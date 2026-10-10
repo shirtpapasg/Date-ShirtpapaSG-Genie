@@ -447,7 +447,12 @@ function fail(key, server, error) {
 
 (async () => {
   try { mcp = await window.claude?.use?.("mcp") } catch (e) { mcp = null }
-  if (!mcp) { $("refresh").hidden = true; return }
+  if (!mcp) {
+    // Outside claude.ai (for example on Vercel) there are no connectors: show the snapshot and say where live data lives.
+    $("refresh").hidden = true;
+    $("stamp").innerHTML = 'Snapshot · 10 Oct 2026 · <a href="https://claude.ai/artifact/CE9GUjdMnXJPhv4xNU5PAa" target="_blank" rel="noopener">open in claude.ai for live data</a>';
+    return;
+  }
   for (const [key, server, tool, input] of SOURCES) {
     mcp.watchTool(server, tool, input, ev => ev.type === "data" ? apply(key, server, ev.result) : fail(key, server, ev.error),
       { cache: { staleTime: 60000 }, refetchInterval: 180000 });
