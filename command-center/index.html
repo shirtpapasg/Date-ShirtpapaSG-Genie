@@ -1,110 +1,181 @@
 <title>Shirtpapa Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
-/* Layout: a teacher's mission board. Summary strip, then a "needs you" queue, then one panel per source (sessions, live sites, artifacts, repos). */
+/* Layout: a control room. Hero status strip, instrument tiles, a "needs you" queue, then paired consoles (sessions | sites), the activity feed and heatmap, then the catalogue of artifacts and repos. Dark-first; light theme mirrored. */
 :root {
-  --bg: #eef2f0;
-  --panel: #ffffff;
-  --line: #d5ddd9;
-  --ink: #16201c;
-  --muted: #5c6b65;
-  --accent: #2b55c9;
-  --accent-soft: #e3e9fa;
-  --good: #1d7f55; --good-soft: #def2e8;
-  --warn: #a8670f; --warn-soft: #fbefd9;
-  --crit: #b83a26; --crit-soft: #f9e2dd;
-  --idle: #6b7772; --idle-soft: #e8ecea;
-  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
-  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --bg: #0b1114; --bg2: #0f171b;
+  --panel: #141d22; --panel2: #192429; --line: #243238; --line2: #2f4048;
+  --ink: #e9f0f2; --muted: #8aa0a8; --faint: #5d727a;
+  --accent: #46d3c4; --accent-ink: #0b1114; --accent-soft: rgba(70,211,196,.14); --accent-glow: rgba(70,211,196,.35);
+  --good: #5fd48f; --good-soft: rgba(95,212,143,.14);
+  --warn: #f2b84b; --warn-soft: rgba(242,184,75,.16);
+  --crit: #ff7a6b; --crit-soft: rgba(255,122,107,.16);
+  --idle: #8aa0a8; --idle-soft: rgba(138,160,168,.14);
+  --sci: #6fb5ff; --eng: #ff9ad5; --math: #ffc860; --tool: #b8a6ff;
+  --display: "Syne", "Avenir Next", system-ui, sans-serif;
+  --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #111816; --panel: #19221f; --line: #2c3833; --ink: #e6ede9; --muted: #95a59e;
-  --accent: #8aa8ff; --accent-soft: #232f4d;
-  --good: #5cc795; --good-soft: #17352a; --warn: #e3ae55; --warn-soft: #3a2d16;
-  --crit: #f0846f; --crit-soft: #3d2019; --idle: #9aa6a1; --idle-soft: #242d2a;
-  color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #111816; --panel: #19221f; --line: #2c3833; --ink: #e6ede9; --muted: #95a59e;
-  --accent: #8aa8ff; --accent-soft: #232f4d;
-  --good: #5cc795; --good-soft: #17352a; --warn: #e3ae55; --warn-soft: #3a2d16;
-  --crit: #f0846f; --crit-soft: #3d2019; --idle: #9aa6a1; --idle-soft: #242d2a;
-  color-scheme: dark }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  --bg: #eef3f3; --bg2: #e4ebeb; --panel: #ffffff; --panel2: #f4f8f8; --line: #d6e0e0; --line2: #c3d0d0;
+  --ink: #101b1f; --muted: #58707a; --faint: #8da0a8;
+  --accent: #0f9b8e; --accent-ink: #ffffff; --accent-soft: rgba(15,155,142,.12); --accent-glow: rgba(15,155,142,.25);
+  --good: #1c8a52; --good-soft: rgba(28,138,82,.12); --warn: #a8690c; --warn-soft: rgba(168,105,12,.14);
+  --crit: #c1392b; --crit-soft: rgba(193,57,43,.12); --idle: #6b7f87; --idle-soft: rgba(107,127,135,.14);
+  --sci: #1f6fd0; --eng: #c23a8f; --math: #b57a00; --tool: #6a4fd8;
+  color-scheme: light } }
+:root[data-theme="light"] {
+  --bg: #eef3f3; --bg2: #e4ebeb; --panel: #ffffff; --panel2: #f4f8f8; --line: #d6e0e0; --line2: #c3d0d0;
+  --ink: #101b1f; --muted: #58707a; --faint: #8da0a8;
+  --accent: #0f9b8e; --accent-ink: #ffffff; --accent-soft: rgba(15,155,142,.12); --accent-glow: rgba(15,155,142,.25);
+  --good: #1c8a52; --good-soft: rgba(28,138,82,.12); --warn: #a8690c; --warn-soft: rgba(168,105,12,.14);
+  --crit: #c1392b; --crit-soft: rgba(193,57,43,.12); --idle: #6b7f87; --idle-soft: rgba(107,127,135,.14);
+  --sci: #1f6fd0; --eng: #c23a8f; --math: #b57a00; --tool: #6a4fd8;
+  color-scheme: light }
 
 * { box-sizing: border-box }
-body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--body); padding-inline: 16px; padding-block: 20px 48px }
-.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 20px }
-a { color: var(--accent); text-decoration: none }
-a:hover { text-decoration: underline }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px }
-
-header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px }
-h1 { font: 800 clamp(26px, 4vw, 38px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0; text-wrap: balance }
-.sub { color: var(--muted); margin: 4px 0 0 }
-.hdr-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
-.stamp { font: 12px var(--mono); color: var(--muted) }
-button { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 7px 12px; border-radius: 8px; cursor: pointer }
+html, body { height: 100% }
+body {
+  margin: 0; background: var(--bg) radial-gradient(1200px 500px at 15% -10%, var(--accent-soft), transparent 60%) no-repeat;
+  color: var(--ink); font: 14px/1.5 var(--body); padding-inline: 16px; padding-block: 18px 56px;
+}
+.wrap { max-width: 1220px; margin: 0 auto; display: grid; gap: 18px }
+a { color: inherit; text-decoration: none }
+a:hover .t, a.t:hover, .chip:hover b { color: var(--accent) }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 6px }
+button { font: 600 12px var(--body); border: 1px solid var(--line2); background: var(--panel2); color: var(--ink); padding: 7px 12px; border-radius: 8px; cursor: pointer }
 button:hover { border-color: var(--accent); color: var(--accent) }
+button:disabled { opacity: .6; cursor: default }
 
-.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px }
-.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px }
-.kpi .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600 }
-.kpi .num { font: 800 32px/1.1 var(--display); font-variant-numeric: tabular-nums }
-.kpi .note { font-size: 12px; color: var(--muted) }
-.kpi svg { margin-top: 6px; width: 100%; height: 34px; display: block }
+/* Hero */
+.hero { display: grid; grid-template-columns: 1fr auto; gap: 14px 24px; align-items: end; padding-bottom: 14px; border-bottom: 1px solid var(--line) }
+.eyebrow { font: 500 11px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 8px }
+h1 { font: 800 clamp(30px, 5vw, 50px)/.98 var(--display); letter-spacing: -0.03em; margin: 8px 0 6px; text-wrap: balance }
+h1 em { font-style: normal; color: var(--accent) }
+.sub { color: var(--muted); margin: 0; max-width: 60ch }
+.hero-right { display: grid; gap: 8px; justify-items: end; text-align: right }
+.beacon { display: inline-flex; align-items: center; gap: 8px; font: 500 12px var(--mono); color: var(--muted); padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel) }
+.beacon i { width: 8px; height: 8px; border-radius: 50%; background: var(--idle); box-shadow: 0 0 0 0 transparent }
+.beacon.live i { background: var(--good); animation: pulse 2s ease-out infinite; color: var(--good) }
+.beacon.err i { background: var(--crit) }
+.beacon a { color: var(--accent) }
+.clock { font: 500 12px var(--mono); color: var(--faint); font-variant-numeric: tabular-nums }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 var(--accent-glow) } 70% { box-shadow: 0 0 0 9px transparent } 100% { box-shadow: 0 0 0 0 transparent } }
 
-.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 20px; align-items: start }
-section.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; min-width: 0; display: grid; gap: 12px }
+/* Instrument tiles */
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px }
+.kpi { position: relative; background: linear-gradient(180deg, var(--panel2), var(--panel)); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 12px; display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; min-width: 0; overflow: hidden }
+.kpi::after { content: ""; position: absolute; inset: auto 0 0 0; height: 2px; background: var(--tile, var(--accent)); opacity: .7 }
+.kpi .lbl { grid-column: 1 / -1; font: 500 10.5px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted) }
+.kpi .num { font: 800 38px/1 var(--display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; margin-top: 4px }
+.kpi .note { grid-column: 1 / -1; font-size: 12px; color: var(--muted); margin-top: 4px; overflow-wrap: anywhere }
+.kpi .viz { grid-row: 2; grid-column: 2; align-self: center }
+.kpi .viz svg { display: block }
+.kpi .wide { grid-column: 1 / -1; width: 100%; height: 44px; margin-top: 4px }
+.ring text { font: 700 11px var(--mono); fill: var(--ink) }
+.stack { display: flex; height: 6px; border-radius: 3px; overflow: hidden; margin-top: 8px; gap: 2px }
+.stack i { display: block; height: 100% }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 6px; font: 11px var(--mono); color: var(--muted) }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; vertical-align: -1px }
+
+/* Panels */
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); gap: 18px; align-items: start }
+section.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; min-width: 0; display: grid; gap: 12px; align-content: start }
 .ph { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap }
-h2 { font: 600 18px/1.2 var(--display); margin: 0; letter-spacing: -0.01em }
-.src { font: 11px var(--mono); color: var(--muted) }
+h2 { font: 700 19px/1.2 var(--display); margin: 0; letter-spacing: -0.015em; display: flex; align-items: center; gap: 10px }
+h2 .n { font: 500 12px var(--mono); color: var(--muted); background: var(--panel2); border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px }
+.src { font: 11px var(--mono); color: var(--faint) }
 .src.live { color: var(--good) }
 .src.err { color: var(--crit) }
 
-.needs { border-color: var(--warn); background: linear-gradient(var(--warn-soft), var(--panel) 70%) }
+.needs { border-color: color-mix(in srgb, var(--warn) 55%, var(--line)); background: linear-gradient(135deg, var(--warn-soft), var(--panel) 55%) }
 .needs ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px }
-.needs li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap }
+.needs li { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; align-items: baseline; padding: 10px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px }
+.needs li .t { font-weight: 700 }
+.needs li .hint { grid-column: 2; font-size: 12.5px; color: var(--muted) }
+.needs li.clear { grid-template-columns: auto 1fr }
 
-.rows { display: grid; gap: 0; margin: 0; padding: 0; list-style: none }
-.row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 0; border-top: 1px solid var(--line); min-width: 0 }
+.rows { display: grid; margin: 0; padding: 0; list-style: none }
+.row { display: grid; grid-template-columns: 34px 1fr auto; gap: 2px 12px; padding: 11px 0; border-top: 1px solid var(--line); min-width: 0; align-items: start }
 .row:first-child { border-top: 0 }
-.row .t { font-weight: 600; min-width: 0; overflow-wrap: anywhere }
-.row .d { grid-column: 1 / -1; color: var(--muted); font-size: 13px; overflow-wrap: anywhere }
-.row .when { font: 12px var(--mono); color: var(--muted); white-space: nowrap; text-align: right }
-.meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap }
+.row .av { grid-row: 1 / 3; width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; font: 700 13px var(--mono); color: var(--accent-ink); background: var(--sub, var(--accent)); letter-spacing: -.02em }
+.row .t { font-weight: 700; min-width: 0; overflow-wrap: anywhere; line-height: 1.3 }
+.row .d { grid-column: 2 / -1; color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; display: flex; gap: 8px; align-items: center; flex-wrap: wrap }
+.row .when { font: 500 11.5px var(--mono); color: var(--faint); white-space: nowrap; text-align: right; padding-top: 2px }
+.bars { display: inline-flex; gap: 2px; align-items: flex-end; height: 12px }
+.bars i { display: block; width: 4px; background: var(--line2); border-radius: 1px }
+.bars i.on { background: var(--accent) }
 
-.pill { display: inline-flex; align-items: center; gap: 5px; font: 600 11px var(--body); letter-spacing: .03em; padding: 2px 8px; border-radius: 999px; white-space: nowrap }
+.pill { display: inline-flex; align-items: center; gap: 6px; font: 700 10.5px var(--body); letter-spacing: .05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; white-space: nowrap }
 .pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor }
 .p-good { color: var(--good); background: var(--good-soft) }
 .p-warn { color: var(--warn); background: var(--warn-soft) }
 .p-crit { color: var(--crit); background: var(--crit-soft) }
 .p-idle { color: var(--idle); background: var(--idle-soft) }
 .p-acc { color: var(--accent); background: var(--accent-soft) }
-.tag { font: 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px }
+.p-acc::before, .p-warn::before, .p-crit::before { animation: pulse 2.2s ease-out infinite }
+.subj { font: 600 10px var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; color: var(--sub); background: color-mix(in srgb, var(--sub) 16%, transparent) }
 
+/* Feed + heatmap */
+.feed { list-style: none; margin: 0; padding: 0; display: grid; gap: 0 }
+.feed li { display: grid; grid-template-columns: 10px 1fr auto; gap: 0 12px; padding: 9px 0; border-top: 1px solid var(--line); min-width: 0 }
+.feed li:first-child { border-top: 0 }
+.feed .stripe { width: 3px; border-radius: 2px; background: var(--src); margin: 3px 0 }
+.feed .what { min-width: 0; overflow-wrap: anywhere }
+.feed .what b { font-weight: 700 }
+.feed .what span { color: var(--muted); font-size: 12.5px }
+.feed .srcl { font: 500 10px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--src); margin-right: 6px }
+.feed .when { font: 500 11.5px var(--mono); color: var(--faint); white-space: nowrap }
+.heat { display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px; width: 100% }
+.heat .col { display: grid; grid-template-rows: repeat(7, 1fr); gap: 3px }
+.heat b { display: block; aspect-ratio: 1; border-radius: 3px; background: var(--panel2); border: 1px solid var(--line) }
+.heat b[data-l="1"] { background: color-mix(in srgb, var(--accent) 28%, var(--panel2)); border-color: transparent }
+.heat b[data-l="2"] { background: color-mix(in srgb, var(--accent) 55%, var(--panel2)); border-color: transparent }
+.heat b[data-l="3"] { background: color-mix(in srgb, var(--accent) 80%, var(--panel2)); border-color: transparent }
+.heat b[data-l="4"] { background: var(--accent); border-color: transparent; box-shadow: 0 0 8px var(--accent-glow) }
+.heat-foot { display: flex; justify-content: space-between; font: 11px var(--mono); color: var(--faint); flex-wrap: wrap; gap: 4px }
+.heat-foot .scale { display: inline-flex; gap: 3px; align-items: center }
+.heat-foot .scale b { width: 10px; height: 10px; border-radius: 2px; display: inline-block; background: var(--panel2); border: 1px solid var(--line) }
+
+/* Catalogue */
 .tabs { display: flex; gap: 6px; flex-wrap: wrap }
-.tabs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--panel) }
-.chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 8px }
-.chip { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; display: grid; gap: 2px; min-width: 0 }
-.chip:hover { border-color: var(--accent); text-decoration: none }
-.chip b { color: var(--ink); font-weight: 600; overflow-wrap: anywhere }
-.chip span { font: 11px var(--mono); color: var(--muted) }
-.chip.pinned { border-color: var(--accent); background: var(--accent-soft) }
+.tabs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink) }
+.chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 215px), 1fr)); gap: 8px }
+.chip { position: relative; border: 1px solid var(--line); background: var(--panel2); border-radius: 11px; padding: 10px 12px 10px 16px; display: grid; gap: 3px; min-width: 0; overflow: hidden }
+.chip::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--sub, var(--idle)) }
+.chip:hover { border-color: var(--accent) }
+.chip b { font-weight: 700; overflow-wrap: anywhere; line-height: 1.3 }
+.chip .m { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; font: 11px var(--mono); color: var(--muted) }
+.chip.pinned { background: linear-gradient(135deg, var(--accent-soft), var(--panel2) 70%); border-color: color-mix(in srgb, var(--accent) 50%, var(--line)) }
+.pin { font: 700 9.5px var(--mono); letter-spacing: .1em; color: var(--accent) }
 .hint { font-size: 12px; color: var(--muted); margin: 0 }
-.scroll { max-height: 520px; overflow-y: auto; padding-right: 4px }
-@media (prefers-reduced-motion: no-preference) { .kpi, section.panel { animation: rise .35s ease-out both } }
-@keyframes rise { from { transform: translateY(4px) } to { transform: none } }
+.scroll { max-height: 560px; overflow-y: auto; padding-right: 4px }
+
+@media (max-width: 640px) {
+  .hero { grid-template-columns: 1fr }
+  .hero-right { justify-items: start; text-align: left }
+  .kpi .num { font-size: 32px }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .kpi, section.panel { animation: rise .4s cubic-bezier(.2,.7,.2,1) both }
+  .kpi:nth-child(2), .grid2 > :nth-child(2) { animation-delay: .06s } .kpi:nth-child(3) { animation-delay: .12s } .kpi:nth-child(4) { animation-delay: .18s } .kpi:nth-child(5) { animation-delay: .24s }
+}
+@media (prefers-reduced-motion: reduce) { .beacon.live i, .pill::before { animation: none } }
+@keyframes rise { from { transform: translateY(6px); opacity: .6 } to { transform: none; opacity: 1 } }
 </style>
 
 <div class="wrap">
-  <header>
+  <header class="hero">
     <div>
-      <h1>Shirtpapa Command Center</h1>
-      <p class="sub">Every classroom app you've built with Claude, in one place.</p>
+      <div class="eyebrow"><span>Mission board</span><span style="color:var(--faint)">·</span><span id="eyebrow-date" style="color:var(--muted)"></span></div>
+      <h1>Shirtpapa <em>Command Center</em></h1>
+      <p class="sub">Every classroom app you've built with Claude: what's working, what's live for pupils, and what's waiting on you.</p>
     </div>
-    <div class="hdr-right">
-      <span class="stamp" id="stamp">Snapshot · 10 Oct 2026</span>
+    <div class="hero-right">
+      <span class="beacon" id="beacon"><i></i><span id="beacon-text">Snapshot · 10 Oct 2026</span></span>
+      <span class="clock" id="clock"></span>
       <button id="refresh" type="button">Refresh live data</button>
     </div>
   </header>
@@ -112,37 +183,48 @@ h2 { font: 600 18px/1.2 var(--display); margin: 0; letter-spacing: -0.01em }
   <div class="kpis" id="kpis"></div>
 
   <section class="panel needs" id="needs-panel">
-    <div class="ph"><h2>Needs you</h2><span class="src">from sessions and artifacts</span></div>
+    <div class="ph"><h2>Needs you <span class="n" id="needs-n"></span></h2><span class="src">from sessions, deploys and artifacts</span></div>
     <ul id="needs"></ul>
   </section>
 
   <div class="grid2">
     <section class="panel">
-      <div class="ph"><h2>Claude Code sessions</h2><span class="src" id="src-sessions">snapshot</span></div>
+      <div class="ph"><h2>Claude Code sessions <span class="n" id="sessions-n"></span></h2><span class="src" id="src-sessions">snapshot</span></div>
       <ul class="rows scroll" id="sessions"></ul>
     </section>
     <section class="panel">
-      <div class="ph"><h2>Live sites on Vercel</h2><span class="src" id="src-sites">snapshot</span></div>
+      <div class="ph"><h2>Live sites on Vercel <span class="n" id="sites-n"></span></h2><span class="src" id="src-sites">snapshot</span></div>
       <ul class="rows scroll" id="sites"></ul>
     </section>
   </div>
 
+  <div class="grid2">
+    <section class="panel">
+      <div class="ph"><h2>Latest activity</h2><span class="src">sessions · deploys · pushes · artifacts</span></div>
+      <ul class="feed" id="feed"></ul>
+    </section>
+    <section class="panel">
+      <div class="ph"><h2>Twelve weeks of building</h2><span class="src" id="heat-total"></span></div>
+      <div class="heat" id="heat" role="img" aria-label="Activity per day over the last twelve weeks"></div>
+      <div class="heat-foot"><span id="heat-range"></span><span class="scale">less <b></b><b data-l="1"></b><b data-l="2"></b><b data-l="3"></b><b data-l="4"></b> more</span></div>
+      <p class="hint" id="heat-note"></p>
+    </section>
+  </div>
+
   <section class="panel">
-    <div class="ph"><h2>Artifacts</h2><span class="src">snapshot · ask Claude to refresh</span></div>
+    <div class="ph"><h2>Artifacts <span class="n" id="art-n"></span></h2><span class="src">snapshot · ask Claude to refresh</span></div>
     <div class="tabs" id="art-tabs" role="group" aria-label="Filter artifacts"></div>
     <div class="chips" id="artifacts"></div>
   </section>
 
   <section class="panel">
-    <div class="ph"><h2>GitHub repositories</h2><span class="src" id="src-repos">snapshot</span></div>
+    <div class="ph"><h2>GitHub repositories <span class="n" id="repos-n"></span></h2><span class="src" id="src-repos">snapshot</span></div>
     <div class="chips" id="repos"></div>
   </section>
 </div>
 
 <script>
 // ---------- Snapshot (taken 10 Oct 2026). Live connector data replaces it when available. ----------
-const SNAP_AT = Date.parse("2026-10-10T00:10:00Z");
-
 const SNAP_SESSIONS = [
   ["session_01GWoShLxdhPEUofxkrDJodb","AI command center dashboard","working","2026-10-10T00:07:27Z","Building this dashboard"],
   ["session_01C6hkWgXdwMxJL3Q2rw2ttF","YouTube agent skill setup","completed","2026-10-10T00:02:33Z","22 episodes playable from review board; cut into parts"],
@@ -158,7 +240,7 @@ const SNAP_SESSIONS = [
 ].map(([id,title,status,updated,detail]) => ({id,title,status,updated:Date.parse(updated),detail}));
 
 const SNAP_PROJECTS = [
-  ["spelling-game",1791428611219],["theoneapp",1791427532837],["each-child-a-seed",1791168420940],
+  ["shirtpapa-command-center",1791596705410],["spelling-game",1791428611219],["theoneapp",1791427532837],["each-child-a-seed",1791168420940],
   ["each-child-a-seed-temp",1791168400877],["date-shirtpapa-sg-genie",1791168301116],
   ["smart-science-paper-marking-app",1790544501165],["exercise-app-v1",1789776996934],["robotics-via",1789711276092],
   ["warm-coat-lab",1789700996918],["smart-science-marking-site",1789198235775],["4-s7-shirtpapa-sg-genie-final",1788426569697],
@@ -167,6 +249,7 @@ const SNAP_PROJECTS = [
 ].map(([name,updated]) => ({name,updated}));
 
 const SNAP_DEPLOYS = [
+  ["shirtpapa-command-center",1791596705410,"READY","Command center: point to claude.ai for live data when opened outside it"],
   ["spelling-game",1791428608120,"READY","Make portrait usable: merge the side panels, ask phones to rotate"],
   ["spelling-game",1791428049293,"READY","Apply the new responsive layout, keeping all features"],
   ["theoneapp",1791427505735,"READY","All built benches join the app; those not signed off are in review"],
@@ -203,11 +286,14 @@ const SNAP_DEPLOYS = [
   ["theoneapp",1790520725218,"READY","The build brief for the Primary 3 labs"],
   ["theoneapp",1790514380254,"READY","2.4 Model Builder is live"],
   ["theoneapp",1790489792024,"READY","2.3 What If Lab is live"],
-  ["theoneapp",1790482459044,"READY","2.2 Food Journey Lab is live"]
+  ["theoneapp",1790482459044,"READY","2.2 Food Journey Lab is live"],
+  ["theoneapp",1790471349157,"READY","The closing note begins with You and keeps to syllabus words"],
+  ["theoneapp",1790471277784,"READY","The closing note speaks to the pupil too"],
+  ["theoneapp",1790471191633,"READY","The marker speaks to the pupil as you"]
 ].map(([name,created,state,msg]) => ({name,created,state,msg}));
 
 const SNAP_REPOS = [
-  ["spelling-game","2026-10-08T03:03:26Z",1],["TheOneApp","2026-10-08T02:45:09Z",1],["Date-ShirtpapaSG-Genie","2026-10-05T02:47:02Z",0],
+  ["Date-ShirtpapaSG-Genie","2026-10-10T01:05:00Z",0],["spelling-game","2026-10-08T03:03:26Z",1],["TheOneApp","2026-10-08T02:45:09Z",1],
   ["Each-Child-A-Seed","2026-10-05T02:46:19Z",0],["Smart-Science-Paper-Marking-App","2026-09-27T21:28:01Z",1],["Exercise_app_V1","2026-09-19T00:16:26Z",0],
   ["smart-science-marking-site","2026-09-12T07:30:09Z",1],["0.8-","2026-09-12T00:39:23Z",0],["4S7-ShirtpapaSG-Genie-Final","2026-09-03T09:08:15Z",0],
   ["Nan-Hua-Science-Skillset-Map","2026-08-25T01:48:50Z",0],["Combine-Feedback-Generator-Final","2026-08-03T20:28:11Z",0],["Science-Heat-Lab","2026-07-30T04:17:14Z",0],
@@ -218,8 +304,8 @@ const SNAP_REPOS = [
   ["Dictation-App","2026-04-12T06:34:35Z",0],["Spellmon","2026-04-10T13:12:00Z",0],["AscentHeroPrimaryScienceRevision","2026-04-04T01:12:17Z",0]
 ].map(([name,pushed,priv]) => ({name,pushed:Date.parse(pushed),priv:!!priv}));
 
-// Artifacts: [title, id, updated, pinned]
 const ARTIFACTS = [
+  ["Shirtpapa Command Center","CE9GUjdMnXJPhv4xNU5PAa","2026-10-10",0],
   ["P4 Videos Review Board","4LdsCNE87uai78ZDNHTPss","2026-10-09",1],["Science Benches","UyhiBYR3kEvZSYq6hYmszW","2026-10-08",1],
   ["4E5 Marking Desk","ApZ241epXpmDm9zsUatAUF","2026-09-29",1],["Primary 5 Benches","YWf4FpmwPDYrUCy7juj6sj","2026-10-06",0],
   ["Smart Science Marking","QonQJk2XQfF6LJWjq9qTBx","2026-09-12",1],["index","EchiAmqFpjd8zdBH9oCjje","2026-10-06",0],
@@ -239,13 +325,22 @@ const ARTIFACTS = [
   ["Anime Sunset Login","FiP9rNYv5deM4g8m9zgXq1","2026-09-26",0],["Science Claw Mind Lab","PamUqHdZHgykq9vrXPoauo","2026-09-16",0],
   ["SPIKE Route Builder","YZpdsujspq9hX876msZntv","2026-09-17",0],["Slash Command Trainer","NvEgMeypz3TLzoVb8cUxpX","2026-09-16",0],
   ["From Marking to Mastery","WxxZLHZrVRza6YRg4vCb1q","2026-09-16",0],["Stripe Setup Walkthrough","8dgRF1HW7YdivMDcevCoNx","2026-09-11",0]
-].map(([title,id,updated,pinned]) => ({title,id,updated:Date.parse(updated+"T12:00:00Z"),pinned:!!pinned,group:groupOf(title,pinned)}));
+].map(([title,id,updated,pinned]) => ({title,id,updated:Date.parse(updated+"T12:00:00Z"),pinned:!!pinned,group:groupOf(title)}));
 
-function groupOf(t, pinned) {
+function groupOf(t) {
   if (t === "index") return "untitled";
   if (/mark|feedback|writing|review/i.test(t)) return "marking";
   if (/lab|bench/i.test(t)) return "labs";
   return "other";
+}
+// Subject tagging: which classroom a thing belongs to, by its name.
+const SUBJECTS = { sci: ["Science", "var(--sci)"], eng: ["English", "var(--eng)"], math: ["Maths", "var(--math)"], tool: ["Tools", "var(--tool)"] };
+function subjectOf(name) {
+  const n = String(name || "");
+  if (/spell|dictation|writing|\bel[_\s-]|two stars|book|kindle|e-book/i.test(n)) return "eng";
+  if (/math|psle|score|measure/i.test(n)) return "math";
+  if (/science|lab|bench|heat|plant|shadow|matter|light|monster|seed|robot|spike|ascent|genie|oneapp|marking|feedback|exercise|p[3-6]\b|videos/i.test(n)) return "sci";
+  return "tool";
 }
 
 // ---------- State ----------
@@ -280,78 +375,130 @@ const STATUS = {
   archived:     ["Archived", "p-idle"]
 };
 const pill = (label, cls) => `<span class="pill ${cls}">${esc(label)}</span>`;
+const subj = key => `<span class="subj" style="--sub:${SUBJECTS[key][1]}">${SUBJECTS[key][0]}</span>`;
+const initials = name => String(name).replace(/[-_]/g, " ").split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join("") || "?";
+const WAITING = s => ["review_ready","need_input","blocked","failed"].includes(s.status);
 
-// ---------- Renderers ----------
-function renderKpis() {
-  const s = state.sessions.items, open = s.filter(x => ["working","review_ready","need_input","blocked","failed"].includes(x.status));
-  const deploys = state.deploys.items, week = Date.now() - 7*864e5;
-  const recent = deploys.filter(d => d.created > week).length;
-  const failing = deploys.filter(d => d.state === "ERROR").length;
-  const tiles = [
-    ["Claude sessions", s.length, `${open.length} open · ${s.filter(x=>x.status==="review_ready"||x.status==="need_input").length} waiting on you`],
-    ["Live sites", state.projects.items.length, failing ? `${failing} failed deploys` : "All recent deploys healthy"],
-    ["Deploys, last 7 days", recent, "Production pushes to Vercel", spark(deploys)],
-    ["Artifacts", ARTIFACTS.length, `${ARTIFACTS.filter(a=>a.pinned).length} pinned · ${ARTIFACTS.filter(a=>a.group==="labs").length} labs and benches`],
-    ["GitHub repos", state.repos.items.length, `${state.repos.items.filter(r => r.pushed > Date.now()-14*864e5).length} pushed in the last 2 weeks`]
-  ];
-  $("kpis").innerHTML = tiles.map(([l,n,note,svg]) =>
-    `<div class="kpi"><span class="lbl">${l}</span><span class="num">${n}</span><span class="note">${esc(note)}</span>${svg||""}</div>`).join("");
+// ---------- Instrument tiles ----------
+function ring(part, total, color) {
+  const r = 20, c = 2 * Math.PI * r, f = total ? part / total : 0;
+  return `<svg class="ring" width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="${r}" fill="none" stroke="var(--line2)" stroke-width="5"/>
+    <circle cx="26" cy="26" r="${r}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${(c*f).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 26 26)"/>
+    <text x="26" y="30" text-anchor="middle">${part}</text></svg>`;
 }
-
-function spark(deploys) {
+function areaSpark(deploys) {
   const days = 14, end = new Date(); end.setHours(23,59,59,999);
   const counts = Array(days).fill(0);
-  for (const d of deploys) {
-    const i = days - 1 - Math.floor((end - d.created) / 864e5);
-    if (i >= 0 && i < days) counts[i]++;
-  }
-  const max = Math.max(1, ...counts), W = 160, H = 34, bw = W / days;
-  const bars = counts.map((c, i) => {
-    const h = c ? Math.max(3, (c / max) * (H - 4)) : 1;
-    return `<rect x="${(i*bw+1).toFixed(1)}" y="${(H-h).toFixed(1)}" width="${(bw-2).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${i===days-1?"var(--accent)":"var(--line)"}"><title>${c} deploys</title></rect>`;
-  }).join("");
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Deploys per day, last 14 days">${bars}</svg>`;
+  for (const d of deploys) { const i = days - 1 - Math.floor((end - d.created) / 864e5); if (i >= 0 && i < days) counts[i]++ }
+  const max = Math.max(1, ...counts), W = 200, H = 44, px = i => (i / (days - 1)) * (W - 4) + 2, py = c => H - 4 - (c / max) * (H - 10);
+  const pts = counts.map((c, i) => `${px(i).toFixed(1)},${py(c).toFixed(1)}`);
+  const last = counts[days - 1];
+  return `<svg class="wide" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Deploys per day, last 14 days">
+    <defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".45"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>
+    ${[0.5,1].map(f => `<line x1="2" x2="${W-2}" y1="${py(max*f).toFixed(1)}" y2="${py(max*f).toFixed(1)}" stroke="var(--line)" stroke-dasharray="2 3"/>`).join("")}
+    <path d="M${pts[0]} L${pts.join(" L")} L${px(days-1).toFixed(1)},${H-2} L2,${H-2} Z" fill="url(#sg)"/>
+    <polyline points="${pts.join(" ")}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="${px(days-1).toFixed(1)}" cy="${py(last).toFixed(1)}" r="3" fill="var(--accent)"/></svg>`;
+}
+function renderKpis() {
+  const s = state.sessions.items, waiting = s.filter(WAITING).length, working = s.filter(x => x.status === "working").length;
+  const deploys = state.deploys.items, week = Date.now() - 7*864e5;
+  const recent = deploys.filter(d => d.created > week).length, failing = deploys.filter(d => d.state === "ERROR").length;
+  const groups = [["labs","Labs","var(--sci)"],["marking","Marking","var(--eng)"],["other","Other","var(--tool)"],["untitled","Untitled","var(--idle)"]]
+    .map(([k,l,c]) => [l, ARTIFACTS.filter(a => a.group === k).length, c]);
+  const repos = state.repos.items, fresh = repos.filter(r => r.pushed > Date.now()-14*864e5).length;
+  const tiles = [
+    { l: "Claude sessions", n: s.length, note: `${working} working · ${waiting} waiting on you`, viz: ring(waiting, s.length, waiting ? "var(--warn)" : "var(--good)"), c: "var(--warn)" },
+    { l: "Live sites", n: state.projects.items.length, note: failing ? `${failing} failed deploys` : "Every recent deploy healthy", viz: ring(state.projects.items.length - failing, state.projects.items.length, "var(--good)"), c: "var(--good)" },
+    { l: "Deploys, last 7 days", n: recent, note: "Production pushes to Vercel", wide: areaSpark(deploys) },
+    { l: "Artifacts", n: ARTIFACTS.length, note: `<div class="stack">${groups.map(([,n,c]) => `<i style="width:${(n/ARTIFACTS.length*100).toFixed(1)}%;background:${c}"></i>`).join("")}</div><div class="legend">${groups.map(([l,n,c]) => `<span><i style="background:${c}"></i>${l} ${n}</span>`).join("")}</div>`, raw: true, c: "var(--sci)" },
+    { l: "GitHub repos", n: repos.length, note: `${fresh} pushed in the last 2 weeks`, viz: ring(fresh, repos.length, "var(--tool)"), c: "var(--tool)" }
+  ];
+  $("kpis").innerHTML = tiles.map(t =>
+    `<div class="kpi" style="--tile:${t.c || "var(--accent)"}"><span class="lbl">${t.l}</span><span class="num">${t.n}</span>${t.viz ? `<span class="viz">${t.viz}</span>` : ""}${t.wide || ""}<span class="note">${t.raw ? t.note : esc(t.note)}</span></div>`).join("");
 }
 
+// ---------- Needs you ----------
 function renderNeeds() {
   const items = [];
-  for (const s of state.sessions.items) {
-    if (s.status === "review_ready" || s.status === "need_input" || s.status === "blocked" || s.status === "failed") {
-      const [l, c] = STATUS[s.status];
-      items.push(`<li>${pill(l, c)}<a href="https://claude.ai/code/${esc(s.id)}" target="_blank" rel="noopener">${esc(s.title)}</a><span class="hint">${esc(s.detail)}</span></li>`);
-    }
+  for (const s of state.sessions.items.filter(WAITING)) {
+    const [l, c] = STATUS[s.status];
+    items.push(`<li>${pill(l, c)}<a class="t" href="https://claude.ai/code/${esc(s.id)}" target="_blank" rel="noopener">${esc(s.title)}</a><span class="hint">${esc(s.detail)}</span></li>`);
   }
   for (const d of state.deploys.items.filter(d => d.state === "ERROR").slice(0, 5))
-    items.push(`<li>${pill("Deploy failed","p-crit")}<a href="https://vercel.com/shirtpapa-sg/${esc(d.name)}" target="_blank" rel="noopener">${esc(d.name)}</a><span class="hint">${esc(d.msg)}</span></li>`);
+    items.push(`<li>${pill("Deploy failed","p-crit")}<a class="t" href="https://vercel.com/shirtpapa-sg/${esc(d.name)}" target="_blank" rel="noopener">${esc(d.name)}</a><span class="hint">${esc(d.msg)}</span></li>`);
   const untitled = ARTIFACTS.filter(a => a.group === "untitled").length;
-  if (untitled) items.push(`<li>${pill("Tidy up","p-idle")}<span>${untitled} artifacts are called “index”</span><span class="hint">Give them real names so you can find them, or delete the copies you don't need.</span></li>`);
-  $("needs").innerHTML = items.join("") || `<li>${pill("All clear","p-good")}<span>Nothing is waiting on you.</span></li>`;
+  if (untitled) items.push(`<li>${pill("Tidy up","p-idle")}<span class="t">${untitled} artifacts are called “index”</span><span class="hint">Give them real names so you can find them, or delete the copies you don't need.</span></li>`);
+  $("needs").innerHTML = items.join("") || `<li class="clear">${pill("All clear","p-good")}<span class="t">Nothing is waiting on you.</span></li>`;
+  $("needs-n").textContent = items.length;
 }
 
+// ---------- Consoles ----------
 function renderSessions() {
   const order = { need_input:0, blocked:0, failed:0, review_ready:1, working:2, completed:3, archived:4 };
   const list = [...state.sessions.items].sort((a,b) => (order[a.status]??5) - (order[b.status]??5) || b.updated - a.updated);
   $("sessions").innerHTML = list.map(s => {
-    const [l, c] = STATUS[s.status] || [s.status, "p-idle"];
-    return `<li class="row"><a class="t" href="https://claude.ai/code/${esc(s.id)}" target="_blank" rel="noopener">${esc(s.title || "Untitled session")}</a>
+    const [l, c] = STATUS[s.status] || [s.status, "p-idle"], k = subjectOf(s.title);
+    return `<li class="row" style="--sub:${SUBJECTS[k][1]}"><span class="av">${esc(initials(s.title))}</span>
+      <a class="t" href="https://claude.ai/code/${esc(s.id)}" target="_blank" rel="noopener">${esc(s.title || "Untitled session")}</a>
       <span class="when">${ago(s.updated)}</span>
-      <div class="d meta">${pill(l, c)}${s.detail ? `<span>${esc(s.detail)}</span>` : ""}</div></li>`;
+      <div class="d">${pill(l, c)}${s.detail ? `<span>${esc(s.detail)}</span>` : ""}</div></li>`;
   }).join("");
+  $("sessions-n").textContent = list.length;
 }
-
 function renderSites() {
-  const latest = {};
-  for (const d of state.deploys.items) if (!latest[d.name] || d.created > latest[d.name].created) latest[d.name] = d;
-  const list = [...state.projects.items].sort((a,b) => b.updated - a.updated);
+  const latest = {}, count = {};
+  for (const d of state.deploys.items) { count[d.name] = (count[d.name] || 0) + 1; if (!latest[d.name] || d.created > latest[d.name].created) latest[d.name] = d }
+  const list = [...state.projects.items].sort((a,b) => (latest[b.name]?.created || b.updated) - (latest[a.name]?.created || a.updated));
+  const week = Date.now() - 7*864e5;
   $("sites").innerHTML = list.map(p => {
-    const d = latest[p.name];
+    const d = latest[p.name], k = subjectOf(p.name);
     const st = d ? (d.state === "READY" ? pill("Live","p-good") : d.state === "ERROR" ? pill("Failed","p-crit") : pill(d.state.toLowerCase(),"p-warn")) : pill("Quiet","p-idle");
-    return `<li class="row"><a class="t" href="https://vercel.com/shirtpapa-sg/${esc(p.name)}" target="_blank" rel="noopener">${esc(p.name)}</a>
+    const bars = Array.from({length: 7}, (_, i) => { const day = week + i*864e5; const on = state.deploys.items.some(x => x.name === p.name && x.created >= day && x.created < day + 864e5); return `<i class="${on?"on":""}" style="height:${on?12:4}px"></i>` }).join("");
+    return `<li class="row" style="--sub:${SUBJECTS[k][1]}"><span class="av">${esc(initials(p.name))}</span>
+      <a class="t" href="https://${esc(p.name)}.vercel.app" target="_blank" rel="noopener">${esc(p.name)}</a>
       <span class="when">${ago(d ? d.created : p.updated)}</span>
-      <div class="d meta">${st}<span>${d ? esc(d.msg) : "No production deploy in the recent list"}</span></div></li>`;
+      <div class="d">${st}${subj(k)}<span class="bars" title="Deploys this week">${bars}</span><span>${d ? esc(d.msg) : "No production deploy in the recent list"}</span></div></li>`;
   }).join("");
+  $("sites-n").textContent = list.length;
 }
 
+// ---------- Feed + heatmap ----------
+function events() {
+  const ev = [];
+  for (const s of state.sessions.items) ev.push({ at: s.updated, src: "session", color: "var(--warn)", title: s.title, detail: STATUS[s.status]?.[0] || s.status, href: `https://claude.ai/code/${s.id}` });
+  for (const d of state.deploys.items) ev.push({ at: d.created, src: "deploy", color: "var(--good)", title: d.name, detail: d.msg, href: `https://vercel.com/shirtpapa-sg/${d.name}` });
+  for (const r of state.repos.items) ev.push({ at: r.pushed, src: "push", color: "var(--tool)", title: r.name, detail: "pushed to GitHub", href: `https://github.com/shirtpapasg/${r.name}` });
+  for (const a of ARTIFACTS) ev.push({ at: a.updated, src: "artifact", color: "var(--sci)", title: a.title, detail: "artifact updated", href: `https://claude.ai/artifact/${a.id}` });
+  return ev.filter(e => e.at).sort((a, b) => b.at - a.at);
+}
+function renderFeed() {
+  const ev = events().slice(0, 14);
+  $("feed").innerHTML = ev.map(e => `<li style="--src:${e.color}"><span class="stripe"></span>
+    <div class="what"><span class="srcl">${e.src}</span><a href="${esc(e.href)}" target="_blank" rel="noopener"><b>${esc(e.title)}</b></a><br><span>${esc(e.detail)}</span></div>
+    <span class="when">${ago(e.at)}</span></li>`).join("");
+}
+function renderHeat() {
+  const weeks = 12, days = weeks * 7, end = new Date(); end.setHours(23,59,59,999);
+  const start = end.getTime() - days * 864e5 + 1;
+  const counts = Array(days).fill(0); let total = 0, best = 0, bestDay = 0;
+  for (const e of events()) { const i = Math.floor((e.at - start) / 864e5); if (i >= 0 && i < days) { counts[i]++; total++ } }
+  counts.forEach((c, i) => { if (c > best) { best = c; bestDay = i } });
+  // Align columns to weeks so each column reads top-to-bottom as one week; the first column may start part-way.
+  const firstDow = new Date(start).getDay();
+  const cells = Array(firstDow).fill(null).concat(counts);
+  const cols = [];
+  for (let c = 0; c < cells.length; c += 7) cols.push(cells.slice(c, c + 7));
+  const lvl = n => n === 0 ? 0 : n <= 1 ? 1 : n <= 3 ? 2 : n <= 6 ? 3 : 4;
+  $("heat").style.gridTemplateColumns = `repeat(${cols.length}, 1fr)`;
+  $("heat").innerHTML = cols.map(col => `<div class="col">${col.map((n, i) => n === null ? `<b style="visibility:hidden"></b>` : `<b data-l="${lvl(n)}" title="${n} events"></b>`).join("")}</div>`).join("");
+  const fmt = ms => new Date(ms).toLocaleDateString(undefined, { day: "numeric", month: "short" });
+  $("heat-range").textContent = `${fmt(start)} → ${fmt(end)}`;
+  $("heat-total").textContent = `${total} events`;
+  $("heat-note").textContent = best ? `Busiest day: ${fmt(start + bestDay * 864e5)} with ${best} events across sessions, deploys, pushes and artifacts.` : "";
+}
+
+// ---------- Catalogue ----------
 const ART_TABS = [["all","All"],["pinned","Pinned"],["labs","Labs & benches"],["marking","Marking & feedback"],["other","Other"],["untitled","Untitled"]];
 function renderArtifacts() {
   $("art-tabs").innerHTML = ART_TABS.map(([k,l]) => {
@@ -359,10 +506,10 @@ function renderArtifacts() {
     return `<button type="button" data-k="${k}" aria-pressed="${state.artFilter===k}">${l} · ${n}</button>`;
   }).join("");
   const f = state.artFilter;
-  const list = ARTIFACTS.filter(a => f === "all" || (f === "pinned" ? a.pinned : a.group === f))
-    .sort((a,b) => (b.pinned - a.pinned) || b.updated - a.updated);
-  $("artifacts").innerHTML = list.map(a =>
-    `<a class="chip${a.pinned?" pinned":""}" href="https://claude.ai/artifact/${esc(a.id)}" target="_blank" rel="noopener"><b>${esc(a.title)}</b><span>${a.pinned?"pinned · ":""}updated ${ago(a.updated)}</span></a>`).join("");
+  const list = ARTIFACTS.filter(a => f === "all" || (f === "pinned" ? a.pinned : a.group === f)).sort((a,b) => (b.pinned - a.pinned) || b.updated - a.updated);
+  $("artifacts").innerHTML = list.map(a => { const k = a.group === "untitled" ? null : subjectOf(a.title);
+    return `<a class="chip${a.pinned?" pinned":""}" style="--sub:${k ? SUBJECTS[k][1] : "var(--idle)"}" href="https://claude.ai/artifact/${esc(a.id)}" target="_blank" rel="noopener"><b>${esc(a.title)}</b><span class="m">${a.pinned?`<span class="pin">PINNED</span>`:""}${k ? subj(k) : ""}<span>${ago(a.updated)}</span></span></a>` }).join("");
+  $("art-n").textContent = ARTIFACTS.length;
 }
 $("art-tabs").addEventListener("click", e => {
   const b = e.target.closest("button[data-k]"); if (!b) return;
@@ -370,11 +517,11 @@ $("art-tabs").addEventListener("click", e => {
   try { localStorage.setItem("cc-art-filter", state.artFilter) } catch (e) {}
   renderArtifacts();
 });
-
 function renderRepos() {
   const list = [...state.repos.items].sort((a,b) => b.pushed - a.pushed);
-  $("repos").innerHTML = list.map(r =>
-    `<a class="chip" href="https://github.com/shirtpapasg/${esc(r.name)}" target="_blank" rel="noopener"><b>${esc(r.name)}</b><span>${r.priv?"private · ":""}pushed ${ago(r.pushed)}</span></a>`).join("");
+  $("repos").innerHTML = list.map(r => { const k = subjectOf(r.name);
+    return `<a class="chip" style="--sub:${SUBJECTS[k][1]}" href="https://github.com/shirtpapasg/${esc(r.name)}" target="_blank" rel="noopener"><b>${esc(r.name)}</b><span class="m">${subj(k)}${r.priv?"<span>private</span>":""}<span>pushed ${ago(r.pushed)}</span></span></a>` }).join("");
+  $("repos-n").textContent = list.length;
 }
 
 function renderSrc() {
@@ -384,9 +531,16 @@ function renderSrc() {
     el.textContent = s.err ? s.err : s.live ? `live · ${ago(s.at)}` : "snapshot · 10 Oct";
   };
   set("src-sessions","sessions"); set("src-sites","deploys"); set("src-repos","repos");
+  const anyLive = ["sessions","deploys","repos"].some(k => state[k].live), anyErr = ["sessions","deploys","repos"].some(k => state[k].err);
+  const b = $("beacon"); b.className = "beacon" + (anyLive ? " live" : anyErr ? " err" : "");
+  if (anyLive) $("beacon-text").textContent = "Live from your connectors";
 }
-
-function renderAll() { renderKpis(); renderNeeds(); renderSessions(); renderSites(); renderArtifacts(); renderRepos(); renderSrc(); }
+function tickClock() {
+  const now = new Date();
+  $("clock").textContent = now.toLocaleString(undefined, { weekday: "short", hour: "2-digit", minute: "2-digit" });
+  $("eyebrow-date").textContent = now.toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" });
+}
+function renderAll() { tickClock(); renderKpis(); renderNeeds(); renderSessions(); renderSites(); renderFeed(); renderHeat(); renderArtifacts(); renderRepos(); renderSrc(); }
 renderAll();
 
 // ---------- Live data from connectors ----------
@@ -419,7 +573,7 @@ const parsers = {
   })),
   repos: p => (p.repos || p.data || []).filter(r => r.full_name).map(r => ({ name: r.full_name.split("/")[1], pushed: Date.parse(r.pushed_at), priv: r.visibility === "private" })),
   projects: p => (p.result?.projects || p.projects || []).map(x => ({ name: x.name, updated: x.updatedAt })),
-  deploys: p => { const r = p.result?.deployments || p.deployments || {}; return (r.deployments || r || []).map(d => ({ name: d.name, created: d.created, state: d.state, msg: (d.meta?.githubCommitMessage || "").split("\n").pop().trim() || (d.meta?.githubCommitMessage || "").split("\n")[0] })) }
+  deploys: p => { const r = p.result?.deployments || p.deployments || {}; return (r.deployments || r || []).map(d => ({ name: d.name, created: d.created, state: d.state, msg: (d.meta?.githubCommitMessage || "").split("\n")[0].trim() })) }
 };
 const SOURCES = [
   ["sessions", CCR, "list_sessions", { limit: 50 }],
@@ -450,7 +604,7 @@ function fail(key, server, error) {
   if (!mcp) {
     // Outside claude.ai (for example on Vercel) there are no connectors: show the snapshot and say where live data lives.
     $("refresh").hidden = true;
-    $("stamp").innerHTML = 'Snapshot · 10 Oct 2026 · <a href="https://claude.ai/artifact/CE9GUjdMnXJPhv4xNU5PAa" target="_blank" rel="noopener">open in claude.ai for live data</a>';
+    $("beacon-text").innerHTML = 'Snapshot · 10 Oct · <a href="https://claude.ai/artifact/CE9GUjdMnXJPhv4xNU5PAa" target="_blank" rel="noopener">open in claude.ai for live data</a>';
     return;
   }
   for (const [key, server, tool, input] of SOURCES) {
@@ -465,7 +619,6 @@ $("refresh").addEventListener("click", async () => {
   await Promise.all(SOURCES.map(([key, server, tool, input]) =>
     mcp.callTool(server, tool, input, { cache: { refresh: true } }).then(r => apply(key, server, r), e => fail(key, server, e))));
   b.disabled = false; b.textContent = "Refresh live data";
-  $("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 });
 
 setInterval(renderAll, 60000);
