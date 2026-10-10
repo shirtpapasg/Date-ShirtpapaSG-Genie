@@ -1,0 +1,467 @@
+<title>Shirtpapa Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a teacher's mission board. Summary strip, then a "needs you" queue, then one panel per source (sessions, live sites, artifacts, repos). */
+:root {
+  --bg: #eef2f0;
+  --panel: #ffffff;
+  --line: #d5ddd9;
+  --ink: #16201c;
+  --muted: #5c6b65;
+  --accent: #2b55c9;
+  --accent-soft: #e3e9fa;
+  --good: #1d7f55; --good-soft: #def2e8;
+  --warn: #a8670f; --warn-soft: #fbefd9;
+  --crit: #b83a26; --crit-soft: #f9e2dd;
+  --idle: #6b7772; --idle-soft: #e8ecea;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111816; --panel: #19221f; --line: #2c3833; --ink: #e6ede9; --muted: #95a59e;
+  --accent: #8aa8ff; --accent-soft: #232f4d;
+  --good: #5cc795; --good-soft: #17352a; --warn: #e3ae55; --warn-soft: #3a2d16;
+  --crit: #f0846f; --crit-soft: #3d2019; --idle: #9aa6a1; --idle-soft: #242d2a;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111816; --panel: #19221f; --line: #2c3833; --ink: #e6ede9; --muted: #95a59e;
+  --accent: #8aa8ff; --accent-soft: #232f4d;
+  --good: #5cc795; --good-soft: #17352a; --warn: #e3ae55; --warn-soft: #3a2d16;
+  --crit: #f0846f; --crit-soft: #3d2019; --idle: #9aa6a1; --idle-soft: #242d2a;
+  color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--ink); font: 14px/1.5 var(--body); padding-inline: 16px; padding-block: 20px 48px }
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; gap: 20px }
+a { color: var(--accent); text-decoration: none }
+a:hover { text-decoration: underline }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px }
+
+header { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px }
+h1 { font: 800 clamp(26px, 4vw, 38px)/1.05 var(--display); letter-spacing: -0.02em; margin: 0; text-wrap: balance }
+.sub { color: var(--muted); margin: 4px 0 0 }
+.hdr-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
+.stamp { font: 12px var(--mono); color: var(--muted) }
+button { font: 500 13px var(--body); border: 1px solid var(--line); background: var(--panel); color: var(--ink); padding: 7px 12px; border-radius: 8px; cursor: pointer }
+button:hover { border-color: var(--accent); color: var(--accent) }
+
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px }
+.kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px }
+.kpi .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600 }
+.kpi .num { font: 800 32px/1.1 var(--display); font-variant-numeric: tabular-nums }
+.kpi .note { font-size: 12px; color: var(--muted) }
+.kpi svg { margin-top: 6px; width: 100%; height: 34px; display: block }
+
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 20px; align-items: start }
+section.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; min-width: 0; display: grid; gap: 12px }
+.ph { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap }
+h2 { font: 600 18px/1.2 var(--display); margin: 0; letter-spacing: -0.01em }
+.src { font: 11px var(--mono); color: var(--muted) }
+.src.live { color: var(--good) }
+.src.err { color: var(--crit) }
+
+.needs { border-color: var(--warn); background: linear-gradient(var(--warn-soft), var(--panel) 70%) }
+.needs ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px }
+.needs li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap }
+
+.rows { display: grid; gap: 0; margin: 0; padding: 0; list-style: none }
+.row { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 0; border-top: 1px solid var(--line); min-width: 0 }
+.row:first-child { border-top: 0 }
+.row .t { font-weight: 600; min-width: 0; overflow-wrap: anywhere }
+.row .d { grid-column: 1 / -1; color: var(--muted); font-size: 13px; overflow-wrap: anywhere }
+.row .when { font: 12px var(--mono); color: var(--muted); white-space: nowrap; text-align: right }
+.meta { display: flex; gap: 6px; align-items: center; flex-wrap: wrap }
+
+.pill { display: inline-flex; align-items: center; gap: 5px; font: 600 11px var(--body); letter-spacing: .03em; padding: 2px 8px; border-radius: 999px; white-space: nowrap }
+.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor }
+.p-good { color: var(--good); background: var(--good-soft) }
+.p-warn { color: var(--warn); background: var(--warn-soft) }
+.p-crit { color: var(--crit); background: var(--crit-soft) }
+.p-idle { color: var(--idle); background: var(--idle-soft) }
+.p-acc { color: var(--accent); background: var(--accent-soft) }
+.tag { font: 11px var(--mono); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px }
+
+.tabs { display: flex; gap: 6px; flex-wrap: wrap }
+.tabs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--panel) }
+.chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: 8px }
+.chip { border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; display: grid; gap: 2px; min-width: 0 }
+.chip:hover { border-color: var(--accent); text-decoration: none }
+.chip b { color: var(--ink); font-weight: 600; overflow-wrap: anywhere }
+.chip span { font: 11px var(--mono); color: var(--muted) }
+.chip.pinned { border-color: var(--accent); background: var(--accent-soft) }
+.hint { font-size: 12px; color: var(--muted); margin: 0 }
+.scroll { max-height: 520px; overflow-y: auto; padding-right: 4px }
+@media (prefers-reduced-motion: no-preference) { .kpi, section.panel { animation: rise .35s ease-out both } }
+@keyframes rise { from { transform: translateY(4px) } to { transform: none } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Shirtpapa Command Center</h1>
+      <p class="sub">Every classroom app you've built with Claude, in one place.</p>
+    </div>
+    <div class="hdr-right">
+      <span class="stamp" id="stamp">Snapshot · 10 Oct 2026</span>
+      <button id="refresh" type="button">Refresh live data</button>
+    </div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <section class="panel needs" id="needs-panel">
+    <div class="ph"><h2>Needs you</h2><span class="src">from sessions and artifacts</span></div>
+    <ul id="needs"></ul>
+  </section>
+
+  <div class="grid2">
+    <section class="panel">
+      <div class="ph"><h2>Claude Code sessions</h2><span class="src" id="src-sessions">snapshot</span></div>
+      <ul class="rows scroll" id="sessions"></ul>
+    </section>
+    <section class="panel">
+      <div class="ph"><h2>Live sites on Vercel</h2><span class="src" id="src-sites">snapshot</span></div>
+      <ul class="rows scroll" id="sites"></ul>
+    </section>
+  </div>
+
+  <section class="panel">
+    <div class="ph"><h2>Artifacts</h2><span class="src">snapshot · ask Claude to refresh</span></div>
+    <div class="tabs" id="art-tabs" role="group" aria-label="Filter artifacts"></div>
+    <div class="chips" id="artifacts"></div>
+  </section>
+
+  <section class="panel">
+    <div class="ph"><h2>GitHub repositories</h2><span class="src" id="src-repos">snapshot</span></div>
+    <div class="chips" id="repos"></div>
+  </section>
+</div>
+
+<script>
+// ---------- Snapshot (taken 10 Oct 2026). Live connector data replaces it when available. ----------
+const SNAP_AT = Date.parse("2026-10-10T00:10:00Z");
+
+const SNAP_SESSIONS = [
+  ["session_01GWoShLxdhPEUofxkrDJodb","AI command center dashboard","working","2026-10-10T00:07:27Z","Building this dashboard"],
+  ["session_01C6hkWgXdwMxJL3Q2rw2ttF","YouTube agent skill setup","completed","2026-10-10T00:02:33Z","22 episodes playable from review board; cut into parts"],
+  ["session_01NVVCvv9Dfw6HC7u8QGsfgb","Each Child A Seed GitHub/Vercel setup","review_ready","2026-10-05T22:25:30Z","Ready to push to GitHub; Vercel will update the live site"],
+  ["session_01W1VwhkxswrsYzKjzQNDVDR","Review","completed","2026-10-04T00:46:16Z","Guided you to the in-app offer; flagged security next steps"],
+  ["session_01YJnaUePRGdVDe7a2xdWPnc","Next book in Kindle format","completed","2026-09-12T00:39:32Z","Book description written (long and short versions)"],
+  ["session_01XmR3VFsL8rrBge2Gt6cH36","AI e-book writing for Kindle","review_ready","2026-09-09T03:04:13Z","Your computer was unreachable when it last tried to resume"],
+  ["session_01CgtPyZP5z61Tk1aqmoL3eC","Smart Science Paper Marking App runtime overhaul","archived","2026-09-13T15:33:16Z",""],
+  ["session_0133fb4JNgusdQGfdf5wihc6","Primary school science page animations","archived","2026-09-14T02:10:59Z",""],
+  ["session_013Qu3QER3W5HhzmVXeyKGn7","Selling apps without company registration in Singapore","archived","2026-09-11T07:34:51Z",""],
+  ["session_01XUaUNWPSYq9trciPbBm8Ks","Reorganize mark.js file structure","archived","2026-09-08T13:50:21Z",""],
+  ["session_015cnjvwopPXGYLSbd3fe7HY","Design: Science feedback generator","need_input","2026-09-10T03:19:40Z","Re-attach the exported design bundle (README, chats/, project/)"]
+].map(([id,title,status,updated,detail]) => ({id,title,status,updated:Date.parse(updated),detail}));
+
+const SNAP_PROJECTS = [
+  ["spelling-game",1791428611219],["theoneapp",1791427532837],["each-child-a-seed",1791168420940],
+  ["each-child-a-seed-temp",1791168400877],["date-shirtpapa-sg-genie",1791168301116],
+  ["smart-science-paper-marking-app",1790544501165],["exercise-app-v1",1789776996934],["robotics-via",1789711276092],
+  ["warm-coat-lab",1789700996918],["smart-science-marking-site",1789198235775],["4-s7-shirtpapa-sg-genie-final",1788426569697],
+  ["nan-hua-science-skillset-map",1787622535508],["combine-feedback-generator-final",1785788897393],
+  ["science-heat-lab",1785661284105],["el-writing-6-game",1785311124599],["shirtpapa-sg-genie",1783003355853]
+].map(([name,updated]) => ({name,updated}));
+
+const SNAP_DEPLOYS = [
+  ["spelling-game",1791428608120,"READY","Make portrait usable: merge the side panels, ask phones to rotate"],
+  ["spelling-game",1791428049293,"READY","Apply the new responsive layout, keeping all features"],
+  ["theoneapp",1791427505735,"READY","All built benches join the app; those not signed off are in review"],
+  ["theoneapp",1791281404084,"READY","P6 1.2 bench: the tracing step is not timed or scored"],
+  ["theoneapp",1791278405530,"READY","P6 1.2 is in review until the teacher has tried it"],
+  ["theoneapp",1791278184832,"READY","Typed questions in the bench Challenge, marked by the app"],
+  ["each-child-a-seed",1791168416792,"READY","Each Child a Seed: ECAS P3 lesson package"],
+  ["each-child-a-seed",1791168363892,"READY","Add ECAS P3 lesson package for Vercel deploy"],
+  ["theoneapp",1791101512317,"READY","Lab challenge results and advice for parents in the session email"],
+  ["theoneapp",1791101007140,"READY","Before I Start step, explore mode, no tally chart on Spot and Sort"],
+  ["theoneapp",1791076861872,"READY","Enlarge panel matches the painted theme"],
+  ["theoneapp",1791075115440,"READY","Floating conclusion banner on every bench"],
+  ["theoneapp",1791038908442,"READY","Close-up on every tap: P3 bench and Cooler"],
+  ["theoneapp",1791037442237,"READY","Tour card glides between targets instead of jumping"],
+  ["theoneapp",1791036113501,"READY","Heat and Cooler benches: welcome tour, pinned Next, why card"],
+  ["theoneapp",1791034580162,"READY","P3 1.1 Spot and Sort bench, live"],
+  ["theoneapp",1791003979809,"READY","Primary 3 briefs: the tour's lines are read, not spoken"],
+  ["theoneapp",1791002586014,"READY","Primary 3 briefs: a welcome tour in every lab"],
+  ["theoneapp",1790954963890,"READY","24 labs brought up to the 1.4 standard"],
+  ["theoneapp",1790931870143,"READY","1.3 Compare Plants Lab is live"],
+  ["theoneapp",1790928616796,"READY","1.2 Plant Parts Lab: cause-and-effect card"],
+  ["theoneapp",1790921446309,"READY","1.2 Plant Parts Lab is live"],
+  ["theoneapp",1790918078193,"READY","1.1 Garden Walk Lab is live"],
+  ["theoneapp",1790626893255,"READY","Build notes for the Primary 5 activities"],
+  ["theoneapp",1790625839438,"READY","Build notes for the Primary 6 activities"],
+  ["theoneapp",1790611569836,"READY","The build briefs for the Primary 5 and 6 labs"],
+  ["smart-science-paper-marking-app",1790544477088,"READY","4.1 Dark Box Lab is live"],
+  ["theoneapp",1790544418108,"READY","4.1 Dark Box Lab is live"],
+  ["theoneapp",1790532400671,"READY","The Primary 3 notes files, reviewed"],
+  ["theoneapp",1790531608743,"READY","The School Lab list is a folder per primary level"],
+  ["theoneapp",1790522083880,"READY","Build notes for the remaining Primary 3 activities"],
+  ["theoneapp",1790521496153,"READY","Build notes for the fourteen Primary 3 activities"],
+  ["smart-science-paper-marking-app",1790520955173,"READY","Labs 2.2, 2.3 and 2.4 join the live app"],
+  ["theoneapp",1790520725218,"READY","The build brief for the Primary 3 labs"],
+  ["theoneapp",1790514380254,"READY","2.4 Model Builder is live"],
+  ["theoneapp",1790489792024,"READY","2.3 What If Lab is live"],
+  ["theoneapp",1790482459044,"READY","2.2 Food Journey Lab is live"]
+].map(([name,created,state,msg]) => ({name,created,state,msg}));
+
+const SNAP_REPOS = [
+  ["spelling-game","2026-10-08T03:03:26Z",1],["TheOneApp","2026-10-08T02:45:09Z",1],["Date-ShirtpapaSG-Genie","2026-10-05T02:47:02Z",0],
+  ["Each-Child-A-Seed","2026-10-05T02:46:19Z",0],["Smart-Science-Paper-Marking-App","2026-09-27T21:28:01Z",1],["Exercise_app_V1","2026-09-19T00:16:26Z",0],
+  ["smart-science-marking-site","2026-09-12T07:30:09Z",1],["0.8-","2026-09-12T00:39:23Z",0],["4S7-ShirtpapaSG-Genie-Final","2026-09-03T09:08:15Z",0],
+  ["Nan-Hua-Science-Skillset-Map","2026-08-25T01:48:50Z",0],["Combine-Feedback-Generator-Final","2026-08-03T20:28:11Z",0],["Science-Heat-Lab","2026-07-30T04:17:14Z",0],
+  ["P4-Heat-experiment","2026-07-30T00:44:55Z",0],["EL_Writing_6_Game","2026-07-29T07:42:40Z",0],["Combine-Feedback-Generator","2026-07-17T10:26:32Z",0],
+  ["6S6-ShirtpapaSG-Genie","2026-07-12T12:36:58Z",0],["Date-shirtpapasg-genie-final","2026-07-12T12:27:50Z",0],["Science-Worksheet-Template","2026-06-16T12:42:03Z",0],
+  ["Image-Extractor","2026-06-15T01:25:59Z",0],["Google-Form-Script-Creator","2026-06-15T01:00:01Z",0],["Beginner-AI-Tutorial","2026-06-14T23:59:57Z",0],
+  ["2026-Secondary-School-PSLE-Intake-score","2026-06-04T06:12:15Z",0],["MonsterGo-Science","2026-04-30T07:59:18Z",0],["Light-simulation","2026-04-21T00:28:41Z",0],
+  ["Dictation-App","2026-04-12T06:34:35Z",0],["Spellmon","2026-04-10T13:12:00Z",0],["AscentHeroPrimaryScienceRevision","2026-04-04T01:12:17Z",0]
+].map(([name,pushed,priv]) => ({name,pushed:Date.parse(pushed),priv:!!priv}));
+
+// Artifacts: [title, id, updated, pinned]
+const ARTIFACTS = [
+  ["P4 Videos Review Board","4LdsCNE87uai78ZDNHTPss","2026-10-09",1],["Science Benches","UyhiBYR3kEvZSYq6hYmszW","2026-10-08",1],
+  ["4E5 Marking Desk","ApZ241epXpmDm9zsUatAUF","2026-09-29",1],["Primary 5 Benches","YWf4FpmwPDYrUCy7juj6sj","2026-10-06",0],
+  ["Smart Science Marking","QonQJk2XQfF6LJWjq9qTBx","2026-09-12",1],["index","EchiAmqFpjd8zdBH9oCjje","2026-10-06",0],
+  ["index","WtgJxkxMPTwN8rPsph6cy3","2026-10-06",0],["index","JA26Pkxqi5RQLyUziq2oAN","2026-10-06",0],["index","HYKxret4tqLuCPrbXa9WJY","2026-10-06",0],
+  ["index","G8v9zhWpRFauVMsSiBmPuC","2026-10-06",0],["index","72o83kf5CgbRTA3jTax2n8","2026-10-06",0],["P3 1.1 Spot and Sort Lab","33U6MfjPPipADN5euq4Jai","2026-10-04",0],
+  ["index","7XDG58JUd6ZtFkN4kAP1qt","2026-10-06",0],["Two Spheres Lab","GPHMyyiAyr38yBXCy62qg8","2026-10-02",0],["Measure Lab","EqvXdHV8xDRHY1fbgFGZQu","2026-10-02",0],
+  ["States Lab","1PS3kUvKNUiJrFwJhrwDEX","2026-10-02",0],["Matter Lab","4H9i9UWtG4EUmUZdSjdeU7","2026-10-02",0],["Model Builder Lab","AUhUnGkksTMFqsnowKZomA","2026-10-02",0],
+  ["What If Lab","VxotNZZmnCcffwCv4mSdUe","2026-10-02",0],["Food Journey Lab","WBHih6oWGTp39XWGDCMkJE","2026-10-02",0],["Body Systems Lab","FNYqmHguTBuZFYck9C7PCa","2026-10-02",0],
+  ["Warm Coat Lab","YKSx91VgkcS4is1Lo2aDtc","2026-10-02",0],["Cooler Lab","FBpJhu1a8BnkHYV7GZp6DT","2026-10-02",0],["Compare Plants Lab","JwvDuHhrcWNh433PmgwiT2","2026-10-02",0],
+  ["Plant Parts Lab","MdgizTPyWi6qmXoGnNfT2S","2026-10-02",0],["Garden Walk Lab","C8KaWgmwouZUw8VA7mNkyn","2026-10-02",0],["Heat or Temperature Lab","BNU3eJD6ycQJqNyoZGjRYW","2026-10-02",0],
+  ["Hot Potato Lab","G5bXVdeyhAFvi9q8FwsFKL","2026-10-02",0],["Thermometer Lab","SVJ7BJVsEVQZUmx1aPziV7","2026-10-02",0],["Heat Lab","XHGdRM49xMRVBLakp9PqFm","2026-10-02",0],
+  ["Conductor Lab","MfmVbLFob8afFfxvABPCXt","2026-10-02",0],["Heat Flow Lab","HSa5RThEqZkxMhAffTBvXS","2026-10-02",0],["Shadow Show Lab","5RvR4A2wNaDVFjfSELW3tB","2026-10-02",0],
+  ["Shadow Shape Lab","5LcA5gEx3jKe7DJ3oRT2oL","2026-10-02",0],["Shadow Arc Lab","Wbp3kHCWFFEjrTYQ4NnzNL","2026-10-02",0],["Shadow Size Lab","2713ki3QBzSiSStFXB52FU","2026-10-02",0],
+  ["Shadow Lab","Wjk2kx3KQNM824f8yVE8sR","2026-10-02",0],["Dark Box Lab","3YvAasjwbhGenwbzZhFbmM","2026-10-02",0],["Plant Care Lab","96eLEiauJ4TqTDf3zaR55U","2026-10-02",0],
+  ["Two Stars Writing Review — 4E5","YFxMzkb3XuM2vnJTnJw2hM","2026-10-02",0],["EL Writing Feedback Generator","TrapK4iBQnoYv7SQX6KBdN","2026-10-02",0],
+  ["Science Claw Design System","KMQySzFQWXdEu6Ns8F5s4h","2026-10-02",0],["Science Marking Members Setup","Ws7MkfKrsSvuhFgCKa7tCy","2026-09-11",1],
+  ["Anime Sunset Login","FiP9rNYv5deM4g8m9zgXq1","2026-09-26",0],["Science Claw Mind Lab","PamUqHdZHgykq9vrXPoauo","2026-09-16",0],
+  ["SPIKE Route Builder","YZpdsujspq9hX876msZntv","2026-09-17",0],["Slash Command Trainer","NvEgMeypz3TLzoVb8cUxpX","2026-09-16",0],
+  ["From Marking to Mastery","WxxZLHZrVRza6YRg4vCb1q","2026-09-16",0],["Stripe Setup Walkthrough","8dgRF1HW7YdivMDcevCoNx","2026-09-11",0]
+].map(([title,id,updated,pinned]) => ({title,id,updated:Date.parse(updated+"T12:00:00Z"),pinned:!!pinned,group:groupOf(title,pinned)}));
+
+function groupOf(t, pinned) {
+  if (t === "index") return "untitled";
+  if (/mark|feedback|writing|review/i.test(t)) return "marking";
+  if (/lab|bench/i.test(t)) return "labs";
+  return "other";
+}
+
+// ---------- State ----------
+const state = {
+  sessions: { items: SNAP_SESSIONS, live: false, err: null },
+  projects: { items: SNAP_PROJECTS, live: false, err: null },
+  deploys:  { items: SNAP_DEPLOYS,  live: false, err: null },
+  repos:    { items: SNAP_REPOS,    live: false, err: null },
+  artFilter: "all"
+};
+try { state.artFilter = localStorage.getItem("cc-art-filter") || "all" } catch (e) {}
+
+// ---------- Helpers ----------
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function ago(ms) {
+  if (!ms) return "";
+  const d = (Date.now() - ms) / 1000;
+  if (d < 90) return "just now";
+  if (d < 3600) return Math.round(d/60) + "m ago";
+  if (d < 86400) return Math.round(d/3600) + "h ago";
+  if (d < 86400*45) return Math.round(d/86400) + "d ago";
+  return new Date(ms).toLocaleDateString(undefined, { day: "numeric", month: "short" });
+}
+const STATUS = {
+  working:      ["Working", "p-acc"],
+  review_ready: ["Ready for review", "p-warn"],
+  need_input:   ["Needs input", "p-crit"],
+  blocked:      ["Blocked", "p-crit"],
+  failed:       ["Failed", "p-crit"],
+  completed:    ["Done", "p-good"],
+  archived:     ["Archived", "p-idle"]
+};
+const pill = (label, cls) => `<span class="pill ${cls}">${esc(label)}</span>`;
+
+// ---------- Renderers ----------
+function renderKpis() {
+  const s = state.sessions.items, open = s.filter(x => ["working","review_ready","need_input","blocked","failed"].includes(x.status));
+  const deploys = state.deploys.items, week = Date.now() - 7*864e5;
+  const recent = deploys.filter(d => d.created > week).length;
+  const failing = deploys.filter(d => d.state === "ERROR").length;
+  const tiles = [
+    ["Claude sessions", s.length, `${open.length} open · ${s.filter(x=>x.status==="review_ready"||x.status==="need_input").length} waiting on you`],
+    ["Live sites", state.projects.items.length, failing ? `${failing} failed deploys` : "All recent deploys healthy"],
+    ["Deploys, last 7 days", recent, "Production pushes to Vercel", spark(deploys)],
+    ["Artifacts", ARTIFACTS.length, `${ARTIFACTS.filter(a=>a.pinned).length} pinned · ${ARTIFACTS.filter(a=>a.group==="labs").length} labs and benches`],
+    ["GitHub repos", state.repos.items.length, `${state.repos.items.filter(r => r.pushed > Date.now()-14*864e5).length} pushed in the last 2 weeks`]
+  ];
+  $("kpis").innerHTML = tiles.map(([l,n,note,svg]) =>
+    `<div class="kpi"><span class="lbl">${l}</span><span class="num">${n}</span><span class="note">${esc(note)}</span>${svg||""}</div>`).join("");
+}
+
+function spark(deploys) {
+  const days = 14, end = new Date(); end.setHours(23,59,59,999);
+  const counts = Array(days).fill(0);
+  for (const d of deploys) {
+    const i = days - 1 - Math.floor((end - d.created) / 864e5);
+    if (i >= 0 && i < days) counts[i]++;
+  }
+  const max = Math.max(1, ...counts), W = 160, H = 34, bw = W / days;
+  const bars = counts.map((c, i) => {
+    const h = c ? Math.max(3, (c / max) * (H - 4)) : 1;
+    return `<rect x="${(i*bw+1).toFixed(1)}" y="${(H-h).toFixed(1)}" width="${(bw-2).toFixed(1)}" height="${h.toFixed(1)}" rx="1.5" fill="${i===days-1?"var(--accent)":"var(--line)"}"><title>${c} deploys</title></rect>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Deploys per day, last 14 days">${bars}</svg>`;
+}
+
+function renderNeeds() {
+  const items = [];
+  for (const s of state.sessions.items) {
+    if (s.status === "review_ready" || s.status === "need_input" || s.status === "blocked" || s.status === "failed") {
+      const [l, c] = STATUS[s.status];
+      items.push(`<li>${pill(l, c)}<a href="https://claude.ai/code/${esc(s.id)}" target="_blank" rel="noopener">${esc(s.title)}</a><span class="hint">${esc(s.detail)}</span></li>`);
+    }
+  }
+  for (const d of state.deploys.items.filter(d => d.state === "ERROR").slice(0, 5))
+    items.push(`<li>${pill("Deploy failed","p-crit")}<a href="https://vercel.com/shirtpapa-sg/${esc(d.name)}" target="_blank" rel="noopener">${esc(d.name)}</a><span class="hint">${esc(d.msg)}</span></li>`);
+  const untitled = ARTIFACTS.filter(a => a.group === "untitled").length;
+  if (untitled) items.push(`<li>${pill("Tidy up","p-idle")}<span>${untitled} artifacts are called “index”</span><span class="hint">Give them real names so you can find them, or delete the copies you don't need.</span></li>`);
+  $("needs").innerHTML = items.join("") || `<li>${pill("All clear","p-good")}<span>Nothing is waiting on you.</span></li>`;
+}
+
+function renderSessions() {
+  const order = { need_input:0, blocked:0, failed:0, review_ready:1, working:2, completed:3, archived:4 };
+  const list = [...state.sessions.items].sort((a,b) => (order[a.status]??5) - (order[b.status]??5) || b.updated - a.updated);
+  $("sessions").innerHTML = list.map(s => {
+    const [l, c] = STATUS[s.status] || [s.status, "p-idle"];
+    return `<li class="row"><a class="t" href="https://claude.ai/code/${esc(s.id)}" target="_blank" rel="noopener">${esc(s.title || "Untitled session")}</a>
+      <span class="when">${ago(s.updated)}</span>
+      <div class="d meta">${pill(l, c)}${s.detail ? `<span>${esc(s.detail)}</span>` : ""}</div></li>`;
+  }).join("");
+}
+
+function renderSites() {
+  const latest = {};
+  for (const d of state.deploys.items) if (!latest[d.name] || d.created > latest[d.name].created) latest[d.name] = d;
+  const list = [...state.projects.items].sort((a,b) => b.updated - a.updated);
+  $("sites").innerHTML = list.map(p => {
+    const d = latest[p.name];
+    const st = d ? (d.state === "READY" ? pill("Live","p-good") : d.state === "ERROR" ? pill("Failed","p-crit") : pill(d.state.toLowerCase(),"p-warn")) : pill("Quiet","p-idle");
+    return `<li class="row"><a class="t" href="https://vercel.com/shirtpapa-sg/${esc(p.name)}" target="_blank" rel="noopener">${esc(p.name)}</a>
+      <span class="when">${ago(d ? d.created : p.updated)}</span>
+      <div class="d meta">${st}<span>${d ? esc(d.msg) : "No production deploy in the recent list"}</span></div></li>`;
+  }).join("");
+}
+
+const ART_TABS = [["all","All"],["pinned","Pinned"],["labs","Labs & benches"],["marking","Marking & feedback"],["other","Other"],["untitled","Untitled"]];
+function renderArtifacts() {
+  $("art-tabs").innerHTML = ART_TABS.map(([k,l]) => {
+    const n = k === "all" ? ARTIFACTS.length : k === "pinned" ? ARTIFACTS.filter(a=>a.pinned).length : ARTIFACTS.filter(a=>a.group===k).length;
+    return `<button type="button" data-k="${k}" aria-pressed="${state.artFilter===k}">${l} · ${n}</button>`;
+  }).join("");
+  const f = state.artFilter;
+  const list = ARTIFACTS.filter(a => f === "all" || (f === "pinned" ? a.pinned : a.group === f))
+    .sort((a,b) => (b.pinned - a.pinned) || b.updated - a.updated);
+  $("artifacts").innerHTML = list.map(a =>
+    `<a class="chip${a.pinned?" pinned":""}" href="https://claude.ai/artifact/${esc(a.id)}" target="_blank" rel="noopener"><b>${esc(a.title)}</b><span>${a.pinned?"pinned · ":""}updated ${ago(a.updated)}</span></a>`).join("");
+}
+$("art-tabs").addEventListener("click", e => {
+  const b = e.target.closest("button[data-k]"); if (!b) return;
+  state.artFilter = b.dataset.k;
+  try { localStorage.setItem("cc-art-filter", state.artFilter) } catch (e) {}
+  renderArtifacts();
+});
+
+function renderRepos() {
+  const list = [...state.repos.items].sort((a,b) => b.pushed - a.pushed);
+  $("repos").innerHTML = list.map(r =>
+    `<a class="chip" href="https://github.com/shirtpapasg/${esc(r.name)}" target="_blank" rel="noopener"><b>${esc(r.name)}</b><span>${r.priv?"private · ":""}pushed ${ago(r.pushed)}</span></a>`).join("");
+}
+
+function renderSrc() {
+  const set = (id, key) => {
+    const s = state[key], el = $(id);
+    el.className = "src" + (s.err ? " err" : s.live ? " live" : "");
+    el.textContent = s.err ? s.err : s.live ? `live · ${ago(s.at)}` : "snapshot · 10 Oct";
+  };
+  set("src-sessions","sessions"); set("src-sites","deploys"); set("src-repos","repos");
+}
+
+function renderAll() { renderKpis(); renderNeeds(); renderSessions(); renderSites(); renderArtifacts(); renderRepos(); renderSrc(); }
+renderAll();
+
+// ---------- Live data from connectors ----------
+const CCR = "Claude Code Remote", VERCEL = "Vercel";
+function errText(code, server) {
+  switch (code) {
+    case "needs_reauth": return `Reconnect ${server} in Settings → Connectors`;
+    case "server_not_connected": case "selection_required": return `Add ${server} in Settings → Connectors`;
+    case "not_in_manifest": case "not_granted": return `${server} not allowed for this page · showing snapshot`;
+    case "approval_required": return `${server} needs approval · press Refresh`;
+    case "server_unavailable": return `${server} unreachable · showing last data`;
+    case "tool_error": return `${server} reported an error · showing last data`;
+    default: return "Live data unavailable · showing snapshot";
+  }
+}
+function payloadOf(res) {
+  let p = res && res.payload;
+  if (typeof p === "string") { const i = p.indexOf("{"), j = p.lastIndexOf("}"); try { p = JSON.parse(p.slice(i, j + 1)) } catch (e) { p = null } }
+  return p || {};
+}
+function bucket(s) {
+  const b = String(s.status_bucket || "").replace("SESSION_STATUS_BUCKET_","").toLowerCase();
+  if (String(s.session_status || "").includes("ARCHIVED")) return "archived";
+  return b || "completed";
+}
+const parsers = {
+  sessions: p => (p.ccr?.data || p.data || p.sessions || []).map(s => ({
+    id: s.id, title: s.title, status: bucket(s), updated: Date.parse(s.updated_at),
+    detail: s.post_turn_summary?.needs_action || s.post_turn_summary?.status_detail || s.external_metadata?.post_turn_summary?.status_detail || ""
+  })),
+  repos: p => (p.repos || p.data || []).filter(r => r.full_name).map(r => ({ name: r.full_name.split("/")[1], pushed: Date.parse(r.pushed_at), priv: r.visibility === "private" })),
+  projects: p => (p.result?.projects || p.projects || []).map(x => ({ name: x.name, updated: x.updatedAt })),
+  deploys: p => { const r = p.result?.deployments || p.deployments || {}; return (r.deployments || r || []).map(d => ({ name: d.name, created: d.created, state: d.state, msg: (d.meta?.githubCommitMessage || "").split("\n").pop().trim() || (d.meta?.githubCommitMessage || "").split("\n")[0] })) }
+};
+const SOURCES = [
+  ["sessions", CCR, "list_sessions", { limit: 50 }],
+  ["repos", CCR, "list_repos", { limit: 100 }],
+  ["projects", VERCEL, "list_projects", { limit: "50" }],
+  ["deploys", VERCEL, "list_deployments", { limit: 60, target: "production" }]
+];
+const DENY = ["needs_reauth","server_not_connected","blocked_by_policy","approval_required","not_in_manifest","not_granted"];
+
+let mcp = null;
+function apply(key, server, res) {
+  try {
+    const items = parsers[key](payloadOf(res)).filter(x => x.name || x.id);
+    if (!items.length) return;
+    state[key] = { items, live: true, err: null, at: res.cache?.storedAt || Date.now() };
+    renderAll();
+  } catch (e) {}
+}
+function fail(key, server, error) {
+  const s = state[key];
+  s.err = errText(error?.code, server);
+  if (DENY.includes(error?.code) && s.live) { s.live = false; }
+  renderSrc();
+}
+
+(async () => {
+  try { mcp = await window.claude?.use?.("mcp") } catch (e) { mcp = null }
+  if (!mcp) { $("refresh").hidden = true; return }
+  for (const [key, server, tool, input] of SOURCES) {
+    mcp.watchTool(server, tool, input, ev => ev.type === "data" ? apply(key, server, ev.result) : fail(key, server, ev.error),
+      { cache: { staleTime: 60000 }, refetchInterval: 180000 });
+  }
+})();
+
+$("refresh").addEventListener("click", async () => {
+  if (!mcp) return;
+  const b = $("refresh"); b.disabled = true; b.textContent = "Refreshing…";
+  await Promise.all(SOURCES.map(([key, server, tool, input]) =>
+    mcp.callTool(server, tool, input, { cache: { refresh: true } }).then(r => apply(key, server, r), e => fail(key, server, e))));
+  b.disabled = false; b.textContent = "Refresh live data";
+  $("stamp").textContent = "Updated " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+});
+
+setInterval(renderAll, 60000);
+</script>
