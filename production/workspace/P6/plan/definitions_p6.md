@@ -22,6 +22,7 @@ Cross-check sources:
 - A script line that says what something IS copies the **textbook** wording, unshortened. An exam-style *explanation* line may use the **recitation** wording (the teacher's examined phrasing) once it passes the ⚠ checks below.
 - **Takeaway** rows are the shaded one-line boxes that close each section; **WIHL** rows are the numbered "What I Have Learnt" summaries. These are the safest lines.
 - ⚠ **beyond the 2023 syllabus: use only if the textbook says it** marks recitation lines that go past the syllabus. Each one says whether the textbook (pp. 2–73) does say it.
+- **Let's Apply answers** given in the Notes column are worked out from the text; the book prints no answers.
 - Pages are **book page numbers**. PDF page = book page + 7 is the best estimate, unconfirmed (see `content_map_p6.md`, Verification log).
 - Quotes marked † were checked by eye because the extraction interleaves another label inside the sentence; every other double-quoted string was machine-checked against the extracted text (ignoring line breaks, curly/straight quotes and the extraction's backslashes).
 
@@ -205,7 +206,7 @@ Teacher's matching table: **Recitation Ch 3 "Forces"** (21 lines, all quoted bel
 | 3.38 | Playground springs | "The elastic spring force exerted by the springs allows you to bounce up and down." | 3 | 67 | Trampoline; spring rider. Science Around Us. | — |
 | 3.39 | **Takeaway (types of forces)** | "Different types of forces include magnetic force, frictional force, gravitational force and elastic spring force." | 3 | 67 | Also WIHL 3. | — |
 | 3.40 | Let's Apply Q1 (not a force) | "(4) David’s hands gaining heat from warm water" | 3 | 68 | The answer: gaining heat is not a push or a pull. Good model of *gains heat from*. | — |
-| 3.41 | Let's Apply hint (Q3) | "Frictional force opposes movement, while gravitational force pulls all objects towards the Earth." | 3 | 69 | Q3 answer (2): frictional force acts at A (moving) not at B (stopped); gravitational force at both. Q2 answer (1): frictional + gravitational on the biscuit in tongs. Q4 answer (4): smoother surface. | — |
+| 3.41 | Let's Apply hint (Q3) | "Frictional force opposes movement, while gravitational force pulls all objects towards the Earth." | 3 | 69 | Q3 expected answer (2): frictional force acts at A (moving) not at B (stopped); gravitational force at both. Q2 answer (1): frictional + gravitational on the biscuit in tongs. Q4 answer (4): smoother surface. | — |
 | 3.42 | Let's Apply Q5 (spring) | "Devi used the set-up below to find out how the mass of an object affects the length of a spring." | 3 | 70 | 100 g → 10 cm, 200 g → 15 cm, 300 g → 20 cm. | Recitation Ch 3 (What is the relationship between load and spring extension?): ‹Greater load causes greater extension or compression of the spring.› ✓ (*load* and *extension* are not book words; the book says mass and length). |
 | 3.43 | Let's Apply Q6 hint | "What is the force that opposes movement?" | 3 | 71 | Repeats for reliability; launcher gives the same push each time. | — |
 | 3.44 | **WIHL (p. 72)** | "1. A force is a push or a pull." / "2. A force can" + the four effects (3.9) / "3. Different types of forces include magnetic force, frictional force, gravitational force and elastic spring force." | 3 | 72 |  | — |
