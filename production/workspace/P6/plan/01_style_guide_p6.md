@@ -41,7 +41,7 @@ P6 changes:
 3. **Wrong statements:** ✗ at the start only, no strikeout, only on statements that are actually false ("✗ Energy is used up").
 4. **Positive language.** 5. **Realism** (§8) and **photos** (P5 guide §11).
 6. **Every named skill or term becomes a key word, full name** ("KINETIC ENERGY", "POTENTIAL ENERGY", "ENERGY CONVERSION", "FRICTIONAL FORCE", "GRAVITATIONAL FORCE", "ELASTIC SPRING FORCE", "MAGNETIC FORCE", "PHOTOSYNTHESIS", "RESPIRATION", "CHLOROPHYLL", "PRODUCER", "CONSUMER", "PREDATOR", "PREY", "FOOD WEB", "POPULATION", "COMMUNITY", "HABITAT", "ADAPTATION", "DEFORESTATION", "GLOBAL WARMING", "RENEWABLE").
-7. **4-second "Think!" countdown.** 8. **School Lab card + spoken link** where a built P6 lab matches (`app_p6.md`: only six P6 benches are built today; the rest ship with `lab: null` and a home try-it). 9. **Mind map matching the Mind Lab poster** (P6 posters: Photosynthesis, Energy Conversion, Forces, Living Things & Their Environment; speak "&" as "and"). 10. **Bigger objects.** 11. **Welcome with three goals and a goodbye.** 12. **Free tools, files split over about 14 MB.**
+7. **4-second "Think!" countdown.** 8. **School Lab card + spoken link** where a built P6 lab matches (`app_p6.md`: only seven P6 benches are built today, all in Chapter 1 and all in review; the rest ship with `lab: null` and a home try-it). 9. **Mind map matching the Mind Lab poster** (P6 posters: Photosynthesis, Energy Conversion, Forces, Living Things & Their Environment; speak "&" as "and"). 10. **Bigger objects.** 11. **Welcome with three goals and a goodbye.** 12. **Free tools, files split over about 14 MB.**
 
 ## 6. P6 adjustments for 11–12-year-olds
 
