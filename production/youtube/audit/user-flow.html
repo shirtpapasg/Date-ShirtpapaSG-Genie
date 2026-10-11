@@ -1,0 +1,29 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fbfaf3;font-family:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;color:#1d2a44}
+.c{width:1920px;height:1080px;padding:48px 64px;box-sizing:border-box}
+h1{margin:0 0 6px;font-size:40px} .sub{color:#4d5b76;font-size:22px;margin:0 0 30px}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;margin-bottom:26px}
+.step{border:3px solid #1f8a4c;border-radius:18px;background:#fff;padding:18px 20px;font-size:21px;line-height:1.35;min-height:250px;position:relative}
+.step b{display:block;font-size:25px;margin-bottom:6px} .step .n{position:absolute;top:-18px;left:18px;background:#1f8a4c;color:#fff;border-radius:999px;width:40px;height:40px;display:grid;place-items:center;font-weight:700;font-size:21px}
+.step small{display:block;color:#4d5b76;font-size:18px;margin-top:8px}
+.g{border-color:#1c6ed6} .g .n{background:#1c6ed6}
+.p{border-color:#c77a00;background:#fff8dd} .p .n{background:#c77a00}
+h2{font-size:26px;margin:0 0 20px;color:#1f8a4c}
+</style></head><body><div class="c">
+<h1>TheOneApp Publisher · user flows</h1>
+<p class="sub">Flow A: the channel owner publishes an episode · Flow B: a pupil watches it in TheOneApp</p>
+<h2>Flow A · publishing (channel owner only)</h2>
+<div class="row">
+<div class="step"><span class="n">1</span><b>Sign in once</b>Run <i>yt_device_login.py start</i>. The tool shows a code and google.com/device.<small>Google device-code flow, scope youtube</small></div>
+<div class="step g"><span class="n">2</span><b>Approve on Google</b>Owner enters the code, picks the channel account, sees the consent screen naming the YouTube permission, clicks Allow.<small>Revocable later at Google security settings</small></div>
+<div class="step"><span class="n">3</span><b>Dry run</b>Run <i>publish_p4.py --dry-run</i>. The tool lists each episode it found and what it would change. Nothing is written.<small>channels.list, playlistItems.list</small></div>
+<div class="step"><span class="n">4</span><b>Publish</b>Run <i>publish_p4.py --privacy public</i>: upload (videos.insert), set title, description, tags, category, language, made-for-kids (videos.update), thumbnail (thumbnails.set), playlist.<small>Report written with each video link</small></div>
+</div>
+<h2>Flow B · watching (pupils)</h2>
+<div class="row">
+<div class="step p"><span class="n">1</span><b>Open TheOneApp</b>theoneapp-sg.vercel.app · Videos. No sign-in. The page says lessons play from the YouTube channel and links the privacy policy and terms.</div>
+<div class="step p"><span class="n">2</span><b>Choose an episode</b>Pick a “Now showing” episode on the Primary 4 shelf.</div>
+<div class="step g"><span class="n">3</span><b>Watch on YouTube's player</b>The video plays in YouTube's privacy-enhanced embedded player with standard YouTube controls. “Watch it on YouTube” opens the video on youtube.com.</div>
+<div class="step p"><span class="n">4</span><b>Test yourself</b>After the video, the app offers a quiz on the same topic. The app makes no YouTube API calls.</div>
+</div>
+</div></body></html>
