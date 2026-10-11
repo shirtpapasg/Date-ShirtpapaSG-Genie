@@ -186,7 +186,16 @@ def main():
 
     pl_id, created = ensure_playlist(a.privacy, a.dry_run)
     print(f"Playlist {PLAYLIST_TITLE!r}: {'would create' if created and a.dry_run else ('created ' if created else 'found ') + str(pl_id)}")
-    in_pl = playlist_videos(pl_id) if pl_id else {}
+    in_pl = {}
+    if pl_id and not created:
+        for attempt in range(4):          # a playlist made moments ago can 404 for a few seconds
+            try:
+                in_pl = playlist_videos(pl_id)
+                break
+            except RuntimeError as err:
+                if "playlistNotFound" not in str(err) or attempt == 3:
+                    raise
+                time.sleep(3 * (attempt + 1))
 
     report = []
     for e in episodes:
@@ -220,8 +229,15 @@ def main():
                 thumb_ok = False
                 print("        thumbnail NOT set:", str(err)[:300])
         if vid not in in_pl:
-            add_to_playlist(pl_id, vid)
-            print("        added to playlist")
+            for attempt in range(4):
+                try:
+                    add_to_playlist(pl_id, vid)
+                    print("        added to playlist")
+                    break
+                except RuntimeError as err:
+                    if "playlistNotFound" not in str(err) or attempt == 3:
+                        raise
+                    time.sleep(3 * (attempt + 1))
         after = get_video(vid)
         report.append({"ep": n, "videoId": vid, "url": url, "status": "done",
                        "title": after["snippet"]["title"], "privacy": after["status"]["privacyStatus"],
