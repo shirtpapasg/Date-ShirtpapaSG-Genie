@@ -1791,7 +1791,7 @@
    }
   ],
   "scriptCautions": [
-   "The bench header reads \"Reproduction Compared Lab\". The list title is \"Human and Plant Reproduction Compared\" (37 characters, so the lab card shrinks the title line to fit).",
+   "The bench header reads \"Reproduction Compared Lab\". The list title is \"Human and Plant Reproduction Compared\" (37 characters, the longest P5 title, so the lab card will likely shrink its title line).",
    "The bench says \"male cell\", \"female cell\" and \"womb\", and its typed question says \"the sperm swim along a tube\". Use \"male reproductive cell\", \"egg cell\" and the book's names for the parts."
   ],
   "written": [
