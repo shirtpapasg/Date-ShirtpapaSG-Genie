@@ -25,7 +25,7 @@
 ```
 What is a system in science? A bike, your body and a tree all work the same way: parts with their own jobs, working together. Primary 4 Science (Singapore) and Grade 4 Science (US), explained for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Which bike part can you lose?
 0:12 Welcome! What you'll learn today
@@ -76,7 +76,7 @@ You Ate 3 Plant Parts Today. Which Ones?
 ```
 Plant parts and their functions: what do leaves, stems and roots do? Learn the 6 jobs of the plant system, plus an exam tip about roots that many students mix up. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 3 plant parts you ate today
 0:09 Welcome! What you'll learn today
@@ -131,7 +131,7 @@ Parallel or Net? The 4 Parts of Every Leaf
 ```
 Parts of a leaf for kids: leaf blade, leaf stalk, main vein and smaller veins, plus parallel vs net veins and how leaves differ. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 4 parts every leaf has
 0:11 Welcome! What you'll learn today
@@ -175,7 +175,7 @@ parts of a leaf, leaf parts for kids, leaf blade leaf stalk, main vein smaller v
 ```
 Where are a cactus's leaves? Woody and non-woody stems, the baobab that stores water, climbers, creepers, storage roots like carrots, and the stem-cutting trick. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Where are the cactus leaves?
 0:09 Welcome! What you'll learn today
@@ -223,7 +223,7 @@ plant adaptations for kids, cactus spines are leaves, woody and non-woody stems,
 ```
 Human body systems for kids: respiratory, circulatory, skeletal, muscular and digestive systems, what each does, and how they work together. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 5 systems working right now
 0:10 Welcome! What you'll learn today
@@ -268,7 +268,7 @@ Digestion Starts Before You Swallow | P4 Science
 ```
 Where does digestion begin? Follow one mouthful of chicken rice through the mouth, gullet and stomach: why we chew, what saliva does, and why you shouldn't talk while swallowing. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Digestion before you swallow?
 0:11 Welcome! What you'll learn today
@@ -318,7 +318,7 @@ Your Small Intestine Is 6.5 Metres Long. Here's Why
 ```
 Small intestine and large intestine for kids: where digestion ends, how digested food is absorbed into the blood, why the large intestine absorbs water, and how fibre helps. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 A 6.5-metre tube inside you
 0:11 Welcome! What you'll learn today
@@ -369,7 +369,7 @@ Is Air Matter? Try These 2 Simple Tests
 ```
 What is matter? Matter is anything that has mass and takes up space. Two simple tests prove that air is matter, and we find out why light, shadows, heat and sound are not. Primary 4 Science (Singapore) and Grade 5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Is air nothing?
 0:12 Welcome! What you'll learn today
@@ -419,7 +419,7 @@ what is matter, is air matter, matter for kids, mass and volume, air has mass, a
 ```
 States of matter for kids: solid, liquid and gas. Which have a definite shape, which have a definite volume, and which can be compressed? Plus scuba tanks, helium balloons and the water shooter. Primary 4 Science (Singapore) and Grade 5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 The squeeze test
 0:15 Welcome! What you'll learn today
@@ -469,7 +469,7 @@ How to Weigh Air: The 11-Gram Trick
 ```
 How to measure mass with an electronic balance: kilograms and grams, the 3 balance rules (flat surface, switch on with the pan empty, check for zero error and press tare), and how to find the mass of a liquid or a gas by subtraction. Primary 4 Science (Singapore) and Grade 5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Can you weigh air?
 0:12 Welcome! What you'll learn today
@@ -518,7 +518,7 @@ Measure Any Rock's Volume in 3 Steps (No Ruler)
 ```
 How to measure volume for kids: the measuring cylinder, cm³ and ml, reading at eye level from the bottom of the curved surface, finding a rock's volume by displacement, and measuring the volume of a gas. Primary 4 Science (Singapore) and Grade 5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 The volume of a bumpy rock?
 0:10 Welcome! What you'll learn today
@@ -567,7 +567,7 @@ how to measure volume, measuring cylinder, volume by displacement, volume of a r
 ```
 Hypothesis and fair test for kids: does flattening plasticine make it lighter? Learn what a hypothesis is, how to plan a fair test (change one variable, keep the others the same, measure the result) and what to do when results don't support your idea. Primary 4 Science (Singapore) and Grades 3–5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Can flattening make it lighter?
 0:10 Welcome! What you'll learn today
@@ -616,7 +616,7 @@ Every Light Comes From 1 of 2 Places. Which?
 ```
 Sources of light for kids: natural sources (the Sun, other stars, lightning, fireflies, jellyfish, glow-worms) and man-made sources (light bulbs, fireworks), plus what energy is and why we need light. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Every light comes from…
 0:12 Welcome! What you'll learn today
@@ -666,7 +666,7 @@ The Moon Has Never Shone. Not Once.
 ```
 How do we see? Light must enter our eyes, either directly from a light source or after being reflected off an object. That's why we can see the Moon, even though it is not a source of light. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 The Moon has never shone
 0:09 Welcome! What you'll learn today
@@ -715,7 +715,7 @@ How Shadows Form: 2 Facts About Light for Kids
 ```
 How are shadows formed? Light travels in straight lines, and it cannot pass through opaque objects (only some passes through translucent ones). Includes wayang kulit, the three-card test and why frosted glass casts a less dark shadow. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Can glass make a shadow?
 0:10 Welcome! What you'll learn today
@@ -765,7 +765,7 @@ how are shadows formed, shadows for kids, light travels in straight lines, opaqu
 ```
 What affects the size of a shadow? The distance between the object and the light source, and the distance between the object and the screen. Includes moving the torch, the screen and the ball, the ray-drawing model, and your shadow under a street lamp. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Giant or tiny shadows
 0:12 Welcome! What you'll learn today
@@ -814,7 +814,7 @@ Can a Cone Cast a Circle Shadow?
 ```
 What decides the shape of a shadow? The part of the object that faces the light. A cone can cast a triangle or a circle! Plus hand shadow puppets, why shadows are longest in the morning and evening and shortest at noon, which way they point, and sundials. Primary 4 Science (Singapore) and Grade 5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Can a cone cast a circle?
 0:08 Welcome! What you'll learn today
@@ -863,7 +863,7 @@ Why Your Hands Can't Measure Temperature
 ```
 What is temperature and how do we measure it? The three-bowl test shows why touch is unreliable. Learn degrees Celsius, thermal cameras, digital, infrared and laboratory thermometers, how to read a lab thermometer, and data loggers. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 The three-bowl trick
 0:14 Welcome! What you'll learn today
@@ -913,7 +913,7 @@ Heat vs Temperature: The 1 Sentence That Fixes It
 ```
 What is the difference between heat and temperature? Heat is a form of energy; temperature is a measure of how hot or cold something is. See milk warm up in hot water, why "I have so much heat" is wrong, and how hot and cold water both end at room temperature. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 "I have so much heat!"
 0:12 Welcome! What you'll learn today
@@ -961,7 +961,7 @@ Which Way Does Heat Flow? The 1 Rule for Kids
 ```
 Heat flows from a higher temperature to a lower temperature, until both are the same. Cold never flows! Why ice feels cold, why "letting the cold out" is backwards, how to read a line graph of heat flow, heat flow along a metal rod, and sources of heat like the Sun and hot springs. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Cold doesn't flow
 0:09 Welcome! What you'll learn today
@@ -1011,7 +1011,7 @@ Why Your Pot Has a Plastic Handle
 ```
 Good and poor conductors of heat for kids: why a metal spoon gets hot but a wooden one doesn't, the wax rod experiment (metal, glass, plastic, wood), why pots have plastic handles, and how trapped air in wool and polystyrene keeps heat in or out. Primary 4 Science (Singapore) and Grade 4 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Why a plastic handle?
 0:10 Welcome! What you'll learn today
@@ -1060,7 +1060,7 @@ Why Do Roads Have Gaps? 3 Effects of Heat
 ```
 Effects of heat for kids: temperature change, expansion and contraction, and change of state. See the ball-and-ring experiment, coloured water rising in a tube, a balloon inflating on a flask, why jar lids loosen in hot water, why roads and bridges have expansion gaps, and how ice, water and steam change with heat. Primary 4 Science (Singapore) and Grade 5 Science (US), for kids aged 9–12.
 
-🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-ten.vercel.app
+🚀 Revise with mind maps in TheOneApp, the ultimate science app: https://theoneapp-sg.vercel.app
 
 0:00 Gaps in roads: a mistake?
 0:10 Welcome! What you'll learn today

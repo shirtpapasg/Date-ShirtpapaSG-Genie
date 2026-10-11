@@ -29,7 +29,7 @@ API = "https://www.googleapis.com/youtube/v3"
 UPLOAD = "https://www.googleapis.com/upload/youtube/v3"
 PLAYLIST_TITLE = "TheOneApp, Explained"
 PLAYLIST_DESC = ("Primary 4 Science (Singapore) and Grade 4 Science (US), explained for kids aged 9–12. "
-                 "Revise with mind maps in TheOneApp: https://theoneapp-ten.vercel.app")
+                 "Revise with mind maps in TheOneApp: https://theoneapp-sg.vercel.app")
 
 
 def token():
