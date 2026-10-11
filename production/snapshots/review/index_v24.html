@@ -1,0 +1,152 @@
+<title>P4 Videos Review Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one column of episode rows on exercise-book grid paper; pipeline summary on top */
+:root{
+  --bg:#eef3fa; --grid:#dbe5f3; --surface:#ffffff; --ink:#16213e; --muted:#5b6782; --line:#d3dceb;
+  --accent:#23845a; --heart:#c92a6b; --george:#1c6ed6;
+  --s-scripted:#7a869e; --s-rendered:#2f6fd6; --s-uploaded:#c77a00; --s-approved:#1f8a4c; --s-live:#7b3fd1;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif; --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1524; --grid:#172238; --surface:#162038; --ink:#e7edf8; --muted:#9ba8c4; --line:#26324d;
+  --accent:#4cc38a; --heart:#f06595; --george:#5c9df5;
+  --s-scripted:#8d99b3; --s-rendered:#5c9df5; --s-uploaded:#f0a63a; --s-approved:#4cc38a; --s-live:#b08cf5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1524; --grid:#172238; --surface:#162038; --ink:#e7edf8; --muted:#9ba8c4; --line:#26324d;
+  --accent:#4cc38a; --heart:#f06595; --george:#5c9df5;
+  --s-scripted:#8d99b3; --s-rendered:#5c9df5; --s-uploaded:#f0a63a; --s-approved:#4cc38a; --s-live:#b08cf5; color-scheme:dark}
+body{background:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(30px,5vw,44px)/1.05 var(--display);margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.pipe{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:14px}
+.dot{width:10px;height:10px;border-radius:50%}
+.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.list{display:grid;gap:12px}
+.ep{display:grid;grid-template-columns:200px 1fr;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.thumb{width:100%;aspect-ratio:16/9;border-radius:8px;object-fit:cover;background:var(--grid);display:grid;place-items:center;color:var(--muted);font:500 12px var(--mono);text-align:center;max-width:100%}
+.meta{min-width:0;display:grid;gap:8px;align-content:start}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.no{font:500 13px var(--mono);color:var(--muted)}
+.title{font:600 20px/1.2 var(--display);margin:0;text-wrap:balance}
+.tag{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;border:1.5px solid currentColor}
+.heart{color:var(--heart)} .george{color:var(--george)}
+.sub{color:var(--muted);font-size:14px}
+.status{font-size:12px;font-weight:700;color:#fff;padding:3px 10px;border-radius:999px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type=url],textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+input[type=url]{flex:1 1 260px}
+textarea{width:100%;min-height:38px;resize:vertical;box-sizing:border-box}
+input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:700 14px var(--body);border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 12px;cursor:pointer}
+button.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+a.yt{font-weight:700;color:var(--george)}
+.saved{font:500 12px var(--mono);color:var(--accent)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:22px;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+.tw{position:relative;display:block;padding:0;border:0;background:none;border-radius:8px;cursor:pointer;max-width:100%}
+.tw .play{position:absolute;inset:0;display:grid;place-items:center}
+.tw .play span{width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.62);color:#fff;display:grid;place-items:center;font-size:22px;padding-left:4px;box-sizing:border-box}
+.tw:hover .play span{background:var(--accent)}
+button.pl{background:var(--accent);border-color:var(--accent);color:#fff}
+dialog.player{width:min(1100px,96vw);max-width:96vw;padding:0;border:0;border-radius:14px;background:#000;color:#fff;overflow:hidden}
+dialog.player::backdrop{background:rgba(5,10,20,.82)}
+.pbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:10px 14px;background:#111827}
+.pbar b{font:600 17px/1.2 var(--display)} .pbar .part{font:500 12px var(--mono);color:#aab4c8}
+.pbar button{background:#1f2937;border-color:#374151;color:#fff}
+dialog.player video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.vwrap{position:relative}
+.done[hidden],dialog.player video[hidden]{display:none}
+.done{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(10,14,28,.86);text-align:center;padding:16px}
+.done b{font:600 clamp(18px,3vw,28px)/1.2 var(--display)}
+.done .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.done button{background:#1f2937;border-color:#374151;color:#fff;font-size:15px;padding:10px 16px}
+@media (max-width:640px){.ep{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.ep{transition:border-color .2s}.ep:hover{border-color:var(--accent)}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">P4 Science, Explained · Inspiring Science P4 · 22 episodes</div>
+    <h1>Episode review board</h1>
+    <p class="lede">Click any thumbnail or <b>▶ Play episode</b> to watch it here. Upload each finished episode to YouTube as <b>Unlisted</b>, paste its link here, watch it, then press <b>Approve</b>. Approved links are the ones that go onto TheOneApp.</p>
+  </header>
+  <div class="pipe" id="pipe" aria-label="Episodes by stage"></div>
+  <div class="list" id="list">
+    <div class="empty" id="empty">Loading the episode list… If nothing appears, open this page inside Claude, where your board is saved.</div>
+  </div>
+  <p class="note">Stages: <b>Scripted</b> → <b>Rendered</b> (video file ready) → <b>Uploaded</b> (YouTube link added) → <b>Approved</b> (you watched it) → <b>Live</b> (linked from TheOneApp).</p>
+</div>
+
+<dialog class="player" id="player" aria-label="Episode player">
+  <div class="pbar"><div><b id="ptitle"></b><div class="part" id="ppart"></div></div><button id="pclose">Close ✕</button></div>
+  <div class="vwrap"><video id="pv" controls playsinline preload="auto"></video>
+  <div class="done" id="pdone" hidden><b>✓ Episode complete</b><div class="row"><button id="preplay">↺ Watch again</button><button id="pnextep">Next episode ▶</button></div></div></div>
+  <video id="pnext" preload="auto" muted hidden></video>
+</dialog>
+<script>
+const STAGES = [["scripted","Scripted"],["rendered","Rendered"],["uploaded","Uploaded"],["approved","Approved"],["live","Live"]];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let db = null, eps = [];
+
+function stageOf(e){ if (e.live) return "live"; if (e.approved) return "approved"; if (e.youtubeUrl) return "uploaded"; return e.rendered ? "rendered" : "scripted"; }
+function renderPipe(){
+  const c = Object.fromEntries(STAGES.map(([k]) => [k, 0])); eps.forEach(e => c[stageOf(e)]++);
+  $("#pipe").innerHTML = STAGES.map(([k, n]) => `<span class="pill"><span class="dot" style="background:var(--s-${k})"></span>${n} <span class="n">${c[k]}</span></span>`).join("");
+}
+function renderList(){
+  if (!eps.length) { $("#list").innerHTML = `<div class="empty">No episodes yet. Claude adds each episode here as it is scripted.</div>`; renderPipe(); return; }
+  $("#list").innerHTML = eps.map(e => { const st = stageOf(e); const label = STAGES.find(s => s[0] === st)[1];
+    const v = (e.narrator || "").toLowerCase();
+    return `<article class="ep" data-id="${esc(e.id)}">
+      ${e.parts && e.parts.length ? `<button class="tw" data-act="play" aria-label="Play episode ${esc(e.no)}">${e.thumb ? `<img class="thumb" src="${esc(e.thumb)}" alt="">` : `<div class="thumb">video</div>`}<span class="play"><span>▶</span></span></button>` : (e.thumb ? `<img class="thumb" src="${esc(e.thumb)}" alt="Thumbnail for episode ${esc(e.no)}">` : `<div class="thumb">thumbnail<br>coming</div>`)}
+      <div class="meta">
+        <div class="top"><span class="no">EP ${String(e.no).padStart(2, "0")}</span><span class="status" style="background:var(--s-${st})">${label}</span>${e.narrator ? `<span class="tag ${v}">${esc(e.narrator)}</span>` : ""}${e.runtime ? `<span class="no">${esc(e.runtime)}</span>` : ""}</div>
+        <h2 class="title">${esc(e.title)}</h2>
+        <div class="sub">${esc(e.chapter)}${e.ytTitle ? ` · YouTube title: “${esc(e.ytTitle)}”` : ""}</div>
+        <div class="row">
+          ${e.parts && e.parts.length ? `<button class="pl" data-act="play">▶ Play episode</button>` : ""}
+          <label class="sr" for="u-${esc(e.id)}" hidden>YouTube link</label>
+          <input type="url" id="u-${esc(e.id)}" placeholder="Paste the Unlisted YouTube link" value="${esc(e.youtubeUrl)}">
+          ${e.youtubeUrl ? `<a class="yt" href="${esc(e.youtubeUrl)}" target="_blank" rel="noopener">Watch ↗</a>` : ""}
+          <button class="${e.approved ? "" : "ok"}" data-act="approve" ${e.youtubeUrl ? "" : "disabled title='Add the YouTube link first'"}>${e.approved ? "Undo approval" : "Approve"}</button>
+          <span class="saved" id="s-${esc(e.id)}"></span>
+        </div>
+        <textarea id="n-${esc(e.id)}" placeholder="Notes for Claude (changes you want)">${esc(e.notes)}</textarea>
+      </div></article>`; }).join("");
+  renderPipe();
+}
+async function save(id, patch){
+  if (!db) { const s = $("#s-" + id); if (s) s.textContent = "Open in Claude to save"; return; }
+  try { await db.doc("episodes/" + id).update({...patch, updatedAt: new Date().toISOString()}); const s = $("#s-" + id); if (s) s.textContent = "Saved"; }
+  catch (err) { const s = $("#s-" + id); if (s) s.textContent = err && err.code === "not_granted" ? "You can view but not edit" : "Not saved, try again"; }
+}
+document.addEventListener("change", ev => { const a = ev.target.closest(".ep"); if (!a) return; const id = a.dataset.id;
+  if (ev.target.type === "url") { const url = ev.target.value.trim(); if (url && !/^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//.test(url)) { $("#s-" + id).textContent = "Paste a youtube.com or youtu.be link"; return; } save(id, {youtubeUrl: url}); }
+  if (ev.target.tagName === "TEXTAREA") save(id, {notes: ev.target.value}); });
+let cur = null, idx = 0;
+function loadPart(i, autoplay){ idx = i; $("#pdone").hidden = true; const v = $("#pv"); v.src = cur.parts[i]; $("#ppart").textContent = cur.parts.length > 1 ? `Part ${i + 1} of ${cur.parts.length} · plays straight through` : "";
+  const n = cur.parts[i + 1]; const pn = $("#pnext"); if (n) { pn.src = n; pn.load(); } else pn.removeAttribute("src");
+  if (autoplay) v.play().catch(() => {}); }
+function openPlayer(e){ cur = e; $("#ptitle").textContent = `EP ${String(e.no).padStart(2, "0")} · ${e.ytTitle || e.title}`; const d = $("#player"); if (!d.open) d.showModal(); loadPart(0, true); }
+$("#pv").addEventListener("ended", () => { if (!cur) return; if (idx + 1 < cur.parts.length) { loadPart(idx + 1, true); return; }
+  const nx = eps.find(x => x.no === cur.no + 1 && x.parts && x.parts.length); $("#pnextep").hidden = !nx; $("#pdone").hidden = false; });
+$("#preplay").addEventListener("click", () => { if (cur) loadPart(0, true); });
+$("#pnextep").addEventListener("click", () => { const nx = cur && eps.find(x => x.no === cur.no + 1 && x.parts && x.parts.length); if (nx) openPlayer(nx); });
+$("#pclose").addEventListener("click", () => $("#player").close());
+$("#player").addEventListener("close", () => { const v = $("#pv"); v.pause(); v.removeAttribute("src"); v.load(); $("#pnext").removeAttribute("src"); cur = null; });
+document.addEventListener("click", ev => { const p = ev.target.closest("[data-act=play]"); if (p) { const e = eps.find(x => x.id === p.closest(".ep").dataset.id); if (e) openPlayer(e); return; } });
+document.addEventListener("click", ev => { const b = ev.target.closest("button[data-act=approve]"); if (!b) return; const id = b.closest(".ep").dataset.id; const e = eps.find(x => x.id === id); save(id, {approved: !e.approved}); });
+
+(async () => { try { db = window.claude ? await window.claude.use("db") : null; } catch (e) { db = null; }
+  if (!db) { $("#empty").textContent = "This board saves inside Claude. Open it from your Claude account to see and edit episodes."; return; }
+  db.collection("episodes").orderBy("no").onSnapshot(snap => { eps = snap.docs.map(d => ({id: d.id, ...d.data()})); renderList(); },
+    () => { $("#empty").textContent = "Couldn't load the episodes. Refresh the page to try again."; });
+})();
+</script>

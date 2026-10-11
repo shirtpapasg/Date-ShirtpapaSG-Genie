@@ -1,0 +1,13 @@
+{
+ "hook": "translate(765 525) scale(1.5) translate(-770 -368)",
+ "rule": "translate(765 525) scale(1.192) translate(-760 -452)",
+ "door": "translate(765 525) scale(1.058) translate(-1006 -513)",
+ "examples": "translate(765 525) scale(1.104) translate(-766 -520)",
+ "stop": "translate(765 525) scale(1.316) translate(-809 -436)",
+ "graph": "translate(765 525) scale(1.336) translate(-645 -484)",
+ "rod": "translate(765 525) scale(1.345) translate(-798 -458)",
+ "quiz": "translate(765 525) scale(1.1) translate(-760 -466)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.169) translate(-760 -472)",
+ "close": "translate(765 525) scale(1.5) translate(-760 -566)"
+}

@@ -1,0 +1,82 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Five systems in your body are working right now, and you never asked them to. If even one stops, your whole body is in trouble. Can you name all five?"
+ },
+ {
+  "id": "run",
+  "scene": "run",
+  "text": "Try this. Run on the spot for thirty seconds. Notice anything? Your heart beats faster. You breathe faster. And later, you feel hungry. That is several body systems, all working together."
+ },
+ {
+  "id": "models",
+  "scene": "models",
+  "text": "Scientists study body systems using models, like the simple diagrams you are about to see. A model is simpler than the real body, but it helps us understand how the parts work."
+ },
+ {
+  "id": "resp",
+  "scene": "resp",
+  "text": "System number one. The respiratory system. Your nose, windpipe and lungs work together for the exchange of gases. You take in air, your body keeps the oxygen it needs, and you breathe out waste gases."
+ },
+ {
+  "id": "circ",
+  "scene": "circ",
+  "text": "System number two. The circulatory system. Your heart pumps blood through tubes called blood vessels. Blood carries digested food and oxygen to every part of your body, and carries waste away. It works closely with the respiratory system. That is why, when you exercise, your heart beats faster and you breathe faster, together."
+ },
+ {
+  "id": "skel",
+  "scene": "skel",
+  "text": "System number three. The skeletal system. Your bones give your body its shape, and protect important parts. Your skull protects your brain. Your rib cage protects your heart and lungs. And your backbone holds you up. The longest bone in your body is your thigh bone, called the femur. And the smallest bones are tiny ones, deep inside your ear."
+ },
+ {
+  "id": "musc1",
+  "scene": "musc",
+  "text": "System number four. The muscular system. Bones cannot move on their own. Muscles pull on them. In your arm, muscles work in pairs. When one muscle contracts, getting shorter, the other relaxes. That is how you lift your arm, and lower it again."
+ },
+ {
+  "id": "musc2",
+  "scene": "musc",
+  "text": "Some muscles are under your control, like the ones in your arm. But your heart is a muscle you cannot control. It keeps beating, even while you sleep."
+ },
+ {
+  "id": "dig",
+  "scene": "dig",
+  "text": "System number five. The digestive system. It breaks your food down into simpler substances that your body can use. It starts in your mouth, and goes all the way through your stomach and intestines. We will follow your lunch through it in the next two episodes."
+ },
+ {
+  "id": "leo",
+  "scene": "leo",
+  "text": "Long ago, the artist and scientist Leonardo da Vinci was so curious about the human body that he drew bones and muscles in amazing detail. Art and science, working together. Curiosity is a superpower."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Which system is made of the heart and blood vessels? And which system gives the body its shape?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "The heart and blood vessels make up the circulatory system. And the skeletal system gives the body its shape."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. The respiratory system is for the exchange of gases. The circulatory system carries digested food and oxygen to all parts of the body, and removes waste. The skeletal system gives the body shape and protects important parts. The muscular system works with the skeletal system to move the body."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit that keeps you going. Never miss twice. If you skip your revision one day, that is okay. Just never skip two days in a row. Get straight back on track the next day."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Revise with a mind map. Human body systems in the middle, and five branches. Respiratory, circulatory, skeletal, muscular and digestive. Add their parts and their jobs. Then save it in TheOneApp, the ultimate science app."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, the five systems are the respiratory, circulatory, skeletal, muscular and digestive systems. Your turn. Put your hand on your chest and feel your heartbeat. Which two systems are working together right now? Tell me in the comments."
+ }
+]

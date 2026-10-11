@@ -1,0 +1,16 @@
+[
+  {"id": "hook", "scene": "hook", "text": "Can you weigh air? You cannot just pour it onto a scale. It spreads away! But scientists have a clever trick. By the end of this video, you will be able to weigh the air inside a ball."},
+  {"id": "units", "scene": "units", "text": "First, how do we measure mass? We use kilograms and grams. A bag of rice might be five kilograms. A one litre bottle of water has a mass of about one kilogram, which is one thousand grams."},
+  {"id": "balances", "scene": "balances", "text": "Long ago, people used a simple balance. Put the object on one side, and known masses on the other, until it is level. Today, we usually use an electronic balance. It is faster, and more accurate."},
+  {"id": "rules1", "scene": "rules", "text": "But an electronic balance only works well if you follow three rules. Rule one. Place it on a flat, steady surface, away from wind. A shaky table, or a fan blowing, gives the wrong reading."},
+  {"id": "rules2", "scene": "rules", "text": "Rule two. Switch it on before you put anything on the pan. Rule three. Check that the reading shows zero. If it shows something else, like zero point five grams, that is a zero error. Press the tare button, and it goes back to zero."},
+  {"id": "solid", "scene": "solid", "text": "Weighing a solid is easy. Put it straight on the pan, and read the mass."},
+  {"id": "liquid", "scene": "liquid", "text": "But a liquid needs a container. So, weigh the empty beaker first. Sixty-four point one grams. Then pour in the water and weigh again. One hundred and thirty-eight grams. Subtract, and the water has a mass of seventy-three point nine grams."},
+  {"id": "air", "scene": "air", "text": "Now, the trick for air! Weigh a flat basketball. Five hundred and eighty-six grams. Pump it full of air, and weigh it again. Five hundred and ninety-seven grams. Subtract, and the air inside has a mass of eleven grams. You just weighed air!"},
+  {"id": "quiz1", "scene": "quiz", "text": "Pause and predict! An empty cup has a mass of fifty grams. With juice inside, it is one hundred and twenty grams. What is the mass of the juice?"},
+  {"id": "quiz2", "scene": "quiz", "text": "Seventy grams! One hundred and twenty, take away fifty."},
+  {"id": "exam", "scene": "exam", "text": "In your exam, say it like this. To find the mass of a liquid or a gas, first measure the mass of the empty container. Then measure the container with the liquid or gas inside. Subtract to find the difference. Always check that the balance reads zero before weighing."},
+  {"id": "habit1", "scene": "habit", "text": "Here is a habit to try. Make it attractive. Pair your revision with something you enjoy. Revise with your favourite music playing, or save a favourite snack for study time. Soon, you will look forward to it."},
+  {"id": "habit2", "scene": "mindmap", "text": "Then add to your matter mind map. Under has mass, write kilograms and grams, the electronic balance, and the three balance rules. Save it in TheOneApp, the ultimate science app."},
+  {"id": "close", "scene": "close", "text": "So, can you weigh air? Yes, by subtracting! Your turn. Use a kitchen scale to find the mass of the water in a glass. Remember to weigh the empty glass first."}
+]

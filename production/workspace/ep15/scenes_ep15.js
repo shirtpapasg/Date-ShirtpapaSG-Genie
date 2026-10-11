@@ -1,0 +1,196 @@
+/* =================== SCENES (Episode 15: why shadows form — straight lines + blocking) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const RAY = "#ffbe0b";
+function ray(p, col = RAY, w = 10) { const g = el("g", {}, p); const ln = el("line", {stroke: col, "stroke-width": w, "stroke-linecap": "round"}, g); const hd = el("path", {d: "M0 0 L-34 -18 L-34 18 Z", fill: col, stroke: INK, "stroke-width": 3}, g);
+  g.to = (x1, y1, x2, y2, k) => { const x = lerp(x1, x2, k), y = lerp(y1, y2, k); set(ln, "x1", x1); set(ln, "y1", y1); set(ln, "x2", x); set(ln, "y2", y); tf(hd, `translate(${x} ${y}) rotate(${Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI})`); op(g, k > 0 ? 1 : 0); }; return g; }
+function eye(p, s = 1) { const g = el("g", {transform: `scale(${s})`}, p); el("path", {d: "M-80 0 Q0 -70 80 0 Q0 70 -80 0 Z", fill: "#fff", stroke: INK, "stroke-width": 6}, g); el("circle", {r: 30, fill: "#3a86ff", stroke: INK, "stroke-width": 4}, g); el("circle", {r: 13, fill: INK}, g); return g; }
+function frost(p, w, h) { const g = el("g", {}, p); el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: 6, fill: "#caf0f8", opacity: .85, stroke: INK, "stroke-width": 5}, g); let sd = 77; const lr = () => (sd = (sd * 16807) % 2147483647) / 2147483647; for (let i = 0; i < 30; i++) el("circle", {cx: (lr() - .5) * (w - 10), cy: (lr() - .5) * (h - 10), r: 2 + lr() * 3, fill: "#fff"}, g); return g; }
+function wood(p, w, h) { const g = el("g", {}, p); el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: 6, fill: "#a0522d", stroke: INK, "stroke-width": 5}, g); for (let i = 1; i < 4; i++) el("line", {x1: -w / 2 + 4, y1: -h / 2 + i * h / 4, x2: w / 2 - 4, y2: -h / 2 + i * h / 4, stroke: "#6f3b1f", "stroke-width": 3}, g); return g; }
+// lamp → object → wall setup. returns g with g.upd(objHalfH, dark, k)
+function setup(p, lx, ly, ox, wx, wallH, objEl) { const g = el("g", {}, p);
+  const beam = el("path", {fill: "#fff3b0", opacity: .55}, g); const wall = el("rect", {x: wx, y: ly - wallH / 2, width: 30, height: wallH, fill: "#e9ecef", stroke: INK, "stroke-width": 5}, g);
+  const sh = el("rect", {x: wx, width: 30, fill: "#1b1b3a"}, g); const lamp = emo(g, lx, ly, 110, "💡"); g.appendChild(objEl); tf(objEl, `translate(${ox} ${ly})`);
+  const r1 = el("line", {stroke: RAY, "stroke-width": 5, "stroke-dasharray": "14 8"}, g), r2 = el("line", {stroke: RAY, "stroke-width": 5, "stroke-dasharray": "14 8"}, g);
+  g.upd = (hh, dark, k) => { const sc = (wx - lx) / (ox - lx), top = ly - hh * sc, bot = ly + hh * sc;
+    set(beam, "d", `M${lx + 40} ${ly} L${wx} ${ly - wallH / 2} L${wx} ${ly + wallH / 2} Z`); op(beam, .5 * k);
+    set(sh, "y", top); set(sh, "height", bot - top); op(sh, dark * k);
+    [[r1, -hh, top], [r2, hh, bot]].forEach(([r, d, yy]) => { set(r, "x1", lx + 40); set(r, "y1", ly); set(r, "x2", lerp(lx + 40, wx, k)); set(r, "y2", lerp(ly, yy, k)); op(r, k > 0 ? 1 : 0); }); };
+  return g; }
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#ade8f4", "#caf0f8");
+  s.sun = emo(s.stage, 260, 200, 200, "☀️"); s.ground = el("rect", {x: 0, y: 820, width: 1920, height: 260, fill: "#95d5b2"}, s.stage);
+  s.gl = frost(s.stage, 220, 300); s.hand = emo(s.stage, 0, 0, 100, "✋"); s.sh = el("ellipse", {rx: 170, ry: 40, fill: "#1b1b3a"}, s.stage);
+  s.q = tx(s.stage, {x: 1150, y: 300, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "GLASS makes a"); s.q2 = tx(s.stage, {x: 1150, y: 390, "text-anchor": "middle", "font-size": 90, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 12}, "SHADOW?!");
+  s.c = chip(s.stage, "…but it lets light THROUGH 🤔", "#3a86ff", {fs: 38});
+  s.run = t => { const a = w => C("hook", w);
+    op(s.gl, ramp(t, a("frosted"), a("frosted") + .2)); tf(s.gl, `translate(700 ${520 + Math.sin(t * 2) * 6})`); op(s.hand, ramp(t, a("frosted"), a("frosted") + .2)); set(s.hand, "x", 700); set(s.hand, "y", 690);
+    op(s.sh, ramp(t, a("shadow") - .3, a("shadow")) * .4); set(s.sh, "cx", 840); set(s.sh, "cy", 880);
+    op(s.q, ramp(t, a("shadow"), a("shadow") + .2)); op(s.q2, ramp(t, a("shadow"), a("shadow") + .2)); tf(s.q2, `translate(1150 390) scale(${pop(t, a("shadow"))}) translate(-1150 -390)`);
+    op(s.c, ramp(t, a("through"), a("through") + .2)); popAt(s.c, 1150, 520, t, a("through")); }; return s; })();
+
+// ---- WAYANG KULIT
+S.wayang = (() => { const s = scene("wayang", "#3c1518", "#69140e");
+  s.glow = el("rect", {x: 360, y: 180, width: 800, height: 540, fill: "#ffe8a3", stroke: "#8d5524", "stroke-width": 16}, s.stage);
+  s.pup = el("g", {}, s.stage); el("circle", {cx: 0, cy: -150, r: 40, fill: "#1b1b1b"}, s.pup); el("path", {d: "M-20 -110 L-80 120 L80 120 L20 -110 Z", fill: "#1b1b1b"}, s.pup); el("path", {d: "M-30 140 L-60 220 M30 140 L60 220", stroke: "#1b1b1b", "stroke-width": 14}, s.pup);
+  s.arm = el("line", {x1: 0, y1: -80, x2: 120, y2: -10, stroke: "#1b1b1b", "stroke-width": 12, "stroke-linecap": "round"}, s.pup); s.stick = el("line", {x1: 0, y1: 120, x2: 0, y2: 340, stroke: "#5a3a1a", "stroke-width": 6}, s.pup);
+  s.tv = chip(s.stage, "📺 before television…", "#6c757d", {fs: 36}); s.name = chip(s.stage, "WAYANG KULIT · shadow puppets", "#e9c46a", {fs: 40});
+  s.two = chip(s.stage, "we need 2 FACTS about light", "#ffbe0b", {fs: 42});
+  s.run = t => { const a = w => C("wayang", w); const lit = ramp(t, a("screen") - .3, a("behind") + .3);
+    set(s.glow, "fill", mix("#5c4033", "#ffe8a3", lit)); op(s.glow, 1);
+    op(s.pup, ramp(t, a("puppets"), a("puppets") + .3)); tf(s.pup, `translate(${760 + Math.sin(t * 1.2) * 160} 470)`); tf(s.arm, `rotate(${Math.sin(t * 3) * 30} 0 -80)`);
+    op(s.tv, on(t, a("television"), a("wayang"), .2)); popAt(s.tv, 760, 120, t, a("television"));
+    op(s.name, ramp(t, a("wayang"), a("wayang") + .2)); popAt(s.name, 760, 120, t, a("wayang"));
+    op(s.two, ramp(t, a("two"), a("two") + .2)); popAt(s.two, 760, 830, t, a("two")); }; return s; })();
+
+// ---- MATERIALS
+S.materials = (() => { const s = scene("materials", "#e0fbfc", "#c2dfe3");
+  const ys = [280, 520, 760];
+  s.rows = [["opaque", "wood", "OPAQUE: NO light through", "#6c757d", 0], ["translucent", "frosted", "TRANSLUCENT: SOME light", "#4ea8de", .45], ["transparent", "clear", "TRANSPARENT: MOST light", "#48cae4", .9]].map(([w, ex, lab, col, pass], i) => {
+    const g = el("g", {}, s.stage); el("rect", {x: 260, y: ys[i] - 40, width: 480, height: 80, fill: "#ffe14d", opacity: .8}, g); const out = el("rect", {x: 800, y: ys[i] - 40, width: 360, height: 80, fill: "#ffe14d", opacity: pass * .8}, g);
+    const pan = i === 0 ? wood(g, 50, 170) : i === 1 ? frost(g, 50, 170) : el("rect", {x: -25, y: -85, width: 50, height: 170, rx: 6, fill: "#ffffff55", stroke: INK, "stroke-width": 5}, g); tf(pan, `translate(770 ${ys[i]})`);
+    return {g, out, w, ex, i, c: chip(s.stage, lab, col, {fs: 30})}; });
+  s.ex = [["🪵 wood", "wood"], ["🧊 frosted glass", "frosted"], ["🪟 clear glass", "clear"]].map(([n, w], i) => ({c: chip(s.stage, n, "#fff", {fs: 28, ink: INK}), w, i}));
+  s.run = t => { const a = w => C("materials", w);
+    s.rows.forEach(r => { op(r.g, ramp(t, a(r.w) - .2, a(r.w))); op(r.c, ramp(t, a(r.w), a(r.w) + .2)); popAt(r.c, 1350, ys[r.i], t, a(r.w)); });
+    s.ex.forEach(e => { op(e.c, ramp(t, a(e.w), a(e.w) + .2)); popAt(e.c, 770, ys[e.i] - 120, t, a(e.w)); }); }; return s; })();
+
+// ---- DEFINE
+S.define = (() => { const s = scene("define", "#fff3b0", "#ffd166");
+  s.obj = el("g", {}); wood(s.obj, 40, 200); s.su = setup(s.stage, 260, 450, 700, 1180, 560, s.obj);
+  s.card = el("g", {}, s.stage); el("rect", {x: -620, y: -80, width: 1240, height: 160, rx: 26, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.card);
+  tx(s.card, {x: 0, y: -18, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#1b1b3a"}, "👤 SHADOW = a dark area formed on a surface"); tx(s.card, {x: 0, y: 40, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#e63946"}, "when an opaque or translucent object BLOCKS light");
+  s.run = t => { const a = w => C("define", w);
+    op(s.su, 1); s.su.upd(100, .85, ramp(t, a("shadow") - .3, a("dark") + .3));
+    op(s.card, ramp(t, a("dark"), a("dark") + .2)); tf(s.card, `translate(760 850) scale(${pop(t, a("dark")) * .95})`); }; return s; })();
+
+// ---- STRAIGHT LINES (laser)
+S.straight = (() => { const s = scene("straight", "#10002b", "#240046");
+  s.title = tx(s.stage, {x: 760, y: 170, "text-anchor": "middle", "font-size": 60, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Fact ①: light travels in STRAIGHT LINES ➡️");
+  s.las = ["#ff006e", "#3a86ff", "#06d6a0", "#ffbe0b", "#8338ec", "#ff595e"].map(c => el("line", {stroke: c, "stroke-width": 8, "stroke-linecap": "round"}, s.stage));
+  s.c = chip(s.stage, "🎆 laser light show", "#ff006e", {fs: 38}); s.t3 = chip(s.stage, "🃏🃏🃏 test it with 3 cards", "#f77f00", {fs: 38});
+  s.run = t => { const a = w => C("straight", w);
+    op(s.title, ramp(t, a("straight") - .4, a("straight"))); tf(s.title, `translate(760 170) scale(${pop(t, a("straight") - .4) * .95}) translate(-760 -170)`);
+    s.las.forEach((l, i) => { const ang = -Math.PI / 2 + Math.sin(t * 1.3 + i) * .7; set(l, "x1", 760); set(l, "y1", 900); set(l, "x2", 760 + Math.cos(ang) * 900); set(l, "y2", 900 + Math.sin(ang) * 900); op(l, ramp(t, a("laser") - .2, a("laser")) * .9); });
+    op(s.c, ramp(t, a("laser"), a("laser") + .2)); popAt(s.c, 400, 820, t, a("laser")); op(s.t3, ramp(t, a("three"), a("three") + .2)); popAt(s.t3, 1120, 820, t, a("three")); }; return s; })();
+
+// ---- THREE CARDS
+S.cards = (() => { const s = scene("cards", "#2b2d42", "#1b1b3a");
+  s.candle = emo(s.stage, 280, 520, 140, "🕯️"); s.e = eye(s.stage, 1);
+  const xs = [600, 820, 1040]; s.cards = xs.map((x, i) => { const g = el("g", {}, s.stage); el("rect", {x: -20, y: -170, width: 40, height: 340, rx: 6, fill: "#e9c46a", stroke: INK, "stroke-width": 5}, g); el("circle", {r: 13, fill: "#1b1b3a"}, g);
+    tx(g, {x: 0, y: 220, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, "ABC"[i]); el("rect", {x: -40, y: 170, width: 80, height: 20, fill: "#6c757d"}, g); return {g, x, i}; });
+  s.r = ray(s.stage); s.x = tx(s.stage, {x: 1270, y: 420, "text-anchor": "middle", "font-size": 110, "font-weight": 700, fill: "#e63946", class: "out", "stroke-width": 8}, "✗");
+  s.c1 = chip(s.stage, "holes in a line ➜ ✓ see the flame", "#06d6a0", {fs: 34}); s.c2 = chip(s.stage, "light can't BEND around the card ➜ STRAIGHT lines", "#f77f00", {fs: 32});
+  s.run = t => { const a = w => C("cards", w); const sh = ramp(t, a("shift"), a("shift") + .5);
+    op(s.candle, 1); op(s.e, ramp(t, a("look") - .3, a("look"))); tf(s.e, "translate(1270 520)");
+    s.cards.forEach(c => { op(c.g, ramp(t, a("three") + c.i * .2, a("three") + .2 + c.i * .2)); tf(c.g, `translate(${c.x} ${520 + (c.i === 1 ? sh * 110 : 0)})`); });
+    const k = ramp(t, a("see") - .2, a("see") + .6); s.r.to(330, 520, t > a("shift") + .3 ? 800 : 1190, 520, k);
+    op(s.x, ramp(t, a("disappears"), a("disappears") + .2)); op(s.c1, on(t, a("see"), a("shift"), .2)); popAt(s.c1, 760, 180, t, a("see"));
+    op(s.c2, ramp(t, a("bend"), a("bend") + .2)); popAt(s.c2, 760, 180, t, a("bend")); }; return s; })();
+
+// ---- SAFETY
+S.safety = (() => { const s = scene("safety", "#ffadad", "#ff595e");
+  s.sun = emo(s.stage, 760, 400, 260, "☀️"); s.no = el("g", {}, s.stage); el("circle", {r: 170, fill: "none", stroke: "#e63946", "stroke-width": 26}, s.no); el("line", {x1: -120, y1: -120, x2: 120, y2: 120, stroke: "#e63946", "stroke-width": 26}, s.no);
+  s.c = chip(s.stage, "⚠️ NEVER look directly at the Sun or very bright lights", "#1b1b3a", {fs: 36});
+  s.run = t => { const a = w => C("safety", w); op(s.sun, 1); op(s.no, ramp(t, a("never"), a("never") + .2)); tf(s.no, `translate(760 400) scale(${pop(t, a("never"))})`);
+    op(s.c, ramp(t, a("safety"), a("safety") + .2)); popAt(s.c, 760, 760, t, a("safety")); }; return s; })();
+
+// ---- BLOCK (opaque vs translucent)
+S.block = (() => { const s = scene("block", "#fff3b0", "#ffd6a5");
+  s.title = chip(s.stage, "Fact ②: light CANNOT pass through opaque objects", "#e63946", {fs: 36});
+  s.o1 = el("g", {}); wood(s.o1, 34, 140); s.s1 = setup(s.stage, 240, 360, 640, 1080, 380, s.o1);
+  s.o2 = el("g", {}); frost(s.o2, 34, 140); s.s2 = setup(s.stage, 240, 760, 640, 1080, 380, s.o2);
+  s.l1 = chip(s.stage, "🪵 board: blocks ALL light ➜ DARK", "#1b1b3a", {fs: 30}); s.l2 = chip(s.stage, "🧊 frosted: some light passes ➜ LESS DARK", "#4ea8de", {fs: 30});
+  s.run = t => { const a = w => C("block", w);
+    op(s.title, ramp(t, a("opaque"), a("opaque") + .2)); popAt(s.title, 760, 150, t, a("opaque"));
+    op(s.s1, ramp(t, a("wooden") - .2, a("wooden"))); s.s1.upd(70, .9, ramp(t, a("wooden"), a("dark") + .3));
+    op(s.s2, ramp(t, a("frosted") - .2, a("frosted"))); s.s2.upd(70, .4, ramp(t, a("frosted"), a("less") + .3));
+    op(s.l1, ramp(t, a("dark"), a("dark") + .2)); popAt(s.l1, 1330, 360, t, a("dark")); op(s.l2, ramp(t, a("less"), a("less") + .2)); popAt(s.l2, 1300, 760, t, a("less")); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.lamp = emo(s.stage, 760, 270, 120, "💡"); s.table = el("rect", {x: 260, y: 780, width: 1000, height: 30, rx: 8, fill: "#bc6c25", stroke: INK, "stroke-width": 6}, s.stage);
+  s.cb = el("rect", {x: 380, y: 500, width: 240, height: 24, fill: "#a0522d", stroke: INK, "stroke-width": 4}, s.stage); s.fp = el("rect", {x: 900, y: 500, width: 240, height: 24, fill: "#caf0f8", stroke: INK, "stroke-width": 4}, s.stage);
+  s.sh1 = el("ellipse", {cx: 470, cy: 770, rx: 170, ry: 18, fill: "#1b1b3a"}, s.stage); s.sh2 = el("ellipse", {cx: 1050, cy: 770, rx: 170, ry: 18, fill: "#1b1b3a"}, s.stage);
+  s.l1 = chip(s.stage, "A: cardboard", "#fff", {fs: 30, ink: INK}); s.l2 = chip(s.stage, "B: frosted plastic", "#fff", {fs: 30, ink: INK});
+  s.q = chip(s.stage, "Which shadow is DARKER?", "#ff9f1c", {fs: 40}); s.a1 = chip(s.stage, "✓ DARKER (opaque)", "#06d6a0", {fs: 32}); s.a2 = chip(s.stage, "less dark (translucent)", "#4ea8de", {fs: 32});
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w); const rv = ramp(t, b("cardboard's") - .2, b("cardboard's") + .3);
+    op(s.pause, on(t, a("pause"), b("cardboard's"), .2)); tf(s.pause, `translate(760 150) scale(${pop(t, a("pause"))}) translate(-760 -150)`);
+    op(s.lamp, ramp(t, a("lamp") - .3, a("lamp"))); op(s.table, 1); op(s.cb, ramp(t, a("cardboard"), a("cardboard") + .2)); op(s.fp, ramp(t, a("frosted"), a("frosted") + .2));
+    op(s.sh1, ramp(t, a("lamp"), a("lamp") + .3) * lerp(.5, .9, rv)); op(s.sh2, ramp(t, a("lamp"), a("lamp") + .3) * lerp(.5, .35, rv));
+    op(s.l1, ramp(t, a("cardboard"), a("cardboard") + .2)); popAt(s.l1, 500, 440, t, a("cardboard")); op(s.l2, ramp(t, a("frosted"), a("frosted") + .2)); popAt(s.l2, 1020, 440, t, a("frosted"));
+    op(s.q, ramp(t, a("darker"), a("darker") + .2) * (1 - rv)); popAt(s.q, 760, 880, t, a("darker"));
+    op(s.a1, ramp(t, b("opaque"), b("opaque") + .2)); popAt(s.a1, 470, 880, t, b("opaque")); op(s.a2, ramp(t, b("translucent"), b("translucent") + .2)); popAt(s.a2, 1050, 880, t, b("translucent")); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["➡️ Light travels in straight lines."], ["🪵 Light cannot pass through an opaque object,", "     so a shadow is formed behind it."], ["🧊 Only some light passes through a translucent", "     object, so its shadow is less dark."]];
+  let y = -150; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 50, "font-size": 40, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 50 + 50; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("travels"), a("cannot"), a("only")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (space it out)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "📆 SPACE IT OUT");
+  s.d = [["today", "review"], ["tomorrow", "tomorrow"], ["+3 days", "three"], ["+1 week", "week"]].map(([n, w], i) => { const g = el("g", {}, s.stage); el("rect", {x: -110, y: -90, width: 220, height: 180, rx: 24, fill: "#fff", stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: 0, y: -30, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#7209b7"}, n); tx(g, {x: 0, y: 60, "text-anchor": "middle", "font-size": 80, "font-weight": 700, fill: "#06d6a0"}, "✓"); return {g, w, i}; });
+  s.bar = el("rect", {x: 380, y: 700, height: 50, rx: 25, fill: "#ffbe0b", stroke: INK, "stroke-width": 5}, s.stage); s.barbg = el("rect", {x: 380, y: 700, width: 760, height: 50, rx: 25, fill: "none", stroke: "#fff", "stroke-width": 5}, s.stage);
+  s.lab = chip(s.stage, "🧠 memory gets STRONGER", "#1b1b3a", {fs: 36});
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.title, ramp(t, a("space"), a("space") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("space"))}) translate(-760 -180)`);
+    let n = 0; s.d.forEach(d => { const tt = a(d.w); if (t > tt) n++; op(d.g, ramp(t, tt, tt + .2)); tf(d.g, `translate(${340 + d.i * 280} 450) scale(${pop(t, tt)})`); });
+    set(s.bar, "width", lerp(0, 760, ramp(t, a("review"), a("stronger") + .5))); op(s.bar, ramp(t, a("review"), a("review") + .2)); op(s.barbg, ramp(t, a("review"), a("review") + .2));
+    op(s.lab, ramp(t, a("stronger"), a("stronger") + .2)); popAt(s.lab, 760, 830, t, a("stronger")); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  const CX = 420, CY = 460;
+  s.dim = [["🌿 NATURAL", "#06d6a0", 220, 250], ["🏭 MAN-MADE", "#3a86ff", 560, 240], ["👁️ HOW WE SEE", "#f77f00", 240, 720]].map(([n, c, x, y]) => ({l: el("path", {d: `M${CX} ${CY} L${x} ${y}`, stroke: c, "stroke-width": 12, opacity: .35}, s.stage), c: chip(s.stage, n, c, {fs: 26}), x, y}));
+  s.l1 = el("path", {d: `M${CX} ${CY} Q640 420 860 420`, stroke: "#1b1b3a", "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 600}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 150, ry: 70, fill: "#ffbe0b", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 16, "text-anchor": "middle", "font-size": 48, "font-weight": 700, fill: INK}, "💡 LIGHT");
+  s.br = chip(s.stage, "👤 SHADOWS", "#1b1b3a", {fs: 38});
+  s.subs = [["light travels in STRAIGHT lines", "straight"], ["opaque ➜ DARK shadow", "opaque"], ["translucent ➜ LESS DARK shadow", "translucent"]].map(([n, w], i) => ({c: chip(s.stage, n, "#fff", {fs: 27, ink: INK}), w, i}));
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr15"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  const IH = 224 * 2000 / 780; s.scr = el("g", {"clip-path": "url(#scr15)"}, s.phone); s.shot = el("image", {href: "oneapp_mind2.png", x: -112, y: -122, width: 224, height: IH, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("light"), a("light") + .2)); tf(s.center, `translate(${CX} ${CY}) scale(${pop(t, a("light"))})`);
+    s.dim.forEach(d => { op(d.l, ramp(t, a("light") + .3, a("light") + .5) * .35); op(d.c, ramp(t, a("light") + .3, a("light") + .5) * .5); popAt(d.c, d.x, d.y, t, a("light") + .3); });
+    set(s.l1, "stroke-dashoffset", 600 * (1 - ramp(t, a("shadows") - .3, a("shadows") + .3))); op(s.l1, t > a("shadows") - .3 ? 1 : 0);
+    op(s.br, ramp(t, a("shadows"), a("shadows") + .2)); popAt(s.br, 900, 420, t, a("shadows"));
+    s.subs.forEach(c => { const tt = a(c.w); op(c.c, ramp(t, tt, tt + .2)); popAt(c.c, 920, 510 + c.i * 76, t, tt); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 640, 130, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1390, ph)} 540) rotate(${lerp(12, -4, ph)})`);
+    const nx = a("ultimate") + .6; const off = -122 - (IH - 327) * ramp(t, a("save"), nx); set(s.shot, "y", off); const sc = IH / 2000;
+    set(s.ring, "x", -112 + 36 * sc); set(s.ring, "y", off + 1722 * sc); set(s.ring, "width", 156 * sc); set(s.ring, "height", 72 * sc);
+    op(s.ring, on(t, nx, SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#3a0ca3", "#f72585");
+  s.ans = el("g", {}, s.stage); el("rect", {x: -430, y: -70, width: 860, height: 140, rx: 70, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.ans); tx(s.ans, {x: 0, y: 22, "text-anchor": "middle", "font-size": 52, "font-weight": 700, fill: "#fff"}, "🧊 It blocks SOME of the light!");
+  s.cards = [0, 1, 2].map(i => { const g = el("g", {}, s.stage); el("rect", {x: -18, y: -140, width: 36, height: 280, rx: 6, fill: "#e9c46a", stroke: INK, "stroke-width": 5}, g); el("circle", {r: 11, fill: "#1b1b3a"}, g); return g; });
+  s.torch = emo(s.stage, 0, 0, 120, "🔦"); s.adult = emo(s.stage, 0, 0, 150, "🧑"); s.c = chip(s.stage, "👩 with an adult · 🔦 torch, not a candle", "#1b1b3a", {fs: 34});
+  s.run = t => { const a = w => C("close", w); const tn = ramp(t, a("your") - .2, a("your") + .1);
+    op(s.ans, ramp(t, a("blocks"), a("blocks") + .15) * (1 - tn)); tf(s.ans, `translate(760 420) scale(${pop(t, a("blocks"))})`);
+    s.cards.forEach((g, i) => { const tt = a("threecard") + i * .2; op(g, ramp(t, tt, tt + .2)); tf(g, `translate(${640 + i * 180} 460)`); });
+    op(s.adult, ramp(t, a("adult"), a("adult") + .2)); set(s.adult, "x", 1250); set(s.adult, "y", 450);
+    op(s.torch, ramp(t, a("torch"), a("torch") + .2)); set(s.torch, "x", 420); set(s.torch, "y", 460);
+    op(s.c, ramp(t, a("adult"), a("adult") + .2)); popAt(s.c, 760, 760, t, a("adult")); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Make your shadow GIANT…");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "then tiny 🔦");
+  s.run = () => {}; return s; })();
+

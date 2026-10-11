@@ -1,0 +1,70 @@
+[
+ [
+  "popAt(s.c, 760, 830, t, a(\"see#2\"))",
+  "popAt(s.c, 760, 745, t, a(\"see#2\"))"
+ ],
+ [
+  "popAt(s.l1, 380, 520, t, b(\"falls\"))",
+  "popAt(s.l1, 330, 548, t, b(\"falls\"))"
+ ],
+ [
+  "popAt(s.l2, 1150, 600, t, b(\"bounces\"))",
+  "popAt(s.l2, 1200, 642, t, b(\"bounces\"))"
+ ],
+ [
+  "popAt(s.l2, 1100, 560, t, a(\"reflected\"))",
+  "popAt(s.l2, 1160, 600, t, a(\"reflected\"))"
+ ],
+ [
+  "el(\"rect\", {x: -260, y: -230, width: 520, height: 460, rx: 30, fill: \"#fff\", stroke: INK, \"stroke-width\": 7}, s.p1)",
+  "el(\"rect\", {x: -290, y: -230, width: 580, height: 460, rx: 30, fill: \"#fff\", stroke: INK, \"stroke-width\": 7}, s.p1)"
+ ],
+ [
+  "el(\"rect\", {x: -260, y: -230, width: 520, height: 460, rx: 30, fill: \"#fff\", stroke: INK, \"stroke-width\": 7}, s.p2)",
+  "el(\"rect\", {x: -290, y: -230, width: 580, height: 460, rx: 30, fill: \"#fff\", stroke: INK, \"stroke-width\": 7}, s.p2)"
+ ],
+ [
+  "s.a2 = chip(s.p2, \"☀️ ➜ 📖 ➜ 👁️ reflected into eyes\", \"#06d6a0\", {fs: 30});",
+  "s.a2 = chip(s.p2, \"☀️ ➜ 📖 ➜ 👁️ reflected into eyes\", \"#06d6a0\", {fs: 27});"
+ ],
+ [
+  "tf(s.earth, \"translate(1300 760)\"); op(s.kid, ramp(t, a(\"earth\") - .2, a(\"earth\"))); set(s.kid, \"x\", 1250); set(s.kid, \"y\", 650);",
+  "tf(s.earth, \"translate(1410 610)\"); op(s.kid, ramp(t, a(\"earth\") - .2, a(\"earth\"))); set(s.kid, \"x\", 1360); set(s.kid, \"y\", 500);"
+ ],
+ [
+  "s.r2.to(900, 380, 1220, 630,",
+  "s.r2.to(900, 370, 1320, 490,"
+ ],
+ [
+  "popAt(s.not, 760, 120, t, a(\"not\"))",
+  "popAt(s.not, 860, 132, t, a(\"not\"))"
+ ],
+ [
+  "popAt(s.bor, 760, 120, t, a(\"borrowed\"))",
+  "popAt(s.bor, 860, 132, t, a(\"borrowed\"))"
+ ],
+ [
+  "set(s.torch, \"x\", 330); set(s.torch, \"y\", 360);",
+  "set(s.torch, \"x\", 325); set(s.torch, \"y\", 349); tf(s.torch, \"rotate(170 325 349)\");"
+ ],
+ [
+  "[[\"✏️\", \"pencil\"], [\"🛋️\", \"sofa\"], [\"🛝\", \"swing\"]].map(([e, w], i) => ({e: emo(s.stage, 0, 0, 150, e), w, i}));",
+  "[[\"✏️\", \"pencil\"], [\"🛋️\", \"sofa\"], [null, \"swing\"]].map(([e, w], i) => ({e: e ? emo(s.stage, 0, 0, 150, e) : (() => { const g = el(\"svg\", {overflow: \"visible\"}, s.stage); el(\"path\", {d: \"M-70 68 L-52 -62 M70 68 L52 -62\", stroke: \"#e63946\", \"stroke-width\": 10, \"stroke-linecap\": \"round\"}, g); el(\"line\", {x1: -62, y1: -62, x2: 62, y2: -62, stroke: \"#e63946\", \"stroke-width\": 12, \"stroke-linecap\": \"round\"}, g); el(\"path\", {d: \"M-24 -62 V28 M24 -62 V28\", stroke: \"#6c584c\", \"stroke-width\": 5}, g); el(\"rect\", {x: -36, y: 26, width: 72, height: 14, rx: 5, fill: \"#ffbe0b\", stroke: INK, \"stroke-width\": 4}, g); return g; })(), w, i}));"
+ ],
+ [
+  "s.pen = emo(s.stage, 760, 600, 110, \"✏️\");",
+  "s.pen = emo(s.stage, 760, 622, 110, \"✏️\"); tf(s.pen, \"rotate(-45 760 622)\");"
+ ],
+ [
+  "s.beam = el(\"path\", {d: \"M0 0 L420 230 L380 330 Z\"",
+  "s.beam = el(\"path\", {d: \"M0 0 L400 175 L360 258 Z\""
+ ],
+ [
+  "s.r1.to(400, 400, 720, 570,",
+  "s.r1.to(400, 400, 715, 600,"
+ ],
+ [
+  "s.r2.to(800, 570, 1190, 390,",
+  "s.r2.to(805, 600, 1190, 390,"
+ ]
+]

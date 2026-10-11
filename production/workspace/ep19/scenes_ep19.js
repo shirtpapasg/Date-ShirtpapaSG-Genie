@@ -1,0 +1,160 @@
+/* =================== SCENES (Episode 19: heat is not temperature) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const HOT = "#e63946", COLD = "#3a86ff", HEATC = "#ff7b00";
+const tcol = v => mix(COLD, HOT, clamp((v - 5) / 60));
+function readout(p, col = INK) { const g = el("g", {}, p); el("rect", {x: -90, y: -36, width: 180, height: 72, rx: 18, fill: "#fff", stroke: INK, "stroke-width": 5}, g); g.t = tx(g, {x: 0, y: 16, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: col}, ""); g.v = v => { g.t.textContent = Math.round(v) + " °C"; set(g.t, "fill", tcol(v)); }; return g; }
+function arrowFlow(p, col = HEATC) { const g = el("g", {}, p); const dots = []; for (let i = 0; i < 6; i++) dots.push(el("text", {"text-anchor": "middle", "font-size": 44}, g)); dots.forEach(d => d.textContent = "🔥"); g.run = (x1, y1, x2, y2, t, k) => dots.forEach((d, i) => { const q = ((t * .6 + i / 6) % 1); set(d, "x", lerp(x1, x2, q)); set(d, "y", lerp(y1, y2, q)); op(d, k * Math.sin(q * Math.PI)); }); return g; }
+function graph(p, w = 620, h = 380) { const g = el("g", {}, p); el("rect", {x: 0, y: -h, width: w, height: h, fill: "#fff", stroke: INK, "stroke-width": 5}, g);
+  tx(g, {x: -14, y: -h + 20, "text-anchor": "end", "font-size": 24, "font-weight": 700, fill: INK}, "°C"); tx(g, {x: w, y: 40, "text-anchor": "end", "font-size": 24, "font-weight": 700, fill: INK}, "time ➜");
+  g.room = el("line", {x1: 0, x2: w, stroke: "#06d6a0", "stroke-width": 5, "stroke-dasharray": "16 10"}, g); g.rl = tx(g, {x: w - 10, "text-anchor": "end", "font-size": 24, "font-weight": 700, fill: "#06d6a0"}, "room temperature");
+  g.y = v => -h * v / 100; set(g.room, "y1", g.y(30)); set(g.room, "y2", g.y(30)); set(g.rl, "y", g.y(30) - 12); g.w = w; return g; }
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#ffd166", "#f77f00");
+  s.kid = emo(s.stage, 0, 0, 220, "🥵"); s.bub = el("g", {}, s.stage); el("path", {d: "M-330 -80 H330 A40 40 0 0 1 370 -40 V40 A40 40 0 0 1 330 80 H-120 L-190 140 L-180 80 H-330 A40 40 0 0 1 -370 40 V-40 A40 40 0 0 1 -330 -80 Z", fill: "#fff", stroke: INK, "stroke-width": 7}, s.bub);
+  tx(s.bub, {x: 0, y: 16, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "\"I have SO much heat!\""); s.x = tx(s.stage, {x: 1240, y: 360, "text-anchor": "middle", "font-size": 200, "font-weight": 700, fill: HOT, class: "out", "stroke-width": 12}, "✗");
+  s.c = el("g", {}, s.stage); tx(s.c, {x: 0, y: 0, "text-anchor": "middle", "font-size": 80, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "🔥 HEAT ≠ 🌡️ TEMPERATURE");
+  s.run = t => { const a = w => C("hook", w);
+    op(s.kid, ramp(t, a("run") - .2, a("run"))); set(s.kid, "x", 420); set(s.kid, "y", 560 + Math.abs(Math.sin(t * 6)) * -10);
+    op(s.bub, ramp(t, a("heat"), a("heat") + .2)); tf(s.bub, `translate(860 360) scale(${pop(t, a("heat")) * .9})`);
+    op(s.x, ramp(t, a("wrong"), a("wrong") + .2)); op(s.c, ramp(t, a("not"), a("not") + .2)); tf(s.c, `translate(760 800) scale(${pop(t, a("not")) * .9})`); }; return s; })();
+
+// ---- MILK IN HOT WATER
+S.milk = (() => { const s = scene("milk", "#caf0f8", "#ade8f4");
+  s.basin = el("g", {}, s.stage); s.water = el("path", {d: "M-300 -40 L-260 160 H260 L300 -40 Z", fill: HOT, opacity: .55}, s.basin); el("path", {d: "M-330 -110 L-270 180 H270 L330 -110", fill: "none", stroke: INK, "stroke-width": 8}, s.basin);
+  s.bottle = el("g", {}, s.stage); s.mk = el("rect", {x: -50, y: -110, width: 100, height: 210, rx: 20, fill: "#fff", stroke: INK, "stroke-width": 6}, s.bottle); el("rect", {x: -22, y: -150, width: 44, height: 44, rx: 6, fill: "#3a86ff", stroke: INK, "stroke-width": 5}, s.bottle); tx(s.bottle, {x: 0, y: 10, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#6c757d"}, "MILK");
+  s.r1 = readout(s.stage); s.r2 = readout(s.stage); s.l1 = chip(s.stage, "🥛 milk", "#fff", {fs: 30, ink: INK}); s.l2 = chip(s.stage, "♨️ hot water", "#fff", {fs: 30, ink: INK});
+  s.fl = arrowFlow(s.stage); s.q = chip(s.stage, "🤔 Something MOVED from the water to the milk. What?", "#7209b7", {fs: 34});
+  s.run = t => { const a = w => C("milk", w); const dip = ramp(t, a("put") - .3, a("put") + .5), k = ramp(t, a("while"), a("fortyfive") + .5);
+    tf(s.basin, "translate(760 600)"); op(s.basin, ramp(t, a("basin") - .3, a("basin"))); set(s.water, "fill", mix(HOT, "#ffb4a2", k));
+    tf(s.bottle, `translate(760 ${lerp(300, 560, dip)})`); op(s.bottle, 1); set(s.mk, "fill", mix("#e0f7ff", "#fff1e6", k));
+    op(s.r1, ramp(t, a("ten") - .3, a("ten"))); tf(s.r1, "translate(560 260)"); s.r1.v(lerp(10, 30, ramp(t, a("ten"), a("thirty")))); op(s.l1, ramp(t, a("ten") - .3, a("ten"))); popAt(s.l1, 560, 190, t, a("ten") - .3);
+    op(s.r2, ramp(t, a("sixty") - .3, a("sixty"))); tf(s.r2, "translate(1150 420)"); s.r2.v(lerp(60, 45, ramp(t, a("sixty"), a("fortyfive")))); op(s.l2, ramp(t, a("sixty") - .3, a("sixty"))); popAt(s.l2, 1150, 350, t, a("sixty") - .3);
+    s.fl.run(1060, 640, 830, 560, t, on(t, a("something"), SC.milk.t1 + .3, .3));
+    op(s.q, ramp(t, a("something"), a("something") + .2)); popAt(s.q, 760, 120, t, a("something")); }; return s; })();
+
+// ---- HEAT
+S.heat = (() => { const s = scene("heat", "#ffadad", "#ffd6a5");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 100, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 14}, "It was HEAT! 🔥");
+  s.e = chip(s.stage, "HEAT is a form of ENERGY ⚡ (like light 💡)", HEATC, {fs: 38});
+  s.gn = el("g", {}, s.stage); el("rect", {x: -260, y: -90, width: 520, height: 180, rx: 26, fill: "#fff", stroke: HOT, "stroke-width": 8}, s.gn); tx(s.gn, {x: 0, y: -10, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: HOT}, "GAIN heat ➕🔥"); tx(s.gn, {x: 0, y: 50, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "temperature RISES ⬆");
+  s.l = el("g", {}, s.stage); el("rect", {x: -260, y: -90, width: 520, height: 180, rx: 26, fill: "#fff", stroke: COLD, "stroke-width": 8}, s.l); tx(s.l, {x: 0, y: -10, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: COLD}, "LOSE heat ➖🔥"); tx(s.l, {x: 0, y: 50, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "temperature FALLS ⬇");
+  s.fl = chip(s.stage, "♨️ hot water ➜ 🔥 ➜ 🥛 cold milk", HEATC, {fs: 40});
+  s.run = t => { const a = w => C("heat", w);
+    op(s.title, ramp(t, a("heat"), a("heat") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("heat"))}) translate(-760 -180)`);
+    op(s.e, ramp(t, a("energy"), a("energy") + .2)); popAt(s.e, 760, 310, t, a("energy"));
+    op(s.gn, ramp(t, a("gains"), a("gains") + .2)); tf(s.gn, `translate(460 520) scale(${pop(t, a("gains"))})`); op(s.l, ramp(t, a("loses"), a("loses") + .2)); tf(s.l, `translate(1060 520) scale(${pop(t, a("loses"))})`);
+    op(s.fl, ramp(t, a("flowed"), a("flowed") + .2)); popAt(s.fl, 760, 780, t, a("flowed")); }; return s; })();
+
+// ---- DIFFERENCE TABLE
+S.diff = (() => { const s = scene("diff", "#e0fbfc", "#c2dfe3");
+  const col = (x, c, icon, n, l1, l2, l3) => { const g = el("g", {}, s.stage); el("rect", {x: -330, y: -260, width: 660, height: 520, rx: 30, fill: "#fff", stroke: c, "stroke-width": 9}, g);
+    tx(g, {x: 0, y: -180, "text-anchor": "middle", "font-size": 54, "font-weight": 700, fill: c}, icon + " " + n); [l1, l2, l3].forEach((l, i) => tx(g, {x: 0, y: -60 + i * 90, "text-anchor": "middle", "font-size": 36, "font-weight": 600, fill: INK}, l)); tf(g, `translate(${x} 520)`); return g; };
+  s.tC = col(420, "#7209b7", "🌡️", "TEMPERATURE", "how hot or cold", "measured with a", "thermometer (°C)"); s.hC = col(1100, HEATC, "🔥", "HEAT", "a form of ENERGY", "CAUSES temperature", "to change");
+  s.vs = tx(s.stage, {x: 760, y: 540, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: INK}, "≠");
+  s.sum = chip(s.stage, "temperature = WHAT we measure · heat = WHY it changes", "#1b1b3a", {fs: 34});
+  s.run = t => { const a = w => C("diff", w);
+    op(s.tC, ramp(t, a("temperature"), a("temperature") + .2)); op(s.hC, ramp(t, a("heat"), a("heat") + .2)); op(s.vs, ramp(t, a("heat"), a("heat") + .2));
+    op(s.sum, ramp(t, a("what"), a("what") + .2)); popAt(s.sum, 760, 870, t, a("what")); }; return s; })();
+
+// ---- FIX THE SENTENCE
+S.fix = (() => { const s = scene("fix", "#d8f3dc", "#b7e4c7");
+  s.bad = chip(s.stage, "✗ \"I have a lot of heat.\"", HOT, {fs: 50}); s.line = el("line", {x1: -330, y1: 0, x2: 330, y2: 0, stroke: HOT, "stroke-width": 10}, s.stage);
+  s.g1 = chip(s.stage, "✓ \"My temperature is HIGHER.\"", "#06d6a0", {fs: 50}); s.g2 = chip(s.stage, "✓ \"My body GAINED heat.\"", "#06d6a0", {fs: 50}); s.kid = emo(s.stage, 1300, 300, 150, "🏃");
+  s.run = t => { const a = w => C("fix", w);
+    op(s.bad, ramp(t, a("lot") - .4, a("lot"))); popAt(s.bad, 760, 300, t, a("lot") - .4); op(s.line, ramp(t, a("say#2"), a("say#2") + .3)); tf(s.line, "translate(760 300)");
+    op(s.g1, ramp(t, a("higher") - .4, a("higher"))); popAt(s.g1, 760, 520, t, a("higher") - .4); op(s.g2, ramp(t, a("gained") - .3, a("gained"))); popAt(s.g2, 760, 700, t, a("gained") - .3); op(s.kid, ramp(t, a("run"), a("run") + .2)); }; return s; })();
+
+// ---- GRAPHS (cooling + warming)
+S.graphs = (() => { const s = scene("graphs", "#fff3b0", "#ffd6a5");
+  s.gr = graph(s.stage); s.hot = el("polyline", {fill: "none", stroke: HOT, "stroke-width": 8, "stroke-linecap": "round"}, s.gr); s.cold = el("polyline", {fill: "none", stroke: COLD, "stroke-width": 8, "stroke-linecap": "round"}, s.gr);
+  s.c1 = emo(s.stage, 0, 0, 110, "☕"); s.c2 = emo(s.stage, 0, 0, 110, "🧊"); s.out = arrowFlow(s.stage); s.inn = arrowFlow(s.stage);
+  s.l1 = chip(s.stage, "hot water LOSES heat ➜ temperature FALLS", HOT, {fs: 30}); s.l2 = chip(s.stage, "cold water GAINS heat ➜ temperature RISES", COLD, {fs: 30}); s.m = chip(s.stage, "both MEET at room temperature 🤝", "#06d6a0", {fs: 36});
+  s.run = t => { const a = w => C("cool", w), b = w => C("warm", w); const k1 = ramp(t, a("falls"), a("temperature#2") + .5), k2 = ramp(t, b("rises"), b("temperature#2") + .5);
+    tf(s.gr, "translate(820 820)"); op(s.gr, 1); op(s.gr.room, ramp(t, a("room") - .3, a("room"))); op(s.gr.rl, ramp(t, a("room") - .3, a("room")));
+    const pts = (v0, k) => { const n = Math.max(2, Math.floor(k * 40)), p = []; for (let i = 0; i < n; i++) { const x = i / 39 * s.gr.w, v = 30 + (v0 - 30) * Math.exp(-i / 9); p.push(`${x},${s.gr.y(v)}`); } return p.join(" "); };
+    set(s.hot, "points", pts(85, k1)); op(s.hot, k1 > 0 ? 1 : 0); set(s.cold, "points", pts(5, k2)); op(s.cold, k2 > 0 ? 1 : 0);
+    op(s.c1, ramp(t, a("cup"), a("cup") + .2)); set(s.c1, "x", 400); set(s.c1, "y", 430); op(s.c2, ramp(t, b("icecold"), b("icecold") + .2)); set(s.c2, "x", 400); set(s.c2, "y", 720);
+    s.out.run(440, 400, 640, 300, t, on(t, a("loses"), b("icecold"), .3)); s.inn.run(640, 820, 440, 720, t, on(t, b("gains"), SC.graphs.t1 + .3, .3));
+    op(s.l1, on(t, a("loses"), b("icecold"), .2)); popAt(s.l1, 820, 150, t, a("loses")); op(s.l2, on(t, b("gains"), b("meet"), .2)); popAt(s.l2, 820, 150, t, b("gains"));
+    op(s.m, ramp(t, b("meet"), b("meet") + .2)); popAt(s.m, 820, 150, t, b("meet")); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.soup = emo(s.stage, 760, 380, 170, "🍲");
+  s.o = [["➕🔥 GAIN heat?", "gain"], ["➖🔥 LOSE heat?", "lose"]].map(([n, w], i) => { const g = el("g", {}, s.stage); const f = el("rect", {x: -230, y: -60, width: 460, height: 120, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: 0, y: 16, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: INK}, n); return {g, f, w, i}; });
+  s.fl = arrowFlow(s.stage); s.ans = chip(s.stage, "LOSES heat ➜ temperature FALLS ➜ room temperature", "#06d6a0", {fs: 32});
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), b("loses"), .2)); tf(s.pause, `translate(760 150) scale(${pop(t, a("pause"))}) translate(-760 -150)`); op(s.soup, ramp(t, a("soup"), a("soup") + .2));
+    s.o.forEach(o => { op(o.g, ramp(t, a(o.w), a(o.w) + .2)); tf(o.g, `translate(${480 + o.i * 560} 640) scale(${pop(t, a(o.w))})`); set(o.f, "fill", t > b("loses") ? (o.i ? "#d8f3dc" : "#ffccd5") : "#fff"); });
+    s.fl.run(820, 340, 1100, 200, t, ramp(t, b("loses"), b("loses") + .3)); op(s.ans, ramp(t, b("falls"), b("falls") + .2)); popAt(s.ans, 760, 820, t, b("falls")); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["🔥 Heat is a form of energy."], ["🌡️ Temperature is a measure of how hot or cold an object is."], ["⬆ When an object gains heat, its temperature increases."], ["⬇ When it loses heat, its temperature decreases."]];
+  let y = -150; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 50, "font-size": 40, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 50 + 50; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("heat"), a("temperature"), a("gains"), a("loses")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (one-sentence summary)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "✍️ ONE-SENTENCE SUMMARY");
+  s.note = el("g", {}, s.stage); el("rect", {x: -480, y: -150, width: 960, height: 300, rx: 20, fill: "#fffdf0", stroke: INK, "stroke-width": 7}, s.note); for (let i = 0; i < 4; i++) el("line", {x1: -450, y1: -80 + i * 60, x2: 450, y2: -80 + i * 60, stroke: "#a2d2ff", "stroke-width": 3}, s.note);
+  s.txt = tx(s.note, {x: -440, y: -30, "font-size": 46, "font-weight": 700, fill: "#7209b7"}, ""); s.pen = emo(s.stage, 0, 0, 90, "✏️");
+  s.c = chip(s.stage, "💪 short and powerful", "#1b1b3a", {fs: 38});
+  s.run = t => { const a = w => C("habit1", w); const full = "Heat is energy, temperature is a measure.", k = ramp(t, a("like"), a("measure") + .4), n = Math.floor(full.length * k);
+    op(s.title, ramp(t, a("summary"), a("summary") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("summary")) * .9}) translate(-760 -180)`);
+    op(s.note, ramp(t, a("write"), a("write") + .2)); tf(s.note, "translate(760 500)"); s.txt.textContent = full.slice(0, n);
+    op(s.pen, k > 0 && k < 1 ? 1 : 0); set(s.pen, "x", 340 + n * 21); set(s.pen, "y", 450);
+    op(s.c, ramp(t, a("short"), a("short") + .2)); popAt(s.c, 760, 800, t, a("short")); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  const CX = 380, CY2 = 470;
+  s.d0 = el("path", {d: `M${CX} ${CY2} L360 230`, stroke: HOT, "stroke-width": 12, opacity: .35}, s.stage); s.dc = chip(s.stage, "🌡️ TEMPERATURE", HOT, {fs: 26});
+  s.l1 = el("path", {d: `M${CX} ${CY2} Q600 620 860 620`, stroke: HEATC, "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 600}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 150, ry: 70, fill: "#f77f00", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 16, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: "#fff"}, "🔥 HEAT");
+  s.br = chip(s.stage, "⚡ HEAT (energy)", HEATC, {fs: 36});
+  s.subs = [["a form of ENERGY", "energy"], ["GAIN heat ➜ temperature RISES", "gain"], ["LOSE heat ➜ temperature FALLS", "lose"]].map(([n, w], i) => ({c: chip(s.stage, n, "#fff", {fs: 28, ink: INK}), w, i}));
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr19"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  const IH = 224 * 2000 / 780; s.scr = el("g", {"clip-path": "url(#scr19)"}, s.phone); s.shot = el("image", {href: "oneapp_mind2.png", x: -112, y: -122, width: 224, height: IH, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("heat"), a("heat") + .2)); tf(s.center, `translate(${CX} ${CY2}) scale(${pop(t, a("heat"))})`);
+    op(s.d0, ramp(t, a("heat") + .3, a("heat") + .5) * .35); op(s.dc, ramp(t, a("heat") + .3, a("heat") + .5) * .5); popAt(s.dc, 360, 230, t, a("heat") + .3);
+    set(s.l1, "stroke-dashoffset", 600 * (1 - ramp(t, a("branch") - .2, a("branch") + .4))); op(s.l1, t > a("branch") - .2 ? 1 : 0);
+    op(s.br, ramp(t, a("heat#2"), a("heat#2") + .2)); popAt(s.br, 920, 620, t, a("heat#2"));
+    s.subs.forEach(c => { const tt = a(c.w); op(c.c, ramp(t, tt, tt + .2)); popAt(c.c, 920, 710 + c.i * 70, t, tt); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 640, 150, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1390, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    const nx = a("ultimate") + .6; const off = -122 - (IH - 327) * ramp(t, a("save"), nx); set(s.shot, "y", off); const sc = IH / 2000;
+    set(s.ring, "x", -112 + 210 * sc); set(s.ring, "y", off + 1722 * sc); set(s.ring, "width", 146 * sc); set(s.ring, "height", 72 * sc);
+    op(s.ring, on(t, nx, SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.ans = el("g", {}, s.stage); el("rect", {x: -330, y: -70, width: 660, height: 140, rx: 70, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.ans); tx(s.ans, {x: 0, y: 22, "text-anchor": "middle", "font-size": 58, "font-weight": 700, fill: "#fff"}, "✗ NO! 🔥 ≠ 🌡️");
+  s.wc = emo(s.stage, 0, 0, 130, "☕"); s.cc = emo(s.stage, 0, 0, 130, "🧊"); s.clock = emo(s.stage, 760, 400, 130, "⏰"); s.q = chip(s.stage, "🤔 after 1 hour: both become…?", "#1b1b3a", {fs: 40});
+  s.run = t => { const a = w => C("close", w); const tn = ramp(t, a("your") - .2, a("your") + .1);
+    op(s.ans, ramp(t, a("no"), a("no") + .15) * (1 - tn)); tf(s.ans, `translate(760 420) scale(${pop(t, a("no"))})`);
+    op(s.wc, ramp(t, a("warm"), a("warm") + .2)); set(s.wc, "x", 440); set(s.wc, "y", 420); op(s.cc, ramp(t, a("cold"), a("cold") + .2)); set(s.cc, "x", 1080); set(s.cc, "y", 420);
+    op(s.clock, ramp(t, a("hour"), a("hour") + .2)); tf(s.clock, `rotate(${Math.sin(t * 6) * 8} 760 400)`); op(s.q, ramp(t, a("predict"), a("predict") + .2)); popAt(s.q, 760, 700, t, a("predict")); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Cold doesn't flow.");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Heat does. 🔥➡️🧊");
+  s.run = () => {}; return s; })();
+

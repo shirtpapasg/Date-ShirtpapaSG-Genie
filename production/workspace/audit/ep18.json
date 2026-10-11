@@ -1,0 +1,23 @@
+[
+ {
+  "kind": "text-overlap",
+  "text": "⭐ THERMOMETER",
+  "other": "⭐ DIGITAL",
+  "from": 82.3,
+  "to": 82.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔥 HEAT",
+  "other": "path:none",
+  "from": 183.05,
+  "to": 193.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌡️ TEMPERATURE",
+  "other": "path:none",
+  "from": 183.55,
+  "to": 193.8
+ }
+]

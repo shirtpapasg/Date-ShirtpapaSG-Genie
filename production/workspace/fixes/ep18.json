@@ -1,0 +1,63 @@
+[
+ [
+  "s.b3 = bowl(s.stage, \"#ff8fab\");",
+  "s.b3 = bowl(s.stage, \"#bde0fe\");"
+ ],
+ [
+  "el(\"rect\", {x: -150, y: -200, width: 300, height: 200, fill: \"#ff8fab\", opacity: .7}, s.bk);",
+  "el(\"rect\", {x: -150, y: -200, width: 300, height: 200, fill: \"#90e0ef\", opacity: .7}, s.bk);"
+ ],
+ [
+  "set(s.hL, \"y\", lerp(580, 600, both) - Math.sin(both * Math.PI) * 140);",
+  "set(s.hL, \"y\", lerp(650, 650, both) - Math.sin(both * Math.PI) * 140); tf(s.hL, `translate(0 ${2 * (lerp(650, 650, both) - Math.sin(both * Math.PI) * 140)}) scale(1 -1)`);"
+ ],
+ [
+  "set(s.hR, \"y\", lerp(580, 600, both) - Math.sin(both * Math.PI) * 140);",
+  "set(s.hR, \"y\", lerp(650, 650, both) - Math.sin(both * Math.PI) * 140); tf(s.hR, `translate(0 ${2 * (lerp(650, 650, both) - Math.sin(both * Math.PI) * 140)}) scale(1 -1)`);"
+ ],
+ [
+  "lerp(650, 650, both)",
+  "lerp(692, 692, both)",
+  4
+ ],
+ [
+  "[null, \"LABORATORY\", \"liquids + gases\", \"laboratory\", \"#d00000\"]",
+  "[null, \"LAB\", \"liquids + gases\", \"laboratory\", \"#d00000\"]"
+ ],
+ [
+  "tx(g, {x: 0, y: 120, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: c}, n); tx(g, {x: 0, y: 170, \"text-anchor\": \"middle\", \"font-size\": 30, \"font-weight\": 600, fill: INK}, u);",
+  "tx(g, {x: 0, y: 108, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: c}, n); tx(g, {x: 0, y: 148, \"text-anchor\": \"middle\", \"font-size\": 30, \"font-weight\": 700, fill: c}, \"THERMOMETER\"); tx(g, {x: 0, y: 196, \"text-anchor\": \"middle\", \"font-size\": 27, \"font-weight\": 600, fill: INK}, u);"
+ ],
+ [
+  "[\"🧪 LABORATORY\", \"laboratory\"]",
+  "[\"🧪 LAB\", \"laboratory\"]"
+ ],
+ [
+  "tx(g, {x: 0, y: 16, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: INK}, n); return {g, f, w, i}; });",
+  "tx(g, {x: 0, y: -2, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: INK}, n); tx(g, {x: 0, y: 38, \"text-anchor\": \"middle\", \"font-size\": 27, \"font-weight\": 700, fill: \"#6c757d\"}, \"THERMOMETER\"); return {g, f, w, i}; });"
+ ],
+ [
+  "[\"③ read at EYE LEVEL, bottom of the curve\", \"three\"]].map(([n, w], i) => ({c: chip(s.stage, n, [\"#00b4d8\", \"#f77f00\", \"#7209b7\"][i], {fs: 30}), w, i}));",
+  "[\"③ read at EYE LEVEL, bottom of the curve\", \"three\"], [\"④ bulb must NOT touch the sides or bottom\", \"four#2\"]].map(([n, w], i) => ({c: chip(s.stage, n, [\"#00b4d8\", \"#f77f00\", \"#7209b7\", \"#2a9d8f\"][i], {fs: 30}), w, i}));"
+ ],
+ [
+  "popAt(s.no, 1080, 680, t, a(\"solid\"));",
+  "popAt(s.no, 1160, 760, t, a(\"solid\"));"
+ ],
+ [
+  "el(\"rect\", {x: -560, y: -80, width: 1120, height: 160, rx: 26, fill: \"#fff\", stroke: INK, \"stroke-width\": 7}, s.card);\n  tx(s.card, {x: 0, y: -10, \"text-anchor\": \"middle\", \"font-size\": 44, \"font-weight\": 700, fill: HOT}, \"🌡️ TEMPERATURE = how hot or cold\"); tx(s.card, {x: 0, y: 50, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: INK}, \"measured in degrees Celsius (°C)\");",
+  "el(\"rect\", {x: -560, y: -112, width: 1120, height: 224, rx: 26, fill: \"#fff\", stroke: INK, \"stroke-width\": 7}, s.card);\n  tx(s.card, {x: 0, y: -50, \"text-anchor\": \"middle\", \"font-size\": 44, \"font-weight\": 700, fill: HOT}, \"🌡️ TEMPERATURE = a measure of how hot\"); tx(s.card, {x: 0, y: 4, \"text-anchor\": \"middle\", \"font-size\": 44, \"font-weight\": 700, fill: HOT}, \"or cold an object is\"); tx(s.card, {x: 0, y: 72, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: INK}, \"measured in degrees Celsius (°C)\");"
+ ],
+ [
+  "tf(s.card, `translate(760 200) scale(${pop(t, a(\"temperature\")) * .9})`);",
+  "tf(s.card, `translate(760 225) scale(${pop(t, a(\"temperature\")) * .9})`);"
+ ],
+ [
+  "\"surfaces, from far away\"",
+  "\"surfaces, without touching\""
+ ],
+ [
+  "[\"③ read at EYE LEVEL, bottom of the curve\", \"three\"]",
+  "[\"③ read at EYE LEVEL, where the liquid stops\", \"three\"]"
+ ]
+]

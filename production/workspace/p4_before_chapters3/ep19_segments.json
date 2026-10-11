@@ -1,0 +1,77 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "After a run, your friend says, I have so much heat in me! Sounds right, doesn't it? But a scientist would say that is wrong. Heat and temperature are not the same thing."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what heat is. Second, how heat is different from temperature. And third, what happens when things gain or lose heat. Let's get started!"
+ },
+ {
+  "id": "milk",
+  "scene": "milk",
+  "text": "Here is a clue. To warm a cold bottle of milk, put it in a basin of hot water. After a while, the milk gets warmer, from ten degrees to thirty. And the water gets cooler, from sixty degrees to forty-five. Something moved from the water to the milk. What was it?"
+ },
+ {
+  "id": "heat",
+  "scene": "heat",
+  "text": "It was heat! Heat is a form of energy, just like light. When something gains heat, its temperature rises. When something loses heat, its temperature falls. The milk gained the heat that the hot water lost. Heat flowed from the hot water to the cold milk."
+ },
+ {
+  "id": "diff",
+  "scene": "diff",
+  "text": "So here is the difference. Temperature is a measure of how hot or cold something is. We measure it with a thermometer. Heat is a form of energy that causes the temperature to change. Temperature is what we measure. Heat is why it changes."
+ },
+ {
+  "id": "fix",
+  "scene": "fix",
+  "text": "So after a run, do not say, I have a lot of heat. Say, my temperature is higher. Or, my body gained heat."
+ },
+ {
+  "id": "cool",
+  "scene": "graphs",
+  "text": "Now watch a cup of hot water left on a table. It loses heat to the air around it, so its temperature falls, quickly at first, then slower, until it reaches room temperature."
+ },
+ {
+  "id": "warm",
+  "scene": "graphs",
+  "text": "And a cup of ice-cold water does the opposite. It gains heat from the surroundings, so its temperature rises, until it also reaches room temperature. Both lines meet at room temperature."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! A bowl of hot soup is left on the table. Does it gain heat or lose heat? And what happens to its temperature?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "It loses heat to the surroundings, so its temperature falls, until it reaches room temperature."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Heat is a form of energy. Temperature is a measure of how hot or cold an object is. When an object gains heat, its temperature increases. When it loses heat, its temperature decreases."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit to try. Use the one-sentence summary. At the end of each lesson, write one sentence that says the main idea. Like, heat is energy, temperature is a measure. Short and powerful."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now add to your heat mind map. A branch called heat. A form of energy. Gain heat, temperature rises. Lose heat, temperature falls. Save it in TheOneApp, the ultimate science app."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, is heat the same as temperature? No! Your turn. Leave a cup of warm water and a cup of cold water on the table, and predict what both will become after an hour."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

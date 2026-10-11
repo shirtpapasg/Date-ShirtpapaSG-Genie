@@ -1,0 +1,46 @@
+{
+ "plants": [
+  "Key words are short verbs in the videos, full jobs in the app: \"anchor\" = Hold the plant firmly to the ground; \"absorb\" = Absorb water and dissolved mineral salts; \"holds upright\" = Hold the plant upright to get light; \"transports\" = Transport food, water and mineral salts…; \"gases in & out\" = Take in and give out gases.",
+  "Middle word: EP4 \"PLANT PARTS\" and EP1 \"SYSTEM\" vs the app's \"Plant System\". EP4 also says \"STEMS\" (plural) for the app's \"Stem\".",
+  "EP1 maps BIKE / BODY / TREE. Only TREE > roots, leaves fits this chapter. BIKE (pedals, chain) and BODY (lungs, heart) are extras.",
+  "EP3 is a map of one LEAF: 4 PARTS (blade, stalk, main vein, smaller veins), 2 VEIN PATTERNS (parallel, net), DIFFERENCES (edge, shape, colour, texture). The app has none of it, so all extras.",
+  "EP4 adaptations are all extras: spines (cactus), woody / non-woody, climbing, creepers, storage roots, roots in water, stores water, green stem makes food, stem cutting.",
+  "App key \"Transport food, water and mineral salts to different parts of the plant\" is 71 characters. The maker allows 60, so the chip needs the short text \"Transport food, water and mineral salts\" (keyShort)."
+ ],
+ "digestive": [
+  "EP5 middle word is \"HUMAN BODY SYSTEMS\" with five branches. Only DIGESTIVE fits this chapter. RESPIRATORY and CIRCULATORY belong to the P5 Circulatory System poster (respcirc). SKELETAL and MUSCULAR have no poster. All are extras here.",
+  "Mouth: video gives PARTS (\"teeth · saliva · tongue\"); the app gives JOBS (\"Breaks food into smaller pieces\", \"Mixes food with digestive juice\"). Teeth and saliva map; tongue is extra.",
+  "Stomach: video \"mixes with juices\"; the app says \"Churns the food up\" and \"Breaks food down into simpler substances\". \"Simpler substances\" is only in the EP6 key-word panel. \"Mixes … juice\" is the app's MOUTH wording, so the match must be scoped to the branch.",
+  "Small intestine: \"digestion ends\" = \"Digestion is completed here\"; \"into blood\" = \"Digested food is absorbed into the blood\". Same meaning, different words.",
+  "Large intestine: the video says \"absorbs water\" but leaves out \"from undigested food\", which is an exam point (mixups.digestive#53). \"Waste leaves the body\" is not in any video map; the nearest is the key word RECTUM + ANUS.",
+  "EP6 stops at the stomach on purpose (Part 1). Only EP7 has all five parts."
+ ],
+ "matter": [
+  "The structure is different. The video branches HAS MASS and TAKES UP SPACE are app KEY WORDS (\"Mass\", \"Volume\") under the app branch \"All matter has\". The words \"All matter has\" are never used in a video.",
+  "EP9 uses ✓/✗ shorthand (\"shape ✓ volume ✓\", \"shape ✗ volume ✓\", \"shape ✗ volume ✗\") and says \"definite\" where the app says \"Fixed\". Liquid \"shape ✗\" = \"Takes the shape of its container\". The Gas key \"Fills up the whole container\" is never shown in a video.",
+  "The app branch \"Changing state\" (Gains heat / Loses heat) is in no Matter video. Change of state only appears in Heat EP22.",
+  "Video extras with no app term: NOT MATTER (light, shadow, heat, sound); units (kg, g, cm³, ml); the electronic balance and its rules; the measuring cylinder and eye level; squeeze / compressed; helium; the EP12 branch HOW SCIENTISTS INVESTIGATE (hypothesis, fair test, change 1 variable, measure).",
+  "Middle word: EP9 \"STATES OF MATTER\" vs \"Matter\".",
+  "Detection caution: the word \"heat\" under NOT MATTER (EP8) must not earn credit for Changing state > Gains heat."
+ ],
+ "light": [
+  "Light SOURCES (NATURAL SOURCES / MAN-MADE SOURCES: Sun, stars, lightning, fireflies, jellyfish, glow-worms, bulbs, candles, torches, fireworks) is a branch in all five Light videos. The Light poster has no sources branch, so all extras.",
+  "The videos have no \"Light travels\" branch. \"light travels in STRAIGHT lines\" sits UNDER SHADOWS, and only in the EP15 scene, not in the phone map.",
+  "The videos have no \"Reflection\" branch. \"reflected from objects\" sits UNDER HOW WE SEE. \"Mirrors reflect best\" is never shown. \"No light means no seeing\" is never shown in a map.",
+  "Shadows: \"opaque ➜ dark shadow\" ≈ \"Light is blocked\". \"translucent ➜ less dark\" is extra. Size: the video gives two rules (nearer the light ➜ bigger; further from the screen ➜ bigger); the app gives only \"Nearer the light, bigger the shadow\". Shape: the video says \"the part facing the light\"; the app says \"Same shape as the object\". Outdoor shadows (longest morning + evening, shortest noon) are extra.",
+  "The videos add sub-branch headings (SHADOW SIZE, SHADOW SHAPE, OUTDOOR SHADOWS), which makes a 3-level map. The app has these ideas as key words."
+ ],
+ "heat": [
+  "Branches: the videos use TEMPERATURE / HEAT (energy) / HEAT FLOW / CONDUCTORS / EFFECTS OF HEAT. The app uses Heat flows / Temperature / Good conductors of heat / Poor conductors of heat / Gaining or losing heat.",
+  "HEAT (energy) / \"a form of ENERGY\" (EP19-22) has no app branch. It is an extra until step (d) adds \"Heat is a form of energy\" (afterD).",
+  "\"gain heat ➜ temperature rises\", \"lose heat ➜ temperature falls\" (EP19) and \"temperature change\" (EP22): the app's Gaining or losing heat keys are only expand / contract / change state, so a temperature change is not an app key. These fit the proposed (d) branch.",
+  "CONDUCTORS is one video branch (\"good: metals\", \"poor: glass · plastic · wood · air\"). The app has two branches, and the video leaves out \"of heat\" (mixups.heat#6 wording tip). \"Heat travels through them quickly / slowly\" is never shown. Glass and polystyrene are extras (they are poor conductors, but not app words).",
+  "Temperature: the video map shows \"measured in °C\", \"thermometer\" and three thermometer types. The definition appears only in the EP19 key-word panel (\"TEMP: HOW HOT OR COLD\"). App: \"How hot or cold something is\" (step d changes it to \"an object is\") and \"Measured with a thermometer\". °C, the thermometer types, bulb fully in and the data logger are extras.",
+  "Heat flow: \"hot ➜ cold\" and \"stops when temperatures are equal\" vs \"From hotter to colder\" and \"Until both are the same temperature\". Same meaning, different words. Sources of heat (Sun, Earth) is extra, and only in the scene and narration.",
+  "EFFECTS OF HEAT = \"Gaining or losing heat\". \"expansion + contraction\" = \"Expands when heated\" + \"Contracts when cooled\". \"change of state\" = \"Can change state\"."
+ ],
+ "living": [],
+ "materials": [],
+ "lifecycles": [],
+ "magnets": []
+}

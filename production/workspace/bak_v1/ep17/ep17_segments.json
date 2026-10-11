@@ -1,0 +1,16 @@
+[
+  {"id": "hook", "scene": "hook", "text": "Can a pointy cone cast a perfectly round shadow? It sounds impossible. But turn it the right way, and it does!"},
+  {"id": "shape", "scene": "shape", "text": "The shape of a shadow depends on the shape of the object. A round ball casts a round shadow. A square card casts a square shadow."},
+  {"id": "cone", "scene": "cone", "text": "But the same object can cast different shadows, depending on which part faces the light. Shine a torch at the side of a cone, and its shadow is a triangle. Shine the torch at its round base, and the shadow is a circle. Even with the pointy tip facing the light, the shadow is still a circle, because the round base blocks the light."},
+  {"id": "hands", "scene": "hands", "text": "This is the secret of hand shadow puppets. If your bird shape does not look like a bird on the wall, turn your hands, so the shape you want faces the light."},
+  {"id": "sun1", "scene": "sun", "text": "Outdoors, the Sun makes our shadows. In the early morning and late afternoon, the Sun is low in the sky, so shadows are long. Near noon, the Sun is high overhead, so shadows are shortest."},
+  {"id": "sun2", "scene": "sun", "text": "The Sun rises in the east and sets in the west. So in the morning, your shadow points west, and in the evening, it points east."},
+  {"id": "sundial", "scene": "sundial", "text": "Long ago, people used sundials to tell the time, from where the shadow fell. Can you think of a problem with a sundial? It does not work at night, or on a cloudy day!"},
+  {"id": "art", "scene": "art", "text": "Some artists even arrange piles of objects and lights, so that the shadows form surprising pictures. Science and art, together again."},
+  {"id": "quiz1", "scene": "quiz", "text": "Pause and predict! A cone stands on its base, with a lamp directly above it. What shape is its shadow on the floor?"},
+  {"id": "quiz2", "scene": "quiz", "text": "A circle! The light comes from above, and the round base blocks the light."},
+  {"id": "exam", "scene": "exam", "text": "In your exam, say it like this. The shape of a shadow depends on the shape of the part of the object that faces the light. Shadows are longest in the early morning and late afternoon, and shortest near noon."},
+  {"id": "habit1", "scene": "habit", "text": "Here is a habit to try. Test yourself. Close your book, and try to explain or draw what you learned, from memory. Then check. Pulling facts out of your brain makes them stick."},
+  {"id": "habit2", "scene": "mindmap", "text": "Now complete your light mind map. Under shadows, add shadow shape. It depends on the part of the object facing the light. Then add outdoor shadows. Longest in the morning and evening, shortest at noon. Save it in TheOneApp, the ultimate science app."},
+  {"id": "close", "scene": "close", "text": "So, can a cone cast a circle? Yes! Your turn. With an adult, look at your shadow in the morning, at noon, and in the afternoon, and see how it changes."}
+]

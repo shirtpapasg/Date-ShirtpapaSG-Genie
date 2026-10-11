@@ -1,0 +1,118 @@
+[
+ [
+  "popAt(s.ln[0], 760, 200, t, a(\"round#2\"))",
+  "popAt(s.ln[0], 1500, 340, t, a(\"round#2\"))"
+ ],
+ [
+  "popAt(s.ln[1], 760, 580, t, a(\"square#2\"))",
+  "popAt(s.ln[1], 1500, 720, t, a(\"square#2\"))"
+ ],
+ [
+  "el(\"path\", {d: `M330 480 L${wx} 160 L${wx} 800 Z`, fill: \"#fff3b0\", opacity: .35}, g); el(\"rect\", {x: wx, y: 140, width: 36, height: 680,",
+  "el(\"path\", {d: `M330 480 L${wx} 220 L${wx} 740 Z`, fill: \"#fff3b0\", opacity: .35}, g); el(\"rect\", {x: wx, y: 200, width: 36, height: 560,"
+ ],
+ [
+  "popAt(s.c0, 760, 160, t, a(\"faces\"))",
+  "popAt(s.c0, 760, 150, t, a(\"faces\"))"
+ ],
+ [
+  "popAt(s.c1, 760, 160, t, a(\"triangle\"))",
+  "popAt(s.c1, 760, 150, t, a(\"triangle\"))"
+ ],
+ [
+  "popAt(s.c2, 760, 160, t, a(\"circle\"))",
+  "popAt(s.c2, 760, 150, t, a(\"circle\"))"
+ ],
+ [
+  "popAt(s.c3, 760, 160, t, a(\"still\"))",
+  "popAt(s.c3, 740, 150, t, a(\"still\"))"
+ ],
+ [
+  "\"even tip first ➜ still a CIRCLE (the base blocks the light)\", \"#3a86ff\", {fs: 30}",
+  "\"even tip first ➜ still a CIRCLE (the base blocks the light)\", \"#3a86ff\", {fs: 28}"
+ ],
+ [
+  "popAt(s.c1, 760, 160, t, a(\"puppets\"))",
+  "popAt(s.c1, 760, 150, t, a(\"puppets\"))"
+ ],
+ [
+  "sy = 760 - Math.sin(u * Math.PI) * 560;",
+  "sy = 760 - Math.sin(u * Math.PI) * 480;"
+ ],
+ [
+  "popAt(s.c1, 760, 160, t, a(\"long\"))",
+  "popAt(s.c1, 760, 145, t, a(\"long\"))"
+ ],
+ [
+  "popAt(s.c2, 760, 160, t, a(\"shortest\"))",
+  "popAt(s.c2, 760, 145, t, a(\"shortest\"))"
+ ],
+ [
+  "popAt(s.c3, 760, 160, t, b(\"west#2\"))",
+  "popAt(s.c3, 760, 145, t, b(\"west#2\"))"
+ ],
+ [
+  "popAt(s.c4, 760, 160, t, b(\"east#2\"))",
+  "popAt(s.c4, 760, 145, t, b(\"east#2\"))"
+ ],
+ [
+  "set(s.sunE, \"x\", 760 + Math.cos(ang) * 600); set(s.sunE, \"y\", 560 - Math.sin(ang) * 400);",
+  "set(s.sunE, \"x\", 760 + Math.cos(ang) * 640); set(s.sunE, \"y\", 560 - Math.sin(ang) * 310);"
+ ],
+ [
+  "popAt(s.c1, 760, 160, t, a(\"time\"))",
+  "popAt(s.c1, 760, 145, t, a(\"time\"))"
+ ],
+ [
+  "popAt(s.q, 760, 260, t, a(\"problem\"))",
+  "popAt(s.q, 760, 775, t, a(\"problem\"))"
+ ],
+ [
+  "popAt(s.n, 500, 850, t, a(\"night\"))",
+  "popAt(s.n, 500, 870, t, a(\"night\"))"
+ ],
+ [
+  "popAt(s.cl, 1020, 850, t, a(\"cloudy\"))",
+  "popAt(s.cl, 1020, 870, t, a(\"cloudy\"))"
+ ],
+ [
+  "popAt(s.c0, 640, 200, t, a(\"surprising\"))",
+  "popAt(s.c0, 560, 150, t, a(\"surprising\"))"
+ ],
+ [
+  "popAt(s.c, 640, 300, t, a(\"together\"))",
+  "popAt(s.c, 480, 240, t, a(\"together\"))"
+ ],
+ [
+  "s.lA = el(\"path\", {d: \"M680 470 Q760 300 900 300\"",
+  "s.lA = el(\"path\", {d: \"M790 470 Q840 300 900 300\""
+ ],
+ [
+  "s.lB = el(\"path\", {d: \"M680 470 Q760 650 900 650\"",
+  "s.lB = el(\"path\", {d: \"M790 470 Q840 650 900 650\""
+ ],
+ [
+  "[\"depends on the part FACING the light\", \"facing\", 900, 370]",
+  "[\"depends on the part FACING the light\", \"facing\", 960, 228]"
+ ],
+ [
+  "\"Your touch is lying to you:\");\n  tx(s.stage, {x: 960, y: 580, \"text-anchor\": \"middle\", \"font-size\": 84, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 10}, \"temperature 🌡️\");",
+  "\"Can your hands measure\");\n  tx(s.stage, {x: 960, y: 580, \"text-anchor\": \"middle\", \"font-size\": 84, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 10}, \"temperature? 🌡️\");"
+ ],
+ [
+  "emo(g, 280, 480, 110, \"🔦\"); return g;",
+  "tf(emo(g, 280, 480, 110, \"🔦\"), \"rotate(135 280 480)\"); return g;"
+ ],
+ [
+  "emo(g, 330, 0, 90, \"🔦\"); return g;",
+  "tf(emo(g, 330, 0, 90, \"🔦\"), \"rotate(135 330 0)\"); return g;"
+ ],
+ [
+  "s.lamp = emo(s.stage, 150, 520, 120, \"💡\");",
+  "s.lamp = emo(s.stage, 150, 520, 120, \"💡\"); tf(s.lamp, \"rotate(90 150 520)\");"
+ ],
+ [
+  "s.lamp = emo(s.stage, 760, 260, 110, \"💡\");",
+  "s.lamp = emo(s.stage, 760, 260, 110, \"💡\"); tf(s.lamp, \"rotate(180 760 260)\");"
+ ]
+]

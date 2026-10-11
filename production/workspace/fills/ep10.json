@@ -1,0 +1,12 @@
+{
+ "hook": "translate(765 525) scale(1.265) translate(-772 -435)",
+ "units": "translate(765 525) scale(1.107) translate(-810 -511)",
+ "balances": "translate(765 525) scale(1.079) translate(-782 -460)",
+ "solid": "translate(765 525) scale(1.5) translate(-760 -423)",
+ "liquid": "translate(765 525) scale(1.194) translate(-841 -442)",
+ "air": "translate(765 525) scale(1.154) translate(-906 -470)",
+ "quiz": "translate(765 525) scale(1.197) translate(-760 -435)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.19) translate(-808 -455)",
+ "close": "translate(765 525) scale(1.5) translate(-760 -484)"
+}

@@ -1,0 +1,6 @@
+[
+ ["s.water = el(\"path\", {d: \"M-300 -40 L-260 160 H260 L300 -40 Z\", fill: HOT, opacity: .55}, s.basin);", "s.water = el(\"path\", {d: \"M-300 -40 L-260 160 H260 L300 -40 Z\", fill: \"#48cae4\", opacity: .55}, s.basin);"],
+ ["set(s.water, \"fill\", mix(HOT, \"#ffb4a2\", k));", "set(s.water, \"fill\", mix(\"#48cae4\", \"#90e0ef\", k));"],
+ ["tf(s.bottle, `translate(760 ${lerp(300, 560, dip)})`);", "tf(s.bottle, `translate(760 ${lerp(300, 655, dip)})`);"],
+ ["s.fl.run(1060, 640, 830, 560, t,", "s.fl.run(1060, 700, 830, 640, t,"]
+]

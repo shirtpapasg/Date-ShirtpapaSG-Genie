@@ -1,0 +1,111 @@
+# Primary 3 Science, Explained — Series Plan ("TheOneApp, Explained - <topic>")
+
+**Source:** Inspiring Science Primary 3 Textbook (MOE CPDD / Marshall Cavendish, 2023; Primary Science Syllabus 2023), book pp. 2–126 (PDF page = book page + 8). Topic map: `R/plan/content_map.md`. Exact wording for every definition: `R/plan/definitions.md`. App links: `R/plan/app_p3.md`, `R/plan/labs_p3.json`.
+
+**How the book is used:** only as a map of topics, concepts, key terms and common mistakes. Every script is original writing. Nothing is copied from the book apart from short technical terms and the exact wording of official definitions and key ideas (needed for definition accuracy). No textbook sentences, questions, characters' names or pictures are reused.
+
+**Audience:**
+- Singapore P3 pupils (ages 8–9) and the parents helping them.
+- US Grade 3 pupils (Grade 2–4 for the materials episodes).
+- Both audiences watch the same video. Each script carries one short **US bridge** and one **Singapore anchor**.
+
+**Format (same design language and features as the finished P4 series, built with `R/kit`):**
+- About 3–5 minutes (P4 ran 3:00–4:40). P3 target: **3:15–4:15, about 420–580 spoken words** in the authored segments, plus the kit's welcome (about 15 s) and goodbye (3 s).
+- Hook → welcome with three goals → body beats → Pause and predict with the 4-second silent "Think!" countdown → Exam corner → atomic habit → mind map on the TheOneApp phone → close with ONE ask → spoken goodbye over the end card.
+- Word-by-word captions, key-word pops to the ⭐ KEY WORDS shelf, confetti on "aha" moments, School Lab card plus the spoken lab link, scene enlargement fills, 60 fps.
+- Style rules: `R/plan/01_style_guide_p3.md`. One brief per episode: `R/plan/briefs/epNN.md`.
+
+**Narrator:** **Heart, "voice 3" (expressive)** for every episode (Kokoro `af_heart`, `en-us`, the kit's default). One voice from start to finish; no alternation (George is retired).
+
+---
+
+## Why 25 episodes
+
+P4 used 22 episodes for a 159-page book. The P3 book is shorter (126 pages) but the viewers are younger, so each episode carries **one big idea and exactly three goals**, and chapters are split a little finer than in P4 (one animal-group trio per episode, one magnet-making method per episode). Every bold section heading of the book (content_map "Section headings in book order") lands in exactly one episode; the coverage check is at the end of this file.
+
+| Theme | Book | Episodes |
+|---|---|---|
+| Diversity: opener + Ch 1 Diversity of Living and Non-living Things | pp. 2–18 | 1–3 |
+| Diversity: Ch 2 Classification of Living Things | pp. 19–44 | 4–7 |
+| Diversity: Ch 3 Diversity of Materials + Theme Closure "Design my zoo!" | pp. 45–72 | 8–13 |
+| Cycles: opener + Ch 4 Life Cycles of Plants | pp. 73–79 | 14–15 |
+| Cycles: Ch 5 Life Cycles of Animals | pp. 80–98 | 16–18 |
+| Interactions: opener + Ch 6 Properties of Magnets | pp. 99–112 | 19–21 |
+| Interactions: Ch 7 Making and Using Magnets | pp. 113–126 | 22–25 |
+
+---
+
+## Episode list (25 episodes)
+
+Columns: # · working title (curiosity hook, kid-friendly) · textbook chapter + pages · big idea · the 3 goals (icon · on-screen label · spoken phrase) · US NGSS link · topic tag for "TheOneApp, Explained - <topic>" · School Lab experiment to link (code · title · part, from `labs_p3.json`; only 1.1 is live for pupils today, see Sign-off) · Mind Lab chapter (exact app name; spoken "and pick …").
+
+| # | Working title | Chapter + pages | Big idea | 3 goals | NGSS | Topic tag | School Lab link | Mind Lab chapter |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Is your teddy bear alive? The two-group sort | Diversity opener + Ch 1, pp. 2–8 | There is a great variety (diversity) of living and non-living things; we classify them by their similarities and differences, and can show the groups as pictures, a table or a graphic organiser | 🔍 What diversity is · "what diversity means" / 📦 How to classify things · "how to classify things into groups" / 🧸 Living or non-living? · "how to tell living things from non-living things" | K-LS1-1 | Living or Non-living | 1.1 Spot and sort · Part (a): Spot the clues (LIVE) | Living & Non-Living |
+| 2 | A drooping plant isn't sad. Here's what it needs | Ch 1, pp. 9–13 | Living things need water, food and air; plants do not eat but make their own food when there is light | 💧 Living things need water · "why living things need water" / 🍚 Living things need food · "why living things need food" / 🌬️ Living things need air · "why living things need air" | K-LS1-1 | Water, Food, Air | 1.2 The needs test · Part (a): Test the bean plant | Living & Non-Living |
+| 3 | Touch this plant and it folds up! What living things can do | Ch 1, pp. 14–18 | Living things grow, respond to changes and reproduce | 📏 Living things grow · "how living things grow" / 🌿 They respond to changes · "how living things respond to changes" / 🐣 They reproduce · "why living things reproduce" | 3-LS1-1 | Grow, Respond, Reproduce | 1.3 Six clues · Part (a): Check the six clues | Living & Non-Living |
+| 4 | Millions of living things, only 4 groups | Ch 2, pp. 19–22 | Scientists classify living things into plants, animals, fungi and bacteria; plants are flowering (seeds in fruits) or non-flowering (spores) | 🗂️ Why scientists classify · "why scientists classify living things" / 4️⃣ The 4 groups of living things · "the four groups of living things" / 🌸 Flowering or non-flowering · "flowering and non-flowering plants" | 4-LS1-1 | Classification | 2.1A Bloom or not · Part (b): Sort plants | Living & Non-Living |
+| 5 | Feathers, scales or moist skin? Animal groups (Part 1) | Ch 2, pp. 23–28 | Animals are grouped by observable characteristics, starting with the outer covering: amphibians, birds and fish | 🐾 What an animal is · "what an animal is" / 🐸 Amphibians and birds · "how to spot an amphibian and a bird" / 🐟 Fish · "what makes a fish a fish" | 4-LS1-1 | Animal Groups (Part 1) | 2.1B Coat and cover · Part (a): Feel the cover | Living & Non-Living |
+| 6 | Count the legs! Insects, reptiles and mammals (Part 2) | Ch 2, pp. 29–33 | Insects (6 legs, feelers, 3 body parts), reptiles (dry scaly skin, cold-blooded) and mammals (hair or fur, milk, warm-blooded) | 🐜 Insects · "how to spot an insect" / 🐊 Reptiles · "how to spot a reptile" / 🐒 Mammals · "how to spot a mammal" | 4-LS1-1 | Animal Groups (Part 2) | 2.3 The mystery creature · Part (b): Decide the group | Living & Non-Living |
+| 7 | A mushroom is NOT a plant: fungi and bacteria | Ch 2, pp. 34–44 | Fungi and bacteria are living things too; fungi do not make their own food and reproduce by spores; bacteria are tiny; both can be useful or harmful | 🍄 What fungi are · "what fungi are" / 🦠 What bacteria are · "what bacteria are" / ⚖️ Useful or harmful · "which ones are useful and which are harmful" | 2-LS4-1 | Fungi and Bacteria | 2.2 Tiny life · Part (b): Spot the fungi | Living & Non-Living |
+| 8 | What's your snack box made of? The 7 materials | Ch 3, pp. 45–52 | Objects are made of materials: wood, metal, ceramic, rubber, glass, plastic and fabric, each from its own source | 🧱 Objects and materials · "the difference between an object and a material" / 7️⃣ The 7 materials · "the seven materials" / 🌳 Where materials come from · "where each material comes from" | 2-PS1-1 | Materials | 3.1 What is it made of? · Part (a): Count the parts | Diversity of Materials |
+| 9 | Snap it or bend it: strong vs flexible | Ch 3, pp. 53–55 | A physical property can be measured or observed; strength is the ability to be pulled or pushed without breaking or tearing, flexibility the ability to bend without breaking | 🔬 What a physical property is · "what a physical property is" / 💪 Strength · "what strength means" / 🤸 Flexibility · "what flexibility means" | 2-PS1-1 | Strength and Flexibility | 3.2 The snap test · Part (a): Hold the load | Diversity of Materials |
+| 10 | A metal ship floats but a metal spoon sinks. Why? | Ch 3, pp. 56–57 | The material affects whether an object floats or sinks (a ship floats because of trapped air); waterproof materials do not absorb water at all | 🚢 Float or sink · "why some materials float and others sink" / ☔ Waterproof · "what waterproof means" / 🥾 Wax makes fabric waterproof · "how a treatment can change a property" | 2-PS1-2 | Float, Sink, Waterproof | 3.5 The drip test · Part (b): Drip on sheet two (no lab exists for 3.4 float or sink) | Diversity of Materials |
+| 11 | See-through, blurry or blocked? Light and materials | Ch 3, p. 58 | Transparency is how much light can pass through a material: transparent (most), translucent (some), opaque (none) | 💡 What transparency is · "what transparency means" / 🪟 Transparent, translucent, opaque · "transparent, translucent and opaque" / 🔦 The torch test · "how to test a material with a torch" | 1-PS4-3 | Transparency | 3.6 The light box · Part (b): Shine on sheet two | Diversity of Materials |
+| 12 | Why isn't a trolley made of glass? Choosing materials | Ch 3, pp. 59–65 | The physical properties of a material allow it to be used in certain ways; one object can be made of different materials, and one object can use many materials | 🎯 Objects have purposes · "what objects are for" / 🛒 Properties decide uses · "how properties decide what a material is used for" / 🚗 Many materials, one object · "why one object can use many materials" | 2-PS1-2 | Choosing Materials | 3.7 Match the job · Part (b): Why this material? | Diversity of Materials |
+| 13 | Design a school bag like an engineer | Ch 3, p. 66 + Theme Closure, pp. 70–72 | Engineers choose materials by their properties: decide what the object is for, its parts, each part's use, draw it, choose the materials, then test it | 👷 What engineers do · "what engineers do with materials" / 📝 The design steps · "the steps of the design process" / 🎒 Design a school bag · "how to design your own school bag" | 3-5-ETS1-1 | Design Process | 3.8 Upgrade it · Part (b): Test the upgrade | Diversity of Materials |
+| 14 | Why does the Sun come back every morning? Cycles | Cycles opener + Ch 4, pp. 73–75 | Cycles are repeated patterns of change (day and night; life cycles); a life cycle is a repeated pattern of change as a living thing grows over time and reproduces | 🔁 What a cycle is · "what a cycle is" / 🌞 Day and night · "why day and night repeat" / 🌱 What a life cycle is · "what a life cycle is" | 1-ESS1-1, 3-LS1-1 | Cycles | 4.1 Find my young · Part (a): Match young to adult | Life Cycles |
+| 15 | One mango seed to a tree full of mangoes: 3 stages | Ch 4, pp. 76–79 | A plant's life cycle has three stages: the seed, the young plant and the adult plant; it repeats, and seed banks keep seeds safe | 👀 Observing like a scientist · "how to observe a plant like a scientist" / 🥭 The 3 plant stages · "the three stages in the life cycle of a plant" / 🏦 Why seeds are saved · "why Singapore keeps a seed bank" | 3-LS1-1 | Plant Life Cycle | 4.2 Seed to plant · Part (b): Build the life cycle | Life Cycles |
+| 16 | A chick looks like a hen. A tadpole doesn't look like a frog! | Ch 5, pp. 80–85 | Some animals have three stages (egg, young, adult); some young look like the adult (chick, nymph) and some do not (tadpole); nymphs moult | 🥚 The 3-stage life cycle · "the three-stage life cycle" / 🐸 Young that look different · "which young look like the adult and which do not" / 🦗 What moulting is · "what moulting is" | 3-LS1-1 | 3-Stage Life Cycles | 5.1 Three stages or four · Part (a): Three-stage animals | Life Cycles |
+| 17 | The caterpillar that becomes a butterfly: 4 stages | Ch 5, pp. 86–89 | Some animals have four stages (egg, larva, pupa, adult) and their young do not look like the adult; knowing the mosquito's cycle helps stop dengue | 🐛 The 4-stage life cycle · "the four-stage life cycle" / 🦋 Larva and pupa · "what the larva and the pupa do" / 🦟 Mosquitoes and dengue · "how knowing the mosquito's life cycle keeps us safe" | 3-LS1-1 | 4-Stage Life Cycles | 5.1 Three stages or four · Part (b): Four-stage animals | Life Cycles |
+| 18 | Frog vs mosquito: same or different? How to compare | Ch 5, pp. 90–98 | Compare life cycles by the number of stages and the features of the young and the adult; a cycle has no first or last stage; life cycles let a kind continue | ⚖️ How to compare · "how to compare two life cycles" / 🔢 Count the stages · "comparing by the number of stages" / 🔄 No first or last stage · "why a cycle has no first or last stage" | 3-LS1-1 | Comparing Life Cycles | 5.2 Compare life cycles · Part (b): Different number of stages | Life Cycles |
+| 19 | Why a magnet ignores a copper coin | Interactions opener + Ch 6, pp. 99–104 | A magnet is an object usually made of iron or steel; it attracts magnetic materials (iron, steel) and not non-magnetic ones (including the metals aluminium and copper) | 🧲 What a magnet is · "what a magnet is" / 🔩 Magnetic materials · "which materials are magnetic" / 🪙 Not all metals · "why not all metals are magnetic" | 3-PS2-3 | Magnetic Materials | 6.1B Magnetic materials · Part (a): Test the metal objects | Magnets |
+| 20 | Magnets that float in mid-air: poles, pulls and pushes | Ch 6, pp. 105–109 | A magnet has two poles where attraction is strongest; unlike poles attract and like poles repel; only repulsion proves something is a magnet | 🧭 Two poles · "the two poles of a magnet" / ↔️ Attract and repel · "when magnets attract and when they repel" / 🔍 Is it a magnet? · "how to prove that something is a magnet" | 3-PS2-3 | Magnet Poles | 6.1A Magnet pairs · Part (a): Bar magnet pair | Magnets |
+| 21 | Hang a magnet and it points North. Every time. | Ch 6, pp. 110–112 | A freely suspended magnet comes to rest in the North–South direction because Earth behaves like a magnet; a compass works the same way | 🧵 A freely suspended magnet · "what a freely suspended magnet does" / 🌍 Earth is like a magnet · "why the Earth behaves like a magnet" / 🧭 How a compass works · "how a compass works" | 3-PS2-3 | Compass | 6.4 A magnet at rest · Part (c): Compare with a compass | Magnets |
+| 22 | Turn a nail into a magnet (the stroke method) | Ch 7, pp. 113–114 | A magnetic object can be magnetised by the stroke method: one pole, same direction, same pole; more strokes make a stronger magnet | ✨ What magnetised means · "what magnetised means" / 🪄 The stroke method · "the three steps of the stroke method" / 📎 More strokes, stronger · "how to make the magnet stronger" | 3-PS2-3 | Stroke Method | 7.1A Make a magnet by stroking · Part (a): Make a magnet | Magnets |
+| 23 | The magnet you can switch off: electromagnets | Ch 7, pp. 115–117 | The electrical method makes an electromagnet, which works only while electricity flows; more turns of wire or more batteries make it stronger; batteries only, never the mains | 🔋 The electrical method · "the electrical method" / ⚠️ Stay safe · "how to stay safe with an electromagnet" / 💪 Make it stronger · "two ways to make an electromagnet stronger" | 3-PS2-3 | Electromagnets | 7.1B Make a magnet with electricity · Part (b): Test the strength | Magnets |
+| 24 | Was that test fair? Change only one thing | Ch 7, p. 118 + Let's Apply, pp. 123–124 | In a fair test only one variable is changed, the others are kept the same and one thing is measured; repeat for reliable results | ❓ What an experiment does · "what an experiment is for" / ⚖️ What a fair test is · "what a fair test is" / 🔁 Why we repeat · "why scientists repeat a test" | 3-5-ETS1-3 | Fair Test | 7.2 Create a toy · Part (b): Test and improve | Magnets |
+| 25 | Magnets are everywhere: fridges, cranes and floating trains | Ch 7, pp. 119–126 | Properties of magnets allow us to use magnets in everyday life: fridge doors, doorstops, whiteboards, scrapyard cranes, maglev trains, MRI scanners, toys | 🧊 Magnets at home · "where magnets hide at home" / 🏗️ Cranes and trains · "how cranes and floating trains use magnets" / 🧸 Design a magnet toy · "how to design your own magnet toy" | 3-PS2-4 | Magnets Everywhere | 7.2 Create a toy · Part (a): Choose and place the magnets | Magnets |
+
+Spoken mind-map line per Mind Lab chapter (app_p3.md §4b): "Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map, and pick Living and Non-Living." (or "…and pick Diversity of Materials." / "…and pick Life Cycles." / "…and pick Magnets."). Speak "&" as "and".
+
+File names (config `output`): 01 LivingOrNot · 02 WaterFoodAir · 03 GrowRespondReproduce · 04 FourGroups · 05 AnimalGroups1 · 06 AnimalGroups2 · 07 FungiBacteria · 08 SevenMaterials · 09 StrongFlexible · 10 FloatSinkWaterproof · 11 Transparency · 12 ChoosingMaterials · 13 DesignProcess · 14 Cycles · 15 PlantLifeCycle · 16 ThreeStages · 17 FourStages · 18 CompareLifeCycles · 19 MagneticMaterials · 20 MagnetPoles · 21 Compass · 22 StrokeMethod · 23 Electromagnet · 24 FairTest · 25 MagnetsEverywhere → `R/P3_EPNN_<Name>.mp4`.
+
+---
+
+## Release order suggestion
+
+1. **Default: book order = school order.** Singapore P3 classes teach Diversity (Ch 1–3) first, then Cycles (Ch 4–5), then Interactions (Ch 6–7), which is the episode order above. Releasing 1 → 25 keeps each video a week or two ahead of the classroom.
+2. **School Lab sign-off gate.** Only lab 1.1 is live for pupils; the other 27 are "In review" (app_p3.md §0). Publish each episode only after the teacher signs off the lab its card names, or sign the labs off in episode order (1.1, 1.2, 1.3, 2.1A, 2.1B, 2.3, 2.2, 3.1, 3.2, 3.5, 3.6, 3.7, 3.8, 4.1, 4.2, 5.1, 5.1, 5.2, 6.1B, 6.1A, 6.4, 7.1A, 7.1B, 7.2, 7.2). The mind-map line needs PR #60 ("My mind map") merged, as it did for P4.
+3. **If the channel needs the most "clickable" episodes first:** 20 (floating magnets), 17 (caterpillar to butterfly), 7 (a mushroom is not a plant), 10 (metal ship floats), 23 (switch-off magnet), 3 (the folding plant), 25 (floating trains).
+4. **Pairs that should stay adjacent in any order:** 5 → 6 (animal groups Part 1 and 2), 16 → 17 → 18 (three stages, four stages, comparing), 22 → 23 → 24 (stroke method, electromagnet, fair test).
+
+---
+
+## What every brief contains (`R/plan/briefs/epNN.md`)
+
+1. Big idea (one sentence) and the three goals as the kit's `goals` triples (icon, on-screen label ≤ 32 characters, spoken phrase).
+2. Beat outline, scene by scene, with the segment ids and scene names the kit expects (`hook`, body beats, `quiz1` + `quiz2` in scene `quiz`, `exam`, `habit1`, `habit2` in scene `mindmap`, `close`) and `[ON SCREEN]` visuals drawable as SVG animation.
+3. The exact definitions to use, by `definitions.md` row number (full wording, never shortened).
+4. Key words for the ⭐ shelf (segment, cue word, label, colour), with full names.
+5. Misconceptions to bust, written as "Exam tip" beats in positive language.
+6. The Exam corner wording box.
+7. Pause and predict: the question, three options, the answer and the reason (the kit inserts the 4-second silent "Think!" countdown with soft ticks between `quiz1` and `quiz2`).
+8. The atomic habit for `habit1` and the mind map for `habit2` (middle word, branches, sub-branches), ending with the real app steps and the chapter to pick.
+9. The School Lab link sentence (spoken) and the card fields (`lab` config).
+10. Singapore anchor and US bridge.
+11. Realism notes: what must look right on screen.
+12. Confetti bursts, the end-card "NEXT EPISODE" lines and the output file name.
+
+---
+
+## Coverage check (every section heading of the book → episode)
+
+- **Theme Opener: Diversity (pp. 2–3)** → 1. **Ch 1:** What can we observe around us? / How do we classify things? (p. 5) → 1 · Living things need water, food, air (pp. 9–13) → 2 · Living things can grow, respond to changes, reproduce (pp. 14–17) → 3 · What I Have Learnt (p. 18) → 3.
+- **Ch 2:** Similarities and differences between plants and animals (p. 20), Plants (p. 21) → 4 · Animals (p. 23), Amphibians (p. 25), Birds (p. 26), Fish (p. 27) → 5 · Insects (p. 29), Reptiles (p. 31), Mammals (p. 32) → 6 · Fungi (p. 34), Bacteria (p. 36), Let's Apply (pp. 40–42), What I Have Learnt (p. 43), concept map (p. 44) → 7 (Let's Apply Q1–Q3 patterns are reused as quiz and exam beats in 5, 6 and 7).
+- **Ch 3:** Types of materials: Wood … Fabric (pp. 46–52) → 8 · Physical properties, Strength, Flexibility (pp. 53–55) → 9 · Float or sink, Waterproof (pp. 56–57) → 10 · Transparency (p. 58) → 11 · How materials are used (pp. 59–65) → 12 · The design process (p. 66), Let's Apply (pp. 67–69), What I Have Learnt + concept map (p. 70), **Theme Closure "Design my zoo!" (pp. 71–72)** → 13 (Let's Apply Q1 → 11, Q2 → 9, Q3 → 12).
+- **Theme Opener: Cycles (p. 73)** → 14. **Ch 4:** What is a life cycle? (p. 75) → 14 · Stages in the life cycle of a plant (pp. 76–78), What I Have Learnt (p. 79) → 15.
+- **Ch 5:** Chicken, frog, grasshopper, cockroach (pp. 82–85) → 16 · Mealworm beetle, butterfly, mosquito, key idea box (pp. 86–89) → 17 · How are life cycles similar or different? (pp. 90–92), day-and-night story (p. 93), Let's Apply (pp. 94–96), What I Have Learnt (p. 97), concept map (p. 98) → 18 (Let's Apply Q1 → 15, Q2 → 18, Q3 → 18).
+- **Theme Opener: Interactions (p. 99)** → 19. **Ch 6:** What is a magnet? Magnetic and non-magnetic materials (pp. 102–104) → 19 · Strongest pull (p. 105), How magnets interact (p. 107) → 20 · Freely suspended magnet (p. 110), What I Have Learnt (p. 112) → 21.
+- **Ch 7:** The stroke method (p. 114) → 22 · The electrical method, stronger electromagnet (pp. 115–117) → 23 · How do we conduct a fair test? (p. 118), Let's Apply (pp. 123–124) → 24 · Magnets in everyday life (pp. 119–122), What I Have Learnt (p. 125), concept map (p. 126) → 25.
+- **Not made into content:** the virus question (p. 8) is mentioned in 1 as an open question only; Let's Apply pictures that could not be read (content_map "Still open") are replaced by original quiz items with the same skill.

@@ -1,0 +1,11 @@
+const { chromium } = require('playwright');
+(async () => { const b = await chromium.launch({args:["--autoplay-policy=no-user-gesture-required"]}); const p = await b.newPage({viewport:{width:1200,height:800}});
+ p.on("pageerror", e => console.log("ERR", e.message));
+ await p.goto("http://localhost:8772/index.html"); await p.click("[data-act=play]"); await p.waitForTimeout(2500);
+ const st = async l => console.log(l, await p.textContent("#ptime"), await p.$eval("#pv", v => v.src.split("/").pop()+" @"+v.currentTime.toFixed(1)+" seekable:"+(v.seekable.length?v.seekable.end(0).toFixed(0):0)));
+ await st("start");
+ await p.$eval("#pseek", el => { el.value = 200; el.dispatchEvent(new Event("change")); }); await p.waitForTimeout(1500); await st("seek 20% (same part, expect 0:44)");
+ await p.$eval("#pseek", el => { el.value = 600; el.dispatchEvent(new Event("change")); }); await p.waitForTimeout(2500); await st("seek 60% (expect 2:12)");
+ await p.$eval("#pseek", el => { el.value = 950; el.dispatchEvent(new Event("change")); }); await p.waitForTimeout(2500); await st("seek 95% (expect 3:29)");
+ await p.click("#pplay"); await p.waitForTimeout(500); await st("paused");
+ await p.screenshot({path:"../snaps/timebar.png"}); await b.close(); })();

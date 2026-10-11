@@ -1,0 +1,82 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Have you noticed small gaps in roads and bridges? They are not mistakes. Engineers put them there on purpose, because of what heat does to materials."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, how things expand and contract. Second, why roads have gaps. And third, how heat changes the state of matter. Let's get started!"
+ },
+ {
+  "id": "three",
+  "scene": "three",
+  "text": "When something gains or loses heat, three things can happen. Its temperature can change. It can expand or contract. Or it can change its state."
+ },
+ {
+  "id": "define",
+  "scene": "define",
+  "text": "When an object gains heat, it expands. That means its volume gets bigger. When it loses heat, it contracts, and its volume gets smaller."
+ },
+ {
+  "id": "ball",
+  "scene": "ball",
+  "text": "Here is the ball and ring experiment. When cool, the metal ball passes through the ring. Heat the ball in a flame, and it expands, so it no longer fits! Cool it in water, and it contracts, and slips through again. Solids expand and contract."
+ },
+ {
+  "id": "liquid",
+  "scene": "liquid",
+  "text": "Liquids do it too. Put a test tube of coloured water, with a thin glass tube, into hot water. The coloured water rises up the tube as it expands. Take it out, and the level falls as it contracts."
+ },
+ {
+  "id": "gas",
+  "scene": "gas",
+  "text": "And gases expand the most. Stretch a balloon over an empty flask, and stand it in hot water. The air inside expands, and the balloon inflates. Remove the heat, and the air contracts, and the balloon goes flat."
+ },
+ {
+  "id": "uses",
+  "scene": "uses",
+  "text": "This is useful. A tight metal lid on a glass jar? Run it under hot water. The lid expands, and opens more easily. But it can cause problems too. On hot days, roads expand. On cool nights, they contract. Without gaps, they would crack. So engineers add expansion gaps."
+ },
+ {
+  "id": "state",
+  "scene": "state",
+  "text": "Heat can also change the state of matter. Ice gains heat and melts into water. Water gains more heat and turns into steam. And the other way round, steam loses heat and turns back into water, and water loses heat and freezes into ice."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! A balloon is left in a hot car. What happens to the air inside it?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "The air gains heat and expands, so the balloon gets bigger. It might even pop!"
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. When an object gains heat, it expands. When it loses heat, it contracts. Gaps are left in roads and bridges to give them space to expand on hot days, so they do not crack."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is the last habit of this series. Review the big picture. Every few weeks, lay out all your mind maps together, and see how the topics connect. Systems, matter, light and heat, all one big story."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now complete your heat mind map. Add effects of heat. Temperature change, expansion and contraction, and change of state. Save it in TheOneApp, the ultimate science app, alongside all your other mind maps."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, why do roads have gaps? To give them room to expand! And that completes our Primary 4 science journey. Your turn. Spot an expansion gap on your next walk, and tell someone why it is there. Thank you for learning with us!"
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you soon. Bye!"
+ }
+]

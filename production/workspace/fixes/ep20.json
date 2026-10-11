@@ -1,0 +1,98 @@
+[
+ [
+  "popAt(s.c, 1000, 880, t, a(\"heat\"))",
+  "popAt(s.c, 1170, 880, t, a(\"heat\"))"
+ ],
+ [
+  "const X0 = 400, Y0 = 820, W = 760, H = 540;",
+  "const X0 = 400, Y0 = 720, W = 760, H = 480;"
+ ],
+ [
+  "popAt(s.eL, 1100, 880, t, a(\"springs\") - .3)",
+  "popAt(s.eL, 1100, 360, t, a(\"springs\") - .3)"
+ ],
+ [
+  "popAt(s.flat, xv(22), yv(42), t, a(\"flat\"))",
+  "popAt(s.flat, xv(22), yv(27), t, a(\"flat\"))"
+ ],
+ [
+  "[[\"🍳\", \"🔥\", \"flame ➜ pot + water\", \"stove\"]",
+  "[[\"🍲\", \"🔥\", \"flame ➜ pot + water\", \"stove\"]"
+ ],
+ [
+  "emo(g, -50, -60, 140, e1); emo(g, 70, 30, 100, e2);",
+  "if (i === 0) { emo(g, 0, 45, 90, e2); emo(g, 0, -60, 140, e1); } else if (i === 1) { tf(emo(g, 0, -125, 100, e2), \"translate(0 -125) scale(1 -1) translate(0 125)\"); emo(g, -30, -60, 140, e1); } else { emo(g, -50, -60, 140, e1); emo(g, 70, 30, 100, e2); }"
+ ],
+ [
+  "\"✓ HEAT flows from the warm air INTO the fridge\"",
+  "\"✓ HEAT flows from the warm room INTO the fridge\""
+ ],
+ [
+  "const k = ramp(t, a(\"hot\") - .2, a(\"thirtyfive\") + .2);",
+  "const k = ramp(t, a(\"hot\") - .2, a(\"same\") + .2);"
+ ],
+ [
+  "const v1 = lerp(50, 35, k), v2 = lerp(20, 35, k);",
+  "const v1 = lerp(50, 27, k), v2 = lerp(20, 27, k);"
+ ],
+ [
+  "[10, 20, 35, 50].forEach(v =>",
+  "[10, 20, 27, 50].forEach(v =>"
+ ],
+ [
+  "d1.push([m, 50 - 15 * ff]); d2.push([m, 20 + 15 * ff]);",
+  "d1.push([m, 50 - 23 * ff]); d2.push([m, 20 + 7 * ff]);"
+ ],
+ [
+  "popAt(s.flat, xv(22), yv(27), t, a(\"flat\"))",
+  "popAt(s.flat, xv(22), yv(40), t, a(\"flat\"))"
+ ],
+ [
+  "\"SOURCE OF HEAT: hotter than its surroundings\"",
+  "\"SOURCE OF HEAT: anything that gives off heat\""
+ ],
+ [
+  "\"☀️ the SUN: our biggest natural source\"",
+  "\"☀️ the SUN: our main source of heat\""
+ ],
+ [
+  "popAt(s.flat, xv(22), yv(40), t, a(\"flat\"))",
+  "popAt(s.flat, xv(22), yv(34), t, a(\"flat\"))"
+ ],
+ [
+  "function readout(",
+  "function heatPath(x, y, ux, uy, L, ph, A = 9, lam = 44) { const vx = -uy, vy = ux, Lb = L - 16, n = Math.max(6, Math.round(Lb / 5)); let d = \"\";\n  for (let j = 0; j <= n; j++) { const s = Lb * j / n, w = A * Math.min(1, s / 14, (Lb - s) / 18) * Math.sin(2 * Math.PI * s / lam - ph); d += (j ? \" L\" : \"M\") + (x + ux * s + vx * w).toFixed(1) + \" \" + (y + uy * s + vy * w).toFixed(1); }\n  const tx_ = x + ux * L, ty_ = y + uy * L, bx = x + ux * (L - 28), by = y + uy * (L - 28); return [d, `M${tx_.toFixed(1)} ${ty_.toFixed(1)} L${(bx + vx * 16).toFixed(1)} ${(by + vy * 16).toFixed(1)} L${(bx - vx * 16).toFixed(1)} ${(by - vy * 16).toFixed(1)} Z`]; }\nfunction heatLines(g, n, col) { const L = [], H = []; for (let i = 0; i < n; i++) { L.push(el(\"path\", {fill: \"none\", stroke: col, \"stroke-width\": 6, \"stroke-linecap\": \"round\", \"stroke-linejoin\": \"round\"}, g)); H.push(el(\"path\", {fill: col, stroke: col, \"stroke-width\": 3, \"stroke-linejoin\": \"round\"}, g)); } return [L, H]; }\n// heat LEAVING an object: n wavy arrows radiating outward in all directions (inward = true: heat coming IN from all around)\nfunction heatOut(p, r0 = 70, n = 8, col = \"#f77f00\", len = 105, sy = 1, inward = false) { const g = el(\"g\", {}, p); const [L, H] = heatLines(g, n, col);\n  g.run = (t, k, x, y) => { op(g, k); if (x !== undefined) tf(g, `translate(${x} ${y})`); if (k <= 0) return; const off = 10 - 10 * Math.cos(t * 2.4);\n    for (let i = 0; i < n; i++) { const th = -Math.PI / 2 + 2 * Math.PI * i / n, ux = Math.cos(th), uy = Math.sin(th), bx = ux * r0, by = uy * r0 * sy;\n      const [d, h] = inward ? heatPath(bx + ux * (len + 20 - off), by + uy * (len + 20 - off), -ux, -uy, len, t * 5) : heatPath(bx + ux * off, by + uy * off, ux, uy, len, t * 5); set(L[i], \"d\", d); set(H[i], \"d\", h); } }; return g; }\n// heat flowing FROM one place INTO another: parallel wavy arrows pointing along the flow\nfunction heatFlow(p, col = \"#f77f00\", n = 3, gap = 36) { const g = el(\"g\", {}, p); const [L, H] = heatLines(g, n, col);\n  g.run = (x1, y1, x2, y2, t, k) => { op(g, k); if (k <= 0) return; const D = Math.hypot(x2 - x1, y2 - y1), ux = (x2 - x1) / D, uy = (y2 - y1) / D, off = 8 - 8 * Math.cos(t * 2.4);\n    for (let i = 0; i < n; i++) { const o = (i - (n - 1) / 2) * gap, [d, h] = heatPath(x1 - uy * o + ux * off, y1 + ux * o + uy * off, ux, uy, D - 16, t * 5); set(L[i], \"d\", d); set(H[i], \"d\", h); } }; return g; }\nfunction readout("
+ ],
+ [
+  "s.fl = flames(s.stage); s.pud",
+  "s.fl = heatFlow(s.stage); s.pud"
+ ],
+ [
+  "s.fl = flames(s.stage); s.c = chip",
+  "s.fl = heatFlow(s.stage); s.c = chip"
+ ],
+ [
+  "s.r2 = readout(s.stage); s.fl = flames(s.stage);",
+  "s.r2 = readout(s.stage); s.fl = heatOut(s.stage, 175, 8, \"#f77f00\", 62, .78); tf(s.fl, \"translate(760 540)\");"
+ ],
+ [
+  "s.fl.run(860, 560, 1050, 620, t, ",
+  "s.fl.run(t, "
+ ],
+ [
+  "s.fl.run(1200, 560, 560, 560, t,",
+  "s.fl.run(1200, 560, 600, 560, t,"
+ ],
+ [
+  "else { emo(g, -50, -60, 140, e1); emo(g, 70, 30, 100, e2); }",
+  "else { emo(g, 0, -30, 130, e1); g.ho = heatOut(g, 85, 8, \"#f77f00\", 68); tf(g.ho, \"translate(0 -30)\"); }"
+ ],
+ [
+  "const ar = bigArrow(g, HEATC);",
+  "const ar = i === 2 ? el(\"g\", {}, g) : bigArrow(g, HEATC);"
+ ],
+ [
+  "op(p.ar, .6 + .4 * Math.sin(t * 5));",
+  "op(p.ar, .6 + .4 * Math.sin(t * 5)); if (p.g.ho) p.g.ho.run(t, 1);"
+ ]
+]

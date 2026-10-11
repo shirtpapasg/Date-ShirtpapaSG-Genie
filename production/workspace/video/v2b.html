@@ -1,0 +1,548 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Inter,"Inter Display",sans-serif}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop id="skyTop" offset="0"/><stop id="skyBot" offset="1"/></linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop id="wTop" offset="0"/><stop id="wBot" offset="1"/></linearGradient>
+    <radialGradient id="sunGlow"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".8"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fireGlow"><stop offset="0" stop-color="#ffcf5a"/><stop offset=".35" stop-color="#ff7a1a" stop-opacity=".9"/><stop offset="1" stop-color="#ff3d00" stop-opacity="0"/></radialGradient>
+    <radialGradient id="emberGlow"><stop offset="0" stop-color="#ffb347" stop-opacity=".95"/><stop offset=".5" stop-color="#ff5a1f" stop-opacity=".6"/><stop offset="1" stop-color="#ff3d00" stop-opacity="0"/></radialGradient>
+    <radialGradient id="vign"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".7"/></radialGradient>
+    <filter id="blur40" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="blur14" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="shadow" x="-10%" y="-30%" width="120%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity=".6"/></filter>
+    <linearGradient id="lowerShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></linearGradient>
+  </defs>
+
+  <!-- ===== A: skyline ===== -->
+  <g id="sceneA"><g id="camA">
+    <rect width="1920" height="1080" fill="url(#sky)"/>
+    <circle id="sunGlowC" cx="1480" cy="300" r="190" fill="url(#sunGlow)"/>
+    <circle id="sun" cx="1480" cy="300" r="56"/>
+    <g id="farCity"></g>
+    <rect id="hazeFar" width="1920" height="780" fill="#d2b48e"/>
+    <g id="nearCity"></g>
+    <rect y="760" width="1920" height="320" fill="url(#water)"/>
+    <g id="reflection" opacity=".22" transform="translate(0,1520) scale(1,-1)"></g>
+    <g id="hazeBands"></g>
+    <rect id="hazeNear" width="1920" height="1080" fill="#c9a57a"/>
+    <g id="particles"></g>
+  </g>
+    <rect id="redPulse" width="1920" height="1080" fill="url(#vign)" opacity="0"/>
+    <g id="titleCard" text-anchor="middle" filter="url(#shadow)" opacity="0">
+      <text x="960" y="470" font-size="132" font-weight="900" fill="#fff" letter-spacing="-3">WHAT CAUSES</text>
+      <text x="960" y="610" font-size="150" font-weight="900" fill="#ffcf5a" letter-spacing="-3">THE HAZE?</text>
+    </g>
+    <g id="psiBadge" opacity="0" filter="url(#shadow)">
+      <rect x="1290" y="70" width="560" height="170" rx="20" fill="#2a1408" fill-opacity=".85" stroke="#f2c230" stroke-width="4"/>
+      <text x="1318" y="116" font-size="26" font-weight="800" fill="#f2c230" letter-spacing="3">24-HR PSI · 7 OCT 2026</text>
+      <text x="1316" y="190" font-size="78" font-weight="900" fill="#fff">105–140</text>
+      <text x="1640" y="160" font-size="30" font-weight="900" fill="#f2c230">UNHEALTHY</text>
+      <text x="1640" y="196" font-size="22" font-weight="600" fill="#e8d8c0">Source: NEA</text>
+    </g>
+    <g id="years" filter="url(#shadow)"></g>
+  </g>
+
+  <!-- ===== M: map ===== -->
+  <g id="sceneM" opacity="0">
+    <rect width="1920" height="1080" fill="#123a4a"/>
+    <g id="camM">
+      <g id="grid" stroke="#1d5266" stroke-width="1.2" fill="none"></g>
+      <g id="land" fill="#d9c7a1" stroke="#f0e3c4" stroke-width="2.2" stroke-linejoin="round"></g>
+      <g id="indo" fill="#ff9a4d" opacity="0"></g>
+      <g id="labels" fill="#6b5a3c" font-weight="700" letter-spacing="6" text-anchor="middle"></g>
+      <g id="wind" opacity="0"></g>
+      <g id="smoke"></g>
+      <g id="paths"></g>
+      <g id="fires"></g>
+      <g id="sg"></g>
+      <g id="mapUI"></g>
+    </g>
+    <rect id="mapHaze" width="1920" height="1080" fill="#c9a57a" opacity="0"/>
+    <g id="mapChips" filter="url(#shadow)"></g>
+  </g>
+
+  <!-- ===== P: peat cross-section ===== -->
+  <g id="sceneP" opacity="0">
+    <g id="camP">
+      <rect x="-600" y="-600" width="3120" height="2280" fill="#c9b79a"/>
+      <rect x="-600" y="-600" width="3120" height="940" fill="#b9b2a0"/>
+      <g id="pTrees"></g>
+      <g id="pPalms" opacity="0"></g>
+      <rect id="pGround" x="-600" y="340" width="3120" height="460" fill="#3b2a1d"/>
+      <g id="pLayers"></g>
+      <rect id="pDry" x="-600" y="340" width="3120" height="360" fill="#d8b277" opacity="0"/>
+      <g id="pCracks" opacity="0" stroke="#2a1c10" stroke-width="4" fill="none"></g>
+      <g id="pLeaves"></g>
+      <path id="pWater" fill="#2f8fe0" opacity="0"/>
+      <g id="pCanal" opacity="0"></g>
+      <g id="pUnder"></g>
+      <g id="pCarbon"></g>
+      <rect x="-600" y="800" width="3120" height="900" fill="#6d6a63"/>
+      <text x="1840" y="842" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#e8e3d8" opacity=".8">MINERAL SOIL</text>
+      <g id="pFire"></g>
+      <g id="pDigger" opacity="0"></g>
+      <g id="pHeli" opacity="0"></g>
+      <g id="pDrops"></g>
+      <g id="pO2"></g>
+      <g id="pDepth" opacity="0"></g>
+      <g id="pQ" text-anchor="middle" opacity="0"><text x="960" y="640" font-size="200" font-weight="900" fill="#fff" fill-opacity=".85">?</text></g>
+      <g id="pPeat" text-anchor="middle" opacity="0"><text x="960" y="620" font-size="170" font-weight="900" fill="#ffcf5a" letter-spacing="10">PEAT</text></g>
+      <g id="pSide" opacity="0"></g>
+    </g>
+    <g id="pChips" filter="url(#shadow)"></g>
+    <g id="pEq" opacity="0" filter="url(#shadow)"></g>
+    <g id="pSmoke"></g>
+  </g>
+
+  <!-- ===== end card ===== -->
+  <g id="endCard" opacity="0">
+    <rect width="1920" height="1080" fill="#0f2633"/>
+    <g text-anchor="middle">
+      <text x="960" y="380" font-size="40" font-weight="800" fill="#9fe3ff" letter-spacing="8">COMING UP IN PART 2</text>
+      <text id="e1" x="960" y="500" font-size="76" font-weight="900" fill="#fff">El Niño: why 2026 is so bad</text>
+      <text id="e2" x="960" y="610" font-size="76" font-weight="900" fill="#fff">Who profits from the burning</text>
+      <text id="e3" x="960" y="720" font-size="76" font-weight="900" fill="#ffcf5a">…and what YOU can do</text>
+    </g>
+  </g>
+
+  <!-- ===== overlays ===== -->
+  <rect id="shade" y="760" width="1920" height="320" fill="url(#lowerShade)"/>
+  <g id="tag" filter="url(#shadow)">
+    <rect x="80" y="72" width="410" height="54" rx="27" fill="#000" fill-opacity=".55"/>
+    <circle cx="112" cy="99" r="8" fill="#ff8a3d"/>
+    <text x="132" y="108" font-size="24" font-weight="700" letter-spacing="4" fill="#fff">THE HAZE, EXPLAINED</text>
+  </g>
+  <g id="caps" filter="url(#shadow)"></g>
+  <rect id="flash" width="1920" height="1080" fill="#fff" opacity="0"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+
+<script>window.TL = {"chunks": [{"t0": 5.9, "t1": 8.2, "w": [{"t": "You", "a": 5.9, "b": 5.9}, {"t": "have", "a": 5.9, "b": 5.9}, {"t": "breathed", "a": 5.9, "b": 5.9}, {"t": "this", "a": 5.9, "b": 5.9}, {"t": "smoke.", "a": 5.9, "b": 5.9}], "phrase": true}, {"t0": 8.25, "t1": 9.5, "w": [{"t": "What", "a": 8.25, "b": 8.25}, {"t": "is", "a": 8.25, "b": 8.25}, {"t": "it", "a": 8.25, "b": 8.25}, {"t": "costing", "a": 8.25, "b": 8.25}, {"t": "your", "a": 8.25, "b": 8.25}, {"t": "lungs?", "a": 8.25, "b": 8.25}], "phrase": true}, {"t0": 9.55, "t1": 12.6, "w": [{"t": "And", "a": 9.55, "b": 9.55}, {"t": "why", "a": 9.55, "b": 9.55}, {"t": "does", "a": 9.55, "b": 9.55}, {"t": "it", "a": 9.55, "b": 9.55}, {"t": "keep", "a": 9.55, "b": 9.55}, {"t": "coming", "a": 9.55, "b": 9.55}, {"t": "back?", "a": 9.55, "b": 9.55}], "phrase": true}, {"t0": 12.8, "t1": 16.5, "w": [{"t": "Let\u2019s", "a": 12.8, "b": 12.8}, {"t": "follow", "a": 12.8, "b": 12.8}, {"t": "the", "a": 12.8, "b": 12.8}, {"t": "smoke", "a": 12.8, "b": 12.8}, {"t": "backwards\u2026", "a": 12.8, "b": 12.8}], "phrase": true}, {"t0": 16.6, "t1": 18.4, "w": [{"t": "\u2026to", "a": 16.6, "b": 16.6}, {"t": "the", "a": 16.6, "b": 16.6}, {"t": "fire", "a": 16.6, "b": 16.6}, {"t": "that", "a": 16.6, "b": 16.6}, {"t": "made", "a": 16.6, "b": 16.6}, {"t": "it,", "a": 16.6, "b": 16.6}], "phrase": true}, {"t0": 18.5, "t1": 22.2, "w": [{"t": "\u2026and", "a": 18.5, "b": 18.5}, {"t": "find", "a": 18.5, "b": 18.5}, {"t": "where", "a": 18.5, "b": 18.5}, {"t": "YOU", "a": 18.5, "b": 18.5}, {"t": "can", "a": 18.5, "b": 18.5}, {"t": "step", "a": 18.5, "b": 18.5}, {"t": "in.", "a": 18.5, "b": 18.5}], "phrase": true}, {"t0": 22.67, "t1": 23.479, "w": [{"t": "So", "a": 22.75, "b": 23.032}, {"t": "where", "a": 23.032, "b": 23.305}, {"t": "does", "a": 23.305, "b": 23.505}, {"t": "it", "a": 23.505, "b": 23.559}]}, {"t0": 23.479, "t1": 24.634, "w": [{"t": "come", "a": 23.559, "b": 23.795}, {"t": "from?", "a": 23.795, "b": 24.314}]}, {"t0": 24.634, "t1": 26.034, "w": [{"t": "Not", "a": 24.714, "b": 24.95}, {"t": "from", "a": 24.95, "b": 25.305}, {"t": "Singapore.", "a": 25.305, "b": 25.823}]}, {"t0": 26.034, "t1": 27.17, "w": [{"t": "During", "a": 26.114, "b": 26.405}, {"t": "the", "a": 26.405, "b": 26.477}, {"t": "dry", "a": 26.477, "b": 26.705}, {"t": "season,", "a": 26.705, "b": 27.25}]}, {"t0": 27.17, "t1": 28.779, "w": [{"t": "fires", "a": 27.25, "b": 27.832}, {"t": "burn", "a": 27.832, "b": 28.095}, {"t": "across", "a": 28.095, "b": 28.559}, {"t": "parts", "a": 28.559, "b": 28.859}]}, {"t0": 28.779, "t1": 30.815, "w": [{"t": "of", "a": 28.859, "b": 28.941}, {"t": "Sumatra", "a": 28.941, "b": 29.568}, {"t": "and", "a": 29.968, "b": 30.205}, {"t": "Kalimantan", "a": 30.205, "b": 30.895}]}, {"t0": 30.815, "t1": 32.343, "w": [{"t": "in", "a": 30.895, "b": 31.105}, {"t": "Indonesia,", "a": 31.377, "b": 32.132}]}, {"t0": 32.343, "t1": 34.261, "w": [{"t": "and", "a": 32.423, "b": 32.586}, {"t": "sometimes", "a": 32.586, "b": 33.286}, {"t": "in", "a": 33.286, "b": 33.377}, {"t": "Malaysia.", "a": 33.377, "b": 34.05}]}, {"t0": 34.261, "t1": 35.579, "w": [{"t": "From", "a": 34.341, "b": 34.605}, {"t": "around", "a": 34.605, "b": 34.968}, {"t": "June", "a": 34.968, "b": 35.405}, {"t": "to", "a": 35.405, "b": 35.659}]}, {"t0": 35.579, "t1": 36.352, "w": [{"t": "October,", "a": 35.659, "b": 36.141}]}, {"t0": 36.352, "t1": 38.334, "w": [{"t": "the", "a": 36.432, "b": 36.523}, {"t": "southwest", "a": 36.523, "b": 37.123}, {"t": "monsoon", "a": 37.123, "b": 37.65}, {"t": "winds", "a": 37.65, "b": 38.159}]}, {"t0": 38.334, "t1": 39.761, "w": [{"t": "carry", "a": 38.414, "b": 38.841}, {"t": "that", "a": 38.841, "b": 38.995}, {"t": "smoke", "a": 38.995, "b": 39.386}, {"t": "across", "a": 39.386, "b": 39.841}]}, {"t0": 39.761, "t1": 40.679, "w": [{"t": "the", "a": 39.841, "b": 39.95}, {"t": "region,", "a": 39.95, "b": 40.523}]}, {"t0": 40.679, "t1": 42.088, "w": [{"t": "straight", "a": 40.759, "b": 41.086}, {"t": "to", "a": 41.086, "b": 41.314}, {"t": "us.", "a": 41.314, "b": 41.877}]}, {"t0": 42.088, "t1": 43.006, "w": [{"t": "The", "a": 42.168, "b": 42.25}, {"t": "wind", "a": 42.25, "b": 42.559}, {"t": "is", "a": 42.559, "b": 42.732}, {"t": "the", "a": 42.732, "b": 43.086}]}, {"t0": 43.006, "t1": 44.143, "w": [{"t": "delivery", "a": 43.086, "b": 43.359}, {"t": "truck.", "a": 43.359, "b": 43.823}]}, {"t0": 44.143, "t1": 44.925, "w": [{"t": "It", "a": 44.223, "b": 44.323}, {"t": "is", "a": 44.323, "b": 44.495}, {"t": "not", "a": 44.495, "b": 44.941}, {"t": "the", "a": 44.941, "b": 45.005}]}, {"t0": 44.925, "t1": 46.441, "w": [{"t": "cause.", "a": 45.005, "b": 45.841}]}, {"t0": 46.475, "t1": 47.365, "w": [{"t": "Here", "a": 46.555, "b": 46.855}, {"t": "is", "a": 46.855, "b": 47.009}, {"t": "the", "a": 47.009, "b": 47.091}, {"t": "part", "a": 47.091, "b": 47.445}]}, {"t0": 47.365, "t1": 49.047, "w": [{"t": "most", "a": 47.445, "b": 47.791}, {"t": "people", "a": 47.791, "b": 48.091}, {"t": "never", "a": 48.091, "b": 48.427}, {"t": "learn.", "a": 48.427, "b": 48.836}]}, {"t0": 49.047, "t1": 50.165, "w": [{"t": "Many", "a": 49.127, "b": 49.327}, {"t": "of", "a": 49.327, "b": 49.445}, {"t": "these", "a": 49.445, "b": 49.664}, {"t": "fires", "a": 49.664, "b": 50.245}]}, {"t0": 50.165, "t1": 51.093, "w": [{"t": "are", "a": 50.245, "b": 50.345}, {"t": "not", "a": 50.345, "b": 50.764}, {"t": "burning", "a": 50.764, "b": 51.082}, {"t": "in", "a": 51.082, "b": 51.173}]}, {"t0": 51.093, "t1": 52.211, "w": [{"t": "normal", "a": 51.173, "b": 51.518}, {"t": "soil.", "a": 51.518, "b": 52.0}]}, {"t0": 52.211, "t1": 54.002, "w": [{"t": "They", "a": 52.291, "b": 52.391}, {"t": "burn", "a": 52.391, "b": 52.664}, {"t": "in", "a": 52.664, "b": 52.9}, {"t": "peat.", "a": 52.9, "b": 54.082}]}, {"t0": 54.002, "t1": 54.893, "w": [{"t": "Peat", "a": 54.082, "b": 54.445}, {"t": "is", "a": 54.445, "b": 54.591}, {"t": "a", "a": 54.591, "b": 54.691}, {"t": "thick", "a": 54.691, "b": 54.973}]}, {"t0": 54.893, "t1": 56.375, "w": [{"t": "layer", "a": 54.973, "b": 55.264}, {"t": "of", "a": 55.264, "b": 55.445}, {"t": "dead", "a": 55.445, "b": 55.627}, {"t": "plants", "a": 55.627, "b": 56.455}]}, {"t0": 56.375, "t1": 57.456, "w": [{"t": "that", "a": 56.455, "b": 56.636}, {"t": "has", "a": 56.636, "b": 56.909}, {"t": "built", "a": 56.909, "b": 57.236}, {"t": "up", "a": 57.236, "b": 57.536}]}, {"t0": 57.456, "t1": 59.202, "w": [{"t": "over", "a": 57.536, "b": 57.773}, {"t": "thousands", "a": 57.773, "b": 58.418}, {"t": "of", "a": 58.418, "b": 58.527}, {"t": "years", "a": 58.527, "b": 59.036}]}, {"t0": 59.202, "t1": 61.02, "w": [{"t": "in", "a": 59.282, "b": 59.436}, {"t": "waterlogged", "a": 59.436, "b": 60.218}, {"t": "swamps.", "a": 60.218, "b": 60.809}]}, {"t0": 61.02, "t1": 62.065, "w": [{"t": "Because", "a": 61.1, "b": 61.464}, {"t": "it", "a": 61.464, "b": 61.555}, {"t": "is", "a": 61.555, "b": 61.709}, {"t": "always", "a": 61.709, "b": 62.145}]}, {"t0": 62.065, "t1": 62.875, "w": [{"t": "wet,", "a": 62.145, "b": 62.955}]}, {"t0": 62.875, "t1": 64.184, "w": [{"t": "the", "a": 62.955, "b": 63.036}, {"t": "plants", "a": 63.036, "b": 63.645}, {"t": "never", "a": 63.645, "b": 63.936}, {"t": "fully", "a": 63.936, "b": 64.264}]}, {"t0": 64.184, "t1": 65.229, "w": [{"t": "rot.", "a": 64.264, "b": 64.927}]}, {"t0": 65.229, "t1": 66.42, "w": [{"t": "They", "a": 65.309, "b": 65.427}, {"t": "just", "a": 65.427, "b": 65.709}, {"t": "pile", "a": 65.709, "b": 66.009}, {"t": "up,", "a": 66.009, "b": 66.5}]}, {"t0": 66.42, "t1": 67.902, "w": [{"t": "storing", "a": 66.5, "b": 67.0}, {"t": "huge", "a": 67.0, "b": 67.327}, {"t": "amounts", "a": 67.327, "b": 67.927}, {"t": "of", "a": 67.927, "b": 67.982}]}, {"t0": 67.902, "t1": 69.091, "w": [{"t": "carbon.", "a": 67.982, "b": 68.491}]}, {"t0": 69.125, "t1": 70.27, "w": [{"t": "But", "a": 69.205, "b": 69.35}, {"t": "when", "a": 69.35, "b": 69.559}, {"t": "companies", "a": 69.559, "b": 70.277}, {"t": "or", "a": 70.277, "b": 70.35}]}, {"t0": 70.27, "t1": 71.97, "w": [{"t": "farmers", "a": 70.35, "b": 70.932}, {"t": "dig", "a": 70.932, "b": 71.223}, {"t": "canals", "a": 71.223, "b": 71.923}, {"t": "to", "a": 71.923, "b": 72.05}]}, {"t0": 71.97, "t1": 73.543, "w": [{"t": "drain", "a": 72.05, "b": 72.386}, {"t": "the", "a": 72.386, "b": 72.459}, {"t": "swamp", "a": 72.459, "b": 72.95}, {"t": "for", "a": 72.95, "b": 73.623}]}, {"t0": 73.543, "t1": 74.425, "w": [{"t": "plantations,", "a": 73.623, "b": 74.214}]}, {"t0": 74.425, "t1": 76.325, "w": [{"t": "the", "a": 74.505, "b": 74.605}, {"t": "peat", "a": 74.605, "b": 75.205}, {"t": "dries", "a": 75.205, "b": 75.768}, {"t": "out.", "a": 75.768, "b": 76.114}]}, {"t0": 76.325, "t1": 77.243, "w": [{"t": "And", "a": 76.405, "b": 76.568}, {"t": "dry", "a": 76.568, "b": 76.786}, {"t": "peat", "a": 76.786, "b": 77.15}, {"t": "is", "a": 77.15, "b": 77.323}]}, {"t0": 77.243, "t1": 78.506, "w": [{"t": "basically", "a": 77.323, "b": 77.795}, {"t": "fuel.", "a": 77.795, "b": 78.295}]}, {"t0": 78.506, "t1": 79.643, "w": [{"t": "Once", "a": 78.586, "b": 78.85}, {"t": "it", "a": 78.85, "b": 78.932}, {"t": "catches", "a": 78.932, "b": 79.441}, {"t": "fire,", "a": 79.441, "b": 79.723}]}, {"t0": 79.643, "t1": 81.306, "w": [{"t": "it", "a": 79.723, "b": 80.441}, {"t": "does", "a": 80.441, "b": 80.941}, {"t": "not", "a": 80.941, "b": 81.123}, {"t": "just", "a": 81.123, "b": 81.386}]}, {"t0": 81.306, "t1": 82.77, "w": [{"t": "burn", "a": 81.386, "b": 81.795}, {"t": "on", "a": 81.795, "b": 81.895}, {"t": "the", "a": 81.895, "b": 81.995}, {"t": "surface.", "a": 81.995, "b": 82.559}]}, {"t0": 82.77, "t1": 84.715, "w": [{"t": "It", "a": 82.85, "b": 82.986}, {"t": "smoulders", "a": 82.986, "b": 83.768}, {"t": "underground,", "a": 83.768, "b": 84.795}]}, {"t0": 84.715, "t1": 86.515, "w": [{"t": "sometimes", "a": 84.795, "b": 85.395}, {"t": "metres", "a": 85.395, "b": 85.968}, {"t": "deep,", "a": 85.968, "b": 86.595}]}, {"t0": 86.515, "t1": 87.67, "w": [{"t": "for", "a": 86.595, "b": 86.923}, {"t": "weeks.", "a": 86.923, "b": 87.459}]}, {"t0": 87.67, "t1": 89.47, "w": [{"t": "Water", "a": 87.75, "b": 88.041}, {"t": "bombing", "a": 88.041, "b": 88.55}, {"t": "from", "a": 88.55, "b": 88.795}, {"t": "helicopters", "a": 88.795, "b": 89.55}]}, {"t0": 89.47, "t1": 90.915, "w": [{"t": "barely", "a": 89.55, "b": 89.868}, {"t": "touches", "a": 89.868, "b": 90.295}, {"t": "it.", "a": 90.295, "b": 90.995}]}, {"t0": 90.915, "t1": 91.97, "w": [{"t": "And", "a": 90.995, "b": 91.159}, {"t": "because", "a": 91.159, "b": 91.541}, {"t": "it", "a": 91.541, "b": 91.723}, {"t": "burns", "a": 91.723, "b": 92.05}]}, {"t0": 91.97, "t1": 94.515, "w": [{"t": "slowly", "a": 92.05, "b": 92.759}, {"t": "with", "a": 93.077, "b": 93.295}, {"t": "little", "a": 93.295, "b": 93.768}, {"t": "oxygen,", "a": 93.768, "b": 94.223}]}, {"t0": 94.515, "t1": 96.761, "w": [{"t": "the", "a": 94.595, "b": 94.759}, {"t": "combustion", "a": 94.759, "b": 95.405}, {"t": "is", "a": 95.405, "b": 95.686}, {"t": "incomplete,", "a": 95.686, "b": 96.486}]}, {"t0": 96.761, "t1": 97.888, "w": [{"t": "which", "a": 96.841, "b": 97.023}, {"t": "is", "a": 97.023, "b": 97.186}, {"t": "exactly", "a": 97.186, "b": 97.868}, {"t": "the", "a": 97.868, "b": 97.968}]}, {"t0": 97.888, "t1": 99.025, "w": [{"t": "kind", "a": 97.968, "b": 98.295}, {"t": "of", "a": 98.295, "b": 98.377}, {"t": "burning", "a": 98.377, "b": 98.905}, {"t": "that", "a": 98.905, "b": 99.105}]}, {"t0": 99.025, "t1": 100.759, "w": [{"t": "produces", "a": 99.105, "b": 99.641}, {"t": "the", "a": 99.641, "b": 99.759}, {"t": "most", "a": 99.759, "b": 99.841}, {"t": "smoke.", "a": 99.841, "b": 100.259}]}], "total": 100.495188, "segs": [["b0", 0.0, 22.263636363636362], ["b1", 22.613636363636363, 46.06818181818182], ["b2", 46.41818181818182, 68.71818181818182], ["b3", 69.06818181818181, 100.48636363636363]]};</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const txt = (parent, attrs, s) => { const t = el("text", attrs, parent); t.textContent = s; return t; };
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const win = (t, a, b, f = .3) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));   // on between a and b
+const pop = (t, a) => { const k = clamp((t - a) / .35); return k < 1 ? ease(k) * (1 + .22 * Math.sin(k * Math.PI)) : 1; };
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], k))).join(",") + ")"; };
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", v);
+// keyframed camera: keys [{t, ...vals, d}] -> eased move of duration d starting at t
+function camAt(keys, t, fields) {
+  let cur = keys[0];
+  const out = {}; fields.forEach(f => out[f] = cur[f]);
+  for (let i = 1; i < keys.length; i++) {
+    const k = keys[i]; if (t < k.t) break;
+    const q = ease((t - k.t) / (k.d || .6));
+    fields.forEach(f => out[f] = lerp(out[f], k[f], q));
+  }
+  return out;
+}
+const END = 104.5;
+
+/* ================= A: skyline ================= */
+function building(parent, x, w, h, fill, base = 760) {
+  el("rect", {x, y: base - h, width: w, height: h, fill}, parent);
+  if (rnd() > .55) el("rect", {x: x + w * .2, y: base - h - 22, width: w * .6, height: 22, fill}, parent);
+  if (rnd() > .75) el("rect", {x: x + w / 2 - 2, y: base - h - 60, width: 4, height: 40, fill}, parent);
+}
+function cityLayer(parent, fill, o) { seed = o.seed; let x = o.x0; while (x < o.x1) { const w = 40 + rnd() * 70; building(parent, x, w, o.hMin + rnd() * (o.hMax - o.hMin), fill); x += w + rnd() * o.gap; } }
+cityLayer($("farCity"), "#5d6878", {seed: 11, x0: -20, x1: 1950, hMin: 90, hMax: 260, gap: 10});
+cityLayer($("nearCity"), "#2b3644", {seed: 3, x0: 40, x1: 1020, hMin: 140, hMax: 400, gap: 26});
+(() => { const g = el("g", {fill: "#2b3644"}, $("nearCity"));
+  [1150, 1255, 1360].forEach(x => el("path", {d: `M${x} 760 L${x + 8} 478 L${x + 62} 478 L${x + 70} 760 Z`}, g));
+  el("path", {d: "M1120 470 L1470 462 Q1500 461 1505 468 L1440 478 L1120 480 Z"}, g);
+  const f = el("g", {stroke: "#2b3644", fill: "none"}, $("nearCity")); const cx = 1700, cy = 590, r = 140;
+  el("circle", {cx, cy, r, "stroke-width": 7}, f); el("circle", {cx, cy, r: r - 14, "stroke-width": 2}, f);
+  for (let i = 0; i < 28; i++) { const a = i / 28 * Math.PI * 2; el("line", {x1: cx, y1: cy, x2: cx + Math.cos(a) * (r - 14), y2: cy + Math.sin(a) * (r - 14), "stroke-width": 1.3}, f); el("rect", {x: cx + Math.cos(a) * r - 6, y: cy + Math.sin(a) * r - 5, width: 12, height: 10, fill: "#2b3644", stroke: "none"}, f); }
+  el("path", {d: `M${cx} ${cy} L${cx - 70} 760 M${cx} ${cy} L${cx + 70} 760`, "stroke-width": 8}, f);
+  building($("nearCity"), 1530, 70, 170, "#2b3644"); })();
+$("reflection").innerHTML = $("nearCity").innerHTML;
+seed = 21;
+const hBands = []; for (let i = 0; i < 5; i++) hBands.push({x: rnd() * 1920, v: 8 + rnd() * 18, e: el("ellipse", {cx: 0, cy: 420 + rnd() * 380, rx: 600 + rnd() * 400, ry: 90 + rnd() * 60, fill: "#cfae84", filter: "url(#blur40)"}, $("hazeBands"))});
+seed = 99;
+const parts = []; for (let i = 0; i < 170; i++) parts.push({x: rnd() * 1920, y: rnd() * 1080, r: .8 + rnd() * 2.6, vx: 10 + rnd() * 30, vy: -4 + rnd() * 8, ph: rnd() * 6.28, e: el("circle", {fill: "#efe2cc"}, $("particles"))});
+const years = ["2015", "2019", "2026"].map((y, i) => { const g = el("g", {opacity: 0}, $("years"));
+  el("rect", {x: 600 + i * 260, y: 380, width: 220, height: 96, rx: 18, fill: i === 2 ? "#d9443b" : "#000", "fill-opacity": i === 2 ? .9 : .55}, g);
+  txt(g, {x: 710 + i * 260, y: 446, "text-anchor": "middle", "font-size": 58, "font-weight": 900, fill: "#fff"}, y); return g; });
+const yearsLbl = txt($("years"), {x: 960, y: 340, "text-anchor": "middle", "font-size": 40, "font-weight": 800, fill: "#fff", opacity: 0}, "Major haze years in Singapore");
+
+/* ================= M: map ================= */
+const K = 67, OX = 89, OY = 4;
+const P = (lon, lat) => [(lon - 94) * K + OX, (8.5 - lat) * K + OY];
+const poly = pts => "M" + pts.map(p => P(...p).map(v => v.toFixed(1)).join(" ")).join(" L") + " Z";
+const coasts = {
+  sumatra: [[95.3,5.6],[96.3,5.3],[97.6,5.0],[98.3,4.2],[99.5,3.2],[100.6,2.2],[101.4,1.8],[102.5,1.3],[103.4,0.6],[103.8,-0.3],[104.5,-1.0],[104.9,-2.2],[105.8,-3.0],[105.9,-4.5],[105.7,-5.8],[104.6,-5.9],[103.9,-5.0],[102.3,-3.9],[101.2,-2.6],[100.4,-1.0],[99.7,0.2],[99.0,1.4],[98.2,2.4],[97.4,3.2],[96.4,4.2],[95.4,5.0]],
+  peninsula: [[99.6,8.2],[100.5,8.2],[100.4,7.0],[101.3,6.8],[102.1,6.2],[102.9,5.6],[103.4,4.8],[103.4,3.9],[103.5,2.8],[104.1,2.0],[104.3,1.45],[103.5,1.3],[103.0,1.8],[102.3,2.3],[101.4,2.9],[100.9,3.9],[100.4,4.9],[100.3,5.9],[100.0,6.6],[99.5,7.4]],
+  borneo: [[109.0,1.4],[109.6,2.0],[110.4,1.7],[111.2,2.6],[112.2,3.1],[113.1,3.4],[113.9,4.6],[115.2,5.0],[116.0,6.0],[116.8,7.0],[117.6,6.5],[118.2,5.8],[119.2,5.3],[118.3,4.6],[117.7,3.9],[117.6,3.0],[118.0,2.0],[118.8,1.0],[117.9,0.6],[117.5,-0.5],[116.9,-1.6],[116.5,-2.6],[116.2,-3.6],[115.0,-4.0],[114.5,-3.6],[113.6,-3.2],[112.5,-3.4],[111.6,-3.0],[110.3,-2.9],[110.1,-1.6],[109.5,-0.9],[109.1,0.0],[108.9,0.6]],
+  java: [[105.2,-6.8],[106.0,-6.0],[107.0,-6.0],[108.3,-6.3],[109.5,-6.8],[110.6,-6.4],[111.5,-6.6],[112.6,-6.9],[113.5,-7.2],[114.4,-7.7],[114.5,-8.6],[113.2,-8.3],[111.0,-8.2],[109.0,-7.8],[107.5,-7.6],[106.3,-7.3],[105.5,-7.0]],
+  bangka: [[105.1,-1.6],[105.8,-1.5],[106.8,-2.4],[106.6,-3.0],[106.0,-2.9],[105.4,-2.3]],
+  belitung: [[107.6,-2.6],[108.2,-2.6],[108.3,-3.2],[107.6,-3.2]],
+  thai: [[99.0,8.6],[100.6,8.6],[100.6,8.2],[99.6,8.2]],
+};
+for (let lon = 94; lon <= 120; lon += 2) { const [x] = P(lon, 0); el("line", {x1: x, y1: -400, x2: x, y2: 1500}, $("grid")); }
+for (let lat = -12; lat <= 12; lat += 2) { const [, y] = P(100, lat); el("line", {x1: -400, y1: y, x2: 2400, y2: y}, $("grid")); }
+for (const k in coasts) el("path", {d: poly(coasts[k])}, $("land"));
+// Indonesia tint (Sumatra, Java, islands, Kalimantan = Borneo south of ~1.5N)
+const clip = el("clipPath", {id: "kal"}, $("v").querySelector("defs")); const kc = P(100, 1.6); el("rect", {x: -400, y: kc[1], width: 3000, height: 2000}, clip);
+["sumatra", "java", "bangka", "belitung"].forEach(k => el("path", {d: poly(coasts[k])}, $("indo")));
+el("path", {d: poly(coasts.borneo), "clip-path": "url(#kal)"}, $("indo"));
+const LBL = {};
+const label = (k, s, lon, lat, size) => { const [x, y] = P(lon, lat); LBL[k] = txt($("labels"), {x, y, "font-size": size}, s); };
+label("sum", "SUMATRA", 101.2, -1.0, 30); label("kal", "KALIMANTAN", 114.6, 1.0, 30); label("bor", "(BORNEO)", 114.6, 0.3, 20);
+label("mal", "MALAYSIA", 101.9, 4.4, 26); label("jav", "JAVA", 109.8, -7.3, 22);
+const indoLbl = txt($("mapUI"), {x: P(108, -4.6)[0], y: P(108, -4.6)[1], "text-anchor": "middle", "font-size": 58, "font-weight": 900, fill: "#ff9a4d", "letter-spacing": 14, opacity: 0}, "INDONESIA");
+
+const SG = P(103.82, 1.33), F1 = P(104.6, -2.9), F2 = P(113.9, -2.3);
+// smoke paths backwards
+function dotsAlong(parent, a, b, c, n, r, color) { const out = []; for (let i = 0; i <= n; i++) { const k = i / n; out.push(el("circle", {cx: (1-k)*(1-k)*a[0] + 2*(1-k)*k*c[0] + k*k*b[0], cy: (1-k)*(1-k)*a[1] + 2*(1-k)*k*c[1] + k*k*b[1], r, fill: color, opacity: 0}, parent)); } return out; }
+const C1 = [SG[0] + 120, (SG[1] + F1[1]) / 2 - 10], C2 = [(SG[0] + F2[0]) / 2, SG[1] - 40];
+const dots1 = dotsAlong($("paths"), SG, F1, C1, 34, 5.2, "#fff"), dots2 = dotsAlong($("paths"), SG, F2, C2, 60, 4, "#fff");
+// fires
+function fire(p, size = 1) {
+  const g = el("g", {opacity: 0}, $("fires"));
+  const glow = el("circle", {cx: p[0], cy: p[1], r: 60 * size, fill: "url(#fireGlow)"}, g);
+  el("path", {d: `M${p[0]} ${p[1]-26*size} C${p[0]+16*size} ${p[1]-8*size} ${p[0]+14*size} ${p[1]+10*size} ${p[0]} ${p[1]+12*size} C${p[0]-14*size} ${p[1]+10*size} ${p[0]-16*size} ${p[1]-8*size} ${p[0]} ${p[1]-26*size} Z`, fill: "#ffe08a", stroke: "#ff6a00", "stroke-width": 3}, g);
+  return {g, glow, size, p};
+}
+const fire1 = fire(F1), fire2 = fire(F2);
+const extraFires = [[103.2,-1.6,27.3],[101.6,0.8,27.6],[105.2,-3.7,27.9],[112.5,-2.7,28.2],[114.9,-1.5,28.5],[110.7,-0.9,28.8],[102.6,2.9,33.5],[111.9,2.4,33.8]]
+  .map(([lon, lat, t0]) => ({...fire(P(lon, lat), .7), t0}));
+// SG marker
+const sgPulse = el("circle", {cx: SG[0], cy: SG[1], r: 10, fill: "none", stroke: "#fff", "stroke-width": 3}, $("sg"));
+el("circle", {cx: SG[0], cy: SG[1], r: 9, fill: "#fff", stroke: "#123a4a", "stroke-width": 3}, $("sg"));
+const sgTag = el("g", {}, $("sg"));
+el("rect", {x: SG[0] + 18, y: SG[1] - 46, width: 290, height: 40, rx: 8, fill: "#fff"}, sgTag);
+txt(sgTag, {x: SG[0] + 32, y: SG[1] - 18, "font-size": 21, "font-weight": 700, fill: "#123a4a"}, "SINGAPORE · your window");
+const qBub = el("g", {opacity: 0}, $("mapUI"));
+el("circle", {cx: SG[0] - 40, cy: SG[1] - 60, r: 34, fill: "#fff"}, qBub);
+txt(qBub, {x: SG[0] - 40, y: SG[1] - 44, "text-anchor": "middle", "font-size": 46, "font-weight": 900, fill: "#123a4a"}, "?");
+const stamp = el("g", {opacity: 0}, $("mapUI"));
+el("rect", {x: SG[0] - 150, y: SG[1] + 20, width: 300, height: 70, rx: 10, fill: "none", stroke: "#e0473c", "stroke-width": 7}, stamp);
+txt(stamp, {x: SG[0], y: SG[1] + 68, "text-anchor": "middle", "font-size": 38, "font-weight": 900, fill: "#e0473c", "letter-spacing": 2}, "NOT FROM HERE");
+const causeTag = el("g", {opacity: 0}, $("mapUI"));
+el("rect", {x: F1[0] + 40, y: F1[1] - 30, width: 300, height: 60, rx: 10, fill: "#ff6a00"}, causeTag);
+txt(causeTag, {x: F1[0] + 190, y: F1[1] + 11, "text-anchor": "middle", "font-size": 32, "font-weight": 900, fill: "#fff"}, "THE CAUSE: FIRE");
+// basket
+const BP = (() => { const k = .45; return [(1-k)*(1-k)*SG[0] + 2*(1-k)*k*C1[0] + k*k*F1[0], (1-k)*(1-k)*SG[1] + 2*(1-k)*k*C1[1] + k*k*F1[1]]; })();
+const bk = el("g", {opacity: 0}, $("mapUI"));
+const bkPulse = el("circle", {cx: BP[0], cy: BP[1], r: 40, fill: "none", stroke: "#ffcf5a", "stroke-width": 4}, bk);
+el("circle", {cx: BP[0], cy: BP[1], r: 36, fill: "#ffcf5a", stroke: "#fff", "stroke-width": 4}, bk);
+el("path", {d: `M${BP[0]-20} ${BP[1]-6} L${BP[0]+20} ${BP[1]-6} L${BP[0]+14} ${BP[1]+16} L${BP[0]-14} ${BP[1]+16} Z`, fill: "#123a4a"}, bk);
+el("path", {d: `M${BP[0]-12} ${BP[1]-6} Q${BP[0]} ${BP[1]-28} ${BP[0]+12} ${BP[1]-6}`, fill: "none", stroke: "#123a4a", "stroke-width": 4}, bk);
+el("rect", {x: BP[0] + 50, y: BP[1] - 24, width: 300, height: 48, rx: 10, fill: "#ffcf5a"}, bk);
+txt(bk, {x: BP[0] + 66, y: BP[1] + 9, "font-size": 24, "font-weight": 800, fill: "#123a4a"}, "YOU can step in here");
+// wind arrows
+const winds = [];
+[[96.5,-3.5],[99.5,-5.5],[103,-6.5],[107,-7.2],[98.5,0.0],[110.5,-4.6],[101.5,-2.0],[113.5,-6.4],[95.5,1.5],[106,-3.5]].forEach(([lon, lat]) => {
+  const a = P(lon, lat), b = P(lon + 3.2, lat + 2.6);
+  winds.push(el("path", {d: `M${a[0]} ${a[1]} Q ${(a[0] + b[0]) / 2 + 20} ${(a[1] + b[1]) / 2 + 20} ${b[0]} ${b[1]}`, stroke: "#9fe3ff", "stroke-width": 7, fill: "none", "stroke-linecap": "round", "stroke-dasharray": "36 22"}, $("wind")));
+  el("path", {d: "M0 0 l-24 -13 l0 26 z", fill: "#9fe3ff", transform: `translate(${b[0]} ${b[1]}) rotate(${Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI})`}, $("wind"));
+});
+// smoke puffs
+seed = 5; const puffs = [];
+for (let i = 0; i < 34; i++) { const src = [F1, F2, P(103.2, -1.6), P(112.5, -2.7)][i % 4]; puffs.push({src, ph: rnd(), jx: -60 + rnd() * 120, jy: -60 + rnd() * 120, r: 28 + rnd() * 30, e: el("circle", {fill: "#cdbb9c", filter: "url(#blur14)", opacity: 0}, $("smoke"))}); }
+// truck
+const truck = el("g", {opacity: 0}, $("mapUI"));
+el("rect", {x: -46, y: -30, width: 60, height: 40, rx: 4, fill: "#fff"}, truck);
+el("path", {d: "M14 -20 h20 l12 14 v16 h-32 z", fill: "#9fe3ff"}, truck);
+el("circle", {cx: -30, cy: 12, r: 9, fill: "#123a4a", stroke: "#fff", "stroke-width": 3}, truck);
+el("circle", {cx: 30, cy: 12, r: 9, fill: "#123a4a", stroke: "#fff", "stroke-width": 3}, truck);
+txt(truck, {x: -16, y: -6, "text-anchor": "middle", "font-size": 13, "font-weight": 900, fill: "#123a4a"}, "SMOKE");
+// map chips (screen space, top-right)
+function chip(parent, lines, col, bg, y = 72) {
+  const g = el("g", {opacity: 0}, parent);
+  const w = 40 + Math.max(...lines.map((l, i) => l.length * (i ? 15.5 : 23.5)));
+  el("rect", {x: 1850 - w, y, width: w, height: 30 + lines.length * 40, rx: 18, fill: bg, "fill-opacity": .9, stroke: col, "stroke-width": 3}, g);
+  lines.forEach((l, i) => txt(g, {x: 1850 - w + 22, y: y + 46 + i * 40, "font-size": i ? 27 : 32, "font-weight": i ? 600 : 900, fill: i ? "#fff" : col, "letter-spacing": i ? 0 : 2}, l));
+  return g;
+}
+const chDry = chip($("mapChips"), ["DRY SEASON", "fires across Indonesia"], "#ffb27a", "#3a1d0b");
+const chMon = chip($("mapChips"), ["SOUTHWEST MONSOON", "around June to October"], "#9fe3ff", "#0b2430");
+
+/* ================= P: peat ================= */
+seed = 12;
+for (let i = 0; i < 34; i++) { const x = -560 + i * 90 + rnd() * 30, h = 120 + rnd() * 110;
+  el("rect", {x: x - 5, y: 340 - h, width: 10, height: h, fill: "#3d4a36"}, $("pTrees"));
+  el("ellipse", {cx: x, cy: 340 - h, rx: 34 + rnd() * 20, ry: 26 + rnd() * 12, fill: rnd() > .5 ? "#4f6b45" : "#5c7a4f"}, $("pTrees")); }
+for (let i = 0; i < 22; i++) { const x = -520 + i * 140, h = 150 + (i % 3) * 14; const g = el("g", {}, $("pPalms"));
+  el("path", {d: `M${x} 340 q 6 ${-h / 2} 0 ${-h}`, stroke: "#5b4a33", "stroke-width": 10, fill: "none"}, g);
+  [-150, -115, -70, -30, 10, 50].forEach(a => { const r = a * Math.PI / 180; el("path", {d: `M${x} ${340 - h} q ${Math.cos(r) * 40} ${Math.sin(r) * 40 - 20} ${Math.cos(r) * 85} ${Math.sin(r) * 85 + 25}`, stroke: "#5f8a3c", "stroke-width": 8, fill: "none", "stroke-linecap": "round"}, g); }); }
+const LT = 340, LB = 800, NL = 8, LH = (LB - LT) / NL;
+const layerCols = ["#2f2117", "#38281b", "#41301f", "#4a3622", "#543d26", "#5e452b", "#684d30", "#735536"];
+const layers = [];
+for (let i = 0; i < NL; i++) { const y = LB - (i + 1) * LH; const g = el("g", {opacity: 0}, $("pLayers"));
+  el("rect", {x: -600, y, width: 3120, height: LH + 1, fill: layerCols[i]}, g);
+  for (let j = 0; j < 50; j++) { const x = -600 + rnd() * 3120, yy = y + 6 + rnd() * (LH - 12); el("path", {d: `M${x} ${yy} q ${18 + rnd() * 20} ${-6 + rnd() * 12} ${40 + rnd() * 30} 0`, stroke: "#9b7a52", "stroke-opacity": .45, "stroke-width": 3, fill: "none"}, g); }
+  layers.push(g); }
+for (let i = 0; i < 26; i++) { let x = -500 + rnd() * 2900, y = 350 + rnd() * 320, d = `M${x} ${y}`; for (let j = 0; j < 5; j++) { x += -30 + rnd() * 60; y += 15 + rnd() * 25; d += ` L${x} ${y}`; } el("path", {d}, $("pCracks")); }
+const leaves = []; for (let i = 0; i < 70; i++) leaves.push({x: -400 + rnd() * 2700, ph: rnd(), e: el("ellipse", {rx: 12, ry: 5, fill: rnd() > .5 ? "#6b8a4f" : "#8a7a3f", opacity: 0}, $("pLeaves"))});
+const carbons = []; for (let i = 0; i < 40; i++) { const g = el("g", {opacity: 0}, $("pCarbon")); const x = -200 + rnd() * 2300, y = 380 + rnd() * 390;
+  el("circle", {cx: x, cy: y, r: 22, fill: "#111", stroke: "#ffcf5a", "stroke-width": 3}, g); txt(g, {x, y: y + 9, "text-anchor": "middle", "font-size": 26, "font-weight": 900, fill: "#ffcf5a"}, "C"); carbons.push({g, d: rnd()}); }
+// canal
+const canal = $("pCanal");
+el("path", {d: "M300 340 L330 520 L430 520 L460 340 Z", fill: "#2b5f80"}, canal);
+el("path", {d: "M300 340 L330 520 L430 520 L460 340", fill: "none", stroke: "#1b1209", "stroke-width": 6}, canal);
+txt(canal, {x: 380, y: 300, "text-anchor": "middle", "font-size": 30, "font-weight": 900, fill: "#fff"}, "CANAL");
+const drainArrows = []; for (let i = 0; i < 4; i++) drainArrows.push(el("path", {d: `M${700 + i * 260} 600 h -120 l 0 -14 l -30 22 l 30 22 l 0 -14 h 120`, fill: "#9fe3ff", opacity: 0}, canal));
+// digger
+const dg = $("pDigger");
+el("rect", {x: -90, y: -60, width: 120, height: 50, rx: 8, fill: "#f2b630"}, dg);
+el("rect", {x: -60, y: -100, width: 60, height: 44, rx: 6, fill: "#f2b630", stroke: "#333", "stroke-width": 3}, dg);
+el("rect", {x: -100, y: -12, width: 140, height: 22, rx: 11, fill: "#333"}, dg);
+const arm = el("path", {d: "M20 -50 L110 -120 L150 -40", stroke: "#e0a020", "stroke-width": 14, fill: "none", "stroke-linejoin": "round"}, dg);
+el("path", {d: "M140 -45 l 30 0 l -10 30 l -30 0 z", fill: "#333"}, dg);
+// underground smoulder
+const under = el("ellipse", {cx: 1250, cy: 470, rx: 0, ry: 0, fill: "url(#emberGlow)"}, $("pUnder"));
+const embers = []; for (let i = 0; i < 60; i++) embers.push({x: (rnd() - .5), y: (rnd() - .5), e: el("circle", {r: 3 + rnd() * 3, fill: "#ffd27a", opacity: 0}, $("pUnder"))});
+// surface fire
+const pf = $("pFire"); const pfGlow = el("ellipse", {cx: 1250, cy: 330, rx: 220, ry: 90, fill: "url(#fireGlow)", opacity: 0}, pf);
+const flames = []; for (let i = 0; i < 9; i++) { const x = 1130 + i * 30; flames.push({x, ph: rnd() * 6, e: el("path", {fill: i % 2 ? "#ffb02e" : "#ff6a1a", opacity: 0}, pf)}); }
+// helicopter
+const hl = $("pHeli");
+el("ellipse", {cx: 0, cy: 0, rx: 70, ry: 34, fill: "#d9443b"}, hl);
+el("path", {d: "M60 -6 L170 -14 L170 4 L60 12 Z", fill: "#d9443b"}, hl);
+el("ellipse", {cx: -28, cy: -6, rx: 26, ry: 18, fill: "#bfe6ff"}, hl);
+el("path", {d: "M-40 34 L-40 46 M40 34 L40 46 M-60 46 L60 46", stroke: "#333", "stroke-width": 5}, hl);
+const rotor = el("rect", {x: -120, y: -46, width: 240, height: 7, rx: 3, fill: "#333"}, hl);
+el("path", {d: "M0 46 L0 120", stroke: "#333", "stroke-width": 3}, hl);
+el("path", {d: "M-22 120 L22 120 L16 150 L-16 150 Z", fill: "#e0a020"}, hl);
+const drops = []; for (let i = 0; i < 40; i++) drops.push({dx: -40 + rnd() * 80, ph: rnd(), e: el("ellipse", {rx: 5, ry: 9, fill: "#6fc3ff", opacity: 0}, $("pDrops"))});
+const splash = el("ellipse", {cx: 1250, cy: 340, rx: 0, ry: 14, fill: "#6fc3ff", opacity: 0}, $("pDrops"));
+// O2 molecules
+const o2s = []; for (let i = 0; i < 10; i++) { const g = el("g", {opacity: 0}, $("pO2")); el("circle", {cx: -11, cy: 0, r: 14, fill: "#e8f4ff", stroke: "#4fa3d9", "stroke-width": 3}, g); el("circle", {cx: 11, cy: 0, r: 14, fill: "#e8f4ff", stroke: "#4fa3d9", "stroke-width": 3}, g); txt(g, {x: 0, y: -22, "text-anchor": "middle", "font-size": 20, "font-weight": 900, fill: "#123a4a"}, "O₂"); o2s.push({x: 900 + rnd() * 700, ph: rnd(), g}); }
+// depth arrow
+const dp = $("pDepth"); el("path", {d: "M1720 345 V 600", stroke: "#fff", "stroke-width": 6}, dp); el("path", {d: "M1720 615 l-16 -28 h32 z M1720 330 l-16 28 h32 z", fill: "#fff"}, dp);
+txt(dp, {x: 1745, y: 480, "font-size": 36, "font-weight": 900, fill: "#fff"}, "metres"); txt(dp, {x: 1745, y: 520, "font-size": 36, "font-weight": 900, fill: "#fff"}, "deep");
+// side arrow (thousands of years)
+const sd = $("pSide"); el("rect", {x: 40, y: 360, width: 300, height: 420, rx: 16, fill: "#000", "fill-opacity": .45}, sd);
+el("path", {d: "M80 750 V 400", stroke: "#ffcf5a", "stroke-width": 6}, sd); el("path", {d: "M80 385 l-14 26 h28 z", fill: "#ffcf5a"}, sd);
+[["newer", 430], ["thousands", 560], ["of years", 600], ["older", 740]].forEach(([s, y], i) => txt(sd, {x: 108, y, "font-size": i === 1 || i === 2 ? 36 : 30, "font-weight": i === 1 || i === 2 ? 900 : 700, fill: i === 1 || i === 2 ? "#ffcf5a" : "#fff"}, s));
+// peat chips
+const pc = (lines, col, bg, y) => chip($("pChips"), lines, col, bg || "#0f2633", y);
+const chNotSoil = pc(["NOT normal soil ✗"], "#ff8f8f", "#2a0f0f", 72);
+const chWet = pc(["ALWAYS WET", "waterlogged swamp"], "#6fc3ff", "#0f2633", 72);
+const chRot = pc(["NEVER FULLY ROTS", "plants just pile up"], "#8fd18a", "#0f2633", 202);
+const chCarb = pc(["HUGE CARBON STORE"], "#ffcf5a", "#0f2633", 332);
+const chFuel = pc(["DRY PEAT = FUEL"], "#ffb27a", "#3a1d0b", 72);
+const chWeeks = pc(["SMOULDERS FOR WEEKS", "day 1"], "#ff8a3d", "#3a1d0b", 72);
+const weeksDay = chWeeks.querySelectorAll("text")[1];
+const chWater = pc(["WATER CAN’T REACH IT ✗"], "#6fc3ff", "#0f2633", 72);
+const chO2 = pc(["LITTLE OXYGEN", "slow, smouldering burn"], "#e8f4ff", "#0f2633", 72);
+// equation card
+const eq = $("pEq");
+el("rect", {x: 260, y: 150, width: 1400, height: 400, rx: 26, fill: "#0f2633", "fill-opacity": .94, stroke: "#fff", "stroke-opacity": .3, "stroke-width": 2}, eq);
+txt(eq, {x: 320, y: 230, "font-size": 34, "font-weight": 800, fill: "#9fb9c6", "letter-spacing": 4}, "COMBUSTION");
+const eqA = el("g", {opacity: 0}, eq);
+txt(eqA, {x: 320, y: 320, "font-size": 44, "font-weight": 800, fill: "#8fd18a"}, "✓ Complete:");
+txt(eqA, {x: 640, y: 320, "font-size": 44, "font-weight": 700, fill: "#fff"}, "fuel + lots of O₂ → CO₂ + H₂O");
+const eqB = el("g", {opacity: 0}, eq);
+txt(eqB, {x: 320, y: 420, "font-size": 44, "font-weight": 800, fill: "#ff8f8f"}, "✗ Incomplete:");
+txt(eqB, {x: 640, y: 420, "font-size": 44, "font-weight": 700, fill: "#fff"}, "fuel + little O₂ → CO + soot");
+txt(eqB, {x: 640, y: 490, "font-size": 40, "font-weight": 900, fill: "#ffcf5a"}, "= SMOKE (and PM2.5)");
+// big smoke
+const bigSmoke = []; for (let i = 0; i < 26; i++) bigSmoke.push({x: 700 + rnd() * 1100, ph: rnd(), r: 120 + rnd() * 160, e: el("circle", {fill: rnd() > .5 ? "#8c8070" : "#a69a88", filter: "url(#blur40)", opacity: 0}, $("pSmoke"))});
+
+/* ================= captions ================= */
+const capEls = TL.chunks.map(c => {
+  const g = el("g", {opacity: 0}, $("caps"));
+  const t = el("text", {x: 960, y: 960, "text-anchor": "middle", "font-size": c.phrase ? 70 : 66, "font-weight": 800, "letter-spacing": "-0.5"}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans};
+});
+
+/* ================= keys ================= */
+const MK = [
+  {t: 0, lon: 103.82, lat: 1.33, s: 3.0},
+  {t: 13.4, lon: 104.4, lat: 0.2, s: 2.0, d: 1.8},
+  {t: 15.8, lon: 109.0, lat: 0.4, s: 1.0, d: 1.6},
+  {t: 22.7, lon: 103.82, lat: 1.0, s: 2.3, d: .7},
+  {t: 26.3, lon: 108.0, lat: 0.0, s: 1.0, d: .7},
+  {t: 28.8, lon: 101.8, lat: -1.0, s: 1.7, d: .6},
+  {t: 30.1, lon: 113.2, lat: -0.8, s: 1.7, d: .6},
+  {t: 31.3, lon: 108.5, lat: -1.0, s: .95, d: .6},
+  {t: 33.3, lon: 106.8, lat: 2.6, s: 1.35, d: .6},
+  {t: 34.9, lon: 108.0, lat: 0.0, s: 1.0, d: .6},
+  {t: 40.7, lon: 104.3, lat: 0.6, s: 1.9, d: .8},
+  {t: 42.1, lon: 104.3, lat: -0.8, s: 1.6, d: .6},
+  {t: 44.4, lon: 104.6, lat: -2.9, s: 2.6, d: .5},
+  {t: 45.9, lon: 104.6, lat: -2.9, s: 7.0, d: .6},
+];
+const PK = [
+  {t: 0, x: 960, y: 540, s: 1.0},
+  {t: 46.4, x: 960, y: 540, s: 1.0},
+  {t: 52.3, x: 960, y: 560, s: 1.1, d: .35},
+  {t: 54.5, x: 960, y: 560, s: 1.0, d: .5},
+  {t: 59.3, x: 960, y: 600, s: 1.06, d: .6},
+  {t: 63.5, x: 960, y: 560, s: 1.0, d: .5},
+  {t: 66.4, x: 1000, y: 560, s: 1.1, d: .6},
+  {t: 69.4, x: 620, y: 470, s: 1.25, d: .7},
+  {t: 72.0, x: 960, y: 560, s: 1.0, d: .6},
+  {t: 78.8, x: 1250, y: 380, s: 1.4, d: .4},
+  {t: 80.8, x: 1150, y: 520, s: 1.05, d: .6},
+  {t: 82.9, x: 1200, y: 500, s: 1.2, d: .6},
+  {t: 86.5, x: 1100, y: 520, s: 1.0, d: .6},
+  {t: 87.9, x: 1250, y: 330, s: 1.12, d: .6},
+  {t: 91.6, x: 1150, y: 430, s: 1.15, d: .6},
+  {t: 94.7, x: 960, y: 540, s: 1.0, d: .5},
+];
+
+/* ================= render ================= */
+window.render = function (t) {
+  const flick = 1 + .12 * Math.sin(t * 17) + .08 * Math.sin(t * 29 + 1);
+  // scene visibility
+  const vA = 1 - ramp(t, 12.6, 13.1);
+  const vM = ramp(t, 12.6, 13.1) * (1 - ramp(t, 46.1, 46.5));
+  const vP = ramp(t, 46.1, 46.5) * (1 - ramp(t, 100.6, 101.0));
+  const vE = ramp(t, 100.6, 101.0);
+  op($("sceneA"), vA); op($("sceneM"), vM); op($("sceneP"), vP); op($("endCard"), vE);
+
+  /* ---- A ---- */
+  if (vA > 0) {
+    const h = ramp(t, .2, 4.0);
+    const s = 1 + .05 * ramp(t, 0, 6) + .08 * ramp(t, 6.3, 6.6) + .05 * ramp(t, 9.5, 12.6);
+    set($("camA"), "transform", `translate(960 600) scale(${s}) translate(-960 -600)`);
+    set($("skyTop"), "stop-color", mix("#7fb6e0", "#9c8f80", h)); set($("skyBot"), "stop-color", mix("#d6e8f4", "#d9b98e", h));
+    set($("wTop"), "stop-color", mix("#4f86a8", "#8a7a64", h)); set($("wBot"), "stop-color", mix("#244a63", "#4a4237", h));
+    set($("sun"), "fill", mix("#fff8dc", "#e9773d", h)); op($("sunGlowC"), lerp(.9, .35, h));
+    op($("hazeFar"), .72 * h); op($("hazeNear"), .3 * h);
+    hBands.forEach(b => { set(b.e, "cx", ((b.x + b.v * t * 3) % 2600) - 340); op(b.e, .45 * h); });
+    parts.forEach(p => { set(p.e, "cx", ((p.x + p.vx * t) % 1980 + 1980) % 1980 - 30); set(p.e, "cy", p.y + p.vy * t + Math.sin(t * 1.3 + p.ph) * 6); set(p.e, "r", p.r); op(p.e, (.25 + .45 * (.5 + .5 * Math.sin(t * 2 + p.ph))) * h); });
+    op($("titleCard"), win(t, .5, 5.6, .35));
+    set($("titleCard"), "transform", `translate(960 540) scale(${.92 + .08 * pop(t, .5) + .02 * ramp(t, .8, 5.6)}) translate(-960 -540)`);
+    op($("psiBadge"), win(t, 2.6, 12.6, .3));
+    set($("psiBadge"), "transform", `translate(1570 155) scale(${pop(t, 2.6)}) translate(-1570 -155)`);
+    op($("redPulse"), win(t, 8.25, 9.6, .25) * (.7 + .3 * Math.sin(t * 9)));
+    op(yearsLbl, win(t, 9.7, 12.6, .3));
+    years.forEach((g, i) => { const a = 10.1 + i * .55; op(g, win(t, a, 12.6, .25)); set(g, "transform", `translate(${710 + i * 260} 428) scale(${pop(t, a)}) translate(${-(710 + i * 260)} -428)`); });
+  }
+
+  /* ---- M ---- */
+  if (vM > 0) {
+    const c = camAt(MK, t, ["lon", "lat", "s"]);
+    const [cx, cy] = P(c.lon, c.lat), s = c.s, inv = 1 / s;
+    set($("camM"), "transform", `translate(960 520) scale(${s}) translate(${-cx} ${-cy})`);
+    const pk = ((t - 13) % 1.6) / 1.6;
+    set(sgPulse, "r", 10 + pk * 30 * Math.max(inv, .4)); op(sgPulse, (1 - pk) * .9);
+    const tagS = Math.max(inv * 1.5, .8);
+    set(sgTag, "transform", `translate(${SG[0]} ${SG[1]}) scale(${tagS}) translate(${-SG[0]} ${-SG[1]})`);
+    op(sgTag, ramp(t, 13.0, 13.5));
+    // opening path (13.3 -> 17.4), fades at 22.6
+    const pathsOn = 1 - ramp(t, 22.4, 22.8);
+    const p1 = ramp(t, 13.3, 16.6), p2 = ramp(t, 16.6, 18.2);
+    dots1.forEach((d, i) => op(d, i / dots1.length <= p1 ? .95 * pathsOn : 0));
+    dots2.forEach((d, i) => op(d, i / dots2.length <= p2 ? .6 * pathsOn : 0));
+    // main fires
+    const f1on = Math.max(ramp(t, 16.6, 17.1) * (1 - ramp(t, 22.4, 22.8)), ramp(t, 27.2, 27.6));
+    const f2on = Math.max(ramp(t, 17.6, 18.1) * (1 - ramp(t, 22.4, 22.8)), ramp(t, 27.5, 27.9));
+    const flare = 1 + .9 * win(t, 44.3, 46.4, .3);
+    [[fire1, f1on, flare], [fire2, f2on, 1]].forEach(([f, o, fl]) => { op(f.g, o); set(f.glow, "r", 60 * flick * fl); });
+    extraFires.forEach(f => { op(f.g, ramp(t, f.t0, f.t0 + .25)); set(f.g, "transform", `translate(${f.p[0]} ${f.p[1]}) scale(${pop(t, f.t0)}) translate(${-f.p[0]} ${-f.p[1]})`); set(f.glow, "r", 42 * flick); });
+    // basket (opening)
+    op(bk, win(t, 19.2, 22.6, .3));
+    set(bk, "transform", `translate(${BP[0]} ${BP[1]}) scale(${pop(t, 19.2) * Math.max(inv * 1.3, .9)}) translate(${-BP[0]} ${-BP[1]})`);
+    const bpk = ((t - 19.2) % 1.4) / 1.4; set(bkPulse, "r", 40 + bpk * 30); op(bkPulse, (1 - bpk) * .8);
+    // beat 2 events
+    op(qBub, win(t, 23.0, 24.7, .25)); set(qBub, "transform", `translate(${SG[0] - 40} ${SG[1] - 60}) scale(${pop(t, 23.0) * Math.max(inv * 1.6, .8)}) translate(${-(SG[0] - 40)} ${-(SG[1] - 60)})`);
+    op(stamp, win(t, 24.7, 26.3, .2)); set(stamp, "transform", `translate(${SG[0]} ${SG[1] + 55}) rotate(-10) scale(${(1.6 - .6 * ramp(t, 24.7, 24.95)) * Math.max(inv * 1.6, .8)}) translate(${-SG[0]} ${-(SG[1] + 55)})`);
+    op(chDry, win(t, 26.4, 34.9, .3));
+    op(chMon, win(t, 34.9, 42.0, .3));
+    ["sum", "kal"].forEach((k, i) => { const a = [28.9, 30.2][i]; const on = win(t, a, a + 1.6, .25); set(LBL[k], "fill", mix("#6b5a3c", "#d9443b", on)); });
+    op($("indo"), .45 * win(t, 31.3, 33.3, .3)); op(indoLbl, win(t, 31.4, 33.3, .3));
+    set(LBL.mal, "fill", mix("#6b5a3c", "#d9443b", win(t, 33.4, 34.9, .25)));
+    op($("wind"), ramp(t, 36.4, 37.2) * (1 - ramp(t, 44.2, 44.6)));
+    winds.forEach(w => set(w, "stroke-dashoffset", -t * 90));
+    const pOn = ramp(t, 38.3, 39.0);
+    puffs.forEach(p => { const k = ((t * .2 + p.ph) % 1); const dx = 330, dy = -400;
+      set(p.e, "cx", p.src[0] + dx * k + p.jx * k); set(p.e, "cy", p.src[1] + dy * k + p.jy * k); set(p.e, "r", p.r * (.6 + k * 1.6)); op(p.e, pOn * .5 * Math.sin(k * Math.PI)); });
+    op($("mapHaze"), .3 * ramp(t, 40.0, 41.2) * (1 - ramp(t, 44.0, 44.5)));
+    const tr = ramp(t, 42.2, 44.1);
+    op(truck, win(t, 42.1, 44.3, .2));
+    set(truck, "transform", `translate(${lerp(F1[0], SG[0] - 10, tr)} ${lerp(F1[1], SG[1] + 40, tr) - 16}) scale(1.5)`);
+    op(causeTag, win(t, 44.5, 46.4, .2)); set(causeTag, "transform", `translate(${F1[0]} ${F1[1]}) scale(${pop(t, 44.5) * Math.max(inv * 1.4, .45)}) translate(${-F1[0]} ${-F1[1]})`);
+  }
+
+  /* ---- P ---- */
+  if (vP > 0) {
+    const c = camAt(PK, t, ["x", "y", "s"]);
+    set($("camP"), "transform", `translate(960 540) scale(${c.s}) translate(${-c.x} ${-c.y})`);
+    // beat 3
+    op($("pQ"), win(t, 46.8, 52.2, .3));
+    op(chNotSoil, win(t, 50.8, 52.6, .25));
+    op($("pPeat"), win(t, 52.6, 54.5, .25)); set($("pPeat"), "transform", `translate(960 560) scale(${pop(t, 52.6)}) translate(-960 -560)`);
+    set($("pGround"), "fill", mix("#3b2a1d", "#7d8f86", ramp(t, 54.2, 54.6)));
+    layers.forEach((g, i) => { const a = ramp(t, 54.6 + i * .45, 54.95 + i * .45); op(g, a); set(g, "transform", `translate(0 ${(1 - a) * -30 + (i === NL - 1 ? -6 * win(t, 65.7, 66.4, .2) : 0)})`); });
+    const fillK = clamp((t - 54.6) / (NL * .45));
+    leaves.forEach(l => { const k = ((t * .45 + l.ph) % 1); set(l.e, "cx", l.x + Math.sin(k * 8 + l.x) * 20); set(l.e, "cy", lerp(200, LB - fillK * (LB - LT), k)); op(l.e, (ramp(t, 54.6, 55.0) * (1 - ramp(t, 59.0, 59.6)) + win(t, 65.6, 66.6, .2)) * Math.min(1, (1 - k) * 4)); });
+    op($("pSide"), win(t, 57.7, 63.4, .3));
+    // water: rises 59.4 -> 60.6, drains 72.0 -> 73.8
+    const wl = lerp(lerp(LB, LT + 24, ease(ramp(t, 59.4, 60.6))), 700, ease(ramp(t, 72.0, 73.8)));
+    let wd = `M-600 ${LB} L-600 ${wl}`; for (let x = -600; x <= 2520; x += 40) wd += ` L${x} ${wl + Math.sin(x / 70 + t * 2) * 6}`; wd += ` L2520 ${LB} Z`;
+    set($("pWater"), "d", wd); op($("pWater"), .2 * ramp(t, 59.4, 59.8));
+    op(chWet, win(t, 61.6, 69.0, .3)); op(chRot, win(t, 63.5, 69.0, .3)); op(chCarb, win(t, 66.4, 69.0, .3));
+    carbons.forEach(cb => op(cb.g, win(t, 66.6 + cb.d * 1.4, 69.0, .25) * (.75 + .25 * Math.sin(t * 3 + cb.d * 9))));
+    // beat 4
+    op($("pDigger"), win(t, 69.5, 74.0, .3));
+    set($("pDigger"), "transform", `translate(${lerp(-200, 560, ease(ramp(t, 69.5, 70.8)))} 340)`);
+    set(arm, "transform", `rotate(${Math.sin(t * 4) * 6 * ramp(t, 70.8, 71.0)} 20 -50)`);
+    op($("pCanal"), ramp(t, 70.9, 71.4));
+    drainArrows.forEach((a, i) => { const k = ((t - 72) * .8 + i * .25) % 1; op(a, win(t, 72.0, 74.4, .3) * (.4 + .6 * Math.sin(k * Math.PI))); set(a, "transform", `translate(${-k * 60} 0)`); });
+    op($("pTrees"), 1 - ramp(t, 73.6, 74.2)); op($("pPalms"), ramp(t, 73.8, 74.4));
+    op($("pDry"), .45 * ramp(t, 74.6, 75.8)); op($("pCracks"), ramp(t, 75.2, 75.8));
+    op(chFuel, win(t, 77.2, 80.8, .25));
+    const fOn = ramp(t, 78.9, 79.3);
+    op(pfGlow, fOn * (1 - .4 * ramp(t, 89.9, 90.6))); set(pfGlow, "rx", 220 * flick);
+    flames.forEach((f, i) => { const h = (60 + 40 * Math.sin(t * 9 + f.ph) + 30 * Math.sin(t * 13 + i)) * fOn * (1 - .6 * ramp(t, 89.9, 90.6));
+      set(f.e, "d", `M${f.x - 22} 340 Q${f.x - 14} ${340 - h * .5} ${f.x + Math.sin(t * 7 + i) * 8} ${340 - h} Q${f.x + 14} ${340 - h * .5} ${f.x + 22} 340 Z`); op(f.e, fOn); });
+    const u = ease(ramp(t, 82.9, 86.4));
+    set(under, "rx", 650 * u * (1 + .04 * flick)); set(under, "ry", 150 * u); op(under, .9 * u);
+    embers.forEach((m, i) => { set(m.e, "cx", 1250 + m.x * 1200 * u); set(m.e, "cy", 470 + m.y * 260 * u); op(m.e, u * (.5 + .5 * Math.sin(t * 6 + i))); });
+    op($("pDepth"), win(t, 85.3, 87.8, .25));
+    op(chWeeks, win(t, 86.6, 89.8, .25)); weeksDay.textContent = "day " + Math.max(1, Math.round(lerp(1, 28, ramp(t, 86.8, 88.6))));
+    // helicopter
+    op($("pHeli"), win(t, 87.9, 91.4, .3));
+    const hx = lerp(2300, 1250, ease(ramp(t, 87.9, 88.9))), hy = 120 + Math.sin(t * 2) * 6;
+    set($("pHeli"), "transform", `translate(${hx} ${hy})`);
+    set(rotor, "transform", `scale(${Math.cos(t * 40)} 1)`);
+    drops.forEach(d => { const k = ((t - 89) * 1.3 + d.ph) % 1; const on = win(t, 89.0, 90.8, .2);
+      set(d.e, "cx", 1250 + d.dx); set(d.e, "cy", hy + 150 + k * (340 - hy - 150)); op(d.e, on * (k > 0 ? 1 : 0)); });
+    set(splash, "rx", 160 * ramp(t, 89.3, 89.9)); op(splash, .7 * win(t, 89.3, 91.0, .3));
+    op(chWater, win(t, 89.9, 91.6, .25));
+    o2s.forEach((o, i) => { const k = ((t - 91.6) * .45 + o.ph) % 1; set(o.g, "transform", `translate(${o.x} ${lerp(80, 330, k)}) scale(.9)`); op(o.g, win(t, 91.7, 94.6, .3) * (i < 4 ? 1 : 0) * Math.min(1, (1 - k) * 3)); });
+    op(chO2, win(t, 93.2, 94.7, .25));
+    op(eq, win(t, 94.7, 99.0, .3)); op(eqA, ramp(t, 94.9, 95.2)); op(eqB, ramp(t, 95.6, 95.9));
+    bigSmoke.forEach((b, i) => { const on = ramp(t, 98.9 + (i % 6) * .12, 99.6 + (i % 6) * .12); const k = clamp((t - 98.9) / 2.2);
+      set(b.e, "cx", b.x + Math.sin(i) * 80 * k); set(b.e, "cy", lerp(380, -100, k * (.5 + b.ph * .5))); set(b.e, "r", b.r * (.4 + k)); op(b.e, on * .9); });
+  }
+
+  /* ---- end card ---- */
+  if (vE > 0) { ["e1", "e2", "e3"].forEach((id, i) => { op($(id), ramp(t, 101.1 + i * .5, 101.5 + i * .5)); }); }
+
+  /* ---- captions ---- */
+  capEls.forEach(({c, g, spans}) => {
+    const a = ramp(t, c.t0, c.t0 + .12) * (1 - ramp(t, c.t1 - .1, c.t1));
+    op(g, a);
+    set(g, "transform", `translate(960 960) scale(${.94 + .06 * ramp(t, c.t0, c.t0 + .15)}) translate(-960 -960)`);
+    if (!c.phrase && a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .05 && (i === c.w.length - 1 || t < c.w[i + 1].a - .05) ? "#ffcf5a" : "#fff"));
+  });
+  op($("shade"), 1 - vE); op($("tag"), ramp(t, 5.4, 6.0) * (1 - vE));
+  op($("flash"), .5 * (win(t, 12.55, 12.95, .2) + win(t, 46.05, 46.45, .2) + win(t, 100.55, 100.95, .2)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .4), ramp(t, END - .6, END)));
+};
+window.render(0);
+</script>
+</body></html>

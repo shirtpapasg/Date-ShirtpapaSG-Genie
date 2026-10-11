@@ -1,0 +1,1372 @@
+{
+ "1": {
+  "kws": [
+   [
+    "PARTS",
+    "PARTS"
+   ],
+   [
+    "WORK TOGETHER",
+    "WORK TOGETHER"
+   ],
+   [
+    "SYSTEM",
+    "SYSTEM"
+   ],
+   [
+    "FUNCTION",
+    "FUNCTION"
+   ],
+   [
+    "ONE PART FAILS → SYSTEM AFFECTED",
+    "ONE PART FAILS"
+   ],
+   [
+    "RESPIRATORY SYSTEM",
+    "RESPIRATORY SYSTEM"
+   ],
+   [
+    "HABIT STACKING",
+    "HABIT STACKING"
+   ],
+   [
+    "MIND MAP",
+    "MIND MAP"
+   ]
+  ],
+  "ch": "plants",
+  "c": "SYSTEM",
+  "b": [
+   [
+    "🚲 BIKE",
+    [
+     "pedals",
+     "chain"
+    ]
+   ],
+   [
+    "🧍 BODY",
+    [
+     "lungs",
+     "heart"
+    ]
+   ],
+   [
+    "🌳 TREE",
+    [
+     "roots",
+     "leaves"
+    ]
+   ]
+  ]
+ },
+ "2": {
+  "kws": [
+   [
+    "LEAVES",
+    "LEAVES"
+   ],
+   [
+    "GASES",
+    "GASES"
+   ],
+   [
+    "STEM",
+    "STEM"
+   ],
+   [
+    "TRANSPORT",
+    "TRANSPORT"
+   ],
+   [
+    "ROOTS",
+    "ROOTS"
+   ],
+   [
+    "ABSORB",
+    "ABSORB"
+   ],
+   [
+    "MINERAL SALTS",
+    "MINERAL SALTS"
+   ],
+   [
+    "MAKE IT OBVIOUS",
+    "MAKE IT OBVIOUS"
+   ],
+   [
+    "MIND MAP",
+    "MIND MAP"
+   ]
+  ],
+  "ch": "plants",
+  "c": "PLANT SYSTEM",
+  "b": [
+   [
+    "🍃 LEAVES",
+    [
+     "make food",
+     "gases in & out"
+    ]
+   ],
+   [
+    "🌿 STEM",
+    [
+     "holds upright",
+     "transports"
+    ]
+   ],
+   [
+    "🥕 ROOTS",
+    [
+     "anchor",
+     "absorb"
+    ]
+   ]
+  ]
+ },
+ "3": {
+  "kws": [
+   [
+    "LEAF BLADE",
+    "LEAF BLADE"
+   ],
+   [
+    "LEAF STALK",
+    "LEAF STALK"
+   ],
+   [
+    "MAIN VEIN",
+    "MAIN VEIN"
+   ],
+   [
+    "SMALLER VEINS",
+    "SMALLER VEINS"
+   ],
+   [
+    "PARALLEL VEINS",
+    "PARALLEL VEINS"
+   ],
+   [
+    "NET VEINS",
+    "NET VEINS"
+   ],
+   [
+    "OBSERVE",
+    "OBSERVE"
+   ],
+   [
+    "ASK",
+    "ASK"
+   ],
+   [
+    "INVESTIGATE",
+    "INVESTIGATE"
+   ],
+   [
+    "TWO-MINUTE RULE",
+    "TWO-MINUTE RULE"
+   ],
+   [
+    "MIND MAP",
+    "MIND MAP"
+   ]
+  ],
+  "ch": "plants",
+  "c": "LEAF",
+  "b": [
+   [
+    "4 PARTS",
+    [
+     "blade · stalk",
+     "main vein · smaller veins"
+    ]
+   ],
+   [
+    "2 VEIN PATTERNS",
+    [
+     "parallel",
+     "net"
+    ]
+   ],
+   [
+    "DIFFERENCES",
+    [
+     "edge · shape",
+     "colour · texture"
+    ]
+   ]
+  ]
+ },
+ "4": {
+  "kws": [
+   [
+    "WOODY STEM",
+    "WOODY STEM"
+   ],
+   [
+    "NON-WOODY STEM",
+    "NON-WOODY STEM"
+   ],
+   [
+    "STORES WATER",
+    "STORES WATER"
+   ],
+   [
+    "SPINES = LEAVES",
+    "SPINES = LEAVES"
+   ],
+   [
+    "GREEN STEM MAKES FOOD",
+    "GREEN STEM = FOOD"
+   ],
+   [
+    "CLIMBERS",
+    "CLIMBERS"
+   ],
+   [
+    "CREEPERS",
+    "CREEPERS"
+   ],
+   [
+    "STORAGE ROOTS",
+    "STORAGE ROOTS"
+   ],
+   [
+    "STEM CUTTING",
+    "STEM CUTTING"
+   ],
+   [
+    "PERSEVERANCE",
+    "PERSEVERANCE"
+   ],
+   [
+    "MAKE IT SATISFYING",
+    "MAKE IT SATISFYING"
+   ]
+  ],
+  "ch": "plants",
+  "c": "PLANT PARTS",
+  "b": [
+   [
+    "🍃 LEAVES",
+    [
+     "spines (cactus)"
+    ]
+   ],
+   [
+    "🌿 STEMS",
+    [
+     "woody · non-woody",
+     "climbing"
+    ]
+   ],
+   [
+    "🥕 ROOTS",
+    [
+     "storage",
+     "in water"
+    ]
+   ]
+  ]
+ },
+ "5": {
+  "kws": [
+   [
+    "MODEL",
+    "MODEL"
+   ],
+   [
+    "RESPIRATORY SYSTEM",
+    "RESPIRATORY SYSTEM"
+   ],
+   [
+    "EXCHANGE OF GASES",
+    "EXCHANGE OF GASES"
+   ],
+   [
+    "CIRCULATORY SYSTEM",
+    "CIRCULATORY SYSTEM"
+   ],
+   [
+    "SKELETAL SYSTEM",
+    "SKELETAL SYSTEM"
+   ],
+   [
+    "FEMUR",
+    "FEMUR"
+   ],
+   [
+    "MUSCULAR SYSTEM",
+    "MUSCULAR SYSTEM"
+   ],
+   [
+    "CONTRACT / RELAX",
+    "CONTRACT / RELAX"
+   ],
+   [
+    "DIGESTIVE SYSTEM",
+    "DIGESTIVE SYSTEM"
+   ],
+   [
+    "NEVER MISS TWICE",
+    "NEVER MISS TWICE"
+   ]
+  ],
+  "ch": "digestive",
+  "c": "HUMAN BODY SYSTEMS",
+  "b": [
+   [
+    "🫁 RESPIRATORY",
+    []
+   ],
+   [
+    "❤️ CIRCULATORY",
+    []
+   ],
+   [
+    "🦴 SKELETAL",
+    []
+   ],
+   [
+    "💪 MUSCULAR",
+    []
+   ],
+   [
+    "🍽️ DIGESTIVE",
+    []
+   ]
+  ]
+ },
+ "6": {
+  "kws": [
+   [
+    "DIGESTION",
+    "DIGESTION"
+   ],
+   [
+    "SIMPLER SUBSTANCES",
+    "SIMPLER SUBSTANCES"
+   ],
+   [
+    "TEETH",
+    "TEETH"
+   ],
+   [
+    "MORE SURFACE EXPOSED",
+    "MORE SURFACE"
+   ],
+   [
+    "SALIVA",
+    "SALIVA"
+   ],
+   [
+    "DIGESTION BEGINS IN MOUTH",
+    "BEGINS IN MOUTH"
+   ],
+   [
+    "GULLET",
+    "GULLET"
+   ],
+   [
+    "WINDPIPE",
+    "WINDPIPE"
+   ],
+   [
+    "STOMACH",
+    "STOMACH"
+   ],
+   [
+    "DIGESTIVE JUICES",
+    "DIGESTIVE JUICES"
+   ],
+   [
+    "PLAN TIME + PLACE",
+    "PLAN TIME + PLACE"
+   ]
+  ],
+  "ch": "digestive",
+  "c": "DIGESTIVE SYSTEM",
+  "b": [
+   [
+    "👄 MOUTH",
+    [
+     "teeth · saliva · tongue"
+    ]
+   ],
+   [
+    "⬇️ GULLET",
+    [
+     "pushes food down"
+    ]
+   ],
+   [
+    "🌀 STOMACH",
+    [
+     "mixes with juices"
+    ]
+   ]
+  ]
+ },
+ "7": {
+  "kws": [
+   [
+    "SMALL INTESTINE",
+    "SMALL INTESTINE"
+   ],
+   [
+    "MORE DIGESTIVE JUICES",
+    "MORE JUICES"
+   ],
+   [
+    "DIGESTION ENDS HERE",
+    "DIGESTION ENDS"
+   ],
+   [
+    "ABSORBED INTO BLOOD",
+    "INTO BLOOD"
+   ],
+   [
+    "LARGE INTESTINE",
+    "LARGE INTESTINE"
+   ],
+   [
+    "ABSORBS WATER",
+    "ABSORBS WATER"
+   ],
+   [
+    "RECTUM + ANUS",
+    "RECTUM + ANUS"
+   ],
+   [
+    "FIBRE",
+    "FIBRE"
+   ],
+   [
+    "MALNOURISHED",
+    "MALNOURISHED"
+   ],
+   [
+    "MAKE IT EASY",
+    "MAKE IT EASY"
+   ]
+  ],
+  "ch": "digestive",
+  "c": "DIGESTIVE SYSTEM",
+  "b": [
+   [
+    "👄 MOUTH",
+    [
+     "digestion begins"
+    ]
+   ],
+   [
+    "⬇️ GULLET",
+    [
+     "pushes food down"
+    ]
+   ],
+   [
+    "🌀 STOMACH",
+    [
+     "mixes with juices"
+    ]
+   ],
+   [
+    "🌀 SMALL INTESTINE",
+    [
+     "digestion ends + into blood"
+    ]
+   ],
+   [
+    "LARGE INTESTINE",
+    [
+     "absorbs water"
+    ]
+   ]
+  ]
+ },
+ "8": {
+  "kws": [
+   [
+    "MATTER",
+    "MATTER"
+   ],
+   [
+    "MASS",
+    "MASS"
+   ],
+   [
+    "BALANCE",
+    "BALANCE"
+   ],
+   [
+    "VOLUME",
+    "VOLUME"
+   ],
+   [
+    "NOT MATTER",
+    "NOT MATTER"
+   ],
+   [
+    "AIR HAS MASS",
+    "AIR: MASS"
+   ],
+   [
+    "AIR TAKES UP SPACE",
+    "AIR: SPACE"
+   ],
+   [
+    "AIR IS MATTER",
+    "AIR IS MATTER"
+   ],
+   [
+    "I AM A SCIENTIST",
+    "IDENTITY"
+   ]
+  ],
+  "ch": "matter",
+  "c": "MATTER",
+  "b": [
+   [
+    "⚖️ HAS MASS",
+    [
+     "kg, g",
+     "use a balance"
+    ]
+   ],
+   [
+    "📦 TAKES UP SPACE",
+    [
+     "volume"
+    ]
+   ],
+   [
+    "✗ NOT MATTER",
+    [
+     "light · shadow",
+     "heat · sound"
+    ]
+   ]
+  ]
+ },
+ "9": {
+  "kws": [
+   [
+    "3 STATES OF MATTER",
+    "3 STATES"
+   ],
+   [
+    "DEFINITE SHAPE",
+    "DEFINITE SHAPE"
+   ],
+   [
+    "DEFINITE VOLUME",
+    "DEFINITE VOLUME"
+   ],
+   [
+    "SOLID",
+    "SOLID"
+   ],
+   [
+    "LIQUID",
+    "LIQUID"
+   ],
+   [
+    "GAS",
+    "GAS"
+   ],
+   [
+    "GAS CAN BE COMPRESSED",
+    "GAS: SQUEEZABLE"
+   ],
+   [
+    "HELIUM",
+    "HELIUM"
+   ],
+   [
+    "HABIT TRACKER",
+    "HABIT TRACKER"
+   ]
+  ],
+  "ch": "matter",
+  "c": "STATES OF MATTER",
+  "b": [
+   [
+    "🧊 SOLID",
+    [
+     "shape ✓ volume ✓",
+     "squeeze ✗"
+    ]
+   ],
+   [
+    "💧 LIQUID",
+    [
+     "shape ✗ volume ✓",
+     "squeeze ✗"
+    ]
+   ],
+   [
+    "💨 GAS",
+    [
+     "shape ✗ volume ✗",
+     "squeeze ✓"
+    ]
+   ]
+  ]
+ },
+ "10": {
+  "kws": [
+   [
+    "KILOGRAMS (kg)",
+    "KILOGRAMS (kg)"
+   ],
+   [
+    "GRAMS (g)",
+    "GRAMS (g)"
+   ],
+   [
+    "ELECTRONIC BALANCE",
+    "E-BALANCE"
+   ],
+   [
+    "FLAT + STEADY",
+    "FLAT + STEADY"
+   ],
+   [
+    "READS ZERO",
+    "READS ZERO"
+   ],
+   [
+    "ZERO ERROR",
+    "ZERO ERROR"
+   ],
+   [
+    "TARE BUTTON",
+    "TARE BUTTON"
+   ],
+   [
+    "SUBTRACT",
+    "SUBTRACT"
+   ],
+   [
+    "AIR: 11 g",
+    "AIR: 11 g"
+   ],
+   [
+    "MAKE IT ATTRACTIVE",
+    "ATTRACTIVE"
+   ]
+  ],
+  "ch": "matter",
+  "c": "MATTER",
+  "b": [
+   [
+    "⚖️ HAS MASS",
+    [
+     "kg and g",
+     "electronic balance"
+    ]
+   ],
+   [
+    "📦 TAKES UP SPACE",
+    []
+   ]
+  ]
+ },
+ "11": {
+  "kws": [
+   [
+    "MEASURING CYLINDER",
+    "MEAS. CYLINDER"
+   ],
+   [
+    "MORE ACCURATE",
+    "MORE ACCURATE"
+   ],
+   [
+    "cm³",
+    "cm³"
+   ],
+   [
+    "ml",
+    "ml"
+   ],
+   [
+    "1 cm³ = 1 ml",
+    "1 cm³ = 1 ml"
+   ],
+   [
+    "FLAT SURFACE",
+    "FLAT SURFACE"
+   ],
+   [
+    "EYE LEVEL",
+    "EYE LEVEL"
+   ],
+   [
+    "BOTTOM OF THE CURVE",
+    "READ THE BOTTOM"
+   ],
+   [
+    "WATER RISES",
+    "WATER RISES"
+   ],
+   [
+    "STUDY BUDDY",
+    "STUDY BUDDY"
+   ]
+  ],
+  "ch": "matter",
+  "c": "MATTER",
+  "b": [
+   [
+    "⚖️ HAS MASS",
+    []
+   ],
+   [
+    "📦 TAKES UP SPACE",
+    [
+     "volume: cm³ and ml",
+     "measuring cylinder"
+    ]
+   ]
+  ]
+ },
+ "12": {
+  "kws": [
+   [
+    "HYPOTHESIS",
+    "HYPOTHESIS"
+   ],
+   [
+    "PREDICTION FROM WHAT YOU KNOW",
+    "PREDICTION"
+   ],
+   [
+    "FAIR TEST",
+    "FAIR TEST"
+   ],
+   [
+    "CHANGE ONLY 1 VARIABLE",
+    "CHANGE 1 THING"
+   ],
+   [
+    "MEASURED VARIABLE",
+    "MEASURE"
+   ],
+   [
+    "RESULTS SUPPORT HYPOTHESIS",
+    "SUPPORTED ✓"
+   ],
+   [
+    "SHAPE DOESN'T CHANGE MASS",
+    "SHAPE ≠ MASS"
+   ],
+   [
+    "TREAT IT LIKE AN EXPERIMENT",
+    "EXPERIMENT IT"
+   ]
+  ],
+  "ch": "matter",
+  "c": "MATTER",
+  "b": [
+   [
+    "⚖️ HAS MASS",
+    []
+   ],
+   [
+    "📦 TAKES UP SPACE",
+    []
+   ],
+   [
+    "🔬 HOW SCIENTISTS INVESTIGATE",
+    [
+     "hypothesis",
+     "fair test: change 1 variable"
+    ]
+   ]
+  ]
+ },
+ "13": {
+  "kws": [
+   [
+    "ENERGY",
+    "ENERGY"
+   ],
+   [
+    "FORMS OF ENERGY",
+    "FORMS OF ENERGY"
+   ],
+   [
+    "SOURCE OF LIGHT",
+    "LIGHT SOURCE"
+   ],
+   [
+    "NATURAL",
+    "NATURAL"
+   ],
+   [
+    "MAN-MADE",
+    "MAN-MADE"
+   ],
+   [
+    "THE SUN IS A STAR",
+    "SUN = STAR"
+   ],
+   [
+    "LIGHTNING",
+    "LIGHTNING"
+   ],
+   [
+    "LIVING LIGHT",
+    "LIVING LIGHT"
+   ],
+   [
+    "PERSISTENCE",
+    "PERSISTENCE"
+   ],
+   [
+    "CELEBRATE SMALL WINS",
+    "CELEBRATE"
+   ]
+  ],
+  "ch": "light",
+  "c": "LIGHT",
+  "b": [
+   [
+    "🌿 NATURAL SOURCES",
+    [
+     "Sun · lightning",
+     "fireflies"
+    ]
+   ],
+   [
+    "🏭 MAN-MADE SOURCES",
+    [
+     "light bulbs",
+     "candles · torches"
+    ]
+   ]
+  ]
+ },
+ "14": {
+  "kws": [
+   [
+    "LIGHT MUST ENTER THE EYES",
+    "ENTERS EYES"
+   ],
+   [
+    "SEEN DIRECTLY",
+    "SEEN DIRECTLY"
+   ],
+   [
+    "LIGHT FALLS ON THE OBJECT",
+    "FALLS ON"
+   ],
+   [
+    "REFLECTION",
+    "REFLECTION"
+   ],
+   [
+    "MOON: NOT A SOURCE",
+    "MOON ≠ SOURCE"
+   ],
+   [
+    "BORROWED SUNLIGHT",
+    "BORROWED SUNLIGHT"
+   ],
+   [
+    "EXAM TIP",
+    "EXAM TIP"
+   ],
+   [
+    "TEACH IT",
+    "TEACH IT"
+   ]
+  ],
+  "ch": "light",
+  "c": "LIGHT",
+  "b": [
+   [
+    "🌿 NATURAL SOURCES",
+    []
+   ],
+   [
+    "🏭 MAN-MADE SOURCES",
+    []
+   ],
+   [
+    "👁️ HOW WE SEE",
+    [
+     "directly from a source",
+     "reflected from objects"
+    ]
+   ]
+  ]
+ },
+ "15": {
+  "kws": [
+   [
+    "OPAQUE",
+    "OPAQUE"
+   ],
+   [
+    "TRANSLUCENT",
+    "TRANSLUCENT"
+   ],
+   [
+    "TRANSPARENT",
+    "TRANSPARENT"
+   ],
+   [
+    "SHADOW",
+    "SHADOW"
+   ],
+   [
+    "LIGHT TRAVELS IN STRAIGHT LINES",
+    "STRAIGHT LINES"
+   ],
+   [
+    "THREE-CARD TEST",
+    "3-CARD TEST"
+   ],
+   [
+    "OPAQUE BLOCKS ALL LIGHT",
+    "OPAQUE BLOCKS"
+   ],
+   [
+    "LESS DARK SHADOW",
+    "LESS DARK"
+   ],
+   [
+    "SPACE IT OUT",
+    "SPACE IT OUT"
+   ]
+  ],
+  "ch": "light",
+  "c": "LIGHT",
+  "b": [
+   [
+    "🌿 NATURAL",
+    []
+   ],
+   [
+    "🏭 MAN-MADE",
+    []
+   ],
+   [
+    "👁️ HOW WE SEE",
+    []
+   ],
+   [
+    "👤 SHADOWS",
+    [
+     "opaque ➜ dark shadow",
+     "translucent ➜ less dark"
+    ]
+   ]
+  ]
+ },
+ "16": {
+  "kws": [
+   [
+    "SCREEN",
+    "SCREEN"
+   ],
+   [
+    "TWO DISTANCES",
+    "TWO DISTANCES"
+   ],
+   [
+    "LIGHT CLOSER = BIGGER",
+    "LIGHT CLOSER"
+   ],
+   [
+    "SCREEN FURTHER = BIGGER",
+    "SCREEN FURTHER"
+   ],
+   [
+    "BOTH DISTANCES CHANGE",
+    "BOTH CHANGE"
+   ],
+   [
+    "RAY MODEL",
+    "RAY MODEL"
+   ],
+   [
+    "REMOVE DISTRACTIONS",
+    "NO DISTRACTIONS"
+   ]
+  ],
+  "ch": "light",
+  "c": "LIGHT",
+  "b": [
+   [
+    "🌿 NATURAL",
+    []
+   ],
+   [
+    "🏭 MAN-MADE",
+    []
+   ],
+   [
+    "👁️ HOW WE SEE",
+    []
+   ],
+   [
+    "👤 SHADOWS",
+    [
+     "size: nearer the light ➜ bigger",
+     "size: further from screen ➜ bigger"
+    ]
+   ]
+  ]
+ },
+ "17": {
+  "kws": [
+   [
+    "SHADOW SHAPE",
+    "SHADOW SHAPE"
+   ],
+   [
+    "PART FACING THE LIGHT",
+    "PART FACING LIGHT"
+   ],
+   [
+    "SIDE = TRIANGLE",
+    "TRIANGLE"
+   ],
+   [
+    "BASE = CIRCLE",
+    "CIRCLE"
+   ],
+   [
+    "SUN LOW = LONG SHADOW",
+    "SUN LOW = LONG"
+   ],
+   [
+    "NOON = SHORTEST",
+    "NOON = SHORTEST"
+   ],
+   [
+    "SUNDIAL",
+    "SUNDIAL"
+   ],
+   [
+    "TEST YOURSELF",
+    "TEST YOURSELF"
+   ]
+  ],
+  "ch": "light",
+  "c": "LIGHT",
+  "b": [
+   [
+    "🌿 NATURAL",
+    []
+   ],
+   [
+    "🏭 MAN-MADE",
+    []
+   ],
+   [
+    "👁️ HOW WE SEE",
+    []
+   ],
+   [
+    "👤 SHADOWS",
+    [
+     "shape: the part facing the light",
+     "outdoor: longest morning + evening, shortest noon"
+    ]
+   ]
+  ]
+ },
+ "18": {
+  "kws": [
+   [
+    "TEMPERATURE",
+    "TEMPERATURE"
+   ],
+   [
+    "DEGREES CELSIUS (°C)",
+    "°C"
+   ],
+   [
+    "THERMAL CAMERA",
+    "THERMAL CAMERA"
+   ],
+   [
+    "THERMOMETER",
+    "THERMOMETER"
+   ],
+   [
+    "DIGITAL THERMOMETER",
+    "DIGITAL THERMOMETER"
+   ],
+   [
+    "INFRARED THERMOMETER",
+    "INFRARED THERMOMETER"
+   ],
+   [
+    "LAB THERMOMETER",
+    "LAB THERMOMETER"
+   ],
+   [
+    "BULB FULLY IN",
+    "BULB FULLY IN"
+   ],
+   [
+    "DATA LOGGER",
+    "DATA LOGGER"
+   ],
+   [
+    "MEASURE PROGRESS",
+    "TRACK SCORES"
+   ]
+  ],
+  "ch": "heat",
+  "c": "HEAT",
+  "b": [
+   [
+    "🌡️ TEMPERATURE",
+    [
+     "measured in °C",
+     "thermometer"
+    ]
+   ]
+  ]
+ },
+ "19": {
+  "kws": [
+   [
+    "HEAT: A FORM OF ENERGY",
+    "HEAT: FORM OF ENERGY"
+   ],
+   [
+    "GAIN HEAT ➜ RISES",
+    "GAIN ➜ RISES"
+   ],
+   [
+    "LOSE HEAT ➜ FALLS",
+    "LOSE ➜ FALLS"
+   ],
+   [
+    "HEAT FLOWS HOT ➜ COLD",
+    "HOT ➜ COLD"
+   ],
+   [
+    "TEMP: HOW HOT OR COLD",
+    "TEMP: HOW HOT OR COLD"
+   ],
+   [
+    "ROOM TEMPERATURE",
+    "ROOM TEMP"
+   ],
+   [
+    "SURROUNDINGS",
+    "SURROUNDINGS"
+   ],
+   [
+    "ONE-SENTENCE SUMMARY",
+    "1-LINE SUMMARY"
+   ]
+  ],
+  "ch": "heat",
+  "c": "HEAT",
+  "b": [
+   [
+    "🌡️ TEMPERATURE",
+    []
+   ],
+   [
+    "⚡ HEAT (energy)",
+    [
+     "gain heat ➜ temperature rises",
+     "lose heat ➜ temperature falls"
+    ]
+   ]
+  ]
+ },
+ "20": {
+  "kws": [
+   [
+    "HEAT FLOWS HOT ➜ COLD",
+    "HOT ➜ COLD"
+   ],
+   [
+    "COLD DOESN'T FLOW",
+    "NO COLD FLOW"
+   ],
+   [
+    "STOPS WHEN EQUAL",
+    "STOPS AT EQUAL"
+   ],
+   [
+    "HORIZONTAL AXIS",
+    "HORIZ. AXIS"
+   ],
+   [
+    "VERTICAL AXIS",
+    "VERTICAL AXIS"
+   ],
+   [
+    "DATA POINT",
+    "DATA POINT"
+   ],
+   [
+    "SOURCE OF HEAT",
+    "HEAT SOURCE"
+   ],
+   [
+    "HOT SPRINGS",
+    "HOT SPRINGS"
+   ],
+   [
+    "NAME THE DIRECTION",
+    "NAME DIRECTION"
+   ]
+  ],
+  "ch": "heat",
+  "c": "HEAT",
+  "b": [
+   [
+    "🌡️ TEMPERATURE",
+    []
+   ],
+   [
+    "⚡ HEAT (energy)",
+    []
+   ],
+   [
+    "➡️ HEAT FLOW",
+    [
+     "hot ➜ cold",
+     "stops when temperatures are equal"
+    ]
+   ]
+  ]
+ },
+ "21": {
+  "kws": [
+   [
+    "MATERIAL MATTERS",
+    "MATERIAL"
+   ],
+   [
+    "WAX ROD TEST",
+    "WAX ROD TEST"
+   ],
+   [
+    "GOOD CONDUCTOR",
+    "GOOD COND."
+   ],
+   [
+    "METALS",
+    "METALS"
+   ],
+   [
+    "POOR CONDUCTOR",
+    "POOR COND."
+   ],
+   [
+    "AIR = POOR CONDUCTOR",
+    "AIR: POOR"
+   ],
+   [
+    "POLYSTYRENE",
+    "POLYSTYRENE"
+   ],
+   [
+    "LINK TO REAL LIFE",
+    "REAL LIFE"
+   ]
+  ],
+  "ch": "heat",
+  "c": "HEAT",
+  "b": [
+   [
+    "🌡️ TEMPERATURE",
+    []
+   ],
+   [
+    "⚡ HEAT",
+    []
+   ],
+   [
+    "➡️ HEAT FLOW",
+    []
+   ],
+   [
+    "🥄 CONDUCTORS",
+    [
+     "good: metals",
+     "poor: glass · plastic · wood · air"
+    ]
+   ]
+  ]
+ },
+ "22": {
+  "kws": [
+   [
+    "EXPAND = VOLUME UP",
+    "EXPAND"
+   ],
+   [
+    "CONTRACT = VOLUME DOWN",
+    "CONTRACT"
+   ],
+   [
+    "BALL + RING",
+    "BALL + RING"
+   ],
+   [
+    "GASES EXPAND MOST",
+    "GAS: MOST"
+   ],
+   [
+    "EXPANSION GAPS",
+    "GAPS"
+   ],
+   [
+    "CHANGE OF STATE",
+    "STATE CHANGE"
+   ],
+   [
+    "MELT",
+    "MELT"
+   ],
+   [
+    "BIG PICTURE REVIEW",
+    "BIG PICTURE"
+   ]
+  ],
+  "ch": "heat",
+  "c": "HEAT",
+  "b": [
+   [
+    "🌡️ TEMPERATURE",
+    []
+   ],
+   [
+    "⚡ HEAT",
+    []
+   ],
+   [
+    "➡️ HEAT FLOW",
+    []
+   ],
+   [
+    "🥄 CONDUCTORS",
+    []
+   ],
+   [
+    "✨ EFFECTS OF HEAT",
+    [
+     "expansion + contraction",
+     "change of state"
+    ]
+   ]
+  ]
+ }
+}

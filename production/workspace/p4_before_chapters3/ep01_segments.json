@@ -1,0 +1,92 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Your bike has seven main parts. Lose the wrong one, and you go nowhere. Which one? Stay with me, because the answer explains your body, a tree, and how to study smarter."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what a system is. Second, what the function of each part means. And third, what happens when one part fails. Let's get started!"
+ },
+ {
+  "id": "bike1",
+  "scene": "bike",
+  "text": "Let's look at a bike. Pedals. Chain. Wheels. Seat. Handlebars. Brakes. And a bell. Each of these parts has its own special job."
+ },
+ {
+  "id": "bike2",
+  "scene": "bike",
+  "text": "Your feet push the pedals. The pedals turn the chain. The chain turns the back wheel. And whoosh, the bike rolls forward. No single part can do that alone. The parts have to work together."
+ },
+ {
+  "id": "def1",
+  "scene": "define",
+  "text": "Scientists have a name for this. When different parts work together to do a job, we call it a system."
+ },
+ {
+  "id": "def2",
+  "scene": "define",
+  "text": "The job of each part is called its function. The pedals have a function. The chain has a function. And together, all the parts carry out one big function. For a bike, that is moving you from place to place."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Quick challenge! Pause the video and predict. Which part could you lose and still ride? The chain? A pedal? Some spokes? Or the bell?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Ready? Without the chain, the pedals spin, but the wheel does not turn. Without a pedal, you cannot push properly. Broken spokes make the wheel wobbly and weak. But without the bell, the bike still moves. It is just less safe, because nobody hears you coming."
+ },
+ {
+  "id": "rule",
+  "scene": "rule",
+  "text": "So here is the big rule. If one part fails, the whole system is likely to be affected."
+ },
+ {
+  "id": "body1",
+  "scene": "body",
+  "text": "Now look at you. Right now, your body is running several systems at the same time. When you breathe, your nose, windpipe and lungs work together. That is your respiratory system."
+ },
+ {
+  "id": "body2",
+  "scene": "body",
+  "text": "Your heart and blood vessels carry blood around your body. Your bones hold you up and protect you, and your muscles pull on them so you can move. And your digestive system is busy breaking down your breakfast. You will meet every one of these later in this series."
+ },
+ {
+  "id": "tree",
+  "scene": "tree",
+  "text": "Even a tree is a system. In Singapore, you might walk past a giant rain tree. In America, maybe an oak in your backyard. The roots hold the tree firmly in the ground and take in water. The stem carries that water up and holds the tree upright. And the leaves make food for the whole tree. Three parts, three jobs, one living system."
+ },
+ {
+  "id": "world",
+  "scene": "world",
+  "text": "Once you know this, you will see systems everywhere. A train line, with trains, tracks, stations and power. A soccer team, with a goalkeeper, defenders and strikers. If one part stops working, everything slows down."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. A system is made up of different parts. Each part has its own function. The parts work together to carry out a function. And if one part does not work, the whole system may be affected."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Now, here is a secret. Good habits are tiny systems too. Try this one. It is called habit stacking. You stick a new habit onto something you already do every day."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "After I pack my school bag, I will draw a one-minute mind map. Put today's big idea in the middle. System. Then draw three branches. Bike, body, and tree. One minute, every day. Then save your mind maps in TheOneApp, the ultimate science app, so your revision is ready before the exam."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, the part you could lose was the bell. And a bike, your body and a tree really are the same kind of thing. They are all systems. Your turn. Tell me in the comments one system you used today."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

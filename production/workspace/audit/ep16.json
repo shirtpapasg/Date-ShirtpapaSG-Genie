@@ -1,0 +1,72 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "A",
+  "other": "line:",
+  "from": 85.05,
+  "to": 94.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "B",
+  "other": "line:",
+  "from": 85.05,
+  "to": 94.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "C",
+  "other": "line:",
+  "from": 86.3,
+  "to": 94.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌿 NATURAL",
+  "other": "path:",
+  "from": 147.55,
+  "to": 160.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🏭 MAN-MADE",
+  "other": "path:",
+  "from": 147.55,
+  "to": 160.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👁️ HOW WE SEE",
+  "other": "path:",
+  "from": 147.55,
+  "to": 160.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "💡 LIGHT",
+  "other": "path:",
+  "from": 147.55,
+  "to": 160.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👤 SHADOWS",
+  "other": "path:none",
+  "from": 150.05,
+  "to": 160.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "📏 SHADOW SIZE",
+  "other": "path:none",
+  "from": 150.3,
+  "to": 160.8
+ },
+ {
+  "kind": "out-of-box",
+  "text": "✋",
+  "other": "",
+  "from": 165.8,
+  "to": 171.55
+ }
+]

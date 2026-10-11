@@ -1,0 +1,30 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "50 g",
+  "other": "line:",
+  "from": 51.05,
+  "to": 60.55
+ },
+ {
+  "kind": "text-overlap",
+  "text": "ZERO ERROR!",
+  "other": "✓ back to zero",
+  "from": 89.8,
+  "to": 90.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "MATTER",
+  "other": "path:none",
+  "from": 185.8,
+  "to": 195.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚖️ HAS MASS",
+  "other": "path:none",
+  "from": 186.05,
+  "to": 195.8
+ }
+]

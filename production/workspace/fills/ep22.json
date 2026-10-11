@@ -1,0 +1,12 @@
+{
+ "three": "translate(765 525) scale(1.108) translate(-752 -446)",
+ "define": "translate(765 525) scale(1.278) translate(-760 -450)",
+ "ball": "translate(765 525) scale(1.362) translate(-718 -428)",
+ "gas": "translate(765 525) scale(1.158) translate(-760 -473)",
+ "uses": "translate(765 525) scale(1.192) translate(-760 -423)",
+ "state": "translate(765 525) scale(1.29) translate(-773 -560)",
+ "quiz": "translate(765 525) scale(1.098) translate(-767 -467)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.121) translate(-760 -481)",
+ "close": "translate(765 525) scale(1.102) translate(-760 -534)"
+}

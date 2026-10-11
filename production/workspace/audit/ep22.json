@@ -1,0 +1,58 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "SYSTEMS",
+  "other": "line:",
+  "from": 179.05,
+  "to": 183.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "MATTER",
+  "other": "line:",
+  "from": 179.05,
+  "to": 183.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌡️ TEMPERATURE",
+  "other": "path:",
+  "from": 185.8,
+  "to": 199.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚡ HEAT",
+  "other": "path:",
+  "from": 185.8,
+  "to": 199.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "➡️ HEAT FLOW",
+  "other": "path:",
+  "from": 185.8,
+  "to": 199.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🥄 CONDUCTORS",
+  "other": "path:",
+  "from": 185.8,
+  "to": 199.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔥 HEAT",
+  "other": "path:",
+  "from": 185.8,
+  "to": 199.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "✨ EFFECTS OF HEAT",
+  "other": "path:none",
+  "from": 187.05,
+  "to": 199.8
+ }
+]

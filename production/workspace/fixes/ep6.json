@@ -1,0 +1,127 @@
+[
+ [
+  "el(\"rect\", {x: -330, y: -60, width: 660, height: 120, rx: 18, fill: \"none\", stroke: \"#e63946\", \"stroke-width\": 10}, s.stamp); tx(s.stamp, {x: 0, y: 22, \"text-anchor\": \"middle\", \"font-size\": 58, \"font-weight\": 700, fill: \"#e63946\"}, \"DIGESTION BEGINS HERE!\");",
+  "el(\"rect\", {x: -180, y: -78, width: 360, height: 156, rx: 18, fill: \"none\", stroke: \"#e63946\", \"stroke-width\": 10}, s.stamp); tx(s.stamp, {x: 0, y: -10, \"text-anchor\": \"middle\", \"font-size\": 42, \"font-weight\": 700, fill: \"#e63946\"}, \"DIGESTION\"); tx(s.stamp, {x: 0, y: 46, \"text-anchor\": \"middle\", \"font-size\": 42, \"font-weight\": 700, fill: \"#e63946\"}, \"BEGINS HERE!\");"
+ ],
+ [
+  "tf(s.stamp, `translate(760 430) rotate(-8) scale(${1.5 - .5 * ramp(t, a(\"begins\"), a(\"begins\") + .25)})`)",
+  "tf(s.stamp, `translate(1330 640) rotate(-8) scale(${1.3 - .3 * ramp(t, a(\"begins\"), a(\"begins\") + .25)})`)"
+ ],
+ [
+  "scene(\"stomach\", \"#e0aaff\", \"#c77dff\")",
+  "scene(\"stomach\", \"#ffd6de\", \"#ffadbb\")"
+ ],
+ [
+  "fill: \"#c77dff\"",
+  "fill: \"#e0707f\""
+ ],
+ [
+  "\"#7b2cbf\"",
+  "\"#9b2c45\"",
+  2
+ ],
+ [
+  "el(\"ellipse\", {rx: 200, ry: 80, fill: \"#9d4edd\"",
+  "el(\"ellipse\", {rx: 200, ry: 80, fill: \"#9b2c45\""
+ ],
+ [
+  ".forEach(([e, n], i) => { emo(s.route, 300 + i * 260, 720, 80, e);",
+  ".forEach(([e, n], i) => { if (e === \"🫃\") stomachShape(el(\"g\", {transform: `translate(${300 + i * 260} 714) scale(.21)`}, s.route)); else emo(s.route, 300 + i * 260, 720, 80, e);"
+ ],
+ [
+  "filter: \"url(#sh)\"}, g); emo(g, 0, -40, 120, e);",
+  "filter: \"url(#sh)\"}, g); if (e === \"🫃\") stomachShape(el(\"g\", {transform: \"translate(0 -48) scale(.3)\"}, g)); else emo(g, 0, -40, 120, e);"
+ ],
+ [
+  "[\"🫃 The stomach mixes food with digestive juices and\"",
+  "[\"🌀 The stomach mixes food with digestive juices and\""
+ ],
+ [
+  "\"🫃 STOMACH\"",
+  "\"🌀 STOMACH\""
+ ],
+ [
+  "const chew = t > a(\"chew\") ? Math.abs(Math.sin((t - a(\"chew\")) * 6)) : 0; tf(s.top, `translate(0 ${chew * 40})`); tf(s.bot, `translate(0 ${-chew * 40})`);",
+  "const chew = t > a(\"chew\") ? Math.abs(Math.sin((t - a(\"chew\")) * 6)) : 0; s.rig.set(.62 - chew * .5);"
+ ],
+ [
+  "\"stroke-width\": 3}, s.mouth)});\n  s.big = el(\"rect\", {x: -90, y: -40, width: 180, height: 80, rx: 18, fill: \"#ffe8cc\", stroke: \"#d4a373\", \"stroke-width\": 5}, s.mouth);",
+  "\"stroke-width\": 3}, s.rig.food)});\n  s.big = el(\"rect\", {x: -90, y: -40, width: 180, height: 80, rx: 18, fill: \"#ffe8cc\", stroke: \"#d4a373\", \"stroke-width\": 5}, s.rig.food);"
+ ],
+ [
+  "s.mouth = el(\"path\", {d: \"M-330 -40 Q0 -230 330 -40 L330 40 Q0 230 -330 40 Z\", fill: \"#9d0208\", stroke: INK, \"stroke-width\": 8}, s.stage);",
+  "s.mouth = el(\"g\", {}, s.stage); s.rig = mouthRig(s.mouth, \"mouthclip6b\"); set(s.rig.food, \"transform\", \"translate(-760 -430)\");"
+ ],
+ [
+  "s.tongue = el(\"path\", {d: \"M-220 60 Q0 -10 220 60 Q0 160 -220 60 Z\", fill: \"#ff8fab\", stroke: INK, \"stroke-width\": 6}, s.stage);",
+  "s.tongue = el(\"g\", {}, s.stage);"
+ ],
+ [
+  "fill: \"#ffe8cc\", stroke: \"#d4a373\", \"stroke-width\": 3}, s.stage)});",
+  "fill: \"#ffe8cc\", stroke: \"#d4a373\", \"stroke-width\": 3}, s.rig.food)});"
+ ],
+ [
+  "s.ball = el(\"circle\", {r: 0, fill: \"#f3d5b5\", stroke: \"#d4a373\", \"stroke-width\": 5}, s.stage);",
+  "s.ball = el(\"circle\", {r: 0, fill: \"#f3d5b5\", stroke: \"#d4a373\", \"stroke-width\": 5}, s.rig.food);"
+ ],
+ [
+  "s.drops = []; for (let i = 0; i < 8; i++) s.drops.push({ph: i / 8, e: emo(s.stage, 0, 0, 46, \"💧\")});",
+  "s.drops = []; for (let i = 0; i < 8; i++) s.drops.push({ph: i / 8, e: emo(s.rig.food, 0, 0, 46, \"💧\")});"
+ ],
+ [
+  "tf(s.tongue, `translate(${X} ${Y}) scale(1 ${1 + .1 * Math.sin(t * 3) * ramp(t, a(\"rolls\"), a(\"rolls\") + .3)})`);",
+  "s.rig.set(.85, Math.max(0, Math.sin(t * 4)) * ramp(t, a(\"rolls\"), a(\"rolls\") + .3) * (1 - ramp(t, a(\"ball\"), a(\"ball\") + .6)));"
+ ],
+ [
+  "set(b.e, \"y\", Y + b.y * (1 - roll) - 10);",
+  "set(b.e, \"y\", Y + 25 + b.y * (1 - roll) - 10);"
+ ],
+ [
+  "set(s.ball, \"cx\", X); set(s.ball, \"cy\", Y); set(s.ball, \"r\", 70 * roll);",
+  "set(s.ball, \"cx\", X); set(s.ball, \"cy\", Y + s.rig.tongueTop - 50 * roll); set(s.ball, \"r\", 62 * roll);"
+ ],
+ [
+  "op(s.mouth, 1 - two); tf(s.mouth, \"translate(760 430)\");",
+  "op(s.mouth, 1 - two); tf(s.mouth, \"translate(760 430) scale(1.25)\");"
+ ],
+ [
+  "popAt(s.j2, 760, 760 - 40, t, b(\"surface\"));",
+  "popAt(s.j2, 760, 735, t, b(\"surface\"));"
+ ],
+ [
+  "tf(s.mouth, `translate(${X} ${Y})`);",
+  "tf(s.mouth, `translate(${X} ${Y}) scale(1.15)`);"
+ ],
+ [
+  "s.rig.set(.85, ",
+  "s.rig.set(.9, "
+ ],
+ [
+  "set(s.ball, \"cy\", Y + s.rig.tongueTop - 50 * roll); set(s.ball, \"r\", 62 * roll);",
+  "set(s.ball, \"cy\", Y + s.rig.tongueTop - 44 * roll); set(s.ball, \"r\", 52 * roll);"
+ ],
+ [
+  "popAt(s.c2, 760, 700, t, a(\"tongue\"));",
+  "popAt(s.c2, 760, 760, t, a(\"tongue\"));"
+ ],
+ [
+  "\"big pieces ➜ SIMPLER SUBSTANCES your body can use\"",
+  "\"food ➜ SIMPLER SUBSTANCES that can be absorbed into the blood\""
+ ],
+ [
+  "\"SALIVA softens food + has digestive juices\"",
+  "\"SALIVA: a digestive juice + softens food\""
+ ],
+ [
+  "s.lbl = chip(s.stage, \"food ➜ SIMPLER SUBSTANCES that can be absorbed into the blood\", \"#7b61ff\", {fs: 32});",
+  "s.lbl = (() => { const g = el(\"g\", {opacity: 0}, s.stage); el(\"rect\", {x: -380, y: -56, width: 760, height: 112, rx: 40, fill: \"#7b61ff\", stroke: INK, \"stroke-width\": 4, filter: \"url(#sh)\"}, g); tx(g, {x: 0, y: -8, \"text-anchor\": \"middle\", \"font-size\": 32, \"font-weight\": 700, fill: \"#fff\"}, \"food ➜ SIMPLER SUBSTANCES\"); tx(g, {x: 0, y: 36, \"text-anchor\": \"middle\", \"font-size\": 32, \"font-weight\": 700, fill: \"#fff\"}, \"that can be absorbed into the blood\"); return g; })();"
+ ],
+ [
+  "popAt(s.lbl, 760, 160, t, a(\"simpler\"));",
+  "popAt(s.lbl, 760, 185, t, a(\"simpler\"));"
+ ],
+ [
+  "popAt(s.lbl, 760, 185, t, a(\"simpler\"));",
+  "popAt(s.lbl, 760, 205, t, a(\"simpler\"));"
+ ]
+]

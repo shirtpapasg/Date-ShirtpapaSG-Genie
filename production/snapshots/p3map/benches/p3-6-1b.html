@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../kit/support.js"></script>
+<script>
+/* Members only. Same session as the app; anyone without one goes to the lab sign-in. */
+(async () => {
+  try {
+    const tok = localStorage.getItem('sm-session-v1') || '';
+    const r = await fetch('/api/access', { method:'POST', headers: Object.assign({'content-type':'application/json'}, tok ? { authorization: 'Bearer ' + tok } : {}), body: JSON.stringify({ action:'session' }) });
+    const d = await r.json();
+    if (d.locked && !d.ok) location.replace('/lab.html');
+  } catch (e) { /* server unreachable: the page itself holds no answers, let it show */ }
+})();
+</script>
+<script src="../kit/lab-expand.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="../kit/_ds/science-claw-design-system-0049d466-e787-4a70-b5c8-0dc67671c4bb/tokens/colors.css">
+  <link rel="stylesheet" href="../kit/_ds/science-claw-design-system-0049d466-e787-4a70-b5c8-0dc67671c4bb/tokens/typography.css">
+  <link rel="stylesheet" href="../kit/_ds/science-claw-design-system-0049d466-e787-4a70-b5c8-0dc67671c4bb/tokens/spacing.css">
+  <link rel="stylesheet" href="../kit/_ds/science-claw-design-system-0049d466-e787-4a70-b5c8-0dc67671c4bb/tokens/effects.css">
+  <link rel="stylesheet" href="../kit/_ds/science-claw-design-system-0049d466-e787-4a70-b5c8-0dc67671c4bb/styles.css">
+  <script src="../kit/_ds/science-claw-design-system-0049d466-e787-4a70-b5c8-0dc67671c4bb/_ds_bundle.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+  <style>
+    html, body { margin: 0; padding: 0; background: #070d15; }
+    a { color: #66ccff; }
+    a:hover { color: #4a90e2; }
+    @media (max-height: 740px) {
+      aside { gap: 8px !important; padding: 10px !important; }
+      aside p, aside li { font-size: 14px !important; }
+    }
+    aside * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    #cl-tilt { display: none; }
+    @media (max-width: 820px) and (orientation: portrait) {
+      #cl-tilt { display: flex !important; }
+    }
+    @keyframes clNudge { 0%,100% { transform: translateX(0); } 50% { transform: translateX(-8px); } }
+    @keyframes clNudgeY { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
+    @keyframes clFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes clTilt { 0%,100% { transform: rotate(-90deg); } 50% { transform: rotate(0deg); } }
+    @keyframes clTourHand { 0%, 100% { transform: translate(-50%, -20%) scale(1); } 40% { transform: translate(-50%, -20%) scale(.84); } 60% { transform: translate(-50%, -20%) scale(1.06); } }
+    @keyframes clTourWobble { 0%, 100% { transform: none; } 30% { transform: rotate(-1.5deg) scale(1.03); } 70% { transform: rotate(1.5deg) scale(1.03); } }
+    @keyframes clTourGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,182,39,0); } 50% { box-shadow: 0 0 0 4px rgba(255,182,39,.9), 0 0 22px rgba(255,182,39,.6); } }
+    @keyframes clTourHand { 0%, 100% { transform: translate(-50%, -20%) scale(1); } 40% { transform: translate(-50%, -20%) scale(.84); } 60% { transform: translate(-50%, -20%) scale(1.06); } }
+    @keyframes clTourWobble { 0%, 100% { transform: none; } 30% { transform: rotate(-1.5deg) scale(1.03); } 70% { transform: rotate(1.5deg) scale(1.03); } }
+    @keyframes clTourGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,182,39,0); } 50% { box-shadow: 0 0 0 4px rgba(255,182,39,.9), 0 0 22px rgba(255,182,39,.6); } }
+    [data-qopt] { margin-block: -3px; }   /* the four choices sit closer, so the page scrolls less */
+    @keyframes clRainbow { from { background-position: 0% 50%; } to { background-position: 300% 50%; } }
+    @keyframes clShake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+    @keyframes clVisit { 0%, 16% { opacity: 1; } 22%, 100% { opacity: 0; } }
+    .cl-visit { position: relative; isolation: isolate; }
+    .cl-visit::before { content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1; padding: 2px; box-sizing: border-box; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); background: linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f); background-size: 300% 100%; animation: clRainbow 2.4s linear infinite, clVisit var(--visit-period, 2.5s) linear var(--visit-delay, 0s) infinite; opacity: 0; }
+    .cl-steady::before, .cl-steady::after { animation-name: clRainbow, none !important; opacity: 1 !important; }
+    .cl-steady::after { animation: clOrbit 2.4s linear infinite !important; opacity: 1 !important; }
+    @keyframes clOrbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    .cl-visit::after { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px 2px rgba(255,255,255,.85); z-index: 1; pointer-events: none; offset-path: inset(1px round 14px); offset-rotate: 0deg; animation: clOrbit 1s linear infinite, clVisit var(--visit-period, 2.5s) linear var(--visit-delay, 0s) infinite; opacity: 0; }
+    @keyframes clBounce { 0%,100% { transform: translateY(0); } 30% { transform: translateY(-9px); } 60% { transform: translateY(3px); } }
+    input.cl-range { -webkit-appearance: none; appearance: none; height: 26px; width: 100%; background: transparent; }
+    input.cl-range::-webkit-slider-runnable-track { height: 8px; border-radius: 999px; background: linear-gradient(90deg, #2f6fd6, #66ccff); }
+    input.cl-range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; margin-top: -8px; border-radius: 50%; background: #fff; border: 3px solid #0a1320; box-shadow: 0 0 12px rgba(255,255,255,.5); cursor: pointer; }
+    input.cl-range::-moz-range-track { height: 8px; border-radius: 999px; background: linear-gradient(90deg, #2f6fd6, #66ccff); }
+    input.cl-range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid #0a1320; cursor: pointer; }
+    @keyframes clPop { 0% { transform: scale(.3) rotate(-6deg); opacity: 0; } 60% { transform: scale(1.12) rotate(2deg); opacity: 1; } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+    @keyframes clConfetti { 0% { transform: translateY(-20vh) rotate(0); opacity: 1; } 100% { transform: translateY(110vh) rotate(720deg); opacity: .2; } }
+    @keyframes clBannerIn { from { opacity: 0; transform: translateY(36px) scale(.94); } to { opacity: 1; transform: none; } }
+    @keyframes clBannerFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes clBannerGlow { 0%, 100% { box-shadow: 0 0 16px rgba(94,224,122,.35), 0 12px 30px rgba(0,0,0,.55); } 50% { box-shadow: 0 0 36px rgba(94,224,122,.75), 0 12px 30px rgba(0,0,0,.55); } }
+    @keyframes clBannerStar { 0%, 100% { transform: rotate(-8deg) scale(1); } 50% { transform: rotate(8deg) scale(1.18); } }
+    @media (prefers-reduced-motion: reduce) { [style*="clBanner"] { animation: none !important; } }
+    @keyframes clRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    @keyframes clLand { 0% { transform: scale(.82); box-shadow: 0 0 0 0 rgba(94,224,122,.9); } 45% { transform: scale(1.07); box-shadow: 0 0 22px 6px rgba(94,224,122,.55); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(94,224,122,0); } }
+    @keyframes clSweep { from { opacity: 0; transform: translateY(10px) scale(.985); } to { opacity: 1; transform: none; } }
+    @keyframes clGlowIn { 0% { opacity: 0; letter-spacing: .3em; } 100% { opacity: 1; letter-spacing: .08em; } }
+    @media (prefers-reduced-motion: reduce) { [style*="clRise"], [style*="clSweep"], [style*="clGlowIn"] { animation: none !important; } }
+    [data-theme="light"] { --sc-bg: #eef3f8; --sc-scene: #dfe8f0; --sc-ink-900: #ffffff; --sc-ink-800: #f1f5f9; --sc-ink-700: #e2e9f0; --sc-glass: rgba(255,255,255,.88); --sc-glass-soft: rgba(255,255,255,.7); --sc-glass-strong: rgba(255,255,255,.96); --sc-glass-line: rgba(16,22,31,.12); --sc-text: #10161f; --sc-text-soft: #2b3747; --sc-text-muted: #5a6775; --sc-text-faint: #8a98a6; --sc-line: rgba(16,22,31,.14); --sc-line-strong: rgba(16,22,31,.28); --sc-btn-neutral: #dfe6ee; --sc-btn-neutral-hi: #cfd9e4; --sc-input-bg: #f1f5f9; --sc-input-line: rgba(16,22,31,.16); --sc-yellow: #b86e00; --sc-text-on-accent: #ffffff; --surface-panel: rgba(255,255,255,.9); --surface-panel-solid: #ffffff; --surface-modal: rgba(255,255,255,.96); --surface-input: #f1f5f9; --text-body: #10161f; --text-secondary: #2b3747; --text-muted: #5a6775; --text-heading: #b86e00; --border-panel: rgba(16,22,31,.12); --border-divider: rgba(16,22,31,.14); --bg-app: #eef3f8; --bg-scene: #dfe8f0; }
+    [data-theme="light"] [style*="rgba(7, 13, 21, 0.9)"], [data-theme="light"] [style*="rgba(7, 13, 21, 0.94)"], [data-theme="light"] [style*="rgba(7, 13, 21, 0.8)"], [data-theme="light"] [style*="rgba(7, 13, 21, 0.78)"], [data-theme="light"] [style*="rgba(7, 13, 21, 0.92)"] { background: rgba(255,255,255,.92) !important; }
+    [data-theme="light"] [style*="rgb(43, 51, 64)"], [data-theme="light"] [style*="rgb(14, 25, 37)"] { background-color: #e6edf4 !important; color: #10161f !important; }
+    [data-theme="light"] header, [data-theme="light"] aside, [data-theme="light"] section, [data-theme="light"] > div { background: var(--sc-bg) !important; }
+    [data-theme="light"] header { background: #ffffff !important; border-color: var(--sc-line) !important; }
+    [data-theme="light"] aside { background: #f4f7fb !important; border-color: var(--sc-line) !important; }
+    [data-theme="light"] [style*="color: #fff"], [data-theme="light"] [style*="color:#fff"] { color: #10161f !important; }
+    [data-theme="light"] [style*="color: #d6dee6"], [data-theme="light"] [style*="color:#d6dee6"] { color: #2b3747 !important; }
+    [data-theme="light"] [style*="color: #e9f1f7"] { color: #10161f !important; }
+    [data-theme="light"] [style*="color: rgb(255, 255, 255)"]:not([style*="47, 111, 214"]):not([style*="linear-gradient"]):not([style*="74, 144, 226"]), [data-theme="light"] [style*="color: rgb(214, 222, 230)"] { color: #10161f !important; }
+    [data-theme="light"] [style*="color: rgb(233, 241, 247)"] { color: #10161f !important; }
+    [data-theme="light"] [style*="color: rgb(94, 224, 122)"], [data-theme="light"] [style*="color: rgb(63, 224, 122)"] { color: #1f7a3a !important; }
+    [data-theme="light"] [style*="color: rgb(205, 123, 245)"] { color: #7a2fae !important; }
+    [data-theme="light"] [style*="color: rgb(102, 204, 255)"] { color: #1a6fb0 !important; }
+    [data-theme="light"] [style*="color: rgb(138, 152, 166)"] { color: #4a5866 !important; }
+    [data-theme="light"] [style*="color: rgb(90, 103, 117)"] { color: #6b7886 !important; }
+    [data-theme="light"] [style*="color: rgb(255, 106, 94)"] { color: #c0392b !important; }
+    [data-theme="light"] [style*="color: rgb(255, 182, 39)"] { color: #b86e00 !important; }
+    [data-theme="light"] [style*="color: #ffb627"], [data-theme="light"] [style*="color:#ffb627"] { color: #b86e00 !important; }
+    [data-theme="light"] [style*="background: #0e1925"], [data-theme="light"] [style*="background: #2b3340"], [data-theme="light"] [style*="background:#2b3340"] { background: #e6edf4 !important; color: #10161f !important; }
+    [data-theme="light"] [style*="rgba(7,13,21,.9)"], [data-theme="light"] [style*="rgba(7,13,21,.94)"], [data-theme="light"] [style*="rgba(7,13,21,.8)"], [data-theme="light"] [style*="rgba(7,13,21,.78)"], [data-theme="light"] [style*="rgba(7,13,21,.92)"] { background: rgba(255,255,255,.92) !important; }
+    [data-theme="light"] [style*="rgba(4,7,12,.78)"] { background: rgba(238,243,248,.85) !important; }
+    [data-theme="light"] [style*="background: rgb(6, 11, 18)"] { background: #f4f7fb !important; border-color: rgba(16,22,31,.14) !important; }
+    [data-theme="light"] [style*="background: rgb(4, 7, 12)"]:not(#cl-tilt) { background: #ffffff !important; border-color: rgba(16,22,31,.14) !important; }
+  </style>
+</helmet>
+
+
+<div id="cl-tilt" style="position: fixed; inset: 0; z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 22px; padding: 32px; text-align: center; background: #04070c; color: #fff; font-family: Nunito, system-ui, sans-serif;">
+  <div style="font-size: 64px; animation: clTilt 2.4s ease-in-out infinite;">📱</div>
+  <div style="font-size: 24px; font-weight: 900; color: #ffb627;">Turn your phone sideways</div>
+  <p style="margin: 0; max-width: 320px; font-size: 16px; line-height: 1.5; color: #8a98a6;">Magnet Test Lab needs <strong style="color: #ffb627;">landscape mode</strong> so the bench and your notebook fit on screen together.</p>
+</div>
+
+<div data-theme="{{ themeAttr }}" style="height: 100vh; display: flex; flex-direction: column; background: #070d15; color: #fff; font-family: Nunito, system-ui, sans-serif; overflow: hidden;">
+
+  <header style="display: flex; align-items: center; gap: 20px; padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,.14); background: #04070c;">
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 240px; flex: none;">
+      <div style="font-size: 21px; font-weight: 900; letter-spacing: .04em; color: #ffb627; white-space: nowrap; text-shadow: 0 0 14px rgba(255,182,39,.35);">📎 MAGNET TEST LAB</div>
+      <div style="font-size: 13px; color: #8a98a6; font-weight: 700; letter-spacing: .02em;">6.1B · What does a magnet attract? · P3 Science</div>
+    </div>
+    <nav data-tour="steps" style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; flex: 1;">
+      <sc-for list="{{ steps }}" as="s" hint-placeholder-count="5">
+        <button onClick="{{ s.go }}" style="{{ s.pill }}" style-hover="filter: brightness(1.14); transform: translateY(-1px)" style-focus="outline: 2px solid #66ccff; outline-offset: 2px">{{ s.label }}</button>
+      </sc-for>
+    </nav>
+    <div style="display: flex; gap: 8px; flex: none;">
+      <button onClick="{{ replayTour }}" title="Show me round" style="width: 48px; height: 48px; border-radius: 14px; background: #2b3340; border: 1px solid rgba(255,255,255,.14); font-size: 20px; cursor: pointer; transition: all 120ms ease-out;" style-hover="filter: brightness(1.14)">🎬</button>
+      <button onClick="{{ toggleMusic }}" title="Music" style="width: 48px; height: 48px; border-radius: 14px; background: #2b3340; border: 1px solid rgba(255,255,255,.14); font-size: 20px; cursor: pointer; transition: all 120ms ease-out;" style-hover="filter: brightness(1.14)">{{ musicGlyph }}</button>
+      <button onClick="{{ toggleTheme }}" title="Light or dark" style="width: 48px; height: 48px; border-radius: 14px; background: #2b3340; border: 1px solid rgba(255,255,255,.14); font-size: 20px; cursor: pointer; transition: all 120ms ease-out;" style-hover="filter: brightness(1.14)">{{ themeGlyph }}</button>
+    </div>
+  </header>
+
+  <sc-if value="{{ lockMsg }}">
+    <div style="padding: 8px 20px; background: rgba(255,182,39,.14); border-bottom: 1px solid rgba(255,182,39,.45); font-size: 15px; font-weight: 800; color: #ffb627;">🔒 That part is locked. Finish the steps for it first, then come back.</div>
+  </sc-if>
+
+  <div style="flex: 1; display: flex; min-height: 0; position: relative;">
+
+    <sc-if value="{{ tourOn }}">
+      <div style="position: fixed; inset: 0; z-index: 90; pointer-events: none;">
+        <div style="{{ tourHoleCss }}"></div>
+        <div style="{{ tourHandCss }}">👆</div>
+        <div style="{{ tourCardCss }}">
+          <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #8a98a6;">{{ tourStep }}</span>
+          <span style="font-size: 15px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; color: #ffb627;">{{ tourCap }}</span>
+          <span style="font-size: 22px; font-weight: 900; line-height: 1.3; color: #fff; text-wrap: pretty;">{{ tourSay }}</span>
+          <div style="display: flex; gap: 10px; margin-top: 6px; pointer-events: auto; white-space: nowrap;">
+            <button onClick="{{ tourSkip }}" style="flex: 0 1 auto; min-height: 50px; padding: 10px 18px; border-radius: 14px; font-family: inherit; font-size: 17px; font-weight: 900; cursor: pointer; background: #2b3340; color: #fff; border: 1px solid rgba(255,255,255,.22);" style-hover="filter: brightness(1.15)">Skip ▸</button>
+            <button onClick="{{ tourNext }}" style="flex: 1 1 0; min-height: 50px; padding: 10px 18px; border-radius: 14px; font-family: inherit; font-size: 17px; font-weight: 900; cursor: pointer; background: linear-gradient(180deg, #6aa9f0, #2f6fd6); color: #fff; border: 2px solid rgba(255,255,255,.5); box-shadow: 0 0 16px rgba(74,144,226,.5);" style-hover="filter: brightness(1.1)">{{ tourNextLabel }}</button>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ celebrate }}">
+      <div onClick="{{ endCelebrate }}" style="position: absolute; inset: 0; z-index: 80; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; background: rgba(4,7,12,.9); cursor: pointer; overflow: hidden;">
+        <sc-for list="{{ confetti }}" as="c" hint-placeholder-count="0">
+          <div style="{{ c.css }}"></div>
+        </sc-for>
+        <div style="font-size: 96px; line-height: 1; animation: clPop 700ms cubic-bezier(.2,1.6,.4,1) both;">🎉</div>
+        <div style="font-size: clamp(72px, 13vw, 190px); line-height: .95; font-weight: 900; letter-spacing: .02em; text-align: center; color: #ffb627; text-shadow: 0 0 40px rgba(255,182,39,.55), 0 8px 0 #7a4a00; animation: clPop 800ms cubic-bezier(.2,1.6,.4,1) 120ms both;">WELL<br>DONE!</div>
+        <div style="font-size: 44px; line-height: 1; animation: clFadeIn 600ms ease-out 700ms both;">{{ starsBig }}</div>
+        <div style="font-size: 14px; font-weight: 700; color: #8a98a6; animation: clFadeIn 600ms ease-out 1200ms both;">Tap anywhere to see the big idea</div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDone }}">
+      <div style="position: absolute; inset: 0; z-index: 70; padding: 26px 28px; background: rgba(4,7,12,.78); overflow-y: auto;">
+        <div style="width: 75%; max-width: 1040px; margin: 0 auto;">
+          <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Panel" title="Well done, scientist" accent="yellow" hint-size="100%,560px">
+            <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
+              <div style="font-size: 54px; line-height: 1; animation: clPop 700ms cubic-bezier(.2,1.6,.4,1) both;">{{ starsBig }}</div>
+              <div style="font-size: 24px; line-height: 1.4; color: #fff; font-weight: 800; text-wrap: pretty; animation: clRise 480ms cubic-bezier(.2,.9,.3,1) both;">{{ scoreLine }}</div>
+            </div>
+            <div style="margin: 22px 0 0; padding: 18px 24px; border-radius: 16px; background: rgba(205,123,245,.1); border: 1px solid rgba(205,123,245,.4); animation: clSweep 520ms cubic-bezier(.2,.9,.3,1) 260ms both;">
+              <div style="font-size: 16px; font-weight: 900; color: #cd7bf5; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px;">You wanted to find out</div>
+              <sc-if value="{{ wantNone }}"><div style="font-size: 17px; line-height: 1.5; color: #d6dee6; font-weight: 700;">You did not tick a question at the start. The big idea below answers all three.</div></sc-if>
+              <ul style="margin: 0; padding-left: 22px; display: grid; gap: 8px; font-size: 18px; line-height: 1.45; color: #fff; font-weight: 700; text-wrap: pretty;">
+                <sc-for list="{{ wantList }}" as="q" hint-placeholder-count="2"><li>{{ q.text }}</li></sc-for>
+              </ul>
+              <div style="margin-top: 10px; font-size: 14px; font-weight: 900; color: #cd7bf5;">Now you know ↓</div>
+            </div>
+            <div style="margin: 22px 0; padding: 22px 24px; border-radius: 16px; background: rgba(255,182,39,.1); border: 1px solid rgba(255,182,39,.4); animation: clSweep 520ms cubic-bezier(.2,.9,.3,1) 360ms both;">
+              <div style="font-size: 16px; font-weight: 900; color: #ffb627; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 16px; animation: clGlowIn 620ms ease-out 520ms both;">The big idea</div>
+              <ol style="margin: 0; padding-left: 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px 32px; font-size: 20px; line-height: 1.5; color: #fff; text-wrap: pretty;">
+                <li style="animation: clRise 460ms cubic-bezier(.2,.9,.3,1) 700ms both;">Magnets attract <strong style="color: #ffb627;">magnetic materials</strong> such as iron and steel.</li>
+                <li style="animation: clRise 460ms cubic-bezier(.2,.9,.3,1) 900ms both;">Magnets do <strong style="color: #ffb627;">not</strong> attract non-magnetic materials, like copper and plastic.</li>
+                <li style="animation: clRise 460ms cubic-bezier(.2,.9,.3,1) 1100ms both;">Being made of metal does <strong style="color: #ffb627;">not always</strong> mean an object is magnetic.</li>
+              </ol>
+            </div>
+            <div style="display: flex; gap: 14px; max-width: 520px; animation: clRise 480ms cubic-bezier(.2,.9,.3,1) 1700ms both;">
+              <div style="flex: 1 1 0; min-width: 0; padding: 2px;"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="ghost" size="lg" onClick="{{ restart }}" hint-size="100%,52px">↺ Start the bench again</x-import></div>
+              <div style="{{ goRingFlex }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="active" size="lg" onClick="{{ testAgain }}" hint-size="100%,52px">🏆 Try the Challenge again</x-import></div>
+            </div>
+          </x-import>
+        </div>
+      </div>
+    </sc-if>
+
+    <aside style="{{ asideCss }}">
+
+      <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+        <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Panel" title="Magnet Test Lab" accent="yellow" hint-size="100%,600px">
+          <div style="font-size: 13px; font-weight: 800; letter-spacing: .04em; color: #8a98a6; margin: -6px 0 10px;">What does a magnet attract? · P3 Science</div>
+          <p style="font-size: 18px; line-height: 1.5; margin: 0 0 14px; color: #fff; text-wrap: pretty;">A <strong style="color: #ffb627;">magnet</strong> sits beside a row of objects: an iron nail, a steel paper clip, a copper coin, a wooden block, a plastic ruler and some foil. Bring the magnet near each one. Which ones jump?</p>
+          <div style="display: grid; gap: 10px; margin-bottom: 14px;">
+            <div style="box-sizing: border-box; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; background: #0e1925; border: 1px solid rgba(255,255,255,.1);">
+              <span style="font-size: 22px;">🔩</span>
+              <span style="font-size: 15px; color: #d6dee6;"><strong style="color: #ffb627;">Test the metal objects</strong> — the nail, the clip and the coin</span>
+            </div>
+            <div style="box-sizing: border-box; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; background: #0e1925; border: 1px solid rgba(255,255,255,.1);">
+              <span style="font-size: 22px;">📏</span>
+              <span style="font-size: 15px; color: #d6dee6;"><strong style="color: #ffb627;">Test the everyday objects</strong> — the wood, the ruler and the foil</span>
+            </div>
+            <div style="box-sizing: border-box; display: flex; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 12px; background: #0e1925; border: 1px solid rgba(255,255,255,.1);">
+              <span style="font-size: 22px;">📦</span>
+              <span style="font-size: 15px; color: #d6dee6;"><strong style="color: #ffb627;">Sort them all</strong> — magnetic or non-magnetic</span>
+            </div>
+          </div>
+
+          <p style="font-size: 14px; line-height: 1.5; margin: 0 0 16px; color: #8a98a6; text-wrap: pretty;">Drag the bench to look round it. Scroll to zoom. Every step can be done again.</p>
+          <div data-cue="{{ cueIntro }}" style="{{ goRing }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="primary" size="lg" onClick="{{ next }}" hint-size="100%,56px">To the bench →</x-import></div>
+        </x-import>
+      </sc-if>
+
+      <sc-if value="{{ isStart }}">
+        <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Panel" title="Before I start" accent="purple" hint-size="100%,600px">
+          <p style="font-size: 15px; line-height: 1.5; margin: 0 0 14px; color: #fff; text-wrap: pretty;">Tick what you already know. Tick what you want to find out. The Wrap-up will come back to your questions.</p>
+          <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(74,144,226,.08); border: 1px solid rgba(74,144,226,.35);">
+            <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #66ccff;">What I already know</span>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <sc-for list="{{ knowChips }}" as="k" hint-placeholder-count="3">
+                <button onClick="{{ k.tap }}" style="{{ k.css }}" style-hover="filter: brightness(1.12)">{{ k.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="box-sizing: border-box; display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; padding: 10px 12px; border-radius: 12px; background: rgba(205,123,245,.08); border: 1px solid rgba(205,123,245,.4);">
+            <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #cd7bf5;">What I want to find out</span>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <sc-for list="{{ wonderChips }}" as="k" hint-placeholder-count="3">
+                <button onClick="{{ k.tap }}" style="{{ k.css }}" style-hover="filter: brightness(1.12)">{{ k.label }}</button>
+              </sc-for>
+            </div>
+            <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #cd7bf5; margin-top: 4px;">A question of my own</span>
+            <input type="text" value="{{ ownValue }}" onInput="{{ setOwn }}" placeholder="Type it here (not saved anywhere)" maxlength="120" style="box-sizing: border-box; width: 100%; min-height: 40px; padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: #2b3340; color: #fff; font-family: inherit; font-size: 14px; font-weight: 700;">
+          </div>
+          <div data-cue="{{ cueStart }}" style="{{ goRing }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="primary" size="lg" onClick="{{ next }}" hint-size="100%,56px">I'm ready →</x-import></div>
+        </x-import>
+      </sc-if>
+
+      <sc-if value="{{ showPredPanel }}">
+        <div data-tour="pred" style="{{ tourPredCss }}">
+        <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Panel" title="Get ready" accent="{{ predAccent }}" hint-size="100%,360px">
+          <p style="font-size: 18px; line-height: 1.5; margin: 0 0 12px; color: #fff; text-wrap: pretty;">{{ predIntro }} <strong style="color: #ffb627;">Think:</strong> {{ predQuestion }}</p>
+          <button onClick="{{ showMe }}" style="{{ showMeCss }}" style-hover="filter: brightness(1.12)">{{ showMeLabel }}</button>
+          <div style="{{ thenCss }}">
+            <div style="{{ thenTitleCss }}">Then go and look</div>
+            <ol style="margin: 0; padding-left: 20px; font-size: 16px; line-height: 1.6; color: #d6dee6;">
+              <li>{{ then1 }}</li>
+              <li>{{ then2 }}</li>
+              <li>{{ then3 }}</li>
+            </ol>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: 14px; white-space: nowrap;">
+            <div style="flex: 0 1 auto; min-width: 0; padding: 2px;"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="ghost" onClick="{{ back }}" hint-size="100%,48px">← Back</x-import></div>
+            <div data-cue="{{ cuePredGo }}" style="{{ predGoRing }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="primary" onClick="{{ predGo }}" hint-size="100%,48px">Go and look →</x-import></div>
+          </div>
+        </x-import>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isQuiz }}">
+        <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Panel" title="Challenge" accent="green" hint-size="100%,520px">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Badge" tone="cyan" hint-size="auto,26px">{{ qTopic }}</x-import>
+            <span style="font-size: 14px; color: #8a98a6; font-weight: 700;">{{ qCounter }}</span>
+            <span style="margin-left: auto; font-size: 18px; letter-spacing: 2px;">{{ starsNow }}</span>
+          </div>
+          <p style="font-size: 19px; line-height: 1.5; margin: 0 0 14px; color: #fff; font-weight: 800; text-wrap: pretty;">{{ qText }}</p>
+          <sc-for list="{{ qOptions }}" as="o" hint-placeholder-count="4">
+            <div class="{{ o.ringClass }}" data-cue="{{ o.cue }}" data-qopt="1" style="{{ o.ring }}">
+              <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.QuizOption" onClick="{{ o.pick }}" hint-size="100%,56px">{{ o.text }}</x-import>
+            </div>
+          </sc-for>
+          <sc-if value="{{ qAnswered }}">
+            <div style="{{ whyBoxCss }}">
+              <div style="{{ whyTitleCss }}">{{ qVerdict }}</div>
+              <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #d6dee6; text-wrap: pretty;">{{ qWhy }}</p>
+            </div>
+            <div data-cue="1" data-qnext="1" style="{{ goRing }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="primary" onClick="{{ nextQ }}" hint-size="100%,48px">{{ qNextLabel }}</x-import></div>
+          </sc-if>
+        </x-import>
+      </sc-if>
+
+      <sc-if value="{{ showPartPanel }}">
+        <div style="order: 0; width: 100%;">
+        <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Panel" title="{{ partTitle }}" accent="{{ partAccent }}" hint-size="100%,640px">
+          <sc-if value="{{ partFresh }}" hint-placeholder-val="{{ true }}">
+            <div style="{{ taskCss }}">
+              <span style="font-size: 12px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #8a98a6;">Your task</span>
+              <span style="font-size: 18px; font-weight: 900; line-height: 1.35; color: #fff; text-wrap: pretty;">{{ partTask }}</span>
+            </div>
+          </sc-if>
+          <div style="{{ statusCss }}">{{ partNow }}</div>
+
+          <sc-if value="{{ isReveal }}">
+            <div data-tour="own" style="display: grid; gap: 8px;">
+              <sc-for list="{{ items }}" as="it" hint-placeholder-count="7">
+                <div class="{{ it.ringClass }}" data-cue="{{ it.cue }}" style="{{ it.ring }}">
+                  <button data-item="{{ it.id }}" onClick="{{ it.tap }}" style="{{ it.css }}" style-hover="filter: brightness(1.12)">
+                    <span style="font-size: 26px; line-height: 1; flex: none;">{{ it.glyph }}</span>
+                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left;">
+                      <span style="{{ it.nameCss }}">{{ it.label }}</span>
+                      <sc-if value="{{ it.shown }}"><span style="font-size: 14px; font-weight: 700; line-height: 1.35; color: #e9f1f7; text-wrap: pretty;">{{ it.clue }}</span></sc-if>
+                    </span>
+                    <span style="{{ it.markCss }}">{{ it.mark }}</span>
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isGive }}">
+            <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #8a98a6;">{{ shelfTitle }}</span>
+            <div data-tour="own" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px;">
+              <sc-for list="{{ gives }}" as="it" hint-placeholder-count="6">
+                <div class="{{ it.ringClass }}" data-cue="{{ it.cue }}" style="{{ it.ring }}">
+                  <button data-give="{{ it.id }}" onClick="{{ it.tap }}" style="{{ it.css }}" style-hover="filter: brightness(1.12)"><span style="font-size: 22px; line-height: 1;">{{ it.glyph }}</span><span>{{ it.label }}</span></button>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: grid; gap: 8px;">
+              <sc-for list="{{ targets }}" as="b" hint-placeholder-count="2">
+                <div class="{{ b.ringClass }}" data-cue="{{ b.cue }}" style="{{ b.ring }}">
+                  <button data-target="{{ b.id }}" onClick="{{ b.tap }}" style="{{ b.css }}" style-hover="filter: brightness(1.1)">
+                    <span style="font-size: 30px; line-height: 1; flex: none;">{{ b.glyph }}</span>
+                    <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0; text-align: left;">
+                      <span style="{{ b.nameCss }}">{{ b.label }}</span>
+                      <span style="font-size: 15px; font-weight: 800; letter-spacing: .04em; color: #d6dee6;">{{ b.marks }}</span>
+                    </span>
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isSort }}">
+            <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #8a98a6;">{{ shelfTitle }}</span>
+            <div data-tour="own" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 12px;">
+              <sc-for list="{{ shelf }}" as="it" hint-placeholder-count="7">
+                <div class="{{ it.ringClass }}" data-cue="{{ it.cue }}" style="{{ it.ring }}">
+                  <button data-item="{{ it.id }}" onClick="{{ it.tap }}" style="{{ it.css }}" style-hover="filter: brightness(1.12)"><span style="font-size: 22px; line-height: 1;">{{ it.glyph }}</span><span>{{ it.label }}</span></button>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display: grid; gap: 8px;">
+              <sc-for list="{{ bins }}" as="b" hint-placeholder-count="3">
+                <div class="{{ b.ringClass }}" data-cue="{{ b.cue }}" style="{{ b.ring }}">
+                  <button data-bin="{{ b.id }}" onClick="{{ b.tap }}" style="{{ b.css }}" style-hover="filter: brightness(1.1)">
+                    <span style="font-size: 26px; line-height: 1; flex: none;">{{ b.glyph }}</span>
+                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left;">
+                      <span style="{{ b.nameCss }}">{{ b.label }}</span>
+                      <span style="font-size: 13px; font-weight: 700; color: #d6dee6;">{{ b.inside }}</span>
+                    </span>
+                    <span style="{{ b.countCss }}">{{ b.count }}</span>
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isRig }}">
+            <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #8a98a6;">{{ rackTitle }}</span>
+            <div data-tour="own" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 4px;">
+              <sc-for list="{{ rigItems }}" as="it" hint-placeholder-count="4">
+                <div class="{{ it.ringClass }}" data-cue="{{ it.cue }}" style="{{ it.ring }}">
+                  <button data-rig="{{ it.id }}" onClick="{{ it.tap }}" style="{{ it.css }}" style-hover="filter: brightness(1.12)"><span style="font-size: 22px; line-height: 1;">{{ it.glyph }}</span><span>{{ it.label }}</span><span style="font-size: 15px; font-weight: 900; color: #5ee07a;">{{ it.mark }}</span></button>
+                </div>
+              </sc-for>
+            </div>
+            <div data-cue="{{ cueAct }}" style="{{ actRing }}">
+              <button data-act="1" onClick="{{ doAct }}" style="{{ actCss }}" style-hover="filter: brightness(1.1)"><span style="font-size: 26px; line-height: 1;">{{ actGlyph }}</span><span>{{ actLabel }}</span></button>
+            </div>
+            <sc-if value="{{ hasTally }}">
+              <div style="display: flex; gap: 8px; justify-content: center; align-items: center; min-height: 30px; margin: 2px 0 6px;">
+                <sc-for list="{{ tally }}" as="t" hint-placeholder-count="0">
+                  <span style="{{ t.css }}">{{ t.glyph }}</span>
+                </sc-for>
+              </div>
+            </sc-if>
+          </sc-if>
+
+          <sc-if value="{{ isChoose }}">
+            <div data-tour="own" style="display: grid; gap: 8px;">
+              <sc-for list="{{ prompts }}" as="p" hint-placeholder-count="3">
+                <div class="{{ p.ringClass }}" data-cue="{{ p.cue }}" style="{{ p.ring }}">
+                  <button data-prompt="{{ p.id }}" onClick="{{ p.tap }}" style="{{ p.css }}" style-hover="filter: brightness(1.12)">
+                    <span style="font-size: 26px; line-height: 1; flex: none;">{{ p.glyph }}</span>
+                    <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0; text-align: left;">
+                      <span style="{{ p.nameCss }}">{{ p.label }}</span>
+                      <sc-if value="{{ p.pickedText }}"><span style="font-size: 14px; font-weight: 700; line-height: 1.35; color: #e9f1f7; text-wrap: pretty;">{{ p.pickedText }}</span></sc-if>
+                    </span>
+                    <span style="flex: none; margin-left: auto; font-size: 16px; font-weight: 900; color: #5ee07a;">{{ p.mark }}</span>
+                  </button>
+                </div>
+              </sc-for>
+            </div>
+            <sc-if value="{{ hasChips }}">
+              <div style="margin: 12px 0 4px; font-size: 16px; font-weight: 900; line-height: 1.35; color: #ffb627; text-wrap: pretty;">{{ chipTitle }}</div>
+              <div style="display: grid; gap: 8px;">
+                <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+                  <div class="{{ c.ringClass }}" data-cue="{{ c.cue }}" style="{{ c.ring }}">
+                    <button data-chip="1" onClick="{{ c.tap }}" style="{{ c.css }}" style-hover="filter: brightness(1.12)">{{ c.text }}</button>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </sc-if>
+
+          <sc-if value="{{ hasChart }}">
+              <div class="{{ resRingClass }}" style="{{ resRing }}">
+              <div data-lab-graph data-lab-title="My chart" tabindex="0" style="position: relative; padding-top: 24px;">
+              <div style="padding: 10px 8px 4px; border-radius: 12px; background: #0a1320; border: 1px solid rgba(255,255,255,.1);">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 0 6px 4px;">
+                  <span style="font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #8a98a6;">{{ graphY }}</span>
+                </div>
+                <svg viewBox="0 0 320 134" style="display: block; width: 100%; height: auto; overflow: visible;">
+                  <line x1="34" y1="112" x2="310" y2="112" stroke="rgba(255,255,255,.16)" stroke-width="1"></line>
+                  <line x1="34" y1="80" x2="310" y2="80" stroke="rgba(255,255,255,.09)" stroke-width="1"></line>
+                  <line x1="34" y1="48" x2="310" y2="48" stroke="rgba(255,255,255,.09)" stroke-width="1"></line>
+                  <line x1="34" y1="16" x2="310" y2="16" stroke="rgba(255,255,255,.09)" stroke-width="1"></line>
+                  <line x1="34" y1="10" x2="34" y2="116" stroke="rgba(255,255,255,.16)" stroke-width="1"></line>
+                  <text x="28" y="115" text-anchor="end" fill="#5a6775" font-size="9" font-weight="700" font-family="Nunito, system-ui, sans-serif">{{ yT0 }}</text>
+                  <text x="28" y="83" text-anchor="end" fill="#5a6775" font-size="9" font-weight="700" font-family="Nunito, system-ui, sans-serif">{{ yT1 }}</text>
+                  <text x="28" y="51" text-anchor="end" fill="#5a6775" font-size="9" font-weight="700" font-family="Nunito, system-ui, sans-serif">{{ yT2 }}</text>
+                  <text x="28" y="19" text-anchor="end" fill="#5a6775" font-size="9" font-weight="700" font-family="Nunito, system-ui, sans-serif">{{ yT3 }}</text>
+                  <sc-for list="{{ xTicks }}" as="t" hint-placeholder-count="0">
+                    <text x="{{ t.x }}" y="128" text-anchor="middle" fill="#5a6775" font-size="9" font-weight="700" font-family="Nunito, system-ui, sans-serif">{{ t.label }}</text>
+                  </sc-for>
+                  <path d="{{ barsPath }}" fill="rgba(94,224,122,.55)" stroke="#5ee07a" stroke-width="1.2"></path>
+                  <sc-for list="{{ barLabels }}" as="t" hint-placeholder-count="0">
+                    <text x="{{ t.x }}" y="{{ t.y }}" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="900" font-family="Nunito, system-ui, sans-serif">{{ t.label }}</text>
+                  </sc-for>
+                </svg>
+                <div style="text-align: center; margin: 2px 6px 0; font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #8a98a6;">{{ graphX }}</div>
+              </div>
+              </div>
+              </div>
+            </sc-if>
+
+          <sc-if value="{{ partErr }}">
+            <div style="margin-top: 12px; padding: 12px 14px; border-radius: 12px; background: rgba(255,182,39,.12); border: 1px solid rgba(255,182,39,.45); font-size: 17px; line-height: 1.45; font-weight: 800; color: #ffb627; text-wrap: pretty;">{{ partErr }}</div>
+          </sc-if>
+        </x-import>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showPredChip }}">
+        <button onClick="{{ expandPanel }}" style="{{ predChipCss }}" style-hover="border-color: rgba(255,182,39,.95)">
+          <span style="font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #ffb627;">My guess · tap to change</span>
+          <span style="font-size: 14px; font-weight: 800; line-height: 1.35;">{{ predLabel }}</span>
+        </button>
+      </sc-if>
+
+      <sc-if value="{{ showCallout }}">
+        <div style="{{ calloutCss }}">
+          <span style="{{ calloutTagCss }}">{{ calloutTag }}</span>
+          <span style="font-size: 16px; font-weight: 700; line-height: 1.45; color: #e9f1f7; text-wrap: pretty;">{{ calloutText }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showNav }}">
+        <div data-tour="next" style="{{ navFadeCss }}">
+          <div style="flex: 0 1 auto; min-width: 0;">
+            <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="ghost" onClick="{{ back }}" hint-size="100%,48px">← Back</x-import>
+          </div>
+          <div data-cue="{{ cueNext }}" style="{{ nextWrapCss }}">
+            <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="{{ nextVariant }}" onClick="{{ nextGated }}" hint-size="100%,48px">{{ nextLabel }}</x-import>
+          </div>
+        </div>
+      </sc-if>
+
+    </aside>
+
+    <div style="flex: 1; min-width: 0; display: flex; flex-direction: column;">
+    <div style="flex: 1; min-height: 0; display: flex;">
+    <section data-tour="bench" data-cue="{{ cueBench }}" style="flex: 1; position: relative; min-width: 0; background: #10233a;">
+      <x-import component-from-global-scope="magnettest-scene" from="./magnettest-scene.js?v=1" demo="{{ demoAttr }}" experiment="{{ experiment }}" setting="{{ settingAttr }}" running="{{ runningAttr }}" reading="{{ readingAttr }}" seconds="{{ secondsAttr }}" placed="{{ placedAttr }}" tested="{{ testedAttr }}" theme="{{ themeAttr }}" hint-size="100%,100%" style="position: absolute; inset: 0;"></x-import>
+
+      <div style="position: absolute; top: 14px; left: 14px; right: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 8px; pointer-events: none;">
+        <div style="display: flex; flex-direction: column; gap: 8px; align-items: flex-start; min-width: 0;">
+          <div style="display: flex; gap: 8px; align-items: center; padding: 7px 14px; border-radius: 999px; background: rgba(7,13,21,.92); border: 1px solid rgba(255,255,255,.14); font-size: 13px; color: #8a98a6; font-weight: 700; white-space: nowrap;">
+            <span>🖱️ Drag to look round · scroll to zoom</span>
+          </div>
+          <div style="{{ capCss }}">{{ capText }}</div>
+        </div>
+        <div data-tour="stickers" style="display: flex; gap: 6px; align-items: center; padding: 6px 10px; border-radius: 999px; background: rgba(7,13,21,.92); border: 1px solid rgba(255,255,255,.14);">
+          <span style="font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #8a98a6; margin-right: 2px;">Stickers</span>
+          <sc-for list="{{ stickers }}" as="st" hint-placeholder-count="3">
+            <span title="{{ st.title }}" style="{{ st.css }}">{{ st.glyph }}</span>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ showClueCard }}">
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: center; padding: 16px 16px 56px; pointer-events: none;">
+          <div style="width: 100%; max-width: 560px; box-sizing: border-box; display: flex; gap: 14px; align-items: center; padding: 14px 18px; border-radius: 20px; background: rgba(7,13,21,.94); border: 2px solid {{ clueTone }}; box-shadow: 0 0 28px {{ clueGlow }}, 0 12px 32px rgba(0,0,0,.5);">
+            <span style="font-size: 40px; line-height: 1; flex: none;">{{ clueGlyph }}</span>
+            <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <span style="{{ clueTagCss }}">{{ clueTag }}</span>
+              <span style="font-size: 19px; font-weight: 800; line-height: 1.4; color: #fff; text-wrap: pretty;">{{ clueText }}</span>
+              <sc-if value="{{ clueWhy }}"><span style="font-size: 15px; font-weight: 800; line-height: 1.4; color: #5ee07a; text-wrap: pretty;">{{ clueWhy }}</span></sc-if>
+            </span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showBenchChip }}">
+        <div style="position: absolute; left: 14px; right: 14px; bottom: 14px; display: flex; justify-content: center; pointer-events: none;">
+          <div style="{{ benchChipCss }}">{{ benchChip }}</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ exploring }}">
+        <div style="position: absolute; left: 14px; right: 14px; bottom: 16px; display: flex; justify-content: center; pointer-events: none;">
+          <sc-if value="{{ showInfo }}">
+            <div data-info="1" style="box-sizing: border-box; width: min(560px, 100%); display: flex; gap: 14px; align-items: center; padding: 14px 18px; border-radius: 20px; background: rgba(7,13,21,.94); border: 3px solid rgba(102,204,255,.85); box-shadow: 0 0 24px rgba(102,204,255,.35), 0 12px 30px rgba(0,0,0,.55); animation: clBannerIn 420ms cubic-bezier(.2,.9,.3,1) both;">
+              <span style="flex: none; font-size: 30px; line-height: 1;">👀</span>
+              <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+                <span style="font-size: 12px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: #66ccff;">{{ infoName }}</span>
+                <span style="font-size: 16px; font-weight: 800; line-height: 1.4; color: #e9f1f7; text-wrap: pretty;">{{ infoText }}</span>
+                <span style="font-size: 12px; font-weight: 800; color: #8a98a6;">Tap another thing, or press ✓ Done looking</span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        <div style="position: absolute; left: 14px; right: 14px; top: 56px; display: flex; justify-content: center; pointer-events: none;">
+          <div style="padding: 8px 18px; border-radius: 999px; background: rgba(7,13,21,.92); font-size: 15px; font-weight: 900; color: #66ccff; border: 2px solid rgba(102,204,255,.6); box-shadow: 0 0 18px rgba(102,204,255,.3);">👀 Looking round · tap any thing with a name tag</div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showBanner }}">
+        <div data-banner="1" style="position: absolute; left: 14px; right: 14px; bottom: 16px; display: flex; justify-content: center; pointer-events: none; animation: clBannerIn 640ms cubic-bezier(.2,.9,.3,1) both;">
+          <div style="box-sizing: border-box; width: min(600px, 100%); display: flex; gap: 14px; align-items: center; padding: 14px 18px 14px 16px; border-radius: 20px; background: rgba(7,13,21,.94); border: 3px solid rgba(94,224,122,.85); animation: clBannerFloat 3.2s ease-in-out infinite, clBannerGlow 2.6s ease-in-out infinite;">
+            <span style="flex: none; font-size: 34px; line-height: 1; animation: clBannerStar 2.2s ease-in-out infinite;">💡</span>
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <span style="font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: #5ee07a;">What I learnt · {{ bannerTag }}</span>
+              <span style="font-size: 17px; font-weight: 800; line-height: 1.4; color: #e9f1f7; text-wrap: pretty;">{{ bannerText }}</span>
+              <span style="font-size: 12px; font-weight: 800; color: #ffb627;">{{ bannerNext }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showHint }}">
+        <div style="{{ hintWrap }}">
+          <span style="{{ hintArrow }}">{{ hintGlyph }}</span>
+          <span style="padding: 10px 16px; border-radius: 14px; background: rgba(255,182,39,.94); color: #10161f; font-size: 16px; font-weight: 800; line-height: 1.35; box-shadow: 0 6px 22px rgba(0,0,0,.45);">{{ hintText }}</span>
+        </div>
+      </sc-if>
+    </section>
+
+    <sc-if value="{{ showRight }}">
+    <div style="width: 280px; flex: none; box-sizing: border-box; padding: 14px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; overflow-x: hidden; scrollbar-gutter: stable; background: #060b12; border-left: 1px solid rgba(255,255,255,.08);">
+      <div data-lab-graph data-lab-title="Readings" tabindex="0" style="position: relative; padding-top: 24px;">
+      <div class="{{ readRingClass }}" style="{{ readRing }}">
+      <div data-tour="readings" style="{{ readCss }}">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+          <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #66ccff;">Readings</span>
+          <sc-if value="{{ readLive }}">
+            <span style="padding: 2px 8px; border-radius: 999px; background: #ffb627; color: #10161f; font-size: 10px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase;">Watch here</span>
+          </sc-if>
+        </div>
+        <div style="display: grid; gap: 2px;">
+          <sc-for list="{{ readRows }}" as="r" hint-placeholder-count="3">
+            <div class="{{ r.ringClass }}" style="{{ r.ring }}">
+            <div style="{{ r.wrap }}">
+              <button onClick="{{ r.toggle }}" style="{{ r.head }}" style-hover="background: rgba(255,255,255,.06);">
+                <span style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1 1 0;"><span style="font-size: 20px; line-height: 1;">{{ r.glyph }}</span><span style="font-size: 15px; font-weight: 700; color: #d6dee6; text-align: left;">{{ r.label }}</span></span>
+                <span style="display: flex; align-items: center; gap: 7px; flex: 0 1 auto; min-width: 0; max-width: 64%;">
+                  <span style="{{ r.valCss }}">{{ r.value }}</span>
+                  <span style="{{ r.caret }}">▼</span>
+                </span>
+              </button>
+              <sc-if value="{{ r.hasBar }}">
+                <div style="height: 8px; margin: 0 8px 6px; border-radius: 999px; background: #0a1320; border: 1px solid rgba(255,255,255,.1); overflow: hidden;">
+                  <div style="{{ r.bar }}"></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ r.open }}">
+                <div style="{{ r.detail }}">
+                  <div style="{{ r.bigCss }}">{{ r.big }}</div>
+                  <p style="margin: 0; font-size: 14px; font-weight: 700; line-height: 1.45; color: #d6dee6; text-wrap: pretty;">{{ r.note }}</p>
+                </div>
+              </sc-if>
+            </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    </sc-if>
+    </div>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1440, &quot;height&quot;: 900}, &quot;sound&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Lesson&quot;}, &quot;music&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Lesson&quot;}, &quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dark&quot;, &quot;light&quot;], &quot;default&quot;: &quot;dark&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Look&quot;}}">
+/* ---------- this lab: every word, picture and rule that is its own ---------- */
+const yes = (name) => [{ show: 'Attracted', val: 1, text: 'Snap! The ' + name + ' shivers, then jumps onto the magnet. Attracted.', cue: 'clink', glyph: '🧲' }];
+const no = (name) => [{ show: 'Not attracted', val: 0, text: 'Nothing happens. The ' + name + ' stays still. Not attracted.', cue: 'look', glyph: '🚫' }];
+const READ = [{ label: 'Attracted?', glyph: '🧲', key: 'show', empty: '—', note: 'Attracted means it jumps to the magnet.' }, { label: 'Object tested', glyph: '🔍', key: 'item', empty: '—', note: 'The object near the magnet right now.' }];
+const ACT = { label: 'Bring the magnet near', glyph: '🧲', first: 'Place an object first, then tap the magnet.' };
+const ALL = [
+  { id: 'nail', label: 'Iron nail', glyph: '🔩', bin: 'mag', sound: 'clink', hints: { non: 'The nail jumped to the magnet. Which box is that?', any: 'Remember the test. Did it jump to the magnet?' } },
+  { id: 'clip', label: 'Steel clip', glyph: '📎', bin: 'mag', sound: 'clink', hints: { non: 'The clip jumped to the magnet. Which box is that?', any: 'Remember the test. Did it jump to the magnet?' } },
+  { id: 'coin', label: 'Copper coin', glyph: '🪙', bin: 'non', sound: 'clink', hints: { mag: 'The coin stayed still. Copper is metal, but not magnetic. Which box is that?', any: 'Remember the test. Did it jump to the magnet?' } },
+  { id: 'wood', label: 'Wooden block', glyph: '🪵', bin: 'non', sound: 'tap', hints: { mag: 'The wood stayed still. Which box is that?', any: 'Remember the test. Did it jump to the magnet?' } },
+  { id: 'ruler', label: 'Plastic ruler', glyph: '📏', bin: 'non', sound: 'pop', hints: { mag: 'The ruler stayed still. Which box is that?', any: 'Remember the test. Did it jump to the magnet?' } },
+  { id: 'foil', label: 'Foil', glyph: '✨', bin: 'non', sound: 'rustle', hints: { mag: 'The foil is shiny metal, but it stayed still. Which box is that?', any: 'Remember the test. Did it jump to the magnet?' } }
+];
+const LAB = {
+  code: '6.1B', name: 'Magnet Test Lab', glyph: '📎',
+  sub: 'What does a magnet attract?', level: 'P3 Science',
+  doneTitle: 'Well done, scientist',
+  modelName: 'magnetTestModel',
+  model: { attracts: (id) => id === 'nail' || id === 'clip' },
+  scene: { tag: 'magnettest-scene', file: 'magnettest-scene.js', event: 'magnettest' },
+  intro: {
+    cap: 'The bench · a magnet and six objects',
+    para: 'A <strong style="color: #ffb627;">magnet</strong> sits beside a row of objects: an iron nail, a steel paper clip, a copper coin, a wooden block, a plastic ruler and some foil. Bring the magnet near each one. Which ones jump?',
+    cards: [
+      { glyph: '🔩', title: 'Test the metal objects', text: 'the nail, the clip and the coin' },
+      { glyph: '📏', title: 'Test the everyday objects', text: 'the wood, the ruler and the foil' },
+      { glyph: '📦', title: 'Sort them all', text: 'magnetic or non-magnetic' }
+    ],
+    know: ['A magnet picks up paper clips.', 'A coin is made of metal.', 'Foil is shiny.'],
+    wonder: ['Does a magnet attract every metal?', 'Is foil magnetic?', 'What does magnetic mean?'],
+    button: 'To the bench →',
+    safety: ''
+  },
+  parts: [
+    {
+      id: 'metals', label: '🔩 Test the Metal Objects', title: 'Test the metal objects', accent: 'yellow', cap: 'Three metal objects', kind: 'rig',
+      sticker: { glyph: '🔩', name: 'nail' },
+      pred: {
+        intro: 'The nail, the clip and the coin are all made of metal.',
+        q: 'which will a magnet attract: the nail, the clip, or the coin?',
+        opts: ['Only the nail and the clip', 'All three', 'None of them'],
+        then: ['Tap an object to place it.', 'Tap Bring the magnet near.', 'Test all three.']
+      },
+      task: 'Place an object, then bring the magnet near. Test all three.',
+      rackTitle: 'On the bench · tap an object',
+      items: [
+        { id: 'nail', label: 'Iron nail', glyph: '🔩', sound: 'clink', clue: 'The iron nail is in place. Now bring the magnet near.' },
+        { id: 'clip', label: 'Steel clip', glyph: '📎', sound: 'clink', clue: 'The steel paper clip is in place. Now bring the magnet near.' },
+        { id: 'coin', label: 'Copper coin', glyph: '🪙', sound: 'clink', clue: 'The copper coin is in place. Now bring the magnet near.' }
+      ],
+      act: ACT,
+      steps: { nail: yes('iron nail'), clip: yes('steel clip'), coin: no('copper coin') },
+      readings: READ,
+      again: 'That one is tested. Tap the next object.',
+      note: ['Not every metal', 'Not everything made of metal is magnetic. Iron and steel are. Copper is not.'],
+      doneChip: 'Nail and clip attracted, coin not',
+      nextLabel: 'Test the everyday objects →'
+    },
+    {
+      id: 'others', label: '📏 Test the Everyday Objects', title: 'Test the everyday objects', accent: 'blue', cap: 'Three everyday objects', kind: 'rig',
+      sticker: { glyph: '📏', name: 'ruler' },
+      pred: {
+        intro: 'Now some everyday objects.',
+        q: 'will the magnet attract the wood, the ruler, or the foil?',
+        opts: ['No, none of them', 'Yes, the foil only', 'Yes, all of them'],
+        then: ['Tap an object to place it.', 'Tap Bring the magnet near.', 'Test all three.']
+      },
+      task: 'Place an object, then bring the magnet near. Test all three.',
+      rackTitle: 'On the bench · tap an object',
+      items: [
+        { id: 'wood', label: 'Wooden block', glyph: '🪵', sound: 'tap', clue: 'The wooden block is in place. Now bring the magnet near.' },
+        { id: 'ruler', label: 'Plastic ruler', glyph: '📏', sound: 'pop', clue: 'The plastic ruler is in place. Now bring the magnet near.' },
+        { id: 'foil', label: 'Foil', glyph: '✨', sound: 'rustle', clue: 'The shiny foil is in place. Now bring the magnet near.' }
+      ],
+      act: ACT,
+      steps: { wood: no('wooden block'), ruler: no('plastic ruler'), foil: no('foil') },
+      readings: READ,
+      again: 'That one is tested. Tap the next object.',
+      note: ['Only certain materials', 'A magnet attracts only certain materials, like iron and steel. Shiny foil is not one of them.'],
+      doneChip: 'Wood, ruler and foil: none attracted',
+      nextLabel: 'Sort them all →'
+    },
+    {
+      id: 'sortall', label: '📦 Sort Them All', title: 'Sort them all', accent: 'green', cap: 'Two boxes', kind: 'sort',
+      sticker: { glyph: '📦', name: 'sorting box' },
+      pred: {
+        intro: 'Six objects have been tested.',
+        q: 'how many of the six are magnetic?',
+        opts: ['Two', 'Three', 'Six'],
+        then: ['Tap an object.', 'Tap the box it belongs in.', 'A wrong box bounces it back with a hint.']
+      },
+      task: 'Tap an object, then tap the box it belongs in: Magnetic or Non-magnetic.',
+      items: ALL,
+      shelfTitle: 'The six objects · tap one',
+      bins: [
+        { id: 'mag', label: 'Magnetic', short: 'Magnetic', glyph: '🧲', tone: '#5ee07a', note: 'Objects that jumped to the magnet.' },
+        { id: 'non', label: 'Non-magnetic', short: 'Non-magnetic', glyph: '🚫', tone: '#66ccff', note: 'Objects that stayed still.' }
+      ],
+      wrong: 'Remember the test. Did it jump to the magnet?',
+      note: ['Magnetic or not', 'Magnetic materials like iron and steel are attracted. Copper, wood, plastic and foil are not.'],
+      doneChip: 'Two magnetic, four non-magnetic',
+      nextLabel: 'Challenge →'
+    }
+  ],
+  quiz: [
+    { topic: 'Metal', text: 'Does a magnet attract anything made of metal?',
+      options: ['No. It attracts only some metals, like iron and steel.', 'Yes, every metal.', 'Yes, if the metal is shiny.', 'Yes, if the metal is heavy.'],
+      answer: 0, why: 'The copper coin and the foil are metal, but the magnet did not attract them.' },
+    { topic: 'Foil', text: 'Why was the shiny foil not attracted?',
+      options: ['It is not made of a magnetic material', 'It was too thin for the magnet to hold', 'It was too shiny for the magnet to grip', 'The magnet was tired'],
+      answer: 0, why: 'Shiny does not mean magnetic. Foil is not iron or steel.' },
+    { topic: 'Plastic', text: 'Can a plastic ruler become magnetic if it is painted grey?',
+      options: ['No. Paint does not change what it is made of.', 'Yes, grey paint turns it into a magnetic material.', 'Yes, any paint works.', 'Only if the paint is thick.'],
+      answer: 0, why: 'A magnet attracts because of the material, not the colour.' },
+    { topic: 'Magnetic', text: 'Which object is magnetic?',
+      options: ['An iron nail', 'A copper coin', 'A wooden block', 'A plastic ruler'],
+      answer: 0, why: 'Iron is a magnetic material. The nail jumped to the magnet.' },
+    { topic: 'Clip', text: 'A steel paper clip shivers and then jumps to the magnet. This shows that steel is',
+      options: ['a magnetic material', 'a non-magnetic material', 'not a metal', 'made of plastic'],
+      answer: 0, why: 'Steel is attracted by a magnet, so steel is a magnetic material.' }
+  ],
+  bigIdea: [
+    'Magnets attract <strong style="color: #ffb627;">magnetic materials</strong> such as iron and steel.',
+    'Magnets do <strong style="color: #ffb627;">not</strong> attract non-magnetic materials, like copper and plastic.',
+    'Being made of metal does <strong style="color: #ffb627;">not always</strong> mean an object is magnetic.'
+  ]
+};
+LAB.tour = { bench: 'A magnet and six objects. Drag to look round.', own: 'Tap an object, then tap to bring the magnet near.', readings: 'Attracted? shows here. Watch it.' };
+
+/* explore mode: one line about each named thing on the bench */
+LAB.describe = {
+  'MAGNET': 'A bar magnet on a handle. It attracts magnetic things and leaves the rest.',
+  'TEST SPOT': 'The test spot. Each object goes here, under the magnet, to be tested.',
+  'NAIL': 'An iron nail. The magnet attracts it, so it is magnetic.',
+  'CLIP': 'A metal paper clip. The magnet attracts it, so it is magnetic.',
+  'COIN': 'A copper-coloured coin. It is metal, but the magnet does not attract it.',
+  'WOOD': 'A block of wood. Wood is not magnetic.',
+  'RULER': 'A plastic ruler. Plastic is not magnetic.',
+  'FOIL': 'Shiny foil. It is metal, but the magnet does not attract it.',
+  'MAGNETIC': 'Things the magnet attracts go in this box.',
+  'NON-MAGNETIC': 'Things the magnet does not attract go in this box.'
+};
+
+/* ---------- the P3 lab engine: the same for every Primary 3 lab ---------- */
+const STEPS = [{ id: 'intro', label: 'Intro' }, { id: 'start', label: '🧠 Before I Start' }].concat(LAB.parts.map(p => ({ id: p.id, label: p.label })), [{ id: 'quiz', label: '🏆 Challenge' }, { id: 'done', label: 'Wrap-up' }]);
+const PART = {}; LAB.parts.forEach(p => { PART[p.id] = p; });
+const ACC = {
+  green: { tone: '#5ee07a', bg: 'rgba(94,224,122,.1)', bd: 'rgba(94,224,122,.4)', bd2: 'rgba(94,224,122,.5)' },
+  yellow: { tone: '#ffb627', bg: 'rgba(255,182,39,.1)', bd: 'rgba(255,182,39,.4)', bd2: 'rgba(255,182,39,.5)' },
+  purple: { tone: '#cd7bf5', bg: 'rgba(205,123,245,.1)', bd: 'rgba(205,123,245,.4)', bd2: 'rgba(205,123,245,.5)' },
+  blue: { tone: '#66ccff', bg: 'rgba(74,144,226,.1)', bd: 'rgba(74,144,226,.4)', bd2: 'rgba(74,144,226,.5)' }
+};
+/* the welcome tour: six scenes in a fixed order; the lab's own words for the bench, its tap and its reading */
+const TOUR = [
+  { at: 'bench', cap: 'Look Around', say: (LAB.tour && LAB.tour.bench) || 'This is your bench. Drag it to look all round.', view: 'part' },
+  { at: 'steps', cap: 'Choose your steps!', say: STEPS.length + ' stepping stones are your steps. Tap one to go there.', view: 'part' },
+  { at: 'pred', cap: 'Then Go and Look', say: 'Read the three steps, then tap Go and look.', view: 'pred' },
+  { at: 'own', cap: 'Tap and Look', say: (LAB.tour && LAB.tour.own) || 'Tap a thing here and see what happens.', view: 'part' },
+  { at: 'readings', cap: 'Study the Results', say: (LAB.tour && LAB.tour.readings) || 'Your readings show here. Watch them count up.', view: 'part' },
+  { at: 'next', cap: 'Collect Stickers', say: 'Tap Next when a part is done. Win the ' + ((LAB.parts[0].sticker && LAB.parts[0].sticker.name) || 'first') + ' sticker!', view: 'part' }
+];
+const TOUR_KEY = 'sm-tour-' + LAB.code;
+const TOUR_SECS = 6.5;
+
+/* the pure model, also on window under the lab's own name */
+try { window[LAB.modelName] = LAB.model || {}; window.__LAB = LAB; } catch (e) {}
+
+/* one short line about a labelled thing: the lab's own (LAB.describe), else the intro line that mentions it */
+function describeThing(name) {
+  const D = LAB.describe || {};
+  const key = Object.keys(D).find(k => k.toUpperCase() === String(name).toUpperCase());
+  if (key) return D[key];
+  const words = String(name).toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length >= 4);
+  const strip = (h) => String(h).replace(/<[^>]+>/g, '');
+  const pool = (LAB.intro.cards || []).map(c => c.title + ' — ' + c.text).concat(strip(LAB.intro.para).split(/(?<=[.!?])\s+/));
+  const line = pool.find(t => words.some(w => t.toLowerCase().indexOf(w) >= 0));
+  return line || 'Part of the bench. You will use it in a moment.';
+}
+
+function shuffle(a) {
+  const r = a.slice();
+  for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = r[i]; r[i] = r[j]; r[j] = t; }
+  return r;
+}
+function shuffled(list) {
+  return list.map((q) => {
+    const order = shuffle(q.options.map((_, i) => i));
+    return Object.assign({}, q, { options: order.map(i => q.options[i]), answer: order.indexOf(q.answer) });
+  });
+}
+/* the order the chips of each "choose" card are shown in: shuffled, so the true chip is not always on top */
+function chipOrders() {
+  const out = {};
+  LAB.parts.forEach(p => { if (p.kind === 'choose') p.prompts.forEach(q => { out[p.id + ':' + q.id] = shuffle(q.opts.map((_, i) => i)); }); });
+  return out;
+}
+
+function unlockedIds() {
+  let raw = null;
+  try { raw = new URLSearchParams(location.search).get('unlock'); } catch (e) { raw = null; }
+  if (raw === null || raw === undefined) return STEPS.map(s => s.id);
+  raw = String(raw).trim();
+  if (raw.toLowerCase() === 'all') return STEPS.map(s => s.id);
+  const list = raw.split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
+  if (list.indexOf('intro') < 0) list.push('intro');
+  if (list.indexOf('start') < 0) list.push('start');   /* the KWL step is always open, like the intro */
+  return list;
+}
+const CONFETTI = Array.from({ length: 26 }, (_, i) => {
+  const cols = ['#ffb627', '#3fc35f', '#66ccff', '#b557e6', '#e8493f', '#fff'];
+  return {
+    css: 'position:absolute;top:0;left:' + (3 + (i * 37) % 94) + '%;width:' + (8 + (i % 3) * 4) + 'px;height:' + (12 + (i % 4) * 4) + 'px;border-radius:2px;background:' + cols[i % 6]
+      + ';animation:clConfetti ' + (2.6 + (i % 5) * 0.4) + 's linear ' + ((i * 0.13) % 1.4) + 's infinite;pointer-events:none;'
+  };
+});
+const starsFor = (score, n) => score >= n ? '⭐⭐⭐' : score >= Math.ceil(n * 0.6) ? '⭐⭐' : score >= 1 ? '⭐' : '';
+
+class Component extends DCLogic {
+  unlocked = unlockedIds();
+  questions = shuffled(LAB.quiz);
+  chipOrder = chipOrders();
+
+  state = {
+    step: 0, music: true, theme: null, celebrate: false,
+    pred: {}, went: {}, expanded: false, info: null, showing: false,
+    revealed: {}, placed: {}, given: {}, rig: {}, chosen: {}, sel: {}, clue: null, justDone: false,
+    know: {}, wonder: {}, own: '',
+    openRow: null, err: '', shake: null, lit: '',
+    qi: 0, picked: null, score: 0,
+    lockMsg: false, idle: false, hintBox: null,
+    tour: null, tourBox: null
+  };
+
+  componentDidMount() {
+    const EV = LAB.scene.event;
+    this._onCue = (e) => { if (e.detail) this.cue(e.detail.kind); };
+    addEventListener(EV + '-cue', this._onCue);
+    /* a thing tapped on the bench is the same as tapping it in the notebook */
+    /* explore mode: a tap on the bench names the nearest labelled thing and shows one line about it */
+    this._onInfo = (e) => {
+      if (!this.state.showing) return;
+      const name = e.detail.name;
+      if (!name) { this.setState({ info: { name: '', text: 'Nothing is labelled there. Tap a thing with a name tag.' } }); return; }
+      this.cue('click');
+      this.setState({ info: { name, text: describeThing(name) } });
+    };
+    addEventListener(EV + '-info', this._onInfo);
+    this._onPick = (e) => {
+      const id = this.stepId(), P = PART[id];
+      if (!P || !e.detail || !this.collapsed()) return;
+      const v = String(e.detail.setting);
+      if (P.kind === 'reveal') this.reveal(v);
+      else if (P.kind === 'sort') { if (P.bins.some(b => b.id === v)) this.tapBin(v); else this.pickItem(v); }
+      else if (P.kind === 'give') { if (P.targets.some(t => t.id === v)) this.tapTarget(v); else this.pickGive(v); }
+      else if (P.kind === 'rig') { if (v === 'act' || this.state.sel[id] === v) this.actRig(); else this.pickRig(v); }
+      else if (P.kind === 'choose') { if (/^\d+$/.test(v)) this.pickOpt(Number(v)); else this.pickPrompt(v); }
+    };
+    addEventListener(EV + '-pick', this._onPick);
+    window.LAB_RESULTS = () => { try { const id = this.stepId(); if (!PART[id]) return []; return this.buildRows(id).map(d => ({ label: d.label, value: String(d.value) })); } catch (e) { return []; } };
+
+    this._unlockAudio = () => {
+      if (this._ac) { if (this._ac.state === 'suspended') this._ac.resume(); return; }
+      try { this._ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { this._ac = null; }
+      if (this._ac) this.startMusic();
+    };
+    addEventListener('pointerdown', this._unlockAudio, true);
+    addEventListener('keydown', this._unlockAudio, true);
+
+    let seen = false; try { seen = !!localStorage.getItem(TOUR_KEY); } catch (e) {}
+    if (!seen) this._tourStartT = setTimeout(() => this.startTour(), 1400);
+    this._onResize = () => { if (this.state.tour) this.measureTour(); };
+    addEventListener('resize', this._onResize);
+
+    this._lastAct = Date.now();
+    this._bump = () => { this._lastAct = Date.now(); if (this.state.idle) this.setState({ idle: false }); };
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(t => addEventListener(t, this._bump, true));
+    this._idleTimer = setInterval(() => {
+      const idle = Date.now() - this._lastAct > 20000;
+      if (idle !== this.state.idle) this.setState({ idle, hintBox: idle ? this.hintAt() : null });
+      else if (idle) {
+        const b = this.hintAt(), cur = this.state.hintBox;
+        if (!b) { if (cur) this.setState({ hintBox: null }); }
+        else if (!cur || Math.abs(b.y - cur.y) > 4 || Math.abs(b.x - cur.x) > 4) this.setState({ hintBox: b });
+      }
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    const EV = LAB.scene.event;
+    removeEventListener(EV + '-cue', this._onCue); removeEventListener(EV + '-pick', this._onPick); removeEventListener(EV + '-info', this._onInfo);
+    removeEventListener('pointerdown', this._unlockAudio, true);
+    removeEventListener('keydown', this._unlockAudio, true);
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(t => removeEventListener(t, this._bump, true));
+    clearInterval(this._idleTimer); clearInterval(this._musicT);
+    clearTimeout(this._lockT); clearTimeout(this._errT); clearTimeout(this._celT); clearTimeout(this._litT); clearTimeout(this._clueT); clearTimeout(this._showT); clearTimeout(this._doneT);
+    clearTimeout(this._tourT); clearTimeout(this._tourStartT); clearTimeout(this._tourM); removeEventListener('resize', this._onResize);
+  }
+
+  componentDidUpdate() { this.applyMusic(); }
+
+  /* ---------- the welcome tour ---------- */
+  startTour() {
+    if (this.stepId() === 'done') return;
+    clearTimeout(this._tourT);
+    this.setState({ tour: { i: 0, over: false }, tourBox: null, idle: false, hintBox: null });
+    this.tourScene(0);
+  }
+  tourScene(i) {
+    clearTimeout(this._tourM);
+    this._tourM = setTimeout(() => { this.measureTour(); this._tourM = setTimeout(() => this.measureTour(), 320); }, 60);
+    clearTimeout(this._tourT);
+    this._tourT = setTimeout(() => this.tourStep(), TOUR_SECS * 1000);
+  }
+  tourStep() {
+    const t = this.state.tour; if (!t) return;
+    if (t.over) { this.endTour(); return; }
+    if (t.i >= TOUR.length - 1) {
+      clearTimeout(this._tourT);
+      this.setState({ tour: { i: t.i, over: true }, tourBox: null });
+      this._tourT = setTimeout(() => this.endTour(), 1800);
+      return;
+    }
+    this.cue('click');
+    this.setState({ tour: { i: t.i + 1, over: false } });
+    this.tourScene(t.i + 1);
+  }
+  endTour() {
+    clearTimeout(this._tourT); clearTimeout(this._tourM);
+    try { localStorage.setItem(TOUR_KEY, '1'); } catch (e) {}
+    this.setState({ tour: null, tourBox: null });
+  }
+  measureTour() {
+    const t = this.state.tour; if (!t || t.over) return;
+    const at = TOUR[t.i].at;
+    const el = [...document.querySelectorAll('[data-tour="' + at + '"]')].find(e => e.getClientRects().length);
+    if (!el) return;   /* nothing to point at yet: keep the last box rather than jump away */
+    const r = el.getBoundingClientRect();
+    const box = { x: r.left, y: r.top, w: r.width, h: r.height };
+    const cur = this.state.tourBox;
+    if (!cur || Math.abs(cur.x - box.x) > 2 || Math.abs(cur.y - box.y) > 2 || Math.abs(cur.w - box.w) > 2 || Math.abs(cur.h - box.h) > 2) this.setState({ tourBox: box });
+  }
+
+  theme() { const t = this.state.theme || this.props.theme || 'dark'; return t === 'light' ? 'light' : 'dark'; }
+
+  /* the challenge result goes to the page that holds this bench (same origin only: the app's lab window), so the
+     session report mailed to parents can say what went well, what to look at again, and what they can do */
+  noteAnswer(q, i, good, s) {
+    try {
+      const M = (this._marks = this._marks || []);
+      M[s.qi] = { topic: q.topic || '', q: q.text || '', ok: good, chose: q.options[i], right: q.options[q.answer], why: q.why || '' };
+      if (s.qi < this.questions.length - 1 || window.parent === window) return;
+      const D = M.filter(Boolean), own = String(this.state.own || '').trim();
+      window.parent.postMessage({ type: 'lab:result', name: LAB.name, code: LAB.code, score: D.filter(m => m.ok).length, total: this.questions.length,
+        right: D.filter(m => m.ok).map(m => m.topic), wrong: D.filter(m => !m.ok).map(m => ({ topic: m.topic, q: m.q, chose: m.chose, answer: m.right, why: m.why })),
+        parts: LAB.parts.map(p => ({ title: p.title, done: !!this.doneFor(p.id) })),
+        wanted: (LAB.intro.wonder || []).filter((t, k) => (this.state.wonder || {})[k]).concat(own ? [own] : []) }, location.origin);
+    } catch (e) {}
+  }
+
+  celebrate() {
+    clearTimeout(this._celT);
+    this.cue('results');
+    this.setState({ celebrate: true });
+    this._celT = setTimeout(() => this.setState({ celebrate: false }), 5200);
+  }
+
+  startMusic() {
+    const ac = this._ac;
+    if (!ac || this._music) return;
+    const bus = ac.createGain(); bus.gain.value = 0;
+    const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1800;
+    bus.connect(lp); lp.connect(ac.destination);
+    this._music = { bus, step: 0, next: ac.currentTime + 0.1 };
+    const SCALE = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 587.33, 659.25];
+    const PATTERN = [0, 2, 4, 7, 5, 4, 2, 1, 0, 3, 5, 7, 6, 5, 3, 2];
+    const CHORDS = [[0, 2, 4], [3, 5, 7], [1, 3, 5], [4, 6, 8]];
+    const BEAT = 0.42;
+    const note = (f, at, dur, type, vol, dest) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = type; o.frequency.value = f;
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(vol, at + 0.03);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+      o.connect(g); g.connect(dest);
+      o.start(at); o.stop(at + dur + 0.05);
+    };
+    this._musicT = setInterval(() => {
+      const m = this._music;
+      if (!m || ac.state !== 'running') return;
+      while (m.next < ac.currentTime + 0.6) {
+        const i = m.step % PATTERN.length, bar = Math.floor(m.step / PATTERN.length) % CHORDS.length;
+        note(SCALE[PATTERN[i]] * 2, m.next, BEAT * 0.9, 'triangle', 0.045, m.bus);
+        if (i === 0) CHORDS[bar].forEach((d, k) => note(SCALE[d % 8] / (d >= 8 ? 1 : 2), m.next + k * 0.02, BEAT * PATTERN.length, 'sine', 0.05, m.bus));
+        if (i % 4 === 0) note(SCALE[CHORDS[bar][0]] / 2, m.next, BEAT * 1.6, 'sine', 0.06, m.bus);
+        m.next += BEAT; m.step++;
+      }
+    }, 200);
+    this.applyMusic();
+  }
+
+  applyMusic() {
+    const m = this._music, ac = this._ac;
+    if (!m || !ac) return;
+    const on = this.state.music && this.props.music !== false && this.stepId() !== 'done';
+    m.bus.gain.cancelScheduledValues(ac.currentTime);
+    m.bus.gain.setTargetAtTime(on ? 0.9 : 0.0001, ac.currentTime, 0.4);
+  }
+
+  /* every cue is synthesized at runtime: no audio files. The animal sounds are short and real-ish. */
+  cue(kind) {
+    if (this.props.sound === false) return;
+    const ac = this._ac;
+    if (!ac) return;
+    if (ac.state === 'suspended') ac.resume();
+    const t0 = ac.currentTime;
+    const beep = (f, at, dur, type, vol, f1) => {
+      const o = ac.createOscillator(), g = ac.createGain();
+      o.type = type; o.frequency.setValueAtTime(f, t0 + at);
+      if (f1) o.frequency.exponentialRampToValueAtTime(f1, t0 + at + dur);
+      g.gain.setValueAtTime(0.0001, t0 + at);
+      g.gain.exponentialRampToValueAtTime(vol, t0 + at + 0.014);
+      g.gain.exponentialRampToValueAtTime(0.0001, t0 + at + dur);
+      o.connect(g); g.connect(ac.destination);
+      o.start(t0 + at); o.stop(t0 + at + dur + 0.03);
+    };
+    const noise = (at, dur, vol, freq, q) => {
+      const n = Math.floor(ac.sampleRate * dur), b = ac.createBuffer(1, n, ac.sampleRate), d = b.getChannelData(0);
+      for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+      const s = ac.createBufferSource(), bp = ac.createBiquadFilter(), g = ac.createGain();
+      s.buffer = b; bp.type = 'bandpass'; bp.frequency.value = freq || 1400; bp.Q.value = q || 0.7;
+      g.gain.setValueAtTime(vol, t0 + at); g.gain.exponentialRampToValueAtTime(0.0001, t0 + at + dur);
+      s.connect(bp); bp.connect(g); g.connect(ac.destination);
+      s.start(t0 + at); s.stop(t0 + at + dur + 0.02);
+    };
+    if (kind === 'click' || kind === 'tap') beep(320, 0, 0.07, 'square', 0.05);
+    else if (kind === 'select') beep(560, 0, 0.1, 'triangle', 0.06);
+    else if (kind === 'correct') [523, 659, 784].forEach((f, i) => beep(f, i * 0.075, 0.15, 'triangle', 0.07));
+    else if (kind === 'wrong' || kind === 'boing') { beep(300, 0, 0.18, 'sine', 0.06, 180); beep(180, 0.16, 0.22, 'sine', 0.05, 240); }
+    else if (kind === 'results') { [392, 523, 659, 784, 1047].forEach((f, i) => beep(f, i * 0.09, 0.22, 'triangle', 0.07)); beep(1047, 0.5, 0.5, 'sine', 0.05); }
+    else if (kind === 'look') { beep(660, 0, 0.14, 'triangle', 0.06); beep(660, 0.2, 0.14, 'triangle', 0.06); beep(880, 0.42, 0.3, 'sine', 0.05); }
+    else if (kind === 'lift' || kind === 'flip') { beep(440, 0, 0.09, 'triangle', 0.045, 660); }
+    else if (kind === 'step' || kind === 'land') { noise(0, 0.07, 0.04, 300); }
+    else if (kind === 'sticker') { [784, 1047, 1319].forEach((f, i) => beep(f, i * 0.07, 0.16, 'triangle', 0.06)); noise(0.2, 0.2, 0.02, 3500); }
+    else if (kind === 'found') { [880, 1175, 1320, 1760].forEach((f, i) => beep(f, i * 0.08, 0.18, 'triangle', 0.055)); beep(2093, 0.36, 0.4, 'sine', 0.035); noise(0.3, 0.25, 0.02, 4000); }
+    /* the animals and things */
+    else if (kind === 'buzz') { for (let i = 0; i < 6; i++) beep(190 + (i % 2) * 25, i * 0.05, 0.06, 'sawtooth', 0.025); }
+    else if (kind === 'purr') { for (let i = 0; i < 10; i++) beep(70, i * 0.06, 0.05, 'triangle', 0.05); }
+    else if (kind === 'rustle') { noise(0, 0.14, 0.04, 2600, 0.4); noise(0.12, 0.18, 0.03, 3200, 0.4); }
+    else if (kind === 'pop') { beep(520, 0, 0.06, 'sine', 0.07, 880); noise(0, 0.04, 0.03, 2000); }
+    else if (kind === 'croak') { beep(140, 0, 0.14, 'sawtooth', 0.035, 110); beep(150, 0.16, 0.16, 'sawtooth', 0.035, 115); }
+    else if (kind === 'chirp') { beep(2000, 0, 0.07, 'sine', 0.045, 2800); beep(2200, 0.1, 0.07, 'sine', 0.04, 3000); }
+    else if (kind === 'cluck') { beep(600, 0, 0.05, 'square', 0.03, 400); beep(500, 0.08, 0.06, 'square', 0.03, 350); beep(650, 0.17, 0.05, 'square', 0.03, 420); }
+    else if (kind === 'moo') { beep(160, 0, 0.5, 'sawtooth', 0.03, 120); }
+    else if (kind === 'baa') { for (let i = 0; i < 5; i++) beep(330 + (i % 2) * 30, i * 0.09, 0.09, 'sawtooth', 0.025); }
+    else if (kind === 'yip') { beep(700, 0, 0.09, 'square', 0.035, 1000); beep(900, 0.12, 0.08, 'square', 0.03, 700); }
+    else if (kind === 'splash') { noise(0, 0.25, 0.05, 900, 0.5); beep(300, 0, 0.1, 'sine', 0.03, 180); }
+    else if (kind === 'ring') { beep(1500, 0, 0.3, 'sine', 0.04); beep(1520, 0.1, 0.4, 'sine', 0.03); }
+    else if (kind === 'clink') { beep(2400, 0, 0.12, 'sine', 0.04); beep(3200, 0.02, 0.08, 'sine', 0.02); }
+  }
+
+  stepId() { return STEPS[this.state.step].id; }
+  isOpen(id) { return this.unlocked.indexOf(id) >= 0; }
+  collapsed() { const id = this.stepId(); return !!PART[id] && !!this.state.went[id] && !this.state.expanded; }
+
+  /* ---------- what has been done ---------- */
+  revealedIn(id) { return this.state.revealed[id] || {}; }
+  placedIn(id) { return this.state.placed[id] || {}; }
+  countIn(id, bin) { const p = this.placedIn(id); return Object.keys(p).filter(k => p[k] === bin).length; }
+  givenIn(id, target) { return ((this.state.given[id] || {})[target]) || {}; }
+  ticksIn(id, target) { const P = PART[id], g = this.givenIn(id, target), T = P.targets.find(t => t.id === target); return P.gives.filter(x => g[x.id] && T && T.reacts).length; }
+  /* rig: how many taps each set-up has had; a set-up is finished when every step has been tapped through */
+  progIn(id) { return this.state.rig[id] || {}; }
+  stepsOf(id, itemId) { const P = PART[id]; return (P && P.steps && P.steps[itemId]) || []; }
+  endedIn(id, itemId) { return this.stepsOf(id, itemId).length > 0 && (this.progIn(id)[itemId] || 0) >= this.stepsOf(id, itemId).length; }
+  stepNow(id, itemId) { const n = this.progIn(id)[itemId] || 0; return n ? this.stepsOf(id, itemId)[n - 1] : null; }
+  valueOf(id, itemId) { const st = this.stepNow(id, itemId); if (!st) return null; const v = st.val !== undefined ? st.val : parseFloat(String(st.show)); return isNaN(v) ? null : v; }
+  /* choose: which option each prompt has settled on (only the right one is kept) */
+  chosenIn(id) { return this.state.chosen[id] || {}; }
+  doneFor(id) {
+    const P = PART[id]; if (!P) return false;
+    if (P.kind === 'reveal') return P.items.every(it => this.revealedIn(id)[it.id]);
+    if (P.kind === 'sort') return P.items.every(it => this.placedIn(id)[it.id] === it.bin);
+    if (P.kind === 'give') return P.targets.every(t => P.gives.every(g => this.givenIn(id, t.id)[g.id]));
+    if (P.kind === 'rig') return P.items.filter(it => it.ok !== false && it.need !== false).every(it => this.endedIn(id, it.id));
+    if (P.kind === 'choose') return P.prompts.every(p => this.chosenIn(id)[p.id] !== undefined);
+    return false;
+  }
+  stickerList() {
+    const out = LAB.parts.map(p => ({ glyph: (p.sticker && p.sticker.glyph) || '⭐', title: (p.sticker && p.sticker.name) || p.title, on: this.doneFor(p.id), gold: false }));
+    const quizDone = this.state.step >= STEPS.length - 1;
+    out.push({ glyph: '🏆', title: 'Challenge', on: quizDone, gold: quizDone });
+    return out;
+  }
+
+  goStep(n) {
+    const st = STEPS[n];
+    if (!st) return;
+    if (!this.isOpen(st.id)) {
+      this.cue('boing');
+      clearTimeout(this._lockT);
+      this.setState({ lockMsg: true });
+      this._lockT = setTimeout(() => this.setState({ lockMsg: false }), 3000);
+      return;
+    }
+    this.cue('click');
+    clearTimeout(this._showT); clearTimeout(this._clueT); clearTimeout(this._doneT);
+    this.setState({ step: n, picked: null, expanded: false, lockMsg: false, hintBox: null, err: '', shake: null, openRow: null, showing: false, clue: null, justDone: false });
+  }
+
+  /* "Show me": the bench plays for three seconds with nothing changed, then comes back */
+  showMe() {
+    this.cue('select');
+    this.setState({ showing: !this.state.showing, info: null });
+  }
+
+  finishedPart(id) {
+    clearTimeout(this._doneT);
+    this.cue('sticker');
+    this.setState({ justDone: true });
+    this._doneT = setTimeout(() => this.setState({ justDone: false }), 6000);
+  }
+
+  /* ---------- reveal: tap a thing, see its clue ---------- */
+  reveal(itemId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'reveal') return;
+    const it = P.items.find(x => x.id === itemId); if (!it) return;
+    const was = this.doneFor(id);
+    const r = Object.assign({}, this.revealedIn(id));
+    if (r[itemId]) { this.cue(it.sound || 'tap'); this.setState({ clue: { id: itemId, glyph: it.glyph, tag: it.label, text: it.clue, why: it.why || '' }, err: P.again || 'You already spotted this one. Try another.' }); clearTimeout(this._errT); this._errT = setTimeout(() => this.setState({ err: '' }), 3000); this.holdClue(); return; }
+    r[itemId] = true;
+    this.cue(it.sound || 'pop');
+    this.setState({ revealed: Object.assign({}, s.revealed, { [id]: r }), clue: { id: itemId, glyph: it.glyph, tag: it.label, text: it.clue, why: it.why || '' }, err: '' });
+    this.flashLit('item-' + itemId);
+    this.holdClue();
+    if (!was && P.items.every(x => r[x.id])) this.finishedPart(id);
+  }
+  holdClue() { clearTimeout(this._clueT); this._clueT = setTimeout(() => this.setState({ clue: null }), 7000); }
+
+  /* ---------- sort: tap a thing, then tap where it goes ---------- */
+  pickItem(itemId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'sort') return;
+    const it = P.items.find(x => x.id === itemId); if (!it || this.placedIn(id)[itemId] === it.bin) return;
+    this.cue(it.sound || 'lift');
+    this.setState({ sel: Object.assign({}, s.sel, { [id]: itemId }), err: '', shake: null });
+  }
+  tapBin(binId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'sort') return;
+    const itemId = s.sel[id]; if (!itemId) { this.flashErr(P.pickFirst || 'Tap a thing first, then tap where it goes.', 'bin-' + binId); return; }
+    const it = P.items.find(x => x.id === itemId); if (!it) return;
+    const was = this.doneFor(id);
+    if (binId !== it.bin) {
+      /* a soft boing, the thing bounces back to the shelf, and a clue that never names the answer */
+      this.cue('boing');
+      const hint = (it.hints && (it.hints[binId] || it.hints.any)) || P.wrong || 'Look at the clue again. Where does it belong?';
+      clearTimeout(this._errT);
+      this.setState({ err: hint, shake: 'bin-' + binId, placed: Object.assign({}, s.placed, { [id]: Object.assign({}, this.placedIn(id), { [itemId]: null }) }) });
+      this._errT = setTimeout(() => this.setState({ err: '', shake: null }), 4200);
+      return;
+    }
+    this.cue('land');
+    const p = Object.assign({}, this.placedIn(id), { [itemId]: binId });
+    const B = P.bins.find(b => b.id === binId) || {};
+    const why = it.why || B.note || '';
+    this.setState({ placed: Object.assign({}, s.placed, { [id]: p }), sel: Object.assign({}, s.sel, { [id]: null }), err: '', shake: null, clue: why ? { id: itemId, glyph: it.glyph, tag: it.label + ' → ' + (B.short || B.label), text: it.clue || ('Yes! ' + it.label + ' belongs here.'), why } : null });
+    this.flashLit('bin-' + binId);
+    if (why) this.holdClue();
+    if (!was && P.items.every(x => p[x.id] === x.bin)) this.finishedPart(id);
+  }
+
+  /* ---------- give: tap a tray or a clue, then tap a thing ---------- */
+  pickGive(giveId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'give') return;
+    if (!P.gives.some(g => g.id === giveId)) return;
+    this.cue('lift');
+    this.setState({ sel: Object.assign({}, s.sel, { [id]: giveId }), err: '', shake: null, clue: null });
+  }
+  tapTarget(targetId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'give') return;
+    const T = P.targets.find(t => t.id === targetId); if (!T) return;
+    const giveId = s.sel[id]; if (!giveId) { this.flashErr(P.pickFirst || 'Tap a tray first, then tap a thing.', 'target-' + targetId); return; }
+    const G = P.gives.find(g => g.id === giveId);
+    const was = this.doneFor(id), had = this.givenIn(id, targetId);
+    if (had[giveId]) {
+      this.cue(T.reacts ? (T.sound || 'tap') : 'boing');
+      clearTimeout(this._errT);
+      this.setState({ err: T.reacts ? (P.again || 'You already gave it that. Try a different one.') : (P.againNo || 'It still does not need it. Try a different one.'), shake: 'target-' + targetId });
+      this._errT = setTimeout(() => this.setState({ err: '', shake: null }), 3200);
+      return;
+    }
+    const g = Object.assign({}, had, { [giveId]: true });
+    const given = Object.assign({}, s.given, { [id]: Object.assign({}, s.given[id] || {}, { [targetId]: g }) });
+    this.cue(T.reacts ? (T.sound || 'correct') : 'look');
+    this.setState({ given, sel: Object.assign({}, s.sel, { [id]: null }), err: '', shake: null, clue: { glyph: T.glyph, tag: T.label + ' · ' + G.label, text: T.reacts ? (T.yes || 'It reacts!') : (T.no || 'Nothing changes.') } });
+    this.flashLit('target-' + targetId);
+    this.holdClue();
+    if (!was && P.targets.every(t => P.gives.every(x => this.givenIn(id, t.id)[x.id] || (t.id === targetId && g[x.id])))) this.finishedPart(id);
+  }
+
+  /* ---------- rig: set something up, then tap the same button again and again ---------- */
+  pickRig(itemId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'rig') return;
+    const it = P.items.find(x => x.id === itemId); if (!it) return;
+    if (it.ok === false) { this.flashErr(it.hint || P.wrong || 'Not that one. Try another.', 'rig-' + itemId); return; }
+    if (this.endedIn(id, itemId)) { this.cue('tap'); this.setState({ sel: Object.assign({}, s.sel, { [id]: itemId }), err: P.again || 'That one is finished. Try another, or tap Next.', shake: null, clue: null }); clearTimeout(this._errT); this._errT = setTimeout(() => this.setState({ err: '' }), 3200); return; }
+    this.cue(it.sound || 'lift');
+    this.setState({ sel: Object.assign({}, s.sel, { [id]: itemId }), err: '', shake: null, clue: it.clue ? { glyph: it.glyph, tag: it.label, text: it.clue } : null });
+    if (it.clue) this.holdClue();
+  }
+  actRig() {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'rig') return;
+    const itemId = s.sel[id]; if (!itemId) { this.flashErr(P.act.first || 'Set it up first, then tap here.', 'act'); return; }
+    const it = P.items.find(x => x.id === itemId); if (!it) return;
+    const steps = this.stepsOf(id, itemId), n = this.progIn(id)[itemId] || 0;
+    if (n >= steps.length) { this.flashErr(P.again || 'That one is finished. Try another, or tap Next.', 'act'); return; }
+    const was = this.doneFor(id), st = steps[n];
+    const prog = Object.assign({}, this.progIn(id), { [itemId]: n + 1 });
+    this.cue(st.cue || P.act.sound || 'tap');
+    this.setState({ rig: Object.assign({}, s.rig, { [id]: prog }), err: '', shake: null, clue: { glyph: st.glyph || it.glyph, tag: it.label, text: st.text } });
+    this.flashLit('act');
+    this.holdClue();
+    if (!was && P.items.filter(x => x.ok !== false && x.need !== false).every(x => (prog[x.id] || 0) >= this.stepsOf(id, x.id).length)) this.finishedPart(id);
+  }
+
+  /* ---------- choose: tap a prompt, then the one chip that is true for it ---------- */
+  pickPrompt(promptId) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'choose') return;
+    const p = P.prompts.find(x => x.id === promptId); if (!p) return;
+    this.cue(p.sound || 'lift');
+    this.setState({ sel: Object.assign({}, s.sel, { [id]: promptId }), err: '', shake: null, clue: p.clue ? { glyph: p.glyph, tag: p.label, text: p.clue } : null });
+    if (p.clue) this.holdClue();
+  }
+  pickOpt(i) {
+    const id = this.stepId(), P = PART[id], s = this.state; if (!P || P.kind !== 'choose') return;
+    const promptId = s.sel[id]; if (!promptId) { this.flashErr(P.pickFirst || 'Tap a card first, then tap a chip.', 'opt-' + i); return; }
+    const p = P.prompts.find(x => x.id === promptId); if (!p) return;
+    if (this.chosenIn(id)[promptId] !== undefined) { this.flashErr(P.again || 'That one is done. Tap another card.', 'opt-' + i); return; }
+    const was = this.doneFor(id);
+    if (i !== p.answer) {
+      this.cue('boing');
+      const hint = (p.hints && (p.hints[i] || p.hints.any)) || P.wrong || 'Look again. Try another chip.';
+      clearTimeout(this._errT);
+      this.setState({ err: hint, shake: 'opt-' + i });
+      this._errT = setTimeout(() => this.setState({ err: '', shake: null }), 4200);
+      return;
+    }
+    this.cue('correct');
+    const ch = Object.assign({}, this.chosenIn(id), { [promptId]: i });
+    this.setState({ chosen: Object.assign({}, s.chosen, { [id]: ch }), sel: Object.assign({}, s.sel, { [id]: null }), err: '', shake: null, clue: { glyph: p.glyph, tag: p.label, text: p.why || p.opts[i] } });
+    this.flashLit('opt-' + i);
+    this.holdClue();
+    if (!was && P.prompts.every(x => ch[x.id] !== undefined)) this.finishedPart(id);
+  }
+
+  ring(on, radius) {
+    const r = radius || 16;
+    return 'display:block;padding:3px;border-radius:' + r + 'px;' + (on
+      ? 'background:linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f);background-size:300% 100%;animation:clRainbow 2.4s linear infinite;box-shadow:0 0 16px rgba(255,255,255,.28);'
+      : 'background:transparent;');
+  }
+  cueRing(on, radius) {
+    return 'display:block;padding:2px;border-radius:' + (radius || 16) + 'px;' + (on
+      ? 'background:linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f);background-size:300% 100%;animation:clRainbow 2.4s linear infinite;box-shadow:0 0 12px rgba(255,255,255,.22);'
+      : 'background:transparent;');
+  }
+  visitRing(on, i, n, radius) {
+    const base = 'display:block;padding:2px;border-radius:' + (radius || 16) + 'px;';
+    if (!on) return base + 'background:transparent;';
+    return base + 'background:transparent;--visit-period:' + (n * 1) + 's;--visit-delay:' + (i * 1) + 's;';
+  }
+  turn(on, i, n, radius) {
+    if (on && n <= 1) return { cls: '', css: this.cueRing(true, radius) };
+    return { cls: on ? 'cl-visit' : '', css: this.visitRing(on, i, n, radius) };
+  }
+  markRing(tone) {
+    const base = 'display:block;padding:3px;border-radius:19px;';
+    if (!tone) return base + 'background:transparent;';
+    return tone === 'good' ? base + 'background:#5ee07a;box-shadow:0 0 16px rgba(63,195,95,.55);' : base + 'background:#e8493f;box-shadow:0 0 16px rgba(232,73,63,.5);';
+  }
+  flashLit(key) {
+    clearTimeout(this._litT);
+    this.setState({ lit: key });
+    this._litT = setTimeout(() => this.setState({ lit: '' }), 1500);
+  }
+  flashErr(msg, key) {
+    clearTimeout(this._errT);
+    this.cue('boing');
+    this.setState({ err: msg, shake: key || null });
+    this._errT = setTimeout(() => this.setState({ err: '', shake: null }), 3600);
+  }
+
+  hintAt() {
+    if (this.stepId() === 'done') return null;
+    const box = [...document.querySelectorAll('[data-cue="1"]')].find(e => e.getClientRects().length);
+    if (!box) return null;
+    const el = box.querySelector('button, input') || box, r = el.getBoundingClientRect();
+    if (el.closest && el.closest('aside')) return { x: r.right + 12, y: r.top + r.height / 2, side: 'right' };
+    return { x: r.left - 12, y: r.top + r.height / 2, side: 'left' };
+  }
+
+  /* the readings: every one has a picture; counts stay small and whole */
+  buildRows(id) {
+    const s = this.state, P = PART[id], tone = ACC[P.accent || 'blue'].tone;
+    const demo = !!s.tour && !s.tour.over && TOUR[s.tour.i].at === 'readings';
+    let defs = [];
+    if (P.kind === 'reveal') {
+      const n = demo ? 1 : P.items.filter(it => this.revealedIn(id)[it.id]).length, N = P.items.length;
+      defs = [
+        { k: 'cf', glyph: '🔍', label: P.readings ? P.readings[0] : 'Clues found', value: n + ' of ' + N, color: tone, frac: n / N, big: n + ' of ' + N, note: 'Tap a thing to see its clue.' },
+        P.second === 'count'
+          ? { k: 'pt', glyph: '👆', label: P.readings ? P.readings[1] : 'Things tapped', value: String(n), color: '#66ccff', frac: n / N, big: String(n), note: n >= N ? 'All tapped. Move on when you are ready.' : 'Keep going until every part has been tapped.' }
+          : { k: 'lf', glyph: '📋', label: P.readings ? P.readings[1] : 'Things left to spot', value: String(N - n), color: '#66ccff', frac: (N - n) / N, big: String(N - n), note: n >= N ? 'All spotted. Move on when you are ready.' : 'Keep going until every thing has a clue.' }
+      ];
+    } else if (P.kind === 'give') {
+      defs = P.gives.map(g => { const marks = P.targets.map(t => demo ? (t.reacts ? '✓' : '✗') : (this.givenIn(id, t.id)[g.id] ? (t.reacts ? '✓' : '✗') : '·')).join(' '); return { k: 'g-' + g.id, glyph: g.glyph, label: g.label, value: marks, color: tone, big: marks, note: P.targets.length > 1 ? P.targets.map(t => t.label).join(' · ') + ', in that order. ✓ reacts, ✗ does not.' : '✓ means it reacts. ✗ means nothing changes.' }; });
+      P.targets.forEach(t => { const n = demo ? 1 : this.ticksIn(id, t.id); defs.push({ k: 't-' + t.id, glyph: t.glyph, label: t.label + (t.reacts ? ' ticks' : ' crosses'), value: (t.reacts ? n : (demo ? 1 : P.gives.filter(x => this.givenIn(id, t.id)[x.id]).length)) + ' of ' + P.gives.length, color: t.reacts ? '#5ee07a' : '#66ccff', frac: (t.reacts ? n : P.gives.filter(x => this.givenIn(id, t.id)[x.id]).length) / P.gives.length, big: String(t.reacts ? n : P.gives.filter(x => this.givenIn(id, t.id)[x.id]).length), note: t.reacts ? 'A tick for every thing it needs.' : 'A cross for every thing it does not need.' }); });
+    } else if (P.kind === 'sort') {
+      const N = P.items.length;
+      /* P.groups = [{ label, glyph, tone, bins }] folds several bins into one reading, e.g. one glass case with three platforms */
+      defs = P.groups
+        ? P.groups.map(g => { const c = demo ? 1 : g.bins.reduce((a, b) => a + this.countIn(id, b), 0), n = P.items.filter(it => g.bins.indexOf(it.bin) >= 0).length; return { k: 'g-' + g.label, glyph: g.glyph, label: g.label, value: c + ' of ' + n, color: g.tone || tone, frac: c / Math.max(1, n), big: c + ' of ' + n, note: g.note || '' }; })
+        : P.bins.filter(b => !b.spare).map(b => { const c = demo ? 1 : this.countIn(id, b.id); return { k: 'b-' + b.id, glyph: b.glyph, label: b.label, value: String(c), color: b.tone || tone, frac: c / N, big: String(c), note: b.note || ('How many things are in the ' + b.label.toLowerCase() + '.') }; });
+      const left = N - P.items.filter(it => this.placedIn(id)[it.id] === it.bin).length;
+      defs.push({ k: 'lf', glyph: '📦', label: 'Still on the shelf', value: String(demo ? N - 1 : left), color: '#8a98a6', frac: left / N, big: String(left), note: left ? 'Tap a thing, then tap its corner.' : 'The shelf is empty. Move on when you are ready.' });
+    } else if (P.kind === 'rig') {
+      /* the readings name what is on the rig and what the last tap showed */
+      const selId = s.sel[id] || null, it = P.items.find(x => x.id === selId) || null;
+      const demoIt = P.items.find(x => x.ok !== false), demoSt = demoIt ? this.stepsOf(id, demoIt.id)[0] : null;
+      const st = demo ? demoSt : (it ? this.stepNow(id, it.id) : null);
+      const maxVal = Math.max(1, ...P.items.map(x => this.stepsOf(id, x.id).map(y => y.val !== undefined ? y.val : parseFloat(String(y.show))).filter(v => !isNaN(v))).flat());
+      defs = (P.readings || []).map((r, i) => {
+        const key = r.key || (i === 0 ? 'show' : i === 1 ? 'mark' : 'item');
+        let v = r.empty || '—', frac;
+        if (key === 'item') v = demo ? (demoIt ? demoIt.label : v) : (it ? it.label : v);
+        else if (st && st[key] !== undefined) { v = String(st[key]); if (key === 'show') { const n = st.val !== undefined ? st.val : parseFloat(String(st.show)); if (!isNaN(n)) frac = n / maxVal; } }
+        return { k: 'r' + i, glyph: r.glyph || '📏', label: r.label, value: v, color: i === 0 ? tone : '#66ccff', frac, big: v, note: r.note || '', small: key === 'item' };
+      });
+    } else if (P.kind === 'choose') {
+      const N = P.prompts.length, n = demo ? 1 : P.prompts.filter(p => this.chosenIn(id)[p.id] !== undefined).length;
+      defs = [
+        { k: 'cf', glyph: '✅', label: P.readings ? P.readings[0] : 'Right chips found', value: n + ' of ' + N, color: tone, frac: n / N, big: n + ' of ' + N, note: 'Tap a card, then the chip that is true.' },
+        { k: 'lf', glyph: '📋', label: P.readings ? P.readings[1] : 'Cards left', value: String(N - n), color: '#66ccff', frac: (N - n) / N, big: String(N - n), note: n >= N ? 'All found. Move on when you are ready.' : 'Keep going until every card has its chip.' }
+      ];
+    }
+    return defs.map(d => {
+      const open = s.openRow === d.k;
+      return {
+        glyph: d.glyph, label: d.label, value: d.value, big: d.big, note: d.note, open, hasBar: d.frac !== undefined,
+        ringClass: '', ring: this.visitRing(false, 0, 1, 14),
+        toggle: () => { this.cue('click'); this.setState({ openRow: open ? null : d.k }); },
+        wrap: 'border-radius: 12px; transition: background 120ms ease-out;' + (open ? 'background: rgba(255,255,255,.05); box-shadow: 0 0 0 2px ' + d.color + ';' : ''),
+        head: 'display: flex; width: 100%; box-sizing: border-box; align-items: center; justify-content: space-between; gap: 10px; min-height: 48px; padding: 5px 8px; border: none; background: transparent; border-radius: 12px; font-family: inherit; cursor: pointer; transition: background 120ms ease-out;',
+        /* a long value wraps inside its own half of the row instead of running over the label */
+        valCss: 'font-size: ' + (d.small || String(d.value).length > 12 ? 14 : 20) + 'px; font-weight: 900; line-height: 1.2; color: ' + d.color + '; text-align: right; overflow-wrap: anywhere;',
+        caret: 'font-size: 11px; color: ' + d.color + '; transition: transform 150ms ease-out; display: inline-block;' + (open ? 'transform: rotate(180deg);' : ''),
+        bar: 'height: 100%; border-radius: 999px; transition: width 280ms ease-out; background: ' + d.color + ';width: ' + Math.round(Math.max(0, Math.min(1, d.frac || 0)) * 100) + '%;',
+        detail: 'display: grid; gap: 6px; padding: 4px 12px 12px;',
+        bigCss: 'font-size: 30px; font-weight: 900; line-height: 1.05; letter-spacing: -.01em; color: ' + d.color + '; text-shadow: 0 0 22px ' + d.color + '66;'
+      };
+    });
+  }
+
+  /* the P3 graph: a bar chart of counts */
+  buildChart(id) {
+    const P = PART[id];
+    if (P.kind === 'give') return this.buildGiveChart(id);
+    if (P.kind === 'rig') return this.buildRigChart(id);
+    const bins = P.groups ? P.groups.map(g => ({ id: g.bins, label: g.label, short: g.short || g.label })) : P.bins.filter(b => !b.spare), n = bins.length, N = P.items.length;
+    const yMax = Math.max(4, Math.ceil(N / 3) * 3), Y = (v) => 112 - Math.max(0, Math.min(1.08, v / yMax)) * 96;
+    const X = (i) => 34 + (i + 0.5) * (276 / n);
+    let bars = ''; const labels = [];
+    bins.forEach((b, i) => { const c = Array.isArray(b.id) ? b.id.reduce((a, x) => a + this.countIn(id, x), 0) : this.countIn(id, b.id); const w = Math.min(60, 276 / n * 0.5), x0 = X(i) - w / 2, y0 = Y(c); if (c > 0) { bars += 'M' + x0.toFixed(1) + ' 112V' + y0.toFixed(1) + 'h' + w.toFixed(1) + 'V112Z'; labels.push({ x: X(i).toFixed(1), y: (y0 - 4).toFixed(1), label: String(c) }); } });
+    return { barsPath: bars || 'M0 0', barLabels: labels, xTicks: bins.map((b, i) => ({ x: X(i).toFixed(1), label: b.short || b.label })), yT0: '0', yT1: String(yMax / 3), yT2: String(yMax * 2 / 3), yT3: String(yMax), graphY: 'How many', graphX: 'Corner' };
+  }
+
+  /* the rig chart: one bar per thing tested, from this part or an earlier one (P.chart.bars = [{label, part, item}]) */
+  rigBars(id) {
+    const P = PART[id], C = P.chart; if (!C) return [];
+    return C.bars.map(b => { const pid = b.part || id; const v = this.endedIn(pid, b.item) || C.live ? this.valueOf(pid, b.item) : null; return { label: b.label, value: v }; });
+  }
+  buildRigChart(id) {
+    const P = PART[id], C = P.chart || { y: '', x: '', bars: [] }, bars = this.rigBars(id), n = Math.max(1, bars.length);
+    const top = Math.max(C.max || 3, ...bars.map(b => b.value || 0));
+    const yMax = Math.ceil(top / 3) * 3, Y = (v) => 112 - Math.max(0, Math.min(1.08, v / yMax)) * 96;
+    const X = (i) => 34 + (i + 0.5) * (276 / n);
+    let path = ''; const labels = [];
+    bars.forEach((b, i) => { if (b.value === null || b.value === undefined) return; const w = Math.min(60, 276 / n * 0.5), x0 = X(i) - w / 2, y0 = Y(b.value); path += 'M' + x0.toFixed(1) + ' 112V' + y0.toFixed(1) + 'h' + w.toFixed(1) + 'V112Z'; labels.push({ x: X(i).toFixed(1), y: (y0 - 4).toFixed(1), label: String(b.value) + (C.unit || '') }); });
+    return { barsPath: path || 'M0 0', barLabels: labels, xTicks: bars.map((b, i) => ({ x: X(i).toFixed(1), label: b.label })), yT0: '0', yT1: String(yMax / 3), yT2: String(yMax * 2 / 3), yT3: String(yMax), graphY: C.y || '', graphX: C.x || '' };
+  }
+
+  buildGiveChart(id) {
+    const P = PART[id], n = P.targets.length, yMax = P.gives.length <= 3 ? 3 : P.gives.length <= 6 ? 6 : 9, Y = (v) => 112 - Math.max(0, Math.min(1.08, v / yMax)) * 96;
+    const X = (i) => 34 + (i + 0.5) * (276 / n);
+    let bars = ''; const labels = [];
+    P.targets.forEach((t, i) => { const c = this.ticksIn(id, t.id); const w = Math.min(60, 276 / n * 0.5), x0 = X(i) - w / 2, y0 = Y(c); if (c > 0) { bars += 'M' + x0.toFixed(1) + ' 112V' + y0.toFixed(1) + 'h' + w.toFixed(1) + 'V112Z'; labels.push({ x: X(i).toFixed(1), y: (y0 - 4).toFixed(1), label: String(c) }); } });
+    return { barsPath: bars || 'M0 0', barLabels: labels, xTicks: P.targets.map((t, i) => ({ x: X(i).toFixed(1), label: t.label })), yT0: '0', yT1: String(yMax / 3), yT2: String(yMax * 2 / 3), yT3: String(yMax), graphY: 'Needs shown', graphX: 'Thing' };
+  }
+
+  renderVals() {
+    const s = this.state; let id = this.stepId();
+    const q = this.questions[Math.min(s.qi, this.questions.length - 1)];
+    const answered = s.picked !== null;
+    const correct = answered && s.picked === q.answer;
+    const tourOn = !!s.tour, tsc = tourOn ? TOUR[s.tour.i] : null, tourAt = tsc ? tsc.at : '';
+    if (tourOn && !s.tour.over) id = LAB.parts[0].id;
+
+    const isIntro = id === 'intro';
+    const P = PART[id] || LAB.parts[0], isPart = !!PART[id], pid = P.id;
+    const A = ACC[P.accent || 'blue'];
+    const pList = P.pred.opts;
+    const chosenI = isPart ? s.pred[id] : undefined;
+    const chosen = isPart;   /* no guess buttons in a P3 lab: the question is a prompt to think, and Go and look is always open */
+    const collapsed = tourOn && !s.tour.over ? tsc.view !== 'pred' : (isPart && !!s.went[id] && !s.expanded);
+    const done = isPart && this.doneFor(pid);
+    const isReveal = P.kind === 'reveal', isSort = P.kind === 'sort', isGive = P.kind === 'give', isRig = P.kind === 'rig', isChoose = P.kind === 'choose';
+    const rev = this.revealedIn(pid), pl = this.placedIn(pid), selId = s.sel[pid] || null;
+    const nRev = P.kind === 'reveal' ? P.items.filter(it => rev[it.id]).length : 0;
+    const nPl = P.kind === 'sort' ? P.items.filter(it => pl[it.id] === it.bin).length : 0;
+    const nGiven = isGive ? P.targets.reduce((a, t) => a + P.gives.filter(x => this.givenIn(pid, t.id)[x.id]).length, 0) : 0;
+    const rigNeed = isRig ? P.items.filter(x => x.ok !== false && x.need !== false) : [];
+    const nRig = isRig ? rigNeed.filter(x => this.endedIn(pid, x.id)).length : 0;
+    const nTaps = isRig ? Object.values(this.progIn(pid)).reduce((a, b) => a + b, 0) : 0;
+    const nCh = isChoose ? P.prompts.filter(p => this.chosenIn(pid)[p.id] !== undefined).length : 0;
+    const started = isReveal ? nRev > 0 : isGive ? nGiven > 0 || !!selId : isRig ? nTaps > 0 || !!selId : isChoose ? nCh > 0 || !!selId : nPl > 0 || !!selId;
+
+    const pillBase = 'min-height:48px;padding:10px 16px;border-radius:999px;font-family:inherit;font-size:15px;font-weight:900;white-space:nowrap;transition:all 120ms ease-out;';
+    const steps = STEPS.map((stp, i) => {
+      const open = this.isOpen(stp.id), passed = i < s.step || (i === STEPS.length - 1 && s.step === i);
+      return {
+        label: (open ? '' : '🔒 ') + (passed && i !== s.step ? '✓ ' : '') + stp.label,
+        go: () => this.goStep(i),
+        pill: pillBase + (i === s.step
+          ? 'background:#2f6fd6;color:#fff;border:2px solid #6aa9f0;box-shadow:0 0 16px rgba(74,144,226,.5);'
+          : passed ? 'background:rgba(94,224,122,.14);color:#5ee07a;border:1px solid rgba(94,224,122,.5);' : 'background:#2b3340;color:#d6dee6;border:1px solid rgba(255,255,255,.14);')
+          + (open ? 'cursor:pointer;' : 'opacity:.38;cursor:not-allowed;')
+          + (tourOn && tourAt === 'steps' && !s.tour.over ? 'animation:clTourGlow 1.2s ease-in-out ' + (i * 0.3) + 's infinite;' : '')
+      };
+    });
+
+    const predOptions = pList.map((o, i) => {
+      const picked = chosenI === i;
+      return {
+        text: o,
+        ringClass: '', cue: !chosen && i === 0 ? '1' : '',
+        ring: 'margin-bottom:8px;' + (picked ? this.ring(true, 15) : this.cueRing(!chosen, 15)),
+        css: 'display:flex;align-items:center;width:100%;box-sizing:border-box;min-height:52px;padding:10px 14px;border-radius:13px;font-family:inherit;font-size:17px;font-weight:900;line-height:1.35;text-align:left;cursor:pointer;transition:all 120ms ease-out;background:#2b3340;color:#fff;border:1px solid rgba(255,255,255,.18);',
+        pick: () => { this.cue('select'); this.setState({ pred: Object.assign({}, s.pred, { [id]: i }) }); }
+      };
+    });
+
+    const qOptions = q.options.map((text, i) => {
+      const t = this.turn(!answered, i, q.options.length, 19);
+      return {
+        text, cue: !answered && i === 0 ? '1' : '',
+        ringClass: answered ? '' : t.cls,
+        ring: answered ? this.markRing(i === q.answer ? 'good' : (i === s.picked ? 'bad' : null)) : t.css.replace('padding:2px', 'padding:3px'),
+        pick: () => {
+          if (s.picked !== null) return;
+          const good = i === q.answer;
+          this.noteAnswer(q, i, good, s);
+          this.cue(good ? 'results' : 'look');
+          setTimeout(() => { try { const b = document.querySelector('[data-qnext]'); if (b) b.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch (e) {} }, 260);   /* the Next button comes into view by itself */
+          this.setState({ picked: i, score: s.score + (good ? 1 : 0) });
+        }
+      };
+    });
+
+    /* reveal: the things, each with its clue once tapped */
+    const wob = (k) => tourOn && tourAt === k ? 'animation:clTourWobble 1.1s ease-in-out infinite;' : '';
+    const pending = isReveal ? P.items.filter(it => !rev[it.id]) : [];
+    const items = isReveal ? P.items.map(it => {
+      const shown = !!rev[it.id], pi = pending.indexOf(it), t = this.turn(collapsed && !done && !started, pi, pending.length, 14);
+      return {
+        id: it.id, label: it.label, glyph: it.glyph, clue: it.clue || '', shown,
+        ringClass: t.cls, ring: t.css, cue: collapsed && !shown && pi === 0 ? '1' : '',
+        mark: shown ? '✓' : '', markCss: 'flex:none;font-size:16px;font-weight:900;color:#5ee07a;',
+        nameCss: 'font-size:15px;font-weight:900;letter-spacing:.02em;color:' + (shown ? '#5ee07a' : '#e9f1f7') + ';',
+        css: 'display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;min-height:52px;padding:9px 12px;border-radius:12px;font-family:inherit;cursor:pointer;transition:all 120ms ease-out;'
+          + (shown ? 'background:rgba(94,224,122,.08);border:1px solid rgba(94,224,122,.4);' : 'background:#0e1925;border:1px solid rgba(255,255,255,.1);')
+          + (s.lit === 'item-' + it.id ? 'animation:clLand 760ms cubic-bezier(.2,1.5,.4,1) both;' : ''),
+        tap: () => this.reveal(it.id)
+      };
+    }) : [];
+
+    /* sort: the shelf, then the corners */
+    const onShelf = isSort ? P.items.filter(it => pl[it.id] !== it.bin) : [];
+    const shelf = onShelf.map((it, i) => {
+      const sel = selId === it.id, t = this.turn(collapsed && !done && !selId, i, onShelf.length, 14);
+      return {
+        id: it.id, label: it.label, glyph: it.glyph,
+        ringClass: sel ? '' : t.cls, ring: sel ? this.ring(true, 14) : t.css, cue: collapsed && !selId && i === 0 ? '1' : '',
+        css: 'display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border-radius:12px;font-family:inherit;font-size:15px;font-weight:900;white-space:nowrap;cursor:pointer;transition:all 120ms ease-out;'
+          + (sel ? 'background:' + A.tone + ';color:#10161f;border:2px solid rgba(255,255,255,.7);' : 'background:#0e1925;color:#fff;border:1px solid rgba(255,255,255,.14);'),
+        tap: () => this.pickItem(it.id)
+      };
+    });
+    const bins = isSort ? P.bins.map((b, i) => {
+      const inside = P.items.filter(it => pl[it.id] === b.id), t = this.turn(collapsed && !!selId, i, P.bins.length, 14);
+      return {
+        id: b.id, label: b.label, glyph: b.glyph, count: inside.length ? String(inside.length) : '',
+        inside: inside.length ? inside.map(x => x.glyph + ' ' + x.label).join(' · ') : (b.empty || 'Nothing here yet'),
+        ringClass: t.cls, ring: t.css, cue: collapsed && !!selId && i === 0 ? '1' : '',
+        nameCss: 'font-size:15px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:' + (b.tone || A.tone) + ';',
+        countCss: 'flex:none;font-size:20px;font-weight:900;color:' + (b.tone || A.tone) + ';',
+        css: 'display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;min-height:60px;padding:10px 12px;border-radius:14px;font-family:inherit;cursor:pointer;transition:all 120ms ease-out;background:#0e1925;border:2px solid ' + (b.tone || A.tone) + '55;'
+          + (s.shake === 'bin-' + b.id ? 'animation:clShake 320ms ease-in-out 2;' : '') + (s.lit === 'bin-' + b.id ? 'animation:clLand 760ms cubic-bezier(.2,1.5,.4,1) both;' : ''),
+        tap: () => this.tapBin(b.id)
+      };
+    }) : [];
+    const gives = isGive ? P.gives.map((g, i) => {
+      const sel = selId === g.id, allDone = P.targets.every(t => this.givenIn(pid, t.id)[g.id]), t = this.turn(collapsed && !done && !selId && !allDone, P.gives.filter(x => !P.targets.every(tt => this.givenIn(pid, tt.id)[x.id])).indexOf(g), P.gives.filter(x => !P.targets.every(tt => this.givenIn(pid, tt.id)[x.id])).length, 14);
+      return { id: g.id, label: g.label, glyph: g.glyph, ringClass: sel ? '' : t.cls, ring: sel ? this.ring(true, 14) : t.css, cue: collapsed && !selId && !allDone && i === 0 ? '1' : '',
+        css: 'display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border-radius:12px;font-family:inherit;font-size:15px;font-weight:900;white-space:nowrap;cursor:pointer;transition:all 120ms ease-out;'
+          + (sel ? 'background:' + A.tone + ';color:#10161f;border:2px solid rgba(255,255,255,.7);' : allDone ? 'background:rgba(94,224,122,.1);color:#5ee07a;border:1px solid rgba(94,224,122,.4);' : 'background:#0e1925;color:#fff;border:1px solid rgba(255,255,255,.14);'),
+        tap: () => this.pickGive(g.id) };
+    }) : [];
+    const targets = isGive ? P.targets.map((tg, i) => {
+      const g = this.givenIn(pid, tg.id), t = this.turn(collapsed && !!selId, i, P.targets.length, 14);
+      return { id: tg.id, label: tg.label, glyph: tg.glyph, marks: P.gives.map(x => g[x.id] ? (tg.reacts ? '✓' : '✗') : '·').join('  '),
+        ringClass: t.cls, ring: t.css, cue: collapsed && !!selId && i === 0 ? '1' : '',
+        nameCss: 'font-size:15px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:' + (tg.reacts ? '#5ee07a' : '#66ccff') + ';',
+        css: 'display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;min-height:64px;padding:10px 12px;border-radius:14px;font-family:inherit;cursor:pointer;transition:all 120ms ease-out;background:#0e1925;border:2px solid ' + (tg.reacts ? '#5ee07a' : '#66ccff') + '55;'
+          + (s.shake === 'target-' + tg.id ? 'animation:clShake 320ms ease-in-out 2;' : '') + (s.lit === 'target-' + tg.id ? 'animation:clLand 760ms cubic-bezier(.2,1.5,.4,1) both;' : ''),
+        tap: () => this.tapTarget(tg.id) };
+    }) : [];
+    /* rig: the set-ups on the rack, then the one big action button */
+    const rigItems = isRig ? P.items.map((it, i) => {
+      const sel = selId === it.id, ended = this.endedIn(pid, it.id), open = P.items.filter(x => x.ok !== false && !this.endedIn(pid, x.id)), t = this.turn(collapsed && !done && !selId, open.indexOf(it), open.length, 14);
+      return {
+        id: it.id, label: it.label, glyph: it.glyph, mark: ended ? '✓' : '',
+        ringClass: sel ? '' : t.cls, ring: sel ? this.ring(true, 14) : t.css, cue: collapsed && !selId && open.indexOf(it) === 0 ? '1' : '',
+        css: 'display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border-radius:12px;font-family:inherit;font-size:15px;font-weight:900;white-space:nowrap;cursor:pointer;transition:all 120ms ease-out;'
+          + (sel ? 'background:' + A.tone + ';color:#10161f;border:2px solid rgba(255,255,255,.7);' : ended ? 'background:rgba(94,224,122,.1);color:#5ee07a;border:1px solid rgba(94,224,122,.4);' : it.ok === false ? 'background:#0e1925;color:#d6dee6;border:1px dashed rgba(255,255,255,.22);' : 'background:#0e1925;color:#fff;border:1px solid rgba(255,255,255,.14);')
+          + (s.shake === 'rig-' + it.id ? 'animation:clShake 320ms ease-in-out 2;' : ''),
+        tap: () => this.pickRig(it.id)
+      };
+    }) : [];
+    const rigSel = isRig && selId ? P.items.find(x => x.id === selId) : null;
+    const rigSteps = rigSel ? this.stepsOf(pid, rigSel.id) : [], rigN = rigSel ? (this.progIn(pid)[rigSel.id] || 0) : 0;
+    const actOn = isRig && collapsed && !!rigSel && rigN < rigSteps.length;
+    const actCss = 'display:flex;align-items:center;justify-content:center;gap:10px;width:100%;box-sizing:border-box;min-height:60px;padding:12px 16px;border-radius:16px;font-family:inherit;font-size:19px;font-weight:900;cursor:pointer;transition:all 120ms ease-out;'
+      + (actOn ? 'background:linear-gradient(180deg,#6aa9f0,#2f6fd6);color:#fff;border:2px solid rgba(255,255,255,.5);box-shadow:0 0 16px rgba(74,144,226,.5);' : 'background:#2b3340;color:#8a98a6;border:1px solid rgba(255,255,255,.14);')
+      + (s.shake === 'act' ? 'animation:clShake 320ms ease-in-out 2;' : '') + (s.lit === 'act' ? 'animation:clLand 760ms cubic-bezier(.2,1.5,.4,1) both;' : '');
+    const actLabel = isRig ? (P.act.label + (rigSel && rigSteps.length > 1 ? ' · ' + rigN + ' of ' + rigSteps.length : '')) : '';
+    const tally = isRig && rigSel ? rigSteps.map((st, i) => ({ glyph: i < rigN ? (st.glyph || P.act.glyph) : '·', css: 'font-size:' + (i < rigN ? 22 : 18) + 'px;line-height:1;opacity:' + (i < rigN ? 1 : 0.35) + ';transition:all 200ms ease-out;' })) : [];
+
+    /* choose: the cards, then the chips of the open card */
+    const prompts = isChoose ? P.prompts.map((p, i) => {
+      const sel = selId === p.id, got = this.chosenIn(pid)[p.id] !== undefined, open = P.prompts.filter(x => this.chosenIn(pid)[x.id] === undefined), t = this.turn(collapsed && !done && !selId, open.indexOf(p), open.length, 14);
+      return {
+        id: p.id, label: p.label, glyph: p.glyph, q: p.q || '', mark: got ? '✓' : '', pickedText: got ? p.opts[this.chosenIn(pid)[p.id]] : '',
+        ringClass: sel ? '' : t.cls, ring: sel ? this.ring(true, 14) : t.css, cue: collapsed && !selId && open.indexOf(p) === 0 ? '1' : '',
+        nameCss: 'font-size:15px;font-weight:900;letter-spacing:.02em;color:' + (got ? '#5ee07a' : sel ? '#10161f' : '#e9f1f7') + ';',
+        css: 'display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;min-height:52px;padding:9px 12px;border-radius:12px;font-family:inherit;cursor:pointer;transition:all 120ms ease-out;text-align:left;'
+          + (sel ? 'background:' + A.tone + ';color:#10161f;border:2px solid rgba(255,255,255,.7);' : got ? 'background:rgba(94,224,122,.08);border:1px solid rgba(94,224,122,.4);color:#d6dee6;' : 'background:#0e1925;border:1px solid rgba(255,255,255,.1);color:#d6dee6;'),
+        tap: () => this.pickPrompt(p.id)
+      };
+    }) : [];
+    const chSel = isChoose && selId ? P.prompts.find(x => x.id === selId) : null;
+    const chips = chSel ? this.chipOrder[pid + ':' + chSel.id].map((i, at) => {
+      const o = chSel.opts[i], t = this.turn(collapsed, at, chSel.opts.length, 14);
+      return { text: o, ringClass: t.cls, ring: t.css, cue: collapsed && at === 0 ? '1' : '',
+        css: 'display:flex;align-items:center;width:100%;box-sizing:border-box;min-height:50px;padding:10px 14px;border-radius:13px;font-family:inherit;font-size:16px;font-weight:900;line-height:1.35;text-align:left;cursor:pointer;transition:all 120ms ease-out;background:#2b3340;color:#fff;border:1px solid rgba(255,255,255,.18);'
+          + (s.shake === 'opt-' + i ? 'animation:clShake 320ms ease-in-out 2;' : '') + (s.lit === 'opt-' + i ? 'animation:clLand 760ms cubic-bezier(.2,1.5,.4,1) both;' : ''),
+        tap: () => this.pickOpt(i) };
+    }) : [];
+    const chipTitle = chSel ? (chSel.q || 'Which chip is true?') : '';
+
+    const G = (isSort || isGive || isRig) ? this.buildChart(pid) : { barsPath: 'M0 0', barLabels: [], xTicks: [], yT0: '', yT1: '', yT2: '', yT3: '', graphY: '', graphX: '' };
+
+    const partNow = done ? (P.doneNow || 'All done. Move on when you are ready.')
+      : isReveal ? (nRev === 0 ? (P.startNow || 'Tap a thing to see its clue.') : (P.items.length - nRev) + ' more to spot.')
+        : isGive ? (selId ? ('Now tap the thing to give it ' + (P.gives.find(x => x.id === selId) || {}).label.toLowerCase() + '.') : (nGiven === 0 ? (P.startNow || 'Tap a tray, then tap the thing.') : (P.gives.length * P.targets.length - nGiven) + ' more to try.'))
+        : isRig ? (rigSel ? (rigN >= rigSteps.length ? (P.doneOne || 'Done with that one.') + (rigNeed.length - nRig > 0 ? ' Tap the next one on the rack.' : '') : (P.actNow || ('Now tap ' + P.act.label + '.'))) : (nTaps === 0 ? (P.startNow || 'Tap a thing on the rack first.') : (rigNeed.length - nRig) + ' more to test.'))
+        : isChoose ? (chSel ? (P.chipNow || 'Now tap the chip that is true.') : (nCh === 0 ? (P.startNow || 'Tap a card first.') : (P.prompts.length - nCh) + ' more to do.'))
+        : selId ? ('Now tap the corner for the ' + (P.items.find(x => x.id === selId) || {}).label.toLowerCase() + '.')
+          : (nPl === 0 ? (P.startNow || 'Tap a thing, then tap its corner.') : (P.items.length - nPl) + ' still on the shelf.');
+    const clueItem = s.clue && collapsed ? s.clue : null;
+    const benchChip = !collapsed ? '' : done ? '' : '';
+    const stickers = this.stickerList();
+    const starsNow = starsFor(s.score, this.questions.length);
+
+    const tb = s.tourBox, pad = 10;
+    const holeCss = tb
+      ? 'position:fixed;left:' + Math.round(tb.x - pad) + 'px;top:' + Math.round(tb.y - pad) + 'px;width:' + Math.round(tb.w + pad * 2) + 'px;height:' + Math.round(tb.h + pad * 2) + 'px;border-radius:18px;box-shadow:0 0 0 9999px rgba(4,7,12,.72), 0 0 0 3px rgba(255,182,39,.9), 0 0 30px rgba(255,182,39,.5);transition:left 380ms cubic-bezier(.2,.8,.3,1), top 380ms cubic-bezier(.2,.8,.3,1), width 380ms cubic-bezier(.2,.8,.3,1), height 380ms cubic-bezier(.2,.8,.3,1);'
+      : 'position:fixed;inset:0;background:rgba(4,7,12,.72);';
+    const vw = typeof innerWidth === 'number' ? innerWidth : 1440, vh = typeof innerHeight === 'number' ? innerHeight : 900;
+    const cardW = 360;
+    let cx = vw / 2 - cardW / 2, cy = vh - 190;
+    if (tb) { const right = tb.x + tb.w + 24, below = tb.y + tb.h + 24; if (right + cardW < vw - 12 && tb.w < vw * 0.5) { cx = right; cy = Math.max(12, Math.min(vh - 190, tb.y)); } else if (below + 170 < vh) { cx = Math.max(12, Math.min(vw - cardW - 12, tb.x + tb.w / 2 - cardW / 2)); cy = below; } else { cx = Math.max(12, Math.min(vw - cardW - 12, tb.x + tb.w / 2 - cardW / 2)); cy = Math.max(12, tb.y - 190); } }
+
+    return {
+      tourOn, demoAttr: tourOn && !s.tour.over ? tourAt : (s.showing ? 'show' : ''),
+      tourHoleCss: holeCss,
+      tourHandCss: 'position:fixed;left:' + (tb ? Math.round(tb.x + tb.w / 2) : -200) + 'px;top:' + (tb ? Math.round(tb.y + tb.h / 2) : -200) + 'px;font-size:54px;line-height:1;filter:drop-shadow(0 6px 10px rgba(0,0,0,.6));animation:clTourHand 1.2s ease-in-out infinite;transition:left 380ms cubic-bezier(.2,.8,.3,1), top 380ms cubic-bezier(.2,.8,.3,1);' + (tb && !s.tour.over ? '' : 'display:none;'),
+      tourCardCss: 'position:fixed;left:' + Math.round(cx) + 'px;top:' + Math.round(cy) + 'px;width:' + cardW + 'px;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:16px 18px;border-radius:18px;background:rgba(7,13,21,.94);border:2px solid rgba(255,182,39,.8);box-shadow:0 14px 40px rgba(0,0,0,.6);pointer-events:auto;transition:left 380ms cubic-bezier(.2,.8,.3,1), top 380ms cubic-bezier(.2,.8,.3,1);',
+      tourStep: tourOn ? (s.tour.over ? 'Ready' : 'Show me round · ' + (s.tour.i + 1) + ' of ' + TOUR.length) : '',
+      tourSay: tourOn ? (s.tour.over ? 'Your turn!' : tsc.say) : '',
+      tourCap: tourOn ? (s.tour.over ? 'Ready' : ((LAB.tour && LAB.tour.caps && LAB.tour.caps[tsc.at]) || tsc.cap)) : '',
+      tourNextLabel: tourOn && (s.tour.over || s.tour.i >= TOUR.length - 1) ? 'Start ▸' : 'Next ▸',
+      tourSkip: () => { this.cue('click'); this.endTour(); },
+      tourNext: () => { this.tourStep(); },
+      replayTour: () => { this.cue('click'); if (s.tour) this.endTour(); else this.startTour(); },
+      tourPredCss: 'display:block;',
+
+      steps, lockMsg: s.lockMsg,
+      goRing: this.cueRing(true, 16), goRingFlex: 'flex:1 1 0;min-width:0;' + this.cueRing(true, 16),
+      cueIntro: isIntro ? '1' : '',
+      isIntro, isQuiz: id === 'quiz', isDone: id === 'done',
+      /* Before I Start: what I know, what I want to find out, and one question of my own */
+      isStart: id === 'start', cueStart: id === 'start' ? '1' : '',
+      ownValue: s.own, setOwn: (e) => { this.setState({ own: String(e.target.value).slice(0, 120) }); },
+      wantList: (LAB.intro.wonder || []).filter((t, i) => s.wonder[i]).concat(s.own.trim() ? ['Your own question: ' + s.own.trim()] : []).map(t => ({ text: t })),
+      wantNone: !(LAB.intro.wonder || []).some((t, i) => s.wonder[i]) && !s.own.trim(),
+      knewList: (LAB.intro.know || []).filter((t, i) => s.know[i]).map(t => ({ text: t })),
+      knowChips: (LAB.intro.know || []).map((t, i) => ({ label: (s.know[i] ? '✓ ' : '') + t, tap: () => { this.cue('click'); this.setState({ know: Object.assign({}, s.know, { [i]: !s.know[i] }) }); },
+        css: 'width:100%;box-sizing:border-box;min-height:44px;padding:8px 12px;border-radius:12px;font-family:inherit;font-size:15px;font-weight:800;line-height:1.35;text-align:left;cursor:pointer;transition:all 120ms ease-out;' + (s.know[i] ? 'background:rgba(102,204,255,.18);color:#fff;border:1px solid #66ccff;' : 'background:#2b3340;color:#d6dee6;border:1px solid rgba(255,255,255,.18);') })),
+      wonderChips: (LAB.intro.wonder || []).map((t, i) => ({ label: (s.wonder[i] ? '✓ ' : '') + t, tap: () => { this.cue('click'); this.setState({ wonder: Object.assign({}, s.wonder, { [i]: !s.wonder[i] }) }); },
+        css: 'width:100%;box-sizing:border-box;min-height:44px;padding:8px 12px;border-radius:12px;font-family:inherit;font-size:15px;font-weight:800;line-height:1.35;text-align:left;cursor:pointer;transition:all 120ms ease-out;' + (s.wonder[i] ? 'background:rgba(205,123,245,.2);color:#fff;border:1px solid #cd7bf5;' : 'background:#2b3340;color:#d6dee6;border:1px solid rgba(255,255,255,.18);') })),
+
+      showPredPanel: isPart && !collapsed,
+      predAccent: P.accent || 'blue', predIntro: P.pred.intro, predQuestion: P.pred.q,
+      then1: P.pred.then[0], then2: P.pred.then[1], then3: P.pred.then[2],
+      thenCss: 'margin:6px 0 4px;padding:12px 14px;border-radius:12px;background:' + A.bg + ';border:1px solid ' + A.bd + ';',
+      thenTitleCss: 'font-size:15px;font-weight:800;color:' + A.tone + ';margin-bottom:8px;',
+      predOptions,
+      showMe: () => this.showMe(),
+      showMeLabel: s.showing ? '✓ Done looking' : '👀 Show me the bench',
+      showMeCss: 'width:100%;box-sizing:border-box;min-height:48px;padding:10px 14px;border-radius:12px;font-family:inherit;font-size:15px;font-weight:900;cursor:pointer;transition:all 120ms ease-out;background:#2b3340;color:#fff;border:1px solid rgba(255,255,255,.18);margin:2px 0 8px;' + (s.showing ? 'opacity:.7;' : ''),
+      predGoRing: this.cueRing(true, 14) + 'flex:1 1 0;min-width:0;',
+      cuePredGo: '1',
+      predGo: () => { this.cue('click'); this.setState({ expanded: false, went: Object.assign({}, s.went, { [id]: true }) }); },
+      showPredChip: false,
+      predChipCss: 'order:2;width:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:2px;text-align:left;padding:9px 14px;border-radius:14px;isolation:isolate;transform:translateZ(0);background:rgba(7,13,21,.9);border:1px solid rgba(255,182,39,.5);color:#fff;font-family:inherit;cursor:pointer;min-height:48px;',
+      predLabel: chosen || '',
+      expandPanel: () => { this.cue('click'); this.setState({ expanded: true }); },
+
+      showRight: collapsed,
+      readCss: 'width:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;padding:12px 14px;border-radius:16px;background:rgba(7,13,21,.9);border:2px solid ' + (tourAt === 'readings' || s.justDone ? 'rgba(255,182,39,.7)' : 'rgba(74,144,226,.55)') + ';box-shadow:0 0 18px ' + (tourAt === 'readings' || s.justDone ? 'rgba(255,182,39,.3)' : 'rgba(74,144,226,.25)') + ';',
+      readLive: (tourOn && tourAt === 'readings') || s.justDone, readRingClass: s.justDone ? 'cl-visit cl-steady' : '', readRing: this.visitRing(!!s.justDone, 0, 1, 18),
+      readRows: isPart ? this.buildRows(pid) : [],
+
+      showNav: collapsed,
+      navFadeCss: 'display:flex;gap:10px;order:4;margin-top:auto;padding:10px 0 2px;align-items:stretch;white-space:nowrap;position:sticky;bottom:-14px;z-index:5;background:#060b12;box-shadow:0 -12px 12px #060b12;',
+      /* the Next button always says what is still to do, so no one is left guessing */
+      nextLabel: done ? 'Next: ' + (P.nextLabel || 'Next →').replace(/\s*→$/, '') + ' →' : (() => {
+        const more = (n, verb, one, many) => verb + ' ' + n + ' more ' + (n === 1 ? one : many);
+        if (isReveal) return more(P.items.length - nRev, 'Spot', 'thing', 'things');
+        if (isGive) return more(P.targets.length * P.gives.length - nGiven, 'Try', 'time', 'times');
+        if (isRig) return rigNeed.length - nRig > 1 ? more(rigNeed.length - nRig, 'Test', 'thing', 'things') : (selId ? 'Keep tapping ' + ((P.act && P.act.label) || 'the button') : 'Test 1 more thing');
+        if (isChoose) return more(P.prompts.length - nCh, 'Find', 'true chip', 'true chips');
+        return more(P.items.length - nPl, 'Sort', 'thing', 'things');
+      })(),
+      nextVariant: done ? 'primary' : 'neutral',
+      nextWrapCss: 'flex:1 1 0;min-width:0;' + this.cueRing(done || (tourOn && tourAt === 'next'), 14) + (done ? '' : 'opacity:.55;'),
+      cueNext: done ? '1' : '',
+      nextGated: () => {
+        if (done) { this.goStep(Math.min(STEPS.length - 1, s.step + 1)); return; }
+        this.flashErr(isReveal ? 'Spot every thing first. ' + (P.items.length - nRev) + ' to go.' : isGive ? 'Try every tray on every thing first.' : isRig ? 'Test every thing on the rack first. ' + (rigNeed.length - nRig) + ' to go.' : isChoose ? 'Find the true chip for every card first. ' + (P.prompts.length - nCh) + ' to go.' : 'Put every thing in its corner first. ' + (P.items.length - nPl) + ' to go.', null);
+      },
+      statusCss: 'box-sizing:border-box;display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:10px 12px;border-radius:10px;background:#0e1925;border:1px solid rgba(255,255,255,.1);font-size:16px;font-weight:800;line-height:1.4;color:#ffb627;text-wrap:pretty;',
+
+      showPartPanel: collapsed,
+      partTitle: P.title, partAccent: P.accent || 'blue',
+      partFresh: !started,
+      partTask: P.task,
+      taskCss: 'box-sizing:border-box;display:flex;flex-direction:column;gap:4px;margin-bottom:14px;padding:12px 14px;border-radius:14px;background:' + A.bg + ';border:2px solid ' + A.bd2 + ';',
+      partNow,
+      isReveal, items,
+      isSort, shelfTitle: P.shelfTitle || (isGive ? 'Tap one, then tap the thing' : 'On the shelf · tap a thing'), shelf, bins,
+      isGive, gives, targets,
+      isRig, rigItems, rackTitle: P.rackTitle || 'On the rack · tap one', actLabel, actGlyph: isRig ? P.act.glyph : '', actCss, actRing: 'margin:10px 0 4px;' + this.cueRing(actOn, 18), cueAct: actOn ? '1' : '', doAct: () => this.actRig(), tally, hasTally: tally.length > 1,
+      isChoose, prompts, chips, chipTitle, hasChips: !!chSel,
+      /* a chart only where numbers were measured: a tally of ticks or of things sorted is not a graph worth drawing */
+      hasChart: isRig && !!P.chart && this.rigBars(pid).some(b => b.value !== null && b.value !== undefined),
+      resRingClass: s.justDone ? 'cl-visit cl-steady' : '', resRing: 'margin-top:12px;' + this.visitRing(!!s.justDone, 0, 1, 14),
+      barsPath: G.barsPath, barLabels: G.barLabels, xTicks: G.xTicks, yT0: G.yT0, yT1: G.yT1, yT2: G.yT2, yT3: G.yT3, graphY: G.graphY, graphX: G.graphX,
+      partErr: isPart ? s.err : '',
+
+      showCallout: collapsed && done,
+      /* the learning note floats at the foot of the bench once the part is done: the point of the whole step */
+      exploring: s.showing && isPart && !collapsed, cueBench: (s.showing && isPart && !collapsed && !s.info) ? '1' : '', showInfo: s.showing && isPart && !collapsed && !!s.info, infoName: s.info ? s.info.name : '', infoText: s.info ? s.info.text : '',
+      showBanner: collapsed && done && !s.running && !tourOn,
+      bannerTag: P.note[0], bannerText: P.note[1],
+      bannerNext: 'Now tap Next: ' + (P.nextLabel || 'Next →').replace(/\s*→$/, '') + ' →',
+      calloutTag: P.note[0], calloutText: P.note[1],
+      calloutCss: 'display:flex;flex-direction:column;gap:9px;order:3;padding:13px 15px;border-radius:16px;isolation:isolate;transform:translateZ(0);background:rgba(94,224,122,.1);border:2px solid rgba(94,224,122,.75);box-shadow:0 0 18px rgba(94,224,122,.4), inset 0 0 14px rgba(94,224,122,.12), 0 8px 26px rgba(0,0,0,.5);',
+      calloutTagCss: 'font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#5ee07a;',
+
+      asideCss: 'width:' + (collapsed ? 350 : 330) + 'px;flex:none;padding:14px;display:flex;flex-direction:column;gap:10px;overflow-y:auto;scrollbar-gutter:stable;background:#060b12;border-right:1px solid rgba(255,255,255,.08);box-sizing:border-box;',
+
+      experiment: isPart ? id : 'intro',
+      settingAttr: isPart ? (isReveal ? ((s.clue && s.clue.id) || '') : (selId || '')) : '',
+      runningAttr: 'no', readingAttr: isRig ? String(rigN) : '', secondsAttr: '3',
+      placedAttr: isSort ? Object.keys(pl).filter(k => pl[k]).map(k => k + ':' + pl[k]).join(',') : isGive ? P.targets.map(t => P.gives.filter(x => this.givenIn(pid, t.id)[x.id]).map(x => t.id + ':' + x.id)).flat().join(',') : isRig ? Object.keys(this.progIn(pid)).map(k => k + ':' + this.progIn(pid)[k]).join(',') : isChoose ? Object.keys(this.chosenIn(pid)).map(k => k + ':' + this.chosenIn(pid)[k]).join(',') : '',
+      testedAttr: isReveal ? Object.keys(rev).filter(k => rev[k]).join(',') : isRig ? P.items.filter(x => this.endedIn(pid, x.id)).map(x => x.id).join(',') : isChoose ? Object.keys(this.chosenIn(pid)).join(',') : '',
+
+      capText: isPart ? (P.cap || P.title) : (LAB.intro.cap || 'The bench'),
+      capCss: 'padding:6px 12px;border-radius:999px;background:rgba(7,13,21,.78);border:1px solid ' + A.bd + ';color:' + A.tone + ';font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;',
+      stickers: stickers.map((st, i) => ({ glyph: st.glyph, title: st.title, css: 'font-size:22px;line-height:1;width:34px;height:34px;display:grid;place-items:center;border-radius:50%;transition:all 300ms ease-out;' + (st.on ? (st.gold ? 'background:rgba(255,182,39,.35);border:2px solid #ffb627;box-shadow:0 0 14px rgba(255,182,39,.7);' : 'background:rgba(94,224,122,.18);border:2px solid rgba(94,224,122,.8);') + (s.justDone && !st.gold ? 'animation:clPop 700ms cubic-bezier(.2,1.6,.4,1) both;' : '') : 'opacity:.3;filter:grayscale(1);border:2px dashed rgba(255,255,255,.3);') + (tourOn && tourAt === 'next' && i === 0 ? 'opacity:1;filter:none;background:rgba(94,224,122,.18);border:2px solid rgba(94,224,122,.8);animation:clPop 700ms cubic-bezier(.2,1.6,.4,1) both;' : '') })),
+      showClueCard: collapsed && !!clueItem,
+      clueGlyph: clueItem ? clueItem.glyph : '', clueTag: clueItem ? clueItem.tag : '', clueText: clueItem ? clueItem.text : '', clueWhy: clueItem ? (clueItem.why || '') : '',
+      clueTone: A.tone, clueGlow: A.tone + '55',
+      clueTagCss: 'font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:' + A.tone + ';',
+      showBenchChip: !!benchChip && !clueItem,
+      benchChip,
+      benchChipCss: 'padding:8px 18px;border-radius:999px;background:rgba(7,13,21,.92);font-size:17px;font-weight:900;text-align:center;border:2px solid rgba(94,224,122,.6);color:#5ee07a;box-shadow:0 0 18px rgba(94,224,122,.3);',
+
+      qTopic: q.topic,
+      qCounter: 'Question ' + (s.qi + 1) + ' of ' + this.questions.length,
+      qText: q.text,
+      qOptions, qAnswered: answered, starsNow,
+      qVerdict: correct ? 'Correct!' : 'Not quite. Here is why.',
+      whyBoxCss: 'margin:14px 0;padding:14px;border-radius:12px;'
+        + (correct ? 'background:rgba(94,224,122,.1);border:2px solid rgba(94,224,122,.75);box-shadow:0 0 18px rgba(94,224,122,.4), inset 0 0 14px rgba(94,224,122,.12);' : 'background:rgba(255,182,39,.1);border:1px solid rgba(255,182,39,.45);'),
+      whyTitleCss: 'font-size:16px;font-weight:900;margin-bottom:6px;color:' + (correct ? '#5ee07a' : '#ffb627') + ';',
+      qWhy: q.why,
+      qNextLabel: s.qi < this.questions.length - 1 ? 'Next question →' : 'See my stars →',
+      nextQ: () => {
+        this.cue('click');
+        if (s.qi < this.questions.length - 1) this.setState({ qi: s.qi + 1, picked: null });
+        else { this.goStep(STEPS.length - 1); this.celebrate(); }
+      },
+      celebrate: s.celebrate && id === 'done',
+      confetti: CONFETTI,
+      endCelebrate: () => { clearTimeout(this._celT); this.cue('click'); this.setState({ celebrate: false }); },
+      themeAttr: this.theme(),
+      themeGlyph: this.theme() === 'light' ? '🌙' : '☀️',
+      toggleTheme: () => { this.cue('click'); this.setState({ theme: this.theme() === 'light' ? 'dark' : 'light' }); },
+      musicGlyph: s.music ? '🎵' : '🔇',
+      toggleMusic: () => { this.cue('click'); this.setState({ music: !s.music }); },
+      starsBig: starsNow || '☆',
+      scoreLine: (s.score === this.questions.length ? 'Every one right! ' : s.score >= 3 ? 'Great work! ' : 'Good try! ') + s.score + ' out of ' + this.questions.length + ' correct.',
+
+      showHint: s.idle && !!s.hintBox && !tourOn && !(collapsed && done),   /* the banner says it all once the part is done */
+      hintText: isIntro ? 'Tap here to begin'
+        : (s.showing && isPart && !collapsed) ? 'Tap any thing on the bench to read about it'
+        : id === 'start' ? 'Tick what you know and what you want to find out, then press here'
+        : id === 'quiz' ? (answered ? 'Read why, then tap here' : 'Tap an answer here')
+          : isPart && !collapsed ? 'Now go and look'
+            : done ? 'All done — tap Next: ' + (P.nextLabel || 'Next →').replace(/\s*→$/, '')
+              : isReveal ? 'Tap a thing here to see its clue' : isGive ? (selId ? 'Now tap the thing here' : 'Tap a tray here first') : isRig ? (selId ? 'Now tap this button' : 'Tap a thing on the rack first') : isChoose ? (selId ? 'Tap the chip that is true' : 'Tap a card here first') : (selId ? 'Now tap its corner here' : 'Tap a thing here first'),
+      hintWrap: 'position: fixed; z-index: 60; display: flex; gap: 6px; max-width: 300px; pointer-events: none; align-items: center;'
+        + (s.hintBox
+          ? (s.hintBox.side === 'left'
+            ? 'flex-direction: row-reverse; left: ' + Math.round(s.hintBox.x) + 'px; top: ' + Math.round(s.hintBox.y) + 'px; transform: translate(-100%, -50%);'
+            : 'left: ' + Math.round(s.hintBox.x) + 'px; top: ' + Math.round(s.hintBox.y) + 'px; transform: translateY(-50%);')
+          : 'left: 50%; top: 50%;'),
+      hintGlyph: s.hintBox && s.hintBox.side === 'left' ? '▶' : '◀',
+      hintArrow: 'font-size: 26px; color: #ffb627; animation: clNudge 1.1s ease-in-out infinite;',
+
+      next: () => this.goStep(Math.min(STEPS.length - 1, s.step + 1)),
+      back: () => this.goStep(Math.max(0, s.step - 1)),
+      /* "Try the Challenge again": what was done on the bench stays; only the Challenge is cleared and reopened */
+      testAgain: () => { this.setState({ qi: 0, picked: null, score: 0, celebrate: false }); this.goStep(STEPS.findIndex(x => x.id === 'quiz')); },
+      restart: () => {
+        this.cue('click');
+        this.questions = shuffled(LAB.quiz);
+        this.chipOrder = chipOrders();
+        this._marks = [];
+        this.setState({ step: 0, pred: {}, went: {}, expanded: false, showing: false, info: null, celebrate: false, lit: '', revealed: {}, placed: {}, given: {}, rig: {}, chosen: {}, sel: {}, clue: null, justDone: false, know: {}, wonder: {}, own: '', openRow: null, err: '', shake: null, qi: 0, picked: null, score: 0 });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

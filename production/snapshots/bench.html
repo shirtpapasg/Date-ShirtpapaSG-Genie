@@ -1,0 +1,96 @@
+    <section data-tour="bench" style="flex: 1; position: relative; min-width: 0; background: #08131f;">
+      <x-import component-from-global-scope="cooler-scene" from="./cooler-scene.js" experiment="{{ experiment }}" time="{{ time }}" plan="{{ planStr }}" build="{{ buildStr }}" view="{{ view }}" hint-size="100%,100%" style="position: absolute; inset: 0;"></x-import>
+      <div style="position: absolute; top: 14px; left: 14px; display: flex; gap: 8px; align-items: center; padding: 7px 14px; border-radius: 999px; background: rgba(7,13,21,.8); border: 1px solid rgba(255,255,255,.14); font-size: 13px; color: #8a98a6; font-weight: 700; pointer-events: none;">
+        <span>🖱️ Drag to orbit · scroll to zoom</span>
+      </div>
+      <sc-if value="{{ showPredChip }}">
+        <button onClick="{{ expandPanel }}" style="position: absolute; top: 14px; right: 14px; max-width: 320px; display: flex; flex-direction: column; gap: 3px; text-align: left; padding: 12px 16px; border-radius: 16px; background: rgba(7,13,21,.9); border: 2px solid rgba(232,73,63,.6); box-shadow: 0 0 18px rgba(232,73,63,.35); color: #fff; font-family: inherit; cursor: pointer;">
+          <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #ff6a5e;">My prediction</span>
+          <span style="font-size: 15px; font-weight: 800; line-height: 1.35;">{{ predLabel }}</span>
+          <span class="cl-chip-sub" style="font-size: 12px; font-weight: 700; color: #8a98a6;">Tap to change it or see the steps</span>
+        </button>
+      </sc-if>
+
+      <!-- everything at the foot of the bench stacks in one column, so the notes always sit above the controls dock and never under it -->
+      <div class="cl-foot">
+        <sc-if value="{{ showBanner }}">
+          <div data-banner="1" style="display: flex; justify-content: center; width: 100%; pointer-events: none; animation: clBannerIn 640ms cubic-bezier(.2,.9,.3,1) both;">
+            <div class="cl-banner" style="box-sizing: border-box; width: min(600px, 100%); display: flex; gap: 14px; align-items: center; padding: 14px 18px 14px 16px; border-radius: 20px; background: rgba(7,13,21,.94); border: 3px solid rgba(94,224,122,.85); animation: clBannerFloat 3.2s ease-in-out infinite, clBannerGlow 2.6s ease-in-out infinite;">
+              <span class="cl-banner-star" style="flex: none; font-size: 34px; line-height: 1; animation: clBannerStar 2.2s ease-in-out infinite;">💡</span>
+              <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+                <span style="font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: #5ee07a;">What I learnt · {{ bannerTag }}</span>
+                <span class="cl-banner-text" style="font-size: 17px; font-weight: 800; line-height: 1.4; color: #e9f1f7; text-wrap: pretty;">{{ bannerText }}</span>
+                <span style="font-size: 12px; font-weight: 800; color: #ffb627;">{{ bannerNext }}</span>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+        <div class="cl-foot-row">
+          <sc-if value="{{ showNote }}">
+            <div class="{{ noteRingClass }}" style="{{ noteRing }}">
+              <div style="display: flex; flex-direction: column; gap: 6px; padding: 11px 16px; border-radius: 16px; background: rgba(9,26,17,.92); border: 2px solid rgba(94,224,122,.75); box-shadow: 0 0 18px rgba(94,224,122,.4), inset 0 0 14px rgba(94,224,122,.12), 0 8px 26px rgba(0,0,0,.5); text-align: center;">
+                <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #5ee07a;">What we found</span>
+                <span class="cl-note-text" style="font-size: 14px; font-weight: 700; line-height: 1.45; color: #d6f5de; text-wrap: pretty;">{{ noteText }}</span>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showBestChip }}">
+            <div style="flex: none; display: flex; align-items: baseline; gap: 8px; padding: 10px 16px; border-radius: 999px; background: rgba(7,13,21,.9); border: 2px solid rgba(255,182,39,.55); box-shadow: 0 0 18px rgba(255,182,39,.25); font-family: inherit;">
+              <span style="font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #ffb627;">Best</span>
+              <span style="font-size: 18px; font-weight: 900; color: #fff;">{{ bestChip }}</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ showPlanNote }}">
+            <div style="box-sizing: border-box; width: min(400px, 100%); padding: 11px 16px; border-radius: 16px; background: rgba(36,26,6,.94); border: 1px solid rgba(255,182,39,.55); box-shadow: 0 8px 26px rgba(0,0,0,.5); font-size: 14px; font-weight: 700; line-height: 1.45; color: #ffd98a; text-align: center; text-wrap: pretty;">{{ planErr }}</div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ showTestControls }}">
+          <div data-tour="own" data-dock="test" class="cl-dock" role="group" aria-label="Controls">
+            <div class="cl-dock-btns">
+              <div style="{{ playRing }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="primary" size="sm" onClick="{{ togglePlay }}" hint-size="100%,44px">{{ playLabel }}</x-import></div>
+              <div style="padding: 2px;"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="neutral" size="sm" onClick="{{ reset }}" hint-size="100%,44px">↺ Reset</x-import></div>
+            </div>
+            <div class="cl-dock-time">
+              <div class="cl-dock-read"><span class="cl-dock-lab">Time</span><span class="cl-dock-val">{{ timeStr }}</span></div>
+              <div class="cl-dock-slide">
+                <input class="cl-range" type="range" min="0" max="30" step="0.2" value="{{ time }}" onChange="{{ setTime }}" onInput="{{ setTime }}" aria-label="Time in minutes">
+                <div class="cl-ticks"><span>0</span><span>10</span><span>20</span><span>30</span></div>
+              </div>
+            </div>
+            <div class="cl-dock-view">
+              <span class="cl-dock-lab">View</span>
+              <sc-for list="{{ viewButtons }}" as="v" hint-placeholder-count="3">
+                <div style="{{ v.ring }}">
+                  <x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" size="sm" active="{{ v.active }}" onClick="{{ v.pick }}" hint-size="100%,44px">{{ v.label }}</x-import>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ showDesignControls }}">
+          <div data-tour="own" data-dock="design" class="cl-dock" role="group" aria-label="Clock" title="One minute per second. Change any part of your cooler and the clock starts again.">
+            <div class="cl-dock-btns">
+              <div class="{{ startClass }}" style="{{ startRing }}"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="primary" size="sm" onClick="{{ togglePlay }}" hint-size="100%,44px">{{ dPlayLabel }}</x-import></div>
+              <div style="padding: 2px;"><x-import component-from-global-scope="ScienceClawDesignSystem_0049d4.Button" variant="neutral" size="sm" onClick="{{ reset }}" hint-size="100%,44px">↺ Reset</x-import></div>
+            </div>
+            <div class="cl-dock-time">
+              <div class="cl-dock-read"><span class="cl-dock-lab">Clock</span><span class="cl-dock-val">{{ timeStr }}</span></div>
+              <div class="cl-dock-slide">
+                <input class="cl-range" type="range" min="0" max="60" step="0.2" value="{{ time }}" onChange="{{ setTime }}" onInput="{{ setTime }}" aria-label="Clock in minutes">
+                <div class="cl-ticks"><span>0</span><span>20</span><span>40</span><span>60</span></div>
+              </div>
+            </div>
+            <p class="cl-dock-note">1 second = 1 minute. Change your cooler and the clock starts again.</p>
+          </div>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ showHint }}">
+        <div style="{{ hintWrap }}">
+          <span style="{{ hintArrow }}">◀</span>
+          <span style="padding: 10px 16px; border-radius: 14px; background: rgba(255,182,39,.94); color: #10161f; font-size: 15px; font-weight: 800; line-height: 1.35; box-shadow: 0 6px 22px rgba(0,0,0,.45);">{{ hintText }}</span>
+        </div>
+      </sc-if>
+    </section>

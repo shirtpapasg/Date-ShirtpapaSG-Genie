@@ -1,0 +1,896 @@
+[
+ {
+  "id": "living",
+  "t": "Living & Non-Living",
+  "lv": "P3",
+  "th": "DIV",
+  "motif": "meadow",
+  "idea": "Living things need certain things, and can do certain things. Non-living things cannot.",
+  "b": [
+   {
+    "t": "Living things need",
+    "k": [
+     "Water",
+     "Food",
+     "Air"
+    ]
+   },
+   {
+    "t": "Living things can",
+    "k": [
+     "Grow",
+     "Respond to changes",
+     "Reproduce"
+    ]
+   },
+   {
+    "t": "Plants",
+    "k": [
+     "Flowering plants",
+     "Non-flowering plants"
+    ]
+   },
+   {
+    "t": "Animals",
+    "k": [
+     "Mammals, birds, fish",
+     "Reptiles, amphibians",
+     "Insects"
+    ]
+   },
+   {
+    "t": "Other groups",
+    "k": [
+     "Fungi",
+     "Bacteria"
+    ]
+   }
+  ],
+  "out": [
+   "Decide if something is living using the needs-and-can tests",
+   "Place an animal in its group from its features",
+   "Explain why a car moves but is still non-living"
+  ]
+ },
+ {
+  "id": "materials",
+  "t": "Diversity of Materials",
+  "lv": "P3",
+  "th": "DIV",
+  "motif": "meadow",
+  "idea": "Every material has properties, and those properties decide what it is good for.",
+  "b": [
+   {
+    "t": "Strength",
+    "k": [
+     "Holds heavy loads",
+     "Breaks easily"
+    ]
+   },
+   {
+    "t": "Flexibility",
+    "k": [
+     "Bends without breaking",
+     "Stiff and keeps its shape"
+    ]
+   },
+   {
+    "t": "Float or sink",
+    "k": [
+     "Floats on water",
+     "Sinks in water"
+    ]
+   },
+   {
+    "t": "Waterproof",
+    "k": [
+     "Keeps water out",
+     "Soaks water up"
+    ]
+   },
+   {
+    "t": "Lets light through",
+    "k": [
+     "Clear enough to see through",
+     "Blocks the light"
+    ]
+   }
+  ],
+  "out": [
+   "Match a material to a job using its properties",
+   "Say which property makes an object fit for its use",
+   "Plan a fair test to compare two materials"
+  ]
+ },
+ {
+  "id": "lifecycles",
+  "t": "Life Cycles",
+  "lv": "P3",
+  "th": "CYC",
+  "motif": "meadow",
+  "idea": "Plants and animals go through stages, in order, from the start of life to adult.",
+  "b": [
+   {
+    "t": "Flowering plant",
+    "k": [
+     "Seed",
+     "Young plant",
+     "Adult plant"
+    ]
+   },
+   {
+    "t": "Butterfly & beetle",
+    "k": [
+     "Egg",
+     "Larva",
+     "Pupa",
+     "Adult"
+    ]
+   },
+   {
+    "t": "Grasshopper & cockroach",
+    "k": [
+     "Egg",
+     "Nymph",
+     "Adult"
+    ]
+   },
+   {
+    "t": "Frog",
+    "k": [
+     "Egg",
+     "Tadpole (the young)",
+     "Adult frog"
+    ]
+   },
+   {
+    "t": "Chicken",
+    "k": [
+     "Egg",
+     "Chick",
+     "Adult hen"
+    ]
+   }
+  ],
+  "out": [
+   "Name the stages of a life cycle in order",
+   "Compare two animal life cycles and say how they differ",
+   "Use a life cycle to explain how to control mosquitoes"
+  ]
+ },
+ {
+  "id": "reproduction",
+  "t": "Reproduction in Plants",
+  "lv": "P5",
+  "th": "CYC",
+  "motif": "meadow",
+  "idea": "A flower makes seeds, and those seeds travel away to grow into new plants.",
+  "b": [
+   {
+    "t": "Parts of a flower",
+    "k": [
+     "Stamen and anther",
+     "Stigma and ovary",
+     "Ovule"
+    ]
+   },
+   {
+    "t": "Pollination",
+    "k": [
+     "Pollen lands on the stigma",
+     "Carried by insects",
+     "Carried by wind"
+    ]
+   },
+   {
+    "t": "Fertilisation",
+    "k": [
+     "Pollen joins the ovule",
+     "The ovule becomes a seed"
+    ]
+   },
+   {
+    "t": "Seed dispersal",
+    "k": [
+     "By wind",
+     "By water",
+     "By animals",
+     "By splitting"
+    ]
+   },
+   {
+    "t": "Germination",
+    "k": [
+     "Needs water",
+     "Needs air",
+     "Needs warmth"
+    ]
+   }
+  ],
+  "out": [
+   "Name the flower parts and say what each one does",
+   "Trace pollen from anther to a new seed",
+   "Link a seed’s features to how it is dispersed"
+  ]
+ },
+ {
+  "id": "matter",
+  "t": "Matter",
+  "lv": "P4",
+  "th": "CYC",
+  "motif": "plain",
+  "idea": "Everything around us is matter. All matter has mass, takes up space, and can change state.",
+  "b": [
+   {
+    "t": "Solid",
+    "k": [
+     "Fixed shape",
+     "Fixed volume"
+    ]
+   },
+   {
+    "t": "Liquid",
+    "k": [
+     "Takes the shape of its container",
+     "Fixed volume"
+    ]
+   },
+   {
+    "t": "Gas",
+    "k": [
+     "Fills up the whole container",
+     "No fixed shape or volume"
+    ]
+   },
+   {
+    "t": "All matter has",
+    "k": [
+     "Mass",
+     "Volume"
+    ]
+   },
+   {
+    "t": "Changing state",
+    "k": [
+     "Gains heat",
+     "Loses heat"
+    ]
+   }
+  ],
+  "out": [
+   "Sort a substance into solid, liquid or gas from its properties",
+   "Show that a gas has mass and takes up space",
+   "Explain a change of state using heat gained or lost"
+  ]
+ },
+ {
+  "id": "water",
+  "t": "The Water Cycle",
+  "lv": "P5",
+  "th": "CYC",
+  "motif": "sky",
+  "idea": "Water moves round and round between the sea, the sky and the land, changing state as it goes.",
+  "b": [
+   {
+    "t": "Evaporation",
+    "k": [
+     "Liquid turns into gas",
+     "Faster when it is hotter",
+     "Faster in the wind"
+    ]
+   },
+   {
+    "t": "Condensation",
+    "k": [
+     "Gas turns back into liquid",
+     "Happens on a cold surface"
+    ]
+   },
+   {
+    "t": "Boiling",
+    "k": [
+     "Only at the boiling point",
+     "Bubbles all through the liquid"
+    ]
+   },
+   {
+    "t": "Freezing & melting",
+    "k": [
+     "Water turns into ice",
+     "Ice turns back into water"
+    ]
+   },
+   {
+    "t": "Round and round",
+    "k": [
+     "Sea and land",
+     "Clouds",
+     "Rain",
+     "Back to the sea"
+    ]
+   }
+  ],
+  "out": [
+   "Tell evaporation and boiling apart",
+   "Explain the water droplets on a cold glass",
+   "Follow one drop of water all the way round the cycle"
+  ]
+ },
+ {
+  "id": "digestive",
+  "t": "Digestive System",
+  "lv": "P4",
+  "th": "SYS",
+  "motif": "plain",
+  "layout": "sides",
+  "sideOf": [
+   "L",
+   "L",
+   "R",
+   "R",
+   "L"
+  ],
+  "idea": "Different parts work together to break food down so the body can take it in.",
+  "b": [
+   {
+    "t": "Mouth",
+    "k": [
+     "Digestion begins here",
+     "Breaks food into smaller pieces",
+     "Mixes food with digestive juice"
+    ]
+   },
+   {
+    "t": "Gullet",
+    "k": [
+     "Pushes food down to the stomach"
+    ]
+   },
+   {
+    "t": "Stomach",
+    "k": [
+     "Churns the food up",
+     "Breaks food down into simpler substances"
+    ]
+   },
+   {
+    "t": "Small intestine",
+    "k": [
+     "Digestion is completed here",
+     "Digested food is absorbed into the blood"
+    ]
+   },
+   {
+    "t": "Large intestine",
+    "k": [
+     "Absorbs water from undigested food",
+     "Waste leaves the body"
+    ]
+   }
+  ],
+  "out": [
+   "Put the parts in the order food travels through them",
+   "Say what digestion and absorption each mean",
+   "Explain why food must be broken down before the body can use it"
+  ]
+ },
+ {
+  "id": "respcirc",
+  "t": "Circulatory System",
+  "lv": "P5",
+  "th": "SYS",
+  "motif": "plain",
+  "layout": "sides",
+  "sideOf": [
+   "R",
+   "L",
+   "R",
+   "L",
+   "L"
+  ],
+  "idea": "The heart, blood vessels and blood work together to carry substances around the body.",
+  "b": [
+   {
+    "t": "Heart",
+    "k": [
+     "Pumps blood around the body",
+     "Beats faster when we are active"
+    ]
+   },
+   {
+    "t": "Lungs",
+    "k": [
+     "Blood takes in oxygen",
+     "Blood gives off carbon dioxide"
+    ]
+   },
+   {
+    "t": "Blood vessels",
+    "k": [
+     "Carry blood to and from the heart",
+     "Reach all parts of the body"
+    ]
+   },
+   {
+    "t": "Blood",
+    "k": [
+     "Carries oxygen, digested food and water",
+     "Carries carbon dioxide and waste away"
+    ]
+   },
+   {
+    "t": "Body parts",
+    "k": [
+     "Take in oxygen and digested food",
+     "Give off carbon dioxide"
+    ]
+   }
+  ],
+  "out": [
+   "Trace the blood from the heart to the lungs and back",
+   "Explain why the heart beats faster when we are active",
+   "Name what blood carries to and from the body parts"
+  ]
+ },
+ {
+  "id": "plants",
+  "t": "Plant System",
+  "lv": "P4/P5",
+  "th": "SYS",
+  "motif": "plant",
+  "idea": "Different parts that work together so that the plant grows well",
+  "b": [
+   {
+    "t": "Leaves",
+    "k": [
+     "Make food",
+     "Take in and give out gases"
+    ]
+   },
+   {
+    "t": "Stem",
+    "k": [
+     "Hold the plant upright to get light",
+     "Transport food, water and mineral salts to different parts of the plant"
+    ]
+   },
+   {
+    "t": "Roots",
+    "k": [
+     "Hold the plant firmly to the ground",
+     "Absorb water and dissolved mineral salts"
+    ]
+   }
+  ],
+  "out": [
+   "Name each plant part and the job it does",
+   "Follow water from the soil up to a leaf",
+   "Predict what happens to a plant with its stem cut"
+  ]
+ },
+ {
+  "id": "electrical",
+  "t": "Electrical System",
+  "lv": "P5",
+  "th": "SYS",
+  "motif": "plain",
+  "sim": "circuit",
+  "idea": "Electricity flows only when the path is complete. How we arrange the parts changes what happens.",
+  "b": [
+   {
+    "t": "Parts of a circuit",
+    "k": [
+     "Cell or battery",
+     "Bulb",
+     "Switch",
+     "Wires"
+    ]
+   },
+   {
+    "t": "Closed circuit",
+    "k": [
+     "The path is complete",
+     "Current flows",
+     "The bulb lights up"
+    ]
+   },
+   {
+    "t": "Open circuit",
+    "k": [
+     "The path is broken",
+     "No current flows",
+     "The bulb stays off"
+    ]
+   },
+   {
+    "t": "Conductors & insulators",
+    "k": [
+     "Metals let current through",
+     "Plastic and wood do not"
+    ]
+   },
+   {
+    "t": "Series",
+    "k": [
+     "One path only",
+     "One bulb out, all out",
+     "Bulbs are dimmer"
+    ]
+   },
+   {
+    "t": "Parallel",
+    "k": [
+     "More than one path",
+     "One bulb out, the others stay on",
+     "Bulbs are brighter"
+    ]
+   }
+  ],
+  "out": [
+   "Draw a closed circuit that lights a bulb",
+   "Test whether a material is a conductor or an insulator",
+   "Predict what happens when one bulb is removed from a series or parallel circuit",
+   "Explain why parallel bulbs are brighter than series bulbs"
+  ]
+ },
+ {
+  "id": "magnets",
+  "t": "Magnets",
+  "lv": "P3",
+  "th": "INT",
+  "motif": "plain",
+  "idea": "A magnet pushes or pulls without touching, and only some materials feel it.",
+  "b": [
+   {
+    "t": "A magnet can",
+    "k": [
+     "Push",
+     "Pull"
+    ]
+   },
+   {
+    "t": "Two poles",
+    "k": [
+     "North pole",
+     "South pole"
+    ]
+   },
+   {
+    "t": "Poles together",
+    "k": [
+     "Unlike poles attract",
+     "Like poles repel"
+    ]
+   },
+   {
+    "t": "Magnetic materials",
+    "k": [
+     "Iron and steel",
+     "Not copper or plastic"
+    ]
+   },
+   {
+    "t": "Making a magnet",
+    "k": [
+     "Stroke method",
+     "Electrical method"
+    ]
+   }
+  ],
+  "out": [
+   "Predict attraction or repulsion from the poles facing each other",
+   "Sort materials into magnetic and non-magnetic",
+   "Make a magnet and test that it works"
+  ]
+ },
+ {
+  "id": "forces",
+  "t": "Forces",
+  "lv": "P6",
+  "th": "INT",
+  "motif": "plain",
+  "idea": "A force is a push or a pull, and it changes how an object moves or what shape it is.",
+  "b": [
+   {
+    "t": "A force is",
+    "k": [
+     "A push",
+     "A pull"
+    ]
+   },
+   {
+    "t": "A force can",
+    "k": [
+     "Move a still object",
+     "Speed it up or slow it down",
+     "Change its direction",
+     "Stop it moving",
+     "Change its shape"
+    ]
+   },
+   {
+    "t": "Frictional force",
+    "k": [
+     "Between surfaces in contact",
+     "Opposes motion",
+     "More on rough surfaces"
+    ]
+   },
+   {
+    "t": "Gravitational force",
+    "k": [
+     "Pulls objects towards the Earth",
+     "Gives an object its weight"
+    ]
+   },
+   {
+    "t": "Elastic spring force",
+    "k": [
+     "In a stretched spring",
+     "In a squashed spring"
+    ]
+   },
+   {
+    "t": "Magnetic force",
+    "k": [
+     "Acts without touching"
+    ]
+   }
+  ],
+  "out": [
+   "Name the force acting in a given situation",
+   "Say which of the five effects a force is having",
+   "Explain weight as the pull of gravity on an object",
+   "Predict how surface roughness changes friction"
+  ]
+ },
+ {
+  "id": "environment",
+  "t": "Living Things & Their Environment",
+  "lv": "P6",
+  "th": "INT",
+  "motif": "meadow",
+  "idea": "Living things feed on each other and are suited to where they live. What people do changes both.",
+  "b": [
+   {
+    "t": "Food chains",
+    "k": [
+     "Producer",
+     "Consumer",
+     "Predator and prey"
+    ]
+   },
+   {
+    "t": "Food webs",
+    "k": [
+     "Food chains that overlap",
+     "Remove one, the others change"
+    ]
+   },
+   {
+    "t": "Adaptations",
+    "k": [
+     "Body features",
+     "Behaviour",
+     "Suited to the habitat"
+    ]
+   },
+   {
+    "t": "Human activity",
+    "k": [
+     "Clearing land",
+     "Pollution",
+     "Conservation"
+    ]
+   }
+  ],
+  "out": [
+   "Build a food chain with the arrows pointing the right way",
+   "Predict the effect of removing one organism from a web",
+   "Link an adaptation to the habitat it suits",
+   "Give one human action that harms and one that helps"
+  ]
+ },
+ {
+  "id": "light",
+  "t": "Light",
+  "lv": "P4",
+  "th": "ENE",
+  "motif": "sky",
+  "idea": "Light travels in straight lines. That one fact explains shadows, reflection and how we see.",
+  "b": [
+   {
+    "t": "Light travels",
+    "k": [
+     "In straight lines"
+    ]
+   },
+   {
+    "t": "Shadows",
+    "k": [
+     "Light is blocked",
+     "Nearer the light, bigger the shadow",
+     "Same shape as the object"
+    ]
+   },
+   {
+    "t": "Reflection",
+    "k": [
+     "Light bounces off surfaces",
+     "Mirrors reflect best"
+    ]
+   },
+   {
+    "t": "How we see",
+    "k": [
+     "Light enters our eyes",
+     "No light means no seeing"
+    ]
+   }
+  ],
+  "out": [
+   "Explain a shadow using straight-line travel",
+   "Predict how a shadow changes as the light or object moves",
+   "Explain how we see an object that makes no light of its own"
+  ]
+ },
+ {
+  "id": "heat",
+  "t": "Heat",
+  "lv": "P4",
+  "th": "ENE",
+  "motif": "plain",
+  "idea": "Heat always flows from the hotter thing to the colder one, until both are the same.",
+  "b": [
+   {
+    "t": "Heat flows",
+    "k": [
+     "From hotter to colder",
+     "Until both are the same temperature"
+    ]
+   },
+   {
+    "t": "Temperature",
+    "k": [
+     "How hot or cold something is",
+     "Measured with a thermometer"
+    ]
+   },
+   {
+    "t": "Good conductors of heat",
+    "k": [
+     "Metals",
+     "Heat travels through them quickly"
+    ]
+   },
+   {
+    "t": "Poor conductors of heat",
+    "k": [
+     "Plastic, wood and air",
+     "Heat travels through them slowly"
+    ]
+   },
+   {
+    "t": "Gaining or losing heat",
+    "k": [
+     "Expands when heated",
+     "Contracts when cooled",
+     "Can change state"
+    ]
+   }
+  ],
+  "out": [
+   "Say which way heat will flow between two objects",
+   "Choose a good or a poor conductor of heat for a given job",
+   "Explain expansion and contraction in a real example",
+   "Link heat gained or lost to a change of state"
+  ]
+ },
+ {
+  "id": "photosynthesis",
+  "t": "Photosynthesis",
+  "lv": "P6",
+  "th": "ENE",
+  "motif": "plant",
+  "idea": "Leaves make the plant’s own food using light, water and carbon dioxide.",
+  "b": [
+   {
+    "t": "Where it happens",
+    "k": [
+     "In the leaves",
+     "In the chlorophyll"
+    ]
+   },
+   {
+    "t": "What it needs",
+    "k": [
+     "Light",
+     "Water",
+     "Carbon dioxide"
+    ]
+   },
+   {
+    "t": "What it makes",
+    "k": [
+     "Food for the plant",
+     "Oxygen, given off"
+    ]
+   },
+   {
+    "t": "Chlorophyll",
+    "k": [
+     "The green colouring",
+     "Traps the light"
+    ]
+   },
+   {
+    "t": "Why it matters",
+    "k": [
+     "Plants are producers",
+     "The start of every food chain"
+    ]
+   }
+  ],
+  "out": [
+   "List what a leaf needs and what it makes",
+   "Design a test to show light is needed",
+   "Explain why plants are producers in a food chain"
+  ]
+ },
+ {
+  "id": "energy",
+  "t": "Energy Conversion",
+  "lv": "P6",
+  "th": "ENE",
+  "motif": "plain",
+  "idea": "Energy is never made or destroyed. It only changes from one form into another.",
+  "b": [
+   {
+    "t": "The rule",
+    "k": [
+     "Not created",
+     "Not destroyed",
+     "Only converted"
+    ]
+   },
+   {
+    "t": "Forms of energy",
+    "k": [
+     "Light",
+     "Heat (thermal)",
+     "Sound",
+     "Electrical",
+     "Kinetic"
+    ]
+   },
+   {
+    "t": "Potential energy",
+    "k": [
+     "Gravitational",
+     "Elastic"
+    ]
+   },
+   {
+    "t": "Chemical energy",
+    "k": [
+     "In food",
+     "In fuel",
+     "In a battery"
+    ]
+   },
+   {
+    "t": "Everyday chains",
+    "k": [
+     "Torch: chemical to light",
+     "Drum: kinetic to sound",
+     "Fan: electrical to kinetic"
+    ]
+   }
+  ],
+  "out": [
+   "Name the energy forms at the start and end of a change",
+   "Write an energy conversion chain for a device",
+   "Explain why energy is never used up, only converted"
+  ]
+ }
+]

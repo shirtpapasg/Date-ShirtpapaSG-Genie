@@ -1,0 +1,30 @@
+[
+ [
+  "popAt(s.lv, 1180, 380, t, a(\"leaves\"))",
+  "popAt(s.lv, 1180, 440, t, a(\"leaves\"))"
+ ],
+ [
+  "popAt(s.lw, 1180, 470, t, a(\"water\"))",
+  "popAt(s.lw, 1180, 515, t, a(\"water\"))"
+ ],
+ [
+  "popAt(s.pr, 1180, 550, t, a(\"animals\"))",
+  "popAt(s.pr, 1180, 585, t, a(\"animals\"))"
+ ],
+ [
+  "popAt(s.food, 1180, 660, t, b(\"green\"))",
+  "popAt(s.food, 1180, 662, t, b(\"green\"))"
+ ],
+ [
+  "popAt(s.wood, 600, 170, t, a(\"woody\"))",
+  "popAt(s.wood, 770, 140, t, a(\"woody\"))"
+ ],
+ [
+  "popAt(s.wl, 400, 200, t, a(\"hairylooking\"))",
+  "popAt(s.wl, 410, 150, t, a(\"hairylooking\"))"
+ ],
+ [
+  "set(s.goat, \"y\", 640);",
+  "set(s.goat, \"y\", 640); { const gx = +s.goat.getAttribute(\"x\"); tf(s.goat, gk < .8 ? `translate(${2 * gx} 0) scale(-1 1)` : \"\"); }"
+ ]
+]

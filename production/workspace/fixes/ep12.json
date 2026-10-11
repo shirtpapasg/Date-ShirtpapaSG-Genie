@@ -1,0 +1,10 @@
+[
+ [
+  "fill: \"#fff1e6\", stroke: \"#e63946\", \"stroke-width\": 8}, s.stage)}); }",
+  "fill: \"#fff1e6\", stroke: \"#e9c46a\", \"stroke-width\": 3}, s.stage)}); const sk = el(\"path\", {d: `M${Math.cos(a0) * 90} ${Math.sin(a0) * 90} A90 90 0 0 1 ${Math.cos(a1) * 90} ${Math.sin(a1) * 90}`, fill: \"none\", stroke: \"#e63946\", \"stroke-width\": 10}, s.stage); const sq = s.sl[i]; const g = el(\"g\", {}, s.stage); g.appendChild(sq.e); g.appendChild(sk); sq.e = g; }"
+ ],
+ [
+  "\"we know: mass = the amount of matter\"",
+  "\"we know: mass = the amount of matter in an object\""
+ ]
+]

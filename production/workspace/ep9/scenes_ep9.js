@@ -1,0 +1,225 @@
+/* =================== SCENES (Episode 9: solid, liquid, gas — the squeeze test) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const TEA = "#c8811a";
+function vessel(p, w, h) { const g = el("g", {}, p); const liq = el("rect", {x: -w / 2 + 6, width: w - 12, fill: TEA}, g);
+  el("path", {d: `M${-w / 2} ${-h} V0 H${w / 2} V${-h}`, fill: "none", stroke: INK, "stroke-width": 8, "stroke-linejoin": "round"}, g);
+  g.fill = (area) => { const hh = Math.min(h, area / (w - 12)); set(liq, "y", -hh); set(liq, "height", Math.max(0, hh - 4)); return area / (w - 12) > h; }; g.fill(0); return g; }
+function dots(p, n, r, col = "#fff") { const a = []; for (let i = 0; i < n; i++) a.push({u: rnd(), v: rnd(), ph: rnd() * 6, e: el("circle", {r, fill: col, stroke: INK, "stroke-width": 2}, p)}); return a; }
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#ffd166", "#06d6a0");
+  s.p = [["🪨", "ROCK", "rock", "no"], ["💧", "WATER", "water", "no#2"], ["🎈", "GAS", "gas", "yes"]].map(([e, n, w, m], i) => { const g = el("g", {}, s.stage);
+    el("rect", {x: -160, y: -170, width: 320, height: 340, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g); const ic = emo(g, 0, -30, 150, e);
+    tx(g, {x: 0, y: 120, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, n); const mk = tx(g, {x: 100, y: -90, "text-anchor": "middle", "font-size": 120, "font-weight": 700, fill: i === 2 ? "#06d6a0" : "#e63946", class: "out", "stroke-width": 9}, i === 2 ? "✓" : "✗"); return {g, ic, mk, w, m, i}; });
+  s.hand = emo(s.stage, 0, 0, 110, "🤏"); s.test = chip(s.stage, "🤏 THE SQUEEZE TEST", "#7209b7", {fs: 46});
+  s.run = t => { const a = w => C("hook", w);
+    s.p.forEach(p => { const tt = a(p.w) - .3; op(p.g, ramp(t, tt, tt + .2)); tf(p.g, `translate(${380 + p.i * 380} 450) scale(${pop(t, tt)})`);
+      const sq = p.i === 2 ? ramp(t, a("yes"), a("yes") + .5) : 0; tf(p.ic, `translate(0 -30) scale(${1 - sq * .35} ${1 - sq * .2}) translate(0 30)`); op(p.mk, ramp(t, a(p.m), a(p.m) + .2)); });
+    const hx = t < a("water") - .3 ? 380 : t < a("gas") - .3 ? 760 : 1140; op(s.hand, on(t, a("squeeze") - .2, a("test"), .2)); set(s.hand, "x", hx + 60); set(s.hand, "y", 250 + Math.sin(t * 9) * 8);
+    op(s.test, ramp(t, a("test"), a("test") + .2)); popAt(s.test, 760, 800, t, a("test")); }; return s; })();
+
+// ---- INTRO
+S.intro = (() => { const s = scene("intro", "#a2d2ff", "#cdb4db");
+  s.st = [["🧊", "SOLID", "solid", "#8d6e63"], ["💧", "LIQUID", "liquid", "#00b4d8"], ["💨", "GAS", "gas", "#6c757d"]].map(([e, n, w, c], i) => { const g = el("g", {}, s.stage); el("circle", {r: 110, fill: "#fff", stroke: c, "stroke-width": 10}, g); emo(g, 0, -10, 110, e);
+    tx(g, {x: 0, y: 160, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, n); return {g, w, i}; });
+  s.three = chip(s.stage, "3 STATES of matter", "#7209b7", {fs: 42});
+  s.q1 = chip(s.stage, "❓ Does it have a DEFINITE SHAPE?", "#ef476f", {fs: 38}); s.q2 = chip(s.stage, "❓ Does it have a DEFINITE VOLUME?", "#3a86ff", {fs: 38});
+  s.note = chip(s.stage, "definite = fixed, it does not change", "#fff", {fs: 28, ink: INK});
+  s.run = t => { const a = w => C("intro", w); const up = ramp(t, a("questions") - .2, a("questions") + .4);
+    op(s.three, ramp(t, a("three"), a("three") + .2)); popAt(s.three, 760, 140, t, a("three"));
+    s.st.forEach(p => { const tt = a(p.w); op(p.g, ramp(t, tt, tt + .2)); tf(p.g, `translate(${400 + p.i * 360} ${lerp(420, 330, up)}) scale(${pop(t, tt) * lerp(1, .75, up)})`); });
+    op(s.q1, ramp(t, a("shape"), a("shape") + .2)); popAt(s.q1, 760, 630, t, a("shape"));
+    op(s.q2, ramp(t, a("volume"), a("volume") + .2)); popAt(s.q2, 760, 730, t, a("volume"));
+    op(s.note, ramp(t, a("volume") + .6, a("volume") + .8)); popAt(s.note, 760, 820, t, a("volume") + .6); }; return s; })();
+
+// ---- SOLID
+S.solid = (() => { const s = scene("solid", "#ffe8d6", "#ddbea9");
+  s.table = el("g", {}, s.stage); el("rect", {x: -200, y: 0, width: 400, height: 30, rx: 8, fill: "#bc6c25", stroke: INK, "stroke-width": 6}, s.table); [-170, 170].forEach(x => el("rect", {x: x - 12, y: 30, width: 24, height: 160, fill: "#bc6c25", stroke: INK, "stroke-width": 6}, s.table));
+  s.box = el("g", {}, s.stage); el("rect", {x: -200, y: -150, width: 400, height: 190, rx: 14, fill: "#e63946", stroke: INK, "stroke-width": 7}, s.box); el("rect", {x: -60, y: -190, width: 120, height: 40, rx: 14, fill: "none", stroke: INK, "stroke-width": 9}, s.box);
+  s.tools = ["🔧", "🪛", "🪚", "🔩"].map((e, i) => emo(s.stage, 0, 0, 90, e));
+  s.ham = emo(s.stage, 0, 0, 140, "🔨");
+  s.c = [["✓ definite SHAPE", "#ef476f", "shape#2"], ["✓ definite VOLUME", "#3a86ff", "volume"], ["✗ cannot be COMPRESSED", "#1b1b3a", "compressed"]].map(([n, col, w], i) => ({c: chip(s.stage, n, col, {fs: 34}), w, i}));
+  s.run = t => { const a = w => C("solid", w); const mv = ramp(t, a("toolbox") - .4, a("toolbox") + .4), full = ramp(t, a("full") - .3, a("full"));
+    op(s.table, 1); tf(s.table, "translate(440 620)"); op(s.box, ramp(t, a("toolbox") - .8, a("toolbox") - .4)); tf(s.box, "translate(1080 640)");
+    s.tools.forEach((e, i) => { op(e, full); set(e, "x", 960 + i * 80); set(e, "y", 560); });
+    const bounce = full * Math.abs(Math.sin((t - a("full")) * 7)) * 40 * (1 - ramp(t, a("compressed") + .4, a("compressed") + .8));
+    op(s.ham, ramp(t, a("hammer"), a("hammer") + .2)); set(s.ham, "x", lerp(440, 1080, mv)); set(s.ham, "y", lerp(560, 540, mv) - Math.sin(mv * Math.PI) * 160 - full * 140 - bounce);
+    s.c.forEach(c => { const tt = a(c.w); op(c.c, ramp(t, tt, tt + .2)); popAt(c.c, 760, 160 + c.i * 80, t, tt); }); }; return s; })();
+
+// ---- LIQUID
+S.liquid = (() => { const s = scene("liquid", "#caf0f8", "#90e0ef");
+  const V = 288 * 130; s.A = vessel(s.stage, 300, 200); s.B = vessel(s.stage, 150, 300); s.Cc = vessel(s.stage, 140, 130); s.D = vessel(s.stage, 420, 320);
+  s.lA = chip(s.stage, "🫖 teapot", "#fff", {fs: 28, ink: INK}); s.lB = chip(s.stage, "jug", "#fff", {fs: 28, ink: INK}); s.lC = chip(s.stage, "☕ small cup", "#fff", {fs: 28, ink: INK}); s.lD = chip(s.stage, "🫖 HUGE teapot", "#fff", {fs: 28, ink: INK});
+  s.stream = el("path", {fill: "none", stroke: TEA, "stroke-width": 16, "stroke-linecap": "round"}, s.stage);
+  s.drips = []; for (let i = 0; i < 8; i++) s.drips.push({ph: i / 8, sd: i % 2 ? 1 : -1, e: el("circle", {r: 10, fill: TEA}, s.stage)});
+  s.c1 = chip(s.stage, "takes the SHAPE of its container", "#00b4d8", {fs: 34}); s.c2 = chip(s.stage, "✗ NO definite shape", "#ef476f", {fs: 34});
+  s.c3 = chip(s.stage, "✓ definite VOLUME", "#3a86ff", {fs: 34}); s.c4 = chip(s.stage, "✗ cannot be COMPRESSED", "#1b1b3a", {fs: 34});
+  s.shoot = el("g", {}, s.stage); el("rect", {x: -260, y: -50, width: 460, height: 100, rx: 30, fill: "#4cc9f0", stroke: INK, "stroke-width": 7}, s.shoot); el("rect", {x: 200, y: -16, width: 70, height: 32, rx: 8, fill: "#4361ee", stroke: INK, "stroke-width": 6}, s.shoot);
+  s.rod = el("rect", {y: -14, width: 260, height: 28, rx: 8, fill: "#ffd166", stroke: INK, "stroke-width": 6}, s.shoot);
+  s.jet = []; for (let i = 0; i < 10; i++) s.jet.push({ph: i / 10, e: emo(s.stage, 0, 0, 50, "💦")});
+  s.c5 = chip(s.stage, "push ➜ the water MUST squirt out 💦", "#06d6a0", {fs: 34});
+  s.run = t => { const a = w => C("liquid1", w), b = w => C("liquid2", w);
+    const p1 = ramp(t, a("pour"), a("jug") + .8), p2 = ramp(t, b("cup"), b("overflows") + .2), p3 = ramp(t, b("huge"), b("fill") + .2), sh = ramp(t, b("shooter") - .3, b("shooter"));
+    const inA = V * (1 - p1), inB = V * p1 * (1 - p2) + 0, inC = Math.min(V * p2, 140 * 128) * (1 - p3 > 0 ? 1 : 0), inD = V * p3;
+    const showC = t < b("huge") - .2, showD = t >= b("huge") - .4;
+    tf(s.A, "translate(360 760)"); s.A.fill(inA); op(s.A, 1 - ramp(t, b("full") - .3, b("full")));
+    tf(s.B, "translate(760 760)"); s.B.fill(t < b("huge") ? (t < b("cup") ? inB : V * (1 - p2)) : V * (1 - p3)); op(s.B, 1 - sh);
+    tf(s.Cc, "translate(1150 760)"); s.Cc.fill(Math.min(V * p2, 128 * 130)); op(s.Cc, ramp(t, b("cup") - .4, b("cup")) * (showC ? 1 : 0));
+    tf(s.D, "translate(1150 760)"); s.D.fill(inD); op(s.D, (showD ? ramp(t, b("huge") - .4, b("huge")) : 0) * (1 - sh));
+    op(s.A, (1 - ramp(t, b("full") - .3, b("full"))) * (1 - sh));
+    op(s.lA, (1 - ramp(t, b("full") - .3, b("full")))); popAt(s.lA, 360, 820, t, SC.liquid.t0); op(s.lB, 1 - sh); popAt(s.lB, 760, 820, t, SC.liquid.t0);
+    op(s.lC, ramp(t, b("cup") - .4, b("cup")) * (showC ? 1 : 0)); popAt(s.lC, 1150, 820, t, b("cup") - .4); op(s.lD, (showD ? ramp(t, b("huge") - .4, b("huge")) : 0) * (1 - sh)); popAt(s.lD, 1150, 820, t, b("huge") - .4);
+    const pour = (k, x1, x2, y2) => { set(s.stream, "d", `M${x1} 520 Q${(x1 + x2) / 2} 420 ${x2} ${y2}`); return k > 0 && k < 1 ? 1 : 0; };
+    let so = 0; if (p1 > 0 && p1 < 1) so = pour(p1, 420, 760, 600); else if (p2 > 0 && p2 < 1) so = pour(p2, 800, 1150, 660); else if (p3 > 0 && p3 < 1) so = pour(p3, 800, 1150, 560); op(s.stream, so);
+    const ov = on(t, b("overflows"), b("huge") - .3, .2); s.drips.forEach(d => { const k = ((t * 1.2 + d.ph) % 1); set(d.e, "cx", 1150 + d.sd * (78 + k * 30)); set(d.e, "cy", lerp(630, 760, k)); op(d.e, ov); });
+    op(s.c1, on(t, a("shape"), b("volume"), .2)); popAt(s.c1, 760, 160, t, a("shape")); op(s.c2, on(t, a("no"), b("volume"), .2)); popAt(s.c2, 760, 240, t, a("no"));
+    op(s.c3, on(t, b("volume"), b("shooter") - .3, .2)); popAt(s.c3, 760, 160, t, b("volume")); op(s.c4, on(t, b("compressed"), b("shooter") - .3, .2)); popAt(s.c4, 760, 240, t, b("compressed"));
+    op(s.shoot, sh); const pk = ramp(t, b("push"), b("push") + .6); tf(s.shoot, "translate(700 470)"); set(s.rod, "x", lerp(-480, -280, pk));
+    s.jet.forEach(j => { const k = ((t * 1.4 + j.ph) % 1); set(j.e, "x", 970 + k * 420); set(j.e, "y", 470 - Math.sin(k * 2.2) * 120 + k * k * 160); op(j.e, ramp(t, b("squirt") - .2, b("squirt")) * (1 - k * .3)); });
+    op(s.c5, ramp(t, b("squirt"), b("squirt") + .2)); popAt(s.c5, 760, 700, t, b("squirt")); }; return s; })();
+
+// ---- GAS (pump + ball, then fill the space)
+S.gas = (() => { const s = scene("gas", "#e9ecef", "#ced4da");
+  s.pump = el("g", {}, s.stage); el("rect", {x: -45, y: -170, width: 90, height: 340, rx: 16, fill: "#adb5bd", stroke: INK, "stroke-width": 7}, s.pump); s.handle = el("g", {}, s.pump);
+  el("rect", {x: -10, y: -300, width: 20, height: 140, fill: "#495057", stroke: INK, "stroke-width": 5}, s.handle); el("rect", {x: -80, y: -320, width: 160, height: 30, rx: 12, fill: "#e63946", stroke: INK, "stroke-width": 6}, s.handle);
+  s.hose = el("path", {d: "M360 640 Q600 760 840 560", fill: "none", stroke: INK, "stroke-width": 14}, s.stage);
+  s.ball = el("g", {}, s.stage); el("circle", {r: 160, fill: "#f77f00", stroke: INK, "stroke-width": 8}, s.ball); el("path", {d: "M-160 0 H160 M0 -160 V160 M-110 -115 Q0 0 -110 115 M110 -115 Q0 0 110 115", fill: "none", stroke: INK, "stroke-width": 6}, s.ball);
+  seed = 21; s.d = dots(s.stage, 34, 9);
+  s.room = el("rect", {x: 380, y: 260, width: 760, height: 500, rx: 20, fill: "#ffffff66", stroke: INK, "stroke-width": 8, "stroke-dasharray": "22 12"}, s.stage);
+  s.c1 = chip(s.stage, "takes the ball's ROUND shape", "#f77f00", {fs: 32}); s.c2 = chip(s.stage, "more air squeezes in ✓ can be COMPRESSED", "#06d6a0", {fs: 32});
+  s.c3 = chip(s.stage, "✗ no definite shape   ✗ no definite volume", "#6c757d", {fs: 34}); s.c4 = chip(s.stage, "spreads out to FILL all the space", "#3a86ff", {fs: 34});
+  s.run = t => { const a = w => C("gas1", w); const sp = ramp(t, a("spreads") - .4, a("spreads") + .8), gone = ramp(t, a("no") - .3, a("no"));
+    op(s.pump, 1 - gone); tf(s.pump, "translate(320 470)"); op(s.hose, 1 - gone); op(s.ball, 1 - gone); tf(s.ball, "translate(980 470)");
+    const pumping = on(t, a("pump"), a("compressed") + 1, .1); tf(s.handle, `translate(0 ${pumping * Math.abs(Math.sin(t * 5)) * 120})`);
+    const n = Math.round(lerp(12, 34, ramp(t, a("keep"), a("compressed") + .8)));
+    s.d.forEach((d, i) => { const ang = d.u * 6.283, rr = Math.sqrt(d.v) * 130; const bx = 980 + Math.cos(ang) * rr + Math.sin(t * 2 + d.ph) * 6, by = 470 + Math.sin(ang) * rr + Math.cos(t * 2 + d.ph) * 6;
+      const rx = 420 + d.u * 680, ry = 300 + d.v * 420, cx = 760 + Math.cos(ang) * rr * .4, cy = 510 + Math.sin(ang) * rr * .4;
+      const g2 = gone; set(d.e, "cx", lerp(lerp(bx, cx, g2), rx, sp)); set(d.e, "cy", lerp(lerp(by, cy, g2), ry, sp)); op(d.e, (i < n ? 1 : 0) * ramp(t, a("pump"), a("pump") + .4)); });
+    op(s.room, gone);
+    op(s.c1, on(t, a("round"), a("no") - .3, .2)); popAt(s.c1, 760, 160, t, a("round")); op(s.c2, on(t, a("compressed"), a("no") - .3, .2)); popAt(s.c2, 760, 240, t, a("compressed"));
+    op(s.c3, ramp(t, a("no"), a("no") + .2)); popAt(s.c3, 760, 160, t, a("no")); op(s.c4, ramp(t, a("spreads"), a("spreads") + .2)); popAt(s.c4, 760, 840, t, a("spreads")); }; return s; })();
+
+// ---- SYRINGE
+S.syringe = (() => { const s = scene("syringe", "#d8f3dc", "#b7e4c7");
+  s.barrel = el("rect", {x: 420, y: 410, width: 640, height: 140, rx: 14, fill: "#ffffffaa", stroke: INK, "stroke-width": 8}, s.stage); s.noz = el("rect", {x: 360, y: 460, width: 60, height: 40, rx: 6, fill: "#fff", stroke: INK, "stroke-width": 6}, s.stage);
+  for (let i = 1; i < 8; i++) el("line", {x1: 420 + i * 80, y1: 410, x2: 420 + i * 80, y2: 440, stroke: INK, "stroke-width": 4}, s.stage);
+  s.plg = el("g", {}, s.stage); el("rect", {x: 0, y: -60, width: 24, height: 120, rx: 6, fill: "#495057", stroke: INK, "stroke-width": 5}, s.plg); el("rect", {x: 24, y: -12, width: 520, height: 24, fill: "#adb5bd", stroke: INK, "stroke-width": 5}, s.plg); el("rect", {x: 540, y: -70, width: 26, height: 140, rx: 8, fill: "#495057", stroke: INK, "stroke-width": 5}, s.plg);
+  seed = 31; s.d = dots(s.stage, 22, 9, "#bde0fe"); s.finger = emo(s.stage, 0, 0, 110, "👆");
+  s.c1 = chip(s.stage, "pull ➜ air FILLS the space", "#3a86ff", {fs: 34}); s.c2 = chip(s.stage, "push ➜ air SQUEEZES into a smaller space", "#e63946", {fs: 34});
+  s.run = t => { const a = w => C("gas2", w); const px = lerp(lerp(520, 1000, ramp(t, a("pull"), a("pull") + .8)), 640, ramp(t, a("push"), a("push") + .9));
+    tf(s.plg, `translate(${px} 480)`); op(s.barrel, 1); op(s.noz, 1);
+    s.d.forEach(d => { set(d.e, "cx", 435 + d.u * (px - 450) + Math.sin(t * 3 + d.ph) * 4); set(d.e, "cy", 428 + d.v * 104); op(d.e, 1); });
+    op(s.finger, ramp(t, a("cover"), a("cover") + .2)); set(s.finger, "x", 340); set(s.finger, "y", 470);
+    op(s.c1, on(t, a("fills"), a("push"), .2)); popAt(s.c1, 760, 240, t, a("fills")); op(s.c2, ramp(t, a("squeezes"), a("squeezes") + .2)); popAt(s.c2, 760, 720, t, a("squeezes")); }; return s; })();
+
+// ---- USES
+S.uses = (() => { const s = scene("uses", "#48cae4", "#0077b6");
+  s.diver = emo(s.stage, 0, 0, 200, "🤿"); s.tank = el("g", {}, s.stage); el("rect", {x: -70, y: -170, width: 140, height: 340, rx: 60, fill: "#ffd166", stroke: INK, "stroke-width": 7}, s.tank); el("rect", {x: -22, y: -210, width: 44, height: 46, rx: 8, fill: "#495057", stroke: INK, "stroke-width": 5}, s.tank);
+  seed = 41; s.td = []; for (let i = 0; i < 40; i++) s.td.push(el("circle", {cx: -50 + rnd() * 100, cy: -140 + rnd() * 280, r: 6, fill: "#fff", stroke: INK, "stroke-width": 1.5}, s.tank));
+  s.c1 = chip(s.stage, "🤿 compressed air: lots of air in one tank", "#023e8a", {fs: 32});
+  s.he = el("g", {}, s.stage); el("rect", {x: -60, y: -150, width: 120, height: 300, rx: 50, fill: "#adb5bd", stroke: INK, "stroke-width": 7}, s.he); tx(s.he, {x: 0, y: 20, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: INK}, "He");
+  s.bal = ["🎈", "⭐", "💖"].map(e => emo(s.stage, 0, 0, 120, e)); s.c2 = chip(s.stage, "helium ➜ balloons of ANY shape 🎉", "#f72585", {fs: 32});
+  s.run = t => { const a = w => C("uses", w); const sw = ramp(t, a("helium") - .4, a("helium"));
+    op(s.diver, ramp(t, SC.uses.t0, SC.uses.t0 + .3) * (1 - sw)); set(s.diver, "x", 520); set(s.diver, "y", 470 + Math.sin(t * 2) * 10);
+    op(s.tank, ramp(t, a("tank"), a("tank") + .2) * (1 - sw)); tf(s.tank, `translate(880 480) scale(${pop(t, a("tank"))})`);
+    op(s.c1, ramp(t, a("lots"), a("lots") + .2) * (1 - sw)); popAt(s.c1, 760, 820, t, a("lots"));
+    op(s.he, sw); tf(s.he, "translate(460 520)");
+    s.bal.forEach((b, i) => { const tt = a("balloons") + i * .25, k = ramp(t, tt, tt + 1); op(b, ramp(t, tt, tt + .2)); set(b, "x", lerp(500, 780 + i * 180, k)); set(b, "y", lerp(400, 300 + (i % 2) * 120, k) + Math.sin(t * 2 + i) * 10); });
+    op(s.c2, ramp(t, a("shape"), a("shape") + .2)); popAt(s.c2, 900, 820, t, a("shape")); }; return s; })();
+
+// ---- EARTH
+S.earth = (() => { const s = scene("earth", "#03045e", "#240046");
+  s.atm = el("circle", {cx: 640, cy: 500, r: 300, fill: "#90e0ef44", stroke: "#90e0ef", "stroke-width": 10}, s.stage);
+  s.sea = el("circle", {cx: 640, cy: 500, r: 260, fill: "#0077b6", stroke: INK, "stroke-width": 7}, s.stage);
+  s.land = el("path", {d: "M520 330 q60 -40 120 0 q40 60 -20 110 q-60 30 -100 -20 q-30 -50 0 -90 Z M700 520 q80 -30 120 40 q10 80 -60 110 q-70 10 -90 -60 q-10 -60 30 -90 Z M480 580 q40 -10 50 40 q-10 50 -50 40 q-30 -40 0 -80 Z", fill: "#8d6e63", stroke: INK, "stroke-width": 5}, s.stage);
+  s.l = [["🪨 SOLID: rock", "#8d6e63", "rock", 1120, 340], ["🌊 LIQUID: oceans", "#00b4d8", "oceans", 1120, 480], ["💨 GAS: air", "#adb5bd", "air", 1120, 620]].map(([n, c, w, x, y]) => ({c: chip(s.stage, n, c, {fs: 36}), w, x, y}));
+  s.stamp = chip(s.stage, "ALL 3 STATES in one place! 🌍", "#06d6a0", {fs: 42});
+  s.run = t => { const a = w => C("earth", w); tf(s.land, `rotate(${t * 6} 640 500)`); op(s.atm, ramp(t, a("air") - .2, a("air")) * .9 + .1);
+    s.l.forEach(l => { const tt = a(l.w); op(l.c, ramp(t, tt, tt + .2)); popAt(l.c, l.x, l.y, t, tt); });
+    op(s.stamp, ramp(t, a("three"), a("three") + .2)); popAt(s.stamp, 760, 880, t, a("three")); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.q = chip(s.stage, "✓ definite VOLUME   ✗ NO definite shape", "#3a86ff", {fs: 34});
+  s.cards = [["MARBLE", "marble", "SOLID"], ["MILK", "milk", "LIQUID ✓"], ["AIR", "air", "GAS"]].map(([n, w, st], i) => { const g = el("g", {}, s.stage);
+    const face = el("rect", {x: -150, y: -160, width: 300, height: 320, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
+    if (i === 0) { el("circle", {cx: 0, cy: -40, r: 55, fill: "#4cc9f0", stroke: INK, "stroke-width": 5}, g); el("path", {d: "M-30 -60 q30 -30 60 10", fill: "none", stroke: "#fff", "stroke-width": 8}, g); } else emo(g, 0, -40, 120, i === 1 ? "🥛" : "💨");
+    tx(g, {x: 0, y: 90, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: INK}, n); const tag = chip(g, st, i === 1 ? "#06d6a0" : "#6c757d", {fs: 32}); return {g, face, tag, w, i}; });
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), b("milk"), .2)); tf(s.pause, `translate(760 150) scale(${pop(t, a("pause"))}) translate(-760 -150)`);
+    op(s.q, ramp(t, a("volume"), a("volume") + .2)); popAt(s.q, 760, 260, t, a("volume"));
+    s.cards.forEach(c => { const tt = a(c.w); op(c.g, ramp(t, tt, tt + .2)); tf(c.g, `translate(${360 + c.i * 400} 560) scale(${pop(t, tt)})`);
+      const rv = b(c.w); op(c.tag, ramp(t, rv, rv + .2)); popAt(c.tag, 0, 210, t, rv); set(c.face, "fill", t > rv ? (c.i === 1 ? "#d8f3dc" : "#f1f3f5") : "#fff"); }); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["🧊 A solid has a definite shape and a definite volume."], ["💧 A liquid has no definite shape, but has a definite volume."], ["💨 A gas has no definite shape and no definite volume."], ["🤏 Solids and liquids cannot be compressed, but gases can."]];
+  let y = -150; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 50, "font-size": 40, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 50 + 50; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("solid"), a("liquid"), a("gas"), a("solids")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (tracker)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "📆 HABIT TRACKER");
+  s.links = []; s.days = "MTWTFSS".split("").map((d, i) => { const g = el("g", {}, s.stage); el("rect", {x: -70, y: -70, width: 140, height: 140, rx: 22, fill: "#fff", stroke: INK, "stroke-width": 7}, g);
+    tx(g, {x: 0, y: -90, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, d); const mk = tx(g, {x: 0, y: 34, "text-anchor": "middle", "font-size": 100, "font-weight": 700, fill: "#06d6a0"}, "✓"); return {g, mk, i}; });
+  for (let i = 0; i < 6; i++) s.links.push(el("rect", {x: 0, y: -10, width: 40, height: 20, rx: 10, fill: "#ffd166", stroke: INK, "stroke-width": 4}, s.stage));
+  s.fire = emo(s.stage, 0, 0, 110, "🔥"); s.c1 = chip(s.stage, "don't break the chain!", "#1b1b3a", {fs: 38});
+  s.run = t => { const a = w => C("habit1", w); const nT = Math.floor(clamp((t - a("tick")) / (a("going") - a("tick") + .3)) * 7.99);
+    op(s.title, ramp(t, a("tracker"), a("tracker") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("tracker"))}) translate(-760 -180)`);
+    s.days.forEach(d => { const tt = a("row") + d.i * .12; op(d.g, ramp(t, tt, tt + .2)); tf(d.g, `translate(${330 + d.i * 160} 480) scale(${pop(t, tt)})`); op(d.mk, t > a("tick") && d.i < nT ? 1 : 0); });
+    s.links.forEach((l, i) => { set(l, "x", 330 + i * 160 + 60); set(l, "y", 470); op(l, t > a("chain") && i < nT - 1 ? 1 : 0); });
+    op(s.fire, ramp(t, a("grow"), a("grow") + .2)); set(s.fire, "x", 1290); set(s.fire, "y", 330 + Math.sin(t * 6) * 6);
+    op(s.c1, ramp(t, a("going") - .3, a("going"))); popAt(s.c1, 760, 720, t, a("going") - .3); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  const CX = 560, CY = 480;
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 200, ry: 80, fill: "#7209b7", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: -4, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, "STATES OF"); tx(s.center, {x: 0, y: 38, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, "MATTER");
+  const br = [["solid", "🧊 SOLID", "#8d6e63", 240, 290, "shape ✓  volume ✓  squeeze ✗"], ["liquid", "💧 LIQUID", "#00b4d8", 900, 290, "shape ✗  volume ✓  squeeze ✗"], ["gas", "💨 GAS", "#6c757d", 560, 740, "shape ✗  volume ✗  squeeze ✓"]];
+  s.br = br.map(([k, n, col, x, y, sub]) => { const line = el("path", {d: `M${CX} ${CY} Q${(CX + x) / 2} ${y} ${x} ${y}`, stroke: col, "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 700}, s.stage);
+    return {k, line, c: chip(s.stage, n, col, {fs: 36}), x, y, tw: chip(s.stage, sub, "#fff", {fs: 26, ink: INK})}; });
+  s.stage.appendChild(s.center);
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr9"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  s.scr = el("g", {"clip-path": "url(#scr9)"}, s.phone); s.shot = el("image", {href: "oneapp_mind.png", x: -112, y: -122, width: 224, height: 485, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("states"), a("states") + .2)); tf(s.center, `translate(${CX} ${CY}) scale(${pop(t, a("states"))})`);
+    s.br.forEach((b, j) => { const k = a(b.k); set(b.line, "stroke-dashoffset", 700 * (1 - ramp(t, k - .1, k + .4))); op(b.line, t > k - .1 ? 1 : 0); op(b.c, ramp(t, k + .1, k + .3)); popAt(b.c, b.x, b.y, t, k + .1);
+      const tt = a("write") + j * .4; op(b.tw, ramp(t, tt, tt + .2)); popAt(b.tw, b.x, b.y + (b.y < CY ? -72 : 72), t, tt); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 640, 130, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1320, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    const nx = a("ultimate") + .6; const off = -122 - 190 * ramp(t, a("save"), nx); set(s.shot, "y", off);
+    set(s.ring, "x", -112 + 224 * (36 / 780)); set(s.ring, "y", off + 485 * (1083 / 1688)); set(s.ring, "width", 224 * (176 / 780)); set(s.ring, "height", 485 * (72 / 1688));
+    op(s.ring, on(t, nx, SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.ans = el("g", {}, s.stage); el("rect", {x: -330, y: -70, width: 660, height: 140, rx: 70, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.ans); tx(s.ans, {x: 0, y: 22, "text-anchor": "middle", "font-size": 58, "font-weight": 700, fill: "#fff"}, "💨 Only GAS!");
+  s.kit = emo(s.stage, 0, 0, 140, "🍳");
+  s.boxes = [["SOLID", "solid"], ["LIQUID", "liquid"], ["GAS", "gas#2"]].map(([n, w], i) => { const g = el("g", {}, s.stage); el("rect", {x: -110, y: -110, width: 220, height: 220, rx: 26, fill: "#fff", stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: 0, y: 34, "text-anchor": "middle", "font-size": 100, "font-weight": 700, fill: "#adb5bd"}, "?"); tx(g, {x: 0, y: 160, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, n); return {g, w, i}; });
+  s.q = chip(s.stage, "🤏 Which one could you squeeze?", "#1b1b3a", {fs: 40});
+  s.run = t => { const a = w => C("close", w); const tn = ramp(t, a("your") - .2, a("your") + .1);
+    op(s.ans, ramp(t, a("gas"), a("gas") + .15) * (1 - tn)); tf(s.ans, `translate(760 420) scale(${pop(t, a("gas"))})`);
+    op(s.kit, ramp(t, a("kitchen"), a("kitchen") + .2)); set(s.kit, "x", 1290); set(s.kit, "y", 300);
+    s.boxes.forEach(b => { const tt = a(b.w); op(b.g, ramp(t, tt, tt + .2)); tf(b.g, `translate(${420 + b.i * 340} 400) scale(${pop(t, tt)})`); });
+    op(s.q, ramp(t, a("squeeze#2") - .3, a("squeeze#2"))); popAt(s.q, 760, 740, t, a("squeeze#2") - .3); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "How to weigh air");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "(yes, really) ⚖️");
+  s.run = () => {}; return s; })();
+

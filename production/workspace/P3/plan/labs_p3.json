@@ -1,0 +1,4225 @@
+[
+ {
+  "code": "1.1",
+  "id": "p3-1-1",
+  "folder": "labs/spotsort/",
+  "title": "Spot and sort",
+  "topic": "Diversity of Living and Non-living Things",
+  "chapterNo": 1,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "ready",
+  "visibleToPupils": true,
+  "visibility": "Live for pupils (status \"ready\", badge \"Ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Spot the clues",
+    "appLabel": "Part A",
+    "title": "Spot the clues",
+    "appEyebrow": "Part A · think it through, then observe on the bench",
+    "does": "On the bench, tap each thing. The bench moves in close and a card tells you the clue it shows and why it is living or non-living. Spot all seven.",
+    "setUp": "Seven things sit on a shelf in the yard. Some are living and some are non-living. A living thing needs air, water and food, grows, and can make new living things.",
+    "predictQ": "Which of these seven things can grow?",
+    "predictAnswer": "The ant, the tree, the cat and the seed",
+    "takeaway": "A living thing does not have to move to be alive.",
+    "benchStep": "spot",
+    "benchPill": "🔍 Spot the Clues"
+   },
+   {
+    "label": "Part (b): Sort them out",
+    "appLabel": "Part B",
+    "title": "Sort them out",
+    "appEyebrow": "Part B · think it through, then sort on the bench",
+    "does": "On the bench, tap a thing, then tap its corner. A wrong corner bounces it back with a clue. Put all seven in their corners.",
+    "setUp": "Now sort. Each thing goes in the corner that matches what it can do. The Not-sure corner is only a resting place until you check a clue again.",
+    "predictQ": "Where does the seed belong?",
+    "predictAnswer": "Living",
+    "takeaway": "Sort things by what they can do, not just by how they look.",
+    "benchStep": "sort",
+    "benchPill": "📦 Sort Them Out"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 1 \"Diversity of Living and Non-living Things\" → \"1.1  Spot and sort\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Spot and Sort Lab\"",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 1\" (Diversity of Living and Non-living Things), tap \"1.1  Spot and sort\".",
+   "Briefing screen, then the part screen (\"Part A · think it through, then observe on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Spot and Sort Lab\" opens full-screen on that part's pill (\"🔍 Spot the Clues\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/spotsort/index.html",
+   "name": "Spot and Sort Lab",
+   "subtitle": "Living or non-living?",
+   "introButton": "Into the yard →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔍 Spot the Clues",
+    "📦 Sort Them Out",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Look closely at seven things on a shelf, spot the clue each one shows, then sort every thing into the Living corner or the Non-living corner.",
+  "bigIdea": "Living things need air, water and food, can grow, and can make new living things. Non-living things do none of these. A thing is sorted by what it can do, not by how it looks or whether it happens to be moving.",
+  "safety": [
+   "In a real yard, look at small animals without picking them up, and wash your hands after touching soil, seeds or puddles."
+  ],
+  "badge": {
+   "icon": "🔍",
+   "name": "Clue Spotter",
+   "line": "You spotted the clue on every thing, then sorted all seven by what they can do, not by how they look."
+  },
+  "spokenCode": "one point one",
+  "narration": "Open the School Lab, experiment one point one, and press, Let's test it now!",
+  "labcard": {
+   "code": "1.1",
+   "title": "Spot and sort",
+   "part": "Part (a): Spot the clues",
+   "line": "School Lab › 1.1  Spot and sort"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "A puddle moves when it is windy. Is the puddle living?",
+    "answer": "No. The wind pushes it. It does not grow or need food.",
+    "mixups": [
+     "Yes. A puddle moves along the ground, so it must be living.",
+     "Yes. A puddle is wet, so it must be living.",
+     "Yes. A puddle is outside, so it must be living."
+    ],
+    "why": "Moving is not enough. A living thing moves by itself, grows and needs air, water and food. A puddle does none of these."
+   },
+   {
+    "q": "A seed sits still on the shelf. Is it living?",
+    "answer": "Yes. It can grow into a plant.",
+    "mixups": [
+     "No. It does not move, so it is non-living.",
+     "No. It is small, so it is non-living.",
+     "No. It is brown, so it is non-living."
+    ],
+    "why": "A seed looks still, but it can grow into a plant. Growing is a clue for a living thing."
+   },
+   {
+    "q": "A bicycle moves when someone pedals it. Is it living?",
+    "answer": "No. It cannot move by itself. It does not grow.",
+    "mixups": [
+     "Yes. It moves, so it is living.",
+     "Yes. It has a bell and two wheels, so it is living.",
+     "No. It is made of metal, and metal things cannot move."
+    ],
+    "why": "The bicycle only moves because someone pedals it. It does not grow and does not need air, water or food."
+   },
+   {
+    "q": "A cat is fast asleep and not moving. Is it still living?",
+    "answer": "Yes. It still needs air, water and food.",
+    "mixups": [
+     "No. It is not moving, so it is not living now.",
+     "Yes. It is soft, so it is living.",
+     "Yes. It has fur, so it is living."
+    ],
+    "why": "A sleeping cat is still living. It still breathes, needs water and food, and can grow."
+   },
+   {
+    "q": "What do all living things need?",
+    "answer": "Air, water and food.",
+    "mixups": [
+     "Only sunlight and warm weather.",
+     "Only water and some soil.",
+     "Nothing at all."
+    ],
+    "why": "Every living thing needs air, water and food. Living things can also grow, respond and make new living things like themselves."
+   }
+  ],
+  "scriptCautions": [
+   "The lab's big idea lists the needs, growing and making new living things, but leaves out \"respond to changes\". When a video states what living things can do, use the book's full set (need water, food and air; grow, respond to changes and reproduce). Lab 1.3 has all six clues."
+  ]
+ },
+ {
+  "code": "1.2",
+  "id": "p3-1-2",
+  "folder": "labs/p3-1-2/",
+  "title": "The needs test",
+  "topic": "Diversity of Living and Non-living Things",
+  "chapterNo": 1,
+  "theme": "Diversity",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Test the bean plant",
+    "appLabel": "Part A",
+    "title": "Test the bean plant",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap a tray, then tap the bean plant. Try water, food and air.",
+    "setUp": "The bean plant is living.",
+    "predictQ": "Does the bean plant need water, food and air?",
+    "predictAnswer": "Yes, all three",
+    "takeaway": "Living things like this bean plant need water, food and air. A plant makes its own food.",
+    "benchStep": "sprout",
+    "benchPill": "🌱 Test the Bean Plant"
+   },
+   {
+    "label": "Part (b): Test the toy boat",
+    "appLabel": "Part B",
+    "title": "Test the toy boat",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a tray, then tap the toy boat. Try water, food and air.",
+    "setUp": "The toy boat is non-living.",
+    "predictQ": "Does the toy boat need water, food and air?",
+    "predictAnswer": "No, none of them",
+    "takeaway": "Non-living things like this toy boat do not need water, food or air.",
+    "benchStep": "boat",
+    "benchPill": "⛵ Test the Toy Boat"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 1 \"Diversity of Living and Non-living Things\" → \"1.2  The needs test\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"The Needs Test Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 1\" (Diversity of Living and Non-living Things), tap \"1.2  The needs test\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"The Needs Test Lab\" opens full-screen on that part's pill (\"🌱 Test the Bean Plant\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-1-2/index.html",
+   "name": "The Needs Test Lab",
+   "subtitle": "What living things need",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🌱 Test the Bean Plant",
+    "⛵ Test the Toy Boat",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A bean plant and a toy boat sit side by side. Three trays wait beside them: water, food and air. Give each thing what is on the trays and watch what happens.",
+  "bigIdea": "Living things need water, food and air to stay alive and grow. Non-living things do not need any of these. Floating, moving in the wind or getting wet is not the same as needing something to live.",
+  "safety": [],
+  "badge": {
+   "icon": "🌱",
+   "name": "The Needs Test",
+   "line": "You predicted, tested and explained every part of The Needs Test."
+  },
+  "spokenCode": "one point two",
+  "narration": "Open the School Lab, experiment one point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "1.2",
+   "title": "The needs test",
+   "part": "Part (a): Test the bean plant",
+   "line": "School Lab › 1.2  The needs test"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "The toy boat floats on water. Does it need water to live?",
+    "answer": "No. It floats on water but does not use it.",
+    "mixups": [
+     "Yes. It floats on the pond all day, so it must need water.",
+     "Yes. It gets wet, so it must need water.",
+     "Yes. Boats drink water."
+    ],
+    "why": "Floating on water is not the same as needing it. The boat is non-living. It does not need water, food or air."
+   },
+   {
+    "q": "What does the bean plant need to stay alive and grow?",
+    "answer": "Water, food and air.",
+    "mixups": [
+     "Only water.",
+     "Only sunshine.",
+     "Nothing. Plants are not living."
+    ],
+    "why": "The bean plant is living. It needs water, food and air to stay alive and grow."
+   },
+   {
+    "q": "A toy boat moves across a pond when the wind blows. Is it living?",
+    "answer": "No. The wind pushes it. It does not need food.",
+    "mixups": [
+     "Yes. It moves across the pond, so it is living.",
+     "Yes. It is on the water, so it is living.",
+     "Yes. All boats are living."
+    ],
+    "why": "Moving in the wind is not a clue for living. A living thing needs water, food and air, and can grow."
+   },
+   {
+    "q": "Why does a bean plant need air?",
+    "answer": "Living things need air to stay alive.",
+    "mixups": [
+     "Air makes the plant float on water.",
+     "Air keeps its leaves dry in the rain.",
+     "It does not need air."
+    ],
+    "why": "All living things need air. The bean plant used the air it was given."
+   },
+   {
+    "q": "Which of these needs water, food and air?",
+    "answer": "A kitten",
+    "mixups": [
+     "A toy boat",
+     "A stone",
+     "A kite"
+    ],
+    "why": "A kitten is living, so it needs water, food and air. The boat, the stone and the kite are non-living."
+   }
+  ],
+  "scriptCautions": [
+   "The bench offers the bean plant a \"food\" tray. Keep the lab's own line \"A plant makes its own food\" in any narration, so pupils do not think plants are fed."
+  ]
+ },
+ {
+  "code": "1.3",
+  "id": "p3-1-3",
+  "folder": "labs/p3-1-3/",
+  "title": "Six clues",
+  "topic": "Diversity of Living and Non-living Things",
+  "chapterNo": 1,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Check the six clues",
+    "appLabel": "Part A",
+    "title": "Check the six clues",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap a clue card, then tap the hen or the lamp. Try all six clues on both.",
+    "setUp": "Six clues. Two things.",
+    "predictQ": "Will the hen and the lamp show the same six clues?",
+    "predictAnswer": "No. Only the hen shows all six.",
+    "takeaway": "A living thing shows all six clues. A non-living thing shows none.",
+    "benchStep": "check",
+    "benchPill": "🔍 Check the Six Clues"
+   },
+   {
+    "label": "Part (b): Judge living or non-living",
+    "appLabel": "Part B",
+    "title": "Judge living or non-living",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Watch them, then tap the goldfish or the kite and tap its plaque. Use all six clues.",
+    "setUp": "A goldfish swims in a bowl. A kite flies in the wind.",
+    "predictQ": "Do a goldfish and a kite both need food?",
+    "predictAnswer": "No. Only the goldfish needs food.",
+    "takeaway": "Something is living only if it shows all six clues, not just one.",
+    "benchStep": "judge",
+    "benchPill": "⚖️ Judge Living or Non-living"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 1 \"Diversity of Living and Non-living Things\" → \"1.3  Six clues\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Six Clues Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 1\" (Diversity of Living and Non-living Things), tap \"1.3  Six clues\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Six Clues Lab\" opens full-screen on that part's pill (\"🔍 Check the Six Clues\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-1-3/index.html",
+   "name": "Six Clues Lab",
+   "subtitle": "Is it living? Check all six clues",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔍 Check the Six Clues",
+    "⚖️ Judge Living or Non-living",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A hen and a lamp stand on the table. Six clue cards sit above them: water, food, air, grow, respond, young ones. A living thing shows all six.",
+  "bigIdea": "Living things need water, food and air. They can grow, respond to changes and make new living things like themselves. Something is living only if it shows all these clues, not just one of them.",
+  "safety": [],
+  "badge": {
+   "icon": "🔎",
+   "name": "Six Clues",
+   "line": "You predicted, tested and explained every part of Six Clues."
+  },
+  "spokenCode": "one point three",
+  "narration": "Open the School Lab, experiment one point three, and press, Let's test it now!",
+  "labcard": {
+   "code": "1.3",
+   "title": "Six clues",
+   "part": "Part (a): Check the six clues",
+   "line": "School Lab › 1.3  Six clues"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "A toy chick moves when it is wound up. Is it living?",
+    "answer": "No. It moves, but it does not need food or air.",
+    "mixups": [
+     "Yes. It moves when it is wound up, so it is living.",
+     "Yes. It looks like a baby chick, so it is living.",
+     "Yes. It makes a sound, so it is living."
+    ],
+    "why": "One clue is not enough. A living thing shows all six clues. A wound-up toy shows only movement."
+   },
+   {
+    "q": "How many of the six clues does a living thing show?",
+    "answer": "All six.",
+    "mixups": [
+     "Only one.",
+     "Any three.",
+     "None."
+    ],
+    "why": "The hen showed all six clues. The lamp showed none. Living things show all six."
+   },
+   {
+    "q": "A kite flies high in the wind. Is it living?",
+    "answer": "No. The wind moves it. It does not need food.",
+    "mixups": [
+     "Yes. It flies high in the sky, so it is living.",
+     "Yes. It is up in the air, so it must need air.",
+     "Yes. It is colourful, so it is living."
+    ],
+    "why": "A kite only moves because the wind pushes it. It shows none of the six clues."
+   },
+   {
+    "q": "Which clue shows that a goldfish is living?",
+    "answer": "It eats food and grows.",
+    "mixups": [
+     "It is orange with shiny scales.",
+     "It lives in a bowl on a shelf.",
+     "It is small and fits in a hand."
+    ],
+    "why": "Eating, growing, needing water and air, responding and making young ones are the clues. Colour and size are not."
+   },
+   {
+    "q": "What does \"respond\" mean for a living thing?",
+    "answer": "It reacts to a change around it.",
+    "mixups": [
+     "It gives out light in a dark room.",
+     "It floats on a pond in the sun.",
+     "It is heavy and hard to lift."
+    ],
+    "why": "Living things respond to changes around them. The hen moved when something changed. The lamp did not."
+   }
+  ],
+  "scriptCautions": [
+   "The six clues are water, food, air, grow, respond and young ones. In exam wording, say \"reproduce\" as the book does."
+  ]
+ },
+ {
+  "code": "2.1A",
+  "id": "p3-2-1a",
+  "folder": "labs/p3-2-1a/",
+  "title": "Bloom or not",
+  "topic": "Classification of Living Things",
+  "chapterNo": 2,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Look close",
+    "appLabel": "Part A",
+    "title": "Look close",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap each plant. See its parts. Look for a flower, or for spore bags.",
+    "setUp": "Six plants, six pots.",
+    "predictQ": "Do all plants grow a flower?",
+    "predictAnswer": "No, some do not",
+    "takeaway": "Some plants grow a flower. Some plants never do. Ferns and moss make spores instead.",
+    "benchStep": "look",
+    "benchPill": "🔍 Look Close"
+   },
+   {
+    "label": "Part (b): Sort plants",
+    "appLabel": "Part B",
+    "title": "Sort plants",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a plant, then tap its basket. Flowering or non-flowering?",
+    "setUp": "Two baskets: flowering and non-flowering.",
+    "predictQ": "Which plants can go in the flowering basket?",
+    "predictAnswer": "Any plant that can make a flower",
+    "takeaway": "Ferns and moss make spores instead of flowers. Leaves, roots and stems do not decide the group.",
+    "benchStep": "sort",
+    "benchPill": "🌼 Sort Plants"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 2 \"Classification of Living Things\" → \"2.1A  Bloom or not\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Bloom or Not Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 2\" (Classification of Living Things), tap \"2.1A  Bloom or not\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Bloom or Not Lab\" opens full-screen on that part's pill (\"🔍 Look Close\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-2-1a/index.html",
+   "name": "Bloom or Not Lab",
+   "subtitle": "Flowering and non-flowering plants",
+   "introButton": "To the plants →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔍 Look Close",
+    "🌼 Sort Plants",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Six potted plants stand in a row. Look closely at each one. Some can grow a flower. Some never do. Then sort them into two baskets.",
+  "bigIdea": "Plants split into two groups by one thing: does it flower? Flowering plants make seeds inside a flower. Non-flowering plants make spores instead. Leaves, roots and stems do not decide the group.",
+  "safety": [],
+  "badge": {
+   "icon": "🌼",
+   "name": "Bloom or Not",
+   "line": "You predicted, tested and explained every part of Bloom or Not."
+  },
+  "spokenCode": "two point one A",
+  "narration": "Open the School Lab, experiment two point one A, and press, Let's test it now!",
+  "labcard": {
+   "code": "2.1A",
+   "title": "Bloom or not",
+   "part": "Part (a): Look close",
+   "line": "School Lab › 2.1A  Bloom or not"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "A hibiscus has no flower open today. Which group is it in?",
+    "answer": "Flowering. It can make a flower.",
+    "mixups": [
+     "Non-flowering, because no flower is open now.",
+     "Non-flowering, because it has leaves.",
+     "Neither group."
+    ],
+    "why": "A flowering plant does not always have a flower open. It still belongs to the flowering group."
+   },
+   {
+    "q": "A tall plant can never make a flower. Which group is it in?",
+    "answer": "Non-flowering.",
+    "mixups": [
+     "Flowering, because it is tall.",
+     "Flowering, because it has leaves and roots.",
+     "Flowering, because it is green."
+    ],
+    "why": "Only one thing decides the group: can it make a flower? Height, leaves and roots do not."
+   },
+   {
+    "q": "A short spiky plant has spore bags under its leaves. Which group is it in?",
+    "answer": "Non-flowering. It makes spores.",
+    "mixups": [
+     "Flowering, because it is short and small.",
+     "Non-flowering, because it is spiky.",
+     "Flowering, because it is green."
+    ],
+    "why": "Spore bags are the clue. Plants with spores do not make flowers. Being spiky is not the rule."
+   },
+   {
+    "q": "What do flowering plants use to make seeds?",
+    "answer": "Their flowers.",
+    "mixups": [
+     "Their leaves and stems.",
+     "Their roots in the soil.",
+     "Their spores."
+    ],
+    "why": "Flowering plants make seeds inside a flower."
+   },
+   {
+    "q": "What do non-flowering plants like ferns use to reproduce?",
+    "answer": "Spores.",
+    "mixups": [
+     "Flowers.",
+     "Fruit.",
+     "Seeds from a flower."
+    ],
+    "why": "Non-flowering plants make spores instead of flowers."
+   }
+  ],
+  "scriptCautions": [
+   "The lab's big idea says flowering plants \"make seeds inside a flower\". The book says the flowers develop into fruits and the seeds are inside the fruits: use the book's wording. Non-flowering plants reproduce from spores, found in spore bags."
+  ]
+ },
+ {
+  "code": "2.1B",
+  "id": "p3-2-1b",
+  "folder": "labs/p3-2-1b/",
+  "title": "Coat and cover",
+  "topic": "Classification of Living Things",
+  "chapterNo": 2,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 30,
+  "listLine": "Observation · about 30 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Feel the cover",
+    "appLabel": "Part A",
+    "title": "Feel the cover",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap each animal. Feel its cover. It makes its sound!",
+    "setUp": "Six animals, six covers.",
+    "predictQ": "Which covering feels smooth and hard?",
+    "predictAnswer": "Scales",
+    "takeaway": "An animal's cover helps sort it into its group: fur, feathers, scales, moist skin or a hard case.",
+    "benchStep": "cover",
+    "benchPill": "🖐️ Feel the Cover"
+   },
+   {
+    "label": "Part (b): Sort animals",
+    "appLabel": "Part B",
+    "title": "Sort animals",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap an animal, then tap its pen. Use its cover.",
+    "setUp": "Six pens, one for each group.",
+    "predictQ": "Which cover means an animal is a mammal?",
+    "predictAnswer": "Fur",
+    "takeaway": "Six groups: fur, feathers, wet scales, dry scales, moist skin, and a hard case with six legs.",
+    "benchStep": "sort",
+    "benchPill": "🐾 Sort Animals"
+   },
+   {
+    "label": "Part (c): Egg or young",
+    "appLabel": "Part C",
+    "title": "Egg or young",
+    "appEyebrow": "Part C · predict, then test it on the bench",
+    "does": "Tap an animal, then tap how it is born: from an egg, or as live young.",
+    "setUp": "Every animal starts small.",
+    "predictQ": "Do all six groups hatch from an egg?",
+    "predictAnswer": "No, one group does not",
+    "takeaway": "Most animal groups hatch from an egg. Mammals mostly do not: they are born as live young.",
+    "benchStep": "young",
+    "benchPill": "🥚 Egg or Young"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 2 \"Classification of Living Things\" → \"2.1B  Coat and cover\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Coat and Cover Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 2\" (Classification of Living Things), tap \"2.1B  Coat and cover\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Coat and Cover Lab\" opens full-screen on that part's pill (\"🖐️ Feel the Cover\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-2-1b/index.html",
+   "name": "Coat and Cover Lab",
+   "subtitle": "Sorting animals by their covering",
+   "introButton": "To the animals →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🖐️ Feel the Cover",
+    "🐾 Sort Animals",
+    "🥚 Egg or Young",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Six animals sit on stands in a circle. Feel what covers each one, sort them into six pens, then find out how each one is born.",
+  "bigIdea": "Six groups: mammal, bird, fish, reptile, amphibian, insect. The cover on the outside helps you find the group. Most animals hatch from an egg. Most mammals do not. An insect has six legs and a hard case.",
+  "safety": [],
+  "badge": {
+   "icon": "🐾",
+   "name": "Coat and Cover",
+   "line": "You predicted, tested and explained every part of Coat and Cover."
+  },
+  "spokenCode": "two point one B",
+  "narration": "Open the School Lab, experiment two point one B, and press, Let's test it now!",
+  "labcard": {
+   "code": "2.1B",
+   "title": "Coat and cover",
+   "part": "Part (a): Feel the cover",
+   "line": "School Lab › 2.1B  Coat and cover"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "An animal with eight legs sits on a web. Is it an insect?",
+    "answer": "No. An insect has six legs. This is a spider.",
+    "mixups": [
+     "Yes. It is small and has a hard body, so it is an insect.",
+     "Yes. It has no fur, so it is an insect.",
+     "Yes. It sits on a web in the garden, so it is an insect."
+    ],
+    "why": "Count the legs. An insect has six legs and a hard case. Eight legs is a spider."
+   },
+   {
+    "q": "A furry animal swims and feeds its young with milk. What is it?",
+    "answer": "A mammal, because it has fur and milk.",
+    "mixups": [
+     "A fish, because it swims and lives in water.",
+     "A fish, because it swims and has no legs.",
+     "An amphibian, because it swims in ponds."
+    ],
+    "why": "Living in water does not always mean fish. Fur and feeding young with milk are mammal clues."
+   },
+   {
+    "q": "A feathered animal cannot fly. Is it a bird?",
+    "answer": "Yes. Feathers decide the group.",
+    "mixups": [
+     "No. It cannot fly high in the sky, so it is not a bird.",
+     "No. It walks on land on two legs, so it is a reptile.",
+     "No. Only flying animals are birds."
+    ],
+    "why": "Feathers, not flight, decide the group. A bird that cannot fly is still a bird."
+   },
+   {
+    "q": "An animal has moist skin and lays its eggs in water. What is it?",
+    "answer": "An amphibian.",
+    "mixups": [
+     "A fish, because it lives in water.",
+     "A reptile, because it has four legs.",
+     "A mammal, because it has skin."
+    ],
+    "why": "Moist skin and eggs laid in water are the amphibian clues, like the frog."
+   },
+   {
+    "q": "How many legs does an insect have?",
+    "answer": "Six.",
+    "mixups": [
+     "Eight.",
+     "Four.",
+     "Any number, if it is small."
+    ],
+    "why": "An insect has six legs and a hard case. Eight legs is a spider."
+   }
+  ],
+  "scriptCautions": [
+   "The bench sorts by covering (\"wet scales\", \"dry scales\", \"hard case\"). For the exam, use the book's features: fish have scales, fins and gills; reptiles have dry, scaly skin; insects have six legs, one pair of feelers and three body parts (head, thorax, abdomen). The book says MOST mammals give birth to live young."
+  ]
+ },
+ {
+  "code": "2.2",
+  "id": "p3-2-2",
+  "folder": "labs/p3-2-2/",
+  "title": "Tiny life",
+  "topic": "Classification of Living Things",
+  "chapterNo": 2,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 30,
+  "listLine": "Observation · about 30 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Peek at bacteria",
+    "appLabel": "Part A",
+    "title": "Peek at bacteria",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap a slide to look at it under the microscope. Bacteria are too tiny to see without it.",
+    "setUp": "Three slides wait by the microscope.",
+    "predictQ": "Can you see bacteria without a microscope?",
+    "predictAnswer": "No, they are too tiny",
+    "takeaway": "Bacteria are tiny living things. You need a microscope to see them.",
+    "benchStep": "peek",
+    "benchPill": "🔬 Peek at Bacteria"
+   },
+   {
+    "label": "Part (b): Spot the fungi",
+    "appLabel": "Part B",
+    "title": "Spot the fungi",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap each cover on the tray. A fungus is underneath.",
+    "setUp": "Three covers hide three fungi.",
+    "predictQ": "Do fungi make their own food, like a plant?",
+    "predictAnswer": "No",
+    "takeaway": "Fungi cannot make their own food. They soak up food from around them.",
+    "benchStep": "spot",
+    "benchPill": "🍄 Spot the Fungi"
+   },
+   {
+    "label": "Part (c): Helpful or harmful",
+    "appLabel": "Part C",
+    "title": "Helpful or harmful",
+    "appEyebrow": "Part C · predict, then test it on the bench",
+    "does": "Tap a card, then tap the tray it belongs in.",
+    "setUp": "Four cards. Two trays.",
+    "predictQ": "Are all bacteria bad for us?",
+    "predictAnswer": "No, some help us",
+    "takeaway": "Some bacteria and fungi help us. Some can make us unwell.",
+    "benchStep": "sort",
+    "benchPill": "⚖️ Helpful or Harmful"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 2 \"Classification of Living Things\" → \"2.2  Tiny life\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Tiny Life Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 2\" (Classification of Living Things), tap \"2.2  Tiny life\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Tiny Life Lab\" opens full-screen on that part's pill (\"🔬 Peek at Bacteria\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-2-2/index.html",
+   "name": "Tiny Life Lab",
+   "subtitle": "Bacteria and fungi",
+   "introButton": "To the microscope →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔬 Peek at Bacteria",
+    "🍄 Spot the Fungi",
+    "⚖️ Helpful or Harmful",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A microscope sits on the left with three slides. A covered tray sits on the right. Peek at bacteria, find the fungi, then sort helpful from harmful.",
+  "bigIdea": "Bacteria are tiny living things, seen only with a microscope. Fungi cannot make their own food. Yeast, mushrooms and mould are fungi. Some bacteria and fungi help us. Some can make us unwell.",
+  "safety": [
+   "Never touch or sniff real mould. Wash your hands after handling old food."
+  ],
+  "badge": {
+   "icon": "🔬",
+   "name": "Tiny Life",
+   "line": "You predicted, tested and explained every part of Tiny Life."
+  },
+  "spokenCode": "two point two",
+  "narration": "Open the School Lab, experiment two point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "2.2",
+   "title": "Tiny life",
+   "part": "Part (a): Peek at bacteria",
+   "line": "School Lab › 2.2  Tiny life"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "Why do we need a microscope to see bacteria?",
+    "answer": "They are too tiny to see with our eyes.",
+    "mixups": [
+     "They move too fast for our eyes to follow.",
+     "They only come out at night when it is dark.",
+     "They are too far away."
+    ],
+    "why": "Bacteria are tiny living things. Only a microscope makes them big enough to see."
+   },
+   {
+    "q": "Does a mushroom make its own food?",
+    "answer": "No. It soaks up food from around it.",
+    "mixups": [
+     "Yes, it makes food in its cap, like a plant.",
+     "Only in the dark, under the soil.",
+     "Only when it rains for a whole day."
+    ],
+    "why": "A mushroom is a fungus, not a plant. Fungi cannot make their own food."
+   },
+   {
+    "q": "Do all bacteria make us unwell?",
+    "answer": "No. Some bacteria help us, like in yoghurt.",
+    "mixups": [
+     "Yes, all bacteria are harmful and make us ill.",
+     "No, only fungi can make us unwell.",
+     "Yes, every germ is bad for our bodies."
+    ],
+    "why": "Some bacteria help us. Some can make us unwell."
+   },
+   {
+    "q": "Which of these is a fungus?",
+    "answer": "Yeast.",
+    "mixups": [
+     "A tiny stick-shaped bacterium.",
+     "A bean plant in a pot.",
+     "A hen on a farm."
+    ],
+    "why": "Yeast is a fungus. Mushrooms and bread mould are fungi too."
+   },
+   {
+    "q": "Is the mould on old bread alive?",
+    "answer": "Yes. Mould is a living fungus.",
+    "mixups": [
+     "No, it is just a dark stain on the bread.",
+     "No, it only grows on plastic and stones.",
+     "No, it is only dust that fell on it."
+    ],
+    "why": "Mould is a fungus. It is living: it grows and spreads over the bread."
+   }
+  ],
+  "scriptCautions": [
+   "Book: there are four groups of living things (plants, animals, fungi, bacteria). Fungi do not make their own food and reproduce by spores. Bacteria can be rod-shaped, round or spiral-shaped. Give one useful and one harmful example of each."
+  ]
+ },
+ {
+  "code": "2.3",
+  "id": "p3-2-3",
+  "folder": "labs/p3-2-3/",
+  "title": "The mystery creature",
+  "topic": "Classification of Living Things",
+  "chapterNo": 2,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Gather clues",
+    "appLabel": "Part A",
+    "title": "Gather clues",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap each sealed tile. Read every clue before you decide.",
+    "setUp": "Creature Q swims most of the day.",
+    "predictQ": "What group do you think Creature Q belongs to?",
+    "predictAnswer": "Reptile",
+    "takeaway": "Good science reads all the evidence before deciding.",
+    "benchStep": "clues",
+    "benchPill": "🔎 Gather Clues"
+   },
+   {
+    "label": "Part (b): Decide the group",
+    "appLabel": "Part B",
+    "title": "Decide the group",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap Creature Q, then tap its pen. Use all three clues.",
+    "setUp": "Creature Q swims a lot.",
+    "predictQ": "Does living in water always mean an animal is a fish?",
+    "predictAnswer": "No, other groups live in water too",
+    "takeaway": "Scales and eggs laid on land point to reptile, even in a creature that swims a lot.",
+    "benchStep": "decide",
+    "benchPill": "🧩 Decide the Group"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 2 \"Classification of Living Things\" → \"2.3  The mystery creature\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"The Mystery Creature Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 2\" (Classification of Living Things), tap \"2.3  The mystery creature\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"The Mystery Creature Lab\" opens full-screen on that part's pill (\"🔎 Gather Clues\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-2-3/index.html",
+   "name": "The Mystery Creature Lab",
+   "subtitle": "Use the clues to find the group",
+   "introButton": "To the pond →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔎 Gather Clues",
+    "🧩 Decide the Group",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A shadowed creature, Creature Q, sits on a rock in shallow water. Three sealed clue tiles float beside it. Open every clue before you decide its group.",
+  "bigIdea": "Creature Q has scales and lays its eggs on land. That makes it a reptile, even though it swims most of the day. Living in water does not always mean an animal is a fish. Good conclusions come from checking all the evidence.",
+  "safety": [],
+  "badge": {
+   "icon": "🧩",
+   "name": "The Mystery Creature",
+   "line": "You predicted, tested and explained every part of The Mystery Creature."
+  },
+  "spokenCode": "two point three",
+  "narration": "Open the School Lab, experiment two point three, and press, Let's test it now!",
+  "labcard": {
+   "code": "2.3",
+   "title": "The mystery creature",
+   "part": "Part (a): Gather clues",
+   "line": "School Lab › 2.3  The mystery creature"
+  },
+  "mindmap": {
+   "id": "living",
+   "railName": "Living & Non-Living",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Living & Non-Living (P3)",
+   "spokenPick": "Living and Non-Living"
+  },
+  "challenge": [
+   {
+    "q": "A creature spends all day in a pond. What can you say?",
+    "answer": "You need more clues before you decide.",
+    "mixups": [
+     "It must be a fish, because it lives in water.",
+     "It must be an amphibian, because it swims.",
+     "It must be a mammal."
+    ],
+    "why": "Many groups live in water. Check its covering and how its young are born before you decide."
+   },
+   {
+    "q": "A creature with dry scales lays eggs on a warm bank. What is it?",
+    "answer": "A reptile.",
+    "mixups": [
+     "A fish, because it swims well.",
+     "An amphibian, because it is near water.",
+     "A bird, because it lays eggs."
+    ],
+    "why": "Dry scales and eggs laid on land are reptile clues, even if it swims a lot."
+   },
+   {
+    "q": "A creature with moist skin lays eggs in a pond. What is it?",
+    "answer": "An amphibian.",
+    "mixups": [
+     "A fish, because it lives in water.",
+     "A reptile, because it has four legs.",
+     "An insect, because it is small."
+    ],
+    "why": "Moist skin and eggs laid in water are amphibian clues."
+   },
+   {
+    "q": "A creature with feathers cannot swim at all. What is it?",
+    "answer": "A bird. Feathers decide the group.",
+    "mixups": [
+     "A mammal, because it cannot swim.",
+     "A reptile, because it walks on land.",
+     "A fish that lost its scales."
+    ],
+    "why": "Feathers mean bird, whether or not it swims or flies."
+   },
+   {
+    "q": "What does \"evidence\" mean when you decide a group?",
+    "answer": "What you observe, like its covering and how its young are born.",
+    "mixups": [
+     "A guess about how the animal looks.",
+     "The name of the animal.",
+     "What you hope it is."
+    ],
+    "why": "Evidence is what you observe. Good conclusions come from checking all of it."
+   }
+  ],
+  "scriptCautions": [
+   "Reptiles have dry, scaly skin and most lay eggs on land. Amphibians have moist skin and lay eggs in water. Living in water does not make an animal a fish."
+  ]
+ },
+ {
+  "code": "3.1",
+  "id": "p3-3-1",
+  "folder": "labs/p3-3-1/",
+  "title": "What is it made of?",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Count the parts",
+    "appLabel": "Part A",
+    "title": "Count the parts",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap each part of the backpack. A label names its material.",
+    "setUp": "One backpack sits on the table.",
+    "predictQ": "How many materials is this backpack made of?",
+    "predictAnswer": "Three or more",
+    "takeaway": "An object can be made of one material, or of many. This backpack uses three.",
+    "benchStep": "count",
+    "benchPill": "🔢 Count the Parts"
+   },
+   {
+    "label": "Part (b): Same kind, different stuff",
+    "appLabel": "Part B",
+    "title": "Same kind, different stuff",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a thing, then tap the bin with its material.",
+    "setUp": "A mug and a cup both hold drinks.",
+    "predictQ": "Are two mugs always made of the same material?",
+    "predictAnswer": "No, they can be different",
+    "takeaway": "The mug and the cup both hold drinks, but one is ceramic and one is plastic.",
+    "benchStep": "sort",
+    "benchPill": "🗂️ Same Kind, Different Stuff"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.1  What is it made of?\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Made-Of Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.1  What is it made of?\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Made-Of Lab\" opens full-screen on that part's pill (\"🔢 Count the Parts\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-1/index.html",
+   "name": "Made-Of Lab",
+   "subtitle": "Objects and materials",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔢 Count the Parts",
+    "🗂️ Same Kind, Different Stuff",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A backpack sits on the table. Beside it, a tray holds a mug, a cup, a ruler and a chair. What is each one made of? Tap and find out.",
+  "bigIdea": "An object can be made of one material or many. The same kind of object can be made of different materials. One material can make many kinds of objects.",
+  "safety": [],
+  "badge": {
+   "icon": "🎒",
+   "name": "Made-Of",
+   "line": "You predicted, tested and explained every part of Made-Of."
+  },
+  "spokenCode": "three point one",
+  "narration": "Open the School Lab, experiment three point one, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.1",
+   "title": "What is it made of?",
+   "part": "Part (a): Count the parts",
+   "line": "School Lab › 3.1  What is it made of?"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "A backpack has a fabric body, a metal zip and a plastic tag. How many materials is it made of?",
+    "answer": "Three",
+    "mixups": [
+     "One, because it is one object",
+     "Two",
+     "None, a backpack is not a material"
+    ],
+    "why": "Fabric, metal and plastic are three different materials. One object can be made of many materials."
+   },
+   {
+    "q": "Two cups look the same shape. Are they always made of the same material?",
+    "answer": "No, they can be different",
+    "mixups": [
+     "Yes, always",
+     "Only if one is cracked",
+     "Yes, because they hold drinks"
+    ],
+    "why": "The same kind of object can be made of different materials. One cup can be plastic, the other ceramic."
+   },
+   {
+    "q": "Which of these names a material, not an object?",
+    "answer": "Metal",
+    "mixups": [
+     "Spoon",
+     "Chair",
+     "Mug"
+    ],
+    "why": "Metal is a material. A spoon, a chair and a mug are objects that can be made of metal."
+   },
+   {
+    "q": "A ruler can be made of wood or of plastic. What does this show?",
+    "answer": "The same kind of object can use different materials",
+    "mixups": [
+     "All rulers must be wood",
+     "Materials never repeat",
+     "A ruler is a material"
+    ],
+    "why": "A ruler is one kind of object. It can be made of wood, plastic or even metal."
+   },
+   {
+    "q": "Which sentence is true?",
+    "answer": "One material can make many different objects",
+    "mixups": [
+     "A material can only make one object",
+     "Every object is made of exactly one material",
+     "Objects and materials are the same thing"
+    ],
+    "why": "Wood can make a ruler, a chair and a door. One material can make many objects."
+   }
+  ],
+  "scriptCautions": [
+   "The book names seven materials: wood, metal, ceramic, rubber, glass, plastic and fabric."
+  ]
+ },
+ {
+  "code": "3.2",
+  "id": "p3-3-2",
+  "folder": "labs/p3-3-2/",
+  "title": "The snap test",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Hold the load",
+    "appLabel": "Part A",
+    "title": "Hold the load",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Clip on the paper strip. Add weights one at a time until it snaps.",
+    "setUp": "Both strips are the same size.",
+    "predictQ": "Which holds more weights before it snaps: paper or plastic?",
+    "predictAnswer": "Plastic",
+    "takeaway": "A material that holds a heavy load without breaking is strong. Paper snapped after 2 weights.",
+    "benchStep": "hold",
+    "benchPill": "🏋️ Hold the Load"
+   },
+   {
+    "label": "Part (b): Swap the strip",
+    "appLabel": "Part B",
+    "title": "Swap the strip",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Clip on the plastic strip. Add weights one at a time until it snaps.",
+    "setUp": "The paper strip held 2 weights.",
+    "predictQ": "How many weights will the plastic strip hold before it snaps?",
+    "predictAnswer": "More than paper",
+    "takeaway": "The plastic strip held 6 weights. The paper strip held 2. Plastic is the stronger material.",
+    "benchStep": "swap",
+    "benchPill": "🔁 Swap the Strip"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.2  The snap test\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Snap Test Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.2  The snap test\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Snap Test Lab\" opens full-screen on that part's pill (\"🏋️ Hold the Load\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-2/index.html",
+   "name": "Snap Test Lab",
+   "subtitle": "Which material is stronger?",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🏋️ Hold the Load",
+    "🔁 Swap the Strip",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A stand holds a clip and a hook. A paper strip and a plastic strip wait on the rack. Hang weights on each strip. Which one snaps first?",
+  "bigIdea": "A strong material holds a heavy load without breaking. Some materials are stronger than others. We test strength by adding weights until the material breaks, then comparing the counts.",
+  "safety": [],
+  "badge": {
+   "icon": "🏋️",
+   "name": "Snap Test",
+   "line": "You predicted, tested and explained every part of Snap Test."
+  },
+  "spokenCode": "three point two",
+  "narration": "Open the School Lab, experiment three point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.2",
+   "title": "The snap test",
+   "part": "Part (a): Hold the load",
+   "line": "School Lab › 3.2  The snap test"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "A material that holds a heavy load without breaking is called",
+    "answer": "strong",
+    "mixups": [
+     "bendy",
+     "see-through",
+     "soft"
+    ],
+    "why": "Strong means it can hold a heavy load without breaking."
+   },
+   {
+    "q": "The paper strip snapped after 2 weights. The plastic strip snapped after 6. Which is stronger?",
+    "answer": "Plastic",
+    "mixups": [
+     "Paper",
+     "Both the same",
+     "Neither, both snapped"
+    ],
+    "why": "Plastic held more weights before it snapped, so plastic is stronger."
+   },
+   {
+    "q": "A strip bends a lot before it breaks. Does that make it strong?",
+    "answer": "No. Strong means it holds a load.",
+    "mixups": [
+     "Yes, bending a lot means it is strong.",
+     "Yes, but only for metal.",
+     "Yes, bending is the same as strong."
+    ],
+    "why": "Bending is a different test. Strong is about holding a load without breaking."
+   },
+   {
+    "q": "Which is a fair way to test strength?",
+    "answer": "Use strips of the same length and width",
+    "mixups": [
+     "Use strips of different lengths",
+     "Add all the weights at once",
+     "Test only one strip"
+    ],
+    "why": "Only the material should be different. The strips must be the same size."
+   },
+   {
+    "q": "Scissors are made of metal mainly because metal is",
+    "answer": "strong",
+    "mixups": [
+     "see-through",
+     "soft",
+     "light"
+    ],
+    "why": "Scissors must push hard without breaking. Metal is strong."
+   }
+  ],
+  "scriptCautions": [
+   "The lab defines \"strong\" as \"holds a heavy load without breaking\". The book defines strength as a material's ability to be pulled or pushed without breaking or tearing. Use the book's wording (definitions.md) whenever a line says what strength IS."
+  ]
+ },
+ {
+  "code": "3.3",
+  "id": "p3-3-3",
+  "folder": "labs/p3-3-3/",
+  "title": "The bend test",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Bend the wood",
+    "appLabel": "Part A",
+    "title": "Bend the wood",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Clamp the wooden strip. Hang the weight and read the bend.",
+    "setUp": "Both strips are the same length and thickness.",
+    "predictQ": "Which bends more without breaking: wood or plastic?",
+    "predictAnswer": "Plastic",
+    "takeaway": "A material that bends without breaking is flexible. The wood bent 2 cm.",
+    "benchStep": "bend",
+    "benchPill": "🌀 Bend the Wood"
+   },
+   {
+    "label": "Part (b): Bend the plastic",
+    "appLabel": "Part B",
+    "title": "Bend the plastic",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Clamp the plastic strip. Hang the same weight and read the bend.",
+    "setUp": "The wood bent 2 cm.",
+    "predictQ": "Will the plastic strip bend more or less than the wood?",
+    "predictAnswer": "More than wood",
+    "takeaway": "Under the same weight, plastic bent 6 cm and wood bent 2 cm. Plastic is more flexible.",
+    "benchStep": "compare",
+    "benchPill": "🔀 Bend the Plastic"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.3  The bend test\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Bend Test Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.3  The bend test\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Bend Test Lab\" opens full-screen on that part's pill (\"🌀 Bend the Wood\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-3/index.html",
+   "name": "Bend Test Lab",
+   "subtitle": "Which material is more flexible?",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🌀 Bend the Wood",
+    "🔀 Bend the Plastic",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A clamp grips the edge of the table. A ruler stands beside it. A wooden strip and a plastic strip wait on the rack, the same length. Hang the same weight on each. Which one bends more?",
+  "bigIdea": "A flexible material bends without breaking. Some materials bend more than others under the same weight. We test flexibility by measuring how far a strip bends.",
+  "safety": [],
+  "badge": {
+   "icon": "🌀",
+   "name": "Bend Test",
+   "line": "You predicted, tested and explained every part of Bend Test."
+  },
+  "spokenCode": "three point three",
+  "narration": "Open the School Lab, experiment three point three, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.3",
+   "title": "The bend test",
+   "part": "Part (a): Bend the wood",
+   "line": "School Lab › 3.3  The bend test"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "A material that bends without breaking is called",
+    "answer": "flexible",
+    "mixups": [
+     "strong",
+     "see-through",
+     "hard"
+    ],
+    "why": "Flexible means it bends without breaking."
+   },
+   {
+    "q": "The wood bent 2 cm. The plastic bent 6 cm under the same weight. Which is more flexible?",
+    "answer": "Plastic",
+    "mixups": [
+     "Wood",
+     "Both the same",
+     "Neither"
+    ],
+    "why": "Plastic bent further under the same weight, so plastic is more flexible."
+   },
+   {
+    "q": "A glass sheet cracks after bending only a little. Is glass flexible?",
+    "answer": "No. It breaks before it bends much.",
+    "mixups": [
+     "Yes. Any bending at all means it is flexible.",
+     "Yes. Glass is see-through.",
+     "Yes. Glass is smooth."
+    ],
+    "why": "Flexible means bending without breaking. Glass breaks, so it is not flexible."
+   },
+   {
+    "q": "Which is a fair way to test how much strips bend?",
+    "answer": "Use strips of the same length and thickness",
+    "mixups": [
+     "Use a different weight for each strip",
+     "Test only one strip",
+     "Use a longer plastic strip"
+    ],
+    "why": "Only the material should change. Same length, same thickness, same weight."
+   },
+   {
+    "q": "A rubber band bends a lot and does not snap. Rubber is",
+    "answer": "flexible",
+    "mixups": [
+     "not flexible",
+     "see-through",
+     "hard"
+    ],
+    "why": "Rubber bends a lot without breaking, so it is flexible."
+   }
+  ],
+  "scriptCautions": [
+   "Book: flexibility is a material's ability to bend without breaking. The book's opposite word is \"rigid\"."
+  ]
+ },
+ {
+  "code": "3.5",
+  "id": "p3-3-5",
+  "folder": "labs/p3-3-5/",
+  "title": "The drip test",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Drip on sheet one",
+    "appLabel": "Part A",
+    "title": "Drip on sheet one",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Place the plastic sheet. Add drops and watch what the water does.",
+    "setUp": "Two sheets wait on the table.",
+    "predictQ": "Which sheet keeps water out: plastic or paper?",
+    "predictAnswer": "Plastic",
+    "takeaway": "The drops sat on top as beads. Plastic does not let water through.",
+    "benchStep": "drip",
+    "benchPill": "💧 Drip on Sheet One"
+   },
+   {
+    "label": "Part (b): Drip on sheet two",
+    "appLabel": "Part B",
+    "title": "Drip on sheet two",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Place the paper sheet. Add drops and watch what the water does.",
+    "setUp": "The plastic sheet kept the water out.",
+    "predictQ": "Will the paper sheet keep water out too?",
+    "predictAnswer": "No, the water soaks in",
+    "takeaway": "The drops soaked in and spread. Paper soaks up water instead of keeping it out.",
+    "benchStep": "soak",
+    "benchPill": "🌂 Drip on Sheet Two"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.5  The drip test\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Drip Test Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.5  The drip test\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Drip Test Lab\" opens full-screen on that part's pill (\"💧 Drip on Sheet One\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-5/index.html",
+   "name": "Drip Test Lab",
+   "subtitle": "Does it let water through?",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "💧 Drip on Sheet One",
+    "🌂 Drip on Sheet Two",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A dropper of water sits beside two flat sheets, one plastic and one paper. Drip water on each sheet. Does the water sit on top, or soak in?",
+  "bigIdea": "Some materials do not let water through. The drops sit on top. Some materials soak water up instead. We test this by dripping water and watching what happens on top of and inside the sheet.",
+  "safety": [],
+  "badge": {
+   "icon": "💧",
+   "name": "Drip Test",
+   "line": "You predicted, tested and explained every part of Drip Test."
+  },
+  "spokenCode": "three point five",
+  "narration": "Open the School Lab, experiment three point five, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.5",
+   "title": "The drip test",
+   "part": "Part (a): Drip on sheet one",
+   "line": "School Lab › 3.5  The drip test"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "Which sheet did not let water through in our test?",
+    "answer": "Plastic",
+    "mixups": [
+     "Paper",
+     "Neither sheet",
+     "Both sheets"
+    ],
+    "why": "The drops sat on top of the plastic as beads. Underneath stayed dry."
+   },
+   {
+    "q": "On the paper sheet, the water drops",
+    "answer": "soaked in and spread",
+    "mixups": [
+     "sat on top as small round beads",
+     "bounced away off the table",
+     "turned into fizzy bubbles"
+    ],
+    "why": "Paper soaks up water. The drops made a dark patch that grew."
+   },
+   {
+    "q": "To keep the test fair, what should stay the same for both sheets?",
+    "answer": "The sheet size and number of drops",
+    "mixups": [
+     "The colour and the shape of the sheet",
+     "The time of day and the weather",
+     "The name written on the sheet"
+    ],
+    "why": "Only the material should change. Same size, same number of drops."
+   },
+   {
+    "q": "A pupil wants to make a raincoat. Which material should be chosen?",
+    "answer": "Plastic, because it keeps water out",
+    "mixups": [
+     "Fabric, because it is soft and soaks up water",
+     "Paper, because it is light and cheap to buy",
+     "Paper towel, because it is soft and thick"
+    ],
+    "why": "A raincoat must keep water out. Plastic does not let water through."
+   },
+   {
+    "q": "Which material soaks up water fastest?",
+    "answer": "Paper towel",
+    "mixups": [
+     "Plastic sheet",
+     "Glass sheet",
+     "Metal sheet"
+    ],
+    "why": "Paper towel soaks water up. Plastic, glass and metal do not let water through."
+   }
+  ],
+  "scriptCautions": [
+   "The bench avoids the word \"waterproof\" (the P3 lab brief says to use \"does not let water through\"), but the book teaches \"waterproof\": a material that does not absorb water or let water pass through. Use the book term in the exam corner."
+  ]
+ },
+ {
+  "code": "3.6",
+  "id": "p3-3-6",
+  "folder": "labs/p3-3-6/",
+  "title": "The light box",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Experiment",
+  "minutes": 30,
+  "listLine": "Experiment · about 30 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Shine on sheet one",
+    "appLabel": "Part A",
+    "title": "Shine on sheet one",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Hold up the clear sheet. Switch on the torch and count the lit dots.",
+    "setUp": "The clear sheet is first.",
+    "predictQ": "Does this clear sheet let most, some, or no light through?",
+    "predictAnswer": "Most light",
+    "takeaway": "A material that lets most light through is see-through. All five dots lit up.",
+    "benchStep": "most",
+    "benchPill": "🔦 Shine on Sheet One"
+   },
+   {
+    "label": "Part (b): Shine on sheet two",
+    "appLabel": "Part B",
+    "title": "Shine on sheet two",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Swap in the frosted sheet. Switch on the torch and count the lit dots.",
+    "setUp": "The clear sheet lit all five dots.",
+    "predictQ": "Will the frosted sheet light up more or fewer dots than the clear one?",
+    "predictAnswer": "Fewer dots",
+    "takeaway": "A material that lets some light through looks blurry, not clear. Two dots lit up.",
+    "benchStep": "some",
+    "benchPill": "🌥️ Shine on Sheet Two"
+   },
+   {
+    "label": "Part (c): Shine on sheet three",
+    "appLabel": "Part C",
+    "title": "Shine on sheet three",
+    "appEyebrow": "Part C · predict, then test it on the bench",
+    "does": "Swap in the metal sheet. Switch on the torch and count the lit dots.",
+    "setUp": "The metal sheet is last.",
+    "predictQ": "Will any dots light up through the metal sheet?",
+    "predictAnswer": "None will light up",
+    "takeaway": "A material that lets no light through blocks it completely. No dots lit up.",
+    "benchStep": "none",
+    "benchPill": "⬛ Shine on Sheet Three"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.6  The light box\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Torch Test Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.6  The light box\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Torch Test Lab\" opens full-screen on that part's pill (\"🔦 Shine on Sheet One\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-6/index.html",
+   "name": "Torch Test Lab",
+   "subtitle": "Does it let light through?",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔦 Shine on Sheet One",
+    "🌥️ Shine on Sheet Two",
+    "⬛ Shine on Sheet Three",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A torch points at a screen with five small dots. Three sheets wait on a rack: clear plastic, frosted plastic and metal. Hold a sheet in the light. How many dots light up?",
+  "bigIdea": "Some materials let most light through. They are see-through. Some let only some light through. Things look blurry. Metal lets no light through at all. It makes a dark shadow.",
+  "safety": [
+   "Never shine a torch into anyone's eyes."
+  ],
+  "badge": {
+   "icon": "🔦",
+   "name": "Torch Test",
+   "line": "You predicted, tested and explained every part of Torch Test."
+  },
+  "spokenCode": "three point six",
+  "narration": "Open the School Lab, experiment three point six, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.6",
+   "title": "The light box",
+   "part": "Part (a): Shine on sheet one",
+   "line": "School Lab › 3.6  The light box"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "Metal blocked every dot in our test. Metal lets",
+    "answer": "no light through",
+    "mixups": [
+     "most light through",
+     "some light through",
+     "light through only at night"
+    ],
+    "why": "No dots lit up behind the metal sheet. Metal lets no light through."
+   },
+   {
+    "q": "Clear plastic lit up all five dots. Clear plastic lets",
+    "answer": "most light through",
+    "mixups": [
+     "some light through",
+     "no light through",
+     "light through only when wet"
+    ],
+    "why": "All five dots lit up sharp and bright. Clear plastic lets most light through."
+   },
+   {
+    "q": "Which sheet made a dark shadow on the screen?",
+    "answer": "The metal sheet",
+    "mixups": [
+     "The clear sheet",
+     "The frosted sheet",
+     "None of the sheets"
+    ],
+    "why": "The metal sheet lets no light through, so it makes a dark shadow."
+   },
+   {
+    "q": "Frosted plastic lit up 2 of the 5 dots, and they looked blurry. Frosted plastic lets",
+    "answer": "some light through",
+    "mixups": [
+     "most light through",
+     "no light through",
+     "light through only up close"
+    ],
+    "why": "A few blurry dots means some light gets through, but not most."
+   },
+   {
+    "q": "Which is a fair way to test how much light passes through?",
+    "answer": "Use the same torch and distance each time",
+    "mixups": [
+     "Use a brighter torch for one of the sheets",
+     "Test each sheet in a different dark room",
+     "Move the screen closer for each sheet"
+    ],
+    "why": "Only the sheet should change. Same torch, same distance, same screen."
+   }
+  ],
+  "scriptCautions": [
+   "The bench says \"lets most / some / no light through\" and \"see-through\". The book adds transparent, translucent and opaque, but the app's syllabus file lists those three terms as not required at P3. Teach most / some / no light first, and name the terms only if the teacher wants them."
+  ]
+ },
+ {
+  "code": "3.7",
+  "id": "p3-3-7",
+  "folder": "labs/p3-3-7/",
+  "title": "Match the job",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Match object to material",
+    "appLabel": "Part A",
+    "title": "Match object to material",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap an object, then tap the material bin it belongs in.",
+    "setUp": "Each object is made of the material that suits its job.",
+    "predictQ": "Which material is best for making a raincoat?",
+    "predictAnswer": "Plastic",
+    "takeaway": "A material is chosen because of what it can do. The raincoat is plastic because plastic keeps water out.",
+    "benchStep": "match",
+    "benchPill": "🧩 Match Object to Material"
+   },
+   {
+    "label": "Part (b): Why this material?",
+    "appLabel": "Part B",
+    "title": "Why this material?",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a material bin, then tap the reason it suits its object.",
+    "setUp": "Each material was chosen for a reason.",
+    "predictQ": "Why is a raincoat made of plastic?",
+    "predictAnswer": "It does not let water through",
+    "takeaway": "Each material is chosen for a reason. Plastic keeps rain out. Glass lets light in. Fabric bends. Metal is strong.",
+    "benchStep": "reason",
+    "benchPill": "💡 Why This Material?"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.7  Match the job\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Match the Material Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.7  Match the job\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Match the Material Lab\" opens full-screen on that part's pill (\"🧩 Match Object to Material\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-7/index.html",
+   "name": "Match the Material Lab",
+   "subtitle": "Why that material?",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧩 Match Object to Material",
+    "💡 Why This Material?",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Four object cards sit in a tray: a raincoat, a window, a school bag and a pair of scissors. Four material bins stand behind. Match each object to its material, then say why.",
+  "bigIdea": "A material is chosen for what it can do. Different objects need different things from a material. Each material has a reason it suits its object.",
+  "safety": [],
+  "badge": {
+   "icon": "🧩",
+   "name": "Match the Material",
+   "line": "You predicted, tested and explained every part of Match the Material."
+  },
+  "spokenCode": "three point seven",
+  "narration": "Open the School Lab, experiment three point seven, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.7",
+   "title": "Match the job",
+   "part": "Part (a): Match object to material",
+   "line": "School Lab › 3.7  Match the job"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "A raincoat is made of plastic mainly because plastic",
+    "answer": "does not let water through",
+    "mixups": [
+     "is strong enough to carry heavy bags",
+     "lets light through into the room",
+     "is shiny and pleasant to touch"
+    ],
+    "why": "A raincoat must keep rain out. Plastic does not let water through."
+   },
+   {
+    "q": "A window is made of glass mainly because glass",
+    "answer": "lets light through",
+    "mixups": [
+     "is flexible and bends in the wind",
+     "soaks up water from the rain",
+     "is heavy and hard to carry"
+    ],
+    "why": "We look through windows. Glass lets light through."
+   },
+   {
+    "q": "Which object needs a material that lets light through?",
+    "answer": "A window",
+    "mixups": [
+     "A raincoat",
+     "A school bag",
+     "Scissors"
+    ],
+    "why": "We look through a window. Glass lets light through."
+   },
+   {
+    "q": "A school bag strap is made of fabric mainly because fabric",
+    "answer": "bends and folds easily",
+    "mixups": [
+     "lets no light through",
+     "is see-through",
+     "soaks up water from the rain"
+    ],
+    "why": "A strap must bend with you. Fabric is flexible."
+   },
+   {
+    "q": "Scissors are made of metal mainly because metal",
+    "answer": "is strong",
+    "mixups": [
+     "is flexible",
+     "soaks up water",
+     "is see-through"
+    ],
+    "why": "Scissors push hard when they cut. Metal is strong and hard."
+   }
+  ],
+  "scriptCautions": [
+   "Exam pattern for \"Why is X made of Y?\": name the property, then link it to what the object does."
+  ]
+ },
+ {
+  "code": "3.8",
+  "id": "p3-3-8",
+  "folder": "labs/p3-3-8/",
+  "title": "Upgrade it",
+  "topic": "Diversity of Materials",
+  "chapterNo": 3,
+  "theme": "Diversity",
+  "kind": "Make it",
+  "minutes": 25,
+  "listLine": "Make it · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Choose a better material",
+    "appLabel": "Part A",
+    "title": "Choose a better material",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap the torn strap, then tap the material that suits a strap.",
+    "setUp": "The strap is made of paper and it tore.",
+    "predictQ": "Which material would make a stronger strap?",
+    "predictAnswer": "Fabric",
+    "takeaway": "We choose a material for a part by thinking about what it can do. Fabric bends and is strong.",
+    "benchStep": "swap",
+    "benchPill": "🔧 Choose a Better Material"
+   },
+   {
+    "label": "Part (b): Test the upgrade",
+    "appLabel": "Part B",
+    "title": "Test the upgrade",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Check the old strap's count. Then clip on the new strap and add weights.",
+    "setUp": "The old paper strap held 2 weights before it tore.",
+    "predictQ": "How many weights will the new strap hold, compared with the old one?",
+    "predictAnswer": "More than before",
+    "takeaway": "An upgrade is only real if a test shows it holds up better. 6 weights beats 2.",
+    "benchStep": "test",
+    "benchPill": "🧪 Test the Upgrade"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 3 \"Diversity of Materials\" → \"3.8  Upgrade it\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Upgrade Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 3\" (Diversity of Materials), tap \"3.8  Upgrade it\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Upgrade Lab\" opens full-screen on that part's pill (\"🔧 Choose a Better Material\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-3-8/index.html",
+   "name": "Upgrade Lab",
+   "subtitle": "Choose a better material",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔧 Choose a Better Material",
+    "🧪 Test the Upgrade",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A school bag sits on the table. Its paper strap tore and hangs loose. A tray holds fabric, glass, metal and more paper. Choose a better material, then test it.",
+  "bigIdea": "We improve an object by choosing a material that suits its job better. We test an improvement by comparing counts before and after. Choosing a material means thinking about what it can do.",
+  "safety": [],
+  "badge": {
+   "icon": "🔧",
+   "name": "Upgrade",
+   "line": "You predicted, tested and explained every part of Upgrade."
+  },
+  "spokenCode": "three point eight",
+  "narration": "Open the School Lab, experiment three point eight, and press, Let's test it now!",
+  "labcard": {
+   "code": "3.8",
+   "title": "Upgrade it",
+   "part": "Part (a): Choose a better material",
+   "line": "School Lab › 3.8  Upgrade it"
+  },
+  "mindmap": {
+   "id": "materials",
+   "railName": "Diversity of Materials",
+   "railTag": "P3",
+   "railTheme": "Diversity",
+   "makerOption": "Diversity of Materials (P3)",
+   "spokenPick": "Diversity of Materials"
+  },
+  "challenge": [
+   {
+    "q": "Why do we improve an object?",
+    "answer": "To make it work better",
+    "mixups": [
+     "To make it look different and colourful",
+     "To use up more of the materials",
+     "To make it heavier to carry around"
+    ],
+    "why": "We change a material so the object does its job better."
+   },
+   {
+    "q": "A paper strap tore easily. What is a good replacement?",
+    "answer": "Fabric, because it bends and is strong",
+    "mixups": [
+     "Glass, because it is hard and see-through",
+     "Another paper strap, but a thicker one",
+     "Paper towel, because it is soft and thick"
+    ],
+    "why": "A strap must bend and be strong. Fabric does both."
+   },
+   {
+    "q": "Does any new material always make an object better?",
+    "answer": "No, it must suit the job",
+    "mixups": [
+     "Yes, any change at all helps a lot",
+     "Only if it is made of metal or glass",
+     "Yes, if it is a new colour or shape"
+    ],
+    "why": "Glass on a strap would break. The new material must suit the job."
+   },
+   {
+    "q": "A leaking vase needs a material that",
+    "answer": "does not let water through",
+    "mixups": [
+     "lets light through the sides",
+     "bends easily when it is held",
+     "soaks up water"
+    ],
+    "why": "A vase holds water, so its material must not let water through."
+   },
+   {
+    "q": "Which shows an improvement was really tested?",
+    "answer": "Comparing the weights before and after",
+    "mixups": [
+     "Saying it looks much better than before",
+     "Guessing which strap looks stronger",
+     "Asking a friend if it looks strong"
+    ],
+    "why": "A test compares before and after. 2 weights before, 6 weights after."
+   }
+  ],
+  "scriptCautions": []
+ },
+ {
+  "code": "4.1",
+  "id": "p3-4-1",
+  "folder": "labs/p3-4-1/",
+  "title": "Find my young",
+  "topic": "Life Cycles of Plants",
+  "chapterNo": 4,
+  "theme": "Cycles",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Match young to adult",
+    "appLabel": "Part A",
+    "title": "Match young to adult",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap a young card, then tap the adult card it grows into.",
+    "setUp": "Three young cards and three adult cards are mixed up.",
+    "predictQ": "Does every living thing have a young stage and an adult stage?",
+    "predictAnswer": "Yes, every one",
+    "takeaway": "A young living thing grows into the adult of its own kind. A puppy becomes a dog, never a cat.",
+    "benchStep": "match",
+    "benchPill": "🧩 Match Young to Adult"
+   },
+   {
+    "label": "Part (b): Compare young and adult",
+    "appLabel": "Part B",
+    "title": "Compare young and adult",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a pair, then tap the chip that is true for it.",
+    "setUp": "The pairs are matched.",
+    "predictQ": "Do the young and the adult look exactly the same?",
+    "predictAnswer": "No, the adult has grown more",
+    "takeaway": "The young and the adult are alike, but the adult has grown more.",
+    "benchStep": "compare",
+    "benchPill": "🔍 Compare Young and Adult"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 4 \"Life Cycles of Plants\" → \"4.1  Find my young\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Young and Adult Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 4\" (Life Cycles of Plants), tap \"4.1  Find my young\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Young and Adult Lab\" opens full-screen on that part's pill (\"🧩 Match Young to Adult\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-4-1/index.html",
+   "name": "Young and Adult Lab",
+   "subtitle": "Living things grow",
+   "introButton": "To the shelf →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧩 Match Young to Adult",
+    "🔍 Compare Young and Adult",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A wooden shelf holds six picture cards, all mixed up. Three show a young living thing. Three show an adult. Match each young one to the adult it grows into, then say how they are alike and different.",
+  "bigIdea": "Every living thing starts small, as a young one. It grows into an adult of its own kind over time. The young and adult are alike, but the adult has grown more.",
+  "safety": [],
+  "badge": {
+   "icon": "🐾",
+   "name": "Young and Adult",
+   "line": "You predicted, tested and explained every part of Young and Adult."
+  },
+  "spokenCode": "four point one",
+  "narration": "Open the School Lab, experiment four point one, and press, Let's test it now!",
+  "labcard": {
+   "code": "4.1",
+   "title": "Find my young",
+   "part": "Part (a): Match young to adult",
+   "line": "School Lab › 4.1  Find my young"
+  },
+  "mindmap": {
+   "id": "lifecycles",
+   "railName": "Life Cycles",
+   "railTag": "P3",
+   "railTheme": "Cycles",
+   "makerOption": "Life Cycles (P3)",
+   "spokenPick": "Life Cycles"
+  },
+  "challenge": [
+   {
+    "q": "Which pair is a young living thing and the adult it grows into?",
+    "answer": "Puppy and dog",
+    "mixups": [
+     "Puppy and cat",
+     "Kitten and dog",
+     "Seed and stone"
+    ],
+    "why": "A puppy grows into a dog, its own kind. A kitten grows into a cat."
+   },
+   {
+    "q": "What happens to a young living thing over time?",
+    "answer": "It grows into an adult",
+    "mixups": [
+     "It stays the same size",
+     "It turns into a different kind",
+     "It shrinks"
+    ],
+    "why": "Every living thing starts small and grows into an adult over time."
+   },
+   {
+    "q": "A child and an adult person are alike because",
+    "answer": "both have the same body parts",
+    "mixups": [
+     "both are the same height and weight",
+     "both are the same age",
+     "both have the same shoes"
+    ],
+    "why": "The body parts are the same. The adult is bigger because it has grown more."
+   },
+   {
+    "q": "A seed grows into",
+    "answer": "an adult plant",
+    "mixups": [
+     "a small baby animal",
+     "a smooth round stone",
+     "a bigger seed"
+    ],
+    "why": "A seed grows into a plant of its own kind."
+   },
+   {
+    "q": "The adult is different from the young because the adult",
+    "answer": "has grown more",
+    "mixups": [
+     "is a different kind",
+     "is smaller",
+     "is non-living"
+    ],
+    "why": "The adult is the same kind, but it has grown bigger over time."
+   }
+  ],
+  "scriptCautions": []
+ },
+ {
+  "code": "4.2",
+  "id": "p3-4-2",
+  "folder": "labs/p3-4-2/",
+  "title": "Seed to plant",
+  "topic": "Life Cycles of Plants",
+  "chapterNo": 4,
+  "theme": "Cycles",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Grow the seed",
+    "appLabel": "Part A",
+    "title": "Grow the seed",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap the pots, then tap ▶ Later. Watch both pots and read the height.",
+    "setUp": "Both seeds have water, air and warmth. Only one has light.",
+    "predictQ": "Will the seedling grow taller as the days pass?",
+    "predictAnswer": "Yes, taller each day",
+    "takeaway": "A seed grows into a seedling that grows taller each day. It needs water, air and light to grow well.",
+    "benchStep": "grow",
+    "benchPill": "🌱 Grow the Seed"
+   },
+   {
+    "label": "Part (b): Build the life cycle",
+    "appLabel": "Part B",
+    "title": "Build the life cycle",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a stage card, then tap the platform it belongs on: first, second or third.",
+    "setUp": "The plant has flowers now.",
+    "predictQ": "Will the grown plant make new seeds?",
+    "predictAnswer": "Yes, inside its fruit",
+    "takeaway": "The adult plant grows flowers, then fruit with new seeds inside. The new seeds start the cycle again.",
+    "benchStep": "cycle",
+    "benchPill": "🔄 Build the Life Cycle"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 4 \"Life Cycles of Plants\" → \"4.2  Seed to plant\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Seed to Plant Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 4\" (Life Cycles of Plants), tap \"4.2  Seed to plant\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Seed to Plant Lab\" opens full-screen on that part's pill (\"🌱 Grow the Seed\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-4-2/index.html",
+   "name": "Seed to Plant Lab",
+   "subtitle": "A plant grows up",
+   "introButton": "To the windowsill →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🌱 Grow the Seed",
+    "🔄 Build the Life Cycle",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Two small pots sit on a windowsill, each with a seed just planted. One pot is in the sun. One is under a dark box. A day dial reads Day 0. Turn the days forward and watch what grows.",
+  "bigIdea": "A plant's life cycle has three stages: seed, seedling and adult plant. The seed needs water, air and the right warmth to start growing. The seedling needs light to grow well. The adult plant makes new seeds of its own.",
+  "safety": [],
+  "badge": {
+   "icon": "🌱",
+   "name": "Seed to Plant",
+   "line": "You predicted, tested and explained every part of Seed to Plant."
+  },
+  "spokenCode": "four point two",
+  "narration": "Open the School Lab, experiment four point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "4.2",
+   "title": "Seed to plant",
+   "part": "Part (a): Grow the seed",
+   "line": "School Lab › 4.2  Seed to plant"
+  },
+  "mindmap": {
+   "id": "lifecycles",
+   "railName": "Life Cycles",
+   "railTag": "P3",
+   "railTheme": "Cycles",
+   "makerOption": "Life Cycles (P3)",
+   "spokenPick": "Life Cycles"
+  },
+  "challenge": [
+   {
+    "q": "What are the three stages of a plant's life cycle, in order?",
+    "answer": "Seed, seedling, adult plant",
+    "mixups": [
+     "Seedling, seed, adult plant",
+     "Adult plant, seed, seedling",
+     "Seed, adult plant, seedling"
+    ],
+    "why": "A seed grows into a seedling, and the seedling grows into an adult plant."
+   },
+   {
+    "q": "What does a seed need to start growing?",
+    "answer": "Water, air and the right warmth",
+    "mixups": [
+     "Only strong bright light from the sun",
+     "Flowers",
+     "Fruit"
+    ],
+    "why": "Both seeds started growing, even the one in the dark. A seed needs water, air and warmth to start."
+   },
+   {
+    "q": "The seedling in the dark box was pale and weak. Why?",
+    "answer": "A seedling needs light to grow well",
+    "mixups": [
+     "It was given far too much water every day",
+     "It was too warm",
+     "Seeds cannot grow in pots"
+    ],
+    "why": "A seedling needs light to grow well. Without light it turns pale and weak."
+   },
+   {
+    "q": "Where do a plant's new seeds come from?",
+    "answer": "Inside the fruit of the adult plant",
+    "mixups": [
+     "From the roots under the ground",
+     "From the damp soil around its roots",
+     "From the seedling's leaves"
+    ],
+    "why": "The adult plant grows flowers, then fruit. The new seeds are inside the fruit."
+   },
+   {
+    "q": "On the windowsill, the sunny seedling grew from 1 cm to 12 cm. What does this show?",
+    "answer": "A seedling grows taller over the days",
+    "mixups": [
+     "A seedling stays the same height each day",
+     "A seedling gets shorter",
+     "Seedlings grow only at night"
+    ],
+    "why": "A seedling grows taller each day when it has water, air and light."
+   }
+  ],
+  "scriptCautions": [
+   "The bench calls the middle stage \"seedling\" (about 36 times). The book's stage names are seed, young plant and adult plant, and the Mind Lab poster also says \"Young plant\". Say \"young plant\" in narration and on screen.",
+   "The bench's \"water, air and the right warmth\" for a seed to start growing is P5 content (germination). Keep it light."
+  ]
+ },
+ {
+  "code": "5.1",
+  "id": "p3-5-1",
+  "folder": "labs/p3-5-1/",
+  "title": "Three stages or four",
+  "topic": "Life Cycles of Animals",
+  "chapterNo": 5,
+  "theme": "Cycles",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Three-stage animals",
+    "appLabel": "Part A",
+    "title": "Three-stage animals",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap a stage model, then tap its platform. Build both life cycles in order.",
+    "setUp": "The grasshopper and the frog each have three stages.",
+    "predictQ": "Does every three-stage animal look like its adult when young?",
+    "predictAnswer": "No, some do and some do not",
+    "takeaway": "A young grasshopper looks like the adult. A tadpole looks nothing like a frog. Both animals have three stages.",
+    "benchStep": "three",
+    "benchPill": "🦗 Three-Stage Animals"
+   },
+   {
+    "label": "Part (b): Four-stage animals",
+    "appLabel": "Part B",
+    "title": "Four-stage animals",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a stage model, then tap its platform. Build both life cycles in order.",
+    "setUp": "The butterfly and the mosquito each have four stages.",
+    "predictQ": "Does a four-stage animal's young ever look like the adult?",
+    "predictAnswer": "No, it looks very different",
+    "takeaway": "A four-stage animal's young looks nothing like the adult at first. A caterpillar becomes a butterfly only after the pupa stage.",
+    "benchStep": "four",
+    "benchPill": "🦋 Four-Stage Animals"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 5 \"Life Cycles of Animals\" → \"5.1  Three stages or four\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Life Cycle Cases Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 5\" (Life Cycles of Animals), tap \"5.1  Three stages or four\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Life Cycle Cases Lab\" opens full-screen on that part's pill (\"🦗 Three-Stage Animals\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-5-1/index.html",
+   "name": "Life Cycle Cases Lab",
+   "subtitle": "Three stages or four?",
+   "introButton": "To the cases →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🦗 Three-Stage Animals",
+    "🦋 Four-Stage Animals",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Two glass cases sit side by side, each with numbered platforms. Stage models wait on a tray. Build each animal's life cycle in order: some have three stages, some have four.",
+  "bigIdea": "Some animals have three stages: egg, young and adult. Others have four stages: egg, young, pupa and adult. A four-stage animal's young looks nothing like the adult at first.",
+  "safety": [],
+  "badge": {
+   "icon": "🦋",
+   "name": "Life Cycle Cases",
+   "line": "You predicted, tested and explained every part of Life Cycle Cases."
+  },
+  "spokenCode": "five point one",
+  "narration": "Open the School Lab, experiment five point one, and press, Let's test it now!",
+  "labcard": {
+   "code": "5.1",
+   "title": "Three stages or four",
+   "part": "Part (a): Three-stage animals",
+   "line": "School Lab › 5.1  Three stages or four"
+  },
+  "mindmap": {
+   "id": "lifecycles",
+   "railName": "Life Cycles",
+   "railTag": "P3",
+   "railTheme": "Cycles",
+   "makerOption": "Life Cycles (P3)",
+   "spokenPick": "Life Cycles"
+  },
+  "challenge": [
+   {
+    "q": "Which animal has three stages: egg, young and adult?",
+    "answer": "Grasshopper",
+    "mixups": [
+     "Butterfly",
+     "Mosquito",
+     "Beetle"
+    ],
+    "why": "A grasshopper has three stages. A butterfly, a mosquito and a beetle have four, with a pupa."
+   },
+   {
+    "q": "What happens inside the pupa?",
+    "answer": "The adult forms",
+    "mixups": [
+     "The egg is laid",
+     "The animal eats a lot",
+     "The animal turns back into an egg"
+    ],
+    "why": "The pupa does not eat. Inside it, the adult is forming."
+   },
+   {
+    "q": "A frog has three stages. Does the tadpole look like the adult frog?",
+    "answer": "No, it has a tail and lives in water",
+    "mixups": [
+     "Yes, it looks exactly the same as the frog",
+     "Yes, but it is a lot smaller",
+     "It has wings"
+    ],
+    "why": "Three stages does not mean the young looks like the adult. A tadpole looks nothing like a frog."
+   },
+   {
+    "q": "A caterpillar is the young of which animal?",
+    "answer": "Butterfly",
+    "mixups": [
+     "Grasshopper",
+     "Frog",
+     "Chicken"
+    ],
+    "why": "A caterpillar hatches from a butterfly egg, becomes a pupa, then an adult butterfly."
+   },
+   {
+    "q": "The four stages of a mosquito, in order, are",
+    "answer": "egg, larva, pupa, adult",
+    "mixups": [
+     "egg, pupa, larva, adult",
+     "larva, egg, pupa, adult",
+     "egg, young, adult, pupa"
+    ],
+    "why": "Egg, then larva in the water, then pupa, then the adult flies away."
+   }
+  ],
+  "scriptCautions": [
+   "The lab's big idea gives the four stages as \"egg, young, pupa and adult\". The book, and the bench's own Challenge, say egg, larva, pupa, adult. Use \"larva\".",
+   "Name each young one correctly: nymph (grasshopper, cockroach), tadpole (frog), caterpillar (butterfly larva), wriggler (mosquito larva)."
+  ]
+ },
+ {
+  "code": "5.2",
+  "id": "p3-5-2",
+  "folder": "labs/p3-5-2/",
+  "title": "Compare life cycles",
+  "topic": "Life Cycles of Animals",
+  "chapterNo": 5,
+  "theme": "Cycles",
+  "kind": "Observation",
+  "minutes": 25,
+  "listLine": "Observation · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Same number of stages",
+    "appLabel": "Part A",
+    "title": "Same number of stages",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Look at both cases. Tap a question card, then tap the chip that is true.",
+    "setUp": "The chicken and the frog both have three stages.",
+    "predictQ": "Do animals with the same number of stages look alike when young?",
+    "predictAnswer": "Not always",
+    "takeaway": "The chicken and frog have three stages, but look different when young.",
+    "benchStep": "same",
+    "benchPill": "⚖️ Same Number of Stages"
+   },
+   {
+    "label": "Part (b): Different number of stages",
+    "appLabel": "Part B",
+    "title": "Different number of stages",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Look at both cases. Tap a question card, then tap the chip that is true.",
+    "setUp": "The mosquito and the cockroach both start as an egg.",
+    "predictQ": "Does starting as an egg mean animals share the same stages?",
+    "predictAnswer": "No, the number of stages can differ",
+    "takeaway": "Both start as an egg; only the mosquito has a pupa stage.",
+    "benchStep": "different",
+    "benchPill": "🔀 Different Number of Stages"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 5 \"Life Cycles of Animals\" → \"5.2  Compare life cycles\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Compare Cycles Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 5\" (Life Cycles of Animals), tap \"5.2  Compare life cycles\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Compare Cycles Lab\" opens full-screen on that part's pill (\"⚖️ Same Number of Stages\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-5-2/index.html",
+   "name": "Compare Cycles Lab",
+   "subtitle": "Alike and different",
+   "introButton": "To the cases →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "⚖️ Same Number of Stages",
+    "🔀 Different Number of Stages",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Two glass cases sit side by side, each showing a whole life cycle. Look at both. What is alike? What is different? First a chicken and a frog, then a mosquito and a cockroach.",
+  "bigIdea": "Different living things can have different life cycles. Some share the same stages but still look different when young. Others have a different number of stages altogether. Comparing means looking for what is alike and what is different.",
+  "safety": [],
+  "badge": {
+   "icon": "⚖️",
+   "name": "Compare Cycles",
+   "line": "You predicted, tested and explained every part of Compare Cycles."
+  },
+  "spokenCode": "five point two",
+  "narration": "Open the School Lab, experiment five point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "5.2",
+   "title": "Compare life cycles",
+   "part": "Part (a): Same number of stages",
+   "line": "School Lab › 5.2  Compare life cycles"
+  },
+  "mindmap": {
+   "id": "lifecycles",
+   "railName": "Life Cycles",
+   "railTag": "P3",
+   "railTheme": "Cycles",
+   "makerOption": "Life Cycles (P3)",
+   "spokenPick": "Life Cycles"
+  },
+  "challenge": [
+   {
+    "q": "Two animals both start as an egg. Must they have the same number of stages?",
+    "answer": "No. A mosquito has four stages, a cockroach has three.",
+    "mixups": [
+     "Yes, always.",
+     "Yes, if both are insects.",
+     "Yes, if both are small."
+    ],
+    "why": "Starting as an egg does not fix the number of stages. The mosquito has a pupa; the cockroach does not."
+   },
+   {
+    "q": "A chicken and a frog both have three stages. Do their young look alike?",
+    "answer": "No. A chick looks like a hen, a tadpole looks nothing like a frog.",
+    "mixups": [
+     "Yes, exactly alike.",
+     "Yes. A chick and a tadpole both have feathers, so they look alike.",
+     "Yes, both have tails."
+    ],
+    "why": "The same number of stages does not mean the young look alike."
+   },
+   {
+    "q": "Which of these has a pupa stage?",
+    "answer": "Mosquito",
+    "mixups": [
+     "Cockroach",
+     "Chicken",
+     "Frog"
+    ],
+    "why": "Only four-stage animals like the mosquito and butterfly have a pupa."
+   },
+   {
+    "q": "When we compare two life cycles, we look for",
+    "answer": "what is alike and what is different",
+    "mixups": [
+     "only what is alike in the two life cycles",
+     "only what is different",
+     "which animal is bigger"
+    ],
+    "why": "Comparing means finding both the likenesses and the differences."
+   },
+   {
+    "q": "The stages of a cockroach, in order, are",
+    "answer": "egg, young, adult",
+    "mixups": [
+     "egg, larva, pupa, adult",
+     "egg, tadpole, adult",
+     "young, egg, adult"
+    ],
+    "why": "A cockroach has three stages. The young looks like a small adult without wings."
+   }
+  ],
+  "scriptCautions": [
+   "A comparison answer must give the basis: the number of stages, or whether the young looks like the adult."
+  ]
+ },
+ {
+  "code": "6.1A",
+  "id": "p3-6-1a",
+  "folder": "labs/p3-6-1a/",
+  "title": "Magnet pairs",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Bar magnet pair",
+    "appLabel": "Part A",
+    "title": "Bar magnet pair",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Choose which ends face, then slide the magnets together. Try all three ways.",
+    "setUp": "Each magnet has a red end and a blue end.",
+    "predictQ": "If you turn one magnet, will they attract or repel?",
+    "predictAnswer": "It depends which ends face each other",
+    "takeaway": "Unlike poles, one red and one blue, attract. Like poles, both red or both blue, repel.",
+    "benchStep": "bar",
+    "benchPill": "🧲 Bar Magnet Pair"
+   },
+   {
+    "label": "Part (b): U-shaped pair",
+    "appLabel": "Part B",
+    "title": "U-shaped pair",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Choose which ends face, then slide the U-shaped magnets together. Try all three ways.",
+    "setUp": "Now two U-shaped magnets.",
+    "predictQ": "Will U-shaped magnets attract and repel the same way as bar magnets?",
+    "predictAnswer": "Yes, the same way",
+    "takeaway": "The shape of a magnet does not change the rule. Unlike poles attract, like poles repel.",
+    "benchStep": "horseshoe",
+    "benchPill": "🧲 U-shaped Pair"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.1A  Magnet pairs\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Attract or Repel Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.1A  Magnet pairs\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Attract or Repel Lab\" opens full-screen on that part's pill (\"🧲 Bar Magnet Pair\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-1a/index.html",
+   "name": "Attract or Repel Lab",
+   "subtitle": "Attract and repel",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧲 Bar Magnet Pair",
+    "🧲 U-shaped Pair",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Two bar magnets sit apart on the table. One end of each is red, the other blue. Choose which ends face each other, then slide them close. Do they attract, or repel?",
+  "bigIdea": "Unlike poles, one red and one blue, attract. Like poles, both red or both blue, repel. This is true whatever shape the magnet is.",
+  "safety": [],
+  "badge": {
+   "icon": "🧲",
+   "name": "Attract or Repel",
+   "line": "You predicted, tested and explained every part of Attract or Repel."
+  },
+  "spokenCode": "six point one A",
+  "narration": "Open the School Lab, experiment six point one A, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.1A",
+   "title": "Magnet pairs",
+   "part": "Part (a): Bar magnet pair",
+   "line": "School Lab › 6.1A  Magnet pairs"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "A red end faces a blue end. What happens when the magnets slide close?",
+    "answer": "They attract and stick together",
+    "mixups": [
+     "They repel and move apart from each other",
+     "Nothing happens",
+     "They spin round"
+    ],
+    "why": "Unlike poles, one red and one blue, attract."
+   },
+   {
+    "q": "Two red ends face each other. What happens?",
+    "answer": "They repel and move apart",
+    "mixups": [
+     "They attract and stick together",
+     "They always stick, whatever ends face",
+     "They melt"
+    ],
+    "why": "Like poles, both red or both blue, repel."
+   },
+   {
+    "q": "A magnet is turned round so the other end faces. Does it stop being a magnet?",
+    "answer": "No. It still attracts or repels, depending on the ends.",
+    "mixups": [
+     "Yes. Turning it round makes it stop working for good.",
+     "Yes, until it is turned back.",
+     "Only bar magnets keep working."
+    ],
+    "why": "Turning a magnet only changes which end faces. Both ends are still poles."
+   },
+   {
+    "q": "Can U-shaped magnets repel each other?",
+    "answer": "Yes, when like poles face",
+    "mixups": [
+     "No, only bar magnets repel",
+     "No, U-shaped magnets only attract",
+     "Only if they are big"
+    ],
+    "why": "The rule is the same for every shape: like poles repel."
+   },
+   {
+    "q": "Which pair of poles will attract?",
+    "answer": "Red and blue",
+    "mixups": [
+     "Red and red",
+     "Blue and blue",
+     "None of them"
+    ],
+    "why": "Unlike poles attract. Like poles repel."
+   }
+  ],
+  "scriptCautions": [
+   "The bench colours the poles red and blue and never names them. The book names a North pole and a South pole: say \"North pole\" and \"South pole\" in narration, and \"unlike poles attract, like poles repel\" (the book's words, not \"opposite\" and \"same\")."
+  ]
+ },
+ {
+  "code": "6.1B",
+  "id": "p3-6-1b",
+  "folder": "labs/p3-6-1b/",
+  "title": "Magnetic materials",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 30,
+  "listLine": "Experiment · about 30 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Test the metal objects",
+    "appLabel": "Part A",
+    "title": "Test the metal objects",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Place an object, then bring the magnet near. Test all three.",
+    "setUp": "The nail, the clip and the coin are all made of metal.",
+    "predictQ": "Which will a magnet attract: the nail, the clip, or the coin?",
+    "predictAnswer": "Only the nail and the clip",
+    "takeaway": "Not everything made of metal is magnetic. Iron and steel are. Copper is not.",
+    "benchStep": "metals",
+    "benchPill": "🔩 Test the Metal Objects"
+   },
+   {
+    "label": "Part (b): Test the everyday objects",
+    "appLabel": "Part B",
+    "title": "Test the everyday objects",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Place an object, then bring the magnet near. Test all three.",
+    "setUp": "Now some everyday objects.",
+    "predictQ": "Will the magnet attract the wood, the ruler, or the foil?",
+    "predictAnswer": "No, none of them",
+    "takeaway": "A magnet attracts only certain materials, like iron and steel. Shiny foil is not one of them.",
+    "benchStep": "others",
+    "benchPill": "📏 Test the Everyday Objects"
+   },
+   {
+    "label": "Part (c): Sort them all",
+    "appLabel": "Part C",
+    "title": "Sort them all",
+    "appEyebrow": "Part C · predict, then test it on the bench",
+    "does": "Tap an object, then tap the box it belongs in: Magnetic or Non-magnetic.",
+    "setUp": "Six objects have been tested.",
+    "predictQ": "How many of the six are magnetic?",
+    "predictAnswer": "Two",
+    "takeaway": "Magnetic materials like iron and steel are attracted. Copper, wood, plastic and foil are not.",
+    "benchStep": "sortall",
+    "benchPill": "📦 Sort Them All"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.1B  Magnetic materials\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Magnet Test Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.1B  Magnetic materials\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Magnet Test Lab\" opens full-screen on that part's pill (\"🔩 Test the Metal Objects\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-1b/index.html",
+   "name": "Magnet Test Lab",
+   "subtitle": "What does a magnet attract?",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔩 Test the Metal Objects",
+    "📏 Test the Everyday Objects",
+    "📦 Sort Them All",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A magnet sits beside a row of objects: an iron nail, a steel paper clip, a copper coin, a wooden block, a plastic ruler and some foil. Bring the magnet near each one. Which ones jump?",
+  "bigIdea": "Magnets attract magnetic materials such as iron and steel. Magnets do not attract non-magnetic materials, like copper and plastic. Being made of metal does not always mean an object is magnetic.",
+  "safety": [],
+  "badge": {
+   "icon": "📎",
+   "name": "Magnet Test",
+   "line": "You predicted, tested and explained every part of Magnet Test."
+  },
+  "spokenCode": "six point one B",
+  "narration": "Open the School Lab, experiment six point one B, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.1B",
+   "title": "Magnetic materials",
+   "part": "Part (a): Test the metal objects",
+   "line": "School Lab › 6.1B  Magnetic materials"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "Does a magnet attract anything made of metal?",
+    "answer": "No. It attracts only some metals, like iron and steel.",
+    "mixups": [
+     "Yes, every metal.",
+     "Yes, if the metal is shiny.",
+     "Yes, if the metal is heavy."
+    ],
+    "why": "The copper coin and the foil are metal, but the magnet did not attract them."
+   },
+   {
+    "q": "Why was the shiny foil not attracted?",
+    "answer": "It is not made of a magnetic material",
+    "mixups": [
+     "It was too thin for the magnet to hold",
+     "It was too shiny for the magnet to grip",
+     "The magnet was tired"
+    ],
+    "why": "Shiny does not mean magnetic. Foil is not iron or steel."
+   },
+   {
+    "q": "Can a plastic ruler become magnetic if it is painted grey?",
+    "answer": "No. Paint does not change what it is made of.",
+    "mixups": [
+     "Yes, grey paint turns it into a magnetic material.",
+     "Yes, any paint works.",
+     "Only if the paint is thick."
+    ],
+    "why": "A magnet attracts because of the material, not the colour."
+   },
+   {
+    "q": "Which object is magnetic?",
+    "answer": "An iron nail",
+    "mixups": [
+     "A copper coin",
+     "A wooden block",
+     "A plastic ruler"
+    ],
+    "why": "Iron is a magnetic material. The nail jumped to the magnet."
+   },
+   {
+    "q": "A steel paper clip shivers and then jumps to the magnet. This shows that steel is",
+    "answer": "a magnetic material",
+    "mixups": [
+     "a non-magnetic material",
+     "not a metal",
+     "made of plastic"
+    ],
+    "why": "Steel is attracted by a magnet, so steel is a magnetic material."
+   }
+  ],
+  "scriptCautions": [
+   "Book: magnetic materials include iron and steel. Aluminium and copper are metals that are not magnetic. Do not name nickel or cobalt: the syllabus says they are not required, even though Mix-up buster card 24 lists them."
+  ]
+ },
+ {
+  "code": "6.2",
+  "id": "p3-6-2",
+  "folder": "labs/p3-6-2/",
+  "title": "Magnet poles",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Test the bar magnet",
+    "appLabel": "Part A",
+    "title": "Test the bar magnet",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap a spot on the magnet, then lower and lift. Count the clips. Test all three spots.",
+    "setUp": "The bar magnet has a red end, a middle and a blue end.",
+    "predictQ": "Which part will pick up the most clips?",
+    "predictAnswer": "The two ends",
+    "takeaway": "A magnet attracts most strongly at its two ends, its poles. The middle holds almost nothing.",
+    "benchStep": "bar",
+    "benchPill": "🧲 Test the Bar Magnet"
+   },
+   {
+    "label": "Part (b): Test another shape",
+    "appLabel": "Part B",
+    "title": "Test another shape",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a spot on the U-shaped magnet, then lower and lift. Test all three spots.",
+    "setUp": "Now a U-shaped magnet.",
+    "predictQ": "Will a U-shaped magnet also hold most clips at its ends?",
+    "predictAnswer": "Yes, the same as the bar magnet",
+    "takeaway": "Every magnet attracts most strongly at its poles, whatever its shape.",
+    "benchStep": "horseshoe",
+    "benchPill": "🧲 Test Another Shape"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.2  Magnet poles\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Strongest Spot Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.2  Magnet poles\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Strongest Spot Lab\" opens full-screen on that part's pill (\"🧲 Test the Bar Magnet\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-2/index.html",
+   "name": "Strongest Spot Lab",
+   "subtitle": "Where is a magnet strongest?",
+   "introButton": "To the table →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧲 Test the Bar Magnet",
+    "🧲 Test Another Shape",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A bar magnet lies beside a pile of paper clips. Lower one spot of the magnet into the clips, lift it, and count how many cling. Which spot holds the most?",
+  "bigIdea": "A magnet attracts most strongly at its two poles. We measure this by counting the paper clips it holds. This is true for different shapes of magnet.",
+  "safety": [],
+  "badge": {
+   "icon": "📎",
+   "name": "Strongest Spot",
+   "line": "You predicted, tested and explained every part of Strongest Spot."
+  },
+  "spokenCode": "six point two",
+  "narration": "Open the School Lab, experiment six point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.2",
+   "title": "Magnet poles",
+   "part": "Part (a): Test the bar magnet",
+   "line": "School Lab › 6.2  Magnet poles"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "Where does a magnet attract most strongly?",
+    "answer": "At its two ends, the poles",
+    "mixups": [
+     "In the middle",
+     "All over, the same",
+     "Only at the red end, not the blue end"
+    ],
+    "why": "Both ends held 8 clips. The middle held only 1."
+   },
+   {
+    "q": "Does a U-shaped magnet have poles?",
+    "answer": "Yes, at its two ends",
+    "mixups": [
+     "No, only bar magnets have poles",
+     "Yes, in the middle",
+     "Only when it is warm"
+    ],
+    "why": "Every magnet has two poles, whatever its shape."
+   },
+   {
+    "q": "Why do we count the clips?",
+    "answer": "More clips means a stronger attraction at that spot",
+    "mixups": [
+     "Clips are easy to find",
+     "The number of clips does not tell us anything at all",
+     "To make the magnet heavier"
+    ],
+    "why": "The number of clips tells us how strongly that spot attracts."
+   },
+   {
+    "q": "Which spot of the bar magnet held the fewest clips?",
+    "answer": "The middle",
+    "mixups": [
+     "The red end",
+     "The blue end",
+     "All held the same"
+    ],
+    "why": "The middle held only 1 clip. Each end held 8."
+   },
+   {
+    "q": "The middle of the bar magnet held 1 clip. The ends held 8. This shows",
+    "answer": "the ends attract more strongly than the middle",
+    "mixups": [
+     "the middle is the strongest",
+     "the magnet is broken because the middle held so few",
+     "the clips were too heavy"
+    ],
+    "why": "More clips at the ends means stronger attraction at the poles."
+   }
+  ],
+  "scriptCautions": [
+   "The bench colours the poles red and blue and never names them. The book names a North pole and a South pole: say \"North pole\" and \"South pole\" in narration, and \"unlike poles attract, like poles repel\" (the book's words, not \"opposite\" and \"same\").",
+   "Every magnet has two poles, whatever its shape. Attraction is strongest at the poles."
+  ]
+ },
+ {
+  "code": "6.3A",
+  "id": "p3-6-3a",
+  "folder": "labs/p3-6-3a/",
+  "title": "The magnet cart",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Unlike poles facing",
+    "appLabel": "Part A",
+    "title": "Unlike poles facing",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Choose which ends face, then roll the cart. Watch what happens.",
+    "setUp": "The carts start apart.",
+    "predictQ": "If red faces blue, will the carts roll together or stay apart?",
+    "predictAnswer": "Roll together",
+    "takeaway": "Unlike poles attract: the carts roll together.",
+    "benchStep": "unlike",
+    "benchPill": "🚃 Unlike Poles Facing"
+   },
+   {
+    "label": "Part (b): Like poles facing",
+    "appLabel": "Part B",
+    "title": "Like poles facing",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Choose which ends face, then roll the cart. Watch the gap.",
+    "setUp": "Now turn one magnet round.",
+    "predictQ": "If both ends are red, will the carts roll together or stay apart?",
+    "predictAnswer": "Stay apart",
+    "takeaway": "Like poles repel: the carts stay apart and never touch.",
+    "benchStep": "like",
+    "benchPill": "🚃 Like Poles Facing"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.3A  The magnet cart\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Magnet Carts Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.3A  The magnet cart\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Magnet Carts Lab\" opens full-screen on that part's pill (\"🚃 Unlike Poles Facing\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-3a/index.html",
+   "name": "Magnet Carts Lab",
+   "subtitle": "Magnets on wheels",
+   "introButton": "To the track →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🚃 Unlike Poles Facing",
+    "🚃 Like Poles Facing",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "Two toy carts sit apart on a straight track. Each carries a bar magnet, red end and blue end. Turn a magnet, roll a cart, and watch: do the carts come together, or stay apart?",
+  "bigIdea": "Unlike poles attract; the carts roll together. Like poles repel; the carts stay apart. Magnets attract or repel without touching.",
+  "safety": [],
+  "badge": {
+   "icon": "🚃",
+   "name": "Magnet Carts",
+   "line": "You predicted, tested and explained every part of Magnet Carts."
+  },
+  "spokenCode": "six point three A",
+  "narration": "Open the School Lab, experiment six point three A, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.3A",
+   "title": "The magnet cart",
+   "part": "Part (a): Unlike poles facing",
+   "line": "School Lab › 6.3A  The magnet cart"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "Red faces blue. What do the carts do?",
+    "answer": "They roll together",
+    "mixups": [
+     "They stay apart",
+     "They stay still",
+     "They roll backwards"
+    ],
+    "why": "Unlike poles attract, so the carts roll together."
+   },
+   {
+    "q": "Red faces red. What do the carts do?",
+    "answer": "They stay apart",
+    "mixups": [
+     "They roll together",
+     "They always bump",
+     "They spin"
+    ],
+    "why": "Like poles repel, so the carts stay apart."
+   },
+   {
+    "q": "Do the carts need a hand to move them apart when like poles face?",
+    "answer": "No. The magnets repel without touching.",
+    "mixups": [
+     "Yes, always.",
+     "Yes, unless the track is very long and flat.",
+     "Yes, magnets cannot move carts."
+    ],
+    "why": "Magnets attract and repel without touching. No hand is needed."
+   },
+   {
+    "q": "What does repel mean?",
+    "answer": "The magnets move apart",
+    "mixups": [
+     "The magnets touch and stick",
+     "The magnets stop working",
+     "The magnets get warm"
+    ],
+    "why": "Repel means they move apart. Attract means they come together."
+   },
+   {
+    "q": "Do two magnets always roll together, whatever ends face?",
+    "answer": "No. It depends which ends face.",
+    "mixups": [
+     "Yes, always.",
+     "Yes, if they are both on little carts.",
+     "Yes, if they are close."
+    ],
+    "why": "Unlike poles attract and like poles repel. It depends which ends face."
+   }
+  ],
+  "scriptCautions": [
+   "The bench colours the poles red and blue and never names them. The book names a North pole and a South pole: say \"North pole\" and \"South pole\" in narration, and \"unlike poles attract, like poles repel\" (the book's words, not \"opposite\" and \"same\")."
+  ]
+ },
+ {
+  "code": "6.3B",
+  "id": "p3-6-3b",
+  "folder": "labs/p3-6-3b/",
+  "title": "Ring magnets",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Stack the rings",
+    "appLabel": "Part A",
+    "title": "Stack the rings",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Choose which sides meet, then lower the top ring. Try all three ways.",
+    "setUp": "The bottom ring is on the rod. Its top side faces up.",
+    "predictQ": "If blue meets red, will the rings sit flat or float apart?",
+    "predictAnswer": "Sit flat together",
+    "takeaway": "Unlike poles attract and the rings sit flat. Like poles repel and the top ring floats with a gap.",
+    "benchStep": "stack",
+    "benchPill": "🔵 Stack the Rings"
+   },
+   {
+    "label": "Part (b): Find the missing pole",
+    "appLabel": "Part B",
+    "title": "Find the missing pole",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap a puzzle card, look at the stand, then tap the colour of the hidden side.",
+    "setUp": "One ring has its bottom side painted over. You cannot see its colour.",
+    "predictQ": "A ring floats with a gap above a red side. Is its hidden side red or blue?",
+    "predictAnswer": "Red",
+    "takeaway": "A gap means the same colour poles are facing each other. Flat means they are different.",
+    "benchStep": "find",
+    "benchPill": "🔴 Find the Missing Pole"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.3B  Ring magnets\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Ring Magnets Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.3B  Ring magnets\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Ring Magnets Lab\" opens full-screen on that part's pill (\"🔵 Stack the Rings\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-3b/index.html",
+   "name": "Ring Magnets Lab",
+   "subtitle": "Floating rings",
+   "introButton": "To the stand →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔵 Stack the Rings",
+    "🔴 Find the Missing Pole",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "An upright stand holds a rod. Two ring magnets wait beside it, one side red and one side blue. Slide one ring on, then lower the other. Does it sit flat, or float with a gap?",
+  "bigIdea": "Like poles repel and leave a gap. Unlike poles attract and sit flat. A gap tells us the hidden pole's colour: it is the same as the one below.",
+  "safety": [],
+  "badge": {
+   "icon": "🔵",
+   "name": "Ring Magnets",
+   "line": "You predicted, tested and explained every part of Ring Magnets."
+  },
+  "spokenCode": "six point three B",
+  "narration": "Open the School Lab, experiment six point three B, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.3B",
+   "title": "Ring magnets",
+   "part": "Part (a): Stack the rings",
+   "line": "School Lab › 6.3B  Ring magnets"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "Two ring magnets float apart with a gap. The sides facing each other are",
+    "answer": "the same colour",
+    "mixups": [
+     "different colours",
+     "both painted over",
+     "not magnets"
+    ],
+    "why": "A gap means like poles are facing. Like poles repel."
+   },
+   {
+    "q": "A ring sits flat on another ring. The sides facing each other are",
+    "answer": "different colours",
+    "mixups": [
+     "both painted the same colour",
+     "both red",
+     "both blue"
+    ],
+    "why": "Flat means unlike poles are facing. Unlike poles attract."
+   },
+   {
+    "q": "A ring floats above another ring. Is the magnet broken?",
+    "answer": "No. Like poles are repelling, which is normal.",
+    "mixups": [
+     "Yes, floating means broken.",
+     "Yes, rings should always sit flat on each other.",
+     "Only if the gap is big."
+    ],
+    "why": "Floating is what like poles do. The magnets are working."
+   },
+   {
+    "q": "Will any two ring magnets always float apart?",
+    "answer": "No. It depends which sides face.",
+    "mixups": [
+     "Yes, always.",
+     "Yes, if they are exactly the same size.",
+     "No, rings never float."
+    ],
+    "why": "Turn one ring over and they sit flat. It depends which sides face."
+   },
+   {
+    "q": "A ring floats above a blue side. Its hidden side must be",
+    "answer": "blue",
+    "mixups": [
+     "red",
+     "green",
+     "impossible to tell"
+    ],
+    "why": "A gap means the same colour is facing. Blue below, blue hidden."
+   }
+  ],
+  "scriptCautions": [
+   "The bench colours the poles red and blue and never names them. The book names a North pole and a South pole: say \"North pole\" and \"South pole\" in narration, and \"unlike poles attract, like poles repel\" (the book's words, not \"opposite\" and \"same\").",
+   "Ring magnets float because like poles repel."
+  ]
+ },
+ {
+  "code": "6.3C",
+  "id": "p3-6-3c",
+  "folder": "labs/p3-6-3c/",
+  "title": "Magnet or not?",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Test the objects",
+    "appLabel": "Part A",
+    "title": "Test the objects",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap an object and a pole, then bring the magnet near. Do all six tests.",
+    "setUp": "Object A is attracted to the red end.",
+    "predictQ": "Which result at the blue end would show that A is a magnet?",
+    "predictAnswer": "It is pushed away",
+    "takeaway": "A is attracted by one pole and repelled by the other: a magnet. B is attracted by both: a magnetic material. C by neither: non-magnetic.",
+    "benchStep": "test",
+    "benchPill": "🔍 Test the Objects"
+   },
+   {
+    "label": "Part (b): Sort the objects",
+    "appLabel": "Part B",
+    "title": "Sort the objects",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Tap an object, then tap its box: Magnet, Magnetic material, or Non-magnetic material.",
+    "setUp": "Object A was attracted by the red end and repelled by the blue end.",
+    "predictQ": "From the tests, what is object A?",
+    "predictAnswer": "A magnet",
+    "takeaway": "Testing both poles tells us if something is a magnet. Only a magnet can be repelled.",
+    "benchStep": "classify",
+    "benchPill": "📋 Sort the Objects"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.3C  Magnet or not?\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Magnet or Not Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.3C  Magnet or not?\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Magnet or Not Lab\" opens full-screen on that part's pill (\"🔍 Test the Objects\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-3c/index.html",
+   "name": "Magnet or Not Lab",
+   "subtitle": "Test with both poles",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔍 Test the Objects",
+    "📋 Sort the Objects",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A bar magnet with its red and blue ends sits beside three closed casings marked A, B and C. You cannot see inside. Bring each pole near each one. Which is a magnet, which is magnetic, and which is not?",
+  "bigIdea": "Attracted by one pole and repelled by the other: it is a magnet. Attracted by both poles: it is a magnetic material. Attracted by neither: it is non-magnetic.",
+  "safety": [],
+  "badge": {
+   "icon": "❓",
+   "name": "Magnet or Not",
+   "line": "You predicted, tested and explained every part of Magnet or Not."
+  },
+  "spokenCode": "six point three C",
+  "narration": "Open the School Lab, experiment six point three C, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.3C",
+   "title": "Magnet or not?",
+   "part": "Part (a): Test the objects",
+   "line": "School Lab › 6.3C  Magnet or not?"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "An object is attracted by one pole and repelled by the other. It is",
+    "answer": "a magnet",
+    "mixups": [
+     "a magnetic material",
+     "a non-magnetic material",
+     "broken"
+    ],
+    "why": "Only a magnet can be repelled, because it has poles of its own."
+   },
+   {
+    "q": "An object is attracted by both poles. It is",
+    "answer": "a magnetic material",
+    "mixups": [
+     "a magnet",
+     "a non-magnetic material",
+     "a plastic"
+    ],
+    "why": "A magnetic material like iron is attracted by either pole and never repelled."
+   },
+   {
+    "q": "Must any object attracted to a magnet be a magnet itself?",
+    "answer": "No. An iron nail is attracted but is not a magnet.",
+    "mixups": [
+     "Yes, always.",
+     "Yes, if it is shiny and made of metal, it must be a magnet.",
+     "Yes, if it jumps."
+    ],
+    "why": "A magnetic material is attracted too. To be sure, test the other pole: a magnet is repelled."
+   },
+   {
+    "q": "An object is repelled by one pole. Could it be non-magnetic?",
+    "answer": "No. Only a magnet can be repelled.",
+    "mixups": [
+     "Yes, non-magnetic things are repelled.",
+     "Yes, if it is light.",
+     "Yes, if it is plastic."
+    ],
+    "why": "A non-magnetic material does nothing near a magnet. Repelling means it is a magnet."
+   },
+   {
+    "q": "Why do we test with both poles?",
+    "answer": "To tell a magnet from a magnetic material",
+    "mixups": [
+     "Because one pole is stronger",
+     "To make the magnet warm enough to work well",
+     "Because red is easier to see"
+    ],
+    "why": "Both attract a magnetic material. Only a magnet is repelled by one of them."
+   }
+  ],
+  "scriptCautions": [
+   "Only repulsion proves that an object is a magnet. Magnets do not repel non-magnetic materials; they just do not attract them."
+  ]
+ },
+ {
+  "code": "6.4",
+  "id": "p3-6-4",
+  "folder": "labs/p3-6-4/",
+  "title": "A magnet at rest",
+  "topic": "Properties of Magnets",
+  "chapterNo": 6,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 30,
+  "listLine": "Experiment · about 30 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Hang the magnet",
+    "appLabel": "Part A",
+    "title": "Hang the magnet",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap the hanging magnet, let it go, then nudge it. Watch where the red end stops each time.",
+    "setUp": "The magnet hangs on a string, held still.",
+    "predictQ": "If this hanging magnet turns freely, which way will it point?",
+    "predictAnswer": "The same way every time",
+    "takeaway": "A magnet free to turn always settles pointing the same way: north–south.",
+    "benchStep": "hang",
+    "benchPill": "🧵 Hang the Magnet"
+   },
+   {
+    "label": "Part (b): Float the magnet",
+    "appLabel": "Part B",
+    "title": "Float the magnet",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Float the magnet on the board, nudge it, and compare with the hanging magnet.",
+    "setUp": "The hanging magnet settled north–south.",
+    "predictQ": "Will a floating magnet point the same way as the hanging one?",
+    "predictAnswer": "Yes, the same way",
+    "takeaway": "A floating magnet settles pointing the same way as a hanging one: north–south.",
+    "benchStep": "float",
+    "benchPill": "🌊 Float the Magnet"
+   },
+   {
+    "label": "Part (c): Compare with a compass",
+    "appLabel": "Part C",
+    "title": "Compare with a compass",
+    "appEyebrow": "Part C · predict, then test it on the bench",
+    "does": "Place the compass and watch its needle. Compare with both magnets.",
+    "setUp": "A compass has a thin needle that turns freely.",
+    "predictQ": "Will the compass needle point the same way as the magnets?",
+    "predictAnswer": "Yes",
+    "takeaway": "A compass needle is a small magnet free to turn. It settles north–south, like any free magnet.",
+    "benchStep": "compare",
+    "benchPill": "🧭 Compare with a Compass"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 6 \"Properties of Magnets\" → \"6.4  A magnet at rest\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Magnet at Rest Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 6\" (Properties of Magnets), tap \"6.4  A magnet at rest\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Magnet at Rest Lab\" opens full-screen on that part's pill (\"🧵 Hang the Magnet\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-6-4/index.html",
+   "name": "Magnet at Rest Lab",
+   "subtitle": "Which way does a free magnet point?",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧵 Hang the Magnet",
+    "🌊 Float the Magnet",
+    "🧭 Compare with a Compass",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A stand holds a bar magnet tied on a string. A basin of water and a small foam board wait nearby, and a compass sits in its box. Let each magnet turn freely. Which way does it point when it stops?",
+  "bigIdea": "A magnet free to turn always settles the same way. This is true whether it hangs, floats, or sits in a compass. It always points north to south.",
+  "safety": [],
+  "badge": {
+   "icon": "🧭",
+   "name": "Magnet at Rest",
+   "line": "You predicted, tested and explained every part of Magnet at Rest."
+  },
+  "spokenCode": "six point four",
+  "narration": "Open the School Lab, experiment six point four, and press, Let's test it now!",
+  "labcard": {
+   "code": "6.4",
+   "title": "A magnet at rest",
+   "part": "Part (a): Hang the magnet",
+   "line": "School Lab › 6.4  A magnet at rest"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "A hanging magnet is nudged and settles again. Which way does it point?",
+    "answer": "The same way as before",
+    "mixups": [
+     "A different way each time",
+     "Straight up",
+     "Wherever it was pushed"
+    ],
+    "why": "A magnet free to turn always settles the same way: north–south."
+   },
+   {
+    "q": "Does only a bar magnet settle pointing one way?",
+    "answer": "No. Any magnet free to turn does.",
+    "mixups": [
+     "Yes, only long bar magnets settle like this.",
+     "Yes, only U-shaped magnets.",
+     "No magnet does."
+    ],
+    "why": "Hanging, floating or in a compass: any free magnet settles north–south."
+   },
+   {
+    "q": "A compass needle is",
+    "answer": "a small magnet free to turn",
+    "mixups": [
+     "a piece of plastic",
+     "a needle for sewing",
+     "a magnet that is stuck and never moves"
+    ],
+    "why": "The needle is a tiny magnet. That is why it settles north–south."
+   },
+   {
+    "q": "Does a compass needle point wherever it is pushed?",
+    "answer": "No. It swings back and settles north–south.",
+    "mixups": [
+     "Yes, it stays pointing wherever you push it.",
+     "Yes, if you push gently.",
+     "It stops working if pushed."
+    ],
+    "why": "Push it and it swings back. A free magnet always settles the same way."
+   },
+   {
+    "q": "A magnet floats on a board in water. When it stops turning, it points",
+    "answer": "north–south, like a hanging magnet",
+    "mixups": [
+     "towards the nearest side of the basin",
+     "a different way every time",
+     "nowhere, it keeps spinning"
+    ],
+    "why": "Floating lets the magnet turn freely, so it settles north–south."
+   }
+  ],
+  "scriptCautions": [
+   "Book wording: a freely suspended magnet comes to rest in the North-South direction, because the Earth behaves like a magnet. The bench says \"Red end north\"."
+  ]
+ },
+ {
+  "code": "7.1A",
+  "id": "p3-7-1a",
+  "folder": "labs/p3-7-1a/",
+  "title": "Make a magnet by stroking",
+  "topic": "Making and Using Magnets",
+  "chapterNo": 7,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Make a magnet",
+    "appLabel": "Part A",
+    "title": "Make a magnet",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Choose a thing from the tray, then stroke it with the magnet, the same way each time.",
+    "setUp": "Three things wait on the tray.",
+    "predictQ": "Which of these can become a magnet when we stroke it?",
+    "predictAnswer": "Iron nail",
+    "takeaway": "A magnet can only be made from a magnetic material, like iron. Copper and wood cannot.",
+    "benchStep": "stroke",
+    "benchPill": "🧲 Make a Magnet"
+   },
+   {
+    "label": "Part (b): Count the clips",
+    "appLabel": "Part B",
+    "title": "Count the clips",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Choose how many strokes the nail has had, then dip it in the clips. Try all four.",
+    "setUp": "The nail can be stroked more, or less.",
+    "predictQ": "If we stroke the nail more, will it pick up more clips?",
+    "predictAnswer": "More clips",
+    "takeaway": "The more strokes, the stronger the magnet, up to a point. 40 strokes was only a little better than 30.",
+    "benchStep": "test",
+    "benchPill": "📎 Count the Clips"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 7 \"Making and Using Magnets\" → \"7.1A  Make a magnet by stroking\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Make a Magnet Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 7\" (Making and Using Magnets), tap \"7.1A  Make a magnet by stroking\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Make a Magnet Lab\" opens full-screen on that part's pill (\"🧲 Make a Magnet\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-7-1a/index.html",
+   "name": "Make a Magnet Lab",
+   "subtitle": "Stroke a nail",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧲 Make a Magnet",
+    "📎 Count the Clips",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A tray holds an iron nail, a copper rod and a wooden peg. A bar magnet and a dish of paper clips sit beside it. Stroke one of them with the magnet, the same way every time. Can you make a new magnet?",
+  "bigIdea": "A magnet can be made only from a magnetic material, like an iron nail. Stroke it with one pole, the same way each time, lifting away after every stroke. More strokes make a stronger magnet, up to a point.",
+  "safety": [],
+  "badge": {
+   "icon": "🧲",
+   "name": "Make a Magnet",
+   "line": "You predicted, tested and explained every part of Make a Magnet."
+  },
+  "spokenCode": "seven point one A",
+  "narration": "Open the School Lab, experiment seven point one A, and press, Let's test it now!",
+  "labcard": {
+   "code": "7.1A",
+   "title": "Make a magnet by stroking",
+   "part": "Part (a): Make a magnet",
+   "line": "School Lab › 7.1A  Make a magnet by stroking"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "Why does an iron nail become a magnet when stroked, but a copper rod does not?",
+    "answer": "Iron is a magnetic material and copper is not",
+    "mixups": [
+     "Copper is too shiny and too soft to become a magnet",
+     "The copper rod was stroked too fast",
+     "Copper is too heavy"
+    ],
+    "why": "Only a magnetic material like iron or steel can be made into a magnet."
+   },
+   {
+    "q": "How should we stroke the nail to make it a magnet?",
+    "answer": "With one pole, the same way each time, lifting away after each stroke",
+    "mixups": [
+     "Any way at all, direction does not matter",
+     "Rubbing it back and forth quickly, keeping the magnet on the nail all the time",
+     "With both poles at once"
+    ],
+    "why": "One pole, one direction, lift away each time. Back and forth undoes the work."
+   },
+   {
+    "q": "A nail is stroked 40 times instead of 10. What happens to the number of clips it attracts?",
+    "answer": "It attracts more clips",
+    "mixups": [
+     "It attracts the same number",
+     "It attracts fewer clips",
+     "It stops attracting clips"
+    ],
+    "why": "More strokes make a stronger magnet, up to a point."
+   },
+   {
+    "q": "Which of these will become a magnet when stroked with a bar magnet?",
+    "answer": "A steel paper clip",
+    "mixups": [
+     "A plastic ruler",
+     "A wooden peg",
+     "A copper coin"
+    ],
+    "why": "Steel is a magnetic material. Plastic, wood and copper are not."
+   },
+   {
+    "q": "The nail held 2 clips after 10 strokes and 7 after 40. What does this show?",
+    "answer": "More strokes make a stronger magnet",
+    "mixups": [
+     "Fewer strokes make a stronger magnet",
+     "Strokes make no difference",
+     "The nail was a magnet from the start"
+    ],
+    "why": "More strokes gave more clips, so the magnet was stronger."
+   }
+  ],
+  "scriptCautions": [
+   "Book terms: \"stroke method\" (stroke with one pole, in the same direction, with the same pole each time); the object is then \"magnetised\". More strokes make a stronger magnet."
+  ]
+ },
+ {
+  "code": "7.1B",
+  "id": "p3-7-1b",
+  "folder": "labs/p3-7-1b/",
+  "title": "Make a magnet with electricity",
+  "topic": "Making and Using Magnets",
+  "chapterNo": 7,
+  "theme": "Interactions",
+  "kind": "Experiment",
+  "minutes": 25,
+  "listLine": "Experiment · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Wind the coil",
+    "appLabel": "Part A",
+    "title": "Wind the coil",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Tap the loose wire end, then connect the battery. Disconnect and connect again. Watch the clips.",
+    "setUp": "The nail has a coil of wire, but nothing is connected yet.",
+    "predictQ": "Will the iron nail attract paper clips before we connect the battery?",
+    "predictAnswer": "No, only after electricity flows",
+    "takeaway": "A magnet made with electricity works only while electricity flows. Switch it off and the clips drop.",
+    "benchStep": "coil",
+    "benchPill": "🔌 Wind the Coil"
+   },
+   {
+    "label": "Part (b): Test the strength",
+    "appLabel": "Part B",
+    "title": "Test the strength",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Choose how many turns of wire, then connect the battery and count the clips. Try all three.",
+    "setUp": "The coil can have more or fewer turns of wire.",
+    "predictQ": "If we add more turns of wire, will it attract more clips?",
+    "predictAnswer": "More clips",
+    "takeaway": "More turns of wire make a stronger magnet made with electricity: 3, 6, then 9 clips.",
+    "benchStep": "test",
+    "benchPill": "🔋 Test the Strength"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 7 \"Making and Using Magnets\" → \"7.1B  Make a magnet with electricity\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Electric Magnet Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 7\" (Making and Using Magnets), tap \"7.1B  Make a magnet with electricity\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Electric Magnet Lab\" opens full-screen on that part's pill (\"🔌 Wind the Coil\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-7-1b/index.html",
+   "name": "Electric Magnet Lab",
+   "subtitle": "A magnet made with electricity",
+   "introButton": "To the bench →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🔌 Wind the Coil",
+    "🔋 Test the Strength",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "An iron nail is wound with turns of wire. Its two wire ends hang loose. A battery and a dish of clips wait beside it. Connect the wire to the battery and watch the clips.",
+  "bigIdea": "A magnet can be made with electricity: a coil of wire round an iron nail. It works only while electricity flows, so it can be switched on and off. More turns of wire make it stronger.",
+  "safety": [
+   "Use only a small battery, and disconnect it after each test so the wire does not get hot."
+  ],
+  "badge": {
+   "icon": "🔋",
+   "name": "Electric Magnet",
+   "line": "You predicted, tested and explained every part of Electric Magnet."
+  },
+  "spokenCode": "seven point one B",
+  "narration": "Open the School Lab, experiment seven point one B, and press, Let's test it now!",
+  "labcard": {
+   "code": "7.1B",
+   "title": "Make a magnet with electricity",
+   "part": "Part (a): Wind the coil",
+   "line": "School Lab › 7.1B  Make a magnet with electricity"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "When is the nail a magnet in this experiment?",
+    "answer": "Only while electricity flows through the wire",
+    "mixups": [
+     "All the time, even before the battery is connected",
+     "Only after it is stroked with a bar magnet",
+     "Only at night"
+    ],
+    "why": "Connect the battery and the clips cling. Disconnect it and they drop."
+   },
+   {
+    "q": "What happens when the battery is disconnected?",
+    "answer": "The nail stops being a magnet and the clips drop away",
+    "mixups": [
+     "The nail stays a magnet forever",
+     "The nail becomes a stronger magnet and holds more clips",
+     "The clips stick harder"
+    ],
+    "why": "No electricity, no magnet. The clips drop away."
+   },
+   {
+    "q": "A nail is wound with 30 turns of wire instead of 10, using the same battery. What happens to the number of clips it attracts?",
+    "answer": "It attracts more clips",
+    "mixups": [
+     "It attracts the same number",
+     "It attracts fewer clips",
+     "It attracts none"
+    ],
+    "why": "More turns of wire make a stronger magnet made with electricity."
+   },
+   {
+    "q": "Why is a magnet made with electricity useful in a crane that lifts scrap metal?",
+    "answer": "It can be switched off to drop the metal where wanted",
+    "mixups": [
+     "It never needs a battery or any wire to work well",
+     "It works even without wire",
+     "It is lighter than a bar magnet"
+    ],
+    "why": "Switch it on to lift, off to drop. A bar magnet cannot be switched off."
+   },
+   {
+    "q": "What do we coil the wire around to make this kind of magnet?",
+    "answer": "An iron nail",
+    "mixups": [
+     "A wooden peg",
+     "A plastic rod",
+     "A copper coin"
+    ],
+    "why": "Iron is a magnetic material. Wood, plastic and copper are not."
+   }
+  ],
+  "scriptCautions": [
+   "The bench says \"a magnet made with electricity\". The book's terms are \"electrical method\" and \"electromagnet\". The book also makes it stronger with more batteries, which the bench does not show.",
+   "Keep the book's safety line: do not leave it connected for too long, and never connect it to the mains supply."
+  ]
+ },
+ {
+  "code": "7.2",
+  "id": "p3-7-2",
+  "folder": "labs/p3-7-2/",
+  "title": "Create a toy",
+  "topic": "Making and Using Magnets",
+  "chapterNo": 7,
+  "theme": "Interactions",
+  "kind": "Make it",
+  "minutes": 25,
+  "listLine": "Make it · about 25 minutes · runs in 3D",
+  "status": "review",
+  "visibleToPupils": false,
+  "visibility": "In review: shown only in Admin or Adult mode, with an \"In review\" badge. A pupil cannot see it until the teacher signs it off (status \"ready\").",
+  "parts": [
+   {
+    "label": "Part (a): Choose and place the magnets",
+    "appLabel": "Part A",
+    "title": "Choose and place the magnets",
+    "appEyebrow": "Part A · predict, then test it on the bench",
+    "does": "Try all four ways the poles can face. Find the two that bring the cart to the flag, and the two that push it away.",
+    "setUp": "The cart must reach the flag. The wand waits near the flag.",
+    "predictQ": "To bring the cart to the flag, should the wand attract or repel it?",
+    "predictAnswer": "Attract",
+    "takeaway": "Unlike poles (red and blue) attract and bring the cart. Like poles (red and red, blue and blue) repel and push it away. We choose on purpose.",
+    "benchStep": "build",
+    "benchPill": "🧲 Choose and Place the Magnets"
+   },
+   {
+    "label": "Part (b): Test and improve",
+    "appLabel": "Part B",
+    "title": "Test and improve",
+    "appEyebrow": "Part B · predict, then test it on the bench",
+    "does": "Test with the wand far, then move it closer one step at a time. Read the distance each time.",
+    "setUp": "The poles are right. Now the wand's distance matters.",
+    "predictQ": "Will the cart reach the flag on the very first try?",
+    "predictAnswer": "No, it will likely need a change",
+    "takeaway": "We test a toy, then change one thing at a time. Each attempt shows if the change helped.",
+    "benchStep": "test",
+    "benchPill": "🔍 Test and Improve"
+   }
+  ],
+  "startButton": "Let's test it now!",
+  "navPath": "TheOneApp → bottom bar \"School Lab\" (#nav-lab) → lab.html \"Every experiment in the books.\" → \"Primary 3\" folder → Chapter 7 \"Making and Using Magnets\" → \"7.2  Create a toy\" → Briefing → Part A (or the part named) → tap a Predict answer → \"Let's test it now!\" → 3D bench \"Magnet Toy Lab\" [admin/adult mode only until signed off]",
+  "navSteps": [
+   "Open TheOneApp (the Questions screen).",
+   "Tap \"School Lab\" in the bottom bar (button #nav-lab). On a wide screen, the lab building's door in the scenery opens it too.",
+   "If the page asks, sign in as a member (\"Members sign in here.\").",
+   "School Lab page (lab.html, heading \"Every experiment in the books.\"): the \"Primary 3\" folder opens by itself while P3 has a ready experiment. If it is folded, tap \"Primary 3\".",
+   "Under \"Chapter 7\" (Making and Using Magnets), tap \"7.2  Create a toy\".",
+   "Briefing screen, then the part screen (\"Part A · predict, then test it on the bench\").",
+   "Tap a Predict answer. \"Let's test it now!\" lights up: press it.",
+   "The 3D bench \"Magnet Toy Lab\" opens full-screen on that part's pill (\"🧲 Choose and Place the Magnets\"). \"← Back to the steps\" returns."
+  ],
+  "bench": {
+   "page": "labs/p3-7-2/index.html",
+   "name": "Magnet Toy Lab",
+   "subtitle": "Build it, test it, improve it",
+   "introButton": "To the track →",
+   "pills": [
+    "Intro",
+    "🧠 Before I Start",
+    "🧲 Choose and Place the Magnets",
+    "🔍 Test and Improve",
+    "🏆 Challenge",
+    "Wrap-up"
+   ]
+  },
+  "aim": "A small cart sits on a track with a flag at the far end. A hand-held wand holds a magnet. The cart has a magnet too, red end and blue end. Choose the poles, test it, then change one thing to make it reach the flag.",
+  "bigIdea": "We choose which poles face each other on purpose: unlike poles attract, like poles repel. We test a toy, then change one thing at a time. Comparing attempts shows whether a change really improved it.",
+  "safety": [],
+  "badge": {
+   "icon": "🚃",
+   "name": "Magnet Toy",
+   "line": "You predicted, tested and explained every part of Magnet Toy."
+  },
+  "spokenCode": "seven point two",
+  "narration": "Open the School Lab, experiment seven point two, and press, Let's test it now!",
+  "labcard": {
+   "code": "7.2",
+   "title": "Create a toy",
+   "part": "Part (a): Choose and place the magnets",
+   "line": "School Lab › 7.2  Create a toy"
+  },
+  "mindmap": {
+   "id": "magnets",
+   "railName": "Magnets",
+   "railTag": "P3",
+   "railTheme": "Interactions",
+   "makerOption": "Magnets (P3)",
+   "spokenPick": "Magnets"
+  },
+  "challenge": [
+   {
+    "q": "Why do we choose a magnet's pole on purpose when building a toy?",
+    "answer": "To make the toy attract or repel as we planned",
+    "mixups": [
+     "To make the magnet look nicer",
+     "So that the toy can use more magnets than before",
+     "Because red is the strong end"
+    ],
+    "why": "Which poles face decides attract or repel. We choose it to fit the plan."
+   },
+   {
+    "q": "Two magnets move apart when they face each other. What poles are facing?",
+    "answer": "Like poles, such as red facing red",
+    "mixups": [
+     "Unlike poles, such as red facing blue",
+     "No poles at all",
+     "One pole only"
+    ],
+    "why": "Like poles repel. Unlike poles attract."
+   },
+   {
+    "q": "A toy cart will not move toward the wand. What could improve it?",
+    "answer": "Flip a magnet's pole, or move the wand closer",
+    "mixups": [
+     "Paint the cart a new colour",
+     "Swap the magnet for a plastic part",
+     "Add a much heavier flag at the end of the track"
+    ],
+    "why": "Wrong poles, or too far away. Change one of those and test again."
+   },
+   {
+    "q": "Why do we test a toy after building it?",
+    "answer": "To find out if it really works the way we planned",
+    "mixups": [
+     "To make it look finished",
+     "Testing is only needed if the toy looks wrong at first",
+     "To use up the battery"
+    ],
+    "why": "A test shows what really happens. Then we can improve it."
+   },
+   {
+    "q": "Which of these shows a toy was really improved?",
+    "answer": "Comparing how it worked before and after one change",
+    "mixups": [
+     "Saying that it looks a lot better now than it did before",
+     "Guessing that it will work",
+     "Changing three things at once"
+    ],
+    "why": "10 cm, then 25, then 40: the attempts show the change helped."
+   }
+  ],
+  "scriptCautions": [
+   "Change one thing at a time, then compare before and after (a fair test)."
+  ]
+ }
+]

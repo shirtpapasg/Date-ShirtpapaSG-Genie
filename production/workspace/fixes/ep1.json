@@ -1,0 +1,122 @@
+[
+ [
+  "[\"ROOTS: hold tree + take in water\", \"#6f4518\", 400, 760], [\"STEM: carries water + holds tree up\", \"#8b5e34\", 1100, 520], [\"LEAVES: make food\", \"#38b000\", 1120, 200]]",
+  "[\"ROOTS: hold tree + take in water\", \"#6f4518\", 400, 880], [\"STEM: carries water + holds tree up\", \"#8b5e34\", 1150, 520], [\"LEAVES: make food\", \"#38b000\", 1330, 200]]"
+ ],
+ [
+  "popAt(s.labs[0].c, 400, 760, t",
+  "popAt(s.labs[0].c, 400, 880, t"
+ ],
+ [
+  "popAt(s.labs[1].c, 1110, 520, t",
+  "popAt(s.labs[1].c, 1150, 520, t"
+ ],
+ [
+  "popAt(s.labs[2].c, 1120, 200, t",
+  "popAt(s.labs[2].c, 1330, 200, t"
+ ],
+ [
+  "popAt(g, [560, 760, 960][i], 120, t, k)",
+  "popAt(g, [560, 760, 960][i], 96, t, k)"
+ ],
+ [
+  "tx(s.c1, {x: 0, y: 190, \"text-anchor\": \"middle\", \"font-size\": 30, \"font-weight\": 600, fill: INK}, \"trains · tracks · stations · power\");",
+  "tx(s.c1, {x: 0, y: 205, \"text-anchor\": \"middle\", \"font-size\": 30, \"font-weight\": 600, fill: INK}, \"trains · tracks · stations · power\");"
+ ],
+ [
+  "const pos = [[0, 150, \"GK\"], [-160, 60, \"D\"], [0, 60, \"D\"], [160, 60, \"D\"], [-110, -60, \"S\"], [110, -60, \"S\"]];",
+  "const pos = [[0, 100, \"GK\"], [-160, 15, \"D\"], [0, 15, \"D\"], [160, 15, \"D\"], [-110, -90, \"S\"], [110, -90, \"S\"]];"
+ ],
+ [
+  "s.slow = [s.c1, s.c2].map(c => { const t2 = tx(c, {x: 0, y: 150,",
+  "s.slow = [s.c1, s.c2].map((c, ci) => { const t2 = tx(c, {x: 0, y: ci ? 205 : 140,"
+ ],
+ [
+  "fill: \"#c77dff\"",
+  "fill: \"#e0707f\""
+ ],
+ [
+  "\"#e0aaff\"",
+  "\"#f4a3b4\""
+ ],
+ [
+  "\"DIGESTIVE SYSTEM\", 1140, 600, \"#9d4edd\"]",
+  "\"DIGESTIVE SYSTEM\", 1140, 600, \"#9b2c45\"]"
+ ],
+ [
+  "const cards = [[\"A\", \"⛓️\", \"CHAIN\"], [\"B\", \"🦶\", \"PEDAL\"], [\"C\", \"\", \"SPOKES\"], [\"D\", \"🔔\", \"BELL\"]];",
+  "const cards = [[\"A\", \"⛓️\", \"CHAIN\"], [\"B\", \"\", \"PEDAL\"], [\"C\", \"\", \"SPOKES\"], [\"D\", \"🔔\", \"BELL\"]];"
+ ],
+ [
+  "if (e) emo(g, 0, -25, 120, e); else {",
+  "if (e) emo(g, 0, -25, 120, e); else if (n === \"PEDAL\") { const pg = el(\"g\", {transform: \"translate(0 -25)\"}, g); el(\"circle\", {cx: -30, cy: 25, r: 40, fill: \"none\", stroke: \"#6c757d\", \"stroke-width\": 8, \"stroke-dasharray\": \"8 5\"}, pg); el(\"line\", {x1: -30, y1: 25, x2: 28, y2: -22, stroke: \"#2b2d42\", \"stroke-width\": 14, \"stroke-linecap\": \"round\"}, pg); el(\"circle\", {cx: -30, cy: 25, r: 14, fill: \"#adb5bd\", stroke: INK, \"stroke-width\": 4}, pg); el(\"rect\", {x: -22, y: -40, width: 100, height: 36, rx: 8, fill: \"#06d6a0\", stroke: INK, \"stroke-width\": 5}, pg); for (let k = 0; k < 4; k++) el(\"line\", {x1: -4 + k * 22, y1: -34, x2: -4 + k * 22, y2: -10, stroke: INK, \"stroke-width\": 3}, pg); } else {"
+ ],
+ [
+  "set(s.mini, \"x\", lerp(260, 1260, k)); set(s.mini, \"y\", 690 - Math.sin(k * Math.PI) * 60 - 30);",
+  "set(s.mini, \"x\", lerp(260, 1260, k)); set(s.mini, \"y\", 690 - Math.sin(k * Math.PI) * 60 - 30); tf(s.mini, `translate(${2 * lerp(260, 1260, k)} 0) scale(-1 1)`);"
+ ],
+ [
+  "const pg = el(\"g\", {transform: \"translate(0 -25)\"}, g);",
+  "const pg = el(\"g\", {transform: \"translate(-22 -20)\"}, g);"
+ ],
+ [
+  "const bx = 760 + go * 380, by = 440;",
+  "const bx = 760 + go * 380, by = 400;"
+ ],
+ [
+  "tf(s.bk.g, `translate(${bx} ${by})`);",
+  "tf(s.bk.g, `translate(${bx} ${by}) scale(1.2)`);"
+ ],
+ [
+  "const ax = bx + an[0], ay = by + an[1];",
+  "const ax = bx + an[0] * 1.2, ay = by + an[1] * 1.2;"
+ ],
+ [
+  "tf(s.foot, `translate(${bx - 10 + Math.cos(spin * 2.4) * 40} ${by + 120 + Math.sin(spin * 2.4) * 40})`);",
+  "tf(s.foot, `translate(${bx - 12 + Math.cos(spin * 2.4) * 48} ${by + 144 + Math.sin(spin * 2.4) * 48})`);"
+ ],
+ [
+  "const parts = [[\"Pedals\", \"#06d6a0\", 640, 742], [\"Chain\", \"#6c757d\", 380, 742], [\"Wheels\", \"#2b2d42\", 300, 330], [\"Seat\", \"#3a0ca3\", 520, 190], [\"Handlebars\", \"#ffbe0b\", 1120, 175], [\"Brakes\", \"#e63946\", 1250, 330], [\"Bell\", \"#ffd60a\", 880, 160]];",
+  "const parts = [[\"Pedals\", \"#06d6a0\", 720, 800], [\"Chain\", \"#6c757d\", 400, 800], [\"Wheels\", \"#2b2d42\", 180, 380], [\"Seat\", \"#3a0ca3\", 600, 135], [\"Handlebars\", \"#ffbe0b\", 1250, 150], [\"Brakes\", \"#e63946\", 1370, 330], [\"Bell\", \"#ffd60a\", 930, 125]];"
+ ],
+ [
+  "s.icons = [[\"🚲\", \"bike\"], [\"🧍\", \"body\"], [\"🌳\", \"tree\"]].map(([e, w], i) => ({e: emo(s.stage, 0, 0, 130, e), w, x: 420 + i * 340}));",
+  "s.icons = [[\"🚲\", \"bike\"], [\"🧍\", \"body\"], [\"🌳\", \"tree\"]].map(([e, w], i) => ({e: emo(s.stage, 0, 0, 175, e), w, x: 420 + i * 340}));"
+ ],
+ [
+  "s.labs = lab.map(([k, n, x, y, col]) => ({k, x, y, c: chip(s.stage, n, col, {fs: 30})}));",
+  "const AN = {nose: [760, 195], windpipe: [760, 295], lungs: [690, 400], heart: [790, 360], bones: [570, 450], muscles: [945, 400], digestive: [790, 500]};\n  s.lines = lab.filter(L => AN[L[0]]).map(([k, n, x, y]) => ({k, l: el(\"line\", {x1: x, y1: y, x2: AN[k][0], y2: AN[k][1], stroke: INK, \"stroke-width\": 4, \"stroke-linecap\": \"round\", opacity: 0}, s.stage)}));\n  s.labs = lab.map(([k, n, x, y, col]) => ({k, x, y, c: chip(s.stage, n, col, {fs: 30})}));"
+ ],
+ [
+  "s.labs.forEach(L => { op(L.c, ramp(t, T[L.k], T[L.k] + .2)); popAt(L.c, L.x, L.y, t, T[L.k]); });",
+  "s.labs.forEach(L => { op(L.c, ramp(t, T[L.k], T[L.k] + .2)); popAt(L.c, L.x, L.y, t, T[L.k]); }); s.lines.forEach(L => op(L.l, ramp(t, T[L.k] + .1, T[L.k] + .35)));"
+ ],
+ [
+  "s.labs = [[\"ROOTS: hold tree + take in water\"",
+  "s.tl = [[400, 880, 640, 745], [1150, 520, 795, 500], [1330, 200, 1060, 290]].map(([x1, y1, x2, y2]) => el(\"line\", {x1, y1, x2, y2, stroke: INK, \"stroke-width\": 4, \"stroke-linecap\": \"round\", opacity: 0}, s.stage));\n  s.labs = [[\"ROOTS: hold tree + take in water\""
+ ],
+ [
+  "op(s.labs[2].c, ramp(t, a(\"leaves\"), a(\"leaves\") + .2));",
+  "op(s.labs[2].c, ramp(t, a(\"leaves\"), a(\"leaves\") + .2)); [a(\"roots\"), a(\"stem\"), a(\"leaves\")].forEach((k, i) => op(s.tl[i], ramp(t, k + .1, k + .35)));"
+ ],
+ [
+  "op(g, ramp(t, k, k + .2)); popAt(g, [560, 760, 960][i], 96, t, k);",
+  "op(g, 0);"
+ ],
+ [
+  "s.tl = [[400, 880, 640, 745], [1150, 520, 795, 500]",
+  "s.tl = [[440, 880, 640, 745], [1340, 520, 795, 500]"
+ ],
+ [
+  "[\"ROOTS: hold tree + take in water\", \"#6f4518\", 400, 880], [\"STEM: carries water + holds tree up\", \"#8b5e34\", 1150, 520]",
+  "[\"ROOTS: hold tree + absorb water & mineral salts\", \"#6f4518\", 440, 880], [\"STEM: carries water, mineral salts & food + holds tree up\", \"#8b5e34\", 1340, 520]"
+ ],
+ [
+  "popAt(s.labs[0].c, 400, 880, t",
+  "popAt(s.labs[0].c, 440, 880, t"
+ ],
+ [
+  "popAt(s.labs[1].c, 1150, 520, t",
+  "popAt(s.labs[1].c, 1340, 520, t"
+ ]
+]

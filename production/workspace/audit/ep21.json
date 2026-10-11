@@ -1,0 +1,37 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "🌡️ TEMPERATURE",
+  "other": "path:",
+  "from": 172.3,
+  "to": 184.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚡ HEAT",
+  "other": "path:",
+  "from": 172.3,
+  "to": 184.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "➡️ HEAT FLOW",
+  "other": "path:",
+  "from": 172.3,
+  "to": 184.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔥 HEAT",
+  "other": "path:",
+  "from": 172.3,
+  "to": 184.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🥄 CONDUCTORS",
+  "other": "path:none",
+  "from": 174.3,
+  "to": 184.8
+ }
+]

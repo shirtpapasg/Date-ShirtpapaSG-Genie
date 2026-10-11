@@ -1,0 +1,16 @@
+[
+  {"id": "hook", "scene": "hook", "text": "Every light you have ever seen comes from one of two places. Nature, or people. Can you sort them? By the end, you will never look at a firefly the same way again."},
+  {"id": "energy", "scene": "energy", "text": "First, a big idea. Energy. You need energy to run and climb. Plants need energy to grow. Energy cooks our food and makes a radio work. There are many forms of energy. Light is one of them, and so is heat."},
+  {"id": "need", "scene": "need", "text": "Imagine your room at night with no light at all. You cannot find your things, and you might trip or bump into something. Light helps us see, find things, and stay safe."},
+  {"id": "sources", "scene": "sources", "text": "Anything that gives off its own light is called a source of light. Sources of light can be natural or man-made."},
+  {"id": "natural", "scene": "natural", "text": "Natural sources come from nature. The Sun is our main source of light. It is actually a star! Other stars give off light too, but so little reaches us that they cannot light up the night. Lightning, during a thunderstorm, is another natural source."},
+  {"id": "living", "scene": "living", "text": "And some living things make their own light! Fireflies flash light patterns to find each other. Some jellyfish and deep-sea creatures glow in the dark ocean, where sunlight cannot reach. Glow-worms light up caves."},
+  {"id": "manmade", "scene": "manmade", "text": "Man-made sources are made by people. Light bulbs light our homes after the Sun has set. And fireworks light up the sky at celebrations, like National Day and New Year."},
+  {"id": "edison", "scene": "edison", "text": "Early light bulbs were too big or too bright for homes. Thomas Edison and his team kept testing, again and again, until they made a bulb that was practical for homes. That is persistence!"},
+  {"id": "quiz1", "scene": "quiz", "text": "Pause and predict! Natural or man-made? A candle, the Sun, a firefly, and a torch."},
+  {"id": "quiz2", "scene": "quiz", "text": "The Sun and the firefly are natural. The candle and the torch are made by people, so they are man-made."},
+  {"id": "exam", "scene": "exam", "text": "In your exam, say it like this. A source of light is an object that gives off light. The Sun, other stars, lightning and some living things are natural sources of light. Light bulbs and fireworks are man-made sources of light."},
+  {"id": "habit1", "scene": "habit", "text": "Here is a habit to try. Celebrate small wins. When you finish your revision, give yourself a little cheer, or a high five. That good feeling teaches your brain to want to do it again."},
+  {"id": "habit2", "scene": "mindmap", "text": "Now start a new mind map. Light in the middle, with two branches. Natural sources, and man-made sources. Add examples to each. Save it in TheOneApp, the ultimate science app."},
+  {"id": "close", "scene": "close", "text": "So, where does every light come from? Nature, or people! Your turn. Tonight, spot three sources of light, and decide if each one is natural or man-made."}
+]

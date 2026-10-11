@@ -1,0 +1,95 @@
+[
+ [
+  "popAt(s.marks, 760, 820 - 120, t, a(\"lose\"))",
+  "popAt(s.marks, 760, 845, t, a(\"lose\"))"
+ ],
+ [
+  "s.sun = emo(s.world, 260, 120, 150, \"☀️\");",
+  "s.sun = emo(s.world, 1110, 260, 150, \"☀️\");"
+ ],
+ [
+  "el(\"line\", {x1: 320, y1: 170, x2: 640 + i * 40, y2: 230 + i * 50,",
+  "el(\"line\", {x1: 1040, y1: 290, x2: 960 - i * 30, y2: 180 + i * 55,"
+ ],
+ [
+  "    op(s.rays, on(t, L1(\"light\"), L2(\"tiny\"), .3));",
+  "    op(s.sun, (1 - on(t, L2(\"tiny\") - .3, L2(\"so\"), .3)) * (1 - ramp(t, R(\"now\") - .6, R(\"now\") - .2)));\n    op(s.rays, on(t, L1(\"light\"), L2(\"tiny\"), .3));"
+ ],
+ [
+  "popAt(s.factory, 1150, 200, t, L1(\"factory\"))",
+  "popAt(s.factory, 360, 440, t, L1(\"factory\"))"
+ ],
+ [
+  "popAt(g, 1150 + (i ? 150 : -150), i ? 170 : 700, t, L2(\"gases\"))",
+  "popAt(g, 1590, i ? 420 : 640, t, L2(\"gases\"))"
+ ],
+ [
+  "el(\"rect\", {x: 0, y: 0, width: 560, height: 70 + lines.length * 52, rx: 26,",
+  "el(\"rect\", {x: 0, y: 0, width: 560, height: 84 + lines.length * 52, rx: 26,"
+ ],
+ [
+  "const ls = lines.map((L, i) => tx(g, {x: 26, y: 112 + i * 52,",
+  "const ls = lines.map((L, i) => tx(g, {x: L.startsWith(\" \") ? 72 : 26, y: 112 + i * 52,"
+ ],
+ [
+  "popAt(s.badge, 1160, 160, t, a(\"adult\"))",
+  "popAt(s.badge, 1190, 160, t, a(\"adult\"))"
+ ],
+ [
+  "s.plate = el(\"g\", {transform: \"translate(760 470)\"}, s.stage); el(\"ellipse\", {rx: 520, ry: 300,",
+  "s.plate = el(\"g\", {transform: \"translate(760 500)\"}, s.stage); el(\"ellipse\", {rx: 520, ry: 270,"
+ ],
+ [
+  "popAt(s.sg, 380, 790 - 70, t, a(\"kai\"))",
+  "popAt(s.sg, 340, 830, t, a(\"kai\"))"
+ ],
+ [
+  "popAt(s.us, 640, 790 - 70, t, a(\"lettuce\"))",
+  "popAt(s.us, 740, 830, t, a(\"lettuce\"))"
+ ],
+ [
+  "popAt(s.store, 830, 230, t, a(\"stores\"))",
+  "popAt(s.store, 830, 300, t, a(\"stores\"))"
+ ],
+ [
+  "popAt(s.facts, 760, 820 - 60, t, a(\"facts\"))",
+  "popAt(s.facts, 760, 870, t, a(\"facts\"))"
+ ],
+ [
+  "s.drop = emo(s.stage, 0, 0, 70, \"💧\");",
+  "s.drop = emo(s.stage, 0, 0, 70, \"💧\"); s.drop.setAttribute(\"style\", \"filter: hue-rotate(150deg) saturate(1.6)\");"
+ ],
+ [
+  "el(\"rect\", {x: -50, y: -290, width: 100, height: 70, rx: 18, fill: \"#ef476f\", stroke: INK, \"stroke-width\": 6}, s.bottle);",
+  "s.cap = el(\"rect\", {x: -50, y: -290, width: 100, height: 70, rx: 18, fill: \"#ef476f\", stroke: INK, \"stroke-width\": 6}, s.bottle);"
+ ],
+ [
+  "tf(s.bottle, `translate(760 560) rotate(${-25 * tilt})`);",
+  "tf(s.bottle, `translate(760 560) rotate(${-25 * tilt})`); op(s.cap, 1 - ramp(tilt, 0, .3));"
+ ],
+ [
+  "op(s.yes, ramp(t, a(\"only\"), a(\"only\") + .2)); popAt(s.yes, 760, 760, t, a(\"only\"));",
+  "op(s.yes, ramp(t, a(\"absorb\"), a(\"absorb\") + .2)); popAt(s.yes, 760, 760, t, a(\"absorb\"));"
+ ],
+ [
+  "\"colour travels UP the stem ⬆\"",
+  "\"colour travels UP the stalk ⬆\""
+ ],
+ [
+  "op(s.lbl, ramp(t, a(\"stem\"), a(\"stem\") + .2)); popAt(s.lbl, 1240, 560, t, a(\"stem\"))",
+  "op(s.lbl, ramp(t, a(\"stalk\"), a(\"stalk\") + .2)); popAt(s.lbl, 1240, 560, t, a(\"stalk\"))"
+ ],
+ [
+  "for (let i = 0; i < 3; i++) el(\"rect\", {x: -22 + i * 28, y: -170, width: 30, height: 330, rx: 14, fill: \"#95d5b2\", stroke: INK, \"stroke-width\": 4}, s.cel);",
+  "for (let i = 0; i < 3; i++) { const ax = -26 + i * 30, ay = -170 + (i % 2) * 20; el(\"rect\", {x: ax, y: ay, width: 22, height: 330 - (i % 2) * 20, rx: 10, fill: \"#6a994e\", stroke: INK, \"stroke-width\": 4}, s.cel); el(\"path\", {d: `M${ax - 3} ${ay + 34} Q${ax + 11} ${ay - 34} ${ax + 25} ${ay + 34} Z`, fill: \"#386641\", stroke: INK, \"stroke-width\": 4}, s.cel); for (let j = 0; j < 4; j++) el(\"path\", {d: `M${ax + 4} ${ay + 80 + j * 60} l7 -14 l7 14`, fill: \"none\", stroke: \"#386641\", \"stroke-width\": 3}, s.cel); }"
+ ],
+ [
+  "a(\"carrot\"), a(\"celery\"), .2)",
+  "a(\"carrot\"), a(\"asparagus\"), .2)"
+ ],
+ [
+  "a(\"waiting\")",
+  "a(\"pick\")",
+  2
+ ]
+]

@@ -1,0 +1,58 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "HUMAN BODY",
+  "other": "path:none",
+  "from": 235.55,
+  "to": 246.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🫁 RESPIRATORY",
+  "other": "path:none",
+  "from": 235.8,
+  "to": 246.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "SYSTEMS",
+  "other": "path:none",
+  "from": 236.55,
+  "to": 246.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "❤️ CIRCULATORY",
+  "other": "path:none",
+  "from": 236.8,
+  "to": 246.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🦴 SKELETAL",
+  "other": "path:none",
+  "from": 238.05,
+  "to": 246.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "💪 MUSCULAR",
+  "other": "path:none",
+  "from": 238.55,
+  "to": 246.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🍽️ DIGESTIVE",
+  "other": "path:none",
+  "from": 239.55,
+  "to": 246.3
+ },
+ {
+  "kind": "text-overlap",
+  "text": "❤️",
+  "other": "✋",
+  "from": 256.05,
+  "to": 263.05
+ }
+]

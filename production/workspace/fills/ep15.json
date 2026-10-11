@@ -1,0 +1,10 @@
+{
+ "wayang": "translate(765 525) scale(1.09) translate(-760 -475)",
+ "materials": "translate(765 525) scale(1.075) translate(-925 -488)",
+ "define": "translate(765 525) scale(1.085) translate(-760 -552)",
+ "cards": "translate(765 525) scale(1.195) translate(-772 -504)",
+ "safety": "translate(765 525) scale(1.239) translate(-760 -500)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.107) translate(-756 -481)",
+ "close": "translate(765 525) scale(1.34) translate(-812 -556)"
+}

@@ -1,0 +1,29 @@
+{
+  "approved": false,
+  "changes": [
+    "Quiz: a true 4-second silent “Think!” countdown with a soft clock tick, before the answer",
+    "New name: “TheOneApp, Explained”",
+    "Bigger objects fill the empty space",
+    "Narrated in Heart voice 3 (more expressive)",
+    "Torches point at the ball and screen",
+    "Walker faces the way he walks"
+  ],
+  "chapter": "Ch 5 Shadows",
+  "live": false,
+  "narrator": "Heart (voice 3)",
+  "no": 16,
+  "notes": "",
+  "parts": [
+    "/_blob/bac64f6898055899ec6853c77b1b8fe1",
+    "/_blob/f02823f0028f66ac40a77c32675b3217",
+    "/_blob/58bd758bea9ba5faa78d60de530554fb"
+  ],
+  "pending": true,
+  "rendered": true,
+  "runtime": "2:44",
+  "thumb": "thumbs/ep16.jpg",
+  "title": "Make your shadow giant, then tiny",
+  "videoUpdatedAt": "2026-10-10T15:20:00Z",
+  "youtubeUrl": "",
+  "ytTitle": "2 Distances Control Every Shadow's Size"
+}

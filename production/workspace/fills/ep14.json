@@ -1,0 +1,8 @@
+{
+ "blind": "translate(765 525) scale(1.274) translate(-857 -448)",
+ "direct": "translate(765 525) scale(1.052) translate(-788 -559)",
+ "myth": "translate(765 525) scale(1.091) translate(-829 -508)",
+ "quiz": "translate(765 525) scale(1.149) translate(-760 -434)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "close": "translate(765 525) scale(1.453) translate(-824 -442)"
+}

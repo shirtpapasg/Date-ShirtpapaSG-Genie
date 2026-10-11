@@ -1,0 +1,30 @@
+{
+  "approved": false,
+  "changes": [
+    "Quiz: a true 4-second silent “Think!” countdown with a soft clock tick, before the answer",
+    "New name: “TheOneApp, Explained”",
+    "Bigger objects fill the empty space",
+    "Narrated in Heart voice 3 (more expressive)",
+    "Shadows line up with the light",
+    "Candle flame lines up with the card holes",
+    "Torch points through the cards"
+  ],
+  "chapter": "Ch 5 Shadows",
+  "live": false,
+  "narrator": "Heart (voice 3)",
+  "no": 15,
+  "notes": "",
+  "parts": [
+    "/_blob/cf3671121614b5a00d1643f59e106239",
+    "/_blob/5dd39bfdbd9945ed3b9865191d773a47",
+    "/_blob/63f7ef34e8a0769e3d74102da15bb496"
+  ],
+  "pending": true,
+  "rendered": true,
+  "runtime": "3:06",
+  "thumb": "thumbs/ep15.jpg",
+  "title": "Why shadows exist (and why glass casts them too)",
+  "videoUpdatedAt": "2026-10-10T15:20:00Z",
+  "youtubeUrl": "",
+  "ytTitle": "How Shadows Form: 2 Facts About Light for Kids"
+}

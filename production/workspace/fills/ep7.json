@@ -1,0 +1,12 @@
+{
+ "hook": "translate(765 525) scale(1.053) translate(-789 -398)",
+ "recap": "translate(765 525) scale(1.339) translate(-697 -492)",
+ "large": "translate(765 525) scale(1.113) translate(-802 -406)",
+ "exit": "translate(765 525) scale(1.072) translate(-908 -512)",
+ "fibre": "translate(765 525) scale(1.072) translate(-778 -496)",
+ "team": "translate(765 525) scale(1.136) translate(-756 -459)",
+ "quiz": "translate(765 525) scale(1.113) translate(-770 -412)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.079) translate(-738 -497)",
+ "close": "translate(765 525) scale(1.283) translate(-760 -550)"
+}

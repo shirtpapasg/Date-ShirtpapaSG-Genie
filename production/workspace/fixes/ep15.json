@@ -1,0 +1,66 @@
+[
+ [
+  "op(s.card, ramp(t, a(\"dark\"), a(\"dark\") + .2)); tf(s.card, `translate(760 850) scale(${pop(t, a(\"dark\")) * .95})`);",
+  "op(s.card, ramp(t, a(\"surface\"), a(\"surface\") + .2)); tf(s.card, `translate(760 850) scale(${pop(t, a(\"surface\")) * .95})`);"
+ ],
+ [
+  "set(l, \"x2\", 760 + Math.cos(ang) * 900); set(l, \"y2\", 900 + Math.sin(ang) * 900)",
+  "set(l, \"x2\", 760 + Math.cos(ang) * 640); set(l, \"y2\", 900 + Math.sin(ang) * 640)"
+ ],
+ [
+  "popAt(s.c, 400, 820, t, a(\"laser\"))",
+  "popAt(s.c, 360, 820, t, a(\"laser\"))"
+ ],
+ [
+  "popAt(s.t3, 1120, 820, t, a(\"three\"))",
+  "popAt(s.t3, 1190, 820, t, a(\"three\"))"
+ ],
+ [
+  "\"🪵 board: blocks ALL light ➜ DARK\", \"#1b1b3a\", {fs: 30}); s.l2 = chip(s.stage, \"🧊 frosted: some light passes ➜ LESS DARK\", \"#4ea8de\", {fs: 30});",
+  "\"🪵 board: blocks ALL light ➜ DARK\", \"#1b1b3a\", {fs: 26}); s.l2 = chip(s.stage, \"🧊 frosted: some light passes ➜ LESS DARK\", \"#4ea8de\", {fs: 28});"
+ ],
+ [
+  "popAt(s.l1, 1330, 360, t, a(\"dark\"))",
+  "popAt(s.l1, 1400, 270, t, a(\"dark\"))"
+ ],
+ [
+  "popAt(s.l2, 1300, 760, t, a(\"less\"))",
+  "popAt(s.l2, 1478, 760, t, a(\"less\"))"
+ ],
+ [
+  "s.sh = el(\"ellipse\", {rx: 170, ry: 40, fill: \"#1b1b3a\"}, s.stage);",
+  "s.sh = el(\"ellipse\", {rx: 200, ry: 40, fill: \"#1b1b3a\"}, s.stage);"
+ ],
+ [
+  "set(s.sh, \"cx\", 840); set(s.sh, \"cy\", 880);",
+  "set(s.sh, \"cx\", 1190); set(s.sh, \"cy\", 880);"
+ ],
+ [
+  "s.candle = emo(s.stage, 280, 520, 140, \"🕯️\");",
+  "s.candle = emo(s.stage, 280, 565, 140, \"🕯️\");"
+ ],
+ [
+  "s.table = el(\"rect\", {x: 260, y: 780, width: 1000, height: 30,",
+  "s.table = el(\"rect\", {x: 200, y: 780, width: 1120, height: 30,"
+ ],
+ [
+  "s.cb = el(\"rect\", {x: 380, y: 500, width: 240,",
+  "s.cb = el(\"rect\", {x: 380, y: 628, width: 240,"
+ ],
+ [
+  "s.fp = el(\"rect\", {x: 900, y: 500, width: 240,",
+  "s.fp = el(\"rect\", {x: 900, y: 628, width: 240,"
+ ],
+ [
+  "s.sh1 = el(\"ellipse\", {cx: 470, cy: 770, rx: 170, ry: 18,",
+  "s.sh1 = el(\"ellipse\", {cx: 402, cy: 770, rx: 166, ry: 18,"
+ ],
+ [
+  "s.sh2 = el(\"ellipse\", {cx: 1050, cy: 770, rx: 170, ry: 18,",
+  "s.sh2 = el(\"ellipse\", {cx: 1118, cy: 770, rx: 166, ry: 18,"
+ ],
+ [
+  "set(s.torch, \"x\", 420); set(s.torch, \"y\", 460);",
+  "set(s.torch, \"x\", 420); set(s.torch, \"y\", 460); tf(s.torch, \"rotate(135 420 460)\");"
+ ]
+]

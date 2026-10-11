@@ -1,0 +1,156 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "Pedals",
+  "other": "line:",
+  "from": 33.05,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Chain",
+  "other": "line:",
+  "from": 34.05,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Wheels",
+  "other": "line:",
+  "from": 34.55,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Seat",
+  "other": "line:",
+  "from": 35.3,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Handlebars",
+  "other": "line:",
+  "from": 36.3,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Brakes",
+  "other": "line:",
+  "from": 37.05,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Bell",
+  "other": "line:",
+  "from": 37.8,
+  "to": 47.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Pedals",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Chain",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Wheels",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Seat",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Handlebars",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Brakes",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "Bell",
+  "other": "line:",
+  "from": 50.05,
+  "to": 54.3
+ },
+ {
+  "kind": "out-of-box",
+  "text": "✗",
+  "other": "",
+  "from": 86.8,
+  "to": 102.3
+ },
+ {
+  "kind": "out-of-box",
+  "text": "✓",
+  "other": "",
+  "from": 96.8,
+  "to": 102.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "PEDALS",
+  "other": "rect:#fff",
+  "from": 106.3,
+  "to": 109.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "BRAKES",
+  "other": "rect:#fff",
+  "from": 106.8,
+  "to": 109.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "SYSTEM",
+  "other": "path:none",
+  "from": 214.3,
+  "to": 225.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🚲 BIKE",
+  "other": "path:none",
+  "from": 214.8,
+  "to": 225.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🧍 BODY",
+  "other": "path:none",
+  "from": 215.3,
+  "to": 225.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌳 TREE",
+  "other": "path:none",
+  "from": 216.05,
+  "to": 225.3
+ }
+]

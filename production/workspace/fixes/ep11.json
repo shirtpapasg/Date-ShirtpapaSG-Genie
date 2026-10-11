@@ -1,0 +1,34 @@
+[
+ [
+  "KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;",
+  "KW.forEach(K => { const t0 = K.k.t, tfly = .6, nx = KW[K.i + 1], tf0 = nx && nx.k.t < t0 + 1.9 + tfly ? Math.max(t0 + .6, nx.k.t - tfly) : t0 + 1.9;"
+ ],
+ [
+  "popAt(l.c, l.x, 800, t, a(l.w))",
+  "popAt(l.c, l.x, 772, t, a(l.w))"
+ ],
+ [
+  "popAt(s.c1, 580, 870, t, a(\"flat\"))",
+  "popAt(s.c1, 330, 870, t, a(\"flat\"))"
+ ],
+ [
+  "s.c3 = chip(s.stage, \"space taken by air = its VOLUME\", \"#06d6a0\", {fs: 34});",
+  "s.c3 = chip(s.stage, \"space taken by air = its VOLUME\", \"#06d6a0\", {fs: 30});"
+ ],
+ [
+  "popAt(s.c1, 560, 150, t, a(\"upside\"))",
+  "popAt(s.c1, 400, 150, t, a(\"upside\"))"
+ ],
+ [
+  "popAt(s.c2, 560, 150, t, a(\"pushes\"))",
+  "popAt(s.c2, 400, 150, t, a(\"pushes\"))"
+ ],
+ [
+  "popAt(s.c3, 560, 230, t, a(\"volume\"))",
+  "popAt(s.c3, 400, 230, t, a(\"volume\"))"
+ ],
+ [
+  "s.straw = el(\"path\", {d: \"M1250 380 V760 H750 V680\"",
+  "s.straw = el(\"path\", {d: \"M1240 335 H1060 V760 H750 V680\""
+ ]
+]

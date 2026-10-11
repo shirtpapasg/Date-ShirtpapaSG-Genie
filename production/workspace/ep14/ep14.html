@@ -1,0 +1,450 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,Inter,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="confetti"></g>
+  <!-- overlays -->
+  <g id="tag" filter="url(#sh)">
+    <rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/>
+    <text x="70" y="73" font-size="25" font-weight="700" fill="#fff" letter-spacing="0">🌕 TheOneApp, Explained - Light and the Moon</text>
+  </g>
+  <g id="shelf"><text id="shelfHead" x="1515" y="58" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect x="0" y="1072" width="1920" height="8" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" x="0" y="1072" width="0" height="8" fill="url(#rainbow)"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+<script>window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const CHIPS = [];
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, extra = "") => tf(e, `translate(${x} ${y}) scale(${Math.max(0, pop(t, a))}) ${extra}`);
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const C = (seg, w) => { const v = TL.cues[seg] && TL.cues[seg][w]; if (v === undefined) throw new Error("cue " + seg + ":" + w); return v; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+
+/* ---------- reusable widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p);
+  const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  CHIPS.push([g, fs, !!opts.w]);
+  return g;
+}
+function bg(p, c1, c2) {
+  const id = "g" + Math.round(rnd() * 1e9) + "_" + (bg.n = (bg.n || 0) + 1);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: 1920, height: 1080, fill: `url(#${id})`}, p);
+  // floating bubbles for liveliness
+  const bubbles = [];
+  for (let i = 0; i < 14; i++) bubbles.push({x: rnd() * 1920, y: rnd() * 1080, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return bubbles;
+}
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % 1200 + 1200) % 1200 - 60); set(o.e, "r", o.r); }); }
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {}, g); return {g, b, stage, name}; }
+
+/* ---------- bike ---------- */
+function makeBike(p) {
+  const g = el("g", {}, p), K = {};
+  const B = [-230, 90], F = [230, 90], Cr = [-10, 100];
+  const wheel = c => { const w = el("g", {transform: `translate(${c[0]} ${c[1]})`}, g);
+    el("circle", {r: 130, fill: "none", stroke: "#2b2d42", "stroke-width": 20}, w); el("circle", {r: 112, fill: "none", stroke: "#adb5bd", "stroke-width": 6}, w);
+    const sp = el("g", {}, w); for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; el("line", {x1: 0, y1: 0, x2: Math.cos(a) * 110, y2: Math.sin(a) * 110, stroke: "#ced4da", "stroke-width": 3}, sp); }
+    el("circle", {r: 16, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, w); return sp; };
+  K.wheelB = wheel(B); K.wheelF = wheel(F);
+  K.chain = el("path", {d: `M${B[0]} ${B[1] - 18} L${Cr[0]} ${Cr[1] - 30} A30 30 0 0 1 ${Cr[0]} ${Cr[1] + 30} L${B[0]} ${B[1] + 18} A18 18 0 0 1 ${B[0]} ${B[1] - 18} Z`, fill: "none", stroke: "#6c757d", "stroke-width": 8, "stroke-dasharray": "10 6"}, g);
+  const fr = el("g", {stroke: "#ff4d6d", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: `M${B[0]} ${B[1]} L${Cr[0]} ${Cr[1]} L-60 -80 Z M-60 -80 L170 -90 L${Cr[0]} ${Cr[1]} M170 -90 L${F[0]} ${F[1]}`}, fr);
+  el("path", {d: "M170 -90 L190 -150", stroke: "#ff4d6d", "stroke-width": 14, "stroke-linecap": "round"}, g);
+  K.handle = el("path", {d: "M150 -150 L240 -162", stroke: INK, "stroke-width": 12, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 240, cy: -162, r: 11, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, g);
+  K.brake = el("path", {d: "M215 -150 L250 -128 M218 -40 L242 -40", stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, g);
+  K.bell = el("circle", {cx: 200, cy: -172, r: 14, fill: "#ffd60a", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M-60 -80 L-70 -100", stroke: "#3a0ca3", "stroke-width": 10}, g);
+  K.seat = el("path", {d: "M-125 -108 Q-70 -126 -20 -106 Q-70 -96 -125 -108 Z", fill: "#3a0ca3", stroke: INK, "stroke-width": 4}, g);
+  const crank = el("g", {transform: `translate(${Cr[0]} ${Cr[1]})`}, g);
+  el("circle", {r: 30, fill: "#ced4da", stroke: INK, "stroke-width": 4}, crank);
+  K.crank = el("g", {}, crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: 58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: -58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  K.pedalA = el("rect", {x: -22, y: 52, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.pedalB = el("rect", {x: -22, y: -66, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.anchor = {Pedals: [-10, 160], Chain: [-130, 98], Wheels: [-230, 90], Seat: [-72, -112], Handlebars: [195, -156], Brakes: [233, -40], Bell: [200, -172]};
+  K.g = g; K.F = F; K.B = B;
+  K.animate = (crankDeg, wheelDeg, chainOff) => { tf(K.crank, `rotate(${crankDeg})`); tf(K.wheelB, `rotate(${wheelDeg})`); tf(K.wheelF, `rotate(${wheelDeg})`); set(K.chain, "stroke-dashoffset", chainOff); };
+  return K;
+}
+
+/* =================== SCENES (Episode 14: how we see — directly or by reflection; the Moon) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const RAY = "#ffbe0b";
+// light ray with arrowhead, drawn to fraction k
+function ray(p, col = RAY, w = 10) { const g = el("g", {}, p); const ln = el("line", {stroke: col, "stroke-width": w, "stroke-linecap": "round"}, g); const hd = el("path", {d: "M0 0 L-34 -18 L-34 18 Z", fill: col, stroke: INK, "stroke-width": 3}, g);
+  g.to = (x1, y1, x2, y2, k) => { const x = lerp(x1, x2, k), y = lerp(y1, y2, k); set(ln, "x1", x1); set(ln, "y1", y1); set(ln, "x2", x); set(ln, "y2", y); tf(hd, `translate(${x} ${y}) rotate(${Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI})`); op(g, k > 0 ? 1 : 0); }; return g; }
+function moonDisc(p, r = 150) { const g = el("g", {}, p); el("circle", {r, fill: "#f1f3f5", stroke: INK, "stroke-width": 6}, g); [[-.35, -.25, .2], [.3, .1, .14], [-.1, .4, .1], [.35, -.4, .08]].forEach(([x, y, s]) => el("circle", {cx: x * r, cy: y * r, r: s * r, fill: "#ced4da"}, g)); return g; }
+function eye(p, s = 1) { const g = el("g", {transform: `scale(${s})`}, p); el("path", {d: "M-80 0 Q0 -70 80 0 Q0 70 -80 0 Z", fill: "#fff", stroke: INK, "stroke-width": 6}, g); el("circle", {r: 30, fill: "#3a86ff", stroke: INK, "stroke-width": 4}, g); el("circle", {r: 13, fill: INK}, g); el("circle", {cx: -8, cy: -9, r: 6, fill: "#fff"}, g); return g; }
+function firefly(p) { const g = el("g", {}, p); el("circle", {cx: 0, cy: 14, r: 30, fill: "#fff3b0", opacity: .7}, g); el("circle", {cx: 0, cy: 14, r: 15, fill: "#ffe14d"}, g); el("ellipse", {cx: 0, cy: -10, rx: 12, ry: 20, fill: "#3d2c1e", stroke: INK, "stroke-width": 3}, g); return g; }
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#03045e", "#10002b");
+  seed = 5; s.st = []; for (let i = 0; i < 30; i++) s.st.push({x: rnd() * 1500, y: rnd() * 900, e: el("circle", {r: 2 + rnd() * 4, fill: "#fff"}, s.stage)});
+  s.m = moonDisc(s.stage, 200); s.glow = el("circle", {r: 260, fill: "#fff3b0", opacity: .15}, s.stage); s.stage.appendChild(s.m);
+  s.x = chip(s.stage, "✗ its OWN light: never!", "#e63946", {fs: 44}); s.once = tx(s.stage, {x: 1150, y: 520, "text-anchor": "middle", "font-size": 90, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "NOT ONCE.");
+  s.q = chip(s.stage, "🤔 so how can we SEE it?", "#7209b7", {fs: 46});
+  s.run = t => { const a = w => C("hook", w);
+    s.st.forEach((q, i) => { set(q.e, "cx", q.x); set(q.e, "cy", q.y); op(q.e, .3 + .6 * Math.abs(Math.sin(t * 1.5 + i))); });
+    op(s.m, ramp(t, .2, .6)); tf(s.m, "translate(560 470)"); op(s.glow, ramp(t, a("lights"), a("lights") + .4) * .3); set(s.glow, "cx", 560); set(s.glow, "cy", 470);
+    op(s.x, ramp(t, a("never"), a("never") + .2)); popAt(s.x, 1150, 380, t, a("never"));
+    op(s.once, ramp(t, a("once"), a("once") + .2)); tf(s.once, `translate(1150 520) scale(${pop(t, a("once"))}) translate(-1150 -520)`);
+    op(s.q, ramp(t, a("see"), a("see") + .2)); popAt(s.q, 760, 820, t, a("see")); }; return s; })();
+
+// ---- BLINDFOLD
+S.blind = (() => { const s = scene("blind", "#90e0ef", "#caffbf");
+  s.sun = emo(s.stage, 1300, 220, 180, "☀️"); s.kid = emo(s.stage, 0, 0, 260, "🧒"); s.band = el("rect", {x: -95, y: -50, width: 190, height: 40, rx: 14, fill: "#1b1b3a"}, s.stage);
+  s.x = chip(s.stage, "✗ can't see, even in bright sunshine", "#e63946", {fs: 36});
+  s.rays = [0, 1, 2].map(() => ray(s.stage)); s.e = eye(s.stage, 1.3);
+  s.c = chip(s.stage, "To SEE: light must ENTER our eyes", "#ffbe0b", {fs: 44});
+  s.run = t => { const a = w => C("blind", w); const en = ramp(t, a("see#2") - .5, a("see#2") + .2);
+    op(s.kid, ramp(t, SC.blind.t0, SC.blind.t0 + .3) * (1 - en)); set(s.kid, "x", 560 + Math.sin(t * 3) * 20); set(s.kid, "y", 500);
+    op(s.band, ramp(t, a("blindfold"), a("blindfold") + .2) * (1 - en)); tf(s.band, `translate(${560 + Math.sin(t * 3) * 20} 470)`);
+    op(s.x, on(t, a("cannot"), a("see#2") - .5, .2)); popAt(s.x, 760, 780, t, a("cannot"));
+    op(s.e, en); tf(s.e, "translate(560 560) scale(1.3)");
+    s.rays.forEach((r, i) => r.to(1240, 260 + i * 30, 680, 520 + i * 30, ramp(t, a("see#2") + i * .15, a("see#2") + .8 + i * .15)));
+    op(s.c, ramp(t, a("see#2"), a("see#2") + .2)); popAt(s.c, 760, 745, t, a("see#2")); }; return s; })();
+
+// ---- DIRECT
+S.direct = (() => { const s = scene("direct", "#1d3557", "#14213d");
+  const ys = [230, 420, 610, 800];
+  s.src = [["⭐", "star"], ["🕯️", "candle"], [null, "firefly"], ["💡", "bulb"]].map(([e, w], i) => { const g = el("g", {}, s.stage); if (e) emo(g, 0, 0, 120, e); else firefly(g); return {g, w, i}; });
+  s.e = eye(s.stage, 1.4); s.rays = ys.map(() => ray(s.stage));
+  s.c = chip(s.stage, "light goes STRAIGHT into our eyes ➜ seen DIRECTLY", "#f77f00", {fs: 34});
+  s.run = t => { const a = w => C("direct", w);
+    s.src.forEach(q => { op(q.g, ramp(t, a(q.w), a(q.w) + .2)); tf(q.g, `translate(380 ${ys[q.i]}) scale(${pop(t, a(q.w))})`); });
+    op(s.e, ramp(t, a("straight") - .4, a("straight"))); tf(s.e, "translate(1250 520) scale(1.4)");
+    s.rays.forEach((r, i) => r.to(470, ys[i], 1130, 520, ramp(t, a("straight") + i * .1, a("straight") + .7 + i * .1)));
+    op(s.c, ramp(t, a("directly"), a("directly") + .2)); popAt(s.c, 760, 930, t, a("directly")); }; return s; })();
+
+// ---- REFLECTION (2 steps)
+S.reflect = (() => { const s = scene("reflect", "#fff3b0", "#ffd6a5");
+  s.objs = [["✏️", "pencil"], ["🛋️", "sofa"], [null, "swing"]].map(([e, w], i) => ({e: e ? emo(s.stage, 0, 0, 150, e) : (() => { const g = el("svg", {overflow: "visible"}, s.stage); el("path", {d: "M-70 68 L-52 -62 M70 68 L52 -62", stroke: "#e63946", "stroke-width": 10, "stroke-linecap": "round"}, g); el("line", {x1: -62, y1: -62, x2: 62, y2: -62, stroke: "#e63946", "stroke-width": 12, "stroke-linecap": "round"}, g); el("path", {d: "M-24 -62 V28 M24 -62 V28", stroke: "#6c584c", "stroke-width": 5}, g); el("rect", {x: -36, y: 26, width: 72, height: 14, rx: 5, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, g); return g; })(), w, i}));
+  s.no = chip(s.stage, "these do NOT give off light", "#6c757d", {fs: 38}); s.two = tx(s.stage, {x: 760, y: 820, "text-anchor": "middle", "font-size": 90, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "2 STEPS");
+  s.lamp = emo(s.stage, 0, 0, 150, "💡"); s.sofa = emo(s.stage, 0, 0, 170, "🛋️"); s.e = eye(s.stage, 1.2); s.r1 = ray(s.stage); s.r2 = ray(s.stage);
+  s.l1 = chip(s.stage, "① light FALLS ON the object", "#06d6a0", {fs: 32}); s.l2 = chip(s.stage, "② it BOUNCES OFF into our eyes", "#3a86ff", {fs: 32});
+  s.refl = chip(s.stage, "bouncing off = REFLECTION", "#7209b7", {fs: 40}); s.ok = chip(s.stage, "✓ we SEE the object", "#06d6a0", {fs: 40});
+  s.run = t => { const a = w => C("reflect1", w), b = w => C("reflect2", w); const dia = ramp(t, b("one") - .4, b("one"));
+    s.objs.forEach(o => { op(o.e, ramp(t, a(o.w), a(o.w) + .2) * (1 - dia)); set(o.e, "x", 400 + o.i * 360); set(o.e, "y", 440); });
+    op(s.no, on(t, a("not"), b("one") - .3, .2)); popAt(s.no, 760, 650, t, a("not")); op(s.two, on(t, a("two"), b("one") - .3, .2)); tf(s.two, `translate(760 820) scale(${pop(t, a("two"))}) translate(-760 -820)`);
+    op(s.lamp, dia); set(s.lamp, "x", 300); set(s.lamp, "y", 260); op(s.sofa, dia); set(s.sofa, "x", 760); set(s.sofa, "y", 660); op(s.e, dia); tf(s.e, "translate(1250 380) scale(1.2)");
+    s.r1.to(350, 320, 700, 600, ramp(t, b("falls") - .2, b("falls") + .6)); s.r2.to(820, 600, 1150, 420, ramp(t, b("bounces") - .1, b("enters") + .2));
+    op(s.l1, ramp(t, b("falls"), b("falls") + .2)); popAt(s.l1, 330, 548, t, b("falls")); op(s.l2, ramp(t, b("bounces"), b("bounces") + .2)); popAt(s.l2, 1200, 642, t, b("bounces"));
+    op(s.refl, ramp(t, b("reflection"), b("reflection") + .2)); popAt(s.refl, 760, 150, t, b("reflection")); op(s.ok, ramp(t, b("see"), b("see") + .2)); popAt(s.ok, 1150, 230, t, b("see")); }; return s; })();
+
+// ---- BLACKOUT
+S.blackout = (() => { const s = scene("blackout", "#2b2d42", "#1b1b3a");
+  s.table = el("rect", {x: 500, y: 640, width: 520, height: 30, rx: 8, fill: "#8d5524", stroke: INK, "stroke-width": 6}, s.stage); s.pen = emo(s.stage, 760, 622, 110, "✏️"); tf(s.pen, "rotate(-45 760 622)");
+  s.dark = el("rect", {x: 0, y: 0, width: 1920, height: 1080, fill: "#000"}, s.stage); s.q = tx(s.stage, {x: 760, y: 560, "text-anchor": "middle", "font-size": 120, "font-weight": 700, fill: "#adb5bd"}, "?");
+  s.torch = emo(s.stage, 0, 0, 120, "🔦"); s.beam = el("path", {d: "M0 0 L400 175 L360 258 Z", fill: "#fff3b0", opacity: .5}, s.stage);
+  s.e = eye(s.stage, 1); s.r1 = ray(s.stage); s.r2 = ray(s.stage); s.ok = chip(s.stage, "✓ Now you can see it!", "#06d6a0", {fs: 44});
+  s.l1 = chip(s.stage, "① falls on the pencil", "#06d6a0", {fs: 30}); s.l2 = chip(s.stage, "② reflected into your eyes", "#3a86ff", {fs: 30});
+  s.run = t => { const a = w => C("blackout", w); const on1 = ramp(t, a("switch") - .1, a("switch") + .2);
+    op(s.dark, .92 * (1 - on1 * .55)); op(s.q, on(t, a("pencil"), a("switch"), .2)); op(s.pen, 1);
+    op(s.torch, ramp(t, a("switch") - .3, a("switch"))); set(s.torch, "x", 325); set(s.torch, "y", 349); tf(s.torch, "rotate(170 325 349)"); op(s.beam, on1 * .5); tf(s.beam, "translate(370 380)");
+    op(s.e, ramp(t, a("pencil") - .3, a("pencil"))); tf(s.e, "translate(1280 360)");
+    s.r1.to(400, 400, 715, 600, ramp(t, a("falls") - .2, a("falls") + .5)); s.r2.to(805, 600, 1190, 390, ramp(t, a("reflected") - .1, a("enters") + .2));
+    op(s.l1, ramp(t, a("falls"), a("falls") + .2)); popAt(s.l1, 520, 760, t, a("falls")); op(s.l2, ramp(t, a("reflected"), a("reflected") + .2)); popAt(s.l2, 1160, 600, t, a("reflected"));
+    op(s.ok, ramp(t, a("now"), a("now") + .2)); popAt(s.ok, 760, 160, t, a("now")); }; return s; })();
+
+// ---- MOON
+S.moon = (() => { const s = scene("moon", "#03045e", "#10002b");
+  seed = 8; s.st = []; for (let i = 0; i < 24; i++) s.st.push({x: rnd() * 1500, y: rnd() * 900, e: el("circle", {r: 2 + rnd() * 3, fill: "#fff"}, s.stage)});
+  s.sun = emo(s.stage, 0, 0, 220, "☀️"); s.m = moonDisc(s.stage, 110); s.earth = el("g", {}, s.stage); el("circle", {r: 130, fill: "#0077b6", stroke: INK, "stroke-width": 6}, s.earth); el("path", {d: "M-70 -50 q40 -30 80 0 q20 40 -20 60 q-50 10 -60 -60 Z M30 40 q40 -10 60 20 q-20 40 -60 20 Z", fill: "#38b000", stroke: INK, "stroke-width": 4}, s.earth);
+  s.kid = emo(s.stage, 0, 0, 90, "👀"); s.r1 = ray(s.stage); s.r2 = ray(s.stage);
+  s.not = chip(s.stage, "✗ the Moon is NOT a source of light", "#e63946", {fs: 36}); s.lab = chip(s.stage, "sunlight falls on the Moon ➜ reflected to Earth", "#3a86ff", {fs: 32});
+  s.bor = chip(s.stage, "🌕 = BORROWED sunlight ☀️", "#ffbe0b", {fs: 44});
+  s.run = t => { const a = w => C("moon", w);
+    s.st.forEach((q, i) => { set(q.e, "cx", q.x); set(q.e, "cy", q.y); op(q.e, .3 + .5 * Math.abs(Math.sin(t + i))); });
+    op(s.sun, ramp(t, a("sunlight") - .4, a("sunlight"))); set(s.sun, "x", 220); set(s.sun, "y", 640);
+    op(s.m, 1); tf(s.m, `translate(800 300) scale(${1 + .04 * Math.sin(t * 2) * ramp(t, a("shines"), a("shines") + .3)})`);
+    op(s.earth, ramp(t, a("earth") - .4, a("earth"))); tf(s.earth, "translate(1410 610)"); op(s.kid, ramp(t, a("earth") - .2, a("earth"))); set(s.kid, "x", 1360); set(s.kid, "y", 500);
+    s.r1.to(320, 600, 690, 360, ramp(t, a("falls") - .3, a("falls") + .5)); s.r2.to(900, 370, 1320, 490, ramp(t, a("reflected") - .1, a("reflected") + .6));
+    op(s.not, on(t, a("not"), a("borrowed") - .3, .2)); popAt(s.not, 860, 132, t, a("not")); op(s.lab, on(t, a("reflected"), a("borrowed") - .3, .2)); popAt(s.lab, 640, 930, t, a("reflected"));
+    op(s.bor, ramp(t, a("borrowed"), a("borrowed") + .2)); popAt(s.bor, 860, 132, t, a("borrowed")); }; return s; })();
+
+// ---- MYTH
+S.myth = (() => { const s = scene("myth", "#ffadad", "#ffd6a5");
+  s.trap = chip(s.stage, "💡 EXAM TIP", "#e63946", {fs: 50}); s.e = eye(s.stage, 1.8);
+  s.out = [0, 1, 2].map(() => ray(s.stage, "#e63946")); s.inn = [0, 1, 2].map(() => ray(s.stage, "#06d6a0"));
+  s.c1 = chip(s.stage, "✗ eyes SEND OUT light", "#e63946", {fs: 40}); s.c2 = chip(s.stage, "✓ light travels INTO the eyes", "#06d6a0", {fs: 40}); s.x = tx(s.stage, {x: 1100, y: 520, "text-anchor": "middle", "font-size": 200, "font-weight": 700, fill: "#e63946", class: "out", "stroke-width": 12}, "✗");
+  s.run = t => { const a = w => C("myth", w); const sw = ramp(t, a("into") - .5, a("into"));
+    op(s.trap, ramp(t, a("tip"), a("tip") + .2)); popAt(s.trap, 760, 160, t, a("tip")); op(s.e, 1); tf(s.e, "translate(560 520) scale(1.8)");
+    s.out.forEach((r, i) => { r.to(700, 520, 1250, 340 + i * 180, ramp(t, a("send"), a("send") + .6) * 1); op(r, ramp(t, a("send"), a("send") + .2) * (1 - sw)); });
+    op(s.x, on(t, a("send") + .6, a("into") - .4, .2));
+    s.inn.forEach((r, i) => r.to(1250, 340 + i * 180, 720, 520, ramp(t, a("into") + i * .1, a("into") + .7 + i * .1)));
+    op(s.c1, ramp(t, a("send"), a("send") + .2) * (1 - sw)); popAt(s.c1, 760, 860, t, a("send")); op(s.c2, sw); popAt(s.c2, 760, 860, t, a("into") - .5); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.p1 = el("g", {}, s.stage); el("rect", {x: -290, y: -230, width: 580, height: 460, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7}, s.p1); tf(moonDisc(s.p1, 90), "translate(0 -60)"); tx(s.p1, {x: 0, y: 110, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: INK}, "Source of light?");
+  s.a1 = chip(s.p1, "✗ NO: it REFLECTS sunlight", "#e63946", {fs: 30});
+  s.p2 = el("g", {}, s.stage); el("rect", {x: -290, y: -230, width: 580, height: 460, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7}, s.p2); emo(s.p2, 0, -60, 130, "📖"); tx(s.p2, {x: 0, y: 110, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: INK}, "How do we see it?");
+  s.a2 = chip(s.p2, "☀️ ➜ 📖 ➜ 👁️ reflected into eyes", "#06d6a0", {fs: 27});
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), b("reflects") - .5, .2)); tf(s.pause, `translate(760 150) scale(${pop(t, a("pause"))}) translate(-760 -150)`);
+    op(s.p1, ramp(t, a("moon"), a("moon") + .2)); tf(s.p1, `translate(460 530) scale(${pop(t, a("moon"))})`); op(s.p2, ramp(t, a("book"), a("book") + .2)); tf(s.p2, `translate(1060 530) scale(${pop(t, a("book"))})`);
+    op(s.a1, ramp(t, b("reflects"), b("reflects") + .2)); popAt(s.a1, 0, 180, t, b("reflects")); op(s.a2, ramp(t, b("sunlight#2"), b("sunlight#2") + .2)); popAt(s.a2, 0, 180, t, b("sunlight#2")); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["☀️ Light from the Sun falls on the Moon."], ["🌕 The light is reflected from the Moon and enters our eyes."], ["👁️ So we can see the Moon."], ["✗ The Moon is NOT a source of light."]];
+  let y = -150; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 50, "font-size": 40, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 50 + 50; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("light"), a("reflected"), a("so"), a("not")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (teach it)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "🧑‍🏫 TEACH IT TO SOMEONE");
+  s.kid = emo(s.stage, 0, 0, 180, "🧒"); s.fam = emo(s.stage, 0, 0, 180, "👵");
+  s.bub = el("g", {}, s.stage); el("rect", {x: -230, y: -70, width: 460, height: 140, rx: 40, fill: "#fff", stroke: INK, "stroke-width": 6}, s.bub); el("path", {d: "M-120 66 L-160 120 L-70 66 Z", fill: "#fff", stroke: INK, "stroke-width": 6}, s.bub); tx(s.bub, {x: 0, y: 22, "text-anchor": "middle", "font-size": 54}, "☀️ ➜ 🌕 ➜ 👁️");
+  s.c1 = chip(s.stage, "in your OWN words", "#7209b7", {fs: 38}); s.c2 = chip(s.stage, "can teach it = truly UNDERSTAND it ✓", "#1b1b3a", {fs: 38});
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.title, ramp(t, a("teach"), a("teach") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("teach")) * .95}) translate(-760 -180)`);
+    op(s.kid, ramp(t, a("explain") - .3, a("explain"))); set(s.kid, "x", 480); set(s.kid, "y", 620); op(s.fam, ramp(t, a("family"), a("family") + .2)); set(s.fam, "x", 1080); set(s.fam, "y", 620);
+    op(s.bub, ramp(t, a("explain"), a("explain") + .2)); tf(s.bub, `translate(700 400) scale(${pop(t, a("explain"))})`);
+    op(s.c1, ramp(t, a("own"), a("own") + .2)); popAt(s.c1, 760, 800, t, a("own")); op(s.c2, ramp(t, a("truly"), a("truly") + .2)); popAt(s.c2, 760, 890, t, a("truly")); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  const CX = 480, CY = 430;
+  s.dim = [["🌿 NATURAL SOURCES", "#06d6a0", 300, 230], ["🏭 MAN-MADE SOURCES", "#3a86ff", 760, 230]].map(([n, c, x, y]) => ({l: el("path", {d: `M${CX} ${CY} L${x} ${y}`, stroke: c, "stroke-width": 12, opacity: .35}, s.stage), c: chip(s.stage, n, c, {fs: 28}), x, y}));
+  s.l1 = el("path", {d: `M${CX} ${CY} Q560 640 860 640`, stroke: "#f77f00", "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 600}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 160, ry: 74, fill: "#ffbe0b", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 16, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: INK}, "💡 LIGHT");
+  s.br = chip(s.stage, "👁️ HOW WE SEE", "#f77f00", {fs: 36});
+  s.subs = [["light must ENTER the eyes", "see"], ["directly from a source", "directly"], ["reflected from objects", "reflected"], ["the Moon reflects sunlight", "reflected"]].map(([n, w], i) => ({c: chip(s.stage, n, "#fff", {fs: 27, ink: INK}), w, i}));
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr14"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  const IH = 224 * 2000 / 780; s.scr = el("g", {"clip-path": "url(#scr14)"}, s.phone); s.shot = el("image", {href: "oneapp_mind2.png", x: -112, y: -122, width: 224, height: IH, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("light"), a("light") + .2)); tf(s.center, `translate(${CX} ${CY}) scale(${pop(t, a("light"))})`);
+    s.dim.forEach(d => { op(d.l, ramp(t, a("light") + .3, a("light") + .5) * .35); op(d.c, ramp(t, a("light") + .3, a("light") + .5) * .5); popAt(d.c, d.x, d.y, t, a("light") + .3); });
+    set(s.l1, "stroke-dashoffset", 600 * (1 - ramp(t, a("branch") - .1, a("branch") + .4))); op(s.l1, t > a("branch") - .1 ? 1 : 0);
+    op(s.br, ramp(t, a("see"), a("see") + .2)); popAt(s.br, 920, 640, t, a("see"));
+    s.subs.forEach(c => { const tt = a(c.w) + (c.i === 3 ? .5 : 0); op(c.c, ramp(t, tt, tt + .2)); popAt(c.c, 920, 720 + c.i * 64, t, tt); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 640, 130, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1380, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    const nx = a("ultimate") + .6; const off = -122 - (IH - 327) * ramp(t, a("save"), nx); set(s.shot, "y", off); const sc = IH / 2000;
+    set(s.ring, "x", -112 + 36 * sc); set(s.ring, "y", off + 1722 * sc); set(s.ring, "width", 156 * sc); set(s.ring, "height", 72 * sc);
+    op(s.ring, on(t, nx, SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#3a0ca3", "#10002b");
+  s.ans = el("g", {}, s.stage); el("rect", {x: -380, y: -70, width: 760, height: 140, rx: 70, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.ans); tx(s.ans, {x: 0, y: 22, "text-anchor": "middle", "font-size": 56, "font-weight": 700, fill: "#fff"}, "🌕 Never by itself!");
+  s.m = moonDisc(s.stage, 110); s.fam = emo(s.stage, 0, 0, 160, "👵");
+  s.bub = el("g", {}, s.stage); el("rect", {x: -230, y: -70, width: 460, height: 140, rx: 40, fill: "#fff", stroke: INK, "stroke-width": 6}, s.bub); tx(s.bub, {x: 0, y: 22, "text-anchor": "middle", "font-size": 54}, "☀️ ➜ 🌕 ➜ 👀");
+  s.run = t => { const a = w => C("close", w); const tn = ramp(t, a("tonight") - .2, a("tonight") + .1);
+    op(s.ans, ramp(t, a("never"), a("never") + .15) * (1 - tn)); tf(s.ans, `translate(760 420) scale(${pop(t, a("never"))})`);
+    op(s.m, ramp(t, a("tonight"), a("tonight") + .2)); tf(s.m, "translate(1200 260)");
+    op(s.fam, ramp(t, a("explain"), a("explain") + .2)); set(s.fam, "x", 480); set(s.fam, "y", 640);
+    op(s.bub, ramp(t, a("explain"), a("explain") + .2)); tf(s.bub, `translate(820 520) scale(${pop(t, a("explain"))})`); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Why shadows exist");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "(and why glass casts them too) 👤");
+  s.run = () => {}; return s; })();
+
+
+window.INTRO = {"goals": [["👀", "How we see", "first"], ["💡", "Seeing light sources", "second"], ["🌙", "Why the Moon seems to shine", "third"]]};
+// ---- WELCOME (greeting + "today you'll learn")
+S.welcome = (() => { const sv = seed; seed = 424242; const s = scene("welcome", "#ffd166", "#ef476f"), I = window.INTRO;
+  s.wave = emo(s.stage, 0, 0, 190, "👋");
+  s.hi = el("g", {}, s.stage);
+  tx(s.hi, {x: 0, y: 0, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Welcome to");
+  tx(s.hi, {x: 0, y: 125, "text-anchor": "middle", "font-size": 118, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "TheOneApp, Explained!");
+  s.board = el("g", {}, s.stage);
+  el("rect", {x: -700, y: -380, width: 1400, height: 720, rx: 46, fill: "#fffaf0", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.board);
+  el("rect", {x: -700, y: -380, width: 1400, height: 130, rx: 46, fill: INK}, s.board);
+  el("rect", {x: -700, y: -290, width: 1400, height: 40, fill: INK}, s.board);
+  tx(s.board, {x: 0, y: -293, "text-anchor": "middle", "font-size": 66, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 3}, "🎯 TODAY YOU'LL LEARN");
+  const cols = ["#ff5d73", "#3a86ff", "#06d6a0"];
+  s.rows = I.goals.map(([icon, label, cue], i) => { const g = el("g", {}, s.board), y = -120 + i * 175;
+    el("circle", {cx: -560, cy: y, r: 56, fill: cols[i], stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: -560, y: y + 25, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#fff"}, String(i + 1));
+    emo(g, -420, y, 92, icon);
+    tx(g, {x: -330, y: y + 21, "font-size": 58, "font-weight": 700, fill: INK}, label);
+    return {g, y, cue}; });
+  s.run = t => { const T0 = SC.welcome.t0, tB = C("welcome", "today") - .35, go = C("welcome", I.go || "started");
+    // phase A: wave + welcome
+    const a = 1 - ramp(t, tB - .3, tB + .1);
+    tf(s.wave, `translate(960 ${330 - 40 * (1 - a)}) scale(${Math.max(0, pop(t, T0 - .1)) * a}) rotate(${Math.sin(t * 9) * 18})`);
+    tf(s.hi, `translate(960 ${590 - 60 * (1 - a)}) scale(${Math.max(0, pop(t, C("welcome", "welcome") - .15)) * a})`); op(s.hi, a);
+    // phase B: learning board, one row per goal
+    const b = Math.max(0, pop(t, tB, .55)), bump = 1 + .04 * on(t, go, go + .5, .2);
+    tf(s.board, `translate(960 ${520 + Math.sin(t * 1.5) * 6}) scale(${b * bump})`); op(s.board, b > 0 ? 1 : 0);
+    s.rows.forEach(r => { const k = Math.max(0, pop(t, C("welcome", r.cue) - .1));
+      tf(r.g, `translate(${-60 * (1 - Math.min(1, k))} 0)`); op(r.g, clamp(k)); });
+  };
+  seed = sv; return s; })();
+
+/* ---------- confetti ---------- */
+function burst() {}
+const BURSTS = []; // precomputed so rendering is deterministic per frame
+seed = 77; const conf = []; for (let i = 0; i < 70; i++) conf.push({vx: (rnd() - .5) * 1400, vy: -600 - rnd() * 700, rot: rnd() * 720, col: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6], e: el("rect", {width: 18, height: 10, rx: 3, opacity: 0}, $("confetti"))});
+conf.forEach(c => set(c.e, "fill", c.col));
+function drawConfetti(t) { const b = TL.bursts.filter(x => t >= x && t < x + 1.6).pop();
+  conf.forEach(c => { if (b === undefined) { op(c.e, 0); return; } const k = t - b; const x = 760 + c.vx * k * .5, y = 450 + c.vy * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.rot * k})`); op(c.e, 1 - k / 1.6); }); }
+
+/* ---------- keyword box → shelf ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const fs = 54, w = k.label.length * fs * .56 + 70;
+  const big = el("g", {}, g); el("rect", {x: -w / 2, y: -50, width: w, height: 100, rx: 50, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 19, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, "⭐ " + k.label);
+  const sfs = 25, sw = k.short.length * sfs * .58 + 40;
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -sw / 2, y: -22, width: sw, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": sfs, "font-weight": 700, fill: "#fff"}, k.short);
+  return {k, g, big, small, sw, i}; });
+function drawKW(t) {
+  op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;
+    const sx = 1880 - K.sw / 2, sy = 104 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; }
+    op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly);
+    const x = lerp(960, sx, fly), y = lerp(860, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    const scl = Math.max(0, pop(t, t0, .5));
+    tf(K.g, `translate(${x} ${y})`);
+    tf(K.big, `scale(${scl * lerp(1, .46, fly) * (1 + .04 * Math.sin(t * 8) * (1 - fly))})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); tf(K.small, `scale(${1 + .15 * on(t, tf0 + tfly, tf0 + tfly + .35, .15)})`);
+  });
+}
+
+/* ---------- captions ---------- */
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * 46 * .52 + 60;
+  el("rect", {x: 960 - w / 2, y: 975, width: w, height: 70, rx: 35, fill: "#1b1b3a", "fill-opacity": .78}, g);
+  const t = el("text", {x: 960, y: 1023, "text-anchor": "middle", "font-size": 46, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- render ---------- */
+const order = TL.scenes.map(s => s.scene);
+window.LABCARD = {"seg": "blackout", "word": "try", "code": "4.1", "title": "Seeing in the dark", "part": "Part (b): Lights on"};
+// "Try it in TheOneApp" card: shown while Heart points students to the matching School Lab experiment
+const LC = window.LABCARD, LCG = el("g", {opacity: 0}, $("v")); $("v").insertBefore(LCG, $("confetti"));
+el("rect", {x: 0, y: 0, width: 1920, height: 1080, fill: "#0b1020", opacity: .55}, LCG);
+const LCB = el("g", {}, LCG);
+el("rect", {x: -470, y: -190, width: 940, height: 380, rx: 36, fill: "#fffdf7", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, LCB);
+el("rect", {x: -470, y: -190, width: 940, height: 92, rx: 36, fill: "#7209b7"}, LCB); el("rect", {x: -470, y: -130, width: 940, height: 32, fill: "#7209b7"}, LCB);
+tx(LCB, {x: 0, y: -128, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "🧪 Try it yourself in TheOneApp");
+const LCT = tx(LCB, {x: 0, y: -30, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "School Lab › " + LC.code + "  " + LC.title);
+tx(LCB, {x: 0, y: 30, "text-anchor": "middle", "font-size": 32, "font-weight": 600, fill: "#5b6782"}, LC.part);
+const LCbtn = el("g", {transform: "translate(0 110)"}, LCB); el("rect", {x: -230, y: -40, width: 460, height: 80, rx: 40, fill: "#2a9d8f", stroke: INK, "stroke-width": 5}, LCbtn);
+tx(LCbtn, {x: 0, y: 14, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: "#fff"}, "Let's test it now! ▶");
+function drawLC(t) { if (!LC.fit) { const bw = LCT.getBBox().width; if (bw > 870) LCT.setAttribute("font-size", 40 * 870 / bw); LC.fit = bw > 0; }   // long lab titles: shrink to fit the card
+  const seg = TL.segs.find(s => s.id === LC.seg); if (!seg) return; const cs = TL.cues[LC.seg] || {};
+  const t0 = Math.max(...Object.keys(cs).filter(k => k.replace(/#\d+$/, "") === LC.word).map(k => cs[k])), t1 = seg.t1 + .6;
+  op(LCG, on(t, t0 - .2, t1, .3)); tf(LCB, `translate(760 520) scale(${Math.max(0, pop(t, t0 - .2))})`);
+  tf(LCbtn, `translate(0 110) scale(${1 + .05 * Math.sin(t * 6)})`); }
+
+window.MMPHONE = {"href": "mm_ep14.png", "saved": [327, 35, 158, 62], "map": [24, 266, 732, 374]};
+// "My mind map" phone: the episode's own map from TheOneApp's maker (780x1688 shot), ring on "Saved ✓", then scroll to show the whole map
+(() => { const s = S.mindmap, B = window.MMPHONE; if (!s || !s.shot || !B) return;
+  const k = 224 / 780, H = 1688 * k, WIN = 327;
+  s.shot.setAttribute("href", B.href); s.shot.setAttribute("height", H);
+  const D = Math.max(0, (B.map[1] + B.map[3] + 14) * k - WIN);
+  const ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 4, rx: 9}, s.shot.parentNode);
+  const cues = TL.cues.habit2 || {}, last = w => { let v = null; for (const key in cues) if (key === w || key.startsWith(w + "#")) v = Math.max(v ?? -1, cues[key]); return v; };
+  const run0 = s.run;
+  s.run = t => { run0(t); if (s.ring && s.ring.tagName === "rect") op(s.ring, 0);
+    const t1 = SC.mindmap.t1, sv = C("habit2", "save"), mk = (last("tap") ?? (sv + 2.5)) - .2;
+    const off = -122 - D * ramp(t, mk + .4, Math.min(t1 - .3, mk + 3)); set(s.shot, "y", off);
+    set(ring, "x", -112 + B.saved[0] * k - 3); set(ring, "y", off + B.saved[1] * k - 3); set(ring, "width", B.saved[2] * k + 6); set(ring, "height", B.saved[3] * k + 6);
+    op(ring, on(t, sv + .7, D > 0 ? mk + .4 : t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; })();
+
+// 4-second "think" countdown between the quiz question and the answer (shared by every episode).
+// It sits in the caption strip, which is empty during the silent pause, so it never covers the quiz.
+const QZ = TL.segs.find(s => s.id === "quiz1"), CD = el("g", {opacity: 0}, $("v"));
+el("rect", {x: -300, y: -46, width: 600, height: 92, rx: 46, fill: "#1b1b3a", stroke: "#fff", "stroke-width": 4, filter: "url(#sh)"}, CD);
+tx(CD, {x: -120, y: 17, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "⏸ Think!");
+el("circle", {cx: 190, cy: 0, r: 38, fill: "#f77f00", stroke: "#fff", "stroke-width": 4}, CD);
+const CDT = tx(CD, {x: 190, y: 19, "text-anchor": "middle", "font-size": 54, "font-weight": 700, fill: "#fff"}, "4");
+const CDB = el("rect", {x: -250, y: 30, width: 500, height: 8, rx: 4, fill: "#ffd166"}, CD);
+function drawCD(t) { if (!QZ) return; const t0 = QZ.t1 + .5, k = clamp((t - t0) / 4);
+  op(CD, on(t, t0, t0 + 4.15, .15)); tf(CD, "translate(960 1004)");
+  CDT.textContent = String(Math.max(1, 4 - Math.floor(k * 4))); set(CDB, "width", 500 * (1 - k));
+  if (S.quiz && S.quiz.ring) op(S.quiz.ring, 0); }
+
+const FILL = {"blind": "translate(765 525) scale(1.274) translate(-857 -448)", "direct": "translate(765 525) scale(1.052) translate(-788 -559)", "myth": "translate(765 525) scale(1.091) translate(-829 -508)", "quiz": "translate(765 525) scale(1.149) translate(-760 -434)", "exam": "translate(765 525) scale(1.067) translate(-760 -450)", "close": "translate(765 525) scale(1.453) translate(-824 -442)"}; for (const k in FILL) if (S[k]) S[k].stage.setAttribute("transform", FILL[k]);
+window.render = function (t) {
+  order.concat(["end"]).forEach((name, i) => {
+    const s = S[name]; const t0 = name === "end" ? TL.END - 4.0 : SC[name].t0 - (i ? .4 : 0);
+    const nxt = i + 1 < order.length ? SC[order[i + 1]].t0 - .4 : (name === "end" ? 1e9 : TL.END - 4.0);
+    const v = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2));
+    op(s.g, v); if (v <= 0) return;
+    tf(s.g, `translate(960 540) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(-960 -540)`);
+    moveBubbles(s.b, t); s.run(t);
+  });
+  drawConfetti(t); drawKW(t); drawCaps(t); drawCD(t); drawLC(t);
+  set($("prog"), "width", 1920 * clamp(t / TL.END));
+  { const tg = $("tag"); tg.querySelector("rect").setAttribute("width", tg.querySelector("text").getComputedTextLength() + 62); } op($("tag"), ramp(t, .2, .6) * (1 - ramp(t, TL.END - 4.2, TL.END - 3.8)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+function fitPill(g, pad) { const r = g.querySelector("rect"), t = g.querySelector("text"); if (!r || !t) return 0;
+  const need = t.getBBox().width + pad, w = +r.getAttribute("width");
+  if (need > w) { const cx = +r.getAttribute("x") + w / 2; set(r, "width", need); set(r, "x", cx - need / 2); } return Math.max(need, w); }
+function shrinkText(g, fs) { const r = g.querySelector("rect"), t = g.querySelector("text"); const w = +r.getAttribute("width") - fs * 1.1, bw = t.getBBox().width;
+  if (bw > w) set(t, "font-size", fs * w / bw); }
+document.fonts.ready.then(() => {
+  CHIPS.forEach(([g, fs, fixed]) => fixed ? shrinkText(g, fs) : fitPill(g, fs * 1.3));
+  KW.forEach(K => { fitPill(K.big, 70); K.sw = fitPill(K.small, 36); });
+  CAPS.forEach(({g}) => fitPill(g, 64));
+  window.READY = true; });
+</script>
+</body></html>

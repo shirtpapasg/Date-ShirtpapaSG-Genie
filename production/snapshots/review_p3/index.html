@@ -1,0 +1,208 @@
+<title>P3 Videos Review Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one column of episode rows on exercise-book grid paper; pipeline summary on top */
+:root{
+  --bg:#eef3fa; --grid:#dbe5f3; --surface:#ffffff; --ink:#16213e; --muted:#5b6782; --line:#d3dceb;
+  --accent:#23845a; --heart:#c92a6b; --george:#1c6ed6;
+  --s-scripted:#7a869e; --s-rendered:#2f6fd6; --s-uploaded:#c77a00; --s-approved:#1f8a4c; --s-live:#7b3fd1;
+  --display:"Baloo 2","Trebuchet MS",system-ui,sans-serif; --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1524; --grid:#172238; --surface:#162038; --ink:#e7edf8; --muted:#9ba8c4; --line:#26324d;
+  --accent:#4cc38a; --heart:#f06595; --george:#5c9df5;
+  --s-scripted:#8d99b3; --s-rendered:#5c9df5; --s-uploaded:#f0a63a; --s-approved:#4cc38a; --s-live:#b08cf5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1524; --grid:#172238; --surface:#162038; --ink:#e7edf8; --muted:#9ba8c4; --line:#26324d;
+  --accent:#4cc38a; --heart:#f06595; --george:#5c9df5;
+  --s-scripted:#8d99b3; --s-rendered:#5c9df5; --s-uploaded:#f0a63a; --s-approved:#4cc38a; --s-live:#b08cf5; color-scheme:dark}
+body{background:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:22px}
+header{display:grid;gap:6px}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(30px,5vw,44px)/1.05 var(--display);margin:0;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.pipe{display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:700;font-size:14px}
+.dot{width:10px;height:10px;border-radius:50%}
+.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.list{display:grid;gap:12px}
+.ep{display:grid;grid-template-columns:200px 1fr;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
+.thumb{width:100%;aspect-ratio:16/9;border-radius:8px;object-fit:cover;background:var(--grid);display:grid;place-items:center;color:var(--muted);font:500 12px var(--mono);text-align:center;max-width:100%}
+.meta{min-width:0;display:grid;gap:8px;align-content:start}
+.top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.no{font:500 13px var(--mono);color:var(--muted)}
+.title{font:600 20px/1.2 var(--display);margin:0;text-wrap:balance}
+.tag{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;border:1.5px solid currentColor}
+.heart{color:var(--heart)} .george{color:var(--george)}
+.sub{color:var(--muted);font-size:14px}
+.status{font-size:12px;font-weight:700;color:#fff;padding:3px 10px;border-radius:999px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input[type=url],textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+input[type=url]{flex:1 1 260px}
+textarea{width:100%;min-height:38px;resize:vertical;box-sizing:border-box}
+input:focus-visible,textarea:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button{font:700 14px var(--body);border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 12px;cursor:pointer}
+button.ok{background:var(--accent);border-color:var(--accent);color:#fff}
+a.yt{font-weight:700;color:var(--george)}
+.saved{font:500 12px var(--mono);color:var(--accent)}
+.empty{background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:22px;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+.tw{position:relative;display:block;padding:0;border:0;background:none;border-radius:8px;cursor:pointer;max-width:100%}
+.tw .play{position:absolute;inset:0;display:grid;place-items:center}
+.tw .play span{width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.62);color:#fff;display:grid;place-items:center;font-size:22px;padding-left:4px;box-sizing:border-box}
+.tw:hover .play span{background:var(--accent)}
+button.pl{background:var(--accent);border-color:var(--accent);color:#fff}
+dialog.player{width:min(1100px,96vw);max-width:96vw;padding:0;border:0;border-radius:14px;background:#000;color:#fff;overflow:hidden}
+dialog.player::backdrop{background:rgba(5,10,20,.82)}
+.pbar{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;padding:10px 14px;background:#111827}
+.pbar b{font:600 17px/1.2 var(--display)} .pbar .part{font:500 12px var(--mono);color:#aab4c8}
+.pbar button{background:#1f2937;border-color:#374151;color:#fff}
+dialog.player video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.vwrap{position:relative}
+.done[hidden],dialog.player video[hidden]{display:none}
+.done{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(10,14,28,.86);text-align:center;padding:16px}
+.done b{font:600 clamp(18px,3vw,28px)/1.2 var(--display)}
+.done .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.done button{background:#1f2937;border-color:#374151;color:#fff;font-size:15px;padding:10px 16px}
+@media (max-width:640px){.ep{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.ep{transition:border-color .2s}.ep:hover{border-color:var(--accent)}}
+.ctl{display:flex;align-items:center;gap:10px;padding:8px 4px 2px;color:#fff}
+.ctl button{background:#1f2937;border-color:#374151;color:#fff;padding:6px 12px;min-width:44px}
+.ctl input[type=range]{flex:1;min-width:0;accent-color:#4cc38a;height:28px}
+.ctl .t{font:500 13px var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.vcol{display:grid;gap:8px;align-content:start;min-width:0}
+.rv{border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.35;display:grid;gap:6px;border:1.5px solid currentColor}
+.rv b{font-size:13px} .rv ul{margin:0;padding-left:16px} .rv .when{font:500 11px var(--mono);opacity:.85}
+.rv.wip{color:var(--s-uploaded);background:color-mix(in srgb,var(--s-uploaded) 10%,var(--surface))}
+.rv.new{color:var(--s-approved);background:color-mix(in srgb,var(--s-approved) 10%,var(--surface))}
+.rv.seen{color:var(--muted);border-style:dashed}
+.rv ul,.rv .when{color:var(--ink)} .rv.seen ul{display:none}
+.rv button{font-size:13px;padding:6px 10px;background:var(--s-approved);border-color:var(--s-approved);color:#fff;justify-self:start}
+.revsum{font-weight:700;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+@media (max-width:560px){.ep{grid-template-columns:1fr}}
+.track{display:flex;flex-wrap:wrap;gap:4px;list-style:none;margin:0;padding:0;font-size:12px;font-weight:700}
+.track li{padding:3px 9px;border-radius:999px;border:1.5px solid var(--line);color:var(--muted);background:var(--surface)}
+.track li.on{color:#fff;border-color:transparent}
+.track li.cur{box-shadow:0 0 0 2px var(--ink)}
+.track .tb{all:unset;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.track .tb:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:999px}
+.nextstep{font-size:13px;color:var(--muted)}
+.stagehelp{margin-top:4px}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">TheOneApp, Explained · Inspiring Science P3 · Primary 3 series</div>
+    <h1>Episode review board</h1>
+    <p class="lede">Click any thumbnail or <b>▶ Play episode</b> to watch it here. Watch each episode here, then press <b>Approve</b> (on the card, or the <b>Approved</b> step of its track). Then upload it to YouTube as <b>Unlisted</b> and paste its link here. Approved, uploaded links are the ones that go onto TheOneApp.</p>
+  </header>
+  <div class="pipe" id="pipe" aria-label="Episodes by stage"></div>
+  <p class="note stagehelp">Each episode moves through 5 stages, shown as a track on its card: <b>Scripted</b> → <b>Rendered</b> (video file ready, playable here) → <b>Approved</b> (you press Approve after watching) → <b>Uploaded</b> (you paste its Unlisted YouTube link) → <b>Live</b> (linked from TheOneApp). The counts above show how many episodes are at each stage.</p>
+  <div class="list" id="list">
+    <div class="empty" id="empty">Loading the episode list… If nothing appears, open this page inside Claude, where your board is saved.</div>
+  </div>
+</div>
+
+<dialog class="player" id="player" aria-label="Episode player">
+  <div class="pbar"><div><b id="ptitle"></b><div class="part" id="ppart"></div></div><button id="pclose">Close ✕</button></div>
+  <div class="vwrap"><video id="pv" playsinline preload="auto"></video>
+  <div class="done" id="pdone" hidden><b>✓ Episode complete</b><div class="row"><button id="preplay">↺ Watch again</button><button id="pnextep">Next episode ▶</button></div></div></div>
+  <div class="ctl"><button id="pplay" aria-label="Play or pause">▶</button><input id="pseek" type="range" min="0" max="1000" value="0" step="1" aria-label="Episode timeline"><span class="t" id="ptime">0:00 / 0:00</span><button id="pfull" aria-label="Full screen">⤢</button></div>
+  <video id="pnext" preload="auto" muted hidden></video>
+</dialog>
+<script>
+const STAGES = [["scripted","Scripted"],["rendered","Rendered"],["approved","Approved"],["uploaded","Uploaded"],["live","Live"]];
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let db = null, eps = [];
+
+const NEXT = {"scripted": "Next: Claude renders the video.", "rendered": "Next: watch it here, then press Approve.", "approved": "Next: upload to YouTube as Unlisted and paste the link below.", "uploaded": "Next: link it from TheOneApp.", "live": "Done: live in TheOneApp."};
+function stageOf(e){ if (e.live) return "live"; if (e.approved && e.youtubeUrl) return "uploaded"; if (e.approved) return "approved"; return e.rendered ? "rendered" : "scripted"; }
+function renderPipe(){
+  const c = Object.fromEntries(STAGES.map(([k]) => [k, 0])); eps.forEach(e => c[stageOf(e)]++);
+  $("#pipe").innerHTML = STAGES.map(([k, n]) => `<span class="pill"><span class="dot" style="background:var(--s-${k})"></span>${n} <span class="n">${c[k]}</span></span>`).join("");
+}
+const when = iso => { try { return new Date(iso).toLocaleString(undefined, {day: "numeric", month: "short", hour: "numeric", minute: "2-digit"}); } catch (e) { return ""; } };
+const needsReview = e => !e.pending && e.videoUpdatedAt && (!e.reviewedAt || e.reviewedAt < e.videoUpdatedAt);
+function reviewBadge(e){
+  const list = (e.changes || []).length ? `<ul>${e.changes.map(c => `<li>${esc(c)}</li>`).join("")}</ul>` : "";
+  if (e.pending) return `<div class="rv wip" role="status"><b>⏳ Update in progress</b><span class="when">Changes are being made. Wait for the green badge before reviewing.</span>${list}</div>`;
+  if (needsReview(e)) return `<div class="rv new" role="status"><b>🆕 New version: ready to review</b><span class="when">Updated ${esc(when(e.videoUpdatedAt))}</span>${list}<button data-act="reviewed">✓ Mark reviewed</button></div>`;
+  if (e.videoUpdatedAt) return `<div class="rv seen"><b>✓ Reviewed</b><span class="when">Version of ${esc(when(e.videoUpdatedAt))}</span></div>`;
+  return ""; }
+function renderList(){
+  if (!eps.length) { $("#list").innerHTML = `<div class="empty">No episodes yet. Claude adds each episode here as it is scripted.</div>`; renderPipe(); return; }
+  const nr = eps.filter(needsReview).length, nw = eps.filter(e => e.pending).length;
+  const sum = nr || nw ? `<div class="revsum" role="status">${nr ? `🆕 ${nr} episode${nr > 1 ? "s" : ""} ready to review` : ""}${nr && nw ? " · " : ""}${nw ? `⏳ ${nw} being updated` : ""}</div>` : "";
+  $("#list").innerHTML = sum + eps.map(e => { const st = stageOf(e); const label = STAGES.find(s => s[0] === st)[1];
+    const v = (e.narrator || "").toLowerCase();
+    return `<article class="ep" data-id="${esc(e.id)}">
+      <div class="vcol">${e.parts && e.parts.length ? `<button class="tw" data-act="play" aria-label="Play episode ${esc(e.no)}">${e.thumb ? `<img class="thumb" src="${esc(e.thumb)}" alt="">` : `<div class="thumb">video</div>`}<span class="play"><span>▶</span></span></button>` : (e.thumb ? `<img class="thumb" src="${esc(e.thumb)}" alt="Thumbnail for episode ${esc(e.no)}">` : `<div class="thumb">thumbnail<br>coming</div>`)}
+      ${reviewBadge(e)}</div>
+      <div class="meta">
+        <div class="top"><span class="no">EP ${String(e.no).padStart(2, "0")}</span>${e.narrator ? `<span class="tag ${v}">${esc(e.narrator)}</span>` : ""}${e.runtime ? `<span class="no">${esc(e.runtime)}</span>` : ""}</div>
+        <ol class="track" aria-label="Stage: ${label}">${STAGES.map(([k, n], i) => { const ci = STAGES.findIndex(x => x[0] === st); const lab = `${i < ci ? "✓ " : ""}${n}`; return `<li class="${i <= ci ? "on" : ""}${i === ci ? " cur" : ""}"${i <= ci ? ` style="background:var(--s-${k})"` : ""}>${k === "approved" && e.rendered ? `<button class="tb" data-act="approve" title="${e.approved ? "Undo approval" : "Approve this episode"}">${lab}</button>` : lab}</li>`; }).join("")}</ol>
+        <div class="nextstep">${NEXT[st]}</div>
+        <h2 class="title">${esc(e.title)}</h2>
+        <div class="sub">${esc(e.chapter)}${e.ytTitle ? ` · YouTube title: “${esc(e.ytTitle)}”` : ""}</div>
+        <div class="row">
+          ${e.parts && e.parts.length ? `<button class="pl" data-act="play">▶ Play episode</button>` : ""}
+          <label class="sr" for="u-${esc(e.id)}" hidden>YouTube link</label>
+          <input type="url" id="u-${esc(e.id)}" placeholder="Paste the Unlisted YouTube link" value="${esc(e.youtubeUrl)}">
+          ${e.youtubeUrl ? `<a class="yt" href="${esc(e.youtubeUrl)}" target="_blank" rel="noopener">Watch ↗</a>` : ""}
+          <button class="${e.approved ? "" : "ok"}" data-act="approve" ${e.rendered ? "" : "disabled title='The video is not ready yet'"}>${e.approved ? "Undo approval" : "Approve"}</button>
+          <span class="saved" id="s-${esc(e.id)}"></span>
+        </div>
+        <textarea id="n-${esc(e.id)}" placeholder="Notes for Claude (changes you want)">${esc(e.notes)}</textarea>
+      </div></article>`; }).join("");
+  renderPipe();
+}
+async function save(id, patch){
+  if (!db) { const s = $("#s-" + id); if (s) s.textContent = "Open in Claude to save"; return; }
+  try { await db.doc("episodes/" + id).update({...patch, updatedAt: new Date().toISOString()}); const s = $("#s-" + id); if (s) s.textContent = "Saved"; }
+  catch (err) { const s = $("#s-" + id); if (s) s.textContent = err && err.code === "not_granted" ? "You can view but not edit" : "Not saved, try again"; }
+}
+document.addEventListener("change", ev => { const a = ev.target.closest(".ep"); if (!a) return; const id = a.dataset.id;
+  if (ev.target.type === "url") { const url = ev.target.value.trim(); if (url && !/^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//.test(url)) { $("#s-" + id).textContent = "Paste a youtube.com or youtu.be link"; return; } save(id, {youtubeUrl: url}); }
+  if (ev.target.tagName === "TEXTAREA") save(id, {notes: ev.target.value}); });
+let cur = null, idx = 0, durs = [], seeking = false, pendingT = null;
+const fmt = t => { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0"); };
+const offs = i => durs.slice(0, i).reduce((a, b) => a + (b || 0), 0);
+const total = () => durs.reduce((a, b) => a + (b || 0), 0);
+function probe(e){ durs = e.parts.map(() => 0); e.parts.forEach((u, i) => { const m = document.createElement("video"); m.preload = "metadata"; m.muted = true;
+  m.onloadedmetadata = () => { if (cur === e) { durs[i] = m.duration; tick(); } m.removeAttribute("src"); m.load(); }; m.src = u; }); }
+function tick(){ const v = $("#pv"); if (!cur) return; if (v.duration && !durs[idx]) durs[idx] = v.duration;
+  const T = total(), now = offs(idx) + (v.currentTime || 0);
+  if (!seeking) $("#pseek").value = T ? Math.round(now / T * 1000) : 0;
+  $("#ptime").textContent = `${fmt(seeking ? $("#pseek").value / 1000 * T : now)} / ${fmt(T)}`; $("#pplay").textContent = v.paused ? "▶" : "❚❚"; }
+function loadPart(i, autoplay, at){ idx = i; $("#pdone").hidden = true; const v = $("#pv"); pendingT = at || null; v.src = cur.parts[i]; $("#ppart").textContent = "";
+  const n = cur.parts[i + 1]; const pn = $("#pnext"); if (n) { pn.src = n; pn.load(); } else pn.removeAttribute("src");
+  if (autoplay) v.play().catch(() => {}); tick(); }
+function seekTo(t){ const v = $("#pv"); let i = 0; while (i < durs.length - 1 && t >= offs(i + 1)) i++;
+  const local = Math.max(0, t - offs(i)); if (i === idx && v.src) { v.currentTime = local; $("#pdone").hidden = true; } else loadPart(i, !v.paused || !$("#pdone").hidden, local); }
+$("#pv").addEventListener("loadedmetadata", () => { const v = $("#pv"); durs[idx] = v.duration; if (pendingT) { v.currentTime = Math.min(pendingT, v.duration - .05); pendingT = null; } tick(); });
+["timeupdate","play","pause"].forEach(k => $("#pv").addEventListener(k, tick));
+$("#pv").addEventListener("click", () => { const v = $("#pv"); v.paused ? v.play().catch(() => {}) : v.pause(); });
+$("#pplay").addEventListener("click", () => { const v = $("#pv"); if (!$("#pdone").hidden) { loadPart(0, true); return; } v.paused ? v.play().catch(() => {}) : v.pause(); });
+$("#pseek").addEventListener("input", () => { seeking = true; tick(); });
+$("#pseek").addEventListener("change", () => { seeking = false; seekTo($("#pseek").value / 1000 * total()); });
+$("#pfull").addEventListener("click", () => { const w = $(".vwrap"); (w.requestFullscreen ? w.requestFullscreen() : Promise.reject()).catch(() => { const v = $("#pv"); if (v.webkitEnterFullscreen) v.webkitEnterFullscreen(); }); });
+function openPlayer(e){ cur = e; $("#ptitle").textContent = `EP ${String(e.no).padStart(2, "0")} · ${e.ytTitle || e.title}`; const d = $("#player"); if (!d.open) d.showModal(); probe(e); loadPart(0, true); }
+$("#pv").addEventListener("ended", () => { if (!cur) return; if (idx + 1 < cur.parts.length) { loadPart(idx + 1, true); return; }
+  const nx = eps.find(x => x.no === cur.no + 1 && x.parts && x.parts.length); $("#pnextep").hidden = !nx; $("#pdone").hidden = false; tick(); });
+$("#preplay").addEventListener("click", () => { if (cur) loadPart(0, true); });
+$("#pnextep").addEventListener("click", () => { const nx = cur && eps.find(x => x.no === cur.no + 1 && x.parts && x.parts.length); if (nx) openPlayer(nx); });
+$("#pclose").addEventListener("click", () => $("#player").close());
+$("#player").addEventListener("close", () => { const v = $("#pv"); v.pause(); v.removeAttribute("src"); v.load(); $("#pnext").removeAttribute("src"); cur = null; });
+document.addEventListener("click", ev => { const p = ev.target.closest("[data-act=play]"); if (p) { const e = eps.find(x => x.id === p.closest(".ep").dataset.id); if (e) openPlayer(e); return; } });
+document.addEventListener("click", ev => { const b = ev.target.closest("button[data-act=reviewed]"); if (!b) return; save(b.closest(".ep").dataset.id, {reviewedAt: new Date().toISOString()}); });
+document.addEventListener("click", ev => { const b = ev.target.closest("button[data-act=approve]"); if (!b) return; const id = b.closest(".ep").dataset.id; const e = eps.find(x => x.id === id); save(id, {approved: !e.approved}); });
+
+(async () => { try { db = window.claude ? await window.claude.use("db") : null; } catch (e) { db = null; }
+  if (!db) { $("#empty").textContent = "This board saves inside Claude. Open it from your Claude account to see and edit episodes."; return; }
+  db.collection("episodes").orderBy("no").onSnapshot(snap => { eps = snap.docs.map(d => ({id: d.id, ...d.data()})); renderList(); },
+    () => { $("#empty").textContent = "Couldn't load the episodes. Refresh the page to try again."; });
+})();
+</script>

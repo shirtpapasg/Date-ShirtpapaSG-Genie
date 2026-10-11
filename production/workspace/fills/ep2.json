@@ -1,0 +1,8 @@
+{
+ "trap": "translate(765 525) scale(1.203) translate(-928 -454)",
+ "quiz": "translate(765 525) scale(1.225) translate(-900 -413)",
+ "dinner": "translate(765 525) scale(1.127) translate(-694 -484)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.073) translate(-870 -508)",
+ "close": "translate(765 525) scale(1.305) translate(-760 -428)"
+}

@@ -1,0 +1,520 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,Inter,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="confetti"></g>
+  <!-- overlays -->
+  <g id="tag" filter="url(#sh)">
+    <rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/>
+    <text x="70" y="73" font-size="25" font-weight="700" fill="#fff" letter-spacing="0">🍗 TheOneApp, Explained - Digestion (Part 1)</text>
+  </g>
+  <g id="shelf"><text id="shelfHead" x="1515" y="58" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect x="0" y="1072" width="1920" height="8" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" x="0" y="1072" width="0" height="8" fill="url(#rainbow)"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+<script>window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const CHIPS = [];
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, extra = "") => tf(e, `translate(${x} ${y}) scale(${Math.max(0, pop(t, a))}) ${extra}`);
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const C = (seg, w) => { const v = TL.cues[seg] && TL.cues[seg][w]; if (v === undefined) throw new Error("cue " + seg + ":" + w); return v; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+
+/* ---------- reusable widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p);
+  const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  CHIPS.push([g, fs, !!opts.w]);
+  return g;
+}
+function bg(p, c1, c2) {
+  const id = "g" + Math.round(rnd() * 1e9) + "_" + (bg.n = (bg.n || 0) + 1);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: 1920, height: 1080, fill: `url(#${id})`}, p);
+  // floating bubbles for liveliness
+  const bubbles = [];
+  for (let i = 0; i < 14; i++) bubbles.push({x: rnd() * 1920, y: rnd() * 1080, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return bubbles;
+}
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % 1200 + 1200) % 1200 - 60); set(o.e, "r", o.r); }); }
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {}, g); return {g, b, stage, name}; }
+
+/* ---------- bike ---------- */
+function makeBike(p) {
+  const g = el("g", {}, p), K = {};
+  const B = [-230, 90], F = [230, 90], Cr = [-10, 100];
+  const wheel = c => { const w = el("g", {transform: `translate(${c[0]} ${c[1]})`}, g);
+    el("circle", {r: 130, fill: "none", stroke: "#2b2d42", "stroke-width": 20}, w); el("circle", {r: 112, fill: "none", stroke: "#adb5bd", "stroke-width": 6}, w);
+    const sp = el("g", {}, w); for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; el("line", {x1: 0, y1: 0, x2: Math.cos(a) * 110, y2: Math.sin(a) * 110, stroke: "#ced4da", "stroke-width": 3}, sp); }
+    el("circle", {r: 16, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, w); return sp; };
+  K.wheelB = wheel(B); K.wheelF = wheel(F);
+  K.chain = el("path", {d: `M${B[0]} ${B[1] - 18} L${Cr[0]} ${Cr[1] - 30} A30 30 0 0 1 ${Cr[0]} ${Cr[1] + 30} L${B[0]} ${B[1] + 18} A18 18 0 0 1 ${B[0]} ${B[1] - 18} Z`, fill: "none", stroke: "#6c757d", "stroke-width": 8, "stroke-dasharray": "10 6"}, g);
+  const fr = el("g", {stroke: "#ff4d6d", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: `M${B[0]} ${B[1]} L${Cr[0]} ${Cr[1]} L-60 -80 Z M-60 -80 L170 -90 L${Cr[0]} ${Cr[1]} M170 -90 L${F[0]} ${F[1]}`}, fr);
+  el("path", {d: "M170 -90 L190 -150", stroke: "#ff4d6d", "stroke-width": 14, "stroke-linecap": "round"}, g);
+  K.handle = el("path", {d: "M150 -150 L240 -162", stroke: INK, "stroke-width": 12, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 240, cy: -162, r: 11, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, g);
+  K.brake = el("path", {d: "M215 -150 L250 -128 M218 -40 L242 -40", stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, g);
+  K.bell = el("circle", {cx: 200, cy: -172, r: 14, fill: "#ffd60a", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M-60 -80 L-70 -100", stroke: "#3a0ca3", "stroke-width": 10}, g);
+  K.seat = el("path", {d: "M-125 -108 Q-70 -126 -20 -106 Q-70 -96 -125 -108 Z", fill: "#3a0ca3", stroke: INK, "stroke-width": 4}, g);
+  const crank = el("g", {transform: `translate(${Cr[0]} ${Cr[1]})`}, g);
+  el("circle", {r: 30, fill: "#ced4da", stroke: INK, "stroke-width": 4}, crank);
+  K.crank = el("g", {}, crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: 58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: -58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  K.pedalA = el("rect", {x: -22, y: 52, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.pedalB = el("rect", {x: -22, y: -66, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.anchor = {Pedals: [-10, 160], Chain: [-130, 98], Wheels: [-230, 90], Seat: [-72, -112], Handlebars: [195, -156], Brakes: [233, -40], Bell: [200, -172]};
+  K.g = g; K.F = F; K.B = B;
+  K.animate = (crankDeg, wheelDeg, chainOff) => { tf(K.crank, `rotate(${crankDeg})`); tf(K.wheelB, `rotate(${wheelDeg})`); tf(K.wheelF, `rotate(${wheelDeg})`); set(K.chain, "stroke-dashoffset", chainOff); };
+  return K;
+}
+
+/* =================== SCENES (Episode 6: digestion part 1 — mouth to stomach) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+function plate(p) { const g = el("g", {}, p); el("ellipse", {rx: 300, ry: 190, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
+  el("ellipse", {cx: -70, cy: 0, rx: 140, ry: 90, fill: "#fff8e7", stroke: "#e9d8a6", "stroke-width": 5}, g); seed = 3; for (let i = 0; i < 60; i++) el("ellipse", {cx: -70 + (rnd() - .5) * 230, cy: (rnd() - .5) * 140, rx: 8, ry: 4, fill: "#fff", stroke: "#e9d8a6", "stroke-width": 1.5, transform: ""}, g);
+  for (let i = 0; i < 4; i++) el("rect", {x: 60 + i * 34, y: -80, width: 30, height: 150, rx: 10, fill: "#ffe8cc", stroke: "#d4a373", "stroke-width": 4, transform: `rotate(${8 - i * 4} ${75 + i * 34} 0)`}, g);
+  [0, 1, 2].forEach(i => el("ellipse", {cx: 220, cy: -60 + i * 50, rx: 28, ry: 18, fill: "#95d5b2", stroke: INK, "stroke-width": 3}, g)); return g; }
+function cube(p, x, y, s, col = "#ffb703") { const g = el("g", {transform: `translate(${x} ${y})`}, p);
+  el("path", {d: `M0 ${-s} L${s * .87} ${-s / 2} L0 0 L${-s * .87} ${-s / 2} Z`, fill: mix(col, "#ffffff", .35), stroke: INK, "stroke-width": 3}, g);
+  el("path", {d: `M${-s * .87} ${-s / 2} L0 0 L0 ${s} L${-s * .87} ${s / 2} Z`, fill: col, stroke: INK, "stroke-width": 3}, g);
+  el("path", {d: `M${s * .87} ${-s / 2} L0 0 L0 ${s} L${s * .87} ${s / 2} Z`, fill: mix(col, "#000000", .2), stroke: INK, "stroke-width": 3}, g); return g; }
+function stomachShape(p) { return el("path", {d: "M-60 -160 Q-40 -60 -120 20 Q-190 120 -60 170 Q80 210 150 80 Q190 -40 60 -60 Q10 -70 0 -160 Z", fill: "#e0707f", stroke: INK, "stroke-width": 7}, p); }
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#ffd166", "#ef476f");
+  s.pl = plate(s.stage); s.mouth = emo(s.stage, 0, 0, 180, "👄"); s.chick = emo(s.stage, 0, 0, 90, "🍗");
+  s.before = tx(s.stage, {x: 1160, y: 300, "text-anchor": "middle", "font-size": 90, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "BEFORE you");
+  s.before2 = tx(s.stage, {x: 1160, y: 410, "text-anchor": "middle", "font-size": 90, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 12}, "swallow?!");
+  s.mark = chip(s.stage, "✗ −1 mark", "#e63946", {fs: 44});
+  s.run = t => { const a = w => C("hook", w);
+    tf(s.pl, `translate(500 520) scale(${pop(t, .2)})`);
+    const k = ramp(t, a("digested") - .5, a("digested") + .6); op(s.chick, 1); set(s.chick, "x", lerp(640, 560, k)); set(s.chick, "y", lerp(500, 250, k) - Math.sin(k * Math.PI) * 80);
+    op(s.mouth, ramp(t, a("digested") - .3, a("digested"))); set(s.mouth, "x", 560); set(s.mouth, "y", 200);
+    op(s.before, ramp(t, a("before"), a("before") + .2)); op(s.before2, ramp(t, a("swallow"), a("swallow") + .2)); tf(s.before2, `translate(1160 410) scale(${pop(t, a("swallow"))}) translate(-1160 -410)`);
+    op(s.mark, on(t, a("lose"), a("do"), .2)); popAt(s.mark, 1160, 560, t, a("lose")); }; return s; })();
+
+// ---- WHAT IS DIGESTION
+S.what = (() => { const s = scene("what", "#90e0ef", "#48cae4");
+  s.big = el("rect", {x: -130, y: -130, width: 260, height: 260, rx: 30, fill: "#ffb703", stroke: INK, "stroke-width": 8}, s.stage);
+  s.bits = []; seed = 8; for (let i = 0; i < 40; i++) s.bits.push({a: rnd() * 6.28, r: 60 + rnd() * 240, e: el("circle", {r: 6 + rnd() * 8, fill: ["#ffb703", "#fb8500", "#ffd166"][i % 3], stroke: INK, "stroke-width": 2}, s.stage)});
+  s.kid = emo(s.stage, 1200, 430, 220, "🧍"); s.spark = emo(s.stage, 1290, 300, 80, "✨");
+  s.lbl = (() => { const g = el("g", {opacity: 0}, s.stage); el("rect", {x: -380, y: -56, width: 760, height: 112, rx: 40, fill: "#7b61ff", stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g); tx(g, {x: 0, y: -8, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#fff"}, "food ➜ SIMPLER SUBSTANCES"); tx(g, {x: 0, y: 36, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#fff"}, "that can be absorbed into the blood"); return g; })();
+  s.route = el("g", {}, s.stage); [["👄", "mouth"], ["⬇️", "gullet"], ["🫃", "stomach"]].forEach(([e, n], i) => { if (e === "🫃") stomachShape(el("g", {transform: `translate(${300 + i * 260} 714) scale(.21)`}, s.route)); else emo(s.route, 300 + i * 260, 720, 80, e); tx(s.route, {x: 300 + i * 260, y: 800, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, n); });
+  s.run = t => { const a = w => C("what", w); const br = ramp(t, a("breaking"), a("breaking") + 1);
+    op(s.big, 1 - br); tf(s.big, `translate(560 400) rotate(${Math.sin(t * 2) * 4}) scale(${pop(t, SC.what.t0 - .2) * (1 - br * .5)})`);
+    s.bits.forEach(b => { const k = br, use = ramp(t, a("use"), a("use") + 1.4); set(b.e, "cx", 560 + Math.cos(b.a) * b.r * k + use * (640 - Math.cos(b.a) * b.r * k)); set(b.e, "cy", 400 + Math.sin(b.a) * b.r * k * .7 + use * (30 - Math.sin(b.a) * b.r * k * .7)); op(b.e, br * (1 - use * .9)); });
+    op(s.kid, ramp(t, a("body"), a("body") + .2)); op(s.spark, ramp(t, a("use"), a("use") + .5) * (.6 + .4 * Math.sin(t * 6)));
+    op(s.lbl, ramp(t, a("simpler"), a("simpler") + .2)); popAt(s.lbl, 760, 205, t, a("simpler"));
+    op(s.route, ramp(t, a("follow"), a("follow") + .3)); }; return s; })();
+
+// ---- TEETH (two jobs + cube model)
+S.teeth = (() => { const s = scene("teeth", "#ffccd5", "#ffb3c1");
+  // open-mouth model (front view): lips, gums, two rows of teeth on the jaw's curve, throat + uvula, tongue; m.set(open, lift) moves the lower jaw
+  window.mouthRig = (p, id) => { const W = 380, m = {g: el("g", {}, p)};
+    const q = (x, c) => { const u = (x + W) / (2 * W); return 2 * u * (1 - u) * c; };          // y of the curve M-W 0 Q0 c W 0
+    const curve = c => `M${-W} 0 Q0 ${c} ${W} 0`;
+    m.lipLo = el("path", {fill: "#d9475a", stroke: INK, "stroke-width": 7, "stroke-linejoin": "round"}, m.g);
+    m.cav = el("path", {fill: "#5c0a14"}, m.g);
+    const cp = el("clipPath", {id}, $("v").querySelector("defs")); m.cp = el("path", {}, cp);
+    const inner = el("g", {"clip-path": `url(#${id})`}, m.g);
+    m.throat = el("ellipse", {cx: 0, rx: 120, fill: "#2e050b"}, inner);
+    m.uvula = el("path", {d: "M-16 -96 Q-20 -40 0 -34 Q20 -40 16 -96 Z", fill: "#e5737f", stroke: "#a4133c", "stroke-width": 3}, inner);
+    m.tongue = el("g", {}, inner); m.tBody = el("path", {fill: "#f28a9d", stroke: "#b5304f", "stroke-width": 5}, m.tongue);
+    m.tGroove = el("path", {fill: "none", stroke: "#d0566f", "stroke-width": 5, "stroke-linecap": "round"}, m.tongue);
+    m.food = el("g", {}, inner);                                                               // food sits in front of the tongue, behind the teeth
+    el("path", {d: curve(-200), fill: "none", stroke: "#f4a3b4", "stroke-width": 58}, inner);
+    m.gumLo = el("path", {fill: "none", stroke: "#f4a3b4", "stroke-width": 58}, inner);
+    const widths = [62, 56, 50, 44, 38, 32], lens = [56, 52, 50, 42, 36, 30], xs = [];
+    let x = 0; widths.forEach((w, i) => { xs.push([x + w / 2, w, lens[i]]); x += w; });
+    const teeth = xs.flatMap(([cx, w, l]) => [[cx, w, l], [-cx, w, l]]);
+    const tooth = (w, l, up) => { const r = 12, s = up ? 1 : -1;                                // root at y=0 (under the gum), tip at y = s*l
+      return `M${-w / 2} ${-s * 30} L${w / 2} ${-s * 30} L${w / 2} ${s * (l - r)} Q${w / 2} ${s * l} ${w / 2 - r} ${s * l} L${-w / 2 + r} ${s * l} Q${-w / 2} ${s * l} ${-w / 2} ${s * (l - r)} Z`; };
+    const ang = (x, c) => Math.atan2(-c * x / (W * W), 1) * 180 / Math.PI;                       // slope of the curve at x, in degrees
+    teeth.forEach(([tx0, w, l]) => { const e = el("path", {d: tooth(w, l, 1), fill: "#fffdf7", stroke: "#b8bec6", "stroke-width": 3, "stroke-linejoin": "round"}, inner);
+      e.setAttribute("transform", `translate(${tx0} ${q(tx0, -200) + 6}) rotate(${ang(tx0, -200)})`); });
+    m.lower = teeth.map(([tx0, w, l]) => ({x: tx0, e: el("path", {d: tooth(w, l * .92, 0), fill: "#fffdf7", stroke: "#b8bec6", "stroke-width": 3, "stroke-linejoin": "round"}, inner)}));
+    m.lipUp = el("path", {d: `M${-W - 10} 4 Q-200 -175 -40 -150 Q0 -120 40 -150 Q200 -175 ${W + 10} 4 Q0 -205 ${-W - 10} 4 Z`, fill: "#d9475a", stroke: INK, "stroke-width": 7, "stroke-linejoin": "round"}, m.g);
+    el("path", {d: `M${-W + 40} -6 Q0 -150 ${W - 40} -6`, fill: "none", stroke: "#f08a9a", "stroke-width": 6, "stroke-linecap": "round", opacity: .8}, m.g);
+    m.set = (open, lift = 0) => { const c = 40 + 380 * open, yL = q(0, c);
+      const cav = `M${-W} 0 Q0 -200 ${W} 0 Q0 ${c} ${-W} 0 Z`; set(m.cav, "d", cav); set(m.cp, "d", cav);
+      set(m.lipLo, "d", `M${-W - 10} 4 Q0 ${c} ${W + 10} 4 Q0 ${c + 120} ${-W - 10} 4 Z`);
+      set(m.throat, "cy", (yL - 100) / 2); set(m.throat, "ry", Math.max(10, (yL + 100) / 2 - 20));
+      set(m.gumLo, "d", curve(c));
+      m.lower.forEach(t => t.e.setAttribute("transform", `translate(${t.x} ${q(t.x, c) - 6}) rotate(${ang(t.x, c)})`));
+      const ty = yL - 80, tip = -60 - 60 * lift;                                                   // tongue rests on the lower jaw; lift curls the tip up
+      set(m.tBody, "d", `M-250 ${ty + 60} Q-262 ${ty - 50} -130 ${ty - 62} Q0 ${ty + tip} 130 ${ty - 62} Q262 ${ty - 50} 250 ${ty + 60} Z`);
+      set(m.tGroove, "d", `M0 ${ty + tip / 2 - 8} Q6 ${ty - 10} 0 ${ty + 40}`); m.tongueTop = ty + tip / 2; return yL; };
+    m.set(.5); return m; };
+  s.mouth = el("g", {}, s.stage); s.rig = mouthRig(s.mouth, "mouthclip6");
+  s.top = el("g", {}, s.mouth); s.bot = el("g", {}, s.mouth);
+  s.chunks = []; seed = 2; for (let i = 0; i < 12; i++) s.chunks.push({dx: (rnd() - .5) * 360, dy: (rnd() - .5) * 60, e: el("rect", {width: 30, height: 24, rx: 6, fill: "#ffe8cc", stroke: "#d4a373", "stroke-width": 3}, s.rig.food)});
+  s.big = el("rect", {x: -90, y: -40, width: 180, height: 80, rx: 18, fill: "#ffe8cc", stroke: "#d4a373", "stroke-width": 5}, s.rig.food);
+  s.j1 = chip(s.stage, "JOB ①: easier to SWALLOW", "#06d6a0", {fs: 36}); s.j2 = chip(s.stage, "JOB ②: more SURFACE for digestive juices", "#ff9f1c", {fs: 34});
+  s.cubeBig = cube(s.stage, 0, 0, 150); s.cubes = []; for (let i = 0; i < 8; i++) s.cubes.push(cube(s.stage, 0, 0, 70));
+  s.f6 = chip(s.stage, "1 cube = 6 faces", "#1b1b3a", {fs: 34}); s.f48 = chip(s.stage, "8 small cubes = 48 faces!", "#e63946", {fs: 34});
+  s.drops = []; for (let i = 0; i < 10; i++) s.drops.push({ph: i / 10, e: emo(s.stage, 0, 0, 44, "💧")}); s.fast = chip(s.stage, "⏩ digestion is FASTER", "#3a86ff", {fs: 36});
+  s.run = t => { const a = w => C("teeth1", w), b = w => C("teeth2", w); const two = ramp(t, b("imagine") - .3, b("imagine") + .1);
+    op(s.mouth, 1 - two); tf(s.mouth, "translate(760 430) scale(1.25)");
+    const chew = t > a("chew") ? Math.abs(Math.sin((t - a("chew")) * 6)) : 0; s.rig.set(.62 - chew * .5);
+    const sp = ramp(t, a("chew"), a("smaller") + .5); op(s.big, 1 - sp); s.chunks.forEach(c => { set(c.e, "x", c.dx * sp - 15); set(c.e, "y", c.dy * sp - 12); op(c.e, sp); });
+    op(s.j1, ramp(t, a("first"), a("first") + .2) * (1 - two)); popAt(s.j1, 760, 160, t, a("first"));
+    op(s.j2, ramp(t, b("surface"), b("surface") + .2) * (1 - two)); popAt(s.j2, 760, 735, t, b("surface"));
+    const cut = ramp(t, b("many"), b("many") + .8);
+    op(s.cubeBig, two * (1 - cut)); tf(s.cubeBig, `translate(480 430) scale(${pop(t, b("imagine") - .2)})`);
+    s.cubes.forEach((c, i) => { const gx = (i % 4) * 150, gy = Math.floor(i / 4) * 170; op(c, cut); tf(c, `translate(${lerp(480, 860 + gx, cut)} ${lerp(430, 330 + gy, cut)})`); });
+    op(s.f6, two * ramp(t, b("one"), b("one") + .2) * (1 - cut * .4)); popAt(s.f6, 480, 180, t, b("one"));
+    op(s.f48, ramp(t, b("surfaces"), b("surfaces") + .2)); popAt(s.f48, 1080, 180, t, b("surfaces"));
+    s.drops.forEach((d, i) => { const k = ((t * .8 + d.ph) % 1); set(d.e, "x", 860 + (i % 4) * 150); set(d.e, "y", lerp(160, 360 + Math.floor(i / 5) * 170, k)); op(d.e, ramp(t, b("juices#2"), b("juices#2") + .3) * Math.sin(k * Math.PI)); });
+    op(s.fast, ramp(t, b("faster"), b("faster") + .2)); popAt(s.fast, 760, 760 - 40, t, b("faster")); }; return s; })();
+
+// ---- SALIVA + TONGUE
+S.saliva = (() => { const s = scene("saliva", "#a2d2ff", "#bde0fe");
+  s.mouth = el("g", {}, s.stage); s.rig = mouthRig(s.mouth, "mouthclip6b"); set(s.rig.food, "transform", "translate(-760 -430)");
+  s.tongue = el("g", {}, s.stage);
+  s.bits = []; seed = 5; for (let i = 0; i < 14; i++) s.bits.push({x: (rnd() - .5) * 400, y: (rnd() - .5) * 80, e: el("rect", {width: 26, height: 20, rx: 6, fill: "#ffe8cc", stroke: "#d4a373", "stroke-width": 3}, s.rig.food)});
+  s.ball = el("circle", {r: 0, fill: "#f3d5b5", stroke: "#d4a373", "stroke-width": 5}, s.rig.food);
+  s.drops = []; for (let i = 0; i < 8; i++) s.drops.push({ph: i / 8, e: emo(s.rig.food, 0, 0, 46, "💧")});
+  s.c1 = chip(s.stage, "SALIVA: a digestive juice + softens food", "#00b4d8", {fs: 32}); s.c2 = chip(s.stage, "TONGUE tastes 😋 + rolls food into a ball", "#ff8fab", {fs: 32});
+  s.stamp = el("g", {}, s.stage); el("rect", {x: -180, y: -78, width: 360, height: 156, rx: 18, fill: "none", stroke: "#e63946", "stroke-width": 10}, s.stamp); tx(s.stamp, {x: 0, y: -10, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: "#e63946"}, "DIGESTION"); tx(s.stamp, {x: 0, y: 46, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: "#e63946"}, "BEGINS HERE!");
+  s.run = t => { const a = w => C("saliva", w); const X = 760, Y = 430;
+    tf(s.mouth, `translate(${X} ${Y}) scale(1.15)`); s.rig.set(.9, Math.max(0, Math.sin(t * 4)) * ramp(t, a("rolls"), a("rolls") + .3) * (1 - ramp(t, a("ball"), a("ball") + .6)));
+    const soft = ramp(t, a("softens"), a("softens") + 1), roll = ramp(t, a("rolls"), a("ball") + .5);
+    s.bits.forEach(b => { set(b.e, "x", X + b.x * (1 - roll) - 13); set(b.e, "y", Y + 25 + b.y * (1 - roll) - 10); set(b.e, "fill", mix("#ffe8cc", "#f3d5b5", soft)); op(b.e, 1 - roll); });
+    set(s.ball, "cx", X); set(s.ball, "cy", Y + s.rig.tongueTop - 44 * roll); set(s.ball, "r", 52 * roll);
+    s.drops.forEach((d, i) => { const k = ((t * .7 + d.ph) % 1); set(d.e, "x", X - 250 + i * 70); set(d.e, "y", lerp(Y - 140, Y, k)); op(d.e, on(t, a("saliva#2"), a("tongue"), .3) * Math.sin(k * Math.PI)); });
+    op(s.c1, ramp(t, a("softens"), a("softens") + .2)); popAt(s.c1, 760, 160, t, a("softens"));
+    op(s.c2, ramp(t, a("tongue"), a("tongue") + .2)); popAt(s.c2, 760, 760, t, a("tongue"));
+    op(s.stamp, ramp(t, a("begins"), a("begins") + .15)); tf(s.stamp, `translate(1330 640) rotate(-8) scale(${1.3 - .3 * ramp(t, a("begins"), a("begins") + .25)})`); }; return s; })();
+
+// ---- TOOTHACHE
+S.tooth = (() => { const s = scene("tooth", "#ffd6a5", "#fdffb6");
+  s.t = emo(s.stage, 0, 0, 260, "🦷"); s.face = emo(s.stage, 0, 0, 160, "😖"); s.ache = el("g", {stroke: "#e63946", "stroke-width": 10, "stroke-linecap": "round"}, s.stage);
+  [[-170, -100, -230, -150], [170, -100, 230, -150], [-190, 20, -260, 20], [190, 20, 260, 20]].forEach(([a, b, c, d]) => el("line", {x1: a, y1: b, x2: c, y2: d}, s.ache));
+  s.c1 = chip(s.stage, "hurts to chew ➜ hard to swallow and eat", "#e63946", {fs: 32}); s.c2 = chip(s.stage, "🪥 care for your teeth + see a dentist", "#06d6a0", {fs: 34});
+  s.run = t => { const a = w => C("tooth", w);
+    op(s.t, 1); set(s.t, "x", 0); set(s.t, "y", 0); tf(s.t, `translate(560 430) rotate(${Math.sin(t * 18) * 4 * on(t, SC.tooth.t0, a("so"), .2)})`);
+    op(s.ache, on(t, SC.tooth.t0, a("so"), .2) * (.6 + .4 * Math.sin(t * 10))); tf(s.ache, "translate(560 430)");
+    op(s.face, ramp(t, a("hurts"), a("hurts") + .2)); set(s.face, "x", 1050); set(s.face, "y", 330);
+    op(s.c1, ramp(t, a("hard"), a("hard") + .2)); popAt(s.c1, 1050, 520, t, a("hard"));
+    op(s.c2, ramp(t, a("dentist") - .3, a("dentist"))); popAt(s.c2, 1050, 640, t, a("dentist") - .3); }; return s; })();
+
+// ---- GULLET
+S.gullet = (() => { const s = scene("gullet", "#caffbf", "#9bf6ff");
+  s.tube = el("rect", {x: -45, y: 150, width: 90, height: 520, rx: 44, fill: "#ffafcc", stroke: INK, "stroke-width": 7}, s.stage);
+  s.mouth = emo(s.stage, 0, 110, 110, "👄"); s.st = stomachShape(s.stage);
+  s.ball = el("circle", {r: 34, fill: "#f3d5b5", stroke: "#d4a373", "stroke-width": 5}, s.stage);
+  s.sq = [0, 1].map(() => el("ellipse", {rx: 58, ry: 18, fill: "none", stroke: "#e63946", "stroke-width": 9}, s.stage));
+  s.c1 = chip(s.stage, "GULLET: a muscular tube", "#ef476f", {fs: 36}); s.c2 = chip(s.stage, "muscles SQUEEZE + push food down ⬇", "#ff9f1c", {fs: 32}); s.c3 = chip(s.stage, "✗ does NOT digest food, just moves it", "#1b1b3a", {fs: 32});
+  s.run = t => { const a = w => C("gullet", w); const X = 560;
+    tf(s.tube, `translate(${X} 0)`); set(s.mouth, "x", X); tf(s.st, `translate(${X + 40} 790) scale(.7)`);
+    const k = t > a("swallow") ? ((t - a("swallow")) * .28) % 1 : 0; const y = lerp(170, 650, k);
+    set(s.ball, "cx", X); set(s.ball, "cy", y); op(s.ball, t > a("swallow") ? 1 : 0);
+    s.sq.forEach((q, i) => { set(q, "cx", X); set(q, "cy", y - 60 - i * 40); op(q, ramp(t, a("squeeze"), a("squeeze") + .2)); });
+    op(s.c1, ramp(t, a("muscular"), a("muscular") + .2)); popAt(s.c1, 1150, 240, t, a("muscular"));
+    op(s.c2, ramp(t, a("squeeze"), a("squeeze") + .2)); popAt(s.c2, 1150, 400, t, a("squeeze"));
+    op(s.c3, ramp(t, a("not"), a("not") + .2)); popAt(s.c3, 1150, 560, t, a("not")); }; return s; })();
+
+// ---- SAFETY (windpipe vs gullet)
+S.safety = (() => { const s = scene("safety", "#ffadad", "#ff595e");
+  s.wp = el("g", {}, s.stage); el("rect", {x: -40, y: 0, width: 80, height: 500, rx: 30, fill: "#bde0fe", stroke: INK, "stroke-width": 7}, s.wp); for (let i = 0; i < 12; i++) el("line", {x1: -40, y1: 30 + i * 40, x2: 40, y2: 30 + i * 40, stroke: "#4cc9f0", "stroke-width": 6}, s.wp);
+  s.gu = el("g", {}, s.stage); el("rect", {x: -40, y: 0, width: 80, height: 500, rx: 30, fill: "#ffafcc", stroke: INK, "stroke-width": 7}, s.gu);
+  s.l1 = tx(s.stage, {x: 0, y: 0, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, "WINDPIPE (air)"); s.l2 = tx(s.stage, {x: 0, y: 0, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, "GULLET (food)");
+  s.food = el("circle", {r: 30, fill: "#f3d5b5", stroke: "#d4a373", "stroke-width": 5}, s.stage); s.talk = emo(s.stage, 0, 0, 120, "🗣️"); s.cough = emo(s.stage, 0, 0, 140, "😵");
+  s.rule = el("g", {}, s.stage); el("rect", {x: -380, y: -55, width: 760, height: 110, rx: 55, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.rule); tx(s.rule, {x: 0, y: 20, "text-anchor": "middle", "font-size": 54, "font-weight": 700, fill: "#fff"}, "✓ chew ➜ swallow ➜ then talk");
+  s.run = t => { const a = w => C("safety", w);
+    tf(s.wp, "translate(480 200)"); tf(s.gu, "translate(640 200)"); set(s.l1, "x", 360); set(s.l1, "y", 170); set(s.l2, "x", 760); set(s.l2, "y", 170);
+    op(s.wp, ramp(t, a("windpipe"), a("windpipe") + .2)); op(s.l1, ramp(t, a("windpipe"), a("windpipe") + .2)); op(s.l2, 1);
+    const wrong = ramp(t, a("instead") - .6, a("instead") + .4); const k = clamp((t - a("talk") - .2) / 1.4);
+    set(s.food, "cx", lerp(640, 480, wrong)); set(s.food, "cy", lerp(220, 480, k)); op(s.food, on(t, a("talk"), a("so"), .2));
+    op(s.talk, on(t, a("talk"), a("so"), .2)); set(s.talk, "x", 1050); set(s.talk, "y", 330);
+    op(s.cough, on(t, a("cough"), a("so"), .2)); set(s.cough, "x", 1050 + Math.sin(t * 30) * 8); set(s.cough, "y", 520);
+    op(s.rule, ramp(t, a("chew"), a("chew") + .2)); tf(s.rule, `translate(760 760) scale(${pop(t, a("chew"))})`); }; return s; })();
+
+// ---- STOMACH
+S.stomach = (() => { const s = scene("stomach", "#ffd6de", "#ffadbb");
+  s.bag = el("g", {}, s.stage); s.shape = stomachShape(s.bag); s.mixIn = el("circle", {r: 0, fill: "#f3d5b5", opacity: .8}, s.bag);
+  s.bits = []; seed = 6; for (let i = 0; i < 18; i++) s.bits.push({x: (rnd() - .5) * 200, y: (rnd() - .3) * 200, ph: rnd() * 6, e: el("rect", {width: 22, height: 18, rx: 5, fill: "#ffe8cc", stroke: "#d4a373", "stroke-width": 3}, s.bag)});
+  s.drops = []; for (let i = 0; i < 8; i++) s.drops.push({ph: i / 8, e: emo(s.bag, 0, 0, 40, "🧪")});
+  s.clock = emo(s.stage, 0, 0, 110, "⏰");
+  s.c1 = chip(s.stage, "STOMACH: a muscular bag", "#9b2c45", {fs: 36}); s.c2 = chip(s.stage, "holds food for a few hours", "#fff", {fs: 30, ink: INK}); s.c3 = chip(s.stage, "makes DIGESTIVE JUICES + churns", "#06d6a0", {fs: 32}); s.c4 = chip(s.stage, "food is PARTLY digested ➜ soupy", "#ff9f1c", {fs: 32});
+  s.run = t => { const a = w => C("stomach", w); const ch = ramp(t, a("churns"), a("churns") + .3);
+    tf(s.bag, `translate(520 460) scale(${1.25 + .05 * ch * Math.sin(t * 7)}) rotate(${ch * 4 * Math.sin(t * 5)})`);
+    const soup = ramp(t, a("partly"), a("soupy") + .5);
+    s.bits.forEach(b => { set(b.e, "x", b.x + Math.sin(t * 3 + b.ph) * 20 * ch - 11); set(b.e, "y", b.y + Math.cos(t * 3 + b.ph) * 14 * ch - 9); op(b.e, ramp(t, SC.stomach.t0, SC.stomach.t0 + .5) * (1 - soup)); });
+    set(s.mixIn, "r", 120 * soup); set(s.mixIn, "cx", 10); set(s.mixIn, "cy", 40);
+    s.drops.forEach((d, i) => { const k = ((t * .6 + d.ph) % 1); set(d.e, "x", -120 + i * 34); set(d.e, "y", lerp(-140, 60, k)); op(d.e, ramp(t, a("juices"), a("juices") + .3) * Math.sin(k * Math.PI) * (1 - soup * .5)); });
+    op(s.clock, on(t, a("hours"), a("makes"), .2)); set(s.clock, "x", 860); set(s.clock, "y", 300 + Math.sin(t * 4) * 6);
+    [[s.c1, a("muscular"), 160], [s.c2, a("hours"), 300], [s.c3, a("juices"), 440], [s.c4, a("partly"), 580]].forEach(([c, tt, y]) => { op(c, ramp(t, tt, tt + .2)); popAt(c, 1150, y, t, tt); }); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 170, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.cards = [["👄", "MOUTH", "mouth"], ["⬇️", "GULLET", "gullet"], ["🫃", "STOMACH", "stomach"]].map(([e, n, w], i) => { const g = el("g", {}, s.stage);
+    const face = el("rect", {x: -150, y: -170, width: 300, height: 340, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g); if (e === "🫃") stomachShape(el("g", {transform: "translate(0 -48) scale(.3)"}, g)); else emo(g, 0, -40, 120, e);
+    tx(g, {x: 0, y: 100, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: INK}, n); const mk = tx(g, {x: 0, y: 40, "text-anchor": "middle", "font-size": 200, "font-weight": 700, fill: i ? "#e63946" : "#06d6a0", class: "out", "stroke-width": 10, opacity: 0}, i ? "✗" : "✓"); return {g, face, mk, w, i}; });
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), b("it"), .2)); tf(s.pause, `translate(760 170) scale(${pop(t, a("pause"))}) translate(-760 -170)`);
+    s.cards.forEach(c => { const tt = a(c.w); op(c.g, ramp(t, tt, tt + .2)); tf(c.g, `translate(${360 + c.i * 400} 480) scale(${pop(t, tt)})`);
+      const rv = c.i === 0 ? b("mouth") : b(c.w); op(c.mk, ramp(t, rv, rv + .2)); set(c.face, "fill", t > rv ? (c.i ? "#ffccd5" : "#d8f3dc") : "#fff"); }); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["👄 Digestion begins in the mouth."], ["🦷 Teeth break food into smaller pieces: easier to swallow,", "     and more surface exposed to digestive juices."], ["⬇️ The gullet pushes food to the stomach."], ["🌀 The stomach mixes food with digestive juices and", "     digests it further."]];
+  let y = -160; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 46, "font-size": 36, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 46 + 28; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("begins"), a("teeth"), a("gullet"), a("stomach#2")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (plan time + place)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "📅 PLAN THE TIME + PLACE");
+  s.card = el("g", {}, s.stage); el("rect", {x: -560, y: -150, width: 1120, height: 300, rx: 26, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.card);
+  s.parts = [["I will", "#1b1b3a", -500, -25], ["revise science for 10 min", "#3a86ff", -330, -25], ["at 8:00,", "#ef476f", -500, 75], ["at my desk", "#ff9f1c", -300, 75]].map(([w, c, x, y]) => tx(s.card, {x, y, "font-size": 44, "font-weight": 700, fill: c, opacity: 0}, w));
+  s.clock = emo(s.stage, 0, 0, 120, "🕗"); s.desk = emo(s.stage, 0, 0, 120, "🪑");
+  s.likely = chip(s.stage, "decide WHEN + WHERE ➜ much more likely to do it ✓", "#1b1b3a", {fs: 32});
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.title, ramp(t, a("plan"), a("plan") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("plan"))}) translate(-760 -180)`);
+    op(s.card, ramp(t, a("will") - .3, a("will"))); tf(s.card, "translate(760 450)");
+    [a("will"), a("revise"), a("eight"), a("desk")].forEach((tt, i) => op(s.parts[i], ramp(t, tt, tt + .2)));
+    op(s.clock, ramp(t, a("eight"), a("eight") + .2)); set(s.clock, "x", 860); set(s.clock, "y", 680); op(s.desk, ramp(t, a("desk"), a("desk") + .2)); set(s.desk, "x", 1060); set(s.desk, "y", 680);
+    op(s.likely, ramp(t, a("likely"), a("likely") + .2)); popAt(s.likely, 760, 790 - 30, t, a("likely")); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 200, ry: 80, fill: "#9b2c45", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: -4, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, "DIGESTIVE"); tx(s.center, {x: 0, y: 38, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, "SYSTEM");
+  const br = [["mouth", "👄 MOUTH", "#e63946", 380, 300, ["teeth", "saliva", "tongue"]], ["gullet", "⬇️ GULLET", "#ef476f", 340, 720, ["pushes food down"]], ["stomach", "🌀 STOMACH", "#9b2c45", 1020, 720, ["mixes with juices"]]];
+  s.br = br.map(([k, n, col, x, y, subs]) => { const line = el("path", {d: `M720 500 Q${(720 + x) / 2} ${y} ${x} ${y}`, stroke: col, "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 700}, s.stage);
+    return {k, line, c: chip(s.stage, n, col, {fs: 34}), x, y, tw: subs.map(sn => chip(s.stage, sn, "#fff", {fs: 26, ink: INK}))}; });
+  s.stage.appendChild(s.center);
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr6"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  s.scr = el("g", {"clip-path": "url(#scr6)"}, s.phone); s.shot = el("image", {href: "oneapp_mind.png", x: -112, y: -122, width: 224, height: 485, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("digestive"), a("digestive") + .2)); tf(s.center, `translate(720 500) scale(${pop(t, a("digestive"))})`);
+    s.br.forEach(b => { const k = a(b.k); set(b.line, "stroke-dashoffset", 700 * (1 - ramp(t, k - .1, k + .4))); op(b.line, t > k - .1 ? 1 : 0); op(b.c, ramp(t, k + .1, k + .3)); popAt(b.c, b.x, b.y, t, k + .1);
+      const n = b.tw.length; b.tw.forEach((tw, j) => { const tt = a("add") + j * .3 + (b.k === "mouth" ? 0 : b.k === "gullet" ? 1 : 1.3); op(tw, ramp(t, tt, tt + .2)); const ang = (j - (n - 1) / 2) * .8; popAt(tw, b.x + Math.sin(ang) * 250, b.y + (b.y < 500 ? -1 : 1) * 90, t, tt); }); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 760, 140, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1340, ph)} 560) rotate(${lerp(12, -4, ph)})`);
+    const off = -122 - 260 * ramp(t, a("ultimate"), a("next")); set(s.shot, "y", off);
+    set(s.ring, "x", -112 + 224 * (36 / 780)); set(s.ring, "y", off + 485 * (1235 / 1688)); set(s.ring, "width", 224 * (304 / 780)); set(s.ring, "height", 485 * (72 / 1688));
+    op(s.ring, on(t, a("next"), SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.ans = el("g", {}, s.stage); el("rect", {x: -330, y: -70, width: 660, height: 140, rx: 70, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.ans); tx(s.ans, {x: 0, y: 22, "text-anchor": "middle", "font-size": 58, "font-weight": 700, fill: "#fff"}, "👄 In the MOUTH!");
+  s.face = emo(s.stage, 0, 0, 170, "😋"); s.cnt = tx(s.stage, {x: 1150, y: 520, "text-anchor": "middle", "font-size": 150, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 14}, "0");
+  s.bubble = el("g", {}, s.stage); el("path", {d: "M-420 -80 H420 A40 40 0 0 1 460 -40 V40 A40 40 0 0 1 420 80 H-260 L-330 140 L-320 80 H-420 A40 40 0 0 1 -460 40 V-40 A40 40 0 0 1 -420 -80 Z", fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.bubble);
+  tx(s.bubble, {x: 0, y: 14, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: INK}, "🔢 How many chews per mouthful?");
+  s.run = t => { const a = w => C("close", w); const tn = ramp(t, a("your") - .2, a("your") + .1);
+    op(s.ans, ramp(t, a("mouth"), a("mouth") + .15) * (1 - tn)); tf(s.ans, `translate(760 400) scale(${pop(t, a("mouth"))})`);
+    op(s.face, tn); set(s.face, "x", 520); set(s.face, "y", 420 + Math.abs(Math.sin(t * 8)) * 12);
+    op(s.cnt, tn); s.cnt.textContent = String(Math.min(20, Math.floor(Math.max(0, t - a("count")) * 4)));
+    op(s.bubble, ramp(t, a("tell") - .3, a("tell"))); tf(s.bubble, `translate(820 760) scale(${pop(t, a("tell") - .3) * .85})`); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Part 2: the 6.5-metre tube");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "inside your belly 🌀");
+  s.run = () => {}; return s; })();
+
+
+window.INTRO = {"goals": [["🍎", "What digestion is", "first"], ["😋", "How the mouth starts it", "second"], ["🥣", "The gullet and stomach", "third"]]};
+// ---- WELCOME (greeting + "today you'll learn")
+S.welcome = (() => { const sv = seed; seed = 424242; const s = scene("welcome", "#ffd166", "#ef476f"), I = window.INTRO;
+  s.wave = emo(s.stage, 0, 0, 190, "👋");
+  s.hi = el("g", {}, s.stage);
+  tx(s.hi, {x: 0, y: 0, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Welcome to");
+  tx(s.hi, {x: 0, y: 125, "text-anchor": "middle", "font-size": 118, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "TheOneApp, Explained!");
+  s.board = el("g", {}, s.stage);
+  el("rect", {x: -700, y: -380, width: 1400, height: 720, rx: 46, fill: "#fffaf0", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.board);
+  el("rect", {x: -700, y: -380, width: 1400, height: 130, rx: 46, fill: INK}, s.board);
+  el("rect", {x: -700, y: -290, width: 1400, height: 40, fill: INK}, s.board);
+  tx(s.board, {x: 0, y: -293, "text-anchor": "middle", "font-size": 66, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 3}, "🎯 TODAY YOU'LL LEARN");
+  const cols = ["#ff5d73", "#3a86ff", "#06d6a0"];
+  s.rows = I.goals.map(([icon, label, cue], i) => { const g = el("g", {}, s.board), y = -120 + i * 175;
+    el("circle", {cx: -560, cy: y, r: 56, fill: cols[i], stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: -560, y: y + 25, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#fff"}, String(i + 1));
+    emo(g, -420, y, 92, icon);
+    tx(g, {x: -330, y: y + 21, "font-size": 58, "font-weight": 700, fill: INK}, label);
+    return {g, y, cue}; });
+  s.run = t => { const T0 = SC.welcome.t0, tB = C("welcome", "today") - .35, go = C("welcome", I.go || "started");
+    // phase A: wave + welcome
+    const a = 1 - ramp(t, tB - .3, tB + .1);
+    tf(s.wave, `translate(960 ${330 - 40 * (1 - a)}) scale(${Math.max(0, pop(t, T0 - .1)) * a}) rotate(${Math.sin(t * 9) * 18})`);
+    tf(s.hi, `translate(960 ${590 - 60 * (1 - a)}) scale(${Math.max(0, pop(t, C("welcome", "welcome") - .15)) * a})`); op(s.hi, a);
+    // phase B: learning board, one row per goal
+    const b = Math.max(0, pop(t, tB, .55)), bump = 1 + .04 * on(t, go, go + .5, .2);
+    tf(s.board, `translate(960 ${520 + Math.sin(t * 1.5) * 6}) scale(${b * bump})`); op(s.board, b > 0 ? 1 : 0);
+    s.rows.forEach(r => { const k = Math.max(0, pop(t, C("welcome", r.cue) - .1));
+      tf(r.g, `translate(${-60 * (1 - Math.min(1, k))} 0)`); op(r.g, clamp(k)); });
+  };
+  seed = sv; return s; })();
+
+/* ---------- confetti ---------- */
+function burst() {}
+const BURSTS = []; // precomputed so rendering is deterministic per frame
+seed = 77; const conf = []; for (let i = 0; i < 70; i++) conf.push({vx: (rnd() - .5) * 1400, vy: -600 - rnd() * 700, rot: rnd() * 720, col: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6], e: el("rect", {width: 18, height: 10, rx: 3, opacity: 0}, $("confetti"))});
+conf.forEach(c => set(c.e, "fill", c.col));
+function drawConfetti(t) { const b = TL.bursts.filter(x => t >= x && t < x + 1.6).pop();
+  conf.forEach(c => { if (b === undefined) { op(c.e, 0); return; } const k = t - b; const x = 760 + c.vx * k * .5, y = 450 + c.vy * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.rot * k})`); op(c.e, 1 - k / 1.6); }); }
+
+/* ---------- keyword box → shelf ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const fs = 54, w = k.label.length * fs * .56 + 70;
+  const big = el("g", {}, g); el("rect", {x: -w / 2, y: -50, width: w, height: 100, rx: 50, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 19, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, "⭐ " + k.label);
+  const sfs = 25, sw = k.short.length * sfs * .58 + 40;
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -sw / 2, y: -22, width: sw, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": sfs, "font-weight": 700, fill: "#fff"}, k.short);
+  return {k, g, big, small, sw, i}; });
+function drawKW(t) {
+  op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;
+    const sx = 1880 - K.sw / 2, sy = 104 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; }
+    op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly);
+    const x = lerp(960, sx, fly), y = lerp(860, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    const scl = Math.max(0, pop(t, t0, .5));
+    tf(K.g, `translate(${x} ${y})`);
+    tf(K.big, `scale(${scl * lerp(1, .46, fly) * (1 + .04 * Math.sin(t * 8) * (1 - fly))})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); tf(K.small, `scale(${1 + .15 * on(t, tf0 + tfly, tf0 + tfly + .35, .15)})`);
+  });
+}
+
+/* ---------- captions ---------- */
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * 46 * .52 + 60;
+  el("rect", {x: 960 - w / 2, y: 975, width: w, height: 70, rx: 35, fill: "#1b1b3a", "fill-opacity": .78}, g);
+  const t = el("text", {x: 960, y: 1023, "text-anchor": "middle", "font-size": 46, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- render ---------- */
+const order = TL.scenes.map(s => s.scene);
+window.LABCARD = {"seg": "stomach", "word": "try", "code": "2.2", "title": "Where your food goes", "part": "Part (b): Follow the food"};
+// "Try it in TheOneApp" card: shown while Heart points students to the matching School Lab experiment
+const LC = window.LABCARD, LCG = el("g", {opacity: 0}, $("v")); $("v").insertBefore(LCG, $("confetti"));
+el("rect", {x: 0, y: 0, width: 1920, height: 1080, fill: "#0b1020", opacity: .55}, LCG);
+const LCB = el("g", {}, LCG);
+el("rect", {x: -470, y: -190, width: 940, height: 380, rx: 36, fill: "#fffdf7", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, LCB);
+el("rect", {x: -470, y: -190, width: 940, height: 92, rx: 36, fill: "#7209b7"}, LCB); el("rect", {x: -470, y: -130, width: 940, height: 32, fill: "#7209b7"}, LCB);
+tx(LCB, {x: 0, y: -128, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "🧪 Try it yourself in TheOneApp");
+const LCT = tx(LCB, {x: 0, y: -30, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "School Lab › " + LC.code + "  " + LC.title);
+tx(LCB, {x: 0, y: 30, "text-anchor": "middle", "font-size": 32, "font-weight": 600, fill: "#5b6782"}, LC.part);
+const LCbtn = el("g", {transform: "translate(0 110)"}, LCB); el("rect", {x: -230, y: -40, width: 460, height: 80, rx: 40, fill: "#2a9d8f", stroke: INK, "stroke-width": 5}, LCbtn);
+tx(LCbtn, {x: 0, y: 14, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: "#fff"}, "Let's test it now! ▶");
+function drawLC(t) { if (!LC.fit) { const bw = LCT.getBBox().width; if (bw > 870) LCT.setAttribute("font-size", 40 * 870 / bw); LC.fit = bw > 0; }   // long lab titles: shrink to fit the card
+  const seg = TL.segs.find(s => s.id === LC.seg); if (!seg) return; const cs = TL.cues[LC.seg] || {};
+  const t0 = Math.max(...Object.keys(cs).filter(k => k.replace(/#\d+$/, "") === LC.word).map(k => cs[k])), t1 = seg.t1 + .6;
+  op(LCG, on(t, t0 - .2, t1, .3)); tf(LCB, `translate(760 520) scale(${Math.max(0, pop(t, t0 - .2))})`);
+  tf(LCbtn, `translate(0 110) scale(${1 + .05 * Math.sin(t * 6)})`); }
+
+window.MMPHONE = {"href": "mm_ep6.png", "saved": [327, 35, 158, 62], "map": [24, 266, 732, 350]};
+// "My mind map" phone: the episode's own map from TheOneApp's maker (780x1688 shot), ring on "Saved ✓", then scroll to show the whole map
+(() => { const s = S.mindmap, B = window.MMPHONE; if (!s || !s.shot || !B) return;
+  const k = 224 / 780, H = 1688 * k, WIN = 327;
+  s.shot.setAttribute("href", B.href); s.shot.setAttribute("height", H);
+  const D = Math.max(0, (B.map[1] + B.map[3] + 14) * k - WIN);
+  const ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 4, rx: 9}, s.shot.parentNode);
+  const cues = TL.cues.habit2 || {}, last = w => { let v = null; for (const key in cues) if (key === w || key.startsWith(w + "#")) v = Math.max(v ?? -1, cues[key]); return v; };
+  const run0 = s.run;
+  s.run = t => { run0(t); if (s.ring && s.ring.tagName === "rect") op(s.ring, 0);
+    const t1 = SC.mindmap.t1, sv = C("habit2", "save"), mk = (last("tap") ?? (sv + 2.5)) - .2;
+    const off = -122 - D * ramp(t, mk + .4, Math.min(t1 - .3, mk + 3)); set(s.shot, "y", off);
+    set(ring, "x", -112 + B.saved[0] * k - 3); set(ring, "y", off + B.saved[1] * k - 3); set(ring, "width", B.saved[2] * k + 6); set(ring, "height", B.saved[3] * k + 6);
+    op(ring, on(t, sv + .7, D > 0 ? mk + .4 : t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; })();
+
+// 4-second "think" countdown between the quiz question and the answer (shared by every episode).
+// It sits in the caption strip, which is empty during the silent pause, so it never covers the quiz.
+const QZ = TL.segs.find(s => s.id === "quiz1"), CD = el("g", {opacity: 0}, $("v"));
+el("rect", {x: -300, y: -46, width: 600, height: 92, rx: 46, fill: "#1b1b3a", stroke: "#fff", "stroke-width": 4, filter: "url(#sh)"}, CD);
+tx(CD, {x: -120, y: 17, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "⏸ Think!");
+el("circle", {cx: 190, cy: 0, r: 38, fill: "#f77f00", stroke: "#fff", "stroke-width": 4}, CD);
+const CDT = tx(CD, {x: 190, y: 19, "text-anchor": "middle", "font-size": 54, "font-weight": 700, fill: "#fff"}, "4");
+const CDB = el("rect", {x: -250, y: 30, width: 500, height: 8, rx: 4, fill: "#ffd166"}, CD);
+function drawCD(t) { if (!QZ) return; const t0 = QZ.t1 + .5, k = clamp((t - t0) / 4);
+  op(CD, on(t, t0, t0 + 4.15, .15)); tf(CD, "translate(960 1004)");
+  CDT.textContent = String(Math.max(1, 4 - Math.floor(k * 4))); set(CDB, "width", 500 * (1 - k));
+  if (S.quiz && S.quiz.ring) op(S.quiz.ring, 0); }
+
+const FILL = {"hook": "translate(765 525) scale(1.175) translate(-808 -402)", "what": "translate(765 525) scale(1.28) translate(-795 -475)", "teeth": "translate(765 525) scale(1.302) translate(-822 -446)", "saliva": "translate(765 525) scale(1.168) translate(-924 -459)", "tooth": "translate(765 525) scale(1.236) translate(-878 -454)", "safety": "translate(765 525) scale(1.243) translate(-704 -477)", "stomach": "translate(765 525) scale(1.227) translate(-900 -416)", "quiz": "translate(765 525) scale(1.277) translate(-754 -385)", "exam": "translate(765 525) scale(1.067) translate(-760 -450)", "habit": "translate(765 525) scale(1.235) translate(-760 -446)", "close": "translate(765 525) scale(1.5) translate(-820 -604)"}; for (const k in FILL) if (S[k]) S[k].stage.setAttribute("transform", FILL[k]);
+window.render = function (t) {
+  order.concat(["end"]).forEach((name, i) => {
+    const s = S[name]; const t0 = name === "end" ? TL.END - 4.0 : SC[name].t0 - (i ? .4 : 0);
+    const nxt = i + 1 < order.length ? SC[order[i + 1]].t0 - .4 : (name === "end" ? 1e9 : TL.END - 4.0);
+    const v = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2));
+    op(s.g, v); if (v <= 0) return;
+    tf(s.g, `translate(960 540) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(-960 -540)`);
+    moveBubbles(s.b, t); s.run(t);
+  });
+  drawConfetti(t); drawKW(t); drawCaps(t); drawCD(t); drawLC(t);
+  set($("prog"), "width", 1920 * clamp(t / TL.END));
+  { const tg = $("tag"); tg.querySelector("rect").setAttribute("width", tg.querySelector("text").getComputedTextLength() + 62); } op($("tag"), ramp(t, .2, .6) * (1 - ramp(t, TL.END - 4.2, TL.END - 3.8)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+function fitPill(g, pad) { const r = g.querySelector("rect"), t = g.querySelector("text"); if (!r || !t) return 0;
+  const need = t.getBBox().width + pad, w = +r.getAttribute("width");
+  if (need > w) { const cx = +r.getAttribute("x") + w / 2; set(r, "width", need); set(r, "x", cx - need / 2); } return Math.max(need, w); }
+function shrinkText(g, fs) { const r = g.querySelector("rect"), t = g.querySelector("text"); const w = +r.getAttribute("width") - fs * 1.1, bw = t.getBBox().width;
+  if (bw > w) set(t, "font-size", fs * w / bw); }
+document.fonts.ready.then(() => {
+  CHIPS.forEach(([g, fs, fixed]) => fixed ? shrinkText(g, fs) : fitPill(g, fs * 1.3));
+  KW.forEach(K => { fitPill(K.big, 70); K.sw = fitPill(K.small, 36); });
+  CAPS.forEach(({g}) => fitPill(g, 64));
+  window.READY = true; });
+</script>
+</body></html>

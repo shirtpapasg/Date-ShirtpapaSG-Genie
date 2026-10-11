@@ -1,0 +1,65 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "LEAF BLADE",
+  "other": "line:",
+  "from": 34.3,
+  "to": 42.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "LEAF STALK",
+  "other": "line:",
+  "from": 40.05,
+  "to": 42.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "LEAF BLADE",
+  "other": "line:",
+  "from": 45.55,
+  "to": 62.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "LEAF STALK",
+  "other": "line:",
+  "from": 45.55,
+  "to": 62.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "MAIN VEIN",
+  "other": "line:",
+  "from": 48.8,
+  "to": 62.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🍃 LEAF",
+  "other": "path:none",
+  "from": 178.3,
+  "to": 191.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "4 PARTS",
+  "other": "path:none",
+  "from": 178.55,
+  "to": 191.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "2 VEIN PATTERNS",
+  "other": "path:none",
+  "from": 181.05,
+  "to": 191.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "DIFFERENCES",
+  "other": "path:none",
+  "from": 184.05,
+  "to": 191.3
+ }
+]

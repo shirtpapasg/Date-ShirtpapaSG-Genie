@@ -1,0 +1,607 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Inter,"Inter Display",sans-serif}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop id="skyTop" offset="0"/><stop id="skyBot" offset="1"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop id="wTop" offset="0"/><stop id="wBot" offset="1"/>
+    </linearGradient>
+    <radialGradient id="sunGlow"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".8"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="fireGlow"><stop offset="0" stop-color="#ffcf5a"/><stop offset=".35" stop-color="#ff7a1a" stop-opacity=".9"/><stop offset="1" stop-color="#ff3d00" stop-opacity="0"/></radialGradient>
+    <filter id="blur40" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="blur14" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="shadow" x="-10%" y="-30%" width="120%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#000" flood-opacity=".55"/></filter>
+    <linearGradient id="lowerShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></linearGradient>
+  </defs>
+
+  <!-- ============ SCENE A: Singapore skyline in haze ============ -->
+  <g id="sceneA">
+    <g id="camA">
+      <rect width="1920" height="1080" fill="url(#sky)"/>
+      <circle id="sunGlowC" cx="1480" cy="300" r="190" fill="url(#sunGlow)"/>
+      <circle id="sun" cx="1480" cy="300" r="56"/>
+      <g id="farCity"></g>
+      <rect id="hazeFar" x="0" y="0" width="1920" height="780"/>
+      <g id="nearCity"></g>
+      <rect y="760" width="1920" height="320" fill="url(#water)"/>
+      <g id="reflection" opacity=".22" transform="translate(0,1520) scale(1,-1)"></g>
+      <g id="hazeBands"></g>
+      <rect id="hazeNear" width="1920" height="1080"/>
+      <g id="particles"></g>
+    </g>
+  </g>
+
+  <!-- ============ SCENE B: map, smoke path backwards ============ -->
+  <g id="sceneB" opacity="0">
+    <rect width="1920" height="1080" fill="#123a4a"/>
+    <g id="camB">
+      <g id="grid" stroke="#1d5266" stroke-width="1.2" fill="none"></g>
+      <g id="land" fill="#d9c7a1" stroke="#f0e3c4" stroke-width="2.2" stroke-linejoin="round"></g>
+      <g id="labels" fill="#6b5a3c" font-weight="700" letter-spacing="6" text-anchor="middle"></g>
+      <g id="smoke"></g>
+      <g id="path2"></g>
+      <g id="path1"></g>
+      <g id="fires"></g>
+      <g id="sg"></g>
+      <g id="basket" opacity="0"></g>
+    </g>
+  </g>
+
+  <!-- ============ SCENE C: PM2.5 (Beat 1) ============ -->
+  <g id="sceneC" opacity="0">
+    <rect width="1920" height="1080" fill="#0f2633"/>
+    <g id="cBg"></g>
+    <g id="cTitle" text-anchor="middle">
+      <text x="960" y="470" font-size="260" font-weight="900" fill="#ffcf5a" letter-spacing="-6">PM2.5</text>
+      <text id="cSub" x="960" y="565" font-size="46" font-weight="600" fill="#cfe3ec">Particulate Matter, 2.5 micrometres or smaller</text>
+    </g>
+    <g id="cScale"></g>
+    <g id="cLungs"></g>
+    <g id="cPSI"></g>
+  </g>
+  <!-- ============ SCENE E: Peat cross-section (Beat 3) ============ -->
+  <g id="sceneE" opacity="0">
+    <rect width="1920" height="1080" fill="#c9b79a"/>
+    <rect width="1920" height="340" fill="#b9b2a0"/>
+    <g id="eTrees"></g>
+    <g id="eFire"></g>
+    <rect id="eGround" x="0" y="340" width="1920" height="740" fill="#3b2a1d"/>
+    <g id="eLayers"></g>
+    <g id="eLeaves"></g>
+    <path id="eWater" fill="#4fa3d9" opacity="0"/>
+    <g id="eCarbon"></g>
+    <rect x="0" y="800" width="1920" height="280" fill="#6d6a63"/>
+    <text x="1840" y="842" text-anchor="end" font-size="24" font-weight="700" letter-spacing="3" fill="#e8e3d8" opacity=".8">MINERAL SOIL</text>
+    <g id="eQ" text-anchor="middle"><text x="960" y="640" font-size="200" font-weight="900" fill="#fff" fill-opacity=".85">?</text></g>
+    <g id="ePeat" text-anchor="middle" opacity="0"><text x="960" y="620" font-size="170" font-weight="900" fill="#ffcf5a" letter-spacing="10">PEAT</text></g>
+    <g id="eSide"></g>
+    <g id="eChips"></g>
+  </g>
+
+  <!-- ============ Overlays ============ -->
+  <rect y="700" width="1920" height="380" fill="url(#lowerShade)"/>
+  <g id="tag" filter="url(#shadow)">
+    <rect x="80" y="72" width="410" height="54" rx="27" fill="#000" fill-opacity=".55"/>
+    <circle cx="112" cy="99" r="8" fill="#ff8a3d"/>
+    <text x="132" y="108" font-size="24" font-weight="700" letter-spacing="4" fill="#fff">THE HAZE, EXPLAINED</text>
+  </g>
+  <g id="captions" filter="url(#shadow)"></g>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="0"/>
+</svg>
+
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+const clamp = (x, a=0, b=1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const hex = h => [1,3,5].map(i => parseInt(h.slice(i, i+2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], k))).join(",") + ")"; };
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+/* ---------- Scene A build ---------- */
+function building(parent, x, w, h, fill, base=760) {
+  const g = el("g", {}, parent);
+  el("rect", {x, y: base - h, width: w, height: h, fill}, g);
+  if (rnd() > .55) el("rect", {x: x + w*.2, y: base - h - 22, width: w*.6, height: 22, fill}, g);
+  if (rnd() > .75) el("rect", {x: x + w/2 - 2, y: base - h - 60, width: 4, height: 40, fill}, g);
+  return g;
+}
+function mbs(parent, fill) {
+  const g = el("g", {fill}, parent);
+  [1150, 1255, 1360].forEach(x => {
+    el("path", {d: `M${x} 760 L${x+8} 478 L${x+62} 478 L${x+70} 760 Z`}, g);
+    el("path", {d: `M${x+30} 760 L${x+40} 490 L${x+56} 490 L${x+70} 760 Z`, opacity: .0}, g);
+  });
+  el("path", {d: "M1120 470 L1470 462 Q1500 461 1505 468 L1440 478 L1120 480 Z"}, g);
+  return g;
+}
+function flyer(parent, stroke) {
+  const g = el("g", {stroke, fill: "none"}, parent);
+  const cx = 1700, cy = 590, r = 140;
+  el("circle", {cx, cy, r, "stroke-width": 7}, g);
+  el("circle", {cx, cy, r: r - 14, "stroke-width": 2}, g);
+  for (let i = 0; i < 28; i++) {
+    const a = i / 28 * Math.PI * 2;
+    el("line", {x1: cx, y1: cy, x2: cx + Math.cos(a) * (r - 14), y2: cy + Math.sin(a) * (r - 14), "stroke-width": 1.3}, g);
+    el("rect", {x: cx + Math.cos(a) * r - 6, y: cy + Math.sin(a) * r - 5, width: 12, height: 10, fill: stroke, stroke: "none"}, g);
+  }
+  el("path", {d: `M${cx} ${cy} L${cx-70} 760 M${cx} ${cy} L${cx+70} 760`, "stroke-width": 8}, g);
+  return g;
+}
+function cityLayer(parent, fill, opts) {
+  seed = opts.seed;
+  let x = opts.x0;
+  while (x < opts.x1) {
+    const w = 40 + rnd() * 70, h = opts.hMin + rnd() * (opts.hMax - opts.hMin);
+    building(parent, x, w, h, fill);
+    x += w + rnd() * opts.gap;
+  }
+}
+// far layer
+cityLayer($("farCity"), "#5d6878", {seed: 11, x0: -20, x1: 1950, hMin: 90, hMax: 260, gap: 10});
+// near layer: CBD on left, MBS + Flyer on right
+cityLayer($("nearCity"), "#2b3644", {seed: 3, x0: 40, x1: 1020, hMin: 140, hMax: 400, gap: 26});
+mbs($("nearCity"), "#2b3644");
+flyer($("nearCity"), "#2b3644");
+building($("nearCity"), 1530, 70, 170, "#2b3644");
+// reflection = copy of near city
+$("reflection").innerHTML = $("nearCity").innerHTML;
+// haze bands
+seed = 21;
+const bands = [];
+for (let i = 0; i < 5; i++) bands.push(el("ellipse", {cx: rnd() * 1920, cy: 420 + rnd() * 380, rx: 600 + rnd() * 400, ry: 90 + rnd() * 60, fill: "#cfae84", filter: "url(#blur40)"}, $("hazeBands")));
+const bandSpeed = bands.map(() => 8 + rnd() * 18);
+const bandX = bands.map(b => +b.getAttribute("cx"));
+// particles (PM2.5)
+const parts = [];
+seed = 99;
+for (let i = 0; i < 170; i++) parts.push({x: rnd() * 1920, y: rnd() * 1080, r: .8 + rnd() * 2.6, vx: 10 + rnd() * 30, vy: -4 + rnd() * 8, ph: rnd() * 6.28,
+  e: el("circle", {r: 1, fill: "#efe2cc"}, $("particles"))});
+
+/* ---------- Scene B build (map) ---------- */
+const K = 67, OX = 89, OY = 4;
+const P = (lon, lat) => [(lon - 94) * K + OX, (8.5 - lat) * K + OY];
+const poly = pts => "M" + pts.map(p => P(...p).map(v => v.toFixed(1)).join(" ")).join(" L") + " Z";
+const coasts = {
+  sumatra: [[95.3,5.6],[96.3,5.3],[97.6,5.0],[98.3,4.2],[99.5,3.2],[100.6,2.2],[101.4,1.8],[102.5,1.3],[103.4,0.6],[103.8,-0.3],[104.5,-1.0],[104.9,-2.2],[105.8,-3.0],[105.9,-4.5],[105.7,-5.8],[104.6,-5.9],[103.9,-5.0],[102.3,-3.9],[101.2,-2.6],[100.4,-1.0],[99.7,0.2],[99.0,1.4],[98.2,2.4],[97.4,3.2],[96.4,4.2],[95.4,5.0]],
+  peninsula: [[99.6,8.2],[100.5,8.2],[100.4,7.0],[101.3,6.8],[102.1,6.2],[102.9,5.6],[103.4,4.8],[103.4,3.9],[103.5,2.8],[104.1,2.0],[104.3,1.45],[103.5,1.3],[103.0,1.8],[102.3,2.3],[101.4,2.9],[100.9,3.9],[100.4,4.9],[100.3,5.9],[100.0,6.6],[99.5,7.4]],
+  borneo: [[109.0,1.4],[109.6,2.0],[110.4,1.7],[111.2,2.6],[112.2,3.1],[113.1,3.4],[113.9,4.6],[115.2,5.0],[116.0,6.0],[116.8,7.0],[117.6,6.5],[118.2,5.8],[119.2,5.3],[118.3,4.6],[117.7,3.9],[117.6,3.0],[118.0,2.0],[118.8,1.0],[117.9,0.6],[117.5,-0.5],[116.9,-1.6],[116.5,-2.6],[116.2,-3.6],[115.0,-4.0],[114.5,-3.6],[113.6,-3.2],[112.5,-3.4],[111.6,-3.0],[110.3,-2.9],[110.1,-1.6],[109.5,-0.9],[109.1,0.0],[108.9,0.6]],
+  java: [[105.2,-6.8],[106.0,-6.0],[107.0,-6.0],[108.3,-6.3],[109.5,-6.8],[110.6,-6.4],[111.5,-6.6],[112.6,-6.9],[113.5,-7.2],[114.4,-7.7],[114.5,-8.6],[113.2,-8.3],[111.0,-8.2],[109.0,-7.8],[107.5,-7.6],[106.3,-7.3],[105.5,-7.0]],
+  bangka: [[105.1,-1.6],[105.8,-1.5],[106.8,-2.4],[106.6,-3.0],[106.0,-2.9],[105.4,-2.3]],
+  belitung: [[107.6,-2.6],[108.2,-2.6],[108.3,-3.2],[107.6,-3.2]],
+  thai: [[99.0,8.6],[100.6,8.6],[100.6,8.2],[99.6,8.2]],
+};
+for (let lon = 94; lon <= 120; lon += 2) { const [x] = P(lon, 0); el("line", {x1: x, y1: -200, x2: x, y2: 1300}, $("grid")); }
+for (let lat = -10; lat <= 10; lat += 2) { const [, y] = P(100, lat); el("line", {x1: -200, y1: y, x2: 2200, y2: y}, $("grid")); }
+for (const k in coasts) el("path", {d: poly(coasts[k])}, $("land"));
+const label = (txt, lon, lat, size) => { const [x, y] = P(lon, lat); const t = el("text", {x, y, "font-size": size}, $("labels")); t.textContent = txt; };
+label("SUMATRA", 101.2, -1.0, 30); label("KALIMANTAN", 114.6, 1.0, 30); label("(BORNEO)", 114.6, 0.3, 20);
+label("MALAYSIA", 101.9, 4.4, 26); label("JAVA", 109.8, -7.3, 22);
+
+const SG = P(103.82, 1.33);
+const F1 = P(104.6, -2.9);   // South Sumatra peatland
+const F2 = P(113.9, -2.3);   // Central Kalimantan peatland
+// Singapore marker
+const sg = $("sg");
+const sgPulse = el("circle", {cx: SG[0], cy: SG[1], r: 10, fill: "none", stroke: "#fff", "stroke-width": 3}, sg);
+el("circle", {cx: SG[0], cy: SG[1], r: 9, fill: "#fff", stroke: "#123a4a", "stroke-width": 3}, sg);
+const sgTag = el("g", {}, sg);
+el("rect", {x: SG[0] + 18, y: SG[1] - 46, width: 290, height: 40, rx: 8, fill: "#fff"}, sgTag);
+const sgT = el("text", {x: SG[0] + 32, y: SG[1] - 18, "font-size": 21, "font-weight": 700, fill: "#123a4a"}, sgTag);
+sgT.textContent = "SINGAPORE · your window";
+
+// dotted path helpers (quadratic Bézier)
+function dotsAlong(parent, a, b, c, n, r, color) {
+  const out = [];
+  for (let i = 0; i <= n; i++) {
+    const k = i / n, x = (1-k)*(1-k)*a[0] + 2*(1-k)*k*c[0] + k*k*b[0], y = (1-k)*(1-k)*a[1] + 2*(1-k)*k*c[1] + k*k*b[1];
+    out.push(el("circle", {cx: x, cy: y, r, fill: color, opacity: 0}, parent));
+  }
+  return out;
+}
+const C1 = [SG[0] + 120, (SG[1] + F1[1]) / 2 - 10];
+const C2 = [(SG[0] + F2[0]) / 2, SG[1] - 40];
+const dots1 = dotsAlong($("path1"), SG, F1, C1, 34, 5.2, "#ffffff");
+const dots2 = dotsAlong($("path2"), SG, F2, C2, 60, 4, "#ffffff");
+// fires
+function fire(parent, p) {
+  const g = el("g", {opacity: 0}, parent);
+  const glow = el("circle", {cx: p[0], cy: p[1], r: 60, fill: "url(#fireGlow)"}, g);
+  const core = el("path", {d: `M${p[0]} ${p[1]-26} C${p[0]+16} ${p[1]-8} ${p[0]+14} ${p[1]+10} ${p[0]} ${p[1]+12} C${p[0]-14} ${p[1]+10} ${p[0]-16} ${p[1]-8} ${p[0]} ${p[1]-26} Z`, fill: "#ffe08a", stroke: "#ff6a00", "stroke-width": 3}, g);
+  return {g, glow, core};
+}
+const fire1 = fire($("fires"), F1), fire2 = fire($("fires"), F2);
+// smoke puffs drifting from fires toward NE (Singapore)
+seed = 5;
+const puffs = [];
+for (let i = 0; i < 26; i++) {
+  const src = i % 3 === 0 ? F2 : F1;
+  puffs.push({src, ph: rnd(), dx: 160 + rnd() * 160, dy: -(200 + rnd() * 140), r: 30 + rnd() * 30,
+    e: el("circle", {fill: "#cdbb9c", filter: "url(#blur14)", opacity: 0}, $("smoke"))});
+}
+// basket badge at a point on path 1
+const BP = (() => { const k = .45; return [(1-k)*(1-k)*SG[0] + 2*(1-k)*k*C1[0] + k*k*F1[0], (1-k)*(1-k)*SG[1] + 2*(1-k)*k*C1[1] + k*k*F1[1]]; })();
+const bk = $("basket");
+const bkPulse = el("circle", {cx: BP[0], cy: BP[1], r: 40, fill: "none", stroke: "#ffcf5a", "stroke-width": 4}, bk);
+el("circle", {cx: BP[0], cy: BP[1], r: 36, fill: "#ffcf5a", stroke: "#fff", "stroke-width": 4}, bk);
+el("path", {d: `M${BP[0]-20} ${BP[1]-6} L${BP[0]+20} ${BP[1]-6} L${BP[0]+14} ${BP[1]+16} L${BP[0]-14} ${BP[1]+16} Z`, fill: "#123a4a"}, bk);
+el("path", {d: `M${BP[0]-12} ${BP[1]-6} Q${BP[0]} ${BP[1]-28} ${BP[0]+12} ${BP[1]-6}`, fill: "none", stroke: "#123a4a", "stroke-width": 4}, bk);
+const bkTag = el("g", {}, bk);
+el("rect", {x: BP[0] + 50, y: BP[1] - 24, width: 300, height: 48, rx: 10, fill: "#ffcf5a"}, bkTag);
+const bkT = el("text", {x: BP[0] + 66, y: BP[1] + 9, "font-size": 24, "font-weight": 800, fill: "#123a4a"}, bkTag);
+bkT.textContent = "YOU can step in here";
+
+/* ---------- Captions ---------- */
+const caps = [
+  {t0: 1.2,  t1: 8.9,  text: "You have breathed this smoke.", size: 76},
+  {t0: 9.3,  t1: 14.7, text: "What is it costing your lungs?", size: 76, sub: {t: 11.8, text: "…and why does it keep coming back?"}},
+  {t0: 16.9, t1: 22.6, text: "Let’s follow the smoke backwards…", size: 72},
+  {t0: 22.9, t1: 29.5, text: "…to the fire, and where YOU can step in.", size: 72},
+];
+caps.forEach(c => {
+  c.g = el("g", {opacity: 0}, $("captions"));
+  c.m = el("text", {x: 96, y: 930, "font-size": c.size, "font-weight": 800, fill: "#fff", "letter-spacing": "-1"}, c.g); c.m.textContent = c.text;
+  if (c.sub) { c.s = el("text", {x: 100, y: 1000, "font-size": 46, "font-weight": 600, fill: "#ffe9cf", opacity: 0}, c.g); c.s.textContent = c.sub.text; }
+});
+
+/* ---------- Render(t) ---------- */
+const renderOpening = function (t) {
+  // ----- Scene A
+  const h = ramp(t, .3, 6.5);                 // haze amount
+  const sA = 1 + .07 * ramp(t, 0, 15.5);      // slow push-in
+  $("camA").setAttribute("transform", `translate(960 600) scale(${sA}) translate(-960 -600)`);
+  $("skyTop").setAttribute("stop-color", mix("#7fb6e0", "#9c8f80", h));
+  $("skyBot").setAttribute("stop-color", mix("#d6e8f4", "#d9b98e", h));
+  $("wTop").setAttribute("stop-color", mix("#4f86a8", "#8a7a64", h));
+  $("wBot").setAttribute("stop-color", mix("#244a63", "#4a4237", h));
+  $("sun").setAttribute("fill", mix("#fff8dc", "#e9773d", h));
+  $("sun").setAttribute("opacity", lerp(.95, .85, h));
+  $("sunGlowC").setAttribute("opacity", lerp(.9, .35, h));
+  $("hazeFar").setAttribute("fill", "#d2b48e"); $("hazeFar").setAttribute("opacity", .72 * h);
+  $("hazeNear").setAttribute("fill", "#c9a57a"); $("hazeNear").setAttribute("opacity", .30 * h);
+  bands.forEach((b, i) => { b.setAttribute("cx", ((bandX[i] + bandSpeed[i] * t) % 2600) - 340); b.setAttribute("opacity", .45 * h); });
+  parts.forEach(p => {
+    const x = ((p.x + p.vx * t) % 1980 + 1980) % 1980 - 30, y = p.y + p.vy * t + Math.sin(t * 1.3 + p.ph) * 6;
+    p.e.setAttribute("cx", x); p.e.setAttribute("cy", y); p.e.setAttribute("r", p.r);
+    p.e.setAttribute("opacity", (.25 + .45 * (.5 + .5 * Math.sin(t * 2 + p.ph))) * h);
+  });
+
+  // ----- Transition A -> B (in the natural pause)
+  const xB = ramp(t, 14.9, 16.4);
+  $("sceneA").setAttribute("opacity", 1 - xB);
+  $("sceneB").setAttribute("opacity", xB);
+
+  // ----- Scene B camera: start close on Singapore, pull out to show both fires
+  const z = ramp(t, 16.2, 21.5);
+  const s = lerp(3.0, 1.0, z);
+  const end = P(109.0, 0.6);
+  const cx = lerp(SG[0], end[0], z), cy = lerp(SG[1], end[1], z);
+  $("camB").setAttribute("transform", `translate(960 520) scale(${s}) translate(${-cx} ${-cy})`);
+  // SG pulse
+  const pk = ((t - 15) % 1.6) / 1.6;
+  sgPulse.setAttribute("r", 10 + pk * 34 / Math.max(1, s * .6)); sgPulse.setAttribute("opacity", (1 - pk) * .9);
+  sgTag.setAttribute("opacity", ramp(t, 15.8, 16.6));
+  const inv = 1 / s; // keep labels readable while zoomed
+  sgTag.setAttribute("transform", `translate(${SG[0]} ${SG[1]}) scale(${Math.max(inv * 1.5, .8)}) translate(${-SG[0]} ${-SG[1]})`);
+  // path 1 draws backwards from SG to Sumatra fire
+  const p1 = ramp(t, 17.2, 20.6);
+  dots1.forEach((d, i) => d.setAttribute("opacity", i / dots1.length <= p1 ? .95 : 0));
+  const p2 = ramp(t, 19.6, 22.4);
+  dots2.forEach((d, i) => d.setAttribute("opacity", i / dots2.length <= p2 ? .6 : 0));
+  // fires ignite when the path arrives
+  [[fire1, 20.2], [fire2, 22.0]].forEach(([f, t0]) => {
+    const on = ramp(t, t0, t0 + .7);
+    const flick = 1 + .12 * Math.sin(t * 17) + .08 * Math.sin(t * 29 + 1);
+    f.g.setAttribute("opacity", on);
+    f.glow.setAttribute("r", 60 * flick * (.6 + .4 * on));
+  });
+  // smoke drifting from fires toward Singapore
+  puffs.forEach((p, i) => {
+    const on = ramp(t, p.src === F1 ? 20.4 : 22.2, (p.src === F1 ? 20.4 : 22.2) + 1.5);
+    const k = ((t * .18 + p.ph) % 1);
+    const vx = SG[0] - p.src[0], vy = SG[1] - p.src[1]; p.e.setAttribute("cx", p.src[0] + vx * k * .85 + (p.dx - 240) * .25 * k); p.e.setAttribute("cy", p.src[1] + vy * k * .85 + (p.dy + 270) * .25 * k);
+    p.e.setAttribute("r", p.r * (.6 + k * 1.4));
+    p.e.setAttribute("opacity", on * .45 * Math.sin(k * Math.PI));
+  });
+  // basket badge
+  const b = ramp(t, 23.4, 24.2);
+  const pop = b < 1 ? b * (1 + .25 * Math.sin(b * Math.PI)) : 1;
+  bk.setAttribute("opacity", b);
+  bk.setAttribute("transform", `translate(${BP[0]} ${BP[1]}) scale(${pop * Math.max(inv * 1.3, .9)}) translate(${-BP[0]} ${-BP[1]})`);
+  const bpk = ((t - 23.4) % 1.4) / 1.4;
+  bkPulse.setAttribute("r", 40 + bpk * 30); bkPulse.setAttribute("opacity", t > 23.4 ? (1 - bpk) * .8 : 0);
+
+};
+/* ================= FULL VIDEO: beats 1–3 ================= */
+const O1 = 29.63, O2 = 59.85, O3 = 87.08, END = 126.1;
+
+/* ---------- Scene C build (PM2.5) ---------- */
+seed = 404;
+const cParts = [];
+for (let i = 0; i < 90; i++) cParts.push({x: rnd() * 1920, y: rnd() * 1080, r: 1 + rnd() * 3, vx: 6 + rnd() * 16, ph: rnd() * 6.28, e: el("circle", {fill: "#e9dcc4"}, $("cBg"))});
+// hair vs particle scale
+const cs = $("cScale");
+const hairG = el("g", {opacity: 0}, cs);
+const hairGrad = el("radialGradient", {id: "hairGrad"}, $("v").querySelector("defs"));
+el("stop", {offset: "0", "stop-color": "#a07a52"}, hairGrad); el("stop", {offset: "1", "stop-color": "#5e4027"}, hairGrad);
+const hair = el("circle", {cx: 720, cy: 420, r: 230, fill: "url(#hairGrad)", stroke: "#c79c6d", "stroke-width": 4}, hairG);
+for (let i = 0; i < 9; i++) el("path", {d: `M${560 + i * 35} ${260 + Math.abs(4 - i) * 12} q 20 160 0 ${320 - Math.abs(4 - i) * 24}`, stroke: "#c79c6d", "stroke-opacity": .35, "stroke-width": 3, fill: "none"}, hairG);
+const ht = el("text", {x: 720, y: 712, "text-anchor": "middle", "font-size": 40, "font-weight": 800, fill: "#fff"}, hairG); ht.textContent = "Human hair";
+const ht2 = el("text", {x: 720, y: 758, "text-anchor": "middle", "font-size": 30, "font-weight": 600, fill: "#cfe3ec"}, hairG); ht2.textContent = "about 50–70 micrometres wide";
+const pmG = el("g", {opacity: 0}, cs);
+const pmRing = el("circle", {cx: 1330, cy: 420, r: 20, fill: "none", stroke: "#ffcf5a", "stroke-width": 3}, pmG);
+el("circle", {cx: 1330, cy: 420, r: 9, fill: "#ffcf5a"}, pmG);
+const pt = el("text", {x: 1330, y: 712, "text-anchor": "middle", "font-size": 40, "font-weight": 800, fill: "#ffcf5a"}, pmG); pt.textContent = "PM2.5 particle";
+const pt2 = el("text", {x: 1330, y: 758, "text-anchor": "middle", "font-size": 30, "font-weight": 600, fill: "#cfe3ec"}, pmG); pt2.textContent = "2.5 micrometres or smaller";
+const cmpG = el("g", {opacity: 0, "text-anchor": "middle"}, cs);
+const cmpT = el("text", {x: 1080, y: 300, "font-size": 54, "font-weight": 900, fill: "#fff"}, cmpG); cmpT.textContent = "≈ 30× thinner";
+el("path", {d: "M990 340 L1250 410", stroke: "#fff", "stroke-width": 4, "stroke-dasharray": "10 10", fill: "none"}, cmpG);
+el("path", {d: "M1250 410 l-26 -2 l12 -16 z", fill: "#fff"}, cmpG);
+
+// lungs diagram
+const lg = $("cLungs"); lg.setAttribute("opacity", 0);
+const lobeL = "M935 380 C 860 360 760 380 700 470 C 640 560 640 660 690 700 C 740 735 840 720 900 690 C 935 670 945 600 945 520 Z";
+const lobeR = "M985 380 C 1060 360 1160 380 1220 470 C 1280 560 1280 660 1230 700 C 1180 735 1080 720 1020 690 C 985 670 975 600 975 520 Z";
+el("path", {d: "M610 650 C 760 620 1160 620 1310 650", stroke: "#e04848", "stroke-width": 16, fill: "none", "stroke-linecap": "round", opacity: .9}, lg);
+el("path", {d: lobeL, fill: "#f2b6b0", stroke: "#ffe0dc", "stroke-width": 4}, lg);
+el("path", {d: lobeR, fill: "#f2b6b0", stroke: "#ffe0dc", "stroke-width": 4}, lg);
+el("rect", {x: 943, y: 150, width: 34, height: 250, rx: 16, fill: "#e8a29b", stroke: "#ffe0dc", "stroke-width": 3}, lg);
+const bronchi = ["M960 395 C 930 420 880 440 830 470", "M960 395 C 990 420 1040 440 1090 470", "M830 470 C 800 500 780 540 770 600", "M830 470 C 850 510 860 560 860 620", "M1090 470 C 1120 500 1140 540 1150 600", "M1090 470 C 1070 510 1060 560 1060 620", "M800 520 l-50 30", "M1120 520 l50 30", "M860 560 l40 40", "M1060 560 l-40 40"];
+bronchi.forEach((d, i) => el("path", {d, stroke: "#b8574f", "stroke-width": i < 2 ? 12 : i < 6 ? 8 : 5, fill: "none", "stroke-linecap": "round"}, lg));
+const lbl = (x, y, txt, anchor, col) => { const t = el("text", {x, y, "text-anchor": anchor, "font-size": 32, "font-weight": 800, fill: col || "#fff"}, lg); t.textContent = txt; return t; };
+const lb1 = lbl(1010, 200, "nose & throat can’t stop it", "start");
+const lb2 = lbl(1250, 470, "deep in the lungs", "start");
+const lb3 = lbl(1330, 662, "some reach the blood", "start", "#ff8f8f");
+seed = 77;
+const lParts = [];
+for (let i = 0; i < 46; i++) {
+  const side = rnd() < .5 ? -1 : 1;
+  const tx = 960 + side * (60 + rnd() * 190), ty = 470 + rnd() * 200;
+  lParts.push({t0: rnd() * 7, side, tx, ty, blood: i % 5 === 0, e: el("circle", {r: 6, fill: "#ffcf5a", stroke: "#5a4300", "stroke-width": 1.5, opacity: 0}, lg)});
+}
+// PSI + effects
+const pg = $("cPSI"); pg.setAttribute("opacity", 0);
+const chips = [["Stinging eyes", 380], ["Asthma flare-ups", 960], ["Cut outdoor activity", 1540]].map(([txt, x], i) => {
+  const g = el("g", {opacity: 0}, pg);
+  const w = 30 + txt.length * 19;
+  el("rect", {x: x - w / 2, y: 190, width: w, height: 70, rx: 35, fill: "#fff"}, g);
+  const t = el("text", {x, y: 236, "text-anchor": "middle", "font-size": 34, "font-weight": 800, fill: "#0f2633"}, g); t.textContent = txt;
+  return g;
+});
+const psiBands = [["0–50", "Good", "#3fae5a"], ["51–100", "Moderate", "#3b8fd9"], ["101–200", "Unhealthy", "#f2c230"], ["201–300", "Very unhealthy", "#f08a2b"], ["300+", "Hazardous", "#d9443b"]];
+const psiG = el("g", {opacity: 0}, pg);
+const pt0 = el("text", {x: 210, y: 345, "font-size": 34, "font-weight": 800, fill: "#fff", "letter-spacing": 3}, psiG); pt0.textContent = "PSI (Pollutant Standards Index)";
+psiBands.forEach(([r, n, c], i) => {
+  const x = 210 + i * 300;
+  el("rect", {x: x + 3, y: 410, width: 294, height: 90, rx: i === 0 ? 14 : 4, fill: c}, psiG);
+  const a = el("text", {x: x + 150, y: 468, "text-anchor": "middle", "font-size": 36, "font-weight": 900, fill: "#0f2633"}, psiG); a.textContent = r;
+  const b = el("text", {x: x + 150, y: 550, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#fff"}, psiG); b.textContent = n;
+});
+const src = el("text", {x: 1710, y: 620, "text-anchor": "end", "font-size": 24, "font-weight": 600, fill: "#9fb9c6"}, psiG); src.textContent = "Bands: National Environment Agency (NEA)";
+const needle = el("path", {d: "M0 0 l-18 -30 h36 z", fill: "#fff"}, psiG);
+
+/* ---------- Scene D extras on the map (Beat 2) ---------- */
+const windG = el("g", {opacity: 0}, $("camB"));
+const winds = [];
+[[96.5, -3.5], [99.5, -5.5], [103, -6.5], [107, -7.2], [98.5, 0.0], [110.5, -4.6], [101.5, -2.0], [113.5, -6.4], [95.5, 1.5]].forEach(([lon, lat]) => {
+  const a = P(lon, lat), b = P(lon + 3.2, lat + 2.6);
+  const p = el("path", {d: `M${a[0]} ${a[1]} Q ${(a[0] + b[0]) / 2 + 20} ${(a[1] + b[1]) / 2 + 20} ${b[0]} ${b[1]}`, stroke: "#9fe3ff", "stroke-width": 7, fill: "none", "stroke-linecap": "round", "stroke-dasharray": "36 22"}, windG);
+  const ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI;
+  el("path", {d: "M0 0 l-24 -13 l0 26 z", fill: "#9fe3ff", transform: `translate(${b[0]} ${b[1]}) rotate(${ang})`}, windG);
+  winds.push(p);
+});
+const windChip = el("g", {opacity: 0}, $("captions").parentNode.insertBefore(el("g", {}), $("captions")));
+el("rect", {x: 1290, y: 72, width: 550, height: 104, rx: 18, fill: "#0b2430", "fill-opacity": .85, stroke: "#9fe3ff", "stroke-width": 3}, windChip);
+const wc1 = el("text", {x: 1318, y: 116, "font-size": 32, "font-weight": 900, fill: "#9fe3ff", "letter-spacing": 2}, windChip); wc1.textContent = "SOUTHWEST MONSOON";
+const wc2 = el("text", {x: 1318, y: 156, "font-size": 28, "font-weight": 600, fill: "#fff"}, windChip); wc2.textContent = "around June to October";
+const dryChip = el("g", {opacity: 0}, windChip.parentNode);
+el("rect", {x: 1290, y: 72, width: 550, height: 104, rx: 18, fill: "#3a1d0b", "fill-opacity": .85, stroke: "#ff9a4d", "stroke-width": 3}, dryChip);
+const dc1 = el("text", {x: 1318, y: 116, "font-size": 32, "font-weight": 900, fill: "#ffb27a", "letter-spacing": 2}, dryChip); dc1.textContent = "DRY SEASON FIRES";
+const dc2 = el("text", {x: 1318, y: 156, "font-size": 28, "font-weight": 600, fill: "#fff"}, dryChip); dc2.textContent = "Sumatra & Kalimantan, Indonesia";
+// delivery truck
+const truck = el("g", {opacity: 0}, $("camB"));
+el("rect", {x: -46, y: -30, width: 60, height: 40, rx: 4, fill: "#fff"}, truck);
+el("path", {d: "M14 -20 h20 l12 14 v16 h-32 z", fill: "#9fe3ff"}, truck);
+el("circle", {cx: -30, cy: 12, r: 9, fill: "#123a4a", stroke: "#fff", "stroke-width": 3}, truck);
+el("circle", {cx: 30, cy: 12, r: 9, fill: "#123a4a", stroke: "#fff", "stroke-width": 3}, truck);
+const truckT = el("text", {x: -16, y: -6, "text-anchor": "middle", "font-size": 13, "font-weight": 900, fill: "#123a4a"}, truck); truckT.textContent = "SMOKE";
+
+/* ---------- Scene E build (peat) ---------- */
+seed = 12;
+const eT = $("eTrees");
+for (let i = 0; i < 26; i++) {
+  const x = 20 + i * 75 + rnd() * 30, h = 120 + rnd() * 110;
+  el("rect", {x: x - 5, y: 340 - h, width: 10, height: h, fill: "#3d4a36"}, eT);
+  el("ellipse", {cx: x, cy: 340 - h, rx: 34 + rnd() * 20, ry: 26 + rnd() * 12, fill: rnd() > .5 ? "#4f6b45" : "#5c7a4f"}, eT);
+}
+const eF = $("eFire");
+const efGlow = el("ellipse", {cx: 1450, cy: 330, rx: 160, ry: 70, fill: "url(#fireGlow)"}, eF);
+const efUnder = el("ellipse", {cx: 1450, cy: 420, rx: 200, ry: 60, fill: "url(#fireGlow)", opacity: .7}, eF);
+const LAYERS = 8, LT = 340, LB = 800, LH = (LB - LT) / LAYERS;
+const layerCols = ["#2f2117", "#38281b", "#41301f", "#4a3622", "#543d26", "#5e452b", "#684d30", "#735536"];
+const layers = [];
+for (let i = 0; i < LAYERS; i++) {
+  const y = LB - (i + 1) * LH;
+  const g = el("g", {opacity: 0}, $("eLayers"));
+  el("rect", {x: 0, y, width: 1920, height: LH + 1, fill: layerCols[i]}, g);
+  for (let j = 0; j < 40; j++) { const x = rnd() * 1920, yy = y + 6 + rnd() * (LH - 12); el("path", {d: `M${x} ${yy} q ${18 + rnd() * 20} ${-6 + rnd() * 12} ${40 + rnd() * 30} 0`, stroke: "#9b7a52", "stroke-opacity": .45, "stroke-width": 3, fill: "none"}, g); }
+  layers.push({g, y});
+}
+const leaves = [];
+for (let i = 0; i < 60; i++) leaves.push({x: rnd() * 1920, ph: rnd(), e: el("ellipse", {rx: 12, ry: 5, fill: rnd() > .5 ? "#6b8a4f" : "#8a7a3f", opacity: 0}, $("eLeaves"))});
+const carbons = [];
+for (let i = 0; i < 34; i++) {
+  const g = el("g", {opacity: 0}, $("eCarbon"));
+  const x = 80 + rnd() * 1760, y = 380 + rnd() * 390;
+  el("circle", {cx: x, cy: y, r: 22, fill: "#111", stroke: "#ffcf5a", "stroke-width": 3}, g);
+  const t = el("text", {x, y: y + 9, "text-anchor": "middle", "font-size": 26, "font-weight": 900, fill: "#ffcf5a"}, g); t.textContent = "C";
+  carbons.push({g, d: rnd()});
+}
+// side arrow: older at bottom, newer at top
+const side = $("eSide"); side.setAttribute("opacity", 0);
+el("rect", {x: 40, y: 360, width: 300, height: 420, rx: 16, fill: "#000", "fill-opacity": .45}, side);
+el("path", {d: "M80 750 V 400", stroke: "#ffcf5a", "stroke-width": 6}, side);
+el("path", {d: "M80 385 l-14 26 h28 z", fill: "#ffcf5a"}, side);
+[["newer", 430], ["thousands", 560], ["of years", 600], ["older", 740]].forEach(([s, y], i) => { const t = el("text", {x: 108, y, "font-size": i === 1 || i === 2 ? 36 : 30, "font-weight": i === 1 || i === 2 ? 900 : 700, fill: i === 1 || i === 2 ? "#ffcf5a" : "#fff"}, side); t.textContent = s; });
+// chips
+const eChips = [["Waterlogged swamp: always wet", "#4fa3d9"], ["Plants never fully rot", "#8fd18a"], ["Huge carbon store", "#ffcf5a"]].map(([txt, c], i) => {
+  const g = el("g", {opacity: 0}, $("eChips"));
+  const w = 40 + txt.length * 19, x = 1880 - w;
+  el("rect", {x, y: 60 + i * 86, width: w, height: 68, rx: 34, fill: "#0f2633", "fill-opacity": .88, stroke: c, "stroke-width": 3}, g);
+  const t = el("text", {x: x + w / 2, y: 106 + i * 86, "text-anchor": "middle", "font-size": 32, "font-weight": 800, fill: c}, g); t.textContent = txt;
+  return g;
+});
+
+/* ---------- extra captions ---------- */
+[
+  {t0: O1 + 1.4,  t1: O1 + 9.8,  text: "What are you actually breathing?", size: 72},
+  {t0: O1 + 9.9,  t1: O1 + 15.4, text: "Tiny enough to slip past your defences", size: 68},
+  {t0: O1 + 15.6, t1: O1 + 24.6, text: "PM2.5 travels deep into your lungs", size: 68, sub: {t: O1 + 19.5, text: "…and some can pass into your blood."}},
+  {t0: O1 + 24.8, t1: O1 + 29.9, text: "When the PSI climbs, cut outdoor activity", size: 64},
+  {t0: O2 + 0.9,  t1: O2 + 9.6,  text: "Where does it come from? Not Singapore.", size: 68},
+  {t0: O2 + 9.8,  t1: O2 + 16.9, text: "Monsoon winds carry the smoke to us", size: 68},
+  {t0: O2 + 17.2, t1: O2 + 22.2, text: "The wind is the delivery truck…", size: 72},
+  {t0: O2 + 22.4, t1: O2 + 26.9, text: "…not the cause.", size: 80},
+  {t0: O3 + 0.8,  t1: O3 + 11.0, text: "The part most people never learn…", size: 72},
+  {t0: O3 + 11.3, t1: O3 + 14.6, text: "These fires burn in PEAT", size: 76},
+  {t0: O3 + 14.8, t1: O3 + 22.4, text: "Peat: dead plants piled up over thousands of years", size: 60},
+  {t0: O3 + 22.6, t1: O3 + 30.2, text: "…in swamps that are always waterlogged", size: 64},
+  {t0: O3 + 30.5, t1: O3 + 34.4, text: "Always wet, so plants never fully rot", size: 68},
+  {t0: O3 + 34.6, t1: O3 + 38.0, text: "Peat stores huge amounts of carbon", size: 68},
+].forEach(c => {
+  caps.push(c);
+  c.g = el("g", {opacity: 0}, $("captions"));
+  c.m = el("text", {x: 96, y: 930, "font-size": c.size, "font-weight": 800, fill: "#fff", "letter-spacing": "-1"}, c.g); c.m.textContent = c.text;
+  if (c.sub) { c.s = el("text", {x: 100, y: 1000, "font-size": 46, "font-weight": 600, fill: "#ffe9cf", opacity: 0}, c.g); c.s.textContent = c.sub.text; }
+});
+
+/* ---------- Full render ---------- */
+window.render = function (t) {
+  renderOpening(Math.min(t, O1 - 0.02));
+  const flick = 1 + .12 * Math.sin(t * 17) + .08 * Math.sin(t * 29 + 1);
+
+  // scene visibility
+  const inC = ramp(t, O1 - .35, O1 + .35) * (1 - ramp(t, O2 - .35, O2 + .35));
+  const inD = ramp(t, O2 - .35, O2 + .35) * (1 - ramp(t, O3 - .35, O3 + .35));
+  const inE = ramp(t, O3 - .35, O3 + .35);
+  if (t >= O1 - .35) $("sceneB").setAttribute("opacity", t < O2 - .35 ? 1 - inC : inD);
+  $("sceneC").setAttribute("opacity", inC);
+  $("sceneE").setAttribute("opacity", inE);
+
+  // ---- Scene C (Beat 1)
+  if (inC > 0) {
+    const c = t - O1;
+    cParts.forEach(p => { p.e.setAttribute("cx", ((p.x + p.vx * c) % 1960) - 20); p.e.setAttribute("cy", p.y + Math.sin(c + p.ph) * 8); p.e.setAttribute("r", p.r); p.e.setAttribute("opacity", .35); });
+    const title = ramp(c, 4.2, 5.0) * (1 - ramp(c, 9.4, 9.9));
+    $("cTitle").setAttribute("opacity", title);
+    $("cTitle").setAttribute("transform", `translate(960 450) scale(${.9 + .1 * ramp(c, 4.2, 5.4)}) translate(-960 -450)`);
+    $("cSub").setAttribute("opacity", ramp(c, 5.6, 6.2));
+    const sc = 1 - ramp(c, 15.1, 15.6);
+    hairG.setAttribute("opacity", ramp(c, 9.9, 10.5) * sc);
+    pmG.setAttribute("opacity", ramp(c, 11.2, 11.7) * sc);
+    cmpG.setAttribute("opacity", ramp(c, 12.4, 12.9) * sc);
+    const pr = ((c - 11.2) % 1.2) / 1.2; pmRing.setAttribute("r", 12 + pr * 30); pmRing.setAttribute("opacity", c > 11.2 ? 1 - pr : 0);
+    const lungOn = ramp(c, 15.5, 16.1) * (1 - ramp(c, 24.3, 24.8));
+    lg.setAttribute("opacity", lungOn);
+    lb1.setAttribute("opacity", ramp(c, 16.5, 17)); lb2.setAttribute("opacity", ramp(c, 18.0, 18.5)); lb3.setAttribute("opacity", ramp(c, 19.6, 20.1));
+    lParts.forEach(p => {
+      const k = (c - 16 - p.t0) / 2.6;
+      if (k < 0) { p.e.setAttribute("opacity", 0); return; }
+      let x, y;
+      if (k < .4) { const q = k / .4; x = 960 + Math.sin(q * 9 + p.tx) * 6; y = lerp(140, 395, q); }
+      else if (k < 1) { const q = ease((k - .4) / .6); x = lerp(960, p.tx, q); y = lerp(395, p.ty, q); }
+      else if (p.blood) { const q = ease(clamp(k - 1)); x = p.tx; y = lerp(p.ty, 648, q); }
+      else { x = p.tx + Math.sin(c * 2 + p.tx) * 3; y = p.ty; }
+      p.e.setAttribute("cx", x); p.e.setAttribute("cy", y); p.e.setAttribute("opacity", 1);
+      p.e.setAttribute("fill", p.blood && k > 1.3 ? "#ff6b6b" : "#ffcf5a");
+    });
+    pg.setAttribute("opacity", ramp(c, 24.7, 25.2));
+    chips.forEach((g, i) => g.setAttribute("opacity", ramp(c, 25.0 + i * .5, 25.4 + i * .5)));
+    psiG.setAttribute("opacity", ramp(c, 26.3, 26.8));
+    const nx = lerp(360, 960, ease(ramp(c, 26.8, 29.3)));
+    needle.setAttribute("transform", `translate(${nx} 405)`);
+  }
+
+  // ---- Scene D (Beat 2) – the same map, now with wind
+  if (inD > 0) {
+    const d = t - O2;
+    $("path1").setAttribute("opacity", 0); $("path2").setAttribute("opacity", 0);
+    bk.setAttribute("opacity", 0);
+    sgTag.setAttribute("opacity", 1);
+    const fireOn = ramp(d, 3.0, 3.8);
+    [fire1, fire2].forEach(f => { f.g.setAttribute("opacity", fireOn); f.glow.setAttribute("r", 60 * flick); });
+    dryChip.setAttribute("opacity", ramp(d, 3.2, 3.7) * (1 - ramp(d, 9.4, 9.8)));
+    const w = ramp(d, 9.8, 10.6);
+    windG.setAttribute("opacity", w); windChip.setAttribute("opacity", ramp(d, 10.0, 10.5));
+    winds.forEach(p => p.setAttribute("stroke-dashoffset", -d * 90));
+    puffs.forEach(p => {
+      const k = ((d * .2 + p.ph) % 1);
+      const dirX = 300 * (.35 + .65 * w), dirY = -380 * (.35 + .65 * w);
+      p.e.setAttribute("cx", p.src[0] + dirX * k + (p.dx - 240) * .2 * k);
+      p.e.setAttribute("cy", p.src[1] + dirY * k + (p.dy + 270) * .2 * k);
+      p.e.setAttribute("r", p.r * (.6 + k * 1.6));
+      p.e.setAttribute("opacity", fireOn * .5 * Math.sin(k * Math.PI));
+    });
+    const tr = ramp(d, 17.2, 21.4);
+    truck.setAttribute("opacity", ramp(d, 17.0, 17.4) * (1 - ramp(d, 21.6, 22.0)));
+    truck.setAttribute("transform", `translate(${lerp(F1[0], SG[0] - 10, tr)} ${lerp(F1[1], SG[1] + 40, tr) - 16}) scale(1.4)`);
+    const cause = ramp(d, 22.3, 22.8);
+    [fire1, fire2].forEach(f => f.glow.setAttribute("r", 60 * flick * (1 + .8 * cause)));
+  } else { windG.setAttribute("opacity", 0); windChip.setAttribute("opacity", 0); dryChip.setAttribute("opacity", 0); truck.setAttribute("opacity", 0); }
+
+  // ---- Scene E (Beat 3) – peat
+  if (inE > 0) {
+    const e = t - O3;
+    efGlow.setAttribute("rx", 160 * flick); efGlow.setAttribute("opacity", 1 - .6 * ramp(e, 14, 16));
+    efUnder.setAttribute("opacity", ramp(e, 4, 6) * (1 - .6 * ramp(e, 14, 16)) * (.6 + .3 * flick));
+    $("eQ").setAttribute("opacity", ramp(e, 5.0, 5.6) * (1 - ramp(e, 10.8, 11.3)));
+    $("ePeat").setAttribute("opacity", ramp(e, 11.3, 11.8) * (1 - ramp(e, 14.4, 14.9)));
+    // layers stack bottom-up from 14.6 to 24
+    layers.forEach((L, i) => { const a = ramp(e, 14.6 + i * 1.15, 15.3 + i * 1.15); L.g.setAttribute("opacity", a); L.g.setAttribute("transform", `translate(0 ${(1 - a) * -30})`); });
+    $("eGround").setAttribute("fill", mix("#3b2a1d", "#7d8f86", ramp(e, 14.0, 14.6)));
+    leaves.forEach(l => {
+      const k = ((e * .35 + l.ph) % 1);
+      const fill = clamp((e - 14.6) / (LAYERS * 1.15));
+      const topY = LB - fill * (LB - LT);
+      l.e.setAttribute("cx", l.x + Math.sin(k * 8 + l.x) * 20);
+      l.e.setAttribute("cy", lerp(220, topY, k));
+      l.e.setAttribute("opacity", ramp(e, 14.6, 15.2) * (1 - ramp(e, 24.5, 25.5)) * Math.min(1, (1 - k) * 4));
+    });
+    $("eSide").setAttribute("opacity", ramp(e, 15.5, 16.2));
+    // water table rises 22.6 -> 26
+    const wl = lerp(LB, LT + 24, ease(ramp(e, 22.6, 26.0)));
+    let wd = `M0 ${LB} L0 ${wl}`;
+    for (let x = 0; x <= 1920; x += 40) wd += ` L${x} ${wl + Math.sin(x / 70 + e * 2) * 6}`;
+    wd += ` L1920 ${LB} Z`;
+    $("eWater").setAttribute("d", wd); $("eWater").setAttribute("opacity", .26 * ramp(e, 22.6, 23.2));
+    eChips[0].setAttribute("opacity", ramp(e, 23.0, 23.5));
+    eChips[1].setAttribute("opacity", ramp(e, 30.5, 31.0));
+    eChips[2].setAttribute("opacity", ramp(e, 34.6, 35.1));
+    carbons.forEach(cb => cb.g.setAttribute("opacity", ramp(e, 34.8 + cb.d * 1.6, 35.2 + cb.d * 1.6) * (.75 + .25 * Math.sin(e * 3 + cb.d * 9))));
+  }
+
+  // ---- captions + fades (real time)
+  caps.forEach(c => {
+    const a = ramp(t, c.t0, c.t0 + .45) * (1 - ramp(t, c.t1 - .35, c.t1));
+    c.g.setAttribute("opacity", a);
+    c.g.setAttribute("transform", `translate(0 ${(1 - ramp(t, c.t0, c.t0 + .45)) * 18})`);
+    if (c.s) c.s.setAttribute("opacity", ramp(t, c.sub.t, c.sub.t + .45));
+  });
+  $("tag").setAttribute("opacity", ramp(t, .2, 1));
+  $("fade").setAttribute("opacity", Math.max(1 - ramp(t, 0, .6), ramp(t, END - .7, END)));
+};
+
+window.render(0);
+</script>
+</body></html>

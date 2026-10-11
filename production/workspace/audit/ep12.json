@@ -1,0 +1,37 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "📚 gather more info",
+  "other": "circle:none",
+  "from": 116.3,
+  "to": 119.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔁 try again",
+  "other": "circle:none",
+  "from": 118.05,
+  "to": 119.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚖️ HAS MASS",
+  "other": "path:",
+  "from": 166.05,
+  "to": 178.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "MATTER",
+  "other": "path:",
+  "from": 166.05,
+  "to": 178.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔬 HOW SCIENTISTS INVESTIGATE",
+  "other": "path:none",
+  "from": 169.05,
+  "to": 178.8
+ }
+]

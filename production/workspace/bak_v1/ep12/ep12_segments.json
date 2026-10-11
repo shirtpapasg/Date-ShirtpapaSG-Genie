@@ -1,0 +1,15 @@
+[
+  {"id": "hook", "scene": "hook", "text": "Can you make a lump of plasticine lighter, just by flattening it? Lots of people think so. Let's test it, the way real scientists do."},
+  {"id": "story", "scene": "story", "text": "Imagine you are building a plasticine tower, and it keeps toppling over. Your friend says, flatten the heavy piece at the top. That will make it lighter. Is your friend right?"},
+  {"id": "hyp", "scene": "hyp", "text": "A scientist starts with a hypothesis. A hypothesis is not a wild guess. It is a prediction based on what you already know. We know that mass is the amount of matter. Flattening does not add or remove any plasticine. So our hypothesis is, changing the shape does not change the mass."},
+  {"id": "fair", "scene": "fair", "text": "Next, we plan a fair test. In a fair test, we change only one thing, and keep everything else the same. The variable we change is the shape. We keep the same piece of plasticine, so the amount and type stay the same. And the variable we measure is the mass, using an electronic balance."},
+  {"id": "method", "scene": "method", "text": "Weigh the block. Twenty grams. Flatten it, without removing any. Twenty grams. Roll it into a ball. Twenty grams. Roll it into a long log. Still twenty grams!"},
+  {"id": "result", "scene": "result", "text": "So, the results support our hypothesis. Shape does not affect mass. Flattening the piece will not make it lighter. Your friend's idea was wrong, and that is okay. Now we know more."},
+  {"id": "wrong", "scene": "wrong", "text": "And if your results do not support your hypothesis? That is okay too. Scientists check their method, gather more information, and try again."},
+  {"id": "quiz1", "scene": "quiz", "text": "Pause and predict! You cut an apple into eight pieces. Is the total mass more, less, or the same?"},
+  {"id": "quiz2", "scene": "quiz", "text": "The same! No apple was added or removed, so the amount of matter did not change."},
+  {"id": "exam", "scene": "exam", "text": "In your exam, say it like this. A hypothesis is a prediction based on what we know. In a fair test, we change only one variable, and keep all the other variables the same. The results support the hypothesis that shape does not affect mass."},
+  {"id": "habit1", "scene": "habit", "text": "Here is a habit for when things go wrong. Treat it like an experiment. If your study plan does not work, do not give up. Ask why, change one thing, and test it again next week."},
+  {"id": "habit2", "scene": "mindmap", "text": "Now finish your matter mind map with a new branch. How scientists investigate. Hypothesis, fair test, change one variable, and measure. Save it in TheOneApp, the ultimate science app."},
+  {"id": "close", "scene": "close", "text": "So, does flattening plasticine make it lighter? No! Shape does not change mass. Your turn. Write your own hypothesis about something at home, and plan a fair test to check it."}
+]

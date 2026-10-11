@@ -1,0 +1,87 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Your chicken rice is already being digested before you even swallow it. Miss where digestion starts, and you lose an exam mark. Do you know where it starts?"
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what digestion is. Second, how your mouth starts digestion. And third, what the gullet and stomach do. Let's get started!"
+ },
+ {
+  "id": "what",
+  "scene": "what",
+  "text": "Food is made of big pieces your body cannot use yet. Digestion is the process of breaking food down into simpler substances, so your body can use them. Let's follow one mouthful of chicken rice, or a burger, on its journey."
+ },
+ {
+  "id": "teeth1",
+  "scene": "teeth",
+  "text": "Stop one. The mouth. Your teeth bite and chew the food into smaller pieces. This does two important jobs. First, smaller pieces are easier to swallow."
+ },
+ {
+  "id": "teeth2",
+  "scene": "teeth",
+  "text": "Second, cutting food into smaller pieces exposes more surface to digestive juices. Imagine cutting one big cube into many small cubes. Suddenly, there are many more surfaces for the juices to work on, so digestion happens faster."
+ },
+ {
+  "id": "saliva",
+  "scene": "saliva",
+  "text": "Your mouth also makes saliva. Saliva softens the food, and it contains digestive juices. Your tongue tastes the food, and rolls it into a soft ball, ready to swallow. So digestion begins right here, in the mouth."
+ },
+ {
+  "id": "tooth",
+  "scene": "tooth",
+  "text": "That is why a toothache is such a problem. If it hurts to chew, it is hard to swallow and eat. So take care of your teeth, and see a dentist for check-ups."
+ },
+ {
+  "id": "gullet",
+  "scene": "gullet",
+  "text": "Stop two. The gullet. When you swallow, the food goes down a muscular tube called the gullet. Its muscles squeeze, and push the food down to your stomach. The gullet does not digest food. It just moves it along."
+ },
+ {
+  "id": "safety",
+  "scene": "safety",
+  "text": "Here is a safety tip. Your gullet lies right next to your windpipe, the tube for air. If you talk while you swallow, food can go down the windpipe instead. That makes you cough and choke. So, chew, swallow, then talk."
+ },
+ {
+  "id": "stomach",
+  "scene": "stomach",
+  "text": "Stop three. The stomach. Your stomach is a muscular bag that holds your food for a few hours. It makes digestive juices, and churns the food, mixing it with the juices. Here, the food is partly digested, and turns into a thick, soupy mixture."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Where does digestion begin? In the mouth, the gullet, or the stomach?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "It begins in the mouth, with chewing and saliva. The gullet only moves food along, and the stomach continues the digestion."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Digestion begins in the mouth. Teeth break food into smaller pieces, making it easier to swallow, and exposing more surface to digestive juices. The gullet pushes food to the stomach. The stomach mixes food with digestive juices, and digests it further."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit to try. Plan the time and the place. Say it out loud. I will revise science for ten minutes, at eight o'clock, at my desk. When you decide when and where, you are much more likely to actually do it."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Then draw your mind map. Digestive system in the middle. Start with three branches. Mouth, gullet and stomach. Add each part's job. Then save it in TheOneApp, the ultimate science app, and in the next episode, we will finish the journey."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, where does digestion start? In the mouth! Your turn. At your next meal, count how many times you chew one mouthful. Tell me your number in the comments."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

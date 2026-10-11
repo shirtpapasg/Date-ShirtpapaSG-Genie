@@ -1,0 +1,51 @@
+[
+ {
+  "kind": "out-of-box",
+  "text": "🐈",
+  "other": "",
+  "from": 110.3,
+  "to": 115.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌿 NATURAL",
+  "other": "path:",
+  "from": 157.05,
+  "to": 172.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🏭 MAN-MADE",
+  "other": "path:",
+  "from": 157.05,
+  "to": 172.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👁️ HOW WE SEE",
+  "other": "path:",
+  "from": 157.05,
+  "to": 172.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "💡 LIGHT",
+  "other": "path:",
+  "from": 157.05,
+  "to": 172.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔺 SHADOW SHAPE",
+  "other": "path:none",
+  "from": 159.8,
+  "to": 172.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "☀️ OUTDOOR SHADOWS",
+  "other": "path:none",
+  "from": 164.3,
+  "to": 172.8
+ }
+]

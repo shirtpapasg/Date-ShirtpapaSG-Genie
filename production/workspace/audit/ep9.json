@@ -1,0 +1,23 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "STATES OF",
+  "other": "path:none",
+  "from": 189.3,
+  "to": 201.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🧊 SOLID",
+  "other": "path:none",
+  "from": 189.55,
+  "to": 201.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "💧 LIQUID",
+  "other": "path:none",
+  "from": 190.3,
+  "to": 201.3
+ }
+]

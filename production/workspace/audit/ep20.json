@@ -1,0 +1,30 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "🌡️ TEMPERATURE",
+  "other": "path:",
+  "from": 198.05,
+  "to": 211.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚡ HEAT (energy)",
+  "other": "path:",
+  "from": 198.05,
+  "to": 211.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔥 HEAT",
+  "other": "path:",
+  "from": 198.05,
+  "to": 211.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "➡️ HEAT FLOW",
+  "other": "path:none",
+  "from": 200.3,
+  "to": 211.3
+ }
+]

@@ -1,0 +1,51 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "🎆 laser light show",
+  "other": "line:",
+  "from": 71.3,
+  "to": 74.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🃏🃏🃏 test it with 3 cards",
+  "other": "line:",
+  "from": 73.3,
+  "to": 74.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌿 NATURAL",
+  "other": "path:",
+  "from": 161.05,
+  "to": 175.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🏭 MAN-MADE",
+  "other": "path:",
+  "from": 161.05,
+  "to": 175.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👁️ HOW WE SEE",
+  "other": "path:",
+  "from": 161.05,
+  "to": 175.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "💡 LIGHT",
+  "other": "path:",
+  "from": 161.05,
+  "to": 175.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👤 SHADOWS",
+  "other": "path:none",
+  "from": 163.05,
+  "to": 175.55
+ }
+]

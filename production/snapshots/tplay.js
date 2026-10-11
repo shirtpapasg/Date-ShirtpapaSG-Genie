@@ -1,0 +1,22 @@
+const { chromium } = require('playwright');
+(async () => {
+  const b = await chromium.launch({ args: ['--autoplay-policy=no-user-gesture-required'] });
+  const p = await b.newPage(); const logs = [];
+  p.on('pageerror', e => logs.push('ERR ' + e.message)); p.on('console', m => logs.push('console ' + m.text()));
+  await p.addInitScript(() => { window.calls = []; window.HeartTTS = { generate: async (t, o) => { window.calls.push([t, o.speed, Math.round(performance.now())]);
+      const sr = 24000, a = new Float32Array(sr * 0.4); for (let i = 0; i < a.length; i++) a[i] = Math.sin(i / 10) * 0.1; return { audio: a, sampling_rate: sr }; } }; });
+  await p.goto('http://localhost:8765/demo.html'); await p.waitForTimeout(600);
+  console.log('buttons', await p.$$eval('.heart-btn', bs => bs.map(b => b.textContent.trim())));
+  const btns = await p.$$('.heart-btn');
+  await btns[0].click(); await p.waitForTimeout(300);
+  console.log('state while playing:', await btns[0].getAttribute('data-state'), '| reading:', await p.$eval('[data-heart]', e => e.dataset.heartReading));
+  await p.waitForTimeout(3500);
+  const c = await p.evaluate(() => window.calls);
+  console.log('sentences spoken:', c.length, c.map(x => x[1]).join(','), '| state after:', await btns[0].getAttribute('data-state'));
+  console.log('first text:', c[0][0]);
+  await p.evaluate(() => window.calls = []);
+  await btns[1].click(); await p.waitForTimeout(500); await btns[1].click(); await p.waitForTimeout(1500);
+  console.log('foundation speeds:', (await p.evaluate(() => window.calls)).map(x => x[1]).join(','), '| after stop:', await btns[1].getAttribute('data-state'), 'calls', (await p.evaluate(() => window.calls)).length);
+  await btns[2].click(); await p.waitForTimeout(700);
+  console.log('mp3 state:', await btns[2].getAttribute('data-state'));
+  console.log(logs.slice(0, 5).join('\n')); await b.close(); })();

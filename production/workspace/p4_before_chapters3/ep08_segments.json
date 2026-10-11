@@ -1,0 +1,82 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Is air nothing? Your exam will say no. Air is matter, just like a rock or a cup of water. But how can something invisible be matter? Let's put it to the test."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what matter is. Second, what mass and volume mean. And third, how to prove that air is matter. Let's get started!"
+ },
+ {
+  "id": "what",
+  "scene": "what",
+  "text": "In everyday talk, what's the matter means, what's wrong? But in science, matter means something special. Matter is anything that has mass and takes up space."
+ },
+ {
+  "id": "mass",
+  "scene": "mass",
+  "text": "Mass is the amount of matter in an object. A bottle full of water has more matter than one that is nearly empty, so it has a greater mass. Put both on a balance, and it tilts towards the heavier one."
+ },
+ {
+  "id": "space",
+  "scene": "space",
+  "text": "Matter also takes up space. Try to pour more water into a bottle that is already full. It overflows! The water inside is already taking up the space. The amount of space an object takes up is called its volume."
+ },
+ {
+  "id": "non",
+  "scene": "non",
+  "text": "So, what is not matter? Light, shadows, heat and sound. Shine a torch on a balance, and the reading stays at zero. You can stand inside a shadow. Heat and sound pass right through walls. They have no mass, and they do not take up space."
+ },
+ {
+  "id": "air1",
+  "scene": "air1",
+  "text": "Now, the big test. Is air matter? Test one. Does air have mass? Put a pumped-up basketball and a flat basketball on a balance. The balance tilts towards the pumped-up ball. The extra air has mass!"
+ },
+ {
+  "id": "air2",
+  "scene": "air2",
+  "text": "Test two. Does air take up space? Push an upside-down cup straight down into water. The water cannot fill the cup, because air is trapped inside, taking up the space. Blow more air in through a straw, and the water level inside the cup drops even more."
+ },
+ {
+  "id": "verdict",
+  "scene": "verdict",
+  "text": "So air has mass, and it takes up space. Air is matter, even though you cannot see it."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Which of these is matter? A rainbow, a balloon full of air, a shadow, or the sound of a drum?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Only the balloon full of air. A rainbow is light, and light, shadows and sound are not matter."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Matter is anything that has mass and occupies space. Air is matter, because it has mass and occupies space. Light, shadow, heat and sound are not matter, because they have no mass and do not occupy space."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit for thinkers. Choose who you want to be. Instead of saying, I have to study, say, I am a scientist, and scientists test their ideas. Every time you ask why, you prove it to yourself."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now draw your mind map. Matter in the middle, with two branches. Has mass, and takes up space. Then add a separate bubble for things that are not matter. Light, shadow, heat and sound. Save it in TheOneApp, the ultimate science app."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, is air nothing? No! Air is matter. Your turn. Find three things at home that are matter, and one thing that is not. Can you explain why?"
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

@@ -1,0 +1,22 @@
+[
+ [
+  "const mk = tx(g, {x: 100, y: -90, \"text-anchor\": \"middle\", \"font-size\": 120,",
+  "const mk = tx(g, {x: 106, y: -80, \"text-anchor\": \"middle\", \"font-size\": 90,"
+ ],
+ [
+  "set(s.hand, \"y\", 250 + Math.sin(t * 9) * 8)",
+  "set(s.hand, \"y\", 212 + Math.sin(t * 9) * 8)"
+ ],
+ [
+  "set(s.fire, \"y\", 330 + Math.sin(t * 6) * 6)",
+  "set(s.fire, \"y\", 285 + Math.sin(t * 6) * 6)"
+ ],
+ [
+  "[\"solid\", \"🧊 SOLID\", \"#8d6e63\", 240, 290,",
+  "[\"solid\", \"🧊 SOLID\", \"#8d6e63\", 300, 290,"
+ ],
+ [
+  "\"rock\", 1120, 340], [\"🌊 LIQUID: oceans\", \"#00b4d8\", \"oceans\", 1120, 480], [\"💨 GAS: air\", \"#adb5bd\", \"air\", 1120, 620]",
+  "\"rock\", 1190, 340], [\"🌊 LIQUID: oceans\", \"#00b4d8\", \"oceans\", 1190, 480], [\"💨 GAS: air\", \"#adb5bd\", \"air\", 1190, 620]"
+ ]
+]

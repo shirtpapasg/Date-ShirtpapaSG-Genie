@@ -1,0 +1,70 @@
+[
+ [
+  "KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;",
+  "KW.forEach(K => { const t0 = K.k.t, tfly = .6, nx = KW[K.i + 1], tf0 = nx && nx.k.t < t0 + 1.9 + tfly ? Math.max(t0 + .6, nx.k.t - tfly) : t0 + 1.9;"
+ ],
+ [
+  "set(it.e, \"y\", lerp(330, 600, sort)",
+  "set(it.e, \"y\", lerp(285, 600, sort)"
+ ],
+ [
+  "popAt(c.c, 440 + c.i * 320, 200, t, a(c.w))",
+  "popAt(c.c, 380 + c.i * 380, 200, t, a(c.w))"
+ ],
+ [
+  "popAt(s.c1, 760, 730, t, a(\"main\"))",
+  "popAt(s.c1, 760, 668, t, a(\"main\"))"
+ ],
+ [
+  "popAt(s.c2, 760, 820, t, a(\"star\"))",
+  "popAt(s.c2, 760, 748, t, a(\"star\"))"
+ ],
+ [
+  "popAt(s.c4, 760, 820, t, a(\"thunderstorm\") - .3)",
+  "popAt(s.c4, 760, 748, t, a(\"thunderstorm\") - .3)"
+ ],
+ [
+  "set(s.sun, \"y\", 470); tf(s.sun, `rotate(${t * 10} 760 470)`)",
+  "set(s.sun, \"y\", 435); tf(s.sun, `rotate(${t * 10} 760 435)`)"
+ ],
+ [
+  "s.fl = el(\"circle\", {r: 20, fill: \"#ffe14d\"}, s.stage);",
+  "s.stalk = el(\"path\", {fill: \"none\", stroke: \"#8ecae6\", \"stroke-width\": 5, \"stroke-linecap\": \"round\"}, s.stage); s.fl = el(\"circle\", {r: 20, fill: \"#ffe14d\"}, s.stage);"
+ ],
+ [
+  "set(s.fl, \"cx\", 600 + Math.sin(t) * 30); set(s.fl, \"cy\", 700);",
+  "set(s.fl, \"cx\", 600 + Math.sin(t) * 30); set(s.fl, \"cy\", 700); { const fx = 660 + Math.sin(t) * 30; set(s.stalk, \"d\", `M${fx - 45} 742 Q${fx - 42} 712 ${fx - 60} 718`); op(s.stalk, ramp(t, a(\"deepsea\"), a(\"deepsea\") + .2)); }"
+ ],
+ [
+  "s.x1 = chip(s.stage, \"✗ too BIG\", \"#e63946\", {fs: 34}); s.b2 = emo(s.stage, 0, 0, 120, \"💡\");",
+  "s.x1 = chip(s.stage, \"✗ burned out\", \"#e63946\", {fs: 34}); s.b1.setAttribute(\"style\", \"filter: grayscale(1) brightness(.75)\"); s.b2 = emo(s.stage, 0, 0, 150, \"⏱️\");"
+ ],
+ [
+  "\"✗ too BRIGHT\"",
+  "\"✗ too QUICKLY\""
+ ],
+ [
+  "\"✓ practical for HOMES\"",
+  "\"✓ lasted long enough for HOMES\""
+ ],
+ [
+  "    op(s.b1, ramp(t, a(\"big\"), a(\"big\") + .2) * (1 - fade)); set(s.b1, \"x\", 460); set(s.b1, \"y\", 420); op(s.x1, ramp(t, a(\"big\"), a(\"big\") + .2) * (1 - fade)); popAt(s.x1, 460, 620, t, a(\"big\"));",
+  "    op(s.b1, ramp(t, a(\"burned\"), a(\"burned\") + .2) * (1 - fade)); set(s.b1, \"x\", 460); set(s.b1, \"y\", 420); op(s.x1, ramp(t, a(\"burned\"), a(\"burned\") + .2) * (1 - fade)); popAt(s.x1, 460, 620, t, a(\"burned\"));"
+ ],
+ [
+  "    op(s.b2, ramp(t, a(\"bright\"), a(\"bright\") + .2) * (1 - fade)); set(s.b2, \"x\", 1060); set(s.b2, \"y\", 420); op(s.glare, ramp(t, a(\"bright\"), a(\"bright\") + .2) * (1 - fade) * (.5 + .4 * Math.sin(t * 9))); set(s.glare, \"cx\", 1060); set(s.glare, \"cy\", 410);",
+  "    op(s.b2, ramp(t, a(\"quickly\"), a(\"quickly\") + .2) * (1 - fade)); set(s.b2, \"x\", 1060); set(s.b2, \"y\", 420); op(s.glare, 0);"
+ ],
+ [
+  "    op(s.x2, ramp(t, a(\"bright\"), a(\"bright\") + .2) * (1 - fade)); popAt(s.x2, 1060, 620, t, a(\"bright\"));",
+  "    op(s.x2, ramp(t, a(\"quickly\"), a(\"quickly\") + .2) * (1 - fade)); popAt(s.x2, 1060, 620, t, a(\"quickly\"));"
+ ],
+ [
+  "    op(s.ok, ramp(t, a(\"practical\"), a(\"practical\") + .2)); set(s.ok, \"x\", 1250); set(s.ok, \"y\", 430); op(s.okc, ramp(t, a(\"practical\"), a(\"practical\") + .2)); popAt(s.okc, 1250, 600, t, a(\"practical\"));",
+  "    op(s.ok, ramp(t, a(\"lasted\"), a(\"lasted\") + .2)); set(s.ok, \"x\", 1250); set(s.ok, \"y\", 430); op(s.okc, ramp(t, a(\"lasted\"), a(\"lasted\") + .2)); popAt(s.okc, 1250, 600, t, a(\"lasted\"));"
+ ],
+ [
+  "\"💡 A source of light is an object that gives off light.\"",
+  "\"💡 A source of light is an object that gives off its own light.\""
+ ]
+]

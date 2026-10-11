@@ -1,0 +1,23 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "💡 LIGHT",
+  "other": "path:none",
+  "from": 172.05,
+  "to": 180.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌿 NATURAL SOURCES",
+  "other": "path:none",
+  "from": 172.3,
+  "to": 180.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🏭 MAN-MADE SOURCES",
+  "other": "path:none",
+  "from": 173.55,
+  "to": 180.05
+ }
+]

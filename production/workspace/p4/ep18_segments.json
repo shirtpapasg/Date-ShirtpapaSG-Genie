@@ -1,0 +1,77 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Put one hand in cold water and the other in warm water. Then put both hands into the same bowl of lukewarm water. One hand says it is warm. The other says it is cold! Your sense of touch got mixed up!"
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what temperature is. Second, why your hands cannot measure it. And third, how to use thermometers. Let's get started!"
+ },
+ {
+  "id": "need",
+  "scene": "need",
+  "text": "So how hot is hot? Doctors need to know your exact body temperature when you have a fever. Bakers need the exact oven temperature. Words like hot, warm and cold are not good enough. We need numbers."
+ },
+ {
+  "id": "temp",
+  "scene": "temp",
+  "text": "Temperature is a measure of how hot or cold an object is. It is measured in degrees Celsius. The bigger the number, the higher the temperature. Fifty degrees Celsius is hotter than ten degrees Celsius."
+ },
+ {
+  "id": "camera",
+  "scene": "camera",
+  "text": "A thermal camera shows temperature using colours. Warm bodies glow red and yellow. Airports and hospitals in Singapore use them to spot people with a fever, without touching anyone."
+ },
+ {
+  "id": "types",
+  "scene": "types",
+  "text": "To measure temperature accurately, we use a thermometer. A digital thermometer measures body temperature. An infrared thermometer measures the temperature of a surface, without touching it. And a laboratory thermometer measures liquids and gases."
+ },
+ {
+  "id": "lab",
+  "scene": "lab",
+  "text": "Using a lab thermometer takes four steps. One. Put the bulb fully into the liquid. Two. Wait until the red liquid stops moving. Three. Read at eye level, where the red liquid stops. Four. Keep the bulb away from the sides and bottom of the container, or you will measure the container instead of the liquid. And remember, a lab thermometer cannot measure a solid, because its bulb must be fully surrounded."
+ },
+ {
+  "id": "logger",
+  "scene": "logger",
+  "text": "Scientists also use a data logger. Connect a temperature sensor, and it records the temperature again and again, and even draws a graph for you. Touch, or thermometer? You can try it yourself in The One App. Open the School Lab, experiment six point one, and press, Let's test it now!"
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Which thermometer would you use to measure the temperature of a cup of tea? A digital, an infrared, or a laboratory thermometer?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "A laboratory thermometer works best, because tea is a liquid and the bulb can be fully dipped in. An infrared thermometer could measure its surface too."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Temperature is a measure of how hot or cold an object is, measured in degrees Celsius using a thermometer. Our sense of touch cannot measure temperature accurately."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit to try. Measure your progress. After each topic, give yourself a quick five-question quiz, and write down your score. Watching the numbers go up is a great feeling."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now start a new mind map. Heat in the middle. Add a branch for temperature. Measured in degrees Celsius, with a thermometer. Add the three types of thermometers. Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, did your touch get mixed up? Yes, so use a thermometer! Your turn. Try the three-bowl test with an adult, using water that is only slightly warm, never hot."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

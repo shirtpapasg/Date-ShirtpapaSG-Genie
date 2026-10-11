@@ -1,0 +1,102 @@
+[
+ [
+  "function tbs(p, r = 60, sh = 700)",
+  "function tbs(p, r = 60, sh = 520)"
+ ],
+ [
+  "popAt(s.lt, 260, 580, t, a(\"torch\"))",
+  "popAt(s.lt, 260, 605, t, a(\"torch\"))"
+ ],
+ [
+  "popAt(s.t, 760, 120, t, SC.rule1.t0)",
+  "popAt(s.t, 820, 125, t, SC.rule1.t0)"
+ ],
+ [
+  "op(s.c1, on(t, a(\"bigger\"), a(\"further\"), .2)); popAt(s.c1, 760, 900, t, a(\"bigger\")); op(s.c2, ramp(t, a(\"smaller\"), a(\"smaller\") + .2)); popAt(s.c2, 760, 900, t, a(\"smaller\"));",
+  "op(s.c1, on(t, a(\"bigger\"), a(\"further\"), .2)); popAt(s.c1, 680, 200, t, a(\"bigger\")); op(s.c2, ramp(t, a(\"smaller\"), a(\"smaller\") + .2)); popAt(s.c2, 680, 200, t, a(\"smaller\"));"
+ ],
+ [
+  "op(s.c1, on(t, a(\"bigger\"), a(\"closer\"), .2)); popAt(s.c1, 760, 900, t, a(\"bigger\")); op(s.c2, ramp(t, a(\"smaller\"), a(\"smaller\") + .2)); popAt(s.c2, 760, 900, t, a(\"smaller\"));",
+  "op(s.c1, on(t, a(\"bigger\"), a(\"closer\"), .2)); popAt(s.c1, 620, 198, t, a(\"bigger\")); op(s.c2, ramp(t, a(\"smaller\"), a(\"smaller\") + .2)); popAt(s.c2, 620, 198, t, a(\"smaller\"));"
+ ],
+ [
+  "s.d = tbs(s.stage, 45, 760)",
+  "s.d = tbs(s.stage, 45, 560)"
+ ],
+ [
+  "popAt(s.lock, 760, 110,",
+  "popAt(s.lock, 760, 135,"
+ ],
+ [
+  "popAt(s.c1, 760, 110,",
+  "popAt(s.c1, 760, 135,"
+ ],
+ [
+  "popAt(s.c2, 760, 110,",
+  "popAt(s.c2, 760, 135,"
+ ],
+ [
+  "popAt(s.c3, 760, 110,",
+  "popAt(s.c3, 760, 135,"
+ ],
+ [
+  "popAt(s.t, 760, 120, t, SC.rule2.t0)",
+  "popAt(s.t, 820, 125, t, SC.rule2.t0)"
+ ],
+ [
+  "popAt(s.ls, 1267, 880, t, a(\"screen\"))",
+  "popAt(s.ls, 1267, 215, t, a(\"screen\"))"
+ ],
+ [
+  "s.d = tbs(s.stage); s.lt = chip",
+  "s.d = tbs(s.stage, 60, 440); s.lt = chip"
+ ],
+ [
+  "s.d1.set(300, 700, 700, \"distance ①\"); s.d2.set(820, 1240, 700, \"distance ②\")",
+  "s.d1.set(300, 700, 762, \"distance ①\"); s.d2.set(820, 1240, 762, \"distance ②\")"
+ ],
+ [
+  "tf(torch, `rotate(45 ${T - 40} ${CY})`);",
+  "tf(torch, `rotate(135 ${T - 40} ${CY})`);"
+ ],
+ [
+  "tf(s.torch, `rotate(45 ${T - 40} ${CY})`);",
+  "tf(s.torch, `rotate(135 ${T - 40} ${CY})`);"
+ ],
+ [
+  "s.torch = emo(s.stage, 260, 500, 120, \"🔦\");",
+  "s.torch = emo(s.stage, 260, 500, 120, \"🔦\"); tf(s.torch, \"rotate(135 260 500)\");"
+ ],
+ [
+  "set(i.e, \"y\", 620 + 20 * (1 - pop(t, a(i.w)))); });",
+  "set(i.e, \"y\", 620 + 20 * (1 - pop(t, a(i.w)))); if (i.i === 0) tf(i.e, `rotate(135 480 ${620 + 20 * (1 - pop(t, a(i.w)))})`); });"
+ ],
+ [
+  "tf(s.p, `scale(${dir < 0 ? 1 : -1} 1)`);",
+  "tf(s.p, \"scale(-1 1)\");"
+ ],
+ [
+  "\"…or tiny 🐜\"",
+  "\"…or small 🐜\""
+ ],
+ [
+  "op(s.tiny, ramp(t, a(\"tiny\"), a(\"tiny\") + .2)",
+  "op(s.tiny, ramp(t, a(\"small\"), a(\"small\") + .2)"
+ ],
+ [
+  "[\"⚽\", \"ball\"]",
+  "[\"⚽\", \"ball#2\"]"
+ ],
+ [
+  "s.l2 = chip(s.stage, \"tiny\", \"#ef476f\", {fs: 34});",
+  "s.l2 = chip(s.stage, \"small\", \"#ef476f\", {fs: 34});"
+ ],
+ [
+  "k = ramp(t, a(\"tiny\") - .3, a(\"tiny\") + .5);",
+  "k = ramp(t, a(\"small\") - .3, a(\"small\") + .5);"
+ ],
+ [
+  "    op(s.l1, on(t, a(\"giant#2\"), a(\"tiny\") - .3, .2)); popAt(s.l1, 900, 170, t, a(\"giant#2\")); op(s.l2, ramp(t, a(\"tiny\"), a(\"tiny\") + .2)); popAt(s.l2, 900, 170, t, a(\"tiny\")); }; return s; })();",
+  "    op(s.l1, on(t, a(\"giant#2\"), a(\"small\") - .3, .2)); popAt(s.l1, 900, 170, t, a(\"giant#2\")); op(s.l2, ramp(t, a(\"small\"), a(\"small\") + .2)); popAt(s.l2, 900, 170, t, a(\"small\")); }; return s; })();"
+ ]
+]

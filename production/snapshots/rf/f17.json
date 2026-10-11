@@ -1,0 +1,4 @@
+[
+ ["s.lamp = emo(s.stage, 150, 520, 120, \"💡\");", "s.lamp = emo(s.stage, 150, 520, 120, \"💡\"); tf(s.lamp, \"rotate(90 150 520)\");"],
+ ["s.lamp = emo(s.stage, 760, 260, 110, \"💡\");", "s.lamp = emo(s.stage, 760, 260, 110, \"💡\"); tf(s.lamp, \"rotate(180 760 260)\");"]
+]

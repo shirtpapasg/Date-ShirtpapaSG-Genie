@@ -1,0 +1,14 @@
+{
+ "hook": "translate(765 525) scale(1.216) translate(-758 -490)",
+ "intro": "translate(765 525) scale(1.288) translate(-756 -435)",
+ "solid": "translate(765 525) scale(1.246) translate(-760 -469)",
+ "liquid": "translate(765 525) scale(1.177) translate(-806 -488)",
+ "gas": "translate(765 525) scale(1.141) translate(-733 -500)",
+ "syringe": "translate(765 525) scale(1.105) translate(-919 -481)",
+ "uses": "translate(765 525) scale(1.378) translate(-760 -544)",
+ "earth": "translate(765 525) scale(1.184) translate(-864 -559)",
+ "quiz": "translate(765 525) scale(1.177) translate(-764 -441)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.281) translate(-810 -428)",
+ "close": "translate(765 525) scale(1.323) translate(-838 -497)"
+}

@@ -1,0 +1,23 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "MATTER",
+  "other": "path:none",
+  "from": 181.3,
+  "to": 192.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚖️ HAS MASS",
+  "other": "path:none",
+  "from": 181.55,
+  "to": 192.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "📦 TAKES UP SPACE",
+  "other": "path:none",
+  "from": 182.8,
+  "to": 192.8
+ }
+]

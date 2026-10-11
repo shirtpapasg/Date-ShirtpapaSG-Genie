@@ -1,0 +1,82 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Why does a metal pot have a plastic handle? If the whole pot were metal, you could not even pick it up. The answer is all about how fast heat can travel."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, good conductors of heat. Second, poor conductors of heat. And third, how air keeps you warm. Let's get started!"
+ },
+ {
+  "id": "spoons",
+  "scene": "spoons",
+  "text": "Put a metal spoon and a wooden spoon into the same cup of hot water. After a minute, the metal spoon feels hot, but the wooden spoon is still cool. Heat flowed through the metal much faster."
+ },
+ {
+  "id": "cups",
+  "scene": "cups",
+  "text": "And hot water stays hot longer in a polystyrene cup than in a metal cup. So the material matters!"
+ },
+ {
+  "id": "wax1",
+  "scene": "wax",
+  "text": "Scientists test this with the wax rod experiment. Stand rods of metal, glass, plastic and wood in the same hot water. Each rod has a blob of wax at the top. The faster heat flows up the rod, the more wax melts."
+ },
+ {
+  "id": "wax2",
+  "scene": "wax",
+  "text": "The metal rod melts the most wax, then glass, then plastic. The wooden rod melts the least. Heat flows fastest through metal, and slowest through wood."
+ },
+ {
+  "id": "cond",
+  "scene": "cond",
+  "text": "Materials that let heat flow through quickly are good conductors of heat. Metals are good conductors. Materials that let heat flow slowly are poor conductors of heat, like glass, plastic and wood."
+ },
+ {
+  "id": "uses",
+  "scene": "uses",
+  "text": "Now the pot makes sense. The pot is metal, a good conductor, so heat reaches the food quickly. But the handle is plastic or wood, a poor conductor, so it stays cool enough to hold. Kettles, pans and irons are designed the same way."
+ },
+ {
+  "id": "air",
+  "scene": "air",
+  "text": "Here is a surprise. Air is a poor conductor of heat. A woolly sweater traps lots of air between its fibres, so it slows down heat leaving your body, and keeps you warm. Polystyrene is full of trapped air too, so a cooler box keeps drinks and fish cold for longer."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Which spoon would you choose to stir hot soup, so your fingers do not get hot? Metal or wood?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Wood! It is a poor conductor of heat, so heat flows through it slowly."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Metal is a good conductor of heat, so heat flows through it quickly. Wood and plastic are poor conductors of heat, so heat flows through them slowly. That is why pot handles are made of plastic or wood."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit to try. Link it to real life. When you learn a fact, find it at home. Look at your kitchen. Which parts are good conductors, and which are poor conductors? Real examples make facts unforgettable."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now add to your heat mind map. A branch called conductors. Good conductors, like metals. Poor conductors, like glass, plastic, wood and air. Save it in TheOneApp, the ultimate science app."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, why does your pot have a plastic handle? Because plastic is a poor conductor of heat! Your turn. Find three good conductors and three poor conductors in your kitchen."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

@@ -1,0 +1,87 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "You ate three plant parts today. Mix up their jobs in your exam, and you lose easy marks. Which three? Let's find out."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what leaves do. Second, what the stem does. And third, what roots do. Let's get started!"
+ },
+ {
+  "id": "turn",
+  "scene": "plant",
+  "text": "Remember the bike from our last episode? A plant is a system too. It has three main parts. Leaves. Stem. And roots. Each part has its own job, and they all work together so the plant can grow well."
+ },
+ {
+  "id": "leaves1",
+  "scene": "plant",
+  "text": "Let's start at the top. Leaves are the plant's food factory. Most leaves are green, because they contain a green substance that soaks up light. The plant uses that light to make its own food."
+ },
+ {
+  "id": "leaves2",
+  "scene": "plant",
+  "text": "Leaves also have tiny openings, far too small to see. Through these openings, gases move into and out of the leaf. So leaves have two jobs. They make food, and they take in and give out gases."
+ },
+ {
+  "id": "stem1",
+  "scene": "plant",
+  "text": "Next, the stem. Its first job is to hold the plant upright, so the leaves are lifted up towards the light. Its second job is transport. The stem carries water and mineral salts up from the roots, and carries food from the leaves to other parts of the plant."
+ },
+ {
+  "id": "roots1",
+  "scene": "plant",
+  "text": "Now, down into the soil. Roots have two jobs too. They hold the plant firmly in the ground, so wind and rain cannot knock it over. And they absorb water and mineral salts from the soil."
+ },
+ {
+  "id": "roots2",
+  "scene": "trap",
+  "text": "Here is an exam tip. Lots of students mix this up. Roots do not take in food from the soil. The plant makes its own food in the leaves. Roots absorb water and mineral salts, not food. You can try this yourself in The One App. Open the School Lab, experiment one point two, and press, Let's test it now!"
+ },
+ {
+  "id": "tryit",
+  "scene": "tryit",
+  "text": "Want to see transport with your own eyes? Ask an adult to help you stand a stick of celery in a glass of water with a few drops of food colouring. Wait for a day. The colour travels up the stalk, all the way into the leaves."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict. Two similar plants get the same water and the same light. But we remove most of the leaves from plant B. After two weeks, which plant has grown taller?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Plant A grows taller. With fewer leaves, plant B makes less food, so it grows less. One part of the system is damaged, and the whole plant is affected."
+ },
+ {
+  "id": "dinner",
+  "scene": "dinner",
+  "text": "So, back to your meals. When you eat kai lan, nai bai or lettuce, you are eating leaves. A carrot or a sweet potato is a root that stores food. And asparagus? That is a stem."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Leaves make food, and take in and give out gases. The stem holds the plant upright, and transports water, mineral salts and food. Roots hold the plant firmly in the ground, and absorb water and mineral salts."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Now, a habit to help you remember. It is called, make it obvious. Write the three jobs on a sticky note, and stick it on your water bottle. Every time you take a drink, just like the roots, you take in the facts too."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Then turn it into a mind map. Plant system in the middle. Three branches. Leaves, stem and roots. Two jobs on each branch. Then save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map, and pick Plant System."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, the three parts you ate could be a leaf, a stem and a root. Leaves make food. The stem holds up and carries. Roots anchor and absorb. Your turn. Tell me in the comments which plant part you ate today."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

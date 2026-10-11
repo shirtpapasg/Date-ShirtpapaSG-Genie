@@ -1,0 +1,123 @@
+[
+ [
+  "x: 160, y: 200, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"1\")",
+  "x: 90, y: 280, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"1\")"
+ ],
+ [
+  "x: 160, y: 200, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"2\")",
+  "x: 90, y: 280, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"2\")"
+ ],
+ [
+  "x: 160, y: 200, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"3\")",
+  "x: 90, y: 280, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"3\")"
+ ],
+ [
+  "x: 160, y: 200, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"4\")",
+  "x: 90, y: 280, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"4\")"
+ ],
+ [
+  "x: 160, y: 200, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"5\")",
+  "x: 90, y: 280, \"font-size\": 160, \"font-weight\": 700, fill: \"#fff\", class: \"out\", \"stroke-width\": 14}, \"5\")"
+ ],
+ [
+  "popAt(s.trouble, 760, 760 - 30",
+  "popAt(s.trouble, 760, 805"
+ ],
+ [
+  "tf(mk.g, \"translate(0 -250) scale(.6)\")",
+  "tf(mk.g, \"translate(0 -268) scale(.58)\")"
+ ],
+ [
+  "tf(rk.g, \"translate(0 -250) scale(.6)\")",
+  "tf(rk.g, \"translate(0 -268) scale(.58)\")"
+ ],
+ [
+  "y: 230, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: INK}, \"MODEL 📐\"",
+  "y: 245, \"text-anchor\": \"middle\", \"font-size\": 38, \"font-weight\": 700, fill: INK}, \"MODEL 📐\""
+ ],
+ [
+  "y: 230, \"text-anchor\": \"middle\", \"font-size\": 40, \"font-weight\": 700, fill: INK}, \"REAL BODY 🤯\"",
+  "y: 245, \"text-anchor\": \"middle\", \"font-size\": 38, \"font-weight\": 700, fill: INK}, \"REAL BODY 🤯\""
+ ],
+ [
+  "popAt(s.shape, 420, 420, t, a(\"shape\"))",
+  "popAt(s.shape, 320, 330, t, a(\"shape\"))"
+ ],
+ [
+  "popAt(s.pair, 760, 180, t, a(\"pairs\"))",
+  "popAt(s.pair, 1110, 180, t, a(\"pairs\"))"
+ ],
+ [
+  "popAt(s.simple, 760, 790 - 40, t, a(\"simpler\"))",
+  "popAt(s.simple, 760, 870, t, a(\"simpler\"))"
+ ],
+ [
+  "x: 760, y: 770, \"text-anchor\": \"middle\", \"font-size\": 64",
+  "x: 760, y: 820, \"text-anchor\": \"middle\", \"font-size\": 64"
+ ],
+ [
+  "translate(760 770) scale(${pop(t, a(\"art\"))}) translate(-760 -770)",
+  "translate(760 820) scale(${pop(t, a(\"art\"))}) translate(-760 -820)"
+ ],
+ [
+  "popAt(s.carry[i], 330, 300 + i * 110, t, tt)",
+  "popAt(s.carry[i], 370, 310 + i * 110, t, tt)"
+ ],
+ [
+  "s.bpm = tx(s.stage, {x: 1200, y: 380",
+  "s.bpm = tx(s.stage, {x: 1270, y: 400"
+ ],
+ [
+  "popAt(s.duo, 1300, 520, t, a(\"respiratory\"))",
+  "popAt(s.duo, 1330, 540, t, a(\"respiratory\"))"
+ ],
+ [
+  "tf(s.K.g, \"translate(860 0) scale(.95)\"); op(s.num, ramp(t, SC.resp.t0",
+  "tf(s.K.g, \"translate(860 -5) scale(.92)\"); op(s.num, ramp(t, SC.resp.t0"
+ ],
+ [
+  "popAt(s.ex, 760, 790 - 40, t, a(\"exchange\"))",
+  "popAt(s.ex, 860, 776, t, a(\"exchange\"))"
+ ],
+ [
+  "popAt(s.next, 1200, 300, t, a(\"next\"))",
+  "popAt(s.next, 1170, 300, t, a(\"next\"))"
+ ],
+ [
+  "scene(\"dig\", \"#e0aaff\", \"#c77dff\")",
+  "scene(\"dig\", \"#ffd6de\", \"#ffadbb\")"
+ ],
+ [
+  "\"#e0aaff\"",
+  "\"#f4a3b4\"",
+  2
+ ],
+ [
+  "fill: \"#c77dff\"",
+  "fill: \"#e0707f\""
+ ],
+ [
+  "s.tube = el(\"path\", {d, stroke: \"#9d4edd\"",
+  "s.tube = el(\"path\", {d, stroke: \"#f08a9a\""
+ ],
+ [
+  "\"🍽️ DIGESTIVE\", \"#9d4edd\"",
+  "\"🍽️ DIGESTIVE\", \"#9b2c45\""
+ ],
+ [
+  "\"food ➜ simpler substances your body can use\", \"#7209b7\"",
+  "\"food ➜ simpler substances your body can use\", \"#9b2c45\""
+ ],
+ [
+  "const rk = kid(s.r, {shirt: \"#9d4edd\"});",
+  "const rk = kid(s.r, {shirt: \"#48cae4\"});"
+ ],
+ [
+  "\"food ➜ simpler substances your body can use\"",
+  "\"food ➜ simpler substances absorbed into the blood\""
+ ],
+ [
+  "[\"🦴 Skeletal system: gives the body shape and protects\", \"     important parts.\"]",
+  "[\"🦴 Skeletal system: supports the body, gives it shape,\", \"     and protects important parts.\"]"
+ ]
+]

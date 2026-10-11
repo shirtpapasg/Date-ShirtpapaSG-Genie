@@ -1,0 +1,559 @@
+{
+ "p3-1-2.html": {
+  "code": "1.2",
+  "name": "The Needs Test Lab",
+  "sub": "What living things need",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "sprout",
+    "pill": "🌱 Test the Bean Plant",
+    "title": "Test the bean plant"
+   },
+   {
+    "step": "boat",
+    "pill": "⛵ Test the Toy Boat",
+    "title": "Test the toy boat"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-1-3.html": {
+  "code": "1.3",
+  "name": "Six Clues Lab",
+  "sub": "Is it living? Check all six clues",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "check",
+    "pill": "🔍 Check the Six Clues",
+    "title": "Check the six clues"
+   },
+   {
+    "step": "judge",
+    "pill": "⚖️ Judge Living or Non-living",
+    "title": "Judge living or non-living"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-2-1a.html": {
+  "code": "2.1A",
+  "name": "Bloom or Not Lab",
+  "sub": "Flowering and non-flowering plants",
+  "button": "To the plants →",
+  "parts": [
+   {
+    "step": "look",
+    "pill": "🔍 Look Close",
+    "title": "Look close"
+   },
+   {
+    "step": "sort",
+    "pill": "🌼 Sort Plants",
+    "title": "Sort plants"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-2-1b.html": {
+  "code": "2.1B",
+  "name": "Coat and Cover Lab",
+  "sub": "Sorting animals by their covering",
+  "button": "To the animals →",
+  "parts": [
+   {
+    "step": "cover",
+    "pill": "🖐️ Feel the Cover",
+    "title": "Feel the cover"
+   },
+   {
+    "step": "sort",
+    "pill": "🐾 Sort Animals",
+    "title": "Sort animals"
+   },
+   {
+    "step": "young",
+    "pill": "🥚 Egg or Young",
+    "title": "Egg or young"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-2-2.html": {
+  "code": "2.2",
+  "name": "Tiny Life Lab",
+  "sub": "Bacteria and fungi",
+  "button": "To the microscope →",
+  "parts": [
+   {
+    "step": "peek",
+    "pill": "🔬 Peek at Bacteria",
+    "title": "Peek at bacteria"
+   },
+   {
+    "step": "spot",
+    "pill": "🍄 Spot the Fungi",
+    "title": "Spot the fungi"
+   },
+   {
+    "step": "sort",
+    "pill": "⚖️ Helpful or Harmful",
+    "title": "Helpful or harmful"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-2-3.html": {
+  "code": "2.3",
+  "name": "The Mystery Creature Lab",
+  "sub": "Use the clues to find the group",
+  "button": "To the pond →",
+  "parts": [
+   {
+    "step": "clues",
+    "pill": "🔎 Gather Clues",
+    "title": "Gather clues"
+   },
+   {
+    "step": "decide",
+    "pill": "🧩 Decide the Group",
+    "title": "Decide the group"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-1.html": {
+  "code": "3.1",
+  "name": "Made-Of Lab",
+  "sub": "Objects and materials",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "count",
+    "pill": "🔢 Count the Parts",
+    "title": "Count the parts"
+   },
+   {
+    "step": "sort",
+    "pill": "🗂️ Same Kind, Different Stuff",
+    "title": "Same kind, different stuff"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-2.html": {
+  "code": "3.2",
+  "name": "Snap Test Lab",
+  "sub": "Which material is stronger?",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "hold",
+    "pill": "🏋️ Hold the Load",
+    "title": "Hold the load"
+   },
+   {
+    "step": "swap",
+    "pill": "🔁 Swap the Strip",
+    "title": "Swap the strip"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-3.html": {
+  "code": "3.3",
+  "name": "Bend Test Lab",
+  "sub": "Which material is more flexible?",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "bend",
+    "pill": "🌀 Bend the Wood",
+    "title": "Bend the wood"
+   },
+   {
+    "step": "compare",
+    "pill": "🔀 Bend the Plastic",
+    "title": "Bend the plastic"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-5.html": {
+  "code": "3.5",
+  "name": "Drip Test Lab",
+  "sub": "Does it let water through?",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "drip",
+    "pill": "💧 Drip on Sheet One",
+    "title": "Drip on sheet one"
+   },
+   {
+    "step": "soak",
+    "pill": "🌂 Drip on Sheet Two",
+    "title": "Drip on sheet two"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-6.html": {
+  "code": "3.6",
+  "name": "Torch Test Lab",
+  "sub": "Does it let light through?",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "most",
+    "pill": "🔦 Shine on Sheet One",
+    "title": "Shine on sheet one"
+   },
+   {
+    "step": "some",
+    "pill": "🌥️ Shine on Sheet Two",
+    "title": "Shine on sheet two"
+   },
+   {
+    "step": "none",
+    "pill": "⬛ Shine on Sheet Three",
+    "title": "Shine on sheet three"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-7.html": {
+  "code": "3.7",
+  "name": "Match the Material Lab",
+  "sub": "Why that material?",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "match",
+    "pill": "🧩 Match Object to Material",
+    "title": "Match object to material"
+   },
+   {
+    "step": "reason",
+    "pill": "💡 Why This Material?",
+    "title": "Why this material?"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-3-8.html": {
+  "code": "3.8",
+  "name": "Upgrade Lab",
+  "sub": "Choose a better material",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "swap",
+    "pill": "🔧 Choose a Better Material",
+    "title": "Choose a better material"
+   },
+   {
+    "step": "test",
+    "pill": "🧪 Test the Upgrade",
+    "title": "Test the upgrade"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-4-1.html": {
+  "code": "4.1",
+  "name": "Young and Adult Lab",
+  "sub": "Living things grow",
+  "button": "To the shelf →",
+  "parts": [
+   {
+    "step": "match",
+    "pill": "🧩 Match Young to Adult",
+    "title": "Match young to adult"
+   },
+   {
+    "step": "compare",
+    "pill": "🔍 Compare Young and Adult",
+    "title": "Compare young and adult"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-4-2.html": {
+  "code": "4.2",
+  "name": "Seed to Plant Lab",
+  "sub": "A plant grows up",
+  "button": "To the windowsill →",
+  "parts": [
+   {
+    "step": "grow",
+    "pill": "🌱 Grow the Seed",
+    "title": "Grow the seed"
+   },
+   {
+    "step": "cycle",
+    "pill": "🔄 Build the Life Cycle",
+    "title": "Build the life cycle"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-5-1.html": {
+  "code": "5.1",
+  "name": "Life Cycle Cases Lab",
+  "sub": "Three stages or four?",
+  "button": "To the cases →",
+  "parts": [
+   {
+    "step": "three",
+    "pill": "🦗 Three-Stage Animals",
+    "title": "Three-stage animals"
+   },
+   {
+    "step": "four",
+    "pill": "🦋 Four-Stage Animals",
+    "title": "Four-stage animals"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-5-2.html": {
+  "code": "5.2",
+  "name": "Compare Cycles Lab",
+  "sub": "Alike and different",
+  "button": "To the cases →",
+  "parts": [
+   {
+    "step": "same",
+    "pill": "⚖️ Same Number of Stages",
+    "title": "Same number of stages"
+   },
+   {
+    "step": "different",
+    "pill": "🔀 Different Number of Stages",
+    "title": "Different number of stages"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-1a.html": {
+  "code": "6.1A",
+  "name": "Attract or Repel Lab",
+  "sub": "Attract and repel",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "bar",
+    "pill": "🧲 Bar Magnet Pair",
+    "title": "Bar magnet pair"
+   },
+   {
+    "step": "horseshoe",
+    "pill": "🧲 U-shaped Pair",
+    "title": "U-shaped pair"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-1b.html": {
+  "code": "6.1B",
+  "name": "Magnet Test Lab",
+  "sub": "What does a magnet attract?",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "metals",
+    "pill": "🔩 Test the Metal Objects",
+    "title": "Test the metal objects"
+   },
+   {
+    "step": "others",
+    "pill": "📏 Test the Everyday Objects",
+    "title": "Test the everyday objects"
+   },
+   {
+    "step": "sortall",
+    "pill": "📦 Sort Them All",
+    "title": "Sort them all"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-2.html": {
+  "code": "6.2",
+  "name": "Strongest Spot Lab",
+  "sub": "Where is a magnet strongest?",
+  "button": "To the table →",
+  "parts": [
+   {
+    "step": "bar",
+    "pill": "🧲 Test the Bar Magnet",
+    "title": "Test the bar magnet"
+   },
+   {
+    "step": "horseshoe",
+    "pill": "🧲 Test Another Shape",
+    "title": "Test another shape"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-3a.html": {
+  "code": "6.3A",
+  "name": "Magnet Carts Lab",
+  "sub": "Magnets on wheels",
+  "button": "To the track →",
+  "parts": [
+   {
+    "step": "unlike",
+    "pill": "🚃 Unlike Poles Facing",
+    "title": "Unlike poles facing"
+   },
+   {
+    "step": "like",
+    "pill": "🚃 Like Poles Facing",
+    "title": "Like poles facing"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-3b.html": {
+  "code": "6.3B",
+  "name": "Ring Magnets Lab",
+  "sub": "Floating rings",
+  "button": "To the stand →",
+  "parts": [
+   {
+    "step": "stack",
+    "pill": "🔵 Stack the Rings",
+    "title": "Stack the rings"
+   },
+   {
+    "step": "find",
+    "pill": "🔴 Find the Missing Pole",
+    "title": "Find the missing pole"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-3c.html": {
+  "code": "6.3C",
+  "name": "Magnet or Not Lab",
+  "sub": "Test with both poles",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "test",
+    "pill": "🔍 Test the Objects",
+    "title": "Test the objects"
+   },
+   {
+    "step": "classify",
+    "pill": "📋 Sort the Objects",
+    "title": "Sort the objects"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-6-4.html": {
+  "code": "6.4",
+  "name": "Magnet at Rest Lab",
+  "sub": "Which way does a free magnet point?",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "hang",
+    "pill": "🧵 Hang the Magnet",
+    "title": "Hang the magnet"
+   },
+   {
+    "step": "float",
+    "pill": "🌊 Float the Magnet",
+    "title": "Float the magnet"
+   },
+   {
+    "step": "compare",
+    "pill": "🧭 Compare with a Compass",
+    "title": "Compare with a compass"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-7-1a.html": {
+  "code": "7.1A",
+  "name": "Make a Magnet Lab",
+  "sub": "Stroke a nail",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "stroke",
+    "pill": "🧲 Make a Magnet",
+    "title": "Make a magnet"
+   },
+   {
+    "step": "test",
+    "pill": "📎 Count the Clips",
+    "title": "Count the clips"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-7-1b.html": {
+  "code": "7.1B",
+  "name": "Electric Magnet Lab",
+  "sub": "A magnet made with electricity",
+  "button": "To the bench →",
+  "parts": [
+   {
+    "step": "coil",
+    "pill": "🔌 Wind the Coil",
+    "title": "Wind the coil"
+   },
+   {
+    "step": "test",
+    "pill": "🔋 Test the Strength",
+    "title": "Test the strength"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "p3-7-2.html": {
+  "code": "7.2",
+  "name": "Magnet Toy Lab",
+  "sub": "Build it, test it, improve it",
+  "button": "To the track →",
+  "parts": [
+   {
+    "step": "build",
+    "pill": "🧲 Choose and Place the Magnets",
+    "title": "Choose and place the magnets"
+   },
+   {
+    "step": "test",
+    "pill": "🔍 Test and Improve",
+    "title": "Test and improve"
+   }
+  ],
+  "htmlTitle": null
+ },
+ "spotsort.html": {
+  "code": "1.1",
+  "name": "Spot and Sort Lab",
+  "sub": "Living or non-living?",
+  "button": "Into the yard →",
+  "parts": [
+   {
+    "step": "spot",
+    "pill": "🔍 Spot the Clues",
+    "title": "Spot the clues"
+   },
+   {
+    "step": "sort",
+    "pill": "📦 Sort Them Out",
+    "title": "Sort them out"
+   }
+  ],
+  "htmlTitle": null
+ }
+}

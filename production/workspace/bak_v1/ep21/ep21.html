@@ -1,0 +1,341 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,Inter,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="confetti"></g>
+  <!-- overlays -->
+  <g id="tag" filter="url(#sh)">
+    <rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/>
+    <text x="70" y="73" font-size="27" font-weight="700" fill="#fff" letter-spacing="1">🍳 P4 SCIENCE · EP 21</text>
+  </g>
+  <g id="shelf"><text id="shelfHead" x="1515" y="58" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect x="0" y="1072" width="1920" height="8" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" x="0" y="1072" width="0" height="8" fill="url(#rainbow)"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+<script>window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, extra = "") => tf(e, `translate(${x} ${y}) scale(${Math.max(0, pop(t, a))}) ${extra}`);
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const C = (seg, w) => { const v = TL.cues[seg] && TL.cues[seg][w]; if (v === undefined) throw new Error("cue " + seg + ":" + w); return v; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+
+/* ---------- reusable widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p);
+  const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  return g;
+}
+function bg(p, c1, c2) {
+  const id = "g" + Math.round(rnd() * 1e9);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: 1920, height: 1080, fill: `url(#${id})`}, p);
+  // floating bubbles for liveliness
+  const bubbles = [];
+  for (let i = 0; i < 14; i++) bubbles.push({x: rnd() * 1920, y: rnd() * 1080, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return bubbles;
+}
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % 1200 + 1200) % 1200 - 60); set(o.e, "r", o.r); }); }
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {}, g); return {g, b, stage, name}; }
+
+/* ---------- bike ---------- */
+function makeBike(p) {
+  const g = el("g", {}, p), K = {};
+  const B = [-230, 90], F = [230, 90], Cr = [-10, 100];
+  const wheel = c => { const w = el("g", {transform: `translate(${c[0]} ${c[1]})`}, g);
+    el("circle", {r: 130, fill: "none", stroke: "#2b2d42", "stroke-width": 20}, w); el("circle", {r: 112, fill: "none", stroke: "#adb5bd", "stroke-width": 6}, w);
+    const sp = el("g", {}, w); for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; el("line", {x1: 0, y1: 0, x2: Math.cos(a) * 110, y2: Math.sin(a) * 110, stroke: "#ced4da", "stroke-width": 3}, sp); }
+    el("circle", {r: 16, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, w); return sp; };
+  K.wheelB = wheel(B); K.wheelF = wheel(F);
+  K.chain = el("path", {d: `M${B[0]} ${B[1] - 18} L${Cr[0]} ${Cr[1] - 30} A30 30 0 0 1 ${Cr[0]} ${Cr[1] + 30} L${B[0]} ${B[1] + 18} A18 18 0 0 1 ${B[0]} ${B[1] - 18} Z`, fill: "none", stroke: "#6c757d", "stroke-width": 8, "stroke-dasharray": "10 6"}, g);
+  const fr = el("g", {stroke: "#ff4d6d", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: `M${B[0]} ${B[1]} L${Cr[0]} ${Cr[1]} L-60 -80 Z M-60 -80 L170 -90 L${Cr[0]} ${Cr[1]} M170 -90 L${F[0]} ${F[1]}`}, fr);
+  el("path", {d: "M170 -90 L190 -150", stroke: "#ff4d6d", "stroke-width": 14, "stroke-linecap": "round"}, g);
+  K.handle = el("path", {d: "M150 -150 L240 -162", stroke: INK, "stroke-width": 12, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 240, cy: -162, r: 11, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, g);
+  K.brake = el("path", {d: "M215 -150 L250 -128 M218 -40 L242 -40", stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, g);
+  K.bell = el("circle", {cx: 200, cy: -172, r: 14, fill: "#ffd60a", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M-60 -80 L-70 -100", stroke: "#3a0ca3", "stroke-width": 10}, g);
+  K.seat = el("path", {d: "M-125 -108 Q-70 -126 -20 -106 Q-70 -96 -125 -108 Z", fill: "#3a0ca3", stroke: INK, "stroke-width": 4}, g);
+  const crank = el("g", {transform: `translate(${Cr[0]} ${Cr[1]})`}, g);
+  el("circle", {r: 30, fill: "#ced4da", stroke: INK, "stroke-width": 4}, crank);
+  K.crank = el("g", {}, crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: 58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: -58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  K.pedalA = el("rect", {x: -22, y: 52, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.pedalB = el("rect", {x: -22, y: -66, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.anchor = {Pedals: [-10, 160], Chain: [-130, 98], Wheels: [-230, 90], Seat: [-72, -112], Handlebars: [195, -156], Brakes: [233, -40], Bell: [200, -172]};
+  K.g = g; K.F = F; K.B = B;
+  K.animate = (crankDeg, wheelDeg, chainOff) => { tf(K.crank, `rotate(${crankDeg})`); tf(K.wheelB, `rotate(${wheelDeg})`); tf(K.wheelF, `rotate(${wheelDeg})`); set(K.chain, "stroke-dashoffset", chainOff); };
+  return K;
+}
+
+/* =================== SCENES (Episode 21: good and poor conductors of heat) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const HOT = "#e63946", COLD = "#3a86ff", MET = "#adb5bd", WOOD = "#b5835a", PLAS = "#06d6a0", GLS = "#caf0f8";
+function pot(p) { const g = el("g", {}, p); g.body = el("path", {d: "M-200 -120 H200 L180 120 Q0 160 -180 120 Z", fill: MET, stroke: INK, "stroke-width": 8}, g); el("rect", {x: -220, y: -140, width: 440, height: 30, rx: 12, fill: "#6c757d", stroke: INK, "stroke-width": 6}, g);
+  g.hl = el("rect", {x: 210, y: -110, width: 230, height: 50, rx: 25, fill: MET, stroke: INK, "stroke-width": 7}, g); return g; }
+function hotWater(p, w = 360, h = 160) { const g = el("g", {}, p); el("rect", {x: -w / 2, y: 0, width: w, height: h, fill: HOT, opacity: .45}, g); el("path", {d: `M${-w / 2 - 10} -60 V${h} H${w / 2 + 10} V-60`, fill: "none", stroke: INK, "stroke-width": 7}, g); return g; }
+function steam(p, n = 4) { const g = el("g", {}, p); const s = []; for (let i = 0; i < n; i++) s.push(el("path", {d: "M0 0 q-12 -20 0 -40 q12 -20 0 -40", fill: "none", stroke: "#fff", "stroke-width": 6, "stroke-linecap": "round"}, g)); g.run = (x, y, t) => s.forEach((e, i) => { const k = (t * .7 + i / n) % 1; set(e, "transform", `translate(${x - 60 + i * 40} ${y - k * 60})`); op(e, Math.sin(k * Math.PI) * .8); }); return g; }
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#ffd166", "#f77f00");
+  s.stove = emo(s.stage, 640, 820, 180, "🔥"); s.p = pot(s.stage); s.st = steam(s.stage); s.hand = emo(s.stage, 0, 0, 130, "✋"); s.ow = tx(s.stage, {x: 1260, y: 330, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: HOT, class: "out", "stroke-width": 8}, "OUCH!");
+  s.q = chip(s.stage, "🤔 why a PLASTIC handle?", "#1b1b3a", {fs: 44}); s.c = chip(s.stage, "⏩ how FAST heat travels", HOT, {fs: 40});
+  s.run = t => { const a = w => C("hook", w); const plast = ramp(t, a("plastic") - .2, a("plastic") + .3), allm = on(t, a("whole"), a("answer") - .3, .2);
+    tf(s.p, "translate(640 600)"); op(s.p, 1); set(s.p.hl, "fill", t > a("whole") - .2 && t < a("answer") - .3 ? MET : mix(MET, "#212529", plast)); s.st.run(640, 440, t); op(s.st, 1);
+    op(s.hand, allm); set(s.hand, "x", 1100 + Math.sin(t * 20) * 6 * allm); set(s.hand, "y", 460); op(s.ow, allm * ramp(t, a("pick"), a("pick") + .2));
+    op(s.q, on(t, a("plastic"), a("whole"), .2)); popAt(s.q, 760, 180, t, a("plastic")); op(s.c, ramp(t, a("fast"), a("fast") + .2)); popAt(s.c, 760, 180, t, a("fast")); }; return s; })();
+
+// ---- SPOONS
+S.spoons = (() => { const s = scene("spoons", "#caf0f8", "#ade8f4");
+  s.w = hotWater(s.stage); s.ms = el("rect", {x: -14, y: -260, width: 28, height: 380, rx: 14, fill: MET, stroke: INK, "stroke-width": 5}, s.stage); s.ws = el("rect", {x: -14, y: -260, width: 28, height: 380, rx: 14, fill: WOOD, stroke: INK, "stroke-width": 5}, s.stage);
+  s.lm = chip(s.stage, "metal", "#fff", {fs: 30, ink: INK}); s.lw = chip(s.stage, "wood", "#fff", {fs: 30, ink: INK}); s.hot = chip(s.stage, "🔥 HOT!", HOT, {fs: 36}); s.cool = chip(s.stage, "😌 still cool", COLD, {fs: 36});
+  s.c = chip(s.stage, "heat flowed through METAL much FASTER", "#7209b7", {fs: 36});
+  s.run = t => { const a = w => C("spoons", w); const k = ramp(t, a("minute"), a("feels") + .6);
+    tf(s.w, "translate(760 560)"); op(s.w, 1); tf(s.ms, "translate(680 560) rotate(-12)"); tf(s.ws, "translate(840 560) rotate(12)"); op(s.ms, ramp(t, a("metal") - .2, a("metal"))); op(s.ws, ramp(t, a("wooden") - .2, a("wooden")));
+    set(s.ms, "fill", mix(MET, "#ff6b6b", k));
+    op(s.lm, ramp(t, a("metal"), a("metal") + .2)); popAt(s.lm, 560, 280, t, a("metal")); op(s.lw, ramp(t, a("wooden"), a("wooden") + .2)); popAt(s.lw, 960, 280, t, a("wooden"));
+    op(s.hot, ramp(t, a("hot#2"), a("hot#2") + .2)); popAt(s.hot, 560, 200, t, a("hot#2")); op(s.cool, ramp(t, a("cool"), a("cool") + .2)); popAt(s.cool, 960, 200, t, a("cool"));
+    op(s.c, ramp(t, a("faster"), a("faster") + .2)); popAt(s.c, 760, 860, t, a("faster")); }; return s; })();
+
+// ---- CUPS
+S.cups = (() => { const s = scene("cups", "#e0fbfc", "#c2dfe3");
+  s.poly = el("g", {}, s.stage); el("path", {d: "M-100 -150 L-80 150 H80 L100 -150 Z", fill: "#fff", stroke: INK, "stroke-width": 7}, s.poly); tx(s.poly, {x: 0, y: 200, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, "polystyrene cup");
+  s.met = el("g", {}, s.stage); el("path", {d: "M-100 -150 L-80 150 H80 L100 -150 Z", fill: MET, stroke: INK, "stroke-width": 7}, s.met); tx(s.met, {x: 0, y: 200, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, "metal cup");
+  s.s1 = steam(s.stage, 5); s.s2 = steam(s.stage, 5); s.c = chip(s.stage, "the MATERIAL matters!", "#7209b7", {fs: 44});
+  s.run = t => { const a = w => C("cups", w); const k = ramp(t, a("longer"), SC.cups.t1);
+    tf(s.poly, "translate(500 520)"); op(s.poly, ramp(t, a("polystyrene") - .2, a("polystyrene"))); tf(s.met, "translate(1020 520)"); op(s.met, ramp(t, a("metal") - .2, a("metal")));
+    s.s1.run(500, 360, t); op(s.s1, ramp(t, a("polystyrene"), a("polystyrene") + .3)); s.s2.run(1020, 360, t); op(s.s2, ramp(t, a("metal"), a("metal") + .3) * (1 - k * .9));
+    op(s.c, ramp(t, a("matters"), a("matters") + .2)); popAt(s.c, 760, 170, t, a("matters")); }; return s; })();
+
+// ---- WAX ROD EXPERIMENT
+S.wax = (() => { const s = scene("wax", "#fff3b0", "#ffd6a5");
+  s.w = hotWater(s.stage, 900, 150); const M = [["METAL", MET, 1], ["GLASS", GLS, .65], ["PLASTIC", PLAS, .35], ["WOOD", WOOD, .12]];
+  s.rods = M.map(([n, c, r], i) => { const g = el("g", {}, s.stage); el("rect", {x: -20, y: -360, width: 40, height: 460, rx: 8, fill: c, stroke: INK, "stroke-width": 5}, g);
+    const wax = el("ellipse", {cx: 0, cy: -380, rx: 34, ry: 26, fill: "#fff8e7", stroke: "#d4a373", "stroke-width": 4}, g); const drip = el("ellipse", {cx: 0, cy: 0, rx: 30, ry: 8, fill: "#fff8e7", stroke: "#d4a373", "stroke-width": 3}, g);
+    tx(g, {x: 0, y: 160, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, n); const rank = tx(g, {x: 0, y: -430, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, ["1st", "2nd", "3rd", "4th"][i]); return {g, wax, drip, r, i, rank, n: n.toLowerCase()}; });
+  s.c1 = chip(s.stage, "same hot water · faster heat flow = MORE wax melts", "#1b1b3a", {fs: 32}); s.c2 = chip(s.stage, "🔥 FASTEST: metal  ·  🐢 SLOWEST: wood", "#e63946", {fs: 36});
+  s.run = t => { const a = w => C("wax1", w), b = w => C("wax2", w); const melt = ramp(t, b("metal") - 1.5, b("least") + .5);
+    tf(s.w, "translate(760 640)"); op(s.w, ramp(t, a("water") - .3, a("water")));
+    s.rods.forEach(r => { const tt = a(r.n); op(r.g, ramp(t, tt, tt + .2)); tf(r.g, `translate(${430 + r.i * 220} 690)`); const m = clamp(melt * r.r * 1.1);
+      set(r.wax, "ry", 26 * (1 - m)); set(r.wax, "rx", 34 * (1 - m * .6)); op(r.wax, 1 - m * .95); set(r.drip, "cy", -320 + m * 330); op(r.drip, m > .05 ? 1 : 0);
+      const rt = [b("metal"), b("glass"), b("plastic"), b("wooden")][r.i]; op(r.rank, ramp(t, rt, rt + .2)); });
+    op(s.c1, on(t, a("faster"), b("metal"), .2)); popAt(s.c1, 760, 140, t, a("faster")); op(s.c2, ramp(t, b("fastest"), b("fastest") + .2)); popAt(s.c2, 760, 140, t, b("fastest")); }; return s; })();
+
+// ---- CONDUCTORS
+S.cond = (() => { const s = scene("cond", "#ffadad", "#bde0fe");
+  const box = (x, c, title, sub, items) => { const g = el("g", {}, s.stage); el("rect", {x: -330, y: -260, width: 660, height: 520, rx: 30, fill: "#fff", stroke: c, "stroke-width": 10}, g);
+    tx(g, {x: 0, y: -180, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: c}, title); tx(g, {x: 0, y: -125, "text-anchor": "middle", "font-size": 30, "font-weight": 600, fill: INK}, sub);
+    const it = items.map(([e, n], i) => { const q = el("g", {opacity: 0}, g); emo(q, -120 + (i % 2) * 240, -10 + Math.floor(i / 2) * 150, 90, e); tx(q, {x: -120 + (i % 2) * 240, y: 60 + Math.floor(i / 2) * 150, "text-anchor": "middle", "font-size": 28, "font-weight": 700, fill: INK}, n); return q; });
+    tf(g, `translate(${x} 540)`); g.it = it; return g; };
+  s.good = box(420, HOT, "🔥 GOOD conductors", "heat flows through QUICKLY", [["🥄", "metals"], ["🍳", "steel"], ["🔩", "iron"], ["🪙", "copper"]]);
+  s.poor = box(1100, COLD, "🐢 POOR conductors", "heat flows through SLOWLY", [["🥛", "glass"], ["🧴", "plastic"], ["🪵", "wood"]]);
+  s.run = t => { const a = w => C("cond", w);
+    op(s.good, ramp(t, a("good") - .3, a("good"))); s.good.it.forEach((q, i) => op(q, ramp(t, a("metals") + i * .15, a("metals") + .2 + i * .15)));
+    op(s.poor, ramp(t, a("poor") - .3, a("poor"))); const ts = [a("glass"), a("plastic"), a("wood")]; s.poor.it.forEach((q, i) => op(q, ramp(t, ts[i], ts[i] + .2))); }; return s; })();
+
+// ---- USES
+S.uses = (() => { const s = scene("uses", "#fefae0", "#faedcd");
+  s.p = pot(s.stage); s.fire = emo(s.stage, 560, 820, 160, "🔥"); s.st = steam(s.stage);
+  s.l1 = chip(s.stage, "METAL pot: GOOD conductor ➜ cooks food FAST", HOT, {fs: 30}); s.l2 = chip(s.stage, "PLASTIC handle: POOR conductor ➜ safe to hold ✋", COLD, {fs: 30});
+  s.o = [["🫖", "kettles"], ["🍳", "pans"], ["👕", "irons"]].map(([e, w], i) => ({e: emo(s.stage, 0, 0, 120, e), w, i}));
+  s.run = t => { const a = w => C("uses", w);
+    tf(s.p, "translate(560 600)"); op(s.p, 1); set(s.p.hl, "fill", "#212529"); s.st.run(560, 450, t); op(s.st, ramp(t, a("food") - .3, a("food")));
+    set(s.p.body, "fill", mix(MET, "#ff8fab", ramp(t, a("food") - .5, a("food") + .5)));
+    op(s.l1, ramp(t, a("metal"), a("metal") + .2)); popAt(s.l1, 760, 170, t, a("metal")); op(s.l2, ramp(t, a("handle"), a("handle") + .2)); popAt(s.l2, 900, 300, t, a("handle"));
+    s.o.forEach(o => { op(o.e, ramp(t, a(o.w), a(o.w) + .2)); set(o.e, "x", 1240 + (o.i % 2) * 140); set(o.e, "y", 520 + o.i * 120); }); }; return s; })();
+
+// ---- AIR IS A POOR CONDUCTOR
+S.air = (() => { const s = scene("air", "#a2d2ff", "#cdb4db");
+  s.t = chip(s.stage, "🌬️ AIR is a POOR conductor of heat", "#0077b6", {fs: 42});
+  s.sw = emo(s.stage, 0, 0, 260, "🧶"); seed = 5; s.bub = []; for (let i = 0; i < 16; i++) s.bub.push({x: (rnd() - .5) * 240, y: (rnd() - .5) * 200, e: el("circle", {r: 10 + rnd() * 8, fill: "#fff", stroke: "#48cae4", "stroke-width": 3, opacity: .9}, s.stage)});
+  s.kid = emo(s.stage, 0, 0, 140, "😊"); s.l1 = chip(s.stage, "trapped AIR slows heat LEAVING your body ➜ warm", "#7209b7", {fs: 30});
+  s.box = el("g", {}, s.stage); el("rect", {x: -190, y: -120, width: 380, height: 240, rx: 20, fill: "#fff", stroke: INK, "stroke-width": 7}, s.box); for (let i = 0; i < 40; i++) el("circle", {cx: -170 + (i % 10) * 38, cy: -100 + Math.floor(i / 10) * 60, r: 9, fill: "#e9ecef"}, s.box);
+  emo(s.box, -60, 0, 90, "🥤"); emo(s.box, 70, 0, 90, "🐟"); s.l2 = chip(s.stage, "polystyrene cooler box: full of AIR ➜ stays cold ❄️", "#6c757d", {fs: 30});
+  s.run = t => { const a = w => C("air", w); const sw = ramp(t, a("polystyrene") - .4, a("polystyrene"));
+    op(s.t, ramp(t, a("air"), a("air") + .2)); popAt(s.t, 760, 140, t, a("air"));
+    op(s.sw, ramp(t, a("sweater") - .2, a("sweater")) * (1 - sw)); set(s.sw, "x", 560); set(s.sw, "y", 500);
+    s.bub.forEach((b, i) => { set(b.e, "cx", 560 + b.x + Math.sin(t * 2 + i) * 6); set(b.e, "cy", 500 + b.y); op(b.e, ramp(t, a("traps"), a("traps") + .4) * (1 - sw)); });
+    op(s.kid, ramp(t, a("warm"), a("warm") + .2) * (1 - sw)); set(s.kid, "x", 1000); set(s.kid, "y", 480); op(s.l1, ramp(t, a("slows"), a("slows") + .2) * (1 - sw)); popAt(s.l1, 760, 800, t, a("slows"));
+    op(s.box, sw); tf(s.box, "translate(760 500) scale(1.2)"); op(s.l2, ramp(t, a("cooler"), a("cooler") + .2)); popAt(s.l2, 760, 800, t, a("cooler")); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.soup = emo(s.stage, 760, 360, 150, "🍲");
+  s.o = [["🥄 METAL", "metal", MET], ["🪵 WOOD", "wood", WOOD]].map(([n, w, c], i) => { const g = el("g", {}, s.stage); const f = el("rect", {x: -220, y: -70, width: 440, height: 140, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: 0, y: 18, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: INK}, n); return {g, f, w, i}; });
+  s.ans = chip(s.stage, "✓ WOOD: a POOR conductor ➜ heat flows SLOWLY", "#06d6a0", {fs: 34});
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), b("wood"), .2)); tf(s.pause, `translate(760 150) scale(${pop(t, a("pause"))}) translate(-760 -150)`); op(s.soup, ramp(t, a("soup"), a("soup") + .2));
+    s.o.forEach(o => { op(o.g, ramp(t, a(o.w), a(o.w) + .2)); tf(o.g, `translate(${480 + o.i * 560} 620) scale(${pop(t, a(o.w))})`); set(o.f, "fill", t > b("wood") ? (o.i ? "#d8f3dc" : "#ffccd5") : "#fff"); });
+    op(s.ans, ramp(t, b("poor"), b("poor") + .2)); popAt(s.ans, 760, 820, t, b("poor")); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["🥄 Metal is a GOOD conductor of heat, so heat flows", "     through it quickly."], ["🪵 Wood and plastic are POOR conductors of heat, so", "     heat flows through them slowly."], ["🍳 That is why pot handles are made of plastic or wood."]];
+  let y = -150; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 50, "font-size": 40, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 50 + 45; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("metal"), a("wood"), a("why")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (link to real life)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "🏠 LINK IT TO REAL LIFE");
+  s.k = el("g", {}, s.stage); el("rect", {x: -520, y: -200, width: 1040, height: 400, rx: 30, fill: "#fff8e7", stroke: INK, "stroke-width": 7}, s.k);
+  s.it = [["🍳", -380, -60, 1], ["🫖", -190, -60, 1], ["🥄", 0, -60, 1], ["🪵", 190, -60, 0], ["🧤", 380, -60, 0], ["🥛", 0, 100, 0]].map(([e, x, y, g]) => { const q = emo(s.k, x, y, 100, e); const tag = tx(s.k, {x, y: y + 75, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: g ? HOT : COLD}, g ? "good" : "poor"); return {q, tag}; });
+  s.c = chip(s.stage, "real examples ➜ facts you never forget 🧠", "#1b1b3a", {fs: 36});
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.title, ramp(t, a("real"), a("real") + .2)); tf(s.title, `translate(760 180) scale(${pop(t, a("real")) * .95}) translate(-760 -180)`);
+    op(s.k, ramp(t, a("kitchen") - .3, a("kitchen"))); tf(s.k, "translate(760 540)");
+    s.it.forEach((q, i) => { op(q.tag, ramp(t, a("good") + i * .3, a("good") + .2 + i * .3)); });
+    op(s.c, ramp(t, a("unforgettable") - .4, a("unforgettable"))); popAt(s.c, 760, 830, t, a("unforgettable") - .4); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  const CX = 380, CY2 = 470;
+  s.dim = [["🌡️ TEMPERATURE", HOT, 240, 240], ["⚡ HEAT", "#ff7b00", 220, 720], ["➡️ HEAT FLOW", "#ff006e", 560, 230]].map(([n, c, x, y]) => ({l: el("path", {d: `M${CX} ${CY2} L${x} ${y}`, stroke: c, "stroke-width": 12, opacity: .35}, s.stage), c: chip(s.stage, n, c, {fs: 24}), x, y}));
+  s.l1 = el("path", {d: `M${CX} ${CY2} Q600 600 860 600`, stroke: "#7209b7", "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 600}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 150, ry: 70, fill: "#f77f00", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 16, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: "#fff"}, "🔥 HEAT");
+  s.br = chip(s.stage, "🥄 CONDUCTORS", "#7209b7", {fs: 36});
+  s.subs = [["GOOD: metals", "good"], ["POOR: glass · plastic · wood · AIR", "poor"]].map(([n, w], i) => ({c: chip(s.stage, n, "#fff", {fs: 28, ink: INK}), w, i}));
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr21"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  const IH = 224 * 2000 / 780; s.scr = el("g", {"clip-path": "url(#scr21)"}, s.phone); s.shot = el("image", {href: "oneapp_mind2.png", x: -112, y: -122, width: 224, height: IH, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("heat"), a("heat") + .2)); tf(s.center, `translate(${CX} ${CY2}) scale(${pop(t, a("heat"))})`);
+    s.dim.forEach(d => { op(d.l, ramp(t, a("heat") + .3, a("heat") + .5) * .35); op(d.c, ramp(t, a("heat") + .3, a("heat") + .5) * .5); popAt(d.c, d.x, d.y, t, a("heat") + .3); });
+    set(s.l1, "stroke-dashoffset", 600 * (1 - ramp(t, a("conductors") - .3, a("conductors") + .3))); op(s.l1, t > a("conductors") - .3 ? 1 : 0);
+    op(s.br, ramp(t, a("conductors"), a("conductors") + .2)); popAt(s.br, 920, 600, t, a("conductors"));
+    s.subs.forEach(c => { const tt = a(c.w); op(c.c, ramp(t, tt, tt + .2)); popAt(c.c, 960, 690 + c.i * 76, t, tt); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 640, 150, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1410, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    const nx = a("ultimate") + .6; const off = -122 - (IH - 327) * ramp(t, a("save"), nx); set(s.shot, "y", off); const sc = IH / 2000;
+    set(s.ring, "x", -112 + 210 * sc); set(s.ring, "y", off + 1722 * sc); set(s.ring, "width", 146 * sc); set(s.ring, "height", 72 * sc);
+    op(s.ring, on(t, nx, SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.ans = el("g", {}, s.stage); el("rect", {x: -470, y: -70, width: 940, height: 140, rx: 70, fill: "#06d6a0", stroke: INK, "stroke-width": 7}, s.ans); tx(s.ans, {x: 0, y: 22, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: "#fff"}, "🍳 plastic = a POOR conductor!");
+  s.cols = [["🔥 GOOD", HOT, 520], ["🐢 POOR", COLD, 1000]].map(([n, c, x]) => { const g = el("g", {}, s.stage); el("rect", {x: -200, y: -220, width: 400, height: 440, rx: 26, fill: "#fff", stroke: c, "stroke-width": 8}, g); tx(g, {x: 0, y: -160, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: c}, n);
+    [0, 1, 2].forEach(i => { el("rect", {x: -140, y: -100 + i * 100, width: 280, height: 70, rx: 14, fill: "none", stroke: "#adb5bd", "stroke-width": 4, "stroke-dasharray": "12 8"}, g); tx(g, {x: 0, y: -52 + i * 100, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#adb5bd"}, (i + 1) + ". ?"); }); tf(g, `translate(${x} 500)`); return g; });
+  s.run = t => { const a = w => C("close", w); const tn = ramp(t, a("your") - .2, a("your") + .1);
+    op(s.ans, ramp(t, a("plastic#2"), a("plastic#2") + .15) * (1 - tn)); tf(s.ans, `translate(760 420) scale(${pop(t, a("plastic#2"))})`);
+    s.cols.forEach((g, i) => { const tt = a("your") + i * .3; op(g, ramp(t, tt, tt + .2)); }); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT: THE FINAL EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Why roads have gaps:");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "expansion + contraction 🛣️");
+  s.run = () => {}; return s; })();
+
+
+/* ---------- confetti ---------- */
+function burst() {}
+const BURSTS = []; // precomputed so rendering is deterministic per frame
+seed = 77; const conf = []; for (let i = 0; i < 70; i++) conf.push({vx: (rnd() - .5) * 1400, vy: -600 - rnd() * 700, rot: rnd() * 720, col: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6], e: el("rect", {width: 18, height: 10, rx: 3, opacity: 0}, $("confetti"))});
+conf.forEach(c => set(c.e, "fill", c.col));
+function drawConfetti(t) { const b = TL.bursts.filter(x => t >= x && t < x + 1.6).pop();
+  conf.forEach(c => { if (b === undefined) { op(c.e, 0); return; } const k = t - b; const x = 760 + c.vx * k * .5, y = 450 + c.vy * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.rot * k})`); op(c.e, 1 - k / 1.6); }); }
+
+/* ---------- keyword box → shelf ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const fs = 54, w = k.label.length * fs * .56 + 70;
+  const big = el("g", {}, g); el("rect", {x: -w / 2, y: -50, width: w, height: 100, rx: 50, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 19, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, "⭐ " + k.label);
+  const sfs = 25, sw = k.short.length * sfs * .58 + 40;
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -sw / 2, y: -22, width: sw, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": sfs, "font-weight": 700, fill: "#fff"}, k.short);
+  return {k, g, big, small, sw, i}; });
+function drawKW(t) {
+  op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;
+    const sx = 1880 - K.sw / 2, sy = 104 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; }
+    op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly);
+    const x = lerp(960, sx, fly), y = lerp(860, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    const scl = Math.max(0, pop(t, t0, .5));
+    tf(K.g, `translate(${x} ${y})`);
+    tf(K.big, `scale(${scl * lerp(1, .46, fly) * (1 + .04 * Math.sin(t * 8) * (1 - fly))})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); tf(K.small, `scale(${1 + .15 * on(t, tf0 + tfly, tf0 + tfly + .35, .15)})`);
+  });
+}
+
+/* ---------- captions ---------- */
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * 46 * .52 + 60;
+  el("rect", {x: 960 - w / 2, y: 975, width: w, height: 70, rx: 35, fill: "#1b1b3a", "fill-opacity": .78}, g);
+  const t = el("text", {x: 960, y: 1023, "text-anchor": "middle", "font-size": 46, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- render ---------- */
+const order = TL.scenes.map(s => s.scene);
+window.render = function (t) {
+  order.concat(["end"]).forEach((name, i) => {
+    const s = S[name]; const t0 = name === "end" ? TL.END - 4.0 : SC[name].t0 - (i ? .4 : 0);
+    const nxt = i + 1 < order.length ? SC[order[i + 1]].t0 - .4 : (name === "end" ? 1e9 : TL.END - 4.0);
+    const v = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2));
+    op(s.g, v); if (v <= 0) return;
+    tf(s.g, `translate(960 540) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(-960 -540)`);
+    moveBubbles(s.b, t); s.run(t);
+  });
+  drawConfetti(t); drawKW(t); drawCaps(t);
+  set($("prog"), "width", 1920 * clamp(t / TL.END));
+  op($("tag"), ramp(t, .2, .6) * (1 - ramp(t, TL.END - 4.2, TL.END - 3.8)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+document.fonts.ready.then(() => { window.READY = true; });
+</script>
+</body></html>

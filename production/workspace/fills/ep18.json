@@ -1,0 +1,12 @@
+{
+ "hook": "translate(765 525) scale(1.076) translate(-760 -495)",
+ "need": "translate(765 525) scale(1.401) translate(-744 -578)",
+ "temp": "translate(765 525) scale(1.166) translate(-760 -488)",
+ "camera": "translate(765 525) scale(1.081) translate(-715 -480)",
+ "types": "translate(765 525) scale(1.142) translate(-759 -456)",
+ "logger": "translate(765 525) scale(1.25) translate(-910 -434)",
+ "quiz": "translate(765 525) scale(1.063) translate(-788 -464)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.056) translate(-760 -510)",
+ "close": "translate(765 525) scale(1.278) translate(-836 -584)"
+}

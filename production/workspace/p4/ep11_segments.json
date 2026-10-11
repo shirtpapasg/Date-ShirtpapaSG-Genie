@@ -1,0 +1,77 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "How do you measure the volume of a bumpy rock? You cannot use a ruler. But with a little water, you can find its volume exactly. Let me show you."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what volume is. Second, how to use a measuring cylinder. And third, how to find the volume of a rock. Let's get started!"
+ },
+ {
+  "id": "tools",
+  "scene": "tools",
+  "text": "Volume is the amount of space something takes up. To measure the volume of a liquid, we use a measuring cylinder or a beaker. At home, a measuring cup works too. The measuring cylinder is more accurate, because its markings are closer together."
+ },
+ {
+  "id": "units",
+  "scene": "units",
+  "text": "Volume is measured in cubic centimetres, or millilitres. And here is a handy fact. One cubic centimetre is exactly the same as one millilitre."
+ },
+ {
+  "id": "read",
+  "scene": "read",
+  "text": "To read a measuring cylinder, place it on a flat surface. Look closely, and you will see the water surface is curved. Bend down so your eye is level with the water, and read from the bottom of the curved surface. Here, it reads ninety cubic centimetres."
+ },
+ {
+  "id": "rock1",
+  "scene": "rock",
+  "text": "Now for the rock. Pour water into a measuring cylinder, and read the volume. Fifty cubic centimetres. Tie the rock to a string, and lower it gently into the water."
+ },
+ {
+  "id": "rock2",
+  "scene": "rock",
+  "text": "The water level rises to sixty cubic centimetres. The rock pushed the water up by taking up space. So the volume of the rock is sixty, take away fifty. Ten cubic centimetres! Want to measure volume yourself? You can try it in The One App. Open the School Lab, experiment three point three, and press, Let's test it now!"
+ },
+ {
+  "id": "gas",
+  "scene": "gas",
+  "text": "You can even measure a gas this way. Fill a measuring cylinder with water, and turn it upside down in a basin of water. Blow air in through a straw. The air pushes the water out, and the space it takes up shows the volume of the air."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! A beaker has twenty cubic centimetres of water. After a stone is added, it shows thirty-five. What is the volume of the stone?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Fifteen cubic centimetres! Thirty-five, take away twenty."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Place the measuring cylinder on a flat surface. Read at eye level, from the bottom of the curved water surface. To find the volume of a solid, subtract the first water level from the new water level."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit to try. Find a study buddy. Agree to revise at the same time, and check on each other. When someone is counting on you, it is much easier to show up."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Then add to your matter mind map. Under takes up space, write volume, cubic centimetres and millilitres, and the measuring cylinder. Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, how do you measure a rock's volume? Use water, and subtract! Your turn. Ask an adult to help you find the volume of a small toy, using a measuring cup and water."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

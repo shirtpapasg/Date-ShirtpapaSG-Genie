@@ -1,0 +1,18 @@
+[
+ [
+  "tf(s.stamp, `translate(640 840) rotate(-4)",
+  "tf(s.stamp, `translate(1350 620) rotate(-4)"
+ ],
+ [
+  "s.c1 = chip(s.stage, \"digested food ➜ absorbed INTO THE BLOOD\", \"#d00000\", {fs: 34});",
+  "s.c1 = chip(s.stage, \"digested food ➜ absorbed INTO THE BLOOD\", \"#d00000\", {fs: 30});"
+ ],
+ [
+  "popAt(s.c1, 640, 110, t, a(\"blood\"))",
+  "popAt(s.c1, 1530, 425, t, a(\"blood\"))"
+ ],
+ [
+  "{x: 140, y: 220, \"font-size\": 32, \"font-weight\": 700, fill: \"#9d0208\"}, \"inside the small intestine\"",
+  "{x: 140, y: 207, \"font-size\": 32, \"font-weight\": 700, fill: \"#9d0208\"}, \"inside the small intestine\""
+ ]
+]

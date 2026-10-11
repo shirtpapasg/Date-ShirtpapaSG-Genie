@@ -1,0 +1,58 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "DIGESTIVE",
+  "other": "path:none",
+  "from": 201.3,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👄 MOUTH",
+  "other": "path:none",
+  "from": 201.8,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "SYSTEM",
+  "other": "path:none",
+  "from": 202.05,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⬇️ GULLET",
+  "other": "path:none",
+  "from": 202.3,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🫃 STOMACH",
+  "other": "path:none",
+  "from": 202.8,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "LARGE INTESTINE",
+  "other": "path:none",
+  "from": 204.8,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "digestion begins",
+  "other": "path:none",
+  "from": 206.3,
+  "to": 211.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "mixes with juices",
+  "other": "path:none",
+  "from": 207.05,
+  "to": 211.3
+ }
+]

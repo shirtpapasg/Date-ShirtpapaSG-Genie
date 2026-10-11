@@ -1,0 +1,13 @@
+{
+ "hook": "translate(765 525) scale(1.175) translate(-808 -402)",
+ "what": "translate(765 525) scale(1.28) translate(-795 -475)",
+ "teeth": "translate(765 525) scale(1.302) translate(-822 -446)",
+ "saliva": "translate(765 525) scale(1.168) translate(-924 -459)",
+ "tooth": "translate(765 525) scale(1.236) translate(-878 -454)",
+ "safety": "translate(765 525) scale(1.243) translate(-704 -477)",
+ "stomach": "translate(765 525) scale(1.227) translate(-900 -416)",
+ "quiz": "translate(765 525) scale(1.277) translate(-754 -385)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.235) translate(-760 -446)",
+ "close": "translate(765 525) scale(1.5) translate(-820 -604)"
+}

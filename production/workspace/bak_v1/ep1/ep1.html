@@ -1,0 +1,458 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,Inter,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="confetti"></g>
+  <!-- overlays -->
+  <g id="tag" filter="url(#sh)">
+    <rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/>
+    <text x="70" y="73" font-size="27" font-weight="700" fill="#fff" letter-spacing="1">⚙ P4 SCIENCE · EP 1</text>
+  </g>
+  <g id="shelf"><text id="shelfHead" x="1515" y="58" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect x="0" y="1072" width="1920" height="8" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" x="0" y="1072" width="0" height="8" fill="url(#rainbow)"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+<script>window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, extra = "") => tf(e, `translate(${x} ${y}) scale(${Math.max(0, pop(t, a))}) ${extra}`);
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const C = (seg, w) => { const v = TL.cues[seg] && TL.cues[seg][w]; if (v === undefined) throw new Error("cue " + seg + ":" + w); return v; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+
+/* ---------- reusable widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p);
+  const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  return g;
+}
+function bg(p, c1, c2) {
+  const id = "g" + Math.round(rnd() * 1e9);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: 1920, height: 1080, fill: `url(#${id})`}, p);
+  // floating bubbles for liveliness
+  const bubbles = [];
+  for (let i = 0; i < 14; i++) bubbles.push({x: rnd() * 1920, y: rnd() * 1080, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return bubbles;
+}
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % 1200 + 1200) % 1200 - 60); set(o.e, "r", o.r); }); }
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {}, g); return {g, b, stage, name}; }
+
+/* ---------- bike ---------- */
+function makeBike(p) {
+  const g = el("g", {}, p), K = {};
+  const B = [-230, 90], F = [230, 90], Cr = [-10, 100];
+  const wheel = c => { const w = el("g", {transform: `translate(${c[0]} ${c[1]})`}, g);
+    el("circle", {r: 130, fill: "none", stroke: "#2b2d42", "stroke-width": 20}, w); el("circle", {r: 112, fill: "none", stroke: "#adb5bd", "stroke-width": 6}, w);
+    const sp = el("g", {}, w); for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; el("line", {x1: 0, y1: 0, x2: Math.cos(a) * 110, y2: Math.sin(a) * 110, stroke: "#ced4da", "stroke-width": 3}, sp); }
+    el("circle", {r: 16, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, w); return sp; };
+  K.wheelB = wheel(B); K.wheelF = wheel(F);
+  K.chain = el("path", {d: `M${B[0]} ${B[1] - 18} L${Cr[0]} ${Cr[1] - 30} A30 30 0 0 1 ${Cr[0]} ${Cr[1] + 30} L${B[0]} ${B[1] + 18} A18 18 0 0 1 ${B[0]} ${B[1] - 18} Z`, fill: "none", stroke: "#6c757d", "stroke-width": 8, "stroke-dasharray": "10 6"}, g);
+  const fr = el("g", {stroke: "#ff4d6d", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: `M${B[0]} ${B[1]} L${Cr[0]} ${Cr[1]} L-60 -80 Z M-60 -80 L170 -90 L${Cr[0]} ${Cr[1]} M170 -90 L${F[0]} ${F[1]}`}, fr);
+  el("path", {d: "M170 -90 L190 -150", stroke: "#ff4d6d", "stroke-width": 14, "stroke-linecap": "round"}, g);
+  K.handle = el("path", {d: "M150 -150 L240 -162", stroke: INK, "stroke-width": 12, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 240, cy: -162, r: 11, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, g);
+  K.brake = el("path", {d: "M215 -150 L250 -128 M218 -40 L242 -40", stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, g);
+  K.bell = el("circle", {cx: 200, cy: -172, r: 14, fill: "#ffd60a", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M-60 -80 L-70 -100", stroke: "#3a0ca3", "stroke-width": 10}, g);
+  K.seat = el("path", {d: "M-125 -108 Q-70 -126 -20 -106 Q-70 -96 -125 -108 Z", fill: "#3a0ca3", stroke: INK, "stroke-width": 4}, g);
+  const crank = el("g", {transform: `translate(${Cr[0]} ${Cr[1]})`}, g);
+  el("circle", {r: 30, fill: "#ced4da", stroke: INK, "stroke-width": 4}, crank);
+  K.crank = el("g", {}, crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: 58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: -58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  K.pedalA = el("rect", {x: -22, y: 52, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.pedalB = el("rect", {x: -22, y: -66, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.anchor = {Pedals: [-10, 160], Chain: [-130, 98], Wheels: [-230, 90], Seat: [-72, -112], Handlebars: [195, -156], Brakes: [233, -40], Bell: [200, -172]};
+  K.g = g; K.F = F; K.B = B;
+  K.animate = (crankDeg, wheelDeg, chainOff) => { tf(K.crank, `rotate(${crankDeg})`); tf(K.wheelB, `rotate(${wheelDeg})`); tf(K.wheelF, `rotate(${wheelDeg})`); set(K.chain, "stroke-dashoffset", chainOff); };
+  return K;
+}
+
+/* =================== SCENES =================== */
+const S = {};
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#4cc9f0", "#7209b7");
+  s.bike = makeBike(s.stage); s.icons = [["🧍", 330, 230, "body", "body"], ["🌳", 760, 210, "tree", "tree"], ["📚", 1190, 230, "study", "study"]].map(([e, x, y, w]) => ({e: emo(s.stage, 0, 0, 110, e), x, y, w}));
+  s.seven = el("g", {}, s.stage); el("circle", {r: 92, fill: "#ffbe0b", stroke: INK, "stroke-width": 7}, s.seven); tx(s.seven, {x: 0, y: 46, "text-anchor": "middle", "font-size": 130, "font-weight": 700, fill: INK}, "7");
+  s.q = []; for (let i = 0; i < 5; i++) s.q.push(tx(s.stage, {"font-size": 120, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10, "text-anchor": "middle"}, "?"));
+  s.which = tx(s.stage, {x: 760, y: 220, "text-anchor": "middle", "font-size": 110, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "WHICH ONE?");
+  s.run = t => { const T0 = SC.hook.t0;
+    const bs = .8; tf(s.bike.g, `translate(${760 + Math.sin(t * 40) * 8 * on(t, C("hook", "nowhere"), C("hook", "nowhere") + .8, .1)} 520) scale(${bs * Math.max(0, pop(t, T0 + .05))})`);
+    s.bike.animate(t * 40, t * 30, -t * 30);
+    popAt(s.seven, 1310, 470, t, C("hook", "seven")); op(s.seven, on(t, C("hook", "seven"), C("hook", "which"), .2));
+    s.q.forEach((q, i) => { set(q, "x", 300 + i * 230); set(q, "y", 260 + Math.sin(t * 6 + i) * 20); op(q, on(t, C("hook", "lose"), C("hook", "which") - .1, .2)); });
+    op(s.which, on(t, C("hook", "which"), C("hook", "stay"), .2)); tf(s.which, `translate(760 220) scale(${pop(t, C("hook", "which"))}) translate(-760 -220)`);
+    s.icons.forEach(ic => { op(ic.e, ramp(t, C("hook", ic.w), C("hook", ic.w) + .2)); popAt(ic.e, ic.x, ic.y, t, C("hook", ic.w)); });
+  }; return s; })();
+
+// ---- BIKE
+S.bike = (() => { const s = scene("bike", "#8ecae6", "#caf0f8");
+  el("rect", {x: 0, y: 690, width: 1920, height: 400, fill: "#80ed99"}, s.stage); el("rect", {x: 0, y: 690, width: 1920, height: 14, fill: "#57cc99"}, s.stage);
+  s.speed = el("g", {opacity: 0}, s.stage); for (let i = 0; i < 6; i++) el("rect", {x: 100 + i * 40, y: 380 + i * 50, width: 260, height: 12, rx: 6, fill: "#fff"}, s.speed);
+  s.lines = el("g", {}, s.stage); s.bk = makeBike(s.stage);
+  const parts = [["Pedals", "#06d6a0", 640, 742], ["Chain", "#6c757d", 380, 742], ["Wheels", "#2b2d42", 300, 330], ["Seat", "#3a0ca3", 520, 190], ["Handlebars", "#ffbe0b", 1120, 175], ["Brakes", "#e63946", 1250, 330], ["Bell", "#ffd60a", 880, 160]];
+  s.parts = parts.map(([n, col, x, y]) => ({n, x, y, line: el("line", {stroke: INK, "stroke-width": 4, "stroke-dasharray": "8 6", opacity: 0}, s.lines), ring: el("circle", {r: 30, fill: "#ffe14d", opacity: 0}, s.stage), c: chip(s.stage, n, col, {ink: n === "Bell" || n === "Handlebars" ? INK : "#fff"})}));
+  s.foot = emo(s.stage, 0, 0, 90, "🦶");
+  s.run = t => { const T = w => C("bike1", w), U = w => C("bike2", w);
+    const go = ramp(t, U("whoosh") - .1, U("whoosh") + .5) * (1 - ramp(t, U("no") - .2, U("no") + .5));
+    const bx = 760 + go * 380, by = 440;
+    tf(s.bk.g, `translate(${bx} ${by})`); op(s.speed, go);
+    const spin = t > U("pedals") ? (t - U("pedals")) : 0, wheelOn = t > U("wheel") ? (t - U("wheel")) : 0;
+    s.bk.animate(spin * 140, wheelOn * 220 + go * 300, -(t > U("chain") ? (t - U("chain")) * 60 : 0));
+    const keys = ["pedals", "chain", "wheels", "seat", "handlebars", "brakes", "bell"];
+    const glowAll = on(t, U("together") - .1, SC.bike.t1 + .5, .2);
+    s.parts.forEach((p, i) => { const a = T(keys[i]); const an = s.bk.anchor[p.n];
+      const ax = bx + an[0], ay = by + an[1];
+      op(p.c, ramp(t, a, a + .2)); popAt(p.c, p.x, p.y, t, a);
+      set(p.line, "x1", p.x); set(p.line, "y1", p.y); set(p.line, "x2", ax); set(p.line, "y2", ay); op(p.line, ramp(t, a + .1, a + .3) * (1 - go));
+      set(p.ring, "cx", ax); set(p.ring, "cy", ay); set(p.ring, "r", 26 + 8 * Math.sin(t * 8)); op(p.ring, .55 * Math.max(on(t, a, a + 1.4, .2), glowAll * (.5 + .5 * Math.sin(t * 6 + i))));
+    });
+    op(s.foot, on(t, U("feet"), U("chain"), .2)); tf(s.foot, `translate(${bx - 10 + Math.cos(spin * 2.4) * 40} ${by + 120 + Math.sin(spin * 2.4) * 40})`);
+  }; return s; })();
+
+// ---- DEFINE
+S.define = (() => { const s = scene("define", "#ffd166", "#ff9f1c");
+  const blocks = [["PEDALS", "#06d6a0", "push"], ["CHAIN", "#3a86ff", "turns the wheel"], ["WHEELS", "#ff4d6d", "roll"]];
+  s.blocks = blocks.map(([n, col, job], i) => { const g = el("g", {}, s.stage);
+    el("rect", {x: -150, y: -70, width: 300, height: 140, rx: 26, fill: col, stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
+    tx(g, {x: 0, y: 16, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, n);
+    const tag = el("g", {}, g); el("rect", {x: -165, y: 86, width: 330, height: 58, rx: 14, fill: "#fff", stroke: INK, "stroke-width": 4}, tag);
+    tx(tag, {x: 0, y: 125, "text-anchor": "middle", "font-size": 27, "font-weight": 600, fill: INK}, "job: " + job);
+    return {g, tag, i}; });
+  s.intro = tx(s.stage, {x: 760, y: 300, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "🔬 Scientists call this…");
+  s.word = tx(s.stage, {x: 760, y: 250, "text-anchor": "middle", "font-size": 150, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 16, "letter-spacing": 8}, "SYSTEM");
+  s.big = el("g", {}, s.stage); el("rect", {x: -470, y: -60, width: 940, height: 120, rx: 30, fill: "#7b61ff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, s.big);
+  tx(s.big, {x: 0, y: 16, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "BIG FUNCTION: moving you 🚲");
+  s.trip = el("g", {}, s.stage); el("path", {d: "M260 700 Q760 620 1260 700", stroke: "#fff", "stroke-width": 8, "stroke-dasharray": "4 18", "stroke-linecap": "round", fill: "none"}, s.trip);
+  emo(s.trip, 230, 690, 80, "🏠"); emo(s.trip, 1290, 690, 80, "🏫"); s.mini = emo(s.trip, 0, 0, 70, "🚲");
+  s.run = t => { const a = w => C("def1", w), b = w => C("def2", w);
+    const snap = ramp(t, a("together") - .1, a("together") + .5);
+    s.blocks.forEach((B, i) => { const spread = (i - 1) * lerp(440, 360, snap); const lift = Math.sin(t * 2 + i) * 6 * (1 - snap);
+      op(B.g, ramp(t, a("parts") - .2 + i * .12, a("parts") + i * .12)); tf(B.g, `translate(${760 + spread} ${470 + lift}) scale(${pop(t, a("parts") - .2 + i * .12)})`);
+      op(B.tag, ramp(t, b("function") + i * .35, b("function") + .25 + i * .35)); });
+    op(s.intro, on(t, SC.define.t0 - .1, a("parts") - .1, .2)); tf(s.intro, `translate(760 300) scale(${pop(t, SC.define.t0 - .1)}) translate(-760 -300)`);
+    op(s.word, ramp(t, a("system"), a("system") + .15)); tf(s.word, `translate(760 250) scale(${pop(t, a("system"), .5)}) translate(-760 -250)`);
+    const bigOn = ramp(t, b("big"), b("big") + .3); op(s.big, bigOn); tf(s.big, `translate(760 700) scale(${pop(t, b("big"))})`);
+    const tr = ramp(t, b("place"), b("place#2") + .6); op(s.trip, ramp(t, b("moving"), b("moving") + .3)); op(s.big, bigOn * (1 - ramp(t, b("moving"), b("moving") + .3)));
+    const k = tr; set(s.mini, "x", lerp(260, 1260, k)); set(s.mini, "y", 690 - Math.sin(k * Math.PI) * 60 - 30);
+    if (t > a("system") && t < a("system") + .05) burst(t);
+  }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  const cards = [["A", "⛓️", "CHAIN"], ["B", "🦶", "PEDAL"], ["C", "", "SPOKES"], ["D", "🔔", "BELL"]];
+  s.cards = cards.map(([L, e, n], i) => { const g = el("g", {}, s.stage);
+    const face = el("rect", {x: -140, y: -175, width: 280, height: 350, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
+    el("circle", {cx: -95, cy: -130, r: 30, fill: "#7209b7"}, g); tx(g, {x: -95, y: -119, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#fff"}, L);
+    if (e) emo(g, 0, -25, 120, e); else { const wg = el("g", {transform: "translate(0 -25)"}, g); el("circle", {r: 55, fill: "none", stroke: "#2b2d42", "stroke-width": 12}, wg); for (let k = 0; k < 8; k++) { const an = k * Math.PI / 4; el("line", {x1: 0, y1: 0, x2: Math.cos(an) * 50, y2: Math.sin(an) * 50, stroke: "#6c757d", "stroke-width": 4}, wg); } el("circle", {r: 10, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, wg); }
+    tx(g, {x: 0, y: 110, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: INK}, n);
+    const mark = tx(g, {x: 0, y: 40, "text-anchor": "middle", "font-size": 230, "font-weight": 700, fill: i === 3 ? "#06d6a0" : "#e63946", class: "out", "stroke-width": 10, opacity: 0}, i === 3 ? "✓" : "✗");
+    const note = tx(g, {x: 0, y: 225, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6, opacity: 0}, ["wheel won't turn", "can't push", "wobbly & weak", "still moves! (less safe)"][i]);
+    return {g, face, mark, note, i}; });
+  s.ring = el("g", {}, s.stage); el("circle", {r: 70, fill: "#ffbe0b", stroke: INK, "stroke-width": 6}, s.ring);
+  s.ringArc = el("circle", {r: 58, fill: "none", stroke: INK, "stroke-width": 12, "stroke-dasharray": "364 364", transform: "rotate(-90)"}, s.ring);
+  s.ringT = tx(s.ring, {x: 0, y: 22, "text-anchor": "middle", "font-size": 62, "font-weight": 700, fill: INK}, "5");
+  s.pause = tx(s.stage, {x: 760, y: 200, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    const hl = [a("chain"), a("pedal"), a("spokes"), a("bell")], rv = [b("chain"), b("pedal"), b("spokes"), b("bell")];
+    s.cards.forEach(c => { const x = 250 + c.i * 340, y = 500;
+      const wig = on(t, hl[c.i], hl[c.i] + .8, .15); tf(c.g, `translate(${x} ${y - 30 * wig}) rotate(${Math.sin(t * 20) * 4 * wig}) scale(${pop(t, a("challenge") + c.i * .12)})`);
+      op(c.g, ramp(t, a("challenge") + c.i * .12, a("challenge") + .2 + c.i * .12));
+      op(c.mark, ramp(t, rv[c.i], rv[c.i] + .2)); op(c.note, ramp(t, rv[c.i] + .2, rv[c.i] + .4));
+      set(c.face, "fill", t > rv[c.i] ? (c.i === 3 ? "#d8f3dc" : "#ffccd5") : "#fff"); });
+    const cd = ramp(t, a("pause"), a("predict") + .3); op(s.pause, on(t, a("pause"), a("which"), .2));
+    tf(s.pause, `translate(760 200) scale(${pop(t, a("pause"))}) translate(-760 -200)`);
+    const ct = clamp((t - a("predict")) / 4); op(s.ring, on(t, a("predict"), b("ready") + .2, .2)); tf(s.ring, "translate(1300 200)");
+    set(s.ringArc, "stroke-dashoffset", 364 * ct); s.ringT.textContent = Math.max(1, 5 - Math.floor(ct * 5));
+    if (Math.abs(t - b("bell")) < .02) burst(t);
+  }; return s; })();
+
+// ---- RULE (dominoes)
+S.rule = (() => { const s = scene("rule", "#ff006e", "#fb5607");
+  const names = ["CHAIN", "WHEEL", "PEDALS", "SEAT", "BRAKES", "BIKE"];
+  s.d = names.map((n, i) => { const g = el("g", {}, s.stage);
+    el("rect", {x: -50, y: -220, width: 100, height: 220, rx: 16, fill: i === 0 ? "#ffe14d" : "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
+    tx(g, {x: 0, y: -100, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: INK, transform: "rotate(-90 0 -100)"}, n); return g; });
+  s.warn = tx(s.stage, {x: 760, y: 230, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⚠ ONE PART FAILS…");
+  s.warn2 = tx(s.stage, {x: 760, y: 330, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 12}, "…THE WHOLE SYSTEM IS AFFECTED");
+  s.run = t => { const a = w => C("rule", w);
+    s.d.forEach((g, i) => { const t0 = a("fails") + i * .22; const fall = ramp(t, t0, t0 + .35);
+      tf(g, `translate(${330 + i * 170} 700) rotate(${fall * 72})`); op(g, ramp(t, SC.rule.t0 - .2 + i * .05, SC.rule.t0 + .1 + i * .05)); });
+    op(s.warn, ramp(t, a("one"), a("one") + .2)); op(s.warn2, ramp(t, a("whole"), a("whole") + .2));
+    tf(s.warn2, `translate(760 330) scale(${pop(t, a("whole"))}) translate(-760 -330)`);
+  }; return s; })();
+
+// ---- BODY
+S.body = (() => { const s = scene("body", "#48cae4", "#ade8f4");
+  const g = el("g", {transform: "translate(760 0)"}, s.stage);
+  const skin = "#ffcfa3";
+  el("rect", {x: -150, y: 270, width: 300, height: 320, rx: 90, fill: "#ffbe0b", stroke: INK, "stroke-width": 6}, g);
+  el("path", {d: "M-140 300 Q-230 420 -220 560 M140 300 Q230 420 220 560", stroke: skin, "stroke-width": 50, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: "M-140 300 Q-230 420 -220 560 M140 300 Q230 420 220 560", stroke: INK, "stroke-width": 4, fill: "none", opacity: .25}, g);
+  el("path", {d: "M-70 580 L-80 780 M70 580 L80 780", stroke: "#3a86ff", "stroke-width": 64, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 0, cy: 180, r: 92, fill: skin, stroke: INK, "stroke-width": 6}, g);
+  el("circle", {cx: -32, cy: 168, r: 9, fill: INK}, g); el("circle", {cx: 32, cy: 168, r: 9, fill: INK}, g);
+  el("path", {d: "M-30 215 Q0 240 30 215", stroke: INK, "stroke-width": 6, fill: "none", "stroke-linecap": "round"}, g);
+  s.parts = {};
+  const P = (k, f) => { const pg = el("g", {opacity: 0}, g); f(pg); s.parts[k] = pg; };
+  P("nose", pg => el("circle", {cx: 0, cy: 195, r: 16, fill: "#ff8fab", stroke: INK, "stroke-width": 4}, pg));
+  P("windpipe", pg => el("rect", {x: -12, y: 250, width: 24, height: 90, rx: 10, fill: "#ffafcc", stroke: INK, "stroke-width": 4}, pg));
+  P("lungs", pg => { el("path", {d: "M-14 330 Q-120 320 -110 450 Q-60 480 -14 440 Z", fill: "#ff8fab", stroke: INK, "stroke-width": 5}, pg); el("path", {d: "M14 330 Q120 320 110 450 Q60 480 14 440 Z", fill: "#ff8fab", stroke: INK, "stroke-width": 5}, pg); });
+  P("heart", pg => emo(pg, 30, 360, 70, "❤️"));
+  P("blood", pg => { el("path", {d: "M30 360 Q-100 420 -210 540 M30 360 Q120 470 210 540 M0 360 L-70 760 M10 380 L80 760 M0 300 L0 220", stroke: "#e63946", "stroke-width": 7, fill: "none", "stroke-dasharray": "14 8"}, pg); });
+  P("bones", pg => { el("path", {d: "M-60 600 L-75 770 M60 600 L75 770 M-130 320 Q-200 420 -205 540 M130 320 Q200 420 205 540", stroke: "#fff", "stroke-width": 14, "stroke-linecap": "round", fill: "none"}, pg);
+    for (let i = 0; i < 4; i++) el("path", {d: `M-90 ${330 + i * 34} Q0 ${350 + i * 34} 90 ${330 + i * 34}`, stroke: "#fff", "stroke-width": 9, fill: "none"}, pg); });
+  P("muscles", pg => { el("ellipse", {cx: -185, cy: 400, rx: 34, ry: 55, fill: "#ff595e", stroke: INK, "stroke-width": 4}, pg); el("ellipse", {cx: 185, cy: 400, rx: 34, ry: 55, fill: "#ff595e", stroke: INK, "stroke-width": 4}, pg); });
+  P("digestive", pg => { el("path", {d: "M-10 460 Q60 450 50 500 Q20 530 -30 510 Z", fill: "#c77dff", stroke: INK, "stroke-width": 5}, pg);
+    el("path", {d: "M-50 520 q30 -14 60 0 q30 14 0 28 q-30 14 -60 0 q-30 -14 0 -28 M-70 560 q60 30 120 0", stroke: "#e0aaff", "stroke-width": 12, fill: "none", "stroke-linecap": "round"}, pg); });
+  s.food = emo(g, 0, 0, 60, "🍳");
+  const lab = [["nose", "NOSE", 420, 200, "#ff8fab"], ["windpipe", "WINDPIPE", 400, 300, "#ffafcc"], ["lungs", "LUNGS", 400, 410, "#ff8fab"], ["respiratory", "RESPIRATORY SYSTEM 🫁", 1140, 200, "#3a86ff"],
+    ["heart", "HEART ❤️", 1150, 330, "#e63946"], ["bones", "BONES 🦴", 400, 560, "#adb5bd"], ["muscles", "MUSCLES 💪", 1150, 450, "#ff595e"], ["digestive", "DIGESTIVE SYSTEM", 1140, 600, "#9d4edd"]];
+  s.labs = lab.map(([k, n, x, y, col]) => ({k, x, y, c: chip(s.stage, n, col, {fs: 30})}));
+  s.run = t => { const a = w => C("body1", w), b = w => C("body2", w);
+    const T = {nose: a("nose"), windpipe: a("windpipe"), lungs: a("lungs"), respiratory: a("respiratory"), heart: b("heart"), blood: b("blood"), bones: b("bones"), muscles: b("muscles"), digestive: b("digestive")};
+    for (const k in s.parts) op(s.parts[k], ramp(t, T[k] - .1, T[k] + .2) * (k === "muscles" ? 1 : 1));
+    tf(s.parts.muscles, `translate(0 0) scale(1 ${1 + .12 * Math.sin(t * 6) * ramp(t, T.muscles, T.muscles + .3)})`);
+    tf(s.parts.lungs, `translate(0 ${390}) scale(${1 + .06 * Math.sin(t * 3)}) translate(0 -390)`);
+    s.labs.forEach(L => { op(L.c, ramp(t, T[L.k], T[L.k] + .2)); popAt(L.c, L.x, L.y, t, T[L.k]); });
+    const f = ramp(t, b("breakfast"), b("breakfast") + 1.2); op(s.food, on(t, b("breakfast") - .2, b("breakfast") + 1.4, .2)); set(s.food, "x", 0); set(s.food, "y", lerp(60, 490, f));
+  }; return s; })();
+
+// ---- TREE
+S.tree = (() => { const s = scene("tree", "#90e0ef", "#caffbf");
+  el("rect", {x: 0, y: 640, width: 1920, height: 460, fill: "#a47148"}, s.stage); el("rect", {x: 0, y: 630, width: 1920, height: 22, fill: "#57cc99"}, s.stage);
+  s.sun = emo(s.stage, 180, 190, 150, "☀️");
+  s.rays = el("g", {}, s.stage); for (let i = 0; i < 5; i++) el("line", {x1: 240, y1: 230, x2: 460 + i * 80, y2: 300 + i * 30, stroke: "#ffd60a", "stroke-width": 8, "stroke-dasharray": "18 12", "stroke-linecap": "round"}, s.rays);
+  s.roots = el("path", {d: "M760 640 Q700 720 560 790 M760 640 Q760 730 740 820 M760 640 Q830 720 960 790 M720 650 Q640 680 600 700 M800 650 Q880 670 930 690", stroke: "#6f4518", "stroke-width": 16, fill: "none", "stroke-linecap": "round"}, s.stage);
+  s.trunk = el("path", {d: "M720 640 Q730 480 700 360 L820 360 Q790 480 800 640 Z", fill: "#8b5e34", stroke: INK, "stroke-width": 6}, s.stage);
+  s.canopy = el("g", {}, s.stage); [[760, 300, 380, 120], [560, 340, 200, 90], [960, 340, 200, 90], [660, 250, 200, 90], [860, 250, 200, 90]].forEach(([cx, cy, rx, ry]) => el("ellipse", {cx, cy, rx, ry, fill: "#38b000", stroke: INK, "stroke-width": 6}, s.canopy));
+  s.sparkles = []; for (let i = 0; i < 12; i++) s.sparkles.push({x: 450 + rnd() * 620, y: 230 + rnd() * 160, ph: rnd() * 6, e: emo(s.stage, 0, 0, 34, "✨")});
+  s.drops = []; for (let i = 0; i < 10; i++) s.drops.push({ph: i / 10, e: el("circle", {r: 11, fill: "#4cc9f0", stroke: INK, "stroke-width": 3}, s.stage)});
+  s.glow = {roots: el("path", {d: s.roots.getAttribute("d"), stroke: "#ffe14d", "stroke-width": 30, fill: "none", opacity: 0, "stroke-linecap": "round"}, s.stage)};
+  s.stage.insertBefore(s.glow.roots, s.roots);
+  s.flags = [chip(s.stage, "🇸🇬 Singapore: rain tree", "#ef233c", {fs: 30}), chip(s.stage, "🇺🇸 USA: oak tree", "#3a86ff", {fs: 30})];
+  s.labs = [["ROOTS: hold tree + take in water", "#6f4518", 400, 760], ["STEM: carries water + holds tree up", "#8b5e34", 1100, 520], ["LEAVES: make food", "#38b000", 1120, 200]].map(([n, col, x, y]) => ({x, y, c: chip(s.stage, n, col, {fs: 28})}));
+  s.three = [1, 2, 3].map(i => { const g = el("g", {}, s.stage); el("circle", {r: 46, fill: ["#6f4518", "#8b5e34", "#38b000"][i - 1], stroke: INK, "stroke-width": 5}, g); tx(g, {x: 0, y: 17, "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: "#fff"}, String(i)); return g; });
+  s.run = t => { const a = w => C("tree", w);
+    op(s.flags[0], on(t, a("singapore"), a("america") , .2)); popAt(s.flags[0], 1130, 120, t, a("singapore"));
+    op(s.flags[1], on(t, a("america"), a("roots"), .2)); popAt(s.flags[1], 1130, 120, t, a("america"));
+    op(s.glow.roots, .7 * on(t, a("roots"), a("stem"), .2));
+    op(s.labs[0].c, ramp(t, a("roots"), a("roots") + .2)); popAt(s.labs[0].c, 400, 760, t, a("roots"));
+    op(s.labs[1].c, ramp(t, a("stem"), a("stem") + .2)); popAt(s.labs[1].c, 1110, 520, t, a("stem"));
+    op(s.labs[2].c, ramp(t, a("leaves"), a("leaves") + .2)); popAt(s.labs[2].c, 1120, 200, t, a("leaves"));
+    set(s.trunk, "fill", t > a("stem") && t < a("leaves") ? "#c08552" : "#8b5e34");
+    const flow = ramp(t, a("water#2") - .3, a("water#2"));
+    s.drops.forEach(d => { const k = ((t * .5 + d.ph) % 1); let x, y; if (k < .35) { x = lerp(560, 760, k / .35); y = lerp(790, 640, k / .35); } else { x = 760 + Math.sin(k * 20) * 10; y = lerp(640, 300, (k - .35) / .65); }
+      set(d.e, "cx", x); set(d.e, "cy", y); op(d.e, Math.max(on(t, a("water") , a("stem"), .2), flow * on(t, a("water#2"), a("three"), .2))); });
+    op(s.rays, on(t, a("leaves"), SC.tree.t1 + 1, .2)); set(s.rays, "stroke-dashoffset", -t * 60);
+    s.rays.querySelectorAll("line").forEach(l => set(l, "stroke-dashoffset", -t * 60));
+    s.sparkles.forEach(sp => { set(sp.e, "x", sp.x); set(sp.e, "y", sp.y + Math.sin(t * 3 + sp.ph) * 8); op(sp.e, on(t, a("food"), SC.tree.t1 + 1, .2) * (.5 + .5 * Math.sin(t * 5 + sp.ph))); });
+    s.three.forEach((g, i) => { const k = [a("three"), a("three#2"), a("one")][i]; op(g, ramp(t, k, k + .2)); popAt(g, [560, 760, 960][i], 120, t, k); });
+    tf(s.canopy, `translate(760 300) scale(${1 + .015 * Math.sin(t * 2)}) translate(-760 -300)`);
+  }; return s; })();
+
+// ---- WORLD
+S.world = (() => { const s = scene("world", "#4361ee", "#4cc9f0");
+  const card = (x, title, col) => { const g = el("g", {}, s.stage); el("rect", {x: -320, y: -250, width: 640, height: 500, rx: 40, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
+    el("rect", {x: -320, y: -250, width: 640, height: 90, rx: 40, fill: col}, g); el("rect", {x: -320, y: -190, width: 640, height: 30, fill: col}, g);
+    tx(g, {x: 0, y: -190, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#fff"}, title); g.x = x; return g; };
+  s.c1 = card(430, "🚆 TRAIN LINE", "#ef476f"); s.c2 = card(1100, "⚽ SOCCER TEAM", "#06d6a0");
+  el("path", {d: "M-250 60 L250 60", stroke: "#6c757d", "stroke-width": 14, "stroke-linecap": "round"}, s.c1);
+  [-220, -70, 80, 230].forEach(x => el("circle", {cx: x, cy: 60, r: 22, fill: "#fff", stroke: INK, "stroke-width": 6}, s.c1));
+  s.train = emo(s.c1, 0, 0, 90, "🚆"); s.bolt = emo(s.c1, 230, -70, 70, "⚡");
+  tx(s.c1, {x: 0, y: 190, "text-anchor": "middle", "font-size": 30, "font-weight": 600, fill: INK}, "trains · tracks · stations · power");
+  const pos = [[0, 150, "GK"], [-160, 60, "D"], [0, 60, "D"], [160, 60, "D"], [-110, -60, "S"], [110, -60, "S"]];
+  s.players = pos.map(([x, y, l]) => { const g = el("g", {transform: `translate(${x} ${y})`}, s.c2); const c = el("circle", {r: 34, fill: l === "GK" ? "#ffbe0b" : l === "D" ? "#3a86ff" : "#ef476f", stroke: INK, "stroke-width": 5}, g); tx(g, {x: 0, y: 11, "text-anchor": "middle", "font-size": 28, "font-weight": 700, fill: "#fff"}, l); return {g, c}; });
+  s.slow = [s.c1, s.c2].map(c => { const t2 = tx(c, {x: 0, y: 150, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#e63946", class: "out", "stroke-width": 0, opacity: 0}, "🐢 slows down!"); return t2; });
+  s.run = t => { const a = w => C("world", w);
+    op(s.c1, ramp(t, a("train"), a("train") + .2)); tf(s.c1, `translate(430 470) scale(${pop(t, a("train"))})`);
+    op(s.c2, ramp(t, a("soccer"), a("soccer") + .2)); tf(s.c2, `translate(1100 470) scale(${pop(t, a("soccer"))})`);
+    const slow = ramp(t, a("stops"), a("stops") + .4);
+    const tk = ((t * lerp(.35, .08, slow)) % 1); set(s.train, "x", lerp(-220, 230, tk)); set(s.train, "y", 20);
+    op(s.bolt, 1 - slow * (.5 + .5 * Math.sin(t * 12)));
+    s.players.forEach((p, i) => { if (i === 4) set(p.c, "fill", slow > .5 ? "#adb5bd" : "#ef476f"); });
+    s.slow.forEach(e => op(e, slow));
+    if (Math.abs(t - a("everywhere")) < .02) burst(t);
+  }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -660, y: -320, width: 1320, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -600, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  s.lines = ["A system is made up of different parts.", "Each part has its own function.", "The parts work together to carry out a function.", "If one part does not work, the whole system may be affected."].map((L, i) => {
+    const r = el("g", {opacity: 0}, g); tx(r, {x: -560, y: -130 + i * 115, "font-size": 40, "font-weight": 600, fill: "#fff"}, L); tx(r, {x: -615, y: -128 + i * 115, "font-size": 44, "font-weight": 700, fill: "#ffe14d"}, "✓"); return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("made"), a("each"), a("parts#2") , a("if")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.gear = emo(s.stage, 760, 230, 160, "⚙️");
+  s.eq = tx(s.stage, {x: 760, y: 380, "text-anchor": "middle", "font-size": 64, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "habit = tiny system");
+  const block = (label, col, w) => { const g = el("g", {}, s.stage); el("rect", {x: -w / 2, y: -60, width: w, height: 120, rx: 18, fill: col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
+    for (let i = 0; i < 4; i++) el("rect", {x: -w / 2 + 40 + i * (w - 80) / 3 - 30, y: -86, width: 60, height: 30, rx: 8, fill: col, stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: 0, y: 16, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, label); return g; };
+  s.b1 = block("🎒 I pack my school bag", "#ef476f", 760); s.b2 = block("🧠 1-minute mind map", "#ffbe0b", 760);
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.gear, ramp(t, a("habits"), a("habits") + .2)); tf(s.gear, `rotate(${t * 60} 760 230)`);
+    op(s.eq, on(t, a("systems"), a("stacking") - .1, .2));
+    op(s.b1, ramp(t, a("stick") - .1, a("stick") + .2)); tf(s.b1, `translate(760 ${640}) scale(${pop(t, a("stick") - .1)})`);
+    const d = ramp(t, a("onto"), a("onto") + .5); op(s.b2, ramp(t, a("onto") - .1, a("onto"))); tf(s.b2, `translate(760 ${lerp(150, 490, d)})`);
+    if (Math.abs(t - (a("onto") + .5)) < .02) burst(t);
+  }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  s.formula = el("g", {}, s.stage); el("rect", {x: -560, y: -50, width: 1120, height: 100, rx: 20, fill: "#fff", stroke: INK, "stroke-width": 5, filter: "url(#sh)"}, s.formula);
+  tx(s.formula, {x: 0, y: 14, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "After I pack my bag ➜ I draw a 1-min mind map");
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 170, ry: 80, fill: "#f72585", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 16, "text-anchor": "middle", "font-size": 52, "font-weight": 700, fill: "#fff"}, "SYSTEM");
+  const br = [["bike", "🚲 BIKE", "#ff4d6d", 330, 310, ["pedals", "chain"]], ["body", "🧍 BODY", "#3a86ff", 330, 660, ["lungs", "heart"]], ["tree", "🌳 TREE", "#38b000", 1010, 690, ["roots", "leaves"]]];
+  s.br = br.map(([k, n, col, x, y, subs]) => { const line = el("path", {d: `M720 480 Q${(720 + x) / 2} ${y} ${x} ${y}`, stroke: col, "stroke-width": 12, fill: "none", "stroke-linecap": "round"}, s.stage);
+    const len = 700; set(line, "stroke-dasharray", len); const c = chip(s.stage, n, col, {fs: 38});
+    const twigs = subs.map((sn, j) => chip(s.stage, sn, "#fff", {fs: 26, ink: INK})); return {k, line, len, c, x, y, twigs}; });
+  s.stage.appendChild(s.center);
+  s.timer = el("g", {}, s.stage); el("circle", {r: 66, fill: "#fff", stroke: INK, "stroke-width": 6}, s.timer); tx(s.timer, {x: 0, y: 16, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: INK}, "1:00"); emo(s.timer, 0, -96, 56, "⏱️");
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp");
+  tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  const cp = el("clipPath", {id: "scr"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  s.shot = el("image", {href: "oneapp_mind.png", x: -112, y: -122, width: 224, height: 485, preserveAspectRatio: "xMidYMin slice", "clip-path": "url(#scr)"}, s.phone);
+  s.thumbs = [s.shot];
+  s.run = t => { const a = w => C("habit2", w); a("one") === undefined;
+    op(s.formula, on(t, a("after") - .1, a("middle"), .2)); tf(s.formula, `translate(760 230) scale(${pop(t, a("after") - .1)})`);
+    op(s.center, ramp(t, a("middle"), a("middle") + .2)); tf(s.center, `translate(720 480) scale(${pop(t, a("middle"))})`);
+    s.br.forEach(b => { const k = a(b.k); set(b.line, "stroke-dashoffset", b.len * (1 - ramp(t, k - .1, k + .4))); op(b.line, t > k - .1 ? 1 : 0);
+      op(b.c, ramp(t, k + .2, k + .4)); popAt(b.c, b.x, b.y, t, k + .2);
+      b.twigs.forEach((tw, j) => { const tt = k + .7 + j * .25; op(tw, ramp(t, tt, tt + .2)); popAt(tw, b.x + (j ? 110 : -110), b.y + (b.y < 480 ? -80 : 80), t, tt); }); });
+    op(s.timer, on(t, a("one"), a("save"), .2)); popAt(s.timer, 1180, 300, t, a("one"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1340, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 760, 160, t, a("ultimate"));
+    op(s.shot, ramp(t, a("theoneapp"), a("theoneapp") + .3)); set(s.shot, "y", -122 - 120 * ramp(t, a("ultimate") + .5, a("ultimate") + 3.5));
+  }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.bell = emo(s.stage, 0, 0, 220, "🔔");
+  s.icons = [["🚲", "bike"], ["🧍", "body"], ["🌳", "tree"]].map(([e, w], i) => ({e: emo(s.stage, 0, 0, 130, e), w, x: 420 + i * 340}));
+  s.sys = tx(s.stage, {x: 760, y: 420, "text-anchor": "middle", "font-size": 140, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 16}, "SYSTEMS ⚙");
+  s.bubble = el("g", {}, s.stage); el("path", {d: "M-420 -90 H420 A40 40 0 0 1 460 -50 V50 A40 40 0 0 1 420 90 H-260 L-330 150 L-320 90 H-420 A40 40 0 0 1 -460 50 V-50 A40 40 0 0 1 -420 -90 Z", fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.bubble);
+  tx(s.bubble, {x: 0, y: 16, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "💬 One system YOU used today?");
+  s.run = t => { const a = w => C("close", w);
+    op(s.bell, on(t, a("bell"), a("bike"), .2)); tf(s.bell, `translate(760 400) rotate(${Math.sin(t * 25) * 18 * on(t, a("bell"), a("bell") + 1.2, .1)}) scale(${pop(t, a("bell"))})`);
+    const merge = ramp(t, a("systems"), a("systems") + .5);
+    s.icons.forEach(ic => { const k = a(ic.w); op(ic.e, ramp(t, k, k + .2) * (1 - merge)); set(ic.e, "x", lerp(ic.x, 760, merge)); set(ic.e, "y", 420); tf(ic.e, `scale(1)`); });
+    op(s.sys, on(t, a("systems"), a("turn"), .2)); tf(s.sys, `translate(760 420) scale(${pop(t, a("systems"), .5)}) translate(-760 -420)`);
+    op(s.bubble, ramp(t, a("comments") - .3, a("comments"))); tf(s.bubble, `translate(760 470) scale(${pop(t, a("comments") - .3)})`);
+    if (Math.abs(t - a("bell")) < .02 || Math.abs(t - a("systems")) < .02) burst(t);
+  }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "The 3-part team");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "inside every plant 🌱");
+  s.run = () => {}; return s; })();
+
+/* ---------- confetti ---------- */
+function burst() {}
+const BURSTS = []; // precomputed so rendering is deterministic per frame
+seed = 77; const conf = []; for (let i = 0; i < 70; i++) conf.push({vx: (rnd() - .5) * 1400, vy: -600 - rnd() * 700, rot: rnd() * 720, col: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6], e: el("rect", {width: 18, height: 10, rx: 3, opacity: 0}, $("confetti"))});
+conf.forEach(c => set(c.e, "fill", c.col));
+function drawConfetti(t) { const b = TL.bursts.filter(x => t >= x && t < x + 1.6).pop();
+  conf.forEach(c => { if (b === undefined) { op(c.e, 0); return; } const k = t - b; const x = 760 + c.vx * k * .5, y = 450 + c.vy * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.rot * k})`); op(c.e, 1 - k / 1.6); }); }
+
+/* ---------- keyword box → shelf ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const fs = 54, w = k.label.length * fs * .56 + 70;
+  const big = el("g", {}, g); el("rect", {x: -w / 2, y: -50, width: w, height: 100, rx: 50, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 19, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, "⭐ " + k.label);
+  const sfs = 25, sw = k.short.length * sfs * .58 + 40;
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -sw / 2, y: -22, width: sw, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": sfs, "font-weight": 700, fill: "#fff"}, k.short);
+  return {k, g, big, small, sw, i}; });
+function drawKW(t) {
+  op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;
+    const sx = 1880 - K.sw / 2, sy = 104 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; }
+    op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly);
+    const x = lerp(960, sx, fly), y = lerp(860, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    const scl = Math.max(0, pop(t, t0, .5));
+    tf(K.g, `translate(${x} ${y})`);
+    tf(K.big, `scale(${scl * lerp(1, .46, fly) * (1 + .04 * Math.sin(t * 8) * (1 - fly))})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); tf(K.small, `scale(${1 + .15 * on(t, tf0 + tfly, tf0 + tfly + .35, .15)})`);
+  });
+}
+
+/* ---------- captions ---------- */
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * 46 * .52 + 60;
+  el("rect", {x: 960 - w / 2, y: 975, width: w, height: 70, rx: 35, fill: "#1b1b3a", "fill-opacity": .78}, g);
+  const t = el("text", {x: 960, y: 1023, "text-anchor": "middle", "font-size": 46, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- render ---------- */
+const order = TL.scenes.map(s => s.scene);
+window.render = function (t) {
+  order.concat(["end"]).forEach((name, i) => {
+    const s = S[name]; const t0 = name === "end" ? TL.END - 4.0 : SC[name].t0 - (i ? .4 : 0);
+    const nxt = i + 1 < order.length ? SC[order[i + 1]].t0 - .4 : (name === "end" ? 1e9 : TL.END - 4.0);
+    const v = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2));
+    op(s.g, v); if (v <= 0) return;
+    tf(s.g, `translate(960 540) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(-960 -540)`);
+    moveBubbles(s.b, t); s.run(t);
+  });
+  drawConfetti(t); drawKW(t); drawCaps(t);
+  set($("prog"), "width", 1920 * clamp(t / TL.END));
+  op($("tag"), ramp(t, .2, .6) * (1 - ramp(t, TL.END - 4.2, TL.END - 3.8)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+document.fonts.ready.then(() => { window.READY = true; });
+</script>
+</body></html>

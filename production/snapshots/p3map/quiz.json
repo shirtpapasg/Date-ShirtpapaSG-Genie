@@ -1,0 +1,1738 @@
+{
+ "p3-1-2": [
+  {
+   "topic": "Floating",
+   "text": "The toy boat floats on water. Does it need water to live?",
+   "options": [
+    "No. It floats on water but does not use it.",
+    "Yes. It floats on the pond all day, so it must need water.",
+    "Yes. It gets wet, so it must need water.",
+    "Yes. Boats drink water."
+   ],
+   "answer": 0,
+   "why": "Floating on water is not the same as needing it. The boat is non-living. It does not need water, food or air."
+  },
+  {
+   "topic": "Needs",
+   "text": "What does the bean plant need to stay alive and grow?",
+   "options": [
+    "Water, food and air.",
+    "Only water.",
+    "Only sunshine.",
+    "Nothing. Plants are not living."
+   ],
+   "answer": 0,
+   "why": "The bean plant is living. It needs water, food and air to stay alive and grow."
+  },
+  {
+   "topic": "Wind",
+   "text": "A toy boat moves across a pond when the wind blows. Is it living?",
+   "options": [
+    "No. The wind pushes it. It does not need food.",
+    "Yes. It moves across the pond, so it is living.",
+    "Yes. It is on the water, so it is living.",
+    "Yes. All boats are living."
+   ],
+   "answer": 0,
+   "why": "Moving in the wind is not a clue for living. A living thing needs water, food and air, and can grow."
+  },
+  {
+   "topic": "Air",
+   "text": "Why does a bean plant need air?",
+   "options": [
+    "Living things need air to stay alive.",
+    "Air makes the plant float on water.",
+    "Air keeps its leaves dry in the rain.",
+    "It does not need air."
+   ],
+   "answer": 0,
+   "why": "All living things need air. The bean plant used the air it was given."
+  },
+  {
+   "topic": "Sorting",
+   "text": "Which of these needs water, food and air?",
+   "options": [
+    "A kitten",
+    "A toy boat",
+    "A stone",
+    "A kite"
+   ],
+   "answer": 0,
+   "why": "A kitten is living, so it needs water, food and air. The boat, the stone and the kite are non-living."
+  }
+ ],
+ "p3-1-3": [
+  {
+   "topic": "Toy",
+   "text": "A toy chick moves when it is wound up. Is it living?",
+   "options": [
+    "No. It moves, but it does not need food or air.",
+    "Yes. It moves when it is wound up, so it is living.",
+    "Yes. It looks like a baby chick, so it is living.",
+    "Yes. It makes a sound, so it is living."
+   ],
+   "answer": 0,
+   "why": "One clue is not enough. A living thing shows all six clues. A wound-up toy shows only movement."
+  },
+  {
+   "topic": "Clues",
+   "text": "How many of the six clues does a living thing show?",
+   "options": [
+    "All six.",
+    "Only one.",
+    "Any three.",
+    "None."
+   ],
+   "answer": 0,
+   "why": "The hen showed all six clues. The lamp showed none. Living things show all six."
+  },
+  {
+   "topic": "Kite",
+   "text": "A kite flies high in the wind. Is it living?",
+   "options": [
+    "No. The wind moves it. It does not need food.",
+    "Yes. It flies high in the sky, so it is living.",
+    "Yes. It is up in the air, so it must need air.",
+    "Yes. It is colourful, so it is living."
+   ],
+   "answer": 0,
+   "why": "A kite only moves because the wind pushes it. It shows none of the six clues."
+  },
+  {
+   "topic": "Goldfish",
+   "text": "Which clue shows that a goldfish is living?",
+   "options": [
+    "It eats food and grows.",
+    "It is orange with shiny scales.",
+    "It lives in a bowl on a shelf.",
+    "It is small and fits in a hand."
+   ],
+   "answer": 0,
+   "why": "Eating, growing, needing water and air, responding and making young ones are the clues. Colour and size are not."
+  },
+  {
+   "topic": "Respond",
+   "text": "What does \"respond\" mean for a living thing?",
+   "options": [
+    "It reacts to a change around it.",
+    "It gives out light in a dark room.",
+    "It floats on a pond in the sun.",
+    "It is heavy and hard to lift."
+   ],
+   "answer": 0,
+   "why": "Living things respond to changes around them. The hen moved when something changed. The lamp did not."
+  }
+ ],
+ "p3-2-1a": [
+  {
+   "topic": "Closed flower",
+   "text": "A hibiscus has no flower open today. Which group is it in?",
+   "options": [
+    "Flowering. It can make a flower.",
+    "Non-flowering, because no flower is open now.",
+    "Non-flowering, because it has leaves.",
+    "Neither group."
+   ],
+   "answer": 0,
+   "why": "A flowering plant does not always have a flower open. It still belongs to the flowering group."
+  },
+  {
+   "topic": "Tall plant",
+   "text": "A tall plant can never make a flower. Which group is it in?",
+   "options": [
+    "Non-flowering.",
+    "Flowering, because it is tall.",
+    "Flowering, because it has leaves and roots.",
+    "Flowering, because it is green."
+   ],
+   "answer": 0,
+   "why": "Only one thing decides the group: can it make a flower? Height, leaves and roots do not."
+  },
+  {
+   "topic": "Spore bags",
+   "text": "A short spiky plant has spore bags under its leaves. Which group is it in?",
+   "options": [
+    "Non-flowering. It makes spores.",
+    "Flowering, because it is short and small.",
+    "Non-flowering, because it is spiky.",
+    "Flowering, because it is green."
+   ],
+   "answer": 0,
+   "why": "Spore bags are the clue. Plants with spores do not make flowers. Being spiky is not the rule."
+  },
+  {
+   "topic": "Seeds",
+   "text": "What do flowering plants use to make seeds?",
+   "options": [
+    "Their flowers.",
+    "Their leaves and stems.",
+    "Their roots in the soil.",
+    "Their spores."
+   ],
+   "answer": 0,
+   "why": "Flowering plants make seeds inside a flower."
+  },
+  {
+   "topic": "Spores",
+   "text": "What do non-flowering plants like ferns use to reproduce?",
+   "options": [
+    "Spores.",
+    "Flowers.",
+    "Fruit.",
+    "Seeds from a flower."
+   ],
+   "answer": 0,
+   "why": "Non-flowering plants make spores instead of flowers."
+  }
+ ],
+ "p3-2-1b": [
+  {
+   "topic": "Legs",
+   "text": "An animal with eight legs sits on a web. Is it an insect?",
+   "options": [
+    "No. An insect has six legs. This is a spider.",
+    "Yes. It is small and has a hard body, so it is an insect.",
+    "Yes. It has no fur, so it is an insect.",
+    "Yes. It sits on a web in the garden, so it is an insect."
+   ],
+   "answer": 0,
+   "why": "Count the legs. An insect has six legs and a hard case. Eight legs is a spider."
+  },
+  {
+   "topic": "Water",
+   "text": "A furry animal swims and feeds its young with milk. What is it?",
+   "options": [
+    "A mammal, because it has fur and milk.",
+    "A fish, because it swims and lives in water.",
+    "A fish, because it swims and has no legs.",
+    "An amphibian, because it swims in ponds."
+   ],
+   "answer": 0,
+   "why": "Living in water does not always mean fish. Fur and feeding young with milk are mammal clues."
+  },
+  {
+   "topic": "Feathers",
+   "text": "A feathered animal cannot fly. Is it a bird?",
+   "options": [
+    "Yes. Feathers decide the group.",
+    "No. It cannot fly high in the sky, so it is not a bird.",
+    "No. It walks on land on two legs, so it is a reptile.",
+    "No. Only flying animals are birds."
+   ],
+   "answer": 0,
+   "why": "Feathers, not flight, decide the group. A bird that cannot fly is still a bird."
+  },
+  {
+   "topic": "Moist skin",
+   "text": "An animal has moist skin and lays its eggs in water. What is it?",
+   "options": [
+    "An amphibian.",
+    "A fish, because it lives in water.",
+    "A reptile, because it has four legs.",
+    "A mammal, because it has skin."
+   ],
+   "answer": 0,
+   "why": "Moist skin and eggs laid in water are the amphibian clues, like the frog."
+  },
+  {
+   "topic": "Insects",
+   "text": "How many legs does an insect have?",
+   "options": [
+    "Six.",
+    "Eight.",
+    "Four.",
+    "Any number, if it is small."
+   ],
+   "answer": 0,
+   "why": "An insect has six legs and a hard case. Eight legs is a spider."
+  }
+ ],
+ "p3-2-2": [
+  {
+   "topic": "Microscope",
+   "text": "Why do we need a microscope to see bacteria?",
+   "options": [
+    "They are too tiny to see with our eyes.",
+    "They move too fast for our eyes to follow.",
+    "They only come out at night when it is dark.",
+    "They are too far away."
+   ],
+   "answer": 0,
+   "why": "Bacteria are tiny living things. Only a microscope makes them big enough to see."
+  },
+  {
+   "topic": "Mushroom",
+   "text": "Does a mushroom make its own food?",
+   "options": [
+    "No. It soaks up food from around it.",
+    "Yes, it makes food in its cap, like a plant.",
+    "Only in the dark, under the soil.",
+    "Only when it rains for a whole day."
+   ],
+   "answer": 0,
+   "why": "A mushroom is a fungus, not a plant. Fungi cannot make their own food."
+  },
+  {
+   "topic": "Bacteria",
+   "text": "Do all bacteria make us unwell?",
+   "options": [
+    "No. Some bacteria help us, like in yoghurt.",
+    "Yes, all bacteria are harmful and make us ill.",
+    "No, only fungi can make us unwell.",
+    "Yes, every germ is bad for our bodies."
+   ],
+   "answer": 0,
+   "why": "Some bacteria help us. Some can make us unwell."
+  },
+  {
+   "topic": "Fungi",
+   "text": "Which of these is a fungus?",
+   "options": [
+    "Yeast.",
+    "A tiny stick-shaped bacterium.",
+    "A bean plant in a pot.",
+    "A hen on a farm."
+   ],
+   "answer": 0,
+   "why": "Yeast is a fungus. Mushrooms and bread mould are fungi too."
+  },
+  {
+   "topic": "Mould",
+   "text": "Is the mould on old bread alive?",
+   "options": [
+    "Yes. Mould is a living fungus.",
+    "No, it is just a dark stain on the bread.",
+    "No, it only grows on plastic and stones.",
+    "No, it is only dust that fell on it."
+   ],
+   "answer": 0,
+   "why": "Mould is a fungus. It is living: it grows and spreads over the bread."
+  }
+ ],
+ "p3-2-3": [
+  {
+   "topic": "Water",
+   "text": "A creature spends all day in a pond. What can you say?",
+   "options": [
+    "You need more clues before you decide.",
+    "It must be a fish, because it lives in water.",
+    "It must be an amphibian, because it swims.",
+    "It must be a mammal."
+   ],
+   "answer": 0,
+   "why": "Many groups live in water. Check its covering and how its young are born before you decide."
+  },
+  {
+   "topic": "Scales",
+   "text": "A creature with dry scales lays eggs on a warm bank. What is it?",
+   "options": [
+    "A reptile.",
+    "A fish, because it swims well.",
+    "An amphibian, because it is near water.",
+    "A bird, because it lays eggs."
+   ],
+   "answer": 0,
+   "why": "Dry scales and eggs laid on land are reptile clues, even if it swims a lot."
+  },
+  {
+   "topic": "Moist skin",
+   "text": "A creature with moist skin lays eggs in a pond. What is it?",
+   "options": [
+    "An amphibian.",
+    "A fish, because it lives in water.",
+    "A reptile, because it has four legs.",
+    "An insect, because it is small."
+   ],
+   "answer": 0,
+   "why": "Moist skin and eggs laid in water are amphibian clues."
+  },
+  {
+   "topic": "Feathers",
+   "text": "A creature with feathers cannot swim at all. What is it?",
+   "options": [
+    "A bird. Feathers decide the group.",
+    "A mammal, because it cannot swim.",
+    "A reptile, because it walks on land.",
+    "A fish that lost its scales."
+   ],
+   "answer": 0,
+   "why": "Feathers mean bird, whether or not it swims or flies."
+  },
+  {
+   "topic": "Evidence",
+   "text": "What does \"evidence\" mean when you decide a group?",
+   "options": [
+    "What you observe, like its covering and how its young are born.",
+    "A guess about how the animal looks.",
+    "The name of the animal.",
+    "What you hope it is."
+   ],
+   "answer": 0,
+   "why": "Evidence is what you observe. Good conclusions come from checking all of it."
+  }
+ ],
+ "p3-3-1": [
+  {
+   "topic": "Parts",
+   "text": "A backpack has a fabric body, a metal zip and a plastic tag. How many materials is it made of?",
+   "options": [
+    "Three",
+    "One, because it is one object",
+    "Two",
+    "None, a backpack is not a material"
+   ],
+   "answer": 0,
+   "why": "Fabric, metal and plastic are three different materials. One object can be made of many materials."
+  },
+  {
+   "topic": "Cups",
+   "text": "Two cups look the same shape. Are they always made of the same material?",
+   "options": [
+    "No, they can be different",
+    "Yes, always",
+    "Only if one is cracked",
+    "Yes, because they hold drinks"
+   ],
+   "answer": 0,
+   "why": "The same kind of object can be made of different materials. One cup can be plastic, the other ceramic."
+  },
+  {
+   "topic": "Material",
+   "text": "Which of these names a material, not an object?",
+   "options": [
+    "Metal",
+    "Spoon",
+    "Chair",
+    "Mug"
+   ],
+   "answer": 0,
+   "why": "Metal is a material. A spoon, a chair and a mug are objects that can be made of metal."
+  },
+  {
+   "topic": "Ruler",
+   "text": "A ruler can be made of wood or of plastic. What does this show?",
+   "options": [
+    "The same kind of object can use different materials",
+    "All rulers must be wood",
+    "Materials never repeat",
+    "A ruler is a material"
+   ],
+   "answer": 0,
+   "why": "A ruler is one kind of object. It can be made of wood, plastic or even metal."
+  },
+  {
+   "topic": "Objects",
+   "text": "Which sentence is true?",
+   "options": [
+    "One material can make many different objects",
+    "A material can only make one object",
+    "Every object is made of exactly one material",
+    "Objects and materials are the same thing"
+   ],
+   "answer": 0,
+   "why": "Wood can make a ruler, a chair and a door. One material can make many objects."
+  }
+ ],
+ "p3-3-2": [
+  {
+   "topic": "Strong",
+   "text": "A material that holds a heavy load without breaking is called",
+   "options": [
+    "strong",
+    "bendy",
+    "see-through",
+    "soft"
+   ],
+   "answer": 0,
+   "why": "Strong means it can hold a heavy load without breaking."
+  },
+  {
+   "topic": "Results",
+   "text": "The paper strip snapped after 2 weights. The plastic strip snapped after 6. Which is stronger?",
+   "options": [
+    "Plastic",
+    "Paper",
+    "Both the same",
+    "Neither, both snapped"
+   ],
+   "answer": 0,
+   "why": "Plastic held more weights before it snapped, so plastic is stronger."
+  },
+  {
+   "topic": "Bending",
+   "text": "A strip bends a lot before it breaks. Does that make it strong?",
+   "options": [
+    "No. Strong means it holds a load.",
+    "Yes, bending a lot means it is strong.",
+    "Yes, but only for metal.",
+    "Yes, bending is the same as strong."
+   ],
+   "answer": 0,
+   "why": "Bending is a different test. Strong is about holding a load without breaking."
+  },
+  {
+   "topic": "Fair test",
+   "text": "Which is a fair way to test strength?",
+   "options": [
+    "Use strips of the same length and width",
+    "Use strips of different lengths",
+    "Add all the weights at once",
+    "Test only one strip"
+   ],
+   "answer": 0,
+   "why": "Only the material should be different. The strips must be the same size."
+  },
+  {
+   "topic": "Scissors",
+   "text": "Scissors are made of metal mainly because metal is",
+   "options": [
+    "strong",
+    "see-through",
+    "soft",
+    "light"
+   ],
+   "answer": 0,
+   "why": "Scissors must push hard without breaking. Metal is strong."
+  }
+ ],
+ "p3-3-3": [
+  {
+   "topic": "Flexible",
+   "text": "A material that bends without breaking is called",
+   "options": [
+    "flexible",
+    "strong",
+    "see-through",
+    "hard"
+   ],
+   "answer": 0,
+   "why": "Flexible means it bends without breaking."
+  },
+  {
+   "topic": "Results",
+   "text": "The wood bent 2 cm. The plastic bent 6 cm under the same weight. Which is more flexible?",
+   "options": [
+    "Plastic",
+    "Wood",
+    "Both the same",
+    "Neither"
+   ],
+   "answer": 0,
+   "why": "Plastic bent further under the same weight, so plastic is more flexible."
+  },
+  {
+   "topic": "Glass",
+   "text": "A glass sheet cracks after bending only a little. Is glass flexible?",
+   "options": [
+    "No. It breaks before it bends much.",
+    "Yes. Any bending at all means it is flexible.",
+    "Yes. Glass is see-through.",
+    "Yes. Glass is smooth."
+   ],
+   "answer": 0,
+   "why": "Flexible means bending without breaking. Glass breaks, so it is not flexible."
+  },
+  {
+   "topic": "Fair test",
+   "text": "Which is a fair way to test how much strips bend?",
+   "options": [
+    "Use strips of the same length and thickness",
+    "Use a different weight for each strip",
+    "Test only one strip",
+    "Use a longer plastic strip"
+   ],
+   "answer": 0,
+   "why": "Only the material should change. Same length, same thickness, same weight."
+  },
+  {
+   "topic": "Rubber",
+   "text": "A rubber band bends a lot and does not snap. Rubber is",
+   "options": [
+    "flexible",
+    "not flexible",
+    "see-through",
+    "hard"
+   ],
+   "answer": 0,
+   "why": "Rubber bends a lot without breaking, so it is flexible."
+  }
+ ],
+ "p3-3-5": [
+  {
+   "topic": "Keeps water out",
+   "text": "Which sheet did not let water through in our test?",
+   "options": [
+    "Plastic",
+    "Paper",
+    "Neither sheet",
+    "Both sheets"
+   ],
+   "answer": 0,
+   "why": "The drops sat on top of the plastic as beads. Underneath stayed dry."
+  },
+  {
+   "topic": "Paper",
+   "text": "On the paper sheet, the water drops",
+   "options": [
+    "soaked in and spread",
+    "sat on top as small round beads",
+    "bounced away off the table",
+    "turned into fizzy bubbles"
+   ],
+   "answer": 0,
+   "why": "Paper soaks up water. The drops made a dark patch that grew."
+  },
+  {
+   "topic": "Fair test",
+   "text": "To keep the test fair, what should stay the same for both sheets?",
+   "options": [
+    "The sheet size and number of drops",
+    "The colour and the shape of the sheet",
+    "The time of day and the weather",
+    "The name written on the sheet"
+   ],
+   "answer": 0,
+   "why": "Only the material should change. Same size, same number of drops."
+  },
+  {
+   "topic": "Raincoat",
+   "text": "A pupil wants to make a raincoat. Which material should be chosen?",
+   "options": [
+    "Plastic, because it keeps water out",
+    "Fabric, because it is soft and soaks up water",
+    "Paper, because it is light and cheap to buy",
+    "Paper towel, because it is soft and thick"
+   ],
+   "answer": 0,
+   "why": "A raincoat must keep water out. Plastic does not let water through."
+  },
+  {
+   "topic": "Soaks up",
+   "text": "Which material soaks up water fastest?",
+   "options": [
+    "Paper towel",
+    "Plastic sheet",
+    "Glass sheet",
+    "Metal sheet"
+   ],
+   "answer": 0,
+   "why": "Paper towel soaks water up. Plastic, glass and metal do not let water through."
+  }
+ ],
+ "p3-3-6": [
+  {
+   "topic": "Metal",
+   "text": "Metal blocked every dot in our test. Metal lets",
+   "options": [
+    "no light through",
+    "most light through",
+    "some light through",
+    "light through only at night"
+   ],
+   "answer": 0,
+   "why": "No dots lit up behind the metal sheet. Metal lets no light through."
+  },
+  {
+   "topic": "Clear",
+   "text": "Clear plastic lit up all five dots. Clear plastic lets",
+   "options": [
+    "most light through",
+    "some light through",
+    "no light through",
+    "light through only when wet"
+   ],
+   "answer": 0,
+   "why": "All five dots lit up sharp and bright. Clear plastic lets most light through."
+  },
+  {
+   "topic": "Shadow",
+   "text": "Which sheet made a dark shadow on the screen?",
+   "options": [
+    "The metal sheet",
+    "The clear sheet",
+    "The frosted sheet",
+    "None of the sheets"
+   ],
+   "answer": 0,
+   "why": "The metal sheet lets no light through, so it makes a dark shadow."
+  },
+  {
+   "topic": "Frosted",
+   "text": "Frosted plastic lit up 2 of the 5 dots, and they looked blurry. Frosted plastic lets",
+   "options": [
+    "some light through",
+    "most light through",
+    "no light through",
+    "light through only up close"
+   ],
+   "answer": 0,
+   "why": "A few blurry dots means some light gets through, but not most."
+  },
+  {
+   "topic": "Fair test",
+   "text": "Which is a fair way to test how much light passes through?",
+   "options": [
+    "Use the same torch and distance each time",
+    "Use a brighter torch for one of the sheets",
+    "Test each sheet in a different dark room",
+    "Move the screen closer for each sheet"
+   ],
+   "answer": 0,
+   "why": "Only the sheet should change. Same torch, same distance, same screen."
+  }
+ ],
+ "p3-3-7": [
+  {
+   "topic": "Raincoat",
+   "text": "A raincoat is made of plastic mainly because plastic",
+   "options": [
+    "does not let water through",
+    "is strong enough to carry heavy bags",
+    "lets light through into the room",
+    "is shiny and pleasant to touch"
+   ],
+   "answer": 0,
+   "why": "A raincoat must keep rain out. Plastic does not let water through."
+  },
+  {
+   "topic": "Window",
+   "text": "A window is made of glass mainly because glass",
+   "options": [
+    "lets light through",
+    "is flexible and bends in the wind",
+    "soaks up water from the rain",
+    "is heavy and hard to carry"
+   ],
+   "answer": 0,
+   "why": "We look through windows. Glass lets light through."
+  },
+  {
+   "topic": "Light",
+   "text": "Which object needs a material that lets light through?",
+   "options": [
+    "A window",
+    "A raincoat",
+    "A school bag",
+    "Scissors"
+   ],
+   "answer": 0,
+   "why": "We look through a window. Glass lets light through."
+  },
+  {
+   "topic": "Strap",
+   "text": "A school bag strap is made of fabric mainly because fabric",
+   "options": [
+    "bends and folds easily",
+    "lets no light through",
+    "is see-through",
+    "soaks up water from the rain"
+   ],
+   "answer": 0,
+   "why": "A strap must bend with you. Fabric is flexible."
+  },
+  {
+   "topic": "Scissors",
+   "text": "Scissors are made of metal mainly because metal",
+   "options": [
+    "is strong",
+    "is flexible",
+    "soaks up water",
+    "is see-through"
+   ],
+   "answer": 0,
+   "why": "Scissors push hard when they cut. Metal is strong and hard."
+  }
+ ],
+ "p3-3-8": [
+  {
+   "topic": "Why improve",
+   "text": "Why do we improve an object?",
+   "options": [
+    "To make it work better",
+    "To make it look different and colourful",
+    "To use up more of the materials",
+    "To make it heavier to carry around"
+   ],
+   "answer": 0,
+   "why": "We change a material so the object does its job better."
+  },
+  {
+   "topic": "Strap",
+   "text": "A paper strap tore easily. What is a good replacement?",
+   "options": [
+    "Fabric, because it bends and is strong",
+    "Glass, because it is hard and see-through",
+    "Another paper strap, but a thicker one",
+    "Paper towel, because it is soft and thick"
+   ],
+   "answer": 0,
+   "why": "A strap must bend and be strong. Fabric does both."
+  },
+  {
+   "topic": "Any change",
+   "text": "Does any new material always make an object better?",
+   "options": [
+    "No, it must suit the job",
+    "Yes, any change at all helps a lot",
+    "Only if it is made of metal or glass",
+    "Yes, if it is a new colour or shape"
+   ],
+   "answer": 0,
+   "why": "Glass on a strap would break. The new material must suit the job."
+  },
+  {
+   "topic": "Vase",
+   "text": "A leaking vase needs a material that",
+   "options": [
+    "does not let water through",
+    "lets light through the sides",
+    "bends easily when it is held",
+    "soaks up water"
+   ],
+   "answer": 0,
+   "why": "A vase holds water, so its material must not let water through."
+  },
+  {
+   "topic": "Testing",
+   "text": "Which shows an improvement was really tested?",
+   "options": [
+    "Comparing the weights before and after",
+    "Saying it looks much better than before",
+    "Guessing which strap looks stronger",
+    "Asking a friend if it looks strong"
+   ],
+   "answer": 0,
+   "why": "A test compares before and after. 2 weights before, 6 weights after."
+  }
+ ],
+ "p3-4-1": [
+  {
+   "topic": "Pairs",
+   "text": "Which pair is a young living thing and the adult it grows into?",
+   "options": [
+    "Puppy and dog",
+    "Puppy and cat",
+    "Kitten and dog",
+    "Seed and stone"
+   ],
+   "answer": 0,
+   "why": "A puppy grows into a dog, its own kind. A kitten grows into a cat."
+  },
+  {
+   "topic": "Growing",
+   "text": "What happens to a young living thing over time?",
+   "options": [
+    "It grows into an adult",
+    "It stays the same size",
+    "It turns into a different kind",
+    "It shrinks"
+   ],
+   "answer": 0,
+   "why": "Every living thing starts small and grows into an adult over time."
+  },
+  {
+   "topic": "Alike",
+   "text": "A child and an adult person are alike because",
+   "options": [
+    "both have the same body parts",
+    "both are the same height and weight",
+    "both are the same age",
+    "both have the same shoes"
+   ],
+   "answer": 0,
+   "why": "The body parts are the same. The adult is bigger because it has grown more."
+  },
+  {
+   "topic": "Seed",
+   "text": "A seed grows into",
+   "options": [
+    "an adult plant",
+    "a small baby animal",
+    "a smooth round stone",
+    "a bigger seed"
+   ],
+   "answer": 0,
+   "why": "A seed grows into a plant of its own kind."
+  },
+  {
+   "topic": "Different",
+   "text": "The adult is different from the young because the adult",
+   "options": [
+    "has grown more",
+    "is a different kind",
+    "is smaller",
+    "is non-living"
+   ],
+   "answer": 0,
+   "why": "The adult is the same kind, but it has grown bigger over time."
+  }
+ ],
+ "p3-4-2": [
+  {
+   "topic": "Stages",
+   "text": "What are the three stages of a plant's life cycle, in order?",
+   "options": [
+    "Seed, seedling, adult plant",
+    "Seedling, seed, adult plant",
+    "Adult plant, seed, seedling",
+    "Seed, adult plant, seedling"
+   ],
+   "answer": 0,
+   "why": "A seed grows into a seedling, and the seedling grows into an adult plant."
+  },
+  {
+   "topic": "Starting",
+   "text": "What does a seed need to start growing?",
+   "options": [
+    "Water, air and the right warmth",
+    "Only strong bright light from the sun",
+    "Flowers",
+    "Fruit"
+   ],
+   "answer": 0,
+   "why": "Both seeds started growing, even the one in the dark. A seed needs water, air and warmth to start."
+  },
+  {
+   "topic": "Light",
+   "text": "The seedling in the dark box was pale and weak. Why?",
+   "options": [
+    "A seedling needs light to grow well",
+    "It was given far too much water every day",
+    "It was too warm",
+    "Seeds cannot grow in pots"
+   ],
+   "answer": 0,
+   "why": "A seedling needs light to grow well. Without light it turns pale and weak."
+  },
+  {
+   "topic": "New seeds",
+   "text": "Where do a plant's new seeds come from?",
+   "options": [
+    "Inside the fruit of the adult plant",
+    "From the roots under the ground",
+    "From the damp soil around its roots",
+    "From the seedling's leaves"
+   ],
+   "answer": 0,
+   "why": "The adult plant grows flowers, then fruit. The new seeds are inside the fruit."
+  },
+  {
+   "topic": "Height",
+   "text": "On the windowsill, the sunny seedling grew from 1 cm to 12 cm. What does this show?",
+   "options": [
+    "A seedling grows taller over the days",
+    "A seedling stays the same height each day",
+    "A seedling gets shorter",
+    "Seedlings grow only at night"
+   ],
+   "answer": 0,
+   "why": "A seedling grows taller each day when it has water, air and light."
+  }
+ ],
+ "p3-5-1": [
+  {
+   "topic": "Three stages",
+   "text": "Which animal has three stages: egg, young and adult?",
+   "options": [
+    "Grasshopper",
+    "Butterfly",
+    "Mosquito",
+    "Beetle"
+   ],
+   "answer": 0,
+   "why": "A grasshopper has three stages. A butterfly, a mosquito and a beetle have four, with a pupa."
+  },
+  {
+   "topic": "Pupa",
+   "text": "What happens inside the pupa?",
+   "options": [
+    "The adult forms",
+    "The egg is laid",
+    "The animal eats a lot",
+    "The animal turns back into an egg"
+   ],
+   "answer": 0,
+   "why": "The pupa does not eat. Inside it, the adult is forming."
+  },
+  {
+   "topic": "Tadpole",
+   "text": "A frog has three stages. Does the tadpole look like the adult frog?",
+   "options": [
+    "No, it has a tail and lives in water",
+    "Yes, it looks exactly the same as the frog",
+    "Yes, but it is a lot smaller",
+    "It has wings"
+   ],
+   "answer": 0,
+   "why": "Three stages does not mean the young looks like the adult. A tadpole looks nothing like a frog."
+  },
+  {
+   "topic": "Caterpillar",
+   "text": "A caterpillar is the young of which animal?",
+   "options": [
+    "Butterfly",
+    "Grasshopper",
+    "Frog",
+    "Chicken"
+   ],
+   "answer": 0,
+   "why": "A caterpillar hatches from a butterfly egg, becomes a pupa, then an adult butterfly."
+  },
+  {
+   "topic": "Four stages",
+   "text": "The four stages of a mosquito, in order, are",
+   "options": [
+    "egg, larva, pupa, adult",
+    "egg, pupa, larva, adult",
+    "larva, egg, pupa, adult",
+    "egg, young, adult, pupa"
+   ],
+   "answer": 0,
+   "why": "Egg, then larva in the water, then pupa, then the adult flies away."
+  }
+ ],
+ "p3-5-2": [
+  {
+   "topic": "Eggs",
+   "text": "Two animals both start as an egg. Must they have the same number of stages?",
+   "options": [
+    "No. A mosquito has four stages, a cockroach has three.",
+    "Yes, always.",
+    "Yes, if both are insects.",
+    "Yes, if both are small."
+   ],
+   "answer": 0,
+   "why": "Starting as an egg does not fix the number of stages. The mosquito has a pupa; the cockroach does not."
+  },
+  {
+   "topic": "Young",
+   "text": "A chicken and a frog both have three stages. Do their young look alike?",
+   "options": [
+    "No. A chick looks like a hen, a tadpole looks nothing like a frog.",
+    "Yes, exactly alike.",
+    "Yes. A chick and a tadpole both have feathers, so they look alike.",
+    "Yes, both have tails."
+   ],
+   "answer": 0,
+   "why": "The same number of stages does not mean the young look alike."
+  },
+  {
+   "topic": "Pupa",
+   "text": "Which of these has a pupa stage?",
+   "options": [
+    "Mosquito",
+    "Cockroach",
+    "Chicken",
+    "Frog"
+   ],
+   "answer": 0,
+   "why": "Only four-stage animals like the mosquito and butterfly have a pupa."
+  },
+  {
+   "topic": "Comparing",
+   "text": "When we compare two life cycles, we look for",
+   "options": [
+    "what is alike and what is different",
+    "only what is alike in the two life cycles",
+    "only what is different",
+    "which animal is bigger"
+   ],
+   "answer": 0,
+   "why": "Comparing means finding both the likenesses and the differences."
+  },
+  {
+   "topic": "Cockroach",
+   "text": "The stages of a cockroach, in order, are",
+   "options": [
+    "egg, young, adult",
+    "egg, larva, pupa, adult",
+    "egg, tadpole, adult",
+    "young, egg, adult"
+   ],
+   "answer": 0,
+   "why": "A cockroach has three stages. The young looks like a small adult without wings."
+  }
+ ],
+ "p3-6-1a": [
+  {
+   "topic": "Attract",
+   "text": "A red end faces a blue end. What happens when the magnets slide close?",
+   "options": [
+    "They attract and stick together",
+    "They repel and move apart from each other",
+    "Nothing happens",
+    "They spin round"
+   ],
+   "answer": 0,
+   "why": "Unlike poles, one red and one blue, attract."
+  },
+  {
+   "topic": "Repel",
+   "text": "Two red ends face each other. What happens?",
+   "options": [
+    "They repel and move apart",
+    "They attract and stick together",
+    "They always stick, whatever ends face",
+    "They melt"
+   ],
+   "answer": 0,
+   "why": "Like poles, both red or both blue, repel."
+  },
+  {
+   "topic": "Turning",
+   "text": "A magnet is turned round so the other end faces. Does it stop being a magnet?",
+   "options": [
+    "No. It still attracts or repels, depending on the ends.",
+    "Yes. Turning it round makes it stop working for good.",
+    "Yes, until it is turned back.",
+    "Only bar magnets keep working."
+   ],
+   "answer": 0,
+   "why": "Turning a magnet only changes which end faces. Both ends are still poles."
+  },
+  {
+   "topic": "Shape",
+   "text": "Can U-shaped magnets repel each other?",
+   "options": [
+    "Yes, when like poles face",
+    "No, only bar magnets repel",
+    "No, U-shaped magnets only attract",
+    "Only if they are big"
+   ],
+   "answer": 0,
+   "why": "The rule is the same for every shape: like poles repel."
+  },
+  {
+   "topic": "Poles",
+   "text": "Which pair of poles will attract?",
+   "options": [
+    "Red and blue",
+    "Red and red",
+    "Blue and blue",
+    "None of them"
+   ],
+   "answer": 0,
+   "why": "Unlike poles attract. Like poles repel."
+  }
+ ],
+ "p3-6-1b": [
+  {
+   "topic": "Metal",
+   "text": "Does a magnet attract anything made of metal?",
+   "options": [
+    "No. It attracts only some metals, like iron and steel.",
+    "Yes, every metal.",
+    "Yes, if the metal is shiny.",
+    "Yes, if the metal is heavy."
+   ],
+   "answer": 0,
+   "why": "The copper coin and the foil are metal, but the magnet did not attract them."
+  },
+  {
+   "topic": "Foil",
+   "text": "Why was the shiny foil not attracted?",
+   "options": [
+    "It is not made of a magnetic material",
+    "It was too thin for the magnet to hold",
+    "It was too shiny for the magnet to grip",
+    "The magnet was tired"
+   ],
+   "answer": 0,
+   "why": "Shiny does not mean magnetic. Foil is not iron or steel."
+  },
+  {
+   "topic": "Plastic",
+   "text": "Can a plastic ruler become magnetic if it is painted grey?",
+   "options": [
+    "No. Paint does not change what it is made of.",
+    "Yes, grey paint turns it into a magnetic material.",
+    "Yes, any paint works.",
+    "Only if the paint is thick."
+   ],
+   "answer": 0,
+   "why": "A magnet attracts because of the material, not the colour."
+  },
+  {
+   "topic": "Magnetic",
+   "text": "Which object is magnetic?",
+   "options": [
+    "An iron nail",
+    "A copper coin",
+    "A wooden block",
+    "A plastic ruler"
+   ],
+   "answer": 0,
+   "why": "Iron is a magnetic material. The nail jumped to the magnet."
+  },
+  {
+   "topic": "Clip",
+   "text": "A steel paper clip shivers and then jumps to the magnet. This shows that steel is",
+   "options": [
+    "a magnetic material",
+    "a non-magnetic material",
+    "not a metal",
+    "made of plastic"
+   ],
+   "answer": 0,
+   "why": "Steel is attracted by a magnet, so steel is a magnetic material."
+  }
+ ],
+ "p3-6-2": [
+  {
+   "topic": "Poles",
+   "text": "Where does a magnet attract most strongly?",
+   "options": [
+    "At its two ends, the poles",
+    "In the middle",
+    "All over, the same",
+    "Only at the red end, not the blue end"
+   ],
+   "answer": 0,
+   "why": "Both ends held 8 clips. The middle held only 1."
+  },
+  {
+   "topic": "Shape",
+   "text": "Does a U-shaped magnet have poles?",
+   "options": [
+    "Yes, at its two ends",
+    "No, only bar magnets have poles",
+    "Yes, in the middle",
+    "Only when it is warm"
+   ],
+   "answer": 0,
+   "why": "Every magnet has two poles, whatever its shape."
+  },
+  {
+   "topic": "Counting",
+   "text": "Why do we count the clips?",
+   "options": [
+    "More clips means a stronger attraction at that spot",
+    "Clips are easy to find",
+    "The number of clips does not tell us anything at all",
+    "To make the magnet heavier"
+   ],
+   "answer": 0,
+   "why": "The number of clips tells us how strongly that spot attracts."
+  },
+  {
+   "topic": "Fewest",
+   "text": "Which spot of the bar magnet held the fewest clips?",
+   "options": [
+    "The middle",
+    "The red end",
+    "The blue end",
+    "All held the same"
+   ],
+   "answer": 0,
+   "why": "The middle held only 1 clip. Each end held 8."
+  },
+  {
+   "topic": "Middle",
+   "text": "The middle of the bar magnet held 1 clip. The ends held 8. This shows",
+   "options": [
+    "the ends attract more strongly than the middle",
+    "the middle is the strongest",
+    "the magnet is broken because the middle held so few",
+    "the clips were too heavy"
+   ],
+   "answer": 0,
+   "why": "More clips at the ends means stronger attraction at the poles."
+  }
+ ],
+ "p3-6-3a": [
+  {
+   "topic": "Unlike",
+   "text": "Red faces blue. What do the carts do?",
+   "options": [
+    "They roll together",
+    "They stay apart",
+    "They stay still",
+    "They roll backwards"
+   ],
+   "answer": 0,
+   "why": "Unlike poles attract, so the carts roll together."
+  },
+  {
+   "topic": "Like",
+   "text": "Red faces red. What do the carts do?",
+   "options": [
+    "They stay apart",
+    "They roll together",
+    "They always bump",
+    "They spin"
+   ],
+   "answer": 0,
+   "why": "Like poles repel, so the carts stay apart."
+  },
+  {
+   "topic": "No hands",
+   "text": "Do the carts need a hand to move them apart when like poles face?",
+   "options": [
+    "No. The magnets repel without touching.",
+    "Yes, always.",
+    "Yes, unless the track is very long and flat.",
+    "Yes, magnets cannot move carts."
+   ],
+   "answer": 0,
+   "why": "Magnets attract and repel without touching. No hand is needed."
+  },
+  {
+   "topic": "Repel",
+   "text": "What does repel mean?",
+   "options": [
+    "The magnets move apart",
+    "The magnets touch and stick",
+    "The magnets stop working",
+    "The magnets get warm"
+   ],
+   "answer": 0,
+   "why": "Repel means they move apart. Attract means they come together."
+  },
+  {
+   "topic": "Always",
+   "text": "Do two magnets always roll together, whatever ends face?",
+   "options": [
+    "No. It depends which ends face.",
+    "Yes, always.",
+    "Yes, if they are both on little carts.",
+    "Yes, if they are close."
+   ],
+   "answer": 0,
+   "why": "Unlike poles attract and like poles repel. It depends which ends face."
+  }
+ ],
+ "p3-6-3b": [
+  {
+   "topic": "Gap",
+   "text": "Two ring magnets float apart with a gap. The sides facing each other are",
+   "options": [
+    "the same colour",
+    "different colours",
+    "both painted over",
+    "not magnets"
+   ],
+   "answer": 0,
+   "why": "A gap means like poles are facing. Like poles repel."
+  },
+  {
+   "topic": "Flat",
+   "text": "A ring sits flat on another ring. The sides facing each other are",
+   "options": [
+    "different colours",
+    "both painted the same colour",
+    "both red",
+    "both blue"
+   ],
+   "answer": 0,
+   "why": "Flat means unlike poles are facing. Unlike poles attract."
+  },
+  {
+   "topic": "Broken?",
+   "text": "A ring floats above another ring. Is the magnet broken?",
+   "options": [
+    "No. Like poles are repelling, which is normal.",
+    "Yes, floating means broken.",
+    "Yes, rings should always sit flat on each other.",
+    "Only if the gap is big."
+   ],
+   "answer": 0,
+   "why": "Floating is what like poles do. The magnets are working."
+  },
+  {
+   "topic": "Always?",
+   "text": "Will any two ring magnets always float apart?",
+   "options": [
+    "No. It depends which sides face.",
+    "Yes, always.",
+    "Yes, if they are exactly the same size.",
+    "No, rings never float."
+   ],
+   "answer": 0,
+   "why": "Turn one ring over and they sit flat. It depends which sides face."
+  },
+  {
+   "topic": "Hidden",
+   "text": "A ring floats above a blue side. Its hidden side must be",
+   "options": [
+    "blue",
+    "red",
+    "green",
+    "impossible to tell"
+   ],
+   "answer": 0,
+   "why": "A gap means the same colour is facing. Blue below, blue hidden."
+  }
+ ],
+ "p3-6-3c": [
+  {
+   "topic": "Magnet",
+   "text": "An object is attracted by one pole and repelled by the other. It is",
+   "options": [
+    "a magnet",
+    "a magnetic material",
+    "a non-magnetic material",
+    "broken"
+   ],
+   "answer": 0,
+   "why": "Only a magnet can be repelled, because it has poles of its own."
+  },
+  {
+   "topic": "Magnetic",
+   "text": "An object is attracted by both poles. It is",
+   "options": [
+    "a magnetic material",
+    "a magnet",
+    "a non-magnetic material",
+    "a plastic"
+   ],
+   "answer": 0,
+   "why": "A magnetic material like iron is attracted by either pole and never repelled."
+  },
+  {
+   "topic": "Attracted",
+   "text": "Must any object attracted to a magnet be a magnet itself?",
+   "options": [
+    "No. An iron nail is attracted but is not a magnet.",
+    "Yes, always.",
+    "Yes, if it is shiny and made of metal, it must be a magnet.",
+    "Yes, if it jumps."
+   ],
+   "answer": 0,
+   "why": "A magnetic material is attracted too. To be sure, test the other pole: a magnet is repelled."
+  },
+  {
+   "topic": "Repelled",
+   "text": "An object is repelled by one pole. Could it be non-magnetic?",
+   "options": [
+    "No. Only a magnet can be repelled.",
+    "Yes, non-magnetic things are repelled.",
+    "Yes, if it is light.",
+    "Yes, if it is plastic."
+   ],
+   "answer": 0,
+   "why": "A non-magnetic material does nothing near a magnet. Repelling means it is a magnet."
+  },
+  {
+   "topic": "Test",
+   "text": "Why do we test with both poles?",
+   "options": [
+    "To tell a magnet from a magnetic material",
+    "Because one pole is stronger",
+    "To make the magnet warm enough to work well",
+    "Because red is easier to see"
+   ],
+   "answer": 0,
+   "why": "Both attract a magnetic material. Only a magnet is repelled by one of them."
+  }
+ ],
+ "p3-6-4": [
+  {
+   "topic": "Settling",
+   "text": "A hanging magnet is nudged and settles again. Which way does it point?",
+   "options": [
+    "The same way as before",
+    "A different way each time",
+    "Straight up",
+    "Wherever it was pushed"
+   ],
+   "answer": 0,
+   "why": "A magnet free to turn always settles the same way: north–south."
+  },
+  {
+   "topic": "Shape",
+   "text": "Does only a bar magnet settle pointing one way?",
+   "options": [
+    "No. Any magnet free to turn does.",
+    "Yes, only long bar magnets settle like this.",
+    "Yes, only U-shaped magnets.",
+    "No magnet does."
+   ],
+   "answer": 0,
+   "why": "Hanging, floating or in a compass: any free magnet settles north–south."
+  },
+  {
+   "topic": "Compass",
+   "text": "A compass needle is",
+   "options": [
+    "a small magnet free to turn",
+    "a piece of plastic",
+    "a needle for sewing",
+    "a magnet that is stuck and never moves"
+   ],
+   "answer": 0,
+   "why": "The needle is a tiny magnet. That is why it settles north–south."
+  },
+  {
+   "topic": "Pushed",
+   "text": "Does a compass needle point wherever it is pushed?",
+   "options": [
+    "No. It swings back and settles north–south.",
+    "Yes, it stays pointing wherever you push it.",
+    "Yes, if you push gently.",
+    "It stops working if pushed."
+   ],
+   "answer": 0,
+   "why": "Push it and it swings back. A free magnet always settles the same way."
+  },
+  {
+   "topic": "Floating",
+   "text": "A magnet floats on a board in water. When it stops turning, it points",
+   "options": [
+    "north–south, like a hanging magnet",
+    "towards the nearest side of the basin",
+    "a different way every time",
+    "nowhere, it keeps spinning"
+   ],
+   "answer": 0,
+   "why": "Floating lets the magnet turn freely, so it settles north–south."
+  }
+ ],
+ "p3-7-1a": [
+  {
+   "topic": "Copper",
+   "text": "Why does an iron nail become a magnet when stroked, but a copper rod does not?",
+   "options": [
+    "Iron is a magnetic material and copper is not",
+    "Copper is too shiny and too soft to become a magnet",
+    "The copper rod was stroked too fast",
+    "Copper is too heavy"
+   ],
+   "answer": 0,
+   "why": "Only a magnetic material like iron or steel can be made into a magnet."
+  },
+  {
+   "topic": "Stroking",
+   "text": "How should we stroke the nail to make it a magnet?",
+   "options": [
+    "With one pole, the same way each time, lifting away after each stroke",
+    "Any way at all, direction does not matter",
+    "Rubbing it back and forth quickly, keeping the magnet on the nail all the time",
+    "With both poles at once"
+   ],
+   "answer": 0,
+   "why": "One pole, one direction, lift away each time. Back and forth undoes the work."
+  },
+  {
+   "topic": "More strokes",
+   "text": "A nail is stroked 40 times instead of 10. What happens to the number of clips it attracts?",
+   "options": [
+    "It attracts more clips",
+    "It attracts the same number",
+    "It attracts fewer clips",
+    "It stops attracting clips"
+   ],
+   "answer": 0,
+   "why": "More strokes make a stronger magnet, up to a point."
+  },
+  {
+   "topic": "Which",
+   "text": "Which of these will become a magnet when stroked with a bar magnet?",
+   "options": [
+    "A steel paper clip",
+    "A plastic ruler",
+    "A wooden peg",
+    "A copper coin"
+   ],
+   "answer": 0,
+   "why": "Steel is a magnetic material. Plastic, wood and copper are not."
+  },
+  {
+   "topic": "Compare",
+   "text": "The nail held 2 clips after 10 strokes and 7 after 40. What does this show?",
+   "options": [
+    "More strokes make a stronger magnet",
+    "Fewer strokes make a stronger magnet",
+    "Strokes make no difference",
+    "The nail was a magnet from the start"
+   ],
+   "answer": 0,
+   "why": "More strokes gave more clips, so the magnet was stronger."
+  }
+ ],
+ "p3-7-1b": [
+  {
+   "topic": "When",
+   "text": "When is the nail a magnet in this experiment?",
+   "options": [
+    "Only while electricity flows through the wire",
+    "All the time, even before the battery is connected",
+    "Only after it is stroked with a bar magnet",
+    "Only at night"
+   ],
+   "answer": 0,
+   "why": "Connect the battery and the clips cling. Disconnect it and they drop."
+  },
+  {
+   "topic": "Off",
+   "text": "What happens when the battery is disconnected?",
+   "options": [
+    "The nail stops being a magnet and the clips drop away",
+    "The nail stays a magnet forever",
+    "The nail becomes a stronger magnet and holds more clips",
+    "The clips stick harder"
+   ],
+   "answer": 0,
+   "why": "No electricity, no magnet. The clips drop away."
+  },
+  {
+   "topic": "Turns",
+   "text": "A nail is wound with 30 turns of wire instead of 10, using the same battery. What happens to the number of clips it attracts?",
+   "options": [
+    "It attracts more clips",
+    "It attracts the same number",
+    "It attracts fewer clips",
+    "It attracts none"
+   ],
+   "answer": 0,
+   "why": "More turns of wire make a stronger magnet made with electricity."
+  },
+  {
+   "topic": "Crane",
+   "text": "Why is a magnet made with electricity useful in a crane that lifts scrap metal?",
+   "options": [
+    "It can be switched off to drop the metal where wanted",
+    "It never needs a battery or any wire to work well",
+    "It works even without wire",
+    "It is lighter than a bar magnet"
+   ],
+   "answer": 0,
+   "why": "Switch it on to lift, off to drop. A bar magnet cannot be switched off."
+  },
+  {
+   "topic": "Core",
+   "text": "What do we coil the wire around to make this kind of magnet?",
+   "options": [
+    "An iron nail",
+    "A wooden peg",
+    "A plastic rod",
+    "A copper coin"
+   ],
+   "answer": 0,
+   "why": "Iron is a magnetic material. Wood, plastic and copper are not."
+  }
+ ],
+ "p3-7-2": [
+  {
+   "topic": "On purpose",
+   "text": "Why do we choose a magnet's pole on purpose when building a toy?",
+   "options": [
+    "To make the toy attract or repel as we planned",
+    "To make the magnet look nicer",
+    "So that the toy can use more magnets than before",
+    "Because red is the strong end"
+   ],
+   "answer": 0,
+   "why": "Which poles face decides attract or repel. We choose it to fit the plan."
+  },
+  {
+   "topic": "Repel",
+   "text": "Two magnets move apart when they face each other. What poles are facing?",
+   "options": [
+    "Like poles, such as red facing red",
+    "Unlike poles, such as red facing blue",
+    "No poles at all",
+    "One pole only"
+   ],
+   "answer": 0,
+   "why": "Like poles repel. Unlike poles attract."
+  },
+  {
+   "topic": "Improve",
+   "text": "A toy cart will not move toward the wand. What could improve it?",
+   "options": [
+    "Flip a magnet's pole, or move the wand closer",
+    "Paint the cart a new colour",
+    "Swap the magnet for a plastic part",
+    "Add a much heavier flag at the end of the track"
+   ],
+   "answer": 0,
+   "why": "Wrong poles, or too far away. Change one of those and test again."
+  },
+  {
+   "topic": "Testing",
+   "text": "Why do we test a toy after building it?",
+   "options": [
+    "To find out if it really works the way we planned",
+    "To make it look finished",
+    "Testing is only needed if the toy looks wrong at first",
+    "To use up the battery"
+   ],
+   "answer": 0,
+   "why": "A test shows what really happens. Then we can improve it."
+  },
+  {
+   "topic": "Improved",
+   "text": "Which of these shows a toy was really improved?",
+   "options": [
+    "Comparing how it worked before and after one change",
+    "Saying that it looks a lot better now than it did before",
+    "Guessing that it will work",
+    "Changing three things at once"
+   ],
+   "answer": 0,
+   "why": "10 cm, then 25, then 40: the attempts show the change helped."
+  }
+ ],
+ "spotsort": [
+  {
+   "topic": "Clues",
+   "text": "A puddle moves when it is windy. Is the puddle living?",
+   "options": [
+    "No. The wind pushes it. It does not grow or need food.",
+    "Yes. A puddle moves along the ground, so it must be living.",
+    "Yes. A puddle is wet, so it must be living.",
+    "Yes. A puddle is outside, so it must be living."
+   ],
+   "answer": 0,
+   "why": "Moving is not enough. A living thing moves by itself, grows and needs air, water and food. A puddle does none of these."
+  },
+  {
+   "topic": "Seed",
+   "text": "A seed sits still on the shelf. Is it living?",
+   "options": [
+    "Yes. It can grow into a plant.",
+    "No. It does not move, so it is non-living.",
+    "No. It is small, so it is non-living.",
+    "No. It is brown, so it is non-living."
+   ],
+   "answer": 0,
+   "why": "A seed looks still, but it can grow into a plant. Growing is a clue for a living thing."
+  },
+  {
+   "topic": "Bicycle",
+   "text": "A bicycle moves when someone pedals it. Is it living?",
+   "options": [
+    "No. It cannot move by itself. It does not grow.",
+    "Yes. It moves, so it is living.",
+    "Yes. It has a bell and two wheels, so it is living.",
+    "No. It is made of metal, and metal things cannot move."
+   ],
+   "answer": 0,
+   "why": "The bicycle only moves because someone pedals it. It does not grow and does not need air, water or food."
+  },
+  {
+   "topic": "Cat",
+   "text": "A cat is fast asleep and not moving. Is it still living?",
+   "options": [
+    "Yes. It still needs air, water and food.",
+    "No. It is not moving, so it is not living now.",
+    "Yes. It is soft, so it is living.",
+    "Yes. It has fur, so it is living."
+   ],
+   "answer": 0,
+   "why": "A sleeping cat is still living. It still breathes, needs water and food, and can grow."
+  },
+  {
+   "topic": "Living things",
+   "text": "What do all living things need?",
+   "options": [
+    "Air, water and food.",
+    "Only sunlight and warm weather.",
+    "Only water and some soil.",
+    "Nothing at all."
+   ],
+   "answer": 0,
+   "why": "Every living thing needs air, water and food. Living things can also grow, respond and make new living things like themselves."
+  }
+ ]
+}

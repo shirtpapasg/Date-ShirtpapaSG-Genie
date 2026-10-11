@@ -1,0 +1,10 @@
+{
+ "hook": "translate(765 525) scale(1.239) translate(-774 -435)",
+ "tools": "translate(765 525) scale(1.263) translate(-744 -466)",
+ "units": "translate(765 525) scale(1.5) translate(-730 -422)",
+ "read": "translate(765 525) scale(1.087) translate(-768 -509)",
+ "gas": "translate(765 525) scale(1.161) translate(-704 -474)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.241) translate(-760 -450)",
+ "close": "translate(765 525) scale(1.202) translate(-697 -508)"
+}

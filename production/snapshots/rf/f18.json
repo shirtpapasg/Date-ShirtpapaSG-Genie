@@ -1,0 +1,6 @@
+[
+ ["s.b3 = bowl(s.stage, \"#ff8fab\");", "s.b3 = bowl(s.stage, \"#bde0fe\");"],
+ ["el(\"rect\", {x: -150, y: -200, width: 300, height: 200, fill: \"#ff8fab\", opacity: .7}, s.bk);", "el(\"rect\", {x: -150, y: -200, width: 300, height: 200, fill: \"#90e0ef\", opacity: .7}, s.bk);"],
+ ["set(s.hL, \"y\", lerp(580, 600, both) - Math.sin(both * Math.PI) * 140);", "set(s.hL, \"y\", lerp(650, 650, both) - Math.sin(both * Math.PI) * 140); tf(s.hL, `translate(0 ${2 * (lerp(650, 650, both) - Math.sin(both * Math.PI) * 140)}) scale(1 -1)`);"],
+ ["set(s.hR, \"y\", lerp(580, 600, both) - Math.sin(both * Math.PI) * 140);", "set(s.hR, \"y\", lerp(650, 650, both) - Math.sin(both * Math.PI) * 140); tf(s.hR, `translate(0 ${2 * (lerp(650, 650, both) - Math.sin(both * Math.PI) * 140)}) scale(1 -1)`);"]
+]

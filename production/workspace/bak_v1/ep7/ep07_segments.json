@@ -1,0 +1,17 @@
+[
+  {"id": "hook", "scene": "hook", "text": "Inside your belly is a tube about six and a half metres long. That is longer than a giraffe is tall. So how does it fit inside you, and what is it doing with your lunch?"},
+  {"id": "recap", "scene": "recap", "text": "Last time, your chicken rice went from the mouth, down the gullet, into the stomach. It left the stomach as a thick, soupy mixture. Now for the second half of the journey."},
+  {"id": "small1", "scene": "small", "text": "Stop four. The small intestine. It is a long, narrow tube, folded and coiled up neatly inside your belly. That is how it fits."},
+  {"id": "small2", "scene": "small", "text": "Its walls make even more digestive juices, which mix with the food and digest it further. And here, digestion ends. The food is now broken down into simple substances your body can use."},
+  {"id": "absorb", "scene": "absorb", "text": "Then comes the most important part. The digested food is absorbed through the walls of the small intestine, into the blood. Your blood carries it to every part of your body, giving you energy to run, think and grow."},
+  {"id": "large", "scene": "large", "text": "Stop five. The large intestine. It is wider, but shorter. It receives the undigested food, the parts your body could not break down. The large intestine absorbs water from it, so the waste becomes more solid."},
+  {"id": "exit", "scene": "exit", "text": "Finally, the undigested waste is stored in the rectum, and leaves your body through the anus when you go to the toilet. Yes, that is science too!"},
+  {"id": "fibre", "scene": "fibre", "text": "Here is a healthy tip. Fruits and vegetables contain fibre. Fibre helps undigested food move smoothly through the large intestine. Too little fibre, and going to the toilet can become hard and uncomfortable. So add some greens, like kangkong or broccoli, to your plate."},
+  {"id": "team", "scene": "team", "text": "Every part must work well for the whole system to work. If a large part of the small intestine is removed, the body cannot absorb enough digested food. The person can become malnourished, even when they eat enough."},
+  {"id": "quiz1", "scene": "quiz", "text": "Pause and predict! In which part does digestion end? And which part absorbs water?"},
+  {"id": "quiz2", "scene": "quiz", "text": "Digestion ends in the small intestine, where digested food is absorbed into the blood. And the large intestine absorbs water from the undigested food."},
+  {"id": "exam", "scene": "exam", "text": "In your exam, say it like this. In the small intestine, food is mixed with more digestive juices and digested further. Digestion ends there, and digested food is absorbed into the blood. The large intestine absorbs water from the undigested food."},
+  {"id": "habit1", "scene": "habit", "text": "Here is a habit to try. Make it easy. Tonight, put your science notes and a pen on your desk, ready for tomorrow. When there is nothing to set up, starting feels easy, and you are much more likely to begin."},
+  {"id": "habit2", "scene": "mindmap", "text": "Then finish your mind map. Digestive system in the middle, with five branches. Mouth, gullet, stomach, small intestine and large intestine. Add each part's job. Then save it in TheOneApp, the ultimate science app."},
+  {"id": "close", "scene": "close", "text": "So, the six and a half metre tube is your small intestine, where digestion ends. Your turn. Next time you eat, name the five stops your food will visit. Can you say them all in order?"}
+]

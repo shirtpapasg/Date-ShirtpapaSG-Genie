@@ -1,0 +1,82 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Hold up a sheet of frosted glass in sunlight, and it casts a shadow! But how can something that lets light through make a shadow? Let's find out."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what a shadow is. Second, how light travels. And third, opaque and translucent objects. Let's get started!"
+ },
+ {
+  "id": "wayang",
+  "scene": "wayang",
+  "text": "Long ago, before television, people in Southeast Asia watched wayang kulit. Shadow puppets danced on a cloth screen, lit from behind. To understand that magic, we need two facts about light."
+ },
+ {
+  "id": "materials",
+  "scene": "materials",
+  "text": "First, a quick recap. Opaque objects, like wood, let no light through. Translucent objects, like frosted glass, let some light through. And transparent objects, like clear glass, let most light through."
+ },
+ {
+  "id": "define",
+  "scene": "define",
+  "text": "A shadow is the dark area formed on a surface, when an opaque or translucent object blocks light from falling on that surface."
+ },
+ {
+  "id": "straight",
+  "scene": "straight",
+  "text": "Fact one. Light travels in straight lines. You can see it in a laser light show, and test it with three cards."
+ },
+ {
+  "id": "cards",
+  "scene": "cards",
+  "text": "Make a small hole in each of three cards, and line up the holes in front of a candle flame. Look through the holes, and you can see the flame. Now shift the middle card a little. The flame disappears! The light cannot bend around the card, because light travels in straight lines."
+ },
+ {
+  "id": "safety",
+  "scene": "safety",
+  "text": "Safety first. Never look directly at the Sun, or at any very bright light."
+ },
+ {
+  "id": "block",
+  "scene": "block",
+  "text": "Fact two. Light cannot pass through opaque objects. A wooden board blocks all the light, so its shadow is dark. Frosted glass is translucent, so some light passes through, and its shadow is less dark. Do all materials form shadows? Try it yourself in The One App. Open the School Lab, experiment five point one, and press, Let's test it now!"
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! A cardboard sheet and a frosted plastic sheet are placed under a lamp. Which shadow is darker?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "The cardboard's shadow! Cardboard is opaque, and blocks all the light. Frosted plastic is translucent, so its shadow is less dark."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Light travels in straight lines. Light cannot pass through an opaque object, so a shadow is formed behind it. Only some light passes through a translucent object, so its shadow is less dark."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit for remembering. Space it out. Review today's lesson tomorrow, again in three days, and again next week. Each time you remember, the memory gets stronger."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now add to your light mind map. A branch called shadows. Light travels in straight lines. Opaque objects make dark shadows. Translucent objects make less dark shadows. Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, why does frosted glass cast a shadow? It blocks some of the light! Your turn. Try the three-card test with an adult, using a torch instead of a candle."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

@@ -1,0 +1,8811 @@
+{
+ "_meta": {
+  "what": "Per-chapter key-word bank for \"Check my map\". App (Mind Lab TOPICS in mindmap.html) wording is the master. P4 video wording (eps 1-22: phone mind map in mm/eps.json, the S.mindmap scene in epNb.html, the key-word panel labels in epN/tl.json) is aligned to it. P3 chapters have app terms only.",
+  "built": "origin/main 67c3545 (mindmap.html TOPICS, misconceptions.js, mixups.js)",
+  "meansKind": {
+   "branch": "an app branch",
+   "key": "an app key word (see \"under\")",
+   "centre": "the chapter itself (middle word)",
+   "idea": "the chapter's big idea (TOPICS.idea)",
+   "extra": "no app equivalent: accept, never hint at it"
+  },
+  "partial": "true = close but not the same idea; credit it, but do not count it as a full match in the \"you got right\" lines if a better match exists",
+  "afterD": "what the term will mean once step (d) adds \"Heat is a form of energy\" to the Heat poster",
+  "detect": "a phrase, matched on WHOLE WORDS after normalising (see \"normalise\"). \"a && b\" = both phrases in the same node, or in the node plus its branch. \"unless\": skip if any of these is in the same node (or its branch). \"inBranch\": only test sub-branches of a branch that matches that app branch.",
+  "normalise": "lower-case; FIRST arrows ➜ → -> => ➡ ⟶ ⇒ -> \" to \" (➜ and ➡ are in emoji ranges); then drop emoji (keep ✓ ✗ ≠); \"&\" -> \"and\"; other punctuation (= : · + , . ( ) ' etc.) -> space; collapse spaces; simple plural on both sides (-ies -> y; -ses/-xes/-zes/-ches/-shes -> drop \"es\"; else drop a final s, not ss). Reference: kwbank_selftest.py norm().",
+  "matchOrder": "for each pupil node: (1) exact video term / raw (normalised) of this chapter; (2) app keys and keyAliases of the branch the node sits under; (3) the longest alias anywhere in the chapter. Several app terms can share a short alias (\"temperature\", \"volume ✓\", \"shape ✗\"), so the longest / in-branch match wins.",
+  "proposed": "heat > \"Heat is a form of energy\" is NOT on the poster yet (step d). Do not hint at it before the poster has it."
+ },
+ "plants": {
+  "title": "Plant System",
+  "lv": "P4/P5",
+  "idea": "Different parts that work together so that the plant grows well",
+  "eps": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "centreAliases": [
+   "plant system",
+   "plant parts",
+   "parts of a plant",
+   "plant",
+   "system",
+   "tree"
+  ],
+  "app": [
+   {
+    "branch": "Leaves",
+    "aliases": [
+     "leaf",
+     "leaves"
+    ],
+    "keys": [
+     "Make food",
+     "Take in and give out gases"
+    ],
+    "keyAliases": {
+     "Make food": [
+      "make food",
+      "makes food",
+      "makes its own food",
+      "make their own food",
+      "food maker",
+      "photosynthesis"
+     ],
+     "Take in and give out gases": [
+      "gases in and out",
+      "gases in & out",
+      "take in gases",
+      "give out gases",
+      "takes in and gives out gases",
+      "exchange of gases",
+      "gas exchange",
+      "gases"
+     ]
+    },
+    "rank": 1,
+    "hint": "Add a branch for the leaves. What job do leaves do for the plant?"
+   },
+   {
+    "branch": "Roots",
+    "aliases": [
+     "root",
+     "roots"
+    ],
+    "keys": [
+     "Hold the plant firmly to the ground",
+     "Absorb water and dissolved mineral salts"
+    ],
+    "keyAliases": {
+     "Hold the plant firmly to the ground": [
+      "anchor",
+      "anchors",
+      "anchors the plant",
+      "holds the plant firmly",
+      "holds the plant in the ground",
+      "holds the plant in place",
+      "grips the soil"
+     ],
+     "Absorb water and dissolved mineral salts": [
+      "absorb",
+      "absorbs",
+      "absorb water",
+      "absorbs water",
+      "takes in water",
+      "take in water",
+      "mineral salts",
+      "water and mineral salts",
+      "absorb water and mineral salts"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a branch for the roots. What two jobs do roots do?"
+   },
+   {
+    "branch": "Stem",
+    "aliases": [
+     "stem",
+     "stems"
+    ],
+    "keys": [
+     "Hold the plant upright to get light",
+     "Transport food, water and mineral salts to different parts of the plant"
+    ],
+    "keyAliases": {
+     "Hold the plant upright to get light": [
+      "holds upright",
+      "hold upright",
+      "holds the plant up",
+      "keeps the plant upright",
+      "supports the plant",
+      "support",
+      "holds up the leaves"
+     ],
+     "Transport food, water and mineral salts to different parts of the plant": [
+      "transport",
+      "transports",
+      "carries water",
+      "carries food",
+      "carries food and water",
+      "transports water",
+      "transports food",
+      "moves water and food",
+      "water-carrying tubes",
+      "food-carrying tubes"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a branch for the stem. How does the stem help the plant?",
+    "keyShort": {
+     "Transport food, water and mineral salts to different parts of the plant": "Transport food, water and mineral salts"
+    }
+   }
+  ],
+  "videoCentre": [
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "SYSTEM",
+    "type": "branch",
+    "means": "Different parts that work together so that the plant grows well",
+    "meansKind": "idea",
+    "note": "EP1 is a general \"systems\" map (bike, body, tree).",
+    "src": "map",
+    "raw": [
+     "SYSTEM"
+    ],
+    "chip": "📺 SYSTEM = Different parts that work together so that the plant grows well"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "PLANT SYSTEM",
+    "type": "branch",
+    "means": "Plant System",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "PLANT SYSTEM"
+    ],
+    "chip": "📺 PLANT SYSTEM = Plant System"
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "LEAF",
+    "type": "branch",
+    "means": "Leaves",
+    "meansKind": "branch",
+    "note": "EP3 zooms in on one leaf: the whole map sits under the Leaves branch.",
+    "src": "map",
+    "raw": [
+     "LEAF",
+     "🍃 LEAF"
+    ],
+    "chip": "📺 LEAF = Leaves"
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "PLANT PARTS",
+    "type": "branch",
+    "means": "Plant System",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "PLANT PARTS"
+    ],
+    "chip": "📺 PLANT PARTS = Plant System"
+   }
+  ],
+  "video": [
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "BIKE",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "A non-living example of a system.",
+    "src": "map",
+    "raw": [
+     "🚲 BIKE"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "pedals",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "BIKE",
+    "src": "map",
+    "raw": [
+     "pedals"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "chain",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "BIKE",
+    "src": "map",
+    "raw": [
+     "chain"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "BODY",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Human body as a system: see Digestive System / Circulatory System (P5) maps.",
+    "src": "map",
+    "raw": [
+     "🧍 BODY"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "lungs",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "BODY",
+    "note": "See Circulatory System (respcirc, P5).",
+    "src": "map",
+    "raw": [
+     "lungs"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "heart",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "BODY",
+    "note": "See Circulatory System (respcirc, P5).",
+    "src": "map",
+    "raw": [
+     "heart"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "TREE",
+    "type": "branch",
+    "means": "Plant System",
+    "meansKind": "centre",
+    "note": "A tree is a plant system.",
+    "src": "map",
+    "raw": [
+     "🌳 TREE"
+    ],
+    "chip": "📺 TREE = Plant System"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "roots",
+    "type": "keyword",
+    "means": "Roots",
+    "meansKind": "branch",
+    "videoParent": "TREE",
+    "src": "map",
+    "raw": [
+     "roots"
+    ],
+    "chip": "📺 roots = Roots"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "leaves",
+    "type": "keyword",
+    "means": "Leaves",
+    "meansKind": "branch",
+    "videoParent": "TREE",
+    "src": "map",
+    "raw": [
+     "leaves"
+    ],
+    "chip": "📺 leaves = Leaves"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "PARTS",
+    "type": "keyword",
+    "means": "Different parts that work together so that the plant grows well",
+    "meansKind": "idea",
+    "src": "kw",
+    "raw": [
+     "PARTS"
+    ],
+    "chip": "📺 PARTS = Different parts that work together so that the plant grows well"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "WORK TOGETHER",
+    "type": "keyword",
+    "means": "Different parts that work together so that the plant grows well",
+    "meansKind": "idea",
+    "src": "kw",
+    "raw": [
+     "WORK TOGETHER"
+    ],
+    "chip": "📺 WORK TOGETHER = Different parts that work together so that the plant grows well"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "SYSTEM",
+    "type": "keyword",
+    "means": "Plant System",
+    "meansKind": "centre",
+    "src": "kw",
+    "raw": [
+     "SYSTEM"
+    ],
+    "chip": "📺 SYSTEM = Plant System"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "FUNCTION",
+    "type": "keyword",
+    "means": "Different parts that work together so that the plant grows well",
+    "meansKind": "idea",
+    "note": "Function = the job a part does. The app's key words are the jobs.",
+    "src": "kw",
+    "raw": [
+     "FUNCTION"
+    ],
+    "chip": "📺 FUNCTION = Different parts that work together so that the plant grows well"
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "ONE PART FAILS → SYSTEM AFFECTED",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Systems idea. Close to the app outcome \"Predict what happens to a plant with its stem cut\".",
+    "src": "kw",
+    "raw": [
+     "ONE PART FAILS → SYSTEM AFFECTED",
+     "ONE PART FAILS"
+    ]
+   },
+   {
+    "ep": 1,
+    "eps": [
+     1
+    ],
+    "term": "RESPIRATORY SYSTEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "See Circulatory System (respcirc, P5).",
+    "src": "kw",
+    "raw": [
+     "RESPIRATORY SYSTEM"
+    ]
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2,
+     4
+    ],
+    "term": "LEAVES",
+    "type": "branch",
+    "means": "Leaves",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🍃 LEAVES"
+    ],
+    "chip": "📺 LEAVES = Leaves"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "make food",
+    "type": "keyword",
+    "means": "Make food",
+    "meansKind": "key",
+    "under": "Leaves",
+    "videoParent": "LEAVES",
+    "src": "map+scene",
+    "raw": [
+     "make food"
+    ],
+    "chip": "📺 make food = Make food"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "gases in & out",
+    "type": "keyword",
+    "means": "Take in and give out gases",
+    "meansKind": "key",
+    "under": "Leaves",
+    "videoParent": "LEAVES",
+    "src": "map+scene",
+    "raw": [
+     "gases in & out"
+    ],
+    "chip": "📺 gases in & out = Take in and give out gases"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "STEM",
+    "type": "branch",
+    "means": "Stem",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🌿 STEM"
+    ],
+    "chip": "📺 STEM = Stem"
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "STEMS",
+    "type": "branch",
+    "means": "Stem",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🌿 STEMS"
+    ],
+    "chip": "📺 STEMS = Stem"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "holds upright",
+    "type": "keyword",
+    "means": "Hold the plant upright to get light",
+    "meansKind": "key",
+    "under": "Stem",
+    "videoParent": "STEM",
+    "src": "map+scene",
+    "raw": [
+     "holds upright"
+    ],
+    "chip": "📺 holds upright = Hold the plant upright to get light"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "transports",
+    "type": "keyword",
+    "means": "Transport food, water and mineral salts to different parts of the plant",
+    "meansKind": "key",
+    "under": "Stem",
+    "videoParent": "STEM",
+    "src": "map+scene",
+    "raw": [
+     "transports"
+    ],
+    "chip": "📺 transports = Transport food, water and mineral salts to different parts of the plant"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2,
+     4
+    ],
+    "term": "ROOTS",
+    "type": "branch",
+    "means": "Roots",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🥕 ROOTS"
+    ],
+    "chip": "📺 ROOTS = Roots"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "anchor",
+    "type": "keyword",
+    "means": "Hold the plant firmly to the ground",
+    "meansKind": "key",
+    "under": "Roots",
+    "videoParent": "ROOTS",
+    "src": "map+scene",
+    "raw": [
+     "anchor"
+    ],
+    "chip": "📺 anchor = Hold the plant firmly to the ground"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "absorb",
+    "type": "keyword",
+    "means": "Absorb water and dissolved mineral salts",
+    "meansKind": "key",
+    "under": "Roots",
+    "videoParent": "ROOTS",
+    "src": "map+scene",
+    "raw": [
+     "absorb"
+    ],
+    "chip": "📺 absorb = Absorb water and dissolved mineral salts"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "LEAVES",
+    "type": "keyword",
+    "means": "Leaves",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "LEAVES"
+    ],
+    "chip": "📺 LEAVES = Leaves"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "GASES",
+    "type": "keyword",
+    "means": "Take in and give out gases",
+    "meansKind": "key",
+    "under": "Leaves",
+    "src": "kw",
+    "raw": [
+     "GASES"
+    ],
+    "chip": "📺 GASES = Take in and give out gases"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "STEM",
+    "type": "keyword",
+    "means": "Stem",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "STEM"
+    ],
+    "chip": "📺 STEM = Stem"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "TRANSPORT",
+    "type": "keyword",
+    "means": "Transport food, water and mineral salts to different parts of the plant",
+    "meansKind": "key",
+    "under": "Stem",
+    "src": "kw",
+    "raw": [
+     "TRANSPORT"
+    ],
+    "chip": "📺 TRANSPORT = Transport food, water and mineral salts to different parts of the plant"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "ROOTS",
+    "type": "keyword",
+    "means": "Roots",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "ROOTS"
+    ],
+    "chip": "📺 ROOTS = Roots"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "ABSORB",
+    "type": "keyword",
+    "means": "Absorb water and dissolved mineral salts",
+    "meansKind": "key",
+    "under": "Roots",
+    "src": "kw",
+    "raw": [
+     "ABSORB"
+    ],
+    "chip": "📺 ABSORB = Absorb water and dissolved mineral salts"
+   },
+   {
+    "ep": 2,
+    "eps": [
+     2
+    ],
+    "term": "MINERAL SALTS",
+    "type": "keyword",
+    "means": "Absorb water and dissolved mineral salts",
+    "meansKind": "key",
+    "under": "Roots",
+    "meansAll": [
+     "Absorb water and dissolved mineral salts",
+     "Transport food, water and mineral salts to different parts of the plant"
+    ],
+    "src": "kw",
+    "raw": [
+     "MINERAL SALTS"
+    ],
+    "chip": "📺 MINERAL SALTS = Absorb water and dissolved mineral salts + Transport food, water and mineral salts to different parts of the plant"
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "4 PARTS",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Parts of a leaf. The Leaves branch has no leaf-part key words.",
+    "src": "map",
+    "raw": [
+     "4 PARTS"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "blade",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "4 PARTS",
+    "src": "map",
+    "raw": [
+     "blade · stalk",
+     "blade"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "stalk",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "4 PARTS",
+    "src": "map",
+    "raw": [
+     "blade · stalk",
+     "stalk"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "main vein",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "4 PARTS",
+    "src": "map",
+    "raw": [
+     "main vein · smaller veins",
+     "main vein"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "smaller veins",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "4 PARTS",
+    "src": "map",
+    "raw": [
+     "main vein · smaller veins",
+     "smaller veins"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "2 VEIN PATTERNS",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "map",
+    "raw": [
+     "2 VEIN PATTERNS"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "parallel",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "2 VEIN PATTERNS",
+    "src": "map",
+    "raw": [
+     "parallel"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "net",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "2 VEIN PATTERNS",
+    "src": "map",
+    "raw": [
+     "net"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "DIFFERENCES",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "How leaves differ.",
+    "src": "map",
+    "raw": [
+     "DIFFERENCES"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "edge",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "DIFFERENCES",
+    "src": "map",
+    "raw": [
+     "edge · shape",
+     "edge"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "shape",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "DIFFERENCES",
+    "src": "map",
+    "raw": [
+     "edge · shape",
+     "shape"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "colour",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "DIFFERENCES",
+    "src": "map",
+    "raw": [
+     "colour · texture",
+     "colour"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "texture",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "DIFFERENCES",
+    "src": "map",
+    "raw": [
+     "colour · texture",
+     "texture"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "LEAF BLADE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "LEAF BLADE"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "LEAF STALK",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "LEAF STALK"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "MAIN VEIN",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MAIN VEIN"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "SMALLER VEINS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SMALLER VEINS"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "PARALLEL VEINS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "PARALLEL VEINS"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "NET VEINS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "NET VEINS"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "OBSERVE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Science process skill.",
+    "src": "kw",
+    "raw": [
+     "OBSERVE"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "ASK",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Science process skill.",
+    "src": "kw",
+    "raw": [
+     "ASK"
+    ]
+   },
+   {
+    "ep": 3,
+    "eps": [
+     3
+    ],
+    "term": "INVESTIGATE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Science process skill.",
+    "src": "kw",
+    "raw": [
+     "INVESTIGATE"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "spines (cactus)",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "LEAVES",
+    "note": "Adaptation: a cactus's spines are its leaves (M-46).",
+    "src": "map",
+    "raw": [
+     "spines (cactus)"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "woody",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "STEMS",
+    "src": "map",
+    "raw": [
+     "woody · non-woody",
+     "woody"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "non-woody",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "STEMS",
+    "src": "map",
+    "raw": [
+     "woody · non-woody",
+     "non-woody"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "climbing",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "STEMS",
+    "src": "map",
+    "raw": [
+     "climbing"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "storage",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "ROOTS",
+    "note": "Storage roots (e.g. carrot).",
+    "src": "map",
+    "raw": [
+     "storage"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "in water",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "ROOTS",
+    "note": "Roots that grow in water.",
+    "src": "map",
+    "raw": [
+     "in water"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "WOODY STEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "WOODY STEM"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "NON-WOODY STEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "NON-WOODY STEM"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "STORES WATER",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "STORES WATER"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "SPINES = LEAVES",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SPINES = LEAVES"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "CLIMBERS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "CLIMBERS"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "CREEPERS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "CREEPERS"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "STORAGE ROOTS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "STORAGE ROOTS"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "STEM CUTTING",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "STEM CUTTING"
+    ]
+   },
+   {
+    "ep": 4,
+    "eps": [
+     4
+    ],
+    "term": "GREEN STEM MAKES FOOD",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Related to Leaves > Make food, but about the stem. Accept, no credit for the Leaves branch.",
+    "src": "kw",
+    "raw": [
+     "GREEN STEM MAKES FOOD",
+     "GREEN STEM = FOOD"
+    ]
+   }
+  ],
+  "mixups": [
+   {
+    "detect": [
+     "roots absorb food",
+     "roots take in food",
+     "absorb food",
+     "absorbs food",
+     "takes in food from the soil",
+     "food from the soil",
+     "food from soil",
+     "gets food from the soil",
+     "absorb nutrients",
+     "absorbs nutrients",
+     "takes in nutrients",
+     "soil gives food",
+     "plants eat soil"
+    ],
+    "say": "Exam tip: roots absorb water and dissolved mineral salts. The leaves make the plant's food.",
+    "src": "M-20 + mixups.plants#38",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "roots only hold",
+     "only hold the plant",
+     "roots just hold"
+    ],
+    "say": "Exam tip: roots do two jobs. They hold the plant firmly and absorb water and mineral salts.",
+    "src": "M-21",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "stem stores food",
+     "stems store food",
+     "stem keeps food",
+     "stem stores the food"
+    ],
+    "say": "Exam tip: the stem transports water and food to all parts of the plant.",
+    "src": "mixups.plants#39",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "stomata take in",
+     "stomata takes in",
+     "stomata absorb",
+     "stomata breathe"
+    ],
+    "say": "Exam tip: stomata are tiny openings. They allow gases to enter and leave the leaf.",
+    "src": "mixups.plants#40",
+    "kind": "mixup",
+    "note": "Stomata are not on the P4 poster; kept because the chapter is P4/P5."
+   },
+   {
+    "detect": [
+     "breathe out oxygen",
+     "breathes out oxygen",
+     "breathe in carbon dioxide",
+     "breathes in carbon dioxide",
+     "plants breathe",
+     "leaves breathe"
+    ],
+    "say": "Exam tip: plants respire like all living things. Leaves take in and give out gases.",
+    "src": "M-23",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "cactus has no leaves",
+     "cactus has no leaf",
+     "cactus no leaves",
+     "cactus does not have leaves",
+     "cactus doesn't have leaves",
+     "spines are not leaves",
+     "cactus is not a plant"
+    ],
+    "say": "Exam tip: a cactus is a plant. Its spines are its leaves.",
+    "src": "M-46",
+    "kind": "mixup"
+   }
+  ],
+  "mixupsSkipped": [
+   "M-22 (bark, P5; not map-shaped)",
+   "mixups.plants#42, #44 (answer-writing for one question type)"
+  ],
+  "extras": [
+   {
+    "term": "BIKE",
+    "eps": [
+     1
+    ],
+    "note": "A non-living example of a system."
+   },
+   {
+    "term": "pedals",
+    "eps": [
+     1
+    ]
+   },
+   {
+    "term": "chain",
+    "eps": [
+     1
+    ]
+   },
+   {
+    "term": "BODY",
+    "eps": [
+     1
+    ],
+    "note": "Human body as a system: see Digestive System / Circulatory System (P5) maps."
+   },
+   {
+    "term": "lungs",
+    "eps": [
+     1
+    ],
+    "note": "See Circulatory System (respcirc, P5)."
+   },
+   {
+    "term": "heart",
+    "eps": [
+     1
+    ],
+    "note": "See Circulatory System (respcirc, P5)."
+   },
+   {
+    "term": "ONE PART FAILS → SYSTEM AFFECTED",
+    "eps": [
+     1
+    ],
+    "note": "Systems idea. Close to the app outcome \"Predict what happens to a plant with its stem cut\"."
+   },
+   {
+    "term": "RESPIRATORY SYSTEM",
+    "eps": [
+     1
+    ],
+    "note": "See Circulatory System (respcirc, P5)."
+   },
+   {
+    "term": "4 PARTS",
+    "eps": [
+     3
+    ],
+    "note": "Parts of a leaf. The Leaves branch has no leaf-part key words."
+   },
+   {
+    "term": "blade",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "stalk",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "main vein",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "smaller veins",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "2 VEIN PATTERNS",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "parallel",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "net",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "DIFFERENCES",
+    "eps": [
+     3
+    ],
+    "note": "How leaves differ."
+   },
+   {
+    "term": "edge",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "shape",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "colour",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "texture",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "LEAF BLADE",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "LEAF STALK",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "PARALLEL VEINS",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "NET VEINS",
+    "eps": [
+     3
+    ]
+   },
+   {
+    "term": "OBSERVE",
+    "eps": [
+     3
+    ],
+    "note": "Science process skill."
+   },
+   {
+    "term": "ASK",
+    "eps": [
+     3
+    ],
+    "note": "Science process skill."
+   },
+   {
+    "term": "INVESTIGATE",
+    "eps": [
+     3
+    ],
+    "note": "Science process skill."
+   },
+   {
+    "term": "spines (cactus)",
+    "eps": [
+     4
+    ],
+    "note": "Adaptation: a cactus's spines are its leaves (M-46)."
+   },
+   {
+    "term": "woody",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "non-woody",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "climbing",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "storage",
+    "eps": [
+     4
+    ],
+    "note": "Storage roots (e.g. carrot)."
+   },
+   {
+    "term": "in water",
+    "eps": [
+     4
+    ],
+    "note": "Roots that grow in water."
+   },
+   {
+    "term": "WOODY STEM",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "NON-WOODY STEM",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "STORES WATER",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "SPINES = LEAVES",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "CLIMBERS",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "CREEPERS",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "STORAGE ROOTS",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "STEM CUTTING",
+    "eps": [
+     4
+    ]
+   },
+   {
+    "term": "GREEN STEM MAKES FOOD",
+    "eps": [
+     4
+    ],
+    "note": "Related to Leaves > Make food, but about the stem. Accept, no credit for the Leaves branch."
+   }
+  ],
+  "habitLabelsSkipped": {
+   "1": [
+    "HABIT STACKING",
+    "MIND MAP"
+   ],
+   "2": [
+    "MAKE IT OBVIOUS",
+    "MIND MAP"
+   ],
+   "3": [
+    "TWO-MINUTE RULE",
+    "MIND MAP"
+   ],
+   "4": [
+    "PERSEVERANCE",
+    "MAKE IT SATISFYING"
+   ]
+  }
+ },
+ "digestive": {
+  "title": "Digestive System",
+  "lv": "P4",
+  "idea": "Different parts work together to break food down so the body can take it in.",
+  "eps": [
+   5,
+   6,
+   7
+  ],
+  "centreAliases": [
+   "digestive system",
+   "digestion",
+   "human digestive system"
+  ],
+  "app": [
+   {
+    "branch": "Mouth",
+    "aliases": [
+     "mouth"
+    ],
+    "keys": [
+     "Digestion begins here",
+     "Breaks food into smaller pieces",
+     "Mixes food with digestive juice"
+    ],
+    "keyAliases": {
+     "Digestion begins here": [
+      "digestion begins",
+      "digestion starts",
+      "digestion begins in the mouth",
+      "starts digestion"
+     ],
+     "Breaks food into smaller pieces": [
+      "teeth",
+      "chew",
+      "chews",
+      "chewing",
+      "smaller pieces",
+      "breaks food into small pieces",
+      "bite",
+      "grind"
+     ],
+     "Mixes food with digestive juice": [
+      "saliva",
+      "digestive juice",
+      "mixes with saliva",
+      "mixes food with saliva"
+     ]
+    },
+    "rank": 1,
+    "hint": "Start where food goes in. Add a branch for the mouth."
+   },
+   {
+    "branch": "Small intestine",
+    "aliases": [
+     "small intestine",
+     "small gut"
+    ],
+    "keys": [
+     "Digestion is completed here",
+     "Digested food is absorbed into the blood"
+    ],
+    "keyAliases": {
+     "Digestion is completed here": [
+      "digestion ends",
+      "digestion ends here",
+      "digestion is completed",
+      "digestion completed",
+      "completes digestion",
+      "digestion finishes"
+     ],
+     "Digested food is absorbed into the blood": [
+      "into blood",
+      "into the blood",
+      "absorbed into blood",
+      "absorbed into the blood",
+      "absorbs digested food",
+      "absorption",
+      "absorbs food",
+      "absorbed into the bloodstream"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add the small intestine. This is where digested food goes into the blood."
+   },
+   {
+    "branch": "Stomach",
+    "aliases": [
+     "stomach"
+    ],
+    "keys": [
+     "Churns the food up",
+     "Breaks food down into simpler substances"
+    ],
+    "keyAliases": {
+     "Churns the food up": [
+      "churns",
+      "churn",
+      "churning",
+      "mixes with juices",
+      "mixes food with digestive juices",
+      "squeezes and mixes"
+     ],
+     "Breaks food down into simpler substances": [
+      "simpler substances",
+      "breaks food down",
+      "digests food",
+      "simpler food"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a branch for the stomach. What does it do to the food?"
+   },
+   {
+    "branch": "Large intestine",
+    "aliases": [
+     "large intestine"
+    ],
+    "keys": [
+     "Absorbs water from undigested food",
+     "Waste leaves the body"
+    ],
+    "keyAliases": {
+     "Absorbs water from undigested food": [
+      "absorbs water",
+      "absorb water",
+      "takes in water",
+      "water from undigested food"
+     ],
+     "Waste leaves the body": [
+      "waste leaves the body",
+      "waste",
+      "rectum",
+      "anus",
+      "rectum and anus",
+      "removes waste",
+      "faeces",
+      "feces"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add the large intestine. What does it take back from the food that is left?"
+   },
+   {
+    "branch": "Gullet",
+    "aliases": [
+     "gullet",
+     "oesophagus",
+     "esophagus",
+     "food pipe",
+     "foodpipe"
+    ],
+    "keys": [
+     "Pushes food down to the stomach"
+    ],
+    "keyAliases": {
+     "Pushes food down to the stomach": [
+      "pushes food down",
+      "push food down",
+      "carries food to the stomach",
+      "moves food to the stomach",
+      "squeezes food down"
+     ]
+    },
+    "rank": 5,
+    "hint": "Add the gullet. It joins the mouth to the stomach."
+   }
+  ],
+  "videoCentre": [
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "HUMAN BODY SYSTEMS",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "EP5 maps all five body systems; the Digestive System is one branch of it.",
+    "src": "map",
+    "raw": [
+     "HUMAN BODY SYSTEMS",
+     "HUMAN BODY",
+     "SYSTEMS"
+    ]
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6,
+     7
+    ],
+    "term": "DIGESTIVE SYSTEM",
+    "type": "branch",
+    "means": "Digestive System",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "DIGESTIVE SYSTEM",
+     "DIGESTIVE",
+     "SYSTEM"
+    ],
+    "chip": "📺 DIGESTIVE SYSTEM = Digestive System"
+   }
+  ],
+  "video": [
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "RESPIRATORY",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "See Circulatory System (respcirc, P5).",
+    "src": "map",
+    "raw": [
+     "🫁 RESPIRATORY"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "CIRCULATORY",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "See Circulatory System (respcirc, P5).",
+    "src": "map",
+    "raw": [
+     "❤️ CIRCULATORY"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "SKELETAL",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "No Mind Lab poster (Recitation topic only).",
+    "src": "map",
+    "raw": [
+     "🦴 SKELETAL"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "MUSCULAR",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "No Mind Lab poster.",
+    "src": "map",
+    "raw": [
+     "💪 MUSCULAR"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "DIGESTIVE",
+    "type": "branch",
+    "means": "Digestive System",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "🍽️ DIGESTIVE"
+    ],
+    "chip": "📺 DIGESTIVE = Digestive System"
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "MODEL",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MODEL"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "RESPIRATORY SYSTEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "RESPIRATORY SYSTEM"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "EXCHANGE OF GASES",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "EXCHANGE OF GASES"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "CIRCULATORY SYSTEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "CIRCULATORY SYSTEM"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "SKELETAL SYSTEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SKELETAL SYSTEM"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "FEMUR",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "FEMUR"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "MUSCULAR SYSTEM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MUSCULAR SYSTEM"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "CONTRACT / RELAX",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "CONTRACT / RELAX"
+    ]
+   },
+   {
+    "ep": 5,
+    "eps": [
+     5
+    ],
+    "term": "DIGESTIVE SYSTEM",
+    "type": "keyword",
+    "means": "Digestive System",
+    "meansKind": "centre",
+    "src": "kw",
+    "raw": [
+     "DIGESTIVE SYSTEM"
+    ],
+    "chip": "📺 DIGESTIVE SYSTEM = Digestive System"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6,
+     7
+    ],
+    "term": "MOUTH",
+    "type": "branch",
+    "means": "Mouth",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "👄 MOUTH"
+    ],
+    "chip": "📺 MOUTH = Mouth"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "teeth",
+    "type": "keyword",
+    "means": "Breaks food into smaller pieces",
+    "meansKind": "key",
+    "under": "Mouth",
+    "videoParent": "MOUTH",
+    "src": "map",
+    "raw": [
+     "teeth · saliva · tongue",
+     "teeth"
+    ],
+    "chip": "📺 teeth = Breaks food into smaller pieces"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "saliva",
+    "type": "keyword",
+    "means": "Mixes food with digestive juice",
+    "meansKind": "key",
+    "under": "Mouth",
+    "videoParent": "MOUTH",
+    "note": "Saliva is the digestive juice in the mouth.",
+    "src": "map",
+    "raw": [
+     "teeth · saliva · tongue",
+     "saliva"
+    ],
+    "chip": "📺 saliva = Mixes food with digestive juice"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "tongue",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "MOUTH",
+    "note": "A part, not a job. Accept under Mouth.",
+    "src": "map",
+    "raw": [
+     "teeth · saliva · tongue",
+     "tongue"
+    ]
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "digestion begins",
+    "type": "keyword",
+    "means": "Digestion begins here",
+    "meansKind": "key",
+    "under": "Mouth",
+    "videoParent": "MOUTH",
+    "src": "map+scene",
+    "raw": [
+     "digestion begins"
+    ],
+    "chip": "📺 digestion begins = Digestion begins here"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6,
+     7
+    ],
+    "term": "GULLET",
+    "type": "branch",
+    "means": "Gullet",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "⬇️ GULLET"
+    ],
+    "chip": "📺 GULLET = Gullet"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6,
+     7
+    ],
+    "term": "pushes food down",
+    "type": "keyword",
+    "means": "Pushes food down to the stomach",
+    "meansKind": "key",
+    "under": "Gullet",
+    "videoParent": "GULLET",
+    "src": "map+scene",
+    "raw": [
+     "pushes food down"
+    ],
+    "chip": "📺 pushes food down = Pushes food down to the stomach"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6,
+     7
+    ],
+    "term": "STOMACH",
+    "type": "branch",
+    "means": "Stomach",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🌀 STOMACH"
+    ],
+    "chip": "📺 STOMACH = Stomach"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6,
+     7
+    ],
+    "term": "mixes with juices",
+    "type": "keyword",
+    "means": "Churns the food up",
+    "meansKind": "key",
+    "under": "Stomach",
+    "videoParent": "STOMACH",
+    "partial": true,
+    "note": "Closest app key: churning mixes food with digestive juices. Scope to the Stomach branch: under Mouth it means \"Mixes food with digestive juice\".",
+    "src": "map+scene",
+    "raw": [
+     "mixes with juices"
+    ],
+    "chip": "📺 mixes with juices = Churns the food up"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "SMALL INTESTINE",
+    "type": "branch",
+    "means": "Small intestine",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🌀 SMALL INTESTINE"
+    ],
+    "chip": "📺 SMALL INTESTINE = Small intestine"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "digestion ends",
+    "type": "keyword",
+    "means": "Digestion is completed here",
+    "meansKind": "key",
+    "under": "Small intestine",
+    "videoParent": "SMALL INTESTINE",
+    "src": "map+scene",
+    "raw": [
+     "digestion ends + into blood",
+     "digestion ends"
+    ],
+    "chip": "📺 digestion ends = Digestion is completed here"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "into blood",
+    "type": "keyword",
+    "means": "Digested food is absorbed into the blood",
+    "meansKind": "key",
+    "under": "Small intestine",
+    "videoParent": "SMALL INTESTINE",
+    "src": "map+scene",
+    "raw": [
+     "digestion ends + into blood",
+     "into blood"
+    ],
+    "chip": "📺 into blood = Digested food is absorbed into the blood"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "LARGE INTESTINE",
+    "type": "branch",
+    "means": "Large intestine",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "LARGE INTESTINE"
+    ],
+    "chip": "📺 LARGE INTESTINE = Large intestine"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "absorbs water",
+    "type": "keyword",
+    "means": "Absorbs water from undigested food",
+    "meansKind": "key",
+    "under": "Large intestine",
+    "videoParent": "LARGE INTESTINE",
+    "note": "App adds \"from undigested food\" (mixups.digestive#53).",
+    "src": "map+scene",
+    "raw": [
+     "absorbs water"
+    ],
+    "chip": "📺 absorbs water = Absorbs water from undigested food"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "DIGESTION",
+    "type": "keyword",
+    "means": "Different parts work together to break food down so the body can take it in.",
+    "meansKind": "idea",
+    "src": "kw",
+    "raw": [
+     "DIGESTION"
+    ],
+    "chip": "📺 DIGESTION = Different parts work together to break food down so the body can take it in."
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "SIMPLER SUBSTANCES",
+    "type": "keyword",
+    "means": "Breaks food down into simpler substances",
+    "meansKind": "key",
+    "under": "Stomach",
+    "src": "kw",
+    "raw": [
+     "SIMPLER SUBSTANCES"
+    ],
+    "chip": "📺 SIMPLER SUBSTANCES = Breaks food down into simpler substances"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "TEETH",
+    "type": "keyword",
+    "means": "Breaks food into smaller pieces",
+    "meansKind": "key",
+    "under": "Mouth",
+    "src": "kw",
+    "raw": [
+     "TEETH"
+    ],
+    "chip": "📺 TEETH = Breaks food into smaller pieces"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "MORE SURFACE EXPOSED",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Why chewing helps digestion.",
+    "src": "kw",
+    "raw": [
+     "MORE SURFACE EXPOSED",
+     "MORE SURFACE"
+    ]
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "SALIVA",
+    "type": "keyword",
+    "means": "Mixes food with digestive juice",
+    "meansKind": "key",
+    "under": "Mouth",
+    "src": "kw",
+    "raw": [
+     "SALIVA"
+    ],
+    "chip": "📺 SALIVA = Mixes food with digestive juice"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "DIGESTION BEGINS IN MOUTH",
+    "type": "keyword",
+    "means": "Digestion begins here",
+    "meansKind": "key",
+    "under": "Mouth",
+    "src": "kw",
+    "raw": [
+     "DIGESTION BEGINS IN MOUTH",
+     "BEGINS IN MOUTH"
+    ],
+    "chip": "📺 DIGESTION BEGINS IN MOUTH = Digestion begins here"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "GULLET",
+    "type": "keyword",
+    "means": "Gullet",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "GULLET"
+    ],
+    "chip": "📺 GULLET = Gullet"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "WINDPIPE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Respiratory system; food goes down the gullet, not the windpipe.",
+    "src": "kw",
+    "raw": [
+     "WINDPIPE"
+    ]
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "STOMACH",
+    "type": "keyword",
+    "means": "Stomach",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "STOMACH"
+    ],
+    "chip": "📺 STOMACH = Stomach"
+   },
+   {
+    "ep": 6,
+    "eps": [
+     6
+    ],
+    "term": "DIGESTIVE JUICES",
+    "type": "keyword",
+    "means": "Mixes food with digestive juice",
+    "meansKind": "key",
+    "under": "Mouth",
+    "meansAll": [
+     "Mixes food with digestive juice",
+     "Churns the food up"
+    ],
+    "note": "In the mouth (saliva) and in the stomach.",
+    "src": "kw",
+    "raw": [
+     "DIGESTIVE JUICES"
+    ],
+    "chip": "📺 DIGESTIVE JUICES = Mixes food with digestive juice + Churns the food up"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "SMALL INTESTINE",
+    "type": "keyword",
+    "means": "Small intestine",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "SMALL INTESTINE"
+    ],
+    "chip": "📺 SMALL INTESTINE = Small intestine"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "MORE DIGESTIVE JUICES",
+    "type": "keyword",
+    "means": "Digestion is completed here",
+    "meansKind": "key",
+    "under": "Small intestine",
+    "partial": true,
+    "note": "Why digestion is completed in the small intestine.",
+    "src": "kw",
+    "raw": [
+     "MORE DIGESTIVE JUICES",
+     "MORE JUICES"
+    ],
+    "chip": "📺 MORE DIGESTIVE JUICES = Digestion is completed here"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "DIGESTION ENDS HERE",
+    "type": "keyword",
+    "means": "Digestion is completed here",
+    "meansKind": "key",
+    "under": "Small intestine",
+    "src": "kw",
+    "raw": [
+     "DIGESTION ENDS HERE",
+     "DIGESTION ENDS"
+    ],
+    "chip": "📺 DIGESTION ENDS HERE = Digestion is completed here"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "ABSORBED INTO BLOOD",
+    "type": "keyword",
+    "means": "Digested food is absorbed into the blood",
+    "meansKind": "key",
+    "under": "Small intestine",
+    "src": "kw",
+    "raw": [
+     "ABSORBED INTO BLOOD",
+     "INTO BLOOD"
+    ],
+    "chip": "📺 ABSORBED INTO BLOOD = Digested food is absorbed into the blood"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "LARGE INTESTINE",
+    "type": "keyword",
+    "means": "Large intestine",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "LARGE INTESTINE"
+    ],
+    "chip": "📺 LARGE INTESTINE = Large intestine"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "ABSORBS WATER",
+    "type": "keyword",
+    "means": "Absorbs water from undigested food",
+    "meansKind": "key",
+    "under": "Large intestine",
+    "src": "kw",
+    "raw": [
+     "ABSORBS WATER"
+    ],
+    "chip": "📺 ABSORBS WATER = Absorbs water from undigested food"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "RECTUM + ANUS",
+    "type": "keyword",
+    "means": "Waste leaves the body",
+    "meansKind": "key",
+    "under": "Large intestine",
+    "partial": true,
+    "note": "Where the waste leaves the body.",
+    "src": "kw",
+    "raw": [
+     "RECTUM + ANUS"
+    ],
+    "chip": "📺 RECTUM + ANUS = Waste leaves the body"
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "FIBRE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "FIBRE"
+    ]
+   },
+   {
+    "ep": 7,
+    "eps": [
+     7
+    ],
+    "term": "MALNOURISHED",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MALNOURISHED"
+    ]
+   }
+  ],
+  "mixups": [
+   {
+    "detect": [
+     "digestion starts in the stomach",
+     "digestion begins in the stomach",
+     "digestion only in the stomach",
+     "digestion happens only in the stomach",
+     "only the stomach digests",
+     "digestion starts in stomach"
+    ],
+    "say": "Exam tip: digestion begins in the mouth. It is completed in the small intestine.",
+    "src": "M-24",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "digestion begins",
+     "digestion starts"
+    ],
+    "say": "Exam tip: digestion begins in the mouth. It is completed in the small intestine.",
+    "src": "M-24",
+    "kind": "mixup",
+    "unless": [
+     "mouth"
+    ],
+    "inBranch": "Stomach"
+   },
+   {
+    "detect": [
+     "absorbed in the stomach",
+     "stomach absorbs",
+     "into the blood in the stomach"
+    ],
+    "say": "Exam tip: digested food is absorbed into the blood in the small intestine.",
+    "src": "M-25",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "absorb",
+     "absorbs",
+     "absorbed",
+     "into blood",
+     "into the blood"
+    ],
+    "say": "Exam tip: digested food is absorbed into the blood in the small intestine.",
+    "src": "M-25",
+    "kind": "mixup",
+    "inBranch": "Stomach"
+   },
+   {
+    "detect": [
+     "digestion breaks food into smaller pieces",
+     "digestion is breaking food into smaller pieces",
+     "digestion means breaking food into smaller pieces",
+     "digestion: smaller pieces",
+     "digestion = smaller pieces",
+     "digestion to smaller pieces"
+    ],
+    "say": "Exam tip: digestion breaks food down into simpler substances, not just smaller pieces.",
+    "src": "mixups.digestive#52",
+    "kind": "mixup",
+    "note": "Match within ONE node only: \"Breaks food into smaller pieces\" under Mouth is correct (teeth)."
+   },
+   {
+    "detect": [
+     "water from digested food",
+     "water from the digested food"
+    ],
+    "say": "Exam tip: the large intestine absorbs water from the undigested food.",
+    "src": "mixups.digestive#53",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "big intestine"
+    ],
+    "say": "Exam tip: its name is the large intestine.",
+    "src": "mixups.digestive#59",
+    "kind": "wording"
+   },
+   {
+    "detect": [
+     "lungs pump blood",
+     "lungs pump",
+     "lung pumps"
+    ],
+    "say": "Exam tip: the heart pumps blood. The lungs take in oxygen and give out carbon dioxide.",
+    "src": "M-26",
+    "kind": "mixup",
+    "note": "For EP5-style \"body systems\" maps made under this chapter."
+   },
+   {
+    "detect": [
+     "mouth is part of the respiratory system",
+     "respiratory && mouth"
+    ],
+    "say": "Exam tip: the mouth belongs to the digestive system. Air goes in through the nose and the windpipe.",
+    "src": "mixups.respcirc#55",
+    "kind": "mixup",
+    "note": "For EP5-style maps. \"&&\" = both in the same node or the node and its branch."
+   },
+   {
+    "detect": [
+     "breathing tube",
+     "circulation system"
+    ],
+    "say": "Exam tip: use the exact names: windpipe, circulatory system.",
+    "src": "mixups.respcirc#59",
+    "kind": "wording"
+   }
+  ],
+  "mixupsSkipped": [
+   "mixups.digestive#54 (less blood -> less absorption; question-specific)",
+   "M-27 (respiratory; P5 chapter)"
+  ],
+  "extras": [
+   {
+    "term": "RESPIRATORY",
+    "eps": [
+     5
+    ],
+    "note": "See Circulatory System (respcirc, P5)."
+   },
+   {
+    "term": "CIRCULATORY",
+    "eps": [
+     5
+    ],
+    "note": "See Circulatory System (respcirc, P5)."
+   },
+   {
+    "term": "SKELETAL",
+    "eps": [
+     5
+    ],
+    "note": "No Mind Lab poster (Recitation topic only)."
+   },
+   {
+    "term": "MUSCULAR",
+    "eps": [
+     5
+    ],
+    "note": "No Mind Lab poster."
+   },
+   {
+    "term": "MODEL",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "RESPIRATORY SYSTEM",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "EXCHANGE OF GASES",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "CIRCULATORY SYSTEM",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "SKELETAL SYSTEM",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "FEMUR",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "MUSCULAR SYSTEM",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "CONTRACT / RELAX",
+    "eps": [
+     5
+    ]
+   },
+   {
+    "term": "tongue",
+    "eps": [
+     6
+    ],
+    "note": "A part, not a job. Accept under Mouth."
+   },
+   {
+    "term": "MORE SURFACE EXPOSED",
+    "eps": [
+     6
+    ],
+    "note": "Why chewing helps digestion."
+   },
+   {
+    "term": "WINDPIPE",
+    "eps": [
+     6
+    ],
+    "note": "Respiratory system; food goes down the gullet, not the windpipe."
+   },
+   {
+    "term": "FIBRE",
+    "eps": [
+     7
+    ]
+   },
+   {
+    "term": "MALNOURISHED",
+    "eps": [
+     7
+    ]
+   }
+  ],
+  "habitLabelsSkipped": {
+   "5": [
+    "NEVER MISS TWICE"
+   ],
+   "6": [
+    "PLAN TIME + PLACE"
+   ],
+   "7": [
+    "MAKE IT EASY"
+   ]
+  }
+ },
+ "matter": {
+  "title": "Matter",
+  "lv": "P4",
+  "idea": "Everything around us is matter. All matter has mass, takes up space, and can change state.",
+  "eps": [
+   8,
+   9,
+   10,
+   11,
+   12
+  ],
+  "centreAliases": [
+   "matter",
+   "states of matter",
+   "three states of matter",
+   "3 states of matter"
+  ],
+  "app": [
+   {
+    "branch": "All matter has",
+    "aliases": [
+     "all matter has",
+     "matter has",
+     "properties of matter",
+     "what matter has"
+    ],
+    "keys": [
+     "Mass",
+     "Volume"
+    ],
+    "keyAliases": {
+     "Mass": [
+      "mass",
+      "has mass",
+      "have mass"
+     ],
+     "Volume": [
+      "volume",
+      "takes up space",
+      "take up space",
+      "occupies space",
+      "has volume",
+      "space"
+     ]
+    },
+    "rank": 1,
+    "hint": "What does all matter have? Add a branch for it."
+   },
+   {
+    "branch": "Solid",
+    "aliases": [
+     "solid",
+     "solids"
+    ],
+    "keys": [
+     "Fixed shape",
+     "Fixed volume"
+    ],
+    "keyAliases": {
+     "Fixed shape": [
+      "fixed shape",
+      "definite shape",
+      "keeps its shape",
+      "own shape",
+      "shape ✓"
+     ],
+     "Fixed volume": [
+      "fixed volume",
+      "definite volume",
+      "volume ✓"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a branch for solids. Think about shape and volume."
+   },
+   {
+    "branch": "Liquid",
+    "aliases": [
+     "liquid",
+     "liquids"
+    ],
+    "keys": [
+     "Takes the shape of its container",
+     "Fixed volume"
+    ],
+    "keyAliases": {
+     "Takes the shape of its container": [
+      "takes the shape of its container",
+      "takes the shape of the container",
+      "shape of the container",
+      "no fixed shape",
+      "no definite shape",
+      "shape ✗"
+     ],
+     "Fixed volume": [
+      "fixed volume",
+      "definite volume",
+      "volume ✓"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a branch for liquids. Think about shape and volume."
+   },
+   {
+    "branch": "Gas",
+    "aliases": [
+     "gas",
+     "gases"
+    ],
+    "keys": [
+     "Fills up the whole container",
+     "No fixed shape or volume"
+    ],
+    "keyAliases": {
+     "Fills up the whole container": [
+      "fills up the whole container",
+      "fills the container",
+      "fills up the container",
+      "fills the whole container",
+      "fills any container",
+      "spreads out to fill"
+     ],
+     "No fixed shape or volume": [
+      "no fixed shape or volume",
+      "no fixed shape",
+      "no fixed volume",
+      "no definite shape",
+      "no definite volume",
+      "shape ✗ volume ✗",
+      "volume ✗"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add a branch for gases. Think about shape and volume."
+   },
+   {
+    "branch": "Changing state",
+    "aliases": [
+     "changing state",
+     "change of state",
+     "changes of state",
+     "change state",
+     "state change",
+     "melting",
+     "freezing"
+    ],
+    "keys": [
+     "Gains heat",
+     "Loses heat"
+    ],
+    "keyAliases": {
+     "Gains heat": [
+      "gains heat",
+      "gain heat",
+      "gaining heat",
+      "heated",
+      "when heated"
+     ],
+     "Loses heat": [
+      "loses heat",
+      "lose heat",
+      "losing heat",
+      "cooled",
+      "when cooled"
+     ]
+    },
+    "rank": 5,
+    "hint": "Matter can change state. What makes it change?"
+   }
+  ],
+  "videoCentre": [
+   {
+    "ep": 8,
+    "eps": [
+     8,
+     10,
+     11,
+     12
+    ],
+    "term": "MATTER",
+    "type": "branch",
+    "means": "Matter",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "MATTER"
+    ],
+    "chip": "📺 MATTER = Matter"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "STATES OF MATTER",
+    "type": "branch",
+    "means": "Matter",
+    "meansKind": "centre",
+    "note": "Its three branches are the app branches Solid, Liquid, Gas.",
+    "src": "map",
+    "raw": [
+     "STATES OF MATTER",
+     "STATES OF",
+     "MATTER"
+    ],
+    "chip": "📺 STATES OF MATTER = Matter"
+   }
+  ],
+  "video": [
+   {
+    "ep": 8,
+    "eps": [
+     8,
+     10,
+     11,
+     12
+    ],
+    "term": "HAS MASS",
+    "type": "branch",
+    "means": "Mass",
+    "meansKind": "key",
+    "under": "All matter has",
+    "note": "Video BRANCH = app KEY WORD (under \"All matter has\"). Accept as a branch.",
+    "src": "map+scene",
+    "raw": [
+     "⚖️ HAS MASS"
+    ],
+    "chip": "📺 HAS MASS = Mass"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "kg, g",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HAS MASS",
+    "note": "Units of mass.",
+    "src": "map",
+    "raw": [
+     "kg, g",
+     "kg, g · use a balance"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "use a balance",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HAS MASS",
+    "src": "map",
+    "raw": [
+     "use a balance",
+     "kg, g · use a balance"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8,
+     10,
+     11,
+     12
+    ],
+    "term": "TAKES UP SPACE",
+    "type": "branch",
+    "means": "Volume",
+    "meansKind": "key",
+    "under": "All matter has",
+    "note": "Video BRANCH = app KEY WORD (under \"All matter has\"). Accept as a branch.",
+    "src": "map+scene",
+    "raw": [
+     "📦 TAKES UP SPACE"
+    ],
+    "chip": "📺 TAKES UP SPACE = Volume"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8,
+     11
+    ],
+    "term": "volume",
+    "type": "keyword",
+    "means": "Volume",
+    "meansKind": "key",
+    "under": "All matter has",
+    "videoParent": "TAKES UP SPACE",
+    "src": "map+scene",
+    "raw": [
+     "volume"
+    ],
+    "chip": "📺 volume = Volume"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "✗ NOT MATTER",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Light, shadow, heat and sound are not matter. Its \"heat\" must NOT count as Changing state > Gains heat.",
+    "src": "map+scene",
+    "raw": [
+     "✗ NOT MATTER",
+     "NOT MATTER ✗"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "light",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NOT MATTER",
+    "src": "map",
+    "raw": [
+     "light · shadow",
+     "💡 light"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "shadow",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NOT MATTER",
+    "src": "map",
+    "raw": [
+     "light · shadow",
+     "👤 shadow"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "heat",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NOT MATTER",
+    "src": "map",
+    "raw": [
+     "heat · sound",
+     "🔥 heat"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "sound",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NOT MATTER",
+    "src": "map",
+    "raw": [
+     "heat · sound",
+     "🔊 sound"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "MATTER",
+    "type": "keyword",
+    "means": "Matter",
+    "meansKind": "centre",
+    "src": "kw",
+    "raw": [
+     "MATTER"
+    ],
+    "chip": "📺 MATTER = Matter"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "MASS",
+    "type": "keyword",
+    "means": "Mass",
+    "meansKind": "key",
+    "under": "All matter has",
+    "src": "kw",
+    "raw": [
+     "MASS"
+    ],
+    "chip": "📺 MASS = Mass"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "BALANCE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BALANCE"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "VOLUME",
+    "type": "keyword",
+    "means": "Volume",
+    "meansKind": "key",
+    "under": "All matter has",
+    "src": "kw",
+    "raw": [
+     "VOLUME"
+    ],
+    "chip": "📺 VOLUME = Volume"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "NOT MATTER",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "NOT MATTER"
+    ]
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "AIR HAS MASS",
+    "type": "keyword",
+    "means": "Mass",
+    "meansKind": "key",
+    "under": "All matter has",
+    "partial": true,
+    "note": "Air is a gas, and it has mass.",
+    "src": "kw",
+    "raw": [
+     "AIR HAS MASS",
+     "AIR: MASS"
+    ],
+    "chip": "📺 AIR HAS MASS = Mass"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "AIR TAKES UP SPACE",
+    "type": "keyword",
+    "means": "Volume",
+    "meansKind": "key",
+    "under": "All matter has",
+    "partial": true,
+    "src": "kw",
+    "raw": [
+     "AIR TAKES UP SPACE",
+     "AIR: SPACE"
+    ],
+    "chip": "📺 AIR TAKES UP SPACE = Volume"
+   },
+   {
+    "ep": 8,
+    "eps": [
+     8
+    ],
+    "term": "AIR IS MATTER",
+    "type": "keyword",
+    "means": "Everything around us is matter. All matter has mass, takes up space, and can change state.",
+    "meansKind": "idea",
+    "src": "kw",
+    "raw": [
+     "AIR IS MATTER"
+    ],
+    "chip": "📺 AIR IS MATTER = Everything around us is matter. All matter has mass, takes up space, and can change state."
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "SOLID",
+    "type": "branch",
+    "means": "Solid",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🧊 SOLID"
+    ],
+    "chip": "📺 SOLID = Solid"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "shape ✓",
+    "type": "keyword",
+    "means": "Fixed shape",
+    "meansKind": "key",
+    "under": "Solid",
+    "videoParent": "SOLID",
+    "src": "map",
+    "raw": [
+     "shape ✓ volume ✓",
+     "shape ✓  volume ✓  squeeze ✗"
+    ],
+    "chip": "📺 shape ✓ = Fixed shape"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "volume ✓",
+    "type": "keyword",
+    "means": "Fixed volume",
+    "meansKind": "key",
+    "under": "Solid",
+    "videoParent": "SOLID",
+    "src": "map",
+    "raw": [
+     "shape ✓ volume ✓",
+     "shape ✓  volume ✓  squeeze ✗"
+    ],
+    "chip": "📺 volume ✓ = Fixed volume"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "squeeze ✗",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "SOLID",
+    "note": "Cannot be compressed.",
+    "src": "map",
+    "raw": [
+     "squeeze ✗",
+     "shape ✓  volume ✓  squeeze ✗"
+    ]
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "LIQUID",
+    "type": "branch",
+    "means": "Liquid",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "💧 LIQUID"
+    ],
+    "chip": "📺 LIQUID = Liquid"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "shape ✗",
+    "type": "keyword",
+    "means": "Takes the shape of its container",
+    "meansKind": "key",
+    "under": "Liquid",
+    "videoParent": "LIQUID",
+    "note": "No fixed shape.",
+    "src": "map",
+    "raw": [
+     "shape ✗ volume ✓",
+     "shape ✗  volume ✓  squeeze ✗"
+    ],
+    "chip": "📺 shape ✗ = Takes the shape of its container"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "volume ✓",
+    "type": "keyword",
+    "means": "Fixed volume",
+    "meansKind": "key",
+    "under": "Liquid",
+    "videoParent": "LIQUID",
+    "src": "map",
+    "raw": [
+     "shape ✗ volume ✓",
+     "shape ✗  volume ✓  squeeze ✗"
+    ],
+    "chip": "📺 volume ✓ = Fixed volume"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "squeeze ✗",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "LIQUID",
+    "note": "Cannot be compressed.",
+    "src": "map",
+    "raw": [
+     "squeeze ✗",
+     "shape ✗  volume ✓  squeeze ✗"
+    ]
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "GAS",
+    "type": "branch",
+    "means": "Gas",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "💨 GAS"
+    ],
+    "chip": "📺 GAS = Gas"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "shape ✗ volume ✗",
+    "type": "keyword",
+    "means": "No fixed shape or volume",
+    "meansKind": "key",
+    "under": "Gas",
+    "videoParent": "GAS",
+    "src": "map",
+    "raw": [
+     "shape ✗ volume ✗",
+     "shape ✗  volume ✗  squeeze ✓"
+    ],
+    "chip": "📺 shape ✗ volume ✗ = No fixed shape or volume"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "squeeze ✓",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "GAS",
+    "note": "Can be compressed.",
+    "src": "map",
+    "raw": [
+     "squeeze ✓",
+     "shape ✗  volume ✗  squeeze ✓"
+    ]
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "3 STATES OF MATTER",
+    "type": "keyword",
+    "means": "Solid",
+    "meansKind": "branch",
+    "meansAll": [
+     "Solid",
+     "Liquid",
+     "Gas"
+    ],
+    "src": "kw",
+    "raw": [
+     "3 STATES OF MATTER",
+     "3 STATES"
+    ],
+    "chip": "📺 3 STATES OF MATTER = Solid + Liquid + Gas"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "DEFINITE SHAPE",
+    "type": "keyword",
+    "means": "Fixed shape",
+    "meansKind": "key",
+    "under": "Solid",
+    "note": "definite = fixed",
+    "src": "kw",
+    "raw": [
+     "DEFINITE SHAPE"
+    ],
+    "chip": "📺 DEFINITE SHAPE = Fixed shape"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "DEFINITE VOLUME",
+    "type": "keyword",
+    "means": "Fixed volume",
+    "meansKind": "key",
+    "under": "Solid",
+    "note": "Solid and Liquid.",
+    "src": "kw",
+    "raw": [
+     "DEFINITE VOLUME"
+    ],
+    "chip": "📺 DEFINITE VOLUME = Fixed volume"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "SOLID",
+    "type": "keyword",
+    "means": "Solid",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "SOLID"
+    ],
+    "chip": "📺 SOLID = Solid"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "LIQUID",
+    "type": "keyword",
+    "means": "Liquid",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "LIQUID"
+    ],
+    "chip": "📺 LIQUID = Liquid"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "GAS",
+    "type": "keyword",
+    "means": "Gas",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "GAS"
+    ],
+    "chip": "📺 GAS = Gas"
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "GAS CAN BE COMPRESSED",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "GAS CAN BE COMPRESSED",
+     "GAS: SQUEEZABLE"
+    ]
+   },
+   {
+    "ep": 9,
+    "eps": [
+     9
+    ],
+    "term": "HELIUM",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "HELIUM"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "kg and g",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HAS MASS",
+    "note": "Units of mass.",
+    "src": "map+scene",
+    "raw": [
+     "kg and g"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "electronic balance",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HAS MASS",
+    "src": "map+scene",
+    "raw": [
+     "electronic balance"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "3 rules: flat · ON when empty · zero/tare",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HAS MASS",
+    "src": "scene",
+    "raw": [
+     "3 rules: flat · ON when empty · zero/tare"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "KILOGRAMS (kg)",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "KILOGRAMS (kg)"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "GRAMS (g)",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "GRAMS (g)"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "ELECTRONIC BALANCE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "ELECTRONIC BALANCE",
+     "E-BALANCE"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "FLAT + STEADY",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "FLAT + STEADY"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "READS ZERO",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "READS ZERO"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "ZERO ERROR",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "ZERO ERROR"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "TARE BUTTON",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "TARE BUTTON"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "SUBTRACT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SUBTRACT"
+    ]
+   },
+   {
+    "ep": 10,
+    "eps": [
+     10
+    ],
+    "term": "AIR: 11 g",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "AIR: 11 g"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "cm³ and ml",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "TAKES UP SPACE",
+    "note": "Units of volume.",
+    "src": "map",
+    "raw": [
+     "volume: cm³ and ml",
+     "cm³ and ml (1 cm³ = 1 ml)"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "measuring cylinder",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "TAKES UP SPACE",
+    "src": "map",
+    "raw": [
+     "measuring cylinder",
+     "measuring cylinder · eye level"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "eye level",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "TAKES UP SPACE",
+    "src": "scene",
+    "raw": [
+     "measuring cylinder · eye level"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "MEASURING CYLINDER",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MEASURING CYLINDER",
+     "MEAS. CYLINDER"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "MORE ACCURATE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MORE ACCURATE"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "cm³",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "cm³"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "ml",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "ml"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "1 cm³ = 1 ml",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "1 cm³ = 1 ml"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "FLAT SURFACE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "FLAT SURFACE"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "EYE LEVEL",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "EYE LEVEL"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "BOTTOM OF THE CURVE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BOTTOM OF THE CURVE",
+     "READ THE BOTTOM"
+    ]
+   },
+   {
+    "ep": 11,
+    "eps": [
+     11
+    ],
+    "term": "WATER RISES",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "WATER RISES"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "HOW SCIENTISTS INVESTIGATE",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Experimental skills (mixups._exp applies to every chapter).",
+    "src": "map",
+    "raw": [
+     "🔬 HOW SCIENTISTS INVESTIGATE"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "hypothesis",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HOW SCIENTISTS INVESTIGATE",
+    "src": "map+scene",
+    "raw": [
+     "hypothesis"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "fair test",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HOW SCIENTISTS INVESTIGATE",
+    "src": "map",
+    "raw": [
+     "fair test: change 1 variable",
+     "fair test"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "change 1 variable",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HOW SCIENTISTS INVESTIGATE",
+    "src": "map",
+    "raw": [
+     "fair test: change 1 variable",
+     "change 1 variable, keep the rest"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "measure (e.g. mass)",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HOW SCIENTISTS INVESTIGATE",
+    "src": "scene",
+    "raw": [
+     "measure (e.g. mass)"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "HYPOTHESIS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "HYPOTHESIS"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "PREDICTION FROM WHAT YOU KNOW",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "PREDICTION FROM WHAT YOU KNOW",
+     "PREDICTION"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "FAIR TEST",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "FAIR TEST"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "CHANGE ONLY 1 VARIABLE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "CHANGE ONLY 1 VARIABLE",
+     "CHANGE 1 THING"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "MEASURED VARIABLE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MEASURED VARIABLE",
+     "MEASURE"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "RESULTS SUPPORT HYPOTHESIS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "RESULTS SUPPORT HYPOTHESIS",
+     "SUPPORTED ✓"
+    ]
+   },
+   {
+    "ep": 12,
+    "eps": [
+     12
+    ],
+    "term": "SHAPE DOESN'T CHANGE MASS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Related to Mass (M-14). Must NOT trigger the M-14 mix-up (negated).",
+    "src": "kw",
+    "raw": [
+     "SHAPE DOESN'T CHANGE MASS",
+     "SHAPE ≠ MASS"
+    ]
+   }
+  ],
+  "mixups": [
+   {
+    "detect": [
+     "gas has no mass",
+     "gases have no mass",
+     "air has no mass",
+     "air has no weight",
+     "air weighs nothing",
+     "gas weighs nothing",
+     "air is not matter",
+     "gas is not matter",
+     "gases are not matter",
+     "air is nothing",
+     "air does not take up space",
+     "air doesn't take up space",
+     "gas does not take up space",
+     "gases do not take up space",
+     "air takes up no space"
+    ],
+    "say": "Exam tip: air is matter. It has mass and takes up space.",
+    "src": "M-13",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "breaking reduces mass",
+     "less mass when broken",
+     "cutting reduces mass",
+     "mass changes with shape",
+     "shape changes mass",
+     "changing shape changes mass",
+     "less matter when broken",
+     "smaller pieces have less mass"
+    ],
+    "say": "Exam tip: changing the shape does not change the mass. The amount of matter stays the same.",
+    "src": "M-14",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "doesn't",
+     "does not",
+     "no",
+     "≠"
+    ]
+   },
+   {
+    "detect": [
+     "liquid has a fixed shape",
+     "liquids have a fixed shape",
+     "liquid has a definite shape",
+     "liquids have a definite shape",
+     "liquids keep their shape",
+     "liquid keeps its shape"
+    ],
+    "say": "Exam tip: a liquid has no fixed shape. It takes the shape of its container.",
+    "src": "M-15",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "fixed shape",
+     "definite shape",
+     "own shape",
+     "keeps its shape",
+     "shape ✓"
+    ],
+    "say": "Exam tip: a liquid has no fixed shape. It takes the shape of its container.",
+    "src": "M-15",
+    "kind": "mixup",
+    "unless": [
+     "no",
+     "not",
+     "without",
+     "✗"
+    ],
+    "inBranch": "Liquid"
+   },
+   {
+    "detect": [
+     "fixed volume",
+     "definite volume",
+     "volume ✓",
+     "fixed shape",
+     "definite shape",
+     "shape ✓"
+    ],
+    "say": "Exam tip: a gas has no fixed shape and no fixed volume. It fills up the whole container.",
+    "src": "M-13 (wrong: \"A gas ... fills its container\") + TOPICS Gas keys",
+    "kind": "mixup",
+    "unless": [
+     "no",
+     "not",
+     "without",
+     "✗"
+    ],
+    "inBranch": "Gas"
+   },
+   {
+    "detect": [
+     "same volume same mass",
+     "same size same mass",
+     "same volume means same mass",
+     "same size means same mass",
+     "same volume so same mass"
+    ],
+    "say": "Exam tip: two things can take up the same space but have different masses.",
+    "src": "M-44",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "doesn't",
+     "does not"
+    ]
+   },
+   {
+    "detect": [
+     "loses heat and melts",
+     "lose heat and melt",
+     "lost heat and melted",
+     "melts when it loses heat",
+     "melts when cooled",
+     "lose heat to melt",
+     "gains heat and freezes",
+     "gain heat and freeze",
+     "freezes when heated",
+     "freezes when it gains heat",
+     "gain heat to freeze"
+    ],
+    "say": "Exam tip: ice gains heat and melts. Water loses heat and freezes.",
+    "src": "mixups.water#9",
+    "kind": "mixup",
+    "note": "Card is keyed \"water\" (P5); the same idea is on this poster (Changing state)."
+   },
+   {
+    "detect": [
+     "repeat the experiment",
+     "repeat experiment",
+     "do it again"
+    ],
+    "say": "Exam tip: repeat the experiment and find the average.",
+    "src": "mixups._exp#75",
+    "kind": "mixup",
+    "unless": [
+     "average"
+    ],
+    "note": "For an EP12-style \"How scientists investigate\" branch."
+   },
+   {
+    "detect": [
+     "amount of water",
+     "size of",
+     "type of"
+    ],
+    "say": "Exam tip: name something you can measure, like the volume of water.",
+    "src": "mixups._exp#76",
+    "kind": "wording",
+    "note": "Only inside an investigate / fair-test branch (match the parent text: investigate, fair test, variable)."
+   }
+  ],
+  "mixupsSkipped": [
+   "mixups._exp#77-80 (answer-writing; not map-shaped)"
+  ],
+  "mixupCandidates": [
+   {
+    "detect": [
+     "light is matter",
+     "heat is matter",
+     "sound is matter",
+     "shadow is matter",
+     "light has mass",
+     "heat has mass",
+     "sound has mass"
+    ],
+    "say": "Exam tip: light, heat, sound and shadows are not matter. They have no mass.",
+    "src": "video EP8 (NOT MATTER box)",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "no",
+     "isn't"
+    ],
+    "note": "NOT in misconceptions.js / mixups.js: needs the teacher's approval."
+   }
+  ],
+  "extras": [
+   {
+    "term": "kg, g",
+    "eps": [
+     8
+    ],
+    "note": "Units of mass."
+   },
+   {
+    "term": "use a balance",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "✗ NOT MATTER",
+    "eps": [
+     8
+    ],
+    "note": "Light, shadow, heat and sound are not matter. Its \"heat\" must NOT count as Changing state > Gains heat."
+   },
+   {
+    "term": "light",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "shadow",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "heat",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "sound",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "BALANCE",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "NOT MATTER",
+    "eps": [
+     8
+    ]
+   },
+   {
+    "term": "squeeze ✗",
+    "eps": [
+     9
+    ],
+    "note": "Cannot be compressed."
+   },
+   {
+    "term": "squeeze ✓",
+    "eps": [
+     9
+    ],
+    "note": "Can be compressed."
+   },
+   {
+    "term": "GAS CAN BE COMPRESSED",
+    "eps": [
+     9
+    ]
+   },
+   {
+    "term": "HELIUM",
+    "eps": [
+     9
+    ]
+   },
+   {
+    "term": "kg and g",
+    "eps": [
+     10
+    ],
+    "note": "Units of mass."
+   },
+   {
+    "term": "electronic balance",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "3 rules: flat · ON when empty · zero/tare",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "KILOGRAMS (kg)",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "GRAMS (g)",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "FLAT + STEADY",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "READS ZERO",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "ZERO ERROR",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "TARE BUTTON",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "SUBTRACT",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "AIR: 11 g",
+    "eps": [
+     10
+    ]
+   },
+   {
+    "term": "cm³ and ml",
+    "eps": [
+     11
+    ],
+    "note": "Units of volume."
+   },
+   {
+    "term": "measuring cylinder",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "eye level",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "MORE ACCURATE",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "cm³",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "ml",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "1 cm³ = 1 ml",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "FLAT SURFACE",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "BOTTOM OF THE CURVE",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "WATER RISES",
+    "eps": [
+     11
+    ]
+   },
+   {
+    "term": "HOW SCIENTISTS INVESTIGATE",
+    "eps": [
+     12
+    ],
+    "note": "Experimental skills (mixups._exp applies to every chapter)."
+   },
+   {
+    "term": "hypothesis",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "fair test",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "change 1 variable",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "measure (e.g. mass)",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "PREDICTION FROM WHAT YOU KNOW",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "CHANGE ONLY 1 VARIABLE",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "MEASURED VARIABLE",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "RESULTS SUPPORT HYPOTHESIS",
+    "eps": [
+     12
+    ]
+   },
+   {
+    "term": "SHAPE DOESN'T CHANGE MASS",
+    "eps": [
+     12
+    ],
+    "note": "Related to Mass (M-14). Must NOT trigger the M-14 mix-up (negated)."
+   }
+  ],
+  "habitLabelsSkipped": {
+   "8": [
+    "I AM A SCIENTIST"
+   ],
+   "9": [
+    "HABIT TRACKER"
+   ],
+   "10": [
+    "MAKE IT ATTRACTIVE"
+   ],
+   "11": [
+    "STUDY BUDDY"
+   ],
+   "12": [
+    "TREAT IT LIKE AN EXPERIMENT"
+   ]
+  }
+ },
+ "light": {
+  "title": "Light",
+  "lv": "P4",
+  "idea": "Light travels in straight lines. That one fact explains shadows, reflection and how we see.",
+  "eps": [
+   13,
+   14,
+   15,
+   16,
+   17
+  ],
+  "centreAliases": [
+   "light"
+  ],
+  "app": [
+   {
+    "branch": "Light travels",
+    "aliases": [
+     "light travels",
+     "how light travels"
+    ],
+    "keys": [
+     "In straight lines"
+    ],
+    "keyAliases": {
+     "In straight lines": [
+      "straight lines",
+      "straight line",
+      "in a straight line",
+      "travels straight",
+      "travels in straight lines"
+     ]
+    },
+    "rank": 1,
+    "hint": "Add the big idea: how does light travel?"
+   },
+   {
+    "branch": "How we see",
+    "aliases": [
+     "how we see",
+     "seeing",
+     "how do we see"
+    ],
+    "keys": [
+     "Light enters our eyes",
+     "No light means no seeing"
+    ],
+    "keyAliases": {
+     "Light enters our eyes": [
+      "enters our eyes",
+      "enters the eyes",
+      "enter the eyes",
+      "enters the eye",
+      "into our eyes",
+      "into the eyes",
+      "reaches our eyes",
+      "light must enter the eyes"
+     ],
+     "No light means no seeing": [
+      "no light no seeing",
+      "cannot see in the dark",
+      "can't see in the dark",
+      "cannot see without light",
+      "need light to see",
+      "no light cannot see"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a branch for how we see. Where must the light go?"
+   },
+   {
+    "branch": "Shadows",
+    "aliases": [
+     "shadow",
+     "shadows"
+    ],
+    "keys": [
+     "Light is blocked",
+     "Nearer the light, bigger the shadow",
+     "Same shape as the object"
+    ],
+    "keyAliases": {
+     "Light is blocked": [
+      "light is blocked",
+      "blocks light",
+      "blocks the light",
+      "blocked",
+      "opaque",
+      "opaque blocks all light"
+     ],
+     "Nearer the light, bigger the shadow": [
+      "nearer the light bigger",
+      "closer to the light bigger",
+      "near the light bigger",
+      "light closer bigger",
+      "nearer the light bigger shadow",
+      "object nearer the light bigger",
+      "shadow size",
+      "size"
+     ],
+     "Same shape as the object": [
+      "same shape",
+      "shadow shape",
+      "shape of the object",
+      "part facing the light",
+      "outline of the object",
+      "shape"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a branch for shadows. How does a shadow form?"
+   },
+   {
+    "branch": "Reflection",
+    "aliases": [
+     "reflection",
+     "reflect",
+     "reflects",
+     "reflected"
+    ],
+    "keys": [
+     "Light bounces off surfaces",
+     "Mirrors reflect best"
+    ],
+    "keyAliases": {
+     "Light bounces off surfaces": [
+      "bounces off",
+      "bounce off",
+      "light bounces",
+      "reflected from objects",
+      "reflected off",
+      "light is reflected",
+      "reflects light"
+     ],
+     "Mirrors reflect best": [
+      "mirror",
+      "mirrors",
+      "shiny surfaces"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add a branch for reflection. What happens when light hits a surface?"
+   }
+  ],
+  "videoCentre": [
+   {
+    "ep": 13,
+    "eps": [
+     13,
+     14,
+     15,
+     16,
+     17
+    ],
+    "term": "LIGHT",
+    "type": "branch",
+    "means": "Light",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "LIGHT",
+     "💡 LIGHT"
+    ],
+    "chip": "📺 LIGHT = Light"
+   }
+  ],
+  "video": [
+   {
+    "ep": 13,
+    "eps": [
+     13,
+     14
+    ],
+    "term": "NATURAL SOURCES",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Light sources. The Light poster has no \"sources of light\" branch.",
+    "src": "map+scene",
+    "raw": [
+     "🌿 NATURAL SOURCES"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15,
+     16,
+     17
+    ],
+    "term": "NATURAL",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Short form of NATURAL SOURCES.",
+    "src": "map+scene",
+    "raw": [
+     "🌿 NATURAL"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "Sun",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NATURAL SOURCES",
+    "src": "map",
+    "raw": [
+     "Sun · lightning",
+     "Sun (a star) · other stars"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "other stars",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NATURAL SOURCES",
+    "src": "scene",
+    "raw": [
+     "Sun (a star) · other stars"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "lightning",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NATURAL SOURCES",
+    "src": "map+scene",
+    "raw": [
+     "Sun · lightning",
+     "lightning"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "fireflies",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NATURAL SOURCES",
+    "src": "map+scene",
+    "raw": [
+     "fireflies",
+     "fireflies · jellyfish · glow-worms"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "jellyfish",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NATURAL SOURCES",
+    "src": "scene",
+    "raw": [
+     "fireflies · jellyfish · glow-worms"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "glow-worms",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "NATURAL SOURCES",
+    "src": "scene",
+    "raw": [
+     "fireflies · jellyfish · glow-worms"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13,
+     14
+    ],
+    "term": "MAN-MADE SOURCES",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "map+scene",
+    "raw": [
+     "🏭 MAN-MADE SOURCES"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15,
+     16,
+     17
+    ],
+    "term": "MAN-MADE",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "map+scene",
+    "raw": [
+     "🏭 MAN-MADE"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "light bulbs",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "MAN-MADE SOURCES",
+    "src": "map+scene",
+    "raw": [
+     "light bulbs"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "fireworks",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "MAN-MADE SOURCES",
+    "src": "scene",
+    "raw": [
+     "fireworks"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "candles",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "MAN-MADE SOURCES",
+    "src": "map+scene",
+    "raw": [
+     "candles · torches"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "torches",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "MAN-MADE SOURCES",
+    "src": "map+scene",
+    "raw": [
+     "candles · torches"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "ENERGY",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "See Energy Conversion (P6).",
+    "src": "kw",
+    "raw": [
+     "ENERGY"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "FORMS OF ENERGY",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "See Energy Conversion (P6).",
+    "src": "kw",
+    "raw": [
+     "FORMS OF ENERGY"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "SOURCE OF LIGHT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SOURCE OF LIGHT",
+     "LIGHT SOURCE"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "NATURAL",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "NATURAL"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "MAN-MADE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MAN-MADE"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "THE SUN IS A STAR",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "THE SUN IS A STAR",
+     "SUN = STAR"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "LIGHTNING",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "LIGHTNING"
+    ]
+   },
+   {
+    "ep": 13,
+    "eps": [
+     13
+    ],
+    "term": "LIVING LIGHT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "LIVING LIGHT"
+    ]
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14,
+     15,
+     16,
+     17
+    ],
+    "term": "HOW WE SEE",
+    "type": "branch",
+    "means": "How we see",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "👁️ HOW WE SEE"
+    ],
+    "chip": "📺 HOW WE SEE = How we see"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "light must ENTER the eyes",
+    "type": "keyword",
+    "means": "Light enters our eyes",
+    "meansKind": "key",
+    "under": "How we see",
+    "videoParent": "HOW WE SEE",
+    "src": "scene",
+    "raw": [
+     "light must ENTER the eyes"
+    ],
+    "chip": "📺 light must ENTER the eyes = Light enters our eyes"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "directly from a source",
+    "type": "keyword",
+    "means": "Light enters our eyes",
+    "meansKind": "key",
+    "under": "How we see",
+    "videoParent": "HOW WE SEE",
+    "partial": true,
+    "note": "Light from a source enters the eyes directly.",
+    "src": "map+scene",
+    "raw": [
+     "directly from a source"
+    ],
+    "chip": "📺 directly from a source = Light enters our eyes"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "reflected from objects",
+    "type": "keyword",
+    "means": "Light bounces off surfaces",
+    "meansKind": "key",
+    "under": "Reflection",
+    "videoParent": "HOW WE SEE",
+    "meansAll": [
+     "Light bounces off surfaces",
+     "Light enters our eyes"
+    ],
+    "note": "Video puts reflection UNDER How we see; the app has its own Reflection branch.",
+    "src": "map+scene",
+    "raw": [
+     "reflected from objects"
+    ],
+    "chip": "📺 reflected from objects = Light bounces off surfaces + Light enters our eyes"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "the Moon reflects sunlight",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HOW WE SEE",
+    "note": "An example of reflection: accept, related to Reflection.",
+    "src": "scene",
+    "raw": [
+     "the Moon reflects sunlight"
+    ]
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "LIGHT MUST ENTER THE EYES",
+    "type": "keyword",
+    "means": "Light enters our eyes",
+    "meansKind": "key",
+    "under": "How we see",
+    "src": "kw",
+    "raw": [
+     "LIGHT MUST ENTER THE EYES",
+     "ENTERS EYES"
+    ],
+    "chip": "📺 LIGHT MUST ENTER THE EYES = Light enters our eyes"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "SEEN DIRECTLY",
+    "type": "keyword",
+    "means": "Light enters our eyes",
+    "meansKind": "key",
+    "under": "How we see",
+    "partial": true,
+    "src": "kw",
+    "raw": [
+     "SEEN DIRECTLY"
+    ],
+    "chip": "📺 SEEN DIRECTLY = Light enters our eyes"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "LIGHT FALLS ON THE OBJECT",
+    "type": "keyword",
+    "means": "Light bounces off surfaces",
+    "meansKind": "key",
+    "under": "Reflection",
+    "partial": true,
+    "note": "Light falls on the object and is reflected into our eyes.",
+    "src": "kw",
+    "raw": [
+     "LIGHT FALLS ON THE OBJECT",
+     "FALLS ON"
+    ],
+    "chip": "📺 LIGHT FALLS ON THE OBJECT = Light bounces off surfaces"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "REFLECTION",
+    "type": "keyword",
+    "means": "Reflection",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "REFLECTION"
+    ],
+    "chip": "📺 REFLECTION = Reflection"
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "MOON: NOT A SOURCE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MOON: NOT A SOURCE",
+     "MOON ≠ SOURCE"
+    ]
+   },
+   {
+    "ep": 14,
+    "eps": [
+     14
+    ],
+    "term": "BORROWED SUNLIGHT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BORROWED SUNLIGHT"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15,
+     16,
+     17
+    ],
+    "term": "SHADOWS",
+    "type": "branch",
+    "means": "Shadows",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "👤 SHADOWS"
+    ],
+    "chip": "📺 SHADOWS = Shadows"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "light travels in STRAIGHT lines",
+    "type": "keyword",
+    "means": "In straight lines",
+    "meansKind": "key",
+    "under": "Light travels",
+    "videoParent": "SHADOWS",
+    "note": "Video puts it UNDER Shadows; the app has its own \"Light travels\" branch.",
+    "src": "scene",
+    "raw": [
+     "light travels in STRAIGHT lines"
+    ],
+    "chip": "📺 light travels in STRAIGHT lines = In straight lines"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "opaque ➜ dark shadow",
+    "type": "keyword",
+    "means": "Light is blocked",
+    "meansKind": "key",
+    "under": "Shadows",
+    "videoParent": "SHADOWS",
+    "partial": true,
+    "note": "Opaque objects block all the light.",
+    "src": "map+scene",
+    "raw": [
+     "opaque ➜ dark shadow",
+     "opaque ➜ DARK shadow"
+    ],
+    "chip": "📺 opaque ➜ dark shadow = Light is blocked"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "translucent ➜ less dark",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "SHADOWS",
+    "note": "The poster has no translucent key word.",
+    "src": "map+scene",
+    "raw": [
+     "translucent ➜ less dark",
+     "translucent ➜ LESS DARK shadow"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "OPAQUE",
+    "type": "keyword",
+    "means": "Light is blocked",
+    "meansKind": "key",
+    "under": "Shadows",
+    "partial": true,
+    "src": "kw",
+    "raw": [
+     "OPAQUE"
+    ],
+    "chip": "📺 OPAQUE = Light is blocked"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "TRANSLUCENT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "TRANSLUCENT"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "TRANSPARENT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "TRANSPARENT"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "SHADOW",
+    "type": "keyword",
+    "means": "Shadows",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "SHADOW"
+    ],
+    "chip": "📺 SHADOW = Shadows"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "LIGHT TRAVELS IN STRAIGHT LINES",
+    "type": "keyword",
+    "means": "In straight lines",
+    "meansKind": "key",
+    "under": "Light travels",
+    "src": "kw",
+    "raw": [
+     "LIGHT TRAVELS IN STRAIGHT LINES",
+     "STRAIGHT LINES"
+    ],
+    "chip": "📺 LIGHT TRAVELS IN STRAIGHT LINES = In straight lines"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "THREE-CARD TEST",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "THREE-CARD TEST",
+     "3-CARD TEST"
+    ]
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "OPAQUE BLOCKS ALL LIGHT",
+    "type": "keyword",
+    "means": "Light is blocked",
+    "meansKind": "key",
+    "under": "Shadows",
+    "src": "kw",
+    "raw": [
+     "OPAQUE BLOCKS ALL LIGHT",
+     "OPAQUE BLOCKS"
+    ],
+    "chip": "📺 OPAQUE BLOCKS ALL LIGHT = Light is blocked"
+   },
+   {
+    "ep": 15,
+    "eps": [
+     15
+    ],
+    "term": "LESS DARK SHADOW",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "LESS DARK SHADOW",
+     "LESS DARK"
+    ]
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16,
+     17
+    ],
+    "term": "SHADOW SIZE",
+    "type": "branch",
+    "means": "Nearer the light, bigger the shadow",
+    "meansKind": "key",
+    "under": "Shadows",
+    "videoParent": "SHADOWS",
+    "partial": true,
+    "note": "Sub-branch heading under SHADOWS.",
+    "src": "scene",
+    "raw": [
+     "📏 SHADOW SIZE",
+     "📏 size"
+    ],
+    "chip": "📺 SHADOW SIZE = Nearer the light, bigger the shadow"
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "nearer the light ➜ bigger",
+    "type": "keyword",
+    "means": "Nearer the light, bigger the shadow",
+    "meansKind": "key",
+    "under": "Shadows",
+    "videoParent": "SHADOWS",
+    "src": "map+scene",
+    "raw": [
+     "size: nearer the light ➜ bigger",
+     "object NEARER the light ➜ BIGGER"
+    ],
+    "chip": "📺 nearer the light ➜ bigger = Nearer the light, bigger the shadow"
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "further from screen ➜ bigger",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "SHADOWS",
+    "note": "The poster gives only the light-distance rule. Correct science: accept.",
+    "src": "map+scene",
+    "raw": [
+     "size: further from screen ➜ bigger",
+     "object FURTHER from screen ➜ BIGGER"
+    ]
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "SCREEN",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SCREEN"
+    ]
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "TWO DISTANCES",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "TWO DISTANCES"
+    ]
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "LIGHT CLOSER = BIGGER",
+    "type": "keyword",
+    "means": "Nearer the light, bigger the shadow",
+    "meansKind": "key",
+    "under": "Shadows",
+    "src": "kw",
+    "raw": [
+     "LIGHT CLOSER = BIGGER",
+     "LIGHT CLOSER"
+    ],
+    "chip": "📺 LIGHT CLOSER = BIGGER = Nearer the light, bigger the shadow"
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "SCREEN FURTHER = BIGGER",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SCREEN FURTHER = BIGGER",
+     "SCREEN FURTHER"
+    ]
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "BOTH DISTANCES CHANGE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BOTH DISTANCES CHANGE",
+     "BOTH CHANGE"
+    ]
+   },
+   {
+    "ep": 16,
+    "eps": [
+     16
+    ],
+    "term": "RAY MODEL",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Uses straight-line travel (Light travels).",
+    "src": "kw",
+    "raw": [
+     "RAY MODEL"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "SHADOW SHAPE",
+    "type": "branch",
+    "means": "Same shape as the object",
+    "meansKind": "key",
+    "under": "Shadows",
+    "videoParent": "SHADOWS",
+    "partial": true,
+    "src": "scene",
+    "raw": [
+     "🔺 SHADOW SHAPE"
+    ],
+    "chip": "📺 SHADOW SHAPE = Same shape as the object"
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "the part facing the light",
+    "type": "keyword",
+    "means": "Same shape as the object",
+    "meansKind": "key",
+    "under": "Shadows",
+    "videoParent": "SHADOWS",
+    "partial": true,
+    "note": "More exact than the poster: the shape depends on the part facing the light (a cone can cast a circle).",
+    "src": "map+scene",
+    "raw": [
+     "shape: the part facing the light",
+     "depends on the part FACING the light"
+    ],
+    "chip": "📺 the part facing the light = Same shape as the object"
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "OUTDOOR SHADOWS",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "SHADOWS",
+    "src": "scene",
+    "raw": [
+     "☀️ OUTDOOR SHADOWS"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "longest morning + evening",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "SHADOWS",
+    "src": "map+scene",
+    "raw": [
+     "outdoor: longest morning + evening, shortest noon",
+     "LONGEST: morning + evening"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "shortest noon",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "SHADOWS",
+    "src": "map+scene",
+    "raw": [
+     "outdoor: longest morning + evening, shortest noon",
+     "SHORTEST: noon"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "SHADOW SHAPE",
+    "type": "keyword",
+    "means": "Same shape as the object",
+    "meansKind": "key",
+    "under": "Shadows",
+    "partial": true,
+    "src": "kw",
+    "raw": [
+     "SHADOW SHAPE"
+    ],
+    "chip": "📺 SHADOW SHAPE = Same shape as the object"
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "PART FACING THE LIGHT",
+    "type": "keyword",
+    "means": "Same shape as the object",
+    "meansKind": "key",
+    "under": "Shadows",
+    "partial": true,
+    "src": "kw",
+    "raw": [
+     "PART FACING THE LIGHT",
+     "PART FACING LIGHT"
+    ],
+    "chip": "📺 PART FACING THE LIGHT = Same shape as the object"
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "SIDE = TRIANGLE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SIDE = TRIANGLE",
+     "TRIANGLE"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "BASE = CIRCLE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BASE = CIRCLE",
+     "CIRCLE"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "SUN LOW = LONG SHADOW",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SUN LOW = LONG SHADOW",
+     "SUN LOW = LONG"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "NOON = SHORTEST",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "NOON = SHORTEST"
+    ]
+   },
+   {
+    "ep": 17,
+    "eps": [
+     17
+    ],
+    "term": "SUNDIAL",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SUNDIAL"
+    ]
+   }
+  ],
+  "mixups": [
+   {
+    "detect": [
+     "light from our eyes",
+     "light from the eyes",
+     "light from eyes",
+     "eyes give out light",
+     "eyes give light",
+     "eyes send out light",
+     "eyes send light",
+     "eyes shoot light",
+     "eyes produce light",
+     "light comes out of our eyes",
+     "from eyes to object",
+     "from the eyes to the object"
+    ],
+    "say": "Exam tip: light enters our eyes. Our eyes do not give out light.",
+    "src": "M-16",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "don't",
+     "do not"
+    ]
+   },
+   {
+    "detect": [
+     "shadow is a reflection",
+     "shadows are reflections",
+     "shadow is reflected",
+     "shadow reflects",
+     "shadow is made by reflection"
+    ],
+    "say": "Exam tip: a shadow forms where light is blocked. It is not a reflection.",
+    "src": "M-17",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "isn't"
+    ]
+   },
+   {
+    "detect": [
+     "translucent && no shadow",
+     "translucent && not cast",
+     "translucent && doesn't cast",
+     "translucent && does not cast",
+     "translucent && cannot cast",
+     "translucent && no shadows"
+    ],
+    "say": "Exam tip: translucent things let some light through, so they cast a less dark shadow.",
+    "src": "M-18",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "closer to the screen && bigger",
+     "nearer the screen && bigger",
+     "nearer to the screen && bigger",
+     "near the screen && bigger",
+     "closer to screen && bigger",
+     "further from the light && bigger",
+     "farther from the light && bigger",
+     "away from the light && bigger",
+     "further from the torch && bigger",
+     "nearer the light && smaller",
+     "closer to the light && smaller"
+    ],
+    "say": "Exam tip: nearer the light, bigger the shadow. Nearer the screen, smaller the shadow.",
+    "src": "M-19",
+    "kind": "mixup",
+    "note": "\"further from screen && bigger\" is CORRECT (EP16) and must not trigger."
+   },
+   {
+    "detect": [
+     "eyes adjust",
+     "eyes get used to the dark",
+     "see in the dark",
+     "see in total darkness",
+     "see in complete darkness",
+     "can see without light",
+     "see without light"
+    ],
+    "say": "Exam tip: with no light at all, we cannot see. Light must enter our eyes.",
+    "src": "M-45",
+    "kind": "mixup",
+    "unless": [
+     "cannot",
+     "can't",
+     "not",
+     "no light no"
+    ]
+   }
+  ],
+  "mixupsSkipped": [],
+  "mixupCandidates": [
+   {
+    "detect": [
+     "moon is a source",
+     "moon gives out light",
+     "moon gives light",
+     "moon makes light",
+     "moon produces light",
+     "moon shines by itself"
+    ],
+    "say": "Exam tip: the Moon is not a source of light. It reflects light from the Sun.",
+    "src": "video EP14 exam box",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "isn't",
+     "reflect"
+    ],
+    "note": "NOT in misconceptions.js / mixups.js: needs the teacher's approval."
+   }
+  ],
+  "extras": [
+   {
+    "term": "NATURAL SOURCES",
+    "eps": [
+     13,
+     14
+    ],
+    "note": "Light sources. The Light poster has no \"sources of light\" branch."
+   },
+   {
+    "term": "NATURAL",
+    "eps": [
+     13,
+     15,
+     16,
+     17
+    ],
+    "note": "Short form of NATURAL SOURCES."
+   },
+   {
+    "term": "Sun",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "other stars",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "lightning",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "fireflies",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "jellyfish",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "glow-worms",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "MAN-MADE SOURCES",
+    "eps": [
+     13,
+     14
+    ]
+   },
+   {
+    "term": "MAN-MADE",
+    "eps": [
+     13,
+     15,
+     16,
+     17
+    ]
+   },
+   {
+    "term": "light bulbs",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "fireworks",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "candles",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "torches",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "ENERGY",
+    "eps": [
+     13
+    ],
+    "note": "See Energy Conversion (P6)."
+   },
+   {
+    "term": "FORMS OF ENERGY",
+    "eps": [
+     13
+    ],
+    "note": "See Energy Conversion (P6)."
+   },
+   {
+    "term": "SOURCE OF LIGHT",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "THE SUN IS A STAR",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "LIVING LIGHT",
+    "eps": [
+     13
+    ]
+   },
+   {
+    "term": "the Moon reflects sunlight",
+    "eps": [
+     14
+    ],
+    "note": "An example of reflection: accept, related to Reflection."
+   },
+   {
+    "term": "MOON: NOT A SOURCE",
+    "eps": [
+     14
+    ]
+   },
+   {
+    "term": "BORROWED SUNLIGHT",
+    "eps": [
+     14
+    ]
+   },
+   {
+    "term": "translucent ➜ less dark",
+    "eps": [
+     15
+    ],
+    "note": "The poster has no translucent key word."
+   },
+   {
+    "term": "TRANSLUCENT",
+    "eps": [
+     15
+    ]
+   },
+   {
+    "term": "TRANSPARENT",
+    "eps": [
+     15
+    ]
+   },
+   {
+    "term": "THREE-CARD TEST",
+    "eps": [
+     15
+    ]
+   },
+   {
+    "term": "LESS DARK SHADOW",
+    "eps": [
+     15
+    ]
+   },
+   {
+    "term": "further from screen ➜ bigger",
+    "eps": [
+     16
+    ],
+    "note": "The poster gives only the light-distance rule. Correct science: accept."
+   },
+   {
+    "term": "SCREEN",
+    "eps": [
+     16
+    ]
+   },
+   {
+    "term": "TWO DISTANCES",
+    "eps": [
+     16
+    ]
+   },
+   {
+    "term": "SCREEN FURTHER = BIGGER",
+    "eps": [
+     16
+    ]
+   },
+   {
+    "term": "BOTH DISTANCES CHANGE",
+    "eps": [
+     16
+    ]
+   },
+   {
+    "term": "RAY MODEL",
+    "eps": [
+     16
+    ],
+    "note": "Uses straight-line travel (Light travels)."
+   },
+   {
+    "term": "OUTDOOR SHADOWS",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "longest morning + evening",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "shortest noon",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "SIDE = TRIANGLE",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "BASE = CIRCLE",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "SUN LOW = LONG SHADOW",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "NOON = SHORTEST",
+    "eps": [
+     17
+    ]
+   },
+   {
+    "term": "SUNDIAL",
+    "eps": [
+     17
+    ]
+   }
+  ],
+  "habitLabelsSkipped": {
+   "13": [
+    "PERSISTENCE",
+    "CELEBRATE SMALL WINS"
+   ],
+   "14": [
+    "EXAM TIP",
+    "TEACH IT"
+   ],
+   "15": [
+    "SPACE IT OUT"
+   ],
+   "16": [
+    "REMOVE DISTRACTIONS"
+   ],
+   "17": [
+    "TEST YOURSELF"
+   ]
+  }
+ },
+ "heat": {
+  "title": "Heat",
+  "lv": "P4",
+  "idea": "Heat always flows from the hotter thing to the colder one, until both are the same.",
+  "eps": [
+   18,
+   19,
+   20,
+   21,
+   22
+  ],
+  "centreAliases": [
+   "heat"
+  ],
+  "app": [
+   {
+    "branch": "Heat flows",
+    "aliases": [
+     "heat flow",
+     "heat flows",
+     "flow of heat",
+     "heat transfer",
+     "heat moves",
+     "direction of heat flow"
+    ],
+    "keys": [
+     "From hotter to colder",
+     "Until both are the same temperature"
+    ],
+    "keyAliases": {
+     "From hotter to colder": [
+      "hotter to colder",
+      "hot to cold",
+      "from hot to cold",
+      "higher temperature to lower temperature",
+      "warmer to cooler",
+      "from a hotter place to a colder place"
+     ],
+     "Until both are the same temperature": [
+      "same temperature",
+      "temperatures are equal",
+      "stops when equal",
+      "stops when temperatures are equal",
+      "until equal",
+      "until both are the same",
+      "equal temperature"
+     ]
+    },
+    "rank": 1,
+    "hint": "Add the big idea: which way does heat flow?"
+   },
+   {
+    "branch": "Temperature",
+    "aliases": [
+     "temperature",
+     "temp"
+    ],
+    "keys": [
+     "How hot or cold an object is",
+     "Measured with a thermometer"
+    ],
+    "keyAliases": {
+     "How hot or cold an object is": [
+      "how hot or cold",
+      "how hot or cold an object is",
+      "how hot or cold something is",
+      "how hot something is",
+      "degree of hotness"
+     ],
+     "Measured with a thermometer": [
+      "thermometer",
+      "measured with a thermometer",
+      "use a thermometer",
+      "lab thermometer",
+      "laboratory thermometer",
+      "digital thermometer",
+      "clinical thermometer"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a branch for temperature. What does it tell us?",
+    "changed": {
+     "from": "How hot or cold something is",
+     "to": "How hot or cold an object is",
+     "why": "step (d): full MOE definition"
+    }
+   },
+   {
+    "branch": "Heat is a form of energy",
+    "aliases": [
+     "heat is a form of energy",
+     "form of energy",
+     "heat is energy",
+     "heat (energy)",
+     "heat energy",
+     "energy"
+    ],
+    "keys": [
+     "Gain heat: temperature rises",
+     "Lose heat: temperature falls"
+    ],
+    "keyAliases": {
+     "Gain heat: temperature rises": [
+      "gain heat temperature rises",
+      "gains heat temperature rises",
+      "temperature rises",
+      "temperature increases",
+      "gain heat to temperature rises"
+     ],
+     "Lose heat: temperature falls": [
+      "lose heat temperature falls",
+      "loses heat temperature falls",
+      "temperature falls",
+      "temperature drops",
+      "temperature decreases",
+      "lose heat to temperature falls"
+     ]
+    },
+    "rank": 3,
+    "hint": "What is heat? Add a branch that says heat is a form of energy.",
+    "proposed": true,
+    "note": "Proposed by step (d). The key words are a suggestion that also matches EP19; if (d) lands with different key words, update this entry to match the poster."
+   },
+   {
+    "branch": "Good conductors of heat",
+    "aliases": [
+     "good conductor",
+     "good conductors",
+     "good conductor of heat",
+     "conductors of heat"
+    ],
+    "keys": [
+     "Metals",
+     "Heat travels through them quickly"
+    ],
+    "keyAliases": {
+     "Metals": [
+      "metal",
+      "metals",
+      "iron",
+      "steel",
+      "copper",
+      "aluminium",
+      "aluminum",
+      "silver"
+     ],
+     "Heat travels through them quickly": [
+      "heat travels quickly",
+      "conducts heat quickly",
+      "heat passes through quickly",
+      "heat flows through quickly",
+      "quickly",
+      "fast"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add good conductors of heat. Which materials let heat through quickly?"
+   },
+   {
+    "branch": "Poor conductors of heat",
+    "aliases": [
+     "poor conductor",
+     "poor conductors",
+     "poor conductor of heat",
+     "heat insulator",
+     "insulator",
+     "insulators"
+    ],
+    "keys": [
+     "Plastic, wood and air",
+     "Heat travels through them slowly"
+    ],
+    "keyAliases": {
+     "Plastic, wood and air": [
+      "plastic",
+      "wood",
+      "air",
+      "glass",
+      "polystyrene",
+      "wool",
+      "rubber",
+      "cloth",
+      "fabric",
+      "cork"
+     ],
+     "Heat travels through them slowly": [
+      "heat travels slowly",
+      "conducts heat slowly",
+      "heat passes through slowly",
+      "slowly",
+      "slow"
+     ]
+    },
+    "rank": 5,
+    "hint": "Add poor conductors of heat. Which materials let heat through slowly?"
+   },
+   {
+    "branch": "Gaining or losing heat",
+    "aliases": [
+     "gaining or losing heat",
+     "gain or lose heat",
+     "effects of heat",
+     "effect of heat",
+     "heating and cooling",
+     "when heated or cooled"
+    ],
+    "keys": [
+     "Expands when heated",
+     "Contracts when cooled",
+     "Can change state"
+    ],
+    "keyAliases": {
+     "Expands when heated": [
+      "expand",
+      "expands",
+      "expansion",
+      "expands when heated",
+      "volume up",
+      "volume increases"
+     ],
+     "Contracts when cooled": [
+      "contract",
+      "contracts",
+      "contraction",
+      "contracts when cooled",
+      "volume down",
+      "volume decreases"
+     ],
+     "Can change state": [
+      "change of state",
+      "changes state",
+      "change state",
+      "state change",
+      "melt",
+      "melts",
+      "melting",
+      "freeze",
+      "freezes",
+      "boil",
+      "boils",
+      "evaporate",
+      "condense"
+     ]
+    },
+    "rank": 6,
+    "hint": "What happens to things when they gain or lose heat? Add a branch."
+   }
+  ],
+  "videoCentre": [
+   {
+    "ep": 18,
+    "eps": [
+     18,
+     19,
+     20,
+     21,
+     22
+    ],
+    "term": "HEAT",
+    "type": "branch",
+    "means": "Heat",
+    "meansKind": "centre",
+    "src": "map",
+    "raw": [
+     "HEAT",
+     "🔥 HEAT"
+    ],
+    "chip": "📺 HEAT = Heat"
+   }
+  ],
+  "video": [
+   {
+    "ep": 18,
+    "eps": [
+     18,
+     19,
+     20,
+     21,
+     22
+    ],
+    "term": "TEMPERATURE",
+    "type": "branch",
+    "means": "Temperature",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "🌡️ TEMPERATURE"
+    ],
+    "chip": "📺 TEMPERATURE = Temperature"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "measured in °C",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "TEMPERATURE",
+    "note": "The unit. Do not credit \"Measured with a thermometer\" from the word \"measured\" alone.",
+    "src": "map+scene",
+    "raw": [
+     "measured in °C"
+    ]
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "thermometer",
+    "type": "keyword",
+    "means": "Measured with a thermometer",
+    "meansKind": "key",
+    "under": "Temperature",
+    "videoParent": "TEMPERATURE",
+    "src": "map+scene",
+    "raw": [
+     "thermometer",
+     "with a THERMOMETER"
+    ],
+    "chip": "📺 thermometer = Measured with a thermometer"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "digital · infrared · laboratory",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "TEMPERATURE",
+    "note": "Three types of thermometer: related to \"Measured with a thermometer\".",
+    "src": "scene",
+    "raw": [
+     "digital · infrared · laboratory"
+    ]
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "TEMPERATURE",
+    "type": "keyword",
+    "means": "Temperature",
+    "meansKind": "branch",
+    "src": "kw",
+    "raw": [
+     "TEMPERATURE"
+    ],
+    "chip": "📺 TEMPERATURE = Temperature"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "DEGREES CELSIUS (°C)",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "DEGREES CELSIUS (°C)",
+     "°C"
+    ]
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "THERMAL CAMERA",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "THERMAL CAMERA"
+    ]
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "THERMOMETER",
+    "type": "keyword",
+    "means": "Measured with a thermometer",
+    "meansKind": "key",
+    "under": "Temperature",
+    "src": "kw",
+    "raw": [
+     "THERMOMETER"
+    ],
+    "chip": "📺 THERMOMETER = Measured with a thermometer"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "DIGITAL THERMOMETER",
+    "type": "keyword",
+    "means": "Measured with a thermometer",
+    "meansKind": "key",
+    "under": "Temperature",
+    "partial": true,
+    "note": "A type of thermometer.",
+    "src": "kw",
+    "raw": [
+     "DIGITAL THERMOMETER"
+    ],
+    "chip": "📺 DIGITAL THERMOMETER = Measured with a thermometer"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "INFRARED THERMOMETER",
+    "type": "keyword",
+    "means": "Measured with a thermometer",
+    "meansKind": "key",
+    "under": "Temperature",
+    "partial": true,
+    "note": "A type of thermometer.",
+    "src": "kw",
+    "raw": [
+     "INFRARED THERMOMETER"
+    ],
+    "chip": "📺 INFRARED THERMOMETER = Measured with a thermometer"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "LAB THERMOMETER",
+    "type": "keyword",
+    "means": "Measured with a thermometer",
+    "meansKind": "key",
+    "under": "Temperature",
+    "partial": true,
+    "note": "A type of thermometer.",
+    "src": "kw",
+    "raw": [
+     "LAB THERMOMETER"
+    ],
+    "chip": "📺 LAB THERMOMETER = Measured with a thermometer"
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "BULB FULLY IN",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BULB FULLY IN"
+    ]
+   },
+   {
+    "ep": 18,
+    "eps": [
+     18
+    ],
+    "term": "DATA LOGGER",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "DATA LOGGER"
+    ]
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19,
+     20
+    ],
+    "term": "HEAT (energy)",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    },
+    "note": "No poster branch today. After step (d) it means \"Heat is a form of energy\".",
+    "src": "map+scene",
+    "raw": [
+     "⚡ HEAT (energy)"
+    ]
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21,
+     22
+    ],
+    "term": "HEAT",
+    "type": "branch",
+    "means": "extra",
+    "meansKind": "extra",
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    },
+    "note": "Short form of HEAT (energy).",
+    "src": "map+scene",
+    "raw": [
+     "⚡ HEAT"
+    ]
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "a form of ENERGY",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HEAT (energy)",
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    },
+    "src": "scene",
+    "raw": [
+     "a form of ENERGY"
+    ]
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "gain heat ➜ temperature rises",
+    "type": "keyword",
+    "means": "Gaining or losing heat",
+    "meansKind": "branch",
+    "videoParent": "HEAT (energy)",
+    "partial": true,
+    "afterD": {
+     "branch": "Heat is a form of energy",
+     "key": "Gain heat: temperature rises"
+    },
+    "note": "The poster's Gaining or losing heat keys are expand / contract / change state; \"temperature rises\" is not one of them.",
+    "src": "map+scene",
+    "raw": [
+     "gain heat ➜ temperature rises",
+     "GAIN heat ➜ temperature RISES"
+    ],
+    "chip": "📺 gain heat ➜ temperature rises = Gaining or losing heat"
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "lose heat ➜ temperature falls",
+    "type": "keyword",
+    "means": "Gaining or losing heat",
+    "meansKind": "branch",
+    "videoParent": "HEAT (energy)",
+    "partial": true,
+    "afterD": {
+     "branch": "Heat is a form of energy",
+     "key": "Lose heat: temperature falls"
+    },
+    "src": "map+scene",
+    "raw": [
+     "lose heat ➜ temperature falls",
+     "LOSE heat ➜ temperature FALLS"
+    ],
+    "chip": "📺 lose heat ➜ temperature falls = Gaining or losing heat"
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "HEAT: A FORM OF ENERGY",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    },
+    "src": "kw",
+    "raw": [
+     "HEAT: A FORM OF ENERGY",
+     "HEAT: FORM OF ENERGY"
+    ]
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "GAIN HEAT ➜ RISES",
+    "type": "keyword",
+    "means": "Gaining or losing heat",
+    "meansKind": "branch",
+    "partial": true,
+    "afterD": {
+     "branch": "Heat is a form of energy",
+     "key": "Gain heat: temperature rises"
+    },
+    "src": "kw",
+    "raw": [
+     "GAIN HEAT ➜ RISES",
+     "GAIN ➜ RISES"
+    ],
+    "chip": "📺 GAIN HEAT ➜ RISES = Gaining or losing heat"
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "LOSE HEAT ➜ FALLS",
+    "type": "keyword",
+    "means": "Gaining or losing heat",
+    "meansKind": "branch",
+    "partial": true,
+    "afterD": {
+     "branch": "Heat is a form of energy",
+     "key": "Lose heat: temperature falls"
+    },
+    "src": "kw",
+    "raw": [
+     "LOSE HEAT ➜ FALLS",
+     "LOSE ➜ FALLS"
+    ],
+    "chip": "📺 LOSE HEAT ➜ FALLS = Gaining or losing heat"
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19,
+     20
+    ],
+    "term": "HEAT FLOWS HOT ➜ COLD",
+    "type": "keyword",
+    "means": "From hotter to colder",
+    "meansKind": "key",
+    "under": "Heat flows",
+    "src": "kw",
+    "raw": [
+     "HEAT FLOWS HOT ➜ COLD",
+     "HOT ➜ COLD"
+    ],
+    "chip": "📺 HEAT FLOWS HOT ➜ COLD = From hotter to colder"
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "TEMP: HOW HOT OR COLD",
+    "type": "keyword",
+    "means": "How hot or cold an object is",
+    "meansKind": "key",
+    "under": "Temperature",
+    "src": "kw",
+    "raw": [
+     "TEMP: HOW HOT OR COLD"
+    ],
+    "chip": "📺 TEMP: HOW HOT OR COLD = How hot or cold an object is"
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "ROOM TEMPERATURE",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "ROOM TEMPERATURE",
+     "ROOM TEMP"
+    ]
+   },
+   {
+    "ep": 19,
+    "eps": [
+     19
+    ],
+    "term": "SURROUNDINGS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SURROUNDINGS"
+    ]
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20,
+     21,
+     22
+    ],
+    "term": "HEAT FLOW",
+    "type": "branch",
+    "means": "Heat flows",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "➡️ HEAT FLOW"
+    ],
+    "chip": "📺 HEAT FLOW = Heat flows"
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "hot ➜ cold",
+    "type": "keyword",
+    "means": "From hotter to colder",
+    "meansKind": "key",
+    "under": "Heat flows",
+    "videoParent": "HEAT FLOW",
+    "src": "map+scene",
+    "raw": [
+     "hot ➜ cold",
+     "HOT ➜ COLD"
+    ],
+    "chip": "📺 hot ➜ cold = From hotter to colder"
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "stops when temperatures are equal",
+    "type": "keyword",
+    "means": "Until both are the same temperature",
+    "meansKind": "key",
+    "under": "Heat flows",
+    "videoParent": "HEAT FLOW",
+    "src": "map+scene",
+    "raw": [
+     "stops when temperatures are equal",
+     "stops when temperatures are EQUAL"
+    ],
+    "chip": "📺 stops when temperatures are equal = Until both are the same temperature"
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "sources: Sun · Earth",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "videoParent": "HEAT FLOW",
+    "note": "Sources of heat. In the scene and the narration, not in the phone map.",
+    "src": "scene",
+    "raw": [
+     "sources: ☀️ Sun · 🌍 Earth"
+    ]
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "COLD DOESN'T FLOW",
+    "type": "keyword",
+    "means": "From hotter to colder",
+    "meansKind": "key",
+    "under": "Heat flows",
+    "note": "The M-01 correction. Must NOT trigger the \"cold flows\" mix-up (negated).",
+    "src": "kw",
+    "raw": [
+     "COLD DOESN'T FLOW",
+     "NO COLD FLOW"
+    ],
+    "chip": "📺 COLD DOESN'T FLOW = From hotter to colder"
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "STOPS WHEN EQUAL",
+    "type": "keyword",
+    "means": "Until both are the same temperature",
+    "meansKind": "key",
+    "under": "Heat flows",
+    "src": "kw",
+    "raw": [
+     "STOPS WHEN EQUAL",
+     "STOPS AT EQUAL"
+    ],
+    "chip": "📺 STOPS WHEN EQUAL = Until both are the same temperature"
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "HORIZONTAL AXIS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Line-graph skills.",
+    "src": "kw",
+    "raw": [
+     "HORIZONTAL AXIS",
+     "HORIZ. AXIS"
+    ]
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "VERTICAL AXIS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Line-graph skills.",
+    "src": "kw",
+    "raw": [
+     "VERTICAL AXIS"
+    ]
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "DATA POINT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "note": "Line-graph skills.",
+    "src": "kw",
+    "raw": [
+     "DATA POINT"
+    ]
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "SOURCE OF HEAT",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "SOURCE OF HEAT",
+     "HEAT SOURCE"
+    ]
+   },
+   {
+    "ep": 20,
+    "eps": [
+     20
+    ],
+    "term": "HOT SPRINGS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "HOT SPRINGS"
+    ]
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21,
+     22
+    ],
+    "term": "CONDUCTORS",
+    "type": "branch",
+    "means": "Good conductors of heat",
+    "meansKind": "branch",
+    "meansAll": [
+     "Good conductors of heat",
+     "Poor conductors of heat"
+    ],
+    "note": "One video branch = two poster branches. Wording tip: add \"of heat\" (mixups.heat#6).",
+    "src": "map+scene",
+    "raw": [
+     "🥄 CONDUCTORS"
+    ],
+    "chip": "📺 CONDUCTORS = Good conductors of heat + Poor conductors of heat"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "good: metals",
+    "type": "keyword",
+    "means": "Metals",
+    "meansKind": "key",
+    "under": "Good conductors of heat",
+    "videoParent": "CONDUCTORS",
+    "meansAll": [
+     "Good conductors of heat",
+     "Metals"
+    ],
+    "src": "map+scene",
+    "raw": [
+     "good: metals",
+     "GOOD: metals"
+    ],
+    "chip": "📺 good: metals = Good conductors of heat + Metals"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "poor: glass · plastic · wood · air",
+    "type": "keyword",
+    "means": "Plastic, wood and air",
+    "meansKind": "key",
+    "under": "Poor conductors of heat",
+    "videoParent": "CONDUCTORS",
+    "meansAll": [
+     "Poor conductors of heat",
+     "Plastic, wood and air"
+    ],
+    "note": "\"glass\" is extra (not on the poster); plastic, wood and air match.",
+    "src": "map+scene",
+    "raw": [
+     "poor: glass · plastic · wood · air",
+     "POOR: glass · plastic · wood · AIR"
+    ],
+    "chip": "📺 poor: glass · plastic · wood · air = Poor conductors of heat + Plastic, wood and air"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "MATERIAL MATTERS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "MATERIAL MATTERS",
+     "MATERIAL"
+    ]
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "WAX ROD TEST",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "WAX ROD TEST"
+    ]
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "GOOD CONDUCTOR",
+    "type": "keyword",
+    "means": "Good conductors of heat",
+    "meansKind": "branch",
+    "note": "Wording tip: \"good conductor OF HEAT\" (mixups.heat#6).",
+    "src": "kw",
+    "raw": [
+     "GOOD CONDUCTOR",
+     "GOOD COND."
+    ],
+    "chip": "📺 GOOD CONDUCTOR = Good conductors of heat"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "METALS",
+    "type": "keyword",
+    "means": "Metals",
+    "meansKind": "key",
+    "under": "Good conductors of heat",
+    "src": "kw",
+    "raw": [
+     "METALS"
+    ],
+    "chip": "📺 METALS = Metals"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "POOR CONDUCTOR",
+    "type": "keyword",
+    "means": "Poor conductors of heat",
+    "meansKind": "branch",
+    "note": "Wording tip: \"poor conductor OF HEAT\".",
+    "src": "kw",
+    "raw": [
+     "POOR CONDUCTOR",
+     "POOR COND."
+    ],
+    "chip": "📺 POOR CONDUCTOR = Poor conductors of heat"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "AIR = POOR CONDUCTOR",
+    "type": "keyword",
+    "means": "Plastic, wood and air",
+    "meansKind": "key",
+    "under": "Poor conductors of heat",
+    "src": "kw",
+    "raw": [
+     "AIR = POOR CONDUCTOR",
+     "AIR: POOR"
+    ],
+    "chip": "📺 AIR = POOR CONDUCTOR = Plastic, wood and air"
+   },
+   {
+    "ep": 21,
+    "eps": [
+     21
+    ],
+    "term": "POLYSTYRENE",
+    "type": "keyword",
+    "means": "Plastic, wood and air",
+    "meansKind": "key",
+    "under": "Poor conductors of heat",
+    "partial": true,
+    "note": "Another poor conductor of heat.",
+    "src": "kw",
+    "raw": [
+     "POLYSTYRENE"
+    ],
+    "chip": "📺 POLYSTYRENE = Plastic, wood and air"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "EFFECTS OF HEAT",
+    "type": "branch",
+    "means": "Gaining or losing heat",
+    "meansKind": "branch",
+    "src": "map+scene",
+    "raw": [
+     "✨ EFFECTS OF HEAT"
+    ],
+    "chip": "📺 EFFECTS OF HEAT = Gaining or losing heat"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "temperature change",
+    "type": "keyword",
+    "means": "Gaining or losing heat",
+    "meansKind": "branch",
+    "videoParent": "EFFECTS OF HEAT",
+    "partial": true,
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    },
+    "note": "Same idea as EP19 gain/lose heat -> temperature rises/falls.",
+    "src": "scene",
+    "raw": [
+     "temperature change"
+    ],
+    "chip": "📺 temperature change = Gaining or losing heat"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "expansion",
+    "type": "keyword",
+    "means": "Expands when heated",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "videoParent": "EFFECTS OF HEAT",
+    "src": "map+scene",
+    "raw": [
+     "expansion + contraction"
+    ],
+    "chip": "📺 expansion = Expands when heated"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "contraction",
+    "type": "keyword",
+    "means": "Contracts when cooled",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "videoParent": "EFFECTS OF HEAT",
+    "src": "map+scene",
+    "raw": [
+     "expansion + contraction"
+    ],
+    "chip": "📺 contraction = Contracts when cooled"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "change of state",
+    "type": "keyword",
+    "means": "Can change state",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "videoParent": "EFFECTS OF HEAT",
+    "src": "map+scene",
+    "raw": [
+     "change of state"
+    ],
+    "chip": "📺 change of state = Can change state"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "EXPAND = VOLUME UP",
+    "type": "keyword",
+    "means": "Expands when heated",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "src": "kw",
+    "raw": [
+     "EXPAND = VOLUME UP",
+     "EXPAND"
+    ],
+    "chip": "📺 EXPAND = VOLUME UP = Expands when heated"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "CONTRACT = VOLUME DOWN",
+    "type": "keyword",
+    "means": "Contracts when cooled",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "src": "kw",
+    "raw": [
+     "CONTRACT = VOLUME DOWN",
+     "CONTRACT"
+    ],
+    "chip": "📺 CONTRACT = VOLUME DOWN = Contracts when cooled"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "BALL + RING",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "BALL + RING"
+    ]
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "GASES EXPAND MOST",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "GASES EXPAND MOST",
+     "GAS: MOST"
+    ]
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "EXPANSION GAPS",
+    "type": "keyword",
+    "means": "extra",
+    "meansKind": "extra",
+    "src": "kw",
+    "raw": [
+     "EXPANSION GAPS",
+     "GAPS"
+    ]
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "CHANGE OF STATE",
+    "type": "keyword",
+    "means": "Can change state",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "src": "kw",
+    "raw": [
+     "CHANGE OF STATE",
+     "STATE CHANGE"
+    ],
+    "chip": "📺 CHANGE OF STATE = Can change state"
+   },
+   {
+    "ep": 22,
+    "eps": [
+     22
+    ],
+    "term": "MELT",
+    "type": "keyword",
+    "means": "Can change state",
+    "meansKind": "key",
+    "under": "Gaining or losing heat",
+    "src": "kw",
+    "raw": [
+     "MELT"
+    ],
+    "chip": "📺 MELT = Can change state"
+   }
+  ],
+  "mixups": [
+   {
+    "detect": [
+     "cold flows",
+     "cold flow",
+     "flow of cold",
+     "cold moves",
+     "cold travels",
+     "cold goes into",
+     "cold enters",
+     "cold passes",
+     "cold spreads",
+     "coldness flows",
+     "cold to hot",
+     "colder to hotter",
+     "cold energy"
+    ],
+    "say": "Exam tip: only heat flows, from the hotter thing to the colder thing. Cold does not flow.",
+    "src": "M-01",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "doesn't",
+     "does not",
+     "no",
+     "never",
+     "isn't"
+    ]
+   },
+   {
+    "detect": [
+     "non-conductor",
+     "non conductor",
+     "nonconductor",
+     "stops heat",
+     "stop heat",
+     "blocks heat",
+     "block heat",
+     "does not conduct heat",
+     "doesn't conduct heat",
+     "no heat passes",
+     "heat cannot pass",
+     "does not let heat through",
+     "doesn't let heat through"
+    ],
+    "say": "Exam tip: say \"poor conductor of heat\". Heat still passes through it, only slowly.",
+    "src": "M-02 + mixups.heat#2",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "temperature is heat",
+     "temperature measures heat",
+     "temperature is a measure of heat",
+     "measure of heat",
+     "measures heat",
+     "heat is temperature",
+     "heat is the same as temperature",
+     "heat equals temperature",
+     "heat and temperature are the same",
+     "thermometer measures heat"
+    ],
+    "say": "Exam tip: heat is a form of energy. Temperature is how hot or cold an object is.",
+    "src": "M-03 + mixups.heat#3",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "isn't",
+     "is not",
+     "≠"
+    ]
+   },
+   {
+    "detect": [
+     "metals are cold",
+     "metal is cold",
+     "metals are colder",
+     "metal is colder",
+     "metals are naturally cold"
+    ],
+    "say": "Exam tip: metal only feels cold. It is a good conductor of heat, so it takes heat away from your hand quickly.",
+    "src": "M-04",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "traps heat",
+     "trap heat",
+     "trapped heat",
+     "trapping heat",
+     "blanket gives heat",
+     "blanket adds heat",
+     "blankets give heat",
+     "fur gives heat",
+     "adds heat to"
+    ],
+    "say": "Exam tip: fur and blankets trap AIR. Air is a poor conductor of heat, so heat is lost more slowly.",
+    "src": "M-05 + mixups.heat#1",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "mass increases",
+     "more mass",
+     "gains mass",
+     "mass goes up",
+     "mass gets bigger",
+     "gets heavier",
+     "becomes heavier",
+     "heavier when heated",
+     "loses mass when cooled"
+    ],
+    "say": "Exam tip: when something expands, its volume goes up. Its mass stays the same.",
+    "src": "M-06",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "same"
+    ]
+   },
+   {
+    "detect": [
+     "loses heat and melts",
+     "lose heat and melt",
+     "lost heat and melted",
+     "melts when it loses heat",
+     "melts when cooled",
+     "lose heat to melt",
+     "gains heat and freezes",
+     "gain heat and freeze",
+     "freezes when heated",
+     "freezes when it gains heat",
+     "gain heat to freeze"
+    ],
+    "say": "Exam tip: ice gains heat and melts. Water loses heat and freezes.",
+    "src": "mixups.water#9",
+    "kind": "mixup",
+    "note": "Card is keyed \"water\" (P5); the same idea is on this poster (Can change state)."
+   },
+   {
+    "detect": [
+     "becomes bigger",
+     "gets bigger",
+     "grows bigger",
+     "becomes smaller",
+     "gets smaller",
+     "shrinks"
+    ],
+    "say": "Exam tip: use the science words: it expands when heated and contracts when cooled.",
+    "src": "mixups.heat#7",
+    "kind": "wording",
+    "unless": [
+     "expand",
+     "contract"
+    ]
+   },
+   {
+    "detect": [
+     "good conductor",
+     "good conductors",
+     "poor conductor",
+     "poor conductors",
+     "conductors"
+    ],
+    "say": "Exam tip: write it in full: good conductor of heat, poor conductor of heat.",
+    "src": "mixups.heat#6",
+    "kind": "wording",
+    "unless": [
+     "of heat",
+     "heat"
+    ],
+    "note": "Check the node AND its branch for \"heat\" before showing this."
+   }
+  ],
+  "mixupsSkipped": [
+   "mixups.heat#4 (bubble: name what expands)",
+   "mixups.heat#5 (gain heat FROM what)",
+   "M-43 (ring and ball: which object)",
+   "M-11 (temperature steady while melting; P5 water)"
+  ],
+  "extras": [
+   {
+    "term": "measured in °C",
+    "eps": [
+     18
+    ],
+    "note": "The unit. Do not credit \"Measured with a thermometer\" from the word \"measured\" alone."
+   },
+   {
+    "term": "digital · infrared · laboratory",
+    "eps": [
+     18
+    ],
+    "note": "Three types of thermometer: related to \"Measured with a thermometer\"."
+   },
+   {
+    "term": "DEGREES CELSIUS (°C)",
+    "eps": [
+     18
+    ]
+   },
+   {
+    "term": "THERMAL CAMERA",
+    "eps": [
+     18
+    ]
+   },
+   {
+    "term": "BULB FULLY IN",
+    "eps": [
+     18
+    ]
+   },
+   {
+    "term": "DATA LOGGER",
+    "eps": [
+     18
+    ]
+   },
+   {
+    "term": "HEAT (energy)",
+    "eps": [
+     19,
+     20
+    ],
+    "note": "No poster branch today. After step (d) it means \"Heat is a form of energy\".",
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    }
+   },
+   {
+    "term": "HEAT",
+    "eps": [
+     21,
+     22
+    ],
+    "note": "Short form of HEAT (energy).",
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    }
+   },
+   {
+    "term": "a form of ENERGY",
+    "eps": [
+     19
+    ],
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    }
+   },
+   {
+    "term": "HEAT: A FORM OF ENERGY",
+    "eps": [
+     19
+    ],
+    "afterD": {
+     "branch": "Heat is a form of energy"
+    }
+   },
+   {
+    "term": "ROOM TEMPERATURE",
+    "eps": [
+     19
+    ]
+   },
+   {
+    "term": "SURROUNDINGS",
+    "eps": [
+     19
+    ]
+   },
+   {
+    "term": "sources: Sun · Earth",
+    "eps": [
+     20
+    ],
+    "note": "Sources of heat. In the scene and the narration, not in the phone map."
+   },
+   {
+    "term": "HORIZONTAL AXIS",
+    "eps": [
+     20
+    ],
+    "note": "Line-graph skills."
+   },
+   {
+    "term": "VERTICAL AXIS",
+    "eps": [
+     20
+    ],
+    "note": "Line-graph skills."
+   },
+   {
+    "term": "DATA POINT",
+    "eps": [
+     20
+    ],
+    "note": "Line-graph skills."
+   },
+   {
+    "term": "SOURCE OF HEAT",
+    "eps": [
+     20
+    ]
+   },
+   {
+    "term": "HOT SPRINGS",
+    "eps": [
+     20
+    ]
+   },
+   {
+    "term": "MATERIAL MATTERS",
+    "eps": [
+     21
+    ]
+   },
+   {
+    "term": "WAX ROD TEST",
+    "eps": [
+     21
+    ]
+   },
+   {
+    "term": "BALL + RING",
+    "eps": [
+     22
+    ]
+   },
+   {
+    "term": "GASES EXPAND MOST",
+    "eps": [
+     22
+    ]
+   },
+   {
+    "term": "EXPANSION GAPS",
+    "eps": [
+     22
+    ]
+   }
+  ],
+  "habitLabelsSkipped": {
+   "18": [
+    "MEASURE PROGRESS"
+   ],
+   "19": [
+    "ONE-SENTENCE SUMMARY"
+   ],
+   "20": [
+    "NAME THE DIRECTION"
+   ],
+   "21": [
+    "LINK TO REAL LIFE"
+   ],
+   "22": [
+    "BIG PICTURE REVIEW"
+   ]
+  }
+ },
+ "living": {
+  "title": "Living & Non-Living",
+  "lv": "P3",
+  "idea": "Living things need certain things, and can do certain things. Non-living things cannot.",
+  "eps": [],
+  "centreAliases": [
+   "living and non-living",
+   "living things",
+   "living & non-living",
+   "living"
+  ],
+  "app": [
+   {
+    "branch": "Living things need",
+    "aliases": [
+     "living things need",
+     "needs",
+     "what living things need"
+    ],
+    "keys": [
+     "Water",
+     "Food",
+     "Air"
+    ],
+    "keyAliases": {
+     "Water": [
+      "water"
+     ],
+     "Food": [
+      "food"
+     ],
+     "Air": [
+      "air",
+      "oxygen"
+     ]
+    },
+    "rank": 1,
+    "hint": "What do all living things need? Add a branch."
+   },
+   {
+    "branch": "Living things can",
+    "aliases": [
+     "living things can",
+     "characteristics of living things",
+     "what living things can do"
+    ],
+    "keys": [
+     "Grow",
+     "Respond to changes",
+     "Reproduce"
+    ],
+    "keyAliases": {
+     "Grow": [
+      "grow",
+      "grows",
+      "growth"
+     ],
+     "Respond to changes": [
+      "respond",
+      "responds to changes",
+      "response",
+      "react to changes"
+     ],
+     "Reproduce": [
+      "reproduce",
+      "reproduces",
+      "reproduction",
+      "have young",
+      "make young"
+     ]
+    },
+    "rank": 2,
+    "hint": "What can all living things do? Add a branch."
+   },
+   {
+    "branch": "Plants",
+    "aliases": [
+     "plant",
+     "plants"
+    ],
+    "keys": [
+     "Flowering plants",
+     "Non-flowering plants"
+    ],
+    "keyAliases": {
+     "Flowering plants": [
+      "flowering",
+      "flowering plant",
+      "flowers"
+     ],
+     "Non-flowering plants": [
+      "non-flowering",
+      "non flowering",
+      "fern",
+      "ferns",
+      "moss",
+      "mosses"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a branch for plants. What two groups are there?"
+   },
+   {
+    "branch": "Animals",
+    "aliases": [
+     "animal",
+     "animals"
+    ],
+    "keys": [
+     "Mammals, birds, fish",
+     "Reptiles, amphibians",
+     "Insects"
+    ],
+    "keyAliases": {
+     "Mammals, birds, fish": [
+      "mammal",
+      "mammals",
+      "bird",
+      "birds",
+      "fish"
+     ],
+     "Reptiles, amphibians": [
+      "reptile",
+      "reptiles",
+      "amphibian",
+      "amphibians"
+     ],
+     "Insects": [
+      "insect",
+      "insects"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add a branch for animals and their groups."
+   },
+   {
+    "branch": "Other groups",
+    "aliases": [
+     "other groups",
+     "fungi and bacteria",
+     "microorganisms"
+    ],
+    "keys": [
+     "Fungi",
+     "Bacteria"
+    ],
+    "keyAliases": {
+     "Fungi": [
+      "fungi",
+      "fungus",
+      "mushroom",
+      "mushrooms",
+      "mould",
+      "mold",
+      "yeast"
+     ],
+     "Bacteria": [
+      "bacteria",
+      "bacterium"
+     ]
+    },
+    "rank": 5,
+    "hint": "Some living things are not plants or animals. Add a branch for them."
+   }
+  ],
+  "video": [],
+  "videoCentre": [],
+  "mixups": [
+   {
+    "detect": [
+     "wings",
+     "feelers",
+     "antennae"
+    ],
+    "say": "Exam tip: an insect has six legs and three body parts. Other animals can have wings and feelers too.",
+    "src": "mixups.lifecycles#62 (cross-listed)",
+    "kind": "mixup",
+    "unless": [
+     "six legs",
+     "6 legs",
+     "three body parts",
+     "3 body parts",
+     "three parts",
+     "3 parts"
+    ],
+    "inBranch": "Insects",
+    "note": "Shown only when an Insects node gives wings/feelers but not six legs / three body parts."
+   }
+  ],
+  "mixupsSkipped": [
+   "No Living-and-Non-Living entries exist in misconceptions.js or mixups.js."
+  ],
+  "mixupCandidates": [
+   {
+    "detect": [
+     "car is living",
+     "cars are living",
+     "moves so it is living",
+     "it moves so it is alive",
+     "fire is living"
+    ],
+    "say": "Exam tip: moving is not enough. A living thing also grows, responds to changes and reproduces.",
+    "src": "TOPICS outcome (\"why a car moves but is still non-living\")",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "non"
+    ],
+    "note": "NOT in misconceptions.js / mixups.js: needs the teacher's approval."
+   }
+  ],
+  "extras": [],
+  "habitLabelsSkipped": {}
+ },
+ "materials": {
+  "title": "Diversity of Materials",
+  "lv": "P3",
+  "idea": "Every material has properties, and those properties decide what it is good for.",
+  "eps": [],
+  "centreAliases": [
+   "diversity of materials",
+   "materials",
+   "properties of materials"
+  ],
+  "app": [
+   {
+    "branch": "Strength",
+    "aliases": [
+     "strength",
+     "strong"
+    ],
+    "keys": [
+     "Holds heavy loads",
+     "Breaks easily"
+    ],
+    "keyAliases": {
+     "Holds heavy loads": [
+      "holds heavy loads",
+      "holds heavy things",
+      "strong",
+      "does not break easily"
+     ],
+     "Breaks easily": [
+      "breaks easily",
+      "weak",
+      "fragile"
+     ]
+    },
+    "rank": 1,
+    "hint": "Add a branch for strength. Which materials are strong?"
+   },
+   {
+    "branch": "Flexibility",
+    "aliases": [
+     "flexibility",
+     "flexible"
+    ],
+    "keys": [
+     "Bends without breaking",
+     "Stiff and keeps its shape"
+    ],
+    "keyAliases": {
+     "Bends without breaking": [
+      "bends without breaking",
+      "bends easily",
+      "flexible",
+      "bendy"
+     ],
+     "Stiff and keeps its shape": [
+      "stiff",
+      "rigid",
+      "keeps its shape",
+      "not flexible"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a branch for flexibility. Which materials bend?"
+   },
+   {
+    "branch": "Float or sink",
+    "aliases": [
+     "float or sink",
+     "floating",
+     "sinking",
+     "floats or sinks"
+    ],
+    "keys": [
+     "Floats on water",
+     "Sinks in water"
+    ],
+    "keyAliases": {
+     "Floats on water": [
+      "floats",
+      "float",
+      "floats on water"
+     ],
+     "Sinks in water": [
+      "sinks",
+      "sink",
+      "sinks in water"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a branch: does it float or sink?"
+   },
+   {
+    "branch": "Waterproof",
+    "aliases": [
+     "waterproof",
+     "water resistant"
+    ],
+    "keys": [
+     "Keeps water out",
+     "Soaks water up"
+    ],
+    "keyAliases": {
+     "Keeps water out": [
+      "keeps water out",
+      "waterproof",
+      "does not absorb water",
+      "does not let water through"
+     ],
+     "Soaks water up": [
+      "soaks water up",
+      "soaks up water",
+      "absorbs water",
+      "absorbent"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add a branch for waterproof materials."
+   },
+   {
+    "branch": "Lets light through",
+    "aliases": [
+     "lets light through",
+     "allows light through",
+     "light passes through"
+    ],
+    "keys": [
+     "Clear enough to see through",
+     "Blocks the light"
+    ],
+    "keyAliases": {
+     "Clear enough to see through": [
+      "clear",
+      "transparent",
+      "see-through",
+      "see through"
+     ],
+     "Blocks the light": [
+      "blocks light",
+      "blocks the light",
+      "opaque",
+      "does not let light through"
+     ]
+    },
+    "rank": 5,
+    "hint": "Add a branch: does it let light through?"
+   }
+  ],
+  "video": [],
+  "videoCentre": [],
+  "mixups": [
+   {
+    "detect": [
+     "heavy things sink",
+     "heavy objects sink",
+     "heavy sinks",
+     "heavier sinks",
+     "light things float",
+     "light objects float",
+     "lighter floats",
+     "light floats",
+     "heavy things cannot float",
+     "heavy objects cannot float"
+    ],
+    "say": "Exam tip: floating does not depend on weight alone. It depends on the material.",
+    "src": "M-33",
+    "kind": "mixup",
+    "unless": [
+     "not"
+    ]
+   }
+  ],
+  "mixupsSkipped": [
+   "M-34 (one useful property): not detectable in a map.",
+   "No Materials entries in mixups.js."
+  ],
+  "extras": [],
+  "habitLabelsSkipped": {}
+ },
+ "lifecycles": {
+  "title": "Life Cycles",
+  "lv": "P3",
+  "idea": "Plants and animals go through stages, in order, from the start of life to adult.",
+  "eps": [],
+  "centreAliases": [
+   "life cycles",
+   "life cycle",
+   "lifecycles"
+  ],
+  "app": [
+   {
+    "branch": "Flowering plant",
+    "aliases": [
+     "flowering plant",
+     "plant",
+     "plant life cycle"
+    ],
+    "keys": [
+     "Seed",
+     "Young plant",
+     "Adult plant"
+    ],
+    "keyAliases": {
+     "Seed": [
+      "seed",
+      "seeds"
+     ],
+     "Young plant": [
+      "young plant",
+      "seedling"
+     ],
+     "Adult plant": [
+      "adult plant",
+      "mature plant"
+     ]
+    },
+    "rank": 1,
+    "hint": "Add the flowering plant. What stages does it go through?"
+   },
+   {
+    "branch": "Butterfly & beetle",
+    "aliases": [
+     "butterfly",
+     "beetle",
+     "butterfly and beetle",
+     "four stages",
+     "4 stages",
+     "four-stage",
+     "mosquito"
+    ],
+    "keys": [
+     "Egg",
+     "Larva",
+     "Pupa",
+     "Adult"
+    ],
+    "keyAliases": {
+     "Egg": [
+      "egg",
+      "eggs"
+     ],
+     "Larva": [
+      "larva",
+      "larvae",
+      "caterpillar",
+      "grub"
+     ],
+     "Pupa": [
+      "pupa",
+      "pupae",
+      "chrysalis",
+      "cocoon"
+     ],
+     "Adult": [
+      "adult"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a four-stage life cycle, like the butterfly."
+   },
+   {
+    "branch": "Grasshopper & cockroach",
+    "aliases": [
+     "grasshopper",
+     "cockroach",
+     "grasshopper and cockroach",
+     "three stages",
+     "3 stages",
+     "three-stage"
+    ],
+    "keys": [
+     "Egg",
+     "Nymph",
+     "Adult"
+    ],
+    "keyAliases": {
+     "Egg": [
+      "egg",
+      "eggs"
+     ],
+     "Nymph": [
+      "nymph",
+      "nymphs",
+      "young"
+     ],
+     "Adult": [
+      "adult"
+     ]
+    },
+    "rank": 3,
+    "hint": "Add a three-stage life cycle, like the grasshopper."
+   },
+   {
+    "branch": "Frog",
+    "aliases": [
+     "frog",
+     "frogs"
+    ],
+    "keys": [
+     "Egg",
+     "Tadpole (the young)",
+     "Adult frog"
+    ],
+    "keyAliases": {
+     "Egg": [
+      "egg",
+      "eggs",
+      "frogspawn"
+     ],
+     "Tadpole (the young)": [
+      "tadpole",
+      "tadpoles",
+      "froglet"
+     ],
+     "Adult frog": [
+      "adult frog",
+      "adult",
+      "frog"
+     ]
+    },
+    "rank": 4,
+    "hint": "Add the frog. What is its young called?"
+   },
+   {
+    "branch": "Chicken",
+    "aliases": [
+     "chicken",
+     "hen"
+    ],
+    "keys": [
+     "Egg",
+     "Chick",
+     "Adult hen"
+    ],
+    "keyAliases": {
+     "Egg": [
+      "egg",
+      "eggs"
+     ],
+     "Chick": [
+      "chick",
+      "chicks"
+     ],
+     "Adult hen": [
+      "adult hen",
+      "hen",
+      "adult chicken",
+      "rooster"
+     ]
+    },
+    "rank": 5,
+    "hint": "Add the chicken. What hatches from the egg?"
+   }
+  ],
+  "video": [],
+  "videoCentre": [],
+  "mixups": [
+   {
+    "detect": [
+     "pupa",
+     "pupae",
+     "larva",
+     "larvae",
+     "caterpillar",
+     "chrysalis"
+    ],
+    "say": "Exam tip: grasshoppers and cockroaches have three stages: egg, nymph, adult. There is no larva or pupa.",
+    "src": "M-28 + M-29",
+    "kind": "mixup",
+    "unless": [
+     "no",
+     "not"
+    ],
+    "inBranch": "Grasshopper & cockroach"
+   },
+   {
+    "detect": [
+     "all insects have a pupa",
+     "all insects have pupa",
+     "every insect has a pupa",
+     "all insects have four stages",
+     "all insects have 4 stages"
+    ],
+    "say": "Exam tip: some insects have three stages (egg, nymph, adult), with no pupa.",
+    "src": "M-28",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "wings",
+     "feelers",
+     "antennae"
+    ],
+    "say": "Exam tip: an insect has six legs and three body parts. Other animals can have wings and feelers too.",
+    "src": "mixups.lifecycles#62",
+    "kind": "mixup",
+    "unless": [
+     "six legs",
+     "6 legs",
+     "three body parts",
+     "3 body parts",
+     "three parts",
+     "3 parts"
+    ],
+    "inBranch": "Insects",
+    "note": "Only if the pupil made an \"Insects\" branch."
+   },
+   {
+    "detect": [
+     "oil stops air entering",
+     "oil blocks air",
+     "oil stops air from entering",
+     "oil stops air going into the water",
+     "oil stops oxygen entering the water"
+    ],
+    "say": "Exam tip: the oil stops the larvae and pupae from taking in air at the water's surface.",
+    "src": "mixups.lifecycles#63",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "continuity of its kind",
+     "continuity of their kind"
+    ],
+    "say": "Exam tip: many eggs are laid because some are eaten or do not hatch. This way, some survive.",
+    "src": "mixups.lifecycles#64",
+    "kind": "mixup"
+   },
+   {
+    "detect": [
+     "information from parents",
+     "information is passed",
+     "information passed down"
+    ],
+    "say": "Exam tip: the young get their characteristics from their parents.",
+    "src": "mixups.lifecycles#66",
+    "kind": "wording"
+   }
+  ],
+  "mixupsSkipped": [
+   "mixups.lifecycles#65 (rain stopped, numbers rise; question-specific)"
+  ],
+  "extras": [],
+  "habitLabelsSkipped": {}
+ },
+ "magnets": {
+  "title": "Magnets",
+  "lv": "P3",
+  "idea": "A magnet pushes or pulls without touching, and only some materials feel it.",
+  "eps": [],
+  "centreAliases": [
+   "magnets",
+   "magnet"
+  ],
+  "app": [
+   {
+    "branch": "A magnet can",
+    "aliases": [
+     "a magnet can",
+     "magnet can",
+     "what magnets do"
+    ],
+    "keys": [
+     "Push",
+     "Pull"
+    ],
+    "keyAliases": {
+     "Push": [
+      "push",
+      "pushes"
+     ],
+     "Pull": [
+      "pull",
+      "pulls"
+     ]
+    },
+    "rank": 3,
+    "hint": "What can a magnet do? Add a branch."
+   },
+   {
+    "branch": "Two poles",
+    "aliases": [
+     "two poles",
+     "2 poles",
+     "poles"
+    ],
+    "keys": [
+     "North pole",
+     "South pole"
+    ],
+    "keyAliases": {
+     "North pole": [
+      "north pole",
+      "north",
+      "n pole"
+     ],
+     "South pole": [
+      "south pole",
+      "south",
+      "s pole"
+     ]
+    },
+    "rank": 2,
+    "hint": "Add a branch for the two poles."
+   },
+   {
+    "branch": "Poles together",
+    "aliases": [
+     "poles together",
+     "like and unlike poles"
+    ],
+    "keys": [
+     "Unlike poles attract",
+     "Like poles repel"
+    ],
+    "keyAliases": {
+     "Unlike poles attract": [
+      "unlike poles attract",
+      "opposite poles attract",
+      "different poles attract",
+      "north and south attract",
+      "n and s attract"
+     ],
+     "Like poles repel": [
+      "like poles repel",
+      "same poles repel",
+      "north and north repel",
+      "south and south repel",
+      "n and n repel",
+      "s and s repel"
+     ]
+    },
+    "rank": 1,
+    "hint": "What happens when two poles meet? Add a branch."
+   },
+   {
+    "branch": "Magnetic materials",
+    "aliases": [
+     "magnetic materials",
+     "magnetic",
+     "attracted to magnets"
+    ],
+    "keys": [
+     "Iron and steel",
+     "Not copper or plastic"
+    ],
+    "keyAliases": {
+     "Iron and steel": [
+      "iron",
+      "steel",
+      "nickel",
+      "cobalt"
+     ],
+     "Not copper or plastic": [
+      "non-magnetic",
+      "not magnetic",
+      "copper",
+      "plastic",
+      "aluminium",
+      "aluminum",
+      "wood",
+      "glass",
+      "not attracted"
+     ]
+    },
+    "rank": 4,
+    "hint": "Which materials does a magnet attract? Add a branch."
+   },
+   {
+    "branch": "Making a magnet",
+    "aliases": [
+     "making a magnet",
+     "make a magnet",
+     "make magnets"
+    ],
+    "keys": [
+     "Stroke method",
+     "Electrical method"
+    ],
+    "keyAliases": {
+     "Stroke method": [
+      "stroke",
+      "stroking",
+      "stroke method"
+     ],
+     "Electrical method": [
+      "electrical method",
+      "electric",
+      "electromagnet",
+      "coil of wire"
+     ]
+    },
+    "rank": 5,
+    "hint": "How can we make a magnet? Add a branch."
+   }
+  ],
+  "video": [],
+  "videoCentre": [],
+  "mixups": [
+   {
+    "detect": [
+     "all metals are magnetic",
+     "all metals",
+     "attracts all metals",
+     "attracts metal",
+     "attract metal",
+     "attracts metals",
+     "attract metals",
+     "magnets attract metal",
+     "copper is magnetic",
+     "aluminium is magnetic",
+     "aluminum is magnetic",
+     "attracts copper",
+     "attracts aluminium",
+     "attracts aluminum",
+     "attracts gold",
+     "attracts silver"
+    ],
+    "say": "Exam tip: magnets attract magnetic materials like iron and steel. Not all metals are magnetic.",
+    "src": "M-35 + mixups.magnets#24",
+    "kind": "mixup",
+    "unless": [
+     "not",
+     "only some",
+     "non"
+    ]
+   },
+   {
+    "detect": [
+     "like poles attract",
+     "same poles attract",
+     "unlike poles repel",
+     "opposite poles repel",
+     "different poles repel",
+     "north and north attract",
+     "south and south attract",
+     "north and south repel",
+     "n and n attract",
+     "s and s attract",
+     "n and s repel",
+     "stronger pole attracts"
+    ],
+    "say": "Exam tip: unlike poles attract. Like poles repel.",
+    "src": "M-36",
+    "kind": "mixup",
+    "note": "Whole-word matching is essential: \"unlike poles attract\" contains \"like poles attract\"."
+   },
+   {
+    "detect": [
+     "attracted the magnet",
+     "attracts the magnet",
+     "attract the magnet",
+     "iron attracts",
+     "steel attracts",
+     "iron attracted"
+    ],
+    "say": "Exam tip: write it this way round: the iron is attracted to the magnet.",
+    "src": "mixups.magnets#25",
+    "kind": "wording"
+   }
+  ],
+  "mixupsSkipped": [
+   "mixups.magnets#26 (balance reading; question-specific)"
+  ],
+  "extras": [],
+  "habitLabelsSkipped": {}
+ }
+}

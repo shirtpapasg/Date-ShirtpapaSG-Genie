@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Science Marking · Lab</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Atkinson+Hyperlegible:wght@400;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* Same exercise-book palette as the app. Every colour is a variable, set once
+     for light and once for dark. */
+  :root{
+    --ink:#1d2a44; --bg:#fbfaf3; --surface:#f1f5fb; --rule:#d5dbe7;
+    --mid:#4d5b76; --accent:#1f8a4c; --accent-bg:rgba(31,138,76,.12);
+    --faint:#8a95ab; --card:#ffffff; --grid:rgba(96,140,196,.15);
+    --margin:#e2646a; --pen-dark:#166b3b;
+    --hl:#ffd84d; --hl-soft:rgba(255,216,77,.35); --hl-ink:#5a4600;
+    --warn:#c9741b; --warn-bg:rgba(201,116,27,.12);
+    --round:'Fredoka','Nunito',ui-rounded,system-ui,sans-serif;
+    --body:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;
+    --hand:'Caveat','Segoe Script',cursive;
+  }
+  html[data-theme="dark"]{
+    --ink:#eef1f7; --bg:#141a27; --surface:#222c3f; --rule:#2c3549;
+    --mid:#b6bfd1; --accent:#4fc47f; --accent-bg:rgba(79,196,127,.14);
+    --faint:#7c879d; --card:#1c2434; --grid:rgba(120,160,220,.10);
+    --margin:#d8686e; --pen-dark:#0f5c31;
+    --hl:#f3c93a; --hl-soft:rgba(243,201,58,.20); --hl-ink:#f8e7a0;
+    --warn:#e9a35a; --warn-bg:rgba(233,163,90,.14);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;
+    background-color:var(--bg);
+    background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+    background-size:28px 28px;background-attachment:fixed}
+  .wrap{max-width:720px;margin:0 auto;padding:22px 22px 80px 44px;position:relative}
+  /* Arriving through the door of the lab in the grass: the light of the doorway
+     fades and the page settles, so going in reads as one move over two pages. */
+  #lab-arrive{position:fixed;inset:0;z-index:95;pointer-events:none;
+    background:radial-gradient(circle at 50% 62%, #fff6e0 0%, #f4e5c4 38%, #c9a978 100%);
+    animation:lab-arrive .52s ease-out forwards}
+  @keyframes lab-arrive{from{opacity:1}to{opacity:0}}
+  html.arriving .wrap,html.arriving #gate{animation:lab-step-in .52s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes lab-step-in{from{transform:scale(1.06);opacity:.35}to{transform:none;opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    #lab-arrive{display:none}
+    html.arriving .wrap,html.arriving #gate{animation:none}
+  }
+  .wrap::before{content:'';position:absolute;top:0;bottom:0;left:22px;width:2px;background:var(--margin);opacity:.55}
+  @media (max-width:400px){ .wrap{padding-left:34px} .wrap::before{left:15px} }
+  h1,h2,h3{font-family:var(--round);font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.2}
+  h1{font-size:28px} h2{font-size:22px} h3{font-size:18px}
+  .eyebrow{font-family:var(--round);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid)}
+  .muted{color:var(--mid);font-size:15px}
+  /* A full answer to a question in parts: one line per part, so a pupil can see
+     where each one begins and match it to what they wrote. */
+  .ans-line{display:block}
+  .ans-line + .ans-line{margin-top:7px}
+  a{color:var(--accent)}
+  .top{display:flex;align-items:baseline;gap:14px;border-bottom:1px dashed var(--rule);padding-bottom:12px;margin-bottom:22px}
+  .top a{margin-left:auto;font-size:14px;text-decoration:none;font-family:var(--round);font-weight:600}
+  button{font-family:var(--round);font-weight:600;font-size:17px;padding:14px 20px;min-height:52px;border-radius:999px;border:0;
+    cursor:pointer;margin-top:12px;width:100%;text-align:center;transition:transform .08s ease,box-shadow .16s}
+  .primary{background:var(--accent);color:#fff;box-shadow:0 3px 0 var(--pen-dark)}
+  .primary:active{transform:translateY(2px);box-shadow:0 1px 0 var(--pen-dark)}
+  .secondary{background:var(--card);color:var(--ink);border:1.5px solid var(--rule)}
+  .ghost{background:transparent;color:var(--accent);min-height:44px;font-size:15px}
+  button:disabled{opacity:.5;cursor:default}
+  .card{background:var(--surface);border-left:4px solid var(--hl);border-radius:0 12px 12px 0;padding:14px 18px;margin-top:16px;
+    box-shadow:0 6px 18px rgba(29,42,68,.06)}
+  .card.warn{border-left-color:var(--warn);background:var(--warn-bg)}
+  .card.idea{border-left-color:var(--accent);background:var(--accent-bg)}
+  .item{background:var(--card);border:1.5px solid var(--rule);border-radius:14px;padding:16px 18px;margin-top:12px;
+    box-shadow:0 6px 18px rgba(29,42,68,.06)}
+  .item.link{cursor:pointer}
+  .item.link:hover{border-color:var(--mid)}
+  .badge{display:inline-block;font-family:var(--round);font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    padding:3px 10px;border-radius:999px;background:var(--accent-bg);color:var(--accent);margin-left:8px;vertical-align:middle}
+  .badge.soon{background:var(--surface);color:var(--mid)}
+  /* the level folders on the list */
+  .lv{margin-top:22px;border:1.5px solid var(--rule);border-radius:16px;padding:0 16px 4px;background:var(--surface)}
+  .lv summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:12px;padding:14px 0}
+  .lv summary::-webkit-details-marker{display:none}
+  .lv summary::before{content:'▸';color:var(--mid);font-size:14px}
+  .lv[open] summary::before{content:'▾'}
+  .lv-name{font-family:var(--round);font-weight:700;font-size:20px}
+  .lv-line{color:var(--mid);font-size:14px}
+  .lv > div{margin-top:8px}
+  .badge.kind{background:var(--hl-soft);color:var(--hl-ink)}
+  html[data-theme="dark"] .badge.kind{color:var(--hl)}
+  ul.need{margin:8px 0 0;padding-left:22px} ul.need li{margin:3px 0}
+  .dgm{margin-top:16px;border:1.5px solid var(--rule);background:var(--card);padding:14px;border-radius:12px}
+  .dgm svg{width:100%;height:auto;display:block}
+  html[data-theme="dark"] .dgm svg{filter:invert(.92) hue-rotate(180deg)}
+  .step{margin-top:14px;padding:14px 16px;border:1.5px solid var(--rule);border-radius:14px;background:var(--card)}
+  .step .n{font-family:var(--hand);font-weight:700;color:var(--accent);font-size:22px;line-height:1;margin-right:8px}
+  .step.note{background:var(--surface);border-style:dashed}
+  .opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+  .opt{width:100%;text-align:left;margin:0;min-height:48px;padding:12px 16px;background:var(--card);color:var(--ink);
+    border:1.5px solid var(--rule);border-radius:12px;font-family:var(--body);font-weight:400;font-size:16px}
+  .step .q{font-size:19px;line-height:1.5;margin-top:2px}
+  @keyframes rainbowSlide{from{background-position:0 0,0% 50%}to{background-position:0 0,300% 50%}}
+  /* the chosen answer wears the Heat Lab's sliding rainbow ring */
+  .opt.picked{border:2px solid transparent;font-weight:700;
+    background:linear-gradient(var(--card),var(--card)) padding-box,
+      linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f) border-box;
+    background-size:100% 100%,300% 100%;animation:rainbowSlide 2.4s linear infinite;
+    box-shadow:0 0 14px rgba(255,255,255,.18)}
+  .opt.right{border-color:var(--accent);background:var(--accent-bg);font-weight:700}
+  .opt.right.picked{background:linear-gradient(var(--accent-bg),var(--accent-bg)) padding-box,
+      linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f) border-box;background-size:100% 100%,300% 100%}
+  @media (prefers-reduced-motion:reduce){.opt.picked{animation:none}}
+  /* read aloud: the segment being read wears the same rainbow ring */
+  .step,.card{position:relative}
+  button.say{position:absolute;top:10px;right:10px;width:36px;height:36px;min-height:0;padding:0;margin:0;border-radius:50%;
+    border:1.5px solid var(--rule);background:var(--surface);color:var(--mid);font-size:16px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+  button.say:hover{color:var(--accent);border-color:var(--accent)}
+  .has-say{padding-right:54px}
+  .reading{--rb:var(--card);border:2px solid transparent !important;
+    background:linear-gradient(var(--rb),var(--rb)) padding-box,
+      linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f) border-box !important;
+    background-size:100% 100%,300% 100% !important;animation:rainbowSlide 2.4s linear infinite;box-shadow:0 0 14px rgba(255,255,255,.18)}
+  .step.note.reading{--rb:var(--surface)}
+  .card.idea.reading{--rb:var(--accent-bg)}
+  .card.warn.reading{--rb:var(--warn-bg)}
+  .reading button.say{color:var(--accent);border-color:var(--accent)}
+  button.readpart,button.readspeed,button.readsound{width:auto;min-height:38px;font-size:14px;padding:6px 14px;margin:0 8px 6px 0;display:inline-flex;gap:8px;align-items:center}
+  .readrow{display:flex;flex-wrap:wrap;align-items:center}
+  .console .hud{flex-wrap:wrap;row-gap:6px}
+  .console .hud .aids{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .console .hud .aids button{width:auto;min-height:30px;font-size:12.5px;padding:4px 10px;margin:0;border-radius:999px;color:var(--lab-mid);border:1px solid var(--lab-line);background:transparent}
+  .console .hud .aids button.lit{color:var(--glow);border-color:rgba(95,211,255,.5)}
+  @media (max-width:560px){ .console .hud .aids button{font-size:11.5px;padding:3px 8px} }
+  .w{border-radius:4px;transition:background .12s}
+  .w.now{background:var(--hl-soft);box-shadow:0 0 0 3px var(--hl-soft);color:var(--hl-ink);font-weight:700}
+  html[data-theme="dark"] .w.now{color:var(--hl-ink)}
+  @media (prefers-reduced-motion:reduce){.reading{animation:none}}
+  .opt:disabled{opacity:.85}
+  .verdict{margin-top:10px;font-family:var(--round);font-weight:600;color:var(--accent)}
+  textarea{width:100%;font-family:var(--round);font-weight:600;font-size:17px;line-height:1.6;padding:12px 14px;min-height:110px;margin-top:10px;
+    background:var(--card);color:var(--ink);border:1.5px solid var(--rule);border-radius:10px}
+  textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-bg)}
+  input.blank{font:inherit;font-family:var(--round);font-weight:600;width:130px;padding:4px 8px;margin:0 3px;border:0;border-bottom:2px solid var(--rule);
+    background:transparent;color:var(--ink);text-align:center}
+  input.blank:focus{outline:none;border-bottom-color:var(--accent)}
+  input.blank.ok{border-bottom-color:var(--accent);color:var(--accent)} input.blank.no{border-bottom-color:var(--warn)}
+  .row{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-top:1px dashed var(--rule)}
+  .tick{width:14px;height:14px;flex:none;margin-top:7px;border-radius:50%;background:var(--accent)}
+  .tick.open{background:transparent;position:relative}
+  .tick.open::before,.tick.open::after{content:'';position:absolute;left:50%;top:50%;width:16px;height:3px;background:var(--margin);border-radius:2px;transform:translate(-50%,-50%) rotate(45deg)}
+  .tick.open::after{transform:translate(-50%,-50%) rotate(-45deg)}
+  .dark{background:var(--ink);color:var(--bg);padding:16px 18px;margin-top:14px;border-radius:14px}
+  html[data-theme="dark"] .dark{background:var(--card);color:var(--ink)}
+  .dark .eyebrow{color:var(--hl)}
+  .err{border-left:4px solid var(--warn);background:var(--warn-bg);padding:12px 16px;margin-top:12px;border-radius:0 10px 10px 0}
+  .hide{display:none !important}
+  /* the 3D lab opens full-screen over the steps, and comes back */
+  #labwin{position:fixed;inset:0;z-index:65;background:#08131f;display:none;flex-direction:column}
+  #labwin.on{display:flex}
+  #labwin .bar{display:flex;align-items:center;gap:12px;padding:8px 12px;background:#0d1826;color:#eef1f7;font-family:var(--round);font-weight:600;font-size:15px}
+  #labwin .bar button{width:auto;margin:0;min-height:38px;font-size:14px;padding:6px 14px;background:#1f8a4c;color:#fff}
+  #labwin .bar a{margin-left:auto;color:#66ccff;font-size:13px}
+  /* The way back is the way on: the bar says which part is being tested and
+     carries a lit button that closes the bench and lands on "what did you see". */
+  #labwin .bar{flex-wrap:wrap;row-gap:6px}
+  #labwin .bar .guide{font-size:13px;color:#a9b8d1;font-weight:600;margin-left:6px}
+  /* The name of the lab gives way first, so the way back and the way on are
+     never the things that fall off the end of the bar. */
+  #labwin-title{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #labwin-back,#labwin-sound,#labwin-done{flex:none}
+  /* The bar's own rule zeroes every button margin, so this one has to be said
+     with the same weight to push the way on to the right edge. */
+  @media (max-width:760px){ #labwin .bar a{display:none} #labwin .bar #labwin-done{margin-left:auto} }
+  /* The way on lives at the top right of the bar. It sat at the bottom centre,
+     which is where a bench puts what it wants to say at the end, so it covered
+     the very thing the pupil had just earned. Up here it covers nothing, and it
+     is still the brightest thing in the bar once the station is done. */
+  #labwin-done{width:auto;margin:0;min-height:40px;padding:8px 18px;font-size:15px;border-radius:999px;
+    background:rgba(18,33,58,.92);color:#5fd3ff;border:1.5px solid rgba(95,211,255,.55);
+    box-shadow:0 0 0 2px rgba(95,211,255,.10);transition:transform .25s,box-shadow .3s,background .3s}
+  #labwin-done:hover{transform:translateY(-1px);box-shadow:0 0 18px rgba(95,211,255,.4)}
+  /* the sound button, next to the way back */
+  #labwin-sound{width:auto;margin:0;min-height:38px;padding:6px 12px;font-size:16px;line-height:1;
+    background:rgba(255,255,255,.08);color:#eef1f7;border:1px solid rgba(255,255,255,.18)}
+  #labwin-sound:hover{border-color:#66ccff}
+  #labwin-done.lit{background:linear-gradient(90deg,#4fc47f,#7fe0a4);color:#06281a;border-color:transparent;font-weight:700;
+    box-shadow:0 0 0 3px rgba(79,196,127,.35),0 0 22px rgba(79,196,127,.6);animation:dock-land .5s cubic-bezier(.3,1.5,.4,1) both,dock-beckon 1.6s ease-in-out .5s infinite}
+  @keyframes dock-land{from{transform:scale(.7);opacity:0}to{transform:none;opacity:1}}
+  @keyframes dock-beckon{50%{box-shadow:0 0 0 7px rgba(79,196,127,.18),0 0 30px rgba(79,196,127,.85)}}
+  #labwin-done[hidden]{display:none}
+  @media (prefers-reduced-motion:reduce){ #labwin-done.lit{animation:none} }
+  @media (max-width:600px){ #labwin-done{font-size:14px;padding:7px 13px;min-height:36px} #labwin .bar .guide{display:none}
+    #labwin .bar{gap:8px;padding:6px 10px} #labwin-back{font-size:13px;padding:6px 11px} }
+  /* The way on is the one thing on the bench page a pupil must not miss, so it
+     is the biggest and brightest thing in the bar from the moment the bench
+     opens: a slow breathing glow and a sheen that crosses it. When the station
+     is done it turns brighter still. Every bench gets it, because the bar is
+     this page's and not the bench's. */
+  #labwin .bar #labwin-done{position:relative;overflow:hidden;min-height:54px;padding:12px 28px;font-size:18px;font-weight:700;letter-spacing:.01em;
+    background:linear-gradient(90deg,#23945a,#3fbf78);color:#fff;border:2px solid rgba(170,255,208,.8);
+    box-shadow:0 0 0 3px rgba(79,196,127,.30),0 0 24px rgba(79,196,127,.65);animation:done-glow 1.8s ease-in-out infinite}
+  #labwin .bar #labwin-done::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);transform:translateX(-120%);animation:done-sheen 2.8s ease-in-out infinite}
+  #labwin .bar #labwin-done:hover{transform:scale(1.04)}
+  #labwin .bar #labwin-done.lit{background:linear-gradient(90deg,#4fc47f,#a8f0c4);color:#06281a;border-color:#eafff3;
+    animation:dock-land .5s cubic-bezier(.3,1.5,.4,1) both,done-glow 1.1s ease-in-out .5s infinite}
+  @keyframes done-glow{50%{box-shadow:0 0 0 9px rgba(79,196,127,.16),0 0 42px rgba(79,196,127,.95);transform:scale(1.03)}}
+  @keyframes done-sheen{0%,55%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+  @media (max-width:600px){ #labwin .bar #labwin-done{order:9;flex:1 1 100%;min-height:48px;font-size:16px;padding:10px 16px} }
+  @media (max-height:520px){ #labwin .bar #labwin-done{min-height:42px;font-size:15px;padding:8px 20px} }
+  @media (prefers-reduced-motion:reduce){ #labwin .bar #labwin-done,#labwin .bar #labwin-done.lit,#labwin .bar #labwin-done::after{animation:none} }
+  /* light or dark, next to the sound */
+  #labwin .bar #labwin-theme{width:auto;margin:0;min-height:38px;padding:6px 12px;font-size:16px;line-height:1;flex:none;
+    background:rgba(255,255,255,.08);color:#eef1f7;border:1px solid rgba(255,255,255,.18)}
+  #labwin .bar #labwin-theme:hover{border-color:#66ccff}
+  /* the bar in light mode; the bench inside follows through labs/_shared/lab-theme.js */
+  html:not([data-theme="dark"]) #labwin{background:#eef2f7}
+  html:not([data-theme="dark"]) #labwin .bar{background:#fff;color:#1d2a44;box-shadow:0 1px 0 #d5dde8}
+  html:not([data-theme="dark"]) #labwin .bar .guide{color:#55627a}
+  html:not([data-theme="dark"]) #labwin .bar a{color:#1668a8}
+  html:not([data-theme="dark"]) #labwin .bar #labwin-sound,html:not([data-theme="dark"]) #labwin .bar #labwin-theme{background:#f1f4f9;color:#1d2a44;border-color:#cfd8e6}
+  #labwin-toast{position:absolute;left:50%;top:64px;transform:translateX(-50%);z-index:2;max-width:min(92vw,560px);display:flex;gap:12px;align-items:center;flex-wrap:wrap;
+    padding:12px 16px;border-radius:14px;background:#12213a;color:#eef3fb;border:1px solid rgba(255,180,87,.5);box-shadow:0 12px 40px rgba(0,0,0,.5);font-family:var(--round);font-weight:600;font-size:15px;animation:box-in .4s both}
+  #labwin-toast[hidden]{display:none}
+  #labwin-toast button{width:auto;margin:0;min-height:40px;font-size:14px;padding:8px 14px;background:#ffb457;color:#3a2200}
+  #labwin{position:fixed}
+  #labwin iframe{flex:1;border:0;width:100%;background:#08131f}
+  /* the celebration and the badges */
+  #confetti{position:fixed;inset:0;z-index:80;pointer-events:none;display:none}
+  .ach{margin-top:14px;padding:16px 18px;border-radius:14px;border:2px solid var(--hl);background:var(--hl-soft);display:flex;gap:14px;align-items:center}
+  .ach .ico{font-size:34px;line-height:1}
+  .ach b{font-family:var(--round);font-weight:700;font-size:18px;display:block}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .bdg{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--hl-soft);color:var(--hl-ink);font-family:var(--round);font-weight:600;font-size:14px}
+  html[data-theme="dark"] .bdg{color:var(--hl)}
+  .lockhint{font-size:13px;color:var(--mid);margin-top:6px}
+  /* parts fold up, so the steps do not sprawl */
+  .part-hd{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+  .part-hd h2{flex:1}
+  .part-hd .chev{font-family:var(--round);color:var(--mid);transition:transform .2s}
+  .part.open .part-hd .chev{transform:rotate(90deg)}
+  .part-body{display:none}
+  .part.open .part-body{display:block}
+  .part-hd button{width:auto;margin:0;min-height:38px;font-size:14px;padding:6px 14px}
+  button.mic{width:auto;min-height:40px;font-size:14px;padding:8px 14px;margin-top:8px;display:inline-flex;gap:8px;align-items:center}
+  button.mic.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .mic-hint{font-size:13px;line-height:1.5;margin-top:6px;color:var(--mid)}
+  .busy{color:var(--mid);font-size:15px;margin-top:10px}
+  /* members only */
+  #gate{position:fixed;inset:0;z-index:70;background:var(--bg);display:none;align-items:center;justify-content:center;padding:28px 22px;overflow:auto}
+  #gate.on{display:flex} #gate .g-box{max-width:420px;width:100%}
+  #gate input{width:100%;font-family:var(--body);font-size:17px;padding:14px 16px;border:1.5px solid var(--rule);border-radius:10px;background:var(--card);color:var(--ink);margin-top:18px}
+  .g-msg{margin-top:14px;font-size:15px;color:var(--mid)} .g-msg.err{color:var(--warn);border:0;background:none;padding:0}
+  /* ── the console: inside the lab the lights are different ─────────────
+     The list is the exercise book. An activity is an instrument panel: one
+     screen at a time, a rail that shows where you are, a bench that opens the
+     moment you have predicted. Deep navy rather than black, so it stays soft on
+     a child's eyes; the app's green still means done and right; the safety
+     strip is amber; the badge is gold. The same faces as the app, so it is
+     still one product. */
+  :root{
+    --lab-bg:#0b1626; --lab-panel:#12213a; --lab-panel-2:#182c4a; --lab-line:rgba(120,190,255,.18);
+    --lab-ink:#eef3fb; --lab-mid:#a9b8d1; --lab-faint:#6f7f9c;
+    --glow:#5fd3ff; --glow-soft:rgba(95,211,255,.16);
+    --lab-ok:#4fc47f; --lab-ok-soft:rgba(79,196,127,.16); --lab-ok-dark:#1e6b40;
+    --lab-warn:#ffb457; --lab-warn-soft:rgba(255,180,87,.14);
+    --lab-gold:#ffd84d; --lab-gold-soft:rgba(255,216,77,.14);
+  }
+  body.in-lab{overflow:hidden}
+  #con-bg{position:fixed;inset:0;z-index:1;display:none;background:var(--lab-bg)}
+  body.in-lab #con-bg{display:block}
+  #act.console{position:fixed;inset:0;z-index:2;color:var(--lab-ink);display:grid;grid-template-columns:250px minmax(0,1fr);grid-template-rows:100%;overflow:hidden}
+  #act.console > .busy,#act.console > .err,#act.console > .ghost{grid-column:1 / -1;align-self:start;margin:40px auto 0;max-width:520px;color:var(--lab-mid)}
+
+  /* the rail: where you are in the mission */
+  .rail{display:flex;flex-direction:column;gap:18px;padding:22px 18px;border-right:1px solid var(--lab-line);
+    background:linear-gradient(180deg,rgba(18,33,58,.92),rgba(11,22,38,.72));backdrop-filter:blur(6px);overflow:auto;min-height:0}
+  .rail .out{color:var(--glow);text-decoration:none;font-family:var(--round);font-weight:600;font-size:14px}
+  .rail .mission .eyebrow{color:var(--glow);letter-spacing:.16em}
+  .rail .mission b{display:block;font-family:var(--round);font-weight:600;font-size:18px;line-height:1.25;margin-top:4px;text-wrap:balance}
+  .nodes{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;position:relative}
+  .nodes::before{content:'';position:absolute;left:15px;top:16px;bottom:16px;width:2px;background:var(--lab-line)}
+  .node{display:flex;align-items:center;gap:12px;padding:7px 0;cursor:pointer;color:var(--lab-mid);font-family:var(--round);font-weight:600;font-size:15px;
+    position:relative;background:none;border:0;text-align:left;min-height:0;margin:0;width:100%;line-height:1.2}
+  .node i{width:32px;height:32px;border-radius:50%;flex:none;display:grid;place-items:center;font-style:normal;font-size:13px;
+    border:2px solid var(--lab-line);background:var(--lab-bg);position:relative;z-index:1;transition:box-shadow .3s,border-color .3s,background .3s}
+  .node.done i{border-color:var(--lab-ok);background:var(--lab-ok);color:#06281a}
+  .node.now{color:var(--lab-ink)}
+  .node.now i{border-color:var(--glow);color:var(--glow);box-shadow:0 0 0 4px var(--glow-soft),0 0 18px var(--glow);animation:node-pulse 2.2s ease-in-out infinite}
+  .node.now.done i{color:#06281a}
+  @keyframes node-pulse{50%{box-shadow:0 0 0 7px var(--glow-soft),0 0 26px var(--glow)}}
+  .node small{display:block;font-family:var(--body);font-weight:400;font-size:12px;color:var(--lab-faint);margin-top:1px}
+  .node:focus-visible{outline:2px solid var(--glow);outline-offset:2px;border-radius:8px}
+  .rail-foot{margin-top:auto;padding:14px;border:1px solid var(--lab-line);border-radius:14px;display:flex;gap:12px;align-items:center;opacity:.6;transition:opacity .4s,box-shadow .4s}
+  .rail-foot.got{opacity:1;border-color:var(--lab-gold);box-shadow:0 0 22px rgba(255,216,77,.25)}
+  .rail-foot .ico{font-size:30px;line-height:1;filter:grayscale(1)} .rail-foot.got .ico{filter:none}
+  .rail-foot .eyebrow{font-size:10px;color:var(--lab-faint)} .rail-foot.got .eyebrow{color:var(--lab-gold)}
+  .rail-foot b{display:block;font-family:var(--round);font-weight:600;font-size:14px;line-height:1.25}
+
+  /* the stage: one screen at a time */
+  .stage{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0;position:relative}
+  .hud{display:flex;align-items:center;gap:16px;padding:16px 28px 0;max-width:820px;width:100%;margin:0 auto}
+  .hud .counter{font-family:var(--round);font-weight:700;font-size:12px;letter-spacing:.16em;color:var(--glow);white-space:nowrap}
+  .hud .bar{flex:1;height:4px;border-radius:2px;background:var(--lab-line);overflow:hidden}
+  .hud .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--lab-ok),var(--glow));box-shadow:0 0 12px var(--glow);transition:width .5s cubic-bezier(.2,.7,.3,1)}
+  .hud .pct{font-family:var(--round);font-weight:700;font-size:12px;color:var(--lab-mid);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .screens{position:relative;overflow:auto;padding:18px 28px 24px;-webkit-overflow-scrolling:touch}
+  .scr{display:none;max-width:764px;margin:0 auto;padding:26px 30px 30px;border:1px solid var(--lab-line);border-radius:18px;
+    background:linear-gradient(160deg,var(--lab-panel),rgba(18,33,58,.55));box-shadow:0 0 0 1px rgba(95,211,255,.05),0 24px 60px rgba(0,0,0,.38);position:relative}
+  /* results from the bench, beside the question. On a wide screen the question
+     and the results share the stage, side by side, so the empty margins are
+     put to work. On a narrow one the results are a drawer under the question. */
+  .recap{min-height:0;overflow:auto;margin:18px 28px 24px 0;padding:0;border:1px solid var(--lab-line);border-radius:18px;
+    background:linear-gradient(160deg,#0d1a2c,#0a1320);color:#eef1f7;box-shadow:0 0 0 1px rgba(95,211,255,.08),0 24px 60px rgba(0,0,0,.38);animation:rc-in .4s cubic-bezier(.2,.8,.3,1) both}
+  .recap[hidden]{display:none}
+  @keyframes rc-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+  .rc-head{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;width:100%;padding:14px 18px 10px;cursor:default;position:sticky;top:0;z-index:1;background:#0d1a2c;border-radius:18px 18px 0 0}
+  .rc-tag{font-family:var(--round);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#5fd3ff}
+  .rc-when{margin-left:auto;font-size:12.5px;color:#8a98a6;font-family:var(--round);font-weight:600}
+  .rc-chev{display:none;color:#5fd3ff;transition:transform .2s}
+  .rc-body{padding:0 18px 16px;display:flex;flex-direction:column;gap:12px}
+  .rc-what{align-self:flex-start;padding:5px 12px;border-radius:999px;background:#4a90e2;color:#06182c;font-family:var(--round);font-weight:700;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase}
+  .rc-rows{display:flex;flex-direction:column}
+  .rc-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:16px}
+  .rc-row:last-child{border-bottom:0}
+  .rc-row span{color:#d6dee6} .rc-row b{font-family:var(--round);font-weight:700;font-size:17px;text-align:right;font-variant-numeric:tabular-nums}
+  .rc-graph,.rc-shot{margin:0;padding:10px 8px 6px;border-radius:12px;background:#0a1320;border:1px solid rgba(255,255,255,.1)}
+  .rc-graph svg{display:block;width:100%;height:auto;overflow:visible}
+  .rc-html{color:#eef1f7;font-family:Nunito,var(--round),system-ui,sans-serif;font-size:14px;overflow:auto;padding:2px}
+  .rc-graph svg path,.rc-graph svg polyline{stroke-width:3px}
+  .rc-graph figcaption,.rc-shot figcaption{font-family:var(--round);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a98a6;margin:0 6px 4px}
+  .rc-shot{padding:6px} .rc-shot img{display:block;width:100%;height:auto;border-radius:8px} .rc-shot figcaption{margin:6px 6px 2px}
+  .rc-again{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;padding:11px 14px;border-radius:12px;border:1.5px solid rgba(95,211,255,.5);color:#5fd3ff;font-family:var(--round);font-weight:700;font-size:15px}
+  .rc-again:hover{background:rgba(95,211,255,.1)} .rc-again:focus-visible{outline:3px solid #5fd3ff;outline-offset:2px}
+  .rc-note{margin:0;font-size:13px;line-height:1.45;color:#8a98a6}
+  @media (min-width:1101px){
+    .stage.has-recap{grid-template-columns:minmax(0,1.35fr) minmax(320px,1fr)}
+    .stage.has-recap .hud,.stage.has-recap .ctl{grid-column:1 / -1;max-width:none}
+    .stage.has-recap .screens{grid-column:1;padding-right:20px}
+    .stage.has-recap .recap{grid-column:2;grid-row:2}
+    .stage.has-recap .scr{max-width:none}
+  }
+  @media (max-width:1100px){
+    .stage.has-recap{grid-template-rows:auto minmax(0,1fr) auto auto;grid-template-columns:minmax(0,1fr)}
+    .recap{margin:0 14px 6px;min-width:0;max-width:calc(100% - 28px);box-sizing:border-box;max-height:46vh;border-radius:14px}
+    .rc-head{cursor:pointer;padding:11px 14px;border-radius:14px} .rc-chev{display:inline}
+    .recap.shut .rc-body{display:none} .recap.shut .rc-chev{transform:rotate(-90deg)}
+    .rc-body{padding:0 14px 12px}
+  }
+  @media (prefers-reduced-motion:reduce){ .recap{animation:none} }
+  .scr::before,.scr::after{content:'';position:absolute;width:22px;height:22px;border:2px solid var(--glow);opacity:.6;pointer-events:none}
+  .scr::before{left:9px;top:9px;border-right:0;border-bottom:0}
+  .scr::after{right:9px;bottom:9px;border-left:0;border-top:0}
+  .scr.on{display:block;animation:scr-in .38s cubic-bezier(.2,.7,.3,1) both}
+  .scr.on.back{animation-name:scr-in-back}
+  @keyframes scr-in{from{opacity:0;transform:translateX(40px) scale(.985)}to{opacity:1;transform:none}}
+  @keyframes scr-in-back{from{opacity:0;transform:translateX(-40px) scale(.985)}to{opacity:1;transform:none}}
+
+  /* what is on a screen */
+  .console .eyebrow{color:var(--glow);letter-spacing:.16em}
+  .console h1{font-size:34px;line-height:1.15;margin-top:8px;text-wrap:balance}
+  .console h2{font-size:26px;margin-top:8px;text-wrap:balance}
+  .console .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .console .badge{background:var(--lab-panel-2);color:var(--lab-mid);border:1px solid var(--lab-line);margin:0}
+  .console .badge.kind{background:var(--lab-gold-soft);color:var(--lab-gold);border-color:rgba(255,216,77,.3)}
+  .console .card,.console .step{margin-top:16px;border:1px solid var(--lab-line);border-left-width:4px;border-radius:0 14px 14px 0;background:rgba(255,255,255,.035);padding:16px 18px;color:var(--lab-ink)}
+  .console .card.idea{border-left-color:var(--glow);background:var(--glow-soft)}
+  .console .card.warn{border-left-color:var(--lab-warn);background:var(--lab-warn-soft)} .console .card.warn .eyebrow{color:var(--lab-warn)}
+  .console .card .big{font-family:var(--round);font-weight:600;font-size:20px;line-height:1.5;margin-top:6px}
+  .console .how{margin-top:16px;padding:12px 16px;border-radius:12px;background:var(--lab-panel-2);color:var(--lab-mid);font-size:15px;display:flex;gap:12px;align-items:center}
+  .console .how .dot{width:12px;height:12px;border-radius:50%;background:var(--glow);box-shadow:0 0 12px var(--glow);flex:none}
+  .console .step{border-left-width:1px;border-radius:14px;padding:20px 22px}
+  .console .step.has-say,.console .card.has-say{padding-right:54px}
+  .console .step .do{font-size:18px;line-height:1.55;color:var(--lab-mid);margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--lab-line)}
+  .console .step .q{font-family:var(--round);font-weight:600;font-size:22px;line-height:1.4;margin-top:4px;color:var(--lab-ink)}
+  .console .step.note{border-style:dashed;background:rgba(255,216,77,.06);border-color:rgba(255,216,77,.35)} .console .step.note .eyebrow{color:var(--lab-gold)}
+  .console ul.need li{margin:5px 0}
+  .console .opt{background:var(--lab-panel-2);color:var(--lab-ink);border:1.5px solid var(--lab-line);font-size:17px}
+  .console .opt:hover:not(:disabled){border-color:var(--glow);box-shadow:0 0 0 3px var(--glow-soft)}
+  .console .opt.picked{border:2px solid transparent;background:linear-gradient(var(--lab-panel-2),var(--lab-panel-2)) padding-box,
+      linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f) border-box;background-size:100% 100%,300% 100%}
+  .console .opt.right{border-color:var(--lab-ok);background:var(--lab-ok-soft)}
+  .console .opt.right.picked{background:linear-gradient(rgba(31,110,60,.55),rgba(31,110,60,.55)) padding-box,
+      linear-gradient(90deg,#e8493f,#ffb627,#3fc35f,#66ccff,#b557e6,#e8493f) border-box;background-size:100% 100%,300% 100%}
+  .console .verdict{color:var(--lab-ok)}
+  .console textarea{background:var(--lab-bg);color:var(--lab-ink);border-color:var(--lab-line)}
+  .console textarea:focus{border-color:var(--glow);box-shadow:0 0 0 3px var(--glow-soft)}
+  .console input.blank{background:transparent;color:var(--lab-ink);border-bottom-color:var(--glow)}
+  .console input.blank.ok{color:var(--lab-ok);border-bottom-color:var(--lab-ok)} .console input.blank.no{border-bottom-color:var(--lab-warn)}
+  .console .primary{background:var(--lab-ok);box-shadow:0 3px 0 var(--lab-ok-dark)}
+  .console .primary:active{box-shadow:0 1px 0 var(--lab-ok-dark)}
+  .console [data-lab]{background:linear-gradient(90deg,#39b6e8,#5fd3ff);color:#06202e;box-shadow:0 0 0 2px rgba(95,211,255,.3),0 0 26px rgba(95,211,255,.45);animation:beckon 1.8s ease-in-out infinite}
+  @keyframes beckon{50%{box-shadow:0 0 0 6px rgba(95,211,255,.18),0 0 34px rgba(95,211,255,.6)}}
+  .console .secondary{background:var(--lab-panel-2);color:var(--lab-ink);border-color:var(--lab-line)}
+  .console .ghost{color:var(--glow)}
+  .console .muted{color:var(--lab-mid)}
+  .console .dark{background:var(--lab-panel-2);color:var(--lab-ink)} .console .dark .eyebrow{color:var(--lab-gold)}
+  .console .row{border-top-color:var(--lab-line)} .console .tick{background:var(--lab-ok)}
+  .console .tick.open::before,.console .tick.open::after{background:var(--lab-warn)}
+  .console .err{background:var(--lab-warn-soft);border-left-color:var(--lab-warn)}
+  .console .ach{border-color:var(--lab-gold);background:var(--lab-gold-soft);box-shadow:0 0 30px rgba(255,216,77,.22)}
+  .console .ach .eyebrow{color:var(--lab-gold) !important}
+  .console button.say{background:var(--lab-panel-2);color:var(--lab-mid);border-color:var(--lab-line)}
+  .console button.say:hover,.console .reading button.say{color:var(--glow);border-color:var(--glow)}
+  .console .reading{--rb:var(--lab-panel)}
+  .console .w.now{color:#3a2d00}
+  .console .dgm{background:#fff;border-color:var(--lab-line)} .console .dgm svg{filter:none}
+  .console .benchhint{margin-top:10px;font-size:14px}
+  .console .enterhint{font-size:12.5px;margin:-4px 0 6px;color:var(--lab-faint)}
+  .console .retry{margin-top:18px;padding-top:16px;border-top:1px dashed var(--lab-line);animation:box-in .5s .9s both}
+  .console .retry .retry-lead{margin-bottom:10px} .console .retry .retry-lead .muted{font-size:15px;margin-top:4px}
+  .console .retry textarea:disabled{opacity:.85}
+  @media (prefers-reduced-motion:reduce){ .console .retry{animation:none} }
+  /* ── the marked answer ──────────────────────────────────────────
+     Full marks: a gold cheer, the box pulses gold, confetti falls and the chime
+     plays. Short of it: a cyan cheer for the effort, the box pulses once, each
+     kept point ticks in, and each missing point draws an amber line under
+     itself, one after another, so what to add is the most visible thing. */
+  .console .cheer{display:flex;gap:14px;align-items:center;margin:14px 0 8px;padding:14px 16px;border-radius:14px;border:1px solid;animation:cheer-in .6s cubic-bezier(.3,1.4,.4,1) both}
+  .console .cheer .ico{font-size:34px;line-height:1;animation:cheer-bounce 1.3s ease-in-out infinite}
+  .console .cheer b{display:block;font-family:var(--round);font-weight:700;font-size:20px;line-height:1.2}
+  .console .cheer span:not(.ico){font-size:15px;color:var(--lab-mid)}
+  .console .cheer.full{background:var(--lab-gold-soft);border-color:var(--lab-gold);box-shadow:0 0 30px rgba(255,216,77,.25)} .console .cheer.full b{color:var(--lab-gold)}
+  .console .cheer.nearly{background:var(--glow-soft);border-color:rgba(95,211,255,.5)} .console .cheer.nearly b{color:var(--glow)}
+  .console .cheer.none{background:rgba(255,255,255,.04);border-color:var(--lab-line)} .console .cheer.none b{color:var(--lab-ink)}
+  @keyframes cheer-in{from{opacity:0;transform:scale(.8) translateY(10px)}to{opacity:1;transform:none}}
+  @keyframes cheer-bounce{50%{transform:translateY(-5px) rotate(-8deg)}}
+  .console .step.win{border-color:var(--lab-gold);animation:win-pulse 1.5s ease-out 3}
+  @keyframes win-pulse{0%{box-shadow:0 0 0 0 rgba(255,216,77,.65)}100%{box-shadow:0 0 0 26px rgba(255,216,77,0)}}
+  .console .step.nudge{animation:nudge-pulse 1.5s ease-out 2}
+  @keyframes nudge-pulse{0%{box-shadow:0 0 0 0 rgba(95,211,255,.55)}100%{box-shadow:0 0 0 20px rgba(95,211,255,0)}}
+  .console .row.hit,.console .row.gap{animation:box-in .5s both;animation-delay:calc(var(--n,0) * .22s + .35s)}
+  .console .row.hit .tick{animation:pop .5s cubic-bezier(.3,1.6,.4,1) both;animation-delay:calc(var(--n,0) * .22s + .5s)}
+  .console .row.gap .tick.open{animation:tick-blink 1.1s ease-in-out 3;animation-delay:calc(var(--n,0) * .22s + .7s)}
+  @keyframes tick-blink{50%{box-shadow:0 0 0 6px rgba(255,180,87,.35)}}
+  .console .row.gap .ul{font-weight:600;color:var(--lab-ink);padding-bottom:3px;border-radius:2px;
+    background:linear-gradient(90deg,var(--lab-warn),var(--lab-gold)) no-repeat 0 100%;background-size:0% 3px;
+    animation:ul-draw .9s cubic-bezier(.2,.7,.3,1) forwards;animation-delay:calc(var(--n,0) * .22s + .8s)}
+  @keyframes ul-draw{to{background-size:100% 3px}}
+  @media (prefers-reduced-motion:reduce){
+    .console .cheer,.console .cheer .ico,.console .step.win,.console .step.nudge,.console .row.hit,.console .row.gap,.console .row.hit .tick,.console .row.gap .tick.open{animation:none}
+    .console .row.gap .ul{animation:none;background-size:100% 3px}
+  }
+  .console .todo{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .console .todo button{width:100%;text-align:left;margin:0;min-height:0;padding:12px 16px;background:var(--lab-panel-2);color:var(--lab-ink);border:1.5px solid var(--lab-line);font-size:15px;display:flex;gap:12px;align-items:center}
+  .console .todo button:hover{border-color:var(--glow)}
+  .console .todo .k{color:var(--glow);font-size:12px;letter-spacing:.12em;text-transform:uppercase;flex:none;width:96px}
+  @media (prefers-reduced-motion:reduce){
+    .scr.on{animation:none} .node.now i{animation:none} .console [data-lab]{animation:none} .hud .bar i{transition:none}
+  }
+
+  /* ── the headings announce themselves ─────────────────────────────
+     Every box carries a plate: an icon, the name, a rim of its own colour. When
+     a screen arrives the boxes come in one after another, each plate lands with
+     its letters closing up, a light runs across it, and a charge runs down the
+     box's edge. Read-aloud keeps its own glow, so a box being read is left alone. */
+  .console .hd{display:inline-flex;align-items:center;gap:8px;padding:6px 13px 6px 9px;border-radius:999px;font-size:12.5px;letter-spacing:.18em;
+    background:rgba(95,211,255,.10);border:1px solid rgba(95,211,255,.38);color:var(--glow);position:relative;overflow:hidden;margin:0 0 10px;
+    box-shadow:0 0 0 0 rgba(95,211,255,0),inset 0 0 12px rgba(95,211,255,.08)}
+  .console .hd::before{content:attr(data-ico);font-size:15px;letter-spacing:0;line-height:1;filter:drop-shadow(0 0 6px rgba(95,211,255,.7))}
+  .console .hd::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.38) 50%,transparent 70%);transform:translateX(-130%)}
+  .console .card.warn .hd{background:rgba(255,180,87,.12);border-color:rgba(255,180,87,.5);color:var(--lab-warn);box-shadow:inset 0 0 12px rgba(255,180,87,.10)}
+  .console .card.warn .hd::before{filter:drop-shadow(0 0 6px rgba(255,180,87,.8))}
+  .console .step.note .hd{background:rgba(255,216,77,.10);border-color:rgba(255,216,77,.45);color:var(--lab-gold)}
+  .console .step.note .hd::before{filter:drop-shadow(0 0 6px rgba(255,216,77,.8))}
+  .scr.on .card:not(.reading),.scr.on .step:not(.reading){animation:box-in .55s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--n,0) * .13s + .08s)}
+  @keyframes box-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  .scr.on .hd{animation:hd-in .6s cubic-bezier(.2,.8,.3,1) both;animation-delay:calc(var(--n,0) * .13s + .18s)}
+  @keyframes hd-in{from{opacity:0;transform:translateX(-10px);letter-spacing:.42em}60%{letter-spacing:.14em}to{opacity:1;transform:none;letter-spacing:.18em}}
+  .scr.on .hd::after{animation:hd-shine 1s ease-out both;animation-delay:calc(var(--n,0) * .13s + .55s)}
+  @keyframes hd-shine{to{transform:translateX(130%)}}
+  .console .card::before,.console .step::before{content:'';position:absolute;left:-4px;top:0;width:4px;height:100%;border-radius:3px;pointer-events:none;opacity:0;
+    background:linear-gradient(180deg,#fff,rgba(255,255,255,.2));box-shadow:0 0 14px var(--glow)}
+  .console .step::before{left:-1px;width:2px}
+  .console .card.warn::before{box-shadow:0 0 14px var(--lab-warn)} .console .step.note::before{box-shadow:0 0 14px var(--lab-gold)}
+  .scr.on .card::before,.scr.on .step::before{animation:charge 1s ease-out both;animation-delay:calc(var(--n,0) * .13s + .2s)}
+  @keyframes charge{0%{clip-path:inset(0 0 100% 0);opacity:1}65%{clip-path:inset(0);opacity:.9}100%{clip-path:inset(0);opacity:0}}
+  .scr > .eyebrow{display:inline-block} .scr.on > .eyebrow{animation:hd-in .6s cubic-bezier(.2,.8,.3,1) both}
+  .scr.on > h1,.scr.on > h2{animation:box-in .5s cubic-bezier(.2,.8,.3,1) both;animation-delay:.06s}
+
+  /* ── the rail is alive ───────────────────────────────────────────
+     The line fills with light as far as the screen you are on, and a bright
+     bead rides its tip when you move. The node you are on wears a scanning
+     ring; a node that is done flips its letter to a tick with a small pop; the
+     badge floats once it is yours. */
+  .nodes::after{content:'';position:absolute;left:15px;top:16px;width:2px;height:var(--fill,0px);border-radius:1px;
+    background:linear-gradient(180deg,var(--lab-ok),var(--glow));box-shadow:0 0 10px var(--glow);transition:height .7s cubic-bezier(.2,.7,.3,1)}
+  .nodes .bead{position:absolute;left:12px;top:calc(var(--fill,0px) + 8px);width:8px;height:8px;border-radius:50%;background:#fff;
+    box-shadow:0 0 12px 3px var(--glow);transition:top .7s cubic-bezier(.2,.7,.3,1);z-index:2;pointer-events:none}
+  .node .lbl{transition:transform .35s cubic-bezier(.2,.8,.3,1),color .3s} .node.now .lbl{transform:translateX(5px)}
+  .node i{overflow:visible}
+  .node.now i::before{content:'';position:absolute;inset:-7px;border-radius:50%;pointer-events:none;
+    background:conic-gradient(from 0deg,transparent 0 62%,rgba(95,211,255,.15) 74%,var(--glow) 100%);
+    -webkit-mask:radial-gradient(circle,transparent 58%,#000 60%);mask:radial-gradient(circle,transparent 58%,#000 60%);animation:orbit 2.6s linear infinite}
+  @keyframes orbit{to{transform:rotate(360deg)}}
+  .node.done i{color:transparent;animation:pop .55s cubic-bezier(.3,1.6,.4,1) both}
+  .node.done i::after{content:'✓';position:absolute;inset:0;display:grid;place-items:center;color:#06281a;font-weight:800;font-size:15px}
+  @keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.18)}100%{transform:none}}
+  .rail-foot.got{animation:float 3.4s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-4px)}}
+  @media (prefers-reduced-motion:reduce){
+    .scr.on .card,.scr.on .step,.scr.on .hd,.scr.on .hd::after,.scr.on .card::before,.scr.on .step::before,.scr.on > .eyebrow,.scr.on > h1,.scr.on > h2,
+    .node.now i::before,.node.done i,.rail-foot.got{animation:none}
+    .console .card::before,.console .step::before{display:none} .nodes::after,.nodes .bead{transition:none}
+  }
+  @media (max-width:900px){ .nodes::after,.nodes .bead{display:none} .node.now .lbl{transform:none} }
+
+  /* the controls: one way forward, one way back */
+  .ctl{display:flex;align-items:center;gap:12px;padding:12px 28px calc(18px + env(safe-area-inset-bottom));max-width:820px;width:100%;margin:0 auto}
+  .ctl button{width:auto;margin:0;min-height:48px}
+  .ctl .back{background:transparent;color:var(--lab-mid);border:1.5px solid var(--lab-line);font-size:15px}
+  .ctl .back:hover:not(:disabled){border-color:var(--glow);color:var(--lab-ink)}
+  .ctl .msg{flex:1;text-align:right;font-size:14px;color:var(--lab-faint);line-height:1.35}
+  .ctl .next{background:var(--lab-ok);color:#fff;box-shadow:0 3px 0 var(--lab-ok-dark);padding:12px 26px}
+  .ctl .next:disabled{opacity:.35}
+  .ctl .next.finish{background:linear-gradient(90deg,#ffb627,var(--lab-gold));color:#3a2d00;box-shadow:0 3px 0 #8a6d00}
+  .ctl .skip{color:var(--lab-mid);font-size:14px;min-height:0;padding:6px 10px}
+  .ctl [hidden]{display:none !important}
+
+  /* a phone has no room for a rail down the side: the nodes go across the top */
+  @media (max-width:900px){
+    #act.console{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+    .rail{flex-direction:row;align-items:center;gap:10px;padding:10px 12px;border-right:0;border-bottom:1px solid var(--lab-line);overflow-x:auto;overflow-y:hidden}
+    .rail .out{flex:none;font-size:13px} .rail .mission{display:none} .rail-foot{display:none}
+    .nodes{flex-direction:row;gap:2px;margin:0;flex:none} .nodes::before{display:none}
+    .node{padding:2px 3px;width:auto} .node i{width:30px;height:30px;font-size:12px} .node .lbl{display:none}
+    .hud{padding:12px 14px 0} .ctl{padding:10px 14px calc(14px + env(safe-area-inset-bottom))} .screens{padding:12px 12px 18px}
+    .scr{padding:22px 18px 24px} .scr::before,.scr::after{width:16px;height:16px}
+    .console h1{font-size:28px} .console h2{font-size:22px} .console .step .q{font-size:20px} .console .card .big{font-size:18px}
+    .ctl .msg{font-size:13px}
+  }
+  /* a tablet has room for the names of the nodes across the top */
+  @media (min-width:700px) and (max-width:900px){
+    .rail{gap:8px} .rail .out{font-size:13px} .nodes{gap:0}
+    .node{padding:2px 7px 2px 3px;gap:7px} .node .lbl{display:block;font-size:12.5px;white-space:nowrap} .node small{display:none}
+  }
+  /* a phone held sideways: the chrome shrinks so the screen has the height */
+  @media (max-height:500px){
+    .rail{padding:5px 10px;gap:8px} .rail .out{font-size:12px} .node i{width:26px;height:26px;font-size:11px}
+    .hud{padding-top:6px} .screens{padding:8px 12px 10px} .scr{padding:14px 16px 16px}
+    .scr::before,.scr::after{width:12px;height:12px}
+    .ctl{padding:6px 14px calc(8px + env(safe-area-inset-bottom));gap:8px} .ctl button{min-height:40px;font-size:14px;padding:8px 16px}
+    .console h1{font-size:23px} .console h2{font-size:20px;margin-top:4px} .console .step .q{font-size:18px} .console .card .big{font-size:17px}
+    .console .card,.console .step{padding:12px 14px;margin-top:10px} .console .step .do{font-size:16px;margin-bottom:10px;padding-bottom:10px}
+    .console .opt{min-height:42px;padding:9px 14px;font-size:15px}
+    #labwin .bar{padding:4px 10px} #labwin .bar button{min-height:32px;font-size:13px}
+  }
+  /* a large screen: the panel and its type grow with the room */
+  @media (min-width:1600px){
+    #act.console{grid-template-columns:290px minmax(0,1fr)}
+    .scr{max-width:900px;padding:30px 36px 34px} .hud,.ctl{max-width:960px}
+    .console h1{font-size:38px} .console h2{font-size:29px} .console .step .q{font-size:24px} .console .card .big{font-size:22px}
+    .console .opt{font-size:18px} .console .step .do{font-size:19px}
+    .rail .mission b{font-size:20px} .node{font-size:16px}
+  }
+</style>
+</head>
+<body>
+<script>
+/* Came in through the door rather than by typing the address: play the other
+   half of that move once, then forget it. */
+(function () {
+  var came = false;
+  try { came = sessionStorage.getItem('sm-lab-enter') === '1'; sessionStorage.removeItem('sm-lab-enter'); } catch (e) {}
+  if (!came || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('arriving');
+  addEventListener('DOMContentLoaded', function () {
+    var a = document.createElement('div');
+    a.id = 'lab-arrive';
+    document.body.appendChild(a);
+    setTimeout(function () { a.remove(); document.documentElement.classList.remove('arriving'); }, 720);
+  });
+})();
+</script>
+<div id="gate">
+  <div class="g-box">
+    <span class="eyebrow">Science Marking · Lab</span>
+    <h1 style="margin-top:10px">Members sign in here.</h1>
+    <p class="muted" style="margin-top:12px">Enter the email you signed up with and I will send you a sign-in link. It works once and lasts a day.</p>
+    <form id="g-form"><input id="g-email" type="email" autocomplete="email" placeholder="name@example.com" required>
+      <button class="primary" id="g-go" type="submit">Send me a sign-in link</button></form>
+    <div class="g-msg" id="g-msg"></div>
+    <p class="muted" style="margin-top:26px;font-size:14px">Not a member yet? Membership is at
+      <a href="https://smart-science-marking-site.vercel.app" target="_blank" rel="noopener">Smart Science Marking</a>.</p>
+  </div>
+</div>
+
+<canvas id="confetti"></canvas>
+<div id="labwin"><div class="bar"><button id="labwin-back" type="button">← Back to the steps</button>
+  <button id="labwin-sound" type="button" title="Sound" aria-label="Sound">🔊</button><button id="labwin-theme" type="button" title="Light or dark" aria-label="Light or dark">◐</button><span id="labwin-title"></span>
+  <span class="guide" id="labwin-guide"></span>
+  <a id="labwin-tab" href="#" target="_blank" rel="noopener">Open in its own tab</a>
+  <button id="labwin-done" type="button" hidden>Say what I saw →</button></div>
+<div id="labwin-toast" hidden><span class="t-txt"></span><button type="button" id="labwin-go"></button></div><iframe id="labwin-frame" aria-label="3D lab" allow="fullscreen"></iframe>
+</div>
+
+<div class="wrap">
+  <div class="top"><span class="eyebrow">Science Marking · Lab</span><a href="./">← Back to marking</a></div>
+  <div id="list"></div>
+  <div id="act" class="hide"></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+try { const t = localStorage.getItem('sm-theme-v1'); if (t === 'dark') document.documentElement.dataset.theme = 'dark'; } catch(e){}
+
+/* ── the same session as the app ── */
+const SESS = 'sm-session-v1';
+const sessionToken = () => { try { return localStorage.getItem(SESS) || ''; } catch(e){ return ''; } };
+let gateLocked = false;
+async function api(path, body){
+  const headers = {'content-type':'application/json'};
+  if (sessionToken()) headers.authorization = 'Bearer ' + sessionToken();
+  const r = await fetch(path, { method:'POST', headers, body: JSON.stringify(body || {}) });
+  const text = await r.text(); let d = {};
+  try { d = JSON.parse(text); } catch(e){ throw new Error('The server did not reply. Please try again.'); }
+  if (!r.ok){ if (r.status === 401 && d.signIn) gateOpen(); throw new Error(d.error || 'Something went wrong. Please try again.'); }
+  return d;
+}
+function gateMsg(t, err){ const m = $('g-msg'); m.textContent = t || ''; m.classList.toggle('err', !!err); }
+function gateOpen(){ try { localStorage.removeItem(SESS); } catch(e){} $('gate').classList.add('on'); }
+async function boot(){
+  const url = new URL(location.href), k = url.searchParams.get('k');
+  if (k){ history.replaceState(null, '', url.pathname + url.hash); $('gate').classList.add('on'); gateMsg('Signing you in…');
+    try { const d = await api('/api/access', { action:'login', token:k }); if (d.session) localStorage.setItem(SESS, d.session); gateMsg(''); }
+    catch(e){ gateMsg(e.message, true); } }
+  try {
+    const d = await api('/api/access', { action:'session' });
+    gateLocked = !!d.locked;
+    if (d.locked && d.ok) LSYNC.pull();
+    if (d.locked && !d.ok) return gateOpen();
+  } catch(e){ if (!sessionToken()) { /* server unreachable: let the list call say so */ } }
+  $('gate').classList.remove('on');
+  route();
+}
+$('g-form').onsubmit = async e => {
+  e.preventDefault(); const email = $('g-email').value.trim(); if (!email) return;
+  $('g-go').disabled = true;
+  try { const d = await api('/api/access', { action:'link', email }); gateMsg(d.message || 'If that address is registered, a sign-in link is on its way.'); }
+  catch(err){ gateMsg(err.message, true); }
+  $('g-go').disabled = false;
+};
+
+/* ── the session record, same shape as the app's ── */
+/* ── every answer, to the teacher's Google Sheet ──────────────────────
+   The same sender as the app: predictions, observations, written answers and
+   the conclusion's missing words, each with the lab it came from. It runs
+   whether or not the members lock is on. */
+const GSHEET = {
+  off: false,
+  device(){
+    try {
+      let d = localStorage.getItem('sm-device-v1');
+      if (!d){ d = Array.from(crypto.getRandomValues(new Uint8Array(6)), b => b.toString(16).padStart(2,'0')).join(''); localStorage.setItem('sm-device-v1', d); }
+      return d;
+    } catch(e){ return ''; }
+  },
+  post(row){
+    if (this.off || !row) return;
+    const headers = { 'content-type': 'application/json' };
+    const tok = sessionToken(); if (tok) headers.authorization = 'Bearer ' + tok;
+    // keepalive: a row sent just before the page is closed still arrives
+    fetch('/api/log', { method:'POST', headers, keepalive: true,
+      body: JSON.stringify({ action: 'sheet', ...row, ...this.pupil(), device: this.device() }) })
+      .then(r => r.json()).then(x => { if (x && x.off) this.off = true; }).catch(() => {});
+  },
+  pupil(){
+    let w = null;
+    try { w = JSON.parse(localStorage.getItem('sm-who-v1') || 'null'); } catch(e){}
+    w = w || {};
+    return { name: w.name || '', nickname: w.nick || '', school: w.school || '' };
+  },
+  send(type, d){
+    d = d || {};
+    const a = (typeof CON !== 'undefined' && CON.a) || (typeof A !== 'undefined' && A) || {};
+    const where = 'lab', topic = [a.code, a.title].filter(Boolean).join(' ');
+    if (type === 'answer') return this.post({ where, topic, kind:'answer', q:d.q, a1:d.a1, a2:d.a2, marks:d.marks, max:d.max, model:d.model });
+    if (type !== 'lab') return;
+    if (d.what === 'predicted' || d.what === 'observed')
+      return this.post({ where, topic, kind:d.what, q:d.q, a1:d.chose, correct:d.correct });
+    if (d.what === 'conclusion') return this.post({ where, topic, kind:'conclusion', a1:d.words, marks:d.right, max:d.total });
+  },
+};
+
+const LOG = {
+  sid: null, q: Promise.resolve(), idleT: null, ended: false,
+  on(){ return gateLocked && !!sessionToken(); },
+  id(){ if (!this.sid){ try { this.sid = sessionStorage.getItem('sm-sid') || ''; } catch(e){}
+    if (!this.sid){ this.sid = Array.from(crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2,'0')).join(''); try { sessionStorage.setItem('sm-sid', this.sid); } catch(e){} } } return this.sid; },
+  event(type, data){ try { GSHEET.send(type, data); } catch(e){} if (!this.on()) return; this.ended = false; this.touch();
+    this.q = this.q.then(() => api('/api/log', { action:'event', sid: this.id(), ev:{ type, ...(data||{}) } })).catch(() => {}); },
+  end(beacon){ if (!this.on() || this.ended || !this.sid) return; this.ended = true; clearTimeout(this.idleT);
+    const body = JSON.stringify({ action:'end', sid: this.id(), session: sessionToken() });
+    if (beacon && navigator.sendBeacon) navigator.sendBeacon('/api/log', new Blob([body], { type:'application/json' }));
+    else this.q = this.q.then(() => api('/api/log', { action:'end', sid: this.id(), session: sessionToken() })).catch(() => {});
+    this.sid = null; try { sessionStorage.removeItem('sm-sid'); } catch(e){} },
+  touch(){ clearTimeout(this.idleT); this.idleT = setTimeout(() => this.end(false), 60*60*1000); },
+};
+['pointerdown','keydown'].forEach(ev => addEventListener(ev, () => { if (LOG.on() && !LOG.ended && LOG.sid) LOG.touch(); }, { passive:true }));
+addEventListener('pagehide', () => LOG.end(true));
+
+/* ── progress on this device ── */
+const PK = 'sm-lab-progress-v1';
+const prog = () => { try { return JSON.parse(localStorage.getItem(PK) || '{}'); } catch(e){ return {}; } };
+const setProg = (id, key, val) => { const p = prog(); p[id] = p[id] || {}; p[id][key] = val; try { localStorage.setItem(PK, JSON.stringify(p)); } catch(e){} LSYNC.touch(); if (typeof conRefresh === 'function') conRefresh(); };
+/* Progress and badges follow the pupil: while signed in, this key is kept on
+   the account too and merged on arrival (a badge earned anywhere is earned). */
+const LSYNC = {
+  timer: null, dirty: false,
+  on(){ return gateLocked && !!sessionToken(); },
+  touch(){ if (!this.on()) return; this.dirty = true; clearTimeout(this.timer); this.timer = setTimeout(() => this.push(), 2500); },
+  async push(){ if (!this.on() || !this.dirty) return; this.dirty = false; try { await api('/api/access', { action: 'store-put', items: [{ key: PK, v: JSON.stringify(prog()), t: Date.now() }] }); } catch(e){ this.dirty = true; } },
+  flush(){ if (!this.on() || !this.dirty) return; this.dirty = false; try { fetch('/api/access', { method: 'POST', keepalive: true, headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'store-put', items: [{ key: PK, v: JSON.stringify(prog()), t: Date.now() }], session: sessionToken() }) }); } catch(e){} },
+  async pull(){
+    if (!this.on()) return;
+    try {
+      const d = await api('/api/access', { action: 'store-get' });
+      const r = d && d.store && d.store[PK]; if (!r || !r.v) { this.dirty = true; this.push(); return; }
+      let R = {}; try { R = JSON.parse(r.v) || {}; } catch(e){ return; }
+      const L = prog(), out = {};
+      new Set([...Object.keys(L), ...Object.keys(R)]).forEach(id => {
+        const x = L[id] || {}, y = R[id] || {}, o = { ...y, ...x };
+        if (y.badge && !x.badge) o.badge = y.badge;
+        if (x.badge && y.badge) o.badge = ((x.badge.ts || 0) <= (y.badge.ts || 0)) ? x.badge : y.badge;
+        ['tested', 'done', 'cdone'].forEach(f => { if (x[f] || y[f]) o[f] = x[f] || y[f]; });
+        out[id] = o;
+      });
+      const merged = JSON.stringify(out);
+      if (merged !== JSON.stringify(L)) { try { localStorage.setItem(PK, merged); } catch(e){} if (A) renderActivity(A); else if (!$('list').classList.contains('hide')) renderList(); }
+      if (merged !== r.v) { this.dirty = true; this.push(); }
+    } catch(e){ /* the device copy stands */ }
+  },
+};
+addEventListener('pagehide', () => LSYNC.flush());
+const getProg = (id, key) => ((prog()[id] || {})[key]);
+
+/* ── router ── */
+addEventListener('hashchange', route);
+function route(){
+  closeLab();
+  const m = location.hash.match(/^#a\/([a-z0-9-]+)$/);
+  if (m) openActivity(m[1]); else renderList();
+}
+
+/* ── the list: every activity in the book ── */
+const KIND = { lab3d:'Experiment', observe:'Observation', make:'Make it' };
+// The adult, for the lab: a parent code has been set on this device AND unlocked
+// in this session. (No code at all does not count here — a family that never set
+// one must not see activities still in review, nor skip the locks.)
+// Admin mode (logged in from the app's buddy menu, or here) counts too: the site
+// owner testing the app sees everything and no bench is locked.
+const ADMIN_ON = 'sm-admin-v1';
+const ADMIN_FP = '6a93db1e49bd29e2f2c8e4c5a5a79c4ede9723cc0c5a296e2bd221e77aa8886d';
+const isSiteAdmin = () => { try { return localStorage.getItem(ADMIN_ON) === '1'; } catch(e){ return false; } };
+const adminDevice = () => { try { return isSiteAdmin() || (!!localStorage.getItem('sm-adm-v1') && sessionStorage.getItem('sm-adm-open') === '1'); } catch(e){ return false; } };
+// The admin can also log in here, so an activity still in review can be checked
+// on this page directly. Only a fingerprint of the password lives in the page.
+async function codeHash(t){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('sm:' + t));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+function reviewerBar(){
+  if (isSiteAdmin()) return '<div class="muted" style="margin-top:34px;font-size:13px">Admin mode is on for this device: activities in review are shown and every bench is open. <a href="#" id="rev-off">Admin logout</a></div>';
+  if (adminDevice()) return '<div class="muted" style="margin-top:34px;font-size:13px">Adult mode is on for this tab: activities in review are shown and every bench is open.</div>';
+  return '<div style="margin-top:34px;display:flex;gap:8px;align-items:center;flex-wrap:wrap" class="muted"><span style="font-size:13px">Admin?</span>' +
+    '<input id="rev-pin" type="password" autocomplete="current-password" placeholder="Admin password" style="width:160px">' +
+    '<button class="ghost" id="rev-go" type="button">Log in</button><span id="rev-msg" style="font-size:13px"></span></div>';
+}
+function wireReviewer(){
+  const off = $('rev-off'); if (off) off.onclick = e => { e.preventDefault(); try { localStorage.removeItem(ADMIN_ON); } catch(x){} renderList(); };
+  const go = $('rev-go'); if (!go) return;
+  const tryIt = async () => {
+    const v = $('rev-pin').value || '';
+    if (!v) return;
+    if (await codeHash(v) === ADMIN_FP){ try { localStorage.setItem(ADMIN_ON, '1'); } catch(e){} renderList(); }
+    else { $('rev-msg').textContent = 'That is not the admin password.'; $('rev-pin').value = ''; }
+  };
+  go.onclick = tryIt;
+  $('rev-pin').onkeydown = e => { if (e.key === 'Enter') tryIt(); };
+}
+const tags = a => (a.cc21 || []).map(t => '<span class="badge kind">' + esc(t) + '</span>').join('') +
+                  (a.skills || []).map(t => '<span class="badge soon">' + esc(t) + '</span>').join('');
+async function renderList(){
+  ttsStop(); conLeave();
+  $('act').classList.add('hide'); $('list').classList.remove('hide');
+  $('list').innerHTML = '<h1>Every experiment<br>in the book.</h1><p class="muted">Primary 4. Predict what will happen, run it, then explain it in your own words and get it marked.</p><div class="busy">Loading…</div>';
+  try {
+    const d = await api('/api/lab', { action:'list' });
+    const p = prog();
+    const earned = (d.levels || [{ chapters: d.chapters }]).flatMap(l => l.chapters).flatMap(ch => ch.activities).filter(a => a.badge && (p[a.id] || {}).badge);
+    const item = a => {
+      const got = (p[a.id] || {}).badge, open = a.status === 'ready' || a.status === 'review';
+      return '<div class="item' + (open ? ' link' : '') + '"' + (open ? ' data-open="' + a.id + '"' : '') + '>' +
+        '<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span class="eyebrow">' + esc(a.code) + '</span>' +
+        '<h3 style="flex:1">' + esc(a.title) + '</h3>' +
+        (a.status === 'ready' ? '<span class="badge">' + (got ? (a.badge ? a.badge.icon + ' Badge earned' : 'Done') : 'Ready') + '</span>' :
+         a.status === 'review' ? '<span class="badge" style="background:var(--warn-bg);color:var(--warn)">In review</span>' : '<span class="badge soon">Coming soon</span>') + '</div>' +
+        '<div class="muted" style="margin-top:6px">' + KIND[a.kind] + (a.minutes ? ' · about ' + a.minutes + ' minutes' : '') + (a.sim ? ' · runs in 3D' : '') + '</div>' +
+        '<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px 0">' + tags(a).replace(/margin-left:8px/g, '') + '</div></div>';
+    };
+    const chapterHtml = ch => '<div style="margin-top:28px"><span class="eyebrow">Chapter ' + ch.n + '</span><h2 style="margin-top:6px">' + esc(ch.title) + '</h2>' +
+      ch.activities.slice().sort((x, y) => x.code.localeCompare(y.code, undefined, { numeric: true })).filter(a => a.status !== 'review' || adminDevice()).map(item).join('') + '</div>';
+    // one folder per primary level; the one with experiments ready opens, the rest fold away
+    const levels = d.levels || [{ level: 'P4', chapters: d.chapters }];
+    const NAME = { P3: 'Primary 3', P4: 'Primary 4', P5: 'Primary 5', P6: 'Primary 6' };
+    const firstReady = (levels.find(l => l.chapters.some(ch => ch.activities.some(a => a.status === 'ready'))) || {}).level;
+    const folder = l => {
+      const acts = l.chapters.flatMap(ch => ch.activities), ready = acts.filter(a => a.status === 'ready').length, soon = acts.filter(a => a.status === 'soon').length;
+      const line = !acts.length ? 'Coming soon' : (ready ? ready + ' ready' : '') + (ready && soon ? ' · ' : '') + (soon ? soon + ' coming soon' : '');
+      return '<details class="lv"' + (l.level === firstReady ? ' open' : '') + '><summary><span class="lv-name">' + NAME[l.level] + '</span><span class="lv-line">' + line + '</span></summary>' +
+        (acts.length ? l.chapters.map(chapterHtml).join('') : '<div class="muted" style="padding:6px 0 14px">The experiments for ' + NAME[l.level] + ' are being built. They will appear here as they are ready.</div>') + '</details>';
+    };
+    $('list').innerHTML = '<h1>Every experiment<br>in the books.</h1><p class="muted">One folder for each primary level. Predict what will happen, run it, then explain it in your own words and get it marked.</p>' +
+      (earned.length ? '<div class="card idea" style="margin-top:18px"><span class="eyebrow" style="color:var(--accent)">Your badges</span><div class="badges">' +
+        earned.map(a => '<span class="bdg">' + a.badge.icon + ' ' + esc(a.badge.name) + '</span>').join('') + '</div></div>' : '') +
+      levels.map(folder).join('') + reviewerBar();
+    $('list').querySelectorAll('[data-open]').forEach(el => el.onclick = () => { location.hash = '#a/' + el.dataset.open; });
+    wireReviewer();
+  } catch(e){ $('list').innerHTML += '<div class="err">' + esc(e.message) + '</div>'; }
+}
+
+/* ── one activity ── */
+let A = null;
+async function openActivity(id){
+  $('list').classList.add('hide'); $('act').className = 'console';
+  document.body.classList.add('in-lab'); CONBG.start();
+  $('act').innerHTML = '<div class="busy">Loading…</div>';
+  try {
+    const d = await api('/api/lab', { action:'get', id });
+    A = d.activity; renderActivity(A); LOG.event('lab', { code: A.code, title: A.title, what: 'opened' });
+  } catch(e){ $('act').innerHTML = '<button class="ghost" onclick="location.hash=\'\'">← All experiments</button><div class="err">' + esc(e.message) + '</div>'; }
+}
+
+/* ── the console ─────────────────────────────────────────────────
+   An activity is a run of screens, one at a time: the briefing, then each part
+   (its heading, then every step of it), the conclusion, the real-life
+   questions, and the badge at the end. A rail down the side shows the run and
+   where you are. Nothing is thrown at the pupil at once; the next thing
+   appears only when they ask for it, and a question has to be answered before
+   the way forward opens. The bench still opens the moment a prediction is made.
+   Every element keeps the id and data attribute the rest of this page already
+   looks for, so marking, picks, the locks and the badge work unchanged. */
+const CON = { a: null, scr: [], groups: [], i: 0 };
+const SCR_KEY = id => 'sm-lab-scr:' + id;
+
+function renderActivity(a){
+  CON.a = a; CON.scr = []; CON.groups = []; CON.i = 0;
+  const scr = CON.scr, groups = CON.groups;
+  const covered = pid => !!(a.sim && a.sim.page && (a.sim.covers || []).indexOf(pid) >= 0);
+  const label = (a.sim && a.sim.label) || "Let's test it now!";
+
+  // the briefing
+  groups.push({ id: 'brief', mark: 'i', name: 'Briefing' });
+  scr.push({ id: 'brief', group: 'brief', kind: 'brief', html:
+    '<span class="eyebrow">' + esc(a.chapter) + ' · ' + esc(a.code) + (a.minutes ? ' · about ' + a.minutes + ' minutes' : '') + '</span>' +
+    '<h1>' + esc(a.title) + '</h1><div class="tags">' + tags(a).replace(/margin-left:8px/g, '') + '</div>' +
+    '<div class="card idea"><span class="eyebrow hd" data-ico="💡">The big idea</span><div class="big">' + esc(a.bigIdea) + '</div></div>' +
+    '<div class="card"><span class="eyebrow hd" data-ico="🔭">What we are finding out</span><div style="margin-top:6px">' + esc(a.aim) + '</div></div>' +
+    (a.safety && a.safety.length ? '<div class="card warn"><span class="eyebrow hd" data-ico="⚠️">Stay safe</span>' + a.safety.map(s => '<div style="margin-top:6px">' + esc(s) + '</div>').join('') + '</div>' : '') +
+    (a.sim && a.sim.page ? '<div class="how"><span class="dot"></span><div>Predict first. The moment you make a prediction, <b>' + esc(label) + '</b> lights up and the 3D bench opens for that part.</div></div>' : '') });
+
+  // the parts, a screen per step
+  (a.parts || []).forEach(p => {
+    const P = p.id.toUpperCase();
+    groups.push({ id: p.id, mark: P, name: 'Part ' + P });
+    scr.push({ id: 'part-' + p.id, group: p.id, kind: 'part', html:
+      '<span class="eyebrow">Part ' + P + ' · ' + esc(p.who) + '</span><h2>' + esc(p.title) + '</h2>' +
+      (p.need ? '<div class="card"><span class="eyebrow hd" data-ico="🧰">What you need</span><ul class="need">' + p.need.map(n => '<li>' + esc(n) + '</li>').join('') + '</ul></div>' : '') +
+      (p.diagram ? svgFor(p.diagram) : '') });
+    const steps = p.steps || [];
+    let n = 0, carry = '';
+    steps.forEach((s, si) => {
+      const key = p.id + ':' + si, isQ = s.predict || s.observe || s.explain;
+      // a thing worth knowing sits under the step before it
+      if (s.note){
+        const h = '<div class="step note"><span class="eyebrow hd" data-ico="✨">Worth knowing</span><div style="margin-top:4px">' + esc(s.note) + '</div></div>';
+        const last = scr[scr.length - 1];
+        if (last && last.group === p.id && last.kind !== 'part') last.html += h;
+        else scr.push({ id: 'n-' + cssKey(key), group: p.id, kind: 'note', html: h });
+        return;
+      }
+      // an instruction on its own leads into the question that follows it
+      if (!isQ){
+        const nxt = steps[si + 1];
+        if (s.do && nxt && (nxt.predict || nxt.observe || nxt.explain)){ carry = s.do; return; }
+        if (s.do) scr.push({ id: 's-' + cssKey(key), group: p.id, kind: 'do', html:
+          '<span class="eyebrow">Part ' + P + ' · do this</span><div class="step"><span class="eyebrow hd" data-ico="🧪">Do this</span><div class="q">' + esc(s.do) + '</div></div>' });
+        return;
+      }
+      n++;
+      const doTxt = [carry, s.do].filter(Boolean).join(' '); carry = '';
+      let h = '<span class="eyebrow">Part ' + P + ' · step ' + n + '</span><div class="step" data-key="' + key + '">';
+      if (doTxt) h += '<div class="do">' + esc(doTxt) + '</div>';
+      if (s.predict || s.observe){
+        const t = s.predict || s.observe, kind = s.predict ? 'predict' : 'observe';
+        const benchHere = s.predict && covered(p.id);   // a prediction made is a prediction to test
+        h += '<span class="eyebrow hd" data-ico="' + (s.predict ? '🔮' : '👀') + '">' + (s.predict ? 'Predict' : 'What did you see?') + '</span><div class="q">' + esc(t.q) + '</div>' +
+          '<div class="opts">' + t.options.map((o, i) => '<button class="opt" data-pick="' + key + '" data-i="' + i + '" data-kind="' + kind + '">' + esc(o) + '</button>').join('') + '</div>' +
+          '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><div class="verdict" id="v-' + cssKey(key) + '" style="flex:1"></div>' +
+          (benchHere ? '<button class="primary" data-lab data-step="' + key + '" type="button" style="width:auto;margin-top:10px" hidden>' + esc(label) + '</button>' : '') + '</div>' +
+          (benchHere ? '<div class="benchhint muted" hidden>On the bench, watch what happens. Then come back here and the next screen asks what you saw.</div>' : '');
+      }
+      if (s.explain) h += explainHtml(key, s.explain.q, s.explain.marks, { part: p.id, step: si }, getProg(a.id, key) === 'done');
+      h += '</div>';
+      scr.push({ id: 's-' + cssKey(key), group: p.id, kind: s.explain ? 'explain' : 'pick', key, see: !!(s.observe || s.explain), html: h });
+    });
+  });
+
+  // the conclusion
+  if (a.conclude && a.conclude.length){
+    groups.push({ id: 'conclude', mark: '✎', name: "Let's conclude" });
+    let h = '<span class="eyebrow">Let\'s conclude</span><h2>Fill in the missing words.</h2>';
+    a.conclude.forEach((c, ci) => {
+      let k = 0;
+      h += '<div class="step" style="font-size:17px">' + c.text.split('___').map((seg, i, arr) => esc(seg) + (i < arr.length - 1 ? '<input class="blank" data-c="' + ci + '" data-k="' + (k++) + '" autocomplete="off" autocapitalize="off">' : '')).join('') + '</div>';
+    });
+    h += '<button class="primary" id="c-check" style="margin-top:16px">Check my words</button><div id="c-out"></div>';
+    scr.push({ id: 'conclude', group: 'conclude', kind: 'conclude', see: true, html: h });
+  }
+
+  // real life, one question a screen
+  if (a.check && a.check.length){
+    groups.push({ id: 'check', mark: '?', name: 'Now use it' });
+    a.check.forEach((c, ci) => scr.push({ id: 'check-' + ci, group: 'check', kind: 'explain', key: 'check:' + ci, html:
+      '<span class="eyebrow">Now use it · ' + (ci + 1) + ' of ' + a.check.length + '</span>' +
+      '<div class="step" data-key="check:' + ci + '">' + explainHtml('check:' + ci, c.q, c.marks, { check: ci }, getProg(a.id, 'check:' + ci) === 'done') + '</div>' }));
+  }
+
+  // the end
+  groups.push({ id: 'badge', mark: '★', name: 'The badge' });
+  scr.push({ id: 'badge', group: 'badge', kind: 'badge', html:
+    '<span class="eyebrow">The end of the lab</span><h2 id="end-h"></h2><div id="ach"></div><div id="todo"></div>' +
+    '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px;align-items:center">' +
+    '<button class="secondary" id="done-btn" style="width:auto;margin:0">← All experiments</button>' +
+    '<button class="ghost" data-reset id="reset-top" type="button" disabled style="width:auto;margin:0">↺ Start this experiment again</button></div>' +
+    '<div class="muted" data-resethint style="font-size:13.5px;margin-top:6px"></div>' });
+
+  const foot = a.badge ? '<div class="rail-foot" id="rail-badge"><span class="ico">' + a.badge.icon + '</span><div><span class="eyebrow">Badge to earn</span><b>' + esc(a.badge.name) + '</b></div></div>' : '';
+  $('act').className = 'console';
+  $('act').innerHTML =
+    '<aside class="rail"><a class="out" href="#">← All experiments</a>' +
+    '<div class="mission"><span class="eyebrow">' + esc(a.chapter) + ' · ' + esc(a.code) + '</span><b>' + esc(a.title) + '</b></div>' +
+    '<ol class="nodes"><span class="bead"></span>' + groups.map(g => '<li><button class="node" type="button" data-group="' + g.id + '"><i>' + g.mark + '</i><span class="lbl">' + esc(g.name) + '<small></small></span></button></li>').join('') + '</ol>' + foot + '</aside>' +
+    '<section class="stage"><div class="hud"><span class="counter" id="con-count"></span><div class="bar"><i id="con-bar"></i></div><span class="pct" id="con-pct"></span></div>' +
+    '<div class="screens" id="con-screens">' + scr.map(s => '<div class="scr" data-scr="' + s.id + '">' + s.html + '</div>').join('') + '</div>' +
+    '<aside class="recap" id="con-recap" aria-label="Results from your bench" hidden></aside>' +
+    '<div class="ctl"><button class="back" id="con-back" type="button">← Back</button><span class="msg" id="con-msg"></span>' +
+    '<button class="ghost skip" id="con-skip" type="button" hidden>Skip for now →</button><button class="next" id="con-next" type="button">Next →</button></div></section>';
+  document.body.classList.add('in-lab'); CONBG.start();
+  // boxes and their plates arrive one after another, in the order they sit
+  $('act').querySelectorAll('.scr').forEach(sc => sc.querySelectorAll('.card, .step').forEach((el, n) => {
+    el.style.setProperty('--n', n); el.querySelectorAll('.hd').forEach(h => h.style.setProperty('--n', n));
+  }));
+  wireActivity(a); addReaders(a); refreshGates(a);
+  $('con-back').onclick = () => conShow(CON.i - 1, 'back');
+  $('con-next').onclick = () => { if (!$('con-next').disabled) conShow(CON.i + 1); };
+  $('con-skip').onclick = () => conShow(CON.i + 1);
+  $('act').querySelectorAll('.node').forEach(b => b.onclick = () => conShow(scr.findIndex(s => s.group === b.dataset.group)));
+  conShow(conResume(a));
+}
+const cssKey = k => k.replace(/[^a-z0-9]/gi, '_');
+
+// A screen is satisfied when what it asks for has been done.
+const isTask = s => s.kind === 'pick' || s.kind === 'explain' || s.kind === 'conclude';
+function satisfied(s){
+  const a = CON.a;
+  if (s.kind === 'pick') return getProg(a.id, s.key) != null;
+  if (s.kind === 'explain') return getProg(a.id, s.key) === 'done';
+  if (s.kind === 'conclude') return !!getProg(a.id, 'cdone');
+  return true;
+}
+// Where to open: a fresh activity starts at the briefing; one in progress comes
+// back to the screen it was on, or failing that to the first thing still to do.
+function conResume(a){
+  const p = prog()[a.id] || {};
+  const touched = Object.keys(p).some(k => k !== 'tested' && k !== 'badge');
+  if (!touched) return 0;
+  let saved = -1; try { saved = +sessionStorage.getItem(SCR_KEY(a.id)); } catch(e){}
+  if (saved >= 0 && saved < CON.scr.length) return saved;
+  const first = CON.scr.findIndex(s => isTask(s) && !satisfied(s));
+  return first >= 0 ? first : CON.scr.length - 1;
+}
+function conShow(i, dir){
+  const scr = CON.scr; if (!scr.length || !$('con-screens')) return;
+  i = Math.max(0, Math.min(scr.length - 1, i)); CON.i = i;
+  ttsStop();
+  [...$('con-screens').children].forEach((el, k) => {
+    el.classList.remove('on', 'back');
+    if (k === i){ el.classList.add('on'); if (dir === 'back') el.classList.add('back'); }
+  });
+  $('con-screens').scrollTop = 0;
+  try { sessionStorage.setItem(SCR_KEY(CON.a.id), String(i)); } catch(e){}
+  if (scr[i].kind === 'badge') conEnd();
+  conRefresh();
+}
+// The rail, the bar and the buttons follow the progress record, so they are
+// right after every pick, every marked answer and every reset.
+function conRefresh(){
+  const a = CON.a, scr = CON.scr;
+  if (!a || !scr.length || !$('con-next')) return;
+  paintRecap();
+  const i = CON.i, s = scr[i], last = i === scr.length - 1;
+  const tasks = scr.filter(isTask), done = tasks.filter(satisfied).length;
+  $('con-count').textContent = 'Screen ' + (i + 1) + ' of ' + scr.length;
+  $('con-bar').style.width = (tasks.length ? Math.round(done / tasks.length * 100) : 0) + '%';
+  $('con-pct').textContent = done + ' of ' + tasks.length + ' done';
+  // the rail
+  CON.groups.forEach(g => {
+    const b = $('act').querySelector('.node[data-group="' + g.id + '"]'); if (!b) return;
+    const mine = scr.filter(x => x.group === g.id), tk = mine.filter(isTask);
+    const lastIdx = scr.lastIndexOf(mine[mine.length - 1]);
+    const isDone = g.id === 'badge' ? !!getProg(a.id, 'badge') : tk.length ? tk.every(satisfied) : lastIdx < i;
+    b.classList.toggle('done', isDone); b.classList.toggle('now', s.group === g.id);
+    const sm = b.querySelector('small'); if (sm) sm.textContent = tk.length ? tk.filter(satisfied).length + ' of ' + tk.length + ' done' : '';
+    b.setAttribute('aria-current', s.group === g.id ? 'step' : 'false');
+  });
+  const rb = $('rail-badge'); if (rb) rb.classList.toggle('got', !!getProg(a.id, 'badge'));
+  $('act').querySelectorAll('[data-lab]').forEach(b => { const h = b.parentElement.nextElementSibling; if (h && h.classList.contains('benchhint')) h.hidden = b.hidden; });
+  // the line down the rail fills with light as far as the screen you are on
+  const nodes = $('act').querySelector('.nodes'), now = nodes && nodes.querySelector('.node.now');
+  if (nodes && now){ const ni = now.querySelector('i'); nodes.style.setProperty('--fill', (now.offsetTop + ni.offsetTop + ni.offsetHeight / 2 - 16) + 'px'); }
+  // the way forward
+  const ok = satisfied(s), next = $('con-next'), skip = $('con-skip'), msg = $('con-msg');
+  $('con-back').hidden = i === 0;
+  next.hidden = last; skip.hidden = true; msg.textContent = '';
+  next.classList.toggle('finish', i === scr.length - 2);
+  next.textContent = i === scr.length - 2 ? 'Finish ★' : 'Next →';
+  if (!last && !ok){
+    next.disabled = true;
+    if (s.kind === 'pick') msg.textContent = 'Choose an answer to go on.';
+    else if (s.kind === 'conclude'){ msg.textContent = 'Check your words, or come back to this later.'; skip.hidden = false; }
+    else { msg.textContent = 'Check your answer, or come back to it later.'; skip.hidden = false; }
+  } else next.disabled = false;
+}
+// The last screen: the badge if it is earned, otherwise what is left to do,
+// each a button that takes you straight there.
+function conEnd(){
+  const a = CON.a, h = $('end-h'), todo = $('todo'); if (!h) return;
+  const got = !!getProg(a.id, 'badge');
+  const left = CON.scr.map((s, i) => ({ s, i })).filter(x => isTask(x.s) && !satisfied(x.s));
+  if (got){ h.textContent = 'You did it.'; todo.innerHTML = ''; if ($('ach') && !$('ach').innerHTML && a.badge) $('ach').innerHTML = achHtml(a); return; }
+  h.textContent = left.length ? (left.length === 1 ? 'One thing left.' : left.length + ' things left.') : 'Nearly there.';
+  todo.innerHTML = '<div class="muted" style="margin-top:8px">' + (a.badge ? 'The badge <b>' + esc(a.badge.name) + '</b> is yours when every step is done.' : 'Finish every step to complete the lab.') + '</div>' +
+    '<div class="todo">' + left.map(x => {
+      const g = CON.groups.find(g => g.id === x.s.group), k = g ? g.name : x.s.group;
+      const what = x.s.kind === 'pick' ? 'A question to answer' : x.s.kind === 'conclude' ? 'The missing words' : 'An explanation to check';
+      return '<button type="button" data-goto="' + x.i + '"><span class="k">' + esc(k) + '</span><span>' + what + '</span></button>';
+    }).join('') + '</div>';
+  todo.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => conShow(+b.dataset.goto, 'back'));
+}
+function conLeave(){
+  document.body.classList.remove('in-lab'); CONBG.stop();
+  CON.a = null; CON.scr = []; CON.groups = [];
+  $('act').className = 'hide';
+}
+// Arrow keys move between screens when nothing is being typed.
+document.addEventListener('keydown', e => {
+  if (!CON.a || !document.body.classList.contains('in-lab') || $('labwin').classList.contains('on')) return;
+  const t = e.target; if (t && (t.tagName === 'TEXTAREA' || t.tagName === 'INPUT')) return;
+  if (e.key === 'ArrowRight'){ const n = $('con-next'); if (n && !n.disabled && !n.hidden) conShow(CON.i + 1); }
+  if (e.key === 'ArrowLeft') conShow(CON.i - 1, 'back');
+});
+
+/* Behind the console: a faint grid, a glow from the far corner, and slow motes
+   drifting up like dust in a beam. Still under "reduce motion", and asleep
+   whenever the tab is hidden. */
+const CONBG = {
+  c: null, ctx: null, dots: [], raf: 0, on: false, W: 0, H: 0,
+  start(){
+    if (!this.c){
+      this.c = document.createElement('canvas'); this.c.id = 'con-bg'; this.c.setAttribute('aria-hidden', 'true');
+      document.body.insertBefore(this.c, document.body.firstChild); this.ctx = this.c.getContext('2d');
+      addEventListener('resize', () => { if (this.on) this.size(); });
+      document.addEventListener('visibilitychange', () => { if (!document.hidden && this.on && !this.raf) this.raf = requestAnimationFrame(t => this.frame(t)); });
+    }
+    this.on = true; this.size();
+  },
+  stop(){ this.on = false; if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; },
+  size(){
+    const d = Math.min(2, devicePixelRatio || 1); this.W = innerWidth; this.H = innerHeight;
+    this.c.width = this.W * d; this.c.height = this.H * d; this.ctx.setTransform(d, 0, 0, d, 0, 0);
+    this.dots = []; for (let i = 0; i < 70; i++) this.dots.push({ x: Math.random() * this.W, y: Math.random() * this.H, r: Math.random() * 1.6 + .5, v: Math.random() * 9 + 3, p: Math.random() * 6.28 });
+    if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0;
+    this.frame(performance.now(), true);
+  },
+  frame(t, once){
+    if (!this.on && !once){ this.raf = 0; return; }
+    const ctx = this.ctx, W = this.W, H = this.H, still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(95,211,255,.07)'; ctx.lineWidth = 1;
+    for (let x = 0.5; x <= W; x += 48){ ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let y = 0.5; y <= H; y += 48){ ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+    const g = ctx.createRadialGradient(W * .88, -H * .12, 10, W * .88, -H * .12, H * .95);
+    g.addColorStop(0, 'rgba(95,211,255,.20)'); g.addColorStop(1, 'rgba(95,211,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    const g2 = ctx.createRadialGradient(0, H, 10, 0, H, H * .7);
+    g2.addColorStop(0, 'rgba(79,196,127,.10)'); g2.addColorStop(1, 'rgba(79,196,127,0)');
+    ctx.fillStyle = g2; ctx.fillRect(0, 0, W, H);
+    this.dots.forEach(d => {
+      if (!still){ d.y -= d.v * 0.016; if (d.y < -4){ d.y = H + 4; d.x = Math.random() * W; } }
+      const a = .32 + .28 * Math.sin(t / 900 + d.p);
+      ctx.fillStyle = 'rgba(160,225,255,' + a.toFixed(2) + ')';
+      ctx.beginPath(); ctx.arc(d.x + (still ? 0 : Math.sin(t / 1400 + d.p) * 6), d.y, d.r, 0, 6.283); ctx.fill();
+    });
+    if (this.on && !still && !document.hidden) this.raf = requestAnimationFrame(tt => this.frame(tt)); else this.raf = 0;
+  }
+};
+
+function explainHtml(key, q, marks, where, done){
+  const id = cssKey(key);
+  return '<span class="eyebrow hd" data-ico="✍️">Explain · ' + marks + (marks === 1 ? ' mark' : ' marks') + '</span>' + '<div class="q">' + esc(q) + '</div>' +
+    (done ? '<div class="verdict">✓ Marked. Your explanation has been checked.</div>' :
+    '<div id="x-' + id + '" data-where=\'' + esc(JSON.stringify(where)) + '\'>' +
+    '<textarea id="t-' + id + '" maxlength="800" placeholder="Write your explanation in full sentences…"></textarea>' +
+    '<div class="muted enterhint">Enter sends it. Shift + Enter for a new line.</div>' +
+    '<button class="primary" data-mark="' + key + '">Check my answer</button><div id="o-' + id + '"></div></div>');
+}
+
+/* ── locks, completion and the badge ───────────────────────
+   Predict before you test: a part's bench opens only once every prediction in
+   it is made. Finish every step, the conclusion and the checks, and the whole
+   lab unlocks with a badge — that is the achievement. */
+// A part's bench opens with its first prediction: predict, then test, then the next prediction.
+const predsDone = (a, p) => (p.steps || []).some((s, i) => s.predict && getProg(a.id, p.id + ':' + i) != null);
+const partDone = (a, p) => (p.steps || []).every((s, i) => { const k = p.id + ':' + i;
+  if (s.predict || s.observe) return getProg(a.id, k) != null; if (s.explain) return getProg(a.id, k) === 'done'; return true; });
+const allDone = a => (a.parts || []).every(p => partDone(a, p)) && (!(a.conclude || []).length || !!getProg(a.id, 'cdone')) &&
+  (a.check || []).every((c, i) => getProg(a.id, 'check:' + i) === 'done');
+// Where a part's bench is: usually a step in the activity's own lab page, but a
+// part may borrow a station from another lab (map: { c: { page, step } }).
+const simFor = (a, pid) => { const m = a.sim && a.sim.map && a.sim.map[pid]; if (!m) return null; return typeof m === 'string' ? { page: a.sim.page, step: m } : m; };
+function unlockList(a, page){
+  if (getProg(a.id, 'badge') || adminDevice()) return 'all';
+  page = page || a.sim.page;
+  const ids = ['intro'];
+  (a.sim.covers || []).forEach(pid => { const p = (a.parts || []).find(x => x.id === pid), m = simFor(a, pid); if (p && m && m.page === page && predsDone(a, p)) ids.push(m.step); });
+  return ids.join(',');
+}
+function refreshGates(a){
+  if (!a.sim || !a.sim.page) return;
+  const got = !!getProg(a.id, 'badge'), adm = adminDevice();
+  let anyOpen = got || adm;
+  // The button beside each prediction appears the moment that prediction is made.
+  $('act').querySelectorAll('[data-lab][data-step]').forEach(b => {
+    const made = getProg(a.id, b.dataset.step) != null;
+    b.hidden = !(made || got || adm); if (made) anyOpen = true;
+    const hh = b.parentElement.nextElementSibling; if (hh && hh.classList.contains('benchhint')) hh.hidden = b.hidden;
+  });
+  (a.parts || []).forEach(p => { if (predsDone(a, p)) anyOpen = true; });
+  const tested = !!getProg(a.id, 'tested');
+  const rt = $('reset-top'); if (rt) rt.disabled = !(tested || adm);
+  const rh = $('act').querySelector('[data-resethint]'); if (rh) rh.textContent = (tested || adm) ? 'Clears your answers here. A badge you earned stays.' : 'Available after you test your first prediction.';
+  const hint = $('act').querySelector('[data-lockhint]');
+  if (hint) hint.textContent = got ? a.badge ? a.badge.icon + ' Badge earned — the whole lab is open, including the challenge.' : 'The whole lab is open.'
+    : adm ? 'Admin mode: the whole bench is open.'
+    : anyOpen ? 'Open so far: ' + (a.sim.covers || []).filter(pid => { const p = (a.parts || []).find(x => x.id === pid); return p && predsDone(a, p); }).map(pid => 'Part ' + pid.toUpperCase()).join(', ') + '. Everything opens with the badge.'
+    : 'Nothing is open yet. Make your first prediction below.';
+  if (got && $('ach') && !$('ach').innerHTML && a.badge) $('ach').innerHTML = achHtml(a);
+}
+const achHtml = a => '<div class="ach"><div class="ico">' + a.badge.icon + '</div><div><span class="eyebrow" style="color:var(--hl-ink)">Achievement unlocked</span><b>' + esc(a.badge.name) + '</b>' +
+  '<div style="font-size:15px">' + esc(a.badge.line) + ' The whole 3D lab is now open — challenge included.</div></div></div>';
+function checkAchievement(a){
+  if (getProg(a.id, 'badge') || !allDone(a)) return;
+  setProg(a.id, 'badge', { ts: Date.now(), icon: a.badge ? a.badge.icon : '🏅', name: a.badge ? a.badge.name : a.title, code: a.code }); setProg(a.id, 'done', true);
+  if ($('ach') && a.badge) $('ach').innerHTML = achHtml(a);
+  refreshGates(a); celebrate();
+  conShow(CON.scr.length - 1);
+  LOG.event('lab', { code: a.code, what: 'achievement unlocked', badge: a.badge ? a.badge.name : a.title });
+}
+
+/* ── rainbow confetti and a success sound ── */
+function celebrate(){
+  try { successSound(); } catch(e){}
+  try { window.BUDDY && BUDDY.cheer('You earned the badge!'); } catch(e){}
+  const c = $('confetti'), g = c.getContext('2d'); c.width = innerWidth; c.height = innerHeight; c.style.display = 'block';
+  const cols = ['#ff5252','#ff9800','#ffd600','#4caf50','#00bcd4','#7c4dff'];
+  const P = Array.from({ length: 180 }, () => ({ x: Math.random() * c.width, y: -20 - Math.random() * c.height * .5, vx: (Math.random() - .5) * 3, vy: 2 + Math.random() * 3,
+    r: 5 + Math.random() * 6, a: Math.random() * Math.PI, va: (Math.random() - .5) * .3, col: cols[Math.floor(Math.random() * cols.length)] }));
+  const t0 = performance.now();
+  (function tick(now){
+    const t = (now - t0) / 1000; g.clearRect(0, 0, c.width, c.height);
+    P.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += .04; p.a += p.va;
+      g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.fillStyle = p.col; g.globalAlpha = Math.max(0, Math.min(1, 4 - t)); g.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); g.restore(); });
+    if (t < 4) requestAnimationFrame(tick); else { g.clearRect(0, 0, c.width, c.height); c.style.display = 'none'; }
+  })(t0);
+}
+let actx = null;
+/* ── a sound for every answer ──────────────────────────────
+   Short synthesised notes, so the page never feels dead when a pupil acts:
+   a pop when a prediction is chosen, a rising whoosh when an answer is sent,
+   a bright ding for a right observation, a soft low pair for a wrong one, a
+   warm third for marks that fall short, a gentle drop for none, and the full
+   chime for full marks and the badge. One switch turns them all off. */
+const SFX_KEY = 'sm-sfx-v1';
+const sfxOn = () => { try { return localStorage.getItem(SFX_KEY) !== 'off'; } catch(e){ return true; } };
+function tone(f, t, dur, type, vol, slide){
+  const o = actx.createOscillator(), g = actx.createGain(); o.type = type || 'sine';
+  o.frequency.setValueAtTime(f, t); if (slide) o.frequency.exponentialRampToValueAtTime(slide, t + dur);
+  g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol || .08, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + .05);
+}
+function sfx(kind){
+  if (!sfxOn()) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
+    const t = actx.currentTime + .01;
+    if (kind === 'pick'){ tone(620, t, .09, 'sine', .07, 880); }
+    else if (kind === 'send'){ tone(440, t, .08, 'triangle', .06, 660); tone(660, t + .07, .12, 'triangle', .06); }
+    else if (kind === 'right'){ tone(784, t, .12, 'triangle', .08); tone(1046.5, t + .11, .22, 'triangle', .08); }
+    else if (kind === 'wrong'){ tone(330, t, .14, 'sine', .06); tone(262, t + .13, .26, 'sine', .06); }
+    else if (kind === 'partial'){ tone(523.25, t, .11, 'triangle', .07); tone(659.25, t + .1, .2, 'triangle', .07); }
+    else if (kind === 'none'){ tone(392, t, .14, 'sine', .06); tone(330, t + .13, .24, 'sine', .06); }
+  } catch(e){}
+}
+function successSound(){
+  if (!sfxOn()) return;
+  actx = actx || new (window.AudioContext || window.webkitAudioContext)(); if (actx.state === 'suspended') actx.resume();
+  const t0 = actx.currentTime + .02;
+  [[523.25, 0], [659.25, .13], [783.99, .26], [1046.5, .39]].forEach(([f, dt]) => {
+    const o = actx.createOscillator(), gn = actx.createGain(); o.type = 'triangle'; o.frequency.value = f;
+    gn.gain.setValueAtTime(0, t0 + dt); gn.gain.linearRampToValueAtTime(.09, t0 + dt + .02); gn.gain.exponentialRampToValueAtTime(.0001, t0 + dt + (dt > .3 ? .7 : .22));
+    o.connect(gn).connect(actx.destination); o.start(t0 + dt); o.stop(t0 + dt + .8);
+  });
+}
+
+/* ── the 3D lab, full-screen over the steps ───────────────
+   Each 3D lab is its own page under labs/<name>/, laid out like the Heat Lab.
+   "Let's test it now!" opens it over the steps; "Back to the steps" closes it
+   and everything the pupil had ticked is still there. */
+function openLab(a, pid){
+  ttsStop();
+  const m = pid ? simFor(a, pid) : null, page = (m && m.page) || a.sim.page;
+  const url = page + '?unlock=' + encodeURIComponent(unlockList(a, page));
+  const fr = $('labwin-frame');
+  fr.onload = () => { addSound(); addTheme(); addShared('lab-graph'); addShared('lab-results'); addShared('lab-voice'); if (m && m.step) jumpToStep(m.step); };   // lab-voice: Heart reads the bench's side panel
+  // a light bench is drawn dark first and turned light once the layer is in;
+  // keep it out of sight for that moment so it does not flash
+  if (themeNow() === 'light'){ fr.style.visibility = 'hidden'; setTimeout(() => { fr.style.visibility = ''; }, 2500); }
+  fr.src = url; $('labwin-title').textContent = a.title; $('labwin-tab').href = url;
+  $('labwin').classList.add('on'); document.body.style.overflow = 'hidden';
+  CON.bench = pid || null; labGuide(a, pid); watchBench();
+  if (!getProg(a.id, 'tested')){ setProg(a.id, 'tested', true); refreshGates(a); }
+  LOG.event('lab', { code: a.code, what: 'opened the 3D lab' });
+}
+/* Straight to the part being tested. A bench always opens on its intro, so a pupil
+   coming back for Part B had to click past the intro and Part A again. lab.html
+   knows which step the part maps to, so once the bench has drawn its pills it
+   presses that one. It is done from here, not inside each lab, so every bench
+   gets it and a re-export from Claude Design cannot lose it. The step's place is
+   read from the bench's own STEPS list; a locked pill is never pressed. */
+function jumpToStep(step){
+  const fr = $('labwin-frame'), src = fr.src; let tries = 0;
+  const t = setInterval(() => {
+    if (++tries > 60 || fr.src !== src || !$('labwin').classList.contains('on')) return clearInterval(t);
+    let d; try { d = fr.contentDocument; } catch (e) { return clearInterval(t); }
+    if (!d) return;
+    const pills = d.querySelectorAll('nav > *'); if (pills.length < 2) return;
+    const code = [...d.querySelectorAll('script[data-dc-script], script[type="text/x-dc"]')].map(x => x.textContent).join('\n');
+    const list = (code.match(/const STEPS = \[([\s\S]*?)\n\];/) || [])[1] || '';
+    const ids = [...list.matchAll(/\bid:\s*'([^']+)'/g)].map(x => x[1]);
+    const i = ids.indexOf(step);
+    clearInterval(t);
+    if (i < 1 || i >= pills.length) return;
+    const pill = pills[i]; if (/🔒/.test(pill.textContent)) return;
+    (pill.matches('button,[role=button]') ? pill : pill.querySelector('button,[role=button]') || pill).click();
+  }, 150);
+}
+function closeLab(){
+  if (!$('labwin').classList.contains('on')) return;
+  captureBench();
+  $('labwin').classList.remove('on'); $('labwin-frame').src = 'about:blank'; document.body.style.overflow = '';
+  $('labwin-toast').hidden = true;
+  conReturn();
+  // Coming back to the same screen ("Look again on the bench", then back) does not change
+  // screens, so nothing repainted the results and the pupil saw the LAST visit's numbers
+  // under "your own results". Paint them now; paintRecap skips it if nothing is new.
+  paintRecap();
+  // the buddy waited under the bench; back on the steps it asks the question that matters
+  setTimeout(() => { try { window.BUDDY && BUDDY.say('Back from the bench! What did you see?', 5000); } catch(e){} }, 700);
+}
+// Which part the bench is open for, said plainly in the bar, with the way on lit.
+function labGuide(a, pid){
+  const g = $('labwin-guide'), d = $('labwin-done');
+  if (!pid){ g.textContent = ''; d.hidden = true; return; }
+  g.textContent = 'Testing Part ' + pid.toUpperCase() + '.';
+  d.hidden = false; d.classList.remove('lit'); d.textContent = doneLabel(false);
+}
+/* A narrow bar says the same thing in fewer words, so the way on never falls
+   off the end of it. */
+const doneLabel = lit => innerWidth < 760
+  ? (lit ? 'Done ✓ Say what I saw →' : 'Say what I saw →')
+  : (lit ? 'Station done ✓  Say what I saw →' : 'Finished on the bench? Say what I saw →');
+addEventListener('resize', () => {
+  const d = $('labwin-done');
+  if (d && !d.hidden) d.textContent = doneLabel(d.classList.contains('lit'));
+});
+
+/* Music and sounds for whichever bench is open. The layer lives in one file
+   under labs/_shared, so every bench gets it without a line of its own and
+   nothing to re-export. Same origin, so the steps page can hand it over. */
+function addSound(){
+  try {
+    const d = $('labwin-frame').contentDocument;
+    if (!d || d.querySelector('script[data-lab-sound]')) return;
+    const s = d.createElement('script');
+    s.src = '/labs/_shared/lab-sound.js';
+    s.setAttribute('data-lab-sound', '');
+    (d.head || d.documentElement).appendChild(s);
+  } catch (e) { /* a bench that will not open to us keeps its own sound */ }
+  paintSound();
+}
+/* Any other shared layer under labs/_shared: handed to the open bench once. */
+function addShared(name){
+  try {
+    const d = $('labwin-frame').contentDocument;
+    if (!d || !d.body || /about:blank$/.test(d.URL) || d.querySelector('script[data-' + name + ']')) return;
+    const s = d.createElement('script');
+    s.src = '/labs/_shared/' + name + '.js';
+    s.setAttribute('data-' + name, '');
+    (d.head || d.documentElement).appendChild(s);
+  } catch (e) {}
+}
+/* Light and dark for whichever bench is open, from labs/_shared/lab-theme.js.
+   The benches were drawn dark and none reads a theme, so the layer turns the
+   instruments light and leaves the 3D scene in its true colours. */
+const themeNow = () => document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+function addTheme(){
+  const fr = $('labwin-frame'), show = () => { fr.style.visibility = ''; };
+  try {
+    const d = fr.contentDocument;
+    if (!d || !d.body || fr.src === 'about:blank' || /about:blank$/.test(d.URL)) return show();
+    if (fr.contentWindow.__labTheme){ fr.contentWindow.__labTheme.set(themeNow()); return show(); }
+    const s = d.createElement('script');
+    s.src = '/labs/_shared/lab-theme.js';
+    s.setAttribute('data-lab-theme', '');
+    s.onload = () => { try { fr.contentWindow.__labTheme.set(themeNow()); } catch (e) {} requestAnimationFrame(show); setTimeout(show, 120); };
+    s.onerror = show;
+    (d.head || d.documentElement).appendChild(s);
+  } catch (e) { show(); }
+  paintTheme();
+}
+function paintTheme(){
+  const b = $('labwin-theme'); if (!b) return;
+  const dark = themeNow() === 'dark';
+  b.textContent = dark ? '☀' : '◐';
+  b.title = b.ariaLabel = dark ? 'Dark mode. Tap for light.' : 'Light mode. Tap for dark.';
+}
+$('labwin-theme').onclick = () => {
+  const t = themeNow() === 'dark' ? 'light' : 'dark';
+  if (t === 'dark') document.documentElement.dataset.theme = 'dark'; else delete document.documentElement.dataset.theme;
+  try { localStorage.setItem('sm-theme-v1', t); } catch (e) {}
+  try { $('labwin-frame').contentWindow.__labTheme.set(t); } catch (e) {}
+  paintTheme();
+  LOG.event('lab', { code: CON.a ? CON.a.code : '', what: 'bench turned ' + t });
+};
+paintTheme();
+const SOUND_KEY = 'sm-lab-sound-v1';
+const soundMode = () => { try { return localStorage.getItem(SOUND_KEY) || 'full'; } catch(e){ return 'full'; } };
+function paintSound(){
+  const b = $('labwin-sound'); if (!b) return;
+  const m = soundMode();
+  b.textContent = m === 'full' ? '🔊' : m === 'fx' ? '🔈' : '🔇';
+  b.title = b.ariaLabel = m === 'full' ? 'Music and sounds on. Tap for sounds only.'
+    : m === 'fx' ? 'Sounds only. Tap for silence.' : 'Silent. Tap for music and sounds.';
+}
+$('labwin-sound').onclick = () => {
+  let m;
+  try { m = $('labwin-frame').contentWindow.__labSound.cycle(); }
+  catch (e) {                                    // the layer is not up yet: remember the choice anyway
+    m = { full: 'fx', fx: 'off', off: 'full' }[soundMode()];
+    try { localStorage.setItem(SOUND_KEY, m); } catch (x) {}
+  }
+  paintSound();
+  LOG.event('lab', { code: CON.a ? CON.a.code : '', what: 'sound set to ' + m });
+};
+paintSound();
+$('labwin-done').onclick = () => { LOG.event('lab', { code: CON.a ? CON.a.code : '', what: 'back from the bench by the lit button' }); closeLab(); };
+// Back from the bench: land on the first thing in that part still to do,
+// which straight after a prediction is "what did you see".
+/* What the bench showed, kept for the questions that follow it.
+   labs/_shared/lab-results.js reads the open bench (its reading rows, its
+   charts, a photograph of the scene) as the pupil leaves, and the panel beside
+   "What did you see?" shows it, so the answer comes from the pupil's own
+   results and not from memory. Latest visit wins. */
+const RECAP = {
+  mem: {},
+  key: id => 'sm-lab-recap:' + id,
+  all(id){ if (this.mem[id]) return this.mem[id];
+    try { this.mem[id] = JSON.parse(sessionStorage.getItem(this.key(id)) || '{}'); } catch (e) { this.mem[id] = {}; } return this.mem[id]; },
+  put(id, pid, snap){ const all = this.all(id); all[pid] = snap;
+    try { sessionStorage.setItem(this.key(id), JSON.stringify(all)); }
+    catch (e) { try { const slim = {}; Object.keys(all).forEach(k => slim[k] = { ...all[k], shot: '' }); sessionStorage.setItem(this.key(id), JSON.stringify(slim)); } catch (x) {} } },
+  get(id, pid){ const all = this.all(id); if (all[pid]) return { pid, ...all[pid] };
+    const last = Object.keys(all).sort((a, b) => all[b].at - all[a].at)[0]; return last ? { pid: last, ...all[last] } : null; }
+};
+/* A pupil often finishes a run and then wanders to another tab of the bench
+   (the challenge, the wrap-up) before leaving, and those tabs show no readings
+   at all. So the bench is watched while it is open, and what is kept is the last
+   moment that had real data: a graph with its curves drawn if there was one,
+   otherwise the last readings. The photograph is taken once, on the way out. */
+const WATCH = { t: 0, data: null, rows: null };
+function watchBench(){
+  clearInterval(WATCH.t); WATCH.data = WATCH.rows = null;
+  WATCH.t = setInterval(() => {
+    try {
+      const w = $('labwin-frame').contentWindow; if (!w || !w.__labResults) return;
+      const s = w.__labResults.snap({ shot: false });
+      if (s.drawn) WATCH.data = s;
+      if (s.readings.length) WATCH.rows = s;
+    } catch (e) {}
+  }, 1500);
+}
+function captureBench(){
+  clearInterval(WATCH.t);
+  try {
+    const a = CON.a, w = $('labwin-frame').contentWindow;
+    if (!a || !w || !w.__labResults) return;
+    const exit = w.__labResults.snap();
+    // what is on screen as they leave, if it is data; otherwise the last data seen
+    const best = exit.drawn ? exit : WATCH.data || (exit.readings.length ? exit : WATCH.rows) || exit;
+    const s = { ...best, shot: exit.shot, at: Date.now() };
+    if (!(s.readings.length || s.graphs.length || s.shot)) return;
+    RECAP.put(a.id, CON.bench || 'bench', s);
+  } catch (e) {}
+}
+function paintRecap(){
+  const box = $('con-recap'), a = CON.a, s = CON.scr[CON.i]; if (!box || !a || !s) return;
+  const stage = box.parentElement, snap = s.see ? RECAP.get(a.id, s.group) : null;
+  stage.classList.toggle('has-recap', !!snap); box.hidden = !snap;
+  if (!snap) return;
+  const stamp = snap.pid + ':' + snap.at; if (box.dataset.stamp === stamp) return; box.dataset.stamp = stamp;
+  const isPart = (a.parts || []).some(p => p.id === snap.pid);
+  const mins = Math.max(0, Math.round((Date.now() - snap.at) / 60000));
+  box.innerHTML =
+    '<button class="rc-head" type="button" id="rc-toggle" aria-expanded="true"><span class="rc-tag">📊 From your bench</span><span class="rc-when">' +
+      (isPart ? 'Part ' + esc(snap.pid.toUpperCase()) + ' · ' : '') + (mins < 1 ? 'just now' : mins + ' min ago') + '</span><span class="rc-chev" aria-hidden="true">▾</span></button>' +
+    '<div class="rc-body">' + (snap.heading ? '<div class="rc-what">' + esc(snap.heading) + '</div>' : '') +
+    (snap.readings.length ? '<div class="rc-rows">' + snap.readings.map(r => '<div class="rc-row"><span>' + esc(r.label) + '</span><b style="color:' + esc(r.color || '#fff') + '">' + esc(r.value) + '</b></div>').join('') + '</div>' : '') +
+    snap.graphs.map(g => '<figure class="rc-graph">' + (g.title ? '<figcaption>' + esc(g.title) + '</figcaption>' : '') + (g.svg || '<div class="rc-html" data-w="' + (+g.width || 0) + '">' + g.html + '</div>') + '</figure>').join('') +
+    (snap.shot ? '<figure class="rc-shot"><img alt="The bench as you left it" src="' + snap.shot + '"><figcaption>The bench as you left it</figcaption></figure>' : '') +
+    (isPart ? '<button class="rc-again" type="button" id="rc-again">🔬 Look again on the bench</button>' : '') +
+    '<p class="rc-note">These are your own results from the last time you were on the bench. Use them to answer.</p></div>';
+  if (innerWidth <= 700) { box.classList.add('shut'); $('rc-toggle').setAttribute('aria-expanded', 'false'); }   // a phone opens it when it wants it
+  // a table or bar chart from the bench keeps its own width; scale it to the panel
+  const fitHtml = () => box.querySelectorAll('.rc-html').forEach(d => { const k = d.firstElementChild, w = +d.dataset.w || (k && k.offsetWidth); if (k && w && d.clientWidth > 60) k.style.zoom = String(Math.max(0.6, Math.min(2.2, (d.clientWidth - 6) / w))); });
+  $('rc-toggle').onclick = () => { const shut = box.classList.toggle('shut'); $('rc-toggle').setAttribute('aria-expanded', String(!shut)); fitHtml(); };
+  requestAnimationFrame(fitHtml); setTimeout(fitHtml, 80);
+  const again = $('rc-again'); if (again) again.onclick = () => openLab(a, snap.pid);
+}
+function conReturn(){
+  const a = CON.a, pid = CON.bench; CON.bench = null;
+  if (!a || !pid || !CON.scr.length) return;
+  const i = CON.scr.findIndex(x => x.group === pid && isTask(x) && !satisfied(x));
+  if (i >= 0 && i !== CON.i) conShow(i);
+}
+/* A bench can talk to the steps. Two messages, both optional:
+     parent.postMessage({ type: 'lab:done', step: 'plan' }, '*')    the station is finished
+     parent.postMessage({ type: 'lab:locked', step: 'run' }, '*')   a locked pill was tapped
+     parent.postMessage({ type: 'lab:result', score, total, right, wrong }, origin)   the challenge is over (every bench sends it)
+     parent.postMessage({ type: 'lab:mark', rid, n, answer, attempt, firstAnswer }, origin)   a typed answer in the bench's own
+       Challenge; it is marked here and sent back as { type: 'lab:marked', rid, result } or { …, error }
+   Done lights the button in the bar green. Locked shows, over the bench, which
+   prediction opens that station and a button that goes straight to it. */
+addEventListener('message', e => {
+  const d = e.data || {}; const a = CON.a;
+  if (!a || !$('labwin').classList.contains('on') || typeof d.type !== 'string') return;
+  if (d.type === 'lab:done'){
+    const b = $('labwin-done'); b.hidden = false; b.classList.add('lit'); b.textContent = doneLabel(true);
+    try { $('labwin-frame').contentWindow.__labSound.win(); } catch (e) {}
+    $('labwin-guide').textContent = 'Testing Part ' + (CON.bench || '').toUpperCase() + '. Done!';
+  }
+  /* the challenge is over: its result goes into the session report mailed to the member and the guardian */
+  if (d.type === 'lab:result' && e.origin === location.origin){
+    const cut = (v, n) => String(v == null ? '' : v).slice(0, n), arr = v => Array.isArray(v) ? v : [];
+    LOG.event('lab', { code: a.code, title: a.title, what: 'finished the challenge', bench: cut(d.name, 80), unit: d.unit === 'marks' ? 'marks' : '',
+      score: Math.max(0, Number(d.score) || 0), total: Math.max(0, Number(d.total) || 0),
+      right: arr(d.right).slice(0, 8).map(x => cut(x, 60)),
+      wrong: arr(d.wrong).slice(0, 8).map(w => ({ topic: cut(w && w.topic, 60), q: cut(w && w.q, 300), chose: cut(w && w.chose, 200), answer: cut(w && w.answer, 200), why: cut(w && w.why, 320) })),
+      parts: arr(d.parts).slice(0, 4).map(x => ({ title: cut(x && x.title, 60), done: !!(x && x.done) })),
+      wanted: arr(d.wanted).slice(0, 4).map(x => cut(x, 140)) });
+  }
+  /* a typed answer from the bench's own Challenge: the same marker, the same rules and the same two tries as
+     every other written answer. The marking points never leave the server; only the result goes back to the bench. */
+  if (d.type === 'lab:mark' && e.origin === location.origin && e.source === $('labwin-frame').contentWindow){
+    const src = e.source, reply = m => { try { src.postMessage(Object.assign({ type: 'lab:marked', rid: String(d.rid || '') }, m), location.origin); } catch (err) {} };
+    const n = Number(d.n), answer = String(d.answer || '').slice(0, 800), attempt = Number(d.attempt) === 2 ? 2 : 1, first = String(d.firstAnswer || '').slice(0, 800);
+    const w = (a.written || [])[n];
+    if (!w || !answer.trim()) { reply({ error: 'This question cannot be marked here.' }); return; }
+    (async () => {
+      try {
+        const memoKey = 'lab|' + a.id + '|written:' + n, prior = MARKMEMO.get(memoKey, answer);
+        const r = await api('/api/lab', { action: 'mark', id: a.id, written: n, answer, attempt, firstAnswer: first, ...(prior ? { prior } : {}) });
+        MARKMEMO.put(memoKey, answer, attempt, r);
+        const max = r.maxMarks ?? w.marks ?? null, full = max != null && r.marks != null && r.marks >= max;
+        if (!r.deflect && (attempt === 2 || full)) LOG.event('answer', attempt === 2 ? { q: w.q, a1: first, a2: answer, marks: r.marks ?? null, max, model: r.modelAnswer || '' } : { q: w.q, a1: answer, marks: r.marks ?? null, max, model: '' });
+        reply({ result: r });
+      } catch (err) { reply({ error: (err && err.message) || 'The marker is not available right now. Try again.' }); }
+    })();
+  }
+  if (d.type === 'lab:locked'){
+    const pid = (a.sim && a.sim.covers || []).find(p => { const m = simFor(a, p); return m && m.step === d.step; });
+    const t = $('labwin-toast'); if (!pid) return;
+    t.querySelector('.t-txt').textContent = '🔒 That station opens after your Part ' + pid.toUpperCase() + ' prediction.';
+    const go = $('labwin-go'); go.textContent = 'Go and predict →';
+    go.onclick = () => { CON.bench = null; closeLab(); const i = CON.scr.findIndex(x => x.group === pid && x.kind === 'pick' && !satisfied(x)); if (i >= 0) conShow(i); };
+    t.hidden = false; clearTimeout(t._t); t._t = setTimeout(() => { t.hidden = true; }, 8000);
+  }
+});
+$('labwin-back').onclick = closeLab;
+
+function wireActivity(a){
+  $('act').querySelectorAll('[data-lab]').forEach(b => b.onclick = e => { e.stopPropagation(); if (!b.disabled) openLab(a, (b.dataset.step || '').split(':')[0]); });
+  // parts fold: tap a heading to open it and fold the others
+  $('act').querySelectorAll('.part-hd').forEach(hd => hd.onclick = () => {
+    const part = hd.parentElement, wasOpen = part.classList.contains('open');
+    $('act').querySelectorAll('.part').forEach(p => p.classList.remove('open'));
+    if (!wasOpen){ part.classList.add('open'); part.scrollIntoView({ behavior:'smooth', block:'start' }); }
+  });
+  // predictions and observations
+  $('act').querySelectorAll('[data-pick]').forEach(b => {
+    const key = b.dataset.pick, saved = getProg(a.id, key);
+    if (saved != null) showPick(a, key, +saved, false);
+    b.onclick = () => { setProg(a.id, key, +b.dataset.i); showPick(a, key, +b.dataset.i, true); };
+  });
+  // written explanations
+  $('act').querySelectorAll('[data-mark]').forEach(b => b.onclick = () => markExplain(a, b.dataset.mark));
+  $('act').querySelectorAll('textarea').forEach(t => attachMic(t));
+  // Enter sends the answer, the way it does in a chat; Shift+Enter makes a new line.
+  $('act').querySelectorAll('textarea[id^="t-"]').forEach(t => t.onkeydown = e => {
+    if (e.key !== 'Enter' || e.shiftKey || e.isComposing) return;
+    e.preventDefault();
+    const b = t.parentElement.querySelector('[data-mark]'); if (b && !b.disabled && t.value.trim()) b.click();
+  });
+  // and in the missing-words boxes, Enter checks the words
+  $('act').querySelectorAll('input.blank').forEach(inp => inp.onkeydown = e => { if (e.key === 'Enter'){ e.preventDefault(); const c = $('c-check'); if (c) c.click(); } });
+  // conclude
+  const cc = $('c-check');
+  if (cc) cc.onclick = () => {
+    let right = 0, total = 0, tries = (getProg(a.id, 'ctries') || 0) + 1; setProg(a.id, 'ctries', tries);
+    const filled = [];
+    $('act').querySelectorAll('input.blank').forEach(inp => {
+      const want = a.conclude[+inp.dataset.c].answers[+inp.dataset.k]; total++;
+      const got = inp.value.trim().toLowerCase();
+      const ok = got && (got === want || got.startsWith(want.slice(0, Math.min(5, want.length))));
+      inp.classList.toggle('ok', !!ok); inp.classList.toggle('no', !ok);
+      if (ok) right++; else if (tries >= 2) inp.value = want, inp.classList.add('ok');
+      filled.push(inp.value);
+    });
+    sfx(right === total ? 'right' : right > 0 ? 'partial' : 'wrong');
+    $('c-out').innerHTML = '<div class="verdict">' + (right === total ? 'All ' + total + ' right.' : right + ' of ' + total + ' right.' + (tries >= 2 ? ' The missing words are filled in for you.' : ' Try the amber ones again.')) + '</div>';
+    LOG.event('lab', { code: a.code, what: 'conclusion', words: filled.join(' | '), right, total });
+    if (right === total || tries >= 2) { setProg(a.id, 'cdone', true); checkAchievement(a); }
+  };
+  const db = $('done-btn'); if (db) db.onclick = () => { location.hash = ''; };
+  // Redo from the top. Progress for this activity is cleared; an earned badge is kept.
+  $('act').querySelectorAll('[data-reset]').forEach(b => b.onclick = () => {
+    if (b.disabled) return;
+    if (!confirm('Start "' + a.title + '" again from the beginning? Your predictions, observations and answers here will be cleared.')) return;
+    const p = prog(); const badge = (p[a.id] || {}).badge;
+    p[a.id] = badge ? { badge } : {};
+    try { localStorage.setItem(PK, JSON.stringify(p)); } catch(e){}
+    LSYNC.touch();
+    LOG.event('lab', { code: a.code, what: 'started again' });
+    renderActivity(a);
+  });
+}
+
+function stepOf(a, key){
+  const [pid, si] = key.split(':'); const p = a.parts.find(x => x.id === pid); return p && p.steps[+si];
+}
+function showPick(a, key, i, fresh){
+  const s = stepOf(a, key); const t = s.predict || s.observe; const right = t.answer;
+  $('act').querySelectorAll('[data-pick="' + key + '"]').forEach(b => {
+    const bi = +b.dataset.i; b.disabled = true;
+    b.classList.toggle('picked', bi === i);
+    if (s.observe) b.classList.toggle('right', bi === right);
+  });
+  const v = $('v-' + cssKey(key));
+  if (s.predict) v.textContent = 'Prediction noted. Now test it and see.';
+  else v.textContent = i === right ? 'That is what happens.' : 'Look again — ' + t.options[right].toLowerCase() + '.';
+  if (fresh){
+    sfx(s.predict ? 'pick' : (i === right ? 'right' : 'wrong'));
+    LOG.event('lab', { code: a.code, what: s.predict ? 'predicted' : 'observed', q: t.q, chose: t.options[i], correct: s.observe ? i === right : null });
+    refreshGates(a); checkAchievement(a);
+  }
+}
+
+/* The same answer earns the same marks. What the marker said about an answer
+   is remembered here, and sent back with the same answer if it is sent again,
+   so the marker's verdict is reused and not made afresh (api/_consistent.js).
+   Capitals, spacing and punctuation do not make it a different answer. */
+const MARKMEMO = {
+  K: 'sm-mark-memo-v1',
+  norm: s => String(s || '').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim(),
+  all(){ try { return JSON.parse(localStorage.getItem(this.K) || '{}'); } catch (e) { return {}; } },
+  get(q, answer){ const m = this.all()[q]; const hit = m && m.find(x => x.n === this.norm(answer)); return hit ? { answer, attempt: hit.t, result: hit.r } : null; },
+  put(q, answer, attempt, r){
+    if (!r || r.deflect || r.error || r.marks == null) return;
+    const all = this.all(), n = this.norm(answer); if (!n) return;
+    const slim = { marks: r.marks, maxMarks: r.maxMarks, verdict: r.verdict, headline: r.headline, keywords: r.keywords, gaps: r.gaps, contradiction: r.contradiction, contradictionNote: r.contradictionNote, ponder: r.ponder, tutorNote: r.tutorNote, misconception: r.misconception };
+    const list = (all[q] || []).filter(x => x.n !== n); const was = (all[q] || []).find(x => x.n === n);
+    list.push({ n, t: was ? Math.min(was.t, attempt) : attempt, r: was ? was.r : slim, at: Date.now() });
+    all[q] = list.slice(-6);
+    const keys = Object.keys(all); if (keys.length > 120) keys.sort((a, b) => (all[a][0].at || 0) - (all[b][0].at || 0)).slice(0, keys.length - 120).forEach(k => delete all[k]);
+    try { localStorage.setItem(this.K, JSON.stringify(all)); } catch (e) {}
+  }
+};
+async function markExplain(a, key){
+  const id = cssKey(key), box = $('x-' + id), ta = $('t-' + id), out = $('o-' + id), btn = box.querySelector('[data-mark]');
+  const where = JSON.parse(box.dataset.where);
+  const answer = ta.value.trim(); if (!answer) return;
+  const state = box._state || { attempt: 1, first: '' };
+  btn.disabled = true; btn.textContent = 'Checking…'; sfx('send');
+  try {
+    const memoKey = 'lab|' + a.id + '|' + JSON.stringify(where), prior = MARKMEMO.get(memoKey, answer);
+    const r = await api('/api/lab', { action:'mark', id: a.id, ...where, answer, attempt: state.attempt, firstAnswer: state.first, ...(prior ? { prior } : {}) });
+    MARKMEMO.put(memoKey, answer, state.attempt, r);
+    if (r.deflect){ out.innerHTML = '<div class="card">' + esc(r.deflect) + '</div>'; btn.disabled = false; btn.textContent = 'Check my answer'; return; }
+    const hits = (r.keywords || []).filter(k => k.hit).map(k => k.phrase), gaps = r.gaps || [];
+    const missed = (r.keywords || []).filter(k => k.hit === false).map(k => k.phrase);
+    const max = r.maxMarks ?? null, got = r.marks ?? null, full = max != null && got != null && got >= max;
+    const score = (got != null && max != null) ? got + ' of ' + max + (max === 1 ? ' mark' : ' marks') : '';
+    // Full marks is a moment: a cheer, confetti and the chime. Anything less is
+    // met with encouragement, and what is missing is underlined so it cannot be missed.
+    // Three moods, and the words must match the marks. Full marks is a cheer.
+    // Some marks is praise for what is there and a pointer to what is not.
+    // No marks is neither: no trophy, no flexing arm, just a warm nudge to have a
+    // go, because "good effort" over a blank would ring false.
+    const none = !full && !(got > 0);
+    const bare = answer.split(/\s+/).filter(Boolean).length < 5;
+    const noneLine = bare
+      ? 'No marks yet, and that is fine. Say what you think happens and why. Any idea is a start.'
+      : (gaps.length ? 'Not there yet, and that is fine. The lines below show what the answer needs. Try again with those.'
+                     : 'Not there yet, and that is fine. Think about what you saw on the bench, then try again.');
+    let h = full
+      ? '<div class="cheer full"><span class="ico">🏆</span><div><b>Full marks!</b><span>' + esc(score) + (score ? '. ' : '') + 'A complete answer. Well done.</span></div></div>'
+      : none
+      ? '<div class="cheer none"><div><b>Every answer starts somewhere.</b><span>' + esc(noneLine) + '</span></div></div>'
+      : '<div class="cheer nearly"><span class="ico">💪</span><div><b>Good effort. Keep going.</b><span>' + esc(score) + (score ? '. ' : '') + 'The underlined lines are what to add.</span></div></div>';
+    // an answer sent again unchanged is told so: the marks have not moved because the answer has not
+    if (r.sameAsBefore && !full) h += '<div class="muted" style="margin-top:8px;font-size:14.5px"><b>This is the same answer as before, so the marks are the same.</b> Change or add to it to earn more.</div>';
+    h += '<div class="verdict">' + esc(r.verdict || 'Checked') + '</div><div>' + esc(r.headline || '') + '</div>';
+    // half a mark comes off for a statement that contradicts the science; say so, kindly
+    if (r.contradictionPenalty) h += '<div class="card warn" style="margin-top:8px"><span class="eyebrow">Half a mark taken off</span><div style="margin-top:6px">' + esc(r.contradictionNote || 'One sentence in your answer says something that is not right, and it goes against the rest. Find it and take it out.') + '</div></div>';
+    const gapRows = list => list.map((x, i) => '<div class="row gap" style="--n:' + i + '"><span class="tick open"></span><div><span class="ul">' + esc(x) + '</span></div></div>').join('');
+    if (hits.length) h += '<div style="margin-top:8px"><span class="eyebrow hd" data-ico="✅">Keep all of this</span>' + hits.map((x, i) => '<div class="row hit" style="--n:' + i + '"><span class="tick"></span><div>' + esc(x) + '</div></div>').join('') + '</div>';
+    if (state.attempt === 1){
+      if (gaps.length) h += '<div style="margin-top:8px"><span class="eyebrow hd" data-ico="🔎">Worth adding</span>' + gapRows(gaps) + '</div>';
+      if (r.ponder) h += '<div class="dark"><span class="eyebrow">Something to think about</span><div style="margin-top:6px">' + esc(r.ponder) + '</div></div>';
+      // Their own words stay put: a pupil who has to retype everything spends
+      // the effort on typing instead of on the idea that was missing.
+      box._state = { attempt: 2, first: answer };
+      ta.value = answer; ta.placeholder = 'Add the missing ideas to your answer…';
+      btn.disabled = false; btn.textContent = "That's my answer";
+      try { ta.focus({ preventScroll: true }); ta.setSelectionRange(ta.value.length, ta.value.length); } catch(e){}
+      LOG.event('answer', { q: (stepOf(a, key) || {}).explain ? stepOf(a, key).explain.q : (a.check[where.check] || {}).q, a1: answer, marks: r.marks ?? null, max: r.maxMarks ?? null, model: '' });
+    } else {
+      if (!full && missed.length) h += '<div style="margin-top:8px"><span class="eyebrow hd" data-ico="🔎">Still to add</span>' + gapRows(missed) + '</div>';
+      if (r.modelAnswer) h += '<div class="card" style="margin-top:12px"><span class="eyebrow hd" data-ico="📝">A full answer</span><div style="margin-top:6px;font-family:var(--round);font-weight:600">' + answerHTML(r.modelAnswer, esc) + '</div>' +
+        '<div class="muted" style="margin-top:8px;font-size:14px">This is how I would write it. Your teacher might say it differently. That is fine.</div></div>';
+      if (r.misconception) h += '<div class="card warn"><span class="eyebrow">Lots of people mix this up</span><div style="margin-top:6px">' + esc(r.misconception.belief) + '</div><div class="muted" style="margin-top:6px">Corrected by: ' + esc(r.misconception.fix) + '</div></div>';
+      ta.disabled = true; btn.remove();
+      setProg(a.id, key, 'done');
+      refreshGates(a); checkAchievement(a);
+      LOG.event('answer', { q: (stepOf(a, key) || {}).explain ? stepOf(a, key).explain.q : (a.check[where.check] || {}).q, a1: state.first, a2: answer, marks: r.marks ?? null, max: r.maxMarks ?? null, model: r.modelAnswer || '' });
+    }
+    // The box to write in follows the reading. After the first check it moves
+    // under the feedback, so the pupil reads down and writes where they land.
+    // After the second it sits above the marking with their answer still in it.
+    let again = box.querySelector('.retry');
+    if (!again){
+      again = document.createElement('div'); again.className = 'retry';
+      [...box.children].filter(n => n !== out).forEach(n => again.appendChild(n));
+    }
+    // marking schemes differ between schools and between PSLE years: say so wherever marks are shown
+    if (r.maxMarks != null) h += '<div class="muted" style="margin-top:10px;font-size:14px">Marks can differ from school to school. Each school has its own marking scheme, and PSLE marking changes a little every year too. If you are not sure, check with your teacher.</div>';
+    out.innerHTML = h;
+    // the buddy reacts to a marked answer: a cheer for full marks, a nudge on the first try
+    try { if (window.BUDDY) { if (full) BUDDY.cheer('Full marks! Nice one!'); else if (state.attempt === 1) BUDDY.say('Good start. Add the underlined ideas and try again.', 5500); } } catch(e){}
+    if (state.attempt === 1){
+      const lead = document.createElement('div'); lead.className = 'retry-lead';
+      lead.innerHTML = '<span class="eyebrow hd" data-ico="✍️">Now write the whole answer again</span>' +
+        '<div class="muted">' + (hits.length ? 'Your answer is still here. Add what was missing, then read the whole thing through.' : 'Your words are still here. Use the underlined line above: say what happens, then why.') + '</div>';
+      again.insertBefore(lead, again.firstChild);
+      out.appendChild(again);
+    } else {
+      const lead = again.querySelector('.retry-lead'); if (lead) lead.remove();
+      out.insertBefore(again, out.firstChild);
+    }
+    const stepEl = box.closest('.step');
+    if (stepEl){ stepEl.classList.remove('win', 'nudge'); void stepEl.offsetWidth; stepEl.classList.add(full ? 'win' : 'nudge'); }
+    if (full) celebrate(); else sfx(none ? 'none' : 'partial');
+    try { out.firstElementChild.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch(x){}
+    LOG.event('lab', { code: a.code, what: full ? 'full marks' : 'marks short', marks: got, max });
+  } catch(e){ out.innerHTML = '<div class="err">' + esc(e.message) + '</div>'; btn.disabled = false; btn.textContent = 'Check my answer'; }
+}
+
+/* ── say it instead of typing it (same as the app) ── */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const MICS = new Set();
+function tidySpeech(t){ return String(t||'').replace(/\s*\b(full stop|period)\b/gi,'.').replace(/\s*\bcomma\b/gi,',').replace(/\s*\bquestion mark\b/gi,'?')
+  .replace(/\s+([.,?])/g,'$1').replace(/([.?]\s+|^\s*)([a-z])/g,(m,a,b)=>a+b.toUpperCase()).trim(); }
+/* ── read aloud ─────────────────────────────────────────────
+   The browser's own English reader. Every step and card gets a small speaker;
+   a part gets "Read this part", which walks through its segments in order.
+   The segment being read wears the rainbow ring. Nothing leaves the device. */
+const TTS = { el: null, words: [], queue: [], audio: null, seq: 0, cloud: null, on: 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window };
+function ttsVoice(){
+  const vs = speechSynthesis.getVoices() || [];
+  for (const lang of ['en-SG', 'en-GB', 'en-AU', 'en-US', 'en']) { const v = vs.find(x => (x.lang || '').replace('_', '-').toLowerCase().startsWith(lang.toLowerCase())); if (v) return v; }
+  return null;
+}
+if (TTS.on) { try { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); } catch(e){} }
+// Speed: weak readers need the slow one. Remembered on this device.
+const TTS_SLOW = 'sm-tts-slow-v1';
+const ttsSlow = () => { try { return localStorage.getItem(TTS_SLOW) === '1'; } catch(e){ return false; } };
+const ttsRate = () => ttsSlow() ? 0.72 : 0.9;
+// Wrap every word of a segment in a span once, so the word being spoken can
+// light up. Buttons that are options are read as "Option 1: …"; other controls
+// are skipped. Returns the words in reading order with their place in the text.
+const TTS_SKIP = 'button.say, textarea, input, .verdict, .n, [data-lockhint], [data-resethint], .badges, .bdg, button.readpart, button.readspeed, button.readsound, .readrow, .aids, .hud, button.primary, button.ghost, button.secondary, button.mic';
+const BLOCKY = { DIV:1, P:1, H2:1, H3:1, LI:1, BUTTON:1, SPAN:0 };
+function ttsWords(el){
+  const words = []; let text = '';
+  const endSentence = () => { const t = text.trimEnd(); if (t && !/[.!?:]$/.test(t)) text = t + '. '; else if (t) text = t + ' '; };
+  const walk = node => {
+    if (node.nodeType === 3){
+      const parts = node.nodeValue.split(/(\s+)/);
+      if (!parts.some(x => x.trim())) return;
+      const frag = document.createDocumentFragment();
+      parts.forEach(pt => {
+        if (!pt) return;
+        if (!pt.trim()){ frag.appendChild(document.createTextNode(pt)); text += ' '; return; }
+        const sp = document.createElement('span'); sp.className = 'w'; sp.textContent = pt; frag.appendChild(sp);
+        const spoken = pt.replace(/_{2,}/g, 'blank');
+        words.push({ sp, start: text.length, end: text.length + spoken.length }); text += spoken;
+      });
+      node.parentNode.replaceChild(frag, node);
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    if (node.matches(TTS_SKIP)) return;
+    if (node.classList.contains('w')){ const spoken = node.textContent.replace(/_{2,}/g, 'blank'); words.push({ sp: node, start: text.length, end: text.length + spoken.length }); text += spoken + ' '; return; }
+    if (node.classList.contains('opt')){ endSentence(); text += 'Option ' + ([...node.parentNode.children].indexOf(node) + 1) + ': '; }
+    [...node.childNodes].forEach(walk);
+    if (BLOCKY[node.tagName] || node.classList.contains('eyebrow') || node.classList.contains('q')) endSentence();
+  };
+  walk(el);
+  // The words were placed while the text was still being gathered. Tidying the spaces moves everything, so each
+  // word is found again, in order, in the text that is actually spoken: that is the text the voices time against.
+  const said = text.replace(/\s+/g, ' ').replace(/\s+([,.;:!?])/g, '$1').trim();
+  let pos = 0;
+  words.forEach(w => { const sp = text.slice(w.start, w.end), at = said.indexOf(sp, pos); if (at >= 0){ w.start = at; w.end = at + sp.length; pos = w.end; } else { w.start = pos; w.end = pos; } });
+  return { words, text: said };
+}
+function ttsMark(el, i){
+  el.querySelectorAll('.w.now').forEach(x => x.classList.remove('now'));
+  if (i != null && TTS.words[i]) TTS.words[i].sp.classList.add('now');
+}
+// Read one segment. The natural voice comes from the server when a speech key
+// is set there (the audio arrives as mp3, with word times when the service gives
+// them); otherwise the browser's own voice reads it. Either way the segment
+// wears the ring and the word being spoken lights up.
+function ttsBegin(el, words){
+  TTS.el = el; TTS.words = words; el.classList.add('reading');
+  const b = el.querySelector('button.say'); if (b) { b.textContent = '⏹'; b.setAttribute('aria-label', 'Stop reading'); }
+  try { el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); } catch(e){}
+}
+function ttsFinish(el, onDone){
+  if (TTS.el !== el) return;
+  ttsMark(el, null); el.classList.remove('reading');
+  const b = el.querySelector('button.say'); if (b) { b.textContent = '🔊'; b.setAttribute('aria-label', 'Read this to me'); }
+  TTS.el = null; if (onDone) onDone();
+}
+/* Heart: the narrator of the P4 Science, Explained videos reads the app too. Her clips are made ahead of time
+   (one per segment, keyed by a short hash of the exact words) and listed in voice/heart/index.json. A segment with
+   no clip (words that changed, or text written live such as marking feedback) falls back to the voices below. */
+const HEART = { p: null, m: null };
+function heartKey(str){
+  let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+  for (let i = 0; i < str.length; i++){ const ch = str.charCodeAt(i); h1 = Math.imul(h1 ^ ch, 2654435761); h2 = Math.imul(h2 ^ ch, 1597334677); }
+  h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+  h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+  return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(36);
+}
+async function heartClip(text){
+  try {
+    if (!HEART.p) HEART.p = fetch('/voice/heart/index.json').then(r => r.ok ? r.json() : null).catch(() => null);
+    const idx = await HEART.p, k = heartKey(text);
+    if (!(idx && idx.clips && idx.clips[k])) return null;
+    // when she says each word (hundredths of a second, one per word of the text), so the right word lights up
+    if (!HEART.m) HEART.m = fetch('/voice/heart/marks.json').then(r => r.ok ? r.json() : null).catch(() => null);
+    const all = await HEART.m, t = all && all[k]; let marks = null;
+    if (Array.isArray(t)){ marks = []; const re = /\S+/g; let x, i = 0; while ((x = re.exec(text)) && i < t.length) marks.push({ start: x.index, end: x.index + x[0].length, t0: t[i++] / 100 }); }
+    return { url: '/voice/heart/' + k + '.m4a', marks };
+  } catch(e){ return null; }
+}
+async function ttsSpeak(el, onDone){
+  const { words, text } = ttsWords(el);
+  if (!text) { if (onDone) onDone(); return; }
+  ttsBegin(el, words);
+  const my = ++TTS.seq;
+  const clip = await heartClip(text);
+  if (TTS.seq !== my || TTS.el !== el) return;               // stopped while we looked
+  if (clip){ ttsPlay(el, words, text, clip, () => ttsFinish(el, onDone)); return; }
+  if (TTS.cloud !== false){
+    try {
+      const d = await api('/api/lab', { action: 'speak', text });
+      if (TTS.seq !== my || TTS.el !== el) return;           // stopped while we waited
+      if (d && d.audio){ ttsPlay(el, words, text, d, () => ttsFinish(el, onDone)); return; }
+      if (d && d.off) TTS.cloud = false;                     // no key on the server: browser voice from now on
+    } catch(e){ if (TTS.seq !== my || TTS.el !== el) return; }
+  }
+  ttsBrowser(el, words, text, () => ttsFinish(el, onDone));
+}
+function ttsPlay(el, words, text, d, done){
+  let url = null;
+  if (d.url) url = d.url;                                    // a clip made ahead of time: played from its own address
+  else try {
+    const bin = atob(d.audio); const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    url = URL.createObjectURL(new Blob([arr], { type: 'audio/mpeg' }));
+  } catch(e){ ttsBrowser(el, words, text, done); return; }
+  const au = new Audio(url); au.preload = 'auto'; au.playbackRate = ttsSlow() ? 0.8 : 1;
+  TTS.audio = au;
+  // When the service gives word times, each of our words takes the time of the
+  // mark that covers its first character. Otherwise time is spread evenly over
+  // the text, which is close enough to follow.
+  const marks = Array.isArray(d.marks) && d.marks.length ? d.marks : null;
+  const times = marks ? words.map(w => { const m = marks.find(x => w.start >= x.start && w.start < x.end) || marks.find(x => x.start >= w.start); return m ? m.t0 : null; }) : null;
+  const tick = () => {
+    if (TTS.audio !== au) return;
+    const t = au.currentTime; let i = -1;
+    if (times){ for (let k = 0; k < times.length; k++) if (times[k] != null && times[k] <= t + 0.06) i = k; }   // a touch early: the eye should arrive with the word
+    else if (au.duration && isFinite(au.duration)){ const ci = (t / au.duration) * text.length; for (let k = 0; k < words.length; k++) if (words[k].start <= ci) i = k; }
+    if (i >= 0) ttsMark(el, i);
+    requestAnimationFrame(tick);
+  };
+  const end = () => { if (TTS.audio !== au) return; TTS.audio = null; try { URL.revokeObjectURL(url); } catch(e){} done(); };
+  au.onended = end;
+  au.onerror = () => { if (TTS.audio !== au) return; TTS.audio = null; try { URL.revokeObjectURL(url); } catch(e){} ttsBrowser(el, words, text, done); };
+  au.play().then(() => requestAnimationFrame(tick)).catch(() => { if (TTS.audio !== au) return; TTS.audio = null; try { URL.revokeObjectURL(url); } catch(e){} ttsBrowser(el, words, text, done); });
+}
+function ttsBrowser(el, words, text, done){
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-SG'; u.rate = ttsRate(); u.pitch = 1;
+  const v = ttsVoice(); if (v) u.voice = v;
+  u.onboundary = ev => { if (TTS.el !== el) return; const ci = ev.charIndex || 0; let i = words.findIndex(w => ci >= w.start && ci < w.end); if (i < 0) i = words.findIndex(w => w.start >= ci); if (i >= 0) ttsMark(el, i); };
+  u.onend = u.onerror = () => { if (TTS.el === el) done(); };
+  speechSynthesis.speak(u);
+}
+function ttsStop(){
+  if (!TTS.on) return;
+  TTS.seq++;
+  TTS.queue = [];
+  if (TTS.audio){ const au = TTS.audio; TTS.audio = null; try { au.pause(); au.src = ''; } catch(e){} }
+  try { speechSynthesis.cancel(); } catch(e){}
+  ttsClear();
+}
+function ttsClear(){
+  if (TTS.el){ ttsMark(TTS.el, null); TTS.el.classList.remove('reading'); const b = TTS.el.querySelector('button.say'); if (b) { b.textContent = '🔊'; b.setAttribute('aria-label', 'Read this to me'); } }
+  TTS.el = null;
+  $('act').querySelectorAll('button.readpart').forEach(b => { b.textContent = '🔊 Read this screen'; });
+}
+function ttsNext(){
+  const el = TTS.queue.shift();
+  if (!el) { ttsClear(); return; }
+  ttsSpeak(el, ttsNext);
+}
+function addReaders(a){
+  if (!TTS.on) return;
+  const segs = [...$('act').querySelectorAll('.step, .card')];
+  segs.forEach(el => {
+    if (el.querySelector('button.say')) return;
+    el.classList.add('has-say');
+    const b = document.createElement('button');
+    b.className = 'say'; b.type = 'button'; b.textContent = '🔊'; b.setAttribute('aria-label', 'Read this to me'); b.title = 'Read this to me';
+    b.onclick = e => {
+      e.stopPropagation();
+      if (TTS.el === el) { ttsStop(); return; }
+      ttsStop(); ttsSpeak(el);
+      LOG.event('lab', { code: a.code, what: 'read aloud' });
+    };
+    el.appendChild(b);
+  });
+  // The aids live in the stage's top bar, so they are on every screen:
+  // read this screen aloud, the slow voice, and the sounds switch.
+  const hud = $('act').querySelector('.hud');
+  if (hud && !hud.querySelector('.aids')){
+    const row = document.createElement('div'); row.className = 'aids';
+    const rd = document.createElement('button'); rd.className = 'ghost readpart'; rd.type = 'button'; rd.textContent = '🔊 Read this screen'; rd.title = 'Read everything on this screen aloud';
+    rd.onclick = e => {
+      e.stopPropagation();
+      const scr = $('act').querySelector('.scr.on');
+      if (TTS.queue.length || (TTS.el && scr && scr.contains(TTS.el))) { ttsStop(); return; }
+      ttsStop();
+      TTS.queue = scr ? [...scr.querySelectorAll('.step, .card')] : [];
+      if (!TTS.queue.length) return;
+      rd.textContent = '⏹ Stop reading';
+      LOG.event('lab', { code: a.code, what: 'read screen aloud' });
+      ttsNext();
+    };
+    const sp = document.createElement('button'); sp.className = 'ghost readspeed'; sp.type = 'button'; sp.title = 'A slower voice for reading aloud';
+    const spLabel = () => { sp.textContent = ttsSlow() ? '🐢 Slow voice: on' : '🐢 Slow voice: off'; sp.setAttribute('aria-pressed', ttsSlow() ? 'true' : 'false'); sp.classList.toggle('lit', ttsSlow()); };
+    spLabel();
+    sp.onclick = e => { e.stopPropagation(); try { localStorage.setItem(TTS_SLOW, ttsSlow() ? '0' : '1'); } catch(x){} if (TTS.audio) TTS.audio.playbackRate = ttsSlow() ? 0.8 : 1; spLabel(); };
+    const so = document.createElement('button'); so.className = 'ghost readsound'; so.type = 'button'; so.title = 'The little sounds when you answer';
+    const soLabel = () => { so.textContent = sfxOn() ? '🔈 Sounds: on' : '🔇 Sounds: off'; so.setAttribute('aria-pressed', sfxOn() ? 'true' : 'false'); so.classList.toggle('lit', sfxOn()); };
+    soLabel();
+    so.onclick = e => { e.stopPropagation(); try { localStorage.setItem(SFX_KEY, sfxOn() ? 'off' : 'on'); } catch(x){} soLabel(); if (sfxOn()) sfx('pick'); };
+    row.appendChild(rd); row.appendChild(sp); row.appendChild(so);
+    hud.appendChild(row);
+  }
+}
+addEventListener('hashchange', ttsStop);
+addEventListener('pagehide', ttsStop);
+
+function attachMic(ta){
+  const b = document.createElement('button'); b.type='button'; b.className='mic secondary'; b.innerHTML='<span>🎤</span>Say it instead';
+  const hint = document.createElement('div'); hint.className='mic-hint';
+  ta.insertAdjacentElement('afterend', b); b.insertAdjacentElement('afterend', hint);
+  if (!SR){ b.disabled = true; hint.textContent = 'Speaking works in Chrome, Edge and Safari. You can still type here.'; return; }
+  let rec=null, base='', finals='', active=false;
+  const idle = () => { b.classList.remove('on'); b.innerHTML='<span>🎤</span>Say it instead'; };
+  const stop = () => { if (!active && !rec) return; active=false; if (rec){ try{ rec.onend=null; rec.stop(); }catch(e){} rec=null; } ta.value=(base+finals).trimEnd().slice(0,800); idle(); };
+  const start = () => { base = ta.value.trim() ? ta.value.replace(/\s*$/,' ') : ''; finals='';
+    rec = new SR(); rec.lang='en-SG'; rec.continuous=true; rec.interimResults=true;
+    rec.onresult = e => { let interim=''; for (let i=e.resultIndex;i<e.results.length;i++){ const r=e.results[i]; if (r.isFinal) finals += tidySpeech(r[0].transcript)+' '; else interim += r[0].transcript; } ta.value = base+finals+interim; };
+    rec.onerror = e => { hint.textContent = e.error==='not-allowed' ? 'The microphone is blocked. Allow it for this site, then tap again.' : e.error==='no-speech' ? 'I did not hear anything. Tap and speak in English.' : e.error==='aborted' ? '' : 'Speaking did not work just now. You can still type.'; stop(); };
+    rec.onend = () => { if (active){ try{ rec.start(); }catch(err){ stop(); } } };
+    try { rec.start(); active=true; b.classList.add('on'); b.innerHTML='<span>●</span>Listening… tap to stop'; hint.textContent='Speak in English. Say “full stop” to end a sentence.'; } catch(err){ hint.textContent='Speaking did not start. You can still type.'; idle(); } };
+  MICS.add(stop); b.onclick = () => active ? stop() : start();
+}
+document.addEventListener('click', e => { const btn = e.target.closest('button'); if (btn && !btn.classList.contains('mic')) MICS.forEach(s => s()); }, true);
+
+/* ── diagrams: the app's shape vocabulary, drawn here the same way ── */
+function svgFor(d){
+  if (!d || !Array.isArray(d.shapes) || !d.shapes.length) return '';
+  const vb = d.viewBox || '0 0 320 200', ink = 'var(--ink)', mid = 'var(--mid)';
+  const fillOf = f => f === 'dark' ? 'var(--rule)' : f === 'light' ? 'var(--surface)' : 'none';
+  let out = '', defs = '', usedArrow = false, usedHatch = false;
+  d.shapes.forEach(s => {
+    const dash = s.dashed ? ' stroke-dasharray="6 4"' : '';
+    switch (s.type) {
+      case 'rect': out += '<rect x="'+s.x+'" y="'+s.y+'" width="'+s.w+'" height="'+s.h+'" fill="'+fillOf(s.fill)+'" stroke="'+ink+'" stroke-width="2"'+dash+'/>'; break;
+      case 'circle': out += '<circle cx="'+s.cx+'" cy="'+s.cy+'" r="'+s.r+'" fill="'+fillOf(s.fill)+'" stroke="'+ink+'" stroke-width="2"'+dash+'/>'; break;
+      case 'line': if (s.arrow) usedArrow = true;
+        out += '<line x1="'+s.x1+'" y1="'+s.y1+'" x2="'+s.x2+'" y2="'+s.y2+'" stroke="'+ink+'" stroke-width="2"'+dash+(s.arrow?' marker-end="url(#ar)"':'')+'/>'; break;
+      case 'arc': { const mx=(s.x1+s.x2)/2, my=(s.y1+s.y2)/2, b=s.bulge||20;
+        out += '<path d="M'+s.x1+' '+s.y1+' Q'+(mx)+' '+(my+b)+' '+s.x2+' '+s.y2+'" fill="none" stroke="'+ink+'" stroke-width="2"'+dash+'/>'; break; }
+      case 'water': { const y=s.y, w=s.w, x=s.x, step=w/4; let p='M'+x+' '+y;
+        for (let i=0;i<4;i++){ p += ' q'+(step/4)+' -5 '+(step/2)+' 0 q'+(step/4)+' 5 '+(step/2)+' 0'; }
+        out += '<path d="'+p+'" fill="none" stroke="'+ink+'" stroke-width="2"/><rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+(s.h||20)+'" fill="var(--surface)" opacity=".7"/>'; break; }
+      case 'hatch': usedHatch = true; out += '<rect x="'+s.x+'" y="'+s.y+'" width="'+s.w+'" height="'+s.h+'" fill="url(#ht)" stroke="'+ink+'" stroke-width="2"/>'; break;
+    }
+  });
+  const vbW = parseFloat(String(vb).split(/\s+/)[2]) || 320, vbH = parseFloat(String(vb).split(/\s+/)[3]) || 200, LH = 13;
+  const boxes = (d.labels||[]).map(l => { const txt = String(l.text||'').replace(/[<>&]/g,''); if (!txt) return null;
+    const w = txt.length*5.6, tgt = (l.leaderTo && l.leaderTo.length===2) ? l.leaderTo : null, leftward = tgt ? tgt[0] < l.x : false;
+    let x = l.x; if (leftward) x = Math.min(x, vbW-2); else x = Math.max(2, Math.min(x, vbW-w-2));
+    return { txt, w, tgt, leftward, x, y: Math.max(LH, Math.min(+l.y||LH, vbH-3)) }; }).filter(Boolean);
+  const span = bx => bx.leftward ? { l: bx.x-bx.w, r: bx.x } : { l: bx.x, r: bx.x+bx.w };
+  const hits = (A,B) => { const a1=span(A), b1=span(B); return a1.l < b1.r+3 && b1.l < a1.r+3 && Math.abs(A.y-B.y) < LH; };
+  boxes.sort((A,B) => A.y-B.y || span(A).l-span(B).l);
+  boxes.forEach((bx,i) => { for (let j=0;j<i;j++){ if (!hits(bx, boxes[j])) continue; const down = boxes[j].y+LH; if (down <= vbH-3) bx.y = down; else { const up = boxes[j].y-LH; if (up >= LH) bx.y = up; } } });
+  boxes.forEach(bx => { const { txt, w, tgt, leftward, x, y } = bx;
+    if (tgt){ const tl = leftward ? x-w : x, tr = leftward ? x : x+w; let fx, fy = y-4;
+      if (tgt[0] < tl) fx = tl-4; else if (tgt[0] > tr) fx = tr+4; else { fx = tgt[0]; fy = (tgt[1] > y) ? y+3 : y-13; }
+      out += '<line x1="'+fx.toFixed(1)+'" y1="'+fy.toFixed(1)+'" x2="'+tgt[0]+'" y2="'+tgt[1]+'" stroke="'+mid+'" stroke-width="1"/>'; }
+    out += '<text x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" font-size="11" fill="'+mid+'" font-family="var(--body)"'+(leftward?' text-anchor="end"':'')+'>'+txt+'</text>'; });
+  if (usedArrow) defs += '<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="'+ink+'"/></marker>';
+  if (usedHatch) defs += '<pattern id="ht" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse"><line x1="0" y1="0" x2="0" y2="7" stroke="'+mid+'" stroke-width="2"/></pattern>';
+  return '<div class="dgm"><svg viewBox="'+vb+'" role="img" aria-label="Diagram">'+(defs?'<defs>'+defs+'</defs>':'')+out+'</svg></div>';
+}
+
+boot();
+</script>
+<!-- the pet buddy: on the steps pages only, never on the bench (labs/_shared/lab-buddy.js) -->
+<script src="answer-lines.js"></script>
+<script src="labs/_shared/lab-buddy.js" defer></script>
+<script src="focus.js" defer></script>
+</body>
+</html>

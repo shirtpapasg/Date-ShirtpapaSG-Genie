@@ -1,0 +1,36 @@
+const { chromium } = require('playwright');
+const fs = require('fs'), path = require('path');
+const ROOT = '/home/user/theoneapp', OUT = '/tmp/claude-0/-home-user/8764a423-5385-5445-b38a-c2c2633ecdb7/scratchpad/snaps/';
+(async () => {
+  const b = await chromium.launch({ proxy: { server: 'http://127.0.0.1:33675' } });
+  const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true });
+  await ctx.route('http://app.test/**', r => { const u = new URL(r.request().url()); let f = path.join(ROOT, u.pathname === '/' ? 'index.html' : u.pathname);
+    if (r.request().method() !== 'GET' || !fs.existsSync(f)) return r.fulfill({ status: 404, body: '{}' }); r.fulfill({ status: 200, contentType: f.endsWith('.js') ? 'text/javascript' : f.endsWith('.html') ? 'text/html' : undefined, body: fs.readFileSync(f) }); });
+  const p = await ctx.newPage();
+  const errs = []; p.on('pageerror', e => errs.push(e.message));
+  await p.goto('http://app.test/index.html'); await p.waitForTimeout(2500);
+  for (const t of ['Skip the tour','Done','Skip','Not now','Close']) { const l = p.getByText(t, { exact: true }); if (await l.count() && await l.first().isVisible()) { await l.first().click().catch(()=>{}); await p.waitForTimeout(600); } }
+  await p.locator('#pip').click({ force: true }); await p.waitForTimeout(700);
+  await p.screenshot({ path: OUT + 'mm_phone_buddymenu.png' });
+  console.log('menu item visible', await p.isVisible('#pm-mindmap'));
+  await p.evaluate(() => document.getElementById('pm-mindmap').click()); await p.waitForURL(/mindmap\.html/);
+  console.log('navigated', p.url());
+  await p.goto('http://app.test/mindmap.html#make'); await p.waitForTimeout(800);
+  console.log('#make opens sheet', await p.isVisible('#mm-home'));
+  await p.click('#mm-new'); await p.click('#mm-add'); await p.keyboard.type('Temperature');
+  await p.keyboard.press('Enter'); await p.keyboard.type('x'); await p.keyboard.press('Backspace'); await p.keyboard.press('Backspace');
+  console.log('backspace removed sub', await p.locator('.mm-subs li').count() === 0);
+  await p.click('[data-act="del"]'); console.log('deleted', await p.locator('.mm-br').count());
+  await p.click('#mm-undo'); console.log('undo restored', await p.locator('.mm-br').count());
+  await p.click('[data-act="colour"][data-c="blue"]'); console.log('colour', await p.getAttribute('[data-c="blue"]', 'aria-checked'));
+  await p.click('#mm-back');
+  await p.click('.mm-card >> text=Rename'); await p.keyboard.press('Control+A'); await p.keyboard.type('Hot stuff'); await p.keyboard.press('Enter');
+  console.log('renamed', await p.textContent('.mm-cname'));
+  await p.click('.mm-card >> text=Delete'); await p.click('text=Yes, delete');
+  console.log('cards after delete', await p.locator('.mm-card').count());
+  await p.click('#mm-new'); await p.click('#mm-back');
+  console.log('blank map not kept', await p.locator('.mm-card').count());
+  await p.keyboard.press('Escape'); console.log('esc closes', await p.isHidden('#mm-sheet'));
+  console.log('errors', errs);
+  await b.close();
+})();

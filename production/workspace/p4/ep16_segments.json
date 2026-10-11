@@ -1,0 +1,77 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Want a giant shadow, as tall as a dinosaur? Or a small one, about the size of the ball? You can do both, with just a torch, a ball and a wall. Here is how."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, how the distance from the light matters. Second, how the distance from the screen matters. And third, how to predict the size of a shadow. Let's get started!"
+ },
+ {
+  "id": "setup",
+  "scene": "setup",
+  "text": "Here is our set-up. A torch, a ball, and a screen. The screen is simply the surface where the shadow falls. Two distances decide the size of the shadow."
+ },
+ {
+  "id": "rule1",
+  "scene": "rule1",
+  "text": "Rule one. Move the torch closer to the ball, and the shadow gets bigger. Move the torch further away, and the shadow gets smaller."
+ },
+ {
+  "id": "rule2",
+  "scene": "rule2",
+  "text": "Rule two. Move the screen further from the ball, and the shadow gets bigger. Move the screen closer, and the shadow gets smaller."
+ },
+ {
+  "id": "move",
+  "scene": "move",
+  "text": "Now keep the torch and screen still, and move the ball. When the ball is near the torch, it is far from the screen, so the shadow is big. When the ball is near the screen, the shadow is small. Moving the ball changes both distances at once. Want to move the light yourself? Try it in The One App. Open the School Lab, experiment five point two, and press, Let's test it now!"
+ },
+ {
+  "id": "rays",
+  "scene": "rays",
+  "text": "Scientists use a model to predict this. Draw straight lines from the torch, past the top and bottom of the ball, to the screen. The gap between the lines on the screen shows the size of the shadow."
+ },
+ {
+  "id": "lamp",
+  "scene": "lamp",
+  "text": "Try noticing this on a walk at night. As you walk towards a street lamp, your shadow gets shorter. As you walk away, it gets longer again."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! You want a bigger shadow. Should you move the ball closer to the torch, or closer to the screen?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Closer to the torch! The ball is then further from the screen, and it blocks more of the light, so the shadow is bigger."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. The nearer the object is to the light source, the bigger its shadow. The further the object is from the screen, the bigger its shadow."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit to try. Remove distractions. Before you revise, put your phone or tablet in another room. Out of sight, out of mind, and your focus gets much stronger."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now add to your light mind map. Under shadows, write shadow size. Object nearer the light, bigger shadow. Object further from the screen, bigger shadow. Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, how do you make a giant shadow? Move the object close to the light! Your turn. Make a giant shadow of your hand on a wall, then make it as small as you can."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

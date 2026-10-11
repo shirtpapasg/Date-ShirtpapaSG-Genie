@@ -1,0 +1,10 @@
+const { chromium } = require('playwright');
+(async () => { const b = await chromium.launch(); const p = await b.newPage({viewport:{width:1280,height:900}});
+  p.on('pageerror', e => console.log('ERR', e.message));
+  await p.goto('file://' + process.argv[2]); await p.waitForTimeout(800);
+  console.log('h264', await p.evaluate(() => document.createElement('video').canPlayType('video/mp4; codecs="avc1.640028"')));
+  await p.click('button.tw'); await p.waitForTimeout(800);
+  console.log(await p.evaluate(() => ({open: document.querySelector('#player').open, src: document.querySelector('#pv').getAttribute('src'), part: document.querySelector('#ppart').textContent})));
+  await p.evaluate(() => document.querySelector('#pv').dispatchEvent(new Event('ended'))); await p.waitForTimeout(300);
+  console.log(await p.evaluate(() => ({src: document.querySelector('#pv').getAttribute('src'), part: document.querySelector('#ppart').textContent})));
+  await p.evaluate(() => document.querySelector("#pv").dispatchEvent(new Event("ended"))); await p.waitForTimeout(300); console.log("done", await p.evaluate(() => [!document.querySelector("#pdone").hidden, !document.querySelector("#pnextep").hidden])); await p.screenshot({path: process.argv[3]}); await b.close(); })();

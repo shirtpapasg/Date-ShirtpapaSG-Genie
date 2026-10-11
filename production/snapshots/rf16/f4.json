@@ -1,0 +1,1 @@
+[["set(s.goat, \"y\", 640);", "set(s.goat, \"y\", 640); { const gx = +s.goat.getAttribute(\"x\"); tf(s.goat, gk < .8 ? `translate(${2 * gx} 0) scale(-1 1)` : \"\"); }"]]

@@ -1,0 +1,82 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "The Moon lights up the night sky. But the Moon has never made a single ray of its own light. Not once. So how can we see it?"
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, how we see. Second, how we see light sources. And third, why the Moon seems to shine. Let's get started!"
+ },
+ {
+  "id": "blind",
+  "scene": "blind",
+  "text": "First, how do we see anything at all? Play tag with a blindfold on, and you cannot see, even in bright sunshine. To see, light must enter our eyes."
+ },
+ {
+  "id": "direct",
+  "scene": "direct",
+  "text": "When we look at a source of light, like a star, a candle flame, a firefly or a light bulb, its light travels straight into our eyes. We see it directly."
+ },
+ {
+  "id": "reflect1",
+  "scene": "reflect",
+  "text": "But most things do not give off light. A pencil, a sofa, a swing. So how do we see them? It takes two steps."
+ },
+ {
+  "id": "reflect2",
+  "scene": "reflect",
+  "text": "Step one. Light from a source falls on the object. Step two. The light bounces off the object, and enters our eyes. Bouncing off is called reflection. When reflected light enters our eyes, we see the object."
+ },
+ {
+  "id": "blackout",
+  "scene": "blackout",
+  "text": "Imagine a blackout at night. You cannot see the pencil on the table. Switch on a torch. Light from the torch falls on the pencil, is reflected, and enters your eyes. Now you can see it! Lights out, lights on! You can try it yourself in The One App. Open the School Lab, experiment four point one, and press, Let's test it now!"
+ },
+ {
+  "id": "moon",
+  "scene": "moon",
+  "text": "Now, the Moon. The Moon is not a source of light. Sunlight falls on the Moon, and is reflected to our eyes on Earth. That is why it shines. It is borrowed sunlight!"
+ },
+ {
+  "id": "myth",
+  "scene": "myth",
+  "text": "Here is an exam tip. Our eyes do not send out light to see things. Light must travel into our eyes."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Is the Moon a source of light? And how do we see a book on a table in the day?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "The Moon is not a source of light. It reflects sunlight. And sunlight falls on the book, is reflected, and enters our eyes."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. Light from the Sun falls on the Moon. The light is reflected from the Moon and enters our eyes. So we can see the Moon. The Moon is not a source of light."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a powerful habit. Teach it to someone. Explain today's lesson to a friend or a family member, in your own words. If you can teach it, you truly understand it."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now add to your light mind map. A new branch called how we see. Light enters the eyes directly, or is reflected from objects into the eyes. Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, has the Moon ever shone? Never by itself! Your turn. Tonight, look at the Moon, and explain to someone at home why we can see it."
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

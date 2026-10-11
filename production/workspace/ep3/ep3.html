@@ -1,0 +1,470 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,Inter,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="confetti"></g>
+  <!-- overlays -->
+  <g id="tag" filter="url(#sh)">
+    <rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/>
+    <text x="70" y="73" font-size="25" font-weight="700" fill="#fff" letter-spacing="0">🍃 TheOneApp, Explained - Leaves</text>
+  </g>
+  <g id="shelf"><text id="shelfHead" x="1515" y="58" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect x="0" y="1072" width="1920" height="8" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" x="0" y="1072" width="0" height="8" fill="url(#rainbow)"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+<script>window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const CHIPS = [];
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, extra = "") => tf(e, `translate(${x} ${y}) scale(${Math.max(0, pop(t, a))}) ${extra}`);
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const C = (seg, w) => { const v = TL.cues[seg] && TL.cues[seg][w]; if (v === undefined) throw new Error("cue " + seg + ":" + w); return v; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+
+/* ---------- reusable widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p);
+  const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  CHIPS.push([g, fs, !!opts.w]);
+  return g;
+}
+function bg(p, c1, c2) {
+  const id = "g" + Math.round(rnd() * 1e9) + "_" + (bg.n = (bg.n || 0) + 1);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: 1920, height: 1080, fill: `url(#${id})`}, p);
+  // floating bubbles for liveliness
+  const bubbles = [];
+  for (let i = 0; i < 14; i++) bubbles.push({x: rnd() * 1920, y: rnd() * 1080, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return bubbles;
+}
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % 1200 + 1200) % 1200 - 60); set(o.e, "r", o.r); }); }
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {}, g); return {g, b, stage, name}; }
+
+/* ---------- bike ---------- */
+function makeBike(p) {
+  const g = el("g", {}, p), K = {};
+  const B = [-230, 90], F = [230, 90], Cr = [-10, 100];
+  const wheel = c => { const w = el("g", {transform: `translate(${c[0]} ${c[1]})`}, g);
+    el("circle", {r: 130, fill: "none", stroke: "#2b2d42", "stroke-width": 20}, w); el("circle", {r: 112, fill: "none", stroke: "#adb5bd", "stroke-width": 6}, w);
+    const sp = el("g", {}, w); for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; el("line", {x1: 0, y1: 0, x2: Math.cos(a) * 110, y2: Math.sin(a) * 110, stroke: "#ced4da", "stroke-width": 3}, sp); }
+    el("circle", {r: 16, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, w); return sp; };
+  K.wheelB = wheel(B); K.wheelF = wheel(F);
+  K.chain = el("path", {d: `M${B[0]} ${B[1] - 18} L${Cr[0]} ${Cr[1] - 30} A30 30 0 0 1 ${Cr[0]} ${Cr[1] + 30} L${B[0]} ${B[1] + 18} A18 18 0 0 1 ${B[0]} ${B[1] - 18} Z`, fill: "none", stroke: "#6c757d", "stroke-width": 8, "stroke-dasharray": "10 6"}, g);
+  const fr = el("g", {stroke: "#ff4d6d", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: `M${B[0]} ${B[1]} L${Cr[0]} ${Cr[1]} L-60 -80 Z M-60 -80 L170 -90 L${Cr[0]} ${Cr[1]} M170 -90 L${F[0]} ${F[1]}`}, fr);
+  el("path", {d: "M170 -90 L190 -150", stroke: "#ff4d6d", "stroke-width": 14, "stroke-linecap": "round"}, g);
+  K.handle = el("path", {d: "M150 -150 L240 -162", stroke: INK, "stroke-width": 12, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 240, cy: -162, r: 11, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, g);
+  K.brake = el("path", {d: "M215 -150 L250 -128 M218 -40 L242 -40", stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, g);
+  K.bell = el("circle", {cx: 200, cy: -172, r: 14, fill: "#ffd60a", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M-60 -80 L-70 -100", stroke: "#3a0ca3", "stroke-width": 10}, g);
+  K.seat = el("path", {d: "M-125 -108 Q-70 -126 -20 -106 Q-70 -96 -125 -108 Z", fill: "#3a0ca3", stroke: INK, "stroke-width": 4}, g);
+  const crank = el("g", {transform: `translate(${Cr[0]} ${Cr[1]})`}, g);
+  el("circle", {r: 30, fill: "#ced4da", stroke: INK, "stroke-width": 4}, crank);
+  K.crank = el("g", {}, crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: 58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: -58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  K.pedalA = el("rect", {x: -22, y: 52, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.pedalB = el("rect", {x: -22, y: -66, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.anchor = {Pedals: [-10, 160], Chain: [-130, 98], Wheels: [-230, 90], Seat: [-72, -112], Handlebars: [195, -156], Brakes: [233, -40], Bell: [200, -172]};
+  K.g = g; K.F = F; K.B = B;
+  K.animate = (crankDeg, wheelDeg, chainOff) => { tf(K.crank, `rotate(${crankDeg})`); tf(K.wheelB, `rotate(${wheelDeg})`); tf(K.wheelF, `rotate(${wheelDeg})`); set(K.chain, "stroke-dashoffset", chainOff); };
+  return K;
+}
+
+/* =================== SCENES (Episode 3: parts of a leaf) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const leafD = (W, H) => `M0 0 Q${W * .3} ${-H} ${W} 0 Q${W * .3} ${H} 0 0 Z`;
+function bigLeaf(p, W, H, opt = {}) {
+  const g = el("g", {}, p), K = {g};
+  K.stalk = el("path", {d: `M${-(opt.stalk || 140)} 0 L4 0`, stroke: "#6a994e", "stroke-width": 18, "stroke-linecap": "round"}, g);
+  K.edgeGlow = el("path", {d: leafD(W, H), fill: "none", stroke: "#ffe14d", "stroke-width": 26, opacity: 0, "stroke-linejoin": "round"}, g);
+  K.blade = el("path", {d: leafD(W, H), fill: opt.fill || "#2dc653", stroke: INK, "stroke-width": 7}, g);
+  const bcid = "bigclip" + Math.random().toString(36).slice(2); el("path", {d: leafD(W, H)}, el("clipPath", {id: bcid}, $("v").querySelector("defs"))); K.small = el("g", {stroke: opt.vein || "#b7efc5", "stroke-width": 6, fill: "none", "stroke-linecap": "round", "clip-path": `url(#${bcid})`}, g); K.smallL = [];
+  for (let i = 1; i <= 6; i++) { const x = W * i / 7.5, h = H * Math.sin(Math.PI * x / W) * .62;
+    [-1, 1].forEach(sd => { const l = el("path", {d: `M${x} 0 Q${x + 40} ${sd * h * .5} ${x + 85} ${sd * h}`, "stroke-dasharray": 200, "stroke-dashoffset": 200}, K.small); K.smallL.push(l); }); }
+  K.mainGlow = el("path", {d: `M4 0 L${W * .96} 0`, stroke: "#ffe14d", "stroke-width": 24, opacity: 0, "stroke-linecap": "round"}, g);
+  K.main = el("path", {d: `M4 0 L${W * .96} 0`, stroke: opt.vein || "#d8f3dc", "stroke-width": 11, "stroke-linecap": "round"}, g);
+  K.stalkGlow = el("path", {d: `M${-(opt.stalk || 140)} 0 L4 0`, stroke: "#ffe14d", "stroke-width": 36, opacity: 0, "stroke-linecap": "round"}, g);
+  g.insertBefore(K.stalkGlow, K.stalk);
+  return K;
+}
+function parallelLeaf(p, L, Wd, col = "#52b788") { const g = el("g", {}, p);
+  el("path", {d: `M0 0 Q${Wd} ${-L * .5} 0 ${-L} Q${-Wd} ${-L * .5} 0 0 Z`, fill: col, stroke: INK, "stroke-width": 6}, g);
+  const lines = [-.6, -.3, 0, .3, .6].map(k => el("path", {d: `M${k * Wd * .3} -6 Q${k * Wd * .75} ${-L * .5} 0 ${-L + 10}`, stroke: "#d8f3dc", "stroke-width": 5, fill: "none", "stroke-dasharray": L * 1.2, "stroke-dashoffset": L * 1.2}, g));
+  return {g, lines}; }
+let NETID = 0;
+function netLeaf(p, R, col = "#2dc653") { const g = el("g", {}, p);
+  const shape = `M0 ${R} Q${R * 1.1} ${R * .3} ${R * .2} ${-R} Q0 ${-R * 1.1} ${-R * .2} ${-R} Q${-R * 1.1} ${R * .3} 0 ${R} Z`;
+  el("path", {d: shape, fill: col}, g);
+  const id = "netclip" + (NETID++); const cp = el("clipPath", {id}, $("v").querySelector("defs")); el("path", {d: shape}, cp);
+  const vg = el("g", {"clip-path": `url(#${id})`}, g);
+  el("path", {d: shape, fill: "none", stroke: INK, "stroke-width": 6}, g);
+  const lines = []; const add = d => lines.push(el("path", {d, stroke: "#d8f3dc", "stroke-width": 5, fill: "none", "stroke-dasharray": 400, "stroke-dashoffset": 400}, vg));
+  add(`M0 ${R} L0 ${-R * .9}`); for (let i = 0; i < 4; i++) { const y = R * .6 - i * R * .45; add(`M0 ${y - 70} Q${R * .3} ${y - 40} ${R * .6} ${y}`); add(`M0 ${y - 70} Q${-R * .3} ${y - 40} ${-R * .6} ${y}`);
+    add(`M${R * .3} ${y - 22} l${R * .15} ${30}`); add(`M${-R * .3} ${y - 22} l${-R * .15} ${30}`); }
+  return {g, lines}; }
+const drawOn = (lines, k) => lines.forEach((l, i) => { const L = +l.getAttribute("stroke-dasharray"); const kk = clamp(k * lines.length - i * .6); set(l, "stroke-dashoffset", L * (1 - kk)); });
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#80ed99", "#38a3a5");
+  s.L = bigLeaf(s.stage, 640, 230); s.qs = [[0, -20], [280, 0], [-90, 0], [380, -110]].map(() => tx(s.stage, {"font-size": 80, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 9, "text-anchor": "middle"}, "?"));
+  s.four = el("g", {}, s.stage); el("circle", {r: 88, fill: "#ffbe0b", stroke: INK, "stroke-width": 7}, s.four); tx(s.four, {x: 0, y: 44, "text-anchor": "middle", "font-size": 124, "font-weight": 700, fill: INK}, "4");
+  s.mark = chip(s.stage, "✗ −1 mark", "#e63946", {fs: 44});
+  s.run = t => { const a = w => C("hook", w);
+    tf(s.L.g, `translate(${480} 470) rotate(${-8 + Math.sin(t * 1.5) * 2}) scale(${pop(t, .3)})`);
+    const pos = [[640, 470], [960, 420], [380, 500], [1060, 330]];
+    s.qs.forEach((q, i) => { set(q, "x", pos[i][0]); set(q, "y", pos[i][1] + Math.sin(t * 5 + i) * 14); op(q, ramp(t, a("four") + i * .15, a("four") + .2 + i * .15)); });
+    popAt(s.four, 1250, 230, t, a("four")); op(s.four, ramp(t, a("four"), a("four") + .2));
+    op(s.mark, on(t, a("lose"), a("grab"), .2)); popAt(s.mark, 760, 720, t, a("lose")); }; return s; })();
+
+// ---- LEAF PARTS
+S.leaf = (() => { const s = scene("leaf", "#caffbf", "#9bf6ff");
+  s.L = bigLeaf(s.stage, 900, 300, {stalk: 160});
+  s.lines = el("g", {stroke: INK, "stroke-width": 4, "stroke-dasharray": "8 6"}, s.stage); s.ln = {}; ["blade", "stalk", "main", "small"].forEach(k => s.ln[k] = el("line", {opacity: 0}, s.lines));
+  s.lab = {blade: chip(s.stage, "LEAF BLADE", "#2dc653", {fs: 38}), stalk: chip(s.stage, "LEAF STALK", "#a0522d", {fs: 38}), main: chip(s.stage, "MAIN VEIN", "#3a86ff", {fs: 38}), small: chip(s.stage, "SMALLER VEINS", "#00b4d8", {fs: 38})};
+  s.shape = chip(s.stage, "edge = leaf's shape ✏️", "#ffbe0b", {fs: 32, ink: INK});
+  s.mini = [160, 30].map((st, i) => { const g = el("g", {}, s.stage); const k = bigLeaf(g, 200, 70, {stalk: st}); return {g, i, lbl: tx(g, {x: 80, y: 110, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, i ? "short stalk" : "long stalk")}; });
+  s.join = el("circle", {r: 30, fill: "none", stroke: "#e63946", "stroke-width": 7, opacity: 0}, s.stage);
+  s.badge = el("g", {}, s.stage); el("circle", {r: 70, fill: "#ffbe0b", stroke: INK, "stroke-width": 6}, s.badge); tx(s.badge, {x: 0, y: 34, "text-anchor": "middle", "font-size": 96, "font-weight": 700, fill: INK}, "4");
+  s.run = t => { const a = w => C("parts1", w), b = w => C("parts2", w), c = w => C("parts3", w);
+    const X = 330, Y = 430; const sm = on(t, b("some"), b("now"), .3);
+    tf(s.L.g, `translate(${X} ${Y - sm * 90}) scale(${1 - sm * .25})`);
+    op(s.L.edgeGlow, .9 * on(t, a("edge"), a("shape") + 1.2, .2)); set(s.L.edgeGlow, "stroke-dasharray", "2600"); set(s.L.edgeGlow, "stroke-dashoffset", 2600 * (1 - ramp(t, a("edge"), a("shape"))));
+    op(s.L.stalkGlow, .9 * on(t, b("stalk"), b("some"), .2)); op(s.L.mainGlow, .9 * on(t, b("main"), b("joined") + 1, .2));
+    drawOn(s.L.smallL, ramp(t, c("smaller") - .3, c("veins") + 1));
+    const P = {blade: [X + 420, Y - 80, 1150, 230, a("blade")], stalk: [X - 90, Y, 300, 680, b("stalk")], main: [X + 600, Y, 1150, 650, b("main")], small: [X + 380, Y + 90, 760, 760, c("smaller")]};
+    for (const k in P) { const [ax, ay, cx, cy, tt] = P[k]; op(s.lab[k], ramp(t, tt, tt + .2) * (1 - sm)); popAt(s.lab[k], cx, cy, t, tt);
+      set(s.ln[k], "x1", cx); set(s.ln[k], "y1", cy); set(s.ln[k], "x2", ax); set(s.ln[k], "y2", ay - sm * 90); op(s.ln[k], ramp(t, tt + .1, tt + .3) * (1 - sm)); }
+    op(s.shape, on(t, a("shape"), b("stalk"), .2)); popAt(s.shape, 760, 160, t, a("shape"));
+    s.mini.forEach(m => { const tt = m.i ? b("short") : b("long"); op(m.g, on(t, tt, b("now"), .2)); tf(m.g, `translate(${m.i ? 950 : 360} ${560}) scale(${1.7 * pop(t, tt)})`); });
+    set(s.join, "cx", X); set(s.join, "cy", Y); op(s.join, on(t, b("joined"), b("joined") + 1.5, .2));
+    const f = c("four"); op(s.badge, on(t, f, SC.leaf.t1 + .5, .2)); popAt(s.badge, 1300, 420, t, f);
+    if (t > f) Object.values(s.lab).forEach((e, i) => tf(e, e.getAttribute("transform") + ` scale(${1 + .06 * Math.sin(t * 8 + i)})`)); }; return s; })();
+
+// ---- VEINS
+S.veins = (() => { const s = scene("veins", "#a2d2ff", "#cdb4db");
+  s.par = parallelLeaf(s.stage, 520, 120); s.net = netLeaf(s.stage, 250);
+  s.t1 = tx(s.stage, {x: 420, y: 790 - 60, "text-anchor": "middle", "font-size": 56, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "PARALLEL");
+  s.t2 = tx(s.stage, {x: 1110, y: 790 - 60, "text-anchor": "middle", "font-size": 56, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "NET");
+  s.c = {grass: chip(s.stage, "🌾 grass", "#6a994e", {fs: 30}), pandan: chip(s.stage, "🇸🇬 pandan", "#2d6a4f", {fs: 30}), hibiscus: chip(s.stage, "🌺 hibiscus", "#e63946", {fs: 30}), maple: chip(s.stage, "🍁 maple 🇺🇸", "#ff7b00", {fs: 30})};
+  s.netIcon = el("g", {}, s.stage); { const ng = el("g", {transform: "rotate(45)"}, s.netIcon); for (let k = -2; k <= 2; k++) { el("line", {x1: k * 22, y1: -50, x2: k * 22, y2: 50, stroke: "#8d6e63", "stroke-width": 4}, ng); el("line", {x1: -50, y1: k * 22, x2: 50, y2: k * 22, stroke: "#8d6e63", "stroke-width": 4}, ng); } el("rect", {x: -50, y: -50, width: 100, height: 100, fill: "none", stroke: "#5d4037", "stroke-width": 5}, ng); [-40, 0, 40].forEach(fx => el("circle", {cx: fx, cy: -62 + Math.abs(fx) * .55, r: 11, fill: "#ff7b00", stroke: INK, "stroke-width": 3}, s.netIcon)); }
+  s.run = t => { const a = w => C("veins1", w), b = w => C("veins2", w);
+    op(s.par.g, ramp(t, SC.veins.t0 - .3, SC.veins.t0)); tf(s.par.g, `translate(420 640) rotate(${Math.sin(t) * 3})`);
+    drawOn(s.par.lines, ramp(t, a("straight") - .4, a("parallel") + .3)); op(s.t1, ramp(t, a("parallel"), a("parallel") + .2));
+    op(s.net.g, ramp(t, b("other") - .2, b("other") + .1)); tf(s.net.g, `translate(1110 400) scale(${pop(t, b("other") - .2)}) rotate(${Math.sin(t * 1.2) * 3})`);
+    drawOn(s.net.lines, ramp(t, b("branch"), b("net") + .3)); op(s.t2, ramp(t, b("net"), b("net") + .2));
+    op(s.netIcon, on(t, b("fishing"), b("call") + .5, .2)); popAt(s.netIcon, 1370, 330, t, b("fishing"));
+    [["grass", a("grass"), 240, 200], ["pandan", a("pandan"), 600, 200], ["hibiscus", b("hibiscus"), 840, 760 - 60], ["maple", b("maple"), 1370, 760 - 60]].forEach(([k, tt, x, y]) => { op(s.c[k], ramp(t, tt, tt + .2)); popAt(s.c[k], x, y, t, tt); }); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  s.pause = tx(s.stage, {x: 760, y: 190, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.cards = [0, 1, 2].map(i => { const g = el("g", {}, s.stage); el("rect", {x: -170, y: -220, width: 340, height: 440, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
+    el("circle", {cx: -120, cy: -170, r: 30, fill: "#7209b7"}, g); tx(g, {x: -120, y: -159, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#fff"}, "ABC"[i]);
+    let lf; if (i === 0) { lf = parallelLeaf(g, 330, 70, "#74c69d"); tf(lf.g, "translate(0 170)"); drawOn(lf.lines, 1); } else { lf = netLeaf(g, i === 1 ? 140 : 120, i === 1 ? "#2dc653" : "#40916c"); tf(lf.g, i === 2 ? "translate(0 -10) scale(1.1 .95)" : "translate(0 0)"); drawOn(lf.lines, 1); }
+    const ans = chip(g, i === 0 ? "PARALLEL" : "NET", i === 0 ? "#ff9f1c" : "#7b61ff", {fs: 36}); tf(ans, "translate(0 260)"); return {g, ans, i}; });
+  s.ring = el("g", {}, s.stage); el("circle", {r: 62, fill: "#ffbe0b", stroke: INK, "stroke-width": 6}, s.ring); s.rt = tx(s.ring, {x: 0, y: 22, "text-anchor": "middle", "font-size": 60, "font-weight": 700, fill: INK}, "3");
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), b("leaf"), .2)); tf(s.pause, `translate(760 190) scale(${pop(t, a("pause"))}) translate(-760 -190)`);
+    s.cards.forEach(c => { const tt = a("look") + c.i * .2; op(c.g, ramp(t, tt, tt + .2)); tf(c.g, `translate(${330 + c.i * 430} 470) scale(${pop(t, tt)})`);
+      const rv = c.i === 0 ? b("parallel") : b("net"); op(c.ans, ramp(t, rv, rv + .2)); });
+    const ct = clamp((t - a("veins")) / 3); op(s.ring, on(t, a("veins"), b("leaf"), .2)); tf(s.ring, "translate(1320 190)"); s.rt.textContent = Math.max(1, 3 - Math.floor(ct * 3)); }; return s; })();
+
+// ---- DIVERSITY
+S.diverse = (() => { const s = scene("diverse", "#ffd166", "#ff9f1c");
+  const card = (title, col) => { const g = el("g", {}, s.stage); el("rect", {x: -310, y: -160, width: 620, height: 320, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
+    el("rect", {x: -310, y: -160, width: 620, height: 64, rx: 30, fill: col}, g); el("rect", {x: -310, y: -126, width: 620, height: 30, fill: col}, g);
+    tx(g, {x: 0, y: -114, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: "#fff"}, title); return g; };
+  s.edge = card("EDGE", "#2dc653"); { const l = el("g", {transform: "translate(-150 40)"}, s.edge); el("path", {d: leafD(220, 80), fill: "#52b788", stroke: INK, "stroke-width": 5, transform: "translate(-110 0)"}, l); tx(l, {x: 0, y: 110, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, "smooth");
+    let d = "M-110 0"; for (let i = 0; i <= 12; i++) { const x = -110 + i * 220 / 12, y = -Math.sin(Math.PI * i / 12) * 80; d += ` L${x} ${y + (i % 2 ? -14 : 0)}`; } for (let i = 12; i >= 0; i--) { const x = -110 + i * 220 / 12, y = Math.sin(Math.PI * i / 12) * 80; d += ` L${x} ${y + (i % 2 ? 14 : 0)}`; }
+    const r = el("g", {transform: "translate(150 40)"}, s.edge); el("path", {d: d + " Z", fill: "#52b788", stroke: INK, "stroke-width": 5}, r); tx(r, {x: 0, y: 110, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, "jagged"); }
+  s.shape = card("SHAPE", "#3a86ff"); { el("ellipse", {cx: -150, cy: 30, rx: 120, ry: 70, fill: "#52b788", stroke: INK, "stroke-width": 5}, s.shape); tx(s.shape, {x: -150, y: 150, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, "oval");
+    el("circle", {cx: 150, cy: 30, r: 85, fill: "#52b788", stroke: INK, "stroke-width": 5}, s.shape); tx(s.shape, {x: 150, y: 150, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, "round"); }
+  s.colour = card("COLOUR", "#9d4edd"); [["#2dc653", "green"], ["#7b2cbf", "purple"], ["#d00000", "red"]].forEach(([c, n], i) => { el("path", {d: leafD(150, 60), fill: c, stroke: INK, "stroke-width": 5, transform: `translate(${-260 + i * 190} 30)`}, s.colour); tx(s.colour, {x: -185 + i * 190, y: 140, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, n); });
+  s.tex = card("TEXTURE", "#ef476f"); { el("path", {d: leafD(220, 80), fill: "#2d6a4f", stroke: INK, "stroke-width": 5, transform: "translate(-260 30)"}, s.tex); el("path", {d: "M-230 10 Q-170 -30 -100 0", stroke: "#fff", "stroke-width": 10, fill: "none", opacity: .8, "stroke-linecap": "round"}, s.tex); emo(s.tex, -60, -40, 50, "✨");
+    tx(s.tex, {x: -150, y: 150, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, "waxy & shiny");
+    el("path", {d: leafD(220, 80), fill: "#95d5b2", stroke: INK, "stroke-width": 5, transform: "translate(40 30)"}, s.tex); for (let i = 0; i < 40; i++) { const x = 40 + (i % 20) * 11, sd = i < 20 ? -1 : 1, y = sd * Math.sin(Math.PI * (x - 40) / 220) * 80 * .6 + 30; el("line", {x1: x, y1: y, x2: x + 4, y2: y + sd * 16, stroke: "#1b4332", "stroke-width": 3}, s.tex); }
+    tx(s.tex, {x: 150, y: 150, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: INK}, "soft & hairy"); }
+  s.surv = chip(s.stage, "🌍 differences help each plant SURVIVE", "#06d6a0", {fs: 36});
+  s.run = t => { const a = w => C("diverse1", w), b = w => C("diverse2", w);
+    const G = [[s.edge, 420, 300, a("edge")], [s.shape, 1080, 300, a("shape")], [s.colour, 420, 650, b("green")], [s.tex, 1080, 650, b("texture")]];
+    const sv = on(t, b("survive"), SC.diverse.t1 + .5, .2);
+    G.forEach(([g, x, y, tt], i) => { op(g, ramp(t, tt, tt + .2)); tf(g, `translate(${x} ${y}) scale(${pop(t, tt) * (1 + .03 * sv * Math.sin(t * 6 + i))})`); });
+    op(s.surv, sv); popAt(s.surv, 750, 880, t, b("survive")); }; return s; })();
+
+// ---- ASK QUESTIONS
+S.ask = (() => { const s = scene("ask", "#4361ee", "#4cc9f0");
+  s.chain = [["👀", "OBSERVE", "observe"], ["❓", "ASK", "ask"], ["🔬", "INVESTIGATE", "investigation"]].map(([e, n, w], i) => { const g = el("g", {}, s.stage); el("circle", {r: 105, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g); emo(g, 0, -10, 100, e);
+    tx(g, {x: 0, y: 150, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, n); return {g, w, x: 330 + i * 430}; });
+  s.arrows = [0, 1].map(i => tx(s.stage, {x: 545 + i * 430, y: 300, "text-anchor": "middle", "font-size": 90, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 8}, "➜"));
+  s.q1 = chip(s.stage, "Why is this leaf hairy? 🤔", "#ef476f", {fs: 36}); s.q2 = chip(s.stage, "Why do these veins run in straight lines? 🤔", "#ff9f1c", {fs: 34});
+  s.run = t => { const a = w => C("ask", w);
+    s.chain.forEach((c, i) => { const tt = a(c.w); op(c.g, ramp(t, tt, tt + .2)); popAt(c.g, c.x, 280, t, tt); });
+    s.arrows.forEach((ar, i) => op(ar, ramp(t, a(["questions", "investigation"][i]) - .2, a(["questions", "investigation"][i]))));
+    op(s.q1, ramp(t, a("hairy") - .5, a("hairy"))); popAt(s.q1, 600, 600, t, a("hairy") - .5);
+    op(s.q2, ramp(t, a("straight") - .6, a("straight") - .1)); popAt(s.q2, 820, 700, t, a("straight") - .6); }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · label it like this:");
+  const lf = bigLeaf(g, 420, 140, {stalk: 90, fill: "#40916c"}); tf(lf.g, "translate(-560 30)"); drawOn(lf.smallL, 1);
+  s.lbl = ["① Leaf blade", "② Leaf stalk", "③ Main vein", "④ Smaller veins"].map((L, i) => tx(g, {x: 30, y: -130 + i * 70, "font-size": 44, "font-weight": 700, fill: "#fff", opacity: 0}, L));
+  s.vein = tx(g, {x: -610, y: 260, "font-size": 40, "font-weight": 600, fill: "#ffe14d", opacity: 0}, "Veins can be PARALLEL or arranged like a NET.");
+  s.run = t => { const a = w => C("exam", w); const k = [a("blade"), a("stalk"), a("main"), a("smaller")];
+    s.lbl.forEach((l, i) => op(l, ramp(t, k[i] - .1, k[i] + .2))); op(s.vein, ramp(t, a("remember"), a("remember") + .3)); }; return s; })();
+
+// ---- HABIT (two-minute rule)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 80, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏱ THE TWO-MINUTE RULE");
+  s.timer = el("g", {}, s.stage); el("circle", {r: 110, fill: "#fff", stroke: INK, "stroke-width": 8}, s.timer); s.tt = tx(s.timer, {x: 0, y: 26, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: INK}, "2:00");
+  s.arc = el("circle", {r: 92, fill: "none", stroke: "#ef476f", "stroke-width": 16, "stroke-dasharray": "578 578", transform: "rotate(-90)"}, s.timer);
+  s.paper = el("g", {}, s.stage); el("rect", {x: -330, y: -220, width: 660, height: 440, rx: 12, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, s.paper);
+  s.sketch = el("path", {d: leafD(380, 130), transform: "translate(-200 0)", fill: "none", stroke: "#2d6a4f", "stroke-width": 6, "stroke-dasharray": 1400, "stroke-dashoffset": 1400}, s.paper);
+  s.sk2 = el("path", {d: "M-280 0 L-200 0 M-200 0 L160 0", stroke: "#2d6a4f", "stroke-width": 6, "stroke-dasharray": 500, "stroke-dashoffset": 500}, s.paper);
+  s.sl = ["blade", "stalk", "main vein", "smaller veins"].map((n, i) => tx(s.paper, {x: [40, -300, 80, -120][i], y: [-120, 50, 40, 150][i], "font-size": 28, "font-weight": 700, fill: "#ef476f", opacity: 0}, n));
+  s.leaf = emo(s.stage, 0, 0, 120, "🍂");
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.title, ramp(t, SC.habit.t0 - .2, SC.habit.t0 + .1)); tf(s.title, `translate(760 180) scale(${pop(t, SC.habit.t0 - .2)}) translate(-760 -180)`);
+    const fl = ramp(t, a("fallen") - .5, a("fallen") + .6); op(s.leaf, on(t, a("pick") - .3, a("drawing") , .2)); set(s.leaf, "x", 760 + Math.sin(t * 3) * 60); set(s.leaf, "y", lerp(260, 520, fl));
+    op(s.paper, ramp(t, a("drawing") - .3, a("drawing"))); tf(s.paper, "translate(640 540)");
+    const dr = ramp(t, a("drawing"), a("labelling")); set(s.sketch, "stroke-dashoffset", 1400 * (1 - dr)); set(s.sk2, "stroke-dashoffset", 500 * (1 - dr));
+    s.sl.forEach((l, i) => op(l, ramp(t, a("labelling") + i * .3, a("labelling") + .2 + i * .3)));
+    op(s.timer, ramp(t, a("spend") - .2, a("spend"))); tf(s.timer, `translate(1220 470) scale(${pop(t, a("spend") - .2)})`);
+    const k = ramp(t, a("spend"), SC.habit.t1 + .3); set(s.arc, "stroke-dashoffset", 578 * k); const sec = Math.round(120 * (1 - k)); s.tt.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`; }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 130, ry: 76, fill: "#2dc653", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 18, "text-anchor": "middle", "font-size": 52, "font-weight": 700, fill: "#fff"}, "🍃 LEAF");
+  const br = [["parts", "4 PARTS", "#3a86ff", 430, 330, ["blade", "stalk", "main vein", "smaller veins"]], ["vein", "2 VEIN PATTERNS", "#ff9f1c", 330, 700, ["parallel", "net"]], ["different", "DIFFERENCES", "#ef476f", 1010, 700, ["edge", "shape", "colour", "texture"]]];
+  s.br = br.map(([k, n, col, x, y, subs]) => { const line = el("path", {d: `M720 480 Q${(720 + x) / 2} ${y} ${x} ${y}`, stroke: col, "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 700}, s.stage);
+    return {k, line, c: chip(s.stage, n, col, {fs: 34}), x, y, tw: subs.map(sn => chip(s.stage, sn, "#fff", {fs: 24, ink: INK}))}; });
+  s.stage.appendChild(s.center);
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr3"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  s.scr = el("g", {"clip-path": "url(#scr3)"}, s.phone); s.shot = el("image", {href: "oneapp_mind.png", x: -112, y: -122, width: 224, height: 485, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 5, rx: 13}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("leaf"), a("leaf") + .2)); tf(s.center, `translate(720 480) scale(${pop(t, a("leaf"))})`);
+    const bt = {parts: a("four"), vein: a("vein"), different: a("different")};
+    s.br.forEach(b => { const k = bt[b.k]; set(b.line, "stroke-dashoffset", 700 * (1 - ramp(t, k - .1, k + .4))); op(b.line, t > k - .1 ? 1 : 0); op(b.c, ramp(t, k + .15, k + .35)); popAt(b.c, b.x, b.y, t, k + .15);
+      const n = b.tw.length; b.tw.forEach((tw, j) => { const tt = k + .5 + j * .25; op(tw, ramp(t, tt, tt + .2)); const ang = (j - (n - 1) / 2) * .55; popAt(tw, b.x + Math.sin(ang) * 260, b.y + (b.y < 480 ? -1 : 1) * (90 + (j % 2) * 55), t, tt); }); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 1040, 125, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1340, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    const off = -122 - 270 * ramp(t, a("ultimate") + .4, a("grows")); set(s.shot, "y", off);
+    set(s.ring, "x", -112 + 224 * (36 / 780)); set(s.ring, "y", off + 485 * (1330 / 1688)); set(s.ring, "width", 224 * (290 / 780)); set(s.ring, "height", 485 * (72 / 1688));
+    op(s.ring, on(t, a("grows"), SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.L = bigLeaf(s.stage, 600, 200, {stalk: 110}); drawOn(s.L.smallL, 1);
+  s.lab = ["blade", "stalk", "main", "smaller"].map((w, i) => ({w, c: chip(s.stage, ["LEAF BLADE", "LEAF STALK", "MAIN VEIN", "SMALLER VEINS"][i], ["#2dc653", "#a0522d", "#3a86ff", "#00b4d8"][i], {fs: 30}), x: [880, 330, 1180, 640][i], y: [220, 600, 560, 640][i]}));
+  s.bubble = el("g", {}, s.stage); el("path", {d: "M-470 -90 H470 A40 40 0 0 1 510 -50 V50 A40 40 0 0 1 470 90 H-290 L-360 150 L-350 90 H-470 A40 40 0 0 1 -510 50 V-50 A40 40 0 0 1 -470 -90 Z", fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.bubble);
+  tx(s.bubble, {x: 0, y: 16, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: INK}, "🔍 Find a leaf: PARALLEL or NET?");
+  s.run = t => { const a = w => C("close", w); const bb = ramp(t, a("find") - .4, a("find"));
+    tf(s.L.g, `translate(${480} ${420 - bb * 60}) scale(${pop(t, SC.close.t0 - .2) * (1 - bb * .3)})`);
+    s.lab.forEach(L => { op(L.c, ramp(t, a(L.w), a(L.w) + .2) * (1 - bb)); popAt(L.c, L.x, L.y, t, a(L.w)); });
+    op(s.bubble, bb); tf(s.bubble, `translate(760 560) scale(${pop(t, a("find") - .4)})`); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Plants with superpowers:");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "cactus, climbers & carrots 🌵");
+  s.run = () => {}; return s; })();
+
+
+window.INTRO = {"goals": [["🍃", "The 4 parts of a leaf", "first"], ["🌿", "Parallel and net veins", "second"], ["🔍", "How leaves are different", "third"]]};
+// ---- WELCOME (greeting + "today you'll learn")
+S.welcome = (() => { const sv = seed; seed = 424242; const s = scene("welcome", "#ffd166", "#ef476f"), I = window.INTRO;
+  s.wave = emo(s.stage, 0, 0, 190, "👋");
+  s.hi = el("g", {}, s.stage);
+  tx(s.hi, {x: 0, y: 0, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Welcome to");
+  tx(s.hi, {x: 0, y: 125, "text-anchor": "middle", "font-size": 118, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "TheOneApp, Explained!");
+  s.board = el("g", {}, s.stage);
+  el("rect", {x: -700, y: -380, width: 1400, height: 720, rx: 46, fill: "#fffaf0", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.board);
+  el("rect", {x: -700, y: -380, width: 1400, height: 130, rx: 46, fill: INK}, s.board);
+  el("rect", {x: -700, y: -290, width: 1400, height: 40, fill: INK}, s.board);
+  tx(s.board, {x: 0, y: -293, "text-anchor": "middle", "font-size": 66, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 3}, "🎯 TODAY YOU'LL LEARN");
+  const cols = ["#ff5d73", "#3a86ff", "#06d6a0"];
+  s.rows = I.goals.map(([icon, label, cue], i) => { const g = el("g", {}, s.board), y = -120 + i * 175;
+    el("circle", {cx: -560, cy: y, r: 56, fill: cols[i], stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: -560, y: y + 25, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#fff"}, String(i + 1));
+    emo(g, -420, y, 92, icon);
+    tx(g, {x: -330, y: y + 21, "font-size": 58, "font-weight": 700, fill: INK}, label);
+    return {g, y, cue}; });
+  s.run = t => { const T0 = SC.welcome.t0, tB = C("welcome", "today") - .35, go = C("welcome", I.go || "started");
+    // phase A: wave + welcome
+    const a = 1 - ramp(t, tB - .3, tB + .1);
+    tf(s.wave, `translate(960 ${330 - 40 * (1 - a)}) scale(${Math.max(0, pop(t, T0 - .1)) * a}) rotate(${Math.sin(t * 9) * 18})`);
+    tf(s.hi, `translate(960 ${590 - 60 * (1 - a)}) scale(${Math.max(0, pop(t, C("welcome", "welcome") - .15)) * a})`); op(s.hi, a);
+    // phase B: learning board, one row per goal
+    const b = Math.max(0, pop(t, tB, .55)), bump = 1 + .04 * on(t, go, go + .5, .2);
+    tf(s.board, `translate(960 ${520 + Math.sin(t * 1.5) * 6}) scale(${b * bump})`); op(s.board, b > 0 ? 1 : 0);
+    s.rows.forEach(r => { const k = Math.max(0, pop(t, C("welcome", r.cue) - .1));
+      tf(r.g, `translate(${-60 * (1 - Math.min(1, k))} 0)`); op(r.g, clamp(k)); });
+  };
+  seed = sv; return s; })();
+
+/* ---------- confetti ---------- */
+function burst() {}
+const BURSTS = []; // precomputed so rendering is deterministic per frame
+seed = 77; const conf = []; for (let i = 0; i < 70; i++) conf.push({vx: (rnd() - .5) * 1400, vy: -600 - rnd() * 700, rot: rnd() * 720, col: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6], e: el("rect", {width: 18, height: 10, rx: 3, opacity: 0}, $("confetti"))});
+conf.forEach(c => set(c.e, "fill", c.col));
+function drawConfetti(t) { const b = TL.bursts.filter(x => t >= x && t < x + 1.6).pop();
+  conf.forEach(c => { if (b === undefined) { op(c.e, 0); return; } const k = t - b; const x = 760 + c.vx * k * .5, y = 450 + c.vy * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.rot * k})`); op(c.e, 1 - k / 1.6); }); }
+
+/* ---------- keyword box → shelf ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const fs = 54, w = k.label.length * fs * .56 + 70;
+  const big = el("g", {}, g); el("rect", {x: -w / 2, y: -50, width: w, height: 100, rx: 50, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 19, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, "⭐ " + k.label);
+  const sfs = 25, sw = k.short.length * sfs * .58 + 40;
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -sw / 2, y: -22, width: sw, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": sfs, "font-weight": 700, fill: "#fff"}, k.short);
+  return {k, g, big, small, sw, i}; });
+function drawKW(t) {
+  op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;
+    const sx = 1880 - K.sw / 2, sy = 104 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; }
+    op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly);
+    const x = lerp(960, sx, fly), y = lerp(860, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    const scl = Math.max(0, pop(t, t0, .5));
+    tf(K.g, `translate(${x} ${y})`);
+    tf(K.big, `scale(${scl * lerp(1, .46, fly) * (1 + .04 * Math.sin(t * 8) * (1 - fly))})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); tf(K.small, `scale(${1 + .15 * on(t, tf0 + tfly, tf0 + tfly + .35, .15)})`);
+  });
+}
+
+/* ---------- captions ---------- */
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * 46 * .52 + 60;
+  el("rect", {x: 960 - w / 2, y: 975, width: w, height: 70, rx: 35, fill: "#1b1b3a", "fill-opacity": .78}, g);
+  const t = el("text", {x: 960, y: 1023, "text-anchor": "middle", "font-size": 46, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- render ---------- */
+const order = TL.scenes.map(s => s.scene);
+window.LABCARD = {"seg": "diverse2", "word": "try", "code": "1.3", "title": "Looking closely at plants", "part": "Part (a): Plant cards"};
+// "Try it in TheOneApp" card: shown while Heart points students to the matching School Lab experiment
+const LC = window.LABCARD, LCG = el("g", {opacity: 0}, $("v")); $("v").insertBefore(LCG, $("confetti"));
+el("rect", {x: 0, y: 0, width: 1920, height: 1080, fill: "#0b1020", opacity: .55}, LCG);
+const LCB = el("g", {}, LCG);
+el("rect", {x: -470, y: -190, width: 940, height: 380, rx: 36, fill: "#fffdf7", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, LCB);
+el("rect", {x: -470, y: -190, width: 940, height: 92, rx: 36, fill: "#7209b7"}, LCB); el("rect", {x: -470, y: -130, width: 940, height: 32, fill: "#7209b7"}, LCB);
+tx(LCB, {x: 0, y: -128, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "🧪 Try it yourself in TheOneApp");
+const LCT = tx(LCB, {x: 0, y: -30, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "School Lab › " + LC.code + "  " + LC.title);
+tx(LCB, {x: 0, y: 30, "text-anchor": "middle", "font-size": 32, "font-weight": 600, fill: "#5b6782"}, LC.part);
+const LCbtn = el("g", {transform: "translate(0 110)"}, LCB); el("rect", {x: -230, y: -40, width: 460, height: 80, rx: 40, fill: "#2a9d8f", stroke: INK, "stroke-width": 5}, LCbtn);
+tx(LCbtn, {x: 0, y: 14, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: "#fff"}, "Let's test it now! ▶");
+function drawLC(t) { if (!LC.fit) { const bw = LCT.getBBox().width; if (bw > 870) LCT.setAttribute("font-size", 40 * 870 / bw); LC.fit = bw > 0; }   // long lab titles: shrink to fit the card
+  const seg = TL.segs.find(s => s.id === LC.seg); if (!seg) return; const cs = TL.cues[LC.seg] || {};
+  const t0 = Math.max(...Object.keys(cs).filter(k => k.replace(/#\d+$/, "") === LC.word).map(k => cs[k])), t1 = seg.t1 + .6;
+  op(LCG, on(t, t0 - .2, t1, .3)); tf(LCB, `translate(760 520) scale(${Math.max(0, pop(t, t0 - .2))})`);
+  tf(LCbtn, `translate(0 110) scale(${1 + .05 * Math.sin(t * 6)})`); }
+
+window.MMPHONE = {"href": "mm_ep3.png", "saved": [327, 35, 158, 62], "map": [24, 266, 732, 416]};
+// "My mind map" phone: the episode's own map from TheOneApp's maker (780x1688 shot), ring on "Saved ✓", then scroll to show the whole map
+(() => { const s = S.mindmap, B = window.MMPHONE; if (!s || !s.shot || !B) return;
+  const k = 224 / 780, H = 1688 * k, WIN = 327;
+  s.shot.setAttribute("href", B.href); s.shot.setAttribute("height", H);
+  const D = Math.max(0, (B.map[1] + B.map[3] + 14) * k - WIN);
+  const ring = el("rect", {fill: "none", stroke: "#f72585", "stroke-width": 4, rx: 9}, s.shot.parentNode);
+  const cues = TL.cues.habit2 || {}, last = w => { let v = null; for (const key in cues) if (key === w || key.startsWith(w + "#")) v = Math.max(v ?? -1, cues[key]); return v; };
+  const run0 = s.run;
+  s.run = t => { run0(t); if (s.ring && s.ring.tagName === "rect") op(s.ring, 0);
+    const t1 = SC.mindmap.t1, sv = C("habit2", "save"), mk = (last("tap") ?? (sv + 2.5)) - .2;
+    const off = -122 - D * ramp(t, mk + .4, Math.min(t1 - .3, mk + 3)); set(s.shot, "y", off);
+    set(ring, "x", -112 + B.saved[0] * k - 3); set(ring, "y", off + B.saved[1] * k - 3); set(ring, "width", B.saved[2] * k + 6); set(ring, "height", B.saved[3] * k + 6);
+    op(ring, on(t, sv + .7, D > 0 ? mk + .4 : t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; })();
+
+// 4-second "think" countdown between the quiz question and the answer (shared by every episode).
+// It sits in the caption strip, which is empty during the silent pause, so it never covers the quiz.
+const QZ = TL.segs.find(s => s.id === "quiz1"), CD = el("g", {opacity: 0}, $("v"));
+el("rect", {x: -300, y: -46, width: 600, height: 92, rx: 46, fill: "#1b1b3a", stroke: "#fff", "stroke-width": 4, filter: "url(#sh)"}, CD);
+tx(CD, {x: -120, y: 17, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "⏸ Think!");
+el("circle", {cx: 190, cy: 0, r: 38, fill: "#f77f00", stroke: "#fff", "stroke-width": 4}, CD);
+const CDT = tx(CD, {x: 190, y: 19, "text-anchor": "middle", "font-size": 54, "font-weight": 700, fill: "#fff"}, "4");
+const CDB = el("rect", {x: -250, y: 30, width: 500, height: 8, rx: 4, fill: "#ffd166"}, CD);
+function drawCD(t) { if (!QZ) return; const t0 = QZ.t1 + .5, k = clamp((t - t0) / 4);
+  op(CD, on(t, t0, t0 + 4.15, .15)); tf(CD, "translate(960 1004)");
+  CDT.textContent = String(Math.max(1, 4 - Math.floor(k * 4))); set(CDB, "width", 500 * (1 - k));
+  if (S.quiz && S.quiz.ring) op(S.quiz.ring, 0); }
+
+const FILL = {"hook": "translate(765 525) scale(1.369) translate(-842 -448)", "leaf": "translate(765 525) scale(1.076) translate(-742 -462)", "quiz": "translate(765 525) scale(1.16) translate(-760 -440)", "diverse": "translate(765 525) scale(1.058) translate(-752 -524)", "ask": "translate(765 525) scale(1.299) translate(-764 -448)", "exam": "translate(765 525) scale(1.067) translate(-760 -450)", "habit": "translate(765 525) scale(1.292) translate(-804 -431)", "close": "translate(765 525) scale(1.323) translate(-756 -454)"}; for (const k in FILL) if (S[k]) S[k].stage.setAttribute("transform", FILL[k]);
+window.render = function (t) {
+  order.concat(["end"]).forEach((name, i) => {
+    const s = S[name]; const t0 = name === "end" ? TL.END - 4.0 : SC[name].t0 - (i ? .4 : 0);
+    const nxt = i + 1 < order.length ? SC[order[i + 1]].t0 - .4 : (name === "end" ? 1e9 : TL.END - 4.0);
+    const v = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2));
+    op(s.g, v); if (v <= 0) return;
+    tf(s.g, `translate(960 540) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(-960 -540)`);
+    moveBubbles(s.b, t); s.run(t);
+  });
+  drawConfetti(t); drawKW(t); drawCaps(t); drawCD(t); drawLC(t);
+  set($("prog"), "width", 1920 * clamp(t / TL.END));
+  { const tg = $("tag"); tg.querySelector("rect").setAttribute("width", tg.querySelector("text").getComputedTextLength() + 62); } op($("tag"), ramp(t, .2, .6) * (1 - ramp(t, TL.END - 4.2, TL.END - 3.8)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+function fitPill(g, pad) { const r = g.querySelector("rect"), t = g.querySelector("text"); if (!r || !t) return 0;
+  const need = t.getBBox().width + pad, w = +r.getAttribute("width");
+  if (need > w) { const cx = +r.getAttribute("x") + w / 2; set(r, "width", need); set(r, "x", cx - need / 2); } return Math.max(need, w); }
+function shrinkText(g, fs) { const r = g.querySelector("rect"), t = g.querySelector("text"); const w = +r.getAttribute("width") - fs * 1.1, bw = t.getBBox().width;
+  if (bw > w) set(t, "font-size", fs * w / bw); }
+document.fonts.ready.then(() => {
+  CHIPS.forEach(([g, fs, fixed]) => fixed ? shrinkText(g, fs) : fitPill(g, fs * 1.3));
+  KW.forEach(K => { fitPill(K.big, 70); K.sw = fitPill(K.small, 36); });
+  CAPS.forEach(({g}) => fitPill(g, 64));
+  window.READY = true; });
+</script>
+</body></html>

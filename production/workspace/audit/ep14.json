@@ -1,0 +1,37 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "① light FALLS ON the object",
+  "other": "line:",
+  "from": 61.05,
+  "to": 73.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌿 NATURAL SOURCES",
+  "other": "path:",
+  "from": 152.8,
+  "to": 165.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🏭 MAN-MADE SOURCES",
+  "other": "path:",
+  "from": 152.8,
+  "to": 165.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "💡 LIGHT",
+  "other": "path:",
+  "from": 152.8,
+  "to": 165.3
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "👁️ HOW WE SEE",
+  "other": "path:none",
+  "from": 155.55,
+  "to": 165.55
+ }
+]

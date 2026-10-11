@@ -1,0 +1,11 @@
+{
+ "hook": "translate(765 525) scale(1.499) translate(-746 -454)",
+ "setup": "translate(765 525) scale(1.21) translate(-756 -430)",
+ "rule1": "translate(765 525) scale(1.118) translate(-644 -416)",
+ "rule2": "translate(765 525) scale(1.109) translate(-810 -416)",
+ "move": "translate(765 525) scale(1.173) translate(-724 -431)",
+ "quiz": "translate(765 525) scale(1.393) translate(-674 -385)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.052) translate(-808 -510)",
+ "close": "translate(765 525) scale(1.111) translate(-788 -518)"
+}

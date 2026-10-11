@@ -1,0 +1,87 @@
+[
+ {
+  "id": "hook",
+  "scene": "hook",
+  "text": "Can you squeeze a rock into a smaller space? No. Can you squeeze water? Also no. But a gas? Yes! One simple squeeze test helps tell solids, liquids and gases apart."
+ },
+ {
+  "id": "welcome",
+  "scene": "welcome",
+  "text": "Hi there, and welcome to The One App, Explained! I'm so happy you're here. Today, you will learn three big ideas. First, what a solid is. Second, what a liquid is. And third, what a gas is, and which one can be squeezed. Let's get started!"
+ },
+ {
+  "id": "intro",
+  "scene": "intro",
+  "text": "Matter can be in three states. Solid, liquid or gas. Scientists sort them using two questions. Does it have a definite shape? And does it have a definite volume?"
+ },
+ {
+  "id": "solid",
+  "scene": "solid",
+  "text": "Solids first. A hammer keeps its shape, whether it is on a table or in a toolbox. It has a definite shape, and a definite volume. You cannot squeeze it into a full toolbox, because solids cannot be compressed."
+ },
+ {
+  "id": "liquid1",
+  "scene": "liquid",
+  "text": "Now liquids. Pour tea from a teapot into a jug. The tea takes the shape of whatever holds it. So a liquid has no definite shape."
+ },
+ {
+  "id": "liquid2",
+  "scene": "liquid",
+  "text": "But it does have a definite volume. Pour a full jug into a small cup, and it overflows, because a liquid has a definite volume. Pour it into a huge teapot, and it does not fill it up. And liquids cannot be compressed. That is why a water shooter works. Push the water, and it has to squirt out."
+ },
+ {
+  "id": "gas1",
+  "scene": "gas",
+  "text": "Finally, gases, like air. Pump air into a basketball, and it takes the ball's round shape. And you can keep pumping more air in, because gases can be compressed. A gas has no definite shape and no definite volume. It spreads out to fill all the space it is given."
+ },
+ {
+  "id": "gas2",
+  "scene": "syringe",
+  "text": "Try it with a syringe. Pull the plunger, and air fills the space. Cover the nozzle and push, and the air squeezes into a smaller space. Want to squeeze a solid, a liquid and a gas? You can try it in The One App. Open the School Lab, experiment three point two, and press, Let's test it now!"
+ },
+ {
+  "id": "uses",
+  "scene": "uses",
+  "text": "Squeezing gas is very useful. A scuba diver carries a tank of compressed air, so lots of air fits on their back. And helium is squeezed into tanks, ready to fill party balloons of any shape."
+ },
+ {
+  "id": "earth",
+  "scene": "earth",
+  "text": "Look at our planet. Solid rock, liquid oceans, and a layer of air. All three states of matter, in one place."
+ },
+ {
+  "id": "quiz1",
+  "scene": "quiz",
+  "text": "Pause and predict! Which one has a definite volume, but no definite shape? A marble, milk, or air?"
+ },
+ {
+  "id": "quiz2",
+  "scene": "quiz",
+  "text": "Milk! It is a liquid. A marble is a solid, with a definite shape and volume. Air is a gas, with neither."
+ },
+ {
+  "id": "exam",
+  "scene": "exam",
+  "text": "In your exam, say it like this. A solid has a definite shape and a definite volume. A liquid has no definite shape, but has a definite volume. A gas has no definite shape and no definite volume. Solids and liquids cannot be compressed, but gases can."
+ },
+ {
+  "id": "habit1",
+  "scene": "habit",
+  "text": "Here is a habit trick. Use a habit tracker. Draw a row of boxes, one for each day. Every time you revise, tick a box. Watching the chain of ticks grow makes you want to keep it going."
+ },
+ {
+  "id": "habit2",
+  "scene": "mindmap",
+  "text": "Now your mind map. States of matter in the middle, with three branches. Solid, liquid and gas. For each one, write whether it has a definite shape, a definite volume, and whether it can be compressed. Save it in TheOneApp, the ultimate science app. Tap Mind maps, then, Make my own mind map."
+ },
+ {
+  "id": "close",
+  "scene": "close",
+  "text": "So, which state passes the squeeze test? Only gas! Your turn. Find one solid, one liquid and one gas in your kitchen. Which one could you squeeze?"
+ },
+ {
+  "id": "bye",
+  "scene": "end",
+  "text": "Thanks for watching! See you next time. Bye!"
+ }
+]

@@ -1,0 +1,10 @@
+{
+ "hook": "translate(765 525) scale(1.369) translate(-842 -448)",
+ "leaf": "translate(765 525) scale(1.076) translate(-742 -462)",
+ "quiz": "translate(765 525) scale(1.16) translate(-760 -440)",
+ "diverse": "translate(765 525) scale(1.058) translate(-752 -524)",
+ "ask": "translate(765 525) scale(1.299) translate(-764 -448)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.292) translate(-804 -431)",
+ "close": "translate(765 525) scale(1.323) translate(-756 -454)"
+}

@@ -1,0 +1,469 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;width:1920px;height:1080px;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,Inter,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="confetti"></g>
+  <!-- overlays -->
+  <g id="tag" filter="url(#sh)">
+    <rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/>
+    <text x="70" y="73" font-size="27" font-weight="700" fill="#fff" letter-spacing="1">🌱 P4 SCIENCE · EP 2</text>
+  </g>
+  <g id="shelf"><text id="shelfHead" x="1515" y="58" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect x="0" y="1072" width="1920" height="8" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" x="0" y="1072" width="0" height="8" fill="url(#rainbow)"/>
+  <rect id="fade" width="1920" height="1080" fill="#000" opacity="1"/>
+</svg>
+<script>window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, extra = "") => tf(e, `translate(${x} ${y}) scale(${Math.max(0, pop(t, a))}) ${extra}`);
+let seed = 3; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const C = (seg, w) => { const v = TL.cues[seg] && TL.cues[seg][w]; if (v === undefined) throw new Error("cue " + seg + ":" + w); return v; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+
+/* ---------- reusable widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p);
+  const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  return g;
+}
+function bg(p, c1, c2) {
+  const id = "g" + Math.round(rnd() * 1e9);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: 1920, height: 1080, fill: `url(#${id})`}, p);
+  // floating bubbles for liveliness
+  const bubbles = [];
+  for (let i = 0; i < 14; i++) bubbles.push({x: rnd() * 1920, y: rnd() * 1080, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return bubbles;
+}
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % 1200 + 1200) % 1200 - 60); set(o.e, "r", o.r); }); }
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {}, g); return {g, b, stage, name}; }
+
+/* ---------- bike ---------- */
+function makeBike(p) {
+  const g = el("g", {}, p), K = {};
+  const B = [-230, 90], F = [230, 90], Cr = [-10, 100];
+  const wheel = c => { const w = el("g", {transform: `translate(${c[0]} ${c[1]})`}, g);
+    el("circle", {r: 130, fill: "none", stroke: "#2b2d42", "stroke-width": 20}, w); el("circle", {r: 112, fill: "none", stroke: "#adb5bd", "stroke-width": 6}, w);
+    const sp = el("g", {}, w); for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; el("line", {x1: 0, y1: 0, x2: Math.cos(a) * 110, y2: Math.sin(a) * 110, stroke: "#ced4da", "stroke-width": 3}, sp); }
+    el("circle", {r: 16, fill: "#ffbe0b", stroke: INK, "stroke-width": 4}, w); return sp; };
+  K.wheelB = wheel(B); K.wheelF = wheel(F);
+  K.chain = el("path", {d: `M${B[0]} ${B[1] - 18} L${Cr[0]} ${Cr[1] - 30} A30 30 0 0 1 ${Cr[0]} ${Cr[1] + 30} L${B[0]} ${B[1] + 18} A18 18 0 0 1 ${B[0]} ${B[1] - 18} Z`, fill: "none", stroke: "#6c757d", "stroke-width": 8, "stroke-dasharray": "10 6"}, g);
+  const fr = el("g", {stroke: "#ff4d6d", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, g);
+  el("path", {d: `M${B[0]} ${B[1]} L${Cr[0]} ${Cr[1]} L-60 -80 Z M-60 -80 L170 -90 L${Cr[0]} ${Cr[1]} M170 -90 L${F[0]} ${F[1]}`}, fr);
+  el("path", {d: "M170 -90 L190 -150", stroke: "#ff4d6d", "stroke-width": 14, "stroke-linecap": "round"}, g);
+  K.handle = el("path", {d: "M150 -150 L240 -162", stroke: INK, "stroke-width": 12, "stroke-linecap": "round"}, g);
+  el("circle", {cx: 240, cy: -162, r: 11, fill: "#ffbe0b", stroke: INK, "stroke-width": 3}, g);
+  K.brake = el("path", {d: "M215 -150 L250 -128 M218 -40 L242 -40", stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, g);
+  K.bell = el("circle", {cx: 200, cy: -172, r: 14, fill: "#ffd60a", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M-60 -80 L-70 -100", stroke: "#3a0ca3", "stroke-width": 10}, g);
+  K.seat = el("path", {d: "M-125 -108 Q-70 -126 -20 -106 Q-70 -96 -125 -108 Z", fill: "#3a0ca3", stroke: INK, "stroke-width": 4}, g);
+  const crank = el("g", {transform: `translate(${Cr[0]} ${Cr[1]})`}, g);
+  el("circle", {r: 30, fill: "#ced4da", stroke: INK, "stroke-width": 4}, crank);
+  K.crank = el("g", {}, crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: 58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  el("line", {x1: 0, y1: 0, x2: 0, y2: -58, stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, K.crank);
+  K.pedalA = el("rect", {x: -22, y: 52, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.pedalB = el("rect", {x: -22, y: -66, width: 44, height: 14, rx: 5, fill: "#06d6a0", stroke: INK, "stroke-width": 3}, K.crank);
+  K.anchor = {Pedals: [-10, 160], Chain: [-130, 98], Wheels: [-230, 90], Seat: [-72, -112], Handlebars: [195, -156], Brakes: [233, -40], Bell: [200, -172]};
+  K.g = g; K.F = F; K.B = B;
+  K.animate = (crankDeg, wheelDeg, chainOff) => { tf(K.crank, `rotate(${crankDeg})`); tf(K.wheelB, `rotate(${wheelDeg})`); tf(K.wheelF, `rotate(${wheelDeg})`); set(K.chain, "stroke-dashoffset", chainOff); };
+  return K;
+}
+
+/* =================== SCENES (Episode 2: plant system) =================== */
+const S = {};
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const camAt = (keys, t) => { let c = {...keys[0]}; for (let i = 1; i < keys.length; i++) { const k = keys[i]; if (t < k.t) break; const q = ease((t - k.t) / (k.d || .7)); ["x", "y", "s"].forEach(f => c[f] = lerp(c[f], k[f], q)); } return c; };
+function leafPath(len, w) { return `M0 0 Q${len * .35} ${-w} ${len} 0 Q${len * .35} ${w} 0 0 Z`; }
+function drawPlant(p, opts = {}) {
+  const K = {}; const g = el("g", {}, p); K.g = g;
+  const qb = (a, c, b, u) => [(1 - u) * (1 - u) * a[0] + 2 * u * (1 - u) * c[0] + u * u * b[0], (1 - u) * (1 - u) * a[1] + 2 * u * (1 - u) * c[1] + u * u * b[1]];
+  const qd = (a, c, b) => `M${a[0]} ${a[1]} Q${c[0]} ${c[1]} ${b[0]} ${b[1]}`;
+  // ---- roots: three main roots, every side root grows out of one of them
+  const O = [760, 596], mains = [[[728, 700], [612, 858]], [[770, 745], [758, 892]], [[798, 700], [948, 848]]];
+  const side = [[0, .38, [-70, -20], [-20, 10]], [0, .68, [-60, 30], [-30, 40]], [1, .45, [-55, 25], [-20, 30]], [1, .62, [60, 20], [30, 30]], [2, .38, [75, -18], [20, 10]], [2, .68, [-20, 60], [-14, 30]]];
+  const rootD = [], fine = [], tips = mains.map(m => m[1]);
+  mains.forEach(([c, e]) => rootD.push(qd(O, c, e)));
+  side.forEach(([mi, u, d, cOff]) => { const [c, e] = mains[mi], s0 = qb(O, c, e, u), e2 = [s0[0] + d[0], s0[1] + d[1]];
+    fine.push(qd(s0, [s0[0] + d[0] * .5 + cOff[0], s0[1] + d[1] * .5 + cOff[1]], e2)); tips.push(e2); });
+  const hairs = []; [...mains.map(([c, e]) => [O, c, e])].forEach(([a, c, e]) => [.8, .9].forEach(u => { const q = qb(a, c, e, u); hairs.push(`M${q[0]} ${q[1]} l${(q[0] < 760 ? -1 : 1) * 16} 10 M${q[0]} ${q[1]} l${(q[0] < 760 ? 1 : -1) * 12} 14`); }));
+  K.tips = tips;
+  K.rootsGlow = el("path", {d: rootD.concat(fine).join(" "), stroke: "#ffe14d", "stroke-width": 40, fill: "none", "stroke-linecap": "round", opacity: 0}, g);
+  el("path", {d: rootD.join(" "), stroke: INK, "stroke-width": 24, fill: "none", "stroke-linecap": "round"}, g);
+  el("path", {d: fine.join(" "), stroke: INK, "stroke-width": 15, fill: "none", "stroke-linecap": "round"}, g);
+  K.roots = el("path", {d: rootD.join(" "), stroke: "#fbe7c6", "stroke-width": 16, fill: "none", "stroke-linecap": "round"}, g);
+  el("path", {d: fine.join(" "), stroke: "#fbe7c6", "stroke-width": 8, fill: "none", "stroke-linecap": "round"}, g);
+  // ---- stem: one tapered piece that flows into the roots
+  K.top = el("g", {}, g);
+  const S0 = [760, 610], SC_ = [750, 400], S1 = [760, 180];
+  const sAt = u => qb(S0, SC_, S1, u), half = u => lerp(17, 7, u);
+  K.sx = y => { let u = clamp((610 - y) / 430); return sAt(u)[0]; };
+  const L = [], R = []; for (let i = 0; i <= 20; i++) { const u = i / 20, q = sAt(u); L.push(`${(q[0] - half(u)).toFixed(1)} ${q[1].toFixed(1)}`); R.unshift(`${(q[0] + half(u)).toFixed(1)} ${q[1].toFixed(1)}`); }
+  const stemD = `M${L.join(" L")} Q760 166 ${R.join(" L")} Z`;
+  K.stemGlow = el("path", {d: qd(S0, SC_, S1), stroke: "#ffe14d", "stroke-width": 56, fill: "none", "stroke-linecap": "round", opacity: 0}, K.top);
+  // ---- leaves on short stalks, in matching pairs angled upward, plus a bud on top
+  K.leaves = []; K.leafGlow = [];
+  const leafAt = (u, sd, len, w, ang) => { const q = sAt(u), x = q[0] + sd * (half(u) - 3), y = q[1];
+    const lg = el("g", {transform: `translate(${x} ${y}) rotate(${sd < 0 ? 180 + ang : -ang})`}, K.top);
+    el("path", {d: "M0 0 Q18 -5 34 0", stroke: INK, "stroke-width": 14, fill: "none", "stroke-linecap": "round"}, lg);
+    el("path", {d: "M0 0 Q18 -5 34 0", stroke: "#52b788", "stroke-width": 8, fill: "none", "stroke-linecap": "round"}, lg);
+    const lf = el("g", {transform: "translate(30 0)"}, lg);
+    const glow = el("path", {d: leafPath(len, w + 10), fill: "#ffe14d", opacity: 0, transform: "scale(1.08)"}, lf);
+    el("path", {d: leafPath(len, w), fill: "#2dc653", stroke: INK, "stroke-width": 5}, lf);
+    el("path", {d: `M0 0 L${len - 12} 0`, stroke: "#b7efc5", "stroke-width": 4}, lf);
+    for (let i = 1; i < 4; i++) el("path", {d: `M${len * i / 4} 0 L${len * i / 4 + 24} ${-w * .42} M${len * i / 4} 0 L${len * i / 4 + 24} ${w * .42}`, stroke: "#b7efc5", "stroke-width": 3}, lf);
+    K.leaves.push(lg); K.leafGlow.push(glow); return {x, y}; };
+  [[.32, 200, 66, 22], [.55, 180, 60, 32], [.76, 150, 52, 42], [.92, 108, 40, 55]].forEach(([u, len, w, ang]) => { leafAt(u, -1, len, w, ang); leafAt(u, 1, len, w, ang); });
+  el("path", {d: stemD, fill: "#52b788", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, K.top);
+  el("path", {d: qd([766, 600], [757, 400], [762, 200]), stroke: "#95d5b2", "stroke-width": 5, fill: "none", "stroke-linecap": "round", opacity: .8}, K.top);
+  const bud = el("g", {transform: `translate(${sAt(1)[0]} 178) rotate(-90)`}, K.top);
+  const bg_ = el("path", {d: leafPath(64, 26 + 10), fill: "#ffe14d", opacity: 0, transform: "scale(1.08)"}, bud);
+  el("path", {d: leafPath(64, 26), fill: "#2dc653", stroke: INK, "stroke-width": 5}, bud); K.leaves.push(bud); K.leafGlow.push(bg_);
+  // point on the 2nd right leaf where made food starts its trip down
+  const q = sAt(.55), a = 32 * Math.PI / 180; K.foodFrom = [q[0] + 14 + 120 * Math.cos(a), q[1] - 120 * Math.sin(a)];
+  return K;
+}
+
+// ---- HOOK
+S.hook = (() => { const s = scene("hook", "#80ed99", "#2a9d8f");
+  s.plate = el("g", {}, s.stage); el("circle", {r: 300, fill: "#fff", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.plate); el("circle", {r: 230, fill: "none", stroke: "#e9ecef", "stroke-width": 10}, s.plate);
+  s.food = [["🥬", -120, -60], ["🥕", 120, -40]].map(([e, x, y]) => ({e: emo(s.plate, x, y, 150, e), x, y}));
+  const cel = el("g", {transform: "translate(0 120) rotate(-70)"}, s.plate); for (let i = 0; i < 3; i++) el("rect", {x: -90, y: -40 + i * 26, width: 180, height: 26, rx: 12, fill: "#95d5b2", stroke: INK, "stroke-width": 4}, cel); s.food.push({e: cel, x: 0, y: 120});
+  s.q = [0, 1, 2].map(i => tx(s.stage, {"font-size": 110, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10, "text-anchor": "middle"}, "?"));
+  s.three = el("g", {}, s.stage); el("circle", {r: 90, fill: "#ffbe0b", stroke: INK, "stroke-width": 7}, s.three); tx(s.three, {x: 0, y: 44, "text-anchor": "middle", "font-size": 124, "font-weight": 700, fill: INK}, "3");
+  s.marks = el("g", {}, s.stage); el("rect", {x: -260, y: -50, width: 520, height: 100, rx: 50, fill: "#e63946", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, s.marks); tx(s.marks, {x: 0, y: 18, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "✗ −2 marks");
+  s.run = t => { const a = w => C("hook", w);
+    op(s.plate, 1); tf(s.plate, `translate(760 470) scale(${pop(t, .3)}) rotate(${Math.sin(t) * 2})`);
+    s.food.forEach((f, i) => op(f.e, ramp(t, .5 + i * .2, .7 + i * .2)));
+    popAt(s.three, 1180, 230, t, a("three")); op(s.three, on(t, a("three"), a("let's"), .2));
+    op(s.marks, on(t, a("lose"), a("which") + .2, .2)); popAt(s.marks, 760, 820 - 120, t, a("lose"));
+    s.q.forEach((q, i) => { set(q, "x", 420 + i * 340); set(q, "y", 200 + Math.sin(t * 6 + i) * 18); op(q, on(t, a("which"), SC.hook.t1 + .3, .2)); }); }; return s; })();
+
+// ---- PLANT (turn, leaves, stem, roots) with camera
+S.plant = (() => { const s = scene("plant", "#a2d2ff", "#cdb4db");
+  s.world = el("g", {}, s.stage);
+  s.sun = emo(s.world, 260, 120, 150, "☀️");
+  s.rays = el("g", {opacity: 0}, s.world); for (let i = 0; i < 6; i++) el("line", {x1: 320, y1: 170, x2: 640 + i * 40, y2: 230 + i * 50, stroke: "#ffd60a", "stroke-width": 9, "stroke-dasharray": "20 14", "stroke-linecap": "round"}, s.rays);
+  el("rect", {x: -1400, y: 600, width: 4400, height: 1400, fill: "#9c6644"}, s.world); el("rect", {x: -1400, y: 588, width: 4400, height: 24, fill: "#57cc99"}, s.world);
+  seed = 9; for (let i = 0; i < 40; i++) el("ellipse", {cx: -300 + rnd() * 2200, cy: 640 + rnd() * 500, rx: 8 + rnd() * 16, ry: 6 + rnd() * 10, fill: "#7f5539", opacity: .7}, s.world);
+  s.P = drawPlant(s.world);
+  s.sparks = []; for (let i = 0; i < 14; i++) s.sparks.push({x: 560 + rnd() * 400, y: 170 + rnd() * 320, ph: rnd() * 6, e: emo(s.world, 0, 0, 30, "✨")});
+  s.up = []; for (let i = 0; i < 9; i++) s.up.push({ph: i / 9, e: el("circle", {r: 9, fill: "#4cc9f0", stroke: INK, "stroke-width": 3}, s.world)});
+  s.down = []; for (let i = 0; i < 7; i++) s.down.push({ph: i / 7, e: el("circle", {r: 8, fill: "#ffb703", stroke: INK, "stroke-width": 3}, s.world)});
+  s.soilIn = []; for (let i = 0; i < 16; i++) s.soilIn.push({tipI: i, ph: rnd(), tip: null, mineral: i % 3 === 0, e: i % 3 === 0 ? el("rect", {width: 14, height: 14, fill: "#c77dff", stroke: INK, "stroke-width": 2, transform: "rotate(45)"}, s.world) : el("circle", {r: 8, fill: "#4cc9f0", stroke: INK, "stroke-width": 2}, s.world)});
+  s.wind = el("g", {opacity: 0}, s.world); for (let i = 0; i < 5; i++) el("path", {d: `M${200 + (i % 2) * 60} ${220 + i * 70} q 120 -30 240 0 q 60 15 100 -10`, stroke: "#fff", "stroke-width": 9, fill: "none", "stroke-linecap": "round"}, s.wind);
+  // job cards (screen space)
+  const card = (title, col, lines) => { const g = el("g", {}, s.stage); el("rect", {x: 0, y: 0, width: 560, height: 70 + lines.length * 52, rx: 26, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
+    el("rect", {x: 0, y: 0, width: 560, height: 64, rx: 26, fill: col}, g); el("rect", {x: 0, y: 38, width: 560, height: 26, fill: col}, g);
+    tx(g, {x: 280, y: 45, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff"}, title);
+    const ls = lines.map((L, i) => tx(g, {x: 26, y: 112 + i * 52, "font-size": 33, "font-weight": 600, fill: INK, opacity: 0}, L)); return {g, ls}; };
+  s.cLeaf = card("🍃 LEAVES", "#2dc653", ["① make food", "② take in & give out gases"]);
+  s.cStem = card("🌿 STEM", "#a0522d", ["① holds plant upright", "② transports water, mineral", "    salts and food"]);
+  s.cRoot = card("🥕 ROOTS", "#6f4518", ["① hold plant firmly in ground", "② absorb water + mineral salts"]);
+  s.factory = chip(s.stage, "🏭 FOOD FACTORY", "#2dc653", {fs: 40});
+  // magnifier (screen space)
+  s.mag = el("g", {}, s.stage); const cpId = "magc"; const cp = el("clipPath", {id: cpId}, $("v").querySelector("defs")); el("circle", {r: 220}, cp);
+  const inner = el("g", {"clip-path": `url(#${cpId})`}, s.mag); el("rect", {x: -230, y: -230, width: 460, height: 460, fill: "#74c69d"}, inner);
+  for (let i = 0; i < 30; i++) el("ellipse", {cx: -200 + (i % 6) * 80 + (Math.floor(i / 6) % 2) * 40, cy: -200 + Math.floor(i / 6) * 90, rx: 38, ry: 30, fill: "#95d5b2", stroke: "#52b788", "stroke-width": 3}, inner);
+  s.stoma = [[-90, -60], [90, 20], [-30, 120]].map(([x, y]) => { const sg = el("g", {transform: `translate(${x} ${y})`}, inner);
+    el("path", {d: "M0 -34 Q-30 -30 -26 0 Q-30 30 0 34 Q-12 0 0 -34 Z", fill: "#2d6a4f", stroke: INK, "stroke-width": 3}, sg);
+    el("path", {d: "M0 -34 Q30 -30 26 0 Q30 30 0 34 Q12 0 0 -34 Z", fill: "#2d6a4f", stroke: INK, "stroke-width": 3}, sg);
+    el("ellipse", {rx: 7, ry: 26, fill: "#081c15"}, sg); return sg; });
+  s.gasIn = []; s.gasOut = []; for (let i = 0; i < 6; i++) { s.gasIn.push(el("circle", {r: 12, fill: "#bde0fe", stroke: INK, "stroke-width": 2}, inner)); s.gasOut.push(el("circle", {r: 12, fill: "#fff", stroke: INK, "stroke-width": 2}, inner)); }
+  el("circle", {r: 220, fill: "none", stroke: INK, "stroke-width": 14}, s.mag); el("path", {d: "M150 160 L250 270", stroke: INK, "stroke-width": 30, "stroke-linecap": "round"}, s.mag);
+  s.gasLbl = [chip(s.stage, "gases IN ↘", "#3a86ff", {fs: 30}), chip(s.stage, "gases OUT ↗", "#6c757d", {fs: 30})];
+  s.run = t => { const T = w => C("turn", w), L1 = w => C("leaves1", w), L2 = w => C("leaves2", w), St = w => C("stem1", w), R = w => C("roots1", w);
+    const K = [{t: 0, x: 760, y: 520, s: .92}, {t: L1("start") - .4, x: 760, y: 330, s: 1.45}, {t: L2("tiny"), x: 860, y: 380, s: 2.2}, {t: L2("so") , x: 760, y: 330, s: 1.45}, {t: St("next") - .2, x: 700, y: 420, s: 1.05}, {t: R("now") - .2, x: 760, y: 740, s: 1.35}];
+    const c = camAt(K, t); tf(s.world, `translate(960 520) scale(${c.s}) translate(${-c.x} ${-c.y})`);
+    const P = s.P;
+    P.leafGlow.forEach(g => op(g, .8 * Math.max(on(t, T("leaves"), T("stem"), .15), on(t, L1("food"), L1("light"), .2))));
+    op(P.stemGlow, .8 * Math.max(on(t, T("stem"), T("roots"), .15), on(t, St("stem"), St("transport"), .2)));
+    op(P.rootsGlow, .8 * Math.max(on(t, T("roots"), T("each") , .15), on(t, R("roots"), R("firmly"), .2)));
+    // upright: droop then straighten
+    const droop = (1 - ramp(t, St("upright") - .2, St("upright") + .6)) * on(t, St("next") - .3, St("upright") + 1, .3);
+    tf(P.top, `rotate(${droop * 16 + Math.sin(t * 1.5) * 1.2 + 6 * on(t, R("wind"), R("rain") + 1.2, .3) * Math.sin(t * 9)} 760 600)`);
+    op(s.wind, on(t, R("wind"), R("over") + .6, .2)); tf(s.wind, `translate(${((t * 300) % 500) - 250} 0)`);
+    op(s.rays, on(t, L1("light"), L2("tiny"), .3)); s.rays.querySelectorAll("line").forEach(l => set(l, "stroke-dashoffset", -t * 70));
+    s.sparks.forEach(sp => { set(sp.e, "x", sp.x); set(sp.e, "y", sp.y + Math.sin(t * 3 + sp.ph) * 8); op(sp.e, on(t, L1("own"), L2("tiny"), .2) * (.5 + .5 * Math.sin(t * 5 + sp.ph))); });
+    op(s.factory, on(t, L1("factory"), L1("most") + 2, .2)); popAt(s.factory, 1150, 200, t, L1("factory"));
+    // magnifier
+    const mg = on(t, L2("tiny"), L2("so"), .3); op(s.mag, mg); tf(s.mag, `translate(1150 430) scale(${pop(t, L2("tiny"))})`);
+    const gasOn = ramp(t, L2("gases"), L2("gases") + .3);
+    s.gasIn.forEach((e, i) => { const k = ((t * .6 + i / 6) % 1); const st = s.stoma[i % 3].getAttribute("transform").match(/-?\d+/g).map(Number);
+      set(e, "cx", st[0] - 140 + 140 * k); set(e, "cy", st[1] - 100 + 100 * k); op(e, gasOn * Math.sin(k * Math.PI)); });
+    s.gasOut.forEach((e, i) => { const k = ((t * .6 + i / 6 + .5) % 1); const st = s.stoma[(i + 1) % 3].getAttribute("transform").match(/-?\d+/g).map(Number);
+      set(e, "cx", st[0] + 140 * k); set(e, "cy", st[1] - 100 * k); op(e, gasOn * Math.sin(k * Math.PI)); });
+    s.gasLbl.forEach((g, i) => { op(g, gasOn * mg); popAt(g, 1150 + (i ? 150 : -150), i ? 170 : 700, t, L2("gases")); });
+    // stem transport
+    const upOn = on(t, St("water"), R("now") - .2, .3), dnOn = on(t, St("food"), R("now") - .2, .3);
+    s.up.forEach(d => { const k = ((t * .45 + d.ph) % 1); const yy = lerp(600, 200, k); set(d.e, "cx", P.sx(yy) + Math.sin(k * 12) * 3); set(d.e, "cy", yy); op(d.e, upOn); });
+    s.down.forEach(d => { const k = ((t * .4 + d.ph) % 1); const yy = lerp(P.foodFrom[1], 580, k); set(d.e, "cx", lerp(P.foodFrom[0], P.sx(yy) + 6, Math.min(1, k * 3))); set(d.e, "cy", yy); op(d.e, dnOn); });
+    // roots absorb
+    const ab = on(t, R("absorb"), SC.plant.t1 + .5, .3);
+    s.soilIn.forEach(d => { d.tip = P.tips[d.tipI % P.tips.length]; const k = ((t * .5 + d.ph) % 1); const x = d.tip[0] + (1 - k) * (d.mineral ? -60 : 60), y = d.tip[1] + (1 - k) * 70;
+      if (d.mineral) set(d.e, "transform", `translate(${x} ${y}) rotate(45)`); else { set(d.e, "cx", x); set(d.e, "cy", y); } op(d.e, ab * Math.min(1, (1 - k) * 3)); });
+    // job cards
+    const cards = [[s.cLeaf, L1("start"), St("next") - .3, [L1("food"), L2("gases#2")]], [s.cStem, St("stem"), R("now") - .3, [St("upright"), St("transport"), St("transport") + .01]], [s.cRoot, R("roots"), SC.plant.t1 + .6, [R("firmly"), R("absorb")]]];
+    cards.forEach(([cd, a, b, ks]) => { op(cd.g, on(t, a, b, .25)); tf(cd.g, `translate(${70 - (1 - pop(t, a)) * 300} 120)`); cd.ls.forEach((l, i) => op(l, ramp(t, ks[i], ks[i] + .25))); });
+  }; return s; })();
+
+// ---- TRAP
+S.trap = (() => { const s = scene("trap", "#ff595e", "#ff924c");
+  s.title = tx(s.stage, {x: 760, y: 200, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⚠ EXAM TRAP!");
+  s.roots = el("path", {d: "M760 520 Q700 600 620 680 M760 520 Q760 620 750 720 M760 520 Q830 600 900 670", stroke: "#6f4518", "stroke-width": 18, fill: "none", "stroke-linecap": "round"}, s.stage);
+  el("rect", {x: 700, y: 430, width: 120, height: 100, rx: 20, fill: "#52b788", stroke: INK, "stroke-width": 6}, s.stage);
+  s.burger = emo(s.stage, 0, 0, 120, "🍔");
+  s.x = tx(s.stage, {x: 0, y: 0, "text-anchor": "middle", "font-size": 200, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "✗");
+  s.no = chip(s.stage, "Roots do NOT take in food", "#1b1b3a", {fs: 40});
+  s.leaf = chip(s.stage, "🍃 Food is made in the LEAVES", "#2dc653", {fs: 38});
+  s.yes = chip(s.stage, "✓ Roots absorb water + mineral salts", "#3a86ff", {fs: 38});
+  s.run = t => { const a = w => C("roots2", w);
+    op(s.title, 1); tf(s.title, `translate(760 200) scale(${pop(t, SC.trap.t0) * (1 + .04 * Math.sin(t * 8))}) translate(-760 -200)`);
+    const fall = ramp(t, a("do"), a("do") + .6), bounce = ramp(t, a("do") + .6, a("do") + 1.4);
+    set(s.burger, "x", lerp(760, 1150, bounce)); set(s.burger, "y", lerp(300, 560, fall) - Math.sin(bounce * Math.PI) * 220); op(s.burger, on(t, a("roots"), a("plant") , .2));
+    set(s.x, "x", 760); set(s.x, "y", 640); op(s.x, on(t, a("not"), a("plant"), .15));
+    op(s.no, ramp(t, a("food"), a("food") + .2)); popAt(s.no, 760, 330, t, a("food"));
+    op(s.leaf, ramp(t, a("leaves"), a("leaves") + .2)); popAt(s.leaf, 1180, 520, t, a("leaves"));
+    op(s.yes, ramp(t, a("only"), a("only") + .2)); popAt(s.yes, 760, 760, t, a("only")); }; return s; })();
+
+// ---- TRY IT
+S.tryit = (() => { const s = scene("tryit", "#90e0ef", "#caf0f8");
+  el("rect", {x: 0, y: 690, width: 1920, height: 400, fill: "#ddb892"}, s.stage);
+  s.badge = chip(s.stage, "🧑‍🏫 Ask an adult to help!", "#ef476f", {fs: 36});
+  const gl = el("g", {transform: "translate(760 0)"}, s.stage);
+  s.water = el("rect", {x: -110, y: 520, width: 220, height: 170, fill: "#bde0fe", opacity: .9}, gl);
+  s.celery = el("g", {}, gl);
+  s.stalk = el("rect", {x: -26, y: 180, width: 52, height: 490, rx: 22, fill: "#95d5b2", stroke: INK, "stroke-width": 5}, s.celery);
+  s.dye = el("rect", {x: -18, y: 660, width: 36, height: 0, rx: 14, fill: "#e63946", opacity: .8}, s.celery);
+  for (let i = 0; i < 3; i++) el("line", {x1: -10 + i * 10, y1: 200, x2: -10 + i * 10, y2: 660, stroke: "#74c69d", "stroke-width": 3}, s.celery);
+  s.cLeaves = [[-60, 150, -30], [0, 120, 0], [60, 150, 30]].map(([x, y, r]) => el("path", {d: leafPath(110, 45), transform: `translate(${x} ${y + 40}) rotate(${r - 90})`, fill: "#52b788", stroke: INK, "stroke-width": 4}, s.celery));
+  el("path", {d: "M-130 400 L-110 700 L110 700 L130 400", fill: "none", stroke: INK, "stroke-width": 7, opacity: .8}, gl);
+  el("path", {d: "M-125 410 L-108 690", stroke: "#fff", "stroke-width": 8, opacity: .6}, gl);
+  s.drop = emo(s.stage, 0, 0, 70, "💧");
+  s.clock = emo(s.stage, 1200, 300, 130, "🕐"); s.day = tx(s.stage, {x: 1200, y: 440, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "1 day later…");
+  s.arrow = el("path", {d: "M900 640 L900 260", stroke: "#e63946", "stroke-width": 12, "stroke-linecap": "round", "marker-end": ""}, s.stage); s.arrowHead = el("path", {d: "M876 290 L900 240 L924 290 Z", fill: "#e63946"}, s.stage);
+  s.lbl = chip(s.stage, "colour travels UP the stem ⬆", "#e63946", {fs: 32});
+  s.run = t => { const a = w => C("tryit", w);
+    op(s.badge, ramp(t, a("adult"), a("adult") + .2)); popAt(s.badge, 1160, 160, t, a("adult"));
+    const dr = ramp(t, a("colouring") - .4, a("colouring") + .3); op(s.drop, on(t, a("drops") - .2, a("colouring") + .5, .15)); set(s.drop, "x", 790); set(s.drop, "y", lerp(330, 520, dr));
+    set(s.water, "fill", t > a("colouring") ? mix("#bde0fe", "#ff8fa3", ramp(t, a("colouring"), a("colouring") + .8)) : "#bde0fe");
+    op(s.clock, on(t, a("wait"), a("colour") + .5, .2)); tf(s.clock, `rotate(${t * 360} 1200 300)`); op(s.day, on(t, a("day"), a("colour") + .5, .2));
+    const rise = ramp(t, a("travels"), a("leaves") + .3); set(s.dye, "y", 660 - 470 * rise); set(s.dye, "height", 470 * rise);
+    s.cLeaves.forEach(l => set(l, "fill", mix("#52b788", "#ef6f8a", ramp(t, a("leaves"), a("leaves") + .6))));
+    op(s.arrow, on(t, a("travels"), SC.tryit.t1 + .5, .2)); op(s.arrowHead, on(t, a("travels"), SC.tryit.t1 + .5, .2));
+    op(s.lbl, ramp(t, a("stem"), a("stem") + .2)); popAt(s.lbl, 1240, 560, t, a("stem")); }; return s; })();
+
+// ---- QUIZ
+S.quiz = (() => { const s = scene("quiz", "#b5179e", "#560bad");
+  const pot = (x, label, leaves) => { const g = el("g", {transform: `translate(${x} 0)`}, s.stage);
+    const stem = el("rect", {x: -10, y: 300, width: 20, height: 330, rx: 9, fill: "#52b788", stroke: INK, "stroke-width": 4}, g);
+    const top = el("g", {}, g); const lv = [];
+    for (let i = 0; i < 6; i++) { const y = 360 + i * 45, side = i % 2 ? 1 : -1; lv.push(el("path", {d: leafPath(110, 38), transform: `translate(${side * 6} ${y}) rotate(${side < 0 ? 200 : -20})`, fill: "#2dc653", stroke: INK, "stroke-width": 4}, top)); }
+    el("path", {d: "M-110 620 L110 620 L85 760 L-85 760 Z", fill: "#e76f51", stroke: INK, "stroke-width": 6}, g);
+    tx(g, {x: 0, y: 715, "text-anchor": "middle", "font-size": 64, "font-weight": 700, fill: "#fff"}, label);
+    return {g, stem, top, lv}; };
+  s.A = pot(480, "A"); s.B = pot(1040, "B");
+  s.pause = tx(s.stage, {x: 760, y: 180, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "⏸ PAUSE & PREDICT!");
+  s.cal = el("g", {}, s.stage); el("rect", {x: -90, y: -90, width: 180, height: 180, rx: 20, fill: "#fff", stroke: INK, "stroke-width": 6}, s.cal); el("rect", {x: -90, y: -90, width: 180, height: 50, rx: 20, fill: "#e63946"}, s.cal);
+  s.calT = tx(s.cal, {x: 0, y: 50, "text-anchor": "middle", "font-size": 56, "font-weight": 700, fill: INK}, "wk 0");
+  s.crown = emo(s.stage, 0, 0, 100, "👑");
+  s.less = chip(s.stage, "fewer leaves → less food → grows less", "#ffbe0b", {fs: 28, ink: INK});
+  s.run = t => { const a = w => C("quiz1", w), b = w => C("quiz2", w);
+    op(s.pause, on(t, a("pause"), a("two#2") , .2)); tf(s.pause, `translate(760 180) scale(${pop(t, a("pause"))}) translate(-760 -180)`);
+    const rem = ramp(t, a("remove"), a("remove") + .8);
+    s.B.lv.forEach((l, i) => { if (i < 4) set(l, "transform", `translate(${(i % 2 ? 1 : -1) * (6 + rem * 200)} ${360 + i * 45 - rem * 150}) rotate(${(i % 2 ? -20 : 200) + rem * 90})`); op(l, 1 - rem); });
+    op(s.cal, on(t, a("weeks"), b("plant") + .5, .2)); popAt(s.cal, 760, 420, t, a("weeks"));
+    const g = ramp(t, a("weeks") + .3, b("taller") + .3); s.calT.textContent = g > .5 ? "wk 2" : "wk 0";
+    const hA = 1 + .35 * ramp(t, b("plant"), b("taller") + .5), hB = 1 + .1 * ramp(t, b("plant"), b("taller") + .5);
+    [[s.A, hA], [s.B, hB]].forEach(([P, h]) => { set(P.stem, "y", 630 - 330 * h); set(P.stem, "height", 330 * h); tf(P.top, `translate(0 ${-330 * (h - 1)})`); });
+    op(s.crown, ramp(t, b("taller"), b("taller") + .2)); set(s.crown, "x", 480); set(s.crown, "y", 630 - 330 * hA - 60);
+    op(s.less, ramp(t, b("fewer"), b("fewer") + .2)); popAt(s.less, 1110, 140, t, b("fewer")); }; return s; })();
+
+// ---- DINNER
+S.dinner = (() => { const s = scene("dinner", "#ffd166", "#f4a261");
+  s.plate = el("g", {transform: "translate(760 470)"}, s.stage); el("ellipse", {rx: 520, ry: 300, fill: "#fff", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.plate);
+  s.greens = el("g", {}, s.plate); for (let i = 0; i < 6; i++) el("path", {d: leafPath(150, 60), transform: `translate(-300 ${-60 + i * 18}) rotate(${-60 + i * 22})`, fill: i % 2 ? "#2d6a4f" : "#40916c", stroke: INK, "stroke-width": 4}, s.greens);
+  s.roots = el("g", {}, s.plate); emo(s.roots, 20, -40, 140, "🥕"); emo(s.roots, 60, 110, 130, "🍠");
+  s.cel = el("g", {transform: "translate(300 0) rotate(20)"}, s.plate); for (let i = 0; i < 3; i++) el("rect", {x: -22 + i * 28, y: -170, width: 30, height: 330, rx: 14, fill: "#95d5b2", stroke: INK, "stroke-width": 4}, s.cel);
+  s.lab = [["LEAVES 🍃", "#2d6a4f", 460, 160, "leaves"], ["ROOTS 🥕", "#e76f51", 800, 140, "root"], ["STEM 🌿", "#52b788", 1130, 180, "stem"]].map(([n, col, x, y, w]) => ({c: chip(s.stage, n, col, {fs: 40}), x, y, w}));
+  s.sg = chip(s.stage, "🇸🇬 kai lan · nai bai", "#ef233c", {fs: 32}); s.us = chip(s.stage, "🇺🇸 lettuce", "#3a86ff", {fs: 32});
+  s.store = chip(s.stage, "stores food", "#fff", {fs: 28, ink: INK});
+  s.run = t => { const a = w => C("dinner", w);
+    s.lab.forEach(L => { op(L.c, ramp(t, a(L.w), a(L.w) + .2)); popAt(L.c, L.x, L.y, t, a(L.w)); });
+    op(s.sg, ramp(t, a("kai"), a("kai") + .2)); popAt(s.sg, 380, 790 - 70, t, a("kai"));
+    op(s.us, ramp(t, a("lettuce"), a("lettuce") + .2)); popAt(s.us, 640, 790 - 70, t, a("lettuce"));
+    op(s.store, ramp(t, a("stores"), a("stores") + .2)); popAt(s.store, 830, 230, t, a("stores"));
+    tf(s.greens, `scale(${1 + .08 * on(t, a("leaves") , a("carrot"), .2)})`); tf(s.roots, `scale(${1 + .08 * on(t, a("carrot"), a("celery"), .2)})`);
+  }; return s; })();
+
+// ---- EXAM
+S.exam = (() => { const s = scene("exam", "#14213d", "#1d3557");
+  const g = el("g", {transform: "translate(760 450)"}, s.stage);
+  el("rect", {x: -670, y: -320, width: 1340, height: 640, rx: 34, fill: "#2b9348", stroke: "#8d5524", "stroke-width": 22, filter: "url(#sh)"}, g);
+  tx(g, {x: -610, y: -240, "font-size": 50, "font-weight": 700, fill: "#ffe14d"}, "📝 EXAM CORNER · say it like this:");
+  const L = [["🍃 Leaves make food, and take in and give out gases."], ["🌿 The stem holds the plant upright, and transports", "     water, mineral salts and food."], ["🥕 Roots hold the plant firmly in the ground, and", "     absorb water and mineral salts."]];
+  let y = -150; s.lines = L.map(ls => { const r = el("g", {opacity: 0}, g); ls.forEach((x, i) => tx(r, {x: -610, y: y + i * 50, "font-size": 38, "font-weight": 600, fill: "#fff"}, x)); y += ls.length * 50 + 40; return r; });
+  s.run = t => { const a = w => C("exam", w); const k = [a("leaves"), a("stem"), a("roots")];
+    s.lines.forEach((r, i) => { op(r, ramp(t, k[i] - .15, k[i] + .2)); tf(r, `translate(${(1 - ramp(t, k[i] - .15, k[i] + .3)) * -40} 0)`); }); }; return s; })();
+
+// ---- HABIT (make it obvious)
+S.habit = (() => { const s = scene("habit", "#06d6a0", "#118ab2");
+  s.title = tx(s.stage, {x: 760, y: 200, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "👀 MAKE IT OBVIOUS");
+  s.bottle = el("g", {}, s.stage); el("rect", {x: -90, y: -230, width: 180, height: 460, rx: 60, fill: "#4cc9f0", stroke: INK, "stroke-width": 7, opacity: .95}, s.bottle);
+  el("rect", {x: -50, y: -290, width: 100, height: 70, rx: 18, fill: "#ef476f", stroke: INK, "stroke-width": 6}, s.bottle);
+  el("rect", {x: -70, y: -40, width: 140, height: 220, rx: 40, fill: "#90e0ef", opacity: .7}, s.bottle);
+  s.note = el("g", {}, s.stage); el("rect", {x: -150, y: -130, width: 300, height: 260, fill: "#ffe14d", stroke: INK, "stroke-width": 5, filter: "url(#sh)"}, s.note);
+  [["🍃 make food + gases"], ["🌿 holds up + carries"], ["🥕 anchors + absorbs"]].forEach(([l], i) => tx(s.note, {x: -130, y: -60 + i * 70, "font-size": 27, "font-weight": 700, fill: INK}, l));
+  s.drops = [0, 1, 2, 3].map(i => el("circle", {r: 12, fill: "#4cc9f0", stroke: INK, "stroke-width": 3}, s.stage));
+  s.facts = chip(s.stage, "💡 drink → read → remember", "#ff9f1c", {fs: 34});
+  s.run = t => { const a = w => C("habit1", w);
+    op(s.title, ramp(t, a("obvious"), a("obvious") + .2)); tf(s.title, `translate(760 200) scale(${pop(t, a("obvious"))}) translate(-760 -200)`);
+    const tilt = on(t, a("drink") - .2, a("drink") + 1.2, .3); op(s.bottle, ramp(t, SC.habit.t0 - .2, SC.habit.t0 + .1)); tf(s.bottle, `translate(760 560) rotate(${-25 * tilt})`);
+    const st = ramp(t, a("stick") - .2, a("stick") + .4); op(s.note, ramp(t, a("write"), a("write") + .2)); tf(s.note, `translate(${lerp(1250, 760, st)} ${lerp(420, 560, st)}) rotate(${lerp(8, -4, st)}) scale(${lerp(1, .55, st)})`);
+    s.drops.forEach((d, i) => { const k = ((t * .8 + i / 4) % 1); set(d, "cx", 1150); set(d, "cy", lerp(400, 700, k)); op(d, on(t, a("roots"), SC.habit.t1 + .5, .2) * Math.sin(k * Math.PI)); });
+    op(s.facts, ramp(t, a("facts"), a("facts") + .2)); popAt(s.facts, 760, 820 - 60, t, a("facts")); }; return s; })();
+
+// ---- MIND MAP
+S.mindmap = (() => { const s = scene("mindmap", "#fff3b0", "#ffd6a5");
+  for (let i = 0; i < 16; i++) el("line", {x1: 0, y1: 120 + i * 60, x2: 1920, y2: 120 + i * 60, stroke: "#a2d2ff", "stroke-width": 2, opacity: .6}, s.stage);
+  s.center = el("g", {}, s.stage); el("ellipse", {rx: 190, ry: 80, fill: "#2dc653", stroke: INK, "stroke-width": 7}, s.center); tx(s.center, {x: 0, y: 16, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff"}, "PLANT SYSTEM");
+  const br = [["leaves", "🍃 LEAVES", "#2dc653", 330, 340, ["make food", "gases in & out"]], ["stem", "🌿 STEM", "#a0522d", 330, 680, ["holds upright", "transports"]], ["roots", "🥕 ROOTS", "#6f4518", 1010, 690, ["anchor", "absorb"]]];
+  s.br = br.map(([k, n, col, x, y, subs]) => { const line = el("path", {d: `M720 480 Q${(720 + x) / 2} ${y} ${x} ${y}`, stroke: col, "stroke-width": 12, fill: "none", "stroke-linecap": "round", "stroke-dasharray": 700}, s.stage);
+    return {k, line, c: chip(s.stage, n, col, {fs: 38}), x, y, tw: subs.map(sn => chip(s.stage, sn, "#fff", {fs: 26, ink: INK}))}; });
+  s.stage.appendChild(s.center);
+  s.ult = chip(s.stage, "🚀 TheOneApp · the ultimate science app", "#7209b7", {fs: 30});
+  s.phone = el("g", {}, s.stage); el("rect", {x: -130, y: -240, width: 260, height: 480, rx: 40, fill: INK}, s.phone); el("rect", {x: -112, y: -205, width: 224, height: 410, rx: 20, fill: "#fff"}, s.phone);
+  tx(s.phone, {x: 0, y: -168, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#7209b7"}, "TheOneApp"); tx(s.phone, {x: 0, y: -138, "text-anchor": "middle", "font-size": 17, "font-weight": 600, fill: "#6c757d"}, "the ultimate science app");
+  const cp = el("clipPath", {id: "scr2"}, $("v").querySelector("defs")); el("rect", {x: -112, y: -122, width: 224, height: 327, rx: 4}, cp);
+  s.scr = el("g", {"clip-path": "url(#scr2)"}, s.phone);
+  s.shot = el("image", {href: "oneapp_mind.png", x: -112, y: -122, width: 224, height: 485, preserveAspectRatio: "xMidYMin slice"}, s.scr);
+  s.ring = el("rect", {x: -103, y: 0, width: 98, height: 26, rx: 13, fill: "none", stroke: "#f72585", "stroke-width": 5}, s.scr);
+  s.run = t => { const a = w => C("habit2", w);
+    op(s.center, ramp(t, a("plant"), a("plant") + .2)); tf(s.center, `translate(720 480) scale(${pop(t, a("plant"))})`);
+    s.br.forEach(b => { const k = a(b.k); set(b.line, "stroke-dashoffset", 700 * (1 - ramp(t, k - .1, k + .4))); op(b.line, t > k - .1 ? 1 : 0);
+      op(b.c, ramp(t, k + .15, k + .35)); popAt(b.c, b.x, b.y, t, k + .15);
+      b.tw.forEach((tw, j) => { const tt = a("two") + j * .3 + b.k.length * .05; op(tw, ramp(t, tt, tt + .2)); popAt(tw, b.x + (j ? 120 : -120), b.y + (b.y < 480 ? -80 : 80), t, tt); }); });
+    op(s.ult, on(t, a("ultimate"), SC.mindmap.t1 + .5, .2)); popAt(s.ult, 760, 160, t, a("ultimate"));
+    const ph = ramp(t, a("save"), a("save") + .6); op(s.phone, ph); tf(s.phone, `translate(${lerp(1650, 1340, ph)} 520) rotate(${lerp(12, -4, ph)})`);
+    const scroll = ramp(t, a("ultimate") + .4, a("waiting")); const off = -122 - 270 * scroll; set(s.shot, "y", off);
+    set(s.ring, "x", -112 + 224 * (36 / 780)); set(s.ring, "y", off + 485 * (1330 / 1688)); set(s.ring, "width", 224 * (290 / 780)); set(s.ring, "height", 485 * (72 / 1688));
+    op(s.ring, on(t, a("waiting") - .1, SC.mindmap.t1 + .5, .15) * (.6 + .4 * Math.sin(t * 8))); }; return s; })();
+
+// ---- CLOSE
+S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
+  s.icons = [["🍃", "leaf", "make food"], ["🌿", "stem", "holds up + carries"], ["🥕", "root", "anchor + absorb"]].map(([e, w, j], i) => ({e: emo(s.stage, 0, 0, 140, e), w, x: 420 + i * 340, j: chip(s.stage, j, "#fff", {fs: 28, ink: INK})}));
+  s.bubble = el("g", {}, s.stage); el("path", {d: "M-460 -90 H460 A40 40 0 0 1 500 -50 V50 A40 40 0 0 1 460 90 H-280 L-350 150 L-340 90 H-460 A40 40 0 0 1 -500 50 V-50 A40 40 0 0 1 -460 -90 Z", fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.bubble);
+  tx(s.bubble, {x: 0, y: 16, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: INK}, "💬 Which plant part did YOU eat today?");
+  s.run = t => { const a = w => C("close", w); const jt = [a("food"), a("carries"), a("absorb")];
+    s.icons.forEach((ic, i) => { const k = a(ic.w); op(ic.e, ramp(t, k, k + .2) * (1 - ramp(t, a("comments") - .5, a("comments")))); set(ic.e, "x", ic.x); set(ic.e, "y", 330); tf(ic.e, `translate(${ic.x} 330) scale(${pop(t, k)}) translate(${-ic.x} -330)`);
+      op(ic.j, ramp(t, jt[i], jt[i] + .2) * (1 - ramp(t, a("comments") - .5, a("comments")))); popAt(ic.j, ic.x, 480, t, jt[i]); });
+    op(s.bubble, ramp(t, a("comments") - .3, a("comments"))); tf(s.bubble, `translate(760 450) scale(${pop(t, a("comments") - .3)})`); }; return s; })();
+
+// ---- END CARD
+S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7");
+  tx(s.stage, {x: 960, y: 360, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", "letter-spacing": 6}, "NEXT EPISODE");
+  tx(s.stage, {x: 960, y: 480, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Read a leaf");
+  tx(s.stage, {x: 960, y: 580, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "like a scientist 🍃");
+  s.run = () => {}; return s; })();
+
+
+/* ---------- confetti ---------- */
+function burst() {}
+const BURSTS = []; // precomputed so rendering is deterministic per frame
+seed = 77; const conf = []; for (let i = 0; i < 70; i++) conf.push({vx: (rnd() - .5) * 1400, vy: -600 - rnd() * 700, rot: rnd() * 720, col: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6], e: el("rect", {width: 18, height: 10, rx: 3, opacity: 0}, $("confetti"))});
+conf.forEach(c => set(c.e, "fill", c.col));
+function drawConfetti(t) { const b = TL.bursts.filter(x => t >= x && t < x + 1.6).pop();
+  conf.forEach(c => { if (b === undefined) { op(c.e, 0); return; } const k = t - b; const x = 760 + c.vx * k * .5, y = 450 + c.vy * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.rot * k})`); op(c.e, 1 - k / 1.6); }); }
+
+/* ---------- keyword box → shelf ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const fs = 54, w = k.label.length * fs * .56 + 70;
+  const big = el("g", {}, g); el("rect", {x: -w / 2, y: -50, width: w, height: 100, rx: 50, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 19, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 6}, "⭐ " + k.label);
+  const sfs = 25, sw = k.short.length * sfs * .58 + 40;
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -sw / 2, y: -22, width: sw, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": sfs, "font-weight": 700, fill: "#fff"}, k.short);
+  return {k, g, big, small, sw, i}; });
+function drawKW(t) {
+  op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tf0 = t0 + 1.9, tfly = .6;
+    const sx = 1880 - K.sw / 2, sy = 104 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; }
+    op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly);
+    const x = lerp(960, sx, fly), y = lerp(860, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    const scl = Math.max(0, pop(t, t0, .5));
+    tf(K.g, `translate(${x} ${y})`);
+    tf(K.big, `scale(${scl * lerp(1, .46, fly) * (1 + .04 * Math.sin(t * 8) * (1 - fly))})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); tf(K.small, `scale(${1 + .15 * on(t, tf0 + tfly, tf0 + tfly + .35, .15)})`);
+  });
+}
+
+/* ---------- captions ---------- */
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * 46 * .52 + 60;
+  el("rect", {x: 960 - w / 2, y: 975, width: w, height: 70, rx: 35, fill: "#1b1b3a", "fill-opacity": .78}, g);
+  const t = el("text", {x: 960, y: 1023, "text-anchor": "middle", "font-size": 46, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- render ---------- */
+const order = TL.scenes.map(s => s.scene);
+window.render = function (t) {
+  order.concat(["end"]).forEach((name, i) => {
+    const s = S[name]; const t0 = name === "end" ? TL.END - 4.0 : SC[name].t0 - (i ? .4 : 0);
+    const nxt = i + 1 < order.length ? SC[order[i + 1]].t0 - .4 : (name === "end" ? 1e9 : TL.END - 4.0);
+    const v = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2));
+    op(s.g, v); if (v <= 0) return;
+    tf(s.g, `translate(960 540) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(-960 -540)`);
+    moveBubbles(s.b, t); s.run(t);
+  });
+  drawConfetti(t); drawKW(t); drawCaps(t);
+  set($("prog"), "width", 1920 * clamp(t / TL.END));
+  op($("tag"), ramp(t, .2, .6) * (1 - ramp(t, TL.END - 4.2, TL.END - 3.8)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+document.fonts.ready.then(() => { window.READY = true; });
+</script>
+</body></html>

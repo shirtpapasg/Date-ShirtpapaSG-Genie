@@ -1,0 +1,44 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "SPINES = LEAVES! 🌵",
+  "other": "line:",
+  "from": 93.3,
+  "to": 98.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "① lose less water",
+  "other": "line:",
+  "from": 93.3,
+  "to": 98.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "PLANT PARTS",
+  "other": "path:none",
+  "from": 248.3,
+  "to": 259.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🍃 LEAVES",
+  "other": "path:none",
+  "from": 248.55,
+  "to": 259.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🌿 STEMS",
+  "other": "path:none",
+  "from": 250.8,
+  "to": 259.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🥕 ROOTS",
+  "other": "path:none",
+  "from": 253.55,
+  "to": 259.8
+ }
+]

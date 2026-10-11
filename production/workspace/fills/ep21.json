@@ -1,0 +1,13 @@
+{
+ "hook": "translate(765 525) scale(1.081) translate(-886 -534)",
+ "spoons": "translate(765 525) scale(1.168) translate(-760 -530)",
+ "cups": "translate(765 525) scale(1.426) translate(-759 -429)",
+ "wax": "translate(765 525) scale(1.132) translate(-760 -482)",
+ "cond": "translate(765 525) scale(1.067) translate(-760 -540)",
+ "uses": "translate(765 525) scale(1.097) translate(-898 -528)",
+ "air": "translate(765 525) scale(1.171) translate(-760 -467)",
+ "quiz": "translate(765 525) scale(1.102) translate(-762 -466)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.117) translate(-760 -484)",
+ "close": "translate(765 525) scale(1.5) translate(-760 -500)"
+}

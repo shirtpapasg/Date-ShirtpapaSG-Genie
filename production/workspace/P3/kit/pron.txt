@@ -1,0 +1,24 @@
+# Extra pronunciations for the pocketsphinx aligner (CMU ARPAbet phones), for words that are not in cmudict-en-us.
+# One word per line: word PHONES. Lowercase. Add series-wide words here; one-off words can go in the episode config "pron".
+# prep_p3.py stops with "OOV" before any TTS runs if a spoken word is in neither place.
+bai B AY
+baobab B EY OW B AE B
+cardboard's K AA R D B AO R D Z
+creeper K R IY P ER
+creepers K R IY P ER Z
+hibiscus HH AY B IH S K AH S
+kangkong K AA NG K AO NG
+kulit K UW L IH T
+labelling L EY B AH L IH NG
+litre L IY T ER
+nai N AY
+pandan P AE N D AE N
+southeast S AW TH IY S T
+sundials S AH N D AY AH L Z
+tare T EH R
+toothache T UW TH EY K
+undigested AH N D AY JH EH S T IH D
+vapour V EY P ER
+wayang W AA Y AA NG
+whoosh W UW SH
+windpipe W IH N D P AY P

@@ -1,0 +1,28 @@
+{
+  "approved": false,
+  "changes": [
+    "New name: “TheOneApp, Explained”",
+    "Bigger objects fill the empty space",
+    "Narrated in Heart voice 3 (more expressive)",
+    "Torches face their beams",
+    "Lamp bulbs face their light"
+  ],
+  "chapter": "Ch 5 Shadows",
+  "live": false,
+  "narrator": "Heart (voice 3)",
+  "no": 17,
+  "notes": "",
+  "parts": [
+    "/_blob/b5dee4ef1af68d2fda63bc0f4a807c48",
+    "/_blob/688f70acd3a89e38a83c2f65d72eb4b8",
+    "/_blob/688988caeeae729c1b327a3e6af53abc"
+  ],
+  "pending": false,
+  "rendered": true,
+  "runtime": "3:01",
+  "thumb": "thumbs/ep17.jpg",
+  "title": "A cone can cast a circle: shadow shapes and sundials",
+  "videoUpdatedAt": "2026-10-10T15:58:00Z",
+  "youtubeUrl": "",
+  "ytTitle": "Can a Cone Cast a Circle Shadow?"
+}

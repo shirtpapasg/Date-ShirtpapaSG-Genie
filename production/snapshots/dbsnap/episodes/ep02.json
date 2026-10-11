@@ -1,0 +1,29 @@
+{
+  "approved": false,
+  "changes": [
+    "Quiz: a true 4-second silent “Think!” countdown with a soft clock tick, before the answer",
+    "New name: “TheOneApp, Explained”",
+    "Bigger objects fill the empty space",
+    "Food-colouring drop is pink",
+    "Bottle cap comes off before drinking"
+  ],
+  "chapter": "Ch 1 Plant System",
+  "live": false,
+  "narrator": "Heart (voice 3)",
+  "no": 2,
+  "notes": "",
+  "parts": [
+    "/_blob/43e4434b27c250055d8769229ff48008",
+    "/_blob/8011334923de257282d5acdcb804bf8c",
+    "/_blob/fa537361a6c922847ad84510448b1dac",
+    "/_blob/e0066032c09484a25a11670a77566e2c"
+  ],
+  "pending": true,
+  "rendered": true,
+  "runtime": "3:42",
+  "thumb": "thumbs/ep02.jpg",
+  "title": "The 3-part team inside every plant",
+  "videoUpdatedAt": "2026-10-10T12:56:00Z",
+  "youtubeUrl": "",
+  "ytTitle": "You Ate 3 Plant Parts Today. Which Ones?"
+}

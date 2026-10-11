@@ -1,0 +1,11 @@
+{
+ "hook": "translate(765 525) scale(1.372) translate(-884 -554)",
+ "story": "translate(765 525) scale(1.246) translate(-877 -462)",
+ "hyp": "translate(765 525) scale(1.146) translate(-760 -408)",
+ "method": "translate(765 525) scale(1.312) translate(-865 -544)",
+ "result": "translate(765 525) scale(1.184) translate(-760 -476)",
+ "wrong": "translate(765 525) scale(1.069) translate(-760 -522)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.189) translate(-760 -456)",
+ "close": "translate(765 525) scale(1.39) translate(-780 -500)"
+}

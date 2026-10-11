@@ -1,0 +1,12 @@
+{
+ "hook": "translate(765 525) scale(1.129) translate(-843 -458)",
+ "run": "translate(765 525) scale(1.396) translate(-892 -328)",
+ "models": "translate(765 525) scale(1.341) translate(-765 -475)",
+ "resp": "translate(765 525) scale(1.152) translate(-709 -438)",
+ "musc": "translate(765 525) scale(1.065) translate(-762 -428)",
+ "leo": "translate(765 525) scale(1.169) translate(-760 -474)",
+ "quiz": "translate(765 525) scale(1.14) translate(-760 -384)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.3) translate(-770 -416)",
+ "close": "translate(765 525) scale(1.118) translate(-836 -421)"
+}

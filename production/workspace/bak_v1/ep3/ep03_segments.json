@@ -1,0 +1,17 @@
+[
+  {"id": "hook", "scene": "hook", "text": "Every leaf has the same four parts. Miss one in your exam, and you lose a mark. Can you name all four? Grab a leaf, and let's read it like a scientist."},
+  {"id": "parts1", "scene": "leaf", "text": "Here is a leaf, up close. The biggest, flat part is called the leaf blade. Look at its edge. The edge of the leaf blade gives the leaf its shape."},
+  {"id": "parts2", "scene": "leaf", "text": "The leaf stalk joins the leaf to the stem. Some leaf stalks are long, and some are very short. Now look down the middle. That thick line is the main vein, and it is joined to the leaf stalk."},
+  {"id": "parts3", "scene": "leaf", "text": "Branching out from the main vein are many smaller veins. So there you go. Leaf blade, leaf stalk, main vein, and smaller veins. Four parts."},
+  {"id": "veins1", "scene": "veins", "text": "Now, here is something cool. Veins are not always arranged the same way. In some leaves, like grass or pandan, the veins run side by side, in straight lines. We call these parallel veins."},
+  {"id": "veins2", "scene": "veins", "text": "In other leaves, like a hibiscus or a maple leaf, the veins branch again and again, like a fishing net. We call these net veins."},
+  {"id": "quiz1", "scene": "quiz", "text": "Pause and predict! Look at these three leaves. Parallel veins, or net veins?"},
+  {"id": "quiz2", "scene": "quiz", "text": "Leaf A has lines running side by side, so it has parallel veins. Leaves B and C have veins that branch out like a net, so they have net veins."},
+  {"id": "diverse1", "scene": "diverse", "text": "Leaves are amazingly different. Look at the edge. Some edges are smooth and straight, and some are jagged, like tiny teeth. Look at the shape. Some leaves are oval, and some are round."},
+  {"id": "diverse2", "scene": "diverse", "text": "Most leaves are green, but some are purple or red, like red spinach. And feel the texture. Some leaves are waxy and shiny, while others are soft and hairy. These differences help each plant survive in the place where it grows."},
+  {"id": "ask", "scene": "ask", "text": "This is how scientists think. They observe carefully, and then they ask questions. Why is this leaf hairy? Why do these veins run in straight lines? Every good investigation starts with a good question."},
+  {"id": "exam", "scene": "exam", "text": "In your exam, label the four parts like this. Leaf blade. Leaf stalk. Main vein. Smaller veins. And remember, veins can be parallel, or arranged like a net."},
+  {"id": "habit1", "scene": "habit", "text": "Here is a habit to try. It is called the two-minute rule. Make a new habit so small that it takes just two minutes. On your way home, pick up one fallen leaf. Then spend two minutes drawing it, and labelling its four parts."},
+  {"id": "habit2", "scene": "mindmap", "text": "Then add it to your mind map. Leaf in the middle. One branch for the four parts. One branch for the two vein patterns. One branch for how leaves are different. Then save it in TheOneApp, the ultimate science app, so your revision grows, one leaf at a time."},
+  {"id": "close", "scene": "close", "text": "So, the four parts are the leaf blade, the leaf stalk, the main vein and the smaller veins. Your turn. Find one leaf today. Does it have parallel veins, or net veins? Tell me in the comments."}
+]

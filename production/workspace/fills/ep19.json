@@ -1,0 +1,12 @@
+{
+ "hook": "translate(765 525) scale(1.287) translate(-772 -492)",
+ "milk": "translate(765 525) scale(1.227) translate(-760 -434)",
+ "heat": "translate(765 525) scale(1.235) translate(-764 -406)",
+ "diff": "translate(765 525) scale(1.135) translate(-760 -582)",
+ "fix": "translate(765 525) scale(1.284) translate(-838 -477)",
+ "graphs": "translate(765 525) scale(1.095) translate(-999 -500)",
+ "quiz": "translate(765 525) scale(1.102) translate(-756 -466)",
+ "exam": "translate(765 525) scale(1.067) translate(-760 -450)",
+ "habit": "translate(765 525) scale(1.163) translate(-760 -470)",
+ "close": "translate(765 525) scale(1.5) translate(-760 -527)"
+}

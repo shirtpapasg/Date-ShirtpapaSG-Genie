@@ -1,0 +1,30 @@
+[
+ {
+  "kind": "text-on-drawing",
+  "text": "MILK",
+  "other": "path:rgb(230,57,70)",
+  "from": 34.55,
+  "to": 37.05
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "MILK",
+  "other": "path:rgb(255,180,162)",
+  "from": 44.05,
+  "to": 48.55
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "🔥 HEAT",
+  "other": "path:none",
+  "from": 166.55,
+  "to": 177.8
+ },
+ {
+  "kind": "text-on-drawing",
+  "text": "⚡ HEAT (energy)",
+  "other": "path:none",
+  "from": 167.55,
+  "to": 177.8
+ }
+]
