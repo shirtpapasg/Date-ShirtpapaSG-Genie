@@ -1,0 +1,55 @@
+<!-- Paste this block into SecondBrain/Brain.html (below the 10 Oct voice entry) -->
+<section class="brain-entry" id="update-2026-10-11">
+  <h2>🗂️ TheOneApp + videos: update 11 Oct 2026</h2>
+
+  <h3>🎭 Character Voice Maker (new, keep for future use)</h3>
+  <p><strong>Kit:</strong> <code>character-voice-kit</code> (<code>voice_maker.py</code>, <code>SKILL.md</code>, samples). Free and offline: Kokoro TTS + Praat.
+     Backup copy: GitHub <code>shirtpapasg/Date-ShirtpapaSG-Genie</code>, branch <code>claude/cool-hypatia-v13e6t</code>, folder <code>production/character-voice-kit</code>.</p>
+  <p><strong>Recipe:</strong> blend Kokoro voices → speak → Praat "Change gender" (raises formants + pitch median, widens pitch range) → loudness −16 LUFS, 48 kHz.
+     Plain pitch-shifting (rubberband) sounded robotic, so it is not used.</p>
+  <table>
+    <tr><th>Character</th><th>Personality</th><th>Chosen voice</th><th>Recipe</th></tr>
+    <tr><td>Pip</td><td>chinchilla, cute and lively</td><td>kid3</td><td>af_heart .6 + af_nova .4 · speed 1.10 · formant 1.18 · median 340 Hz · range 1.4</td></tr>
+    <tr><td>Basil (was Phil)</td><td>kid lizard, sharp and energetic</td><td>kid2</td><td>am_puck .6 + am_fenrir .4 · speed 1.10 · formant 1.16 · median 245 Hz · range 1.3</td></tr>
+    <tr><td>Momo</td><td>playful, cute and friendly</td><td>kid3</td><td>af_heart .5 + af_aoede .3 + af_jessica .2 · speed 1.06 · formant 1.16 · median 325 Hz · range 1.4</td></tr>
+  </table>
+  <p><strong>New character process:</strong> 2 base blends (A/B) → pick one → 3 kid versions (kid1 natural, kid2 younger, kid3 smallest/most playful) → pick → save in the kit and here.
+     Narrator stays <strong>Heart</strong> (voice 3 for YouTube, voice 4 for Foundation Science).</p>
+
+  <h3>🎬 P4 series: "TheOneApp, Explained" (22 episodes)</h3>
+  <ul>
+    <li>All 22 re-rendered with the <strong>quiz question on screen during the 4-second countdown</strong> (rule for ALL videos).</li>
+    <li>EP05: femur removed (only syllabus terms). EP06: clearer digestion diagram.</li>
+    <li>Thumbnails: main idea + level (e.g. "P4 Systems") + "TheOneApp Explained" on a colourful frame. EP12 "Experiment: Fair Test"; EP22 "Most things expand when heated".</li>
+    <li>Board: <a href="https://claude.ai/artifact/4LdsCNE87uai78ZDNHTPss">P4 Videos Review Board</a></li>
+  </ul>
+
+  <h3>🎬 P3 series (25 episodes planned)</h3>
+  <ul>
+    <li>Same design and features as P4. Opus subagents build; main agent compiles. Mind-map wording matches the app's Mind Lab.</li>
+    <li>Done: EP00 Special "Make your own mind map" (5:11), EP01 Living or Non-living (4:11), EP02 Water, Food and Air (3:48), EP03 Grow, Respond, Reproduce (4:15).</li>
+    <li>Next: EP04–07 after the P3 style is approved. App School Labs 1.2 and 1.3 to be set from "review" to ready before release.</li>
+    <li>Board: <a href="https://claude.ai/artifact/LfKMLzdwANDQsbRkNjE3gP">P3 Videos Review Board</a></li>
+    <li>P5 and P6 textbooks noted for future series.</li>
+  </ul>
+
+  <h3>📺 YouTube workflow</h3>
+  <ul>
+    <li>Teacher uploads the MP4 in YouTube Studio (API uploads stay locked Private until an audit).</li>
+    <li>Then Claude fills in title, description, tags, thumbnail, made-for-kids, playlist, Unlisted, and puts the link on the board, only after "make it live".</li>
+    <li>P4 EP01–02 uploaded; EP03–05 files sent. Client secret is kept in the protected secret store (rotated).</li>
+  </ul>
+
+  <h3>📱 TheOneApp features</h3>
+  <ul>
+    <li>Mind maps live (PR #60, merged). Waiting for review: "Check my map" (PR #70), Mind Lab video autoplay that pauses when a mind map plays (PR #68), lab controls at the bottom (PR #63).</li>
+    <li>After the special mind-map video is on YouTube, set its video ID in Mind Lab (PR #68).</li>
+  </ul>
+
+  <h3>✏️ House rules</h3>
+  <ul>
+    <li>Positive language · full, correct definitions · syllabus terms only · realistic objects.</li>
+    <li>Diagram labels: plain lines, no arrowheads, no numbered markers. Wrong statements start with ✗ (no strikeout).</li>
+    <li>Free tools only · split files over ~14 MB.</li>
+  </ul>
+</section>
