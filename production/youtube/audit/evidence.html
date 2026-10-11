@@ -55,11 +55,7 @@ Enter this code:                 SYL-HFH-VTNT
 The code is valid for 30 minutes. Then run:  python3 yt_device_login.py wait</pre>
   <h3>Step 2 · Google's consent screen</h3>
   <p>The owner opens google.com/device, enters the code, chooses the channel's Google account, and sees the standard Google consent screen for "TheOneApp Publisher" listing the YouTube permission. After approval Google shows "Success! Device connected". The screens below are the ones the channel owner saw on 11 October 2026.</p>
-  <table>
-    <tr><th>Screen</th><th>What it showed</th></tr>
-    <tr><td>Sign in with Google · TheOneApp Publisher</td><td>Consent request for the YouTube scope, approved by the channel owner</td></tr>
-    <tr><td>Success! Device connected · TheOneApp</td><td>Confirmation after approval</td></tr>
-  </table>
+  <img src="oauth-success-device-connected.png" alt="Google: Success! Device connected, TheOneApp" style="max-height: 70mm; width: auto; display: block; margin: 6pt 0;">
   <h3>Step 3 · the tool receives the token</h3>
   <pre>$ python3 production/youtube/yt_device_login.py wait
 Waiting for your approval in the browser…
@@ -126,8 +122,9 @@ sqzPRN9jEpg public kids=True thumb 1280x720 | 5 Body Systems Keeping You Alive R
 
 <section class="page">
   <h2>3. Player / embed</h2>
-  <p>The published videos appear on the Videos page of TheOneApp, played through YouTube's privacy-enhanced embedded player (youtube-nocookie.com, with the standard YouTube controls and branding). The page states that the lessons play from the YouTube channel and links the channel, the privacy policy and the terms. Episodes 1 to 5 are "Now showing"; the rest are "Coming soon" until published.</p>
-  <img src="videos-page-with-privacy-link.png" alt="TheOneApp Videos page" style="max-height: 215mm; width: auto; display: block; margin: 0 auto;">
+  <p>The published videos appear on the Videos page of TheOneApp, played through YouTube's privacy-enhanced embedded player (youtube-nocookie.com, with the standard YouTube controls and branding). The page states that the lessons play from the YouTube channel; its footer links the channel, the privacy policy and the terms. Episodes 1 to 5 are "Now showing"; the rest are "Coming soon" until published.</p>
+  <img src="videos-page-top.png" alt="TheOneApp Videos page, top" style="max-height: 150mm; width: auto; display: block; margin: 6pt auto;">
+  <img src="videos-page-footer.png" alt="TheOneApp Videos page, footer with privacy policy and terms links" style="max-height: 70mm; width: auto; display: block; margin: 6pt auto;">
 </section>
 
 </body>
