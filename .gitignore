@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+production/youtube/.yt_token.json
+production/youtube/.yt_device.json
+production/youtube/publish_report.json
