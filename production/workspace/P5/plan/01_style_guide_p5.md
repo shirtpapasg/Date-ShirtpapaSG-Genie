@@ -9,7 +9,7 @@ This guide carries over **every** rule of the P3 style guide (`P3/plan/01_style_
 - A warm, curious teacher talking to ONE 10-year-old who is about to meet fair tests, tables and line graphs properly for the first time: "you", short sentences, one idea per sentence, but **the science words arrive sooner** than in P3. Name the thing, show it, then use the term for the rest of the episode.
 - Spoken English, not textbook English. No Singlish in the narration (both countries watch).
 - **Cause, then effect, every time:** "The water gains heat from the flame, so it boils." "The ice loses heat to the air… no: the air is warmer, so the ice gains heat from the air and melts." Say **gains heat from / loses heat to**; never "cold gets in", never "the cold makes it".
-- Every claim is accurate to the P5 syllabus. Simplify, but never say something a P6 teacher would have to unteach. Never: particles, molecules, atoms, *energy* (the P6 word in this app: say "gains heat"), xylem / phloem (say **water-carrying tubes** / **food-carrying tubes**), voltage, "current" as a noun on screen (say "electricity flows"), "cold flows".
+- Every claim is accurate to the P5 syllabus. Simplify, but never say something a P6 teacher would have to unteach. Never: particles, molecules, atoms, *energy* (the P6 word in this app: say "gains heat"), xylem / phloem (say **water-carrying tubes** / **food-carrying tubes**), voltage, "cold flows". **Electric current (teacher's ruling 12 Oct 2026):** the videos say "electric current" for what flows in a closed circuit ("electric current flows", "electric current cannot flow", "metals let electric current through"), and "electricity" for the supply ("electricity from the mains", "using electricity safely"). Say the term in full, "electric current".
 - Numbers are real and friendly: 0 °C, 100 °C, three batteries, five seeds, 1 ml of water, 10 minutes. Never invent a measured value: use the Activity Book's set-ups or say "say, ten grams".
 - Hedge words stay where the source has them (*most*, *usually*, *may*).
 
@@ -45,7 +45,7 @@ P5 changes:
 3. **Wrong statements:** ✗ at the start only, no strikeout, only on statements that are actually false.
 4. **Positive language.**
 5. **Realism** (section 10), now including photos (section 11).
-6. **Every named skill or term becomes a key word, with its full name** ("WATER-CARRYING TUBES", "RATE OF EVAPORATION", "EXPOSED SURFACE AREA", "CLOSED CIRCUIT", "ELECTRICAL CONDUCTOR", "SEED DISPERSAL", "FAIR TEST", "VARIABLE CHANGED").
+6. **Every named skill or term becomes a key word, with its full name** ("WATER-CARRYING TUBES", "RATE OF EVAPORATION", "EXPOSED SURFACE AREA", "CLOSED CIRCUIT", "ELECTRIC CURRENT", "ELECTRICAL CONDUCTOR", "SEED DISPERSAL", "FAIR TEST", "VARIABLE CHANGED").
 7. **The 4-second silent "Think!" countdown** before every quiz answer; the question stays on screen during the countdown.
 8. **School Lab card plus the spoken link** wherever a P5 lab matches: "You can try it in The One App. Open the School Lab, experiment two point four, and press, Let's test it now!" (letters spoken: "one point five A"). The teaser names what the bench really holds (`labs_p5.json`).
 9. **Mind-map habit with the real app steps**, chapter names from `app_p5.md` §4 (the P5 Mind Lab posters: Reproduction in Plants, The Water Cycle, Plant System, Circulatory System, Electrical System). Mind-map wording matches the poster.
