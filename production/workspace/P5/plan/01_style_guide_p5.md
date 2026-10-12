@@ -107,7 +107,7 @@ Three authored files per episode (`epNN_segments.json`, `epNN.json`, `scenes_epN
 ## 14. Pre-render checklist (P5)
 
 1. Every definition line matches `definitions_p5.md` word for word; lines flagged "textbook unverified" were checked by the teacher against the textbook.
-2. Cause-then-effect wording with "gains heat from / loses heat to"; no particles, molecules, energy, xylem, phloem, voltage, current-as-a-noun.
+2. Cause-then-effect wording with "gains heat from / loses heat to"; no particles, molecules, energy, xylem, phloem, voltage; the flow in a circuit is always "electric current" (never "current" alone or "electricity flows").
 3. Variables chips on every investigation; the fair test names changed, kept the same, measured.
 4. No numbered stages, no arrowheads on label lines, no strikeout, ✗ only on false lines.
 5. Positive language sweep; human reproduction plain and clinical.

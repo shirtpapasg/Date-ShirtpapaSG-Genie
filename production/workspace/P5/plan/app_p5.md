@@ -512,7 +512,7 @@ Sources: `labs-p4.js` (the `SOON_P5` list, from line 2134: code, chapter, title)
 - Typed Challenge questions (marked by the app): "What is a closed circuit? [1]" · "In your results, the bulb stayed dark when the switch was open. Explain why. [2]" · "A pupil says, "The bulb uses up the electricity as it shines." Use what you saw in the glass wires to explain why the pupil is wrong. [2]"
 - Mind map to pick: **Electrical System**
 - Script check: "The bulb does not use it up" (electricity) is in line with the BRIEF-P5 rule. Mix-up buster #17 (mixups.js line 130) explains a dim torch with "chemical potential energy", which is P6. Keep energy words out of P5 videos.
-- Script check: The bench always says "electricity flows". The Electrical System poster says "Current flows" and "No current flows". See the sign-off gates.
+- Script check: The bench says "electricity flows"; the video says "electric current flows" (teacher's ruling, 12 Oct 2026). The Electrical System poster now says "Electric current flows" and "No electric current flows" (TheOneApp PR #115). The bench wording is a sign-off gate (§7).
 
 #### 5.3 Conductors and Insulators  ·  In review (admin/adult mode only)
 - Folder: `labs/p5-5-3/` · list line: "Experiment · about 25 minutes · runs in 3D" · bench: **Conductors and Insulators Lab** ("Which materials let electricity flow"), intro button "Open the tester →"
@@ -523,7 +523,7 @@ Sources: `labs-p4.js` (the `SOON_P5` list, from line 2134: code, chapter, title)
 - Safety line: Test only safe classroom objects with a battery. Never test a wall socket or a mains wire.
 - Typed Challenge questions (marked by the app): "What is an electrical conductor? [1]" · "In your results, the bulb lit when the metal spoon was placed across the gap. Explain why. [2]" · "With the plastic ruler across the gap, no part of the loop glowed, not even the wire joined to the battery. Explain why. [2]"
 - Mind map to pick: **Electrical System**
-- Script check: The bench says "electrical conductor / insulator" in full. The poster says "Conductors & insulators" and "Metals let current through".
+- Script check: The bench says "electrical conductor / insulator" in full. The poster says "Conductors & insulators" and "Metals let electric current through".
 
 #### 5.4 Circuit Diagrams  ·  In review (admin/adult mode only)
 - Folder: `labs/p5-5-4/` · list line: "Experiment · about 25 minutes · runs in 3D" · bench: **Circuit Diagrams Lab** ("Reading circuit diagrams with symbols"), intro button "Start matching →"
@@ -654,15 +654,15 @@ Sources: `labs-p4.js` (the `SOON_P5` list, from line 2134: code, chapter, title)
   - Can-do lines: "Name each plant part and the job it does" · "Follow water from the soil up to a leaf" · "Predict what happens to a plant with its stem cut"
 - **Electrical System** (`electrical`, P5, Systems; it has a 3D circuit view, `sim:'circuit'`). Main idea: "Electricity flows only when the path is complete. How we arrange the parts changes what happens." Branches (six):
   - Parts of a circuit: Cell or battery, Bulb, Switch, Wires
-  - Closed circuit: The path is complete, Current flows, The bulb lights up
-  - Open circuit: The path is broken, No current flows, The bulb stays off
-  - Conductors & insulators: Metals let current through, Plastic and wood do not
+  - Closed circuit: The path is complete, Electric current flows, The bulb lights up
+  - Open circuit: The path is broken, No electric current flows, The bulb stays off
+  - Conductors & insulators: Metals let electric current through, Plastic and wood do not
   - Series: One path only, One bulb out, all out, Bulbs are dimmer
   - Parallel: More than one path, One bulb out, the others stay on, Bulbs are brighter
   - Can-do lines: "Draw a closed circuit that lights a bulb" · "Test whether a material is a conductor or an insulator" · "Predict what happens when one bulb is removed from a series or parallel circuit" · "Explain why parallel bulbs are brighter than series bulbs"
 
 **How the posters compare with the labs and the book** (for the mind-map segment of each script):
-- The **Electrical System** poster says "Current flows", "No current flows" and "Metals let current through" (lines 771–773). The labs never say "current": `BRIEF-P5.md` §1 bans it ("say 'electricity flows'"), and the series plan keeps "the words voltage and current" out of episodes 23–26. **The mind map must match the poster, so this is a sign-off gate (§7).**
+- The **Electrical System** poster now says "Electric current flows", "No electric current flows" and "Metals let electric current through" (changed 12 Oct 2026, TheOneApp PR #115, on the teacher's ruling). The videos use the same words. The labs still say "electricity flows" (`BRIEF-P5.md` §1): **the labs must be brought to the poster wording, so this is a sign-off gate (§7).** The series plan keeps only the word voltage out of episodes 23–26.
 - In **Reproduction in Plants**, "Pollen joins the ovule" (line 708) is looser than the book ("the male reproductive cell from pollen fuses with the egg cell in the ovule"). "Pollen lands on the stigma" is close to the answer that Mix-up buster #45 marks as the mix-up ("Pollen touches the stigma"; the right answer is the TRANSFER of pollen FROM the anther TO the stigma). The poster has no petal, filament or style; lab 1.5A has all of them.
 - **The Water Cycle** has no "exposed surface area" point (lab 2.4 tests it), no 0 °C or 100 °C, and no "gains heat / loses heat".
 - **Plant System** never says "water-carrying tubes" or "food-carrying tubes", the P5 words that every Chapter 3 lab uses; it says "Transport food, water and mineral salts".
@@ -826,7 +826,7 @@ P5-area entries the marker can name in feedback: M-07 to M-12 (Water), M-20 to M
    The teacher must confirm (a) whether a cells episode ships at all, with `lab: null`, and (b) whether "male/female reproductive cell" is fine in Chapter 1 videos.
 3. **The P5 folder is folded.** Pupils must tap "Primary 5" first (§0, point 4). Decide whether the spoken line names the folder.
 4. **Poster wording that a video's mind map must match, but that conflicts with the labs or the book:**
-   - **Electrical System:** "Current flows", "No current flows", "Metals let current through" (`mindmap.html` lines 771–773). The labs and the series plan never say "current". Either the teacher allows "current" in the mind-map beat, or the poster is changed first.
+   - **Electrical System: resolved.** The poster said "Current flows", "No current flows", "Metals let current through" (`mindmap.html` lines 771–773). Teacher's ruling 12 Oct 2026: the videos say "electric current" for what flows in a closed circuit and "electricity" for the supply. The poster is being changed to "Electric current flows", "No electric current flows" and "Metals let electric current through", so the EP 23–24 mind maps match it and the conflict is resolved. Check the live poster before those videos go public.
    - **Reproduction in Plants:** "Pollen joins the ovule" (line 708) and "Pollen lands on the stigma" (line 707) are looser than the exam wording, and the second is close to Mix-up buster #45's mix-up.
 5. **Wording in the labs that could contradict a video or the exam wording** (details in each lab's "Script check" lines, §3b):
    - 1.4 says "egg", "womb", "egg tube" and "sperm duct"; Mix-up buster #46 says "Write egg cell, not egg".
@@ -850,7 +850,7 @@ P5-area entries the marker can name in feedback: M-07 to M-12 (Water), M-20 to M
    `labs_p5.json` marks each part: `variablesShown` and `briefSays`.
 7. **Excluded words: checked, none found.** The search covered the lab-specific text of all 40 benches (each page's `LAB` object and its `*-scene.js`) and the 40 records. It found no xylem, phloem, energy, molecule(s), particle(s), atom(s), voltage, "current", nickel, cobalt, self-/cross-pollination, pollen tube, umbilical cord, foetus, embryo or organ(s). "Cell(s)" appears only in the reproduction labs (point 2) and as code names in the circuit scene scripts, which are never shown. "Steam" appears only in 2.2 (point 5). The out-of-level words do appear in **other parts of the app** that a P5 video might quote:
    - Mix-up busters #16–#18 and #20 (energy, electromagnets);
-   - the Electrical poster's "current";
+   - the Electrical poster's "current" (now allowed as "electric current": see point 4);
    - Quiz Yourself's "organ" and "salt lowers the melting point".
 8. **The Challenge is 3 + 3, not 5.** A video that says "answer the five questions" is wrong. The 3 typed questions are marked only inside the app, and need sign-in and the marker.
 9. **Do not link review labs directly.** `lab.html#a/<id>` opens a review lab for any member (§1). Keep such links out of descriptions until sign-off.

@@ -65,7 +65,7 @@ All P3–P5 rules hold. P6 additions: **a leaf shows its tiny openings only when
 ## 9. Pre-render checklist (P6)
 
 1. Every definition line matches `definitions_p6.md` word for word; "textbook unverified" lines (Chapters 4–5) checked by the teacher.
-2. Forms of energy named as the book names them; long names at most once each; never "energy is used up".
+2. Forms of energy: short forms in narration, long forms in every typed on-screen label (§1 ruling, 12 Oct 2026); never "energy is used up".
 3. Cause → process → result explanations in recitation wording; forces named in full; mass and weight kept apart.
 4. Variables chips on every investigation; data beats read with trend and range.
 5. No numbered markers, no arrowheads on label lines, no strikeout, ✗ only on false lines.

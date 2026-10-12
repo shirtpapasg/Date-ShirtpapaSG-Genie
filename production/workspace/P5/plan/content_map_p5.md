@@ -158,23 +158,23 @@ The page of every activity is in **Section headings in book order** at the end. 
 
 ## CHAPTER 5: ELECTRICAL SYSTEMS (AB pp. 137–152)
 
-**Key questions / outcomes.** Identify the components of a simple circuit. When does a bulb light? Which materials let electricity through?
+**Key questions / outcomes.** Identify the components of a simple circuit. When does a bulb light? Which materials let electric current through?
 
 **Core concepts (teaching order)**
 1. **Let's connect (5.1):** battery, crocodile-clip wires, a bulb and a model bulb. Pupils predict and test six set-ups. A bulb lights only when both of its contacts are joined to both battery terminals in one unbroken loop.
-2. **Closed circuits (5.2):** closed = no gap, so electricity flows and the bulb lights. Open = a gap. A switch opens and closes the gap.
+2. **Closed circuits (5.2):** closed = no gap, so electric current flows and the bulb lights. Open = a gap. A switch opens and closes the gap.
 3. **Electrical conductors and insulators (5.3):** test objects with a circuit tester. Metals conduct; plastic, rubber, wood, glass and fabric insulate. A wire is a metal core in a plastic covering.
 4. **Circuit diagrams (5.4):** standard symbols for battery, bulb, switch (open and closed) and wire.
 
-**Key terms:** electric circuit, battery, terminal (+/−), wire, bulb, filament, switch, closed circuit, open circuit, electrical conductor, electrical insulator, circuit tester, circuit diagram, symbol.
+**Key terms:** electric circuit, electric current, battery, terminal (+/−), wire, bulb, filament, switch, closed circuit, open circuit, electrical conductor, electrical insulator, circuit tester, circuit diagram, symbol.
 
 **Common mistakes:** one wire is enough; touching a wire "near" the battery; "all shiny things conduct"; "the bulb uses up electricity"; drawing pictures instead of symbols; a fused bulb is still a closed circuit.
 
 **Singapore examples:** torchlights and toy cars; the HDB kitchen's circuit breaker; Orchard Road Christmas lights; Singapore's 3-pin plugs (insulated plastic casing).
 
-**Accuracy flags:** (1) "current": the Mind Lab poster says "Current flows", but the style guide bans "current" as a noun on screen, so use "electricity flows"; (2) say "battery", never "cell", to avoid a clash with Ch 1; (3) graphite is a non-metal conductor: check whether the textbook mentions it; (4) "not used up" (lab brief 5.2) is loose, so avoid it; (5) never "energy" or "voltage".
+**Accuracy flags:** (1) "electric current": teacher's ruling 12 Oct 2026: the videos say "electric current" for what flows in a closed circuit and "electricity" for the supply; the Mind Lab poster's "Current flows" / "No current flows" / "Metals let current through" is being changed to "Electric current flows" / "No electric current flows" / "Metals let electric current through"; (2) say "battery", never "cell", to avoid a clash with Ch 1; (3) graphite is a non-metal conductor: check whether the textbook mentions it; (4) "not used up" (lab brief 5.2) is loose, so avoid it; (5) never "energy" or "voltage".
 
-**Still open:** the AB TOC lists no CfU for Ch 5 (shared with Ch 6?); the textbook's exact definitions of the circuit terms; whether it says "electric current"; the six circuits in 5.1.
+**Still open:** the AB TOC lists no CfU for Ch 5 (shared with Ch 6?); the textbook's exact definitions of the circuit terms; whether it says "electric current" (the videos do, per the 12 Oct 2026 ruling); the six circuits in 5.1.
 
 ---
 

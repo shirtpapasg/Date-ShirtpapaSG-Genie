@@ -19,7 +19,7 @@ Sources (all read in full on 11 Oct 2026):
 - In AB "Let's Conclude" rows, **the words in [square brackets] are the blanks, filled with the standard answer.** Each is marked ⚠ blanks filled, verify.
 - ⚠ textbook unverified = wording not taken from the teacher's documents or the syllabus.
 - ⚠⚠ = serious: a conflict with a syllabus exclude, a house rule or another source. These are also listed under Accuracy flags in `content_map_p5.md`.
-- House rules: positive language (no "die / kill / dead" in narration; the science terms stay); full definitions, never shortened; syllabus terms only; "gains heat from / loses heat to", never "cold gets in"; never "particles / molecules / atoms / energy" (energy is the P6 word in this app); "water-carrying tubes / food-carrying tubes", never xylem / phloem; "electricity flows", not "current" as a noun on screen.
+- House rules: positive language (no "die / kill / dead" in narration; the science terms stay); full definitions, never shortened; syllabus terms only; "gains heat from / loses heat to", never "cold gets in"; never "particles / molecules / atoms / energy" (energy is the P6 word in this app); "water-carrying tubes / food-carrying tubes", never xylem / phloem; "electric current flows", never "current" alone and never "electricity flows" (teacher's ruling, 12 Oct 2026).
 
 ---
 
@@ -243,7 +243,7 @@ Teacher's ruling 12 Oct 2026: the videos say 'electric current' for what flows i
 |---|---|---|---|---|
 | 5.1 | Syllabus outcomes (electrical) | "Identify the components of a simple circuit" / "Compare series and parallel circuits" | Syllabus outcome | The syllabus file lists no excludes. |
 | 5.2 | Parts of a circuit (AB) | "To explore the parts of an electric circuit" (What we need: bulb, crocodile clip wire, D size battery, model of the light bulb) | AB 5.1 aim (AB features page) | ⚠ AB wording. The AB says **battery**; avoid "cell" for a battery (it clashes with the Ch 1 cell). |
-| 5.3 | Mind Lab poster (electrical) | "Electricity flows only when the path is complete. How we arrange the parts changes what happens." Parts: "Cell or battery", "Bulb", "Switch", "Wires". | Mind Lab poster `electrical` | ⚠ textbook unverified. ⚠ "Cell or battery": say "battery". |
+| 5.3 | Mind Lab poster (electrical) | "Electricity flows only when the path is complete. [Branches now read "Electric current flows" / "No electric current flows" / "Metals let electric current through" since 12 Oct 2026.] How we arrange the parts changes what happens." Parts: "Cell or battery", "Bulb", "Switch", "Wires". | Mind Lab poster `electrical` | ⚠ textbook unverified. ⚠ "Cell or battery": say "battery". |
 | 5.4 | Electric circuit | An electric circuit is a complete path through which electric current flows. | Standard P5 wording, textbook unverified | ⚠ textbook unverified. "Electric current" per the teacher's ruling (12 Oct 2026). |
 | 5.5 | Closed circuit | A closed circuit has no gaps, so electric current flows through it and the bulb lights up. | Standard P5 wording, textbook unverified | ⚠ textbook unverified. Poster: "The path is complete", "Current flows", "The bulb lights up"; "Current flows" is being changed to "Electric current flows" (`app_p5.md` §7.4). |
 | 5.6 | Open circuit | An open circuit has a gap, so electric current cannot flow and the bulb does not light up. | Standard P5 wording, textbook unverified | ⚠ textbook unverified. Poster: "The path is broken", "No current flows", "The bulb stays off"; "No current flows" is being changed to "No electric current flows" (`app_p5.md` §7.4). |
@@ -297,5 +297,5 @@ From `theoneapp/syllabus-p3p5.js` (2023 syllabus, updated May 2024). Topics with
 
 | Rule | Exact wording |
 |---|---|
-| Banned words | "Never particles, molecules, atoms, energy (the P6 word), xylem / phloem (say "water-carrying tubes / food-carrying tubes"), voltage, current as a noun on the bench (say "electricity flows"), cells and organs beyond what the activity names." |
+| Banned words | "Never particles, molecules, atoms, energy (the P6 word), xylem / phloem (say "water-carrying tubes / food-carrying tubes"), voltage, "current" alone or "electricity flows" (say "electric current flows"; teacher's ruling, 12 Oct 2026), cells and organs beyond what the activity names." |
 | Heat language | "Say "gains heat from / loses heat to", never "cold gets in"." |
