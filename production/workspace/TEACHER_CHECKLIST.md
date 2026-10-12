@@ -2,7 +2,14 @@
 
 All 27 P5 briefs and all 24 P6 briefs are written (`P5/plan/briefs`, `P6/plan/briefs`), with the reference documents beside them. Every line a script could not trace to your documents, the syllabus or the textbook carries a ⚠ in the brief. The items below need your decision; everything else can go straight to scripting.
 
-## A. Decisions that affect many episodes
+## Decisions received 12 Oct 2026
+
+1. Cells (P5 EP01): out of syllabus; keep the episode, labelled "Additional information" (applied).
+2. Electric current: the P5 electricity videos and the Mind Lab Electrical System poster say "electric current flows" (applied; poster change in TheOneApp).
+3. Forms of energy (P6): short forms spoken, long forms in typed on-screen text (applied).
+4. Textbook photos: later. 5. Lab sign-off: to be confirmed.
+
+## A. Decisions that affect many episodes (as originally raised)
 
 1. **Cells (P5 EP01).** The 2023 syllabus lists "recognise that a cell is a basic unit of life" for P5; your School Lab notes rule cells outside the level. Keep EP01 or drop it?
 2. **"Current" in the Mind Lab.** The Electrical System poster says "Current flows", "No current flows", "Metals let current through", "Cell or battery". The P5 word list says "electricity flows" and "battery". Either the poster changes (recommended) or the five electricity episodes match the poster.
