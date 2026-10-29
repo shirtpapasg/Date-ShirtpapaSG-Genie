@@ -31,5 +31,6 @@ Spoken words: +1 (quiz2). Everything after quiz2 moves later by about a second; 
   is 4:19 (first render 4:20). WHEEL is named at 1:25 and revealed ("can't roll") at 1:40.
 - Rendered with `ep1/run_all.sh` (1920x1080, 60 fps). The MP4 is not kept in the repo.
 
-Still to do (steps 3 and 4 above): upload the new file to YouTube, set the old one to Unlisted, and change
-EP01's link in TheOneApp `videos.js`.
+Published 29 Oct 2026: https://www.youtube.com/watch?v=FOvUezOZJbo (public, made for kids, thumbnail, first in
+the "TheOneApp, Explained" playlist). The first upload (Dyw505BwWnI) was deleted at the teacher's request, and
+TheOneApp `videos.js` points to the new video.
