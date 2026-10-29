@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TheOneApp Publisher · Evidence for the YouTube API Services compliance audit</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  body { font: 11.5pt/1.5 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif; color: #1d2a44; }
+  h1 { font-size: 22pt; margin: 0 0 4pt; }
+  h2 { font-size: 15pt; margin: 0 0 8pt; color: #1f8a4c; border-bottom: 1px solid #d5dbe7; padding-bottom: 4pt; }
+  h3 { font-size: 12pt; margin: 14pt 0 4pt; }
+  .meta { color: #4d5b76; margin: 0 0 14pt; }
+  .page { page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  pre { background: #0f172a; color: #e5eefc; padding: 10pt 12pt; border-radius: 8pt; font: 8.6pt/1.4 "IBM Plex Mono", ui-monospace, Menlo, monospace; white-space: pre-wrap; word-break: break-word; }
+  img { max-width: 100%; border: 1px solid #d5dbe7; border-radius: 6pt; }
+  table { border-collapse: collapse; width: 100%; font-size: 10.5pt; }
+  td, th { border: 1px solid #d5dbe7; padding: 4pt 6pt; text-align: left; vertical-align: top; }
+  th { background: #f1f5fb; }
+  .note { background: #fff8dd; border: 1px solid #f0d77a; border-radius: 6pt; padding: 8pt 10pt; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <h1>TheOneApp Publisher</h1>
+  <p class="meta">Evidence for the YouTube API Services compliance audit · Google Cloud project 780560926873 · 12 October 2026</p>
+  <p><b>What the API client is.</b> TheOneApp Publisher is a private command-line tool used by one person, the teacher who runs TheOneApp (<a href="https://theoneapp-sg.vercel.app">theoneapp-sg.vercel.app</a>), to publish the teacher's own educational science videos to the teacher's own YouTube channel, <a href="https://www.youtube.com/channel/UCu8usghTv_5K0FuJykeCGKg">TheOneApp</a>. It has no other users and no user accounts.</p>
+  <h3>Endpoints used</h3>
+  <table>
+    <tr><th>Endpoint</th><th>Why</th></tr>
+    <tr><td>channels.list (mine=true)</td><td>Find the signed-in owner's channel and its uploads playlist</td></tr>
+    <tr><td>playlistItems.list</td><td>Find each uploaded episode on the owner's channel</td></tr>
+    <tr><td>videos.insert</td><td>Upload a finished episode (once the project is audited)</td></tr>
+    <tr><td>videos.list, videos.update</td><td>Set title, description, tags, category, language, made-for-kids, visibility</td></tr>
+    <tr><td>thumbnails.set</td><td>Upload the episode's custom thumbnail</td></tr>
+    <tr><td>playlists.list, playlists.insert, playlistItems.insert</td><td>Keep every episode in the series playlist "TheOneApp, Explained"</td></tr>
+  </table>
+  <h3>What is in this document</h3>
+  <ol>
+    <li>OAuth flow: how the owner signs in (Google device-code flow), the scope requested, and how access is revoked.</li>
+    <li>Upload interface: the tool's dry run and its publishing run, as recorded on 11 October 2026.</li>
+    <li>Player / embed: where the published videos appear in TheOneApp.</li>
+  </ol>
+  <p>Links referred to in the privacy policy and terms: <a href="https://theoneapp-sg.vercel.app/privacy.html">Privacy Policy</a> · <a href="https://theoneapp-sg.vercel.app/terms.html">Terms of Service</a> · <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a> · <a href="https://policies.google.com/privacy">Google Privacy Policy</a> · <a href="https://security.google.com/settings/security/permissions">Revoke access</a>.</p>
+</section>
+
+<section class="page">
+  <h2>1. OAuth flow</h2>
+  <p>The tool uses Google's OAuth 2.0 <b>device-code flow</b> (OAuth client type "TVs and Limited Input devices"). It requests one scope, <code>https://www.googleapis.com/auth/youtube</code>, which is needed to upload and edit the owner's own videos and playlists. Nothing is read from any other account.</p>
+  <h3>Step 1 · the tool asks for sign-in</h3>
+  <pre>$ python3 production/youtube/yt_device_login.py start
+Open this link in your browser:  https://www.google.com/device
+Enter this code:                 SYL-HFH-VTNT
+The code is valid for 30 minutes. Then run:  python3 yt_device_login.py wait</pre>
+  <h3>Step 2 · Google's consent screen</h3>
+  <p>The owner opens google.com/device, enters the code, chooses the channel's Google account, and sees the standard Google consent screen for "TheOneApp Publisher" listing the YouTube permission. After approval Google shows "Success! Device connected". The screens below are the ones the channel owner saw on 11 October 2026.</p>
+  <table>
+    <tr><th>Screen</th><th>What it showed</th></tr>
+    <tr><td>Sign in with Google · "TheOneApp Publisher wants to access your Google Account"</td><td>The YouTube permission ("Manage your YouTube account"), approved by the channel owner</td></tr>
+    <tr><td>Success! Device connected · TheOneApp</td><td>Google's confirmation after approval</td></tr>
+  </table>
+  <h3>Step 3 · the tool receives the token</h3>
+  <pre>$ python3 production/youtube/yt_device_login.py wait
+Waiting for your approval in the browser…
+Tokens stored in production/youtube/.yt_token.json (refresh token: yes)</pre>
+  <p>The token file is readable by the owner only (mode 600), is excluded from version control, and lives only in the owner's private workspace. The tool never prints a token.</p>
+  <h3>Revocation</h3>
+  <p>The owner revokes the tool's access at any time at <a href="https://security.google.com/settings/security/permissions">security.google.com/settings/security/permissions</a> ("Third-party apps with account access" → TheOneApp Publisher → Remove access). The stored token then stops working. The privacy policy and terms both state this.</p>
+</section>
+
+<section class="page">
+  <h2>2. Upload interface</h2>
+  <p>The tool has no graphical interface; it is run from a terminal by the owner. It always offers a <b>dry run</b> that lists what it would change before anything is written. Below are the real runs from 11 October 2026, when episodes 1 to 5 of the series were published.</p>
+  <h3>Dry run</h3>
+  <pre>$ python3 production/youtube/publish_p4.py --from 1 --to 5 --dry-run
+Channel: TheOneApp (UCu8usghTv_5K0FuJykeCGKg)
+Playlist 'TheOneApp, Explained': would create
+EP01: 'P4 EP01 Systems Heart' -> '7 Bike Parts Explain Every System in Science'  https://www.youtube.com/watch?v=Dyw505BwWnI
+        would set description (1172 chars), 14 tags, category Education, made-for-kids, public, thumbnail P4_EP01_thumbnail.jpg, add to playlist
+EP02: 'P4 EP02 PlantSystem George' -> 'You Ate 3 Plant Parts Today. Which Ones?'  https://www.youtube.com/watch?v=loaPYprOWDQ
+        would set description (1289 chars), 15 tags, category Education, made-for-kids, public, thumbnail P4_EP02_thumbnail.jpg, add to playlist
+EP03: 'P4 EP03 LeafParts Heart' -> 'Parallel or Net? The 4 Parts of Every Leaf'  https://www.youtube.com/watch?v=PNe2DU8sFTI
+        would set description (850 chars), 12 tags, category Education, made-for-kids, public, thumbnail P4_EP03_thumbnail.jpg, add to playlist
+EP04: 'P4 EP04 PlantAdaptations' -> '5 Plants With Superpowers | P4 Science Plant System'  https://www.youtube.com/watch?v=CHAXJoRGXgU
+        would set description (986 chars), 14 tags, category Education, made-for-kids, public, thumbnail P4_EP04_thumbnail.jpg, add to playlist
+EP05: 'P4 EP05 BodySystems' -> '5 Body Systems Keeping You Alive Right Now'  https://www.youtube.com/watch?v=sqzPRN9jEpg
+        would set description (884 chars), 14 tags, category Education, made-for-kids, public, thumbnail P4_EP05_thumbnail.jpg, add to playlist
+Report: production/youtube/publish_report.json</pre>
+  <h3>Publishing run</h3>
+  <pre>$ python3 production/youtube/publish_p4.py --from 1 --to 5 --privacy public
+Channel: TheOneApp (UCu8usghTv_5K0FuJykeCGKg)
+Playlist 'TheOneApp, Explained': found PLPfEuT7l4KjI
+EP01: 'P4 EP01 Systems Heart' -> '7 Bike Parts Explain Every System in Science'  https://www.youtube.com/watch?v=Dyw505BwWnI
+        metadata, made-for-kids and visibility set
+        added to playlist
+EP02: 'P4 EP02 PlantSystem George' -> 'You Ate 3 Plant Parts Today. Which Ones?'  https://www.youtube.com/watch?v=loaPYprOWDQ
+        metadata, made-for-kids and visibility set
+        added to playlist
+EP03: 'P4 EP03 LeafParts Heart' -> 'Parallel or Net? The 4 Parts of Every Leaf'  https://www.youtube.com/watch?v=PNe2DU8sFTI
+        metadata, made-for-kids and visibility set
+        added to playlist
+EP04: 'P4 EP04 PlantAdaptations' -> '5 Plants With Superpowers | P4 Science Plant System'  https://www.youtube.com/watch?v=CHAXJoRGXgU
+        metadata, made-for-kids and visibility set
+        added to playlist
+EP05: 'P4 EP05 BodySystems' -> '5 Body Systems Keeping You Alive Right Now'  https://www.youtube.com/watch?v=sqzPRN9jEpg
+        metadata, made-for-kids and visibility set
+        added to playlist
+Report: production/youtube/publish_report.json
+
+$ (thumbnails, after the channel was phone-verified)
+longUploadsStatus = allowed
+EP01 thumbnail set
+EP02 thumbnail set
+EP03 thumbnail set
+EP04 thumbnail set
+EP05 thumbnail set</pre>
+  <h3>Result check (videos.list)</h3>
+  <pre>Dyw505BwWnI public kids=True thumb 1280x720 | 7 Bike Parts Explain Every System in Science
+loaPYprOWDQ public kids=True thumb 1280x720 | You Ate 3 Plant Parts Today. Which Ones?
+PNe2DU8sFTI public kids=True thumb 1280x720 | Parallel or Net? The 4 Parts of Every Leaf
+CHAXJoRGXgU public kids=True thumb 1280x720 | 5 Plants With Superpowers | P4 Science Plant System
+sqzPRN9jEpg public kids=True thumb 1280x720 | 5 Body Systems Keeping You Alive Right Now</pre>
+  <p>Every video is marked "made for kids" because the audience is 9 to 12 years old. The videos were uploaded by the owner in YouTube Studio; the tool will use videos.insert for later episodes once the project is audited.</p>
+</section>
+
+<section class="page">
+  <h2>3. Player / embed</h2>
+  <p>The published videos appear on the Videos page of TheOneApp, played through YouTube's privacy-enhanced embedded player (youtube-nocookie.com, with the standard YouTube controls and branding). The page states that the lessons play from the YouTube channel; its footer links the channel, the privacy policy and the terms. Episodes 1 to 5 are "Now showing"; the rest are "Coming soon" until published.</p>
+  <img src="videos-page-top.png" alt="TheOneApp Videos page, top" style="max-height: 150mm; width: auto; display: block; margin: 6pt auto;">
+  <img src="videos-page-footer.png" alt="TheOneApp Videos page, footer with privacy policy and terms links" style="max-height: 70mm; width: auto; display: block; margin: 6pt auto;">
+</section>
+
+</body>
+</html>
