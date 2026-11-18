@@ -1,0 +1,187 @@
+{
+ "episode": "SAU EP09",
+ "title": "Mosquitoes vs mosquitoes!",
+ "tag": "🌏 TheOneApp, Explored · EP 9 · Mosquitoes",
+ "intro": {
+  "goals": [
+   [
+    "🔄",
+    "A mosquito's life cycle",
+    "first"
+   ],
+   [
+    "🦟",
+    "How dengue spreads",
+    "second"
+   ],
+   [
+    "🧪",
+    "How Wolbachia mosquitoes help",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "More science from",
+  "your world! 🌏"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🔄",
+    "Egg, larva, pupa, adult",
+    "larva",
+    0.12,
+    "#2a9d8f"
+   ],
+   [
+    "🦟",
+    "Only female mosquitoes bite",
+    "bite",
+    0.32,
+    "#e63946"
+   ],
+   [
+    "🚫",
+    "Wolbachia males: eggs don't hatch",
+    "hatch",
+    0.52,
+    "#7209b7"
+   ]
+  ],
+  "tease": "🌏 Next time: more science from your world!",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "cycle",
+   "LIFE CYCLE",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "larva",
+   "LARVA",
+   "#3a86ff"
+  ],
+  [
+   "textbook",
+   "pupa",
+   "PUPA",
+   "#f77f00"
+  ],
+  [
+   "news",
+   "dengue",
+   "DENGUE",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "nightBuzz",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Bzzz! In Singapore, some mosquitoes spread a disease called dengue. But here's a twist. Singapore is fighting mosquitoes, with more mosquitoes!"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. What would happen to the crocodile if all the mangrove crabs disappeared? The mudskippers would lose their food, so there would be fewer mudskippers, and less food for the crocodile. Every link in a food chain matters!"
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, a mosquito's life cycle. Second, how dengue spreads. And third, how Wolbachia mosquitoes help. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. Singapore had about thirteen thousand six hundred dengue cases in twenty twenty-four, and just over four thousand in twenty twenty-five. In Project Wolbachia areas, the risk of getting dengue fell by more than seventy per cent.",
+   "hold": 1.0
+  },
+  {
+   "id": "m1",
+   "scene": "lab",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "m2",
+   "scene": "povRelease",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "m3",
+   "scene": "povFly",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "m4",
+   "scene": "povMeet",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "m5",
+   "scene": "povEggs",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "m6",
+   "scene": "fewer",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that journey? You were a male Aedes mosquito with Wolbachia inside. You were released at an HDB block. Males don't bite, so you just flew around, looking for a female. You found one and mated with her. But her eggs could not hatch. So, fewer mosquitoes, and less dengue.",
+   "hold": 1.0
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Three, you learn about life cycles. A mosquito's life cycle has four stages: egg, larva, pupa and adult. The first three stages happen in water. That's why we never leave water standing in flower pot plates!",
+   "hold": 1.0
+  },
+  {
+   "id": "dengue",
+   "scene": "dengue",
+   "text": "Only female mosquitoes bite. They need blood to make their eggs. When a female Aedes mosquito bites someone with dengue, it can pass the virus on to the next person it bites."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Once a week, hunt for standing water around your home: flower pot plates, pails, and roof gutters. Tip it out, and break the mosquito life cycle!"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why does Project Wolbachia release only male mosquitoes, and never females? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. A mosquito's life cycle goes egg, larva, pupa, adult, and the first three stages live in water. Only female mosquitoes bite. And when Wolbachia males mate with wild females, the eggs don't hatch. Next time: more science from your world!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}
