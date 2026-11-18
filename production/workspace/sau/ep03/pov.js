@@ -13,7 +13,7 @@ function c3Face(g, y = -30, k = 1) { [-18, 18].forEach(x => { el("circle", {cx: 
 // a cheap can for crowds (no clip path)
 function canLite(p, col, o = {}) { const g = el("g", {}, p); el("path", {d: o.dent ? c3DENT : c3BODY, fill: col, stroke: INK, "stroke-width": 7, "stroke-linejoin": "round"}, g);
   el("path", {d: "M-40 -90 H40 L50 -70 H-50 Z", fill: "#d5dde2", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g); el("path", {d: "M-50 70 H50 L40 90 H-40 Z", fill: "#d5dde2", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g);
-  if (!o.dent) el("path", {d: "M-48 20 Q-24 -4 0 16 T48 12 V42 Q24 62 0 44 T-48 48 Z", fill: "#fff", opacity: .85}, g);
+  if (!o.dent) { el("rect", {x: -47, y: 16, width: 94, height: 30, fill: "#fff", opacity: .9}, g); [[-24, 31], [0, 31], [24, 31]].forEach(([x, y]) => el("circle", {cx: x, cy: y, r: 7, fill: col}, g)); }
   el("rect", {x: -38, y: -60, width: 12, height: 120, rx: 6, fill: "#fff", opacity: .35}, g); if (o.face) c3Face(g, o.dent ? -44 : -34); return g; }
 function c3Fly(a, off, o = {}) { const sp = o.spread || 900, fog = o.fog || .3, K = o.k || 2.6;
   a.forEach(ob => { const z = ((ob.z0 - off) % 1 + 1) % 1, zz = .08 + K * z; ob.z = z;
@@ -190,7 +190,7 @@ S.povMelt = (() => { const s = scene("povMelt", "#1a0f0a", "#1a0f0a"), st = s.st
   s.fl = [-200, -100, 0, 110, 205].map((x, i) => { const g = el("g", {transform: `translate(${x} 300)`}, s.mouth); g.p = el("path", {d: "M-60 0 Q-70 -90 -20 -150 Q-24 -100 6 -120 Q0 -200 40 -250 Q36 -160 66 -110 Q84 -60 60 0 Z", fill: i % 2 ? "#ffe14d" : "#ff9e00", stroke: "#e85d04", "stroke-width": 5, opacity: .9}, g); return g; });
   s.str = c3Streaks(s.w, 22, 5, "#ffd166", 6);
   s.in = el("g", {}, s.w); c3Full(s.in, c3GradR([[0, "#fff3b0"], [.45, "#ffb703"], [1, "#c2410c"]]));
-  s.ch = field(s.in, 16, 131, (e, i) => { e.c = el("g", {}, e); [[-58, 10, -14], [0, -14, 6], [56, 16, 22]].forEach(([x, y, r], k) => tf(canLite(e.c, C3COL[(i + k * 2) % 7], {dent: true, face: k === 1 && i % 2 === 0}), `translate(${x} ${y}) rotate(${r}) scale(.9 .6)`));
+  s.ch = field(s.in, 22, 131, (e, i) => { e.c = el("g", {}, e); [[-58, 10, -14], [0, -14, 6], [56, 16, 22]].forEach(([x, y, r], k) => tf(canLite(e.c, C3COL[(i + k * 2) % 7], {dent: true, face: k === 1 && i % 2 === 0}), `translate(${x} ${y}) rotate(${r}) scale(.9 .6)`));
     e.b = el("g", {}, e); const bb = blob(e.b, 120, "#ffd166", 300 + i); set(bb, "stroke", "#f77f00"); set(bb, "stroke-width", 8); el("ellipse", {cx: -30, cy: -34, rx: 40, ry: 16, fill: "#fff8d6", opacity: .9}, e.b);
     e.d = el("path", {d: "M-18 60 Q-22 150 0 190 Q22 150 18 60 Z", fill: "#ffd166", stroke: "#f77f00", "stroke-width": 6}, e); }, .2);
   s.pool = el("path", {fill: c3GradL([[0, "#fff8d6"], [.12, "#ffe066"], [.5, "#ffa200"], [1, "#e85d04"]]), stroke: "#fff", "stroke-width": 10, "stroke-linejoin": "round"}, s.in);
@@ -201,7 +201,7 @@ S.povMelt = (() => { const s = scene("povMelt", "#1a0f0a", "#1a0f0a"), st = s.st
     tf(s.mouth, `translate(${X} ${Y - 40 * sc + 30}) scale(${sc})`); s.fl.forEach((f, i) => tf(f.p, `scale(${1 + .12 * Math.sin(u * 11 + i * 2)} ${.75 + .3 * Math.abs(Math.sin(u * 7 + i * 1.7))})`));
     c3RunStreaks(s.str, 1.1 * u, {r0: 200, a: .5 * (1 - ramp(u, TIN - .2, TIN + .3))});
     op(s.in, ramp(u, TIN - .35, TIN + .15));
-    c3Fly(s.ch, .05 * u, {spread: 760, rot: 0, fog: .6, k: 1.5, fn: (o, x, y, z, sc2) => { const mm = clamp(m * 1.5 - o.u * .5); op(o.e.c, 1 - ramp(mm, .25, .7)); op(o.e.b, ramp(mm, .1, .6)); tf(o.e.b, `scale(${1 + .15 * mm} ${1 - .5 * mm})`); tf(o.e.d, `translate(0 ${40 * mm}) scale(1 ${.2 + 2.2 * mm})`); op(o.e.d, ramp(mm, .15, .4)); return [x, y - 60 * sc2 + 420 * sc2 * mm * mm, sc2 * 1.2, (o.u - .5) * 30]; }});
+    c3Fly(s.ch, .05 * u, {spread: 640, rot: 0, fog: .6, k: 1.5, fn: (o, x, y, z, sc2) => { const mm = clamp(m * 1.5 - o.u * .5); op(o.e.c, 1 - ramp(mm, .25, .7)); op(o.e.b, ramp(mm, .1, .6)); tf(o.e.b, `scale(${1 + .15 * mm} ${1 - .5 * mm})`); tf(o.e.d, `translate(0 ${40 * mm}) scale(1 ${.2 + 2.2 * mm})`); op(o.e.d, ramp(mm, .15, .4)); return [x, y - 60 * sc2 + 420 * sc2 * mm * mm, sc2 * 2.4, (o.u - .5) * 30]; }});
     const L = lerp(1140, 150, ease(clamp((u - 2.5) / 2.0))); let d = `M${FULL.x - 20} ${FULL.y + FULL.h + 40} L${FULL.x - 20} ${L}`; for (let x = FULL.x - 20; x <= FULL.x + FULL.w + 60; x += 70) d += ` L${x} ${L + 22 * Math.sin(x * .011 + u * 3.2) + 12 * Math.sin(x * .027 - u * 4.4)}`; set(s.pool, "d", d + ` L${FULL.x + FULL.w + 60} ${FULL.y + FULL.h + 40} Z`);
     s.sheen.forEach(o => { const y = L + 70 + o.y * 760; set(o.e, "cx", FULL.x + ((o.x + u * .05 * (o.u - .5)) % 1 + 1) % 1 * FULL.w); set(o.e, "cy", y); op(o.e, y > L + 40 ? .5 + .3 * Math.sin(u * 3 + o.u * 9) : 0); });
     s.bub.forEach(o => { const k = ((u * .5 + o.u) % 1), y = lerp(1060, L + 20, k); set(o.e, "cx", FULL.x + o.x * FULL.w); set(o.e, "cy", y); op(o.e, u > 2.6 ? Math.sin(k * Math.PI) * .8 : 0); });
@@ -219,13 +219,13 @@ S.povRoll = (() => { const s = scene("povRoll", "#1d2d44", "#1d2d44"), st = s.st
     g.ln = [0, 1, 2, 3, 4, 5, 6, 7].map(() => el("line", {x1: -600, x2: 600, stroke: INK, "stroke-width": 6, "stroke-linecap": "round"}, g)); g.d = d; return g; });
   s.str = c3Streaks(s.w, 18, 15, "#eef2f4", 6); s.fl = c3Full(s.w, "#f1f4f6", 0);
   // outside: cut and press
-  s.out = el("g", {}, st); c3Full(s.out, c3GradL([[0, "#dff3ff"], [.7, "#bcd9ec"], [.7, "#8d99ae"], [1, "#6c7887"]]));
+  s.out = el("g", {}, st); s.o2 = s.out; s.out = el("g", {transform: `translate(${X} 430) scale(1.15) translate(-910 -560)`}, s.o2); c3Full(s.out, c3GradL([[0, "#dff3ff"], [.7, "#bcd9ec"], [.7, "#8d99ae"], [1, "#6c7887"]]));
   el("rect", A3({x: FULL.x - 20, y: SY + 12, width: 780, height: 40, fill: "#8d99ae"}), s.out); [0, 300, 600].forEach(x => el("rect", A3({x: FULL.x + 60 + x, y: SY + 52, width: 30, height: 200, fill: "#6c757d"}), s.out));
   s.sheet = el("rect", {x: FULL.x - 20, y: SY, width: 780, height: 12, fill: "#eef2f4", stroke: INK, "stroke-width": 5}, s.out);
   s.hole = el("ellipse", {cx: 430, cy: SY + 6, rx: 66, ry: 7, fill: "#3d4852"}, s.out);
   s.cut = el("g", {}, s.out); el("rect", A3({x: -34, y: -640, width: 68, height: 430, fill: "#6c757d"}), s.cut); el("rect", A3({x: -84, y: -220, width: 168, height: 170, rx: 14, fill: "#f77f00", "stroke-width": 7}), s.cut); el("path", A3({d: "M-70 -50 H70 V0 H52 V-26 H-52 V0 H-70 Z", fill: "#ced4da"}), s.cut);
   // the press and its die (seen cut open)
-  const PX = 930; el("rect", A3({x: PX - 190, y: SY + 6, width: 130, height: 250, fill: "#495057", "stroke-width": 7}), s.out); el("rect", A3({x: PX + 60, y: SY + 6, width: 130, height: 250, fill: "#495057", "stroke-width": 7}), s.out); el("rect", {x: PX - 60, y: SY + 6, width: 120, height: 250, fill: "#1b263b", stroke: INK, "stroke-width": 7}, s.out); el("rect", A3({x: PX - 210, y: SY + 250, width: 420, height: 50, fill: "#343a40", "stroke-width": 7}), s.out);
+  const PX = 930; el("rect", A3({x: PX - 190, y: SY + 6, width: 130, height: 200, fill: "#495057", "stroke-width": 7}), s.out); el("rect", A3({x: PX + 60, y: SY + 6, width: 130, height: 200, fill: "#495057", "stroke-width": 7}), s.out); el("rect", {x: PX - 60, y: SY + 6, width: 120, height: 200, fill: "#1b263b", stroke: INK, "stroke-width": 7}, s.out); el("rect", A3({x: PX - 210, y: SY + 200, width: 420, height: 44, fill: "#343a40", "stroke-width": 7}), s.out);
   s.cupO = el("path", {fill: "none", stroke: INK, "stroke-width": 22, "stroke-linejoin": "round", "stroke-linecap": "round"}, s.out); s.cup = el("path", {fill: "none", stroke: "#eef2f4", "stroke-width": 12, "stroke-linejoin": "round", "stroke-linecap": "round"}, s.out);
   s.punch = el("g", {}, s.out); el("rect", A3({x: -44, y: -700, width: 88, height: 700, fill: c3GradL([[0, "#8d99ae"], [.4, "#dfe6ea"], [1, "#6c757d"]], {x2: 1, y2: 0}), "stroke-width": 7}), s.punch); el("rect", A3({x: -90, y: -760, width: 180, height: 120, rx: 14, fill: "#f77f00", "stroke-width": 7}), s.punch);
   s.disc = el("g", {}, s.out); el("ellipse", {rx: 66, ry: 12, fill: "#eef2f4", stroke: INK, "stroke-width": 6}, s.disc); el("ellipse", {cx: -14, cy: -3, rx: 30, ry: 4, fill: "#fff"}, s.disc);
@@ -240,18 +240,18 @@ S.povRoll = (() => { const s = scene("povRoll", "#1d2d44", "#1d2d44"), st = s.st
     s.rl.forEach(r => r.ln.forEach((l, i) => { const th = i * .785 - r.d * (u * 2.6 + 2.2 * u * u), y = 150 * Math.sin(th); set(l, "y1", y); set(l, "y2", y); op(l, Math.cos(th) > 0 ? .5 * Math.cos(th) : 0); }));
     c3RunStreaks(s.str, 1.2 * u, {r0: 260, a: .35}); op(s.fl, on(u, TP - .25, TP + .5, .22));
     // outside
-    op(s.out, ramp(u, TP + .05, TP + .3)); const CX = 430, PX = 930, cd = on(u, 2.45, 2.85, .13), cutDone = u > 2.6;
+    op(s.o2, ramp(u, TP + .05, TP + .3)); const CX = 430, PX = 930, cd = on(u, 2.45, 2.85, .13), cutDone = u > 2.6;
     tf(s.cut, `translate(${CX} ${lerp(SY - 110, SY + 4, cd)})`); op(s.hole, cutDone ? 1 : 0);
-    const mv = ease(clamp((u - 2.85) / .45)), pk = ramp(u, 3.4, 3.7), pu = pk - ramp(u, 3.75, 4.0), h = 220 * pk;
+    const mv = ease(clamp((u - 2.85) / .45)), pk = ramp(u, 3.4, 3.7), pu = pk - ramp(u, 3.75, 4.0), h = 170 * pk;
     tf(s.disc, `translate(${lerp(CX, PX, mv)} ${lerp(SY + 6, SY + 2, mv) - Math.sin(mv * Math.PI) * 120})`); op(s.disc, cutDone && pk < .04 ? 1 : 0);
     const cp = `M${PX - 52} ${SY + 6} V${SY + 6 + h} H${PX + 52} V${SY + 6}`; set(s.cup, "d", cp); set(s.cupO, "d", cp); op(s.cup, pk >= .04 ? 1 : 0); op(s.cupO, pk >= .04 ? 1 : 0);
-    tf(s.punch, `translate(${PX} ${lerp(SY - 150, SY - 4 + 220, pu) })`);
-    tf(s.l1, `translate(${CX} ${SY + 130})`); op(s.l1, ramp(u, 2.5, 2.7)); tf(s.l2, `translate(${PX} ${SY + 370})`); op(s.l2, ramp(u, 3.5, 3.7));
+    tf(s.punch, `translate(${PX} ${lerp(SY - 150, SY - 4 + 170, pu) })`);
+    tf(s.l1, `translate(${CX} ${SY + 130})`); op(s.l1, ramp(u, 2.5, 2.7)); tf(s.l2, `translate(${PX} ${SY + 300})`); op(s.l2, ramp(u, 3.5, 3.7));
     const nk = ease(clamp((u - 4.0) / .45)), nx = lerp(PX, 1390, nk), ny = lerp(SY + 110, 430, nk) - Math.sin(nk * Math.PI) * 60;
     tf(s.newc, `translate(${nx} ${ny}) scale(${lerp(.55, 1.9, nk)})`); op(s.newc, ramp(u, 3.98, 4.08)); tf(s.glow, `translate(1390 430)`); op(s.glow, ramp(u, 4.25, 4.5)); tf(s.rays, `translate(1390 430) scale(${.8 + .2 * Math.max(0, pop(u, 4.35, .4))})`); op(s.rays, ramp(u, 4.3, 4.45));
     tf(s.you, `translate(1390 228) scale(${Math.max(0, pop(u, 4.45))})`); op(s.you, ramp(u, 4.4, 4.55));
     op(s.vh, 1 - ramp(u, .6, 1.6)); op(s.vg, ramp(u, .6, 1.6) * (1 - ramp(u, TP, TP + .3)));
-    op(s.blink, .9 * (1 - ramp(u, -.2, .3))); c3Show(s.c0, t, t0 + .25, t0 + TP + .1); c3Show(s.card, t, t0 + 2.6, t0 + D - .1); }; return s; })();
+    op(s.blink, .9 * (1 - ramp(u, -.2, .3))); c3Show(s.c0, t, t0 + .25, t0 + TP + .1); c3Show(s.card, t, t0 + 2.6, t0 + D - .3); }; return s; })();
 
 // ---- 8. shelf (outside): a brand-new can on a supermarket shelf... and the same pupil picks us up
 S.shelf = (() => { const s = scene("shelf", "#fff8e8", "#fff8e8"), st = s.stage, FLR = 930, MX = 770, MY = 566; s.cam = el("g", {}, st); const c = s.cam;
@@ -266,13 +266,13 @@ S.shelf = (() => { const s = scene("shelf", "#fff8e8", "#fff8e8"), st = s.stage,
   for (let i = 0; i < 12; i++) tf(bottleG(s.row, {col: ["#06d6a0", "#f77f00", "#b5179e"][Math.floor(i / 4)]}), `translate(${380 + i * 118} 818) scale(.82)`);
   s.glow = el("g", {transform: `translate(${MX} ${MY})`}, c); c3Glow(s.glow, "#fff8d6", 190, .95, .25);
   s.kid = c3Kid(c); op(s.kid.can, 0);
-  s.me = el("g", {}, c); canG(s.me, "#3a86ff", {face: true, mark: true, sw: 8}); s.sp = [[-70, -70, 50], [72, -30, 40], [-60, 50, 36]].map(([x, y, f]) => { const e = emo(c, 0, 0, f, "✨"); e.dx = x; e.dy = y; return e; });
+  s.me = el("g", {}, c); canG(s.me, "#3a86ff", {face: true, mark: true, sw: 8}); s.sp = [[-70, -70, 50], [72, -30, 40], [-60, 50, 36]].map(([x, y, f]) => { const e = emo(c, 0, 0, f, "✨"); e.ox = x; e.oy = y; return e; });
   s.you = youTag(c); s.card = c3Big(st, "Back on the shelf, as a brand-new can!", "#1d6fd1");
   s.run = t => { const t0 = c3T("shelf"), u = t - t0, D = c3D("shelf"), w = c3Walk(u, .7, 1.9, 4), reach = ramp(u, 1.85, 2.35), take = ramp(u, 2.5, 3.15);
     const q = {x: lerp(120, 628, w.k), y: FLR + 55, sc: .97, sw: w.sw, bob: w.bob - 14 * on(u, 3.2, 3.6, .15), arm: lerp(lerp(0, -146, reach), -68, take), head: lerp(-12 * reach, 8, take), smile: u > 2.45, lean: 3 * reach * (1 - take)};
     if (reach <= 0) delete q.arm; c3Pose(s.kid, q); const h = c3Hand(q, 150), held = u > 2.45, cx = held ? h[0] + 16 : MX, cy = held ? h[1] - 6 : MY;
     tf(s.me, `translate(${cx} ${cy}) scale(.62) rotate(${held ? 8 * take : 0})`); op(s.glow, 1 - ramp(u, 2.3, 2.6));
-    s.sp.forEach((e, i) => { tf(e, `translate(${cx + e.dx} ${cy + e.dy}) scale(${.8 + .3 * Math.sin(u * 6 + i * 2)})`); op(e, 1 - ramp(u, 2.0, 2.4) + ramp(u, 3.3, 3.6)); });
+    s.sp.forEach((e, i) => { tf(e, `translate(${cx + e.ox} ${cy + e.oy}) scale(${.8 + .3 * Math.sin(u * 6 + i * 2)})`); op(e, 1 - ramp(u, 2.0, 2.4) + ramp(u, 3.3, 3.6)); });
     tf(s.you, `translate(${cx} ${cy - 62}) scale(${.8 * Math.max(0, pop(u, .15))})`); op(s.you, 1 - on(u, 1.9, 3.3, .2));
     const z1 = ramp(u, .6, 1.6), z2 = ramp(u, 3.0, 4.0), z = lerp(lerp(2.5, 1.02, z1), 1.3, z2), fx = lerp(lerp(MX, 830, z1), 690, z2), fy = lerp(lerp(MY - 10, 430, z1), 560, z2);
     tf(c, `translate(${VP[0]} ${VP[1]}) scale(${z}) translate(${-fx} ${-fy})`); c3Show(s.card, t, t0 + 2.9, t0 + D); }; return s; })();

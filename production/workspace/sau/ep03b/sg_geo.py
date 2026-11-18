@@ -1,6 +1,6 @@
 """sg_geo.py (EP03 Part 2): prints the Singapore close-up coastline used by ep03b/scenes.js (const SG3), from the same
 Natural Earth file as geo_map.py (geo/land10.geojson). Equirectangular (fine this close to the equator): 3300 px per degree,
-(103.82 E, 1.31 N) at (810, 480), the middle of the screen in scene units.   python3 ep03b/sg_geo.py > ep03b/sg_geo.js"""
+(103.82 E, 1.31 N) at (810, 480), the middle of the screen in scene units.   python3 ep03b/sg_geo.py   (the output is pasted at the top of ep03b/scenes.js; "tuas0", the start of the barge route on the drawn coast, is added by hand)"""
 import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); K = 3300
 P = lambda lon, lat: (810 + (lon - 103.82) * K, 480 - (lat - 1.31) * K)

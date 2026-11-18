@@ -195,6 +195,7 @@ S.hook = (() => { const s = scene("hook", "#3a0ca3", "#4361ee"), st = s.stage;
     el("rect", {x: 300, y: 158 + r * 78, width: 26, height: 22, rx: 3, fill: "#ced4da", stroke: INK, "stroke-width": 3}, s.blk); }
   el("rect", R3A({x: 232, y: 124, width: 64, height: 676, fill: "#14142b"}), s.blk); el("rect", R3A({x: 190, y: 716, width: 150, height: 84, fill: "#2b2d42"}), s.blk);
   el("path", R3A({d: "M214 738 H316 L306 796 H224 Z", fill: "#2a9d8f"}), s.blk); el("rect", {x: 30, y: 800, width: 470, height: 14, rx: 7, fill: INK}, s.blk);
+  r3Lab(s.blk, 264, 92, "rubbish chute", 32); r3Lab(s.blk, 264, 852, "bin centre", 32);
   s.bag = r3Bag(st, "#adb5bd", .36); s.puff = el("g", {}, st); [[-30, 0], [0, -14], [30, 0]].forEach(([x, y]) => el("circle", {cx: x, cy: y, r: 16, fill: "#fff", opacity: .8}, s.puff));
   s.q = el("g", {}, st); tx(s.q, {x: 0, y: 0, "text-anchor": "middle", "font-size": 62, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 11}, "Where does it go next?");
   s.arrow = arrowG(st, "#ffe14d"); s.qm = tx(st, {x: 0, y: 0, "text-anchor": "middle", "font-size": 150, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 18}, "?");
@@ -251,7 +252,7 @@ S.news = (() => { const s = scene("news", "#023e8a", "#0077b6"), st = s.stage;
   s.A = el("g", {}, st); skyline(s.A, 90, 800, "#03045e"); s.heap = el("g", {}, s.A);
   el("path", R3A({d: "M40 800 Q200 520 420 470 Q600 300 780 470 Q1020 540 1160 800 Z", fill: "#6c757d"}), s.heap);
   seed = 31; for (let i = 0; i < 22; i++) { const x = 170 + rnd() * 860, y = 800 - rnd() * Math.max(40, 300 - Math.abs(x - 600) * .55); const b = r3Bag(s.heap, ["#343a40", "#495057", "#adb5bd", "#212529"][i % 4], .55 + rnd() * .35); tf(b, `translate(${x} ${y - 40}) rotate(${rnd() * 50 - 25}) scale(${.55 + rnd() * .35})`); }
-  el("rect", {x: -200, y: 800, width: 1600, height: 300, fill: "#03045e"}, s.A);
+  el("rect", {x: -400, y: 800, width: 2600, height: 400, fill: "#03045e"}, s.A);
   s.up = arrowG(s.A, "#e63946"); s.c1 = chip(st, "2025: more rubbish than ever before", "#e63946", {fs: 40});
   s.B = el("g", {}, st); s.bags = []; for (let i = 0; i < 10; i++) { const g = el("g", {}, s.B); g.grey = r3Bag(g, "#6c757d", 1); g.blue = r3Bag(g, "#1d6fd6", 1); s.bags.push(g); }
   { const g = s.bags[0]; el("circle", {cx: 0, cy: 6, r: 34, fill: "#fff", stroke: INK, "stroke-width": 4}, g.blue); emo(g.blue, 0, 6, 44, "♻️"); }
@@ -297,6 +298,9 @@ S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = s.stage;
       tf(g, `translate(${g.x} ${g.y}) scale(${1 + .13 * now})`); op(g, .28 + .72 * done); set(g.bg, "fill", now > .5 ? "#fff8d6" : "#fff"); set(g.bg, "stroke", now > .5 ? "#f77f00" : INK);
       if (i < 7) op(s.arrows[i], .25 + .75 * ramp(t, cue("recap", s.cards[i + 1].w, (i + 2.5) / 10) - .3, cue("recap", s.cards[i + 1].w, (i + 2.5) / 10))); }); }; return s; })();
 
+function hdb3(p, x, y, w, h, col) { const g = el("g", {}, p); el("rect", {x, y: y - h, width: w, height: h, rx: 6, fill: col, stroke: INK, "stroke-width": 5}, g);
+  for (let r = 0; r < Math.floor((h - 70) / 46); r++) for (let c = 0; c < Math.floor(w / 40); c++) el("rect", {x: x + 12 + c * 40, y: y - h + 18 + r * 46, width: 22, height: 26, rx: 3, fill: "#fdf0d5", opacity: .9}, g);
+  el("rect", {x: x + 10, y: y - 60, width: w - 20, height: 60, fill: "#00000033"}, g); for (let c = 0; c < Math.floor(w / 80); c++) el("rect", {x: x + 30 + c * 80, y: y - 60, width: 16, height: 60, fill: col, stroke: INK, "stroke-width": 3}, g); return g; }
 // ---- TEXTBOOK (P6: how people affect the environment): everything took materials and energy to make; reduce, reuse, recycle, in that order
 S.textbook = (() => { const s = scene("textbook", "#d8f3dc", "#95d5b2"), st = s.stage;
   s.p6 = chip(st, "📗 P6: how people affect the environment", "#7209b7", {fs: 38});
@@ -306,11 +310,14 @@ S.textbook = (() => { const s = scene("textbook", "#d8f3dc", "#95d5b2"), st = s.
   s.ar = arrowG(s.mk, "#f77f00"); tf(s.ar, "translate(760 200) scale(.8)"); s.box = r3Box(s.mk); tf(s.box, "translate(960 196) scale(.8)");
   s.line = tx(st, {x: 600, y: 372, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: INK, "data-fit": 1100}, "Everything took materials and energy to make");
   const R = [["1", "REDUCE", "use less", "#2a9d8f", 980, "reduce"], ["2", "REUSE", "use things again", "#3a86ff", 800, "reuse"], ["3", "RECYCLE", "what's left", "#06d6a0", 620, "recycle"]];
-  s.rows = R.map(([n, a, b, col, w, cw], i) => { const g = el("g", {}, st), y = 470 + i * 128;
+  s.rows = R.map(([n, a, b, col, w, cw], i) => { const g = el("g", {}, st), y = 446 + i * 112;
     el("rect", {x: -w / 2, y: -52, width: w, height: 104, rx: 52, fill: col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, g);
     el("circle", {cx: -w / 2 + 56, cy: 0, r: 40, fill: "#fff", stroke: INK, "stroke-width": 5}, g); tx(g, {x: -w / 2 + 56, y: 18, "text-anchor": "middle", "font-size": 52, "font-weight": 700, fill: INK}, n);
     tx(g, {x: -w / 2 + 120, y: 19, "font-size": 54, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, a); tx(g, {x: w / 2 - 40, y: 14, "text-anchor": "end", "font-size": 36, "font-weight": 700, fill: INK}, b); g.y = y; g.cw = cw; return g; });
-  s.run = t => { const a = (w, f) => cue("textbook", w, f), te = a("everything", .35);
+  // a real moment first: rubbish bags by the bins under an HDB block
+  s.intro = el("g", {}, st); hdb3(s.intro, 130, 720, 300, 470, "#f4a261"); hdb3(s.intro, 470, 720, 260, 380, "#e9c46a"); hdb3(s.intro, 770, 720, 300, 520, "#e76f51"); el("rect", {x: 60, y: 720, width: 1080, height: 16, rx: 8, fill: INK}, s.intro);
+  [[250, 0], [420, 1], [900, 2]].forEach(([x, i]) => { const b = r3Bag(s.intro, ["#343a40", "#495057", "#212529"][i]); tf(b, `translate(${x} 690) scale(.7)`); }); { const b = r3Bin(s.intro); tf(b, "translate(640 724) scale(.8)"); } emo(s.intro, 1010, 660, 110, "🚛");
+  s.run = t => { const a = (w, f) => cue("textbook", w, f), te = a("everything", .35); op(s.intro, on(t, SC.textbook.t0 - .3, te - .1, .3));
     popAt(s.p6, 600, 60, t, a("primary", .1) - .2); op(s.mk, ramp(t, te - .3, te)); tf(s.mk, `translate(0 ${20 * (1 - ramp(t, te - .3, te))})`);
     tf(s.ar, `translate(${760 + 8 * Math.sin(t * 5)} 200) scale(.8)`); popAt(s.line, 0, 0, t, a("took", .45) - .1);
     s.rows.forEach((g, i) => { const tw = a(g.cw, .62 + i * .12) - .15; popAt(g, 600, g.y, t, tw); }); }; return s; })();
@@ -325,19 +332,23 @@ S.act = (() => { const s = scene("act", "#ffd166", "#f77f00"), st = s.stage;
   // 1: a reusable container with clips
   { const g = el("g", {transform: "translate(0 -30)"}, s.cards[0]); el("path", R3A({d: "M-120 -10 H120 L108 90 Q106 104 92 104 H-92 Q-106 104 -108 90 Z", fill: "#48cae4"}), g);
     el("rect", R3A({x: -132, y: -50, width: 264, height: 46, rx: 16, fill: "#2a9d8f"}), g); [-132, 108].forEach(x => el("rect", R3A({x, y: -30, width: 24, height: 50, rx: 8, fill: "#ffd166", "stroke-width": 5}), g));
-    emo(g, -40, 44, 60, "🍚"); emo(g, 40, 44, 60, "🍗"); s.tick = emo(s.cards[0], 110, -140, 80, "✅"); }
+    const aw = el("g", {transform: "translate(0 -176)"}, s.cards[0]); for (let k = 0; k < 6; k++) el("path", R3A({d: `M${-150 + k * 50} -20 h50 v44 q-25 22 -50 0 Z`, fill: k % 2 ? "#fff" : "#e63946", "stroke-width": 4}), aw);
+    el("rect", R3A({x: -118, y: 36, width: 236, height: 44, rx: 8, fill: "#ffd166", "stroke-width": 4}), aw); tx(aw, {x: 0, y: 68, "text-anchor": "middle", "font-size": 27, "font-weight": 700, fill: INK}, "CHICKEN RICE");
+    emo(g, -40, 44, 60, "🍚"); emo(g, 40, 44, 60, "🍗"); s.tick = emo(s.cards[0], 120, -60, 80, "✅"); }
   // 2: a can and a bottle go back; a 10-cent coin comes out
-  { const g = el("g", {transform: "translate(0 -30)"}, s.cards[1]); const c = r3Can(g, "#e63946", 1.1); tf(c, "translate(-96 20) scale(1.1)");
+  { const g = el("g", {transform: "translate(0 -30)"}, s.cards[1]); el("rect", R3A({x: -160, y: -170, width: 320, height: 290, rx: 18, fill: "#52b788", "stroke-width": 5}), g); el("rect", R3A({x: -120, y: -156, width: 240, height: 40, rx: 8, fill: "#fff", "stroke-width": 4}), g);
+    tx(g, {x: 0, y: -127, "text-anchor": "middle", "font-size": 24, "font-weight": 700, fill: INK}, "RETURN HERE"); const c = r3Can(g, "#e63946", 1.1); tf(c, "translate(-96 20) scale(1.1)");
     el("path", R3A({d: "M-22 -100 H22 V-70 Q46 -50 46 -20 V84 Q46 96 34 96 H-34 Q-46 96 -46 84 V-20 Q-46 -50 -22 -70 Z", fill: "#a8dadc"}), g); el("rect", R3A({x: -24, y: -114, width: 48, height: 22, rx: 6, fill: "#3a86ff", "stroke-width": 5}), g);
     el("rect", {x: -44, y: -6, width: 88, height: 50, fill: "#3a86ff", stroke: INK, "stroke-width": 4}, g);
     s.coin = el("g", {}, s.cards[1]); el("circle", R3A({r: 54, fill: "#ffd166"}), s.coin); el("circle", {r: 43, fill: "none", stroke: "#e0a800", "stroke-width": 5}, s.coin); tx(s.coin, {x: 0, y: 17, "text-anchor": "middle", "font-size": 48, "font-weight": 700, fill: INK}, "10¢"); }
   // 3: the blue bin, clean and dry
-  { const g = el("g", {}, s.cards[2]); const b = r3Bin(g, 1.05); tf(b, "translate(-10 130) scale(1.05)"); s.sp = emo(s.cards[2], 110, -150, 70, "✨"); s.sp2 = emo(s.cards[2], -120, -60, 50, "✨"); }
+  { const g = el("g", {}, s.cards[2]); [-150, 110].forEach(x => el("rect", R3A({x, y: -190, width: 40, height: 330, fill: "#ced4da", "stroke-width": 4}), g)); el("rect", R3A({x: -160, y: -200, width: 320, height: 40, fill: "#adb5bd", "stroke-width": 4}), g);
+    el("rect", R3A({x: -60, y: -150, width: 120, height: 40, rx: 6, fill: "#fff", "stroke-width": 4}), g); tx(g, {x: 0, y: -121, "text-anchor": "middle", "font-size": 24, "font-weight": 700, fill: INK}, "BLK 123"); const b = r3Bin(g, 1.05); tf(b, "translate(-10 130) scale(1.05)"); s.sp = emo(s.cards[2], 90, -80, 70, "✨"); s.sp2 = emo(s.cards[2], -100, -40, 50, "✨"); }
   s.run = t => { const a = (w, f) => cue("act", w, f); popAt(s.top, 600, 70, t, SC.act.t0 - .2);
     s.cards.forEach((g, i) => popAt(g, g.x, 450, t, a(g.w, .15 + i * .28) - .2));
-    tf(s.tick, `translate(110 -140) scale(${Math.max(0, pop(t, a("container", .2) + .3))}) translate(-110 140)`);
-    const tc = a("ten", .55); tf(s.coin, `translate(${110} ${lerp(40, -130, ramp(t, tc - .1, tc + .4))}) scale(${Math.max(0, pop(t, tc - .1))})`); op(s.coin, t > tc - .1 ? 1 : 0);
-    const k = Math.max(0, pop(t, a("clean", .82))); tf(s.sp, `translate(110 -150) scale(${k * (1 + .1 * Math.sin(t * 6))}) translate(-110 150)`); tf(s.sp2, `translate(-120 -60) scale(${Math.max(0, pop(t, a("dry", .88)))}) translate(120 60)`); }; return s; })();
+    tf(s.tick, `translate(120 -60) scale(${Math.max(0, pop(t, a("container", .2) + .3))}) translate(-120 60)`);
+    const tc = a("ten", .55); tf(s.coin, `translate(${110} ${lerp(60, -60, ramp(t, tc - .1, tc + .4))}) scale(${Math.max(0, pop(t, tc - .1))})`); op(s.coin, t > tc - .1 ? 1 : 0);
+    const k = Math.max(0, pop(t, a("clean", .82))); tf(s.sp, `translate(90 -80) scale(${k * (1 + .1 * Math.sin(t * 6))}) translate(-90 80)`); tf(s.sp2, `translate(-100 -40) scale(${Math.max(0, pop(t, a("dry", .88)))}) translate(100 40)`); }; return s; })();
 
 // ---- TRY THIS: count everything your family throws away in one day
 S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage;

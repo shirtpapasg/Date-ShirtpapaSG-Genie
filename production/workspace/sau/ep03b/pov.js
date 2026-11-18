@@ -46,7 +46,7 @@ S.kitchen = (() => { const s = scene("kitchen", "#fdebc8", "#fdebc8"), st = s.st
     const blink = (tt % 1.7) < .12 ? .1 : 1; tf(s.box.eyes, `translate(0 ${22 * (1 - blink)}) scale(1 ${blink})`); const scared = f > .3; op(s.box.m0, scared ? 0 : 1); op(s.box.m1, scared ? 1 : 0);
     s.junk.forEach((j, i) => { const k = ramp(f, .44 + i * .05, .54 + i * .05); tf(j, k < 1 ? `translate(${BX + j.jx} ${lerp(-120, BY + j.jy, k * k)}) rotate(${j.jr + 200 * (1 - k)})` : `${G} translate(${j.jx} ${j.jy}) rotate(${j.jr})`); op(j, (f > .44 + i * .05 ? 1 : 0) * (1 - ramp(f, .93, .96))); });
     s.kit.hop.flap(flap);
-    tf(s.you, `translate(480 300) scale(${Math.max(0, pop(f, .05, .08))}) rotate(${-6 + 2 * Math.sin(tt * 4)})`); op(s.you, on(f, .05, .34, .04));
+    tf(s.you, `translate(380 250) scale(${Math.max(0, pop(f, .05, .08))}) rotate(${-6 + 2 * Math.sin(tt * 4)})`); op(s.you, on(f, .05, .34, .04));
     const z = lerp(1.45, 1.15, ramp(f, .3, .5)) + .55 * ramp(f, .84, 1), cx = lerp(BX, lerp(960, HX, ramp(f, .84, 1)), ramp(f, .3, .7)), cy = lerp(400, lerp(470, HY, ramp(f, .84, 1)), ramp(f, .3, .7));
     tf(s.cam, `translate(${VP[0]} ${VP[1]}) scale(${z}) translate(${-cx} ${-cy})`); op(s.dark, ramp(f, .955, .995));
     showCard(s.card, t, SC.kitchen.t0 + .5, SC.kitchen.t1 - .2); }; return s; })();
@@ -54,9 +54,9 @@ S.kitchen = (() => { const s = scene("kitchen", "#fdebc8", "#fdebc8"), st = s.st
 // ---- 2 DOWN THE CHUTE (first person): we tumble down the dark shaft past the hopper of every floor, 12 down to 1
 S.povChute = (() => { const s = scene("povChute", "#07070d", "#07070d"), st = s.stage, N = 13;
   s.tun = el("g", {}, st);
-  [[[-1, -1], [1, -1], "#2b2d3a"], [[1, -1], [1, 1], "#3a3d4d"], [[1, 1], [-1, 1], "#22242f"], [[-1, 1], [-1, -1], "#34374a"]].forEach(([a, b, c]) => el("path", {d: `M0 0 L${a[0] * 2600} ${a[1] * 2600} L${b[0] * 2600} ${b[1] * 2600} Z`, fill: c}, s.tun));
+  [[[-1, -1], [1, -1], "#4a4e63"], [[1, -1], [1, 1], "#5d627a"], [[1, 1], [-1, 1], "#3b3f52"], [[-1, 1], [-1, -1], "#545970"]].forEach(([a, b, c]) => el("path", {d: `M0 0 L${a[0] * 2600} ${a[1] * 2600} L${b[0] * 2600} ${b[1] * 2600} Z`, fill: c}, s.tun));
   [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(a => el("line", {x1: 0, y1: 0, x2: a[0] * 2600, y2: a[1] * 2600, stroke: "#0b0b12", "stroke-width": 8}, s.tun));
-  s.fog = el("circle", {r: 1500, fill: r3GR([[0, "#000", 1], [.1, "#000", .96], [.45, "#000", .45], [1, "#000", 0]])}, s.tun);
+  s.fog = el("circle", {r: 1500, fill: r3GR([[0, "#000", 1], [.06, "#000", .95], [.3, "#000", .5], [.7, "#000", .12], [1, "#000", 0]])}, s.tun);
   s.rings = []; for (let j = N; j >= 1; j--) { const g = el("g", {}, s.tun); g.j = j; g.rib = el("rect", {x: -300, y: -300, width: 600, height: 600, fill: "none", stroke: "#0b0b12", "stroke-width": 16}, g);
     el("rect", {x: -292, y: -292, width: 584, height: 584, fill: "none", stroke: "#6c7086", "stroke-width": 5, opacity: .6}, g);
     g.door = el("path", {fill: "#ffd166", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, s.tun); g.glow = el("path", {fill: "#ffd166", opacity: .25}, s.tun);
@@ -72,7 +72,7 @@ S.povChute = (() => { const s = scene("povChute", "#07070d", "#07070d"), st = s.
     s.rings.forEach(g => { const rel = g.j - c, vis = rel > .16 && rel < 9; op(g, vis ? clamp(1.25 - rel / 7) : 0); [g.door, g.glow, g.num].forEach(e => op(e, 0)); if (!vis) return;
       tf(g, `scale(${1 / rel})`); const r1 = rel + .22, r2 = rel + .62; if (r1 < .12) return; const s1 = 1 / r1, s2 = 1 / r2, sm = 2 / (r1 + r2);
       set(g.door, "d", `M${296 * s1} ${-78 * s1} L${296 * s1} ${78 * s1} L${296 * s2} ${78 * s2} L${296 * s2} ${-78 * s2} Z`); op(g.door, clamp(1.3 - rel / 6));
-      set(g.glow, "d", `M${296 * s1} ${-78 * s1} L${296 * s1} ${78 * s1} L${120 * s1} ${200 * s1} L${120 * s1} ${-200 * s1} Z`); op(g.glow, .16 * clamp(1.3 - rel / 5));
+      set(g.glow, "d", `M${296 * s1} ${-78 * s1} L${296 * s1} ${78 * s1} L${120 * s1} ${200 * s1} L${120 * s1} ${-200 * s1} Z`); op(g.glow, 0);
       tf(g.num, `translate(${296 * sm - 4 * sm} ${0}) scale(${sm * .55} ${sm * 1.15})`); set(g.num, "y", 32); op(g.num, clamp(1.3 - rel / 4)); });
     const rb = N + .45 - c; tf(s.bot, `scale(${1 / Math.max(.2, rb)})`); op(s.bot, clamp(1.6 - rb / 5));
     const sp = .5 + 2.6 * f; s.streaks.forEach(o => { const u = (o.u + tt * o.v * sp * .5) % 1, r = 160 + 950 * u * u, L = 40 + 260 * u * sp * .5, ca = Math.cos(o.a + rot * Math.PI / 180), sa = Math.sin(o.a + rot * Math.PI / 180);
@@ -94,7 +94,7 @@ S.povTruck2 = (() => { const s = scene("povTruck2", "#15171f", "#15171f"), st = 
     el("path", R3A({d: `M${a[0] * W} ${a[1] * Hh} L${b[0] * W} ${b[1] * Hh} L${b[0] * W * 9} ${b[1] * Hh * 9} L${a[0] * W * 9} ${a[1] * Hh * 9} Z`, fill: c, "stroke-width": 7}), s.far));
   [1.5, 2.2, 3.3, 5].forEach(k => el("rect", {x: -W * k, y: -Hh * k, width: 2 * W * k, height: 2 * Hh * k, fill: "none", stroke: "#1b1d27", "stroke-width": 5 * k, opacity: .7}, s.far));
   // the packer plate: swings down over the opening, then pushes at us
-  s.plate = el("g", {}, s.far); s.pl = el("rect", R3A({x: -W - 30, y: -Hh - 30, width: 2 * W + 60, height: 10, fill: "#8d99ae", "stroke-width": 7}), s.plate);
+  s.plate = el("g", {}, s.far); s.pl = el("rect", R3A({x: -W - 30, y: -Hh - 30, width: 2 * W + 60, height: 10, fill: r3GL([[0, "#9aa5b8"], [.82, "#9aa5b8"], [.82, "#5f697c"], [1, "#5f697c"]], {gradientUnits: "userSpaceOnUse", x1: 0, y1: 0, x2: 0, y2: 64, spreadMethod: "repeat"}), "stroke-width": 7}), s.plate);
   s.hz = el("g", {}, s.plate); const cid = "r3hz"; el("rect", {x: -W - 30, y: 0, width: 2 * W + 60, height: 70}, el("clipPath", {id: cid}, r3Defs()));
   const hz = el("g", {"clip-path": `url(#${cid})`}, s.hz); el("rect", {x: -W - 30, y: 0, width: 2 * W + 60, height: 70, fill: "#ffd60a"}, hz); for (let i = -12; i < 14; i++) el("path", {d: `M${i * 80} 0 h40 l-50 70 h-40 Z`, fill: INK}, hz);
   el("rect", R3A({x: -W - 30, y: 0, width: 2 * W + 60, height: 70, fill: "none", "stroke-width": 7}), s.hz);
@@ -107,7 +107,7 @@ S.povTruck2 = (() => { const s = scene("povTruck2", "#15171f", "#15171f"), st = 
     const ph = 10 + (2 * 250 + 40) * dn; set(s.pl, "height", ph); tf(s.hz, `translate(0 ${-250 - 30 + ph - 70})`); op(s.hz, dn > .12 ? 1 : 0);
     s.bags.forEach(g => { const k = clamp((f - .02 - g.i * .055) / .2), kk = k * k; tf(g, `translate(${VP[0] + lerp(g.x * .1, g.x * (1 - .25 * sq), kk) + sh[0]} ${VP[1] + lerp(-150, g.y - 120 * sq * (g.y < 200 ? 1 : .3), kk) + 30 * Math.sin(k * Math.PI) + sh[1]}) rotate(${g.r + 200 * (1 - k)}) scale(${lerp(.25, g.k, kk) * (1 + .25 * sq)} ${lerp(.25, g.k, kk) * (1 - .45 * sq)})`); op(g, k > 0 ? 1 : 0); });
     tf(s.me, `translate(${sh[0]} ${sh[1] - 60 * sq}) translate(810 1020) scale(${1 + .08 * sq} ${1 + 1.2 * sq}) translate(-810 -1020)`);
-    tf(s.barT, `translate(0 ${-1120 + 470 * sq * sq + 200 * ramp(f, .93, 1)})`); tf(s.barB, `translate(0 ${1120 - 250 * sq * sq - 400 * ramp(f, .93, 1)})`); op(s.dark, ramp(f, .95, 1)); }; return s; })();
+    tf(s.barT, `translate(0 ${-1120 + 470 * sq + 200 * ramp(f, .93, 1)})`); tf(s.barB, `translate(0 ${1120 - 250 * sq - 400 * ramp(f, .93, 1)})`); op(s.dark, ramp(f, .95, 1)); }; return s; })();
 
 // ---- 4 THE CLAW (first person): we lie in the rubbish pit of the plant, looking up. The giant grab comes down, closes round us and lifts
 S.povClaw = (() => { const s = scene("povClaw", "#1f2430", "#1f2430"), st = s.stage;
@@ -145,7 +145,7 @@ S.povClaw = (() => { const s = scene("povClaw", "#1f2430", "#1f2430"), st = s.st
 // ---- 5 THE FURNACE: first person into the fire (we burn), then the plant cut open: fire -> heat -> water boils -> steam -> turbine -> generator -> electricity
 S.povFurnace = (() => { const s = scene("povFurnace", "#6a040f", "#6a040f"), st = s.stage;
   s.A = el("g", {}, st); fullRect(s.A, r3GR([[0, "#fff3b0"], [.22, "#ffba08"], [.55, "#e85d04"], [1, "#6a040f"]]));
-  s.fl = field(s.A, 30, 77, e => r3Flame(e, 2.2), .22); s.me = r3Me(s.A);
+  s.fl = field(s.A, 46, 77, e => r3Flame(e, 3.6), .2); s.me = r3Me(s.A);
   s.sparks = []; seed = 9; for (let i = 0; i < 40; i++) s.sparks.push({e: el("circle", {r: 4 + rnd() * 7, fill: "#fff3b0"}, s.A), x: rnd(), u: rnd(), v: .5 + rnd()});
   s.vig = vignette(s.A, "#ff7b00", .7);
   // ---- the plant, cut open
@@ -174,18 +174,18 @@ S.povFurnace = (() => { const s = scene("povFurnace", "#6a040f", "#6a040f"), st 
   for (let k = 0; k < 8; k++) [228, 432].forEach(y => el("path", {d: `M${1250 + k * 27} ${y} h14`, stroke: "#b5651d", "stroke-width": 14, "stroke-linecap": "round"}, B));
   s.mag = el("g", {transform: "translate(1351 330)"}, B); el("rect", {x: -84, y: -22, width: 84, height: 44, fill: "#e63946", stroke: INK, "stroke-width": 5}, s.mag); el("rect", {x: 0, y: -22, width: 84, height: 44, fill: "#3a86ff", stroke: INK, "stroke-width": 5}, s.mag);
   tx(s.mag, {x: -42, y: 12, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#fff"}, "N"); tx(s.mag, {x: 42, y: 12, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: "#fff"}, "S");
-  const WD = "M1476 330 H1560 V470 H1610"; el("path", {d: WD, fill: "none", stroke: INK, "stroke-width": 16, "stroke-linejoin": "round"}, B); s.cur = el("path", {d: WD, fill: "none", stroke: "#ffd166", "stroke-width": 8, "stroke-dasharray": "14 18"}, B);
-  s.fg = el("circle", {cx: 1690, cy: 500, r: 330, fill: r3GR([[0, "#ffe066", .7], [1, "#ffe066", 0]]), opacity: 0}, B);
-  el("rect", R3A({x: 1610, y: 250, width: 170, height: 550, rx: 8, fill: "#f4a261"}), B); s.wins = []; for (let r = 0; r < 8; r++) for (let c = 0; c < 3; c++) s.wins.push(el("rect", {x: 1626 + c * 50, y: 274 + r * 64, width: 34, height: 40, rx: 4, fill: "#3d405b", stroke: INK, "stroke-width": 3}, B));
+  const WD = "M1476 330 H1540 V470 H1580"; el("path", {d: WD, fill: "none", stroke: INK, "stroke-width": 16, "stroke-linejoin": "round"}, B); s.cur = el("path", {d: WD, fill: "none", stroke: "#ffd166", "stroke-width": 8, "stroke-dasharray": "14 18"}, B);
+  s.fg = el("circle", {cx: 1665, cy: 500, r: 330, fill: r3GR([[0, "#ffe066", .7], [1, "#ffe066", 0]]), opacity: 0}, B);
+  el("rect", R3A({x: 1580, y: 250, width: 170, height: 550, rx: 8, fill: "#f4a261"}), B); s.wins = []; for (let r = 0; r < 8; r++) for (let c = 0; c < 3; c++) s.wins.push(el("rect", {x: 1596 + c * 50, y: 274 + r * 64, width: 34, height: 40, rx: 4, fill: "#3d405b", stroke: INK, "stroke-width": 3}, B));
   s.zap = emo(B, 1351, 150, 110, "⚡");
   s.labA = [["furnace", 280, 100], ["turbine", 966, 150], ["generator", 1351, 500]].map(([w, x, y]) => r3Lab(B, x, y, w, 44, "#ffe14d"));
-  s.labB = [["heat", 280, 560], ["steam", 640, 500], ["electricity", 1500, 580]].map(([w, x, y]) => r3Lab(B, x, y, w, 40));
+  s.labB = [["heat", 280, 560], ["steam", 640, 500], ["electricity", 1440, 610]].map(([w, x, y]) => r3Lab(B, x, y, w, 40));
   s.card = povCard(st, "Burning makes heat… and the heat makes electricity", "#e85d04"); s.flash = fullRect(st, "#fff3b0", 0);
   const PTS = []; s.pts = () => { if (!PTS.length) { const L = s.pipe.getTotalLength(); for (let i = 0; i <= 240; i++) { const p = s.pipe.getPointAtLength(L * i / 240); PTS.push([p.x, p.y]); } } return PTS; };
   s.run = t => { const c = SC.povFurnace, f = FR3("povFurnace")(t), tt = t - c.t0, D = c.t1 - c.t0, cut = .3, ff = clamp(f / cut), g = clamp((f - cut) / (1 - cut)), x = ramp(f, cut - .03, cut + .03);
     op(s.A, 1 - x); op(s.B, x); op(s.flash, .9 * on(f, cut - .05, cut + .06, .045) + .8 * on(f, -.05, .08, .05));
     if (x < 1) { flyField(s.fl, .1 + 1.5 * ff, 1000); const burn = ramp(ff, .25, .9); s.me.burn(burn); const sh = r3Sh(tt, 8);
-      tf(s.me, `translate(${sh[0]} ${sh[1] + 50 * burn}) translate(810 1020) scale(${1 - .25 * burn} 1) translate(-810 -1020)`);
+      tf(s.me, `translate(${sh[0]} ${sh[1] + 14 * burn}) translate(810 1020) scale(${1 - .25 * burn} 1) translate(-810 -1020)`);
       s.sparks.forEach(o => { const u = (o.u + tt * o.v * .9) % 1; set(o.e, "cx", -150 + o.x * 1920 + 60 * Math.sin(tt * 3 + o.u * 9)); set(o.e, "cy", 1040 - u * 1150); op(o.e, 1 - u); }); }
     if (x > 0) { const P = s.pts(), T = k => c.t0 + D * (cut + (1 - cut) * k);
       s.fires.forEach((e, i) => tf(e, `translate(${e.x} ${e.y}) scale(${e.k * (1 + .08 * Math.sin(tt * 13 + i * 2))} ${e.k * (1 + .16 * Math.sin(tt * 17 + i * 3))})`));
@@ -208,11 +208,11 @@ function r3MeAsh(p) { const g = el("g", {}, p); el("path", R3A({d: "M-220 1060 V
 S.povAsh = (() => { const s = scene("povAsh", "#22252e", "#22252e"), st = s.stage;
   fullRect(st, r3GL([[0, "#2b2f3c"], [.45, "#3a3f50"], [1, "#1b1d27"]]));
   s.exit = el("g", {}, st); el("rect", R3A({x: -150, y: -110, width: 300, height: 220, rx: 10, fill: r3GL([[0, "#bde0fe"], [.55, "#bde0fe"], [.56, "#0096c7"], [1, "#0077b6"]]), "stroke-width": 6}), s.exit); emo(s.exit, 60, -50, 60, "☀️");
-  s.belt = el("path", R3A({d: "M-420 1040 L690 500 L930 500 L2040 1040 Z", fill: "#343a40", "stroke-width": 8}), st);
+  s.belt = el("path", R3A({d: "M-420 1040 L690 500 L930 500 L2040 1040 Z", fill: "#5c6370", "stroke-width": 8}), st);
   s.rails = el("path", {d: "M-420 1040 L690 500 M2040 1040 L930 500", stroke: "#f4a300", "stroke-width": 16, "stroke-linecap": "round", fill: "none"}, st);
   s.posts = []; for (let i = 0; i < 8; i++) { const g = el("g", {}, st); [-1, 1].forEach(sd => { el("rect", R3A({x: sd * 700 - 26, y: -900, width: 52, height: 1500, fill: "#495057"}), g); el("rect", R3A({x: sd * 700 - 60, y: -900, width: 120, height: 70, fill: "#f4a300"}), g); });
     el("rect", R3A({x: -700, y: -900, width: 1400, height: 56, fill: "#495057"}), g); el("rect", R3A({x: -110, y: -850, width: 220, height: 50, rx: 12, fill: "#fff8d6"}), g); s.posts.push({g, z0: i / 8}); }
-  s.lumps = []; seed = 21; for (let i = 0; i < 16; i++) { const g = el("g", {}, st), z = .12 + rnd() * .88; blob(g, 60, i % 3 ? "#8d99ae" : "#adb5bd", 50 + i); s.lumps.push({g, x: rnd() * 2 - 1, z}); seed = 21 + i * 7; }
+  s.lumps = []; seed = 21; for (let i = 0; i < 16; i++) { const g = el("g", {}, st), z = .3 + rnd() * .7; blob(g, 60, i % 3 ? "#8d99ae" : "#adb5bd", 50 + i); s.lumps.push({g, x: rnd() * 2 - 1, z}); seed = 21 + i * 7; }
   s.me = r3MeAsh(st); s.flakes = []; seed = 8; for (let i = 0; i < 30; i++) s.flakes.push({e: el("circle", {r: 3 + rnd() * 5, fill: "#ced4da", opacity: .7}, st), x: rnd(), u: rnd(), v: .3 + rnd() * .5});
   s.vig = vignette(st, "#adb5bd", .55);
   // 10 parts of rubbish -> 1 part of ash
@@ -234,13 +234,13 @@ S.povAsh = (() => { const s = scene("povAsh", "#22252e", "#22252e"), st = s.stag
     op(s.flash, ramp(f, .93, 1) * .85); showCard(s.card, t, c.t0 + .9, c.t1 - .25); }; return s; })();
 
 // ---- 7 THE BARGE (outside, the real map): the ash sails from Tuas to Semakau Landfill
-S.barge = (() => { const s = scene("barge", "#48cae4", "#48cae4"), st = s.stage, K = 1.5, CX = 480, CY = 640;
+S.barge = (() => { const s = scene("barge", "#48cae4", "#48cae4"), st = s.stage, K = 1.15, CX = 640, CY = 600;
   s.map = r3Map(st, FULL.w, FULL.h, K, CX, CY, 0); tf(s.map, `translate(${VP[0]} ${VP[1]})`);
   const M = (q, dx = 0, dy = 0) => { const p = s.map.pt(q, dx, dy); return [p[0] + VP[0], p[1] + VP[1]]; };
   const A = M(SG3.tuas0), Bq = M([330, 770]), C = M(SG3.sem, -58 * K, -4 * K);
   s.cv = u => [(1 - u) * (1 - u) * A[0] + 2 * u * (1 - u) * Bq[0] + u * u * C[0], (1 - u) * (1 - u) * A[1] + 2 * u * (1 - u) * Bq[1] + u * u * C[1]];
   s.dots = []; for (let i = 1; i < 34; i++) { const p = s.cv(i / 34); s.dots.push(el("circle", {cx: p[0], cy: p[1], r: 8, fill: "#fff", stroke: INK, "stroke-width": 4})); st.appendChild(s.dots[i - 1]); }
-  s.sgL = r3Lab(st, ...M([820, 380]), "Singapore", 64);
+  s.sgL = r3Lab(st, ...M([830, 330]), "Singapore", 64);
   emo(st, A[0] + 34, A[1] - 44, 80, "🏭"); s.p1 = r3Pin(st); tf(s.p1, `translate(${A.join(" ")})`); s.p2 = r3Pin(st, "#e63946"); tf(s.p2, `translate(${M(SG3.sem).join(" ")})`);
   s.l1 = r3Lab(st, A[0] - 20, A[1] - 96, "Tuas", 50, "#ffe14d"); s.l2 = r3Lab(st, M(SG3.sem)[0] + 40, M(SG3.sem)[1] + 96, "Semakau Landfill", 50, "#ffe14d");
   // the barge, seen from above: a tug pulling a flat barge heaped with ash
@@ -274,7 +274,7 @@ S.semakau = (() => { const s = scene("semakau", "#8ecae6", "#8ecae6"), st = s.st
   el("rect", R3A({x: 44, y: -84, width: 66, height: 70, rx: 10, fill: "#2a9d8f"}), s.truck); el("rect", {x: 66, y: -72, width: 34, height: 26, rx: 4, fill: "#caf0f8", stroke: INK, "stroke-width": 4}, s.truck);
   el("rect", R3A({x: -96, y: -22, width: 206, height: 14, rx: 6, fill: "#495057", "stroke-width": 5}), s.truck); [-60, 70].forEach(x => { el("circle", R3A({cx: x, cy: 0, r: 22, fill: "#212529"}), s.truck); el("circle", {cx: x, cy: 0, r: 8, fill: "#adb5bd"}, s.truck); });
   s.pour = []; for (let i = 0; i < 14; i++) s.pour.push(el("circle", {r: 9, fill: "#8d99ae", stroke: INK, "stroke-width": 3}, st));
-  s.labs = [["the sea", 150, 600], ["rock wall with a lining", 520, 380], ["landfill cell", 1060, 760]].map(([w, x, y]) => r3Lab(st, x, y, w, 40));
+  s.labs = [["the sea", 130, 640], ["rock wall with a lining", 540, 640], ["landfill cell", 1090, 640]].map(([w, x, y]) => r3Lab(st, x, y, w, 40));
   // Semakau's cells seen from above, and the year
   s.top = el("g", {}, st); el("rect", {x: 300, y: 36, width: 1180, height: 216, rx: 30, fill: "#fffaf0", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.top);
   s.yr = tx(s.top, {x: 450, y: 176, "text-anchor": "middle", "font-size": 96, "font-weight": 700, fill: INK}, "2026");

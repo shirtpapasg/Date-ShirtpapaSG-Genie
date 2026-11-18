@@ -22,6 +22,7 @@ function c3Tick(p, r, w = 16) { const g = el("g", {}, p), d = `M${-r} ${0} L${-r
 function c3Arrow(p, len, col = INK, w = 12) { const g = el("g", {}, p); el("path", {d: `M0 0 H${len - 20} M${len - 34} -20 L${len} 0 L${len - 34} 20`, fill: "none", stroke: col, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round"}, g); return g; }
 
 /* ---- drawings ---- */
+const HERO = "#fb8500";      // our can before it is recycled (plain stripes and dots: no real brand)
 // our own Deposit Mark: a white disc, a "comes back" arrow and 10¢ (generic: it copies no real logo)
 function dmark(p, r = 30) { const g = el("g", {}, p), R = r * .7, a0 = -50 * Math.PI / 180, a1 = 235 * Math.PI / 180, c = Math.cos(a1), s = Math.sin(a1);
   el("circle", {r, fill: "#fff", stroke: INK, "stroke-width": Math.max(2, r * .12)}, g);
@@ -34,7 +35,7 @@ function canG(p, col = "#e63946", o = {}) { const g = el("g", {}, p), sw = o.sw 
   const cp = "c3cp" + (canG.n = (canG.n || 0) + 1), c = el("clipPath", {id: cp}, c3Defs()); el("path", {d: body}, c);
   el("path", {d: body, fill: "#d5dde2"}, g); const m = el("g", {"clip-path": `url(#${cp})`}, g);
   el("rect", {x: -52, y: -68, width: 104, height: 136, fill: col}, m);
-  el("path", {d: "M-52 20 Q-26 -6 0 16 T52 12 V44 Q26 66 0 46 T-52 50 Z", fill: "#fff", opacity: .9}, m);
+  el("rect", {x: -52, y: 14, width: 104, height: 32, fill: "#fff", opacity: .92}, m); [-26, 0, 26].forEach(x => el("circle", {cx: x, cy: 30, r: 8, fill: col}, m));
   el("rect", {x: -40, y: -84, width: 13, height: 168, rx: 6, fill: "#fff", opacity: .32}, m); el("rect", {x: 30, y: -90, width: 22, height: 180, fill: INK, opacity: .12}, m);
   [-68, 68].forEach(y => el("line", {x1: -52, y1: y, x2: 52, y2: y, stroke: INK, "stroke-width": sw * .6}, m));
   el("path", {d: body, fill: "none", stroke: INK, "stroke-width": sw, "stroke-linejoin": "round"}, g);
@@ -56,7 +57,7 @@ function tinG(p, o = {}) { const g = el("g", {}, p);
 const BOT = "M-16 -100 Q-16 -76 -40 -58 Q-46 -50 -46 -38 V104 Q-46 120 -30 120 H30 Q46 120 46 104 V-38 Q46 -50 40 -58 Q16 -76 16 -100 Z";
 // a plastic drink bottle (with our Deposit Mark) and a glass bottle (no mark: glass is not in the scheme)
 function bottleG(p, o = {}) { const g = el("g", {}, p); el("path", A3({d: BOT, fill: "#c9ecff"}), g); el("rect", {x: -34, y: -40, width: 11, height: 140, rx: 5, fill: "#fff", opacity: .7}, g);
-  el("rect", {x: -46, y: -6, width: 92, height: 70, fill: o.col || "#06d6a0", stroke: INK, "stroke-width": 4}, g); el("path", {d: "M-46 30 Q-22 10 0 28 T46 24 V46 Q22 60 0 46 T-46 50 Z", fill: "#fff", opacity: .85}, g);
+  el("rect", {x: -46, y: -6, width: 92, height: 70, fill: o.col || "#06d6a0", stroke: INK, "stroke-width": 4}, g); el("rect", {x: -46, y: 18, width: 92, height: 22, fill: "#fff", opacity: .9}, g);
   el("rect", A3({x: -20, y: -124, width: 40, height: 26, rx: 6, fill: "#3a86ff", "stroke-width": 5}), g);
   if (o.mark !== false) { g.mark = dmark(g, 17); tf(g.mark, "translate(22 88)"); } return g; }
 function glassG(p) { const g = el("g", {}, p); el("path", A3({d: BOT, fill: "#2d6a4f"}), g); el("rect", {x: -34, y: -40, width: 11, height: 140, rx: 5, fill: "#b7e4c7", opacity: .6}, g);
@@ -79,7 +80,7 @@ function rvmG(p) { const g = el("g", {}, p);
   g.ring = el("circle", A3({cx: 0, cy: -215, r: 76, fill: "#e9eef1", "stroke-width": 7}), g); el("circle", A3({cx: 0, cy: -215, r: 56, fill: "#0b1d24"}), g);
   el("path", {d: "M-40 -246 A56 56 0 0 1 40 -246", fill: "none", stroke: "#27485a", "stroke-width": 8, "stroke-linecap": "round"}, g);
   el("rect", A3({x: -112, y: -120, width: 224, height: 62, rx: 14, fill: "#e9f5f3", "stroke-width": 5}), g);
-  tf(canG(g, "#e63946", {sw: 12}), "translate(-52 -89) scale(.25)"); tf(bottleG(g, {mark: false}), "translate(-6 -88) scale(.2)"); tf(c3Tick(g, 14, 9), "translate(62 -90)"); return g; }
+  tf(canG(g, HERO, {sw: 12}), "translate(-52 -89) scale(.25)"); tf(bottleG(g, {mark: false}), "translate(-6 -88) scale(.2)"); tf(c3Tick(g, 14, 9), "translate(62 -90)"); return g; }
 // a green litter bin (the kind at a void deck) and the big blue recycling bin
 function binG(p) { const g = el("g", {}, p); el("rect", A3({x: -62, y: -170, width: 124, height: 170, rx: 14, fill: "#40916c"}), g); el("rect", A3({x: -74, y: -196, width: 148, height: 34, rx: 12, fill: "#2d6a4f"}), g);
   el("rect", A3({x: -40, y: -150, width: 80, height: 30, rx: 8, fill: "#12241c", "stroke-width": 5}), g); [-30, 0, 30].forEach(x => el("line", {x1: x, y1: -100, x2: x, y2: -20, stroke: "#2d6a4f", "stroke-width": 7, "stroke-linecap": "round"}, g)); return g; }
@@ -126,7 +127,7 @@ function c3Kid(p) { const K = el("g", {}, p), SKIN = "#f1c27d", BLUE = "#3a86ff"
   K.m0 = el("path", {d: "M38 -372 Q52 -362 66 -372", fill: "none", stroke: INK, "stroke-width": 5.5, "stroke-linecap": "round"}, K.head);
   K.m1 = el("g", {opacity: 0}, K.head); el("path", A({d: "M34 -376 Q52 -371 72 -378 Q69 -348 51 -348 Q37 -350 34 -376 Z", fill: "#7a1c1c", "stroke-width": 5}), K.m1); el("path", {d: "M39 -372 Q52 -368 68 -373 L67 -366 Q52 -362 40 -365 Z", fill: "#fff"}, K.m1);
   K.armN = el("g", {}, K.body);
-  K.can = el("g", {transform: "translate(0 132)"}, K.armN); K.canIn = canG(K.can, "#e63946", {mark: true, sw: 10}); tf(K.canIn, "scale(.36)");
+  K.can = el("g", {transform: "translate(0 132)"}, K.armN); K.canIn = canG(K.can, HERO, {mark: true, sw: 10}); tf(K.canIn, "scale(.36)");
   el("rect", A({x: -14, y: 36, width: 28, height: 92, rx: 14, fill: SKIN}), K.armN);
   el("circle", A({cx: 0, cy: 126, r: 17, fill: SKIN, "stroke-width": 5}), K.armN);
   el("rect", A({x: -19, y: -10, width: 38, height: 62, rx: 17, fill: BLUE}), K.armN);
@@ -197,7 +198,7 @@ S.hook = (() => { const s = scene("hook", "#118ab2", "#073b4c"), st = s.stage;
   s.bin = el("g", {}, st); binG(s.bin); s.binQ = c3Lab(st, "bin it?", 54, "#fff");
   s.rvm = el("g", {}, st); s.m = rvmG(s.rvm); s.rvmQ = c3Lab(st, "bring it back?", 54, "#ffe14d");
   s.bot = el("g", {}, st); bottleG(s.bot);
-  s.can = el("g", {}, st); s.canIn = canG(s.can, "#e63946", {mark: true});
+  s.can = el("g", {}, st); s.canIn = canG(s.can, HERO, {mark: true});
   s.clk = el("g", {}, st); [-150, -90, -30].forEach(a => { const r = a * Math.PI / 180; el("line", {x1: Math.cos(r) * 190, y1: Math.sin(r) * 240, x2: Math.cos(r) * 250, y2: Math.sin(r) * 310, stroke: "#ffe14d", "stroke-width": 14, "stroke-linecap": "round"}, s.clk); });
   s.dep = chip(st, "+ 10¢ deposit", "#2a9d8f", {fs: 52});
   s.coin = el("g", {}, st); coinG(s.coin, 100); s.back = c3Lab(st, "10¢ back!", 84, "#ffe14d");
@@ -237,10 +238,10 @@ S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), st = s.stag
   s.cloud = el("g", {}, s.pan); [[0, 0, 120], [120, 20, 100], [-130, 24, 96], [40, -50, 90], [230, 40, 70], [-230, 44, 66]].forEach(([x, y, r]) => el("circle", {cx: x, cy: y, r, fill: "#e9ecef", stroke: INK, "stroke-width": 6}, s.cloud)); [[0, 0, 114], [120, 20, 94], [-130, 24, 90], [40, -50, 84], [230, 40, 64], [-230, 44, 60]].forEach(([x, y, r]) => el("circle", {cx: x, cy: y, r, fill: "#e9ecef"}, s.cloud));
   el("rect", {x: PX, y: PY, width: PW, height: PH, rx: 36, fill: "none", stroke: INK, "stroke-width": 8}, st);
   s.not = el("g", {}, st); el("rect", {x: -300, y: -62, width: 600, height: 124, rx: 26, fill: "#e63946", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.not); tx(s.not, {x: 0, y: 24, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#fff"}, "Not on their own!");
-  s.c1 = chip(st, "🏠 Our rooftops are too small for all the electricity we use", "#f77f00", {fs: 34});
-  s.c2 = chip(st, "🌙 night: no power", "#1d3557", {fs: 38}); s.c3 = chip(st, "☁️ cloudy: less power", "#6c757d", {fs: 38});
-  s.c4 = tx(st, {x: 600, y: 742, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, "So Singapore is also looking at…");
-  s.c5 = chip(st, "🔌 power from our neighbours", "#2a9d8f", {fs: 38}); s.c6 = chip(st, "⚛️ even nuclear", "#7209b7", {fs: 38});
+  s.c1 = chip(st, "🏠 Rooftops are too small for all we use", "#f77f00", {fs: 46});
+  s.c2 = chip(st, "🌙 night: no power", "#1d3557", {fs: 44}); s.c3 = chip(st, "☁️ cloudy: less power", "#6c757d", {fs: 44});
+  s.c4 = tx(st, {x: 600, y: 742, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 9}, "So Singapore is also looking at…");
+  s.c5 = chip(st, "🔌 power from our neighbours", "#2a9d8f", {fs: 42}); s.c6 = chip(st, "⚛️ even nuclear", "#7209b7", {fs: 42});
   s.run = t => { const a = (w, f) => cue("answer", w, f), t0 = SC.answer.t0, tp = a("panels", .15), tn = a("not", .32), ts = a("small", .45), tng = a("nothing", .62), tc = a("less", .69), tw = a("that's", .78);
     popAt(s.top, 600, 40, t, t0 - .2); op(s.q, ramp(t, a("could", .1) - .1, a("could", .1) + .3));
     const ng = on(t, tng - .1, tc - .1, .5), cl = ramp(t, tc - .15, tc + .5), day = (1 - ng), pw = day * (1 - .6 * cl) * ramp(t, tp, tp + .6);
@@ -250,8 +251,8 @@ S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), st = s.stag
     s.flats.forEach((f, i) => { op(f.roof, ramp(t, tp + i * .12, tp + i * .12 + .3)); f.pan.forEach(r => set(r, "fill", mix("#0b132b", "#3a86ff", pw))); op(f.beam, .32 * pw * ramp(t, tp + .5, tp + 1));
       f.win.forEach((wn, j) => set(wn, "fill", ng > .5 && (j * 7 + i * 3) % 5 < 3 ? "#ffd166" : mix("#fdf0d5", "#3d4470", ng))); });
     const nk = Math.max(0, pop(t, tn - .05, .35)); tf(s.not, `translate(600 330) rotate(-5) scale(${nk})`); op(s.not, on(t, tn - .05, tng - .2, .2));
-    c3At(s.c1, 600, 735, t, ts - .2, tw - .1); c3At(s.c2, 330, 818, t, tng + .3, tw - .1); c3At(s.c3, 850, 818, t, tc + .3, tw - .1);
-    op(s.c4, ramp(t, tw, tw + .3)); c3At(s.c5, 390, 818, t, a("neighbours", .9) - .2); c3At(s.c6, 900, 818, t, a("nuclear", .97) - .15); }; return s; })();
+    c3At(s.c1, 600, 728, t, ts - .2, tw - .1); c3At(s.c2, 300, 826, t, tng + .3, tw - .1); c3At(s.c3, 850, 826, t, tc + .3, tw - .1);
+    op(s.c4, ramp(t, tw, tw + .3)); c3At(s.c5, 400, 830, t, a("neighbours", .9) - .2); c3At(s.c6, 960, 830, t, a("nuclear", .97) - .15); }; return s; })();
 
 // ---- NEWS: 1 April 2026, the Beverage Container Return Scheme. Plastic bottles and metal cans carry a 10¢ deposit; around 1,000 return machines; the machine pays the 10¢ back
 S.news = (() => { const s = scene("news", "#0b6e63", "#0a3d62"), st = s.stage;
@@ -260,25 +261,25 @@ S.news = (() => { const s = scene("news", "#0b6e63", "#0a3d62"), st = s.stage;
   tx(s.cal, {x: 0, y: -84, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", "letter-spacing": 3}, "APRIL"); tx(s.cal, {x: 0, y: 64, "text-anchor": "middle", "font-size": 150, "font-weight": 700, fill: INK}, "1"); tx(s.cal, {x: 0, y: 118, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#6c757d"}, "2026");
   s.title = el("g", {}, st); tx(s.title, {x: 0, y: 0, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "Beverage Container"); tx(s.title, {x: 0, y: 92, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 12}, "Return Scheme");
   // B: what carries the deposit
-  s.B = el("g", {}, st); s.bot = el("g", {}, s.B); bottleG(s.bot); s.can = el("g", {}, s.B); canG(s.can, "#e63946", {mark: true});
+  s.B = el("g", {}, st); s.bot = el("g", {}, s.B); bottleG(s.bot); s.can = el("g", {}, s.B); canG(s.can, HERO, {mark: true});
   s.l1 = c3Lab(s.B, "plastic bottle", 44); s.l2 = c3Lab(s.B, "metal can", 44);
   s.mk = el("g", {}, s.B); dmark(s.mk, 100); s.mkL = c3Lab(s.B, "Deposit Mark", 50, "#ffe14d");
   s.ln = [el("line", {stroke: "#ffe14d", "stroke-width": 7, "stroke-dasharray": "4 14", "stroke-linecap": "round"}, s.B), el("line", {stroke: "#ffe14d", "stroke-width": 7, "stroke-dasharray": "4 14", "stroke-linecap": "round"}, s.B)];
   // C: around 1,000 machines (50 little machines, each standing for 20)
-  s.C = el("g", {}, st); s.minis = []; for (let i = 0; i < 50; i++) { const g = el("g", {}, s.C); el("rect", {x: -24, y: -44, width: 48, height: 88, rx: 8, fill: "#2a9d8f", stroke: INK, "stroke-width": 4}, g); el("rect", {x: -16, y: -36, width: 32, height: 16, rx: 3, fill: "#fff"}, g); el("circle", {cx: 0, cy: 4, r: 12, fill: "#0b1d24", stroke: "#e9eef1", "stroke-width": 4}, g); g.x = 150 + (i % 10) * 100; g.y = 330 + Math.floor(i / 10) * 104; s.minis.push(g); }
-  s.n1 = tx(s.C, {x: 600, y: 240, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 12}, "around 1,000 return machines");
-  s.key = el("g", {transform: "translate(600 850)"}, s.C); el("rect", {x: -316, y: -34, width: 28, height: 52, rx: 5, fill: "#2a9d8f", stroke: INK, "stroke-width": 3}, s.key); tx(s.key, {x: 20, y: 6, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff"}, "= 20 machines, all across Singapore");
+  s.C = el("g", {}, st); s.minis = []; for (let i = 0; i < 50; i++) { const g = el("g", {}, s.C); el("rect", {x: -24, y: -44, width: 48, height: 88, rx: 8, fill: "#2a9d8f", stroke: INK, "stroke-width": 4}, g); el("rect", {x: -16, y: -36, width: 32, height: 16, rx: 3, fill: "#fff"}, g); el("circle", {cx: 0, cy: 4, r: 12, fill: "#0b1d24", stroke: "#e9eef1", "stroke-width": 4}, g); g.x = 105 + (i % 10) * 110; g.y = 300 + Math.floor(i / 10) * 112; s.minis.push(g); }
+  s.n1 = tx(s.C, {x: 600, y: 170, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 12}, "around 1,000 return machines");
+  s.key = el("g", {transform: "translate(600 846)"}, s.C); el("rect", {x: -316, y: -34, width: 28, height: 52, rx: 5, fill: "#2a9d8f", stroke: INK, "stroke-width": 3}, s.key); tx(s.key, {x: 20, y: 6, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff"}, "= 20 machines, all across Singapore");
   // D: the machine pays back
-  s.D = el("g", {}, st); s.rv = el("g", {}, s.D); s.m = rvmG(s.rv); s.dcan = el("g", {}, s.D); canG(s.dcan, "#e63946", {mark: true}); s.coin = el("g", {}, s.D); coinG(s.coin, 100); s.back = c3Lab(s.D, "10¢ back!", 90, "#ffe14d");
+  s.D = el("g", {}, st); s.rv = el("g", {}, s.D); s.m = rvmG(s.rv); s.dcan = el("g", {}, s.D); canG(s.dcan, HERO, {mark: true}); s.coin = el("g", {}, s.D); coinG(s.coin, 100); s.back = c3Lab(s.D, "10¢ back!", 90, "#ffe14d");
   s.run = t => { const a = (w, f) => cue("news", w, f), t0 = SC.news.t0, td = a("first", .08), tt = a("beverage", .2), tB = a("drinks", .33), tC = a("there", .6), tD = a("put", .82);
     popAt(s.top, 600, 40, t, t0 - .2);
-    const up = ramp(t, tB - .5, tB), calS = lerp(1.15, .42, up); tf(s.cal, `translate(${lerp(600, 110, up)} ${lerp(330, 150, up)}) scale(${calS * Math.max(0, pop(t, td - .15))}) rotate(${lerp(-4, 0, up)})`); op(s.cal, ramp(t, td - .2, td));
-    tf(s.title, `translate(${lerp(600, 680, up)} ${lerp(640, 130, up)}) scale(${lerp(1, .62, up) * Math.max(0, pop(t, tt - .1))})`); op(s.title, ramp(t, tt - .15, tt));
-    op(s.B, on(t, tB - .1, tC - .1, .3)); c3At(s.bot, 250, 520, t, a("plastic", .37) - .2, 1e9, 1.55); c3At(s.l1, 250, 790, t, a("plastic", .37)); c3At(s.can, 520, 545, t, a("metal", .42) - .2, 1e9, 1.55); c3At(s.l2, 520, 790, t, a("metal", .42));
+    const up = ramp(t, tB - .5, tB), calS = lerp(1.15, .42, up); tf(s.cal, `translate(${lerp(600, 110, up)} ${lerp(330, 150, up)}) scale(${calS * Math.max(0, pop(t, td - .15))}) rotate(${lerp(-4, 0, up)})`); op(s.cal, ramp(t, td - .2, td) * (1 - ramp(t, tC - .3, tC)));
+    tf(s.title, `translate(${lerp(600, 680, up)} ${lerp(640, 130, up)}) scale(${lerp(1, .62, up) * Math.max(0, pop(t, tt - .1))})`); op(s.title, ramp(t, tt - .15, tt) * (1 - ramp(t, tC - .3, tC)));
+    op(s.B, on(t, tB - .1, tC - .1, .3)); c3At(s.bot, 230, 540, t, a("plastic", .37) - .2, 1e9, 1.5); c3At(s.l1, 230, 318, t, a("plastic", .37)); c3At(s.can, 540, 565, t, a("metal", .42) - .2, 1e9, 1.5); c3At(s.l2, 540, 318, t, a("metal", .42));
     const tm = a("ten-cent", .5) - .1; c3At(s.mk, 900, 480, t, tm, 1e9, 1 + .05 * Math.sin(t * 6) * on(t, tm, tm + 1.5, .2)); c3At(s.mkL, 900, 650, t, tm + .25);
-    [[272 + 34, 520 + 136], [546 + 14, 545 + 84]].forEach(([x, y], i) => { const l = s.ln[i]; set(l, "x1", x + 20); set(l, "y1", y - 6); set(l, "x2", 800); set(l, "y2", lerp(y, 480, .8)); op(l, ramp(t, tm + .2 + i * .15, tm + .5 + i * .15)); });
-    op(s.C, on(t, tC - .1, tD - .1, .3)); const tk = a("thousand", .66); tf(s.n1, `translate(600 240) scale(${Math.max(0, pop(t, tk - .1))}) translate(-600 -240)`);
-    s.minis.forEach((g, i) => { const ti = tC + .1 + i * .05; tf(g, `translate(${g.x} ${g.y}) scale(${Math.max(0, pop(t, ti, .3))})`); }); op(s.key, ramp(t, a("across", .74), a("across", .74) + .3));
+    [[230 + 33, 540 + 132], [540 + 39, 565 + 81]].forEach(([x, y], i) => { const l = s.ln[i]; set(l, "x1", x + 26); set(l, "y1", y - 8); set(l, "x2", 812); set(l, "y2", lerp(y, 480, .75)); op(l, ramp(t, tm + .2 + i * .15, tm + .5 + i * .15)); });
+    op(s.C, on(t, tC - .1, tD - .1, .3)); const tk = a("thousand", .66); tf(s.n1, `translate(600 170) scale(${Math.max(0, pop(t, tk - .1))}) translate(-600 -170)`);
+    s.minis.forEach((g, i) => { const ti = tC + .1 + i * .05; tf(g, `translate(${g.x} ${g.y}) scale(${1.15 * Math.max(0, pop(t, ti, .3))})`); }); op(s.key, ramp(t, a("across", .74), a("across", .74) + .3));
     op(s.D, ramp(t, tD - .1, tD + .2)); tf(s.rv, `translate(820 850) scale(${1.25 * Math.max(0, pop(t, tD - .1))})`);
     const tcn = a("can", .86), kin = ramp(t, tcn, tcn + .8), tp = a("pays", .93); tf(s.dcan, `translate(${lerp(330, 820, kin)} ${lerp(600, 581, kin)}) scale(${lerp(1.5, .5, kin)}) rotate(${90 * ramp(t, tcn - .5, tcn)})`); op(s.dcan, ramp(t, tD + .1, tD + .3) * (1 - ramp(t, tcn + .7, tcn + .85)));
     s.m.scr.textContent = t > tcn + .85 ? "✓ 10¢ back" : "RETURN";
@@ -288,7 +289,7 @@ S.news = (() => { const s = scene("news", "#0b6e63", "#0a3d62"), st = s.stage;
 // ---- RECAP: the journey in eight steps; each lights up as Heart names it. One kind of label per row: what happened to you
 function c3Recap(name, words) { const s = scene(name, "#fff3b0", "#ffd6a5"), st = s.stage;
   s.head = tx(st, {x: 600, y: 96, "text-anchor": "middle", "font-size": 60, "font-weight": 700, fill: INK}, "Your journey as a drink can");
-  s.me = el("g", {}, st); canG(s.me, "#e63946", {face: true});
+  s.me = el("g", {}, st); canG(s.me, HERO, {face: true});
   const icon = [g => tf(rvmG(g), "translate(0 62) scale(.27)"),
     g => emo(g, 0, -18, 104, "🚚"),
     g => { el("path", A3({d: "M-52 -76 H-22 V-34 A22 22 0 0 0 22 -34 V-76 H52 V-34 A52 52 0 0 1 -52 -34 Z", fill: "#e63946", "stroke-width": 5}), g); el("rect", A3({x: -52, y: -76, width: 30, height: 18, fill: "#dee2e6", "stroke-width": 4}), g); el("rect", A3({x: 22, y: -76, width: 30, height: 18, fill: "#dee2e6", "stroke-width": 4}), g); tf(tinG(g), "translate(-36 32) scale(.36) rotate(-10)"); tf(canG(g, "#3a86ff", {sw: 10}), "translate(44 40) scale(.3)"); g.flip = 1; },
@@ -314,7 +315,7 @@ function c3Magnet(p) { const g = el("g", {}, p); el("path", A3({d: "M-150 -170 H
 S.textbook = (() => { const s = scene("textbook", "#fdf0d5", "#ffd6a5"), st = s.stage;
   s.head = el("g", {}, st); el("rect", {x: -470, y: -52, width: 940, height: 104, rx: 30, fill: "#3a0ca3", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.head); tx(s.head, {x: 0, y: 20, "text-anchor": "middle", "font-size": 58, "font-weight": 700, fill: "#fff"}, "📘 Primary 3 Science · Materials");
   // A + B: the can, and the "again and again" loop
-  s.AB = el("g", {}, st); s.can = el("g", {}, s.AB); canG(s.can, "#e63946", {mark: true});
+  s.AB = el("g", {}, st); s.can = el("g", {}, s.AB); canG(s.can, HERO, {mark: true});
   s.n1 = tx(s.AB, {x: 250, y: 0, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "drink can"); s.n2 = tx(s.AB, {x: 250, y: 0, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#6c757d"}, "aluminium: a metal");
   s.loop = el("g", {transform: "translate(800 470)"}, s.AB); const LR = 215, node = k => { const an = -Math.PI / 2 + k * 2 * Math.PI / 3; return [Math.cos(an) * LR, Math.sin(an) * LR]; };
   s.arcs = [0, 1, 2].map(k => { const a0 = -90 + k * 120 + 34, a1 = -90 + (k + 1) * 120 - 34, r = Math.PI / 180, g = el("g", {}, s.loop);
@@ -329,11 +330,11 @@ S.textbook = (() => { const s = scene("textbook", "#fdf0d5", "#ffd6a5"), st = s.
   // C: the magnet test. One kind of label per row: the thing's name above, the science word below
   s.C = el("g", {}, st); s.mag = el("g", {}, s.C); c3Magnet(s.mag);
   s.pull = el("g", {}, s.C); [-36, 0, 36].forEach(x => el("path", {d: `M${x} 0 V60`, stroke: "#e63946", "stroke-width": 9, "stroke-linecap": "round", "stroke-dasharray": "2 20"}, s.pull));
-  s.tin = el("g", {}, s.C); tinG(s.tin); s.al = el("g", {}, s.C); canG(s.al, "#e63946", {mark: true});
+  s.tin = el("g", {}, s.C); tinG(s.tin); s.al = el("g", {}, s.C); canG(s.al, HERO, {mark: true});
   s.tn = tx(s.C, {x: 330, y: 700, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "steel can"); s.ts = chip(s.C, "magnetic ✓", "#06d6a0", {fs: 38, ink: INK});
   s.an = tx(s.C, {x: 870, y: 700, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "aluminium can"); s.as = chip(s.C, "non-magnetic ✗", "#e63946", {fs: 38});
   s.iron = tx(s.C, {x: 330, y: 648, "text-anchor": "middle", "font-size": 28, "font-weight": 600, fill: "#6c757d"}, "(steel is mostly iron)");
-  s.how = chip(st, "🧲 That's how a magnet sorts cans!", "#3a0ca3", {fs: 44});
+  s.how = chip(st, "🧲 That's how a magnet sorts cans!", "#3a0ca3", {fs: 44}); s.home = chip(st, "🏠 Test it with a fridge magnet at home!", "#f77f00", {fs: 40});
   s.run = t => { const a = (w, f) => cue("textbook", w, f), t0 = SC.textbook.t0, tc = a("a", .3), tal = a("aluminium", .42), tm = a("metals", .5), tg = a("magnets", .7), tst = a("steel", .76), tno = a("not", .81), th = a("that's", .9);
     tf(s.head, `translate(600 70) scale(${Math.max(0, pop(t, a("primary", .1) - .2))})`);
     op(s.AB, on(t, tc - .2, tg - .15, .3)); const mv = ramp(t, tm - .5, tm);
@@ -349,7 +350,7 @@ S.textbook = (() => { const s = scene("textbook", "#fdf0d5", "#ffd6a5"), st = s.
     const wob = on(t, tno, tno + .7, .15) * Math.sin((t - tno) * 26) * 3; tf(s.al, `translate(870 500) scale(${Math.max(0, pop(t, tg + .35)) * 1.25}) rotate(${wob})`);
     op(s.tn, ramp(t, tst - .2, tst)); op(s.iron, ramp(t, tst + .3, tst + .6)); c3At(s.ts, 330, 752, t, tst + .2, 1e9, 1); op(s.an, ramp(t, tno - .4, tno - .2)); c3At(s.as, 870, 752, t, tno + .1);
     set(s.tn, "y", 706); set(s.an, "y", 706); set(s.iron, "y", 800);
-    c3At(s.how, 600, 190, t, th); }; return s; })();
+    c3At(s.how, 600, 190, t, th); c3At(s.home, 600, 852, t, th + .9); }; return s; })();
 
 // ---- WHY IT MATTERS: a can from recycled aluminium needs much less energy than one from new metal dug out of the ground (no number is given; the bars are about 1 to 20)
 S.matters = (() => { const s = scene("matters", "#d8f3dc", "#95d5b2"), st = s.stage, BX = 760, BL = 400;
@@ -385,17 +386,17 @@ S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage;
     el("circle", {cx: -140, cy: -216, r: 32, fill: "#7209b7", stroke: INK, "stroke-width": 5}, g); tx(g, {x: -140, y: -201, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: "#fff"}, String(n)); g.x = x; return g; };
   const cap = (g, l1, l2) => { tx(g, {x: 0, y: 222, "text-anchor": "middle", "font-size": 31, "font-weight": 700, fill: INK, "data-fit": 340}, l1); tx(g, {x: 0, y: 262, "text-anchor": "middle", "font-size": 31, "font-weight": 700, fill: INK, "data-fit": 340}, l2); };
   // 1: the mark
-  s.p1 = panel(200, 1); const p1 = s.p1; tf(canG(p1, "#e63946", {mark: true}), "translate(-50 10) scale(1.5)");
+  s.p1 = panel(200, 1); const p1 = s.p1; tf(canG(p1, HERO, {mark: true}), "translate(-50 10) scale(1.5)");
   s.lens = el("g", {}, p1); el("line", {x1: 52, y1: 52, x2: 110, y2: 110, stroke: INK, "stroke-width": 26, "stroke-linecap": "round"}, s.lens); el("line", {x1: 56, y1: 56, x2: 108, y2: 108, stroke: "#8d5b3a", "stroke-width": 14, "stroke-linecap": "round"}, s.lens);
   el("circle", {r: 78, fill: "#e9f5ff", stroke: INK, "stroke-width": 9}, s.lens); tf(dmark(s.lens, 58), "translate(0 0)"); cap(p1, "Look for the", "Deposit Mark");
   // 2: empty, whole, to the machine
-  s.p2 = panel(600, 2); const p2 = s.p2; s.c2 = el("g", {}, p2); canG(s.c2, "#e63946", {mark: true}); s.drops = [0, 1, 2].map(i => el("path", {d: "M0 -12 Q10 4 0 10 Q-10 4 0 -12 Z", fill: "#4cc9f0", stroke: INK, "stroke-width": 3}, p2));
-  s.sq = el("g", {}, p2); tf(canG(s.sq, "#e63946", {dent: true, sw: 9}), "scale(.62 .4) rotate(8)"); s.sqx = c3Cross(s.sq, 36, 11); s.ok = c3Tick(p2, 30, 12);
+  s.p2 = panel(600, 2); const p2 = s.p2; s.c2 = el("g", {}, p2); canG(s.c2, HERO, {mark: true}); s.drops = [0, 1, 2].map(i => el("path", {d: "M0 -12 Q10 4 0 10 Q-10 4 0 -12 Z", fill: "#4cc9f0", stroke: INK, "stroke-width": 3}, p2));
+  s.sq = el("g", {}, p2); tf(canG(s.sq, HERO, {dent: true, sw: 9}), "scale(.62 .4) rotate(8)"); s.sqx = c3Cross(s.sq, 36, 11); s.ok = c3Tick(p2, 30, 12);
   s.m2 = el("g", {}, p2); tf(rvmG(s.m2), "scale(.42)"); s.ar2 = c3Arrow(p2, 60); cap(p2, "Empty it. Keep it whole.", "Bring it to a return machine");
   // 3: glass and cartons
   s.p3 = panel(1000, 3); const p3 = s.p3; s.gl = el("g", {}, p3); glassG(s.gl); s.ct = el("g", {}, p3); cartonG(s.ct);
   s.m3 = el("g", {}, p3); tf(rvmG(s.m3), "scale(.3)"); s.x3 = c3Cross(s.m3, 50, 14); tf(s.x3, "translate(0 -90)");
-  s.bb = el("g", {}, p3); tf(blueBinG(s.bb), "scale(.62)"); s.ok3 = c3Tick(p3, 28, 12); cap(p3, "Glass bottles and cartons:", "the blue recycling bin");
+  s.bb = el("g", {}, p3); tf(blueBinG(s.bb), "scale(.62)"); s.ok3 = c3Tick(p3, 28, 12); cap(p3, "Glass bottles and cartons:", "the blue bin at your block");
   s.run = t => { const a = (w, f) => cue("try", w, f), t1 = a("look", .12), t2 = a("empty", .3), tw = a("whole", .4), tr = a("return", .48), t3 = a("glass", .58), tcn = a("cartons", .66), tx3 = a("don't", .74), tb = a("blue", .9);
     [[s.p1, t1], [s.p2, t2], [s.p3, t3]].forEach(([g, tt]) => { tf(g, `translate(${g.x} 440) scale(${Math.max(0, pop(t, tt - .25))})`); op(g, ramp(t, tt - .3, tt - .1)); });
     tf(s.lens, `translate(${lerp(90, -11, ramp(t, t1, t1 + .7))} ${lerp(-120, 91, ramp(t, t1, t1 + .7))}) scale(${1 + .05 * Math.sin(t * 5)})`);
@@ -413,7 +414,7 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = s.stage;
   s.title = tx(st, {x: 600, y: 100, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 10}, "🤔 Think about it!");
   s.L = el("g", {}, st); el("circle", {r: 200, fill: "#fff", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.L); s.spin = el("g", {}, s.L);
   [0, 180].forEach(a => { const g = el("g", {transform: `rotate(${a})`}, s.spin); el("path", {d: "M-150 -40 A155 155 0 0 1 130 -84", fill: "none", stroke: "#2a9d8f", "stroke-width": 24, "stroke-linecap": "round"}, g); el("path", {d: "M108 -128 L160 -62 L84 -52 Z", fill: "#2a9d8f", stroke: "#2a9d8f", "stroke-width": 8, "stroke-linejoin": "round"}, g); });
-  tf(canG(s.L, "#e63946", {mark: true}), "scale(.95)"); s.l1 = c3Lab(st, "recycle: again and again", 44);
+  tf(canG(s.L, HERO, {mark: true}), "scale(.95)"); s.l1 = c3Lab(st, "recycle: again and again", 44);
   s.R = el("g", {}, st); el("circle", {r: 200, fill: "#fff", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.R); el("path", A3({d: "M-150 96 L-104 6 L-58 50 L-16 -34 L40 30 L84 -6 L150 96 Z", fill: "#b5651d"}), s.R); emo(s.R, 0, -86, 96, "⛏️"); s.l2 = c3Lab(st, "dig up new metal", 44);
   s.vs = c3Lab(st, "?", 220, "#ffe14d");
   s.ans = chip(st, "Answer in Part 2!", "#f72585", {fs: 48});
