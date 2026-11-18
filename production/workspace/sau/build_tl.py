@@ -147,9 +147,17 @@ src = {"pop": "sine=f=880:d=0.12,volume=0.5,afade=t=out:st=0.02:d=0.1,asetrate=4
        "flash": "anoisesrc=d=1:c=white:a=0.3,lowpass=f=4000,afade=t=in:d=0.01,afade=t=out:st=0.05:d=0.9",
        "deep": "anoisesrc=d=5:c=brown:a=0.4,lowpass=f=300,tremolo=f=0.4:d=0.6,afade=t=in:d=0.8,afade=t=out:st=4:d=1",
        "wind": "anoisesrc=d=6:c=pink:a=0.32,bandpass=f=420:w=300,tremolo=f=0.6:d=0.5,afade=t=in:d=0.8,afade=t=out:st=5:d=1"}
+# A name with a file sfx/<name>.wav (made by sfx_lib.py) plays that file; any other name plays its one-line ffmpeg sound above.
+SFX = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sfx")
+wavof = lambda kd: os.path.join(SFX, kd + ".wav")
+for kd in sorted({kd for kd, _ in ev if not os.path.exists(wavof(kd)) and kd not in src}): print("WARNING no such sound, left out:", kd)
+ev = [(kd, tt) for kd, tt in ev if os.path.exists(wavof(kd)) or kd in src]
+if not ev: ev = [("pop", END + 5)]                          # nothing to play: still write a (silent) effects track
 inputs, fl = [], []
 for i, (kd, tt) in enumerate(ev):
-    inputs += ["-f", "lavfi", "-i", src[kd]]; fl.append(f"[{i}:a]aformat=sample_rates=44100:channel_layouts=mono,adelay={int(max(0, tt) * 1000)}:all=1[e{i}]")
-fl.append("".join(f"[e{i}]" for i in range(len(ev))) + f"amix=inputs={len(ev)}:normalize=0,apad,atrim=0:{END}[out]")
+    inputs += ["-i", wavof(kd)] if os.path.exists(wavof(kd)) else ["-f", "lavfi", "-i", src[kd]]
+    fl.append(f"[{i}:a]aformat=sample_rates=44100:channel_layouts=mono,adelay={int(max(0, tt) * 1000)}:all=1[e{i}]")
+# sounds that overlap are added together; the limiter only acts if the sum would clip
+fl.append("".join(f"[e{i}]" for i in range(len(ev))) + f"amix=inputs={len(ev)}:normalize=0,alimiter=limit=0.94:attack=3:release=80:level=false:latency=true,apad,atrim=0:{END}[out]")
 subprocess.run(["ffmpeg", "-loglevel", "error", "-y"] + inputs + ["-filter_complex", ";".join(fl), "-map", "[out]", OUT + "_sfx.wav"], check=True)
 print("END", END); [print(" ", x["scene"], x["t0"], x["t1"]) for x in scenes]
