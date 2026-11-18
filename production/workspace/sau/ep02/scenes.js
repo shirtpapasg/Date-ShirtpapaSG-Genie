@@ -88,37 +88,75 @@ S.news = (() => { const s = scene("news", "#023e8a", "#0077b6");
     const k = ramp(t, tsh - .3, tsh + 2.5); tf(s.ship, `translate(${lerp(1130, 790, k)} ${lerp(170, 350, k)})`); op(s.ship, ramp(t, tsh - .4, tsh - .1));
     popAt(s.cal, 600, 50, t, a("twenty-eight", .8)); }; return s; })();
 
-// ---- CONVERT: one chain, every box the same way round: the THING's name above, its form of ENERGY below
-// (the teacher, 18 Nov 2026: never mix a name, a state of matter and an energy form in one row)
-S.convert = (() => { const s = scene("convert", "#fff3b0", "#ffd166");
-  const turbine = p => { const g = el("g", {}, p); el("circle", {r: 62, fill: "#e9ecef", stroke: INK, "stroke-width": 6}, g); g.bl = el("g", {}, g);
-    for (let i = 0; i < 6; i++) el("path", {d: "M0 0 L54 -14 Q60 0 54 14 Z", fill: "#457b9d", stroke: INK, "stroke-width": 3, transform: `rotate(${i * 60})`}, g.bl); el("circle", {r: 12, fill: INK}, g); return g; };
-  const tank = p => { const g = el("g", {}, p); el("rect", {x: -38, y: -62, width: 76, height: 124, rx: 30, fill: "#90e0ef", stroke: INK, "stroke-width": 6}, g);
-    el("rect", {x: -14, y: -78, width: 28, height: 20, rx: 5, fill: "#adb5bd", stroke: INK, "stroke-width": 5}, g);
-    tx(g, {x: 0, y: 12, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: INK}, "GAS"); return g; };
-  const generator = p => { const g = el("g", {}, p); el("rect", {x: -66, y: -46, width: 132, height: 92, rx: 16, fill: "#dee2e6", stroke: INK, "stroke-width": 6}, g);
-    for (let k = 0; k < 6; k++) el("path", {d: `M${-40 + k * 14} -26 q7 26 0 52`, fill: "none", stroke: "#b5651d", "stroke-width": 6}, g);
-    emo(g, 36, 0, 54, "⚡"); return g; };
-  const STEPS = [["Natural gas", tank, "chemical potential energy", "chemical", .15, "#f77f00"],
-    ["Burning gas", "🔥", "heat energy", "heat", .35, "#e63946"],
-    ["Turbine", turbine, "kinetic energy", "turbines", .6, "#457b9d"],
-    ["Generator", generator, "electrical energy", "electrical", .85, "#e0a800"],
-    ["Lamp", "💡", "light energy", "electrical", .92, "#06d6a0"]];
-  s.items = STEPS.map(([name, pic, energy, w, f, col], i) => { const g = el("g", {}, s.stage);
-    tx(g, {x: 0, y: -122, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, name);
-    el("rect", {x: -95, y: -95, width: 190, height: 190, rx: 28, fill: "#fff", stroke: col, "stroke-width": 9}, g);
-    if (typeof pic === "string") emo(g, 0, 0, 110, pic); else { const d = pic(g); if (d.bl) g.tb = d; }
-    const lab = el("g", {transform: "translate(0 152)"}, g); el("rect", {x: -105, y: -34, width: 210, height: 68, rx: 20, fill: col, stroke: INK, "stroke-width": 4}, lab);
-    const words = energy.split(" "), lines = words.length > 2 ? [words.slice(0, 2).join(" "), words.slice(2).join(" ")] : [energy];
-    lines.forEach((ln, k) => tx(lab, {x: 0, y: (lines.length > 1 ? -6 + k * 28 : 9), "text-anchor": "middle", "font-size": lines.length > 1 ? 24 : 27, "font-weight": 700, fill: "#fff"}, ln));
-    g.w = w; g.f = f; g.i = i; g.x = 120 + i * 240; return g; });
-  s.arrows = [0, 1, 2, 3].map(i => { const a = el("path", {d: "M-16 -16 L14 0 L-16 16 Z", fill: INK}, s.stage); a.x = 120 + i * 240 + 120; return a; });
-  s.head = tx(s.stage, {x: 600, y: 230, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#5b6782"}, "THING  ↑          ENERGY  ↓");
-  s.p6 = chip(s.stage, "P6: energy changes from one form to another", "#7209b7", {fs: 36});
+// ---- CONVERT: a working power station. Gas flows in, burns, hot gas spins the turbine, the shaft turns a magnet inside a
+// copper coil (the generator), current flows along the wires and a lamp lights in an HDB flat. Each part comes alive when
+// Heart names it; every label row is the same kind: the thing's name above, its form of energy below (rule 10).
+S.convert = (() => { const s = scene("convert", "#e9f5ff", "#cfe8fb"); const st = s.stage, Y = 470;
+  s.p6 = chip(st, "P6: energy changes from one form to another", "#7209b7", {fs: 34});
+  // 1 natural gas pipe
+  s.pipe = el("g", {}, st); el("rect", {x: -20, y: Y - 26, width: 240, height: 52, rx: 10, fill: "#adb5bd", stroke: INK, "stroke-width": 6}, s.pipe);
+  s.gas = []; for (let k = 0; k < 9; k++) s.gas.push(el("circle", {r: 9, fill: "#4cc9f0", stroke: INK, "stroke-width": 2}, s.pipe));
+  // 2 combustion chamber with a flame
+  s.ch = el("g", {}, st); el("rect", {x: 210, y: Y - 95, width: 160, height: 190, rx: 18, fill: "#495057", stroke: INK, "stroke-width": 7}, s.ch);
+  el("rect", {x: 228, y: Y - 77, width: 124, height: 154, rx: 12, fill: "#1b1b3a"}, s.ch);
+  s.flame = el("g", {transform: `translate(290 ${Y + 55})`}, s.ch);
+  s.fo = el("path", {d: "M0 0 C-48 -20 -40 -80 -6 -120 C-10 -80 18 -70 12 -100 C44 -60 44 -18 0 0 Z", fill: "#f77f00"}, s.flame);
+  s.fi = el("path", {d: "M0 0 C-24 -12 -20 -50 -2 -70 C2 -48 20 -40 14 -56 C26 -34 22 -10 0 0 Z", fill: "#4cc9f0"}, s.flame);
+  // 3 hot gas duct and turbine
+  s.duct = el("g", {}, st); el("rect", {x: 366, y: Y - 34, width: 80, height: 68, fill: "#6c757d", stroke: INK, "stroke-width": 6}, s.duct);
+  s.hot = []; for (let k = 0; k < 10; k++) s.hot.push(el("circle", {r: 8, fill: "#ff7b00"}, s.duct));
+  s.tb = el("g", {transform: `translate(530 ${Y})`}, st); el("circle", {r: 92, fill: "#e9ecef", stroke: INK, "stroke-width": 7}, s.tb);
+  s.bl = el("g", {}, s.tb); for (let k = 0; k < 8; k++) el("path", {d: "M10 -8 L80 -22 Q86 0 80 22 L10 8 Z", fill: "#457b9d", stroke: INK, "stroke-width": 3, transform: `rotate(${k * 45})`}, s.bl);
+  el("circle", {r: 16, fill: INK}, s.tb);
+  // shaft to the generator
+  s.shaft = el("g", {}, st); el("rect", {x: 620, y: Y - 12, width: 110, height: 24, fill: "#adb5bd", stroke: INK, "stroke-width": 5}, s.shaft);
+  s.stripes = []; for (let k = 0; k < 5; k++) s.stripes.push(el("rect", {y: Y - 12, width: 8, height: 24, fill: INK, opacity: .45}, s.shaft));
+  // 4 generator: a magnet turning inside a copper coil
+  s.gen = el("g", {}, st); el("rect", {x: 728, y: Y - 110, width: 200, height: 220, rx: 18, fill: "#f8f9fa", stroke: INK, "stroke-width": 7}, s.gen);
+  for (let k = 0; k < 7; k++) { el("path", {d: `M${748 + k * 26} ${Y - 92} h16`, stroke: "#b5651d", "stroke-width": 12, "stroke-linecap": "round"}, s.gen);
+    el("path", {d: `M${748 + k * 26} ${Y + 92} h16`, stroke: "#b5651d", "stroke-width": 12, "stroke-linecap": "round"}, s.gen); }
+  s.mag = el("g", {transform: `translate(828 ${Y})`}, s.gen); el("rect", {x: -70, y: -18, width: 70, height: 36, fill: "#e63946", stroke: INK, "stroke-width": 4}, s.mag);
+  el("rect", {x: 0, y: -18, width: 70, height: 36, fill: "#3a86ff", stroke: INK, "stroke-width": 4}, s.mag);
+  tx(s.mag, {x: -35, y: 10, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: "#fff"}, "N"); tx(s.mag, {x: 35, y: 10, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: "#fff"}, "S");
+  // 5 wires to an HDB flat with a lamp
+  s.wire = el("g", {}, st); const wd = `M928 ${Y - 40} H1010 V250 H1050`; const wd2 = `M928 ${Y + 40} H1040 V290 H1050`;
+  el("path", {d: wd, fill: "none", stroke: INK, "stroke-width": 9}, s.wire); el("path", {d: wd2, fill: "none", stroke: INK, "stroke-width": 9}, s.wire);
+  s.cur = el("path", {d: wd, fill: "none", stroke: "#ffd166", "stroke-width": 5, "stroke-dasharray": "10 16"}, s.wire);
+  s.cur2 = el("path", {d: wd2, fill: "none", stroke: "#ffd166", "stroke-width": 5, "stroke-dasharray": "10 16"}, s.wire);
+  s.flat = el("g", {}, st); el("rect", {x: 1050, y: 130, width: 140, height: 300, rx: 6, fill: "#f4a261", stroke: INK, "stroke-width": 6}, s.flat);
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 2; c++) el("rect", {x: 1068 + c * 62, y: 150 + r * 66, width: 42, height: 44, rx: 4, fill: "#fdf0d5"}, s.flat);
+  s.glow = el("circle", {cx: 1151, cy: 238, r: 60, fill: "#ffe066", filter: "url(#blur)", opacity: 0}, s.flat);
+  s.win = el("rect", {x: 1130, y: 216, width: 42, height: 44, rx: 4, fill: "#fdf0d5", stroke: INK, "stroke-width": 3}, s.flat);
+  s.lamp = emo(s.flat, 1151, 236, 34, "💡");
+  // labels: name above, energy below, one pair per part
+  const L = [["Natural gas", 90, "chemical potential energy", "#f77f00", "chemical", .15], ["Burning", 300, "heat energy", "#e63946", "burns", .3],
+             ["Turbine", 530, "kinetic energy", "#457b9d", "turbines", .55], ["Generator", 828, "electrical energy", "#e0a800", "generators", .7],
+             ["Lamp", 1135, "light energy", "#06d6a0", "electrical", .85]];
+  s.labs = L.map(([name, x, energy, col, w, f], i) => { const g = el("g", {}, st);
+    tx(g, {x, y: i === 4 ? 105 : Y - 130, "text-anchor": "middle", "font-size": 32, "font-weight": 700, fill: INK}, name);
+    const by = i === 4 ? 478 : Y + 150, lab = el("g", {transform: `translate(${x} ${by})`}, g); el("rect", {x: -88, y: -32, width: 176, height: 64, rx: 18, fill: col, stroke: INK, "stroke-width": 4}, lab);
+    const wds = energy.split(" "), lines = energy.length > 12 ? [wds.slice(0, -1).join(" "), wds[wds.length - 1]] : [energy];
+    lines.forEach((ln, k) => tx(lab, {x: 0, y: lines.length > 1 ? -5 + k * 26 : 9, "text-anchor": "middle", "font-size": 22, "font-weight": 700, fill: "#fff"}, ln));
+    g.w = w; g.f = f; return g; });
   s.run = t => { const a = (w, f) => cue("convert", w, f);
-    popAt(s.p6, 600, 90, t, SC.convert.t0 - .1); op(s.head, 0);
-    s.items.forEach((g, i) => { const tw = a(g.w, g.f) + (i === 4 ? .6 : 0); popAt(g, g.x, 450, t, tw); if (g.tb) tf(g.tb.bl, `rotate(${t > tw ? (t - tw) * 400 : 0})`);
-      if (i < 4) { const ar = s.arrows[i]; tf(ar, `translate(${ar.x} 450)`); op(ar, ramp(t, tw + .2, tw + .4)); } }); }; return s; })();
+    const T = s.labs.map(g => a(g.w, g.f)); T[4] += .9;          // the lamp lights just after "electrical energy"
+    const on1 = k => ramp(t, T[k] - .3, T[k] + .2);
+    popAt(s.p6, 600, 70, t, SC.convert.t0 - .1);
+    [s.pipe, s.ch, s.duct, s.tb, s.gen].forEach((g, k) => op(g, .25 + .75 * on1(Math.min(k === 2 ? 2 : k === 3 ? 2 : k === 4 ? 3 : k, 4))));
+    op(s.shaft, .25 + .75 * on1(2)); op(s.wire, .25 + .75 * on1(3)); op(s.flat, .25 + .75 * on1(4));
+    s.labs.forEach((g, k) => op(g, on1(k)));
+    // gas flowing in the pipe
+    s.gas.forEach((d, k) => { const u = ((t * .5 + k / 9) % 1); set(d, "cx", -10 + u * 220); set(d, "cy", Y + Math.sin(k * 2.1) * 10); op(d, on1(0)); });
+    // the flame grows when it burns
+    const fl = on1(1); tf(s.flame, `translate(290 ${Y + 55}) scale(${(.2 + .8 * fl) * (1 + .06 * Math.sin(t * 13))} ${(.2 + .8 * fl) * (1 + .1 * Math.sin(t * 17))})`);
+    // hot gas rushes into the turbine; it spins faster as the hot gas arrives
+    s.hot.forEach((d, k) => { const u = ((t * 1.2 + k / 10) % 1); set(d, "cx", 366 + u * 120); set(d, "cy", Y - 24 + (k % 3) * 24); op(d, on1(2) * (1 - u * .3)); });
+    const spin = 40 + 520 * on1(2); s.ang = (s.ang || 0); const dt = s.lt ? Math.max(0, Math.min(.1, t - s.lt)) : 0; s.lt = t; s.ang += spin * dt;
+    tf(s.bl, `rotate(${s.ang})`); tf(s.mag, `translate(828 ${Y}) rotate(${s.ang})`);
+    s.stripes.forEach((r, k) => set(r, "x", 624 + ((k * 22 + s.ang * .3) % 104)));
+    // current flows once the generator turns; the lamp lights
+    const cur = on1(3); set(s.cur, "stroke-dashoffset", -t * 90); set(s.cur2, "stroke-dashoffset", t * 90); op(s.cur, cur); op(s.cur2, cur);
+    const lit = on1(4); op(s.glow, .9 * lit); set(s.win, "fill", lit > .5 ? "#ffe066" : "#fdf0d5"); op(s.lamp, .3 + .7 * lit); }; return s; })();
 
 // ---- SUN: sunlight -> tiny sea life -> buried under rock for millions of years -> natural gas
 S.sun = (() => { const s = scene("sun", "#8ecae6", "#023047");
