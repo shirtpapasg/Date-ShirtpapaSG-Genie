@@ -42,7 +42,7 @@ S.returnMachine = (() => { const s = scene("returnMachine", "#b9b3a6", "#b9b3a6"
   s.rvmG = el("g", {transform: `translate(${HX} ${G + 20}) scale(1.5)`}, c); s.rvm = rvmG(s.rvmG);
   s.dark = el("circle", {cx: HX, cy: HY, r: 80, fill: c3GradR([[0, "#12313a"], [.6, "#0b1d24"], [1, "#081419"]])}, c);
   s.kid = c3Kid(c); op(s.kid.can, 0);
-  s.can = el("g", {}, c); canG(s.can, "#e63946", {face: true, mark: true}); s.you = youTag(c);
+  s.can = el("g", {}, c); canG(s.can, HERO, {face: true, mark: true}); s.you = youTag(c);
   s.cover = el("path", {d: `M${HX - 84} ${HY} A84 84 0 0 1 ${HX + 84} ${HY} L${HX + 140} ${HY} A140 140 0 0 0 ${HX - 140} ${HY} Z`, fill: "none"}, c);
   s.black = fullRect(st, "#0b1d24", 0); s.card = c3Big(st, "You are an aluminium drink can");
   s.run = t => { const t0 = c3T("returnMachine"), u = t - t0, w = c3Walk(u, .25, 1.35, 3), aim = ramp(u, 1.3, 1.9), push = ramp(u, 2.0, 2.6), rel = ramp(u, 2.9, 3.4);
@@ -64,7 +64,7 @@ S.povScan = (() => { const s = scene("povScan", "#0b1d24", "#0b1d24"), st = s.st
   s.lamps = [-1, 1].map(d => { const g = el("g", {transform: `translate(${X + d * 700} ${Y - 400})`}, s.w); el("rect", A3({x: -70, y: -50, width: 140, height: 100, rx: 20, fill: "#495057"}), g); g.gl = el("g", {}, g); c3Glow(g.gl, "#ff4d6d", 150, .9, .2); el("circle", A3({r: 30, fill: "#ff4d6d", "stroke-width": 5}), g); return g; });
   s.mon = el("g", {}, s.w); el("rect", A3({x: -310, y: -200, width: 620, height: 400, rx: 34, fill: "#3d5a68", "stroke-width": 8}), s.mon); s.scr = el("rect", A3({x: -280, y: -170, width: 560, height: 340, rx: 18, fill: "#06262e"}), s.mon);
   tx(s.mon, {x: 0, y: -122, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#8dffc0", "letter-spacing": 6}, "SCANNER");
-  tf(canG(s.mon, "#e63946", {face: true, mark: true}), "translate(-150 26) scale(1.25)"); s.mk = el("g", {transform: "translate(110 6)"}, s.mon); dmark(s.mk, 84);
+  tf(canG(s.mon, HERO, {face: true, mark: true}), "translate(-150 26) scale(1.25)"); s.mk = el("g", {transform: "translate(110 6)"}, s.mon); dmark(s.mk, 84);
   tx(s.mon, {x: 110, y: 138, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#fff"}, "Deposit Mark");
   s.zl = el("line", {x1: -112, y1: 88, x2: 22, y2: 30, stroke: "#8dffc0", "stroke-width": 5, "stroke-dasharray": "3 12", "stroke-linecap": "round"}, s.mon);
   s.sl = el("rect", {x: -5, y: -96, width: 10, height: 258, fill: "#ff4d6d"}, s.mon); s.tick = c3Tick(s.mon, 44, 16);
@@ -247,9 +247,9 @@ S.povRoll = (() => { const s = scene("povRoll", "#1d2d44", "#1d2d44"), st = s.st
     const cp = `M${PX - 52} ${SY + 6} V${SY + 6 + h} H${PX + 52} V${SY + 6}`; set(s.cup, "d", cp); set(s.cupO, "d", cp); op(s.cup, pk >= .04 ? 1 : 0); op(s.cupO, pk >= .04 ? 1 : 0);
     tf(s.punch, `translate(${PX} ${lerp(SY - 150, SY - 4 + 170, pu) })`);
     tf(s.l1, `translate(${CX} ${SY + 130})`); op(s.l1, ramp(u, 2.5, 2.7)); tf(s.l2, `translate(${PX} ${SY + 300})`); op(s.l2, ramp(u, 3.5, 3.7));
-    const nk = ease(clamp((u - 4.0) / .45)), nx = lerp(PX, 1390, nk), ny = lerp(SY + 110, 430, nk) - Math.sin(nk * Math.PI) * 60;
-    tf(s.newc, `translate(${nx} ${ny}) scale(${lerp(.55, 1.9, nk)})`); op(s.newc, ramp(u, 3.98, 4.08)); tf(s.glow, `translate(1390 430)`); op(s.glow, ramp(u, 4.25, 4.5)); tf(s.rays, `translate(1390 430) scale(${.8 + .2 * Math.max(0, pop(u, 4.35, .4))})`); op(s.rays, ramp(u, 4.3, 4.45));
-    tf(s.you, `translate(1390 228) scale(${Math.max(0, pop(u, 4.45))})`); op(s.you, ramp(u, 4.4, 4.55));
+    const nk = ease(clamp((u - 4.0) / .45)), nx = lerp(PX, 1390, nk), ny = lerp(SY + 110, 500, nk) - Math.sin(nk * Math.PI) * 60;
+    tf(s.newc, `translate(${nx} ${ny}) scale(${lerp(.55, 1.9, nk)})`); op(s.newc, ramp(u, 3.98, 4.08)); tf(s.glow, `translate(1390 500)`); op(s.glow, ramp(u, 4.25, 4.5)); tf(s.rays, `translate(1390 500) scale(${.8 + .2 * Math.max(0, pop(u, 4.35, .4))})`); op(s.rays, ramp(u, 4.3, 4.45));
+    tf(s.you, `translate(1390 300) scale(${Math.max(0, pop(u, 4.45))})`); op(s.you, ramp(u, 4.4, 4.55));
     op(s.vh, 1 - ramp(u, .6, 1.6)); op(s.vg, ramp(u, .6, 1.6) * (1 - ramp(u, TP, TP + .3)));
     op(s.blink, .9 * (1 - ramp(u, -.2, .3))); c3Show(s.c0, t, t0 + .25, t0 + TP + .1); c3Show(s.card, t, t0 + 2.6, t0 + D - .3); }; return s; })();
 
