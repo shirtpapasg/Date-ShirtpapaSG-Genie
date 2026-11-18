@@ -286,8 +286,8 @@ function makeRecap(name, from, to, words) { const s = scene(name, "#fff3b0", "#f
   s.run = t => { s.cards.forEach((g, i) => { const tw = i >= from && i <= to ? cue(name, words[i - from], (i - from + .5) / (to - from + 1)) : null;
       const done = i < from || (tw !== null && t >= tw), now = tw !== null && on(t, tw - .1, tw + 1.6, .2);
       tf(g, `translate(${g.x} ${g.y}) scale(${1 + .12 * now})`); op(g, done ? 1 : .3); }); }; return s; }
-S.recap1 = makeRecap("recap1", 0, 3, ["rock", "seabed", "cleaned", "kilometres"]);
-S.recap2 = makeRecap("recap2", 4, 7, ["burning", "chimney", "cables", "lamp"]);
+S.recap1 = makeRecap("recap1", 0, 3, ["rock", "natuna", "cleaned", "kilometres"]);
+S.recap2 = makeRecap("recap2", 4, 7, ["burning", "carbon", "cables", "lamp"]);
 
 // ---- SUN: sunlight -> tiny sea life -> buried under rock for millions of years -> natural gas
 S.sun = (() => { const s = scene("sun", "#8ecae6", "#023047");
@@ -301,7 +301,8 @@ S.sun = (() => { const s = scene("sun", "#8ecae6", "#023047");
   s.myr = chip(s.stage, "⏳ millions of years", "#7f5539", {fs: 38});
   s.wow = chip(s.stage, "even gas power started as SUNLIGHT!", "#f72585", {fs: 40});
   s.co2 = chip(s.stage, "burning it releases carbon dioxide", "#495057", {fs: 32}); s.gone = chip(s.stage, "used up = gone", "#e63946", {fs: 32});
-  s.run = t => { const a = (w, f) => cue("sun", w, f), tl = a("tiny", .15), tm = a("millions", .3), tg = has("sun", "sunlight") ? a("sunlight", .62) - .4 : a("gas", .55);
+  s.top = chip(s.stage, "✅ The answer from Part 1", "#06d6a0", {fs: 40});
+  s.run = t => { if (has("sun", "question")) { popAt(s.top, 600, 40, t, cue("sun", "question", .05)); op(s.top, on(t, cue("sun", "question", .05), cue("sun", "tiny", .3), .2)); } else op(s.top, 0); const a = (w, f) => cue("sun", w, f), tl = a("tiny", .15), tm = a("millions", .3), tg = has("sun", "sunlight") ? a("sunlight", .62) - .4 : a("gas", .55);
     tf(s.sunE, `translate(160 120) scale(${1 + .06 * Math.sin(t * 3)}) translate(-160 -120)`); set(s.rays, "stroke-dashoffset", -t * 40); s.rays.querySelectorAll("line").forEach(l => l.setAttribute("stroke-dashoffset", -t * 50));
     const bury = ramp(t, tm, tm + 3);
     s.life.forEach(d => { const sink = clamp(bury * 1.3 - d.u * .3); set(d.e, "cx", 60 + d.v * 1080 + Math.sin(t + d.w) * 15); set(d.e, "cy", lerp(300 + d.u * 150, 760 + (d.v - .5) * 60, sink)); op(d.e, ramp(t, tl - .2, tl + .3) * (1 - ramp(t, tg, tg + .6))); });
@@ -371,19 +372,20 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7");
     el("circle", {r: 120, fill: "#fff", stroke: INK, "stroke-width": 7}, g); emo(g, 0, -5, 120, e); tx(g, {x: 0, y: 180, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, l); });
   s.eq = tx(s.stage, {x: 600, y: 520, "text-anchor": "middle", "font-size": 120, class: "emo"}, "🔥 = ☀️ ?");
   s.q = emo(s.stage, 600, 300, 150, "❓");
-  s.ans = chip(s.stage, has("think", "next") ? "Answer next week!" : "▶ Full episode: TheOneApp, Explored", "#f72585", {fs: 44});
+  const AW = has("think", "part") ? "part" : has("think", "next") ? "next" : "watch";
+  s.ans = chip(s.stage, AW === "part" ? "Answer in Part 2!" : AW === "next" ? "Answer next week!" : "▶ Full episode: TheOneApp, Explored", "#f72585", {fs: 44});
   s.run = t => { const a = (w, f) => cue("think", w, f), mode = has("think", "rooftop") ? 0 : has("think", "choose") ? 1 : 2;
     popAt(s.title, 0, 0, t, SC.think.t0 - .2);
     op(s.roofs, mode === 0 ? ramp(t, a("rooftop", .2), a("rooftop", .2) + .4) : 0); s.roofList.forEach(r => op(r, mode === 0 ? ramp(t, a("panels", .35), a("panels", .35) + .5) : 0));
     op(s.pick, mode === 1 ? ramp(t, a("choose", .2), a("choose", .2) + .4) : 0); op(s.eq, mode === 2 ? ramp(t, SC.think.t0, SC.think.t0 + .4) : 0);
     tf(s.q, `translate(600 300) scale(${(mode === 0 ? Math.max(0, pop(t, a("why", .55))) : 0) * (1 + .08 * Math.sin(t * 5))}) translate(-600 -300)`);
-    popAt(s.ans, 600, 840, t, has("think", "next") ? a("next", .9) : a("watch", .6)); }; return s; })();
+    popAt(s.ans, 600, 840, t, a(AW, AW === "watch" ? .6 : .9)); }; return s; })();
 
 // ---- CLOSE: what to remember, then next week's teaser
 S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
-  const rows = [["🔥", "Most of our electricity: burning natural gas", "natural", .15, "#3a86ff"], ["🚢", "We bring the gas in from other countries", "bring", .3, "#2a9d8f"], ["💡", "So we save energy", "save", .55, "#f77f00"], ["☀️", "Next: the Sun, neighbours, maybe nuclear", "sun", .7, "#7209b7"]];
-  s.rows = rows.map(([e, lab, w, f, col], i) => ({c: chip(s.stage, e + "  " + lab, col, {fs: 42}), w, f, y: 150 + i * 160}));
-  s.tease = chip(s.stage, "🦟 Next week: the mosquitoes that fight dengue!", "#3a0ca3", {fs: 40});
-  s.run = t => { const tn = cue("close", "next", .85);
+  const CL = CFG.close || {}, rows = CL.rows || [["🔥", "Most of our electricity: burning natural gas", "natural", .15, "#3a86ff"], ["🚢", "We bring the gas in from other countries", "bring", .3, "#2a9d8f"], ["💡", "So we save energy", "save", .55, "#f77f00"], ["☀️", "Next: the Sun, neighbours, maybe nuclear", "sun", .7, "#7209b7"]];
+  s.rows = rows.map(([e, lab, w, f, col], i) => ({c: chip(s.stage, e + "  " + lab, col, {fs: 42}), w, f, y: 150 + i * (rows.length > 3 ? 160 : 190)}));
+  s.tease = chip(s.stage, CL.tease || "🦟 Next week: the mosquitoes that fight dengue!", "#3a0ca3", {fs: 40});
+  s.run = t => { const tn = cue("close", CL.teaseWord || "next", .85);
     s.rows.forEach(r => { const tw = cue("close", r.w, r.f); popAt(r.c, 600, r.y, t, tw); op(r.c, ramp(t, tw - .05, tw + .1) * (1 - .6 * ramp(t, tn - .2, tn + .3))); });
     popAt(s.tease, 600, 820, t, tn); }; return s; })();

@@ -28,9 +28,10 @@ FOOT = ("\n\nTheOneApp, Explored: one real news story every Thursday, and the sc
         "The sister series of TheOneApp, Explained.\n\n#TheOneAppExplored #PrimaryScience #Singapore")
 EP1_CH = chapters(f"{SAU}/ep01/ep01_tl.json", {"hook": "Where did the haze go?", "welcome": "Today you'll learn", "news": "The headline", "peat": "Follow one tiny particle", "recap": "Its journey", "tiny": "How small is PM2.5?",
     "lungs": "Your nose and lungs (P5 respiratory system)", "wind": "Why the haze went away", "impact": "People and the environment (P6)", "try": "Try this at home", "think": "Think about it", "close": "Remember"})
-EP2_CH = chapters(f"{SAU}/ep02/ep02_tl.json", {"hook": "No oil, no gas", "answer": "Last week's answer: N95 vs cloth", "welcome": "Today you'll learn", "history": "From 1965 to today",
-    "today": "93 out of 100", "news": "The news", "sun": "Gas started as sunlight", "seabed": "Follow one tiny bit of gas", "recap1": "Its journey", "convert": "Energy changes (P6)",
-    "options": "Solar and our neighbours", "nuclear": "Could nuclear power us?", "try": "Be an energy detective", "think": "Think about it", "close": "Remember"})
+EP2_CH = chapters(f"{SAU}/ep02/ep02_tl.json", {"hook": "No oil, no gas", "answer": "Last week's answer: N95 vs cloth", "welcome": "Today you'll learn", "today": "93 out of 100",
+    "seabed": "You are a tiny bit of natural gas", "recap1": "Your journey", "convert": "Energy changes (P6)", "try": "Be an energy detective", "think": "Think about it", "close": "Remember"})
+EP2B_CH = chapters(f"{SAU}/ep02b/ep02b_tl.json", {"hook2": "No oil, no coal, no gas", "sun": "Part 1's answer: gas started as sunlight", "welcome": "Today you'll learn", "history": "From 1965 to today",
+    "news": "The news: less gas from Indonesia", "povSpace": "Be a ray of sunlight", "options": "Solar and our neighbours", "nuclear": "Could nuclear power us?", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
  {"id": "sau-trailer", "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
@@ -43,14 +44,20 @@ VIDEOS = [
   "desc": "About 30 times thinner than a strand of your hair! Watch the full episode: Why did the haze go away? (TheOneApp, Explored EP1)" + FOOT, "tags": ["haze", "PM2.5", "shorts", "theoneapp explored"]},
  {"id": "sau-ep01-s2", "file": f"{SAU}/ep01/short2.mp4", "at": "2026-11-30T09:00:00Z", "title": "Why Does Haze Only Come At Certain Times? #Shorts",
   "desc": "It's all about the wind and the rain. Watch the full episode: Why did the haze go away? (TheOneApp, Explored EP1)" + FOOT, "tags": ["haze", "monsoon", "shorts", "theoneapp explored"]},
- {"id": "sau-ep02", "file": f"{SAU}/ep02/ep02.mp4", "thumb": f"{SAU}/ep02/thumb_ep02.jpg", "at": "2026-12-03T09:00:00Z", "title": "No Oil, No Gas: How Does Singapore Keep The Lights On? | TheOneApp, Explored EP2",
-  "desc": "Singapore has no oil, coal or gas of its own, yet the lights always come on. From oil-fired power stations in 1965 to natural gas today. Follow one tiny bit of gas from rock under the seabed, along a 650 km pipe, through a power station and into the lamp in your room. Then: what Indonesia's smaller pipeline supply means, and what could power us next: solar, clean electricity from our neighbours, even nuclear. Linked to P6 energy forms and conversion.\n\n" + EP2_CH +
+ {"id": "sau-ep02", "file": f"{SAU}/ep02/ep02.mp4", "thumb": f"{SAU}/ep02/thumb_ep02.jpg", "at": "2026-12-03T09:00:00Z", "title": "No Oil, No Gas: How Does Singapore Keep The Lights On? (Part 1) | TheOneApp, Explored EP2",
+  "desc": "Singapore has no oil, coal or gas of its own, yet the lights always come on. In Part 1, YOU are a tiny bit of natural gas: squeezed in rock under the seabed, shooting up a well, cleaned, sent 650 km along a pipe on the seabed, burned in a power station, until your energy lights the lamp in your room. Then Heart explains the energy changes from the Primary 6 textbook: chemical potential energy to heat, kinetic and electrical energy. Part 2 is out on Sunday."
+          "\n\n" + EP2_CH +
+          "\n\nSources: Energy Market Authority (ema.gov.sg) energy statistics." + FOOT,
+  "tags": ["energy", "natural gas", "singapore", "electricity", "primary 6 science", "energy conversion", "power station", "PSLE science", "theoneapp explored"]},
+ {"id": "sau-ep02b", "file": f"{SAU}/ep02b/ep02b.mp4", "thumb": f"{SAU}/ep02b/thumb_ep02b.jpg", "at": "2026-12-06T09:00:00Z", "title": "Can Singapore Keep The Lights On? Sun, Neighbours Or Atoms (Part 2) | TheOneApp, Explored EP2",
+  "desc": "Part 2: from oil-fired power stations in 1965 to natural gas today, and what Indonesia sending a little less gas by pipeline means. Then be a ray of sunlight landing on the floating solar farm at Tengeh Reservoir, electricity in a cable under the sea, and a neutron splitting a uranium atom: three ways Singapore might keep the lights on in future."
+          "\n\n" + EP2B_CH +
           "\n\nSources: Energy Market Authority (ema.gov.sg) energy statistics and its 2026 feature on advanced nuclear energy; Ministry of Trade and Industry (mti.gov.sg) on low-carbon electricity imports; news reports of 24 to 26 October 2026 on Indonesia's pipeline gas." + FOOT,
-  "tags": ["energy", "natural gas", "singapore", "electricity", "primary 6 science", "energy conversion", "solar", "nuclear", "PSLE science", "theoneapp explored"]},
- {"id": "sau-ep02-s1", "file": f"{SAU}/ep02/short1.mp4", "at": "2026-12-04T09:00:00Z", "title": "Is Gas Power Secretly Sunlight? #Shorts",
-  "desc": "Natural gas formed from tiny sea creatures that got their energy from the Sun. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2)" + FOOT, "tags": ["energy", "natural gas", "sun", "shorts", "theoneapp explored"]},
- {"id": "sau-ep02-s2", "file": f"{SAU}/ep02/short2.mp4", "at": "2026-12-07T09:00:00Z", "title": "Could Nuclear Power Singapore? #Shorts",
-  "desc": "Singapore is studying small modular reactors, but has not decided yet. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2)" + FOOT, "tags": ["nuclear energy", "singapore", "energy", "shorts", "theoneapp explored"]},
+  "tags": ["energy", "natural gas", "singapore", "solar", "nuclear", "electricity", "primary 6 science", "PSLE science", "theoneapp explored"]},
+ {"id": "sau-ep02-s1", "file": f"{SAU}/ep02/short1.mp4", "at": "2026-12-07T09:00:00Z", "title": "Is Gas Power Secretly Sunlight? #Shorts",
+  "desc": "Natural gas formed from tiny sea creatures that got their energy from the Sun. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2, Parts 1 and 2)" + FOOT, "tags": ["energy", "natural gas", "sun", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep02-s2", "file": f"{SAU}/ep02/short2.mp4", "at": "2026-12-08T09:00:00Z", "title": "Could Nuclear Power Singapore? #Shorts",
+  "desc": "Singapore is studying small modular reactors, but has not decided yet. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2, Parts 1 and 2)" + FOOT, "tags": ["nuclear energy", "singapore", "energy", "shorts", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 REPLACE = sys.argv[1:2] == ['--replace']; want = (sys.argv[2:] if REPLACE else sys.argv[1:]) or [v['id'] for v in VIDEOS]

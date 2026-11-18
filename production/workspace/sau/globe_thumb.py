@@ -17,6 +17,7 @@ Config keys (all optional except white, yellow, banner):
   sun {"xy": [x, y], "size": 220}                 a Sun off the globe with rays towards it
   sources [{"at": [lon,lat], "label": "West Natuna gas fields", "dy": -60}, ...]   where a pipeline starts (a gas-field marker)
   singapore true/false (marker and label; default true)
+  badge "PART 1"       a tilted red sticker in the top-right corner (a two-part episode)
 Coastlines: Natural Earth 1:10m land and 1:50m countries (public domain), in geo/ (not in git: download
   ne_10m_land.geojson as geo/land10.geojson and ne_50m_admin_0_countries.geojson as geo/countries.geojson from
   github.com/nvkelso/natural-earth-vector, folder geojson).
@@ -94,6 +95,9 @@ else:
     by, bs = 1000, cfg.get('bannerSize', 112)
 banner = (f'<text x="{W / 2}" y="{by}" text-anchor="middle" font-size="{bs}" font-weight="700" letter-spacing="5" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="30" stroke-linejoin="round">{cfg["banner"]}</text>'
           f'<text x="{W / 2}" y="{by}" text-anchor="middle" font-size="{bs}" font-weight="700" letter-spacing="5" fill="#1b1b3a" stroke="#ffd60a" stroke-width="15" stroke-linejoin="round" style="paint-order:stroke">{cfg["banner"]}</text>')
+bx, bg_ = (W - 230, 260) if V else (W - 210, 110)
+badge = (f'<g transform="translate({bx} {bg_}) rotate(8)"><rect x="-170" y="-62" width="340" height="124" rx="26" fill="#e63946" stroke="#fff" stroke-width="8"/>'
+         f'<text x="0" y="28" text-anchor="middle" font-size="84" font-weight="700" fill="#fff" class="out" stroke-width="10">{cfg["badge"]}</text></g>') if cfg.get('badge') else ''
 html = f'''<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{{font-family:Fredoka;font-weight:600;src:url({fonts}/fredoka-latin-600-normal.woff2)}}@font-face{{font-family:Fredoka;font-weight:700;src:url({fonts}/fredoka-latin-700-normal.woff2)}}
 html,body{{margin:0;background:#000;width:{W}px;height:{H}px;overflow:hidden}} text{{font-family:Fredoka,sans-serif}} .emo{{font-family:"Noto Color Emoji"}} .out{{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}}
@@ -114,6 +118,6 @@ html,body{{margin:0;background:#000;width:{W}px;height:{H}px;overflow:hidden}} t
 <circle cx="{CX}" cy="{CY}" r="{DISK}" fill="url(#shade)"/></g>
 {sgm}{icons_out}
 <rect width="{W}" height="{H * .3:.0f}" fill="url(#top)"/>
-{pill}{title}{banner}
+{pill}{title}{banner}{badge}
 </svg></body></html>'''
 open(out, 'w').write(html); print('wrote', out, W, 'x', H)

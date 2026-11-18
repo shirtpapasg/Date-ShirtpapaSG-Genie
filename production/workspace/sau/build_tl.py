@@ -17,7 +17,7 @@ EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH",
          "north-east": "N AO R TH IY S T", "senoko": "S EH N OW K OW", "tengeh": "T EH NG EH", "liquefied": "L IH K W AH F AY D",
          "sixty-five": "S IH K S T IY F AY V", "ninety-one": "N AY N T IY W AH N", "ninety-two": "N AY N T IY T UW",
          "ninety-three": "N AY N T IY TH R IY", "twenty-eight": "T W EH N T IY EY T", "thirty-five": "TH ER T IY F AY V",
-         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW", "natuna": "N AH T UW N AH", "hdb": "EY CH D IY B IY", "vapour": "V EY P ER"}
+         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW", "natuna": "N AH T UW N AH", "hdb": "EY CH D IY B IY", "vapour": "V EY P ER", "kinetic": "K IH N EH T IH K", "neighbours": "N EY B ER Z", "uranium": "Y UH R EY N IY AH M"}
 dur = lambda f: float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
 
 def align(s):
@@ -60,7 +60,7 @@ for i, s in enumerate(spec["segments"]):
         if s.get("silent") and spec["segments"][i - 1].get("silent"): g = 0.15   # picture-only shots flow straight on
         g += spec["segments"][i - 1].get("hold", 0)          # a segment can hold its picture a little longer
         parts.append(("sil", g)); t += g
-    segs.append({"id": s["id"], "scene": s["scene"], "t0": round(t, 3), "t1": round(t + d, 3), "silent": bool(s.get("silent")),
+    segs.append({"id": s["id"], "scene": s["scene"], "t0": round(t, 3), "t1": round(t + d, 3), "silent": bool(s.get("silent")), "shots": s.get("shots", []),
                  "words": [{"t": w["t"], "a": round(t + w["a"], 3), "b": round(t + w["b"], 3)} for w in words]})
     parts.append(("sil", d) if s.get("silent") else ("seg", s["id"]))
     for kd, at in s.get("sfx", []): SEGSFX.append((kd, t + at))
@@ -106,6 +106,9 @@ for s in segs:
         cs[f"{kk}#{n}"] = w["a"]
         if n == 1: cs[kk] = w["a"]
     cs["_t0"] = s["t0"]; cs["_t1"] = s["t1"]; cues[s["id"]] = cs
+for s in spec["segments"]:
+    for w, *_ in s.get("shots", []):
+        if w not in cues.get(s["id"], {}): print("WARNING shot word not said:", s["id"], w)
 kws = [{"t": cues[sid][w], "label": lab, "col": col} for sid, w, lab, col in spec.get("kws", [])]
 scenes = []
 for s in segs:
@@ -139,6 +142,10 @@ src = {"pop": "sine=f=880:d=0.12,volume=0.5,afade=t=out:st=0.02:d=0.1,asetrate=4
        "crackle": "anoisesrc=d=2.6:c=white:a=0.12,highpass=f=2500,tremolo=f=23:d=1,afade=t=in:d=0.3,afade=t=out:st=2:d=0.6",
        "breath": "anoisesrc=d=1.8:c=pink:a=0.28,bandpass=f=900:w=800,afade=t=in:d=0.8,afade=t=out:st=0.9:d=0.9",
        "rain": "anoisesrc=d=5:c=white:a=0.16,highpass=f=900,lowpass=f=7000,afade=t=in:d=0.6,afade=t=out:st=4:d=1",
+       "boom": "anoisesrc=d=1.8:c=brown:a=0.9,lowpass=f=140,afade=t=in:d=0.02,afade=t=out:st=0.2:d=1.6",
+       "rush": "anoisesrc=d=4:c=pink:a=0.35,bandpass=f=900:w=700,afade=t=in:d=1.2,afade=t=out:st=3:d=1",
+       "flash": "anoisesrc=d=1:c=white:a=0.3,lowpass=f=4000,afade=t=in:d=0.01,afade=t=out:st=0.05:d=0.9",
+       "deep": "anoisesrc=d=5:c=brown:a=0.4,lowpass=f=300,tremolo=f=0.4:d=0.6,afade=t=in:d=0.8,afade=t=out:st=4:d=1",
        "wind": "anoisesrc=d=6:c=pink:a=0.32,bandpass=f=420:w=300,tremolo=f=0.6:d=0.5,afade=t=in:d=0.8,afade=t=out:st=5:d=1"}
 inputs, fl = [], []
 for i, (kd, tt) in enumerate(ev):

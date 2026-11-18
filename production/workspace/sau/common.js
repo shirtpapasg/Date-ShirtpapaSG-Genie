@@ -48,10 +48,40 @@ S.nyk = (() => { const s = scene("nyk", "#ffbe0b", "#fb5607");
 // ---- END CARD (episode only)
 S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7"), N = CFG.next || [];
   N.forEach((ln, i) => tx(s.stage, {x: 600, y: 230 + i * 120, "text-anchor": "middle", "font-size": i ? 84 : 46, "font-weight": 700, fill: i ? "#fff" : "#ffe14d", class: i ? "out" : "", "stroke-width": 10, "letter-spacing": i ? 0 : 6}, ln));
-  const c = chip(s.stage, "🌏 TheOneApp, Explored · a new episode every Thursday", "#f72585", {fs: 38});
+  const c = chip(s.stage, CFG.endChip || "🌏 TheOneApp, Explored · a new episode every Thursday", "#f72585", {fs: 38});
   s.run = t => { popAt(c, 600, 720, t, TL.END - (CFG.outro || 3.8) + 2.8); }; return s; })();
 
 // ---- QUESTION CARD (Shorts only: the question is in the header, this is the opening beat)
 S.qcard = (() => { const s = scene("qcard", "#4361ee", "#7209b7");
   s.e = emo(s.stage, 600, 380, 300, "🤔"); s.c = chip(s.stage, "🌏 TheOneApp, Explored", "#f72585", {fs: 48});
   s.run = t => { tf(s.e, `translate(600 380) scale(${Math.max(0, pop(t, .2)) * (1 + .06 * Math.sin(t * 6))}) translate(-600 -380)`); popAt(s.c, 600, 720, t, .5); }; return s; })();
+
+/* ---- FIRST-PERSON KIT (the teacher, 18 Nov 2026): the camera IS the particle. We fly with it at its size; things rush past and
+   loom up. VP is the middle of the whole screen in scene units; FULL covers the whole screen. Mix with outside shots for variety. */
+const VP = SHORT ? [600, 450] : [810, 480];
+const FULL = SHORT ? {x: -100, y: -700, w: 1400, h: 2300} : {x: -170, y: -80, w: 1960, h: 1120};
+function fullRect(p, fill, o = 1) { return el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill, opacity: o}, p); }
+// a soft coloured edge: "this is you" (cyan = the gas, yellow = light or electricity)
+function vignette(p, col, a = .55) { const id = "vg" + (vignette.n = (vignette.n || 0) + 1); const g = el("radialGradient", {id, cx: .5, cy: .5, r: .72}, $("v").querySelector("defs"));
+  el("stop", {offset: .5, "stop-color": col, "stop-opacity": 0}, g); el("stop", {offset: 1, "stop-color": col, "stop-opacity": a}, g);
+  return el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill: `url(#${id})`}, p); }
+// a fly-through field: things spread in depth that rush towards the camera as `off` grows (one unit of off = the whole depth)
+function field(p, n, sd, make, clear = 0) { const G = el("g", {}, p); seed = sd; const a = [];
+  for (let i = 0; i < n; i++) { let x = rnd() * 2 - 1, y = rnd() * 2 - 1; const z0 = rnd(), u = rnd();
+    if (Math.abs(x) < clear && Math.abs(y) < clear) { if (Math.abs(x) > Math.abs(y)) x = Math.sign(x) * clear; else y = (y < 0 ? -1 : 1) * clear; }
+    const e = el("g", {}, G); const sv = seed; make(e, i); seed = sv; a.push({x, y, z0, u, i, e}); } a.G = G; return a; }
+function flyField(a, off, spread = 900, fn) { a.forEach(o => { const z = ((o.z0 - off) % 1 + 1) % 1, zz = .08 + 2.6 * z; o.z = z;
+    let sx = VP[0] + o.x * spread / zz, sy = VP[1] + o.y * spread * .7 / zz; if (fn) [sx, sy] = fn(o, sx, sy, z);
+    tf(o.e, `translate(${sx} ${sy}) scale(${.5 / zz}) rotate(${o.u * 360 + off * 60 * (o.u - .5)})`); op(o.e, clamp((1 - z) / .3) * clamp((z - .004) / .05)); });
+  a.slice().sort((p, q) => q.z - p.z).forEach(o => a.G.appendChild(o.e)); }      // near things in front
+// a tunnel: rings drawn at radius 300 that rush past the camera
+function tunnelG(p, n, make) { const G = el("g", {}, p); const a = []; for (let i = 0; i < n; i++) { const e = el("g", {}, G); make(e, i); a.push({z0: i / n, e}); } a.G = G; return a; }
+function runTunnel(a, off, R = 380) { a.forEach(o => { const z = ((o.z0 - off) % 1 + 1) % 1, zz = .12 + 8 * z; o.z = z;
+    tf(o.e, `translate(${VP[0]} ${VP[1]}) scale(${R / 300 / zz})`); op(o.e, clamp((1 - z) / .3)); });
+  a.slice().sort((p, q) => q.z - p.z).forEach(o => a.G.appendChild(o.e)); }
+// a short text card at the bottom of a picture-only shot
+function povCard(p, text, col = "#1b1b3a") { return chip(p, text, col, {fs: 34}); }
+function showCard(c, t, a, b, y = 905) { tf(c, `translate(${VP[0]} ${y}) scale(${Math.max(0, pop(t, a))})`); op(c, on(t, a, b, .3)); }
+function blob(p, r, col, sd) { seed = sd; const P = []; for (let k = 0; k < 10; k++) { const an = k / 10 * Math.PI * 2, rr = r * (.72 + .4 * rnd()); P.push([Math.cos(an) * rr, Math.sin(an) * rr]); }
+  const d = `M${(P[9][0] + P[0][0]) / 2} ${(P[9][1] + P[0][1]) / 2} ` + P.map((q, k) => { const n = P[(k + 1) % 10]; return `Q${q[0]} ${q[1]} ${(q[0] + n[0]) / 2} ${(q[1] + n[1]) / 2}`; }).join(" ") + " Z";
+  return el("path", {d, fill: col, stroke: INK, "stroke-width": 6}, p); }

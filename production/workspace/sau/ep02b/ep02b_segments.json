@@ -1,0 +1,278 @@
+{
+ "episode": "SAU EP02 Part 2",
+ "title": "Can Singapore keep the lights on? (Part 2)",
+ "tag": "🌏 TheOneApp, Explored · EP 2 · Part 2",
+ "intro": {
+  "goals": [
+   [
+    "📜",
+    "How we kept the lights on since 1965",
+    "first"
+   ],
+   [
+    "☀️",
+    "What could power us next",
+    "second"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT WEEK",
+  "The mosquitoes that",
+  "fight dengue 🦟"
+ ],
+ "close": {
+  "rows": [
+   [
+    "🛢️",
+    "1965: power from burning oil",
+    "oil",
+    0.15,
+    "#6c757d"
+   ],
+   [
+    "🔥",
+    "Today: mostly natural gas",
+    "natural",
+    0.35,
+    "#3a86ff"
+   ],
+   [
+    "☀️",
+    "Next: the Sun, our neighbours, maybe atoms",
+    "sun",
+    0.6,
+    "#7209b7"
+   ]
+  ],
+  "tease": "🦟 Next week: the mosquitoes that fight dengue!",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "answer",
+   "sun",
+   "THE SUN",
+   "#ff5d73"
+  ],
+  [
+   "history",
+   "liquefied",
+   "LNG",
+   "#7209b7"
+  ],
+  [
+   "future1",
+   "solar",
+   "SOLAR ENERGY",
+   "#f4a261"
+  ],
+  [
+   "future2",
+   "nuclear",
+   "NUCLEAR ENERGY",
+   "#7209b7"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "hook2",
+   "silent": 3.4,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "whoosh",
+     2.6
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook2",
+   "text": "Singapore has no oil, no coal and no gas of its own. We bring in almost all of our energy from other countries. So how can we keep the lights on, today and in the future?"
+  },
+  {
+   "id": "answer",
+   "scene": "sun",
+   "text": "First, the question from part one. Where did the energy in natural gas come from? It came from the Sun! Natural gas formed over millions of years from tiny living things that got their energy from sunlight. But burning it releases carbon dioxide, and once it is used up, it is gone.",
+   "shots": [
+    [
+     "millions",
+     1.25,
+     600,
+     640
+    ],
+    [
+     "sunlight",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome back to TheOneApp, Explored! This is part two. Today, you'll learn two things. First, how Singapore has kept its lights on since nineteen sixty-five. Second, what could power us next. Let's get started!"
+  },
+  {
+   "id": "history",
+   "scene": "history",
+   "text": "When Singapore became independent in nineteen sixty-five, our power stations burned oil. In nineteen ninety-one, Senoko Power Station became the first to use natural gas. From nineteen ninety-two, gas arrived by pipeline from Malaysia, and later from Indonesia too. And in twenty thirteen, Singapore opened its first terminal for liquefied natural gas, which arrives by ship from around the world.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "sixty-five",
+     1.35,
+     330,
+     500
+    ],
+    [
+     "ninety-two",
+     1.35,
+     780,
+     500
+    ],
+    [
+     "thirteen",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. In October twenty twenty-six, Indonesia began sending Singapore a little less gas by pipeline, saying it needs more of its own gas at home. It's less than two out of every hundred units of gas we use each day, and Singapore can buy more by ship. But some gas contracts end in twenty twenty-eight, so Singapore is planning ahead.",
+   "hold": 1.2,
+   "shots": [
+    [
+     "less",
+     1.4,
+     640,
+     470
+    ],
+    [
+     "ship",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "f1",
+   "scene": "povSpace",
+   "silent": 4.4,
+   "sfx": [
+    [
+     "space_warp",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "f2",
+   "scene": "povPanel",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "sun_whoosh",
+     0
+    ],
+    [
+     "panel_hit",
+     3.6
+    ]
+   ]
+  },
+  {
+   "id": "f3",
+   "scene": "povSea",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "underwater",
+     0
+    ],
+    [
+     "cable_zip",
+     0.4
+    ]
+   ]
+  },
+  {
+   "id": "f4",
+   "scene": "povNeutron",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "neutron_zip",
+     0.2
+    ],
+    [
+     "split_boom",
+     2.8
+    ]
+   ]
+  },
+  {
+   "id": "future1",
+   "scene": "options",
+   "text": "So what could power Singapore next? More solar panels, on rooftops and even on reservoirs, like the floating solar farm at Tengeh Reservoir with about a hundred and twenty thousand panels. And clean electricity from our neighbours, sent by cable. Singapore aims to bring in about a third of the electricity it will need by twenty thirty-five.",
+   "shots": [
+    [
+     "rooftops",
+     1.3,
+     250,
+     450
+    ],
+    [
+     "tengeh",
+     1.3,
+     280,
+     700
+    ],
+    [
+     "neighbours",
+     1.2,
+     870,
+     430
+    ],
+    [
+     "third",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "future2",
+   "scene": "nuclear",
+   "text": "And nuclear energy. Inside a reactor, tiny atoms split and release a lot of heat, without making carbon dioxide. Singapore is studying small modular reactors, but has not decided yet. Scientists must first be sure they are safe for a small, crowded island."
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! If we covered every rooftop in Singapore with solar panels, could they power the whole country? Why or why not? I'll tell you the answer next week."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. In nineteen sixty-five, Singapore made electricity by burning oil. Today, we mostly burn natural gas. In future, we could get energy from the Sun, from our neighbours, and maybe even from atoms. Next week: the mosquitoes that fight dengue!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

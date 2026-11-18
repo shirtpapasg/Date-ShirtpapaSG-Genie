@@ -1,0 +1,295 @@
+{
+ "episode": "SAU EP02",
+ "title": "How does Singapore keep the lights on?",
+ "tag": "🌏 TheOneApp, Explored · EP 2 · Keeping the Lights On",
+ "intro": {
+  "goals": [
+   [
+    "⚡",
+    "How Singapore makes electricity",
+    "first"
+   ],
+   [
+    "🔄",
+    "The energy changes inside a power station",
+    "second"
+   ],
+   [
+    "☀️",
+    "What could power us next",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT WEEK",
+  "The mosquitoes that",
+  "fight dengue 🦟"
+ ],
+ "kws": [
+  [
+   "today",
+   "natural",
+   "NATURAL GAS",
+   "#3a86ff"
+  ],
+  [
+   "science2",
+   "sun",
+   "THE SUN",
+   "#ff5d73"
+  ],
+  [
+   "j5",
+   "chemical",
+   "CHEMICAL POTENTIAL ENERGY",
+   "#f77f00"
+  ],
+  [
+   "j5",
+   "electrical",
+   "ELECTRICAL ENERGY",
+   "#ffbe0b"
+  ],
+  [
+   "future2",
+   "nuclear",
+   "NUCLEAR ENERGY",
+   "#7209b7"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Flip a switch, and the lights come on. But Singapore has no oil, no coal and no gas of its own. So where does our electricity come from?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last week's question. Why does an N ninety-five mask protect you better than a cloth mask? A cloth mask has gaps much bigger than haze particles. An N ninety-five mask has a fine filter that traps at least ninety-five out of every hundred tiny particles, and it fits closely around your face."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how Singapore makes its electricity. Second, the energy changes inside a power station. And third, what could power us next. Let's get started!"
+  },
+  {
+   "id": "history",
+   "scene": "history",
+   "text": "When Singapore became independent in nineteen sixty-five, our power stations burned oil. In nineteen ninety-one, Senoko Power Station became the first to use natural gas. From nineteen ninety-two, gas arrived by pipeline from Malaysia, and later from Indonesia too. And in twenty thirteen, Singapore opened its first terminal for liquefied natural gas, which arrives by ship from around the world.",
+   "hold": 1.0
+  },
+  {
+   "id": "today",
+   "scene": "today",
+   "text": "Today, about ninety-three out of every hundred units of our electricity come from burning natural gas. Solar panels make less than three.",
+   "hold": 1.0
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. In October twenty twenty-six, Indonesia began sending Singapore a little less gas by pipeline, saying it needs more of its own gas at home. It's less than two out of every hundred units of gas we use each day, and Singapore can buy more by ship. But some gas contracts end in twenty twenty-eight, so Singapore is planning ahead.",
+   "hold": 1.0
+  },
+  {
+   "id": "science2",
+   "scene": "sun",
+   "text": "And here's a surprise. Natural gas formed over millions of years from tiny living things that got their energy from the Sun. So even gas power started as sunlight! But burning it releases carbon dioxide, and once it is used up, it is gone."
+  },
+  {
+   "id": "h1",
+   "scene": "seabed",
+   "silent": 4.8,
+   "sfx": [
+    [
+     "rumble",
+     0.0
+    ],
+    [
+     "bubble",
+     1.2
+    ],
+    [
+     "bubble",
+     2.2
+    ],
+    [
+     "bubble",
+     3.4
+    ]
+   ]
+  },
+  {
+   "id": "h2",
+   "scene": "well",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "drill",
+     0.1
+    ],
+    [
+     "whoosh",
+     2.2
+    ],
+    [
+     "whoosh",
+     2.7
+    ]
+   ]
+  },
+  {
+   "id": "h3",
+   "scene": "clean",
+   "silent": 4.4,
+   "sfx": [
+    [
+     "splash",
+     0.6
+    ],
+    [
+     "hiss",
+     1.6
+    ],
+    [
+     "splash",
+     2.4
+    ]
+   ]
+  },
+  {
+   "id": "h4",
+   "scene": "route",
+   "silent": 5.6,
+   "sfx": [
+    [
+     "hum",
+     0.0
+    ],
+    [
+     "ping",
+     5.0
+    ]
+   ]
+  },
+  {
+   "id": "h5",
+   "scene": "station",
+   "silent": 7.0,
+   "sfx": [
+    [
+     "roar",
+     0.9
+    ],
+    [
+     "whirr",
+     2.4
+    ],
+    [
+     "buzz",
+     4.2
+    ]
+   ]
+  },
+  {
+   "id": "h6",
+   "scene": "chimney",
+   "silent": 3.8,
+   "sfx": [
+    [
+     "whoosh",
+     0.4
+    ],
+    [
+     "zap",
+     2.6
+    ]
+   ]
+  },
+  {
+   "id": "h7",
+   "scene": "cables",
+   "silent": 4.4,
+   "sfx": [
+    [
+     "zap",
+     0.3
+    ],
+    [
+     "zap",
+     1.6
+    ],
+    [
+     "zap",
+     2.9
+    ]
+   ]
+  },
+  {
+   "id": "h8",
+   "scene": "ceiling",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "click",
+     1.0
+    ],
+    [
+     "chime",
+     1.2
+    ]
+   ]
+  },
+  {
+   "id": "n1",
+   "scene": "recap1",
+   "hold": 1.0,
+   "text": "Did you follow that tiny bit of natural gas? It was trapped in rock under the seabed, near the Natuna Islands. It was cleaned, then it travelled about six hundred and fifty kilometres through a pipe on the seabed, all the way to Singapore."
+  },
+  {
+   "id": "j5",
+   "scene": "convert",
+   "text": "Now for the textbook link! In Primary Six, you learn that energy changes from one form to another. At the power station, the gas burned. Its chemical potential energy became heat energy. The hot gases spun a turbine, and the turbine turned a magnet inside a copper coil in the generator, making electrical energy.",
+   "hold": 1.5
+  },
+  {
+   "id": "n2",
+   "scene": "recap2",
+   "hold": 1.2,
+   "text": "Burning turned the gas into carbon dioxide and water vapour. But its energy kept going, as electricity through cables under the ground, all the way to the lamp in your room."
+  },
+  {
+   "id": "future1",
+   "scene": "options",
+   "text": "So what could power Singapore next? More solar panels, on rooftops and even on reservoirs, like the floating solar farm at Tengeh Reservoir with about a hundred and twenty thousand panels. And clean electricity from our neighbours, sent by cable. Singapore aims to bring in about a third of the electricity it will need by twenty thirty-five."
+  },
+  {
+   "id": "future2",
+   "scene": "nuclear",
+   "text": "And nuclear energy. Inside a reactor, tiny atoms split and release a lot of heat, without making carbon dioxide. Singapore is studying small modular reactors, but has not decided yet. Scientists must first be sure they are safe for a small, crowded island."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Be an energy detective. Find five things at home that change electrical energy into other forms, like a fan, a lamp or a kettle. For each one, write down the forms of energy it changes into."
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! If we covered every rooftop in Singapore with solar panels, could they power the whole country? Why or why not? I'll tell you the answer next week."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Singapore makes most of its electricity by burning natural gas that we bring in from other countries. That's why we save energy, and why scientists are looking at the Sun, our neighbours and even nuclear power. Next week: the mosquitoes that fight dengue!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

@@ -102,6 +102,10 @@ Every TheOneApp, Explored episode is planned against this guide before its scrip
 * **Let it breathe.** Use `"hold": seconds` on a segment after a big line or a dense fact, so the picture stays and the viewer can take it in.
 * **Animation shows the process, never decoration.** Every moving thing must be the science happening (gas flowing, a magnet turning, current moving). No floating, wobbling or spinning for its own sake.
 * **Cinema mode.** During picture-only shots, the label and the key-word shelf step aside.
+* **First person, not always third person (the teacher, 18 Nov 2026).** In the hero sequence the camera IS the particle: we fly with it at its size, and things rush past and loom up (the teacher's example was the parasite's-eye shots in AI-animated dramas). For the gas: squeezed between huge rock grains, shooting up the well pipe towards a circle of light, tumbling through the cleaning tank, diving into the ring of blue flames until the screen flashes, riding the electricity down the cable, ending top-down as the lamp clicks on. Open with one outside shot that dives into the character, and keep a few outside shots where they explain what you cannot see from inside (a real map, a chimney). Heart's recap then speaks to the viewer as the particle ("You were a tiny bit of natural gas…"). The kit: the first-person section at the end of `common.js` (`VP`, `vignette`, `field`/`flyField`, `tunnelG`/`runTunnel`, `povCard`/`showCard`); EP02's shots are in `ep02/pov.js` and `ep02b/pov.js`.
+* **A change every 10 to 15 seconds.** A new shot, a switch between first person and outside, a text card, a sound or music shift. For a long narrated segment, add camera moves: `"shots": [["word", zoom, x, y], ...]` eases the camera in on (x, y) of the scene box when Heart says the word (`build_tl.py` warns if the word is never said).
+* **Good sound effects.** `sfx_lib.py` synthesises a layered sound library into `sfx/<name>.wav`; `build_tl.py` uses the file when it exists. Gentle synthesised music beds (`pad_wonder`, `pad_tension`) give a music shift under a picture-only sequence.
+* **Long episodes come in parts.** EP02 became Part 1 (the science: the gas journey and the energy changes; ends on a cliffhanger and a "think about it" answered in Part 2) and Part 2 (the story: 1965 to today, the news, and the future), each about 3 minutes. `CFG.close` (rows and teaser), `CFG.endChip` and the think scene's "Answer in Part 2!" make each part close in its own words.
 
 ## Thumbnails: the globe style (the teacher's favourite, 18 Nov 2026)
 
@@ -163,13 +167,15 @@ New week, new folder `epNN/`:
 | No | Week of | Story | Textbook link | Levels |
 |---|---|---|---|---|
 | 1 | 23 Nov 2026 | Why did the haze go away? | Respiratory system; how people affect the environment | P5, P6 |
-| 2 | 30 Nov 2026 | How does Singapore keep the lights on? (oil in 1965 → natural gas today, Indonesia's gas cut, solar, imports, nuclear). Rendered 18 Nov with two Shorts (sunlight, nuclear); on the board for review | Energy forms and conversion; how people affect the environment | P6 |
+| 2 | 30 Nov 2026 | How does Singapore keep the lights on? In two parts (18 Nov, the teacher): Part 1 (Thu 3 Dec) the gas journey in first person and the energy changes; Part 2 (Sun 6 Dec) oil in 1965 → natural gas today, Indonesia's gas cut, then first person as sunlight, undersea-cable electricity and a neutron: solar, imports, nuclear. Two Shorts (sunlight Mon 7 Dec, nuclear Tue 8 Dec) | Energy forms and conversion; how people affect the environment | P6 |
 | 3 | 7 Dec 2026 | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; how people affect the environment | P3, P6 |
 | 4 | 14 Dec 2026 | Cooling a city without more air-con (exam special) | Heat; energy | P4, P6 |
 
 EP01's "Think about it" (answered at the start of EP02): *Why does an N95 mask protect you better than a cloth mask during the haze?* Answer: the gaps between the fibres of a cloth mask are much bigger than PM2.5 particles, so many slip through. An N95 mask has a fine filter that traps at least 95 out of every 100 tiny particles, and it fits closely so air doesn't leak in around the edges.
 
-EP02's "Think about it" (answer it at the start of EP03): *If we covered every rooftop in Singapore with solar panels, could they power the whole country?* Answer: no. Singapore's rooftops are too small for all the electricity we use, and panels make nothing at night and less on cloudy days. That's why Singapore also looks at imports, storage and other sources.
+EP02 Part 1's "Think about it" (answered at the start of Part 2): *The energy in natural gas did not start in the gas. Where did it come from?* Answer: the Sun. Natural gas formed over millions of years from tiny living things that got their energy from sunlight.
+
+EP02 Part 2's "Think about it" (answer it at the start of EP03): *If we covered every rooftop in Singapore with solar panels, could they power the whole country?* Answer: no. Singapore's rooftops are too small for all the electricity we use, and panels make nothing at night and less on cloudy days. That's why Singapore also looks at imports, storage and other sources.
 
 Before rendering a new episode, show the teacher the script breakdown (each part, its words, what is on screen and why it is written that way) in the proposal doc, and wait for the go. The teacher asked for this on 18 Nov 2026.
 
@@ -183,8 +189,9 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP01 | RmRSeKnx6Ac | Thu 26 Nov, 5 pm |
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
-| EP02 | MCr7EFf_8p4 | Thu 3 Dec, 5 pm |
-| EP02 Short 1 | xDAGBl5XHJQ | Fri 4 Dec, 5 pm |
-| EP02 Short 2 | xE8CyfEKG9w | Mon 7 Dec, 5 pm |
+| EP02 Part 1 | MCr7EFf_8p4 (to be replaced by the Part 1 render) | Thu 3 Dec, 5 pm |
+| EP02 Part 2 | (to be uploaded) | Sun 6 Dec, 5 pm |
+| EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
+| EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
 
 Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the TheOneApp, Explored ticket appear). The daily check prepares that pull request.

@@ -134,6 +134,12 @@ set($("shelfHead"), "x", 1515); set($("shelfHead"), "y", 78);
 $("tagT").textContent = CFG.tag; if (SHORT) { tf($("tag"), `translate(${W / 2 - 250} 40)`); }
 const order = TL.scenes.map(s => s.scene).concat(SHORT || !S.end ? [] : ["end"]);
 let CINEMA = 0;
+// shots: a segment can list ["word", zoom, x, y] camera moves; on that word the camera eases in on (x, y) of the scene box,
+// so long narrated stretches still get a new picture every 10 to 15 seconds (the teacher's pacing guide)
+const SHOTS = {}; TL.segs.forEach(sg => (sg.shots || []).forEach(([w, z, x, y]) => { const c = TL.cues[sg.id]; if (c && c[w] !== undefined) (SHOTS[sg.scene] = SHOTS[sg.scene] || []).push([c[w], z, x, y]); }));
+Object.values(SHOTS).forEach(L => L.sort((a, b) => a[0] - b[0]));
+function camera(name, t) { let z = 1, cx = 600, cy = 450; SHOTS[name].forEach(([tt, z1, x1, y1]) => { const k = ramp(t, tt - .2, tt + .8); z = lerp(z, z1, k); cx = lerp(cx, x1, k); cy = lerp(cy, y1, k); });
+  return `${BOX} translate(600 450) scale(${z}) translate(${-cx} ${-cy})`; }
 const ENDT = TL.END - (CFG.outro || 3.8) + 2.4;   // the end card follows "Now you know!" after 2.4 s
 window.render = function (t) {
   order.forEach((name, i) => { const s = S[name]; if (!s) return;
@@ -141,7 +147,7 @@ window.render = function (t) {
     const nxtName = order[i + 1], nxt = nxtName ? (nxtName === "end" ? ENDT : SC[nxtName].t0 - .4) : 1e9;
     const vis = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2)); op(s.g, vis); if (vis <= 0) return;
     tf(s.g, `translate(${W / 2} ${H / 2}) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(${-W / 2} ${-H / 2})`);
-    moveBubbles(s.b, t); s.run(t); });
+    moveBubbles(s.b, t); s.run(t); if (SHOTS[name]) set(s.stage, "transform", camera(name, t)); });
   drawConfetti(t); drawKW(t); drawCaps(t);
   // cinema mode: during picture-only shots the label, the key-word shelf and the key-word boxes step aside
   CINEMA = Math.max(0, ...TL.segs.filter(s => s.silent).map(s => on(t, s.t0 - .6, s.t1 + .4, .5)));
