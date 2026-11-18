@@ -32,6 +32,14 @@ EP2_CH = chapters(f"{SAU}/ep02/ep02_tl.json", {"hook": "No oil, no gas", "answer
     "seabed": "You are a tiny bit of natural gas", "recap1": "Your journey", "convert": "Energy changes (P6)", "try": "Be an energy detective", "think": "Think about it", "close": "Remember"})
 EP2B_CH = chapters(f"{SAU}/ep02b/ep02b_tl.json", {"hook2": "No oil, no coal, no gas", "sun": "Part 1's answer: gas started as sunlight", "welcome": "Today you'll learn", "history": "From 1965 to today",
     "news": "The news: less gas from Indonesia", "povSpace": "Be a ray of sunlight", "options": "Solar and our neighbours", "nuclear": "Could nuclear power us?", "think": "Think about it", "close": "Remember"})
+EP3_CH = chapters(f"{SAU}/ep03/ep03_tl.json", {"hook": "Bin it or bring it back?", "answer": "Last time's answer: rooftop solar", "welcome": "Today you'll learn", "news": "The news: 10 cents back",
+    "returnMachine": "You are a drink can", "recap": "Your journey", "textbook": "Metals and magnets (P3)", "matters": "Why it matters", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP3B_CH = chapters(f"{SAU}/ep03b/ep03b_tl.json", {"hook": "Down the chute", "answer": "Part 1's answer", "welcome": "Today you'll learn", "news": "The news: our only landfill",
+    "kitchen": "You are a takeaway box", "recap": "Your journey", "textbook": "Reduce, reuse, recycle (P6)", "act": "What you can do", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP4_CH = chapters(f"{SAU}/ep04/ep04_tl.json", {"hook": "Where does the rain come from?", "answer": "Last time's answer: the greasy box", "welcome": "Today you'll learn", "news": "The news: the monsoon",
+    "home": "You are a water molecule", "recap": "Your journey", "cycle": "The water cycle (P4)", "salt": "Is rain salty?", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP5_CH = chapters(f"{SAU}/ep05/ep05_tl.json", {"hook": "Where does your energy come from?", "answer": "Last time's answer: drying clothes", "welcome": "Today you'll learn", "news": "The news: Singapore's food goals",
+    "povSun": "You are sunlight", "recap": "Your journey", "photo": "Photosynthesis and food chains", "security": "Food security", "try": "Try this", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
  {"id": "sau-trailer", "live": True, "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
@@ -58,6 +66,22 @@ VIDEOS = [
   "desc": "Natural gas formed from tiny sea creatures that got their energy from the Sun. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2, Parts 1 and 2)" + FOOT, "tags": ["energy", "natural gas", "sun", "shorts", "theoneapp explored"]},
  {"id": "sau-ep02-s2", "file": f"{SAU}/ep02/short2.mp4", "at": "2026-11-24T09:00:00Z", "title": "Could Nuclear Power Singapore? #Shorts",
   "desc": "Singapore is studying small modular reactors, but has not decided yet. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2, Parts 1 and 2)" + FOOT, "tags": ["nuclear energy", "singapore", "energy", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep03", "file": f"{SAU}/ep03/ep03.mp4", "thumb": f"{SAU}/ep03/thumb_ep03.jpg", "at": "2026-11-25T09:00:00Z", "title": "10 Cents For Your Can? What Really Happens To It (Part 1) | TheOneApp, Explored EP3",
+  "desc": "Since April 2026, drinks in plastic bottles and metal cans in Singapore carry a 10-cent deposit, and return machines pay it back. Be an aluminium drink can: scanned, sorted by a magnet, squashed, melted and pressed into a brand-new can. Then Heart explains metals and magnets from the Primary 3 textbook, and why recycling saves energy. Part 2 is out on Saturday 28 November."
+          "\n\n" + EP3_CH + "\n\nSources: National Environment Agency (nea.gov.sg), Beverage Container Return Scheme." + FOOT,
+  "tags": ["recycling", "beverage container return scheme", "10 cents", "aluminium", "magnets", "primary 3 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep03b", "file": f"{SAU}/ep03b/ep03b.mp4", "thumb": f"{SAU}/ep03b/thumb_ep03b.jpg", "at": "2026-11-28T09:00:00Z", "title": "Where Does Our Rubbish Go? Full By 2035?! (Part 2) | TheOneApp, Explored EP3",
+  "desc": "Part 2: be a greasy takeaway box. Down the rubbish chute, burnt at a waste-to-energy plant in Tuas (the heat makes electricity), and the ash taken by barge to Semakau, Singapore's only landfill, expected to be full by about 2035. Then reduce, reuse and recycle right."
+          "\n\n" + EP3B_CH + "\n\nSources: National Environment Agency waste statistics 2025; Ministry of Sustainability and the Environment on the lifespan of Semakau Landfill." + FOOT,
+  "tags": ["recycling", "semakau landfill", "waste", "reduce reuse recycle", "primary 6 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep04", "file": f"{SAU}/ep04/ep04.mp4", "thumb": f"{SAU}/ep04/thumb_ep04.jpg", "at": "2026-12-01T09:00:00Z", "title": "Where Does All This Rain Come From? You Are A Water Molecule | TheOneApp, Explored EP4",
+  "desc": "The north-east monsoon brings Singapore its wettest months. Be a water molecule leaving home in MacRitchie Reservoir: evaporate, meet friends from a puddle, the sea and a river, condense into a cloud, fall as rain and flow home through the drains. Then Heart explains the water cycle from the Primary 4 textbook, and why rain is not salty."
+          "\n\n" + EP4_CH + "\n\nSources: Meteorological Service Singapore on the north-east monsoon; PUB on water catchment." + FOOT,
+  "tags": ["water cycle", "evaporation", "condensation", "rain", "monsoon", "primary 4 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep05", "file": f"{SAU}/ep05/ep05.mp4", "thumb": f"{SAU}/ep05/thumb_ep05.jpg", "at": "2026-12-04T09:00:00Z", "title": "Your Food Is Sunlight?! Where Does Your Energy Come From? | TheOneApp, Explored EP5",
+  "desc": "Be a bit of sunlight: caught by a leaf, turned into food by photosynthesis, stored in a grain of corn, eaten by a hen on a Singapore egg farm, and eaten by a student in the school canteen, until you help them run in the playground. Then Heart explains photosynthesis, food chains and how Singapore keeps food on our tables (food security)."
+          "\n\n" + EP5_CH + "\n\nSources: Singapore Food Agency (sfa.gov.sg), Singapore Food Story 2 and Singapore Food Statistics." + FOOT,
+  "tags": ["photosynthesis", "food chain", "food security", "singapore food story", "energy", "primary 5 science", "singapore", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.

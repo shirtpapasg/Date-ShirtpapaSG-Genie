@@ -1,0 +1,200 @@
+{
+ "episode": "SAU EP03 Part 2",
+ "title": "Where does our rubbish go? (Part 2)",
+ "tag": "🌏 TheOneApp, Explored · EP 3 · Part 2",
+ "intro": {
+  "goals": [
+   [
+    "🔥",
+    "What happens to rubbish we can't recycle",
+    "first"
+   ],
+   [
+    "🏝️",
+    "Why our only landfill is filling up",
+    "second"
+   ],
+   [
+    "💪",
+    "What you can do",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "Where does all this",
+  "rain come from? 🌧️"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🔥",
+    "Rubbish we can't recycle is burnt",
+    "burnt",
+    0.12,
+    "#f77f00"
+   ],
+   [
+    "🏝️",
+    "Its ash goes to Semakau, full by about 2035",
+    "semakau",
+    0.3,
+    "#6c757d"
+   ],
+   [
+    "♻️",
+    "Reduce, reuse, recycle right!",
+    "reduce",
+    0.6,
+    "#2a9d8f"
+   ]
+  ],
+  "tease": "🌧️ Next time: where does all this rain come from?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "news",
+   "landfill",
+   "LANDFILL",
+   "#6c757d"
+  ],
+  [
+   "textbook",
+   "reduce",
+   "REDUCE",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "reuse",
+   "REUSE",
+   "#3a86ff"
+  ],
+  [
+   "textbook",
+   "recycle",
+   "RECYCLE",
+   "#06d6a0"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "chute0",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Down the chute it goes! But where does your rubbish go after that? Singapore is a small island with only one landfill left, and it is filling up."
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, the question from part one. Why is recycling a can better than digging up new metal? Making a can from recycled aluminium uses much less energy, and we don't have to dig up more rock from the ground. And aluminium can be recycled again and again, without wearing out."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome back to TheOneApp, Explored! This is part two. Today, you'll learn three things. First, what happens to rubbish we can't recycle. Second, why our only landfill is filling up. And third, what you can do. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. In twenty twenty-five, Singapore threw away more rubbish than ever before. Only about one in every ten things thrown away from our homes was recycled. And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five."
+  },
+  {
+   "id": "r1",
+   "scene": "kitchen",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "r2",
+   "scene": "povChute",
+   "silent": 4.5,
+   "sfx": []
+  },
+  {
+   "id": "r3",
+   "scene": "povTruck2",
+   "silent": 4.0,
+   "sfx": []
+  },
+  {
+   "id": "r4",
+   "scene": "povClaw",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "r5",
+   "scene": "povFurnace",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "r6",
+   "scene": "povAsh",
+   "silent": 4.0,
+   "sfx": []
+  },
+  {
+   "id": "r7",
+   "scene": "barge",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "r8",
+   "scene": "semakau",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "hold": 1.0,
+   "text": "Did you feel that journey? You were a takeaway box, covered in curry. Down the chute you went, into a truck, and to a waste-to-energy plant in Tuas. You were burnt, and the heat made electricity. All that was left was ash, which a barge carried to Semakau Landfill."
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "hold": 1.0,
+   "text": "Now for the textbook link! In Primary Six, you learn how people affect the environment. Everything we throw away took materials and energy to make. So first, reduce: use less. Then reuse: use things again. And then recycle what's left."
+  },
+  {
+   "id": "act",
+   "scene": "act",
+   "hold": 1.0,
+   "text": "So what can you do? Bring your own container when you buy takeaway. Return your drink cans and bottles for ten cents. And keep your recycling clean and dry, so it really gets recycled."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! For one day, count everything your family throws away. How many things could you have reused or recycled?"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why shouldn't you put a greasy food box in the blue recycling bin? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Rubbish we can't recycle is burnt, and its ash goes to Semakau, our only landfill, which could be full by about twenty thirty-five. So reduce, reuse, and recycle right. Next time: where does all this rain come from?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}
