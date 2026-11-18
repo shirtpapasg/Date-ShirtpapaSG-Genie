@@ -205,6 +205,7 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP04 Rain | Y4mV0P_QnmI | Tue 1 Dec, 5 pm |
 | EP05 Food | 7CLMxQbivnc | Fri 4 Dec, 5 pm |
 | EP06 Digestion | JiNYG8Upozg | Mon 7 Dec, 5 pm |
+| EP07 Oxygen | SOaxffBqJBI | Thu 10 Dec, 5 pm |
 | EP08 Food chain | f3KNTUoYfQg | Sun 13 Dec, 5 pm |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
