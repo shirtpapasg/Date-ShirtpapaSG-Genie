@@ -5,7 +5,7 @@ const L = require('./lib.js');
 const { K, Y, em, word, vgrad, rgrad, sky, spot, vignette, blurred, sticker, shadow, clouds, hdb, bokeh, stars, arrow, hand, thermo, ring } = L;
 
 module.exports = (S, H) => {
-  const { bgPark, bgGarden, bgLeafy, bgDesert, bgBody, bgLab, bgKitchen, bgWall, kidHead, leafShape, chickenRice } = H;
+  const { bgPark, bgGarden, bgLeafy, bgDesert, bgBody, bgLab, bgKitchen, bgWall, bgDark, kidHead, leafShape, chickenRice } = H;
   const T = (t, s) => `<g transform="${t}">${s}</g>`;
   const P = Math.PI;
   const sub2 = `<tspan font-size="62%" dy="10">2</tspan>`;
@@ -412,9 +412,9 @@ module.exports = (S, H) => {
       <path d="M690 230 V550 H1210 V230" fill="none" stroke="${K}" stroke-width="12" stroke-linejoin="round"/><path d="M704 240 V536" stroke="#fff" stroke-width="7" opacity=".7"/>`;
     const b1 = `<rect x="30" y="290" width="240" height="250" fill="#fff3d0"/><rect x="60" y="322" width="170" height="18" rx="6" fill="#6b7592" stroke="${K}" stroke-width="6"/><line x1="146" y1="340" x2="146" y2="410" stroke="${K}" stroke-width="12"/><line x1="146" y1="340" x2="146" y2="410" stroke="#c5cbdb" stroke-width="5"/>
       <path d="M106 410 H186 L204 492 H88Z" fill="#3a3f55" stroke="${K}" stroke-width="7" stroke-linejoin="round"/><text x="146" y="470" font-size="36" font-weight="700" text-anchor="middle" fill="#fff">1 kg</text>`;
-    const b2 = `<rect x="270" y="290" width="240" height="250" fill="#d6f7e8"/><path d="M310 470 Q390 300 480 440" fill="none" stroke="${K}" stroke-width="44" stroke-linecap="round"/><path d="M310 470 Q390 300 480 440" fill="none" stroke="#31c48d" stroke-width="28" stroke-linecap="round"/>` + em('✋', 318, 482, 0);
+    const b2 = `<rect x="270" y="290" width="240" height="250" fill="#d6f7e8"/><path d="M310 470 Q390 300 480 440" fill="none" stroke="${K}" stroke-width="44" stroke-linecap="round"/><path d="M310 470 Q390 300 480 440" fill="none" stroke="#31c48d" stroke-width="28" stroke-linecap="round"/>`;
     return bgLab() + spot(950, 380, 400, '#fff', .5) + bubble(146, 410, 98, b1) + bubble(394, 410, 98, b2) + sticker(tank) +
-      arrow(885, 212, 885, 250, { c: '#31c48d', w: 0.1 }) + tag('WOOD', 1090, 300, 50, '#ffd9a0') + tag('METAL', 860, 506, 50, '#e9eef8') +
+      tag('WOOD', 1090, 300, 50, '#ffd9a0') + tag('METAL', 860, 506, 50, '#e9eef8') +
       arrow(1085, 360, 1085, 444, { c: '#ff3b3b', w: 20 }) + word('?', 590, 420, 150, Y);
   };
 

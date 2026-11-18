@@ -18,7 +18,7 @@ const name = e => `${e.set || 'P4'}_EP${pad(e.ep)}`;
   const tpl = fs.readFileSync(path.join(DIR, 'template.html'), 'utf8');
   const args = process.argv.slice(2);
   const want = e => !args.length || args.some(a => /^\d+$/.test(a) ? (e.set || 'P4') === 'P4' && +a === e.ep
-    : a.includes(':') ? a.toUpperCase() === `${e.set}:${e.ep}` && !(a.includes(':') === false) : a.toUpperCase() === e.set);
+    : a.includes(':') ? a.toUpperCase() === `${e.set}:${e.ep}` : a.toUpperCase() === e.set);
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   fs.mkdirSync(path.join(DIR, '.work'), { recursive: true });
