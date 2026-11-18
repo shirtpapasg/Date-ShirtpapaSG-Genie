@@ -89,3 +89,19 @@ EP01's "Think about it" (answered at the start of EP02): *Why does an N95 mask p
 EP02's "Think about it" (answer it at the start of EP03): *If we covered every rooftop in Singapore with solar panels, could they power the whole country?* Answer: no. Singapore's rooftops are too small for all the electricity we use, and panels make nothing at night and less on cloudy days. That's why Singapore also looks at imports, storage and other sources.
 
 Before rendering a new episode, show the teacher the script breakdown (each part, its words, what is on screen and why it is written that way) in the proposal doc, and wait for the go. The teacher asked for this on 18 Nov 2026.
+
+## On YouTube (uploaded 18 Nov 2026, scheduled; playlist "Science Around Us")
+
+`production/youtube/sau_upload.py` uploads each video private with a `publishAt` time, Made for Kids, with chapters from its timeline, its thumbnail (made with `workspace/sau/thumb.js` in the P5 thumbnail style), and the playlist.
+
+| Video | YouTube | Goes public (SGT) |
+|---|---|---|
+| Trailer | n1eJrOu3_rk | Wed 25 Nov, 7 pm |
+| EP01 | AMcOEvTZIT0 | Thu 26 Nov, 5 pm |
+| EP01 Short 1 | 2roHMQzgR3g | Fri 27 Nov, 5 pm |
+| EP01 Short 2 | JZk7eoDdriQ | Mon 30 Nov, 5 pm |
+| EP02 | JyHO8uWltzE | Thu 3 Dec, 5 pm |
+| EP02 Short 1 | MvqM1Bf6OoQ | Fri 4 Dec, 5 pm |
+| EP02 Short 2 | 7EFtIj6W_0k | Mon 7 Dec, 5 pm |
+
+Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the Science Around Us ticket appear). The daily check prepares that pull request.
