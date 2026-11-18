@@ -64,6 +64,8 @@ First-person hero shots (the camera is the particle)
   neutron_zip    0.7 s   a tiny fast particle shooting past ("pyeew")
   split_boom     3.2 s   the atom splits: crack, deep boom, two bits fly off, then a swell of heat
   thud           0.45 s  a soft heavy landing
+  door_open      1.0 s   a room door opening: handle latch, then a soft creak as it swings
+  footsteps      1.35 s  four soft indoor steps (school shoes on a wooden floor), 0.34 s apart; the first lands at 0.02 s
 
 Story and pacing
   riser          4.0 s   tension build that stops dead, so the next sound lands hard (put the hit at 4.0 s)
@@ -807,6 +809,33 @@ def s_thud():
     x = sine(125 * np.exp(-t / 0.05) + 52) * np.exp(-t / 0.075) + 0.6 * filt(noise(d, "pink"), 100, 600) * np.exp(-t / 0.03)
     x += 0.2 * filt(noise(d), 1500, 5000) * np.exp(-t / 0.004) + 2.0 * reson(noise(d, "pink"), 330, 2.5) * np.exp(-t / 0.045)
     return fade(soft(x, 1.6), 0.0005, 0.15)
+
+
+@sound("door_open", peak=-8)
+def s_door_open():
+    d = 1.0; x = np.zeros(int(d * SR)); c = T(0.09)
+    put(x, reson(noise(0.09), 1700, 2.5) * np.exp(-c / 0.005) + 0.5 * sine(640, 0.09) * np.exp(-c / 0.012), 0.0, 0.7)          # the handle goes down
+    put(x, filt(noise(0.09), 900, 5200) * np.exp(-c / 0.004) + 0.9 * sine(310, 0.09) * np.exp(-c / 0.02), 0.085)                # the latch lets go (clack)
+    k = T(0.07); put(x, 2.2 * reson(noise(0.07, "pink"), 190, 2) * np.exp(-k / 0.03), 0.085, 0.5)                              # the door's wooden body
+    g = T(0.62); p = g / 0.62                                                                                                   # the creak: a hinge that sticks and slips
+    f = 300 + 150 * np.sin(np.pi * p) ** 1.5 + 22 * np.sin(PI2 * 7 * g)
+    env = np.sin(np.pi * np.clip(p, 0, 1)) ** 1.3
+    cr = harm(f, [1, .7, .5, .34, .22, .14, .08]) * (0.6 + 0.4 * saw(np.full(len(g), 43.0), K=10))
+    cr = filt(cr, 350, 3800) + 0.25 * filt(noise(0.62, "pink"), 200, 1500)                                                      # plus the air the door pushes
+    put(x, cr * env, 0.2, 0.2)
+    return fade(reverb(x, rt=0.35, wet=0.14, hi=5000)[:len(x)], 0.0003, 0.12)
+
+
+@sound("footsteps", peak=-10)
+def s_footsteps():
+    d = 1.35; x = np.zeros(int(d * SR))
+    for i in range(4):
+        L = 0.16; t = T(L); v = (1.0, 0.85, 0.95, 0.8)[i]; fb = (150, 135, 158, 128)[i]                                         # left and right feet differ a little
+        heel = sine(fb * np.exp(-t / 0.04) + 62) * np.exp(-t / 0.04) + 1.6 * reson(noise(L, "pink"), 300 + 30 * (i % 2), 2.2) * np.exp(-t / 0.028)
+        heel += 0.5 * filt(noise(L), 1200, 4200) * np.exp(-t / 0.005)                                                           # the sole touching the floor
+        put(x, soft(heel, 1.3), 0.02 + 0.34 * i, v)
+        s = T(0.07); put(x, 0.5 * reson(noise(0.07, "pink"), 700, 1.5) * np.exp(-s / 0.016), 0.02 + 0.34 * i + 0.075, v * 0.5)   # the toe rolling down
+    return fade(reverb(x, rt=0.3, wet=0.12, hi=4000)[:len(x)], 0.0005, 0.1)
 
 
 # ---------- story and pacing ----------

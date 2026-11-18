@@ -71,6 +71,29 @@
  ],
  "segments": [
   {
+   "id": "h00",
+   "scene": "kidRoom",
+   "silent": 4.8,
+   "sfx": [
+    [
+     "door_open",
+     0.52
+    ],
+    [
+     "footsteps",
+     1.28
+    ],
+    [
+     "lamp_click",
+     3.5
+    ],
+    [
+     "click",
+     3.55
+    ]
+   ]
+  },
+  {
    "id": "hook",
    "scene": "hook",
    "text": "Flip a switch, and the lights come on. But Singapore has no oil, no coal and no gas of its own. So where does our electricity come from?"
