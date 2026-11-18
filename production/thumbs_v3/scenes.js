@@ -415,4 +415,8 @@ S.roadGap = () => {
     arrow(330, 452, 566, 452, { c: '#ff3b3b', w: 26 }) + arrow(930, 452, 694, 452, { c: '#ff3b3b', w: 26 });
 };
 
+/* P3, P5 and P6 scenes live in scenes_p356.js; they share the backgrounds and props above. */
+delete require.cache[require.resolve('./scenes_p356.js')];
+require('./scenes_p356.js')(S, { bgPark, bgGarden, bgLeafy, bgDesert, bgBody, bgHawker, bgLab, bgNight, bgDark, bgKitchen, bgWall, skyline, eq, kidHead, torso, tube, leafShape, chickenRice });
+
 module.exports = S;

@@ -1,0 +1,88 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fredoka;font-weight:500;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2")}
+@font-face{font-family:Fredoka;font-weight:600;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2")}
+@font-face{font-family:Fredoka;font-weight:700;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2")}
+html,body{margin:0;background:#000}
+svg{display:block}
+text{font-family:Fredoka,'Noto Color Emoji',sans-serif}
+.em{font-family:'Noto Color Emoji'}
+</style></head>
+<body>
+<svg id="thumb" xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+  <!-- white sticker edge + soft drop shadow: makes the hero pop off the scene -->
+  <filter id="sticker" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="6" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.2" result="d2"/>
+    <feComponentTransfer in="d2" result="d3"><feFuncA type="linear" slope="6" intercept="-1"/></feComponentTransfer>
+    <feFlood flood-color="#fff"/><feComposite in2="d3" operator="in" result="w"/>
+    <feGaussianBlur in="d" stdDeviation="9" result="b"/><feOffset in="b" dy="10" result="o"/>
+    <feFlood flood-color="#0b0b25" flood-opacity=".55"/><feComposite in2="o" operator="in" result="s"/>
+    <feMerge><feMergeNode in="s"/><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="b"/><feOffset in="b" dy="9" result="o"/>
+    <feFlood flood-color="#0b0b25" flood-opacity=".5"/><feComposite in2="o" operator="in" result="s"/>
+    <feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="bgblur" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800"><feGaussianBlur stdDeviation="3.2"/></filter>
+  <filter id="blur8" filterUnits="userSpaceOnUse" x="-80" y="-80" width="1440" height="880"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="blur20" filterUnits="userSpaceOnUse" x="-120" y="-120" width="1520" height="960"><feGaussianBlur stdDeviation="20"/></filter>
+  <filter id="sil" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feColorMatrix type="matrix" values="0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0 0.2  0 0 0 1 0"/><feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff3a0" stop-opacity=".95"/><stop offset="1" stop-color="#fff3a0" stop-opacity=".35"/></linearGradient>
+</defs>
+<g filter="url(#bgblur)"><defs><linearGradient id="g44" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#58b9ff"/><stop offset="0.55" stop-color="#c8eeff"/><stop offset="1" stop-color="#e8fbff"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g44)"/><g transform="translate(200,300) scale(1.1)" fill="#fff" opacity=".9"><ellipse cx="0" cy="0" rx="70" ry="30"/><circle cx="-30" cy="-18" r="30"/><circle cx="12" cy="-28" r="38"/><circle cx="48" cy="-10" r="24"/></g><g transform="translate(620,260) scale(0.9)" fill="#fff" opacity=".9"><ellipse cx="0" cy="0" rx="70" ry="30"/><circle cx="-30" cy="-18" r="30"/><circle cx="12" cy="-28" r="38"/><circle cx="48" cy="-10" r="24"/></g><ellipse cx="350" cy="610" rx="600" ry="70" fill="#78d36f"/><rect y="586" width="1280" height="40" fill="#5cc45c"/></g><defs><linearGradient id="g45" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8a5a36"/><stop offset="1" stop-color="#4f2f1b"/></linearGradient></defs><rect y="614" width="1280" height="120" fill="url(#g45)"/><path d="M0 614 H1280" stroke="#3f8f3c" stroke-width="16"/><circle cx="90" cy="680" r="9" fill="#2d1a0e" opacity="0.25"/><circle cx="300" cy="720" r="6" fill="#2d1a0e" opacity="0.25"/><circle cx="520" cy="660" r="8" fill="#2d1a0e" opacity="0.2"/><circle cx="760" cy="710" r="7" fill="#2d1a0e" opacity="0.25"/><circle cx="640" cy="750" r="5" fill="#2d1a0e" opacity="0.2"/><circle cx="1200" cy="690" r="8" fill="#2d1a0e" opacity="0.22"/><defs><radialGradient id="r46" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#0b0b25" stop-opacity="0"/><stop offset="1" stop-color="#0b0b25" stop-opacity="0.3"/></radialGradient></defs><rect width="1280" height="720" fill="url(#r46)"/><defs><radialGradient id="r47" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><circle cx="760" cy="396" r="430" fill="url(#r47)"/><g filter="url(#sticker)"><g transform="translate(1130,130)"><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(0)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(30)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(60)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(90)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(120)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(150)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(180)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(210)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(240)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(270)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(300)"/><path d="M0 -92.03999999999999 L13.260000000000002 -120.12 L-13.260000000000002 -120.12Z" fill="#ffb31f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round" transform="rotate(330)"/><circle r="78" fill="#ffd23f" stroke="#1b1b3a" stroke-width="8"/><circle cx="-23.4" cy="-23.4" r="35.1" fill="#fff6b0" opacity=".6"/></g></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M1050 190 Q975 240 951.5871182489462 255.6085878340358" fill="none" stroke="#1b1b3a" stroke-width="39"/><path d="M900 290 L931.7288512240831 220.41286038354502 L976.4376870398365 287.4761141071752 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M1050 190 Q975 240 951.5871182489462 255.6085878340358" fill="none" stroke="#ffd23f" stroke-width="26"/><path d="M900 290 L931.7288512240831 220.41286038354502 L976.4376870398365 287.4761141071752 Z" fill="#ffd23f" stroke="#ffd23f" stroke-width="2"/></g><g filter="url(#sticker)"><g transform="translate(760,396) rotate(62)"><path d="M0 -215 C247.5 -129 230.99999999999997 129 0 215 C-230.99999999999997 129 -247.5 -129 0 -215Z" fill="#3fc45f" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round"/><path d="M0 -196 V196 M0 -120 L70 -160 M0 -50 L96 -96 M0 30 L92 -16 M0 106 L66 68 M0 -120 L-70 -160 M0 -50 L-96 -96 M0 30 L-92 -16 M0 106 L-66 68" stroke="#1f7a3a" stroke-width="7" fill="none" stroke-linecap="round"/></g></g><g font-weight="700" font-size="84" text-anchor="middle" stroke-linejoin="round" transform="rotate(-8 754 420)"><text x="754" y="426" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="21.84">FOOD</text><text x="754" y="420" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="16.8">FOOD</text><text x="754" y="420" fill="#ffd23f">FOOD</text></g><g filter="url(#sticker)"><text class="em" x="250" y="500" font-size="104" text-anchor="middle" dominant-baseline="central"  >💧</text></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M320 496 Q434 474 496.94206467507803 461.85328576445863" fill="none" stroke="#1b1b3a" stroke-width="35"/><path d="M548 452 L500.4578961864871 495.9039675312512 L487.5349329338702 428.9395215858728 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M320 496 Q434 474 496.94206467507803 461.85328576445863" fill="none" stroke="#3fa9ff" stroke-width="22"/><path d="M548 452 L500.4578961864871 495.9039675312512 L487.5349329338702 428.9395215858728 Z" fill="#3fa9ff" stroke="#3fa9ff" stroke-width="2"/></g><g font-weight="700" font-size="76" text-anchor="middle" stroke-linejoin="round" ><text x="250" y="354" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="19.76">CO<tspan font-size="62%" dy="10">2</tspan></text><text x="250" y="348" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="15.200000000000001">CO<tspan font-size="62%" dy="10">2</tspan></text><text x="250" y="348" fill="#fff">CO<tspan font-size="62%" dy="10">2</tspan></text></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M350 330 Q455 345 508.52262632961936 352.6460894756599" fill="none" stroke="#1b1b3a" stroke-width="35"/><path d="M560 360 L500.7303096009436 385.97910314079377 L510.3752460963281 318.4645476731022 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M350 330 Q455 345 508.52262632961936 352.6460894756599" fill="none" stroke="#c5cbdb" stroke-width="22"/><path d="M560 360 L500.7303096009436 385.97910314079377 L510.3752460963281 318.4645476731022 Z" fill="#c5cbdb" stroke="#c5cbdb" stroke-width="2"/></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M950 424 Q995 429 998.256883143708 429.36187590485645" fill="none" stroke="#1b1b3a" stroke-width="31"/><path d="M1040 434 L992.1941923621989 456.7599375240259 L998.3562715171754 401.301225129238 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M950 424 Q995 429 998.256883143708 429.36187590485645" fill="none" stroke="#7fe0ff" stroke-width="18"/><path d="M1040 434 L992.1941923621989 456.7599375240259 L998.3562715171754 401.301225129238 Z" fill="#7fe0ff" stroke="#7fe0ff" stroke-width="2"/></g><g filter="url(#sticker)"><g fill="#eaf8ff" stroke="#1b1b3a" stroke-width="6"><circle cx="1120" cy="436" r="62"/><circle cx="1206" cy="350" r="30"/><circle cx="1216" cy="500" r="24"/></g><text x="1118" y="456" font-size="58" font-weight="700" text-anchor="middle" fill="#1b1b3a">O<tspan font-size="36" dy="10">2</tspan></text></g>
+<!-- brand pill -->
+<g filter="url(#shadow)">
+  <rect id="pill" x="38" y="22" width="500" height="70" rx="35" fill="#1b1b3a" stroke="#fff" stroke-width="4"/>
+  <text id="pilltext" x="72" y="71" font-size="40" font-weight="600" fill="#fff">TheOneApp <tspan fill="#ffd23f">Explained</tspan></text>
+</g>
+<!-- giant two-tone title -->
+<g id="title" font-weight="700" stroke-linejoin="round" stroke-linecap="round">
+  <text id="t0" x="38" y="208" fill="#1b1b3a" stroke="#1b1b3a"></text>
+  <text id="t1" x="38" y="208" fill="#1b1b3a" stroke="#1b1b3a"></text>
+  <text id="t2" x="38" y="208"></text>
+</g>
+<!-- yellow idea banner -->
+<g filter="url(#shadow)">
+  <rect id="ban" x="38" y="572" width="900" height="112" rx="28" fill="#ffd23f" stroke="#1b1b3a" stroke-width="7"/>
+  <text id="bantext" x="80" y="655" font-weight="700" fill="#1b1b3a"></text>
+</g>
+</svg>
+<script>
+const D = {"set":"P6","ep":2,"level":"P6","topic":"Photosynthesis","banner":"A leaf makes FOOD?!","scene":"photo","titleMaxW":860,"video":"How Does A Leaf Make Food From Light?"};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function layout(){
+  // pill
+  const pt = document.getElementById('pilltext');
+  document.getElementById('pill').setAttribute('width', pt.getComputedTextLength() + 68);
+  // title: "P4" yellow + topic white, auto-fit to titleMaxW
+  const inner = `<tspan fill="#ffd23f">${esc(D.level)}</tspan><tspan fill="#fff"> ${esc(D.topic)}</tspan>`;
+  const maxW = D.titleMaxW || 860; let size = D.titleSize || 150;
+  const t = ['t0','t1','t2'].map(id => document.getElementById(id));
+  const set = s => t.forEach(el => { el.innerHTML = inner; el.setAttribute('font-size', s); });
+  set(size);
+  const w = t[2].getComputedTextLength();
+  if (w > maxW) { size = Math.floor(size * maxW / w); set(size); }
+  const base = 96 + size * 0.80;                    // keep the cap height just under the pill
+  t.forEach(el => el.setAttribute('y', base));
+  t[0].innerHTML = esc(D.level + ' ' + D.topic); t[1].innerHTML = esc(D.level + ' ' + D.topic);
+  t[0].setAttribute('stroke-width', size * 0.24); t[0].setAttribute('transform', 'translate(0,9)');   // dark drop
+  t[1].setAttribute('stroke-width', size * 0.20);
+  // banner
+  const bt = document.getElementById('bantext'); bt.textContent = D.banner;
+  let bs = 78; bt.setAttribute('font-size', bs);
+  const bmax = (D.bannerMaxW || 1010) - 84;
+  let bw = bt.getComputedTextLength();
+  if (bw > bmax) { bs = Math.floor(bs * bmax / bw); bt.setAttribute('font-size', bs); bw = bt.getComputedTextLength(); }
+  bt.setAttribute('y', 628 + bs * 0.35);
+  document.getElementById('ban').setAttribute('width', bw + 84);
+  window.TITLE_RIGHT = 38 + t[2].getComputedTextLength();
+}
+Promise.all(['500','600','700'].map(w => document.fonts.load(w + ' 80px Fredoka'))).then(() => document.fonts.ready).then(() => { layout(); window.READY = true; });
+</script>
+</body></html>

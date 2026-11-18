@@ -1,0 +1,91 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fredoka;font-weight:500;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2")}
+@font-face{font-family:Fredoka;font-weight:600;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2")}
+@font-face{font-family:Fredoka;font-weight:700;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2")}
+html,body{margin:0;background:#000}
+svg{display:block}
+text{font-family:Fredoka,'Noto Color Emoji',sans-serif}
+.em{font-family:'Noto Color Emoji'}
+</style></head>
+<body>
+<svg id="thumb" xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+  <!-- white sticker edge + soft drop shadow: makes the hero pop off the scene -->
+  <filter id="sticker" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="6" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.2" result="d2"/>
+    <feComponentTransfer in="d2" result="d3"><feFuncA type="linear" slope="6" intercept="-1"/></feComponentTransfer>
+    <feFlood flood-color="#fff"/><feComposite in2="d3" operator="in" result="w"/>
+    <feGaussianBlur in="d" stdDeviation="9" result="b"/><feOffset in="b" dy="10" result="o"/>
+    <feFlood flood-color="#0b0b25" flood-opacity=".55"/><feComposite in2="o" operator="in" result="s"/>
+    <feMerge><feMergeNode in="s"/><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="b"/><feOffset in="b" dy="9" result="o"/>
+    <feFlood flood-color="#0b0b25" flood-opacity=".5"/><feComposite in2="o" operator="in" result="s"/>
+    <feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="bgblur" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800"><feGaussianBlur stdDeviation="3.2"/></filter>
+  <filter id="blur8" filterUnits="userSpaceOnUse" x="-80" y="-80" width="1440" height="880"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="blur20" filterUnits="userSpaceOnUse" x="-120" y="-120" width="1520" height="960"><feGaussianBlur stdDeviation="20"/></filter>
+  <filter id="sil" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feColorMatrix type="matrix" values="0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0 0.2  0 0 0 1 0"/><feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff3a0" stop-opacity=".95"/><stop offset="1" stop-color="#fff3a0" stop-opacity=".35"/></linearGradient>
+</defs>
+<defs><radialGradient id="r52" cx="0.62" cy="0.45" r="0.75"><stop offset="0" stop-color="#d8f6ff"/><stop offset="0.75" stop-color="#6fc3ff"/><stop offset="1" stop-color="#8a5a3a"/></radialGradient></defs><rect width="1280" height="720" fill="url(#r52)"/><rect y="545" width="1280" height="175" fill="#3a4a8a"/><rect y="545" width="1280" height="10" fill="#1b1b3a" opacity=".35"/><defs><radialGradient id="r53" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#0b0b25" stop-opacity="0"/><stop offset="1" stop-color="#0b0b25" stop-opacity="0.5"/></radialGradient></defs><rect width="1280" height="720" fill="url(#r53)"/><defs><radialGradient id="r54" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff" stop-opacity="0.55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><circle cx="900" cy="400" r="440" fill="url(#r54)"/><g filter="url(#sticker)"><g transform="translate(600,390)"><g stroke="#1b1b3a" stroke-width="8" stroke-linejoin="round"><rect x="-80" y="-12" width="90" height="24" fill="#c5cbdb"/><ellipse cx="-110" cy="-50" rx="42" ry="56" fill="#ffd23f"/><ellipse cx="-110" cy="50" rx="42" ry="56" fill="#ffd23f"/><ellipse cx="-110" cy="-50" rx="16" ry="26" fill="#1b2450" opacity=".35" stroke="none"/><ellipse cx="-110" cy="50" rx="16" ry="26" fill="#1b2450" opacity=".35" stroke="none"/></g></g><g stroke="#1b1b3a" stroke-width="9" stroke-linejoin="round"><path d="M600 510 V410 Q600 360 660 350 L730 250 Q750 224 790 224 H990 Q1030 224 1060 260 L1120 350 Q1210 360 1210 420 V510Z" fill="#ff4b4b"/>
+      <path d="M1010 250 L1080 346 H996 V250Z" fill="#bfeaff"/></g>
+      <circle cx="870" cy="380" r="112" fill="#1b2450" stroke="#1b1b3a" stroke-width="9"/><path d="M870 380 L875.7 381.6 L875.8 383.6 L875.2 385.8 L873.8 387.8 L871.6 389.5 L868.9 390.5 L865.7 390.6 L862.3 389.7 L859.2 387.7 L856.6 384.8 L854.9 380.9 L854.3 376.5 L855.1 371.9 L857.3 367.4 L860.8 363.6 L865.5 360.8 L871.0 359.4 L876.9 359.6 L882.8 361.5 L888.1 365.2 L892.4 370.5 L895.0 376.9 L895.8 384.1 L894.5 391.5 L891.1 398.4 L885.7 404.3 L878.6 408.6 L870.4 410.8 L861.7 410.6 L853.1 407.9 L845.4 402.7 L839.2 395.4 L835.2 386.5 L833.9 376.6 L835.4 366.4 L839.8 356.8 L846.8 348.6 L856.1 342.5 L866.9 339.2 L878.5 339.1 L889.9 342.2 L900.2 348.5 L908.5 357.6 L914.1 368.9 L916.4 381.6 L915.0 394.6 L910.0 407.0 L901.6 417.7 L890.3 425.8 L877.0 430.5 L862.6 431.4 L848.3 428.2 L835.3 421.0 L824.5 410.3 L817.0 396.9 L813.5 381.6 L814.4 365.7 L819.7 350.4 L829.2 337.0 L842.3 326.6 L857.9 320.1 L875.0 318.2 L892.3 321.1 L908.2 328.8 L921.6 340.8 L931.3 356.3 L936.4 374.0 L936.3 392.8 L931.0 411.0 L920.8 427.3 L906.2 440.3 L888.3 448.8 L868.6 452.1 L848.4 449.8 L829.5 441.9 L813.2 428.9 L801.1 411.7 L794.1 391.6 L793.0 370.0 L797.9 348.8 L808.6 329.5 L824.5 313.7 L844.3 302.8 L866.5 297.8 L889.6 299.1 L911.7 306.9 L930.9 320.6 L945.7 339.3 L954.9 361.7 L957.6 385.9" fill="none" stroke="#ffd23f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="1170" cy="420" r="20" fill="#ffd23f" stroke="#1b1b3a" stroke-width="6"/><circle cx="710" cy="512" r="62" fill="#2b3350" stroke="#1b1b3a" stroke-width="8"/><circle cx="710" cy="512" r="26" fill="#e9eef8" stroke="#1b1b3a" stroke-width="6"/><circle cx="1090" cy="512" r="62" fill="#2b3350" stroke="#1b1b3a" stroke-width="8"/><circle cx="1090" cy="512" r="26" fill="#e9eef8" stroke="#1b1b3a" stroke-width="6"/></g><ellipse cx="870" cy="380" rx="130" ry="130" fill="none" stroke="#1b1b3a" stroke-width="20"/><ellipse cx="870" cy="380" rx="130" ry="130" fill="none" stroke="#ffd23f" stroke-width="10"/><g stroke-linecap="round" stroke-linejoin="round"><path d="M430 300 Q340 385 395.83038183015856 437.72869395070535" fill="none" stroke="#1b1b3a" stroke-width="33"/><path d="M430 470 L372.3640128506339 458.2062310808585 L414.93467189438434 413.13141562276985 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M430 300 Q340 385 395.83038183015856 437.72869395070535" fill="none" stroke="#ffd23f" stroke-width="20"/><path d="M430 470 L372.3640128506339 458.2062310808585 L414.93467189438434 413.13141562276985 Z" fill="#ffd23f" stroke="#ffd23f" stroke-width="2"/></g><g font-weight="700" font-size="220" text-anchor="middle" stroke-linejoin="round" transform="rotate(-10 250 420)"><text x="250" y="426" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="57.2">?</text><text x="250" y="420" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="44">?</text><text x="250" y="420" fill="#ffd23f">?</text></g><g stroke="#fff" stroke-width="10" stroke-linecap="round" opacity=".9"><path d="M1230 330 H1270 M1236 400 H1276 M1230 470 H1270"/></g>
+<!-- brand pill -->
+<g filter="url(#shadow)">
+  <rect id="pill" x="38" y="22" width="500" height="70" rx="35" fill="#1b1b3a" stroke="#fff" stroke-width="4"/>
+  <text id="pilltext" x="72" y="71" font-size="40" font-weight="600" fill="#fff">TheOneApp <tspan fill="#ffd23f">Explained</tspan></text>
+</g>
+<!-- giant two-tone title -->
+<g id="title" font-weight="700" stroke-linejoin="round" stroke-linecap="round">
+  <text id="t0" x="38" y="208" fill="#1b1b3a" stroke="#1b1b3a"></text>
+  <text id="t1" x="38" y="208" fill="#1b1b3a" stroke="#1b1b3a"></text>
+  <text id="t2" x="38" y="208"></text>
+</g>
+<!-- yellow idea banner -->
+<g filter="url(#shadow)">
+  <rect id="ban" x="38" y="572" width="900" height="112" rx="28" fill="#ffd23f" stroke="#1b1b3a" stroke-width="7"/>
+  <text id="bantext" x="80" y="655" font-weight="700" fill="#1b1b3a"></text>
+</g>
+</svg>
+<script>
+const D = {"set":"P6","ep":4,"level":"P6","topic":"Stored Energy","banner":"What's hiding inside?","scene":"windup","titleMaxW":800,"video":"What Is Hiding Inside A Wound-Up Toy?"};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function layout(){
+  // pill
+  const pt = document.getElementById('pilltext');
+  document.getElementById('pill').setAttribute('width', pt.getComputedTextLength() + 68);
+  // title: "P4" yellow + topic white, auto-fit to titleMaxW
+  const inner = `<tspan fill="#ffd23f">${esc(D.level)}</tspan><tspan fill="#fff"> ${esc(D.topic)}</tspan>`;
+  const maxW = D.titleMaxW || 860; let size = D.titleSize || 150;
+  const t = ['t0','t1','t2'].map(id => document.getElementById(id));
+  const set = s => t.forEach(el => { el.innerHTML = inner; el.setAttribute('font-size', s); });
+  set(size);
+  const w = t[2].getComputedTextLength();
+  if (w > maxW) { size = Math.floor(size * maxW / w); set(size); }
+  const base = 96 + size * 0.80;                    // keep the cap height just under the pill
+  t.forEach(el => el.setAttribute('y', base));
+  t[0].innerHTML = esc(D.level + ' ' + D.topic); t[1].innerHTML = esc(D.level + ' ' + D.topic);
+  t[0].setAttribute('stroke-width', size * 0.24); t[0].setAttribute('transform', 'translate(0,9)');   // dark drop
+  t[1].setAttribute('stroke-width', size * 0.20);
+  // banner
+  const bt = document.getElementById('bantext'); bt.textContent = D.banner;
+  let bs = 78; bt.setAttribute('font-size', bs);
+  const bmax = (D.bannerMaxW || 1010) - 84;
+  let bw = bt.getComputedTextLength();
+  if (bw > bmax) { bs = Math.floor(bs * bmax / bw); bt.setAttribute('font-size', bs); bw = bt.getComputedTextLength(); }
+  bt.setAttribute('y', 628 + bs * 0.35);
+  document.getElementById('ban').setAttribute('width', bw + 84);
+  window.TITLE_RIGHT = 38 + t[2].getComputedTextLength();
+}
+Promise.all(['500','600','700'].map(w => document.fonts.load(w + ' 80px Fredoka'))).then(() => document.fonts.ready).then(() => { layout(); window.READY = true; });
+</script>
+</body></html>
