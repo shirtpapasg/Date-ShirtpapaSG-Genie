@@ -187,7 +187,7 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | Video | YouTube | Goes public (SGT) |
 |---|---|---|
 | Trailer | WnUML8oojhM | public since 18 Nov (the teacher asked to go live early) |
-| EP01 | RmRSeKnx6Ac | public since 18 Nov |
+| EP01 | cefk-GzboRU | public since 18 Nov (re-uploaded with the first-person journey) |
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
 | EP02 Part 1 | s1l0mru1EGc | public since 18 Nov (re-uploaded with the cold open) |
