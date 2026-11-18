@@ -26,17 +26,17 @@ def chapters(tl, names):
     return "\n".join(out)
 FOOT = ("\n\nTheOneApp, Explored: one real news story every Thursday, and the science from your textbook (Primary 3 to Primary 6, Singapore). "
         "The sister series of TheOneApp, Explained.\n\n#TheOneAppExplored #PrimaryScience #Singapore")
-EP1_CH = chapters(f"{SAU}/ep01/ep01_tl.json", {"hook": "Where did the haze go?", "welcome": "Today you'll learn", "news": "The headline", "smoke": "What is haze?", "tiny": "How small is PM2.5?",
-    "wind": "Why the wind matters", "lungs": "Your nose and lungs (P5 respiratory system)", "impact": "People and the environment (P6)", "try": "Try this at home", "think": "Think about it", "close": "Remember"})
+EP1_CH = chapters(f"{SAU}/ep01/ep01_tl.json", {"hook": "Where did the haze go?", "welcome": "Today you'll learn", "news": "The headline", "peat": "Follow one tiny particle", "recap": "Its journey", "tiny": "How small is PM2.5?",
+    "lungs": "Your nose and lungs (P5 respiratory system)", "wind": "Why the haze went away", "impact": "People and the environment (P6)", "try": "Try this at home", "think": "Think about it", "close": "Remember"})
 EP2_CH = chapters(f"{SAU}/ep02/ep02_tl.json", {"hook": "No oil, no gas", "answer": "Last week's answer: N95 vs cloth", "welcome": "Today you'll learn", "history": "From 1965 to today",
-    "today": "93 out of 100", "news": "The news", "convert": "Energy changes (P6)", "sun": "Gas started as sunlight", "options": "Solar and our neighbours", "nuclear": "Could nuclear power us?",
-    "try": "Be an energy detective", "think": "Think about it", "close": "Remember"})
+    "today": "93 out of 100", "news": "The news", "sun": "Gas started as sunlight", "seabed": "Follow one tiny bit of gas", "recap1": "Its journey", "convert": "Energy changes (P6)",
+    "options": "Solar and our neighbours", "nuclear": "Could nuclear power us?", "try": "Be an energy detective", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
  {"id": "sau-trailer", "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
   "tags": ["theoneapp explored", "primary science", "singapore", "haze", "shorts"]},
  {"id": "sau-ep01", "file": f"{SAU}/ep01/ep01.mp4", "thumb": f"{SAU}/ep01/thumb_ep01.jpg", "at": "2026-11-26T09:00:00Z", "title": "Why Did The Haze Go Away? | TheOneApp, Explored EP1",
-  "desc": "In September 2026 the sky over Singapore turned grey and smoky. By November the haze was gone. Where did it come from, and where did it go? Heart explains PM2.5 particles, why the wind decides when the haze comes, how your nose and lungs protect you (P5 respiratory system) and how burning forests affects the environment (P6).\n\n" + EP1_CH +
+  "desc": "In September 2026 the sky over Singapore turned grey and smoky. By November the haze was gone. Where did it come from, and where did it go? Follow one tiny haze particle from a peat fire in Sumatra, across the sea on the south-west winds, into a child's lungs. Then Heart explains PM2.5 particles, how your nose and lungs protect you (P5 respiratory system), why the rain and the changing winds cleared the sky, and how burning forests affects the environment (P6).\n\n" + EP1_CH +
           "\n\nSources: National Environment Agency haze updates (nea.gov.sg), September to November 2026; news reports of 4 September 2026 (air quality in the unhealthy range for the first time since 2023)." + FOOT,
   "tags": ["haze", "PM2.5", "respiratory system", "primary 5 science", "primary 6 science", "singapore", "PSLE science", "theoneapp explored"]},
  {"id": "sau-ep01-s1", "file": f"{SAU}/ep01/short1.mp4", "at": "2026-11-27T09:00:00Z", "title": "How Small Is A Haze Particle? #Shorts",
@@ -44,7 +44,7 @@ VIDEOS = [
  {"id": "sau-ep01-s2", "file": f"{SAU}/ep01/short2.mp4", "at": "2026-11-30T09:00:00Z", "title": "Why Does Haze Only Come At Certain Times? #Shorts",
   "desc": "It's all about the wind and the rain. Watch the full episode: Why did the haze go away? (TheOneApp, Explored EP1)" + FOOT, "tags": ["haze", "monsoon", "shorts", "theoneapp explored"]},
  {"id": "sau-ep02", "file": f"{SAU}/ep02/ep02.mp4", "thumb": f"{SAU}/ep02/thumb_ep02.jpg", "at": "2026-12-03T09:00:00Z", "title": "No Oil, No Gas: How Does Singapore Keep The Lights On? | TheOneApp, Explored EP2",
-  "desc": "Singapore has no oil, coal or gas of its own, yet the lights always come on. From oil-fired power stations in 1965 to natural gas today, what Indonesia's smaller pipeline supply means, and what could power us next: solar, clean electricity from our neighbours, even nuclear. Linked to P6 energy forms and conversion.\n\n" + EP2_CH +
+  "desc": "Singapore has no oil, coal or gas of its own, yet the lights always come on. From oil-fired power stations in 1965 to natural gas today. Follow one tiny bit of gas from rock under the seabed, along a 650 km pipe, through a power station and into the lamp in your room. Then: what Indonesia's smaller pipeline supply means, and what could power us next: solar, clean electricity from our neighbours, even nuclear. Linked to P6 energy forms and conversion.\n\n" + EP2_CH +
           "\n\nSources: Energy Market Authority (ema.gov.sg) energy statistics and its 2026 feature on advanced nuclear energy; Ministry of Trade and Industry (mti.gov.sg) on low-carbon electricity imports; news reports of 24 to 26 October 2026 on Indonesia's pipeline gas." + FOOT,
   "tags": ["energy", "natural gas", "singapore", "electricity", "primary 6 science", "energy conversion", "solar", "nuclear", "PSLE science", "theoneapp explored"]},
  {"id": "sau-ep02-s1", "file": f"{SAU}/ep02/short1.mp4", "at": "2026-12-04T09:00:00Z", "title": "Is Gas Power Secretly Sunlight? #Shorts",
