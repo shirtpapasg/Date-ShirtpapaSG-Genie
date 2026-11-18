@@ -21,3 +21,5 @@ Outputs: `P4_EPnn.jpg`, `contact_sheet.png`, `contact_small.png` (168x94 each). 
 Same template. Rows in `data.json` carry `set` (P3/P4/P5/P6, the file prefix) and `level` (the yellow title word; "Mind" for the P3 EP00 special).
 Their drawings are in `scenes_p356.js` (loaded by `scenes.js`). `P5_EP01.jpg` is the teacher's original panda thumbnail, kept as it is (`"static": true`).
 Outputs: `P3_EP00…05.jpg`, `P5_EP01/02/03/05/06/16.jpg`, `P6_EP01…12.jpg`, `contact_sheet_p3p5p6.png`, `contact_small_p3p5p6.png`.
+
+P3 EP06–14B (Materials, Life Cycles, Magnets) are the rows with `"batch": "p3more"`; `ep` may be a string such as `"7A"` (`node make.js P3:7A`). Sheets: `contact_sheet_p3_more.png`, `contact_small_p3_more.png`.

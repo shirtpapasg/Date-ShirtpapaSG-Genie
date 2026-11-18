@@ -485,15 +485,15 @@ module.exports = (S, H) => {
 
   // P3 EP12  a magnet pulls iron and steel, but not every metal
   S.magMetals = () => {
-    const mx = 900, top = 120;
-    const u = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round"><path d="M${mx - 170} 420 V${top + 150} A170 170 0 0 1 ${mx + 170} ${top + 150} V420 H${mx + 80} V${top + 150} A80 80 0 0 0 ${mx - 80} ${top + 150} V420Z" fill="#ff3b3b"/><rect x="${mx - 170}" y="340" width="90" height="80" fill="#e9eef8"/><rect x="${mx + 80}" y="340" width="90" height="80" fill="#e9eef8"/></g>
-      <text x="${mx - 125}" y="400" font-size="52" font-weight="700" text-anchor="middle" fill="${K}">N</text><text x="${mx + 125}" y="400" font-size="52" font-weight="700" text-anchor="middle" fill="${K}">S</text>`;
+    const mx = 900, top = 80;
+    const u = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round"><path d="M${mx - 170} 380 V${top + 150} A170 170 0 0 1 ${mx + 170} ${top + 150} V380 H${mx + 80} V${top + 150} A80 80 0 0 0 ${mx - 80} ${top + 150} V380Z" fill="#ff3b3b"/><rect x="${mx - 170}" y="300" width="90" height="80" fill="#e9eef8"/><rect x="${mx + 80}" y="300" width="90" height="80" fill="#e9eef8"/></g>
+      <text x="${mx - 125}" y="360" font-size="52" font-weight="700" text-anchor="middle" fill="${K}">N</text><text x="${mx + 125}" y="360" font-size="52" font-weight="700" text-anchor="middle" fill="${K}">S</text>`;
     const can = `<g stroke="${K}" stroke-width="8" stroke-linejoin="round"><rect x="110" y="330" width="130" height="200" rx="18" fill="#dfe5f2"/><rect x="110" y="380" width="130" height="90" fill="#31c48d"/><ellipse cx="175" cy="332" rx="62" ry="14" fill="#f5f8ff"/></g>`;
     const coin = `<circle cx="470" cy="470" r="62" fill="#d98a4a" stroke="${K}" stroke-width="8"/><circle cx="470" cy="470" r="44" fill="none" stroke="#a85f2a" stroke-width="6"/><text x="470" y="490" font-size="52" font-weight="700" text-anchor="middle" fill="#7a3f14">¢</text>`;
     return bgLab('#3b4fd6', '#8fb8ff', '#f0e2c8') + spot(mx, 360, 400, '#fff', .55) +
-      sticker(nail(mx - 126, 432, 120, 80) + clip(mx + 110, 452, 1.2, 12) + clip(mx + 150, 498, 1.2, -20) + clip(mx + 100, 520, 1.1, 30)) + sticker(u) +
-      sticker(can) + no(240, 330, 40) + sticker(coin) + no(528, 414, 40) + tick(mx - 210, 470, 40) +
-      tag('ALUMINIUM', 200, 284, 46, '#fff') + tag('COPPER', 480, 372, 46, '#ffc89a') + tag('IRON', mx - 290, 540, 56, '#7dffb0') + tag('STEEL', mx + 250, 540, 56, '#7dffb0');
+      sticker(nail(mx - 126, 392, 150, 84) + clip(mx + 110, 416, 1.3, 12) + clip(mx + 152, 470, 1.3, -20) + clip(mx + 96, 492, 1.2, 30)) + sticker(u) +
+      sticker(can) + no(240, 330, 40) + sticker(coin) + no(528, 414, 40) + tick(mx - 214, 420, 40) + tick(mx + 226, 420, 40) +
+      tag('ALUMINIUM', 200, 284, 46, '#fff') + tag('COPPER', 480, 372, 46, '#ffc89a') + tag('IRON', mx - 250, 520, 56, '#7dffb0') + tag('STEEL', mx + 262, 520, 56, '#7dffb0');
   };
 
   // P3 EP13  like poles repel; a freely hanging magnet points north-south
@@ -519,9 +519,11 @@ module.exports = (S, H) => {
 
   // P3 EP14B  a fair test: which magnet holds the longer chain of paper clips?
   S.magStrength = () => {
-    const rig = (x, n, c) => { let s = barMag(x, 300, 190, 84, 90, false, 50); for (let i = 0; i < n; i++) s += clip(x + (i % 2 ? 5 : -5), 428 + i * 38, .95, i % 2 ? 8 : -8); return s; };
-    const bar = `<rect x="330" y="176" width="820" height="30" rx="12" fill="#6b7592" stroke="${K}" stroke-width="8"/><path d="M470 206 V214 M1000 206 V214" stroke="${K}" stroke-width="14"/>`;
-    return bgLab('#ff8a4c', '#ffd08a', '#fff0d0') + spot(1000, 360, 360, '#fff', .6) + sticker(bar) + sticker(rig(470, 2)) + sticker(rig(1000, 4)) +
-      word('2', 610, 480, 130, '#fff') + word('4', 1150, 500, 150, Y) + word('?', 780, 420, 170, Y) + sticker(em('📎', 200, 430, 190));
+    const vmag = x => `<rect x="${x - 56}" y="236" width="112" height="84" fill="#2f7bff"/><rect x="${x - 56}" y="320" width="112" height="84" fill="#ff3b3b"/><rect x="${x - 56}" y="236" width="112" height="168" rx="8" fill="none" stroke="${K}" stroke-width="9"/><line x1="${x - 56}" y1="320" x2="${x + 56}" y2="320" stroke="${K}" stroke-width="6"/>
+      <text x="${x}" y="300" font-size="62" font-weight="700" text-anchor="middle" fill="#fff">S</text><text x="${x}" y="384" font-size="62" font-weight="700" text-anchor="middle" fill="#fff">N</text>`;
+    const rig = (x, n) => { let s = ''; for (let i = n - 1; i >= 0; i--) s += clip(x, 436 + i * 46, 1.05, 0); return s + vmag(x); };
+    const bar = `<rect x="400" y="212" width="790" height="28" rx="12" fill="#6b7592" stroke="${K}" stroke-width="8"/>`;
+    return bgLab('#ff8a4c', '#ffd08a', '#fff0d0') + spot(1060, 380, 360, '#fff', .6) + sticker(bar) + sticker(rig(530, 2)) + sticker(rig(1060, 4)) +
+      word('2', 670, 500, 130, '#fff') + word('4', 1200, 520, 150, Y) + word('?', 820, 420, 170, Y) + sticker(em('📎', 220, 420, 190));
   };
 };
