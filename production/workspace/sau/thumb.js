@@ -14,7 +14,9 @@ const { chromium } = require('playwright');
     const pt = E('text', {x: 330, y: 101, 'text-anchor': 'middle', 'font-size': 50, 'font-weight': 700, fill: '#fff'}); pt.innerHTML = '🌏 Science <tspan fill="#ffd60a">Around Us</tspan>';
     const tt = E('text', {x: 60, y: 300, 'font-size': 170, 'font-weight': 700, class: 'out', 'stroke-width': 30}); tt.innerHTML = `<tspan fill="#fff">${w1}</tspan> <tspan fill="#ffd60a">${w2}</tspan>`;
     const bb = tt.getBBox(); if (bb.width > 1800) tt.setAttribute('font-size', 170 * 1800 / bb.width);
-    E('rect', {x: 60, y: 870, width: 1800, height: 170, rx: 85, fill: '#ffd60a', stroke: '#1b1b3a', 'stroke-width': 10});
-    const bt = E('text', {x: 960, y: 985, 'text-anchor': 'middle', 'font-size': 100, 'font-weight': 700, fill: '#1b1b3a'}, banner); const w = bt.getBBox().width; if (w > 1680) bt.setAttribute('font-size', 100 * 1680 / w);
+    // banner words with a thick yellow border (no box), the teacher's choice 18 Nov 2026
+    const bo = E('text', {x: 960, y: 1000, 'text-anchor': 'middle', 'font-size': 112, 'font-weight': 700, 'letter-spacing': 5, fill: '#1b1b3a', stroke: '#1b1b3a', 'stroke-width': 30, 'stroke-linejoin': 'round'}, banner);
+    const bt = E('text', {x: 960, y: 1000, 'text-anchor': 'middle', 'font-size': 112, 'font-weight': 700, 'letter-spacing': 5, fill: '#1b1b3a', stroke: '#ffd60a', 'stroke-width': 15, 'stroke-linejoin': 'round', style: 'paint-order:stroke'}, banner);
+    const w = bt.getBBox().width; if (w > 1700) [bo, bt].forEach(e => e.setAttribute('font-size', 112 * 1700 / w));
   }, [t, w1, w2, banner, stf, X]);
   await p.screenshot({ path: out }); await b.close(); })();
