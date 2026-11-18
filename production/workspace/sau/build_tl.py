@@ -148,6 +148,10 @@ src = {"pop": "sine=f=880:d=0.12,volume=0.5,afade=t=out:st=0.02:d=0.1,asetrate=4
        "deep": "anoisesrc=d=5:c=brown:a=0.4,lowpass=f=300,tremolo=f=0.4:d=0.6,afade=t=in:d=0.8,afade=t=out:st=4:d=1",
        "wind": "anoisesrc=d=6:c=pink:a=0.32,bandpass=f=420:w=300,tremolo=f=0.6:d=0.5,afade=t=in:d=0.8,afade=t=out:st=5:d=1"}
 # A name with a file sfx/<name>.wav (made by sfx_lib.py) plays that file; any other name plays its one-line ffmpeg sound above.
+# The wav files are not in git: a fresh checkout makes them once (about 6 s; same sounds every time).
+_here = os.path.dirname(os.path.abspath(__file__))
+if not os.path.isdir(os.path.join(_here, "sfx")) or not os.listdir(os.path.join(_here, "sfx")):
+    print("making the sound library (sfx_lib.py)"); subprocess.run([sys.executable, os.path.join(_here, "sfx_lib.py")], check=True, cwd=_here)
 SFX = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sfx")
 wavof = lambda kd: os.path.join(SFX, kd + ".wav")
 for kd in sorted({kd for kd, _ in ev if not os.path.exists(wavof(kd)) and kd not in src}): print("WARNING no such sound, left out:", kd)
