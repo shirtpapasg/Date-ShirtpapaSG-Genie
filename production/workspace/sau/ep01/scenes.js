@@ -21,7 +21,7 @@ S.hook = (() => { const s = scene("hook", "#8ecae6", "#219ebc");
   s.sep = chip(s.stage, "SEPTEMBER", "#6c757d", {fs: 44}); s.nov = chip(s.stage, "NOVEMBER", "#06d6a0", {fs: 44});
   s.q = tx(s.stage, {x: 600, y: 830, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "Where did the haze go? 🤔");
   s.run = t => { const a = (w, f) => cue("hook", w, f);
-    const hz = ramp(t, a("grey", .2) - .3, a("smoky", .3) + .6) * (1 - ramp(t, a("gone", .55) - .6, a("gone", .55) + .5));
+    const hz = ramp(t, SC.hook.t0 + .2, SC.hook.t0 + 3) * (1 - ramp(t, a("gone", .55) - .6, a("gone", .55) + .5));   // the sky greys in silence first
     set(s.sky, "fill", mix("#8ecae6", "#9a9184", hz)); op(s.haze, .55 * hz); op(s.sun, 1 - .75 * hz);
     s.blobs.forEach(b => { set(b.e, "cx", b.x + Math.sin(t * .3) * 40 + b.v * t * .3); set(b.e, "cy", b.y); op(b.e, .9 * hz); });
     popAt(s.sep, 600, 110, t, a("september", .05)); op(s.sep, on(t, a("september", .05), a("november", .5), .2));
@@ -267,3 +267,104 @@ S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7"), N = CFG.next || [
 S.qcard = (() => { const s = scene("qcard", "#4361ee", "#7209b7");
   s.e = emo(s.stage, 600, 380, 300, "🤔"); s.c = chip(s.stage, "🌏 TheOneApp, Explored", "#f72585", {fs: 48});
   s.run = t => { tf(s.e, `translate(600 380) scale(${Math.max(0, pop(t, .2)) * (1 + .06 * Math.sin(t * 6))}) translate(-600 -380)`); popAt(s.c, 600, 720, t, .5); }; return s; })();
+
+// ======== THE HAZE-PARTICLE JOURNEY (hero sequence): picture-only shots, sound effects, no voice; then Heart explains ========
+const FR = name => { const c = SC[name]; return c ? (tt => clamp((tt - c.t0) / Math.max(.1, c.t1 - c.t0))) : (() => 0); };
+function meDust(p, sc = 1) { const g = el("g", {}, p); el("circle", {r: 40 * sc, fill: "#6c584c", opacity: .35, filter: "url(#blur)"}, g);
+  el("circle", {r: 22 * sc, fill: "#7d6f5a", stroke: INK, "stroke-width": 4}, g);
+  [-8, 8].forEach(x => { el("circle", {cx: x * sc, cy: -4 * sc, r: 5 * sc, fill: "#fff"}, g); el("circle", {cx: (x + 1) * sc, cy: -3 * sc, r: 2.5 * sc, fill: INK}, g); });
+  el("path", {d: `M${-7 * sc} ${8 * sc} Q0 ${4 * sc} ${7 * sc} ${8 * sc}`, fill: "none", stroke: INK, "stroke-width": 2.5, "stroke-linecap": "round"}, g); return g; }
+const card = (p, txt) => { const g = el("g", {}, p); el("rect", {x: -250, y: -34, width: 500, height: 68, rx: 12, fill: "#1b1b3a", opacity: .85}, g);
+  tx(g, {x: 0, y: 12, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#fff", "data-fit": 470}, txt); return g; };
+
+// 1 a peat fire smoulders under a forest in Sumatra; one particle is born in the smoke
+S.peat = (() => { const s = scene("peat", "#2b2d42", "#3d405b"); s.cam = el("g", {}, s.stage);
+  el("rect", {x: -600, y: -500, width: 2400, height: 1000, fill: "#8d99ae"}, s.cam); el("rect", {x: -600, y: 500, width: 2400, height: 130, fill: "#3a2e24"}, s.cam);
+  el("rect", {x: -600, y: 630, width: 2400, height: 600, fill: "#5c4033"}, s.cam);
+  seed = 101; for (let k = 0; k < 40; k++) el("path", {d: `M${-500 + rnd() * 2200} ${520 + rnd() * 100} q8 -6 16 0`, stroke: "#6b4f3a", "stroke-width": 4, fill: "none"}, s.cam);
+  s.trees = []; for (let k = 0; k < 9; k++) { const x = -360 + k * 230, g = el("g", {}, s.cam); el("rect", {x: x - 10, y: 330, width: 20, height: 170, fill: "#5c4033"}, g); el("circle", {cx: x, cy: 300, r: 70, fill: "#40916c"}, g); s.trees.push(g); }
+  s.embers = []; for (let k = 0; k < 26; k++) s.embers.push({e: el("circle", {r: 6 + rnd() * 8, fill: rnd() > .5 ? "#f77f00" : "#e63946"}, s.cam), x: 120 + rnd() * 900, y: 520 + rnd() * 90, ph: rnd() * 6});
+  s.smoke = []; for (let k = 0; k < 30; k++) s.smoke.push({e: el("circle", {r: 20 + rnd() * 30, fill: "#6c757d", filter: "url(#blur)"}, s.cam), x: 150 + rnd() * 850, u: rnd()});
+  s.me = meDust(s.cam); s.loc = card(s.stage, "Peat land · Riau, Sumatra · August 2026");
+  s.run = t => { const f = FR("peat")(t); tf(s.cam, `translate(600 520) scale(${1 + .45 * ease(f)}) translate(-600 ${-520 + 60 * ease(f)})`);
+    s.embers.forEach(m => op(m.e, .5 + .5 * Math.sin(t * 6 + m.ph)) || set(m.e, "cx", m.x) || set(m.e, "cy", m.y));
+    s.smoke.forEach(m => { const k = (m.u + t * .12) % 1; set(m.e, "cx", m.x + Math.sin(k * 6) * 20); set(m.e, "cy", 540 - k * 520); op(m.e, .55 * (1 - k)); });
+    const born = ramp(f, .45, .6); tf(s.me, `translate(600 ${lerp(560, 430, ease((f - .45) / .55))}) scale(${born})`);
+    popAt(s.loc, 600, 820, t, SC.peat.t0 + .3); op(s.loc, on(f, .05, .8, .1)); }; return s; })();
+
+// 2 hot air lifts it high
+S.rise = (() => { const s = scene("rise", "#8d99ae", "#bde0fe"); seed = 103;
+  s.col = []; for (let k = 0; k < 14; k++) s.col.push({e: el("path", {d: "M0 0 q12 -30 0 -60 q-12 -30 0 -60", fill: "none", stroke: "#ffbe0b", "stroke-width": 5, opacity: .6}, s.stage), x: 470 + rnd() * 260, u: rnd()});
+  s.smoke = []; for (let k = 0; k < 24; k++) s.smoke.push({e: el("circle", {r: 24 + rnd() * 26, fill: "#6c757d", filter: "url(#blur)"}, s.stage), x: 460 + rnd() * 280, u: rnd()});
+  el("rect", {x: -600, y: 860, width: 2400, height: 300, fill: "#3a2e24"}, s.stage);
+  s.me = meDust(s.stage); s.lab = tx(s.stage, {x: 860, y: 300, "font-size": 34, "font-weight": 700, fill: INK}, "hot air rises");
+  s.run = t => { const f = FR("rise")(t);
+    s.col.forEach(m => { const k = (m.u + t * .45) % 1; tf(m.e, `translate(${m.x} ${900 - k * 900})`); op(m.e, .6 * Math.sin(k * Math.PI)); });
+    s.smoke.forEach(m => { const k = (m.u + t * .25) % 1; set(m.e, "cx", m.x + Math.sin(k * 5) * 30); set(m.e, "cy", 880 - k * 900); op(m.e, .5); });
+    tf(s.me, `translate(${600 + Math.sin(t * 2) * 20} ${lerp(800, 120, ease(f))})`); op(s.lab, ramp(f, .2, .35)); }; return s; })();
+
+// 3 the real map: south-west winds push it across the Strait of Malacca to Singapore
+S.drift = (() => { const s = scene("drift", "#023e8a", "#0077b6"); s.cam = el("g", {}, s.stage); s.map = regionMap(s.cam);
+  const F = GEO.fires[0], SG = GEO.sg; s.fireE = emo(s.cam, F[0], F[1], 54, "🔥");
+  s.arr = [[F[0] - 210, F[1] + 200], [F[0] - 40, F[1] + 260], [F[0] + 160, F[1] + 290]].map(([x, y]) => { const g = arrowG(s.cam, "#ffd166"); g.x = x; g.y = y; return g; });
+  s.plume = []; seed = 105; for (let k = 0; k < 18; k++) s.plume.push({e: el("circle", {r: 30 + rnd() * 40, fill: "#8d8478", filter: "url(#blur)"}, s.cam), u: rnd(), v: rnd()});
+  s.me = meDust(s.cam, .8); s.lab = card(s.stage, "South-west winds · June to September");
+  s.run = t => { const f = FR("drift")(t), q = ease((f - .1) / .8);
+    s.arr.forEach((g, i) => { const k = (t * .5 + i * .3) % 1; tf(g, `translate(${g.x + k * 60} ${g.y - k * 60}) rotate(-45) scale(.9)`); op(g, ramp(f, .05, .15)); });
+    s.plume.forEach(m => { const k = Math.min(q, m.u); set(m.e, "cx", lerp(F[0], SG[0], k) + (m.v - .5) * 80); set(m.e, "cy", lerp(F[1], SG[1], k) + (m.v - .5) * 60); op(m.e, .55 * ramp(q, m.u - .1, m.u)); });
+    tf(s.me, `translate(${lerp(F[0], SG[0], q)} ${lerp(F[1], SG[1], q) + Math.sin(t * 3) * 6})`);
+    tf(s.cam, `translate(600 450) scale(${1.25 + .2 * ease(f)}) translate(${-lerp(F[0], SG[0], .2 + .6 * q)} ${-lerp(F[1], SG[1], .2 + .6 * q)})`);
+    popAt(s.lab, 600, 820, t, SC.drift.t0 + .3); }; return s; })();
+
+// 4 it arrives over Singapore; the sky dims
+S.arrive = (() => { const s = scene("arrive", "#8ecae6", "#219ebc");
+  s.sky = el("rect", {x: -600, y: -500, width: 2400, height: 1400, fill: "#8ecae6"}, s.stage); skyline(s.stage, 110, 900, "#264653");
+  s.haze = el("rect", {x: -600, y: -500, width: 2400, height: 1400, fill: "#a89f91", opacity: 0}, s.stage); s.me = meDust(s.stage);
+  s.loc = card(s.stage, "Singapore · September 2026");
+  s.run = t => { const f = FR("arrive")(t); set(s.sky, "fill", mix("#8ecae6", "#9a9184", ease(f))); op(s.haze, .5 * ease(f));
+    tf(s.me, `translate(${lerp(-60, 640, ease(f))} ${lerp(160, 560, ease(f))})`); popAt(s.loc, 600, 80, t, SC.arrive.t0 + .3); }; return s; })();
+
+// 5 a child breathes in: nose hairs catch the big dust; the tiny particle slips past, down the windpipe, deep into the lungs
+S.breath = (() => { const s = scene("breath", "#ffc8dd", "#ffafcc");
+  el("path", {d: "M300 900 Q300 560 420 510 L480 480 Q520 460 520 420 L520 330 Q440 300 440 200 Q440 70 560 60 Q680 50 690 190 Q700 260 660 310 L650 420 Q650 460 700 480 L780 510 Q900 560 900 900 Z", fill: "#ffe8d6", stroke: INK, "stroke-width": 7}, s.stage);
+  el("path", {d: "M440 190 Q400 220 440 236", fill: "#ffe8d6", stroke: INK, "stroke-width": 7}, s.stage);
+  for (let k = 0; k < 5; k++) el("line", {x1: 432 + k * 6, y1: 214, x2: 426 + k * 6, y2: 232, stroke: "#6d4c41", "stroke-width": 3}, s.stage);
+  el("path", {d: "M470 226 Q560 246 580 330 L585 600", fill: "none", stroke: "#ef476f", "stroke-width": 26, "stroke-linecap": "round"}, s.stage);
+  el("path", {d: "M585 600 Q560 640 520 660 M585 600 Q610 640 650 660", fill: "none", stroke: "#ef476f", "stroke-width": 18, "stroke-linecap": "round"}, s.stage);
+  s.lungs = el("g", {}, s.stage); el("path", {d: "M510 630 Q420 640 410 760 Q400 880 480 890 Q560 890 565 780 L565 660 Z", fill: "#ff8fab", stroke: INK, "stroke-width": 6}, s.lungs);
+  el("path", {d: "M660 630 Q750 640 760 760 Q770 880 690 890 Q610 890 605 780 L605 660 Z", fill: "#ff8fab", stroke: INK, "stroke-width": 6}, s.lungs);
+  seed = 107; s.air = []; for (let k = 0; k < 14; k++) s.air.push({e: el("circle", {r: 6, fill: "#4cc9f0", opacity: .7}, s.stage), u: rnd()});
+  s.big = [0, 1, 2].map(k => el("circle", {r: 14, fill: "#8d5524", stroke: INK, "stroke-width": 2}, s.stage));
+  s.me = meDust(s.stage, .55); s.l1 = tx(s.stage, {x: 250, y: 160, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, "big dust: caught");
+  const P = k => { if (k < .25) { const q = k / .25; return [lerp(300, 450, q), lerp(205, 226, q)]; } if (k < .7) { const q = (k - .25) / .45; return [lerp(470, 585, q), lerp(230, 600, q)]; } const q = (k - .7) / .3; return [lerp(585, 520, q), lerp(600, 760, q)]; };
+  s.run = t => { const f = FR("breath")(t), inh = .5 - .5 * Math.cos(f * Math.PI * 2 * 1.5);
+    tf(s.lungs, `translate(585 760) scale(${1 + .06 * inh}) translate(-585 -760)`);
+    s.air.forEach(a => { const k = (a.u + t * .35) % 1; const [x, y] = P(k); set(a.e, "cx", x); set(a.e, "cy", y); });
+    s.big.forEach((b, k) => { const q = ease((f - k * .1) / .3); set(b, "cx", lerp(300, 428 + k * 6, q)); set(b, "cy", lerp(190 + k * 10, 222, q)); });
+    op(s.l1, ramp(f, .25, .35)); const [x, y] = P(ease((f - .2) / .75)); tf(s.me, `translate(${x} ${y})`); }; return s; })();
+
+// recap board: Heart names each step as it lights up
+S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5");
+  const ST = [["🔥", "peat fire in Sumatra", "peat"], ["⬆️", "hot air lifts it", "hot"], ["🌬️", "south-west winds", "winds"], ["🏙️", "Singapore", "singapore"], ["👃", "breathed in", "breathed"]];
+  s.cards = ST.map(([e, lab, w], i) => { const g = el("g", {}, s.stage), x = 120 + i * 240; el("rect", {x: -105, y: -120, width: 210, height: 240, rx: 28, fill: "#fff", stroke: INK, "stroke-width": 6}, g);
+    emo(g, 0, -20, 90, e); tx(g, {x: 0, y: 88, "text-anchor": "middle", "font-size": 24, "font-weight": 700, fill: INK, "data-fit": 190}, lab); tx(g, {x: -86, y: -86, "font-size": 26, "font-weight": 700, fill: "#7209b7"}, String(i + 1)); g.x = x; g.w = w; return g; });
+  ST.slice(0, 4).forEach((_, i) => el("path", {d: "M-12 -12 L10 0 L-12 12 Z", fill: INK, transform: `translate(${120 + i * 240 + 120} 450)`}, s.stage));
+  s.run = t => { s.cards.forEach((g, i) => { const tw = cue("recap", g.w, (i + .5) / 5); const now = on(t, tw - .1, tw + 1.6, .2);
+    tf(g, `translate(${g.x} 450) scale(${1 + .12 * now})`); op(g, t >= tw - .1 ? 1 : .3); }); }; return s; })();
+
+// the turn, close up: raindrops catch the particles and carry them down
+S.rainfall = (() => { const s = scene("rainfall", "#6c757d", "#adb5bd"); seed = 109;
+  s.parts = []; for (let k = 0; k < 40; k++) s.parts.push({e: el("circle", {r: 6, fill: "#5c4d3c"}, s.stage), x: rnd() * 1200, y: 60 + rnd() * 560, caught: rnd()});
+  s.drops = []; for (let k = 0; k < 18; k++) s.drops.push({e: el("path", {d: "M0 -26 Q15 0 0 14 Q-15 0 0 -26 Z", fill: "#90e0ef", stroke: "#0077b6", "stroke-width": 3}, s.stage), x: 30 + rnd() * 1140, u: rnd()});
+  el("rect", {x: -600, y: 800, width: 2400, height: 300, fill: "#52b788"}, s.stage); s.pud = el("ellipse", {cx: 600, cy: 830, rx: 0, ry: 0, fill: "#48cae4", opacity: .8}, s.stage);
+  s.lab = card(s.stage, "October 2026 · the rain returns");
+  s.run = t => { const f = FR("rainfall")(t);
+    s.drops.forEach(d => { const k = (d.u + t * .7) % 1; tf(d.e, `translate(${d.x} ${-40 + k * 860})`); op(d.e, ramp(f, 0, .1)); });
+    s.parts.forEach(p => { const fall = ramp(f, p.caught * .7, p.caught * .7 + .2); set(p.e, "cx", p.x); set(p.e, "cy", lerp(p.y, 815, fall)); op(p.e, 1 - .7 * ramp(f, .9, 1)); });
+    set(s.pud, "rx", 500 * ease(f)); set(s.pud, "ry", 26 * ease(f)); popAt(s.lab, 600, 70, t, SC.rainfall.t0 + .3); }; return s; })();
+
+// resolution: back to the opening skyline, now clear and blue
+S.clear = (() => { const s = scene("clear", "#8ecae6", "#219ebc");
+  el("rect", {x: 50, y: 40, width: 1100, height: 640, rx: 36, fill: "#8ecae6", stroke: INK, "stroke-width": 8}, s.stage);
+  s.sun = emo(s.stage, 960, 170, 130, "☀️"); skyline(s.stage, 110, 680, "#264653");
+  s.run = t => { tf(s.sun, `translate(960 170) scale(${1 + .03 * Math.sin(t * 1.5)}) translate(-960 -170)`); }; return s; })();

@@ -134,7 +134,12 @@ src = {"pop": "sine=f=880:d=0.12,volume=0.5,afade=t=out:st=0.02:d=0.1,asetrate=4
        "buzz": "aevalsrc=0.12*sin(2*PI*100*t)+0.07*sin(2*PI*200*t)+0.04*sin(2*PI*300*t):s=44100:d=2.6,afade=t=in:d=0.2,afade=t=out:st=2:d=0.6",
        "zap": "aevalsrc=0.25*sin(2*PI*(2400-1800*t/0.4)*t)*exp(-5*t):s=44100:d=0.4",
        "click": "aevalsrc=0.6*sin(2*PI*2200*t)*exp(-180*t):s=44100:d=0.06",
-       "chime": "aevalsrc=0.16*sin(2*PI*1046*t)*exp(-2*t)+0.12*sin(2*PI*1568*t)*exp(-2.4*t):s=44100:d=2"}
+       "chime": "aevalsrc=0.16*sin(2*PI*1046*t)*exp(-2*t)+0.12*sin(2*PI*1568*t)*exp(-2.4*t):s=44100:d=2",
+       "cough": "anoisesrc=d=0.4:c=pink:a=0.55,bandpass=f=650:w=500,afade=t=in:d=0.02,afade=t=out:st=0.08:d=0.3",
+       "crackle": "anoisesrc=d=2.6:c=white:a=0.12,highpass=f=2500,tremolo=f=23:d=1,afade=t=in:d=0.3,afade=t=out:st=2:d=0.6",
+       "breath": "anoisesrc=d=1.8:c=pink:a=0.28,bandpass=f=900:w=800,afade=t=in:d=0.8,afade=t=out:st=0.9:d=0.9",
+       "rain": "anoisesrc=d=5:c=white:a=0.16,highpass=f=900,lowpass=f=7000,afade=t=in:d=0.6,afade=t=out:st=4:d=1",
+       "wind": "anoisesrc=d=6:c=pink:a=0.32,bandpass=f=420:w=300,tremolo=f=0.6:d=0.5,afade=t=in:d=0.8,afade=t=out:st=5:d=1"}
 inputs, fl = [], []
 for i, (kd, tt) in enumerate(ev):
     inputs += ["-f", "lavfi", "-i", src[kd]]; fl.append(f"[{i}:a]aformat=sample_rates=44100:channel_layouts=mono,adelay={int(max(0, tt) * 1000)}:all=1[e{i}]")
