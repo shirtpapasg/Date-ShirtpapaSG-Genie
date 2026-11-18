@@ -1,0 +1,187 @@
+{
+ "episode": "SAU EP08",
+ "title": "What did the crocodile eat?",
+ "tag": "🌏 TheOneApp, Explored · EP 8 · Food Chains",
+ "intro": {
+  "goals": [
+   [
+    "🔗",
+    "What a food chain is",
+    "first"
+   ],
+   [
+    "🌿",
+    "Producers, consumers, predators and prey",
+    "second"
+   ],
+   [
+    "☀️",
+    "Where every food chain begins",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "The mosquitoes that",
+  "fight dengue 🦟"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🔗",
+    "A food chain shows who eats whom",
+    "whom",
+    0.12,
+    "#2a9d8f"
+   ],
+   [
+    "➡️",
+    "Arrows show the way energy flows",
+    "arrows",
+    0.32,
+    "#f77f00"
+   ],
+   [
+    "☀️",
+    "Almost every food chain begins with the Sun",
+    "begins",
+    0.52,
+    "#ffbe0b"
+   ]
+  ],
+  "tease": "🦟 Next time: the mosquitoes that fight dengue!",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "producers",
+   "PRODUCERS",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "consumers",
+   "CONSUMERS",
+   "#f77f00"
+  ],
+  [
+   "textbook",
+   "predator",
+   "PREDATOR",
+   "#e63946"
+  ],
+  [
+   "textbook",
+   "prey",
+   "PREY",
+   "#3a86ff"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "crocDawn",
+   "silent": 5.5,
+   "sfx": []
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "This is a saltwater crocodile, in Sungei Buloh Wetland Reserve. Nothing here hunts it. It is an apex predator. But all its energy came from somewhere. Let's rewind!"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why does your face turn red after running? Your working muscles make a lot of heat. So your body sends more blood close to your skin, to let the heat out. That's why your face turns red."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what a food chain is. Second, about producers, consumers, predators and prey. And third, where every food chain begins. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's a Singapore fact. Saltwater crocodiles are the largest reptiles in the world, and a few live wild in Singapore's mangroves. At Sungei Buloh, visitors stay on the paths and keep a safe distance.",
+   "hold": 1.0
+  },
+  {
+   "id": "r1",
+   "scene": "povCroc",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "r2",
+   "scene": "povMudskipper",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "r3",
+   "scene": "povCrab",
+   "silent": 5.5,
+   "sfx": []
+  },
+  {
+   "id": "r4",
+   "scene": "povLeaf",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "r5",
+   "scene": "povSunlight",
+   "silent": 3.5,
+   "sfx": []
+  },
+  {
+   "id": "r6",
+   "scene": "chainForward",
+   "silent": 5.5,
+   "sfx": []
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that rewind? The crocodile ate a mudskipper. The mudskipper ate a crab. The crab ate a fallen mangrove leaf. And the leaf made its food from sunlight.",
+   "hold": 1.0
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Six, you learn about food chains. A food chain shows who eats whom. Green plants are producers: they make their own food using light energy. Animals are consumers: they eat plants or other animals. An animal that hunts is a predator, and the animal it hunts is its prey. The arrows in a food chain show the way energy flows: from the food, to the eater.",
+   "hold": 1.0
+  },
+  {
+   "id": "bigidea",
+   "scene": "bigidea",
+   "text": "So here's the big idea. Almost every food chain begins with the Sun. Even a crocodile runs on sunlight!"
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Make a food chain from your school garden, or from your dinner. Start with the Sun, and draw the arrows the way energy flows."
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! What would happen to the crocodile if all the mangrove crabs disappeared? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. A food chain shows who eats whom. The arrows show the way energy flows. And almost every food chain begins with the Sun. Next time: the mosquitoes that fight dengue!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

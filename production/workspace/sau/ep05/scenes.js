@@ -144,10 +144,10 @@ function pose5(K, x, y, sc, q = {}) { const f = q.flip ? -1 : 1;
 // a running pose: ph = the stride angle (radians), A = how far the legs swing (degrees)
 const run5 = (ph, A = 42, extra = {}) => Object.assign({legN: A * Math.sin(ph), legF: -A * Math.sin(ph), armN: -A * 1.05 * Math.sin(ph) - 12, armF: A * 1.05 * Math.sin(ph) - 12, lean: 9, bob: -16 * Math.abs(Math.cos(ph)), head: -4}, extra);
 // a jump pose: k = 0..1 through the jump, h = its height
-const jump5 = (k, h = 170, extra = {}) => { const up = Math.sin(Math.PI * clamp(k)); return Object.assign({bob: -h * up, legN: -34 * up, legF: 30 * up, armN: -168 * Math.min(1, up * 1.6), armF: -150 * Math.min(1, up * 1.6), lean: -4 * up, head: -12 * up, laugh: up > .15 ? 1 : 0}, extra); };
+const jump5 = (k, h = 170, extra = {}) => { const up = Math.sin(Math.PI * clamp(k)); return Object.assign({bob: -h * up, legN: -34 * up, legF: 30 * up, armN: -118 * Math.min(1, up * 1.6), armF: -205 * Math.min(1, up * 1.6), lean: -4 * up, head: -12 * up, laugh: up > .15 ? 1 : 0}, extra); };
 
 // ---- the school playground (a Singapore primary school; no real school's name). Ground for the back row is y = 800.
-const PG5 = {BAR: 548, BAR_X: [520, 900], TOWER: [1090, 1210], PLAT: 566, CHUTE: [[1206, 560], [1300, 600], [1380, 730], [1480, 776]], DOOR: [148, 640]};
+const PG5 = {BAR: 470, BAR_X: [520, 900], TOWER: [1090, 1210], PLAT: 566, CHUTE: [[1206, 560], [1300, 600], [1380, 730], [1480, 776]], DOOR: [148, 640]};
 function school5(p) { const g = el("g", {}, p);
   el("rect", {x: -1200, y: -900, width: 4400, height: 1560, fill: school5.sky || (school5.sky = grad5("linearGradient", {x1: 0, y1: 0, x2: 0, y2: 1}, [[0, "#6ec6ff"], [1, "#e3f6ff"]]))}, g);
   [[-60, 120, 26], [1270, 60, 30], [640, -20, 22]].forEach(([x, y, r]) => { const c = el("g", {fill: "#fff", opacity: .9}, g); [[0, 0, 2.2], [r * 1.9, -r * .7, 2.8], [r * 4, 0, 2.3], [r * 2, r * .5, 3.2]].forEach(([dx, dy, k]) => el("ellipse", {cx: x + dx, cy: y + dy, rx: r * k * .8, ry: r * k * .42}, c)); });
@@ -174,7 +174,7 @@ function school5(p) { const g = el("g", {}, p);
   el("path", A5({d: "M1230 520 H1900 L1880 496 H1250 Z", fill: "#40916c"}), g); [1270, 1500, 1730].forEach(x => el("rect", A5({x: x - 7, y: 520, width: 14, height: 122, fill: "#f8f9fa", "stroke-width": 4}), g));
   // the rubber play floor
   el("path", {d: "M250 720 H1660 Q1760 720 1790 820 L1840 1040 H130 L200 800 Q215 720 250 720 Z", fill: "#ef8354", stroke: INK, "stroke-width": 5}, g);
-  el("path", {d: "M640 800 Q820 760 1020 810 Q1140 880 1010 960 Q780 1010 610 950 Q520 870 640 800 Z", fill: "#4cc9f0", opacity: .8}, g); el("circle", {cx: 1420, cy: 900, r: 70, fill: "#ffd166", opacity: .8}, g);
+  el("path", {d: "M640 800 Q820 760 1020 810 Q1140 880 1010 960 Q780 1010 610 950 Q520 870 640 800 Z", fill: "#2a9d8f", opacity: .55}, g); el("circle", {cx: 1420, cy: 900, r: 70, fill: "#ffd166", opacity: .8}, g);
   // the monkey bars
   const mb = el("g", {}, g), [bx0, bx1] = PG5.BAR_X, by = PG5.BAR;
   [bx0, bx1].forEach(x => { el("rect", A5({x: x - 9, y: by, width: 18, height: 800 - by, rx: 6, fill: "#ffbe0b", "stroke-width": 5}), mb); for (let k = 1; k < 5; k++) el("line", {x1: x - 26, y1: by + k * 50, x2: x + 26, y2: by + k * 50, stroke: INK, "stroke-width": 7, "stroke-linecap": "round"}, mb); });
@@ -198,7 +198,7 @@ function chute5(k) { const C = PG5.CHUTE, B = (i, u) => (1 - u) ** 3 * C[0][i] +
 // the friends at play: red on the monkey bars, yellow on the slide, purple cheering. tau = seconds; they loop.
 function friends5(p) { const F = {r: kid5(p, {shirt: "#e63946", skin: "#c68642", hair: "#1b1b1b", style: "short"}), y: kid5(p, {shirt: "#ffbe0b", skin: "#f1c27d", hair: "#1b1b1b", style: "pony"}), g: kid5(p, {shirt: "#06d6a0", skin: "#8d5524", hair: "#1b1b1b", style: "short"}), v: kid5(p, {shirt: "#9d4edd", skin: "#e0ac69", hair: "#5a3825", style: "bob"})}; return F; }
 // the kid on the monkey bars: hand over hand from x0 to x1
-function hang5(K, x, tau, sc = .5) { const sw = Math.sin(tau * 5.2); pose5(K, x, PG5.BAR + 8 + 430 * sc, sc, {armN: -176 + 14 * sw, armF: -184 - 14 * sw, legN: 14 * sw - 8, legF: -12 * sw + 6, lean: 7 * sw, laugh: 1, shut: false, shadow: 0}); }
+function hang5(K, x, tau, sc = .5) { const sw = Math.sin(tau * 5.2); pose5(K, x, PG5.BAR + 8 + 430 * sc, sc, {armN: -197 + 12 * sw, armF: -163 - 12 * sw, legN: 14 * sw - 8, legF: -12 * sw + 6, lean: 7 * sw, laugh: 1, shut: false, shadow: 0}); }
 
 /* =========================================== PART 2: THE NARRATED SCENES =========================================== */
 
@@ -417,7 +417,7 @@ S.security = (() => { const s = scene("security", "#023e8a", "#0077b6"), st = s.
     tile(995, "#e9f5ff", "vegetable farms", g => { el("rect", A5({x: -130, y: -220, width: 260, height: 390, rx: 8, fill: "#f8f9fa"}), g);
       for (let f = 0; f < 5; f++) { const y = -150 + f * 74; el("rect", {x: -126, y: y - 60, width: 252, height: 10, fill: "#f72585", opacity: .75}, g); el("rect", A5({x: -126, y, width: 252, height: 12, fill: "#adb5bd", "stroke-width": 4}), g);
         for (let c = 0; c < 6; c++) el("path", A5({d: `M${-104 + c * 42} ${y} q-18 -22 0 -40 q18 18 0 40 Z M${-104 + c * 42} ${y} q-22 -8 -20 -26 q20 2 20 26 Z M${-104 + c * 42} ${y} q22 -8 20 -26 q-20 2 -20 26 Z`, fill: f % 2 ? "#74c69d" : "#52b788", "stroke-width": 3.5}), g); } })];
-  s.stack = lab5(s.grow, 995, 172, "stacked in a building", 26);
+  s.stack = lab5(s.grow, 0, 0, "stacked in a building", 26);
   // 3. store food away
   s.store = el("g", {}, st);
   el("path", A5({d: "M150 330 L600 190 L1050 330 V770 H150 Z", fill: "#dee2e6"}), s.store); el("rect", A5({x: 215, y: 390, width: 770, height: 380, fill: "#495057"}), s.store);

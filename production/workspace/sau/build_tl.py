@@ -17,7 +17,7 @@ EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH",
          "north-east": "N AO R TH IY S T", "senoko": "S EH N OW K OW", "tengeh": "T EH NG EH", "liquefied": "L IH K W AH F AY D",
          "sixty-five": "S IH K S T IY F AY V", "ninety-one": "N AY N T IY W AH N", "ninety-two": "N AY N T IY T UW",
          "ninety-three": "N AY N T IY TH R IY", "twenty-eight": "T W EH N T IY EY T", "thirty-five": "TH ER T IY F AY V",
-         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW", "natuna": "N AH T UW N AH", "hdb": "EY CH D IY B IY", "vapour": "V EY P ER", "kinetic": "K IH N EH T IH K", "neighbours": "N EY B ER Z", "uranium": "Y UH R EY N IY AH M", "condenses": "K AH N D EH N S IH Z", "macritchie": "M AH K R IH CH IY", "ten-cent": "T EH N S EH N T", "pulau": "P UW L AW", "semakau": "S EH M AH K AW", "tuas": "T UW AH S", "waste-to-energy": "W EY S T T UW EH N ER JH IY"}
+         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW", "natuna": "N AH T UW N AH", "hdb": "EY CH D IY B IY", "vapour": "V EY P ER", "kinetic": "K IH N EH T IH K", "neighbours": "N EY B ER Z", "uranium": "Y UH R EY N IY AH M", "condenses": "K AH N D EH N S IH Z", "macritchie": "M AH K R IH CH IY", "ten-cent": "T EH N S EH N T", "pulau": "P UW L AW", "semakau": "S EH M AH K AW", "tuas": "T UW AH S", "waste-to-energy": "W EY S T T UW EH N ER JH IY", "ultra-clean": "AH L T R AH K L IY N", "wholegrain": "HH OW L G R EY N", "finger-like": "F IH NG G ER L AY K", "buloh": "B UW L OW", "mangroves": "M AE NG G R OW V Z", "mudskipper": "M AH D S K IH P ER", "sungei": "S UW NG EY"}
 dur = lambda f: float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
 
 def align(s):
@@ -74,7 +74,7 @@ subprocess.run(["ffmpeg", "-loglevel", "error", "-y"] + inputs + ["-filter_compl
 
 # captions say acronyms and numbers the way pupils read them ("P S I" -> "PSI", "two point five" -> "2.5")
 MERGE = [("nineteen sixty-five", "1965"), ("nineteen ninety-one", "1991"), ("nineteen ninety-two", "1992"), ("twenty thirteen", "2013"), ("twenty twenty-eight", "2028"), ("twenty thirty-five", "2035"), ("twenty twenty-six", "2026"), ("twenty twenty-three", "2023"), ("two point five", "2.5"), ("my E N V", "myENV"),
-         ("P S I", "PSI"), ("P M", "PM"), ("N ninety-five", "N95"), ("ten-cent", "10-cent"), ("ten cents", "10 cents")]
+         ("P S I", "PSI"), ("P M", "PM"), ("N ninety-five", "N95"), ("ten-cent", "10-cent"), ("ten cents", "10 cents"), ("new water", "NEWater")]
 def capwords(ws):
     out, i = [], 0
     while i < len(ws):

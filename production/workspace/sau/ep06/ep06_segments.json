@@ -1,0 +1,193 @@
+{
+ "episode": "SAU EP06",
+ "title": "Where does your food go?",
+ "tag": "🌏 TheOneApp, Explored · EP 6 · Digestion",
+ "intro": {
+  "goals": [
+   [
+    "🦷",
+    "How your body breaks food down",
+    "first"
+   ],
+   [
+    "🩸",
+    "How digested food gets into your blood",
+    "second"
+   ],
+   [
+    "🚽",
+    "Where the leftovers go",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "How does oxygen get",
+  "to your muscles? 🫁"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🦷",
+    "Food is broken down into simpler substances",
+    "broken",
+    0.12,
+    "#f77f00"
+   ],
+   [
+    "🩸",
+    "Small intestine: digested food into the blood",
+    "small",
+    0.3,
+    "#e63946"
+   ],
+   [
+    "💧",
+    "Large intestine: water taken back",
+    "large",
+    0.5,
+    "#3a86ff"
+   ]
+  ],
+  "tease": "🫁 Next time: how does oxygen get to your muscles?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "digestive",
+   "DIGESTIVE SYSTEM",
+   "#f77f00"
+  ],
+  [
+   "textbook",
+   "small",
+   "SMALL INTESTINE",
+   "#e63946"
+  ],
+  [
+   "textbook",
+   "large",
+   "LARGE INTESTINE",
+   "#3a86ff"
+  ],
+  [
+   "fibre",
+   "fibre",
+   "FIBRE",
+   "#2a9d8f"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "canteenBite",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Chomp! Last time, your food's energy helped you run and jump. But what happens to the food inside you? And the bits your body can't use: where do they go?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why does Singapore buy food from many different countries, instead of just one? If one country has a flood, a disease, or stops selling, we can still buy from the others. Don't put all your eggs in one basket!"
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how your body breaks food down. Second, how digested food gets into your blood. And third, where the leftovers go. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's a Singapore fact. Every flush goes on a journey too. Used water flows through deep tunnels to water reclamation plants, where it is cleaned. Some of it becomes ultra-clean new water, which can meet up to forty per cent of Singapore's water needs.",
+   "hold": 1.0
+  },
+  {
+   "id": "d1",
+   "scene": "povMouth",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "d2",
+   "scene": "povGullet",
+   "silent": 4.0,
+   "sfx": []
+  },
+  {
+   "id": "d3",
+   "scene": "povStomach",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "d4",
+   "scene": "povSmall",
+   "silent": 7.0,
+   "sfx": []
+  },
+  {
+   "id": "d5",
+   "scene": "povLarge",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "d6",
+   "scene": "povExit",
+   "silent": 3.5,
+   "sfx": []
+  },
+  {
+   "id": "d7",
+   "scene": "toilet",
+   "silent": 4.5,
+   "sfx": []
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that journey? You were a bit of fibre from a green vegetable. Teeth chewed you, the gullet squeezed you down, and the stomach churned you. In the small intestine, your rice and egg friends were digested and passed into the blood. But fibre can't be digested, so you moved on. The large intestine took back water, and then, plop!",
+   "hold": 1.0
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Four, you learn about the digestive system: the mouth, gullet, stomach, small intestine and large intestine. Digestive juices break food down into simpler substances. In the small intestine, digested food passes into the blood, which carries it around the body. In the large intestine, water is taken back. Food that cannot be digested leaves the body through the anus.",
+   "hold": 1.0
+  },
+  {
+   "id": "fibre",
+   "scene": "fibre",
+   "text": "Fibre can't be digested, but it's still important. It helps food move smoothly through your intestines. Vegetables, fruit and wholegrain foods are full of fibre."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Chew a piece of plain bread for one whole minute without swallowing. Does it start to taste sweet? That's your saliva breaking starch into sugar!"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! In an adult, the small intestine is about six metres long. That's longer than a car! Why do you think it is so long? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Your digestive system breaks food down into simpler substances. The small intestine passes digested food into your blood. The large intestine takes back water. And what's left goes, plop! Next time: how does oxygen get to your muscles?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

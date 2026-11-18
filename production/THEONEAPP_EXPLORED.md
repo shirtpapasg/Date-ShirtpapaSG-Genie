@@ -104,6 +104,7 @@ Every TheOneApp, Explored episode is planned against this guide before its scrip
 * **Cinema mode.** During picture-only shots, the label and the key-word shelf step aside.
 * **First person, not always third person (the teacher, 18 Nov 2026).** In the hero sequence the camera IS the particle: we fly with it at its size, and things rush past and loom up (the teacher's example was the parasite's-eye shots in AI-animated dramas). For the gas: squeezed between huge rock grains, shooting up the well pipe towards a circle of light, tumbling through the cleaning tank, diving into the ring of blue flames until the screen flashes, riding the electricity down the cable, ending top-down as the lamp clicks on. Open with one outside shot that dives into the character, and keep a few outside shots where they explain what you cannot see from inside (a real map, a chimney). Heart's recap then speaks to the viewer as the particle ("You were a tiny bit of natural gas…"). The kit: the first-person section at the end of `common.js` (`VP`, `vignette`, `field`/`flyField`, `tunnelG`/`runTunnel`, `povCard`/`showCard`); EP02's shots are in `ep02/pov.js` and `ep02b/pov.js`.
 * **A silent cold open (the teacher, 18 Nov 2026).** Before Heart says a word, open on a few seconds of an everyday moment a pupil knows, with only sound: for EP02, a kid comes into a dark HDB bedroom and flips the light switch, CLICK, the room lights up; then the introduction starts. EP01 opens on haze building over the city and a cough. Picture first, words second.
+* **Real life, always (the teacher, 18 Nov 2026).** Whatever the topic, link the science to real-life examples Singapore pupils know, so they make the connection: the school canteen, an HDB flat and its void deck, a hawker centre, PE lessons, the playground, the MRT, a school trip to Sungei Buloh, the blue recycling bin. When a scene teaches an idea, show it in a real Singapore moment as well as in a diagram. Whole-episode builds follow `workspace/sau/EPISODE_BRIEF.md`.
 * **A change every 10 to 15 seconds.** A new shot, a switch between first person and outside, a text card, a sound or music shift. For a long narrated segment, add camera moves: `"shots": [["word", zoom, x, y], ...]` eases the camera in on (x, y) of the scene box when Heart says the word (`build_tl.py` warns if the word is never said).
 * **Good sound effects.** `sfx_lib.py` synthesises a layered sound library into `sfx/<name>.wav`; `build_tl.py` uses the file when it exists. Gentle synthesised music beds (`pad_wonder`, `pad_tension`) give a music shift under a picture-only sequence.
 * **Long episodes come in parts.** EP02 became Part 1 (the science: the gas journey and the energy changes; ends on a cliffhanger and a "think about it" answered in Part 2) and Part 2 (the story: 1965 to today, the news, and the future), each about 3 minutes. `CFG.close` (rows and teaser), `CFG.endChip` and the think scene's "Answer in Part 2!" make each part close in its own words.
@@ -165,12 +166,19 @@ New week, new folder `epNN/`:
 
 ## Episodes
 
-| No | Week of | Story | Textbook link | Levels |
+Released every 3 days at 5 pm SGT from 18 Nov 2026 (the teacher: "don't delay too long"), with a Short on most days in between.
+
+| No | Goes public | Story | Textbook link | Levels |
 |---|---|---|---|---|
-| 1 | 23 Nov 2026 | Why did the haze go away? | Respiratory system; how people affect the environment | P5, P6 |
-| 2 | 30 Nov 2026 | How does Singapore keep the lights on? In two parts (18 Nov, the teacher): Part 1 (Thu 3 Dec) the gas journey in first person and the energy changes; Part 2 (Sun 6 Dec) oil in 1965 → natural gas today, Indonesia's gas cut, then first person as sunlight, undersea-cable electricity and a neutron: solar, imports, nuclear. Two Shorts (sunlight Mon 7 Dec, nuclear Tue 8 Dec) | Energy forms and conversion; how people affect the environment | P6 |
-| 3 | 7 Dec 2026 | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; how people affect the environment | P3, P6 |
-| 4 | 14 Dec 2026 | Cooling a city without more air-con (exam special) | Heat; energy | P4, P6 |
+| 1 | public 18 Nov | Why did the haze go away? (first person: a smoke particle) | Respiratory system; people and the environment | P5, P6 |
+| 2 | Part 1 public 18 Nov; Part 2 Sun 22 Nov | How does Singapore keep the lights on? (first person: natural gas; Part 2 sunlight, cable, neutron) | Energy forms and conversion | P6 |
+| 3 | Part 1 Wed 25 Nov; Part 2 Sat 28 Nov | Recycling: 10¢ for your can (first person: a drink can) and where our rubbish goes (a greasy takeaway box, Semakau full by about 2035) | Materials and magnets; people and the environment | P3, P6 |
+| 4 | Tue 1 Dec | Where does all this rain come from? (first person: a water molecule from MacRitchie) | The water cycle | P4 |
+| 5 | Fri 4 Dec | Your food is sunlight?! (first person: light energy, through a leaf, a hen and an egg, to a student) and food security | Photosynthesis; food chains | P5, P6 |
+| 6 | Mon 7 Dec | Where does your food go? (first person: vegetable fibre, mouth to toilet bowl; NEWater) | Digestive system | P4 |
+| 7 | Thu 10 Dec | How does oxygen get to your muscles? (first person: oxygen, nose to muscle; hands over to carbon dioxide, which is breathed out) | Respiratory and circulatory systems | P5 |
+| 8 | Sun 13 Dec | What did the crocodile eat? (a rewind food chain at Sungei Buloh: crocodile, mudskipper, crab, mangrove leaf, the Sun) | Food chains | P6 |
+| 9 | Wed 16 Dec | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; people and the environment | P3, P6 |
 
 EP01's "Think about it" (answered at the start of EP02): *Why does an N95 mask protect you better than a cloth mask during the haze?* Answer: the gaps between the fibres of a cloth mask are much bigger than PM2.5 particles, so many slip through. An N95 mask has a fine filter that traps at least 95 out of every 100 tiny particles, and it fits closely so air doesn't leak in around the edges.
 
