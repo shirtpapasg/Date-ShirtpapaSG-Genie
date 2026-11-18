@@ -40,7 +40,7 @@ cd production/workspace/sau
 PY=/home/user/heart-tts/venv/bin/python
 # a test file with only silent segments, e.g. ep02/povA_segments.json: {"episode":"test","title":"t","tag":"🌏 test","segments":[{"id":"h1","scene":"povRock","silent":4.2,"sfx":[["rumble",0]]}, ...],"outro":1}
 $PY build_tl.py ep02/povA_segments.json ep02/aud ep02/povA            # writes povA_tl.json, povA_voice.wav, povA_sfx.wav
-python3 build_page.py ep02/povA_segments.json ep02/povA_tl.json common.js,ep02/scenes.js,ep02/pov.js ep02/povA_page.html 1920x1080
+python3 build_page.py ep02/povA_segments.json ep02/povA_tl.json common.js,geo_map.js,ep02/scenes.js,ep02/pov.js ep02/povA_page.html 1920x1080
 node stills.js ep02/povA_page.html /tmp/povA/s 1920 1080 1.0 2.5 4.0 ...     # then look at the PNGs (combine with ffmpeg tile to save looks)
 # a clip with sound, one browser only (the machine has 4 CPUs shared with other agents):
 F=$(python3 -c "import json,math;print(math.ceil(json.load(open('ep02/povA_tl.json'))['END']*30))")
