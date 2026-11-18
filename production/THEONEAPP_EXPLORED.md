@@ -197,19 +197,19 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | Video | YouTube | Goes public (SGT) |
 |---|---|---|
 | Trailer | WnUML8oojhM | public since 18 Nov (the teacher asked to go live early) |
-| EP01 | cefk-GzboRU | public since 18 Nov (re-uploaded with the first-person journey) |
+| EP01 | jfRxXhsPOQM | public since 18 Nov (re-uploaded with the first-person journey) |
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
-| EP02 Part 1 | s1l0mru1EGc | public since 18 Nov (re-uploaded with the cold open) |
-| EP02 Part 2 | 44kn8zDoo5c | Sun 22 Nov, 5 pm |
-| EP03 Part 1 | CJcNV69lzxk | Wed 25 Nov, 5 pm |
-| EP03 Part 2 | 6WOvUUOVogE | Sat 28 Nov, 5 pm |
-| EP04 Rain | Y4mV0P_QnmI | Tue 1 Dec, 5 pm |
-| EP05 Food | 7CLMxQbivnc | Fri 4 Dec, 5 pm |
-| EP06 Digestion | JiNYG8Upozg | Mon 7 Dec, 5 pm |
-| EP07 Oxygen | SOaxffBqJBI | Thu 10 Dec, 5 pm |
-| EP08 Food chain | f3KNTUoYfQg | Sun 13 Dec, 5 pm |
-| EP09 Mosquitoes | mUzcEOrz938 | Wed 16 Dec, 5 pm |
+| EP02 Part 1 | xGfdk5-E8gA | public since 18 Nov (re-uploaded with the cold open) |
+| EP02 Part 2 | LaT5UpsL7Bc | Sun 22 Nov, 5 pm |
+| EP03 Part 1 | Fvj-CKYUUtk | Wed 25 Nov, 5 pm |
+| EP03 Part 2 | -6w5H9eDxP4 | Sat 28 Nov, 5 pm |
+| EP04 Rain | ackRNYZrxho | Tue 1 Dec, 5 pm |
+| EP05 Food | Dbo4uYY8ySY | Fri 4 Dec, 5 pm |
+| EP06 Digestion | V_agOM8Wdr8 | Mon 7 Dec, 5 pm |
+| EP07 Oxygen | wTh7LQTkBZI | Thu 10 Dec, 5 pm |
+| EP08 Food chain | EQ0h_Rw2XdU | Sun 13 Dec, 5 pm |
+| EP09 Mosquitoes | bUD4mfPhqc0 | Wed 16 Dec, 5 pm |
 | Shorts EP03 to EP05 | see youtube/sau_uploaded.json | 26, 27, 29, 30 Nov; 2, 3, 5, 6 Dec |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
