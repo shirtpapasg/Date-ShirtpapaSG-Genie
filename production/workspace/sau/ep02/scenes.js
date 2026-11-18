@@ -114,11 +114,37 @@ function platform(p) { const g = el("g", {}, p);
   el("rect", {x: 660, y: -40, width: 16, height: 90, fill: "#6c757d", stroke: INK, "stroke-width": 3}, g); emo(g, 668, -55, 40, "🔥");
   tx(g, {x: 600, y: 30, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, "gas platform"); return g; }
 
-S.seabed = (() => { const s = scene("seabed", "#023047", "#023047"); s.cam = el("g", {}, s.stage); seabedArt(s.cam); s.me = meGas(s.cam);
-  s.title = tx(s.stage, {x: 600, y: 60, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 9}, "Follow one tiny bit of natural gas…");
-  s.run = t => { const f = FR("seabed")(t); const z = 1 + .7 * ease(f);
-    tf(s.cam, `translate(600 610) scale(${z}) translate(-600 -610)`); tf(s.me, `translate(600 ${610 + Math.sin(t * 2) * 4}) scale(${1 + .08 * Math.sin(t * 4)})`);
-    op(s.title, on(t, SC.seabed.t0 + .3, SC.seabed.t1 - .4, .5)); }; return s; })();
+S.seabed = (() => { const s = scene("seabed", "#023047", "#023047"); s.cam = el("g", {}, s.stage); const c = s.cam, D = $("v").querySelector("defs");
+  // outside shot 1: the sea near the Natuna Islands, the rock layers, the gas trapped in rock. It ends by diving INTO the gas: from then on we see through its eyes.
+  const lg = el("linearGradient", {id: "seaG", x1: 0, y1: 0, x2: 0, y2: 1}, D); el("stop", {offset: 0, "stop-color": "#48cae4"}, lg); el("stop", {offset: 1, "stop-color": "#0077b6"}, lg);
+  el("rect", {x: -2500, y: -1800, width: 6200, height: 1910, fill: "#bde0fe"}, c);
+  el("path", {d: "M-120 112 Q-60 52 10 78 Q70 30 150 70 Q200 60 250 112 Z", fill: "#52b788", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, c);
+  tx(c, {x: 65, y: 12, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, "Natuna Islands");
+  el("rect", {x: -2500, y: 110, width: 6200, height: 250, fill: "url(#seaG)"}, c);
+  for (let k = 0; k < 22; k++) el("path", {d: `M${-1400 + k * 190} ${160 + (k % 3) * 62} q25 -14 50 0 t50 0`, fill: "none", stroke: "#fff", "stroke-width": 4, opacity: .4}, c);
+  el("rect", {x: -2500, y: 360, width: 6200, height: 40, fill: "#e9c46a"}, c);
+  el("rect", {x: -2500, y: 400, width: 6200, height: 120, fill: "#6c757d"}, c);
+  for (let k = 0; k < 26; k++) el("path", {d: `M${-1500 + k * 180} ${430 + (k % 2) * 40} h120`, stroke: "#495057", "stroke-width": 5}, c);
+  el("rect", {x: -2500, y: 520, width: 6200, height: 180, fill: "#dda15e"}, c);
+  seed = 91; for (let k = 0; k < 230; k++) { const x = -1500 + rnd() * 4200, y = 538 + rnd() * 146; if (Math.abs(x - 600) < 60 && Math.abs(y - 610) < 50) continue;
+    el("circle", {cx: x, cy: y, r: 9 + rnd() * 6, fill: "#fefae0", opacity: .9}, c); el("circle", {cx: x, cy: y, r: 4, fill: "#4cc9f0"}, c); }
+  el("rect", {x: -2500, y: 700, width: 6200, height: 2400, fill: "#7f5539"}, c);
+  const pf = el("g", {transform: "translate(330 0)"}, c); el("rect", {x: 588, y: 96, width: 24, height: 480, fill: "#495057", stroke: INK, "stroke-width": 3}, pf); platform(pf);
+  tx(c, {x: 330, y: 335, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: "#fff"}, "the sea");
+  tx(c, {x: 560, y: 472, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#fff"}, "rock that seals the gas in");
+  s.gl = tx(c, {x: 590, y: 690, "text-anchor": "middle", "font-size": 28, "font-weight": 700, fill: INK}, "rock with tiny gaps, full of natural gas");
+  el("circle", {cx: 600, cy: 610, r: 34, fill: "#fefae0"}, c); s.me = meGas(c);
+  s.you = el("g", {}, c); el("path", {d: "M-150 -26 H-46 V-44 L0 0 L-46 44 V26 H-150 Z", fill: "#ffe14d", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, s.you);
+  tx(s.you, {x: -98, y: 13, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: INK}, "YOU");
+  s.flood = el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill: "#4cc9f0", opacity: 0}, s.stage);
+  s.title = tx(s.stage, {x: VP[0], y: 52, "text-anchor": "middle", "font-size": 60, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 12}, "You are a tiny bit of natural gas…");
+  s.run = t => { const f = FR("seabed")(t), k = ease((f - .12) / .5), d = Math.pow(clamp((f - .72) / .2), 3);
+    const z = lerp(1, 2.15, k) * (1 + 34 * d), cx = lerp(700, 600, k), cy = lerp(350, 590, k) + 16 * clamp(d * 4);
+    tf(s.cam, `translate(${VP[0]} ${VP[1]}) scale(${z}) translate(${-cx} ${-cy})`);
+    tf(s.me, "translate(600 610)"); op(s.me.firstChild, .45 * (1 - clamp(d * 30)));
+    tf(s.you, `translate(562 610) scale(${.62 * Math.max(0, pop(t, SC.seabed.t0 + .34 * (SC.seabed.t1 - SC.seabed.t0)))})`); op(s.you, 1 - ramp(f, .68, .74));
+    op(s.gl, 1 - ramp(f, .7, .76)); op(s.flood, ramp(f, .86, .93));
+    op(s.title, on(t, SC.seabed.t0 + .2, SC.seabed.t0 + .74 * (SC.seabed.t1 - SC.seabed.t0), .4)); }; return s; })();
 
 S.well = (() => { const s = scene("well", "#023047", "#023047"); s.cam = el("g", {}, s.stage); seabedArt(s.cam); platform(s.cam);
   s.pipe = el("rect", {x: 588, y: 96, width: 24, height: 0, fill: "#495057", stroke: INK, "stroke-width": 3}, s.cam);
@@ -149,14 +175,23 @@ S.clean = (() => { const s = scene("clean", "#e9f5ff", "#cfe8fb");
     const mx = lerp(-20, 1240, ease((f - .1) / .85)); tf(s.me, `translate(${mx} 402)`); }; return s; })();
 
 S.route = (() => { const s = scene("route", "#023e8a", "#0077b6"); s.cam = el("g", {}, s.stage); s.map = regionMap(s.cam);
-  const [a, b, c] = GEO.pipes.na; s.pipe = el("path", {d: pipeD("na"), fill: "none", stroke: INK, "stroke-width": 18, "stroke-linecap": "round"}, s.cam);
-  el("path", {d: pipeD("na"), fill: "none", stroke: "#ffd166", "stroke-width": 9, "stroke-linecap": "round", "stroke-dasharray": "14 12"}, s.cam);
-  gasSources(s.cam).forEach(g => op(g, 1)); s.me = meGas(s.cam);
-  s.km = chip(s.stage, "0 km", "#1b1b3a", {fs: 40, w: 230});
-  s.run = t => { const f = FR("route")(t), q = ease((f - .08) / .82); const B = (k, u) => (1 - u) * (1 - u) * a[k] + 2 * (1 - u) * u * b[k] + u * u * c[k];
-    tf(s.me, `translate(${B(0, q)} ${B(1, q)}) scale(.8)`); s.km.querySelector("text").textContent = Math.round(650 * q) + " km";
-    const z = 1.1 + .35 * ease(f); tf(s.cam, `translate(${lerp(700, 650, f)} ${lerp(360, 420, f)}) scale(${z}) translate(${-B(0, q * .6 + .2)} ${-B(1, q * .6 + .2)})`);
-    popAt(s.km, 600, 820, t, SC.route.t0 + .2); }; return s; })();
+  // outside shot 2, on the real map: the pipe on the seabed from the West Natuna gas fields to Singapore (about 650 km). The map fills the screen.
+  const [a, b, c] = GEO.pipes.na; el("path", {d: pipeD("na"), fill: "none", stroke: INK, "stroke-width": 13, "stroke-linecap": "round"}, s.cam);
+  el("path", {d: pipeD("na"), fill: "none", stroke: "#ffd166", "stroke-width": 7, "stroke-linecap": "round"}, s.cam);
+  s.done = el("path", {fill: "none", stroke: "#4cc9f0", "stroke-width": 7, "stroke-linecap": "round"}, s.cam);
+  op(gasSources(s.cam)[1], 1); s.me = meGas(s.cam);
+  s.km = tx(s.stage, {x: VP[0], y: 96, "text-anchor": "middle", "font-size": 96, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 18}, "0 km");
+  s.card = chip(s.stage, "Along a pipe on the seabed, all the way to Singapore", "#1b1b3a", {fs: 50});
+  s.run = t => { const f = FR("route")(t), q = ease((f - .14) / .68), B = (k, u) => (1 - u) * (1 - u) * a[k] + 2 * (1 - u) * u * b[k] + u * u * c[k];
+    const x = B(0, q), y = B(1, q), m = [lerp(a[0], b[0], q), lerp(a[1], b[1], q)];
+    set(s.done, "d", `M${a[0]} ${a[1]} Q${m[0]} ${m[1]} ${x} ${y}`); op(s.done, q > .002 ? 1 : 0);
+    const z = lerp(1.75, 2.8, ease(f / .8)) * (1 + .9 * Math.pow(clamp((f - .9) / .1), 2)), k = ease((f - .05) / .5), hw = 960 / z, hh = 540 / z;
+    const cx = clamp(lerp(650, x + lerp(30, 130, ease((f - .4) / .4)) * (1 - clamp((f - .9) / .1)), k), hw + 4, 1196 - hw), cy = clamp(lerp(350, y - 6 - 66 * ease((f - .4) / .5), k), hh + 4, 896 - hh);
+    tf(s.cam, `translate(${VP[0]} ${VP[1]}) scale(${z}) translate(${-cx} ${-cy})`);
+    tf(s.me, `translate(${x} ${y}) scale(${1.9 / z})`);
+    const ar = clamp((f - .84) / .13); set(s.map.sgRing, "r", 16 + 46 * ar); op(s.map.sgRing, ar > 0 ? 1 - ar : 0);
+    s.km.textContent = Math.round(650 * q) + " km"; op(s.km, ramp(f, .04, .1));
+    tf(s.card, `translate(${VP[0]} 884) scale(${Math.max(0, pop(t, SC.route.t0 + .3))})`); op(s.card, ramp(t, SC.route.t0 + .3, SC.route.t0 + .5)); }; return s; })();
 
 // The power station, drawn once and used twice: "station" (picture-only, paced by the shot) and "convert" (labelled, paced by Heart's words)
 function makeStation(name, labelled) { const s = scene(name, "#e9f5ff", "#cfe8fb"); const st = s.stage, Y = 470;
@@ -217,22 +252,34 @@ function makeStation(name, labelled) { const s = scene(name, "#e9f5ff", "#cfe8fb
 S.station = makeStation("station", false);
 S.convert = makeStation("convert", true);
 
-S.chimney = (() => { const s = scene("chimney", "#cfe8fb", "#a2d2ff");
-  el("rect", {x: 620, y: 110, width: 90, height: 320, fill: "#adb5bd", stroke: INK, "stroke-width": 6}, s.stage);
-  el("rect", {x: 250, y: 400, width: 560, height: 400, rx: 10, fill: "#e9ecef", stroke: INK, "stroke-width": 7}, s.stage);
-  el("rect", {x: 330, y: 520, width: 170, height: 170, rx: 14, fill: "#1b1b3a", stroke: INK, "stroke-width": 5}, s.stage); s.fl = emo(s.stage, 415, 605, 110, "🔥");
-  tx(s.stage, {x: 530, y: 460, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, "power station");
-  const mol = (atoms) => { const g = el("g", {}, s.stage); atoms.forEach(([x, y, r, col, l]) => { el("circle", {cx: x, cy: y, r, fill: col, stroke: INK, "stroke-width": 3}, g); tx(g, {x, y: y + 7, "text-anchor": "middle", "font-size": r, "font-weight": 700, fill: col === "#fff" ? INK : "#fff"}, l); }); return g; };
-  s.co2 = mol([[-34, 0, 20, "#e63946", "O"], [0, 0, 22, "#212529", "C"], [34, 0, 20, "#e63946", "O"]]); s.h2o = mol([[0, 0, 22, "#e63946", "O"], [-26, 18, 15, "#fff", "H"], [26, 18, 15, "#fff", "H"]]);
-  s.l1 = tx(s.stage, {x: 0, y: 0, "text-anchor": "start", "font-size": 30, "font-weight": 700, fill: INK}, "carbon dioxide"); s.l2 = tx(s.stage, {x: 0, y: 0, "text-anchor": "start", "font-size": 30, "font-weight": 700, fill: INK}, "water vapour");
-  s.me = meGas(s.stage); s.cable = el("path", {d: "M810 700 H1240", fill: "none", stroke: INK, "stroke-width": 12}, s.stage);
-  s.pulse = el("circle", {r: 20, fill: "#ffd166", filter: "url(#blur)"}, s.stage); s.pulse2 = el("circle", {r: 10, fill: "#ffe066"}, s.stage);
-  s.run = t => { const f = FR("chimney")(t), sp = ease((f - .15) / .15), rise = ease((f - .3) / .6);
-    tf(s.me, `translate(415 ${605 - 40 * ease(f / .15)}) scale(${1 - sp})`); op(s.me, 1 - sp);
-    const y1 = lerp(560, 40, rise), y2 = lerp(600, 70, rise), x1 = lerp(415, 660, ease(rise * 2.5)) + (rise > .5 ? (rise - .5) * 120 : 0), x2 = lerp(415, 690, ease(rise * 2.5)) + (rise > .5 ? (rise - .5) * 260 : 0);
-    tf(s.co2, `translate(${x1} ${y1})`); tf(s.h2o, `translate(${x2} ${y2})`); op(s.co2, sp); op(s.h2o, sp);
-    set(s.l1, "x", x1 + 50); set(s.l1, "y", y1 + 10); set(s.l2, "x", x2 + 50); set(s.l2, "y", y2 + 12); op(s.l1, ramp(f, .45, .55)); op(s.l2, ramp(f, .5, .6));
-    const pq = ease((f - .55) / .4); [s.pulse, s.pulse2].forEach(p => { set(p, "cx", lerp(810, 1240, pq)); set(p, "cy", 700); op(p, f > .55 ? 1 : 0); }); }; return s; })();
+S.chimney = (() => { const s = scene("chimney", "#cfe8fb", "#a2d2ff"); s.cam = el("g", {}, s.stage); const c = s.cam;
+  // outside shot 3: the burnt gases (carbon dioxide and water vapour) leave by the chimney; the ENERGY goes on as electricity, along a cable under the ground.
+  el("rect", {x: -2500, y: -2500, width: 6500, height: 3140, fill: "#cfe8fb"}, c);
+  el("g", {transform: "translate(700 642) scale(1.05)", opacity: .8}, c).appendChild(skyline(c, 0, 0, "#a9c9e8"));
+  el("rect", {x: -2500, y: 640, width: 6500, height: 3000, fill: "#9c6644"}, c); el("rect", {x: -2500, y: 626, width: 6500, height: 30, fill: "#52b788", stroke: INK, "stroke-width": 4}, c);
+  el("rect", {x: 330, y: 130, width: 92, height: 280, fill: "#f8f9fa", stroke: INK, "stroke-width": 6}, c);
+  [130, 222, 314].forEach(y => el("rect", {x: 330, y, width: 92, height: 46, fill: "#e63946", stroke: INK, "stroke-width": 6}, c));
+  el("rect", {x: 520, y: 500, width: 210, height: 130, fill: "#dee2e6", stroke: INK, "stroke-width": 7}, c);
+  el("rect", {x: 60, y: 400, width: 470, height: 230, rx: 8, fill: "#f1f3f5", stroke: INK, "stroke-width": 7}, c);
+  for (let k = 0; k < 5; k++) el("rect", {x: 96 + k * 84, y: 520, width: 54, height: 70, rx: 5, fill: "#ffd166", stroke: INK, "stroke-width": 4}, c);
+  tx(c, {x: 295, y: 476, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: INK}, "power station");
+  const cd = "M730 590 H800 V730 H2600"; el("path", {d: cd, fill: "none", stroke: INK, "stroke-width": 22, "stroke-linejoin": "round"}, c);
+  el("path", {d: cd, fill: "none", stroke: "#6c757d", "stroke-width": 12, "stroke-linejoin": "round"}, c);
+  s.cur = el("path", {d: cd, fill: "none", stroke: "#ffe14d", "stroke-width": 10, "stroke-linejoin": "round", "stroke-dasharray": "34 46"}, c);
+  s.el = tx(c, {x: 1180, y: 700, "text-anchor": "middle", "font-size": 44, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 9}, "electricity ⚡");
+  const mol = (p, atoms) => { const g = el("g", {}, p); atoms.forEach(([x, y, r, col, l]) => { el("circle", {cx: x, cy: y, r, fill: col, stroke: INK, "stroke-width": 3}, g); tx(g, {x, y: y + r * .34, "text-anchor": "middle", "font-size": r, "font-weight": 700, fill: col === "#fff" ? INK : "#fff"}, l); }); return g; };
+  const CO2 = [[-34, 0, 20, "#e63946", "O"], [0, 0, 22, "#212529", "C"], [34, 0, 20, "#e63946", "O"]], H2O = [[0, 0, 22, "#e63946", "O"], [-26, 18, 15, "#fff", "H"], [26, 18, 15, "#fff", "H"]];
+  seed = 57; s.m = []; for (let k = 0; k < 8; k++) s.m.push({e: mol(c, k % 3 === 1 ? CO2 : H2O), u: k / 8, w: rnd() - .5, v: rnd()});
+  const leg = el("g", {}, c); tf(mol(leg, CO2), "translate(1010 300) scale(1.25)"); tf(mol(leg, H2O), "translate(1010 392) scale(1.25)");
+  tx(leg, {x: 1100, y: 317, "font-size": 50, "font-weight": 700, fill: INK}, "carbon dioxide"); tx(leg, {x: 1100, y: 412, "font-size": 50, "font-weight": 700, fill: INK}, "water vapour"); s.leg = leg;
+  s.flood = el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill: "#ffe14d", opacity: 0}, s.stage);
+  s.card = chip(s.stage, "The gases leave. The energy travels on as electricity!", "#1b1b3a", {fs: 50});
+  s.run = t => { const f = FR("chimney")(t), tau = t - SC.chimney.t0;
+    s.m.forEach(m => { const p = ((m.u + tau * .16) % 1 + 1) % 1; tf(m.e, `translate(${376 + 1150 * Math.pow(p, 1.25) + m.w * 150 * p} ${118 - 60 * p - 190 * (m.v - .35) * p}) scale(${1 + 1.1 * p})`); op(m.e, clamp(p / .06) * clamp((1 - p) / .15)); });
+    op(s.leg, ramp(f, .1, .2)); set(s.cur, "stroke-dashoffset", -tau * 330); op(s.el, ramp(f, .3, .4));
+    const d = Math.pow(clamp((f - .7) / .22), 2); tf(s.cam, `translate(${VP[0]} ${VP[1]}) scale(${1.1 * (1 + 8 * d)}) translate(${-lerp(810, 1180, clamp(d * 5))} ${-lerp(440, 730, clamp(d * 5))})`);
+    op(s.flood, ramp(f, .86, .93));
+    tf(s.card, `translate(${VP[0]} 884) scale(${Math.max(0, pop(t, SC.chimney.t0 + .2))})`); op(s.card, on(t, SC.chimney.t0 + .2, SC.chimney.t0 + .74 * (SC.chimney.t1 - SC.chimney.t0), .25)); }; return s; })();
 
 S.cables = (() => { const s = scene("cables", "#cfe8fb", "#cfe8fb");
   el("rect", {x: -200, y: 420, width: 1600, height: 500, fill: "#9c6644"}, s.stage); el("rect", {x: -200, y: 400, width: 1600, height: 26, fill: "#52b788"}, s.stage);
@@ -254,21 +301,32 @@ S.cables = (() => { const s = scene("cables", "#cfe8fb", "#cfe8fb");
 
 // Top-down: the camera looks down from the ceiling. The desk lamp clicks on over a pupil's book.
 S.ceiling = (() => { const s = scene("ceiling", "#3d2c1e", "#3d2c1e"); s.cam = el("g", {}, s.stage);
+  // last shot, top-down from the ceiling: the electricity arrives along the lamp's cord, and the desk lamp clicks on over a pupil's book.
+  el("rect", {x: -2000, y: -2000, width: 5200, height: 4900, fill: "#3d2c1e"}, s.cam);
   el("rect", {x: 60, y: 30, width: 1080, height: 840, fill: "#d4a373", stroke: "#6c584c", "stroke-width": 24}, s.cam);
   for (let k = 0; k < 12; k++) el("line", {x1: 72, y1: 60 + k * 70, x2: 1128, y2: 60 + k * 70, stroke: "#bc8a5f", "stroke-width": 3}, s.cam);
   el("rect", {x: 380, y: 18, width: 300, height: 26, fill: "#a2d2ff", stroke: INK, "stroke-width": 4}, s.cam);
   el("rect", {x: 760, y: 120, width: 330, height: 460, rx: 18, fill: "#e9ecef", stroke: INK, "stroke-width": 6}, s.cam); el("rect", {x: 790, y: 140, width: 270, height: 90, rx: 20, fill: "#fff", stroke: INK, "stroke-width": 4}, s.cam);
+  el("rect", {x: 760, y: 300, width: 330, height: 280, rx: 18, fill: "#8ecae6", stroke: INK, "stroke-width": 6}, s.cam);
   el("rect", {x: 130, y: 520, width: 460, height: 230, rx: 12, fill: "#a5a58d", stroke: INK, "stroke-width": 6}, s.cam);
-  el("rect", {x: 250, y: 560, width: 180, height: 120, fill: "#fff", stroke: INK, "stroke-width": 4}, s.cam); el("line", {x1: 340, y1: 560, x2: 340, y2: 680, stroke: INK, "stroke-width": 3}, s.cam);
-  for (let k = 0; k < 4; k++) el("line", {x1: 262, y1: 585 + k * 22, x2: 326, y2: 585 + k * 22, stroke: "#adb5bd", "stroke-width": 3}, s.cam);
-  el("rect", {x: 450, y: 600, width: 70, height: 12, rx: 6, fill: "#ffbe0b", stroke: INK, "stroke-width": 3, transform: "rotate(-25 485 606)"}, s.cam);
-  el("ellipse", {cx: 340, cy: 800, rx: 120, ry: 60, fill: "#3a86ff", stroke: INK, "stroke-width": 5}, s.cam); el("circle", {cx: 340, cy: 790, r: 52, fill: "#3d2c1e", stroke: INK, "stroke-width": 4}, s.cam);
-  el("ellipse", {cx: 280, cy: 720, rx: 22, ry: 40, fill: "#f1c27d", stroke: INK, "stroke-width": 4}, s.cam); el("ellipse", {cx: 400, cy: 720, rx: 22, ry: 40, fill: "#f1c27d", stroke: INK, "stroke-width": 4}, s.cam);
-  s.lampGlow = el("circle", {cx: 510, cy: 560, r: 240, fill: "#ffe066", filter: "url(#blur)", opacity: 0}, s.cam);
-  el("circle", {cx: 530, cy: 540, r: 46, fill: "#ffd166", stroke: INK, "stroke-width": 5}, s.cam); el("circle", {cx: 530, cy: 540, r: 16, fill: "#fff3b0"}, s.cam);
-  s.dark = el("rect", {x: -300, y: -300, width: 1800, height: 1500, fill: "#0b1020", opacity: .7}, s.stage);
-  s.run = t => { const f = FR("ceiling")(t), lit = ramp(f, .22, .3); op(s.dark, .7 * (1 - lit) + .05); op(s.lampGlow, .75 * lit);
-    const z = lerp(1.45, 1, ease(f)); tf(s.cam, `translate(400 640) scale(${z}) translate(-400 -640)`); }; return s; })();
+  el("rect", {x: 52, y: 452, width: 30, height: 50, rx: 5, fill: "#fff", stroke: INK, "stroke-width": 4}, s.cam);
+  s.cord = el("path", {d: "M82 477 C190 470 150 600 300 540 S440 500 505 548", fill: "none", stroke: INK, "stroke-width": 7, "stroke-linecap": "round"}, s.cam);
+  el("rect", {x: 250, y: 580, width: 180, height: 120, fill: "#fff", stroke: INK, "stroke-width": 4}, s.cam); el("line", {x1: 340, y1: 580, x2: 340, y2: 700, stroke: INK, "stroke-width": 3}, s.cam);
+  for (let k = 0; k < 4; k++) { el("line", {x1: 262, y1: 603 + k * 22, x2: 326, y2: 603 + k * 22, stroke: "#adb5bd", "stroke-width": 3}, s.cam); el("line", {x1: 352, y1: 603 + k * 22, x2: 416, y2: 603 + k * 22, stroke: "#adb5bd", "stroke-width": 3}, s.cam); }
+  el("rect", {x: 452, y: 640, width: 70, height: 12, rx: 6, fill: "#ffbe0b", stroke: INK, "stroke-width": 3, transform: "rotate(-25 487 646)"}, s.cam);
+  s.lampGlow = el("circle", {cx: 430, cy: 625, r: 290, fill: "#ffe066", filter: "url(#blur)", opacity: 0}, s.cam);
+  el("ellipse", {cx: 340, cy: 812, rx: 120, ry: 56, fill: "#3a86ff", stroke: INK, "stroke-width": 5}, s.cam); el("circle", {cx: 340, cy: 800, r: 52, fill: "#3d2c1e", stroke: INK, "stroke-width": 4}, s.cam);
+  el("ellipse", {cx: 280, cy: 736, rx: 22, ry: 40, fill: "#f1c27d", stroke: INK, "stroke-width": 4}, s.cam); el("ellipse", {cx: 400, cy: 736, rx: 22, ry: 40, fill: "#f1c27d", stroke: INK, "stroke-width": 4}, s.cam);
+  s.dark = el("rect", {x: -2000, y: -2000, width: 5200, height: 4900, fill: "#0b1020", opacity: .7}, s.cam);
+  s.pulse = el("g", {}, s.cam); el("circle", {r: 26, fill: "#ffe14d", opacity: .5}, s.pulse); el("circle", {r: 12, fill: "#fff8d6"}, s.pulse);
+  s.shade = el("circle", {cx: 530, cy: 548, r: 50, fill: "#f4a261", stroke: INK, "stroke-width": 6}, s.cam); s.bulb = el("circle", {cx: 530, cy: 548, r: 22, fill: "#6c584c", stroke: INK, "stroke-width": 4}, s.cam);
+  s.rays = el("g", {transform: "translate(530 548)", opacity: 0}, s.cam); for (let k = 0; k < 10; k++) el("path", {d: "M0 -70 V-104", stroke: "#ffe14d", "stroke-width": 9, "stroke-linecap": "round", transform: `rotate(${k * 36})`}, s.rays);
+  s.card = chip(s.stage, "…and the lamp in your room lights up!", "#1b1b3a", {fs: 50}); const L = s.cord.getTotalLength();
+  s.run = t => { const f = FR("ceiling")(t), CL = .2, lit = ramp(f, CL, CL + .03), c = SC.ceiling;
+    op(s.dark, .78 * (1 - lit) + .12 * lit * (1 - ramp(f, .3, .8)) ); op(s.lampGlow, .85 * lit); op(s.rays, lit * (1 - ramp(f, .34, .44))); set(s.bulb, "fill", lit > .5 ? "#fff8d6" : "#6c584c"); set(s.shade, "fill", lit > .5 ? "#ffbe0b" : "#f4a261");
+    const pq = clamp((t - (c.t0 - .35)) / (CL * (c.t1 - c.t0) + .35)), P = s.cord.getPointAtLength(L * ease(pq)); tf(s.pulse, `translate(${P.x} ${P.y})`); op(s.pulse, pq < 1 ? 1 : 0);
+    const k = ease((f - CL - .04) / .6), z = lerp(2.3, 1.58, k); tf(s.cam, `translate(${VP[0]} ${VP[1]}) scale(${z}) translate(${-lerp(400, 600, k)} ${-lerp(600, 560, k)})`);
+    tf(s.card, `translate(${VP[0]} 40) scale(${Math.max(0, pop(t, c.t0 + (CL + .12) * (c.t1 - c.t0)))})`); op(s.card, ramp(f, CL + .12, CL + .18)); }; return s; })();
 
 // Recap boards: the journey in eight steps; each lights up as Heart names it (in step with her words)
 function makeRecap(name, from, to, words) { const s = scene(name, "#fff3b0", "#ffd6a5");
