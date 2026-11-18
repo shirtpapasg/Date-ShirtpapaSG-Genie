@@ -33,10 +33,10 @@ EP2_CH = chapters(f"{SAU}/ep02/ep02_tl.json", {"hook": "No oil, no gas", "answer
 EP2B_CH = chapters(f"{SAU}/ep02b/ep02b_tl.json", {"hook2": "No oil, no coal, no gas", "sun": "Part 1's answer: gas started as sunlight", "welcome": "Today you'll learn", "history": "From 1965 to today",
     "news": "The news: less gas from Indonesia", "povSpace": "Be a ray of sunlight", "options": "Solar and our neighbours", "nuclear": "Could nuclear power us?", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
- {"id": "sau-trailer", "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
+ {"id": "sau-trailer", "live": True, "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
   "tags": ["theoneapp explored", "primary science", "singapore", "haze", "shorts"]},
- {"id": "sau-ep01", "file": f"{SAU}/ep01/ep01.mp4", "thumb": f"{SAU}/ep01/thumb_ep01.jpg", "at": "2026-11-26T09:00:00Z", "title": "Why Did The Haze Go Away? | TheOneApp, Explored EP1",
+ {"id": "sau-ep01", "live": True, "file": f"{SAU}/ep01/ep01.mp4", "thumb": f"{SAU}/ep01/thumb_ep01.jpg", "at": "2026-11-26T09:00:00Z", "title": "Why Did The Haze Go Away? | TheOneApp, Explored EP1",
   "desc": "In September 2026 the sky over Singapore turned grey and smoky. By November the haze was gone. Where did it come from, and where did it go? Follow one tiny haze particle from a peat fire in Sumatra, across the sea on the south-west winds, into a child's lungs. Then Heart explains PM2.5 particles, how your nose and lungs protect you (P5 respiratory system), why the rain and the changing winds cleared the sky, and how burning forests affects the environment (P6).\n\n" + EP1_CH +
           "\n\nSources: National Environment Agency haze updates (nea.gov.sg), September to November 2026; news reports of 4 September 2026 (air quality in the unhealthy range for the first time since 2023)." + FOOT,
   "tags": ["haze", "PM2.5", "respiratory system", "primary 5 science", "primary 6 science", "singapore", "PSLE science", "theoneapp explored"]},
@@ -44,7 +44,7 @@ VIDEOS = [
   "desc": "About 30 times thinner than a strand of your hair! Watch the full episode: Why did the haze go away? (TheOneApp, Explored EP1)" + FOOT, "tags": ["haze", "PM2.5", "shorts", "theoneapp explored"]},
  {"id": "sau-ep01-s2", "file": f"{SAU}/ep01/short2.mp4", "at": "2026-11-30T09:00:00Z", "title": "Why Does Haze Only Come At Certain Times? #Shorts",
   "desc": "It's all about the wind and the rain. Watch the full episode: Why did the haze go away? (TheOneApp, Explored EP1)" + FOOT, "tags": ["haze", "monsoon", "shorts", "theoneapp explored"]},
- {"id": "sau-ep02", "file": f"{SAU}/ep02/ep02.mp4", "thumb": f"{SAU}/ep02/thumb_ep02.jpg", "at": "2026-12-03T09:00:00Z", "title": "No Oil, No Gas: How Does Singapore Keep The Lights On? (Part 1) | TheOneApp, Explored EP2",
+ {"id": "sau-ep02", "live": True, "file": f"{SAU}/ep02/ep02.mp4", "thumb": f"{SAU}/ep02/thumb_ep02.jpg", "at": "2026-12-03T09:00:00Z", "title": "No Oil, No Gas: How Does Singapore Keep The Lights On? (Part 1) | TheOneApp, Explored EP2",
   "desc": "Singapore has no oil, coal or gas of its own, yet the lights always come on. In Part 1, YOU are a tiny bit of natural gas: squeezed in rock under the seabed, shooting up a well, cleaned, sent 650 km along a pipe on the seabed, burned in a power station, until your energy lights the lamp in your room. Then Heart explains the energy changes from the Primary 6 textbook: chemical potential energy to heat, kinetic and electrical energy. Part 2 is out on Sunday."
           "\n\n" + EP2_CH +
           "\n\nSources: Energy Market Authority (ema.gov.sg) energy statistics." + FOOT,
@@ -60,6 +60,7 @@ VIDEOS = [
   "desc": "Singapore is studying small modular reactors, but has not decided yet. Watch the full episode: How does Singapore keep the lights on? (TheOneApp, Explored EP2, Parts 1 and 2)" + FOOT, "tags": ["nuclear energy", "singapore", "energy", "shorts", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
+# "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
 REPLACE = sys.argv[1:2] == ['--replace']; want = (sys.argv[2:] if REPLACE else sys.argv[1:]) or [v['id'] for v in VIDEOS]
 ORDER = [v['id'] for v in VIDEOS]
 def save(): json.dump(done, open(os.path.join(HERE, 'sau_uploaded.json'), 'w'), indent=1)
@@ -75,7 +76,7 @@ for v in VIDEOS:
         old = done.pop(v['id'])['videoId']; call("DELETE", f"{API}/videos", {"id": old}); save(); print("deleted old upload", v['id'], old)
     if v['id'] in done: continue
     meta = {"snippet": {"title": v['title'], "description": v['desc'], "tags": v['tags'], "categoryId": "27", "defaultLanguage": "en", "defaultAudioLanguage": "en"},
-            "status": {"privacyStatus": "private", "publishAt": v['at'], "selfDeclaredMadeForKids": True, "embeddable": True}}
+            "status": ({"privacyStatus": "public"} if v.get('live') else {"privacyStatus": "private", "publishAt": v['at']}) | {"selfDeclaredMadeForKids": True, "embeddable": True}}
     try:
         h = call("POST", f"{UP}/videos", {"uploadType": "resumable", "part": "snippet,status"}, meta, headers=True)
         data = open(v['file'], 'rb').read()

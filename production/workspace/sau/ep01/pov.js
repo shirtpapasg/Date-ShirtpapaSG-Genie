@@ -41,7 +41,7 @@ function hzTube(a, off, R = 380, bx = 0, by = 0, K = 8, al = 1) { a.forEach(o =>
   a.slice().sort((p, q) => q.z - p.z).forEach(o => a.G.appendChild(o.e)); }
 // another tiny bit of smoke (a friend): a lumpy soot-brown blob with a face; r = 24 is about the size of meDust
 const HZC = ["#7d6f5a", "#8a7866", "#6f6150", "#94836c"];
-function hzMote(p, r = 24, sd = 1, col) { const g = el("g", {}, p), k = r / 24, b = blob(g, r * 1.12, col || HZC[sd % 4], 900 + sd * 13); set(b, "stroke-width", 4 * k);
+function hzMote(p, r = 24, sd = 1, col) { const sv = seed, g = el("g", {}, p), k = r / 24, b = blob(g, r * 1.12, col || HZC[sd % 4], 900 + sd * 13); set(b, "stroke-width", 4 * k); seed = sv;
   el("ellipse", {cx: -9 * k, cy: -14 * k, rx: 7 * k, ry: 4 * k, fill: "#fff", opacity: .35, transform: `rotate(-30 ${-9 * k} ${-14 * k})`}, g);
   [-8, 8].forEach(x => { el("circle", {cx: x * k, cy: -3 * k, r: 5.6 * k, fill: "#fff"}, g); el("circle", {cx: (x + 1) * k, cy: -2 * k, r: 2.8 * k, fill: INK}, g); });
   el("path", {d: `M${-6 * k} ${9 * k} Q0 ${13 * k} ${6 * k} ${9 * k}`, fill: "none", stroke: INK, "stroke-width": 2.6 * k, "stroke-linecap": "round"}, g); return g; }
@@ -53,7 +53,7 @@ function hzYou(p) { const g = el("g", {}, p); el("path", {d: "M-62 -92 H62 Q74 -
 
 // ---- 1. peat (outside): peat land in Riau. The fire is UNDER the ground: the peat glows and smokes, with no big flames. One bit of smoke is born: us
 S.peat = (() => { const s = scene("peat", "#2b2d42", "#3d405b"), st = s.stage, c = s.cam = el("g", {}, st), GY = 520, MX = 700;
-  el("rect", {x: -1600, y: -1700, width: 4800, height: 1700 + GY, fill: hzGradL([[0, "#55596e"], [.62, "#8f8c90"], [.86, "#c9a68a"], [1, "#eab98a"]])}, c);
+  el("rect", {x: -1600, y: -1700, width: 4800, height: 1700 + GY, fill: hzGradL([[0, "#39445c"], [.6, "#76808f"], [.88, "#c7a58b"], [1, "#eab98a"]])}, c);
   const sun = el("g", {transform: "translate(300 150)"}, c); hzGlow(sun, "#ff9e58", 210, .55, .2); el("circle", {r: 58, fill: "#ff7b3a", opacity: .92}, sun);
   // far forest edge, then the land: living trees on the left, burnt stumps where the fire has been
   seed = 201; let fd = `M-1600 ${GY}`; for (let x = -1600; x < 3200; x += 60) fd += ` L${x} ${GY - 60 - rnd() * 50} L${x + 30} ${GY - 96 - rnd() * 60}`; el("path", {d: fd + ` L3200 ${GY} Z`, fill: "#5d7366", opacity: .8}, c);
@@ -68,13 +68,14 @@ S.peat = (() => { const s = scene("peat", "#2b2d42", "#3d405b"), st = s.stage, c
   el("rect", {x: -1600, y: GY - 12, width: 1830, height: 16, rx: 6, fill: "#8a9a4f", stroke: INK, "stroke-width": 4}, c); el("rect", {x: 1440, y: GY - 12, width: 1800, height: 16, rx: 6, fill: "#8a9a4f", stroke: INK, "stroke-width": 4}, c);
   el("rect", {x: 240, y: GY - 2, width: 1190, height: 22, rx: 8, fill: "#262019", stroke: INK, "stroke-width": 4}, c);                 // ash where it has burnt
   // the smouldering peat: glowing pockets under the ground, with cracks up to the surface
-  seed = 205; s.hot = []; for (let k = 0; k < 9; k++) { const x = 300 + k * 128 + rnd() * 50, y = GY + 70 + rnd() * 90, g = el("g", {transform: `translate(${x} ${y})`}, c);
-    hzGlow(g, "#ff6a00", 150, .75, .15); const b = blob(g, 46 + rnd() * 26, "#f77f00", 300 + k); set(b, "stroke", "#9d0208"); set(b, "stroke-width", 5); const y2 = blob(g, 22, "#ffd166", 320 + k); set(y2, "stroke", "none");
-    el("path", {d: `M0 -30 q${-14 + rnd() * 28} ${-(y - GY) / 2} ${-8 + rnd() * 16} ${-(y - GY) + 26}`, fill: "none", stroke: "#ff9e00", "stroke-width": 6, "stroke-linecap": "round", opacity: .8}, g); s.hot.push({g, ph: rnd() * 6, x, y}); }
-  s.puffs = []; seed = 207; for (let k = 0; k < 46; k++) s.puffs.push({e: hzPuff(c, 70 + rnd() * 70, k % 3 ? "#c9c1b6" : "#a39a8e", .7), x: 280 + rnd() * 1120, u: rnd(), v: .7 + rnd() * .6, w: rnd()});
+  const seam = el("g", {transform: `translate(830 ${GY + 128})`}, c); el("ellipse", {rx: 780, ry: 230, fill: hzGradR([[0, "#ff6a00", .85], [.5, "#ff6a00", .5], [1, "#ff6a00", 0]])}, seam);
+  const sb = blob(seam, 100, "#9d2a0a", 301); set(sb, "stroke", "#4a1204"); set(sb, "stroke-width", 2); tf(sb, "scale(6 1)"); const sb2 = blob(seam, 74, "#e85d04", 302); set(sb2, "stroke", "none"); tf(sb2, "scale(6.6 1)");
+  seed = 205; s.hot = []; for (let k = 0; k < 12; k++) { const x = 290 + k * 98 + rnd() * 40, y = GY + 96 + rnd() * 70, g = el("g", {transform: `translate(${x} ${y})`}, c);
+    hzGlow(g, "#ffb703", 80, .9, .2); const y2 = blob(g, 20 + rnd() * 16, "#ffe08a", 320 + k); set(y2, "stroke", "none");
+    if (k % 2) el("path", {d: `M0 -40 q${-14 + rnd() * 28} ${-(y - GY) / 2 + 20} ${-8 + rnd() * 16} ${-(y - GY) + 44}`, fill: "none", stroke: "#ff9e00", "stroke-width": 7, "stroke-linecap": "round", opacity: .85}, c.appendChild(el("g", {transform: `translate(${x} ${y})`}))); s.hot.push({g, ph: rnd() * 6, x, y}); }
+  s.puffs = []; seed = 207; for (let k = 0; k < 46; k++) s.puffs.push({e: hzPuff(c, 70 + rnd() * 70, k % 3 ? "#ece6dc" : "#b3aa9d", .85), x: 280 + rnd() * 1120, u: rnd(), v: .7 + rnd() * .6, w: rnd()});
   s.me = meDust(c); s.you = hzYou(c);
-  s.l1 = hzLab(c, "peat (soil made of old, dead plants)", 34); s.l2 = hzLab(c, "it smoulders under the ground", 34, "#ffe14d"); s.l3 = hzLab(c, "smoke", 40);
-  vignette(st, HZ, .35); s.flood = fullRect(st, "#7d6f5a", 0);
+  vignette(st, HZ, .35); s.l1 = hzLab(st, "peat: soil made of old, dead plants", 46); s.l2 = hzLab(st, "it smoulders under the ground", 46, "#ffe14d"); s.l3 = hzLab(st, "smoke", 54); s.flood = fullRect(st, "#7d6f5a", 0);
   s.top = hzLab(st, "You are a tiny bit of smoke…", 64); s.card = hzBig(st, "Peat land · Riau, Sumatra · August 2026");
   s.run = t => { const t0 = hzT("peat"), u = t - t0, D = hzD("peat"), dv = clamp((u - (D - 2.5)) / 1.9);
     const born = ramp(u, 1.3, 1.8), my = lerp(GY + 96, GY - 170, ease((u - 1.5) / 2.2)), mx = MX + 26 * Math.sin((u - 1.5) * 1.6) * ramp(u, 1.5, 2.5);
@@ -83,8 +84,8 @@ S.peat = (() => { const s = scene("peat", "#2b2d42", "#3d405b"), st = s.stage, c
     s.hot.forEach(h => op(h.g, .72 + .28 * Math.sin(t * 5 + h.ph) * Math.sin(t * 1.7 + h.ph * 2)));
     s.puffs.forEach(p => { const q = (p.u + t * .11 * p.v) % 1; tf(p.e, `translate(${p.x + q * q * 520 + Math.sin(q * 7 + p.w * 6) * 24} ${GY - 10 - q * 640}) scale(${.35 + 1.5 * q})`); op(p.e, Math.sin(Math.min(1, q * 1.3) * Math.PI) * .85 * (1 - .5 * dv)); });
     tf(s.me, `translate(${mx} ${my}) scale(${born * 1.5})`); tf(s.you, `translate(${mx} ${my - 34}) scale(${Math.max(0, pop(u, 1.9)) * (1 - ramp(u, D - 2.4, D - 2.0))})`);
-    const la = on(u, .5, D - 2.5, .3); tf(s.l1, `translate(1280 ${GY + 330})`); op(s.l1, la); tf(s.l2, `translate(1020 ${GY + 236})`); op(s.l2, on(u, .9, D - 2.5, .3)); tf(s.l3, `translate(1190 ${GY - 280})`); op(s.l3, la);
-    op(s.flood, ramp(u, D - .78, D - .55)); tf(s.top, `translate(${X0} 52)`); op(s.top, on(u, .35, D - 1.7, .3)); hzShow(s.card, t, t0 + .5, t0 + D - 1.7); }; return s; })();
+    const la = on(u, .5, D - 2.5, .3); tf(s.l1, `translate(330 835)`); op(s.l1, la); tf(s.l2, `translate(1290 835)`); op(s.l2, on(u, .9, D - 2.5, .3)); tf(s.l3, `translate(1330 240)`); op(s.l3, la);
+    op(s.flood, ramp(u, D - .78, D - .55)); tf(s.top, `translate(${X0} 52)`); op(s.top, on(u, .35, D - 1.7, .3)); hzShow(s.card, t, t0 + .5, t0 + D - 1.7, 930); }; return s; })();
 
 // ---- 2. povFire: born in the smouldering peat. Dark peat all round us, embers glowing below, other bits of smoke; the hot smoke pushes us up to a gap of sky
 S.povFire = (() => { const s = scene("povFire", "#120a06", "#120a06"), st = s.stage; s.w = el("g", {}, st);
@@ -104,7 +105,7 @@ S.povFire = (() => { const s = scene("povFire", "#120a06", "#120a06"), st = s.st
     const off = .05 * u + .5 * esc * esc, cy = lerp(-250, 0, ease(esc / .8)), hs = .5 * Math.exp(4.2 * e3 + .9 * esc);
     tf(s.hole, `translate(${X0} ${Y0 + cy}) scale(${hs})`);
     const clr = (o, x, y, z, sc) => { o.al = clamp((Math.hypot(x - X0, y - Y0 - cy) - 120 * hs - 250 * sc) / 120 + 1 - ramp(esc, .1, .4)); (o.e.em || []).forEach((d, k) => op(d, .6 + .4 * Math.sin(t * 6 + o.i + k * 2))); };
-    hzFly(s.clods, off, {fog: .9, k: 1.9, nf: .02, cy, fn: clr});
+    hzFly(s.clods, off, {fog: .16, k: 1.9, nf: .02, cy, fn: clr});
     hzFly(s.puffs, off * 1.6 + .05 * u, {fog: .6, cy, rot: 0, a: .8});
     s.sparks.forEach(p => { const q = ((p.u + ua * .4 * p.v) % 1); tf(p.g, `translate(${FULL.x + p.x * FULL.w + Math.sin(q * 9 + p.w) * 40} ${1040 - q * 1150}) scale(${.6 + p.v})`); op(p.g, Math.sin(q * Math.PI)); });
     hzFly(s.mates, off * .45, {rot: 0, fog: .7, k: 1.9, cy, fn: (o, x, y, z, sc) => [x + Math.sin(t * 9 + o.u * 40) * 7 * sc, y + Math.cos(t * 11 + o.u * 70) * 7 * sc - 60 * esc * sc, sc, Math.sin(t * 7 + o.u * 30) * 8]});
@@ -115,12 +116,12 @@ S.povFire = (() => { const s = scene("povFire", "#120a06", "#120a06"), st = s.st
 S.povRise = (() => { const s = scene("povRise", "#cfc5b4", "#cfc5b4"), st = s.stage;
   // looking up
   s.up = el("g", {}, st); hzRound(s.up, [[0, "#f3ead9"], [.5, "#ddd2bf"], [1, "#b9ad9a"]]);
-  s.for = el("g", {}, s.up); let ring = "M-5000 -5000 H5000 V5000 H-5000 Z M250 0"; for (let k = 1; k <= 24; k++) { const a = -k / 24 * 6.2832, r = 250 + 46 * Math.sin(k * 2.7) + 30 * Math.sin(k * 5.1); ring += ` L${r * Math.cos(a)} ${r * Math.sin(a)}`; }
+  s.for = el("g", {}, s.up); let ring = "M-5000 -5000 H5000 V5000 H-5000 Z M250 0"; for (let k = 1; k <= 72; k++) { const a = -k / 72 * 6.2832, r = 250 + 40 * Math.sin(a * 3 + 1) + 22 * Math.sin(a * 7); ring += ` L${r * Math.cos(a)} ${r * Math.sin(a)}`; }
   el("path", {d: ring + " Z", fill: hzGradR([[0, "#3f6b4f"], [.12, "#2d4a38"], [1, "#16261d"]]), "fill-rule": "evenodd"}, s.for);
   seed = 221; for (let k = 0; k < 9; k++) { const a = k / 9 * 6.2832 + rnd() * .3, r0 = 250 + rnd() * 120, w1 = 190 + rnd() * 90, ch = k % 4 === 1, g = el("g", {transform: `rotate(${a * 57.2958})`}, s.for);
     el("path", {d: `M${r0} -12 L2600 ${-w1} L2600 ${w1} L${r0} 12 Z`, fill: ch ? "#3a2d27" : "#7a5236", stroke: INK, "stroke-width": 8, "stroke-linejoin": "round"}, g);
     el("path", {d: `M${r0 + 30} -3 L2600 ${-w1 * .45} L2600 ${-w1 * .15} Z`, fill: ch ? "#54443c" : "#9a6c48", opacity: .8}, g); }
-  seed = 223; for (let k = 0; k < 30; k++) { const a = k / 30 * 6.2832 + rnd() * .2, r = 250 + rnd() * 330, g = el("g", {transform: `translate(${r * Math.cos(a)} ${r * Math.sin(a)}) rotate(${rnd() * 360})`}, s.for);
+  seed = 223; for (let k = 0; k < 44; k++) { const a = k / 44 * 6.2832 + rnd() * .2, r = 270 + (k % 3) * 150 + rnd() * 60, g = el("g", {transform: `translate(${r * Math.cos(a)} ${r * Math.sin(a)}) rotate(${rnd() * 360})`}, s.for);
     blob(g, 70 + rnd() * 60, ["#40916c", "#52b788", "#2d6a4f", "#74c69d"][k % 4], 700 + k); }
   s.str = hzStreaks(s.up, 30, 5, "#fff8e8", 6);
   // looking down
@@ -135,25 +136,25 @@ S.povRise = (() => { const s = scene("povRise", "#cfc5b4", "#cfc5b4"), st = s.st
   const scar = blob(L, 380, "#2a211c", 83); set(scar, "stroke-width", 10);
   seed = 227; s.spots = []; for (let k = 0; k < 9; k++) { const g = el("g", {transform: `translate(${(rnd() - .5) * 460} ${(rnd() - .5) * 400})`}, L); hzGlow(g, "#ff7b00", 120, .9, .2); el("circle", {r: 26, fill: "#ffd166"}, g); s.spots.push(g); }
   [[-1900, 900, .5], [-1500, -300, .4], [900, 1500, .45]].forEach(([x, y, k], i) => { const g = el("g", {transform: `translate(${x} ${y}) scale(${k})`}, L); const b = blob(g, 620, "#7a5a40", 85 + i); set(b, "stroke-width", 14); const b2 = blob(g, 300, "#2a211c", 88 + i); set(b2, "stroke", "none"); hzPuff(g, 700, "#d6cdbf", .85); });
-  s.plume = []; seed = 229; for (let k = 0; k < 16; k++) s.plume.push({e: hzPuff(s.dn, 260, k % 2 ? "#ded5c7" : "#b3a999", .75), u: rnd(), an: rnd() * 6.2832, v: .6 + rnd() * .8});
+  s.plume = []; seed = 229; for (let k = 0; k < 16; k++) s.plume.push({e: hzPuff(s.dn, 170, k % 2 ? "#eee7dc" : "#c4baab", .7), u: rnd(), an: rnd() * 6.2832, v: .6 + rnd() * .8});
   s.wisps = field(s.dn, 12, 91, e => hzPuff(e, 520, "#e9e1d3", .55), .2);
   s.str2 = hzStreaks(s.dn, 26, 7, "#fff8e8", 6);
-  s.lab = hzLab(s.dn, "the peat land", 46);
+  s.lab = hzLab(s.dn, "the peat land", 58, "#ffe14d");
   s.haze = fullRect(st, "#cfc5b4", 0);
   seed = 231; s.mates = []; for (let k = 0; k < 8; k++) s.mates.push({e: hzMote(st, 44, k + 3), an: k / 8 * 6.2832 + rnd() * .5, r: 300 + rnd() * 230, u: rnd()});
   vignette(st, HZ, .6); s.blink = fullRect(st, "#e3d9c8", 0);
   s.card = hzBig(st, "Hot air rises… and it carries us up!", "#b3541e"); s.card2 = hzBig(st, "Up above the trees. The land shrinks below us");
   s.run = t => { const t0 = hzT("povRise"), u = t - t0, D = hzD("povRise"), ua = Math.max(0, u), CUT = D * .43, up = u < CUT;
     op(s.up, up ? 1 : 0); op(s.dn, up ? 0 : 1);
-    if (up) { tf(s.for, `translate(${X0} ${Y0}) scale(${.5 * Math.exp(1.75 * (u + .3))}) rotate(${-14 * u})`); hzRunStreaks(s.str, .9 * ua + .3 * ua * ua, {r0: 80, a: .6}); }
-    else { const v = u - CUT, zl = .36 + 2.3 * Math.exp(-1.15 * v); tf(L, `translate(${X0} ${Y0 + 40}) scale(${zl}) rotate(${-8 + 5 * v})`);
+    if (up) { tf(s.for, `translate(${X0} ${Y0}) scale(${.45 * Math.exp(1.03 * (u + .3))}) rotate(${-12 * u})`); hzRunStreaks(s.str, .9 * ua + .3 * ua * ua, {r0: 80, a: .6}); }
+    else { const v = u - CUT, zl = .36 + 1.7 * Math.exp(-1.15 * v); tf(L, `translate(${X0} ${Y0 + 40}) scale(${zl}) rotate(${-8 + 5 * v})`);
       s.spots.forEach((g, k) => op(g, .65 + .35 * Math.sin(t * 5 + k * 2)));
       s.plume.forEach(p => { const q = (p.u + v * .22 * p.v) % 1, r = 520 * q * zl * 1.6; tf(p.e, `translate(${X0 + Math.cos(p.an) * r * .6 + q * 200} ${Y0 + 40 + Math.sin(p.an) * r * .5 - q * 120}) scale(${(.25 + 1.2 * q) * Math.max(.5, zl)})`); op(p.e, Math.sin(q * Math.PI) * .8); });
       hzFly(s.wisps, -.16 * v, {fog: .5, rot: 0, a: .8}); hzRunStreaks(s.str2, -.8 * v, {r0: 120, a: .45});
-      tf(s.lab, `translate(${X0} ${Y0 + 40 + 400 * zl + 40})`); op(s.lab, on(v, .5, 1.9, .25)); }
+      tf(s.lab, `translate(${X0} ${Math.min(Y0 + 40 + 330 * zl + 60, 765)})`); op(s.lab, on(v, .45, 2.0, .25)); }
     s.mates.forEach(m => { const rr = m.r + 30 * Math.sin(ua * 2.2 + m.u * 9), an = m.an + .25 * Math.sin(ua * 1.3 + m.u * 5);
       tf(m.e, `translate(${X0 + Math.cos(an) * rr * 1.5} ${Y0 + Math.sin(an) * rr * .85}) scale(${.8 + .7 * m.u}) rotate(${Math.sin(t * 6 + m.u * 20) * 8})`); });
-    op(s.haze, Math.max(on(u, CUT - .28, CUT + .3, .25), .8 * ramp(u, D * .62, D - .5)));
+    op(s.haze, Math.max(on(u, CUT - .28, CUT + .3, .25), .85 * ramp(u, D * .7, D - .5)));
     op(s.blink, 1 - ramp(u, -.3, .2));
     hzShow(s.card, t, t0 + .2, t0 + CUT - .15); hzShow(s.card2, t, t0 + CUT + .35, t0 + D); }; return s; })();
 
@@ -165,29 +166,29 @@ S.drift = (() => { const s = scene("drift", "#023e8a", "#0077b6"), st = s.stage;
   s.plume = []; seed = 243; for (let k = 0; k < 26; k++) s.plume.push({e: hzPuff(s.cam, 16 + rnd() * 12, k % 2 ? "#8d8478" : "#a59b8d", .85), u: .04 + rnd() * .96, v: rnd() - .5, w: rnd()});
   s.trail = el("path", {fill: "none", stroke: "#fff", "stroke-width": 2.6, "stroke-linecap": "round", "stroke-dasharray": "1 6"}, s.cam);
   s.fire = el("g", {transform: `translate(${F[0]} ${F[1]})`}, s.cam); s.fe = emo(s.fire, 0, -4, 26, "🔥");
-  s.fl = tx(s.fire, {x: -14, y: 4, "text-anchor": "end", "font-size": 13, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 3.4}, "peat fires in Riau");
+  s.fl = tx(s.fire, {x: -14, y: 4, "text-anchor": "end", "font-size": 17, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 4.4}, "peat fires in Riau");
   s.sea = tx(s.cam, {x: 548, y: 392, "text-anchor": "middle", "font-size": 9.5, "font-weight": 700, fill: "#0b5c85", "font-style": "italic", transform: "rotate(38 548 392)"}, "Strait of Malacca");
-  s.me = el("g", {}, s.cam); el("circle", {r: 30, fill: "none", stroke: "#ffe14d", "stroke-width": 5}, s.me); meDust(s.me);
+  s.me = el("g", {}, s.cam); el("circle", {r: 34, fill: "none", stroke: "#ffe14d", "stroke-width": 5}, s.me); meDust(s.me); tf(hzYou(s.me), "translate(0 -30) scale(.8)");
   // a compass, the wind's name and the distance: fixed on the screen
-  s.comp = el("g", {transform: "translate(1560 190)"}, st); el("circle", {r: 96, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.comp);
+  s.comp = el("g", {transform: "translate(70 200)"}, st); el("circle", {r: 96, fill: "#fff", stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, s.comp);
   el("path", {d: "M0 -74 L20 0 L-20 0 Z", fill: "#e63946", stroke: INK, "stroke-width": 4, "stroke-linejoin": "round"}, s.comp); el("path", {d: "M0 74 L20 0 L-20 0 Z", fill: "#ced4da", stroke: INK, "stroke-width": 4, "stroke-linejoin": "round"}, s.comp);
   tx(s.comp, {x: 0, y: -100, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 9}, "N");
-  s.arrow = el("g", {transform: "translate(1560 190)"}, st); const ag = arrowG(s.arrow, "#ffd166"); tf(ag, "translate(-150 150) rotate(-45) scale(1.5)");
+  s.arrow = el("g", {transform: "translate(70 200)"}, st); const ag = arrowG(s.arrow, "#ffd166"); tf(ag, "translate(30 300) rotate(-45) scale(1.3)");
   s.wl = hzLab(st, "south-west wind", 46, "#ffd166");
   s.km = tx(st, {x: X0, y: 96, "text-anchor": "middle", "font-size": 96, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 18}, "0 km");
   s.card = hzBig(st, "June to September: south-west winds carry the smoke to Singapore");
   s.run = t => { const t0 = hzT("drift"), u = t - t0, D = hzD("drift"), f = clamp(u / D), q = ease((u - 1.1) / (D - 2.6)), x = B(0, q), y = B(1, q);
-    const z = lerp(1.8, 4.6, ease(u / (D * .55))), hw = 960 / z, hh = 540 / z, k = ease(u / 2.2);
-    const cx = clamp(lerp(600, lerp(F[0], SG[0], .5) - 6, k), hw + 4, 1196 - hw), cy = clamp(lerp(440, lerp(F[1], SG[1], .5) + 8, k), hh + 4, 896 - hh);
+    const z = lerp(1.8, 2.9, ease(u / (D * .5))), hw = 960 / z, hh = 540 / z, k = ease(u / 2.2);
+    const cx = clamp(lerp(600, lerp(F[0], SG[0], .5) + 10, k), hw + 4, 1196 - hw), cy = clamp(lerp(440, lerp(F[1], SG[1], .5) + 8, k), hh + 4, 896 - hh);
     tf(s.cam, `translate(${X0} ${Y0}) scale(${z}) translate(${-cx} ${-cy})`);
     s.wind.forEach(w => { const p = (w.u + t * .28 * w.v) % 1, L = 46, x1 = w.x - 60 + p * 150, y1 = w.y + 60 - p * 150; set(w.e, "x1", x1); set(w.e, "y1", y1); set(w.e, "x2", x1 + L * .7 * Math.sin(p * Math.PI)); set(w.e, "y2", y1 - L * .7 * Math.sin(p * Math.PI)); op(w.e, .55 * Math.sin(p * Math.PI) * ramp(u, .2, .9)); });
     s.plume.forEach(p => { const g = Math.min(q * 1.08, p.u), a = ramp(q * 1.08, p.u - .06, p.u), wd = 8 + 26 * g; tf(p.e, `translate(${B(0, g) + p.v * wd + Math.sin(t * .8 + p.w * 6) * 1.5} ${B(1, g) + (p.w - .5) * wd}) scale(${.7 + 1.2 * g})`); op(p.e, a * .8); });
     const m = [lerp(F[0], C[0], q), lerp(F[1], C[1], q)]; set(s.trail, "d", `M${F[0]} ${F[1]} Q${m[0]} ${m[1]} ${x} ${y}`); op(s.trail, q > .002 ? .9 : 0);
     tf(s.fe, `translate(0 -4) scale(${1 + .08 * Math.sin(t * 9)}) translate(0 4)`);
-    tf(s.me, `translate(${x} ${y}) scale(${1.25 / z})`);
+    tf(s.me, `translate(${x} ${y}) scale(${1.9 / z})`);
     const ar = clamp((q - .93) / .07) * (1 - ramp(u, D - .9, D - .5)); set(s.map.sgRing, "r", 16 + 30 * ((t * 1.4) % 1)); op(s.map.sgRing, ar * (1 - (t * 1.4) % 1));
     s.km.textContent = (q > .97 ? "about " : "") + Math.round(280 * q / 10) * 10 + " km"; op(s.km, ramp(u, .9, 1.2));
-    tf(s.wl, `translate(1500 420)`); op(s.wl, ramp(u, .3, .7)); op(s.arrow, ramp(u, .3, .7)); op(s.comp, ramp(u, .1, .5));
+    tf(s.wl, `translate(170 395)`); op(s.wl, ramp(u, .3, .7)); op(s.arrow, ramp(u, .3, .7)); op(s.comp, ramp(u, .1, .5));
     hzShow(s.card, t, t0 + .4, t0 + D + 1); }; return s; })();
 
 // ---- 5. povArrive: riding the wind over the sea with lots of other smoke particles; Singapore's skyline comes out of the grey haze ahead
@@ -207,29 +208,31 @@ S.povArrive = (() => { const s = scene("povArrive", "#a8a094", "#a8a094"), st = 
   s.puffs = field(st, 16, 57, (e, i) => hzPuff(e, 330, i % 2 ? "#cfc6b8" : "#aaa092", .55), .08);
   s.mates = field(st, 16, 79, (e, i) => hzMote(e, 80, i + 2), .16);
   s.str = hzStreaks(st, 26, 9, "#fff8e8", 5);
+  seed = 253; s.near = []; for (let k = 0; k < 8; k++) { const an = k / 8 * 6.2832 + rnd() * .5, r = 330 + rnd() * 250, uu = rnd(); s.near.push({e: hzMote(st, 46, k + 12), an, r, u: uu}); }
   vignette(st, HZ, .6); s.blink = fullRect(st, "#cfc5b4", 0); s.flood = fullRect(st, "#a89f91", 0);
   s.card = hzBig(st, "Riding the wind, with lots of other bits of smoke"); s.loc = hzBig(st, "Singapore · September 2026", "#5c677d");
   s.run = t => { const t0 = hzT("povArrive"), u = t - t0, D = hzD("povArrive"), ua = u + .6, g = ua / (D + .2);
-    const cs = .2 * Math.exp(2.3 * g * g + .5 * g); tf(s.city, `translate(${X0} ${HY + 4}) scale(${cs})`); op(s.city, ramp(u, .5, 2.4) * .95);
+    const cs = .3 * Math.exp(1.9 * g * g + .5 * g); tf(s.city, `translate(${X0} ${HY + 4}) scale(${cs})`); op(s.city, ramp(u, .2, 1.8) * .95);
     s.waves.forEach(w => { const z = ((w.z0 - .3 * ua) % 1 + 1) % 1, zz = .05 + z; tf(w.e, `translate(${X0 + w.x * 420 / zz} ${HY + 27 / zz - 20}) scale(${.14 / zz})`); op(w.e, clamp((1 - z) / .4) * clamp(z / .04) * .8); });
     s.ships.forEach(h => { const z = h.z - .16 * ua, zz = .05 + Math.max(0, z); tf(h.g, `translate(${X0 + h.x * 420 / zz} ${HY + 27 / zz - 20}) scale(${.1 / zz})`); op(h.g, z > .01 ? clamp((1.1 - z) / .3) : 0); });
     hzFly(s.puffs, .12 * ua, {fog: .6, rot: 0, a: .75, cy: -40});
-    hzFly(s.mates, .035 * ua, {rot: 0, fog: .6, cy: -40, fn: (o, x, y, z, sc) => [x + Math.sin(t * 5 + o.u * 40) * 9 * sc, y + Math.cos(t * 6 + o.u * 70) * 9 * sc, sc, Math.sin(t * 5 + o.u * 30) * 8]});
+    hzFly(s.mates, .03 * ua, {rot: 0, fog: .7, k: 1.3, cy: -40, fn: (o, x, y, z, sc) => [x + Math.sin(t * 5 + o.u * 40) * 9 * sc, y + Math.cos(t * 6 + o.u * 70) * 9 * sc, sc, Math.sin(t * 5 + o.u * 30) * 8]});
     hzRunStreaks(s.str, .7 * ua, {r0: 160, a: .35, y: -10});
+    s.near.forEach(m => { const rr = m.r + 30 * Math.sin(ua * 2.2 + m.u * 9), an = m.an + .25 * Math.sin(ua * 1.3 + m.u * 5); tf(m.e, `translate(${X0 + Math.cos(an) * rr * 1.5} ${Y0 + Math.sin(an) * rr * .85}) scale(${.8 + .8 * m.u}) rotate(${Math.sin(t * 6 + m.u * 20) * 8})`); });
     op(s.blink, 1 - ramp(u, -.3, .2)); op(s.flood, ramp(u, D - 1.0, D - .5) * .96);
     hzShow(s.card, t, t0 + .3, t0 + 2.2); hzShow(s.loc, t, t0 + 2.4, t0 + D); }; return s; })();
 
 // ---- 6. povNose: someone breathes in. A giant nose; inside, a forest of hairs covered in sticky mucus. BIG dust gets stuck. We are far smaller: we slip through
-function hzHair(p, sd) { seed = sd; const g = el("g", {}, p), b = 24 + rnd() * 8, c = -70 + rnd() * 140;
+function hzHair(p, sd) { const sv = seed; seed = sd; const g = el("g", {}, p), b = 44 + rnd() * 14, c = -70 + rnd() * 140;
   el("ellipse", {rx: 60, ry: 52, fill: "#c9566e", stroke: INK, "stroke-width": 7}, g);
   el("path", {d: `M-6 ${-b} Q300 ${c - b * .7} 640 ${c * .5 - 4} L640 ${c * .5 + 4} Q300 ${c + b * .7} -6 ${b} Z`, fill: "#5b3a29", stroke: INK, "stroke-width": 8, "stroke-linejoin": "round"}, g);
   el("path", {d: `M20 ${-b * .45} Q300 ${c - b * .3} 600 ${c * .5 - 1}`, fill: "none", stroke: "#8a5e44", "stroke-width": 6, "stroke-linecap": "round"}, g);
-  [[150 + rnd() * 80, 1], [380 + rnd() * 120, .7]].forEach(([x, k]) => { const y = c * (x / 640) * .9, m = el("g", {transform: `translate(${x} ${y + 16 * k})`}, g);            // beads of sticky mucus
+  [[200 + rnd() * 260, .8 + rnd() * .5]].forEach(([x, k]) => { const y = c * (x / 640) * .9, m = el("g", {transform: `translate(${x} ${y + 16 * k})`}, g);            // beads of sticky mucus
     el("ellipse", {rx: 46 * k, ry: 34 * k, fill: "#d6f08f", stroke: "#6f9a2d", "stroke-width": 5, opacity: .9}, m); el("ellipse", {cx: -14 * k, cy: -12 * k, rx: 13 * k, ry: 7 * k, fill: "#fff", opacity: .8}, m); });
-  return g; }
-function hzDust(p, r, sd) { const g = el("g", {}, p), b = blob(g, r, ["#c9a66b", "#b8925a", "#d4b483"][sd % 3], 500 + sd * 7); set(b, "stroke-width", 9);
+  seed = sv; return g; }
+function hzDust(p, r, sd) { const sv = seed, g = el("g", {}, p), b = blob(g, r, ["#c9a66b", "#b8925a", "#d4b483"][sd % 3], 500 + sd * 7); set(b, "stroke-width", 9);
   const h = blob(g, r * .5, "#fff", 520 + sd); set(h, "stroke", "none"); set(h, "opacity", .22); tf(h, `translate(${-r * .25} ${-r * .3})`);
-  seed = 540 + sd; for (let k = 0; k < 6; k++) el("circle", {cx: (rnd() - .5) * r, cy: (rnd() - .3) * r, r: r * (.05 + rnd() * .07), fill: INK, opacity: .3}, g); return g; }
+  seed = 540 + sd; for (let k = 0; k < 6; k++) el("circle", {cx: (rnd() - .5) * r, cy: (rnd() - .3) * r, r: r * (.05 + rnd() * .07), fill: INK, opacity: .3}, g); seed = sv; return g; }
 S.povNose = (() => { const s = scene("povNose", "#f2c6a6", "#f2c6a6"), st = s.stage, T1 = 1.15;
   // outside: a giant nose, seen from in front and below; we are pulled to one nostril
   s.out = el("g", {}, st); el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill: hzGradR([[0, "#f7d3b5"], [1, "#e5ad88"]])}, s.out);
@@ -243,9 +246,9 @@ S.povNose = (() => { const s = scene("povNose", "#f2c6a6", "#f2c6a6"), st = s.st
   // inside
   s.inn = el("g", {}, st); hzRound(s.inn, [[0, "#22060e"], [.16, "#5c1a2b"], [.5, "#b5475f"], [1, "#f08ea4"]]);
   s.exit = el("g", {}, s.inn); hzGlow(s.exit, "#12030a", 330, 1, .55);
-  s.hairs = field(s.inn, 40, 431, (e, i) => { e.h = hzHair(e, 800 + i); if (i % 3 === 0) { const d = el("g", {transform: `translate(${430} ${-10})`}, e.h); const sp = blob(d, 150, "#d6f08f", 640 + i); set(sp, "stroke", "#6f9a2d"); set(sp, "opacity", .9); hzDust(d, 120, i); } }, .34);
-  s.heroH = [[.3, -.16, 0], [-.27, .2, 1], [.1, .3, 2]].map(([x, y, i]) => { const e = el("g", {}, s.inn); hzHair(e, 870 + i); return {e, x, y}; });
-  s.heroD = s.heroH.map((h, i) => { const e = el("g", {}, s.inn); e.sp = blob(e, 300, "#d6f08f", 660 + i); set(e.sp, "stroke", "#6f9a2d"); set(e.sp, "stroke-width", 8); hzDust(e, 230, i + 4); return {e, x: h.x, y: h.y, zf: [.2, .25, .3][i], ts: [1.95, 2.6, 3.2][i]}; });
+  s.hairs = field(s.inn, 38, 431, (e, i) => { e.h = hzHair(e, 800 + i); if (i % 5 === 0) { const d = el("g", {transform: `translate(${430} ${-10})`}, e.h); const sp = blob(d, 150, "#d6f08f", 640 + i); set(sp, "stroke", "#6f9a2d"); set(sp, "opacity", .9); hzDust(d, 120, i); } }, .34);
+  s.heroH = [[.36, -.2, 0], [-.34, .24, 1]].map(([x, y, i]) => { const e = el("g", {}, s.inn); hzHair(e, 870 + i); return {e, x, y}; });
+  s.heroD = s.heroH.map((h, i) => { const e = el("g", {}, s.inn); e.sp = blob(e, 215, "#d6f08f", 660 + i); set(e.sp, "stroke", "#6f9a2d"); set(e.sp, "stroke-width", 8); hzDust(e, 165, i + 4); return {e, x: h.x, y: h.y, zf: [.24, .3][i], ts: [2.0, 2.9][i]}; });
   s.mates = field(s.inn, 9, 83, (e, i) => hzMote(e, 54, i + 5), .1);
   s.str = hzStreaks(s.inn, 30, 15, "#ffe3ea", 6);
   s.L = [hzLab(s.inn, "nose hairs", 54), hzLab(s.inn, "sticky mucus", 54, "#e4f7a8"), hzLab(s.inn, "big dust: stuck!", 54, "#ffe14d")];
@@ -261,14 +264,14 @@ S.povNose = (() => { const s = scene("povNose", "#f2c6a6", "#f2c6a6"), st = s.st
         const a = Math.atan2(Y0 - hy, X0 - hx), tipx = hx + Math.cos(a) * 470 * hs, tipy = hy + Math.sin(a) * 470 * hs;
         tf(h.e, `translate(${hx} ${hy}) scale(${hs}) rotate(${a * 57.2958})`); op(h.e, vis);
         const fl = clamp((d.ts - u) / 1.1), sc = .5 / (.08 + 2.2 * z), stuck = u >= d.ts, jx = stuck ? 0 : Math.sin(t * 8 + i * 2) * 10;
-        const fx = lerp(tipx, X0 + (i - 1) * 240 + d.x * 500, fl * fl), fy = lerp(tipy, Y0 + 300 - i * 60, fl * fl);
-        tf(d.e, `translate(${fx + jx} ${fy}) scale(${hs * (1 + 1.6 * fl)}) rotate(${stuck ? 20 * i : (d.ts - u) * 90})`); op(d.e, vis * ramp(v, .1 + i * .2, .5 + i * .2)); op(d.e.sp, stuck ? .9 : 0); d.px = fx; d.py = fy; d.ps = hs; });
-      [s.heroH[2], s.heroD[2], s.heroH[1], s.heroD[1], s.heroH[0], s.heroD[0]].forEach(o => s.inn.insertBefore(o.e, s.mates.G));
+        const fx = lerp(tipx, X0 + d.x * 1500, fl * fl), fy = lerp(tipy, Y0 + 330 - i * 500, fl * fl);
+        tf(d.e, `translate(${fx + jx} ${fy}) scale(${hs * (1 + 1.6 * fl)}) rotate(${stuck ? 20 * i : (d.ts - u) * 90})`); op(d.e, (zw - off > .004 ? 1 : 0) * ramp(v, .1 + i * .5, .3 + i * .5)); op(d.e.sp, stuck ? .9 : 0); d.px = fx; d.py = fy; d.ps = hs; });
+      [s.heroH[1], s.heroD[1], s.heroH[0], s.heroD[0]].forEach(o => s.inn.insertBefore(o.e, s.mates.G));
       hzFly(s.mates, off * .4, {rot: 0, fog: .6, k: 2.2, fn: (o, x, y, z, sc) => [x + Math.sin(t * 8 + o.u * 40) * 10 * sc, y + Math.cos(t * 9 + o.u * 70) * 10 * sc, sc, Math.sin(t * 7 + o.u * 30) * 9]});
       hzRunStreaks(s.str, .8 * v, {r0: 110, a: .4});
       const ex = Math.exp(3.4 * clamp((u - (D - 1.5)) / 1.0)); tf(s.exit, `translate(${X0} ${Y0}) scale(${.55 * ex})`);
-      hzAt(s.L[0], 420, 150, u, T1 + .35, T1 + 1.6); hzAt(s.L[1], 1250, 200, u, T1 + .7, T1 + 1.9);
-      const d0 = s.heroD[0]; hzAt(s.L[2], clamp(d0.px, 300, 1320), clamp(d0.py - 150 * d0.ps - 60, 80, 760), u, d0.ts + .05, D - .9); }
+      hzAt(s.L[0], 330, 120, u, T1 + .3, T1 + 1.7); hzAt(s.L[1], 1290, 120, u, T1 + .6, T1 + 2.0);
+      const d0 = s.heroD[0]; hzAt(s.L[2], clamp(d0.px, 300, 1320), clamp(d0.py - 190 * d0.ps - 50, 220, 760), u, d0.ts + .05, D - .9); }
     op(s.blink, 1 - ramp(u, -.3, .15)); op(s.dark, Math.max(on(u, T1 - .16, T1 + .2, .14), ramp(u, D - .8, D - .52)));
     hzShow(s.card0, t, t0 + .05, t0 + T1 - .1); hzShow(s.card, t, t0 + T1 + .5, t0 + D); }; return s; })();
 
@@ -284,7 +287,7 @@ S.povLung = (() => { const s = scene("povLung", "#2a0812", "#2a0812"), st = s.st
     el("circle", Object.assign({stroke: INK, "stroke-width": 50}, a), e); el("circle", Object.assign({stroke: "#f6efe2", "stroke-width": 36}, a), e); el("circle", Object.assign({stroke: "#fff", "stroke-width": 8, opacity: .8}, a, {r: 302}), e); });
   s.fk = [hzFork(s.tube, "#b5475f", "#f6efe2"), hzFork(s.tube, "#c25a70", "#f3c9d1")];
   s.str = hzStreaks(s.tube, 34, 17, "#ffe3ea", 6);
-  s.mates = field(s.tube, 7, 87, (e, i) => hzMote(e, 50, i + 9), .12);
+  s.mates = field(s.tube, 8, 87, (e, i) => hzMote(e, 90, i + 9), .16);
   s.L = [hzLab(s.tube, "windpipe", 56), hzLab(s.tube, "the airways branch…", 56), hzLab(s.tube, "…and branch again", 56)];
   // the air sacs
   s.sac = el("g", {}, st); el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill: hzGradR([[0, "#8f2740"], [1, "#4a1020"]])}, s.sac);
@@ -298,7 +301,7 @@ S.povLung = (() => { const s = scene("povLung", "#2a0812", "#2a0812"), st = s.st
   el("path", {d: arc(VR + 40, A0, A1), fill: "none", stroke: "#ff7b89", "stroke-width": 16, "stroke-linecap": "round", opacity: .7}, s.big);
   s.rbc = []; for (let k = 0; k < 11; k++) { const g = el("g", {}, s.big); el("ellipse", {rx: 46, ry: 34, fill: "#b5121f", stroke: INK, "stroke-width": 6}, g); el("ellipse", {rx: 22, ry: 13, fill: "#8e0d18"}, g); s.rbc.push({g, u: k / 11}); }
   el("circle", {r: 470, fill: hzGradR([[0, "#fff4f5"], [.8, "#ffd3da"], [1, "#f9a8b9"]]), stroke: INK, "stroke-width": 10}, s.big); el("circle", {r: 452, fill: "none", stroke: "#fff", "stroke-width": 10, opacity: .55, "stroke-dasharray": "300 2600", transform: "rotate(200)"}, s.big);
-  seed = 261; s.ox = []; for (let k = 0; k < 12; k++) { const g = el("g", {}, s.big); el("circle", {r: 22, fill: "#4cc9f0", stroke: INK, "stroke-width": 5}, g); tx(g, {x: 0, y: 8, "text-anchor": "middle", "font-size": 22, "font-weight": 700, fill: INK}, "O₂"); s.ox.push({g, u: rnd(), a: A0 + .25 + rnd() * (A1 - A0 - .5), r: 120 + rnd() * 200}); }
+  seed = 261; s.ox = []; for (let k = 0; k < 12; k++) { const g = el("g", {}, s.big); el("circle", {r: 31, fill: "#4cc9f0", stroke: INK, "stroke-width": 5}, g); tx(g, {x: 0, y: 10, "text-anchor": "middle", "font-size": 29, "font-weight": 700, fill: INK}, "O₂"); s.ox.push({g, u: rnd(), a: A0 + .25 + rnd() * (A1 - A0 - .5), r: 120 + rnd() * 200}); }
   s.sm = [[-250, 250, 21], [300, 190, 22], [-40, 330, 23]].map(([x, y, sd]) => { const g = hzMote(s.big, 46, sd); return {g, x, y}; });
   s.SL = [hzLab(s.sac, "an air sac", 56), hzLab(s.sac, "oxygen", 50, "#bdf0ff"), hzLab(s.sac, "blood", 56)];
   s.vg = vignette(st, HZ, .6); s.blink = fullRect(st, "#22060e", 0); s.flash = fullRect(st, "#ffd9df", 0);
@@ -310,7 +313,7 @@ S.povLung = (() => { const s = scene("povLung", "#2a0812", "#2a0812"), st = s.st
       hzTube(s.rings, .42 * ua + .05 * ua * ua, 420, bx, by, 8, 1 - ramp(f1, .8, 2.2)); hzRunStreaks(s.str, 1.3 * ua, {r0: 80, a: .5});
       tf(s.fk[0], `translate(${X0 + bx + 150 * f1 * e1} ${Y0 + by}) scale(${f1})`); op(s.fk[0], ramp(u, .55, .9) * (f2 < 2.4 ? 1 : 0));
       tf(s.fk[1], `translate(${X0 - 150 * f2 * e2} ${Y0}) scale(${f2}) rotate(28)`); op(s.fk[1], u > 1.75 ? ramp(f1, 1.5, 3) : 0); if (f1 < 3) s.tube.insertBefore(s.fk[1], s.fk[0]); else s.tube.insertBefore(s.fk[0], s.fk[1]);
-      hzFly(s.mates, .05 * ua, {rot: 0, fog: .6, fn: (o, x, y, z, sc) => [x + Math.sin(t * 8 + o.u * 40) * 10 * sc, y + Math.cos(t * 9 + o.u * 70) * 10 * sc, sc, Math.sin(t * 7 + o.u * 30) * 9]});
+      hzFly(s.mates, .05 * ua, {rot: 0, fog: .6, k: 1.5, fn: (o, x, y, z, sc) => [x + Math.sin(t * 8 + o.u * 40) * 10 * sc, y + Math.cos(t * 9 + o.u * 70) * 10 * sc, sc, Math.sin(t * 7 + o.u * 30) * 9]});
       hzAt(s.L[0], X0, 130, u, .15, 1.05); hzAt(s.L[1], X0, 130, u, 1.15, 2.1); hzAt(s.L[2], X0, 130, u, 2.2, TS - .1); }
     else { const v = u - TS, k = 1 - Math.exp(-2.6 * v), z = lerp(.2, 1, k);
       tf(s.cl, `translate(${X0} ${Y0 - 30}) scale(${z}) rotate(${-10 * (1 - k)})`);
@@ -334,12 +337,12 @@ S.povRain = (() => { const s = scene("povRain", "#7d8590", "#7d8590"), st = s.st
   s.drops = s.mates.map((m, k) => ({e: hzDrop(s.air, 86 + m.u * 50, 0), m}));
   s.giant = hzDrop(s.air, 300, 0);
   // inside the drop, falling: the ground rushes up
-  s.fall = el("g", {}, st); s.gr = el("g", {}, s.fall); const G = s.gr;
+  s.fall = el("g", {}, st); fullRect(s.fall, "#6fae6b"); s.gr = el("g", {}, s.fall); const G = s.gr;
   el("rect", {x: -4000, y: -3000, width: 8000, height: 6000, fill: "#6fae6b"}, G);
   seed = 273; for (let k = 0; k < 60; k++) { const x = (rnd() - .5) * 7000, y = (rnd() - .5) * 5000; if (Math.abs(x) < 900 && Math.abs(y) < 700) continue; if (k % 2) el("rect", {x, y, width: 300 + rnd() * 400, height: 260 + rnd() * 300, rx: 16, fill: ["#e9c9a8", "#d7dde3", "#f2e2c4", "#c9d3dc"][k % 4], stroke: INK, "stroke-width": 9}, G); else el("circle", {cx: x, cy: y, r: 130 + rnd() * 110, fill: "#3f8f58", stroke: INK, "stroke-width": 9}, G); }
   el("rect", {x: -4000, y: 760, width: 8000, height: 260, fill: "#5c636b", stroke: INK, "stroke-width": 9}, G); for (let k = -20; k < 20; k++) el("rect", {x: k * 200, y: 880, width: 110, height: 16, fill: "#f1f3f5"}, G);
   [[-560, -330], [500, -420], [640, 300], [-640, 380]].forEach(([x, y], i) => { el("circle", {cx: x, cy: y, r: 170, fill: "#3f8f58", stroke: INK, "stroke-width": 9}, G); el("circle", {cx: x - 30, cy: y - 40, r: 80, fill: "#58a56f"}, G); });
-  const pud = blob(G, 400, "#8fd3f4", 97); set(pud, "stroke-width", 9); tf(pud, "scale(1.4 1)"); s.rip = [0, 1, 2].map(() => el("ellipse", {fill: "none", stroke: "#fff", "stroke-width": 12}, G));
+  const pud = blob(G, 400, "#8fd3f4", 97); set(pud, "stroke-width", 9); tf(pud, "scale(1.4 1)"); s.wash = [[-170, 60, 51], [150, -70, 52], [40, 150, 53]].map(([x, y, sd]) => { const g = hzMote(G, 60, sd); tf(g, `translate(${x} ${y})`); return g; }); s.rip = [0, 1, 2].map(() => el("ellipse", {fill: "none", stroke: "#fff", "stroke-width": 12}, G));
   s.side = [[-520, -210, 120, 41], [560, -150, 150, 42], [-430, 300, 100, 43], [470, 310, 90, 0], [-760, 60, 80, 44]].map(([x, y, r, m]) => ({e: hzDrop(s.fall, r, m), x, y}));
   s.strF = hzStreaks(s.fall, 30, 21, "#eaf9ff", 6);
   s.lens = el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: FULL.h, fill: hzGradR([[0, "#8fd3f4", .1], [.6, "#8fd3f4", .25], [.86, "#3a9ad9", .7], [1, "#1f6fb0", .95]], {r: .62})}, s.fall);
@@ -353,22 +356,22 @@ S.povRain = (() => { const s = scene("povRain", "#7d8590", "#7d8590"), st = s.st
       s.drops.forEach(d => { const m = d.m, dy = (u - m.td) * 1500, caught = u > m.td, my = caught ? m.y + dy : m.y + Math.sin(ua * 2 + m.u * 9) * 10, mx = m.x + Math.sin(ua * 1.4 + m.u * 20) * 12 * (caught ? 0 : 1);
         tf(m.e, `translate(${mx} ${my})`); tf(d.e, `translate(${m.x} ${m.y + dy - 20})`); });
       const g = clamp((u - .9) / (TG - .9)), gs = .12 + 6.5 * g * g * g; tf(s.giant, `translate(${X0 + 40 * (1 - g)} ${lerp(-140, Y0, ease(g))}) scale(${gs})`); op(s.giant, u > .9 ? 1 : 0);
-      hzAt(s.L, X0 + 330, 250, u, 1.15, TG - .25); }
-    else { const v = u - TG, hit = clamp(v / (TSPL - TG)), z = .14 * Math.exp(2.9 * hit * hit + .6 * hit), w = 1 + .025 * Math.sin(t * 9);
+      hzAt(s.L, X0 + 330, 250, u, 1.15, TG - .25); op(s.L2, 0); }
+    else { const v = u - TG, hit = clamp(v / (TSPL - TG)), z = .24 * Math.exp(1.05 * hit * hit + .4 * hit), w = 1 + .025 * Math.sin(t * 9);
       tf(G, `translate(${X0} ${Y0}) scale(${z}) rotate(${12 * (1 - hit)})`);
       s.side.forEach((d, i) => { tf(d.e, `translate(${X0 + d.x + Math.sin(t * 2 + i) * 8} ${Y0 + d.y + Math.cos(t * 2.6 + i * 2) * 8}) scale(${1 - .25 * hit})`); op(d.e, 1 - ramp(u, TSPL - .15, TSPL)); });
       hzRunStreaks(s.strF, 1.4 * v, {r0: 200, a: .5 * (1 - ramp(u, TSPL - .1, TSPL))});
       tf(s.lens, `translate(${X0} ${Y0}) scale(${w} ${2 - w}) translate(${-X0} ${-Y0})`); op(s.lens, 1 - ramp(u, TSPL, TSPL + .3)); op(s.hl, .55 * (1 - ramp(u, TSPL, TSPL + .2)));
-      s.rip.forEach((r, i) => { const q = clamp((u - TSPL - i * .22) / .9); set(r, "rx", 150 + 900 * q); set(r, "ry", 110 + 640 * q); op(r, q > 0 ? (1 - q) * .9 : 0); });
-      tf(s.L2, `translate(${X0} 150)`); op(s.L2, on(v, .25, TSPL - TG - .2, .2)); }
+      s.rip.forEach((r, i) => { const q = clamp((u - TSPL - i * .22) / .9); set(r, "rx", 80 + 520 * q); set(r, "ry", 60 + 360 * q); op(r, q > 0 ? (1 - q) * .9 : 0); }); s.wash.forEach(g => op(g, ramp(u, TSPL + .1, TSPL + .3)));
+      tf(s.L2, `translate(${X0} 150)`); op(s.L2, on(v, .25, TSPL - TG - .2, .2)); op(s.L, 0); }
     op(s.gulp, on(u, TG - .14, TG + .28, .13)); op(s.splash, on(u, TSPL - .08, TSPL + .3, .1) * .9);
     hzShow(s.card, t, t0 + .3, t0 + D + 1); }; return s; })();
 
 // ---- 9. clear (outside): the same view of Singapore as when we arrived, now with clean air and a blue sky
 S.clear = (() => { const s = scene("clear", "#8ecae6", "#219ebc"), st = s.stage, HY = 560;
   el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: HY - FULL.y, fill: hzGradL([[0, "#2f9be0"], [.7, "#8fd3f4"], [1, "#d6f4ff"]])}, st);
-  s.sun = el("g", {transform: "translate(1330 170)"}, st); hzGlow(s.sun, "#fff3b0", 300, .8, .2); el("circle", {r: 70, fill: "#ffd60a", stroke: INK, "stroke-width": 7}, s.sun);
-  [[230, 190, 1], [820, 110, .7], [1500, 330, .8]].forEach(([x, y, k]) => { const g = el("g", {transform: `translate(${x} ${y}) scale(${k})`}, st); el("path", {d: "M-170 40 Q-210 40 -205 0 Q-200 -44 -150 -40 Q-130 -100 -60 -92 Q-20 -150 50 -116 Q120 -130 130 -62 Q200 -60 196 -4 Q194 40 150 40 Z", fill: "#fff", stroke: INK, "stroke-width": 7, "stroke-linejoin": "round"}, g); });
+  s.sun = el("g", {transform: "translate(1665 150)"}, st); hzGlow(s.sun, "#fff3b0", 300, .8, .2); el("circle", {r: 70, fill: "#ffd60a", stroke: INK, "stroke-width": 7}, s.sun);
+  [[160, 230, 1], [760, 250, .7], [1380, 300, .8]].forEach(([x, y, k]) => { const g = el("g", {transform: `translate(${x} ${y}) scale(${k})`}, st); el("path", {d: "M-170 40 Q-210 40 -205 0 Q-200 -44 -150 -40 Q-130 -100 -60 -92 Q-20 -150 50 -116 Q120 -130 130 -62 Q200 -60 196 -4 Q194 40 150 40 Z", fill: "#fff", stroke: INK, "stroke-width": 7, "stroke-linejoin": "round"}, g); });
   s.city = el("g", {transform: `translate(${X0} ${HY + 4}) scale(1.5)`}, st); hzCity(s.city, "#264653", "#4a8fa8");
   seed = 281; for (let k = 0; k < 15; k++) { const x = -640 + k * 92 + rnd() * 30; el("circle", {cx: x, cy: -14, r: 30 + rnd() * 16, fill: k % 2 ? "#40916c" : "#52b788", stroke: INK, "stroke-width": 4}, s.city); }
   el("rect", {x: FULL.x, y: HY, width: FULL.w, height: FULL.y + FULL.h - HY, fill: hzGradL([[0, "#48cae4"], [1, "#0077b6"]])}, st); el("line", {x1: FULL.x, y1: HY, x2: FULL.x + FULL.w, y2: HY, stroke: INK, "stroke-width": 7}, st);
