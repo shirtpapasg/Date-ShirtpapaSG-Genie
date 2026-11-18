@@ -1,0 +1,200 @@
+{
+ "episode": "SAU EP05",
+ "title": "Where does your energy come from?",
+ "tag": "🌏 TheOneApp, Explored · EP 5 · Food",
+ "intro": {
+  "goals": [
+   [
+    "🌿",
+    "How plants make food from light",
+    "first"
+   ],
+   [
+    "🐔",
+    "How energy passes along a food chain",
+    "second"
+   ],
+   [
+    "🍽️",
+    "How Singapore keeps food on our tables",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "The mosquitoes that",
+  "fight dengue 🦟"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "☀️",
+    "All food starts with sunlight",
+    "sunlight",
+    0.15,
+    "#f4a261"
+   ],
+   [
+    "🌽",
+    "Plant → hen → you: a food chain",
+    "chain",
+    0.35,
+    "#2a9d8f"
+   ],
+   [
+    "🛒",
+    "Many sources, grow more, store some",
+    "countries",
+    0.6,
+    "#e63946"
+   ]
+  ],
+  "tease": "🦟 Next time: the mosquitoes that fight dengue!",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "photosynthesis",
+   "PHOTOSYNTHESIS",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "chain",
+   "FOOD CHAIN",
+   "#f77f00"
+  ],
+  [
+   "food",
+   "security",
+   "FOOD SECURITY",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "playground0",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Run, jump, climb! Where does all that energy come from? From your food. But Singapore brings in more than nine out of every ten bites of food from other countries. So how does food, and its energy, reach you?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why do wet clothes dry faster on a sunny, windy day? The Sun's heat makes the water evaporate faster, and the wind blows the water vapour away, so more water can evaporate."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how plants make food from light. Second, how energy passes along a food chain. And third, how Singapore keeps food on our tables. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. Last November, Singapore set new goals for its food. By twenty thirty-five, our own farms should grow one in five of the leafy and fruit vegetables we eat, and three in ten of our eggs and seafood. About a third of our eggs already come from farms in Singapore."
+  },
+  {
+   "id": "f1",
+   "scene": "povSun",
+   "silent": 3.0,
+   "sfx": []
+  },
+  {
+   "id": "f2",
+   "scene": "povLeaf",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "f3",
+   "scene": "povPhoto",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "f4",
+   "scene": "povGrain",
+   "silent": 4.0,
+   "sfx": []
+  },
+  {
+   "id": "f5",
+   "scene": "shipMap",
+   "silent": 4.5,
+   "sfx": []
+  },
+  {
+   "id": "f6",
+   "scene": "povHen",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "f7",
+   "scene": "canteen",
+   "silent": 4.5,
+   "sfx": []
+  },
+  {
+   "id": "f8",
+   "scene": "povBody",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "f9",
+   "scene": "playground",
+   "silent": 5.5,
+   "sfx": []
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "hold": 1.0,
+   "text": "Did you feel that journey? You were light energy from the Sun. A leaf caught you, and photosynthesis turned you into food: chemical potential energy, stored in a grain of corn. A hen on a Singapore farm ate the grain, and you went into an egg. A student ate the egg, and now you help them run, jump and grow."
+  },
+  {
+   "id": "textbook",
+   "scene": "photo",
+   "hold": 1.0,
+   "text": "Now for the textbook link! Plants make their own food by photosynthesis. Using light energy, their leaves turn water and carbon dioxide into sugar, and give out oxygen. Animals cannot make their own food. They get energy by eating plants, or other animals that ate plants. Plant, hen, you: that's a food chain."
+  },
+  {
+   "id": "food",
+   "scene": "security",
+   "hold": 1.0,
+   "text": "So how does Singapore keep food on our tables? This is called food security. We buy from many different countries, so if one has a problem, others can still sell to us. We grow more at home, on egg farms, fish farms, and vegetable farms stacked high in buildings. And we store food away, just in case."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Look at your dinner. Trace every food back to a plant that caught sunlight. Rice? A plant. Chicken? It ate grain. Can you find any food that did not start with sunlight?"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why does Singapore buy food from many different countries, instead of just one? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. All our food starts with sunlight, caught by plants. Energy passes along the food chain, from plants, to animals, to us. And Singapore keeps its food safe by buying from many countries, growing more at home, and storing some away. Next time: the mosquitoes that fight dengue!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

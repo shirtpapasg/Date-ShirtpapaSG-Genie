@@ -17,9 +17,9 @@
   ]
  },
  "next": [
-  "NEXT WEEK",
-  "The mosquitoes that",
-  "fight dengue 🦟"
+  "NEXT TIME",
+  "What really happens",
+  "to your drink can? ♻️"
  ],
  "close": {
   "rows": [
@@ -45,7 +45,7 @@
     "#7209b7"
    ]
   ],
-  "tease": "🦟 Next week: the mosquitoes that fight dengue!",
+  "tease": "♻️ Next time: what really happens to your drink can?",
   "teaseWord": "next"
  },
  "kws": [
@@ -322,12 +322,12 @@
   {
    "id": "think",
    "scene": "think",
-   "text": "Think about it! If we covered every rooftop in Singapore with solar panels, could they power the whole country? Why or why not? I'll tell you the answer next week."
+   "text": "Think about it! If we covered every rooftop in Singapore with solar panels, could they power the whole country? Why or why not? I'll tell you the answer next time."
   },
   {
    "id": "close",
    "scene": "close",
-   "text": "So remember. In nineteen sixty-five, Singapore made electricity by burning oil. Today, we mostly burn natural gas. In future, we could get energy from the Sun, from our neighbours, and maybe even from atoms. Next week: the mosquitoes that fight dengue!"
+   "text": "So remember. In nineteen sixty-five, Singapore made electricity by burning oil. Today, we mostly burn natural gas. In future, we could get energy from the Sun, from our neighbours, and maybe even from atoms. Next time: what really happens to your drink can?"
   },
   {
    "id": "nyk",
@@ -336,5 +336,6 @@
    "text": "Now you know!"
   }
  ],
- "outro": 6.0
+ "outro": 6.0,
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days"
 }
