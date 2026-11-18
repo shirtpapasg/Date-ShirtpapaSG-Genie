@@ -9,7 +9,7 @@ const fs = require('fs'), path = require('path');
 const { chromium } = require('playwright');
 const DIR = __dirname;
 const FONTS = 'file://' + path.resolve(DIR, '../workspace/sau/fonts/node_modules/@fontsource/fredoka/files');
-const pad = n => String(n).padStart(2, '0');
+const pad = n => String(n).replace(/^\d+/, d => d.padStart(2, '0'));   // 7 -> 07, '7A' -> 07A
 const name = e => `${e.set || 'P4'}_EP${pad(e.ep)}`;
 (async () => {
   const data = JSON.parse(fs.readFileSync(path.join(DIR, 'data.json'), 'utf8'));
@@ -18,7 +18,7 @@ const name = e => `${e.set || 'P4'}_EP${pad(e.ep)}`;
   const tpl = fs.readFileSync(path.join(DIR, 'template.html'), 'utf8');
   const args = process.argv.slice(2);
   const want = e => !args.length || args.some(a => /^\d+$/.test(a) ? (e.set || 'P4') === 'P4' && +a === e.ep
-    : a.includes(':') ? a.toUpperCase() === `${e.set}:${e.ep}` : a.toUpperCase() === e.set);
+    : a.includes(':') ? a.toUpperCase() === `${e.set}:${e.ep}` && !(a.includes(':') === false) : a.toUpperCase() === e.set);
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   fs.mkdirSync(path.join(DIR, '.work'), { recursive: true });
@@ -45,10 +45,12 @@ const name = e => `${e.set || 'P4'}_EP${pad(e.ep)}`;
     await page.setContent(`<body style="margin:0;background:#0f0f0f"><style>.l{font:12px/22px sans-serif;color:#ddd;height:22px;overflow:hidden;white-space:nowrap}img{display:block;border-radius:${w > 200 ? 8 : 4}px}</style><div style="display:flex;flex-wrap:wrap;gap:${gap}px;padding:${gap}px">${cells}</div></body>`, { waitUntil: 'load' });
     await page.screenshot({ path: path.join(DIR, file) });
   };
-  const p4 = data.filter(e => (e.set || 'P4') === 'P4'), rest = data.filter(e => (e.set || 'P4') !== 'P4');
+  const p4 = data.filter(e => (e.set || 'P4') === 'P4'), rest = data.filter(e => (e.set || 'P4') !== 'P4' && !e.batch), more = data.filter(e => e.batch === 'p3more');
   await sheet(p4, 'contact_sheet.png', 480, 270, 4, 14, e => `EP${pad(e.ep)} · ${e.video}`);
   await sheet(p4, 'contact_small.png', 168, 94, 6, 10, null);
   await sheet(rest, 'contact_sheet_p3p5p6.png', 480, 270, 4, 14, e => `${e.set} EP${pad(e.ep)} · ${e.video}`);
   await sheet(rest, 'contact_small_p3p5p6.png', 168, 94, 6, 10, null);
+  await sheet(more, 'contact_sheet_p3_more.png', 480, 270, 4, 14, e => `${e.set} EP${pad(e.ep)} · ${e.video}`);
+  await sheet(more, 'contact_small_p3_more.png', 168, 94, 6, 10, null);
   await browser.close();
 })();

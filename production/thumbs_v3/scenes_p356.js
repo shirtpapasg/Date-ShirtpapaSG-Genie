@@ -375,4 +375,153 @@ module.exports = (S, H) => {
       dots('M880 320 Q930 250 990 200', '#fff') + arrow(960, 240, 1010, 176, { c: Y, w: 24 }) +
       sticker(turtle(760, 410, 1.12, 42));
   };
+
+  /* ================= P3 EP06-14B: Materials, Life Cycles, Magnets ================= */
+  const tick = (x, y, s) => `<circle cx="${x}" cy="${y}" r="${s}" fill="#31c48d" stroke="${K}" stroke-width="7"/><path d="M${x - s * .45} ${y} L${x - s * .1} ${y + s * .36} L${x + s * .5} ${y - s * .34}" fill="none" stroke="#fff" stroke-width="${s * .26}" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const no = (x, y, s) => `<circle cx="${x}" cy="${y}" r="${s}" fill="#ff3b3b" stroke="${K}" stroke-width="7"/><path d="M${x - s * .4} ${y - s * .4} L${x + s * .4} ${y + s * .4} M${x + s * .4} ${y - s * .4} L${x - s * .4} ${y + s * .4}" fill="none" stroke="#fff" stroke-width="${s * .26}" stroke-linecap="round"/>`;
+  // bar magnet centred at (x,y): red N half on the right unless flip
+  const barMag = (x, y, w, h, rot = 0, flip = false, fs = null) => { const f = fs || h * .72, a = flip ? ['N', 'S'] : ['S', 'N'], c = flip ? ['#ff3b3b', '#2f7bff'] : ['#2f7bff', '#ff3b3b'];
+    return T(`translate(${x},${y}) rotate(${rot})`, `<rect x="${-w / 2}" y="${-h / 2}" width="${w / 2}" height="${h}" fill="${c[0]}"/><rect x="0" y="${-h / 2}" width="${w / 2}" height="${h}" fill="${c[1]}"/><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="8" fill="none" stroke="${K}" stroke-width="9"/><line x1="0" y1="${-h / 2}" x2="0" y2="${h / 2}" stroke="${K}" stroke-width="6"/>
+      <text x="${-w / 2 + h * .55}" y="${f * .35}" font-size="${f}" font-weight="700" text-anchor="middle" fill="#fff">${a[0]}</text><text x="${w / 2 - h * .55}" y="${f * .35}" font-size="${f}" font-weight="700" text-anchor="middle" fill="#fff">${a[1]}</text>`); };
+  // iron nail: head at (x,y), point to the right
+  const nail = (x, y, len, rot = 0, s = 1) => T(`translate(${x},${y}) rotate(${rot}) scale(${s})`, `<g stroke="${K}" stroke-width="8" stroke-linejoin="round"><path d="M10 -15 H${len - 46} L${len} 0 L${len - 46} 15 H10Z" fill="#aeb6c9"/><rect x="-12" y="-36" width="26" height="72" rx="8" fill="#8d97b3"/></g><path d="M22 -6 H${len - 60}" stroke="#e9eef8" stroke-width="6" stroke-linecap="round"/>`);
+  const clip = (x, y, s = 1, rot = 0, c = '#dfe5f2') => { const d = 'M-9 -26 V18 a9 9 0 0 0 18 0 V-22 a15 15 0 0 0 -30 0 V22 a21 21 0 0 0 42 0 V-18'; return T(`translate(${x},${y}) rotate(${rot}) scale(${s})`, `<path d="${d}" fill="none" stroke="${K}" stroke-width="13" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round"/>`); };
+  const pond = () => blurred(sky([[0, '#1fa3a8'], [.6, '#3fd0b8'], [1, '#1c8f7a']]) + bokeh([[200, 300, 90, .16], [700, 500, 130, .12], [1100, 200, 100, .16], [480, 160, 60, .14]], '#eaffb8') +
+    `<ellipse cx="1120" cy="560" rx="260" ry="70" fill="#2fae52"/><ellipse cx="160" cy="330" rx="150" ry="40" fill="#2fae52" opacity=".7"/>`) + vignette(.4);
+  const tadpole = (x, y, s, rot = 0) => T(`translate(${x},${y}) rotate(${rot}) scale(${s})`, `<g stroke="${K}" stroke-width="8" stroke-linejoin="round"><path d="M-60 -10 Q-150 -70 -220 -10 Q-280 40 -340 0 Q-280 70 -210 40 Q-140 10 -60 30Z" fill="#7a8a4a"/><ellipse cx="0" cy="0" rx="112" ry="82" fill="#5f6f3a"/><ellipse cx="10" cy="26" rx="70" ry="40" fill="#8a9a5a" stroke="none"/></g><circle cx="52" cy="-26" r="20" fill="#fff" stroke="${K}" stroke-width="6"/><circle cx="58" cy="-24" r="9" fill="${K}"/><path d="M70 22 Q88 34 100 20" fill="none" stroke="${K}" stroke-width="6" stroke-linecap="round"/>`);
+  const frogEgg = (x, y, r) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#eaf8ff" stroke="${K}" stroke-width="5" opacity=".95"/><circle cx="${x}" cy="${y}" r="${r * .42}" fill="${K}"/>`;
+
+  // P3 EP6  object or material? one pencil is made of three materials
+  S.pencil = () => {
+    const y = 318, h = 124;
+    let fer = ''; for (const x of [222, 250, 278]) fer += `<line x1="${x}" y1="${y - h / 2}" x2="${x}" y2="${y + h / 2}" stroke="#6b7592" stroke-width="7"/>`;
+    const pen = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round"><rect x="70" y="${y - h / 2}" width="140" height="${h}" rx="34" fill="#ff7ab0"/><rect x="196" y="${y - h / 2 - 5}" width="110" height="${h + 10}" fill="#c5cbdb"/>
+      <rect x="306" y="${y - h / 2}" width="640" height="${h}" fill="${Y}"/><path d="M306 ${y - h / 6} H946 M306 ${y + h / 6} H946" stroke="#e0a800" stroke-width="6" fill="none"/>
+      <path d="M946 ${y - h / 2} L1180 ${y} L946 ${y + h / 2}Z" fill="#f3d2a0"/><path d="M1108 ${y - 19} L1180 ${y} L1108 ${y + 19}Z" fill="#3a3f55"/></g>${fer}`;
+    const lab = (t, x, tx, c) => arrow(x, 470, tx, y + h / 2 + 22, { c, w: 16 }) + tag(t, x, 528, 62, c);
+    return bgLab('#ff8a4c', '#ffd08a', '#fff0d0') + spot(640, 330, 520, '#fff', .5) + sticker(pen) +
+      lab('RUBBER', 190, 140, '#ff9ac4') + lab('METAL', 520, 256, '#e9eef8') + lab('WOOD', 880, 1010, '#ffd9a0');
+  };
+
+  // P3 EP7A  testing materials: strong? bendy? does it float?
+  S.testTank = () => {
+    const [g, d] = vgrad([[0, '#6fd0ff', .85], [1, '#1f8fd6', .9]]);
+    const tank = `<defs>${d}</defs><rect x="690" y="300" width="520" height="250" fill="url(#${g})"/><path d="M690 300 Q730 284 770 300 T850 300 T930 300 T1010 300 T1090 300 T1170 300 L1210 300" fill="none" stroke="#fff" stroke-width="8"/>
+      <rect x="800" y="258" width="170" height="84" rx="8" fill="#c98548" stroke="${K}" stroke-width="8"/><path d="M816 284 H950 M820 314 H940" stroke="#8a5326" stroke-width="6" stroke-linecap="round"/>
+      <rect x="1010" y="462" width="150" height="80" rx="8" fill="#aeb6c9" stroke="${K}" stroke-width="8"/><path d="M1026 482 H1090" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+      <path d="M690 230 V550 H1210 V230" fill="none" stroke="${K}" stroke-width="12" stroke-linejoin="round"/><path d="M704 240 V536" stroke="#fff" stroke-width="7" opacity=".7"/>`;
+    const b1 = `<rect x="30" y="290" width="240" height="250" fill="#fff3d0"/><rect x="60" y="322" width="170" height="18" rx="6" fill="#6b7592" stroke="${K}" stroke-width="6"/><line x1="146" y1="340" x2="146" y2="410" stroke="${K}" stroke-width="12"/><line x1="146" y1="340" x2="146" y2="410" stroke="#c5cbdb" stroke-width="5"/>
+      <path d="M106 410 H186 L204 492 H88Z" fill="#3a3f55" stroke="${K}" stroke-width="7" stroke-linejoin="round"/><text x="146" y="470" font-size="36" font-weight="700" text-anchor="middle" fill="#fff">1 kg</text>`;
+    const b2 = `<rect x="270" y="290" width="240" height="250" fill="#d6f7e8"/><path d="M310 470 Q390 300 480 440" fill="none" stroke="${K}" stroke-width="44" stroke-linecap="round"/><path d="M310 470 Q390 300 480 440" fill="none" stroke="#31c48d" stroke-width="28" stroke-linecap="round"/>` + em('✋', 318, 482, 0);
+    return bgLab() + spot(950, 380, 400, '#fff', .5) + bubble(146, 410, 98, b1) + bubble(394, 410, 98, b2) + sticker(tank) +
+      arrow(885, 212, 885, 250, { c: '#31c48d', w: 0.1 }) + tag('WOOD', 1090, 300, 50, '#ffd9a0') + tag('METAL', 860, 506, 50, '#e9eef8') +
+      arrow(1085, 360, 1085, 444, { c: '#ff3b3b', w: 20 }) + word('?', 590, 420, 150, Y);
+  };
+
+  // P3 EP7B  waterproof: drops bead up and roll off; fabric soaks them up
+  S.waterproof = () => {
+    const cx = 960;
+    const coat = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round"><path d="M${cx - 150} 250 L${cx - 290} 400 L${cx - 220} 462 L${cx - 150} 400Z" fill="#ffc400"/><path d="M${cx + 150} 250 L${cx + 290} 400 L${cx + 220} 462 L${cx + 150} 400Z" fill="#ffc400"/>
+      <path d="M${cx - 150} 240 H${cx + 150} L${cx + 170} 556 H${cx - 170}Z" fill="${Y}"/><path d="M${cx - 84} 250 Q${cx - 100} 130 ${cx} 126 Q${cx + 100} 130 ${cx + 84} 250 Q${cx} 300 ${cx - 84} 250Z" fill="#ffc400"/><path d="M${cx - 50} 240 Q${cx - 56} 170 ${cx} 168 Q${cx + 56} 170 ${cx + 50} 240Z" fill="#3a2a6e"/>
+      <path d="M${cx} 286 V556" fill="none" stroke-width="7"/></g><g fill="#fff" stroke="${K}" stroke-width="5"><circle cx="${cx + 22}" cy="330" r="11"/><circle cx="${cx + 22}" cy="410" r="11"/><circle cx="${cx + 22}" cy="490" r="11"/></g>`;
+    const bead = (x, y, r) => `<ellipse cx="${x}" cy="${y}" rx="${r}" ry="${r * .8}" fill="#6fd0ff" stroke="${K}" stroke-width="5"/><ellipse cx="${x - r * .3}" cy="${y - r * .25}" rx="${r * .3}" ry="${r * .2}" fill="#fff"/>`;
+    const tx = 310, shirt = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round"><path d="M${tx - 90} 290 L${tx - 230} 350 L${tx - 190} 440 L${tx - 120} 410 V550 H${tx + 120} V410 L${tx + 190} 440 L${tx + 230} 350 L${tx + 90} 290 Q${tx} 350 ${tx - 90} 290Z" fill="#f5f0e4"/></g>
+      <g fill="#7f9fc4" opacity=".85"><ellipse cx="${tx - 30}" cy="430" rx="70" ry="56"/><ellipse cx="${tx + 56}" cy="490" rx="50" ry="42"/><ellipse cx="${tx + 130}" cy="372" rx="44" ry="26"/><ellipse cx="${tx - 150}" cy="372" rx="40" ry="24"/></g>`;
+    return blurred(sky([[0, '#5a6f9a'], [.7, '#9fb6d6'], [1, '#c8d8ea']]) + clouds([[240, 300, 1.4], [760, 260, 1.2], [1150, 120, 1.4]]) + `<rect y="540" width="1280" height="180" fill="#5b6478"/>`) + vignette(.4) + spot(cx, 360, 380, '#fff', .5) +
+      sticker(shirt) + sticker(coat) + drops([[720, 120, 1], [860, 60, .9], [1180, 220, 1], [1230, 80, .8], [620, 250, .9], [560, 380, .8]]) +
+      bead(cx - 90, 330, 22) + bead(cx - 60, 430, 18) + bead(cx + 100, 380, 22) + bead(cx - 226, 372, 18) + bead(cx + 120, 520, 18) +
+      arrow(cx + 196, 330, cx + 250, 420, { c: '#6fd0ff', w: 14 }) + tag('SOAKED', tx, 268, 54, '#bfe0ff') + no(tx + 150, 300, 34) + tick(cx + 190, 200, 40);
+  };
+
+  // P3 EP8  choose the material for the purpose: a glass trolley is a bad idea
+  S.glassTrolley = () => {
+    const x0 = 560, y0 = 250;
+    let grid = ''; for (let i = 1; i < 7; i++) grid += `<line x1="${x0 + 60 + i * 62}" y1="${y0 + 20}" x2="${x0 + 80 + i * 52}" y2="${y0 + 190}" stroke="#bfeaff" stroke-width="5"/>`;
+    const crack = `<path d="M${x0 + 250} ${y0 + 24} l-24 46 l40 26 l-34 44 l36 30 l-20 26 M${x0 + 256} ${y0 + 96} l56 -10 l30 30 M${x0 + 232} ${y0 + 140} l-60 14 l-22 34" fill="none" stroke="${K}" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>`;
+    const trolley = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M${x0 - 90} ${y0 - 30} H${x0 + 10} L${x0 + 60} ${y0 + 20}" fill="none" stroke-width="20"/><path d="M${x0 - 90} ${y0 - 30} H${x0 + 10} L${x0 + 60} ${y0 + 20}" fill="none" stroke="#ff5a5a" stroke-width="8"/>
+      <path d="M${x0 + 50} ${y0 + 14} H${x0 + 520} L${x0 + 460} ${y0 + 196} H${x0 + 96}Z" fill="#cfefff" fill-opacity=".72"/><path d="M${x0 + 110} ${y0 + 196} L${x0 + 130} ${y0 + 262} H${x0 + 440}" fill="none"/></g>${grid}
+      <path d="M${x0 + 90} ${y0 + 40} L${x0 + 126} ${y0 + 150}" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity=".9"/>${crack}
+      <circle cx="${x0 + 160}" cy="${y0 + 286}" r="30" fill="#2b3350" stroke="${K}" stroke-width="8"/><circle cx="${x0 + 420}" cy="${y0 + 286}" r="30" fill="#2b3350" stroke="${K}" stroke-width="8"/>`;
+    const shard = (x, y, r) => `<path d="M0 -26 L20 14 L-22 18Z" fill="#cfefff" stroke="${K}" stroke-width="6" stroke-linejoin="round" transform="translate(${x},${y}) rotate(${r})"/>`;
+    return bgWall('#fff3d0', '#ffb86b', '#6a5a8a') + spot(840, 380, 420, '#fff', .55) + sticker(em('🍉', x0 + 300, y0 + 60, 170) + trolley) +
+      sticker(shard(1150, 500, 20) + shard(1210, 420, 80) + shard(560, 520, -30) + shard(500, 440, 50)) +
+      `<g stroke="${Y}" stroke-width="10" stroke-linecap="round"><path d="M800 196 l-14 -40 M850 190 l10 -44 M740 216 l-36 -26"/></g>` +
+      sticker(em('😱', 250, 410, 230)) + word('GLASS', 1130, 190, 76, '#bfeaff', 'middle', 8);
+  };
+
+  // P3 EP9  a plant's life cycle goes round and round: seed, young plant, adult plant
+  S.plantCycle = () => {
+    const st = (x, y, r, col, inner) => bubble(x, y, r, `<rect x="${x - r - 8}" y="${y - r - 8}" width="${2 * r + 16}" height="${2 * r + 16}" fill="${col}"/>` + inner);
+    const seed = `<path d="M470 470 Q430 400 490 370 Q570 350 600 420 Q610 480 540 490 Q490 494 470 470Z" fill="#e9c98a" stroke="${K}" stroke-width="8" stroke-linejoin="round"/><path d="M494 396 Q550 390 580 430" fill="none" stroke="#b58a4a" stroke-width="6" stroke-linecap="round"/>`;
+    const young = `<rect x="740" y="252" width="200" height="60" fill="#8a5a36"/><path d="M836 256 V170" stroke="${K}" stroke-width="20" stroke-linecap="round"/><path d="M836 256 V170" stroke="#5fcf5a" stroke-width="9" stroke-linecap="round"/>` + leafShape(806, 168, 34, 76, -50, '#5fcf5a') + leafShape(868, 160, 34, 76, 50, '#7fd65a');
+    const tree = `<path d="M1068 520 Q1078 440 1064 380 H1116 Q1104 440 1114 520Z" fill="#9a6338" stroke="${K}" stroke-width="7" stroke-linejoin="round"/><g fill="#3fbf5f" stroke="${K}" stroke-width="7"><circle cx="1020" cy="368" r="58"/><circle cx="1160" cy="368" r="58"/><circle cx="1090" cy="318" r="76"/></g><g fill="#3fbf5f"><circle cx="1020" cy="368" r="52"/><circle cx="1160" cy="368" r="52"/><circle cx="1090" cy="318" r="70"/></g>` + em('🥭', 1034, 388, 50) + em('🥭', 1130, 340, 50) + em('🥭', 1150, 410, 46);
+    return bgGarden(600) + spot(860, 360, 460, '#fff', .5) +
+      arrow(610, 350, 730, 240, { c: Y, w: 24, bend: -30 }) + arrow(940, 200, 1040, 262, { c: Y, w: 24, bend: -24 }) + arrow(960, 500, 650, 500, { c: Y, w: 24, bend: -40 }) +
+      st(536, 428, 92, '#fff3d0', seed) + st(836, 196, 84, '#d6f1ff', young) + st(1090, 400, 132, '#d6f1ff', tree) +
+      sticker(em('🥭', 230, 420, 200)) + arrow(350, 428, 420, 428, { c: '#fff', w: 18 });
+  };
+
+  // P3 EP10  egg -> tadpole (no legs) -> frog
+  S.tadFrog = () => {
+    const eggs = [[120, 400, 34], [176, 440, 34], [110, 468, 34], [180, 374, 30], [232, 412, 30], [150, 512, 28], [222, 480, 30]].map(([x, y, r]) => frogEgg(x, y, r)).join('');
+    return pond() + spot(600, 400, 380, '#fff', .45) + sticker(eggs) + arrow(270, 440, 330, 440, { c: Y, w: 22 }) +
+      sticker(tadpole(640, 420, .92, -6)) + arrow(790, 420, 870, 400, { c: Y, w: 22 }) + sticker(em('🐸', 1060, 350, 300)) +
+      tag('NO LEGS!', 560, 296, 58, '#fff') + word('?', 910, 300, 130, Y, 'middle', 10);
+  };
+
+  // P3 EP11  compare life cycles: a frog has 3 stages, a mosquito has 4
+  S.frogMozzie = () => {
+    const st = (x, y, col, inner) => bubble(x, y, 62, `<rect x="${x - 72}" y="${y - 72}" width="144" height="144" fill="${col}"/>` + inner);
+    const y1 = 310, y2 = 478, w = '#d6f1ff';
+    const ar = (x, y) => arrow(x - 22, y, x + 14, y, { c: '#fff', w: 12 });
+    const larva = (x, y) => `<path d="M${x - 44} ${y - 30} H${x + 44}" stroke="#2f9bff" stroke-width="6"/><path d="M${x - 10} ${y - 30} Q${x - 4} ${y} ${x + 16} ${y + 34}" fill="none" stroke="${K}" stroke-width="22" stroke-linecap="round"/><path d="M${x - 10} ${y - 30} Q${x - 4} ${y} ${x + 16} ${y + 34}" fill="none" stroke="#8a6a4a" stroke-width="11" stroke-linecap="round" stroke-dasharray="9 5"/><circle cx="${x + 18}" cy="${y + 36}" r="13" fill="#5a3a2a" stroke="${K}" stroke-width="5"/>`;
+    const pupa = (x, y) => `<path d="M${x - 44} ${y - 30} H${x + 44}" stroke="#2f9bff" stroke-width="6"/><circle cx="${x - 6}" cy="${y - 4}" r="27" fill="#6b4a3a" stroke="${K}" stroke-width="6"/><path d="M${x + 12} ${y + 14} Q${x + 34} ${y + 40} ${x + 6} ${y + 44}" fill="none" stroke="${K}" stroke-width="20" stroke-linecap="round"/><path d="M${x + 12} ${y + 14} Q${x + 34} ${y + 40} ${x + 6} ${y + 44}" fill="none" stroke="#6b4a3a" stroke-width="9" stroke-linecap="round"/>`;
+    const raft = (x, y) => [-30, -15, 0, 15, 30].map(d => `<ellipse cx="${x + d}" cy="${y}" rx="8" ry="22" fill="#3a2a2a" stroke="${K}" stroke-width="3"/>`).join('') + `<path d="M${x - 46} ${y + 22} H${x + 46}" stroke="#2f9bff" stroke-width="6"/>`;
+    return pond() + spot(1100, 300, 300, '#fff', .5) +
+      st(110, y1, w, frogEgg(110, y1, 34)) + ar(196, y1) + st(280, y1, w, tadpole(300, y1, .3)) + ar(366, y1) + st(450, y1, '#e4f7c8', em('🐸', 450, y1 + 2, 90)) + word('3', 580, y1 + 34, 120, Y) +
+      st(110, y2, w, raft(110, y2)) + ar(196, y2) + st(280, y2, w, larva(280, y2)) + ar(366, y2) + st(450, y2, w, pupa(450, y2)) + ar(536, y2) + st(620, y2, '#ffe7d0', em('🦟', 620, y2 + 2, 90)) + word('4', 750, y2 + 34, 120, Y) +
+      sticker(em('🦟', 1090, 300, 300)) + sticker(em('🐸', 930, 470, 150));
+  };
+
+  // P3 EP12  a magnet pulls iron and steel, but not every metal
+  S.magMetals = () => {
+    const mx = 900, top = 120;
+    const u = `<g stroke="${K}" stroke-width="9" stroke-linejoin="round"><path d="M${mx - 170} 420 V${top + 150} A170 170 0 0 1 ${mx + 170} ${top + 150} V420 H${mx + 80} V${top + 150} A80 80 0 0 0 ${mx - 80} ${top + 150} V420Z" fill="#ff3b3b"/><rect x="${mx - 170}" y="340" width="90" height="80" fill="#e9eef8"/><rect x="${mx + 80}" y="340" width="90" height="80" fill="#e9eef8"/></g>
+      <text x="${mx - 125}" y="400" font-size="52" font-weight="700" text-anchor="middle" fill="${K}">N</text><text x="${mx + 125}" y="400" font-size="52" font-weight="700" text-anchor="middle" fill="${K}">S</text>`;
+    const can = `<g stroke="${K}" stroke-width="8" stroke-linejoin="round"><rect x="110" y="330" width="130" height="200" rx="18" fill="#dfe5f2"/><rect x="110" y="380" width="130" height="90" fill="#31c48d"/><ellipse cx="175" cy="332" rx="62" ry="14" fill="#f5f8ff"/></g>`;
+    const coin = `<circle cx="470" cy="470" r="62" fill="#d98a4a" stroke="${K}" stroke-width="8"/><circle cx="470" cy="470" r="44" fill="none" stroke="#a85f2a" stroke-width="6"/><text x="470" y="490" font-size="52" font-weight="700" text-anchor="middle" fill="#7a3f14">¢</text>`;
+    return bgLab('#3b4fd6', '#8fb8ff', '#f0e2c8') + spot(mx, 360, 400, '#fff', .55) +
+      sticker(nail(mx - 126, 432, 120, 80) + clip(mx + 110, 452, 1.2, 12) + clip(mx + 150, 498, 1.2, -20) + clip(mx + 100, 520, 1.1, 30)) + sticker(u) +
+      sticker(can) + no(240, 330, 40) + sticker(coin) + no(528, 414, 40) + tick(mx - 210, 470, 40) +
+      tag('ALUMINIUM', 200, 284, 46, '#fff') + tag('COPPER', 480, 372, 46, '#ffc89a') + tag('IRON', mx - 290, 540, 56, '#7dffb0') + tag('STEEL', mx + 250, 540, 56, '#7dffb0');
+  };
+
+  // P3 EP13  like poles repel; a freely hanging magnet points north-south
+  S.poles = () => {
+    const y = 420;
+    const hang = `<line x1="1080" y1="-10" x2="1080" y2="150" stroke="${K}" stroke-width="10"/><line x1="1080" y1="-10" x2="1080" y2="150" stroke="#fff" stroke-width="4"/>` + barMag(1080, 170, 250, 56, -18, false, 40);
+    const zap = `<g stroke="${Y}" stroke-width="12" stroke-linecap="round"><path d="M640 ${y - 80} V${y - 130} M640 ${y + 80} V${y + 130} M600 ${y - 60} l-26 -40 M680 ${y - 60} l26 -40 M600 ${y + 60} l-26 40 M680 ${y + 60} l26 40"/></g>`;
+    return bgDark('#5b2bd6', '#160a3a') + spot(640, y, 420, '#fff', .3) + sticker(barMag(300, y, 460, 130)) + sticker(barMag(980, y, 460, 130, 0, true)) + zap +
+      arrow(520, 290, 360, 290, { c: '#ff8a3c', w: 26 }) + arrow(760, 290, 920, 290, { c: '#ff8a3c', w: 26 }) +
+      sticker(hang) + arrow(1210, 150, 1246, 60, { c: '#fff', w: 12 }) + word('N', 1180, 80, 60, '#ff7a7a');
+  };
+
+  // P3 EP14A  two ways to make an iron nail into a magnet: stroke it, or use electricity
+  S.makeMagnet = () => {
+    let coil = ''; for (let i = 0; i < 7; i++) coil += `<ellipse cx="${1016 + i * 24}" cy="200" rx="12" ry="34" fill="none" stroke="${K}" stroke-width="13"/><ellipse cx="${1016 + i * 24}" cy="200" rx="12" ry="34" fill="none" stroke="#ff8a3c" stroke-width="6"/>`;
+    const em2 = `<rect x="960" y="70" width="300" height="270" fill="#e8f1ff"/>` + nail(984, 200, 230, 0, .9) + coil + `<path d="M1016 232 Q1010 290 1070 290 M1160 232 Q1170 290 1130 290" fill="none" stroke="${K}" stroke-width="8"/>` + em('🔋', 1100, 286, 70);
+    const badge = (x, y, n) => `<circle cx="${x}" cy="${y}" r="38" fill="${Y}" stroke="${K}" stroke-width="7"/><text x="${x}" y="${y + 19}" font-size="54" font-weight="700" text-anchor="middle" fill="${K}">${n}</text>`;
+    return bgLab('#12a6a0', '#8ff0d8', '#f0e2c8') + spot(560, 420, 420, '#fff', .5) +
+      sticker(nail(170, 470, 560) + clip(770, 474, 1.3, 80) + clip(820, 500, 1.2, 40) + clip(790, 440, 1.1, 120)) +
+      sticker(barMag(420, 352, 330, 96, -24)) + arrow(250, 300, 660, 300, { c: Y, w: 24, bend: -70 }) +
+      shadow(badge(96, 330, 1)) + bubble(1100, 200, 118, em2) + shadow(badge(1010, 106, 2)) + sticker(em('⚡', 1210, 300, 80));
+  };
+
+  // P3 EP14B  a fair test: which magnet holds the longer chain of paper clips?
+  S.magStrength = () => {
+    const rig = (x, n, c) => { let s = barMag(x, 300, 190, 84, 90, false, 50); for (let i = 0; i < n; i++) s += clip(x + (i % 2 ? 5 : -5), 428 + i * 38, .95, i % 2 ? 8 : -8); return s; };
+    const bar = `<rect x="330" y="176" width="820" height="30" rx="12" fill="#6b7592" stroke="${K}" stroke-width="8"/><path d="M470 206 V214 M1000 206 V214" stroke="${K}" stroke-width="14"/>`;
+    return bgLab('#ff8a4c', '#ffd08a', '#fff0d0') + spot(1000, 360, 360, '#fff', .6) + sticker(bar) + sticker(rig(470, 2)) + sticker(rig(1000, 4)) +
+      word('2', 610, 480, 130, '#fff') + word('4', 1150, 500, 150, Y) + word('?', 780, 420, 170, Y) + sticker(em('📎', 200, 430, 190));
+  };
 };

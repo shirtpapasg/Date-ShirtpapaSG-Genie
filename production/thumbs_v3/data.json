@@ -44,5 +44,16 @@
  {"set": "P6", "ep": 9, "level": "P6", "topic": "Habitats", "banner": "Why hide in the damp?", "scene": "snail", "titleMaxW": 680, "video": "Why Do Snails Hide In Damp Corners?"},
  {"set": "P6", "ep": 10, "level": "P6", "topic": "Food Webs", "banner": "More birds. Then what?", "scene": "foodWeb", "titleMaxW": 720, "video": "What Happens When More Birds Arrive? Food Webs"},
  {"set": "P6", "ep": 11, "level": "P6", "topic": "Adaptations", "banner": "Why come out at NIGHT?", "scene": "desertFox", "titleMaxW": 760, "video": "Why Does A Desert Animal Come Out At Night?"},
- {"set": "P6", "ep": 12, "level": "P6", "topic": "Conservation", "banner": "Help them reach the sea!", "scene": "turtle", "titleMaxW": 760, "video": "Can We Help Baby Turtles Reach The Sea?"}
+ {"set": "P6", "ep": 12, "level": "P6", "topic": "Conservation", "banner": "Help them reach the sea!", "scene": "turtle", "titleMaxW": 760, "video": "Can We Help Baby Turtles Reach The Sea?"},
+ {"set": "P3", "ep": 6, "level": "P3", "topic": "Materials", "banner": "1 pencil, 3 materials!", "scene": "pencil", "titleMaxW": 680, "video": "What Is It Made Of? Seven Materials Around You", "batch": "p3more"},
+ {"set": "P3", "ep": "7A", "level": "P3", "topic": "Testing Materials", "banner": "Strong? Bendy? Floaty?", "scene": "testTank", "titleMaxW": 860, "video": "Strong, Bendy, Floaty: Testing Materials (Part A)", "batch": "p3more"},
+ {"set": "P3", "ep": "7B", "level": "P3", "topic": "Waterproof", "banner": "Drops roll right off!", "scene": "waterproof", "titleMaxW": 700, "video": "Waterproof Or See-Through? Testing Materials (Part B)", "batch": "p3more"},
+ {"set": "P3", "ep": 8, "level": "P3", "topic": "Right Material", "banner": "A GLASS trolley?!", "scene": "glassTrolley", "titleMaxW": 800, "video": "Why That Material? A Glass Trolley And Other Bad Ideas", "batch": "p3more"},
+ {"set": "P3", "ep": 9, "level": "P3", "topic": "Life Cycles", "banner": "Round and round!", "scene": "plantCycle", "titleMaxW": 700, "video": "What Happens After You Plant A Seed? Round And Round", "batch": "p3more"},
+ {"set": "P3", "ep": 10, "level": "P3", "topic": "Frog Life Cycle", "banner": "No legs. Then a FROG?!", "scene": "tadFrog", "titleMaxW": 800, "video": "A Tadpole Has No Legs. So How Does It Become A Frog?", "batch": "p3more"},
+ {"set": "P3", "ep": 11, "level": "P3", "topic": "Frog vs Mosquito", "banner": "3 stages or 4?", "scene": "frogMozzie", "titleMaxW": 820, "video": "Frog Or Mosquito: Who Changes More? Comparing Life Cycles", "batch": "p3more"},
+ {"set": "P3", "ep": 12, "level": "P3", "topic": "Magnets", "banner": "Not all metals stick!", "scene": "magMetals", "titleMaxW": 640, "video": "Not All Metals Stick! What A Magnet Really Pulls", "batch": "p3more"},
+ {"set": "P3", "ep": 13, "level": "P3", "topic": "Magnetic Poles", "banner": "They REFUSE to touch!", "scene": "poles", "titleMaxW": 800, "video": "Two Magnets That Refuse To Touch, And One That Finds North", "batch": "p3more"},
+ {"set": "P3", "ep": "14A", "level": "P3", "topic": "Make A Magnet", "banner": "Nail becomes a MAGNET!", "scene": "makeMagnet", "titleMaxW": 800, "video": "Turn A Nail Into A Magnet, Two Ways (Part A)", "batch": "p3more"},
+ {"set": "P3", "ep": "14B", "level": "P3", "topic": "Magnet Strength", "banner": "Which one is STRONGER?", "scene": "magStrength", "titleMaxW": 820, "video": "Test It Fairly, Then Find Magnets Everywhere (Part B)", "batch": "p3more"}
 ]

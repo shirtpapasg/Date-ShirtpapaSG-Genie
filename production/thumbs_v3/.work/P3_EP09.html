@@ -1,0 +1,88 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:Fredoka;font-weight:500;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-500-normal.woff2")}
+@font-face{font-family:Fredoka;font-weight:600;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2")}
+@font-face{font-family:Fredoka;font-weight:700;src:url("file:///home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2")}
+html,body{margin:0;background:#000}
+svg{display:block}
+text{font-family:Fredoka,'Noto Color Emoji',sans-serif}
+.em{font-family:'Noto Color Emoji'}
+</style></head>
+<body>
+<svg id="thumb" xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs>
+  <!-- white sticker edge + soft drop shadow: makes the hero pop off the scene -->
+  <filter id="sticker" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feMorphology in="SourceAlpha" operator="dilate" radius="6" result="d"/>
+    <feGaussianBlur in="d" stdDeviation="1.2" result="d2"/>
+    <feComponentTransfer in="d2" result="d3"><feFuncA type="linear" slope="6" intercept="-1"/></feComponentTransfer>
+    <feFlood flood-color="#fff"/><feComposite in2="d3" operator="in" result="w"/>
+    <feGaussianBlur in="d" stdDeviation="9" result="b"/><feOffset in="b" dy="10" result="o"/>
+    <feFlood flood-color="#0b0b25" flood-opacity=".55"/><feComposite in2="o" operator="in" result="s"/>
+    <feMerge><feMergeNode in="s"/><feMergeNode in="w"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="shadow" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="b"/><feOffset in="b" dy="9" result="o"/>
+    <feFlood flood-color="#0b0b25" flood-opacity=".5"/><feComposite in2="o" operator="in" result="s"/>
+    <feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="bgblur" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800"><feGaussianBlur stdDeviation="3.2"/></filter>
+  <filter id="blur8" filterUnits="userSpaceOnUse" x="-80" y="-80" width="1440" height="880"><feGaussianBlur stdDeviation="8"/></filter>
+  <filter id="blur20" filterUnits="userSpaceOnUse" x="-120" y="-120" width="1520" height="960"><feGaussianBlur stdDeviation="20"/></filter>
+  <filter id="sil" filterUnits="userSpaceOnUse" x="-40" y="-40" width="1360" height="800">
+    <feColorMatrix type="matrix" values="0 0 0 0 0.09  0 0 0 0 0.08  0 0 0 0 0.2  0 0 0 1 0"/><feGaussianBlur stdDeviation="2.5"/>
+  </filter>
+  <linearGradient id="beamG" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff3a0" stop-opacity=".95"/><stop offset="1" stop-color="#fff3a0" stop-opacity=".35"/></linearGradient>
+</defs>
+<g filter="url(#bgblur)"><defs><linearGradient id="g14" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#58b9ff"/><stop offset="0.55" stop-color="#c8eeff"/><stop offset="1" stop-color="#e8fbff"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g14)"/><g transform="translate(200,300) scale(1.1)" fill="#fff" opacity=".9"><ellipse cx="0" cy="0" rx="70" ry="30"/><circle cx="-30" cy="-18" r="30"/><circle cx="12" cy="-28" r="38"/><circle cx="48" cy="-10" r="24"/></g><g transform="translate(620,260) scale(0.9)" fill="#fff" opacity=".9"><ellipse cx="0" cy="0" rx="70" ry="30"/><circle cx="-30" cy="-18" r="30"/><circle cx="12" cy="-28" r="38"/><circle cx="48" cy="-10" r="24"/></g><ellipse cx="350" cy="610" rx="600" ry="70" fill="#78d36f"/><rect y="586" width="1280" height="40" fill="#5cc45c"/></g><defs><linearGradient id="g15" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8a5a36"/><stop offset="1" stop-color="#4f2f1b"/></linearGradient></defs><rect y="614" width="1280" height="120" fill="url(#g15)"/><path d="M0 614 H1280" stroke="#3f8f3c" stroke-width="16"/><circle cx="90" cy="680" r="9" fill="#2d1a0e" opacity="0.25"/><circle cx="300" cy="720" r="6" fill="#2d1a0e" opacity="0.25"/><circle cx="520" cy="660" r="8" fill="#2d1a0e" opacity="0.2"/><circle cx="760" cy="710" r="7" fill="#2d1a0e" opacity="0.25"/><circle cx="640" cy="750" r="5" fill="#2d1a0e" opacity="0.2"/><circle cx="1200" cy="690" r="8" fill="#2d1a0e" opacity="0.22"/><defs><radialGradient id="r16" cx="0.5" cy="0.5" r="0.75"><stop offset="0.55" stop-color="#0b0b25" stop-opacity="0"/><stop offset="1" stop-color="#0b0b25" stop-opacity="0.3"/></radialGradient></defs><rect width="1280" height="720" fill="url(#r16)"/><defs><radialGradient id="r17" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff" stop-opacity="0.5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><circle cx="860" cy="360" r="460" fill="url(#r17)"/><g stroke-linecap="round" stroke-linejoin="round"><path d="M610 350 Q649.7282611444796 272.88537579397774 677.2546383587924 261.60848965888675" fill="none" stroke="#1b1b3a" stroke-width="37"/><path d="M730 240 L688.5809494182128 297.1690672383532 L660.3761839687185 228.3224899382505 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M610 350 Q649.7282611444796 272.88537579397774 677.2546383587924 261.60848965888675" fill="none" stroke="#ffd23f" stroke-width="24"/><path d="M730 240 L688.5809494182128 297.1690672383532 L660.3761839687185 228.3224899382505 Z" fill="#ffd23f" stroke="#ffd23f" stroke-width="2"/></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M940 200 Q1002.6465520526802 210.60233539890288 1006.4898650383069 215.89066412483135" fill="none" stroke="#1b1b3a" stroke-width="37"/><path d="M1040 262 L974.6337650481078 235.3336292642958 L1034.8185824009595 191.59408468271752 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M940 200 Q1002.6465520526802 210.60233539890288 1006.4898650383069 215.89066412483135" fill="none" stroke="#ffd23f" stroke-width="24"/><path d="M1040 262 L974.6337650481078 235.3336292642958 L1034.8185824009595 191.59408468271752 Z" fill="#ffd23f" stroke="#ffd23f" stroke-width="2"/></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M960 500 Q805 540 705.1918074514334 514.2430470842409" fill="none" stroke="#1b1b3a" stroke-width="37"/><path d="M650 500 L717.3921017301712 478.9727646993181 L698.8011771149517 551.0125975832943 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M960 500 Q805 540 705.1918074514334 514.2430470842409" fill="none" stroke="#ffd23f" stroke-width="24"/><path d="M650 500 L717.3921017301712 478.9727646993181 L698.8011771149517 551.0125975832943 Z" fill="#ffd23f" stroke="#ffd23f" stroke-width="2"/></g><g filter="url(#sticker)"><circle cx="536" cy="428" r="97" fill="#fff" stroke="#1b1b3a" stroke-width="8"/><clipPath id="pb3"><circle cx="536" cy="428" r="92"/></clipPath><g clip-path="url(#pb3)"><rect x="436" y="328" width="200" height="200" fill="#fff3d0"/><path d="M470 470 Q430 400 490 370 Q570 350 600 420 Q610 480 540 490 Q490 494 470 470Z" fill="#e9c98a" stroke="#1b1b3a" stroke-width="8" stroke-linejoin="round"/><path d="M494 396 Q550 390 580 430" fill="none" stroke="#b58a4a" stroke-width="6" stroke-linecap="round"/></g></g><g filter="url(#sticker)"><circle cx="836" cy="196" r="89" fill="#fff" stroke="#1b1b3a" stroke-width="8"/><clipPath id="pb4"><circle cx="836" cy="196" r="84"/></clipPath><g clip-path="url(#pb4)"><rect x="744" y="104" width="184" height="184" fill="#d6f1ff"/><rect x="740" y="252" width="200" height="60" fill="#8a5a36"/><path d="M836 256 V170" stroke="#1b1b3a" stroke-width="20" stroke-linecap="round"/><path d="M836 256 V170" stroke="#5fcf5a" stroke-width="9" stroke-linecap="round"/><g transform="translate(806,168) rotate(-50)"><path d="M0 -38 C25.5 -22.8 23.799999999999997 22.8 0 38 C-23.799999999999997 22.8 -25.5 -22.8 0 -38Z" fill="#5fcf5a" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round"/></g><g transform="translate(868,160) rotate(50)"><path d="M0 -38 C25.5 -22.8 23.799999999999997 22.8 0 38 C-23.799999999999997 22.8 -25.5 -22.8 0 -38Z" fill="#7fd65a" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round"/></g></g></g><g filter="url(#sticker)"><circle cx="1090" cy="400" r="137" fill="#fff" stroke="#1b1b3a" stroke-width="8"/><clipPath id="pb5"><circle cx="1090" cy="400" r="132"/></clipPath><g clip-path="url(#pb5)"><rect x="950" y="260" width="280" height="280" fill="#d6f1ff"/><path d="M1068 520 Q1078 440 1064 380 H1116 Q1104 440 1114 520Z" fill="#9a6338" stroke="#1b1b3a" stroke-width="7" stroke-linejoin="round"/><g fill="#3fbf5f" stroke="#1b1b3a" stroke-width="7"><circle cx="1020" cy="368" r="58"/><circle cx="1160" cy="368" r="58"/><circle cx="1090" cy="318" r="76"/></g><g fill="#3fbf5f"><circle cx="1020" cy="368" r="52"/><circle cx="1160" cy="368" r="52"/><circle cx="1090" cy="318" r="70"/></g><text class="em" x="1034" y="388" font-size="50" text-anchor="middle" dominant-baseline="central"  >🥭</text><text class="em" x="1130" y="340" font-size="50" text-anchor="middle" dominant-baseline="central"  >🥭</text><text class="em" x="1150" y="410" font-size="46" text-anchor="middle" dominant-baseline="central"  >🥭</text></g></g><g filter="url(#sticker)"><text class="em" x="230" y="420" font-size="200" text-anchor="middle" dominant-baseline="central"  >🥭</text></g><g stroke-linecap="round" stroke-linejoin="round"><path d="M350 428 Q385 428 378 428" fill="none" stroke="#1b1b3a" stroke-width="31"/><path d="M420 428 L375 455.9 L375 400.1 Z" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="13"/><path d="M350 428 Q385 428 378 428" fill="none" stroke="#fff" stroke-width="18"/><path d="M420 428 L375 455.9 L375 400.1 Z" fill="#fff" stroke="#fff" stroke-width="2"/></g>
+<!-- brand pill -->
+<g filter="url(#shadow)">
+  <rect id="pill" x="38" y="22" width="500" height="70" rx="35" fill="#1b1b3a" stroke="#fff" stroke-width="4"/>
+  <text id="pilltext" x="72" y="71" font-size="40" font-weight="600" fill="#fff">TheOneApp <tspan fill="#ffd23f">Explained</tspan></text>
+</g>
+<!-- giant two-tone title -->
+<g id="title" font-weight="700" stroke-linejoin="round" stroke-linecap="round">
+  <text id="t0" x="38" y="208" fill="#1b1b3a" stroke="#1b1b3a"></text>
+  <text id="t1" x="38" y="208" fill="#1b1b3a" stroke="#1b1b3a"></text>
+  <text id="t2" x="38" y="208"></text>
+</g>
+<!-- yellow idea banner -->
+<g filter="url(#shadow)">
+  <rect id="ban" x="38" y="572" width="900" height="112" rx="28" fill="#ffd23f" stroke="#1b1b3a" stroke-width="7"/>
+  <text id="bantext" x="80" y="655" font-weight="700" fill="#1b1b3a"></text>
+</g>
+</svg>
+<script>
+const D = {"set":"P3","ep":9,"level":"P3","topic":"Life Cycles","banner":"Round and round!","scene":"plantCycle","titleMaxW":700,"video":"What Happens After You Plant A Seed? Round And Round","batch":"p3more"};
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+function layout(){
+  // pill
+  const pt = document.getElementById('pilltext');
+  document.getElementById('pill').setAttribute('width', pt.getComputedTextLength() + 68);
+  // title: "P4" yellow + topic white, auto-fit to titleMaxW
+  const inner = `<tspan fill="#ffd23f">${esc(D.level)}</tspan><tspan fill="#fff"> ${esc(D.topic)}</tspan>`;
+  const maxW = D.titleMaxW || 860; let size = D.titleSize || 150;
+  const t = ['t0','t1','t2'].map(id => document.getElementById(id));
+  const set = s => t.forEach(el => { el.innerHTML = inner; el.setAttribute('font-size', s); });
+  set(size);
+  const w = t[2].getComputedTextLength();
+  if (w > maxW) { size = Math.floor(size * maxW / w); set(size); }
+  const base = 96 + size * 0.80;                    // keep the cap height just under the pill
+  t.forEach(el => el.setAttribute('y', base));
+  t[0].innerHTML = esc(D.level + ' ' + D.topic); t[1].innerHTML = esc(D.level + ' ' + D.topic);
+  t[0].setAttribute('stroke-width', size * 0.24); t[0].setAttribute('transform', 'translate(0,9)');   // dark drop
+  t[1].setAttribute('stroke-width', size * 0.20);
+  // banner
+  const bt = document.getElementById('bantext'); bt.textContent = D.banner;
+  let bs = 78; bt.setAttribute('font-size', bs);
+  const bmax = (D.bannerMaxW || 1010) - 84;
+  let bw = bt.getComputedTextLength();
+  if (bw > bmax) { bs = Math.floor(bs * bmax / bw); bt.setAttribute('font-size', bs); bw = bt.getComputedTextLength(); }
+  bt.setAttribute('y', 628 + bs * 0.35);
+  document.getElementById('ban').setAttribute('width', bw + 84);
+  window.TITLE_RIGHT = 38 + t[2].getComputedTextLength();
+}
+Promise.all(['500','600','700'].map(w => document.fonts.load(w + ' 80px Fredoka'))).then(() => document.fonts.ready).then(() => { layout(); window.READY = true; });
+</script>
+</body></html>
