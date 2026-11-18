@@ -148,10 +148,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how air gets into your lungs. Second, how your blood carries oxygen. And third, what your muscles do with it. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "text": "Here's an amazing fact. Your heart beats about a hundred thousand times every day. And it pumps your blood all the way around your body in about one minute.",
-   "hold": 1.0
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "o1",
@@ -482,6 +482,12 @@
      3.3
     ]
    ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's an amazing fact. Your heart beats about a hundred thousand times every day. And it pumps your blood all the way around your body in about one minute.",
+   "hold": 1.0
   },
   {
    "id": "n1",

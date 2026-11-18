@@ -136,10 +136,10 @@
    "text": "Welcome back to TheOneApp, Explored! This is part two. Today, you'll learn three things. First, what happens to rubbish we can't recycle. Second, why our only landfill is filling up. And third, what you can do. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "hold": 1.0,
-   "text": "Here's the news. In twenty twenty-five, Singapore threw away more rubbish than ever before. Only about one in every ten things thrown away from our homes was recycled. And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five."
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "r1",
@@ -512,6 +512,12 @@
      6.15
     ]
    ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. In twenty twenty-five, Singapore threw away more rubbish than ever before. Only about one in every ten things thrown away from our homes was recycled. And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five."
   },
   {
    "id": "n1",

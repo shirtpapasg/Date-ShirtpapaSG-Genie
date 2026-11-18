@@ -1,0 +1,516 @@
+{
+ "episode": "SAU EP01",
+ "title": "Why did the haze go away?",
+ "tag": "🌏 TheOneApp, Explored · EP 1 · The Haze",
+ "intro": {
+  "goals": [
+   [
+    "💨",
+    "What haze is made of",
+    "first"
+   ],
+   [
+    "🫁",
+    "How your lungs protect you",
+    "second"
+   ],
+   [
+    "🌬️",
+    "Why the wind matters",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT WEEK",
+  "How does Singapore",
+  "keep the lights on? 💡"
+ ],
+ "kws": [
+  [
+   "n1",
+   "smoke",
+   "HAZE = SMOKE",
+   "#6c757d"
+  ],
+  [
+   "n1",
+   "winds",
+   "WIND DIRECTION",
+   "#3a86ff"
+  ],
+  [
+   "smoke2",
+   "five",
+   "PM2.5",
+   "#e63946"
+  ],
+  [
+   "lungs1",
+   "respiratory",
+   "RESPIRATORY SYSTEM",
+   "#ef476f"
+  ],
+  [
+   "wind2",
+   "rain",
+   "RAIN WASHES IT OUT",
+   "#00b4d8"
+  ],
+  [
+   "impact",
+   "hotspots",
+   "HOTSPOTS",
+   "#f77f00"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "hook",
+   "silent": 3.6,
+   "sfx": [
+    [
+     "hum",
+     0.0
+    ],
+    [
+     "cough",
+     2.2
+    ],
+    [
+     "cough",
+     2.9
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "In September, the sky over Singapore turned grey and smoky. By November, the haze was gone. Where did it come from? And where did it go?"
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what haze is made of. Second, how your lungs protect you. And third, why the wind decides when the haze comes. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the headline. On the fourth of September, twenty twenty-six, Singapore's air reached the unhealthy range for the first time since twenty twenty-three. Then, on the seventh of November, the National Environment Agency ended its haze measures for the season.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "fourth",
+     1.2,
+     600,
+     260
+    ],
+    [
+     "air",
+     1.12,
+     600,
+     540
+    ],
+    [
+     "seventh",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "p1",
+   "scene": "peat",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "crackle",
+     0.1
+    ],
+    [
+     "pop",
+     1.9
+    ],
+    [
+     "crackle",
+     2.6
+    ],
+    [
+     "whoosh",
+     3.5
+    ]
+   ]
+  },
+  {
+   "id": "p2",
+   "scene": "povFire",
+   "silent": 4.4,
+   "sfx": [
+    [
+     "deep",
+     0
+    ],
+    [
+     "crackle",
+     0.2
+    ],
+    [
+     "rush",
+     1.8
+    ],
+    [
+     "crackle",
+     2.4
+    ],
+    [
+     "whoosh",
+     3.5
+    ]
+   ]
+  },
+  {
+   "id": "p3",
+   "scene": "povRise",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "rush",
+     0
+    ],
+    [
+     "pass_by",
+     0.9
+    ],
+    [
+     "pass_by",
+     1.4
+    ],
+    [
+     "whoosh",
+     1.8
+    ],
+    [
+     "pad_wonder",
+     2.0
+    ],
+    [
+     "wind",
+     2.1
+    ]
+   ]
+  },
+  {
+   "id": "p4",
+   "scene": "drift",
+   "silent": 6.2,
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "pop",
+     0.4
+    ],
+    [
+     "ping",
+     4.6
+    ]
+   ]
+  },
+  {
+   "id": "p5",
+   "scene": "povArrive",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "reveal",
+     2.3
+    ],
+    [
+     "pad_tension",
+     2.4
+    ],
+    [
+     "pass_by",
+     3.0
+    ],
+    [
+     "cough",
+     4.0
+    ],
+    [
+     "cough",
+     4.45
+    ]
+   ]
+  },
+  {
+   "id": "p6",
+   "scene": "povNose",
+   "silent": 4.8,
+   "sfx": [
+    [
+     "breath",
+     0
+    ],
+    [
+     "rush",
+     0.1
+    ],
+    [
+     "whoosh",
+     0.95
+    ],
+    [
+     "pass_by",
+     1.6
+    ],
+    [
+     "thud",
+     2.0
+    ],
+    [
+     "pass_by",
+     2.5
+    ],
+    [
+     "thud",
+     2.9
+    ],
+    [
+     "pass_by",
+     3.4
+    ]
+   ]
+  },
+  {
+   "id": "p7",
+   "scene": "povLung",
+   "silent": 5.6,
+   "sfx": [
+    [
+     "pipe_rush",
+     0
+    ],
+    [
+     "pass_by",
+     1.9
+    ],
+    [
+     "pass_by",
+     2.8
+    ],
+    [
+     "reveal",
+     3.05
+    ],
+    [
+     "thud",
+     3.9
+    ],
+    [
+     "bubble",
+     4.2
+    ],
+    [
+     "bubble",
+     4.9
+    ]
+   ]
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "hold": 0.8,
+   "text": "Did you feel that journey? You were a tiny particle of smoke from a peat land fire in Sumatra. Hot air lifted you high into the sky. From June to September, winds from the south-west carried you across the sea to Singapore, and someone breathed you in."
+  },
+  {
+   "id": "smoke2",
+   "scene": "tiny",
+   "text": "The smallest ones are called P M two point five. They are less than two point five micrometres wide. That's about thirty times thinner than one strand of your hair! They are so light, they can float in the air for days."
+  },
+  {
+   "id": "lungs1",
+   "scene": "lungs",
+   "text": "Now for the textbook link! In Primary Five, you learn about the respiratory system. When you breathe in, air travels through your nose, down your windpipe, and into your lungs. In the lungs, oxygen passes into your blood.",
+   "shots": [
+    [
+     "nose",
+     1.35,
+     470,
+     260
+    ],
+    [
+     "lungs",
+     1.3,
+     585,
+     700
+    ],
+    [
+     "oxygen",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "lungs2",
+   "scene": "lungs",
+   "text": "Your nose is the first line of defence. Tiny hairs and sticky mucus trap dust and bigger particles. But P M two point five particles are so small that some slip past, deep into the lungs. That's why haze can make it harder to breathe, especially for people with asthma.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "hairs",
+     1.3,
+     900,
+     380
+    ],
+    [
+     "asthma",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "wind2",
+   "scene": "wind",
+   "text": "In October and November, the winds become light and change direction, and heavy rain showers return. Rain washes the particles out of the air. Then the north-east monsoon arrives, and the wind blows from the north-east, away from the fires. That's why the haze went away.",
+   "hold": 0.6,
+   "shots": [
+    [
+     "rain",
+     1.3,
+     612,
+     350
+    ],
+    [
+     "north-east",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "p8",
+   "scene": "povRain",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "rain",
+     0
+    ],
+    [
+     "pass_by",
+     0.7
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "bubble",
+     2.15
+    ],
+    [
+     "splash",
+     2.25
+    ],
+    [
+     "rush",
+     2.4
+    ],
+    [
+     "splash",
+     4.25
+    ],
+    [
+     "thud",
+     4.25
+    ],
+    [
+     "chime",
+     4.7
+    ]
+   ]
+  },
+  {
+   "id": "impact",
+   "scene": "impact",
+   "text": "In Primary Six, you learn how people affect the environment. When forests are burned to clear land, animals lose their homes, and the smoke pollutes the air, even in other countries. Today, scientists use satellites to spot the fires, called hotspots, so they can be put out sooner.",
+   "shots": [
+    [
+     "animals",
+     1.2,
+     520,
+     700
+    ],
+    [
+     "satellites",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Every morning, look out of your window at a building far away. Give it a score from one to five for how clearly you can see it. Then check the P S I reading on the my E N V app. Do your scores match the readings?"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! During the haze, an N ninety-five mask protects you better than a cloth mask. Why do you think that is? I'll tell you the answer next week."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Haze is tiny smoke particles, carried here by the wind, and washed away by the rain. And your nose and lungs work hard to keep you safe. Next week: Singapore has no oil, coal or gas of its own. So how do we keep the lights on?"
+  },
+  {
+   "id": "p9",
+   "scene": "clear",
+   "silent": 3.4,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "chime",
+     0.4
+    ],
+    [
+     "sparkle",
+     1.3
+    ]
+   ]
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

@@ -120,42 +120,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how your body breaks food down. Second, how digested food gets into your blood. And third, where the leftovers go. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "text": "Here's a Singapore fact. Every flush goes on a journey too. Used water flows through deep tunnels to water reclamation plants, where it is cleaned. Some of it becomes ultra-clean new water, which can meet up to forty per cent of Singapore's water needs.",
-   "hold": 1.0,
-   "shots": [
-    [
-     "flush",
-     1.6,
-     330,
-     290
-    ],
-    [
-     "deep",
-     1.45,
-     520,
-     560
-    ],
-    [
-     "plants",
-     1.5,
-     800,
-     420
-    ],
-    [
-     "some",
-     1.35,
-     940,
-     380
-    ],
-    [
-     "forty",
-     1.1,
-     620,
-     465
-    ]
-   ]
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "d1",
@@ -383,6 +351,44 @@
     [
      "ep06_flush",
      2.45
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's a Singapore fact. Every flush goes on a journey too. Used water flows through deep tunnels to water reclamation plants, where it is cleaned. Some of it becomes ultra-clean new water, which can meet up to forty per cent of Singapore's water needs.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "flush",
+     1.6,
+     330,
+     290
+    ],
+    [
+     "deep",
+     1.45,
+     520,
+     560
+    ],
+    [
+     "plants",
+     1.5,
+     800,
+     420
+    ],
+    [
+     "some",
+     1.35,
+     940,
+     380
+    ],
+    [
+     "forty",
+     1.1,
+     620,
+     465
     ]
    ]
   },

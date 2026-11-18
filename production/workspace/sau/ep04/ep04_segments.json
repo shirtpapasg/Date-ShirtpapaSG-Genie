@@ -142,10 +142,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how water evaporates. Second, how clouds and rain form. And third, how rain finds its way back to our reservoirs. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "hold": 1.0,
-   "text": "Here's the news. The north-east monsoon season has begun. From November to January, Singapore gets some of its heaviest rain of the year. And we don't waste it. Drains and canals carry the rain into our reservoirs. About two-thirds of Singapore's land catches rain this way."
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "w1",
@@ -453,6 +453,12 @@
      3.4
     ]
    ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. The north-east monsoon season has begun. From November to January, Singapore gets some of its heaviest rain of the year. And we don't waste it. Drains and canals carry the rain into our reservoirs. About two-thirds of Singapore's land catches rain this way."
   },
   {
    "id": "n1",

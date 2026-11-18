@@ -85,3 +85,20 @@ function showCard(c, t, a, b, y = 905) { tf(c, `translate(${VP[0]} ${y}) scale($
 function blob(p, r, col, sd) { seed = sd; const P = []; for (let k = 0; k < 10; k++) { const an = k / 10 * Math.PI * 2, rr = r * (.72 + .4 * rnd()); P.push([Math.cos(an) * rr, Math.sin(an) * rr]); }
   const d = `M${(P[9][0] + P[0][0]) / 2} ${(P[9][1] + P[0][1]) / 2} ` + P.map((q, k) => { const n = P[(k + 1) % 10]; return `Q${q[0]} ${q[1]} ${(q[0] + n[0]) / 2} ${(q[1] + n[1]) / 2}`; }).join(" ") + " Z";
   return el("path", {d, fill: col, stroke: INK, "stroke-width": 6}, p); }
+
+// ---- ARE YOU READY? 3, 2, 1, GO! (the teacher, 19 Nov 2026): straight after "Today you'll learn", into the first-person journey.
+// Heart says "Are you ready? Three, two, one, go!"; each number lands on her word.
+S.countdown = (() => { const s = scene("countdown", "#3a0ca3", "#f72585");
+  s.rays = el("g", {}, s.stage); for (let i = 0; i < 16; i++) el("path", {d: `M0 0 L${Math.cos(i * Math.PI / 8 - .1) * 900} ${Math.sin(i * Math.PI / 8 - .1) * 900} L${Math.cos(i * Math.PI / 8 + .1) * 900} ${Math.sin(i * Math.PI / 8 + .1) * 900} Z`, fill: "#fff", opacity: .1}, s.rays);
+  s.q = tx(s.stage, {x: 0, y: 0, "text-anchor": "middle", "font-size": 120, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 16}, "Are you ready?");
+  s.ring = el("circle", {cx: 810, cy: 520, r: 200, fill: "none", stroke: "#fff", "stroke-width": 22, opacity: 0, "stroke-linecap": "round", transform: "rotate(-90 810 520)"}, s.stage);
+  s.nums = ["3", "2", "1", "GO!"].map((n, i) => { const g = el("g", {}, s.stage);
+    if (i < 3) el("circle", {r: 170, fill: ["#06d6a0", "#ffbe0b", "#ef476f"][i], stroke: INK, "stroke-width": 12}, g);
+    tx(g, {x: 0, y: i < 3 ? 85 : 70, "text-anchor": "middle", "font-size": i < 3 ? 260 : 230, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 18}, n); return g; });
+  const C = 2 * Math.PI * 200;
+  s.run = t => { const a = (w, f) => cue("countdown", w, f), T = [a("three", .45), a("two", .62), a("one", .78), a("go", .92)];
+    tf(s.rays, `translate(810 520) rotate(${t * 20})`);
+    const qOn = 1 - ramp(t, T[0] - .2, T[0]); tf(s.q, `translate(810 ${lerp(470, 300, ramp(t, SC.countdown.t0, SC.countdown.t0 + .4))}) scale(${Math.max(0, pop(t, SC.countdown.t0 - .1, .5))})`); op(s.q, qOn);
+    s.nums.forEach((g, i) => { const t0 = T[i], t1 = i < 3 ? T[i + 1] : 1e9;
+      tf(g, `translate(810 520) scale(${Math.max(0, pop(t, t0 - .05, .35)) * (i === 3 ? 1 + .1 * ramp(t, t0, t0 + .6) : 1)})`); op(g, on(t, t0 - .05, t1 + .02, .08)); });
+    const k = clamp((t - T[0]) / Math.max(.3, T[3] - T[0])); set(s.ring, "stroke-dasharray", `${C * (1 - k)} ${C}`); op(s.ring, on(t, T[0] - .05, T[3], .1)); }; return s; })();

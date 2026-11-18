@@ -95,30 +95,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what haze is made of. Second, how your lungs protect you. And third, why the wind decides when the haze comes. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "text": "Here's the headline. On the fourth of September, twenty twenty-six, Singapore's air reached the unhealthy range for the first time since twenty twenty-three. Then, on the seventh of November, the National Environment Agency ended its haze measures for the season.",
-   "hold": 1.0,
-   "shots": [
-    [
-     "fourth",
-     1.2,
-     600,
-     260
-    ],
-    [
-     "air",
-     1.12,
-     600,
-     540
-    ],
-    [
-     "seventh",
-     1,
-     600,
-     450
-    ]
-   ]
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "p1",
@@ -330,6 +310,32 @@
     [
      "bubble",
      4.9
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the headline. On the fourth of September, twenty twenty-six, Singapore's air reached the unhealthy range for the first time since twenty twenty-three. Then, on the seventh of November, the National Environment Agency ended its haze measures for the season.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "fourth",
+     1.2,
+     600,
+     260
+    ],
+    [
+     "air",
+     1.12,
+     600,
+     540
+    ],
+    [
+     "seventh",
+     1,
+     600,
+     450
     ]
    ]
   },

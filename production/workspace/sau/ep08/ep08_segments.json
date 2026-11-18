@@ -138,10 +138,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what a food chain is. Second, about producers, consumers, predators and prey. And third, where every food chain begins. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "text": "Here's a Singapore fact. Saltwater crocodiles are the largest reptiles in the world, and a few live wild in Singapore's mangroves. At Sungei Buloh, visitors stay on the paths and keep a safe distance.",
-   "hold": 1.0
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "r1",
@@ -380,6 +380,12 @@
      4.4
     ]
    ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's a Singapore fact. Saltwater crocodiles are the largest reptiles in the world, and a few live wild in Singapore's mangroves. At Sungei Buloh, visitors stay on the paths and keep a safe distance.",
+   "hold": 1.0
   },
   {
    "id": "n1",

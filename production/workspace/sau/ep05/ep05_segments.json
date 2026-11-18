@@ -130,10 +130,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how plants make food from light. Second, how energy passes along a food chain. And third, how Singapore keeps food on our tables. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "hold": 1.0,
-   "text": "Here's the news. Last November, Singapore set new goals for its food. By twenty thirty-five, our own farms should grow one in five of the leafy and fruit vegetables we eat, and three in ten of our eggs and seafood. About a third of our eggs already come from farms in Singapore."
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "f1",
@@ -441,6 +441,12 @@
      4.4
     ]
    ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. Last November, Singapore set new goals for its food. By twenty thirty-five, our own farms should grow one in five of the leafy and fruit vegetables we eat, and three in ten of our eggs and seafood. About a third of our eggs already come from farms in Singapore."
   },
   {
    "id": "n1",

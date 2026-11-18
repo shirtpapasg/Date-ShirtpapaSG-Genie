@@ -123,6 +123,10 @@ VIDEOS = [
   "desc": "From the Sun, to a leaf, to a grain, to a hen, to an egg, to you. Watch the full episode: Where does your energy come from? (TheOneApp, Explored EP5)" + FOOT, "tags": ["photosynthesis", "food chain", "shorts", "theoneapp explored"]},
  {"id": "sau-ep05-s2", "file": f"{SAU}/ep05/short2.mp4", "thumb": f"{SAU}/ep05/thumb_short2.jpg", "at": "2026-12-06T09:00:00Z", "title": "Why Does Singapore Buy Food From So Many Countries? #Shorts",
   "desc": "More than 9 in 10 bites of our food come from other countries. Food security: many sources, grow more at home, store some away. Watch the full episode: Where does your energy come from? (TheOneApp, Explored EP5)" + FOOT, "tags": ["food security", "singapore", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep06-s1", "file": f"{SAU}/ep06/short1.mp4", "thumb": f"{SAU}/ep06/thumb_short1.jpg", "at": "2026-12-08T09:00:00Z", "title": "Why Does Bread Taste Sweet If You Chew It? #Shorts",
+  "desc": "Chew plain bread for a minute: your saliva breaks starch into sugar. Watch the full episode: Where does your food go? (TheOneApp, Explored EP6)" + FOOT, "tags": ["digestion", "saliva", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep06-s2", "file": f"{SAU}/ep06/short2.mp4", "thumb": f"{SAU}/ep06/thumb_short2.jpg", "at": "2026-12-09T09:00:00Z", "title": "Where Does Your Food Go? Mouth To Toilet! #Shorts",
+  "desc": "Be a bit of fibre: mouth, gullet, stomach, intestines… plop! Watch the full episode: Where does your food go? (TheOneApp, Explored EP6)" + FOOT, "tags": ["digestive system", "fibre", "shorts", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.

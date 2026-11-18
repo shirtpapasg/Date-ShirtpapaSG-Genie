@@ -129,10 +129,10 @@
    "text": "Welcome to TheOneApp, Explored! This is part one of two. Today, you'll learn two things. First, how Singapore makes its electricity. Second, the energy changes inside a power station. Let's get started!"
   },
   {
-   "id": "today",
-   "scene": "today",
-   "text": "Today, about ninety-three out of every hundred units of our electricity come from burning natural gas. Solar panels make less than three.",
-   "hold": 1.0
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "h1",
@@ -350,6 +350,12 @@
      1.0
     ]
    ]
+  },
+  {
+   "id": "today",
+   "scene": "today",
+   "text": "Today, about ninety-three out of every hundred units of our electricity come from burning natural gas. Solar panels make less than three.",
+   "hold": 1.0
   },
   {
    "id": "n1",

@@ -134,36 +134,10 @@
    "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, a mosquito's life cycle. Second, how dengue spreads. And third, how Wolbachia mosquitoes help. Let's get started!"
   },
   {
-   "id": "news",
-   "scene": "news",
-   "text": "Here's the news. Singapore had about thirteen thousand six hundred dengue cases in twenty twenty-four, and just over four thousand in twenty twenty-five. In Project Wolbachia areas, the risk of getting dengue fell by more than seventy per cent.",
-   "hold": 1.0,
-   "sfx": [
-    [
-     "pop",
-     2.7
-    ],
-    [
-     "pop",
-     7.5
-    ],
-    [
-     "chime",
-     8.4
-    ],
-    [
-     "click",
-     13.0
-    ],
-    [
-     "ep09_swarm",
-     13.3
-    ],
-    [
-     "stinger",
-     14.5
-    ]
-   ]
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "m1",
@@ -456,6 +430,38 @@
     [
      "sparkle",
      3.6
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. Singapore had about thirteen thousand six hundred dengue cases in twenty twenty-four, and just over four thousand in twenty twenty-five. In Project Wolbachia areas, the risk of getting dengue fell by more than seventy per cent.",
+   "hold": 1.0,
+   "sfx": [
+    [
+     "pop",
+     2.7
+    ],
+    [
+     "pop",
+     7.5
+    ],
+    [
+     "chime",
+     8.4
+    ],
+    [
+     "click",
+     13.0
+    ],
+    [
+     "ep09_swarm",
+     13.3
+    ],
+    [
+     "stinger",
+     14.5
     ]
    ]
   },

@@ -132,50 +132,10 @@
    "text": "Welcome back to TheOneApp, Explored! This is part two. Today, you'll learn two things. First, how Singapore has kept its lights on since nineteen sixty-five. Second, what could power us next. Let's get started!"
   },
   {
-   "id": "history",
-   "scene": "history",
-   "text": "When Singapore became independent in nineteen sixty-five, our power stations burned oil. In nineteen ninety-one, Senoko Power Station became the first to use natural gas. From nineteen ninety-two, gas arrived by pipeline from Malaysia, and later from Indonesia too. And in twenty thirteen, Singapore opened its first terminal for liquefied natural gas, which arrives by ship from around the world.",
-   "hold": 1.0,
-   "shots": [
-    [
-     "sixty-five",
-     1.35,
-     330,
-     500
-    ],
-    [
-     "ninety-two",
-     1.35,
-     780,
-     500
-    ],
-    [
-     "thirteen",
-     1,
-     600,
-     450
-    ]
-   ]
-  },
-  {
-   "id": "news",
-   "scene": "news",
-   "text": "Here's the news. In October twenty twenty-six, Indonesia began sending Singapore a little less gas by pipeline, saying it needs more of its own gas at home. It's less than two out of every hundred units of gas we use each day, and Singapore can buy more by ship. But some gas contracts end in twenty twenty-eight, so Singapore is planning ahead.",
-   "hold": 1.2,
-   "shots": [
-    [
-     "less",
-     1.4,
-     640,
-     470
-    ],
-    [
-     "ship",
-     1,
-     600,
-     450
-    ]
-   ]
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three, two, one, go!"
   },
   {
    "id": "f1",
@@ -286,6 +246,52 @@
     [
      "stinger",
      3.8
+    ]
+   ]
+  },
+  {
+   "id": "history",
+   "scene": "history",
+   "text": "When Singapore became independent in nineteen sixty-five, our power stations burned oil. In nineteen ninety-one, Senoko Power Station became the first to use natural gas. From nineteen ninety-two, gas arrived by pipeline from Malaysia, and later from Indonesia too. And in twenty thirteen, Singapore opened its first terminal for liquefied natural gas, which arrives by ship from around the world.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "sixty-five",
+     1.35,
+     330,
+     500
+    ],
+    [
+     "ninety-two",
+     1.35,
+     780,
+     500
+    ],
+    [
+     "thirteen",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. In October twenty twenty-six, Indonesia began sending Singapore a little less gas by pipeline, saying it needs more of its own gas at home. It's less than two out of every hundred units of gas we use each day, and Singapore can buy more by ship. But some gas contracts end in twenty twenty-eight, so Singapore is planning ahead.",
+   "hold": 1.2,
+   "shots": [
+    [
+     "less",
+     1.4,
+     640,
+     470
+    ],
+    [
+     "ship",
+     1,
+     600,
+     450
     ]
    ]
   },
