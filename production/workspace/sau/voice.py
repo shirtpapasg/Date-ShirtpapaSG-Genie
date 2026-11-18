@@ -15,6 +15,7 @@ spec = json.load(open(sys.argv[1])); out = sys.argv[2]; GAP = 0.57
 os.makedirs(out + '/sent', exist_ok=True)
 def sents(t): return [p for p in re.split(r'(?<=[.!?])\s+', t.replace('TheOneApp', 'The One App')) if p.strip()]
 for s in spec['segments']:
+    if s.get('silent'): continue        # picture-only beat: no voice
     ex = bool(s.get('excited')); speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if ex else (0.94, 1.6, 1.0, 0.0)
     for i, p in enumerate(sents(s['text'])):
         f = f"{out}/sent/{s['id']}_{i:02d}.wav"

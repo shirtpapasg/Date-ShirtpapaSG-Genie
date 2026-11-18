@@ -132,6 +132,7 @@ set($("progBg"), "y", H - 8); set($("progBg"), "width", W); set($("progBg"), "he
 set($("shelfHead"), "x", 1515); set($("shelfHead"), "y", 78);
 $("tagT").textContent = CFG.tag; if (SHORT) { tf($("tag"), `translate(${W / 2 - 250} 40)`); }
 const order = TL.scenes.map(s => s.scene).concat(SHORT || !S.end ? [] : ["end"]);
+let CINEMA = 0;
 const ENDT = TL.END - (CFG.outro || 3.8) + 2.4;   // the end card follows "Now you know!" after 2.4 s
 window.render = function (t) {
   order.forEach((name, i) => { const s = S[name]; if (!s) return;
@@ -141,9 +142,12 @@ window.render = function (t) {
     tf(s.g, `translate(${W / 2} ${H / 2}) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(${-W / 2} ${-H / 2})`);
     moveBubbles(s.b, t); s.run(t); });
   drawConfetti(t); drawKW(t); drawCaps(t);
+  // cinema mode: during picture-only shots the label, the key-word shelf and the key-word boxes step aside
+  CINEMA = Math.max(0, ...TL.segs.filter(s => s.silent).map(s => on(t, s.t0 - .6, s.t1 + .4, .5)));
+  op($("shelf"), (+$("shelf").getAttribute("opacity") || 1) * (1 - CINEMA)); op($("kwFly"), 1 - CINEMA);
   op($("head"), SHORT ? ramp(t, .1, .5) : 0);
   set($("prog"), "width", W * clamp(t / TL.END));
-  { const tg = $("tag"); tg.querySelector("rect").setAttribute("width", $("tagT").getComputedTextLength() + 62); } op($("tag"), ramp(t, .2, .6) * (SHORT ? 1 : 1 - ramp(t, ENDT - .4, ENDT)));
+  { const tg = $("tag"); tg.querySelector("rect").setAttribute("width", $("tagT").getComputedTextLength() + 62); } op($("tag"), ramp(t, .2, .6) * (SHORT ? 1 : 1 - ramp(t, ENDT - .4, ENDT)) * (1 - CINEMA));
   op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
 };
 function fitPill(g, pad) { const r = g.querySelector("rect"), tt = g.querySelector("text"); if (!r || !tt) return 0;
@@ -153,6 +157,8 @@ document.fonts.ready.then(() => {
   CHIPS.forEach(([g, fs, fixed]) => { if (!fixed) fitPill(g, fs * 1.3); });
   KW.forEach(K => { fitPill(K.big, 70); K.sw = fitPill(K.small, 36); });
   CAPS.forEach(({g}) => fitPill(g, 64));
+  // any text marked data-fit="<max width>" shrinks until it fits its box (labels never spill out)
+  document.querySelectorAll('[data-fit]').forEach(t => { const m = +t.getAttribute('data-fit'), w = t.getComputedTextLength(); if (w > m) t.setAttribute('font-size', +t.getAttribute('font-size') * m / w); });
   window.READY = true; });
 </script>
 </body></html>

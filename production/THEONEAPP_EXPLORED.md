@@ -36,6 +36,73 @@ The teacher's weekly science-news videos for Singapore primary pupils (2026-11-1
    - Never draw a made-up coastline or a "rough" map.
 10. **One kind of label per row** (the teacher, 18 Nov 2026). In a diagram, every item is labelled the same way: the THING's name above and the science word below (for energy changes: natural gas / chemical potential energy, burning gas / heat energy, turbine / kinetic energy, generator / electrical energy, lamp / light energy). Never mix a name, a state of matter and an energy form in one row: pupils will learn the wrong idea. Every line on a map starts and ends somewhere named (a pipeline starts at its gas field).
 
+## Storytelling and pacing guide (the teacher's, 18 Nov 2026)
+
+Every TheOneApp, Explored episode is planned against this guide before its script is written. In our videos, "interview" means Heart's narration and any real voices; "footage" and "B-roll" mean our drawn, animated scenes.
+
+### The core idea
+
+* One clear question or tension drives the whole piece. "What happens to the fish when the river runs dry?" beats "a film about a river".
+* The viewer should be able to say in one sentence what it was about afterwards.
+* Pick one main character or subject. Short docs fail when they try to cover five people.
+* Show change. The subject, situation or the viewer's understanding should be different at the end than the start.
+
+### The flow (3 to 5 minutes)
+
+1. Hook, 0 to 20 seconds. Open on the most striking image, line or question. No logos, no slow title cards. Earn the next minute.
+2. Set-up, 20 to 60 seconds. Who, where, what is at stake. Keep it to what the viewer needs right now, not everything you know.
+3. Deepen, 1 to 3 minutes. The main body. Two or three beats that each add something new: a complication, a surprise, a human detail. Each beat raises a small question the next beat answers.
+4. Turn, around 3 to 4 minutes. The moment things shift. A revelation, a decision, a result. This is the emotional peak.
+5. Resolution, last 30 to 45 seconds. Land the meaning. Return to the opening image or line so the piece feels closed. End on a strong final shot, then cut. No lingering.
+
+### Format and ingredients
+
+* Interview audio over picture. The interview is the spine. Cut the talking head away quickly and lay the voice over footage that shows what they describe.
+* B-roll with purpose. Every shot should prove, illustrate or contrast something being said. Pretty filler drains energy.
+* Real moments over telling. A person doing the thing beats a person describing the thing.
+* Minimal narration. Let the subject carry it. If you must narrate, do it to bridge gaps, not to explain what we can already see.
+* Text sparingly. Name and role lower-thirds, a date or location card, one or two key facts. No paragraphs.
+* Sound. Natural sound, room tone and ambience matter as much as music. Silence after a big line hits harder than a swell.
+* Music. One or two tracks at most. Music lifts transitions and the turn, then drops out under important speech.
+
+### Pacing
+
+* Average shot length around 3 to 5 seconds in body sections, longer for emotional beats, shorter during montage or energy.
+* Change something every 10 to 15 seconds: a new shot, a new voice, a music shift, a text card. Attention resets.
+* Breathe. Let one or two moments run long with no cuts and no music. Those are the shots people remember.
+* Cut on action and cut on the beat of speech. Never let a sentence trail into a dead frame.
+* Front-load. If the viewer is bored at 40 seconds, they leave. Put the second-best moment early and save the best for the turn.
+* Avoid talking heads longer than 8 to 10 seconds without a cutaway.
+
+### Editing discipline
+
+* Script the edit before you cut. Write a one-page outline of the five parts with the key lines from interviews.
+* Cut the first version 20 percent long, then trim anything that does not serve the one question.
+* Every scene should answer "why is this here?". If you cannot say, remove it.
+* Watch with sound off. If the images alone do not tell the story, fix the pictures. Watch with picture off. If the audio alone does not make sense, fix the structure.
+
+### Visual craft
+
+* Vary shot sizes: wide to establish, medium for action, close for emotion and detail. Alternate them.
+* Consistent colour and exposure. One grade across everything so the piece feels like one film.
+* Stable camera unless movement means something. Handheld for intimacy or urgency, tripod or gimbal for calm.
+* Shoot more detail shots than you think you need. Hands, textures, objects and faces fill gaps in the edit.
+
+### Common mistakes in short docs
+
+* Starting with background instead of a hook.
+* Trying to tell the whole life story instead of one moment.
+* Letting music run under everything.
+* Explaining the point out loud at the end instead of showing it.
+* Running to 5 minutes when 3 would be tighter. Shorter is almost always better.
+
+### How the kit does this (18 Nov 2026)
+
+* **A hero sequence in every episode.** One fresh, visual idea, such as following one tiny bit of gas from the rock under the seabed to the lamp in your room. It plays first as picture-only shots with sound effects (`"silent": seconds` and `"sfx"` on a segment). Then Heart speaks, in step with recap pictures that light up as she names each step.
+* **Let it breathe.** Use `"hold": seconds` on a segment after a big line or a dense fact, so the picture stays and the viewer can take it in.
+* **Animation shows the process, never decoration.** Every moving thing must be the science happening (gas flowing, a magnet turning, current moving). No floating, wobbling or spinning for its own sake.
+* **Cinema mode.** During picture-only shots, the label and the key-word shelf step aside.
+
 ## Thumbnails: the globe style (the teacher's favourite, 18 Nov 2026)
 
 Every TheOneApp, Explored video, Shorts and trailer included, uses `workspace/sau/globe_thumb.py`. It draws a real globe in space (Natural Earth coastlines), centred on Singapore, with the story drawn at true positions: haze, fires, pipelines, wind arrows, ships, the Sun. On top go the "TheOneApp Explored" pill, a giant white-and-yellow title, and the hook words with a yellow border (no box). Each video has a small JSON file next to its scenes, for example `ep01/globe_ep01.json` and `ep02/globe_short1.json`.

@@ -17,7 +17,7 @@ EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH",
          "north-east": "N AO R TH IY S T", "senoko": "S EH N OW K OW", "tengeh": "T EH NG EH", "liquefied": "L IH K W AH F AY D",
          "sixty-five": "S IH K S T IY F AY V", "ninety-one": "N AY N T IY W AH N", "ninety-two": "N AY N T IY T UW",
          "ninety-three": "N AY N T IY TH R IY", "twenty-eight": "T W EH N T IY EY T", "thirty-five": "TH ER T IY F AY V",
-         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW"}
+         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW", "natuna": "N AH T UW N AH", "hdb": "EY CH D IY B IY", "vapour": "V EY P ER"}
 dur = lambda f: float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
 
 def align(s):
@@ -50,15 +50,21 @@ def align(s):
 
 INTRO, GAP_SAME, GAP_SCENE, OUTRO = 0.6, 0.55, 1.0, spec.get("outro", 3.8)
 t = INTRO; segs = []; parts = [("sil", INTRO)]
+SEGSFX = []
 for i, s in enumerate(spec["segments"]):
-    words, d = align(s)
+    if s.get("silent"): words, d = [], float(s["silent"])     # a picture-only beat: no voice, its own sound effects
+    else: words, d = align(s)
     if i:
         g = GAP_SAME if spec["segments"][i - 1]["scene"] == s["scene"] else GAP_SCENE
         if s["scene"] == "nyk": g = 0.8
+        if s.get("silent") and spec["segments"][i - 1].get("silent"): g = 0.15   # picture-only shots flow straight on
+        g += spec["segments"][i - 1].get("hold", 0)          # a segment can hold its picture a little longer
         parts.append(("sil", g)); t += g
-    segs.append({"id": s["id"], "scene": s["scene"], "t0": round(t, 3), "t1": round(t + d, 3),
+    segs.append({"id": s["id"], "scene": s["scene"], "t0": round(t, 3), "t1": round(t + d, 3), "silent": bool(s.get("silent")),
                  "words": [{"t": w["t"], "a": round(t + w["a"], 3), "b": round(t + w["b"], 3)} for w in words]})
-    parts.append(("seg", s["id"])); t += d
+    parts.append(("sil", d) if s.get("silent") else ("seg", s["id"]))
+    for kd, at in s.get("sfx", []): SEGSFX.append((kd, t + at))
+    t += d
 END = round(t + OUTRO, 3)
 inputs = []
 for kd, v in parts:
@@ -109,11 +115,26 @@ nyk = next((s["t0"] for s in segs if s["scene"] == "nyk"), END - 3)
 json.dump({"END": END, "segs": [{k: v for k, v in s.items() if k != "words"} for s in segs], "caps": caps, "cues": cues, "kws": kws,
            "scenes": scenes, "spec": {k: v for k, v in spec.items() if k != "segments"}}, open(OUT + "_tl.json", "w"))
 
-ev = [("pop", k["t"]) for k in kws] + [("whoosh", s["t0"] - .35) for s in scenes[1:]] + [("ding", nyk), ("tada", nyk + .05)]
+SIL = {s["scene"] for s in spec["segments"] if s.get("silent")}
+ev = [("pop", k["t"]) for k in kws] + [("whoosh", s["t0"] - .35) for s in scenes[1:] if s["scene"] not in SIL] + [("ding", nyk), ("tada", nyk + .05)] + SEGSFX
 src = {"pop": "sine=f=880:d=0.12,volume=0.5,afade=t=out:st=0.02:d=0.1,asetrate=44100*1.2,aresample=44100",
        "whoosh": "anoisesrc=d=0.5:c=pink:a=0.25,bandpass=f=1200:w=900,afade=t=in:d=0.15,afade=t=out:st=0.2:d=0.3",
        "ding": "sine=f=1318:d=0.6,volume=0.35,afade=t=out:st=0.05:d=0.55",
-       "tada": "aevalsrc=0.18*sin(2*PI*784*t)*exp(-3*t)+0.15*sin(2*PI*988*t)*exp(-3*t)+0.15*sin(2*PI*1175*t)*exp(-3*t):s=44100:d=1.2"}
+       "tada": "aevalsrc=0.18*sin(2*PI*784*t)*exp(-3*t)+0.15*sin(2*PI*988*t)*exp(-3*t)+0.15*sin(2*PI*1175*t)*exp(-3*t):s=44100:d=1.2",
+       # picture-only beats (the hero journey): what each process sounds like
+       "rumble": "anoisesrc=d=4.5:c=brown:a=0.5,lowpass=f=160,afade=t=in:d=0.8,afade=t=out:st=3.6:d=0.9",
+       "bubble": "aevalsrc=0.35*sin(2*PI*(500+900*t)*t)*exp(-14*t):s=44100:d=0.35",
+       "drill": "anoisesrc=d=2:c=brown:a=0.45,lowpass=f=500,tremolo=f=14:d=0.9,afade=t=out:st=1.5:d=0.5",
+       "splash": "anoisesrc=d=0.7:c=white:a=0.3,highpass=f=900,afade=t=in:d=0.05,afade=t=out:st=0.1:d=0.6",
+       "hiss": "anoisesrc=d=1.2:c=white:a=0.18,highpass=f=3000,afade=t=in:d=0.2,afade=t=out:st=0.7:d=0.5",
+       "hum": "aevalsrc=0.16*sin(2*PI*70*t)+0.08*sin(2*PI*140*t):s=44100:d=5.2,afade=t=in:d=0.8,afade=t=out:st=4.2:d=1",
+       "ping": "aevalsrc=0.3*sin(2*PI*1568*t)*exp(-4*t):s=44100:d=1.2",
+       "roar": "anoisesrc=d=5.5:c=pink:a=0.4,lowpass=f=700,afade=t=in:d=0.4,afade=t=out:st=4.6:d=0.9",
+       "whirr": "aevalsrc=0.16*sin(2*PI*(90+60*t)*t)+0.06*sin(2*PI*(270+180*t)*t):s=44100:d=4,afade=t=out:st=3.2:d=0.8",
+       "buzz": "aevalsrc=0.12*sin(2*PI*100*t)+0.07*sin(2*PI*200*t)+0.04*sin(2*PI*300*t):s=44100:d=2.6,afade=t=in:d=0.2,afade=t=out:st=2:d=0.6",
+       "zap": "aevalsrc=0.25*sin(2*PI*(2400-1800*t/0.4)*t)*exp(-5*t):s=44100:d=0.4",
+       "click": "aevalsrc=0.6*sin(2*PI*2200*t)*exp(-180*t):s=44100:d=0.06",
+       "chime": "aevalsrc=0.16*sin(2*PI*1046*t)*exp(-2*t)+0.12*sin(2*PI*1568*t)*exp(-2.4*t):s=44100:d=2"}
 inputs, fl = [], []
 for i, (kd, tt) in enumerate(ev):
     inputs += ["-f", "lavfi", "-i", src[kd]]; fl.append(f"[{i}:a]aformat=sample_rates=44100:channel_layouts=mono,adelay={int(max(0, tt) * 1000)}:all=1[e{i}]")
