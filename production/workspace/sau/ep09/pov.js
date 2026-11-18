@@ -14,8 +14,8 @@ const DAWN = [[0, "#5a6bb0"], [.38, "#f4a9a0"], [.62, "#ffe2a8"]], DAY = [[0, "#
 
 /* ---- "this is you": the purple edge, and your own antennae (bushy: you are a male) and proboscis poking into the picture */
 function me(p) { const g = el("g", {}, p); g.vg = vignette(g, "#9d4edd", .55); g.b = el("g", {}, g);
-  g.a = [-1, 1].map(s => { const a = el("g", {}, g.b), bx = CX + s * 170, by = 1070, ex = CX + s * 400, ey = 640, dx = ex - bx, dy = ey - by, L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L;
-    for (let i = 1; i <= 15; i++) { const k = i / 16, x = bx + dx * k, y = by + dy * k, h = 92 * (1 - .5 * k);
+  g.a = [-1, 1].map(s => { const a = el("g", {}, g.b), bx = CX + s * 170, by = 1070, ex = CX + s * 370, ey = 700, dx = ex - bx, dy = ey - by, L = Math.hypot(dx, dy), nx = -dy / L, ny = dx / L;
+    for (let i = 1; i <= 15; i++) { const k = i / 16, x = bx + dx * k, y = by + dy * k, h = 78 * (1 - .5 * k);
       el("path", {d: `M${x + nx * h + dx / L * h * .6} ${y + ny * h + dy / L * h * .6} L${x} ${y} L${x - nx * h + dx / L * h * .6} ${y - ny * h + dy / L * h * .6}`, fill: "none", stroke: M9K, "stroke-width": 7, "stroke-linecap": "round", opacity: .92}, a); }
     el("line", {x1: bx, y1: by, x2: ex, y2: ey, stroke: M9K, "stroke-width": 17, "stroke-linecap": "round"}, a); a.o = [bx, by]; a.s = s; return a; });
   el("path", {d: `M${CX - 30} 1080 L${CX - 5} 838 Q${CX} 826 ${CX + 5} 838 L${CX + 30} 1080 Z`, fill: M9K}, g.b);
@@ -97,7 +97,7 @@ S.nightBuzz = (() => { const s = scene("nightBuzz", "#0d1326", "#0d1326"), N = "
     const hit = ramp(u, SL - .16, SL), back = ramp(u, SL + .5, SL + 1.1); tf(K.armN, `translate(10 -300) rotate(${lerp(0, 152, hit) - 60 * back})`);
     const awake = u > SL ? 1 : 0; op(K.eyes, awake); op(s.shut, 1 - awake); op(K.m0, 1 - awake); op(s.oh, awake); tf(K.brow, `translate(0 ${-9 * awake})`); op(s.zz, on(u, -.6, SL - .1, .2)); tf(s.zz, `translate(0 ${-10 * Math.sin(u * 2)})`);
     tf(K.head, `rotate(${awake * 5 * Math.sin((u - SL) * 30) * (1 - ramp(u, SL, SL + .4))} 2 -330)`);
-    op(s.flash, .5 * on(u, SL - .02, SL + .25, .1)); tf(s.slap, `translate(${CX + 250} 330) rotate(-8) scale(${Math.max(0, pop(u, SL, .25)) * .9})`); op(s.slap, on(u, SL, 1e9, .05)); };
+    op(s.flash, .3 * on(u, SL - .02, SL + .25, .1)); tf(s.slap, `translate(${CX + 250} 330) rotate(-8) scale(${Math.max(0, pop(u, SL, .25)) * .9})`); op(s.slap, on(u, SL, 1e9, .05)); };
   return s; })();
 
 /* =====================================================================================================================
@@ -117,7 +117,7 @@ S.lab = (() => { const s = scene("lab", "#d8f3f0", "#d8f3f0"), N = "lab"; s.cam 
   s.off = m9Officer(c); tf(s.off, "translate(1180 806) scale(.8)");
   s.w = el("g", {}, s.stage); s.glow = el("circle", {r: 330, fill: "#fff", filter: "url(#blur)", opacity: .85}, s.w); s.me = m9Moz(s.w);
   s.lb = [["bushy antennae = a male", 250, -190, 150, -70, INK], ["white stripes", -330, 210, -110, 110, INK], ["Wolbachia inside", -330, -170, -110, -16, "#7209b7"]].map(([l, x, y, ax, ay, col]) => { const g = el("g", {}, s.stage);
-    g.ln = el("line", {x1: CX + x * .8, y1: 440 + y * .8, x2: CX + ax * 1.7, y2: 440 + ay * 1.7, stroke: INK, "stroke-width": 6, "stroke-linecap": "round"}, g); g.c = chip(g, l, col, {fs: 36}); g.x = CX + x * 1.25; g.y = 440 + y * 1.1; return g; });
+    g.ln = el("line", {x1: CX + x * .8, y1: 440 + y * .8, x2: CX + ax * 1.7, y2: 440 + ay * 1.7, stroke: INK, "stroke-width": 6, "stroke-linecap": "round"}, g); g.c = chip(g, l, col, {fs: 44}); g.x = CX + x * 1.25; g.y = 440 + y * 1.1; return g; });
   s.loc = card(s.stage, "📍 An NEA mosquito production facility", INK, 40); s.c = card(s.stage, "You are a male Aedes mosquito, with Wolbachia inside", "#7209b7", 42);
   s.run = t => { const u = t - T0(N), D = DUR(N), k = ramp(u, 1.5, 2.7), z = lerp(1.05, 3.4, k) + 5 * ramp(u, D - .5, D + .1);
     tf(c, `translate(${CX} ${CY}) scale(${z}) translate(${-lerp(810, 860, k)} ${-lerp(480, 485, k)})`);
@@ -136,7 +136,6 @@ S.povRelease = (() => { const s = scene("povRelease", "#10122a", "#10122a"), N =
   s.box = el("g", {}, s.stage); const hw = 420, hh = 250;
   el("path", {d: `M-3000 -3000 H5000 V4000 H-3000 Z M${CX - hw} ${CY - hh} V${CY + hh} H${CX + hw} V${CY - hh} Z`, fill: "#1b1e36", "fill-rule": "evenodd"}, s.box);
   el("rect", {x: CX - hw, y: CY - hh, width: 2 * hw, height: 2 * hh, fill: "none", stroke: "#3b4166", "stroke-width": 26}, s.box); el("rect", {x: CX - hw - 13, y: CY - hh - 13, width: 2 * hw + 26, height: 2 * hh + 26, fill: "none", stroke: INK, "stroke-width": 6}, s.box);
-  for (let i = 0; i < 7; i++) el("line", {x1: -170, y1: 80 + i * 140, x2: 1790, y2: 80 + i * 140, stroke: "#2a2e4d", "stroke-width": 5}, s.box);
   s.lid = el("g", {}, s.box); el("rect", {x: CX - hw, y: 0, width: 2 * hw, height: 2 * hh, fill: "#2b3052", stroke: INK, "stroke-width": 6}, s.lid);
   s.slit = el("rect", {x: CX - hw, y: CY + hh - 8, width: 2 * hw, height: 10, fill: "#ffe2a8"}, s.box); s.beam = el("path", {d: `M${CX - hw} ${CY + hh} H${CX + hw} L${CX + hw + 300} 1100 H${CX - hw - 300} Z`, fill: "#ffe2a8", opacity: .12}, s.box);
   s.pals = [[250, 760, .8, 1], [1380, 700, .9, -1], [1150, 880, .7, -1], [470, 900, .6, 1]].map(([x, y, k, f]) => { const g = el("g", {}, s.box), m = m9Moz(g); g.m = m; g.x = x; g.y = y; g.k = k; g.f = f; return g; });
@@ -163,9 +162,9 @@ S.povFly = (() => { const s = scene("povFly", "#dff4ff", "#dff4ff"), N = "povFly
     s.ha.run(.6 + 2.2 * u + .5 * u * u); s.sw.run(t, 1 + .3 * u, .8 - .2 * u); op(s.sw, 1 - ramp(u, 1.2, 2));
     tf(s.A, `translate(${-500 * sw} ${-1500 * sw * sw}) rotate(${14 * sw} ${CX} ${CY})`); op(s.A, 1 - ramp(u, 2.8, 3.05));
     tf(s.B, `translate(${200 * (1 - sw)} ${900 * (1 - sw) * (1 - sw)}) rotate(${-10 * (1 - sw)} ${CX} ${CY})`);
-    const v = Math.max(0, u - 2.6), off = 1.25 * v; s.hb.run(off);
-    const zk = 5.4 - off, zz = Math.max(.34, zk), wx = lerp(-80, 330, ramp(zk, .5, 5.4)) + 500 * (1 - ramp(zk, .2, 1.1)), q = s.hb.P(wx, 470, zz), ph = u * 7;
-    tf(s.kidG, `translate(${q[0]} ${q[1]}) scale(${-1 / zz} ${1 / zz})`); e9Pose(s.kid, 26 * Math.sin(ph)); tf(s.kid.body, `translate(0 ${-8 * Math.abs(Math.cos(ph))})`); op(s.kidG, zk > .3 ? 1 : 0);
+    const v = Math.max(0, u - 2.6), off = 1.9 * v; s.hb.run(off);
+    const zk = 5.4 - off, zz = Math.max(.3, zk), wx = lerp(120, 330, ramp(zk, .5, 5.4)) + 260 * (1 - ramp(zk, .1, 1.0)), q = s.hb.P(wx, 470, zz), ph = u * 7;
+    tf(s.kidG, `translate(${q[0]} ${q[1]}) scale(${-1 / zz} ${1 / zz})`); e9Pose(s.kid, 26 * Math.sin(ph)); tf(s.kid.body, `translate(0 ${-8 * Math.abs(Math.cos(ph))})`); op(s.kidG, 1 - ramp(zk, .34, .26));
     s.me.run(t); showC(s.c0, u, .2, 2.3, 905); showC(s.c, u, 3.5, D - .1, 905);
     tf(s.no, `translate(${CX + 560} 250) scale(${Math.max(0, pop(u, 4.0))})`); op(s.no, on(u, 4.0, D - .1, .2)); };
   return s; })();
@@ -187,42 +186,42 @@ S.povMeet = (() => { const s = scene("povMeet", "#f3ead2", "#f3ead2"), N = "povM
   s.me = me(s.stage); s.c = card(s.stage, "You find a wild female…", "#f72585");
   s.run = t => { const u = t - T0(N), D = DUR(N), k = ramp(u, -.4, 2.6), z = lerp(.3, 1, Math.pow(k, 1.5)), wob = 1 - ramp(u, 2.4, 3.2);
     tf(c, `translate(${CX + 40 * wob * Math.sin(u * 2.6)} ${CY + 26 * wob * Math.sin(u * 3.7)}) scale(${z}) translate(${-830} ${-400})`);
-    op(s.ring, on(u, 2.7, D - .2, .2)); set(s.ring, "stroke-dashoffset", 0); popAt(s.l1, 1250, 230, u, 2.7); popAt(s.l2, 620, 700, u, 3.2);
+    op(s.ring, on(u, 2.7, D - .2, .2)); set(s.ring, "stroke-dashoffset", 0); popAt(s.l1, 1250, 230, u, 2.7); popAt(s.l2, 480, 250, u, 3.2);
     tf(s.heart, `translate(${CX} ${200 - 30 * ramp(u, 3.9, 4.8)}) scale(${Math.max(0, pop(u, 3.9))})`); op(s.heart, on(u, 3.9, D, .2));
     s.me.run(t, .3 + .7 * wob); showC(s.c, u, .7, D - .1, 905); };
   return s; })();
 
 /* =====================================================================================================================
    POV EGGS (6 s): she lays her eggs at the water's edge in a flower pot plate. Days and nights pass... the eggs stay closed. */
-S.povEggs = (() => { const s = scene("povEggs", "#f3ead2", "#f3ead2"), N = "povEggs", OX = CX + 520, OY = 900, SCL = 1.5, WY = OY - 105 * SCL;
+S.povEggs = (() => { const s = scene("povEggs", "#f3ead2", "#f3ead2"), N = "povEggs", OX = 1282, OY = 717, SCL = 1.5, WY = OY - 105 * SCL;
   s.A = el("g", {}, s.stage); el("rect", {x: -170, y: -80, width: 1960, height: 1120, fill: "#f3ead2"}, s.A); el("rect", {x: -170, y: 700, width: 1960, height: 340, fill: "#c9c2b2"}, s.A); el("line", {x1: -170, y1: 700, x2: 1790, y2: 700, stroke: INK, "stroke-width": 6}, s.A);
   s.potG = el("g", {}, s.A); s.pot = m9Pot(s.potG);
   s.B = el("g", {}, s.stage); el("rect", {x: -170, y: -80, width: 1960, height: 1120, fill: "#f3ead2"}, s.B);
-  s.sky = el("g", {}, s.B); s.tint = fullRect(s.B, "#1a2466", 0); set(s.tint, "style", "mix-blend-mode:multiply");
+  s.sky = el("g", {}, s.B); el("rect", {x: -170, y: 717, width: 1960, height: 330, fill: "#c9c2b2"}, s.B); el("line", {x1: -170, y1: 717, x2: 1790, y2: 717, stroke: INK, "stroke-width": 6}, s.B); s.tint = fullRect(s.B, "#1a2466", 0); set(s.tint, "style", "mix-blend-mode:multiply");
   s.cut = m9PlateCut(s.B); tf(s.cut, `translate(${OX} ${OY}) scale(${SCL})`);
   // the eggs: black, glued to the plate's wall right at the water line, and a few on the water's edge (cut's own units)
-  s.eggs = [[-566, -128, -76], [-560, -152, -74], [-570, -110, -78], [-530, -108, 4], [-486, -107, -6], [-444, -108, 8]].map(([x, y, r]) => { const e = m9Egg(s.cut, 1.25); e.x = x; e.y = y; e.r = r; return e; });
+  s.eggs = [[-567, -126, -76], [-560, -156, -76], [-553, -186, -76], [-516, -107, 4], [-456, -106, -6], [-396, -107, 8]].map(([x, y, r]) => { const e = m9Egg(s.cut, 1.6); e.x = x; e.y = y; e.r = r; return e; });
   s.fg = el("g", {}, s.B); s.f = m9Moz(s.fg, {female: true});
   s.sun = el("g", {}, s.B); el("circle", {r: 120, fill: "#fff3a0", filter: "url(#blur)"}, s.sun); e9Sun(s.sun, 56);
   s.moon = el("g", {}, s.B); el("circle", {r: 60, fill: "#fff3c4", stroke: INK, "stroke-width": 6}, s.moon); el("circle", {cx: 24, cy: -14, r: 50, fill: "#3d4a8f"}, s.moon);
   s.day = chip(s.B, "Day 1", INK, {fs: 60, w: 280}); s.dayT = s.day.querySelector("text");
-  s.lens = el("g", {}, s.B); el("circle", {r: 150, fill: "none", stroke: "#e63946", "stroke-width": 12}, s.lens);
+  s.lens = el("g", {}, s.B); el("circle", {r: 190, fill: "none", stroke: "#e63946", "stroke-width": 12}, s.lens);
   s.x = m9X(s.B, 70); s.nl = chip(s.B, "no larvae", "#e63946", {fs: 44}); s.wet = chip(s.B, "eggs at the water's edge", INK, {fs: 34});
   s.me = me(s.stage); s.c0 = card(s.stage, "She lays her eggs in a flower pot plate", INK, 40); s.c = card(s.stage, "…but her eggs don't hatch!", "#e63946", 50);
-  s.run = t => { const u = t - T0(N), D = DUR(N), kz = ramp(u, -.4, 1.1), kB = ramp(u, .85, 1.25), EX = OX - 520 * SCL, EY = WY - 10;
+  s.run = t => { const u = t - T0(N), D = DUR(N), kz = ramp(u, -.4, 1.1), kB = ramp(u, .85, 1.25), EX = OX - 500 * SCL, EY = WY - 10;
     tf(s.potG, `translate(${lerp(810, 1500, kz)} ${lerp(690, 1500, kz)}) scale(${lerp(1.3, 5.5, kz)})`); op(s.A, 1 - kB); op(s.B, kB);
     // she lands on the water (mosquitoes can stand on it), lays, and leaves
-    const kin = ramp(u, .9, 1.6), kout = ramp(u, 3.0, 3.6), fx = lerp(lerp(1500, EX + 230, kin), -500, kout), fy = lerp(lerp(60, WY - 178, kin), 100, kout) - 120 * Math.sin(Math.PI * kout);
+    const kin = ramp(u, .9, 1.6), kout = ramp(u, 3.0, 3.6), fx = lerp(lerp(1500, EX + 330, kin), -500, kout), fy = lerp(lerp(60, WY - 178, kin), 100, kout) - 120 * Math.sin(Math.PI * kout);
     s.f.fly(1 - on(u, 1.6, 3.0, .12)); tf(s.fg, `translate(${fx} ${fy}) scale(1.45) rotate(${-6 * (1 - kin) + 12 * on(u, 1.7, 2.95, .2)})`); op(s.fg, on(u, .85, 3.65, .15));
     s.eggs.forEach((e, i) => { const tt = 1.8 + i * .2; tf(e, `translate(${e.x} ${e.y}) rotate(${e.r}) scale(${Math.max(0, pop(u, tt, .25))})`); });
-    popAt(s.wet, EX + 250, WY + 150, u, 2.2); op(s.wet, on(u, 2.2, 3.3, .2));
+    popAt(s.wet, EX + 120, WY - 330, u, 2.3); op(s.wet, on(u, 2.2, 3.3, .2));
     // days pass: the Sun and the Moon cross the sky, seven times
     const dk = clamp((u - 3.35) / 1.55), dd = dk * 7, day = Math.min(6, Math.floor(dd)), f = dd - day, isN = dk > 0 && dk < 1 && f > .5, ph = (f % .5) * 2;
     const ax = lerp(-100, 1720, ph), ay = 250 - 170 * Math.sin(Math.PI * ph); tf(s.sun, `translate(${dk >= 1 ? 1300 : ax} ${dk >= 1 ? 170 : ay})`); tf(s.moon, `translate(${ax} ${ay})`);
     op(s.sun, dk > 0 && !isN ? 1 : 0); op(s.moon, isN ? 1 : 0); op(s.tint, dk > 0 && dk < 1 ? .55 * Math.pow(Math.max(0, Math.sin(Math.PI * (f - .5) * 2)), .6) * (isN ? 1 : 0) : 0);
     s.dayT.textContent = "Day " + (day + 1); popAt(s.day, 300, 190, u, 3.3); const bump = 1 + .12 * (1 - clamp(f * 3)) * (dk > 0 && dk < 1 ? 1 : 0); tf(s.day, `translate(300 190) scale(${Math.max(0, pop(u, 3.3)) * bump})`);
-    tf(s.lens, `translate(${EX + 60} ${EY - 30}) scale(${1 + .5 * (1 - ramp(u, 4.9, 5.3))})`); op(s.lens, on(u, 4.9, 1e9, .15));
-    popAt(s.x, EX + 330, EY + 110, u, 5.05); popAt(s.nl, EX + 560, EY + 110, u, 5.2);
+    tf(s.lens, `translate(${EX + 10} ${EY - 30}) scale(${1 + .5 * (1 - ramp(u, 4.9, 5.3))})`); op(s.lens, on(u, 4.9, 1e9, .15));
+    popAt(s.x, EX + 10, EY - 300, u, 5.05); popAt(s.nl, EX + 250, EY - 300, u, 5.2);
     s.me.run(t, .5); showC(s.c0, u, 1.2, 3.2, 905); showC(s.c, u, 4.75, D + .2, 905); };
   return s; })();
 

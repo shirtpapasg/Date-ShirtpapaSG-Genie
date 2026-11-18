@@ -228,12 +228,13 @@ function m9Moz(p, o = {}) { const M = el("g", {}, p), fem = !!o.female, K = M9K;
   return M; }
 // a mosquito flying away from us (seen from behind), about 110 wide: for the swarm we fly out with
 function m9Back(p) { const g = el("g", {}, p);
-  [-1, 1].forEach(s => [18, 34].forEach(a => el("ellipse", {cx: s * 46, cy: -10, rx: 46, ry: 12, fill: "#e8f7ff", opacity: .4, stroke: "#9fc6dc", "stroke-width": 2, transform: `rotate(${-s * a} ${s * 8} -6)`}, g)));
-  [[-16, 44], [-6, 52], [8, 52], [18, 44]].forEach(([x, y]) => { el("line", {x1: x * .4, y1: 8, x2: x, y2: y, stroke: M9K, "stroke-width": 5, "stroke-linecap": "round"}, g); el("line", {x1: x * .4, y1: 8, x2: x, y2: y, stroke: "#fff", "stroke-width": 5, "stroke-dasharray": "6 10", "stroke-dashoffset": -6}, g); });
-  el("circle", {r: 18, fill: M9K, stroke: INK, "stroke-width": 4}, g); el("circle", {r: 10, fill: "none", stroke: "#fff", "stroke-width": 5}, g); return g; }
+  [-1, 1].forEach(s => [14, 30].forEach(a => el("ellipse", {cx: s * 52, cy: -22, rx: 50, ry: 13, fill: "#e8f7ff", opacity: .45, stroke: "#9fc6dc", "stroke-width": 2, transform: `rotate(${-s * a} ${s * 8} -18)`}, g)));
+  [[-26, 40], [-10, 54], [10, 54], [26, 40]].forEach(([x, y]) => { el("line", {x1: x * .3, y1: 0, x2: x, y2: y, stroke: M9K, "stroke-width": 5, "stroke-linecap": "round"}, g); el("line", {x1: x * .3, y1: 0, x2: x, y2: y, stroke: "#fff", "stroke-width": 5, "stroke-dasharray": "6 10", "stroke-dashoffset": -6}, g); });
+  el("circle", {cx: 0, cy: -20, r: 16, fill: M9K, stroke: INK, "stroke-width": 4}, g); el("ellipse", {cx: 0, cy: 6, rx: 12, ry: 24, fill: M9K, stroke: INK, "stroke-width": 4}, g);
+  [-4, 6, 16].forEach(y => el("line", {x1: -9, y1: y, x2: 9, y2: y, stroke: "#fff", "stroke-width": 5, "stroke-linecap": "round"}, g)); return g; }
 
 /* ---- the three stages that live in water. The water surface is y = 0 for the larva and the pupa. */
-function m9Egg(p, k = 1) { const g = el("g", {}, p); el("ellipse", {rx: 19 * k, ry: 7.5 * k, fill: "#111118", stroke: INK, "stroke-width": 3}, g); el("path", {d: `M${-10 * k} ${-2.5 * k} Q0 ${-5.5 * k} ${9 * k} ${-3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 2.5 * k, "stroke-linecap": "round", opacity: .7}, g); return g; }
+function m9Egg(p, k = 1) { const g = el("g", {}, p); el("ellipse", {rx: 19 * k, ry: 7.5 * k, fill: "#111118", stroke: "#aab4c8", "stroke-width": 2.5}, g); el("path", {d: `M${-10 * k} ${-2.5 * k} Q0 ${-5.5 * k} ${9 * k} ${-3 * k}`, fill: "none", stroke: "#fff", "stroke-width": 2.5 * k, "stroke-linecap": "round", opacity: .7}, g); return g; }
 // the larva (a "wriggler") hangs head down from the surface; its breathing tube touches the surface at (0, 0). L.run(ph) wriggles it.
 function m9Larva(p, k = 1) { const L = el("g", {}, p), C = "#b89068"; L.seg = [];
   L.tube = el("line", {stroke: INK, "stroke-width": 13 * k, "stroke-linecap": "round"}, L); L.tube2 = el("line", {stroke: "#8a6a4a", "stroke-width": 7 * k, "stroke-linecap": "round"}, L);
@@ -356,11 +357,13 @@ function m9Officer(p) { const g = el("g", {}, p), SK = "#e0ac69";
 function m9Disc(p, kind, ring = INK) { const g = el("g", {}, p), id = "m9c" + (m9Disc.n = (m9Disc.n || 0) + 1); const cp = el("clipPath", {id}, e9defs()); el("circle", {r: 116}, cp);
   el("circle", {r: 120, fill: "#fff", stroke: ring, "stroke-width": 8}, g); const q = g.pic = el("g", {"clip-path": `url(#${id})`}, g);
   if (kind === "eggs" || kind === "larva" || kind === "pupa") { el("rect", {x: -130, y: -130, width: 260, height: 260, fill: "#eaf7ff"}, q); el("rect", {x: -130, y: -42, width: 260, height: 180, fill: "#7fd4ff"}, q); el("line", {x1: -130, y1: -42, x2: 130, y2: -42, stroke: "#3a86ff", "stroke-width": 6}, q); }
-  if (kind === "eggs") { el("path", m9A({d: "M56 -130 L84 130 H140 V-130 Z", fill: "#d98a5f", "stroke-width": 5}), q); [[40, -52, -74], [34, -78, -70], [44, -30, -78], [30, -102, -68]].forEach(([x, y, r]) => tf(m9Egg(q, 1.35), `translate(${x} ${y}) rotate(${r})`)); [[-40, -47, 0], [-84, -46, 8]].forEach(([x, y, r]) => tf(m9Egg(q, 1.25), `translate(${x} ${y}) rotate(${r})`)); }
+  if (kind === "eggs") { el("path", m9A({d: "M84 -130 L104 130 H140 V-130 Z", fill: "#d98a5f", "stroke-width": 5}), q); [[74, -62, -80], [70, -92, -80]].forEach(([x, y, r]) => tf(m9Egg(q, 1.7), `translate(${x} ${y}) rotate(${r})`)); [[26, -46, 4], [-26, -45, -8], [-78, -46, 6]].forEach(([x, y, r]) => tf(m9Egg(q, 1.7), `translate(${x} ${y}) rotate(${r})`)); }
   if (kind === "larva") { g.larva = m9Larva(q, 1.05); tf(g.larva, "translate(-58 -42)"); }
   if (kind === "pupa") tf(m9Pupa(q, .95), "translate(-6 -42)");
   if (kind === "adultF" || kind === "adultM") { el("rect", {x: -130, y: -130, width: 260, height: 260, fill: "#fff8e1"}, q); g.moz = m9Moz(q, {female: kind === "adultF"}); tf(g.moz, "translate(-2 -6) scale(.56)"); }
   el("circle", {r: 120, fill: "none", stroke: ring, "stroke-width": 8}, g); return g; }
+// narrated scenes after the first key word: the picture fills the screen left of the key-word shelf
+const m9W = s => el("g", {transform: "translate(650 432) scale(1.12) translate(-600 -450)"}, s.stage);
 // a red "no" cross and a green tick
 const m9X = (p, r = 60) => { const g = el("g", {}, p); [[-1, 1], [1, 1]].forEach(([a]) => { el("line", {x1: -r * a, y1: -r, x2: r * a, y2: r, stroke: INK, "stroke-width": r * .52, "stroke-linecap": "round"}, g); }); [[-1], [1]].forEach(([a]) => el("line", {x1: -r * a, y1: -r, x2: r * a, y2: r, stroke: "#e63946", "stroke-width": r * .32, "stroke-linecap": "round"}, g)); return g; };
 const m9Tick = (p, r = 60) => { const g = el("g", {}, p), d = `M${-r} ${r * .1} L${-r * .3} ${r * .8} L${r} ${-r * .8}`; el("path", {d, fill: "none", stroke: INK, "stroke-width": r * .52, "stroke-linecap": "round", "stroke-linejoin": "round"}, g); el("path", {d, fill: "none", stroke: "#06d6a0", "stroke-width": r * .32, "stroke-linecap": "round", "stroke-linejoin": "round"}, g); return g; };
@@ -371,7 +374,7 @@ const m9Tick = (p, r = 60) => { const g = el("g", {}, p), d = `M${-r} ${r * .1} 
 S.hook = (() => { const s = scene("hook", "#58b4ee", "#dff4ff"), st = s.stage; s.cam = el("g", {}, st);
   s.est = m9Estate(s.cam, {x: 900, k: .8});
   s.dark = fullRect(st, "#1b1b3a", 0);
-  s.fg = el("g", {}, st); s.f = m9Moz(s.fg, {female: true}); s.f.fly(1);
+  s.fg = el("g", {}, st); el("ellipse", {cx: 0, cy: -10, rx: 260, ry: 170, fill: "#fff", filter: "url(#blur)", opacity: .75}, s.fg); s.f = m9Moz(s.fg, {female: true}); s.f.fly(1);
   s.males = []; for (let i = 0; i < 7; i++) { const g = el("g", {}, st), m = m9Moz(g); m.fly(1); op(m.wol, 1); s.males.push(g); }
   s.name = chip(st, "an Aedes mosquito: black, with white stripes", INK, {fs: 40});
   s.den = chip(st, "⚠️ Some Aedes mosquitoes spread DENGUE", "#e63946", {fs: 48});
@@ -384,43 +387,43 @@ S.hook = (() => { const s = scene("hook", "#58b4ee", "#dff4ff"), st = s.stage; s
     popAt(s.name, 800, 760, t, t0 + 1.3); op(s.name, on(t, t0 + 1.3, tD - .1, .2)); popAt(s.den, 810, 800, t, tD); op(s.den, on(t, tD, tT - .1, .2));
     op(s.dark, .5 * ramp(t, tT - .2, tT + .3)); tf(s.tw, `translate(810 200) scale(${Math.max(0, pop(t, tT))}) translate(-810 -200)`); op(s.tw, on(t, tT, tF - .15, .15));
     [[s.t1, 300, 170, tF], [s.vs, 810, 420, tF + .35], [s.t2, 1300, 170, tW]].forEach(([e, X, Y, tt]) => { set(e, "x", 0); set(e, "y", 0); tf(e, `translate(${X} ${Y}) scale(${Math.max(0, pop(t, tt))})`); op(e, ramp(t, tt - .05, tt + .1)); });
-    s.males.forEach((g, i) => { const k = ramp(t, tW - .1 + i * .07, tW + .7 + i * .07), c = i % 3, r = Math.floor(i / 3), X = lerp(2100, 1010 + c * 250 + (r % 2) * 110, k), Y = 380 + r * 190 + Math.sin(t * 5 + i * 2) * 9;
+    s.males.forEach((g, i) => { const k = ramp(t, tW - .1 + i * .07, tW + .7 + i * .07), c = i % 3, r = Math.floor(i / 3), X = lerp(2100, 930 + c * 225 + (r % 2) * 100, k), Y = 380 + r * 190 + Math.sin(t * 5 + i * 2) * 9;
       tf(g, `translate(${X} ${Y}) scale(${-.62} .62)`); op(g, k > 0 ? 1 : 0); }); };
   return s; })();
 
 // ---- LAST TIME'S ANSWER (EP08, Sungei Buloh): no crabs -> the mudskippers lose their food -> fewer mudskippers -> less food for the crocodile
-S.answer = (() => { const s = scene("answer", "#3a0ca3", "#7209b7"), st = s.stage, K = ["leafF", "crab", "skipper", "croc"], X = i => 240 + i * 380, Y = 420;
+S.answer = (() => { const s = scene("answer", "#3a0ca3", "#7209b7"), st = s.stage, K = ["leafF", "crab", "skipper", "croc"], X = i => 210 + i * 400, Y = 440;
   s.sw = e9Swamp(st, {bank: false}); fullRect(st, "#2a1470", .72);
   s.top = chip(st, "✅ Last time: no more mangrove crabs… what happens to the crocodile?", "#06d6a0", {fs: 38, ink: INK});
   s.loc = chip(st, "📍 Sungei Buloh Wetland Reserve", INK, {fs: 30});
   s.arr = [0, 1, 2].map(i => { const g = e9Arrow(st, .62); set(g.a, "fill", "#ffbe0b"); return g; });
-  s.gone = el("g", {}, st); el("circle", {cx: X(1), cy: Y, r: 138, fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-dasharray": "18 16"}, s.gone); m9T(s.gone, X(1), Y + 16, "gone", 56, "#fff");
+  s.gone = el("g", {}, st); el("circle", {cx: X(1), cy: Y, r: 156, fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-dasharray": "18 16"}, s.gone); m9T(s.gone, X(1), Y + 16, "gone", 56, "#fff");
   s.items = K.map((k, i) => { const g = e9Item(st, k); g.x = X(i); return g; });
-  s.names = K.map((k, i) => m9T(st, X(i), Y + 208, E9NAME[k], 40));
+  s.names = K.map((k, i) => m9T(st, X(i), Y + 226, E9NAME[k], 44));
   s.xs = [1, 2].map(i => { const g = m9X(st, 30); return g; });
   s.c = [["1  The mudskippers lose their food", "#f77f00"], ["2  Fewer mudskippers", "#3a86ff"], ["3  Less food for the crocodile", "#e63946"]].map(([l, c]) => chip(st, l, c, {fs: 44}));
   s.big = m9T(st, 810, 0, "Every link in a food chain matters!", 84, "#ffe14d");
   s.run = t => { const a = (w, f) => cue("answer", w, f), t0 = SC.answer.t0, tW = a("what", .16), tD = a("disappeared", .36), tL = a("lose", .5), tF = a("fewer", .63), tS = a("less", .73), tE = a("every", .88);
     popAt(s.top, 810, 80, t, t0 - .2); popAt(s.loc, 810, 150, t, t0 + .4); const g1 = ramp(t, tD, tD + .5), g2 = ramp(t, tF, tF + .7), g3 = ramp(t, tS, tS + .7);
-    s.items.forEach((g, i) => { const sh = i === 1 ? 8 * on(t, a("crabs", .33), tD, .1) * Math.sin(t * 40) : 0, sc = 1.15 * (i === 1 ? 1 - .5 * g1 : i === 2 ? 1 - .32 * g2 : i === 3 ? 1 - .1 * g3 : 1);
+    s.items.forEach((g, i) => { const sh = i === 1 ? 8 * on(t, a("crabs", .33), tD, .1) * Math.sin(t * 40) : 0, sc = 1.32 * (i === 1 ? 1 - .5 * g1 : i === 2 ? 1 - .32 * g2 : i === 3 ? 1 - .1 * g3 : 1);
       popAt(g, g.x + sh, Y, t, tW - .5 + i * .1, sc); op(g, ramp(t, tW - .5 + i * .1, tW - .3 + i * .1) * (i === 1 ? 1 - g1 : i === 2 ? 1 - .5 * g2 : i === 3 ? 1 - .25 * g3 : 1)); });
     s.names.forEach((n, i) => op(n, ramp(t, tW - .3 + i * .1, tW + i * .1) * (i === 1 ? 1 - .6 * g1 : 1)));
     const gl = ramp(t, tL, tL + .4);
-    s.arr.forEach((g, i) => { tf(g, `translate(${X(i) + 190} ${Y})`); op(g, ramp(t, tW - .3 + i * .1, tW + i * .1) * (i === 0 ? 1 - .75 * g1 : 1)); set(g.a, "fill", mix("#ffbe0b", "#8d99ae", i === 1 ? gl : i === 2 ? g3 : g1)); });
-    s.xs.forEach((g, k) => popAt(g, X(k + 1) + 190, Y, t, k ? tS : tL)); op(s.gone, g1);
+    s.arr.forEach((g, i) => { tf(g, `translate(${X(i) + 200} ${Y})`); op(g, ramp(t, tW - .3 + i * .1, tW + i * .1) * (i === 0 ? 1 - .75 * g1 : 1)); set(g.a, "fill", mix("#ffbe0b", "#8d99ae", i === 1 ? gl : i === 2 ? g3 : g1)); });
+    s.xs.forEach((g, k) => popAt(g, X(k + 1) + 200, Y, t, k ? tS : tL)); op(s.gone, g1);
     s.c.forEach((c, i) => { const tt = [tL, tF, tS][i]; popAt(c, 810, 800, t, tt); op(c, on(t, tt, i < 2 ? [tF, tS][i] - .1 : tE - .1, .15)); });
     set(s.big, "x", 0); tf(s.big, `translate(810 800) scale(${Math.max(0, pop(t, tE))})`); op(s.big, ramp(t, tE - .05, tE + .1)); };
   return s; })();
 
 // ---- NEWS: the dengue numbers as two bars drawn to scale; then real life: an estate in a Project Wolbachia area, an NEA officer
 // and a release device on a corridor; the risk of dengue fell by more than 70%.
-S.news = (() => { const s = scene("news", "#0b6e6e", "#073b4c"), st = s.stage, B0 = 770, H = 520, CX = 600;
+S.news = (() => { const s = scene("news", "#0b6e6e", "#073b4c"), st = m9W(s), B0 = 640, H = 380, CX = 700;
   s.A = el("g", {}, st); s.top = chip(st, "📰 Dengue cases in Singapore", "#f72585", {fs: 46});
-  el("line", {x1: 130, y1: B0, x2: 1070, y2: B0, stroke: "#fff", "stroke-width": 7, "stroke-linecap": "round"}, s.A);
-  s.bars = [[340, 13600, "#e63946", "2024", "about 13,600"], [860, 4100, "#ffbe0b", "2025", "just over 4,000"]].map(([x, n, c, yr, lab]) => { const g = el("g", {}, s.A); g.h = H * n / 13600; g.x = x;
+  el("line", {x1: 230, y1: B0, x2: 1170, y2: B0, stroke: "#fff", "stroke-width": 7, "stroke-linecap": "round"}, s.A);
+  s.bars = [[440, 13600, "#e63946", "2024", "about 13,600"], [960, 4100, "#ffbe0b", "2025", "just over 4,000"]].map(([x, n, c, yr, lab]) => { const g = el("g", {}, s.A); g.h = H * n / 13600; g.x = x;
     g.r = el("rect", m9A({x: x - 120, width: 240, fill: c, rx: 10})); g.r = el("rect", m9A({x: x - 120, width: 240, fill: c, rx: 10}), g); m9T(s.A, x, B0 + 66, yr, 56); g.l = m9T(g, x, 0, lab, 60, "#ffe14d"); g.s = m9T(g, x, 0, "cases", 38); return g; });
   s.dn = el("g", {}, s.A); el("path", m9A({d: "M-150 -60 Q20 -70 120 60 L152 34 L150 130 L58 108 L88 84 Q10 -20 -150 -14 Z", fill: "#06d6a0"}), s.dn);
-  s.src = tx(s.A, {x: 1070, y: B0 + 100, "text-anchor": "end", "font-size": 28, "font-weight": 600, fill: "#fff", opacity: .8}, "Source: National Environment Agency (NEA)");
+  s.src = tx(s.A, {x: 1170, y: B0 + 110, "text-anchor": "end", "font-size": 28, "font-weight": 600, fill: "#fff", opacity: .8}, "Source: National Environment Agency (NEA)");
   // real life
   s.B = el("g", {}, st); s.est = m9Estate(s.B, {x: 560, k: .8, un: 7, trees: [[-60, 1.1], [1170, 1.1]]});
   s.area = chip(st, "📍 An HDB estate in a Project Wolbachia area", INK, {fs: 38});
@@ -432,27 +435,27 @@ S.news = (() => { const s = scene("news", "#0b6e6e", "#073b4c"), st = s.stage, B
   tx(s.pct, {x: 0, y: -24, "text-anchor": "middle", "font-size": 52, "font-weight": 700, fill: INK}, "Risk of getting dengue here:"); tx(s.pct, {x: 0, y: 62, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: INK}, "down by more than 70%");
   s.run = t => { const a = (w, f) => cue("news", w, f), t0 = SC.news.t0, t13 = a("thirteen", .17), t4 = a("four", .47), tP = a("project", .63) - .3, tR = a("risk", .78) - .3, t70 = a("seventy", .9);
     const kB = ramp(t, tP, tP + .4), kC = ramp(t, tR, tR + .4); op(s.A, 1 - kB); op(s.B, kB * (1 - kC)); op(s.C, kC);
-    popAt(s.top, CX, 70, t, t0 - .2); op(s.top, on(t, t0 - .2, tP, .2));
+    popAt(s.top, 720, 70, t, t0 - .2); op(s.top, on(t, t0 - .2, tP, .2));
     s.bars.forEach((g, i) => { const tt = i ? t4 : t13, k = ease((t - tt) / .9), h = Math.max(1, g.h * k); set(g.r, "y", B0 - h); set(g.r, "height", h); op(g, ramp(t, tt - .05, tt + .1)); set(g.l, "y", B0 - h - 66); set(g.s, "y", B0 - h - 20); });
-    tf(s.dn, `translate(600 330) scale(${Math.max(0, pop(t, t4 + .8))})`); op(s.src, ramp(t, t13, t13 + .4));
+    tf(s.dn, `translate(700 270) scale(${Math.max(0, pop(t, t4 + .8))})`); op(s.src, ramp(t, t13, t13 + .4));
     tf(s.B, `translate(600 450) scale(${1.02 + .1 * ramp(t, tP, tR + .4)}) translate(-600 -450)`); popAt(s.area, 600, 80, t, tP + .3); op(s.area, on(t, tP + .3, tR, .2));
-    const z = lerp(1.5, 1.22, ramp(t, tR, t70 + 1)); tf(s.cam, `translate(600 400) scale(${z}) translate(-560 -470)`);
+    const z = lerp(1.5, 1.22, ramp(t, tR, t70 + 1)); tf(s.cam, `translate(600 420) scale(${z}) translate(-570 -440)`);
     const u = t - tR - .7; s.dev.open(ramp(u, 0, .35)); tf(s.off.armR, `translate(76 -398) rotate(${-150 * ramp(u, -.5, 0) + 20 * ramp(u, .3, .8)})`);
     s.moz.forEach((g, i) => { const k = clamp((u - .25 - i * .16) / 2.6), ang = -1.2 + i * .34, d = 520 * Math.pow(k, .7); tf(g, `translate(${632 + Math.cos(ang) * d * 1.3 + 30 * Math.sin(t * 4 + i)} ${392 + Math.sin(ang) * d * .55 - 40 * k}) scale(${(i % 2 ? -1 : 1) * lerp(.1, .3, k)} ${lerp(.1, .3, k)})`); op(g, k > 0 ? 1 - ramp(k, .85, 1) : 0); });
-    popAt(s.lo, 330, 240, t, tR + .4); popAt(s.ld, 800, 230, t, tR + .7); popAt(s.lm, 880, 520, t, tR + 1.5); [s.lo, s.ld, s.lm].forEach(c => op(c, +c.getAttribute("opacity") * (1 - ramp(t, t70 - .3, t70))));
+    popAt(s.lo, 300, 640, t, tR + .4); popAt(s.ld, 740, 640, t, tR + .7); popAt(s.lm, 960, 250, t, tR + 1.5); [s.lo, s.ld, s.lm].forEach(c => op(c, +c.getAttribute("opacity") * (1 - ramp(t, t70 - .3, t70))));
     popAt(s.pct, 600, 760, t, t70 - .1); };
   return s; })();
 
 // ---- RECAP: the journey on a board; each step lights up as Heart names it
-S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = s.stage, X = i => 110 + (i % 3) * 490, Y = i => 300 + Math.floor(i / 3) * 310;
-  s.title = tx(st, {x: 600, y: 110, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: INK}, "🦟 Your journey as a Wolbachia mosquito");
+S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = m9W(s), X = i => 110 + (i % 3) * 490, Y = i => 340 + Math.floor(i / 3) * 300;
+  s.title = tx(st, {x: 640, y: 150, "text-anchor": "middle", "font-size": 64, "font-weight": 700, fill: INK}, "🦟 Your journey as a Wolbachia mosquito");
   const pics = [g => { const m = m9Moz(g); op(m.wol, 1); tf(m, "translate(0 -10) scale(.42)"); },
     g => { tf(m9Block(g, {fl: 4, un: 3}), "translate(-10 62) scale(.26)"); const d = m9Device(g); d.open(1); tf(d, "translate(74 6) scale(.42)"); },
     g => { const m = m9Moz(g); m.fly(1); tf(m, "translate(-14 -6) scale(.36)"); tf(m9X(g, 20), "translate(62 32)"); emo(g, 66, -34, 44, "🧒"); },
     g => { const f = m9Moz(g, {female: true}); tf(f, "translate(0 -10) scale(.42)"); },
     g => { el("rect", {x: -100, y: 0, width: 200, height: 60, fill: "#7fd4ff"}, g); el("line", {x1: -100, y1: 0, x2: 100, y2: 0, stroke: "#3a86ff", "stroke-width": 5}, g); [-60, -20, 20, 60].forEach((x, i) => tf(m9Egg(g, 1.5), `translate(${x} ${-4 + (i % 2) * 5}) rotate(${i * 9 - 12})`)); tf(m9X(g, 26), "translate(0 -40)"); },
     g => { [[-66, -30, 1], [0, -30, 0], [66, -30, 0], [-66, 34, 0], [0, 34, 1], [66, 34, 0]].forEach(([x, y, k]) => { const m = m9Moz(g); tf(m, `translate(${x} ${y}) scale(.15)`); op(m, k ? 1 : .18); }); }];
-  s.cards = ["You: a male Aedes, with Wolbachia", "Released at an HDB block", "Males don't bite", "You found a wild female", "Her eggs did not hatch", "Fewer mosquitoes, less dengue"].map((lab, i) => { const g = el("g", {}, st);
+  s.cards = ["You: a male, with Wolbachia", "Released at an HDB block", "Males don't bite", "You found a wild female", "Her eggs did not hatch", "Fewer mosquitoes, less dengue"].map((lab, i) => { const g = el("g", {}, st);
     el("rect", {x: -215, y: -130, width: 430, height: 260, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
     el("circle", {cx: -176, cy: -92, r: 30, fill: ["#7209b7", "#f77f00", "#2a9d8f", "#f72585", "#e63946", "#06d6a0"][i], stroke: INK, "stroke-width": 5}, g); tx(g, {x: -176, y: -78, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, String(i + 1));
     pics[i](el("g", {transform: "translate(0 -34)"}, g)); tx(g, {x: 0, y: 104, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK, "data-fit": 400}, lab); return g; });
@@ -463,9 +466,9 @@ S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = s.stage,
 
 // ---- TEXTBOOK (P3 life cycles): the mosquito's life cycle as a circle, in step with Heart: egg, larva, pupa (all in water), adult.
 // Two rows of labels, one kind each: the stage's name; where it lives. Then real life: water left in a flower pot plate.
-S.textbook = (() => { const s = scene("textbook", "#e0fbfc", "#c2dfe3"), st = s.stage, CX = 600, CY = 470, R = 262;
-  const P = [[CX, CY - R], [CX + R + 130, CY], [CX, CY + R], [CX - R - 130, CY]], K = ["eggs", "larva", "pupa", "adultF"], NM = ["egg", "larva", "pupa", "adult"], RC = ["#2a9d8f", "#3a86ff", "#f77f00", "#e63946"];
-  s.h = chip(st, "📘 Primary 3 · Life cycles", "#3a0ca3", {fs: 44}); s.A = el("g", {}, st);
+S.textbook = (() => { const s = scene("textbook", "#e0fbfc", "#c2dfe3"), st = m9W(s), CX = 600, CY = 395, R = 215;
+  const P = [[CX, CY - R], [CX + R + 190, CY], [CX, CY + R], [CX - R - 190, CY]], K = ["eggs", "larva", "pupa", "adultF"], NM = ["egg", "larva", "pupa", "adult"], RC = ["#2a9d8f", "#3a86ff", "#f77f00", "#e63946"];
+  s.h = chip(st, "📘 Primary 3 · Life cycles", "#3a0ca3", {fs: 36}); s.A = el("g", {}, st);
   s.mid = el("g", {}, s.A); tx(s.mid, {x: CX, y: CY - 8, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "a mosquito's"); tx(s.mid, {x: CX, y: CY + 46, "text-anchor": "middle", "font-size": 46, "font-weight": 700, fill: INK}, "life cycle");
   s.arr = [0, 1, 2, 3].map(i => { const a = P[i], b = P[(i + 1) % 4], mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, ox = (mx - CX) * .34, oy = (my - CY) * .34, g = el("g", {}, s.A);
     const ux = b[0] - a[0], uy = b[1] - a[1], L = Math.hypot(ux, uy), A = [a[0] + ux / L * 150, a[1] + uy / L * 150], B = [b[0] - ux / L * 150, b[1] - uy / L * 150], d = `M${A} Q${mx + ox} ${my + oy} ${B}`.replace(/,/g, " ");
@@ -473,33 +476,34 @@ S.textbook = (() => { const s = scene("textbook", "#e0fbfc", "#c2dfe3"), st = s.
     const an = Math.atan2(B[1] - (my + oy), B[0] - (mx + ox)) * 180 / Math.PI; el("path", m9A({d: "M-24 -26 L26 0 L-24 26 Z", fill: "#ffbe0b", transform: `translate(${B[0]} ${B[1]}) rotate(${an})`}), g); return g; });
   s.band = el("rect", {x: -150, y: 0, width: 1500, height: 0, fill: "#7fd4ff", opacity: 0}, s.A);
   s.items = K.map((k, i) => { const g = m9Disc(s.A, k, RC[i]); g.x = P[i][0]; g.y = P[i][1]; return g; });
-  const lx = i => P[i][0] + (i === 0 || i === 2 ? 250 : 0), ly = i => P[i][1] + (i === 0 || i === 2 ? -10 : 178);
+  const lx = i => P[i][0] + (i === 0 ? 250 : i === 2 ? -215 : 0), ly = i => P[i][1] + (i === 0 ? -10 : i === 2 ? 66 : 178);
   s.names = NM.map((n, i) => tx(s.A, {x: lx(i), y: ly(i), "text-anchor": "middle", "font-size": 50, "font-weight": 700, fill: INK}, n));
-  s.where = ["in water", "in water", "in water", "on land, in the air"].map((w, i) => { const g = chip(s.A, w, i < 3 ? "#3a86ff" : "#8d99ae", {fs: 32}); g.x = lx(i); g.y = ly(i) + 50; return g; });
+  s.where = ["in water", "in water", "in water", "land and air"].map((w, i) => { const g = chip(s.A, w, i < 3 ? "#3a86ff" : "#8d99ae", {fs: 32}); g.x = lx(i); g.y = ly(i) + 50; return g; });
   s.tube = el("g", {}, s.A); el("path", {d: `M${P[1][0] - 58} ${P[1][1] - 60} L${P[1][0] - 20} ${P[1][1] - 150}`, stroke: INK, "stroke-width": 5, "stroke-linecap": "round"}, s.tube); s.tl = chip(s.tube, "breathing tube", INK, {fs: 28});
   s.four = chip(st, "4 stages", "#7209b7", {fs: 44});
   // real life: a flower pot on its plate in the corridor; in the plate's water, larvae and a pupa
   s.B = el("g", {}, st); el("rect", {x: -170, y: -80, width: 1960, height: 1120, fill: "#f3ead2"}, s.B); el("rect", {x: -170, y: 640, width: 1960, height: 400, fill: "#c9c2b2"}, s.B); el("line", {x1: -170, y1: 640, x2: 1790, y2: 640, stroke: INK, "stroke-width": 6}, s.B);
   s.pot = m9Pot(s.B); tf(s.pot, "translate(250 700) scale(1.25)");
-  s.lens = el("g", {transform: "translate(830 440)"}, s.B); const cp = el("clipPath", {id: "m9lens"}, e9defs()); el("circle", {r: 300}, cp); const q = el("g", {"clip-path": "url(#m9lens)"}, s.lens);
-  el("rect", {x: -310, y: -310, width: 620, height: 620, fill: "#eaf7ff"}, q); s.cut = m9PlateCut(q); tf(s.cut, "translate(-430 250) scale(1.35)");
+  s.lens = el("g", {transform: "translate(830 460)"}, s.B); const cp = el("clipPath", {id: "m9lens"}, e9defs()); el("circle", {r: 300}, cp); const q = el("g", {"clip-path": "url(#m9lens)"}, s.lens);
+  el("rect", {x: -310, y: -310, width: 620, height: 620, fill: "#eaf7ff"}, q); s.cut = m9PlateCut(q); tf(s.cut, "translate(840 230) scale(1.95)");
+  s.lar = [[-548, 0], [-462, 1.7], [-384, 3.1]].map(([x, ph]) => { const L = m9Larva(s.cut.wat, .46); tf(L, `translate(${x} -105)`); L.ph = ph; return L; }); tf(m9Pupa(s.cut.wat, .42), "translate(-312 -105)");
   s.lar = [[310, 0], [420, 1.7], [520, 3.1]].map(([x, ph]) => { const L = m9Larva(s.cut.wat, .62); tf(L, `translate(${x} -105)`); L.ph = ph; return L; }); tf(m9Pupa(s.cut.wat, .5), "translate(590 -105)");
   el("circle", {r: 300, fill: "none", stroke: INK, "stroke-width": 12}, s.lens); el("path", {d: "M-190 232 L-430 300 M-250 -166 L-446 232", stroke: INK, "stroke-width": 5, "stroke-dasharray": "12 12", fill: "none"}, s.B);
   s.w1 = chip(st, "🪴 A flower pot plate with water left standing in it", INK, {fs: 36}); s.w2 = chip(st, "⚠️ Standing water = a home for young mosquitoes", "#e63946", {fs: 42});
   s.run = t => { const a = (w, f) => cue("textbook", w, f), t0 = SC.textbook.t0, tC = a("cycle", .37), T = [a("egg", .48), a("larva", .52), a("pupa", .56), a("adult", .59)], tW = a("first", .65), tWa = a("water", .75), tB = a("that's", .81) - .3, kB = ramp(t, tB, tB + .5);
-    popAt(s.h, 600, 56, t, t0 - .2); op(s.h, on(t, t0 - .2, tB, .2)); op(s.A, 1 - kB); op(s.B, kB);
-    op(s.mid, ramp(t, tC - .3, tC)); popAt(s.four, 600, 150, t, a("four", .4)); op(s.four, on(t, a("four", .4), T[0] - .1, .2));
-    s.items.forEach((g, i) => { const hi = on(t, T[i], i < 3 ? T[i + 1] : T[i] + .9, .15), w = i < 3 ? on(t, tW, tB, .3) * .06 : 0; popAt(g, g.x, g.y, t, T[i] - .1, .92 * (1 + .14 * hi + w)); op(s.names[i], ramp(t, T[i], T[i] + .2)); });
+    popAt(s.h, 200, 130, t, t0 - .2); op(s.h, on(t, t0 - .2, tB, .2)); op(s.A, 1 - kB); op(s.B, kB);
+    op(s.mid, ramp(t, tC - .3, tC)); popAt(s.four, 1010, 160, t, a("four", .4)); op(s.four, on(t, a("four", .4), T[0] - .1, .2));
+    s.items.forEach((g, i) => { const hi = on(t, T[i], i < 3 ? T[i + 1] : T[i] + .9, .15), w = i < 3 ? on(t, tW, tB, .3) * .06 : 0; popAt(g, g.x, g.y, t, T[i] - .1, .88 * (1 + .1 * hi + w)); op(s.names[i], ramp(t, T[i], T[i] + .2)); });
     s.items[1].larva.run(t * 7);
     s.arr.forEach((g, i) => { const tt = i < 3 ? T[i + 1] - .25 : T[3] + .5; op(g, ramp(t, tt, tt + .3)); set(g.p, "stroke-dasharray", "26 20"); set(g.p, "stroke-dashoffset", -t * 60); });
     s.where.forEach((g, i) => popAt(g, g.x, g.y, t, i < 3 ? tWa - .5 + i * .18 : tWa + .5));
     op(s.tube, on(t, T[1] + .3, tB, .2)); popAt(s.tl, P[1][0] + 60, P[1][1] - 170, t, T[1] + .3);
-    s.lar.forEach(L => L.run(t * 7 + L.ph)); tf(s.lens, `translate(830 440) scale(${Math.max(0, pop(t, tB + .5, .5))})`);
-    popAt(s.w1, 600, 60, t, tB + .3); popAt(s.w2, 600, 850, t, a("standing", .9) - .2); };
+    s.lar.forEach(L => L.run(t * 7 + L.ph)); tf(s.lens, `translate(830 460) scale(${Math.max(0, pop(t, tB + .5, .5))})`);
+    popAt(s.w1, 640, 110, t, tB + .3); popAt(s.w2, 600, 812, t, a("standing", .9) - .2); };
   return s; })();
 
 // ---- DENGUE: only females bite (they need blood to make eggs). Then: person with dengue -> mosquito -> the next person.
-S.dengue = (() => { const s = scene("dengue", "#fde2e4", "#fad2e1"), st = s.stage, X = [190, 600, 1010], Y = 400;
+S.dengue = (() => { const s = scene("dengue", "#fde2e4", "#fad2e1"), st = m9W(s), X = [200, 640, 1080], Y = 410;
   s.A = el("g", {}, st);
   s.f = el("g", {}, s.A); s.fd = m9Disc(s.f, "adultF", "#e63946"); m9T(s.f, 0, 196, "female", 54, INK); tx(s.f, {x: 0, y: 244, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, "thin antennae"); s.ft = m9Tick(s.f, 30); s.fb = chip(s.f, "bites", "#e63946", {fs: 44});
   s.m = el("g", {}, s.A); s.md = m9Disc(s.m, "adultM", "#3a86ff"); m9T(s.m, 0, 196, "male", 54, INK); tx(s.m, {x: 0, y: 244, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, "bushy antennae"); s.mx = m9X(s.m, 26); s.mb = chip(s.m, "does not bite", "#3a86ff", {fs: 44});
@@ -508,27 +512,27 @@ S.dengue = (() => { const s = scene("dengue", "#fde2e4", "#fad2e1"), st = s.stag
   s.B = el("g", {}, st); s.h = chip(st, "🦟 How dengue spreads", "#e63946", {fs: 46});
   const person = (x, face, ring) => { const g = el("g", {}, s.B); el("circle", {r: 120, fill: "#fff", stroke: ring, "stroke-width": 8}, g); emo(g, 0, 4, 150, face); g.x = x; return g; };
   s.p1 = person(X[0], "🤒", "#e63946"); s.mq = m9Disc(s.B, "adultF", INK); s.mq.x = X[1]; s.p2 = person(X[2], "🙂", "#2a9d8f");
-  s.ars = [0, 1].map(i => { const g = e9Arrow(s.B, .9); set(g.a, "fill", "#cfd3dc"); tf(g, `translate(${(X[i] + X[i + 1]) / 2} ${Y})`); return g; });
-  s.bite = [0, 1].map(i => { const g = chip(s.B, i ? "bites again" : "bites", INK, {fs: 30}); return g; });
-  s.names = ["a person with dengue", "a female Aedes mosquito", "the next person"].map((n, i) => tx(s.B, {x: X[i], y: Y + 186, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: INK, "data-fit": 380}, n));
+  s.ars = [0, 1].map(i => { const g = e9Arrow(s.B, 1.1); set(g.a, "fill", "#cfd3dc"); tf(g, `translate(${(X[i] + X[i + 1]) / 2} ${Y})`); return g; });
+  s.bite = [0, 1].map(i => { const g = chip(s.B, i ? "bites again" : "bites", INK, {fs: 32}); return g; });
+  s.names = ["a person with dengue", "a female Aedes mosquito", "the next person"].map((n, i) => tx(s.B, {x: X[i], y: Y + 200, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK, "data-fit": 380}, n));
   s.v = el("g", {}, s.B); for (let i = 0; i < 10; i++) el("line", {x1: 0, y1: 0, x2: 30 * Math.cos(i * .628), y2: 30 * Math.sin(i * .628), stroke: "#7209b7", "stroke-width": 7, "stroke-linecap": "round"}, s.v); el("circle", {r: 20, fill: "#c77dff", stroke: "#7209b7", "stroke-width": 6}, s.v);
   s.vl = chip(s.B, "dengue virus", "#7209b7", {fs: 32});
   s.end = chip(st, "The mosquito carries the virus from person to person", "#7209b7", {fs: 38});
   s.run = t => { const a = (w, f) => cue("dengue", w, f), t0 = SC.dengue.t0, tO = a("only", 0), tBi = a("bite", .12), tBl = a("blood", .25), tW = a("when", .43) - .3, tB1 = a("bites", .57), tD = a("dengue", .65), tP = a("pass", .76), tN = a("next", .88), kB = ramp(t, tW, tW + .4);
     op(s.A, 1 - kB); op(s.B, kB); op(s.ec, +s.ec.getAttribute("opacity") * (1 - kB));
-    tf(s.f, `translate(330 330) scale(${1.25 * Math.max(0, pop(t, tO - .1))})`); tf(s.m, `translate(880 330) scale(${1.25 * Math.max(0, pop(t, tO + .15))})`);
+    tf(s.f, `translate(330 350) scale(${1.15 * Math.max(0, pop(t, tO - .1))})`); tf(s.m, `translate(880 350) scale(${1.15 * Math.max(0, pop(t, tO + .15))})`);
     popAt(s.ft, 104, -100, t, tBi - .1); popAt(s.fb, 0, -172, t, tBi - .1); popAt(s.mx, 104, -100, t, tBi + .5); popAt(s.mb, 0, -172, t, tBi + .5);
-    tf(s.eg, `translate(540 760) scale(${Math.max(0, pop(t, tBl))})`); popAt(s.ec, 600, 860, t, tBl + .4); op(s.ec, on(t, tBl + .4, tW, .2));
-    popAt(s.h, 600, 70, t, tW + .2); popAt(s.p1, X[0], Y, t, tD - .6, 1.1); popAt(s.mq, X[1], Y, t, tW + .2, 1.1); popAt(s.p2, X[2], Y, t, tN - .2, 1.1);
+    tf(s.eg, `translate(540 742) scale(${Math.max(0, pop(t, tBl))})`); popAt(s.ec, 600, 838, t, tBl + .4); op(s.ec, on(t, tBl + .4, tW, .2));
+    popAt(s.h, 760, 70, t, tW + .2); popAt(s.p1, X[0], Y, t, tD - .6, 1.15); popAt(s.mq, X[1], Y, t, tW + .2, 1.15); popAt(s.p2, X[2], Y, t, tN - .2, 1.15);
     s.names.forEach((n, i) => op(n, ramp(t, [tD - .5, tW + .3, tN - .1][i], [tD - .5, tW + .3, tN - .1][i] + .3)));
     s.ars.forEach((g, i) => { const tt = i ? tP : tD - .2, k = ramp(t, tt, tt + .3); op(g, k); set(g.a, "fill", mix("#cfd3dc", "#c77dff", ramp(t, tt + .2, tt + .8))); });
-    popAt(s.bite[0], (X[0] + X[1]) / 2, Y - 74, t, tD - .2); popAt(s.bite[1], (X[1] + X[2]) / 2, Y - 74, t, tP + .1);
-    const k1 = ease((t - tD - .1) / .9), k2 = ease((t - tP - .2) / 1.0), vx = lerp(lerp(X[0], X[1], k1), X[2], k2); tf(s.v, `translate(${vx} ${Y - 150 - 26 * Math.sin(Math.PI * (k2 > 0 ? k2 : k1))}) scale(${.8 + .1 * Math.sin(t * 6)})`); op(s.v, ramp(t, tD - .4, tD - .1));
-    popAt(s.vl, vx, Y - 216, t, tD - .3); popAt(s.end, 600, 800, t, tN + .5); };
+    popAt(s.bite[0], (X[0] + X[1]) / 2, Y - 104, t, tD - .2); popAt(s.bite[1], (X[1] + X[2]) / 2, Y - 104, t, tP + .1);
+    const k1 = ease((t - tD - .1) / .9), k2 = ease((t - tP - .2) / 1.0), vx = lerp(lerp(X[0], X[1], k1), X[2], k2); tf(s.v, `translate(${vx} ${Y - 186 - 26 * Math.sin(Math.PI * (k2 > 0 ? k2 : k1))}) scale(${.8 + .1 * Math.sin(t * 6)})`); op(s.v, ramp(t, tD - .4, tD - .1));
+    popAt(s.vl, vx, Y - 256, t, tD - .3); popAt(s.end, 600, 800, t, tN + .5); };
   return s; })();
 
 // ---- TRY THIS: once a week, tip out standing water: a flower pot plate, a pail, a roof gutter. Break the life cycle!
-S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage, X = [200, 600, 1000], Y = 600;
+S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = m9W(s), X = [200, 600, 1000], Y = 600;
   s.h = chip(st, "✏️ Try this at home!", "#7209b7", {fs: 46}); s.wk = chip(st, "🗓️ Once a week: hunt for standing water", "#3a86ff", {fs: 40});
   s.cards = X.map(x => el("rect", {x: x - 180, y: 230, width: 360, height: 470, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, st));
   s.it = X.map((x, i) => el("g", {}, st)); s.tilt = [];
@@ -537,7 +541,7 @@ S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage, X =
   // 2 the pail
   { const g = s.it[1], p = s.pail = el("g", {}, g); el("path", {d: "M-96 -150 Q0 -260 96 -150", fill: "none", stroke: INK, "stroke-width": 9, "stroke-linecap": "round"}, p);
     el("path", m9A({d: "M-104 -150 H104 L80 40 H-80 Z", fill: "#3a86ff"}), p); s.pw = el("ellipse", {cx: 0, cy: -150, rx: 98, ry: 20, fill: "#7fd4ff", stroke: INK, "stroke-width": 6}, p); el("path", {d: "M-70 -110 L-58 10", stroke: "#fff", "stroke-width": 10, "stroke-linecap": "round", opacity: .35}, p);
-    s.pour1 = el("path", {d: "M120 -60 Q170 -20 166 120", fill: "none", stroke: "#7fd4ff", "stroke-width": 20, "stroke-linecap": "round"}, g); }
+    s.pour1 = el("path", {d: "M112 -96 Q150 -40 148 110", fill: "none", stroke: "#7fd4ff", "stroke-width": 20, "stroke-linecap": "round"}, g); }
   // 3 the roof gutter: clear the leaves so the water runs away
   { const g = s.it[2]; el("path", m9A({d: "M-170 -90 L150 -250 L150 -200 L-170 -40 Z", fill: "#e76f51"}), g); for (let i = 0; i < 5; i++) el("line", {x1: -150 + i * 62, y1: -72 - i * 31, x2: -150 + i * 62, y2: -36 - i * 31, stroke: INK, "stroke-width": 4, opacity: .5}, g);
     el("path", m9A({d: "M-176 -30 H40 V20 Q40 50 10 50 H-146 Q-176 50 -176 20 Z", fill: "#adb5bd"}), g); s.gw = el("rect", {x: -170, y: -22, width: 204, height: 30, fill: "#7fd4ff", stroke: "#3a86ff", "stroke-width": 3}, g);
@@ -547,28 +551,28 @@ S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage, X =
   s.ok = X.map(x => m9Tick(st, 34));
   s.tip = chip(st, "💧 Tip it out!", "#f77f00", {fs: 50}); s.brk = chip(st, "No water = no eggs, larvae or pupae. The life cycle breaks!", "#e63946", {fs: 36});
   s.run = t => { const a = (w, f) => cue("try", w, f), t0 = SC.try.t0, T = [a("flower", .45), a("pails", .58), a("roof", .64)], tT = a("tip", .77), tB = a("break", .86);
-    popAt(s.h, 600, 60, t, t0 - .2); popAt(s.wk, 600, 150, t, a("once", .15));
+    popAt(s.h, 700, 60, t, t0 - .2); popAt(s.wk, 600, 150, t, a("once", .15));
     X.forEach((x, i) => { const k = Math.max(0, pop(t, T[i] - .15)); op(s.cards[i], clamp(k)); op(s.names[i], clamp(k)); const tk = ramp(t, tT + i * .25, tT + .6 + i * .25), dn = ramp(t, tT + .5 + i * .25, tT + 1.2 + i * .25);
-      tf(s.it[i], `translate(${x} ${Y}) scale(${k})`); popAt(s.ok[i], x + 130, 640, t, tT + 1.1 + i * .25);
-      if (i === 0) { tf(s.pot.pot, `translate(${-60 * tk} ${-70 * tk})`); tf(s.pot, `translate(0 40) scale(.74) rotate(${16 * tk * (1 - .0 * dn)} 110 0)`); op(s.pot.water, 1 - dn); op(s.pot.shine, 1 - dn); op(s.pour0, on(t, tT + .3, tT + 1.2, .2)); }
-      if (i === 1) { tf(s.pail, `rotate(${62 * tk} 90 20)`); op(s.pw, 1 - .8 * dn); op(s.pour1, on(t, tT + .55, tT + 1.45, .2)); }
+      tf(s.it[i], `translate(${x + (i === 2 ? 34 : 0)} ${Y}) scale(${k * (i === 2 ? .8 : 1)})`); popAt(s.ok[i], x + 130, 640, t, tT + 1.1 + i * .25);
+      if (i === 0) { tf(s.pot.pot, `translate(${-40 * tk} ${-56 * tk}) rotate(${-16 * tk})`); tf(s.pot, `translate(0 40) scale(.74) rotate(${16 * tk * (1 - .0 * dn)} 110 0)`); op(s.pot.water, 1 - dn); op(s.pot.shine, 1 - dn); op(s.pour0, on(t, tT + .3, tT + 1.2, .2)); }
+      if (i === 1) { tf(s.pail, `rotate(${46 * tk} 90 20)`); op(s.pw, 1 - .8 * dn); op(s.pour1, on(t, tT + .55, tT + 1.45, .2)); }
       if (i === 2) { tf(s.lv, `translate(${-70 * tk} ${-120 * tk}) rotate(${-30 * tk})`); op(s.lv, 1 - dn); set(s.gw, "height", 30 * (1 - dn)); set(s.gw, "y", -22 + 30 * dn); op(s.pour2, on(t, tT + .8, tT + 1.7, .2)); } });
     popAt(s.tip, 600, 770, t, tT); op(s.tip, on(t, tT, tB, .2)); popAt(s.brk, 600, 790, t, tB); };
   return s; })();
 
 // ---- THINK ABOUT IT: why release only males, never females?
-S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = s.stage;
-  s.title = tx(st, {x: 600, y: 110, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 10}, "🤔 Think about it!");
+S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = m9W(s);
+  s.title = tx(st, {x: 740, y: 130, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 10}, "🤔 Think about it!");
   s.dev = m9Device(st); tf(s.dev, "translate(600 420) scale(1.7)"); s.dev.open(1);
   s.m = [0, 1, 2].map(i => { const g = el("g", {}, st), d = m9Disc(g, "adultM", "#06d6a0"); tf(m9Tick(g, 30), "translate(96 -96)"); return g; }); s.ml = m9T(st, 250, 0, "males: released", 44);
   s.f = el("g", {}, st); m9Disc(s.f, "adultF", "#e63946"); s.fx = m9X(s.f, 84); s.fl = m9T(st, 1010, 0, "females: never released", 44); s.q = emo(st, 1010, 190, 110, "❓");
   s.c = chip(st, "Why does Project Wolbachia release only MALE mosquitoes?", "#e63946", {fs: 40}); s.ans = chip(st, "Answer next time!", "#f72585", {fs: 46});
   s.run = t => { const a = (w, f) => cue("think", w, f), t0 = SC.think.t0, tM = a("male", .45), tF = a("females", .65), tR = a("release", .35);
     popAt(s.title, 0, 0, t, t0 - .2); op(s.dev, ramp(t, tR - .4, tR - .1));
-    s.m.forEach((g, i) => popAt(g, [150, 330, 240][i], [330, 330, 520][i], t, tM - .1 + i * .15, .72)); set(s.ml, "y", 700); op(s.ml, ramp(t, tM + .2, tM + .5));
+    s.m.forEach((g, i) => popAt(g, [150, 330, 240][i], [330, 330, 520][i], t, tM - .1 + i * .15, .72)); set(s.ml, "y", 668); op(s.ml, ramp(t, tM + .2, tM + .5));
     popAt(s.f, 1010, 420, t, tF - .15, 1.05); set(s.fl, "y", 620); op(s.fl, ramp(t, tF + .1, tF + .4));
     tf(s.q, `translate(1010 190) scale(${Math.max(0, pop(t, tF + .4)) * (1 + .08 * Math.sin(t * 5))}) translate(-1010 -190)`);
-    popAt(s.c, 600, 780, t, a("why", .15)); popAt(s.ans, 600, 860, t, a("next", .9)); };
+    popAt(s.c, 600, 740, t, a("why", .15)); popAt(s.ans, 600, 822, t, a("next", .9)); };
   return s; })();
 
 // ---- CLOSE: what to remember, then next time's teaser (rows from CFG.close; copied from ep02)

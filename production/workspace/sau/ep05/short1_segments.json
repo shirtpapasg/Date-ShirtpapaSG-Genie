@@ -1,0 +1,187 @@
+{
+ "episode": "SAU EP05 Short 1",
+ "title": "Is all your food secretly sunlight?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s1b",
+   "photosynthesis",
+   "PHOTOSYNTHESIS",
+   "#2a9d8f"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "Is all your food secretly sunlight?"
+  },
+  {
+   "id": "f1",
+   "scene": "povSun",
+   "silent": 3.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "sun_whoosh",
+     0.25
+    ],
+    [
+     "flash",
+     0.85
+    ],
+    [
+     "space_warp",
+     1.0
+    ]
+   ]
+  },
+  {
+   "id": "f2",
+   "scene": "povLeaf",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "ep05_leaf",
+     1.9
+    ],
+    [
+     "pass_by",
+     3.0
+    ],
+    [
+     "pass_by",
+     3.7
+    ],
+    [
+     "riser",
+     3.9
+    ],
+    [
+     "pass_by",
+     4.3
+    ]
+   ]
+  },
+  {
+   "id": "f3",
+   "scene": "povPhoto",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.7
+    ],
+    [
+     "bubble",
+     0.3
+    ],
+    [
+     "bubble",
+     1.0
+    ],
+    [
+     "bubble",
+     1.7
+    ],
+    [
+     "flash",
+     2.75
+    ],
+    [
+     "stinger",
+     2.8
+    ],
+    [
+     "sparkle",
+     3.3
+    ],
+    [
+     "bubble",
+     3.5
+    ],
+    [
+     "bubble",
+     4.1
+    ],
+    [
+     "bubble",
+     4.8
+    ]
+   ]
+  },
+  {
+   "id": "f6",
+   "scene": "povHen",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep05_cluck",
+     0.15
+    ],
+    [
+     "ep05_cluck",
+     1.0
+    ],
+    [
+     "ep05_peck",
+     1.93
+    ],
+    [
+     "ep05_gulp",
+     2.05
+    ],
+    [
+     "reveal",
+     2.5
+    ],
+    [
+     "pop",
+     3.4
+    ],
+    [
+     "ep05_cluck",
+     4.1
+    ],
+    [
+     "chime",
+     3.7
+    ]
+   ]
+  },
+  {
+   "id": "s1b",
+   "scene": "recap",
+   "text": "You were light energy from the Sun. A leaf caught you, and photosynthesis turned you into food, stored in a grain of corn."
+  },
+  {
+   "id": "s1c",
+   "scene": "recap",
+   "text": "A hen on a Singapore farm ate the grain, and you went into an egg. A student ate the egg, and now you help them run, jump and grow."
+  },
+  {
+   "id": "s1d",
+   "scene": "recap",
+   "text": "All our food starts with sunlight, caught by plants."
+  },
+  {
+   "id": "s1e",
+   "scene": "recap",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}
