@@ -1,6 +1,8 @@
 """sau_upload.py: upload Science Around Us videos to YouTube, scheduled per the series rhythm, Made for Kids,
 in the "Science Around Us" playlist, with chapters from each render's timeline. Writes sau_uploaded.json.
     YT_TOKEN_FILE=.yt_token.json python3 sau_upload.py [ids...]      (default: every video in VIDEOS not yet uploaded)
+    python3 sau_upload.py --replace sau-ep01 ...    a new render of a video that is still scheduled (not yet public): deletes the
+                                                    old upload and uploads the new file with the same details and playlist place
 """
 import json, os, sys, time, urllib.request, urllib.parse, urllib.error
 HERE = os.path.dirname(os.path.abspath(__file__)); SAU = os.path.join(HERE, '../workspace/sau')
@@ -51,7 +53,8 @@ VIDEOS = [
   "desc": "Singapore is studying small modular reactors, but has not decided yet. Watch the full episode: How does Singapore keep the lights on? (Science Around Us EP2)" + FOOT, "tags": ["nuclear energy", "singapore", "energy", "shorts", "science around us"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
-want = sys.argv[1:] or [v['id'] for v in VIDEOS]
+REPLACE = sys.argv[1:2] == ['--replace']; want = (sys.argv[2:] if REPLACE else sys.argv[1:]) or [v['id'] for v in VIDEOS]
+ORDER = [v['id'] for v in VIDEOS]
 def save(): json.dump(done, open(os.path.join(HERE, 'sau_uploaded.json'), 'w'), indent=1)
 # playlist
 pl = done.get('_playlist')
@@ -60,7 +63,10 @@ if not pl:
         "description": "One real news story every Thursday, and the science behind it from your textbook. Primary 3 to Primary 6, Singapore."}, "status": {"privacyStatus": "public"}})["id"]
     done['_playlist'] = pl; save(); print("playlist", pl)
 for v in VIDEOS:
-    if v['id'] not in want or v['id'] in done: continue
+    if v['id'] not in want: continue
+    if REPLACE and v['id'] in done:
+        old = done.pop(v['id'])['videoId']; call("DELETE", f"{API}/videos", {"id": old}); save(); print("deleted old upload", v['id'], old)
+    if v['id'] in done: continue
     meta = {"snippet": {"title": v['title'], "description": v['desc'], "tags": v['tags'], "categoryId": "27", "defaultLanguage": "en", "defaultAudioLanguage": "en"},
             "status": {"privacyStatus": "private", "publishAt": v['at'], "selfDeclaredMadeForKids": True, "embeddable": True}}
     try:
@@ -73,7 +79,7 @@ for v in VIDEOS:
             try: call("POST", f"{UP}/thumbnails/set", {"videoId": vid, "uploadType": "media"}, raw=open(v['thumb'], 'rb').read(), ctype="image/jpeg"); print("  thumbnail set")
             except urllib.error.HTTPError as e: print("  thumbnail failed", e.code, e.read()[:200])
         for k in range(4):
-            try: call("POST", f"{API}/playlistItems", {"part": "snippet"}, {"snippet": {"playlistId": pl, "resourceId": {"kind": "youtube#video", "videoId": vid}}}); print("  in playlist"); break
+            try: call("POST", f"{API}/playlistItems", {"part": "snippet"}, {"snippet": {"playlistId": pl, "position": ORDER.index(v['id']), "resourceId": {"kind": "youtube#video", "videoId": vid}}}); print("  in playlist"); break
             except urllib.error.HTTPError as e: time.sleep(3 * (k + 1))
         time.sleep(2)
     except urllib.error.HTTPError as e:

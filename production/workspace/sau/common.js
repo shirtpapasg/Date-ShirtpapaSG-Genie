@@ -7,21 +7,7 @@ function skyline(p, x0, y0, col) { const g = el("g", {fill: col}, p);
   [0, 60, 120].forEach(dx => el("rect", {x: x0 + 600 + dx, y: y0 - 250, width: 38, height: 250}, g));      // three towers with a deck on top
   el("path", {d: `M${x0 + 585} ${y0 - 262} H${x0 + 775} Q${x0 + 790} ${y0 - 262} ${x0 + 795} ${y0 - 252} H${x0 + 585} Z`}, g);
   return g; }
-function regionMap(p) { const g = el("g", {}, p);
-  el("rect", {x: 0, y: 0, width: 1200, height: 900, rx: 40, fill: "#48cae4", stroke: INK, "stroke-width": 7}, g);
-  for (let i = 0; i < 7; i++) el("path", {d: `M${80 + i * 160} ${120 + (i % 3) * 260} q20 -12 40 0 t40 0`, fill: "none", stroke: "#fff", "stroke-width": 4, opacity: .5}, g);
-  const land = {fill: "#95d5b2", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round"};
-  el("path", Object.assign({d: "M380 0 L520 0 Q560 120 600 230 Q640 330 610 395 Q570 410 540 360 Q470 250 420 140 Q395 70 380 0 Z"}, land), g);        // Malaysia
-  el("ellipse", Object.assign({cx: 330, cy: 560, rx: 360, ry: 95, transform: "rotate(38 330 560)"}, land), g);                                       // Sumatra
-  el("path", Object.assign({d: "M760 330 Q860 250 1000 290 Q1120 330 1110 470 Q1100 620 990 700 Q880 760 800 680 Q730 600 740 470 Q745 380 760 330 Z"}, land), g); // Borneo
-  el("path", {d: "M745 520 Q900 540 1105 500", fill: "none", stroke: INK, "stroke-width": 3, "stroke-dasharray": "10 8", opacity: .5}, g);
-  const lab = (x, y, s, fs = 30) => tx(g, {x, y, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: INK}, s);
-  lab(470, 120, "Malaysia", 28); lab(280, 600, "Sumatra"); lab(930, 640, "Kalimantan");
-  g.sg = el("g", {transform: "translate(612 418)"}, g); el("circle", {r: 16, fill: "#e63946", stroke: "#fff", "stroke-width": 5}, g.sg);
-  g.sgRing = el("circle", {r: 16, fill: "none", stroke: "#e63946", "stroke-width": 4}, g.sg);
-  tx(g.sg, {x: 26, y: -16, "font-size": 34, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, "Singapore");
-  g.fires = [[260, 560], [340, 640], [430, 700], [860, 610], [960, 560], [900, 680]];
-  return g; }
+/* regionMap: see geo_map.js (accurate coastlines) */
 function arrowG(p, col) { const g = el("g", {}, p); el("path", {d: "M-70 -14 H30 V-36 L80 0 L30 36 V14 H-70 Z", fill: col, stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g); return g; }
 function particles(p, n, col, r0, r1) { const a = []; for (let i = 0; i < n; i++) a.push({e: el("circle", {r: r0 + rnd() * (r1 - r0), fill: col}, p), u: rnd(), v: rnd(), w: rnd() * 6}); return a; }
 

@@ -74,7 +74,7 @@ S.news = (() => { const s = scene("news", "#023e8a", "#0077b6");
   s.map = regionMap(s.stage);
   const pipe = (d, col) => { const g = el("g", {}, s.stage); el("path", {d, fill: "none", stroke: INK, "stroke-width": 18, "stroke-linecap": "round"}, g);
     const f = el("path", {d, fill: "none", stroke: col, "stroke-width": 9, "stroke-dasharray": "16 18", "stroke-linecap": "round"}, g); g.f = f; return g; };
-  s.pMy = pipe("M500 230 Q560 330 605 405", "#ffd166"); s.pSu = pipe("M360 520 Q480 470 600 428", "#ffd166"); s.pNa = pipe("M1150 120 Q900 200 626 410", "#ffd166");
+  s.pMy = pipe(pipeD("my"), "#ffd166"); s.pSu = pipe(pipeD("su"), "#ffd166"); s.pNa = pipe(pipeD("na"), "#ffd166");
   s.ship = emo(s.stage, 0, 0, 110, "🚢");
   s.h = chip(s.stage, "Oct 2026: a little less gas by pipeline from Indonesia", "#e63946", {fs: 30});
   s.small = chip(s.stage, "under 2 of every 100 units we use", "#2a9d8f", {fs: 32});
@@ -82,9 +82,9 @@ S.news = (() => { const s = scene("news", "#023e8a", "#0077b6");
   s.run = t => { const a = (w, f) => cue("news", w, f), tl = a("less", .3), tsh = a("ship", .6);
     [s.pMy, s.pSu, s.pNa].forEach((p, i) => { op(p, ramp(t, SC.news.t0 - .3 + i * .2, SC.news.t0 + i * .2)); set(p.f, "stroke-dashoffset", -t * 80); });
     [s.pSu, s.pNa].forEach(p => set(p.f, "stroke-dasharray", t > tl ? "8 34" : "16 18"));
-    popAt(s.h, 600, 50, t, a("october", .1)); op(s.h, on(t, a("october", .1), a("twenty-eight", .8), .2));
+    popAt(s.h, 600, 50, t, a("october", .1)); op(s.h, on(t, a("october", .1), a("two", .45) + .3, .2));
     popAt(s.small, 600, 50, t, a("two", .45) + .3); op(s.small, on(t, a("two", .45) + .3, a("twenty-eight", .8), .2));
-    const k = ramp(t, tsh - .3, tsh + 2.5); tf(s.ship, `translate(${lerp(1260, 760, k)} ${lerp(820, 470, k)})`); op(s.ship, ramp(t, tsh - .4, tsh - .1));
+    const k = ramp(t, tsh - .3, tsh + 2.5); tf(s.ship, `translate(${lerp(1130, 790, k)} ${lerp(170, 350, k)})`); op(s.ship, ramp(t, tsh - .4, tsh - .1));
     popAt(s.cal, 600, 50, t, a("twenty-eight", .8)); }; return s; })();
 
 // ---- CONVERT: chemical potential -> heat -> kinetic -> electrical -> your lamp

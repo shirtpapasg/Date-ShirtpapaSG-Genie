@@ -28,6 +28,10 @@ The teacher's weekly science-news videos for Singapore primary pupils (2026-11-1
 6. Our own pictures: Heart's animations only. No news footage or newspaper photos.
 7. Dated, not "this week": say "In November 2026".
 8. YouTube: Made for Kids, playlist "Science Around Us"; sources listed in the description.
+9. **Drawn, but true to the world and the science** (the teacher, 18 Nov 2026). Pictures can be cartoons, but what they show must be accurate: real map shapes and positions, real proportions and scales, correct science diagrams.
+   - Maps come from real coastline data: `workspace/sau/geo_map.js` (`regionMap()`, used by the scenes) and `globe_thumb.py` (thumbnails), both built from Natural Earth.
+   - Places (fires, pipelines, labels) go at their real longitude and latitude.
+   - Never draw a made-up coastline or a "rough" map.
 
 ## The kit (`production/workspace/sau/`)
 
