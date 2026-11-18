@@ -3,7 +3,10 @@
    (hook, answer, news, recap, textbook, try, think, close). The picture-only shots are in ep07/pov.js.
    Rule 9: oxygen is never shown turning into carbon dioxide. Carbon dioxide is made from the food; the oxygen ends up in water.
    Every frame depends only on t. */
-const o7T = n => SC[n] ? SC[n].t0 : -1e6, o7D = n => SC[n] ? SC[n].t1 - SC[n].t0 : 1, o7U = (n, t) => t - o7T(n);
+// the teacher (19 Nov 2026): the oxygen journey was too rushed. The hero shots now run SLOWER: their segments are 1.6 times longer and
+// each shot's own clock runs 1.6 times slower, so every move, card and beat keeps its place in the shot, just slower.
+const O7SLOW = {airOut: 1.6, povNose: 1.6, povWindpipe: 1.6, povAirSac: 1.6, povRBC: 1.6, povHeart: 1.6, povArtery: 1.6, povMuscle: 1.6, povReturn: 1.6, povExhale: 1.6};
+const o7T = n => SC[n] ? SC[n].t0 : -1e6, o7D = n => SC[n] ? (SC[n].t1 - SC[n].t0) / (O7SLOW[n] || 1) : 1, o7U = (n, t) => (t - o7T(n)) / (O7SLOW[n] || 1);
 const O7X = VP[0], O7Y = VP[1];
 const O7 = {SKIN: "#f1c27d", SK2: "#dba968", BLUE: "#3a86ff", NAVY: "#1d3557", HAIR: "#3d2c1e", O: "#e63946", C: "#343a40", N: "#9db8d6", ME: "#ff5d73", CO: "#8d99ae"};
 const o7o = {stroke: INK, "stroke-width": 6, "stroke-linejoin": "round", "stroke-linecap": "round"}, o7A = (a, b) => Object.assign({}, o7o, a, b || {});
