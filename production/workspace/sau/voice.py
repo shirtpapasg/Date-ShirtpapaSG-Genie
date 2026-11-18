@@ -1,4 +1,4 @@
-"""voice.py: Heart's narration for a Science Around Us video (voice 3, the same recipe as the episodes).
+"""voice.py: Heart's narration for a TheOneApp, Explored video (voice 3, the same recipe as the episodes).
 
 Kokoro af_heart, one sentence at a time at speed 0.94, pitch swing widened 1.6 times around her median, 0.57 s between
 sentences, levelled to -21.7 dB. A segment marked "excited" (the closing "Now you know!") is said brighter: faster,

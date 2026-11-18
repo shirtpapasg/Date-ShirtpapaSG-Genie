@@ -1,4 +1,4 @@
-// thumb.js: a Science Around Us thumbnail in the P5 style (pill, giant two-tone title, the episode's own scene, yellow banner).
+// thumb.js: a TheOneApp, Explored thumbnail in the P5 style (pill, giant two-tone title, the episode's own scene, yellow banner).
 // node thumb.js page.html out.png t "WHITE WORDS" "YELLOW WORDS" "banner words" [stageTransform] [extra.js: run in the page after the frame is drawn]
 const { chromium } = require('playwright');
 (async () => { const [page, out, t, w1, w2, banner, stf, extra] = process.argv.slice(2); const X = extra ? require('fs').readFileSync(extra, 'utf8') : ''; const b = await chromium.launch();
@@ -11,7 +11,7 @@ const { chromium } = require('playwright');
     const lg = document.createElementNS(NS, 'linearGradient'); lg.id = 'thg'; lg.setAttribute('x1', 0); lg.setAttribute('y1', 0); lg.setAttribute('x2', 0); lg.setAttribute('y2', 1);
     [['0', '#000', '.55'], ['1', '#000', '0']].forEach(([o, c, a]) => { const st = document.createElementNS(NS, 'stop'); st.setAttribute('offset', o); st.setAttribute('stop-color', c); st.setAttribute('stop-opacity', a); lg.appendChild(st); }); v.querySelector('defs').appendChild(lg);
     E('rect', {x: 50, y: 40, width: 560, height: 90, rx: 45, fill: '#1b1b3a', stroke: '#fff', 'stroke-width': 5});
-    const pt = E('text', {x: 330, y: 101, 'text-anchor': 'middle', 'font-size': 50, 'font-weight': 700, fill: '#fff'}); pt.innerHTML = '🌏 Science <tspan fill="#ffd60a">Around Us</tspan>';
+    const pt = E('text', {x: 330, y: 101, 'text-anchor': 'middle', 'font-size': 50, 'font-weight': 700, fill: '#fff'}); pt.innerHTML = 'TheOneApp <tspan fill="#ffd60a">Explored</tspan>';
     const tt = E('text', {x: 60, y: 300, 'font-size': 170, 'font-weight': 700, class: 'out', 'stroke-width': 30}); tt.innerHTML = `<tspan fill="#fff">${w1}</tspan> <tspan fill="#ffd60a">${w2}</tspan>`;
     const bb = tt.getBBox(); if (bb.width > 1800) tt.setAttribute('font-size', 170 * 1800 / bb.width);
     // banner words with a thick yellow border (no box), the teacher's choice 18 Nov 2026

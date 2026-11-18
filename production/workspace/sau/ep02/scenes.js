@@ -1,4 +1,4 @@
-/* Science Around Us EP02: How does Singapore keep the lights on? Load after ../common.js.
+/* TheOneApp, Explored EP02: How does Singapore keep the lights on? Load after ../common.js.
    Scenes draw in a 1200 x 900 box; times come from cue(scene, word, fallback) so the Shorts can reuse them. */
 
 const cross = (p, x, y, r) => { const g = el("g", {}, p);
@@ -183,7 +183,7 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7");
     el("circle", {r: 120, fill: "#fff", stroke: INK, "stroke-width": 7}, g); emo(g, 0, -5, 120, e); tx(g, {x: 0, y: 180, "text-anchor": "middle", "font-size": 42, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, l); });
   s.eq = tx(s.stage, {x: 600, y: 520, "text-anchor": "middle", "font-size": 120, class: "emo"}, "🔥 = ☀️ ?");
   s.q = emo(s.stage, 600, 300, 150, "❓");
-  s.ans = chip(s.stage, has("think", "next") ? "Answer next week!" : "▶ Full episode: Science Around Us", "#f72585", {fs: 44});
+  s.ans = chip(s.stage, has("think", "next") ? "Answer next week!" : "▶ Full episode: TheOneApp, Explored", "#f72585", {fs: 44});
   s.run = t => { const a = (w, f) => cue("think", w, f), mode = has("think", "rooftop") ? 0 : has("think", "choose") ? 1 : 2;
     popAt(s.title, 0, 0, t, SC.think.t0 - .2);
     op(s.roofs, mode === 0 ? ramp(t, a("rooftop", .2), a("rooftop", .2) + .4) : 0); s.roofList.forEach(r => op(r, mode === 0 ? ramp(t, a("panels", .35), a("panels", .35) + .5) : 0));

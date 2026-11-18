@@ -1,4 +1,4 @@
-/* Science Around Us trailer (outreach Short). Load after ../common.js and from_ep01.js (tiny, lungs). */
+/* TheOneApp, Explored trailer (outreach Short). Load after ../common.js and from_ep01.js (tiny, lungs). */
 function skyScene(name, toGrey) { const s = scene(name, "#8ecae6", "#219ebc");
   s.sky = el("rect", {x: 50, y: 60, width: 1100, height: 700, rx: 36, fill: "#8ecae6", stroke: INK, "stroke-width": 8}, s.stage);
   s.sun = emo(s.stage, 960, 190, 130, "☀️"); skyline(s.stage, 110, 760, "#264653");
@@ -13,7 +13,7 @@ S.tease = (() => { const s = scene("tease", "#1b263b", "#415a77");
     emo(g, -400, 0, 130, e); tx(g, {x: -300, y: 20, "font-size": 52, "font-weight": 700, fill: INK}, l); g.w = w; g.i = i; return g; });
   s.run = t => { s.cards.forEach(g => popAt(g, 600, 170 + g.i * 270, t, cue("tease", g.w, .1 + g.i * .3))); }; return s; })();
 S.promise = (() => { const s = scene("promise", "#ffd166", "#ef476f");
-  s.badge = chip(s.stage, "🌏 Science Around Us", "#f72585", {fs: 64});
+  s.badge = chip(s.stage, "🌏 TheOneApp, Explored", "#f72585", {fs: 64});
   s.cal = el("g", {}, s.stage); el("rect", {x: -200, y: -170, width: 400, height: 340, rx: 30, fill: "#fff", stroke: INK, "stroke-width": 8}, s.cal);
   el("rect", {x: -200, y: -170, width: 400, height: 100, rx: 30, fill: "#e63946"}, s.cal); el("rect", {x: -200, y: -110, width: 400, height: 40, fill: "#e63946"}, s.cal);
   s.day = tx(s.cal, {x: 0, y: -100, "text-anchor": "middle", "font-size": 48, "font-weight": 700, fill: "#fff"}, "MONDAY"); tx(s.cal, {x: 0, y: 70, "text-anchor": "middle", "font-size": 110, "font-weight": 700, fill: INK}, "📰➜🔬");

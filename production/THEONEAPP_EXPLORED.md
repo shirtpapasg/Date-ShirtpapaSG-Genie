@@ -1,9 +1,11 @@
-# Science Around Us: the series handbook
+# TheOneApp, Explored: the series handbook
+
+Renamed from "Science Around Us" on 18 Nov 2026: other books, films and videos already use that name. "Explored" pairs with the textbook series "TheOneApp, Explained": Explained teaches the textbook, Explored takes it into the real world. The board level code stays `SAU` and the kit folder stays `workspace/sau/`.
 
 The teacher's weekly science-news videos for Singapore primary pupils (2026-11-18). Each week, one news story is linked to a textbook topic pupils already study.
 
 - Proposal and decisions: the teacher's doc "Science in the News: Weekly Video Proposals", https://claude.ai/artifact/AgsDbqBpB2UvQq38XkoLpa
-- Board: the Videos Review Board, https://claude.ai/artifact/4LdsCNE87uai78ZDNHTPss, tab **Science Around Us** (cards have `level: "SAU"`)
+- Board: the Videos Review Board, https://claude.ai/artifact/4LdsCNE87uai78ZDNHTPss, tab **TheOneApp, Explored** (cards have `level: "SAU"`)
 - Kit: `production/workspace/sau/` on this branch
 
 ## Each week: one episode and two Shorts from one script
@@ -27,7 +29,7 @@ The teacher's weekly science-news videos for Singapore primary pupils (2026-11-1
 5. Every fact has a source. Use the agency or mission first (NEA, PUB, NParks, MSS, NASA, ESA). If a page can't be opened from the cloud, use two news reports that agree, and put the fact in the card's `changes` list as "to confirm before approving".
 6. Our own pictures: Heart's animations only. No news footage or newspaper photos.
 7. Dated, not "this week": say "In November 2026".
-8. YouTube: Made for Kids, playlist "Science Around Us"; sources listed in the description.
+8. YouTube: Made for Kids, playlist "TheOneApp, Explored"; sources listed in the description.
 9. **Drawn, but true to the world and the science** (the teacher, 18 Nov 2026). Pictures can be cartoons, but what they show must be accurate: real map shapes and positions, real proportions and scales, correct science diagrams.
    - Maps come from real coastline data: `workspace/sau/geo_map.js` (`regionMap()`, used by the scenes) and `globe_thumb.py` (thumbnails), both built from Natural Earth.
    - Places (fires, pipelines, labels) go at their real longitude and latitude.
@@ -71,13 +73,13 @@ New week, new folder `epNN/`:
 
 | When | Who | What |
 |---|---|---|
-| Monday 07:43 SGT | Scheduled task "Science Around Us: weekly episode" | Finds three candidate stories from the past week, each with its source, textbook link and level. Sends a phone notification. If this week's episode is already on the board (EP01 was made early for the week of 23 Nov), it plans the following week's instead. |
+| Monday 07:43 SGT | Scheduled task "TheOneApp, Explored: weekly episode" | Finds three candidate stories from the past week, each with its source, textbook link and level. Sends a phone notification. If this week's episode is already on the board (EP01 was made early for the week of 23 Nov), it plans the following week's instead. |
 | Monday | Teacher | Replies 1, 2 or 3 in that session (or "skip"). |
 | Monday–Tuesday | That session | Writes the script and both Shorts, renders them, puts all three on the board as Rendered, and replies with the board link. |
 | Wednesday | Teacher | Watches, then presses Approve or leaves notes. |
-| Daily 07:56 SGT | Scheduled task "Video pipeline check" | Applies notes on Science Around Us cards by re-rendering in the cloud. Prepares the YouTube details for approved videos. |
+| Daily 07:56 SGT | Scheduled task "Video pipeline check" | Applies notes on TheOneApp, Explored cards by re-rendering in the cloud. Prepares the YouTube details for approved videos. |
 | Thursday | Teacher says "go" | Episode uploaded (needs the teacher's YouTube sign-in, see `production/youtube/YOUTUBE_RELOGIN.md`). Short 1 goes up on Friday, Short 2 on Monday. |
-| After upload | Daily check | Prepares the TheOneApp change (Science Around Us shelf in `videos.js`) as a pull request. It merges only on "go". |
+| After upload | Daily check | Prepares the TheOneApp change (TheOneApp, Explored shelf in `videos.js`) as a pull request. It merges only on "go". |
 
 ## Episodes
 
@@ -94,7 +96,7 @@ EP02's "Think about it" (answer it at the start of EP03): *If we covered every r
 
 Before rendering a new episode, show the teacher the script breakdown (each part, its words, what is on screen and why it is written that way) in the proposal doc, and wait for the go. The teacher asked for this on 18 Nov 2026.
 
-## On YouTube (uploaded 18 Nov 2026, scheduled; playlist "Science Around Us")
+## On YouTube (uploaded 18 Nov 2026, scheduled; playlist "TheOneApp, Explored")
 
 `production/youtube/sau_upload.py` uploads each video private with a `publishAt` time, Made for Kids, with chapters from its timeline, its thumbnail (made with `workspace/sau/thumb.js` in the P5 thumbnail style), and the playlist.
 
@@ -108,4 +110,4 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP02 Short 1 | MvqM1Bf6OoQ | Fri 4 Dec, 5 pm |
 | EP02 Short 2 | 7EFtIj6W_0k | Mon 7 Dec, 5 pm |
 
-Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the Science Around Us ticket appear). The daily check prepares that pull request.
+Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the TheOneApp, Explored ticket appear). The daily check prepares that pull request.

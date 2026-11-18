@@ -1,4 +1,4 @@
-"""globe_thumb.py: a Science Around Us thumbnail on a real globe (Natural Earth coastlines, orthographic view)
+"""globe_thumb.py: a TheOneApp, Explored thumbnail on a real globe (Natural Earth coastlines, orthographic view)
 centred on Singapore, in the P5 thumbnail style (pill, giant two-tone title, yellow banner).
     python3 globe_thumb.py ep01/globe_ep01.json ep01/thumb_ep01.html    then screenshot it at 1920x1080
 Coastlines: Natural Earth 1:10m land and 1:50m countries (public domain), in geo/ (not in git: download
@@ -57,7 +57,7 @@ html,body{{margin:0;background:#000;width:1920px;height:1080px;overflow:hidden}}
 <text x="{sg[0]+64:.0f}" y="{sg[1]+14:.0f}" font-size="46" font-weight="700" fill="#fff" class="out" stroke-width="10">Singapore</text>
 <rect width="1920" height="330" fill="url(#top)"/>
 <rect x="50" y="40" width="560" height="90" rx="45" fill="#1b1b3a" stroke="#fff" stroke-width="5"/>
-<text x="330" y="101" text-anchor="middle" font-size="50" font-weight="700" fill="#fff">🌏 Science <tspan fill="#ffd60a">Around Us</tspan></text>
+<text x="330" y="101" text-anchor="middle" font-size="50" font-weight="700" fill="#fff">TheOneApp <tspan fill="#ffd60a">Explored</tspan></text>
 <text x="60" y="300" font-size="{cfg.get('titleSize', 170)}" font-weight="700" class="out" stroke-width="30"><tspan fill="#fff">{cfg['white']}</tspan> <tspan fill="#ffd60a">{cfg['yellow']}</tspan></text>
 <text x="960" y="1000" text-anchor="middle" font-size="112" font-weight="700" letter-spacing="5" fill="#1b1b3a" stroke="#1b1b3a" stroke-width="30" stroke-linejoin="round">{cfg['banner']}</text>
 <text x="960" y="1000" text-anchor="middle" font-size="112" font-weight="700" letter-spacing="5" fill="#1b1b3a" stroke="#ffd60a" stroke-width="15" stroke-linejoin="round" style="paint-order:stroke">{cfg['banner']}</text>

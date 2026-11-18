@@ -1,4 +1,4 @@
-"""build_tl.py: word timings -> timeline, voice track and sound effects for a Science Around Us video.
+"""build_tl.py: word timings -> timeline, voice track and sound effects for a TheOneApp, Explored video.
 
     python build_tl.py ep01/ep01_segments.json ep01/aud ep01/ep01      (writes ep01_tl.json, ep01_voice.wav, ep01_sfx.wav)
 
@@ -21,7 +21,7 @@ EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH",
 dur = lambda f: float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
 
 def align(s):
-    toks = s["text"].split(); spoken = [(i, w) for i, t in enumerate(toks) for w in re.findall(r"[a-z'][a-z'\-]*[a-z]|[a-z]", t.lower())]
+    toks = s["text"].split(); spoken = [(i, w) for i, t in enumerate(toks) for w in re.findall(r"[a-z'][a-z'\-]*[a-z]|[a-z]", t.replace("TheOneApp", "the one app").lower())]
     wav = f"{AUD}/{s['id']}.wav"; w16 = f"{AUD}/{s['id']}_16k.wav"; D = dur(wav)
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", wav, "-ar", "16000", "-ac", "1", w16], check=True)
     al = []

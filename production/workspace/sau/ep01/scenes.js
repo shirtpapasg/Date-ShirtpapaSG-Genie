@@ -1,4 +1,4 @@
-/* Science Around Us EP01: Why did the haze go away? Scenes draw in a 1200 x 900 box (centre 600, 450).
+/* TheOneApp, Explored EP01: Why did the haze go away? Scenes draw in a 1200 x 900 box (centre 600, 450).
    Times come from cue(scene, word, fallback fraction), so the Shorts reuse the same scenes with their own words. */
 
 /* ---- shared drawings ---- */
@@ -33,7 +33,7 @@ S.welcome = (() => { const s = scene("welcome", "#ffd166", "#ef476f"), I = CFG.i
   s.wave = emo(s.stage, 0, 0, 170, "🌏");
   s.hi = el("g", {}, s.stage);
   tx(s.hi, {x: 0, y: 0, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "Welcome to");
-  tx(s.hi, {x: 0, y: 125, "text-anchor": "middle", "font-size": 118, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "Science Around Us!");
+  tx(s.hi, {x: 0, y: 125, "text-anchor": "middle", "font-size": 104, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "TheOneApp, Explored!");
   s.board = el("g", {}, s.stage);
   el("rect", {x: -560, y: -380, width: 1120, height: 720, rx: 46, fill: "#fffaf0", stroke: INK, "stroke-width": 8, filter: "url(#sh)"}, s.board);
   el("rect", {x: -560, y: -380, width: 1120, height: 130, rx: 46, fill: INK}, s.board); el("rect", {x: -560, y: -290, width: 1120, height: 40, fill: INK}, s.board);
@@ -232,7 +232,7 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7");
   s.cloth = mask(330, "#4895ef", "cloth mask", false); s.n95 = mask(870, "#fff", "N95 mask", true);
   s.vs = tx(s.stage, {x: 600, y: 470, "text-anchor": "middle", "font-size": 80, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, "vs");
   s.q = emo(s.stage, 600, 300, 150, "❓");
-  s.ans = chip(s.stage, has("think", "next") ? "Answer next week!" : "▶ Full episode: Science Around Us", "#f72585", {fs: 44});
+  s.ans = chip(s.stage, has("think", "next") ? "Answer next week!" : "▶ Full episode: TheOneApp, Explored", "#f72585", {fs: 44});
   s.run = t => { const a = (w, f) => cue("think", w, f);
     popAt(s.title, 0, 0, t, SC.think.t0 - .2);
     popAt(s.cloth, s.cloth.x, 430, t, a("cloth", .3)); popAt(s.n95, s.n95.x, 430, t, a("n", .2)); op(s.vs, ramp(t, a("cloth", .3), a("cloth", .3) + .3));
@@ -260,10 +260,10 @@ S.nyk = (() => { const s = scene("nyk", "#ffbe0b", "#fb5607");
 // ---- END CARD (episode only)
 S.end = (() => { const s = scene("end", "#3a0ca3", "#7209b7"), N = CFG.next || [];
   N.forEach((ln, i) => tx(s.stage, {x: 600, y: 230 + i * 120, "text-anchor": "middle", "font-size": i ? 84 : 46, "font-weight": 700, fill: i ? "#fff" : "#ffe14d", class: i ? "out" : "", "stroke-width": 10, "letter-spacing": i ? 0 : 6}, ln));
-  const c = chip(s.stage, "🌏 Science Around Us · a new episode every Thursday", "#f72585", {fs: 38});
+  const c = chip(s.stage, "🌏 TheOneApp, Explored · a new episode every Thursday", "#f72585", {fs: 38});
   s.run = t => { popAt(c, 600, 720, t, TL.END - (CFG.outro || 3.8) + 2.8); }; return s; })();
 
 // ---- QUESTION CARD (Shorts only: the question is in the header, this is the opening beat)
 S.qcard = (() => { const s = scene("qcard", "#4361ee", "#7209b7");
-  s.e = emo(s.stage, 600, 380, 300, "🤔"); s.c = chip(s.stage, "🌏 Science Around Us", "#f72585", {fs: 48});
+  s.e = emo(s.stage, 600, 380, 300, "🤔"); s.c = chip(s.stage, "🌏 TheOneApp, Explored", "#f72585", {fs: 48});
   s.run = t => { tf(s.e, `translate(600 380) scale(${Math.max(0, pop(t, .2)) * (1 + .06 * Math.sin(t * 6))}) translate(-600 -380)`); popAt(s.c, 600, 720, t, .5); }; return s; })();

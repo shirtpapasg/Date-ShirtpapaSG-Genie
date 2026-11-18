@@ -1,7 +1,7 @@
 {
  "episode": "SAU EP01",
  "title": "Why did the haze go away?",
- "tag": "🌏 Science Around Us · EP 1 · The Haze",
+ "tag": "🌏 TheOneApp, Explored · EP 1 · The Haze",
  "intro": {
   "goals": [
    [
@@ -73,7 +73,7 @@
   {
    "id": "welcome",
    "scene": "welcome",
-   "text": "Welcome to Science Around Us! Today, you'll learn three things. First, what haze is made of. Second, how your lungs protect you. And third, why the wind decides when the haze comes. Let's get started!"
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what haze is made of. Second, how your lungs protect you. And third, why the wind decides when the haze comes. Let's get started!"
   },
   {
    "id": "news",

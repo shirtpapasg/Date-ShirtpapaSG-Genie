@@ -1,4 +1,4 @@
-"""geo_map.py: writes geo_map.js, the accurate region map every Science Around Us scene uses (regionMap).
+"""geo_map.py: writes geo_map.js, the accurate region map every TheOneApp, Explored scene uses (regionMap).
 Natural Earth coastlines (geo/, see globe_thumb.py), orthographic view centred on Singapore, drawn in the scenes'
 1200 x 900 box with Singapore at (612, 418). Points closer than 1.2 px are dropped to keep frames fast.
     python3 geo_map.py

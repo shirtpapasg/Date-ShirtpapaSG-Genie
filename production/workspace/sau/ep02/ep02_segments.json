@@ -1,7 +1,7 @@
 {
  "episode": "SAU EP02",
  "title": "How does Singapore keep the lights on?",
- "tag": "🌏 Science Around Us · EP 2 · Keeping the Lights On",
+ "tag": "🌏 TheOneApp, Explored · EP 2 · Keeping the Lights On",
  "intro": {
   "goals": [
    [
@@ -72,7 +72,7 @@
   {
    "id": "welcome",
    "scene": "welcome",
-   "text": "Welcome to Science Around Us! Today, you'll learn three things. First, how Singapore makes its electricity. Second, the energy changes inside a power station. And third, what could power us next. Let's get started!"
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how Singapore makes its electricity. Second, the energy changes inside a power station. And third, what could power us next. Let's get started!"
   },
   {
    "id": "history",
