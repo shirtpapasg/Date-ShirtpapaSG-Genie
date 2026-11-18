@@ -7,7 +7,7 @@ Each morning a fresh Claude session reads this playbook, checks every episode on
 - Board: https://claude.ai/artifact/4LdsCNE87uai78ZDNHTPss
 - Its database collection: `episodes`
 - One document per episode, with these fields:
-  - `level` (P3–P6; a missing level means P4), `no`, `title`
+  - `level` (P3–P6, or SAU for Science Around Us; a missing level means P4), `no`, `title`
   - `rendered`, `approved`, `youtubeUrl`, `live`, `pending`
   - `videoUpdatedAt`, `reviewedAt`
   - `parts` (the video files) or `playAt` (watch on another board)
@@ -63,3 +63,11 @@ Stuck / mismatch: …
 ```
 
 If nothing changed since yesterday, it says so in one line.
+
+## Science Around Us (weekly news videos, level SAU)
+
+The series has its own handbook: `production/SCIENCE_AROUND_US.md`. For its cards, the daily check also:
+
+- Renders in the cloud. The kit is `production/workspace/sau/`, so a teacher's note on a Science Around Us card is fixed by editing the script or scenes, re-rendering, and uploading the new parts to the card as a new version (`pending` while working, then `videoUpdatedAt`). The superseded, unapproved parts of that card may then be deleted from the board's assets.
+- Prepares the upload details with the playlist "Science Around Us", Made for Kids, and the sources in the description. Short 1 goes up the day after the episode, Short 2 three days after.
+- Checks that the next episode opens by answering the last episode's "Think about it" question.

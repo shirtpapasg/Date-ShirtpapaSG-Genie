@@ -1,0 +1,42 @@
+{
+ "episode": "SAU EP01 Short 2",
+ "title": "Why does haze come at certain times?",
+ "tag": "🌏 Science Around Us",
+ "kws": [
+  [
+   "s2b",
+   "wind",
+   "WIND DIRECTION",
+   "#3a86ff"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "Why does the haze only come at certain times of the year?"
+  },
+  {
+   "id": "s2b",
+   "scene": "wind",
+   "text": "From June to September, the wind blows from the south and the south-west. It carries smoke from fires in Sumatra and Kalimantan across the sea to Singapore."
+  },
+  {
+   "id": "s2c",
+   "scene": "wind",
+   "text": "In October and November, the winds change and heavy rain returns. Rain washes the smoke out of the air, and the north-east monsoon blows it away from us."
+  },
+  {
+   "id": "s2d",
+   "scene": "think",
+   "text": "So, which way is the wind blowing today? Watch the full episode on Science Around Us."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 2.6
+}

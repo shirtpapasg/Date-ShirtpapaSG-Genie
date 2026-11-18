@@ -3,3 +3,14 @@ __pycache__/
 production/youtube/.yt_token.json
 production/youtube/.yt_device.json
 production/youtube/publish_report.json
+# Science Around Us: generated media and tools (rebuilt by the kit)
+production/workspace/sau/fonts/node_modules/
+production/workspace/sau/*/aud*/
+production/workspace/sau/*/*.wav
+production/workspace/sau/*/*.mp4
+production/workspace/sau/*/*_page.html
+production/workspace/sau/*/*_log*.txt
+production/workspace/sau/*/*_parts.txt
+production/workspace/sau/*/render.log
+production/workspace/sau/*/parts/
+production/workspace/sau/*/thumb*.png

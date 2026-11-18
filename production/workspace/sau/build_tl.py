@@ -1,0 +1,119 @@
+"""build_tl.py: word timings -> timeline, voice track and sound effects for a Science Around Us video.
+
+    python build_tl.py ep01/ep01_segments.json ep01/aud ep01/ep01      (writes ep01_tl.json, ep01_voice.wav, ep01_sfx.wav)
+
+Words are aligned with pocketsphinx; a segment it cannot align is timed by spreading its words over the clip in
+proportion to their length (captions stay close enough, and the log says which segment it was).
+"""
+import json, re, wave, subprocess, os, sys, pocketsphinx
+from pocketsphinx import Decoder
+spec = json.load(open(sys.argv[1])); AUD = sys.argv[2]; OUT = sys.argv[3]
+dic = set(l.split()[0].split('(')[0] for l in open(os.path.join(pocketsphinx.get_model_path(), 'en-us', 'cmudict-en-us.dict')))
+EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH", "micrometres": "M AY K R OW M IY T ER Z",
+         "kilometres": "K IH L AA M AH T ER Z", "windpipe": "W IH N D P AY P", "mucus": "M Y UW K AH S", "myenv": "M AY",
+         "hotspots": "HH AA T S P AA T S", "singapore's": "S IH NG AH P AO R Z", "you'll": "Y UW L", "that's": "DH AE T S",
+         "here's": "HH IY R Z", "let's": "L EH T S", "i'll": "AY L", "defence": "D IH F EH N S", "twenty-six": "T W EH N T IY S IH K S",
+         "twenty-three": "T W EH N T IY TH R IY", "ninety-five": "N AY N T IY F AY V", "south-west": "S AW TH W EH S T",
+         "north-east": "N AO R TH IY S T"}
+dur = lambda f: float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
+
+def align(s):
+    toks = s["text"].split(); spoken = [(i, w) for i, t in enumerate(toks) for w in re.findall(r"[a-z'][a-z'\-]*[a-z]|[a-z]", t.lower())]
+    wav = f"{AUD}/{s['id']}.wav"; w16 = f"{AUD}/{s['id']}_16k.wav"; D = dur(wav)
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", wav, "-ar", "16000", "-ac", "1", w16], check=True)
+    al = []
+    try:
+        d = Decoder(samprate=16000, loglevel="FATAL")
+        for w in set(w for _, w in spoken if w not in dic):
+            if w in EXTRA: d.add_word(w, EXTRA[w], True)
+        d.set_align_text(" ".join(w for _, w in spoken))
+        data = wave.open(w16, "rb"); raw = data.readframes(data.getnframes())
+        d.start_utt(); d.process_raw(raw, full_utt=True); d.end_utt()
+        al = [(x.word, x.start_frame / 100, (x.end_frame + 1) / 100) for x in d.seg() if x.word not in ("<s>", "</s>", "<sil>", "(NULL)")]
+    except Exception as e:
+        print(s["id"], "align error", e)
+    tw = {}
+    if len(al) == len(spoken):
+        for (ti, _), (_, a, b) in zip(spoken, al):
+            if ti not in tw: tw[ti] = [a, b]
+            else: tw[ti][1] = b
+        print(s["id"], "aligned", len(al))
+    else:
+        tot = sum(len(t) + 2 for t in toks); c = 0.05
+        for i, t in enumerate(toks):
+            L = (D - .1) * (len(t) + 2) / tot; tw[i] = [c, c + L * .85]; c += L
+        print(s["id"], "PROPORTIONAL (aligned", len(al), "of", len(spoken), ")")
+    return [{"t": t, "a": tw[i][0], "b": tw[i][1]} for i, t in enumerate(toks)], D
+
+INTRO, GAP_SAME, GAP_SCENE, OUTRO = 0.6, 0.55, 1.0, spec.get("outro", 3.8)
+t = INTRO; segs = []; parts = [("sil", INTRO)]
+for i, s in enumerate(spec["segments"]):
+    words, d = align(s)
+    if i:
+        g = GAP_SAME if spec["segments"][i - 1]["scene"] == s["scene"] else GAP_SCENE
+        if s["scene"] == "nyk": g = 0.8
+        parts.append(("sil", g)); t += g
+    segs.append({"id": s["id"], "scene": s["scene"], "t0": round(t, 3), "t1": round(t + d, 3),
+                 "words": [{"t": w["t"], "a": round(t + w["a"], 3), "b": round(t + w["b"], 3)} for w in words]})
+    parts.append(("seg", s["id"])); t += d
+END = round(t + OUTRO, 3)
+inputs = []
+for kd, v in parts:
+    inputs += (["-f", "lavfi", "-t", f"{v:.3f}", "-i", "anullsrc=r=24000:cl=mono"] if kd == "sil" else ["-i", f"{AUD}/{v}.wav"])
+fc = "".join(f"[{i}:a]" for i in range(len(parts))) + f"concat=n={len(parts)}:v=0:a=1,apad,atrim=0:{END}[out]"
+subprocess.run(["ffmpeg", "-loglevel", "error", "-y"] + inputs + ["-filter_complex", fc, "-map", "[out]", OUT + "_voice.wav"], check=True)
+
+# captions say acronyms and numbers the way pupils read them ("P S I" -> "PSI", "two point five" -> "2.5")
+MERGE = [("twenty twenty-six", "2026"), ("twenty twenty-three", "2023"), ("two point five", "2.5"), ("my E N V", "myENV"),
+         ("P S I", "PSI"), ("P M", "PM"), ("N ninety-five", "N95")]
+def capwords(ws):
+    out, i = [], 0
+    while i < len(ws):
+        for src, dst in MERGE:
+            n = len(src.split()); seq = ws[i:i + n]
+            if len(seq) == n and " ".join(re.sub(r"[.,?!]+$", "", w["t"]) for w in seq).lower() == src.lower():
+                tail = re.search(r"[.,?!]*$", seq[-1]["t"]).group(0)
+                out.append({"t": dst + tail, "a": seq[0]["a"], "b": seq[-1]["b"]}); i += n; break
+        else: out.append(ws[i]); i += 1
+    return out
+chunks = []
+for s in segs:
+    if s["scene"] == "nyk": continue                      # the big title says it
+    cur = []
+    for w in capwords(s["words"]):
+        cur.append(w)
+        if w["t"][-1] in ".,?!" or len(cur) >= 5: chunks.append(cur); cur = []
+    if cur: chunks.append(cur)
+caps = []
+for i, c in enumerate(chunks):
+    nxt = chunks[i + 1][0]["a"] - .06 if i + 1 < len(chunks) else c[-1]["b"] + .6
+    caps.append({"t0": round(c[0]["a"] - .06, 3), "t1": round(min(nxt, c[-1]["b"] + .7), 3), "w": c})
+cues = {}
+for s in segs:
+    cs = {}
+    for w in s["words"]:
+        kk = re.sub(r"[^a-z'\-]", "", w["t"].lower()); n = 1
+        while f"{kk}#{n}" in cs: n += 1
+        cs[f"{kk}#{n}"] = w["a"]
+        if n == 1: cs[kk] = w["a"]
+    cs["_t0"] = s["t0"]; cs["_t1"] = s["t1"]; cues[s["id"]] = cs
+kws = [{"t": cues[sid][w], "label": lab, "col": col} for sid, w, lab, col in spec.get("kws", [])]
+scenes = []
+for s in segs:
+    if not scenes or scenes[-1]["scene"] != s["scene"]: scenes.append({"scene": s["scene"], "t0": s["t0"], "t1": s["t1"]})
+    else: scenes[-1]["t1"] = s["t1"]
+nyk = next((s["t0"] for s in segs if s["scene"] == "nyk"), END - 3)
+json.dump({"END": END, "segs": [{k: v for k, v in s.items() if k != "words"} for s in segs], "caps": caps, "cues": cues, "kws": kws,
+           "scenes": scenes, "spec": {k: v for k, v in spec.items() if k != "segments"}}, open(OUT + "_tl.json", "w"))
+
+ev = [("pop", k["t"]) for k in kws] + [("whoosh", s["t0"] - .35) for s in scenes[1:]] + [("ding", nyk), ("tada", nyk + .05)]
+src = {"pop": "sine=f=880:d=0.12,volume=0.5,afade=t=out:st=0.02:d=0.1,asetrate=44100*1.2,aresample=44100",
+       "whoosh": "anoisesrc=d=0.5:c=pink:a=0.25,bandpass=f=1200:w=900,afade=t=in:d=0.15,afade=t=out:st=0.2:d=0.3",
+       "ding": "sine=f=1318:d=0.6,volume=0.35,afade=t=out:st=0.05:d=0.55",
+       "tada": "aevalsrc=0.18*sin(2*PI*784*t)*exp(-3*t)+0.15*sin(2*PI*988*t)*exp(-3*t)+0.15*sin(2*PI*1175*t)*exp(-3*t):s=44100:d=1.2"}
+inputs, fl = [], []
+for i, (kd, tt) in enumerate(ev):
+    inputs += ["-f", "lavfi", "-i", src[kd]]; fl.append(f"[{i}:a]aformat=sample_rates=44100:channel_layouts=mono,adelay={int(max(0, tt) * 1000)}:all=1[e{i}]")
+fl.append("".join(f"[e{i}]" for i in range(len(ev))) + f"amix=inputs={len(ev)}:normalize=0,apad,atrim=0:{END}[out]")
+subprocess.run(["ffmpeg", "-loglevel", "error", "-y"] + inputs + ["-filter_complex", ";".join(fl), "-map", "[out]", OUT + "_sfx.wav"], check=True)
+print("END", END); [print(" ", x["scene"], x["t0"], x["t1"]) for x in scenes]

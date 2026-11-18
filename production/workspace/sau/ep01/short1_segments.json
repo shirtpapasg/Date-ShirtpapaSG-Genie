@@ -1,0 +1,42 @@
+{
+ "episode": "SAU EP01 Short 1",
+ "title": "How small is a haze particle?",
+ "tag": "🌏 Science Around Us",
+ "kws": [
+  [
+   "s1b",
+   "five",
+   "PM2.5",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "How small is a haze particle?"
+  },
+  {
+   "id": "s1b",
+   "scene": "tiny",
+   "text": "Haze is smoke from forest fires far away. Its smallest particles are less than two point five micrometres wide. That's about thirty times thinner than a strand of your hair!"
+  },
+  {
+   "id": "s1c",
+   "scene": "lungs",
+   "text": "Your nose hairs and mucus trap bigger dust. But these tiny particles can slip past, deep into your lungs. That's why haze makes it harder to breathe."
+  },
+  {
+   "id": "s1d",
+   "scene": "think",
+   "text": "So why does an N ninety-five mask work better than a cloth one? Watch the full episode on Science Around Us."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 2.6
+}

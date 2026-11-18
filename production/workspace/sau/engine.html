@@ -1,0 +1,158 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Science Around Us: one page draws every frame of an episode (1920x1080) or a Short (1080x1920).
+     build_page.py fills in __CFG__, __TL__ and __SCENES__; render.js calls window.render(t) per frame. -->
+<style>
+  @font-face{font-family:Fredoka;font-weight:500;src:url(FONTS/fredoka-latin-500-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:600;src:url(FONTS/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(FONTS/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;padding:0;background:#000;overflow:hidden}
+  svg{display:block}
+  text{font-family:Fredoka,sans-serif;font-weight:600}
+  .emo{font-family:"Noto Color Emoji",sans-serif}
+  .out{paint-order:stroke;stroke:#1b1b3a;stroke-linejoin:round}
+</style></head>
+<body>
+<svg id="v" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="0" flood-color="#1b1b3a" flood-opacity=".35"/></filter>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1"><stop offset="0" stop-color="#ff5d73"/><stop offset=".25" stop-color="#ffbe0b"/><stop offset=".5" stop-color="#06d6a0"/><stop offset=".75" stop-color="#3a86ff"/><stop offset="1" stop-color="#b5179e"/></linearGradient>
+  </defs>
+  <g id="scenes"></g>
+  <g id="head"></g>
+  <g id="confetti"></g>
+  <g id="tag" filter="url(#sh)"><rect x="40" y="34" width="430" height="58" rx="29" fill="#1b1b3a"/><text id="tagT" x="70" y="73" font-size="25" font-weight="700" fill="#fff"></text></g>
+  <g id="shelf"><text id="shelfHead" font-size="22" font-weight="700" fill="#fff" class="out" stroke-width="6" letter-spacing="3" opacity="0">⭐ KEY WORDS</text></g>
+  <g id="kwFly"></g>
+  <g id="caps"></g>
+  <rect id="progBg" fill="#1b1b3a" opacity=".35"/>
+  <rect id="prog" fill="url(#rainbow)"/>
+  <rect id="fade" fill="#000" opacity="1"/>
+</svg>
+<script>window.CFG = __CFG__; window.TL = __TL__;</script>
+<script>
+const NS = "http://www.w3.org/2000/svg", CHIPS = [];
+const {W, H} = CFG, SHORT = H > W;
+const $ = id => document.getElementById(id);
+const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+const tx = (p, a, s) => { const t = el("text", a, p); t.textContent = s; return t; };
+const emo = (p, x, y, size, s) => tx(p, {x, y, "font-size": size, class: "emo", "text-anchor": "middle", "dominant-baseline": "central"}, s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const lerp = (a, b, k) => a + (b - a) * k;
+const ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+const ramp = (t, a, b) => ease((t - a) / (b - a));
+const back = k => { k = clamp(k); const c = 1.9; return 1 + (c + 1) * Math.pow(k - 1, 3) + c * Math.pow(k - 1, 2); };
+const pop = (t, a, d = .45) => back((t - a) / d);
+const on = (t, a, b = 1e9, f = .25) => ramp(t, a, a + f) * (1 - ramp(t, b - f, b));
+const set = (e, k, v) => e.setAttribute(k, v);
+const op = (e, v) => e.setAttribute("opacity", clamp(v));
+const tf = (e, s) => e.setAttribute("transform", s);
+const popAt = (e, x, y, t, a, s = 1) => { tf(e, `translate(${x} ${y}) scale(${s * Math.max(0, pop(t, a))})`); op(e, ramp(t, a - .05, a + .1)); };
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const INK = "#1b1b3a";
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (h1, h2, k) => { const a = hex(h1), b = hex(h2); return "rgb(" + a.map((v, i) => Math.round(lerp(v, b[i], clamp(k)))).join(",") + ")"; };
+const SC = {}; TL.scenes.forEach(s => SC[s.scene] = s);
+const SEGS = name => TL.segs.filter(s => s.scene === name);
+// cue(scene, word, frac): when a word is first said in that scene ("word#2" = its second time); if the scene's script
+// never says it (a Short says it differently), a fixed fraction of the way through the scene instead.
+function cue(name, word, frac) { for (const s of SEGS(name)) { const c = TL.cues[s.id]; if (c && c[word] !== undefined) return c[word]; }
+  const sc = SC[name]; return sc ? sc.t0 + (sc.t1 - sc.t0) * frac : 0; }
+const has = (name, word) => SEGS(name).some(s => TL.cues[s.id] && TL.cues[s.id][word] !== undefined);
+
+/* ---------- widgets ---------- */
+function chip(p, label, col, opts = {}) {
+  const g = el("g", {opacity: 0}, p); const fs = opts.fs || 30, w = opts.w || (label.length * fs * .56 + 44), h = fs + 26;
+  el("rect", {x: -w / 2, y: -h / 2, width: w, height: h, rx: h / 2, fill: col, stroke: INK, "stroke-width": 4, filter: "url(#sh)"}, g);
+  tx(g, {x: 0, y: fs * .36, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: opts.ink || "#fff"}, label);
+  CHIPS.push([g, fs, !!opts.w]); return g; }
+function bg(p, c1, c2) {
+  const id = "g" + (bg.n = (bg.n || 0) + 1);
+  const lg = el("linearGradient", {id, x1: 0, y1: 0, x2: .3, y2: 1}, $("v").querySelector("defs"));
+  el("stop", {offset: 0, "stop-color": c1}, lg); el("stop", {offset: 1, "stop-color": c2}, lg);
+  el("rect", {width: W, height: H, fill: `url(#${id})`}, p);
+  const b = []; for (let i = 0; i < 14; i++) b.push({x: rnd() * W, y: rnd() * H, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
+  return b; }
+function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % (H + 120) + H + 120) % (H + 120) - 60); set(o.e, "r", o.r); }); }
+// every scene draws in a 1200 x 900 box; the box sits left of the key-word shelf (episode) or mid-screen (Short)
+const BOX = SHORT ? "translate(0 560) scale(0.9)" : "translate(150 60)";
+function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {transform: BOX}, g); return {g, b, stage, name, run: () => {}}; }
+const S = {};
+</script>
+<script>
+__SCENES__
+</script>
+<script>
+/* ---------- Short header: the question stays on screen above the picture ---------- */
+if (SHORT) { const h = $("head"); const lines = CFG.headLines || [CFG.title];
+  lines.forEach((ln, i) => tx(h, {x: W / 2, y: 260 + i * 110 - (lines.length - 1) * 55, "text-anchor": "middle", "font-size": 92, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 14}, ln)); }
+
+/* ---------- confetti (at "Now you know!") ---------- */
+const CONF = []; seed = 99;
+for (let i = 0; i < 90; i++) CONF.push({e: el("rect", {width: 16, height: 26, rx: 4, fill: ["#ff5d73", "#ffbe0b", "#06d6a0", "#3a86ff", "#b5179e", "#fff"][i % 6]}, $("confetti")),
+  a: -Math.PI / 2 + (rnd() - .5) * 2.4, v: 700 + rnd() * 900, r: rnd() * 720, x: W / 2 + (rnd() - .5) * 200});
+function drawConfetti(t) { const n = SC.nyk; if (!n) return; const k = t - n.t0;
+  CONF.forEach(c => { if (k < 0 || k > 3.2) { op(c.e, 0); return; } op(c.e, 1 - ramp(k, 2.4, 3.2));
+    const x = c.x + Math.cos(c.a) * c.v * k * .55, y = H * .58 + Math.sin(c.a) * c.v * k + 900 * k * k;
+    tf(c.e, `translate(${x} ${y}) rotate(${c.r + k * 400})`); }); }
+
+/* ---------- key words: a big box, then to the shelf (episode) or away (Short) ---------- */
+const KW = TL.kws.map((k, i) => { const g = el("g", {opacity: 0}, $("kwFly"));
+  const big = el("g", {}, g); el("rect", {x: -300, y: -60, width: 600, height: 120, rx: 60, fill: k.col, stroke: INK, "stroke-width": 7, filter: "url(#sh)"}, big);
+  tx(big, {x: 0, y: 22, "text-anchor": "middle", "font-size": 62, "font-weight": 700, fill: "#fff"}, k.label);
+  const small = el("g", {opacity: 0}, g); el("rect", {x: -150, y: -22, width: 300, height: 44, rx: 22, fill: k.col, stroke: INK, "stroke-width": 4}, small);
+  tx(small, {x: 0, y: 9, "text-anchor": "middle", "font-size": 24, "font-weight": 700, fill: "#fff"}, k.label);
+  return {k, g, big, small, sw: 300, i}; });
+function drawKW(t) {
+  if (SHORT) { KW.forEach(K => { const t0 = K.k.t; op(K.g, on(t, t0, t0 + 2.4, .2)); op(K.small, 0); tf(K.g, `translate(${W / 2} 1470)`); tf(K.big, `scale(${.8 * Math.max(0, pop(t, t0, .5))})`); }); return; }
+  if (KW.length) op($("shelfHead"), ramp(t, KW[0].k.t + 1.8, KW[0].k.t + 2.2));
+  KW.forEach(K => { const t0 = K.k.t, tfly = .6, tf0 = t0 + 1.9, sx = 1880 - K.sw / 2, sy = 124 + K.i * 56;
+    if (t < t0 - .05) { op(K.g, 0); return; } op(K.g, 1);
+    const fly = ramp(t, tf0, tf0 + tfly), x = lerp(760, sx, fly), y = lerp(880, sy, fly) - Math.sin(fly * Math.PI) * 120;
+    tf(K.g, `translate(${x} ${y})`); tf(K.big, `scale(${Math.max(0, pop(t, t0, .5)) * lerp(1, .46, fly)})`); op(K.big, 1 - ramp(t, tf0 + tfly * .6, tf0 + tfly));
+    op(K.small, ramp(t, tf0 + tfly * .5, tf0 + tfly)); });
+  op($("shelf"), 1 - ramp(t, SC.nyk ? SC.nyk.t0 - .5 : 1e9, SC.nyk ? SC.nyk.t0 : 1e9)); KW.forEach(K => { if (SC.nyk && t > SC.nyk.t0 - .5) op(K.g, 1 - ramp(t, SC.nyk.t0 - .5, SC.nyk.t0)); }); }
+
+/* ---------- captions (word by word, the spoken word in yellow) ---------- */
+const CAPY = SHORT ? 1620 : 1023, CAPF = SHORT ? 54 : 46;
+const CAPS = TL.caps.map(c => { const g = el("g", {opacity: 0}, $("caps"));
+  const len = c.w.reduce((n, w) => n + w.t.length + 1, 0), w = len * CAPF * .52 + 60;
+  el("rect", {x: W / 2 - w / 2, y: CAPY - CAPF - 2, width: w, height: CAPF + 24, rx: (CAPF + 24) / 2, fill: "#1b1b3a", "fill-opacity": .8}, g);
+  const t = el("text", {x: W / 2, y: CAPY, "text-anchor": "middle", "font-size": CAPF, "font-weight": 600}, g);
+  const spans = c.w.map((w, i) => { const s = el("tspan", {fill: "#fff"}, t); s.textContent = (i ? " " : "") + w.t; return s; });
+  return {c, g, spans}; });
+function drawCaps(t) { CAPS.forEach(({c, g, spans}) => { const a = ramp(t, c.t0, c.t0 + .08) * (1 - ramp(t, c.t1 - .08, c.t1)); op(g, a);
+  if (a > 0) c.w.forEach((w, i) => set(spans[i], "fill", t >= w.a - .04 && (i === c.w.length - 1 || t < c.w[i + 1].a - .04) ? "#ffe14d" : "#fff")); }); }
+
+/* ---------- frame ---------- */
+const v = $("v"); set(v, "width", W); set(v, "height", H); set(v, "viewBox", `0 0 ${W} ${H}`); document.body.style.width = W + "px"; document.body.style.height = H + "px";
+["fade"].forEach(id => { set($(id), "width", W); set($(id), "height", H); });
+set($("progBg"), "y", H - 8); set($("progBg"), "width", W); set($("progBg"), "height", 8); set($("prog"), "y", H - 8); set($("prog"), "height", 8);
+set($("shelfHead"), "x", 1515); set($("shelfHead"), "y", 78);
+$("tagT").textContent = CFG.tag; if (SHORT) { tf($("tag"), `translate(${W / 2 - 250} 40)`); }
+const order = TL.scenes.map(s => s.scene).concat(SHORT || !S.end ? [] : ["end"]);
+const ENDT = TL.END - (CFG.outro || 3.8) + 2.4;   // the end card follows "Now you know!" after 2.4 s
+window.render = function (t) {
+  order.forEach((name, i) => { const s = S[name]; if (!s) return;
+    const t0 = name === "end" ? ENDT : SC[name].t0 - (i ? .4 : 0);
+    const nxtName = order[i + 1], nxt = nxtName ? (nxtName === "end" ? ENDT : SC[nxtName].t0 - .4) : 1e9;
+    const vis = ramp(t, t0 - .2, t0 + .2) * (1 - ramp(t, nxt - .2, nxt + .2)); op(s.g, vis); if (vis <= 0) return;
+    tf(s.g, `translate(${W / 2} ${H / 2}) scale(${1 + .06 * (1 - ramp(t, t0 - .2, t0 + .3))}) translate(${-W / 2} ${-H / 2})`);
+    moveBubbles(s.b, t); s.run(t); });
+  drawConfetti(t); drawKW(t); drawCaps(t);
+  op($("head"), SHORT ? ramp(t, .1, .5) : 0);
+  set($("prog"), "width", W * clamp(t / TL.END));
+  { const tg = $("tag"); tg.querySelector("rect").setAttribute("width", $("tagT").getComputedTextLength() + 62); } op($("tag"), ramp(t, .2, .6) * (SHORT ? 1 : 1 - ramp(t, ENDT - .4, ENDT)));
+  op($("fade"), Math.max(1 - ramp(t, 0, .35), ramp(t, TL.END - .5, TL.END)));
+};
+function fitPill(g, pad) { const r = g.querySelector("rect"), tt = g.querySelector("text"); if (!r || !tt) return 0;
+  const need = tt.getBBox().width + pad, w = +r.getAttribute("width");
+  if (need > w) { const cx = +r.getAttribute("x") + w / 2; set(r, "width", need); set(r, "x", cx - need / 2); } return Math.max(need, w); }
+document.fonts.ready.then(() => {
+  CHIPS.forEach(([g, fs, fixed]) => { if (!fixed) fitPill(g, fs * 1.3); });
+  KW.forEach(K => { fitPill(K.big, 70); K.sw = fitPill(K.small, 36); });
+  CAPS.forEach(({g}) => fitPill(g, 64));
+  window.READY = true; });
+</script>
+</body></html>
