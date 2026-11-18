@@ -185,11 +185,11 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 
 | Video | YouTube | Goes public (SGT) |
 |---|---|---|
-| Trailer | WnUML8oojhM | Wed 25 Nov, 7 pm |
-| EP01 | RmRSeKnx6Ac | Thu 26 Nov, 5 pm |
+| Trailer | WnUML8oojhM | public since 18 Nov (the teacher asked to go live early) |
+| EP01 | RmRSeKnx6Ac | public since 18 Nov |
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
-| EP02 Part 1 | k7KprUkoduU | Thu 3 Dec, 5 pm |
+| EP02 Part 1 | k7KprUkoduU | public since 18 Nov |
 | EP02 Part 2 | JlrwaLyZ2ZI | Sun 6 Dec, 5 pm |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
