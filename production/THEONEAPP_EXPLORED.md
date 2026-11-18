@@ -180,11 +180,11 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | Video | YouTube | Goes public (SGT) |
 |---|---|---|
 | Trailer | WnUML8oojhM | Wed 25 Nov, 7 pm |
-| EP01 | CxCl5ZM_5dw | Thu 26 Nov, 5 pm |
+| EP01 | RmRSeKnx6Ac | Thu 26 Nov, 5 pm |
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
-| EP02 | rT2wlRo1PCc | Thu 3 Dec, 5 pm |
-| EP02 Short 1 | apUqq0d6YvQ | Fri 4 Dec, 5 pm |
+| EP02 | MCr7EFf_8p4 | Thu 3 Dec, 5 pm |
+| EP02 Short 1 | xDAGBl5XHJQ | Fri 4 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Mon 7 Dec, 5 pm |
 
 Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the TheOneApp, Explored ticket appear). The daily check prepares that pull request.
