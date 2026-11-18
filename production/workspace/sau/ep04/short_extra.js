@@ -26,10 +26,11 @@ if (SHORT) { const fit4 = window.fit4;
   big(fit4("povSea", .8, 700, 480, 450, [[1090, "#0f5fae"]]).card, 1.2);
   big(fit4("povCool", .8).card, 1.3);
   { const s = fit4("povFall", .8); big(s.card, 1.6); big(s.card2, 1.6); }
-  big(fit4("povFriends", .82, 870).card, 1.12);
+  big(fit4("povFriends", .82, 870, 480, 450, [[1300, "#6cc487", -1e4, 1400, s => s.gr], [1300, "#3a86ff", 1400, 1e4, s => s.gr]]).card, 1.12);
   { const s = fit4("salt", .8, 615, 480, 470, [[1030, "#133894", -1e4, 800], [1030, "#e9c46a", 800, 1e4]]); big(s.lvap, 1); s.lvap.firstChild.setAttribute("transform", "translate(130 0)"); }
   fit4("try", .95, 615);
   // the water cycle: this Short only tells the evaporation half, so the condensation half is left out
   { const s = fit4("cycle", .92, 525, 480, 450, [[1030, "#3a86ff", -1e4, 441], [1030, "#74c69d", 441, 1e4]]); hide(s, [s.hC, s.cloud, s.pC, s.lc, s.rain.G, s.lr, s.ld, s.cf, s.loopA, s.round, s.rC]);
-    const w = el("g", {transform: "translate(-320 -440)"}); while (s.rE.firstChild) w.appendChild(s.rE.firstChild); s.rE.appendChild(w); }
+    const w = el("g", {transform: "translate(-350 -440)"}); while (s.rE.firstChild) w.appendChild(s.rE.firstChild); s.rE.appendChild(w);
+    big(s.title, 1); s.title.firstChild.setAttribute("transform", "translate(-180 0)"); }
 }

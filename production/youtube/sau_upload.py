@@ -115,6 +115,14 @@ VIDEOS = [
   "desc": "Be Wolby, a male Aedes mosquito with Wolbachia inside, released by NEA at an HDB block. Males don't bite. When Wolbachia males mate with wild females, the eggs don't hatch, so there are fewer mosquitoes and less dengue. Then Heart explains a mosquito's life cycle from the Primary 3 textbook, how dengue spreads, and how to tip out standing water."
           "\n\n" + EP9_CH + "\n\nSources: National Environment Agency (nea.gov.sg), Project Wolbachia and dengue statistics." + FOOT,
   "tags": ["dengue", "wolbachia", "mosquito", "life cycle", "primary 3 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep04-s1", "file": f"{SAU}/ep04/short1.mp4", "thumb": f"{SAU}/ep04/thumb_short1.jpg", "at": "2026-12-02T09:00:00Z", "title": "Is Rain From The Sea Salty? #Shorts",
+  "desc": "When sea water evaporates, the salt stays behind, so rain is fresh water. Watch the full episode: Where does all this rain come from? (TheOneApp, Explored EP4)" + FOOT, "tags": ["water cycle", "evaporation", "rain", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep04-s2", "file": f"{SAU}/ep04/short2.mp4", "thumb": f"{SAU}/ep04/thumb_short2.jpg", "at": "2026-12-03T09:00:00Z", "title": "Where Does A Puddle Go? #Shorts",
+  "desc": "Draw around a puddle with chalk and watch it shrink: the water evaporates into water vapour. Watch the full episode: Where does all this rain come from? (TheOneApp, Explored EP4)" + FOOT, "tags": ["evaporation", "water vapour", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep05-s1", "file": f"{SAU}/ep05/short1.mp4", "thumb": f"{SAU}/ep05/thumb_short1.jpg", "at": "2026-12-05T09:00:00Z", "title": "Is All Your Food Secretly Sunlight? #Shorts",
+  "desc": "From the Sun, to a leaf, to a grain, to a hen, to an egg, to you. Watch the full episode: Where does your energy come from? (TheOneApp, Explored EP5)" + FOOT, "tags": ["photosynthesis", "food chain", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep05-s2", "file": f"{SAU}/ep05/short2.mp4", "thumb": f"{SAU}/ep05/thumb_short2.jpg", "at": "2026-12-06T09:00:00Z", "title": "Why Does Singapore Buy Food From So Many Countries? #Shorts",
+  "desc": "More than 9 in 10 bites of our food come from other countries. Food security: many sources, grow more at home, store some away. Watch the full episode: Where does your energy come from? (TheOneApp, Explored EP5)" + FOOT, "tags": ["food security", "singapore", "shorts", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.

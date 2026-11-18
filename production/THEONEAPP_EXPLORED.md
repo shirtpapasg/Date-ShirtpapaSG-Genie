@@ -208,6 +208,7 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP07 Oxygen | SOaxffBqJBI | Thu 10 Dec, 5 pm |
 | EP08 Food chain | f3KNTUoYfQg | Sun 13 Dec, 5 pm |
 | EP09 Mosquitoes | mUzcEOrz938 | Wed 16 Dec, 5 pm |
+| Shorts EP03 to EP05 | see youtube/sau_uploaded.json | 26, 27, 29, 30 Nov; 2, 3, 5, 6 Dec |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
 
