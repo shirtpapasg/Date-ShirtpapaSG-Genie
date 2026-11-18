@@ -98,7 +98,27 @@
    "id": "news",
    "scene": "news",
    "text": "Here's the headline. On the fourth of September, twenty twenty-six, Singapore's air reached the unhealthy range for the first time since twenty twenty-three. Then, on the seventh of November, the National Environment Agency ended its haze measures for the season.",
-   "hold": 1.0
+   "hold": 1.0,
+   "shots": [
+    [
+     "fourth",
+     1.25,
+     600,
+     230
+    ],
+    [
+     "air",
+     1.2,
+     600,
+     600
+    ],
+    [
+     "seventh",
+     1,
+     600,
+     450
+    ]
+   ]
   },
   {
    "id": "p1",
@@ -179,7 +199,7 @@
    "id": "n1",
    "scene": "recap",
    "hold": 0.8,
-   "text": "Did you follow that tiny particle? It came from peat land burning in Sumatra. Hot air lifted it high into the sky. From June to September, winds from the south-west carried it across the sea to Singapore, and someone breathed it in."
+   "text": "Did you feel that journey? You were a tiny particle of smoke from a peat land fire in Sumatra. Hot air lifted you high into the sky. From June to September, winds from the south-west carried you across the sea to Singapore, and someone breathed you in."
   },
   {
    "id": "smoke2",
@@ -189,19 +209,67 @@
   {
    "id": "lungs1",
    "scene": "lungs",
-   "text": "Now for the textbook link! In Primary Five, you learn about the respiratory system. When you breathe in, air travels through your nose, down your windpipe, and into your lungs. In the lungs, oxygen passes into your blood."
+   "text": "Now for the textbook link! In Primary Five, you learn about the respiratory system. When you breathe in, air travels through your nose, down your windpipe, and into your lungs. In the lungs, oxygen passes into your blood.",
+   "shots": [
+    [
+     "nose",
+     1.35,
+     470,
+     260
+    ],
+    [
+     "lungs",
+     1.3,
+     585,
+     700
+    ],
+    [
+     "oxygen",
+     1,
+     600,
+     450
+    ]
+   ]
   },
   {
    "id": "lungs2",
    "scene": "lungs",
    "text": "Your nose is the first line of defence. Tiny hairs and sticky mucus trap dust and bigger particles. But P M two point five particles are so small that some slip past, deep into the lungs. That's why haze can make it harder to breathe, especially for people with asthma.",
-   "hold": 1.0
+   "hold": 1.0,
+   "shots": [
+    [
+     "hairs",
+     1.3,
+     900,
+     380
+    ],
+    [
+     "asthma",
+     1,
+     600,
+     450
+    ]
+   ]
   },
   {
    "id": "wind2",
    "scene": "wind",
    "text": "In October and November, the winds become light and change direction, and heavy rain showers return. Rain washes the particles out of the air. Then the north-east monsoon arrives, and the wind blows from the north-east, away from the fires. That's why the haze went away.",
-   "hold": 0.6
+   "hold": 0.6,
+   "shots": [
+    [
+     "rain",
+     1.3,
+     612,
+     350
+    ],
+    [
+     "north-east",
+     1,
+     600,
+     450
+    ]
+   ]
   },
   {
    "id": "p6",
@@ -217,7 +285,21 @@
   {
    "id": "impact",
    "scene": "impact",
-   "text": "In Primary Six, you learn how people affect the environment. When forests are burned to clear land, animals lose their homes, and the smoke pollutes the air, even in other countries. Today, scientists use satellites to spot the fires, called hotspots, so they can be put out sooner."
+   "text": "In Primary Six, you learn how people affect the environment. When forests are burned to clear land, animals lose their homes, and the smoke pollutes the air, even in other countries. Today, scientists use satellites to spot the fires, called hotspots, so they can be put out sooner.",
+   "shots": [
+    [
+     "animals",
+     1.2,
+     520,
+     700
+    ],
+    [
+     "satellites",
+     1,
+     600,
+     450
+    ]
+   ]
   },
   {
    "id": "try",
