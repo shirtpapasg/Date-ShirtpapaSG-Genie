@@ -18,3 +18,6 @@ production/workspace/sau/*/render*.log
 production/workspace/sau/*/parts*/
 production/youtube/sau_uploaded.json
 production/thumbs_v3/.work/
+# Natural Earth coastlines (13 MB): globe_thumb.py's README line says where to download them
+production/workspace/sau/geo/
+production/workspace/sau/*/thumb_*_globe.html
