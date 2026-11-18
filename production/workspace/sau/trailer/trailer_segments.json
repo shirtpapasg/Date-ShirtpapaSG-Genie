@@ -1,0 +1,50 @@
+{
+ "episode": "SAU trailer",
+ "title": "This grey sky was a science lesson",
+ "tag": "🌏 Science Around Us",
+ "outro": 2.6,
+ "kws": [],
+ "segments": [
+  {
+   "id": "t1",
+   "scene": "sky",
+   "text": "This grey sky? It was a science lesson."
+  },
+  {
+   "id": "t2",
+   "scene": "tease",
+   "text": "Smoke that travelled hundreds of kilometres. Mosquitoes that fight dengue. And a country with no oil or gas of its own."
+  },
+  {
+   "id": "t3",
+   "scene": "tiny",
+   "text": "Here's one. The tiniest haze particles are thirty times thinner than your hair."
+  },
+  {
+   "id": "t4",
+   "scene": "lungs",
+   "text": "So small, they slip past your nose, straight into your lungs."
+  },
+  {
+   "id": "t5",
+   "scene": "promise",
+   "text": "Every Thursday, Science Around Us takes one real news story and shows you the science from your textbook. Primary Three to Primary Six."
+  },
+  {
+   "id": "t6",
+   "scene": "subscribe",
+   "text": "Subscribe, so next week you'll find out how Singapore keeps the lights on."
+  },
+  {
+   "id": "t7",
+   "scene": "skyclear",
+   "text": "And that grey sky?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

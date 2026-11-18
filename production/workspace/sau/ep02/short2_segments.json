@@ -1,0 +1,42 @@
+{
+ "episode": "SAU EP02 Short 2",
+ "title": "Could nuclear power Singapore?",
+ "tag": "🌏 Science Around Us",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s2b",
+   "nuclear",
+   "NUCLEAR ENERGY",
+   "#7209b7"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "Could a nuclear reactor power Singapore one day?"
+  },
+  {
+   "id": "s2b",
+   "scene": "nuclear",
+   "text": "Inside a nuclear reactor, tiny atoms split and release a lot of heat, without making carbon dioxide. Small modular reactors are newer, smaller designs."
+  },
+  {
+   "id": "s2c",
+   "scene": "nuclear",
+   "text": "Singapore is studying them, but has not decided yet. On a small, crowded island, scientists must first be sure they are safe."
+  },
+  {
+   "id": "s2d",
+   "scene": "think",
+   "text": "So, which would you choose: more solar, power from our neighbours, or nuclear? Watch the full episode on Science Around Us."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

@@ -14,3 +14,5 @@ production/workspace/sau/*/*_parts.txt
 production/workspace/sau/*/render.log
 production/workspace/sau/*/parts/
 production/workspace/sau/*/thumb*.png
+production/workspace/sau/*/render*.log
+production/workspace/sau/*/parts*/

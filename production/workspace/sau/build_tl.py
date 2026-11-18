@@ -14,7 +14,10 @@ EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH",
          "hotspots": "HH AA T S P AA T S", "singapore's": "S IH NG AH P AO R Z", "you'll": "Y UW L", "that's": "DH AE T S",
          "here's": "HH IY R Z", "let's": "L EH T S", "i'll": "AY L", "defence": "D IH F EH N S", "twenty-six": "T W EH N T IY S IH K S",
          "twenty-three": "T W EH N T IY TH R IY", "ninety-five": "N AY N T IY F AY V", "south-west": "S AW TH W EH S T",
-         "north-east": "N AO R TH IY S T"}
+         "north-east": "N AO R TH IY S T", "senoko": "S EH N OW K OW", "tengeh": "T EH NG EH", "liquefied": "L IH K W AH F AY D",
+         "sixty-five": "S IH K S T IY F AY V", "ninety-one": "N AY N T IY W AH N", "ninety-two": "N AY N T IY T UW",
+         "ninety-three": "N AY N T IY TH R IY", "twenty-eight": "T W EH N T IY EY T", "thirty-five": "TH ER T IY F AY V",
+         "you're": "Y UH R", "it's": "IH T S", "we're": "W IY R", "modular": "M AA JH AH L ER", "co-": "K OW"}
 dur = lambda f: float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]))
 
 def align(s):
@@ -64,7 +67,7 @@ fc = "".join(f"[{i}:a]" for i in range(len(parts))) + f"concat=n={len(parts)}:v=
 subprocess.run(["ffmpeg", "-loglevel", "error", "-y"] + inputs + ["-filter_complex", fc, "-map", "[out]", OUT + "_voice.wav"], check=True)
 
 # captions say acronyms and numbers the way pupils read them ("P S I" -> "PSI", "two point five" -> "2.5")
-MERGE = [("twenty twenty-six", "2026"), ("twenty twenty-three", "2023"), ("two point five", "2.5"), ("my E N V", "myENV"),
+MERGE = [("nineteen sixty-five", "1965"), ("nineteen ninety-one", "1991"), ("nineteen ninety-two", "1992"), ("twenty thirteen", "2013"), ("twenty twenty-eight", "2028"), ("twenty thirty-five", "2035"), ("twenty twenty-six", "2026"), ("twenty twenty-three", "2023"), ("two point five", "2.5"), ("my E N V", "myENV"),
          ("P S I", "PSI"), ("P M", "PM"), ("N ninety-five", "N95")]
 def capwords(ws):
     out, i = [], 0

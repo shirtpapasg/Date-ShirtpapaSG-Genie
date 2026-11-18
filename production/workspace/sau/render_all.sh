@@ -9,4 +9,4 @@ one() { V=$1; W=$2; H=$3; N=$4
   ffmpeg -loglevel error -y -i ${V}_noaudio.mp4 -i ${V}_voice.wav -i ${V}_sfx.wav -filter_complex "[1:a]aresample=48000,loudnorm=I=-16:TP=-1.5,aresample=48000[v];[2:a]aresample=48000,volume=0.5[s];[v][s]amix=inputs=2:duration=first:normalize=0,aformat=sample_rates=48000:channel_layouts=stereo[a]" -map 0:v -map "[a]" -c:v copy -c:a aac -b:a 192k -movflags +faststart ${V}.mp4
   rm -f ${V}_part*.mp4 ${V}_noaudio.mp4; ffprobe -hide_banner ${V}.mp4 2>&1 | grep -E "Duration|Stream" ; }
 # ./render_all.sh epNN [list]: the list picks what to render (default: the episode and both Shorts), e.g. "epNN" alone after a fix
-for V in ${2:-$EP short1 short2}; do case $V in short*) one $V 1080 1920 2;; *) one $V 1920 1080 4;; esac; done; echo RENDER_DONE
+for V in ${2:-$EP short1 short2}; do case $V in short*|trailer*) one $V 1080 1920 2;; *) one $V 1920 1080 4;; esac; done; echo RENDER_DONE
