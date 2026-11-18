@@ -257,7 +257,10 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7");
 S.close = (() => { const s = scene("close", "#f15bb5", "#fee440");
   const rows = [["💨", "Haze is tiny smoke particles", "tiny", .15, "#495057"], ["🌬️", "The wind carries it here", "wind", .4, "#3a86ff"], ["🌧️", "Rain washes it out", "rain", .55, "#00b4d8"], ["👃", "Your nose and lungs protect you", "nose", .85, "#ef476f"]];
   s.rows = rows.map(([e, lab, w, f, col], i) => { const c = chip(s.stage, e + "  " + lab, col, {fs: 48}); return {c, w, f, y: 170 + i * 175}; });
-  s.run = t => { s.rows.forEach(r => popAt(r.c, 600, r.y, t, cue("close", r.w, r.f))); }; return s; })();
+  s.tease = chip(s.stage, "💡 Next week: how does Singapore keep the lights on?", "#3a0ca3", {fs: 40});
+  s.run = t => { const tn = has("close", "next") ? cue("close", "next", .8) : 1e9;
+    s.rows.forEach(r => { popAt(r.c, 600, r.y, t, cue("close", r.w, r.f)); op(r.c, ramp(t, cue("close", r.w, r.f) - .05, cue("close", r.w, r.f) + .1) * (1 - .6 * ramp(t, tn - .2, tn + .3))); });
+    popAt(s.tease, 600, 850, t, tn); }; return s; })();
 
 // ---- NOW YOU KNOW!
 S.nyk = (() => { const s = scene("nyk", "#ffbe0b", "#fb5607");

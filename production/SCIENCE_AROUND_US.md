@@ -80,8 +80,12 @@ New week, new folder `epNN/`:
 | No | Week of | Story | Textbook link | Levels |
 |---|---|---|---|---|
 | 1 | 23 Nov 2026 | Why did the haze go away? | Respiratory system; how people affect the environment | P5, P6 |
-| 2 | 30 Nov 2026 | COP31: why countries meet about climate | Heat; how people affect the environment | P4, P6 |
+| 2 | 30 Nov 2026 | How does Singapore keep the lights on? (oil in 1965 → natural gas today, Indonesia's gas cut, solar, imports, nuclear). Script drafted in ep02/, waiting for the teacher's go before rendering | Energy forms and conversion; how people affect the environment | P6 |
 | 3 | 7 Dec 2026 | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; how people affect the environment | P3, P6 |
 | 4 | 14 Dec 2026 | Cooling a city without more air-con (exam special) | Heat; energy | P4, P6 |
 
-EP01's "Think about it" (answer it at the start of EP02): *Why does an N95 mask protect you better than a cloth mask during the haze?* Answer: the gaps between the fibres of a cloth mask are much bigger than PM2.5 particles, so many slip through. An N95 mask has a fine filter that traps at least 95 out of every 100 tiny particles, and it fits closely so air doesn't leak in around the edges.
+EP01's "Think about it" (answered at the start of EP02): *Why does an N95 mask protect you better than a cloth mask during the haze?* Answer: the gaps between the fibres of a cloth mask are much bigger than PM2.5 particles, so many slip through. An N95 mask has a fine filter that traps at least 95 out of every 100 tiny particles, and it fits closely so air doesn't leak in around the edges.
+
+EP02's "Think about it" (answer it at the start of EP03): *If we covered every rooftop in Singapore with solar panels, could they power the whole country?* Answer: no. Singapore's rooftops are too small for all the electricity we use, and panels make nothing at night and less on cloudy days. That's why Singapore also looks at imports, storage and other sources.
+
+Before rendering a new episode, show the teacher the script breakdown (each part, its words, what is on screen and why it is written that way) in the proposal doc, and wait for the go. The teacher asked for this on 18 Nov 2026.
