@@ -207,6 +207,7 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP06 Digestion | JiNYG8Upozg | Mon 7 Dec, 5 pm |
 | EP07 Oxygen | SOaxffBqJBI | Thu 10 Dec, 5 pm |
 | EP08 Food chain | f3KNTUoYfQg | Sun 13 Dec, 5 pm |
+| EP09 Mosquitoes | mUzcEOrz938 | Wed 16 Dec, 5 pm |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
 

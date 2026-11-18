@@ -47,6 +47,8 @@ EP7_CH = chapters(f"{SAU}/ep07/ep07_tl.json", {"hook": "Huff, puff!", "answer": 
     "airOut": "You are oxygen", "recap": "Your journey", "textbook": "Respiratory and circulatory systems (P5)", "try": "Try this", "think": "Think about it", "close": "Remember"})
 EP8_CH = chapters(f"{SAU}/ep08/ep08_tl.json", {"hook": "An apex predator", "answer": "Last time's answer", "welcome": "Today you'll learn", "news": "Crocodiles in Singapore",
     "povCroc": "Rewind: you are the crocodile", "recap": "The rewind", "textbook": "Food chains (P6)", "bigidea": "The big idea", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP9_CH = chapters(f"{SAU}/ep09/ep09_tl.json", {"hook": "Mosquitoes vs mosquitoes", "answer": "Last time's answer", "welcome": "Today you'll learn", "news": "The news: dengue in Singapore",
+    "lab": "You are a Wolbachia mosquito", "recap": "Your journey", "textbook": "Life cycles (P3)", "dengue": "How dengue spreads", "try": "Try this", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
  {"id": "sau-trailer", "live": True, "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
@@ -109,6 +111,10 @@ VIDEOS = [
   "desc": "Semakau Landfill is expected to be full by about 2035. Watch the full episode: Where does our rubbish go? (TheOneApp, Explored EP3 Part 2)" + FOOT, "tags": ["semakau", "landfill", "recycling", "shorts", "theoneapp explored"]},
  {"id": "sau-ep03b-s2", "file": f"{SAU}/ep03b/short2.mp4", "thumb": f"{SAU}/ep03b/thumb_short2.jpg", "at": "2026-11-30T09:00:00Z", "title": "What Happens To Rubbish You Throw Away? #Shorts",
   "desc": "Down the chute, burnt at a waste-to-energy plant, and the ash goes to Semakau. Watch the full episode: Where does our rubbish go? (TheOneApp, Explored EP3 Part 2)" + FOOT, "tags": ["rubbish", "waste to energy", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep09", "file": f"{SAU}/ep09/ep09.mp4", "thumb": f"{SAU}/ep09/thumb_ep09.jpg", "at": "2026-12-16T09:00:00Z", "title": "Mosquitoes VS Mosquitoes! How Singapore Fights Dengue | TheOneApp, Explored EP9",
+  "desc": "Be Wolby, a male Aedes mosquito with Wolbachia inside, released by NEA at an HDB block. Males don't bite. When Wolbachia males mate with wild females, the eggs don't hatch, so there are fewer mosquitoes and less dengue. Then Heart explains a mosquito's life cycle from the Primary 3 textbook, how dengue spreads, and how to tip out standing water."
+          "\n\n" + EP9_CH + "\n\nSources: National Environment Agency (nea.gov.sg), Project Wolbachia and dengue statistics." + FOOT,
+  "tags": ["dengue", "wolbachia", "mosquito", "life cycle", "primary 3 science", "singapore", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
