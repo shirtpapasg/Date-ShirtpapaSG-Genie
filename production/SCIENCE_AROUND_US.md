@@ -80,7 +80,7 @@ New week, new folder `epNN/`:
 | No | Week of | Story | Textbook link | Levels |
 |---|---|---|---|---|
 | 1 | 23 Nov 2026 | Why did the haze go away? | Respiratory system; how people affect the environment | P5, P6 |
-| 2 | 30 Nov 2026 | How does Singapore keep the lights on? (oil in 1965 → natural gas today, Indonesia's gas cut, solar, imports, nuclear). Script drafted in ep02/, waiting for the teacher's go before rendering | Energy forms and conversion; how people affect the environment | P6 |
+| 2 | 30 Nov 2026 | How does Singapore keep the lights on? (oil in 1965 → natural gas today, Indonesia's gas cut, solar, imports, nuclear). Rendered 18 Nov with two Shorts (sunlight, nuclear); on the board for review | Energy forms and conversion; how people affect the environment | P6 |
 | 3 | 7 Dec 2026 | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; how people affect the environment | P3, P6 |
 | 4 | 14 Dec 2026 | Cooling a city without more air-con (exam special) | Heat; energy | P4, P6 |
 
