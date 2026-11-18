@@ -23,8 +23,8 @@
  },
  "next": [
   "NEXT TIME",
-  "The mosquitoes that",
-  "fight dengue 🦟"
+  "Where does the rest",
+  "of your food go? 🍽️"
  ],
  "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
  "close": {
@@ -51,7 +51,7 @@
     "#e63946"
    ]
   ],
-  "tease": "🦟 Next time: the mosquitoes that fight dengue!",
+  "tease": "🍽️ Next time: where does the rest of your food go?",
   "teaseWord": "next"
  },
  "kws": [
@@ -473,7 +473,7 @@
   {
    "id": "close",
    "scene": "close",
-   "text": "So remember. All our food starts with sunlight, caught by plants. Energy passes along the food chain, from plants, to animals, to us. And Singapore keeps its food safe by buying from many countries, growing more at home, and storing some away. Next time: the mosquitoes that fight dengue!"
+   "text": "So remember. All our food starts with sunlight, caught by plants. Energy passes along the food chain, from plants, to animals, to us. And Singapore keeps its food safe by buying from many countries, growing more at home, and storing some away. Next time: where does the rest of your food go?"
   },
   {
    "id": "nyk",

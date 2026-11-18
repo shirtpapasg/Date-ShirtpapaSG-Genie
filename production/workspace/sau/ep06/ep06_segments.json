@@ -32,7 +32,7 @@
    [
     "🦷",
     "Food is broken down into simpler substances",
-    "broken",
+    "breaks",
     0.12,
     "#f77f00"
    ],
@@ -85,7 +85,24 @@
    "id": "h0",
    "scene": "canteenBite",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep05_kids",
+     0
+    ],
+    [
+     "ep06_clink",
+     0.8
+    ],
+    [
+     "ep06_chomp",
+     3.3
+    ],
+    [
+     "ep05_munch",
+     3.65
+    ]
+   ]
   },
   {
    "id": "hook",
@@ -106,49 +123,268 @@
    "id": "news",
    "scene": "news",
    "text": "Here's a Singapore fact. Every flush goes on a journey too. Used water flows through deep tunnels to water reclamation plants, where it is cleaned. Some of it becomes ultra-clean new water, which can meet up to forty per cent of Singapore's water needs.",
-   "hold": 1.0
+   "hold": 1.0,
+   "shots": [
+    [
+     "flush",
+     1.6,
+     330,
+     290
+    ],
+    [
+     "deep",
+     1.45,
+     520,
+     560
+    ],
+    [
+     "plants",
+     1.5,
+     800,
+     420
+    ],
+    [
+     "some",
+     1.35,
+     940,
+     380
+    ],
+    [
+     "forty",
+     1.1,
+     620,
+     465
+    ]
+   ]
   },
   {
    "id": "d1",
    "scene": "povMouth",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ep06_chomp",
+     0.9
+    ],
+    [
+     "splash",
+     0.98
+    ],
+    [
+     "ep06_chomp",
+     1.95
+    ],
+    [
+     "splash",
+     2.03
+    ],
+    [
+     "ep06_chomp",
+     3.0
+    ],
+    [
+     "splash",
+     3.08
+    ],
+    [
+     "ep06_squish",
+     3.7
+    ],
+    [
+     "whoosh",
+     4.4
+    ]
+   ]
   },
   {
    "id": "d2",
    "scene": "povGullet",
    "silent": 4.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep05_gulp",
+     0
+    ],
+    [
+     "ep06_squish",
+     0.02
+    ],
+    [
+     "ep06_squish",
+     1.12
+    ],
+    [
+     "pass_by",
+     1.7
+    ],
+    [
+     "ep06_squish",
+     2.22
+    ],
+    [
+     "ep06_squish",
+     3.32
+    ],
+    [
+     "pad_wonder",
+     3.85
+    ]
+   ]
   },
   {
    "id": "d3",
    "scene": "povStomach",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "splash",
+     0
+    ],
+    [
+     "tank_swirl",
+     0.2
+    ],
+    [
+     "ep06_gurgle",
+     1.0
+    ],
+    [
+     "bubble",
+     2.4
+    ],
+    [
+     "ep06_gurgle",
+     3.0
+    ],
+    [
+     "bubble",
+     4.2
+    ]
+   ]
   },
   {
    "id": "d4",
    "scene": "povSmall",
    "silent": 7.0,
-   "sfx": []
+   "sfx": [
+    [
+     "pass_by",
+     0.3
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "pop",
+     2.5
+    ],
+    [
+     "pop",
+     2.8
+    ],
+    [
+     "sparkle",
+     3.9
+    ],
+    [
+     "pad_wonder",
+     3.55
+    ],
+    [
+     "sparkle",
+     4.6
+    ],
+    [
+     "reveal",
+     3.75
+    ],
+    [
+     "ep06_squish",
+     5.6
+    ],
+    [
+     "pass_by",
+     6.1
+    ]
+   ]
   },
   {
    "id": "d5",
    "scene": "povLarge",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep06_slurp",
+     0.4
+    ],
+    [
+     "ep06_slurp",
+     1.3
+    ],
+    [
+     "ep06_slurp",
+     2.2
+    ],
+    [
+     "ep06_squish",
+     2.9
+    ],
+    [
+     "ep06_slurp",
+     3.2
+    ],
+    [
+     "ep06_squish",
+     3.8
+    ],
+    [
+     "thud",
+     4.3
+    ]
+   ]
   },
   {
    "id": "d6",
    "scene": "povExit",
    "silent": 3.5,
-   "sfx": []
+   "sfx": [
+    [
+     "riser",
+     0.25
+    ],
+    [
+     "deep",
+     0
+    ]
+   ]
   },
   {
    "id": "d7",
    "scene": "toilet",
    "silent": 4.5,
-   "sfx": []
+   "sfx": [
+    [
+     "ep06_plop",
+     0.6
+    ],
+    [
+     "splash",
+     0.64
+    ],
+    [
+     "click",
+     2.35
+    ],
+    [
+     "ep06_flush",
+     2.45
+    ]
+   ]
   },
   {
    "id": "n1",

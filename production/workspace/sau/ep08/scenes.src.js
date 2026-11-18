@@ -161,25 +161,25 @@ S.hook = (() => { const s = scene("hook", "#58b4ee", "#55806c"); s.cam = el("g",
   s.q = tx(s.stage, {x: 810, y: 300, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 14}, "Where did its energy come from?");
   s.rw = el("g", {}, s.stage); tx(s.rw, {x: 0, y: 0, "text-anchor": "middle", "font-size": 190, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 26}, "⏪ REWIND!");
   s.run = t => { const a = (w, f) => cue("hook", w, f), tA = a("apex", .55), tE = a("energy", .75), tR = a("rewind", .93);
-    const z = 1 + .16 * ramp(t, SC.hook.t0, tA) + .34 * ramp(t, tA - .3, tA + .6) - .25 * ramp(t, tE - .3, tE + .5), k = ramp(t, tA - .3, tA + .6) * (1 - ramp(t, tE - .3, tE + .5)), r = ramp(t, tR - .1, tR + .5);
+    const z = 1.16 + .12 * ramp(t, SC.hook.t0, tA) + .34 * ramp(t, tA - .3, tA + .6) - .25 * ramp(t, tE - .3, tE + .5), k = ramp(t, tA - .3, tA + .6) * (1 - ramp(t, tE - .3, tE + .5)), r = ramp(t, tR - .1, tR + .5);
     tf(s.cam, `translate(${VP[0]} ${VP[1]}) rotate(${-9 * r}) scale(${z * (1 + .1 * r)}) translate(${-lerp(840, 1090, k)} ${-lerp(520, 700, k)})`);
     s.croc.jaw(22 * on(t, tA - .2, tE - .2, .5)); op(s.croc.glow, on(t, tE - .1, 1e9, .4) * (.75 + .25 * Math.sin(t * 7)));
-    popAt(s.name, 810, 420, t, a("crocodile", .1) - .1); op(s.name, on(t, a("crocodile", .1) - .1, tA - .4, .2));
-    popAt(s.loc, 950, 130, t, a("sungei", .2) - .1); op(s.loc, on(t, a("sungei", .2) - .1, tE - .3, .2));
+    popAt(s.name, 810, 500, t, a("crocodile", .1) - .1); op(s.name, on(t, a("crocodile", .1) - .1, tA - .4, .2));
+    popAt(s.loc, 950, 130, t, a("sungei", .2) - .1); op(s.loc, on(t, a("sungei", .2) - .1, tA - .2, .2));
     popAt(s.apex, 810, 180, t, tA); op(s.apex, on(t, tA, tE - .2, .2));
     tf(s.q, `translate(810 300) scale(${Math.max(0, pop(t, tE + .1))}) translate(-810 -300)`); op(s.q, on(t, tE + .1, tR - .05, .15));
     op(s.sep, .55 * r); tf(s.rw, `translate(810 470) scale(${Math.max(0, pop(t, tR, .4))}) rotate(${-6 + 3 * Math.sin(t * 9)})`); op(s.rw, ramp(t, tR - .05, tR + .1)); };
   return s; })();
 
 // ---- LAST TIME'S ANSWER: why your face turns red after running (a PE lesson): muscles make heat, more blood flows near the skin
-S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), st = s.stage, SKIN = "#f1c27d";
-  s.top = chip(st, "✅ Last time: why does your face turn red after running?", "#06d6a0", {fs: 38, ink: INK});
+S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), ST = s.stage, st = el("g", {transform: "translate(600 440) scale(1.34) translate(-600 -430)"}, ST), SKIN = "#f1c27d";
+  s.top = chip(ST, "✅ Last time: why does your face turn red after running?", "#06d6a0", {fs: 38, ink: INK});
   // the pupil running at PE
   s.run1 = el("g", {}, st); el("rect", {x: 30, y: 668, width: 330, height: 60, rx: 12, fill: "#e76f51", stroke: INK, "stroke-width": 6}, s.run1);
   [80, 150, 220, 290].forEach(x => el("line", {x1: x, y1: 698, x2: x + 36, y2: 698, stroke: "#fff", "stroke-width": 6, "stroke-linecap": "round"}, s.run1));
   s.kidG = el("g", {transform: "translate(190 690) scale(.66)"}, s.run1); s.kid = e8Kid(s.kidG); op(s.kid.bag, 0);
   s.hot = el("g", {}, s.run1); [[150, 590], [190, 560], [232, 596]].forEach(([x, y]) => el("path", {d: `M${x} ${y} q-13 -17 0 -34 q13 -17 0 -34 q-13 -17 0 -34`, fill: "none", stroke: "#ff5d3b", "stroke-width": 9, "stroke-linecap": "round"}, s.hot));
-  tx(s.run1, {x: 195, y: 790, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, "running at PE");
+  tx(s.run1, {x: 195, y: 330, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, "running at PE");
   // the face
   s.face = el("g", {}, st); const f = el("g", {}, s.face);
   [-1, 1].forEach(k => el("ellipse", e8A({cx: k * 150, cy: 12, rx: 22, ry: 30, fill: SKIN}), f));
@@ -201,7 +201,7 @@ S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), st = s.stag
   el("circle", {r: 170, fill: "none", stroke: INK, "stroke-width": 9}, s.skin);
   tx(s.skin, {x: 0, y: 232, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 8}, "under your skin");
   s.zoom = el("path", {d: "M700 330 L800 260 M700 470 L800 560", fill: "none", stroke: "#fff", "stroke-width": 5, "stroke-dasharray": "10 10"}, st);
-  s.c = [["1  muscles make heat", "#f77f00", 210], ["2  more blood near the skin", "#e63946", 610], ["3  the heat gets out", "#2a9d8f", 1010]].map(([l, c, x]) => { const g = chip(st, l, c, {fs: 30}); g.x = x; return g; });
+  s.c = [["1  muscles make heat", "#f77f00", 80], ["2  more blood near the skin", "#e63946", 610], ["3  the heat gets out", "#2a9d8f", 1130]].map(([l, c, x]) => { const g = chip(ST, l, c, {fs: 38}); g.x = x; return g; });
   s.run = t => { const a = (w, f) => cue("answer", w, f), t0 = SC.answer.t0, tM = a("muscles", .4), tB = a("blood", .6), tL = a("let", .75);
     popAt(s.top, 660, 60, t, t0 - .2);
     const ph = (t - t0) * 9, sw = 34 * Math.sin(ph); op(s.run1, ramp(t, t0, t0 + .3)); e8Pose(s.kid, sw); tf(s.kid.body, `translate(0 ${-10 * Math.abs(Math.cos(ph))}) rotate(7 0 -120)`);
@@ -209,12 +209,12 @@ S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), st = s.stag
     popAt(s.face, 600, 420, t, a("face", .15) - .2); const fl = ramp(t, tB, tB + 1.2); op(s.red, .34 * fl); s.cheek.forEach(c => op(c, .25 + .6 * fl)); s.sweat.forEach(e => op(e, ramp(t, tM, tM + .4)));
     popAt(s.skin, 980, 420, t, tB - .5); op(s.zoom, ramp(t, tB - .3, tB)); const w = lerp(12, 34, fl); set(s.vo, "stroke-width", w + 10); set(s.v, "stroke-width", w); set(s.vf, "stroke-width", w * .3); set(s.vf, "stroke-dashoffset", -t * (40 + 60 * fl));
     s.heat.forEach((h, i) => { const kk = ramp(t, tL + i * .12, tL + .5 + i * .12); op(h, kk); tf(h, `translate(0 ${24 * (1 - kk) - 8 * Math.sin(t * 5 + i)})`); });
-    s.c.forEach((c, i) => popAt(c, c.x, 836, t, [tM, tB, tL][i])); };
+    s.c.forEach((c, i) => popAt(c, c.x, 868, t, [tM, tB, tL][i])); };
   return s; })();
 
 // ---- NEWS: a Singapore fact. The largest reptile in the world (drawn to scale beside a pupil); then a school trip on the boardwalk
 S.news = (() => { const s = scene("news", "#0b6e6e", "#073b4c"), st = s.stage;
-  s.A = el("g", {}, st);
+  s.A = el("g", {transform: "translate(600 470) scale(1.3) translate(-640 -520)"}, st);
   el("line", {x1: 60, y1: 560, x2: 1250, y2: 560, stroke: "#fff", "stroke-width": 6, "stroke-linecap": "round", opacity: .5}, s.A);
   s.croc = e8Croc(s.A); tf(s.croc, "translate(560 560)");                                   // 894 px long = about 5 m, so 1 m = 179 px
   s.kidG = el("g", {transform: "translate(1140 560) scale(.495)"}, s.A); s.kid = e8Kid(s.kidG); e8Pose(s.kid, 0);      // a 1.4 m pupil = 250 px
@@ -245,25 +245,26 @@ S.news = (() => { const s = scene("news", "#0b6e6e", "#073b4c"), st = s.stage;
     op(s.A, 1 - kB); op(s.B, kB); tf(s.B, `translate(${VP[0]} ${VP[1]}) scale(${1.12 - .12 * ramp(t, tB, tB + 5)}) translate(${-VP[0]} ${-VP[1]})`);
     popAt(s.top, 760, 60, t, t0 - .2); op(s.top, on(t, t0 - .2, tB, .2));
     popAt(s.croc, 560, 560, t, a("saltwater", .1) - .3); op(s.ruler, ramp(t, a("largest", .25), a("largest", .25) + .4)); op(s.kidG, ramp(t, a("reptiles", .32), a("reptiles", .32) + .3)); op(s.kl, ramp(t, a("reptiles", .32) + .2, a("reptiles", .32) + .5));
-    popAt(s.big, 600, 170, t, a("largest", .25)); op(s.big, on(t, a("largest", .25), tB, .2));
-    popAt(s.few, 600, 810, t, a("few", .42)); op(s.few, on(t, a("few", .42), tB, .2));
-    popAt(s.trip, 930, 110, t, tB + .3); popAt(s.safe, 860, 880, t, a("keep", .9) - .1); };
+    popAt(s.big, 640, 150, t, a("largest", .25)); op(s.big, on(t, a("largest", .25), tB, .2));
+    popAt(s.few, 640, 850, t, a("few", .42)); op(s.few, on(t, a("few", .42), tB, .2));
+    popAt(s.trip, 930, 110, t, tB + .3); popAt(s.safe, 900, 850, t, a("keep", .9) - .1); };
   return s; })();
 
 // ---- RECAP: the rewind, on a board. The chain reads Sun -> leaf -> crab -> mudskipper -> crocodile; it lights from the
 // crocodile backwards as Heart names each step, and each arrow (food -> eater) lights when she says who was eaten.
-S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = s.stage, K = ["sun", "leafF", "crab", "skipper", "croc"], X = i => 128 + i * 236;
-  s.title = tx(st, {x: 600, y: 150, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: INK}, "⏪ You rewound the crocodile's lunch");
-  s.arr = [0, 1, 2, 3].map(i => { const g = e8Arrow(st, .52); tf(g, `translate(${X(i) + 118} 430)`); return g; });
-  s.cards = K.map((k, i) => { const g = el("g", {}, st); el("rect", {x: -106, y: -150, width: 212, height: 330, rx: 28, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
+S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = s.stage, K = ["sun", "leafF", "crab", "skipper", "croc"], X = i => 810 + (i - 2) * 335;
+  s.title = tx(st, {x: 810, y: 140, "text-anchor": "middle", "font-size": 84, "font-weight": 700, fill: INK}, "⏪ You rewound the crocodile's lunch");
+  s.arr = [0, 1, 2, 3].map(i => { const g = e8Arrow(st, .5); return g; });
+  s.cards = K.map((k, i) => { const g = el("g", {}, st); el("rect", {x: -98, y: -150, width: 196, height: 330, rx: 28, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g);
     tf(e8Item(g, k, ["#ffbe0b", "#2a9d8f", "#f77f00", "#3a86ff", "#e63946"][i]), "translate(0 -36) scale(.78)");
-    tx(g, {x: 0, y: 122, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK, "data-fit": 190}, E8NAME[k]); g.x = X(i); return g; });
-  s.say = [["The crocodile ate a mudskipper", "#e63946"], ["The mudskipper ate a crab", "#3a86ff"], ["The crab ate a fallen mangrove leaf", "#f77f00"], ["The leaf made its food from sunlight", "#2a9d8f"]].map(([l, c]) => chip(st, l, c, {fs: 44}));
+    tx(g, {x: 0, y: 122, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK, "data-fit": 176}, E8NAME[k]); g.x = X(i); return g; });
+  s.arr.forEach(g => st.appendChild(g));
+  s.say = [["The crocodile ate a mudskipper", "#e63946"], ["The mudskipper ate a crab", "#3a86ff"], ["The crab ate a fallen mangrove leaf", "#f77f00"], ["The leaf made its food from sunlight", "#2a9d8f"]].map(([l, c]) => chip(st, l, c, {fs: 54}));
   s.run = t => { const a = (w, f) => cue("recap", w, f), T = [a("sunlight", .93), a("leaf", .7), a("crab", .45), a("mudskipper", .28), a("crocodile", .18)], TA = [a("sunlight", .93), a("leaf", .7), a("crab", .45), a("mudskipper", .28)];
     op(s.title, ramp(t, SC.recap.t0 - .1, SC.recap.t0 + .3));
-    s.cards.forEach((g, i) => { const now = on(t, T[i] - .1, T[i] + 1.5, .2); tf(g, `translate(${g.x} ${430 - 26 * now}) scale(${1 + .13 * now})`); op(g, t >= T[i] - .1 ? 1 : .28); });
-    s.arr.forEach((g, i) => { const k = ramp(t, TA[i], TA[i] + .3); set(g.a, "fill", mix("#cfd3dc", "#ffbe0b", k)); op(g, .35 + .65 * k); tf(g, `translate(${X(i) + 118} 430) scale(${1 + .35 * on(t, TA[i], TA[i] + .7, .2)})`); });
-    const ST = [a("crocodile", .18), a("mudskipper#2", .4), a("crab#2", .6), a("leaf#2", .85)]; s.say.forEach((c, i) => { popAt(c, 600, 760, t, ST[i] - .1); op(c, on(t, ST[i] - .1, i < 3 ? ST[i + 1] - .15 : 1e9, .15)); }); };
+    s.cards.forEach((g, i) => { const now = on(t, T[i] - .1, T[i] + 1.5, .2); tf(g, `translate(${g.x} ${430 - 26 * now}) scale(${1.45 * (1 + .12 * now)})`); op(g, t >= T[i] - .1 ? 1 : .28); });
+    s.arr.forEach((g, i) => { const k = ramp(t, TA[i], TA[i] + .3); set(g.a, "fill", mix("#cfd3dc", "#ffbe0b", k)); op(g, .35 + .65 * k); tf(g, `translate(${X(i) + 167} 410) scale(${1 + .35 * on(t, TA[i], TA[i] + .7, .2)})`); });
+    const ST = [a("crocodile", .18), a("mudskipper#2", .4), a("crab#2", .6), a("leaf#2", .85)]; s.say.forEach((c, i) => { popAt(c, 810, 800, t, ST[i] - .1); op(c, on(t, ST[i] - .1, i < 3 ? ST[i + 1] - .15 : 1e9, .15)); }); };
   return s; })();
 
 // ---- TEXTBOOK (P6 food chains). Three rows under the pictures, one kind of label each: the names; producer or consumer;
@@ -273,7 +274,7 @@ S.textbook = (() => { const s = scene("textbook", "#e0fbfc", "#c2dfe3"), st = s.
   s.who = chip(st, "A food chain shows who eats whom", INK, {fs: 40});
   s.sun = e8Sun(st, 50); s.ray = el("g", {}, st); [[96, 150, 172, 252], [78, 176, 150, 268], [116, 132, 196, 236]].forEach(([a, b, c, d]) => el("line", {x1: a, y1: b, x2: c, y2: d, stroke: "#ffbe0b", "stroke-width": 10, "stroke-linecap": "round", "stroke-dasharray": "22 16"}, s.ray));
   s.le = chip(st, "light energy", "#ffbe0b", {fs: 30, ink: INK});
-  s.arr = [0, 1, 2].map(i => { const g = e8Arrow(st, .56); g.x = X(i) + 145; return g; });
+  s.arr = [0, 1, 2].map(i => { const g = e8Arrow(st, .5); g.x = X(i) + 145; return g; });
   s.dots = [0, 1, 2].map(() => el("circle", {r: 13, fill: "#fff3a0", stroke: "#f77f00", "stroke-width": 5}, st));
   s.items = K.map((k, i) => { const g = e8Item(st, k, ["#2a9d8f", "#f77f00", "#f77f00", "#f77f00"][i]); g.x = X(i); return g; });
   const lab = (x, y, t, fs, col) => tx(st, {x, y, "text-anchor": "middle", "font-size": fs, "font-weight": 700, fill: col || INK, "data-fit": 270}, t);
@@ -281,41 +282,41 @@ S.textbook = (() => { const s = scene("textbook", "#e0fbfc", "#c2dfe3"), st = s.
   const pill = (x, y, t, col) => { const g = el("g", {}, st); el("rect", {x: -128, y: -34, width: 256, height: 68, rx: 34, fill: col, stroke: INK, "stroke-width": 5, filter: "url(#sh)"}, g); tx(g, {x: 0, y: 13, "text-anchor": "middle", "font-size": 38, "font-weight": 700, fill: "#fff"}, t); g.x = x; g.y = y; return g; };
   s.roles = K.map((k, i) => pill(X(i), 590, i ? "consumer" : "producer", i ? "#f77f00" : "#2a9d8f"));
   s.hunt = [pill(X(2), 680, "prey", "#3a86ff"), pill(X(3), 680, "predator", "#e63946")];
-  s.rl = [["name", 510], ["makes or eats?", 590], ["hunter or hunted?", 680]].map(([l, y]) => tx(st, {x: 12, y: y + 8, "font-size": 22, "font-weight": 700, fill: "#5c677d"}, l));
+  s.rl = [];
   s.make = chip(st, "🌿 Green plants make their own food", "#2a9d8f", {fs: 34}); s.eat = chip(st, "🍽️ Animals eat plants or other animals", "#f77f00", {fs: 34});
   s.flow = chip(st, "➡️ The arrows show the way energy flows", "#7209b7", {fs: 38}); s.fe = chip(st, "from the FOOD  →  to the EATER", "#e63946", {fs: 44});
   s.run = t => { const a = (w, f) => cue("textbook", w, f), t0 = SC.textbook.t0, tW = a("chain", .2), tG = a("green", .3), tP = a("producers", .33), tL = a("light", .42), tAn = a("animals", .47), tC = a("consumers", .5),
       tPr = a("predator", .68), tPy = a("prey", .77), tAr = a("arrows", .82), tF = a("from", .93), tE = a("eater", .98);
-    popAt(s.h, 760, 56, t, t0 - .2); popAt(s.who, 700, 150, t, tW); op(s.who, on(t, tW, tG - .2, .2));
-    s.items.forEach((g, i) => { popAt(g, g.x, Y, t, tW + .15 * i, .92 * (1 + .1 * (i === 0 ? on(t, tG, tAn - .3, .3) : on(t, tAn, tPr - .4, .3)) + .12 * (i === 3 ? on(t, tPr, tPy - .2, .25) : i === 2 ? on(t, tPy, tAr - .3, .25) : 0))); });
-    s.names.forEach((n, i) => op(n, ramp(t, tW + .3 + .15 * i, tW + .6 + .15 * i))); op(s.rl[0], ramp(t, tW + .4, tW + .8)); op(s.rl[1], ramp(t, tP, tP + .3)); op(s.rl[2], ramp(t, tPr, tPr + .3));
+    popAt(s.h, 760, 56, t, t0 - .2); op(s.h, ramp(t, t0 - .2, t0) * (1 - on(t, tG - .3, tAr + .3, .3))); popAt(s.who, 700, 150, t, tW); op(s.who, on(t, tW, tG - .2, .2));
+    s.items.forEach((g, i) => { popAt(g, g.x, Y, t, tW + .15 * i, .85 * (1 + .1 * (i === 0 ? on(t, tG, tAn - .3, .3) : on(t, tAn, tPr - .4, .3)) + .12 * (i === 3 ? on(t, tPr, tPy - .2, .25) : i === 2 ? on(t, tPy, tAr - .3, .25) : 0))); });
+    s.names.forEach((n, i) => op(n, ramp(t, tW + .3 + .15 * i, tW + .6 + .15 * i)));
     s.arr.forEach((g, i) => { const k = ramp(t, tW + .5 + .15 * i, tW + .8 + .15 * i), lit = ramp(t, tAr + i * .25, tAr + .3 + i * .25); op(g, k); set(g.a, "fill", mix("#cfd3dc", "#ffbe0b", lit)); tf(g, `translate(${g.x} ${Y}) scale(${1 + .3 * on(t, tAr + i * .25, tAr + .8 + i * .25, .2)})`); });
     s.dots.forEach((d, i) => { const ph = ((t - tAr) * .9 - i * .18) % 1, vis = t > tAr + .2 ? Math.sin(Math.PI * clamp(ph)) : 0; set(d, "cx", lerp(X(i) + 70, X(i + 1) - 70, clamp(ph))); set(d, "cy", Y - 62); op(d, vis); });
-    tf(s.sun, `translate(74 128) scale(${Math.max(0, pop(t, tG - .2)) * (1 + .08 * on(t, tL, tL + 1.2, .3))})`); op(s.ray, ramp(t, tL - .3, tL)); set(s.ray, "stroke-dashoffset", 0); [...s.ray.children].forEach(l => set(l, "stroke-dashoffset", -(t - tL) * 60));
-    popAt(s.le, 250, 196, t, tL); op(s.le, on(t, tL, 1e9, .2));
+    tf(s.ray, "translate(12 36)"); tf(s.sun, `translate(86 164) scale(${Math.max(0, pop(t, tG - .2)) * (1 + .08 * on(t, tL, tL + 1.2, .3))})`); op(s.ray, ramp(t, tL - .3, tL)); set(s.ray, "stroke-dashoffset", 0); [...s.ray.children].forEach(l => set(l, "stroke-dashoffset", -(t - tL) * 60));
+    popAt(s.le, 290, 190, t, tL); op(s.le, on(t, tL, 1e9, .2));
     s.roles.forEach((g, i) => popAt(g, g.x, g.y, t, i ? tC + .12 * (i - 1) : tP)); popAt(s.hunt[1], s.hunt[1].x, s.hunt[1].y, t, tPr); popAt(s.hunt[0], s.hunt[0].x, s.hunt[0].y, t, tPy);
-    popAt(s.make, 600, 800, t, tP + .9); op(s.make, on(t, tP + .9, tAn - .1, .2)); popAt(s.eat, 600, 800, t, tC + .9); op(s.eat, on(t, tC + .9, tPr - .2, .2));
+    popAt(s.make, 820, 130, t, tP + .9); op(s.make, on(t, tP + .9, tAn - .1, .2)); popAt(s.eat, 780, 190, t, tC + .9); op(s.eat, on(t, tC + .9, tPr - .2, .2));
     popAt(s.flow, 600, 800, t, tAr + .2); op(s.flow, on(t, tAr + .2, tF - .1, .2)); popAt(s.fe, 600, 800, t, tF); };
   return s; })();
 
 // ---- BIG IDEA: back at the mudbank. Almost every food chain begins with the Sun; even a crocodile runs on sunlight.
 S.bigidea = (() => { const s = scene("bigidea", "#58b4ee", "#55806c"); s.cam = el("g", {}, s.stage);
-  s.sw = e8Swamp(s.cam, {}); s.glow = el("circle", {cx: 300, cy: 190, r: 210, fill: "#fff3a0", filter: "url(#blur)", opacity: .7}, s.cam); s.sun = e8Sun(s.cam, 86);
-  const P = [[300, 190], [1420, 250], [1380, 760], [1010, 720]];
+  s.sw = e8Swamp(s.cam, {}); s.glow = el("circle", {cx: 180, cy: 200, r: 210, fill: "#fff3a0", filter: "url(#blur)", opacity: .7}, s.cam); s.sun = e8Sun(s.cam, 86);
+  const P = [[180, 200], [1480, 330], [1470, 790], [1010, 720]];
   s.path = el("path", {d: `M${P[0]} L${P[1]} L${P[2]} L${P[3]}`.replace(/,/g, " "), fill: "none", stroke: "#ffe14d", "stroke-width": 12, "stroke-linecap": "round", "stroke-linejoin": "round", "stroke-dasharray": "4 26"}, s.cam);
   s.croc = e8Croc(s.cam); tf(s.croc, "translate(880 800)");
-  s.crab = e8Crab(s.cam); tf(s.crab, "translate(1420 830) scale(.42)"); s.skip = e8Skipper(s.cam); tf(s.skip, "translate(1270 842) scale(-.6 .6)");
+  s.crab = e8Crab(s.cam); tf(s.crab, "translate(1560 850) scale(.5)"); s.skip = e8Skipper(s.cam); tf(s.skip, "translate(1400 856) scale(-.7 .7)");
   s.sp = el("g", {}, s.cam); el("circle", {r: 44, fill: "#ffe14d", filter: "url(#blur)"}, s.sp); el("circle", {r: 17, fill: "#fff", stroke: "#f77f00", "stroke-width": 5}, s.sp);
-  s.t1 = tx(s.stage, {x: 760, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 13}, "Almost every food chain");
-  s.t2 = tx(s.stage, {x: 760, y: 250, "text-anchor": "middle", "font-size": 92, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 15}, "begins with the Sun!");
+  s.t1 = tx(s.stage, {x: 880, y: 150, "text-anchor": "middle", "font-size": 72, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 13}, "Almost every food chain");
+  s.t2 = tx(s.stage, {x: 880, y: 250, "text-anchor": "middle", "font-size": 92, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 15}, "begins with the Sun!");
   s.c = chip(s.stage, "☀️ Even a crocodile runs on sunlight!", "#e63946", {fs: 50});
   s.run = t => { const a = (w, f) => cue("bigidea", w, f), t0 = SC.bigidea.t0, tS = a("sun", .55), tC = a("crocodile", .75), tR = a("runs", .85);
     tf(s.cam, `translate(${VP[0]} ${VP[1]}) scale(${1.1 - .1 * ramp(t, t0 - .3, t0 + 4)}) translate(${-VP[0]} ${-VP[1]})`);
-    tf(s.sun, `translate(300 190) scale(${1 + .16 * on(t, tS - .1, tS + 1.2, .3)})`); tf(s.sun.rays, `scale(${1 + .2 * on(t, tS - .1, tS + 1.2, .3)})`); op(s.glow, .5 + .4 * on(t, tS - .1, tS + 1.4, .3));
-    tf(s.t1, `translate(760 150) scale(${Math.max(0, pop(t, a("almost", .28) - .1))}) translate(-760 -150)`); tf(s.t2, `translate(760 250) scale(${Math.max(0, pop(t, a("begins", .48)))}) translate(-760 -250)`);
+    tf(s.sun, `translate(180 200) scale(${1 + .16 * on(t, tS - .1, tS + 1.2, .3)})`); tf(s.sun.rays, `scale(${1 + .2 * on(t, tS - .1, tS + 1.2, .3)})`); op(s.glow, .5 + .4 * on(t, tS - .1, tS + 1.4, .3));
+    tf(s.t1, `translate(880 150) scale(${Math.max(0, pop(t, a("almost", .28) - .1))}) translate(-880 -150)`); tf(s.t2, `translate(880 250) scale(${Math.max(0, pop(t, a("begins", .48)))}) translate(-880 -250)`);
     const k = clamp((t - tS - .3) / (tC + .5 - tS - .3)), seg = Math.min(2.999, k * 3), i = Math.floor(seg), f = ease(seg - i), x = lerp(P[i][0], P[i + 1][0], f), y = lerp(P[i][1], P[i + 1][1], f);
     op(s.path, ramp(t, tS, tS + .4)); tf(s.sp, `translate(${x} ${y})`); op(s.sp, on(t, tS + .2, tC + .7, .15)); op(s.croc.glow, on(t, tC + .5, 1e9, .3) * (.8 + .2 * Math.sin(t * 7)));
-    op(s.t1, on(t, a("almost", .28) - .1, tC - .2, .2)); op(s.t2, on(t, a("begins", .48), tC - .2, .2)); popAt(s.c, 760, 200, t, tR - .2); };
+    op(s.t1, on(t, a("almost", .28) - .1, tC - .2, .2)); op(s.t2, on(t, a("begins", .48), tC - .2, .2)); popAt(s.c, 880, 200, t, tR - .2); };
   return s; })();
 
 // ---- TRY THIS: two food chains from a pupil's own day, on a notebook page: the school garden, and dinner (chicken rice)
@@ -338,21 +339,21 @@ S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage;
   return s; })();
 
 // ---- THINK ABOUT IT: take the mangrove crabs out of the chain. What happens to the crocodile?
-S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = s.stage, K = ["leafF", "crab", "skipper", "croc"], X = i => 180 + i * 280, Y = 400;
+S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = s.stage, K = ["leafF", "crab", "skipper", "croc"], X = i => 105 + i * 330, Y = 400;
   s.title = tx(st, {x: 600, y: 110, "text-anchor": "middle", "font-size": 76, "font-weight": 700, fill: "#ffe14d", class: "out", "stroke-width": 10}, "🤔 Think about it!");
-  s.arr = [0, 1, 2].map(i => { const g = e8Arrow(st, .52); tf(g, `translate(${X(i) + 140} ${Y})`); set(g.a, "fill", "#ffbe0b"); return g; });
-  s.gone = el("g", {}, st); el("circle", {cx: X(1), cy: Y, r: 110, fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-dasharray": "18 16"}, s.gone); tx(s.gone, {x: X(1), y: Y + 34, "text-anchor": "middle", "font-size": 100, "font-weight": 700, fill: "#fff"}, "?");
+  s.arr = [0, 1, 2].map(i => { const g = e8Arrow(st, .55); tf(g, `translate(${X(i) + 165} ${Y})`); set(g.a, "fill", "#ffbe0b"); return g; });
+  s.gone = el("g", {}, st); el("circle", {cx: X(1), cy: Y, r: 128, fill: "none", stroke: "#fff", "stroke-width": 7, "stroke-dasharray": "18 16"}, s.gone); tx(s.gone, {x: X(1), y: Y + 34, "text-anchor": "middle", "font-size": 100, "font-weight": 700, fill: "#fff"}, "?");
   s.items = K.map((k, i) => { const g = e8Item(st, k); g.x = X(i); return g; });
-  s.names = K.map((k, i) => tx(st, {x: X(i), y: Y + 170, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, E8NAME[k]));
+  s.names = K.map((k, i) => tx(st, {x: X(i), y: Y + 190, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, E8NAME[k]));
   s.q = emo(st, X(3), Y - 150, 110, "❓");
-  s.c = chip(st, "No more mangrove crabs… what happens to the crocodile?", "#e63946", {fs: 38});
+  s.c = chip(st, "No more mangrove crabs… what happens to the crocodile?", "#e63946", {fs: 42});
   s.ans = chip(st, "Answer next time!", "#f72585", {fs: 46});
   s.run = t => { const a = (w, f) => cue("think", w, f), t0 = SC.think.t0, tW = a("what", .2), tD = a("disappeared", .6), tC = a("crabs", .52);
     popAt(s.title, 0, 0, t, t0 - .2); const g1 = ramp(t, tD, tD + .5);
-    s.items.forEach((g, i) => { const sh = i === 1 ? 8 * on(t, tC, tD, .1) * Math.sin(t * 40) : 0; popAt(g, g.x + sh, Y, t, tW - .3 + i * .1, .92 * (i === 1 ? 1 - .5 * g1 : 1) * (i === 3 ? 1 + .1 * on(t, a("crocodile", .3), a("crocodile", .3) + 1, .2) : 1)); if (i === 1) op(g, (1 - g1) * ramp(t, tW - .3, tW)); else if (i > 1) op(g, ramp(t, tW - .3 + i * .1, tW + i * .1) * (1 - .45 * ramp(t, tD + .4, tD + 1))); });
+    s.items.forEach((g, i) => { const sh = i === 1 ? 8 * on(t, tC, tD, .1) * Math.sin(t * 40) : 0; popAt(g, g.x + sh, Y, t, tW - .3 + i * .1, 1.08 * (i === 1 ? 1 - .5 * g1 : 1) * (i === 3 ? 1 + .1 * on(t, a("crocodile", .3), a("crocodile", .3) + 1, .2) : 1)); if (i === 1) op(g, (1 - g1) * ramp(t, tW - .3, tW)); else if (i > 1) op(g, ramp(t, tW - .3 + i * .1, tW + i * .1)); });
     s.names.forEach((n, i) => op(n, ramp(t, tW + i * .1, tW + .3 + i * .1) * (i === 1 ? 1 - .6 * g1 : 1))); s.arr.forEach((g, i) => op(g, ramp(t, tW + i * .1, tW + .3 + i * .1) * (i < 2 ? 1 - .75 * g1 : 1)));
     op(s.gone, g1); tf(s.q, `translate(${X(3)} ${Y - 150}) scale(${Math.max(0, pop(t, tD + .5)) * (1 + .08 * Math.sin(t * 5))}) translate(${-X(3)} ${-(Y - 150)})`);
-    popAt(s.c, 600, 690, t, tD + .2); popAt(s.ans, 600, 830, t, a("next", .9)); };
+    popAt(s.c, 600, 700, t, tD + .2); popAt(s.ans, 600, 830, t, a("next", .9)); };
   return s; })();
 
 // ---- CLOSE: what to remember, then next time's teaser (rows from CFG.close; copied from ep02)

@@ -85,7 +85,52 @@
    "id": "h0",
    "scene": "peRun",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "ep07_whistle",
+     0.05
+    ],
+    [
+     "ep07_run",
+     0.1
+    ],
+    [
+     "ep07_pant",
+     2.9
+    ],
+    [
+     "ep07_pant",
+     4.0
+    ],
+    [
+     "ep07_heart",
+     3.0
+    ],
+    [
+     "ep07_heart",
+     3.4
+    ],
+    [
+     "ep07_heart",
+     3.8
+    ],
+    [
+     "ep07_heart",
+     4.2
+    ],
+    [
+     "ep07_heart",
+     4.6
+    ],
+    [
+     "ep07_heart",
+     5.0
+    ]
+   ]
   },
   {
    "id": "hook",
@@ -112,61 +157,331 @@
    "id": "o1",
    "scene": "airOut",
    "silent": 4.0,
-   "sfx": []
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "ep07_pant",
+     0.2
+    ],
+    [
+     "pop",
+     0.5
+    ],
+    [
+     "reveal",
+     0.9
+    ],
+    [
+     "sun_whoosh",
+     1.6
+    ]
+   ]
   },
   {
    "id": "o2",
    "scene": "povNose",
    "silent": 4.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep07_sniff",
+     0
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "pass_by",
+     2.0
+    ],
+    [
+     "pass_by",
+     2.7
+    ],
+    [
+     "rush",
+     0.9
+    ]
+   ]
   },
   {
    "id": "o3",
    "scene": "povWindpipe",
    "silent": 4.5,
-   "sfx": []
+   "sfx": [
+    [
+     "pipe_rush",
+     0
+    ],
+    [
+     "pad_wonder",
+     0.7
+    ],
+    [
+     "pass_by",
+     1.6
+    ],
+    [
+     "pass_by",
+     2.6
+    ],
+    [
+     "pass_by",
+     3.5
+    ]
+   ]
   },
   {
    "id": "o4",
    "scene": "povAirSac",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "reveal",
+     0.1
+    ],
+    [
+     "bubble",
+     1.0
+    ],
+    [
+     "bubble",
+     1.7
+    ],
+    [
+     "bubble",
+     2.4
+    ],
+    [
+     "ep07_squish",
+     3.9
+    ],
+    [
+     "splash",
+     4.3
+    ]
+   ]
   },
   {
    "id": "o5",
    "scene": "povRBC",
    "silent": 4.0,
-   "sfx": []
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ep07_flow",
+     0
+    ],
+    [
+     "pass_by",
+     0.9
+    ],
+    [
+     "thud",
+     1.8
+    ],
+    [
+     "sparkle",
+     2.1
+    ],
+    [
+     "rush",
+     2.2
+    ]
+   ]
   },
   {
    "id": "o6",
    "scene": "povHeart",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep07_flow",
+     0
+    ],
+    [
+     "ep07_heart",
+     1.47
+    ],
+    [
+     "ep07_heart",
+     2.67
+    ],
+    [
+     "boom",
+     2.7
+    ],
+    [
+     "pipe_rush",
+     2.9
+    ],
+    [
+     "pass_by",
+     3.4
+    ]
+   ]
   },
   {
    "id": "o7",
    "scene": "povArtery",
    "silent": 4.5,
-   "sfx": []
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ping",
+     0.2
+    ],
+    [
+     "whoosh",
+     1.4
+    ],
+    [
+     "ep07_flow",
+     1.6
+    ],
+    [
+     "pass_by",
+     2.4
+    ],
+    [
+     "pass_by",
+     3.2
+    ],
+    [
+     "pass_by",
+     3.8
+    ]
+   ]
   },
   {
    "id": "o8",
    "scene": "povMuscle",
    "silent": 6.5,
-   "sfx": []
+   "sfx": [
+    [
+     "ep07_squish",
+     0
+    ],
+    [
+     "pop",
+     0.5
+    ],
+    [
+     "flash",
+     1.93
+    ],
+    [
+     "power_up",
+     1.95
+    ],
+    [
+     "ep07_twitch",
+     1.97
+    ],
+    [
+     "ep07_twitch",
+     2.57
+    ],
+    [
+     "pop",
+     2.25
+    ],
+    [
+     "pop",
+     2.4
+    ],
+    [
+     "pad_wonder",
+     4.35
+    ],
+    [
+     "sun_whoosh",
+     4.2
+    ],
+    [
+     "ding",
+     5.0
+    ]
+   ]
   },
   {
    "id": "o9",
    "scene": "povReturn",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ping",
+     0.2
+    ],
+    [
+     "whoosh",
+     1.35
+    ],
+    [
+     "ep07_flow",
+     1.5
+    ],
+    [
+     "ep07_heart",
+     2.82
+    ],
+    [
+     "boom",
+     2.85
+    ],
+    [
+     "pipe_rush",
+     3.0
+    ]
+   ]
   },
   {
    "id": "o10",
    "scene": "povExhale",
    "silent": 4.5,
-   "sfx": []
+   "sfx": [
+    [
+     "ep07_squish",
+     0.2
+    ],
+    [
+     "bubble",
+     0.5
+    ],
+    [
+     "pipe_rush",
+     1.1
+    ],
+    [
+     "ep07_exhale",
+     2.6
+    ],
+    [
+     "flash",
+     2.95
+    ],
+    [
+     "ep07_birds",
+     3.0
+    ],
+    [
+     "chime",
+     3.3
+    ]
+   ]
   },
   {
    "id": "n1",
@@ -178,7 +493,27 @@
    "id": "textbook",
    "scene": "textbook",
    "text": "Now for the textbook link! In Primary Five, you learn about the respiratory and circulatory systems. When you breathe in, oxygen enters your lungs and passes into your blood. Your heart pumps blood through blood vessels to every part of your body. Your cells use oxygen to release energy from food, and they make carbon dioxide. The blood carries carbon dioxide back to your lungs, and you breathe it out.",
-   "hold": 1.0
+   "hold": 1.0,
+   "shots": [
+    [
+     "heart",
+     1.12,
+     600,
+     430
+    ],
+    [
+     "cells",
+     1.15,
+     600,
+     520
+    ],
+    [
+     "carries",
+     1.0,
+     600,
+     450
+    ]
+   ]
   },
   {
    "id": "try",
