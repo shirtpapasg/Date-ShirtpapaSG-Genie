@@ -34,6 +34,7 @@ The teacher's weekly science-news videos for Singapore primary pupils (2026-11-1
    - Maps come from real coastline data: `workspace/sau/geo_map.js` (`regionMap()`, used by the scenes) and `globe_thumb.py` (thumbnails), both built from Natural Earth.
    - Places (fires, pipelines, labels) go at their real longitude and latitude.
    - Never draw a made-up coastline or a "rough" map.
+10. **One kind of label per row** (the teacher, 18 Nov 2026). In a diagram, every item is labelled the same way: the THING's name above and the science word below (for energy changes: natural gas / chemical potential energy, burning gas / heat energy, turbine / kinetic energy, generator / electrical energy, lamp / light energy). Never mix a name, a state of matter and an energy form in one row: pupils will learn the wrong idea. Every line on a map starts and ends somewhere named (a pipeline starts at its gas field).
 
 ## Thumbnails: the globe style (the teacher's favourite, 18 Nov 2026)
 
@@ -115,8 +116,8 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP01 | CxCl5ZM_5dw | Thu 26 Nov, 5 pm |
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
-| EP02 | VXOMD9YK3oQ | Thu 3 Dec, 5 pm |
-| EP02 Short 1 | vgS6HH_SIww | Fri 4 Dec, 5 pm |
+| EP02 | rT2wlRo1PCc | Thu 3 Dec, 5 pm |
+| EP02 Short 1 | apUqq0d6YvQ | Fri 4 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Mon 7 Dec, 5 pm |
 
 Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the TheOneApp, Explored ticket appear). The daily check prepares that pull request.

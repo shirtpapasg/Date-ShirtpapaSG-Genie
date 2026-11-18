@@ -25,8 +25,9 @@ P = lambda lon, lat: [round(v, 1) for v in proj(lon, lat)]
 G = {"land": LAND, "border": BORDER, "sg": P(103.82, 1.35),
      # 2026 hotspot areas: Riau, Jambi, South Sumatra; West, Central and South Kalimantan
      "fires": [P(101.4, 0.6), P(102.6, -1.0), P(104.6, -2.9), P(110.6, -0.6), P(113.8, -2.3), P(114.9, -3.0)],
-     "labels": [["Malaysia", P(102.2, 4.6), 30], ["Sumatra", P(100.6, -2.2), 32], ["Kalimantan", P(113.2, -0.6), 32], ["Java", P(108.8, -7.0), 26]],
+     "labels": [["Malaysia", P(101.9, 5.9), 30], ["Sumatra", P(100.6, -2.2), 32], ["Kalimantan", P(113.2, -0.6), 32], ["Java", P(108.8, -7.0), 26]],
      # gas pipelines into Singapore: from Kerteh (Malaysia), from Grissik in South Sumatra via Batam, from West Natuna
+     "sources": [[P(103.42, 4.55), "Malaysia gas", "end"], [P(105.6, 4.8), "West Natuna gas fields", "start"], [P(103.3, -2.4), "South Sumatra gas", "below"]],
      "pipes": {"my": [P(103.42, 4.55), P(103.3, 2.6), P(103.82, 1.45)], "su": [P(103.3, -2.4), P(104.0, -0.5), P(103.9, 1.1)], "na": [P(105.6, 4.8), P(104.9, 2.9), P(103.95, 1.4)]}}
 js = "/* geo_map.js: made by geo_map.py from Natural Earth coastlines (accurate shapes, orthographic, Singapore at 612,418). */\nconst GEO = " + json.dumps(G) + ";\n" + '''
 function regionMap(p) { const g = el("g", {}, p);
@@ -42,6 +43,12 @@ function regionMap(p) { const g = el("g", {}, p);
   g.sgRing = el("circle", {r: 16, fill: "none", stroke: "#e63946", "stroke-width": 4}, g.sg);
   tx(g.sg, {x: 26, y: -16, "font-size": 34, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, "Singapore");
   g.fires = GEO.fires.map(f => f.slice()); return g; }
+// where each pipeline starts: a gas-field marker and its name (so no pipe starts "nowhere")
+function gasSources(p) { return GEO.sources.map(([[x, y], name, side]) => { const g = el("g", {opacity: 0}, p);
+  el("circle", {cx: x, cy: y, r: 24, fill: INK, stroke: "#ffd166", "stroke-width": 6}, g);
+  tx(g, {x, y: y + 7, "text-anchor": "middle", "font-size": 19, "font-weight": 700, fill: "#ffd166"}, "GAS");
+  const lx = side === "end" ? x - 34 : side === "start" ? x + 34 : x, ly = side === "below" ? y + 58 : y + 9;
+  tx(g, {x: lx, y: ly, "text-anchor": side === "below" ? "middle" : side, "font-size": 28, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 7}, name); return g; }); }
 const pipeD = k => { const [a, b, c] = GEO.pipes[k]; return `M${a[0]} ${a[1]} Q${b[0]} ${b[1]} ${c[0]} ${c[1]}`; };
 '''
 open(f'{HERE}/geo_map.js', 'w').write(js); print('geo_map.js', len(js) // 1024, 'KB; SG', G['sg'])

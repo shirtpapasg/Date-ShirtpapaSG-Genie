@@ -75,31 +75,50 @@ S.news = (() => { const s = scene("news", "#023e8a", "#0077b6");
   const pipe = (d, col) => { const g = el("g", {}, s.stage); el("path", {d, fill: "none", stroke: INK, "stroke-width": 18, "stroke-linecap": "round"}, g);
     const f = el("path", {d, fill: "none", stroke: col, "stroke-width": 9, "stroke-dasharray": "16 18", "stroke-linecap": "round"}, g); g.f = f; return g; };
   s.pMy = pipe(pipeD("my"), "#ffd166"); s.pSu = pipe(pipeD("su"), "#ffd166"); s.pNa = pipe(pipeD("na"), "#ffd166");
-  s.ship = emo(s.stage, 0, 0, 110, "🚢");
+  s.src = gasSources(s.stage); s.ship = emo(s.stage, 0, 0, 110, "🚢");
   s.h = chip(s.stage, "Oct 2026: a little less gas by pipeline from Indonesia", "#e63946", {fs: 30});
   s.small = chip(s.stage, "under 2 of every 100 units we use", "#2a9d8f", {fs: 32});
   s.cal = chip(s.stage, "📅 some contracts end in 2028 → planning ahead", "#7209b7", {fs: 32});
   s.run = t => { const a = (w, f) => cue("news", w, f), tl = a("less", .3), tsh = a("ship", .6);
     [s.pMy, s.pSu, s.pNa].forEach((p, i) => { op(p, ramp(t, SC.news.t0 - .3 + i * .2, SC.news.t0 + i * .2)); set(p.f, "stroke-dashoffset", -t * 80); });
+    s.src.forEach((g, i) => op(g, ramp(t, SC.news.t0 - .1 + i * .2, SC.news.t0 + .2 + i * .2)));
     [s.pSu, s.pNa].forEach(p => set(p.f, "stroke-dasharray", t > tl ? "8 34" : "16 18"));
     popAt(s.h, 600, 50, t, a("october", .1)); op(s.h, on(t, a("october", .1), a("two", .45) + .3, .2));
     popAt(s.small, 600, 50, t, a("two", .45) + .3); op(s.small, on(t, a("two", .45) + .3, a("twenty-eight", .8), .2));
     const k = ramp(t, tsh - .3, tsh + 2.5); tf(s.ship, `translate(${lerp(1130, 790, k)} ${lerp(170, 350, k)})`); op(s.ship, ramp(t, tsh - .4, tsh - .1));
     popAt(s.cal, 600, 50, t, a("twenty-eight", .8)); }; return s; })();
 
-// ---- CONVERT: chemical potential -> heat -> kinetic -> electrical -> your lamp
+// ---- CONVERT: one chain, every box the same way round: the THING's name above, its form of ENERGY below
+// (the teacher, 18 Nov 2026: never mix a name, a state of matter and an energy form in one row)
 S.convert = (() => { const s = scene("convert", "#fff3b0", "#ffd166");
-  const turbine = p => { const g = el("g", {}, p); el("circle", {r: 70, fill: "#e9ecef", stroke: INK, "stroke-width": 6}, g); g.bl = el("g", {}, g);
-    for (let i = 0; i < 6; i++) el("path", {d: "M0 0 L60 -16 Q66 0 60 16 Z", fill: "#457b9d", stroke: INK, "stroke-width": 3, transform: `rotate(${i * 60})`}, g.bl); el("circle", {r: 14, fill: INK}, g); return g; };
-  const S5 = [["🔥", "chemical potential energy", "chemical", .15, "#f77f00"], ["♨️", "heat", "heat", .35, "#e63946"], [null, "kinetic energy", "turbines", .6, "#457b9d"], ["⚡", "electrical energy", "electrical", .85, "#ffbe0b"], ["💡", "your lamp", "electrical", .9, "#06d6a0"]];
-  s.items = S5.map(([e, lab, w, f, col], i) => { const g = el("g", {}, s.stage); el("rect", {x: -105, y: -105, width: 210, height: 210, rx: 30, fill: "#fff", stroke: col, "stroke-width": 9}, g);
-    if (e) emo(g, 0, 0, 120, e); else g.tb = turbine(g); const c = chip(g, lab, col, {fs: 26}); tf(c, "translate(0 160)"); op(c, 1); g.w = w; g.f = f; g.i = i; g.x = 110 + i * 245; return g; });
-  s.arrows = [0, 1, 2, 3].map(i => { const a = el("path", {d: "M-24 -18 L14 0 L-24 18 Z", fill: INK}, s.stage); a.x = 110 + i * 245 + 122; return a; });
+  const turbine = p => { const g = el("g", {}, p); el("circle", {r: 62, fill: "#e9ecef", stroke: INK, "stroke-width": 6}, g); g.bl = el("g", {}, g);
+    for (let i = 0; i < 6; i++) el("path", {d: "M0 0 L54 -14 Q60 0 54 14 Z", fill: "#457b9d", stroke: INK, "stroke-width": 3, transform: `rotate(${i * 60})`}, g.bl); el("circle", {r: 12, fill: INK}, g); return g; };
+  const tank = p => { const g = el("g", {}, p); el("rect", {x: -38, y: -62, width: 76, height: 124, rx: 30, fill: "#90e0ef", stroke: INK, "stroke-width": 6}, g);
+    el("rect", {x: -14, y: -78, width: 28, height: 20, rx: 5, fill: "#adb5bd", stroke: INK, "stroke-width": 5}, g);
+    tx(g, {x: 0, y: 12, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: INK}, "GAS"); return g; };
+  const generator = p => { const g = el("g", {}, p); el("rect", {x: -66, y: -46, width: 132, height: 92, rx: 16, fill: "#dee2e6", stroke: INK, "stroke-width": 6}, g);
+    for (let k = 0; k < 6; k++) el("path", {d: `M${-40 + k * 14} -26 q7 26 0 52`, fill: "none", stroke: "#b5651d", "stroke-width": 6}, g);
+    emo(g, 36, 0, 54, "⚡"); return g; };
+  const STEPS = [["Natural gas", tank, "chemical potential energy", "chemical", .15, "#f77f00"],
+    ["Burning gas", "🔥", "heat energy", "heat", .35, "#e63946"],
+    ["Turbine", turbine, "kinetic energy", "turbines", .6, "#457b9d"],
+    ["Generator", generator, "electrical energy", "electrical", .85, "#e0a800"],
+    ["Lamp", "💡", "light energy", "electrical", .92, "#06d6a0"]];
+  s.items = STEPS.map(([name, pic, energy, w, f, col], i) => { const g = el("g", {}, s.stage);
+    tx(g, {x: 0, y: -122, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, name);
+    el("rect", {x: -95, y: -95, width: 190, height: 190, rx: 28, fill: "#fff", stroke: col, "stroke-width": 9}, g);
+    if (typeof pic === "string") emo(g, 0, 0, 110, pic); else { const d = pic(g); if (d.bl) g.tb = d; }
+    const lab = el("g", {transform: "translate(0 152)"}, g); el("rect", {x: -105, y: -34, width: 210, height: 68, rx: 20, fill: col, stroke: INK, "stroke-width": 4}, lab);
+    const words = energy.split(" "), lines = words.length > 2 ? [words.slice(0, 2).join(" "), words.slice(2).join(" ")] : [energy];
+    lines.forEach((ln, k) => tx(lab, {x: 0, y: (lines.length > 1 ? -6 + k * 28 : 9), "text-anchor": "middle", "font-size": lines.length > 1 ? 24 : 27, "font-weight": 700, fill: "#fff"}, ln));
+    g.w = w; g.f = f; g.i = i; g.x = 120 + i * 240; return g; });
+  s.arrows = [0, 1, 2, 3].map(i => { const a = el("path", {d: "M-16 -16 L14 0 L-16 16 Z", fill: INK}, s.stage); a.x = 120 + i * 240 + 120; return a; });
+  s.head = tx(s.stage, {x: 600, y: 230, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#5b6782"}, "THING  ↑          ENERGY  ↓");
   s.p6 = chip(s.stage, "P6: energy changes from one form to another", "#7209b7", {fs: 36});
   s.run = t => { const a = (w, f) => cue("convert", w, f);
-    popAt(s.p6, 600, 90, t, SC.convert.t0 - .1);
-    s.items.forEach((g, i) => { const tw = a(g.w, g.f) + (i === 4 ? .5 : 0); popAt(g, g.x, 430, t, tw); if (g.tb) tf(g.tb.bl, `rotate(${t > tw ? (t - tw) * 400 : 0})`);
-      if (i < 4) { const ar = s.arrows[i]; tf(ar, `translate(${ar.x} 430)`); op(ar, ramp(t, tw + .2, tw + .4)); } }); }; return s; })();
+    popAt(s.p6, 600, 90, t, SC.convert.t0 - .1); op(s.head, 0);
+    s.items.forEach((g, i) => { const tw = a(g.w, g.f) + (i === 4 ? .6 : 0); popAt(g, g.x, 450, t, tw); if (g.tb) tf(g.tb.bl, `rotate(${t > tw ? (t - tw) * 400 : 0})`);
+      if (i < 4) { const ar = s.arrows[i]; tf(ar, `translate(${ar.x} 450)`); op(ar, ramp(t, tw + .2, tw + .4)); } }); }; return s; })();
 
 // ---- SUN: sunlight -> tiny sea life -> buried under rock for millions of years -> natural gas
 S.sun = (() => { const s = scene("sun", "#8ecae6", "#023047");

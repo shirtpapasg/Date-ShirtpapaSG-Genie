@@ -15,6 +15,7 @@ Config keys (all optional except white, yellow, banner):
   arrows [{"from": [lon,lat], "to": [lon,lat], "col": "#ffd166"}, ...]                (winds)
   icons [{"at": [lon,lat] or "xy": [x,y], "e": "🚢", "size": 80}, ...]
   sun {"xy": [x, y], "size": 220}                 a Sun off the globe with rays towards it
+  sources [{"at": [lon,lat], "label": "West Natuna gas fields", "dy": -60}, ...]   where a pipeline starts (a gas-field marker)
   singapore true/false (marker and label; default true)
 Coastlines: Natural Earth 1:10m land and 1:50m countries (public domain), in geo/ (not in git: download
   ne_10m_land.geojson as geo/land10.geojson and ne_50m_admin_0_countries.geojson as geo/countries.geojson from
@@ -61,6 +62,12 @@ arrows = ''.join(arrow(a) for a in cfg.get('arrows', []))
 def icon(i):
     x, y = P(i['at']) if 'at' in i else i['xy']
     return f'<text x="{x:.0f}" y="{y:.0f}" font-size="{i.get("size", 80)}" text-anchor="middle" dominant-baseline="central" class="emo">{i["e"]}</text>'
+def source(sr):
+    x, y = P(sr['at']); dy = sr.get('dy', -58)
+    return (f'<circle cx="{x:.0f}" cy="{y:.0f}" r="30" fill="#1b1b3a" stroke="#ffd166" stroke-width="7"/>'
+            f'<text x="{x:.0f}" y="{y + 9:.0f}" text-anchor="middle" font-size="24" font-weight="700" fill="#ffd166">GAS</text>'
+            f'<text x="{x + sr.get("dx", 0):.0f}" y="{y + dy:.0f}" text-anchor="{sr.get("anchor", "middle")}" font-size="{sr.get("size", 30)}" font-weight="700" fill="#fff" class="out" stroke-width="8">{sr["label"]}</text>')
+sources = ''.join(source(sr) for sr in cfg.get('sources', []))
 icons_in = ''.join(icon(i) for i in cfg.get('icons', []) if 'at' in i); icons_out = ''.join(icon(i) for i in cfg.get('icons', []) if 'xy' in i)
 sun = ''
 if cfg.get('sun'):
@@ -103,7 +110,7 @@ html,body{{margin:0;background:#000;width:{W}px;height:{H}px;overflow:hidden}} t
 <path d="{grat}" fill="none" stroke="#fff" stroke-width="1.5" opacity=".18"/>
 <path d="{land_d}" fill="#7fbf7f" stroke="#2d5a3d" stroke-width="2.5" stroke-linejoin="round"/>
 <path d="{border_d}" fill="none" stroke="#2d5a3d" stroke-width="2" stroke-dasharray="7 6" opacity=".7"/>
-{haze}{lines}{fires}{labels}{icons_in}{arrows}
+{haze}{lines}{sources}{fires}{labels}{icons_in}{arrows}
 <circle cx="{CX}" cy="{CY}" r="{DISK}" fill="url(#shade)"/></g>
 {sgm}{icons_out}
 <rect width="{W}" height="{H * .3:.0f}" fill="url(#top)"/>
