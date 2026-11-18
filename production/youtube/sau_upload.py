@@ -19,6 +19,7 @@ def call(method, url, params=None, body=None, raw=None, ctype="application/json"
     r = urllib.request.Request(url, data=data, method=method, headers={"Authorization": "Bearer " + TOK, "Content-Type": ctype})
     with urllib.request.urlopen(r) as resp: return resp.headers if headers else (json.load(resp) if resp.length != 0 else {})
 def chapters(tl, names):
+    if not os.path.exists(tl): return ''
     tl = json.load(open(tl)); out = []
     for s in tl['scenes']:
         if s['scene'] in names:
@@ -40,6 +41,12 @@ EP4_CH = chapters(f"{SAU}/ep04/ep04_tl.json", {"hook": "Where does the rain come
     "home": "You are a water molecule", "recap": "Your journey", "cycle": "The water cycle (P4)", "salt": "Is rain salty?", "try": "Try this", "think": "Think about it", "close": "Remember"})
 EP5_CH = chapters(f"{SAU}/ep05/ep05_tl.json", {"hook": "Where does your energy come from?", "answer": "Last time's answer: drying clothes", "welcome": "Today you'll learn", "news": "The news: Singapore's food goals",
     "povSun": "You are sunlight", "recap": "Your journey", "photo": "Photosynthesis and food chains", "security": "Food security", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP6_CH = chapters(f"{SAU}/ep06/ep06_tl.json", {"hook": "Where does your food go?", "answer": "Last time's answer", "welcome": "Today you'll learn", "news": "Where does the flush go?",
+    "povMouth": "You are a bit of fibre", "recap": "Your journey", "textbook": "The digestive system (P4)", "fibre": "Why fibre matters", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP7_CH = chapters(f"{SAU}/ep07/ep07_tl.json", {"hook": "Huff, puff!", "answer": "Last time's answer", "welcome": "Today you'll learn", "news": "100,000 heartbeats a day",
+    "airOut": "You are oxygen", "recap": "Your journey", "textbook": "Respiratory and circulatory systems (P5)", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP8_CH = chapters(f"{SAU}/ep08/ep08_tl.json", {"hook": "An apex predator", "answer": "Last time's answer", "welcome": "Today you'll learn", "news": "Crocodiles in Singapore",
+    "povCroc": "Rewind: you are the crocodile", "recap": "The rewind", "textbook": "Food chains (P6)", "bigidea": "The big idea", "try": "Try this", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
  {"id": "sau-trailer", "live": True, "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
@@ -82,6 +89,18 @@ VIDEOS = [
   "desc": "Be a bit of sunlight: caught by a leaf, turned into food by photosynthesis, stored in a grain of corn, eaten by a hen on a Singapore egg farm, and eaten by a student in the school canteen, until you help them run in the playground. Then Heart explains photosynthesis, food chains and how Singapore keeps food on our tables (food security)."
           "\n\n" + EP5_CH + "\n\nSources: Singapore Food Agency (sfa.gov.sg), Singapore Food Story 2 and Singapore Food Statistics." + FOOT,
   "tags": ["photosynthesis", "food chain", "food security", "singapore food story", "energy", "primary 5 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep06", "file": f"{SAU}/ep06/ep06.mp4", "thumb": f"{SAU}/ep06/thumb_ep06.jpg", "at": "2026-12-07T09:00:00Z", "title": "Where Does Your Food Go? Mouth To Toilet! | TheOneApp, Explored EP6",
+  "desc": "Be a bit of fibre from the vegetables on your canteen plate: chewed, squeezed down the gullet, churned in the stomach, past the small intestine (where your rice and egg friends pass into the blood), through the large intestine and, plop, into the toilet. Then Heart explains the digestive system from the Primary 4 textbook, why fibre matters, and where the flush goes (NEWater)."
+          "\n\n" + EP6_CH + "\n\nSources: PUB (pub.gov.sg) on used water and NEWater." + FOOT,
+  "tags": ["digestive system", "digestion", "fibre", "small intestine", "primary 4 science", "newater", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep07", "file": f"{SAU}/ep07/ep07.mp4", "thumb": f"{SAU}/ep07/thumb_ep07.jpg", "at": "2026-12-10T09:00:00Z", "title": "You Are Oxygen! How Does Oxygen Get To Your Muscles? | TheOneApp, Explored EP7",
+  "desc": "Be an oxygen molecule in the playground air: breathed in through the nose, down the windpipe, into an air sac, carried by a red blood cell, pumped by the heart to a leg muscle, where you help release energy from food. Then ride back with carbon dioxide and out of the nose. Heart explains the respiratory and circulatory systems from the Primary 5 textbook."
+          "\n\n" + EP7_CH + FOOT,
+  "tags": ["circulatory system", "respiratory system", "oxygen", "heart", "lungs", "primary 5 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep08", "file": f"{SAU}/ep08/ep08.mp4", "thumb": f"{SAU}/ep08/thumb_ep08.jpg", "at": "2026-12-13T09:00:00Z", "title": "What Did The Crocodile Eat? Rewind To The Sun | TheOneApp, Explored EP8",
+  "desc": "A saltwater crocodile at Sungei Buloh Wetland Reserve is an apex predator. Rewind its last meal: be the crocodile, then the mudskipper it ate, the crab the mudskipper ate, the mangrove leaf the crab ate, and the sunlight the leaf caught. Then Heart explains food chains, producers, consumers, predators and prey from the Primary 6 textbook."
+          "\n\n" + EP8_CH + "\n\nSources: National Parks Board (nparks.gov.sg), Sungei Buloh Wetland Reserve." + FOOT,
+  "tags": ["food chain", "producer", "consumer", "predator", "prey", "sungei buloh", "primary 6 science", "singapore", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.

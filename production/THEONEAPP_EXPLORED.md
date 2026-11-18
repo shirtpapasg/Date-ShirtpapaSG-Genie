@@ -200,6 +200,12 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
 | EP02 Part 1 | s1l0mru1EGc | public since 18 Nov (re-uploaded with the cold open) |
 | EP02 Part 2 | 44kn8zDoo5c | Sun 22 Nov, 5 pm |
+| EP03 Part 1 | CJcNV69lzxk | Wed 25 Nov, 5 pm |
+| EP03 Part 2 | 6WOvUUOVogE | Sat 28 Nov, 5 pm |
+| EP04 Rain | Y4mV0P_QnmI | Tue 1 Dec, 5 pm |
+| EP05 Food | 7CLMxQbivnc | Fri 4 Dec, 5 pm |
+| EP06 Digestion | JiNYG8Upozg | Mon 7 Dec, 5 pm |
+| EP08 Food chain | f3KNTUoYfQg | Sun 13 Dec, 5 pm |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
 
