@@ -191,7 +191,7 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
 | EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
 | EP02 Part 1 | s1l0mru1EGc | public since 18 Nov (re-uploaded with the cold open) |
-| EP02 Part 2 | JlrwaLyZ2ZI | Sun 6 Dec, 5 pm |
+| EP02 Part 2 | 44kn8zDoo5c | Sun 22 Nov, 5 pm |
 | EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
 | EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
 
