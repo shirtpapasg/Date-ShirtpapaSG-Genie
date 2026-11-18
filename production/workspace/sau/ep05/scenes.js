@@ -204,7 +204,7 @@ function hang5(K, x, tau, sc = .5) { const sw = Math.sin(tau * 5.2); pose5(K, x,
 
 // ---- HOOK: run, jump, climb -> energy -> food -> more than 9 in 10 bites come from other countries -> how does it reach you?
 S.hook = (() => { const s = scene("hook", "#90e0ef", "#48cae4"), st = s.stage;
-  el("rect", {x: -200, y: 640, width: 1700, height: 400, fill: "#ef8354", opacity: .9}, st); el("line", {x1: -200, y1: 640, x2: 1500, y2: 640, stroke: INK, "stroke-width": 5}, st);
+  s.gr = el("g", {}, st); el("rect", {x: -200, y: 640, width: 2200, height: 400, fill: "#ef8354", opacity: .9}, s.gr); el("line", {x1: -200, y1: 640, x2: 2000, y2: 640, stroke: INK, "stroke-width": 5}, s.gr);
   s.kids = el("g", {}, st);
   s.lad = el("g", {}, s.kids); el("path", A5({d: "M1010 640 V170 M1090 640 V170", fill: "none", stroke: INK, "stroke-width": 20}), s.lad); el("path", {d: "M1010 640 V170 M1090 640 V170", fill: "none", stroke: "#ffbe0b", "stroke-width": 10, "stroke-linecap": "round"}, s.lad);
   for (let k = 0; k < 8; k++) { el("line", {x1: 1010, y1: 600 - k * 58, x2: 1090, y2: 600 - k * 58, stroke: INK, "stroke-width": 14, "stroke-linecap": "round"}, s.lad); el("line", {x1: 1010, y1: 600 - k * 58, x2: 1090, y2: 600 - k * 58, stroke: "#ffbe0b", "stroke-width": 6, "stroke-linecap": "round"}, s.lad); }
@@ -219,27 +219,27 @@ S.hook = (() => { const s = scene("hook", "#90e0ef", "#48cae4"), st = s.stage;
   s.bites = FOODS.map((e, i) => { const g = el("g", {}, st); g.ring = el("circle", {r: 50, fill: "#fff", stroke: INK, "stroke-width": 6}, g); emo(g, 0, 2, 58, e);
     g.badge = el("g", {transform: "translate(30 -36)"}, g); el("circle", {r: 22, fill: i < 9 ? "#e63946" : "#2a9d8f", stroke: INK, "stroke-width": 4}, g.badge); emo(g.badge, 0, 1, 24, i < 9 ? "🚢" : "🌱"); return g; });
   s.c9 = chip(st, "🚢 More than 9 in 10: from other countries", "#e63946", {fs: 40});
-  s.c1 = lab5(st, 1095, 640, "grown here", 28, "#caffbf");
+  s.c1 = lab5(st, 1085, 610, "grown here", 34, "#caffbf");
   s.q4 = lab5(st, 0, 0, "So how does food, and its energy, reach YOU?", 52, "#ffe14d");
   s.run = t => { const a = (w, f) => cue("hook", w, f), t0 = SC.hook.t0, tE = a("where", .14), tF = a("your", .32), tS = a("but", .4), tN = a("nine", .54), tO = a("other", .72), tQ = a("so", .83);
-    const kOut = 1 - ramp(t, tF - .3, tF + .1); op(s.kids, kOut);
+    const kOut = 1 - ramp(t, tF - .3, tF + .1); op(s.kids, kOut); op(s.gr, kOut);
     const ph = t * 11;
     [["run", 250, 0], ["jump", 620, 1], ["climb", 980, 2]].forEach(([w, x, i]) => { const tw = i === 0 ? t0 - .2 : a(w, .03 + i * .03) - .12, k = Math.max(0, pop(t, tw, .35));
       const K = [s.k1, s.k2, s.k3][i];
-      if (i === 0) pose5(K, x + 30 * Math.sin(t * 2.2), 640, .62 * k, run5(ph, 44));
-      if (i === 1) { const jk = ((t - tw) * .9) % 1; pose5(K, x, 640, .62 * k, jump5(jk, 190)); }
-      if (i === 2) { const c = Math.sin(t * 6), up = ((t - tw) * 60) % 116; pose5(K, x, 610 - up - 60, .58 * k, {armN: -150 + 24 * c, armF: -150 - 24 * c, legN: -34 - 22 * c, legF: -34 + 22 * c, lean: 6, shadow: 0, laugh: 1, shut: false}); }
-      tf(s.w[i], `translate(${x + (i === 2 ? -150 : 0)} ${i === 2 ? 760 : 760}) scale(${k})`);
-      tf(s.zap[i], `translate(${x + (i === 2 ? -190 : 120)} ${300 + (i % 2) * 40}) scale(${Math.max(0, pop(t, tE + i * .12, .35)) * (1 + .1 * Math.sin(t * 9 + i))})`); });
+      if (i === 0) pose5(K, x + 30 * Math.sin(t * 2.2), 640, .8 * k, run5(ph, 44));
+      if (i === 1) { const jk = ((t - tw) * .9) % 1; pose5(K, x, 640, .8 * k, jump5(jk, 150)); }
+      if (i === 2) { const c = Math.sin(t * 6), up = ((t - tw) * 60) % 116; pose5(K, x, 600 - up - 30, .7 * k, {armN: -150 + 24 * c, armF: -150 - 24 * c, legN: -34 - 22 * c, legF: -34 + 22 * c, lean: 6, shadow: 0, laugh: 1, shut: false}); }
+      tf(s.w[i], `translate(${x + (i === 2 ? 40 : 0)} 750) scale(${k})`);
+      tf(s.zap[i], `translate(${x + (i === 2 ? -150 : 150)} ${250 + (i % 2) * 40}) scale(${Math.max(0, pop(t, tE + i * .12, .35)) * (1 + .1 * Math.sin(t * 9 + i))})`); });
     op(s.lad, clamp(Math.max(0, pop(t, a("climb", .09) - .12, .35))));
     popAt(s.q1, 600, 120, t, tE); op(s.q1, on(t, tE, tF - .1, .2));
     popAt(s.q2, 600, 130, t, tF); op(s.q2, on(t, tF, tS, .2));
     popAt(s.q3, 600, 120, t, tS + .1); op(s.q3, on(t, tS + .1, tQ - .1, .25));
     const mv = ramp(t, tS - .1, tS + .5), pk = Math.max(0, pop(t, tF - .1, .5));
-    tf(s.plate, `translate(${600} ${lerp(480, 330, mv)}) scale(${pk * lerp(1.45, .8, mv)})`); op(s.plate, pk > 0 ? 1 : 0);
-    s.bites.forEach((g, i) => { const tb = a("brings", .46) + i * .07, k = Math.max(0, pop(t, tb, .35)); tf(g, `translate(${105 + i * 110} 560) scale(${k})`); op(g, k > 0 ? 1 : 0);
+    tf(s.plate, `translate(${600} ${lerp(500, 310, mv)}) scale(${pk * lerp(1.6, .78, mv)})`); op(s.plate, pk > 0 ? 1 : 0);
+    s.bites.forEach((g, i) => { const tb = a("brings", .46) + i * .07, k = Math.max(0, pop(t, tb, .35)); tf(g, `translate(${105 + i * 110} 520) scale(${k})`); op(g, k > 0 ? 1 : 0);
       const tl = i < 9 ? tN + i * .13 : tO + .5, lit = t >= tl; set(g.ring, "fill", lit ? (i < 9 ? "#ffd6a5" : "#caffbf") : "#fff"); tf(g.badge, `translate(30 -36) scale(${Math.max(0, pop(t, tl, .3))})`); });
-    popAt(s.c9, 560, 690, t, tO); op(s.c1, ramp(t, tO + .5, tO + .8));
+    popAt(s.c9, 520, 690, t, tO); op(s.c1, ramp(t, tO + .5, tO + .8));
     popAt(s.q4, 600, 810, t, tQ); }; return s; })();
 
 // ---- LAST TIME'S ANSWER: why wet clothes dry faster on a sunny, windy day
@@ -247,30 +247,31 @@ S.answer = (() => { const s = scene("answer", "#3a0ca3", "#4361ee"), st = s.stag
   s.top = chip(st, "✅ Last time's answer", "#06d6a0", {fs: 42});
   s.q = lab5(st, 600, 128, "Why do wet clothes dry faster on a sunny, windy day?", 40);
   s.sun = sun5(st, 62);
-  s.rays = [[205, 215, 330, 300], [215, 255, 540, 330], [200, 290, 300, 470]].map(([x1, y1, x2, y2]) => arrow5(st, x1, y1, x2, y2, "#ff7b00", 10));
+  s.rays = [[1040, 262, 965, 340], [1020, 215, 740, 300], [1075, 285, 960, 540]].map(([x1, y1, x2, y2]) => arrow5(st, x1, y1, x2, y2, "#ff7b00", 10));
   s.wind = []; for (let i = 0; i < 7; i++) s.wind.push(el("path", {d: "M0 0 q40 -16 80 0 t80 0", fill: "none", stroke: "#fff", "stroke-width": 9, "stroke-linecap": "round", opacity: 0}, st));
-  s.line = el("g", {}, st); el("path", A5({d: "M130 232 H1070", fill: "none", stroke: INK, "stroke-width": 24}), s.line); el("path", {d: "M130 232 H1070", stroke: "#d4a373", "stroke-width": 14, "stroke-linecap": "round"}, s.line);
-  [300, 520, 760, 960].forEach(x => el("line", {x1: x, y1: 225, x2: x, y2: 239, stroke: "#9c6644", "stroke-width": 5}, s.line));
-  const C = [["M-110 0 L-60 -6 Q0 30 60 -6 L110 0 L150 70 L104 100 L88 70 V250 H-88 V70 L-104 100 L-150 70 Z", "#ffd166", 360], ["M-80 0 H80 L96 180 H14 L0 70 L-14 180 H-96 Z", "#06d6a0", 640], ["M-74 0 H74 V270 H-74 Z", "#ff8fab", 880]];
+  s.wall = el("g", {}, st); el("rect", A5({x: -200, y: 150, width: 300, height: 760, fill: "#f6bd60"}), s.wall); el("rect", A5({x: -40, y: 330, width: 110, height: 150, rx: 6, fill: "#bde0fe", "stroke-width": 5}), s.wall); el("rect", A5({x: 84, y: 212, width: 34, height: 44, rx: 6, fill: "#adb5bd", "stroke-width": 5}), s.wall); lab5(s.wall, 30, 560, "HDB", 30, "#fff");
+  s.line = el("g", {}, st); el("path", A5({d: "M100 232 H960", fill: "none", stroke: INK, "stroke-width": 24}), s.line); el("path", {d: "M100 232 H960", stroke: "#d4a373", "stroke-width": 14, "stroke-linecap": "round"}, s.line);
+  [300, 520, 760].forEach(x => el("line", {x1: x, y1: 225, x2: x, y2: 239, stroke: "#9c6644", "stroke-width": 5}, s.line));
+  const C = [["M-110 0 L-60 -6 Q0 30 60 -6 L110 0 L150 70 L104 100 L88 70 V250 H-88 V70 L-104 100 L-150 70 Z", "#ffd166", 330], ["M-80 0 H80 L96 180 H14 L0 70 L-14 180 H-96 Z", "#06d6a0", 610], ["M-74 0 H74 V270 H-74 Z", "#ff8fab", 850]];
   s.cl = C.map(([d, col, x]) => { const g = el("g", {}, st); g.x = x; el("path", A5({d, fill: col}), g); g.wet = el("path", {d, fill: "#1b1b3a", opacity: .4}, g);
     [-40, 40].forEach(dx => el("rect", A5({x: dx - 7, y: -22, width: 14, height: 34, rx: 4, fill: "#f8f9fa", "stroke-width": 4}), g));
     g.drips = [-50, 0, 46].map(dx => { const d5 = drop5(g, 9); d5.dx = dx; return d5; }); return g; });
   seed = 77; s.vap = []; for (let i = 0; i < 42; i++) s.vap.push({e: el("circle", {r: 7 + rnd() * 5, fill: "#bde0fe", stroke: "#fff", "stroke-width": 2, opacity: 0}, st), u: rnd(), v: rnd(), w: rnd(), c: i % 3});
-  s.vl = lab5(st, 0, 0, "water vapour", 34, "#bde0fe");
+  s.vl = lab5(st, 0, 0, "water vapour", 46, "#bde0fe");
   s.c1 = chip(st, "☀️ Heat: the water evaporates faster", "#f77f00", {fs: 36}); s.c2 = chip(st, "💨 Wind: blows the water vapour away", "#0096c7", {fs: 36});
   s.run = t => { const a = (w, f) => cue("answer", w, f), tH = a("heat", .5), tE = a("evaporate", .57), tW = a("wind", .7), tM = a("more", .88);
     popAt(s.top, 600, 48, t, SC.answer.t0 - .2); popAt(s.q, 0, 0, t, a("why", .18)); op(s.q, on(t, a("why", .18), 1e9, .2));
     op(s.line, ramp(t, a("wet", .2) - .4, a("wet", .2) - .1));
     const dry = ramp(t, tE, tM + 1.6), wk = ramp(t, tW, tW + .5);
-    s.cl.forEach((g, i) => { const k = Math.max(0, pop(t, a("wet", .2) - .2 + i * .1, .4)); tf(g, `translate(${g.x} 240) rotate(${wk * (-7 + 3 * Math.sin(t * 5 + i))}) scale(${k})`); op(g, k > 0 ? 1 : 0);
+    s.cl.forEach((g, i) => { const k = Math.max(0, pop(t, a("wet", .2) - .2 + i * .1, .4)); tf(g, `translate(${g.x} 240) rotate(${wk * (-7 + 3 * Math.sin(t * 5 + i))}) scale(${k * 1.25})`); op(g, k > 0 ? 1 : 0);
       op(g.wet, .42 * (1 - dry)); g.drips.forEach((d, j) => { const p = ((t * .8 + j * .37 + i * .2) % 1); tf(d, `translate(${d.dx} ${[250, 180, 270][i] + 6 + p * 90})`); op(d, (1 - p) * (1 - ramp(t, tE, tE + 2.5))); }); });
-    popAt(s.sun, 120, 250, t, a("sunny", .32) - .1); tf(s.sun.rays, `rotate(${t * 20})`);
+    popAt(s.sun, 1110, 190, t, a("sunny", .32) - .1); tf(s.sun.rays, `rotate(${t * 20})`);
     s.rays.forEach((r, i) => op(r, ramp(t, tH - .1 + i * .12, tH + .15 + i * .12) * (.7 + .3 * Math.sin(t * 7 + i))));
     s.vap.forEach(o => { const p = ((t - tE) * .3 + o.u) % 1, g = s.cl[o.c], live = t > tE + o.u * 1.2 ? 1 : 0;
-      const x = g.x - 80 + o.v * 160 + wk * (120 + 620 * p * (.6 + .8 * o.w)), y = 500 - o.w * 200 - p * lerp(380, 190, wk) + 14 * Math.sin(t * 2 + o.u * 9);
+      const x = g.x - 80 + o.v * 160 + wk * (120 + 620 * p * (.6 + .8 * o.w)), y = 560 - o.w * 240 - p * lerp(380, 190, wk) + 14 * Math.sin(t * 2 + o.u * 9);
       set(o.e, "cx", x); set(o.e, "cy", y); op(o.e, live * clamp(p / .1) * clamp((1 - p) / .25) * .95 * (1 - .75 * ramp(t, tM + 1.2, tM + 2.4))); });
     s.wind.forEach((w, i) => { const x = ((t * 520 + i * 260) % 1700) - 300; tf(w, `translate(${x} ${300 + i * 62 + (i % 2) * 20})`); op(w, .75 * wk * clamp((x + 300) / 150) * clamp((1400 - x) / 150)); });
-    popAt(s.vl, lerp(600, 760, wk), 640, t, tE + .5); op(s.vl, on(t, tE + .5, 1e9, .2));
+    popAt(s.vl, lerp(620, 800, wk), 660, t, tE + .5); op(s.vl, on(t, tE + .5, 1e9, .2));
     popAt(s.c1, 600, 735, t, tH); popAt(s.c2, 600, 822, t, tW); }; return s; })();
 
 // ---- NEWS: Singapore Food Story 2 (announced November 2025): by 2035, 1 in 5 vegetables and 3 in 10 eggs and seafood grown here
@@ -341,7 +342,7 @@ S.photo = (() => { const s = scene("photo", "#d8f3dc", "#95d5b2"), st = s.stage;
   s.up = [0, 1, 2, 3, 4].map(() => drop5(s.lab, 9));
   const L = {};
   L.light = el("g", {}, s.lab); L.light.appendChild(arrow5(L.light, 172, 178, 268, 316, "#ffd60a", 13)); lab5(L.light, 112, 262, "light", 38, "#ffe14d");
-  L.water = el("g", {}, s.lab); L.water.appendChild(arrow5(L.water, 150, 800, 340, 770, "#4cc9f0", 13)); lab5(L.water, 190, 842, "water", 38, "#bde0fe"); lab5(L.water, 590, 800, "taken in by the roots", 26);
+  L.water = el("g", {}, s.lab); L.water.appendChild(arrow5(L.water, 150, 800, 340, 770, "#4cc9f0", 13)); lab5(L.water, 190, 842, "water", 38, "#bde0fe"); lab5(L.water, 560, 800, "taken in by the roots", 32);
   L.co2 = el("g", {}, s.lab); L.co2.appendChild(arrow5(L.co2, 668, 352, 588, 452, "#6c757d", 13)); lab5(L.co2, 610, 330, "carbon dioxide", 34, "#e9ecef"); tf(gas5(L.co2, "co2", 22), "translate(690 384)");
   L.sugar = el("g", {}, s.lab); [[250, 372], [290, 352], [520, 448]].forEach(([x, y]) => tf(hex5(L.sugar, 17), `translate(${x} ${y})`)); lab5(L.sugar, 212, 444, "sugar", 38, "#ffd166");
   L.o2 = el("g", {}, s.lab); L.o2.appendChild(arrow5(L.o2, 556, 262, 650, 178, "#e0fbfc", 13)); lab5(L.o2, 640, 150, "oxygen", 36, "#e0fbfc"); tf(gas5(L.o2, "o2", 22), "translate(672 230)");
@@ -381,22 +382,26 @@ S.photo = (() => { const s = scene("photo", "#d8f3dc", "#95d5b2"), st = s.stage;
 
 // ---- FOOD SECURITY: buy from many countries (real map), grow more at home (egg farm, fish farm, vegetable tower), store food away
 S.security = (() => { const s = scene("security", "#023e8a", "#0077b6"), st = s.stage, MT = "translate(93.75 150) scale(.625)", PL = WORLD5.pl, SG = WORLD5.sg;
-  s.q = lab5(st, 600, 128, "How does Singapore keep food on our tables?", 48);
-  s.plate = plate5(st);
+  s.q = lab5(st, 600, 150, "How does Singapore keep food on our tables?", 48);
+  s.plate = el("g", {}, st); el("rect", A5({x: -520, y: -250, width: 1040, height: 500, rx: 20, fill: "#e9ecef"}), s.plate);
+  [[-250, "#f8f9fa"], [0, "#f8f9fa"]].forEach(([y]) => { el("rect", {x: -500, y: y + 20, width: 1000, height: 200, fill: "#fff"}, s.plate); el("rect", A5({x: -520, y: y + 208, width: 1040, height: 34, fill: "#e63946", "stroke-width": 5}), s.plate); });
+  [["🥚", "Malaysia"], ["🍚", "Thailand"], ["🍗", "Brazil"], ["🥬", "China"], ["🥩", "Australia"], ["🥦", "Singapore"]].forEach(([e, n], i) => { const x = -340 + (i % 3) * 340, y = -250 + Math.floor(i / 3) * 250; emo(s.plate, x, y + 118, 120, e);
+    el("rect", A5({x: x - 120, y: y + 200, width: 240, height: 50, rx: 10, fill: n === "Singapore" ? "#caffbf" : "#fff3b0", "stroke-width": 4}), s.plate); tx(s.plate, {x, y: y + 236, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: INK}, "from " + n); });
+  s.shop = chip(st, "🛒 At the supermarket: look where your food comes from", "#1b1b3a", {fs: 34});
   s.tabs = [["🚢 Many countries", "#e63946"], ["🌱 Grow at home", "#2a9d8f"], ["📦 Store some", "#7209b7"]].map(([l, c], i) => { const g = chip(st, l, c, {fs: 32}); g.x = 200 + i * 400; return g; });
   // 1. the map
   s.mapG = el("g", {}, st); const cp = clip5(c => el("rect", {x: 0, y: 112, width: 1200, height: 676, rx: 40}, c)); const mc = el("g", {"clip-path": cp}, s.mapG), m = el("g", {transform: MT}, mc);
   world5(m);
   const curve = (n, bend) => { const [x, y] = PL[n], mx = (x + SG[0]) / 2 + bend[0], my = (y + SG[1]) / 2 + bend[1]; return `M${x} ${y} Q${mx} ${my} ${SG[0]} ${SG[1]}`; };
-  const R = [["Brazil", "M" + WORLD5.ship.map(q => q.join(" ")).join(" L"), [-10, -46, "middle"]], ["Australia", curve("Australia", [-60, 0]), [0, 62, "middle"]], ["China", curve("China", [70, 10]), [26, -22, "start"]],
-    ["Thailand", curve("Thailand", [-30, 0]), [-26, -18, "end"]], ["Malaysia", curve("Malaysia", [-6, 4]), [-30, 26, "end"]]];
+  const R = [["Brazil", "M" + WORLD5.ship.map(q => q.join(" ")).join(" L"), [10, -40, "middle"]], ["Australia", curve("Australia", [-60, 0]), [20, 76, "middle"]], ["China", curve("China", [70, 10]), [30, -22, "start"]],
+    ["Thailand", curve("Thailand", [-30, 0]), [-30, -30, "end"]], ["Malaysia", curve("Malaysia", [-6, 4]), [-34, 40, "end"]]];
   s.routes = R.map(([n, d, [lx, ly, an]]) => { const g = el("g", {}, m), [x, y] = PL[n];
     el("path", {d, fill: "none", stroke: INK, "stroke-width": 11, "stroke-linecap": "round", "stroke-linejoin": "round"}, g);
     g.f = el("path", {d, fill: "none", stroke: "#ffe14d", "stroke-width": 6, "stroke-dasharray": "16 14", "stroke-linecap": "round", "stroke-linejoin": "round"}, g);
     el("circle", {cx: x, cy: y, r: 13, fill: "#ffe14d", stroke: INK, "stroke-width": 5}, g);
-    tx(g, {x: x + lx, y: y + ly, "text-anchor": an, "font-size": 42, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 10}, n); g.n = n; return g; });
+    tx(g, {x: x + lx, y: y + ly, "text-anchor": an, "font-size": 60, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 14}, n); g.n = n; return g; });
   s.sg = el("g", {transform: `translate(${SG[0]} ${SG[1]})`}, m); s.ring = el("circle", {r: 16, fill: "none", stroke: "#e63946", "stroke-width": 6}, s.sg); el("circle", {r: 15, fill: "#e63946", stroke: "#fff", "stroke-width": 5}, s.sg);
-  tx(s.sg, {x: 28, y: 52, "font-size": 46, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 11}, "Singapore");
+  tx(s.sg, {x: 30, y: 66, "font-size": 60, "font-weight": 700, fill: "#fff", class: "out", "stroke-width": 11}, "Singapore");
   s.warn = el("g", {}, m); el("circle", {r: 44, fill: "#fff", stroke: INK, "stroke-width": 6}, s.warn); emo(s.warn, 0, 0, 52, "⚠️");
   el("rect", {x: 0, y: 112, width: 1200, height: 676, rx: 40, fill: "none", stroke: INK, "stroke-width": 7}, s.mapG);
   s.c1 = chip(s.mapG, "If one has a problem, others can still sell to us", "#1b1b3a", {fs: 34});
@@ -417,7 +422,7 @@ S.security = (() => { const s = scene("security", "#023e8a", "#0077b6"), st = s.
     tile(995, "#e9f5ff", "vegetable farms", g => { el("rect", A5({x: -130, y: -220, width: 260, height: 390, rx: 8, fill: "#f8f9fa"}), g);
       for (let f = 0; f < 5; f++) { const y = -150 + f * 74; el("rect", {x: -126, y: y - 60, width: 252, height: 10, fill: "#f72585", opacity: .75}, g); el("rect", A5({x: -126, y, width: 252, height: 12, fill: "#adb5bd", "stroke-width": 4}), g);
         for (let c = 0; c < 6; c++) el("path", A5({d: `M${-104 + c * 42} ${y} q-18 -22 0 -40 q18 18 0 40 Z M${-104 + c * 42} ${y} q-22 -8 -20 -26 q20 2 20 26 Z M${-104 + c * 42} ${y} q22 -8 20 -26 q-20 2 -20 26 Z`, fill: f % 2 ? "#74c69d" : "#52b788", "stroke-width": 3.5}), g); } })];
-  s.stack = lab5(s.grow, 0, 0, "stacked in a building", 26);
+  s.stack = lab5(s.grow, 0, 0, "stacked in a building", 36);
   // 3. store food away
   s.store = el("g", {}, st);
   el("path", A5({d: "M150 330 L600 190 L1050 330 V770 H150 Z", fill: "#dee2e6"}), s.store); el("rect", A5({x: 215, y: 390, width: 770, height: 380, fill: "#495057"}), s.store);
@@ -426,7 +431,7 @@ S.security = (() => { const s = scene("security", "#023e8a", "#0077b6"), st = s.
   s.c3 = chip(s.store, "Food stored away, just in case", "#7209b7", {fs: 38});
   s.run = t => { const a = (w, f) => cue("security", w, f), t0 = SC.security.t0, tM = a("buy", .27), tP = a("problem", .41), tO = a("others", .45), tG = a("grow", .56), tS = a("store", .9);
     popAt(s.q, 0, 0, t, t0 - .2); op(s.q, on(t, t0 - .2, tM - .2, .25));
-    tf(s.plate, `translate(600 500) scale(${1.5 * Math.max(0, pop(t, a("food", .06), .45))})`); op(s.plate, on(t, a("food", .06), tM - .15, .25));
+    tf(s.plate, `translate(600 460) scale(${Math.max(0, pop(t, (t0 + .2), .45))})`); op(s.plate, on(t, (t0 + .2), tM - .15, .25)); popAt(s.shop, 600, 770, t, (t0 + .2) + .3); op(s.shop, on(t, (t0 + .2) + .3, a("security", .2) - .3, .2));
     s.tabs.forEach((g, i) => { const tw = [tM, tG, tS][i]; popAt(g, g.x, 56, t, tw - .1); const cur = t < [tG, tS, 1e9][i] - .1; op(g, ramp(t, tw - .15, tw) * (cur ? 1 : .55)); });
     op(s.mapG, on(t, tM - .2, tG - .1, .3));
     s.routes.forEach((g, i) => { const tr = tM + .25 + i * .22, bad = g.n === "Brazil" && t > tP; op(g, ramp(t, tr, tr + .25)); set(g.f, "stroke-dashoffset", bad ? 0 : -(t - t0) * 70);
@@ -437,7 +442,7 @@ S.security = (() => { const s = scene("security", "#023e8a", "#0077b6"), st = s.
     op(s.grow, on(t, tG - .1, tS - .1, .3));
     s.tiles.forEach((g, i) => popAt(g, g.x, 440, t, [a("egg", .64), a("fish", .69), a("vegetable", .73)][i] - .15));
     if (s.fish) s.fish.forEach((f, i) => { const [x, y, d] = f.q, sw = Math.sin((t - t0) * 1.3 + i * 2); tf(f, `translate(${x + 44 * sw} ${y}) scale(${(Math.cos((t - t0) * 1.3 + i * 2) > 0 ? -1 : 1)} 1)`); });
-    popAt(s.stack, 995, 172, t, a("stacked", .78)); op(s.stack, on(t, a("stacked", .78), tS - .1, .2));
+    popAt(s.stack, 995, 166, t, a("stacked", .78)); op(s.stack, on(t, a("stacked", .78), tS - .1, .2));
     op(s.store, ramp(t, tS - .1, tS + .2)); s.sacks.forEach(g => { const k = Math.max(0, pop(t, tS + .1 + g.i * .035, .3)); tf(g, `translate(${g.x} ${g.y}) scale(${k})`); });
     popAt(s.c3, 600, 300, t, a("just", .95) - .2); }; return s; })();
 
@@ -445,7 +450,7 @@ S.security = (() => { const s = scene("security", "#023e8a", "#0077b6"), st = s.
 S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = s.stage;
   s.top = chip(st, "🏠 Try this at home: trace your dinner back to sunlight", "#7209b7", {fs: 36});
   el("rect", {x: 20, y: 240, width: 380, height: 470, rx: 40, fill: "#d4a373", stroke: INK, "stroke-width": 7}, st);
-  s.plate = plate5(st);
+  s.plate = plate5(st); s.hk = lab5(st, 210, 760, "dinner at the hawker centre", 30);
   s.sun = sun5(st, 70);
   const tok = (x, y, name, art) => { const g = el("g", {}, st); g.x = x; g.y = y; el("circle", {r: 78, fill: "#fff", stroke: INK, "stroke-width": 6, filter: "url(#sh)"}, g); art(g); lab5(g, 0, 122, name, 34); return g; };
   s.r1 = tok(560, 300, "rice", g => emo(g, 0, 4, 92, "🍚")); s.r2 = tok(830, 300, "a rice plant", g => emo(g, 0, 4, 92, "🌾"));
@@ -472,13 +477,13 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = s.stage;
     el("circle", {cx: 0, cy: 110, r: 30, fill: "#e63946", stroke: "#fff", "stroke-width": 6}, g); lab5(g, 0, 178, "Singapore", 30);
     g.nm = lab5(g, 0, -176, name, 44, "#ffe14d"); return g; };
   s.many = side(310, 5, "many countries"); s.one = side(890, 1, "just one country");
-  s.vs = lab5(st, 600, 470, "or", 60); s.qm = emo(st, 600, 600, 130, "❓");
+  s.vs = lab5(st, 600, 470, "or", 60); s.qm = emo(st, 600, 640, 110, "❓");
   s.ans = chip(st, "Answer next time!", "#f72585", {fs: 44});
   s.run = t => { const a = (w, f) => cue("think", w, f), tM = a("many", .42), tO = a("instead", .6);
     popAt(s.title, 0, 0, t, SC.think.t0 - .2);
     popAt(s.many, 310, 440, t, tM - .5); s.many.ar.forEach((q, i) => op(q, ramp(t, tM - .2 + i * .12, tM + i * .12)));
     popAt(s.one, 890, 440, t, tO - .1); s.one.ar.forEach(q => op(q, ramp(t, tO + .3, tO + .5)));
-    popAt(s.vs, 0, 0, t, tO - .1); tf(s.qm, `translate(600 600) scale(${Math.max(0, pop(t, tO + .5)) * (1 + .08 * Math.sin(t * 5))}) translate(-600 -600)`);
+    popAt(s.vs, 0, 0, t, tO - .1); tf(s.qm, `translate(600 640) scale(${Math.max(0, pop(t, tO + .5)) * (1 + .08 * Math.sin(t * 5))}) translate(-600 -640)`);
     popAt(s.ans, 600, 838, t, a("next", .92)); }; return s; })();
 
 // ---- CLOSE: what to remember (rows from CFG.close), then next time's teaser (the same scene as EP02's)

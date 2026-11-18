@@ -208,7 +208,7 @@ S.shipMap = (() => { const s = scene("shipMap", "#48cae4", "#48cae4"); s.cam = e
   s.done = el("path", {fill: "none", stroke: "#ffe14d", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round"}, s.cam);
   s.br = el("g", {transform: `translate(${P[0][0]} ${P[0][1]})`}, s.cam); el("circle", {r: 30, fill: "#fff", stroke: INK, "stroke-width": 6}, s.br); emo(s.br, 0, 1, 34, "🌽"); lab5(s.br, -20, -48, "Brazil", 50);
   s.sg = el("g", {transform: `translate(${WORLD5.sg[0]} ${WORLD5.sg[1]})`}, s.cam); s.ring = el("circle", {r: 16, fill: "none", stroke: "#e63946", "stroke-width": 6}, s.sg);
-  el("circle", {r: 15, fill: "#e63946", stroke: "#fff", "stroke-width": 5}, s.sg); lab5(s.sg, 24, -22, "Singapore", 50, "#fff", "start");
+  el("circle", {r: 15, fill: "#e63946", stroke: "#fff", "stroke-width": 5}, s.sg); lab5(s.sg, 26, 62, "Singapore", 50, "#fff", "start");
   s.ship = ship5(s.cam); s.wake = el("g", {}, s.ship);
   s.card = card5(s.stage, "Hens' feed comes to Singapore by ship", INK, 46);
   s.run = t => { const u = U5("shipMap", t), D = D5("shipMap"), q = ease(sg(u, .25, D - .95)), [x, y, i] = at(q);
@@ -305,7 +305,7 @@ S.canteen = (() => { const s = scene("canteen", "#fff3d6", "#fff3d6"), F = 800;
   el("line", {x1: -1500, y1: F - 60, x2: 3500, y2: F - 60, stroke: INK, "stroke-width": 6}, s.cam);
   [[-60, 0], [420, 1]].forEach(([x]) => { el("rect", A5({x, y: -80, width: 60, height: F - 60 + 80, fill: "#f6bd60"}), s.cam); });
   // the stall
-  const st = el("g", {transform: "translate(-190 0)"}, s.cam);
+  const st = el("g", {transform: "translate(-330 0)"}, s.cam);
   el("rect", A5({x: 1010, y: 190, width: 800, height: 550, fill: "#2b2d42"}), st); el("rect", {x: 1030, y: 210, width: 760, height: 330, fill: "#fdf0d5"}, st);
   el("rect", A5({x: 990, y: 70, width: 840, height: 130, rx: 16, fill: "#e63946"}), st); tx(st, {x: 1410, y: 158, "text-anchor": "middle", "font-size": 70, "font-weight": 700, fill: "#fff", "letter-spacing": 3}, "STALL 3 · BREAKFAST");
   [["🍳", "egg"], ["🍞", "toast"], ["🥛", "milk"]].forEach(([e, n], i) => { el("rect", A5({x: 1500 + i * 96, y: 232, width: 84, height: 108, rx: 10, fill: "#fff", "stroke-width": 5}), st); emo(st, 1542 + i * 96, 274, 50, e); tx(st, {x: 1542 + i * 96, y: 328, "text-anchor": "middle", "font-size": 22, "font-weight": 700, fill: INK}, n); });
@@ -318,7 +318,7 @@ S.canteen = (() => { const s = scene("canteen", "#fff3d6", "#fff3d6"), F = 800;
   el("rect", A5({x: 1090, y: 476, width: 190, height: 50, rx: 8, fill: "#495057"}), st); el("path", A5({d: "M1100 456 H1270 L1256 480 H1114 Z", fill: "#22223b"}), st); el("rect", A5({x: 1262, y: 452, width: 90, height: 14, rx: 6, fill: "#22223b", "stroke-width": 5}), st);
   s.steam = [0, 1, 2].map(i => el("path", {d: "M0 0 q-14 -22 0 -44 t0 -44", fill: "none", stroke: "#fff", "stroke-width": 8, "stroke-linecap": "round", opacity: .8, transform: `translate(${1150 + i * 36} 446)`}, st));
   // a table with stools, and the queue
-  const tb = el("g", {transform: "translate(-330 0)"}, s.cam); [[-40, 880], [150, 880], [340, 880]].forEach(([x, y]) => { el("rect", A5({x: x - 9, y: y - 70, width: 18, height: 80, fill: "#6c757d", "stroke-width": 5}), tb); el("ellipse", A5({cx: x, cy: y - 74, rx: 56, ry: 16, fill: "#f72585"}), tb); });
+  const tb = el("g", {transform: "translate(-560 0)"}, s.cam); [[-40, 880], [150, 880], [340, 880]].forEach(([x, y]) => { el("rect", A5({x: x - 9, y: y - 70, width: 18, height: 80, fill: "#6c757d", "stroke-width": 5}), tb); el("ellipse", A5({cx: x, cy: y - 74, rx: 56, ry: 16, fill: "#f72585"}), tb); });
   el("rect", A5({x: -130, y: 690, width: 570, height: 26, rx: 10, fill: "#4cc9f0"}), tb); [[-80, 0], [380, 0]].forEach(([x]) => el("rect", A5({x: x - 10, y: 716, width: 20, height: 160, fill: "#6c757d", "stroke-width": 5}), tb));
   emo(tb, 60, 664, 54, "🍜"); emo(tb, 250, 664, 54, "🥤");
   s.q = friends5(s.cam); s.me = kid5(s.cam);
@@ -346,10 +346,10 @@ S.canteen = (() => { const s = scene("canteen", "#fff3d6", "#fff3d6"), F = 800;
   el("rect", A5({x: -220, y: -1400, width: 2140, height: 1140, rx: 60, fill: "#ff8fa3", "stroke-width": 9}), s.tU); el("rect", A5({x: -220, y: 260, width: 2140, height: 1140, rx: 60, fill: "#ff8fa3", "stroke-width": 9}), s.tD);
   s.run = t => { const u = U5("canteen", t), D = D5("canteen"), CUT1 = 1.85, CUT2 = 3.45;
     // A
-    op(s.A, 1 - ramp(u, CUT1 - .08, CUT1 + .04)); const pk = ease(sg(u, -.45, CUT1)); camTf(s.cam, lerp(1.12, 1.5, pk), lerp(740, 900, pk), lerp(500, 500, pk));
-    pose5(s.me, 740, F, .6, {armN: -62 + 6 * Math.sin(u * 3), laugh: u > 1 ? 1 : 0, shut: false, head: -4});
-    [[s.q.y, 570], [s.q.r, 400], [s.q.v, 230]].forEach(([K, x], i) => pose5(K, x, F + 6 * i, .58, {head: 6 * Math.sin(u * 1.8 + i * 2), armN: i === 1 ? -30 + 20 * Math.sin(u * 4) : 0}));
-    pose5(s.q.g, -180, 800, .5, {legN: -84, legF: -84, armN: -60 + 20 * Math.sin(u * 5), lean: 4, shadow: 0, bob: -24});
+    op(s.A, 1 - ramp(u, CUT1 - .08, CUT1 + .04)); const pk = ease(sg(u, -.45, CUT1)); camTf(s.cam, lerp(1.12, 1.45, pk), lerp(700, 850, pk), lerp(480, 500, pk));
+    pose5(s.me, 600, F, .62, {armN: -62 + 6 * Math.sin(u * 3), laugh: u > 1 ? 1 : 0, shut: false, head: -4});
+    [[s.q.y, 430], [s.q.r, 260], [s.q.v, 90]].forEach(([K, x], i) => pose5(K, x, F + 6 * i, .58, {head: 6 * Math.sin(u * 1.8 + i * 2), armN: i === 1 ? -30 + 20 * Math.sin(u * 4) : 0}));
+    pose5(s.q.g, -410, 800, .5, {legN: -84, legF: -84, armN: -60 + 20 * Math.sin(u * 5), lean: 4, shadow: 0, bob: -24});
     tf(s.arm, `translate(-70 -70) rotate(${lerp(-70, -118, ease(sg(u, .9, 1.6)))})`); s.steam.forEach((p, i) => op(p, .35 + .45 * Math.sin(u * 5 + i * 2)));
     showC5(s.cardA, t, SC.canteen.t0 + .1, SC.canteen.t0 + CUT1 - .1, 905);
     // B

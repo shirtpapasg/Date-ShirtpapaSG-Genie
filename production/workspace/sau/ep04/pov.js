@@ -126,7 +126,7 @@ S.home = (() => { const s = scene("home", "#0a3d7a", "#0a3d7a"), st = s.stage;
     runStreaks4(s.str, u * 1.4, {r0: 120}); op(s.str.G, on(u, 1.5, 2.5, .3));
     // under water
     s.u.jig(t); const rise = ease((u - 3.5) / 2.2), my = lerp(590, 245, rise), mx = 810 + 26 * Math.sin((u - 3.5) * 3) * (rise > 0 && rise < 1 ? 1 : 0);
-    const dive = Math.pow(clamp((u - 5.75) / .75), 2.2), zu = lerp(.7, 1.22, ease((u - 1.6) / 1.2)) * (1 + 12 * dive), camY = lerp(520, 400, rise);
+    const dive = Math.pow(clamp((u - 5.75) / .75), 2.2), zu = lerp(.7, 1.22, ease((u - 1.6) / 1.2)) * (1 + 12 * dive), camY = lerp(560, 440, rise);
     tf(s.uw, `translate(${VP[0]} ${VP[1]}) scale(${zu}) translate(${-lerp(810, mx, dive)} ${-lerp(camY, my, dive)})`);
     at4(s.mama, 500 + 8 * wob4(t, 2, 1), 640 + 8 * wob4(t, 2.3, 2), 1.15, -8); at4(s.papa, 1120 + 8 * wob4(t, 2.1, 3), 650 + 8 * wob4(t, 1.9, 4), 1.15, 8);
     at4(s.me, mx + 5 * wob4(t, 2.6, 5), my + 5 * wob4(t, 2.2, 6), 1, 10 * Math.sin((u - 3.5) * 3) * (rise > 0 && rise < 1 ? 1 : 0));

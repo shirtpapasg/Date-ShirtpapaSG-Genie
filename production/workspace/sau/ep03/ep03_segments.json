@@ -52,7 +52,7 @@
    ]
   ],
   "tease": "▶ Part 2: Where does our rubbish go?",
-  "teaseWord": "next"
+  "teaseWord": "find"
  },
  "kws": [
   [
@@ -85,7 +85,28 @@
    "id": "h0",
    "scene": "voidDeck",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep03_gulp",
+     0.25
+    ],
+    [
+     "ep03_clink",
+     1.85
+    ],
+    [
+     "footsteps",
+     2.1
+    ],
+    [
+     "sparkle",
+     3.85
+    ],
+    [
+     "reveal",
+     3.9
+    ]
+   ]
   },
   {
    "id": "hook",
@@ -112,49 +133,245 @@
    "id": "c1",
    "scene": "returnMachine",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "footsteps",
+     0.3
+    ],
+    [
+     "ep03_slide",
+     2.05
+    ],
+    [
+     "whoosh",
+     3.0
+    ],
+    [
+     "rush",
+     2.9
+    ]
+   ]
   },
   {
    "id": "c2",
    "scene": "povScan",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "hum",
+     0
+    ],
+    [
+     "cable_zip",
+     1.0
+    ],
+    [
+     "ep03_beep",
+     2.25
+    ],
+    [
+     "ep03_coin",
+     2.55
+    ],
+    [
+     "pad_wonder",
+     3.85
+    ],
+    [
+     "ep03_crunch",
+     3.93
+    ],
+    [
+     "boom",
+     3.95
+    ]
+   ]
   },
   {
    "id": "c3",
    "scene": "povTruck",
    "silent": 4.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep03_clatter",
+     0
+    ],
+    [
+     "rumble",
+     0
+    ],
+    [
+     "thud",
+     0.9
+    ],
+    [
+     "thud",
+     2.3
+    ]
+   ]
   },
   {
    "id": "c4",
    "scene": "povSort",
    "silent": 6.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep03_belt",
+     0
+    ],
+    [
+     "ep03_clank",
+     2.48
+    ],
+    [
+     "ep03_clank",
+     3.0
+    ],
+    [
+     "ep03_clank",
+     3.43
+    ],
+    [
+     "pad_tension",
+     3.55
+    ],
+    [
+     "ep03_clank",
+     3.86
+    ],
+    [
+     "ep03_clank",
+     4.22
+    ],
+    [
+     "pass_by",
+     4.45
+    ]
+   ]
   },
   {
    "id": "c5",
    "scene": "povBale",
    "silent": 4.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep03_press",
+     0.2
+    ],
+    [
+     "boom",
+     2.05
+    ],
+    [
+     "pop",
+     2.85
+    ]
+   ]
   },
   {
    "id": "c6",
    "scene": "povMelt",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "roar",
+     0
+    ],
+    [
+     "ignite",
+     0.8
+    ],
+    [
+     "crackle",
+     2.0
+    ],
+    [
+     "pad_wonder",
+     2.25
+    ],
+    [
+     "bubble",
+     2.8
+    ],
+    [
+     "hiss",
+     3.0
+    ],
+    [
+     "bubble",
+     3.5
+    ],
+    [
+     "bubble",
+     4.1
+    ]
+   ]
   },
   {
    "id": "c7",
    "scene": "povRoll",
    "silent": 5.0,
-   "sfx": []
+   "sfx": [
+    [
+     "ep03_roll",
+     0
+    ],
+    [
+     "whoosh",
+     1.6
+    ],
+    [
+     "ep03_stamp",
+     2.5
+    ],
+    [
+     "ep03_stamp",
+     3.57
+    ],
+    [
+     "pop",
+     4.0
+    ],
+    [
+     "sparkle",
+     4.3
+    ],
+    [
+     "chime",
+     4.35
+    ]
+   ]
   },
   {
    "id": "c8",
    "scene": "shelf",
    "silent": 4.5,
-   "sfx": []
+   "sfx": [
+    [
+     "sparkle",
+     0.2
+    ],
+    [
+     "footsteps",
+     0.75
+    ],
+    [
+     "pad_wonder",
+     0.95
+    ],
+    [
+     "pop",
+     2.45
+    ],
+    [
+     "chime",
+     3.0
+    ]
+   ]
   },
   {
    "id": "n1",

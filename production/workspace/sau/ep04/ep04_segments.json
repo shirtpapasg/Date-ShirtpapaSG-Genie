@@ -95,16 +95,20 @@
      1.6
     ],
     [
-     "boom",
+     "thunder",
      1.0
     ],
     [
-     "rumble",
-     1.05
+     "drip",
+     3.92
     ],
     [
      "boom",
      4.35
+    ],
+    [
+     "drip",
+     5.55
     ]
    ]
   },
@@ -120,9 +124,9 @@
    "shots": [
     [
      "greasy",
-     1.2,
-     420,
-     480
+     1.12,
+     470,
+     450
     ],
     [
      "burnt",
@@ -196,6 +200,10 @@
    "silent": 5.5,
    "sfx": [
     [
+     "jiggle",
+     0
+    ],
+    [
      "pad_wonder",
      2.35
     ],
@@ -254,7 +262,7 @@
    "silent": 5.0,
    "sfx": [
     [
-     "wind",
+     "sea_wash",
      0
     ],
     [
@@ -359,8 +367,8 @@
      0
     ],
     [
-     "boom",
-     0.2
+     "thunder",
+     0.1
     ],
     [
      "rush",
@@ -488,66 +496,18 @@
    "id": "textbook",
    "scene": "cycle",
    "hold": 1.0,
-   "text": "Now for the textbook link! In Primary Four, you learn about the water cycle. When water gains heat, it evaporates: it changes from a liquid into a gas called water vapour. When water vapour loses heat, it condenses back into tiny drops of liquid water. Round and round, evaporation and condensation move water all over our planet.",
-   "shots": [
-    [
-     "gains",
-     1.22,
-     420,
-     520
-    ],
-    [
-     "loses",
-     1.22,
-     960,
-     340
-    ],
-    [
-     "round",
-     1,
-     600,
-     450
-    ]
-   ]
+   "text": "Now for the textbook link! In Primary Four, you learn about the water cycle. When water gains heat, it evaporates: it changes from a liquid into a gas called water vapour. When water vapour loses heat, it condenses back into tiny drops of liquid water. Round and round, evaporation and condensation move water all over our planet."
   },
   {
    "id": "salt",
    "scene": "salt",
    "hold": 1.0,
-   "text": "And here's a surprise. When sea water evaporates, the salt stays behind. So rain is fresh water, even when it came from the sea!",
-   "shots": [
-    [
-     "salt",
-     1.25,
-     380,
-     640
-    ],
-    [
-     "fresh",
-     1,
-     600,
-     450
-    ]
-   ]
+   "text": "And here's a surprise. When sea water evaporates, the salt stays behind. So rain is fresh water, even when it came from the sea!"
   },
   {
    "id": "try",
    "scene": "try",
-   "text": "Try this at home! After it rains, find a puddle on a sunny path. Draw around its edge with chalk. Come back every hour and draw around it again. Watch it shrink! Where did the water go?",
-   "shots": [
-    [
-     "chalk",
-     1.2,
-     560,
-     500
-    ],
-    [
-     "hour",
-     1,
-     600,
-     450
-    ]
-   ]
+   "text": "Try this at home! After it rains, find a puddle on a sunny path. Draw around its edge with chalk. Come back every hour and draw around it again. Watch it shrink! Where did the water go?"
   },
   {
    "id": "think",

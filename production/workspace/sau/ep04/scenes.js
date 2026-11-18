@@ -257,14 +257,14 @@ S.recap = (() => { const s = scene("recap", "#fff3b0", "#ffd6a5"), st = s.stage;
     tx(g, {x: 0, y: l2 ? 100 : 118, "text-anchor": "middle", "font-size": 27, "font-weight": 700, fill: INK, "data-fit": 236}, l1); if (l2) tx(g, {x: 0, y: 132, "text-anchor": "middle", "font-size": 27, "font-weight": 700, fill: INK, "data-fit": 236}, l2);
     el("circle", A4({cx: -104, cy: -124, r: 24, fill: "#7209b7", "stroke-width": 4}), g); tx(g, {x: -104, y: -113, "text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#fff"}, String(i + 1)); g.x = x; g.y = y; g.w = w; return g; });
   s.me = el("g", {}, st); glow4(s.me, "#ffe14d", 70, .9, .3); s.mo = mol4(s.me, "mo", 26); const yt = tag4(s.me, "YOU", "#ffe14d", INK, 22); at4(yt, 0, 84);
-  s.home = chip(st, "…and round again: the water cycle!", "#06d6a0", {fs: 40, ink: INK});
+  s.home = chip(st, "…and round again: the water cycle!", "#06d6a0", {fs: 44, ink: INK});
   s.run = t => { const tt = s.cards.map((g, i) => cue("recap", g.w, .12 + i * .1)), th = cue("recap", "home", .96);
-    popAt(s.title, 600, 40, t, SC.recap.t0 - .2);
+    popAt(s.title, 600, 40, t, SC.recap.t0 - .2); op(s.title, on(t, SC.recap.t0 - .2, tt[0] - .3, .2));
     s.cards.forEach((g, i) => { const done = t >= tt[i] - .1, now = on(t, tt[i] - .1, (tt[i + 1] || th) - .1, .2); tf(g, `translate(${g.x} ${g.y}) scale(${1 + .13 * now})`); op(g, done ? 1 : .32); set(g.bg, "fill", now > .5 ? "#fffbe0" : "#fff"); set(g.bg, "stroke", now > .5 ? "#f72585" : INK); });
     let x = s.cards[0].x - 60, y = s.cards[0].y - 60, hop = 0; const stops = tt.concat([th]);
     stops.forEach((tw, i) => { const k = ease((t - (tw - .35)) / .5), c = s.cards[i % 8]; if (k > 0) { hop = Math.sin(clamp((t - (tw - .35)) / .5) * Math.PI); x = lerp(x, c.x + 78, k); y = lerp(y, c.y - 96, k); } });
     at4(s.me, x, y - hop * 46); face4(s.mo, t > th ? 1 : 0, 0); op(s.me, ramp(t, tt[0] - .5, tt[0] - .2));
-    popAt(s.home, 600, 460, t, th + .1); }; return s; })();
+    popAt(s.home, 600, 40, t, th + .1); }; return s; })();
 
 // ---- THE TEXTBOOK LINK: the water cycle. Gains heat: evaporation (liquid -> gas, water vapour). Loses heat: condensation (gas -> liquid). Round and round.
 S.cycle = (() => { const s = scene("cycle", "#bde0fe", "#e0f4ff"), st = s.stage;
@@ -282,32 +282,40 @@ S.cycle = (() => { const s = scene("cycle", "#bde0fe", "#e0f4ff"), st = s.stage;
   // heat rays from the Sun down to the water
   s.rays = [[230, 250, 300, 640], [200, 280, 180, 640], [260, 220, 410, 640]].map(([x1, y1, x2, y2]) => el("line", {x1, y1, x2, y2, stroke: "#ffb703", "stroke-width": 9, "stroke-dasharray": "22 18", "stroke-linecap": "round"}, st));
   // evaporation: wavy arrows up, with molecules leaving the water
-  s.ev = el("g", {}, st); [[90, 0], [250, 1], [400, 2]].forEach(([x, j]) => { el("path", {d: `M${x} 670 q-26 -28 0 -56 q26 -28 0 -56 q-26 -28 0 -56`, fill: "none", stroke: INK, "stroke-width": 22, "stroke-linecap": "round"}, s.ev);
-    el("path", {d: `M${x} 670 q-26 -28 0 -56 q26 -28 0 -56 q-26 -28 0 -56`, fill: "none", stroke: "#f77f00", "stroke-width": 12, "stroke-linecap": "round"}, s.ev); el("path", A4({d: `M${x - 30} 508 L${x} 460 L${x + 30} 508 Z`, fill: "#f77f00", "stroke-width": 5}), s.ev); });
+  s.ev = el("g", {}, st); [[90, 0], [250, 1], [400, 2]].forEach(([x, j]) => { el("path", {d: `M${x} 686 q-26 -25 0 -50 q26 -25 0 -50 q-26 -25 0 -50`, fill: "none", stroke: INK, "stroke-width": 22, "stroke-linecap": "round"}, s.ev);
+    el("path", {d: `M${x} 686 q-26 -25 0 -50 q26 -25 0 -50 q-26 -25 0 -50`, fill: "none", stroke: "#f77f00", "stroke-width": 12, "stroke-linecap": "round"}, s.ev); el("path", A4({d: `M${x - 30} 540 L${x} 492 L${x + 30} 540 Z`, fill: "#f77f00", "stroke-width": 5}), s.ev); });
   s.vap = [[380, 300], [500, 220], [640, 290], [760, 200], [820, 300], [460, 410]].map(([x, y], i) => { const g = mol4(st, "plain", 17); g.x = x; g.y = y; g.i = i; return g; });
   // the cloud, its drops, the rain
   s.cloud = cloud4(st, 21, 430, "#fff", 7); s.dots = el("g", {}, s.cloud); seed = 8; for (let i = 0; i < 26; i++) el("circle", {cx: (rnd() - .5) * 330, cy: -rnd() * 110 + 30, r: 6, fill: "#4cc9f0", stroke: INK, "stroke-width": 2}, s.dots);
-  s.rain = rain4(st, 22, 4, {x0: 900, w: 330, y0: 380, h: 120, len: 26, speed: 330, sw: 6, col: "#1d6fe0", slant: -.1});
+  s.rain = rain4(st, 22, 4, {x0: 850, w: 320, y0: 380, h: 120, len: 26, speed: 330, sw: 6, col: "#1d6fe0", slant: -.1});
   // labels: processes are pills (with the change of state under them), things are white outlined words
-  const proc = (name, sub, col) => { const g = el("g", {}, st); const c = chip(g, name, col, {fs: 44}); op(c, 1); g.sub = lab4(g, sub, 34, "#fff"); at4(g.sub, 0, 70); return g; };
+  const proc = (name, sub, col) => { const g = el("g", {}, st); const c = chip(g, name, col, {fs: 44}); op(c, 1); g.sub = lab4(g, sub, 34, "#fff"); at4(g.sub, 0, 62); return g; };
   s.pE = proc("EVAPORATION", "liquid → gas", "#f77f00"); s.pC = proc("CONDENSATION", "gas → liquid", "#7209b7");
   s.hE = chip(st, "🔥 water gains heat", "#e63946", {fs: 30}); s.hC = chip(st, "❄️ water vapour loses heat", "#3a86ff", {fs: 30});
   s.lv = el("g", {}, st); at4(lab4(s.lv, "water vapour", 40, "#fff"), 0, 0); at4(lab4(s.lv, "(a gas: you cannot see it)", 28, "#fff"), 0, 40);
   s.lc = el("g", {}, st); at4(lab4(s.lc, "cloud: tiny drops", 34, "#fff", "start"), 0, 0); at4(lab4(s.lc, "of liquid water", 34, "#fff", "start"), 0, 40); s.lr = lab4(st, "rain", 40, "#fff", "start"); s.ld = lab4(st, "drains and canals", 32, "#fff"); s.lw = lab4(st, "reservoir", 38, "#fff"); s.ls = lab4(st, "the Sun", 32, "#fff");
   s.title = chip(st, "📘 Primary 4 Science: the water cycle", "#1d3557", {fs: 46});
-  s.loopA = el("g", {}, st); [["M330 250 Q560 60 800 170", 0], ["M1150 520 Q1150 600 1060 610", 1], ["M430 800 Q250 830 120 760", 2]].forEach(([d]) => { const p = el("path", {d, fill: "none", stroke: "#ffe14d", "stroke-width": 12, "stroke-linecap": "round", "stroke-dasharray": "4 22"}, s.loopA); });
+  // real life (the teacher: link every idea to a Singapore moment): clothes drying on a bamboo pole; drops on a cold drink
+  const real = (cap1, cap2, col, draw) => { const g = el("g", {}, st); el("circle", A4({r: 122, fill: col, "stroke-width": 8, filter: "url(#sh)"}), g); const m = el("g", {"clip-path": clip4(c => el("circle", {r: 118}, c))}, g); draw(m);
+    el("circle", {r: 122, fill: "none", stroke: INK, "stroke-width": 8}, g); at4(lab4(g, cap1, 30, "#fff"), 0, 166); at4(lab4(g, cap2, 30, "#ffe14d"), 0, 202); return g; };
+  s.rE = real("like clothes drying", "on a bamboo pole", "#bfe6ff", m => { hdb4(m, -130, 130, 150, 220, "#f4d6a0", {sd: 5}); el("rect", A4({x: -40, y: -34, width: 170, height: 12, rx: 6, fill: "#e9c46a", "stroke-width": 4}), m);
+    [["#ef476f", -6], ["#06d6a0", 70]].forEach(([c, x]) => { const h = shirt4(m, c); tf(h, `translate(${x} -30) scale(.62) rotate(6)`); op(h.wet, 0); }); at4(sun4(m, 22), -74, -74); });
+  s.rC = real("like the drops on", "a cold drink", "#ffe8c2", m => { el("rect", {x: -130, y: 62, width: 260, height: 70, fill: "#c98b5a"}, m); el("path", A4({d: "M-44 -78 L-34 66 H34 L44 -78 Z", fill: "#fff", "fill-opacity": .65, "stroke-width": 5}), m); el("path", {d: "M-40 -40 L-33 62 H33 L40 -40 Z", fill: "#8d5524", opacity: .85}, m);
+    [[-18, -52], [10, -60], [22, -40]].forEach(([x, y]) => el("rect", A4({x: x - 13, y: y - 13, width: 26, height: 26, rx: 5, fill: "#dff6ff", "stroke-width": 3}), m)); el("line", {x1: 14, y1: -110, x2: -2, y2: 20, stroke: "#e63946", "stroke-width": 8, "stroke-linecap": "round"}, m);
+    [[-52, -20], [-48, 22], [50, -6], [46, 34], [-56, 50], [54, -44]].forEach(([x, y]) => at4(drop4(m, 8, "#4cc9f0"), x, y)); });
+  s.loopA = el("g", {}, st); [["M420 350 Q600 250 790 262", 0], ["M1150 520 Q1150 600 1060 610", 1], ["M430 800 Q250 830 120 760", 2]].forEach(([d]) => { const p = el("path", {d, fill: "none", stroke: "#ffe14d", "stroke-width": 12, "stroke-linecap": "round", "stroke-dasharray": "4 22"}, s.loopA); });
   s.round = chip(st, "🔁 round and round: the water cycle", "#06d6a0", {fs: 42, ink: INK});
   s.run = t => { const a = (w, f) => cue("cycle", w, f), t0 = SC.cycle.t0, tg = a("gains", .22), te = a("evaporates", .28), tl = a("liquid", .36), tv = a("vapour", .44), tlo = a("loses", .55), tc = a("condenses", .6), td = a("drops", .68), tr = a("round", .78);
-    popAt(s.title, 700, 30, t, a("primary", .08)); op(s.title, on(t, a("primary", .08), tv - .2, .2)); at4(s.ls, 300, 150, Math.max(0, pop(t, t0 + .3))); at4(s.lw, 150, 850, Math.max(0, pop(t, t0 + .6)));
+    popAt(s.title, 700, 30, t, a("primary", .08)); op(s.title, on(t, a("primary", .08), tv - .2, .2)); at4(s.ls, 150, 326, Math.max(0, pop(t, t0 + .3))); at4(s.lw, 110, 820, Math.max(0, pop(t, t0 + .6)));
     tf(s.sun.rays, `rotate(${t * 8})`); s.rays.forEach(r => { op(r, on(t, tg, tlo, .3)); set(r, "stroke-dashoffset", -t * 70); });
     popAt(s.hE, 250, 760, t, tg); op(s.hE, on(t, tg, 1e9, .2));
-    op(s.ev, ramp(t, te - .1, te + .3)); popAt(s.pE, 250, 340, t, te); op(s.pE.sub, ramp(t, tl - .1, tl + .2));
+    op(s.ev, ramp(t, te - .1, te + .3)); popAt(s.pE, 262, 392, t, te); op(s.pE.sub, ramp(t, tl - .1, tl + .2));
     s.vap.forEach(g => { const tt = tv - .3 + g.i * .12, k = ramp(t, tt, tt + .8); at4(g, lerp(250, g.x + 60, k) + 5 * Math.sin(t * 1.3 + g.i), lerp(600, g.y, k) + 5 * Math.cos(t * 1.1 + g.i * 2)); op(g, .9 * k); });
     popAt(s.lv, 600, 96, t, tv);
-    popAt(s.hC, 1080, 36, t, tlo); const ck = Math.max(0, pop(t, tc - .2, .6)); at4(s.cloud, 1060, 340, ck); popAt(s.pC, 1060, 118, t, tc); at4(s.lc, 1300, 330, Math.max(0, pop(t, tc + .5)));
-    op(s.rain.G, ramp(t, td - .1, td + .4)); runRain4(s.rain, t); at4(s.lr, 1270, 470, Math.max(0, pop(t, td)));
+    popAt(s.hC, 1040, 36, t, tlo); const ck = Math.max(0, pop(t, tc - .2, .6)); at4(s.cloud, 1000, 340, ck); popAt(s.pC, 1000, 118, t, tc); at4(s.lc, 1262, 300, Math.max(0, pop(t, tc + .5)));
+    op(s.rain.G, ramp(t, td - .1, td + .4)); runRain4(s.rain, t); at4(s.lr, 1200, 440, Math.max(0, pop(t, td)));
     at4(s.ld, 800, 760, Math.max(0, pop(t, td + .7))); set(s.cf, "stroke-dashoffset", -t * 60); op(s.cf, ramp(t, td + .3, td + .8));
-    op(s.loopA, ramp(t, tr - .1, tr + .4)); [...s.loopA.children].forEach(p => set(p, "stroke-dashoffset", -t * 70)); popAt(s.round, 720, 868, t, tr + .2); if (t > tr) op(s.hE, 0); }; return s; })();
+    op(s.loopA, ramp(t, tr - .1, tr + .4)); [...s.loopA.children].forEach(p => set(p, "stroke-dashoffset", -t * 70)); popAt(s.round, 620, 868, t, tr + .2); popAt(s.rE, 1330, 690, t, te + 1.0); popAt(s.rC, 1620, 690, t, tc + 1.2); if (t > tr) op(s.hE, 0); }; return s; })();
 
 // ---- SALT: sea water evaporates, the salt stays behind; rain is fresh water
 function salt4(p, r = 16) { const g = el("g", {}, p); el("rect", {x: -r, y: -r, width: r * 2, height: r * 2, rx: r * .35, fill: "#f1f3f5", stroke: INK, "stroke-width": Math.max(2.5, r * .2)}, g);
@@ -321,14 +329,14 @@ S.salt = (() => { const s = scene("salt", "#0077b6", "#48cae4"), st = s.stage;
   el("path", {d: "M800 520 Q860 560 880 700 Q900 820 1040 860 Q1300 900 1790 880 V1040 H800 Z", fill: "#e9c46a", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round"}, st);
   seed = 4; s.mols = []; for (let i = 0; i < 9; i++) { const g = mol4(st, i < 5 ? "friend" : "plain", 36); g.x = -80 + i * 100 + rnd() * 20; g.y = 590 + (i % 3) * 95 + rnd() * 30; g.i = i; s.mols.push(g); }
   s.salts = []; for (let i = 0; i < 6; i++) { const g = salt4(st, 26); g.x = -30 + i * 140 + rnd() * 20; g.y = 640 + ((i + 1) % 3) * 90 + rnd() * 20; g.i = i; s.salts.push(g); }
-  s.lsea = lab4(st, "sea water", 48, "#fff"); s.lsalt = el("g", {}, st); const sc = chip(s.lsalt, "the salt stays behind", "#f1f3f5", {fs: 44, ink: INK}); op(sc, 1);
+  s.lsea = lab4(st, "the sea at East Coast Park", 44, "#fff", "start"); s.lsalt = el("g", {}, st); const sc = chip(s.lsalt, "the salt stays behind", "#f1f3f5", {fs: 44, ink: INK}); op(sc, 1);
   s.up = [0, 1, 2, 3].map(i => { const g = mol4(st, "friend", 40); g.i = i; return g; });
   s.lvap = lab4(st, "only the water evaporates", 44, "#fff");
   s.cloud = cloud4(st, 31, 400, "#fff", 7); s.rain = rain4(st, 16, 14, {x0: 880, w: 300, y0: 330, h: 250, len: 30, speed: 420, sw: 6, col: "#1d6fe0", slant: 0});
   s.glass = el("g", {}, st); el("path", A4({d: "M-80 -120 L-62 120 H62 L80 -120", fill: "#fff", "fill-opacity": .5}), s.glass); s.fill = el("path", {d: "M-70 0 L-62 116 H62 L70 0 Z", fill: "#4cc9f0", stroke: INK, "stroke-width": 4}, s.glass);
   s.fresh = chip(st, "💧 Rain is fresh water", "#06d6a0", {fs: 46, ink: INK}); s.tick = emo(st, 0, 0, 90, "✅");
   s.run = t => { const a = (w, f) => cue("salt", w, f), t0 = SC.salt.t0, te = a("evaporates", .35), ts = a("salt", .45), tf_ = a("fresh", .7), tse = a("sea", .92);
-    popAt(s.title, 700, 90, t, t0); op(s.title, on(t, t0, te + .2, .25)); at4(s.lsea, 80, 450, Math.max(0, pop(t, t0 + .5)));
+    popAt(s.title, 700, 90, t, t0); op(s.title, on(t, t0, te + .2, .25)); at4(s.lsea, -110, 452, Math.max(0, pop(t, t0 + .5)));
     s.mols.forEach(g => at4(g, g.x + 6 * wob4(t, 2.2, g.i), g.y + 6 * wob4(t, 1.9, g.i * 3)));
     s.salts.forEach(g => { const tt = ts + g.i * .12, j = on(t, tt, tt + .9, .2); at4(g, g.x + 3 * wob4(t, 1.6, g.i * 5), g.y - 60 * Math.abs(Math.sin(clamp((t - tt) / .9) * Math.PI)) * (t > tt && t < tt + .9 ? 1 : 0), 1 + .25 * j); });
     popAt(s.lsalt, 330, 868, t, ts + .3);
