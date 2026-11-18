@@ -1,0 +1,82 @@
+{
+ "episode": "SAU EP03 Short 1",
+ "title": "Is your can worth 10 cents?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s1b",
+   "deposit",
+   "10¢ DEPOSIT",
+   "#2a9d8f"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "Is your empty drink can worth ten cents?"
+  },
+  {
+   "id": "s1b",
+   "scene": "news",
+   "text": "On the first of April, Singapore started the Beverage Container Return Scheme. Drinks in plastic bottles and metal cans now carry a ten-cent deposit."
+  },
+  {
+   "id": "s1c",
+   "scene": "news",
+   "text": "There are around a thousand return machines across Singapore. Put in your empty can, and the machine pays your ten cents back!"
+  },
+  {
+   "id": "c2",
+   "scene": "povScan",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "hum",
+     0
+    ],
+    [
+     "cable_zip",
+     1.0
+    ],
+    [
+     "ep03_beep",
+     2.25
+    ],
+    [
+     "ep03_coin",
+     2.55
+    ],
+    [
+     "pad_wonder",
+     3.85
+    ],
+    [
+     "ep03_crunch",
+     3.93
+    ],
+    [
+     "boom",
+     3.95
+    ]
+   ]
+  },
+  {
+   "id": "s1d",
+   "scene": "try",
+   "text": "Look for the Deposit Mark on your drink. Empty your can, keep it whole, and bring it to a return machine. Glass bottles and drink cartons don't go in the machine. They go in the blue recycling bin."
+  },
+  {
+   "id": "s1e",
+   "scene": "try",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

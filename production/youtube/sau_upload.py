@@ -101,6 +101,14 @@ VIDEOS = [
   "desc": "A saltwater crocodile at Sungei Buloh Wetland Reserve is an apex predator. Rewind its last meal: be the crocodile, then the mudskipper it ate, the crab the mudskipper ate, the mangrove leaf the crab ate, and the sunlight the leaf caught. Then Heart explains food chains, producers, consumers, predators and prey from the Primary 6 textbook."
           "\n\n" + EP8_CH + "\n\nSources: National Parks Board (nparks.gov.sg), Sungei Buloh Wetland Reserve." + FOOT,
   "tags": ["food chain", "producer", "consumer", "predator", "prey", "sungei buloh", "primary 6 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep03-s1", "file": f"{SAU}/ep03/short1.mp4", "thumb": f"{SAU}/ep03/thumb_short1.jpg", "at": "2026-11-26T09:00:00Z", "title": "Is Your Can Worth 10 Cents? #Shorts",
+  "desc": "Singapore's Beverage Container Return Scheme: a 10-cent deposit on drink cans and plastic bottles, paid back at return machines. Watch the full episode: What really happens to your drink can? (TheOneApp, Explored EP3)" + FOOT, "tags": ["recycling", "10 cents", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep03-s2", "file": f"{SAU}/ep03/short2.mp4", "thumb": f"{SAU}/ep03/thumb_short2.jpg", "at": "2026-11-27T09:00:00Z", "title": "How Does A Magnet Sort Cans? #Shorts",
+  "desc": "Magnets attract steel but not aluminium. Watch the full episode: What really happens to your drink can? (TheOneApp, Explored EP3)" + FOOT, "tags": ["magnets", "recycling", "aluminium", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep03b-s1", "file": f"{SAU}/ep03b/short1.mp4", "thumb": f"{SAU}/ep03b/thumb_short1.jpg", "at": "2026-11-29T09:00:00Z", "title": "Singapore's Only Landfill Is Filling Up! #Shorts",
+  "desc": "Semakau Landfill is expected to be full by about 2035. Watch the full episode: Where does our rubbish go? (TheOneApp, Explored EP3 Part 2)" + FOOT, "tags": ["semakau", "landfill", "recycling", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep03b-s2", "file": f"{SAU}/ep03b/short2.mp4", "thumb": f"{SAU}/ep03b/thumb_short2.jpg", "at": "2026-11-30T09:00:00Z", "title": "What Happens To Rubbish You Throw Away? #Shorts",
+  "desc": "Down the chute, burnt at a waste-to-energy plant, and the ash goes to Semakau. Watch the full episode: Where does our rubbish go? (TheOneApp, Explored EP3 Part 2)" + FOOT, "tags": ["rubbish", "waste to energy", "shorts", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
