@@ -74,7 +74,8 @@ function bg(p, c1, c2) {
   el("rect", {width: W, height: H, fill: `url(#${id})`}, p);
   const b = []; for (let i = 0; i < 14; i++) b.push({x: rnd() * W, y: rnd() * H, r: 20 + rnd() * 70, v: 8 + rnd() * 20, ph: rnd() * 6, e: el("circle", {fill: "#fff", opacity: .09}, p)});
   return b; }
-function moveBubbles(b, t) { b.forEach(o => { set(o.e, "cx", o.x + Math.sin(t * .4 + o.ph) * 30); set(o.e, "cy", ((o.y - o.v * t) % (H + 120) + H + 120) % (H + 120) - 60); set(o.e, "r", o.r); }); }
+// background circles stay still: nothing moves on screen unless it is the science happening (the teacher, 18 Nov 2026)
+function moveBubbles(b, t) { b.forEach(o => { if (o.placed) return; set(o.e, "cx", o.x); set(o.e, "cy", o.y); set(o.e, "r", o.r * .8); op(o.e, .06); o.placed = true; }); }
 // every scene draws in a 1200 x 900 box; the box sits left of the key-word shelf (episode) or mid-screen (Short)
 const BOX = SHORT ? "translate(0 560) scale(0.9)" : "translate(150 60)";
 function scene(name, c1, c2) { const g = el("g", {opacity: 0}, $("scenes")); const b = bg(g, c1, c2); const stage = el("g", {transform: BOX}, g); return {g, b, stage, name, run: () => {}}; }
