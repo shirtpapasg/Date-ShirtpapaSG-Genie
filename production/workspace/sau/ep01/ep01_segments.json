@@ -29,15 +29,9 @@
  "kws": [
   [
    "n1",
-   "burning",
+   "smoke",
    "HAZE = SMOKE",
    "#6c757d"
-  ],
-  [
-   "smoke2",
-   "five",
-   "PM2.5",
-   "#e63946"
   ],
   [
    "n1",
@@ -46,16 +40,22 @@
    "#3a86ff"
   ],
   [
-   "wind2",
-   "rain",
-   "RAIN WASHES IT OUT",
-   "#00b4d8"
+   "smoke2",
+   "five",
+   "PM2.5",
+   "#e63946"
   ],
   [
    "lungs1",
    "respiratory",
    "RESPIRATORY SYSTEM",
    "#ef476f"
+  ],
+  [
+   "wind2",
+   "rain",
+   "RAIN WASHES IT OUT",
+   "#00b4d8"
   ],
   [
    "impact",
@@ -102,15 +102,15 @@
    "shots": [
     [
      "fourth",
-     1.25,
+     1.2,
      600,
-     230
+     260
     ],
     [
      "air",
-     1.2,
+     1.12,
      600,
-     600
+     540
     ],
     [
      "seventh",
@@ -123,75 +123,213 @@
   {
    "id": "p1",
    "scene": "peat",
-   "silent": 5.2,
+   "silent": 5.4,
    "sfx": [
     [
-     "crackle",
-     0.0
+     "pad_tension",
+     0
     ],
     [
      "crackle",
-     2.5
+     0.1
+    ],
+    [
+     "pop",
+     1.9
+    ],
+    [
+     "crackle",
+     2.6
+    ],
+    [
+     "whoosh",
+     3.5
     ]
    ]
   },
   {
    "id": "p2",
-   "scene": "rise",
-   "silent": 4.2,
+   "scene": "povFire",
+   "silent": 4.4,
    "sfx": [
     [
-     "whoosh",
-     0.6
+     "deep",
+     0
+    ],
+    [
+     "crackle",
+     0.2
+    ],
+    [
+     "rush",
+     1.8
+    ],
+    [
+     "crackle",
+     2.4
     ],
     [
      "whoosh",
-     1.6
-    ],
-    [
-     "whoosh",
-     2.6
+     3.5
     ]
    ]
   },
   {
    "id": "p3",
-   "scene": "drift",
-   "silent": 6.2,
+   "scene": "povRise",
+   "silent": 4.6,
    "sfx": [
     [
+     "rush",
+     0
+    ],
+    [
+     "pass_by",
+     0.9
+    ],
+    [
+     "pass_by",
+     1.4
+    ],
+    [
+     "whoosh",
+     1.8
+    ],
+    [
+     "pad_wonder",
+     2.0
+    ],
+    [
      "wind",
-     0.0
+     2.1
     ]
    ]
   },
   {
    "id": "p4",
-   "scene": "arrive",
-   "silent": 4.6,
+   "scene": "drift",
+   "silent": 6.2,
    "sfx": [
     [
-     "hum",
-     0.0
+     "wind",
+     0
     ],
     [
-     "cough",
-     3.4
+     "pop",
+     0.4
+    ],
+    [
+     "ping",
+     4.6
     ]
    ]
   },
   {
    "id": "p5",
-   "scene": "breath",
-   "silent": 6.2,
+   "scene": "povArrive",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "reveal",
+     2.3
+    ],
+    [
+     "pad_tension",
+     2.4
+    ],
+    [
+     "pass_by",
+     3.0
+    ],
+    [
+     "cough",
+     4.0
+    ],
+    [
+     "cough",
+     4.45
+    ]
+   ]
+  },
+  {
+   "id": "p6",
+   "scene": "povNose",
+   "silent": 4.8,
    "sfx": [
     [
      "breath",
-     0.4
+     0
     ],
     [
-     "breath",
+     "rush",
+     0.1
+    ],
+    [
+     "whoosh",
+     0.95
+    ],
+    [
+     "pass_by",
+     1.6
+    ],
+    [
+     "thud",
+     2.0
+    ],
+    [
+     "pass_by",
+     2.5
+    ],
+    [
+     "thud",
+     2.9
+    ],
+    [
+     "pass_by",
      3.4
+    ]
+   ]
+  },
+  {
+   "id": "p7",
+   "scene": "povLung",
+   "silent": 5.6,
+   "sfx": [
+    [
+     "pipe_rush",
+     0
+    ],
+    [
+     "pass_by",
+     1.9
+    ],
+    [
+     "pass_by",
+     2.8
+    ],
+    [
+     "reveal",
+     3.05
+    ],
+    [
+     "thud",
+     3.9
+    ],
+    [
+     "bubble",
+     4.2
+    ],
+    [
+     "bubble",
+     4.9
     ]
    ]
   },
@@ -272,13 +410,45 @@
    ]
   },
   {
-   "id": "p6",
-   "scene": "rainfall",
-   "silent": 5.0,
+   "id": "p8",
+   "scene": "povRain",
+   "silent": 5.4,
    "sfx": [
     [
      "rain",
-     0.0
+     0
+    ],
+    [
+     "pass_by",
+     0.7
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "bubble",
+     2.15
+    ],
+    [
+     "splash",
+     2.25
+    ],
+    [
+     "rush",
+     2.4
+    ],
+    [
+     "splash",
+     4.25
+    ],
+    [
+     "thud",
+     4.25
+    ],
+    [
+     "chime",
+     4.7
     ]
    ]
   },
@@ -317,13 +487,21 @@
    "text": "So remember. Haze is tiny smoke particles, carried here by the wind, and washed away by the rain. And your nose and lungs work hard to keep you safe. Next week: Singapore has no oil, coal or gas of its own. So how do we keep the lights on?"
   },
   {
-   "id": "p7",
+   "id": "p9",
    "scene": "clear",
    "silent": 3.4,
    "sfx": [
     [
+     "pad_wonder",
+     0
+    ],
+    [
      "chime",
      0.4
+    ],
+    [
+     "sparkle",
+     1.3
     ]
    ]
   },
