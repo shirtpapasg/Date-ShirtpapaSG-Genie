@@ -35,6 +35,15 @@ The teacher's weekly science-news videos for Singapore primary pupils (2026-11-1
    - Places (fires, pipelines, labels) go at their real longitude and latitude.
    - Never draw a made-up coastline or a "rough" map.
 
+## Thumbnails: the globe style (the teacher's favourite, 18 Nov 2026)
+
+Every TheOneApp, Explored video, Shorts and trailer included, uses `workspace/sau/globe_thumb.py`. It draws a real globe in space (Natural Earth coastlines), centred on Singapore, with the story drawn at true positions: haze, fires, pipelines, wind arrows, ships, the Sun. On top go the "TheOneApp Explored" pill, a giant white-and-yellow title, and the hook words with a yellow border (no box). Each video has a small JSON file next to its scenes, for example `ep01/globe_ep01.json` and `ep02/globe_short1.json`.
+
+    python3 globe_thumb.py epNN/globe_epNN.json epNN/thumb_epNN_globe.html && node shot.js epNN/thumb_epNN_globe.html epNN/thumb_epNN.png 1920 1080
+    (Shorts: "W": 1080, "H": 1920 in the JSON and 1080 1920 for shot.js; save the JPG at 1280x720 or 720x1280)
+
+For a story far from Singapore, move `centre` and the `cx`/`cy`. Keep rule 9: everything drawn on the globe sits at its real longitude and latitude.
+
 ## The kit (`production/workspace/sau/`)
 
 Everything renders in the cloud session; nothing needs the teacher's Mac.
