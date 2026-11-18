@@ -86,7 +86,19 @@
     ],
     [
      "whoosh",
-     2.6
+     0.52
+    ],
+    [
+     "whoosh",
+     1.32
+    ],
+    [
+     "whoosh",
+     2.12
+    ],
+    [
+     "thud",
+     2.9
     ]
    ]
   },
@@ -171,8 +183,20 @@
    "silent": 4.4,
    "sfx": [
     [
-     "space_warp",
+     "pad_wonder",
      0
+    ],
+    [
+     "flash",
+     0
+    ],
+    [
+     "sun_whoosh",
+     0
+    ],
+    [
+     "space_warp",
+     1.2
     ]
    ]
   },
@@ -182,12 +206,24 @@
    "silent": 4.6,
    "sfx": [
     [
-     "sun_whoosh",
+     "wind",
      0
     ],
     [
+     "pass_by",
+     0.9
+    ],
+    [
      "panel_hit",
-     3.6
+     2.9
+    ],
+    [
+     "power_up",
+     2.4
+    ],
+    [
+     "sparkle",
+     3.5
     ]
    ]
   },
@@ -202,7 +238,19 @@
     ],
     [
      "cable_zip",
-     0.4
+     0.3
+    ],
+    [
+     "bubble",
+     1.4
+    ],
+    [
+     "bubble",
+     2.9
+    ],
+    [
+     "pass_by",
+     2.2
     ]
    ]
   },
@@ -212,12 +260,32 @@
    "silent": 5.4,
    "sfx": [
     [
+     "pad_tension",
+     0
+    ],
+    [
      "neutron_zip",
-     0.2
+     1.55
+    ],
+    [
+     "buzz",
+     2.0
     ],
     [
      "split_boom",
-     2.8
+     2.95
+    ],
+    [
+     "neutron_zip",
+     3.0
+    ],
+    [
+     "neutron_zip",
+     3.15
+    ],
+    [
+     "stinger",
+     3.8
     ]
    ]
   },
@@ -240,12 +308,6 @@
     ],
     [
      "neighbours",
-     1.2,
-     870,
-     430
-    ],
-    [
-     "third",
      1,
      600,
      450
