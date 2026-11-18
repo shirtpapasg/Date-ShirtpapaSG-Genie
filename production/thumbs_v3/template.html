@@ -83,6 +83,6 @@ function layout(){
   document.getElementById('ban').setAttribute('width', bw + 84);
   window.TITLE_RIGHT = 38 + t[2].getComputedTextLength();
 }
-document.fonts.ready.then(() => { layout(); window.READY = true; });
+Promise.all(['500','600','700'].map(w => document.fonts.load(w + ' 80px Fredoka'))).then(() => document.fonts.ready).then(() => { layout(); window.READY = true; });
 </script>
 </body></html>
