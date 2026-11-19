@@ -49,6 +49,8 @@ EP8_CH = chapters(f"{SAU}/ep08/ep08_tl.json", {"hook": "An apex predator", "answ
     "povCroc": "Rewind: you are the crocodile", "recap": "The rewind", "textbook": "Food chains (P6)", "bigidea": "The big idea", "try": "Try this", "think": "Think about it", "close": "Remember"})
 EP9_CH = chapters(f"{SAU}/ep09/ep09_tl.json", {"hook": "Mosquitoes vs mosquitoes", "answer": "Last time's answer", "welcome": "Today you'll learn", "news": "The news: dengue in Singapore",
     "lab": "You are a Wolbachia mosquito", "recap": "Your journey", "textbook": "Life cycles (P3)", "dengue": "How dengue spreads", "try": "Try this", "think": "Think about it", "close": "Remember"})
+EP10_CH = chapters(f"{SAU}/ep10/ep10_tl.json", {"hook": "A dead grasshopper", "answer": "Last time's answer", "welcome": "Today you'll learn", "povGrasshopper": "You are a nutrient",
+    "news": "Food waste in Singapore", "recap": "Your journey", "textbook": "Decomposers (P6)", "helpers": "The little helpers", "security": "Food security", "semakau": "Compost, recycling and Pulau Semakau", "habit": "Make composting a habit", "try": "Try this", "think": "Think about it", "close": "Remember"})
 VIDEOS = [
  {"id": "sau-trailer", "live": True, "file": f"{SAU}/trailer/trailer.mp4", "at": "2026-11-25T11:00:00Z", "title": "This Grey Sky Was A Science Lesson 🌫️ #Shorts",
   "desc": "Smoke from hundreds of kilometres away. Mosquitoes that fight dengue. A country with no oil or gas of its own. Every Thursday, TheOneApp, Explored turns one real news story into the science from your textbook." + FOOT,
@@ -127,6 +129,10 @@ VIDEOS = [
   "desc": "Chew plain bread for a minute: your saliva breaks starch into sugar. Watch the full episode: Where does your food go? (TheOneApp, Explored EP6)" + FOOT, "tags": ["digestion", "saliva", "shorts", "theoneapp explored"]},
  {"id": "sau-ep06-s2", "file": f"{SAU}/ep06/short2.mp4", "thumb": f"{SAU}/ep06/thumb_short2.jpg", "at": "2026-12-09T09:00:00Z", "title": "Where Does Your Food Go? Mouth To Toilet! #Shorts",
   "desc": "Be a bit of fibre: mouth, gullet, stomach, intestines… plop! Watch the full episode: Where does your food go? (TheOneApp, Explored EP6)" + FOOT, "tags": ["digestive system", "fibre", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep10", "live": True, "file": f"{SAU}/ep10/ep10.mp4", "thumb": f"{SAU}/ep10/thumb_ep10.jpg", "at": "2026-12-19T09:00:00Z", "title": "Dead Things Become Your Food?! The Secret Life Of A Compost Bin | TheOneApp, Explored EP10",
+  "desc": "Be a tiny bit of nutrient in a dead grasshopper: decomposers break it down, you go into the soil and a school compost bin, feed a chye sim plant, get eaten by a grasshopper, and one day go back to the soil. Then Heart explains decomposers and detritivores from the Primary 6 textbook, how composting and recycling mean less ash at Pulau Semakau, food security, and how to make composting a habit."
+          "\n\n" + EP10_CH + "\n\nSources: National Environment Agency (nea.gov.sg) and Ministry of Sustainability and the Environment, food waste statistics 2025." + FOOT,
+  "tags": ["compost", "decomposers", "detritivores", "nutrient cycle", "food waste", "food security", "primary 6 science", "singapore", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
