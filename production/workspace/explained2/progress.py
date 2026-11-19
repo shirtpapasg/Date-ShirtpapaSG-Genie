@@ -7,7 +7,7 @@ JOBS = [("art", "Art direction", ["research.md", "STYLE_GUIDE.md", "frames/sheet
         ("characters", "Buddies (Pip, Basil, Momo)", ["characters/buddies.js", "characters/sheet.png", "characters/talk.mp4"]),
         ("script", "P3 EP1 pilot script", ["pilot_p3_ep01_script.md"]),
         ("script2", "P3 EP2 script", ["p3_ep02_script.md"]),
-        ("motion", "Animation quality", ["kit/motion.js", "motion_test/before_after.mp4"])]
+        ("motion", "EP1 Short: It walks. Is it ALIVE?", ["kit/motion.js", "MOTION_GUIDE.md", "short1/out/short1.mp4"])]
 now = datetime.datetime.now(datetime.timezone.utc)
 for jid, name, files in JOBS:
     p = {}
