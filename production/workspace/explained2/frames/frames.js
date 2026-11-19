@@ -77,6 +77,8 @@ F[1] = () => { sd = 5;
 /* ============ (b) the micro-world: you are inside a money plant leaf ============ */
 // Drawn, but true at primary level: a leaf is made of cells; each plant cell has a cell wall, a nucleus and chloroplasts.
 // The tall cells packed side by side under the top skin of the leaf are where most of the chloroplasts are.
+// P3 episodes show the leaf world with NO part labels (cells and their parts are P5/P6). Set true for a P5/P6 episode.
+const SHOW_P5_LABELS = false;
 F[2] = () => { sd = 21; const LB = {c: [0, 0]};
   const chloro = (x, y, a, s = 1, glow = true) => `<g transform="translate(${x} ${y}) rotate(${a}) scale(${s})">${glow ? `<ellipse rx="52" ry="38" fill="#E9FF6A" opacity=".95" filter="url(#b10)"/>` : ""}
     <ellipse rx="30" ry="17" fill="url(#bChl)" stroke="#2E9E4F" stroke-width="3.5"/><path d="M-14-6 v12 M-4-9 v18 M6-9 v18 M16-6 v12" stroke="#2E9E4F" stroke-width="3" stroke-linecap="round" opacity=".55"/><path d="M-18-9 q18-8 34 0" stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none" opacity=".7"/></g>`;
@@ -111,12 +113,12 @@ F[2] = () => { sd = 21; const LB = {c: [0, 0]};
   <g filter="url(#b10)" opacity=".9"><rect x="-260" y="560" width="400" height="700" rx="90" fill="#0D5A45"/><rect x="1790" y="-200" width="400" height="760" rx="90" fill="#0D5A45"/><ellipse cx="-40" cy="700" rx="60" ry="34" fill="#3FB86A" transform="rotate(70 -40 700)"/></g>
   <rect width="1920" height="1080" fill="url(#bYou)"/>${vignette(.55)}
   <!-- labels: one plain line each, the same kind of label (the name of the part) -->
-  ${label(700, 262, "chloroplast", LB.c[0], LB.c[1])}${label(1300, 262, "nucleus", 1452, 362)}${label(1380, 800, "cell wall", 1276, 720)}
+  ${SHOW_P5_LABELS ? label(700, 262, "chloroplast", LB.c[0], LB.c[1]) + label(1300, 262, "nucleus", 1452, 362) + label(1380, 800, "cell wall", 1276, 720) : ""}
   <!-- this is you -->
   <g filter="url(#drop)"><g transform="translate(610 1016) rotate(-62)">${hand("#FFE2C2")}</g><g transform="translate(1310 1016) rotate(62) scale(-1 1)">${hand("#FFE2C2")}</g></g>
   ${pill(960, 1010, 170, 72, "url(#gSun)", "YOU", 42, P.ink, {ls: 3})}
   ${grain(.13)}
-  ${pill(1040, 112, 980, 92, P.ink, "Inside the leaf: tiny <tspan fill=\"#D9F77A\">cells</tspan>, busy making food.", 44, "#fff", {w: 600})}
+  ${pill(1060, 112, 900, 92, P.ink, "Inside the money plant leaf. Is it <tspan fill=\"#D9F77A\">alive</tspan>?", 44, "#fff", {w: 600})}
   ${pill(250, 112, 360, 62, P.ink, "You: too small to see", 27, "#fff", {w: 600})}`; };
 
 /* ============ (c) the lock-in ============ */
@@ -200,8 +202,8 @@ F[5] = () => { sd = 3;
     <g filter="url(#dropS)"><rect x="620" y="186" width="520" height="92" rx="46" fill="url(#gSun)"/></g>
     <g transform="translate(672 232)"><circle r="30" fill="${P.ink}"/><path d="M-14 0 l10 11 l19-22" fill="none" stroke="${P.sun}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></g>
     ${T(912, 248, "MARK SENTENCE", 42, P.ink, {ls: 3})}
-    ${T(1650, 300, "1 of 4", 30, P.ink2, {w: 600, a: "end", x: 'opacity=".7"'})}
-    <foreignObject x="640" y="360" width="1020" height="330"><div xmlns="http://www.w3.org/1999/xhtml" class="mark">Living things need <b>water</b>, <b>food</b> and <b>air</b>.</div></foreignObject>
+    ${T(1650, 300, "2 of 3", 30, P.ink2, {w: 600, a: "end", x: 'opacity=".7"'})}
+    <foreignObject x="640" y="322" width="1020" height="390"><div xmlns="http://www.w3.org/1999/xhtml" class="mark">Classification is the <b>grouping</b> of things based on their <b>similarities</b> and <b>differences</b>.</div></foreignObject>
     <path d="M640 716 H1650" stroke="${P.ink}" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round" opacity=".3"/>
     ${T(640, 776, "Primary 3 Science  ·  Diversity  ·  Living and non-living things", 30, P.ink2, {a: "start", w: 500})}
   </g>
