@@ -13,7 +13,7 @@
   {
    "id": "o1",
    "scene": "airOut",
-   "silent": 6.4,
+   "silent": 5.4,
    "sfx": [
     [
      "pad_wonder",
@@ -25,111 +25,57 @@
     ],
     [
      "ep07_pant",
-     0.32
+     0.27
     ],
     [
      "pop",
-     0.8
+     0.68
     ],
     [
      "reveal",
-     1.44
+     1.21
     ],
     [
      "sun_whoosh",
-     2.56
-    ]
-   ]
-  },
-  {
-   "id": "o2",
-   "scene": "povNose",
-   "silent": 6.4,
-   "sfx": [
-    [
-     "ep07_sniff",
-     0.0
-    ],
-    [
-     "pass_by",
-     2.08
-    ],
-    [
-     "pass_by",
-     3.2
-    ],
-    [
-     "pass_by",
-     4.32
-    ],
-    [
-     "rush",
-     1.44
-    ]
-   ]
-  },
-  {
-   "id": "o3",
-   "scene": "povWindpipe",
-   "silent": 7.2,
-   "sfx": [
-    [
-     "pipe_rush",
-     0.0
-    ],
-    [
-     "pad_wonder",
-     1.12
-    ],
-    [
-     "pass_by",
-     2.56
-    ],
-    [
-     "pass_by",
-     4.16
-    ],
-    [
-     "pass_by",
-     5.6
+     2.16
     ]
    ]
   },
   {
    "id": "o4",
    "scene": "povAirSac",
-   "silent": 8.0,
+   "silent": 6.75,
    "sfx": [
     [
      "reveal",
-     0.16
+     0.14
     ],
     [
      "bubble",
-     1.6
+     1.35
     ],
     [
      "bubble",
-     2.72
+     2.3
     ],
     [
      "bubble",
-     3.84
+     3.24
     ],
     [
      "ep07_squish",
-     6.24
+     5.27
     ],
     [
      "splash",
-     6.88
+     5.8
     ]
    ]
   },
   {
    "id": "o5",
    "scene": "povRBC",
-   "silent": 6.4,
+   "silent": 5.4,
    "sfx": [
     [
      "pad_wonder",
@@ -141,92 +87,26 @@
     ],
     [
      "pass_by",
-     1.44
+     1.21
     ],
     [
      "thud",
-     2.88
+     2.43
     ],
     [
      "sparkle",
-     3.36
+     2.83
     ],
     [
      "rush",
-     3.52
-    ]
-   ]
-  },
-  {
-   "id": "o6",
-   "scene": "povHeart",
-   "silent": 8.0,
-   "sfx": [
-    [
-     "ep07_flow",
-     0.0
-    ],
-    [
-     "ep07_heart",
-     2.35
-    ],
-    [
-     "ep07_heart",
-     4.27
-    ],
-    [
-     "boom",
-     4.32
-    ],
-    [
-     "pipe_rush",
-     4.64
-    ],
-    [
-     "pass_by",
-     5.44
-    ]
-   ]
-  },
-  {
-   "id": "o7",
-   "scene": "povArtery",
-   "silent": 7.2,
-   "sfx": [
-    [
-     "pad_wonder",
-     0.0
-    ],
-    [
-     "ping",
-     0.32
-    ],
-    [
-     "whoosh",
-     2.24
-    ],
-    [
-     "ep07_flow",
-     2.56
-    ],
-    [
-     "pass_by",
-     3.84
-    ],
-    [
-     "pass_by",
-     5.12
-    ],
-    [
-     "pass_by",
-     6.08
+     2.97
     ]
    ]
   },
   {
    "id": "o8",
    "scene": "povMuscle",
-   "silent": 10.4,
+   "silent": 8.78,
    "sfx": [
     [
      "ep07_squish",
@@ -234,43 +114,43 @@
     ],
     [
      "pop",
-     0.8
+     0.68
     ],
     [
      "flash",
-     3.09
+     2.61
     ],
     [
      "power_up",
-     3.12
+     2.63
     ],
     [
      "ep07_twitch",
-     3.15
+     2.66
     ],
     [
      "ep07_twitch",
-     4.11
+     3.47
     ],
     [
      "pop",
-     3.6
+     3.04
     ],
     [
      "pop",
-     3.84
+     3.24
     ],
     [
      "pad_wonder",
-     6.96
+     5.87
     ],
     [
      "sun_whoosh",
-     6.72
+     5.67
     ],
     [
      "ding",
-     8.0
+     6.75
     ]
    ]
   },

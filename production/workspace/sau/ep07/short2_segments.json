@@ -17,7 +17,7 @@
    "sfx": [
     [
      "ep07_birds",
-     0
+     0.0
     ],
     [
      "ep07_whistle",
@@ -100,7 +100,12 @@
   {
    "id": "s2c",
    "scene": "news",
-   "text": "Here's an amazing fact. Your heart beats about a hundred thousand times every day. And it pumps your blood all the way around your body in about one minute."
+   "text": "Your heart beats about a hundred thousand times every day. And it pumps your blood all the way around your body in about one minute."
+  },
+  {
+   "id": "s2f",
+   "scene": "news",
+   "text": "Your lungs pass oxygen into your blood. Your heart pumps that blood around your body."
   },
   {
    "id": "s2d",
