@@ -18,8 +18,8 @@ const PAN = [
   ["front view", [1040, 404], [207, 313], { look: 1 }, "look 1 (front view)"]];
 const T = (x, y, s, z = 30, a = "middle") => `<text x="${x}" y="${y}" font-size="${z}" text-anchor="${a}">${s}</text>`;
 let defs = "", o = `<rect width="3600" height="2330" fill="#FFF8EA"/>` + T(60, 70, "Basil: the teacher's reference panels (left of each pair) and the SVG rig (right)", 46, "start");
-const refImg = (i, x, y, c, op = 1) => { const [bx, by] = PAN[i][1], k = c / 322; defs += `<clipPath id="c${i}_${x}"><rect x="${x}" y="${y}" width="${c}" height="${c}" rx="${22 * k}"/></clipPath>`;
-  return `<image href="${REF}" x="${x - bx * k}" y="${y - by * k}" width="${RW * k}" height="${RH * k}" clip-path="url(#c${i}_${x})" opacity="${op}"/>`; };
+const refImg = (i, x, y, c, op = 1) => { const [bx, by] = PAN[i][1], k = c / 322; defs += `<clipPath id="c${i}_${x}_${y}"><rect x="${x}" y="${y}" width="${c}" height="${c}" rx="${22 * k}"/></clipPath>`;
+  return `<image href="${REF}" x="${x - bx * k}" y="${y - by * k}" width="${RW * k}" height="${RH * k}" clip-path="url(#c${i}_${x}_${y})" opacity="${op}"/>`; };
 const rig = (i, x, y, c, extra) => { const k = c / 322, [fx, fy] = PAN[i][2]; return Buddies.draw("basil", x + fx * k, y + fy * k, 290 * k, 1.0, Object.assign({ shadow: false, blink: false, breathe: false }, PAN[i][3], extra)); };
 const C = 430;
 PAN.forEach((p, i) => { const x = 40 + (i % 4) * 890, y = 110 + Math.floor(i / 4) * 540;
@@ -27,7 +27,7 @@ PAN.forEach((p, i) => { const x = 40 + (i % 4) * 890, y = 110 + Math.floor(i / 4
 // overlays: the rig drawn at 55% over the reference at the same size
 const yo = 1260, CO = 840;
 o += T(60, yo - 30, "Overlay check: rig (55%) on top of the reference at the same size. Three-quarter views and the front view.", 40, "start");
-[[6, {}], [4, {}], [1, {}], [7, {}]].forEach(([i, ex], j) => { const x = 40 + j * 890;
+[[6, {}], [4, {}], [3, {}], [7, {}]].forEach(([i, ex], j) => { const x = 40 + j * 890;
   o += refImg(i, x, yo, CO) + `<svg x="${x}" y="${yo}" width="${CO}" height="${CO}" viewBox="${x} ${yo} ${CO} ${CO}" opacity=".55">${rig(i, x, yo, CO, ex)}</svg>` + T(x + CO / 2, yo + CO + 44, PAN[i][0] + " + rig", 32); });
 o += T(60, 2270, "Rig drawn flat-vector per the style guide (self-coloured lines, soft bumps instead of sharp spikes). Eye centres, head width and snout length are matched to the panels above.", 30, "start");
 document.getElementById("v").innerHTML = `<defs>${defs}</defs>` + o;

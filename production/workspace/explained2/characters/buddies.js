@@ -71,8 +71,8 @@
       head: { cx: 0, cy: -238, rx: 86, ry: 60 }, chinY: -180,
       eyes: [{ x: -18, y: -251, r: 19.5, sx: 1 }, { x: 57, y: -265, r: 14.5, sx: .68 }], brow: 20, browGap: 5, browK: .5,
       mouth: { x: 40, y: -205, hw: 56, cusp: false, oh: 20, rot: 0, B: [-41, -226], D: [22, -210], F: [72, -236] }, happyOpen: 0,
-      sh: { L: [-56, -142], R: [50, -146] }, armW: 24, reach: 88,
-      rest: { sit: { L: [-8, -98], R: [38, -100], bend: 10 }, stand: { L: [-8, -98], R: [38, -100], bend: 10 } },
+      sh: { L: [-50, -140], R: [48, -146] }, armW: 24, reach: 88,
+      rest: { sit: { L: [-4, -98], R: [36, -102], bend: -16 }, stand: { L: [-4, -98], R: [36, -102], bend: -16 } },
       chin: { L: [-30, -182], R: [46, -180] }, chest: [10, -128], legs: [[-40, 24], [44, 22]] },
     /* Momo: grey-white tabby kitten; pink inner ears, big sparkly eyes, forehead and cheek stripes, white muzzle, chest and paws, striped tail with a white tip. */
     momo: { H: 310, native: 1, lift: 24, hand: "R", seed: 3.1,
@@ -92,8 +92,8 @@
         P("M-182 -70 C-182 -50 -166 -34 -142 -32 M-160 -92 C-158 -76 -146 -66 -128 -64", null, sp.line, 3, 'opacity=".45"')); },
     // thick curled tail with rows of scales (short arcs), as on the reference sheet
     basil(sp, t) { const a = 1.6 * Math.sin(TAU * t / 3.3);
-      const pts = sample([[[34, -36], [-16, 6], [-108, 12], [-150, -16]], [[-150, -16], [-194, -46], [-198, -122], [-160, -152]], [[-160, -152], [-134, -172], [-98, -160], [-106, -126]]], 12);
-      const N = pts.length - 1, wf = k => lerp(28, 6, Math.pow(k, 1.7)); let sc = "", edge = "";
+      const pts = sample([[[34, -30], [-30, -18], [-110, -12], [-146, -40]], [[-146, -40], [-180, -66], [-178, -132], [-141, -150]], [[-141, -150], [-114, -163], [-86, -152], [-84, -125]]], 12);
+      const N = pts.length - 1, wf = k => lerp(26, 7, Math.pow(k, 1.8)); let sc = "", edge = "";
       for (let i = 4; i < N - 1; i++) { const a0 = pts[i - 1], b0 = pts[i + 1], d = Math.hypot(b0[0] - a0[0], b0[1] - a0[1]), tx = (b0[0] - a0[0]) / d, ty = (b0[1] - a0[1]) / d, nx = -ty, ny = tx, w = wf(i / N), c = pts[i];
         (i % 2 ? [-.52, .08, .62] : [-.24, .36]).forEach(q => { const hw = w * .26, cx = c[0] + nx * w * q, cy = c[1] + ny * w * q;
           sc += `M${n(cx - nx * hw)} ${n(cy - ny * hw)} Q${n(cx + tx * hw * 1.5)} ${n(cy + ty * hw * 1.5)} ${n(cx + nx * hw)} ${n(cy + ny * hw)} `; });
@@ -111,7 +111,7 @@
     pip(sp) { return E(0, -92, 108, 94, sp.fur, sp.line) + P("M-92 -52 C-70 -4 70 -4 92 -52 C70 -22 -70 -22 -92 -52Z", sp.shade, null, 0, 'opacity=".5"') +
         P("M-58 -112 C-74 -70 -62 -18 -30 -8 C-10 -3 10 -3 30 -8 C62 -18 74 -70 58 -112 C44 -128 30 -122 20 -130 C10 -122 -10 -122 -20 -130 C-30 -122 -44 -128 -58 -112Z", sp.belly); },
     // chubby pear body, pale belly turned a little to the snout side
-    basil(sp) { return P("M-38 -184 C-74 -160 -82 -112 -78 -70 C-76 -30 -62 -8 -30 -4 C0 0 42 0 64 -6 C88 -16 88 -70 80 -104 C74 -142 60 -168 40 -184 Z", sp.fur, sp.line) +
+    basil(sp) { return P("M-30 -186 C-56 -166 -70 -122 -77 -76 C-82 -30 -62 -8 -30 -4 C0 0 42 0 66 -6 C92 -16 92 -70 82 -104 C74 -142 58 -168 36 -186 Z", sp.fur, sp.line) +
         P("M-70 -50 C-56 -10 50 -6 78 -40 C60 -22 -50 -24 -70 -50Z", sp.shade, null, 0, 'opacity=".4"') +
         P("M-6 -172 C-30 -134 -36 -52 -14 -14 C10 -6 44 -6 62 -12 C80 -42 76 -112 64 -142 C56 -162 44 -170 34 -174 Z", sp.belly) +
         P("M-20 -150 l8 7 l7 -8 l8 8 l8 -8 l8 7 l8 -7", null, sp.light, 3, 'opacity=".9"'); },
@@ -137,8 +137,8 @@
     S: [[86, -241], [78, -263], [61, -284], [34, -293], [2, -298], [-36, -293], [-66, -273], [-82, -240], [-72, -204], [-36, -183], [18, -178], [66, -196]],
     F: [[90, -224], [77, -257], [54, -282], [27, -294], [0, -299], [-27, -294], [-54, -282], [-77, -257], [-90, -224], [-62, -190], [0, -179], [62, -190]],
     // bump size on the stretch after each point
-    bS: [0, 0, 2.6, 3.4, 4.2, 5.6, 6.6, 6.6, 5, 2.6, 0, 0],
-    bF: [4.6, 0, 2.6, 3.4, 3.4, 2.6, 0, 4.6, 6, 2.6, 2.6, 6],
+    bS: [0, 0, 3.6, 4.6, 5.4, 7.4, 9, 9, 7, 3.6, 0, 0],
+    bF: [6.5, 0, 3.6, 4.6, 4.6, 3.6, 0, 6.5, 8, 3.6, 3.6, 8],
     spots: [[[22, -283], [10, -286], 5], [[0, -287], [-10, -285], 5.5], [[-22, -281], [0, -272], 4.5], [[36, -272], [14, -264], 3.6], [[10, -271], [-13, -264], 3.6], [[-46, -266], [0, -258], 4]] };
   // a smooth closed curve through points, as cubic segments
   function spline(A) { const N = A.length, g = i => A[(i + N) % N], segs = [];
@@ -157,7 +157,7 @@
       const A = BH.S.map((p, i) => { const q = L2(p, BH.F[i]); if (i >= 9) q[1] += jaw * (i === 10 ? 1 : .6); return q; });
       const segs = spline(A), d = segPath(segs); let fr = "";
       segs.forEach((s, i) => { const z = lerp(BH.bS[i], BH.bF[i], f); if (z < 1.2) return;
-        [.17, .5, .83].forEach(k => { const p = bez(s, k), q = bez(s, k + .02), tl = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, tx = (q[0] - p[0]) / tl, ty = (q[1] - p[1]) / tl, nx = ty, ny = -tx, b = z * .95, h = z * 1.15;
+        [.17, .5, .83].forEach(k => { const p = bez(s, k), q = bez(s, k + .02), tl = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, tx = (q[0] - p[0]) / tl, ty = (q[1] - p[1]) / tl, nx = ty, ny = -tx, b = z * .9, h = z * 1.35;
           fr += `<path d="M${n(p[0] - tx * b - nx * 2)} ${n(p[1] - ty * b - ny * 2)} L${n(p[0] + nx * h)} ${n(p[1] + ny * h)} L${n(p[0] + tx * b - nx * 2)} ${n(p[1] + ty * b - ny * 2)}Z"/>`; }); });
       let out = U(fr + `<path d="${d}Z"/>`, sp.fur, sp.line);
       // pale throat: from the smile line down to just inside the jaw
@@ -238,7 +238,7 @@
     amazed:   { eyes: { type: "open", dy: -.2 }, brows: [[-6, 8], [-6, 8]], mouth: "laugh", m: .8, tilt: -3, gesture: "wave" },
     dreamy:   { eyes: { type: "closed" }, mouth: "smile", tilt: -3, gesture: "cheek", blush: 1 },
     shy:      { eyes: { type: "open", lid: .1, dx: .3, dy: .5 }, mouth: "smile", tilt: 6, gesture: "shy", blush: 1 },
-    stern:    { eyes: { type: "open", lid: .3, slant: 16 }, brows: [[18, -3], [18, -3]], mouth: "flat", tilt: 0, gesture: "cross" },
+    stern:    { eyes: { type: "open", lid: .3, slant: 16 }, brows: [[18, -3], [18, -3]], mouth: "line", tilt: 0, gesture: "cross" },
     blep:     { eyes: { type: "open" }, mouth: "blep", tilt: 7, blush: 1 },
     zen:      { eyes: { type: "closed" }, mouth: "smile", tilt: 0 },
     hyper:    { eyes: { type: "open" }, brows: [[-6, 8], [-6, 8]], mouth: "laugh", m: 1, tilt: 0, gesture: "tada", shake: 1, dashes: 1, blush: 1 }
@@ -280,12 +280,14 @@
     if (type === "smirk") return P(`M${n(B[0])} ${n(B[1] - 5)} Q${n(lerp(C[0], mid[0], .35))} ${n(lerp(C[1], mid[1], .35) + 2)} ${n(F[0])} ${n(F[1])} M${n(B[0] + 2)} ${n(B[1] - 3)} q-7 -3 -7 -11`, null, sp.line);
     if (type === "pout") { const a = at(.2), b = at(.86); return P(q([a[0], a[1] + 12], [mid[0] + 4, mid[1] - 3], [b[0], b[1] + 12]), null, sp.line); }
     if (type === "wobble") { const a = at(.14), b = at(.88), w = (b[0] - a[0]) / 4, sl = (b[1] - a[1]) / 4; let dd = `M${n(a[0])} ${n(a[1] + 9)}`; for (let i = 0; i < 4; i++) dd += ` q${n(w / 2)} ${n(sl / 2 + (i % 2 ? 8 : -8))} ${n(w)} ${n(sl)}`; return P(dd, null, sp.line); }
-    if (type === "flat") { const a = at(.16), b = at(.86); return P(`M${n(a[0])} ${n(a[1] + 9)} L${n(b[0])} ${n(b[1] + 9)}`, null, sp.line); }
+    if (type === "line") { const a = at(.16), b = at(.86); return P(`M${n(a[0])} ${n(a[1] + 9)} L${n(b[0])} ${n(b[1] + 9)}`, null, sp.line); }
+    if (type === "flat") return P(q(B, [lerp(C[0], mid[0], .5), lerp(C[1], mid[1], .5) + 1], at(.9)) + tickB, null, sp.line);   // thoughtful: a small closed smile
     if (type === "blep") { const k = lerp(.62, .5, f), u = 1 - k, p = [u * u * B[0] + 2 * u * k * C[0] + k * k * F[0], u * u * B[1] + 2 * u * k * C[1] + k * k * F[1]];
       return P(`M${n(p[0] - 8)} ${n(p[1] - 1)} C${n(p[0] - 9)} ${n(p[1] + 15)} ${n(p[0] + 9)} ${n(p[1] + 15)} ${n(p[0] + 8)} ${n(p[1] - 1)}Z`, TONGUE, "#D97A80", 2.6) + P(smile, null, sp.line); }
     return P(smile, null, sp.line); }
   function mouth(sp, type, m) {
     if (sp.mouth.B) return basilMouth(sp, type, m);
+    if (type === "line") type = "flat";
     const M = sp.mouth, hw = M.hw, c = M.cusp; let out = "";
     const smile = c ? `M${-hw} -2 Q${-hw / 2} ${hw * .62} 0 0 Q${hw / 2} ${hw * .62} ${hw} -2` : `M${-hw} -3 Q${-hw * .1} ${hw * .34} ${hw} -9 q7 -1 8 -9`;
     const tongue = (cy, rx, ry) => E(0, cy, rx, ry, TONGUE);
