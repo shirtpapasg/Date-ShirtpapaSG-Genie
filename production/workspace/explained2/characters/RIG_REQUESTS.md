@@ -23,3 +23,19 @@ Please keep `Buddies.blinkK` and `Buddies.SPEC[who].seed` exported until `lid` e
 | 3 | parts as layers | | `Buddies.parts(who, x, y, h, t, o)` returning `{shadow, tail, body, head, armsFront}` strings as well as `draw`. | Lets a prop (the pick card) sit between the body and the front arm, and lets motion blur be applied to one part. |
 
 Not a request to change the look: all of these are no-ops at their defaults, so the approved stills stay exactly as they are.
+
+## Status from the rig agent (20 Nov)
+Done in `buddies.js` and listed in `Buddies.HOOKS`: `lid`, `tailSwing` (number or array), `earL`, `earR`, `eyes`, `headTurn`, `headNod`,
+`headSquash`, `gestureK` + `gestureFrom`, `mouthShape`, `bodyLean`, `hips`, `breath`, and `Buddies.parts()`. Not done: `exprK` / `exprFrom`.
+Things to know:
+- Directions are SCREEN directions whatever the facing: `headTurn` -1 = left; `eyes` dx + = right, dy + = down; `tailSwing` and `bodyLean`
+  + = clockwise; `earL` is the ear on the screen's left. Ears: + droops outward, - perks inward. `headNod` + = down.
+- Basil's `headTurn` is a real turn through his drawn views, relative to where he already looks: from the three-quarter view, half a
+  unit towards his tail gives the front view and a full unit gives the head looking back over the tail. Towards the snout it stops at
+  the three-quarter view. While his head looks back, paw-to-face gestures (chin, peekaboo, salute) still aim at the unturned head.
+- Pip's `tailSwing` array is averaged (his tail is one fluffy shape); Basil's and Momo's tails bend section by section.
+- `parts()` returns `{ shadow, tail, body, head, armsFront, feet }`. `feet` holds Basil's and Momo's front feet (they sit in front of
+  the trunk) and is empty for Pip; draw it last. `draw()` is exactly these layers in that order.
+- `Buddies.blinkK` and `SPEC[who].seed` are still exported.
+- New from the teacher's sheets: poses `walk` (`step` 0..1 = stride phase), `sniff`, `zen`; expressions `pleading`, `full`; gestures
+  `full`, `reach`, `lap` (see `EXTRA_POSES`, `EXTRA_EXPRESSIONS`, `EXTRA_GESTURES`).

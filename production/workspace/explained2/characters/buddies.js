@@ -23,6 +23,23 @@
 //                                  when talking or when no facing is given; .5 when a facing is given)
 //         air: 0..1                jump height for pose "jump" (default: a hop loop from t);   tilt: extra head tilt in degrees
 //         shadow: false            no ground shadow;   seed: number, shifts the blink / talk timing so buddies don't move in step }
+//   More (from the teacher's reference sheets):
+//         pose: "walk" (step: 0..1 sets the stride phase, default from t) | "sniff" (on all fours, nose down) | "zen" (cross-legged)
+//         expr: "pleading" | "full";   gesture: "full" (hands on belly) | "reach" (one arm high) | "lap"
+//         Basil's hyper and zen are front views; his tailgaze turns the head back over the tail.
+//   Rig hooks for the motion layer (characters/RIG_REQUESTS.md; listed in Buddies.HOOKS; every one is "no change" when absent or 0):
+//         lid 0..1 (eyelids from outside; the rig's own blink is then off)      eyes: [dx, dy] -1..1, screen directions (dy + = down)
+//         tailSwing: degrees about the root, or an array of 2 to 5 angles base to tip (screen clockwise = +; replaces the idle sway)
+//         earL, earR: degrees, screen-left / screen-right ear, + = droops outward, - = perks inward (Basil: + flares his crest bumps)
+//         headTurn -1..1: screen left / right. Pip, Momo: the face slides and narrows, far ear narrows, near ear widens.
+//                  Basil: a real turn through his views: from the three-quarter view, .5 towards the tail = front view, 1 = looking back
+//         headNod -1..1 (+ = down)      headSquash about -.12...12 (head scaled about the chin)
+//         gestureK 0..1 with gestureFrom (default "rest"): the arm in between two gestures, the hand on an arc about the shoulder
+//         mouthShape: "open" | "o" | "wide" | "closed" (mouth 0..1 stays the opening)
+//         bodyLean (degrees, screen clockwise = +) and hips (units): the trunk leans / shifts, the feet stay planted
+//         breath -1..1 (chest scale from outside)
+//   Buddies.parts(who, x, y, h, t, o) -> { shadow, tail, body, head, armsFront, feet }: the same picture as layers, back to front.
+//         (Not done: exprK / exprFrom, the blend between two expressions.)
 (function (root) {
   "use strict";
   // engine helpers (same definitions as sau/engine.html; kept inside this closure so nothing clashes on a page)
@@ -63,7 +80,7 @@
       mouth: { x: 0, y: -163, hw: 14, cusp: true, oh: 15, rot: 0 }, happyOpen: 0,
       sh: { L: [-80, -112], R: [80, -112] }, armW: 27, reach: 92,
       rest: { sit: { L: [-30, -92], R: [30, -92], bend: 10 }, stand: { L: [-30, -92], R: [30, -92], bend: 10 } },
-      chin: { L: [-34, -132], R: [34, -132] }, legs: [[-46, 24], [46, 24]] },
+      chin: { L: [-34, -132], R: [34, -132] }, bellyC: [0, -62, 36], legs: [[-46, 24], [46, 24]] },
     /* Basil: pale lavender-grey lizard, drawn from the teacher's reference sheet (characters/basil_ref). Three-quarter view, snout to
        the right: the FAR eye sits on the far top corner of the head above the short round snout, the NEAR eye is big and set back,
        a wide flat-topped dome with small bumps runs behind them. look = 1 turns it to the front view (see basilTurn). */
@@ -74,7 +91,7 @@
       mouth: { x: 40, y: -205, hw: 56, cusp: false, oh: 20, rot: 0, B: [-41, -226], D: [22, -210], F: [72, -236] }, happyOpen: 0,
       sh: { L: [-50, -140], R: [66, -138] }, armW: 24, reach: 88,
       rest: { sit: { L: [-4, -98], R: [36, -102], bend: -16 }, stand: { L: [-4, -98], R: [36, -102], bend: -16 } },
-      chin: { L: [-30, -182], R: [46, -180] }, chest: [10, -128], legs: [[-40, 24], [44, 22]] },
+      chin: { L: [-30, -182], R: [46, -180] }, chest: [10, -128], bellyC: [20, -84, 31], legs: [[-40, 24], [44, 22]] },
     /* Momo: grey-white tabby kitten; pink inner ears, big sparkly eyes, forehead and cheek stripes, white muzzle, chest and paws, striped tail with a white tip. */
     momo: { H: 310, native: 1, lift: 24, hand: "R", seed: 3.1,
       line: "#5F5A78", fur: "#D3CDD5", shade: "#A39DB1", light: "#E2DCE1", belly: "#FAF7F1", paw: "#FAF7F1", lid: "#BDB7C5", inner: "#F0A3AE", pink: "#F08FA0", eye: "#423D5E",
@@ -83,25 +100,31 @@
       mouth: { x: 0, y: -160, hw: 13, cusp: true, oh: 15, rot: 0 }, happyOpen: .38,
       sh: { L: [-36, -98], R: [36, -98] }, shUp: { L: [-64, -104], R: [64, -104] }, armW: 31, reach: 98,
       rest: { sit: { L: [-30, -16], R: [30, -16], bend: 0 }, stand: { L: [-26, -74], R: [26, -74], bend: 12 } },
-      chin: { L: [-36, -130], R: [36, -130] }, legs: [[-44, 30], [44, 30]] }
+      chin: { L: [-36, -130], R: [36, -130] }, bellyC: [0, -56, 31], legs: [[-44, 30], [44, 30]] }
   };
 
   /* ---------- parts: tails ---------- */
+  // tailSwing from outside: a number (degrees about the root) or an array of angles from base to tip (each section bends in turn)
+  const swA = (sw, own) => sw == null ? own : Array.isArray(sw) ? (sw[0] || 0) : +sw || 0;
+  function bendPts(pts, sw) { if (!Array.isArray(sw) || sw.length < 2) return pts; const N = pts.length - 1, m = sw.length; let out = pts.map(q => q.slice());
+    for (let j = 1; j < m; j++) { const i0 = Math.round(j * N / m), a = (sw[j] - sw[j - 1]) * DEG, c = Math.cos(a), sn = Math.sin(a), pv = out[i0];
+      for (let i = i0 + 1; i <= N; i++) { const dx = out[i][0] - pv[0], dy = out[i][1] - pv[1]; out[i] = [pv[0] + dx * c - dy * sn, pv[1] + dx * sn + dy * c]; } }
+    return out; }
   const TAIL = {
-    pip(sp, t) { const a = 2.5 * Math.sin(TAU * t / 2.9);
+    pip(sp, t, sw) { const a = Array.isArray(sw) ? sw.reduce((u, v) => u + v, 0) / sw.length : swA(sw, 2.5 * Math.sin(TAU * t / 2.9));
       return Gt(`rotate(${n(a)} -80 -40)`, P("M-70 -22 C-96 -6 -128 -2 -150 -10 C-160 0 -184 -6 -186 -26 C-206 -30 -216 -54 -204 -70 C-220 -86 -214 -114 -198 -124 C-198 -146 -176 -160 -158 -152 C-140 -158 -122 -140 -134 -122 C-148 -112 -148 -94 -128 -86 C-104 -78 -84 -90 -70 -108 Z", sp.fur, sp.line) + P("M-80 -34 C-110 -18 -160 -22 -178 -52 C-160 -40 -120 -44 -96 -66 Z", sp.shade, null, 0, 'opacity=".55"') +
         P("M-182 -70 C-182 -50 -166 -34 -142 -32 M-160 -92 C-158 -76 -146 -66 -128 -64", null, sp.line, 3, 'opacity=".45"')); },
     // thick curled tail with rows of scales (short arcs), as on the reference sheet
-    basil(sp, t) { const a = 1.6 * Math.sin(TAU * t / 3.3);
-      const pts = sample([[[34, -40], [-30, -27], [-112, -15], [-152, -42]], [[-152, -42], [-190, -70], [-186, -136], [-146, -152]], [[-146, -152], [-116, -164], [-88, -152], [-87, -124]]], 12);
+    basil(sp, t, sw) { const a = swA(sw, 1.6 * Math.sin(TAU * t / 3.3));
+      const pts = bendPts(sample([[[34, -40], [-30, -27], [-112, -15], [-152, -42]], [[-152, -42], [-190, -70], [-186, -136], [-146, -152]], [[-146, -152], [-116, -164], [-88, -152], [-87, -124]]], 12), sw);
       const N = pts.length - 1, wf = k => lerp(29, 7, Math.pow(k, 1.9)); let sc = "", edge = "";
       for (let i = 4; i < N - 1; i++) { const a0 = pts[i - 1], b0 = pts[i + 1], d = Math.hypot(b0[0] - a0[0], b0[1] - a0[1]), tx = (b0[0] - a0[0]) / d, ty = (b0[1] - a0[1]) / d, nx = -ty, ny = tx, w = wf(i / N), c = pts[i];
         (i % 2 ? [-.52, .08, .62] : [-.24, .36]).forEach(q => { const hw = w * .26, cx = c[0] + nx * w * q, cy = c[1] + ny * w * q;
           sc += `M${n(cx - nx * hw)} ${n(cy - ny * hw)} Q${n(cx + tx * hw * 1.5)} ${n(cy + ty * hw * 1.5)} ${n(cx + nx * hw)} ${n(cy + ny * hw)} `; });
         if (i % 2 && i > 6) { const hw = 4.5, cx = c[0] + nx * (w - 1), cy = c[1] + ny * (w - 1); edge += `<path d="M${n(cx - tx * hw)} ${n(cy - ty * hw)} L${n(cx + nx * 6)} ${n(cy + ny * 6)} L${n(cx + tx * hw)} ${n(cy + ty * hw)}Z"/>`; } }
       return Gt(`rotate(${n(a)} 30 -30)`, U(edge + `<path d="${tube(pts, wf)}"/>`, sp.fur, sp.line) + P(tube(pts, k => wf(k) * .5, .08, .9), sp.light, null, 0, 'opacity=".55"') + P(sc, null, sp.shade, 2.6, 'opacity=".9"')); },
-    momo(sp, t) { const a = 3 * Math.sin(TAU * t / 2.6);
-      const pts = sample([[[-40, -24], [-110, -2], [-176, -34], [-160, -92]], [[-160, -92], [-152, -122], [-128, -134], [-116, -118]]], 12);
+    momo(sp, t, sw) { const a = swA(sw, 3 * Math.sin(TAU * t / 2.6));
+      const pts = bendPts(sample([[[-40, -24], [-110, -2], [-176, -34], [-160, -92]], [[-160, -92], [-152, -122], [-128, -134], [-116, -118]]], 12), sw);
       const wf = k => lerp(19, 15, k); let st = "";
       [.3, .44, .58].forEach(k => { const i = Math.round(k * (pts.length - 1)), a0 = pts[i - 1], b0 = pts[i + 1], d = Math.hypot(b0[0] - a0[0], b0[1] - a0[1]), nx = -(b0[1] - a0[1]) / d, ny = (b0[0] - a0[0]) / d, w = wf(k) - 3, c = pts[i]; st += `M${n(c[0] + nx * w)} ${n(c[1] + ny * w)} L${n(c[0] - nx * w * .2)} ${n(c[1] - ny * w * .2)} `; });
       return Gt(`rotate(${n(a)} -40 -24)`, P(tube(pts, wf), sp.fur, sp.line) + P(tube(pts, wf, .72, 1) + "Z", sp.belly) + P(st, null, sp.shade, 7) + P(tube(pts, wf), null, sp.line)); }
@@ -120,15 +143,15 @@
         P("M-40 -128 C-52 -98 -46 -72 -30 -60 L-22 -68 L-12 -48 L0 -60 L12 -48 L22 -68 L30 -60 C46 -72 52 -98 40 -128 Z", sp.belly); }
   };
   const FEET = {
-    pip(sp, lift) { const f = s => E(s * 46, -8, 25, 11, sp.paw, sp.line) + P(`M${s * 40} -4 v-7 M${s * 52} -4 v-7`, null, sp.line, 3, 'opacity=".6"'); return f(-1) + f(1); },
-    basil(sp, lift) { const fan = `<ellipse cx="-42" cy="-9" rx="19" ry="10"/><path d="M-56 -8 L-68 -1 M-50 -6 L-56 3 M-40 -6 L-38 4 M-30 -8 L-20 0" stroke-width="${9 + LW * 2}" stroke-linecap="round"/>`;
+    pip(sp, lift, up = [0, 0]) { const f = s => Gt(`translate(0 ${n(-up[s < 0 ? 0 : 1])})`, E(s * 46, -8, 25, 11, sp.paw, sp.line) + P(`M${s * 40} -4 v-7 M${s * 52} -4 v-7`, null, sp.line, 3, 'opacity=".6"')); return f(-1) + f(1); },
+    basil(sp, lift, up = [0, 0]) { const fan = `<ellipse cx="-42" cy="-9" rx="19" ry="10"/><path d="M-56 -8 L-68 -1 M-50 -6 L-56 3 M-40 -6 L-38 4 M-30 -8 L-20 0" stroke-width="${9 + LW * 2}" stroke-linecap="round"/>`;
       const foot = `<g stroke="${sp.line}" fill="${sp.line}" stroke-width="${LW * 2}">${fan}</g><g stroke="${sp.fur}" fill="${sp.fur}" stroke-width="0">${fan.replace(/stroke-width="[\d.]+"/, 'stroke-width="9"')}</g>`;
-      return (lift ? "" : E(-46, -46, 31, 33, sp.fur, sp.line) + P("M-66 -62 q7 7 14 0 M-50 -62 q7 7 14 0 M-58 -48 q7 7 14 0 M-42 -48 q7 7 14 0 M-66 -34 q7 7 14 0 M-50 -34 q7 7 14 0", null, sp.shade, 2.6)) + foot; },
-    momo(sp, lift) { const f = s => E(s * 70, -9, 25, 12, sp.paw, sp.line) + P(`M${s * 64} -5 v-7 M${s * 76} -5 v-7`, null, sp.line, 3, 'opacity=".5"'); return f(-1) + f(1); }
+      return (lift ? "" : E(-46, -46, 31, 33, sp.fur, sp.line) + P("M-66 -62 q7 7 14 0 M-50 -62 q7 7 14 0 M-58 -48 q7 7 14 0 M-42 -48 q7 7 14 0 M-66 -34 q7 7 14 0 M-50 -34 q7 7 14 0", null, sp.shade, 2.6)) + Gt(`translate(0 ${n(-up[0])})`, foot); },
+    momo(sp, lift, up = [0, 0]) { const f = s => Gt(`translate(0 ${n(-up[s < 0 ? 0 : 1])})`, E(s * 70, -9, 25, 12, sp.paw, sp.line) + P(`M${s * 64} -5 v-7 M${s * 76} -5 v-7`, null, sp.line, 3, 'opacity=".5"')); return f(-1) + f(1); }
   };
   // Basil's far leg: a hip bump and a foot that peek out behind the body
-  function basilFar(sp, lift) { const toes = `<ellipse cx="74" cy="-10" rx="18" ry="9"/><path d="M84 -12 L99 -12 M84 -8 L98 -3 M80 -6 L90 2" stroke-width="${8 + LW * 2}" stroke-linecap="round"/>`;
-    return (lift ? "" : E(70, -46, 24, 30, sp.shade, sp.line)) + `<g stroke="${sp.line}" fill="${sp.line}" stroke-width="${LW * 2}">${toes}</g><g stroke="${sp.fur}" fill="${sp.fur}" stroke-width="0">${toes.replace(/stroke-width="[\d.]+"/, 'stroke-width="8"')}</g>`; }
+  function basilFar(sp, lift, up = 0) { const toes = `<ellipse cx="74" cy="-10" rx="18" ry="9"/><path d="M84 -12 L99 -12 M84 -8 L98 -3 M80 -6 L90 2" stroke-width="${8 + LW * 2}" stroke-linecap="round"/>`;
+    return (lift ? "" : E(70, -46, 24, 30, sp.shade, sp.line)) + Gt(`translate(0 ${n(-up)})`, `<g stroke="${sp.line}" fill="${sp.line}" stroke-width="${LW * 2}">${toes}</g><g stroke="${sp.fur}" fill="${sp.fur}" stroke-width="0">${toes.replace(/stroke-width="[\d.]+"/, 'stroke-width="8"')}</g>`); }
   // short legs that show when a buddy stands up
   function legs(sp, lift) { if (!lift) return ""; return sp.legs.map(([x, w]) => `<path d="M${x} ${-lift - 14} V-10" stroke="${sp.line}" stroke-width="${w + LW * 2}" stroke-linecap="round"/><path d="M${x} ${-lift - 14} V-10" stroke="${sp.fur}" stroke-width="${w}" stroke-linecap="round"/>`).join(""); }
 
@@ -147,16 +170,19 @@
   const segPath = segs => `M${n(segs[0][0][0])} ${n(segs[0][0][1])}` + segs.map(s => ` C${n(s[1][0])} ${n(s[1][1])} ${n(s[2][0])} ${n(s[2][1])} ${n(s[3][0])} ${n(s[3][1])}`).join("");
 
   /* ---------- parts: head without the face ---------- */
+  // head state from the rig hooks: ear = [left, right] degrees (+ = droop outward), turn -1..1, fx / fy = how far the face slides
+  const HS0 = { ear: [0, 0], turn: 0, fx: 0, fy: 0, crest: 1 };
   const HEAD = {
-    pip(sp) { const ear = s => E(s * 90, -270, 55, 58, sp.fur, sp.line) + E(s * 88, -266, 40, 43, sp.inner) + E(s * 82, -256, 26, 28, "#BFA9B8", null, 0, 'opacity=".55"') +
+    pip(sp) { const ear = s => Gt(`rotate(${s * 17} ${s * 80} -272)`, E(s * 80, -272, 46, 61, sp.fur, sp.line) + E(s * 79, -268, 32, 46, sp.inner) + E(s * 76, -258, 21, 31, "#BFA9B8", null, 0, 'opacity=".55"')) +
         P(`M${s * 50} -238 C${s * 54} -252 ${s * 62} -260 ${s * 72} -262 C${s * 68} -254 ${s * 72} -248 ${s * 80} -246 C${s * 72} -240 ${s * 70} -234 ${s * 74} -226 C${s * 64} -226 ${s * 56} -230 ${s * 50} -238Z`, sp.belly, sp.line, 2.5);
-      return ear(-1) + ear(1) + E(0, -192, 106, 82, sp.fur, sp.line) + E(0, -164, 48, 30, sp.light); },
+      const hs = sp.hs || HS0, er = s => Gt(`translate(${s * 62} -226) rotate(${n(s * hs.ear[s < 0 ? 0 : 1])}) scale(${n(1 + s * .22 * hs.turn)} 1) translate(${-s * 62} 226)`, ear(s));
+      return er(-1) + er(1) + E(0, -192, 106, 82, sp.fur, sp.line) + E(hs.fx, -164 + hs.fy, 48, 30, sp.light); },
     // Basil's head. One smooth closed curve through 12 points (BH.S three-quarter, BH.F front view; sp.turn blends them), small soft
     // bumps along the crown and the back of the head, the pale throat under the smile, crown spots, eye sockets, nostrils.
     basil(sp) { const f = sp.turn || 0, jaw = sp.jaw || 0, M = sp.mouth, L2 = (a, b) => [lerp(a[0], b[0], f), lerp(a[1], b[1], f)];
       const A = BH.S.map((p, i) => { const q = L2(p, BH.F[i]); if (i >= 9) q[1] += jaw * (i === 10 ? 1 : .6); return q; });
       const segs = spline(A), d = segPath(segs); let fr = "";
-      segs.forEach((s, i) => { const z = lerp(BH.bS[i], BH.bF[i], f); if (z < 1.2) return;
+      segs.forEach((s, i) => { const z0 = lerp(BH.bS[i], BH.bF[i], f), z = z0 * ((sp.hs || HS0).crest); if (z0 < 1.2 || z < .6) return;
         [.17, .5, .83].forEach(k => { const p = bez(s, k), q = bez(s, k + .02), tl = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, tx = (q[0] - p[0]) / tl, ty = (q[1] - p[1]) / tl, nx = -ty, ny = tx, b = z * 1.25, h = z * .95;
           fr += `<path d="M${n(p[0] - tx * b - nx * 2)} ${n(p[1] - ty * b - ny * 2)} L${n(p[0] + nx * h)} ${n(p[1] + ny * h)} L${n(p[0] + tx * b - nx * 2)} ${n(p[1] + ty * b - ny * 2)}Z"/>`; }); });
       let out = U(fr + `<path d="${d}Z"/>`, sp.fur, sp.line);
@@ -174,10 +200,11 @@
       return out + E(n1[0], n1[1], lerp(1.8, 2.6, f), 2.6, sp.line) + E(n2[0], n2[1], 2.6, 2.6, sp.line); },
     momo(sp) { const ear = s => P(`M${s * 100} -212 C${s * 100} -250 ${s * 96} -286 ${s * 88} -304 Q${s * 84} -312 ${s * 76} -306 C${s * 54} -292 ${s * 34} -278 ${s * 20} -262 Z`, sp.fur, sp.line) +
         P(`M${s * 90} -232 C${s * 90} -256 ${s * 88} -276 ${s * 83} -290 C${s * 66} -280 ${s * 50} -268 ${s * 40} -256 Z`, sp.inner);
-      return ear(-1) + ear(1) + P("M-70 -262 C-100 -242 -110 -208 -102 -182 L-116 -170 L-98 -162 C-84 -128 -42 -114 0 -114 C42 -114 84 -128 98 -162 L116 -170 L102 -182 C110 -208 100 -242 70 -262 C40 -278 -40 -278 -70 -262 Z", sp.fur, sp.line) +
-        P("M0 -271 L-5 -244 L5 -244Z M-24 -268 L-25 -246 L-16 -248Z M24 -268 L25 -246 L16 -248Z", sp.shade, sp.shade, 5) +
+      const hs = sp.hs || HS0, er = s => Gt(`translate(${s * 62} -238) rotate(${n(s * hs.ear[s < 0 ? 0 : 1])}) scale(${n(1 + s * .22 * hs.turn)} 1) translate(${-s * 62} 238)`, ear(s));
+      return er(-1) + er(1) + P("M-70 -262 C-100 -242 -110 -208 -102 -182 L-116 -170 L-98 -162 C-84 -128 -42 -114 0 -114 C42 -114 84 -128 98 -162 L116 -170 L102 -182 C110 -208 100 -242 70 -262 C40 -278 -40 -278 -70 -262 Z", sp.fur, sp.line) +
+        Gt(`translate(${n(hs.fx * .5)} 0)`, P("M0 -271 L-5 -244 L5 -244Z M-24 -268 L-25 -246 L-16 -248Z M24 -268 L25 -246 L16 -248Z", sp.shade, sp.shade, 5)) +
         P("M-102 -200 L-78 -196 M-100 -182 L-80 -182 M102 -200 L78 -196 M100 -182 L80 -182", null, sp.shade, 7) +
-        P("M-46 -158 C-46 -180 -20 -186 0 -182 C20 -186 46 -180 46 -158 C46 -134 20 -124 0 -124 C-20 -124 -46 -134 -46 -158Z", sp.belly); }
+        Gt(`translate(${n(hs.fx)} ${n(hs.fy * .6)})`, P("M-46 -158 C-46 -180 -20 -186 0 -182 C20 -186 46 -180 46 -158 C46 -134 20 -124 0 -124 C-20 -124 -46 -134 -46 -158Z", sp.belly)); }
   };
 
   /* ---------- parts: paws, drawn at the end of an arm; +x points along the arm ---------- */
@@ -216,12 +243,15 @@
     listen: (sp, S, s) => ({ P: [sp.head.cx + s * (sp.head.rx + 4), sp.head.cy + 4], bend: s * 16, f: { pad: 1 } }),
     peekaboo: (sp, S, s) => { const e = sp.eyes[s < 0 ? 0 : 1]; return { P: [e.x - s * 2, e.y + 6], bend: s * 30, front: 1, f: { pad: 1, big: 1.15 } }; },
     salute: (sp, S, s) => { const e = sp.eyes[s < 0 ? 0 : 1]; return { P: [e.x + s * e.r * .5, e.y - e.r - 9], bend: s * 34, front: 1, f: {} }; },
-    tada: (sp, S, s, t) => ({ P: [S[0] + s * sp.reach * .92, S[1] - sp.reach * .5 - 3 * Math.sin(TAU * 1.2 * t + s)], bend: s * 8, f: { pad: 1 } }),
+    tada: (sp, S, s, t) => ({ P: [S[0] + s * sp.reach * .84, S[1] - sp.reach * .66 - 3 * Math.sin(TAU * 1.2 * t + s)], bend: s * 8, f: { pad: 1 } }),
     please: (sp, S, s) => { const c = sp.chest || [0, S[1] + 18]; return { P: [c[0] + s * 9, c[1]], bend: s * -16, front: 1, f: {} }; },
     cheek: (sp, S, s) => { const c = sp.chin[s < 0 ? "L" : "R"]; return { P: [c[0] + s * 16, c[1] - 10], bend: s * 20, front: 1, f: { pad: 1 } }; },
-    shy: (sp, S, s) => ({ P: [sp.mouth.x + s * 13, sp.mouth.y + (sp.mouth.B ? 4 : 10)], bend: s * 24, front: 1, f: {} })
+    shy: (sp, S, s) => ({ P: [sp.mouth.x + s * 13, sp.mouth.y + (sp.mouth.B ? 4 : 10)], bend: s * 24, front: 1, f: {} }),
+    full: (sp, S, s) => { const b = sp.bellyC; return { P: [b[0] + s * b[2], b[1]], bend: s * -12, front: 1, f: {} }; },        // both hands on the belly
+    reach: (sp, S, s) => ({ P: [S[0] + s * sp.reach * .5, S[1] - sp.reach * 1.08], bend: s * 5, f: { pad: 1 } }),           // one arm stretched high
+    lap: (sp, S, s) => ({ P: [(sp.bellyC[0] * .5) + s * 13, -34], bend: s * -14, front: 1, f: {} })                            // hands together in the lap (zen)
   };
-  const BOTH = { cross: 1, cheer: 1, flare: 1, tada: 1, please: 1, shy: 1 };
+  const BOTH = { cross: 1, cheer: 1, flare: 1, tada: 1, please: 1, shy: 1, full: 1, lap: 1 };
 
   /* ---------- expressions ---------- */
   // eyes: type open | arc | squeeze | wide; lid 0..1; slant >0 cross, <0 worried; brows [left, right] as [angle, raise] or null
@@ -240,12 +270,14 @@
     shy:      { eyes: { type: "open", lid: .1, dx: .3, dy: .5 }, mouth: "smile", tilt: 6, gesture: "shy", blush: 1 },
     stern:    { eyes: { type: "open", lid: .3, slant: 16 }, brows: [[18, -3], [18, -3]], mouth: "line", tilt: 0, gesture: "cross" },
     blep:     { eyes: { type: "open" }, mouth: "blep", tilt: 7, blush: 1 },
-    zen:      { eyes: { type: "closed" }, mouth: "smile", tilt: 0 },
-    tailgaze: { eyes: { type: "open", dx: -1, dy: .2 }, mouth: "smile", tilt: -4, lookX: -.9 },
-    hyper:    { eyes: { type: "open" }, brows: [[-6, 8], [-6, 8]], mouth: "laugh", m: 1, tilt: 0, gesture: "tada", shake: 1, dashes: 1, blush: 1 }
+    zen:      { eyes: { type: "closed" }, mouth: "smile", tilt: 0, front: 1 },
+    tailgaze: { eyes: { type: "open", dx: -1, dy: .2 }, mouth: "smile", tilt: -4, lookX: -.9, back: 1 },
+    hyper:    { eyes: { type: "open" }, brows: [[-6, 8], [-6, 8]], mouth: "laugh", m: 1, tilt: 0, gesture: "full", shake: 1, vib: 1, blush: 1, front: 1 },
+    pleading: { eyes: { type: "open", dy: -.25 }, brows: [[-16, 5], [-16, 5]], mouth: "pout", tilt: 4, gesture: "please" },
+    full:     { eyes: { type: "arc" }, mouth: "smile", tilt: -3, gesture: "full", blush: 1 }
   };
   // Basil's own head tilt per expression, in degrees (minus = snout up), as on his reference sheet
-  const BT = { happy: 0, cheering: -9, shocked: -5, thinking: -11, smug: -5, oops: 6, laughing: -9, sulking: 5, amazed: -11, dreamy: -4, shy: 9, stern: 2, blep: -3, zen: 0, hyper: -4, tailgaze: 5 };
+  const BT = { happy: 0, cheering: -9, shocked: -5, thinking: -11, smug: -5, oops: 6, laughing: -9, sulking: 5, amazed: -11, dreamy: -4, shy: 9, stern: 2, blep: -3, zen: 0, hyper: -4, tailgaze: 5, pleading: -6, full: -5 };
 
   const EYE = {
     pip: (sp, r) => E(0, 0, r, r, sp.eye) + E(-r * .3, -r * .36, r * .32, r * .32, "#fff") + E(r * .34, r * .32, r * .15, r * .15, "#fff", null, 0, 'opacity=".8"'),
@@ -265,7 +297,7 @@
       if (lid > .02) { const R = (type === "wide" ? Math.max(r * 1.12, 17) : r) + 2.4, y = -R + 2 * R * lid, hw = Math.sqrt(Math.max(0, R * R - y * y));
         out += Gt(`rotate(${n(-s * -(st.slant || 0))})`, P(`M${n(-hw)} ${n(y)} A${n(R)} ${n(R)} 0 ${lid > .5 ? 1 : 0} 1 ${n(hw)} ${n(y)} Z`, sp.lid, sp.line, 3.2)); }
     }
-    return Gt(`translate(${n(e.x)} ${n(e.y)})` + (e.sx && e.sx !== 1 ? ` scale(${e.sx.toFixed(3)} 1)` : ""), out);
+    return Gt(`translate(${n(e.x)} ${n(e.y)})` + (e.sx && e.sx !== 1 || st.sq ? ` scale(${(e.sx || 1).toFixed(3)} ${st.sq ? .85 : 1})` : ""), out);
   }
   function brow(sp, e, s, b) { if (!b) return ""; const len = Math.max(e.r * .95, 13) * (e.sx ? Math.max(e.sx, .8) : 1), y = -Math.min(Math.max(e.r, 15) + (sp.browGap || 9) + b[1] * (sp.browK || 1), e.bmax || 99);
     return Gt(`translate(${n(e.x)} ${n(e.y + y)}) rotate(${n(s * -b[0])})`, P(`M${-len} 0 Q0 -4 ${len} 0`, null, sp.line, LW)); }
@@ -320,9 +352,14 @@
     const tm = o.mouth != null ? clamp(o.mouth) : o.talking ? talkM(t, o.seed) : null;
     if (tm != null) { if (tm < .1) { if (mt === "open" || mt === "laugh" || mt === "o") mt = "smile"; } else if (ex.mouth === "laugh") { m = .35 + tm * .65; } else if (ex.mouth === "o") { m = tm; }
       else { mt = (hash(Math.floor(t * 5.6 + o.seed * 3.7) * 2.1) < .2 && o.mouth == null) ? "o" : "open"; m = tm; } }
+    // mouthShape: the viseme family from the voice; `mouth` stays the opening
+    const ms = o.mouthShape; if (ms === "closed") { if (mt === "open" || mt === "laugh" || mt === "o") mt = "smile"; m = 0; }
+    else if (ms === "o" || ms === "open" || ms === "wide") { mt = ms === "wide" ? "laugh" : ms; m = tm != null ? tm : (m || .5); }
     return [mt, m]; }
   function face(sp, who, ex, t, o) {
-    const E0 = sp.eyes, st = ex.eyes, bk = o.blink === false ? 0 : (blinkK(t, o.seed) > .5 ? 1 : blinkK(t, o.seed) * 1.6);
+    const E0 = sp.eyes, st = Object.assign({}, ex.eyes), bk = o.lid != null ? clamp(o.lid) : o.blink === false ? 0 : (blinkK(t, o.seed) > .5 ? 1 : blinkK(t, o.seed) * 1.6);
+    if (o.lid != null && o.lid >= .5) st.sq = 1;                       // lid squash
+    if (o.eyes) { st.dx = clamp((st.dx || 0) + (+o.eyes[0] || 0) * .86 * (o._flip ? -1 : 1), -1.3, 1.3); st.dy = clamp((st.dy || 0) + (+o.eyes[1] || 0) * .86, -1.3, 1.3); }
     const [mt, m] = mouthState(sp, ex, t, o);
     let out = "";
     // cheeks
@@ -331,7 +368,7 @@
     else out += E(-sp.eyes[1].x - 24, by, 15, 9, sp.pink, null, 0, `opacity="${bl}"`) + E(sp.eyes[1].x + 24, by, 15, 9, sp.pink, null, 0, `opacity="${bl}"`);
     if (ex.puff) out += who === "basil" ? "" : "";
     out += eye(sp, who, E0[0], -1, st, bk) + eye(sp, who, E0[1], 1, st, bk);
-    if (ex.brows) out += brow(sp, E0[0], -1, ex.brows[0]) + brow(sp, E0[1], 1, ex.brows[1]);
+    if (ex.brows) out += Gt(`translate(0 ${st.sq ? 2 : 0})`, brow(sp, E0[0], -1, ex.brows[0]) + brow(sp, E0[1], 1, ex.brows[1]));
     // nose and whiskers
     if (who === "pip") out += P("M-7 -176 Q0 -179 7 -176 Q4 -168 0 -167 Q-4 -168 -7 -176Z", sp.pink, "#D97A80", 2) + P("M0 -167 V-163", null, sp.line, 3.5) +
       P("M-58 -172 L-104 -180 M-58 -166 L-106 -164 M-58 -160 L-100 -148 M58 -172 L104 -180 M58 -166 L106 -164 M58 -160 L100 -148", null, "#fff", 2.4, 'opacity=".9"');
@@ -348,53 +385,111 @@
       eyes: [{ x: L(-18, -47), y: L(-251, -257), r: L(19.5, 19), sx: L(1, .84) }, { x: L(57, 47), y: L(-265, -257), r: L(14.5, 19), sx: L(.68, .84), bmax: L(19, 60) }],
       mouth: Object.assign({}, M, { x: L(40, 0), y: L(-205, -200), B: L2(M.B, [-66, -228]), D: L2(M.D, [0, -205]), F: L2(M.F, [66, -228]) }),
       chin: { L: L2(sp.chin.L, [-34, -182]), R: L2(sp.chin.R, [34, -182]) }, chest: L2(sp.chest, [4, -128]) }); }
+  /* ---------- extra poses: cross-legged (zen) and on all fours (sniff) ---------- */
+  function zenLegs(sp, who) { const leg = s => E(s * 40, -17, 50, 16, sp.fur, sp.line, LW, `transform="rotate(${s * -9} ${s * 40} -17)"`), foot = s => E(-s * 16, -11, 17, 10, sp.paw, sp.line) + P(`M${-s * 22} -8 v-6 M${-s * 12} -8 v-6`, null, sp.line, 2.6, 'opacity=".5"');
+    return leg(-1) + leg(1) + foot(1) + foot(-1); }
+  const SNIFF = { pip: { body: [-34, -74, 102, 66], tail: [-58, -8], head: [84, 92, 6, .94], legs: [-104, -52, 40, 104], sniff: [150, -14] },
+    basil: { body: [-36, -56, 112, 44], tail: [-128, -26, .72], head: [92, 160, 24, .94], legs: [-112, -58, 34, 84], sniff: [196, -14] },
+    momo: { body: [-40, -82, 104, 58], tail: [-92, -62], head: [76, 84, 6, .94], legs: [-112, -60, 30, 96], sniff: [146, -14] } };
+  function sniffFig(sp, who, t, headInner, tailStr, bob) { const K = SNIFF[who], [bx, by, rx, ry] = K.body;
+    let body = E(bx, by, rx, ry, sp.fur, sp.line, LW, `transform="rotate(9 ${bx} ${by})"`) + P(`M${bx - rx * .8} ${by + ry * .45} Q${bx} ${by + ry * 1.2} ${bx + rx * .8} ${by + ry * .62} Q${bx} ${by + ry * .82} ${bx - rx * .8} ${by + ry * .45}Z`, who === "pip" ? sp.shade : sp.belly, null, 0, 'opacity=".6"');
+    if (who === "momo") body += P([-.55, -.25, .05, .35].map(k => `M${n(bx + rx * k)} ${n(by - ry * Math.sqrt(1 - k * k) + 5 + 9 * k)} q-6 14 2 30`).join(" "), null, sp.shade, 7);
+    if (who === "basil") body += P([-.6, -.3, 0, .3].map(k => `M${n(bx + rx * k - 7)} ${n(by - ry * .45 + 9 * k)} q7 7 14 0 M${n(bx + rx * k + 9)} ${n(by - ry * .1 + 9 * k)} q7 7 14 0`).join(" "), null, sp.shade, 2.6);
+    const leg = (x, far) => { const top = by + ry * .3, d = `M${x} ${n(top)} Q${x - 6} -24 ${x + 4} -12`;
+      return `<path d="${d}" fill="none" stroke="${sp.line}" stroke-width="${sp.armW * .9 + LW * 2}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${far ? sp.shade : sp.fur}" stroke-width="${sp.armW * .9}" stroke-linecap="round"/>` + Gt(`translate(${x + 5} -10) rotate(${who === "basil" ? 14 : 0})`, PAW[who](sp, {})); };
+    const [hx, hy, ha, hs] = K.head, L = K.legs, dots = [0, 13, 25].map((d, i) => E(K.sniff[0] + d, K.sniff[1] - (i % 2) * 5 - 2 * Math.sin(TAU * t * 1.5 + i), 3.2 - i * .6, 3.2 - i * .6, sp.shade, null, 0, 'opacity=".8"')).join("");
+    return { tail: Gt(`translate(${K.tail[0]} ${K.tail[1]}) scale(${K.tail[2] || 1})`, tailStr), body: leg(L[1], 1) + leg(L[3], 1) + body + leg(L[0]) + leg(L[2]) + dots,
+      head: Gt(`translate(${hx} ${n(hy + bob)}) rotate(${ha} ${sp.head.cx} ${sp.chinY}) translate(0 ${sp.chinY}) scale(${hs}) translate(0 ${-sp.chinY})`, headInner) }; }
+
   /* ---------- the rig ---------- */
-  function draw(who, x, y, h, t, o) {
-    let sp = SPEC[who]; if (!sp) return ""; o = Object.assign({}, o); t = +t || 0;
+  // build(): every part as a string in rig units, plus the outer transforms. draw() joins them; parts() hands them out as layers.
+  function build(who, x, y, h, t, o) {
+    let sp = SPEC[who]; if (!sp) return null; o = Object.assign({}, o); t = +t || 0;
     o.seed = (o.seed || 0) + sp.seed;
-    const ex = EXPR[o.expr] || EXPR.happy;
-    if (who === "basil") { const ms = mouthState(sp, ex, t, o); sp = basilTurn(sp, o.look != null ? clamp(Math.abs(o.look)) : (o.talking || o.mouth != null) ? .7 : 0, ms[0] === "open" || ms[0] === "laugh" ? 3 + ms[1] * 6 : 0); }
-    const pose = o.pose || "sit", s = h / sp.H;
-    const facing = o.facing === "left" ? -1 : 1, flip = facing !== sp.native, br = o.breathe === false ? 0 : Math.sin(TAU * t / 3 + o.seed);
+    const ex = EXPR[o.expr] || EXPR.happy, pose = o.pose || "sit", s = h / sp.H;
+    const facing = o.facing === "left" ? -1 : 1, flip = facing !== sp.native, fs = flip ? -1 : 1; o._flip = flip;
+    const br = o.breath != null ? clamp(+o.breath || 0, -1, 1) : o.breathe === false ? 0 : Math.sin(TAU * t / 3 + o.seed);
+    const hturn = clamp((+o.headTurn || 0) * fs, -1, 1), hnod = clamp(+o.headNod || 0, -1, 1);
+    let mirror = false;
+    if (who === "basil") { const ms = mouthState(sp, ex, t, o);
+      // where the head points: 1 = three-quarter to the snout side, 0 = front, -1 = three-quarter the other way (looking back over the tail)
+      const base = 1 - (o.look != null ? clamp(Math.abs(o.look)) : (ex.front || pose === "zen") ? 1 : (o.talking || o.mouth != null) ? .7 : 0);
+      const pos = clamp(base + 2 * hturn + (ex.back ? -2 : 0), -1, 1); mirror = pos < 0;
+      sp = basilTurn(sp, 1 - Math.abs(pos), ms[0] === "open" || ms[0] === "laugh" ? 3 + ms[1] * 6 : 0); }
     // pose
-    let lift = pose === "stand" ? sp.lift : pose === "lean" ? sp.lift * .5 : pose === "jump" ? sp.lift * .6 : 0, lean = 0, jy = 0, sy = 1, air = 0;
+    let lift = pose === "stand" || pose === "walk" ? sp.lift : pose === "lean" ? sp.lift * .5 : pose === "jump" ? sp.lift * .6 : 0, lean = 0, jy = 0, sy = 1, air = 0, up = [0, 0], swing = 0;
     if (pose === "lean") lean = sp.native * 9;
     if (pose === "jump") { if (o.air != null) air = clamp(o.air); else { const p = ((t + o.seed * .21) % .9 + .9) % .9 / .9; air = p < .12 ? 0 : Math.sin(Math.PI * (p - .12) / .88); }
       jy = air * sp.H * .26; sy = lerp(.92, 1.05, clamp(air * 3)); }
+    if (pose === "walk") { const ph = TAU * (o.step != null ? +o.step : t * 1.8), sn = Math.sin(ph); up = [Math.max(0, sn) * 10, Math.max(0, -sn) * 10]; swing = sn; jy = Math.abs(Math.cos(ph)) * 3; lean = sp.native * 3; }
     const sx = 1 / Math.sqrt(sy);
+    // head state for the hooks (ears, turn, nod)
+    const ear = [+o.earL || 0, +o.earR || 0]; if (flip) ear.reverse();
+    const lookX = who === "basil" ? 0 : clamp((o.look != null ? clamp(o.look, -1, 1) : o.facing && !o.talking ? .5 : 0) + (ex.lookX || 0), -1, 1) * 7 + hturn * 22 + (ex.back ? -12 : 0);
+    const turnK = who === "basil" ? 0 : clamp(hturn + (ex.back ? -.6 : 0), -1, 1);
+    sp = Object.assign({}, sp, { hs: { ear, turn: turnK, fx: who === "basil" ? 0 : hturn * 22 + (ex.back ? -12 : 0), fy: who === "basil" ? 0 : hnod * 10, crest: 1 + (ear[0] + ear[1]) / 50 } });
     // gestures: which paw goes where
-    let g = o.gesture || ex.gesture || (pose === "jump" ? "cheer" : "rest"), side = null;
-    if (g === "pointL" || g === "pointR") { side = (g === "pointL") !== flip ? "L" : "R"; g = "point"; }
-    else if (!BOTH[g] && g !== "rest") { side = o.hand ? ((o.hand === "L") !== flip ? "L" : "R") : sp.hand; }
-    const rp = sp.rest[pose === "sit" ? "sit" : "stand"]; const arms = { back: "", front: "" }; let extras = "";
-    const UP = { wave: 1, thumbs: 1, cheer: 1, pawHead: 1 };   // Momo's raised paw starts wider, so it clears her big head, and stays in front of it
-    ["L", "R"].forEach(k => { const sg = k === "L" ? -1 : 1, act = g !== "rest" && GEST[g] && (BOTH[g] || side === k || (g === "peekaboo" && who !== "basil" && !o.hand)), S = (act && UP[g] && sp.shUp ? sp.shUp : sp.sh)[k]; let a;
-      if (act) { a = GEST[g](sp, S, sg, t); if (sp.shUp && UP[g]) a.front = 1; } else a = { P: rp[k], bend: sg * rp.bend, front: 1, f: {} };
-      const str = arm(sp, who, S, a.P, a.bend, a.f); if (a.front) arms.front += str; else arms.back += str;
+    const rp = sp.rest[pose === "sit" || pose === "zen" || pose === "sniff" ? "sit" : "stand"]; const arms = { back: "", front: "" }; let extras = "";
+    const UP = { wave: 1, thumbs: 1, cheer: 1, pawHead: 1, reach: 1, tada: 1 };   // Momo's raised paw starts wider, so it clears her big head, and stays in front of it
+    const resolve = g => { let side = null; if (g === "pointL" || g === "pointR") { side = (g === "pointL") !== flip ? "L" : "R"; g = "point"; }
+      else if (!BOTH[g] && g !== "rest") side = o.hand ? ((o.hand === "L") !== flip ? "L" : "R") : sp.hand; return { g, side }; };
+    const armPose = (r, k) => { const sg = k === "L" ? -1 : 1, g = r.g, act = g !== "rest" && GEST[g] && (BOTH[g] || r.side === k || (g === "peekaboo" && who !== "basil" && !o.hand)), S = (act && UP[g] && sp.shUp ? sp.shUp : sp.sh)[k]; let a;
+      if (act) { a = GEST[g](sp, S, sg, t); if (sp.shUp && UP[g]) a.front = 1; } else a = { P: [rp[k][0] + (k === "L" ? swing : -swing) * 9, rp[k][1]], bend: sg * rp.bend, front: 1, f: {} };
+      a.S = S; return a; };
+    const gTo = resolve(o.gesture || ex.gesture || (pose === "jump" ? "cheer" : pose === "zen" ? "lap" : "rest")), gK = o.gestureK != null ? clamp(+o.gestureK) : 1, gFrom = gK < 1 ? resolve(o.gestureFrom || "rest") : null;
+    ["L", "R"].forEach(k => { const sg = k === "L" ? -1 : 1; let a = armPose(gTo, k);
+      if (gFrom) { const b = armPose(gFrom, k), S = [lerp(b.S[0], a.S[0], gK), lerp(b.S[1], a.S[1], gK)];
+        // the hand travels on an arc about the shoulder (angle and length are blended)
+        const pa = Math.atan2(a.P[1] - a.S[1], a.P[0] - a.S[0]), pb = Math.atan2(b.P[1] - b.S[1], b.P[0] - b.S[0]); let da = pa - pb; if (da > Math.PI) da -= TAU; if (da < -Math.PI) da += TAU;
+        const an = pb + da * gK, ln = lerp(Math.hypot(b.P[0] - b.S[0], b.P[1] - b.S[1]), Math.hypot(a.P[0] - a.S[0], a.P[1] - a.S[1]), gK), src = gK >= .5 ? a : b;
+        a = { S, P: [S[0] + ln * Math.cos(an), S[1] + ln * Math.sin(an)], bend: lerp(b.bend, a.bend, gK), front: src.front, f: src.f, star: gK > .85 && a.star }; }
+      const str = arm(sp, who, a.S, a.P, a.bend, a.f); if (a.front) arms.front += str; else arms.back += str;
       if (a.star) { const tw = 1 + .25 * Math.sin(TAU * 1.5 * t); extras += star(a.P[0] + sg * 34, a.P[1] - 30, 13 * tw) + star(a.P[0] + sg * 52, a.P[1] - 4, 7 * (2 - tw)); } });
     // head motion
     const shake = ex.shake ? 3 * Math.sin(TAU * 4.5 * t) : 0, nod = o.talking ? 1.4 * Math.sin(TAU * 1.6 * t + o.seed) : 0;
-    const tilt = (who === "basil" ? (BT[o.expr] || 0) * (1 - .55 * sp.turn) : (ex.tilt || 0) * sp.native) + (o.tilt || 0) + nod, hy = -1.8 * br + shake + (pose === "lean" ? 3 : 0), hx = pose === "lean" ? sp.native * 9 : 0;
-    const look = who === "basil" ? 0 : clamp((o.look != null ? clamp(o.look, -1, 1) : o.facing && !o.talking ? .5 : 0) + (ex.lookX || 0), -1, 1) * 7;
+    let tilt = (who === "basil" ? (BT[o.expr] || 0) * (1 - .55 * sp.turn) + hnod * 9 : (ex.tilt || 0) * sp.native) + (o.tilt || 0) + nod; if (mirror) tilt = -tilt;
+    const hy = -1.8 * br + shake + (pose === "lean" ? 3 : 0), hx = pose === "lean" ? sp.native * 9 : 0;
     // extras fixed to the head
     let hEx = ""; const hd = sp.head;
     if (ex.sweat) hEx += Gt(`translate(${-sp.native * (hd.rx * .78) + (who === "basil" ? 30 : 0)} ${hd.cy - hd.ry * .62}) rotate(${-sp.native * 18})`, P("M0 -16 C10 -2 10 9 0 9 C-10 9 -10 -2 0 -16Z", "#AEDDF8", "#5E9FCF", 3));
     if (ex.dashes) hEx += P([-28, 0, 28].map(a => { const c = Math.sin(a * DEG), d = -Math.cos(a * DEG), r0 = hd.ry + (who === "pip" ? 62 : who === "momo" ? 56 : 30), cx = who === "basil" ? 10 : 0; return `M${n(cx + c * r0)} ${n(hd.cy + d * r0)} L${n(cx + c * (r0 + 20))} ${n(hd.cy + d * (r0 + 20))}`; }).join(" "), null, sp.line, 5);
+    // hyper: curved motion lines on both sides of the head
+    if (ex.vib) { const R0 = who === "basil" ? 112 : 150, cy = hd.cy - (who === "basil" ? 6 : 26), w = 1.5 * Math.sin(TAU * 6 * t);
+      hEx += P([-1, 1].map(sg => [0, 16].map(d => { const R = R0 + d + w, a0 = (d ? 12 : 20) * DEG, a1 = (d ? -22 : -30) * DEG; return `M${n(sg * R * Math.cos(a0))} ${n(cy + R * Math.sin(a0))} A${R} ${R} 0 0 ${sg > 0 ? 0 : 1} ${n(sg * R * Math.cos(a1))} ${n(cy + R * Math.sin(a1))}`; }).join(" ")).join(" "), null, sp.line, 4, 'opacity=".7"'); }
     if (ex.stars) { const tw = 1 + .25 * Math.sin(TAU * 1.5 * t); extras += star(-hd.rx - 34, hd.cy - hd.ry - 10, 11 * tw) + star(hd.rx + 40, hd.cy - hd.ry + 6, 9 * (2 - tw)); }
-    const head = Gt(`translate(${n(hx)} ${n(hy)}) rotate(${n(tilt)} ${hd.cx} ${sp.chinY})`, HEAD[who](sp) + Gt(`translate(${n(look)} 0)`, face(sp, who, ex, t, o)) + hEx);
-    const upper = Gt(`translate(0 ${-lift})`, Gt(`scale(1 ${n(1 + .02 * br)})`, BODY[who](sp)) + arms.back + head + arms.front + extras);
-    const feetUp = pose === "jump" ? -air * 6 : 0;
-    const feet = Gt(`translate(0 ${n(feetUp)})`, FEET[who](sp, lift));
-    // Pip's feet peek out from under his body; Basil's thigh and Momo's hind paws sit in front of theirs
-    const fig = Gt(`translate(0 ${n(-jy)}) rotate(${lean}) scale(${n(sx)} ${n(sy)})`, Gt(`translate(0 ${-lift * .5})`, TAIL[who](sp, t)) + legs(sp, lift) + (who === "basil" ? basilFar(sp, lift) : "") + (who === "pip" ? feet + upper : upper + feet));
-    const shW = (who === "basil" ? 120 : 112) * (1 - air * .35);
+    const sq = clamp(+o.headSquash || 0, -.3, .3), sqT = sq ? ` translate(0 ${sp.chinY}) scale(${n(100 / (1 + sq)) / 100} ${n(100 * (1 + sq)) / 100}) translate(0 ${-sp.chinY})` : "";
+    const faceT = who === "basil" ? "" : `translate(${n(lookX)} ${n(hnod * 10)})` + (turnK ? ` scale(${n(100 - 9 * Math.abs(turnK)) / 100} 1)` : "");
+    let headInner = HEAD[who](sp) + (faceT ? Gt(faceT, face(sp, who, ex, t, o)) : face(sp, who, ex, t, o)) + hEx; if (mirror) headInner = Gt("scale(-1 1)", headInner);
+    const tailStr = TAIL[who](sp, t, o.tailSwing == null ? null : Array.isArray(o.tailSwing) ? o.tailSwing.map(v => (+v || 0) * fs) : (+o.tailSwing || 0) * fs);
+    const figT = `translate(0 ${n(-jy)}) rotate(${lean}) scale(${n(sx)} ${n(sy)})`, outer = `translate(${n(x)} ${n(y)}) scale(${n(flip ? -s : s)} ${n(s)})`;
+    const shW = (who === "basil" ? 120 : 112) * (1 - air * .35) * (pose === "sniff" ? 1.25 : 1);
     const shadow = o.shadow === false ? "" : `<ellipse cx="${who === "basil" ? -30 : -10}" cy="2" rx="${n(shW)}" ry="${n(shW * .13)}" fill="#2B2147" opacity="${n(.2 * (1 - air * .5))}"/>`;
-    return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(flip ? -s : s)} ${n(s)})">${shadow}${fig}</g>`;
+    if (pose === "sniff") { const q = sniffFig(sp, who, t, Gt(`rotate(${n(tilt)} ${hd.cx} ${sp.chinY})${sqT}`, headInner), tailStr, 2 * Math.sin(TAU * t * 1.5));
+      return { outer, figT, shadow, layers: [["tail", q.tail], ["body", q.body], ["head", q.head]] }; }
+    const upT = `translate(${n((+o.hips || 0) * fs)} ${-lift}) rotate(${n((+o.bodyLean || 0) * fs)} 0 -30)`, U = inner => inner ? Gt(upT, inner) : "";
+    const headG = Gt(`translate(${n(hx)} ${n(hy)}) rotate(${n(tilt)} ${hd.cx} ${sp.chinY})${sqT}`, headInner);
+    const feetUp = pose === "jump" ? -air * 6 : 0;
+    const feet = pose === "zen" ? zenLegs(sp, who) : Gt(`translate(0 ${n(feetUp)})`, FEET[who](sp, lift, up));
+    const under = legs(sp, lift) + (who === "basil" && pose !== "zen" ? basilFar(sp, lift, up[1]) : "");
+    const bodyG = Gt(`scale(1 ${n(1 + .02 * br)})`, BODY[who](sp));
+    // Pip's feet peek out from under his body; Basil's thigh and Momo's hind paws sit in front of theirs
+    return { outer, figT, shadow, layers: [["tail", Gt(`translate(0 ${-lift * .5})`, tailStr)], ["body", under + (who === "pip" && pose !== "zen" ? feet : "") + U(bodyG + arms.back)], ["head", U(headG)], ["armsFront", U(arms.front + extras)], ["feet", who === "pip" && pose !== "zen" ? "" : feet]] };
   }
-  const api = { draw, SPEC, LW,
+  const wrap = (b, inner) => inner ? `<g transform="${b.outer}"><g transform="${b.figT}">${inner}</g></g>` : "";
+  function draw(who, x, y, h, t, o) { const b = build(who, x, y, h, t, o); if (!b) return "";
+    return `<g transform="${b.outer}">${b.shadow}<g transform="${b.figT}">${b.layers.map(l => l[1]).join("")}</g></g>`; }
+  // the same picture as layers, back to front: shadow, tail, body (with legs and back arm), head, armsFront, feet (Basil's and Momo's
+  // front feet; empty for Pip). Put a prop between `head` and `armsFront` and the front paw holds it.
+  function parts(who, x, y, h, t, o) { const b = build(who, x, y, h, t, o), out = { shadow: "", tail: "", body: "", head: "", armsFront: "", feet: "" }; if (!b) return out;
+    out.shadow = b.shadow ? `<g transform="${b.outer}">${b.shadow}</g>` : ""; b.layers.forEach(l => { out[l[0]] = wrap(b, l[1]); }); return out; }
+  const api = { draw, parts, SPEC, LW,
     pip: (x, y, h, t, o) => draw("pip", x, y, h, t, o), basil: (x, y, h, t, o) => draw("basil", x, y, h, t, o), momo: (x, y, h, t, o) => draw("momo", x, y, h, t, o),
-    EXPRESSIONS: Object.keys(EXPR), GESTURES: ["rest", "pointL", "pointR", "wave", "pawHead", "cross", "thumbs", "cheer", "chin", "flare"], POSES: ["sit", "stand", "lean", "jump"],
-    EXTRA_EXPRESSIONS: ["amazed", "dreamy", "shy", "stern", "blep", "zen", "hyper", "tailgaze"], EXTRA_GESTURES: ["idea", "listen", "peekaboo", "salute", "tada", "please", "cheek", "shy"],
+    EXPRESSIONS: ["happy", "cheering", "shocked", "thinking", "smug", "oops", "laughing", "sulking"],
+    GESTURES: ["rest", "pointL", "pointR", "wave", "pawHead", "cross", "thumbs", "cheer", "chin", "flare"], POSES: ["sit", "stand", "lean", "jump"],
+    EXTRA_EXPRESSIONS: ["amazed", "dreamy", "shy", "stern", "blep", "zen", "hyper", "tailgaze", "pleading", "full"],
+    EXTRA_GESTURES: ["idea", "listen", "peekaboo", "salute", "tada", "please", "cheek", "shy", "full", "reach", "lap"], EXTRA_POSES: ["walk", "sniff", "zen"],
+    // rig hooks the motion layer may pass (characters/RIG_REQUESTS.md); each one is "no change" when absent
+    HOOKS: ["lid", "tailSwing", "earL", "earR", "eyes", "headTurn", "headNod", "headSquash", "gestureK", "gestureFrom", "mouthShape", "bodyLean", "hips", "breath", "parts"],
     // heights that keep the app's relative sizes when the three stand together (multiply by one common size)
     REL: { pip: .9, basil: 1, momo: 1 }, talkM, blinkK };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.Buddies = api;

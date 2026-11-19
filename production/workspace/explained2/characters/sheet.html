@@ -1,17 +1,17 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
-<!-- Character sheet for the buddy rigs. node ../kit/shot.js sheet.html sheet.png 2600 3330 -->
+<!-- Character sheet for the buddy rigs. node ../kit/shot.js sheet.html sheet.png 2600 4350 -->
 <style>
   @font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
   @font-face{font-family:Fredoka;font-weight:700;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
   html,body{margin:0;background:#FFF8EA;overflow:hidden} svg{display:block} text{font-family:Fredoka}
 </style></head><body>
-<svg id="v" xmlns="http://www.w3.org/2000/svg" width="2600" height="3330" viewBox="0 0 2600 3330"></svg>
+<svg id="v" xmlns="http://www.w3.org/2000/svg" width="2600" height="4350" viewBox="0 0 2600 4350"></svg>
 <script src="buddies.js"></script>
 <script>
 const B = Buddies, W = 2600, AURA = { pip: "#B9A6FF", basil: "#7FE3C4", momo: "#FFB38A" }, NAME = { pip: "Pip the chinchilla", basil: "Basil the lizard", momo: "Momo the cat" }, PET = { pip: "chin", basil: "liz", momo: "cat" };
 const T = (x, y, s, size = 26, a = "middle", w = 600, fill = "#2B2147") => `<text x="${x}" y="${y}" font-size="${size}" text-anchor="${a}" font-weight="${w}" fill="${fill}">${s}</text>`;
-let out = `<rect width="${W}" height="3330" fill="#FFF8EA"/>` + T(60, 78, "The buddies: app art (left) and the new SVG rigs", 54, "start", 700);
+let out = `<rect width="${W}" height="4350" fill="#FFF8EA"/>` + T(60, 78, "The buddies: app art (left) and the new SVG rigs", 54, "start", 700);
 const T0 = 1.0, H = 230;
 ["pip", "basil", "momo"].forEach((who, r) => { const y0 = 120 + r * 860, k = B.REL[who];
   out += `<rect x="40" y="${y0}" width="${W - 80}" height="830" rx="36" fill="#fff"/><rect x="40" y="${y0}" width="520" height="830" rx="36" fill="${AURA[who]}" opacity=".35"/>` + T(70, y0 + 52, NAME[who], 38, "start", 700);
@@ -36,5 +36,11 @@ more2.forEach(([who, l, o], i) => { const x = 150 + i * 195, y = yb + 520; out +
 // line-up on aura discs
 [["pip", 1500, { expr: "smug", gesture: "pointR" }], ["basil", 1920, { expr: "thinking" }], ["momo", 2340, { expr: "cheering" }]].forEach(([who, x, o]) => { const h = 310 * B.REL[who], y = yb + 520;
   out += `<circle cx="${x}" cy="${y - 150}" r="${196}" fill="${AURA[who]}" opacity=".92"/>` + B.draw(who, x, y, h, T0, o) + `<rect x="${x - 70}" y="${y + 14}" width="140" height="44" rx="22" fill="${AURA[who]}"/>` + T(x, y + 46, who[0].toUpperCase() + who.slice(1), 26, "middle", 700); });
+// new poses from the teacher's reference sheets
+const yn = yb + 620, NEW = [["please", { expr: "pleading" }], ["ta-da", { gesture: "tada" }], ["listen", { gesture: "listen" }], ["peekaboo", { gesture: "peekaboo" }], ["idea", { gesture: "idea" }], ["stern", { expr: "stern" }], ["blep", { expr: "blep" }], ["full", { expr: "full" }], ["tail-gaze", { expr: "tailgaze" }],
+  ["walk", { pose: "walk", step: .22 }], ["sniff", { pose: "sniff" }], ["salute", { pose: "stand", gesture: "salute" }], ["reach", { pose: "stand", gesture: "reach" }], ["hyper", { expr: "hyper" }], ["zen", { pose: "zen", expr: "zen" }], ["amazed", { expr: "amazed" }], ["dreamy", { expr: "dreamy" }], ["shy", { expr: "shy" }]];
+out += `<rect x="40" y="${yn}" width="${W - 80}" height="980" rx="36" fill="#fff"/>` + T(70, yn + 52, "More poses from the teacher's reference sheets (expr, gesture and pose extras)", 34, "start", 700);
+["pip", "basil", "momo"].forEach((who, r) => NEW.forEach(([l, o], i) => { const x = 130 + i * 138, y = yn + 300 + r * 300, sn = o.pose === "sniff";
+  out += B.draw(who, x + (sn ? 14 : 8), y, (sn ? 105 : 150) * B.REL[who] * (who === "basil" ? .84 : 1), T0, o) + (r === 2 ? T(x, y + 34, l, 20) : ""); }));
 document.getElementById("v").innerHTML = out;
 </script></body></html>

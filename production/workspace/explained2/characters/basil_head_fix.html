@@ -1,23 +1,23 @@
 <!doctype html><html><head><meta charset="utf-8">
-<!-- Basil against the teacher's reference sheet. node ../kit/shot.js basil_head_fix.html basil_head_fix.png 3600 2330 -->
+<!-- Basil against the teacher's reference sheet. node ../kit/shot.js basil_head_fix.html basil_head_fix.png 3600 3200 -->
 <style>@font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
 html,body{margin:0;background:#FFF8EA} svg{display:block} text{font-family:Fredoka;font-weight:600;fill:#2B2147}</style></head><body>
-<svg id="v" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3600" height="2330" viewBox="0 0 3600 2330"></svg>
+<svg id="v" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3600" height="3200" viewBox="0 0 3600 3200"></svg>
 <script src="buddies.js"></script>
 <script>
 const REF = "basil_ref/basil_8_poses_from_teacher.jpg", RW = 1376, RH = 768;
 // each panel: crop box on the sheet, where the feet are in the crop (px), and the matching rig options
 const PAN = [
-  ["look down", [12, 14], [210, 311], { tilt: 20, expr: "shy", gesture: "rest" }, "happy, tilt 20, eyes down"],
-  ["look up", [354, 14], [212, 311], { tilt: -22 }, "happy, tilt -22"],
-  ["look back", [696, 14], [198, 309], { facing: "left", gesture: "wave", hand: "L" }, "facing left, wave (whole rig mirrored)"],
+  ["look down", [12, 14], [210, 311], { headNod: 1, tilt: 12, eyes: [.2, 1] }, "headNod 1, eyes down"],
+  ["look up", [354, 14], [212, 311], { headNod: -1, tilt: -13, eyes: [.2, -.8] }, "headNod -1, eyes up"],
+  ["look back", [696, 14], [198, 309], { headTurn: -1, gesture: "wave", hand: "R" }, "headTurn -1 (head only), wave"],
   ["dreamy", [1040, 14], [205, 311], { expr: "dreamy" }, "expr dreamy"],
   ["thoughtful", [12, 404], [214, 313], { expr: "thinking" }, "expr thinking"],
   ["shy", [354, 404], [212, 313], { expr: "shy" }, "expr shy"],
   ["amazed", [696, 404], [207, 313], { expr: "amazed" }, "expr amazed"],
   ["front view", [1040, 404], [207, 313], { look: 1 }, "look 1 (front view)"]];
 const T = (x, y, s, z = 30, a = "middle") => `<text x="${x}" y="${y}" font-size="${z}" text-anchor="${a}">${s}</text>`;
-let defs = "", o = `<rect width="3600" height="2330" fill="#FFF8EA"/>` + T(60, 70, "Basil: the teacher's reference panels (left of each pair) and the SVG rig (right)", 46, "start");
+let defs = "", o = `<rect width="3600" height="3200" fill="#FFF8EA"/>` + T(60, 70, "Basil: the teacher's reference panels (left of each pair) and the SVG rig (right)", 46, "start");
 const refImg = (i, x, y, c, op = 1) => { const [bx, by] = PAN[i][1], k = c / 322; defs += `<clipPath id="c${i}_${x}_${y}"><rect x="${x}" y="${y}" width="${c}" height="${c}" rx="${22 * k}"/></clipPath>`;
   return `<image href="${REF}" x="${x - bx * k}" y="${y - by * k}" width="${RW * k}" height="${RH * k}" clip-path="url(#c${i}_${x}_${y})" opacity="${op}"/>`; };
 const rig = (i, x, y, c, extra) => { const k = c / 322, [fx, fy] = PAN[i][2]; return Buddies.draw("basil", x + fx * k, y + fy * k, 290 * k, 1.0, Object.assign({ shadow: false, blink: false, breathe: false }, PAN[i][3], extra)); };
@@ -29,6 +29,11 @@ const yo = 1260, CO = 840;
 o += T(60, yo - 30, "Overlay check: rig (55%) on top of the reference at the same size. Three-quarter views and the front view.", 40, "start");
 [[6, {}], [4, {}], [3, {}], [7, {}]].forEach(([i, ex], j) => { const x = 40 + j * 890;
   o += refImg(i, x, yo, CO) + `<svg x="${x}" y="${yo}" width="${CO}" height="${CO}" viewBox="${x} ${yo} ${CO} ${CO}" opacity=".55">${rig(i, x, yo, CO, ex)}</svg>` + T(x + CO / 2, yo + CO + 44, PAN[i][0] + " + rig", 32); });
-o += T(60, 2270, "Rig drawn flat-vector per the style guide (self-coloured lines, soft bumps instead of sharp spikes). Eye centres, head width and snout length are matched to the panels above.", 30, "start");
+o += T(60, 2200, "Rig drawn flat-vector per the style guide (self-coloured lines, soft bumps instead of sharp spikes). Eye centres, head width and snout length are matched to the panels above.", 30, "start");
+// the second sheet's poses (16-pose sheet: described by the teacher, not on disk)
+const NEW = [["please", { expr: "pleading" }], ["ta-da", { gesture: "tada", expr: "amazed", look: 1 }], ["listen", { gesture: "listen", hand: "L" }], ["peekaboo", { gesture: "peekaboo", look: 1 }], ["idea", { gesture: "idea", expr: "amazed" }], ["stern", { expr: "stern" }], ["blep", { expr: "blep" }], ["full", { expr: "full" }],
+  ["tail-gaze", { expr: "tailgaze" }], ["walk", { pose: "walk", step: .22 }], ["sniff", { pose: "sniff" }], ["salute", { pose: "stand", gesture: "salute" }], ["reach", { pose: "stand", gesture: "reach", headNod: -.8 }], ["hyper", { expr: "hyper" }], ["zen", { pose: "zen", expr: "zen" }]];
+o += T(60, 2340, "New poses from the teacher's second Basil sheet (rig only)", 40, "start");
+NEW.forEach(([l, op], i) => { const x = 270 + (i % 8) * 428, y = 2740 + Math.floor(i / 8) * 400, sn = op.pose === "sniff"; o += Buddies.draw("basil", x + (sn ? 40 : 20), y, sn ? 250 : 320, 1.0, Object.assign({ blink: false, breathe: false }, op)) + T(x, y + 44, l, 30); });
 document.getElementById("v").innerHTML = `<defs>${defs}</defs>` + o;
 </script></body></html>

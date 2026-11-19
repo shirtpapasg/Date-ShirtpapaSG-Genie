@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Momo / Pip against the teacher's 32-pose sheets. node ../kit/shot.js "ref_compare.html?who=momo" momo_ref_compare.png 2640 2370   (same with who=pip) -->
+<style>@font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+html,body{margin:0;background:#FFF8EA} svg{display:block} text{font-family:Fredoka;font-weight:600;fill:#2B2147}</style></head><body>
+<svg id="v" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2640" height="2370" viewBox="0 0 2640 2370"></svg>
+<script src="buddies.js"></script>
+<script>
+const who = (location.search.match(/who=(\w+)/) || [0, "momo"])[1], REF = `${who}_ref/${who}_32_poses_from_teacher.jpg`, RW = 1376, RH = 768;
+const CX = [14, 184, 355, 526, 696, 866, 1036, 1207], CY = [10, 208, 396, 585], PW = 156;
+// [label, column, row on the sheet, rig options, how the rig is asked for it]
+const PAN = [
+  ["look down", 0, 0, { headNod: 1, eyes: [.3, 1], tilt: 6 }, "headNod 1, eyes down"],
+  ["look up", 1, 0, { headNod: -1, eyes: [.2, -1], tilt: -6 }, "headNod -1, eyes up"],
+  ["look back", 2, 0, { headTurn: -1, eyes: [-1, 0], gesture: "wave", hand: "R" }, "headTurn -1, wave"],
+  ["dreamy", 3, 0, { expr: "dreamy" }, "expr dreamy"],
+  ["thoughtful", 4, 0, { expr: "thinking" }, "expr thinking"],
+  ["shy", 5, 0, { expr: "shy" }, "expr shy"],
+  ["amazed", 6, 0, { expr: "amazed" }, "expr amazed"],
+  ["front view", 7, 0, {}, "default (happy, sit)"],
+  ["please", 0, 1, { expr: "pleading" }, "expr pleading"],
+  ["ta-da", 1, 1, { gesture: "tada" }, "gesture tada"],
+  ["listen", 2, 1, { gesture: "listen", eyes: [.8, 0] }, "gesture listen"],
+  ["peekaboo", 3, 1, { gesture: "peekaboo" }, "gesture peekaboo"],
+  ["explore", 4, 1, { pose: "lean", gesture: "flare", hand: "R", headNod: .6, eyes: [.6, .8] }, "pose lean, headNod .6"],
+  ["idea", 5, 1, { gesture: "idea", expr: "amazed" }, "gesture idea"],
+  ["stern", 6, 1, { expr: "stern" }, "expr stern"],
+  ["blep", 7, 1, { expr: "blep" }, "expr blep"],
+  ["walk", 0, 3, { pose: "walk", step: .22, gesture: "wave", expr: "amazed" }, "pose walk, wave"],
+  ["sniff", 1, 3, { pose: "sniff" }, "pose sniff"],
+  ["salute", 2, 3, { pose: "stand", gesture: "salute", expr: "stern" }, "stand, gesture salute"],
+  ["reach", 3, 3, { pose: "stand", gesture: "reach", headNod: -.8, eyes: [.3, -1] }, "stand, gesture reach"],
+  ["full", 4, 3, { expr: "full" }, "expr full"],
+  ["tail-gaze", 5, 3, { expr: "tailgaze" }, "expr tailgaze"],
+  ["hyper", 6, 3, { expr: "hyper" }, "expr hyper"],
+  ["zen", 7, 3, { pose: "zen", expr: "zen" }, "pose zen, expr zen"]];
+const MIX = { pip: { "ta-da": 1, "idea": 1, "sniff": 1, "reach": 1, "hyper": 1 } }[who] || {};
+const NAME = { momo: "Momo", pip: "Pip" }[who];
+const T = (x, y, s, z = 24, a = "middle", f = "#2B2147") => `<text x="${x}" y="${y}" font-size="${z}" text-anchor="${a}" style="fill:${f}">${s}</text>`;
+let defs = "", o = `<rect width="2640" height="2370" fill="#FFF8EA"/>` + T(50, 62, `${NAME}: the teacher's reference panels (left of each pair) and the SVG rig (right)`, 42, "start");
+const C = 300, k = C / PW;
+PAN.forEach((p, i) => { const x = 40 + (i % 4) * 645, y = 100 + Math.floor(i / 4) * 368, bx = CX[p[1]], by = CY[p[2]];
+  defs += `<clipPath id="c${i}"><rect x="${x}" y="${y}" width="${C}" height="${C}" rx="26"/></clipPath>`;
+  o += `<rect x="${x}" y="${y}" width="${C * 2 + 10}" height="${C}" rx="26" fill="#fff"/><image href="${REF}" x="${x - bx * k}" y="${y - by * k}" width="${RW * k}" height="${RH * k}" clip-path="url(#c${i})" opacity="${MIX[p[0]] ? .45 : 1}"/>`;
+  if (MIX[p[0]]) o += `<rect x="${x + 20}" y="${y + C - 46}" width="${C - 40}" height="34" rx="17" fill="#2B2147"/>` + T(x + C / 2, y + C - 22, "lizard panel: ignored", 19, "middle", "#fff");
+  const sn = p[3].pose === "sniff";
+  o += `<svg x="${x + C + 10}" y="${y}" width="${C}" height="${C}" viewBox="${x + C + 10} ${y} ${C} ${C}">${Buddies.draw(who, x + C + 10 + C / 2 + (sn ? 10 : 14), y + C - 24, (sn ? 170 : 232) * Buddies.REL[who], 1.0, Object.assign({ blink: false, breathe: false }, p[3]))}</svg>`;
+  o += T(x + C / 2, y + C + 32, p[0] + " (reference)") + T(x + C + 10 + C / 2, y + C + 32, "rig: " + p[4]); });
+o += T(50, 2340, "Row 3 of the teacher's sheet repeats poses from the other rows, so rows 1, 2 and 4 are shown. The rig stays flat-vector and faces the viewer, as approved.", 26, "start");
+document.getElementById("v").innerHTML = `<defs>${defs}</defs>` + o;
+</script></body></html>
