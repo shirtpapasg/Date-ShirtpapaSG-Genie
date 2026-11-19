@@ -1,0 +1,199 @@
+{
+ "episode": "SAU EP10",
+ "title": "Dead things… become your food?!",
+ "tag": "🌏 TheOneApp, Explored · EP 10 · Compost",
+ "intro": {
+  "goals": [
+   [
+    "🍄",
+    "What decomposers do",
+    "first"
+   ],
+   [
+    "🪱",
+    "How a compost bin feeds plants",
+    "second"
+   ],
+   [
+    "🍽️",
+    "How it helps Singapore's food security",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "More science from",
+  "your world! 🌏"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🍄",
+    "Decomposers return nutrients to the soil",
+    "decomposers",
+    0.12,
+    "#7f5539"
+   ],
+   [
+    "🌱",
+    "Compost feeds plants, plants feed animals",
+    "compost",
+    0.32,
+    "#2a9d8f"
+   ],
+   [
+    "🍽️",
+    "Waste less, compost more: food security",
+    "waste",
+    0.55,
+    "#e63946"
+   ]
+  ],
+  "tease": "🌏 Next time: more science from your world!",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "decomposers",
+   "DECOMPOSERS",
+   "#7f5539"
+  ],
+  [
+   "textbook",
+   "nutrients",
+   "NUTRIENTS",
+   "#2a9d8f"
+  ],
+  [
+   "security",
+   "compost",
+   "COMPOST",
+   "#6a994e"
+  ],
+  [
+   "news",
+   "waste",
+   "FOOD WASTE",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "gardenFind",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "A dead grasshopper. Gross? Actually, it's treasure! Inside it are nutrients that plants need. So where do they go?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why does Project Wolbachia release only male mosquitoes? Male mosquitoes don't bite, so they can't spread dengue. Female mosquitoes bite, so releasing them could make things worse."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what decomposers do. Second, how a compost bin feeds plants. And third, how it helps Singapore's food security. Let's get started!"
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "c1",
+   "scene": "povGrasshopper",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "c2",
+   "scene": "povDecompose",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "c3",
+   "scene": "povCompost",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "c4",
+   "scene": "povSpread",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "c5",
+   "scene": "povRoot",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "c6",
+   "scene": "povEaten",
+   "silent": 5.0,
+   "sfx": []
+  },
+  {
+   "id": "c7",
+   "scene": "circle",
+   "silent": 6.0,
+   "sfx": []
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. In twenty twenty-five, Singapore threw away about seven hundred and ninety thousand tonnes of food waste. Only about eighteen out of every hundred tonnes was recycled. The rest was burnt, and its nutrients were lost.",
+   "hold": 1.0
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that journey? You were a tiny bit of nutrient inside a dead grasshopper. Decomposers broke it down, and you went into the soil. You were raked into a compost bin with leaves and food scraps, and spread on the garden as compost. A plant's roots took you in. A grasshopper ate the leaf, and one day, you went back to the soil again.",
+   "hold": 1.0
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Six, you learn about decomposers. Bacteria and fungi break down dead plants and animals into simpler substances. These go back into the soil, and plants use them to grow. Without decomposers, dead things would pile up, and the soil would run out of nutrients.",
+   "hold": 1.0
+  },
+  {
+   "id": "security",
+   "scene": "security",
+   "text": "So how does this help Singapore's food security? Healthy soil grows healthy food. Composting turns food scraps into rich compost for our gardens and farms, instead of burning them. And wasting less food means Singapore needs to buy less."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! In a container, layer fruit and vegetable peels with dry leaves and some soil. Keep it damp, and stir it every few days. In a few weeks, it turns into dark, crumbly compost. But don't add meat, fish or oily food. They smell, and attract pests."
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why do you think a compost bin gets warm inside? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Decomposers return nutrients from dead things to the soil. Compost feeds plants, and plants feed animals, round and round. And when we waste less and compost more, we help Singapore's food security. Next time: more science from your world!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}
