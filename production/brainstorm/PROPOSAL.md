@@ -101,3 +101,18 @@ life cycles and body systems, the rounds become "Sort it" (put it through the ri
 1. The rival: Chop the mynah (recommended), or a robot, or a pupil character.
 2. Catchphrase: "Lock it in!" (global) or a Singlish touch such as "Confirm plus chop!".
 3. Pilot: P5 evaporation as one full episode + three Shorts + the teacher sheet, scripted first for approval.
+
+## Update (19 Nov): the cast is TheOneApp's pet buddies
+The teacher asked for the app's pet buddies instead of a new rival: Pip the chinchilla, Basil the lizard and Momo the cat (pets/*.png
+in TheOneApp; kid voices from the Character Voice Kit: Pip af_sky, Basil am_liam, Momo af_heart, each lifted to a child's voice).
+- Heart stays the host. The three buddies are the panel the viewer plays against: each locks in with a one-line reason AFTER the
+  viewer locks in.
+- Personalities: Pip careful (checks the fair test), Basil bold (goes with his gut), Momo curious (asks the question kids are thinking).
+- The wrong idea ROTATES between the buddies by round, and sometimes two buddies disagree, so no pet is "the dumb one" and no shortcut
+  ("pick the opposite of Basil") wins. Whoever is wrong is a good sport and is corrected within seconds, never in Heart's voice.
+- The FOUL is still run by a buddy; the Showdown's flawed exam answer is a buddy's homework.
+- Season score: You vs the Buddies. In TheOneApp the child's chosen buddy cheers their real score (same pet, same voice): the videos
+  advertise the app and the app brings children back to the videos.
+- Art: the app pets are painted 152 px images with four poses. The videos need them redrawn as SVG character rigs that match the app
+  look (same colours, shapes and faces) with talking mouths, blinks and about eight expressions. First step: a character sheet for the
+  teacher to approve.
