@@ -19,3 +19,14 @@ Read first:
 Hard rules: original work only (learn principles from successful channels, never copy any show's characters, names, look or music);
 Singapore settings and MOE-exact science; nothing may teach a wrong idea; deterministic frames (a frame depends only on t).
 Do not commit, push, upload or touch YouTube, the review boards or TheOneApp.
+
+## Updates (19 Nov, later)
+- The PILOT is P3 EPISODE 1 "Living and non-living things" (P3 plan row 1: "Is your teddy bear alive? The two-group sort"), not P5
+  evaporation. P3 plan: `git -C /home/user/Date-ShirtpapaSG-Genie show origin/claude/cool-hypatia-v13e6t:production/workspace/P3/plan/<file>`
+  (00_series_plan.md, 01_style_guide_p3.md, briefs/ep01.md; list with git ls-tree).
+- The teacher's success examples (principles only, never copy): `success_examples.md` in this folder (7 videos: Sesame Street,
+  Dr. Plants x2, Aquarium Info, Journey to the Microcosmos, Kurzgesagt x2). Read it all.
+- PROGRESS: the teacher watches a progress indicator. Each time you finish a step, overwrite `progress/<your-id>.json` with
+  {"pct": <0-100 honest estimate of your whole job>, "step": "<what you just finished, 6-10 plain words>", "next": "<what's next>",
+  "updated": "<UTC ISO time>"}. Write it first thing, then after every step. One quick write; don't let it slow you down.
+- SAVE AS YOU GO: the machine can restart. Write each deliverable to disk as soon as a usable draft exists, then improve it in place.
