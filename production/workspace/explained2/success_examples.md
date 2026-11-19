@@ -17,3 +17,9 @@ Learn principles only; never copy characters, names, music, footage or look.
      process is the story); a big satisfying reveal; the maker speaks as "I/we", so the viewer feels they are doing it too.
    - For us: the buddies BUILD something to answer the question ("We turned Momo's bedroom into a living-things zoo", "We built a
      sorting machine"), with steps, setbacks and a reveal.
+5. Journey to the Microcosmos, "The Incredible World of Bacterial Communities"  https://www.youtube.com/watch?v=GvQrH8qas0Q
+   - real microscope footage of tiny life, treated as a beautiful, alien world; calm, warm, wondering narration ("we") that asks big
+     questions; rich ambient music; shots allowed to breathe; a sense of awe more than a list of facts.
+   - For us: our first-person "shrink" journeys should feel like this: a living micro-world with soft light, depth, organic textures and
+     motion, and moments of quiet wonder between the game beats (the contrast makes the game beats land harder). Perfect for P3 EP7
+     (fungi and bacteria), P5 cells, P6 decomposers.
