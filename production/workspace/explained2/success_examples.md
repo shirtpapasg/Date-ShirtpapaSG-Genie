@@ -30,3 +30,9 @@ Learn principles only; never copy characters, names, music, footage or look.
      narrator; very high production polish, every frame worth pausing on.
    - For us: the level of polish to aim for in the new style guide; clean vector shapes, a signature palette, glow and depth, and
      diagrams so clear a 9-year-old reads them in one second.
+7. Kurzgesagt – In a Nutshell, "Black Holes Explained – From Birth to Death"  https://www.youtube.com/watch?v=e-P5IFTqB98
+   - a hard idea told as a life story ("from birth to death"); built up step by step from something everyone knows; scale made
+     tangible with comparisons ("if the Sun were a grain of sand..."); a few strong visual metaphors reused through the video; each
+     step answers the question the last one raised, so curiosity pulls the viewer forward.
+   - For us: tell a concept as a journey or life story where it fits, use Singapore-sized comparisons (an HDB block, an MRT train,
+     a void deck) for scale, and chain the segments so each answer opens the next question.
