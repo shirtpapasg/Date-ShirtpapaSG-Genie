@@ -1,0 +1,149 @@
+{
+ "episode": "SAU EP10 Short 2",
+ "title": "Don't kill the ants! Why?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s2b",
+   "detritivores",
+   "DETRITIVORES",
+   "#bc6c25"
+  ],
+  [
+   "s2c",
+   "landfill",
+   "LANDFILL",
+   "#6c757d"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "Don't kill the ants! Why?"
+  },
+  {
+   "id": "h0",
+   "scene": "gardenFind",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "footsteps",
+     0.1
+    ],
+    [
+     "footsteps",
+     1.1
+    ],
+    [
+     "pop",
+     2.05
+    ],
+    [
+     "ep08_nibble",
+     3.22
+    ],
+    [
+     "thud",
+     3.25
+    ],
+    [
+     "thud",
+     3.75
+    ],
+    [
+     "jiggle",
+     3.95
+    ],
+    [
+     "stinger",
+     3.98
+    ]
+   ]
+  },
+  {
+   "id": "s2b",
+   "scene": "helpers",
+   "text": "Ants, flies, earthworms, millipedes and woodlice eat dead things too. They are called detritivores. They break dead things into smaller pieces, so bacteria and fungi can finish the job. So don't kill them. Leave them alone!",
+   "sfx": []
+  },
+  {
+   "id": "s2c",
+   "scene": "semakau",
+   "text": "Composting works together with recycling. Every fruit peel we compost, and every can we recycle, is one less thing to burn. And less burning means less ash buried at Pulau Semakau, Singapore's only landfill, which could be full by about twenty thirty-five.",
+   "sfx": [
+    [
+     "pop",
+     0.1
+    ],
+    [
+     "pop",
+     1.4
+    ],
+    [
+     "ep06_plop",
+     3.6
+    ],
+    [
+     "ep03_clink",
+     5.4
+    ],
+    [
+     "ding",
+     6.5
+    ],
+    [
+     "ep05_horn",
+     10.3
+    ],
+    [
+     "sea_wash",
+     10.3
+    ],
+    [
+     "ping",
+     10.9
+    ],
+    [
+     "reveal",
+     13.8
+    ]
+   ]
+  },
+  {
+   "id": "s2d",
+   "scene": "habit",
+   "text": "So make composting a habit! Keep a small container for fruit and vegetable peels.",
+   "sfx": [
+    [
+     "pop",
+     2.6
+    ],
+    [
+     "ep06_plop",
+     4.0
+    ],
+    [
+     "ep06_plop",
+     4.6
+    ]
+   ]
+  },
+  {
+   "id": "s2e",
+   "scene": "habit",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "episode": "SAU EP07 Short 2",
+ "title": "Why does your heart pound when you run?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [],
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "Why does your heart pound when you run?"
+  },
+  {
+   "id": "h0",
+   "scene": "peRun",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "ep07_whistle",
+     0.05
+    ],
+    [
+     "ep07_run",
+     0.1
+    ],
+    [
+     "ep07_pant",
+     2.9
+    ],
+    [
+     "ep07_pant",
+     4.0
+    ],
+    [
+     "ep07_heart",
+     3.0
+    ],
+    [
+     "ep07_heart",
+     3.4
+    ],
+    [
+     "ep07_heart",
+     3.8
+    ],
+    [
+     "ep07_heart",
+     4.2
+    ],
+    [
+     "ep07_heart",
+     4.6
+    ],
+    [
+     "ep07_heart",
+     5.0
+    ]
+   ]
+  },
+  {
+   "id": "s2b",
+   "scene": "hook",
+   "text": "Huff, puff! When you run, you breathe faster and your heart pounds. Why? Your muscles are calling for oxygen!"
+  },
+  {
+   "id": "o6",
+   "scene": "povHeart",
+   "silent": 8.0,
+   "sfx": [
+    [
+     "ep07_flow",
+     0.0
+    ],
+    [
+     "ep07_heart",
+     2.35
+    ],
+    [
+     "ep07_heart",
+     4.27
+    ],
+    [
+     "boom",
+     4.32
+    ],
+    [
+     "pipe_rush",
+     4.64
+    ],
+    [
+     "pass_by",
+     5.44
+    ]
+   ]
+  },
+  {
+   "id": "s2c",
+   "scene": "news",
+   "text": "Here's an amazing fact. Your heart beats about a hundred thousand times every day. And it pumps your blood all the way around your body in about one minute."
+  },
+  {
+   "id": "s2d",
+   "scene": "try",
+   "text": "Try this at home! Count how many times you breathe in thirty seconds, and feel your pulse on your wrist. Now jump on the spot for one minute, and count again. What changed? Why?"
+  },
+  {
+   "id": "s2e",
+   "scene": "try",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "text": "Now you know!",
+   "excited": true
+  }
+ ]
+}
