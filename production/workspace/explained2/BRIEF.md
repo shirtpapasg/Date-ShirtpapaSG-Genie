@@ -30,3 +30,6 @@ Do not commit, push, upload or touch YouTube, the review boards or TheOneApp.
   {"pct": <0-100 honest estimate of your whole job>, "step": "<what you just finished, 6-10 plain words>", "next": "<what's next>",
   "updated": "<UTC ISO time>"}. Write it first thing, then after every step. One quick write; don't let it slow you down.
 - SAVE AS YOU GO: the machine can restart. Write each deliverable to disk as soon as a usable draft exists, then improve it in place.
+- DECISIONS (20 Nov): NO 3D route (the teacher). The flat SVG redraws of the buddies "lack the cuteness"; the teacher's own painted
+  poses are cuter. Plan: animate the teacher's own buddy art directly as cut-out sprites (squash/stretch, bounce, sway, head tilt,
+  blinks, pose swaps, mouth swaps for lip-sync), from full-size originals the teacher will send.
