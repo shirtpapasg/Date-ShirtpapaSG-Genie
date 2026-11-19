@@ -78,6 +78,18 @@
    "waste",
    "FOOD WASTE",
    "#e63946"
+  ],
+  [
+   "semakau",
+   "landfill",
+   "LANDFILL",
+   "#6c757d"
+  ],
+  [
+   "helpers",
+   "detritivores",
+   "DETRITIVORES",
+   "#bc6c25"
   ]
  ],
  "segments": [
@@ -169,9 +181,26 @@
    "hold": 1.0
   },
   {
+   "id": "helpers",
+   "scene": "helpers",
+   "hold": 1.0,
+   "text": "And don't forget the little helpers. Ants, flies, earthworms, millipedes and woodlice eat dead things too. They are called detritivores. They break dead things into smaller pieces, so bacteria and fungi can finish the job. So don't kill them. Leave them alone!"
+  },
+  {
    "id": "security",
    "scene": "security",
    "text": "So how does this help Singapore's food security? Healthy soil grows healthy food. Composting turns food scraps into rich compost for our gardens and farms, instead of burning them. And wasting less food means Singapore needs to buy less."
+  },
+  {
+   "id": "semakau",
+   "scene": "semakau",
+   "hold": 1.0,
+   "text": "Composting works together with recycling. Every fruit peel we compost, and every can we recycle, is one less thing to burn. And less burning means less ash buried at Pulau Semakau, Singapore's only landfill, which could be full by about twenty thirty-five."
+  },
+  {
+   "id": "habit",
+   "scene": "habit",
+   "text": "So make composting a habit! Keep a small container for fruit and vegetable peels. The benefits? Less rubbish, richer soil, healthier plants, and less fertiliser to buy."
   },
   {
    "id": "try",
