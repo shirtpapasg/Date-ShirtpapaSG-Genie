@@ -475,7 +475,7 @@ S.security = (() => { const s = scene("security", "#bde0fe", "#e3f6ff"), st = qW
   [[220, 800, 460, 4], [760, 800, 460, 4]].forEach(([x, y, w, n]) => tf(qBed(s.A, w, n, true), `translate(${x} ${y}) scale(1.15)`));
   { const g = el("g", {transform: "translate(495 716)"}, s.A); el("rect", qA({x: -5, y: -60, width: 10, height: 90, fill: "#8a6548", "stroke-width": 4}), g); el("rect", qA({x: -120, y: -118, width: 240, height: 62, rx: 10, fill: "#fff"}), g); tx(g, {x: 0, y: -76, "text-anchor": "middle", "font-size": 26, "font-weight": 700, fill: "#2d6a4f"}, "Community Garden"); }
   tf(qBin(s.A), "translate(1100 830) scale(.6)");
-  s.h = chip(st, "🍽️ Food security: enough safe food for everyone", "#3a0ca3", {fs: 36}); s.hs = chip(st, "healthy soil → healthy food", "#6a994e", {fs: 44});
+  s.h = chip(st, "🍽️ Little land to farm, so we import most food", "#3a0ca3", {fs: 36}); s.hs = chip(st, "healthy soil → healthy food", "#6a994e", {fs: 44});
   s.B = el("g", {}, st); el("rect", {x: -300, y: -200, width: 1900, height: 1300, fill: "#fff8e8", opacity: .95}, s.B);
   const K = ["scraps", "bin", "compost", "bed", "farm"], NM = ["food scraps", "compost bin", "compost", "gardens", "farms"];
   s.it = K.map((k, i) => { const g = el("g", {}, s.B); tf(qDisc(g, k, "#6a994e"), "scale(.8)"); tx(g, {x: 0, y: 138, "text-anchor": "middle", "font-size": 36, "font-weight": 700, fill: INK}, NM[i]); return g; });
