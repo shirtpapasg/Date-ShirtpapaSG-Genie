@@ -70,7 +70,48 @@
    "id": "s2b",
    "scene": "helpers",
    "text": "Ants, flies, earthworms, millipedes and woodlice eat dead things too. They are called detritivores. They break dead things into smaller pieces, so bacteria and fungi can finish the job. So don't kill them. Leave them alone!",
-   "sfx": []
+   "sfx": [
+    [
+     "pop",
+     0.0
+    ],
+    [
+     "pop",
+     0.27
+    ],
+    [
+     "pop",
+     1.1
+    ],
+    [
+     "pop",
+     1.92
+    ],
+    [
+     "pop",
+     2.68
+    ],
+    [
+     "pop",
+     5.43
+    ],
+    [
+     "ep08_nibble",
+     7.05
+    ],
+    [
+     "ep08_nibble",
+     8.05
+    ],
+    [
+     "buzz",
+     12.78
+    ],
+    [
+     "chime",
+     14.14
+    ]
+   ]
   },
   {
    "id": "s2c",
@@ -122,15 +163,15 @@
    "sfx": [
     [
      "pop",
-     2.6
+     2.67
     ],
     [
      "ep06_plop",
-     4.0
+     3.71
     ],
     [
      "ep06_plop",
-     4.6
+     4.31
     ]
    ]
   },

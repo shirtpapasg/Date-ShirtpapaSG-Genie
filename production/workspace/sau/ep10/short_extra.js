@@ -43,19 +43,20 @@ if (SHORT) {
   if (S.povDecompose) { const s = S.povDecompose; around(s.lb, "translate(-290 0)"); around(s.l3, "translate(-315 -84)"); }
   // inside the compost bin: the whole bin in view, with us in the middle; its walls run to the top and bottom of the frame
   if (S.povCompost) { const s = S.povCompost, bn = s.bin, run = s.run;
+    around(s.ll, "translate(330 520) scale(1.4) translate(-330 -520)"); around(s.lp, "translate(1160 470) scale(1.35) translate(-1160 -470)");      // bigger name tags
     wrap(s.B, "translate(600 450) scale(.82) translate(-810 -600)");
     bn.querySelectorAll(":scope > rect").forEach(r => { const w = num(r, "width"), h = num(r, "height");
       if (w === 1320 && h === 1120) { set(r, "y", -760); set(r, "height", 2800); } else if (w === 1320 && h === 150) { set(r, "y", -760); set(r, "height", 420); } else if (w === 340) { set(r, "y", -780); set(r, "height", 2840); } });
     bn.querySelectorAll(":scope > line").forEach(l => { set(l, "y1", -760); set(l, "y2", 2040); });
     [[bn.fresh, "#5c3d2e"], [bn.done, "#2a170d"]].forEach(([g, fill]) => g.insertBefore(el("rect", {x: 150, y: 1030, width: 1320, height: 1010, fill}), g.firstChild.nextSibling));
     // things that fall in are hidden until they start to fall (their start is no longer off the top of the screen)
-    s.run = t => { run(t); const u = t - SC.povCompost.t0; bn.leaves.forEach((o, i) => op(o.e, u > 2.15 + i * .04 ? 1 : 0)); bn.peels.forEach((o, i) => op(o.e, u > 2.9 + i * .2 ? 1 : 0)); op(s.meG, u > 2.2 ? 1 : 0); }; }
+    s.run = t => { run(t); const u = t - SC.povCompost.t0; bn.leaves.forEach((o, i) => op(o.e, u > 2.15 + i * .04 ? 1 : 0)); bn.peels.forEach((o, i) => op(o.e, u > 2.9 + i * .2 ? 1 : 0)); op(s.meG, u > 2.2 ? 1 : 0); op(s.warm, 0); }; }      // the Short cuts away before "warm inside!" (that is the episode's question for next time)
 
   /* ---------------- the recap board: a tall ring that fills the frame, with bigger pictures and words ---------------- */
   if (S.recap) { const s = wide("recap"), st = s.fitG, N = 7, CX = 600, CY = 525, RX = 425, RY = 385, P = [];
     for (let i = 0; i < N; i++) { const an = -Math.PI / 2 + i * 2 * Math.PI / N; P.push([CX + RX * Math.cos(an), CY + RY * Math.sin(an)]); }
     s.arr.forEach(g => g.remove()); s.arr = qRing(st, P, CX, CY, 132, .16); s.arr.forEach(g => st.insertBefore(g, s.it[0]));
-    set(s.title, "x", 600); set(s.title, "y", -66); set(s.title, "font-size", 46);
+    set(s.title, "x", 600); set(s.title, "y", -60); set(s.title, "font-size", 42);
     [...s.mid.children].forEach((e, i) => { set(e, "x", CX); set(e, "y", CY - 6 + i * 62); set(e, "font-size", 56); });
     s.it.forEach((g, i) => { tf(g.d, "scale(.9)"); const [bx, by] = i === 1 ? [-84, 84] : i === 2 ? [84, 84] : [-84, -84], c = g.children[1], n = g.children[2];
       set(c, "cx", bx); set(c, "cy", by); set(c, "r", 28); set(n, "x", bx); set(n, "y", by + 13); set(n, "font-size", 38);
@@ -84,7 +85,8 @@ if (SHORT) {
   /* ---------------- Pulau Semakau: the map as a card with the whole main island in it; the "how full" bar above the map ---------------- */
   if (S.semakau) { const s = wide("semakau", .96); deep(s.A); s.A.setAttribute("transform", "translate(600 700) scale(.9) translate(-700 -700)");
     s.C.querySelector("rect").setAttribute("y", -900); s.C.querySelector("rect").setAttribute("height", 2700);
-    set(s.tl, "x", num(s.tl, "x") + 62); around(s.bar, "translate(-250 -215)"); }
+    set(s.tl, "x", num(s.tl, "x") + 62); [s.ncb, s.nbb].forEach(e => { set(e, "font-size", 46); set(e, "y", 766); }); set(s.wl, "font-size", 52);      // bigger names under the bins and the plant
+    around(s.bar, "translate(-250 -245)"); }
 
   /* ---------------- the kitchen: the peel container in the middle; the Short stops before the list of benefits ---------------- */
   if (S.habit) { const s = wide("habit", 1, 560, 450); around(s.h, "translate(-240 -6)"); fitCard(s.kc, 150, 1080);
