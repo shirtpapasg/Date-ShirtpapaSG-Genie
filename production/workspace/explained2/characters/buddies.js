@@ -14,7 +14,8 @@
 //         facing: "left" | "right" default "right"
 //         talking: true            mouth shapes run from t;   mouth: 0..1 sets the opening yourself (e.g. from the voice loudness)
 //         blink: false             switches blinking off (default on);   breathe: false switches idle breathing off
-//         look: -1..1              how far the face turns to the facing side (Pip, Momo; default .5; 0 = straight at the viewer)
+//         look: -1..1              how far the face turns to the facing side (Pip, Momo; 0 = straight at the viewer, the default
+//                                  when talking or when no facing is given; .5 when a facing is given)
 //         air: 0..1                jump height for pose "jump" (default: a hop loop from t);   tilt: extra head tilt in degrees
 //         shadow: false            no ground shadow;   seed: number, shifts the blink / talk timing so buddies don't move in step }
 (function (root) {
@@ -259,7 +260,7 @@
     const sp = SPEC[who]; if (!sp) return ""; o = Object.assign({}, o); t = +t || 0;
     o.seed = (o.seed || 0) + sp.seed;
     const ex = EXPR[o.expr] || EXPR.happy, pose = o.pose || "sit", s = h / sp.H;
-    const facing = o.facing === "left" ? -1 : 1, flip = facing !== sp.native, br = o.breathe === false ? 0 : Math.sin(TAU * t / 3.4 + o.seed);
+    const facing = o.facing === "left" ? -1 : 1, flip = facing !== sp.native, br = o.breathe === false ? 0 : Math.sin(TAU * t / 3 + o.seed);
     // pose
     let lift = pose === "stand" ? sp.lift : pose === "lean" ? sp.lift * .5 : pose === "jump" ? sp.lift * .6 : 0, lean = 0, jy = 0, sy = 1, air = 0;
     if (pose === "lean") lean = sp.native * 9;
@@ -278,23 +279,22 @@
     // head motion
     const shake = ex.shake ? 3 * Math.sin(TAU * 4.5 * t) : 0, nod = o.talking ? 1.4 * Math.sin(TAU * 1.6 * t + o.seed) : 0;
     const tilt = (ex.tilt || 0) * sp.native * (who === "basil" ? -.6 : 1) + (o.tilt || 0) + nod, hy = -1.8 * br + shake + (pose === "lean" ? 3 : 0), hx = pose === "lean" ? sp.native * 9 : 0;
-    const look = who === "basil" ? 0 : (o.look != null ? clamp(o.look, -1, 1) : .5) * 7;
+    const look = who === "basil" ? 0 : (o.look != null ? clamp(o.look, -1, 1) : o.facing && !o.talking ? .5 : 0) * 7;
     // extras fixed to the head
     let hEx = ""; const hd = sp.head;
     if (ex.sweat) hEx += Gt(`translate(${-sp.native * (hd.rx * .78) + (who === "basil" ? 30 : 0)} ${hd.cy - hd.ry * .62}) rotate(${-sp.native * 18})`, P("M0 -16 C10 -2 10 9 0 9 C-10 9 -10 -2 0 -16Z", "#AEDDF8", "#5E9FCF", 3));
     if (ex.dashes) hEx += P([-28, 0, 28].map(a => { const c = Math.sin(a * DEG), d = -Math.cos(a * DEG), r0 = hd.ry + (who === "pip" ? 62 : who === "momo" ? 56 : 30), cx = who === "basil" ? 10 : 0; return `M${n(cx + c * r0)} ${n(hd.cy + d * r0)} L${n(cx + c * (r0 + 20))} ${n(hd.cy + d * (r0 + 20))}`; }).join(" "), null, sp.line, 5);
     if (ex.stars) { const tw = 1 + .25 * Math.sin(TAU * 1.5 * t); extras += star(-hd.rx - 34, hd.cy - hd.ry - 10, 11 * tw) + star(hd.rx + 40, hd.cy - hd.ry + 6, 9 * (2 - tw)); }
     const head = Gt(`translate(${n(hx)} ${n(hy)}) rotate(${n(tilt)} ${hd.cx} ${sp.chinY})`, HEAD[who](sp) + Gt(`translate(${n(look)} 0)`, face(sp, who, ex, t, o)) + hEx);
-    const upper = Gt(`translate(0 ${-lift})`, Gt(`scale(1 ${n(1 + .012 * br)})`, BODY[who](sp)) + arms.back + head + arms.front + extras);
+    const upper = Gt(`translate(0 ${-lift})`, Gt(`scale(1 ${n(1 + .02 * br)})`, BODY[who](sp)) + arms.back + head + arms.front + extras);
     const feetUp = pose === "jump" ? -air * 6 : 0;
-    const fig = Gt(`translate(0 ${n(-jy)}) rotate(${lean}) scale(${n(sx)} ${n(sy)})`, Gt(`translate(0 ${-lift * .5})`, TAIL[who](sp, t)) + legs(sp, lift) + Gt(`translate(0 ${feetUp})`, who === "basil" ? "" : FEET[who](sp, lift)) + (who === "basil" ? "" : "") + (who === "basil" ? Gt(`translate(0 ${-lift * .0})`, "") : "") + upperWithFeet(who, sp, lift, upper, feetUp));
+    const feet = Gt(`translate(0 ${n(feetUp)})`, FEET[who](sp, lift));
+    // Pip's feet peek out from under his body; Basil's thigh and Momo's hind paws sit in front of theirs
+    const fig = Gt(`translate(0 ${n(-jy)}) rotate(${lean}) scale(${n(sx)} ${n(sy)})`, Gt(`translate(0 ${-lift * .5})`, TAIL[who](sp, t)) + legs(sp, lift) + (who === "pip" ? feet + upper : upper + feet));
     const shW = (who === "basil" ? 120 : 112) * (1 - air * .35);
     const shadow = o.shadow === false ? "" : `<ellipse cx="${who === "basil" ? -20 : -10}" cy="2" rx="${n(shW)}" ry="${n(shW * .13)}" fill="#2B2147" opacity="${n(.2 * (1 - air * .5))}"/>`;
     return `<g transform="translate(${n(x)} ${n(y)}) scale(${n(flip ? -s : s)} ${n(s)})">${shadow}${fig}</g>`;
   }
-  // Basil's feet and thigh sit in front of his body; Pip's and Momo's feet are drawn before the body and peek out below it
-  function upperWithFeet(who, sp, lift, upper, feetUp) { return who === "basil" ? upper + Gt(`translate(0 ${feetUp})`, FEET.basil(sp, lift)) : upper + (who === "momo" ? Gt(`translate(0 ${feetUp})`, FEET.momo(sp, lift)) : ""); }
-
   const api = { draw, SPEC, LW,
     pip: (x, y, h, t, o) => draw("pip", x, y, h, t, o), basil: (x, y, h, t, o) => draw("basil", x, y, h, t, o), momo: (x, y, h, t, o) => draw("momo", x, y, h, t, o),
     EXPRESSIONS: Object.keys(EXPR), GESTURES: ["rest", "pointL", "pointR", "wave", "pawHead", "cross", "thumbs", "cheer", "chin", "flare"], POSES: ["sit", "stand", "lean", "jump"],
