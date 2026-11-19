@@ -36,3 +36,11 @@ Learn principles only; never copy characters, names, music, footage or look.
      step answers the question the last one raised, so curiosity pulls the viewer forward.
    - For us: tell a concept as a journey or life story where it fits, use Singapore-sized comparisons (an HDB block, an MRT train,
      a void deck) for scale, and chain the segments so each answer opens the next question.
+8. Cocomelon and Pinkfong (Hogi), e.g. "Learn Colors with Yes papa and Carrot | Hogi Pinkfong"  https://www.youtube.com/watch?v=LDF2puNJggQ
+   - the teacher (20 Nov): "for animation models, I still feel cocomelon is better at their 3D characters. Pinkfong too."
+   - soft, rounded 3D characters with big glossy eyes, gentle subsurface-looking skin/fur, pastel saturated colours, soft global
+     light and contact shadows, simple bouncy squash-and-stretch motion, very readable silhouettes, sing-along rhythm, bright clean sets.
+   - For us: explore real 3D (or a convincing 3D look) for Pip, Basil and Momo, keeping their identity; principles only, never their
+     characters, names, music or look.
+   - also CoComelon, "Wheels on the Animals Bus | CoComelon Animal Time Nursery Rhymes"  https://www.youtube.com/watch?v=qhZgBFSKqKc
+     (cute 3D animal characters, chunky toy-like vehicles and sets, warm soft lighting, constant gentle motion, a repeating song structure).
