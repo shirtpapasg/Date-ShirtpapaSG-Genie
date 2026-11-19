@@ -51,30 +51,30 @@
   /* ---------- the three buddies: colours sampled from the app art, shapes in rig units, feet at (0,0), y up = negative ---------- */
   const SPEC = {
     /* Pip: soft grey-lavender chinchilla; huge round ears, bead eyes, white belly, bushy tail, pink nose. Drawn facing the viewer. */
-    pip: { H: 316, native: 1, lift: 20, hand: "R", seed: 0.0,
-      line: "#646884", fur: "#A6A9BB", shade: "#8D90A7", light: "#C3C4D2", belly: "#F4F2F0", paw: "#DCD9E2", lid: "#9699AE", inner: "#8A8AA4", pink: "#F29C9C", eye: "#37324C",
+    pip: { H: 330, native: 1, lift: 20, hand: "R", seed: 0.0,
+      line: "#646884", fur: "#ADB0C2", shade: "#9497AE", light: "#CBCCD9", belly: "#F5F3F1", paw: "#E0DDE6", lid: "#9C9FB4", inner: "#9998B1", pink: "#F29C9C", eye: "#37324C",
       head: { cx: 0, cy: -192, rx: 106, ry: 82 }, chinY: -112,
-      eyes: [{ x: -45, y: -197, r: 14.5 }, { x: 45, y: -197, r: 14.5 }], brow: 22,
+      eyes: [{ x: -45, y: -196, r: 16 }, { x: 45, y: -196, r: 16 }], brow: 22,
       mouth: { x: 0, y: -163, hw: 14, cusp: true, oh: 15, rot: 0 }, happyOpen: 0,
       sh: { L: [-80, -112], R: [80, -112] }, armW: 27, reach: 92,
       rest: { sit: { L: [-30, -92], R: [30, -92], bend: 10 }, stand: { L: [-30, -92], R: [30, -92], bend: 10 } },
       chin: { L: [-34, -132], R: [34, -132] }, legs: [[-46, 24], [46, 24]] },
     /* Basil: pale grey-white lizard with a lilac tint; wide snout, big dark eyes, spiky fringe, curled striped tail. Drawn three-quarter, as in the app. */
     basil: { H: 300, native: -1, lift: 18, hand: "R", seed: 1.7,
-      line: "#6B6486", fur: "#DAD0DB", shade: "#B9AEC6", light: "#E9E1E6", belly: "#F6F1EC", paw: "#DAD0DB", lid: "#C5BACD", inner: "#B9AEC6", pink: "#F2AEB4", eye: "#3A3349",
+      line: "#6B6486", fur: "#E1D9E2", shade: "#BDB2CA", light: "#EDE6EA", belly: "#F8F4EF", paw: "#E1D9E2", lid: "#CBC1D2", inner: "#BDB2CA", pink: "#F2AEB4", eye: "#3A3349",
       head: { cx: 0, cy: -222, rx: 96, ry: 62 }, chinY: -168,
-      eyes: [{ x: -50, y: -240, r: 17 }, { x: 30, y: -234, r: 25 }], brow: 20,
+      eyes: [{ x: -50, y: -240, r: 17 }, { x: 28, y: -232, r: 24 }], brow: 20,
       mouth: { x: -38, y: -193, hw: 54, cusp: false, oh: 17, rot: -2 }, happyOpen: 0,
       sh: { L: [-44, -136], R: [44, -140] }, armW: 24, reach: 88,
       rest: { sit: { L: [-58, -100], R: [2, -98], bend: 10 }, stand: { L: [-58, -100], R: [2, -98], bend: 10 } },
       chin: { L: [-66, -176], R: [58, -184] }, legs: [[-40, 22], [50, 26]] },
     /* Momo: grey-white tabby kitten; pink inner ears, big sparkly eyes, forehead and cheek stripes, white muzzle, chest and paws, striped tail with a white tip. */
     momo: { H: 310, native: 1, lift: 24, hand: "R", seed: 3.1,
-      line: "#5F5A78", fur: "#CBC5CE", shade: "#9D97AC", light: "#DDD7DC", belly: "#F8F5EE", paw: "#F8F5EE", lid: "#B4AEBD", inner: "#F0A3AE", pink: "#F08FA0", eye: "#423D5E",
+      line: "#5F5A78", fur: "#D3CDD5", shade: "#A39DB1", light: "#E2DCE1", belly: "#FAF7F1", paw: "#FAF7F1", lid: "#BDB7C5", inner: "#F0A3AE", pink: "#F08FA0", eye: "#423D5E",
       head: { cx: 0, cy: -194, rx: 106, ry: 80 }, chinY: -116,
       eyes: [{ x: -43, y: -196, r: 23 }, { x: 43, y: -196, r: 23 }], brow: 20,
       mouth: { x: 0, y: -160, hw: 13, cusp: true, oh: 15, rot: 0 }, happyOpen: .38,
-      sh: { L: [-36, -98], R: [36, -98] }, armW: 31, reach: 92,
+      sh: { L: [-36, -98], R: [36, -98] }, shUp: { L: [-64, -104], R: [64, -104] }, armW: 31, reach: 98,
       rest: { sit: { L: [-30, -16], R: [30, -16], bend: 0 }, stand: { L: [-26, -74], R: [26, -74], bend: 12 } },
       chin: { L: [-36, -130], R: [36, -130] }, legs: [[-44, 30], [44, 30]] }
   };
@@ -82,11 +82,11 @@
   /* ---------- parts: tails ---------- */
   const TAIL = {
     pip(sp, t) { const a = 2.5 * Math.sin(TAU * t / 2.9);
-      return Gt(`rotate(${n(a)} -80 -40)`, P("M-70 -22 C-120 0 -196 -12 -204 -72 C-210 -116 -186 -150 -158 -150 C-136 -150 -128 -132 -136 -120 C-150 -112 -150 -92 -128 -84 C-104 -76 -84 -90 -70 -108 Z", sp.shade, sp.line) +
+      return Gt(`rotate(${n(a)} -80 -40)`, P("M-70 -22 C-96 -6 -128 -2 -150 -10 C-160 0 -184 -6 -186 -26 C-206 -30 -216 -54 -204 -70 C-220 -86 -214 -114 -198 -124 C-198 -146 -176 -160 -158 -152 C-140 -158 -122 -140 -134 -122 C-148 -112 -148 -94 -128 -86 C-104 -78 -84 -90 -70 -108 Z", sp.fur, sp.line) + P("M-80 -34 C-110 -18 -160 -22 -178 -52 C-160 -40 -120 -44 -96 -66 Z", sp.shade, null, 0, 'opacity=".55"') +
         P("M-182 -70 C-182 -50 -166 -34 -142 -32 M-160 -92 C-158 -76 -146 -66 -128 -64", null, sp.line, 3, 'opacity=".45"')); },
     basil(sp, t) { const a = 1.6 * Math.sin(TAU * t / 3.3);
-      const pts = sample([[[58, -34], [-10, 6], [-128, 16], [-178, -34]], [[-178, -34], [-214, -72], [-198, -150], [-146, -152]], [[-146, -152], [-108, -152], [-98, -110], [-126, -100]]], 12);
-      const wf = k => lerp(31, 5, Math.pow(k, .82)); let rings = "";
+      const pts = sample([[[58, -36], [10, 2], [-84, 12], [-132, -22]], [[-132, -22], [-172, -50], [-172, -118], [-130, -128]], [[-130, -128], [-98, -134], [-84, -100], [-106, -92]]], 12);
+      const wf = k => lerp(36, 6, Math.pow(k, .85)); let rings = "";
       for (let i = 5; i < pts.length - 2; i += 3) { const a0 = pts[i - 1], b0 = pts[i + 1], d = Math.hypot(b0[0] - a0[0], b0[1] - a0[1]), nx = -(b0[1] - a0[1]) / d, ny = (b0[0] - a0[0]) / d, w = wf(i / (pts.length - 1)) * .82, c = pts[i], tx = (b0[0] - a0[0]) / d * w * .5, ty = (b0[1] - a0[1]) / d * w * .5;
         rings += `M${n(c[0] + nx * w)} ${n(c[1] + ny * w)} Q${n(c[0] + tx)} ${n(c[1] + ty)} ${n(c[0] - nx * w)} ${n(c[1] - ny * w)} `; }
       return Gt(`rotate(${n(a)} 40 -30)`, P(tube(pts, wf), sp.fur, sp.line) + P(rings, null, sp.shade, 5, 'opacity=".9"')); },
@@ -119,14 +119,14 @@
 
   /* ---------- parts: head without the face ---------- */
   const HEAD = {
-    pip(sp) { const ear = s => E(s * 88, -264, 50, 50, sp.fur, sp.line) + E(s * 86, -260, 35, 35, sp.inner) + E(s * 80, -252, 22, 22, "#A898AE", null, 0, 'opacity=".55"') +
+    pip(sp) { const ear = s => E(s * 90, -270, 55, 58, sp.fur, sp.line) + E(s * 88, -266, 40, 43, sp.inner) + E(s * 82, -256, 26, 28, "#BFA9B8", null, 0, 'opacity=".55"') +
         P(`M${s * 50} -238 C${s * 54} -252 ${s * 62} -260 ${s * 72} -262 C${s * 68} -254 ${s * 72} -248 ${s * 80} -246 C${s * 72} -240 ${s * 70} -234 ${s * 74} -226 C${s * 64} -226 ${s * 56} -230 ${s * 50} -238Z`, sp.belly, sp.line, 2.5);
-      return ear(-1) + ear(1) + E(0, -192, 106, 82, sp.fur, sp.line) + E(0, -164, 48, 30, sp.light) + P("M-50 -262 q10 -10 22 -8 M-12 -272 q12 -6 24 0", null, sp.light, 4, 'opacity=".8"'); },
-    basil(sp) { let sp1 = ""; [[-118, 10], [-96, 12], [-72, 14], [-48, 16], [-24, 18], [0, 18], [24, 17], [48, 15], [70, 12]].forEach(([a, len]) => { const c = Math.cos(a * DEG), s = Math.sin(a * DEG), r0 = 56, r1 = 62 + len, da = 9 * DEG;
-        sp1 += P(`M${n(22 + r0 * Math.cos(a * DEG - da))} ${n(-226 + r0 * Math.sin(a * DEG - da))} L${n(22 + r1 * c)} ${n(-226 + r1 * s)} L${n(22 + r0 * Math.cos(a * DEG + da))} ${n(-226 + r0 * Math.sin(a * DEG + da))}Z`, sp.fur, sp.line); });
-      return sp1 + U(`<circle cx="22" cy="-226" r="62"/><ellipse cx="-42" cy="-210" rx="58" ry="40"/>`, sp.fur, sp.line) +
+      return ear(-1) + ear(1) + E(0, -192, 106, 82, sp.fur, sp.line) + E(0, -164, 48, 30, sp.light); },
+    basil(sp) { let sp1 = ""; [[-118, 10], [-96, 12], [-72, 14], [-48, 16], [-24, 18], [0, 18], [24, 17], [48, 15], [70, 12]].forEach(([a, len]) => { const c = Math.cos(a * DEG), s = Math.sin(a * DEG), r0 = 50, r1 = 55 + len * .8, da = 9 * DEG;
+        sp1 += P(`M${n(24 + r0 * Math.cos(a * DEG - da))} ${n(-224 + r0 * Math.sin(a * DEG - da))} L${n(24 + r1 * c)} ${n(-224 + r1 * s)} L${n(24 + r0 * Math.cos(a * DEG + da))} ${n(-224 + r0 * Math.sin(a * DEG + da))}Z`, sp.fur, sp.line); });
+      return sp1 + U(`<circle cx="24" cy="-224" r="56"/><ellipse cx="-40" cy="-212" rx="64" ry="41"/>`, sp.fur, sp.line) +
         P("M-92 -196 C-60 -176 -10 -172 30 -186 C30 -168 -40 -160 -84 -182 Z", sp.belly, null, 0, 'opacity=".7"') +
-        [[-8, -268, 6], [14, -276, 5], [-28, -256, 5], [38, -272, 4], [-4, -252, 4], [-48, -262, 4], [58, -262, 4]].map(([x, y, r]) => E(x, y, r, r * .65, sp.shade, null, 0, 'opacity=".75"')).join("") +
+        [[-8, -268, 6], [14, -276, 5], [-28, -256, 5], [38, -268, 4], [-4, -252, 4], [-48, -262, 4], [56, -258, 4]].map(([x, y, r]) => E(x, y, r, r * .65, sp.shade, null, 0, 'opacity=".75"')).join("") +
         E(-85, -217, 2.4, 2.4, sp.line) + E(-72, -222, 2.4, 2.4, sp.line); },
     momo(sp) { const ear = s => P(`M${s * 100} -212 C${s * 100} -250 ${s * 96} -286 ${s * 88} -304 Q${s * 84} -312 ${s * 76} -306 C${s * 54} -292 ${s * 34} -278 ${s * 20} -262 Z`, sp.fur, sp.line) +
         P(`M${s * 90} -232 C${s * 90} -256 ${s * 88} -276 ${s * 83} -290 C${s * 66} -280 ${s * 50} -268 ${s * 40} -256 Z`, sp.inner);
@@ -186,7 +186,7 @@
   const EYE = {
     pip: (sp, r) => E(0, 0, r, r, sp.eye) + E(-r * .3, -r * .36, r * .32, r * .32, "#fff") + E(r * .34, r * .32, r * .15, r * .15, "#fff", null, 0, 'opacity=".8"'),
     basil: (sp, r) => E(0, 0, r, r, sp.eye, sp.line, 3.5) + E(0, 0, r * .68, r * .68, null, "#7A6676", r * .16, 'opacity=".8"') + E(-r * .3, -r * .34, r * .3, r * .3, "#fff") + E(r * .36, r * .3, r * .13, r * .13, "#fff", null, 0, 'opacity=".85"'),
-    momo: (sp, r) => E(0, 0, r, r, sp.eye, sp.line, 3.5) + P(`M${-r * .78} ${r * .28} Q0 ${r * .02} ${r * .78} ${r * .28} Q${r * .5} ${r * .92} 0 ${r * .92} Q${-r * .5} ${r * .92} ${-r * .78} ${r * .28}Z`, "#8DB4DC", null, 0, 'opacity=".9"') +
+    momo: (sp, r) => E(0, 0, r, r, sp.eye, sp.line, 3.5) + P(`M${-r * .78} ${r * .28} Q0 ${r * .02} ${r * .78} ${r * .28} Q${r * .5} ${r * .92} 0 ${r * .92} Q${-r * .5} ${r * .92} ${-r * .78} ${r * .28}Z`, "#9DB9D6", null, 0, 'opacity=".9"') +
       E(-r * .3, -r * .36, r * .33, r * .33, "#fff") + E(r * .38, r * .12, r * .14, r * .14, "#fff") + E(r * .1, r * .58, r * .08, r * .08, "#fff") + E(-r * .34, r * .5, r * .06, r * .06, "#fff") + E(r * .2, -r * .56, r * .07, r * .07, "#DDEBFF")
   };
   function eye(sp, who, e, s, st, blinkK) {
@@ -272,8 +272,9 @@
     if (g === "pointL" || g === "pointR") { side = (g === "pointL") !== flip ? "L" : "R"; g = "point"; }
     else if (!BOTH[g] && g !== "rest") { side = o.hand ? ((o.hand === "L") !== flip ? "L" : "R") : sp.hand; }
     const rp = sp.rest[pose === "sit" ? "sit" : "stand"]; const arms = { back: "", front: "" }; let extras = "";
-    ["L", "R"].forEach(k => { const sg = k === "L" ? -1 : 1, S = sp.sh[k]; let a;
-      if (g !== "rest" && GEST[g] && (BOTH[g] || side === k)) a = GEST[g](sp, S, sg, t); else a = { P: rp[k], bend: sg * rp.bend, front: who !== "momo" || pose !== "sit" ? 1 : 1, f: {} };
+    const UP = { wave: 1, thumbs: 1, cheer: 1, pawHead: 1 };   // Momo's raised paw starts wider, so it clears her big head, and stays in front of it
+    ["L", "R"].forEach(k => { const sg = k === "L" ? -1 : 1, act = g !== "rest" && GEST[g] && (BOTH[g] || side === k), S = (act && UP[g] && sp.shUp ? sp.shUp : sp.sh)[k]; let a;
+      if (act) { a = GEST[g](sp, S, sg, t); if (sp.shUp && UP[g]) a.front = 1; } else a = { P: rp[k], bend: sg * rp.bend, front: 1, f: {} };
       const str = arm(sp, who, S, a.P, a.bend, a.f); if (a.front) arms.front += str; else arms.back += str;
       if (a.star) { const tw = 1 + .25 * Math.sin(TAU * 1.5 * t); extras += star(a.P[0] + sg * 34, a.P[1] - 30, 13 * tw) + star(a.P[0] + sg * 52, a.P[1] - 4, 7 * (2 - tw)); } });
     // head motion

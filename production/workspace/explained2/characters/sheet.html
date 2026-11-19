@@ -29,10 +29,12 @@ out += `<rect x="40" y="${yb}" width="${W - 80}" height="590" rx="36" fill="#221
 out += T(70, yb + 50, "More gestures, facing and talking; lock-in line-up on the right", 30, "start", 700, "#fff");
 const more = [["pip", "cross arms", { gesture: "cross" }], ["basil", "cross arms", { gesture: "cross" }], ["momo", "cross arms", { gesture: "cross", pose: "stand" }], ["pip", "paw up (thumbs-up)", { gesture: "thumbs" }], ["basil", "paw up", { gesture: "thumbs" }], ["momo", "paw up", { gesture: "thumbs" }]];
 more.forEach(([who, l, o], i) => { const x = 150 + i * 195, y = yb + 290; out += B.draw(who, x, y, 160 * B.REL[who], T0, o) + T(x, y + 34, l, 18, "middle", 600, "#fff"); });
+const find = (who, f, lo, hi) => { const sd = B.SPEC[who].seed; let bt = 0, bv = lo ? 9 : -1; for (let t = 0; t < 8; t += .01) { const v = f(t, sd); if (lo ? v < bv : v > bv) { bv = v; bt = t; } } return bt; };
+const TT = [1, find("basil", (t, s) => -B.blinkK(t, s) - Math.abs(t - 1) * 1e-3), 1, find("pip", B.talkM), find("basil", B.talkM), find("momo", B.blinkK)];
 const more2 = [["pip", "facing left", { facing: "left" }], ["basil", "facing right", { facing: "right" }], ["momo", "facing left", { facing: "left", pose: "stand" }], ["pip", "talking", { talking: true }], ["basil", "talking", { talking: true }], ["momo", "blink", {}]];
-more2.forEach(([who, l, o], i) => { const x = 150 + i * 195, y = yb + 520; out += B.draw(who, x, y, 160 * B.REL[who], i === 5 ? 0.075 : 1.3 + i * .37, o) + T(x, y + 34, l, 18, "middle", 600, "#fff"); });
+more2.forEach(([who, l, o], i) => { const x = 150 + i * 195, y = yb + 520; out += B.draw(who, x, y, 160 * B.REL[who], TT[i], o) + T(x, y + 34, l, 18, "middle", 600, "#fff"); });
 // line-up on aura discs
-[["pip", 1560, { expr: "smug", gesture: "pointR" }], ["basil", 1930, { expr: "thinking" }], ["momo", 2300, { expr: "cheering" }]].forEach(([who, x, o]) => { const h = 330 * B.REL[who], y = yb + 520;
-  out += `<circle cx="${x}" cy="${y - 150}" r="${205}" fill="${AURA[who]}" opacity=".92"/>` + B.draw(who, x, y, h, T0, o) + `<rect x="${x - 70}" y="${y + 14}" width="140" height="44" rx="22" fill="${AURA[who]}"/>` + T(x, y + 46, who[0].toUpperCase() + who.slice(1), 26, "middle", 700); });
+[["pip", 1500, { expr: "smug", gesture: "pointR" }], ["basil", 1920, { expr: "thinking" }], ["momo", 2340, { expr: "cheering" }]].forEach(([who, x, o]) => { const h = 310 * B.REL[who], y = yb + 520;
+  out += `<circle cx="${x}" cy="${y - 150}" r="${196}" fill="${AURA[who]}" opacity=".92"/>` + B.draw(who, x, y, h, T0, o) + `<rect x="${x - 70}" y="${y + 14}" width="140" height="44" rx="22" fill="${AURA[who]}"/>` + T(x, y + 46, who[0].toUpperCase() + who.slice(1), 26, "middle", 700); });
 document.getElementById("v").innerHTML = out;
 </script></body></html>
