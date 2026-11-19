@@ -7,9 +7,10 @@
 //   Buddies.pip(x, y, h, t, o), Buddies.basil(...), Buddies.momo(...)       shorthands
 //   o = { pose: "sit" | "stand" | "lean" | "jump",                 default "sit"
 //         expr: "happy" | "cheering" | "shocked" | "thinking" | "smug" | "oops" | "laughing" | "sulking",   default "happy"
-//               more: "amazed" | "dreamy" | "shy" | "stern" | "blep" | "zen" | "hyper"   (Buddies.EXTRA_EXPRESSIONS)
+//               more: "amazed" | "dreamy" | "shy" | "stern" | "blep" | "zen" | "hyper" | "tailgaze"   (Buddies.EXTRA_EXPRESSIONS)
 //         gesture: "rest" | "pointL" | "pointR" | "wave" | "pawHead" | "cross" | "thumbs" | "cheer" | "chin" | "flare",
 //               more: "idea" | "listen" | "peekaboo" | "salute" | "tada" | "please" | "cheek" | "shy"   (Buddies.EXTRA_GESTURES)
+//                  peekaboo: Pip and Momo cover both eyes (give hand: "L" | "R" for one paw); Basil covers one eye.
 //                  default: the expression's own (cheering: cheer, thinking: chin, sulking: cross, oops: pawHead, shocked: flare)
 //                  pointL / pointR are SCREEN directions, whatever the facing.
 //         hand: "L" | "R"          which screen-side arm does a one-arm gesture (default: the buddy's own habit)
@@ -185,7 +186,7 @@
       if (f.pad) return U(`<circle cx="4" cy="0" r="14"/><circle cx="17" cy="-10" r="5"/><circle cx="21" cy="-2" r="5"/><circle cx="20" cy="7" r="5"/><circle cx="14" cy="14" r="5"/>`, sp.paw, sp.line) + E(6, 0, 6, 6, sp.pink, null, 0, 'opacity=".7"');
       return E(3, 0, 13.5, 13, sp.paw, sp.line) + P("M11 -5 h6 M11 4 h6", null, sp.line, 2.6, 'opacity=".6"'); },
     basil(sp, f) { const fin = (a, len) => `<path d="M${n(8 * Math.cos(a * DEG))} ${n(8 * Math.sin(a * DEG))} L${n((10 + len) * Math.cos(a * DEG))} ${n((10 + len) * Math.sin(a * DEG))}" stroke-linecap="round"/>`;
-      const fs = f.point ? fin(-38, 5) + fin(0, 24) + fin(34, 5) + fin(62, 4) : f.pad ? fin(-62, 15) + fin(-22, 19) + fin(18, 19) + fin(58, 15) : fin(-42, 10) + fin(-14, 13) + fin(14, 13) + fin(42, 10);
+      const fs = f.point ? fin(-16, 24) + fin(22, 5) + fin(48, 5) + fin(72, 4) : f.pad ? fin(-62, 15) + fin(-22, 19) + fin(18, 19) + fin(58, 15) : fin(-42, 10) + fin(-14, 13) + fin(14, 13) + fin(42, 10);
       return `<g stroke="${sp.line}" stroke-width="${9 + LW * 2}" fill="${sp.line}"><circle cx="2" cy="0" r="10.5"/>${fs}</g><g stroke="${sp.fur}" stroke-width="9" fill="${sp.fur}"><circle cx="2" cy="0" r="10.5"/>${fs}</g>` +
         (f.pad ? E(3, 0, 5, 5, sp.pink, null, 0, 'opacity=".8"') + [[-62, 15], [-22, 19], [18, 19], [58, 15]].map(([a, l]) => E((9 + l) * Math.cos(a * DEG), (9 + l) * Math.sin(a * DEG), 2.6, 2.6, sp.pink, null, 0, 'opacity=".8"')).join("") : ""); },
     momo(sp, f) { if (f.pad) return E(6, 0, 19, 18, sp.paw, sp.line) + E(2, 0, 7.5, 9, sp.pink) + E(14, -10, 3.6, 4.2, sp.pink) + E(18, -1, 3.6, 4.2, sp.pink) + E(15, 9, 3.6, 4.2, sp.pink);
@@ -240,10 +241,11 @@
     stern:    { eyes: { type: "open", lid: .3, slant: 16 }, brows: [[18, -3], [18, -3]], mouth: "line", tilt: 0, gesture: "cross" },
     blep:     { eyes: { type: "open" }, mouth: "blep", tilt: 7, blush: 1 },
     zen:      { eyes: { type: "closed" }, mouth: "smile", tilt: 0 },
+    tailgaze: { eyes: { type: "open", dx: -1, dy: .2 }, mouth: "smile", tilt: -4, lookX: -.9 },
     hyper:    { eyes: { type: "open" }, brows: [[-6, 8], [-6, 8]], mouth: "laugh", m: 1, tilt: 0, gesture: "tada", shake: 1, dashes: 1, blush: 1 }
   };
   // Basil's own head tilt per expression, in degrees (minus = snout up), as on his reference sheet
-  const BT = { happy: 0, cheering: -9, shocked: -5, thinking: -11, smug: -5, oops: 6, laughing: -9, sulking: 5, amazed: -11, dreamy: -4, shy: 9, stern: 2, blep: -3, zen: 0, hyper: -4 };
+  const BT = { happy: 0, cheering: -9, shocked: -5, thinking: -11, smug: -5, oops: 6, laughing: -9, sulking: 5, amazed: -11, dreamy: -4, shy: 9, stern: 2, blep: -3, zen: 0, hyper: -4, tailgaze: 5 };
 
   const EYE = {
     pip: (sp, r) => E(0, 0, r, r, sp.eye) + E(-r * .3, -r * .36, r * .32, r * .32, "#fff") + E(r * .34, r * .32, r * .15, r * .15, "#fff", null, 0, 'opacity=".8"'),
@@ -265,7 +267,7 @@
     }
     return Gt(`translate(${n(e.x)} ${n(e.y)})` + (e.sx && e.sx !== 1 ? ` scale(${e.sx.toFixed(3)} 1)` : ""), out);
   }
-  function brow(sp, e, s, b) { if (!b) return ""; const len = Math.max(e.r * .95, 13) * (e.sx ? Math.max(e.sx, .8) : 1), y = -Math.max(e.r, 15) - (sp.browGap || 9) - b[1] * (sp.browK || 1);
+  function brow(sp, e, s, b) { if (!b) return ""; const len = Math.max(e.r * .95, 13) * (e.sx ? Math.max(e.sx, .8) : 1), y = -Math.min(Math.max(e.r, 15) + (sp.browGap || 9) + b[1] * (sp.browK || 1), e.bmax || 99);
     return Gt(`translate(${n(e.x)} ${n(e.y + y)}) rotate(${n(s * -b[0])})`, P(`M${-len} 0 Q0 -4 ${len} 0`, null, sp.line, LW)); }
 
   // Basil's mouth: a wide smile line from the back corner B through the low point D to the front corner F (head units)
@@ -343,7 +345,7 @@
   // upper right edge, the near eye slides to the upper left edge, the smile widens across the whole face, the nostrils meet in the middle
   function basilTurn(sp, f, jaw) { const L = (a, b) => lerp(a, b, f), L2 = (a, b) => [L(a[0], b[0]), L(a[1], b[1])], M = sp.mouth;
     return Object.assign({}, sp, { turn: f, jaw: jaw || 0,
-      eyes: [{ x: L(-18, -47), y: L(-251, -257), r: L(19.5, 19), sx: L(1, .84) }, { x: L(57, 47), y: L(-265, -257), r: L(14.5, 19), sx: L(.68, .84) }],
+      eyes: [{ x: L(-18, -47), y: L(-251, -257), r: L(19.5, 19), sx: L(1, .84) }, { x: L(57, 47), y: L(-265, -257), r: L(14.5, 19), sx: L(.68, .84), bmax: L(19, 60) }],
       mouth: Object.assign({}, M, { x: L(40, 0), y: L(-205, -200), B: L2(M.B, [-66, -228]), D: L2(M.D, [0, -205]), F: L2(M.F, [66, -228]) }),
       chin: { L: L2(sp.chin.L, [-34, -182]), R: L2(sp.chin.R, [34, -182]) }, chest: L2(sp.chest, [4, -128]) }); }
   /* ---------- the rig ---------- */
@@ -366,14 +368,14 @@
     else if (!BOTH[g] && g !== "rest") { side = o.hand ? ((o.hand === "L") !== flip ? "L" : "R") : sp.hand; }
     const rp = sp.rest[pose === "sit" ? "sit" : "stand"]; const arms = { back: "", front: "" }; let extras = "";
     const UP = { wave: 1, thumbs: 1, cheer: 1, pawHead: 1 };   // Momo's raised paw starts wider, so it clears her big head, and stays in front of it
-    ["L", "R"].forEach(k => { const sg = k === "L" ? -1 : 1, act = g !== "rest" && GEST[g] && (BOTH[g] || side === k), S = (act && UP[g] && sp.shUp ? sp.shUp : sp.sh)[k]; let a;
+    ["L", "R"].forEach(k => { const sg = k === "L" ? -1 : 1, act = g !== "rest" && GEST[g] && (BOTH[g] || side === k || (g === "peekaboo" && who !== "basil" && !o.hand)), S = (act && UP[g] && sp.shUp ? sp.shUp : sp.sh)[k]; let a;
       if (act) { a = GEST[g](sp, S, sg, t); if (sp.shUp && UP[g]) a.front = 1; } else a = { P: rp[k], bend: sg * rp.bend, front: 1, f: {} };
       const str = arm(sp, who, S, a.P, a.bend, a.f); if (a.front) arms.front += str; else arms.back += str;
       if (a.star) { const tw = 1 + .25 * Math.sin(TAU * 1.5 * t); extras += star(a.P[0] + sg * 34, a.P[1] - 30, 13 * tw) + star(a.P[0] + sg * 52, a.P[1] - 4, 7 * (2 - tw)); } });
     // head motion
     const shake = ex.shake ? 3 * Math.sin(TAU * 4.5 * t) : 0, nod = o.talking ? 1.4 * Math.sin(TAU * 1.6 * t + o.seed) : 0;
     const tilt = (who === "basil" ? (BT[o.expr] || 0) * (1 - .55 * sp.turn) : (ex.tilt || 0) * sp.native) + (o.tilt || 0) + nod, hy = -1.8 * br + shake + (pose === "lean" ? 3 : 0), hx = pose === "lean" ? sp.native * 9 : 0;
-    const look = who === "basil" ? 0 : (o.look != null ? clamp(o.look, -1, 1) : o.facing && !o.talking ? .5 : 0) * 7;
+    const look = who === "basil" ? 0 : clamp((o.look != null ? clamp(o.look, -1, 1) : o.facing && !o.talking ? .5 : 0) + (ex.lookX || 0), -1, 1) * 7;
     // extras fixed to the head
     let hEx = ""; const hd = sp.head;
     if (ex.sweat) hEx += Gt(`translate(${-sp.native * (hd.rx * .78) + (who === "basil" ? 30 : 0)} ${hd.cy - hd.ry * .62}) rotate(${-sp.native * 18})`, P("M0 -16 C10 -2 10 9 0 9 C-10 9 -10 -2 0 -16Z", "#AEDDF8", "#5E9FCF", 3));
@@ -392,7 +394,7 @@
   const api = { draw, SPEC, LW,
     pip: (x, y, h, t, o) => draw("pip", x, y, h, t, o), basil: (x, y, h, t, o) => draw("basil", x, y, h, t, o), momo: (x, y, h, t, o) => draw("momo", x, y, h, t, o),
     EXPRESSIONS: Object.keys(EXPR), GESTURES: ["rest", "pointL", "pointR", "wave", "pawHead", "cross", "thumbs", "cheer", "chin", "flare"], POSES: ["sit", "stand", "lean", "jump"],
-    EXTRA_EXPRESSIONS: ["amazed", "dreamy", "shy", "stern", "blep", "zen", "hyper"], EXTRA_GESTURES: ["idea", "listen", "peekaboo", "salute", "tada", "please", "cheek", "shy"],
+    EXTRA_EXPRESSIONS: ["amazed", "dreamy", "shy", "stern", "blep", "zen", "hyper", "tailgaze"], EXTRA_GESTURES: ["idea", "listen", "peekaboo", "salute", "tada", "please", "cheek", "shy"],
     // heights that keep the app's relative sizes when the three stand together (multiply by one common size)
     REL: { pip: .9, basil: 1, momo: 1 }, talkM, blinkK };
   if (typeof module !== "undefined" && module.exports) module.exports = api; else root.Buddies = api;
