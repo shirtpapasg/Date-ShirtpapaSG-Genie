@@ -67,11 +67,11 @@
        the right: the FAR eye sits on the far top corner of the head above the short round snout, the NEAR eye is big and set back,
        a wide flat-topped dome with small bumps runs behind them. look = 1 turns it to the front view (see basilTurn). */
     basil: { H: 300, native: 1, lift: 18, hand: "R", seed: 1.7,
-      line: "#6B6486", fur: "#DAD3E2", shade: "#B4AAC6", light: "#EBE5EC", belly: "#F8F4EF", paw: "#DAD3E2", lid: "#C6BDD2", inner: "#B4AAC6", pink: "#F2AEB4", eye: "#3A3349",
+      line: "#6B6486", fur: "#DAD3E2", shade: "#B4AAC6", light: "#EBE5EC", belly: "#F1ECF0", paw: "#DAD3E2", lid: "#C6BDD2", inner: "#B4AAC6", pink: "#F2AEB4", eye: "#3A3349",
       head: { cx: 0, cy: -238, rx: 86, ry: 60 }, chinY: -180,
-      eyes: [{ x: -18, y: -251, r: 19.5, sx: 1 }, { x: 57, y: -265, r: 14.5, sx: .68 }], brow: 20, browGap: 5, browK: .5,
+      eyes: [{ x: -18, y: -251, r: 19.5, sx: 1 }, { x: 57, y: -265, r: 14.5, sx: .68 }], brow: 20, browGap: 10, browK: .8,
       mouth: { x: 40, y: -205, hw: 56, cusp: false, oh: 20, rot: 0, B: [-41, -226], D: [22, -210], F: [72, -236] }, happyOpen: 0,
-      sh: { L: [-50, -140], R: [48, -146] }, armW: 24, reach: 88,
+      sh: { L: [-50, -140], R: [66, -138] }, armW: 24, reach: 88,
       rest: { sit: { L: [-4, -98], R: [36, -102], bend: -16 }, stand: { L: [-4, -98], R: [36, -102], bend: -16 } },
       chin: { L: [-30, -182], R: [46, -180] }, chest: [10, -128], legs: [[-40, 24], [44, 22]] },
     /* Momo: grey-white tabby kitten; pink inner ears, big sparkly eyes, forehead and cheek stripes, white muzzle, chest and paws, striped tail with a white tip. */
@@ -92,8 +92,8 @@
         P("M-182 -70 C-182 -50 -166 -34 -142 -32 M-160 -92 C-158 -76 -146 -66 -128 -64", null, sp.line, 3, 'opacity=".45"')); },
     // thick curled tail with rows of scales (short arcs), as on the reference sheet
     basil(sp, t) { const a = 1.6 * Math.sin(TAU * t / 3.3);
-      const pts = sample([[[34, -30], [-30, -18], [-110, -12], [-146, -40]], [[-146, -40], [-180, -66], [-178, -132], [-141, -150]], [[-141, -150], [-114, -163], [-86, -152], [-84, -125]]], 12);
-      const N = pts.length - 1, wf = k => lerp(26, 7, Math.pow(k, 1.8)); let sc = "", edge = "";
+      const pts = sample([[[34, -40], [-30, -27], [-112, -15], [-152, -42]], [[-152, -42], [-190, -70], [-186, -136], [-146, -152]], [[-146, -152], [-116, -164], [-88, -152], [-87, -124]]], 12);
+      const N = pts.length - 1, wf = k => lerp(29, 7, Math.pow(k, 1.9)); let sc = "", edge = "";
       for (let i = 4; i < N - 1; i++) { const a0 = pts[i - 1], b0 = pts[i + 1], d = Math.hypot(b0[0] - a0[0], b0[1] - a0[1]), tx = (b0[0] - a0[0]) / d, ty = (b0[1] - a0[1]) / d, nx = -ty, ny = tx, w = wf(i / N), c = pts[i];
         (i % 2 ? [-.52, .08, .62] : [-.24, .36]).forEach(q => { const hw = w * .26, cx = c[0] + nx * w * q, cy = c[1] + ny * w * q;
           sc += `M${n(cx - nx * hw)} ${n(cy - ny * hw)} Q${n(cx + tx * hw * 1.5)} ${n(cy + ty * hw * 1.5)} ${n(cx + nx * hw)} ${n(cy + ny * hw)} `; });
@@ -113,8 +113,7 @@
     // chubby pear body, pale belly turned a little to the snout side
     basil(sp) { return P("M-30 -186 C-56 -166 -70 -122 -77 -76 C-82 -30 -62 -8 -30 -4 C0 0 42 0 66 -6 C92 -16 92 -70 82 -104 C74 -142 58 -168 36 -186 Z", sp.fur, sp.line) +
         P("M-70 -50 C-56 -10 50 -6 78 -40 C60 -22 -50 -24 -70 -50Z", sp.shade, null, 0, 'opacity=".4"') +
-        P("M-6 -172 C-30 -134 -36 -52 -14 -14 C10 -6 44 -6 62 -12 C80 -42 76 -112 64 -142 C56 -162 44 -170 34 -174 Z", sp.belly) +
-        P("M-20 -150 l8 7 l7 -8 l8 8 l8 -8 l8 7 l8 -7", null, sp.light, 3, 'opacity=".9"'); },
+        E(20, -88, 47, 78, sp.belly) + E(22, -100, 30, 50, "#fff", null, 0, 'opacity=".45"'); },
     momo(sp) { return P("M-50 -140 C-98 -112 -96 -22 -74 -6 C-40 2 40 2 74 -6 C96 -22 98 -112 50 -140 Z", sp.fur, sp.line) +
         P("M-88 -84 q16 2 26 12 M-90 -60 q18 0 30 10 M-86 -36 q16 0 26 8 M88 -84 q-16 2 -26 12 M90 -60 q-18 0 -30 10 M86 -36 q-16 0 -26 8", null, sp.shade, 7) +
         P("M-40 -128 C-52 -98 -46 -72 -30 -60 L-22 -68 L-12 -48 L0 -60 L12 -48 L22 -68 L30 -60 C46 -72 52 -98 40 -128 Z", sp.belly); }
@@ -137,8 +136,8 @@
     S: [[86, -241], [78, -263], [61, -284], [34, -293], [2, -298], [-36, -293], [-66, -273], [-82, -240], [-72, -204], [-36, -183], [18, -178], [66, -196]],
     F: [[90, -224], [77, -257], [54, -282], [27, -294], [0, -299], [-27, -294], [-54, -282], [-77, -257], [-90, -224], [-62, -190], [0, -179], [62, -190]],
     // bump size on the stretch after each point
-    bS: [0, 0, 3.6, 4.6, 5.4, 7.4, 9, 9, 7, 3.6, 0, 0],
-    bF: [6.5, 0, 3.6, 4.6, 4.6, 3.6, 0, 6.5, 8, 3.6, 3.6, 8],
+    bS: [0, 0, 3, 4, 4.6, 6, 7, 7, 6, 3.4, 0, 0],
+    bF: [5.5, 0, 3, 4, 4, 3, 0, 5.5, 6.5, 3.4, 3.4, 6.5],
     spots: [[[22, -283], [10, -286], 5], [[0, -287], [-10, -285], 5.5], [[-22, -281], [0, -272], 4.5], [[36, -272], [14, -264], 3.6], [[10, -271], [-13, -264], 3.6], [[-46, -266], [0, -258], 4]] };
   // a smooth closed curve through points, as cubic segments
   function spline(A) { const N = A.length, g = i => A[(i + N) % N], segs = [];
@@ -157,7 +156,7 @@
       const A = BH.S.map((p, i) => { const q = L2(p, BH.F[i]); if (i >= 9) q[1] += jaw * (i === 10 ? 1 : .6); return q; });
       const segs = spline(A), d = segPath(segs); let fr = "";
       segs.forEach((s, i) => { const z = lerp(BH.bS[i], BH.bF[i], f); if (z < 1.2) return;
-        [.17, .5, .83].forEach(k => { const p = bez(s, k), q = bez(s, k + .02), tl = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, tx = (q[0] - p[0]) / tl, ty = (q[1] - p[1]) / tl, nx = ty, ny = -tx, b = z * .9, h = z * 1.35;
+        [.17, .5, .83].forEach(k => { const p = bez(s, k), q = bez(s, k + .02), tl = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1, tx = (q[0] - p[0]) / tl, ty = (q[1] - p[1]) / tl, nx = -ty, ny = tx, b = z * 1.25, h = z * .95;
           fr += `<path d="M${n(p[0] - tx * b - nx * 2)} ${n(p[1] - ty * b - ny * 2)} L${n(p[0] + nx * h)} ${n(p[1] + ny * h)} L${n(p[0] + tx * b - nx * 2)} ${n(p[1] + ty * b - ny * 2)}Z"/>`; }); });
       let out = U(fr + `<path d="${d}Z"/>`, sp.fur, sp.line);
       // pale throat: from the smile line down to just inside the jaw
@@ -165,7 +164,7 @@
       const i8 = ins(A[8], .86), i9 = ins(A[9]), i10 = ins(A[10]), i11 = ins(A[11]), i0 = ins(A[0], .9);
       out += P(`M${n(B[0] - 14)} ${n(B[1] - 2)} L${n(B[0])} ${n(B[1])} Q${n(C[0])} ${n(C[1])} ${n(Fp[0])} ${n(Fp[1])} Q${lerp(i0[0], i0[0], f)} ${i0[1]} ${i11[0]} ${i11[1]} Q${n((i11[0] + i10[0]) / 2 + 6)} ${n(i10[1] + 3)} ${i10[0]} ${i10[1]} Q${n((i9[0] + i10[0]) / 2 - 8)} ${n(i10[1] + 2)} ${i9[0]} ${i9[1]} Q${i8[0]} ${i8[1]} ${n(B[0] - 14)} ${n(B[1] - 2)}Z`, sp.belly, null, 0, 'opacity=".85"');
       // light snout top, crown spots, the darker ear spot at the back
-      out += E(lerp(52, 0, f), lerp(-250, -240, f), lerp(24, 26, f), lerp(11, 12, f), sp.light, null, 0, 'opacity=".8"');
+      out += E(lerp(52, 0, f), lerp(-250, -240, f), lerp(24, 26, f), lerp(11, 12, f), sp.light, null, 0, `opacity="${n(lerp(.8, .4, f))}"`);
       BH.spots.forEach(([a, b, r]) => { const p = L2(a, b); out += E(p[0], p[1], r, r * .7, sp.shade, null, 0, 'opacity=".7"'); });
       out += E(lerp(-62, -84, f), lerp(-246, -240, f), lerp(6, 2, f), 9, sp.shade, null, 0, `opacity="${n(.85 * (1 - f))}"`);
       // eye sockets (a paler rim) and the brow ridge over each eye
@@ -218,7 +217,7 @@
     salute: (sp, S, s) => { const e = sp.eyes[s < 0 ? 0 : 1]; return { P: [e.x + s * e.r * .5, e.y - e.r - 9], bend: s * 34, front: 1, f: {} }; },
     tada: (sp, S, s, t) => ({ P: [S[0] + s * sp.reach * .92, S[1] - sp.reach * .5 - 3 * Math.sin(TAU * 1.2 * t + s)], bend: s * 8, f: { pad: 1 } }),
     please: (sp, S, s) => { const c = sp.chest || [0, S[1] + 18]; return { P: [c[0] + s * 9, c[1]], bend: s * -16, front: 1, f: {} }; },
-    cheek: (sp, S, s) => { const c = sp.chin[s < 0 ? "L" : "R"]; return { P: [c[0] + s * 16, c[1] - 16], bend: s * 20, front: 1, f: { pad: 1 } }; },
+    cheek: (sp, S, s) => { const c = sp.chin[s < 0 ? "L" : "R"]; return { P: [c[0] + s * 16, c[1] - 10], bend: s * 20, front: 1, f: { pad: 1 } }; },
     shy: (sp, S, s) => ({ P: [sp.mouth.x + s * 13, sp.mouth.y + (sp.mouth.B ? 4 : 10)], bend: s * 24, front: 1, f: {} })
   };
   const BOTH = { cross: 1, cheer: 1, flare: 1, tada: 1, please: 1, shy: 1 };
