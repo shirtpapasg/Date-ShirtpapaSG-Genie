@@ -168,19 +168,20 @@ New week, new folder `epNN/`:
 
 ## Episodes
 
-Released every 3 days at 5 pm SGT from 18 Nov 2026 (the teacher: "don't delay too long"), with a Short on most days in between.
+First planned for every 3 days from 18 Nov 2026. On 19 Nov the teacher said "make them live": every episode is public now, and the Shorts keep their daily schedule.
 
 | No | Goes public | Story | Textbook link | Levels |
 |---|---|---|---|---|
 | 1 | public 18 Nov | Why did the haze go away? (first person: a smoke particle) | Respiratory system; people and the environment | P5, P6 |
-| 2 | Part 1 public 18 Nov; Part 2 Sun 22 Nov | How does Singapore keep the lights on? (first person: natural gas; Part 2 sunlight, cable, neutron) | Energy forms and conversion | P6 |
-| 3 | Part 1 Wed 25 Nov; Part 2 Sat 28 Nov | Recycling: 10¢ for your can (first person: a drink can) and where our rubbish goes (a greasy takeaway box, Semakau full by about 2035) | Materials and magnets; people and the environment | P3, P6 |
-| 4 | Tue 1 Dec | Where does all this rain come from? (first person: a water molecule from MacRitchie) | The water cycle | P4 |
-| 5 | Fri 4 Dec | Your food is sunlight?! (first person: light energy, through a leaf, a hen and an egg, to a student) and food security | Photosynthesis; food chains | P5, P6 |
-| 6 | Mon 7 Dec | Where does your food go? (first person: vegetable fibre, mouth to toilet bowl; NEWater) | Digestive system | P4 |
-| 7 | Thu 10 Dec | How does oxygen get to your muscles? (first person: oxygen, nose to muscle; hands over to carbon dioxide, which is breathed out) | Respiratory and circulatory systems | P5 |
-| 8 | Sun 13 Dec | What did the crocodile eat? (a rewind food chain at Sungei Buloh: crocodile, mudskipper, crab, mangrove leaf, the Sun) | Food chains | P6 |
-| 9 | Wed 16 Dec | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; people and the environment | P3, P6 |
+| 2 | public | How does Singapore keep the lights on? (first person: natural gas; Part 2 sunlight, cable, neutron) | Energy forms and conversion | P6 |
+| 3 | public | Recycling: 10¢ for your can (first person: a drink can) and where our rubbish goes (a greasy takeaway box, Semakau full by about 2035) | Materials and magnets; people and the environment | P3, P6 |
+| 4 | public | Where does all this rain come from? (first person: a water molecule from MacRitchie) | The water cycle | P4 |
+| 5 | public | Your food is sunlight?! (first person: light energy, through a leaf, a hen and an egg, to a student) and food security | Photosynthesis; food chains | P5, P6 |
+| 6 | public | Where does your food go? (first person: vegetable fibre, mouth to toilet bowl; NEWater) | Digestive system | P4 |
+| 7 | public | How does oxygen get to your muscles? (first person: oxygen, nose to muscle; hands over to carbon dioxide, which is breathed out) | Respiratory and circulatory systems | P5 |
+| 8 | public | What did the crocodile eat? (a rewind food chain at Sungei Buloh: crocodile, mudskipper, crab, mangrove leaf, the Sun) | Food chains | P6 |
+| 9 | public | Mosquitoes that fight dengue (Project Wolbachia) | Life cycles; people and the environment | P3, P6 |
+| 10 | public 19 Nov | Dead things become your food?! (first person: a nutrient in a dead grasshopper, through a compost bin and a chye sim plant, and back) | Decomposers, the nutrient cycle; food security; Pulau Semakau | P6 |
 
 EP01's "Think about it" (answered at the start of EP02): *Why does an N95 mask protect you better than a cloth mask during the haze?* Answer: the gaps between the fibres of a cloth mask are much bigger than PM2.5 particles, so many slip through. An N95 mask has a fine filter that traps at least 95 out of every 100 tiny particles, and it fits closely so air doesn't leak in around the edges.
 
@@ -194,24 +195,29 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 
 `production/youtube/sau_upload.py` uploads each video (`--replace <ids>` swaps in a new render of a still-scheduled video, same slot and date) private with a `publishAt` time, Made for Kids, with chapters from its timeline, its thumbnail (made with `workspace/sau/thumb.js` in the P5 thumbnail style), and the playlist.
 
-| Video | YouTube | Goes public (SGT) |
+| Video | YouTube | Status (SGT) |
 |---|---|---|
-| Trailer | WnUML8oojhM | public since 18 Nov (the teacher asked to go live early) |
-| EP01 | jfRxXhsPOQM | public since 18 Nov (re-uploaded with the first-person journey) |
-| EP01 Short 1 | jUZChmlOs0s | Fri 27 Nov, 5 pm |
-| EP01 Short 2 | ZbA-GGxWt3s | Mon 30 Nov, 5 pm |
-| EP02 Part 1 | xGfdk5-E8gA | public since 18 Nov (re-uploaded with the cold open) |
-| EP02 Part 2 | LaT5UpsL7Bc | Sun 22 Nov, 5 pm |
-| EP03 Part 1 | Fvj-CKYUUtk | Wed 25 Nov, 5 pm |
-| EP03 Part 2 | -6w5H9eDxP4 | Sat 28 Nov, 5 pm |
-| EP04 Rain | ackRNYZrxho | Tue 1 Dec, 5 pm |
-| EP05 Food | Dbo4uYY8ySY | Fri 4 Dec, 5 pm |
-| EP06 Digestion | V_agOM8Wdr8 | Mon 7 Dec, 5 pm |
-| EP07 Oxygen | wTh7LQTkBZI | Thu 10 Dec, 5 pm |
-| EP08 Food chain | EQ0h_Rw2XdU | Sun 13 Dec, 5 pm |
-| EP09 Mosquitoes | bUD4mfPhqc0 | Wed 16 Dec, 5 pm |
-| Shorts EP03 to EP05 | see youtube/sau_uploaded.json | 26, 27, 29, 30 Nov; 2, 3, 5, 6 Dec |
-| EP02 Short 1 | xDAGBl5XHJQ | Mon 7 Dec, 5 pm |
-| EP02 Short 2 | xE8CyfEKG9w | Tue 8 Dec, 5 pm |
+| Trailer | WnUML8oojhM | public since 18 Nov |
+| EP01 Haze | Ov3AkwALTro | public (new running order, 19 Nov) |
+| EP02 Part 1 Lights | MLsPqkkK_ow | public (new running order, lamp and kettle, 19 Nov). The older copy xGfdk5-E8gA is set to private, not deleted |
+| EP02 Part 2 | g9Brw_po2Ec | public |
+| EP03 Part 1 Can | e0egmX5H4ow | public |
+| EP03 Part 2 Rubbish | qvJ-D5yKsaI | public |
+| EP04 Rain | iLk-TlkMnvk | public |
+| EP05 Food | beI3tFxJrqs | public |
+| EP06 Digestion | _n6nMaWthhU | public |
+| EP07 Oxygen | dagUmrvt_eQ | public |
+| EP08 Food chain | PAoJd12kPWQ | public |
+| EP09 Mosquitoes | F_oNWbfqtC0 | public |
+| EP10 Compost | isq1RcHdBcU | public since 19 Nov |
+| EP01 Shorts | jUZChmlOs0s, ZbA-GGxWt3s | Thu 19 Nov, Fri 20 Nov, 5 pm |
+| EP02 Shorts | xDAGBl5XHJQ, xE8CyfEKG9w | Mon 23 Nov, Tue 24 Nov, 5 pm |
+| EP03 Part 1 Shorts | 3yzjC4j--ec, 8fKXGNkgusA | Thu 26 Nov, Fri 27 Nov, 5 pm |
+| EP03 Part 2 Shorts | SrIf94buYIU, 3as-TwJ4tGM | Sun 29 Nov, Mon 30 Nov, 5 pm |
+| EP04 Shorts | y_gOAbX-Rc0, cZEToluHQA0 | Wed 2 Dec, Thu 3 Dec, 5 pm |
+| EP05 Shorts | JvxVMXWCF2M, HJGDcJ9iDW0 | Sat 5 Dec, Sun 6 Dec, 5 pm |
+| EP06 Shorts | CsVQYo_nQTo, 3IJiBhPp6r4 | Tue 8 Dec, Wed 9 Dec, 5 pm |
+
+The playlist "TheOneApp, Explored" (19 Nov): each episode followed by its Shorts, in order, with no "Deleted video" gaps. EP07 to EP10 have no Shorts yet.
 
 Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the TheOneApp, Explored ticket appear). The daily check prepares that pull request.
