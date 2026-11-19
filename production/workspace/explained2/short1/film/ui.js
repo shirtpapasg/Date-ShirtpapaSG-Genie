@@ -13,7 +13,7 @@
   X.text = (ctx, str, x, y, o = {}) => {
     ctx.save(); X.font(ctx, o); ctx.textAlign = o.align || "center"; ctx.textBaseline = o.base || "alphabetic"; ctx.globalAlpha *= o.alpha == null ? 1 : o.alpha;
     const dx = o.ls && (o.align || "center") === "center" ? o.ls / 2 : 0;
-    if (o.shadow) { ctx.fillStyle = o.shadow === true ? "rgba(18,14,46,.55)" : o.shadow; ctx.fillText(str, x + dx, y + Math.max(3, (o.size || 40) * .07)); }
+    if (o.shadow) { ctx.fillStyle = o.shadow === true ? "rgba(18,14,46,.55)" : o.shadow; G.decor(() => ctx.fillText(str, x + dx, y + Math.max(3, (o.size || 40) * .07))); }
     if (o.stroke) { ctx.lineJoin = "round"; ctx.lineWidth = o.strokeW || 10; ctx.strokeStyle = o.stroke; ctx.strokeText(str, x + dx, y); }
     ctx.fillStyle = o.color || "#fff"; ctx.fillText(str, x + dx, y); ctx.restore();
   };
@@ -71,7 +71,7 @@
 
   // a choice card. side: "L" (blue, LIVING) or "R" (orange, NON-LIVING). k: 0 = slim tab, 1 = full card. poke: 0..1 the hand pokes outward
   X.choice = (ctx, side, cx, cy, k, o = {}) => { const L = side === "L", { poke = 0, dim = 1, glow = 0, tally = [] } = o;
-    const w = lerp(400, 424, k), h = lerp(92, 250, k), deep = L ? P().blueDeep : P().orangeDeep, c0 = L ? "#5FB0FF" : "#FFB45C", c1 = L ? "#2C6FE8" : "#F27A1E";
+    const w = lerp(400, 424, k), h = lerp(92, 250, k), deep = L ? P().blueDeep : P().orangeDeep, c0 = L ? "#56A8FF" : "#FFAA4E", c1 = L ? "#2565E0" : "#E96C10";
     ctx.save(); ctx.translate(cx, cy); ctx.rotate((L ? 1 : -1) * 2 * Math.PI / 180 * k); ctx.globalAlpha *= dim;
     if (glow > 0) { ctx.save(); ctx.shadowColor = L ? "rgba(58,141,255,.9)" : "rgba(255,152,56,.95)"; ctx.shadowBlur = 50 * glow * (G.scale || 1); ctx.fillStyle = c1; X.rr(ctx, -w / 2, -h / 2, w, h, lerp(46, 48, k)); ctx.fill(); ctx.restore(); }
     const r = lerp(46, 48, k);
@@ -81,7 +81,7 @@
     const word = L ? "LIVING" : "NON-LIVING", dir = L ? -1 : 1;
     if (k > .5) { const a = clamp((k - .5) * 2);
       ctx.save(); ctx.globalAlpha *= a; X.hand(ctx, dir * (10 + 26 * poke), -52, .8, dir); ctx.restore();
-      X.text(ctx, word, 0, 62, { size: L ? 76 : 54, ls: L ? 10 : 5, shadow: "rgba(18,14,46,.25)" });
+      X.text(ctx, word, 0, 62, { size: L ? 76 : 54, ls: L ? 10 : 5, shadow: "rgba(18,14,46,.4)" });
       ctx.save(); ctx.globalAlpha *= a * .35; ctx.fillStyle = P().ink; X.rr(ctx, -100, 80, 200, 40, 20); ctx.fill(); ctx.restore();
       X.text(ctx, L ? "point LEFT" : "point RIGHT", 0, 109, { size: 27, w: 600, ls: 1, alpha: a });
     } else {
@@ -105,7 +105,7 @@
   X.bubble = (ctx, cx, cy, lines, now, o = {}) => { const { pop = 1, tailX = 0, size = 46, cross = false, first = null } = o; if (pop <= 0.01) return;
     const lh = size * 1.3, ws = lines.map((ln) => ln.reduce((q, w) => q + X.measure(ctx, w.w, { size, w: 600 }), 0) + (ln.length - 1) * size * .27), chip = cross ? size * 1.25 : 0;
     const w = Math.max(...ws) + 90 + chip, h = lines.length * lh + 44;
-    ctx.save(); ctx.translate(cx, cy + h / 2); ctx.scale(pop, pop); ctx.translate(0, -h / 2);
+    ctx.save(); ctx.translate(cx, cy + h / 2); ctx.scale(pop, pop);
     X.shadow(ctx, 10, 6, .3); ctx.fillStyle = "#fff"; X.rr(ctx, -w / 2, -h / 2, w, h, Math.min(h / 2, 56)); ctx.fill();
     ctx.beginPath(); ctx.moveTo(tailX - 22, h / 2 - 4); ctx.lineTo(tailX + (tailX > 0 ? 14 : -14), h / 2 + 42); ctx.lineTo(tailX + 22, h / 2 - 4); ctx.fill(); X.noShadow(ctx);
     lines.forEach((ln, i) => { const y = -h / 2 + 22 + lh * (i + .74); let x = -ws[i] / 2 + (i === 0 ? chip / 2 : 0);

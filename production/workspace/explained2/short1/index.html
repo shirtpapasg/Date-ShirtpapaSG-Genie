@@ -6,11 +6,12 @@
 <style>html, body { margin: 0; background: #111; } canvas { display: block; width: 100vw; height: auto; }</style>
 </head>
 <body>
-<canvas id="c" width="1920" height="1080"></canvas>
+<canvas id="c" width="1080" height="1920"></canvas>
 <!-- engine (shared) -->
 <script src="engine/util.js"></script>
 <script src="engine/music.js"></script>
 <!-- this film -->
+<script src="voice/voice_data.js"></script>
 <script src="score.js"></script>
 <!-- engine drawing toolkit -->
 <script src="engine/video/gfx.js"></script>
@@ -22,6 +23,11 @@
 <script src="engine/video/data.js"></script>
 <script src="engine/video/boot.js"></script>
 <!-- this film's scenes (add more files here if the film grows) -->
+<script src="lib/buddies.js"></script>
+<script src="lib/motion.js"></script>
+<script src="lib/sprites.js"></script>
+<script src="film/props.js"></script>
+<script src="film/ui.js"></script>
 <script src="film.js"></script>
 </body>
 </html>

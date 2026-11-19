@@ -43,7 +43,7 @@ for (let t = ev.cutBox + BEAT * 2, i = 0; t < ev.tag - BEAT * 2; t += BEAT * 4, 
 
 // ---------- the robot: every step is a wood tick and a tiny foot thud (it IS the percussion) ----------
 for (const s of sc.steps) {
-  const inRing = s.t >= ev.ring0 - 1e-3 && s.t < ev.cutBox, g = (inRing ? 0.45 : 1) * (0.5 + 0.5 * s.k);
+  const inRing = s.t >= ev.ring0 - 1e-3 && s.t < ev.cutBox, g = (inRing ? 0.6 : 1) * (0.5 + 0.5 * s.k);
   robot.addMono(I.woodTick(s.i % 2 ? 0.78 : 0.62), s.t, 0.5 * g, s.i % 2 ? 0.12 : -0.12);
   robot.addMono(I.rim(s.i % 2 ? 1.1 : 0.9, s.i), s.t, 0.1 * g);
   if (s.last) { robot.addMono(I.thud(140, 0.05), s.t, 0.5); robot.addMono(I.woodTick(0.45), s.t, 0.5); robot.addMono(I.bell(380, 0.25, 3.5, 2.7), s.t + 0.05, 0.05); }   // clunk + a loose spring
@@ -53,7 +53,7 @@ robot.addMono(I.boing(), ev.land - 0.02, 0.22); robot.addMono(I.thud(85, 0.09), 
 // ---------- the lock-in ----------
 game.addMono(I.pop(1500, 1), ev.tabL, 0.5, -0.6); game.addMono(I.marimba(m('E5')), ev.tabL, 0.3, -0.5);
 game.addMono(I.pop(1900, 2), ev.tabR, 0.5, 0.6); game.addMono(I.marimba(m('G5')), ev.tabR, 0.3, 0.5);
-for (const k of sc.ticks) game.addMono(I.woodTick(k.strong ? 1.25 : 1.5), k.t, k.strong ? 0.5 : 0.3);
+for (const k of sc.ticks) game.addMono(I.woodTick(k.strong ? 1.25 : 1.5), k.t, k.strong ? 0.8 : 0.45);
 { const b1 = I.bell(1568, 0.5, 1.4, 2.0), b2 = I.bell(2349, 0.35, 1.0, 2.0);
   game.addMono(b1, ev.bell, 0.42); game.addMono(b2, ev.bell, 0.18); verb.addMono(b1, ev.bell, 0.25); }
 game.addMono(I.thud(72, 0.12), ev.stamp, 0.95); game.addMono(I.thwack(), ev.stamp, 0.22);                   // the rubber stamp
@@ -98,7 +98,7 @@ const music = [drums, bass, keys, uke, pad];
 MIX.duck(music, voice, { depth: 0.62, release: 0.3 });
 MIX.duck([robot, amb], voice, { depth: 0.4, release: 0.25 });
 const stems = { drums, bass, keys, uke, pad, robot, game, amb, voice, verb: reverb(verb, { room: 0.7, damp: 0.4 }) };
-const GAIN = { drums: 0.5, bass: 0.55, keys: 0.8, uke: 0.9, pad: 1.6, robot: 0.55, game: 0.8, amb: 1, voice: 2.3, verb: 0.9 };
+const GAIN = { drums: 0.5, bass: 0.55, keys: 0.8, uke: 2.4, pad: 1.6, robot: 0.55, game: 0.8, amb: 1, voice: 2.3, verb: 0.9 };
 const out = path.join(__dirname, 'out');
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? out : null });
 MIX.highpass(mix, 30);

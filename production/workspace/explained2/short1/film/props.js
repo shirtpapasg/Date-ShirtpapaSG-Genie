@@ -100,8 +100,7 @@
     <g filter="url(#dropS)"><rect x="${BX - 24}" y="${BY - 46}" width="${BW + 48}" height="64" rx="24" fill="#3FD0C3"/><rect x="${BX - 12}" y="${BY - 38}" width="${BW + 24}" height="18" rx="9" fill="#fff" opacity=".3"/></g>
     ${Array.from({ length: 8 }, (_, i) => `<ellipse cx="${BX + 120 + i * 100}" cy="${BY - 6}" rx="16" ry="9" fill="${P.night}" opacity=".75"/>`).join("")}`;
   // near plane: one or two dark, soft shapes at the frame edge (a leaf, the corner of a school bag)
-  Props.boxNear = () => `<g filter="url(#b10)" opacity=".93"><g transform="translate(1090 1500) rotate(-150)">${K.leaf(210, false, false).replace(/url\(#gLeaf\)/g, "#1B1440").replace(/#1F7F47|#D8F6C8/g, "#1B1440")}</g>
-    <path d="M-160 1640 Q-40 1500 130 1560 Q250 1610 250 1760 V2080 H-160z" fill="#1B1440"/></g>`;
+  Props.boxNear = () => `<g filter="url(#b10)" opacity=".93"><g transform="translate(1120 1640) rotate(-150)">${K.leaf(210, false, false).replace(/url\(#gLeaf\)/g, "#1B1440").replace(/#1F7F47|#D8F6C8/g, "#1B1440")}</g></g>`;
 
   // the lock-in stage (dark violet, a spotlight from above). vb -160 -160 1400 2240
   Props.stage = () => { const r = rnd(9);
