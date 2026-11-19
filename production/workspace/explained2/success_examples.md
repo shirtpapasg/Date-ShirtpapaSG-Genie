@@ -23,3 +23,10 @@ Learn principles only; never copy characters, names, music, footage or look.
    - For us: our first-person "shrink" journeys should feel like this: a living micro-world with soft light, depth, organic textures and
      motion, and moments of quiet wonder between the game beats (the contrast makes the game beats land harder). Perfect for P3 EP7
      (fungi and bacteria), P5 cells, P6 decomposers.
+6. Kurzgesagt – In a Nutshell, "AI Just Crossed the Terrifying Line - Now What?"  https://www.youtube.com/watch?v=ujkD4SxPKOI
+   - (the topic isn't ours; the craft is) rich flat-vector art with a strong, consistent palette, glowing elements on dark
+     backgrounds, layered depth and parallax, smooth constant motion, simple recurring characters as the audience's stand-ins,
+     icon-clear diagrams, a big question in the title, a script that builds with "but here's the thing" turns, and a calm, confident
+     narrator; very high production polish, every frame worth pausing on.
+   - For us: the level of polish to aim for in the new style guide; clean vector shapes, a signature palette, glow and depth, and
+     diagrams so clear a 9-year-old reads them in one second.
