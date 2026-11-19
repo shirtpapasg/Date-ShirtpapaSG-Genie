@@ -1,19 +1,34 @@
 <!doctype html><html><head><meta charset="utf-8">
+<!-- Basil against the teacher's reference sheet. node ../kit/shot.js basil_head_fix.html basil_head_fix.png 3600 2330 -->
 <style>@font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
 html,body{margin:0;background:#FFF8EA} svg{display:block} text{font-family:Fredoka;font-weight:600;fill:#2B2147}</style></head><body>
-<svg id="v" xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500"></svg>
-<script src="/tmp/claude-0/-home-user/74176568-2247-5488-9d44-67460063f436/scratchpad/buddies_old.js"></script><script>const OLD = Buddies;</script>
+<svg id="v" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3600" height="2330" viewBox="0 0 3600 2330"></svg>
 <script src="buddies.js"></script>
 <script>
-const T = (x, y, s, z = 34) => `<text x="${x}" y="${y}" font-size="${z}" text-anchor="middle">${s}</text>`;
-let o = `<rect width="2400" height="1500" fill="#FFF8EA"/>` + T(1200, 70, "Basil's head: app picture, old rig, new rig", 46);
-o += `<rect x="40" y="110" width="560" height="640" rx="30" fill="#CDF4E6"/><image href="app/liz-sit.png" x="-148" y="160" width="904" height="890" clip-path="inset(0 0 0 0)"/>` ;
-o = `<defs><clipPath id="c"><rect x="40" y="110" width="560" height="640" rx="30"/></clipPath></defs>` + o.replace('clip-path="inset(0 0 0 0)"', 'clip-path="url(#c)"') + T(320, 800, "app");
-const cell = (B, x, lab) => { const opt = lab.includes("camera") ? { look: .6 } : {}; return cell0(B, x, lab, opt); };
-const cell0 = (B, x, lab, opt) => `<rect x="${x - 280}" y="110" width="560" height="640" rx="30" fill="#fff"/><svg x="${x - 280}" y="110" width="560" height="640" viewBox="${x - 280} 110 560 640">${B.draw("basil", x + 26, 1010, 780, 1, Object.assign({ facing: "left", shadow: false }, opt))}</svg>` + T(x, 800, lab);
-o += cell(OLD, 910, "old head (dip between the eyes)") + cell(Buddies, 1500, "new head (one smooth dome)") + cell(Buddies, 2090, "new head, turned to camera");
-// every expression and the risky gestures, new head
-const list = [["happy", {}], ["cheering", { expr: "cheering" }], ["shocked", { expr: "shocked" }], ["thinking", { expr: "thinking" }], ["smug", { expr: "smug" }], ["oops", { expr: "oops" }], ["laughing", { expr: "laughing" }], ["sulking", { expr: "sulking" }], ["jump", { pose: "jump", air: .8 }], ["talking", { talking: true }]];
-list.forEach(([l, op], i) => { const x = 140 + i * 235; o += Buddies.draw("basil", x + 22, 1385, 245, 1.3, Object.assign({ facing: "left" }, op)) + T(x, 1440, l, 28); });
-document.getElementById("v").innerHTML = o;
+const REF = "basil_ref/basil_8_poses_from_teacher.jpg", RW = 1376, RH = 768;
+// each panel: crop box on the sheet, where the feet are in the crop (px), and the matching rig options
+const PAN = [
+  ["look down", [12, 14], [210, 311], { tilt: 20, expr: "shy", gesture: "rest" }, "happy, tilt 20, eyes down"],
+  ["look up", [354, 14], [212, 311], { tilt: -22 }, "happy, tilt -22"],
+  ["look back", [696, 14], [198, 309], { facing: "left", gesture: "wave", hand: "L" }, "facing left, wave (whole rig mirrored)"],
+  ["dreamy", [1040, 14], [205, 311], { expr: "dreamy" }, "expr dreamy"],
+  ["thoughtful", [12, 404], [214, 313], { expr: "thinking" }, "expr thinking"],
+  ["shy", [354, 404], [212, 313], { expr: "shy" }, "expr shy"],
+  ["amazed", [696, 404], [207, 313], { expr: "amazed" }, "expr amazed"],
+  ["front view", [1040, 404], [207, 313], { look: 1 }, "look 1 (front view)"]];
+const T = (x, y, s, z = 30, a = "middle") => `<text x="${x}" y="${y}" font-size="${z}" text-anchor="${a}">${s}</text>`;
+let defs = "", o = `<rect width="3600" height="2330" fill="#FFF8EA"/>` + T(60, 70, "Basil: the teacher's reference panels (left of each pair) and the SVG rig (right)", 46, "start");
+const refImg = (i, x, y, c, op = 1) => { const [bx, by] = PAN[i][1], k = c / 322; defs += `<clipPath id="c${i}_${x}"><rect x="${x}" y="${y}" width="${c}" height="${c}" rx="${22 * k}"/></clipPath>`;
+  return `<image href="${REF}" x="${x - bx * k}" y="${y - by * k}" width="${RW * k}" height="${RH * k}" clip-path="url(#c${i}_${x})" opacity="${op}"/>`; };
+const rig = (i, x, y, c, extra) => { const k = c / 322, [fx, fy] = PAN[i][2]; return Buddies.draw("basil", x + fx * k, y + fy * k, 290 * k, 1.0, Object.assign({ shadow: false, blink: false, breathe: false }, PAN[i][3], extra)); };
+const C = 430;
+PAN.forEach((p, i) => { const x = 40 + (i % 4) * 890, y = 110 + Math.floor(i / 4) * 540;
+  o += `<rect x="${x}" y="${y}" width="${C * 2 + 10}" height="${C}" rx="30" fill="#fff"/>` + refImg(i, x, y, C) + `<svg x="${x + C + 10}" y="${y}" width="${C}" height="${C}" viewBox="${x + C + 10} ${y} ${C} ${C}">${rig(i, x + C + 10, y, C)}</svg>` + T(x + C / 2, y + C + 40, p[0] + " · sit (reference)") + T(x + C + 10 + C / 2, y + C + 40, "rig: " + p[4]); });
+// overlays: the rig drawn at 55% over the reference at the same size
+const yo = 1260, CO = 840;
+o += T(60, yo - 30, "Overlay check: rig (55%) on top of the reference at the same size. Three-quarter views and the front view.", 40, "start");
+[[6, {}], [4, {}], [1, {}], [7, {}]].forEach(([i, ex], j) => { const x = 40 + j * 890;
+  o += refImg(i, x, yo, CO) + `<svg x="${x}" y="${yo}" width="${CO}" height="${CO}" viewBox="${x} ${yo} ${CO} ${CO}" opacity=".55">${rig(i, x, yo, CO, ex)}</svg>` + T(x + CO / 2, yo + CO + 44, PAN[i][0] + " + rig", 32); });
+o += T(60, 2270, "Rig drawn flat-vector per the style guide (self-coloured lines, soft bumps instead of sharp spikes). Eye centres, head width and snout length are matched to the panels above.", 30, "start");
+document.getElementById("v").innerHTML = `<defs>${defs}</defs>` + o;
 </script></body></html>
