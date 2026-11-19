@@ -14,6 +14,6 @@ const cell0 = (B, x, lab, opt) => `<rect x="${x - 280}" y="110" width="560" heig
 o += cell(OLD, 910, "old head (dip between the eyes)") + cell(Buddies, 1500, "new head (one smooth dome)") + cell(Buddies, 2090, "new head, turned to camera");
 // every expression and the risky gestures, new head
 const list = [["happy", {}], ["cheering", { expr: "cheering" }], ["shocked", { expr: "shocked" }], ["thinking", { expr: "thinking" }], ["smug", { expr: "smug" }], ["oops", { expr: "oops" }], ["laughing", { expr: "laughing" }], ["sulking", { expr: "sulking" }], ["jump", { pose: "jump", air: .8 }], ["talking", { talking: true }]];
-list.forEach(([l, op], i) => { const x = 140 + i * 235; o += Buddies.draw("basil", x + 30, 1385, 330, 1.3, Object.assign({ facing: "left" }, op)) + T(x, 1440, l, 28); });
+list.forEach(([l, op], i) => { const x = 140 + i * 235; o += Buddies.draw("basil", x + 22, 1385, 245, 1.3, Object.assign({ facing: "left" }, op)) + T(x, 1440, l, 28); });
 document.getElementById("v").innerHTML = o;
 </script></body></html>
