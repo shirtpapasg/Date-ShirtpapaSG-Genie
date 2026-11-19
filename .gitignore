@@ -28,3 +28,6 @@ production/workspace/sau/preview/
 production/workspace/sau/*/pov[A-Z]_*
 production/workspace/sau/*/bparts/
 production/workspace/explained2/fonts/node_modules/
+production/workspace/explained2/short1/out/*.png
+production/workspace/explained2/short1/out/stills/
+production/workspace/explained2/short1/out/frames/

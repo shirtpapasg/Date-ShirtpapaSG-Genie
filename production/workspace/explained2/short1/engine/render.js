@@ -356,6 +356,7 @@ async function renderRange(f0, f1, workers, dest, { fmt = 'png', crf = 14, prese
 
 // Storyboard: key frames drawn straight into one labelled sheet inside the page.
 const BOARD_JS = `(async (items, cols) => {
+  for (const it of items) if (window.prepareAt) await window.prepareAt(it.t); /* explained2: sprites */
   const src = document.getElementById('c');
   const tall = src.height > src.width;
   const tw = tall ? Math.round(640 * src.width / src.height) : 640, th = tall ? 640 : Math.round(640 * src.height / src.width);

@@ -5,6 +5,7 @@
 // still reads when the thumbnail is ~210 px wide on a phone. Frames default to the film's sync markers
 // (its hits), else three moments across the film. Title/sub default to score.js `poster`, then brand.json.
 const POSTER_JS = `(async (items, o) => {
+  for (const it of items) if (window.prepareAt) await window.prepareAt(it.t); /* explained2: sprites */
   const src = document.getElementById('c');
   const tall = src.height > src.width;
   const fam = o.font;
