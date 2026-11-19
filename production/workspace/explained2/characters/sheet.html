@@ -4,7 +4,7 @@
 <style>
   @font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
   @font-face{font-family:Fredoka;font-weight:700;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
-  html,body{margin:0;background:#FFF8EA;overflow:hidden} svg{display:block} text{font-family:Fredoka;font-weight:600;fill:#2B2147}
+  html,body{margin:0;background:#FFF8EA;overflow:hidden} svg{display:block} text{font-family:Fredoka}
 </style></head><body>
 <svg id="v" xmlns="http://www.w3.org/2000/svg" width="2600" height="3330" viewBox="0 0 2600 3330"></svg>
 <script src="buddies.js"></script>
@@ -16,7 +16,7 @@ const T0 = 1.0, H = 230;
 ["pip", "basil", "momo"].forEach((who, r) => { const y0 = 120 + r * 860, k = B.REL[who];
   out += `<rect x="40" y="${y0}" width="${W - 80}" height="830" rx="36" fill="#fff"/><rect x="40" y="${y0}" width="520" height="830" rx="36" fill="${AURA[who]}" opacity=".35"/>` + T(70, y0 + 52, NAME[who], 38, "start", 700);
   out += T(300, y0 + 96, "in the app", 24);
-  [["sit", 170, 380], ["happy", 430, 380], ["stand", 170, 720], ["cheer", 430, 720]].forEach(([p, x, y]) => { out += `<image href="app/${PET[who]}-${p}.png" x="${x - 120}" y="${y - 250}" width="240" height="250" preserveAspectRatio="xMidYMax meet"/>` + T(x, y + 34, p, 22); });
+  [["sit", 170, 380], ["happy", 430, 380], ["stand", 170, 720], ["cheer", 430, 720]].forEach(([p, x, yy]) => { const y = y0 + yy; out += `<image href="app/${PET[who]}-${p}.png" x="${x - 120}" y="${y - 250}" width="240" height="250" preserveAspectRatio="xMidYMax meet"/>` + T(x, y + 34, p, 22); });
   // 8 expressions
   B.EXPRESSIONS.forEach((e, i) => { const x = 700 + i * 245, y = y0 + 400; out += B.draw(who, x, y, H * k, T0, { expr: e }) + T(x, y + 40, e, 24); });
   // poses, gestures, facing
