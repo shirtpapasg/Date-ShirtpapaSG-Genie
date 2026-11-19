@@ -27,3 +27,4 @@ production/workspace/sau/preview/
 # first-person shot test files made by the build agents
 production/workspace/sau/*/pov[A-Z]_*
 production/workspace/sau/*/bparts/
+production/workspace/explained2/fonts/node_modules/
