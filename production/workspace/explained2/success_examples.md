@@ -12,3 +12,8 @@ Learn principles only; never copy characters, names, music, footage or look.
      survive?"); twists along the way; the payoff held to the end; cinematic close-ups.
    - For us: a "Day 1 ... Day 30" experiment box fits our lock-in game (predict what will happen by day 30, then watch), and suits
      topics like living vs non-living, life cycles, plant needs, germination, decomposition, food chains.
+4. Aquarium Info, "I Turned my Bed into a Fish Tank!"  https://www.youtube.com/watch?v=HH2gKrl22Fw
+   - an absurd, irresistible "I turned X into Y" premise; a build told step by step, with problems and fixes along the way (the
+     process is the story); a big satisfying reveal; the maker speaks as "I/we", so the viewer feels they are doing it too.
+   - For us: the buddies BUILD something to answer the question ("We turned Momo's bedroom into a living-things zoo", "We built a
+     sorting machine"), with steps, setbacks and a reveal.
