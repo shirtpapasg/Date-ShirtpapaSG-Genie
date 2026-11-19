@@ -39,7 +39,7 @@ Blue vs orange was chosen so the two choices stay different for colour-blind vie
 | When | Cold open, dare, lock-ins, sorting, scoreboard, Mark Sentences, class trip, payoff | The first-person shrink journey (about 60 s) and any "inside it" moment |
 | Background | Day: sky `#BFE6FF` to cream. Stage: radial `#4A36B0` to `#120E2E` | One hue family per world, lit from one side: leaf `#FFFDE0` → `#D4F27E` → `#2FA060` → `#0B5C4C` → `#062F33`. Water worlds use `#0D3547` teal; soil worlds `#6B4630` → `#2E1C1F` |
 | Saturation, contrast | High; solid shapes; crisp shadows | Translucent layers (fills at 15 to 50% opacity), soft edges, glow |
-| UI on screen | Logo pill, scoreboard, labels, buddies | Only the YOU tag and hands, one scale pill ("You: too small to see"), one caption, at most three labels. No scoreboard, no logo |
+| UI on screen | Logo pill, scoreboard, labels, buddies | Only the YOU tag and hands, one scale pill ("You: too small to see"), one caption. No scoreboard, no logo. Part labels only at the level that teaches them (see 7.9) |
 | Motion | Snappy, bouncy | Slow drift; shots of 6 to 10 s; let it breathe |
 | Sound | Music and game sounds | Ambient pad, soft water and air sounds, no ticking |
 The switch between modes is always an event (section 10: the Shrink).
@@ -125,7 +125,9 @@ camera; otherwise the camera is still (the teacher's guide: stable unless moveme
 - A cream paper card, tilted about 1 degree, sun-yellow spine on the left, a "✓ MARK SENTENCE" tab, "1 of 4" counter, the
   sentence in Atkinson 700 with highlighter on the key words, and a footer "Primary 3 Science · Diversity · Living and non-living
   things". Dark violet stage behind. One buddy on their disc: "Say it with me!"
-- The sentence is the textbook's exact wording, word for word (frame e uses 1.14: "Living things need water, food and air.").
+- The sentence is the textbook's exact wording, word for word, and belongs to THIS episode (frame e uses EP1's 2.33: "Classification
+  is the grouping of things based on their similarities and differences."; "Living things need water, food and air" is EP2's).
+- Long sentences drop to 70 px; never below 64 px; never shortened to fit.
 - Words appear as Heart says them; highlights sweep in on the key word; then 1 s of stillness. The cards return as a strip at the end.
 
 ### 7.6 The day counter and the 30-day box (frame f)
@@ -145,6 +147,14 @@ camera; otherwise the camera is still (the teacher's guide: stable unless moveme
 - A white pill with the part's name, joined to the part by one plain line that touches it. No arrowheads, no numbers.
 - One kind of label per row (rule 10). Arrows only for motion, flow or direction.
 - At most three labels on screen at once; each appears as it is named.
+
+### 7.9 Level gate for the micro-world (nothing ahead of the syllabus)
+- The micro-world may SHOW more than the level teaches (it is drawn true), but it only NAMES what the episode's level teaches.
+- P3: the inside of a leaf is a beautiful place with no part labels and no "cell", "chloroplast", "nucleus" or "cell wall" on
+  screen or in the voice; the caption is a wondering question ("Inside the money plant leaf. Is it alive?"). It also does not say
+  the leaf is "making food" in EP1 (that belongs to a later episode).
+- P5/P6: the same world with up to three part labels (`SHOW_P5_LABELS = true` in `frames/frames.js`).
+- A caption never gives away the next lock-in or the next episode's Mark Sentence.
 
 ## 8. The buddies
 - Pip (chinchilla, lilac aura), Basil (lizard, mint aura), Momo (cat, peach aura): soft chibi, as in the app. Use the SVG rigs in
@@ -231,12 +241,14 @@ last ("Is Your Teddy Bear Alive? | Living and Non-living Things").
 
 ## 16. What changed from round 1 to round 2 (the self-critique)
 1. (b) was a view up at the plant from the soil; it is now truly inside the leaf: tall cells with cell walls, one nucleus each and
-   glowing chloroplasts, light from the top skin of the leaf. Label lines now touch their parts.
+   glowing chloroplasts, light from the top skin of the leaf. For P3 it carries no part labels and no "making food" caption
+   (coordinator's accuracy note; see 7.9); the labelled P5/P6 version is one switch away.
 2. (c) and (d): "LIVING" read as "LMNG" in tight Fredoka capitals; fixed with wide letter-spacing (now a typography rule). The
    buddies' note no longer overlaps their heads.
 3. (d): the robot fell outside its gate and over the header; it now comes through the NON-LIVING gate and lands in its own slot,
    with a "+1" coin. Pip gives the reason ("It can't grow!") instead of a filler line.
-4. (e): the card said "...air, food and water to stay alive"; it now uses the book's exact words. The tab icon no longer covers the text.
+4. (e): the card said "...air, food and water to stay alive", which is not the book's wording and is EP2's idea; it now shows EP1's
+   classification sentence, word for word. The tab icon no longer covers the text.
 5. (f): "air holes" was a floating label; it is now joined by a plain line.
 6. (g): the scarecrow's cross eyes became dots (nothing that looks hurt); the speech bubble no longer covers it.
 Still to do before production: swap the placeholder buddies for the approved rigs; a second polish pass on (b) (less haze, more
