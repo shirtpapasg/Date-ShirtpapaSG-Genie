@@ -14,7 +14,8 @@
 //         facing: "left" | "right" default "right"
 //         talking: true            mouth shapes run from t;   mouth: 0..1 sets the opening yourself (e.g. from the voice loudness)
 //         blink: false             switches blinking off (default on);   breathe: false switches idle breathing off
-//         look: -1..1              how far the face turns to the facing side (Pip, Momo; 0 = straight at the viewer, the default
+//         look: -1..1              Basil: 0..1, how far his three-quarter face turns to the camera (default 0; .6 when talking).
+//                                  Pip, Momo: how far the face turns to the facing side ( 0 = straight at the viewer, the default
 //                                  when talking or when no facing is given; .5 when a facing is given)
 //         air: 0..1                jump height for pose "jump" (default: a hop loop from t);   tilt: extra head tilt in degrees
 //         shadow: false            no ground shadow;   seed: number, shifts the blink / talk timing so buddies don't move in step }
@@ -63,7 +64,7 @@
     basil: { H: 300, native: -1, lift: 18, hand: "R", seed: 1.7,
       line: "#6B6486", fur: "#E1D9E2", shade: "#BDB2CA", light: "#EDE6EA", belly: "#F8F4EF", paw: "#E1D9E2", lid: "#CBC1D2", inner: "#BDB2CA", pink: "#F2AEB4", eye: "#3A3349",
       head: { cx: 0, cy: -222, rx: 96, ry: 62 }, chinY: -168,
-      eyes: [{ x: -50, y: -240, r: 17 }, { x: 28, y: -232, r: 24 }], brow: 20,
+      eyes: [{ x: -54, y: -236, r: 16 }, { x: 28, y: -232, r: 24 }], brow: 20, browGap: 5, browK: .5,
       mouth: { x: -38, y: -193, hw: 54, cusp: false, oh: 17, rot: -2 }, happyOpen: 0,
       sh: { L: [-44, -136], R: [44, -140] }, armW: 24, reach: 88,
       rest: { sit: { L: [-58, -100], R: [2, -98], bend: 10 }, stand: { L: [-58, -100], R: [2, -98], bend: 10 } },
@@ -122,12 +123,19 @@
     pip(sp) { const ear = s => E(s * 90, -270, 55, 58, sp.fur, sp.line) + E(s * 88, -266, 40, 43, sp.inner) + E(s * 82, -256, 26, 28, "#BFA9B8", null, 0, 'opacity=".55"') +
         P(`M${s * 50} -238 C${s * 54} -252 ${s * 62} -260 ${s * 72} -262 C${s * 68} -254 ${s * 72} -248 ${s * 80} -246 C${s * 72} -240 ${s * 70} -234 ${s * 74} -226 C${s * 64} -226 ${s * 56} -230 ${s * 50} -238Z`, sp.belly, sp.line, 2.5);
       return ear(-1) + ear(1) + E(0, -192, 106, 82, sp.fur, sp.line) + E(0, -164, 48, 30, sp.light); },
-    basil(sp) { let sp1 = ""; [[-118, 10], [-96, 12], [-72, 14], [-48, 16], [-24, 18], [0, 18], [24, 17], [48, 15], [70, 12]].forEach(([a, len]) => { const c = Math.cos(a * DEG), s = Math.sin(a * DEG), r0 = 50, r1 = 55 + len * .8, da = 9 * DEG;
-        sp1 += P(`M${n(24 + r0 * Math.cos(a * DEG - da))} ${n(-224 + r0 * Math.sin(a * DEG - da))} L${n(24 + r1 * c)} ${n(-224 + r1 * s)} L${n(24 + r0 * Math.cos(a * DEG + da))} ${n(-224 + r0 * Math.sin(a * DEG + da))}Z`, sp.fur, sp.line); });
-      return sp1 + U(`<circle cx="24" cy="-224" r="56"/><ellipse cx="-40" cy="-212" rx="64" ry="41"/>`, sp.fur, sp.line) +
-        P("M-92 -196 C-60 -176 -10 -172 30 -186 C30 -168 -40 -160 -84 -182 Z", sp.belly, null, 0, 'opacity=".7"') +
-        [[-8, -268, 6], [14, -276, 5], [-28, -256, 5], [38, -268, 4], [-4, -252, 4], [-48, -262, 4], [56, -258, 4]].map(([x, y, r]) => E(x, y, r, r * .65, sp.shade, null, 0, 'opacity=".75"')).join("") +
-        E(-85, -217, 2.4, 2.4, sp.line) + E(-72, -222, 2.4, 2.4, sp.line); },
+    // one smooth, convex dome from the back of the head over the crown to the snout; both eyes sit inside it.
+    // sp.turn (0..1) blends the three-quarter head towards a front view, for when Basil talks to the camera.
+    basil(sp) { const f = sp.turn || 0, M = sp.mouth; let sp1 = "";
+      const SIDE = [82, -226, 82, -262, 52, -288, 12, -288, -34, -288, -84, -274, -102, -240, -112, -220, -108, -196, -90, -184, -60, -170, 20, -164, 56, -176, 74, -184, 82, -204, 82, -226];
+      const FRONT = [84, -226, 84, -262, 50, -290, 2, -290, -46, -290, -80, -266, -88, -234, -92, -212, -86, -192, -68, -181, -40, -168, 30, -166, 58, -178, 76, -186, 84, -206, 84, -226];
+      const q = SIDE.map((v, i) => n(lerp(v, FRONT[i], f))); let d = `M${q[0]} ${q[1]}`; for (let i = 2; i < q.length; i += 6) d += ` C${q.slice(i, i + 6).join(" ")}`;
+      [[-80, 9], [-58, 12], [-36, 15], [-14, 17], [8, 18], [30, 17], [52, 14]].forEach(([a, len]) => { const c = Math.cos(a * DEG), s = Math.sin(a * DEG), r0 = 52, r1 = 60 + len, da = 9 * DEG;
+        sp1 += P(`M${n(22 + r0 * Math.cos(a * DEG - da))} ${n(-228 + r0 * Math.sin(a * DEG - da))} L${n(22 + r1 * c)} ${n(-228 + r1 * s)} L${n(22 + r0 * Math.cos(a * DEG + da))} ${n(-228 + r0 * Math.sin(a * DEG + da))}Z`, sp.fur, sp.line); });
+      const mx = M.x, my = M.y, hw = M.hw;
+      return sp1 + P(d + "Z", sp.fur, sp.line) +
+        P(`M${n(mx - hw)} ${my - 3} Q${n(mx)} ${n(my + hw * .34)} ${n(mx + hw)} ${my - 9} Q${n(mx + hw * .6)} ${my + 19} ${n(mx)} ${my + 20} Q${n(mx - hw * .7)} ${my + 19} ${n(mx - hw)} ${my - 3}Z`, sp.belly, null, 0, 'opacity=".7"') +
+        [[-8, -268, 6], [14, -276, 5], [-28, -258, 5], [38, -268, 4], [-4, -252, 4], [56, -258, 4]].map(([x, y, r]) => E(x, y, r, r * .65, sp.shade, null, 0, 'opacity=".75"')).join("") +
+        E(lerp(-88, -14, f), lerp(-216, -207, f), 2.4, 2.4, sp.line) + E(lerp(-75, 2, f), lerp(-221, -207, f), 2.4, 2.4, sp.line); },
     momo(sp) { const ear = s => P(`M${s * 100} -212 C${s * 100} -250 ${s * 96} -286 ${s * 88} -304 Q${s * 84} -312 ${s * 76} -306 C${s * 54} -292 ${s * 34} -278 ${s * 20} -262 Z`, sp.fur, sp.line) +
         P(`M${s * 90} -232 C${s * 90} -256 ${s * 88} -276 ${s * 83} -290 C${s * 66} -280 ${s * 50} -268 ${s * 40} -256 Z`, sp.inner);
       return ear(-1) + ear(1) + P("M-70 -262 C-100 -242 -110 -208 -102 -182 L-116 -170 L-98 -162 C-84 -128 -42 -114 0 -114 C42 -114 84 -128 98 -162 L116 -170 L102 -182 C110 -208 100 -242 70 -262 C40 -278 -40 -278 -70 -262 Z", sp.fur, sp.line) +
@@ -203,7 +211,7 @@
     }
     return Gt(`translate(${e.x} ${e.y})`, out);
   }
-  function brow(sp, e, s, b) { if (!b) return ""; const len = Math.max(e.r * .95, 13), y = -Math.max(e.r, 15) - 9 - b[1];
+  function brow(sp, e, s, b) { if (!b) return ""; const len = Math.max(e.r * .95, 13), y = -Math.max(e.r, 15) - (sp.browGap || 9) - b[1] * (sp.browK || 1);
     return Gt(`translate(${e.x} ${e.y + y}) rotate(${n(s * -b[0])})`, P(`M${-len} 0 Q0 -4 ${len} 0`, null, sp.line, LW)); }
 
   function mouth(sp, type, m) {
@@ -241,7 +249,7 @@
     let out = "";
     // cheeks
     const bl = ex.blush ? .62 : .38, by = sp.mouth.y - 8;
-    if (who === "basil") out += E(52, -198, 13, 8, sp.pink, null, 0, `opacity="${bl}"`) + E(-84, -196, 8, 5, sp.pink, null, 0, `opacity="${bl * .7}"`);
+    if (who === "basil") { const f = sp.turn || 0; out += E(lerp(52, 64, f), -198, 13, 8, sp.pink, null, 0, `opacity="${bl}"`) + E(lerp(-86, -70, f), lerp(-192, -200, f), lerp(8, 12, f), lerp(5, 7, f), sp.pink, null, 0, `opacity="${n(bl * lerp(.7, 1, f))}"`); }
     else out += E(-sp.eyes[1].x - 24, by, 15, 9, sp.pink, null, 0, `opacity="${bl}"`) + E(sp.eyes[1].x + 24, by, 15, 9, sp.pink, null, 0, `opacity="${bl}"`);
     if (ex.puff) out += who === "basil" ? "" : "";
     out += eye(sp, who, E0[0], -1, st, bk) + eye(sp, who, E0[1], 1, st, bk);
@@ -255,9 +263,14 @@
     return out;
   }
 
+  // Basil turning his face to the camera: the far eye grows and moves in, the snout shortens, the mouth moves to the middle
+  function basilTurn(sp, f) { if (!f) return sp; const L = (a, b) => lerp(a, b, f);
+    return Object.assign({}, sp, { turn: f, eyes: [{ x: L(-54, -46), y: L(-236, -238), r: L(16, 21) }, { x: L(28, 40), y: L(-232, -236), r: L(24, 23) }], mouth: Object.assign({}, sp.mouth, { x: L(-38, -8), hw: L(54, 48), rot: L(-2, 0) }) }); }
+
   /* ---------- the rig ---------- */
   function draw(who, x, y, h, t, o) {
-    const sp = SPEC[who]; if (!sp) return ""; o = Object.assign({}, o); t = +t || 0;
+    let sp = SPEC[who]; if (!sp) return ""; o = Object.assign({}, o); t = +t || 0;
+    if (who === "basil") sp = basilTurn(sp, o.look != null ? clamp(Math.abs(o.look)) : o.talking ? .6 : 0);
     o.seed = (o.seed || 0) + sp.seed;
     const ex = EXPR[o.expr] || EXPR.happy, pose = o.pose || "sit", s = h / sp.H;
     const facing = o.facing === "left" ? -1 : 1, flip = facing !== sp.native, br = o.breathe === false ? 0 : Math.sin(TAU * t / 3 + o.seed);

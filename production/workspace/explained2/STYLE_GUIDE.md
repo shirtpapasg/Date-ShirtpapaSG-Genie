@@ -1,5 +1,7 @@
 # STYLE GUIDE: "TheOneApp, Explained" (the revamp, P3 to P6)
 
+> **Approved by the teacher on 19 Nov 2026** ("this looks amazing", on the round-2 style frames). This is the look for the revamped series.
+
 Version 1, 19 Nov 2026. Pilot: P3 EP1 "Living and non-living things". For every agent who draws, animates, scores or packages an
 episode. The look lives in code: `kit/style.js` (palette `P`, shared defs, props) and `frames/frames.js` (the seven style frames;
 render with `node ../kit/stills.js styleframes.html out 1920 1080 1 2 3 4 5 6 7` from `frames/`). Contact sheet: `frames/sheet.png`.

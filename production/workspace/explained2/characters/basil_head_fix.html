@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>@font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+html,body{margin:0;background:#FFF8EA} svg{display:block} text{font-family:Fredoka;font-weight:600;fill:#2B2147}</style></head><body>
+<svg id="v" xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500"></svg>
+<script src="/tmp/claude-0/-home-user/74176568-2247-5488-9d44-67460063f436/scratchpad/buddies_old.js"></script><script>const OLD = Buddies;</script>
+<script src="buddies.js"></script>
+<script>
+const T = (x, y, s, z = 34) => `<text x="${x}" y="${y}" font-size="${z}" text-anchor="middle">${s}</text>`;
+let o = `<rect width="2400" height="1500" fill="#FFF8EA"/>` + T(1200, 70, "Basil's head: app picture, old rig (dented), new rig (one smooth dome)", 46);
+o += `<rect x="40" y="110" width="560" height="640" rx="30" fill="#CDF4E6"/><image href="app/liz-sit.png" x="-60" y="140" width="1000" height="1000" clip-path="inset(0 0 0 0)"/>` ;
+o = `<defs><clipPath id="c"><rect x="40" y="110" width="560" height="640" rx="30"/></clipPath></defs>` + o.replace('clip-path="inset(0 0 0 0)"', 'clip-path="url(#c)"') + T(320, 800, "app");
+const cell = (B, x, lab, opt) => `<rect x="${x - 280}" y="110" width="560" height="640" rx="30" fill="#fff"/><svg x="${x - 280}" y="110" width="560" height="640" viewBox="${x - 280} 110 560 640">${B.draw("basil", x + 40, 1540, 1500, 1, Object.assign({ facing: "left", shadow: false }, opt))}</svg>` + T(x, 800, lab);
+o += cell(OLD, 920, "old head") + cell(Buddies, 1520, "new head") + cell(Buddies, 2100, "new head, turned to camera (talking)", { look: .6 });
+// every expression and the risky gestures, new head
+const list = [["happy", {}], ["cheering", { expr: "cheering" }], ["shocked", { expr: "shocked" }], ["thinking", { expr: "thinking" }], ["smug", { expr: "smug" }], ["oops", { expr: "oops" }], ["laughing", { expr: "laughing" }], ["sulking", { expr: "sulking" }], ["jump", { pose: "jump", air: .8 }], ["talking", { talking: true, expr: "shocked" }]];
+list.forEach(([l, op], i) => { const x = 140 + i * 235; o += Buddies.draw("basil", x + 20, 1380, 440, 1.3, Object.assign({ facing: "left" }, op)) + T(x, 1440, l, 28); });
+document.getElementById("v").innerHTML = o;
+</script></body></html>
