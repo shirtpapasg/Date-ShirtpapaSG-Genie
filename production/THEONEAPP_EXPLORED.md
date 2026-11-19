@@ -168,7 +168,7 @@ New week, new folder `epNN/`:
 
 ## Episodes
 
-First planned for every 3 days from 18 Nov 2026. On 19 Nov the teacher said "make them live": every episode is public now, and the Shorts keep their daily schedule.
+First planned for every 3 days from 18 Nov 2026. On 19 Nov the teacher said "make them live": every episode is public now. Later the same day the teacher asked for the Shorts to go live too, so all 14 Shorts are public.
 
 | No | Goes public | Story | Textbook link | Levels |
 |---|---|---|---|---|
@@ -210,13 +210,13 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP08 Food chain | PAoJd12kPWQ | public |
 | EP09 Mosquitoes | F_oNWbfqtC0 | public |
 | EP10 Compost | isq1RcHdBcU | public since 19 Nov |
-| EP01 Shorts | jUZChmlOs0s, ZbA-GGxWt3s | Thu 19 Nov, Fri 20 Nov, 5 pm |
-| EP02 Shorts | xDAGBl5XHJQ, xE8CyfEKG9w | Mon 23 Nov, Tue 24 Nov, 5 pm |
-| EP03 Part 1 Shorts | 3yzjC4j--ec, 8fKXGNkgusA | Thu 26 Nov, Fri 27 Nov, 5 pm |
-| EP03 Part 2 Shorts | SrIf94buYIU, 3as-TwJ4tGM | Sun 29 Nov, Mon 30 Nov, 5 pm |
-| EP04 Shorts | y_gOAbX-Rc0, cZEToluHQA0 | Wed 2 Dec, Thu 3 Dec, 5 pm |
-| EP05 Shorts | JvxVMXWCF2M, HJGDcJ9iDW0 | Sat 5 Dec, Sun 6 Dec, 5 pm |
-| EP06 Shorts | CsVQYo_nQTo, 3IJiBhPp6r4 | Tue 8 Dec, Wed 9 Dec, 5 pm |
+| EP01 Shorts | jUZChmlOs0s, ZbA-GGxWt3s | public since 19 Nov |
+| EP02 Shorts | xDAGBl5XHJQ, xE8CyfEKG9w | public since 19 Nov |
+| EP03 Part 1 Shorts | 3yzjC4j--ec, 8fKXGNkgusA | public since 19 Nov |
+| EP03 Part 2 Shorts | SrIf94buYIU, 3as-TwJ4tGM | public since 19 Nov |
+| EP04 Shorts | y_gOAbX-Rc0, cZEToluHQA0 | public since 19 Nov |
+| EP05 Shorts | JvxVMXWCF2M, HJGDcJ9iDW0 | public since 19 Nov |
+| EP06 Shorts | CsVQYo_nQTo, 3IJiBhPp6r4 | public since 19 Nov |
 
 The playlist "TheOneApp, Explored" (19 Nov): each episode followed by its Shorts, in order, with no "Deleted video" gaps. EP07 to EP10 have no Shorts yet.
 
