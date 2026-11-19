@@ -133,6 +133,14 @@ VIDEOS = [
   "desc": "Be a tiny bit of nutrient in a dead grasshopper: decomposers break it down, you go into the soil and a school compost bin, feed a chye sim plant, get eaten by a grasshopper, and one day go back to the soil. Then Heart explains decomposers and detritivores from the Primary 6 textbook, how composting and recycling mean less ash at Pulau Semakau, food security, and how to make composting a habit."
           "\n\n" + EP10_CH + "\n\nSources: National Environment Agency (nea.gov.sg) and Ministry of Sustainability and the Environment, food waste statistics 2025." + FOOT,
   "tags": ["compost", "decomposers", "detritivores", "nutrient cycle", "food waste", "food security", "primary 6 science", "singapore", "theoneapp explored"]},
+ {"id": "sau-ep07-s1", "file": f"{SAU}/ep07/short1.mp4", "thumb": f"{SAU}/ep07/thumb_short1.jpg", "at": "2026-11-20T09:00:00Z", "title": "How Does Oxygen Get To Your Muscles? #Shorts",
+  "desc": "Be an oxygen molecule: breathed in, into an air sac, onto a red blood cell, pumped by the heart to a leg muscle. Watch the full episode: You are oxygen! (TheOneApp, Explored EP7)" + FOOT, "tags": ["respiratory system", "circulatory system", "oxygen", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep07-s2", "file": f"{SAU}/ep07/short2.mp4", "thumb": f"{SAU}/ep07/thumb_short2.jpg", "at": "2026-11-21T09:00:00Z", "title": "Why Does Your Heart Pound When You Run? #Shorts",
+  "desc": "Your muscles are calling for oxygen! About 100,000 heartbeats a day. Try counting your pulse before and after jumping. Watch the full episode: You are oxygen! (TheOneApp, Explored EP7)" + FOOT, "tags": ["heart", "pulse", "circulatory system", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep10-s1", "file": f"{SAU}/ep10/short1.mp4", "thumb": f"{SAU}/ep10/thumb_short1.jpg", "at": "2026-11-22T09:00:00Z", "title": "Can A Dead Grasshopper Become Your Food? #Shorts",
+  "desc": "Follow one tiny nutrient: decomposers, the compost bin, a plant's roots, and back again. Watch the full episode: Dead things become your food?! (TheOneApp, Explored EP10)" + FOOT, "tags": ["compost", "decomposers", "nutrient cycle", "shorts", "theoneapp explored"]},
+ {"id": "sau-ep10-s2", "file": f"{SAU}/ep10/short2.mp4", "thumb": f"{SAU}/ep10/thumb_short2.jpg", "at": "2026-11-23T09:00:00Z", "title": "Don't Kill The Ants! Here's Why #Shorts",
+  "desc": "Ants, flies, earthworms, millipedes and woodlice are detritivores: they help break down dead things. Leave them alone! Plus: compost and recycle for less ash at Pulau Semakau. Watch the full episode: Dead things become your food?! (TheOneApp, Explored EP10)" + FOOT, "tags": ["detritivores", "compost", "pulau semakau", "shorts", "theoneapp explored"]},
 ]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
