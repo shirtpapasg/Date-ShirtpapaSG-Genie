@@ -133,7 +133,7 @@
    "id": "ready",
    "scene": "countdown",
    "excited": true,
-   "text": "Are you ready? Three, two, one, go!"
+   "text": "Are you ready? Three! Two! One! Go!"
   },
   {
    "id": "f1",

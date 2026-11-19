@@ -406,6 +406,28 @@ S.nuclear = (() => { const s = scene("nuclear", "#240046", "#5a189a");
     popAt(s.smr, 950, 380, t, a("modular", .55)); popAt(s.st, 600, 790, t, a("studying", .55)); popAt(s.sf, 600, 860, t, a("safe", .9));
     if (t > a("safe", .9)) op(s.st, 0); }; return s; })();
 
+
+// a desk lamp (not a bare bulb) and an electric kettle (not a teapot), drawn in the series style
+function deskLamp(p) { const g = el("g", {}, p);
+  const glow = el("path", {d: "M58 -8 L92 -36 L175 135 L-5 135 Z", fill: "#ffe066", opacity: .35}, g);
+  el("ellipse", {cx: 0, cy: 140, rx: 80, ry: 18, fill: "#495057", stroke: INK, "stroke-width": 5}, g);
+  el("path", {d: "M0 135 L-30 30 L40 -60", fill: "none", stroke: INK, "stroke-width": 16, "stroke-linecap": "round", "stroke-linejoin": "round"}, g);
+  el("path", {d: "M0 135 L-30 30 L40 -60", fill: "none", stroke: "#3a86ff", "stroke-width": 9, "stroke-linecap": "round", "stroke-linejoin": "round"}, g);
+  el("circle", {cx: -30, cy: 30, r: 9, fill: "#adb5bd", stroke: INK, "stroke-width": 4}, g);
+  el("path", {d: "M10 -95 L95 -40 L60 5 Z", fill: "#3a86ff", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round"}, g);
+  el("circle", {cx: 66, cy: -12, r: 15, fill: "#fff3b0", stroke: INK, "stroke-width": 4}, g);
+  return glow; }
+function kettle(p) { const g = el("g", {}, p);
+  el("rect", {x: -80, y: 105, width: 160, height: 30, rx: 10, fill: "#495057", stroke: INK, "stroke-width": 5}, g);
+  el("path", {d: "M80 120 Q120 120 125 150", fill: "none", stroke: INK, "stroke-width": 6}, g);
+  el("path", {d: "M-65 105 L-55 -40 Q0 -70 55 -40 L65 105 Z", fill: "#e9ecef", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round"}, g);
+  el("path", {d: "M-55 -40 L-95 -65 L-62 -10", fill: "#e9ecef", stroke: INK, "stroke-width": 6, "stroke-linejoin": "round"}, g);
+  el("path", {d: "M58 -25 Q115 -20 110 40 Q105 80 62 80", fill: "none", stroke: INK, "stroke-width": 14, "stroke-linecap": "round"}, g);
+  el("rect", {x: -20, y: -62, width: 40, height: 12, rx: 6, fill: "#adb5bd", stroke: INK, "stroke-width": 4}, g);
+  el("rect", {x: -48, y: 0, width: 14, height: 70, rx: 7, fill: "#90e0ef", stroke: INK, "stroke-width": 3}, g);
+  el("circle", {cx: 40, cy: 85, r: 7, fill: "#e63946"}, g);
+  const st = el("g", {}, g); [[-90, -95], [-105, -125], [-85, -150]].forEach(([x, y], i) => el("circle", {cx: x, cy: y, r: 14 - i * 2, fill: "#fff", opacity: .8}, st));
+  return st; }
 // ---- TRY THIS: energy detective
 S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff");
   s.mag = emo(s.stage, 0, 0, 160, "🔍");
@@ -413,11 +435,13 @@ S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff");
     el("circle", {r: 90, fill: "#e9ecef", stroke: INK, "stroke-width": 6}, g); g.bl = el("g", {}, g); for (let i = 0; i < 3; i++) el("ellipse", {cx: 0, cy: -45, rx: 22, ry: 45, fill: "#4cc9f0", stroke: INK, "stroke-width": 3, transform: `rotate(${i * 120})`}, g.bl); return g; };
   const T = [["fan", "electrical → kinetic + sound", "#3a86ff"], ["lamp", "electrical → light + heat", "#ffbe0b"], ["kettle", "electrical → heat", "#e63946"]];
   s.items = T.map(([w, lab, col], i) => { const g = el("g", {}, s.stage), x = 220 + i * 380;
-    if (w === "fan") g.f = fan(g); else emo(g, 0, 0, 170, w === "lamp" ? "💡" : "🫖");
+    if (w === "fan") g.f = fan(g); else if (w === "lamp") g.lit = deskLamp(g); else g.steam = kettle(g);
     const c = chip(g, lab, col, {fs: 24}); tf(c, `translate(0 ${i % 2 ? 290 : 220})`); op(c, 1); g.w = w; g.x = x; return g; });
   s.five = chip(s.stage, "Find 5 at home! Write the energy changes ✏️", "#7209b7", {fs: 38});
   s.run = t => { const a = (w, f) => cue("try", w, f);
-    s.items.forEach((g, i) => { popAt(g, g.x, 380, t, a(g.w, .4 + i * .1)); if (g.f) tf(g.f.bl, `rotate(${t * 500})`); });
+    s.items.forEach((g, i) => { popAt(g, g.x, 380, t, a(g.w, .4 + i * .1)); if (g.f) tf(g.f.bl, `rotate(${t * 500})`);
+      if (g.steam) { tf(g.steam, `translate(0 ${-((t * 30) % 30)})`); op(g.steam, .5 + .5 * Math.sin(t * 3)); }
+      if (g.lit) op(g.lit, .25 + .15 * Math.sin(t * 2)); });
     const ti = Math.min(2, Math.max(0, s.items.findIndex(g => t < a(g.w, .4)) - 1)); const k = ramp(t, SC.try.t0, SC.try.t1);
     tf(s.mag, `translate(${lerp(150, 1000, k)} ${200 + Math.sin(t * 2) * 30})`);
     popAt(s.five, 600, 820, t, a("five", .3)); }; return s; })();
