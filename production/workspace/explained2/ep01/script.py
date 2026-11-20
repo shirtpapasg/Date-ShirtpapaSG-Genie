@@ -34,8 +34,7 @@ SEQ1 = [
  ("scene", "game"),
  ("say", "h301", H, "Here is the game. It's You against the Buddies. You lock in first. Then Pip, Basil and Momo answer.", {"pre": .5}),
  ("say", "h302", H, "Every time you are right, put up one finger on your other hand. No lock-in, no point. And a cicak is hiding in this video. Find it!", {"pre": .5, "post": .3}),
- ("scene", "goals"),
- ("say", "h303", H, "Today you will learn what diversity means, how to classify things into groups, and how to tell living things from non-living things.", {"pre": .4, "post": .5}),
+ ("scene", "goals"), ("wait", 4.2),   # TRIM: the three goal chips drop in silently (the line "Today you will learn..." is not spoken)
  # ---- 4 · where the six things came from: diversity
  ("scene", "garden"),
  ("say", "h401", H, "Our six things came from here. A void deck and a garden in Toa Payoh. Look around.", {"pre": .9}),
@@ -49,8 +48,7 @@ SEQ1 = [
  # ---- 5 · the countdown and Day 1
  ("scene", "count"),
  ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94}),
- ("scene", "day1"),
- ("say", "h502", H, "Day one. Six things, one box. The lid has holes, so air can get in. The mealworm has oats to eat and a juicy carrot for water. The plant gets water, and light from the window.", {"pre": .9, "post": .7}),
+ ("scene", "day1"), ("wait", 6.0),    # TRIM: the Day 1 care card (AIR, FOOD, WATER) is on screen without the voice
  # ---- 6 · Round 1: the wind-up robot
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
@@ -94,12 +92,6 @@ SEQ1 = [
  ("say", "p713", P, "I was careful. But I did not watch long enough.", {"pre": .5}),
  ("say", "h714", H, "Momo, living is right. But green is only how it looks. A green pencil is non-living.", {"pre": .5}),
  ("say", "m715", M, "No point for me! So what ARE the clues?", {"pre": .4, "post": .6}),
- # ---- 8 · the real clues, and the chant
- ("scene", "clue"),
- ("say", "h801", H, "Not how it looks. Not whether it moves. Ask two things. What does it need? What can it do?", {"pre": .5, "post": .5}),
- ("say", "h802", H, "Living things need water, food and air. Living things grow, respond to changes and reproduce. You will test these in the next two episodes.", {"pre": .5, "post": .6}),
- ("scene", "chant"), ("wait", .9),
- ("chant", "c803"), ("wait", .7),
  # ---- Part 1's ending: the box under its cloth, the score hand, the shelf recap, "Now you know!"
  ("scene", "tease"),
  ("say", "h850", H, "Our box has twenty-five more days to go. What will be under the cloth on Day thirty? Find out in Part Two!", {"pre": .9, "post": .9}),
@@ -115,10 +107,16 @@ SEQ2 = [
  # ---- Part 2's silent open: a recap montage, then "Last time..."
  ("scene", "recap"), ("wait", 4.8),
  ("scene", "recapline"),
- ("say", "h880", H, "Last time, we put six things in a box, and we found the real clues. What does it need? What can it do? Now it's Day ten. Time to sort!", {"pre": .5, "post": .7}),
+ ("say", "h880", H, "Last time, we put six things in a box. The robot moved, but it is a non-living thing. The green bean stayed still, but it is a living thing. So what are the real clues?", {"pre": .5, "post": .7}),
+ # ---- 8 · the real clues, and the chant
+ ("scene", "clue"),
+ ("say", "h801", H, "Not how it looks. Not whether it moves. Ask two things. What does it need? What can it do?", {"pre": .5, "post": .5}),
+ ("say", "h802", H, "Living things need water, food and air. Living things grow, respond to changes and reproduce. You will test these in the next two episodes.", {"pre": .5, "post": .6}),
+ ("scene", "chant"), ("wait", .9),
+ ("chant", "c803"), ("wait", .7),
  # ---- 9 · HOLD ON: Momo's sort
  ("scene", "sort"),
- ("say", "h901", H, "Sort all six into two groups: living things and non-living things. Momo, you go first.", {"pre": .8, "post": .3}),
+ ("say", "h901", H, "Day ten. Time to sort all six into two groups: living things and non-living things. Momo, you go first.", {"pre": .8, "post": .3}),
  ("mark", "sortGo"),
  ("say", "m902", M, "Squish... squish... knock, knock. Done!", {"pre": .9, "post": .7}),
  ("say", "h903", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .2}),
