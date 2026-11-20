@@ -48,7 +48,11 @@ function lowerPill(x, y, a, b) { const wa = tw(a, 30, 600), wb = b ? tw(b, 30, 6
 const speeded = (t, t0, t1, x = 1700, y = 1010) => OP(ramp(t, t0, .25) * (1 - ramp(t, t1, .25)), `<g transform="translate(${x} ${y})"><rect x="-128" y="-27" width="256" height="54" rx="27" fill="${P.ink}" opacity=".85"/><path d="M-98 -11 l14 11 l-14 11z M-82 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up", 30, "#fff", { w: 600 })}</g>`);
 
 /* ---------- the buddies: the teacher's painted art as cut-out sprites ---------- */
-const AURA = { pip: P.pip, basil: P.basil, momo: P.momo };
+// each buddy's SIGNATURE COLOUR (the teacher, 20 Nov: bright and saturated, not pastel; never green or blue: those mean LIVING / NON-LIVING)
+P.pip = "#8B5CF6"; P.basil = "#14B8A6"; P.momo = "#FB7158";
+const AURA = { pip: P.pip, basil: P.basil, momo: P.momo }, TINT = { pip: "#EDE4FF", basil: "#D5F7F2", momo: "#FFE3DC" }, BNAME = { pip: "Pip", basil: "Basil", momo: "Momo" };
+// a small name tag: the name in white on the buddy's colour
+const nameTag = (who, size = 32) => { const w = tw(BNAME[who], size, 700) + size * 1.5, h = size * 1.5; return `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="${P[who]}"/><rect x="${n2(-w / 2 + 3)}" y="${n2(-h / 2 + 3)}" width="${n2(w - 6)}" height="${n2(h - 6)}" rx="${n2(h / 2 - 3)}" fill="none" stroke="#fff" stroke-width="3" opacity=".85"/></g>` + T(0, n2(size * .35), BNAME[who], size, "#fff"); };
 const DISC_DX = { pip: -.06, basil: -.10, momo: -.08 };
 function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.0 }[who]; const k = Math.floor((t + ph) / per), tb = k * per - ph + hash(k, who.length) * 1.4; return t >= tb && t < tb + .1; }
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
@@ -88,6 +92,8 @@ function buddy(who, x, y, h, t, o = {}) {
   if (o.aura) { const R = h * .62 * Math.min(1, k), cx = x + DISC_DX[who] * h * fl; out += `<circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="${AURA[who]}" opacity="${o.auraO || .9}"/><circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="url(#gSpot)"/>`; }
   if (o.shadow !== false) out += `<ellipse cx="${n2(x)}" cy="${n2(y - h * .01)}" rx="${n2(h * .36 * sx * k * (1 + lift / 400))}" ry="${n2(h * .06 * k)}" fill="${P.ink}" opacity="${n2(.3 * (1 + lift / 200))}" filter="url(#b4)"/>`;
   out += `<g transform="translate(${n2(x)} ${n2(y + lift)}) rotate(${n2(rot)}) scale(${n2(s0 * sx * fl * 1000) / 1000} ${n2(s0 * sy * 1000) / 1000}) translate(${-S.ax} ${-S.ay})" ${o.rim === false ? "" : `filter="url(#${o.rim || "rimB"})"`}><use href="#s_${name}"/></g>`;
+  if (o.tag !== false) { const sp = speaking(who, t), a = (o.in !== undefined ? spring(t, o.in + .15, .4) * (1 - ss(o.in + 2.4, o.in + 2.7, t)) : 0), b = sp ? spring(t, sp.t - .04, .35) : 0, kt = Math.max(a, b) * Math.min(1, k);
+    if (kt > .03) { const size = clamp(h * .115, 26, 40); out += TF(x, Math.min(y + 4, 1080 - size * .95), kt, nameTag(who, size)); } }
   return out + fx;
 }
 
@@ -95,7 +101,7 @@ function buddy(who, x, y, h, t, o = {}) {
 function bubble(x, y, lines, t, t0, t1, o = {}) {
   if (t < t0 || t > t1 + .25) return ""; const size = o.size || 40, k = spring(t, t0, .4) * (1 - eo((t - t1) / .2));
   const w = Math.max(...lines.map((l) => tw(l, size, 600))) + 70 + (o.x ? 64 : 0), h = lines.length * size * 1.22 + 40, tail = o.tail === undefined ? 0 : o.tail, td = o.down === false ? -1 : 1;
-  let s = `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${-h / 2}" width="${n2(w)}" height="${h}" rx="${Math.min(h / 2, 44)}" fill="#FFF8EA"/><path d="M${tail - 20} ${td * (h / 2 - 3)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 34)} L${tail + 20} ${td * (h / 2 - 3)}z" fill="#FFF8EA"/></g>`;
+  const col = o.col; let s = `<g filter="url(#dropS)">${col ? `<path d="M${tail - 26} ${td * (h / 2 - 2)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 44)} L${tail + 26} ${td * (h / 2 - 2)}z" fill="${col}"/><rect x="${n2(-w / 2 - 7)}" y="${-h / 2 - 7}" width="${n2(w + 14)}" height="${h + 14}" rx="${Math.min(h / 2, 44) + 7}" fill="${col}"/>` : ""}<rect x="${n2(-w / 2)}" y="${-h / 2}" width="${n2(w)}" height="${h}" rx="${Math.min(h / 2, 44)}" fill="#FFF8EA"/>${col ? "" : `<path d="M${tail - 20} ${td * (h / 2 - 3)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 34)} L${tail + 20} ${td * (h / 2 - 3)}z" fill="#FFF8EA"/>`}</g>`;
   const tx0 = o.x ? 32 : 0;
   lines.forEach((l, i) => { let h2 = esc(l); const m = i === 0 && o.pick !== false && /^(Living!|Non-living[.!])/.exec(l);
     if (m) h2 = `<tspan fill="${m[1][0] === "L" ? P.leafDeep : P.blueDeep}" font-weight="700">${m[1]}</tspan>` + esc(l.slice(m[1].length));
@@ -110,7 +116,7 @@ function wrap(text, size, maxW, wgt = 600, fam = "Fredoka") { const out = []; le
 function say(id, x, y, t, o = {}) { const L = TL.lines[id]; if (t < L.t - .05 || t > L.end + .8) return ""; let s = "";
   const pages = o.merge ? [{ text: L.text, t0: L.t, t1: L.end + .45 }] : sentPages(id);
   if (!o.merge) for (let i = pages.length - 1; i > 0; i--) if (pages[i].text.split(" ").length + pages[i - 1].text.split(" ").length <= 5) { pages[i - 1].text += " " + pages[i].text; pages[i - 1].t1 = pages[i].t1; pages.splice(i, 1); }
-  pages.forEach((p, i) => { s += bubble(x, y, wrap(p.text, o.size || 40, o.maxW || 560), t, i ? p.t0 : L.t - .04, p.t1, { ...o, x: o.x && i === 0 }); }); return s; }
+  pages.forEach((p, i) => { s += bubble(x, y, wrap(p.text, o.size || 40, o.maxW || 560), t, i ? p.t0 : L.t - .04, p.t1, { ...o, col: P[L.who], x: o.x && i === 0 }); }); return s; }
 
 /* ---------- channel identity + scoreboard ---------- */
 function logo(t, x = 44, y = 34, s = .86) { const b = 1 + .22 * loud("heart", t);

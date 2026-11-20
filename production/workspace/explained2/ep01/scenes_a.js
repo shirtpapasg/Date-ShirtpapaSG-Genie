@@ -67,10 +67,10 @@ SC.hook = (t, s) => { const L = "h201", tM = LT(L), tT = W(L, "this", 1), tE = W
   const eyes = (x1, x2, y, r) => OP(pulse(t, tE + .1, .1, 1.1), `<g fill="none" stroke="${P.sun}" stroke-width="7" filter="url(#b2)"><circle cx="${x1}" cy="${y}" r="${r + 8 * Math.sin(t * 8)}"/><circle cx="${x2}" cy="${y}" r="${r + 8 * Math.sin(t * 8)}"/></g>`);
   const ted = TF(1270, 866, 1.95 * spring(t, tT - .1, .5), teddyBig());
   return CAM(bg("daystage") + `<ellipse cx="660" cy="870" rx="250" ry="34" fill="${P.momo}" opacity=".5"/><ellipse cx="1270" cy="870" rx="250" ry="34" fill="#E9D3B0" opacity=".7"/>`
-    + buddy("momo", 660, 866, 430, t, { in: s.t0 + .05 }) + groundShadow(1270, 868, 190, 26, .3) + ted
+    + buddy("momo", 660, 866, 430, t, { in: s.t0 + .05, tag: false }) + groundShadow(1270, 868, 190, 26, .3) + ted
     + eyes(604, 716, 590, 44) + eyes(1223, 1317, 538, 30)
     + OP(pulse(t, tF + .1, .1, 1.0), `<g stroke="${P.sun}" stroke-width="6" stroke-linecap="round" fill="none"><path d="M520 720 q-30 10 -44 34 M800 720 q30 10 44 34 M1150 720 q-30 10 -44 34 M1392 720 q30 10 44 34"/></g>`)
-    + (t >= tM ? TF(660, 950, spring(t, tM, .4), tpill(0, 0, "Momo", 40, P.momo, P.ink, { w: 700 })) : "") + (t >= tT ? TF(1270, 950, spring(t, tT + .1, .4), tpill(0, 0, "teddy bear", 40, "#fff", P.ink, { w: 700 })) : "")
+    + (t >= tM ? TF(660, 950, spring(t, tM, .4), nameTag("momo", 44)) : "") + (t >= tT ? TF(1270, 950, spring(t, tT + .1, .4), tpill(0, 0, "teddy bear", 40, "#fff", P.ink, { w: 700 })) : "")
     + q(660, tL, 0) + q(1270, tN, 1), z, 960, 620); };
 
 /* ============ the title slam ============ */

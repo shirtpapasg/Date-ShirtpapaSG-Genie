@@ -71,7 +71,7 @@ SC.garden = (t, s) => { const a = "h401", b = "h402", u = (t - s.t0) / (s.t1 - s
 /* ============ Mark Sentence 1 ============ */
 function markScene(t, s, o) { const L = TL.lines[o.id];
   return bg("stage2") + markCard(t, { ...o, t0: s.t0 + .1 })
-    + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses: o.poses || [[s.t0, "pointing"]] }) + bubble(330, 380, ["Say it with me!"], t, s.t0 + .5, L.end + .3, { size: 40, tail: 0 }) + (o.extra || "") + HUD(t); }
+    + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses: o.poses || [[s.t0, "pointing"]] }) + bubble(330, 380, ["Say it with me!"], t, s.t0 + .5, L.end + .3, { size: 40, tail: 0, col: P[o.who] }) + (o.extra || "") + HUD(t); }
 SC.mark1 = (t, s) => markScene(t, s, { id: "h403", who: "momo", n: "1 of 3", text: "There is a great variety of living and non-living things around us. This is called diversity.", keys: ["variety", "living", "non-living", "diversity."],
   poses: [[s.t0, "pointing"], [WE("h403", "diversity") + .1, "cheer"]] });
 

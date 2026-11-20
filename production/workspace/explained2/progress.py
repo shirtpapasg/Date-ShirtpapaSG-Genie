@@ -9,7 +9,7 @@ JOBS = [("art", "Art direction", ["research.md", "STYLE_GUIDE.md", "frames/sheet
         ("script2", "P3 EP2 script", ["p3_ep02_script.md"]),
         ("motion", "EP1 Short: It walks. Is it ALIVE?", ["kit/motion.js", "MOTION_GUIDE.md", "short1/out/short1.mp4"]),
         ("sprites", "Basil talking test (your art)", ["characters/sprites/basil_talk_test.mp4", "characters/sprites/pip_talk_test.mp4", "characters/sprites/momo_talk_test.mp4", "characters/sprites/buddies_lineup_test.mp4"]),
-        ("ep01", "P3 EP1 pilot episode", ["ep01/ep01.mp4"]),
+        ("ep01", "P3 EP1 pilot episode", ["ep01/ep01.mp4", "ep01/ep01_part1.mp4", "ep01/ep01_part2.mp4"]),
         ("posetest", "Pose-switching test (robot round)", ["characters/sprites/pose_test_robot_round.mp4"])]
 now = datetime.datetime.now(datetime.timezone.utc)
 for jid, name, files in JOBS:
