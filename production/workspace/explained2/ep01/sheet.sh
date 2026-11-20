@@ -1,5 +1,5 @@
 #!/bin/bash
-# sheet.sh name cols t1 t2 ...  -> qa/<name>.jpg: a contact sheet of stills at those times
+# PART=1|2 sheet.sh name cols t1 t2 ...  -> qa/<name>.jpg: a contact sheet of stills at those times
 cd "$(dirname "$0")"; name=$1; cols=$2; shift 2; rm -rf qa/_st; mkdir -p qa/_st
 NODE_PATH=$(npm root -g) node stills.js qa/_st/f "$@" || exit 1
 n=$#; rows=$(( (n + cols - 1) / cols ))

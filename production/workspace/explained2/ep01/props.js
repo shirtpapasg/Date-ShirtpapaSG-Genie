@@ -99,7 +99,7 @@ function beanPlant(day, o = {}) { const maxH = o.maxH || 560, sway = o.sway || 0
   if (h > 250) for (let y = 150, i = 0; y < h - 70; y += 130, i++) { const u = y / h, px = tx * u * u, py = -30 - y, L = L1 * (1.15 - .12 * i), dr = 8 + i * 3;
     s += `<g transform="translate(${n2(px)} ${n2(py)})"><g transform="rotate(${-158 + dr})">${bleaf(L, i % 2 === 0)}</g><g transform="rotate(${-22 - dr})">${bleaf(L, i % 2 === 1)}</g></g>`; }
   const a = lerp(80, 24, open) - press * 26;
-  s += `<g transform="translate(${n2(tx)} ${n2(-30 - h)})"><g transform="rotate(${n2(-180 + a)})">${bleaf(L1, true)}</g><g transform="rotate(${n2(-a)})">${bleaf(L1, false)}</g>${h > 250 ? `<g transform="rotate(-90) scale(.5)">${bleaf(L1, true)}</g>` : ""}</g>`;
+  s += `<g transform="translate(${n2(tx)} ${n2(-30 - h)})"><g transform="rotate(${n2(-180 + a)})">${bleaf(L1, true)}</g><g transform="rotate(${n2(-a)})">${bleaf(L1, false)}</g>${h > 250 && press < .05 ? `<g transform="rotate(-90) scale(.5)">${bleaf(L1, true)}</g>` : ""}</g>`;
   return s; }
 // the potted plant (a money plant; kit leaf shape). lean: degrees towards the window (left); nu: 0..1 new leaves unrolled (two of them: nu 0..1 = first, 1..2 = second); droop 0..1
 function potPlant(o = {}) { const { lean = 0, nu = 0, droop = 0, sway = 0 } = o;

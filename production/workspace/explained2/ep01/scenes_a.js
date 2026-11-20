@@ -5,7 +5,7 @@ const HUD = (t, o = {}) => (o.logo === false ? "" : logo(t)) + (o.score === fals
 function boxView(t, o = {}) { const cam = o.cam || [1 + .03 * (o.push || 0), 960, 560], st = o.st || {}, m = o.mode || "day";
   let far = bg("boxfar_" + m); if (o.mode2 && o.mix > 0) far += OP(o.mix, bg("boxfar_" + o.mode2));
   const dark = o.dark || 0;
-  return CAM(far, cam[0], cam[1], cam[2], .35) + CAM(boxBack() + (o.behind || "") + boxThings(st) + (o.inside || "") + (dark ? `<rect x="360" y="230" width="1200" height="640" rx="30" fill="#120E2E" opacity="${n2(dark * .45)}"/>` : "") + boxFront(o.front || {}) + (o.over || ""), cam[0], cam[1], cam[2], 1); }
+  return CAM(far + (o.farOver || ""), cam[0], cam[1], cam[2], .35) + CAM(boxBack() + (o.behind || "") + boxThings(st) + (o.inside || "") + (dark ? `<rect x="360" y="230" width="1200" height="640" rx="30" fill="#120E2E" opacity="${n2(dark * .45)}"/>` : "") + boxFront(o.front || {}) + (o.over || ""), cam[0], cam[1], cam[2], 1); }
 
 /* ============ BG: the bedroom, wide (cold open) ============ */
 BG.room = () => { const r = rndm(5); let floor = ""; for (let i = 0; i < 9; i++) floor += `<path d="M${-400 + i * 340} 1190 L${520 + i * 110} 760" stroke="#8E6A66" stroke-width="3" opacity=".3"/>`;
@@ -28,12 +28,8 @@ function rain(t, x, y, w, h, n = 36, len = 34, o = .5) { let s = ""; for (let i 
 // a small empty clear box (wide shot)
 const miniBox = () => `<rect x="-120" y="-128" width="240" height="128" rx="10" fill="#E9F4FF" opacity=".3"/><rect x="-120" y="-128" width="240" height="128" rx="10" fill="none" stroke="#F4FAFF" stroke-width="5"/><path d="M-100 -112 L-64 -112 L-92 -16 L-100 -16z" fill="#fff" opacity=".35"/>`;
 
-/* ============ 1 · the silent cold open ============ */
-SC.cold = (t) => { const tb = MK("coldBox"), tl = MK("coldLid"), t30 = MK("coldD30"), tc = MK("coldCut"), B = BOX;
-  if (t >= tc) return `<rect width="1920" height="1080" fill="#0B0820"/>`;
-  if (t < tb) { const z = 1 + .16 * eio(t / tb);   // wide: the room, rain on the grilles, the empty box on the ledge
-    return CAM(bg("room") + `<g clip-path="url(#rmW)">${rain(t, 330, 150, 760, 470, 46, 36, .55)}</g>` + TF(710, 616, 1.25, miniBox()) + `<ellipse cx="710" cy="618" rx="130" ry="10" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>`, z, 710, 520) + lowerPill(60, 960, "Toa Payoh, Singapore", "6.40 am"); }
-  if (t < t30) { // close on the box: buddy paws put the six things in, one at a time
+// close on the box: buddy paws put the six things in, one at a time; the lid; DAY 1. tb = first thing, tl = the lid, rainy = the cold open's weather
+function coldBoxShot(t, tb, tl, t30) { const B = BOX;
     const items = [["pebble", B.pebble, B.floor - 30, 50, "#E4E1EC"], ["teddy", B.teddy, B.floor, 200, "#B9B4D6"], ["bean", B.bean, B.floor, 60, "#DCE4DE"], ["plant", B.plant, B.floor - 72, 350, "#E4E1EC"], ["dish", B.dish, B.floor, 60, "#B9B4D6"], ["robot", 880, B.lane, 215, "#DCE4DE"]];
     const hide = {}, drop = []; let paws = "";
     items.forEach(([nm, x, y, hh, col], i) => { const t0 = tb + .15 + i * .78, u = clamp((t - t0) / .42), land = t0 + .42; if (t < t0) { hide[nm] = 1; return; }
@@ -54,10 +50,16 @@ SC.cold = (t) => { const tb = MK("coldBox"), tl = MK("coldLid"), t30 = MK("coldD
     const z = lerp(1.42, 1.0, wide), ccx = lerp(clamp(fx2, 700, 1220), 960, wide), ccy = lerp(640, 560, wide);
     return CAM(bg("boxfar_rain") + `<g clip-path="url(#bfW)">${rain(t, -80, -40, 1330, 940, 40, 44, .4)}</g>`, z, ccx, ccy, .35) + CAM(boxBack() + things + rob + boxFront({ lid: t < tl ? 0 : 1, lidY }) + paws, z, ccx, ccy)
       + (ck ? `<g transform="translate(180 226) scale(${n2(ck)}) translate(-180 -226)" opacity="${n2(clamp((t - tct) / .08))}">${counter(t, 1, -9)}</g>` : ""); }
+/* ============ 1 · the silent cold open ============ */
+SC.cold = (t) => { const tb = MK("coldBox"), tl = MK("coldLid"), t30 = MK("coldD30"), tc = MK("coldCut"), B = BOX;
+  if (t >= tc) return `<rect width="1920" height="1080" fill="#0B0820"/>`;
+  if (t < tb) { const z = 1 + .16 * eio(t / tb);   // wide: the room, rain on the grilles, the empty box on the ledge
+    return CAM(bg("room") + `<g clip-path="url(#rmW)">${rain(t, 330, 150, 760, 470, 46, 36, .55)}</g>` + TF(710, 616, 1.25, miniBox()) + `<ellipse cx="710" cy="618" rx="130" ry="10" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>`, z, 710, 520) + lowerPill(60, 960, "Toa Payoh, Singapore", "6.40 am"); }
+  if (t < t30) return coldBoxShot(t, tb, tl, t30);
   // flash forward: DAY 30. A cloth covers the box; something inside is pushing it up
   const u = t - t30, day = Math.min(30, 1 + Math.floor(u / .45 * 29)), cy = lerp(-900, 0, eo(u / .4)), bump = 34 * (pulse(t, t30 + .75, .12, .5) + pulse(t, t30 + 1.2, .12, .6));
   return CAM(bg("boxfar_day"), 1.06, 960, 560, .35) + CAM(boxBack() + boxThings({ day: 1, hide: { bean: 1 } }) + boxFront({}) + `<g transform="translate(0 ${n2(cy)})">${cloth(bump)}</g>`, 1.06 + .03 * u, 960, 520) + counter(t, day, t30 + .45); };
-SCN.cold.nograde = false;
+
 
 /* ============ 2 · the hook: Momo and a teddy bear ============ */
 SC.hook = (t, s) => { const L = "h201", tM = LT(L), tT = W(L, "this", 1), tE = W(L, "two"), tF = W(L, "soft"), tL = W(L, "one"), tN = W(L, "one", 1), z = 1 + .04 * (t - s.t0) / (s.t1 - s.t0);
@@ -84,8 +86,8 @@ function lockScene(t, c) { const bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, 
   const zb = ss(tb0, tb0 + .4, t), gs = lerp(1, .76, zb), shut = pulse(t, bell, .01, .6);
   const cardL = spring(t, c.tL, .45), cardR = spring(t, c.tR, .45), pl = t >= c.ring0 && t < bell ? rs.tick : 0;
   let main = `<ellipse cx="330" cy="470" rx="380" ry="330" fill="${P.leaf}" opacity="${n2(.3 * Math.min(1, cardL))}" filter="url(#b60)"/><ellipse cx="1590" cy="470" rx="380" ry="330" fill="${P.blue}" opacity="${n2(.3 * Math.min(1, cardR))}" filter="url(#b60)"/>`;
-  if (cardL > .02) main += TF(330, 470, cardL, choiceCard(0, 0, "green", "LIVING", "point LEFT", { flip: 1, pulse: pl }));
-  if (cardR > .02) main += TF(1590, 470, cardR, choiceCard(0, 0, "blue", "NON-LIVING", "point RIGHT", { flip: -1, pulse: pl }));
+  if (cardL > .02) main += TF(330, 470, cardL, choiceCard(0, 0, "green", "LIVING", "point LEFT", { flip: 1, pulse: pl, h: 400 }));
+  if (cardR > .02) main += TF(1590, 470, cardR, choiceCard(0, 0, "blue", "NON-LIVING", "point RIGHT", { flip: -1, pulse: pl, h: 400 }));
   main += ringTimer(960, 470, t < bell ? rs.frac : 0, t < bell ? rs.secs : 0, t, { tick: rs.tick, shut, inner: `<ellipse cx="960" cy="596" rx="120" ry="18" fill="${P.ink}" opacity=".5" filter="url(#b4)"/>` + c.obj(t) });
   if (shut > .05) main += `<circle cx="960" cy="470" r="${n2(RING_R + 40 + 80 * (1 - shut))}" fill="none" stroke="${P.sun}" stroke-width="6" opacity="${n2(shut * .8)}"/>`;
   let top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
@@ -100,12 +102,12 @@ function lockScene(t, c) { const bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, 
     if (t > tin + i * .12 + .2) cards += pickCard(who, x + hh * .66, 1062 - hh * .3, t, pk.word ? LT(pk.id) - .1 : 1e9, pk.word, pk.kind);
     bubs += say(pk.id, x + (i === 0 ? 60 : i === 2 ? -60 : 0), 1062 - hh - 120, t, { x: pk.x, tail: i === 0 ? -60 : i === 2 ? 60 : 0, maxW: 620, size: 42 }); });
   buds += cards;
-  const note = OP(ramp(t, tin + .5, .3) * (1 - ss(bell, bell + .3, t)), pill(960, 772, 470, 52, "#120E2E", "The buddies lock in after you", 27, "#DDD3FF", { w: 500, ls: 1 }));
+  const note = OP(ramp(t, tin + .5, .3) * (1 - ss(bell, bell + .3, t)), pill(960, 802, 470, 48, "#120E2E", "The buddies lock in after you", 27, "#DDD3FF", { w: 500, ls: 1 }));
   // YOU: the pointing move, shown once
   let demo = ""; if (c.demo) { const a = ramp(t, c.tL - .1, .25) * (1 - ramp(t, c.ring0 - .5, .25)), dir = t < c.tR - .12 ? -1 : 1, sw = t < c.tR - .12 ? spring(t, c.tL, .4) : spring(t, c.tR - .12, .4);
     demo = OP(a, TF(960 + dir * 90 * sw, 900, 1.25, `<g transform="scale(${dir} 1)" filter="url(#dropS)">${pointHand()}</g>`) + youPill(960, 1010, 1.1)); }
-  return bg("stage") + `<g transform="translate(960 ${n2(lerp(470, 330, zb))}) scale(${n2(gs)}) translate(-960 -470)">${main}</g>` + top + `<rect y="800" width="1920" height="280" fill="url(#xFloor)"/>` + note + buds + demo + bubs
-    + stamp(t, tS, 960, lerp(470, 330, zb)) + bellIcon(t, c.ring0) + HUD(t, { score: c.score !== false }); }
+  return bg("stage") + `<g transform="translate(960 ${n2(lerp(505, 330, zb))}) scale(${n2(gs)}) translate(-960 -470)">${main}</g>` + top + `<rect y="800" width="1920" height="280" fill="url(#xFloor)"/>` + note + buds + demo + bubs
+    + stamp(t, tS, 960, lerp(505, 330, zb)) + bellIcon(t, c.ring0) + HUD(t, { score: c.score !== false }); }
 
 /* ============ the practice round: the teddy bear ============ */
 SC.prac = (t, s) => { const tv = LT("h208"), tT = WE("h208", "thing"), tLk = W("h208", "eyes");
@@ -125,8 +127,8 @@ SC.game = (t, s) => { const a = "h301", b = "h302", tb = LT(b) - .3, ph2 = ss(tb
   const sbk = spring(t, s.t0 + .15, .5);
   let out = bg("stage") + `<g transform="translate(960 ${n2(lerp(-200, 190, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.45 + .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3), { you: 0, bud: 0 })}</g>`;
   // YOU: one hand points (the answer hand), the other holds up fingers (the score hand)
-  const cnt = [W(b, "one"), W(b, "one") + .45, W(b, "one") + .9, W(b, "one") + 1.35, W(b, "five")]; let nf = 0; cnt.forEach((x) => { if (t >= x) nf++; });
-  const t5 = W(b, "five"), hi = pulse(t, WE(b, "wins") - .2, .1, .5);
+  const cnt = [W(b, "one"), W(b, "one") + .5, W(b, "one") + 1.0]; let nf = 0; cnt.forEach((x) => { if (t >= x) nf++; });
+  const t5 = W(b, "find"), hi = 0;
   const youIn = spring(t, tYou - .1, .5);
   if (youIn > .02) { const px = lerp(400, 330, ph2), cx = lerp(880, 760, ph2), cs = lerp(1.15, 1.9, ph2), cy = lerp(700, 800, ph2) - 30 * hi;
     out += TF(px, lerp(640, 600, ph2), youIn * lerp(1.2, .9, ph2), `<g filter="url(#dropS)" transform="scale(-1 1) rotate(${n2(-8 + 6 * Math.sin(t * 3))})">${pointHand()}</g>`) + OP(1 - ph2, tpill(400, 760, "answer hand", 30, "#fff", P.ink) );
@@ -137,7 +139,7 @@ SC.game = (t, s) => { const a = "h301", b = "h302", tb = LT(b) - .3, ph2 = ss(tb
   // "You lock in first": a small ring
   out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), TF(700, 640, .0, "") + `<g transform="translate(1010 620) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
   // the buddies pop in on their names
-  [["pip", tP, 1170, "waving"], ["basil", tB, 1455, "cheer"], ["momo", tM, 1740, "waving"]].forEach(([w, tt, x, pz]) => { out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.1, "sit"], [t5, "cheer"], [t5 + 1.4, "sit"]], rock: w === "basil" && t < tt + 1.1 ? 3 : 0, jump: [[t5, 40]] }); });
+  [["pip", tP, 1170, "waving"], ["basil", tB, 1455, "cheer"], ["momo", tM, 1740, "waving"]].forEach(([w, tt, x, pz]) => { out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [t5, "cheer"]], wave: true }); });
   // no lock-in, no point · the cicak
   const tN = W(b, "no"), tC = W(b, "cicak");
   out += (t >= tN ? TF(1440, 480, spring(t, tN, .4) * (1 - ramp(t, tC - .2, .2)), tpill(0, 0, "No lock-in, no point!", 46, "#fff", P.ink, { w: 700 })) : "");
@@ -145,7 +147,7 @@ SC.game = (t, s) => { const a = "h301", b = "h302", tb = LT(b) - .3, ph2 = ss(tb
   return out + logo(t); };
 
 /* ============ today's goals ============ */
-SC.goals = (t, s) => { const L = "h303", cues = [W(L, "diversity"), W(L, "classify"), W(L, "tell")], goals = [["What diversity is", "blue"], ["How to classify things", "purple"], ["Living or non-living?", "orange"]];
+SC.goals = (t, s) => { const cues = HAS("h303") ? [W("h303", "diversity"), W("h303", "classify"), W("h303", "tell")] : [s.t0 + .6, s.t0 + 1.5, s.t0 + 2.4], goals = [["What diversity is", "blue"], ["How to classify things", "purple"], ["Living or non-living?", "orange"]];
   const ic = [
     `<circle cx="-40" cy="-6" r="24" fill="${P.leaf}"/><rect x="-6" y="-34" width="46" height="46" rx="10" fill="${P.sun}"/><path d="M50 28 l28 -50 l28 50z" fill="${P.coral}" transform="translate(-64 4)"/>`,
     `<rect x="-78" y="-32" width="66" height="70" rx="12" fill="#fff" opacity=".9"/><rect x="12" y="-32" width="66" height="70" rx="12" fill="#fff" opacity=".9"/><circle cx="-45" cy="2" r="16" fill="${P.blue}"/><rect x="30" y="-14" width="30" height="30" rx="6" fill="${P.orange}"/>`,

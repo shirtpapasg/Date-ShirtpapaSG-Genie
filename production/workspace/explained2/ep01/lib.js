@@ -22,7 +22,7 @@ const CAM = (inner, z = 1, cx = 960, cy = 540, depth = 1) => { const k = 1 + (z 
 const LN = (id) => TL.lines[id], LT = (id) => TL.lines[id].t, LE = (id) => TL.lines[id].end, MK = (n) => TL.marks[n];
 const SCN = {}; TL.scenes.forEach((s) => { SCN[s.name] = s; });
 const norm = (w) => w.toLowerCase().replace(/[^a-z0-9-]/g, "");
-function W(id, word, nth = 0) { const L = TL.lines[id], hits = L.words.filter((x) => norm(x.w) === word); if (!hits.length) { console.error("no word", word, "in", id); return L.t; } return (hits[nth] || hits[0]).a; }
+function W(id, word, nth = 0) { const L = TL.lines[id]; if (!L) { console.error("no line", id); return 0; } const hits = L.words.filter((x) => norm(x.w) === word); if (!hits.length) { console.error("no word", word, "in", id); return L.t; } return (hits[nth] || hits[0]).a; }
 function WE(id, word, nth = 0) { const L = TL.lines[id], hits = L.words.filter((x) => norm(x.w) === word); return hits.length ? (hits[nth] || hits[0]).b : L.end; }
 const said = (id, t) => TL.lines[id].words.filter((w) => w.a <= t).length;    // how many words of the line have started
 // the line a character is speaking at t (or null)
@@ -31,6 +31,7 @@ function mouthOf(who, t) { const L = speaking(who, t); if (!L) return 0; const t
 function loud(who, t) { const L = speaking(who, t); if (!L || !L.open) return 0; const i = Math.floor((t - L.t) * 30 + 1e-6); return L.open[i] || 0; }
 function nodOf(who, t) { const L = speaking(who, t); if (!L) return 0; let n = 0; if (L.who === "chant") { for (const w of L.words) n += pulse(t, w.a, .06, .22) * .5; return Math.min(n, 1.2); } for (const s of L.stress) n += pulse(t, s); return Math.min(n, 1.2); }
 
+const PART = TL.PART || 1, HAS = (id) => !!TL.lines[id];
 /* ---------- text ---------- */
 const _cv = document.createElement("canvas").getContext("2d");
 function tw(s, size, w = 700, fam = "Fredoka", ls = 0) { _cv.font = `${w} ${size}px "${fam}"`; return _cv.measureText(s).width + ls * s.length; }
@@ -55,6 +56,7 @@ function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
    o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
 function buddy(who, x, y, h, t, o = {}) {
+  if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99;
   for (const [tp, p] of o.poses || []) if (t >= tp) { pose = p; tsw = tp; }
   let nxt = 99; for (const [tp] of o.poses || []) if (tp > t) { nxt = tp; break; }
@@ -208,3 +210,25 @@ function keyword(t, t0, x, y, word) { const k = spring(t, t0, .45); if (k < .02)
 /* ---------- stages ---------- */
 // colour wipe: a round blob in the next scene's colour grows from the point of interest, then clears
 function wipe(t, tc, col, cx = 960, cy = 540) { const a = .3, b = .26; if (t < tc - a || t > tc + b) return ""; if (t < tc) return `<circle cx="${cx}" cy="${cy}" r="${n2(ei((t - (tc - a)) / a) * 2300)}" fill="${col}"/>`; return `<rect width="1920" height="1080" fill="${col}" opacity="${n2(1 - eo((t - tc) / b))}"/>`; }
+
+/* ---------- the key-word shelf (top right, under the score pill): sun-yellow pills that stack downward ----------
+   A NEW TERM pops large in the middle, holds about 1.5 s (digest time), then flies to the shelf with a pop. The shelf slides off to
+   the right during the first-person shrink and full-screen cards, and glows once at the end of the part as a recap. */
+const KW = (PART === 1 ? [["DIVERSITY", "kw_diversity", 1], ["LIVING THINGS", "kw_living", 0, [760, 478]], ["NON-LIVING THINGS", "kw_nonliving", 0, [1090, 478]]]
+  : [["CLASSIFICATION", "kw_classification", 1], ["TABLE", "kw_table", 1], ["GRAPHIC ORGANISER", "kw_go", 1]]).map(([w, mk, big, from], i) => ({ w, t: MK(mk), big, from: from || [960, 470], i, tl: MK(mk) + (big ? 1.5 : 0) + .5 }));
+const SHELF_HIDE = { cold: 1, title: 1, r1card: 1, r2card: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1 };
+function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
+  return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
+function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
+  const hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0), tr = MK("recap"); let out = "", top = "";
+  for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * 560, sy = 136 + k.i * 57, tf = k.tl - .5;
+    if (k.big && t < tf) { // the new term, large, held about 1.5 s
+      const a = clamp((t - k.t) / .2), kk = spring(t, k.t, .5); let rays = ""; for (let i = 0; i < 12; i++) { const an = i * 30 * Math.PI / 180 + (t - k.t) * .3; rays += `<path d="M${n2(960 + Math.cos(an) * 330)} ${n2(470 + Math.sin(an) * 150)} L${n2(960 + Math.cos(an) * (400 + 30 * kk))} ${n2(470 + Math.sin(an) * (190 + 20 * kk))}" stroke="${P.sun}" stroke-width="9" stroke-linecap="round" opacity="${n2(.8 * a)}"/>`; }
+      top += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * a)}"/>` + rays + TF(960, 470, kk * (1 + .02 * Math.sin((t - k.t) * 3)), kwPill(k.w, k.w.length > 12 ? 104 : 130)) + OP(a, tpill(960, 640, "KEY WORD", 34, P.ink, P.sun, { w: 700, ls: 5 })); continue; }
+    const u = clamp((t - tf) / .5);
+    if (u < 1) { const e = eio(u), x0 = k.from[0], y0 = k.from[1], x = lerp(x0, sx, e), y = lerp(y0, sy, e) - 120 * Math.sin(Math.PI * e), sc = lerp(k.big ? (k.w.length > 12 ? 104 : 130) / size : 1.5, 1, e) * (k.big ? 1 : Math.min(1, spring(t, tf, .25) + .2));
+      top += OP(k.big ? 1 : Math.min(1, u * 5), TF(x, y, sc, kwPill(k.w, size)) ) + (k.big ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * (1 - u))}"/>` : ""); continue; }
+    const g = pulse(t, tr + k.i * .4, .12, .7), land = pulse(t, k.tl, .02, .3);
+    out += TF(sx - (g * ww * .12), sy, 1 + .22 * land + .24 * g, kwPill(k.w, size, g)); }
+  return out + top; }
+window.OVER = (t, s) => location.search.includes("noshelf") ? "" : shelf(t, s);

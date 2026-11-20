@@ -2,14 +2,14 @@
 SC.r2card = (t, s) => roundCard(t, s, "ROUND 2");
 
 /* ============ 7 · Round 2: the green bean ============ */
-const R2 = { cut: W("h701", "living") - .3 };
+const R2 = { cut: HAS("h701") ? W("h701", "living") - .3 : 0 };
 // the bean on its wet cotton wool, big (for the ring and the close-up). day 2: a little fatter than its DAY 1 outline
 const beanBig = (day, ghost) => (ghost ? `<g opacity=".55" filter="url(#ghostF)">${TF(0, -30, .42, beanSeed(0, 0))}</g>` : "") + beanPlant(day);
 SC.r2 = (t, s) => { const L = "h701", B = BOX;
   if (t < R2.cut) { const z = lerp(2.6, 3.4, (t - s.t0) / (R2.cut - s.t0));   // close on the bean: it has not moved at all
     return boxView(t, { cam: [z, B.bean, B.floor - 40], st: { day: 2, robotX: B.robot1, robot: robotWalkStop(0, 0), bites: 1, wx: 12, cid: "cb3" },
       inside: OP(.5, `<g filter="url(#ghostF)">${TF(B.bean, B.floor - 31, 1.05 * .42, beanSeed(0, 0))}</g>`) })
-      + OP(ramp(t, W(L, "the") - .05, .25), TF(1240, 200, 1, tpill(0, 0, "The green bean", 56, P.ink, "#fff", { w: 700 }))) + OP(ramp(t, W(L, "seed") - .05, .25), TF(1240, 300, 1, tpill(0, 0, "a seed", 44, "#fff", P.ink, { w: 700 })))
+      + OP(ramp(t, W(L, "the") - .05, .25), TF(1040, 190, 1, tpill(0, 0, "The green bean", 56, P.ink, "#fff", { w: 700 }))) + OP(ramp(t, W(L, "seed") - .05, .25), TF(1040, 290, 1, tpill(0, 0, "a seed", 44, "#fff", P.ink, { w: 700 })))
       + counter(t, 2, s.t0 + .15) + HUD(t); }
   return lockScene(t, { s: { t0: R2.cut }, q: "The green bean. Is it…", tq: R2.cut, tL: W(L, "living"), tR: W(L, "non-living"), ring0: MK("ring0_2"), dur: 5, lock: "h702",
     obj: () => TF(960, 566, 1.55, beanBig(2, false)),
@@ -99,24 +99,24 @@ SC.r2score = (t, s) => { const tc = WE("h712", "left") + .15, tn = tc + .6, tPen
     + buddy("momo", 1560, 1050, 380, t, { aura: true, flip: true, poses: [[s.t0, "cheer"], [LT("h714") + .3, "sit"], [W("h714", "but"), "surprised"], [tTag, "oops"], [LT("m715") - .1, "sit"], [W("m715", "so"), "thinking"]] })
     + (t >= tPen ? TF(980, 700, spring(t, tPen, .45) * 1.5, `<g filter="url(#rim)">${pencil()}</g>`) + tag(t, tTag, 980, 850, false, 1.1) + (t >= tPen ? OP(ramp(t, tPen + .2, .3), tpill(980, 560, "green pencil", 34, "#fff", P.ink)) : "") : "")
     + say("p713", 420, 520, t, { size: 44, maxW: 560, tail: -40 }) + say("m715", 1480, 520, t, { size: 46, maxW: 560, tail: 60 }) + logo(t); };
-SCORE.push([WE("h712", "left") + .15, 2, 1]);
+if (HAS("h712")) SCORE.push([WE("h712", "left") + .15, 2, 1]);
 
 /* ============ 8 · the real clues ============ */
 SC.clue = (t, s) => { const a = "h801", b = "h802", tN = W(a, "what") - .1, tD = W(a, "what", 1) - .1, x1 = W(a, "not"), x2 = W(a, "not", 1);
   const xchip = (x, txt, t0) => t < t0 ? "" : TF(x, 150, spring(t, t0, .4), `<g filter="url(#dropS)"><rect x="${-(tw(txt, 40, 600) + 110) / 2}" y="-40" width="${tw(txt, 40, 600) + 110}" height="80" rx="40" fill="${P.paper}"/></g><g transform="translate(${-(tw(txt, 40, 600) + 110) / 2 + 44} 0)"><path d="M-12 -12 L12 12 M12 -12 L-12 12" stroke="${P.ink}" stroke-width="8" stroke-linecap="round"/></g>${T(26, 14, txt, 40, P.ink, { w: 600 })}`);
   const panel = (x, t0, head, key, kinds, words, cols) => { const k = spring(t, t0, .5); if (k < .02) return ""; let ic = "";
     kinds.forEach((kd, i) => { const tw0 = W(b, words[i]), bump = 1 + .25 * pulse(t, tw0, .04, .45), lit = t >= tw0 - .05; ic += TF(-220 + i * 220, 50, 1.55 * bump, `<g filter="url(#${lit ? "glowS" : "dropS"})"><circle r="50" fill="${P.paper}"/></g>${needIcon(kd, cols[i][0], cols[i][1])}`); });
-    return TF(x, 430, k, `<g transform="rotate(${x < 960 ? -1.2 : 1.2})"><g filter="url(#drop)"><rect x="-400" y="-190" width="800" height="390" rx="46" fill="url(#gPaper)"/><path d="M-400 -144 Q-400 -190 -354 -190 H354 Q400 -190 400 -144 V-70 H-400z" fill="url(#gSun)"/></g>
+    return TF(x, 450, k, `<g transform="rotate(${x < 960 ? -1.2 : 1.2})"><g filter="url(#drop)"><rect x="-400" y="-190" width="800" height="390" rx="46" fill="url(#gPaper)"/><path d="M-400 -144 Q-400 -190 -354 -190 H354 Q400 -190 400 -144 V-70 H-400z" fill="url(#gSun)"/></g>
       <text x="0" y="-106" font-family="Fredoka" font-weight="700" font-size="58" fill="${P.ink}" text-anchor="middle">${head}<tspan font-size="70" dx="14">${key}</tspan><tspan>?</tspan></text>${ic}</g>`); };
   // the book's two sentences, each on a gold strip, word by word (said once: a preview)
   const strip = (y, sw, sent) => { const L = TL.lines[b], toks = sent.split(" "), size = 54, sp = tw(" ", size, 700, "Atkinson Hyperlegible"), total = tw(sent, size, 700, "Atkinson Hyperlegible"), a0 = ramp(t, L.words[sw].a - .25, .3); if (a0 <= 0) return ""; let tx = "", cx = 0;
     toks.forEach((w, i) => { const wt = L.words[sw + i].a, o = ramp(t, wt - .05, .15); if (o > 0) tx += `<text x="${n2(960 - total / 2 + cx)}" y="${y + 19}" font-family="Atkinson Hyperlegible" font-weight="700" font-size="${size}" fill="${P.ink}" opacity="${n2(o)}">${esc(w)}</text>`; cx += tw(w, size, 700, "Atkinson Hyperlegible") + sp; });
     return OP(a0, `<g filter="url(#dropS)"><rect x="${n2(960 - total / 2 - 50)}" y="${y - 46}" width="${n2(total + 100)}" height="92" rx="22" fill="#FFE27A"/><rect x="${n2(960 - total / 2 - 50)}" y="${y - 46}" width="16" height="92" rx="8" fill="${P.sunDeep}"/></g>`) + tx; };
   const tTest = W(b, "you") - .1;
-  return bg("stage2") + xchip(600, "how it looks", x1) + xchip(1290, "whether it moves", x2)
+  return bg("stage2") + xchip(480, "how it looks", x1) + xchip(1080, "whether it moves", x2)
     + panel(500, tN, "What does it", "NEED", ["water", "food", "air"], ["water", "food", "air"], [["#1F5FD0", "#8CC8FF"], ["#B4760C", "#F3DDB0"], ["#2E8FB8", "#BFE6FF"]])
     + panel(1420, tD, "What can it", "DO", ["grow", "respond", "reproduce"], ["grow", "respond", "reproduce"], [["#1F8A4C", "#9BE08F"], ["#E36A12", "#FFD08A"], ["#8A4FD0", "#D9C2FF"]])
-    + strip(740, 0, "Living things need water, food and air.") + strip(852, 7, "Living things grow, respond to changes and reproduce.")
+    + strip(752, 0, "Living things need water, food and air.") + strip(860, 7, "Living things grow, respond to changes and reproduce.")
     + (t >= tN + .5 ? TF(960, 990, spring(t, tN + .6, .4) * (1 + .1 * pulse(t, tTest + .2, .1, .6)), tpill(0, 0, "More in Episodes 2 and 3", 38, P.ink, P.sun, { w: 600 })) : "")
     + buddy("basil", 1770, 1075, 200, t, { aura: true, flip: true, poses: [[s.t0, "arms_crossed"], [tN, "surprised"], [tD + .6, "sit"], [tTest, "cheer"]] }) + HUD(t); };
 

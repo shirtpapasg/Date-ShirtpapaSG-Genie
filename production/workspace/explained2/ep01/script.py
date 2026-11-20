@@ -96,11 +96,11 @@ SEQ1 = [
  ("scene", "tease"),
  ("say", "h850", H, "Our box has twenty-five more days to go. What will be under the cloth on Day thirty? Find out in Part Two!", {"pre": .9, "post": .9}),
  ("scene", "p1score"),
- ("say", "h851", H, "Show me your score hand!", {"pre": .6, "post": 1.6}),
- ("mark", "recap"), ("wait", 2.2),
+ ("say", "h851", H, "Show me your score hand!", {"pre": .6, "post": 1.3}),
+ ("mark", "recap"), ("wait", 1.9),
  ("scene", "nyk"),
  ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
- ("wait", 2.2),
+ ("wait", 1.8),
 ]
 
 SEQ2 = [
@@ -170,7 +170,7 @@ SEQ2 = [
  ("mark", "recap"), ("wait", 2.2),
  ("scene", "nyk"),
  ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
- ("wait", 2.2),
+ ("wait", 1.8),
 
 ]
 SEQS = {1: SEQ1, 2: SEQ2}

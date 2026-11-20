@@ -6,7 +6,8 @@ const TH = { teddy: () => TF(0, 0, .72, teddyKey()), dish: () => TF(0, 0, .66, w
 const TNAME = { teddy: "teddy bear", dish: "mealworm", plant: "plant", bean: "green bean plant", robot: "wind-up robot", pebble: "pebble" };
 const WAITX = { teddy: 420, dish: 636, plant: 852, bean: 1068, robot: 1284, pebble: 1500 }, WAITY = 430;
 const SOFTX = { teddy: 420, dish: 590, plant: 750, bean: 880 }, HARDX = { robot: 1200, pebble: 1420 }, TRAYY = 810;
-const SORT = { s1: W("m902", "squish"), s2: W("m902", "squish", 1), k1: W("m902", "knock"), k2: W("m902", "knock", 1) };
+const P2 = HAS("m902");
+const SORT = P2 ? { s1: W("m902", "squish"), s2: W("m902", "squish", 1), k1: W("m902", "knock"), k2: W("m902", "knock", 1) } : { s1: 0, s2: 0, k1: 0, k2: 0 };
 SORT.mv = { teddy: SORT.s1, plant: SORT.s2, bean: SORT.s2 + .38, dish: SORT.k1 - .5, robot: SORT.k1, pebble: SORT.k2 };
 const tray = (x, w, label, lt, t, col) => `<g filter="url(#drop)"><rect x="${x}" y="640" width="${w}" height="230" rx="34" fill="#E6C39A"/><rect x="${x + 16}" y="654" width="${w - 32}" height="190" rx="24" fill="#FFF3DC"/></g>` + (label && t >= lt ? TF(x + w / 2, 912, spring(t, lt, .45), `<g transform="rotate(-2)" filter="url(#dropS)"><rect x="${-(tw(label, 50, 700, "Fredoka", 6) + 80) / 2}" y="-42" width="${tw(label, 50, 700, "Fredoka", 6) + 80}" height="84" rx="42" fill="${col || P.sun}"/>${T(0, 18, label, 50, col ? "#fff" : P.ink, { ls: 6 })}</g>`) : "");
 // st: { moved: t -> 0..1 per thing (or 0), labels: [left, right, time, colL, colR], task: flash 0..1, back: 0..1 (things go back to the row) }
@@ -38,7 +39,7 @@ SC.sort = (t, s) => { const tgo = MK("sortGo"), r0 = MK("ring0_3"), bell = r0 + 
     + say("m902", 330, 560, t, { size: 42, maxW: 520, tail: -80, merge: false }) + say("m905", 400, 560, t, { size: 42, maxW: 560, tail: -120 });
   const [d, tf] = dayAt(t, [[0, 10], [s.t0 + .3, 10]]);
   return out + counter(t, 10, s.t0 + .3, 60, 250, .78, { nodots: true }) + HUD(t); };
-SCORE.push([WE("h904", "crossed") + .2, 3, 1]);
+if (P2) SCORE.push([WE("h904", "crossed") + .2, 1, 0]);
 
 /* ============ Mark Sentence 2: classification ============ */
 SC.mark2 = (t, s) => { const a = "h906", b = "h907", tm = LT(b) - .75;
@@ -48,7 +49,7 @@ SC.mark2 = (t, s) => { const a = "h906", b = "h907", tm = LT(b) - .75;
       + (t >= tA ? TF(640, 500, spring(t, tA, .4) * (1 - ramp(t, tm - .3, .2)), tpill(0, 0, "alike: together", 40, P.ink, "#fff", { w: 700 })) : "") + (t >= tD ? TF(1320, 500, spring(t, tD, .4) * (1 - ramp(t, tm - .3, .2)), tpill(0, 0, "different: apart", 40, P.ink, "#fff", { w: 700 })) : "")
       + buddy("momo", 150, 1066, 330, t, { aura: true, pose: "cheer", nohop: true }) + counter(t, 10, -9, 60, 250, .78, { nodots: true }) + HUD(t) + wipe(t, tm, P.indigo, 960, 540); }
   const sc = { t0: tm, t1: s.t1 }, tw0 = W(b, "similarities");
-  return markScene(t, sc, { id: b, who: "pip", n: "2 of 3", size: 70, text: "Classification is the grouping of things based on their similarities and differences.", keys: ["classification", "grouping", "similarities", "differences."], kw: [["CLASSIFICATION", "classification"], ["SIMILARITIES", "similarities"]],
+  return markScene(t, sc, { id: b, who: "pip", n: "2 of 3", size: 70, text: "Classification is the grouping of things based on their similarities and differences.", keys: ["classification", "grouping", "similarities", "differences."], 
     poses: [[tm, "pointing"], [LE(b), "cheer"]],
     extra: OP(ramp(t, tw0 + .4, .3), `<g transform="translate(1150 1010)"><g filter="url(#dropS)"><rect x="-530" y="-40" width="1060" height="80" rx="20" fill="${P.paper}"/></g>${T(0, 13, `<tspan font-weight="700">similarities:</tspan> characteristics that things have in common`, 36, P.ink, { read: true, w: 400 })}</g>`) }) + wipe(t, tm, P.indigo, 960, 540); };
 
@@ -83,8 +84,8 @@ SC.show = (t, s) => { const r0 = MK("ring0_4"), bell = r0 + 6, rs = ringState(t,
   let out = bg("stage") + homeworkSheet(t, { badges: t >= W(q, "one") - .2 ? 1 : null, lit }, lerp(330, 420, zb), lerp(140, 110, zb), lerp(1, .86, zb));
   // the ring (6 s) and the YOU fingers: 1, 2 or 3
   const rk = spring(t, W(q, "is") - .2, .45) * (1 - zb);
-  if (rk > .02) out += TF(1650, 330, rk, `<g transform="scale(.62)">${ringTimer(0, 0, t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 6 : t < bell ? rs.secs : 0, t, { tick: rs.tick, shut, inner: T(0, 40, "?", 190, "#fff") })}</g>`)
-    + (t >= W(q, "one") - .1 ? TF(1650, 760, rk * 1.25 * (1 + .1 * pulse(t, [W(q, "one"), W(q, "two"), W(q, "three")][nf - 1], .03, .3)), `<g filter="url(#dropS)">${countHand(nf)}</g>`) + youPill(1650, 560, 1.1 * rk) : "") + OP(ramp(t, W(q, "show"), .3) * (1 - zb), tpill(1650, 1010, "1, 2 or 3 fingers", 34, P.ink, "#fff"));
+  if (rk > .02) out += TF(1650, 420, rk, `<g transform="scale(.62)">${ringTimer(0, 0, t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 6 : t < bell ? rs.secs : 0, t, { tick: rs.tick, shut, inner: T(0, 40, "?", 190, "#fff") })}</g>`)
+    + (t >= W(q, "one") - .1 ? TF(1650, 830, rk * 1.15 * (1 + .1 * pulse(t, [W(q, "one"), W(q, "two"), W(q, "three")][nf - 1], .03, .3)), `<g filter="url(#dropS)">${countHand(nf)}</g>`) + youPill(1650, 640, 1.1 * rk) : "") + OP(ramp(t, W(q, "show"), .3) * (1 - zb), tpill(1380, 1010, "1, 2 or 3 fingers", 34, P.ink, "#fff"));
   // Pip presents; after the bell the three answer
   const X = [300, 960, 1620];
   if (t < tb0) out += buddy("pip", 170, 1066, 300, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT("p1001") - .1, "sit"], [LE("p1001") + .1, "pointing"], [r0, "thinking"]] }) + say("p1001", 330, 660, t, { size: 40, maxW: 520, tail: -90 });
@@ -103,20 +104,20 @@ function plantHalf(t, x0, day, st, o = {}) { const w = 900, id = "ph" + day;
     ${o.cicak ? `<g transform="translate(${x0 + 150} 204) scale(${n2(.95 * o.cicak)}) rotate(-12)" opacity="${n2(Math.min(1, o.cicak) * .8)}">${cicak(P.ink2)}</g>` : ""}
     <rect x="${x0}" y="760" width="${w}" height="170" fill="url(#xLedge)"/><rect x="${x0}" y="760" width="${w}" height="8" fill="#fff" opacity=".7"/>
     ${groundShadow(x0 + 590, 800, 150, 16, .3)}${o.ghost ? `<g opacity="${n2(o.ghost)}" filter="url(#ghostF)">${TF(x0 + 590, 690, 1.75, potPlant({}))}</g>` : ""}${TF(x0 + 590, 690, 1.75, potPlant(st))}</g>
-    ${o.nocounter ? "" : `<g transform="translate(${x0 + w - 250} 170) scale(.62)">${counter(t, day, o.flip || -9, 0, 0, 1, { nodots: true })}</g>`}`; }
+    ${o.nocounter ? "" : `<g transform="translate(${x0 + 300} 776) scale(.6)">${counter(t, day, o.flip || -9, 0, 0, 1, { nodots: true })}</g>`}`; }
 const RPDEFS = () => `<defs>${lg("rpWall", [[0, "#8E86E0"], [.7, "#C5B1EE"], [1, "#E6C4DA"]])}${lg("rpSky", [[0, "#7FB7FF"], [.6, "#CFE6FF"], [1, "#FFE9C8"]])}</defs>`;
 SC.replay = (t, s) => { const L = "h1008", tg = W(L, "from") - .1, g = eio((t - tg) / 2.6), tNew = W(L, "new"), tLight = W(L, "light") - .3, tT = W(L, "living") - .15, tCi = W(L, "it"), ck = spring(t, tCi, .4) * (1 - ramp(t, tCi + 2.4, .3));
   const day = Math.round(lerp(1, 14, g)), nuP = 1 + .3 * pulse(t, tNew + .1, .1, .7);
   return bg("stage") + RPDEFS() + TF(0, 0, 1, plantHalf(t, 40, 1, {}, {})) + plantHalf(t, 980, day, { lean: 15 * g, nu: Math.min(1, g * 1.25) }, { band: ramp(t, tLight, .5) * .9, cicak: ck, ghost: .55 * ss(.5, 1, g), flip: -9 })
-    + (t > tNew - .1 ? OP(pulse(t, tNew, .1, 1.6), `<circle cx="${980 + 590 - 70 * 1.75 - 15 * 3.4 * 1.75}" cy="${690 - 214 * 1.75}" r="${n2(84 * nuP)}" fill="none" stroke="${P.sun}" stroke-width="9"/>`) + OP(ramp(t, tNew, .25) * (1 - ramp(t, tLight, .3)), tpill(1700, 250, "a new leaf", 38, "#fff", P.ink, { w: 700 })) : "")
+    + (t > tNew - .1 ? OP(pulse(t, tNew, .1, 1.6), `<circle cx="${980 + 590 - 70 * 1.75 - 15 * 3.4 * 1.75}" cy="${690 - 214 * 1.75}" r="${n2(84 * nuP)}" fill="none" stroke="${P.sun}" stroke-width="9"/>`) + OP(ramp(t, tNew, .25) * (1 - ramp(t, tLight, .3)), tpill(1690, 360, "a new leaf", 38, "#fff", P.ink, { w: 700 })) : "")
     + OP(ramp(t, tLight + .3, .3), tpill(1210, 990, "light from the window", 34, P.ink, P.sun)) + tag(t, tT, 1430, 330, true, 1.3) + speeded(t, tg, tg + 4, 1700, 1010) + HUD(t); };
 
 SC.fixed = (t, s) => { const tR = s.t0 + .25, fix = ss(tR, tR + .6, t), wr = ss(tR + .7, LT("p1009") + .25, t), tk = LT("p1009") + .35, tc = WE("h1010", "fingers") + .25, tb = tc + .6;
   const px = t < tR + .65 ? 420 + 720 + 60 * Math.sin((t - tR) * 26) : 420 + 240 + 180 * wr, py = 150 + 405;
   return bg("stage") + homeworkSheet(t, { fix, write: wr, tick: tk }, 420, 150, 1) + (t > tR - .2 && t < tk ? TF(px + 40, py - 20, .8, `<g transform="rotate(${t < tR + .65 ? 150 : -40})">${pencil()}</g>`) : "")
     + buddy("pip", 190, 1066, 330, t, { aura: true, poses: [[s.t0, "thinking"], [LT("p1009") - .1, "sit"], [LE("p1009") + .1, "cheer"]] }) + say("p1009", 350, 640, t, { size: 40, maxW: 500, tail: -90 })
-    + coin(t, tc, 1700, 300, "+2", "if you showed two fingers") + coin(t, tb, 1700, 560, "+2", "Basil and Momo") + (t >= W("h1010", "put") ? TF(1700, 900, spring(t, W("h1010", "put"), .4) * 1.1, `<g filter="url(#dropS)">${countHand(t >= W("h1010", "more") ? 5 : 3)}</g>`) : "") + HUD(t); };
-SCORE.push([WE("h1010", "fingers") + .25, 5, 1], [WE("h1010", "fingers") + .85, 5, 3]);
+    + coin(t, tc, 1660, 380, "+2", "if you showed two fingers") + coin(t, tb, 1660, 620, "+2", "Basil and Momo") + (t >= W("h1010", "put") ? TF(1700, 900, spring(t, W("h1010", "put"), .4) * 1.1, `<g filter="url(#dropS)">${countHand(t >= W("h1010", "more") ? 3 : 1)}</g>`) : "") + HUD(t); };
+if (P2) SCORE.push([WE("h1010", "fingers") + .25, 3, 0], [WE("h1010", "fingers") + .85, 3, 2]);
 
 /* ============ 11 · three ways to show the groups ============ */
 SC.ways = (t, s) => { const a = "h1101", b = "h1102", tp = W(b, "pictures"), tt = W(b, "table"), tg = W(b, "graphic"), tOther = W(a, "other");
@@ -134,8 +135,8 @@ SC.ways = (t, s) => { const a = "h1101", b = "h1102", tp = W(b, "pictures"), tt 
   LNS.forEach((ln, li) => { const total = tw(ln, size, 700, "Atkinson Hyperlegible"); let cx = 0; ln.split(" ").forEach((w) => { const wt = L.words[wi++].a, o = ramp(t, wt - .05, .15), ww = tw(w, size, 700, "Atkinson Hyperlegible"), y = 856 + li * 78;
     if (o > 0) tx += (keys.includes(w) ? `<rect x="${n2(960 - total / 2 + cx - 5)}" y="${y - 24}" width="${n2((ww + 10) * eo((t - wt) / .3))}" height="30" rx="6" fill="#FFD75A"/>` : "") + `<text x="${n2(960 - total / 2 + cx)}" y="${y}" font-family="Atkinson Hyperlegible" font-weight="700" font-size="${size}" fill="${P.ink}" opacity="${n2(o)}">${esc(w)}</text>`; cx += ww + sp; }); });
   const sk = spring(t, LT(b) - .5, .5);
-  return bg("stage2") + `<g transform="translate(0 -40)">` + fr(360, "PICTURES", tOther - .1, tp, pics) + fr(960, "A TABLE", s.t0 + .15, tt, table) + fr(1560, "A GRAPHIC ORGANISER", tOther + .12, tg, org) + `</g>`
-    + (sk > .02 ? TF(960, 880, sk, `<g transform="translate(-960 -880) rotate(-.6 960 880)"><g filter="url(#drop)"><rect x="330" y="780" width="1260" height="200" rx="28" fill="url(#gPaper)"/><rect x="330" y="780" width="20" height="200" rx="10" fill="${P.sun}"/></g><g transform="translate(370 750)"><rect x="0" y="0" width="350" height="58" rx="29" fill="url(#gSun)" filter="url(#dropS)"/><g transform="translate(34 29)"><circle r="17" fill="${P.ink}"/><path d="M-8 0 L-2 6 L9 -6" fill="none" stroke="${P.sun}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></g>${T(64, 40, "MARK SENTENCE", 30, P.ink, { a: "start", ls: 3 })}</g>${T(1560, 818, "3 of 3", 26, P.ink2, { a: "end", w: 600 })}${tx}</g>`) : "")
+  return bg("stage2") + `<g transform="translate(960 505) scale(.86) translate(-960 -420)">` + fr(360, "PICTURES", tOther - .1, tp, pics) + fr(960, "A TABLE", s.t0 + .15, tt, table) + fr(1560, "A GRAPHIC ORGANISER", tOther + .12, tg, org) + `</g>`
+    + (sk > .02 ? TF(960, 905, sk, `<g transform="translate(-960 -880) rotate(-.6 960 880)"><g filter="url(#drop)"><rect x="330" y="780" width="1260" height="200" rx="28" fill="url(#gPaper)"/><rect x="330" y="780" width="20" height="200" rx="10" fill="${P.sun}"/></g><g transform="translate(370 750)"><rect x="0" y="0" width="350" height="58" rx="29" fill="url(#gSun)" filter="url(#dropS)"/><g transform="translate(34 29)"><circle r="17" fill="${P.ink}"/><path d="M-8 0 L-2 6 L9 -6" fill="none" stroke="${P.sun}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></g>${T(64, 40, "MARK SENTENCE", 30, P.ink, { a: "start", ls: 3 })}</g>${T(1560, 818, "3 of 3", 26, P.ink2, { a: "end", w: 600 })}${tx}</g>`) : "")
     + HUD(t); };
 
 /* ============ 12 · Day 30 ============ */
@@ -156,25 +157,25 @@ SC.day30 = (t, s) => { const a = "h1201", b = "h1202", tr = MK("reveal"), B = BO
 /* two picture piles + the win strip + the chant */
 SC.piles = (t, s) => { const L = "h1203", tA = W(L, "three") - .1, tB = W(L, "three", 1) - .1, ch = TL.lines.c1204;
   const pile = (x, head, col, bgc, ks, t0) => { const k = spring(t, t0, .5); if (k < .02) return ""; let th = ""; ks.forEach(([nm, dx, dy, sc], i) => { th += TF(dx, dy, sc * spring(t, t0 + .12 + i * .1, .4), TH[nm]()); });
-    return TF(x, 330, k, `<g filter="url(#drop)"><rect x="-400" y="-170" width="800" height="400" rx="40" fill="${bgc}"/></g><g transform="translate(0 -170) rotate(-1.5)" filter="url(#dropS)"><rect x="${-(tw(head, 46, 700, "Fredoka", 5) + 80) / 2}" y="-40" width="${tw(head, 46, 700, "Fredoka", 5) + 80}" height="80" rx="40" fill="${col}"/>${T(0, 16, head, 46, "#fff", { ls: 5 })}</g>${th}`); };
+    return TF(x, 350, k * .8, `<g filter="url(#drop)"><rect x="-400" y="-170" width="800" height="400" rx="40" fill="${bgc}"/></g><g transform="translate(0 -170) rotate(-1.5)" filter="url(#dropS)"><rect x="${-(tw(head, 46, 700, "Fredoka", 5) + 80) / 2}" y="-40" width="${tw(head, 46, 700, "Fredoka", 5) + 80}" height="80" rx="40" fill="${col}"/>${T(0, 16, head, 46, "#fff", { ls: 5 })}</g>${th}`); };
   // the win strip: the three Mark Sentences fly past in gold, each with a tick
   const wins = ["This is called diversity.", "Classification is the grouping of things…", "pictures, a table, and a graphic organiser"]; let strip = "";
   wins.forEach((w, i) => { const t0 = s.t0 + 1.2 + i * 1.5, x = lerp(2300, 130 + i * 590, eo((t - t0) / .6)); if (t < t0) return; const ww = 560;
     strip += `<g transform="translate(${n2(x)} 1036)"><rect x="0" y="-27" width="${ww}" height="54" rx="27" fill="url(#gSun)"/><circle cx="30" cy="0" r="17" fill="${P.leafDeep}"/><path d="M22 1 L28 7 L39 -6" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/><text x="58" y="9" font-family="Atkinson Hyperlegible" font-weight="700" font-size="27" fill="${P.ink}">${esc(w)}</text></g>`; });
   // the chant: one phrase at a time, big
   const PH = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What can it DO?"], cur = Math.floor((t - ch.t) / ch.bar); let line = "";
-  if (cur >= 0 && cur < 4) { const k = spring(t, ch.t + cur * ch.bar, .3); line = TF(960, 650, k, `<g transform="translate(0 6)" opacity=".8">${T(0, 30, PH[cur], 96, P.ink, { ls: 2 })}</g>` + T(0, 30, PH[cur], 96, cur === 1 ? "#fff" : P.sun, { ls: 2 })); }
+  if (cur >= 0 && cur < 4) { const k = spring(t, ch.t + cur * ch.bar, .3); line = TF(715, 640, k, `<g transform="translate(0 6)" opacity=".8">${T(0, 30, PH[cur], 96, P.ink, { ls: 2 })}</g>` + T(0, 30, PH[cur], 96, cur === 1 ? "#fff" : P.sun, { ls: 2 })); }
   const beats = []; for (let b2 = 0; b2 < 4; b2++) beats.push(ch.t + b2 * ch.bar + ch.bar * .5); const jumps = beats.map((b2) => [b2 - .2, 28]);
-  let buds = ""; [["pip", 520], ["basil", 960], ["momo", 1400]].forEach(([w, x]) => { buds += buddy(w, x, 990, 250, t, { aura: true, in: s.t0 + .2, jump: t >= ch.t ? jumps : [], poses: [[s.t0, "cheer"], [ch.t - .15, "sit"], [ch.t + 4 * ch.bar - .25, "cheer"]], nohop: t < s.t0 + .5 }); });
-  return bg("stage2") + pile(500, "LIVING THINGS", P.leafDeep, "#DFF5E4", [["bean", -250, 200, 1.45], ["dish", 20, 190, 1.35], ["plant", 270, 190, 1.2]], tA) + pile(1420, "NON-LIVING THINGS", P.blueDeep, "#DCEBFF", [["teddy", -250, 196, 1.5], ["robot", 10, 200, 1.4], ["pebble", 260, 190, 1.5]], tB)
+  let buds = ""; [["pip", 300], ["basil", 715], ["momo", 1130]].forEach(([w, x]) => { buds += buddy(w, x, 990, 250, t, { aura: true, in: s.t0 + .2, jump: t >= ch.t ? jumps : [], poses: [[s.t0, "cheer"], [ch.t - .15, "sit"], [ch.t + 4 * ch.bar - .25, "cheer"]], nohop: t < s.t0 + .5 }); });
+  return bg("stage2") + pile(380, "LIVING THINGS", P.leafDeep, "#DFF5E4", [["bean", -250, 200, 1.45], ["dish", 20, 190, 1.35], ["plant", 270, 190, 1.2]], tA) + pile(1050, "NON-LIVING THINGS", P.blueDeep, "#DCEBFF", [["teddy", -250, 196, 1.5], ["robot", 10, 200, 1.4], ["pebble", 260, 190, 1.5]], tB)
     + line + buds + strip + HUD(t); };
 
 /* ============ 13 · the score hand, the cicak, the dare, "Now you know!" ============ */
-SC.final = (t, s) => { const L = "h1301", t5 = W(L, "five") - .1, thi = W(L, "high") - .05, tm = W(L, "more"), nf = t >= t5 ? 5 : t >= tm ? 4 : 3, hi = pulse(t, thi + .25, .12, .6);
-  let out = bg("stage") + `<g transform="translate(960 ${n2(lerp(-200, 200, eo((t - s.t0) / .35)))})">${scoreboard(t, 0, 0, 1.6, { you: "?", bud: 3 })}</g>`
+SC.final = (t, s) => { const L = "h1301", t5 = W(L, "three") - .1, thi = W(L, "high") - .05, tm = W(L, "more"), nf = t >= t5 ? 3 : t >= tm ? 2 : 1, hi = pulse(t, thi + .25, .12, .6);
+  let out = bg("stage") + `<g transform="translate(960 ${n2(lerp(-200, 200, eo((t - s.t0) / .35)))})">${scoreboard(t, 0, 0, 1.6, { you: "?", bud: 2 })}</g>`
     + TF(960, 760 - 60 * hi, 1.85 * spring(t, s.t0 + .25, .5) * (1 + .1 * hi), `<g filter="url(#drop)">${countHand(nf)}</g>`) + youPill(960, 430, 1.3)
     + OP(hi, `<g stroke="${P.sun}" stroke-width="12" stroke-linecap="round">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const an = -Math.PI * (.05 + i * .1125), r1 = 300 + 60 * (1 - hi), r2 = r1 + 80; return `<path d="M${n2(960 + Math.cos(an) * r1)} ${n2(640 + Math.sin(an) * r1)} L${n2(960 + Math.cos(an) * r2)} ${n2(640 + Math.sin(an) * r2)}"/>`; }).join("")}</g>`)
-    + (t >= tm && t < t5 ? TF(1330, 480, spring(t, tm, .4), tpill(0, 0, "More than 3? You win!", 40, P.sun, P.ink, { w: 700 })) : "") + (t >= thi ? TF(1330, 480, spring(t, thi, .4), tpill(0, 0, "HIGH FIVE!", 52, P.sun, P.ink, { w: 700, ls: 4 })) : "");
+    + (t >= tm && t < t5 ? TF(1330, 480, spring(t, tm, .4), tpill(0, 0, "More than 2? You win!", 40, P.sun, P.ink, { w: 700 })) : "") + (t >= thi ? TF(1330, 480, spring(t, thi, .4), tpill(0, 0, "HIGH FIVE!", 52, P.sun, P.ink, { w: 700, ls: 4 })) : "");
   [["pip", 230, false], ["basil", 610, false], ["momo", 1600, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1060, i === 1 ? 250 : 300, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
   return out + logo(t); };
 
@@ -186,13 +187,13 @@ SC.cicak = (t, s) => { const L = "h1302", z = lerp(1, 1.9, eio((t - s.t0 - .2) /
 SC.day31 = (t, s) => { const B = BOX, tf = s.t0 + .35, droop = ss(tf, tf + 1.6, t) * .9, h = "h1304", tNext = W(h, "lock") - .2, z = lerp(1.0, 1.55, eio((t - s.t0) / 2.2));
   return boxView(t, { cam: [z, B.plant + 180, 600], st: { ...D30, droop, lean: 16 * (1 - droop * .5), robotX: B.robot1, robot: robotWalkStop(0, 0) } })
     + buddy("momo", 1500, 1120, 520, t, { flip: true, rim: "rimC", poses: [[s.t0, "sit"], [tf + .3, "surprised"], [LT("m1303") - .1, "sit"], [LE("m1303") + .1, "oops"], [W(h, "what"), "thinking"]] }) + say("m1303", 1380, 430, t, { size: 50, tail: 80 })
-    + (t >= tNext ? TF(960, 170, spring(t, tNext, .45), `<g filter="url(#drop)"><rect x="-560" y="-64" width="1120" height="128" rx="64" fill="${P.ink}"/></g>${T(0, 20, `<tspan fill="${P.sun}">NEXT:</tspan> A drooping plant isn’t sad.`, 60, "#fff")}`) : "")
+    + (t >= tNext ? TF(800, 190, spring(t, tNext, .45), `<g filter="url(#drop)"><rect x="-560" y="-64" width="1120" height="128" rx="64" fill="${P.ink}"/></g>${T(0, 20, `<tspan fill="${P.sun}">NEXT:</tspan> A drooping plant isn’t sad.`, 60, "#fff")}`) : "")
     + (() => { const d = t >= tf ? 31 : 30; return counter(t, d, tf); })() + HUD(t); };
 
 SC.nyk = (t, s) => { const L = "h1305", t0 = LT(L) - .05, k = lerp(2.4, 1, eo((t - t0) / .18)) + .05 * wob(t, t0 + .18, .5), on = t >= t0;
   let rays = ""; for (let i = 0; i < 18; i++) { const a = i * 20 + (t - s.t0) * 10; rays += `<path d="M960 520 L${n2(960 + Math.cos(a * Math.PI / 180) * 1600)} ${n2(520 + Math.sin(a * Math.PI / 180) * 1600)} L${n2(960 + Math.cos((a + 9) * Math.PI / 180) * 1600)} ${n2(520 + Math.sin((a + 9) * Math.PI / 180) * 1600)}z" fill="#FFE27A" opacity=".5"/>`; }
   let out = `<rect width="1920" height="1080" fill="url(#gSun)"/>${rays}<circle cx="960" cy="520" r="420" fill="#FFF3B8" opacity=".7" filter="url(#b60)"/>`;
-  out += `<ellipse cx="800" cy="1034" rx="330" ry="22" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>` + TF(800, 1030, 2.5, miniBox() + TF(-70, -4, .2, potPlant({ nu: 2, lean: 10 })) + TF(-6, -2, .15, beanPlant(30, { maxH: 700 })) + TF(52, -8, .22, pebble()) + TF(92, -4, .2, teddyKey()));
+  out += `<ellipse cx="800" cy="1034" rx="330" ry="22" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>` + TF(800, 1030, 2.5, miniBox() + TF(-70, -4, .2, potPlant(PART === 1 ? {} : { nu: 2, lean: 10 })) + TF(-6, -2, PART === 1 ? .3 : .15, beanPlant(PART === 1 ? 5 : 30, { maxH: 700 })) + TF(52, -8, .22, pebble()) + TF(92, -4, .2, teddyKey()));
   [["pip", 310, false], ["basil", 1640, true], ["momo", 1265, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1040, 320, t, { flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, "waving"], [t0, "cheer"]], wave: true, jump: [[t0, 70]] }); });
   if (on) out += `<g transform="translate(960 330) scale(${n2(k)}) rotate(-3)"><text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="190" text-anchor="middle" letter-spacing="4" fill="#fff" stroke="${P.ink}" stroke-width="30" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">Now you know!</text><text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="190" text-anchor="middle" letter-spacing="4" fill="#fff">Now you know!</text></g>`;
   return out + logo(t); };

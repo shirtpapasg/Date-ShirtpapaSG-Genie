@@ -3,7 +3,8 @@
 // sfx library (rain, birds). Sound palette = STYLE_GUIDE section 12.   node song.js
 const path = require('path'), fs = require('fs');
 const { SR, Bus, reverb } = require('./audio/dsp'); const I = require('./audio/instruments'); const MIX = require('./audio/mix'); const { m } = require('./music');
-const C = JSON.parse(fs.readFileSync(path.join(__dirname, 'cues.json'))), TL = JSON.parse(fs.readFileSync(path.join(__dirname, 'tl.json')));
+const PART = process.argv[2] || 1;
+const C = JSON.parse(fs.readFileSync(path.join(__dirname, `cues_p${PART}.json`))), TL = JSON.parse(fs.readFileSync(path.join(__dirname, `tl_p${PART}.json`)));
 const DUR = C.END + .2, N = Math.ceil(DUR * SR), bus = () => new Bus(N), SFX = path.join(__dirname, '..', '..', 'sau', 'sfx');
 const voice = bus(), drums = bus(), bass = bus(), keys = bus(), uke = bus(), pad = bus(), game = bus(), amb = bus(), verb = bus(), calm = bus(), wonder = bus();
 const BPM = 104, BEAT = 60 / BPM;
@@ -106,6 +107,9 @@ const P = {
   reveal: (t) => { game.addMono(I.noiseSweep(.5, 400, 3200, { q: 1.2 }), t - .1, .18); chordAt(t + .1, ['C4', 'E4', 'G4', 'C5', 'E5'], .13, 3.2); ['C5', 'E5', 'G5', 'C6', 'E6', 'G6'].forEach((n, i) => mar(n, t + .1 + i * .06, .45)); const c = I.crash(8); game.addMono(c, t + .1, .14); game.addMono(K, t + .1, .9);
     ['C3', 'G3', 'E4', 'G4', 'C5'].forEach((n, i) => uke.addMono(I.guitar(m(n) + 12, 1.6, { bright: .6, seed: i }), t + .1 + i * .02, .2)); },
   curious: (t) => { ['F4', 'A4', 'B4'].forEach((n, i) => { const x = I.marimba(m(n) + 12, { decay: .6 }); game.addMono(x, t + i * BEAT / 2, .3 + i * .05); verb.addMono(x, t + i * BEAT / 2, .25); }); },
+  term: (t) => { ['C6', 'E6', 'G6', 'C7'].forEach((n, i) => { const x = I.musicBox(m(n), { decay: 1.8 }); game.addMono(x, t + i * .1, .2); verb.addMono(x, t + i * .1, .2); }); game.addMono(I.noiseSweep(.35, 600, 2600, { q: 1.2 }), t - .1, .1); chordAt(t, ['C4', 'G4', 'E5'], .06, 1.8); },
+  shelfpop: (t, v) => { game.addMono(I.pop(1500 + 150 * v, 110 + v), t, .6); mar(RISE[3 + v], t, .4, { thock: .5 }); },
+  glow: (t, v) => { const x = I.musicBox(m(['E6', 'G6', 'C7'][v % 3]), { decay: 1.6 }); game.addMono(x, t, .26); verb.addMono(x, t, .22); mar(['E5', 'G5', 'C6'][v % 3], t, .3); },
   final: (t) => { game.addMono(I.thud(80, .1), t, .7); game.addMono(CL, t, .5); [['E5', 0], ['G5', 1], ['C6', 2], ['E6', 3]].forEach(([n, s]) => mar(n, t + s * BEAT / 2, .5, { decay: .7 }));
     ['C3', 'G3', 'E4', 'G4', 'C5'].forEach((n, i) => uke.addMono(I.guitar(m(n) + 12, 1.6, { bright: .6, seed: i }), t + i * .02, .22)); chordAt(t, ['C4', 'E4', 'G4', 'D5'], .09, 2.6); const c = I.crash(9); game.addMono(c, t, .1); },
 };
@@ -117,5 +121,5 @@ const GAIN = { drums: .42, bass: .5, keys: .7, uke: 2.1, pad: 1.6, calm: 1.5, wo
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? path.join(__dirname, "out", "stems") : null }); MIX.highpass(mix, 30);
 for (let i = Math.round((C.END - .06) * SR); i < N; i++) { mix.L[i] = 0; mix.R[i] = 0; }   // hard cut at the end
 const M = MIX.master(mix, .8, undefined, { lufs: -16 });
-fs.mkdirSync(path.join(__dirname, 'out'), { recursive: true }); MIX.writeWav(path.join(__dirname, 'out', 'mix.wav'), mix);
-console.log(`wrote out/mix.wav (${DUR.toFixed(2)} s${M && M.lufs !== undefined ? `, ${M.lufs.toFixed(1)} LUFS` : ''})`);
+fs.mkdirSync(path.join(__dirname, 'out'), { recursive: true }); MIX.writeWav(path.join(__dirname, 'out', `mix_p${PART}.wav`), mix);
+console.log(`wrote out/mix_p${PART}.wav (${DUR.toFixed(2)} s${M && M.lufs !== undefined ? `, ${M.lufs.toFixed(1)} LUFS` : ''})`);

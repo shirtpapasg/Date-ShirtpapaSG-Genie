@@ -69,11 +69,10 @@ SC.garden = (t, s) => { const a = "h401", b = "h402", u = (t - s.t0) / (s.t1 - s
   return CAM(bg("garden") + hi, z, 960, 640) + OP(ramp(t, s.t0 + .5, .3) * (1 - ramp(t, LT(b) - .2, .3)), lowerPill(60, 150, "Void deck and community garden,", "Toa Payoh")) + buds + TF(bx, by, .95, miniBox()) + HUD(t); };
 
 /* ============ Mark Sentence 1 ============ */
-function markScene(t, s, o) { const L = TL.lines[o.id]; let kw = "";
-  (o.kw || []).forEach(([w, cueW, nth], i) => { const t0 = W(o.kwLine || o.id, cueW, nth || 0); kw += keyword(t, t0, 1500 - i * 330, 916, w); });
-  return bg("stage2") + markCard(t, { ...o, t0: s.t0 + .1 }) + (o.kw ? OP(ramp(t, s.t0 + .4, .3), T(1690, 870, "KEY WORDS", 26, "#DDD3FF", { a: "end", ls: 4, w: 600 }) + `<rect x="${1690 - 330 * o.kw.length - 20}" y="952" width="${330 * o.kw.length + 20}" height="6" rx="3" fill="#DDD3FF" opacity=".5"/>`) + kw : "")
+function markScene(t, s, o) { const L = TL.lines[o.id];
+  return bg("stage2") + markCard(t, { ...o, t0: s.t0 + .1 })
     + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses: o.poses || [[s.t0, "pointing"]] }) + bubble(330, 380, ["Say it with me!"], t, s.t0 + .5, L.end + .3, { size: 40, tail: 0 }) + (o.extra || "") + HUD(t); }
-SC.mark1 = (t, s) => markScene(t, s, { id: "h403", who: "momo", n: "1 of 3", text: "There is a great variety of living and non-living things around us. This is called diversity.", keys: ["variety", "living", "non-living", "diversity."], kw: [["DIVERSITY", "diversity"]],
+SC.mark1 = (t, s) => markScene(t, s, { id: "h403", who: "momo", n: "1 of 3", text: "There is a great variety of living and non-living things around us. This is called diversity.", keys: ["variety", "living", "non-living", "diversity."],
   poses: [[s.t0, "pointing"], [WE("h403", "diversity") + .1, "cheer"]] });
 
 /* ============ how do we keep track? Six things hop into the box ============ */
@@ -95,7 +94,7 @@ SC.count = (t, s) => { const L = "h501", ws = [["Are you ready?", LT(L), 150, "#
     + buddy("pip", 300, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("basil", 960, 1070, 230, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("momo", 1620, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + HUD(t); };
 
 /* ============ Day 1: six things, one box; the care card ============ */
-SC.day1 = (t, s) => { const L = "h502", z = lerp(1.0, .84, eo((t - s.t0) / .9)), cam = [z, 960, 500], tA = W(L, "holes"), tF = W(L, "oats"), tW = W(L, "carrot"), tP = W(L, "plant"), tLi = W(L, "light");
+SC.day1 = (t, s) => { const L = "h502", V = HAS(L), z = lerp(1.0, .84, eo((t - s.t0) / .9)), cam = [z, 960, 500], tA = V ? W(L, "holes") : s.t0 + 1.0, tF = V ? W(L, "oats") : s.t0 + 2.0, tW = V ? W(L, "carrot") : s.t0 + 2.9, tP = V ? W(L, "plant") : s.t0 + 3.8, tLi = V ? W(L, "light") : s.t0 + 4.2;
   const wx = (x) => 960 + (x - 960) * z, wy = (y) => 500 + (y - 500) * z, B = BOX;
   const chip = (t0, x, y, kind, txt, px, py, col, fill) => { const k = spring(t, t0, .45); if (k < .02) return ""; return OP(clamp((t - t0) / .15), `<path d="M${x} ${y} L${n2(px)} ${n2(py)}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(px)}" cy="${n2(py)}" r="8" fill="#fff"/>`) + TF(x, y, k, `<g filter="url(#drop)"><rect x="-130" y="-52" width="260" height="104" rx="52" fill="${P.paper}"/></g><g transform="translate(-76 0) scale(.82)">${needIcon(kind, col, fill)}</g>${T(34, 16, txt, 46, P.ink, { ls: 3 })}`); };
   const shaft = OP(pulse(t, tLi + .2, .3, 2.5) * .5, `<g style="mix-blend-mode:screen"><path d="M-80 -40 L560 -40 L${B.plant + 200} 900 L${B.plant - 240} 900z" fill="#FFE27A" filter="url(#b30)"/></g>`);
@@ -109,15 +108,17 @@ SC.day1 = (t, s) => { const L = "h502", z = lerp(1.0, .84, eo((t - s.t0) / .9)),
 function roundCard(t, s, a, b, col = P.sun) { const u = t - s.t0, k = lerp(2.3, 1, eo(u / .16)) + .05 * wob(u, .16, .4);
   return bg("stage") + `<circle cx="960" cy="540" r="${n2(360 + 500 * eo(u / .7))}" fill="none" stroke="${col}" stroke-width="${n2(24 * (1 - eo(u / .7)))}"/><g transform="translate(960 540) scale(${n2(k)}) rotate(-4)"><g filter="url(#drop)"><rect x="${-(tw(a, 200, 700, "Fredoka", 10) + 160) / 2}" y="-150" width="${tw(a, 200, 700, "Fredoka", 10) + 160}" height="${b ? 380 : 300}" rx="60" fill="${col}"/></g>${T(0, 70, a, 200, P.ink, { ls: 10 })}${b ? T(0, 180, b, 64, P.ink, { ls: 8 }) : ""}</g>` + HUD(t); }
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1");
+const P1 = HAS("h601");
 
 /* ============ 6 · Round 1: the wind-up robot ============ */
 const R1 = { step: .27 };
-R1.t0 = SCN.r1.t0; R1.cut = W("h601", "point") - .25; R1.back = SCN.r1ev.t0; R1.stop = WE("h606", "stops") + .25;
+if (P1) { R1.t0 = SCN.r1.t0; R1.cut = W("h601", "point") - .25; R1.back = SCN.r1ev.t0; R1.stop = WE("h606", "stops") + .25;
 // the robot's walk: steps so far at t. Even steps until it is back in the box, then every step takes longer, then it stops in mid-step.
 R1.steps = (() => { const a = []; let t = R1.t0 + .1; while (t < R1.back + .3) { a.push(t); t += R1.step; } let gap = R1.step * 1.18; while (t + gap < R1.stop - .1) { a.push(t); gap *= 1.24; t += gap; } a.push(R1.stop); return a; })();
 R1.phase = (t) => { const S = R1.steps; if (t <= S[0]) return 0; if (t >= S[S.length - 1]) return S.length - 1 + .38; for (let i = 0; i < S.length - 1; i++) if (t < S[i + 1]) return i + (t - S[i]) / (S[i + 1] - S[i]); return S.length - 1; };
 R1.x = (t) => { const p = R1.phase(t), pc = R1.phase(R1.cut), pb = R1.phase(R1.back), pe = R1.steps.length - 1; const xa = lerp(BOX.robot0, 960, clamp(p / pc)); return t < R1.back ? xa : lerp(960, BOX.robot1, clamp((p - pb) / (pe - pb))); };
-const R1_FROZEN = () => robotWalk(R1.steps.length - 1 + .38, .5);     // stopped in mid-step: exactly the same drawing from now on
+}
+const R1_FROZEN = () => robotWalk((R1.steps ? R1.steps.length - 1 : 23) + .38, .5);     // stopped in mid-step: exactly the same drawing from now on
 SC.r1 = (t, s) => { const L = "h601";
   if (t < R1.cut) { const x = R1.x(t), z = 1.5;   // inside the box: it marches right past the mealworm, which lies still in its oats
     return boxView(t, { cam: [z, x + 40, 700], st: { day: 1, robotX: x, robot: robotWalk(R1.phase(t), 1) } }) + OP(ramp(t, W(L, "the") - .05, .25), TF(960, 150, 1, tpill(0, 0, "The wind-up robot", 56, P.ink, "#fff", { w: 700 }))) + counter(t, 1, -9, 60, 110, .8) + HUD(t); }
@@ -139,12 +140,12 @@ SC.r1ev = (t, s) => { const a = "h606", b = "h606b", c = "h607", B = BOX, tSp = 
   let icons = ""; ["water", "food", "air"].forEach((k, i) => { const t0 = W(c, k) - .05, kk = spring(t, t0, .4); if (kk < .02) return; icons += TF(750 + i * 140, 300, kk * .95, iconChip(k) + `<g transform="rotate(-45)"><rect x="-56" y="-7" width="112" height="14" rx="7" fill="${P.ink}"/></g>` ); });
   const tg = W(c, "grow") - .1; icons += t >= tg ? TF(1170, 300, spring(t, tg, .4) * .95, iconChip("grow") + `<g transform="rotate(-45)"><rect x="-56" y="-7" width="112" height="14" rx="7" fill="${P.ink}"/></g>`) : "";
   const tT = W(c, "non-living") - .2;
-  return boxView(t, { cam, mode: "day", mode2: "night", mix: night, dark: night, st: { day: day2 ? 2 : 1 + crawl * .9, robotX: x, robot, bites, wx: lerp(-40, 12, eio(crawl)), wb: .3 + .25 * Math.sin(crawl * 20) * (crawl > 0 && crawl < 1 ? 1 : 0), cid: "cb2" } })
+  return boxView(t, { cam, farOver: OP(ss(tN + .5, tN + .9, t) * (1 - ss(tD - .2, tD + .3, t)) * .85, TF(842, 70, 1.5, `<g transform="rotate(-70)">${cicak("#9C92D6")}</g>`)), mode: "day", mode2: "night", mix: night, dark: night, st: { day: day2 ? 2 : 1 + crawl * .9, robotX: x, robot, bites, wx: lerp(-40, 12, eio(crawl)), wb: .3 + .25 * Math.sin(crawl * 20) * (crawl > 0 && crawl < 1 ? 1 : 0), cid: "cb2" } })
     + OP(zv, `<rect width="1920" height="1080" fill="${P.night}" opacity=".35"/>`) + icons + tag(t, tT, 960, 170, false, 1.4)
     + (t > tN - .2 && t < tv ? (() => { const [d, tf] = dayAt(t, [[0, 1], [tflip, 2]]); return counter(t, d, tf); })() : counter(t, t >= tflip ? 2 : 1, -9, 60, 110, .8))
     + speeded(t, tN, tflip + 1.2) + HUD(t); };
 // the stopped robot: one fixed drawing (not one pixel moves), with the see-through window and its loose spring
-function robotWalkStop(win, coil) { const p = R1.steps.length - 1 + .38, f = p % 1, odd = Math.floor(p) % 2, up = Math.sin(Math.PI * f) * .5;
+function robotWalkStop(win, coil) { const p = (R1.steps ? R1.steps.length - 1 : 23) + .38, f = p % 1, odd = Math.floor(p) % 2, up = Math.sin(Math.PI * f) * .5;
   return robotRig({ liftL: odd ? 0 : up, liftR: odd ? up : 0, slideL: odd ? -3 : 3 * (f - .5), slideR: odd ? 3 * (f - .5) : -3, rock: (odd ? 1 : -1) * 1.6 * Math.cos(Math.PI * f), bob: 2 * Math.abs(Math.sin(Math.PI * f)), head: 0, ant: 0, arm: (odd ? 1 : -1) * 11 * Math.cos(Math.PI * f), key: p * 1.9, win, coil }); }
 
 /* ============ the score after Round 1 ============ */
@@ -153,4 +154,4 @@ SC.r1score = (t, s) => { const tc = WE("h608", "right") + .15, tb = tc + .55;
     + TF(330, 760, spring(t, W("h608", "one") - .1, .4) * 1.5, `<g filter="url(#dropS)">${countHand(1)}</g>`) + (t > W("h608", "one") - .1 ? youPill(330, 520, 1.2) : "")
     + buddy("basil", 960, 1060, 400, t, { aura: true, poses: [[s.t0, "arms_crossed"], [tb, "oops"], [LT("b609") + .5, "sit"], [LE("b609") + .1, "cheer"], [LE("b609") + 1.2, "sit"]] }) + buddy("momo", 1560, 1050, 330, t, { aura: true, flip: true, poses: [[s.t0, "sit"], [LE("b609") - .3, "thinking"], [LT("m610") - .1, "sit"]] })
     + say("b609", 960, 560, t, { size: 46 }) + say("m610", 1470, 600, t, { size: 44, maxW: 600, tail: 60 }) + logo(t); };
-SCORE.push([WE("h608", "right") + .15, 1, 0], [WE("h608", "right") + .7, 1, 1]);
+if (P1) SCORE.push([WE("h608", "right") + .15, 1, 0], [WE("h608", "right") + .7, 1, 1]);
