@@ -6,7 +6,7 @@ const OPEN3 = { 0: -9, 1: -9, 2: -9 }, IN3 = { 0: FULL[0], 1: FULL[1], 2: FULL[2
 const lens = (t, k = 1) => TF(1700, 1052, .8 * k, lensStand([0, 1, 2, 3, 4].map((i) => TF(-60 + hash(i, 3) * 120 + 5 * Math.sin(t * .9 + i), -50 + hash(i, 5) * 110 + 4 * Math.cos(t * .7 + i), .5, `<g transform="rotate(${n2(hash(i, 7) * 180 + 8 * Math.sin(t * .5 + i))})">${[bRod, bRound, bSpiral][i % 3]()}</g>`)).join("")));
 
 /* ============ 1 · the silent cold open: the farm in Kranji; four crates slide in ============ */
-const THUMB1 = (t) => fview(t, { nocr: true, front: [0, 1, 2, 3].map((i) => TF(560 + i * 230, 1010, .78, crate4(i, 0))).join("") + fly(t) }, [1.32, 420, 1000]) + buddy("basil", 250, 640, 300, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+const THUMB1 = (t) => fview(t, { nocr: true, front: [0, 1, 2, 3].map((i) => TF(770 + i * 222, 1012, .8, crate4(i, 0))).join("") + fly(t) }, [1.32, 420, 1000]) + buddy("basil", 215, 560, 290, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), z = 1 + .05 * eio(t / 7); let cr = "";
   CRX.forEach((x, i) => { const t0 = .6 + i * .4; if (t < t0) return; const [cx, d] = slideX(t, t0, .5, 2250 + i * 60, x, CRY); cr += d + TF(cx, CRY, 1, crate4(i, 0)); });
   return fview(t, { nocr: true, front: fly(t) + cr }, [z, 960, 760])
@@ -48,9 +48,9 @@ SC.r1 = (t, s) => { const L = "c601";
   return lockN(t, { cards: ["With the plants", "With the animals", "In a group of its own"], q: "Where does a mushroom go?", tq: W(L, "so") - .1, tc: [W(L, "one", 2), W(L, "two", 1), W(L, "three")], ring0: MK("ring0_1"), dur: 5, lock: "c602",
     obj: (tt) => `<ellipse cx="430" cy="600" rx="150" ry="34" fill="#6FCF72"/>` + TF(430, 596, 1.35, mushroom()),
     picks: [{ who: "momo", id: "c603", word: "1", x: true }, { who: "basil", id: "c604", word: "2", x: true }, { who: "pip", id: "c605", word: "3" }], react: [[LE("c603") + .1, "momo", "pointing"], [LE("c604") + .1, "basil", "arms_crossed"], [LE("c605") + .1, "pip", "pointing"]] }); };
-SC.open3 = (t, s) => { const a = "c606", tA = W(a, "three") - .1, tN = W(a, "not") - .1, tF = W(a, "fungi") - .2, tc = W("c607", "one") - .1, hopT = tA + .5, u = clamp((t - hopT) / .45), inn = u >= 1;
-  const card = inn ? "" : TF(CRX[2] - 150 + 150 * eio(u), CRY - (220 * Math.sin(Math.PI * u) + 150 * u), lerp(1.3, .92, u), pcard(ICON.mushroom()));
-  return fview(t, { st: { 0: -9, 1: -9, 2: tA }, inner: { 0: FULL[0], 1: FULL[1], 2: inn ? FULL[2] : "" }, glow: { 2: pulse(t, tA, .05, 1.2) + .5 * pulse(t, tF, .1, 1.5) }, front: card })
+SC.open3 = (t, s) => { const a = "c606", tA = W(a, "three") - .1, tN = W(a, "not") - .1, tF = W(a, "fungi") - .2, tc = W("c607", "one") - .1, hopT = tA, u = clamp((t - hopT) / .45), inn = u >= 1, tFl = tA + .45;
+  const card = inn ? "" : TF(CRX[2], CRY - (150 * Math.sin(Math.PI * u) + 150 * u), lerp(1.15, .92, u), pcard(ICON.mushroom()));
+  return fview(t, { st: { 0: -9, 1: -9, 2: tFl }, inner: { 0: FULL[0], 1: FULL[1], 2: inn ? FULL[2] : "" }, glow: { 2: pulse(t, tFl, .05, 1.2) + .5 * pulse(t, tF, .1, 1.5) }, front: card })
     + (t >= tN && t < tF + .3 ? TF(1140, 620, spring(t, tN, .4) * (1 - ramp(t, tF, .25)), tpill(0, 0, "does not make its own food", 40, "#fff", P.ink, { w: 700 })) : "")
     + bP(t, { poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]] }) + bB(t, { poses: [[s.t0, "sit"], [tA, "surprised"], [tA + 1.8, "sit"]] }) + bM(t, { poses: [[s.t0, "sit"], [tA, "oops"], [tA + 1.8, "sit"]] })
     + coin(t, tc, 960, 420, "+1", "if you showed three fingers") + (t >= tc + .7 ? TF(1560, 160, spring(t, tc + .7, .4), tpill(0, 0, "Buddies: Pip scores", 28, P.ink, "#DDD3FF", { w: 600 })) : "") + HUD(t); };
@@ -117,5 +117,5 @@ SC.cliff = (t, s) => { const a = "c1301", b = "c1302", c = "c1303", tT = W(a, "t
     + buddy("momo", 1680, 1056, 270, t, { aura: true, flip: true, in: tP + .2, poses: [[tP, "pointing"], [LT(b) - .12, "sit"], [LE(b) + .1, "thinking"]] }) + say(b, 1560, 470, t, { size: 46, tail: 100, maxW: 560 })
     + (t >= tQ ? TF(560, 300, spring(t, tQ, .45), tpill(0, 0, "A flowering plant?", 56, P.ink, "#fff", { w: 700 })) : "")
     + (t >= tF ? TF(560, 520, lerp(2.2, 1, eo((t - tF) / .16)) + .05 * wob(t, tF + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + HUD(t); };
-SC.nyk = (t, s) => nykScene(t, s, [0, 1, 2, 3].map((i) => TF(610 + i * 158, 1040, .56, crate4(i, 1, FULL[i]))).join(""));
+SC.nyk = (t, s) => nykScene(t, s, [0, 1, 2, 3].map((i) => TF(545 + i * 150, 1040, .52, crate4(i, 1, FULL[i]))).join(""));
 })(); }

@@ -18,7 +18,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 6 Round 1
   E(S.r1card.t0, "roundcard"); { const L = "c601"; lock(MK("ring0_1"), 5, "c602", ["c603", "c604", "c605"], [W(L, "one", 2), W(L, "two", 1), W(L, "three")]); }
-  { const a = "c606", tA = W(a, "three") - .1; E(tA, "flip"); E(tA + .05, "tag"); E(tA + .5, "hop"); E(tA + .95, "set"); E(W(a, "not") - .1, "boop", 1); E(W(a, "fungi") - .2, "reveal"); E(W("c607", "one") - .1, "coin"); }
+  { const a = "c606", tA = W(a, "three") - .1; E(tA, "hop", 0); E(tA + .45, "set"); E(tA + .45, "flip"); E(tA + .5, "tag"); E(W(a, "not") - .1, "boop", 1); E(W(a, "fungi") - .2, "reveal"); E(W("c607", "one") - .1, "coin"); }
   // 7 crate four, the shrink
   ["plants", "animals", "fungi"].forEach((w, i) => E(W("c701", w) - .1, "rise", i * 2)); E(W("c701", "four") - .2, "lowdrum", .5); E(LT("c702") + .1, "boop", 3); E(W("c703", "much") - .1, "tap"); E(S.crate4.t1 - .6, "shrink");
   R.wonder.push([MK("dive") + .3, S.reveal.t0 + .5]); E(MK("sand") - .2, "shrink"); E(MK("bact") - .2, "shrink"); for (let i = 0; i < 5; i++) E(LT("c707") + .4 + i * .9, "drip", i); ["rods", "round", "spirals"].forEach((w, i) => E(W("c708", w) - .2, "chime2", i)); E(W("c709", "living") - .1, "chime");
