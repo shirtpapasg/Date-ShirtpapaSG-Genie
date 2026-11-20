@@ -37,3 +37,6 @@ Do not commit, push, upload or touch YouTube, the review boards or TheOneApp.
   It is the reference for how the buddies move in every episode: the teacher's painted poses as cut-outs, swaps with squash,
   stretch, overshoot, a hop, sparkles and dust (never cross-fades), same scale and foot line across poses, breathing/sway/leaning
   idle life, sitting talking sprites for lip-sync, small drawn mouths on one-face poses, speech bubbles with the pick word coloured.
+- THUMBNAILS (20 Nov, the teacher approved): use a bright frame from the episode itself; put the words on the BRIGHT side (here the
+  right), right-aligned, white first line(s) and sun-yellow last line(s), thick dark-violet stroke; keep the other side clear (no dark
+  gradient, no extra logo pill; the frame's own small logo stays). Reference: ep01/thumb_ep01.jpg.
