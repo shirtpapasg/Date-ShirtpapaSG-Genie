@@ -17,3 +17,8 @@
    on the ground (ties in with notes 1 and 2: the box is the same clear box as in the bedroom, with lid and air holes; it may stay
    see-through glass since the teacher calls it "our glass box", but it must read clearly as a box), the lid closes, and the
    buddies carry/bounce the box off towards home, then cut to the bedroom window ledge (Day 1).
+5. "Taugeh" becomes "bean sprouts" (on screen and spoken). Basil's line: "Living! Bean sprouts grow from green beans. I eat bean sprouts!"
+   (bubble shows "I eat bean sprouts!"). Drop the taugeh pronunciation respelling.
+6. "Cicak" becomes "lizard" everywhere, spoken and on screen, in both parts: e.g. "And a lizard is hiding in this video. Find it!",
+   "Did you spot the lizard? It was on the window frame on day fourteen. Is a lizard living or non-living? Tell someone at home."
+   (and Part 1's own hidden-lizard line). The drawing stays the small house lizard; keep the "chek-chek" sound. Drop the cicak respelling.
