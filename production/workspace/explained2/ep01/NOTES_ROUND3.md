@@ -44,3 +44,8 @@
     Also tidy that shot: the robot overlaps the plant pot and hides the green bean on its cotton wool; space the six things out
     so each is clearly visible, and keep the label lines from crossing other things. The small print ("An adult helps. Wash your
     hands. The mealworm goes back to its tub after Day 30.") must fit fully inside the frame (it is cut off on the right).
+11. Part 1's hidden lizard (on the window bar during the Day 1 night time-lapse, about 2:28) is never revealed. Add a reveal near the
+    end of Part 1 (before the key-word read-along): a short replay of that moment with a ring around the lizard, Heart: "Did you spot
+    the lizard? It was on the window at night, on day one. Is a lizard living or non-living? Tell someone at home." (Part 2 keeps
+    its own lizard and its own reveal.) The lizard drawing could also be a touch cuter and clearer (it reads as a flat stick-figure
+    silhouette at night: give it a rounder head, small eyes and a soft rim light so children can actually find it), in both parts.
