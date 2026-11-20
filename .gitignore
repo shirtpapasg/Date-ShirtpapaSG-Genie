@@ -31,3 +31,5 @@ production/workspace/explained2/fonts/node_modules/
 production/workspace/explained2/short1/out/*.png
 production/workspace/explained2/short1/out/stills/
 production/workspace/explained2/short1/out/frames/
+production/workspace/explained2/short1/out/*.mp4
+production/workspace/explained2/short1/out/*.wav
