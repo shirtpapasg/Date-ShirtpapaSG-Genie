@@ -18,8 +18,8 @@ JOBS = [("art", "Art direction", ["research.md", "STYLE_GUIDE.md", "frames/sheet
         ("ep04", "P3 EP4 Part 1 + Part 2", ["p3_ep04_script.md", "ep04/ep04_part1.mp4", "ep04/ep04_part2.mp4"]),
         ("ep06", "P3 EP6 (made by Opus)", ["p3_ep06_script.md", "ep06/ep06_part1.mp4", "ep06/ep06_part2.mp4"]),
         ("ep06f", "P3 EP6 clips (made by Fable)", ["ep06f/clip1_coldopen.mp4", "ep06f/clip2_journey.mp4", "ep06f/clip3_ending.mp4"]),
-        ("ep07", "P3 EP7 script (Fable)", ["p3_ep07_script.md"]),
-        ("ep08", "P3 EP8 script (Fable)", ["p3_ep08_script.md"])]
+        ("ep07", "P3 EP7 (script Fable · setup Opus · scenes Fable · render Opus)", ["p3_ep07_script.md", "ep07/ep07_part1.mp4", "ep07/ep07_part2.mp4"]),
+        ("ep08", "P3 EP8 (script Fable · setup Opus · scenes Fable · render Opus)", ["p3_ep08_script.md", "ep08/ep08_part1.mp4", "ep08/ep08_part2.mp4"])]
 now = datetime.datetime.now(datetime.timezone.utc)
 for jid, name, files in JOBS:
     p = {}
