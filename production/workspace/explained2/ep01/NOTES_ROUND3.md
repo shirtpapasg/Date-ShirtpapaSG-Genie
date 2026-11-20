@@ -29,3 +29,7 @@
    Then Heart: "Well done!" and on into the part's normal ending ("Now you know!" stays last). The buddies can say the words with
    the viewer on the second beat (mouths moving, quiet) to model reading along. Before "Show me your score hand" or after it,
    whichever flows better; it must come before "Now you know!".
+8. Part 2 at about 0:10 (the recap / clue scene): Momo stands loose in front of a giant flower pot with no aura disc, so she looks
+   pot-sized and the proportions are wrong. Fix: whenever a buddy appears in a scene with real-world props (pot, box, plants, bench),
+   put them in their circular signature-colour aura disc (as in the lock-in line-ups and Mark Sentence cards), so they read as
+   "presenters", not as tiny animals inside the set. Check every scene in both parts for the same problem.
