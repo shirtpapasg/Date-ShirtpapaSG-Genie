@@ -16,10 +16,10 @@ for it in SEQ:
             "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"])} for w in v["words"]], "tracks": v["tracks"]}
         order.append(it[1]); t += v["bar"] * 4
     elif k == "say":
-        _, id, who, text, o = it; v = json.load(open(f"{H}/voice/{id}.json")); t += o.get("pre", .35)
+        _, id, who, text, o = it; v = json.load(open(f"{H}/voice/{id}.json")); t += max(.16, o.get("pre", .35) * .72)
         lines[id] = {"who": who, "t": r(t), "dur": v["dur"], "end": r(t + v["dur"]), "text": text, "scene": scenes[-1]["name"],
                      "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"])} for w in v["words"]], "mouth": v["mouth"], "open": v["open"], "stress": [r(t + s) for s in v["stress"]]}
-        order.append(id); t += v["dur"] + o.get("post", 0)
+        order.append(id); t += v["dur"] + o.get("post", 0) * .72
 scenes[-1]["t1"] = r(t)
 TL = {"END": r(t), "FPS": 30, "scenes": scenes, "lines": lines, "order": order, "marks": marks}
 json.dump(TL, open(f"{H}/tl.json", "w")); open(f"{H}/tl.js", "w").write("window.TL=" + json.dumps(TL) + ";")

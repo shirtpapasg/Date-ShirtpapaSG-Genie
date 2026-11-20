@@ -3,7 +3,8 @@
 and checks which deliverables exist on disk. python3 progress.py"""
 import json, os, glob, datetime
 H = os.path.dirname(os.path.abspath(__file__))
-JOBS = [("art", "Art direction", ["research.md", "STYLE_GUIDE.md", "frames/sheet.png"]),
+JOBS = [("posetest", "Pose-switching test (robot round)", ["characters/sprites/pose_test_robot_round.mp4"]),
+        ("art", "Art direction", ["research.md", "STYLE_GUIDE.md", "frames/sheet.png"]),
         ("characters", "Buddies (Pip, Basil, Momo)", ["characters/buddies.js", "characters/sheet.png", "characters/talk.mp4"]),
         ("script", "P3 EP1 pilot script", ["pilot_p3_ep01_script.md"]),
         ("script2", "P3 EP2 script", ["p3_ep02_script.md"]),

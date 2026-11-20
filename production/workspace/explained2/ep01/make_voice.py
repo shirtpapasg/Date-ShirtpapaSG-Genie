@@ -1,6 +1,7 @@
 """make_voice.py: every spoken line of EP1 -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
   /home/user/heart-tts/venv/bin/python make_voice.py
-Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: speed .94, pitch swing x1.6, .57 s between sentences, -21.7 dB;
+Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: pitch swing x1.6, -21.7 dB), but at speed 1.0 with .32 s between
+         sentences (the recipe's .94 and .57 made the episode 8 minutes; the script asks for 6:30); the shrink is said slower (.92);
          "Now you know!" excited: faster, +3 semitones, wider swing, +3 dB).
 Buddies = the Character Voice Kit voices exactly as in characters/sprites/talk_voice.py (voice_maker.CHARACTERS, -18 dB RMS).
 Chant  = each buddy says each of the four phrases; every phrase is stretched to one length so the three land together.
@@ -28,8 +29,8 @@ def up48(x, sr):
     n = int(len(x) * 48000 / sr); X = np.fft.rfft(x); Y = np.zeros(n // 2 + 1, complex); m = min(len(X), len(Y)); Y[:m] = X[:m]
     return np.fft.irfft(Y, n) * (n / len(x))
 
-def heart(text, excited=False):
-    speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if excited else (0.94, 1.6, 1.0, 0.0); parts = []
+def heart(text, excited=False, gap=.32, spd=1.0):
+    speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if excited else (spd, 1.6, 1.0, 0.0); parts = []
     for p in sents(pron(text)):
         a, sr = K().create(p, voice="af_heart", speed=speed, lang="en-us"); x = a.astype(np.float64)
         snd = parselmouth.Sound(x, SR); m = call(snd, "To Manipulation", 0.01, 120, 500); pt = call(m, "Extract pitch tier")
@@ -37,7 +38,7 @@ def heart(text, excited=False):
         call(pt, "Formula", f"{med * shift} * 2 ^ ({swing} * log2(self / {med}))"); call([pt, m], "Replace pitch tier")
         x = call(m, "Get resynthesis (overlap-add)").values[0]
         idx = np.where(np.abs(x) > 0.01)[0]; x = x[max(0, idx[0] - 120): idx[-1] + 240]
-        parts += [x, np.zeros(int(SR * 0.57))]
+        parts += [x, np.zeros(int(SR * gap))]
     x = np.concatenate(parts[:-1]); sp = x[np.abs(x) > 0.003]
     return np.clip(x * (10 ** ((-21.7 + gain) / 20) / np.sqrt(np.mean(sp ** 2))), -0.98, 0.98), SR
 
@@ -135,7 +136,7 @@ for it in SEQ:
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
     if os.path.exists(j) and json.load(open(j)).get("text") == text and os.path.exists(f): continue
-    x, sr = heart(text, o.get("excited", False)) if who == "heart" else buddy(who, text)
+    x, sr = heart(text, o.get("excited", False), o.get("gap", .32), o.get("speed", 1.0)) if who == "heart" else buddy(who, text)
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     words, ok = align(text, f)
     if not ok: bad.append(id)

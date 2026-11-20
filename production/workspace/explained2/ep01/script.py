@@ -15,8 +15,8 @@ PRON = {"Taugeh": "Taogay", "taugeh": "taogay", "cicak": "cheechahk", "winds it 
 
 SEQ = [
  # ---- 1 · silent cold open (12 s)
- ("scene", "cold"), ("mark", "cold0"), ("wait", 3.0), ("mark", "coldBox"), ("wait", 5.3), ("mark", "coldLid"), ("wait", 2.0),
- ("mark", "coldD30"), ("wait", 1.7), ("mark", "coldCut"), ("wait", 0.5),
+ ("scene", "cold"), ("mark", "cold0"), ("wait", 2.6), ("mark", "coldBox"), ("wait", 5.0), ("mark", "coldLid"), ("wait", 1.7),
+ ("mark", "coldD30"), ("wait", 1.6), ("mark", "coldCut"), ("wait", 0.5),
  # ---- 2 · hook and the practice lock-in
  ("scene", "hook"),
  ("say", "h201", H, "This is Momo. This is a teddy bear. Two eyes. Soft fur. One is living. One is not.", {"pre": .2}),
@@ -47,7 +47,7 @@ SEQ = [
  ("say", "h405", H, "We put them into groups. Let's start with six.", {"pre": .35, "post": .9}),
  # ---- 5 · the countdown and Day 1
  ("scene", "count"),
- ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5}),
+ ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94}),
  ("scene", "day1"),
  ("say", "h502", H, "Day one. Six things, one box. The lid has holes, so air can get in. The mealworm has oats to eat and a juicy carrot for water. The plant gets water, and light from the window.", {"pre": .9, "post": .7}),
  # ---- 6 · Round 1: the wind-up robot
@@ -79,13 +79,13 @@ SEQ = [
  ("scene", "lean"),
  ("say", "h706", H, "Three buddies, two answers. Let's shrink down and watch. Quietly.", {"pre": .4, "post": .6}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 3.0),
- ("say", "h707", H, "You are tiny now. The green bean is as big as a bus.", {"pre": 0, "post": 1.6}),
+ ("say", "h707", H, "You are tiny now. The green bean is as big as a bus.", {"speed": .92, "gap": .5, "pre": 0, "post": 1.6}),
  ("mark", "beanClose"),
- ("say", "h708", H, "Listen.", {"pre": .6}),
+ ("say", "h708", H, "Listen.", {"speed": .92, "gap": .5, "pre": .6}),
  ("wait", 1.6), ("mark", "crack"), ("wait", 1.9),
- ("say", "h709", H, "The skin splits. A root pushes out.", {"pre": 0}),
+ ("say", "h709", H, "The skin splits. A root pushes out.", {"speed": .92, "gap": .5, "pre": 0}),
  ("wait", 2.2),
- ("say", "h710", H, "Nobody wound it up. Nobody pushed it. It is growing by itself.", {"pre": 0, "post": 1.6}),
+ ("say", "h710", H, "Nobody wound it up. Nobody pushed it. It is growing by itself.", {"speed": .92, "gap": .5, "pre": 0, "post": 1.6}),
  ("scene", "r2out"), ("mark", "pullout"), ("wait", 1.3),
  ("say", "h711", H, "The green bean is a living thing. It was living all along. It took in water. Then it began to grow.", {"pre": 0, "post": .8}),
  ("scene", "r2score"),
