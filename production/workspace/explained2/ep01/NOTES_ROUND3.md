@@ -5,3 +5,8 @@
 2. Part 1 at 1:43: "flying robot?" The robot hangs high in the air above Basil's head (a big hop arc into the box), so it looks like
    it is flying. Fix: things travel low along the ground in small hops (a few dust puffs) or are carried/slid by the buddies into the
    box; never floating above the buddies' heads; the robot at its normal size; Basil's surprised face can stay.
+3. Mark Sentence cards (e.g. Part 1, "There is a great variety of living and non-living things around us. This is called diversity."):
+   the "Say it with me!" bubble is silent. Fix: the buddy beside the card (Momo here; whoever holds that bubble on each card) SAYS
+   "Say it with me!" aloud in their own voice (lip-sync on, a small inviting bounce/point toward the card), then a 0.8 s pause so
+   viewers can get ready, then Heart reads the sentence. Do the same everywhere "Say it with me!" appears (every Mark Sentence card,
+   and the chant cue), in both parts.
