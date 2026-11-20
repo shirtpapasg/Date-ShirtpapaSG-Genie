@@ -207,7 +207,7 @@ SEQ2 = [
  ("mark", "clean"),
  ("say", "j507", H, "Now the hand is ready for food.", {**SLOW, "pre": 0}),
  ("wait", 1.2),
- ("scene", "pullout"), ("wait", .5),
+ ("scene", "pullout"), ("wait", .3),
  ("say", "j508", B, "Bye-bye, bacteria! Soap wins!", {"pre": .2, "post": .4}),
  # ---- 6 · harmful bacteria: wash your hands
  ("scene", "harmful"),
@@ -270,7 +270,7 @@ SEQ2 = [
  ("scene", "liz"),
  ("say", "j1202", H, "Did you spot the lizard? It was on the kitchen clock. Can you see a lizard without a microscope? Tell someone at home.", {"pre": .5, "post": .5}),
  # ---- 13 · the dare for Episode 8
- ("scene", "dare"), ("wait", .6),
+ ("scene", "dare"), ("wait", .3),
  ("say", "j1301", H, "Next time, something new: materials! A plastic box, a metal box and a glass jar. One of them was made from sand. Which one? Lock in your answer!", {"pre": 0, "post": .3}),
  ("say", "j1302", B, "Sand? In my snack box? Crunchy!", {"pre": .4, "post": .5}),
  # ---- 14 · the key words

@@ -5,7 +5,7 @@
 const XDEFS8 = () => `${lg("mlB", [[0, "#7A7458"], [.55, "#5C5844"], [1, "#4A4636"]])}${lg("mlBelly", [[0, "#B8AE7E"], [1, "#8E8660"]])}${lg("batF", [[0, "#B07A48"], [1, "#7A4E2C"]])}${lg("batW", [[0, "#5E3E30"], [1, "#3E2820"]])}
   ${lg("macF", [[0, "#B8A488"], [1, "#8A7660"]])}${lg("catO", [[0, "#F2B26A"], [1, "#D98A3E"]])}${lg("stSh", [[0, "#8A7A4A"], [1, "#5E5432"]])}${lg("croc", [[0, "#7E8A5A"], [1, "#56603C"]])}${lg("trtl", [[0, "#7A8A4A"], [1, "#4E5A2E"]])}
   ${lg("bread", [[0, "#F2D7A4"], [1, "#E2BA7A"]])}${lg("crust", [[0, "#C9853E"], [1, "#9A5E26"]])}${lg("glass", [[0, "#fff", .55], [.5, "#fff", .15], [1, "#fff", .4]], 1, 0)}
-  <filter id="silF" x="-20%" y="-20%" width="140%" height="140%"><feColorMatrix type="matrix" values="0 0 0 0 .16  0 0 0 0 .12  0 0 0 0 .22  0 0 0 1 0"/></filter>
+  <filter id="silF" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 .14  0 0 0 0 .1  0 0 0 0 .2  0 0 0 1 0"/></filter>
   <pattern id="mlSc" width="16" height="13" patternUnits="userSpaceOnUse"><rect x="1.5" y="1.5" width="13" height="10" rx="5" fill="none" stroke="#2E2C22" stroke-width="1.6" opacity=".55"/></pattern>
   <pattern id="mlSc2" width="11" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(-8)"><rect x="1" y="1" width="9" height="7" rx="3.5" fill="none" stroke="#2E2C22" stroke-width="1.2" opacity=".5"/></pattern>`;
 

@@ -12,8 +12,7 @@ const uwRays = (t, col = "#fff", o = .13) => [0, 1, 2, 3, 4].map((i) => { const 
 // a several-stop colour ramp: stops [[u, "#hex"], ...]
 const ramp3 = (u, stops) => { for (let i = 1; i < stops.length; i++) if (u <= stops[i][0]) return hexL(stops[i - 1][1], stops[i][1], (u - stops[i - 1][0]) / (stops[i][0] - stops[i - 1][0])); return stops[stops.length - 1][1]; };
 
-if (PART === 1) { (() => {
-const HZ = 470;
+const HZ = 470;   // the scale journey's horizon (shared, so Part 2's recap can show a lit scale)
 // the scale field: rows of bead scales running away towards the lizard's head, curving down at the sides (the top of its back).
 // light: {base, lit, zl (the sunlight front: rows nearer than z = zl... are still in shade), warm 0..1, wet 0..1}, br = breathing (px)
 function scaleField(t, L) { const rows = 18, zm = Math.pow(1.17, rows - 1); let pts = ""; for (let i = 0; i <= 40; i++) { const x = -200 + i * 58, dx = (x - 960) / 960; pts += `${i ? "L" : "M"}${n2(x)} ${n2(HZ + 600 / zm + L.br / zm + dx * dx * 520 / Math.sqrt(zm))}`; }
@@ -44,6 +43,7 @@ const lizHead = (L, lift = 0, tg = 0) => { const c = hexL(hexL(L.base, L.lit, L.
     ${[[-50, -40], [50, -40], [0, -70], [-26, -100], [26, -100], [0, -126]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="12" ry="7" fill="${sp}" opacity=".7"/>`).join("")}
     <ellipse cx="-74" cy="-58" rx="20" ry="16" fill="${dk}"/><ellipse cx="74" cy="-58" rx="20" ry="16" fill="${dk}"/><circle cx="-80" cy="-60" r="8" fill="#1E1C16"/><circle cx="80" cy="-60" r="8" fill="#1E1C16"/><circle cx="-82" cy="-63" r="2.5" fill="#fff"/><circle cx="78" cy="-63" r="2.5" fill="#fff"/>
     ${tg > .02 ? `<path d="M0 -160 l0 ${n2(-46 * tg)} m0 0 l-10 -14 m10 14 l10 -14" stroke="#C86A9A" stroke-width="5" fill="none" stroke-linecap="round"/>` : ""}</g>`; };
+if (PART === 1) { (() => {
 SC.shrink = (t, s) => { const td = MK("dive"), tShade = MK("shade"), tSun = MK("sun"), tNoon = MK("noon"), tLand = W("e1104", "lands") - .1, tSp = W("e1105", "splash") - .05, tHot = W("e1105", "hot") - .1, tCool = W("e1105", "cool") - .1;
   const crawl = ss(tSun - .2, tSun + 1.0, t) * (1 - ss(tSp - .3, tSp, t)), slowCrawl = ss(tShade, tShade + 1, t) * (1 - ss(tSun - .4, tSun, t)) * .25;
   // how far it has crawled (the world slides past); speeded up while it crawls into the sun and on to noon
@@ -80,5 +80,47 @@ SC.shrink = (t, s) => { const td = MK("dive"), tShade = MK("shade"), tSun = MK("
 })(); }
 
 if (PART === 2) { (() => {
-SC.shrink = (t, s) => `<rect width="1920" height="1080" fill="#3B2A8C"/>`;
+// the fur forest: hairs rising from warm skin. wind 0..1 bends them back and makes them flutter; you = the big hair in front (sun-yellow rim)
+function furForest(t, wind, o = {}) { let s = "", hs = []; const warmC = o.skin || "#E09A6A";
+  for (let i = 0; i < 110; i++) { const d = Math.pow(hash(i, 41), .8), x = -120 + hash(i, 43) * 2160, y = lerp(760, 1120, d), len = lerp(240, 980, d), th = lerp(3, 30, d); hs.push({ d, x, y, len, th, i }); }
+  hs.sort((a, b) => a.d - b.d);
+  s += `<rect x="-100" y="${n2(740)}" width="2120" height="420" fill="${warmC}" opacity=".95" filter="url(#b30)"/><ellipse cx="960" cy="1120" rx="1300" ry="300" fill="#FFC890" opacity=".55" filter="url(#b60)"/>`;
+  for (const h of hs) { const sw = .07 * Math.sin(t * 1.3 + h.i) * (1 - wind) + wind * (-.85 - .1 * Math.sin(t * 14 + h.i * 3)), lean = .12 * (hash(h.i, 47) - .5) + sw, tx = h.x + Math.sin(lean) * h.len, ty = h.y - Math.cos(lean) * h.len, cx = h.x + Math.sin(lean * .4) * h.len * .5, cy = h.y - h.len * .55;
+    const col = hexL(hexL("#D8A878", "#5E3820", h.d), o.tint || "#3B2A8C", (1 - h.d) * .45);
+    s += `<path d="M${n2(h.x)} ${n2(h.y)} Q${n2(cx)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="${col}" stroke-width="${n2(h.th)}" stroke-linecap="round"/>` + (h.d > .55 ? `<path d="M${n2(h.x + h.th * .2)} ${n2(h.y - 20)} Q${n2(cx + h.th * .2)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#F4D2A8" stroke-width="${n2(h.th * .22)}" stroke-linecap="round" opacity=".45"/>` : ""); }
+  // you: one hair, near the middle, rimmed in sun-yellow
+  const ls = .05 * Math.sin(t * 1.1) * (1 - wind) - .9 * wind - .08 * wind * Math.sin(t * 16), L = 920, tx = 980 + Math.sin(ls) * L, ty = 1150 - Math.cos(ls) * L, cx = 980 + Math.sin(ls * .4) * L * .5, cy = 1150 - L * .55;
+  s += `<path d="M980 1150 Q${n2(cx)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="${P.sun}" stroke-width="54" stroke-linecap="round" opacity=".55" filter="url(#b10)"/><path d="M980 1150 Q${n2(cx)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#6A4024" stroke-width="38" stroke-linecap="round"/><path d="M972 1130 Q${n2(cx - 8)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#E8C090" stroke-width="9" stroke-linecap="round" opacity=".6"/>`;
+  return s; }
+// the world seen from the roost, upside down (the bat hangs head down): the ground is at the top, the sky below it
+const upsideWorld = (t) => `<g filter="url(#b4)"><g transform="translate(0 1080) scale(1 -1)">${bg("palmvalley")}</g></g><rect width="1920" height="1080" fill="#3B2A8C" opacity=".18"/>`;
+// the night flight: stars, the city's glow, palms and lamps rushing past below; d = distance flown
+function flightWorld(t, d) { let s = `<rect width="1920" height="1080" fill="url(#gdSkyN)"/>` + dusks(t, 30, 9) + `<circle cx="1400" cy="700" r="460" fill="#FF9E6B" opacity=".25" filter="url(#b60)"/>`;
+  for (let layer = 0; layer < 3; layer++) { const sp = [.6, 1.4, 3.2][layer], k = [.4, .6, .9][layer], y0 = [640, 720, 820][layer]; for (let i = 0; i < 8; i++) { const x = ((i * 330 + 97 * layer - d * 900 * sp) % 2640 + 2640) % 2640 - 360;
+      s += TF(x, y0 + 20 * hash(i, layer), k, palmTree(560 + 200 * hash(i, 3 + layer), rndm(200 + i + layer * 9), (i + layer) % 2, 1, 0)); if (i % 3 === 0) s += `<circle cx="${n2(x + 120 * k)}" cy="${n2(y0 - 200 * k)}" r="${n2(60 * k)}" fill="#FFD27A" opacity=".5" filter="url(#b10)"/>`; }
+    s += `<rect x="0" y="${y0}" width="1920" height="${1080 - y0}" fill="${["#2E2A5A", "#26304A", "#1E2A3A"][layer]}"/>`; }
+  for (let i = 0; i < 26; i++) { const v = ((hash(i, 61) + t * 1.4) % 1), y = 120 + hash(i, 63) * 700, x = 2000 - v * 2400; s += `<path d="M${n2(x)} ${n2(y)} h${n2(160 + 140 * hash(i, 65))}" stroke="#BFE6FF" stroke-width="${n2(2 + 4 * hash(i, 67))}" stroke-linecap="round" opacity="${n2(.5 * Math.sin(Math.PI * v))}"/>`; }
+  return s; }
+// the wing, opening at the side like a sail: thin skin between long finger bones, the dusk light shining through. u 0..1 open
+function wingSail(t, u, fl = 0) { const wr = [1760, 330], tips = [[lerp(1900, 760, u), lerp(260, -60 - 60 * fl, u)], [lerp(1900, 620, u), lerp(330, 300 - 30 * fl, u)], [lerp(1900, 760, u), lerp(400, 640, u)], [lerp(1900, 1060, u), lerp(460, 900, u)]], root = [2060, 760];
+  let edge = `M${wr[0]} ${wr[1]} L${n2(tips[0][0])} ${n2(tips[0][1])}`; for (let i = 1; i < 4; i++) { const a = tips[i - 1], b = tips[i]; edge += ` Q${n2((a[0] + b[0]) / 2 + 120 * u)} ${n2((a[1] + b[1]) / 2)} ${n2(b[0])} ${n2(b[1])}`; } edge += ` Q${n2(tips[3][0] + 300)} ${n2(tips[3][1] + 20)} ${root[0]} ${root[1]}z`;
+  return `<path d="${edge}" fill="#6A4030" opacity="${n2(.82 * Math.min(1, u * 2))}"/><path d="${edge}" fill="#FF9A5A" opacity="${n2(.3 * u)}" style="mix-blend-mode:screen"/>${Array.from({ length: 14 }, (_, i) => `<path d="M${n2(lerp(wr[0], tips[1][0], .3 + .05 * i))} ${n2(lerp(wr[1], tips[1][1], .3 + .05 * i) + 40 * Math.sin(i))} q60 30 120 10" fill="none" stroke="#3A2218" stroke-width="2" opacity="${n2(.25 * u)}"/>`).join("")}
+    <path d="M${root[0]} ${root[1]} L${wr[0]} ${wr[1]}" stroke="#8A5A40" stroke-width="30" stroke-linecap="round"/>${tips.map((p) => `<path d="M${wr[0]} ${wr[1]} L${n2(p[0])} ${n2(p[1])}" stroke="#8A5A40" stroke-width="14" stroke-linecap="round"/>`).join("")}<path d="M${wr[0]} ${wr[1]} l-10 -40" stroke="#2A1A14" stroke-width="12" stroke-linecap="round"/>`; }
+SC.shrink = (t, s) => { const td = MK("dive"), tW = MK("wings"), tF = MK("fly"), tB = MK("back"), tTS = W("f503", "thin") - .1, tWarm = W("f504", "warm") - .2, tMilk = W("f505", "milk") - .2, tBaby = W("f505", "baby") - .3;
+  const fly = ss(tF, tF + .5, t) * (1 - ss(tB - .2, tB + .3, t)), back = ss(tB - .1, tB + .5, t), wingU = eio((t - tW) / 1.4) * (1 - ss(tF + .2, tF + .9, t));
+  let out = "";
+  // the roost (and back at the palm): upside down
+  if (fly < 1) out += OP(1 - fly, upsideWorld(t) + furForest(t, 0, { tint: "#3B2A8C" }) + (wingU > .01 ? wingSail(t, wingU) : ""));
+  // the flight: the hairs flatten in the wind; cool air; the glow under you stays warm
+  if (fly > 0 && back < 1) out += OP(fly * (1 - back), flightWorld(t, (t - tF) * .7) + `<rect width="1920" height="1080" fill="#5AA8FF" opacity=".16" style="mix-blend-mode:screen"/>` + furForest(t, .9, { tint: "#2E3A8C", skin: "#F0A060" }));
+  // back at the palm: the baby bat drinks its mother's milk (seen close, side on), in warm light under the leaf
+  if (back > 0) { const z = lerp(1.3, 1, eo((t - tB) / 1.6)); out += OP(back, `<rect width="1920" height="1080" fill="#2A2050"/><g filter="url(#b4)" opacity=".7">${bg("palmvalley")}</g><rect width="1920" height="1080" fill="#2A2050" opacity=".4"/><circle cx="960" cy="520" r="420" fill="#FFB070" opacity=".22" filter="url(#b60)"/>`
+      + `<g transform="translate(960 560) scale(${n2(z)}) translate(-960 -560)">${TF(960, -80, 2.4, `<path d="M-300 0 Q0 40 300 0" stroke="#22402F" stroke-width="30" fill="none"/>` + hangBat({ baby: ss(tBaby - .4, tBaby + .4, t), blink: ((t + .5) % 3.1) < .12 }))}</g>`)
+      + (t >= tMilk ? lineTag(t, tMilk, 1420, 640, 960 + 22 * 2.4 * 1, -80 + 150 * 2.4, "milk", 50, P.sun, P.ink) : ""); }
+  // the thermometer: the column stays in the middle the whole time (the air cools; the body under you stays warm)
+  const lev = .56 + .01 * Math.sin(t * 3);
+  out += TF(1790, 1050, .84, thermo(lev, 300, { glow: pulse(t, tWarm, .1, 1.6) }));
+  out += feelTag(t, td + 1.6, tW - .3, "upside down", 300, 960, "#fff") + feelTag(t, tTS, tF - .1, "thin skin, no feathers", 260, 760, "#FFE3C8") + speeded(t, tF + .3, tB - .3, 1500, 1010) + feelTag(t, tWarm, tB - .1, "still warm", 820, 960, "#FFD7A8")
+    + (fly > .5 ? OP(fly, `<g transform="translate(960 860)">${[0, 1, 2].map((i) => `<path d="M${-500 + i * 300} ${-20 * i} q80 -20 160 0" stroke="#BFE6FF" stroke-width="6" fill="none" opacity=".6"/>`).join("")}</g>`) : "");
+  return out + youTag(t, td + .8, "You: one hair") + wipe(t, s.t0, "#8A5A36") + wipe(t, s.t1, "#3B2A8C"); };
 })(); }

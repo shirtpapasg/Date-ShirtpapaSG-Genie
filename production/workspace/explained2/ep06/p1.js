@@ -171,7 +171,7 @@ SC.liz = (t, s) => { const L = "e1302"; return lizReveal(t, s, L, lakeView(t, { 
 
 /* ============ 14 · the cliffhanger: wings, at night ============ */
 SC.cliff = (t, s) => { const L = "e1401", dk = ss(s.t0, s.t0 + 3.2, t), tW = W(L, "wings") - .2, tQ = W(L, "bird") - .2, tP = W(L, "find") - .1, e = eio((t - s.t0) / 3), cam = [lerp(1.02, 1.12, e), lerp(960, 1300, e), lerp(560, 420, e)];
-  let bats = ""; for (let i = 0; i < 4; i++) { const t0 = tW - .6 + i * .45, u = (t - t0) / 4.2; if (u <= 0 || u > 1) continue; const x = lerp(1820 + 60 * (i % 2), 600 - 120 * i, u), y = lerp(330 + 30 * i, 90 + 40 * i, u) + 30 * Math.sin(u * 9 + i), k = lerp(.07, .13, u);
+  let bats = ""; for (let i = 0; i < 4; i++) { const t0 = tW - .6 + i * .45, u = (t - t0) / 4.2; if (u <= 0 || u > 1) continue; const x = lerp(1780 + 90 * (i % 2), 760 - 140 * i, u), y = lerp(250 + 40 * i, 170 + 50 * (i % 2), u) + 26 * Math.sin(u * 9 + i), k = lerp(.12, .22, u);
     bats += TF(x, y, k, `<g filter="url(#silF)">${fruitBat({ wings: 1, flap: t * 9 + i })}</g>`); }
   return lakeView(t, { dusk: dk, lampLit: ss(s.t0 + 1.5, s.t0 + 2.5, t), items: bats }, cam) + speeded(t, s.t0 + .1, s.t0 + 3.4)
     + ["pip", "basil", "momo"].map((w, i) => buddy(w, 190 + i * 250, 1062, 185, t, { aura: true, tag: false, in: s.t0 + .15 + i * .1, poses: [[s.t0, "sit"], [tW + .4, "surprised"], [tQ, w === "basil" ? "arms_crossed" : "thinking"]] })).join("")
