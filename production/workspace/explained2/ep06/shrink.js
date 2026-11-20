@@ -1,97 +1,84 @@
-// shrink.js: the first-person journeys (the series' signature). The camera IS the animal.
-// Part 1: you are the frog. On a leaf, on land (moist skin); jump; under water (strong legs, webbed feet; you breathe through your skin); back on
-//         land (lungs as well). Every action is from the book's own sentences about amphibians (2.11, 2.12).
-// Part 2: you are the mudskipper. In the water (gills); the tide goes out; you push with your fins and hop onto the mud; on land you breathe
-//         through your skin; fins, scales and gills: still a fish (2.15, 2.16, 2.16a).
+// shrink.js: the first-person journeys (the series' signature). The camera IS the thing.
+// Part 1: you are one scale on a monitor lizard's back. You look along its back: rows of scales like roof tiles, rising and falling as it
+//         breathes, its head far ahead. Early morning in the shade (cool: the thermometer is low, the lizard is slow); it crawls into the sun
+//         (a line of sunlight sweeps across the scales and lands on you: you warm up); noon (too hot); splash, into the lake (you cool down).
+//         Your warmth follows the place you are in: the book's word for it (cold-blooded) comes after, on the Mark Sentence card.
+// Part 2: you are one hair on a fruit bat's back (fur like a forest, upside down; the wings: thin skin, no feathers; out into the cool night,
+//         but the body under you stays warm; back at the palm, a baby bat drinks its mother's milk).
 const hexL = (a, b, u) => { const pa = [1, 3, 5].map((i) => parseInt(a.substr(i, 2), 16)), pb = [1, 3, 5].map((i) => parseInt(b.substr(i, 2), 16)); return "#" + pa.map((v, i) => Math.round(lerp(v, pb[i], clamp(u))).toString(16).padStart(2, "0")).join(""); };
 const youTag = (t, t0, txt) => OP(ramp(t, t0, .4), tpill(60 + tw(txt, 34, 600) / 2 + 26, 76, txt, 34, P.ink, "#fff", { w: 600 }));
-// a soft tag that names what you feel (bottom centre, above the bottom fifth)
-const feelTag = (t, t0, t1, txt, y = 790, x = 960) => t < t0 || t > t1 + .3 ? "" : TF(x, y, spring(t, t0, .45) * (1 - ramp(t, t1, .25)), tpill(0, 0, txt, 46, "#fff", P.ink, { w: 700 }));
-// light rays under water
+const feelTag = (t, t0, t1, txt, y = 790, x = 960, fill = "#fff", ink = P.ink) => t < t0 || t > t1 + .3 ? "" : TF(x, y, spring(t, t0, .45) * (1 - ramp(t, t1, .25)), tpill(0, 0, txt, 46, fill, ink, { w: 700 }));
 const uwRays = (t, col = "#fff", o = .13) => [0, 1, 2, 3, 4].map((i) => { const x = 200 + i * 400 + 60 * Math.sin(t * .5 + i * 1.3); return `<path d="M${n2(x)} -20 L${n2(x + 150)} -20 L${n2(x - 120 + 80 * Math.sin(t * .3 + i))} 1100 L${n2(x - 380)} 1100z" fill="${col}" opacity="${n2(o * (.6 + .4 * Math.sin(t * .8 + i * 2)))}"/>`; }).join("");
-// specks drifting past as you move forward: d = how far you have swum (in "screens")
-const uwSpecks = (d, n = 36, col = "#fff") => { let s = ""; for (let i = 0; i < n; i++) { const an = hash(i, 3) * Math.PI * 2, v = (hash(i, 7) + d * (.6 + .8 * hash(i, 5))) % 1, r = 60 + v * v * 1300, x = 960 + Math.cos(an) * r, y = 470 + Math.sin(an) * r * .62; s += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(2 + 9 * v)}" fill="${col}" opacity="${n2(.5 * Math.sin(Math.PI * v))}"/>`; } return s; };
+// a several-stop colour ramp: stops [[u, "#hex"], ...]
+const ramp3 = (u, stops) => { for (let i = 1; i < stops.length; i++) if (u <= stops[i][0]) return hexL(stops[i - 1][1], stops[i][1], (u - stops[i - 1][0]) / (stops[i][0] - stops[i - 1][0])); return stops[stops.length - 1][1]; };
 
 if (PART === 1) { (() => {
-const HZ = 360;
-// your own front foot (four toes with round pads), reaching up from the bottom corner. sd = -1 left, 1 right
-const hand = (sd, wet = 0) => `<g transform="translate(${960 + sd * 470} 1130) scale(${sd} 1)"><path d="M90 60 Q40 -80 -70 -196" fill="none" stroke="#1F7A3A" stroke-width="150" stroke-linecap="round"/><path d="M90 60 Q40 -80 -70 -196" fill="none" stroke="#5CC455" stroke-width="134" stroke-linecap="round"/>
-  ${[[-200, -262, 0], [-150, -340, 1], [-60, -372, 2], [20, -330, 3]].map(([x, y]) => `<path d="M-70 -196 L${x} ${y}" stroke="#1F7A3A" stroke-width="58" stroke-linecap="round"/><path d="M-70 -196 L${x} ${y}" stroke="#5CC455" stroke-width="44" stroke-linecap="round"/><circle cx="${x}" cy="${y}" r="38" fill="#7BD957" stroke="#1F7A3A" stroke-width="7"/><ellipse cx="${x - 8}" cy="${y - 12}" rx="13" ry="9" fill="#fff" opacity="${n2(.5 + .4 * wet)}"/>`).join("")}
-  <path d="M44 -40 Q10 -110 -50 -170" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" opacity="${n2(.35 + .45 * wet)}"/>${[[30, -10], [-20, -120], [70, 30]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="13" ry="17" fill="#DDF4FF" opacity="${n2(.5 + .4 * wet)}" stroke="#fff" stroke-width="3"/>`).join("")}</g>`;
-// the world seen from the leaf: far bank, water, lily pads, reeds, the perch with the kingfisher, your leaf
-const landWorld = (t) => { let pads = "", reeds = ""; [[420, 470, 120], [1260, 450, 90], [1620, 560, 190], [200, 600, 210], [960, 520, 110]].forEach(([x, y, rx], i) => { pads += TF(x, y + 3 * Math.sin(t + i), 1, lilyPad(rx, i % 2 ? "#6FD06A" : "#5CC455")); });
-  [[40, 30], [150, 24], [260, 18], [1700, 22], [1800, 30], [1890, 26]].forEach(([x, w], i) => { const sw = 26 * Math.sin(t * .7 + i); reeds += `<path d="M${x} 1100 Q${n2(x + sw * .4)} 500 ${n2(x + sw + (i % 2 ? 60 : -40))} -40" fill="none" stroke="${i % 2 ? "#2F8A4C" : "#3F9A52"}" stroke-width="${w}" stroke-linecap="round"/>`; });
-  return `<rect x="-400" y="-400" width="2720" height="${HZ + 400}" fill="url(#wSky)"/><circle cx="1380" cy="110" r="230" fill="#FFF3B8" opacity=".8" filter="url(#b60)"/>
-  <g filter="url(#b4)">${Array.from({ length: 16 }, (_, i) => `<circle cx="${-100 + i * 140}" cy="${HZ - 30 - 30 * hash(i, 2)}" r="${90 + 50 * hash(i, 4)}" fill="${i % 3 ? "#4FA26A" : "#3F8F5C"}"/>`).join("")}</g>
-  <rect x="-400" y="${HZ}" width="2720" height="1200" fill="url(#wWater)"/><path d="M-400 ${HZ + 2} H2320" stroke="#fff" stroke-width="5" opacity=".5"/>
-  <g fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".4">${[0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const x = ((i * 291 + t * (20 + i * 4)) % 2200) - 140, y = HZ + 40 + ((i * 83) % 420); return `<path d="M${n2(x)} ${y} q${30 + i * 4} -9 ${60 + i * 8} 0"/>`; }).join("")}</g>
-  <g transform="translate(1150 ${HZ + 150}) scale(.55)"><path d="M0 0 Q-14 -150 8 -320" fill="none" stroke="#4E3A2A" stroke-width="34" stroke-linecap="round"/><path d="M6 -300 Q-50 -320 -150 -308" fill="none" stroke="#4E3A2A" stroke-width="24" stroke-linecap="round"/>${TF(-70, -318, .62, kingfisher({ bob: 1.5 * Math.sin(t * 1.7) }))}</g>
-  ${pads}<g filter="url(#b2)">${reeds}</g>`; };
-const myLeaf = () => `<ellipse cx="960" cy="1210" rx="1250" ry="400" fill="#66CC5C" stroke="#2F8A3E" stroke-width="10"/><g stroke="#2F8A3E" stroke-width="7" opacity=".45" stroke-linecap="round">${[-1000, -640, -320, 0, 320, 640, 1000].map((x) => `<path d="M960 1090 L${960 + x} ${n2(840 + Math.abs(x) * .1)}"/>`).join("")}</g><ellipse cx="700" cy="930" rx="300" ry="34" fill="#fff" opacity=".2"/>`;
-// your own webbed hind foot, sweeping in beside you as you kick. v = 0..1 through one kick
-const webFoot = (sd, v) => { if (v <= 0 || v >= 1) return ""; const up = v < .3 ? eo(v / .3) : 1 - ei((v - .3) / .7), spd = v < .3 ? .5 + .5 * eo(v / .3) : 1, x = 960 + sd * (640 - 120 * (v > .3 ? ei((v - .3) / .7) : 0)), y = 1420 - 520 * up, a = [-.5, -.17, .17, .5].map((q) => q * spd), L = 330;
-  const tp = a.map((q) => [Math.sin(q) * L, -Math.cos(q) * L]);
-  return `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(sd * -16)})"><path d="M0 60 V160" stroke="#1F7A3A" stroke-width="110" stroke-linecap="round"/><path d="M0 60 V160" stroke="#5CC455" stroke-width="94" stroke-linecap="round"/><path d="M0 40 L${tp.map((p) => n2(p[0]) + " " + n2(p[1])).join(" L")}z" fill="#B8EE86" stroke="#1F7A3A" stroke-width="8" stroke-linejoin="round" opacity=".95"/>
-    ${tp.map((p) => `<path d="M0 40 L${n2(p[0])} ${n2(p[1])}" stroke="#1F7A3A" stroke-width="40" stroke-linecap="round"/><path d="M0 40 L${n2(p[0])} ${n2(p[1])}" stroke="#5CC455" stroke-width="28" stroke-linecap="round"/><circle cx="${n2(p[0])}" cy="${n2(p[1])}" r="26" fill="#7BD957" stroke="#1F7A3A" stroke-width="6"/>`).join("")}</g>`; };
-SC.shrink = (t, s) => { const td = MK("dive"), tJ = MK("jump"), tU = MK("under"), tUp = MK("up"), tSp = tJ + .85, tBr = tUp + 1.05, tM = W("a903", "moist") - .1;
-  const land = t < tSp || t >= tBr; let out = "";
-  if (land) { const e = eio((t - td) / 2.0), back = t >= tBr, ju = back ? 0 : clamp((t - tJ) / .85), bq = back ? 1 + .012 * Math.sin((t - tBr) * 5) : 1 + .004 * Math.sin(t * 2), bob = back ? 30 * wob(t, tBr, .7) : 0;
-    const z = lerp(.72, 1, e) * (1 + 1.3 * ei(ju)) * bq, py = 130 * Math.sin(Math.PI * Math.min(1, ju * 1.15)) * (ju < .87 ? 1 : 0) - 520 * ei(clamp((ju - .5) / .5)) + bob, wet = t >= tM ? .5 + .5 * Math.sin((t - tM) * 4) : 0, hd = 700 * ei(ju * 2) + 260 * (1 - e) + (back ? 500 * (1 - eo((t - tBr) / .6)) : 0);
-    out += `<g transform="translate(960 ${n2(HZ + py)}) scale(${n2(z * 1000) / 1000}) translate(-960 ${-HZ})">${landWorld(t)}</g>`
-      + `<g transform="translate(0 ${n2(hd * 1.3)})">${myLeaf()}</g><g transform="translate(0 ${n2(hd + 6 * Math.sin(t * 2))})">${hand(-1, wet)}${hand(1, wet)}</g>`;
-    if (t >= tM && t < tJ) { let sp = ""; for (let i = 0; i < 10; i++) { const sd = i % 2 ? 1 : -1, v = ((t - tM) * .8 + i * .31) % 1, x = 960 + sd * (430 + 200 * hash(i, 3)), y = 760 + 260 * hash(i, 5); sp += `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(.7 * Math.sin(Math.PI * v))}) rotate(${n2(60 * v)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`; } out += sp; }
-    out += feelTag(t, tM, LE("a903") + .5, "moist skin") + (back ? feelTag(t, W("a907", "lungs") - .2, LE("a907") + .4, "lungs and skin") + feelTag(t, W("a908", "land") - .1, s.t1, "land", 800, 560) + feelTag(t, W("a908", "water") - .1, s.t1, "water", 520, 1320) : "");
-    if (back) { const u = t - tBr; for (let i = 0; i < 9; i++) { const x = 160 + hash(i, 3) * 1600, y0 = 80 + hash(i, 5) * 500, y = y0 + 500 * u * u * (.4 + hash(i, 7)); if (y < 1100) out += `<ellipse cx="${n2(x)}" cy="${n2(y)}" rx="${n2(14 + 12 * hash(i, 9))}" ry="${n2(20 + 22 * hash(i, 9))}" fill="#DDF4FF" opacity="${n2(.6 * clamp(1.4 - u * .6))}" stroke="#fff" stroke-width="3"/>`; } }
-  } else { // under water
-    const u = t - tSp, rise = eio((t - tUp) / 1.05), kicks = []; for (let k = tU + .5; k < tUp - .3; k += 1.35) kicks.push(k);
-    const d = .1 * u + kicks.reduce((a, k) => a + .22 * eo((t - k - .25) / .7), 0), surge = kicks.reduce((a, k) => Math.max(a, pulse(t, k + .3, .08, .5)), 0), sy = 900 * rise, zz = 1 + .05 * surge;
-    let pads = "", plants = ""; [[300, 150], [900, 110], [1500, 170], [1900, 130]].forEach(([x, rx], i) => { const xx = 960 + (x - 960) * (1 + d * 1.2), sc = 1 + d * .8; pads += `<path d="M${n2(xx)} ${n2(40 + 10 * i)} Q${n2(xx + 40 * Math.sin(t + i))} 500 ${n2(xx - 60 + 30 * i)} 1100" fill="none" stroke="#2F7F5C" stroke-width="${n2(8 * sc)}" opacity=".6"/><ellipse cx="${n2(xx)}" cy="${n2(34 + 8 * i)}" rx="${n2(rx * sc)}" ry="${n2(rx * .2 * sc)}" fill="#1F6F4C" opacity=".85"/>`; });
-    for (let i = 0; i < 12; i++) { const side = i % 2 ? 1 : -1, v = (hash(i, 2) + d * 1.1) % 1, x = 960 + side * (140 + v * v * 1200), h = 180 + 500 * v, sw = 30 * Math.sin(t * 1.2 + i); plants += `<path d="M${n2(x)} 1100 Q${n2(x + sw)} ${n2(1100 - h * .6)} ${n2(x - sw * .6)} ${n2(1100 - h)}" fill="none" stroke="${i % 3 ? "#2F8A5C" : "#49A86A"}" stroke-width="${n2(10 + 26 * v)}" stroke-linecap="round" opacity="${n2(.5 + .5 * v)}"/>`; }
-    const fv = clamp((t - tU - 1.2) / 4.5), fish = fv > 0 && fv < 1 ? TF(lerp(1500, 240, fv), 420 + 40 * Math.sin(t * 2), lerp(.35, 1.0, fv), `<g transform="scale(-1 1)">${fishG({ wag: t })}</g>`) : "";
-    out += `<g transform="translate(960 ${n2(470 + sy)}) scale(${n2(zz)}) translate(-960 -470)"><rect x="-200" y="-1200" width="2320" height="2400" fill="url(#uwF)"/><rect x="-200" y="-1200" width="2320" height="1210" fill="#EAFBFF"/><g fill="none" stroke="#fff" stroke-width="7" opacity=".7">${[0, 1, 2, 3, 4, 5].map((i) => `<path d="M${n2(((i * 400 + t * 60) % 2400) - 240)} ${n2(16 + 6 * Math.sin(t * 2 + i))} q60 -16 120 0 q60 16 120 0"/>`).join("")}</g>
-      ${uwRays(t)}${pads}<g filter="url(#b2)">${fish}</g>${plants}${uwSpecks(d)}</g>`
-      + kicks.map((k) => webFoot(-1, (t - k) / 1.0) + webFoot(1, (t - k) / 1.0)).join("")
-      + feelTag(t, W("a905", "webbed") - .2, LE("a905") + .5, "strong legs, webbed feet", 560) + feelTag(t, W("a906", "breathe") - .2, tUp, "You breathe through your skin", 560)
-      + `<rect width="1920" height="1080" fill="none" stroke="#BFF0E6" stroke-width="${n2(60 + 30 * Math.sin(t * 2.4))}" opacity="${n2(t >= LT("a906") ? .22 : 0)}" filter="url(#b30)"/>`;
-    // the splash you make going in
-    if (u < 1.1) { let dr = ""; for (let i = 0; i < 26; i++) { const an = hash(i, 3) * Math.PI * 2, r = (120 + 900 * hash(i, 5)) * eo(u / .7); dr += `<circle cx="${n2(960 + Math.cos(an) * r)}" cy="${n2(500 + Math.sin(an) * r * .7)}" r="${n2((10 + 26 * hash(i, 7)) * (1 - u / 1.1))}" fill="#fff" opacity=".9"/>`; }
-      out += `<rect width="1920" height="1080" fill="#fff" opacity="${n2(clamp(1 - u / .35))}"/>` + dr; }
-  }
-  const fl = pulse(t, tBr, .12, .5);
-  return out + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.9 * fl)}"/>` + youTag(t, td + 1.0, "You: a frog") + wipe(t, s.t0, "#DFF6E6") + wipe(t, s.t1, "#DFF6E6"); };
+const HZ = 470;
+// the scale field: rows of bead scales running away towards the lizard's head, curving down at the sides (the top of its back).
+// light: {base, lit, zl (the sunlight front: rows nearer than z = zl... are still in shade), warm 0..1, wet 0..1}, br = breathing (px)
+function scaleField(t, L) { const rows = 18, zm = Math.pow(1.17, rows - 1); let pts = ""; for (let i = 0; i <= 40; i++) { const x = -200 + i * 58, dx = (x - 960) / 960; pts += `${i ? "L" : "M"}${n2(x)} ${n2(HZ + 600 / zm + L.br / zm + dx * dx * 520 / Math.sqrt(zm))}`; }
+  let s = `<path d="${pts} L2120 1200 L-200 1200z" fill="${hexL(hexL(L.base, "#000000", .3), L.haze, .25)}"/>`;
+  for (let j = rows - 1; j >= 0; j--) { const z = Math.pow(1.17, j), y0 = HZ + 600 / z + L.br * (1 / z), w = 236 / z, h = 150 / z, off = (j % 2) * .5, nc = Math.ceil(1920 / w / 2) + 3, haze = .55 * Math.pow(1 - 1 / z, 1.6);
+    for (let c = -nc; c <= nc; c++) { const x = 960 + (c + off) * w, dx = (x - 960) / 960, y = y0 + dx * dx * 520 / Math.sqrt(z), sk = 1 - .25 * dx * dx; if (y > 1180 || x < -w || x > 1920 + w) continue;
+      const lit = z > L.zl ? 1 : clamp(1 - (L.zl - z) * 1.6), cc = c + 40, spot = (j % 4 === 1 && cc % 5 < 2) || (j % 4 === 3 && (cc + 2) % 5 < 2), ridge = Math.abs(c + off) < .6;
+      let col = hexL(spot ? L.spot : L.base, L.lit, lit * L.warm); col = hexL(col, hash(c * 13 + j * 5, 3) > .5 ? "#000000" : "#FFFFFF", .06); col = hexL(col, L.haze, haze);
+      const dkc = hexL(hexL(col, "#000000", .26 + .12 * Math.abs(dx)), L.haze, haze * .8), hw = w * (ridge ? .56 : .5), hh = h * (ridge ? .62 : .54);
+      s += `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(dx * 16)}) scale(${n2(sk)} 1)"><rect x="${n2(-hw)}" y="${n2(-hh + h * .12)}" width="${n2(2 * hw)}" height="${n2(2 * hh)}" rx="${n2(Math.min(hw, hh) * .9)}" fill="${dkc}"/><rect x="${n2(-hw * .92)}" y="${n2(-hh)}" width="${n2(2 * hw * .92)}" height="${n2(2 * hh * .9)}" rx="${n2(Math.min(hw, hh) * .85)}" fill="${col}"/>`
+        + (w > 26 ? `<ellipse cx="${n2(-w * .1)}" cy="${n2(-hh * .55)}" rx="${n2(hw * .5)}" ry="${n2(hh * .22)}" fill="#fff" opacity="${n2((.1 + .18 * lit * L.warm + .4 * L.wet) * (1 - haze))}"/>` : "") + `</g>`; } }
+  return s; }
+// your own scale: the big tile under the camera, at the bottom of the frame (a faint sun-yellow rim says "this is you")
+const myScale = (L, glow) => `<g transform="translate(960 1160)"><ellipse rx="620" ry="250" fill="${hexL(hexL(L.base, L.lit, L.warm), "#000000", .2)}"/><ellipse cy="-30" rx="580" ry="210" fill="${hexL(L.base, L.lit, L.warm)}"/><ellipse cx="-120" cy="-150" rx="260" ry="40" fill="#fff" opacity="${n2(.1 + .25 * L.wet)}"/>
+  <ellipse cy="-30" rx="580" ry="210" fill="none" stroke="${P.sun}" stroke-width="10" opacity="${n2(.35 + .5 * glow)}"/>${glow > .02 ? `<ellipse cy="-30" rx="600" ry="230" fill="#FFB347" opacity="${n2(.35 * glow)}" filter="url(#b30)"/>` : ""}</g>`;
+// the world beyond the lizard's back: the sky, the far bank and the lake, and giant grass blades (with dew) that slide past as it crawls. d = distance crawled
+function worldBack(t, d, Lw) { let s = `<rect x="-200" y="-200" width="2320" height="${HZ + 260}" fill="${Lw.sky}"/>`;
+  s += `<circle cx="${Lw.sunX}" cy="${Lw.sunY}" r="${Lw.sunR * 3}" fill="${Lw.sunC}" opacity="${n2(Lw.sunA * .5)}" filter="url(#b60)"/><circle cx="${Lw.sunX}" cy="${Lw.sunY}" r="${Lw.sunR}" fill="#FFFBEA" opacity="${n2(Lw.sunA)}"/>`;
+  s += `<g filter="url(#b10)">${Array.from({ length: 16 }, (_, i) => `<circle cx="${n2(((i * 170 - d * 40) % 2400 + 2400) % 2400 - 240)}" cy="${n2(HZ - 60 - 40 * hash(i, 2))}" r="${n2(90 + 60 * hash(i, 4))}" fill="${Lw.trees}"/>`).join("")}</g><rect x="-200" y="${HZ - 40}" width="2320" height="300" fill="${Lw.ground}"/>`;
+  // giant grass blades with dew drops, near the lizard's sides: they come from far (small, near the middle) and slide out to the edges
+  for (let i = 0; i < 14; i++) { const sd = i % 2 ? 1 : -1, v = ((hash(i, 5) + d * .22) % 1), x = 960 + sd * (260 + 1100 * v * v), sc = .25 + 1.6 * v * v, y = HZ + 40 + 300 * v * v, sw = 10 * Math.sin(t * .8 + i), h = 520 * sc, col = i % 3 ? Lw.blade : Lw.blade2;
+    s += `<path d="M${n2(x - 26 * sc)} ${n2(y + 40)} Q${n2(x + sw)} ${n2(y - h * .5)} ${n2(x + sd * 60 * sc + sw * 2)} ${n2(y - h)} Q${n2(x + 10 * sc)} ${n2(y - h * .5)} ${n2(x + 26 * sc)} ${n2(y + 40)}z" fill="${col}" opacity="${n2(Math.min(1, v * 3))}"/>`;
+    if (Lw.dew > .02) s += `<circle cx="${n2(x + sd * 18 * sc + sw * .7)}" cy="${n2(y - h * .55)}" r="${n2(15 * sc)}" fill="#E8F6FF" opacity="${n2(.85 * Lw.dew * Math.min(1, v * 3))}" stroke="#fff" stroke-width="${n2(3 * sc)}"/><circle cx="${n2(x + sd * 18 * sc + sw * .7 - 5 * sc)}" cy="${n2(y - h * .55 - 5 * sc)}" r="${n2(4 * sc)}" fill="#fff" opacity="${n2(Lw.dew * Math.min(1, v * 3))}"/>`; }
+  return s; }
+// the back of the lizard's head and neck, far ahead along its back (it lifts a little as it crawls)
+const lizHead = (L, lift = 0, tg = 0) => { const c = hexL(hexL(L.base, L.lit, L.warm * .9), L.haze, .2), dk = hexL(c, "#000000", .28), sp = hexL(hexL(L.spot, L.lit, L.warm * .9), L.haze, .2);
+  return `<g transform="translate(960 ${n2(HZ + 30 - lift)})"><path d="M-190 40 Q-150 -20 -96 -34 Q-60 -100 -30 -150 Q0 -172 30 -150 Q60 -100 96 -34 Q150 -20 190 40z" fill="${dk}"/><path d="M-160 40 Q-126 -14 -84 -28 Q-52 -92 -24 -140 Q0 -158 24 -140 Q52 -92 84 -28 Q126 -14 160 40z" fill="${c}"/>
+    ${[[-50, -40], [50, -40], [0, -70], [-26, -100], [26, -100], [0, -126]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="12" ry="7" fill="${sp}" opacity=".7"/>`).join("")}
+    <ellipse cx="-74" cy="-58" rx="20" ry="16" fill="${dk}"/><ellipse cx="74" cy="-58" rx="20" ry="16" fill="${dk}"/><circle cx="-80" cy="-60" r="8" fill="#1E1C16"/><circle cx="80" cy="-60" r="8" fill="#1E1C16"/><circle cx="-82" cy="-63" r="2.5" fill="#fff"/><circle cx="78" cy="-63" r="2.5" fill="#fff"/>
+    ${tg > .02 ? `<path d="M0 -160 l0 ${n2(-46 * tg)} m0 0 l-10 -14 m10 14 l10 -14" stroke="#C86A9A" stroke-width="5" fill="none" stroke-linecap="round"/>` : ""}</g>`; };
+SC.shrink = (t, s) => { const td = MK("dive"), tShade = MK("shade"), tSun = MK("sun"), tNoon = MK("noon"), tLand = W("e1104", "lands") - .1, tSp = W("e1105", "splash") - .05, tHot = W("e1105", "hot") - .1, tCool = W("e1105", "cool") - .1;
+  const crawl = ss(tSun - .2, tSun + 1.0, t) * (1 - ss(tSp - .3, tSp, t)), slowCrawl = ss(tShade, tShade + 1, t) * (1 - ss(tSun - .4, tSun, t)) * .25;
+  // how far it has crawled (the world slides past); speeded up while it crawls into the sun and on to noon
+  const d = .05 * (t - td) + 1.6 * clamp((t - tSun) / (tNoon - tSun)) + .6 * clamp((t - tNoon) / 2) , gait = Math.sin((t - td) * (crawl > .1 ? 5.2 : 1.4)), sway = (crawl * 3.2 + slowCrawl * 1.2) * gait;
+  const wet = ss(tSp, tSp + .4, t), warm = t < tSun ? 0 : clamp(ss(tLand - .8, tLand + 1.6, t) * .75 + .25 * ss(tNoon - .4, tNoon + .8, t)) * (1 - .85 * ss(tSp + .2, tCool + 1.2, t));
+  const zl = t < W("e1104", "sunlight") - 1.2 ? 99 : lerp(14, -1, eio((t - (W("e1104", "sunlight") - 1.2)) / (tLand - W("e1104", "sunlight") + 1.4)));
+  const noon = ss(tNoon - .3, tNoon + .8, t) * (1 - wet), br = 14 * Math.sin((t - td) * 2.1);
+  const L = { base: hexL("#5E6450", "#5A6E58", wet * .7), spot: hexL("#C9BE86", "#9EB08A", wet), haze: t < tSun ? "#9FB4CC" : hexL("#E8D8B0", "#F4EEDC", noon), lit: hexL("#E8A040", "#F4C870", noon), warm: wet ? warm : (t < tSun ? 0 : warm), zl: wet > .5 ? 99 : zl, br, wet };
+  const Lw = { sky: ramp3(clamp((t - td) / (tNoon + 1 - td)), [[0, "#9FB4CC"], [.35, "#B4C6DA"], [.6, "#FFD9A0"], [1, "#FFF6DC"]]), sunX: lerp(300, 960, clamp((t - tSun + 1) / (tNoon - tSun + 2))), sunY: lerp(HZ - 60, 40, clamp((t - tSun + 1) / (tNoon - tSun + 2))), sunR: 70, sunC: "#FFE08A", sunA: t < tSun - 1 ? .15 : .9,
+    trees: hexL("#4E7A6A", "#5E9A5A", ss(tSun, tNoon, t)), ground: hexL("#6E8A6E", "#9CCB6A", ss(tSun, tNoon, t)), blade: hexL("#3E7A5A", "#5AAE4A", ss(tSun, tNoon, t)), blade2: hexL("#2E6A4A", "#4A9E40", ss(tSun, tNoon, t)), dew: 1 - ss(tSun, tSun + 2, t) };
+  let world = worldBack(t, d, Lw) + lizHead(L, 10 * crawl * Math.abs(gait), tongueAt(t, .5, 4.5));
+  world += `<g transform="translate(0 ${n2(sway * 4)})">${scaleField(t, L)}</g>`;
+  // tip forward into the lake: everything tilts and drops, then the water closes over
+  const tip = ss(tSp - .35, tSp + .25, t), rot = 8 * tip * (1 - wet * .6), dy = 160 * tip * (1 - wet);
+  let out = `<g transform="translate(960 600) rotate(${n2(sway + rot)}) translate(-960 ${n2(-600 + dy)}) ">${world}</g>`;
+  // the line of sunlight sweeping across the rows (a soft golden band at the light front)
+  if (zl < 20 && zl > -1 && !wet) { const yb = HZ + 600 / Math.max(.6, zl); out += `<rect x="-100" y="${n2(yb - 70)}" width="2120" height="140" fill="#FFD27A" opacity=".35" filter="url(#b30)" style="mix-blend-mode:screen"/>`; }
+  out += myScale(L, ss(tLand - .1, tLand + .5, t) * (1 - wet) + .3 * noon);
+  // light: cool shade early, golden sun, white noon; heat shimmer at noon
+  out += `<rect width="1920" height="1080" fill="#6A8AB0" opacity="${n2(.22 * (1 - ss(tSun, tLand, t)) * (1 - wet))}" style="mix-blend-mode:multiply"/>`;
+  out += `<rect width="1920" height="1080" fill="#FFE4A0" opacity="${n2(.16 * warm * (1 - wet) + .1 * noon)}" style="mix-blend-mode:screen"/>`;
+  if (noon > .05) for (let i = 0; i < 6; i++) { const y = 520 + i * 70 - ((t * 60) % 70); out += `<path d="M0 ${n2(y)} Q240 ${n2(y - 10)} 480 ${n2(y)} T960 ${n2(y)} T1440 ${n2(y)} T1920 ${n2(y)}" fill="none" stroke="#fff" stroke-width="3" opacity="${n2(.12 * noon)}"/>`; }
+  if (t < tLand + 1 && t > td) out += motes(t, 18, 9, t < tSun ? "#DCE8F4" : "#FFF0C0");
+  // under water: green-brown lake water, rays from the surface, bubbles streaming up past you
+  if (wet > .01) { let bub = ""; for (let i = 0; i < 34; i++) { const v = ((t - tSp) * (.35 + .4 * hash(i, 3)) + hash(i, 5)) % 1, x = 120 + hash(i, 7) * 1680 + 30 * Math.sin(t * 2 + i), y = 1120 - v * 1240, r = 6 + 22 * hash(i, 9); bub += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r)}" fill="none" stroke="#E8FFF4" stroke-width="${n2(2 + r * .12)}" opacity="${n2(.75 * Math.sin(Math.PI * v))}"/><circle cx="${n2(x - r * .3)}" cy="${n2(y - r * .3)}" r="${n2(r * .25)}" fill="#fff" opacity="${n2(.6 * Math.sin(Math.PI * v))}"/>`; }
+    out += OP(wet, `<rect width="1920" height="1080" fill="#4E7A62" opacity=".55" style="mix-blend-mode:multiply"/><rect width="1920" height="${n2(HZ - 40)}" fill="#9AD0B8" opacity=".55"/><path d="M0 ${HZ - 40} Q480 ${HZ - 60 + 10 * Math.sin(t * 2)} 960 ${HZ - 40} T1920 ${HZ - 40}" fill="none" stroke="#E8FFF4" stroke-width="6" opacity=".6"/>` + uwRays(t, "#E8FFE8", .14) + bub);
+    if (t - tSp < 1.0) { const u = t - tSp; let dr = ""; for (let i = 0; i < 30; i++) { const an = hash(i, 3) * Math.PI * 2, r = (120 + 900 * hash(i, 5)) * eo(u / .7); dr += `<circle cx="${n2(960 + Math.cos(an) * r)}" cy="${n2(560 + Math.sin(an) * r * .7)}" r="${n2((10 + 26 * hash(i, 7)) * (1 - u))}" fill="#fff" opacity=".9"/>`; } out += `<rect width="1920" height="1080" fill="#fff" opacity="${n2(clamp(1 - u / .35))}"/>` + dr; } }
+  // the thermometer (your body warmth): low in the shade, rising in the sun, high at noon, falling in the lake
+  const lev = lerp(.2, .62, ss(tLand - .6, tNoon - .2, t)) + .23 * ss(tNoon - .2, tNoon + 1.2, t) - .55 * ss(tSp + .3, tCool + 1.4, t);
+  out += TF(1790, 1050, .84, thermo(lev, 300, { glow: pulse(t, tLand, .1, 1.5) + pulse(t, tCool, .1, 1.5) }));
+  out += feelTag(t, W("e1102", "dry") - .1, tShade + .3, "dry and scaly", 820) + feelTag(t, W("e1103", "slow") - .2, tSun + .2, "The lizard is slow", 820, 960, "#DCE8F4")
+    + speeded(t, tSun + .2, tSp - .2, 1500, 1010) + (t >= tHot ? TF(1540, 240, spring(t, tHot, .45) * (1 - ramp(t, tSp + .1, .25)), `<g transform="rotate(${n2(t * 25)})">${sunHeat()}</g>` + tpill(0, 96, "too hot", 46, "#fff", P.ink, { w: 700 })) : "");
+  return out + youTag(t, td + .8, "You: one scale") + wipe(t, s.t0, "#E8D9B0") + wipe(t, s.t1, "#BFE6FF"); };
 })(); }
 
 if (PART === 2) { (() => {
-const HZ = 430;
-// your own front fin (a fan on a short arm), at the bottom corner. sd = -1 left, 1 right; push 0..1 = pressed down and back
-const pfin = (sd, push = 0, wet = 0) => { const R = 300, N = 7, a0 = -168 + 30 * push, a1 = -62 + 30 * push, pts = Array.from({ length: N }, (_, i) => { const a = (a0 + (a1 - a0) * i / (N - 1)) * Math.PI / 180, r = R * (i % 2 ? .93 : 1); return [Math.cos(a) * r, Math.sin(a) * r]; });
-  return `<g transform="translate(${960 + sd * 500} ${n2(985 + 60 * push)}) scale(${sd} 1)"><path d="M330 260 L0 0" stroke="#5E4E34" stroke-width="150" stroke-linecap="round"/><path d="M330 260 L0 0" stroke="#A8916C" stroke-width="132" stroke-linecap="round"/>${[[150, 110], [210, 170], [100, 60]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="8" fill="#8CE0F0" opacity=".9"/>`).join("")}
-  <path d="M0 0 L${pts.map((p) => n2(p[0]) + " " + n2(p[1])).join(" L")}z" fill="#E0CB98" stroke="#5E4E34" stroke-width="9" stroke-linejoin="round"/>${pts.map((p) => `<path d="M0 0 L${n2(p[0] * .96)} ${n2(p[1] * .96)}" stroke="#8A7450" stroke-width="7" stroke-linecap="round"/>`).join("")}
-  ${pts.slice(1, -1).map((p, i) => `<circle cx="${n2(p[0] * .62)}" cy="${n2(p[1] * .62 + 14)}" r="10" fill="#3A8DFF" opacity=".75"/>`).join("")}<circle r="58" fill="#A8916C"/><path d="M-200 -120 Q-120 -190 -20 -200" fill="none" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity="${n2(.2 + .5 * wet)}"/></g>`; };
-// the mud flat at low tide, seen from the mud: far trees, the boardwalk with the three buddies watching, pencil roots, big prop roots near you. d = how far you have hopped
-const mudWorld = (t, d) => { const z = 1 + .5 * d; let roots = "", pens = "", holes = "";
-  for (let i = 0; i < 16; i++) { const x = 960 + (hash(i, 3) - .5) * 2600, v = hash(i, 5), y = HZ + 30 + v * v * 500 * z, h = 30 + 130 * v * z; pens += `<path d="M${n2(x)} ${n2(y)} v${n2(-h)}" stroke="#5E4A36" stroke-width="${n2(6 + 14 * v)}" stroke-linecap="round"/>`; }
-  for (let i = 0; i < 10; i++) { const x = 960 + (hash(i, 13) - .5) * 2200, v = hash(i, 15), y = HZ + 60 + v * 560 * z; holes += `<ellipse cx="${n2(x)}" cy="${n2(y)}" rx="${n2(20 + 60 * v)}" ry="${n2(5 + 14 * v)}" fill="#4E3A2A" opacity=".5"/>`; }
-  [[-260, 1], [130, 1], [1650, -1], [2080, -1]].forEach(([x, sd], i) => { const sw = 6 * Math.sin(t * .6 + i); roots += `<path d="M${x + sd * 520} -80 Q${x + sd * 200 + sw} 200 ${x} 1150" fill="none" stroke="#3E2E20" stroke-width="${i % 2 ? 150 : 110}" stroke-linecap="round"/><path d="M${x + sd * 520} -80 Q${x + sd * 200 + sw} 200 ${x} 1150" fill="none" stroke="#6A5038" stroke-width="${i % 2 ? 126 : 90}" stroke-linecap="round"/>`; });
-  const discs = [["pip", P.pip], ["basil", P.basil], ["momo", P.momo]].map(([w, c], i) => `<circle cx="${800 + i * 110}" cy="${HZ - 92}" r="38" fill="${c}"/>` + buddy(w, 800 + i * 110, HZ - 62, 56, t, { tag: false, shadow: false, rim: false, still: true })).join("");
-  return `<rect x="-400" y="-400" width="2720" height="${HZ + 400}" fill="url(#wSky)"/><circle cx="500" cy="120" r="230" fill="#FFF3B8" opacity=".8" filter="url(#b60)"/>
-  <g filter="url(#b4)">${Array.from({ length: 16 }, (_, i) => `<circle cx="${-100 + i * 140}" cy="${HZ - 120 - 30 * hash(i, 2)}" r="${90 + 50 * hash(i, 4)}" fill="${i % 3 ? "#4FA26A" : "#3F8F5C"}"/>`).join("")}</g>
-  <rect x="-400" y="${HZ - 62}" width="2720" height="16" fill="url(#fWood)" stroke="#8A5E34" stroke-width="3"/>${Array.from({ length: 14 }, (_, i) => `<rect x="${-200 + i * 180}" y="${HZ - 60}" width="14" height="64" fill="#8A5E34"/>`).join("")}${discs}
-  <rect x="-400" y="${HZ}" width="2720" height="1200" fill="url(#wMud)"/><path d="M-400 ${HZ + 2} H2320" stroke="#C2A888" stroke-width="5" opacity=".6"/>
-  <g opacity=".5">${[0, 1, 2].map((i) => `<ellipse cx="${n2(960 + (i - 1) * 700 * z)}" cy="${n2(HZ + 120 + i * 60 * z)}" rx="${n2(260 * z)}" ry="${n2(22 * z)}" fill="#CFEBFF"/>`).join("")}</g>${holes}${pens}<g filter="url(#b2)">${roots}</g>`; };
-const uwMud = (t, d) => `<rect x="-200" y="-200" width="2320" height="1500" fill="url(#uwM)"/>${uwRays(t, "#FFF6D8", .1)}` + [[260, 90], [620, 50], [1400, 60], [1720, 110]].map(([x, w], i) => `<path d="M${n2(960 + (x - 960) * (1 + d))} -60 Q${n2(960 + (x - 960) * (1 + d) + 30 * Math.sin(t * .5 + i))} 500 ${n2(960 + (x - 960) * (1 + d) - 60 + 40 * i)} 1150" fill="none" stroke="#3E3424" stroke-width="${w}" stroke-linecap="round" opacity=".7"/>`).join("") + `<ellipse cx="960" cy="1160" rx="1400" ry="170" fill="#6A5A40"/>` + uwSpecks(d, 40, "#FFF6D8");
-SC.shrink = (t, s) => { const td = MK("dive"), tT = MK("tide"), tH = MK("hop"), L4 = "b704", hops = [W(L4, "hop") - .12, W(L4, "hop", 1) - .12], tPush = W(L4, "push") - .1, tG = W("b702", "gills") - .3, tSk = W("b705", "skin") - .4;
-  const e = eio((t - td) / 2.0), yW = lerp(-140, 1260, eio((t - tT - .3) / (tH - tT - .2))), dW = .12 * (t - td), dM = hops.reduce((a, h) => a + .5 * eio((t - h) / .45), 0), lift = hops.reduce((a, h) => a + hop(t, h, .45, 110), 0), land = hops.reduce((a, h) => Math.max(a, pulse(t, h + .45, .02, .35)), 0);
-  const push = Math.max(pulse(t, tPush + .2, .2, .6), ...hops.map((h) => pulse(t, h, .14, .3))), wet = t >= tSk ? .5 + .5 * Math.sin((t - tSk) * 4) : 0, onMud = t >= tH;
-  let out = `<g transform="translate(960 ${n2(HZ + lift * .8 - 10 * land)}) scale(${n2(lerp(.8, 1, e))}) translate(-960 ${-HZ})">${mudWorld(t, dM)}</g>`;
-  if (yW < 1200) out += `<clipPath id="tideC"><rect x="0" y="${n2(yW)}" width="1920" height="1400"/></clipPath><g clip-path="url(#tideC)">${uwMud(t, dW)}</g><path d="M-40 ${n2(yW)} ${Array.from({ length: 17 }, (_, i) => `q60 ${i % 2 ? 22 : -22} 120 0`).join(" ")}" fill="none" stroke="#fff" stroke-width="12" opacity=".8" transform="translate(${n2(-60 + 50 * Math.sin(t * 1.5))} 0)"/>`;
-  // water flowing past your gills (while you are under water)
-  if (t >= tG && t < tT + 1.5) { let fl = ""; for (let i = 0; i < 10; i++) { const sd = i % 2 ? 1 : -1, v = ((t - tG) * .7 + i * .21) % 1; fl += `<path d="M${n2(960 + sd * (260 + 520 * v))} ${n2(560 + 30 * (i % 5) + 60 * v)} h${sd * 80}" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity="${n2(.6 * Math.sin(Math.PI * v) * (1 - ramp(t, tT + 1.0, .5)))}"/>`; } out += fl; }
-  out += `<g transform="translate(0 ${n2(260 * (1 - e) - lift * .25)})">${pfin(-1, push, wet)}${pfin(1, push, wet)}</g>`;
-  if (land > .05) out += [-1, 1].map((sd) => [0, 1, 2].map((i) => `<circle cx="${n2(960 + sd * (420 + 90 * i + 160 * (1 - land)))}" cy="${n2(980 - 60 * i * (1 - land) - 40 * Math.sin(Math.PI * (1 - land)))}" r="${n2(16 - 4 * i)}" fill="#7A6048" opacity="${n2(land)}"/>`).join("")).join("");
-  if (t >= tSk) { let sp = ""; for (let i = 0; i < 10; i++) { const sd = i % 2 ? 1 : -1, v = ((t - tSk) * .8 + i * .31) % 1, x = 960 + sd * (520 + 240 * hash(i, 3)), y = 880 + 160 * hash(i, 5); sp += `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(.7 * Math.sin(Math.PI * v))}) rotate(${n2(60 * v)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`; } out += sp; }
-  const L6 = "b706", chips = ["fins", "scales", "gills"].map((w, i) => t >= W(L6, w) - .1 ? TF(660 + i * 300, 640, spring(t, W(L6, w) - .1, .4), tpill(0, 0, w, 50, "#fff", P.ink, { w: 700 })) : "").join("");
-  out += feelTag(t, tPush, hops[1] + .6, "You push with your fins", 300) + feelTag(t, tG, tT + .2, "You breathe through your gills", 420) + feelTag(t, tT + .5, tH - .1, "The tide goes out", 300) + feelTag(t, tSk, LT(L6) - .3, "You breathe through your skin", 640) + chips
-    + (t >= W(L6, "still") - .1 ? TF(960, 780, spring(t, W(L6, "still") - .1, .45), tpill(0, 0, "Still a fish!", 60, P.sun, P.ink, { w: 700 })) : "");
-  return out + youTag(t, td + 1.0, "You: a mudskipper") + wipe(t, s.t0, "#E6E9D0") + wipe(t, s.t1, "#E6E9D0"); };
+SC.shrink = (t, s) => `<rect width="1920" height="1080" fill="#3B2A8C"/>`;
 })(); }

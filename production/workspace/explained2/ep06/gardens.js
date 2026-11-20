@@ -9,26 +9,31 @@ const XDEFS6 = () => `${lg("gdSky", [[0, "#8CCBFF"], [.55, "#CDEBFF"], [1, "#FFF
   ${rg("gdLampG", [[0, "#FFF2C0", 1], [.35, "#FFD27A", .7], [1, "#FFB040", 0]])}${rg("gdSun", [[0, "#FFFBE6", 1], [.3, "#FFF0B0", .8], [1, "#FFE08A", 0]])}
   <filter id="gdB6" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>`;
 
-const GD = { liz: [700, 742], web: [262, 772], ants: [560, 902], hopper: [1060, 800], lamp: [1250, 902], palms: 1720, gazebo: [1380, 478] };
-// a rain tree: an umbrella of soft, layered canopy over a leaning trunk. origin = the foot of the trunk
-function rainTree(r, s = 1, dark = 0) { let c = "", hi = "";
-  const cols = dark ? ["#2F5E48", "#3A6E50", "#244E3E"] : ["#4FA45A", "#62B862", "#3E8E4E"];
-  for (let i = 0; i < 46; i++) { const a = r(), x = (-560 + a * 1120) * s, y = (-640 - 120 * Math.sin(Math.PI * a) + r() * 90) * s, rr = (70 + r() * 70) * s; c += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(rr)}" fill="${cols[i % 3]}"/>`; if (i % 2 === 0) hi += `<circle cx="${n2(x - rr * .25)}" cy="${n2(y - rr * .35)}" r="${n2(rr * .55)}" fill="${dark ? "#4F7E5E" : "#86CF70"}" opacity=".55"/>`; }
-  const tr = dark ? "#3A2E28" : "url(#gdTrunk)";
-  return `<path d="M${-40 * s} 0 Q${-30 * s} ${-260 * s} ${-90 * s} ${-480 * s} L${-60 * s} ${-500 * s} Q${10 * s} ${-300 * s} ${40 * s} 0z" fill="${tr}"/>
-    <path d="M${-70 * s} ${-430 * s} Q${-260 * s} ${-520 * s} ${-380 * s} ${-600 * s}" fill="none" stroke="${dark ? "#3A2E28" : "#5E4632"}" stroke-width="${26 * s}" stroke-linecap="round"/><path d="M${-60 * s} ${-460 * s} Q${120 * s} ${-560 * s} ${330 * s} ${-620 * s}" fill="none" stroke="${dark ? "#3A2E28" : "#5E4632"}" stroke-width="${24 * s}" stroke-linecap="round"/>
-    <path d="M${-80 * s} ${-480 * s} Q${-60 * s} ${-600 * s} ${-20 * s} ${-680 * s}" fill="none" stroke="${dark ? "#3A2E28" : "#5E4632"}" stroke-width="${20 * s}" stroke-linecap="round"/>${c}${hi}`; }
-// a palm: a tall ringed trunk and a crown of fronds. type 0 = a feather palm (long arching fronds), 1 = a fan palm. origin = the foot
+const GD = { liz: [740, 744], web: [262, 772], ants: [560, 902], hopper: [1060, 800], lamp: [1250, 902], palms: 1720, gazebo: [1080, 478] };
+// a rain tree: a wide, flat umbrella of small leaf clusters over a leaning trunk; darker underneath, lit on top. origin = the foot of the trunk
+function rainTree(r, s = 1, dark = 0) { let under = "", c = "", hi = "";
+  const cols = dark ? ["#2F5E48", "#3A6E50", "#244E3E"] : ["#4E9E52", "#5DB05C", "#43904C"];
+  for (let i = 0; i < 70; i++) { const a = r(), x = (-640 + a * 1280) * s, y = (-600 - 150 * Math.sin(Math.PI * a) + r() * 70) * s, rr = (44 + r() * 46) * s;
+    under += `<circle cx="${n2(x)}" cy="${n2(y + 46 * s)}" r="${n2(rr)}" fill="${dark ? "#1E3E30" : "#2F6E40"}"/>`; c += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(rr)}" fill="${cols[i % 3]}"/>`;
+    if (i % 2 === 0) hi += `<circle cx="${n2(x - rr * .3)}" cy="${n2(y - rr * .4)}" r="${n2(rr * .5)}" fill="${dark ? "#4F7E5E" : "#8ED676"}" opacity=".6"/>`; }
+  const tr = dark ? "#3A2E28" : "url(#gdTrunk)", bc = dark ? "#3A2E28" : "#5E4632";
+  return `<path d="M${-46 * s} 0 Q${-30 * s} ${-260 * s} ${-80 * s} ${-460 * s} L${-48 * s} ${-476 * s} Q${10 * s} ${-300 * s} ${46 * s} 0z" fill="${tr}"/><path d="M${-20 * s} ${-60 * s} Q${-10 * s} ${-260 * s} ${-50 * s} ${-420 * s}" fill="none" stroke="#fff" stroke-width="${6 * s}" opacity="${dark ? 0 : .15}"/>
+    <path d="M${-70 * s} ${-430 * s} Q${-300 * s} ${-500 * s} ${-480 * s} ${-560 * s}" fill="none" stroke="${bc}" stroke-width="${28 * s}" stroke-linecap="round"/><path d="M${-60 * s} ${-450 * s} Q${160 * s} ${-530 * s} ${420 * s} ${-570 * s}" fill="none" stroke="${bc}" stroke-width="${26 * s}" stroke-linecap="round"/>
+    <path d="M${-70 * s} ${-460 * s} Q${-60 * s} ${-560 * s} ${-20 * s} ${-640 * s}" fill="none" stroke="${bc}" stroke-width="${20 * s}" stroke-linecap="round"/><path d="M${-300 * s} ${-500 * s} Q${-360 * s} ${-560 * s} ${-330 * s} ${-620 * s} M${200 * s} ${-530 * s} Q${260 * s} ${-600 * s} ${240 * s} ${-650 * s}" fill="none" stroke="${bc}" stroke-width="${14 * s}" stroke-linecap="round"/>${under}${c}${hi}`; }
+// a palm: a tall ringed trunk and a crown of fronds. type 0 = a feather palm (arching fronds with drooping leaflets), 1 = a fan palm. origin = the foot
 function palmTree(h, r, type = 0, dark = 0, lean = 0) { const top = [lean, -h]; let fr = "", rings = "";
-  const fc = dark ? ["#1E3A36", "#284A40"] : ["#3E9A50", "#56B05C"], tc = dark ? "#2E2A30" : "url(#gdPalm)";
-  for (let i = 1; i < 12; i++) { const y = -h * i / 12, x = lean * i / 12; rings += `<path d="M${n2(x - 15)} ${n2(y)} q15 6 30 0" fill="none" stroke="${dark ? "#1E1A20" : "#6E5A44"}" stroke-width="3" opacity=".6"/>`; }
-  if (type === 0) for (let i = 0; i < 11; i++) { const an = -180 + i * 18 + (r() - .5) * 8, rad = an * Math.PI / 180, L = 230 + r() * 90, ex = top[0] + Math.cos(rad) * L, ey = top[1] + Math.sin(rad) * L * .55 + L * .45 * Math.abs(Math.cos(rad)), mx = top[0] + Math.cos(rad) * L * .5, my = top[1] - 60 + Math.sin(rad) * L * .3;
-      let lf = ""; for (let k = 1; k < 9; k++) { const u = k / 9, px = lerp(top[0], ex, u), py = lerp(top[1], ey, u) - Math.sin(Math.PI * u) * 50, d = 34 * (1 - u * .6); lf += `<path d="M${n2(px)} ${n2(py)} l${n2(-d * .4)} ${n2(d)} M${n2(px)} ${n2(py)} l${n2(d * .4)} ${n2(d)}" stroke="${fc[k % 2]}" stroke-width="7" stroke-linecap="round"/>`; }
-      fr += `<path d="M${top[0]} ${top[1]} Q${n2(mx)} ${n2(my)} ${n2(ex)} ${n2(ey)}" fill="none" stroke="${fc[i % 2]}" stroke-width="9" stroke-linecap="round"/>${lf}`; }
-  else for (let i = 0; i < 9; i++) { const an = -200 + i * 27 + (r() - .5) * 8, rad = an * Math.PI / 180, L = 150 + r() * 40, cx = top[0] + Math.cos(rad) * L, cy = top[1] + Math.sin(rad) * L * .8;
-      let rib = ""; for (let k = -4; k <= 4; k++) { const a2 = rad + k * .13; rib += `<path d="M${n2(cx - Math.cos(rad) * 50)} ${n2(cy - Math.sin(rad) * 40)} L${n2(cx + Math.cos(a2) * 95)} ${n2(cy + Math.sin(a2) * 80)}" stroke="${fc[(k + 8) % 2]}" stroke-width="12" stroke-linecap="round"/>`; }
-      fr += `<path d="M${top[0]} ${top[1]} L${n2(cx)} ${n2(cy)}" stroke="${dark ? "#2E2A30" : "#7A6650"}" stroke-width="7"/>${rib}`; }
-  return `<path d="M-18 0 Q${n2(lean * .4 - 14)} ${n2(-h * .5)} ${n2(lean - 10)} ${-h} L${n2(lean + 10)} ${-h} Q${n2(lean * .4 + 14)} ${n2(-h * .5)} 18 0z" fill="${tc}"/>${rings}${fr}`; }
+  const fc = dark ? ["#1E3A36", "#284A40", "#1A322E"] : ["#3E9A50", "#56B05C", "#2F8A48"], tc = dark ? "#2E2A30" : "url(#gdPalm)";
+  for (let i = 1; i < 14; i++) { const y = -h * i / 14, x = lean * Math.pow(i / 14, 1.5); rings += `<path d="M${n2(x - 15)} ${n2(y)} q15 6 30 0" fill="none" stroke="${dark ? "#1E1A20" : "#6E5A44"}" stroke-width="3" opacity=".55"/>`; }
+  if (type === 0) { const order = []; for (let i = 0; i < 12; i++) order.push(i); order.sort((a, b) => Math.abs(b - 5.5) - Math.abs(a - 5.5));
+    for (const i of order) { const an = (-190 + i * 18.5 + (r() - .5) * 8) * Math.PI / 180, L = 240 + r() * 80, ex = top[0] + Math.cos(an) * L, ey = top[1] + Math.sin(an) * L * .5 + L * .55 * (.4 + Math.abs(Math.cos(an))) , cx = top[0] + Math.cos(an) * L * .55, cy = top[1] + Math.sin(an) * L * .55 - 70;
+      let lf = ""; for (let k = 1; k < 12; k++) { const u = k / 12, px = (1 - u) * (1 - u) * top[0] + 2 * u * (1 - u) * cx + u * u * ex, py = (1 - u) * (1 - u) * top[1] + 2 * u * (1 - u) * cy + u * u * ey, d = 46 * (1 - u * .55);
+        lf += `<path d="M${n2(px)} ${n2(py)} q${n2(-d * .2)} ${n2(d * .5)} ${n2(-d * .45)} ${n2(d)} M${n2(px)} ${n2(py)} q${n2(d * .2)} ${n2(d * .5)} ${n2(d * .45)} ${n2(d)}" fill="none" stroke="${fc[(k + i) % 3]}" stroke-width="8" stroke-linecap="round"/>`; }
+      fr += `${lf}<path d="M${top[0]} ${top[1]} Q${n2(cx)} ${n2(cy)} ${n2(ex)} ${n2(ey)}" fill="none" stroke="${dark ? "#1A2E2A" : "#2E7A40"}" stroke-width="7" stroke-linecap="round"/>`; } }
+  else for (let i = 0; i < 9; i++) { const an = (-205 + i * 28 + (r() - .5) * 8) * Math.PI / 180, L = 120 + r() * 50, cx = top[0] + Math.cos(an) * L, cy = top[1] + Math.sin(an) * L * .75;
+      let pts = ""; const n = 13; for (let k = 0; k <= n; k++) { const a2 = an - 1.15 + 2.3 * k / n, rr = 120 * (k % 2 ? .82 : 1); pts += `${k ? "L" : "M"}${n2(cx + Math.cos(a2) * rr)} ${n2(cy + Math.sin(a2) * rr * .8)}`; }
+      let rib = ""; for (let k = 1; k < n; k += 2) { const a2 = an - 1.15 + 2.3 * k / n; rib += `<path d="M${n2(cx)} ${n2(cy)} L${n2(cx + Math.cos(a2) * 96)} ${n2(cy + Math.sin(a2) * 77)}" stroke="${fc[2]}" stroke-width="3" opacity=".7"/>`; }
+      fr += `<path d="M${top[0]} ${top[1]} L${n2(cx)} ${n2(cy)}" stroke="${dark ? "#2E2A30" : "#7A6650"}" stroke-width="7"/><path d="${pts}L${n2(cx)} ${n2(cy)}z" fill="${fc[i % 2]}" stroke="${fc[2]}" stroke-width="3" stroke-linejoin="round"/>${rib}`; }
+  return `<path d="M-20 0 Q${n2(lean * .3 - 15)} ${n2(-h * .5)} ${n2(lean - 11)} ${-h} L${n2(lean + 11)} ${-h} Q${n2(lean * .3 + 15)} ${n2(-h * .5)} 20 0z" fill="${tc}"/>${rings}${fr}<circle cx="${lean}" cy="${-h + 4}" r="16" fill="${dark ? "#1A2E2A" : "#5E7A3A"}"/>`; }
 // the white Victorian gazebo across the lake (cast iron, eight posts, a dome). origin = its floor centre
 const gazebo = (k = 1) => `<g transform="scale(${k})"><rect x="-70" y="-6" width="140" height="10" rx="3" fill="#F2EFE6"/>${[-60, -30, 0, 30, 60].map((x) => `<rect x="${x - 3}" y="-92" width="6" height="88" fill="#FBFAF4"/>`).join("")}
   <path d="M-78 -92 H78 L64 -106 H-64z" fill="#FBFAF4"/><path d="M-64 -106 Q-60 -150 0 -166 Q60 -150 64 -106z" fill="#F4F1E8"/><path d="M-40 -110 Q-30 -146 0 -158" fill="none" stroke="#D8D2C2" stroke-width="3"/><circle cx="0" cy="-172" r="7" fill="#FBFAF4"/><path d="M0 -179 v-12" stroke="#FBFAF4" stroke-width="3"/>
@@ -46,11 +51,11 @@ function lakeSet(mode) { const r = rndm(606), dk = mode === "dusk"; let far = ""
   for (let i = 0; i < 30; i++) { const x = -220 + i * 82 + r() * 30, rr = 50 + r() * 50; far += `<circle cx="${n2(x)}" cy="${n2(452 - r() * 50 - (i % 5 === 2 ? 40 : 0))}" r="${n2(rr)}" fill="${dk ? (i % 3 ? "#3A3A62" : "#2E3056") : (i % 3 ? "#5FA87A" : "#4E9870")}"/>`; }
   for (let i = 0; i < 18; i++) refl += `<rect x="${n2(-200 + r() * 2300)}" y="${n2(500 + r() * 40)}" width="${n2(50 + r() * 110)}" height="${n2(40 + r() * 90)}" rx="28" fill="${dk ? "#2E2856" : "#2F7F6A"}" opacity=".18"/>`;
   for (let i = 0; i < 60; i++) { const x = -200 + r() * 2320, y = 760 + r() * 120; tufts += `<path d="M${n2(x)} ${n2(y)} q-4 -16 -10 -24 M${n2(x)} ${n2(y)} q2 -18 4 -28 M${n2(x)} ${n2(y)} q6 -14 14 -20" fill="none" stroke="${dk ? "#2E5A3E" : (i % 2 ? "#3E9A4A" : "#7CCB5E")}" stroke-width="4" stroke-linecap="round"/>`; }
-  for (let i = 0; i < 14; i++) { const x = -150 + i * 170 + r() * 60; rocks += `<ellipse cx="${n2(x)}" cy="${n2(706 + r() * 14)}" rx="${n2(30 + r() * 30)}" ry="${n2(13 + r() * 8)}" fill="${dk ? "#4E4660" : "#A8A08E"}" stroke="${dk ? "#3A3448" : "#7E7666"}" stroke-width="3"/>`; }
+  for (let i = 0; i < 14; i++) { const x = -150 + i * 170 + r() * 60; rocks += `<ellipse cx="${n2(x)}" cy="${n2(712 + r() * 12)}" rx="${n2(18 + r() * 22)}" ry="${n2(8 + r() * 5)}" fill="${dk ? "#4E4660" : "#A8A08E"}" stroke="${dk ? "#3A3448" : "#7E7666"}" stroke-width="3"/>`; }
   for (let i = 0; i < 26; i++) pave += `<path d="M${-200 + i * 96} 920 L${n2(-420 + i * 118)} 1200" stroke="${dk ? "#6A5E6E" : "#BBA884"}" stroke-width="3" opacity=".45"/>`;
   const shade = dk ? "" : `<ellipse cx="560" cy="752" rx="560" ry="70" fill="#1E5A3A" opacity=".28" filter="url(#b10)"/>`;
   const tr = rndm(11), tr2 = rndm(19);
-  let palms = ""; [[1690, 560, 0, -30], [1800, 640, 1, 10], [1910, 600, 0, 40], [2030, 700, 0, -20], [1600, 470, 1, 0]].forEach(([x, h, ty, ln], i) => { palms += TF(x, 800 + (i % 2) * 14, 1, palmTree(h, rndm(40 + i), ty, dk, ln)); });
+  let palms = ""; [[1600, 470, 1, 0], [1960, 520, 1, 10], [1700, 600, 0, -40], [1830, 680, 0, 20], [2040, 640, 0, -30]].forEach(([x, h, ty, ln], i) => { palms += TF(x, 800 + (i % 2) * 14, 1, palmTree(h, rndm(40 + i), ty, dk, ln)); });
   return `<rect x="-200" y="-120" width="2320" height="640" fill="url(#${dk ? "gdSkyD" : "gdSky"})"/>
   ${dk ? `<circle cx="1500" cy="440" r="260" fill="#FFB46A" opacity=".55" filter="url(#b60)"/><circle cx="1500" cy="452" r="70" fill="#FFD9A0" opacity=".9"/>` : `<circle cx="160" cy="40" r="300" fill="url(#gdSun)"/><circle cx="160" cy="40" r="64" fill="#FFFBEA"/>`}
   <g fill="${dk ? "#E9A2C0" : "#fff"}" opacity="${dk ? .45 : .85}" filter="url(#b4)"><ellipse cx="700" cy="120" rx="190" ry="34"/><ellipse cx="840" cy="94" rx="110" ry="30"/><ellipse cx="1500" cy="200" rx="160" ry="28"/></g>

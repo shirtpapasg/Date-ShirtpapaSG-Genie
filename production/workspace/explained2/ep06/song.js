@@ -112,6 +112,20 @@ const P = {
   term: (t) => { ['C6', 'E6', 'G6', 'C7'].forEach((n, i) => { const x = I.musicBox(m(n), { decay: 1.8 }); game.addMono(x, t + i * .1, .2); verb.addMono(x, t + i * .1, .2); }); game.addMono(I.noiseSweep(.35, 600, 2600, { q: 1.2 }), t - .1, .1); chordAt(t, ['C4', 'G4', 'E5'], .06, 1.8); },
   shelfpop: (t, v) => { game.addMono(I.pop(1500 + 150 * v, 110 + v), t, .6); mar(RISE[3 + v], t, .4, { thock: .5 }); },
   glow: (t, v) => { const x = I.musicBox(m(['E6', 'G6', 'C7'][v % 3]), { decay: 1.6 }); game.addMono(x, t, .26); verb.addMono(x, t, .22); mar(['E5', 'G5', 'C6'][v % 3], t, .3); },
+  // EP6
+  xylo: (t, v) => { const x = I.marimba(m(['C5', 'D5', 'E5', 'F5', 'G5', 'A5', 'B5', 'C6'][v % 8]), { thock: .5, decay: .5 }); game.addMono(x, t, .55); verb.addMono(x, t, .2); },
+  splash: (t) => { game.addMono(I.noiseSweep(.7, 3000, 500, { q: .9 }), t, .45); game.addMono(I.thud(90, .1), t, .6); game.addMono(I.noiseSweep(1.4, 1600, 300, { q: .7, pink: true }), t + .1, .25); },
+  bubble: (t, v) => { const x = I.bell(700 + 180 * (v % 5), .05, .8, 1.3); wonder.addMono(x, t, .07, (v % 3) - 1); wonder.addMono(I.pop(900 + 120 * (v % 4), 150 + v), t, .08); },
+  shine: (t) => { ['G6', 'B6', 'D7', 'G7'].forEach((n, i) => { const x = I.musicBox(m(n), { decay: 1.0 }); game.addMono(x, t + i * .06, .1); verb.addMono(x, t + i * .06, .14); }); game.addMono(I.noiseSweep(.5, 3000, 9000, { q: 2 }), t, .05); },
+  warm: (t, v) => { for (const n of v ? ['F3', 'A3', 'C4', 'F4'] : ['C3', 'G3', 'E4', 'G4']) { const { L, R } = I.padNote(m(n), 3.4, { cutoff: 1300, attack: 1.0, release: 1.6, detune: .14 }); wonder.addStereo(L, R, t, .16); } const x = I.bell(1760, .6, 1.2, 2.0); verb.addMono(x, t + .4, .08); },
+  flick: (t) => { for (let j = 0; j < 3; j++) game.addMono(I.rim(2.6, 60 + j), t + j * .05, .14); },
+  breath: (t, v) => { (v ? wonder : game).addMono(I.noiseSweep(1.3, 300, 700, { q: .8, pink: true }), t, v ? .05 : .12); },
+  flutter: (t) => { for (let j = 0; j < 6; j++) game.addMono(I.paperFwip(1.5 + .1 * j, 40 + j), t + j * .07, .1); },
+  whine: (t) => { game.addMono(I.bell(1250, .9, .3, 1.0), t, .03); game.addMono(I.bell(1310, .7, .3, 1.0), t + .1, .025); },
+  flap: (t, v) => { for (let j = 0; j < 3; j++) amb.addMono(I.noiseSweep(.14, 300, 900, { q: 1, pink: true }), t + j * .16, .12, ((v || 0) % 3) - 1); },
+  purr: (t) => { for (let j = 0; j < 14; j++) game.addMono(I.tom(70, .08, 70 + j), t + j * .085, .1); },
+  heart: (t) => { wonder.addMono(I.thud(60, .12), t, .45); wonder.addMono(I.thud(56, .1), t + .22, .3); },
+  milk: (t) => { const x = I.musicBox(m('E6'), { decay: 1.2 }); game.addMono(x, t, .12); verb.addMono(x, t, .1); game.addMono(I.pop(1200, 160), t, .1); },
   // note 16: the big happy hit exactly on "know!": brass, a cymbal splash, a confetti pop, a bright chord (the "yay!" is in the buddies' voices)
   blast: (t) => { for (const [n, g] of [['C4', .5], ['E4', .45], ['G4', .45], ['C5', .5], ['E5', .4]]) { const x = I.brassNote(m(n), .9); game.addMono(x, t, g * .5); verb.addMono(x, t, g * .2); }
     const c = I.crash(11), c2 = I.crash(12); game.addMono(c, t, .3); game.addMono(c2, t + .02, .18, .5); verb.addMono(c, t, .15); game.addMono(K, t, 1.0); game.addMono(I.thud(70, .14), t, .9); game.addMono(I.pop(1800, 131), t, .8); game.addMono(I.pop(2400, 132), t + .05, .5, .6); game.addMono(I.pop(1300, 133), t + .09, .5, -.6); game.addMono(CL, t, .7);
