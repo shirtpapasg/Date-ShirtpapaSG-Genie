@@ -15,6 +15,9 @@ import re, numpy as np
 FIX = {
     # teacher, 2026-11-20: 'go with this "Soon-ai, bur-low"', then 'end the "low" with a lower tone' -> approved clip H
     "Sungei Buloh": {"ph": "sˈuːnaɪ, bˈɜːɹloʊ", "fall": 5.0, "tail": 0.32},
+    # teacher, 2026-11-20: 'pulau semakau is "pu-lao, sir-ma-kao"' -> approved clip I (stress on MA)
+    "Pulau Semakau": {"ph": "pˈuːlaʊ, sɜːmˈɑːkaʊ"},
+    "Semakau": {"ph": "sɜːmˈɑːkaʊ"},
 }
 _tok = None
 def _tokz():
