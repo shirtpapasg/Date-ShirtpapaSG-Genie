@@ -40,3 +40,7 @@ Do not commit, push, upload or touch YouTube, the review boards or TheOneApp.
 - THUMBNAILS (20 Nov, the teacher approved): use a bright frame from the episode itself; put the words on the BRIGHT side (here the
   right), right-aligned, white first line(s) and sun-yellow last line(s), thick dark-violet stroke; keep the other side clear (no dark
   gradient, no extra logo pill; the frame's own small logo stays). Reference: ep01/thumb_ep01.jpg. Two-part episodes: a tilted raspberry "PART 1" / "PART 2" badge with a white rim on the LEFT side, bottom-left (ep01/thumb_part_badge_preview.jpg).
+- EP2 (20 Nov): script p3_ep02_script.md approved ("Let's go") with these decisions: Part 1 water+air, Part 2 food (needs always said
+  in book order); pills P1 WATER/WILTING/OXYGEN, P2 FOOD/ENERGY/LIGHT; 5 Mark Sentence cards; needs colours WATER blue, FOOD orange,
+  AIR pale sky-white (not green); drawn times with "speeded up" tags; each part starts at Round one; toy boat and Basil's unfair test
+  only on the teacher sheet. Built in ep02/.
