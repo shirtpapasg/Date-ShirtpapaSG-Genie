@@ -45,7 +45,7 @@ SEQ1 = [
  ("say", "a201", H, "Last time, we sorted living things into four groups. Today, we zoom in on one group. Animals!", {"pre": .3}),
  ("say", "a203", M, "A frog, a bird and a fish. All at one pond! Are they one group?", {"pre": .4, "post": .3}),
  ("scene", "title"),
- ("say", "a204", H, "One group, or three? Lock in your answer. Hold on to it.", {"pre": .6, "post": .5}),
+ ("say", "a204", H, "Did you lock in your answer? One group, or three? Hold on to it.", {"pre": .6, "post": .5}),
  # ---- 3 · the game (the field-trip card slides in during the cold open)
  ("scene", "game"),
  ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. And a lizard is hiding. Find it!", {"pre": .5, "post": .4}),

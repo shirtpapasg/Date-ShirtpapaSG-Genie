@@ -223,7 +223,7 @@ function wipe(t, tc, col, cx = 960, cy = 540) { const a = .3, b = .26; if (t < t
 const KW = (PART === 1 ? [["OUTER COVERING", "kw_cover", 1], ["OBSERVABLE CHARACTERISTICS", "kw_observe", 1], ["AMPHIBIANS", "kw_amphibians", 1], ["MOIST SKIN", "kw_moist", 1]]
   : [["FEATHERS", "kw_feathers", 1], ["FINS", "kw_fins", 1], ["SCALES", "kw_scales", 1], ["GILLS", "kw_gills", 1]]).map(([w, mk, big, from], i) => ({ w, t: MK(mk), big, from: from || [960, 470], i, tl: MK(mk) + (big ? 1.5 : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
-const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1 };
+const SHELF_HIDE = { ...(PART === 1 ? { r1: 1, reveal: 1 } : {}), cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
 const KWLINE = PART === 1 ? ["hk_outer_covering", "hk_observable_characteristics", "hk_amphibians", "hk_moist_skin"] : ["hk_feathers", "hk_fins", "hk_scales", "hk_gills"];

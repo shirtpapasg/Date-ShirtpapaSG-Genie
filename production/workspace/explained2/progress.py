@@ -14,6 +14,7 @@ JOBS = [("art", "Art direction", ["research.md", "STYLE_GUIDE.md", "frames/sheet
         ("ep02", "P3 EP2 Part 1 + Part 2", ["ep02/ep02_part1.mp4", "ep02/ep02_part2.mp4"]),
         ("script3", "P3 EP3 script", ["p3_ep03_script.md"]),
         ("ep03", "P3 EP3 Part 1 + Part 2", ["ep03/ep03_part1.mp4", "ep03/ep03_part2.mp4"]),
+        ("ep05", "P3 EP5 Part 1 + Part 2", ["ep05/ep05_part1.mp4", "ep05/ep05_part2.mp4"]),
         ("ep04", "P3 EP4 Part 1 + Part 2", ["p3_ep04_script.md", "ep04/ep04_part1.mp4", "ep04/ep04_part2.mp4"])]
 now = datetime.datetime.now(datetime.timezone.utc)
 for jid, name, files in JOBS:

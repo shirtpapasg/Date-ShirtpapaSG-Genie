@@ -9,7 +9,7 @@ const fp = (cam, x, y) => [gx(cam, FROGXY[0] - 30 + x * .8), gy(cam, FROGXY[1] +
 
 /* ============ 1 · the silent cold open: the pond at the wetland ============ */
 // the thumbnail's frame (thumb_still.js ... "&thumb"): the frog large on its leaf, the kingfisher above it, the bright water on the right
-const THUMB1 = (t) => wetView(t, { frog: { wet: 1 } }, [1.75, 560, 640]) + buddy("momo", 250, 1040, 330, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+const THUMB1 = (t) => wetView(t, { frog: { wet: 1 }, kf: false, items: `<path d="M430 800 Q424 660 436 548" fill="none" stroke="#4E3A2A" stroke-width="30" stroke-linecap="round"/><path d="M430 800 Q424 660 436 548" fill="none" stroke="#8A6A4C" stroke-width="21" stroke-linecap="round"/><ellipse cx="430" cy="800" rx="44" ry="9" fill="none" stroke="#fff" stroke-width="4" opacity=".6"/>` + TF(436, 540, .62, `<g transform="scale(-1 1)">${kingfisher({})}</g>`) }, [1.75, 300, 640]) + buddy("momo", 190, 800, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), z = 1.04 + .05 * eio(t / 7.2);
   const [cx, cd] = slideX(t, tb + .15, .6, 2200, CARD[0], 1062);
   return wetView(t, {}, [z, 960, 580]) + cd + (t >= tb + .15 ? TF(cx, 1062, CARD[2], trailCard(t)) : "")
@@ -28,7 +28,7 @@ SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) 
   const ln = (y, txt, size, col, k, ls = 6) => k ? `<g transform="translate(960 ${y}) scale(${n2(k)})"><g transform="translate(0 8)" opacity=".85">${T(0, 0, txt, size, P.ink, { ls })}</g>${T(0, 0, txt, size, col, { ls })}</g>` : "";
   return wetView(t, {}, [1.5 - .08 * clamp(u / 5), 800, 620]) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.66 * clamp(u / .2))}"/>`
     + ln(250, "FEATHERS, SCALES", 150, "#fff", k1, 4) + ln(420, "OR MOIST SKIN?", 150, "#fff", k2, 4) + ln(630, "ONE GROUP OR THREE?", 150, P.sun, k3, 4)
-    + (t >= W(L, "lock") - .1 ? TF(960, 770, spring(t, W(L, "lock") - .1, .45), tpill(0, 0, "Lock in your answer. Hold on to it!", 40, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
+    + (t >= W(L, "lock") - .1 ? TF(960, 770, spring(t, W(L, "lock") - .1, .45), tpill(0, 0, "Did you lock in your answer? Hold on to it!", 40, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
 SC.game = (t, s) => gameScene(t, s, "a302", true);
 
 /* ============ 4 · Round Zero: a warm-up ============ */
@@ -76,7 +76,7 @@ SC.r1 = (t, s) => { const L = "a801", tSp = W(L, "splash") - .05, tSw = W(L, "sw
   return lockN(t, { cards: ["Only on land", "Only in water", "Both"], q: "Where can a frog live?", tq: W(L, "where") - .1, tc: [W(L, "one", 1), W(L, "two"), W(L, "three")], ring0: MK("ring0_1"), dur: 5, lock: "a802",
     obj: (tt) => { const j = clamp((tt - tSp) / .45), inW = tt >= tSp + .45, sw = inW ? .5 + .5 * Math.sin((tt - tSp) * 4) : 0, fx = lerp(400, 500, eio(j)) + (inW ? 14 * Math.sin((tt - tSp) * 1.1) : 0), fy = lerp(566, 640, j) - 70 * Math.sin(Math.PI * j);
       return `<ellipse cx="430" cy="610" rx="165" ry="44" fill="#5FB7C9"/>` + TF(380, 570, .5, lilyPad(190, "#66CC5C")) + TF(fx, fy, .5, frog({ ext: inW ? .35 + .55 * sw : j > 0 ? 1 : 0, blink: frogBlink(tt), throat: tt }))
-        + (inW ? `<ellipse cx="${n2(fx)}" cy="632" rx="${n2(70 + 40 * Math.min(1, tt - tSp - .45))}" ry="12" fill="none" stroke="#fff" stroke-width="5" opacity="${n2(clamp(1.6 - (tt - tSp)))}"/><rect x="${n2(fx - 80)}" y="622" width="160" height="40" fill="#5FB7C9" opacity=".55"/>` : "")
+        + (inW ? `<ellipse cx="${n2(fx)}" cy="632" rx="${n2(70 + 40 * Math.min(1, tt - tSp - .45))}" ry="12" fill="none" stroke="#fff" stroke-width="5" opacity="${n2(clamp(1.6 - (tt - tSp)))}"/><ellipse cx="${n2(fx)}" cy="642" rx="84" ry="20" fill="#5FB7C9" opacity=".6"/>` : "")
         + OP(pulse(tt, tSp + .45, .02, .6), `<g stroke="#fff" stroke-width="6" stroke-linecap="round"><path d="M${n2(fx - 40)} 610 l-22 -34 M${n2(fx)} 600 v-44 M${n2(fx + 40)} 610 l22 -34"/></g>`); },
     picks: [{ who: "momo", id: "a803", word: "2", x: true }, { who: "pip", id: "a804", word: "3" }, { who: "basil", id: "a805", word: "3" }], react: [[LE("a803") + .1, "momo", "thinking"], [LE("a804") + .1, "pip", "pointing"], [LE("a805") + .1, "basil", "cheer"]] }); };
 
@@ -103,7 +103,7 @@ SC.skin = (t, s) => { const a = "a1004", b = "a1005", e = eio((t - s.t0) / 1.0),
     + (t >= tD ? TF(1400, 420, 2.2 * spring(t, tD, .45), sunHeat()) + TF(1400, 560, spring(t, tD + .2, .4), tpill(0, 0, "It does not dry out", 40, P.sun, P.ink, { w: 700 })) : "")
     + bookCap(t, a, "Amphibians can breathe through their skin as well as their lungs.", 150, { size: 44, maxW: 900, x: 590, t1: LT(b) - .2 }) + bookCap(t, b, "They have protective moist skin to prevent them from drying out when they are on land.", 150, { size: 44, maxW: 900, x: 590 })
     + buddy("basil", 1740, 1060, 210, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tM, "surprised"], [tM + 1.6, "sit"]] }) + HUD(t); };
-const EGGXY = [800, 770];
+const EGGXY = [860, 800];
 SC.eggs = (t, s) => { const a = "a1006", b = "a1007", c = "a1008", ts = MK("stamp1") + .25, tc = W("a1009", "one") - .1, tb = LT(b) - .4, e = eio((t - tb) / .9), cam = [lerp(2.3, 1.06, e), lerp(EGGXY[0] - 60, 960, e), lerp(EGGXY[1] - 30, 580, e)];
   const tw_ = [W(b, "frogs") - .1, W(b, "toads") - .1, W(b, "salamanders") - .1], pics = [landPic + TF(-6, 110, .66, frog()), landPic + TF(-6, 110, .66, frog({ pal: TOADPAL, warts: true })), landPic + TF(10, 96, .7, salamander())], labs = ["frog", "toad", "salamander"];
   return wetView(t, { items: TF(EGGXY[0], EGGXY[1], .8, frogEggs()) + `<ellipse cx="${EGGXY[0]}" cy="${EGGXY[1]}" rx="110" ry="50" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(.5 + .3 * Math.sin(t * 2))}"/>` }, cam)
@@ -118,7 +118,7 @@ SCORE.push([W("a1009", "one") - .1, 2, 2]);
 const RB = [820, 1046, .9], RG = [1640, 700];
 function ruleBoard(t, o = {}) { const pics = [waterPic + TF(-10, 20, .6, frog({ ext: .5 + .4 * Math.sin(t * 4), swim: false })) + `<path d="M-200 -40 q30 -14 60 0 q30 14 60 0 q30 -14 60 0 q30 14 60 0 q30 -14 60 0 q30 14 60 0" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/>`, waterPic + `<rect x="-300" y="-300" width="600" height="330" fill="#DDF4FF"/>` + TF(0, 34, .8, duck(t))]; let s = "";
   pics.forEach((p, i) => { const x = -250 + i * 500, k = (o.pk || [1, 1])[i]; if (k < .02) return; s += TF(x, -150, k, `<clipPath id="rb${i}"><rect x="-190" y="-130" width="380" height="250" rx="20"/></clipPath><rect x="-198" y="-138" width="396" height="266" rx="26" fill="#fff" stroke="#C9D2E8" stroke-width="5"/><g clip-path="url(#rb${i})">${p}</g>`)
-      + ((o.fish || 0) > .02 ? TF(x + 110, -276, o.fish, `<g transform="rotate(8)">${tpill(0, 0, "a fish?", 36, P.basil, "#fff", { w: 700, nosh: true })}</g>`) : "") + ((o.cov || 0) > .02 ? TF(x, 130, o.cov, tpill(0, 0, ["moist skin", "feathers"][i], 34, P.leafDeep, "#fff", { w: 700, nosh: true })) : ""); });
+      + ((o.fish || 0) > .02 ? TF(x + 110, -276, o.fish, `<g transform="rotate(8)">${tpill(0, 0, "a fish?", 36, P.basil, "#fff", { w: 700, nosh: true })}</g>`) : "") + ((o.cov || 0) > .02 ? TF(x, 30, o.cov, tpill(0, 0, ["moist skin", "feathers"][i], 34, P.leafDeep, "#fff", { w: 700, nosh: true })) : ""); });
   return `<ellipse cx="0" cy="4" rx="330" ry="18" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-200 0 L-120 -110 M200 0 L120 -110" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><rect x="-250" y="-14" width="500" height="20" rx="10" fill="#8A5A36"/>
   <g filter="url(#drop)"><rect x="-540" y="-640" width="1080" height="570" rx="30" fill="${P.basil}"/><rect x="-520" y="-622" width="1040" height="534" rx="18" fill="url(#gPaper)"/></g>
   ${T(0, -530, "If it swims, it is a fish.", 68, P.ink)}${(o.x || 0) > .02 ? `<path d="M-400 -552 H400" stroke="${P.coral}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${n2(800 * Math.min(1, o.x))} 900"/>` + TF(-462, -552, Math.min(1.1, o.x), xBadge(30)) : ""}
@@ -136,7 +136,7 @@ SCORE.push([W("a1103", "one") - .1, 3, 2]);
 
 /* ============ 12 · score hand, the lizard ============ */
 SC.final = (t, s) => { const L = "a1201"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]], TF(1260, 1062, .42, trailCard(t, { 0: 0 }))); };
-SC.liz = (t, s) => { const L = "a1202"; return lizReveal(t, s, L, wetView(t, { liz: 0 }, CAMW), gx(CAMW, LIZXY[0] - 6), gy(CAMW, LIZXY[1] - 4), W(L, "does") - .1, "On land, in water, or both?", 60); };
+SC.liz = (t, s) => { const L = "a1202"; return lizReveal(t, s, L, wetView(t, { liz: 0 }, CAMW), gx(CAMW, LIZXY[0] - 6), gy(CAMW, LIZXY[1] - 4), W(L, "does") - .1, "On land, in water, or both?", 60, 10); };
 
 /* ============ 13 · the cliffhanger: a fish that hops on the mud ============ */
 SC.cliff = (t, s) => { const L = "a1301", e = eio((t - s.t0) / 1.2), cam = [lerp(1.04, 1.55, e), lerp(960, 1450, e), lerp(580, 740, e)], tF = W(L, "fins") - .2, tHp = W(L, "hops") - .2, tQ = W(L, "is") - .1, tP = W(L, "find") - .1;
