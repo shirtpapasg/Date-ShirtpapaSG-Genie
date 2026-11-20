@@ -9,11 +9,17 @@ import cv2, numpy as np, os, sys
 H = os.path.dirname(os.path.abspath(__file__)); T = 175
 STATES = {"closed": "mouth_closed", "half": "mouth_half", "wide": "mouth_wide", "blink": "eyes_closed"}
 
-def cutout(bgr, T=T):
+def cutout(bgr, T=T, seal=0):
+    """T may be a per-pixel array (poses.py lowers it under the feet so a darker ground shadow floods away too).
+    seal > 0: the flood may only pass through gaps wider than about 2*seal px (for a painting whose outline has a small break)."""
     L = bgr.min(2).astype(np.float32)
     light = (L > T).astype(np.uint8)
     pad = np.pad(light, 1, constant_values=1); cv2.floodFill(pad, None, (0, 0), 2)
     bg = pad[1:-1, 1:-1] == 2
+    if seal:
+        k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * seal + 1, 2 * seal + 1))
+        pad = np.pad(cv2.erode(light, k), seal + 1, constant_values=1); cv2.floodFill(pad, None, (0, 0), 2)
+        bg = (cv2.dilate((pad[seal + 1:-seal - 1, seal + 1:-seal - 1] == 2).astype(np.uint8), k) == 1) & bg
     fg = (~bg).astype(np.uint8)
     # drop specks: keep the biggest blob (plus anything at least 2% of it)
     n, lab, st, _ = cv2.connectedComponentsWithStats(fg, connectivity=8)
