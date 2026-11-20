@@ -148,7 +148,7 @@ function counter(t, day, tflip = -9, x = 60, y = 110, s = 1, o = {}) { const f =
   for (let i = 0; i < 30; i++) { const d = i + 1, cx = 22 + (i % 10) * 24, cy = 276 + Math.floor(i / 10) * 24; dots += `<circle cx="${cx}" cy="${cy}" r="${d === day ? 9.5 : 6.5}" fill="${d <= day ? P.sun : "#fff"}" opacity="${d <= day ? 1 : .22}"/>`; }
   return G(x, y, s, `<g filter="url(#drop)"><rect x="0" y="0" width="240" height="232" rx="34" fill="${P.ink}"/><path d="M0 34 Q0 0 34 0 H206 Q240 0 240 34 V72 H0z" fill="url(#gSun)"/></g>${T(120, 54, "DAY", 46, P.ink, { ls: 12 })}
   <g transform="translate(120 152) scale(1 ${n2(sq)})">${T(0, 46, day, 130, "#fff")}</g><rect x="0" y="150" width="240" height="4" fill="#000" opacity=".25"/>
-  ${o.nodots ? "" : dots + T(262, 334, "", 1) + `<text x="120" y="366" font-family="Fredoka" font-weight="500" font-size="27" fill="#fff" text-anchor="middle" opacity=".85">of 30</text>`}`); }
+  ${o.nodots ? "" : `<rect x="0" y="250" width="240" height="134" rx="26" fill="${P.ink}" opacity=".6"/>` + dots + T(262, 334, "", 1) + `<text x="120" y="366" font-family="Fredoka" font-weight="500" font-size="27" fill="#fff" text-anchor="middle" opacity=".85">of 30</text>`}`); }
 // which day shows at t, from a list of flips [[time, day], ...]
 function dayAt(t, flips) { let d = flips[0][1], tf = -9; for (const [tt, dd] of flips) if (t >= tt) { d = dd; tf = tt; } return [d, tf]; }
 

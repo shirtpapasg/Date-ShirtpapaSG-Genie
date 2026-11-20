@@ -133,7 +133,7 @@ const cicak = (col = P.ink2) => `<g fill="${col}" stroke="${col}" stroke-linecap
 const pencil = () => `<g transform="rotate(-24)"><rect x="-120" y="-16" width="200" height="32" rx="6" fill="#43BF6C" stroke="#1F8A4C" stroke-width="5"/><rect x="-120" y="-16" width="200" height="11" rx="5" fill="#fff" opacity=".28"/><path d="M80 -16 L128 0 L80 16z" fill="#F3D2AC" stroke="#B9774A" stroke-width="5" stroke-linejoin="round"/><path d="M112 -6 L128 0 L112 6z" fill="${P.ink}"/><rect x="-146" y="-16" width="30" height="32" rx="8" fill="#FF8FB1" stroke="#E0607F" stroke-width="5"/></g>`;
 
 /* ---------- the 30-day box (16:9). The box: x 360..1560, y 230..870; things stand on the liner at y 800; the robot's lane is y 846. ---------- */
-const BOX = { x: 360, y: 230, w: 1200, h: 640, floor: 800, lane: 846, plant: 500, bean: 728, dish: 962, robot0: 612, robot1: 1150, pebble: 1322, teddy: 1462 };
+const BOX = { x: 360, y: 230, w: 1200, h: 640, floor: 800, lane: 846, plant: 500, bean: 735, dish: 985, robot0: 620, robot1: 1165, pebble: 1295, teddy: 1452, rs: .8 };
 function boxBack() { return `<ellipse cx="960" cy="892" rx="660" ry="30" fill="${P.ink}" opacity=".4" filter="url(#b10)"/>
   <g clip-path="url(#xBoxC)"><rect x="360" y="230" width="1200" height="640" fill="#E9F4FF" opacity=".16"/><ellipse cx="760" cy="470" rx="480" ry="250" fill="#FFF3B8" opacity=".22" filter="url(#b30)"/>
   <path d="M360 782 H1560 V870 H360z" fill="url(#xLiner)"/><path d="M360 782 H1560" stroke="#FFF3DC" stroke-width="6" opacity=".8"/><path d="M360 824 H1560" stroke="#C9A772" stroke-width="2" opacity=".35"/></g>`; }
@@ -145,13 +145,13 @@ function boxFront(o = {}) { const lid = o.lid === undefined ? 1 : o.lid, lidY = 
    Each living thing can show its DAY 1 outline (style 7.6: time-lapse ghosts). */
 function boxThings(st = {}) { const d = st.day || 1, hide = st.hide || {}, B = BOX; let s = "";
   const gh = (inner) => `<g opacity="${n2(st.ghost)}" filter="url(#ghostF)">${inner}</g>`;
-  if (!hide.plant) s += TF(B.plant, B.floor - 50, .86, potPlant({ lean: st.lean || 0, nu: st.nu || 0, droop: st.droop || 0, sway: st.sway || 0 }));
-  if (!hide.bean) s += TF(B.bean, B.floor, .92, beanPlant(d, { maxH: 596, sway: st.sway || 0, lean: st.blean || 0 }));
-  if (!hide.dish) s += TF(B.dish, B.floor, .8, wormDish({ bites: st.bites || 0, wx: st.wx === undefined ? -40 : st.wx, wl: st.wl || 76, wb: st.wb === undefined ? .3 : st.wb, id: st.cid || "cb" }));
-  if (!hide.pebble) s += TF(B.pebble, B.floor - 22, .58, pebble());
-  if (!hide.teddy) s += TF(B.teddy, B.floor, .56, teddyKey());
-  if (st.ghost) s += gh(TF(B.plant, B.floor - 50, .86, potPlant({})) + TF(B.bean, B.floor - 28, .92 * .42, beanSeed(0, 0)) + TF(B.dish - 32, B.floor - 21, .8, mealworm(.3, 76)) + TF(B.pebble, B.floor - 22, .58, pebble()) + TF(B.teddy, B.floor, .56, teddyKey()) + TF(st.robotX === undefined ? B.robot1 : st.robotX, B.lane, .56, robotRig({})));
-  if (!hide.robot) s += TF(st.robotX === undefined ? B.robot0 : st.robotX, B.lane, .56, st.robot || robotRig({ blink: 0 }));
+  if (!hide.plant) s += TF(B.plant, B.floor - 72, 1.25, potPlant({ lean: st.lean || 0, nu: st.nu || 0, droop: st.droop || 0, sway: st.sway || 0 }));
+  if (!hide.bean) s += TF(B.bean, B.floor, 1.05, beanPlant(d, { maxH: 528, sway: st.sway || 0, lean: st.blean || 0 }));
+  if (!hide.dish) s += TF(B.dish, B.floor, 1.0, wormDish({ bites: st.bites || 0, wx: st.wx === undefined ? -40 : st.wx, wl: st.wl || 76, wb: st.wb === undefined ? .3 : st.wb, id: st.cid || "cb" }));
+  if (!hide.pebble) s += TF(B.pebble, B.floor - 30, .8, pebble());
+  if (!hide.teddy) s += TF(B.teddy, B.floor, .85, teddyKey());
+  if (st.ghost) s += gh(TF(B.plant, B.floor - 72, 1.25, potPlant({})) + TF(B.bean, B.floor - 31, 1.05 * .42, beanSeed(0, 0)) + TF(B.dish - 40, B.floor - 26, 1.0, mealworm(.3, 76)) + TF(B.pebble, B.floor - 30, .8, pebble()) + TF(B.teddy, B.floor, .85, teddyKey()) + TF(st.robotX === undefined ? B.robot1 : st.robotX, B.lane, B.rs, robotRig({})));
+  if (!hide.robot) s += TF(st.robotX === undefined ? B.robot0 : st.robotX, B.lane, B.rs, st.robot || robotRig({ blink: 0 }));
   return s; }
 // the cloth over the box on Day 30; bump = how far something pushes it up (px)
 function cloth(bump = 0, o = {}) { const bx = 760;
