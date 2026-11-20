@@ -170,6 +170,8 @@ Also read:
 - **Every label and small print fits fully inside the frame.** Label lines never cross other objects.
 - Frames are a pure function of t. Render in 10 s chunks so restarts lose little.
 
+- **Say names right.** Singapore names Kokoro gets wrong are spoken from approved sounds: see `PRONUNCIATION.md` and `sg_pron.py`
+  (e.g. Sungei Buloh = "Soon-ai, bur-low"). A new name gets a test clip for the teacher before it is used.
 - **Real animals must look real (teacher, 2026-11-20).** Draw an animal's true shape from real photos before drawing it, then simplify
   into the flat cartoon style; never invent anatomy. Example: the monitor lizard from behind has a long narrow head on a long thick
   neck, a heavy body, short legs bent out at elbow and knee with claws down (never straight out like arms), a very long tapering
