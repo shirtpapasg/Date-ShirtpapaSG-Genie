@@ -217,6 +217,8 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP04 Shorts | y_gOAbX-Rc0, cZEToluHQA0 | public since 19 Nov |
 | EP05 Shorts | JvxVMXWCF2M, HJGDcJ9iDW0 | public since 19 Nov |
 | EP06 Shorts | CsVQYo_nQTo, 3IJiBhPp6r4 | public since 19 Nov |
+| EP07 Shorts | NLZvRcobE-E, b9qPfN1begk | Fri 20 Nov (public), Sat 21 Nov, 5 pm |
+| EP10 Shorts | CkC9-VXAdA4, 0izktqFIJJY | Sun 22 Nov, Mon 23 Nov, 5 pm |
 
 The playlist "TheOneApp, Explored" (19 Nov): each episode followed by its Shorts, in order, with no "Deleted video" gaps. EP07 to EP10 have no Shorts yet.
 
