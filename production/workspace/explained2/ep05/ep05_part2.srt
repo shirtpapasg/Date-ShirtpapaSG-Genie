@@ -1,0 +1,603 @@
+1
+00:00:04,375 --> 00:00:06,175
+Last time, we met a frog.
+
+2
+00:00:06,405 --> 00:00:08,685
+It is an amphibian, with moist skin.
+
+3
+00:00:08,915 --> 00:00:12,135
+Its outer covering is an observable characteristic.
+
+4
+00:00:12,355 --> 00:00:14,005
+Two more animals to spot!
+
+5
+00:00:18,409 --> 00:00:19,589
+Lock in first.
+
+6
+00:00:19,809 --> 00:00:21,229
+And find the new lizard!
+
+7
+00:00:21,730 --> 00:00:22,540
+Look up!
+
+8
+00:00:22,800 --> 00:00:23,780
+A kingfisher.
+
+9
+00:00:24,060 --> 00:00:25,070
+It has a beak.
+
+10
+00:00:25,370 --> 00:00:26,380
+It has wings.
+
+11
+00:00:26,650 --> 00:00:28,070
+And its outer covering?
+
+12
+00:00:29,280 --> 00:00:30,150
+Round one.
+
+13
+00:00:30,400 --> 00:00:31,880
+A penguin has feathers.
+
+14
+00:00:32,100 --> 00:00:33,230
+It lays eggs.
+
+15
+00:00:33,430 --> 00:00:34,690
+But it cannot fly!
+
+16
+00:00:34,920 --> 00:00:36,270
+Is a penguin a bird?
+
+17
+00:00:36,540 --> 00:00:37,600
+One, yes.
+
+18
+00:00:37,820 --> 00:00:38,630
+Two, no.
+
+19
+00:00:38,860 --> 00:00:40,270
+Show me with your fingers.
+
+20
+00:00:45,738 --> 00:00:46,688
+Locked in!
+
+21
+00:00:46,818 --> 00:00:47,698
+Two.
+
+22
+00:00:47,818 --> 00:00:48,978
+Birds fly.
+
+23
+00:00:49,228 --> 00:00:50,968
+A penguin cannot fly.
+
+24
+00:00:51,014 --> 00:00:51,614
+One!
+
+25
+00:00:51,364 --> 00:00:53,484
+It has a beak and wings.
+
+26
+00:00:53,533 --> 00:00:54,093
+One!
+
+27
+00:00:54,253 --> 00:00:55,543
+Look at its feathers.
+
+28
+00:00:56,046 --> 00:00:57,856
+Birds live largely on land.
+
+29
+00:00:58,086 --> 00:01:00,916
+Birds have beaks that enable them to pick up food.
+
+30
+00:01:01,122 --> 00:01:03,492
+Birds have wings and can usually fly.
+
+31
+00:01:03,696 --> 00:01:07,226
+Some birds such as ostriches and penguins cannot fly.
+
+32
+00:01:07,433 --> 00:01:08,653
+Birds lay eggs.
+
+33
+00:01:09,238 --> 00:01:10,348
+Say it with me!
+
+34
+00:01:11,057 --> 00:01:13,357
+Birds have an outer covering of feathers.
+
+35
+00:01:17,320 --> 00:01:18,580
+The answer is one.
+
+36
+00:01:18,810 --> 00:01:20,290
+A penguin has feathers.
+
+37
+00:01:20,510 --> 00:01:21,750
+So it is a bird.
+
+38
+00:01:21,800 --> 00:01:23,600
+So flying is not the clue.
+
+39
+00:01:23,820 --> 00:01:24,960
+Feathers are!
+
+40
+00:01:26,171 --> 00:01:27,141
+One finger?
+
+41
+00:01:27,411 --> 00:01:28,551
+One finger up!
+
+42
+00:01:29,128 --> 00:01:30,968
+Now look down, into the water.
+
+43
+00:01:31,228 --> 00:01:32,078
+A fish!
+
+44
+00:01:32,200 --> 00:01:35,530
+Fish are animals that usually live only in water.
+
+45
+00:01:35,740 --> 00:01:38,020
+They have fins to help them swim in water.
+
+46
+00:01:40,427 --> 00:01:41,647
+Say it with me!
+
+47
+00:01:42,354 --> 00:01:44,434
+Fish have an outer covering of scales.
+
+48
+00:01:48,474 --> 00:01:50,514
+Fish usually breathe through their gills.
+
+49
+00:01:52,701 --> 00:01:55,001
+Some fish, such as cod, lay eggs.
+
+50
+00:01:55,221 --> 00:01:58,801
+Other fish, such as the guppy and some sharks, give birth to
+
+51
+00:01:58,551 --> 00:01:59,681
+their young alive.
+
+52
+00:02:00,969 --> 00:02:01,889
+Round two.
+
+53
+00:02:02,149 --> 00:02:03,119
+Look at the mud!
+
+54
+00:02:03,379 --> 00:02:05,399
+This animal hops about on land.
+
+55
+00:02:05,609 --> 00:02:07,889
+But it has fins, scales and gills.
+
+56
+00:02:08,109 --> 00:02:08,989
+What is it?
+
+57
+00:02:09,209 --> 00:02:10,559
+One, an amphibian.
+
+58
+00:02:10,789 --> 00:02:11,819
+Two, a bird.
+
+59
+00:02:12,079 --> 00:02:13,099
+Three, a fish.
+
+60
+00:02:13,329 --> 00:02:14,739
+Show me with your fingers.
+
+61
+00:02:20,211 --> 00:02:21,161
+Locked in!
+
+62
+00:02:21,291 --> 00:02:21,881
+One!
+
+63
+00:02:22,011 --> 00:02:22,991
+Land and water.
+
+64
+00:02:23,211 --> 00:02:24,501
+Just like the frog!
+
+65
+00:02:24,551 --> 00:02:25,351
+Three.
+
+66
+00:02:25,551 --> 00:02:27,871
+I count fins, scales and gills.
+
+67
+00:02:27,926 --> 00:02:28,746
+Three!
+
+68
+00:02:28,846 --> 00:02:30,136
+Frogs have legs.
+
+69
+00:02:30,196 --> 00:02:31,406
+It has fins.
+
+70
+00:02:31,910 --> 00:02:33,050
+Be the mudskipper!
+
+71
+00:02:33,300 --> 00:02:34,270
+Shrink down.
+
+72
+00:02:34,490 --> 00:02:35,370
+Quietly.
+
+73
+00:02:37,757 --> 00:02:39,057
+You are a mudskipper.
+
+74
+00:02:39,417 --> 00:02:40,557
+You are in the water.
+
+75
+00:02:41,017 --> 00:02:42,587
+You breathe through your gills.
+
+76
+00:02:43,186 --> 00:02:44,616
+The tide goes out.
+
+77
+00:02:44,926 --> 00:02:46,356
+The water gets shallow.
+
+78
+00:02:47,670 --> 00:02:49,140
+You push with your fins.
+
+79
+00:02:49,480 --> 00:02:50,190
+Hop.
+
+80
+00:02:50,540 --> 00:02:51,240
+Hop.
+
+81
+00:02:51,570 --> 00:02:52,790
+You are on the mud.
+
+82
+00:02:53,374 --> 00:02:55,884
+Now, on land, you breathe through your skin.
+
+83
+00:02:56,551 --> 00:02:58,341
+Fins, scales and gills.
+
+84
+00:02:58,661 --> 00:03:00,031
+You are still a fish.
+
+85
+00:03:02,453 --> 00:03:03,793
+The answer is three.
+
+86
+00:03:03,917 --> 00:03:07,887
+Mudskippers are special fish that can live on land as well as
+
+87
+00:03:07,637 --> 00:03:08,447
+in water.
+
+88
+00:03:09,669 --> 00:03:10,729
+Three fingers?
+
+89
+00:03:10,949 --> 00:03:12,109
+One finger up!
+
+90
+00:03:13,685 --> 00:03:15,045
+My field notes!
+
+91
+00:03:15,169 --> 00:03:15,819
+One.
+
+92
+00:03:15,959 --> 00:03:17,579
+A frog is an amphibian.
+
+93
+00:03:17,679 --> 00:03:18,469
+Two.
+
+94
+00:03:18,519 --> 00:03:19,919
+A penguin is a bird.
+
+95
+00:03:20,059 --> 00:03:20,949
+Three.
+
+96
+00:03:20,989 --> 00:03:22,629
+A starfish is a fish.
+
+97
+00:03:22,980 --> 00:03:23,860
+Showdown!
+
+98
+00:03:24,100 --> 00:03:25,190
+Double points.
+
+99
+00:03:25,430 --> 00:03:27,010
+One line has a mistake.
+
+100
+00:03:27,240 --> 00:03:28,950
+Line one, two, or three?
+
+101
+00:03:29,180 --> 00:03:30,590
+Show me with your fingers.
+
+102
+00:03:37,058 --> 00:03:38,008
+Locked in!
+
+103
+00:03:38,138 --> 00:03:38,948
+Three.
+
+104
+00:03:39,158 --> 00:03:41,078
+A starfish has no scales.
+
+105
+00:03:41,131 --> 00:03:41,821
+Three!
+
+106
+00:03:41,941 --> 00:03:43,061
+And no gills.
+
+107
+00:03:43,107 --> 00:03:43,677
+Oops!
+
+108
+00:03:44,708 --> 00:03:45,368
+Fixed!
+
+109
+00:03:45,118 --> 00:03:46,738
+Not a fish.
+
+110
+00:03:46,863 --> 00:03:48,333
+Starfish are not fish!
+
+111
+00:03:48,553 --> 00:03:51,253
+This is because they do not have scales or gills.
+
+112
+00:03:51,391 --> 00:03:52,721
+Showed three fingers?
+
+113
+00:03:52,911 --> 00:03:54,811
+Put up two more on your score hand!
+
+114
+00:03:55,312 --> 00:03:56,352
+Three stamps!
+
+115
+00:03:56,632 --> 00:03:58,082
+Three animal groups.
+
+116
+00:03:58,828 --> 00:03:59,884
+Say it with us!
+
+117
+00:04:00,544 --> 00:04:01,194
+Frog!
+
+118
+00:04:00,956 --> 00:04:01,607
+Bird!
+
+119
+00:04:01,369 --> 00:04:02,079
+Fish!
+
+120
+00:04:03,844 --> 00:04:05,594
+Moist skin, feathers, scales!
+
+121
+00:04:07,144 --> 00:04:07,794
+Frog!
+
+122
+00:04:07,556 --> 00:04:08,206
+Bird!
+
+123
+00:04:07,969 --> 00:04:08,679
+Fish!
+
+124
+00:04:08,794 --> 00:04:10,544
+Moist skin, feathers, scales!
+
+125
+00:04:11,399 --> 00:04:12,779
+Show me your score hand!
+
+126
+00:04:13,019 --> 00:04:14,029
+More than two?
+
+127
+00:04:14,269 --> 00:04:15,539
+You beat the Buddies.
+
+128
+00:04:15,769 --> 00:04:16,819
+Four fingers?
+
+129
+00:04:17,059 --> 00:04:18,039
+High five!
+
+130
+00:04:18,543 --> 00:04:19,903
+Did you spot the lizard?
+
+131
+00:04:20,153 --> 00:04:21,693
+It was on a mangrove root.
+
+132
+00:04:21,913 --> 00:04:24,033
+Is a lizard's skin moist, or dry?
+
+133
+00:04:24,233 --> 00:04:25,523
+Tell someone at home.
+
+134
+00:04:26,907 --> 00:04:31,087
+Three more animal groups to go: insects, reptiles and mammals.
+
+135
+00:04:31,297 --> 00:04:32,417
+Here is an ant.
+
+136
+00:04:32,637 --> 00:04:33,667
+And a spider.
+
+137
+00:04:33,897 --> 00:04:35,407
+Only one is an insect!
+
+138
+00:04:35,617 --> 00:04:37,867
+Can you tell which, by counting its legs?
+
+139
+00:04:38,087 --> 00:04:39,987
+Lock in your answer for next time.
+
+140
+00:04:40,708 --> 00:04:42,868
+Let's read today's key words together!
+
+141
+00:04:43,108 --> 00:04:43,828
+Ready?
+
+142
+00:04:44,118 --> 00:04:44,888
+Feathers.
+
+143
+00:04:46,250 --> 00:04:46,898
+Fins.
+
+144
+00:04:48,244 --> 00:04:48,970
+Scales.
+
+145
+00:04:50,445 --> 00:04:51,097
+Gills.
+
+146
+00:04:52,420 --> 00:04:53,320
+Well done!
+
+147
+00:04:54,303 --> 00:04:55,362
+Say it with us!
+
+148
+00:04:56,162 --> 00:04:56,872
+Ready?
+
+149
+00:04:56,997 --> 00:04:57,617
+One!
+
+150
+00:04:57,997 --> 00:04:58,677
+two!
+
+151
+00:04:59,002 --> 00:05:00,177
+Now you know!
