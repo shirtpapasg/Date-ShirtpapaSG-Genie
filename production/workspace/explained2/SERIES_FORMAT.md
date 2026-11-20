@@ -98,6 +98,8 @@ Also read:
   3. Each word lights up as Heart says it, with about 1.2 s for the class to say it. The buddies mouth along.
   4. Heart: "Well done!"
 - **The class says "Now you know!" at the very end of every part:**
+  - The count-in "One!", "two!", "Now you know!" is evenly spaced: each starts exactly 1.0 s after the last.
+  - "Now you know!" ends with a happy BLAST, never robotic: Heart's brightest take, pitched up and rising on "KNOW!", the buddies shouting in unison as a happy crowd, and a big sting on "know!" (brass hit, cymbal, confetti pop, "yay!"), with the title slam and a confetti burst on the same frame.
   1. "Say it with us!", then a 0.8 s pause.
   2. "Ready? One, two…"
   3. Heart and all three buddies shout "Now you know!" together, excited, with the title slamming in and the YOU hands joining.
