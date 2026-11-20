@@ -186,10 +186,11 @@ if __name__ == "__main__":
         for i in map(int, sys.argv[sys.argv.index("--frames") + 1:]): cv2.imwrite(f"{H}/qa/{name}_f{i:04d}.png", sh.frame(fid(i)))
         sys.exit()
     wav = f"{H}/voice/_{name}_mix.wav"; sf.write(wav, sh.audio(), 48000, subtype="PCM_16"); out = f"{H}/{sh.c['out']}"
+    tmp = f"{H}/work/_{name}_render.mp4"; os.makedirs(f"{H}/work", exist_ok=True)       # in-progress file lives in work/, never next to the deliverables
     ff = subprocess.Popen(["ffmpeg", "-loglevel", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{HH}", "-r", str(FPS), "-i", "-",
                            "-i", wav, "-c:v", "libx264", "-preset", "medium", "-crf", "16", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "192k",
-                           "-movflags", "+faststart", "-shortest", out + ".tmp.mp4"], stdin=subprocess.PIPE)
+                           "-movflags", "+faststart", "-shortest", tmp], stdin=subprocess.PIPE)
     for i in range(sh.n):
         ff.stdin.write(sh.frame(fid(i)).tobytes())
         if i % 30 == 0: print(f"{name} frame {i}/{sh.n}", flush=True)
-    ff.stdin.close(); ff.wait(); os.replace(out + ".tmp.mp4", out); print("wrote", out)
+    ff.stdin.close(); ff.wait(); os.replace(tmp, out); print("wrote", out)
