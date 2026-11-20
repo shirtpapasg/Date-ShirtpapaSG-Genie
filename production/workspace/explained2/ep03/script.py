@@ -22,7 +22,7 @@ def kwrecap(words):
     out = [("scene", "kwrecap"), ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5})]
     for w in words:
         k = slug(w)
-        out += [("say", "hk_" + k, H, w + ".", {"pre": 0}), ("unison", "uk_" + k, w + ".", {"pre": .25, "post": .55, "quiet": True})]
+        out += [("say", "hk_" + k, H, w + ".", {"pre": 0}), ("unison", "uk_" + k, w + ".", {"pre": .25, "post": .4, "quiet": True})]
     return out + [("say", "h864", H, "Well done!", {"pre": .2, "post": .7})]
 # the ending, exactly as EP1 round 3 (notes 14-16): "Say it with us!", 0.8 s, "Ready?", "One!", "two!", "Now you know!" 1.0 s apart, the blast, the outro
 NYK = [("scene", "nyk"),
@@ -32,7 +32,7 @@ NYK = [("scene", "nyk"),
  ("say", "h1304t", H, "two!", {"after": ["h1304o", 1.0]}),
  ("say", "h1305", H, "Now you know!", {"after": ["h1304t", 1.0], "shout": True}),
  ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
- ("wait", 5.8)]
+ ("wait", 5.5)]
 CHANTSEQ = [("unison", "u1002", "Say it with us!", {"pre": .6}), ("wait", .8), ("chant", "c1003"), ("wait", .6)]
 COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94})]
 
@@ -45,9 +45,9 @@ SEQ1 = [
  ("say", "a202", B, "I think it's shy. It's hiding from me!", {"pre": .4, "post": .3}),
  ("scene", "title"),
  ("say", "a203", H, "Is it shy? Did you lock in your answer? Hold on to it.", {"pre": .6, "post": .5}),
- # ---- 3 · the field trip and the game
+ # ---- 3 · the field trip and the game   (section 6, trim 1: the field-trip line in its short form)
  ("scene", "trip"),
- ("say", "a301", H, "Today is a field trip. The hunt: what can living things do? Three stamps to collect. One here, in Toa Payoh. Two on a farm, in Kranji.", {"pre": .5, "post": .4}),
+ ("say", "a301", H, "Today is a field trip. Three stamps to collect.", {"pre": .5, "post": .4}),
  ("scene", "game"),
  ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. And a lizard is hiding. Find it!", {"pre": .5, "post": .4}),
  # ---- 4 · Round Zero: the rematch from Episode 2
@@ -60,7 +60,7 @@ SEQ1 = [
  ("say", "a404", H, "Plants do not eat but they can make their own food when there is light.", {"pre": .45}),
  ("say", "a405", H, "Two fingers? One finger up!", {"pre": .5, "post": .6}),
  # ---- 5 · today's goals (no voice) and the countdown
- ("scene", "goals"), ("wait", 4.7),
+ ("scene", "goals"), ("wait", 4.3),
  *COUNT,
  # ---- 6 · Round 1: what happens next?
  ("scene", "r1card"), ("wait", 1.1),
@@ -91,13 +91,13 @@ SEQ1 = [
  ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.0),
  ("say", "a801", H, "The answer is two. The leaves opened again.", {"pre": 0}),
  ("say", "a802", H, "The mimosa plant is commonly called touch-me-not.", {"pre": .5}),
- ("wait", .3), ("mark", "kw_mimosa"), ("wait", 2.1),
+ ("wait", .3), ("mark", "kw_mimosa"), ("wait", 1.9),
  ("scene", "replay"),
  ("say", "a803", H, "The touch was a change. The mimosa folded its leaves. It responded.", {"pre": .4, "post": .5}),
  ("scene", "mark1"),
  ("say", "a804", B, "Say it with me!", {"pre": .8}), ("wait", .8),
  ("say", "a805", H, "Living things respond to changes in the environment.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_respond"), ("wait", 2.1),
+ ("wait", 2.0), ("mark", "kw_respond"), ("wait", 1.9),
  ("scene", "notshy"),
  ("say", "a806", H, "The mimosa plant folds its leaves to protect itself from harm.", {"pre": .4}),
  ("say", "a807", B, "Not shy. Responding!", {"pre": .4}),
@@ -133,7 +133,7 @@ SEQ1 = [
  ("say", "a1202", H, "Did you spot the lizard? It was on the garden sign. A lizard runs away when you come close. Is that responding? Tell someone at home.", {"pre": .7, "post": .7}),
  *kwrecap(["Mimosa", "Respond to changes"]),
  # ---- 13 · the cliffhanger: five eggs in Kranji
- ("scene", "cliff"), ("wait", .6),
+ ("scene", "cliff"), ("wait", .4),
  ("say", "a1301", H, "Next stop: a farm in Kranji. This hen has kept five eggs warm for twenty-one days. Will every egg hatch? Find out in Part Two!", {"pre": .5}),
  ("mark", "eggtap"), ("wait", 1.3),
  # ---- 14 · "Now you know!" and the outro
@@ -142,16 +142,16 @@ SEQ1 = [
 
 SEQ2 = [
  # ---- 1 · silent recap montage (five shots, about 1.2 s each)
- ("scene", "recap"), ("wait", 6.2),
+ ("scene", "recap"), ("wait", 5.0),
  # ---- 2 · "Last time..."
  ("scene", "lasttime"),
  ("say", "b201", H, "Last time, Basil touched a mimosa, and its leaves folded up. It was not shy. It was responding to a change. Now we are on a farm in Kranji.", {"pre": .5, "post": .5}),
  # ---- 3 · today's goals (no voice) and the game
- ("scene", "goals"), ("wait", 4.7),
+ ("scene", "goals"), ("wait", 3.9),
  ("scene", "game"),
- ("say", "b301", H, "It's You against the Buddies again. You lock in first. One finger for every point. And a new lizard is hiding. Find it!", {"pre": .5, "post": .5}),
+ ("say", "b301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .5}),
  # ---- 4 · Round 1: will every egg hatch?
- ("scene", "r1card"), ("wait", 1.1),
+ ("scene", "r1card"), ("wait", 1.0),
  ("scene", "r1"),
  ("say", "b401", M, "Five eggs. So five chicks. Every egg hatches!", {"pre": .6}),
  ("say", "b402", H, "Round one. Is Momo right? Does every egg hatch? One, yes. Two, no. Show me with your fingers.", {"pre": .5}),
@@ -167,52 +167,48 @@ SEQ2 = [
  ("say", "b408", H, "One egg did not hatch. The answer is two. Not every egg hatches.", {"pre": 0, "post": .5}),
  ("scene", "after"),
  ("say", "b409", M, "Oh. Only four.", {"pre": .5}),
- ("say", "b410", H, "That happens, Momo. It is why some animals lay many eggs. A female mosquito lays one hundred to two hundred eggs at once!", {"pre": .45}),
- ("say", "b411", H, "Two fingers? One finger up!", {"pre": .5, "post": .6}),
+ ("say", "b410", H, "That happens, Momo. It is why some animals lay many eggs.", {"pre": .45}),
+ ("say", "b411", H, "Two fingers? One finger up!", {"pre": .5, "post": .4}),
  # ---- 5 · reproduce: more of them
  ("scene", "boards"),
  ("say", "b501", H, "Yesterday, one hen. Today, one hen and four chicks.", {"pre": .5, "post": .5}),
  ("scene", "mark1"),
- ("say", "b502", P, "Say it with me!", {"pre": .8}), ("wait", .8),
- ("say", "b503", H, "When living things reproduce, there will be more of them.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_reproduce"), ("wait", 2.1),
+ ("say", "b502", P, "Say it with me!", {"pre": .6}), ("wait", .8),
+ ("say", "b503", H, "When living things reproduce, there will be more of them. The ability to reproduce is important to ensure the survival of all living things.", {"pre": 0}),   # section 6, trim 5: both sentences of 1.21 on one card
+ ("wait", 2.0), ("mark", "kw_reproduce"), ("wait", 1.9),
  ("scene", "animals"),
  ("say", "b504", H, "Some animals reproduce by giving birth to their young alive.", {"pre": .5}),
  ("say", "b505", M, "Kittens! I was born like that too.", {"pre": .4}),
- ("say", "b506", H, "Other animals lay eggs and their young hatch out of the eggs.", {"pre": .6, "post": .6}),
+ ("say", "b506", H, "Other animals lay eggs and their young hatch out of the eggs.", {"pre": .6, "post": .4}),
  ("scene", "plants"),
  ("say", "b507", B, "But plants cannot lay eggs!", {"pre": .5}),
  ("say", "b508", H, "Some plants reproduce by producing seeds.", {"pre": .5}),
  ("say", "b509", H, "Like this tomato.", {"pre": .45, "post": .5}),
  ("say", "b510", H, "Other plants can reproduce through spores.", {"pre": .6}),
  ("say", "b511", H, "Like this fern. Look under the leaf.", {"pre": .45}),
- ("wait", .5), ("mark", "kw_spores"), ("wait", 2.1),
+ ("wait", .5), ("mark", "kw_spores"), ("wait", 1.9),
  # ---- 6 · why reproducing matters
  ("scene", "extinct"),
  ("say", "b601", H, "Why does reproducing matter? Without new young, a kind of living thing would disappear forever. Scientists call that extinct.", {"pre": .5}),
- ("wait", .2), ("mark", "kw_extinct"), ("wait", 2.1), ("mark", "defstrip"), ("wait", 3.2),
- ("scene", "mark2"),
- ("say", "b602", B, "Say it with me!", {"pre": .8}), ("wait", .8),
- ("say", "b603", H, "The ability to reproduce is important to ensure the survival of all living things.", {"pre": 0}),
- ("wait", 2.0),
- ("scene", "stamp2"), ("wait", 2.0),
+ ("wait", .2), ("mark", "kw_extinct"), ("wait", 3.7),   # the key word holds 1.5 s; the book's definition strip is on screen 3.4 s
+ ("scene", "stamp2"), ("wait", 1.5),
  # ---- 7 · grow: bigger AND more complex
  ("scene", "grow"),
  ("say", "b701", H, "And the four chicks? Now they will grow.", {"pre": .4}),
  ("say", "b702", M, "So a chick just gets bigger? A giant chick?", {"pre": .4}),
- ("say", "b703", H, "Not a giant chick. Look at the hen. Bigger, yes. But she also has wing feathers, a red comb and a tail.", {"pre": .5, "post": .6}),
+ ("say", "b703", H, "Not a giant chick. Look at the hen. Bigger, yes. But she also has wing feathers, a red comb and a tail.", {"pre": .5, "post": .4}),
  ("scene", "mark3"),
- ("say", "b704", M, "Say it with me!", {"pre": .8}), ("wait", .8),
+ ("say", "b704", M, "Say it with me!", {"pre": .6}), ("wait", .8),
  ("say", "b705", H, "When living things grow, they increase in size. They also become more complex.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_complex"), ("wait", 2.1),
+ ("wait", 2.0), ("mark", "kw_complex"), ("wait", 1.9),
  ("scene", "growline"),
- ("say", "b706", H, "You grow like that too. Bigger. And more complex: more hair, longer arms and legs, new teeth.", {"pre": .5, "post": .6}),
+ ("say", "b706", H, "You grow like that too. Bigger. And more complex: more hair, longer arms and legs, new teeth.", {"pre": .5, "post": .4}),
  ("scene", "pots"),
  ("say", "b707", H, "Like animals, plants also increase in size and become more complex as they grow.", {"pre": .5}),
  ("say", "b708", H, "A seed. A small plant. A bigger plant, with more leaves and flowers.", {"pre": .5}),
- ("wait", .4), ("mark", "stamp3"), ("wait", 1.9),
+ ("wait", .3), ("mark", "stamp3"), ("wait", 1.6),
  # ---- 8 · Showdown: Basil's trail notes
- ("scene", "showcard"), ("wait", 1.2),
+ ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
  ("say", "b801", B, "My trail notes!", {"pre": .5}),
  ("say", "b802", B, "One. A hen reproduces by laying eggs. Two. A tomato plant, by producing seeds. Three. A fern, by producing seeds.", {"pre": .5, "post": .3}),
@@ -223,25 +219,25 @@ SEQ2 = [
  ("say", "b806", M, "Three! Spores, not seeds.", {"pre": .4}),
  ("say", "b807", B, "Oops!", {"pre": .4, "post": .4}),
  ("scene", "fixed"),
- ("say", "b808", B, "Fixed! A fern reproduces through spores.", {"pre": 1.5}),
- ("say", "b809", H, "Showed three fingers? Put up two more on your score hand!", {"pre": .5, "post": .7}),
+ ("say", "b808", B, "Fixed! A fern reproduces through spores.", {"pre": .9}),
+ ("say", "b809", H, "Showed three fingers? Put up two more on your score hand!", {"pre": .5, "post": .5}),
  # ---- 9 · three stamps, and the chant
  ("scene", "stamps"),
  ("say", "b901", H, "Three stamps! Grow: the chicks. Respond: the mimosa. Reproduce: the hen.", {"pre": .5, "post": .5}),
  ("scene", "mark4"),
- ("say", "b902", P, "Say it with me!", {"pre": .8}), ("wait", .8),
+ ("say", "b902", P, "Say it with me!", {"pre": .6}), ("wait", .8),
  ("say", "b903", H, "Living things grow, respond to changes and reproduce.", {"pre": 0}),
  ("wait", 2.0),
  ("scene", "chant"),
  *CHANTSEQ,
  # ---- 10 · score hand and the lizard
  ("scene", "final"),
- ("say", "b1001", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .7}),
+ ("say", "b1001", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "b1002", H, "Did you spot the lizard? It was on the hen house wall. Does a lizard lay eggs, or give birth to its young alive? Tell someone at home.", {"pre": .7, "post": .7}),
+ ("say", "b1002", H, "Did you spot the lizard? It was on the hen house wall. Does a lizard lay eggs, or give birth to its young alive? Tell someone at home.", {"pre": .5, "post": .5}),
  # ---- 11 · the dare for Episode 4
- ("scene", "dare"), ("wait", 1.7),
- ("say", "b1101", H, "A hen. A cat. A tomato plant. A fern. There are millions of kinds of living things! But scientists sort them into only four groups. Can you guess the four? Lock in your answer for next time.", {"pre": 0, "post": .9}),
+ ("scene", "dare"), ("wait", 1.1),
+ ("say", "b1101", H, "A hen. A cat. A tomato plant. A fern. There are millions of kinds of living things! But scientists sort them into only four groups. Can you guess the four? Lock in your answer for next time.", {"pre": 0, "post": .6}),
  # ---- 12 · the key words
  *kwrecap(["Reproduce", "Spores", "Extinct", "More complex"]),
  # ---- 13 · "Now you know!" and the outro
