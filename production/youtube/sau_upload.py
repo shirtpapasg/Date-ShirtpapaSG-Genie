@@ -1,5 +1,5 @@
 """sau_upload.py: upload TheOneApp, Explored videos to YouTube, scheduled per the series rhythm, Made for Kids,
-in the "TheOneApp, Explored" playlist, with chapters from each render's timeline. Writes sau_uploaded.json.
+in the "TheOneApp, Explored" playlist (full episodes; Shorts go to "TheOneApp Shorts"), with chapters from each render's timeline. Writes sau_uploaded.json.
     YT_TOKEN_FILE=.yt_token.json python3 sau_upload.py [ids...]      (default: every video in VIDEOS not yet uploaded)
     python3 sau_upload.py --replace sau-ep01 ...    a new render of a video that is still scheduled (not yet public): deletes the
                                                     old upload and uploads the new file with the same details and playlist place
@@ -146,6 +146,8 @@ done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exist
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
 REPLACE = sys.argv[1:2] == ['--replace']; want = (sys.argv[2:] if REPLACE else sys.argv[1:]) or [v['id'] for v in VIDEOS]
 ORDER = [v['id'] for v in VIDEOS]
+TITLE = {v['id']: v['title'] for v in VIDEOS}
+SHORTS_PL = 'PLO1GzAf41cwM'  # "TheOneApp Shorts": every Short on the channel
 def save(): json.dump(done, open(os.path.join(HERE, 'sau_uploaded.json'), 'w'), indent=1)
 # playlist
 pl = done.get('_playlist')
@@ -170,7 +172,10 @@ for v in VIDEOS:
             try: call("POST", f"{UP}/thumbnails/set", {"videoId": vid, "uploadType": "media"}, raw=open(v['thumb'], 'rb').read(), ctype="image/jpeg"); print("  thumbnail set")
             except urllib.error.HTTPError as e: print("  thumbnail failed", e.code, e.read()[:200])
         for k in range(4):
-            try: call("POST", f"{API}/playlistItems", {"part": "snippet"}, {"snippet": {"playlistId": pl, "position": ORDER.index(v['id']), "resourceId": {"kind": "youtube#video", "videoId": vid}}}); print("  in playlist"); break
+            # Shorts go only to the "TheOneApp Shorts" playlist (teacher, 2026-11-20); the Explored playlist holds full episodes only.
+            if '#Shorts' in v['title']: item = {"playlistId": SHORTS_PL, "resourceId": {"kind": "youtube#video", "videoId": vid}}
+            else: item = {"playlistId": pl, "position": len([x for x in ORDER[:ORDER.index(v['id'])] if x in done and '#Shorts' not in TITLE[x]]), "resourceId": {"kind": "youtube#video", "videoId": vid}}
+            try: call("POST", f"{API}/playlistItems", {"part": "snippet"}, {"snippet": item}); print("  in playlist"); break
             except urllib.error.HTTPError as e: time.sleep(3 * (k + 1))
         time.sleep(2)
     except urllib.error.HTTPError as e:

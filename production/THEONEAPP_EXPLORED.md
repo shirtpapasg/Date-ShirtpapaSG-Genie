@@ -29,7 +29,7 @@ The teacher's weekly science-news videos for Singapore primary pupils (2026-11-1
 5. Every fact has a source. Use the agency or mission first (NEA, PUB, NParks, MSS, NASA, ESA). If a page can't be opened from the cloud, use two news reports that agree, and put the fact in the card's `changes` list as "to confirm before approving".
 6. Our own pictures: Heart's animations only. No news footage or newspaper photos.
 7. Dated, not "this week": say "In November 2026".
-8. YouTube: Made for Kids, playlist "TheOneApp, Explored"; sources listed in the description.
+8. YouTube: Made for Kids. Full episodes go in the playlist "TheOneApp, Explored"; Shorts (and the trailer) go ONLY in "TheOneApp Shorts" (PLO1GzAf41cwM), never in Explored (teacher, 2026-11-20). `youtube/sau_upload.py` does this by itself. Sources listed in the description.
 9. **Drawn, but true to the world and the science** (the teacher, 18 Nov 2026). Pictures can be cartoons, but what they show must be accurate: real map shapes and positions, real proportions and scales, correct science diagrams.
    - Maps come from real coastline data: `workspace/sau/geo_map.js` (`regionMap()`, used by the scenes) and `globe_thumb.py` (thumbnails), both built from Natural Earth.
    - Places (fires, pipelines, labels) go at their real longitude and latitude.
