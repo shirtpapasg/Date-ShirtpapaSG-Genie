@@ -33,3 +33,7 @@
    pot-sized and the proportions are wrong. Fix: whenever a buddy appears in a scene with real-world props (pot, box, plants, bench),
    put them in their circular signature-colour aura disc (as in the lock-in line-ups and Mark Sentence cards), so they read as
    "presenters", not as tiny animals inside the set. Check every scene in both parts for the same problem.
+9. Part 2 at about 0:35, the chant card ("Does it move? That's NOT the clue! What does it NEED? What can it DO?") with the YOU tag
+   bubble "Say it with us!": the cue must be SPOKEN: the three buddies together (or Heart) say "Say it with us!", then a 0.8 s pause
+   for reaction time, then the chant starts. (Same rule as note 3, applied to the chant; also check Part 1 / anywhere else a
+   "Say it with us!" or "Say it with me!" bubble appears.)
