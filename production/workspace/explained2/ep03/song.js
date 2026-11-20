@@ -1,4 +1,4 @@
-// song.js: the whole soundtrack of EP1 -> out/mix.wav. Every sound comes from an event in cues.json (dump_cues.js), every voice line
+// song.js: the whole soundtrack of EP3 (EP1's engine) -> out/mix.wav. Every sound comes from an event in cues.json (dump_cues.js), every voice line
 // from tl.json. Synth = the animation-studio plugin's audio engine (audio/, copied from short1/engine/audio); ambiences from the sau
 // sfx library (rain, birds). Sound palette = STYLE_GUIDE section 12.   node song.js
 const path = require('path'), fs = require('fs');
@@ -116,6 +116,7 @@ const P = {
   blast: (t) => { for (const [n, g] of [['C4', .5], ['E4', .45], ['G4', .45], ['C5', .5], ['E5', .4]]) { const x = I.brassNote(m(n), .9); game.addMono(x, t, g * .5); verb.addMono(x, t, g * .2); }
     const c = I.crash(11), c2 = I.crash(12); game.addMono(c, t, .3); game.addMono(c2, t + .02, .18, .5); verb.addMono(c, t, .15); game.addMono(K, t, 1.0); game.addMono(I.thud(70, .14), t, .9); game.addMono(I.pop(1800, 131), t, .8); game.addMono(I.pop(2400, 132), t + .05, .5, .6); game.addMono(I.pop(1300, 133), t + .09, .5, -.6); game.addMono(CL, t, .7);
     ['C5', 'E5', 'G5', 'C6', 'E6', 'G6', 'C7'].forEach((n, i) => mar(n, t + i * .045, .5, { decay: .7 })); chordAt(t, ['C4', 'E4', 'G4', 'C5', 'E5'], .12, 3.0); ['C3', 'G3', 'E4', 'G4', 'C5'].forEach((n, i) => uke.addMono(I.guitar(m(n) + 12, 1.6, { bright: .6, seed: i }), t + i * .015, .24)); },
+  cheep: (t, v) => { for (let j = 0; j < 2; j++) { const x = I.bell(3300 + 240 * ((v || 0) % 3) + j * 320, .05, 1.2, 1.6); game.addMono(x, t + j * .09, .11, ((v || 0) % 3 - 1) * .5); verb.addMono(x, t + j * .09, .05); } },
   final: (t) => { game.addMono(I.thud(80, .1), t, .7); game.addMono(CL, t, .5); [['E5', 0], ['G5', 1], ['C6', 2], ['E6', 3]].forEach(([n, s]) => mar(n, t + s * BEAT / 2, .5, { decay: .7 }));
     ['C3', 'G3', 'E4', 'G4', 'C5'].forEach((n, i) => uke.addMono(I.guitar(m(n) + 12, 1.6, { bright: .6, seed: i }), t + i * .02, .22)); chordAt(t, ['C4', 'E4', 'G4', 'D5'], .09, 2.6); const c = I.crash(9); game.addMono(c, t, .1); },
 };

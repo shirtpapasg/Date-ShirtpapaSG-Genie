@@ -96,7 +96,8 @@ SC.eyes = (t, s) => { const L = "a901", tF = W(L, "bright") - .1, tE = W(L, "eye
 SC.mark2 = (t, s) => markScene(t, s, { id: "a903", sayId: "a902", who: "pip", n: "2 of 2", text: "The ability to respond to changes in our environment helps to protect us from danger and keeps us safe.", keys: ["respond", "changes", "protect", "danger", "keeps", "safe."], size: 60, y: 256 });
 SC.ledge = (t, s) => { const a = "a904", b = "a905", tG = W(b, "grows") - .2, ln = LEDGE_DIR * 30 * eio((t - tG) / 2.2), cam = [lerp(1.5, 1.7, eio((t - s.t0) / 6)), 1150, 720];
   return hotelView(t, { sign: 0, rooms: [0, 0, 0], board: 0, clock: 10, items: `<g opacity=".55" filter="url(#ghostF)">${gPlant({ lean: 0 }, 1000, 1)}</g>` + gPlant({ lean: ln, sway: .3 * Math.sin(t) }, 1000, 1) }, cam)
-    + bookCap(t, a, "Plants are also able to respond to changes in the environment.", 170, { size: 48, maxW: 1000, x: 800 }) + (t >= tG + .6 ? TF(520, 760, spring(t, tG + .6, .4), tpill(0, 0, "towards the sunlight", 40, P.sun, P.ink, { w: 700 })) : "") + HUD(t); };
+    + `<circle cx="1800" cy="420" r="380" fill="#FFE9A8" opacity="${n2(.5 + .1 * Math.sin(t * 1.5))}" filter="url(#b60)"/><path d="M1920 300 L1000 1080 H1600 L1920 760z" fill="#FFF3B8" opacity=".25" filter="url(#b30)"/>`
+    + bookCap(t, a, "Plants are also able to respond to changes in the environment.", 170, { size: 48, maxW: 1000, x: 800 }) + (t >= tG + .6 ? TF(1500, 700, spring(t, tG + .6, .4), tpill(0, 0, "towards the sunlight", 40, P.sun, P.ink, { w: 700 })) : "") + HUD(t); };
 
 /* ============ 10 · HOLD ON! Pip's list ============ */
 const NB = [760, 1040, .86], RG = [1470, 800];
