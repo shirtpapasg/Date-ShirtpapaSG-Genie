@@ -25,7 +25,7 @@ SC.callback = (t, s) => { const a = "e201", b = "e202", tw_ = [W(a, "amphibians"
   const at = [lerp(CARD[0], 1260, big), lerp(CARD[1], 1040, big), lerp(CARD[2], .9, big)], fl = [0, 1, 2].map((i) => pulse(t, tw_[i] - .05, .05, .9)).concat([0, 0, 0]), pl = [0, 0, 0].concat([0, 1, 2].map((i) => pulse(t, t3 + i * .35, .05, .8) + (t > t3 + 1.4 && t < tM ? .4 + .3 * Math.sin(t * 5 + i) : 0)));
   const gA = pulse(t, W(b, "ant") - .15, .1, 1.6), gS = pulse(t, W(b, "spider") - .15, .1, 1.6), look = t < W(b, "spider") - .1 ? -6 : 6;
   return lakeView(t, {}, CAMW) + glowDisc(gx(CAMW, 990), gy(CAMW, 890), 110, gA) + glowDisc(gx(CAMW, GD.web[0]), gy(CAMW, GD.web[1]), 120, gS) + motes(t, 18, 5)
-    + board(t, {}, { flash: fl, pulse: pl }, at) + wBasil(t, { poses: [[s.t0, "sit"]] }) + (t < tM ? wPip(t) + wMomo(t, { out: tM - .1 }) : wPip(t))
+    + wBasil(t, { poses: [[s.t0, "sit"]] }) + (big < .05 ? wPip(t) : "") + board(t, {}, { flash: fl, pulse: pl }, at) + (t < tM ? wMomo(t, { out: tM - .1 }) : "")
     + buddy("momo", 1700, 1056, 300, t, { aura: true, flip: true, in: tM, poses: [[tM, "thinking"], [LT(b) - .12, "sit"], [LE(b) + .1, "thinking"]], look })
     + say(b, 1300, 520, t, { size: 46, tail: 260, maxW: 620 }) + HUD(t); };
 SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) / .16); return k <= 0 ? 0 : lerp(2.4, 1, eo(k)) + .05 * wob(u, d + .16, .4); }, k1 = a(.1), k2 = a(.5);
