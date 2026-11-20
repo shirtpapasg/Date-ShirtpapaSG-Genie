@@ -82,15 +82,17 @@ SC.shrink = (t, s) => { const td = MK("dive"), tShade = MK("shade"), tSun = MK("
 if (PART === 2) { (() => {
 // the fur forest: hairs rising from warm skin. wind 0..1 bends them back and makes them flutter; you = the big hair in front (sun-yellow rim)
 function furForest(t, wind, o = {}) { let s = "", hs = []; const warmC = o.skin || "#E09A6A";
-  for (let i = 0; i < 110; i++) { const d = Math.pow(hash(i, 41), .8), x = -120 + hash(i, 43) * 2160, y = lerp(760, 1120, d), len = lerp(240, 980, d), th = lerp(3, 30, d); hs.push({ d, x, y, len, th, i }); }
+  for (let i = 0; i < 360; i++) { const d = Math.pow(hash(i, 41), .7), x = -160 + hash(i, 43) * 2240, y = lerp(760, 1140, d), len = lerp(170, 760, d) * (.8 + .4 * hash(i, 49)), th = lerp(4, 30, d); hs.push({ d, x, y, len, th, i }); }
   hs.sort((a, b) => a.d - b.d);
-  s += `<rect x="-100" y="${n2(740)}" width="2120" height="420" fill="${warmC}" opacity=".95" filter="url(#b30)"/><ellipse cx="960" cy="1120" rx="1300" ry="300" fill="#FFC890" opacity=".55" filter="url(#b60)"/>`;
-  for (const h of hs) { const sw = .07 * Math.sin(t * 1.3 + h.i) * (1 - wind) + wind * (-.85 - .1 * Math.sin(t * 14 + h.i * 3)), lean = .12 * (hash(h.i, 47) - .5) + sw, tx = h.x + Math.sin(lean) * h.len, ty = h.y - Math.cos(lean) * h.len, cx = h.x + Math.sin(lean * .4) * h.len * .5, cy = h.y - h.len * .55;
-    const col = hexL(hexL("#D8A878", "#5E3820", h.d), o.tint || "#3B2A8C", (1 - h.d) * .45);
-    s += `<path d="M${n2(h.x)} ${n2(h.y)} Q${n2(cx)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="${col}" stroke-width="${n2(h.th)}" stroke-linecap="round"/>` + (h.d > .55 ? `<path d="M${n2(h.x + h.th * .2)} ${n2(h.y - 20)} Q${n2(cx + h.th * .2)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#F4D2A8" stroke-width="${n2(h.th * .22)}" stroke-linecap="round" opacity=".45"/>` : ""); }
+  s += `<rect x="-100" y="${n2(720)}" width="2120" height="440" fill="${warmC}" opacity=".95" filter="url(#b30)"/><ellipse cx="960" cy="1120" rx="1300" ry="300" fill="#FFC890" opacity=".6" filter="url(#b60)"/>`;
+  for (const h of hs) { const sw = .08 * Math.sin(t * 1.3 + h.i * .7) * (1 - wind) + wind * (-.95 - .08 * Math.sin(t * 15 + h.i * 3)), lean = .3 * (hash(h.i, 47) - .5) + sw, tx = h.x + Math.sin(lean) * h.len, ty = h.y - Math.cos(lean) * h.len, bend = (hash(h.i, 51) - .5) * .5 + wind * -.3, cx = h.x + Math.sin(lean + bend) * h.len * .55, cy = h.y - Math.cos(lean + bend) * h.len * .55;
+    const col = hexL(hexL("#E0B07A", "#6A4024", h.d * .8 + .2 * hash(h.i, 53)), o.tint || "#3B2A8C", (1 - h.d) * .5), w = h.th, nx = Math.cos(lean) * w * .5, ny = Math.sin(lean) * w * .5;
+    s += `<path d="M${n2(h.x - nx)} ${n2(h.y - ny)} Q${n2(cx - nx * .6)} ${n2(cy - ny * .6)} ${n2(tx)} ${n2(ty)} Q${n2(cx + nx * .6)} ${n2(cy + ny * .6)} ${n2(h.x + nx)} ${n2(h.y + ny)}z" fill="${col}"/>`
+      + (h.d > .6 ? `<path d="M${n2(h.x)} ${n2(h.y - 10)} Q${n2(cx - nx * .3)} ${n2(cy - ny * .3)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#F6D8A8" stroke-width="${n2(w * .18)}" opacity=".5"/>` : ""); }
   // you: one hair, near the middle, rimmed in sun-yellow
-  const ls = .05 * Math.sin(t * 1.1) * (1 - wind) - .9 * wind - .08 * wind * Math.sin(t * 16), L = 920, tx = 980 + Math.sin(ls) * L, ty = 1150 - Math.cos(ls) * L, cx = 980 + Math.sin(ls * .4) * L * .5, cy = 1150 - L * .55;
-  s += `<path d="M980 1150 Q${n2(cx)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="${P.sun}" stroke-width="54" stroke-linecap="round" opacity=".55" filter="url(#b10)"/><path d="M980 1150 Q${n2(cx)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#6A4024" stroke-width="38" stroke-linecap="round"/><path d="M972 1130 Q${n2(cx - 8)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#E8C090" stroke-width="9" stroke-linecap="round" opacity=".6"/>`;
+  const ls = .05 * Math.sin(t * 1.1) * (1 - wind) - .9 * wind - .06 * wind * Math.sin(t * 16), L = 900, tx = 980 + Math.sin(ls) * L, ty = 1160 - Math.cos(ls) * L, cx = 980 + Math.sin(ls * .5 + .08) * L * .55, cy = 1160 - Math.cos(ls * .5) * L * .55, nx = Math.cos(ls) * 16, ny = Math.sin(ls) * 16;
+  const d = `M${n2(980 - nx)} ${n2(1160 - ny)} Q${n2(cx - nx * .6)} ${n2(cy - ny * .6)} ${n2(tx)} ${n2(ty)} Q${n2(cx + nx * .6)} ${n2(cy + ny * .6)} ${n2(980 + nx)} ${n2(1160 + ny)}z`;
+  s += `<path d="${d}" fill="none" stroke="${P.sun}" stroke-width="22" stroke-linejoin="round" opacity=".55" filter="url(#b10)"/><path d="${d}" fill="#7A4A28" stroke="#FFE08A" stroke-width="3"/><path d="M976 1130 Q${n2(cx - 4)} ${n2(cy)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#F6D8A8" stroke-width="5" opacity=".6"/>`;
   return s; }
 // the world seen from the roost, upside down (the bat hangs head down): the ground is at the top, the sky below it
 const upsideWorld = (t) => `<g filter="url(#b4)"><g transform="translate(0 1080) scale(1 -1)">${bg("palmvalley")}</g></g><rect width="1920" height="1080" fill="#3B2A8C" opacity=".18"/>`;
@@ -116,7 +118,7 @@ SC.shrink = (t, s) => { const td = MK("dive"), tW = MK("wings"), tF = MK("fly"),
   // back at the palm: the baby bat drinks its mother's milk (seen close, side on), in warm light under the leaf
   if (back > 0) { const z = lerp(1.3, 1, eo((t - tB) / 1.6)); out += OP(back, `<rect width="1920" height="1080" fill="#2A2050"/><g filter="url(#b4)" opacity=".7">${bg("palmvalley")}</g><rect width="1920" height="1080" fill="#2A2050" opacity=".4"/><circle cx="960" cy="520" r="420" fill="#FFB070" opacity=".22" filter="url(#b60)"/>`
       + `<g transform="translate(960 560) scale(${n2(z)}) translate(-960 -560)">${TF(960, -80, 2.4, `<path d="M-300 0 Q0 40 300 0" stroke="#22402F" stroke-width="30" fill="none"/>` + hangBat({ baby: ss(tBaby - .4, tBaby + .4, t), blink: ((t + .5) % 3.1) < .12 }))}</g>`)
-      + (t >= tMilk ? lineTag(t, tMilk, 1420, 640, 960 + 22 * 2.4 * 1, -80 + 150 * 2.4, "milk", 50, P.sun, P.ink) : ""); }
+      + (t >= tMilk ? lineTag(t, tMilk, 1420, 640, 960 + 50 * 2.4, -80 + 175 * 2.4, "milk", 50, P.sun, P.ink) : ""); }
   // the thermometer: the column stays in the middle the whole time (the air cools; the body under you stays warm)
   const lev = .56 + .01 * Math.sin(t * 3);
   out += TF(1790, 1050, .84, thermo(lev, 300, { glow: pulse(t, tWarm, .1, 1.6) }));
