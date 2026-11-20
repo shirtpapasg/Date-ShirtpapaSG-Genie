@@ -13,36 +13,48 @@ const uwRays = (t, col = "#fff", o = .13) => [0, 1, 2, 3, 4].map((i) => { const 
 const ramp3 = (u, stops) => { for (let i = 1; i < stops.length; i++) if (u <= stops[i][0]) return hexL(stops[i - 1][1], stops[i][1], (u - stops[i - 1][0]) / (stops[i][0] - stops[i - 1][0])); return stops[stops.length - 1][1]; };
 
 const HZ = 470;   // the scale journey's horizon (shared, so Part 2's recap can show a lit scale)
-// the scale field: rows of bead scales running away towards the lizard's head, curving down at the sides (the top of its back).
-// light: {base, lit, zl (the sunlight front: rows nearer than z = zl... are still in shade), warm 0..1, wet 0..1}, br = breathing (px)
-function scaleField(t, L) { const rows = 18, zm = Math.pow(1.17, rows - 1); let pts = ""; for (let i = 0; i <= 40; i++) { const x = -200 + i * 58, dx = (x - 960) / 960; pts += `${i ? "L" : "M"}${n2(x)} ${n2(HZ + 600 / zm + L.br / zm + dx * dx * 520 / Math.sqrt(zm))}`; }
-  let s = `<path d="${pts} L2120 1200 L-200 1200z" fill="${hexL(hexL(L.base, "#000000", .3), L.haze, .25)}"/>`;
-  for (let j = rows - 1; j >= 0; j--) { const z = Math.pow(1.17, j), y0 = HZ + 600 / z + L.br * (1 / z), w = 236 / z, h = 150 / z, off = (j % 2) * .5, nc = Math.ceil(1920 / w / 2) + 3, haze = .55 * Math.pow(1 - 1 / z, 1.6);
-    for (let c = -nc; c <= nc; c++) { const x = 960 + (c + off) * w, dx = (x - 960) / 960, y = y0 + dx * dx * 520 / Math.sqrt(z), sk = 1 - .25 * dx * dx; if (y > 1180 || x < -w || x > 1920 + w) continue;
-      const lit = z > L.zl ? 1 : clamp(1 - (L.zl - z) * 1.6), cc = c + 40, spot = (j % 4 === 1 && cc % 5 < 2) || (j % 4 === 3 && (cc + 2) % 5 < 2), ridge = Math.abs(c + off) < .6;
-      let col = hexL(spot ? L.spot : L.base, L.lit, lit * L.warm); col = hexL(col, hash(c * 13 + j * 5, 3) > .5 ? "#000000" : "#FFFFFF", .06); col = hexL(col, L.haze, haze);
-      const dkc = hexL(hexL(col, "#000000", .26 + .12 * Math.abs(dx)), L.haze, haze * .8), hw = w * (ridge ? .56 : .5), hh = h * (ridge ? .62 : .54);
-      s += `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(dx * 16)}) scale(${n2(sk)} 1)"><rect x="${n2(-hw)}" y="${n2(-hh + h * .12)}" width="${n2(2 * hw)}" height="${n2(2 * hh)}" rx="${n2(Math.min(hw, hh) * .9)}" fill="${dkc}"/><rect x="${n2(-hw * .92)}" y="${n2(-hh)}" width="${n2(2 * hw * .92)}" height="${n2(2 * hh * .9)}" rx="${n2(Math.min(hw, hh) * .85)}" fill="${col}"/>`
-        + (w > 26 ? `<ellipse cx="${n2(-w * .1)}" cy="${n2(-hh * .55)}" rx="${n2(hw * .5)}" ry="${n2(hh * .22)}" fill="#fff" opacity="${n2((.1 + .18 * lit * L.warm + .4 * L.wet) * (1 - haze))}"/>` : "") + `</g>`; } }
-  return s; }
-// your own scale: the big tile under the camera, at the bottom of the frame (a faint sun-yellow rim says "this is you")
-const myScale = (L, glow) => `<g transform="translate(960 1160)"><ellipse rx="620" ry="250" fill="${hexL(hexL(L.base, L.lit, L.warm), "#000000", .2)}"/><ellipse cy="-30" rx="580" ry="210" fill="${hexL(L.base, L.lit, L.warm)}"/><ellipse cx="-120" cy="-150" rx="260" ry="40" fill="#fff" opacity="${n2(.1 + .25 * L.wet)}"/>
-  <ellipse cy="-30" rx="580" ry="210" fill="none" stroke="${P.sun}" stroke-width="10" opacity="${n2(.35 + .5 * glow)}"/>${glow > .02 ? `<ellipse cy="-30" rx="600" ry="230" fill="#FFB347" opacity="${n2(.35 * glow)}" filter="url(#b30)"/>` : ""}</g>`;
+// the lizard's back, seen from one scale on it (the teacher's notes, 20 Nov: thousands of very small bead-like scales, a fine pebbly texture,
+// no big tiles; dark grey-brown with rows of small pale yellow spots; the back broad and gently arched; far ahead the shoulders, the front legs
+// bent out at the elbow and down to the ground like a push-up, the long thick neck and the long, narrow, low head with small eyes on its sides).
+// Drawn as bands of bead pattern that get smaller with distance. L = {base, spot, lit, warm, zl (sunlight front), br (breathing), wet, haze}
+const BZ = [.82, 1, 1.18, 1.4, 1.66, 1.98, 2.36, 2.82, 3.4, 4.1, 5.0];          // distances of the band edges: from your scale out to the shoulders
+const bY = (z, br = 0) => HZ + 120 + 470 / z + br / z, bHW = (z) => 1300 / z + 40;          // the back's top line on screen and its half-width
+function beadPat(id, z, L, spot) { const s = 3.2 / z, lit = z > L.zl ? 1 : clamp(1 - (L.zl - z) * 1.6), col = hexL(hexL(spot ? L.spot : L.base, L.lit, lit * L.warm), L.haze, .5 * Math.pow(1 - 1 / z, 1.5)), dk = hexL(col, "#000000", .45), hi = .1 + .2 * lit * L.warm + .4 * L.wet;
+  // a 24 x 18 tile with three staggered beads (one pale in a spotted band)
+  const bead = (x, y, c) => `<ellipse cx="${x}" cy="${y + 1}" rx="6.6" ry="5.4" fill="${dk}"/><ellipse cx="${x}" cy="${y}" rx="5.8" ry="4.6" fill="${c}"/><ellipse cx="${x - 1.6}" cy="${y - 1.8}" rx="2.4" ry="1.4" fill="#fff" opacity="${n2(hi)}"/>`;
+  const pale = hexL(hexL(hexL("#D2C48A", col, .4), L.lit, lit * L.warm * .5), L.haze, .4 * Math.pow(1 - 1 / z, 1.5));
+  return `<pattern id="${id}" width="24" height="18" patternUnits="userSpaceOnUse" patternTransform="translate(960 ${n2(bY(z))}) scale(${n2(s)})"><rect width="24" height="18" fill="${dk}"/>${bead(6, 4.5, col)}${bead(18, 4.5, col)}${bead(0, 13.5, col)}${bead(24, 13.5, col)}${bead(12, 13.5, spot ? pale : col)}</pattern>`; }
+function backView(t, L, legs = {}) { let defs = "", s = "";
+  // the shoulders, the front legs (push-up), the neck and the head, far ahead (drawn first: the near back covers their lower part)
+  const zS = BZ[BZ.length - 1], yS = bY(zS, L.br), hw = bHW(zS) * .95, c = hexL(hexL(L.base, L.lit, L.warm * .9), L.haze, .45), dk = hexL(c, "#000000", .35), sp = hexL(hexL("#D2C48A", L.lit, L.warm * .5), L.haze, .45);
+  const leg = (sd) => { const ph = legs.ph || 0, lift = legs.walk ? Math.max(0, Math.sin(ph + (sd > 0 ? 0 : Math.PI))) * 14 : 0, sx = 960 + sd * hw * .78, ex = 960 + sd * (hw + 100), ey = yS - 4 - lift, fx = 960 + sd * (hw + 128), fy = yS + 104 - lift * .5;
+    return `<path d="M${n2(sx)} ${n2(yS - 6)} Q${n2(ex + sd * 30)} ${n2(ey - 40)} ${n2(fx)} ${n2(fy)}" fill="none" stroke="${dk}" stroke-width="74" stroke-linecap="round" stroke-linejoin="round"/><path d="M${n2(sx)} ${n2(yS - 6)} Q${n2(ex + sd * 30)} ${n2(ey - 40)} ${n2(fx)} ${n2(fy)}" fill="none" stroke="${c}" stroke-width="62" stroke-linecap="round" stroke-linejoin="round"/>`
+      + [-2, -1, 0, 1, 2].map((q) => `<path d="M${n2(fx)} ${n2(fy + 20)} l${n2(sd * 14 + q * 16)} ${n2(26)} q${n2(q * 4)} 8 ${n2(sd * 6 + q * 6)} 12" fill="none" stroke="#14120E" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`).join(""); };
+  const tg = legs.tongue || 0, hy = yS - 128 - (legs.lift || 0);
+  s += leg(-1) + leg(1);
+  s += `<path d="M${n2(960 - hw)} ${n2(yS + 30)} Q${n2(960 - hw * .45)} ${n2(yS - 30)} ${n2(960 - 56)} ${n2(hy + 4)} L${n2(960 + 56)} ${n2(hy + 4)} Q${n2(960 + hw * .45)} ${n2(yS - 30)} ${n2(960 + hw)} ${n2(yS + 30)}z" fill="${c}" stroke="${dk}" stroke-width="5"/>`;
+  for (let i = 0; i < 14; i++) s += `<circle cx="${n2(960 + (hash(i, 71) - .5) * hw * 1.2)}" cy="${n2(yS - 10 - hash(i, 73) * 50)}" r="${n2(3 + 2 * hash(i, 75))}" fill="${sp}" opacity=".8"/>`;
+  s += `<g transform="translate(960 ${n2(hy)}) scale(.8)"><path d="M-74 6 Q-60 -20 -20 -58 Q0 -72 20 -58 Q60 -20 74 6z" fill="${dk}"/><path d="M-62 4 Q-50 -18 -16 -52 Q0 -64 16 -52 Q50 -18 62 4z" fill="${c}"/>${[[-30, -10], [30, -10], [-14, -32], [14, -32], [0, -48]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="${sp}" opacity=".8"/>`).join("")}
+    <ellipse cx="-56" cy="-6" rx="8" ry="6" fill="#14120E"/><ellipse cx="56" cy="-6" rx="8" ry="6" fill="#14120E"/><circle cx="-58" cy="-8" r="2" fill="#fff" opacity=".8"/><circle cx="54" cy="-8" r="2" fill="#fff" opacity=".8"/>${tg > .02 ? `<path d="M0 -62 l0 ${n2(-44 * tg)} m0 0 l-10 -14 m10 14 l10 -14" stroke="#B85A8E" stroke-width="5" fill="none" stroke-linecap="round"/>` : ""}</g>`;
+  // the back itself: bands of beads, farthest first, each a curved strip (the back arches down at its sides)
+  for (let j = BZ.length - 2; j >= 0; j--) { const z0 = BZ[j], z1 = BZ[j + 1], spot = j % 3 === 1, id = "bp" + j; defs += beadPat(id, (z0 + z1) / 2, L, spot);
+    const edge = (z, dir) => { let p = ""; const H = bHW(z); for (let k = 0; k <= 24; k++) { const u = dir > 0 ? k / 24 : 1 - k / 24, x = 960 - H + 2 * H * u, dx = (x - 960) / H; p += `${p ? "L" : "M"}${n2(x)} ${n2(bY(z, L.br) + dx * dx * 110 / Math.sqrt(z))}`; } return p; };
+    s += `<path d="${edge(z1, 1)} ${edge(z0, -1).replace("M", "L")}z" fill="url(#${id})"/>`; }
+  // the back's two edges, curving away
+  s += `<rect x="0" y="0" width="1920" height="1080" fill="url(#bkEdge)" opacity="0"/>`;
+  return `<defs>${defs}</defs>` + s; }
+// your own scale: ONE small bead at the bottom middle, among thousands (a faint sun-yellow rim says "this is you")
+const myScale = (L, glow) => { const lit = L.zl < 1.05 ? 1 : 0, c = hexL(L.base, L.lit, L.warm), dk = hexL(c, "#000000", .45);
+  return `<g transform="translate(960 ${n2(bY(1.05, L.br) - 70)})">${glow > .02 ? `<ellipse rx="90" ry="70" fill="#FFB347" opacity="${n2(.5 * glow)}" filter="url(#b10)"/>` : ""}<ellipse cy="4" rx="40" ry="32" fill="${dk}"/><ellipse rx="36" ry="28" fill="${c}"/><ellipse cx="-10" cy="-10" rx="14" ry="8" fill="#fff" opacity="${n2(.15 + .3 * L.wet + .2 * L.warm)}"/><ellipse rx="44" ry="36" fill="none" stroke="${P.sun}" stroke-width="5" opacity="${n2(.5 + .5 * glow)}"/></g>`; };
 // the world beyond the lizard's back: the sky, the far bank and the lake, and giant grass blades (with dew) that slide past as it crawls. d = distance crawled
 function worldBack(t, d, Lw) { let s = `<rect x="-200" y="-200" width="2320" height="${HZ + 260}" fill="${Lw.sky}"/>`;
   s += `<circle cx="${Lw.sunX}" cy="${Lw.sunY}" r="${Lw.sunR * 3}" fill="${Lw.sunC}" opacity="${n2(Lw.sunA * .5)}" filter="url(#b60)"/><circle cx="${Lw.sunX}" cy="${Lw.sunY}" r="${Lw.sunR}" fill="#FFFBEA" opacity="${n2(Lw.sunA)}"/>`;
-  s += `<g filter="url(#b10)">${Array.from({ length: 16 }, (_, i) => `<circle cx="${n2(((i * 170 - d * 40) % 2400 + 2400) % 2400 - 240)}" cy="${n2(HZ - 60 - 40 * hash(i, 2))}" r="${n2(90 + 60 * hash(i, 4))}" fill="${Lw.trees}"/>`).join("")}</g><rect x="-200" y="${HZ - 40}" width="2320" height="300" fill="${Lw.ground}"/>`;
+  s += `<g filter="url(#b10)">${Array.from({ length: 16 }, (_, i) => `<circle cx="${n2(((i * 170 - d * 40) % 2400 + 2400) % 2400 - 240)}" cy="${n2(HZ - 60 - 40 * hash(i, 2))}" r="${n2(90 + 60 * hash(i, 4))}" fill="${Lw.trees}"/>`).join("")}</g><rect x="-200" y="${HZ - 40}" width="2320" height="900" fill="${Lw.ground}"/>`;
   // giant grass blades with dew drops, near the lizard's sides: they come from far (small, near the middle) and slide out to the edges
   for (let i = 0; i < 14; i++) { const sd = i % 2 ? 1 : -1, v = ((hash(i, 5) + d * .22) % 1), x = 960 + sd * (260 + 1100 * v * v), sc = .25 + 1.6 * v * v, y = HZ + 40 + 300 * v * v, sw = 10 * Math.sin(t * .8 + i), h = 520 * sc, col = i % 3 ? Lw.blade : Lw.blade2;
     s += `<path d="M${n2(x - 26 * sc)} ${n2(y + 40)} Q${n2(x + sw)} ${n2(y - h * .5)} ${n2(x + sd * 60 * sc + sw * 2)} ${n2(y - h)} Q${n2(x + 10 * sc)} ${n2(y - h * .5)} ${n2(x + 26 * sc)} ${n2(y + 40)}z" fill="${col}" opacity="${n2(Math.min(1, v * 3))}"/>`;
     if (Lw.dew > .02) s += `<circle cx="${n2(x + sd * 18 * sc + sw * .7)}" cy="${n2(y - h * .55)}" r="${n2(15 * sc)}" fill="#E8F6FF" opacity="${n2(.85 * Lw.dew * Math.min(1, v * 3))}" stroke="#fff" stroke-width="${n2(3 * sc)}"/><circle cx="${n2(x + sd * 18 * sc + sw * .7 - 5 * sc)}" cy="${n2(y - h * .55 - 5 * sc)}" r="${n2(4 * sc)}" fill="#fff" opacity="${n2(Lw.dew * Math.min(1, v * 3))}"/>`; }
   return s; }
-// the back of the lizard's head and neck, far ahead along its back (it lifts a little as it crawls)
-const lizHead = (L, lift = 0, tg = 0) => { const c = hexL(hexL(L.base, L.lit, L.warm * .9), L.haze, .2), dk = hexL(c, "#000000", .28), sp = hexL(hexL(L.spot, L.lit, L.warm * .9), L.haze, .2);
-  return `<g transform="translate(960 ${n2(HZ + 30 - lift)})"><path d="M-190 40 Q-150 -20 -96 -34 Q-60 -100 -30 -150 Q0 -172 30 -150 Q60 -100 96 -34 Q150 -20 190 40z" fill="${dk}"/><path d="M-160 40 Q-126 -14 -84 -28 Q-52 -92 -24 -140 Q0 -158 24 -140 Q52 -92 84 -28 Q126 -14 160 40z" fill="${c}"/>
-    ${[[-50, -40], [50, -40], [0, -70], [-26, -100], [26, -100], [0, -126]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="12" ry="7" fill="${sp}" opacity=".7"/>`).join("")}
-    <ellipse cx="-74" cy="-58" rx="20" ry="16" fill="${dk}"/><ellipse cx="74" cy="-58" rx="20" ry="16" fill="${dk}"/><circle cx="-80" cy="-60" r="8" fill="#1E1C16"/><circle cx="80" cy="-60" r="8" fill="#1E1C16"/><circle cx="-82" cy="-63" r="2.5" fill="#fff"/><circle cx="78" cy="-63" r="2.5" fill="#fff"/>
-    ${tg > .02 ? `<path d="M0 -160 l0 ${n2(-46 * tg)} m0 0 l-10 -14 m10 14 l10 -14" stroke="#C86A9A" stroke-width="5" fill="none" stroke-linecap="round"/>` : ""}</g>`; };
 if (PART === 1) { (() => {
 SC.shrink = (t, s) => { const td = MK("dive"), tShade = MK("shade"), tSun = MK("sun"), tNoon = MK("noon"), tLand = W("e1104", "lands") - .1, tSp = W("e1105", "splash") - .05, tHot = W("e1105", "hot") - .1, tCool = W("e1105", "cool") - .1;
   const crawl = ss(tSun - .2, tSun + 1.0, t) * (1 - ss(tSp - .3, tSp, t)), slowCrawl = ss(tShade, tShade + 1, t) * (1 - ss(tSun - .4, tSun, t)) * .25;
@@ -51,16 +63,15 @@ SC.shrink = (t, s) => { const td = MK("dive"), tShade = MK("shade"), tSun = MK("
   const wet = ss(tSp, tSp + .4, t), warm = t < tSun ? 0 : clamp(ss(tLand - .8, tLand + 1.6, t) * .75 + .25 * ss(tNoon - .4, tNoon + .8, t)) * (1 - .85 * ss(tSp + .2, tCool + 1.2, t));
   const zl = t < W("e1104", "sunlight") - 1.2 ? 99 : lerp(14, -1, eio((t - (W("e1104", "sunlight") - 1.2)) / (tLand - W("e1104", "sunlight") + 1.4)));
   const noon = ss(tNoon - .3, tNoon + .8, t) * (1 - wet), br = 14 * Math.sin((t - td) * 2.1);
-  const L = { base: hexL("#5E6450", "#5A6E58", wet * .7), spot: hexL("#C9BE86", "#9EB08A", wet), haze: t < tSun ? "#9FB4CC" : hexL("#E8D8B0", "#F4EEDC", noon), lit: hexL("#E8A040", "#F4C870", noon), warm: wet ? warm : (t < tSun ? 0 : warm), zl: wet > .5 ? 99 : zl, br, wet };
+  const L = { base: hexL("#3E3B31", "#3A4A3E", wet * .7), spot: hexL("#3E3B31", "#3A4A3E", wet * .7), haze: t < tSun ? "#9FB4CC" : hexL("#E8D8B0", "#F4EEDC", noon), lit: hexL("#B07A3A", "#C8A062", noon), warm: wet ? warm : (t < tSun ? 0 : warm), zl: wet > .5 ? 99 : zl, br, wet };
   const Lw = { sky: ramp3(clamp((t - td) / (tNoon + 1 - td)), [[0, "#9FB4CC"], [.35, "#B4C6DA"], [.6, "#FFD9A0"], [1, "#FFF6DC"]]), sunX: lerp(300, 960, clamp((t - tSun + 1) / (tNoon - tSun + 2))), sunY: lerp(HZ - 60, 40, clamp((t - tSun + 1) / (tNoon - tSun + 2))), sunR: 70, sunC: "#FFE08A", sunA: t < tSun - 1 ? .15 : .9,
     trees: hexL("#4E7A6A", "#5E9A5A", ss(tSun, tNoon, t)), ground: hexL("#6E8A6E", "#9CCB6A", ss(tSun, tNoon, t)), blade: hexL("#3E7A5A", "#5AAE4A", ss(tSun, tNoon, t)), blade2: hexL("#2E6A4A", "#4A9E40", ss(tSun, tNoon, t)), dew: 1 - ss(tSun, tSun + 2, t) };
-  let world = worldBack(t, d, Lw) + lizHead(L, 10 * crawl * Math.abs(gait), tongueAt(t, .5, 4.5));
-  world += `<g transform="translate(0 ${n2(sway * 4)})">${scaleField(t, L)}</g>`;
+  let world = worldBack(t, d, Lw) + `<g transform="translate(0 ${n2(sway * 4)})">${backView(t, L, { walk: crawl > .1, ph: (t - td) * 5.2, tongue: tongueAt(t, .5, 4.5), lift: 8 * crawl * Math.abs(gait) })}</g>`;
   // tip forward into the lake: everything tilts and drops, then the water closes over
   const tip = ss(tSp - .35, tSp + .25, t), rot = 8 * tip * (1 - wet * .6), dy = 160 * tip * (1 - wet);
   let out = `<g transform="translate(960 600) rotate(${n2(sway + rot)}) translate(-960 ${n2(-600 + dy)}) ">${world}</g>`;
   // the line of sunlight sweeping across the rows (a soft golden band at the light front)
-  if (zl < 20 && zl > -1 && !wet) { const yb = HZ + 600 / Math.max(.6, zl); out += `<rect x="-100" y="${n2(yb - 70)}" width="2120" height="140" fill="#FFD27A" opacity=".35" filter="url(#b30)" style="mix-blend-mode:screen"/>`; }
+  if (zl < 20 && zl > -1 && !wet) { const yb = bY(Math.max(.6, zl)); out += `<rect x="-100" y="${n2(yb - 70)}" width="2120" height="140" fill="#FFD27A" opacity=".35" filter="url(#b30)" style="mix-blend-mode:screen"/>`; }
   out += myScale(L, ss(tLand - .1, tLand + .5, t) * (1 - wet) + .3 * noon);
   // light: cool shade early, golden sun, white noon; heat shimmer at noon
   out += `<rect width="1920" height="1080" fill="#6A8AB0" opacity="${n2(.22 * (1 - ss(tSun, tLand, t)) * (1 - wet))}" style="mix-blend-mode:multiply"/>`;

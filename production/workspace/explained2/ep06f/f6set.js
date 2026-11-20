@@ -55,23 +55,29 @@ BG.lake = () => { const r = rndm(77); let far = "", tufts = "", pads = "", leave
   <path d="M${ROCK[0] - 300} ${ROCK[1] + 6} Q${ROCK[0]} ${ROCK[1] - 28} ${ROCK[0] + 290} ${ROCK[1] + 8} Q${ROCK[0]} ${ROCK[1] + 44} ${ROCK[0] - 300} ${ROCK[1] + 6}z" fill="#FFF3C9" opacity=".55"/><path d="M${ROCK[0] - 200} ${ROCK[1] + 80} q50 -20 100 6 M${ROCK[0] + 100} ${ROCK[1] + 96} q60 -24 130 0 M${ROCK[0] - 60} ${ROCK[1] + 120} q40 -10 80 4" stroke="#6E685C" stroke-width="5" stroke-linecap="round" fill="none" opacity=".5"/></g>
   <g><path d="M-200 -120 H250 Q220 300 246 760 Q250 900 300 1000 H-200z" fill="url(#gdTrunk)"/><path d="M250 -120 Q220 300 246 760 Q250 900 300 1000" fill="none" stroke="#4E3422" stroke-width="7"/><path d="M240 996 q60 -20 120 8" stroke="#5E3E28" stroke-width="16" stroke-linecap="round" fill="none"/></g><g>${leaves}</g>`; };
 
-/* ---------- a monitor lizard, side view, facing right. origin = the ground under its middle. o: walk (phase, radians), tongue 0..1, warm 0..1, blink, breathe ---------- */
-function monitor(o = {}) { const ph = o.walk || 0, tg = clamp(o.tongue || 0), w = clamp(o.warm === undefined ? .5 : o.warm), br = o.breathe || 0, ln = "#35402E";
-  const body = hexL("#5F7468", "#8E8A52", w), bel = hexL("#B9C7B4", "#E4D9A4", w), dot = hexL("#C4D2B0", "#F6E48A", w);
-  const leg = (x, sw, far) => { const kx = x + 34 * sw, fx = x + 62 * sw + (far ? 8 : 0), lift = Math.max(0, Math.sin(ph + (far ? Math.PI : 0) + (x > 0 ? 0 : Math.PI))) * 12, fy = -2 - lift * (o.walk === undefined ? 0 : 1);
-    return `<g opacity="${far ? .75 : 1}"><path d="M${x} -62 L${n2(kx)} -34 L${n2(fx)} ${n2(fy)}" stroke="${ln}" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M${x} -62 L${n2(kx)} -34 L${n2(fx)} ${n2(fy)}" stroke="${far ? hexL(body, "#2B2147", .25) : body}" stroke-width="27" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      ${[-14, 0, 14, 26].map((d) => `<path d="M${n2(fx)} ${n2(fy)} l${n2(d * sw + 14 * sw)} ${n2(6 - Math.abs(d) * .12)}" stroke="${ln}" stroke-width="7" stroke-linecap="round"/>`).join("")}</g>`; };
-  let dots = ""; for (let i = 0; i < 9; i++) for (let j = 0; j < 3; j++) { const x = -150 + i * 36 + (j % 2) * 14, y = -112 + j * 20 + 8 * Math.sin(i * .5); dots += `<circle cx="${x}" cy="${n2(y)}" r="${j === 1 ? 6 : 4.5}" fill="${dot}"/>`; }
-  for (let i = 0; i < 9; i++) dots += `<circle cx="${-200 - i * 34}" cy="${n2(-78 + i * 6.6)}" r="${n2(6 - i * .45)}" fill="${dot}"/>`;
-  const sw = o.walk === undefined ? 0 : Math.sin(ph) * .5;
-  return `<ellipse cx="-40" cy="2" rx="330" ry="16" fill="#2B2147" opacity=".25" filter="url(#b4)"/>${leg(-120, -1 + sw * .4, true)}${leg(96, 1 + sw * .4, true)}
-  <path d="M-150 -116 Q-340 -100 ${n2(-520 + 10 * Math.sin(ph))} ${n2(-22 + 6 * Math.sin(ph + 1))} Q-360 -30 -150 -40z" fill="${body}" stroke="${ln}" stroke-width="6" stroke-linejoin="round"/>
-  <g transform="scale(1 ${n2(1 + .025 * br)})"><ellipse cx="-20" cy="-80" rx="176" ry="50" fill="${body}" stroke="${ln}" stroke-width="6"/><path d="M-170 -58 Q-20 -22 130 -62 Q-20 -40 -170 -58z" fill="${bel}" opacity=".9"/></g>
-  <path d="M110 -116 Q190 -150 262 -150 L262 -100 Q190 -84 120 -50z" fill="${body}" stroke="${ln}" stroke-width="6" stroke-linejoin="round"/>
-  <path d="M236 -160 Q300 -176 356 -146 Q384 -132 380 -118 Q372 -104 330 -100 Q276 -94 236 -102z" fill="${body}" stroke="${ln}" stroke-width="6" stroke-linejoin="round"/><path d="M300 -112 Q346 -110 378 -122" stroke="${ln}" stroke-width="4" fill="none" stroke-linecap="round"/>
-  ${tg > .02 ? `<path d="M380 -122 l${n2(46 * tg)} ${n2(2 * tg)} l${n2(18 * tg)} ${n2(-9 * tg)} M${n2(380 + 46 * tg)} ${n2(-122 + 2 * tg)} l${n2(18 * tg)} ${n2(10 * tg)}" stroke="#E8607A" stroke-width="5" stroke-linecap="round" fill="none"/>` : ""}
-  ${o.blink ? `<path d="M296 -146 q12 6 24 0" stroke="${ln}" stroke-width="5" fill="none" stroke-linecap="round"/>` : `<circle cx="308" cy="-146" r="11" fill="#FFE9A8" stroke="${ln}" stroke-width="4"/><ellipse cx="310" cy="-146" rx="4" ry="8" fill="#1B1430"/><circle cx="306" cy="-150" r="2.5" fill="#fff"/>`}<circle cx="364" cy="-134" r="2.5" fill="${ln}"/>
-  ${dots}${leg(-130, -1 - sw * .4, false)}${leg(110, 1 - sw * .4, false)}`; }
+/* ---------- a Malayan water monitor (the monitor lizard children see in Singapore), side view, facing right. origin = the ground under its middle.
+   Anatomy (teacher's photos, 20 Nov): a long, narrow, low head with a pointed snout on a long, thick, tapering neck; a heavy body with a gently arched
+   back; short thick legs that bend out at the elbow and knee and then go down to the ground, with long curved claws; a very long tail, thick at the
+   base, flattened side to side like a paddle, tapering to a point; fine beaded skin, dark grey-brown, with rows of small pale yellowish spots.
+   o: walk (phase, radians), tongue 0..1, warm 0..1, blink, breathe ---------- */
+function monitor(o = {}) { const ph = o.walk || 0, tg = clamp(o.tongue || 0), w = clamp(o.warm === undefined ? .5 : o.warm), br = o.breathe || 0, ln = "#23241F", id = o.id || "mn";
+  const body = hexL("#4B4C45", "#62593F", w), bel = hexL("#8E8F80", "#B3A77A", w), dot = hexL("#D2CB94", "#F2DE8A", w), far = hexL(body, "#1B1B18", .35), tw_ = 8 * Math.sin(ph);
+  const sil = `M-600 ${n2(-10 + tw_ * .5)} Q-430 -44 -300 -78 Q-230 -100 -176 -112 Q-60 -140 60 -128 Q130 -122 176 -134 Q236 -150 286 -160 Q330 -168 366 -156 Q404 -146 418 -134 Q420 -124 404 -120 Q350 -112 300 -108 Q240 -92 196 -66 Q150 -40 60 -34 Q-60 -26 -168 -40 Q-300 -32 -430 -16 Q-520 -6 -600 ${n2(-4 + tw_ * .5)}z`;
+  // a leg: out and down to the elbow / knee, then down to the foot; long curved claws
+  const leg = (x, front, farSide) => { const s = Math.sin(ph + (farSide ? Math.PI : 0) + (front ? 0 : Math.PI)), lift = o.walk === undefined ? 0 : Math.max(0, s) * 10, dx = o.walk === undefined ? 0 : s * 14, fo = farSide ? 16 : 0;
+    const kx = x + (front ? -26 : 30) + fo, ky = -40, fx = x + (front ? 14 : -6) + dx + fo, fy = -3 - lift, col = farSide ? far : body;
+    return `<path d="M${x + fo} -76 L${n2(kx)} ${ky} L${n2(fx)} ${n2(fy)}" stroke="${ln}" stroke-width="42" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M${x + fo} -76 L${n2(kx)} ${ky} L${n2(fx)} ${n2(fy)}" stroke="${col}" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`
+      + [0, 1, 2, 3].map((i) => `<path d="M${n2(fx + 4 + i * 5)} ${n2(fy - 6 + i * 2.4)} q${20 + i * 3} ${-2 - i} ${28 + i * 3} ${9 - i}" stroke="${ln}" stroke-width="6" stroke-linecap="round" fill="none"/>`).join(""); };
+  // rows of small pale spots across the back and the tail; a fine speckle for the beaded skin
+  let spots = "", speck = ""; for (let i = 0; i < 20; i++) { const x = -520 + i * 44; for (let j = 0; j < 4; j++) spots += `<circle cx="${n2(x + j * 4)}" cy="${n2(-150 + j * 22 + (x < -170 ? (-170 - x) * .26 : 0) + 6 * Math.sin(i))}" r="${x < -300 ? 3 : 4.2}" fill="${dot}"/>`; }
+  for (let i = 0; i < 150; i++) speck += `<circle cx="${n2(-590 + hash(i, 3) * 1000)}" cy="${n2(-166 + hash(i, 5) * 160)}" r="1.8" fill="${i % 3 ? "#1B1B18" : "#A9A68C"}" opacity=".5"/>`;
+  return `<ellipse cx="-60" cy="2" rx="380" ry="15" fill="#2B2147" opacity=".25" filter="url(#b4)"/>${leg(-150, false, true)}${leg(128, true, true)}
+  <clipPath id="${id}C"><path d="${sil}"/></clipPath><g transform="translate(0 ${n2(-1.5 * br)})"><path d="${sil}" fill="${body}" stroke="${ln}" stroke-width="7" stroke-linejoin="round"/>
+  <g clip-path="url(#${id}C)"><path d="M-600 -6 Q-300 -30 -168 -40 Q-60 -26 60 -34 Q150 -40 196 -66 Q240 -92 300 -108 L404 -120 L420 -100 L200 -40 L-600 10z" fill="${bel}" opacity=".55"/>${speck}${spots}<path d="M-560 -22 Q-300 -86 -176 -116 Q-60 -144 60 -132 Q180 -134 300 -164" stroke="#fff" stroke-width="6" fill="none" opacity=".14"/></g>
+  <path d="M352 -124 Q390 -124 414 -130" stroke="${ln}" stroke-width="3.5" fill="none" stroke-linecap="round"/><ellipse cx="318" cy="-140" rx="4" ry="6" fill="${ln}" opacity=".7"/>
+  ${tg > .02 ? `<path d="M418 -130 l${n2(44 * tg)} ${n2(3 * tg)} l${n2(16 * tg)} ${n2(-8 * tg)} M${n2(418 + 44 * tg)} ${n2(-130 + 3 * tg)} l${n2(16 * tg)} ${n2(9 * tg)}" stroke="#D9577A" stroke-width="4.5" stroke-linecap="round" fill="none"/>` : ""}
+  ${o.blink ? `<path d="M340 -146 q8 4 16 0" stroke="${ln}" stroke-width="4" fill="none" stroke-linecap="round"/>` : `<circle cx="348" cy="-146" r="7" fill="#E8D48A" stroke="${ln}" stroke-width="3"/><circle cx="349" cy="-146" r="3.2" fill="#14110F"/>`}<circle cx="402" cy="-138" r="2" fill="${ln}"/></g>
+  ${leg(-170, false, false)}${leg(108, true, false)}`; }
 
 /* ---------- a plain thermometer (no numbers). origin = the middle of the bulb; level 0..1; lab = the word above it ---------- */
 function thermo(x, y, level, lab, o = {}) { const H = o.H || 300, lv = clamp(level), col = hexL("#3A8DFF", "#FF5A3C", lv), top = -46 - H, yL = -40 - (H - 26) * lv, k = o.k === undefined ? 1 : o.k; if (k < .02) return "";

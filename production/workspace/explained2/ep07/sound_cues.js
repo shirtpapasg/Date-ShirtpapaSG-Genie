@@ -48,7 +48,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(S.final.t0 + .1, "sting"); E(W("g1301", "high") + .2, "slap"); E(W("g1301", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
   // 14 the cliffhanger: the bin lid, running water, a low drum, a slam
   { const L = "g1401"; E(S.cliff.t0 + .1, "whoosh"); E(W(L, "bin") + .1, "binlid"); R.water.push([W(L, "wash") - .3, LE("g1403") + .3]); E(W("g1402", "clean") + .1, "curious"); E(W("g1403", "what") - .1, "lowdrum"); E(W("g1403", "find") - .1, "slam", 1); }
-  G(S.title.t0 + 1.0, S.goals.t0 - .2); G(S.day1.t0 + .2, S.days.t0); G(S.holdon.t0, LT("g603") - .1); G(LT("g604"), S.patches.t0 + .2); C(LE("g702"), S.r1card.t0); G(S.r1.t0, MK("ring0_2")); G(LT("g803") - .5, S.waitw.t1 - 1.5);
+  G(S.title.t0 + 1.0, S.count.t0 - .2); G(S.day1.t0 + .2, S.days.t0); G(S.holdon.t0, LT("g603") - .1); G(LT("g604"), S.patches.t0 + .2); C(LE("g702"), S.r1card.t0); G(S.r1.t0, MK("ring0_2")); G(LT("g803") - .5, S.waitw.t1 - 1.5);
   G(S.reveal.t0 + 1.0, LT("g1002") - .3); C(LE("g1003") + .3, S.mushroom.t0); G(S.mushroom.t0 + .3, MK("gillsdust")); C(MK("gillsdust") + .2, S.mark2.t0); C(LE("g1105") + .3, S.r2card.t0);
   G(S.r2.t0, MK("ring0_3")); G(LT("u1203") - .3, MK("traysIn")); C(MK("traysIn") + .2, S.final.t0); G(S.final.t0, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.cliff.t0); C(S.cliff.t0 + .3, S.nyk.t0 - .2);
   } else {
@@ -90,7 +90,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(S.final.t0 + .1, "sting"); E(W("j1201", "high") + .2, "slap"); E(W("j1201", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
   // 13 the dare for Episode 8: three soft pops, a soft pour of sand, a curious note, a boing, a sting
   { const L = "j1301"; ["plastic", "metal", "glass"].forEach((w, i) => E(W(L, w) - .15, "softpop", i)); E(W(L, "sand") - .05, "pour"); E(W(L, "which") - .1, "curious"); E(W(L, "lock") - .1, "sting"); E(W("j1302", "crunchy") - .05, "boing"); }
-  G(S.lasttime.t0 + .5, S.goals.t0 - .2); G(S.game.t0, S.microscope.t0 + .2); C(S.microscope.t0 + .3, S.waitw.t0); G(S.pullout.t0 + .4, S.harmful.t0 + .3); C(S.harmful.t0 + .3, S.r1card.t0);
+  G(S.lasttime.t0 + .5, S.microscope.t0 + .2); C(S.microscope.t0 + .3, S.waitw.t0); G(S.pullout.t0 + .4, S.harmful.t0 + .3); C(S.harmful.t0 + .3, S.r1card.t0);
   G(S.r1.t0, MK("ring0_1")); G(LT("j703") - .5, S.mark1.t0); C(LE("j708") + .3, S.showcard.t0); G(S.show.t0 + .3, MK("ring0_2")); G(LT("j805") - .5, S.map.t0); C(S.map.t0 + .3, LT("u1002") - .3);
   C(S.exambanner.t0 + .4, S.final.t0); G(S.final.t0, S.dare.t0 + .3); C(S.dare.t0 + .5, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2);
   }
