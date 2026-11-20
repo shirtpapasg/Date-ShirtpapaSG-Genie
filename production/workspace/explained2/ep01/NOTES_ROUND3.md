@@ -22,3 +22,10 @@
 6. "Cicak" becomes "lizard" everywhere, spoken and on screen, in both parts: e.g. "And a lizard is hiding in this video. Find it!",
    "Did you spot the lizard? It was on the window frame on day fourteen. Is a lizard living or non-living? Tell someone at home."
    (and Part 1's own hidden-lizard line). The drawing stays the small house lizard; keep the "chek-chek" sound. Drop the cicak respelling.
+7. KEY-WORD RECAP before each part ends (both parts), replacing the silent shelf glow: the shelf moves to the centre and grows big;
+   Heart: "Let's read today's key words together! Ready?" then each word lights up in turn while Heart says it, with a pause of about
+   1.2 s after each so viewers can say it aloud (a "YOU" mouth/speech icon or a buddy holding the beat on each pause):
+   Part 1: "Diversity." ... "Living things." ... "Non-living things." Part 2: "Classification." ... "Table." ... "Graphic organiser."
+   Then Heart: "Well done!" and on into the part's normal ending ("Now you know!" stays last). The buddies can say the words with
+   the viewer on the second beat (mouths moving, quiet) to model reading along. Before "Show me your score hand" or after it,
+   whichever flows better; it must come before "Now you know!".
