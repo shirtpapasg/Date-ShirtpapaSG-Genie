@@ -23,9 +23,8 @@ SC.recap = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); 
   else if (i === 2) v = `<rect width="1920" height="1080" fill="#F4D8A0"/>` + `<g transform="translate(0 ${n2(-40 * u)})">${backView(t, { base: "#3E3B31", spot: "#3E3B31", haze: "#F0DCA8", lit: "#E8A040", warm: .8, zl: 99, br: 0, wet: 0 })}${myScale({ base: "#3E3B31", lit: "#E8A040", warm: .8, wet: 0, br: 0, zl: 99 }, .8)}</g>` + `<rect width="1920" height="1080" fill="#FFD27A" opacity=".2"/>` + TF(1790, 1050, .84, thermo(lerp(.3, .75, u), 300));
   else v = bg("lakedusk") + [0, 1, 2].map((k) => TF(lerp(1800, 900 - 200 * k, u), 260 + 50 * k, .18, `<g filter="url(#silF)">${fruitBat({ wings: 1, flap: t * 9 + k })}</g>`)).join("") + TF(1300, 520, spring(t, s.t0 + 3.2, .4), `<circle r="80" fill="url(#gSun)"/>${T(0, 36, "?", 110, P.ink)}`);
   return v + TF(150, 70, 1, tpill(0, 0, "Part 1", 36, P.ink, P.sun, { w: 700 })) + (u < .12 ? `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.6 * (1 - u / .12))}"/>` : ""); };
-const THUMB2 = (t) => bg("stage") + `<g transform="translate(0 0)">${ringTimer(560, 500, .72, null, t, { R: 330, sw: 40, inner: `<clipPath id="thc"><circle cx="560" cy="500" r="300"/></clipPath><g clip-path="url(#thc)"><rect x="200" y="140" width="720" height="720" fill="url(#gdSkyN)"/>${dusks(1, 16, 3)}${TF(560, 520, .62, fruitBat({ wings: 1, flap: 1.2 }))}</g>` })}</g>`
-  + TF(1080, 760, .55, ansCard(1, "Yes")) + TF(1370, 760, .55, ansCard(2, "No")) + buddy("basil", 180, 1080, 300, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
-
+const THUMB2 = (t) => bg("stage") + ringTimer(800, 560, .72, null, t, { R: 300, sw: 40, inner: `<clipPath id="thc"><circle cx="800" cy="560" r="272"/></clipPath><g clip-path="url(#thc)"><rect x="480" y="240" width="640" height="640" fill="url(#gdSkyN)"/>${dusks(1, 16, 3)}${TF(800, 600, .58, fruitBat({ wings: 1, flap: 1.2 }))}</g>` })
+  + TF(1430, 790, .5, ansCard(1, "Yes")) + TF(1700, 790, .5, ansCard(2, "No")) + buddy("basil", 210, 780, 290, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 /* ============ 2 · "Last time..." ============ */
 SC.lasttime = (t, s) => { const a = "f201", b = "f202", tI = W(a, "six") - .2, tR = W(a, "reptiles") - .1, tS = W(a, "dry") - .1, tB = W(a, "basil") - .1, tM = LE(b) - .3;
   const gl = [0, 0, 0, pulse(t, tI, .05, 1.2) + (t > tI && t < tR ? .3 : 0), pulse(t, tR, .05, 1.2) + (t > tR && t < tM ? .3 : 0), 0], pl = [0, 0, 0, 0, 0, t > tM - .4 ? .5 + .5 * Math.sin((t - tM) * 6) : 0];
@@ -88,7 +87,7 @@ SC.tip = (t, s) => { const a = "f801", b = "f802", tS = W(b, "similar") - .1, tD
     + popTag(t, s.t0 + .2, 960, 120, "Exam tip!", 56, P.sun, P.ink, LT(b) - .2) + HUD(t); };
 
 /* ============ 9 · Round 2: which one does not belong? ============ */
-const trio = (tt) => TF(330, 560, .26, catSit(tt)) + TF(440, 570, .24, macaque(tt)) + TF(545, 560, .11, monitor({ t: tt }));
+const trio = (tt) => TF(320, 590, .36, catSit(tt)) + TF(450, 600, .34, macaque(tt)) + TF(540, 600, .13, monitor({ t: tt }));
 SC.r2 = (t, s) => { const L = "f901";
   return lockN(t, { cards: ["A cat", "A monkey", "A lizard"], q: "Which one does not belong?", tq: W(L, "which") - .1, tc: [W(L, "one"), W(L, "two", 1), W(L, "three")], ring0: MK("ring0_2"), dur: 5, lock: "f902",
     obj: (tt) => ringClip(`<rect x="250" y="290" width="360" height="360" fill="#EAF6E8"/><rect x="250" y="560" width="360" height="100" fill="#CDE8B8"/>` + trio(tt)),
@@ -99,7 +98,7 @@ SC.r2ans = (t, s) => { const L = "f906", tSh = W(L, "share") - .2, tF = W(L, "fu
   return bg("daystage") + (glow > .05 ? `<ellipse cx="560" cy="640" rx="380" ry="230" fill="${P.sun}" opacity="${n2(.35 * Math.min(1, glow))}" filter="url(#b30)"/>` : "")
     + TF(400, 760, .9, catSit(t)) + TF(720, 760, .82, macaque(t)) + TF(lx, 760, .42, monitor({ t, tongue: tongueAt(t, 1, 3.5) })) + ld
     + (t >= tF ? OP(ramp(t, tF, .3), `<path d="M300 460 V430 H820 V460" fill="none" stroke="${P.leafDeep}" stroke-width="8" stroke-linecap="round"/>`) + TF(560, 380, spring(t, tF, .4), tpill(0, 0, "fur: mammals", 44, P.leafDeep, "#fff", { w: 700 })) : "")
-    + popTag(t, tS, 1460, 560, "dry, scaly skin: a reptile", 40, P.ink, "#fff") + TF(1560, 260, .44, ansCard(3, "A lizard", { lit: t >= tA ? spring(t, tA, .45) : 0 }))
+    + popTag(t, tS, 1460, 560, "dry, scaly skin: a reptile", 40, P.ink, "#fff") + TF(1180, 330, .44, ansCard(3, "A lizard", { lit: t >= tA ? spring(t, tA, .45) : 0 }))
     + (t >= tP ? TF(250, 520, spring(t, tP, .45), pboard(`<path d="M60 300 V-300" stroke="#7A5E44" stroke-width="80"/><path d="M60 -100 Q-80 -160 -200 -120" stroke="#7A5E44" stroke-width="30" fill="none"/>` + TF(10, 40, .6, `<g transform="rotate(-70)">${catSit(t)}</g>`), 280, 240, "cc", "", 30)) : "")
     + buddy("pip", 160, 1060, 220, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "thinking"], [tP, "oops"], [LE("f908") + .1, "sit"]] }) + say("f908", 420, 660, t, { size: 44, tail: -150 })
     + buddy("basil", 1780, 1060, 220, t, { aura: true, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tA, "cheer"], [tB, "cheer"]], nohop: false }) + say("f908b", 1450, 860, t, { size: 44, tail: 220, maxW: 560 })
@@ -115,7 +114,7 @@ function mysteryCard(t, o = {}) { const lit = o.lit || [0, 0, 0], rub = o.rub ||
     ${TF(30 + 20 * Math.sin(t), -10, .62, `<g transform="rotate(-8)">${seaTurtle({ dark: sil < .5, stroke: t * 2 })}</g>`)}<g fill="none" stroke="#fff" stroke-width="4" opacity=".4">${[0, 1, 2].map((i) => `<path d="M${-300 + ((t * 40 + i * 200) % 600)} ${-150 + i * 8} q30 -8 60 0"/>`).join("")}</g></g>`;
   return `<ellipse cx="0" cy="4" rx="330" ry="18" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-200 0 L-90 -400 M200 0 L90 -400 M0 0 V-300" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><rect x="-330" y="-176" width="660" height="20" rx="10" fill="#8A5A36"/>
   <g filter="url(#drop)"><rect x="-500" y="-1150" width="1000" height="980" rx="26" fill="url(#gPaper)" stroke="${P.momo}" stroke-width="8"/></g>${T(0, -1070, "THE MYSTERY CREATURE", 54, P.ink, { ls: 2 })}<g transform="translate(0 -850)">${pic}</g>${s}${o.tick ? TF(430, -320, o.tick, tickBadge(40)) : ""}`; }
-const NOTE = [900, 1056, .78], lizShow = (t, t0) => 1 - ramp(t, t0, .25) * (1 - ramp(t, t0 + 3.2, .2));
+const NOTE = [900, 1084, .78], lizShow = (t, t0) => 1 - ramp(t, t0, .25) * (1 - ramp(t, t0 + 3.2, .2));
 const showView = (t, o = {}) => palmView(t, { liz: o.liz === undefined ? 1 : o.liz }, [1, 960, 540]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".2"/>` + TF(NOTE[0], NOTE[1], NOTE[2], mysteryCard(t, o.notes || {}));
 SC.show = (t, s) => { const a = "f1001", c = "f1002", r0 = MK("ring0_4"), bell = MK("bell_4"), rs = ringState(t, r0, 6), tLz = LT(a) + .3;
   const tr = [W(a, "one"), W(a, "two"), W(a, "three")], tcn = [W(c, "one", 1), W(c, "two"), W(c, "three")], tP = LT("f1004"), tB = LT("f1005"), tO = LT("f1006");
@@ -129,9 +128,9 @@ SC.show = (t, s) => { const a = "f1001", c = "f1002", r0 = MK("ring0_4"), bell =
     + stamp(t, LT("f1003") - .08, 960, 480) + bellIcon(t, r0) + HUD(t); };
 SC.fixed = (t, s) => { const h = "f1007", tc = W("f1008", "two") - .1, rub = ss(s.t0 + .15, s.t0 + .6, t), wr = ss(s.t0 + .6, s.t0 + 1.6, t), tR = W(h, "sea") - .3, rv = ss(tR, tR + .6, t), tF = LT("f1009") - .12;
   return showView(t, { notes: { fixing: true, rub, write: wr, reveal: rv, tick: spring(t, W(h, "reptile") - .1, .45) } })
-    + (t >= tR + .4 ? TF(1560, 520, spring(t, tR + .4, .45), pboard(turtleNest(t), 420, 340, "tn", "", 30)) : "")
+    + (t >= tR + .4 ? TF(300, 640, spring(t, tR + .4, .45), pboard(turtleNest(t), 420, 340, "tn", "", 30)) : "")
     + buddy("momo", 1720, 1060, 250, t, { aura: true, flip: true, poses: [[s.t0, "sit"], [tF, "cheer"]], nohop: true }) + say("f1009", 1500, 820, t, { size: 52, tail: 160 })
-    + bookCap(t, h, "Read all the clues. Scaly skin and lungs: a reptile. It is a sea turtle!", 120, { size: 44, maxW: 1120, x: 760, t1: LT("f1008") }) + coin(t, tc, 1560, 200, "+2", "if you showed three fingers") + HUD(t); };
+    + bookCap(t, h, "Read all the clues. Scaly skin and lungs: a reptile. It is a sea turtle!", 96, { size: 44, maxW: 1120, x: 760, t1: LT("f1008") }) + coin(t, tc, 1520, 520, "+2", "if you showed three fingers") + HUD(t); };
 SCORE.push([W("f1008", "two") - .1, 4, 2]);
 
 /* ============ 11 · six tiles, and the chant ============ */

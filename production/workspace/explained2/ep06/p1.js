@@ -10,9 +10,9 @@ const ringClip = (inner) => `<clipPath id="rgc"><circle cx="430" cy="470" r="172
 
 /* ============ 1 · the silent cold open: the lake at the Singapore Botanic Gardens ============ */
 // the thumbnail's frame: the garden spider large in its web with its eight legs glowing; the ant in its ring beside it (thumb_still.js "&thumb")
-const THUMB1 = (t) => macroBg(t, { ground: false, sky: "#D8F0D0" }) + TF(1240, 500, 1.18, spiderWeb(330, 0, { op: .9, w: 3 }) + spiderBig({ id: "th", glow: [1, 1, 1, 1, 1, 1, 1, 1] }))
-  + TF(400, 500, 1, `<g filter="url(#drop)"><circle r="230" fill="${P.paper}"/></g><circle r="210" fill="#EAF6E8"/>` + TF(10, 70, .48, antBig({})) ) + TF(400, 790, 1, tpill(0, 0, "6 legs", 54, P.sun, P.ink, { w: 700 })) + TF(1240, 960, 1, tpill(0, 0, "8 legs", 54, P.sun, P.ink, { w: 700 }))
-  + buddy("pip", 190, 1080, 300, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+const THUMB1 = (t) => macroBg(1, { ground: false, sky: "#D8F0D0" }) + TF(1260, 700, .8, spiderWeb(330, 0, { op: .9, w: 3.5 }) + spiderBig({ id: "th", glow: [.8, .8, .8, .8, .8, .8, .8, .8] }))
+  + TF(660, 560, 1, `<g filter="url(#drop)"><circle r="200" fill="${P.paper}"/></g><circle r="184" fill="#EAF6E8"/>` + TF(10, 64, .42, antBig({})) + TF(0, 240, 1, tpill(0, 0, "6 legs", 46, P.sun, P.ink, { w: 700 })))
+  + TF(1620, 990, 1, tpill(0, 0, "8 legs", 54, P.sun, P.ink, { w: 700 })) + buddy("pip", 200, 790, 280, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), e = eio(t / 6.0), cam = [lerp(1.32, 1.03, e), lerp(520, 960, e), lerp(730, 565, e)];
   const [cx, cd] = slideX(t, tb, .75, 2300, CARD[0], 1062);
   return lakeView(t, {}, cam) + motes(t, 26, 4) + `<g transform="translate(${n2(-80 * (1 - e))} ${n2(-40 * (1 - e))})">${nearLeaves(t, 80, 40, 1.6)}${nearLeaves(t + 1, 1900, -20, 1.4, -1)}</g>`

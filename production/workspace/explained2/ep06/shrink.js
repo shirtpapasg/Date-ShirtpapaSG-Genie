@@ -128,8 +128,8 @@ SC.shrink = (t, s) => { const td = MK("dive"), tW = MK("wings"), tF = MK("fly"),
   if (fly > 0 && back < 1) out += OP(fly * (1 - back), flightWorld(t, (t - tF) * .7) + `<rect width="1920" height="1080" fill="#5AA8FF" opacity=".16" style="mix-blend-mode:screen"/>` + furForest(t, .9, { tint: "#2E3A8C", skin: "#F0A060" }));
   // back at the palm: the baby bat drinks its mother's milk (seen close, side on), in warm light under the leaf
   if (back > 0) { const z = lerp(1.3, 1, eo((t - tB) / 1.6)); out += OP(back, `<rect width="1920" height="1080" fill="#2A2050"/><g filter="url(#b4)" opacity=".7">${bg("palmvalley")}</g><rect width="1920" height="1080" fill="#2A2050" opacity=".4"/><circle cx="960" cy="520" r="420" fill="#FFB070" opacity=".22" filter="url(#b60)"/>`
-      + `<g transform="translate(960 560) scale(${n2(z)}) translate(-960 -560)">${TF(960, -80, 2.4, `<path d="M-300 0 Q0 40 300 0" stroke="#22402F" stroke-width="30" fill="none"/>` + hangBat({ baby: ss(tBaby - .4, tBaby + .4, t), blink: ((t + .5) % 3.1) < .12 }))}</g>`)
-      + (t >= tMilk ? lineTag(t, tMilk, 1420, 640, 960 + 50 * 2.4, -80 + 175 * 2.4, "milk", 50, P.sun, P.ink) : ""); }
+      + `<g transform="translate(960 560) scale(${n2(z)}) translate(-960 -560)">${TF(960, 90, 2.0, `<path d="M-300 0 Q0 40 300 0" stroke="#22402F" stroke-width="30" fill="none"/><path d="M-320 -10 Q0 30 320 -10 L300 -120 L-300 -120z" fill="#2C4E3A"/>` + hangBat({ baby: ss(tBaby - .4, tBaby + .4, t), blink: ((t + .5) % 3.1) < .12 }))}</g>`)
+      + (t >= tMilk ? lineTag(t, tMilk, 1420, 700, 1012, 372, "milk", 50, P.sun, P.ink) : ""); }
   // the thermometer: the column stays in the middle the whole time (the air cools; the body under you stays warm)
   const lev = .56 + .01 * Math.sin(t * 3);
   out += TF(1790, 1050, .84, thermo(lev, 300, { glow: pulse(t, tWarm, .1, 1.6) }));

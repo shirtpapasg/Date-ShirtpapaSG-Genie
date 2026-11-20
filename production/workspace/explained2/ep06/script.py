@@ -157,7 +157,7 @@ SEQ2 = [
  ("scene", "game"),
  ("say", "f301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .4}),
  # ---- 4 · Palm Valley at dusk; Round 1: is a bat a bird?
- ("scene", "palms"), ("wait", 2.4),
+ ("scene", "palms"), ("wait", 2.1),
  ("scene", "r1card"), ("wait", 1.0),
  ("scene", "r1"),
  ("say", "f401", H, "Round one. This animal has wings. It flies. Is a bat a bird? One, yes. Two, no. Show me with your fingers.", {"pre": .1}),
@@ -202,7 +202,7 @@ SEQ2 = [
  # ---- 8 · exam tip: same and different, with a reason
  ("scene", "tip"),
  ("say", "f801", H, "Exam tip! Compare a bat and a bird.", {"pre": .5}),
- ("say", "f802", H, "A bat and a bird are similar because both have wings. They are different because a bat has fur, but a bird has feathers.", {"pre": .5, "post": 1.0}),
+ ("say", "f802", H, "A bat and a bird are similar because both have wings. They are different because a bat has fur, but a bird has feathers.", {"pre": .5, "post": .8}),
  # ---- 9 · Round 2: which one does not belong?
  ("scene", "r2card"), ("wait", 1.0),
  ("scene", "r2"),
@@ -253,7 +253,7 @@ SEQ2 = [
  ("say", "f1401", H, "Next time: fungi and bacteria! Mould on bread. Yeast, for making bread. Both are fungi! Which one is useful? Lock in your answer!", {"pre": 0, "post": .6}),
  # ---- 15 · the key words
  *kwrecap(["Mammals", "Mammary glands", "Warm-blooded"]),
- # ---- 16 · "Now you know!" and the outro
- *NYK,
+ # ---- 16 · "Now you know!" and the outro (the outro is 0.4 s shorter than Part 1's, to keep the part near 5:15)
+ *NYK[:-1], ("wait", 4.8),
 ]
 SEQS = {1: SEQ1, 2: SEQ2}
