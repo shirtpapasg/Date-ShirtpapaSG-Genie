@@ -49,3 +49,8 @@
     the lizard? It was on the window at night, on day one. Is a lizard living or non-living? Tell someone at home." (Part 2 keeps
     its own lizard and its own reveal.) The lizard drawing could also be a touch cuter and clearer (it reads as a flat stick-figure
     silhouette at night: give it a rounder head, small eyes and a soft rim light so children can actually find it), in both parts.
+12. Part 2 at 1:26, Mark Sentence 2 (classification): Pip must SAY "Say it with me!" and pause 0.8 s before Heart reads (note 3
+    covers every card; this confirms Pip on card 2 and whichever buddy is on card 3). Also on this card: the word box at the bottom
+    ("similarities: characteristics that things have in common") is dark text on a dark strip and nearly unreadable: give it a
+    light cream fill with dark text (like the card), a small "similarities" key-word highlight, and hold it on screen long enough to
+    read (about 3 s), with Heart reading it aloud.
