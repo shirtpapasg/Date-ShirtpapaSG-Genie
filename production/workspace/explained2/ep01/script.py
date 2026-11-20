@@ -6,12 +6,13 @@ SEQ items:
   ("say", id, who, text, {opts})       a spoken line. opts: pre = silence before it (s), post = silence after it (s)
   ("wait", seconds)                    picture-only time
   ("mark", name)                       name the cursor time (used by sound and picture)
-  ("chant", id)                        the buddies' chant on the clap-clap-stomp grid (6 s)
+  ("chant", id)                        the buddies' chant, call and response: a line, a bar for the viewers ("YOUR TURN!"), ... then all together
+  ("unison", id, text, {opts})         the three buddies say a short line together (opts: pre, post, quiet)
 """
 H, P, B, M = "heart", "pip", "basil", "momo"
 CHANT = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What can it DO?"]
 # how the TTS should say a word (the caption/script text is unchanged)
-PRON = {"Taugeh": "Taogay", "taugeh": "taogay", "cicak": "cheechahk", "winds it up": "wines dit up", "TheOneApp": "The One App"}
+PRON = {"winds it up": "wines dit up", "TheOneApp": "The One App"}
 
 SEQ1 = [
  # ---- 1 · silent cold open (12 s)
@@ -33,22 +34,25 @@ SEQ1 = [
  # ---- 3 · the game and today's goals
  ("scene", "game"),
  ("say", "h301", H, "Here is the game. It's You against the Buddies. You lock in first. Then Pip, Basil and Momo answer.", {"pre": .5}),
- ("say", "h302", H, "Every time you are right, put up one finger on your other hand. No lock-in, no point. And a cicak is hiding in this video. Find it!", {"pre": .5, "post": .3}),
+ ("say", "h302", H, "Every time you are right, put up one finger on your other hand. No lock-in, no point. And a lizard is hiding in this video. Find it!", {"pre": .5, "post": .3}),
  ("scene", "goals"), ("wait", 4.2),   # TRIM: the three goal chips drop in silently (the line "Today you will learn..." is not spoken)
  # ---- 4 · where the six things came from: diversity
  ("scene", "garden"),
  ("say", "h401", H, "Our six things came from here. A void deck and a garden in Toa Payoh. Look around.", {"pre": .9}),
  ("say", "h402", H, "A mynah. Ants. A papaya tree. A bench. A bicycle. A blue recycling bin. So many different things!", {"pre": .5, "post": .4}),
  ("scene", "mark1"),
- ("say", "h403", H, "There is a great variety of living and non-living things around us. This is called diversity.", {"pre": .7}),
+ ("say", "m400", M, "Say it with me!", {"pre": .8}), ("wait", .8),
+ ("say", "h403", H, "There is a great variety of living and non-living things around us. This is called diversity.", {"pre": 0}),
  ("wait", 2.0), ("mark", "kw_diversity"), ("wait", 2.0), ("mark", "kw_living"), ("wait", .55), ("mark", "kw_nonliving"), ("wait", .9),
  ("scene", "garden2"),
  ("say", "b404", B, "So many! How do we keep track?", {"pre": .4}),
- ("say", "h405", H, "We put them into groups. Let's start with six.", {"pre": .35, "post": .9}),
+ ("say", "h405", H, "Let's start off with six. Let's put them into our glass box, and bring them back.", {"pre": .35}),
+ ("wait", 2.0),
  # ---- 5 · the countdown and Day 1
  ("scene", "count"),
  ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94}),
- ("scene", "day1"), ("wait", 6.0),    # TRIM: the Day 1 care card (AIR, FOOD, WATER) is on screen without the voice
+ ("scene", "day1"),
+ ("say", "h502", H, "Day one. Six things, one box. The lid has holes, so air can get in. The mealworm has oats to eat, and a juicy carrot for water. The plant has moist soil, and sunlight from the window.", {"pre": .9, "post": 1.0, "speed": .9, "gap": .5}),
  # ---- 6 · Round 1: the wind-up robot
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
@@ -74,7 +78,7 @@ SEQ1 = [
  ("say", "h702", H, "Locked in!", {"pre": 0}),
  ("say", "p703", P, "Non-living. I watched it for one whole day. It did nothing.", {"pre": .5}),
  ("say", "m704", M, "Living! It's green, like a leaf.", {"pre": .4}),
- ("say", "b705", B, "Living! Taugeh grows from green beans. I eat taugeh!", {"pre": .4, "post": .5}),
+ ("say", "b705", B, "Living! Bean sprouts grow from green beans. I eat bean sprouts!", {"pre": .4, "post": .5}),
  ("scene", "lean"),
  ("say", "h706", H, "Three buddies, two answers. Let's shrink down and watch. Quietly.", {"pre": .4, "post": .6}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 3.0),
@@ -92,15 +96,25 @@ SEQ1 = [
  ("say", "p713", P, "I was careful. But I did not watch long enough.", {"pre": .5}),
  ("say", "h714", H, "Momo, living is right. But green is only how it looks. A green pencil is non-living.", {"pre": .5}),
  ("say", "m715", M, "No point for me! So what ARE the clues?", {"pre": .4, "post": .6}),
- # ---- Part 1's ending: the box under its cloth, the score hand, the shelf recap, "Now you know!"
+ # ---- Part 1's ending: the hidden lizard, the box under its cloth, the score hand, the key-word read-along, "Now you know!"
+ ("scene", "liz1"),
+ ("say", "h845", H, "Did you spot the lizard? It was on the window at night, on day one. Is a lizard living or non-living? Tell someone at home.", {"pre": .9, "post": .8}),
  ("scene", "tease"),
  ("say", "h850", H, "Our box has twenty-five more days to go. What will be under the cloth on Day thirty? Find out in Part Two!", {"pre": .9, "post": .9}),
  ("scene", "p1score"),
- ("say", "h851", H, "Show me your score hand!", {"pre": .6, "post": 1.3}),
- ("mark", "recap"), ("wait", 1.9),
- ("scene", "nyk"),
- ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
- ("wait", 1.8),
+ ("say", "h851", H, "Show me your score hand!", {"pre": .6, "post": 1.6}),
+ ("scene", "kwrecap"),
+ ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5}),
+ ("say", "h861", H, "Diversity.", {"pre": 0}), ("unison", "u861", "Diversity.", {"pre": .25, "post": .55, "quiet": True}),
+ ("say", "h862", H, "Living things.", {"pre": 0}), ("unison", "u862", "Living things.", {"pre": .25, "post": .55, "quiet": True}),
+ ("say", "h863", H, "Non-living things.", {"pre": 0}), ("unison", "u863", "Non-living things.", {"pre": .25, "post": .55, "quiet": True}),
+ ("say", "h864", H, "Well done!", {"pre": .2, "post": .7}),
+ ("scene", "nyk"),   # note 15: the class says it too
+ ("unison", "u1300", "Say it with us!", {"pre": .7}), ("wait", .8),
+ ("say", "h1304b", H, "Ready? One, two...", {"pre": 0, "post": .3, "gap": .3}),
+ ("say", "h1305", H, "Now you know!", {"pre": 0, "excited": True}),
+ ("unison", "u1305", "Now you know!", {"sync": True}),
+ ("wait", 5.8),
 ]
 
 SEQ2 = [
@@ -112,7 +126,8 @@ SEQ2 = [
  ("scene", "clue"),
  ("say", "h801", H, "Not how it looks. Not whether it moves. Ask two things. What does it need? What can it do?", {"pre": .5, "post": .5}),
  ("say", "h802", H, "Living things need water, food and air. Living things grow, respond to changes and reproduce. You will test these in the next two episodes.", {"pre": .5, "post": .6}),
- ("scene", "chant"), ("wait", .9),
+ ("scene", "chant"),
+ ("unison", "u802", "Say it with us!", {"pre": .8}), ("wait", .8),
  ("chant", "c803"), ("wait", .7),
  # ---- 9 · HOLD ON: Momo's sort
  ("scene", "sort"),
@@ -125,8 +140,11 @@ SEQ2 = [
  ("say", "m905", M, "I wanted to know how they feel! Good sort. Wrong question.", {"pre": .5, "post": .6}),
  ("scene", "mark2"),
  ("say", "h906", H, "Momo did put things into groups. Alike things together. Different things apart.", {"pre": .5}),
- ("say", "h907", H, "Classification is the grouping of things based on their similarities and differences.", {"pre": .9}),
- ("wait", 2.0), ("mark", "kw_classification"), ("wait", 2.3),
+ ("say", "p906", P, "Say it with me!", {"pre": 1.0}), ("wait", .8),
+ ("say", "h907", H, "Classification is the grouping of things based on their similarities and differences.", {"pre": 0}),
+ ("wait", 2.0),
+ ("say", "h907b", H, "Similarities: characteristics that things have in common.", {"pre": 0, "post": 1.4, "speed": .9}),
+ ("mark", "kw_classification"), ("wait", 2.3),
  ("scene", "relabel"),
  ("say", "h908", H, "You can choose soft or hard. But our question is living or non-living. So we use the real clues. Has anyone done that?", {"pre": .5, "post": .6}),
  # ---- 10 · Showdown: Pip's homework
@@ -149,7 +167,8 @@ SEQ2 = [
  # ---- 11 · three ways to show the groups
  ("scene", "ways"),
  ("say", "h1101", H, "Pip used a table. The same two groups can be shown in other ways too.", {"pre": .5}),
- ("say", "h1102", H, "We can present our classification using pictures, a table, and a graphic organiser.", {"pre": .8}),
+ ("say", "b1101", B, "Say it with me!", {"pre": .6}), ("wait", .8),
+ ("say", "h1102", H, "We can present our classification using pictures, a table, and a graphic organiser.", {"pre": 0}),
  ("wait", 2.0), ("mark", "kw_go"), ("wait", 2.3),
  # ---- 12 · Day 30
  ("scene", "day30"), ("wait", 1.4),
@@ -158,19 +177,28 @@ SEQ2 = [
  ("say", "h1202", H, "The green bean is a tall plant now. The mealworm is bigger. The plant has new leaves. And the teddy bear, the robot and the pebble? Exactly the same.", {"pre": 0, "post": .8}),
  ("scene", "piles"),
  ("say", "h1203", H, "Three living things. Three non-living things.", {"pre": .6, "post": .5}),
+ ("unison", "u1203", "Say it with us!", {"pre": .5}), ("wait", .8),
  ("chant", "c1204"), ("wait", .6),
  # ---- 13 · score hand, cicak, the dare, "Now you know!"
  ("scene", "final"),
  ("say", "h1301", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .6}),
  ("scene", "cicak"),
- ("say", "h1302", H, "Did you spot the cicak? It was on the window frame on day fourteen. Is a cicak living or non-living? Tell someone at home.", {"pre": .4, "post": .6}),
+ ("say", "h1302", H, "Did you spot the lizard? It was on the window frame on day fourteen. Is a lizard living or non-living? Tell someone at home.", {"pre": .4, "post": .6}),
  ("scene", "day31"), ("wait", 1.3),
  ("say", "m1303", M, "Oh no. Is it sad?", {"pre": 0}),
  ("say", "h1304", H, "A drooping plant isn't sad. What does it need? Lock in your answer for next time.", {"pre": .5, "post": 1.0}),
- ("mark", "recap"), ("wait", 2.2),
- ("scene", "nyk"),
- ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
- ("wait", 1.8),
+ ("scene", "kwrecap"),
+ ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5}),
+ ("say", "h871", H, "Classification.", {"pre": 0}), ("unison", "u871", "Classification.", {"pre": .25, "post": .55, "quiet": True}),
+ ("say", "h872", H, "Table.", {"pre": 0}), ("unison", "u872", "Table.", {"pre": .25, "post": .55, "quiet": True}),
+ ("say", "h873", H, "Graphic organiser.", {"pre": 0}), ("unison", "u873", "Graphic organiser.", {"pre": .25, "post": .55, "quiet": True}),
+ ("say", "h864", H, "Well done!", {"pre": .2, "post": .7}),
+ ("scene", "nyk"),   # note 15: the class says it too
+ ("unison", "u1300", "Say it with us!", {"pre": .7}), ("wait", .8),
+ ("say", "h1304b", H, "Ready? One, two...", {"pre": 0, "post": .3, "gap": .3}),
+ ("say", "h1305", H, "Now you know!", {"pre": 0, "excited": True}),
+ ("unison", "u1305", "Now you know!", {"sync": True}),
+ ("wait", 5.8),
 
 ]
 SEQS = {1: SEQ1, 2: SEQ2}

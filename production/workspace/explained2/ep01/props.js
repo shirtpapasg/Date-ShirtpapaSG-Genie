@@ -131,13 +131,27 @@ function needIcon(kind, col = "#6E6A92", fill = "#C9D2E8") { const g = col; retu
   : kind === "respond" ? `<circle r="15" fill="${fill}" stroke="${g}" stroke-width="5"/><g stroke="${g}" stroke-width="5" stroke-linecap="round"><path d="M0 -24 v-9 M0 24 v9 M-24 0 h-9 M24 0 h9 M-17 -17 l-6 -6 M17 -17 l6 -6 M-17 17 l-6 6 M17 17 l6 6"/></g>`
   : `<circle cx="-14" cy="8" r="17" fill="${fill}" stroke="${g}" stroke-width="5"/><circle cx="18" cy="-8" r="11" fill="${fill}" stroke="${g}" stroke-width="5"/><circle cx="22" cy="20" r="8" fill="${fill}" stroke="${g}" stroke-width="5"/>`; }
 const iconChip = (kind, o = {}) => `<g filter="url(#dropS)"><circle r="50" fill="${P.paper}"/></g>${needIcon(kind, o.col, o.fill)}`;
-// a tiny cicak (house lizard), drawn in ink2 at low contrast; origin = its middle, head up-right
-const cicak = (col = P.ink2) => `<g fill="${col}" stroke="${col}" stroke-linecap="round"><path d="M-30 14 Q-52 22 -58 4 Q-60 -8 -50 -10" fill="none" stroke-width="6"/><ellipse cx="0" cy="0" rx="34" ry="11" transform="rotate(-20)"/><ellipse cx="38" cy="-17" rx="14" ry="10" transform="rotate(-20 38 -17)"/><path d="M14 -14 l4 -16 M22 4 l14 10 M-16 -2 l-6 -16 M-10 14 l6 14" stroke-width="5" fill="none"/></g><circle cx="42" cy="-21" r="2.4" fill="#fff"/>`;
+// a small house lizard (the hidden one): rounder head, small eyes, a curled tail, a soft rim light so children can find it. Origin = its middle, head up-right
+const cicak = (col = "#C9B79C", line = "#6E5F4E") => `<g filter="url(#rimS)"><g stroke="${line}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M-26 12 Q-56 26 -66 6 Q-72 -12 -56 -16 Q-46 -18 -44 -8" fill="none" stroke="${col}" stroke-width="12"/><path d="M-26 12 Q-56 26 -66 6 Q-72 -12 -56 -16 Q-46 -18 -44 -8" fill="none" stroke="${line}" stroke-width="15" opacity=".0"/>
+  <g fill="${col}"><path d="M16 -16 l6 -20 M24 6 l18 12 M-14 -6 l-8 -20 M-8 14 l8 18" stroke="${col}" stroke-width="9" fill="none"/>
+  <circle cx="23" cy="-38" r="6"/><circle cx="44" cy="20" r="6"/><circle cx="-23" cy="-28" r="6"/><circle cx="1" cy="34" r="6"/>
+  <ellipse cx="0" cy="0" rx="36" ry="15" transform="rotate(-20)"/><ellipse cx="42" cy="-19" rx="21" ry="17" transform="rotate(-20 42 -19)"/></g></g>
+  <ellipse cx="-2" cy="-3" rx="22" ry="6" fill="#fff" opacity=".28" transform="rotate(-20)"/>
+  <circle cx="47" cy="-27" r="5.2" fill="#2B2147"/><circle cx="52" cy="-13" r="4.6" fill="#2B2147"/><circle cx="48.5" cy="-28.5" r="1.8" fill="#fff"/><circle cx="53.5" cy="-14.5" r="1.6" fill="#fff"/>
+  <path d="M56 -22 q5 4 3 9" fill="none" stroke="${line}" stroke-width="2.5" stroke-linecap="round"/></g>`;
+// OUR BOX, small (the void deck, the end shot): the same clear box as on the window ledge: glass sides, the teal lid with its air holes, a handle,
+// a label. Origin = the middle of its bottom edge; 260 wide, 150 tall. inner = svg drawn inside (behind the glass). lid: 0 = off, 1 = on; lidY = lift
+function ourBox(inner = "", o = {}) { const lid = o.lid === undefined ? 1 : o.lid, ly = o.lidY || 0; let holes = ""; for (let i = 0; i < 6; i++) holes += `<ellipse cx="${-100 + i * 40}" cy="-163" rx="8" ry="4.5" fill="${P.night}" opacity=".75"/>`;
+  return `<ellipse cx="0" cy="4" rx="150" ry="14" fill="${P.ink}" opacity=".28" filter="url(#b4)"/><rect x="-130" y="-150" width="260" height="150" rx="12" fill="#EAF6FF" opacity=".5"/><rect x="-130" y="-24" width="260" height="24" rx="8" fill="url(#xLiner)"/>${inner}
+  <rect x="-130" y="-150" width="260" height="150" rx="12" fill="url(#xGlass)"/><rect x="-130" y="-150" width="260" height="150" rx="12" fill="none" stroke="#F4FAFF" stroke-width="6"/><path d="M-112 -134 L-78 -134 L-104 -20 L-112 -20z" fill="#fff" opacity=".4"/>
+  <g transform="translate(60 -66) rotate(-4)"><rect x="-52" y="-18" width="104" height="36" rx="8" fill="${P.paper}" stroke="${P.sunDeep}" stroke-width="3"/>${T(0, 8, "OUR BOX", 21, P.ink, { ls: 1 })}</g>
+  ${lid ? `<g transform="translate(0 ${n2(ly)})" opacity="${n2(lid)}"><path d="M-36 -176 q0 -26 36 -26 q36 0 36 26" fill="none" stroke="#188A80" stroke-width="9" stroke-linecap="round"/><rect x="-142" y="-178" width="284" height="32" rx="12" fill="#3FD0C3" stroke="#188A80" stroke-width="4"/><rect x="-134" y="-174" width="268" height="9" rx="4.5" fill="#fff" opacity=".3"/>${holes}</g>` : ""}`; }
 // a green pencil
 const pencil = () => `<g transform="rotate(-24)"><rect x="-120" y="-16" width="200" height="32" rx="6" fill="#43BF6C" stroke="#1F8A4C" stroke-width="5"/><rect x="-120" y="-16" width="200" height="11" rx="5" fill="#fff" opacity=".28"/><path d="M80 -16 L128 0 L80 16z" fill="#F3D2AC" stroke="#B9774A" stroke-width="5" stroke-linejoin="round"/><path d="M112 -6 L128 0 L112 6z" fill="${P.ink}"/><rect x="-146" y="-16" width="30" height="32" rx="8" fill="#FF8FB1" stroke="#E0607F" stroke-width="5"/></g>`;
 
 /* ---------- the 30-day box (16:9). The box: x 360..1560, y 230..870; things stand on the liner at y 800; the robot's lane is y 846. ---------- */
-const BOX = { x: 360, y: 230, w: 1200, h: 640, floor: 800, lane: 846, plant: 500, bean: 735, dish: 985, robot0: 620, robot1: 1165, pebble: 1295, teddy: 1452, rs: .8 };
+const BOX = { x: 360, y: 230, w: 1200, h: 640, floor: 800, lane: 846, plant: 455, robot0: 645, bean: 835, dish: 1045, robot1: 1172, pebble: 1282, teddy: 1455, rs: .8 };
 function boxBack() { return `<ellipse cx="960" cy="892" rx="660" ry="30" fill="${P.ink}" opacity=".4" filter="url(#b10)"/>
   <g clip-path="url(#xBoxC)"><rect x="360" y="230" width="1200" height="640" fill="#E9F4FF" opacity=".16"/><ellipse cx="760" cy="470" rx="480" ry="250" fill="#FFF3B8" opacity=".22" filter="url(#b30)"/>
   <path d="M360 782 H1560 V870 H360z" fill="url(#xLiner)"/><path d="M360 782 H1560" stroke="#FFF3DC" stroke-width="6" opacity=".8"/><path d="M360 824 H1560" stroke="#C9A772" stroke-width="2" opacity=".35"/></g>`; }

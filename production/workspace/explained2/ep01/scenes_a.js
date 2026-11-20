@@ -143,7 +143,7 @@ SC.game = (t, s) => { const a = "h301", b = "h302", tb = LT(b) - .3, ph2 = ss(tb
   // no lock-in, no point · the cicak
   const tN = W(b, "no"), tC = W(b, "cicak");
   out += (t >= tN ? TF(1440, 480, spring(t, tN, .4) * (1 - ramp(t, tC - .2, .2)), tpill(0, 0, "No lock-in, no point!", 46, "#fff", P.ink, { w: 700 })) : "");
-  if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), `<g filter="url(#drop)"><circle r="150" fill="${P.paper}"/></g><g transform="translate(-10 20) scale(2.3) rotate(${n2(4 * Math.sin(t * 5))})">${cicak(P.ink)}</g><g transform="translate(110 -100) rotate(12)"><circle r="46" fill="url(#gSun)"/>${T(0, 22, "?", 64, P.ink)}</g>`) + TF(1440, 640, spring(t, W(b, "find"), .4), tpill(0, 0, "Find the cicak!", 40, P.ink, P.sun, { w: 700 }));
+  if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), `<g filter="url(#drop)"><circle r="150" fill="${P.paper}"/></g><g transform="translate(-10 20) scale(2.1) rotate(${n2(4 * Math.sin(t * 5))})">${cicak()}</g><g transform="translate(110 -100) rotate(12)"><circle r="46" fill="url(#gSun)"/>${T(0, 22, "?", 64, P.ink)}</g>`) + TF(1440, 640, spring(t, W(b, "find"), .4), tpill(0, 0, "Find the lizard!", 40, P.ink, P.sun, { w: 700 }));
   return out + logo(t); };
 
 /* ============ today's goals ============ */

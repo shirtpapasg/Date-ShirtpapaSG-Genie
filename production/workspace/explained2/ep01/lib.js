@@ -225,8 +225,10 @@ const KW = (PART === 1 ? [["DIVERSITY", "kw_diversity", 1], ["LIVING THINGS", "k
 const SHELF_HIDE = { cold: 1, title: 1, r1card: 1, r2card: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
+const KWLINE = PART === 1 ? ["h861", "h862", "h863"] : ["h871", "h872", "h873"];
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
-  const hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0), tr = MK("recap"); let out = "", top = "";
+  const hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
+  const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;
   for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * 560, sy = 136 + k.i * 57, tf = k.tl - .5;
     if (k.big && t < tf) { // the new term, large, held about 1.5 s
       const a = clamp((t - k.t) / .2), kk = spring(t, k.t, .5); let rays = ""; for (let i = 0; i < 12; i++) { const an = i * 30 * Math.PI / 180 + (t - k.t) * .3; rays += `<path d="M${n2(960 + Math.cos(an) * 330)} ${n2(470 + Math.sin(an) * 150)} L${n2(960 + Math.cos(an) * (400 + 30 * kk))} ${n2(470 + Math.sin(an) * (190 + 20 * kk))}" stroke="${P.sun}" stroke-width="9" stroke-linecap="round" opacity="${n2(.8 * a)}"/>`; }
@@ -234,7 +236,10 @@ function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[
     const u = clamp((t - tf) / .5);
     if (u < 1) { const e = eio(u), x0 = k.from[0], y0 = k.from[1], x = lerp(x0, sx, e), y = lerp(y0, sy, e) - 120 * Math.sin(Math.PI * e), sc = lerp(k.big ? (k.w.length > 12 ? 104 : 130) / size : 1.5, 1, e) * (k.big ? 1 : Math.min(1, spring(t, tf, .25) + .2));
       top += OP(k.big ? 1 : Math.min(1, u * 5), TF(x, y, sc, kwPill(k.w, size)) ) + (k.big ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * (1 - u))}"/>` : ""); continue; }
-    const g = pulse(t, tr + k.i * .4, .12, .7), land = pulse(t, k.tl, .02, .3);
-    out += TF(sx - (g * ww * .12), sy, 1 + .22 * land + .24 * g, kwPill(k.w, size, g)); }
+    if (rc > 0) { // the read-along: centre stage, big; each word lights up as it is said and stays lit
+      const tl_ = LT(KWLINE[k.i]), lit = t >= tl_ - .05, g = lit ? pulse(t, tl_, .05, .8) : 0, cy = 330 + k.i * 150, sc = lerp(1, 2.5, rc) * (1 + .1 * g + (lit ? .04 * Math.sin(t * 5) * (t < tl_ + 2.6 ? 1 : 0) : 0));
+      out += OP(lit || rc < 1 ? 1 : .5, TF(lerp(sx, 960, rc), lerp(sy, cy, rc), sc, kwPill(k.w, size, lit && t < tl_ + 2.6 ? 1 : 0))); continue; }
+    const land = pulse(t, k.tl, .02, .3);
+    out += TF(sx, sy, 1 + .22 * land, kwPill(k.w, size)); }
   return out + top; }
 window.OVER = (t, s) => location.search.includes("noshelf") ? "" : shelf(t, s);

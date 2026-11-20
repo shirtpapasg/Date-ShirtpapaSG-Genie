@@ -13,9 +13,19 @@ for it in SEQ:
     elif k == "wait": t += it[1]
     elif k == "mark": marks[it[1]] = r(t)
     elif k == "chant":
-        v = json.load(open(f"{H}/voice/{it[1]}.json")); lines[it[1]] = {"who": "chant", "t": r(t), "dur": v["dur"], "end": r(t + v["bar"] * 4), "bar": v["bar"], "text": v["text"],
+        v = json.load(open(f"{H}/voice/{it[1]}.json")); lines[it[1]] = {"who": "chant", "t": r(t), "dur": v["dur"], "end": r(t + v["len"]), "bar": v["bar"], "slots": v["slots"], "nbars": v["nbars"], "text": v["text"], "gain": .8,
+            "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"]), "slot": w["slot"]} for w in v["words"]], "tracks": v["tracks"]}
+        order.append(it[1]); t += v["len"]
+    elif k == "unison":
+        _, id, text, o = it; v = json.load(open(f"{H}/voice/{id}.json"))
+        if o.get("sync"):    # together with the line just before it (Heart and the buddies shout it at the same time)
+            p = lines[order[-1]]; lines[id] = {"who": "chant", "t": p["t"], "dur": v["dur"], "end": r(p["t"] + v["len"]), "text": text, "gain": .7,
+                "words": [{"w": w["w"], "a": r(p["t"] + w["a"]), "b": r(p["t"] + w["b"])} for w in v["words"]], "tracks": v["tracks"]}
+            order.append(id); t = max(t, p["t"] + v["len"]); continue
+        t += o.get("pre", .3)
+        lines[id] = {"who": "chant", "t": r(t), "dur": v["dur"], "end": r(t + v["len"]), "text": text, "gain": .34 if o.get("quiet") else .8,
             "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"])} for w in v["words"]], "tracks": v["tracks"]}
-        order.append(it[1]); t += v["bar"] * 4
+        order.append(id); t += v["len"] + o.get("post", 0)
     elif k == "say":
         _, id, who, text, o = it; v = json.load(open(f"{H}/voice/{id}.json")); t += max(.16, o.get("pre", .35) * .75)
         lines[id] = {"who": who, "t": r(t), "dur": v["dur"], "end": r(t + v["dur"]), "text": text, "scene": scenes[-1]["name"],

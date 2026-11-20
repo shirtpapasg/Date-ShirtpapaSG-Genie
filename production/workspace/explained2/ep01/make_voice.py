@@ -54,43 +54,45 @@ def stretch(x, sr, dur):
     return call(snd, "Lengthen (overlap-add)", 75, 600, f).values[0] if abs(f - 1) > .02 else x
 
 BAR = 1.65   # the chant: one phrase per bar; clap, clap, stomp
-def chant(id):
-    """three buddies in unison, each phrase stretched to the same length; returns the mix and one track per buddy"""
-    tracks = {}
+# call and response: a line, then a bar for the viewers ("YOUR TURN!"), four times; then all together once at full speed
+SLOTS = [(0, 0), (1, 2), (2, 4), (3, 6), (0, 8), (1, 9), (2, 10), (3, 11)]; NBARS = 12
+def phrase_set(texts):
+    """each buddy says each text; every text is stretched to one length so the three land together. -> {who: [audio]}, durations"""
+    raw = {}
     for who in ("pip", "basil", "momo"):
-        f = f"{V}/{id}_{who}.wav"
-        if not os.path.exists(f):
-            raw = []
-            for ph in CHANT:
-                x, sr = buddy(who, ph); idx = np.where(np.abs(x) > .02)[0]; raw.append(x[idx[0]: idx[-1] + 600])
-            tracks[who] = (raw, sr)
-    if tracks:
-        n = int(BAR * 4 * SR) + SR // 2
-        durs = [min(1.42, float(np.median([len(tracks[w][0][i]) / SR for w in tracks]))) for i in range(4)]
-        for who, (raw, sr) in tracks.items():
-            y = np.zeros(n)
-            for i, x in enumerate(raw):
-                z = stretch(x, sr, durs[i]); a = int((i * BAR + .02) * SR); z = z[: n - a]; y[a: a + len(z)] += z
-            sf.write(f"{V}/{id}_{who}.wav", up48(y, SR).astype(np.float32), 48000, subtype="PCM_16")
+        raw[who] = []
+        for ph in texts:
+            x, sr = buddy(who, ph); idx = np.where(np.abs(x) > .02)[0]; raw[who].append(x[idx[0]: idx[-1] + 600])
+    durs = [min(1.42 if len(texts) > 1 else 9, float(np.median([len(raw[w][i]) / SR for w in raw]))) for i in range(len(texts))]
+    return {w: [stretch(x, SR, durs[i]) for i, x in enumerate(raw[w])] for w in raw}, durs
+def write_group(id, tracks, n, words, extra):
+    for who, y in tracks.items(): sf.write(f"{V}/{id}_{who}.wav", up48(y[:n], SR).astype(np.float32), 48000, subtype="PCM_16")
     mix = sum(sf.read(f"{V}/{id}_{w}.wav")[0] for w in ("pip", "basil", "momo")) * .62
     sf.write(f"{V}/{id}.wav", np.clip(mix, -.98, .98).astype(np.float32), 48000, subtype="PCM_16")
-    out = {"who": "chant", "text": " ".join(CHANT), "dur": round(len(mix) / 48000, 3), "bar": BAR, "fps": 30, "tracks": {}}
-    words = []
-    for i, ph in enumerate(CHANT):
-        ws = ph.split()
-        for j, w in enumerate(ws): words.append({"w": w, "a": round(i * BAR + .02 + j * 1.15 / len(ws), 3), "b": round(i * BAR + .02 + (j + 1) * 1.15 / len(ws), 3)})
-    out["words"] = words
+    out = {"who": "chant", "dur": round(len(mix) / 48000, 3), "fps": 30, "tracks": {}, "words": words, **extra}
     for w in ("pip", "basil", "momo"):
         x, sr = sf.read(f"{V}/{id}_{w}.wav"); op, lv = tv.envelope(x, sr); out["tracks"][w] = tv.mouth_track(tv.level(x, sr, op))
-    json.dump(out, open(f"{V}/{id}.json", "w"))
-    print(id, "chant", out["dur"], flush=True)
+    json.dump(out, open(f"{V}/{id}.json", "w")); print(id, out["dur"], flush=True)
+def chant(id):
+    ph, durs = phrase_set(CHANT); n = int(BAR * NBARS * SR) + SR // 2; tracks = {w: np.zeros(n) for w in ph}; words = []
+    for k, (p, bar) in enumerate(SLOTS):
+        for w in ph:
+            z = ph[w][p]; a = int((bar * BAR + .02) * SR); z = z[: n - a]; tracks[w][a: a + len(z)] += z
+        ws = CHANT[p].split()
+        for j, wd in enumerate(ws): words.append({"w": wd, "a": round(bar * BAR + .02 + j * 1.15 / len(ws), 3), "b": round(bar * BAR + .02 + (j + 1) * 1.15 / len(ws), 3), "slot": k})
+    write_group(id, tracks, n, words, {"text": " ".join(CHANT), "bar": BAR, "slots": SLOTS, "nbars": NBARS, "len": BAR * NBARS})
+def unison(id, text):
+    ph, durs = phrase_set([text]); n = int((durs[0] + .25) * SR); tracks = {}
+    for w in ph: y = np.zeros(n); z = ph[w][0][:n - 480]; y[480: 480 + len(z)] = z; tracks[w] = y
+    ws = text.split(); words = [{"w": wd, "a": round(.01 + j * durs[0] / len(ws), 3), "b": round(.01 + (j + 1) * durs[0] / len(ws), 3)} for j, wd in enumerate(ws)]
+    write_group(id, tracks, n, words, {"text": text, "len": durs[0] + .1})
 
 dic = set(l.split()[0].split("(")[0] for l in open(os.path.join(pocketsphinx.get_model_path(), "en-us", "cmudict-en-us.dict")))
 EXTRA = {"non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
          "lock-in": "L AA K IH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
          "aww": "AA", "recycling": "R IY S AY K L IH NG", "organiser": "AO R G AH N AY Z ER", "showdown": "SH OW D AW N", "papaya": "P AH P AY AH",
          "toa": "T OW AH", "payoh": "P AA Y OW", "mynah": "M AY N AH", "dit": "D IH T", "wines": "W AY N Z", "squish": "S K W IH SH", "buddies": "B AH D IY Z",
-         "classify": "K L AE S AH F AY", "diversity": "D AY V ER S AH T IY", "similarities": "S IH M AH L EH R AH T IY Z"}
+         "classify": "K L AE S AH F AY", "twenty-five": "T W EH N T IY F AY V", "today's": "T AH D EY Z", "sprouts": "S P R AW T S", "diversity": "D AY V ER S AH T IY", "similarities": "S IH M AH L EH R AH T IY Z"}
 def align(text, wav):
     toks = text.split(); ptoks = pron(text).split()
     spoken = []
@@ -133,7 +135,10 @@ def align(text, wav):
 bad = []
 for it in SEQ:
     if it[0] == "chant":
-        if not os.path.exists(f"{V}/{it[1]}.json"): chant(it[1])
+        if not (os.path.exists(f"{V}/{it[1]}.json") and "slots" in json.load(open(f"{V}/{it[1]}.json"))): chant(it[1])
+        continue
+    if it[0] == "unison":
+        if not (os.path.exists(f"{V}/{it[1]}.json") and json.load(open(f"{V}/{it[1]}.json")).get("text") == it[2]): unison(it[1], it[2])
         continue
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
