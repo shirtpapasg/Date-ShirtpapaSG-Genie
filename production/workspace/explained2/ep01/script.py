@@ -111,9 +111,12 @@ SEQ1 = [
  ("say", "h864", H, "Well done!", {"pre": .2, "post": .7}),
  ("scene", "nyk"),   # note 15: the class says it too
  ("unison", "u1300", "Say it with us!", {"pre": .7}), ("wait", .8),
- ("say", "h1304b", H, "Ready? One, two...", {"pre": 0, "post": .3, "gap": .3}),
- ("say", "h1305", H, "Now you know!", {"pre": 0, "excited": True}),
- ("unison", "u1305", "Now you know!", {"sync": True}),
+ ("say", "h1304a", H, "Ready?", {"pre": 0}),
+ # note 16: a real count-in. "One", "Two", "Now you know!" start exactly 1.0 s apart; the blast lands on "know!"
+ ("say", "h1304o", H, "One!", {"pre": .45}),
+ ("say", "h1304t", H, "Two!", {"after": ["h1304o", 1.0]}),
+ ("say", "h1305", H, "Now you know!", {"after": ["h1304t", 1.0], "shout": True}),
+ ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
  ("wait", 5.8),
 ]
 
@@ -195,9 +198,12 @@ SEQ2 = [
  ("say", "h864", H, "Well done!", {"pre": .2, "post": .7}),
  ("scene", "nyk"),   # note 15: the class says it too
  ("unison", "u1300", "Say it with us!", {"pre": .7}), ("wait", .8),
- ("say", "h1304b", H, "Ready? One, two...", {"pre": 0, "post": .3, "gap": .3}),
- ("say", "h1305", H, "Now you know!", {"pre": 0, "excited": True}),
- ("unison", "u1305", "Now you know!", {"sync": True}),
+ ("say", "h1304a", H, "Ready?", {"pre": 0}),
+ # note 16: a real count-in. "One", "Two", "Now you know!" start exactly 1.0 s apart; the blast lands on "know!"
+ ("say", "h1304o", H, "One!", {"pre": .45}),
+ ("say", "h1304t", H, "Two!", {"after": ["h1304o", 1.0]}),
+ ("say", "h1305", H, "Now you know!", {"after": ["h1304t", 1.0], "shout": True}),
+ ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
  ("wait", 5.8),
 
 ]

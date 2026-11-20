@@ -112,6 +112,10 @@ const P = {
   term: (t) => { ['C6', 'E6', 'G6', 'C7'].forEach((n, i) => { const x = I.musicBox(m(n), { decay: 1.8 }); game.addMono(x, t + i * .1, .2); verb.addMono(x, t + i * .1, .2); }); game.addMono(I.noiseSweep(.35, 600, 2600, { q: 1.2 }), t - .1, .1); chordAt(t, ['C4', 'G4', 'E5'], .06, 1.8); },
   shelfpop: (t, v) => { game.addMono(I.pop(1500 + 150 * v, 110 + v), t, .6); mar(RISE[3 + v], t, .4, { thock: .5 }); },
   glow: (t, v) => { const x = I.musicBox(m(['E6', 'G6', 'C7'][v % 3]), { decay: 1.6 }); game.addMono(x, t, .26); verb.addMono(x, t, .22); mar(['E5', 'G5', 'C6'][v % 3], t, .3); },
+  // note 16: the big happy hit exactly on "know!": brass, a cymbal splash, a confetti pop, a bright chord (the "yay!" is in the buddies' voices)
+  blast: (t) => { for (const [n, g] of [['C4', .5], ['E4', .45], ['G4', .45], ['C5', .5], ['E5', .4]]) { const x = I.brassNote(m(n), .9); game.addMono(x, t, g * .5); verb.addMono(x, t, g * .2); }
+    const c = I.crash(11), c2 = I.crash(12); game.addMono(c, t, .3); game.addMono(c2, t + .02, .18, .5); verb.addMono(c, t, .15); game.addMono(K, t, 1.0); game.addMono(I.thud(70, .14), t, .9); game.addMono(I.pop(1800, 131), t, .8); game.addMono(I.pop(2400, 132), t + .05, .5, .6); game.addMono(I.pop(1300, 133), t + .09, .5, -.6); game.addMono(CL, t, .7);
+    ['C5', 'E5', 'G5', 'C6', 'E6', 'G6', 'C7'].forEach((n, i) => mar(n, t + i * .045, .5, { decay: .7 })); chordAt(t, ['C4', 'E4', 'G4', 'C5', 'E5'], .12, 3.0); ['C3', 'G3', 'E4', 'G4', 'C5'].forEach((n, i) => uke.addMono(I.guitar(m(n) + 12, 1.6, { bright: .6, seed: i }), t + i * .015, .24)); },
   final: (t) => { game.addMono(I.thud(80, .1), t, .7); game.addMono(CL, t, .5); [['E5', 0], ['G5', 1], ['C6', 2], ['E6', 3]].forEach(([n, s]) => mar(n, t + s * BEAT / 2, .5, { decay: .7 }));
     ['C3', 'G3', 'E4', 'G4', 'C5'].forEach((n, i) => uke.addMono(I.guitar(m(n) + 12, 1.6, { bright: .6, seed: i }), t + i * .02, .22)); chordAt(t, ['C4', 'E4', 'G4', 'D5'], .09, 2.6); const c = I.crash(9); game.addMono(c, t, .1); },
 };

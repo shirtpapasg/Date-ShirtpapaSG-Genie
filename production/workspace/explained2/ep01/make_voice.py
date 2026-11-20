@@ -87,6 +87,58 @@ def unison(id, text):
     ws = text.split(); words = [{"w": wd, "a": round(.01 + j * durs[0] / len(ws), 3), "b": round(.01 + (j + 1) * durs[0] / len(ws), 3)} for j, wd in enumerate(ws)]
     write_group(id, tracks, n, words, {"text": text, "len": durs[0] + .1})
 
+def onset(x, sr, thr=.02):
+    i = np.where(np.abs(x) > thr * np.abs(x).max())[0]; return i[0] / sr
+def shout(text):
+    """Heart's happy "Now you know!" (note 16): several takes, the brightest one; pitched up; "know!" is longer and RISES (x1.4 -> x1.8);
+    returns the audio (24 kHz), and where "know" starts (s)."""
+    best = None
+    for spd in (.98, 1.04, 1.1):
+        for txt in (text, text.replace("!", "!!"), "Now you KNOW!"):
+            a, sr = K().create(txt, voice="af_heart", speed=spd, lang="en-us"); x = a.astype(np.float64); idx = np.where(np.abs(x) > .01)[0]; x = x[max(0, idx[0] - 120): idx[-1] + 480]
+            snd = parselmouth.Sound(x, SR); f0 = snd.to_pitch(time_step=.01, pitch_floor=120, pitch_ceiling=600).selected_array["frequency"]; f0 = f0[f0 > 0]
+            X = np.abs(np.fft.rfft(x * np.hanning(len(x)))); fr = np.fft.rfftfreq(len(x), 1 / SR); cen = float((X * fr).sum() / X.sum())
+            score = cen / 1000 + (np.percentile(f0, 90) - np.percentile(f0, 10)) / 100 + np.median(f0) / 200      # bright, lively, high
+            if best is None or score > best[0]: best = (score, x, spd, txt)
+    _, x, spd, txt = best; print("   shout take:", txt, "speed", spd, "score", round(best[0], 2))
+    sf.write(f"{V}/_shout_raw.wav", up48(x, SR).astype(np.float32), 48000, subtype="PCM_16")
+    words, ok = align_raw("now you know", f"{V}/_shout_raw.wav"); kn = words[2]["a"] if ok else len(x) / SR * .52; D = len(x) / SR
+    snd = parselmouth.Sound(x, SR); m = call(snd, "To Manipulation", 0.01, 120, 600)
+    pt = call(m, "Extract pitch tier"); med = call(snd.to_pitch(time_step=0.01, pitch_floor=120, pitch_ceiling=600), "Get quantile", 0, 0, 0.5, "Hertz")
+    # everything up three semitones with a wider swing; from "know" on, a rise from x1.4 to x1.8 of the median
+    call(pt, "Formula", f"{med * 1.19} * 2 ^ (1.9 * log2(self / {med}))")
+    call(pt, "Remove points between", kn - .01, D)                              # "KNOW!": a drawn, rising contour (x1.4 -> x1.8 of her median)
+    for u, k in ((0, 1.38), (.18, 1.46), (.45, 1.58), (.75, 1.72), (1, 1.82)): call(pt, "Add point", kn + u * (D - kn - .02), med * k)
+    call([pt, m], "Replace pitch tier")
+    dt = call("Create DurationTier", "d", 0, D); call(dt, "Add point", 0, 1.0); call(dt, "Add point", max(.01, kn - .01), 1.0); call(dt, "Add point", kn + .02, 1.5); call(dt, "Add point", D, 1.6)
+    call([dt, m], "Replace duration tier"); y = call(m, "Get resynthesis (overlap-add)").values[0]
+    sp = y[np.abs(y) > .003]; y = np.clip(y * (10 ** ((-21.7 + 4.5) / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98)
+    return y, kn + .005 - .0, words
+def align_raw(text, wav):
+    return align(text, wav)
+def crowd(id, text, hid):
+    """the three buddies shout it with Heart: each take is stretched so its "know" lands with hers, a doubled copy a few cents apart and a
+    few ms late (a light chorus = a happy crowd), then a short "Yay!" from each. -> voice/<id>.wav + per-buddy tracks for the mouths"""
+    hv = json.load(open(f"{V}/{hid}.json")); kn = hv["know"]; Dh = hv["dur"]; n = int((Dh + 1.5) * SR); tracks = {}; rng = np.random.default_rng(5)
+    for i, who in enumerate(("pip", "basil", "momo")):
+        a, _ = buddy(who, "Now you"); b, _ = buddy(who, "know!"); y, _ = buddy(who, "Yay!")
+        tr = lambda x: (lambda idx: x[idx[0]: idx[-1] + 400])(np.where(np.abs(x) > .02)[0]); a, b, y = tr(a), tr(b), tr(y)
+        a = stretch(a, SR, max(.2, kn - .03)); b = stretch(b, SR, max(.3, Dh - kn + .05))
+        # "know!" rises too
+        snd = parselmouth.Sound(b, SR); m = call(snd, "To Manipulation", 0.01, 100, 700); pt = call(m, "Extract pitch tier"); Db = len(b) / SR
+        call(pt, "Formula", f"self * (1.12 + 0.28 * (x / {Db}))"); call([pt, m], "Replace pitch tier"); b = call(m, "Get resynthesis (overlap-add)").values[0]
+        t = np.zeros(n); off = int((.012 + .014 * i) * SR)
+        def put(x, at, g=1.0):
+            s0 = int(at * SR) + off; x = x[: n - s0]; t[s0: s0 + len(x)] += x * g
+        put(a, 0); put(b, kn)
+        for det, late, g in ((1.03, .028, .6), (.975, .045, .5)):     # the doubling: slightly detuned, slightly late
+            bb = call(parselmouth.Sound(b, SR), "Change gender", 75, 700, 1.0, 0, 1.0, 1.0).values[0] if False else np.interp(np.arange(0, len(b), det), np.arange(len(b)), b)
+            put(bb, kn + late, g)
+        put(y, kn + .42 + .07 * i, .8)
+        tracks[who] = t
+    ws = [{"w": "Now", "a": .005, "b": round(kn * .5, 3)}, {"w": "you", "a": round(kn * .5, 3), "b": round(kn, 3)}, {"w": "know!", "a": round(kn, 3), "b": round(Dh, 3)}]
+    write_group(id, tracks, n, ws, {"text": text, "len": Dh + .1})
+
 dic = set(l.split()[0].split("(")[0] for l in open(os.path.join(pocketsphinx.get_model_path(), "en-us", "cmudict-en-us.dict")))
 EXTRA = {"non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
          "lock-in": "L AA K IH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
@@ -138,17 +190,23 @@ for it in SEQ:
         if not (os.path.exists(f"{V}/{it[1]}.json") and "slots" in json.load(open(f"{V}/{it[1]}.json"))): chant(it[1])
         continue
     if it[0] == "unison":
-        if not (os.path.exists(f"{V}/{it[1]}.json") and json.load(open(f"{V}/{it[1]}.json")).get("text") == it[2]): unison(it[1], it[2])
+        if it[3].get("crowd"):
+            if not (os.path.exists(f"{V}/{it[1]}.json") and json.load(open(f"{V}/{it[1]}.json")).get("crowd")):
+                crowd(it[1], it[2], it[3]["crowd"]); j = json.load(open(f"{V}/{it[1]}.json")); j["crowd"] = True; json.dump(j, open(f"{V}/{it[1]}.json", "w"))
+        elif not (os.path.exists(f"{V}/{it[1]}.json") and json.load(open(f"{V}/{it[1]}.json")).get("text") == it[2]): unison(it[1], it[2])
         continue
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
-    if os.path.exists(j) and json.load(open(j)).get("text") == text and os.path.exists(f): continue
-    x, sr = heart(text, o.get("excited", False), o.get("gap", .45), o.get("speed", .95)) if who == "heart" else buddy(who, text)
+    if os.path.exists(j) and json.load(open(j)).get("text") == text and os.path.exists(f) and (not o.get("shout") or "know" in json.load(open(j))): continue
+    kn = None
+    if o.get("shout"): x, kn, sw = shout(text); sr = SR
+    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .45), o.get("speed", .95)) if who == "heart" else buddy(who, text)
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     words, ok = align(text, f)
+    if kn is not None: D_ = len(x) / 48000; words = [{"w": "Now", "a": .005, "b": round(sw[1]["a"], 3)}, {"w": "you", "a": round(sw[1]["a"], 3), "b": round(kn, 3)}, {"w": "know!", "a": round(kn, 3), "b": round(D_, 3)}]; ok = True
     if not ok: bad.append(id)
     op, lv = tv.envelope(x, 48000); lvl = tv.level(x, 48000, op)
     json.dump({"who": who, "text": text, "dur": round(len(x) / 48000, 3), "words": words, "aligned": ok, "fps": 30,
-               "open": [round(float(v), 2) for v in op], "mouth": tv.mouth_track(lvl), "stress": tv.stresses(lv)}, open(j, "w"))
+               "open": [round(float(v), 2) for v in op], "mouth": tv.mouth_track(lvl), "stress": tv.stresses(lv), **({"know": round(kn, 3)} if kn is not None else {})}, open(j, "w"))
     print(id, who, round(len(x) / 48000, 2), "ok" if ok else "PROPORTIONAL", flush=True)
 print("not aligned:", bad)

@@ -19,7 +19,7 @@ for it in SEQ:
     elif k == "unison":
         _, id, text, o = it; v = json.load(open(f"{H}/voice/{id}.json"))
         if o.get("sync"):    # together with the line just before it (Heart and the buddies shout it at the same time)
-            p = lines[order[-1]]; lines[id] = {"who": "chant", "t": p["t"], "dur": v["dur"], "end": r(p["t"] + v["len"]), "text": text, "gain": .7,
+            p = lines[order[-1]]; lines[id] = {"who": "chant", "t": p["t"], "dur": v["dur"], "end": r(p["t"] + v["len"]), "text": text, "gain": .95 if o.get("crowd") else .7,
                 "words": [{"w": w["w"], "a": r(p["t"] + w["a"]), "b": r(p["t"] + w["b"])} for w in v["words"]], "tracks": v["tracks"]}
             order.append(id); t = max(t, p["t"] + v["len"]); continue
         t += o.get("pre", .3)
@@ -27,9 +27,11 @@ for it in SEQ:
             "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"])} for w in v["words"]], "tracks": v["tracks"]}
         order.append(id); t += v["len"] + o.get("post", 0)
     elif k == "say":
-        _, id, who, text, o = it; v = json.load(open(f"{H}/voice/{id}.json")); t += max(.16, o.get("pre", .35) * .75)
+        _, id, who, text, o = it; v = json.load(open(f"{H}/voice/{id}.json"))
+        if o.get("after"): t = lines[o["after"][0]]["t"] + o["after"][1]     # onsets a fixed time apart (every line's speech starts 5 ms into its file)
+        else: t += max(.16, o.get("pre", .35) * .75)
         lines[id] = {"who": who, "t": r(t), "dur": v["dur"], "end": r(t + v["dur"]), "text": text, "scene": scenes[-1]["name"],
-                     "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"])} for w in v["words"]], "mouth": v["mouth"], "open": v["open"], "stress": [r(t + s) for s in v["stress"]]}
+                     "words": [{"w": w["w"], "a": r(t + w["a"]), "b": r(t + w["b"])} for w in v["words"]], "mouth": v["mouth"], "open": v["open"], "stress": [r(t + s) for s in v["stress"]], **({"know": r(t + v["know"])} if "know" in v else {})}
         order.append(id); t += v["dur"] + o.get("post", 0) * .75
 scenes[-1]["t1"] = r(t)
 TL = {"END": r(t), "FPS": 30, "scenes": scenes, "lines": lines, "order": order, "marks": marks}
