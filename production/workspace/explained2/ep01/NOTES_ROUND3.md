@@ -68,3 +68,7 @@
     the frame (YouTube's controls and "up next" overlay sit there).
     Also in this end shot the glass box shows only 4 of the 6 things (plant, bean plant, pebble, teddy): add the mealworm (on its
     dish) and the robot so all six are there, and keep it as the same box with lid and air holes (note 1).
+15. The ending, both parts: get the class to SAY "Now you know!" with us. Just before it, Heart (or the buddies): "Say it with us!"
+    then a 0.8 s pause, then a short countdown beat ("Ready? One, two...") and everyone, Heart and all three buddies (mouths moving,
+    arms up), shouts "Now you know!" together, excited, with the big title slamming in on the words. A "YOU" tag/hands in the corner
+    show the viewer joins in. Then the extended ~4 s animated outro from note 14.
