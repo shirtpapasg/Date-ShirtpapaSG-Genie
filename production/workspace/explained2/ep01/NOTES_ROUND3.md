@@ -62,3 +62,9 @@
       the next line. Four lines, four pauses. Finish with all together once at full speed if time allows.
     Also on this Day 30 shot: the win strip along the bottom covers the buddies' name tags (Pip / Basil / Momo); lift the buddies or
     the strip so the tags stay readable.
+14. Ending of both parts ("Now you know!" scene): extend by about 4 more seconds with the animation still running (sunburst slowly
+    turning, buddies bouncing/cheering in a loop, a little sparkle, the music bed playing out and fading at the very end), so the
+    video does not stop dead and YouTube's end overlays have time. Nothing new is spoken; keep any text clear of the bottom fifth of
+    the frame (YouTube's controls and "up next" overlay sit there).
+    Also in this end shot the glass box shows only 4 of the 6 things (plant, bean plant, pebble, teddy): add the mealworm (on its
+    dish) and the robot so all six are there, and keep it as the same box with lid and air holes (note 1).
