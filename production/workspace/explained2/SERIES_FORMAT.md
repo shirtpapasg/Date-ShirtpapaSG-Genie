@@ -170,6 +170,12 @@ Also read:
 - **Every label and small print fits fully inside the frame.** Label lines never cross other objects.
 - Frames are a pure function of t. Render in 10 s chunks so restarts lose little.
 
+- **Real animals must look real (teacher, 2026-11-20).** Draw an animal's true shape from real photos before drawing it, then simplify
+  into the flat cartoon style; never invent anatomy. Example: the monitor lizard from behind has a long narrow head on a long thick
+  neck, a heavy body, short legs bent out at elbow and knee with claws down (never straight out like arms), a very long tapering
+  tail, and very fine bead-like scales (never big hexagon tiles). Use the Singapore animal children really see: the Malayan water
+  monitor (dark grey-brown, rows of pale yellow spots, paddle-shaped tail). Reference photos: `refs/` (gitignored, not for reuse).
+
 ## 7. On screen
 
 - Series logo pill top left; the YOU vs BUDDIES score pill top right.
