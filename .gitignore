@@ -39,3 +39,4 @@ production/workspace/explained2/ep01/out/
 production/workspace/explained2/*/out/stems/
 production/workspace/explained2/*/out/chunks/
 *.part.mp4
+production/workspace/explained2/ep01/*.mp4

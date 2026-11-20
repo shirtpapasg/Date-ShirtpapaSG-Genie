@@ -118,15 +118,15 @@ SC.clue = (t, s) => { const a = "h801", b = "h802", tN = W(a, "what") - .1, tD =
     + panel(1420, tD, "What can it", "DO", ["grow", "respond", "reproduce"], ["grow", "respond", "reproduce"], [["#1F8A4C", "#9BE08F"], ["#E36A12", "#FFD08A"], ["#8A4FD0", "#D9C2FF"]])
     + strip(740, 0, "Living things need water, food and air.") + strip(852, 7, "Living things grow, respond to changes and reproduce.")
     + (t >= tN + .5 ? TF(960, 990, spring(t, tN + .6, .4) * (1 + .1 * pulse(t, tTest + .2, .1, .6)), tpill(0, 0, "More in Episodes 2 and 3", 38, P.ink, P.sun, { w: 600 })) : "")
-    + buddy("basil", 170, 1070, 230, t, { aura: true, poses: [[s.t0, "arms_crossed"], [tN, "surprised"], [tD + .6, "sit"], [tTest, "cheer"]] }) + HUD(t); };
+    + buddy("basil", 1770, 1075, 200, t, { aura: true, flip: true, poses: [[s.t0, "arms_crossed"], [tN, "surprised"], [tD + .6, "sit"], [tTest, "cheer"]] }) + HUD(t); };
 
 /* ============ the chant: clap, clap, stomp ============ */
 function chantScene(t, id, o = {}) { const L = TL.lines[id], bar = L.bar, PH = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What can it DO?"], KEY = ["move?", "NOT", "NEED?", "DO?"];
   const tb = t - L.t, cur = clamp(Math.floor(tb / bar), -1, 3); let lines = "";
   const y0 = o.y0 || 190, dy = o.dy || 128, size = o.size || 96;
-  PH.forEach((ph, i) => { const on = cur === i, done = cur > i, ws = ph.split(" "), total = tw(ph, size, 700, "Fredoka", 2), sc = 1 + .12 * pulse(t, L.t + i * bar, .04, .5); let cx = -total / 2, tx = "";
+  PH.forEach((ph, i) => { const on = cur === i, done = cur > i, ws = ph.split(" "), total = ws.reduce((a, w) => a + tw(w, size, 700, "Fredoka", 2) + size * .3, -size * .3), sc = 1 + .12 * pulse(t, L.t + i * bar, .04, .5); let cx = -total / 2, tx = "";
     ws.forEach((w, j) => { const widx = PH.slice(0, i).reduce((n, p) => n + p.split(" ").length, 0) + j, wt = L.words[widx].a, lit = t >= wt - .03, ww = tw(w, size, 700, "Fredoka", 2), isKey = w === KEY[i];
-      tx += `<text x="${n2(cx)}" y="0" font-family="Fredoka" font-weight="700" font-size="${size}" letter-spacing="2" fill="${lit ? (isKey ? P.sun : "#fff") : "#fff"}" opacity="${lit ? 1 : .28}" ${lit && isKey ? `transform="translate(${n2(cx + ww / 2)} 0) scale(${n2(1 + .18 * pulse(t, wt, .03, .35))}) translate(${n2(-cx - ww / 2)} 0)"` : ""}>${esc(w)}</text>`; cx += ww + tw(" ", size, 700); });
+      tx += `<text x="${n2(cx)}" y="0" font-family="Fredoka" font-weight="700" font-size="${size}" letter-spacing="2" fill="${lit ? (isKey ? P.sun : "#fff") : "#fff"}" opacity="${lit ? 1 : .28}" ${lit && isKey ? `transform="translate(${n2(cx + ww / 2)} 0) scale(${n2(1 + .1 * pulse(t, wt, .03, .35))}) translate(${n2(-cx - ww / 2)} 0)"` : ""}>${esc(w)}</text>`; cx += ww + size * .3; });
     lines += `<g transform="translate(${o.x || 960} ${y0 + i * dy}) scale(${n2(sc)})">${tx}</g>`; });
   // the beat: clap, clap, stomp (two bars of it before the words, then under every phrase)
   const beats = []; for (let b = -1; b < 4; b++) { beats.push([L.t + b * bar, "c"], [L.t + b * bar + bar * .25, "c"], [L.t + b * bar + bar * .5, "s"]); }
