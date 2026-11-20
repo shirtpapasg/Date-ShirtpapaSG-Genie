@@ -2,7 +2,12 @@
 
 **Episode title (P3 plan row 3):** "Touch this plant and it folds up! What living things can do" · Ch 1, pp. 14-18 · NGSS 3-LS1-1 · School Lab 1.3 "Six clues"
 **Big idea:** Living things grow (they get bigger and more complex), respond to changes in the environment, and reproduce so that their kind survives.
-**Status:** version 1 (20 Nov 2026), written to follow `SERIES_FORMAT.md`. For the teacher's approval. Nothing is rendered.
+**Status:** version 1 (20 Nov 2026), written to follow `SERIES_FORMAT.md`. **APPROVED by the teacher on 20 Nov 2026 ("EP3 ok").**
+The 15 open questions in section 11 were not answered one by one, so each takes the choice already in this script: two parts; respond,
+then reproduce, then grow (said in the book's order); chant in Part 2 only; "environment" not glossed in the video; key words 2 + 4;
+egg 4 does not hatch; an unnamed farm in Kranji; the extinct strip on screen, "disappear forever" spoken; the stamp colours as written;
+Round Zero scores a point; one gentle snail touch with the safety line; the times as written (seconds, a few minutes, Day 21); Basil's
+lizard-egg line kept; the cold open matches wherever the finished EP2 ends; the School Lab 1.3 line held back until that lab is signed off.
 **It replaces** the old EP3 on YouTube ("Touch This Plant And It Folds Up! What Living Things Can Do").
 
 | | Part 1 | Part 2 |
