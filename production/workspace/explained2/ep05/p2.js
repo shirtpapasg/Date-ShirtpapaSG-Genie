@@ -122,7 +122,7 @@ SC.fixed = (t, s) => { const b = "b908", h = "b909", tc = W("b910", "two") - .1,
   const star = `<rect x="-300" y="-300" width="600" height="600" fill="#BFE6FF"/><rect x="-300" y="60" width="600" height="300" fill="#F1DDB0"/>` + TF(0, 20, 1.1, seaStar());
   return showView(t, { notes: { fixing: true, rub, write: wr, tick: spring(t, LE(b) - .2, .45) } })
     + (t >= tH ? TF(250, 1050, spring(t, tH, .45), wboard(star, 380, 330, "ss", { lab: "also called a sea star", size: 32 })) + (t >= tS ? TF(250, 570, spring(t, tS, .4), tpill(0, 0, "no scales", 40, P.ink, "#fff", { w: 700 })) : "") + (t >= tG ? TF(250, 490, spring(t, tG, .4), tpill(0, 0, "no gills", 40, P.ink, "#fff", { w: 700 })) : "") : "")
-    + buddy("momo", 1720, 1060, 270, t, { aura: true, flip: true, poses: [[s.t0, "sit"], [LE(b) + .1, "cheer"], [LE(b) + 2, "sit"]], nohop: true }) + say(b, 1540, 500, t, { size: 46, tail: 160, maxW: 520 })
+    + buddy("momo", 1720, 1060, 270, t, { aura: true, flip: true, poses: [[s.t0, "sit"], [LE(b) + .1, "cheer"], [LE(b) + 2, "sit"]], nohop: true }) + say(b, 1640, 520, t, { size: 46, tail: 80, maxW: 520 })
     + bookCap(t, h, "Starfish are not fish! This is because they do not have scales or gills.", 150, { size: 44, maxW: 1150, x: 760 }) + coin(t, tc, 1500, 380, "+2", "if you showed three fingers") + HUD(t); };
 SCORE.push([W("b910", "two") - .1, 4, 2]);
 
