@@ -97,7 +97,7 @@ function chantScene(t, s, id, o = {}) { const L = TL.lines[id], beats = chantBea
     fx += OP(clap, `<g stroke="${P.sun}" stroke-width="7" stroke-linecap="round"><path d="M${xs[i] - bh * .5} ${by - bh * .8} l-26 -22 M${xs[i] + bh * .5} ${by - bh * .8} l26 -22 M${xs[i]} ${by - bh * 1.08} v-30"/></g>`) + OP(stomp, `<ellipse cx="${xs[i]}" cy="${by}" rx="${n2(bh * (.5 + .4 * (1 - stomp)))}" ry="${n2(22 + 16 * (1 - stomp))}" fill="none" stroke="#fff" stroke-width="6"/>`); });
   // the check-in board stands behind them on its easel; its three column labels flash in time
   const board = TF(215, 1010, .84, boardEasel(t, o.ticks || {}, { flash: chantFlash(t, L) }));
-  return bg("stage2") + board + chantLines(t, L, { x: 1020, y0: 330, dy: 150, size: 84 }) + (o.head || "") + buds + fx + yourTurn(t, L, 1730, 700, .95) + say(o.sayId || "u1002", 960, 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
+  return bg("stage2") + board + chantLines(t, L, { x: 900, y0: 330, dy: 150, size: 76 }) + (o.head || "") + buds + fx + yourTurn(t, L, 1730, 700, .95) + say(o.sayId || "u1002", 960, 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
 
 /* ============ the score hand ============ */
 function finalScene(t, s, L, bud, tips) { // tips: [[time, text, big]]; the last one is HIGH FIVE

@@ -13,3 +13,13 @@
 - Thumbnails made: `thumb_part1.jpg`, `thumb_part2.jpg` (frames: `node thumb_still.js N 1 qa/th/fN.png "&thumb"`; words: `node thumb.js qa/th/f1.png thumb_part1.jpg 1 "IS IT|SAD?" "WHAT DOES|IT NEED?"`, `node thumb.js qa/th/f2.png thumb_part2.jpg 2 "2 WEEKS|IN THE DARK" "WHAT IS|MISSING?"`).
 - `upload.json` written; `--check` passes.
 - NEXT: `flock /tmp/explained_render.lock node render.js 1 3` and `... 2 3` (finished 10 s chunks are kept), `./finish.sh 1`, `./finish.sh 2`, look at the contact sheets and stills from the mp4s, then upload.
+
+## Finished (20 Nov 2026, ~19:30 UTC): LIVE
+- Part 2 rendered and finished. Chant fix in both parts: the second chant line ("Living things need all three!") ran under the
+  "YOUR TURN!" tag and hid "three!"; `common.js` chantLines now x 900, size 76 (as EP4/EP5). Only the chant chunks were
+  re-rendered (p1: 6600-7500, p2: 6900-7500).
+- Final: `ep02_part1.mp4` 4:58.5, `ep02_part2.mp4` 4:58.2, 1920x1080 30 fps, -16.0 LUFS each; `.srt`, `sheet_part1.png`,
+  `sheet_part2.png`, thumbnails.
+- YouTube (public, Made for Kids): Part 1 https://www.youtube.com/watch?v=0GMt5_Z56Ds , Part 2 https://www.youtube.com/watch?v=23sA7ZKKIFU .
+  In both playlists right after 3KyRNndmUU8; old hHXI7B1Qg8A taken out of both playlists, still public, its description now
+  starts with a pointer to Part 1. Captions (.srt) are not sent by the uploader: add them in YouTube Studio if wanted.
