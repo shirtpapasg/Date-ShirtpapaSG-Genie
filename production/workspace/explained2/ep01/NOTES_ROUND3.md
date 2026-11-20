@@ -37,3 +37,10 @@
    bubble "Say it with us!": the cue must be SPOKEN: the three buddies together (or Heart) say "Say it with us!", then a 0.8 s pause
    for reaction time, then the chant starts. (Same rule as note 3, applied to the chant; also check Part 1 / anywhere else a
    "Say it with us!" or "Say it with me!" bubble appears.)
+10. Part 1, Day 1 care card: bring the VOICE back (it was one of the two trims). Heart, slow and clear, matching the labels as each
+    one lights up: "Day one. Six things, one box. The lid has holes, so air can get in. The mealworm has oats to eat, and a juicy
+    carrot for water. The plant has moist soil, and sunlight from the window." (the teacher wants food, water from the carrot, moist
+    soil and sunlight all said). Show a small sun/sunbeam label on the window and a "moist soil" label on the pot to match.
+    Also tidy that shot: the robot overlaps the plant pot and hides the green bean on its cotton wool; space the six things out
+    so each is clearly visible, and keep the label lines from crossing other things. The small print ("An adult helps. Wash your
+    hands. The mealworm goes back to its tub after Day 30.") must fit fully inside the frame (it is cut off on the right).
