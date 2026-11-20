@@ -8,7 +8,9 @@ const tools = (x = 1545) => TF(x, 1056, 1, stampTool()) + TF(x - 100, 1058, 1, i
 const gx = (cam, x) => camX(cam, x), gy = (cam, y) => camY(cam, y);
 
 /* ============ 1 · the silent cold open: the garden under the block ============ */
-SC.cold = (t, s) => { const tb = MK("coldCard"), z = 1 + .05 * eio(t / 8);
+// the thumbnail's frame (thumb_still.js ... "&thumb"): the mimosa large, left of centre, one leaf folded; Basil far left; the sunny garden on the right
+const THUMB1 = (t) => gardenView(t, { f: FOLD, still: true }, [1.5, 1840, 816]) + buddy("basil", 300, 800, 330, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), z = 1 + .05 * eio(t / 8);
   const [cx, cd] = slideX(t, tb + .15, .6, -260, CARD[0], 1062), [sx2, sd2] = slideX(t, tb + 1.7, .45, 2150, 1545, 1056);
   return gardenView(t, { f: FOLD }, [z, 1150, 760]) + cd + sd2 + (t >= tb + .15 ? TF(cx, 1062, CARD[2], trailCard(t)) : "") + (t >= tb + 1.7 ? tools(sx2) : "")
     + gBasil(t, { poses: [[0, "surprised"], [2.8, "sit"]] }) + gPip(t, { in: tb, poses: [[tb, "pointing"], [tb + 1.5, "sit"]] }) + gMomo(t, { in: tb + 1.4, poses: [[tb + 1.4, "waving"], [tb + 3.0, "sit"]], wave: true })

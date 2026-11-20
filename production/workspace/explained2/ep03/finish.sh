@@ -9,7 +9,7 @@ import sys, subprocess, json
 D = float(sys.argv[1]); PT = sys.argv[2]; tl = json.load(open(f'tl_p{PT}.json'))
 # 30 stills: one inside each scene that lasts long enough, the rest spread evenly
 ts = sorted(set([round(s['t0'] + (s['t1'] - s['t0']) * .62, 2) for s in tl['scenes'] if s['t1'] - s['t0'] > 4]))
-extra = [1.2, 5.5] + [tl['marks'][k] + d for k, d in (('kw_diversity', .8), ('kw_classification', .8), ('kw_table', .8), ('kw_go', .8), ('recap', 1.0), ('crack', 2.5), ('beanClose', 6), ('reveal', 2.5), ('ring0_1', 2), ('ring0_3', 2), ('ring0_4', 3)) if k in tl['marks']]
+extra = [1.2, 5.5] + [tl['marks'][k] + d for k, d in (('kw_mimosa', .8), ('kw_respond', .8), ('fold', 1.2), ('droop', 1.5), ('reopen', 2.2), ('stamp1', .6), ('ring0_0', 2), ('ring0_1', 2), ('ring0_2', 3), ('crack1', 1.2), ('still', .8), ('kw_reproduce', .8), ('kw_extinct', 2.5), ('kw_complex', .8), ('stamp3', .6)) if k in tl['marks']]
 ts = sorted(set(ts + extra))
 while len(ts) > 30: ts.pop(len(ts) // 2 * 0 + min(range(1, len(ts)), key=lambda i: ts[i] - ts[i - 1]))
 for i, t in enumerate(ts): subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', str(t), '-i', f'ep03_part{PT}.mp4', '-frames:v', '1', '-vf', 'scale=640:-1', f'out/sheet/s_{i:02d}.png'], check=True)
@@ -18,6 +18,7 @@ print(len(ts), 'stills')
 def ft(t): h = int(t // 3600); m = int(t % 3600 // 60); s = t % 60; return f"{h:02d}:{m:02d}:{s:06.3f}".replace('.', ',')
 out = []; n = 1
 for id in tl['order']:
+    if id.startswith('uk_') or id == 'u1305': continue
     L = tl['lines'][id]; ws = L['words']; cur = []
     for i, w in enumerate(ws):
         cur.append(w)

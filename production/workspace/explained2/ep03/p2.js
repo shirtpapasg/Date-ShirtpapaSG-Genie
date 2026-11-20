@@ -13,7 +13,9 @@ const henChicks = (t, n = 4) => TF(0, 0, 1, hen({ bob: .3 * Math.sin(t * 1.3) })
 const ALL3 = { 0: 0, 1: 0, 2: 0 };
 
 /* ============ 1 · the silent recap montage: five shots from Part 1 ============ */
-SC.recap = (t, s) => { const i = Math.min(4, Math.floor((t - s.t0) / 1.0)), u = t - s.t0 - i, tip = leafTip(0), cam = [1.7, 1400, 800]; let v;
+// the thumbnail's frame: the nest large, left of centre, five eggs, one with a crack and a tiny beak; the DAY 21 card above; Momo far left
+const THUMB2 = (t) => farmView(t, { day: false, wire: false, cat: false, tags: true, nest: eggsIn((i) => egg(i === 0 ? { crack: 1, beak: true } : {})) }, [1.45, -86, 867]) + TF(720, 330, 1.5, dayCard(21)) + buddy("momo", 235, 800, 300, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+SC.recap = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); const i = Math.min(4, Math.floor((t - s.t0) / 1.0)), u = t - s.t0 - i, tip = leafTip(0), cam = [1.7, 1400, 800]; let v;
   if (i === 0) v = gardenView(t, { f: { 0: [ss(.2, .75, u), ss(.65, .98, u)] } }, cam) + TF(camX(cam, MXY[0] + tip[0]) + 6, camY(cam, MXY[1] + tip[1]) - 8 - 60 * (1 - eo(u / .2)), .8, `<g transform="rotate(24)">${pointer()}</g>`);
   else if (i === 1) v = gardenView(t, { items: TF(800, 968, .78, stopwatch(.6 + u * .3)) }, [1.12, 1150, 770]);
   else if (i === 2) v = bg("daystage") + TF(960, 1012, 1.12, trailCard(t, { 1: s.t0 + 2.4 })) + stampPress(t, s.t0 + 2.4, 960, 1012, 1.12, 1);
