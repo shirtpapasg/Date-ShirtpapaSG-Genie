@@ -15,7 +15,7 @@ CHANT = [["Frog!", "Bird!", "Fish!"], "Moist skin, feathers, scales!"]   # not u
 CHANT_CAPS = [.40, .40, .46]
 # how the TTS should say a word (the caption/script text is unchanged)
 PRON = {}
-SLOW = {"speed": .9, "gap": .55}
+SLOW = {"speed": .86, "gap": .62}
 slug = lambda w: w.lower().replace(" ", "_")
 
 def kwrecap(words):
@@ -53,12 +53,14 @@ SEQ1 = [
  ("say", "c106", H, "Good idea, Momo! Here is today's big dare. Insect, reptile, or mammal. Which group is Basil in?", {"pre": .45, "gap": .4}),
  ("say", "c107", B, "The cool group!", {"pre": .45}),
  ("say", "c108", P, "That is not a group, Basil.", {"pre": .5}),
+ ("say", "c109", B, "It will be!", {"pre": .4}),
  ("mark", "lockit"), ("wait", 3.0),
 ]
 # ================= MOMENT 2 · BE THE THING: you are one scale on a lizard's back =================
 SEQ2 = [
  ("scene", "waitw"),
- ("say", "j201", H, "Be a lizard's scale! Shrink down. Quietly.", {"pre": 1.0, "post": .5}),
+ ("say", "j200", B, "Come and be a scale, like mine!", {"pre": 1.0}),
+ ("say", "j201", H, "Shrink down. Quietly.", {"pre": .4, "post": .5}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 2.2),
  ("say", "j202", H, "You are one tiny scale, on a lizard's back.", {**SLOW, "pre": 0, "post": 1.0}),
  ("say", "j203", H, "You are dry. Not moist, like the frog. All around you, more scales.", {**SLOW, "pre": 0, "post": 1.0}),
@@ -73,8 +75,8 @@ SEQ2 = [
  ("wait", 1.7),
  # back out to normal size: the book's words name what you just lived through (definition 2.21, word for word)
  ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.3),
- ("say", "j208", H, "Reptiles are cold-blooded animals. This means that they do not have a constant body temperature like humans. Their body temperature changes with the environment that they are in.", {"pre": 0, "gap": .5}),
- ("wait", .3), ("mark", "kw_cold"), ("wait", 2.2),
+ ("say", "j208", H, "Reptiles are cold-blooded animals. This means that they do not have a constant body temperature like humans. Their body temperature changes with the environment that they are in.", {"pre": 0, "gap": .65, "speed": .88}),
+ ("wait", .3), ("mark", "kw_cold"), ("wait", 2.7),
  ("say", "j209", B, "Dry, scaly skin. Cold-blooded. That is me! I am a reptile!", {"pre": .3}),
  ("mark", "stampR"), ("wait", 2.6),
 ]
@@ -84,6 +86,7 @@ SEQ3 = [
  ("scene", "next"), ("wait", .9),
  ("say", "e301", H, "Next time: a mushroom. It grows in the soil. It stays in one place. So, is it a plant?", {"pre": 0, "gap": .5}),
  ("say", "e302", M, "Hmm. But where are its leaves?", {"pre": .45}),
+ ("say", "e304", B, "And no legs to count this time!", {"pre": .4}),
  ("say", "e303", H, "Lock in your answer for next time!", {"pre": .45, "post": .5}),
  *NYK,
 ]

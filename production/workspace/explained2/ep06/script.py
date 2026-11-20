@@ -16,7 +16,7 @@ CHANT = [("Six legs?", "Insect!"), ("Dry, scaly skin?", "Reptile!"), ("Hair or f
 CHANT_CAPS = ([.66, .82, .66], [.62, .7, .66])
 # how the TTS should say a word (the caption/script text is unchanged)
 PRON = {}
-SLOW = {"speed": .9, "gap": .6}
+SLOW = {"speed": .86, "gap": .65}   # the journeys: softer and slower than Heart's .90
 slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 
 def kwrecap(words):
@@ -35,7 +35,7 @@ NYK = [("scene", "nyk"),
  ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
  ("wait", 5.2)]
 CHANTSEQ = [("unison", "u1002", "Say it with us!", {"pre": .5}), ("wait", .8), ("chant", "c1103"), ("wait", .4)]
-COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94})]
+COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .90})]
 
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 SEQ1 = [
@@ -63,7 +63,7 @@ SEQ1 = [
  *COUNT,
  # ---- 6 · count the legs: the ant, the spider
  ("scene", "ant"), ("mark", "antIn"), ("wait", 1.0),
- ("say", "e601", H, "Count with me! One, two, three, four, five, six. Six legs!", {"pre": 0, "speed": .9, "gap": .55}),
+ ("say", "e601", H, "Count with me! One, two, three, four, five, six. Six legs!", {"pre": 0, "speed": .86, "gap": .6}),
  ("say", "e602", H, "Two feelers on its head. And three body parts.", {"pre": .5, "post": .5}),
  ("scene", "spider"),
  ("say", "e603", H, "Now the spider. Eight legs! No feelers. Two body parts.", {"pre": .5, "post": .5}),
@@ -74,8 +74,8 @@ SEQ1 = [
  ("say", "e606", P, "Oops! Count the legs!", {"pre": .4, "post": .4}),
  ("scene", "mark1"),
  ("say", "e607", M, "Say it with me!", {"pre": .7}), ("wait", .8),
- ("say", "e608", H, "Insects have six legs and a pair of feelers. The body of insects is divided into the head, thorax and abdomen.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_insects"), ("wait", 2.0), ("mark", "kw_hta"), ("wait", 1.9),
+ ("say", "e608", H, "Insects have six legs and a pair of feelers. The body of insects is divided into the head, thorax and abdomen.", {"pre": 0, "term": ["insects", "thorax"]}),
+ ("wait", 2.5), ("mark", "kw_insects"), ("wait", 2.5), ("mark", "kw_hta"), ("wait", 2.4),
  ("scene", "shell"),
  ("say", "e609", H, "Insects have an outer covering that is usually hard and shell-like.", {"pre": .5, "post": .5}),
  # ---- 7 · wings are not the clue
@@ -100,8 +100,8 @@ SEQ1 = [
  ("say", "e905", B, "Two! Lizards like me!", {"pre": .4, "post": .4}),
  # ---- 10 · the reveal: reptiles, and Basil is one
  ("scene", "r2ans"),
- ("say", "e1001", H, "The answer is two. Reptiles!", {"pre": .3}),
- ("wait", .2), ("mark", "kw_reptiles"), ("wait", 1.5), ("mark", "stampRep"), ("wait", .5),
+ ("say", "e1001", H, "The answer is two. Reptiles!", {"pre": .3, "term": ["reptiles"]}),
+ ("wait", .45), ("mark", "kw_reptiles"), ("wait", 2.0), ("mark", "stampRep"), ("wait", .5),
  ("say", "e1002", H, "Two fingers? One finger up!", {"pre": .2}),
  ("say", "e1003", B, "I knew it! I'm a reptile!", {"pre": .4, "post": .4}),
  ("scene", "rep4"),
@@ -127,8 +127,8 @@ SEQ1 = [
  # ---- 12 · cold-blooded
  ("scene", "mark2"),
  ("say", "e1201", B, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "e1202", H, "Reptiles are cold-blooded animals. This means that they do not have a constant body temperature like humans. Their body temperature changes with the environment that they are in.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_cold"), ("wait", 1.9),
+ ("say", "e1202", H, "Reptiles are cold-blooded animals. This means that they do not have a constant body temperature like humans. Their body temperature changes with the environment that they are in.", {"pre": 0, "term": ["cold-blooded"]}),
+ ("wait", 2.5), ("mark", "kw_cold"), ("wait", 2.4),
  ("scene", "basilsun"),
  ("say", "e1203", B, "Cold-blooded does not mean I am always cold. I warm up in the sun!", {"pre": .4, "post": .5}),
  # ---- 13 · score hand, the lizard, the key words
@@ -180,24 +180,25 @@ SEQ2 = [
  ("wait", 1.6),
  # ---- 6 · the reveal: a mammal
  ("scene", "reveal"), ("mark", "pullout"), ("wait", .9),
- ("say", "f601", H, "The answer is two. A bat is not a bird. It is a mammal!", {"pre": 0}),
- ("wait", .2), ("mark", "kw_mammals"), ("wait", 1.5), ("mark", "stampMam"), ("wait", .5),
+ ("say", "f601", H, "The answer is two. A bat is not a bird. It is a mammal!", {"pre": 0, "term": ["mammal!"]}),
+ ("wait", .45), ("mark", "kw_mammals"), ("wait", 2.0), ("mark", "stampMam"), ("wait", .5),
  ("say", "f602", H, "Two fingers? One finger up!", {"pre": .2}),
  ("say", "f603", B, "Fur! Not feathers!", {"pre": .4, "post": .3}),
  ("scene", "mark1"),
  ("say", "f604", P, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "f605", H, "Mammals are animals that have hair or fur as their outer covering.", {"pre": 0}),
- ("wait", 2.0),
+ ("say", "f605", H, "Mammals are animals that have hair or fur as their outer covering.", {"pre": 0, "term": ["mammals"]}),
+ ("wait", 2.5),
  # ---- 7 · milk, and warm-blooded
  ("scene", "fur4"),
  ("say", "f701", H, "Monkeys, cats, bats, and you! They all have hair or fur.", {"pre": .5}),
- ("say", "f702", M, "Pip and I are mammals!", {"pre": .4, "post": .3}),
+ ("say", "f702", M, "Pip and I are mammals!", {"pre": .4}),
+ ("say", "f702b", B, "And I'm the reptile. No fur for me!", {"pre": .35, "post": .3}),
  ("scene", "milk"),
- ("say", "f703", H, "Most mammals give birth to their young alive. The females have mammary glands that can produce milk for their young.", {"pre": .5}),
- ("wait", .2), ("mark", "kw_glands"), ("wait", 1.9),
+ ("say", "f703", H, "Most mammals give birth to their young alive. The females have mammary glands that can produce milk for their young.", {"pre": .5, "term": ["mammary"]}),
+ ("wait", .6), ("mark", "kw_glands"), ("wait", 2.4),
  ("scene", "warm"), ("wait", .3),
- ("say", "f704", H, "Mammals are warm-blooded, which means that they can maintain a constant body temperature.", {"pre": .2}),
- ("wait", 1.6), ("mark", "kw_warm"), ("wait", 1.9),
+ ("say", "f704", H, "Mammals are warm-blooded, which means that they can maintain a constant body temperature.", {"pre": .2, "term": ["warm-blooded"]}),
+ ("wait", 1.6), ("mark", "kw_warm"), ("wait", 2.4),
  # ---- 8 · exam tip: same and different, with a reason
  ("scene", "tip"),
  ("say", "f801", H, "Exam tip! Compare a bat and a bird.", {"pre": .5}),
@@ -214,7 +215,8 @@ SEQ2 = [
  ("scene", "r2ans"),
  ("say", "f906", H, "The answer is three. Find what the others share. A cat and a monkey have fur: mammals. A lizard has dry, scaly skin: a reptile.", {"pre": .3}),
  ("say", "f907", H, "Three fingers? One finger up!", {"pre": .4}),
- ("say", "f908", P, "Oops. Cats climb too!", {"pre": .4, "post": .4}),
+ ("say", "f908", P, "Oops. Cats climb too!", {"pre": .4}),
+ ("say", "f908b", B, "Scales, not fur. The odd one out is me!", {"pre": .35, "post": .4}),
  # ---- 10 · Showdown: Momo's mystery creature
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
@@ -239,8 +241,8 @@ SEQ2 = [
  ("say", "f1201", H, "Exam corner!", {"pre": .3, "post": .2}),
  ("scene", "mark2"),
  ("say", "f1202", M, "Say it with me!", {"pre": .5}), ("wait", .8),
- ("say", "f1203", H, "Living things such as plants and animals can be classified based on common observable characteristics. There are different types of plants and animals.", {"pre": 0}),
- ("wait", 2.0),
+ ("say", "f1203", H, "Living things such as plants and animals can be classified based on common observable characteristics. There are different types of plants and animals.", {"pre": 0, "term": ["classified"]}),
+ ("wait", 2.5),
  # ---- 13 · score hand and the lizard
  ("scene", "final"),
  ("say", "f1301", H, "Show me your score hand! More than two? You beat the Buddies. Four fingers? High five!", {"pre": .5, "post": .5}),

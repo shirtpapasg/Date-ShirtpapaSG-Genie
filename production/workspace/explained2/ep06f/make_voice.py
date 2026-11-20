@@ -30,7 +30,7 @@ def up48(x, sr):
     n = int(len(x) * 48000 / sr); X = np.fft.rfft(x); Y = np.zeros(n // 2 + 1, complex); m = min(len(X), len(Y)); Y[:m] = X[:m]
     return np.fft.irfft(Y, n) * (n / len(x))
 
-def heart(text, excited=False, gap=.45, spd=.95):
+def heart(text, excited=False, gap=.5, spd=.90):
     speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if excited else (spd, 1.6, 1.0, 0.0); parts = []
     for p in sents(pron(text)):
         a, sr = K().create(p, voice="af_heart", speed=speed, lang="en-us"); x = a.astype(np.float64)
@@ -44,7 +44,7 @@ def heart(text, excited=False, gap=.45, spd=.95):
     return np.clip(x * (10 ** ((-21.7 + gain) / 20) / np.sqrt(np.mean(sp ** 2))), -0.98, 0.98), SR
 
 def buddy(who, text, gap=.16):
-    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * .93   # a little slower (the teacher: about 10% slower overall)
+    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * .88   # a little slower (the teacher: about 10% slower overall)
     x, sr = vm.speak(K(), pron(text), c, gap=gap + .06, para_gap=0)
     idx = np.where(np.abs(x) > .01)[0]; x = x[max(0, idx[0] - 240): idx[-1] + 2400].astype(np.float64)
     sp = x[np.abs(x) > .003]; return np.clip(x * (10 ** (-18 / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98), sr
@@ -211,7 +211,7 @@ for it in SEQ:
     if os.path.exists(j) and json.load(open(j)).get("text") == text and os.path.exists(f) and (not o.get("shout") or "know" in json.load(open(j))): continue
     kn = None
     if o.get("shout"): x, kn, sw = shout(text); sr = SR
-    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .45), o.get("speed", .95)) if who == "heart" else buddy(who, text)
+    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .5), o.get("speed", .90)) if who == "heart" else buddy(who, text)
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     words, ok = align(text, f)
     if kn is not None: D_ = len(x) / 48000; words = [{"w": "Now", "a": .005, "b": round(sw[1]["a"], 3)}, {"w": "you", "a": round(sw[1]["a"], 3), "b": round(kn, 3)}, {"w": "know!", "a": round(kn, 3), "b": round(D_, 3)}]; ok = True
