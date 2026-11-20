@@ -208,6 +208,10 @@ Also read:
 4. **Upload** to TheOneApp's YouTube:
    - Made for Kids, public, in the level playlist;
    - only when the teacher says so.
+5. **Never delete an old video** that a new episode replaces (teacher, 2026-11-20). Its views count towards the channel and
+   towards monetising it. Keep the old one up, take it out of the main level playlist, and point it to the new episode
+   (a card, the end screen or a line in the description). Ask the teacher before making it unlisted or private:
+   watch time on unlisted or private videos does not count towards YouTube's public watch hours.
 
 ## 11. Episode template (one part, about 4 to 5 min)
 
