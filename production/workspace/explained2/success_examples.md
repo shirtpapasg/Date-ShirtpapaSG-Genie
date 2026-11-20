@@ -44,3 +44,6 @@ Learn principles only; never copy characters, names, music, footage or look.
      characters, names, music or look.
    - also CoComelon, "Wheels on the Animals Bus | CoComelon Animal Time Nursery Rhymes"  https://www.youtube.com/watch?v=qhZgBFSKqKc
      (cute 3D animal characters, chunky toy-like vehicles and sets, warm soft lighting, constant gentle motion, a repeating song structure).
+9. TheOneApp, Explored EP9, "Mosquitoes VS Mosquitoes! How Singapore Fights Dengue" (our own)  https://youtu.be/F_oNWbfqtC0
+   - the teacher (20 Nov): "I like this video's way of taking perspective of the particle / energy / material, moving into the
+     microworld. This concept is new and I did not see it anywhere." -> rule in SERIES_FORMAT.md section 1 ("BE THE THING").

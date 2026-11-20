@@ -36,7 +36,7 @@ COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One!
 
 SEQ1 = [
  # ---- 1 · silent cold open: Day 31 on the window ledge (9 s)
- ("scene", "cold"), ("mark", "cold0"), ("wait", 4.0), ("mark", "coldBuild"), ("wait", 5.0),
+ ("scene", "cold"), ("mark", "cold0"), ("wait", 3.6), ("mark", "coldBuild"), ("wait", 4.6),
  # ---- 2 · the callback and the dare
  ("scene", "callback"),
  ("say", "a201", H, "Day thirty-one. Our plant is drooping. Last time, Momo asked: is it sad?", {"pre": .3}),
@@ -46,7 +46,7 @@ SEQ1 = [
  # ---- 3 · the Buddy Hotel and the game
  ("scene", "hotel"),
  ("say", "a301", H, "So the Buddies built a hotel on our window ledge. Three rooms. Three guests. Every guest must get everything it needs. By sunset.", {"pre": .5}),
- ("say", "a302", H, "Room one: our drooping plant. Room two: our mealworm. Room three: a mystery guest from Pip's cupboard.", {"pre": .5, "post": .4}),
+ ("say", "a302", H, "Three guests: our plant, our mealworm, and a mystery guest.", {"pre": .5, "post": .4}),   # section 6, step 1 (was: "Room one: our drooping plant. Room two: our mealworm. Room three: a mystery guest from Pip's cupboard.")
  ("scene", "game"),
  ("say", "a303", H, "It's You against the Buddies. You lock in first. Every time you are right, put up one finger on your other hand. No lock-in, no point. And a lizard is hiding in this video. Find it!", {"pre": .5, "post": .3}),
  # ---- 4 · today's goals and the countdown
@@ -78,11 +78,11 @@ SEQ1 = [
  # ---- 7 · the reveal: it was wilting
  ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.2),
  ("say", "a701", H, "A few hours later. Look! The plant is standing up again. The answer is one. Water.", {"pre": 0}),
- ("wait", .3), ("mark", "kw_water"), ("wait", 2.3),
+ ("wait", .3), ("mark", "kw_water"), ("wait", 2.1),
  ("scene", "mark1"),
  ("say", "a702", M, "Say it with me!", {"pre": .8}), ("wait", .8),
  ("say", "a703", H, "It is wilting. It does not have enough water.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_wilting"), ("wait", 2.3),
+ ("wait", 2.0), ("mark", "kw_wilting"), ("wait", 2.1),
  ("scene", "notsad"),
  ("say", "a704", H, "That is what the drooping was. The plant is not sad. It was wilting.", {"pre": .4}),
  ("say", "a705", M, "Not sad. Wilting!", {"pre": .4, "post": .5}),
@@ -105,15 +105,14 @@ SEQ1 = [
  ("say", "a904", B, "Our glass box has holes in its lid!", {"pre": .4}),
  ("say", "a905", P, "Holes! I forgot. Sorry, little guest.", {"pre": .4, "post": .5}),
  ("scene", "newlid"),
- ("say", "a906", H, "A new lid, with holes, so air can get in.", {"pre": .9, "post": 1.2}),
+ ("say", "a906", H, "A new lid, with holes, so air can get in.", {"pre": .8, "post": 1.0}),
  ("scene", "mark2"),
  ("say", "a907", B, "Say it with me!", {"pre": .8}), ("wait", .8),
  ("say", "a908", H, "Living things breathe in air that contains oxygen.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_oxygen"), ("wait", 2.3),
- ("scene", "pool"),
- ("say", "a909", H, "You too. In the swimming pool, you come up for air.", {"pre": .8, "post": 1.0}),
+ ("wait", 2.0), ("mark", "kw_oxygen"), ("wait", 2.1),
+ # section 6, step 2: the swimming pool cutaway is left out ("You too. In the swimming pool, you come up for air.")
  ("scene", "movein"),
- ("say", "a910", H, "Now our guest can move in. Air, through the holes. Oats, for food. A juicy carrot, for water.", {"pre": 1.6, "post": .7}),
+ ("say", "a910", H, "Now our guest can move in. Air, through the holes. Oats, for food. A juicy carrot, for water.", {"pre": 1.3, "post": .7}),
  ("scene", "plantair"),
  ("say", "a911", H, "All living things need air to live.", {"pre": .7}),
  ("say", "a912", H, "Even plants need air.", {"pre": .5, "post": .8}),
@@ -147,15 +146,14 @@ SEQ2 = [
  ("scene", "goals"),
  ("say", "b301", H, "Today you will learn why living things need food, how a plant gets its food, and the three needs of living things.", {"pre": .6, "post": .4}),
  ("scene", "game"),
- ("say", "b302", H, "It's You against the Buddies again. You lock in first. One finger for every point. And a new lizard is hiding. Find it!", {"pre": .5, "post": .4}),
- *COUNT,
+ ("say", "b302", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .6}),   # section 6, step 4 (step 3: no countdown in Part 2)
  # ---- 4 · food gives energy
  ("scene", "energy"),
  ("say", "b401", H, "First, food. After PE, you feel hungry. You used up lots of energy. So you eat. Our mealworm eats too.", {"pre": .5, "post": .7}),
  ("scene", "mark1"),
  ("say", "b402", B, "Say it with me!", {"pre": .8}), ("wait", .8),
  ("say", "b403", H, "All living things need food. Food provides living things with energy.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_food"), ("wait", 2.1), ("mark", "kw_energy"), ("wait", 2.3),
+ ("wait", 2.0), ("mark", "kw_food"), ("wait", 2.1), ("mark", "kw_energy"), ("wait", 2.1),
  ("scene", "whofeeds"),
  ("say", "b404", M, "You eat rice. The mealworm eats oats. But nobody feeds a plant. So who feeds a plant?", {"pre": .6, "post": .7}),
  # ---- 5 · Round 1: the bean plant from the dark cupboard
@@ -179,7 +177,7 @@ SEQ2 = [
  ("scene", "mark2"),
  ("say", "b510", P, "Say it with me!", {"pre": .8}), ("wait", .8),
  ("say", "b511", H, "Plants do not eat but they can make their own food when there is light.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_light"), ("wait", 2.3),
+ ("wait", 2.0), ("mark", "kw_light"), ("wait", 2.1),
  ("scene", "dark"),
  ("say", "b512", H, "In the dark cupboard, the plant could not make its food.", {"pre": .6, "post": .9}),
  ("scene", "r1score"),

@@ -23,9 +23,20 @@ Also read:
   - a "30-day box" (Dr. Plants),
   - a field trip (Sesame Street),
   - a build-and-reveal (Aquarium Info).
-- A short first-person "shrink" moment of quiet wonder is the Explored signature (Journey to the Microcosmos):
-  - about 20 to 30 s,
-  - true at the level taught: no P5/P6 labels in P3.
+- **BE THE THING: the first-person journey into the micro-world (the teacher, 20 Nov: "I like this video's way of taking
+  perspective of the particle / energy / material, moving into the microworld. This concept is new and I did not see it anywhere.")**
+  Reference: TheOneApp, Explored EP9, "Mosquitoes VS Mosquitoes!" (https://youtu.be/F_oNWbfqtC0), plus Explored EP1 (a smoke
+  particle), EP4 (a water molecule), EP5 (light energy), EP7 (oxygen) and EP10 (a nutrient).
+  - The camera IS the particle, the energy or the material: the viewer becomes the water molecule, the bit of food, the oxygen,
+    the light, the seed, the current. "You are a drop of water. You are in the wet soil…" Second person, present tense.
+  - The world rushes past at that tiny scale: near things big and fast, far things small and slow; the familiar place (the window
+    ledge, the canteen) seen from inside or below; a small "speeded up" or scale tag when time or size is changed.
+  - It follows a real path through the science, step by step (soil → root → stem → leaf), with simple true words and a short card
+    at each stop; then the camera pulls back out to normal size and the textbook words name what the viewer just lived through.
+  - Every episode has at least one such journey (it is the series' signature, not an extra). Typically 20 to 40 s; it may be the
+    spine of a part. Calm music, Heart's voice soft, room to breathe (the quiet-wonder look of Journey to the Microcosmos), so the
+    loud game beats around it land harder.
+  - True at the level taught: no P5/P6 labels in P3 (no "cells", "chloroplast" in P3). Nothing may teach a wrong idea.
 - Real Singapore places always: HDB flat, void deck, community garden, canteen, MRT, Kranji farm.
 - Exam-exact: every definition and key word is quoted word for word from the textbook (the P3 to P6 plan's `definitions` files).
   - Every non-textbook sentence goes on an approval list for the teacher before rendering.
@@ -205,7 +216,7 @@ Also read:
 3. Rules and goals (the "Today you'll learn" chips).
 4. "Are you ready? Three! Two! One! Go!"
 5. Two rounds of lock-ins, each with its evidence and its Mark Sentence. A "Say it with me!" before each card.
-6. The shrink moment.
+6. The first-person "be the thing" journey into the micro-world (the series signature; see section 1).
 7. "HOLD ON!" and/or the Showdown.
 8. The chant as call-and-response.
 9. The reveal or payoff.
