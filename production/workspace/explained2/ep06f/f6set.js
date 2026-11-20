@@ -40,7 +40,7 @@ BG.gardens = () => { const r = rndm(61); let far = "", tufts = "", bark = "", le
   <g>${leaves}</g>`; };
 
 /* ---------- a lake bank in the Gardens: a tree's cool shade on the left, a flat rock in the sun on the right ---------- */
-const ROCK = [1250, 800];   // the middle of the rock's flat top
+const ROCK = [1330, 800];   // the middle of the rock's flat top
 BG.lake = () => { const r = rndm(77); let far = "", tufts = "", pads = "", leaves = "";
   for (let i = 0; i < 20; i++) far += `<circle cx="${-160 + i * 122}" cy="${n2(360 - 36 * r())}" r="${n2(80 + 50 * r())}" fill="${i % 3 ? "#4FA765" : "#3F9458"}"/>`;
   for (let i = 0; i < 60; i++) { const x = -150 + r() * 2250, y = 640 + r() * 480; tufts += `<path d="M${n2(x)} ${n2(y)} l-7 -17 M${n2(x + 6)} ${n2(y)} l1 -22 M${n2(x + 12)} ${n2(y)} l8 -16" stroke="#3F9A52" stroke-width="4" stroke-linecap="round" opacity=".5"/>`; }

@@ -58,19 +58,19 @@ SC.callback = (t, s) => { const a = "c101", b = "c102", c = "c103", d = "c104", 
 SC.dare = (t, s) => { const m = "c105", h = "c106", b = "c107", p = "c108", b2 = "c109", u = t - s.t0, tCnt = W(m, "count") - .1, tDare = W(h, "todays") - .15, tw3 = [W(h, "insect") - .1, W(h, "reptile") - .1, W(h, "mammal") - .1], tQ = W(h, "which") - .12, tLk = MK("lockit");
   let out = view(t, 1.1) + `<rect width="1920" height="1080" fill="#FFF8EA" opacity="${n2(.62 * clamp(u / .3))}"/>` + wipe(t, s.t0 + .02, P.sun, 960, 800);
   // three tiles, numbered for the viewer's fingers
-  ["INSECTS", "REPTILES", "MAMMALS"].forEach((nm, i) => { const lit = Math.max(pulse(t, tw3[i], .05, 1.0), t >= tLk ? (Math.floor((t - tLk) / .55) % 3 === i ? .9 : 0) : 0); out += `<g transform="translate(${520 + i * 440} 250)">${groupTile(nm, i + 1, spring(t, tw3[i] - .1, .45), lit)}</g>`; });
+  ["INSECTS", "REPTILES", "MAMMALS"].forEach((nm, i) => { const lit = Math.max(pulse(t, tw3[i], .05, 1.0), t >= tLk ? (Math.floor((t - tLk) / .55) % 3 === i ? .9 : 0) : 0); out += `<g transform="translate(${490 + i * 470} 262) scale(1.3)">${groupTile(nm, i + 1, spring(t, tw3[i] - .1, .45), lit)}</g>`; });
   if (t >= tDare) out += TF(960, 96, slamK(t, tDare), `<g transform="rotate(-2)"><g filter="url(#drop)"><rect x="-290" y="-44" width="580" height="88" rx="44" fill="${P.coral}"/><rect x="-282" y="-36" width="564" height="72" rx="36" fill="none" stroke="#fff" stroke-width="5"/></g>${T(0, 18, "TODAY’S BIG DARE", 50, "#fff", { ls: 4 })}</g>`);
-  if (t >= tQ) out += bigLine(440, `Which group is <tspan fill="${P.basil}">Basil</tspan> in?`, 92, P.ink, slamK(t, tQ)).replace(`stroke="${P.ink}"`, 'stroke="#fff"');
-  // Momo's magnifying glass slides low along the ground to Basil's feet
-  { const mu = clamp((t - tCnt) / 1.1), gone = ramp(t, tDare - .1, .3), x = lerp(1380, 1080, eio(mu)), y = 960 - 26 * Math.abs(Math.sin(mu * Math.PI * 3)) * (mu < 1 ? 1 : 0) + 5 * Math.sin(t * 4);
-    if (t >= tCnt - .2 && gone < 1) out += OP(1 - gone, TF(x, y, .8 * spring(t, tCnt - .2, .4), `<g transform="scale(-1 1)">${magnifier(90)}</g>`)); }
+  if (t >= tQ) out += bigLine(486, `Which group is <tspan fill="${P.basil}">Basil</tspan> in?`, 92, P.ink, slamK(t, tQ)).replace(`stroke="${P.ink}"`, 'stroke="#fff"');
   out += buddy("basil", 960, 1056, 420, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [tCnt + .5, "surprised"], [tDare + .3, "sit"], [tQ, "arms_crossed"], [LT(b) - .12, "sit"], [LE(b) + .15, "arms_crossed"], [LE(p) - .5, "oops"], [LT(b2) - .12, "sit"], [LE(b2) + .1, "cheer"]], jump: [[tCnt + .5, 30]], wave: true })
     + buddy("pip", 330, 1060, 270, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tQ + .2, "thinking"], [LT(p) - .12, "sit"], [LE(p) + .2, "arms_crossed"], [LE(b2) + .2, "surprised"]] })
     + buddy("momo", 1590, 1060, 270, t, { aura: true, flip: true, in: s.t0 + .15, poses: [[s.t0, "sit"], [LE(m) + .15, "pointing"], [tDare + .2, "sit"], [tQ + .3, "thinking"], [LT(b) - .1, "surprised"], [LE(b2), "waving"]], wave: true })
-    + say(m, 1560, 610, t, { size: 42, tail: 40, maxW: 440 }) + say(b, 960, 560, t, { size: 54, tail: 0, merge: true }) + say(p, 350, 610, t, { size: 42, tail: -30, maxW: 440 }) + say(b2, 960, 560, t, { size: 54, tail: 0, merge: true });
+    + say(m, 1540, 640, t, { size: 42, tail: 40, maxW: 440 }) + say(b, 960, 590, t, { size: 54, tail: 0, merge: true }) + say(p, 350, 640, t, { size: 42, tail: -30, maxW: 440 }) + say(b2, 960, 590, t, { size: 54, tail: 0, merge: true });
+  // Momo's magnifying glass slides low along the ground to Basil's feet
+  { const mu = clamp((t - tCnt) / 1.1), gone = ramp(t, tDare - .1, .3), x = lerp(1400, 1150, eio(mu)), y = 930 - 26 * Math.abs(Math.sin(mu * Math.PI * 3)) * (mu < 1 ? 1 : 0) + 5 * Math.sin(t * 4);
+    if (t >= tCnt - .2 && gone < 1) out += OP(1 - gone, TF(x, y, 1.25 * spring(t, tCnt - .2, .4), `<g transform="scale(-1 1)">${magnifier(90)}</g>`)); }
   // the viewer's hand: one, two or three fingers
-  { const nf = t >= tLk ? Math.floor((t - tLk) / .55) % 3 + 1 : t >= tw3[2] ? 3 : t >= tw3[1] ? 2 : 1, k = spring(t, tw3[0] - .15, .45); if (k > .02) out += TF(1790, 560, k, youPill(0, -150, 1.05) + `<g transform="scale(.6)" filter="url(#dropS)">${countHand(nf)}</g>`); }
-  if (t >= tLk) out += TF(1790, 760, spring(t, tLk, .4) * (1 + .05 * Math.sin(t * 8)), tpill(0, 0, "Lock it in!", 40, P.sun, P.ink, { w: 700 }));
+  { const nf = t >= tLk ? Math.floor((t - tLk) / .55) % 3 + 1 : t >= tw3[2] ? 3 : t >= tw3[1] ? 2 : 1, k = spring(t, tw3[0] - .15, .45); if (k > .02) out += TF(1764, 470, k, `<circle cy="-10" r="128" fill="${P.ink}" opacity=".8"/>` + youPill(0, -150, 1.05) + `<g transform="translate(0 4) scale(.56)" filter="url(#dropS)">${countHand(nf)}</g>`); }
+  if (t >= tLk) out += TF(1764, 650, spring(t, tLk, .4) * (1 + .05 * Math.sin(t * 8)), tpill(0, 0, "Lock it in!", 40, P.sun, P.ink, { w: 700 }));
   return out + logo(t); };
 })(); }
 
@@ -78,7 +78,7 @@ SC.dare = (t, s) => { const m = "c105", h = "c106", b = "c107", p = "c108", b2 =
    MOMENT 2 · BE THE THING: you are one scale on a lizard's back
    ===================================================================================================================== */
 if (PART === 2) { (() => {
-const td = MK("dive"), tCo = MK("cool"), tW = MK("walk"), tS = MK("sun"), tC = MK("cloud"), tP = MK("pullout"), LZ0 = [640, 936];
+const td = MK("dive"), tCo = MK("cool"), tW = MK("walk"), tS = MK("sun"), tC = MK("cloud"), tP = MK("pullout"), LZ0 = [540, 936, .8];
 // how far the lizard has walked (in "body lengths"): slowly in the shade, then a steady crawl into the sun, then it settles on the rock
 const dist = (t) => .07 * (Math.min(t, tW) - td) + (t > tW ? .62 * (Math.min(t, tS) - tW) : 0) + (t > tS ? .62 * .6 * (1 - Math.exp(-(t - tS) / .6)) : 0);
 const ZR = dist(tS) + .12;                       // where the rock begins
@@ -96,7 +96,7 @@ const lakeView = (t, o = {}) => { const cv = o.cover || 0, cx = lerp(1080, 1560,
 const tongueAt = (t, per = 2.7, ph = 0) => { const u = ((t + ph) % per) / .5; return u < 1 ? Math.sin(Math.PI * u) : 0; };
 
 SC.waitw = (t, s) => { const b = "j200", h = "j201", tz = LT(h) - .1, z = 1 + .9 * ei(clamp((t - tz) / (s.t1 - tz)));
-  return CAM(lakeView(t, { liz: LZ0, lz: { warm: .2, breathe: Math.sin(t * 2), tongue: tongueAt(t, 2.4, .6), blink: (t % 3.1) < .12 } }), z, LZ0[0] - 20, LZ0[1] - 110)
+  return CAM(lakeView(t, { liz: LZ0, lz: { warm: .2, breathe: Math.sin(t * 2), tongue: tongueAt(t, 2.4, .6), blink: (t % 3.1) < .12 } }), z, LZ0[0] - 20, LZ0[1] - 90)
     + OP(1 - ramp(t, tz + .5, .4), buddy("basil", 1660, 1056, 290, t, { aura: true, flip: true, in: .15, poses: [[0, "sit"], [LE(b) + .15, "cheer"]], wave: true }) + say(b, 1480, 600, t, { size: 46, tail: 150, maxW: 520, merge: true }))
     + OP(ramp(t, .4, .4) * (1 - ramp(t, tz, .3)), lowerPill(60, 60, "Singapore Botanic Gardens,", "early morning"))
     + (t >= tz ? TF(960, 250, spring(t, tz, .45), tpill(0, 0, "Shrink down… quietly", 50, P.ink, "#fff", { w: 600 })) : ""); };
@@ -113,7 +113,7 @@ function pov(t) { const d = dist(t), ph = 2 * Math.PI * d / .34, moving = clamp(
   { const cs = clamp((ZR - d) / (ZR - dist(tW)) ); if (cs > 0) { let lv = ""; for (let i = 0; i < 12; i++) lv += `<ellipse cx="${n2(-100 + i * 190)}" cy="${n2(-40 + 90 * hash(i, 6))}" rx="${n2(210 + 60 * hash(i, 8))}" ry="${n2(120 + 40 * hash(i, 9))}" fill="${i % 2 ? "#236B42" : "#2E7D4C"}"/>`; far += `<g transform="translate(0 ${n2(-420 * (1 - cs) * (1 - cs))}) scale(1 ${n2(1 + .5 * (1 - cs))})" filter="url(#b4)">${lv}</g>`; } }
   // --- the ground: grass, then the rock; bands and blades come towards you as the lizard walks
   let gr = `<rect x="-300" y="${HZ}" width="2520" height="900" fill="url(#gdLawn)"/>`;
-  if (rockRel < 9) { const ye = rockRel > .3 ? yOf(rockRel) : 1300; gr += `<path d="M-300 ${HZ + 2} H2220 V${n2(ye)} Q960 ${n2(ye + (ye - HZ) * .1)} -300 ${n2(ye)}z" fill="url(#gdRock)"/><path d="M-300 ${HZ + 2} H2220 V${n2(Math.min(ye, HZ + 90))} H-300z" fill="#FFF3C9" opacity="${n2(.5 * lit)}"/>` + (ye < 1200 ? `<path d="M-300 ${n2(ye)} Q960 ${n2(ye + (ye - HZ) * .1)} 2220 ${n2(ye)}" stroke="#6E685C" stroke-width="${n2(3 + (ye - HZ) * .02)}" fill="none"/>` : ""); }
+  if (rockRel < 9) { const ye = rockRel > .3 ? yOf(rockRel) : 1300; gr += `<path d="M-300 ${HZ + 2} H2220 V${n2(ye)} Q960 ${n2(ye + (ye - HZ) * .1)} -300 ${n2(ye)}z" fill="url(#gdRock)"/><path d="M-300 ${HZ + 2} H2220 V${n2(Math.min(ye, HZ + 90))} H-300z" fill="#FFF3C9" opacity="${n2(.55 * (1 - cv))}"/>` + (ye < 1200 ? `<path d="M-300 ${n2(ye)} Q960 ${n2(ye + (ye - HZ) * .1)} 2220 ${n2(ye)}" stroke="#6E685C" stroke-width="${n2(3 + (ye - HZ) * .02)}" fill="none"/>` : ""); }
   for (let k = 0; k < 26; k++) { const z = k * .3, rel = z - d; if (rel < .36 || rel > 7) continue; const y = yOf(rel), rk = z > ZR; gr += `<path d="M-300 ${n2(y)} Q960 ${n2(y + (y - HZ) * .08)} 2220 ${n2(y)}" stroke="${rk ? "#8C8576" : "#3F9A52"}" stroke-width="${n2(2 + 5 / rel)}" fill="none" opacity="${n2(.35 * clamp((7 - rel) / 3))}"/>`; }
   const items = []; for (let i = 0; i < 44; i++) { const z = .5 + i * .16 + .1 * hash(i, 3), rel = z - d; if (rel < .2 || rel > 6) continue; items.push([rel, i, z]); } items.sort((a, b) => b[0] - a[0]);
   let near = "";
@@ -122,9 +122,9 @@ function pov(t) { const d = dist(t), ph = 2 * Math.PI * d / .34, moving = clamp(
     else if (z > ZR + .15) gr += `<ellipse cx="${n2(x)}" cy="${n2(y)}" rx="${n2(26 * sc * (1 + hash(i, 9)))}" ry="${n2(9 * sc)}" fill="#6E685C" opacity="${n2(.45 * fade)}"/>`; }
   // --- the lizard's own neck and head, seen from behind; its front feet step out at the sides
   const body = hexL("#5C7266", "#948C50", T_), dark = hexL("#34463E", "#4A4526", T_), dot = hexL("#BCCBB0", "#F8E68C", T_), tg = tongueAt(t, t > tS ? 1.7 : 3.1, .3) * moving;
-  const foot = (sd) => { const st = Math.sin(ph + (sd > 0 ? 0 : Math.PI)), fwd = Math.max(0, st), sx = 960 + sd * 268 + sway, ex = 960 + sd * (440 + 20 * fwd) + sway * .6, ey = 640 - 44 * fwd, fx = 960 + sd * (486 + 30 * fwd) + sway * .5, fy = 566 - 70 * fwd * moving;
-    return `<path d="M${n2(sx)} 704 L${n2(ex)} ${n2(ey)} L${n2(fx)} ${n2(fy)}" stroke="${dark}" stroke-width="92" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M${n2(sx)} 704 L${n2(ex)} ${n2(ey)} L${n2(fx)} ${n2(fy)}" stroke="${body}" stroke-width="76" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`
-      + [-50, -25, 0, 25, 50].map((a) => { const an = (-90 + a + sd * 26) * Math.PI / 180; return `<path d="M${n2(fx)} ${n2(fy)} L${n2(fx + Math.cos(an) * 74)} ${n2(fy + Math.sin(an) * 74)}" stroke="${dark}" stroke-width="24" stroke-linecap="round"/><path d="M${n2(fx)} ${n2(fy)} L${n2(fx + Math.cos(an) * 70)} ${n2(fy + Math.sin(an) * 70)}" stroke="${body}" stroke-width="14" stroke-linecap="round"/>`; }).join(""); };
+  const foot = (sd) => { const st = Math.sin(ph + (sd > 0 ? 0 : Math.PI)), fwd = Math.max(0, st), sx = 960 + sd * 268 + sway, ex = 960 + sd * (430 + 16 * fwd) + sway * .6, ey = 690 - 14 * fwd, fx = 960 + sd * (520 + 24 * fwd) + sway * .5, fy = 664 - 62 * fwd * moving;
+    return `<path d="M${n2(sx)} 704 L${n2(ex)} ${n2(ey)} L${n2(fx)} ${n2(fy)}" stroke="${dark}" stroke-width="84" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M${n2(sx)} 704 L${n2(ex)} ${n2(ey)} L${n2(fx)} ${n2(fy)}" stroke="${body}" stroke-width="68" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`
+      + [-50, -25, 0, 25, 50].map((a) => { const an = (-90 + a * .9 + sd * 34) * Math.PI / 180; return `<path d="M${n2(fx)} ${n2(fy)} L${n2(fx + Math.cos(an) * 74)} ${n2(fy + Math.sin(an) * 74)}" stroke="${dark}" stroke-width="24" stroke-linecap="round"/><path d="M${n2(fx)} ${n2(fy)} L${n2(fx + Math.cos(an) * 70)} ${n2(fy + Math.sin(an) * 70)}" stroke="${body}" stroke-width="14" stroke-linecap="round"/>`; }).join(""); };
   let hd = ""; for (let i = 0; i < 26; i++) { const a = hash(i, 21) * Math.PI * 2, r = 20 + 60 * hash(i, 23); hd += `<circle cx="${n2(Math.cos(a) * r * .9)}" cy="${n2(-30 + Math.sin(a) * r)}" r="${n2(5 + 4 * hash(i, 25))}" fill="${dot}" opacity=".8"/>`; }
   const head = `<g transform="translate(${n2(960 + hsw + sway * .5)} ${n2(452 + 4 * br)}) rotate(${n2(hsw * .12 + look)})">
     ${tg > .02 ? `<path d="M0 -150 v${n2(-70 * tg)} l${n2(-16 * tg)} ${n2(-30 * tg)} M0 ${n2(-150 - 70 * tg)} l${n2(16 * tg)} ${n2(-30 * tg)}" stroke="#E8607A" stroke-width="9" stroke-linecap="round" fill="none"/>` : ""}
@@ -155,7 +155,7 @@ function pov(t) { const d = dist(t), ph = 2 * Math.PI * d / .34, moving = clamp(
 SC.shrink = (t, s) => { const u = t - td, p = pov(t), kin = clamp(u / 1.5), z = lerp(1.5, 1, eo(kin)), bob = 5 * Math.sin(t * 2.2) + 3 * Math.sin(2 * Math.PI * dist(t) / .17);
   let out = `<g transform="translate(960 ${n2(540 + bob)}) scale(${n2(z * 1000) / 1000}) translate(-960 -540)">${p.world}${p.body}${p.light}</g>`;
   // the way in: the wide view rushes past and clears
-  if (u < 1.0) { const e = ei(u / 1.0); out += OP(1 - ss(.35, 1.0, u), CAM(lakeView(t, { liz: LZ0, lz: { warm: .2 } }), 1.9 + 9 * e, LZ0[0] - 20, LZ0[1] - 110)) + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.8 * pulse(u, .62, .3, .5))}"/>`; }
+  if (u < 1.0) { const e = ei(u / 1.0); out += OP(1 - ss(.35, 1.0, u), CAM(lakeView(t, { liz: LZ0, lz: { warm: .2 } }), 1.9 + 9 * e, LZ0[0] - 20, LZ0[1] - 90)) + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.8 * pulse(u, .62, .3, .5))}"/>`; }
   // YOU: a pill joined to your scale by one plain line
   if (p.you) { const [cx, y, size] = p.you, a = ramp(t, LT("j202") - .2, .4) * (1 - ramp(t, tCo - .3, .5)), yy = 540 + bob + (y - 540) * z, xx = 960 + (cx - 960) * z; out += OP(a, `<path d="M${n2(xx - 330)} ${n2(yy - 20)} L${n2(xx - size * .36)} ${n2(yy)}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(xx - size * .36)}" cy="${n2(yy)}" r="8" fill="#fff"/>` + youPill(xx - 400, yy - 50, 1.25) + TF(xx - 400, yy + 18, 1, tpill(0, 0, "one tiny scale", 34, P.ink, "#fff", { w: 600 }))); }
   // what you feel, in the words Heart uses
@@ -165,18 +165,18 @@ SC.shrink = (t, s) => { const u = t - td, p = pov(t), kin = clamp(u / 1.5), z = 
     + feelTag(t, W("j207", "cool") - .15, s.t1 - .5, "you cool down again", 770, 960, 46);
   // two plain thermometers: the place, and the lizard. They rise and fall together.
   { const k = spring(t, tCo - .5, .5), pl = placeT(t), lz = p.T_, ch = Math.max(pulse(t, tS, .2, 1.6), pulse(t, tC + .9, .2, 1.6)); out += thermo(1640, 700, pl, "PLACE", { k, H: 290, glow: ch }) + thermo(1800, 700, lz, "LIZARD", { k: spring(t, tCo - .3, .5), H: 290, glow: ch, fill: P.basil });
-    out += OP(ramp(t, tCo - .2, .4), tpill(1720, 380, "warm", 24, "#FF5A3C", "#fff", { w: 700, nosh: 1 }) + tpill(1720, 640, "cool", 24, "#3A8DFF", "#fff", { w: 700, nosh: 1 })); }
+    out += OP(ramp(t, tCo - .2, .4), tpill(1720, 420, "warm", 24, "#FF5A3C", "#fff", { w: 700, nosh: 1 }) + tpill(1720, 640, "cool", 24, "#3A8DFF", "#fff", { w: 700, nosh: 1 })); }
   out += youTag(t, LT("j202") - .3, "You are a scale") + OP(ramp(t, LT("j202") + .6, .4), TF(60 + 150, 146, 1, tpill(0, 0, "seen very close up", 28, "#fff", P.ink, { w: 600 }))) + speeded(t, tS + .2, tC + 3.5, 190, 216);
   return out; };
 
 /* ---- back out to normal size: the book's words name what you just lived through ---- */
 const DEF = ["Reptiles are cold-blooded animals.", "This means that they do not have a constant", "body temperature like humans.", "Their body temperature changes with the", "environment that they are in."], KEYS = ["cold-blooded", "changes", "environment"];
-function defCard(t, id, t0, t1) { const L = TL.lines[id], size = 50, lh = 70, fam = "Atkinson Hyperlegible", Wc = 1230, Hc = DEF.length * lh + 120, a0 = spring(t, t0, .5) * (1 - ramp(t, t1, .25)); if (a0 <= .01) return ""; let tx = "", wi = 0;
+function defCard(t, id, t0, t1) { const L = TL.lines[id], size = 53, lh = 72, fam = "Atkinson Hyperlegible", Wc = 1200, Hc = DEF.length * lh + 120, a0 = spring(t, t0, .5) * (1 - ramp(t, t1, .25)); if (a0 <= .01) return ""; let tx = "", wi = 0;
   DEF.forEach((ln, li) => { let cx = 0; ln.split(" ").forEach((w) => { const wt = L.words[wi] ? L.words[wi].a : L.end, a = ramp(t, wt - .05, .16), ww = tw(w, size, 700, fam), y = 150 + li * lh; wi++;
     if (a > 0) { if (KEYS.includes(norm(w))) tx += `<rect x="${n2(54 + cx - 6)}" y="${n2(y - size * .78)}" width="${n2(eo((t - wt) / .35) * (ww + 12))}" height="${n2(size * 1.0)}" rx="8" fill="#FFD75A"/>`; tx += `<text x="${n2(54 + cx)}" y="${n2(y + (1 - a) * 8)}" font-family="${fam}" font-weight="700" font-size="${size}" fill="${P.ink}" opacity="${n2(a)}">${esc(w)}</text>`; }
     cx += ww + tw(" ", size, 700, fam); }); });
   return TF(70 + Wc / 2, 150 + Hc / 2, a0, `<g transform="rotate(-.6) translate(${-Wc / 2} ${-Hc / 2})"><g filter="url(#drop)"><rect width="${Wc}" height="${Hc}" rx="28" fill="url(#gPaper)"/><rect width="18" height="${Hc}" rx="9" fill="${P.sun}"/></g><g transform="translate(40 -28)" filter="url(#dropS)"><rect width="330" height="62" rx="31" fill="url(#gSun)"/></g>${T(74, 14, "FROM YOUR BOOK", 30, P.ink, { a: "start", ls: 3 })}${tx}</g>`); }
-SC.reveal = (t, s) => { const L = "j208", B = "j209", u = t - tP, e = eo(u / 1.2), tK = MK("kw_cold"), tHum = W(L, "humans") - .5, tCh = W(L, "changes") - .2, pl = placeT(t), lz = lizT(t), tDry = W(B, "dry") - .1, tCb = W(B, "cold-blooded") - .1, tMe = W(B, "me") - .15, tRep = W(B, "reptile") - .15, LZ = [ROCK[0] - 60, ROCK[1] + 4, .92];
+SC.reveal = (t, s) => { const L = "j208", B = "j209", u = t - tP, e = eo(u / 1.2), tK = MK("kw_cold"), tHum = W(L, "humans") - .5, tCh = W(L, "changes") - .2, pl = placeT(t), lz = lizT(t), tDry = W(B, "dry") - .1, tCb = W(B, "cold-blooded") - .1, tMe = W(B, "me") - .15, tRep = W(B, "reptile") - .15, LZ = [ROCK[0] + 50, ROCK[1] - 6, .72];
   let out = CAM(lakeView(t, { cover: cover(t), cin: 1, cout: ss(tP + 3.2, tP + 5.6, t), cloud: 1, liz: LZ, lz: { warm: lz, breathe: Math.sin(t * 2), tongue: tongueAt(t, 2.9, 1), blink: (t % 3.3) < .12 } }), lerp(3.4, 1, e), LZ[0] - 40, LZ[1] - 120);
   if (u < 1.1) { const p = pov(t); out += OP(1 - ss(.15, .8, u), `<g transform="translate(${n2(lerp(960, LZ[0] - 40, e))} ${n2(lerp(540, LZ[1] - 120, e))}) scale(${n2(lerp(1, .12, e))}) translate(-960 -540)">${p.world}${p.body}${p.light}</g>`); }
   // sunshine on the rock when the cloud has passed
@@ -205,7 +205,7 @@ SC.reveal = (t, s) => { const L = "j208", B = "j209", u = t - tP, e = eo(u / 1.2
 if (PART === 3) { (() => {
 // small pictures that stand beside the key words while they are read
 const kwIcon = (i, t, lit) => { const th = (lv) => `<g transform="scale(.3) translate(0 130)">${thermo(0, 0, lv, "", { H: 230 })}</g>`;
-  if (i === 0) return `<g transform="translate(-6 34) scale(.2)">${monitor({ warm: .7, tongue: lit ? .5 + .5 * Math.sin(t * 6) : 0 })}</g>`;
+  if (i === 0) return `<g transform="translate(8 26) scale(.118)">${monitor({ warm: .7, tongue: lit ? .5 + .5 * Math.sin(t * 6) : 0 })}</g>`;
   if (i === 1) return th(.5 + .4 * Math.sin(t * 2.4));
   if (i === 2) return `<g fill="#B98A62" stroke="#7A5438" stroke-width="4"><ellipse cx="0" cy="14" rx="26" ry="22"/><circle cx="-30" cy="-14" r="11"/><circle cx="-11" cy="-30" r="12"/><circle cx="12" cy="-30" r="12"/><circle cx="31" cy="-13" r="11"/></g>`;
   return th(.62); };
@@ -213,21 +213,21 @@ const baseKw = SC.kwrecap;
 SC.kwrecap = (t, s) => { let out = baseKw(t, s); const rc = eio((t - s.t0) / .6);
   KWLINE.forEach((id, i) => { const tl_ = LT(id), k = spring(t, tl_ - .05, .45); if (k > .02) out += TF(1368, 300 + i * 138, k * (1 + .08 * pulse(t, tl_, .05, .8)), `<g filter="url(#dropS)"><circle r="56" fill="${P.paper}" stroke="${P.sun}" stroke-width="6"/></g>${kwIcon(i, t, t < tl_ + 2.4)}`); });
   return out; };
-SC.next = (t, s) => { const L = "e301", M_ = "e302", B = "e304", H2 = "e303", u = t - s.t0, tMu = W(L, "mushroom") - .3, tSoil = W(L, "soil") - .2, tStay = W(L, "stays") - .15, tQ = W(L, "so") - .1, tLv = W(M_, "leaves") - .2, tLegs = W(B, "legs") - .15, tLock = LT(H2) - .1, MX = 700, PX = 1240, GY = 800;
+SC.next = (t, s) => { const L = "e301", M_ = "e302", B = "e304", H2 = "e303", u = t - s.t0, tMu = W(L, "mushroom") - .3, tSoil = W(L, "soil") - .2, tStay = W(L, "stays") - .15, tQ = W(L, "so") - .1, tLv = W(M_, "leaves") - .2, tLegs = W(B, "legs") - .15, tLock = LT(H2) - .1, MX = 600, PX = 1250, GY = 840;
   let out = bg("daystage") + wipe(t, s.t0 + .02, P.sun, 960, 500);
   out += TF(960, 110, slamK(t, s.t0 + .25), `<g transform="rotate(-2)"><g filter="url(#drop)"><rect x="-200" y="-44" width="400" height="88" rx="44" fill="${P.coral}"/><rect x="-192" y="-36" width="384" height="72" rx="36" fill="none" stroke="#fff" stroke-width="5"/></g>${T(0, 18, "NEXT TIME", 52, "#fff", { ls: 5 })}</g>`);
   // the mushroom, and a pot plant to compare it with
-  if (t >= tMu) { const k = spring(t, tMu, .5), wig = 1 + .03 * pulse(t, tStay, .05, .6); out += `<ellipse cx="${MX}" cy="${GY + 6}" rx="230" ry="26" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + TF(MX, GY, 1.05 * k, `<g transform="scale(${n2(wig)} ${n2(2 - wig)})">${mushroom()}</g>`) + TF(MX, GY + 76, k, tpill(0, 0, "mushroom", 40, "#fff", P.ink, { w: 700 })); }
-  if (t >= tQ - .5) { const k = spring(t, tQ - .5, .5); out += `<ellipse cx="${PX}" cy="${GY + 6}" rx="170" ry="22" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + TF(PX, GY, 1.3 * k, potPlant({ sway: Math.sin(t * 1.4) * .6 })) + TF(PX, GY + 76, k, tpill(0, 0, "plant", 40, "#fff", P.ink, { w: 700 }))
-    + (t >= tLv ? OP(pulse(t, tLv + .1, .1, 2.2), `<circle cx="${PX}" cy="${GY - 300}" r="${n2(190 + 10 * Math.sin(t * 6))}" fill="none" stroke="${P.leaf}" stroke-width="10" stroke-dasharray="26 16"/>`) + TF(PX + 250, GY - 330, spring(t, tLv, .45), tpill(0, 0, "leaves", 38, P.leaf, "#fff", { w: 700 })) + TF(MX - 290, GY - 300, spring(t, tLv + .5, .45), tpill(0, 0, "no leaves?", 38, P.ink, "#fff", { w: 700 })) : ""); }
-  if (t >= tSoil && t < tLv - .2) out += TF(MX - 300, GY - 40, spring(t, tSoil, .45) * (1 - ramp(t, tLv - .5, .25)), tpill(0, 0, "grows in the soil", 36, P.ink, "#fff", { w: 600 }));
-  if (t >= tStay && t < tLv - .2) out += TF(MX - 290, GY - 230, spring(t, tStay, .45) * (1 - ramp(t, tLv - .5, .25)), tpill(0, 0, "stays in one place", 36, P.ink, "#fff", { w: 600 }));
-  if (t >= tQ) out += bigLine(290, `Is a mushroom a <tspan fill="${P.leafDeep}">PLANT</tspan>?`, 104, P.ink, slamK(t, tQ)).replace(`stroke="${P.ink}"`, 'stroke="#fff"');
-  if (t >= tLock) { const alt = Math.floor((t - tLock) / .6) % 2; out += TF(960, 420, spring(t, tLock, .45), [["1", "Yes", -150], ["2", "No", 150]].map(([n, w, x], i) => `<g transform="translate(${x} 0) scale(${alt === i ? 1.1 : 1})"><g filter="url(#${alt === i ? "glowS" : "dropS"})"><rect x="-120" y="-50" width="240" height="100" rx="26" fill="url(#gPaper)" stroke="${P.sun}" stroke-width="6"/></g><circle cx="-70" cy="0" r="32" fill="url(#gSun)"/>${T(-70, 16, n, 46, P.ink)}${T(30, 17, w, 50, P.ink)}</g>`).join(""))
-    + TF(960, 536, spring(t, tLock + .15, .4), youPill(-190, 0, 1) + tpill(60, 0, "Lock in your answer!", 38, P.ink, "#fff", { w: 700 })); }
+  if (t >= tMu) { const k = spring(t, tMu, .5), wig = 1 + .03 * pulse(t, tStay, .05, .6); out += `<ellipse cx="${MX}" cy="${GY + 6}" rx="230" ry="26" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + TF(MX, GY, 1.25 * k, `<g transform="scale(${n2(wig)} ${n2(2 - wig)})">${mushroom()}</g>`) + TF(MX, GY + 76, k, tpill(0, 0, "mushroom", 40, "#fff", P.ink, { w: 700 })); }
+  if (t >= tQ - .5) { const k = spring(t, tQ - .5, .5); out += `<ellipse cx="${PX}" cy="${GY + 6}" rx="170" ry="22" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + TF(PX, GY, 1.5 * k, potPlant({ sway: Math.sin(t * 1.4) * .6 })) + TF(PX, GY + 76, k, tpill(0, 0, "plant", 40, "#fff", P.ink, { w: 700 }))
+    + (t >= tLv ? OP(pulse(t, tLv + .1, .1, 2.2), `<circle cx="${PX}" cy="${GY - 250}" r="${n2(215 + 10 * Math.sin(t * 6))}" fill="none" stroke="${P.leaf}" stroke-width="10" stroke-dasharray="26 16"/>`) + TF(PX, GY - 500, spring(t, tLv, .45), tpill(0, 0, "leaves", 40, P.leaf, "#fff", { w: 700 })) + TF(MX, GY - 470, spring(t, tLv + .5, .45), tpill(0, 0, "no leaves?", 40, P.ink, "#fff", { w: 700 })) : ""); }
+  if (t >= tSoil && t < tQ - .3) out += TF(MX + 400, GY - 30, spring(t, tSoil, .45) * (1 - ramp(t, tQ - .7, .25)), tpill(0, 0, "grows in the soil", 42, P.ink, "#fff", { w: 600 }));
+  if (t >= tStay && t < tQ - .3) out += TF(MX + 440, GY - 250, spring(t, tStay, .45) * (1 - ramp(t, tQ - .7, .25)), tpill(0, 0, "stays in one place", 42, P.ink, "#fff", { w: 600 }));
+  if (t >= tQ) out += bigLine(262, `Is a mushroom a <tspan fill="${P.leafDeep}">PLANT</tspan>?`, 104, P.ink, slamK(t, tQ)).replace(`stroke="${P.ink}"`, 'stroke="#fff"');
+  if (t >= tLock) { const alt = Math.floor((t - tLock) / .6) % 2; out += TF(925, 620, spring(t, tLock, .45), [["1", "Yes", -62], ["2", "No", 62]].map(([n, w, x], i) => `<g transform="translate(0 ${x}) scale(${alt === i ? 1.1 : 1})"><g filter="url(#${alt === i ? "glowS" : "dropS"})"><rect x="-120" y="-50" width="240" height="100" rx="26" fill="url(#gPaper)" stroke="${P.sun}" stroke-width="6"/></g><circle cx="-70" cy="0" r="32" fill="url(#gSun)"/>${T(-70, 16, n, 46, P.ink)}${T(30, 17, w, 50, P.ink)}</g>`).join(""))
+    + TF(925, 0, spring(t, tLock + .15, .4), youPill(0, 468, 1.1) + tpill(0, 786, "Lock it in!", 38, P.ink, "#fff", { w: 700 })); }
   out += buddy("basil", 250, 1058, 290, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tQ, "arms_crossed"], [LT(B) - .12, "sit"], [LE(B) + .1, "cheer"], [tLock + .6, "sit"]], wave: true })
     + buddy("momo", 1690, 1058, 290, t, { aura: true, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tQ, "thinking"], [LT(M_) - .12, "sit"], [LE(M_) + .15, "thinking"], [tLock + .6, "sit"]] })
-    + say(M_, 1560, 640, t, { size: 44, tail: 120, maxW: 460 }) + say(B, 400, 640, t, { size: 44, tail: -120, maxW: 480 });
+    + say(M_, 1650, 650, t, { size: 42, tail: 40, maxW: 380 }) + say(B, 300, 650, t, { size: 42, tail: -40, maxW: 400 });
   return out + logo(t); };
 // "Now you know!": behind the buddies, today's lizard warm on its rock; on the blast each buddy gets its own group
 SC.nyk = (t, s) => { const t0 = Math.floor(TL.lines.h1305.know * 30 + 1e-6) / 30;
