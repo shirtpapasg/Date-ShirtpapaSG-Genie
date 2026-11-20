@@ -61,18 +61,23 @@ Also read:
 
 ## 3. Pacing (the teacher: "too fast… no time for students to digest")
 
+**Slowed a further 5% (teacher, 2026-11-20, from EP6 on): "consider slowing down the pacing of the video by another 5%, especially areas where new terms are introduced."**
 - **Heart:**
-  - Kokoro af_heart at about speed 0.95.
-  - About 0.45 s between sentences.
+  - Kokoro af_heart at about speed 0.90 (was 0.95).
+  - About 0.5 s between sentences (was 0.45 s).
 - **Buddies:**
   - Each speaks in their Character Voice Kit voice.
-  - About 7% slower than default.
-- **New key word:** when a key word is said for the first time, it pops LARGE with a chime and holds about 1.5 s, then flies to the key-word shelf.
-- **Mark Sentence cards:** hold about 2 s of stillness after Heart finishes reading.
+  - About 12% slower than default (was 7%).
+- **New key word:** when a key word is said for the first time, it pops LARGE with a chime and holds about 2.0 s (was 1.5 s), then
+  flies to the key-word shelf. Heart pauses about 0.6 s after saying a new term before the next sentence, and the new term is said
+  slowly and clearly (a little slower than the rest of the line).
+- **Mark Sentence cards:** hold about 2.5 s of stillness after Heart finishes reading (was 2 s).
 - **Definitions** (e.g. "similarities: characteristics that things have in common"):
   - on a light, readable strip (dark text on cream),
   - read aloud,
-  - on screen about 3 s.
+  - on screen about 3.5 s.
+- **Length:** the slower pace makes parts longer. Keep each part at most about 5:15; if it runs over, cut non-teaching lines (game
+  chatter, extra examples) first, never the pauses around new terms.
 - Something changes on screen every 10 to 15 s.
 - Do not trim teaching to hit a length. Split into parts instead.
 
@@ -124,6 +129,10 @@ Also read:
 - **Heart:** host and narrator, voice only. Warm and fair, never wrong.
 - **Pip (chinchilla), Basil (lizard), Momo (cat):** the teacher's own painted buddies, the same pets as in TheOneApp.
   - Pip is careful, Basil is bold, Momo is curious.
+  - **Basil speaks more (teacher, 2026-11-20: "do give basil more speaking time").** He is the children's favourite voice: give him
+    at least as many lines as Pip and Momo in every part, not only the wrong ideas. He leads some Mark Sentence cards and
+    "Say it with me!" moments, explains things he gets right, cracks the jokes, and reacts on screen (his bold guesses are right
+    about half the time).
   - They are good sports, and nobody is ever made to feel silly.
 - **Art:**
   - The buddies are the teacher's own paintings, animated as cut-out sprites: `characters/sprites/` and `characters/sprites/poses/`.
