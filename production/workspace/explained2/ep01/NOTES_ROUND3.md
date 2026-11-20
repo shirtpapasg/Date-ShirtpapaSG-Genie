@@ -72,3 +72,11 @@
     then a 0.8 s pause, then a short countdown beat ("Ready? One, two...") and everyone, Heart and all three buddies (mouths moving,
     arms up), shouts "Now you know!" together, excited, with the big title slamming in on the words. A "YOU" tag/hands in the corner
     show the viewer joins in. Then the extended ~4 s animated outro from note 14.
+16. (Final edit, both parts) The ending countdown: "One", "two", "Now you know!" must start exactly 1.0 s apart (onsets at T, T+1,
+    T+2), evenly, like a real count-in. "Now you know!" must END WITH A BLAST and sound HAPPY: Heart currently sounds robotic there.
+    Fix the voice: generate several takes and pick the brightest; pitch it up and give it a rising, excited contour on "KNOW!"
+    (parselmouth, as was done for EP Explored's "GO!" shout: longer, pitch x1.4-1.8 rising); layer it with the three buddies'
+    voices shouting the same words in unison (slightly offset, a light chorus/doubling so it sounds like a happy crowd, kids
+    included); and land a big celebratory sting exactly on "know!": a bright brass/synth hit, a cymbal splash, a confetti pop and a
+    short cheer ("yay!"), with the title slam and a confetti burst on screen at the same frame. Check the timing by measuring the
+    waveform onsets (1.0 s +/- 0.03 s apart) and the hit landing within one frame of "know".
