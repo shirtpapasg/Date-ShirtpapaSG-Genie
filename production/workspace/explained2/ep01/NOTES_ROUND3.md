@@ -54,3 +54,11 @@
     ("similarities: characteristics that things have in common") is dark text on a dark strip and nearly unreadable: give it a
     light cream fill with dark text (like the card), a small "similarities" key-word highlight, and hold it on screen long enough to
     read (about 3 s), with Heart reading it aloud.
+13. The chant ("Does it move? That's NOT the clue! What does it NEED? What can it DO?") — the teacher loves it; make it a real
+    read-along every time it appears (Part 2's first chant AND the Day 30 one shown here):
+    - a buddy (or all three) SAYS "Say it with us!" then a 0.8 s pause (as notes 3 and 9);
+    - then CALL AND RESPONSE, line by line: the buddies chant a line on the clap-clap-stomp beat, a "YOUR TURN!" tag pops by the
+      YOU hands and there is a pause of about 1.5 s for the viewers to repeat it (the beat keeps going softly under the pause), then
+      the next line. Four lines, four pauses. Finish with all together once at full speed if time allows.
+    Also on this Day 30 shot: the win strip along the bottom covers the buddies' name tags (Pip / Basil / Momo); lift the buddies or
+    the strip so the tags stay readable.
