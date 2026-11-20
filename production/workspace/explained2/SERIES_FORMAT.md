@@ -208,6 +208,10 @@ Also read:
 4. **Upload** to TheOneApp's YouTube:
    - Made for Kids, public, in the level playlist;
    - only when the teacher says so.
+**Autopilot (teacher, 2026-11-20: "Upload into YouTube and make it live automatically. I trust the system.")** From P3 EP4 on, and
+for finishing EP2: steps 1 and 3 no longer wait for the teacher. Write the script to this rulebook, build it, run the checks, then
+upload it live with `production/youtube/explained_upload.py <epNN/upload.json>` (Made for Kids, public, thumbnails, playlists in
+order). Send the teacher the finished parts and the list of things to check; their notes are fixed in a re-render and re-upload.
 5. **Never delete an old video** that a new episode replaces (teacher, 2026-11-20). Its views count towards the channel and
    towards monetising it. Keep the old one up, take it out of the main level playlist, and point it to the new episode
    (a card, the end screen or a line in the description). Ask the teacher before making it unlisted or private:
