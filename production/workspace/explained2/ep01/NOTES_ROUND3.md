@@ -10,3 +10,10 @@
    "Say it with me!" aloud in their own voice (lip-sync on, a small inviting bounce/point toward the card), then a 0.8 s pause so
    viewers can get ready, then Heart reads the sentence. Do the same everywhere "Say it with me!" appears (every Mark Sentence card,
    and the chant cue), in both parts.
+4. Part 1, end of the void-deck segment (the six things lined up in glowing circles): Heart's line becomes the teacher's words:
+   "Let's start off with six. Let's put them into our glass box, and bring them back."
+   (replaces "We put them into groups. Let's start with six." — keep Basil's "So many! How do we keep track?" before it if it still
+   fits; check it still leads into the next scene). On screen, matching the words: the six things hop LOW into the clear glass box
+   on the ground (ties in with notes 1 and 2: the box is the same clear box as in the bedroom, with lid and air holes; it may stay
+   see-through glass since the teacher calls it "our glass box", but it must read clearly as a box), the lid closes, and the
+   buddies carry/bounce the box off towards home, then cut to the bedroom window ledge (Day 1).
