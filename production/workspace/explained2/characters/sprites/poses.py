@@ -13,7 +13,7 @@ from cutout import cutout, on
 IN = f"{H}/poses_inbox"
 POSES = {  # buddy: {pose: (file, crop or None)}
   "pip": {"cheer": ("pip_cheer_mouth_open_eyes_closed.jpg", None), "oops": ("pip_oops.jpg", None), "thinking": ("pip_thinking.jpg", None),
-          "surprised": ("pip_surprised.jpg", None), "arms_crossed": ("pip_arms_crossed.jpg", None),
+          "surprised": ("pip_surprised.jpg", None), "arms_crossed": ("pip_arms_crossed.jpg", None), "waving": ("pip_waving.jpg", None),
           "pointing": ("pointing_draft2_sheet.jpg", (440, 15, 815, 432))},
   "momo": {"cheer": ("momo_cheer_mouth_open.jpg", None), "oops": ("momo_oops.jpg", None), "thinking": ("momo_thinking.jpg", None),
            "surprised": ("momo_surprised.jpg", None), "arms_crossed": ("momo_arms_crossed.jpg", None), "pointing": ("momo_pointing.jpg", None),
@@ -21,7 +21,8 @@ POSES = {  # buddy: {pose: (file, crop or None)}
   "basil": {"cheer": ("basil_cheer_mouth_wide.jpg", None), "oops": ("basil_oops.jpg", None), "surprised": ("basil_surprised.jpg", None),
             "arms_crossed": ("basil_arms_crossed.jpg", None)},
 }
-SEAL = {("pip", "cheer"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
+SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
+HOLES = {("pip", "waving"): [(150, 590)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
 ADJ = {}      # (buddy, pose): extra scale, set by eye from qa/poses_<buddy>.png
 DX = {}       # (buddy, pose): anchor nudge in source px
@@ -69,6 +70,10 @@ if __name__ == "__main__":
             pm = cut.astype(np.float32); pm[..., :3] *= pm[..., 3:] / 255          # premultiplied resampling: no fringe
             out = cv2.warpAffine(pm, M, (w, h), flags=cv2.INTER_AREA if s < 1 else cv2.INTER_CUBIC)
             a = np.clip(out[..., 3:], 0, 255); out[..., :3] = np.where(a > 0, out[..., :3] / np.maximum(a, 1) * 255, 0); out = np.clip(out, 0, 255).astype(np.uint8)
+            for seed in HOLES.get((who, pose), []):
+                lightm = ((out[..., :3].min(2) > 205) & (out[..., 3] > 0)).astype(np.uint8); pad = np.pad(lightm, 1); cv2.floodFill(pad, None, (seed[0] + 1, seed[1] + 1), 2)
+                hole = cv2.dilate((pad[1:-1, 1:-1] == 2).astype(np.uint8), np.ones((3, 3), np.uint8), iterations=2)
+                soft = cv2.GaussianBlur(hole.astype(np.float32), (0, 0), 1.0); out[..., 3] = (out[..., 3] * (1 - np.clip(soft * 1.6, 0, 1))).astype(np.uint8)
             A = [round(float(m + (ax - x0) * s), 1), round(float(m + (ay - y0) * s), 1)]
             cv2.imwrite(f"{H}/poses/{who}_{pose}.png", out)
             meta[who][pose] = dict(file=f"poses/{who}_{pose}.png", src=fn, anchor=A, scale=round(float(s * k0), 4), size=[w, h])

@@ -24,27 +24,27 @@ T_RING, T_BELL, T_STAMP_OUT = 5.2, 8.2, 8.9
 L_BASIL1, L_PIP1, L_MOMO1, L_BASIL2 = 9.15, 11.2, 14.1, 17.3
 T_SURPRISED, T_OOPS = 16.8, 17.3 + .58      # "Aww." is said in the surprised pose (its mouth is open); the swap sits in the pause after it
 T_TAG, T_SCORE, T_CHEER = 19.5, 19.95, 20.1
-ROBOT_X0, ROBOT_X1, ROBOT_Y = -150.0, 1215.0, 1016.0
+ROBOT_X0, ROBOT_X1, ROBOT_Y = -150.0, 1212.0, 1016.0
 ACTORS = [
-  dict(char="pip", x=400, y=862, h=380, shadow_rx=.30, disc_dx=-.06, phase=.9, nod_deg=1.2,
-       poses=[(0, "cheer"), (2.95, "thinking"), (11.08, "sit"), (14.22, "arms_crossed"), (T_CHEER, "cheer")],
+  dict(char="pip", x=403, y=862, h=380, shadow_rx=.30, disc_dx=-.06, phase=.9, nod_deg=1.2,
+       poses=[(0, "waving"), (2.95, "thinking"), (11.08, "sit"), (14.22, "arms_crossed"), (T_CHEER, "cheer")],
        lines=[("pip1", L_PIP1)], blinks=[13.0],
-       gestures=[dict(kind="pop", t=.2, dur=.55), dict(kind="hop", t=.55, dur=2.3, amp=16, f=2.4), dict(kind="watch", t=3.2, dur=7.6),
+       gestures=[dict(kind="pop", t=.2, dur=.55), dict(kind="rock", t=.65, dur=2.2, deg=4.6, f=2.1), dict(kind="watch", t=3.2, dur=7.6),
                  dict(kind="shake", t=L_PIP1, dur=.84, deg=2.0, period=.42), dict(kind="hop", t=T_CHEER + .12, dur=2.3, amp=26, f=2.6)]),
-  dict(char="basil", x=930, y=862, h=372, shadow_rx=.36, shadow_dx=-.02, disc_dx=-.10,
+  dict(char="basil", x=982, y=862, h=372, shadow_rx=.36, shadow_dx=-.02, disc_dx=-.10,
        poses=[(0, "cheer"), (3.07, "sit"), (8.95, "arms_crossed"), (T_SURPRISED, "surprised"), (T_OOPS, "oops"), (T_CHEER + .1, "cheer")],
        lines=[("basil1", L_BASIL1), ("basil2", L_BASIL2)], blinks=[4.3, 6.9],
        gestures=[dict(kind="pop", t=.5, dur=.55), dict(kind="rock", t=1.0, dur=1.9, deg=4.2, f=1.9), dict(kind="watch", t=3.3, dur=5.4),
                  dict(kind="lean", t=9.0, dur=2.3, deg=-2.2), dict(kind="jump", t=T_SURPRISED, amp=34),
                  dict(kind="lean", t=T_OOPS, dur=2.0, deg=-3.0), dict(kind="hop", t=T_CHEER + .22, dur=2.2, amp=24, f=2.6)]),
-  dict(char="momo", x=1500, y=862, h=380, shadow_rx=.30, disc_dx=.08, phase=1.9, nod_deg=1.2, flip=True,
+  dict(char="momo", x=1480, y=862, h=380, shadow_rx=.30, disc_dx=.08, phase=1.9, nod_deg=1.2, flip=True,
        poses=[(0, "waving"), (3.19, "thinking"), (T_CHEER + .2, "cheer")],
        lines=[("momo1", L_MOMO1)],
        gestures=[dict(kind="pop", t=.8, dur=.55), dict(kind="rock", t=1.25, dur=1.75, deg=5.0, f=2.2), dict(kind="watch", t=3.4, dur=10.5),
                  dict(kind="lean", t=L_MOMO1 + 1.0, dur=1.4, deg=3.2), dict(kind="hop", t=T_CHEER + .32, dur=2.1, amp=26, f=2.6)]),
 ]
-BUBBLES = [("b_basil1", 930, 345, L_BASIL1 - .1, L_BASIL1 + 1.95), ("b_pip1", 452, 345, L_PIP1 - .1, L_PIP1 + 2.8),
-           ("b_momo1", 1450, 345, L_MOMO1 - .1, L_MOMO1 + 2.4), ("b_basil2", 930, 345, L_BASIL2 - .1, L_BASIL2 + 2.1)]
+BUBBLES = [("b_basil1", 982, 345, L_BASIL1 - .1, L_BASIL1 + 1.95), ("b_pip1", 455, 345, L_PIP1 - .1, L_PIP1 + 2.8),
+           ("b_momo1", 1430, 345, L_MOMO1 - .1, L_MOMO1 + 2.4), ("b_basil2", 982, 345, L_BASIL2 - .1, L_BASIL2 + 2.1)]
 
 # ------------------------------------------------------------------ pose sprites
 # a drawn mouth for poses with one painted face. line: points along the painted mouth line (sprite px); span: the part that opens
@@ -205,7 +205,7 @@ class Film:
             for _, p in a["poses"]:
                 if p != "sit" and (a["char"], p) not in self.sp: self.sp[(a["char"], p)] = PoseSprite(a["char"], p, sit, meta)
             for vid, _ in a.get("lines", []): self.voices[vid] = json.load(open(f"{H}/voice/{vid}.json"))
-        bg = stage(ACTORS); rng = np.random.default_rng(9)                   # the lock-in stage + a few stars + the spotlight shaft
+        bg = stage([dict(a, h=380) for a in ACTORS]); rng = np.random.default_rng(9)                   # the lock-in stage + a few stars + the spotlight shaft
         for _ in range(46):
             x, y, r, o = rng.uniform(0, W), rng.uniform(0, 640), rng.uniform(1.5, 4), rng.uniform(.12, .4); blob(bg, x, y, r, r, np.float32([1, 1, 1]), o)
         yy, xx = np.mgrid[0:HH, 0:W].astype(np.float32); half = 110 + (yy / 860) * 520
@@ -242,7 +242,7 @@ class Film:
     def frame(self, t):
         img = self.bg.copy(); U = self.ui
         # the ring timer sits behind the buddies' heads line, above them
-        k = shown(t, T_RING - .3, T_STAMP_OUT)
+        k = shown(t, T_RING - .3, T_BELL + .1, .1)
         if k > 0:
             i = int(np.clip(np.floor((t - T_RING) * FPS + 1e-6), 0, 90)); snap = 1 + .10 * pulse(t, T_BELL, .03, .25)
             blit(img, U[f"ring_{i:02d}"], 960, 322, s=k * snap)
@@ -261,12 +261,12 @@ class Film:
             if k > 0: h, w = U[n].shape[:2]; blit(img, U[n], x, y + 112, s=k, anchor=(w / 2, h / 2 + 112))      # grows out of its tail
         if t >= T_TAG:                                                       # the tag drops onto the robot, squashes and settles
             u = t - T_TAG; fall = min(u / .2, 1.0) ** 2; y = -120 + (716 + 120) * fall; w = float(np.exp(-(u - .2) * 9) * np.cos((u - .2) * 24)) if u > .2 else 0.0
-            blit(img, U["tag"], ROBOT_X1, y + 74, s=.86, sx=1 + .16 * w, sy=1 - .2 * w, anchor=(230, 95 + 74))
+            blit(img, U["tag"], ROBOT_X1, y + 74, s=.8, sx=1 + .16 * w, sy=1 - .2 * w, anchor=(230, 95 + 74))
         sb = "sb11" if t >= T_SCORE else "sb00"; bump = 1 + .12 * float(np.sin(np.pi * np.clip((t - T_SCORE) / (8 / FPS), 0, 1)))
         blit(img, U[sb], 1690, 70, s=bump)
         for dx in (-96, 96):
             u = t - T_SCORE
-            if 0 <= u < .8: blit(img, U["plus1"], 1690 + dx, 150 - 34 * popk(u, .3) + 0, s=.8 * popk(u, .25) * float(1 - ss(.62, .8, u)))
+            if 0 <= u < .8: blit(img, U["plus1"], 1690 + dx, 182 - 22 * popk(u, .3), s=.8 * popk(u, .25) * float(1 - ss(.62, .8, u)))
         return (finish(img) * 255 + .5).astype(np.uint8)
 
 # ------------------------------------------------------------------ sound (all synthesised here; seeded, the same on every run)
@@ -282,10 +282,10 @@ def noise(dur, d, seed, lo=None, hi=None):
     return np.fft.irfft(X, n) * _env(n, .002, d)
 def s_pop(p=1.0): return tone(np.linspace(380 * p, 980 * p, int(.11 * SR)), .11, .05) * .5
 def s_swap(p=1.0): return np.concatenate([tone(np.linspace(520 * p, 300 * p, int(.07 * SR)), .07, .2, .01) * .22, tone(np.linspace(420 * p, 1150 * p, int(.13 * SR)), .13, .06) * .5])
-def s_tick(i): return (tone(2300 if i % 2 else 1750, .05, .012) * .5 + noise(.04, .008, 5 + i % 2, 2500, 9000) * .5) * .6
+def s_tick(i): return (tone(2300 if i % 2 else 1750, .05, .012) * .5 + noise(.05, .008, 5 + i % 2, 2500, 9000) * .5) * .6
 def s_wood(p=1.0): return tone(820 * p, .09, .025, .001, ((1, 1), (2.7, .35))) * .5
 def s_bell(): return sum(tone(1318.5 * h, 1.6, d, .002) * g for h, g, d in ((1, 1, .55), (2.0, .5, .4), (2.76, .35, .3), (5.4, .2, .16), (8.9, .1, .08))) * .34
-def s_thud(): return tone(np.linspace(170, 70, int(.22 * SR)), .22, .07, .002) * .8 + noise(.12, .03, 3, 200, 3000) * .25
+def s_thud(): return tone(np.linspace(170, 70, int(.22 * SR)), .22, .07, .002) * .8 + noise(.22, .03, 3, 200, 3000) * .25
 def s_coin(): return np.concatenate([tone(1318.5, .07, .05, .002, ((1, 1), (2, .3), (3, .15))), tone(1975.5, .4, .14, .002, ((1, 1), (2, .3), (3, .15)))]) * .3
 def s_gasp(): return tone(np.linspace(300, 900, int(.16 * SR)), .16, .1, .02, ((1, 1), (2, .25))) * .3
 def mar(f, dur=.3, d=.11): return tone(f, dur, d, .003, ((1, 1), (4, .22), (2, .12)))
@@ -334,7 +334,7 @@ def audio():
     t = np.arange(n) / SR; e = np.abs(vo[:n]); w = int(.12 * SR); e = np.convolve(e, np.ones(w) / w, "same"); e = np.convolve(np.clip(e / .03, 0, 1), np.ones(w) / w, "same")
     g = (1 - .62 * e) * (1 - .75 * ss(T_RING - .4, T_RING, t) * (1 - ss(T_BELL + .7, T_BELL + 1.1, t))) * ss(0, .3, t) * (1 - ss(DUR - .7, DUR - .05, t))
     g *= 1 + .45 * ss(T_CHEER, T_CHEER + .3, t)
-    mix = vo[:n] + fxb[:n] * .5 * (1 - .3 * e) + bed() * g * .23
+    mix = vo[:n] + fxb[:n] * .68 * (1 - .35 * e) + bed() * g * .23
     return np.clip(np.tanh(mix * 1.15) / np.tanh(1.15) * .95, -1, 1).astype(np.float32)
 
 # ------------------------------------------------------------------ main

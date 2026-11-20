@@ -65,6 +65,19 @@
     857
    ]
   },
+  "waving": {
+   "file": "poses/pip_waving.png",
+   "src": "pip_waving.jpg",
+   "anchor": [
+    332.1,
+    833.0
+   ],
+   "scale": 0.8634,
+   "size": [
+    671,
+    857
+   ]
+  },
   "pointing": {
    "file": "poses/pip_pointing.png",
    "src": "pointing_draft2_sheet.jpg",
