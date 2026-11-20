@@ -1,0 +1,41 @@
+import {VIDEOS} from "./videos.mjs";
+import fs from "fs";
+// chapter map: level -> episode no -> {theme, ch, pages, labs, note, status}
+const P3 = {
+ '0':  ['Study skills','Any chapter (P3 to P6)','','', 'Mind maps: use at the start of the year or before revision.'],
+ '1A': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 2–8','1.1','New format. Covers diversity, living and non-living things.'],
+ '1B': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 2–8','1.1','New format. Covers classification and similarities.'],
+ '2':  ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 9–13','1.2','Living things need water, food and air. A new-format version is in production.'],
+ '3A': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 14–18','1.3','New format. Living things respond to changes: the mimosa, eyelids, a plant turning to the light.'],
+ '3B': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 14–18','1.3','New format. Living things reproduce and grow; seeds, spores and extinct.'],
+ '4':  ['Diversity','Ch 2 Classification of Living Things','pp. 19–33','2.1',''],
+ '5':  ['Diversity','Ch 2 Classification of Living Things','pp. 34–44','2.2',''],
+ '6':  ['Diversity','Ch 3 Diversity of Materials','pp. 45–52','3.1',''],
+ '7A': ['Diversity','Ch 3 Diversity of Materials','pp. 53–57','3.2–3.4',''],
+ '7B': ['Diversity','Ch 3 Diversity of Materials','pp. 57–58','3.5, 3.6',''],
+ '8':  ['Diversity','Ch 3 Diversity of Materials','pp. 59–72','3.7, 3.8','Includes the design process and the theme closure.'],
+ '9':  ['Cycles','Ch 4 Life Cycles of Plants','pp. 73–79','4.1, 4.2',''],
+ '10': ['Cycles','Ch 5 Life Cycles of Animals','pp. 80–89','5.1',''],
+ '11': ['Cycles','Ch 5 Life Cycles of Animals','pp. 90–98','5.2',''],
+ '12': ['Interactions','Ch 6 Properties of Magnets','pp. 99–106','6.1B, 6.2',''],
+ '13': ['Interactions','Ch 6 Properties of Magnets','pp. 107–112','6.1A, 6.3, 6.4',''],
+ '14A':['Interactions','Ch 7 Making and Using Magnets','pp. 113–117','7.1A, 7.1B',''],
+ '14B':['Interactions','Ch 7 Making and Using Magnets','pp. 118–126','7.2',''],
+};
+const P4c = n => n==1?['Systems','Systems (theme opener)']: n<=4?['Systems','Ch 1 Plant System']: n<=7?['Systems','Ch 2 Human Systems']: n<=12?['Cycles','Ch 3 Matter']: n<=14?['Energy','Ch 4 Light']: n<=17?['Energy','Ch 5 Shadows']: n<=19?['Energy','Ch 6 Heat']:['Energy','Ch 7 Effects of Heat'];
+const P5c = n => n<=8?['Cycles','Ch 1 Reproduction in Animals and Plants']:['Systems','Ch 4 The Human Respiratory and Circulatory Systems'];
+const P6c = n => n<=3?['Energy','Ch 1 Photosynthesis','pp. 2–17']: n<=5?['Energy','Ch 2 Energy Conversion','pp. 18–47']: n<=8?['Interactions','Ch 3 Interaction of Forces','pp. 48–73']: n<=10?['Interactions','Ch 4 Interactions Within the Environment','pp. 74–87']:['Interactions','Ch 5 Surviving in the Environment','pp. 88–110'];
+const out = [];
+for (const L of VIDEOS.levels) for (const e of L.episodes) {
+  const no = String(e.no); let theme, ch, pages='', labs='', note='';
+  if (L.level==='P3') [theme,ch,pages,labs,note] = P3[no];
+  else if (L.level==='P4') [theme,ch] = P4c(+no);
+  else if (L.level==='P5') [theme,ch] = P5c(+no);
+  else [theme,ch,pages] = P6c(+no);
+  const ms = (e.moments||[]).map(m=>({at:m.at,what:m.what}));
+  if (!labs) { const l = ms.filter(m=>/^Try it on/.test(m.what)).map(m=>m.what.replace(/^Try it on experiments? /,'')); labs = l.join('; '); }
+  const id = (e.url.match(/v=([\w-]+)/)||[])[1];
+  out.push({lv:L.level,no,theme,ch,pages,labs,note,title:e.title,len:e.len,id,topic:e.topic,m:ms.filter(m=>!/^Try it on/.test(m.what)).concat(ms.filter(m=>/^Try it on/.test(m.what)))});
+}
+fs.writeFileSync('guide-data.json', JSON.stringify(out));
+console.log(out.length, JSON.stringify(out).length);
