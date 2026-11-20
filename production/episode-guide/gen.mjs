@@ -5,11 +5,12 @@ const P3 = {
  '0':  ['Study skills','Any chapter (P3 to P6)','','', 'Mind maps: use at the start of the year or before revision.'],
  '1A': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 2–8','1.1','New format. Covers diversity, living and non-living things.'],
  '1B': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 2–8','1.1','New format. Covers classification and similarities.'],
- '2':  ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 9–13','1.2','Living things need water, food and air. A new-format version is in production.'],
+ '2A': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 9–13','1.2','New format. Living things need water and air: the drooping plant, wilting, oxygen.'],
+ '2B': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 9–13','1.2','New format. Living things need food; plants make their own food when there is light.'],
  '3A': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 14–18','1.3','New format. Living things respond to changes: the mimosa, eyelids, a plant turning to the light.'],
  '3B': ['Diversity','Ch 1 Diversity of Living and Non-living Things','pp. 14–18','1.3','New format. Living things reproduce and grow; seeds, spores and extinct.'],
- '4':  ['Diversity','Ch 2 Classification of Living Things','pp. 19–33','2.1',''],
- '5':  ['Diversity','Ch 2 Classification of Living Things','pp. 34–44','2.2',''],
+ '4':  ['Diversity','Ch 2 Classification of Living Things','pp. 19–33','2.1','Classic version: plants and all six animal groups in one video. The new 4A to 5B cover pp. 19–28 in more depth; insects, reptiles and mammals come next in the new format.'],
+ '5':  ['Diversity','Ch 2 Classification of Living Things','pp. 34–44','2.2','Classic version. A new-format fungi and bacteria episode comes later.'],
  '6':  ['Diversity','Ch 3 Diversity of Materials','pp. 45–52','3.1',''],
  '7A': ['Diversity','Ch 3 Diversity of Materials','pp. 53–57','3.2–3.4',''],
  '7B': ['Diversity','Ch 3 Diversity of Materials','pp. 57–58','3.5, 3.6',''],
@@ -37,5 +38,11 @@ for (const L of VIDEOS.levels) for (const e of L.episodes) {
   const id = (e.url.match(/v=([\w-]+)/)||[])[1];
   out.push({lv:L.level,no,theme,ch,pages,labs,note,title:e.title,len:e.len,id,topic:e.topic,m:ms.filter(m=>!/^Try it on/.test(m.what)).concat(ms.filter(m=>/^Try it on/.test(m.what)))});
 }
+const NEW = [
+ {lv:'P3',no:'4A',theme:'Diversity',ch:'Ch 2 Classification of Living Things',pages:'pp. 19–22',labs:'2.1A',note:'New format. Why scientists classify, and the four groups: plants, animals, fungi and bacteria.',title:'Millions Of Living Things. Only 4 Groups? (Part A)',len:'4:59',id:'sZZh7fjmaKQ',topic:'Classifying Living Things',m:[]},
+ {lv:'P3',no:'4B',theme:'Diversity',ch:'Ch 2 Classification of Living Things',pages:'pp. 19–22',labs:'2.1A',note:'New format. Flowering plants (seeds in fruits) and non-flowering plants (spores).',title:'No Flowers Today. Is It A Flowering Plant? (Part B)',len:'5:01',id:'HCDeYV32P8w',topic:'Classifying Living Things',m:[]},
+ {lv:'P3',no:'5A',theme:'Diversity',ch:'Ch 2 Classification of Living Things',pages:'pp. 23–28',labs:'2.1B',note:'New format. Animals grouped by observable characteristics, starting with the outer covering.',title:'A Frog, A Bird And A Fish: One Group Or Three? (Part A)',len:'5:01',id:'O1KiFUs7pkE',topic:'Classifying Living Things',m:[]},
+ {lv:'P3',no:'5B',theme:'Diversity',ch:'Ch 2 Classification of Living Things',pages:'pp. 23–28',labs:'2.1B',note:'New format. Amphibians, birds and fish, and the fish that walks on land.',title:'This Fish Walks On Land! Is It Really A Fish? (Part B)',len:'5:05',id:'2WuoSmh7xWY',topic:'Classifying Living Things',m:[]}];
+const at = out.findIndex(e => e.lv==='P3' && e.no==='4'); out.splice(at, 0, ...NEW);
 fs.writeFileSync('guide-data.json', JSON.stringify(out));
 console.log(out.length, JSON.stringify(out).length);
