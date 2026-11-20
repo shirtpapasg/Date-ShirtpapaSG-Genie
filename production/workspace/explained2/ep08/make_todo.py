@@ -157,7 +157,16 @@ out = ["# EP8 · SCENES TO DRAW (Stage 2, for Fable)", "",
  "| Pip (purple #8B5CF6) | arms_crossed, cheer, oops, pointing, surprised, thinking, waving | sit (closed / half / wide mouth, blink) |",
  "| Basil (teal #14B8A6) | arms_crossed, cheer, oops, surprised (**no pointing, thinking or waving**: when he leads a card he does an inviting hop; markScene already uses `cheer` for him) | sit (closed / half / wide, blink) |",
  "| Momo (coral #FB7158) | arms_crossed, cheer, oops, pointing, surprised, thinking, waving | sit (closed / half / wide, blink) |", "",
- "No new pose is needed for EP8. Off-model drafts for Basil pointing/waving are in `characters/sprites/poses_inbox/` and are NOT approved.", ""]
+ "No new pose is needed for EP8. Off-model drafts for Basil pointing/waving are in `characters/sprites/poses_inbox/` and are NOT approved.", "",
+ "## Choices Stage 1 made where the script was unclear", "",
+ "- **Part 1 Segment 2 (updated 20 Nov):** the new words no longer contain \"something new\" or \"sand\" in the hook line. The chips slide off on \"Now, non-living things\" (g202); the sand pile pops on \"sand\" in g201 (the hook line g203 has no \"sand\").",
+ "- **Long cells split** (same words, same order) so a pop or a cut can hang on its own line: g201/g202, g501/g502, g1002/g1003, g1101/g1102, j403/j404, j501/j502.",
+ "- **When a new term pops:** on the word itself where Heart says it in a line (OBJECT, MATERIAL, CERAMIC, RUBBER, FABRIC, SAP); after the cream strip where the script lists the strip first (GLASS, METAL, PLASTIC, CLAY); WOOD after the whole line (the on-screen column pops it after the pencil). Heart's next line waits until the pop has held 2.0 s and at least 0.6 s after her line.",
+ "- **SAP** pops during the Mark Sentence reading (\"beside the card\"), so Heart does not stop for it; its sentence is said slowly and followed by at least 0.65 s.",
+ "- **Round 2 (Part 1) and Round 1 (Part 2)** start with a close-up and a key-word pop before the lock-in cards, inside the same scene. Stage 1 covers that part with `lockN`'s `pre` placeholder; you can split it into its own scene with a `(\"scene\", name)` item in script.py and `python3 build_tl.py N` (sound_cues uses lines and marks, not those scene names).",
+ "- **Answer cards with drawings** (Part 2 Round 1: a cow, a tree, a rock): `ansCard` takes text only; it needs a small icon slot.",
+ "- **Chant colours:** the stamp colours (charcoal rubber, slate metal) do not read on the dark stage, so the chant words light white (`PCOL` in common.js); add colour on the board tiles instead.",
+ "- **No cuts were needed:** both parts are under 5:15. The cut tags still work (`CUTS` in script.py) if a later change makes a part longer.", ""]
 for part in (1, 2):
     tl = json.load(open(f"{H}/tl_p{part}.json")); mk = tl["marks"]
     out += [f"## Part {part} · \"{TITLES[part]}\" · {fm(tl['END'])}", ""]
