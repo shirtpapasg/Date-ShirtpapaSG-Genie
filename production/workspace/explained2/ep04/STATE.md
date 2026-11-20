@@ -12,3 +12,12 @@
 - Stills: `PART=N ./sheet.sh name cols t1 t2 ...` -> qa/name.jpg.
 - Upload: `python3 ../../../youtube/explained_upload.py ep04/upload.json --check`, then without `--check`.
 - Status: see ../progress/ep04.json
+
+## Finished (20 Nov 2026, ~19:50 UTC): LIVE
+- Part 1: the queued fixes (mushroom hop in open3, ending props in nyk) were already in the re-rendered chunks 3000-3600 and 8400-8700; final 4:58.9.
+- Part 2 rendered, then one fix: the shelf's slide-aside used a fixed 560 px, so the long "NON-FLOWERING PLANTS" pill stayed half on
+  screen at the right edge in the showdown card, the score/lizard and the ending. `lib.js` now slides by `ww + 160` (as EP5);
+  chunks 5100, 7200, 7500, 8400, 8700, 9000 re-rendered. Final 5:01.4.
+- Both parts 1920x1080 30 fps, -16.0 LUFS; `.srt`, `sheet_part1.png`, `sheet_part2.png`, thumbnails.
+- YouTube (public, Made for Kids): Part 1 https://www.youtube.com/watch?v=sZZh7fjmaKQ , Part 2 https://www.youtube.com/watch?v=HCDeYV32P8w ,
+  in both playlists right after EP3 Part 2 (VQQmu6Gjfhc). Captions (.srt) not sent by the uploader.

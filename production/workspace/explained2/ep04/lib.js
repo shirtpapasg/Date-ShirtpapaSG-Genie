@@ -229,7 +229,7 @@ const KWLINE = PART === 1 ? ["hk_classification", "hk_fungi", "hk_bacteria"] : [
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
   const hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
   const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;
-  for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * 560, sy = 136 + k.i * 57, tf = k.tl - .5;
+  for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * (ww + 160), sy = 136 + k.i * 57, tf = k.tl - .5;
     if (k.big && t < tf) { // the new term, large, held about 1.5 s
       const a = clamp((t - k.t) / .2), kk = spring(t, k.t, .5); let rays = ""; for (let i = 0; i < 12; i++) { const an = i * 30 * Math.PI / 180 + (t - k.t) * .3; rays += `<path d="M${n2(960 + Math.cos(an) * 330)} ${n2(470 + Math.sin(an) * 150)} L${n2(960 + Math.cos(an) * (400 + 30 * kk))} ${n2(470 + Math.sin(an) * (190 + 20 * kk))}" stroke="${P.sun}" stroke-width="9" stroke-linecap="round" opacity="${n2(.8 * a)}"/>`; }
       top += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * a)}"/>` + rays + TF(960, 470, kk * (1 + .02 * Math.sin((t - k.t) * 3)), kwPill(k.w, k.w.length > 16 ? 88 : k.w.length > 12 ? 104 : 130)) + OP(a, tpill(960, 640, "KEY WORD", 34, P.ink, P.sun, { w: 700, ls: 5 })); continue; }
