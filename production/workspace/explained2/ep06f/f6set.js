@@ -1,6 +1,8 @@
 // f6set.js: EP6's places and animals (the three Fable moments).
 //   BG.gardens = the Singapore Botanic Gardens by the Bandstand (the cold open); BG.lake = a lake bank in the Gardens with a rock in the sun (the journey).
 //   monitor() = a monitor lizard, side view (a wild lizard: the buddies are never drawn in code). thermo() = a plain thermometer, no numbers.
+window.NOSCORE = true;   // the three moments stand alone: no running score
+const hexL = (a, b, u) => { const pa = [1, 3, 5].map((i) => parseInt(a.substr(i, 2), 16)), pb = [1, 3, 5].map((i) => parseInt(b.substr(i, 2), 16)); return "#" + pa.map((v, i) => Math.round(lerp(v, pb[i], clamp(u))).toString(16).padStart(2, "0")).join(""); };
 const XDEFS6 = () => `${lg("gdSky", [[0, "#6FBBFF"], [.55, "#C9E9FF"], [1, "#F6F4DC"]])}${lg("gdLawn", [[0, "#9BE07C"], [1, "#58B45E"]])}${lg("gdPath", [[0, "#F1E2C4"], [1, "#D9C39C"]])}${lg("gdTrunk", [[0, "#6E4A30"], [.5, "#8B6140"], [1, "#5E3E28"]], 1, 0)}
   ${lg("gdRoof", [[0, "#5C6B66"], [1, "#3F4C48"]])}${lg("lzBody", [[0, "#7E8C62"], [1, "#56634A"]])}${lg("gdRock", [[0, "#D9D2C2"], [.5, "#B5AD9C"], [1, "#8C8576"]])}${lg("gdWater", [[0, "#A8DDE8"], [1, "#5FB2C4"]])}
   ${lg("thGlass", [[0, "#FFFFFF"], [1, "#E4ECF5"]], 1, 0)}${rg("sunG", [[0, "#FFF9D8", 1], [.35, "#FFE48A", .7], [1, "#FFD66B", 0]])}${lg("mCap", [[0, "#D99A5E"], [1, "#A9683A"]])}
@@ -77,7 +79,7 @@ function thermo(x, y, level, lab, o = {}) { const H = o.H || 300, lv = clamp(lev
   return TF(x, y, k, `<g filter="url(#dropS)"><rect x="-23" y="${top}" width="46" height="${H + 40}" rx="23" fill="url(#thGlass)" stroke="${P.ink}" stroke-width="6"/><circle r="44" fill="url(#thGlass)" stroke="${P.ink}" stroke-width="6"/></g><rect x="-17" y="-30" width="34" height="34" fill="#F4F7FB"/>
     <rect x="-11" y="${n2(yL)}" width="22" height="${n2(-yL + 4)}" rx="9" fill="${col}"/><circle r="31" fill="${col}"/><ellipse cx="-11" cy="-11" rx="9" ry="6" fill="#fff" opacity=".6"/>${ticks}
     ${o.glow ? `<circle r="${n2(52 + 8 * o.glow)}" fill="none" stroke="${col}" stroke-width="6" opacity="${n2(.6 * o.glow)}"/>` : ""}
-    <g transform="translate(0 ${top - 44})">${tpill(0, 0, lab, o.size || 30, o.fill || P.ink, o.ink || "#fff", { w: 700, ls: 1 })}</g>`); }
+    ${lab ? `<g transform="translate(0 ${top - 44})">${tpill(0, 0, lab, o.size || 30, o.fill || P.ink, o.ink || "#fff", { w: 700, ls: 1 })}</g>` : ""}`); }
 // a value that follows its target late (how a body warms and cools): from value a at t0 towards b, time constant tau
 const follow = (t, t0, a, b, tau) => t <= t0 ? a : b + (a - b) * Math.exp(-(t - t0) / tau);
 

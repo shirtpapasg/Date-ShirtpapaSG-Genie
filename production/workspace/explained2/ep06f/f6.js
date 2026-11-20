@@ -21,7 +21,7 @@ const view = (t, z) => CAM(bg("gardens") + liveSet(t), z, 960, 600);
 const zAt = (t) => 1.03 + .05 * eio(t / 5.6);
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return view(4.2, 1.06);
   return view(t, zAt(t))
-    + buddy("basil", 1330, 1058, 270, t, { aura: true, in: .5, poses: [[.5, "sit"], [tDrop + .25, "surprised"], [tUp + .2, "arms_crossed"]], jump: [[tDrop + .22, 40]] })
+    + buddy("basil", 1210, 1058, 270, t, { aura: true, in: .5, poses: [[.5, "sit"], [tDrop + .25, "surprised"], [tUp + .2, "arms_crossed"]], jump: [[tDrop + .22, 40]] })
     + buddy("pip", 560, 1058, 250, t, { aura: true, flip: true, in: 2.5, poses: [[2.5, "pointing"], [4.6, "sit"]] })
     + buddy("momo", 940, 1062, 230, t, { aura: true, in: 3.4, poses: [[3.4, "waving"], [5.0, "sit"]], wave: true })
     + OP(ramp(t, .5, .4) * (1 - ramp(t, 5.1, .3)), lowerPill(60, 60, "Singapore Botanic Gardens,", "by the Bandstand")); };
@@ -47,11 +47,11 @@ SC.callback = (t, s) => { const a = "c101", b = "c102", c = "c103", d = "c104", 
     const mu = clamp((t - tCt - .5) / 1.2), mv = clamp((t - tL - .1) / 1.0), mx = lerp(lerp(900, BX[0] - 30, eio(mu)), BX[1] - 30, eio(mv)), my = lerp(700, BY - 210, eio(mu)) - 60 * Math.sin(Math.PI * (mu < 1 ? mu : mv)) + 8 * Math.sin(t * 3);
     out += TF(mx, my, .95 * spring(t, tCt + .4, .4), magnifier(96)); }
   if (t >= tL) out += TF(960, 392, spring(t, tL, .45), tpill(0, 0, t >= tHold ? "Hold on to your answer!" : "Did you lock in your answer?", 46, P.ink, "#fff", { w: 600 }))
-    + TF(932, 600, spring(t, tL + .1, .4), youPill(0, -96, 1.1) + `<g transform="scale(${alt === 0 ? -.52 : .52} .52)" filter="url(#dropS)">${pointHand()}</g>`);
+    + youPill(596, 392, 1.1 * spring(t, tL + .1, .4));
   out += buddy("pip", 232, 1062, 280, t, { aura: true, poses: [[s.t0, "sit"], [W(b, "both"), "surprised"], [LT(c) - .15, "sit"], [tCt, "pointing"], [tL + .2, "sit"]] })
     + buddy("momo", 932, 1066, 180, t, { aura: true, tag: false, poses: [[s.t0, "sit"], [tO, "thinking"], [tCt + .1, "surprised"], [tL, "thinking"]] })
     + buddy("basil", 1690, 1062, 280, t, { aura: true, flip: true, poses: [[s.t0, "arms_crossed"], [LT(b) - .15, "sit"], [LE(b) + .2, "cheer"], [tSm + .3, "oops"], [tCt + .5, "sit"]], wave: true })
-    + say(b, 1660, 640, t, { size: 40, tail: 30, maxW: 420, x: true }) + say(c, 262, 640, t, { size: 40, tail: -30, maxW: 420 });
+    + say(b, 1660, 640, t, { size: 40, tail: 30, maxW: 420, x: true }) + say(c, 236, 640, t, { size: 40, tail: -10, maxW: 370 });
   return out + OP(clamp(u / .3), logo(t)); };
 
 /* ---- today's big dare: which group is Basil in? ---- */
@@ -70,7 +70,7 @@ SC.dare = (t, s) => { const m = "c105", h = "c106", b = "c107", p = "c108", b2 =
     + say(m, 1560, 610, t, { size: 42, tail: 40, maxW: 440 }) + say(b, 960, 560, t, { size: 54, tail: 0, merge: true }) + say(p, 350, 610, t, { size: 42, tail: -30, maxW: 440 }) + say(b2, 960, 560, t, { size: 54, tail: 0, merge: true });
   // the viewer's hand: one, two or three fingers
   { const nf = t >= tLk ? Math.floor((t - tLk) / .55) % 3 + 1 : t >= tw3[2] ? 3 : t >= tw3[1] ? 2 : 1, k = spring(t, tw3[0] - .15, .45); if (k > .02) out += TF(1790, 560, k, youPill(0, -150, 1.05) + `<g transform="scale(.6)" filter="url(#dropS)">${countHand(nf)}</g>`); }
-  if (t >= tLk) out += TF(960, 96, 0, "") + TF(1790, 760, spring(t, tLk, .4) * (1 + .05 * Math.sin(t * 8)), tpill(0, 0, "Lock it in!", 40, P.sun, P.ink, { w: 700 }));
+  if (t >= tLk) out += TF(1790, 760, spring(t, tLk, .4) * (1 + .05 * Math.sin(t * 8)), tpill(0, 0, "Lock it in!", 40, P.sun, P.ink, { w: 700 }));
   return out + logo(t); };
 })(); }
 
@@ -88,7 +88,7 @@ const placeT = (t) => .2 + .66 * sunOn(t) * (1 - .78 * cover(t));
 const lizT = (t) => { const a = follow(t, tS - .7, .2, .86, 1.5); if (t < tC + .5) return a; const b = follow(t, tC + .5, follow(tC + .5, tS - .7, .2, .86, 1.5), .34, 1.6); if (t < tP + 3.6) return b; return follow(t, tP + 3.6, follow(tP + 3.6, tC + .5, follow(tC + .5, tS - .7, .2, .86, 1.5), .34, 1.6), .86, 1.6); };
 const HZ = 396, yOf = (rel) => HZ + 262 / rel;
 // the wide view: the lake bank, the cloud, the lizard
-const lakeView = (t, o = {}) => { const cv = o.cover || 0, cx = lerp(1080, 1560, eio(cv)) + 14 * Math.sin(t * .4);
+const lakeView = (t, o = {}) => { const cv = o.cover || 0, cx = lerp(1080, 1560, eio(o.cin === undefined ? cv : o.cin)) + 700 * (o.cout || 0) + 14 * Math.sin(t * .4);
   return bg("lake") + `<circle cx="1620" cy="96" r="300" fill="url(#sunG)" opacity="${n2(1 - .6 * cv)}"/><circle cx="1620" cy="96" r="70" fill="#FFF6C8"/>`
     + OP(cv > .01 || o.cloud ? 1 : 0, `<g transform="translate(${n2(cx)} 100)" filter="url(#dropS)"><ellipse cx="0" cy="0" rx="210" ry="62" fill="#fff"/><ellipse cx="-110" cy="20" rx="120" ry="48" fill="#F1F5FA"/><ellipse cx="110" cy="24" rx="130" ry="46" fill="#F1F5FA"/><ellipse cx="20" cy="-40" rx="110" ry="54" fill="#fff"/></g>`)
     + (o.liz ? TF(o.liz[0], o.liz[1], o.liz[2] || 1, monitor(o.lz || {})) : "")
@@ -157,15 +157,15 @@ SC.shrink = (t, s) => { const u = t - td, p = pov(t), kin = clamp(u / 1.5), z = 
   // the way in: the wide view rushes past and clears
   if (u < 1.0) { const e = ei(u / 1.0); out += OP(1 - ss(.35, 1.0, u), CAM(lakeView(t, { liz: LZ0, lz: { warm: .2 } }), 1.9 + 9 * e, LZ0[0] - 20, LZ0[1] - 110)) + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.8 * pulse(u, .62, .3, .5))}"/>`; }
   // YOU: a pill joined to your scale by one plain line
-  if (p.you) { const [cx, y, size] = p.you, a = ramp(t, LT("j202") - .2, .4) * (1 - ramp(t, tCo - .3, .5)), yy = 540 + bob + (y - 540) * z, xx = 960 + (cx - 960) * z; out += OP(a, `<path d="M${n2(xx + 250)} ${n2(yy - 150)} L${n2(xx + size * .34)} ${n2(yy - size * .2)}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(xx + size * .34)}" cy="${n2(yy - size * .2)}" r="8" fill="#fff"/>` + youPill(xx + 280, yy - 168, 1.25) + TF(xx + 280, yy - 100, 1, tpill(0, 0, "one tiny scale", 34, P.ink, "#fff", { w: 600 }))); }
+  if (p.you) { const [cx, y, size] = p.you, a = ramp(t, LT("j202") - .2, .4) * (1 - ramp(t, tCo - .3, .5)), yy = 540 + bob + (y - 540) * z, xx = 960 + (cx - 960) * z; out += OP(a, `<path d="M${n2(xx - 330)} ${n2(yy - 20)} L${n2(xx - size * .36)} ${n2(yy)}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(xx - size * .36)}" cy="${n2(yy)}" r="8" fill="#fff"/>` + youPill(xx - 400, yy - 50, 1.25) + TF(xx - 400, yy + 18, 1, tpill(0, 0, "one tiny scale", 34, P.ink, "#fff", { w: 600 }))); }
   // what you feel, in the words Heart uses
-  out += feelTag(t, W("j203", "dry") - .15, W("j203", "all") - .3, "dry", 560, 520, 60) + feelTag(t, W("j203", "moist") - .1, W("j203", "all") - .3, "not moist", 560, 1400, 46) + feelTag(t, W("j203", "scales") - .5, tCo - .2, "dry, scaly skin", 560, 960, 54)
-    + feelTag(t, W("j204", "cool") - .15, tW - .1, "cool shade", 300, 620, 46) + feelTag(t, W("j204", "cool", 1) - .15, tW - .1, "the lizard is cool too", 560, 960, 46)
-    + feelTag(t, W("j206", "warm") - .15, tC - .3, "warm rock", 300, 620, 46) + feelTag(t, W("j206", "warms") - .3, tC - .3, "the lizard warms up!", 560, 960, 50)
-    + feelTag(t, W("j207", "cool") - .15, s.t1 - .5, "you cool down again", 560, 960, 46);
+  out += feelTag(t, W("j203", "dry") - .15, W("j203", "all") - .3, "dry", 770, 800, 60) + feelTag(t, W("j203", "moist") - .1, W("j203", "all") - .3, "not moist", 770, 1120, 46) + feelTag(t, W("j203", "scales") - .5, tCo - .2, "dry, scaly skin", 770, 960, 54)
+    + feelTag(t, W("j204", "cool") - .15, tW - .1, "cool shade", 250, 560, 46) + feelTag(t, W("j204", "cool", 1) - .15, tW - .1, "the lizard is cool too", 770, 960, 46)
+    + feelTag(t, W("j206", "warm") - .15, tC - .3, "warm rock", 500, 330, 46) + feelTag(t, W("j206", "warms") - .3, tC - .3, "the lizard warms up!", 770, 960, 50)
+    + feelTag(t, W("j207", "cool") - .15, s.t1 - .5, "you cool down again", 770, 960, 46);
   // two plain thermometers: the place, and the lizard. They rise and fall together.
   { const k = spring(t, tCo - .5, .5), pl = placeT(t), lz = p.T_, ch = Math.max(pulse(t, tS, .2, 1.6), pulse(t, tC + .9, .2, 1.6)); out += thermo(1640, 700, pl, "PLACE", { k, H: 290, glow: ch }) + thermo(1800, 700, lz, "LIZARD", { k: spring(t, tCo - .3, .5), H: 290, glow: ch, fill: P.basil });
-    out += OP(ramp(t, tCo - .2, .4), T(1720, 372, "warm", 28, "#fff", { w: 600 }) + T(1720, 648, "cool", 28, "#fff", { w: 600 })); }
+    out += OP(ramp(t, tCo - .2, .4), tpill(1720, 380, "warm", 24, "#FF5A3C", "#fff", { w: 700, nosh: 1 }) + tpill(1720, 640, "cool", 24, "#3A8DFF", "#fff", { w: 700, nosh: 1 })); }
   out += youTag(t, LT("j202") - .3, "You are a scale") + OP(ramp(t, LT("j202") + .6, .4), TF(60 + 150, 146, 1, tpill(0, 0, "seen very close up", 28, "#fff", P.ink, { w: 600 }))) + speeded(t, tS + .2, tC + 3.5, 190, 216);
   return out; };
 
@@ -177,16 +177,16 @@ function defCard(t, id, t0, t1) { const L = TL.lines[id], size = 50, lh = 70, fa
     cx += ww + tw(" ", size, 700, fam); }); });
   return TF(70 + Wc / 2, 150 + Hc / 2, a0, `<g transform="rotate(-.6) translate(${-Wc / 2} ${-Hc / 2})"><g filter="url(#drop)"><rect width="${Wc}" height="${Hc}" rx="28" fill="url(#gPaper)"/><rect width="18" height="${Hc}" rx="9" fill="${P.sun}"/></g><g transform="translate(40 -28)" filter="url(#dropS)"><rect width="330" height="62" rx="31" fill="url(#gSun)"/></g>${T(74, 14, "FROM YOUR BOOK", 30, P.ink, { a: "start", ls: 3 })}${tx}</g>`); }
 SC.reveal = (t, s) => { const L = "j208", B = "j209", u = t - tP, e = eo(u / 1.2), tK = MK("kw_cold"), tHum = W(L, "humans") - .5, tCh = W(L, "changes") - .2, pl = placeT(t), lz = lizT(t), tDry = W(B, "dry") - .1, tCb = W(B, "cold-blooded") - .1, tMe = W(B, "me") - .15, tRep = W(B, "reptile") - .15, LZ = [ROCK[0] - 60, ROCK[1] + 4, .92];
-  let out = CAM(lakeView(t, { cover: cover(t), cloud: 1, liz: LZ, lz: { warm: lz, breathe: Math.sin(t * 2), tongue: tongueAt(t, 2.9, 1), blink: (t % 3.3) < .12 } }), lerp(3.4, 1, e), LZ[0] - 40, LZ[1] - 120);
+  let out = CAM(lakeView(t, { cover: cover(t), cin: 1, cout: ss(tP + 3.2, tP + 5.6, t), cloud: 1, liz: LZ, lz: { warm: lz, breathe: Math.sin(t * 2), tongue: tongueAt(t, 2.9, 1), blink: (t % 3.3) < .12 } }), lerp(3.4, 1, e), LZ[0] - 40, LZ[1] - 120);
   if (u < 1.1) { const p = pov(t); out += OP(1 - ss(.15, .8, u), `<g transform="translate(${n2(lerp(960, LZ[0] - 40, e))} ${n2(lerp(540, LZ[1] - 120, e))}) scale(${n2(lerp(1, .12, e))}) translate(-960 -540)">${p.world}${p.body}${p.light}</g>`); }
   // sunshine on the rock when the cloud has passed
   out += `<ellipse cx="${ROCK[0]}" cy="${ROCK[1] - 60}" rx="520" ry="230" fill="#FFE48A" opacity="${n2(.22 * (1 - cover(t)) * e)}" filter="url(#b30)"/>`;
   out += defCard(t, L, tP + 1.0, tK - .15);
   // the thermometers stay: the place and the lizard move together; YOU stay the same
-  { const k = e, ch = pulse(t, tP + 4.4, .3, 2.2), yk = spring(t, tHum, .5), X = [1500, 1650, 1800], gone = 1 - ramp(t, tK - .2, .25) + ramp(t, tK + 2.6, .3);
-    out += OP(clamp(gone), (yk > .02 ? thermo(X[0], 640, .62, "YOU", { k: yk, H: 250, fill: P.sun, ink: P.ink, glow: pulse(t, tHum + .5, .2, 1.2) }) + OP(ramp(t, tHum + .5, .3) * (1 - ramp(t, tCh - .1, .3)), TF(X[0], 728, 1, tpill(0, 0, "stays the same", 28, "#fff", P.ink, { w: 600 }))) : "")
-      + thermo(X[1], 640, pl, "PLACE", { k, H: 250, glow: ch }) + thermo(X[2], 640, lz, "LIZARD", { k, H: 250, glow: ch, fill: P.basil })
-      + (t >= tCh ? TF((X[1] + X[2]) / 2, 728, spring(t, tCh, .45), tpill(0, 0, "change together", 28, "#fff", P.ink, { w: 600 })) : "")); }
+  { const k = e, ch = pulse(t, tP + 4.4, .3, 2.2), yk = spring(t, tHum, .5), X = [1500, 1650, 1800], gone = 1 - ramp(t, tK - .2, .25) + ramp(t, tK + 2.6, .3), YB = 566, capO = 1 - ramp(t, tK - .25, .2);
+    out += OP(clamp(gone), (yk > .02 ? thermo(X[0], YB, .62, "YOU", { k: yk, H: 250, fill: P.sun, ink: P.ink, glow: pulse(t, tHum + .5, .2, 1.2) }) + OP(ramp(t, tHum + .5, .3) * capO, TF(X[0] - 30, 172, 1, tpill(0, 0, "stays the same", 28, "#fff", P.ink, { w: 600 }))) : "")
+      + thermo(X[1], YB, pl, "PLACE", { k, H: 250, glow: ch }) + thermo(X[2], YB, lz, "LIZARD", { k, H: 250, glow: ch, fill: P.basil })
+      + (t >= tCh ? OP(capO, TF((X[1] + X[2]) / 2 + 10, 172, spring(t, tCh, .45), tpill(0, 0, "change together", 28, "#fff", P.ink, { w: 600 }))) : "")); }
   // Basil's big moment
   const cheer = [[LE(B) + .1, 80], [LE(B) + .8, 50], [LE(B) + 1.5, 50]];
   out += buddy("basil", 330, 1056, 330, t, { aura: true, in: tP + .7, poses: [[tP, "sit"], [tHum, "surprised"], [tHum + 1.6, "sit"], [tK, "cheer"], [LT(B) - .12, "sit"], [LE(B) + .1, "cheer"]], jump: cheer, wave: true })
@@ -204,15 +204,15 @@ SC.reveal = (t, s) => { const L = "j208", B = "j209", u = t - tP, e = eo(u / 1.2
    ===================================================================================================================== */
 if (PART === 3) { (() => {
 // small pictures that stand beside the key words while they are read
-const kwIcon = (i, t, lit) => { const th = (lv) => `<g transform="scale(.36) translate(0 150)">${thermo(0, 0, lv, "", { H: 250 }).replace(/<g transform="translate\(0 -?[\d.]+\)">.*<\/g>$/, "")}</g>`;
+const kwIcon = (i, t, lit) => { const th = (lv) => `<g transform="scale(.3) translate(0 130)">${thermo(0, 0, lv, "", { H: 230 })}</g>`;
   if (i === 0) return `<g transform="translate(-6 34) scale(.2)">${monitor({ warm: .7, tongue: lit ? .5 + .5 * Math.sin(t * 6) : 0 })}</g>`;
   if (i === 1) return th(.5 + .4 * Math.sin(t * 2.4));
   if (i === 2) return `<g fill="#B98A62" stroke="#7A5438" stroke-width="4"><ellipse cx="0" cy="14" rx="26" ry="22"/><circle cx="-30" cy="-14" r="11"/><circle cx="-11" cy="-30" r="12"/><circle cx="12" cy="-30" r="12"/><circle cx="31" cy="-13" r="11"/></g>`;
   return th(.62); };
 const baseKw = SC.kwrecap;
-SC.kwrecap = (t, s) => { let out = baseKw(t, s).replace(logo(t), ""); const rc = eio((t - s.t0) / .6);
+SC.kwrecap = (t, s) => { let out = baseKw(t, s); const rc = eio((t - s.t0) / .6);
   KWLINE.forEach((id, i) => { const tl_ = LT(id), k = spring(t, tl_ - .05, .45); if (k > .02) out += TF(1368, 300 + i * 138, k * (1 + .08 * pulse(t, tl_, .05, .8)), `<g filter="url(#dropS)"><circle r="56" fill="${P.paper}" stroke="${P.sun}" stroke-width="6"/></g>${kwIcon(i, t, t < tl_ + 2.4)}`); });
-  return out + logo(t); };
+  return out; };
 SC.next = (t, s) => { const L = "e301", M_ = "e302", B = "e304", H2 = "e303", u = t - s.t0, tMu = W(L, "mushroom") - .3, tSoil = W(L, "soil") - .2, tStay = W(L, "stays") - .15, tQ = W(L, "so") - .1, tLv = W(M_, "leaves") - .2, tLegs = W(B, "legs") - .15, tLock = LT(H2) - .1, MX = 700, PX = 1240, GY = 800;
   let out = bg("daystage") + wipe(t, s.t0 + .02, P.sun, 960, 500);
   out += TF(960, 110, slamK(t, s.t0 + .25), `<g transform="rotate(-2)"><g filter="url(#drop)"><rect x="-200" y="-44" width="400" height="88" rx="44" fill="${P.coral}"/><rect x="-192" y="-36" width="384" height="72" rx="36" fill="none" stroke="#fff" stroke-width="5"/></g>${T(0, 18, "NEXT TIME", 52, "#fff", { ls: 5 })}</g>`);

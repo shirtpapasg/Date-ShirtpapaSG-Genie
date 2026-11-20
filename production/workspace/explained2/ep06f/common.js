@@ -1,7 +1,7 @@
 // common.js: the scenes both parts share (EP1's approved routines, adapted for EP3): the HUD, round cards, the countdown, the goals, the
 // three-choice lock-in, Mark Sentence cards, the chant (call and response), the score hand, the key-word read-along, "Now you know!".
 window.SC = window.SC || {};
-const HUD = (t, o = {}) => (o.logo === false ? "" : logo(t)) + (o.score === false ? "" : scoreboard(t));
+const HUD = (t, o = {}) => (o.logo === false ? "" : logo(t)) + (o.score === false || window.NOSCORE ? "" : scoreboard(t));
 const dayCounter = (t, day, tflip = -9, x = 60, y = 110, s = .8) => counter(t, day, tflip, x, y, s, { nodots: true });
 // a plain caption for the book's own words: a cream strip, the words appear as Heart says them. off = index of the first word in the line
 function bookCaption(t, id, text, y = 150, o = {}) { const L = TL.lines[id], size = o.size || 52, toks = text.split(" "), fam = "Atkinson Hyperlegible", sp = tw(" ", size, 700, fam), total = tw(text, size, 700, fam), off = o.off || 0, x0 = (o.x || 960) - total / 2;
