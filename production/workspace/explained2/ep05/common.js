@@ -18,8 +18,9 @@ function thought(t, t0, t1, x, y, txt, o = {}) { if (t < t0 || t > t1 + .25) ret
 function roundCard(t, s, a, b, col = P.sun) { const u = t - s.t0, k = lerp(2.3, 1, eo(u / .16)) + .05 * wob(u, .16, .4);
   return bg("stage") + `<circle cx="960" cy="540" r="${n2(360 + 500 * eo(u / .7))}" fill="none" stroke="${col}" stroke-width="${n2(24 * (1 - eo(u / .7)))}"/><g transform="translate(960 540) scale(${n2(k)}) rotate(-4)"><g filter="url(#drop)"><rect x="${-(tw(a, 200, 700, "Fredoka", 10) + 160) / 2}" y="-150" width="${tw(a, 200, 700, "Fredoka", 10) + 160}" height="${b ? 380 : 300}" rx="60" fill="${col}"/></g>${T(0, 70, a, 200, P.ink, { ls: 10 })}${b ? T(0, 180, b, 64, P.ink, { ls: 8 }) : ""}</g>` + HUD(t); }
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1");
-SC.r0card = (t, s) => roundCard(t, s, "ROUND ZERO", "REMATCH");
-SC.listcard = (t, s) => roundCard(t, s, "PIP’S LIST", null, "#CFC2FF");
+SC.r0card = (t, s) => roundCard(t, s, "ROUND ZERO", "WARM-UP");
+SC.r2card = (t, s) => roundCard(t, s, "ROUND 2");
+SC.listcard = (t, s) => roundCard(t, s, "BASIL’S RULE", null, "#9FEADD");
 SC.showcard = (t, s) => roundCard(t, s, "SHOWDOWN", "DOUBLE POINTS", P.sun);
 SC.count = (t, s) => { const L = "h501", ws = [["Are you ready?", LT(L), 150, "#fff"], ["3", W(L, "three"), 520, P.sun], ["2", W(L, "two"), 520, P.sun], ["1", W(L, "one"), 520, P.sun], ["GO!", W(L, "go"), 460, "#fff"]];
   let cur = 0; ws.forEach((w, i) => { if (t >= w[1] - .03) cur = i; }); const [txt, t0, size, col] = ws[cur], k = lerp(2.2, 1, eo((t - t0 + .03) / .16)) + .05 * wob(t, t0 + .13, .4), ringR = 300 + 500 * eo((t - t0) / .6);
@@ -64,11 +65,11 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
 /* ============ Mark Sentence card: the buddy beside it SAYS "Say it with me!", 0.8 s, then Heart reads; the card holds 2 s ============ */
 function markScene(t, s, o) { const S = TL.lines[o.sayId], ts = S.t, p0 = o.who === "basil" ? "cheer" : "pointing";
   const poses = [[s.t0, p0], [ts - .12, "sit"], [S.end + .15, p0], ...(o.poses || [])].sort((a, b) => a[0] - b[0]);
-  return bg("stage2") + (o.under || "") + markCard(t, { footer: "P3 · Diversity · Living and non-living things", ...o, t0: s.t0 + .1 }) + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses, jump: [[ts - .1, 26]], nohop: true, wave: true })
+  return bg("stage2") + (o.under || "") + markCard(t, { footer: "P3 · Diversity · Classification of living things", ...o, t0: s.t0 + .1 }) + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses, jump: [[ts - .1, 26]], nohop: true, wave: true })
     + say(o.sayId, 330, 388, t, { size: 44, tail: 0 }) + (o.extra || "") + HUD(t); }
 
 /* ============ the chant: clap, clap, stomp. Call and response: the buddies chant a line, then one bar for the viewers ("YOUR TURN!"), then all together ============ */
-const PHR = ["Grow! Respond! Reproduce!", "That’s what living things can DO!"], PCOL = { "Grow!": "#7FE58F", "Respond!": "#FFB45C", "Reproduce!": "#8CC4FF", "DO!": P.sun };
+const PHR = ["Frog! Bird! Fish!", "Moist skin, feathers, scales!"], PCOL = { "Frog!": "#7FE58F", "Bird!": "#FFB45C", "Fish!": "#8CC4FF", "Moist": "#7FE58F", "skin,": "#7FE58F", "feathers,": "#FFB45C", "scales!": "#8CC4FF" };
 function chantState(L, t) { const bar = L.bar, tb = (t - L.t) / bar, S = L.slots, nc = L.ncall; let k = -1; S.forEach(([p, b], i) => { if (tb >= b) k = i; });
   const inSlot = k >= 0 && tb < S[k][1] + 1, turn = k >= 0 && k < nc && !inSlot && tb < (S[k + 1] ? S[k + 1][1] : L.nbars) && tb < L.nbars, together = k >= nc;
   return { k, ph: k >= 0 ? S[k][0] : -1, inSlot, turn, together, tb, t0: k >= 0 ? L.t + S[k][1] * bar : L.t }; }
@@ -89,7 +90,7 @@ function chantLines(t, L, o = {}) { const bar = L.bar, st = chantState(L, t); le
     lines += `<g transform="translate(${o.x || 960} ${y0 + i * dy}) scale(${n2(sc)})">${active && st.turn ? `<rect x="${n2(-total / 2 - 30)}" y="${n2(-size * .82)}" width="${n2(total + 60)}" height="${n2(size * 1.12)}" rx="${n2(size * .3)}" fill="${P.sun}" opacity=".16"/>` : ""}${tx}</g>`; });
   return lines + (st.together && st.tb < L.nbars ? TF(o.x || 960, y0 - 120, spring(t, L.t + L.slots[L.ncall][1] * bar, .4), tpill(0, 0, "All together!", 40, P.sun, P.ink, { w: 700 })) : ""); }
 // which board column flashes now (the word being chanted): [w, f, a] 0..1
-function chantFlash(t, L) { const f = [0, 0, 0]; for (const w of L.words) { const i = ["Grow!", "Respond!", "Reproduce!"].indexOf(w.w); if (i >= 0) f[i] = Math.max(f[i], pulse(t, w.a, .03, .35)); } return f; }
+function chantFlash(t, L) { const f = [0, 0, 0]; for (const w of L.words) { const i = (["Frog!", "Bird!", "Fish!"].indexOf(w.w) >= 0 ? ["Frog!", "Bird!", "Fish!"].indexOf(w.w) : ["Moist", "feathers,", "scales!"].indexOf(w.w)); if (i >= 0) f[i] = Math.max(f[i], pulse(t, w.a, .03, .35)); } return f; }
 function chantScene(t, s, id, o = {}) { const L = TL.lines[id], beats = chantBeats(L); let fx = "", clap = 0, stomp = 0; for (const [bt, k, soft] of beats) { const g = soft ? .45 : 1; if (k === "c") clap = Math.max(clap, pulse(t, bt, .03, .18) * g); else stomp = Math.max(stomp, pulse(t, bt, .03, .25) * g); }
   const jumps = beats.filter((b) => b[1] === "s" && !b[2]).map((b) => [b[0] - .2, 30]), by = 1066, bh = 270, xs = [620, 990, 1360], tin = s.t0 + .15;
   let buds = ""; ["pip", "basil", "momo"].forEach((w, i) => { const sq = 1 - .05 * clap; buds += `<g transform="translate(${xs[i]} ${by}) scale(${n2(1 / sq)} ${n2(sq)}) translate(${-xs[i]} ${-by})">${buddy(w, xs[i], by, bh, t, { aura: true, in: tin + i * .08, jump: t >= L.t ? jumps : [], poses: [[s.t0, "sit"], [L.end - .28, "cheer"]] })}</g>`;

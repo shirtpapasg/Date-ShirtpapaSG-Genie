@@ -30,13 +30,13 @@ NYK = [("scene", "nyk"),
  ("say", "h1304t", H, "Two!", {"after": ["h1304o", 1.0]}),
  ("say", "h1305", H, "Now you know!", {"after": ["h1304t", 1.0], "shout": True}),
  ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
- ("wait", 5.8)]
+ ("wait", 5.2)]
 CHANTSEQ = [("unison", "u1002", "Say it with us!", {"pre": .6}), ("wait", .8), ("chant", "c1003"), ("wait", .6)]
 COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94})]
 
 SEQ1 = [
  # ---- 1 · silent cold open: Day 31 on the window ledge (9 s)
- ("scene", "cold"), ("mark", "cold0"), ("wait", 3.6), ("mark", "coldBuild"), ("wait", 4.6),
+ ("scene", "cold"), ("mark", "cold0"), ("wait", 3.2), ("mark", "coldBuild"), ("wait", 4.2),
  # ---- 2 · the callback and the dare
  ("scene", "callback"),
  ("say", "a201", H, "Day thirty-one. Our plant is drooping. Last time, Momo asked: is it sad?", {"pre": .3}),
@@ -61,10 +61,10 @@ SEQ1 = [
  ("say", "a502", H, "Locked in!", {"pre": 0}),
  ("say", "a503", B, "Two, food! It's hungry. Give it my biscuit!", {"pre": .5}),
  ("say", "a504", P, "One, water. I touched the soil. It is dry.", {"pre": .4}),
- ("say", "a505", M, "One, water. Nobody watered it yesterday. But is it sad?", {"pre": .4, "post": .5}),
+ ("say", "a505", M, "One, water. Nobody watered it yesterday. But is it sad?", {"pre": .4, "post": .3}),
  # ---- 6 · we test it, and shrink down to follow the water
  ("scene", "test"),
- ("say", "a601", H, "Let's test Pip's idea. Pip waters the soil. Now we wait. This takes a few hours. So let's shrink down and follow the water. Quietly.", {"pre": .5, "post": .6}),
+ ("say", "a601", H, "Let's test Pip's idea. Pip waters the soil. Now we wait. This takes a few hours. So let's shrink down and follow the water. Quietly.", {"pre": .5, "post": .4}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 3.0),
  ("say", "a602", H, "You are tiny now. You are in the wet soil, with the water.", {**SLOW, "pre": 0, "post": 1.3}),
  ("mark", "toRoot"),
@@ -88,13 +88,13 @@ SEQ1 = [
  ("say", "a705", M, "Not sad. Wilting!", {"pre": .4, "post": .5}),
  ("scene", "r1score"),
  ("say", "a706", H, "Showed one finger? One finger up on your score hand!", {"pre": .5}),
- ("say", "a707", B, "More biscuit for me.", {"pre": .6, "post": .6}),
+ ("say", "a707", B, "More biscuit for me.", {"pre": .6, "post": .4}),
  # ---- 8 · who else needs water?
  ("scene", "who"),
  ("say", "a801", H, "All living things such as plants and animals need water.", {"pre": .6}),
  ("say", "a802", H, "The plant. The mealworm, with its juicy carrot. And you!", {"pre": .5, "post": .5}),
  ("scene", "why"),
- ("say", "a803", H, "We need water to digest food. We need water to carry out our daily activities. We need water to remove waste from our body.", {"pre": .5, "post": .7}),
+ ("say", "a803", H, "We need water to digest food. We need water to carry out our daily activities. We need water to remove waste from our body.", {"pre": .5, "post": .5}),
  # ---- 9 · HOLD ON! Room 2 is not ready
  ("scene", "r2card"), ("wait", 1.1),
  ("scene", "room2"),
@@ -103,35 +103,35 @@ SEQ1 = [
  ("mark", "ring0_2"), ("wait", 5.0), ("mark", "bell_2"), ("wait", .6),
  ("say", "a903", H, "Arms crossed? One finger up! Look. The lid is shut tight. Air cannot get in.", {"pre": 0}),
  ("say", "a904", B, "Our glass box has holes in its lid!", {"pre": .4}),
- ("say", "a905", P, "Holes! I forgot. Sorry, little guest.", {"pre": .4, "post": .5}),
+ ("say", "a905", P, "Holes! I forgot. Sorry, little guest.", {"pre": .4, "post": .3}),
  ("scene", "newlid"),
- ("say", "a906", H, "A new lid, with holes, so air can get in.", {"pre": .8, "post": 1.0}),
+ ("say", "a906", H, "A new lid, with holes, so air can get in.", {"pre": .8, "post": .8}),
  ("scene", "mark2"),
  ("say", "a907", B, "Say it with me!", {"pre": .8}), ("wait", .8),
  ("say", "a908", H, "Living things breathe in air that contains oxygen.", {"pre": 0}),
  ("wait", 2.0), ("mark", "kw_oxygen"), ("wait", 2.1),
  # section 6, step 2: the swimming pool cutaway is left out ("You too. In the swimming pool, you come up for air.")
  ("scene", "movein"),
- ("say", "a910", H, "Now our guest can move in. Air, through the holes. Oats, for food. A juicy carrot, for water.", {"pre": 1.3, "post": .7}),
+ ("say", "a910", H, "Now our guest can move in. Air, through the holes. Oats, for food. A juicy carrot, for water.", {"pre": 1.1, "post": .5}),
  ("scene", "plantair"),
  ("say", "a911", H, "All living things need air to live.", {"pre": .7}),
- ("say", "a912", H, "Even plants need air.", {"pre": .5, "post": .8}),
+ ("say", "a912", H, "Even plants need air.", {"pre": .5, "post": .6}),
  # ---- 10 · the chant, call and response
  ("scene", "chant"),
  ("say", "a1001", H, "One guest. Three needs.", {"pre": .5}),
  *CHANTSEQ,
  # ---- 11 · score hand, the lizard, the key words
  ("scene", "final"),
- ("say", "a1101", H, "Show me your score hand! Two fingers? You beat the Buddies. High five!", {"pre": .5, "post": .7}),
+ ("say", "a1101", H, "Show me your score hand! Two fingers? You beat the Buddies. High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "a1102", H, "Did you spot the lizard? It was on the wall, above the hotel sign. Does a lizard need water? Tell someone at home.", {"pre": .7, "post": .7}),
+ ("say", "a1102", H, "Did you spot the lizard? It was on the wall, above the hotel sign. Does a lizard need water? Tell someone at home.", {"pre": .7, "post": .5}),
  *kwrecap(["Water", "Wilting", "Oxygen"]),
  # ---- 12 · the cliffhanger: Room 3
  ("scene", "cliff"),
  ("say", "a1201", H, "Five ticks. Four to go.", {"pre": .7}),
- ("say", "a1202", M, "The mealworm has oats. But nobody feeds a plant. So who feeds a plant?", {"pre": .5, "post": .5}),
+ ("say", "a1202", M, "The mealworm has oats. But nobody feeds a plant. So who feeds a plant?", {"pre": .5, "post": .3}),
  ("scene", "room3"),
- ("say", "a1203", H, "Room three. A bean plant from Pip's dark cupboard. It had water every day. It had air. But something is wrong under this cloth. What is it missing? Find out in Part Two!", {"pre": .8, "post": 1.1}),
+ ("say", "a1203", H, "Room three. A bean plant from Pip's dark cupboard. It had water every day. It had air. But something is wrong under this cloth. What is it missing? Find out in Part Two!", {"pre": .8, "post": .9}),
  # ---- 13 · "Now you know!" and the outro
  *NYK,
 ]

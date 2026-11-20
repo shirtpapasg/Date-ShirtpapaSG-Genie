@@ -1,4 +1,4 @@
-"""make_voice.py: every spoken line of EP3 -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
+"""make_voice.py: every spoken line of EP5 -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
   /home/user/heart-tts/venv/bin/python make_voice.py
 Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: pitch swing x1.6, -21.7 dB), but at speed .95 with .45 s between
          sentences (the recipe's .94 and .57 made the episode 8 minutes; the script asks for 6:30); the shrink is said slower (.92);
@@ -151,7 +151,7 @@ def crowd(id, text, hid):
     write_group(id, tracks, n, ws, {"text": text, "len": Dh + .1})
 
 dic = set(l.split()[0].split("(")[0] for l in open(os.path.join(pocketsphinx.get_model_path(), "en-us", "cmudict-en-us.dict")))
-EXTRA = {"non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
+EXTRA = {"mudskipper": "M AH D S K IH P ER", "mudskippers": "M AH D S K IH P ER Z", "warm-up": "W AO R M AH P", "non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
          "lock-in": "L AA K IH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
          "aww": "AA", "recycling": "R IY S AY K L IH NG", "organiser": "AO R G AH N AY Z ER", "showdown": "SH OW D AW N", "papaya": "P AH P AY AH",
          "toa": "T OW AH", "payoh": "P AA Y OW", "mynah": "M AY N AH", "dit": "D IH T", "wines": "W AY N Z", "squish": "S K W IH SH", "buddies": "B AH D IY Z",

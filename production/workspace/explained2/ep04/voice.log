@@ -1,0 +1,116 @@
+c201 heart 6.78 ok
+c202 basil 3.28 ok
+c203 heart 5.75 ok
+c301 heart 7.58 ok
+c401 heart 10.96 ok
+c402 pip 1.9 ok
+c403 heart 6.55 ok
+c404 momo 0.97 ok
+c405 heart 5.42 ok
+h501 heart 4.95 ok
+c601 heart 16.57 ok
+c602 heart 0.7 ok
+c603 momo 2.71 ok
+c604 basil 3.13 ok
+c605 pip 3.84 PROPORTIONAL
+c606 heart 9.07 ok
+c607 heart 2.19 ok
+c701 heart 5.8 ok
+c702 basil 2.21 ok
+c703 heart 4.83 ok
+c704 heart 2.76 ok
+c705 heart 2.76 ok
+c706 heart 0.9 ok
+c707 heart 3.73 ok
+c708 heart 4.81 ok
+c709 heart 4.01 ok
+c801 heart 3.94 ok
+c802 heart 4.26 ok
+c804 pip 0.95 ok
+c805 heart 5.84 ok
+c806 basil 1.79 ok
+c807 heart 3.59 ok
+c901 heart 1.4 ok
+c902 heart 6.84 ok
+c903 heart 4.86 ok
+c904 momo 1.74 ok
+c1001 pip 8.39 ok
+c1002 heart 4.66 ok
+c1003 heart 9.43 ok
+c1004 pip 4.02 ok
+c1201 heart 6.29 ok
+c1202 heart 8.84 ok
+h860 heart 2.88 ok
+   align error 'NoneType' object is not iterable
+hk_classification heart 1.02 PROPORTIONAL
+uk_classification 1.309
+hk_fungi heart 0.57 ok
+uk_fungi 0.842
+hk_bacteria heart 0.69 ok
+uk_bacteria 0.984
+h864 heart 0.65 ok
+c1301 heart 4.46 ok
+c1302 momo 4.01 ok
+c1303 heart 4.74 ok
+u1300 1.061
+h1304a heart 0.5 ok
+h1304o heart 0.43 ok
+h1304t heart 0.47 ok
+   shout take: Now you know!! speed 0.98 score 4.48
+h1305 heart 0.93 ok
+u1305 2.43
+d201 heart 8.24 ok
+d301 heart 2.57 ok
+d401 heart 4.96 ok
+d402 momo 4.22 ok
+d403 heart 12.76 ok
+d404 heart 0.7 ok
+d405 basil 1.93 ok
+d406 pip 4.34 ok
+d407 heart 2.48 ok
+d408 heart 6.49 ok
+d409 heart 5.51 ok
+d410 basil 0.77 ok
+d411 heart 4.41 ok
+d412 heart 2.13 ok
+d501 pip 0.95 ok
+d502 heart 8.86 ok
+d503 heart 3.67 ok
+d601 momo 4.64 ok
+d602 heart 9.06 ok
+d603 heart 3.01 ok
+d604 heart 2.64 ok
+d605 heart 1.09 ok
+d606 heart 4.62 ok
+d607 heart 1.46 ok
+d608 heart 1.29 ok
+d609 heart 1.96 ok
+d701 heart 5.88 ok
+d702 momo 0.96 ok
+d703 heart 6.0 ok
+d704 basil 3.77 ok
+d705 heart 9.15 ok
+d801 pip 1.16 ok
+d802 pip 9.9 ok
+d803 heart 7.37 ok
+d804 heart 0.7 ok
+d805 basil 3.86 ok
+d806 momo 2.64 ok
+d807 pip 0.64 ok
+d808 heart 6.33 ok
+d809 pip 2.56 ok
+d810 heart 3.17 ok
+d901 heart 5.38 ok
+u1002 1.061
+c1003 11.9
+d1001 heart 6.39 ok
+d1002 heart 8.35 ok
+d1101 heart 8.92 ok
+d1102 heart 10.27 ok
+hk_flowering_plants heart 1.0 ok
+uk_flowering_plants 1.215
+hk_non-flowering_plants heart 1.2 ok
+uk_non-flowering_plants 1.447
+hk_spore_bags heart 0.85 ok
+uk_spore_bags 1.076
+not aligned: ['c605', 'hk_classification']

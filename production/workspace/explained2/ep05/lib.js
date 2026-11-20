@@ -1,4 +1,4 @@
-// lib.js: the engine's helpers (from EP1, adapted for EP3: key words). Everything returns SVG strings and is a pure function of its arguments (a frame depends only on t).
+// lib.js: the engine's helpers (from EP1, adapted for EP5: key words). Everything returns SVG strings and is a pure function of its arguments (a frame depends only on t).
 // Needs kit/style.js (P, defs, T, pill, G, groundShadow, logoPill, hand, teddy, leaf ...), tl.js (TL) and spr/manifest.js (SPR).
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, u) => a + (b - a) * u;
 const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
@@ -220,24 +220,25 @@ function wipe(t, tc, col, cx = 960, cy = 540) { const a = .3, b = .26; if (t < t
 /* ---------- the key-word shelf (top right, under the score pill): sun-yellow pills that stack downward ----------
    A NEW TERM pops large in the middle, holds about 1.5 s (digest time), then flies to the shelf with a pop. The shelf slides off to
    the right during the first-person shrink and full-screen cards, and glows once at the end of the part as a recap. */
-const KW = (PART === 1 ? [["MIMOSA", "kw_mimosa", 1], ["RESPOND TO CHANGES", "kw_respond", 1]]
-  : [["REPRODUCE", "kw_reproduce", 1], ["SPORES", "kw_spores", 1], ["EXTINCT", "kw_extinct", 1], ["MORE COMPLEX", "kw_complex", 1]]).map(([w, mk, big, from], i) => ({ w, t: MK(mk), big, from: from || [960, 470], i, tl: MK(mk) + (big ? 1.5 : 0) + .5 }));
-const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1 };
+const KW = (PART === 1 ? [["OUTER COVERING", "kw_cover", 1], ["OBSERVABLE CHARACTERISTICS", "kw_observe", 1], ["AMPHIBIANS", "kw_amphibians", 1], ["MOIST SKIN", "kw_moist", 1]]
+  : [["FEATHERS", "kw_feathers", 1], ["FINS", "kw_fins", 1], ["SCALES", "kw_scales", 1], ["GILLS", "kw_gills", 1]]).map(([w, mk, big, from], i) => ({ w, t: MK(mk), big, from: from || [960, 470], i, tl: MK(mk) + (big ? 1.5 : 0) + .5 }));
+const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
+const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
-const KWLINE = PART === 1 ? ["hk_mimosa", "hk_respond_to_changes"] : ["hk_reproduce", "hk_spores", "hk_extinct", "hk_more_complex"];
+const KWLINE = PART === 1 ? ["hk_outer_covering", "hk_observable_characteristics", "hk_amphibians", "hk_moist_skin"] : ["hk_feathers", "hk_fins", "hk_scales", "hk_gills"];
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
   const hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
   const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;
-  for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * 560, sy = 136 + k.i * 57, tf = k.tl - .5;
+  for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * (ww + 160), sy = 136 + k.i * 57, tf = k.tl - .5;
     if (k.big && t < tf) { // the new term, large, held about 1.5 s
       const a = clamp((t - k.t) / .2), kk = spring(t, k.t, .5); let rays = ""; for (let i = 0; i < 12; i++) { const an = i * 30 * Math.PI / 180 + (t - k.t) * .3; rays += `<path d="M${n2(960 + Math.cos(an) * 330)} ${n2(470 + Math.sin(an) * 150)} L${n2(960 + Math.cos(an) * (400 + 30 * kk))} ${n2(470 + Math.sin(an) * (190 + 20 * kk))}" stroke="${P.sun}" stroke-width="9" stroke-linecap="round" opacity="${n2(.8 * a)}"/>`; }
-      top += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * a)}"/>` + rays + TF(960, 470, kk * (1 + .02 * Math.sin((t - k.t) * 3)), kwPill(k.w, k.w.length > 12 ? 104 : 130)) + OP(a, tpill(960, 640, "KEY WORD", 34, P.ink, P.sun, { w: 700, ls: 5 })); continue; }
+      top += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * a)}"/>` + rays + TF(960, 470, kk * (1 + .02 * Math.sin((t - k.t) * 3)), kwPill(k.w, KWBIG(k.w))) + OP(a, tpill(960, 640, "KEY WORD", 34, P.ink, P.sun, { w: 700, ls: 5 })); continue; }
     const u = clamp((t - tf) / .5);
-    if (u < 1) { const e = eio(u), x0 = k.from[0], y0 = k.from[1], x = lerp(x0, sx, e), y = lerp(y0, sy, e) - 120 * Math.sin(Math.PI * e), sc = lerp(k.big ? (k.w.length > 12 ? 104 : 130) / size : 1.5, 1, e) * (k.big ? 1 : Math.min(1, spring(t, tf, .25) + .2));
+    if (u < 1) { const e = eio(u), x0 = k.from[0], y0 = k.from[1], x = lerp(x0, sx, e), y = lerp(y0, sy, e) - 120 * Math.sin(Math.PI * e), sc = lerp(k.big ? KWBIG(k.w) / size : 1.5, 1, e) * (k.big ? 1 : Math.min(1, spring(t, tf, .25) + .2));
       top += OP(k.big ? 1 : Math.min(1, u * 5), TF(x, y, sc, kwPill(k.w, size)) ) + (k.big ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * (1 - u))}"/>` : ""); continue; }
     if (rc > 0) { // the read-along: centre stage, big; each word lights up as it is said and stays lit
-      const tl_ = LT(KWLINE[k.i]), lit = t >= tl_ - .05, g = lit ? pulse(t, tl_, .05, .8) : 0, cy = (KW.length > 3 ? 300 : 360) + k.i * (KW.length > 3 ? 138 : 170), sc = lerp(1, KW.length > 3 ? 2.0 : 2.2, rc) * (1 + .1 * g + (lit ? .04 * Math.sin(t * 5) * (t < tl_ + 2.6 ? 1 : 0) : 0));
+      const tl_ = LT(KWLINE[k.i]), lit = t >= tl_ - .05, g = lit ? pulse(t, tl_, .05, .8) : 0, cy = (KW.length > 3 ? 300 : 360) + k.i * (KW.length > 3 ? 138 : 170), sc = lerp(1, Math.min(KW.length > 3 ? 2.0 : 2.2, 1000 / Math.max(...KW.map((q) => tw(q.w, size, 700, "Fredoka", size * .07) + size * 1.3))), rc) * (1 + .1 * g + (lit ? .04 * Math.sin(t * 5) * (t < tl_ + 2.6 ? 1 : 0) : 0));
       out += OP(lit || rc < 1 ? 1 : .5, TF(lerp(sx, 960, rc), lerp(sy, cy, rc), sc, kwPill(k.w, size, lit && t < tl_ + 2.6 ? 1 : 0))); continue; }
     const land = pulse(t, k.tl, .02, .3);
     out += TF(sx, sy, 1 + .22 * land, kwPill(k.w, size)); }

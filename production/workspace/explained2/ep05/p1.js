@@ -1,155 +1,150 @@
-// p1.js: PART 1, "Touch This Plant and It Folds Up! Is It SHY?": respond. Segments 1-14 of the approved script (p3_ep03_script.md).
+// p1.js: PART 1, "Feathers, Scales or Moist Skin?": what an animal is, outer coverings, observable characteristics, amphibians. Segments 1-14 of p3_ep05_script.md.
 if (PART === 1) { (() => {
-const FOLD = { 0: [1, 1] }, CARD = [345, 1062, .52];
-const gPip = (t, o = {}) => buddy("pip", 105, 1064, 150, t, { aura: true, tag: false, ...o }), gBasil = (t, o = {}) => buddy("basil", 650, 1000, 200, t, { aura: true, tag: false, ...o }), gMomo = (t, o = {}) => buddy("momo", 1790, 1062, 180, t, { aura: true, tag: false, flip: true, ...o });
+const CARD = [1540, 1062, .5], CAMW = [1.04, 960, 580], CAMF = [2.2, 600, 700];
+const wPip = (t, o = {}) => buddy("pip", 120, 1064, 165, t, { aura: true, tag: false, ...o }), wBasil = (t, o = {}) => buddy("basil", 320, 1064, 150, t, { aura: true, tag: false, ...o }), wMomo = (t, o = {}) => buddy("momo", 1800, 1062, 170, t, { aura: true, tag: false, flip: true, ...o });
 const tcard = (t, st = {}, o = {}) => TF(CARD[0], CARD[1], CARD[2], trailCard(t, st, o));
-const tools = (x = 1545) => TF(x, 1056, 1, stampTool()) + TF(x - 100, 1058, 1, inkPad());
-// a point of the garden on screen, for a camera
 const gx = (cam, x) => camX(cam, x), gy = (cam, y) => camY(cam, y);
+// a frog part on screen (the frog sits at FROGXY - 30, scale .8)
+const fp = (cam, x, y) => [gx(cam, FROGXY[0] - 30 + x * .8), gy(cam, FROGXY[1] + y * .8)];
 
-/* ============ 1 · the silent cold open: the garden under the block ============ */
-// the thumbnail's frame (thumb_still.js ... "&thumb"): the mimosa large, left of centre, one leaf folded; Basil far left; the sunny garden on the right
-const THUMB1 = (t) => gardenView(t, { f: FOLD, still: true }, [1.5, 1840, 816]) + buddy("basil", 300, 800, 330, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
-SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), z = 1 + .05 * eio(t / 8);
-  const [cx, cd] = slideX(t, tb + .15, .6, -260, CARD[0], 1062), [sx2, sd2] = slideX(t, tb + 1.7, .45, 2150, 1545, 1056);
-  return gardenView(t, { f: FOLD }, [z, 1150, 760]) + cd + sd2 + (t >= tb + .15 ? TF(cx, 1062, CARD[2], trailCard(t)) : "") + (t >= tb + 1.7 ? tools(sx2) : "")
-    + gBasil(t, { poses: [[0, "surprised"], [2.8, "sit"]] }) + gPip(t, { in: tb, poses: [[tb, "pointing"], [tb + 1.5, "sit"]] }) + gMomo(t, { in: tb + 1.4, poses: [[tb + 1.4, "waving"], [tb + 3.0, "sit"]], wave: true })
-    + OP(1 - ramp(t, tb - .4, .3), lowerPill(60, 60, "Community garden, Toa Payoh,", "Singapore")); };
+/* ============ 1 · the silent cold open: the pond at the wetland ============ */
+// the thumbnail's frame (thumb_still.js ... "&thumb"): the frog large on its leaf, the kingfisher above it, the bright water on the right
+const THUMB1 = (t) => wetView(t, { frog: { wet: 1 } }, [1.75, 560, 640]) + buddy("momo", 250, 1040, 330, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), z = 1.04 + .05 * eio(t / 7.2);
+  const [cx, cd] = slideX(t, tb + .15, .6, 2200, CARD[0], 1062);
+  return wetView(t, {}, [z, 960, 580]) + cd + (t >= tb + .15 ? TF(cx, 1062, CARD[2], trailCard(t)) : "")
+    + wBasil(t, { poses: [[0, "surprised"], [2.6, "sit"]] }) + wPip(t, { in: tb, poses: [[tb, "pointing"], [tb + 1.5, "sit"]] }) + wMomo(t, { in: tb + 1.2, poses: [[tb + 1.2, "waving"], [tb + 2.8, "sit"]], wave: true })
+    + OP(1 - ramp(t, tb - .4, .3), lowerPill(60, 60, "Sungei Buloh Wetland Reserve,", "Singapore")); };
 
 /* ============ 2 · the callback and the dare ============ */
-const CAMF = [1.7, 1400, 800];
-SC.callback = (t, s) => { const a = "a201", e = eio((t - s.t0) / 1.0), cam = [lerp(1.05, CAMF[0], e), lerp(1150, CAMF[1], e), lerp(760, CAMF[2], e)], tS = W(a, "folded") - .3;
-  return gardenView(t, { f: FOLD }, cam) + buddy("basil", 360, 1056, 380, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT("a202") - .12, "sit"]] })
-    + thought(t, tS, LT("a202") - .15, 600, 330, "shy?", { dir: -1, col: P.basil }) + say("a202", 700, 500, t, { size: 50, tail: -160, x: true, maxW: 600 }); };
-SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) / .16); return k <= 0 ? 0 : lerp(2.4, 1, eo(k)) + .05 * wob(u, d + .16, .4); }, L = "a203", k1 = a(.1), k2 = a(.45), k3 = a(LT(L) - s.t0);
+const GROUPS4 = [["PLANTS", "#2FA65A"], ["ANIMALS", "#F08A24"], ["FUNGI", "#9B6BFF"], ["BACTERIA", "#3A8DFF"]];
+SC.callback = (t, s) => { const a = "a201", b = "a203", t4 = W(a, "four") - .1, tA = W(a, "animals") - .1, tw_ = [W(b, "frog") - .15, W(b, "bird") - .15, W(b, "fish") - .15], g = (i) => pulse(t, tw_[i], .1, 1.3), tM = LT(b) - .5, fxn = FISHXY[0] + 110 * Math.sin(t * .5);
+  const chips = GROUPS4.map(([nm, col], i) => { const k = spring(t, t4 + i * .14, .45), on = t >= tA && i === 1, dim = t >= tA && i !== 1; return k < .02 ? "" : OP((dim ? .35 : 1) * (1 - ramp(t, tM, .3)), TF(390 + i * 380, 190, k * (on ? 1.18 + .05 * Math.sin(t * 6) : 1), `<g filter="url(#${on ? "glowS" : "dropS"})"><rect x="-170" y="-48" width="340" height="96" rx="48" fill="${col}"/><rect x="-162" y="-40" width="324" height="80" rx="40" fill="none" stroke="#fff" stroke-width="4" opacity=".8"/></g>${T(0, 17, nm, 48, "#fff", { ls: 3 })}`)); }).join("");
+  return wetView(t, { back: glowDisc(FROGXY[0] - 20, FROGXY[1] - 60, 150, g(0)) + glowDisc(KFXY[0], KFXY[1] - 60, 130, g(1)) + glowDisc(fxn, FISHXY[1], 120, g(2)) }, CAMW)
+    + tcard(t) + chips + wPip(t) + wBasil(t)
+    + buddy("momo", 1740, 1056, 300, t, { aura: true, flip: true, in: tM, poses: [[tM, "thinking"], [LT(b) - .12, "sit"], [LE(b) + .1, "thinking"]] }) + (t < tM ? wMomo(t, { out: tM - .1 }) : "")
+    + say(b, 1360, 520, t, { size: 46, tail: 200, maxW: 600 }); };
+SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) / .16); return k <= 0 ? 0 : lerp(2.4, 1, eo(k)) + .05 * wob(u, d + .16, .4); }, L = "a204", k1 = a(.1), k2 = a(.45), k3 = a(LT(L) - s.t0);
   const ln = (y, txt, size, col, k, ls = 6) => k ? `<g transform="translate(960 ${y}) scale(${n2(k)})"><g transform="translate(0 8)" opacity=".85">${T(0, 0, txt, size, P.ink, { ls })}</g>${T(0, 0, txt, size, col, { ls })}</g>` : "";
-  return gardenView(t, { f: FOLD }, [CAMF[0] - .1 * clamp(u / 5), CAMF[1], CAMF[2]]) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.66 * clamp(u / .2))}"/>`
-    + ln(250, "TOUCH THIS PLANT", 150, "#fff", k1, 4) + ln(420, "AND IT FOLDS UP!", 150, "#fff", k2, 4) + ln(630, "IS IT SHY?", 190, P.sun, k3)
-    + (t >= W(L, "did") - .1 ? TF(960, 760, spring(t, W(L, "did") - .1, .45), tpill(0, 0, "Did you lock in your answer? Hold on to it!", 40, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
-
-/* ============ 3 · the field trip: the trail card and the map ============ */
-SC.trip = (t, s) => { const L = "a301", tT = W(L, "three"), tM = W(L, "field") - .1, dr = eio((t - tM - .3) / 1.4), pl = [0, 1, 2].map((i) => pulse(t, tT + i * .28, .05, .5)), TP = [1090, 318], KJ = [800, 212];
-  const map = `<g filter="url(#drop)"><rect x="470" y="110" width="980" height="320" rx="26" fill="url(#gPaper)" transform="rotate(-1.2 960 270)"/></g><g transform="rotate(-1.2 960 270)"><path d="M560 300 Q560 200 720 180 Q860 150 1000 176 Q1180 170 1320 230 Q1400 270 1340 330 Q1200 392 1010 372 Q820 392 680 366 Q570 350 560 300z" fill="#CFEFC6" stroke="#6DBF7E" stroke-width="6" stroke-linejoin="round" stroke-dasharray="14 6"/>
-    <path d="M${KJ[0]} ${KJ[1]} Q960 200 ${TP[0]} ${TP[1]}" fill="none" stroke="${P.coral}" stroke-width="9" stroke-linecap="round" stroke-dasharray="${n2(330 * dr)} 400"/>
-    ${[[TP, "Toa Payoh", 1], [KJ, "Kranji", -1]].map(([p, nm, sd], i) => { const k = spring(t, tM + i * 1.1, .45); return k < .02 ? "" : `<g transform="translate(${p[0]} ${p[1]}) scale(${n2(k)})"><circle r="19" fill="${P.coral}" stroke="#fff" stroke-width="6"/></g>` + TF(p[0] + sd * 150, p[1] + (sd > 0 ? 40 : -34), k, tpill(0, 0, nm, 36, P.ink, "#fff", { w: 700, nosh: true })); }).join("")}</g>`;
-  const [cx, cd] = slideX(t, s.t0 + .1, .5, 2300, 960, 1012);
-  return bg("daystage") + OP(ramp(t, tM - .2, .3), map) + cd + TF(cx, 1012, 1.12, trailCard(t, {}, { pulse: pl }))
-    + buddy("pip", 190, 1050, 230, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "waving"], [s.t0 + 1.7, "sit"]], wave: true }) + buddy("basil", 440, 1058, 185, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "cheer"], [s.t0 + 1.7, "sit"]], nohop: true })
-    + buddy("momo", 1630, 1050, 230, t, { aura: true, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tT - .1, "pointing"]] })
-    + TF(310, 1066, .8, backpack("#B592FF", "#7C4DE8")) + TF(545, 1068, .7, backpack("#5FD9C4", "#14A090")) + TF(1800, 1066, .8, backpack("#FF9A86", "#E0553A")) + HUD(t); };
+  return wetView(t, {}, [1.5 - .08 * clamp(u / 5), 800, 620]) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.66 * clamp(u / .2))}"/>`
+    + ln(250, "FEATHERS, SCALES", 150, "#fff", k1, 4) + ln(420, "OR MOIST SKIN?", 150, "#fff", k2, 4) + ln(630, "ONE GROUP OR THREE?", 150, P.sun, k3, 4)
+    + (t >= W(L, "lock") - .1 ? TF(960, 770, spring(t, W(L, "lock") - .1, .45), tpill(0, 0, "Lock in your answer. Hold on to it!", 40, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
 SC.game = (t, s) => gameScene(t, s, "a302", true);
 
-/* ============ 4 · Round Zero: the rematch from Episode 2 ============ */
-const mimObj = (t, f = {}) => `<ellipse cx="430" cy="606" rx="150" ry="34" fill="#6FCF72"/>` + TF(430, 600, .4, mimosa(t, f));
+/* ============ 4 · Round Zero: a warm-up ============ */
+const padObj = (inner) => `<ellipse cx="430" cy="600" rx="150" ry="36" fill="#5FB7C9"/>` + TF(430, 590, .6, lilyPad(190, "#66CC5C")) + inner;
 SC.r0 = (t, s) => { const L = "a401", tU = LT("u403"), tcap = LT("a404"), tc = W("a405", "one") - .1;
-  return lockN(t, { cards: ["We feed it", "It makes its own food", "It needs no food"], q: "How does a plant get its food?", tq: W(L, "so") - .1, tc: [W(L, "one"), W(L, "two"), W(L, "three")], ring0: MK("ring0_0"), dur: 5, lock: "a402", ans: 2, tAns: tU + .35,
-    obj: (tt) => mimObj(tt) + (tt >= tcap ? leafSparkles(tt, 430, 500, 150, 80, 8, 3) + TF(430, 350, spring(tt, tcap + .4, .4), tpill(0, 0, "making food", 30, P.sun, P.ink, { w: 700 })) : ""),
+  return lockN(t, { cards: ["Yes", "No"], q: "Can an animal make its own food?", tq: W(L, "can") - .1, tc: [W(L, "one"), W(L, "two")], ring0: MK("ring0_0"), dur: 5, lock: "a402", ans: 2, tAns: tU + .35,
+    obj: (tt) => padObj(TF(410, 586, .62, frog({ throat: tt, blink: frogBlink(tt) }))) + (tt >= tcap ? TF(430, 350, spring(tt, tcap + .4, .4), tpill(0, 0, "It must find food", 30, P.sun, P.ink, { w: 700 })) : ""),
     picks: ["pip", "basil", "momo"].map((who) => ({ who, id: "u403", word: "2" })), react: [[tU + .5, "pip", "cheer"], [tU + .5, "momo", "cheer"], [tU + .5, "basil", "cheer"], [tU + 2.0, "pip", "sit"], [tU + 2.0, "momo", "sit"], [tU + 2.0, "basil", "sit"]],
-    over: (tt) => bookCap(tt, "a404", "Plants do not eat but they can make their own food when there is light.", 590, { size: 44, maxW: 1150, t1: LT("a405") - .15 }) + coin(tt, tc, 960, 640, "+1", "if you showed two fingers") }); };
+    over: (tt) => bookCap(tt, "a404", "Animals are unable to make their own food. They depend on other living things for food.", 590, { size: 44, maxW: 1150, t1: LT("a405") - .15 }) + coin(tt, tc, 960, 640, "+1", "if you showed two fingers") }); };
 SCORE.push([W("a405", "one") - .1, 1, 1]);
 
 /* ============ 5 · today's goals ============ */
-SC.goals = (t, s) => goals3(t, s, [["What the folding plant is doing", TF(-10, 66, .23, mimosa(0, FOLD, { still: true }))], ["How living things respond to changes", TF(20, 50, .62, snail(.0))],
-  ["Why responding keeps living things safe", `<path d="M0 -58 L50 -40 V4 Q50 44 0 62 Q-50 44 -50 4 V-40z" fill="#fff" stroke="${P.ink}" stroke-width="6" stroke-linejoin="round"/><path d="M-22 2 L-6 20 L26 -18" fill="none" stroke="${P.leafDeep}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`]]);
+SC.goals = (t, s) => goals3(t, s, [["What an animal is", TF(-14, 56, .5, frog())], ["How scientists group animals", TF(-10, -6, .56, magnifier(80))], ["What makes a frog an amphibian", TF(0, 0, .36, swatch("skin"))]]);
 
-/* ============ 6 · Round 1: what happens next? ============ */
-SC.r1 = (t, s) => { const L = "a601", tT = W(L, "touched") + .1, tip = leafTip(0), px = 430 + tip[0] * .4, py = 600 + tip[1] * .4, t1 = W(L, "one", 1) - .1;
-  return lockN(t, { cards: ["Stays folded", "Opens again", "The leaf drops off"], q: "What happens next?", tq: W(L, "what") - .1, tc: [W(L, "one", 3), W(L, "two"), W(L, "three")], ring0: MK("ring0_1"), dur: 5, lock: "a602",
-    obj: (tt) => { const f0 = [ss(tT + .15, tT + 1.1, tt), ss(tT + 1.0, tT + 1.7, tt)], k = spring(tt, tT - .45, .35) * (1 - ss(tT + .5, tT + .8, tt)), dn = eo((tt - tT + .3) / .3);
-      return mimObj(tt, { 0: f0 }) + (k > .02 ? TF(px + 4, py - 6 - 30 * (1 - dn), .42 * k, `<g transform="rotate(24)">${pointer()}</g>`) : "") + OP(pulse(tt, tT, .02, .5), `<circle cx="${n2(px)}" cy="${n2(py)}" r="26" fill="none" stroke="${P.sun}" stroke-width="5"/>`)
-        + (tt >= t1 ? TF(1400, 742, spring(tt, t1, .4), tpill(0, 0, "One finger, one leaf.", 32, "#fff", P.ink, { w: 700 })) : ""); },
-    picks: [{ who: "basil", id: "a603", word: "1", x: true }, { who: "momo", id: "a604", word: "2" }, { who: "pip", id: "a605", word: "2" }], react: [[LE("a603") + .1, "basil", "arms_crossed"], [LE("a604") + .1, "momo", "pointing"], [LE("a605") + .1, "pip", "pointing"]] }); };
+/* ============ 6 · what an animal is ============ */
+SC.parts = (t, s) => { const L = "a501", e = eio((t - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMF[0], e), lerp(CAMW[1], CAMF[1], e), lerp(CAMW[2], CAMF[2], e)], tw_ = [W(L, "head") - .1, W(L, "body") - .1, W(L, "limbs") - .1], tQ = LT(L);
+  const lab = [["head", fp(CAMF, 70, -120), [1050, 330]], ["body", fp(CAMF, -40, -92), [330, 380]], ["limbs", fp(CAMF, 78, -28), [1090, 800]]], tL2 = W(L, "legs") - .1, h2 = fp(CAMF, -40, -30);
+  return wetView(t, { kf: false, fish: false }, cam) + OP(ramp(t, tQ, .3) * (1 - ramp(t, tw_[0] - .3, .3)), T(960, 150, "What is an animal?", 76, "#fff", { x: `stroke="${P.ink}" stroke-width="14" paint-order="stroke" stroke-linejoin="round"` }))
+    + lab.map(([nm, p, q], i) => t < tw_[i] ? "" : TF(0, 0, 1, OP(ramp(t, tw_[i], .2), `<path d="M${q[0]} ${q[1]} L${n2(p[0])} ${n2(p[1])}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(p[0])}" cy="${n2(p[1])}" r="8" fill="#fff"/>`) + TF(q[0], q[1], spring(t, tw_[i], .4) * (1 + .1 * pulse(t, tw_[i], .03, .5)), tpill(0, 0, nm, 54, "#fff", P.ink, { w: 700 })))).join("")
+    + (t >= tL2 ? OP(ramp(t, tL2, .2), `<path d="M1090 800 L${n2(h2[0])} ${n2(h2[1])}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(h2[0])}" cy="${n2(h2[1])}" r="8" fill="#fff"/>`) + TF(1090, 880, spring(t, tL2, .4), tpill(0, 0, "its four legs", 36, P.ink, "#fff", { w: 600 })) : "")
+    + buddy("pip", 1700, 1056, 250, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "thinking"], [tw_[0], "pointing"]] }) + HUD(t); };
+SC.mark1 = (t, s) => markScene(t, s, { id: "a503", sayId: "a502", who: "pip", n: "1 of 2", text: "Animals are living things that usually have parts such as a head, a body and limbs.", keys: ["head,", "body", "limbs."], size: 66, y: 256 });
 
-/* ============ 7 · we wait ============ */
-const SW = [800, 968, .78], LEAF2 = [MXY[0] + leafTip(2)[0], MXY[1] + leafTip(2)[1]];
-SC.waitw = (t, s) => { const L = "a701", tC = LT(L) + .3, dive = ei((t - (s.t1 - .55)) / .55), cam = [1.2 + 2.2 * dive, lerp(1050, LEAF2[0], dive), lerp(760, LEAF2[1], dive)], px = gx(cam, LEAF2[0]), py = gy(cam, LEAF2[1]), tP = W(L, "from") - .2;
-  return gardenView(t, { f: FOLD, items: TF(SW[0], SW[1], SW[2], stopwatch(Math.max(0, t - tC) * .3)) }, cam)
-    + OP(1 - dive, buddy("pip", 330, 1056, 230, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [tC + .8, "sit"]], jump: [[tC - .2, 22]] }) + buddy("momo", 1700, 1056, 240, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tP, "pointing"]] })
-      + speeded(t, tC + .3, s.t1, gx(cam, SW[0]) + 210, gy(cam, SW[1]) - 90) + (t >= tP ? TF(px + 6, py - 30 - 10 * Math.sin(t * 3), spring(t, tP, .4) * .7, `<g transform="rotate(18)">${pointer()}</g>`) : "") + HUD(t))
-    + wipe(t, s.t1, "#EAF8E4", px, py); };
+/* ============ 7 · where animals live; outer coverings; observable characteristics ============ */
+SC.homes = (t, s) => { const L = "a601", tw_ = [W(L, "land") - .5, W(L, "water") - .5, W(L, "both") - .3], labs = ["only on land", "only in water", "on land and in water"];
+  const pics = [landPic + TF(0, 130, .62, hen()), waterPic + TF(0, 10, .7, fishG({ wag: t })), waterPic + `<rect x="-300" y="-300" width="600" height="330" fill="#DDF4FF"/>` + TF(10, 60, .7, lilyPad(190, "#66CC5C")) + TF(-10, 52, .66, frog({ throat: t, blink: frogBlink(t) }))];
+  return bg("daystage") + pics.map((p, i) => { const k = spring(t, tw_[i], .45); return k < .02 ? "" : TF(960 + (i - 1) * 520, 900, k * (1 + .04 * pulse(t, tw_[i] + .4, .1, .8)), wboard(p, 400, 360, "hm" + i, { lab: labs[i], size: 38 })); }).join("")
+    + bookCap(t, L, "Some animals live only on land, while some live only in water. There are also some animals that can live both on land and in water.", 150, { size: 42, maxW: 1500 })
+    + buddy("basil", 150, 1064, 160, t, { aura: true, tag: false, in: s.t0 + .2 }) + buddy("momo", 1780, 1064, 160, t, { aura: true, tag: false, flip: true, in: s.t0 + .3 }) + HUD(t); };
+const COVERS = [["feathers", (t) => TF(0, 60, .58, kingfisher({ bob: 1.5 * Math.sin(t * 1.7) })), [-34, -10]], ["scales", (t) => TF(0, 0, .62, fishG({ wag: t })), [-10, 10]], ["moist skin", (t) => TF(-10, 60, .66, frog({ throat: t, blink: frogBlink(t), wet: 1 })), [-30, -20]]];
+SC.cover = (t, s) => { const L = "a602", t0 = s.t0 + .15, tl = W(L, "outer") - .1;
+  return bg("daystage") + COVERS.map(([nm, pic, pt], i) => { const x = 420 + i * 540, k = spring(t, t0 + i * .15, .45), k2 = spring(t, tl + i * .4, .45); return k < .02 ? "" : TF(x - 130, 520, k, pic(t))
+      + (k2 > .02 ? `<path d="M${x - 130 + pt[0]} ${520 + pt[1]} L${x + 70} 740" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="${n2(Math.min(1, k2))}"/><circle cx="${x - 130 + pt[0]}" cy="${520 + pt[1]}" r="9" fill="#fff" opacity="${n2(Math.min(1, k2))}"/>` + TF(x + 70, 740, .9 * k2, swatch(nm === "moist skin" ? "skin" : nm, t)) + TF(x + 70, 930, k2, tpill(0, 0, nm, 44, "#fff", P.ink, { w: 700 })) : ""); }).join("")
+    + bookCap(t, L, "Animals have different outer coverings as they live in different places.", 170, { size: 46, maxW: 1100, x: 740 }) + HUD(t); };
+SC.observe = (t, s) => { const a = "a701", b = "a702", tS = W(a, "similarities") - .1, tD = W(a, "differences") - .1, tSee = W(b, "see") - .2, tMe = W(b, "measure") - .2, tk = MK("kw_observe") + 2.0, mx = lerp(2100, 620 + 60 * Math.sin((t - tSee) * 1.4), eo((t - tSee) / .6));
+  const row = [TF(520, 800, .78, frog({ throat: t, blink: frogBlink(t) })), TF(960, 800, .66, kingfisher({ bob: 1.5 * Math.sin(t * 1.7) })), TF(1420, 730, .72, fishG({ wag: t }))].join("") + [520, 960, 1420].map((x) => `<ellipse cx="${x}" cy="806" rx="150" ry="14" fill="${P.ink}" opacity=".14"/>`).join("");
+  return bg("daystage") + row + bookCap(t, a, "Scientists have grouped the diversity of animals around us according to their similarities and differences.", 150, { size: 42, maxW: 1150, x: 740, t1: LT(b) - .2 })
+    + (t >= tS && t < LT(b) ? TF(740, 930, spring(t, tS, .4), tpill(0, 0, "What is the same?", 40, P.leafDeep, "#fff", { w: 700 })) : "") + (t >= tD && t < LT(b) ? TF(1190, 930, spring(t, tD, .4), tpill(0, 0, "What is different?", 40, P.orangeDeep, "#fff", { w: 700 })) : "")
+    + (t >= tSee ? TF(mx, 690, 1.25, magnifier(110)) + TF(960, 420, spring(t, tSee + .2, .4), tpill(0, 0, "things we can see", 44, "#fff", P.ink, { w: 700 })) : "") + (t >= tMe ? TF(520, 870, spring(t, tMe, .4), ruler(300)) + TF(960, 510, spring(t, tMe + .1, .4), tpill(0, 0, "or measure", 44, "#fff", P.ink, { w: 700 })) : "")
+    + (t >= tk ? OP(ramp(t, tk, .3), `<g filter="url(#dropS)"><rect x="330" y="962" width="1260" height="88" rx="20" fill="url(#gPaper)"/><rect x="330" y="962" width="14" height="88" rx="7" fill="${P.sun}"/></g><rect x="372" y="1010" width="${n2(tw("observable characteristics:", 40, 700, "Atkinson Hyperlegible"))}" height="22" rx="5" fill="#FFD75A"/><text x="372" y="1020" font-family="Atkinson Hyperlegible" font-weight="700" font-size="40" fill="${P.ink}">observable characteristics: things you can see or measure</text>`) : "")
+    + buddy("pip", 150, 1064, 160, t, { aura: true, tag: false, in: s.t0 + .2, poses: [[s.t0, "sit"], [tSee, "pointing"]] }) + HUD(t); };
 
-/* ============ 8 · the reveal: not shy. Responding! ============ */
-SC.reveal = (t, s) => { const a = "a801", b = "a802", e = eo((t - s.t0) / 1.0), cam = [lerp(2.6, 1.12, e), lerp(LEAF2[0], 1150, e), lerp(LEAF2[1], 770, e)], tA = W(a, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0;
-  return gardenView(t, { items: TF(SW[0], SW[1], SW[2], stopwatch(.92)) + TF(1440, 880, .5, ansCard(2, "Opens again", { lit })) }, cam)
-    + (t >= s.t0 + .9 ? TF(gx(cam, SW[0]), gy(cam, SW[1]) - 205, spring(t, s.t0 + .9, .4), tpill(0, 0, "a few minutes later", 32, P.ink, "#fff", { w: 600 })) : "")
-    + buddy("pip", 330, 1056, 230, t, { aura: true, in: s.t0 + .5, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]] }) + buddy("basil", 122, 1060, 170, t, { aura: true, tag: false, in: s.t0 + .6, poses: [[s.t0, "sit"], [tA, "surprised"], [tA + 1.8, "sit"]] })
-    + buddy("momo", 1760, 1056, 230, t, { aura: true, flip: true, in: s.t0 + .55, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]] })
-    + bookCap(t, b, "The mimosa plant is commonly called “touch-me-not”.", 170, { size: 50 }) + wipe(t, s.t0, "#EAF8E4") + HUD(t); };
-const leafPic = (f, dd, touch) => `<rect x="-200" y="-420" width="400" height="360" fill="#CFEFC6"/><ellipse cx="0" cy="-70" rx="220" ry="50" fill="#8FDB7A"/>` + TF(-150, -220, 1, `<g transform="rotate(${n2(-8 + 30 * dd)})">${mleaf(300, f)}</g>`) + `<path d="M-150 -220 Q-170 -140 -160 -70" stroke="#7A9A5A" stroke-width="8" fill="none" stroke-linecap="round"/>` + (touch ? TF(132, -262, .62, `<g transform="rotate(20)">${pointer()}</g>`) : "");
-SC.replay = (t, s) => { const L = "a803", t1 = W(L, "touch") - .25, t2 = W(L, "mimosa") - .25, t3 = W(L, "it") - .2, f2 = ss(t2 + .15, t2 + 1.0, t), cards = [[480, t1, leafPic(0, 0, true), "a change", W(L, "change")], [960, t2, leafPic(f2, ss(t2 + .9, t2 + 1.4, t), false), "it responds", W(L, "responded")], [1440, t3 + .5, leafPic(0, 0, false), "a few minutes later", t3 + .9]];
-  return gardenView(t, {}, [1.12, 1150, 770]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".45"/>`
-    + cards.map(([x, t0, pic, lab, tl], i) => { const k = spring(t, t0, .45); return k < .02 ? "" : TF(x, 960, k * (1 + .04 * pulse(t, tl, .04, .5)), picCard(pic, t >= tl - .1 ? lab : "", { w: 420, h: 480, id: "rp" + i, size: 38 }) + (t >= tl - .1 ? OP(pulse(t, tl, .04, .7), `<rect x="-200" y="-112" width="400" height="80" rx="20" fill="${P.sun}" opacity=".5"/>`) : "")); }).join("") + HUD(t); };
-SC.mark1 = (t, s) => markScene(t, s, { id: "a805", sayId: "a804", who: "basil", n: "1 of 2", text: "Living things respond to changes in the environment.", keys: ["respond", "to", "changes", "environment."], size: 78, y: 256 });
-const CAMN = [.95, 2400, 800];
-SC.notshy = (t, s) => { const a = "a806", b = "a807", tb = LT(b) - .1, ts = MK("stamp1") + .25, tc = W("a808", "one") - .1;
-  return gardenView(t, {}, CAMN) + TF(600, 1056, .6, trailCard(t, { 1: ts })) + stampPress(t, ts, 600, 1056, .6, 1)
-    + buddy("basil", 240, 1056, 280, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "arms_crossed"], [tb - .05, "sit"], [LE(b) + .2, "cheer"], [LE(b) + 2.2, "sit"]] })
-    + buddy("momo", 985, 1062, 190, t, { aura: true, tag: false, in: s.t0 + .2, poses: [[s.t0, "sit"], [ts + .1, "cheer"], [ts + 1.6, "sit"]], jump: [[ts - .25, 30]], nohop: true })
-    + thought(t, s.t0 + .4, tb - .2, 430, 600, "shy?", { dir: -1, col: P.basil }) + thought(t, tb + .5, LE(b) + 1.6, 520, 470, "responding", { dir: -1, col: P.basil, size: 58, ink: P.leafDeep }) + say(b, 560, 640, t, { size: 48, tail: -150 })
-    + bookCap(t, a, "The mimosa plant folds its leaves to protect itself from harm.", 170, { size: 48, maxW: 1000, x: 800, t1: tb }) + coin(t, tc, 1420, 360, "+1", "if you showed two fingers") + HUD(t); };
-SCORE.push([W("a808", "one") - .1, 2, 2]);
+/* ============ 8 · Round 1: where can a frog live? ============ */
+SC.r1 = (t, s) => { const L = "a801", tSp = W(L, "splash") - .05, tSw = W(L, "swims") - .1;
+  return lockN(t, { cards: ["Only on land", "Only in water", "Both"], q: "Where can a frog live?", tq: W(L, "where") - .1, tc: [W(L, "one", 1), W(L, "two"), W(L, "three")], ring0: MK("ring0_1"), dur: 5, lock: "a802",
+    obj: (tt) => { const j = clamp((tt - tSp) / .45), inW = tt >= tSp + .45, sw = inW ? .5 + .5 * Math.sin((tt - tSp) * 4) : 0, fx = lerp(400, 500, eio(j)) + (inW ? 14 * Math.sin((tt - tSp) * 1.1) : 0), fy = lerp(566, 640, j) - 70 * Math.sin(Math.PI * j);
+      return `<ellipse cx="430" cy="610" rx="165" ry="44" fill="#5FB7C9"/>` + TF(380, 570, .5, lilyPad(190, "#66CC5C")) + TF(fx, fy, .5, frog({ ext: inW ? .35 + .55 * sw : j > 0 ? 1 : 0, blink: frogBlink(tt), throat: tt }))
+        + (inW ? `<ellipse cx="${n2(fx)}" cy="632" rx="${n2(70 + 40 * Math.min(1, tt - tSp - .45))}" ry="12" fill="none" stroke="#fff" stroke-width="5" opacity="${n2(clamp(1.6 - (tt - tSp)))}"/><rect x="${n2(fx - 80)}" y="622" width="160" height="40" fill="#5FB7C9" opacity=".55"/>` : "")
+        + OP(pulse(tt, tSp + .45, .02, .6), `<g stroke="#fff" stroke-width="6" stroke-linecap="round"><path d="M${n2(fx - 40)} 610 l-22 -34 M${n2(fx)} 600 v-44 M${n2(fx + 40)} 610 l22 -34"/></g>`); },
+    picks: [{ who: "momo", id: "a803", word: "2", x: true }, { who: "pip", id: "a804", word: "3" }, { who: "basil", id: "a805", word: "3" }], react: [[LE("a803") + .1, "momo", "thinking"], [LE("a804") + .1, "pip", "pointing"], [LE("a805") + .1, "basil", "cheer"]] }); };
 
-/* ============ 9 · you respond too ============ */
-SC.eyes = (t, s) => { const L = "a901", tF = W(L, "bright") - .1, tE = W(L, "eyelids") + .25, u = clamp((t - s.t0) / (tF - s.t0 + .2)), x = lerp(300, 1010, eio(u)), walk = u < 1 ? Math.sin((t - s.t0) * 9) : 0, shut = t >= tE, fl = pulse(t, tF + .15, .12, .8);
-  return CAM(bg("patch"), 1.25, 420, 640) + `<rect x="0" y="0" width="640" height="1080" fill="${P.ink}" opacity=".34"/><rect x="640" y="0" width="1280" height="1080" fill="#FFF3B8" opacity="${n2(.12 + .3 * fl)}"/>`
-    + TF(1530, 250, 2.6 * (1 + .12 * fl), sunHeat()) + TF(x, 1010, 1.75, kid({ legL: 22 * walk, legR: -22 * walk, armL: 14 + 16 * walk, armR: shut ? 150 + 6 * wob(t, tE, .4) : 14 - 16 * walk, eyes: shut ? "shut" : "", mouth: shut ? "flat" : "smile", lean: shut ? -3 : 0 }))
-    + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.6 * fl)}"/>`
-    + buddy("momo", 1700, 1056, 230, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tE, "surprised"], [tE + 1.5, "sit"]] }) + HUD(t); };
-SC.mark2 = (t, s) => markScene(t, s, { id: "a903", sayId: "a902", who: "pip", n: "2 of 2", text: "The ability to respond to changes in our environment helps to protect us from danger and keeps us safe.", keys: ["respond", "changes", "protect", "danger", "keeps", "safe."], size: 60, y: 256 });
-SC.ledge = (t, s) => { const a = "a904", b = "a905", tG = W(b, "grows") - .2, ln = LEDGE_DIR * 30 * eio((t - tG) / 2.2), cam = [lerp(1.5, 1.7, eio((t - s.t0) / 6)), 1150, 720];
-  return hotelView(t, { sign: 0, rooms: [0, 0, 0], board: 0, clock: 10, items: `<g opacity=".55" filter="url(#ghostF)">${gPlant({ lean: 0 }, 1000, 1)}</g>` + gPlant({ lean: ln, sway: .3 * Math.sin(t) }, 1000, 1) }, cam)
-    + `<circle cx="1800" cy="420" r="380" fill="#FFE9A8" opacity="${n2(.5 + .1 * Math.sin(t * 1.5))}" filter="url(#b60)"/><path d="M1920 300 L1000 1080 H1600 L1920 760z" fill="#FFF3B8" opacity=".25" filter="url(#b30)"/>`
-    + bookCap(t, a, "Plants are also able to respond to changes in the environment.", 170, { size: 48, maxW: 1000, x: 800 }) + (t >= tG + .6 ? TF(1500, 700, spring(t, tG + .6, .4), tpill(0, 0, "towards the sunlight", 40, P.sun, P.ink, { w: 700 })) : "") + HUD(t); };
+/* ============ 9 · be the frog ============ */
+SC.waitw = (t, s) => { const L = "a901", dive = ei((t - (s.t1 - .55)) / .55), FX = FROGXY[0] - 10, FY = FROGXY[1] - 90, cam = [1.25 + 2.4 * dive, lerp(900, FX, dive), lerp(640, FY, dive)], tP = W(L, "be") - .2;
+  return wetView(t, {}, cam)
+    + OP(1 - dive, buddy("pip", 300, 1056, 230, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [s.t0 + 1.6, "sit"]] }) + buddy("momo", 1680, 1056, 240, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tP, "cheer"]], nohop: true })
+      + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the frog!", 70, P.sun, P.ink, { w: 700 })) : "") + HUD(t))
+    + wipe(t, s.t1, "#DFF6E6", gx(cam, FX), gy(cam, FY)); };
 
-/* ============ 10 · HOLD ON! Pip's list ============ */
-const NB = [760, 1040, .86], RG = [1470, 800];
-const listView = (t, o = {}) => gardenView(t, { liz: o.liz === undefined ? 1 : o.liz }) + (o.mid || "") + TF(NB[0], NB[1], NB[2], notebook(t, o));
-const lizShow = (t, t0) => 1 - ramp(t, t0, .25) * (1 - ramp(t, t0 + 3.0, .2));
-SC.list = (t, s) => { const a = "a1001", b = "a1002", c = "a1003", r0 = MK("ring0_2"), bell = MK("bell_2"), rs = ringState(t, r0, 5), tl = [W(a, "snail") - .1, W(a, "ice") - .1, W(a, "door") - .1], tLz = LT(a) + 1.2;
-  const lit = [0, 1, 2].map((i) => Math.max(t < LT(b) ? pulse(t, tl[i], .05, 1.1) : 0, t >= r0 && t < bell ? (Math.floor((t - r0) / .55) % 3 === i ? .6 + .4 * rs.tick : 0) : 0)), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1;
-  const cause = [0, spring(t, W(c, "sun") - .1, .4), spring(t, W(c, "wind") - .1, .4)], tg = spring(t, W(c, "non-living") - .1, .4), ring = t >= tX && t < bell + .8;
-  return listView(t, { lit, cause, tags: [0, tg, tg], liz: lizShow(t, tLz) })
-    + buddy("pip", 150, 1060, 205, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT(a) - .1, "sit"], [LE(a) + .15, "cheer"], [LT(b) + .3, "sit"], [W(c, "they") - .2, "oops"], [LE(c) - .5, "sit"]], nohop: true })
-    + say(a, 330, 330, t, { size: 40, tail: -150, x: true, maxW: 620 })
+/* ============ 10 · the reveal: an amphibian ============ */
+SC.reveal = (t, s) => { const a = "a1001", e = eo((t - s.t0) / 1.0), cam = [lerp(2.8, 1.1, e), lerp(FROGXY[0], 960, e), lerp(FROGXY[1] - 90, 580, e)], tA = W(a, "three") - .1, lit = t >= tA ? spring(t, tA, .45) : 0;
+  return wetView(t, { frog: { wet: 1 } }, cam) + TF(1330, 990, .5, ansCard(3, "Both", { lit }))
+    + buddy("pip", 300, 1056, 230, t, { aura: true, in: s.t0 + .5, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]] }) + buddy("basil", 110, 1060, 170, t, { aura: true, tag: false, in: s.t0 + .6, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]], nohop: true })
+    + buddy("momo", 1700, 1056, 230, t, { aura: true, flip: true, in: s.t0 + .55, poses: [[s.t0, "sit"], [tA, "surprised"], [tA + 1.8, "sit"]] })
+    + (t >= tA + .3 ? TF(700, 250, spring(t, tA + .3, .45), tpill(0, 0, "On land AND in water", 60, P.sun, P.ink, { w: 700 })) : "") + wipe(t, s.t0, "#DFF6E6") + HUD(t); };
+SC.mark2 = (t, s) => markScene(t, s, { id: "a1003", sayId: "a1002", who: "momo", n: "2 of 2", text: "Amphibians are animals that can live both on land and in water. Amphibians usually have four legs.", keys: ["Amphibians", "land", "water.", "four", "legs."], size: 62, y: 256 });
+SC.skin = (t, s) => { const a = "a1004", b = "a1005", e = eio((t - s.t0) / 1.0), cam = [lerp(1.1, CAMF[0], e), lerp(960, CAMF[1], e), lerp(580, CAMF[2], e)], tS = W(a, "skin") - .1, tLg = W(a, "lungs") - .1, tM = W(b, "moist") - .1, tD = W(b, "drying") - .2;
+  const pS = fp(CAMF, -40, -112), pL = fp(CAMF, 40, -52), wet = t >= tM ? .5 + .5 * Math.sin((t - tM) * 4) : 0;
+  let sp = ""; if (t >= tM) for (let i = 0; i < 7; i++) { const p = fp(CAMF, -80 + i * 28, -118 - 10 * Math.sin(i * 1.7)), v = ((t - tM) * .9 + i * .37) % 1; sp += `<g transform="translate(${n2(p[0])} ${n2(p[1] - 6)}) scale(${n2(.5 * Math.sin(Math.PI * v))}) rotate(${n2(60 * v)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`; }
+  return wetView(t, { kf: false, fish: false, frog: { wet } }, cam) + sp
+    + (t >= tS && t < LT(b) + 9 ? OP(ramp(t, tS, .2), `<path d="M330 400 L${n2(pS[0])} ${n2(pS[1])}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(pS[0])}" cy="${n2(pS[1])}" r="8" fill="#fff"/>`) + TF(330, 400, spring(t, tS, .4), tpill(0, 0, "skin", 54, "#fff", P.ink, { w: 700 })) : "")
+    + (t >= tLg && t < LT(b) - .2 ? OP(ramp(t, tLg, .2), `<path d="M1150 560 L${n2(pL[0])} ${n2(pL[1])}" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(pL[0])}" cy="${n2(pL[1])}" r="8" fill="#fff"/>`) + TF(1150, 560, spring(t, tLg, .4), tpill(0, 0, "lungs (inside its body)", 44, "#fff", P.ink, { w: 700 })) : "")
+    + (t >= tD ? TF(1400, 420, 2.2 * spring(t, tD, .45), sunHeat()) + TF(1400, 560, spring(t, tD + .2, .4), tpill(0, 0, "It does not dry out", 40, P.sun, P.ink, { w: 700 })) : "")
+    + bookCap(t, a, "Amphibians can breathe through their skin as well as their lungs.", 150, { size: 44, maxW: 900, x: 590, t1: LT(b) - .2 }) + bookCap(t, b, "They have protective moist skin to prevent them from drying out when they are on land.", 150, { size: 44, maxW: 900, x: 590 })
+    + buddy("basil", 1740, 1060, 210, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tM, "surprised"], [tM + 1.6, "sit"]] }) + HUD(t); };
+const EGGXY = [800, 770];
+SC.eggs = (t, s) => { const a = "a1006", b = "a1007", c = "a1008", ts = MK("stamp1") + .25, tc = W("a1009", "one") - .1, tb = LT(b) - .4, e = eio((t - tb) / .9), cam = [lerp(2.3, 1.06, e), lerp(EGGXY[0] - 60, 960, e), lerp(EGGXY[1] - 30, 580, e)];
+  const tw_ = [W(b, "frogs") - .1, W(b, "toads") - .1, W(b, "salamanders") - .1], pics = [landPic + TF(-6, 110, .66, frog()), landPic + TF(-6, 110, .66, frog({ pal: TOADPAL, warts: true })), landPic + TF(10, 96, .7, salamander())], labs = ["frog", "toad", "salamander"];
+  return wetView(t, { items: TF(EGGXY[0], EGGXY[1], .8, frogEggs()) + `<ellipse cx="${EGGXY[0]}" cy="${EGGXY[1]}" rx="110" ry="50" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(.5 + .3 * Math.sin(t * 2))}"/>` }, cam)
+    + (t < tb + .3 ? OP(1 - ramp(t, tb, .3), TF(gx(cam, EGGXY[0]) + 330, gy(cam, EGGXY[1]) - 160, spring(t, W(a, "eggs") - .1, .4), tpill(0, 0, "eggs, in water", 46, "#fff", P.ink, { w: 700 }))) : "")
+    + pics.map((p, i) => { const k = spring(t, tw_[i], .45); return k < .02 ? "" : TF(600 + i * 320, 1052, .82 * k, wboard(p, 330, 290, "am" + i, { lab: labs[i], size: 40 })); }).join("")
+    + (t >= tb ? tcard(t, { 0: ts }) + stampPress(t, ts, CARD[0], CARD[1], CARD[2], 0) : "")
+    + wPip(t, { in: tb + .2 }) + wBasil(t, { in: tb + .3 }) + wMomo(t, { in: tb + .2, tag: true, poses: [[tb, "sit"], [LE(c) + .1, "cheer"], [LE(c) + 2.2, "sit"]], nohop: true }) + say(c, 1560, 560, t, { size: 46, tail: 190, maxW: 560 })
+    + bookCap(t, a, "Amphibians lay their eggs in water.", 150, { size: 48, x: 590, t1: tb }) + bookCap(t, b, "Frogs, toads and salamanders are amphibians.", 150, { size: 44, x: 590, maxW: 900 }) + coin(t, tc, 1180, 420, "+1", "if you showed three fingers") + HUD(t); };
+SCORE.push([W("a1009", "one") - .1, 2, 2]);
+
+/* ============ 11 · HOLD ON! Basil's rule ============ */
+const RB = [820, 1046, .9], RG = [1640, 700];
+function ruleBoard(t, o = {}) { const pics = [waterPic + TF(-10, 20, .6, frog({ ext: .5 + .4 * Math.sin(t * 4), swim: false })) + `<path d="M-200 -40 q30 -14 60 0 q30 14 60 0 q30 -14 60 0 q30 14 60 0 q30 -14 60 0 q30 14 60 0" fill="none" stroke="#fff" stroke-width="6" opacity=".7"/>`, waterPic + `<rect x="-300" y="-300" width="600" height="330" fill="#DDF4FF"/>` + TF(0, 34, .8, duck(t))]; let s = "";
+  pics.forEach((p, i) => { const x = -250 + i * 500, k = (o.pk || [1, 1])[i]; if (k < .02) return; s += TF(x, -150, k, `<clipPath id="rb${i}"><rect x="-190" y="-130" width="380" height="250" rx="20"/></clipPath><rect x="-198" y="-138" width="396" height="266" rx="26" fill="#fff" stroke="#C9D2E8" stroke-width="5"/><g clip-path="url(#rb${i})">${p}</g>`)
+      + ((o.fish || 0) > .02 ? TF(x + 110, -276, o.fish, `<g transform="rotate(8)">${tpill(0, 0, "a fish?", 36, P.basil, "#fff", { w: 700, nosh: true })}</g>`) : "") + ((o.cov || 0) > .02 ? TF(x, 130, o.cov, tpill(0, 0, ["moist skin", "feathers"][i], 34, P.leafDeep, "#fff", { w: 700, nosh: true })) : ""); });
+  return `<ellipse cx="0" cy="4" rx="330" ry="18" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-200 0 L-120 -110 M200 0 L120 -110" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><rect x="-250" y="-14" width="500" height="20" rx="10" fill="#8A5A36"/>
+  <g filter="url(#drop)"><rect x="-540" y="-640" width="1080" height="570" rx="30" fill="${P.basil}"/><rect x="-520" y="-622" width="1040" height="534" rx="18" fill="url(#gPaper)"/></g>
+  ${T(0, -530, "If it swims, it is a fish.", 68, P.ink)}${(o.x || 0) > .02 ? `<path d="M-400 -552 H400" stroke="${P.coral}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${n2(800 * Math.min(1, o.x))} 900"/>` + TF(-462, -552, Math.min(1.1, o.x), xBadge(30)) : ""}
+  <g transform="translate(0 -170)">${s}</g>`; }
+const lizShow = (t, t0) => 1 - ramp(t, t0, .25) * (1 - ramp(t, t0 + 3.2, .2));
+SC.rule = (t, s) => { const a = "a1101", b = "a1102", c = "a1103", d = "a1104", r0 = MK("ring0_2"), bell = MK("bell_2"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, ring = t >= tX && t < bell + .8;
+  const pk = [spring(t, W(a, "frog") - .15, .4), spring(t, W(a, "duck") - .15, .4)], fish = spring(t, W(a, "so") - .1, .4) * (1 - ramp(t, W(c, "many") - .1, .3)), xk = spring(t, W(c, "many") - .1, .4), cov = spring(t, W(c, "look") - .1, .4), tLk = W(c, "look") - .1;
+  return wetView(t, { liz: lizShow(t, LT(a) + 1.0) }, CAMW) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".18"/>` + TF(RB[0], RB[1], RB[2], ruleBoard(t, { pk, fish, x: xk, cov }))
+    + buddy("basil", 170, 1060, 230, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "cheer"], [LT(a) - .1, "sit"], [LE(a) + .15, "arms_crossed"], [W(c, "many") - .1, "surprised"], [LT(d) - .12, "oops"], [LE(d) + .1, "sit"]], nohop: true })
+    + say(a, 420, 300, t, { size: 40, tail: -190, x: true, maxW: 620 }) + say(d, 430, 330, t, { size: 44, tail: -190, maxW: 600 })
     + (ring ? OP(1 - ss(bell + .5, bell + .8, t), TF(RG[0], RG[1], spring(t, tX, .4), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : rs.frac, t < r0 ? 5 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RG[0], RG[1] + 6, .5, crossedArms()) })}</g>`) + youPill(RG[0], RG[1] - 178, 1.0) + tpill(RG[0], RG[1] + 220, "cross your arms", 30, P.ink, "#fff")) : "")
-    + stamp(t, tH, 800, 420, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1470, 760, "+1", "arms crossed") + HUD(t); };
-SCORE.push([W("a1003", "one") - .1, 3, 2]);
-SC.snail = (t, s) => { const a = "a1004", b = "a1005", tT = W(a, "touched") - .15, tP = W(a, "pulled") - .1, tO = LE(a) + .2, pull = ss(tP, tP + .45, t) * (1 - ss(tO, tO + 2.4, t)), k = spring(t, tT - .35, .35) * (1 - ss(tT + .45, tT + .75, t)), tR = W(a, "responding") - .2, tm = LT(b) + .2;
-  return CAM(bg("patch"), 2.3, 1500, 690) + `<ellipse cx="760" cy="900" rx="620" ry="70" fill="#5A3A28" opacity=".5" filter="url(#b10)"/>` + TF(820, 880, 2.1, snail(pull))
-    + (k > .02 ? TF(560, 770 - 30 * (1 - eo((t - tT + .3) / .3)), .8 * k, `<g transform="rotate(-30)">${pointer()}</g>`) : "") + OP(pulse(t, tT, .02, .5), `<circle cx="556" cy="772" r="40" fill="none" stroke="${P.sun}" stroke-width="6"/>`)
-    + standTag(640, 1010, "living thing · it responds", spring(t, tR, .45), 36, P.leafDeep, "#fff")
-    + TF(1585, 1040, .36, notebook(t, { pull: 1, marks: [["tick", spring(t, tm + .9, .4)], ["x", spring(t, tm, .4)], ["x", spring(t, tm + .45, .4)]] }))
-    + buddy("pip", 1200, 1062, 215, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "thinking"], [LT(b) - .12, "sit"], [LE(b) + .1, "cheer"]], nohop: true }) + say(b, 1230, 700, t, { size: 44, tail: 0, maxW: 560 })
-    + finePrint(t, tT, "Look. Do not pick it up. Wash your hands.", 420, 1034) + HUD(t); };
-
-/* ============ 11 · your turn: one finger, one leaf ============ */
-SC.tryit = (t, s) => { const L = "a1101", tw_ = [W(L, "one") - .1, W(L, "stem") - .1, W(L, "never") - .1, W(L, "wash") - .1], tB = W(L, "find") - .2, tS = W(L, "mimosa") + .4;
-  const pics = [`<g transform="translate(-74 30) rotate(-14)">${mleaf(160, 0)}</g>` + TF(76, -12, .4, `<g transform="rotate(18)">${pointer()}</g>`),
-    `<path d="M-70 50 Q0 20 70 -50" stroke="#7A9A5A" stroke-width="22" stroke-linecap="round" fill="none"/>${[[-40, 30], [-6, 8], [30, -20]].map(([x, y]) => `<path d="M${x} ${y} l-8 -30 l22 16z" fill="#A46A4A" stroke="#7A4A2A" stroke-width="3" stroke-linejoin="round"/>`).join("")}`,
-    TF(-10, 62, .3, mimosa(0, {}, { still: true })) + `<g transform="translate(40 -30) rotate(120) scale(.5)" fill="${SKIN}" stroke="${SKIN2}" stroke-width="8"><rect x="-70" y="-34" width="92" height="76" rx="30"/><rect x="-10" y="-34" width="80" height="34" rx="17"/></g><path d="M56 -70 l14 -22 M78 -58 l24 -12" stroke="${P.coral}" stroke-width="6" stroke-linecap="round"/>` + TF(-92, -56, 1, xBadge(24)),
-    `<rect x="-14" y="-76" width="28" height="40" rx="6" fill="#8D97B2" stroke="#5E6788" stroke-width="4"/><rect x="-44" y="-86" width="88" height="16" rx="8" fill="#3A8DFF" stroke="#1F5FD0" stroke-width="4"/><path d="M0 -34 V26" stroke="#8CC8FF" stroke-width="12" stroke-linecap="round"/><g fill="${SKIN}" stroke="${SKIN2}" stroke-width="4"><rect x="-72" y="18" width="76" height="40" rx="18" transform="rotate(14 -34 38)"/><rect x="-4" y="18" width="76" height="40" rx="18" transform="rotate(-14 34 38)"/></g><circle cx="-40" cy="2" r="7" fill="#fff" stroke="#8CC8FF" stroke-width="3"/><circle cx="44" cy="-4" r="9" fill="#fff" stroke="#8CC8FF" stroke-width="3"/>`];
-  let grid = ""; pics.forEach((p, i) => { const k = spring(t, tw_[i], .4), lit = pulse(t, tw_[i], .05, 1.0), x = -150 + (i % 2) * 300, y = -420 + Math.floor(i / 2) * 215; if (k > .02) grid += `<g transform="translate(${x} ${y}) scale(${n2(k * (1 + .05 * lit))})">${lit > .05 ? `<rect x="-140" y="-102" width="280" height="204" rx="26" fill="${P.sun}" opacity="${n2(.85 * lit)}" filter="url(#b10)"/>` : ""}<rect x="-132" y="-94" width="264" height="188" rx="20" fill="#EAF6E0" stroke="#C9D2E8" stroke-width="5"/>${p}</g>`; });
-  const board = `<ellipse cx="0" cy="4" rx="300" ry="16" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-200 0 V-120 M200 0 V-120" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-330" y="-640" width="660" height="560" rx="28" fill="url(#gPaper)" stroke="#8A5A36" stroke-width="8"/></g><g filter="url(#dropS)"><rect x="-150" y="-676" width="300" height="76" rx="38" fill="url(#gSun)"/></g>${T(0, -620, "TRY IT", 50, P.ink, { ls: 8 })}` + grid;
-  return gardenView(t, { items: TF(1590, 985, .72, stopwatch(Math.max(0, t - tS) * .5)) }) + TF(420, 1050, spring(t, tB, .5), board)
-    + (t >= tS ? TF(1590, 800, spring(t, tS, .4), tpill(0, 0, "How many seconds to fold?", 32, P.ink, "#fff", { w: 600 })) : "")
-    + buddy("basil", 900, 1064, 180, t, { aura: true, tag: false, in: s.t0 + .2, poses: [[s.t0, "cheer"], [s.t0 + 1.8, "sit"]], nohop: true }) + HUD(t); };
+    + (t >= tLk ? TF(1600, 640, spring(t, tLk, .45), `<g transform="translate(0 -120)">${magnifier(70)}</g>` + tpill(0, 40, "Look at the", 40, P.sun, P.ink, { w: 700 }) + tpill(0, 118, "outer covering", 46, P.sun, P.ink, { w: 700 })) : "")
+    + stamp(t, tH, 820, 420, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1600, 420, "+1", "arms crossed") + HUD(t); };
+SCORE.push([W("a1103", "one") - .1, 3, 2]);
 
 /* ============ 12 · score hand, the lizard ============ */
-SC.final = (t, s) => { const L = "a1201"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]], TF(1260, 1062, .42, trailCard(t, { 1: 0 }))); };
-SC.liz = (t, s) => { const L = "a1202", tRun = W(L, "runs") - .1, hide = ramp(t, tRun + .35, .3), mx = lerp(2150, 1830, eo((t - tRun) / .5));
-  return lizReveal(t, s, L, listView(t, { liz: hide, mid: buddy("momo", mx, 1062, 200, t, { aura: true, tag: false, flip: true }) }), SIGN[0] + 2, SIGN[1] - 120, W(L, "is") - .1, "Is that responding?", -110); };
+SC.final = (t, s) => { const L = "a1201"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]], TF(1260, 1062, .42, trailCard(t, { 0: 0 }))); };
+SC.liz = (t, s) => { const L = "a1202"; return lizReveal(t, s, L, wetView(t, { liz: 0 }, CAMW), gx(CAMW, LIZXY[0] - 6), gy(CAMW, LIZXY[1] - 4), W(L, "does") - .1, "On land, in water, or both?", 60); };
 
-/* ============ 13 · the cliffhanger: five eggs in Kranji ============ */
-SC.cliff = (t, s) => { const L = "a1301", tH = W(L, "this") - .3, tQ = W(L, "will") - .1, tP = W(L, "find") - .1, tap = MK("eggtap") + .2;
-  if (t < tH) { const u = t - s.t0, hills = (sp, y, col, r) => { let h = ""; for (let i = -1; i < 5; i++) h += `<ellipse cx="${n2(i * 620 - (u * sp) % 620 + 300)}" cy="${y}" rx="${r}" ry="${n2(r * .32)}" fill="${col}"/>`; return h; }; let dash = ""; for (let i = -1; i < 9; i++) dash += `<rect x="${n2(i * 260 - (u * 900) % 260)}" y="1010" width="130" height="14" rx="7" fill="#fff" opacity=".7"/>`;
-    const disc = (who, lx) => buddy(who, 960 + lx * .9, 908 - 198 * .9, 118, t, { aura: true, tag: false, shadow: false, rim: false });
-    return `<rect width="1920" height="1080" fill="url(#mSky)"/>${hills(60, 760, "#8FD38A", 520)}${hills(160, 860, "#6DBF7E", 480)}<rect y="880" width="1920" height="200" fill="#6E6A92"/><rect y="880" width="1920" height="14" fill="#fff" opacity=".4"/>${dash}`
-      + TF(960, 990, .9, bus(t)) + disc("pip", -400) + disc("basil", -130) + disc("momo", 140) + TF(960 - 318 * .9, 990 - 196 * .9, .14, trailCard(t, { 1: 0 })) + lowerPill(60, 150, "Next stop:", "a farm in Kranji") + wipe(t, tH, "#FFF3B8") + HUD(t); }
-  const cam = [lerp(1.3, 1.4, eio((t - tH) / 6)), 240, 640], tk = pulse(t, tap, .02, .3);
-  return farmView(t, { nest: henOnNest(t + 6 * tk), cat: false, items: TF(905, 880, .56, `<ellipse cx="0" cy="4" rx="90" ry="12" fill="${P.ink}" opacity=".25"/><path d="M-50 0 L-30 -30 H30 L50 0z" fill="url(#fWood)" stroke="#8A5E34" stroke-width="4"/><g filter="url(#dropS)"><rect x="-90" y="-250" width="180" height="230" rx="30" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="7"/></g>${T(0, -84, "?", 170, "#3B2A8C")}`) }, cam)
-    + OP(tk, `<g stroke="${P.sun}" stroke-width="6" stroke-linecap="round"><path d="M${gx(cam, 470) - 40} ${gy(cam, 690)} l-18 -22 M${gx(cam, 470)} ${gy(cam, 690) - 10} v-28 M${gx(cam, 470) + 40} ${gy(cam, 690)} l18 -22"/></g>`)
-    + ["pip", "basil", "momo"].map((w, i) => buddy(w, 1180 + i * 250, 1062, 185, t, { aura: true, tag: false, in: tH + .15 + i * .1, poses: [[tH, "sit"], [tQ, w === "basil" ? "arms_crossed" : "thinking"], [tap, "surprised"]] })).join("")
-    + (t >= tQ ? TF(1400, 520, spring(t, tQ, .45), tpill(0, 0, "Will every egg hatch?", 56, P.ink, "#fff", { w: 700 })) : "")
-    + (t >= tP ? TF(1400, 320, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + wipe(t, tH, "#FFF3B8") + HUD(t); };
-SC.nyk = (t, s) => nykScene(t, s, TF(690, 1040, .5, mimosa(t)) + TF(1005, 1040, .4, trailCard(t, { 1: 0 })));
+/* ============ 13 · the cliffhanger: a fish that hops on the mud ============ */
+SC.cliff = (t, s) => { const L = "a1301", e = eio((t - s.t0) / 1.2), cam = [lerp(1.04, 1.55, e), lerp(960, 1450, e), lerp(580, 740, e)], tF = W(L, "fins") - .2, tHp = W(L, "hops") - .2, tQ = W(L, "is") - .1, tP = W(L, "find") - .1;
+  const hops = [0, 1, 2].map((i) => tHp + i * .42), hx = hops.reduce((x, th) => x + 70 * eio((t - th) / .34), 0), hy = hops.reduce((y, th) => y + hop(t, th, .34, 46), 0), out = eo((t - (LT(L) + .2)) / .7);
+  const mud = { x: MUDXY[0] + 210 - hx, y: lerp(MUDXY[1] + 80, MUDXY[1] + 26, out) - hy - (hx / 210) * 26, prop: .4 + .6 * out, fin: ss(tF - .2, tF + .3, t) };
+  return wetView(t, { mud }, cam) + OP(pulse(t, tF, .1, 1.2), `<circle cx="${n2(gx(cam, mud.x + 10))}" cy="${n2(gy(cam, mud.y - 60))}" r="150" fill="none" stroke="${P.sun}" stroke-width="8"/>`)
+    + ["pip", "basil", "momo"].map((w, i) => buddy(w, 190 + i * 250, 1062, 185, t, { aura: true, tag: false, in: s.t0 + .15 + i * .1, poses: [[s.t0, "sit"], [tHp, "surprised"], [tQ, w === "basil" ? "arms_crossed" : "thinking"]] })).join("")
+    + (t >= tQ ? TF(1240, 420, spring(t, tQ, .45), tpill(0, 0, "A fish, or an amphibian?", 56, P.ink, "#fff", { w: 700 })) : "")
+    + (t >= tP ? TF(520, 430, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + HUD(t); };
+SC.nyk = (t, s) => nykScene(t, s, TF(700, 1030, .8, lilyPad(190, "#66CC5C")) + TF(690, 1020, .9, frog({ throat: t, blink: frogBlink(t) })) + TF(1005, 1040, .4, trailCard(t, { 0: 0 })));
 })(); }

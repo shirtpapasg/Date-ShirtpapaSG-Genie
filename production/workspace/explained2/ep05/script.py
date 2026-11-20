@@ -1,4 +1,4 @@
-"""script.py: P3 EP3 "What living things can do", Part 1 and Part 2: the approved script (p3_ep03_script.md) as data.
+"""script.py: P3 EP5 "Feathers, scales or moist skin? Animal groups (Part 1)", Part 1 and Part 2: the script (p3_ep05_script.md) as data.
 Every spoken line is exactly as in the script. make_voice.py records the lines; build_tl.py lays them on the timeline.
 
 SEQ items:
@@ -11,8 +11,8 @@ SEQ items:
 """
 H, P, B, M = "heart", "pip", "basil", "momo"
 # the chant: line 1 is three words on clap, clap, stomp; line 2 is one phrase
-CHANT = [["Grow!", "Respond!", "Reproduce!"], "That's what living things can DO!"]
-CHANT_CAPS = [.40, .42, .78]
+CHANT = [["Frog!", "Bird!", "Fish!"], "Moist skin, feathers, scales!"]
+CHANT_CAPS = [.40, .40, .46]
 # how the TTS should say a word (the caption/script text is unchanged)
 PRON = {}
 SLOW = {"speed": .9, "gap": .55}
@@ -36,211 +36,217 @@ NYK = [("scene", "nyk"),
 CHANTSEQ = [("unison", "u1002", "Say it with us!", {"pre": .6}), ("wait", .8), ("chant", "c1003"), ("wait", .6)]
 COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94})]
 
+LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 SEQ1 = [
- # ---- 1 · silent cold open: the garden under the block (8 s)
- ("scene", "cold"), ("wait", 4.0), ("mark", "coldCard"), ("wait", 4.0),
- # ---- 2 · the callback and the dare
+ # ---- 1 · silent cold open: the pond at the wetland (8 s)
+ ("scene", "cold"), ("wait", 3.6), ("mark", "coldCard"), ("wait", 3.6),
+ # ---- 2 · the callback to Episode 4 and the dare
  ("scene", "callback"),
- ("say", "a201", H, "Last time, Basil touched this plant. And it folded up!", {"pre": .3}),
- ("say", "a202", B, "I think it's shy. It's hiding from me!", {"pre": .4, "post": .3}),
+ ("say", "a201", H, "Last time, we sorted living things into four groups. Today, we zoom in on one group. Animals!", {"pre": .3}),
+ ("say", "a203", M, "A frog, a bird and a fish. All at one pond! Are they one group?", {"pre": .4, "post": .3}),
  ("scene", "title"),
- ("say", "a203", H, "Is it shy? Did you lock in your answer? Hold on to it.", {"pre": .6, "post": .5}),
- # ---- 3 · the field trip and the game   (section 6, trim 1: the field-trip line in its short form)
- ("scene", "trip"),
- ("say", "a301", H, "Today is a field trip. Three stamps to collect.", {"pre": .5, "post": .4}),
+ ("say", "a204", H, "One group, or three? Lock in your answer. Hold on to it.", {"pre": .6, "post": .5}),
+ # ---- 3 · the game (the field-trip card slides in during the cold open)
  ("scene", "game"),
  ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. And a lizard is hiding. Find it!", {"pre": .5, "post": .4}),
- # ---- 4 · Round Zero: the rematch from Episode 2
+ # ---- 4 · Round Zero: a warm-up
  ("scene", "r0card"), ("wait", 1.1),
  ("scene", "r0"),
- ("say", "a401", H, "Round Zero. A rematch from last time! A plant does not eat. So how does it get its food? One, we feed it. Two, it makes its own. Three, it needs no food. Show me with your fingers.", {"pre": .1}),
- ("mark", "ring0_0"), ("wait", 5.0), ("mark", "bell_0"), ("wait", .55),
+ ("say", "a401", H, "Round Zero. A warm-up! A plant makes its own food. Can an animal? One, yes. Two, no. Show me with your fingers.", {"pre": .1}),
+ *LOCK(0),
  ("say", "a402", H, "Locked in!", {"pre": 0}),
  ("unison", "u403", "Two!", {"pre": .5, "post": .1}),
- ("say", "a404", H, "Plants do not eat but they can make their own food when there is light.", {"pre": .45}),
+ ("say", "a404", H, "Animals are unable to make their own food. They depend on other living things for food.", {"pre": .45}),
  ("say", "a405", H, "Two fingers? One finger up!", {"pre": .5, "post": .6}),
  # ---- 5 · today's goals (no voice) and the countdown
  ("scene", "goals"), ("wait", 4.3),
  *COUNT,
- # ---- 6 · Round 1: what happens next?
+ # ---- 6 · what an animal is
+ ("scene", "parts"),
+ ("say", "a501", H, "So, what is an animal? Look at the frog. A head. A body. And limbs. Its legs are its limbs.", {"pre": .5, "post": .4, "gap": .5}),
+ ("scene", "mark1"),
+ ("say", "a502", P, "Say it with me!", {"pre": .8}), ("wait", .8),
+ ("say", "a503", H, "Animals are living things that usually have parts such as a head, a body and limbs.", {"pre": 0}),
+ ("wait", 2.0),
+ # ---- 7 · where animals live; outer coverings; observable characteristics
+ ("scene", "homes"),
+ ("say", "a601", H, "Some animals live only on land, while some live only in water. There are also some animals that can live both on land and in water.", {"pre": .5, "post": .5}),
+ ("scene", "cover"),
+ ("say", "a602", H, "Animals have different outer coverings as they live in different places.", {"pre": .5}),
+ ("wait", .3), ("mark", "kw_cover"), ("wait", 1.9),
+ ("wait", 1.2),
+ ("scene", "observe"),
+ ("say", "a701", H, "Scientists have grouped the diversity of animals around us according to their similarities and differences.", {"pre": .5}),
+ ("say", "a702", H, "They use things we can see or measure. These are called observable characteristics.", {"pre": .5}),
+ ("wait", .3), ("mark", "kw_observe"), ("wait", 2.9),
+ # ---- 8 · Round 1: where can a frog live?
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
- ("say", "a601", H, "Round one. Basil touched one leaf, with one finger. Gently. It folded up. What happens next? One, it stays folded. Two, it opens again. Three, the leaf drops off. Show me with your fingers.", {"pre": .1}),
- ("mark", "ring0_1"), ("wait", 5.0), ("mark", "bell_1"), ("wait", .55),
- ("say", "a602", H, "Locked in!", {"pre": 0}),
- ("say", "a603", B, "One! It's shy. It will hide all day!", {"pre": .5}),
- ("say", "a604", M, "Two. Nothing is torn.", {"pre": .4}),
- ("say", "a605", P, "Two. All its other leaves are open.", {"pre": .4, "post": .5}),
- # ---- 7 · we wait, and shrink down onto the leaf
+ ("say", "a801", H, "Round one. This frog sits on a leaf. Then, splash! It swims. Where can a frog live? One, only on land. Two, only in water. Three, both. Show me with your fingers.", {"pre": .1}),
+ *LOCK(1),
+ ("say", "a802", H, "Locked in!", {"pre": 0}),
+ ("say", "a803", M, "Two! It swims so well. It must live in water.", {"pre": .5}),
+ ("say", "a804", P, "Three. I saw it on a leaf, and in the pond.", {"pre": .4}),
+ ("say", "a805", B, "Three! It hops, and it swims.", {"pre": .4, "post": .5}),
+ # ---- 9 · BE THE FROG
  ("scene", "waitw"),
- ("say", "a701", H, "Let's wait and watch. From very close. Shrink down. Quietly.", {"pre": .5, "post": .5}),
- ("scene", "shrink"), ("mark", "dive"), ("wait", 2.5),
- ("say", "a702", H, "You are tiny now. You are standing on one of its leaves.", {**SLOW, "pre": 0, "post": 1.2}),
- ("mark", "touch"),
- ("say", "a703", H, "One gentle touch.", {**SLOW, "pre": 0}),
- ("mark", "fold"), ("wait", 1.6),
- ("say", "a704", H, "The little leaves fold inwards. Two by two.", {**SLOW, "pre": 0}),
- ("wait", 1.6), ("mark", "droop"),
- ("say", "a705", H, "Then the whole leaf droops.", {**SLOW, "pre": 0}),
- ("wait", 1.6), ("mark", "waiting"),
- ("say", "a706", H, "Now, we wait.", {**SLOW, "pre": 0}),
- ("wait", 3.0), ("mark", "reopen"),
- ("say", "a707", H, "A few minutes later, the leaves open again.", {**SLOW, "pre": 0}),
- ("wait", 1.6),
- # ---- 8 · the reveal: not shy. Responding!
+ ("say", "a901", H, "Be the frog! Shrink down. Quietly.", {"pre": .5, "post": .5}),
+ ("scene", "shrink"), ("mark", "dive"), ("wait", 2.1),
+ ("say", "a902", H, "You are a frog. You sit on a leaf, on land.", {**SLOW, "pre": 0, "post": .9}),
+ ("say", "a903", H, "Your skin is moist. It stops you from drying out.", {**SLOW, "pre": 0, "post": .9}),
+ ("say", "a904", H, "Now, jump!", {**SLOW, "pre": 0}),
+ ("mark", "jump"), ("wait", 1.7), ("mark", "under"),
+ ("say", "a905", H, "You are under water. Your strong legs and webbed feet push you along.", {**SLOW, "pre": 0, "post": .8}),
+ ("say", "a906", H, "Here, you breathe through your skin.", {**SLOW, "pre": 0}),
+ ("wait", 1.3), ("mark", "up"),
+ ("say", "a907", H, "Back on land, you breathe with your lungs as well.", {**SLOW, "pre": 0, "post": .9}),
+ ("say", "a908", H, "Land and water. Both are home.", {**SLOW, "pre": 0}),
+ ("wait", 1.5),
+ # ---- 10 · the reveal: an amphibian
  ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.0),
- ("say", "a801", H, "The answer is two. The leaves opened again.", {"pre": 0}),
- ("say", "a802", H, "The mimosa plant is commonly called touch-me-not.", {"pre": .5}),
- ("wait", .3), ("mark", "kw_mimosa"), ("wait", 1.9),
- ("scene", "replay"),
- ("say", "a803", H, "The touch was a change. The mimosa folded its leaves. It responded.", {"pre": .4, "post": .5}),
- ("scene", "mark1"),
- ("say", "a804", B, "Say it with me!", {"pre": .8}), ("wait", .8),
- ("say", "a805", H, "Living things respond to changes in the environment.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_respond"), ("wait", 1.9),
- ("scene", "notshy"),
- ("say", "a806", H, "The mimosa plant folds its leaves to protect itself from harm.", {"pre": .4}),
- ("say", "a807", B, "Not shy. Responding!", {"pre": .4}),
- ("mark", "stamp1"), ("wait", 1.3),
- ("say", "a808", H, "Two fingers? One finger up!", {"pre": .2, "post": .6}),
- # ---- 9 · you respond too
- ("scene", "eyes"),
- ("say", "a901", H, "You respond too. In bright sunlight, your eyelids shut at once. That protects your eyes.", {"pre": .5, "post": .5}),
+ ("say", "a1001", H, "The answer is three. Both!", {"pre": 0, "post": .4}),
  ("scene", "mark2"),
- ("say", "a902", P, "Say it with me!", {"pre": .8}), ("wait", .8),
- ("say", "a903", H, "The ability to respond to changes in our environment helps to protect us from danger and keeps us safe.", {"pre": 0}),
- ("wait", 2.0),
- ("scene", "ledge"),
- ("say", "a904", H, "Plants are also able to respond to changes in the environment.", {"pre": .6}),
- ("say", "a905", H, "Our plant on the window ledge grows towards the sunlight.", {"pre": .5, "post": .7}),
- # ---- 10 · HOLD ON! Pip's list
+ ("say", "a1002", M, "Say it with me!", {"pre": .8}), ("wait", .8),
+ ("say", "a1003", H, "Amphibians are animals that can live both on land and in water. Amphibians usually have four legs.", {"pre": 0}),
+ ("wait", 2.0), ("mark", "kw_amphibians"), ("wait", 1.9),
+ ("scene", "skin"),
+ ("say", "a1004", H, "Amphibians can breathe through their skin as well as their lungs.", {"pre": .5}),
+ ("say", "a1005", H, "They have protective moist skin to prevent them from drying out when they are on land.", {"pre": .5}),
+ ("wait", .3), ("mark", "kw_moist"), ("wait", 1.9),
+ ("scene", "eggs"),
+ ("say", "a1006", H, "Amphibians lay their eggs in water.", {"pre": .5}),
+ ("say", "a1007", H, "Frogs, toads and salamanders are amphibians.", {"pre": .6}),
+ ("say", "a1008", M, "So the frog is an amphibian!", {"pre": .5}),
+ ("mark", "stamp1"), ("wait", 1.3),
+ ("say", "a1009", H, "Three fingers? One finger up!", {"pre": .2, "post": .6}),
+ # ---- 11 · HOLD ON! Basil's rule
  ("scene", "listcard"), ("wait", 1.1),
- ("scene", "list"),
- ("say", "a1001", P, "My list. Three things that responded today. A snail pulled into its shell. An ice cream melted. A door banged shut.", {"pre": .6, "post": .5}),
- ("say", "a1002", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .3}),
- ("mark", "ring0_2"), ("wait", 5.0), ("mark", "bell_2"), ("wait", .6),
- ("say", "a1003", H, "Arms crossed? One finger up! The sun melted the ice cream. The wind pushed the door. They are non-living things. They changed. But they did not respond.", {"pre": 0, "post": .5}),
- ("scene", "snail"),
- ("say", "a1004", H, "The snail is a living thing. Momo touched it, and it pulled into its shell to protect itself. That is responding.", {"pre": .5}),
- ("say", "a1005", P, "So not everything that changes is responding!", {"pre": .4, "post": .6}),
- # ---- 11 · your turn: one finger, one leaf
- ("scene", "tryit"),
- ("say", "a1101", H, "Your turn. Find a mimosa on a grass patch. One finger, one leaf. The stem has tiny prickles. Never pull the plant. And wash your hands.", {"pre": .5, "post": .6}),
+ ("scene", "rule"),
+ ("say", "a1101", B, "My rule! If it swims, it is a fish. A frog swims. A duck swims. So they are fish!", {"pre": .6, "post": .5}),
+ ("say", "a1102", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .3}),
+ *LOCK(2)[:-1], ("wait", .6),
+ ("say", "a1103", H, "Arms crossed? One finger up! Many animals swim. To find the group, look at the outer covering.", {"pre": 0, "post": .5}),
+ ("say", "a1104", B, "Oops. I must check the cover first!", {"pre": .4, "post": .6}),
  # ---- 12 · score hand, the lizard, the key words
  ("scene", "final"),
  ("say", "a1201", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .7}),
  ("scene", "liz"),
- ("say", "a1202", H, "Did you spot the lizard? It was on the garden sign. A lizard runs away when you come close. Is that responding? Tell someone at home.", {"pre": .7, "post": .7}),
- *kwrecap(["Mimosa", "Respond to changes"]),
- # ---- 13 · the cliffhanger: five eggs in Kranji
+ ("say", "a1202", H, "Did you spot the lizard? It was on the boardwalk rail. Does it live on land, in water, or both? Tell someone at home.", {"pre": .7, "post": .7}),
+ *kwrecap(["Outer covering", "Observable characteristics", "Amphibians", "Moist skin"]),
+ # ---- 13 · the cliffhanger: a fish that hops on the mud
  ("scene", "cliff"), ("wait", .4),
- ("say", "a1301", H, "Next stop: a farm in Kranji. This hen has kept five eggs warm for twenty-one days. Will every egg hatch? Find out in Part Two!", {"pre": .5}),
- ("mark", "eggtap"), ("wait", 1.3),
+ ("say", "a1301", H, "Next: this animal has fins. But it hops about on the mud! Is it a fish, or an amphibian? Find out in Part Two!", {"pre": .5}),
+ ("mark", "hopend"), ("wait", 1.3),
  # ---- 14 · "Now you know!" and the outro
  *NYK,
 ]
 
 SEQ2 = [
- # ---- 1 · silent recap montage (five shots, about 1.2 s each)
- ("scene", "recap"), ("wait", 5.0),
+ # ---- 1 · silent recap montage
+ ("scene", "recap"), ("wait", 4.0),
  # ---- 2 · "Last time..."
  ("scene", "lasttime"),
- ("say", "b201", H, "Last time, Basil touched a mimosa, and its leaves folded up. It was not shy. It was responding to a change. Now we are on a farm in Kranji.", {"pre": .5, "post": .5}),
+ ("say", "b201", H, "Last time, we met a frog. It is an amphibian, with moist skin. Its outer covering is an observable characteristic. Two more animals to spot!", {"pre": .5, "post": .5}),
  # ---- 3 · today's goals (no voice) and the game
  ("scene", "goals"), ("wait", 3.9),
  ("scene", "game"),
  ("say", "b301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .5}),
- # ---- 4 · Round 1: will every egg hatch?
+ # ---- 4 · the kingfisher; Round 1: is a penguin a bird?
+ ("scene", "bird"),
+ ("say", "b401", H, "Look up! A kingfisher. It has a beak. It has wings. And its outer covering?", {"pre": .5, "post": .4, "gap": .5}),
  ("scene", "r1card"), ("wait", 1.0),
  ("scene", "r1"),
- ("say", "b401", M, "Five eggs. So five chicks. Every egg hatches!", {"pre": .6}),
- ("say", "b402", H, "Round one. Is Momo right? Does every egg hatch? One, yes. Two, no. Show me with your fingers.", {"pre": .5}),
- ("mark", "ring0_1"), ("wait", 5.0), ("mark", "bell_1"), ("wait", .55),
+ ("say", "b402", H, "Round one. A penguin has feathers. It lays eggs. But it cannot fly! Is a penguin a bird? One, yes. Two, no. Show me with your fingers.", {"pre": .1}),
+ *LOCK(1),
  ("say", "b403", H, "Locked in!", {"pre": 0}),
- ("say", "b404", P, "One. The hen kept all five warm.", {"pre": .5}),
- ("say", "b405", B, "Two! Lizards lay eggs too. Grandma says not every egg hatches.", {"pre": .4, "post": .5}),
- ("scene", "hatch"),
- ("say", "b406", H, "Watch.", {"pre": .6}),
- ("mark", "crack1"), ("wait", 1.5),
- ("say", "b407", H, "A crack. A beak. One chick! Two. Three. Four!", {"pre": 0, "gap": .62}),
- ("mark", "still"), ("wait", 1.5),
- ("say", "b408", H, "One egg did not hatch. The answer is two. Not every egg hatches.", {"pre": 0, "post": .5}),
- ("scene", "after"),
- ("say", "b409", M, "Oh. Only four.", {"pre": .5}),
- ("say", "b410", H, "That happens, Momo. It is why some animals lay many eggs.", {"pre": .45}),
- ("say", "b411", H, "Two fingers? One finger up!", {"pre": .5, "post": .4}),
- # ---- 5 · reproduce: more of them
- ("scene", "boards"),
- ("say", "b501", H, "Yesterday, one hen. Today, one hen and four chicks.", {"pre": .5, "post": .5}),
+ ("say", "b404", P, "Two. Birds fly. A penguin cannot fly.", {"pre": .5}),
+ ("say", "b405", M, "One! It has a beak and wings.", {"pre": .4}),
+ ("say", "b406", B, "One! Look at its feathers.", {"pre": .4, "post": .5}),
+ ("scene", "birds"),
+ ("say", "b408", H, "Birds live largely on land. Birds have beaks that enable them to pick up food.", {"pre": .5}),
+ ("say", "b409", H, "Birds have wings and can usually fly.", {"pre": .6}),
+ ("say", "b410", H, "Some birds such as ostriches and penguins cannot fly.", {"pre": .6}),
+ ("say", "b411", H, "Birds lay eggs.", {"pre": .6, "post": .5}),
  ("scene", "mark1"),
- ("say", "b502", P, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "b503", H, "When living things reproduce, there will be more of them. The ability to reproduce is important to ensure the survival of all living things.", {"pre": 0}),   # section 6, trim 5: both sentences of 1.21 on one card
- ("wait", 2.0), ("mark", "kw_reproduce"), ("wait", 1.9),
- ("scene", "animals"),
- ("say", "b504", H, "Some animals reproduce by giving birth to their young alive.", {"pre": .5}),
- ("say", "b505", M, "Kittens! I was born like that too.", {"pre": .4}),
- ("say", "b506", H, "Other animals lay eggs and their young hatch out of the eggs.", {"pre": .6, "post": .4}),
- ("scene", "plants"),
- ("say", "b507", B, "But plants cannot lay eggs!", {"pre": .5}),
- ("say", "b508", H, "Some plants reproduce by producing seeds.", {"pre": .5}),
- ("say", "b509", H, "Like this tomato.", {"pre": .45, "post": .5}),
- ("say", "b510", H, "Other plants can reproduce through spores.", {"pre": .6}),
- ("say", "b511", H, "Like this fern. Look under the leaf.", {"pre": .45}),
- ("wait", .5), ("mark", "kw_spores"), ("wait", 1.9),
- # ---- 6 · why reproducing matters
- ("scene", "extinct"),
- ("say", "b601", H, "Why does reproducing matter? Without new young, a kind of living thing would disappear forever. Scientists call that extinct.", {"pre": .5}),
- ("wait", .2), ("mark", "kw_extinct"), ("wait", 3.7),   # the key word holds 1.5 s; the book's definition strip is on screen 3.4 s
- ("scene", "stamp2"), ("wait", 1.5),
- # ---- 7 · grow: bigger AND more complex
- ("scene", "grow"),
- ("say", "b701", H, "And the four chicks? Now they will grow.", {"pre": .4}),
- ("say", "b702", M, "So a chick just gets bigger? A giant chick?", {"pre": .4}),
- ("say", "b703", H, "Not a giant chick. Look at the hen. Bigger, yes. But she also has wing feathers, a red comb and a tail.", {"pre": .5, "post": .4}),
- ("scene", "mark3"),
- ("say", "b704", M, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "b705", H, "When living things grow, they increase in size. They also become more complex.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_complex"), ("wait", 1.9),
- ("scene", "growline"),
- ("say", "b706", H, "You grow like that too. Bigger. And more complex: more hair, longer arms and legs, new teeth.", {"pre": .5, "post": .4}),
- ("scene", "pots"),
- ("say", "b707", H, "Like animals, plants also increase in size and become more complex as they grow.", {"pre": .5}),
- ("say", "b708", H, "A seed. A small plant. A bigger plant, with more leaves and flowers.", {"pre": .5}),
- ("wait", .3), ("mark", "stamp3"), ("wait", 1.6),
- # ---- 8 · Showdown: Basil's trail notes
+ ("say", "b412", B, "Say it with me!", {"pre": .6}), ("wait", .8),
+ ("say", "b413", H, "Birds have an outer covering of feathers.", {"pre": 0}),
+ ("wait", 2.0), ("mark", "kw_feathers"), ("wait", 1.9),
+ ("scene", "birdans"),
+ ("say", "b414", H, "The answer is one. A penguin has feathers. So it is a bird.", {"pre": .4}),
+ ("say", "b415", P, "So flying is not the clue. Feathers are!", {"pre": .4}),
+ ("mark", "stamp2"), ("wait", 1.3),
+ ("say", "b416", H, "One finger? One finger up!", {"pre": .2, "post": .6}),
+ # ---- 5 · fish: fins, scales, gills
+ ("scene", "fish"),
+ ("say", "b501", H, "Now look down, into the water. A fish!", {"pre": .5}),
+ ("say", "b502", H, "Fish are animals that usually live only in water. They have fins to help them swim in water.", {"pre": .5}),
+ ("wait", .3), ("mark", "kw_fins"), ("wait", 1.9),
+ ("scene", "mark2"),
+ ("say", "b503", M, "Say it with me!", {"pre": .6}), ("wait", .8),
+ ("say", "b504", H, "Fish have an outer covering of scales.", {"pre": 0}),
+ ("wait", 2.0), ("mark", "kw_scales"), ("wait", 1.9),
+ ("scene", "gills"),
+ ("say", "b505", H, "Fish usually breathe through their gills.", {"pre": .5}),
+ ("wait", .3), ("mark", "kw_gills"), ("wait", 1.9),
+ ("say", "b506", H, "Some fish, such as cod, lay eggs. Other fish, such as the guppy and some sharks, give birth to their young alive.", {"pre": .3, "post": .5}),
+ # ---- 6 · Round 2: the animal on the mud
+ ("scene", "r2card"), ("wait", 1.0),
+ ("scene", "r2"),
+ ("say", "b601", H, "Round two. Look at the mud! This animal hops about on land. But it has fins, scales and gills. What is it? One, an amphibian. Two, a bird. Three, a fish. Show me with your fingers.", {"pre": .1}),
+ *LOCK(2),
+ ("say", "b602", H, "Locked in!", {"pre": 0}),
+ ("say", "b603", B, "One! Land and water. Just like the frog!", {"pre": .5}),
+ ("say", "b604", P, "Three. I count fins, scales and gills.", {"pre": .4}),
+ ("say", "b605", M, "Three! Frogs have legs. It has fins.", {"pre": .4, "post": .5}),
+ # ---- 7 · BE THE MUDSKIPPER
+ ("scene", "waitw"),
+ ("say", "b701", H, "Be the mudskipper! Shrink down. Quietly.", {"pre": .5, "post": .5}),
+ ("scene", "shrink"), ("mark", "dive"), ("wait", 2.1),
+ ("say", "b702", H, "You are a mudskipper. You are in the water. You breathe through your gills.", {**SLOW, "pre": 0, "post": .9}),
+ ("mark", "tide"),
+ ("say", "b703", H, "The tide goes out. The water gets shallow.", {**SLOW, "pre": 0}),
+ ("wait", 1.4), ("mark", "hop"),
+ ("say", "b704", H, "You push with your fins. Hop. Hop. You are on the mud.", {**SLOW, "pre": 0, "post": .9}),
+ ("say", "b705", H, "Now, on land, you breathe through your skin.", {**SLOW, "pre": 0, "post": 1.0}),
+ ("say", "b706", H, "Fins, scales and gills. You are still a fish.", {**SLOW, "pre": 0}),
+ ("wait", 1.5),
+ # ---- 8 · the reveal: a special fish
+ ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.0),
+ ("say", "b801", H, "The answer is three.", {"pre": 0}),
+ ("say", "b802", H, "Mudskippers are special fish that can live on land as well as in water.", {"pre": .5}),
+ ("mark", "stamp3"), ("wait", 1.3),
+ ("say", "b803", H, "Three fingers? One finger up!", {"pre": .2, "post": .6}),
+ # ---- 9 · Showdown: Momo's field notes
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
- ("say", "b801", B, "My trail notes!", {"pre": .5}),
- ("say", "b802", B, "One. A hen reproduces by laying eggs. Two. A tomato plant, by producing seeds. Three. A fern, by producing seeds.", {"pre": .5, "post": .3}),
- ("say", "b803", H, "Showdown! Double points. One line has a mistake. Line one, two, or three? Show me with your fingers.", {"pre": .5}),
- ("mark", "ring0_2"), ("wait", 6.0), ("mark", "bell_2"), ("wait", .55),
- ("say", "b804", H, "Locked in!", {"pre": 0}),
- ("say", "b805", P, "Three. Those brown dots are spores.", {"pre": .5}),
- ("say", "b806", M, "Three! Spores, not seeds.", {"pre": .4}),
- ("say", "b807", B, "Oops!", {"pre": .4, "post": .4}),
+ ("say", "b901", M, "My field notes!", {"pre": .5}),
+ ("say", "b902", M, "One. A frog is an amphibian. Two. A penguin is a bird. Three. A starfish is a fish.", {"pre": .5, "post": .3}),
+ ("say", "b903", H, "Showdown! Double points. One line has a mistake. Line one, two, or three? Show me with your fingers.", {"pre": .5}),
+ *LOCK(3, 6.0),
+ ("say", "b904", H, "Locked in!", {"pre": 0}),
+ ("say", "b905", P, "Three. A starfish has no scales.", {"pre": .5}),
+ ("say", "b906", B, "Three! And no gills.", {"pre": .4}),
+ ("say", "b907", M, "Oops!", {"pre": .4, "post": .4}),
  ("scene", "fixed"),
- ("say", "b808", B, "Fixed! A fern reproduces through spores.", {"pre": .9}),
- ("say", "b809", H, "Showed three fingers? Put up two more on your score hand!", {"pre": .5, "post": .5}),
- # ---- 9 · three stamps, and the chant
+ ("say", "b908", M, "Fixed! Not a fish.", {"pre": .9}),
+ ("say", "b909", H, "Starfish are not fish! This is because they do not have scales or gills.", {"pre": .5}),
+ ("say", "b910", H, "Showed three fingers? Put up two more on your score hand!", {"pre": .5, "post": .5}),
+ # ---- 10 · three stamps, and the chant
  ("scene", "stamps"),
- ("say", "b901", H, "Three stamps! Grow: the chicks. Respond: the mimosa. Reproduce: the hen.", {"pre": .5, "post": .5}),
- ("scene", "mark4"),
- ("say", "b902", P, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "b903", H, "Living things grow, respond to changes and reproduce.", {"pre": 0}),
- ("wait", 2.0),
+ ("say", "b1001", H, "Three stamps! Three animal groups.", {"pre": .5, "post": .5, "gap": .5}),
  ("scene", "chant"),
  *CHANTSEQ,
- # ---- 10 · score hand and the lizard
+ # ---- 12 · score hand and the lizard
  ("scene", "final"),
- ("say", "b1001", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
+ ("say", "b1201", H, "Show me your score hand! More than two? You beat the Buddies. Four fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "b1002", H, "Did you spot the lizard? It was on the hen house wall. Does a lizard lay eggs, or give birth to its young alive? Tell someone at home.", {"pre": .5, "post": .5}),
- # ---- 11 · the dare for Episode 4
+ ("say", "b1202", H, "Did you spot the lizard? It was on a mangrove root. Is a lizard's skin moist, or dry? Tell someone at home.", {"pre": .5, "post": .5}),
+ # ---- 13 · the dare for Episode 6
  ("scene", "dare"), ("wait", 1.1),
- ("say", "b1101", H, "A hen. A cat. A tomato plant. A fern. There are millions of kinds of living things! But scientists sort them into only four groups. Can you guess the four? Lock in your answer for next time.", {"pre": 0, "post": .6}),
- # ---- 12 · the key words
- *kwrecap(["Reproduce", "Spores", "Extinct", "More complex"]),
- # ---- 13 · "Now you know!" and the outro
+ ("say", "b1301", H, "Three more animal groups to go: insects, reptiles and mammals. Here is an ant. And a spider. Only one is an insect! Can you tell which, by counting its legs? Lock in your answer for next time.", {"pre": 0, "post": .6}),
+ # ---- 14 · the key words
+ *kwrecap(["Feathers", "Fins", "Scales", "Gills"]),
+ # ---- 15 · "Now you know!" and the outro
  *NYK,
 ]
 SEQS = {1: SEQ1, 2: SEQ2}

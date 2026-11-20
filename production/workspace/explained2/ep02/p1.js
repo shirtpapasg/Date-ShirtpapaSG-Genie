@@ -11,8 +11,11 @@ function items1(t, o = {}) { const dish = o.dish || "box"; let s = "";
   if (o.cover) s += gCover(o.cover, o.cover.x === undefined ? HT.rx[2] : o.cover.x);
   return s + (o.extra || ""); }
 
+// the thumbnail frame: Round 1, the drooping plant in Room 1, large, left of centre; Momo on the far left with big worried eyes; the bright window on the right
+const THUMB1 = (t) => hotelView(t, { clock: 9, board: 0, rooms: [0, 0, 0], sign: 0, items: TF(900, 930, 1.9, roomFront(1)) + TF(900, 985 - 54 * 1.75, 1.75, potPlant({ droop: .9, wet: 0 })) })
+  + buddy("momo", 280, 800, 330, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 /* ============ 1 · the silent cold open: Day 31 on the window ledge ============ */
-SC.cold = (t, s) => { const tb = MK("coldBuild"), e = eio(t / (tb + .6)), cam = [lerp(1.3, 1, e), lerp(1090, 960, e), lerp(640, 540, e)];
+SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldBuild"), e = eio(t / (tb + .6)), cam = [lerp(1.3, 1, e), lerp(1090, 960, e), lerp(640, 540, e)];
   const [sx, sd] = slideX(t, tb + .1, .5, -400, 0, HT.fy), rdx = [0, 1, 2].map((i) => slideX(t, tb + 1.1 + i * .5, .45, 1500, 0, HT.fy));
   const st = { clock: 9, sign: t >= tb + .1 ? 1 : 0, signDx: sx, rooms: rdx.map((r, i) => t >= tb + 1.1 + i * .5 ? 1 : 0), roomDx: rdx.map((r) => r[0]), board: spring(t, tb + 2.9, .45),
     items: `<g transform="translate(${HT.sign} 0)">${sd}</g>` + rdx.map((r, i) => `<g transform="translate(${HT.rx[i]} 0)">${r[1]}</g>`).join("") + items1(t, { px: 870 }) };
@@ -55,7 +58,7 @@ SC.r1 = (t, s) => { const L = "a501", tq = W(L, "what") - .25;
   if (t < tq) { const e = eio((t - s.t0) / .8), cam = [lerp(1.5, 2.25, e), 800, lerp(640, 705, e)], tD = W(L, "the") - .1;
     return hotelView(t, { items: items1(t, { cover: {}, sway: .5 * Math.sin(t) }) }, cam) + OP(ramp(t, W(L, "room") - .1, .25), TF(1420, 300, 1, tpill(0, 0, "Room 1", 56, P.ink, "#fff", { w: 700 }))) + OP(ramp(t, tD, .25), TF(1420, 410, 1, tpill(0, 0, "The plant is drooping.", 44, "#fff", P.ink, { w: 700 })))
       + dayCounter(t, 31) + HUD(t); }
-  return lock3(t, { s: { t0: tq }, q: "What does the plant need?", tq, tc: [W(L, "one"), W(L, "two"), W(L, "three")], ring0: MK("ring0_1"), dur: 5, lock: "a502",
+  return lock3(t, { s: { t0: tq }, q: "What does the plant need?", tq, tc: [W(L, "one", 2), W(L, "two"), W(L, "three")], ring0: MK("ring0_1"), dur: 5, lock: "a502",
     obj: () => TF(430, 566, 1.12, potPlant({ droop: .9, wet: 0 })),
     picks: [{ who: "pip", id: "a504", word: "1 WATER", kind: "blue" }, { who: "basil", id: "a503", word: "2 FOOD", kind: "orange", x: true }, { who: "momo", id: "a505", word: "1 WATER", kind: "blue" }],
     props: { basil: [LT("a503") + .9, TF(0, 0, 1.1, biscuit())], pip: [W("a504", "soil") - .1, `<g filter="url(#dropS)"><circle r="56" fill="${P.paper}"/></g><ellipse cx="0" cy="6" rx="40" ry="16" fill="#D8BE96" stroke="#B0946A" stroke-width="4"/><path d="M-22 2 l12 6 l10 -5 M8 -2 l10 7" stroke="#A88A5E" stroke-width="3" fill="none"/>${T(0, -22, "dry", 26, P.ink)}`], momo: [W("a505", "nobody") - .1, TF(20, 50, .8, wateringCan(0, 0))] } }); };
