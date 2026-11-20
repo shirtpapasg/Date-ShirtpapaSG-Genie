@@ -39,4 +39,4 @@ Do not commit, push, upload or touch YouTube, the review boards or TheOneApp.
   idle life, sitting talking sprites for lip-sync, small drawn mouths on one-face poses, speech bubbles with the pick word coloured.
 - THUMBNAILS (20 Nov, the teacher approved): use a bright frame from the episode itself; put the words on the BRIGHT side (here the
   right), right-aligned, white first line(s) and sun-yellow last line(s), thick dark-violet stroke; keep the other side clear (no dark
-  gradient, no extra logo pill; the frame's own small logo stays). Reference: ep01/thumb_ep01.jpg.
+  gradient, no extra logo pill; the frame's own small logo stays). Reference: ep01/thumb_ep01.jpg. Two-part episodes: a tilted raspberry "PART 1" / "PART 2" badge with a white rim on the LEFT side, bottom-left (ep01/thumb_part_badge_preview.jpg).
