@@ -33,3 +33,7 @@ Do not commit, push, upload or touch YouTube, the review boards or TheOneApp.
 - DECISIONS (20 Nov): NO 3D route (the teacher). The flat SVG redraws of the buddies "lack the cuteness"; the teacher's own painted
   poses are cuter. Plan: animate the teacher's own buddy art directly as cut-out sprites (squash/stretch, bounce, sway, head tilt,
   blinks, pose swaps, mouth swaps for lip-sync), from full-size originals the teacher will send.
+- APPROVED (20 Nov): the pose-switching test characters/sprites/pose_test_robot_round.mp4 is "amazing, exactly what I want" (the teacher).
+  It is the reference for how the buddies move in every episode: the teacher's painted poses as cut-outs, swaps with squash,
+  stretch, overshoot, a hop, sparkles and dust (never cross-fades), same scale and foot line across poses, breathing/sway/leaning
+  idle life, sitting talking sprites for lip-sync, small drawn mouths on one-face poses, speech bubbles with the pick word coloured.
