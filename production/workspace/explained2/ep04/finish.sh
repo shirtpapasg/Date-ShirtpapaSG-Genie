@@ -9,7 +9,7 @@ import sys, subprocess, json
 D = float(sys.argv[1]); PT = sys.argv[2]; tl = json.load(open(f'tl_p{PT}.json'))
 # 30 stills: one inside each scene that lasts long enough, the rest spread evenly
 ts = sorted(set([round(s['t0'] + (s['t1'] - s['t0']) * .62, 2) for s in tl['scenes'] if s['t1'] - s['t0'] > 4]))
-extra = [1.2, 5.5] + [tl['marks'][k] + d for k, d in (('kw_mimosa', .8), ('kw_respond', .8), ('fold', 1.2), ('droop', 1.5), ('reopen', 2.2), ('stamp1', .6), ('ring0_0', 2), ('ring0_1', 2), ('ring0_2', 3), ('crack1', 1.2), ('still', .8), ('kw_reproduce', .8), ('kw_extinct', 2.5), ('kw_complex', .8), ('stamp3', .6)) if k in tl['marks']]
+extra = [1.2, 5.5] + [tl['marks'][k] + d for k, d in (('kw_class', .8), ('kw_fungi', .8), ('kw_bacteria', .8), ('dive', 3.5), ('sand', 2.2), ('bact', 3), ('shapes', 4), ('ring0_1', 2), ('ring0_2', 3), ('fl1', 1.4), ('open', 1.2), ('wind', 1.5), ('land', 1.2), ('sprout', 3.2), ('kw_flowering', .8), ('kw_sporebags', .8), ('kw_nonflowering', .8), ('pullout', 3)) if k in tl['marks']]
 ts = sorted(set(ts + extra))
 while len(ts) > 30: ts.pop(len(ts) // 2 * 0 + min(range(1, len(ts)), key=lambda i: ts[i] - ts[i - 1]))
 for i, t in enumerate(ts): subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-ss', str(t), '-i', f'ep04_part{PT}.mp4', '-frames:v', '1', '-vf', 'scale=640:-1', f'out/sheet/s_{i:02d}.png'], check=True)
