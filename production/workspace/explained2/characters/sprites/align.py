@@ -150,7 +150,7 @@ ALLOW = [(455, 300), (500, 352), (640, 350), (720, 320), (770, 302), (832, 286),
 # the lash should sit on the base eye
 LIDS = {"L": dict(src=(577, 306), dst=(567, 308), sx=1.0, sy=1.12, rot=0), "R": dict(src=(805, 245), dst=(803, 262), sx=.9, sy=1.1, rot=0)}
 
-LID_INSET = 10
+LID_INSET = 6
 def main():
     os.makedirs(f"{H}/qa", exist_ok=True)
     B8 = load("closed"); B = pm(B8); meta = {"size": S, "states": {}, "fit": {}}
@@ -206,7 +206,7 @@ def main():
         cv2.imwrite(f"{H}/basil_sit_{s}.png", im)
         ys, xs = np.where(im[..., 3] > 0); meta["states"][s] = dict(file=f"basil_sit_{s}.png", bbox=[int(xs.min()), int(ys.min()), int(xs.max()), int(ys.max())])
     ys, xs = np.where(B8[..., 3] > 0)
-    meta["anchors"] = dict(hips=[640, int(ys.max()) - 6], neck=[640, 478], head_centre=[640, 300], tail_root=[430, 780], ground_y=int(ys.max()))
+    meta["anchors"] = dict(hips=[640, int(ys.max()) - 6], neck=[650, 472], neck_band=[432, 500], head_xmin=[372, 394], tail=dict(root=[445, 790], xband=[445, 335], ymin=[400, 440]), ground_y=int(ys.max()))
     meta["eyes"] = EYES; json.dump(meta, open(f"{H}/basil_sit.json", "w"), indent=1)
     np.save(f"{H}/work/seams.npy", {s: masks[s][1] for s in ("half", "wide")}, allow_pickle=True)
     return out, masks
