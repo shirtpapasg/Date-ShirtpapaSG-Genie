@@ -13,7 +13,7 @@ CHANT = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What ca
 # how the TTS should say a word (the caption/script text is unchanged)
 PRON = {"Taugeh": "Taogay", "taugeh": "taogay", "cicak": "cheechahk", "winds it up": "wines dit up", "TheOneApp": "The One App"}
 
-SEQ = [
+SEQ1 = [
  # ---- 1 · silent cold open (12 s)
  ("scene", "cold"), ("mark", "cold0"), ("wait", 2.6), ("mark", "coldBox"), ("wait", 5.0), ("mark", "coldLid"), ("wait", 1.7),
  ("mark", "coldD30"), ("wait", 1.6), ("mark", "coldCut"), ("wait", 0.5),
@@ -33,7 +33,7 @@ SEQ = [
  # ---- 3 · the game and today's goals
  ("scene", "game"),
  ("say", "h301", H, "Here is the game. It's You against the Buddies. You lock in first. Then Pip, Basil and Momo answer.", {"pre": .5}),
- ("say", "h302", H, "Every time you are right, put up one finger on your other hand. Five fingers wins. No lock-in, no point. And a cicak is hiding in this video. Find it!", {"pre": .5, "post": .3}),
+ ("say", "h302", H, "Every time you are right, put up one finger on your other hand. No lock-in, no point. And a cicak is hiding in this video. Find it!", {"pre": .5, "post": .3}),
  ("scene", "goals"),
  ("say", "h303", H, "Today you will learn what diversity means, how to classify things into groups, and how to tell living things from non-living things.", {"pre": .4, "post": .5}),
  # ---- 4 · where the six things came from: diversity
@@ -41,7 +41,8 @@ SEQ = [
  ("say", "h401", H, "Our six things came from here. A void deck and a garden in Toa Payoh. Look around.", {"pre": .9}),
  ("say", "h402", H, "A mynah. Ants. A papaya tree. A bench. A bicycle. A blue recycling bin. So many different things!", {"pre": .5, "post": .4}),
  ("scene", "mark1"),
- ("say", "h403", H, "There is a great variety of living and non-living things around us. This is called diversity.", {"pre": .7, "post": 1.0}),
+ ("say", "h403", H, "There is a great variety of living and non-living things around us. This is called diversity.", {"pre": .7}),
+ ("wait", 2.0), ("mark", "kw_diversity"), ("wait", 2.0), ("mark", "kw_living"), ("wait", .55), ("mark", "kw_nonliving"), ("wait", .9),
  ("scene", "garden2"),
  ("say", "b404", B, "So many! How do we keep track?", {"pre": .4}),
  ("say", "h405", H, "We put them into groups. Let's start with six.", {"pre": .35, "post": .9}),
@@ -99,9 +100,25 @@ SEQ = [
  ("say", "h802", H, "Living things need water, food and air. Living things grow, respond to changes and reproduce. You will test these in the next two episodes.", {"pre": .5, "post": .6}),
  ("scene", "chant"), ("wait", .9),
  ("chant", "c803"), ("wait", .7),
+ # ---- Part 1's ending: the box under its cloth, the score hand, the shelf recap, "Now you know!"
+ ("scene", "tease"),
+ ("say", "h850", H, "Our box has twenty-five more days to go. What will be under the cloth on Day thirty? Find out in Part Two!", {"pre": .9, "post": .9}),
+ ("scene", "p1score"),
+ ("say", "h851", H, "Show me your score hand!", {"pre": .6, "post": 1.6}),
+ ("mark", "recap"), ("wait", 2.2),
+ ("scene", "nyk"),
+ ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
+ ("wait", 2.2),
+]
+
+SEQ2 = [
+ # ---- Part 2's silent open: a recap montage, then "Last time..."
+ ("scene", "recap"), ("wait", 4.8),
+ ("scene", "recapline"),
+ ("say", "h880", H, "Last time, we put six things in a box, and we found the real clues. What does it need? What can it do? Now it's Day ten. Time to sort!", {"pre": .5, "post": .7}),
  # ---- 9 · HOLD ON: Momo's sort
  ("scene", "sort"),
- ("say", "h901", H, "Day ten. Time to sort all six into two groups: living things and non-living things. Momo, you go first.", {"pre": .8, "post": .3}),
+ ("say", "h901", H, "Sort all six into two groups: living things and non-living things. Momo, you go first.", {"pre": .8, "post": .3}),
  ("mark", "sortGo"),
  ("say", "m902", M, "Squish... squish... knock, knock. Done!", {"pre": .9, "post": .7}),
  ("say", "h903", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .2}),
@@ -110,7 +127,8 @@ SEQ = [
  ("say", "m905", M, "I wanted to know how they feel! Good sort. Wrong question.", {"pre": .5, "post": .6}),
  ("scene", "mark2"),
  ("say", "h906", H, "Momo did put things into groups. Alike things together. Different things apart.", {"pre": .5}),
- ("say", "h907", H, "Classification is the grouping of things based on their similarities and differences.", {"pre": .9, "post": 1.0}),
+ ("say", "h907", H, "Classification is the grouping of things based on their similarities and differences.", {"pre": .9}),
+ ("wait", 2.0), ("mark", "kw_classification"), ("wait", 2.3),
  ("scene", "relabel"),
  ("say", "h908", H, "You can choose soft or hard. But our question is living or non-living. So we use the real clues. Has anyone done that?", {"pre": .5, "post": .6}),
  # ---- 10 · Showdown: Pip's homework
@@ -118,6 +136,7 @@ SEQ = [
  ("scene", "show"),
  ("say", "p1001", P, "My homework from Day one. I fixed the green bean after Round two.", {"pre": .5}),
  ("say", "h1002", H, "Showdown! Double points. Pip made a table with two columns. One thing is still in the wrong column.", {"pre": .5}),
+ ("wait", .3), ("mark", "kw_table"), ("wait", 2.2),
  ("say", "h1003", H, "Is it one, the wind-up robot? Two, the plant? Or three, the pebble? Show me with your fingers.", {"pre": .5}),
  ("mark", "ring0_4"), ("wait", 6.0), ("mark", "bell_4"), ("wait", .55),
  ("say", "h1004", H, "Locked in!", {"pre": 0}),
@@ -132,7 +151,8 @@ SEQ = [
  # ---- 11 · three ways to show the groups
  ("scene", "ways"),
  ("say", "h1101", H, "Pip used a table. The same two groups can be shown in other ways too.", {"pre": .5}),
- ("say", "h1102", H, "We can present our classification using pictures, a table, and a graphic organiser.", {"pre": .8, "post": 1.0}),
+ ("say", "h1102", H, "We can present our classification using pictures, a table, and a graphic organiser.", {"pre": .8}),
+ ("wait", 2.0), ("mark", "kw_go"), ("wait", 2.3),
  # ---- 12 · Day 30
  ("scene", "day30"), ("wait", 1.4),
  ("say", "h1201", H, "Day thirty. What is under the cloth?", {"pre": 0}),
@@ -143,13 +163,16 @@ SEQ = [
  ("chant", "c1204"), ("wait", .6),
  # ---- 13 · score hand, cicak, the dare, "Now you know!"
  ("scene", "final"),
- ("say", "h1301", H, "Show me your score hand! More than three? You beat the Buddies. Five fingers? High five!", {"pre": .5, "post": .6}),
+ ("say", "h1301", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .6}),
  ("scene", "cicak"),
  ("say", "h1302", H, "Did you spot the cicak? It was on the window frame on day fourteen. Is a cicak living or non-living? Tell someone at home.", {"pre": .4, "post": .6}),
  ("scene", "day31"), ("wait", 1.3),
  ("say", "m1303", M, "Oh no. Is it sad?", {"pre": 0}),
- ("say", "h1304", H, "A drooping plant isn't sad. What does it need? Lock in your answer for next time.", {"pre": .5, "post": .6}),
+ ("say", "h1304", H, "A drooping plant isn't sad. What does it need? Lock in your answer for next time.", {"pre": .5, "post": 1.0}),
+ ("mark", "recap"), ("wait", 2.2),
  ("scene", "nyk"),
  ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
  ("wait", 2.2),
+
 ]
+SEQS = {1: SEQ1, 2: SEQ2}

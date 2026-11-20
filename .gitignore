@@ -40,3 +40,7 @@ production/workspace/explained2/*/out/stems/
 production/workspace/explained2/*/out/chunks/
 *.part.mp4
 production/workspace/explained2/ep01/*.mp4
+production/workspace/explained2/**/*.mp4
+production/workspace/explained2/**/*.wav
+!production/workspace/explained2/characters/sprites/*_test*.mp4
+!production/workspace/explained2/characters/sprites/pose_test_robot_round.mp4

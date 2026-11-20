@@ -1,6 +1,6 @@
 """make_voice.py: every spoken line of EP1 -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
   /home/user/heart-tts/venv/bin/python make_voice.py
-Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: pitch swing x1.6, -21.7 dB), but at speed 1.05 with .28 s between
+Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: pitch swing x1.6, -21.7 dB), but at speed .95 with .45 s between
          sentences (the recipe's .94 and .57 made the episode 8 minutes; the script asks for 6:30); the shrink is said slower (.92);
          "Now you know!" excited: faster, +3 semitones, wider swing, +3 dB).
 Buddies = the Character Voice Kit voices exactly as in characters/sprites/talk_voice.py (voice_maker.CHARACTERS, -18 dB RMS).
@@ -11,7 +11,8 @@ import os, sys, json, re, wave, subprocess, numpy as np, soundfile as sf, parsel
 from parselmouth.praat import call
 H = os.path.dirname(os.path.abspath(__file__)); SPR = os.path.join(H, "..", "characters", "sprites"); sys.path.insert(0, SPR); sys.path.insert(0, H)
 import voice_maker as vm, talk_voice as tv
-from script import SEQ, PRON, CHANT
+from script import SEQS, PRON, CHANT
+SEQ = SEQS[1] + SEQS[2]
 import pocketsphinx
 from pocketsphinx import Decoder
 D = "/home/user/heart-tts"; SR = 24000; V = f"{H}/voice"; os.makedirs(V, exist_ok=True)
@@ -29,7 +30,7 @@ def up48(x, sr):
     n = int(len(x) * 48000 / sr); X = np.fft.rfft(x); Y = np.zeros(n // 2 + 1, complex); m = min(len(X), len(Y)); Y[:m] = X[:m]
     return np.fft.irfft(Y, n) * (n / len(x))
 
-def heart(text, excited=False, gap=.28, spd=1.05):
+def heart(text, excited=False, gap=.45, spd=.95):
     speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if excited else (spd, 1.6, 1.0, 0.0); parts = []
     for p in sents(pron(text)):
         a, sr = K().create(p, voice="af_heart", speed=speed, lang="en-us"); x = a.astype(np.float64)
@@ -43,7 +44,8 @@ def heart(text, excited=False, gap=.28, spd=1.05):
     return np.clip(x * (10 ** ((-21.7 + gain) / 20) / np.sqrt(np.mean(sp ** 2))), -0.98, 0.98), SR
 
 def buddy(who, text, gap=.16):
-    x, sr = vm.speak(K(), pron(text), dict(vm.CHARACTERS[who]), gap=gap, para_gap=0)
+    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * .93   # a little slower (the teacher: about 10% slower overall)
+    x, sr = vm.speak(K(), pron(text), c, gap=gap + .06, para_gap=0)
     idx = np.where(np.abs(x) > .01)[0]; x = x[max(0, idx[0] - 240): idx[-1] + 2400].astype(np.float64)
     sp = x[np.abs(x) > .003]; return np.clip(x * (10 ** (-18 / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98), sr
 
@@ -51,7 +53,7 @@ def stretch(x, sr, dur):
     snd = parselmouth.Sound(x, sr); f = dur / (len(x) / sr)
     return call(snd, "Lengthen (overlap-add)", 75, 600, f).values[0] if abs(f - 1) > .02 else x
 
-BAR = 1.5   # the chant: one phrase per bar; clap, clap, stomp
+BAR = 1.65   # the chant: one phrase per bar; clap, clap, stomp
 def chant(id):
     """three buddies in unison, each phrase stretched to the same length; returns the mix and one track per buddy"""
     tracks = {}
@@ -64,7 +66,7 @@ def chant(id):
             tracks[who] = (raw, sr)
     if tracks:
         n = int(BAR * 4 * SR) + SR // 2
-        durs = [min(1.28, float(np.median([len(tracks[w][0][i]) / SR for w in tracks]))) for i in range(4)]
+        durs = [min(1.42, float(np.median([len(tracks[w][0][i]) / SR for w in tracks]))) for i in range(4)]
         for who, (raw, sr) in tracks.items():
             y = np.zeros(n)
             for i, x in enumerate(raw):
@@ -76,7 +78,7 @@ def chant(id):
     words = []
     for i, ph in enumerate(CHANT):
         ws = ph.split()
-        for j, w in enumerate(ws): words.append({"w": w, "a": round(i * BAR + .02 + j * 1.05 / len(ws), 3), "b": round(i * BAR + .02 + (j + 1) * 1.05 / len(ws), 3)})
+        for j, w in enumerate(ws): words.append({"w": w, "a": round(i * BAR + .02 + j * 1.15 / len(ws), 3), "b": round(i * BAR + .02 + (j + 1) * 1.15 / len(ws), 3)})
     out["words"] = words
     for w in ("pip", "basil", "momo"):
         x, sr = sf.read(f"{V}/{id}_{w}.wav"); op, lv = tv.envelope(x, sr); out["tracks"][w] = tv.mouth_track(tv.level(x, sr, op))
@@ -136,7 +138,7 @@ for it in SEQ:
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
     if os.path.exists(j) and json.load(open(j)).get("text") == text and os.path.exists(f): continue
-    x, sr = heart(text, o.get("excited", False), o.get("gap", .28), o.get("speed", 1.05)) if who == "heart" else buddy(who, text)
+    x, sr = heart(text, o.get("excited", False), o.get("gap", .45), o.get("speed", .95)) if who == "heart" else buddy(who, text)
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     words, ok = align(text, f)
     if not ok: bad.append(id)
