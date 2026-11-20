@@ -34,23 +34,25 @@ SC.cold = (t) => { const tb = MK("coldBox"), tl = MK("coldLid"), t30 = MK("coldD
   if (t < tb) { const z = 1 + .16 * eio(t / tb);   // wide: the room, rain on the grilles, the empty box on the ledge
     return CAM(bg("room") + `<g clip-path="url(#rmW)">${rain(t, 330, 150, 760, 470, 46, 36, .55)}</g>` + TF(710, 616, 1.25, miniBox()) + `<ellipse cx="710" cy="618" rx="130" ry="10" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>`, z, 710, 520) + lowerPill(60, 960, "Toa Payoh, Singapore", "6.40 am"); }
   if (t < t30) { // close on the box: buddy paws put the six things in, one at a time
-    const items = [["pebble", B.pebble, B.floor - 30, 50, "#E4E1EC"], ["teddy", B.teddy, B.floor, 200, "#B9B4D6"], ["bean", B.bean, B.floor, 60, "#DCE4DE"], ["plant", B.plant, B.floor - 72, 350, "#E4E1EC"], ["dish", B.dish, B.floor, 60, "#B9B4D6"], ["robot", 520, B.lane, 215, "#DCE4DE"]];
+    const items = [["pebble", B.pebble, B.floor - 30, 50, "#E4E1EC"], ["teddy", B.teddy, B.floor, 200, "#B9B4D6"], ["bean", B.bean, B.floor, 60, "#DCE4DE"], ["plant", B.plant, B.floor - 72, 350, "#E4E1EC"], ["dish", B.dish, B.floor, 60, "#B9B4D6"], ["robot", 880, B.lane, 215, "#DCE4DE"]];
     const hide = {}, drop = []; let paws = "";
     items.forEach(([nm, x, y, hh, col], i) => { const t0 = tb + .15 + i * .78, u = clamp((t - t0) / .42), land = t0 + .42; if (t < t0) { hide[nm] = 1; return; }
       const yy = lerp(-420, 0, 1 - Math.pow(1 - u, 2)), sq = 1 - .12 * wob(t, land, .3) * (t > land ? 1 : 0); drop.push([nm, x, y, yy, sq]);
-      const up = clamp((t - land - .08) / .3); if (up < 1) paws += TF(x, y - hh - 6 + yy - up * 700, 1, paw(col, "#9C96B8")); });
+      const up = clamp((t - land - .08) / .3); if (up < 1) paws += TF(x, y - hh - 6 + yy - up * 700, 1.25, paw(col, "#9C96B8", i % 3)); });
     const st = { day: 1, hide: {} }; for (const k of ["plant", "bean", "dish", "pebble", "teddy", "robot"]) st.hide[k] = 1;
     // draw each landed/falling thing itself (so it can fall and squash)
     const one = (nm) => { const h2 = { plant: 1, bean: 1, dish: 1, pebble: 1, teddy: 1, robot: 1 }; delete h2[nm]; return h2; };
     let things = ""; for (const [nm, x, y, yy, sq] of drop) { if (nm === "robot") continue; things += `<g transform="translate(0 ${n2(yy)}) translate(${x} ${y}) scale(${n2(1 / sq)} ${n2(sq)}) translate(${-x} ${-y})">${boxThings({ day: 1, hide: one(nm) })}</g>`; }
     // the robot: set down, wound up (the key turns: crrk-crrk), then it walks
     const rb = drop.find((d) => d[0] === "robot"); let rob = "";
-    if (rb) { const land = tb + .15 + 5 * .78 + .42, tw0 = land + .15, tgo = land + .75, p = Math.max(0, (t - tgo) / .26), x = 520 + Math.min(p, 6) / 6 * (B.robot0 - 520), wind = t > tw0 && t < tgo ? Math.floor((t - tw0) / .15) * .9 + ss(0, .1, (t - tw0) % .15) * .9 : 0;
+    if (rb) { const land = tb + .15 + 5 * .78 + .42, tw0 = land + .15, tgo = land + .75, p = Math.max(0, (t - tgo) / .26), x = 880 + Math.min(p, 6) / 6 * (B.robot0 - 880), wind = t > tw0 && t < tgo ? Math.floor((t - tw0) / .15) * .9 + ss(0, .1, (t - tw0) % .15) * .9 : 0;
       rob = TF(x, B.lane + rb[3], B.rs, t < tgo ? robotRig({ key: wind, sy: rb[4] }) : (p < 6 ? robotWalk(p, 1) : robotWalk(6 + (t - tgo - 6 * .26) / .26, 1))); }
     const lidU = clamp((t - tl) / .4), lidY = t < tl ? -600 : lerp(-420, 0, 1 - Math.pow(1 - lidU, 2)) - 10 * wob(t, tl + .4, .3) * (t > tl + .4 ? 1 : 0);
     const tct = tl + .75, ck = t < tct ? 0 : lerp(1.9, 1, eo((t - tct) / .16)) + .05 * wob(t, tct + .16, .35);
-    const z = 1.0 + .035 * (t - tb) / (t30 - tb);
-    return CAM(bg("boxfar_rain") + `<g clip-path="url(#bfW)">${rain(t, -80, -40, 1330, 940, 40, 44, .4)}</g>`, z, 960, 560, .35) + CAM(boxBack() + things + rob + boxFront({ lid: t < tl ? 0 : 1, lidY }) + paws, z, 960, 560)
+    // the camera goes to each thing as it lands, then pulls back for the lid
+    const ii = clamp(Math.floor((t - tb - .15) / .78), 0, 5), uu = eio((t - (tb + .15 + ii * .78)) / .4), fx = lerp(ii ? items[ii - 1][1] : 1200, items[ii][1], uu), wide = ss(tl - .5, tl + .3, t), fx2 = ii === 5 && rob ? lerp(fx, 760, ss(tb + 5.2, tb + 6, t)) : fx;
+    const z = lerp(1.42, 1.0, wide), ccx = lerp(clamp(fx2, 700, 1220), 960, wide), ccy = lerp(640, 560, wide);
+    return CAM(bg("boxfar_rain") + `<g clip-path="url(#bfW)">${rain(t, -80, -40, 1330, 940, 40, 44, .4)}</g>`, z, ccx, ccy, .35) + CAM(boxBack() + things + rob + boxFront({ lid: t < tl ? 0 : 1, lidY }) + paws, z, ccx, ccy)
       + (ck ? `<g transform="translate(180 226) scale(${n2(ck)}) translate(-180 -226)" opacity="${n2(clamp((t - tct) / .08))}">${counter(t, 1, -9)}</g>` : ""); }
   // flash forward: DAY 30. A cloth covers the box; something inside is pushing it up
   const u = t - t30, day = Math.min(30, 1 + Math.floor(u / .45 * 29)), cy = lerp(-900, 0, eo(u / .4)), bump = 34 * (pulse(t, t30 + .75, .12, .5) + pulse(t, t30 + 1.2, .12, .6));
@@ -78,12 +80,12 @@ SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) 
 /* ============ the lock-in scene (style 7.1), shared by the practice and Rounds 1 and 2 ============
    c: { s (scene), q (question), tq (when the question shows), tL, tR (cards pop), ring0, dur, lock (Heart's "Locked in!" line), obj(t) -> svg at the ring centre,
         picks: [{who, id, word, kind, x}], t1 (the scene ends), demo (show the YOU pointing hands), score }  */
-function lockScene(t, c) { const bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, picks = c.picks, tb0 = LT(picks[0].id) - .5, rs = ringState(t, c.ring0, c.dur);
+function lockScene(t, c) { const bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, picks = c.picks, tb0 = Math.min(...picks.map((p) => LT(p.id))) - .5, rs = ringState(t, c.ring0, c.dur);
   const zb = ss(tb0, tb0 + .4, t), gs = lerp(1, .76, zb), shut = pulse(t, bell, .01, .6);
   const cardL = spring(t, c.tL, .45), cardR = spring(t, c.tR, .45), pl = t >= c.ring0 && t < bell ? rs.tick : 0;
-  let main = `<ellipse cx="330" cy="470" rx="380" ry="330" fill="${P.blue}" opacity="${n2(.3 * Math.min(1, cardL))}" filter="url(#b60)"/><ellipse cx="1590" cy="470" rx="380" ry="330" fill="${P.orange}" opacity="${n2(.3 * Math.min(1, cardR))}" filter="url(#b60)"/>`;
-  if (cardL > .02) main += TF(330, 470, cardL, choiceCard(0, 0, "blue", "LIVING", "point LEFT", { flip: 1, pulse: pl }));
-  if (cardR > .02) main += TF(1590, 470, cardR, choiceCard(0, 0, "orange", "NON-LIVING", "point RIGHT", { flip: -1, pulse: pl }));
+  let main = `<ellipse cx="330" cy="470" rx="380" ry="330" fill="${P.leaf}" opacity="${n2(.3 * Math.min(1, cardL))}" filter="url(#b60)"/><ellipse cx="1590" cy="470" rx="380" ry="330" fill="${P.blue}" opacity="${n2(.3 * Math.min(1, cardR))}" filter="url(#b60)"/>`;
+  if (cardL > .02) main += TF(330, 470, cardL, choiceCard(0, 0, "green", "LIVING", "point LEFT", { flip: 1, pulse: pl }));
+  if (cardR > .02) main += TF(1590, 470, cardR, choiceCard(0, 0, "blue", "NON-LIVING", "point RIGHT", { flip: -1, pulse: pl }));
   main += ringTimer(960, 470, t < bell ? rs.frac : 0, t < bell ? rs.secs : 0, t, { tick: rs.tick, shut, inner: `<ellipse cx="960" cy="596" rx="120" ry="18" fill="${P.ink}" opacity=".5" filter="url(#b4)"/>` + c.obj(t) });
   if (shut > .05) main += `<circle cx="960" cy="470" r="${n2(RING_R + 40 + 80 * (1 - shut))}" fill="none" stroke="${P.sun}" stroke-width="6" opacity="${n2(shut * .8)}"/>`;
   let top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
@@ -91,7 +93,7 @@ function lockScene(t, c) { const bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, 
   const bx = { [picks[0].who]: 0, [picks[1].who]: 0, [picks[2].who]: 0 }; const X0 = { pip: 600, basil: 960, momo: 1320 }; let buds = "", bubs = "";
   const tin = c.demo ? c.ring0 - .3 : c.s.t0 + .25;
   let cards = "";
-  ["pip", "basil", "momo"].forEach((who, i) => { const pk = picks.find((p) => p.who === who), sp = speaking(who, t), hh = lerp(224, 290, zb) * (sp ? 1.06 : 1), x = lerp(X0[who], [400, 960, 1520][i], zb), poses = [[tin, who === "basil" ? "arms_crossed" : "thinking"], [LT(pk.id) - .12, "sit"]];
+  ["pip", "basil", "momo"].forEach((who, i) => { const pk = picks.find((p) => p.who === who), sp = speaking(who, t), hh = lerp(224, 320, zb) * (sp ? 1.06 : 1), x = lerp(X0[who], [400, 960, 1520][i], zb), poses = [[tin, who === "basil" ? "arms_crossed" : "thinking"], [LT(pk.id) - .12, "sit"]];
     if (c.react) for (const [tt, w2, p2] of c.react) if (w2 === who) poses.push([tt, p2]);
     poses.sort((a, b) => a[0] - b[0]);
     buds += buddy(who, x, 1062, hh, t, { aura: true, auraO: .85, in: tin + i * .12, poses });
@@ -108,7 +110,7 @@ function lockScene(t, c) { const bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, 
 /* ============ the practice round: the teddy bear ============ */
 SC.prac = (t, s) => { const tv = LT("h208"), tT = WE("h208", "thing"), tLk = W("h208", "eyes");
   if (t < tv - .35) return lockScene(t, { s, q: "The teddy bear. Is it…", tq: W("h203", "the"), tL: W("h203", "left"), tR: W("h203", "right"), ring0: MK("ring0_p"), dur: 5, lock: "h204", demo: true, score: false,
-    obj: () => TF(960, 566, 1.22, teddyBig(), 0), picks: [{ who: "pip", id: "p205", word: "NON-LIVING", kind: "orange" }, { who: "basil", id: "b206", word: "NON-LIVING", kind: "orange" }, { who: "momo", id: "m207", word: null }] });
+    obj: () => TF(960, 566, 1.22, teddyBig(), 0), picks: [{ who: "pip", id: "p205", word: "NON-LIVING", kind: "blue" }, { who: "basil", id: "b206", word: "NON-LIVING", kind: "blue" }, { who: "momo", id: "m207", word: null }] });
   // the verdict: the teddy bear alone, the tag lands, "buttons" joined to its eyes by a plain line
   const u = t - (tv - .35), z = 1 + .05 * u / 8;
   return bg("stage") + CAM(`<circle cx="960" cy="520" r="330" fill="#fff" opacity=".08"/><circle cx="960" cy="520" r="250" fill="#fff" opacity=".07"/>` + groundShadow(960, 742, 190, 26, .5) + `<g filter="url(#rim)">${TF(960, 740, 2.1 * spring(t, tv - .35, .5), teddyBig())}</g>`

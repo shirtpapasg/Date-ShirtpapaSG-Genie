@@ -63,10 +63,17 @@ function buddy(who, x, y, h, t, o = {}) {
   let sy = 1, sx = 1, rot = 0, lift = 0;
   if (!o.still) { const br = Math.sin(2 * Math.PI * (t + ph) / 3); sy *= 1 + .012 * br; sx *= 1 - .004 * br; rot += .35 * Math.sin(2 * Math.PI * (t + ph) / 4.6); }
   if (o.in !== undefined) { const w = wob(t, o.in, .5); sy *= 1 + .09 * w; sx *= 1 - .07 * w; }
-  // pose swap: anticipation (a quick squash before), then a stretch and a settle
-  const ant = ss(nxt - .1, nxt, t) * (1 - 0); sy *= 1 - .07 * ant; sx *= 1 + .05 * ant;
-  if (tsw > -90) { const w = wob(t, tsw, .42), a = Math.exp(-(t - tsw) * 9); sy *= 1 + .10 * a * 1.0 + .05 * w; sx *= 1 - .07 * a - .04 * w; lift -= 14 * hop(t, tsw, .26) * (h / 300); }
-  const nod = nodOf(who, t), q = .016 * nod; sy *= 1 - q; sx *= 1 + .8 * q; rot += 1.1 * nod * (o.flip ? -1 : 1);
+  // pose swap, as in the approved pose test: 3 frames of squash on the old picture, a hard cut to the new picture stretched tall,
+  // an overshoot that settles in about 0.3 s, a tiny hop, a ring of sparkles and two dust puffs. Never a cross-fade.
+  const ant = ss(nxt - .1, nxt, t); sy *= 1 - .10 * ant; sx *= 1 + .08 * ant; let fx = "";
+  if (tsw > -90 && !(o.in !== undefined && Math.abs(tsw - o.in) < .3)) { const u = t - tsw, w = Math.exp(-u * 9) * Math.cos(u * 23); sy *= 1 + .13 * w; sx *= 1 - .09 * w; lift -= 15 * Math.sin(Math.PI * clamp(u / .22)) * (h / 380);
+    if (u < .4 && !o.nofx) { const e = 1 - Math.pow(1 - u / .4, 2), cy = y - h * .52;
+      for (let i = 0; i < 6; i++) { const an = (-90 + (i - 2.5) * 44 + 8 * (who.length % 3)) * Math.PI / 180, r = h * (.5 + .22 * e), sc = (i % 2 ? .55 : .8) * Math.pow(Math.sin(Math.PI * Math.min(u / .4, 1)), .6) * h / 380; fx += `<g transform="translate(${n2(x + Math.cos(an) * r * 1.05)} ${n2(cy + Math.sin(an) * r * .92)}) scale(${n2(sc)}) rotate(${n2(40 * u)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#FFF3DC"/></g>`; }
+      for (const sg of [-1, 1]) fx += `<ellipse cx="${n2(x + sg * h * (.3 + .22 * e))}" cy="${n2(y + 4 - 10 * e)}" rx="${n2((26 + 30 * e) * h / 380)}" ry="${n2((12 + 12 * e) * h / 380)}" fill="#DDD3FF" opacity="${n2(.42 * (1 - e))}" filter="url(#b4)"/>`; }
+    // cheering: little hops with a squash on each landing; waving: a side-to-side rock with the whole body
+    if (pose === "cheer" && !o.nohop) { const e = ss(.1, .22, u) * (1 - ss(1.9, 2.3, u)), sA = Math.abs(Math.sin(Math.PI * 2.6 * (u - .1))); lift -= 24 * sA * e * (h / 380); const q2 = (.05 * Math.pow(1 - sA, 3) - .03 * sA) * e; sy *= 1 - q2; sx *= 1 + .8 * q2; rot += 1.6 * Math.sin(Math.PI * 2.6 * (u - .1)) * e; }
+    if (pose === "waving" || (who === "basil" && o.wave && pose === "cheer")) { const e = ss(.2, .4, u) * (1 - ss(1.9, 2.3, u)), sA = Math.sin(2 * Math.PI * 2.1 * u); rot += 4.6 * sA * e; sy *= 1 - .02 * Math.abs(sA) * e; } }
+  const nod = nodOf(who, t), q = (pose === "sit" ? .016 : .022) * nod; sy *= 1 - q; sx *= 1 + .8 * q; rot += 1.1 * nod * (o.flip ? -1 : 1); if (pose !== "sit") lift -= 5 * nod;
   for (const [tj, hj] of o.jump || []) { lift -= hop(t, tj, .36) * hj; const a = ss(tj - .12, tj, t) * (t < tj ? 1 : 0); sy *= 1 - .08 * a; sx *= 1 + .06 * a; const w = wob(t, tj + .36, .35); if (t > tj + .36) { sy *= 1 - .08 * w; sx *= 1 + .06 * w; } }
   if (o.rock) rot += o.rock * Math.sin(2 * Math.PI * t / .7);
   rot += o.look || 0;
@@ -79,16 +86,18 @@ function buddy(who, x, y, h, t, o = {}) {
   if (o.aura) { const R = h * .62 * Math.min(1, k), cx = x + DISC_DX[who] * h * fl; out += `<circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="${AURA[who]}" opacity="${o.auraO || .9}"/><circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="url(#gSpot)"/>`; }
   if (o.shadow !== false) out += `<ellipse cx="${n2(x)}" cy="${n2(y - h * .01)}" rx="${n2(h * .36 * sx * k * (1 + lift / 400))}" ry="${n2(h * .06 * k)}" fill="${P.ink}" opacity="${n2(.3 * (1 + lift / 200))}" filter="url(#b4)"/>`;
   out += `<g transform="translate(${n2(x)} ${n2(y + lift)}) rotate(${n2(rot)}) scale(${n2(s0 * sx * fl * 1000) / 1000} ${n2(s0 * sy * 1000) / 1000}) translate(${-S.ax} ${-S.ay})" ${o.rim === false ? "" : `filter="url(#${o.rim || "rimB"})"`}><use href="#s_${name}"/></g>`;
-  return out;
+  return out + fx;
 }
 
 /* ---------- speech bubble: white pill, Fredoka 600; a ✗ chip at the START for an idea that is not right ---------- */
 function bubble(x, y, lines, t, t0, t1, o = {}) {
   if (t < t0 || t > t1 + .25) return ""; const size = o.size || 40, k = spring(t, t0, .4) * (1 - eo((t - t1) / .2));
   const w = Math.max(...lines.map((l) => tw(l, size, 600))) + 70 + (o.x ? 64 : 0), h = lines.length * size * 1.22 + 40, tail = o.tail === undefined ? 0 : o.tail, td = o.down === false ? -1 : 1;
-  let s = `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${-h / 2}" width="${n2(w)}" height="${h}" rx="${Math.min(h / 2, 44)}" fill="#fff"/><path d="M${tail - 20} ${td * (h / 2 - 3)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 34)} L${tail + 20} ${td * (h / 2 - 3)}z" fill="#fff"/></g>`;
+  let s = `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${-h / 2}" width="${n2(w)}" height="${h}" rx="${Math.min(h / 2, 44)}" fill="#FFF8EA"/><path d="M${tail - 20} ${td * (h / 2 - 3)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 34)} L${tail + 20} ${td * (h / 2 - 3)}z" fill="#FFF8EA"/></g>`;
   const tx0 = o.x ? 32 : 0;
-  lines.forEach((l, i) => { s += T(tx0, (i - (lines.length - 1) / 2) * size * 1.22 + size * .35, esc(l), size, P.ink, { w: 600 }); });
+  lines.forEach((l, i) => { let h2 = esc(l); const m = i === 0 && o.pick !== false && /^(Living!|Non-living[.!])/.exec(l);
+    if (m) h2 = `<tspan fill="${m[1][0] === "L" ? P.leafDeep : P.blueDeep}" font-weight="700">${m[1]}</tspan>` + esc(l.slice(m[1].length));
+    s += T(tx0, (i - (lines.length - 1) / 2) * size * 1.22 + size * .35, h2, size, P.ink, { w: 600 }); });
   if (o.x) s += `<g transform="translate(${n2(-w / 2 + 46)} 0)"><circle r="27" fill="${P.paper}" stroke="${P.ink}" stroke-width="3" opacity=".95"/><path d="M-11 -11 L11 11 M11 -11 L-11 11" stroke="${P.ink}" stroke-width="7" stroke-linecap="round"/></g>`;
   return TF(x, y, k, s);
 }
@@ -142,9 +151,9 @@ const crossedArms = () => `<g stroke="${SKIN2}" stroke-width="5" stroke-linejoin
 /* ---------- game pieces ---------- */
 // verdict tag: LIVING (blue) or NON-LIVING (orange), lands with a small bounce
 function tag(t, t0, x, y, living, s = 1) { const k = spring(t, t0, .45); if (k < .02) return ""; const txt = living ? "LIVING" : "NON-LIVING", w = (living ? 250 : 370);
-  return TF(x, y + (1 - eo((t - t0) / .25)) * -60, k * s, `<g filter="url(#drop)" transform="rotate(${living ? -3 : 3})"><rect x="${-w / 2}" y="-40" width="${w}" height="80" rx="40" fill="url(#${living ? "gBlue" : "gOrange"})"/><rect x="${-w / 2 + 8}" y="-34" width="${w - 16}" height="30" rx="15" fill="#fff" opacity=".2"/>${T(0, 16, txt, 44, "#fff", { ls: 6 })}</g>`); }
+  return TF(x, y + (1 - eo((t - t0) / .25)) * -60, k * s, `<g filter="url(#drop)" transform="rotate(${living ? -3 : 3})"><rect x="${-w / 2}" y="-40" width="${w}" height="80" rx="40" fill="url(#${living ? "gGreen" : "gBlue"})"/><rect x="${-w / 2 + 8}" y="-34" width="${w - 16}" height="30" rx="15" fill="#fff" opacity=".2"/>${T(0, 16, txt, 44, "#fff", { ls: 6 })}</g>`); }
 // the flip day counter (style 7.6). day can be fractional while it flips: pass the day shown and the time of the last flip
-function counter(t, day, tflip = -9, x = 60, y = 110, s = 1, o = {}) { const f = clamp((t - tflip) / .2), sq = tflip > -5 ? 1 - .5 * Math.sin(Math.PI * f) * (f < 1 ? 1 : 0) : 1; let dots = "";
+function counter(t, day, tflip = -9, x = 60, y = 110, s = 1, o = {}) { if (typeof s === 'object') { o = s; s = 1; } const f = clamp((t - tflip) / .2), sq = tflip > -5 ? 1 - .5 * Math.sin(Math.PI * f) * (f < 1 ? 1 : 0) : 1; let dots = "";
   for (let i = 0; i < 30; i++) { const d = i + 1, cx = 22 + (i % 10) * 24, cy = 276 + Math.floor(i / 10) * 24; dots += `<circle cx="${cx}" cy="${cy}" r="${d === day ? 9.5 : 6.5}" fill="${d <= day ? P.sun : "#fff"}" opacity="${d <= day ? 1 : .22}"/>`; }
   return G(x, y, s, `<g filter="url(#drop)"><rect x="0" y="0" width="240" height="232" rx="34" fill="${P.ink}"/><path d="M0 34 Q0 0 34 0 H206 Q240 0 240 34 V72 H0z" fill="url(#gSun)"/></g>${T(120, 54, "DAY", 46, P.ink, { ls: 12 })}
   <g transform="translate(120 152) scale(1 ${n2(sq)})">${T(0, 46, day, 130, "#fff")}</g><rect x="0" y="150" width="240" height="4" fill="#000" opacity=".25"/>
@@ -164,7 +173,7 @@ function ringTimer(cx, cy, frac, secs, t, o = {}) { const R = o.R || RING_R, C =
 function ringTicks(t0, dur) { const out = []; for (let b = 0; b < dur; b++) { const left = dur - b, div = left > 3 ? 1 : left > 1 ? 2 : 4; for (let j = 0; j < div; j++) out.push(t0 + b + j / div); } return out; }
 function ringState(t, t0, dur) { const frac = clamp(1 - (t - t0) / dur), secs = Math.max(0, Math.ceil(dur - (t - t0) - 1e-6)); let tick = 0; if (t >= t0 && t < t0 + dur) for (const tt of ringTicks(t0, dur)) tick = Math.max(tick, pulse(t, tt, .01, .12)); return { frac: t < t0 ? 1 : frac, secs: t < t0 ? dur : secs, tick }; }
 // a choice card (left blue / right orange / purple)
-function choiceCard(x, y, kind, label, sub, o = {}) { const g = { blue: ["gBlue", P.blueDeep], orange: ["gOrange", P.orangeDeep], purple: ["gPurple", "#6B3FD0"] }[kind], flip = o.flip || 1, w = o.w || 480, h = o.h || 430, pls = o.pulse || 0, dim = o.dim === undefined ? 1 : o.dim, lit = o.lit || 0;
+function choiceCard(x, y, kind, label, sub, o = {}) { const g = { green: ["gGreen", "#1F8A4C"], blue: ["gBlue", P.blueDeep], orange: ["gOrange", P.orangeDeep], purple: ["gPurple", "#6B3FD0"] }[kind], flip = o.flip || 1, w = o.w || 480, h = o.h || 430, pls = o.pulse || 0, dim = o.dim === undefined ? 1 : o.dim, lit = o.lit || 0;
   return `<g transform="translate(${x} ${y}) rotate(${flip * 2.2}) scale(${n2(1 + .03 * pls + .05 * lit)})" opacity="${n2(dim)}">${lit ? `<rect x="${-w / 2 - 14}" y="${-h / 2 - 22}" width="${w + 28}" height="${h + 36}" rx="64" fill="${P.sun}" opacity="${n2(.8 * lit)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="50" fill="${g[1]}"/><rect x="${-w / 2}" y="${-h / 2 - 12}" width="${w}" height="${h}" rx="50" fill="url(#${g[0]})"/></g>
     <rect x="${-w / 2 + 18}" y="${-h / 2 + 2}" width="${w - 36}" height="${h * .3}" rx="38" fill="#fff" opacity=".16"/>
     ${o.icon || `<g transform="translate(${-flip * 14} ${-h * .17}) scale(${-flip * 1.15} 1.15)" filter="url(#dropS)">${hand("#fff")}</g>`}
@@ -172,11 +181,11 @@ function choiceCard(x, y, kind, label, sub, o = {}) { const g = { blue: ["gBlue"
     <g><rect x="-135" y="${h * .31}" width="270" height="52" rx="26" fill="${P.ink}" opacity=".35"/>${T(0, h * .31 + 37, sub, 30, "#fff", { w: 600, ls: 1 })}</g>
     ${lit > .5 ? `<g transform="translate(${w / 2 - 40} ${-h / 2 + 20}) scale(${n2(spring(lit, .5, .5))})"><circle r="42" fill="${P.leaf}" stroke="#fff" stroke-width="6"/><path d="M-18 2 L-5 15 L19 -13" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/></g>` : ""}</g>`; }
 // LOCKED IN! stamp
-function stamp(t, t0, x = 960, y = 470, txt = "LOCKED IN!") { if (t < t0 || t > t0 + 1.5) return ""; const u = (t - t0) / .14, k = u < 1 ? lerp(2.2, 1, eo(u)) : 1 + .06 * wob(t, t0 + .14, .4), o = Math.min(1, u * 2) * (1 - ss(t0 + 1.15, t0 + 1.45, t)); const w = tw(txt, 120, 700, "Fredoka", 8) + 120;
-  return OP(o, TF(x, y, k, `<g filter="url(#drop)"><rect x="${-w / 2}" y="-100" width="${w}" height="200" rx="44" fill="${P.sun}"/><rect x="${-w / 2 + 14}" y="-86" width="${w - 28}" height="172" rx="34" fill="none" stroke="${P.ink}" stroke-width="8"/></g>${T(0, 42, txt, 120, P.ink, { ls: 8 })}`, -6)); }
+function stamp(t, t0, x = 960, y = 470, txt = "LOCKED IN!") { if (t < t0 || t > t0 + .95) return ""; const u = (t - t0) / .14, k = (u < 1 ? lerp(2.2, 1, eo(u)) : 1 + .06 * wob(t, t0 + .14, .4)) * (1 + .5 * ei((t - t0 - .72) / .22)), o = Math.min(1, u * 2) * (1 - ss(t0 + .72, t0 + .94, t));
+  return OP(o, TF(x, y, k * 1.25, `<text x="0" y="40" font-family="Fredoka" font-weight="700" font-size="124" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="22" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">${txt}</text><text x="0" y="40" font-family="Fredoka" font-weight="700" font-size="124" text-anchor="middle" letter-spacing="6" fill="url(#gSun)">${txt}</text>`, -6)); }
 // a buddy's pick card: face down "?" until tflip, then the answer word in the choice colour
 function pickCard(who, x, y, t, tflip, word, kind) { const u = clamp((t - tflip) / .22), sx = Math.abs(Math.cos(Math.PI * u)), face = u > .5, pop = 1 + .15 * pulse(t, tflip + .11, .02, .3) * (t > tflip ? 1 : 0);
-  const fill = face ? { blue: "url(#gBlue)", orange: "url(#gOrange)", purple: "url(#gPurple)" }[kind] : P.ink, wd = face ? Math.max(96, tw(word, 30, 700, "Fredoka", 2) + 34) : 88;
+  const fill = face ? { green: "url(#gGreen)", blue: "url(#gBlue)", orange: "url(#gOrange)", purple: "url(#gPurple)" }[kind] : P.ink, wd = face ? Math.max(96, tw(word, 30, 700, "Fredoka", 2) + 34) : 88;
   return `<g transform="translate(${x} ${y}) rotate(${face ? 4 : 8}) scale(${n2(Math.max(.05, sx) * pop)} ${n2(pop)})" filter="url(#dropS)"><rect x="${-wd / 2}" y="-56" width="${wd}" height="112" rx="18" fill="${fill}" stroke="${P[who]}" stroke-width="6"/>${face ? T(0, 12, word, 30, "#fff", { ls: 2 }) : T(0, 22, "?", 64, P[who])}</g>`; }
 
 /* ---------- Mark Sentence card (style 7.5): words appear as Heart says them, highlights sweep in ---------- */

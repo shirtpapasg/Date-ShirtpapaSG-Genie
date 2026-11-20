@@ -35,3 +35,7 @@ production/workspace/explained2/short1/out/*.mp4
 production/workspace/explained2/short1/out/*.wav
 *.tmp.mp4
 production/workspace/explained2/characters/sprites/work/*.mp4
+production/workspace/explained2/ep01/out/
+production/workspace/explained2/*/out/stems/
+production/workspace/explained2/*/out/chunks/
+*.part.mp4

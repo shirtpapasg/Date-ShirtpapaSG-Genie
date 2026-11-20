@@ -8,9 +8,10 @@ const GT = {
     <circle cx="38" cy="-36" r="27" fill="#2B2742" stroke="#221E36" stroke-width="5"/><path d="M44 -62 q10 -12 18 -2" fill="none" stroke="#221E36" stroke-width="6" stroke-linecap="round"/><path d="M60 -40 L92 -32 L60 -24z" fill="#F7C531" stroke="#C98200" stroke-width="4" stroke-linejoin="round"/><circle cx="46" cy="-40" r="5.5" fill="#F7C531"/><circle cx="46" cy="-40" r="2.6" fill="${P.ink}"/><path d="M-30 4 q24 -10 44 8" stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none" opacity=".85"/>`,
   ants: () => [0, 1, 2, 3, 4].map((i) => `<g transform="translate(${-70 + i * 35} ${i % 2 * 5})"><ellipse cx="-8" cy="0" rx="7" ry="5" fill="#3A2420"/><circle cx="1" cy="0" r="4" fill="#3A2420"/><circle cx="8" cy="-1" r="4.5" fill="#3A2420"/><path d="M-6 3 l-4 7 M1 3 v8 M6 3 l4 7 M10 -4 l6 -6" stroke="#3A2420" stroke-width="1.8" stroke-linecap="round"/></g>`).join(""),
   // papaya tree: one straight trunk with leaf scars, a crown of big lobed leaves on long stalks, green fruit under the crown
-  papaya: () => { let lv = "", sc = ""; for (let i = 0; i < 9; i++) { const a = -Math.PI * (i / 8), x = Math.cos(a) * 170, y = -470 + Math.sin(a) * 120 - (i === 4 ? 20 : 0); lv += `<path d="M0 -440 Q${n2(x * .5)} ${n2(y - 30)} ${n2(x)} ${n2(y)}" stroke="#6FAE52" stroke-width="8" fill="none" stroke-linecap="round"/><g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(a * 180 / Math.PI + 90)})">${[-60, -30, 0, 30, 60].map((d) => `<ellipse cx="0" cy="-34" rx="17" ry="46" fill="url(#gLeaf)" stroke="#1F7F47" stroke-width="4" transform="rotate(${d})"/>`).join("")}<circle r="12" fill="#2FA65A"/></g>`; }
+  papaya: () => { let lv = "", sc = ""; const A = [-215, -180, -150, -120, -90, -60, -30, 0, 35];
+    A.forEach((deg, i) => { const a = deg * Math.PI / 180, R = 150 + (i % 2) * 34, x = Math.cos(a) * R, y = -440 + Math.sin(a) * R * .8; lv += `<path d="M0 -440 Q${n2(x * .5)} ${n2(y - 26)} ${n2(x)} ${n2(y)}" stroke="#7FB85C" stroke-width="8" fill="none" stroke-linecap="round"/><g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(deg + 90)})">${[-78, -52, -26, 0, 26, 52, 78].map((d) => `<path d="M0 0 Q-30 -44 0 -${d === 0 ? 92 : 76} Q30 -44 0 0z" fill="url(#gLeaf)" stroke="#1F7F47" stroke-width="4" stroke-linejoin="round" transform="rotate(${d})"/>`).join("")}<circle r="13" fill="#2FA65A"/></g>`; });
     for (let y = -60; y > -400; y -= 44) sc += `<path d="M-16 ${y} q16 10 32 0" stroke="#8C7458" stroke-width="4" fill="none"/>`;
-    return `<path d="M-26 0 Q-20 -220 -15 -440 H15 Q20 -220 26 0z" fill="#C9B08A" stroke="#8C7458" stroke-width="5" stroke-linejoin="round"/>${sc}${[[-24, -398, -14], [22, -394, 12], [-4, -372, 0], [-34, -360, -24], [30, -356, 20]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="19" ry="29" fill="#7FBF4A" stroke="#4E8F2E" stroke-width="4" transform="rotate(${r} ${x} ${y})"/>`).join("")}${lv}`; },
+    return `<path d="M-26 0 Q-20 -220 -15 -440 H15 Q20 -220 26 0z" fill="#C9B08A" stroke="#8C7458" stroke-width="5" stroke-linejoin="round"/>${sc}${lv}${[[-24, -398, -14], [22, -394, 12], [-4, -372, 0], [-34, -360, -24], [30, -356, 20]].map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="19" ry="29" fill="#7FBF4A" stroke="#4E8F2E" stroke-width="4" transform="rotate(${r} ${x} ${y})"/>`).join("")}`; },
   bench: () => `<g stroke="#8A5A36" stroke-width="5" stroke-linejoin="round"><rect x="-150" y="-110" width="300" height="34" rx="10" fill="#D79D62"/><rect x="-150" y="-66" width="300" height="34" rx="10" fill="#D79D62"/><rect x="-160" y="-22" width="320" height="34" rx="10" fill="#E6B57C"/></g><path d="M-120 12 v54 M120 12 v54 M-128 -110 v122 M128 -110 v122" stroke="#5E5A78" stroke-width="12" stroke-linecap="round"/>`,
   bicycle: () => `<g fill="none" stroke="${P.ink2}" stroke-width="9"><circle cx="-92" cy="0" r="62"/><circle cx="92" cy="0" r="62"/></g><g fill="none" stroke="#C9D2E8" stroke-width="3"><path d="M-92 -62 V62 M-154 0 H-30 M92 -62 V62 M30 0 H154"/></g><g fill="none" stroke="${P.coral}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M-92 0 L-40 -86 H56 L92 0 M-40 -86 L8 0 H-92 M8 0 L56 -86"/><path d="M56 -86 L46 -124 H80"/><path d="M-40 -86 L-48 -108"/></g><rect x="-76" y="-122" width="56" height="16" rx="8" fill="${P.ink}"/><circle cx="8" cy="0" r="12" fill="${P.ink2}"/>`,
   // the blue recycling bin
@@ -62,9 +63,9 @@ SC.garden = (t, s) => { const a = "h401", b = "h402", u = (t - s.t0) / (s.t1 - s
   const ta = W(b, "ants"), mk = spring(t, ta, .45) * (1 - ramp(t, W(b, "bench"), .25));
   if (mk > .02) hi += TF(1010, 800, mk, `<g filter="url(#drop)"><circle r="96" fill="#F1E3CF" stroke="#fff" stroke-width="10"/></g><g transform="scale(2.1) translate(${n2(((t * 14) % 35) - 17)} 0)">${GT.ants()}</g><circle r="96" fill="none" stroke="#fff" stroke-width="10"/>`);
   const t0 = s.t0 + .3;
-  const buds = hopIn("pip", -160, 170, 1066, 200, t, t0 + .3, { flip: true }) + hopIn("momo", -160, 520, 1066, 200, t, t0, { flip: true, poses: [[W(b, "so"), "surprised"], [W(b, "so") + 1.6, "sit"]] })
-    + hopIn("basil", -160, 345, 1072, 205, t, t0 + .15, { poses: [[W(a, "look"), "cheer"], [W(a, "look") + 1.2, "sit"]] });
-  const bx = lerp(-80, 660, clamp((t - t0) / 1.2)), by = 1040 - 24 * Math.abs(Math.sin(Math.PI * clamp((t - t0) / 1.2) * 4));
+  const buds = hopIn("pip", -160, 150, 1070, 240, t, t0 + .3, { flip: true }) + hopIn("momo", -160, 560, 1070, 240, t, t0, { flip: true, poses: [[W(b, "so"), "surprised"], [W(b, "so") + 1.6, "sit"]] })
+    + hopIn("basil", -160, 350, 1076, 245, t, t0 + .15, { poses: [[W(a, "look"), "cheer"], [W(a, "look") + 1.2, "sit"]] });
+  const bx = lerp(-80, 800, clamp((t - t0) / 1.2)), by = 1040 - 24 * Math.abs(Math.sin(Math.PI * clamp((t - t0) / 1.2) * 4));
   return CAM(bg("garden") + hi, z, 960, 640) + OP(ramp(t, s.t0 + .5, .3) * (1 - ramp(t, LT(b) - .2, .3)), lowerPill(60, 150, "Void deck and community garden,", "Toa Payoh")) + buds + TF(bx, by, .95, miniBox()) + HUD(t); };
 
 /* ============ Mark Sentence 1 ============ */
@@ -78,7 +79,7 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "h403", who: "momo", n: "1 of 3", tex
 /* ============ how do we keep track? Six things hop into the box ============ */
 SC.garden2 = (t, s) => { const tg = W("h405", "groups"), t6 = W("h405", "six") - .1, z = 1.25;
   const six = [() => TF(0, 10, .8, pebble()), () => TF(0, 50, .62, teddyKey()), () => TF(0, 30, 1, beanPlant(1)), () => TF(0, 10, .62, potPlant({})), () => TF(0, 30, .78, wormDish({ id: "g2" })), () => TF(0, 60, .6, robotRig({}))]; let row = "";
-  six.forEach((f, i) => { const tin = tg + i * .09, th = t6 + i * .16, k = spring(t, tin, .4); if (k < .02) return; const u = clamp((t - th) / .5), x0 = 760 + i * 190, y0 = 420, x = lerp(x0, 1420, u), y = lerp(y0, 860, u) - 260 * Math.sin(Math.PI * u), sc = k * lerp(1, .35, u); if (u >= 1) return;
+  six.forEach((f, i) => { const tin = tg + i * .09, th = t6 + i * .16, k = spring(t, tin, .4); if (k < .02) return; const u = clamp((t - th) / .5), x0 = 900 + i * 166, y0 = 420, x = lerp(x0, 1420, u), y = lerp(y0, 860, u) - 260 * Math.sin(Math.PI * u), sc = k * lerp(1, .35, u); if (u >= 1) return;
     row += `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(sc)})" filter="url(#glowS)"><circle r="92" fill="#fff" opacity=".85"/>${f()}</g>`; });
   const hopN = clamp(Math.floor((t - t6 - .5) / .16) + 1, 0, 6), bsq = 1 + .08 * pulse(t, t6 + .5 + (hopN - 1) * .16, .02, .16) * (hopN > 0 ? 1 : 0);
   return CAM(bg("garden"), z, 700, 760, 1) + `<rect width="1920" height="1080" fill="#fff" opacity=".18"/>`
@@ -122,7 +123,7 @@ SC.r1 = (t, s) => { const L = "h601";
     return boxView(t, { cam: [z, x + 40, 700], st: { day: 1, robotX: x, robot: robotWalk(R1.phase(t), 1) } }) + OP(ramp(t, W(L, "the") - .05, .25), TF(960, 150, 1, tpill(0, 0, "The wind-up robot", 56, P.ink, "#fff", { w: 700 }))) + counter(t, 1, -9, 60, 110, .8) + HUD(t); }
   return lockScene(t, { s: { t0: R1.cut }, q: "The wind-up robot. Is it…", tq: R1.cut, tL: W(L, "left"), tR: W(L, "right"), ring0: MK("ring0_1"), dur: 5, lock: "h602",
     obj: (tt) => TF(960, 596, 1.05, `<g filter="url(#rim)">${robotWalk(R1.phase(tt), 1)}</g>`),
-    picks: [{ who: "pip", id: "p604", word: "NON-LIVING", kind: "orange" }, { who: "basil", id: "b603", word: "LIVING", kind: "blue", x: true }, { who: "momo", id: "m605", word: "NON-LIVING", kind: "orange" }] }); };
+    picks: [{ who: "pip", id: "p604", word: "NON-LIVING", kind: "blue" }, { who: "basil", id: "b603", word: "LIVING", kind: "green", x: true }, { who: "momo", id: "m605", word: "NON-LIVING", kind: "blue" }] }); };
 
 // the evidence: the robot stops; a spring inside; all night; all of day two
 SC.r1ev = (t, s) => { const a = "h606", b = "h606b", c = "h607", B = BOX, tSp = W(a, "spring") - .15, tN = W(b, "all") - .2, tD = W(b, "all", 1) - .15, tflip = W(b, "day"), tv = LT(c) - .2;
@@ -135,11 +136,11 @@ SC.r1ev = (t, s) => { const a = "h606", b = "h606b", c = "h607", B = BOX, tSp = 
   const crawl = ss(tN + .4, tD, t), bites = t > lerp(tN, tD, .75) ? 1 : 0;   // in the night the mealworm crawls over and eats
   const robot = stopped ? robotWalkStop(win, coil) : rob;
   // "It does not need water, food or air. It does not grow."
-  let icons = ""; ["water", "food", "air"].forEach((k, i) => { const t0 = W(c, k) - .05, kk = spring(t, t0, .4); if (kk < .02) return; icons += TF(1420 + i * 0, 520 + i * 118, kk * .95, iconChip(k) + `<g transform="rotate(-45)"><rect x="-56" y="-7" width="112" height="14" rx="7" fill="${P.ink}"/></g>` ); });
-  const tg = W(c, "grow") - .1; icons += t >= tg ? TF(1420, 874, spring(t, tg, .4) * .95, iconChip("grow") + `<g transform="rotate(-45)"><rect x="-56" y="-7" width="112" height="14" rx="7" fill="${P.ink}"/></g>`) : "";
+  let icons = ""; ["water", "food", "air"].forEach((k, i) => { const t0 = W(c, k) - .05, kk = spring(t, t0, .4); if (kk < .02) return; icons += TF(750 + i * 140, 300, kk * .95, iconChip(k) + `<g transform="rotate(-45)"><rect x="-56" y="-7" width="112" height="14" rx="7" fill="${P.ink}"/></g>` ); });
+  const tg = W(c, "grow") - .1; icons += t >= tg ? TF(1170, 300, spring(t, tg, .4) * .95, iconChip("grow") + `<g transform="rotate(-45)"><rect x="-56" y="-7" width="112" height="14" rx="7" fill="${P.ink}"/></g>`) : "";
   const tT = W(c, "non-living") - .2;
   return boxView(t, { cam, mode: "day", mode2: "night", mix: night, dark: night, st: { day: day2 ? 2 : 1 + crawl * .9, robotX: x, robot, bites, wx: lerp(-40, 12, eio(crawl)), wb: .3 + .25 * Math.sin(crawl * 20) * (crawl > 0 && crawl < 1 ? 1 : 0), cid: "cb2" } })
-    + OP(zv, `<rect width="1920" height="1080" fill="${P.night}" opacity=".35"/>`) + icons + tag(t, tT, 850, 250, false, 1.4)
+    + OP(zv, `<rect width="1920" height="1080" fill="${P.night}" opacity=".35"/>`) + icons + tag(t, tT, 960, 170, false, 1.4)
     + (t > tN - .2 && t < tv ? (() => { const [d, tf] = dayAt(t, [[0, 1], [tflip, 2]]); return counter(t, d, tf); })() : counter(t, t >= tflip ? 2 : 1, -9, 60, 110, .8))
     + speeded(t, tN, tflip + 1.2) + HUD(t); };
 // the stopped robot: one fixed drawing (not one pixel moves), with the see-through window and its loose spring

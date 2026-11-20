@@ -4,7 +4,7 @@ const XDEFS = () => `
   ${rg("xRoom", [[0, "#5A3F9E"], [.5, "#2B1F6B"], [1, "#120E2E"]], .5, .42, .8)}${lg("xGlass", [[0, "#BFE6FF", .2], [.5, "#fff", .04], [1, "#BFE6FF", .16]], 1, 1)}
   ${rg("xStage", [[0, "#4A36B0"], [.55, "#251B5C"], [1, "#120E2E"]], .5, .42, .75)}${lg("xFloor", [[0, "#3B2A8C", 0], [1, "#0D0A24", .9]])}
   ${lg("xWorm", [[0, "#F2CB8A"], [1, "#C9924E"]])}${lg("xCarrot", [[0, "#FFB05A"], [1, "#F27A1E"]])}${lg("xBean", [[0, "#9CC46A"], [1, "#5E8F3A"]], 1, 1)}
-  ${lg("xDish", [[0, "#EAF4FF"], [1, "#B9C8E6"]])}${rg("xWin", [[0, "#3B2A8C"], [1, "#1A1340"]])}${lg("gPurple", [[0, "#B592FF"], [1, "#7C4DE8"]])}
+  ${lg("xDish", [[0, "#EAF4FF"], [1, "#B9C8E6"]])}${rg("xWin", [[0, "#3B2A8C"], [1, "#1A1340"]])}${lg("gPurple", [[0, "#B592FF"], [1, "#7C4DE8"]])}${lg("gGreen", [[0, "#6FD98A"], [1, "#2FA65A"]])}
   ${lg("xLedge", [[0, "#FBF3FF"], [1, "#CFC3EC"]])}${lg("xLiner", [[0, "#F4E3C3"], [1, "#D9BC8E"]])}${lg("xCloth", [[0, "#FF8FB1"], [1, "#E0607F"]])}${lg("xStem", [[0, "#7ED07A"], [1, "#CFE9B4"]])}
   ${lg("xCotton", [[0, "#FFFFFF"], [1, "#DCE6F5"]])}${lg("xPaw", [[0, "#F4F1FA"], [1, "#CFC8E0"]])}
   <linearGradient id="gSunU" gradientUnits="userSpaceOnUse" x1="-200" y1="0" x2="200" y2="0"><stop offset="0" stop-color="#FFB52E"/><stop offset="1" stop-color="#FFE27A"/></linearGradient>
@@ -81,7 +81,7 @@ const bleaf = (L, lit) => `<path d="M0 0 C${n2(L * .3)} ${n2(-L * .42)} ${n2(L *
    day 1 seed · day 2 a little fatter · day 3 the skin splits, a root goes down · day 5 a shoot with two leaves · day 10 a small plant ·
    day 14 taller · day 30 a tall young plant. maxH = room under the lid (the top leaves press against it). */
 function beanPlant(day, o = {}) { const maxH = o.maxH || 560, sway = o.sway || 0;
-  const hgt = day < 3.3 ? 0 : day < 5 ? lerp(0, 64, eio((day - 3.3) / 1.7)) : day < 10 ? lerp(64, 170, (day - 5) / 5) : day < 14 ? lerp(170, 240, (day - 10) / 4) : lerp(240, 600, eo((day - 14) / 16) * .92 + .08 * (day - 14) / 16);
+  const hgt = day < 3.3 ? 0 : day < 5 ? lerp(0, 96, eio((day - 3.3) / 1.7)) : day < 10 ? lerp(96, 170, (day - 5) / 5) : day < 14 ? lerp(170, 240, (day - 10) / 4) : lerp(240, 600, eo((day - 14) / 16) * .92 + .08 * (day - 14) / 16);
   const h = Math.min(hgt, maxH), press = clamp((hgt - maxH) / 60);
   let s = cottonDish();
   if (o.ghost) return s;
@@ -94,7 +94,7 @@ function beanPlant(day, o = {}) { const maxH = o.maxH || 560, sway = o.sway || 0
   s += `<path d="${st}" fill="none" stroke="#2C9A55" stroke-width="${n2(clamp(6 + h / 60, 6, 13))}" stroke-linecap="round"/><path d="${st}" fill="none" stroke="#9BE08F" stroke-width="${n2(clamp(2 + h / 150, 2, 5))}" stroke-linecap="round" opacity=".7"/>`;
   if (h < 240) { const cy = -30 - h * .42, co = clamp(1 - (h - 150) / 80);   // the two seed halves low on the stem (they shrink away as the plant uses them)
     if (co > 0) s += `<g opacity="${n2(co)}"><ellipse cx="-13" cy="${n2(cy)}" rx="13" ry="8" fill="#DDE9A8" stroke="#8FA85A" stroke-width="3" transform="rotate(-28 -13 ${n2(cy)})"/><ellipse cx="14" cy="${n2(cy - 2)}" rx="13" ry="8" fill="#DDE9A8" stroke="#8FA85A" stroke-width="3" transform="rotate(26 14 ${n2(cy - 2)})"/></g>`; }
-  const open = clamp(h / 64), L1 = lerp(14, 78, clamp(h / 200)) * lerp(1, 1.25, clamp((h - 240) / 300));
+  const open = clamp(h / 96), L1 = lerp(14, 78, clamp(h / 170)) * lerp(1, 1.25, clamp((h - 240) / 300));
   // leaf pairs up the stem (every 130 px once it is tall), then the top pair
   if (h > 250) for (let y = 150, i = 0; y < h - 70; y += 130, i++) { const u = y / h, px = tx * u * u, py = -30 - y, L = L1 * (1.15 - .12 * i), dr = 8 + i * 3;
     s += `<g transform="translate(${n2(px)} ${n2(py)})"><g transform="rotate(${-158 + dr})">${bleaf(L, i % 2 === 0)}</g><g transform="rotate(${-22 - dr})">${bleaf(L, i % 2 === 1)}</g></g>`; }
@@ -117,8 +117,12 @@ const pebble = () => `<path d="M-80 40 Q-96-10 -50-40 Q-10-70 40-48 Q92-24 84 40
 // the teddy bear keychain: the kit's teddy with a small ring and chain. Origin = its seat on the ground (teddy() is centred on its body)
 const teddyKey = () => `<g transform="translate(0 -88)"><path d="M0 -132 q4 -16 18 -22" stroke="#AAB3CC" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="30" cy="-166" r="15" fill="none" stroke="#AAB3CC" stroke-width="6"/>${teddy()}</g>`;
 const teddyBig = () => `<g transform="translate(0 -88)">${teddy()}</g>`;
-// a buddy paw reaching down (origin = the paw pad; the arm goes up out of frame). col = fur colour
-const paw = (col = "#D9D4EA", line = "#A9A2C4") => `<rect x="-34" y="-640" width="68" height="640" rx="34" fill="${col}" stroke="${line}" stroke-width="5"/><ellipse cx="0" cy="-6" rx="46" ry="38" fill="${col}" stroke="${line}" stroke-width="5"/><path d="M-18 16 v12 M0 20 v13 M18 16 v12" stroke="${line}" stroke-width="4" stroke-linecap="round"/>`;
+// a buddy paw reaching down (origin = the paw pad; the arm goes up out of frame). kind 0 = Momo (tabby stripes), 1 = Pip (plain lavender-grey), 2 = Basil (pale, small scales)
+const paw = (col = "#D9D4EA", line = "#A9A2C4", kind = 1) => { let det = "";
+  if (kind === 0) for (let y = -90; y > -620; y -= 70) det += `<path d="M-30 ${y} q30 16 60 0" stroke="#A9A6BE" stroke-width="9" fill="none" stroke-linecap="round" opacity=".7"/>`;
+  if (kind === 2) for (let y = -70; y > -620; y -= 44) det += `<circle cx="${(y / 44) % 2 ? -12 : 12}" cy="${y}" r="6" fill="#B9C6BE" opacity=".7"/>`;
+  return `<path d="M-30 -640 Q-40 -300 -32 -30 H32 Q40 -300 30 -640z" fill="${col}" stroke="${line}" stroke-width="5" stroke-linejoin="round"/>${det}<path d="M-18 -640 Q-24 -300 -18 -40" stroke="#fff" stroke-width="8" stroke-linecap="round" fill="none" opacity=".5"/>
+  <ellipse cx="0" cy="-8" rx="48" ry="40" fill="${col}" stroke="${line}" stroke-width="5"/><ellipse cx="-12" cy="-22" rx="20" ry="10" fill="#fff" opacity=".5"/><path d="M-18 14 v13 M0 18 v14 M18 14 v13" stroke="${line}" stroke-width="4.5" stroke-linecap="round"/>`; };
 // "no" icons for "it does not need water, food or air"
 function needIcon(kind, col = "#6E6A92", fill = "#C9D2E8") { const g = col; return kind === "water" ? `<path d="M0 -30 C18 -6 22 6 22 14 a22 22 0 0 1 -44 0 C-22 6 -18 -6 0 -30z" fill="${fill}" stroke="${g}" stroke-width="5" stroke-linejoin="round"/><path d="M-10 12 q2 10 12 12" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"/>`
   : kind === "food" ? `<path d="M-30 -2 H30 Q28 26 0 28 Q-28 26 -30 -2z" fill="${fill}" stroke="${g}" stroke-width="5" stroke-linejoin="round"/><path d="M-24 -4 Q-14 -26 0 -24 Q14 -26 24 -4" fill="#fff" stroke="${g}" stroke-width="5" stroke-linejoin="round"/><path d="M-10 -12 l3 -3 M2 -15 l3 3 M12 -10 l3 -3" stroke="${g}" stroke-width="3" stroke-linecap="round"/>`
@@ -146,7 +150,7 @@ function boxFront(o = {}) { const lid = o.lid === undefined ? 1 : o.lid, lidY = 
 function boxThings(st = {}) { const d = st.day || 1, hide = st.hide || {}, B = BOX; let s = "";
   const gh = (inner) => `<g opacity="${n2(st.ghost)}" filter="url(#ghostF)">${inner}</g>`;
   if (!hide.plant) s += TF(B.plant, B.floor - 72, 1.25, potPlant({ lean: st.lean || 0, nu: st.nu || 0, droop: st.droop || 0, sway: st.sway || 0 }));
-  if (!hide.bean) s += TF(B.bean, B.floor, 1.05, beanPlant(d, { maxH: 528, sway: st.sway || 0, lean: st.blean || 0 }));
+  if (!hide.bean) s += TF(B.bean, B.floor, 1.05, beanPlant(d, { maxH: 478, sway: st.sway || 0, lean: st.blean || 0 }));
   if (!hide.dish) s += TF(B.dish, B.floor, 1.0, wormDish({ bites: st.bites || 0, wx: st.wx === undefined ? -40 : st.wx, wl: st.wl || 76, wb: st.wb === undefined ? .3 : st.wb, id: st.cid || "cb" }));
   if (!hide.pebble) s += TF(B.pebble, B.floor - 30, .8, pebble());
   if (!hide.teddy) s += TF(B.teddy, B.floor, .85, teddyKey());
