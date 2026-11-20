@@ -1,0 +1,120 @@
+a201 heart 3.56 ok
+a202 basil 2.25 ok
+a203 heart 3.82 ok
+a301 heart 9.23 ok
+a302 heart 7.58 ok
+a401 heart 12.65 ok
+a402 heart 0.7 ok
+u403 0.745
+a404 heart 3.57 ok
+a405 heart 2.13 ok
+h501 heart 4.95 ok
+a601 heart 14.22 ok
+a602 heart 0.7 ok
+a603 basil 2.74 ok
+a604 momo 1.98 ok
+a605 pip 2.57 ok
+a701 heart 4.89 ok
+a702 heart 3.29 ok
+a703 heart 1.15 ok
+a704 heart 3.1 ok
+a705 heart 1.36 ok
+a706 heart 0.91 ok
+a707 heart 2.35 ok
+a801 heart 2.74 ok
+a802 heart 2.76 ok
+a803 heart 4.73 ok
+a804 basil 0.86 ok
+a805 heart 3.13 ok
+a806 heart 3.48 ok
+a807 basil 1.79 ok
+a808 heart 2.13 ok
+a901 heart 5.65 ok
+a902 pip 0.95 ok
+a903 heart 6.31 ok
+a904 heart 3.67 ok
+a905 heart 3.01 ok
+a1001 pip 8.69 ok
+a1002 heart 4.66 ok
+a1003 heart 10.71 ok
+a1004 heart 6.9 ok
+a1005 pip 2.68 ok
+a1101 heart 9.97 ok
+a1201 heart 6.39 ok
+a1202 heart 8.56 ok
+h860 heart 2.88 ok
+hk_mimosa heart 0.68 ok
+uk_mimosa 0.971
+hk_respond_to_changes heart 1.32 ok
+uk_respond_to_changes 1.57
+h864 heart 0.65 ok
+a1301 heart 8.87 ok
+u1300 1.056
+h1304a heart 0.5 ok
+h1304o heart 0.43 ok
+h1304t heart 0.47 ok
+   shout take: Now you know!! speed 0.98 score 4.48
+h1305 heart 0.93 ok
+u1305 2.43
+b201 heart 9.42 ok
+b301 heart 7.99 ok
+b401 momo 3.65 ok
+b402 heart 7.63 ok
+b403 heart 0.7 ok
+b404 pip 2.73 ok
+b405 basil 4.11 ok
+b406 heart 0.55 ok
+b407 heart 6.49 ok
+b408 heart 4.61 ok
+b409 momo 1.7 ok
+b410 heart 7.85 ok
+b411 heart 2.13 ok
+b501 heart 3.56 ok
+b502 pip 0.95 ok
+b503 heart 2.62 ok
+b504 heart 3.42 ok
+b505 momo 2.42 ok
+b506 heart 3.31 ok
+b507 basil 1.41 ok
+b508 heart 2.4 ok
+b509 heart 1.08 ok
+b510 heart 2.18 ok
+b511 heart 2.35 ok
+b601 heart 7.22 ok
+b602 basil 0.86 ok
+b603 heart 5.02 ok
+b701 heart 2.43 ok
+b702 momo 2.81 ok
+b703 heart 7.22 ok
+b704 momo 0.97 ok
+b705 heart 4.8 ok
+b706 heart 6.38 ok
+b707 heart 5.13 ok
+b708 heart 4.74 ok
+b801 basil 0.96 ok
+b802 basil 8.18 ok
+b803 heart 7.37 ok
+b804 heart 0.7 ok
+b805 pip 2.83 ok
+b806 momo 2.18 ok
+b807 basil 0.53 ok
+b808 basil 2.5 ok
+b809 heart 3.17 ok
+b901 heart 5.84 ok
+b902 pip 0.95 ok
+b903 heart 3.2 ok
+u1002 1.063
+c1003 10.4
+b1001 heart 6.39 ok
+b1002 heart 7.9 ok
+b1101 heart 13.17 ok
+hk_reproduce heart 0.76 ok
+uk_reproduce 1.022
+hk_spores heart 0.68 ok
+uk_spores 0.888
+   align error 'NoneType' object is not iterable
+hk_extinct heart 0.68 PROPORTIONAL
+uk_extinct 0.965
+hk_more_complex heart 0.98 ok
+uk_more_complex 1.214
+not aligned: ['hk_extinct']
