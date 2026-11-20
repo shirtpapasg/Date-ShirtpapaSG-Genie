@@ -3,7 +3,8 @@
 window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t * 1000) / 1000, k, v }), S = SCN, R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [] };
   const lock = (q, r0, dur, lockId, picks, tL, tR, o = {}) => { if (tL) { E(tL, "cardL"); E(tR, "cardR"); } ringTicks(r0, dur).forEach((t, i) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + dur, o.peep ? "peep" : "bell"); E(LT(lockId) - .08 + .14, "stamp"); E(r0, "bellicon");
     picks.forEach((id, i) => E(LT(id) - .1 + .11, "pick", i)); };
-  const chant = (id) => { const L = TL.lines[id]; for (let b = -1; b < 4; b++) { const t0 = L.t + b * L.bar; if (t0 + L.bar * .25 < L.t - .8) { if (t0 + L.bar * .5 >= L.t - .8) E(t0 + L.bar * .5, "stomp"); continue; } if (t0 >= L.t - .8) E(t0, "clap"); E(t0 + L.bar * .25, "clap"); E(t0 + L.bar * .5, "stomp"); } E(L.t + 4 * L.bar - .28, "sparkle"); };
+  const chant = (id) => { const L = TL.lines[id]; for (const [bt, k, soft] of chantBeats(L)) E(bt, k === "c" ? "clap" : "stomp", soft ? .35 : 1); E(L.end - .28, "sparkle"); for (let i = 0; i < 4; i++) E(L.t + (L.slots[i][1] + 1) * L.bar, "turn", i); E(L.t + 8 * L.bar, "softpop", 3); };
+  const sayit = (id) => E(LT(id) - .05, "softpop", 2);
   if (PART === 1) {
   // ---- 1 cold open
   const tb = MK("coldBox"), tl = MK("coldLid"), t30 = MK("coldD30"), tc = MK("coldCut");
@@ -18,17 +19,18 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(WE("h208", "thing") - .25, "tag"); E(W("h208", "eyes"), "pop", 1);
   // ---- 3 game, goals
   E(S.game.t0 + .15, "sting"); ["pip", "basil", "momo"].forEach((w, i) => E(W("h301", w) - .08, "pop", i * 2));
-  { const b = "h302", c = [W(b, "one"), W(b, "one") + .5, W(b, "one") + 1.0]; c.forEach((t, i) => E(t, "pip", i)); E(W(b, "cicak") - .1, "chek"); E(W(b, "cicak") + .9, "chek"); E(W(b, "no"), "boop"); }
+  { const b = "h302", c = [W(b, "one"), W(b, "one") + .5, W(b, "one") + 1.0]; c.forEach((t, i) => E(t, "pip", i)); E(W(b, "lizard") - .1, "chek"); E(W(b, "lizard") + .9, "chek"); E(W(b, "no"), "boop"); }
   [.6, 1.5, 2.4].forEach((d, i) => E(S.goals.t0 + d - .12, "softpop", i));
   // ---- 4 garden
   R.birds.push([S.garden.t0, S.mark1.t0], [S.garden2.t0, S.count.t0]); E(S.garden.t0 + 1.2, "bikebell");
   ["mynah", "ants", "papaya", "bench", "bicycle", "blue"].forEach((w, i) => E(W("h402", w), "rise", i)); [W("h402", "so"), W("h402", "so") + .12, W("h402", "many"), W("h402", "many") + .12, W("h402", "different")].forEach((t, i) => E(t, "rise", 6 + i));
   for (let i = 0; i < 4; i++) E(S.garden.t0 + .3 + (i + 1) * .3, "hop", i);
   E(LE("h403") + .25, "chime");
-  for (let i = 0; i < 6; i++) { E(W("h405", "groups") + i * .09, "softpop", i); E(W("h405", "six") - .1 + i * .16 + .5, "hop", i); }
+  { const L = "h405", tA = W(L, "six") - .5, tPut = W(L, "put") - .1, tLid = Math.max(tPut + 6 * .34 + .5, W(L, "bring") - .2); for (let i = 0; i < 6; i++) { E(tA + i * .1, "softpop", i); E(tPut + i * .34 + .1, "hop", i); E(tPut + i * .34 + .42, "hop", i + 2); }
+    E(tLid + .3, "lid"); for (let i = 0; i < 5; i++) E(tLid + .55 + .15 + i * .3, "hop", i); sayit("m400"); }
   // ---- 5 countdown, Day 1
   ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
-  E(S.day1.t0 + .25, "clack"); [1.0, 2.0, 2.9, 3.8].forEach((d, i) => E(S.day1.t0 + d, "softpop", i));
+  E(S.day1.t0 + .25, "clack"); ["holes", "oats", "carrot", "moist", "sunlight"].forEach((w, i) => E(W("h502", w), "softpop", i));
   // ---- 6 Round 1
   E(S.r1card.t0, "roundcard");
   R1.steps.forEach((t, i) => E(t, i === R1.steps.length - 1 ? "clunk" : "step", t > R1.cut && t < S.r1ev.t0 ? .6 : 1));
@@ -45,8 +47,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(WE("h712", "left") + .15, "coin"); E(W("h714", "green", 1) - .2, "softpop", 1); E(W("h714", "non-living") - .05, "tag", 1); E(LT("p713") + 1.1, "scribble");
   // ---- Part 1's ending
   { const L = "h850", tq = W(L, "what") - .15; E(tq, "whirr", .7); E(tq + .7, "clack"); E(tq + .45, "potthud"); E(tq + .9, "lowdrum"); E(tq + 1.5, "lowdrum", .6); E(W(L, "find") - .1, "sting"); E(S.p1score.t0 + .1, "sting"); E(W("h851", "score") - .1, "pip", 0); E(W("h851", "score") + .4, "pip", 1); }
-  E(MK("crack") * 0 + (W("h606b", "all") + .5), "chek", .5); E(W("h606b", "all") + 1.3, "chek", .5);
-  E(LT("h1305") - .05, "final");
+  E(W("h606b", "all") + .5, "chek", .5); E(W("h606b", "all") + 1.3, "chek", .5); E(S.liz1.t0 + .5, "chek"); E(S.liz1.t0 + 1.5, "chek"); R.night.push([S.liz1.t0 + .2, S.tease.t0 - .3]);
   } else {
   // ---- Part 2's silent open: the recap
   { const t0 = S.recap.t0; ["clink", "jingle", "tap", "potthud", "rustle", "set"].forEach((k, i) => E(t0 + (.1 + .15 + i * .78 + .42) / 2.3, k)); E(t0 + (5.0 + .4 + .1) / 2.3, "lid"); E(t0 + (5.0 + .91 + .1) / 2.3, "clack");
@@ -55,7 +56,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // ---- 8 clue, chant
   E(W("h801", "not"), "boop", 0); E(W("h801", "not", 1), "boop", 1); E(W("h801", "what") - .1, "chime2", 0); E(W("h801", "what", 1) - .1, "chime2", 1);
   ["water", "food", "air", "grow", "respond", "reproduce"].forEach((w, i) => E(W("h802", w), "softpop", i));
-  chant("c803");
+  sayit("u802"); chant("c803");
   // ---- 9 the sort
   E(S.sort.t0 + .3, "clack"); E(S.sort.t0 + .5, "sting");
   for (const [k, t] of Object.entries(SORT.mv)) { E(t, "slide"); if (k !== "dish") E(t - .16, (k in SOFTX) ? "squeak" : "knock"); }
@@ -71,17 +72,20 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(S.ways.t0 + .15, "softpop", 0); E(W("h1101", "other") - .1, "softpop", 1); E(W("h1101", "other") + .12, "softpop", 2); ["pictures", "table", "graphic"].forEach((w, i) => E(W("h1102", w), "rise", i * 2)); E(LE("h1102") + .25, "chime");
   // ---- 12 Day 30
   E(S.day30.t0 + .1, "whirr", 1.1); E(S.day30.t0 + 1.2, "clack"); E(S.day30.t0 + .9, "lowdrum"); E(MK("reveal") - .5, "lowdrum", .6); E(MK("reveal"), "reveal");
-  E(W("h1203", "three") - .1, "softpop", 0); E(W("h1203", "three", 1) - .1, "softpop", 2); chant("c1204");
+  E(W("h1203", "three") - .1, "softpop", 0); E(W("h1203", "three", 1) - .1, "softpop", 2); sayit("u1203"); chant("c1204"); sayit("p906"); sayit("b1101"); E(TL.lines.h907b.t - .35, "flip");
   // ---- 13 ending
   E(S.final.t0 + .1, "sting"); E(W("h1301", "high") + .2, "slap"); E(W("h1301", "three") - .1, "pip", 2);
-  E(S.cicak.t0 + .5, "chek"); E(S.cicak.t0 + 1.4, "chek"); E(S.day31.t0 + .35, "clack"); E(S.day31.t0 + .7, "curious"); E(LT("h1305") - .05, "final");
+  E(S.cicak.t0 + .5, "chek"); E(S.cicak.t0 + 1.4, "chek"); E(S.day31.t0 + .35, "clack"); E(S.day31.t0 + .7, "curious");
   }
   const G = (a, b) => R.groove.push([a, b]), C = (a, b) => R.calm.push([a, b]);
   if (PART === 1) { G(S.title.t0 + 1.2, MK("ring0_p")); G(LT("p205") - .5, S.game.t0); G(S.game.t0 + .6, S.garden.t0); C(S.garden.t0 + 1, S.mark1.t0 - .3); G(S.garden2.t0, S.count.t0 - .2); C(S.day1.t0 + .5, S.r1card.t0);
     G(S.r1.t0, MK("ring0_1")); G(LT("b603") - .5, S.r1ev.t0); C(S.r1ev.t0 + .5, W("h606b", "all") - .5); G(S.r1score.t0, S.r2card.t0); G(S.r2.t0, MK("ring0_2")); G(LT("p703") - .5, S.lean.t0 + .5);
-    G(S.r2out.t0 + 1.3, S.tease.t0); C(S.tease.t0 + .3, W("h850", "what") - .3); G(S.p1score.t0, S.nyk.t0 - .3); }
+    G(S.r2out.t0 + 1.3, S.liz1.t0); C(S.tease.t0 + .3, W("h850", "what") - .3); G(S.p1score.t0, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2); }
   else { G(S.recapline.t0 + .5, S.clue.t0); C(S.clue.t0 + .3, S.chant.t0 - .2); G(S.sort.t0 + .6, MK("ring0_3")); G(LT("h904"), S.mark2.t0 + 2); G(S.relabel.t0, S.showcard.t0); G(S.show.t0 + .3, MK("kw_table")); G(MK("kw_table") + 2, MK("ring0_4")); G(LT("b1005") - .5, S.replay.t0);
-    C(S.replay.t0 + .4, S.fixed.t0); G(S.fixed.t0 + 1, S.ways.t0 + 2.2); G(MK("reveal") + 1.6, S.piles.t0 + 1); G(S.final.t0, S.day31.t0); }
+    C(S.replay.t0 + .4, S.fixed.t0); G(S.fixed.t0 + 1, S.ways.t0 + 2.2); G(MK("reveal") + 1.6, S.piles.t0 + 1); G(S.final.t0, S.day31.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2); }
   // ---- key words: a soft chime as the term pops, a pop as it lands on the shelf; the recap glow
-  for (const k of KW) { if (k.big) E(k.t, "term"); E(k.tl, "shelfpop", k.i); } KW.forEach((k, i) => E(MK("recap") + i * .4, "glow", i));
+  for (const k of KW) { if (k.big) E(k.t, "term"); E(k.tl, "shelfpop", k.i); }
+  // the key-word read-along; the ending: "Say it with us!", "Ready? One, two...", "Now you know!", then the outro plays out
+  E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
+  E(S.nyk.t0 + .1, "whoosh"); sayit("u1300"); E(W("h1304b", "one"), "drum", 0); E(W("h1304b", "two"), "drum", 1); E(LT("h1305") - .05, "final"); R.outro = [LT("h1305") + .9, TL.END];
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

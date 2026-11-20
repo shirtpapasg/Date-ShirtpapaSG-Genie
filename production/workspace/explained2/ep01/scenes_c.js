@@ -17,9 +17,9 @@ SC.r2 = (t, s) => { const L = "h701", B = BOX;
 
 // the three buddies lean in to the glass; the room light dims to night
 SC.lean = (t, s) => { const u = (t - s.t0) / (s.t1 - s.t0), B = BOX, night = ss(.15, .9, u), z = lerp(1.5, 2.1, eio(u));
-  const lean = (who, x, y, h, flip, d) => buddy(who, x, y, h, t, { flip, look: (flip ? -1 : 1) * 5 * eo((t - s.t0 - d) / .6), in: s.t0 + d, rim: "rimC" });
+  const lean = (who, x, y, h, flip, d) => buddy(who, x, y, h, t, { flip, aura: true, tag: false, look: (flip ? -1 : 1) * 4 * eo((t - s.t0 - d) / .6), in: s.t0 + d });
   return boxView(t, { cam: [z, B.bean, B.floor - 80], mode: "day", mode2: "night", mix: night, dark: night * .8, st: { day: 2.2, robotX: B.robot1, robot: robotWalkStop(0, 0), bites: 1, wx: 12, cid: "cb3" } })
-    + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(night * .25)}"/>` + lean("pip", 250, 1150, 520, false, .05) + lean("momo", 1680, 1150, 520, true, .15) + lean("basil", 1330, 1210, 430, true, .3)
+    + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(night * .25)}"/>` + lean("pip", 210, 1066, 300, false, .05) + lean("basil", 560, 1072, 270, false, .3) + lean("momo", 1700, 1066, 300, true, .15)
     + counter(t, 2, -9) + HUD(t); };
 
 /* ============ the first-person shrink: DAY 3, night. The calm micro-world (style: micro-world mode; no part labels at P3) ============ */
@@ -120,20 +120,33 @@ SC.clue = (t, s) => { const a = "h801", b = "h802", tN = W(a, "what") - .1, tD =
     + (t >= tN + .5 ? TF(960, 990, spring(t, tN + .6, .4) * (1 + .1 * pulse(t, tTest + .2, .1, .6)), tpill(0, 0, "More in Episodes 2 and 3", 38, P.ink, P.sun, { w: 600 })) : "")
     + buddy("basil", 1770, 1075, 200, t, { aura: true, flip: true, poses: [[s.t0, "arms_crossed"], [tN, "surprised"], [tD + .6, "sit"], [tTest, "cheer"]] }) + HUD(t); };
 
-/* ============ the chant: clap, clap, stomp ============ */
-function chantScene(t, id, o = {}) { const L = TL.lines[id], bar = L.bar, PH = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What can it DO?"], KEY = ["move?", "NOT", "NEED?", "DO?"];
-  const tb = t - L.t, cur = clamp(Math.floor(tb / bar), -1, 3); let lines = "";
-  const y0 = o.y0 || 190, dy = o.dy || 128, size = o.size || 96;
-  PH.forEach((ph, i) => { const on = cur === i, done = cur > i, ws = ph.split(" "), total = ws.reduce((a, w) => a + tw(w, size, 700, "Fredoka", 2) + size * .3, -size * .3), sc = 1 + .12 * pulse(t, L.t + i * bar, .04, .5); let cx = -total / 2, tx = "";
-    ws.forEach((w, j) => { const widx = PH.slice(0, i).reduce((n, p) => n + p.split(" ").length, 0) + j, wt = L.words[widx].a, lit = t >= wt - .03, ww = tw(w, size, 700, "Fredoka", 2), isKey = w === KEY[i];
-      tx += `<text x="${n2(cx)}" y="0" font-family="Fredoka" font-weight="700" font-size="${size}" letter-spacing="2" fill="${lit ? (isKey ? P.sun : "#fff") : "#fff"}" opacity="${lit ? 1 : .28}" ${lit && isKey ? `transform="translate(${n2(cx + ww / 2)} 0) scale(${n2(1 + .1 * pulse(t, wt, .03, .35))}) translate(${n2(-cx - ww / 2)} 0)"` : ""}>${esc(w)}</text>`; cx += ww + size * .3; });
-    lines += `<g transform="translate(${o.x || 960} ${y0 + i * dy}) scale(${n2(sc)})">${tx}</g>`; });
-  // the beat: clap, clap, stomp (two bars of it before the words, then under every phrase)
-  const beats = []; for (let b = -1; b < 4; b++) { beats.push([L.t + b * bar, "c"], [L.t + b * bar + bar * .25, "c"], [L.t + b * bar + bar * .5, "s"]); }
-  let fx = "", clap = 0, stomp = 0; for (const [bt, k] of beats) { if (bt < L.t - .8) continue; if (k === "c") clap = Math.max(clap, pulse(t, bt, .03, .18)); else stomp = Math.max(stomp, pulse(t, bt, .03, .25)); }
-  const jumps = beats.filter((b) => b[1] === "s" && b[0] > L.t - .8).map((b) => [b[0] - .2, 30]);
+/* ============ the chant: clap, clap, stomp. Call and response: the buddies chant a line, then a bar for the viewers ("YOUR TURN!") ============ */
+const PHR = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What can it DO?"], PKEY = ["move?", "NOT", "NEED?", "DO?"];
+// where the chant is at t: the slot being chanted (or -1), whether it is the viewers' bar, which phrases have been chanted
+function chantState(L, t) { const bar = L.bar, tb = (t - L.t) / bar, S = L.slots; let k = -1; S.forEach(([p, b], i) => { if (tb >= b) k = i; });
+  const inSlot = k >= 0 && tb < S[k][1] + 1, turn = k >= 0 && !inSlot && tb < (S[k + 1] ? S[k + 1][1] : L.nbars) && tb < L.nbars, together = k >= 4;
+  return { k, ph: k >= 0 ? S[k][0] : -1, inSlot, turn, together, tb, t0: k >= 0 ? L.t + S[k][1] * bar : L.t }; }
+// every beat of the chant: [time, "c" | "s", soft]. Two claps and a stomp per bar; soft under the viewers' bars
+function chantBeats(L) { const out = [], resp = new Set(); L.slots.forEach(([p, b], i) => { if (i < 4) resp.add(b + 1); });
+  for (let b = 0; b < L.nbars; b++) { const t0 = L.t + b * L.bar, soft = resp.has(b) ? 1 : 0; out.push([t0, "c", soft], [t0 + L.bar * .25, "c", soft], [t0 + L.bar * .5, "s", soft]); } return out; }
+// the YOU hands (they clap in the viewers' bars) and the YOUR TURN! tag
+function yourTurn(t, L, x, y, sc = 1) { const st = chantState(L, t), beats = chantBeats(L); let clap = 0; if (st.turn) for (const [bt, k] of beats) if (k === "c") clap = Math.max(clap, pulse(t, bt, .04, .16));
+  const tt = st.turn ? L.t + (L.slots[st.k][1] + 1) * L.bar : -9, kk = st.turn ? spring(t, tt, .3) * (1 - ss(tt + L.bar - .2, tt + L.bar, t)) : 0, gap = 70 - 56 * clap;
+  return TF(x, y, sc, `<g opacity="${st.turn ? 1 : .55}"><g transform="translate(${n2(-gap)} 0) rotate(${n2(-12 + 10 * clap)})" filter="url(#dropS)"><g transform="scale(.62)">${countHand(5)}</g></g><g transform="translate(${n2(gap)} 0) scale(-1 1) rotate(${n2(-12 + 10 * clap)})" filter="url(#dropS)"><g transform="scale(.62)">${countHand(5)}</g></g></g>`
+    + youPill(0, -150, .95) + (kk > .02 ? TF(0, -250, kk * (1 + .06 * Math.sin(t * 9)), `<g transform="rotate(-4)"><g filter="url(#drop)"><rect x="-190" y="-46" width="380" height="92" rx="46" fill="${P.coral}"/><rect x="-182" y="-38" width="364" height="76" rx="38" fill="none" stroke="#fff" stroke-width="5"/></g>${T(0, 18, "YOUR TURN!", 50, "#fff", { ls: 3 })}</g>`) : "")); }
+function chantScene(t, id, o = {}) { const L = TL.lines[id], bar = L.bar, st = chantState(L, t); let lines = "";
+  const y0 = o.y0 || 190, dy = o.dy || 128, size = o.size || 96, done = new Set(); L.slots.forEach(([p, b], i) => { if (i <= st.k) done.add(p); });
+  PHR.forEach((ph, i) => { const ws = ph.split(" "), total = ws.reduce((a, w) => a + tw(w, size, 700, "Fredoka", 2) + size * .3, -size * .3), active = st.ph === i && (st.inSlot || st.turn);
+    const sc = 1 + .1 * pulse(t, st.ph === i ? st.t0 : -9, .04, .5) + (active && st.turn ? .04 + .03 * Math.sin((t - L.t) / bar * Math.PI * 4) : 0); let cx = -total / 2, tx = "";
+    // the words light up as they are chanted (in the slot that is running; afterwards the whole line stays lit)
+    const slotW = L.words.filter((w) => w.slot === st.k);
+    ws.forEach((w, j) => { const lit = done.has(i) && (st.ph !== i || !st.inSlot || t >= slotW[j].a - .03), ww = tw(w, size, 700, "Fredoka", 2), isKey = w === PKEY[i], wt = st.ph === i && slotW[j] ? slotW[j].a : -9;
+      tx += `<text x="${n2(cx)}" y="0" font-family="Fredoka" font-weight="700" font-size="${size}" letter-spacing="2" fill="${lit && isKey ? P.sun : "#fff"}" opacity="${lit ? (active || st.together || st.k < 0 ? 1 : .8) : .28}" ${lit && isKey ? `transform="translate(${n2(cx + ww / 2)} 0) scale(${n2(1 + .1 * pulse(t, wt, .03, .35))}) translate(${n2(-cx - ww / 2)} 0)"` : ""}>${esc(w)}</text>`; cx += ww + size * .3; });
+    lines += `<g transform="translate(${o.x || 960} ${y0 + i * dy}) scale(${n2(sc)})">${active && st.turn ? `<rect x="${n2(-total / 2 - 30)}" y="${n2(-size * .82)}" width="${n2(total + 60)}" height="${n2(size * 1.12)}" rx="${n2(size * .3)}" fill="${P.sun}" opacity=".16"/>` : ""}${tx}</g>`; });
+  const beats = chantBeats(L); let fx = "", clap = 0, stomp = 0; for (const [bt, k, soft] of beats) { const g = soft ? .45 : 1; if (k === "c") clap = Math.max(clap, pulse(t, bt, .03, .18) * g); else stomp = Math.max(stomp, pulse(t, bt, .03, .25) * g); }
+  const jumps = beats.filter((b) => b[1] === "s" && !b[2]).map((b) => [b[0] - .2, 30]);
   const by = o.by || 1066, bh = o.bh || 300, xs = o.xs || [400, 960, 1520];
-  let buds = ""; ["pip", "basil", "momo"].forEach((w, i) => { const sq = 1 - .05 * clap; buds += `<g transform="translate(${xs[i]} ${by}) scale(${n2(1 / sq)} ${n2(sq)}) translate(${-xs[i]} ${-by})">${buddy(w, xs[i], by, bh, t, { aura: true, jump: jumps, poses: [[L.t - .9, "sit"], [L.t + 4 * bar - .28, "cheer"]] })}</g>`;
+  let buds = ""; ["pip", "basil", "momo"].forEach((w, i) => { const sq = 1 - .05 * clap; buds += `<g transform="translate(${xs[i]} ${by}) scale(${n2(1 / sq)} ${n2(sq)}) translate(${-xs[i]} ${-by})">${buddy(w, xs[i], by, bh, t, { aura: true, jump: jumps, poses: [[L.t - 9, "sit"], [L.end - .28, "cheer"]], ...(o.bud || {}) })}</g>`;
     fx += OP(clap, `<g stroke="${P.sun}" stroke-width="7" stroke-linecap="round"><path d="M${xs[i] - bh * .5} ${by - bh * .8} l-26 -22 M${xs[i] + bh * .5} ${by - bh * .8} l26 -22 M${xs[i]} ${by - bh * 1.08} v-30"/></g>`) + OP(stomp, `<ellipse cx="${xs[i]}" cy="${by}" rx="${n2(bh * (.5 + .4 * (1 - stomp)))}" ry="${n2(22 + 16 * (1 - stomp))}" fill="none" stroke="#fff" stroke-width="6"/>`); });
-  return lines + buds + fx; }
-SC.chant = (t, s) => bg("stage2") + chantScene(t, "c803") + OP(ramp(t, s.t0 + .2, .3), youPill(250, 150, 1.1) + bubble(250, 250, ["Say it with us!"], t, s.t0 + .25, s.t1, { size: 38, down: false, tail: 0 })) + HUD(t);
+  return lines + buds + fx + (o.you ? yourTurn(t, L, o.you[0], o.you[1], o.you[2] || 1) : "") + (st.together && st.tb < L.nbars ? TF(o.x || 960, y0 - 110, spring(t, L.t + 8 * bar, .4), tpill(0, 0, "All together!", 40, P.sun, P.ink, { w: 700 })) : ""); }
+SC.chant = (t, s) => bg("stage2") + chantScene(t, "c803", { you: [1660, 560, 1.1], y0: 230 }) + say("u802", 960, 620, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t);

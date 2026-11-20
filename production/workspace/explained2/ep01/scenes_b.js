@@ -22,7 +22,7 @@ const GT = {
   lamp: () => `<rect x="-7" y="-520" width="14" height="520" rx="7" fill="#7F89A8"/><path d="M0 -520 q0 -30 60 -30" stroke="#7F89A8" stroke-width="12" fill="none" stroke-linecap="round"/><ellipse cx="72" cy="-544" rx="34" ry="13" fill="#EEF2FA" stroke="#7F89A8" stroke-width="4"/>`,
   ball: () => `<circle r="34" fill="${P.sun}" stroke="#C98200" stroke-width="5"/><path d="M-34 0 Q0 -22 34 0 M-20 -27 Q0 0 -20 27 M20 -27 Q0 0 20 27" stroke="#C98200" stroke-width="3" fill="none"/>`,
 };
-const GP = { mynah: [1270, 905, .8], ants: [1010, 992, 1], papaya: [1520, 850, 1], bench: [330, 842, .86], bicycle: [870, 866, .82], bin: [1110, 838, .78], butterfly: [1690, 470, .7], pandan: [1790, 880, .8], letterboxes: [300, 660, .62], lamp: [1205, 870, .9], ball: [1200, 1000, .8] };
+const GP = { mynah: [1270, 905, .8], ants: [1010, 992, 1], papaya: [1520, 850, 1], bench: [330, 842, .86], bicycle: [940, 866, .82], bin: [1140, 838, .78], butterfly: [1690, 470, .7], pandan: [1790, 880, .8], letterboxes: [300, 660, .62], lamp: [1205, 870, .9], ball: [1200, 1000, .8] };
 BG.garden = () => { const g = (k) => TF(GP[k][0], GP[k][1], GP[k][2], GT[k]()); let beds = "";
   for (let b = 0; b < 3; b++) { const y = 800 + b * 46, x0 = 1330 - b * 20; beds += `<rect x="${x0}" y="${y}" width="${560 + b * 40}" height="34" rx="12" fill="#8A5E3E" stroke="#5E3F28" stroke-width="4"/>`; for (let i = 0; i < 9 + b; i++) beds += `<g transform="translate(${x0 + 30 + i * 58} ${y + 4})"><circle r="17" fill="${i % 2 ? "#43BF6C" : "#6FD86B"}" stroke="#1F8A4C" stroke-width="3"/><circle cx="-6" cy="-5" r="6" fill="#B9EE7A"/></g>`; }
   return `<defs>${lg("gdSky", [[0, "#7FC4FF"], [.7, "#CFEBFF"], [1, "#EAF6E0"]])}${lg("gdGrass", [[0, "#8FDB7A"], [1, "#4FB060"]])}${lg("gdPath", [[0, "#F1E3CF"], [1, "#D9C3A6"]])}${lg("gdDeck", [[0, "#5C4E9C"], [1, "#8A7CC4"]])}${lg("gdBlk", [[0, "#F6D9C8"], [1, "#EFC3B0"]])}</defs>
@@ -42,7 +42,7 @@ BG.garden = () => { const g = (k) => TF(GP[k][0], GP[k][1], GP[k][2], GT[k]()); 
   <path d="M1250 826 H2120 V1010 Q1700 960 1250 890z" fill="url(#gdGrass)"/>
   <g stroke="#8A5A36" stroke-width="7" stroke-linecap="round">${Array.from({ length: 11 }, (_, i) => `<path d="M${1290 + i * 70} 770 v70"/>`).join("")}<path d="M1270 790 H2040 M1270 824 H2040"/></g>
   ${beds}${g("lamp")}${g("papaya")}${g("pandan")}${g("bench")}${g("bicycle")}${g("bin")}${g("ball")}${g("mynah")}${g("ants")}${g("butterfly")}
-  ${groundShadow(330, 902, 150, 14, .2)}${groundShadow(870, 920, 150, 12, .2)}${groundShadow(1110, 892, 70, 10, .25)}${groundShadow(1520, 852, 80, 12, .25)}
+  ${groundShadow(330, 902, 150, 14, .2)}${groundShadow(940, 920, 150, 12, .2)}${groundShadow(1140, 892, 70, 10, .25)}${groundShadow(1520, 852, 80, 12, .25)}
   <g style="mix-blend-mode:screen"><path d="M1400 -120 L2120 -120 L2120 1200 L700 1200z" fill="#FFE9A8" opacity=".1" filter="url(#b30)"/></g>
   <g filter="url(#b10)" opacity=".9"><g transform="translate(1990 1150) rotate(-130)">${leaf(230, false, false).replace(/url\(#gLeaf\)/g, "#1B4D3A").replace(/#1F7F47|#D8F6C8/g, "#1B4D3A")}</g></g>`; };
 
@@ -55,7 +55,7 @@ function hopIn(who, x0, x1, y, h, t, t0, o = {}) { const n = o.n || 4, d = .3, u
 
 /* ============ 4 · where the six things came from ============ */
 SC.garden = (t, s) => { const a = "h401", b = "h402", u = (t - s.t0) / (s.t1 - s.t0), z = 1.12 - .12 * eo((t - s.t0) / 2.2) + .05 * u;
-  const cue = [["mynah", W(b, "mynah"), "mynah", 1270, 800], ["ants", W(b, "ants"), "ants", 1010, 925], ["papaya", W(b, "papaya"), "papaya tree", 1520, 250], ["bench", W(b, "bench"), "bench", 330, 700], ["bicycle", W(b, "bicycle"), "bicycle", 870, 710], ["bin", W(b, "blue"), "blue recycling bin", 1110, 640]];
+  const cue = [["mynah", W(b, "mynah"), "mynah", 1270, 800], ["ants", W(b, "ants"), "ants", 1010, 925], ["papaya", W(b, "papaya"), "papaya tree", 1520, 250], ["bench", W(b, "bench"), "bench", 330, 700], ["bicycle", W(b, "bicycle"), "bicycle", 940, 710], ["bin", W(b, "blue"), "blue recycling bin", 1140, 640]];
   const more = [["butterfly", W(b, "so")], ["pandan", W(b, "so") + .12], ["letterboxes", W(b, "many")], ["lamp", W(b, "many") + .12], ["ball", W(b, "different")]];
   let hi = ""; for (const [k, t0, nm, lx, ly] of cue) hi += gLight(t, k, t0, nm, lx, ly);
   for (const [k, t0] of more) hi += gLight(t, k, t0, null);
@@ -63,12 +63,12 @@ SC.garden = (t, s) => { const a = "h401", b = "h402", u = (t - s.t0) / (s.t1 - s
   const ta = W(b, "ants"), mk = spring(t, ta, .45) * (1 - ramp(t, W(b, "bench"), .25));
   if (mk > .02) hi += TF(1010, 800, mk, `<g filter="url(#drop)"><circle r="96" fill="#F1E3CF" stroke="#fff" stroke-width="10"/></g><g transform="scale(2.1) translate(${n2(((t * 14) % 35) - 17)} 0)">${GT.ants()}</g><circle r="96" fill="none" stroke="#fff" stroke-width="10"/>`);
   const t0 = s.t0 + .3;
-  const buds = hopIn("pip", -180, 150, 1070, 230, t, t0 + .3, { flip: true, aura: true, tag: false }) + hopIn("momo", -180, 590, 1070, 230, t, t0, { flip: true, aura: true, tag: false, poses: [[W(b, "so"), "surprised"], [W(b, "so") + 1.6, "sit"]] })
-    + hopIn("basil", -180, 370, 1076, 235, t, t0 + .15, { aura: true, tag: false, poses: [[W(a, "look"), "cheer"], [W(a, "look") + 1.2, "sit"]] });
+  const buds = hopIn("pip", -180, 125, 1070, 210, t, t0 + .3, { flip: true, aura: true, tag: false }) + hopIn("momo", -180, 500, 1070, 210, t, t0, { flip: true, aura: true, tag: false, poses: [[W(b, "so"), "surprised"], [W(b, "so") + 1.6, "sit"]] })
+    + hopIn("basil", -180, 310, 1076, 215, t, t0 + .15, { aura: true, tag: false, poses: [[W(a, "look"), "cheer"], [W(a, "look") + 1.2, "sit"]] });
   // OUR BOX comes with them (four small hops) and is set down on the ground, clear of the bicycle and the ants
   const ub = clamp((t - t0) / 1.2), bx = lerp(-120, GBOX[0], ub), by = GBOX[1] - 26 * Math.abs(Math.sin(Math.PI * ub * 4)) * (ub < 1 ? 1 : 0), bsq = 1 - .06 * wob(t, t0 + 1.2, .3) * (ub >= 1 ? 1 : 0);
-  return CAM(bg("garden") + hi, z, 960, 640) + OP(ramp(t, s.t0 + .5, .3) * (1 - ramp(t, LT(b) - .2, .3)), lowerPill(60, 150, "Void deck and community garden,", "Toa Payoh")) + buds + `<g transform="translate(${n2(bx)} ${n2(by)}) scale(${n2(1 / bsq)} ${n2(bsq)})">${ourBox("", { lid: 1 })}</g>` + HUD(t); };
-const GBOX = [840, 1052];
+  return CAM(bg("garden") + hi, z, 960, 640) + OP(ramp(t, s.t0 + .5, .3) * (1 - ramp(t, LT(b) - .2, .3)), lowerPill(60, 150, "Void deck and community garden,", "Toa Payoh")) + buds + `<g transform="translate(${n2(bx)} ${n2(by)}) scale(${n2(.86 / bsq)} ${n2(.86 * bsq)})">${ourBox("", { lid: 1 })}</g>` + HUD(t); };
+const GBOX = [690, 1056];
 
 /* ============ Mark Sentence 1 ============ */
 function markScene(t, s, o) { const L = TL.lines[o.id], S = TL.lines[o.sayId], ts = S.t;
@@ -117,10 +117,10 @@ SC.day1 = (t, s) => { const L = "h502", z = lerp(1.0, .84, eo((t - s.t0) / .9)),
   const shaft = OP(.25 + .3 * pulse(t, tLi + .2, .3, 2.5), `<g style="mix-blend-mode:screen"><path d="M-80 -40 L560 -40 L${B.plant + 200} 900 L${B.plant - 240} 900z" fill="#FFE27A" filter="url(#b30)"/></g>`);
   const fine = ["An adult helps. Wash your hands.", "The mealworm goes back to its tub after Day 30."];
   return boxView(t, { cam, st: { day: 1 }, over: shaft })
-    + chip(tA, 1160, 150, "air", "AIR", wx(1124), wy(216), "#2E8FB8", "#BFE6FF", 230) + chip(tF, wx(B.dish) - 170, 930, "food", "FOOD", wx(B.dish - 34), wy(B.floor - 24), "#B4760C", "#F3DDB0")
-    + chip(tW, wx(B.dish) + 190, 930, "water", "WATER", wx(B.dish + 62), wy(B.floor - 30), "#1F5FD0", "#8CC8FF", 280)
-    + chip(tP, wx(B.plant) - 60, 930, "soil", "MOIST SOIL", wx(B.plant), wy(B.floor - 148), "", "", 360) + chip(tLi, 400, 250, "sun", "SUNLIGHT", 250, 330, "", "", 330)
-    + OP(ramp(t, tA + .6, .4), `<g transform="translate(1500 1012)"><rect x="-380" y="-48" width="760" height="96" rx="26" fill="${P.ink}" opacity=".85"/>${T(0, -8, fine[0], 28, "#fff", { w: 500 })}${T(0, 30, fine[1], 28, "#fff", { w: 500 })}</g>`)
+    + chip(tA, 1160, 150, "air", "AIR", wx(1124), wy(216), "#2E8FB8", "#BFE6FF", 230) + chip(tF, wx(B.dish) - 170, 908, "food", "FOOD", wx(B.dish - 34), wy(B.floor - 24), "#B4760C", "#F3DDB0")
+    + chip(tW, wx(B.dish) + 190, 908, "water", "WATER", wx(B.dish + 62), wy(B.floor - 30), "#1F5FD0", "#8CC8FF", 280)
+    + chip(tP, wx(B.plant) - 60, 908, "soil", "MOIST SOIL", wx(B.plant), wy(B.floor - 148), "", "", 360) + chip(tLi, 600, 120, "sun", "SUNLIGHT", 430, 300, "", "", 330)
+    + OP(ramp(t, tA + .6, .4), `<g transform="translate(1500 1028)"><rect x="-380" y="-46" width="760" height="92" rx="26" fill="${P.ink}" opacity=".85"/>${T(0, -8, fine[0], 28, "#fff", { w: 500 })}${T(0, 30, fine[1], 28, "#fff", { w: 500 })}</g>`)
     + `<g transform="scale(${n2(lerp(1.5, 1, eo((t - s.t0 - .25) / .18)))})" opacity="${n2(clamp((t - s.t0 - .2) / .1))}">${counter(t, 1, s.t0 + .25)}</g>` + HUD(t); };
 
 /* ============ round cards ============ */

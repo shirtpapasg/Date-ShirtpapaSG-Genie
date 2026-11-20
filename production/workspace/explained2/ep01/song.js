@@ -9,12 +9,13 @@ const DUR = C.END + .2, N = Math.ceil(DUR * SR), bus = () => new Bus(N), SFX = p
 const voice = bus(), drums = bus(), bass = bus(), keys = bus(), uke = bus(), pad = bus(), game = bus(), amb = bus(), verb = bus(), calm = bus(), wonder = bus();
 const BPM = 104, BEAT = 60 / BPM;
 // ---------- voices
-for (const id of TL.order) MIX.loadAudio(path.join(__dirname, 'voice', id + '.wav'), { at: TL.lines[id].t, length: DUR }).mixInto(voice, TL.lines[id].who === 'heart' ? 1 : TL.lines[id].who === 'chant' ? .8 : .78);
+for (const id of TL.order) MIX.loadAudio(path.join(__dirname, 'voice', id + '.wav'), { at: TL.lines[id].t, length: DUR }).mixInto(voice, TL.lines[id].who === 'heart' ? 1 : TL.lines[id].who === 'chant' ? (TL.lines[id].gain || .8) : .78);
 // ---------- the game bed: marimba, ukulele, claps, in C (short1's theme), only inside the groove regions
 const CH = [['C3', ['E4', 'G4', 'C5']], ['A2', ['E4', 'A4', 'C5']], ['F2', ['F4', 'A4', 'C5']], ['G2', ['D4', 'G4', 'B4']]];
 const MOTIF = [['E5', 0, 1], ['G5', 1, 1], ['C6', 2, 2], ['A5', 4, 1], ['G5', 5, 1], ['E5', 6, 2]], MOTIF2 = [['D5', 0, 1], ['F5', 1, 1], ['A5', 2, 2], ['G5', 4, 1], ['E5', 5, 1], ['C5', 6, 2]], MOTIF3 = [['C5', 0, 1], ['E5', 2, 1], ['G5', 3, 1], ['E5', 4, 2], ['D5', 6, 2]];
 const K = I.kick({ punch: .6, tail: .2 }), CL = I.clap({ decay: .1 }), SH = [I.shaker(.7, 15), I.shaker(1, 16)];
 let barN = 0;
+if (C.R.outro) C.R.groove.push(C.R.outro);
 for (const [a, b] of C.R.groove) for (let t0 = a, bi = 0; t0 + BEAT * 3.2 < b; t0 += BEAT * 4, bi++, barN++) { const [root, chord] = CH[bi % 4];
   for (let s = 0; s < 8; s++) { const t = t0 + s * BEAT / 2; if (t > b - .1) break;
     if (s === 0 || s === 4) drums.addMono(K, t, .5); if (s === 2 || s === 6) { drums.addMono(CL, t, .3); verb.addMono(CL, t, .1); }
@@ -96,7 +97,8 @@ const P = {
   whooshout: (t) => { game.addMono(I.noiseSweep(.8, 300, 3000, { q: 1.4 }), t, .2); game.addMono(I.pop(900, 91), t + .95, .5); },
   scribble: (t) => { game.addMono(I.scribble(.7, 31), t, .3); },
   rub: (t) => { game.addMono(I.scribble(.5, 33), t, .18); game.addMono(I.noiseSweep(.5, 800, 1200, { q: .8 }), t, .06); },
-  clap: (t) => { drums.addMono(CL, t, .75); verb.addMono(CL, t, .2); }, stomp: (t) => { drums.addMono(K, t, .95); drums.addMono(I.thud(70, .12), t, .8); },
+  clap: (t, v) => { const g = v === undefined ? 1 : v; drums.addMono(CL, t, .75 * g); verb.addMono(CL, t, .2 * g); }, stomp: (t, v) => { const g = v === undefined ? 1 : v; drums.addMono(K, t, .95 * g); drums.addMono(I.thud(70, .12), t, .8 * g); },
+  turn: (t, v) => { game.addMono(I.pop(1600, 120 + v), t, .5); mar(['G5', 'A5', 'C6', 'D6'][v % 4], t, .4, { thock: .5 }); },
   sparkle: (t) => { ['C6', 'E6', 'G6', 'C7'].forEach((n, i) => { const x = I.musicBox(m(n)); game.addMono(x, t + i * .05, .14); verb.addMono(x, t + i * .05, .12); }); game.addMono(CL, t + .28, .5); },
   slide: (t) => { game.addMono(I.paperFwip(.9, 6), t, .22); game.addMono(I.thud(130, .05), t + .34, .4); },
   squeak: (t) => { const x = I.whistle(.12); game.addMono(x, t, .09); game.addMono(I.pop(1900, 95), t, .25); },
@@ -119,7 +121,7 @@ MIX.duck([drums, bass, keys, uke, pad], voice, { depth: .64, release: .3 }); MIX
 const stems = { drums, bass, keys, uke, pad, calm, wonder, game, amb, voice, verb: reverb(verb, { room: .7, damp: .4 }) };
 const GAIN = { drums: .42, bass: .5, keys: .7, uke: 2.1, pad: 1.6, calm: 1.5, wonder: .85, game: .75, amb: 1, voice: 2.3, verb: .9 };
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? path.join(__dirname, "out", "stems") : null }); MIX.highpass(mix, 30);
-for (let i = Math.round((C.END - .06) * SR); i < N; i++) { mix.L[i] = 0; mix.R[i] = 0; }   // hard cut at the end
+MIX.fadeOut(mix, C.END - 1.6, C.END - .05);   // the outro music fades at the very end
 const M = MIX.master(mix, .8, undefined, { lufs: -16 });
 fs.mkdirSync(path.join(__dirname, 'out'), { recursive: true }); MIX.writeWav(path.join(__dirname, 'out', `mix_p${PART}.wav`), mix);
 console.log(`wrote out/mix_p${PART}.wav (${DUR.toFixed(2)} s${M && M.lufs !== undefined ? `, ${M.lufs.toFixed(1)} LUFS` : ''})`);

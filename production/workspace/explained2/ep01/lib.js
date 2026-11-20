@@ -237,7 +237,7 @@ function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[
     if (u < 1) { const e = eio(u), x0 = k.from[0], y0 = k.from[1], x = lerp(x0, sx, e), y = lerp(y0, sy, e) - 120 * Math.sin(Math.PI * e), sc = lerp(k.big ? (k.w.length > 12 ? 104 : 130) / size : 1.5, 1, e) * (k.big ? 1 : Math.min(1, spring(t, tf, .25) + .2));
       top += OP(k.big ? 1 : Math.min(1, u * 5), TF(x, y, sc, kwPill(k.w, size)) ) + (k.big ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * (1 - u))}"/>` : ""); continue; }
     if (rc > 0) { // the read-along: centre stage, big; each word lights up as it is said and stays lit
-      const tl_ = LT(KWLINE[k.i]), lit = t >= tl_ - .05, g = lit ? pulse(t, tl_, .05, .8) : 0, cy = 330 + k.i * 150, sc = lerp(1, 2.5, rc) * (1 + .1 * g + (lit ? .04 * Math.sin(t * 5) * (t < tl_ + 2.6 ? 1 : 0) : 0));
+      const tl_ = LT(KWLINE[k.i]), lit = t >= tl_ - .05, g = lit ? pulse(t, tl_, .05, .8) : 0, cy = 330 + k.i * 150, sc = lerp(1, 2.2, rc) * (1 + .1 * g + (lit ? .04 * Math.sin(t * 5) * (t < tl_ + 2.6 ? 1 : 0) : 0));
       out += OP(lit || rc < 1 ? 1 : .5, TF(lerp(sx, 960, rc), lerp(sy, cy, rc), sc, kwPill(k.w, size, lit && t < tl_ + 2.6 ? 1 : 0))); continue; }
     const land = pulse(t, k.tl, .02, .3);
     out += TF(sx, sy, 1 + .22 * land, kwPill(k.w, size)); }
