@@ -89,7 +89,7 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "b403", sayId: "b402", who: "basil", 
 SC.whofeeds = (t, s) => { const m = "b404", tR = W(m, "rice") - .3, tO = W(m, "oats") - .5, tN = W(m, "nobody") - .2, tW = W(m, "who") - .2, cam = [1.45, 1060, 650], g = (t0, d = 1.6) => pulse(t, t0 + .2, .2, d);
   const q = (x) => t >= tW ? TF(camX(cam, x), 330, spring(t, tW + (x > 1000 ? .15 : 0), .45), `<g filter="url(#dropS)"><circle r="56" fill="url(#gSun)"/></g>${T(0, 26, "?", 78, P.ink)}`) : "";
   return hotelView(t, { mode: "pm", clock: 14.4, ticks: T5, items: ring(HT.rx[1], HT.fy - 120, 135, 160, g(tO)) + ring(HT.rx[0], HT.fy - 150, 150, 190, g(tN, 3)) + ring(1485, HT.fy - 130, 150, 170, g(tN, 3)) + items2(t, {}) }, cam)
-    + q(HT.rx[0]) + q(1485) + buddy("momo", 190, 1066, 300, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "thinking"], [LT(m) - .12, "sit"], [LE(m) + .1, "thinking"]] }) + say(m, 520, 520, t, { size: 46, maxW: 620, tail: -200 })
+    + q(HT.rx[0]) + q(1485) + buddy("momo", 190, 1066, 300, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "thinking"], [LT(m) - .12, "sit"], [LE(m) + .1, "thinking"]] }) + say(m, 400, 520, t, { size: 46, maxW: 620, tail: -100 })
     + dayCounter(t, 31) + HUD(t); };
 
 /* ============ 5 · Round 1: the bean plant from the dark cupboard ============ */
@@ -139,7 +139,7 @@ SC.evidence = (t, s) => { const L = "b508", m = "b509", tAir = W(L, "air") - .15
   else { const k = (i) => spring(t, tBut + .1 + i * .18, .5), cx = [760, 1330], lab = t >= tN;
     out += [0, 1].map((i) => TF(cx[i], 1010, 1.25 * k(i), picCard(TF(0, -240, .84, potTop(i === 1)), i ? "the cupboard plant" : "the window plant", { id: "pt" + i, rot: i ? 1.5 : -1.5, size: 38, w: 440, sky: ["#F4E9FF", "#FFF3DC"] }))).join("")
       + (lab ? OP(ramp(t, tN, .2), `<path d="M1045 300 L${cx[0] + 20} 600 M1045 300 L${cx[1] - 20} 600" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/><circle cx="${cx[0] + 20}" cy="600" r="9" fill="${P.ink}"/><circle cx="${cx[1] - 20}" cy="600" r="9" fill="${P.ink}"/>`) + TF(1045, 300, spring(t, tN, .4), tpill(0, 0, "nobody put food here", 50, P.ink, "#fff", { w: 700 })) : "")
-      + buddy("momo", 230, 1062, 320, t, { aura: true, poses: [[s.t0, "sit"], [tBut, "thinking"], [tN + .5, "surprised"], [LT(m) - .12, "sit"], [LE(m) + .1, "thinking"]] }) + say(m, 400, 440, t, { size: 46, maxW: 520, tail: -120 }); }
+      + buddy("momo", 230, 1062, 320, t, { aura: true, poses: [[s.t0, "sit"], [tBut, "thinking"], [tN + .5, "surprised"], [LT(m) - .12, "sit"], [LE(m) + .1, "thinking"]] }) + say(m, 330, 440, t, { size: 46, maxW: 520, tail: -40 }); }
   return out + HUD(t); };
 // light reaches the green plant's leaves ("making food"); the cupboard picture stays dark beside it
 const CAML = [2.3, 1885, 801];
@@ -184,7 +184,7 @@ SC.show = (t, s) => { const a = "b601", rd = ["b602a", "b602b", "b602c"], c = "b
     + (ringOn ? OP(1 - ss(bell + .5, bell + .8, t), TF(RX, RY, spring(t, tcn[0] - .3, .4), `<g transform="translate(${-RX} ${-RY})">${ringTimer(RX, RY, t < r0 ? 1 : rs.frac, t < r0 ? 6 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RX, RY + 60, .62, countHand(nf)) })}</g>`) + youPill(RX, RY - 178, 1.0) + tpill(RX, RY + 222, "line 1, 2 or 3?", 30, P.ink, "#fff")) : "")
     + (t >= bell + .9 ? buddy("pip", 140, 1062, 200, t, { aura: true, in: bell + .9, poses: [[bell + .9, "thinking"], [tP - .12, "sit"], [LE("b605") + .1, "pointing"]] }) + pickCard("pip", 262, 850, t, tP - .1, "LINE 3", "purple")
       + buddy("basil", 395, 1062, 200, t, { aura: true, in: bell + 1.0, poses: [[bell + 1, "arms_crossed"], [tB - .12, "sit"], [LE("b606") + .1, "cheer"]], nohop: true }) + pickCard("basil", 520, 850, t, tB - .1, "LINE 3", "purple") + pickCard("momo", 1590, 850, t, tO + .5, "LINE 3", "purple") : "")
-    + say("b605", 232, 430, t, { size: 40, maxW: 360, tail: -90, tdx: -10 }) + say("b606", 232, 620, t, { size: 40, maxW: 370, tail: 150 })
+    + say("b605", 232, 430, t, { size: 40, maxW: 360, tail: -40, tdx: -30 }) + say("b606", 232, 620, t, { size: 40, maxW: 370, tail: 150 })
     + stamp(t, LT("b604") - .08, 1000, 470) + bellIcon(t, r0) + HUD(t); };
 SC.fixed = (t, s) => { const b = "b608", h = "b609", tc = W(h, "two", 1) - .1, rub = ss(s.t0 + .15, s.t0 + .6, t), wr = ss(s.t0 + .65, LT(b) + .9, t), tPic = W(b, "makes") - .1, t2 = W(h, "two") - .15;
   return showView(t, { notes: { fixing: { rub, write: wr }, lit: [0, pulse(t, t2 + .1, .1, 2.2), 0], pic: t >= tPic ? spring(t, tPic, .45) : 0, tick: spring(t, LE(b) - .2, .45) } })
