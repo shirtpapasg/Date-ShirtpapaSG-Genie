@@ -103,12 +103,12 @@ One recess in a school canteen. A board with seven empty tiles slides in: THE 7 
 
 ### Segment 2 · The new chapter, and the question (0:07-0:21)
 
-**This whole segment is written to be swapped as one piece** once EP7's last dare is known (section 11, choice 1). Nothing after it depends on its words.
+**Swapped on 2026-11-20 to open from EP7's dare** (EP7 ends: "Next time, something new: materials! A plastic box, a metal box and a glass jar. One of them was made from sand. Which one? Lock in your answer!"). Nothing after it depends on its words.
 
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
-| 0:07 | Four small chips along the top, in the order EP4 taught them: **PLANTS · ANIMALS · FUNGI · BACTERIA**, under a small heading *Living things*. On "something new" they slide off to the left and a new chip pops in their place: **NON-LIVING THINGS**. On "made of" a soft glow runs over the table. | **Heart:** "We have sorted living things. Today, something new! Non-living things. What are they made of?" | Four soft pops, a slide, a chime. | The start of Chapter 3. It marks the change from living things to materials in one breath, with EP1's own key word, "non-living things". |
-| 0:13 | A glow lands on each container as Heart names it; small tags pop under them: *plastic* · *metal* · *glass*. On "sand" a small pile of sand pops on the table beside them, with a big **?**. Then the picture dims and the title slams in: **WHAT IS IT MADE OF?** (white) then **ONE WAS ONCE SAND!** (sun yellow). Pill: *Which one? Hold on to your answer!* | **Heart:** "A plastic box. A metal box. A glass jar. One of them was made from sand!" | Three pips, a soft pour of sand, a whoosh, two slams. | The hook is a closed question the child can already hold an answer to. It is answered in Round 1. |
+| 0:07 | Four small chips along the top, in the order EP4 taught them: **PLANTS · ANIMALS · FUNGI · BACTERIA**, under a small heading *Living things*. On "something new" they slide off to the left and a new chip pops in their place: **NON-LIVING THINGS**. On "made of" a soft glow runs over the table. | **Heart:** "Last time, we asked: a plastic box, a metal box and a glass jar. One of them was made from sand! Which one? We have sorted living things. Now, non-living things. What are they made of?" | Four soft pops, a slide, a chime. | The start of Chapter 3. It marks the change from living things to materials in one breath, with EP1's own key word, "non-living things". |
+| 0:13 | A glow lands on each container as Heart names it; small tags pop under them: *plastic* · *metal* · *glass*. On "sand" a small pile of sand pops on the table beside them, with a big **?**. Then the picture dims and the title slams in: **WHAT IS IT MADE OF?** (white) then **ONE WAS ONCE SAND!** (sun yellow). Pill: *Which one? Hold on to your answer!* | **Heart:** "A plastic box. A metal box. A glass jar. Did you lock in your answer?" | Three pips, a soft pour of sand, a whoosh, two slams. | The hook is a closed question the child can already hold an answer to. It is answered in Round 1. |
 
 ### Segment 3 · The game (0:21-0:28)
 
