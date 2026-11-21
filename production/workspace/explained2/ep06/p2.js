@@ -130,7 +130,7 @@ SC.fixed = (t, s) => { const h = "f1007", tc = W("f1008", "two") - .1, rub = ss(
   return showView(t, { notes: { fixing: true, rub, write: wr, reveal: rv, tick: spring(t, W(h, "reptile") - .1, .45) } })
     + (t >= tR + .4 ? TF(300, 640, spring(t, tR + .4, .45), pboard(turtleNest(t), 420, 340, "tn", "", 30)) : "")
     + buddy("momo", 1720, 1060, 250, t, { aura: true, flip: true, poses: [[s.t0, "sit"], [tF, "cheer"]], nohop: true }) + say("f1009", 1500, 820, t, { size: 52, tail: 160 })
-    + bookCap(t, h, "Read all the clues. Scaly skin and lungs: a reptile. It is a sea turtle!", 96, { size: 44, maxW: 1120, x: 760, t1: LT("f1008") }) + coin(t, tc, 1520, 520, "+2", "if you showed three fingers") + HUD(t); };
+    + bookCap(t, h, "Read all the clues. Scaly skin and lungs: a reptile. It is a sea turtle!", 96, { size: 44, maxW: 1120, x: 880, t1: LT("f1008") }) + coin(t, tc, 1520, 520, "+2", "if you showed three fingers") + HUD(t); };
 SCORE.push([W("f1008", "two") - .1, 4, 2]);
 
 /* ============ 11 · six tiles, and the chant ============ */

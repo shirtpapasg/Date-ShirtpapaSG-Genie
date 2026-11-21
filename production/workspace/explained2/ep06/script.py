@@ -155,7 +155,7 @@ SEQ2 = [
  # ---- 2 · "Last time..."
  ("scene", "lasttime"),
  ("say", "f201", H, "Last time, we counted legs. Insects have six. And we met the reptiles, with dry, scaly skin. Like Basil!", {"pre": .5}),
- ("say", "f202", B, "Cold-blooded, and proud!", {"pre": .4, "post": .4}),
+ ("say", "f202", B, "Cold-blooded, and proud!", {"pre": .4, "post": .4}), ("wait", 1.1),   # picture-only: the third recap picture holds at least 2.5 s
  # ---- 3 · today's goals, read aloud by Pip, word for word as printed (rulebook section 11, step 3; teacher, 21 Nov), and the game
  ("scene", "goals"), ("wait", .5),
  ("say", "f3g0", P, "Today you'll learn...", {"pre": .2}),

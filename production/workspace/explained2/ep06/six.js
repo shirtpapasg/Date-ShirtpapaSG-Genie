@@ -30,7 +30,7 @@ function lakeView(t, o = {}, cam = [1, 960, 540]) { const dk = o.dusk || 0; let 
   s += o.back || "";
   if (o.web !== false) s += TF(GD.web[0], GD.web[1], .28, spiderWeb(330, t, { op: .8, w: 3.4 }) + `<g transform="rotate(${n2(1.5 * Math.sin(t * .8))})">${spiderBig({ id: "lk" })}</g>`);
   if (o.hop !== false && !(o.liz !== undefined && o.liz < 1)) s += TF(GD.hopper[0], GD.hopper[1], .13, `<g transform="rotate(-62)">${grasshopper({})}</g>`);
-  if (o.mon !== false) { const m = o.mon || {}; s += TF(m.x || GD.liz[0], m.y || GD.liz[1], m.k || .34, monitor({ t, tongue: m.tongue !== undefined ? m.tongue : tongueAt(t, 2.0, 7.3), ...m })); }
+  if (o.mon !== false) { const m = o.mon || {}; s += TF(m.x || GD.liz[0], m.y || GD.liz[1], m.k || .34, monitor({ t, breath: .5 + .5 * Math.sin(t * 2.1), tongue: m.tongue !== undefined ? m.tongue : tongueAt(t, 2.0, 7.3), ...m })); }
   if (o.ants !== false) for (let i = 0; i < 7; i++) { const x = 860 + ((i * 52 + t * 18) % 380), ph = t * 9 + i * 1.7; s += TF(x, 898 - (i % 2) * 6, .075, antSmall(ph)); }
   if (dk > .01) s += `<rect x="-400" y="-300" width="2720" height="1700" fill="#5A4A8A" opacity="${n2(.32 * dk)}" style="mix-blend-mode:multiply"/>`;
   s += TF(GD.lamp[0], GD.lamp[1], 1, lampPost(o.lampLit || 0, LAMPH));

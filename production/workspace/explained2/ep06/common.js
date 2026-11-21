@@ -119,7 +119,7 @@ SC.kwrecap = (t, s) => { const ids = KWLINE, us = KWLINE.map((k) => "u" + k.slic
     + OP(ramp(t, LT(ids[0]) - .3, .3), T(960, 170, "KEY WORDS", 54, P.sun, { ls: 10 }));
   out += TF(330, 480, 1, youPill(0, 0, 1.3) + `<g transform="translate(0 130) scale(${n2(1 + (turn >= 0 ? .12 + .05 * Math.sin(t * 10) : 0))})" opacity="${turn >= 0 ? 1 : .35}"><g filter="url(#dropS)"><rect x="-110" y="-64" width="220" height="128" rx="50" fill="#fff"/><path d="M-30 60 L-56 108 L16 62z" fill="#fff"/></g>${[-52, 0, 52].map((x, i) => `<circle cx="${x}" cy="${n2(turn >= 0 ? -8 * Math.abs(Math.sin(t * 7 + i)) : 0)}" r="15" fill="${P.ink}"/>`).join("")}</g>`
     + (turn >= 0 ? TF(0, 300, spring(t, LT(us[turn]) - .2, .3), tpill(0, 0, "Say it!", 44, P.coral, "#fff", { w: 700 })) : ""));
-  [["pip", 1600, 520], ["basil", 1770, 790], ["momo", 1600, 1060]].forEach(([w, x, y], i) => { out += buddy(w, x, y, 200, t, { aura: true, flip: true, in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [[tw_, 40]] }); });
+  [["pip", 1716, 500], ["basil", 1800, 780], ["momo", 1716, 1060]].forEach(([w, x, y], i) => { out += buddy(w, x, y, 176, t, { aura: true, flip: true, in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [[tw_, 40]] }); });
   if (t >= tw_) out += TF(330, 900, spring(t, tw_, .45), `<g transform="rotate(-4)"><g filter="url(#drop)"><rect x="-230" y="-64" width="460" height="128" rx="64" fill="url(#gSun)"/></g>${T(0, 24, "Well done!", 70, P.ink)}</g>`);
   return out + HUD(t); };
 
@@ -164,6 +164,6 @@ function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "anima
   // Part 2: "Lock in first. And find the new lizard!"
   out += `<g transform="translate(960 ${n2(lerp(-200, 170, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.35, { you: 0, bud: 0 })}</g>`;
   out += TF(560, 560, spring(t, tLock - .15, .5), `<g transform="scale(.8)">${ringTimer(0, 0, clamp(1 - (t - tLock) / 3), 5, t)}</g>` + TF(0, 0, .95, `<g filter="url(#dropS)">${countHand(t > tLock + .7 ? 3 : t > tLock + .35 ? 2 : 1)}</g>`)) + (t >= tLock ? TF(560, 880, spring(t, tLock + .1, .4), tpill(0, 0, "You lock in first", 42, "#fff", P.ink, { w: 700 })) + youPill(560, 330, 1.2) : "");
-  if (t >= tFind - .25) out += TF(1360, 540, spring(t, tFind - .25, .5), `<g filter="url(#drop)"><circle r="170" fill="${P.paper}"/></g><g transform="scale(1.13)">${hiddenIcon(t)}</g><g transform="translate(124 -112) rotate(12)"><circle r="50" fill="url(#gSun)"/>${T(0, 24, "?", 70, P.ink)}</g>`) + TF(1360, 790, spring(t, tC - .2, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 }));
+  if (t >= tC - .6) out += TF(1360, 540, spring(t, tC - .6, .5), `<g filter="url(#drop)"><circle r="170" fill="${P.paper}"/></g><g transform="scale(1.13)">${hiddenIcon(t)}</g><g transform="translate(124 -112) rotate(12)"><circle r="50" fill="url(#gSun)"/>${T(0, 24, "?", 70, P.ink)}</g>`) + TF(1360, 790, spring(t, tFind - .3, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 }));
   [["pip", 1010, 880], ["basil", 960, 1066], ["momo", 1750, 1060]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 220, t, { aura: true, in: s.t0 + .2 + i * .1, flip: i === 1, poses: [[s.t0, "cheer"], [s.t0 + 1.6, "sit"]], wave: true }); });
   return out + logo(t); }

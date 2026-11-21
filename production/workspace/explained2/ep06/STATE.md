@@ -33,3 +33,37 @@ Part 2 "Is a Bat a BIRD? How to Spot a Mammal". Script: `../p3_ep06_script.md` (
 - Checks: count-in onsets measured on the mix 1.000/0.999 s apart, the blast on "know"; "Say it with me!/us!" then 0.8 s; no EP6 line
   needs sg_pron (no "live").
 - Stills of the monitor: qa/still_monitor_p1_3m00s.jpg (Part 1 3:00.5), qa/still_scale_journey_p1_3m36s.jpg (Part 1 3:36.5).
+
+## 21 Nov 2026: the Fable redraw (the teacher chose Fable's clips). READY FOR STAGE 3 (render and final checks: Opus). Nothing rendered, nothing uploaded.
+The .mp4 / .srt / sheet_part*.png in this folder are the OLD Opus render: they no longer match the timelines. Stage 3 must re-render both parts.
+- New files: `fable_art.js` (animals and props: snake, terrapin, crocodile, sea turtle, fruit bat, cat, macaque, grasshopper (side), squirrel, the plain
+  thermometer `thermoF`, blinking eyes `eyeF`, the hidden-animal bush icon), `fable1.js` (shared pieces + Part 1 scenes), `fable2.js` (Part 2 scenes).
+  They load after p1.js / p2.js (page.html): a scene defined there REPLACES the one of the same name in p1.js / p2.js / shrink.js. beasts.js keeps
+  the old names and hands over to fable_art.js. `gardens.js`: the lake set now has the Bandstand, lily pads, the warm rock (ROCKW), heliconias.
+- Replaced scenes. Part 1: cold, callback, goals, waitw, shrink, pullout, mark2, kwrecap (+pictures), nyk. Part 2: recap, lasttime, goals, waitw,
+  shrink, reveal, warm, dare, kwrecap (+pictures), nyk. Every other scene is the earlier build with the new set and the new animals in it.
+- The teacher's notes of 21 Nov, all applied:
+  - Journeys: BE A SCALE = the beaded water monitor from behind, the YOU magnifier window, PLACE / LIZARD thermometers, the warm rock, the lake;
+    the cold-blooded card is the cream book card (tab MARK SENTENCE 2 of 2, footer "From your book") with the YOU thermometer that stays the same.
+    BE A HAIR = the same language on a fruit bat's back: AIR falls, BAT stays the same; the baby bat drinks milk.
+  - Part 2 ending: read-along with pictures, the NEXT TIME dare card (mould / yeast, cards 1 Mould, 2 Yeast; words unchanged), the outro with
+    MAMMAL / MAMMAL / REPTILE tags and the lizard on its rock (no board). Part 1 outro: the board is centred in the free space, 30% taller.
+  - Part 2 opens with the calm recap (rulebook 2): three held pictures with one label each under Heart's "Last time" line. script.py: the recap
+    scene is 1.2 s (was 4.0), and 1.1 s of picture-only time follows Basil's line.
+  - Goals read aloud (rulebook 11.3): new lines e5g0-e5g3 (Basil) and f3g0-f3g3 (Pip); `goalsRead()` lifts and lights each card as it is read.
+  - Mark Sentences are read by the buddy who says "Say it with me!": e608 Momo, e1202 Basil, f605 Pip, f1203 Momo (re-recorded, same words).
+  - Lock-ins: `lockN` takes `clue(t)`, drawn on top of the ring frame for the whole countdown (Part 1 Round 2's "dry and scaly").
+  - Animals cute and alive: bright blinking eyes, breathing, tails, ears, tongues (fable_art.js; the monitor's eye in beasts.js).
+  - The hidden animal: Part 1 the grasshopper (it hops from its grass blade onto the lamp post during HOLD ON!), Part 2 a plantain squirrel on the
+    palm trunk by the lamp. Re-recorded: e301, e1302, f301, f1302. Rules icon: a bush with two eyes, "Can you spot it?". The "chek" cues are gone.
+- Timelines rebuilt (`python3 build_tl.py 1|2`): Part 1 = 5:13.3, Part 2 = 5:18.8. Part 2 is over the 5:15 guide because of the new read-aloud
+  lines; nothing was cut. If it must come down, the script's own cut order is: "Six animal groups!", the chant's all-together bar, "Pip and I are mammals!".
+- Sound: sound_cues.js / p2cues.js updated (goal pops on the new lines, the recap's clacks became three soft pops, no "chek"). `node dump_cues.js P`
+  runs clean (234 / 236 events). The mixes in out/ are OLD: `./build_part.sh P` rebuilds timeline, cues, song, picture and mux. Delete out/chunks_p1
+  and out/chunks_p2 first (every chunk changed).
+- Thumbnails (new): thumb_part1.jpg, thumb_part2.jpg (`node thumb_still.js N t qa/th/fN.png "&thumb"`, then thumb.js; frames THUMB1 / THUMB2 in fable1/2.js).
+- Checks: qa/sheet_p1_fable.jpg, qa/sheet_p2_fable.jpg (a still in every scene), qa/f1a-c.jpg, qa/f2a-c.jpg (swaps, cards, the journeys).
+  Stills: qa/still_scale_journey_fable_p1_3m46s.jpg, qa/still_hair_journey_fable_p2_1m11s.jpg, qa/still_hair_baby_milk_fable_p2_1m18s.jpg.
+  No motion test was rendered: Stage 3 should watch both journeys, the cold open (the spider's drop) and the splash in motion.
+- To stretch a segment for slower pacing: add ("wait", s) or raise "post" in script.py and rebuild; every scene hangs on marks and word times.
+- upload.json: the descriptions still say "lizard" for the hidden animal if they mention it; check before any upload. A human must listen first.

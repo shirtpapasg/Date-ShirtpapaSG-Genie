@@ -15,16 +15,16 @@ function palmViewF(t, o = {}, cam = [1, 960, 540]) { let s = bg("palmvalley") + 
 const RA = "f201", RB = "f202", tR2 = W(RA, "and") - .45, tR3 = LT(RB) - .35, tREnd = SCN.lasttime.t1;
 const recapPic = (t, i, a, b, inner, label, tLab) => { const o = ss(a - .01, a + .5, t) * (1 - ss(b, b + .5, t)); if (o <= 0) return ""; const z = 1 + .05 * clamp((t - a) / (b + .5 - a));
   return OP(i === 0 ? 1 - ss(b, b + .5, t) : o, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${inner}</g>` + (t >= tLab ? TF(960, 930, spring(t, tLab, .5), `<g filter="url(#drop)"><rect x="${n2(-tw(label, 64, 700) / 2 - 56)}" y="-62" width="${n2(tw(label, 64, 700) + 112)}" height="124" rx="62" fill="${P.ink}"/></g>${T(0, 22, label, 64, "#fff")}`) : "")); };
-function calmRecap(t) { const AX = 960, AY = 760, AK = 1.0;
+function calmRecap(t) { const AX = 960, AY = 650, AK = 1.0;
   const p1 = macroBg(t, { gy: AY - 10 }) + TF(AX, AY, AK, antBig({ glow: [.5, .5, .5, .5, .5, .5], t, feel: .3 })) + [0, 1, 2, 3, 4, 5].map((k) => { const f = antLegTip(k); return numPop(t, -1, AX + f[0] * AK, AY + 76 + (k % 2) * 80, k + 1, .9); }).join("");
-  const p2 = lakeView(t, { mon: { x: 760, y: 760, k: .62, tongue: tongueAt(t, .4, 2.6) }, web: false, hop: false, ants: false }, [1.25, 900, 600]) + TF(1500, 400, 1, skinDisc("scaly", 170, t));
+  const p2 = lakeView(t, { mon: { x: 760, y: 760, k: .62, tongue: tongueAt(t, .4, 2.6) }, web: false, hop: false, ants: false }, [1.25, 900, 600]) + TF(330, 340, 1, skinDisc("scaly", 170, t));
   const cheer = [[LT(RB) + .1, 40], [LE(RB) + .2, 30]];
   const p3 = bg("daystage") + `<circle cx="1500" cy="200" r="520" fill="url(#fSun)" opacity=".9"/>` + buddy("basil", 700, 880, 520, t, { aura: true, tag: false, poses: [[0, "cheer"]], jump: cheer, still: false })
     + thermoF(1240, 640, .2 + .6 * (.5 + .5 * Math.sin((t - tR3) * 1.6 - 1.2)), "PLACE", { H: 300 }) + thermoF(1420, 640, .2 + .6 * (.5 + .5 * Math.sin((t - tR3) * 1.6 - 1.9)), "BASIL", { H: 300, fill: P.basil }) + say(RB, 760, 150, t, { size: 52, tail: -40 });
   return `<rect width="1920" height="1080" fill="#DDF0D6"/>` + recapPic(t, 0, 0, tR2, p1, "Insects: 6 legs", W(RA, "insects") - .2) + recapPic(t, 1, tR2, tR3, p2, "Reptiles: dry, scaly skin", W(RA, "reptiles") - .15) + recapPic(t, 2, tR3, tREnd + 9, p3, "Reptiles: cold-blooded", LT(RB) - .1)
     + TF(190, 70, 1, tpill(0, 0, "Last time: Part 1", 36, P.ink, P.sun, { w: 700 })); }
 const THUMB2 = (t) => `<rect width="1920" height="1080" fill="url(#gdSkyN)"/>` + bg("palmvalley").replace("<use", '<use opacity=".9"') + `<circle cx="1420" cy="250" r="560" fill="url(#fWarm)" opacity=".8"/><circle cx="1420" cy="250" r="150" fill="#FFF3C9"/>` + dusks(1, 16, 3)
-  + TF(760, 760, 1.25, `<g transform="rotate(-6)">${fruitBatF({ wings: 1, flap: 1.1, t: 1, light: 1 })}</g>`) + buddy("basil", 200, 1030, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+  + TF(760, 760, 1.25, `<g transform="rotate(-6)">${fruitBatF({ wings: 1, flap: 1.1, t: 1, light: 1 })}</g>`) + buddy("basil", 230, 470, 270, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 SC.recap = (t, s) => location.search.includes("thumb") ? THUMB2(t) : calmRecap(t);
 SC.lasttime = (t, s) => calmRecap(t) + OP(ramp(t, tR3 + .4, .4), HUD(t));
 
@@ -130,7 +130,7 @@ SC.shrink = (t, s) => { const u = t - td, p = povBat(t), e = eio((t - tOut) / 2.
 SC.reveal = (t, s) => { const a = "f601", e = eo((t - s.t0) / 1.4), cam = [lerp(3.4, 1.1, e), lerp(HB[0], 900, e), lerp(HB[1] + 80, 520, e)], tA = W(a, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, tc = W("f602", "one", 1) - .1, tBs = LT("f603") - .12, tS = MK("stampMam"), tM = W(a, "mammal") - .1, BDX = 1560;
   return palmViewF(t, { baby: 1 }, cam) + TF(1010, 880, .5, ansCard(2, "No", { lit })) + (t >= tM ? TF(960, 560, spring(t, tM, .45), tpill(0, 0, "Not a bird: a MAMMAL", 60, P.sun, P.ink, { w: 700 })) : "")
     + TF(BDX, 1062, .5, sixBoard(t, { 3: -1, 4: -1, 5: tS + .02 })) + sixPress(t, tS, BDX, 1062, .5, 5)
-    + buddy("basil", 300, 1060, 300, t, { aura: true, in: s.t0 + .5, poses: [[s.t0, "sit"], [tA, "oops"], [tBs, "cheer"]] }) + say("f603", 560, 600, t, { size: 48, tail: -150 }) + coin(t, tc, 1010, 420, "+1", "if you showed two fingers") + wipe(t, s.t0, "#3B2A8C") + HUD(t); };
+    + buddy("basil", 300, 1060, 300, t, { aura: true, in: s.t0 + .5, poses: [[s.t0, "sit"], [tA, "oops"], [tBs, "cheer"]] }) + say("f603", 560, 600, t, { size: 48, tail: -150 }) + coin(t, tc, 1010, 300, "+1", "if you showed two fingers") + wipe(t, s.t0, "#3B2A8C") + HUD(t); };
 
 /* ============ 7 · warm-blooded: the moving and the steady thermometers ============ */
 SC.warm = (t, s) => { const L = "f704", t0 = s.t0 + .2, tCon = W(L, "constant") - .2, sunP = ss(t0 + .2, t0 + 1.6, t) * (1 - ss(t0 + 4.0, t0 + 5.0, t)), cloud = ss(t0 + 4.0, t0 + 5.2, t) * (1 - ss(t0 + 8.6, t0 + 9.8, t)), sun2 = ss(t0 + 8.8, t0 + 10, t);
@@ -170,8 +170,8 @@ SC.kwrecap = (t, s) => baseKw(t, s) + kwPictures(t, s, [
 
 /* ============ 16 · "Now you know!": today's lizard, warm on its rock, between the buddies; on the blast each buddy gets its own group ============ */
 SC.nyk = (t, s) => { const t0 = Math.floor(TL.lines.h1305.know * 30 + 1e-6) / 30;
-  let out = nykScene(t, s, `<ellipse cx="786" cy="1046" rx="290" ry="30" fill="#8C8576"/><path d="M516 1046 Q516 976 630 966 Q786 950 944 968 Q1058 978 1058 1046z" fill="url(#fRock)" stroke="#6E685C" stroke-width="6"/>` + TF(838, 970, .42, monitor({ t, tongue: tongueAt(t, .4, 2.6) }))
-    + TF(1056, 880, .36, `<path d="M-40 -6 H60" stroke="#6E4A30" stroke-width="16" stroke-linecap="round"/><g transform="rotate(${n2(3 * Math.sin(t * 2))})">${hangBat({ t })}</g>`).replace(/^/, ""));
+  let out = nykScene(t, s, `<ellipse cx="786" cy="1046" rx="290" ry="30" fill="#8C8576"/><path d="M516 1046 Q516 976 630 966 Q786 950 944 968 Q1058 978 1058 1046z" fill="url(#fRock)" stroke="#6E685C" stroke-width="6"/>` + TF(846, 968, .46, monitor({ t, breath: .5 + .5 * Math.sin(t * 2.1), tongue: tongueAt(t, .4, 2.6) }))
+);
   if (t >= t0 + .5) [["pip", 300, "MAMMAL", P.pip], ["momo", 1275, "MAMMAL", P.momo], ["basil", 1650, "REPTILE", P.basil]].forEach(([w, x, g, col], i) => { const tt = t0 + .5 + i * .22, k = spring(t, tt, .45); if (k < .02) return; const ww = tw(g, 38, 700, "Fredoka", 3) + 64;
     out += TF(x - 20, 620 - 8 * Math.abs(Math.sin((t - tt) * 2.6)), k, `<g transform="rotate(${[-4, 3, -3][i]})"><g filter="url(#dropS)"><rect x="${n2(-ww / 2)}" y="-32" width="${n2(ww)}" height="64" rx="32" fill="${col}"/><rect x="${n2(-ww / 2 + 5)}" y="-27" width="${n2(ww - 10)}" height="54" rx="27" fill="none" stroke="#fff" stroke-width="4"/></g>${T(0, 14, g, 38, "#fff", { ls: 3 })}</g>`); });
   return out; };

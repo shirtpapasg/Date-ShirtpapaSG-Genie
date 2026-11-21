@@ -48,8 +48,8 @@ function bookCard(t, id, LINES, KEYS, t0, t1, o = {}) { const L = TL.lines[id], 
 
 /* ---------- the read-along with pictures: a small picture pops beside each key word as it is read (the Fable ending) ---------- */
 function kwPictures(t, s, icons) { const n = KWLINE.length; let out = "";
-  KWLINE.forEach((id, i) => { const tl_ = LT(id), k = spring(t, tl_ - .05, .45); if (k < .02) return; const cy = (n > 3 ? 300 : 360) + i * (n > 3 ? 138 : 170);
-    out += TF(1392, cy, k * (1 + .08 * pulse(t, tl_, .05, .8)), `<g filter="url(#dropS)"><circle r="60" fill="${P.paper}" stroke="${P.sun}" stroke-width="6"/></g><clipPath id="kwi${i}"><circle r="55"/></clipPath><g clip-path="url(#kwi${i})">${icons[i](t, t < tl_ + 2.4)}</g>`); });
+  KWLINE.forEach((id, i) => { const tl_ = LT(id), k = spring(t, tl_ - .05, .45); if (k < .02) return; const cy = (n > 3 ? 300 : 360) + i * (n > 3 ? 138 : 170), ws = KWLINE.map((q) => tw(TL.lines[q].text.replace(/\.$/, "").toUpperCase(), 34, 700, "Fredoka", 34 * .07) + 34 * 1.3), sc = Math.min(n > 3 ? 2.0 : 2.2, 1000 / Math.max(...ws));
+    out += TF(960 + ws[i] * sc / 2 + 66, cy, k * (1 + .08 * pulse(t, tl_, .05, .8)), `<g filter="url(#dropS)"><circle r="54" fill="${P.paper}" stroke="${P.sun}" stroke-width="6"/></g><clipPath id="kwi${i}"><circle r="50"/></clipPath><g clip-path="url(#kwi${i})">${icons[i](t, t < tl_ + 2.4)}</g>`); });
   return out; }
 const kwThermo = (lv) => `<g transform="scale(.3) translate(0 130)">${thermoF(0, 0, lv, "", { H: 230 })}</g>`;
 
@@ -66,10 +66,10 @@ const webSpider = (t, drop = 0) => TF(GD.web[0], GD.web[1], .28, spiderWeb(330, 
 
 /* ============ 1 · the silent cold open: the lake at the Singapore Botanic Gardens ============ */
 const THUMB1 = (t) => macroBg(1, { ground: false, sky: "#DDF4D4" }) + `<circle cx="1500" cy="160" r="520" fill="url(#fSun)" opacity=".9"/>`
-  + TF(700, 560, .98, spiderWeb(330, 0, { op: .95, w: 3.5 }) + spiderBig({ id: "th", glow: [.9, .9, .9, .9, .9, .9, .9, .9] }))
-  + [0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const f = spiderLegTip(i), d = Math.hypot(f[0], f[1] - 20); return numPop(9, 0, 700 + (f[0] + f[0] / d * 58) * .98, 560 + (f[1] + (f[1] - 20) / d * 58) * .98, i + 1, .86); }).join("")
+  + TF(840, 590, .85, spiderWeb(330, 0, { op: .95, w: 3.5 }) + spiderBig({ id: "th", glow: [.9, .9, .9, .9, .9, .9, .9, .9] }))
+  + [0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const f = spiderLegTip(i), d = Math.hypot(f[0], f[1] - 20); return numPop(9, 0, 840 + (f[0] + f[0] / d * 58) * .85, 590 + (f[1] + (f[1] - 20) / d * 58) * .85, i + 1, .86); }).join("")
   + TF(1560, 820, 1, `<g filter="url(#drop)"><circle r="190" fill="${P.paper}"/></g><circle r="174" fill="#EAF6E8"/>` + TF(8, 62, .4, antBig({})) + TF(0, -214, 1, tpill(0, 0, "6 legs", 46, P.sun, P.ink, { w: 700 })))
-  + buddy("basil", 190, 1030, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+  + buddy("basil", 230, 500, 270, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("coldCard"), e = eio(t / 6.2), cam = [lerp(1.42, 1.03, e), lerp(470, 960, e), lerp(760, 565, e)];
   const tDrop = 1.5, tUp = 4.0, drop = eio((t - tDrop) / .7) * (1 - eio((t - tUp) / 1.1)), [cx, cd] = slideX(t, tb, .75, 2300, BD[0], 1062);
   return lakeView(t, { web: false, ants: false, items: webSpider(t, drop) + antLine(t) }, cam) + motes(t, 26, 4) + `<g transform="translate(${n2(-80 * (1 - e))} ${n2(-40 * (1 - e))})">${nearLeaves(t, 80, 40, 1.6)}${nearLeaves(t + 1, 1900, -20, 1.4, -1)}</g>`
@@ -222,15 +222,15 @@ SC.pullout = (t, s) => { const e = eo((t - s.t0) / 1.2), cam = [lerp(3.2, 1.2, e
 const DEF = ["Reptiles are cold-blooded animals.", "This means that they do not have a constant", "body temperature like humans.", "Their body temperature changes with the", "environment that they are in."], DKEYS = ["cold-blooded", "constant", "body", "temperature", "changes", "environment"];
 SC.mark2 = (t, s) => { const L = "e1202", B = "e1201", tK = MK("kw_cold"), tHum = W(L, "humans") - .5, tCh = W(L, "changes") - .2, LZ = [ROCKW[0] + 40, ROCKW[1] - 4, .3];
   // the lizard has climbed out onto its rock; a cloud covers the sun; on "changes" the cloud moves off and the sun warms the rock again
-  const cv = 1 - ss(tCh - .2, tCh + 1.6, t), pl = (x) => .26 + .5 * (1 - (1 - ss(tCh - .2, tCh + 1.6, x))), lz = lagged(pl, s.t0, t, 1.3), cx = lerp(1010, 420, eio(1 - cv)), cam = [1.5, 1080, 640];
+  const cv = 1 - ss(tCh - .2, tCh + 1.6, t), pl = (x) => .26 + .5 * (1 - (1 - ss(tCh - .2, tCh + 1.6, x))), lz = lagged(pl, s.t0, t, 1.3), cx = lerp(1010, 420, eio(1 - cv)), cam = [1.7, 1000, 700];
   let out = lakeW(t, { mon: { x: LZ[0], y: LZ[1], k: LZ[2], tongue: tongueAt(t, 1, 2.9) }, back: `<g transform="translate(${n2(cx)} 250)" opacity=".96">${cloudF(.8)}</g>` }, cam)
     + `<rect width="1920" height="1080" fill="#3B5E9A" opacity="${n2(.22 * cv)}" style="mix-blend-mode:multiply"/><ellipse cx="${gx(cam, ROCKW[0])}" cy="${gy(cam, ROCKW[1] - 30)}" rx="420" ry="190" fill="#FFE48A" opacity="${n2(.3 * (1 - cv))}" filter="url(#b30)"/>`;
   out += bookCard(t, L, DEF, DKEYS, s.t0 + .15, tK - .15, { tab: "✓ MARK SENTENCE", count: "2 of 2", footer: "From your book · P3 Science · Diversity · Classification of living things", x: 60, y: 150, w: 1210, size: 52, lh: 70 });
   // the thermometers stay: the place and the lizard move together; YOU stay the same
-  { const k = spring(t, s.t0 + .3, .5), ch = pulse(t, tCh + .6, .3, 2.2), yk = spring(t, tHum, .5), X = [1440, 1610, 1780], gone = clamp(1 - ramp(t, tK - .2, .25) + ramp(t, tK + 2.6, .3)), YB = 620, capO = 1 - ramp(t, tK - .25, .2);
-    out += OP(gone, (yk > .02 ? thermoF(X[0], YB, .62, "YOU", { k: yk, H: 250, fill: P.sun, ink: P.ink, glow: pulse(t, tHum + .5, .2, 1.2) }) + OP(ramp(t, tHum + .5, .3) * capO, TF(X[0], 716, 1, tpill(0, 0, "stays the same", 28, "#fff", P.ink, { w: 600 }))) : "")
-      + thermoF(X[1], YB, pl(t), "PLACE", { k, H: 250, glow: ch }) + thermoF(X[2], YB, lz, "LIZARD", { k, H: 250, glow: ch, fill: P.basil })
-      + (t >= tCh ? OP(capO, TF((X[1] + X[2]) / 2, 716, spring(t, tCh, .45), tpill(0, 0, "change together", 28, "#fff", P.ink, { w: 600 }))) : "")); }
+  { const k = spring(t, s.t0 + .3, .5), ch = pulse(t, tCh + .6, .3, 2.2), yk = spring(t, tHum, .5), X = [1500, 1650, 1800], gone = clamp(1 - ramp(t, tK - .2, .25) + ramp(t, tK + 2.6, .3)), YB = 760, capO = 1 - ramp(t, tK - .25, .2);
+    out += OP(gone, (yk > .02 ? thermoF(X[0], YB, .62, "YOU", { k: yk, H: 210, fill: P.sun, ink: P.ink, glow: pulse(t, tHum + .5, .2, 1.2) }) + OP(ramp(t, tHum + .5, .3) * capO, TF(X[0] - 40, 850, 1, tpill(0, 0, "stays the same", 28, "#fff", P.ink, { w: 600 }))) : "")
+      + thermoF(X[1], YB, pl(t), "PLACE", { k, H: 210, glow: ch }) + thermoF(X[2], YB, lz, "LIZARD", { k, H: 210, glow: ch, fill: P.basil })
+      + (t >= tCh ? OP(capO, TF((X[1] + X[2]) / 2 + 20, 850, spring(t, tCh, .45), tpill(0, 0, "change together", 28, "#fff", P.ink, { w: 600 }))) : "")); }
   const S = TL.lines[B];
   out += buddy("basil", 250, 1060, 300, t, { aura: true, in: s.t0 + .15, poses: [[s.t0, "cheer"], [S.t - .12, "sit"], [S.end + .15, "cheer"], [S.end + 1.2, "sit"], [tHum, "surprised"], [tHum + 1.6, "sit"], [tK, "cheer"]], jump: [[S.t - .1, 26]], nohop: true, wave: true })
     + say(B, 420, 690, t, { size: 44, tail: -100 });
