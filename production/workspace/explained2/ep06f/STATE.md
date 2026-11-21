@@ -10,3 +10,8 @@ Three standalone clips of P3 EP6 for a side-by-side comparison with the full epi
 - Stills: `PART=N ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg` (qa/c1a, c1b, c2a, c2b, c3a are the checks of every swap, card and mouth change).
 - Checked: no page errors; count-in onsets 33.318 / 34.318 / 35.318 s (1.000 s apart); the blast is 21 ms after the title frame; 6.2 s of outro.
 - Not uploaded to YouTube. A human must listen before any upload.
+
+## 20-21 Nov: the teacher's monitor-lizard correction
+- `monitor()` (f6set.js, side view) and `pov()` / `beadsClose()` (f6.js, the back seen from behind and the bead close-up) redrawn from `refs/monitor_back/` (gitignored) as a Malayan water monitor: long narrow head and neck, arched back, push-up legs with claws, paddle tail, fine bead scales, dark grey-brown with rows of pale yellow spots. Use this anatomy wherever a monitor lizard appears.
+- Clips 2 and 3 re-rendered (clip 1 has no lizard). Stills: `qa/monitor_back_new_0m28.jpg` (clip 2 at 0:28.6), `qa/monitor_scale_closeup_0m12.jpg` (0:12.5), `qa/clip2_sheet.jpg`.
+- No spoken line in the three clips has the word "live", so nothing was re-recorded for the "liv" rule.

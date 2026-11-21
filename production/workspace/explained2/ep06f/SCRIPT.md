@@ -38,15 +38,19 @@ Place: the Singapore Botanic Gardens, by the Bandstand (the brief's Singapore an
 
 ## Clip 2 · BE THE THING: you are one scale on a lizard's back (1:00)
 
-The camera rides on a monitor lizard's back, just behind its shoulders, looking forward over its head. The one scale outlined in
-sun yellow is YOU. Two plain thermometers (no numbers), **PLACE** and **LIZARD**, show the idea the words only name at the end:
+The lizard is a Malayan water monitor (the monitor lizard children see in Singapore), redrawn on 20 Nov from the teacher's photos
+(`refs/monitor_back/`): a long, narrow, low head on a long, thick, tapering neck; a broad, gently arched back; short thick legs bent
+out at the elbow and down to the ground, long curved claws; a long paddle tail; thousands of very small bead scales, dark grey-brown
+with rows of small pale yellow spots. The clip opens VERY close: the screen is full of beads and one of them, outlined in sun yellow,
+is YOU. On "All around you, more scales" the camera pulls back and you are one small bead among thousands on the lizard's back; a
+round window keeps your bead in view, joined to the real one by a plain line. Two plain thermometers (no numbers), **PLACE** and **LIZARD**, show the idea the words only name at the end:
 the lizard's temperature follows the place, a little late.
 
 | Time | On screen | Exact words | Sound | Why |
 |---|---|---|---|---|
 | 0:00 | A lake bank in the Gardens, early morning. A monitor lizard rests in a tree's shade; ahead of it, a flat rock in the sun. Basil in his disc. | **Basil:** "Come and be a scale, like mine!" | Birds, a pop. | Basil invites the viewer into his own skin. The lizard on screen is a wild one: the buddies are never drawn in code. |
 | 0:02 | Pill *Shrink down… quietly*. The camera falls towards the lizard's back. | **Heart:** "Shrink down. Quietly." | The shrink sweep. | The series' way in. |
-| 0:05 | Whoosh into the micro-world (2 s, no words). Rows of scales fill the bottom of the frame like roof tiles; the lizard's neck and head rise in front; giant grass blades stand around; the tree's canopy is overhead. Tags: *You are a scale* · *seen very close up*. | (nobody) | The calm pad begins. | Room to breathe before the first word. The scale tag is honest about size. |
+| 0:05 | Whoosh into the micro-world (2 s, no words). The screen is full of small round bead scales, seen very close up. Tags: *You are a scale* · *seen very close up*. | (nobody) | The calm pad begins. | Room to breathe before the first word. The scale tag is honest about size. |
 | 0:07 | A YOU pill is joined by one plain line to the scale in the middle. | **Heart:** "You are one tiny scale, on a lizard's back." | A soft chime. | Second person, present tense. |
 | 0:11 | Tags as the words are said: *dry* · *not moist* · then *dry, scaly skin*. | **Heart:** "You are dry. Not moist, like the frog. All around you, more scales." | Two soft pops, a chime. | Answers EP5's own question ("Is a lizard's skin moist, or dry?"). Book: "Reptiles usually have dry and scaly skin." |
 | 0:17 | The two thermometers pop in, both low and blue. Everything is tinted cool blue. The lizard takes slow steps. Tags: *cool shade* · *the lizard is cool too*. | **Heart:** "It is early morning. The shade is cool. So the lizard is cool too." | Two drips, slow footsteps. | Sets the first state: cool place, cool lizard. |
@@ -94,7 +98,7 @@ Basil: "Dry, scaly skin. Cold-blooded. That is me! I am a reptile!" · Momo: "Hm
 
 ## Things for the teacher to check
 
-1. The journey's lizard is a monitor lizard (the brief's Botanic Gardens anchor), not Basil's own kind. Basil only says "a scale, like mine".
+1. The journey's lizard is a Malayan water monitor (the brief's Botanic Gardens anchor; called "monitor lizard" on screen), not Basil's own kind. Basil only says "a scale, like mine".
 2. "Speeded up" is shown while the lizard warms and cools: in life this takes minutes.
 3. The tags MAMMAL / MAMMAL / REPTILE in the outro are on screen only; they assume the full episode has taught mammals by then.
 4. The read-along uses four words (REPTILES, COLD-BLOODED, MAMMALS, WARM-BLOODED), as the end of a second part would.
