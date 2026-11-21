@@ -119,9 +119,10 @@ Also read:
   - Each part hides a small, cute animal that BELONGS to that video's topic or setting (e.g. a frog among the lily pads in an
     amphibian episode, an ant on a stall in a canteen, a snail on the damp kitchen wall), not always the lizard.
   - Drawn to the "cute AND alive" rule, small but findable, in the same place for a few scenes.
-  - The opening rules line and the reveal never depend on which animal it is: say "A little animal is hiding in this video. Can you
-    spot it?" and reveal with "Did you spot the hidden animal? It was the [animal], [where]! … Tell someone at home." The reveal
-    circles it, as before.
+  - **Heart NAMES the animal at the start** (teacher, 2026-11-21: "Heart no longer shares what animal to find in the video… How will
+    the viewer know what to look out for"): "A little [grasshopper] is hiding in this video. Can you spot it?", with a small picture
+    of it on screen for a moment, so children know what to look for. The reveal at the end: "Did you spot the [grasshopper]? It was
+    [where]! … Tell someone at home." The reveal circles it, as before. Nothing else in the episode depends on which animal it is.
   - Say "lizard", never "cicak", when it is a lizard.
 - **Key-word read-along before the end of every part:**
   1. The shelf moves to the centre and grows.
@@ -191,6 +192,8 @@ Also read:
   ostrich: long neck, big round body, long legs). And every animal moves: an idle loop (blink, breathe, small bob) plus its own
   action where it appears (a penguin waddles and flaps its flippers, a bird hops or flutters, a fish swims, a frog hops). Never a
   stiff still sticker.
+- **No orphan labels.** A tag (like "YOU") appears only with the thing it labels, in the same shot; if the thing is not in a
+  scene, its tag is not there either (teacher, 2026-11-21: a stray "YOU" tag in EP6 Part 1's outro).
 - **Props never hide behind the buddies (teacher, 2026-11-21).** A board or prop that shares the frame with the buddy discs is
   centred in the free space between them and big enough to read (the EP6 outro's SIX ANIMAL GROUPS board: centred between Pip
   and Momo, 30% taller); it never sits behind or under a disc.
