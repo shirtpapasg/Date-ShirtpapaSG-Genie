@@ -2,7 +2,7 @@
 "purpose" (and "purposes"), "fragile" (FRAJ-ile, from ../sg_pron.py), in every voice that says them, and qa/new_words_check.m4a (each clip in a row).
   /home/user/heart-tts/venv/bin/python check_words.py
 For each take: the word's span (forced alignment from voice/<id>.json; a one-word line or a buddy's unison / chant track: the whole voiced span),
-then pocketsphinx scores the span against the right sound and a wrong one (use: Y UW S vs Y UW Z; suitable: S UW T AH B AH L vs S W IY T AH B AH L;
+then pocketsphinx chooses between the right sound and a wrong one (a two-way grammar) (use: Y UW S vs Y UW Z; suitable: S UW T AH B AH L vs S W IY T AH B AH L;
 purpose: P ER P AH S vs P ER P OW Z; fragile: F R AE JH AY L vs F R AE JH AH L) and Praat measures how voiced the last 90 ms are (an "s" is
 unvoiced: low; a "z" is voiced: high). Prints one row per take."""
 import os, sys, json, wave, subprocess, tempfile, numpy as np, soundfile as sf, parselmouth, pocketsphinx
@@ -32,18 +32,20 @@ def span(id, word, nth, who):
         if who and id == "c1003": a, b = ws[nth]["a"] - .15, ws[nth]["b"] + .35       # the chant: the answer's slot (spread evenly), padded
         else: a, b = 0, len(x) / sr
         seg = x[int(max(0, a) * sr): int(b * sr)]; env = np.convolve(np.abs(seg), np.ones(480) / 480, "same"); on = np.where(env > env.max() * .08)[0]
-        if who and id == "c1003": return seg[on[0]: on[-1]], sr                       # "The purpose!" / "A suitable material!": the whole answer
-        return seg[on[0]: on[-1]], sr
-    w = ws[nth]; return x[int(max(0, w["a"] - .04) * sr): int((w["b"] + .06) * sr)], sr
+        return seg[max(0, on[0] - int(.05 * sr)): on[-1] + int(.15 * sr)], sr       # padded: a final "s" is quiet
+    w = ws[nth]; return x[int(max(0, w["a"] - .04) * sr): int((w["b"] + .14) * sr)], sr
 
-def score(seg, sr, phones, word, ctx=None):
+def pick(seg, sr, good, bad, word, ctx=None):
+    """pocketsphinx chooses between the right and the wrong sound (a JSGF grammar: [context] (right | wrong) [context]) -> "right" / "wrong" / "?" """
     with tempfile.TemporaryDirectory() as td:
         w = td + "/a.wav"; sf.write(w, seg.astype(np.float32), sr); w16 = td + "/b.wav"
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", w, "-ar", "16000", "-ac", "1", "-c:a", "pcm_s16le", w16], check=True)
-        d = Decoder(samprate=16000, loglevel="FATAL"); d.add_word("xword", phones, True)
-        txt = " ".join(ctx) if ctx else "xword"; d.set_align_text(txt.replace(word, "xword"))
+        d = Decoder(samprate=16000, loglevel="FATAL"); d.add_word("xright", good, True); d.add_word("xwrong", bad, True)
+        body = " ".join("(xright | xwrong)" if c == word else c for c in (ctx or [word]))
+        d.add_jsgf_string("g", "#JSGF V1.0; grammar g; public <s> = " + body + ";"); d.activate_search("g")
         wf = wave.open(w16, "rb"); raw = wf.readframes(wf.getnframes()); d.start_utt(); d.process_raw(raw, full_utt=True); d.end_utt()
-        h = d.hyp(); return h.score if h else -1e12
+        h = d.hyp(); hs = h.hypstr if h else ""
+        return "right" if "xright" in hs else "wrong" if "xwrong" in hs else "?"
 
 def tail_voicing(seg, sr, word):
     end = len(seg) / sr; snd = parselmouth.Sound(seg.astype(np.float64), sr); p = snd.to_pitch(time_step=.005, pitch_floor=90, pitch_ceiling=600)
@@ -52,13 +54,12 @@ def tail_voicing(seg, sr, word):
 rows = []
 for id, word, nth, who, lab in TAKES:
     seg, sr = span(id, word, nth, who)
-    ctx = None
-    if id == "c1003": ctx = (["the", word] if word == "purpose" else ["a", word, "material"])
-    if id.startswith("uk_") or id.startswith("hk_"): ctx = None
-    good, bad = ALT[word]; sg = score(seg, sr, good, word, ctx); sb = score(seg, sr, bad, word, ctx)
+    ctx = (["the", word] if word == "purpose" else ["a", word, "material"]) if id == "c1003" else None
+    good, bad = ALT[word]; vs = [pick(seg[:len(seg) - int(c * sr)] if c else seg, sr, good, bad, word, ctx) for c in (0, .04, .08)]
+    v = max(("right", "wrong"), key=vs.count) if vs.count("right") != vs.count("wrong") else "?"; v = v + " " + "".join(x[0] for x in vs)
     tv = tail_voicing(seg, sr, word) if word in ("use", "purpose", "uses", "purposes") and not ctx else None
-    rows.append((lab, id, word, sg - sb, tv)); print(f"{lab:58s} {id:12s} {word:9s} right-minus-wrong {sg - sb:+9.0f}" + (f"  last-90ms voiced {tv:.2f}" if tv is not None else ""), flush=True)
-json.dump([{"take": r[0], "id": r[1], "word": r[2], "score_right_minus_wrong": r[3], "tail_voiced": r[4]} for r in rows], open(H + "/qa/new_words_check.json", "w"), indent=1)
+    rows.append((lab, id, word, v, tv)); print(f"{lab:58s} {id:12s} {word:9s} heard: {v:6s}" + (f"  last 90 ms voiced {tv:.2f}" if tv is not None else ""), flush=True)
+json.dump([{"take": r[0], "id": r[1], "word": r[2], "heard": r[3], "tail_voiced": r[4]} for r in rows], open(H + "/qa/new_words_check.json", "w"), indent=1)
 
 # the listening clip: every take in a row (each word's whole line, or the one-word / unison / chant take), 0.6 s apart, with the index printed
 clips, t, idx = [], 0.0, []
