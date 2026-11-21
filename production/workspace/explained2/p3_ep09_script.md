@@ -443,3 +443,4 @@ The title lines; the goal chips; the location pills (The void deck of an HDB blo
 - (b) Keep the book's order: strength first; EP8's dare is answered in Part 2 Round 1.
 - (c) The glass cup breaking in the drop box is OK (adult's gloved hands, slow motion, "Never try it"), with the metal cup bouncing too.
 - (d) The cute spider stays as Part 1's hidden animal.
+- Upload: EP9 replaces no old video. The classic "Strong, Bendy, Floaty: Testing Materials (Part A)" 5fBBrJMrAcU (pp. 53–57) stays in the playlists until EP10 is live; EP10 then replaces it (retire_old).
