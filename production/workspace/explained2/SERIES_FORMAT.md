@@ -46,6 +46,27 @@ Also read:
   - Heart never says them.
 - Animals are always shown cared for: food, water, air holes, returned home.
 
+## 1b. The theme gets a "look closer" moment (teacher, 2026-11-21)
+
+The teacher: "future episodes [must] give a stronger emphasis to the theme shown in the video. Like how episode 1 shows the zoom-in
+shot and description of the wind-up robot, the zoom-in seed growth, the plant responding to changes. This zoomed-in and extra
+emphasis… seems diluted in the other episodes."
+
+Every key idea of an episode gets at least one **LOOK-CLOSER** moment, built like EP1's (see `pilot_p3_ep01_script.md`, Round 1:
+the robot slows, a see-through window opens on its back to show the loose spring; the time-lapse of the bean splitting and growing;
+the plant turning to the window):
+1. **Zoom in on the real thing.** The camera pushes in slowly until the object or living thing fills most of the frame; the rest
+   dims or blurs. The buddies, the score and the shelf step back or go quiet.
+2. **Show the evidence happening,** not just its name: a cut-away window into it (the spring in the robot), a magnifier, a slow
+   time-lapse with a day counter and a "speeded up" tag, a before/after side by side. Small arrows or plain label lines point at the
+   exact part ("6 legs", "dry scales", "spores here").
+3. **Heart describes what we SEE, slowly,** in short concrete sentences ("Watch. The robot stops. A spring inside was pushing it."),
+   then says what it means in the book's words.
+4. **Hold it.** At least 6–10 s on the close-up, with the soft sound of the thing itself (ticks, crunch, drip) and the music low.
+5. **One clear verdict** at the end of the moment (a tag lands: NON-LIVING, FUNGI, GROWS…), then pull back out.
+Scripts mark these moments as **[LOOK CLOSER]** in the "On screen" column; each key word / goal of the episode has one. They are
+separate from (and in addition to) the "BE THE THING" journey, and they are never cut for length.
+
 ## 2. Length and parts
 
 - **Each video is about 3 to 5 minutes.** A topic that needs more is split into **Part 1 and Part 2**.
