@@ -67,3 +67,13 @@ The .mp4 / .srt / sheet_part*.png in this folder are the OLD Opus render: they n
   No motion test was rendered: Stage 3 should watch both journeys, the cold open (the spider's drop) and the splash in motion.
 - To stretch a segment for slower pacing: add ("wait", s) or raise "post" in script.py and rebuild; every scene hangs on marks and word times.
 - upload.json: the descriptions still say "lizard" for the hidden animal if they mention it; check before any upload. A human must listen first.
+
+## 21 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE
+- Part 2 cut (script section 6 order; the recap is now required by the rulebook, so it stays): the chant's all-together pass (bars 6-8, -5.4 s).
+  voice/c1103 trimmed to 6 bars (full take kept in out/c1103_full/), make_voice.py SLOTS/NBARS updated, sound_cues.js skips the all-together pop when
+  there is none. "Six animal groups!" and "Pip and I are mammals!" kept (not needed). Recap untouched: pictures 0-5.1 / 5.1-9.8 / 9.8-12.8 s, each labelled.
+- ep06_part1.mp4 5:13.37, ep06_part2.mp4 5:13.47; both -16.0 LUFS, 0 page errors; new .srt, sheet_part1/2.png, check stills qa/stage3_p1.jpg, qa/stage3_p2.jpg.
+- Checks: "Say it with me!/us!" -> 0.96 s -> the buddy reads (timeline); count-in onsets 1.005/1.000 s (P1) and 1.000/1.000 s (P2) on the mix, blast on "know";
+  P1 Round 2 clue "dry and scaly" above the ring at +0.6 and +4.6 s; outro 5.2 s (P1) / 4.8 s (P2) after the shout; reveal "Did you spot the hidden animal?".
+- Uploaded: Part 1 n_NzfK47Sgc, Part 2 NpkenGlnOVQ; both playlists after 2WuoSmh7xWY; sO31eHgDCGI out of the playlists, description points to Part 1.
+- Render chunks deleted after the upload.
