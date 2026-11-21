@@ -12,7 +12,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   ["amphibians", "birds", "fish"].forEach((w, i) => E(W("e201", w) - .05, "softpop", i)); [0, 1, 2].forEach((i) => E(W("e201", "three", 1) + i * .35, "rise", 3 + i * 2)); E(LT("e202") - .3, "curious"); E(W("e202", "ant") - .15, "pip", 0); E(W("e202", "spider") - .15, "pip", 2);
   E(S.title.t0 + .02, "whoosh"); E(S.title.t0 + .26, "slam", 0); E(S.title.t0 + .66, "slam", 2); E(S.title.t0 + 1.0, "softpop", 2);
   // 3 the game
-  E(S.game.t0 + .15, "sting"); { const b = "e301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "lizard") - .1, "chek"); E(W(b, "lizard") + .9, "chek"); }
+  E(S.game.t0 + .15, "sting"); { const b = "e301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "animal") - .1, "curious"); E(W(b, "spot") - .1, "softpop", 1); }
   // 4 Round 1
   E(S.r1card.t0, "roundcard"); lock(MK("ring0_1"), 5, "e402", ["e403", "e404", "e405"], [W("e401", "one", 2), W("e401", "two")]); E(LE("e405") + .1, "softpop", 3);
   // 5 goals, countdown
@@ -27,7 +27,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 7 wings
   [W("e701", "many"), W("e701", "some"), W("e701", "some", 1)].forEach((t, i) => E(t - .2, "softpop", i)); E(W("e701", "many") + .3, "flutter"); E(W("e701", "some") + .3, "whine");
   // 8 HOLD ON!
-  E(S.listcard.t0, "roundcard"); { const a = "e801", b = "e802", c = "e803", r0 = MK("ring0_2"); E(S.rule.t0 + .2, "scribble"); ["butterfly", "pigeon"].forEach((w, i) => E(W(a, w) - .15, "rise", i)); E(W(a, "both") - .1, "boop", 1); E(LT(a) + 1.0, "chek", .45); E(LT(a) + 1.9, "chek", .45);
+  E(S.listcard.t0, "roundcard"); { const a = "e801", b = "e802", c = "e803", r0 = MK("ring0_2"); E(S.rule.t0 + .2, "scribble"); ["butterfly", "pigeon"].forEach((w, i) => E(W(a, w) - .15, "rise", i)); E(W(a, "both") - .1, "boop", 1); E(LT(a) + 1.0, "flick");
     E(W(b, "something") - .1, "boop", 2); E(W(b, "hold") - .1 + .14, "stamp"); ringTicks(r0, 5).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + 5, "bell"); E(r0, "bellicon"); E(W(c, "one") - .1, "coin"); E(W(c, "bird") - .1, "tag"); E(W(c, "feathers") - .1, "softpop", 1); E(W(c, "count") - .1, "rub"); E(LT("e804") + .1, "boop", 0); }
   // 9-10 Round 2, the reveal
   E(S.r2card.t0, "roundcard"); { const L = "e901"; E(W(L, "monitor") - .1, "flick"); E(W(L, "skin") - .15, "rustle"); lock(MK("ring0_3"), 5, "e902", ["e903", "e904", "e905"], [W(L, "one"), W(L, "two", 1), W(L, "three")]); }
@@ -44,7 +44,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 12 cold-blooded
   mark("e1201", "e1202"); E(W("e1203", "sun") - .2, "warm"); E(S.basilsun.t0 + .3, "softpop", 2);
   // 13 the score hand, the lizard
-  E(S.final.t0 + .1, "sting"); E(W("e1301", "high") + .2, "slap"); E(W("e1301", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
+  E(S.final.t0 + .1, "sting"); E(W("e1301", "high") + .2, "slap"); E(W("e1301", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "flick"); E(W("e1302", "grasshopper") - .1, "softpop", 2);
   // 14 the cliffhanger: evening crickets, soft wingbeats, a low drum, the slam
   { const L = "e1401", tW = W(L, "wings") - .2; R.night.push([S.cliff.t0 + 1.2, S.nyk.t0 - .2]); E(S.cliff.t0 + .1, "whoosh"); for (let i = 0; i < 4; i++) E(tW - .3 + i * .45, "flap", i); E(W(L, "bird") - .2, "curious"); E(W(L, "is") - .1, "lowdrum"); E(W(L, "find") - .1, "slam", 1); }
   G(S.title.t0 + .8, MK("ring0_1")); G(LT("e403") - .3, S.count.t0 - .2); C(S.ant.t0 + .3, LT("e608") - .4); C(S.shell.t0 + .3, S.listcard.t0); G(S.rule.t0, LT("e802") - .1); G(LT("e803"), S.r2card.t0); G(S.r2.t0, MK("ring0_3")); G(LT("e903") - .5, S.rep4.t0); C(S.rep4.t0 + .3, S.waitw.t1 - 1.0);

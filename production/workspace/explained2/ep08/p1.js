@@ -119,16 +119,16 @@ SC.plastic = (t, s) => { const a = "g1004", b = "g1005", j = "g1006", tB = LT(a)
 const SBRD = [1500, 1066, .5];
 SC.r2 = (t, s) => { const tL = LT(L2), tz = MK("ring0_r2") + 1;
   return lockN(t, { cards: ["Sand", "Clay", "Oil"], tag: "a ceramic bowl", q: "What is ceramic made from?", tq: W(L2, "what") - .1, tc: [W(L2, "one"), W(L2, "two"), W(L2, "three")], ring0: MK("ring0_r2"), dur: 5, lock: "g1103", tin: W(L2, "what") - .3,
-    obj: (tt) => bowlRing(tt, lizShow(tt, tz)), picks: [{ who: "pip", id: "g1104", word: "1", x: true }, { who: "momo", id: "g1105", word: "2" }, { who: "basil", id: "g1106", word: "2" }],
+    obj: (tt) => bowlRing(tt, 1 - ramp(tt, tz, .5)), picks: [{ who: "pip", id: "g1104", word: "1", x: true }, { who: "momo", id: "g1105", word: "2" }, { who: "basil", id: "g1106", word: "2" }],
     react: [[LE("g1104") + .1, "pip", "thinking"], [LE("g1105") + .1, "momo", "pointing"], [LE("g1106") + .1, "basil", "cheer"]],
     pre: (tt) => tt < tL - .3 ? stallView(tt, { back: glowDisc(STALLB[0], STALLB[1] - 70, 220, pulse(tt, W("g1101", "bowl") - .1, .1, 1.4)) }, [1.02 + .03 * eio((tt - s.t0) / 4), 800, 620]) + boardAt(tt, ...SBRD)
       + buddy("momo", 170, 1060, 200, tt, { aura: true, in: s.t0 + .15, poses: [[s.t0, "pointing"], [s.t0 + 2, "sit"]] }) + wipe(tt, tL - .04, P.indigo, 430, 470) : wipe(tt, tL - .04, P.indigo, 430, 470) }); };
 SC.clay = (t, s) => { const a = "g1107", b = "g1108", tA = W(a, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, tB = LT(b) - .5, [bx, bd] = slideX(t, tB, .7, -500, 300, 800);
-  return stallView(t, {}, [1.04, 800, 620]) + (t >= tB ? bd + picBoard("clay", bx, 800, 1, { sc: 1.05, id: "c" }) : "") + TF(1560, 700, .62 * spring(t, s.t0 + .15, .45), ansCard(2, "Clay", { lit })) + boardAt(t, ...SBRD)
+  return stallView(t, { liz: 0 }, [1.04, 800, 620]) + (t >= tB ? bd + picBoard("clay", bx, 800, 1, { sc: 1.05, id: "c" }) : "") + TF(1560, 700, .62 * spring(t, s.t0 + .15, .45), ansCard(2, "Clay", { lit })) + boardAt(t, ...SBRD)
     + bookCaption(t, b, "Clay can be found in soil dug from the ground.", 170, { size: 54 }) + buddy("basil", 150, 1062, 190, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]], nohop: true }) + HUD(t); };
 SC.kiln = (t, s) => { const L = "g1109", tS = W(L, "shaped") - .2, tK = W(L, "baked") - .2, tW = W(L, "kiln") - .1, tb = MK("bowlback"), j = clamp((t - tb + .45) / .45), bx = lerp(1010, STALLB[0], eio(j)), hopY = 90 * Math.sin(Math.PI * j);
   const lump = t < tK ? TF(STALLB[0], STALLB[1], 1.3 * (1 - ramp(t, tK - .3, .3)), clayLump()) : "";
-  return stallView(t, { bowl: false, items: lump + (j > 0 ? TF(bx, STALLB[1] - hopY, 1.15 * Math.min(1, j * 3), bowl()) + (j >= 1 ? TF(STALLB[0] + 300, STALLB[1] + 24, 1.1 * spring(t, tb, .4), soupSpoon()) + dust(STALLB[0], STALLB[1] + 6, (t - tb) / .4, 1.6) : "") : "") }, [1.04, 800, 620])
+  return stallView(t, { liz: 0, bowl: false, items: lump + (j > 0 ? TF(bx, STALLB[1] - hopY, 1.15 * Math.min(1, j * 3), bowl()) + (j >= 1 ? TF(STALLB[0] + 300, STALLB[1] + 24, 1.1 * spring(t, tb, .4), soupSpoon()) + dust(STALLB[0], STALLB[1] + 6, (t - tb) / .4, 1.6) : "") : "") }, [1.04, 800, 620])
     + picBoard("clay", 300, 800, 1 - ramp(t, tS - .2, .25), { sc: 1.05, id: "c" }) + picBoard("hands", 300, 800, spring(t, tS, .45), { sc: 1.05, lab: "shaped", size: 38, id: "k" }) + picBoard("kiln", 1130, 800, spring(t, tK, .45), { sc: 1.05, t, id: "k2" })
     + (t >= tK ? TF(1130, 300, spring(t, tK + .3, .4), tpill(0, 0, "Very hot! Only in a factory.", 34, P.ink, P.sun, { w: 700 })) : "")
     + (t >= tW ? OP(ramp(t, tW, .3), `<g filter="url(#dropS)"><rect x="330" y="120" width="${n2(tw("kiln: a very hot oven for baking clay", 48, 700, "Atkinson Hyperlegible") + 90)}" height="96" rx="20" fill="url(#gPaper)"/><rect x="330" y="120" width="14" height="96" rx="7" fill="${P.sun}"/></g><rect x="372" y="172" width="${n2(tw("kiln:", 48, 700, "Atkinson Hyperlegible"))}" height="24" rx="5" fill="#FFD75A"/><text x="372" y="184" font-family="Atkinson Hyperlegible" font-weight="700" font-size="48" fill="${P.ink}">kiln: a very hot oven for baking clay</text>`) : "")
@@ -140,7 +140,8 @@ SC.mark2 = (t, s) => { const tc = W("g1112", "one") - .1; return markScene(t, s,
 
 /* ============ 12 · the score hand, the lizard (kwrecap is in common.js) ============ */
 SC.final = (t, s) => { const L = "g1201"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]], TF(1250, 1062, .36, board7(t))); };
-SC.liz = (t, s) => { const L = "g1202"; return lizReveal(t, s, L, stallView(t, { liz: 0 }), LIZ1[0], LIZ1[1] + 6, W(L, "what") - .1, "What material is a window made of?", -120, 150); };
+SC.liz = (t, s) => { const L = "g1202", tN = W(L, "sparrow") - .15; return lizReveal(t, s, L, stallView(t, { liz: 0 }), LIZ1[0], LIZ1[1], W(L, "what") - .1, "What material is a window made of?", -120, 110)
+  + (t >= tN ? TF(960, 190, spring(t, tN, .45), tpill(0, 0, "The sparrow, on the classroom window!", 50, P.sun, P.ink, { w: 700 })) : ""); };
 
 /* ============ 13 · the cliffhanger: white drops ============ */
 SC.cliff = (t, s) => { const L = "g1301", tD = W(L, "sole") - .5, d = eio((t - tD) / .7), tR = W(L, "rubber") - .1, tW = W(L, "white") - .3, tQ = W(L, "where") - .1, tP = W(L, "find") - .1, q = .5 + .5 * Math.sin((t - s.t0) * 5), sh = [1150, 960, 1.15];

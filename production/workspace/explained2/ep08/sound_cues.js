@@ -15,7 +15,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
     [0, 1, 2, 3].forEach((i) => E(W(b, "living") - .1 + i * .14, "softpop", i)); E(W(b, "now") - .1, "slide"); E(W(b, "non-living") - .05, "chime"); E(W(b, "made") - .1, "chime2", 1); }
   { const c = "g203"; ["plastic", "metal", "glass"].forEach((w, i) => E(W(c, w) - .1, "pip", i)); E(tT - .05, "whoosh"); [.26, .61].forEach((d, i) => E(tT + d, "slam", i)); }
   // 3 the game; 4 goals, countdown
-  E(S.game.t0 + .15, "sting"); { const b = "g301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "lizard") - .1, "chek"); E(W(b, "lizard") + .9, "chek"); }
+  E(S.game.t0 + .15, "sting"); { const b = "g301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "animal") - .1, "curious"); E(W(b, "spot") - .1, "pip", 2); }
   [0, 1, 2].forEach((i) => E(LT(["g402", "g403", "g404"][i]) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 the spoon: a soft pop, the magnifier slides, a clink on "Metal!"; Mark Sentence 1
   K(S.spoon.t0, S.mark1.t0); E(LT("g501") - .1, "softpop", 1); E(W("g502", "what") - .2, "slide"); E(W("g502", "metal") - .05, "clink"); E(W("g502", "metal", 1) - .05, "tag", 1); mark("g503", "g504");
@@ -36,11 +36,11 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(S.metal.t0 + .15, "slide"); E(W("g1002", "dug") - .1, "knock"); E(W("g1002", "dug") + .25, "knock"); ["gold", "iron", "copper", "aluminium"].forEach((w, i) => E(W("g1003", w) - .1, "softpop", i));
   E(S.plastic.t0 + .15, "slide"); fx(W("g1005", "oil") - .1, "ep06_gurgle.wav", .18); if (has("g1006")) E(W("g1006", "good") - .1, "boing");
   // 11 Round 2: ceramic; clay; the kiln; Mark Sentence 2
-  E(S.r2card.t0, "roundcard"); { const L = "g1102"; lock(MK("ring0_r2"), 5, "g1103", ["g1104", "g1105", "g1106"], [W(L, "one"), W(L, "two"), W(L, "three")]); E(MK("ring0_r2") + 1.1, "chek", .45); E(MK("ring0_r2") + 1.4, "chek", .45); }
+  E(S.r2card.t0, "roundcard"); { const L = "g1102"; lock(MK("ring0_r2"), 5, "g1103", ["g1104", "g1105", "g1106"], [W(L, "one"), W(L, "two"), W(L, "three")]); E(MK("ring0_r2") + 1.1, "cheep", .5); E(MK("ring0_r2") + 1.4, "cheep", 1); }
   K(S.clay.t0, S.mark2.t0); E(W("g1107", "two") - .1, "tag"); E(LT("g1108") - .4, "slide"); E(W("g1109", "shaped") - .1, "knock"); fx(W("g1109", "baked") - .1, "flame_roar.wav", .07); E(MK("bowlback"), "hop", 1); E(MK("bowlback") + .35, "tok");
   mark("g1110", "g1111"); E(W("g1112", "one") - .1, "coin");
   // 12 the score hand, the lizard; 13 the cliffhanger
-  E(S.final.t0 + .1, "sting"); E(W("g1201", "high") + .2, "slap"); E(W("g1201", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
+  E(S.final.t0 + .1, "sting"); E(W("g1201", "high") + .2, "slap"); E(W("g1201", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "cheep", 0); E(S.liz.t0 + 1.4, "cheep", 1);
   { const L = "g1301"; [0, 1, 2].forEach((i) => E(S.cliff.t0 + .3 + i * .3, "pip", i)); E(W(L, "sole") - .4, "whoosh"); [0, 1, 2].forEach((i) => E(W(L, "white") + .1 + i * .55, "drip", i)); E(W(L, "where") - .1, "lowdrum"); E(W(L, "find") - .1, "slam", 1); }
   G(tT + .9, S.count.t0 - .2); C(S.spoon.t0 + .3, LT("g504") - .4); G(S.rule.t0, LT("g602") - .1); G(LT("g603"), S.rule.t1); G(S.r1.t0, MK("ring0_r1")); G(LT("g703") - .5, S.waitw.t1 - 1.5);
   G(S.reveal.t0 + 1.4, LT("g902") - .4); C(LT("g902") - .3, S.plastic.t1 - (has("g1006") ? 3 : 0)); G(S.r2.t0, MK("ring0_r2")); G(LT("g1104") - .5, S.clay.t0 + .4); C(S.clay.t0 + .5, LT("g1111") - .4); G(LE("g1111") + 1.5, S.final.t0);
@@ -49,7 +49,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 1-3 the recap, "Last time", goals, the game
   if (S.recap) { for (let i = 0; i < 3; i++) E(S.recap.t0 + i * 1.0 + .02, "clack"); E(S.recap.t0 + 1.4, "tag", 1); E(S.recap.t0 + 2.4, "drip", 2); C(S.recap.t0 + .2, S.lasttime.t0 + .4); }
   { const L = "j201"; K(S.lasttime.t0, S.goals.t0); E(W(L, "objects") - .2, "softpop", 0); E(W(L, "sand") - .1, "chime2", 0); E(W(L, "clay") - .1, "chime2", 1); [0, 1, 2].forEach((i) => E(W(L, "three") - .1 + i * .2, "pip", i)); }
-  [0, 1, 2].forEach((i) => E(LT(["j312", "j313", "j314"][i]) - .1, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("j301", "lizard") - .1, "chek"); E(W("j301", "lizard") + .8, "chek");
+  [0, 1, 2].forEach((i) => E(LT(["j312", "j313", "j314"][i]) - .1, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("j301", "animal") - .1, "curious"); E(W("j301", "spot") - .1, "pip", 2);
   // 4 wood: a knock on wood, the pencil, the trees, a saw stroke, a page flip
   K(S.wood.t0, S.r1card.t0); E(W("j401", "bench") - .1, "knock"); E(W("j401", "bench") + .15, "knock"); E(W("j401", "pencil") - .1, "softpop", 2); E(S.trees.t0 + .1, "slide");
   if (has("j403")) E(W("j403", "cut") - .1, "rub"); E(W("j404", "paper") - .1, "flip");
@@ -68,13 +68,13 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   { const L = "j808"; E(W(L, "two") - .1, "tag"); ["cotton", "wool", "silk"].forEach((w, i) => E(W(L, w) - .1, "softpop", i * 2)); E(W(L, "sheep") + .1, "baa"); E(W("j809", "one") - .1, "coin"); E(LT("j810") + .1, "boop", 0); }
   // 9 the Showdown: Pip's notes, the drum roll, the counting hand; count the parts (four pips rising), the rub, the scribble, two coins
   E(S.showcard.t0, "roundcard"); { const a = "j901", b = "j902", r0 = MK("ring0_show"); E(S.show.t0 + .1, "paper"); R.roll.push([LT(b), W(b, "one")]); [W(b, "one"), W(b, "two"), W(b, "three")].forEach((t, i) => E(t - .05, "pip", i));
-    lock(r0, 6, "j903", ["j904", "j905"]); E(r0 + 1.2, "chek", .45); E(r0 + 1.5, "chek", .45); E(LE("j905") + .1, "boop", 2); }
+    lock(r0, 6, "j903", ["j904", "j905"]); E(r0 + 1.2, "tok", .4); E(LE("j905") + .1, "boop", 2); }
   { const L = "j906"; ["sole", "top", "rings", "lace"].forEach((w, i) => E(W(L, w) - .1, "rise", i * 2)); E(W("j907", "one") - .1, "tag"); E(LT("j908"), "rub"); E(LT("j908") + .5, "scribble"); E(W("j909", "two") - .1, "coin2"); E(W("j909", "two") + .5, "coin2", 1); }
   // 10 seven tiles: seven rising notes as each name is read; the chant
   E(S.seven.t0 + .1, "reveal"); sayit("j1001"); ["wood", "metal", "ceramic", "rubber", "glass", "plastic", "fabric"].forEach((w, i) => E(W("j1002", w) - .05, "rise", i)); E(LE("j1002") + .25, "chime");
   sayit("u1002"); chant("c1003");
   // 11-12 the score hand, the lizard, the dare
-  E(S.final.t0 + .1, "sting"); E(W("j1101", "high") + .2, "slap"); E(W("j1101", "four") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
+  E(S.final.t0 + .1, "sting"); E(W("j1101", "high") + .2, "slap"); E(W("j1101", "four") - .1, "pip", 2); E(S.liz.t0 + .5, "pip", 0); E(S.liz.t0 + 1.4, "pip", 1);
   { const L = "j1201"; E(W(L, "band") - .25, "pop", 0); E(W(L, "stick") - .25, "pop", 2); E(W(L, "which") - .1, "curious"); E(LT("j1202") + .2, "twang"); E(W("j1203", "lock") - .1, "sting"); }
   if (S.recap) G(S.lasttime.t0 + .5, S.wood.t0); else G(S.lasttime.t0 + .3, S.wood.t0); C(S.wood.t0 + .3, S.r1card.t0); G(S.r1.t0, MK("ring0_r1")); G(LT("j504") - .5, S.waitw.t1 - 1.5);
   G(S.reveal.t0 + 1.4, LT("j703") - .4); G(LE("j703") + 1.5, S.fabric.t0); C(S.fabric.t0 + .3, S.r2card.t0); G(S.r2.t0, MK("ring0_r2")); G(LT("j805") - .5, S.showcard.t0); G(S.show.t0 + .3, MK("ring0_show"));

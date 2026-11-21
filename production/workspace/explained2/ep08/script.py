@@ -77,7 +77,7 @@ SEQ1 = [
  ("mark", "title"), ("wait", 2.3),
  # ---- 3 · the game
  ("scene", "game"),
- ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. And find the lizard!", {"pre": .4, "post": .4}),
+ ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  # ---- 4 · today's goals (no voice) and the countdown
  # teacher, 2026-11-21 (SERIES_FORMAT section 11, step 3): a buddy READS the three goal cards aloud, word for word as printed (Part 1: Pip)
  ("scene", "goals"), ("say", "g401", P, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "g402", P, "Objects and materials.", {"pre": .3, "post": .3}),
@@ -146,7 +146,7 @@ SEQ1 = [
  ("say", "g1005", H, "Plastic is made in factories using oil that comes from deep under the ground.", {"pre": .4, "term": ["plastic is made"], "hold": STRIP}),
  ("mark", "nm_plastic"), HOLD("nm_plastic"), ("mark", "tile_plastic"),
  *cut("biscuits", [("say", "g1006", B, "My snack box was oil? Good thing my biscuits do not taste like oil!", {"pre": .3, "post": .5})]),
- # ---- 11 · Round 2: ceramic (the hidden lizard is on a classroom window for about 3 s during the ring)
+ # ---- 11 · Round 2: ceramic (the hidden animal, a sparrow, is on the classroom window from the ring on; teacher, 2026-11-21: not always the lizard)
  ("scene", "r2card"), ("wait", 1.1),
  ("scene", "r2"),
  ("say", "g1101", H, "Round two. This noodle bowl is ceramic.", {"pre": .1, "term": ["is ceramic"], "kw": [["kw_ceramic", "ceramic"]]}),
@@ -173,7 +173,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "g1201", H, "Show me your score hand! Three fingers? High five!", {"pre": .5, "post": .6}),
  ("scene", "liz"),
- ("say", "g1202", H, "Did you spot the lizard? It was on the classroom window. What material is a window made of? Tell someone at home.", {"pre": .6, "post": .6}),
+ ("say", "g1202", H, "Did you spot the hidden animal? It was the sparrow, on the classroom window! What material is a window made of? Tell someone at home.", {"pre": .6, "post": .6}),
  *kwrecap(["Object", "Material", "Ceramic", "Clay"]),
  # ---- 13 · the cliffhanger: white drops
  ("scene", "cliff"), ("wait", .5),
@@ -194,7 +194,7 @@ SEQ2 = [
  ("scene", "goals"), ("say", "j311", B, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "j312", B, "Wood, rubber and fabric.", {"pre": .3, "post": .3}),
  ("say", "j313", B, "Where each one comes from.", {"pre": .3, "post": .3}), ("say", "j314", B, "Count the parts.", {"pre": .3, "post": .9}),
  ("scene", "game"),
- ("say", "j301", H, "Lock in first. And find the new lizard!", {"pre": .4, "post": .4}),
+ ("say", "j301", H, "Lock in first. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  # ---- 4 · wood
  ("scene", "wood"),
  ("say", "j401", H, "First, wood. This bench is made of wood. So is your pencil.", {"pre": .4, "term": ["first, wood"]}),
@@ -260,7 +260,7 @@ SEQ2 = [
  ("say", "j809", H, "Two fingers? One finger up!", {"pre": .4}),
  ("mark", "tile_fabric"), ("wait", .3),
  ("say", "j810", B, "So sheep give wool, not cotton. Sorry, sheep!", {"pre": .3, "post": .5}),
- # ---- 9 · Showdown: Pip's notes, and "count the parts" (the new hidden lizard is under the wooden bench for about 3 s)
+ # ---- 9 · Showdown: Pip's notes, and "count the parts" (the hidden animal, an ant with a crumb, is under the wooden bench from the ring on)
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
  ("say", "j901", P, "My notes! One. Wood comes from trees. Two. Glass is made from sand. Three. A school shoe is made of one material.", {"pre": .6, "post": .3}),
@@ -285,7 +285,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "j1101", H, "Show me your score hand! Four fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "j1102", H, "Did you spot the lizard? It was under the wooden bench. Where does wood come from? Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "j1102", H, "Did you spot the hidden animal? It was the ant, under the wooden bench! Where does wood come from? Tell someone at home.", {"pre": .5, "post": .5}),
  # ---- 12 · the dare for Episode 9
  ("scene", "dare"), ("wait", .5),
  ("say", "j1201", H, "Next time, we test the materials! A rubber band. A wooden ice-cream stick. Which one can bend without breaking?", {"pre": 0}),

@@ -197,12 +197,12 @@ function tableItems(t, o = {}) { const g = o.glow || {}, h = o.hero || {}, sc = 
     + (o.spoon === false ? "" : TF(CX.spoon, TY + 30, .7, spoon())) + (o.sand ? TF(CX.sand, TY + 36, .6 * o.sand, sandPile()) : "") + (o.front || ""); }
 function canteenView(t, o = {}, cam = [1, 960, 540]) { const fan = (x) => `<g transform="translate(${x} 150)"><ellipse cx="0" cy="0" rx="${n2(150 + 6 * Math.sin(t * 9))}" ry="22" fill="#fff" opacity=".35"/></g>`;
   return CAM(bg("canteen") + fan(760) + fan(1180) + steam(t, -76, 196, 1.1) + (o.liz2 !== undefined ? lizUnderBench(t, o.liz2) : "") + (o.noitems ? "" : tableItems(t, o)) + (o.items || ""), cam[0], cam[1], cam[2]); }
-// Part 2's hidden lizard: under the wooden bench, on the floor in its shadow (hide 0 = seen, 1 = gone)
-const LIZ2 = [600, 1122];
-const lizUnderBench = (t, hide = 0) => hide >= 1 ? "" : `<g transform="translate(${LIZ2[0] + 60 * hide} ${LIZ2[1]}) scale(${n2(.62 * (1 - hide * .5))})" opacity="${n2(1 - hide)}"><g transform="rotate(${n2(-4 + 3 * Math.sin(t * 5))})">${cicak()}</g></g>`;
+// Part 2's hidden animal: an ant with a biscuit crumb, on the floor under the wooden bench (hide 0 = seen, 1 = not there yet). It walks a little way and back
+const LIZ2 = [600, 1104];
+const lizUnderBench = (t, hide = 0) => hide >= 1 ? "" : `<g transform="translate(${n2(LIZ2[0] + 30 * Math.sin(t * .7) + 90 * hide)} ${LIZ2[1] + 22}) scale(${n2(.95 * (1 - hide * .3) * (Math.cos(t * .7) > 0 ? -1 : 1))} ${n2(.95 * (1 - hide * .3))})" opacity="${n2(1 - hide)}">${ant(t)}</g>`;
 
 /* ---------- the noodle stall, close (static, baked): the counter in front, bowls and spoons behind, and beside the stall a classroom window ---------- */
-const STALLB = [760, 742], LIZ1 = [1560, 372];   // the bowl on the counter; Part 1's hidden lizard on the classroom window
+const STALLB = [760, 742], LIZ1 = [1560, 462];   // the bowl on the counter; Part 1's hidden animal: a sparrow on the classroom window's sill
 BG.stall = () => { let bowls = ""; for (let i = 0; i < 4; i++) for (let j = 0; j < 5 - (i % 2); j++) bowls += `<g transform="translate(${180 + i * 150} ${560 - j * 24})"><path d="M-62 -22 Q-56 18 -20 22 H20 Q56 18 62 -22z" fill="url(#cBowl)" stroke="#9AA6C0" stroke-width="4"/><path d="M-62 -22 H62" stroke="#2F6FCB" stroke-width="7" stroke-linecap="round"/></g>`;
   return `<rect x="-192" y="-108" width="2304" height="1296" fill="url(#cSky)"/>
   <g><rect x="1250" y="-108" width="862" height="900" fill="url(#cWall)"/><rect x="1250" y="560" width="862" height="80" fill="#FBF4E4"/><rect x="1250" y="560" width="862" height="14" fill="#2EA3A0"/><rect x="1250" y="640" width="862" height="200" fill="#E6D8BC"/>${louvre(1420, 210, 330, 290, 7, { sw: 5 })}${louvre(1860, 210, 330, 290, 7, { sw: 5 })}<rect x="1250" y="120" width="862" height="16" fill="#E0705A"/></g>
@@ -217,7 +217,7 @@ BG.stall = () => { let bowls = ""; for (let i = 0; i < 4; i++) for (let j = 0; j
   <rect x="-192" y="846" width="1452" height="342" fill="#F4F7FA"/>${Array.from({ length: 12 }, (_, i) => `<rect x="${-192 + i * 121}" y="846" width="121" height="110" fill="${i % 2 ? "#2EA3A0" : "#F4F7FA"}"/><rect x="${-192 + i * 121}" y="956" width="121" height="110" fill="${i % 2 ? "#F4F7FA" : "#2EA3A0"}"/><rect x="${-192 + i * 121}" y="1066" width="121" height="122" fill="${i % 2 ? "#2EA3A0" : "#F4F7FA"}"/>`).join("")}
   <rect x="1260" y="840" width="852" height="348" fill="url(#cFloor)"/>`; };
 function stallView(t, o = {}, cam = [1, 960, 540]) { const lz = o.liz === undefined ? 1 : o.liz;
-  return CAM(bg("stall") + steam(t, 980, 330, 2) + (lz >= 1 ? "" : `<g transform="translate(${LIZ1[0]} ${LIZ1[1] + 30 * lz}) rotate(-78) scale(${n2(.9 * (1 - .4 * lz))})" opacity="${n2(1 - lz)}"><g transform="rotate(${n2(3 * Math.sin(t * 5))})">${cicak()}</g></g>`)
+  return CAM(bg("stall") + steam(t, 980, 330, 2) + (lz >= 1 ? "" : `<g transform="translate(${n2(LIZ1[0] + 160 * lz)} ${n2(LIZ1[1] + 44 - 120 * lz * (1 - lz) * 4)}) scale(${n2(1.05 * (1 - .3 * lz))})" opacity="${n2(Math.min(1, 3 * (1 - lz)))}">${sparrow(t)}</g>`)
     + (o.back || "") + (o.bowl === false ? "" : TF(STALLB[0], STALLB[1] - (o.hop || 0), 1.15, bowl()) + TF(STALLB[0] + 300, STALLB[1] + 24, 1.1, soupSpoon())) + (o.items || ""), cam[0], cam[1], cam[2]); }
 // the ring picture of the bowl (lockN's obj): the same stall view, small, in the ring (centre 430, 470)
 const bowlRing = (tt, liz = 1) => `<g clip-path="url(#cRing)"><g transform="translate(430 470) scale(.3) translate(-1090 -560)">${stallView(tt, { liz })}</g></g>`;

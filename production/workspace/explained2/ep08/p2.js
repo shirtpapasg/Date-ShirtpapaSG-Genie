@@ -111,7 +111,7 @@ SC.show = (t, s) => { const a = "j901", b = "j902", r0 = MK("ring0_show"), bell 
   const tr = [W(a, "one"), W(a, "two"), W(a, "three")], tcn = [W(b, "one"), W(b, "two"), W(b, "three")], tM = LT("j904"), tB = LT("j905"), tO = LE("j905") + .1;
   const lit = [0, 1, 2].map((i) => t < LT(b) ? (t >= tr[i] - .1 && t < (tr[i + 1] || LE(a)) - .1 ? 1 : 0) : 0), badge = [0, 1, 2].map((i) => Math.max(pulse(t, tcn[i], .04, .5), t >= r0 && t < bell ? (Math.floor((t - r0) / .5) % 3 === i ? .5 + .5 * rs.tick : 0) : 0));
   const nf = t >= tcn[2] - .1 ? 3 : t >= tcn[1] - .1 ? 2 : 1, ringOn = t >= tcn[0] - .3 && t < bell + .8, RX = 235, RY = 560;
-  return showView(t, { liz: lizShow(t, tLz), notes: { lit, badge, x: spring(t, tM + .5, .4) } })
+  return showView(t, { liz: 1 - ramp(t, tLz, .5), notes: { lit, badge, x: spring(t, tM + .5, .4) } })
     + buddy("pip", 1750, 1060, 230, t, { aura: true, flip: true, in: s.t0 + .1, poses: [[s.t0, "cheer"], [LT(a) - .12, "sit"], [LE(a) + .2, "thinking"], [tO, "oops"]], nohop: true }) + say(a, 1560, 330, t, { size: 40, tail: 150, maxW: 560 })
     + (ringOn ? OP(1 - ss(bell + .5, bell + .8, t), TF(RX, RY, spring(t, tcn[0] - .3, .4), `<g transform="translate(${-RX} ${-RY})">${ringTimer(RX, RY, t < r0 ? 1 : rs.frac, t < r0 ? 6 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RX, RY + 60, .62, countHand(nf)) })}</g>`) + youPill(RX, RY - 178, 1.0) + tpill(RX, RY + 222, "line 1, 2 or 3?", 30, P.ink, "#fff")) : "")
     + (t >= bell + .9 ? buddy("momo", 150, 1062, 200, t, { aura: true, in: bell + .9, poses: [[bell + .9, "thinking"], [tM - .12, "sit"], [LE("j904") + .1, "pointing"]] }) + pickNum("momo", 290, 990, t, tM - .1, "3") + buddy("basil", 420, 1062, 180, t, { aura: true, in: bell + 1.0, poses: [[bell + 1, "arms_crossed"], [tB - .12, "sit"], [LE("j905") + .1, "cheer"]], nohop: true }) + pickNum("basil", 540, 990, t, tB - .1, "3")
@@ -137,7 +137,8 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", board: (tt, fla
 
 /* ============ 11 · the score hand and the lizard ============ */
 SC.final = (t, s) => { const L = "j1101"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "four") - .1, null, 4]], TF(1250, 1062, .36, board7(t))); };
-SC.liz = (t, s) => { const L = "j1102"; return `<rect width="1920" height="1080" fill="#C2B49E"/>` + lizReveal(t, s, L, view2(t, { pencil: false, tee: false, shoeX: SHX, liz2: 0 }, CAMSH), gx(CAMSH, LIZ2[0] - 8), gy(CAMSH, LIZ2[1] - 4), W(L, "where") - .1, "Where does wood come from?", 0, -170); };
+SC.liz = (t, s) => { const L = "j1102", tN = W(L, "ant") - .15; return `<rect width="1920" height="1080" fill="#C2B49E"/>` + lizReveal(t, s, L, view2(t, { pencil: false, tee: false, shoeX: SHX, liz2: 0 }, CAMSH), gx(CAMSH, LIZ2[0]), gy(CAMSH, LIZ2[1]), W(L, "where") - .1, "Where does wood come from?", 0, -170)
+  + (t >= tN ? TF(960, 190, spring(t, tN, .45), tpill(0, 0, "The ant, under the wooden bench!", 50, P.sun, P.ink, { w: 700 })) : ""); };
 
 /* ============ 12 · the dare for Episode 9 ============ */
 SC.dare = (t, s) => { const a = "j1201", b = "j1202", c = "j1203", tR = W(a, "rubber") - .2, tS = W(a, "wooden") - .2, tQ = W(a, "which") - .15, tB = LT(b) - .1, tL = LT(c) - .1, DXs = [880, 1400];
