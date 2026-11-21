@@ -6,7 +6,7 @@ teacher approved. In code: `sg_pron.py`: `if needs_fix(text): audio, sr = speak_
 | Word | Say it | Phonemes | Approved |
 |---|---|---|---|
 | Sungei Buloh | "Soon-ai, bur-LOW", with "low" gliding down about 5 semitones (short pause after "Soon-ai") | sˈuːnaɪ, bˈɜːɹloʊ + fall 5 | teacher, 2026-11-20 (clip H) |
-| Pulau Semakau (and "Semakau" alone) | "pu-lao, sir-MA-kao" (stress on "ma"; short pause after "pu-lao") | pˈuːlaʊ, sɜːmˈɑːkaʊ | teacher, 2026-11-20 (clip I) |
+| Pulau Semakau (and "Semakau" alone) | "pu-lao, sir-MA-kao" (stress on "ma"; short pause after "pu-lao") | pˈuːlaʊ, sɜːmˈɑːkaʊ | teacher, 2026-11-20 (clip I). Fixed in the live Explored EP03 Part 2, its two Shorts, EP10 and EP10 Short 2 on 2026-11-21 (re-uploaded; see THEONEAPP_EXPLORED.md) |
 
 Before adding a new Singapore name, make a test clip of Heart saying it in a sentence, send it to the teacher, and add it here
 only once approved.

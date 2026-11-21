@@ -202,24 +202,38 @@ Before rendering a new episode, show the teacher the script breakdown (each part
 | EP02 Part 1 Lights | MLsPqkkK_ow | public (new running order, lamp and kettle, 19 Nov). The older copy xGfdk5-E8gA is set to private, not deleted |
 | EP02 Part 2 | g9Brw_po2Ec | public |
 | EP03 Part 1 Can | e0egmX5H4ow | public |
-| EP03 Part 2 Rubbish | qvJ-D5yKsaI | public |
+| EP03 Part 2 Rubbish | Y_EeXelH3mY | public since 21 Nov ("Semakau" fixed). Replaced for pronunciation: the old qvJ-D5yKsaI stays public, is out of the playlist, and its description's first line points here |
 | EP04 Rain | iLk-TlkMnvk | public |
 | EP05 Food | beI3tFxJrqs | public |
 | EP06 Digestion | _n6nMaWthhU | public |
 | EP07 Oxygen | dagUmrvt_eQ | public |
 | EP08 Food chain | PAoJd12kPWQ | public |
 | EP09 Mosquitoes | F_oNWbfqtC0 | public |
-| EP10 Compost | isq1RcHdBcU | public since 19 Nov |
+| EP10 Compost | 5qYFvo33xVc | public since 21 Nov ("Pulau Semakau" fixed). Replaced for pronunciation: the old isq1RcHdBcU stays public, is out of the playlist, and its description's first line points here |
 | EP01 Shorts | jUZChmlOs0s, ZbA-GGxWt3s | public since 19 Nov |
 | EP02 Shorts | xDAGBl5XHJQ, xE8CyfEKG9w | public since 19 Nov |
 | EP03 Part 1 Shorts | 3yzjC4j--ec, 8fKXGNkgusA | public since 19 Nov |
-| EP03 Part 2 Shorts | SrIf94buYIU, 3as-TwJ4tGM | public since 19 Nov |
+| EP03 Part 2 Shorts | HzY9efKCzYo, b4MCRnlfSw8 | public since 21 Nov ("Semakau" fixed). Replaced for pronunciation: the old SrIf94buYIU and 3as-TwJ4tGM stay public, are out of the Shorts playlist, and point here |
 | EP04 Shorts | y_gOAbX-Rc0, cZEToluHQA0 | public since 19 Nov |
 | EP05 Shorts | JvxVMXWCF2M, HJGDcJ9iDW0 | public since 19 Nov |
 | EP06 Shorts | CsVQYo_nQTo, 3IJiBhPp6r4 | public since 19 Nov |
 | EP07 Shorts | NLZvRcobE-E, b9qPfN1begk | Fri 20 Nov (public), Sat 21 Nov, 5 pm |
-| EP10 Shorts | CkC9-VXAdA4, 0izktqFIJJY | Sun 22 Nov, Mon 23 Nov, 5 pm |
+| EP10 Shorts | CkC9-VXAdA4, xIJGJ2L8e3E | Sun 22 Nov, Mon 23 Nov, 5 pm. Short 2 replaced for pronunciation (Short 1 never says Semakau): the old 0izktqFIJJY is out of the Shorts playlist and points here, but is left untouched, so it also goes public on Mon 23 Nov |
 
 The playlist "TheOneApp, Explored" (19 Nov): each episode followed by its Shorts, in order, with no "Deleted video" gaps. EP07 to EP10 have no Shorts yet.
+
+### Fixing a word in a live video (21 Nov 2026, "Pulau Semakau")
+
+When the teacher approves a new pronunciation (`workspace/explained2/sg_pron.py`, record `PRONUNCIATION.md`), the live videos
+that say the word are fixed without a re-render:
+
+1. `voice.py` says any sentence with a listed name from the approved sounds (`sg_pron.speak_line`), so new episodes are right.
+2. `python pronfix/revoice.py epNN <episode|short1|short2>` (from `workspace/sau`, heart-tts venv) re-says only those
+   sentences with the same recipe and level, puts each into its old place in the voice track (only silence moves; the
+   words stay within 0.3 s of the burnt-in captions), mixes as `render_all.sh` does, brings the mix to -16 LUFS, and
+   copies the old video stream unchanged. Originals stay as `*.before_pron.*`; checks go to `pronfix/<ep>_<video>_report.json`.
+3. Upload with `youtube/explained_upload.py epNN/upload_<video>_pron.json` (`--check` first): same title, description, tags
+   and thumbnail, `"replaces"` and `"retire_old"`, the new video in the old one's playlist place. Never `sau_upload.py --replace`
+   (it deletes). Old videos are never deleted or made private or unlisted. A Short goes only in TheOneApp Shorts.
 
 Add an episode to `NEWS` in TheOneApp's videos.js only after it has gone public (a link makes the TheOneApp, Explored ticket appear). The daily check prepares that pull request.
