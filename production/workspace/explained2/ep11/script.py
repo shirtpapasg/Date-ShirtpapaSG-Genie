@@ -17,6 +17,8 @@ SEQ items:
                                        speed, gap (Heart and buddies: silence between sentences), soft, term (substrings: said slowly, then
                                        >= .65 s), kw: [[mark, word, nth]] (a mark at that word's onset: a key word pops there, or a picture beat),
                                        hold: s (the cursor goes on no earlier than the line's start + s), holdw: [word, s], after: [id, s]
+                                       pron: {text: spoken as} for this line only (the caption keeps the script's words; Stage 3: Pip's
+                                       "opaque" in j602 came out "oh-pack" with Kokoro's own oʊpˈeɪk, "oh-pake" = ˈoʊpˈeɪk decodes as opaque)
   ("wait", seconds)                    picture-only time
   ("mark", name)                       name the cursor time (used by sound and picture)
   ("hold", mark, secs, gap)            the next line waits until mark + secs and at least gap after the cursor (a new term's pop)
@@ -237,7 +239,7 @@ SEQ2 = [
  # ---- 6 · Mark Sentence 1: opaque (Pip); OPAQUE pops beside the card; row 3: the door, a rubber mat and a metal tray; the book's strips
  ("scene", "mark1"),
  ("say", "j601", P, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "j602", P, "Some materials do not allow any light to pass through them. These materials are opaque.", {"pre": 0, "gap": .6}),
+ ("say", "j602", P, "Some materials do not allow any light to pass through them. These materials are opaque.", {"pre": 0, "gap": .6, "pron": {"are opaque.": "are oh-pake."}}),
  ("mark", "kw_opaque"), ("wait", 2.5), HOLD("kw_opaque"),
  ("scene", "row3"), ("mark", "row3"),
  ("say", "j603", H, "A rubber mat. A metal tray. Torch on: no light passes through.", {"pre": 1.4, "kw": [["mat", "rubber"], ["tray", "metal"], ["on5", "on"]]}),   # pre 1.4: the door's tile hops, OPAQUE is stamped

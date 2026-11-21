@@ -29,7 +29,7 @@ const thumbBack = (night) => `<rect width="1920" height="1080" fill="${hx2(night
 const THUMB1 = (t) => thumbBack() + TF(660, 806, .72, rig(t, { sheet: "clear", on: 1, dim: .45, id: "tha" })) + TF(1530, 806, .72, rig(t, { sheet: "frost", on: 1, dim: .45, id: "thb" })) + buddy("basil", 200, 480, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
 
 /* 1 · silent cold open: the living room of an HDB flat at dusk; EP10's three dare boards slide in low at the back of the table */
-const DBX = [1250, 1440, 1630];
+const DBX = [1320, 1505, 1690];   // Stage 3: right of OUR CARD (it hid "clear glass")
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("boardsIn"), tp = MK("budsIn");
   const boards = [0, 1, 2].map((i) => { const t0 = tb + i * .16, [x, d] = slideX(t, t0, .7, 2400, DBX[i], TBY - 22); return t < t0 ? "" : d + dareBoard(i, x, TBY - 110, .46, { id: "c" }); }).join("");
   return tableView(t, { rack: RK0, rig: {}, bot: { x: BOT_FAR }, board: false, back: boards }, [1.02 + .02 * eio(t / 7), 960, 548])
@@ -128,7 +128,7 @@ SC.frostans = (t, s) => { const a = "g1005", b = "g1006", c = "g1007", tA = W(a,
 SC.mark2 = (t, s) => markScene(t, s, { id: "g1102", sayId: "g1101", who: "basil", n: "2 of 2", text: "Some materials allow only some light to pass through them. These materials are translucent.", keys: ["only", "some", "light", "pass", "through", "translucent."], size: 60, y: 250, footer: FOOT,
   extra: TF(830, 930, spring(t, s.t0 + .4, .5), rigCard(t, { sheet: "frost", on: 1 }, 440, 230, "m2")) });
 SC.row2 = (t, s) => V(t, { rack: RK2, rig: { sheet: "frost", robot: 1 }, bot: false, board: { glow: t < stampT(1) ? 1 : -1 } }) + TF(620, 440, spring(t, s.t0 + .3, .45), frontCard(t, "frost", "fc2"))
-  + bookCaption(t, "g1103", "You cannot clearly see the objects placed behind translucent materials.", 120, { size: 40, x: 850, keys: ["cannot", "clearly", "see", "placed", "behind"] }) + buds(t) + torchRule(t) + HUD(t);
+  + bookCaption(t, "g1103", "You cannot clearly see the objects placed behind translucent materials.", 120, { size: 37, x: 830, keys: ["cannot", "clearly", "see", "placed", "behind"] }) + buds(t) + torchRule(t) + HUD(t);
 
 /* 12 · BE THE LIGHT: the glide down the table to the back of the torch (the journey itself is SC.shrink in shrink.js); 13 · pull back out */
 const TBK = [485, 752];
@@ -138,7 +138,7 @@ SC.waitw = (t, s) => { const L = "g1201", dive = ei((t - (s.t1 - 1.5)) / 1.5), e
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the light!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, CREAM, 960, 540); };
 SC.pullout = (t, s) => V(t, { rack: RK2, rig: { sheet: "frost" }, board: {} }, camL([4.4, TBK[0], TBK[1]], CAM0, eo((t - s.t0) / .75))) + wipe(t, s.t0, CREAM) + HUD(t);
 SC.final = (t, s) => { const L = "g1301"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
-SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1; return lizReveal(t, s, L, V(t, { dim: 0, rack: RK2, rig: { sheet: "frost" }, board: {}, wave: ss(tq - .2, tq + .3, t) }), GF[0], GF[1], tq, "It was in the glass tank, on the shelf!", 0, 110, 86, 2.0); };
+SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1; return lizReveal(t, s, L, V(t, { dim: 0, rack: RK2, rig: { sheet: "frost" }, board: false, wave: ss(tq - .2, tq + .3, t) }), GF[0], GF[1], tq, "It was in the glass tank, on the shelf!", 0, 110, 86, 2.0); };
 
 /* 14 · the cliffhanger: an adult's hands set the piece of a white wooden door in the holder; the robot is slid low behind it, out of sight */
 const CAMK = [1.08, 900, 600];

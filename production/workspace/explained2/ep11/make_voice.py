@@ -37,8 +37,9 @@ def K():
     if _k is None: _k = _FixK(vm.load(D + "/kokoro.onnx", D + "/voices.bin"))
     return _k
 sents = lambda t: [p for p in re.split(r"(?<=[.!?])\s+", t) if p.strip()]
+LINE_PRON = {}   # this line's own respellings (script opts "pron"), set while the line is recorded and aligned
 def pron(t):
-    for a, b in PRON.items(): t = t.replace(a, b)
+    for a, b in list(PRON.items()) + list(LINE_PRON.items()): t = t.replace(a, b)
     return t
 def up48(x, sr):
     if sr == 48000: return x
@@ -167,7 +168,7 @@ def crowd(id, text, hid):
 
 dic = set(l.split()[0].split("(")[0] for l in open(os.path.join(pocketsphinx.get_model_path(), "en-us", "cmudict-en-us.dict")))
 EXTRA = {"bobs": "B AA B Z", "fragyle": "F R AE JH AY L", "letterboxes": "L EH T ER B AA K S AH Z", "ice-cream": "AY S K R IY M", "caterpillar": "K AE T ER P IH L ER", "t-shirt": "T IY SH ER T", "ice-cream": "AY S K R IY M", "aluminium": "AE L Y UW M IH N IY AH M", "kiln": "K IH L N", "ooze": "UW Z", "mould": "M OW L D", "fungi": "F AH N JH AY", "you'll": "Y UW L", "i'm": "AY M", "milks": "M IH L K S", "biscuits": "B IH S K AH T S", "noodle": "N UW D AH L", "ceramic": "S ER AE M IH K", "metals": "M EH T AH L Z", "materials": "M AH T IH R IY AH L Z", "mudskipper": "M AH D S K IH P ER", "mudskippers": "M AH D S K IH P ER Z", "warm-up": "W AO R M AH P", "non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
-         "lock-in": "L AA K IH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
+         "lock-in": "L AA K IH N", "oh-pake": "OW P EY K", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
          "aww": "AA", "recycling": "R IY S AY K L IH NG", "organiser": "AO R G AH N AY Z ER", "showdown": "SH OW D AW N", "papaya": "P AH P AY AH",
          "toa": "T OW AH", "payoh": "P AA Y OW", "mynah": "M AY N AH", "dit": "D IH T", "wines": "W AY N Z", "squish": "S K W IH SH", "buddies": "B AH D IY Z",
          "classify": "K L AE S AH F AY", "twenty-five": "T W EH N T IY F AY V", "today's": "T AH D EY Z", "sprouts": "S P R AW T S", "diversity": "D AY V ER S AH T IY", "similarities": "S IH M AH L EH R AH T IY Z", "thirty-one": "TH ER T IY W AH N", "thirty-two": "TH ER T IY T UW", "check-out": "CH EH K AW T", "pip's": "P IH P S", "plant's": "P L AE N T S", "wilting": "W IH L T IH NG", "snug": "S N AH G", "biscuit": "B IH S K AH T", "oats": "OW T S", "whoa": "W OW", "cupboard": "K AH B ER D", "kranji": "K R AA N JH IY", "touch-me-not": "T AH CH M IY N AA T", "twenty-one": "T W EH N T IY W AH N", "rematch": "R IY M AE CH", "prickles": "P R IH K AH L Z", "droops": "D R UW P S", "spores": "S P AO R Z", "reproduces": "R IY P R AH D UW S AH Z", "reproducing": "R IY P R AH D UW S IH NG", "mimosa": "M IH M OW S AH", "eyelids": "AY L IH D Z", "kittens": "K IH T AH N Z", "basil": "B AE Z AH L", "yay": "Y EY", "hatches": "HH AE CH AH Z", "inwards": "IH N W ER D Z", "responding": "R IH S P AA N D IH NG", "responded": "R IH S P AA N D AH D", "non-living": "N AA N L IH V IH NG"}
@@ -225,9 +226,9 @@ for it in SEQ:
         continue
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
-    vo = {k: o[k] for k in ("speed", "gap", "term", "soft", "excited") if k in o}
+    vo = {k: o[k] for k in ("speed", "gap", "term", "soft", "excited", "pron") if k in o}
     if os.path.exists(j) and json.load(open(j)).get("text") == text and json.load(open(j)).get("vo", {}) == vo and os.path.exists(f) and (not o.get("shout") or "know" in json.load(open(j))): continue
-    kn = None
+    kn = None; LINE_PRON.clear(); LINE_PRON.update(o.get("pron", {}))
     if o.get("shout"): x, kn, sw = shout(text); sr = SR
     else: x, sr = heart(text, o.get("excited", False), o.get("gap", .5), o.get("speed", .90), o.get("term", ()), o.get("soft", False)) if who == "heart" else buddy(who, text, **({"gap": o["gap"]} if "gap" in o else {}))
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
