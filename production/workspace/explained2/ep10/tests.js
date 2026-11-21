@@ -43,7 +43,6 @@ function lcPH(t, s, o) { const set = o.setNote ? (tt) => { window._noHud = true;
   return lookCloser(t, s, { tz: s.t0, fx: o.fx || 960, fy: o.fy || 560, art, set, verdict: o.verdict, tv: MK(o.v), over: o.strips ? (tt) => o.strips.map(([id, text, so]) => lcStrip(tt, id, text, so || {})).join("") : undefined }); }
 
 /* ---------- small Stage 1 helpers for p1.js / p2.js ---------- */
-// a cream answer-colour tray (WATERPROOF green / NOT WATERPROOF blue); placeholder rectangles until Stage 2 draws the trays on the table
-const traysPH = (t, t0, x = 960, y = 1040, sc = 1) => TF(x, y, sc * spring(t, t0, .45), `<rect x="-420" y="-64" width="400" height="64" rx="14" fill="${GOODC}"/>${T(-220, -20, "WATERPROOF", 32, "#fff")}<rect x="20" y="-64" width="400" height="64" rx="14" fill="${WEAKC}"/>${T(220, -20, "NOT WATERPROOF", 32, "#fff")}`);
+// (the two trays, traysPH, are drawn in rainy.js)
 // the placeholder object in a lock-in ring (Stage 2 draws the real picture inside the ring)
 const ringPH = (txt) => (tt) => `<circle cx="430" cy="470" r="150" fill="#fff" opacity=".6"/>` + T(430, 482, txt, 30, P.ink);

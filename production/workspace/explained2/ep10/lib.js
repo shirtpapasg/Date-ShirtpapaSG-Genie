@@ -225,8 +225,8 @@ const KWHOLD = 2.0;
 // EP10: FLOAT and SINK pop BESIDE the two blocks inside the tub's look-closer (o.at, no dimming: the close-up stays clear); TRAPPED AIR pops
 // beside Basil's Mark Sentence card as he reads "trapped air"; ABSORB pops beside the school shoe in the drop test's look-closer, WAX beside
 // the boots in the wax look-closer; WATERPROOF pops large in the middle after Pip's card. Shelf order = read-along order (the script's).
-const KW = (PART === 1 ? [["FLOAT", "kw_float", 1, null, { at: [600, 300], size: 100 }], ["SINK", "kw_sink", 1, null, { at: [1320, 300], size: 100 }], ["TRAPPED AIR", "kw_trapped_air", 1, null, { at: [1200, 930], size: 90 }]]
-  : [["ABSORB", "kw_absorb", 1, null, { at: [1450, 300], size: 100 }], ["WATERPROOF", "kw_waterproof", 1], ["WAX", "kw_wax", 1, null, { at: [1450, 300], size: 100 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+const KW = (PART === 1 ? [["FLOAT", "kw_float", 1, null, { at: [320, 474], size: 72 }], ["SINK", "kw_sink", 1, null, { at: [1600, 695], size: 72 }], ["TRAPPED AIR", "kw_trapped_air", 1, null, { at: [1370, 930], size: 84 }]]
+  : [["ABSORB", "kw_absorb", 1, null, { at: [1450, 300], size: 100 }], ["WATERPROOF", "kw_waterproof", 1], ["WAX", "kw_wax", 1, null, { at: [960, 372], size: 80 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lcblocks: 1, lcship: 1, lcbowl: 1, lcdrip: 1, lcwax: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;

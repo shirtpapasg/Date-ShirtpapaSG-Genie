@@ -75,12 +75,54 @@ torch). Five look-closer arts (`blocksArt`, `shipArt`, `bowlArt`, `dripArt`, `wa
 RAINDROP: raincoat, rolling, the shoe's weave, the sock). Two hidden animals, cute and alive: the otter by the rocks, the snail on the
 flower pot. Reused: EP9's two dare boards (being drawn now in ep09/) and EP9's three cards.
 
-## Stage 2 (Fable): draw the scenes in `SCENES_TODO.md`
+## Stage 2: done (2026-11-21, Fable). Every scene is drawn; no `phScene` / `lcPH` / `ringPH` placeholder is left in `p1.js` / `p2.js`.
+**Lengths unchanged: Part 1 4:50.2 (290.2 s), Part 2 5:08.9 (308.9 s).** `script.py`, the voices and the timelines were not touched (no cut used).
+- **New files** (page.html loads them after tests.js): `water.js` (BG.beach / BG.beachR = the East Coast Park shelter, bright / under grey
+  clouds, baked; `beachView`, `seaView`; OUR TUB `tubSvg` + `tubThings`, the two blocks and two spoons (one shape each, two fills), the
+  steel bowl, the jug, `holdDown` = an adult's arm holding a thing from above, `bead` / `tear` / `dropper` / `cupSvg` / `waxBlock`, the
+  board `board3Art`, the container ship `shipSide` + its hull window `shipInside` + `seaOver` + `shipCard`, `otterArt`, `snailArt`, EP9's two
+  dare boards `PIC.spoonTub` / `PIC.ship` copied from ep09/voiddeck.js, `rainIn` / `splashes`) and `rainy.js` (BG.vdrain = the void deck in
+  the rain, drawn again in ep10 in EP9's style + flower pots, the covered walkway's metal roof, the block opposite; `deckView`, `traysOn`;
+  `coatStand`, `shoeTray` / `shoeWet` (EP8's shoe + a wet patch), `bootFront` (toe towards us; `wet`, `wax`), `bootsTray`, `kitSvg`, the trays
+  `trayG` / `trayB` / `traysPH`, four tiles `PIC.tRubber/tCoat/tGlass/tMetal`, `basilNotes`, EP11's dare boards `PIC.dClear/dFrost/dDoor` +
+  `torch`). `main.js` adds `XDEFS10`; `bg/`: beach, beachR, vdrain baked (`node bake.js beach beachR vdrain` after any change to them).
+- **Changed:** `tests.js` (`board3` -> `board3Art`; `HIDDEN` = the drawn otter / snail; `traysPH` moved to rainy.js), `closer.js` (`lcVerdict`
+  takes `{ plain, vx }`: coloured words, an off-centre verdict; the five arts and `SC.lc*`), `shrink.js` (both journeys), `lib.js` (key-word
+  pop positions: FLOAT [320, 474] 72, SINK [1600, 695] 72, TRAPPED AIR [1370, 930] 84, WAX [960, 372] 80; ABSORB as Stage 1).
+- **LOOK CLOSER as built** (all in the shared frame: push-in, set dims, no score / shelf / buddies, one verdict held 2.5 s):
+  | Scene | Part, time (verdict) | What is shown | Verdict |
+  |---|---|---|---|
+  | `lcblocks` | P1 0:50.9-1:11.2 (1:08.7) | slow motion: hands lower the wooden block (dips, bobs, floats half under: FLOAT), then the metal block (straight down, bubbles, rests: SINK); two spoons the same way | WOOD FLOATS · METAL SINKS (violet; FLOATS green, SINKS blue) |
+  | `lcship` | P1 2:19.5-2:46.3 (2:43.8) | the ship side on, "part of it is under the water"; a window opens in the hull (rooms, ladders, doors, engine room, air · air · air); split: the solid block with a little window (hatched metal) | TRAPPED AIR INSIDE |
+  | `lcbowl` | P1 3:43.5-4:00.8 (3:58.3) | the bowl cut open, floating (air inside); the jug pours, it sits lower and lower, water runs over the rim, it goes down and rests beside the block (water inside) | THE AIR IS GONE: IT SINKS (blue) |
+  | `lcdrip` | P2 0:57.3-1:28.3 (1:25.8) | slow motion, three pages that slide: the sleeve (a bead, lens: smooth · no gaps, a hand tilts it, it rolls off, dry) -> the shoe's toe (the drop flattens, a wet patch spreads, lens: water between the threads, ABSORB) -> the cut view (sock inside, a dark spot: It passes through, a wet sock) | FABRIC ABSORBS WATER (blue) |
+  | `lcwax` | P2 2:35.1-2:54.1 (2:51.6) | two boots (plain · with wax); a hand rubs the block SHOE WAX over the right one (a thin shiny layer, WAX); one drop on each: soaks in / sits as a bead and rolls off; the small print stays on | WITH WAX: WATERPROOF (green, on the right boot) |
+- **Journeys:** BE THE AIR (P1 2:58.5-3:26.1: over the sea, the hull grows, in through the door, the huge room, the door slides shut and a lamp
+  comes on = trapped air, a round window with a fish, the room rocks) · BE A RAINDROP (P2 1:58.4-2:21.6: falling over the estate onto a child
+  in a yellow raincoat seen from above, splat, the yellow slope turns over, off its edge onto the white weave, down between the ropes, out
+  onto a knitted sock).
+- **Hidden animals** (named by Heart with the drawn badge; the reveal rings them and they wave): the **otter** at `OTT` [452, 604] by the
+  breakwater rocks in every wide beach shot (not in the look-closers / the lift-off); the **snail** at `SNL` on the rim of the biggest flower
+  pot in every void-deck shot (it glides a little along the rim).
+- **21 Nov rules:** the HOLD ON! ring keeps its two pictures (EP9's two boards, small) and both clue labels through the countdown; the
+  crossed arms sit UNDER the pictures now. Trays, boards and props stand clear of the buddy discs (trays G 330-1130, B 1140-1480).
+- **Deviations from the script / SCENES_TODO** (all picture only): the two blocks (and the two spoons) are let go one after the other, each as
+  Heart describes it, not together; the ship's "air" labels sit inside the rooms (no lines); the tub's sticker is on its lower left; in the
+  bowl scenes the wooden block and both spoons are back on the tray (only the metal block stays in the tub); the "finger" that tilts the
+  sleeve is a hand lifting its end; the board stands at the back of the void-deck table; `four`'s tiles stand in a row on a wide green
+  tray beside the raincoat; in `treated` the tiles are gone (the waxed boot takes their place); Part 2's Showdown and dare are on the dimmed
+  / cleared void deck; the chant's board is at the lower left (.4) with the three flash pictures beside the lines; EP9's dare boards are EP9's
+  `PIC.spoonTub` / `PIC.ship` with tags metal · sinks / metal · floats (EP9's own dare scene was not drawn yet: keep the two alike).
+- **Checks (stills only; no video rendered):** stills every 0.45 s of both parts: no page errors. `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg` (a
+  frame every 3 s), `qa/lc_p1.jpg`, `qa/lc_p2.jpg` (the five look-closers as strips), `qa/journey_air.jpg`, `qa/journey_rain.jpg`.
+  Thumbnails `thumb_part1.jpg`, `thumb_part2.jpg` (`node thumb_still.js N 1 qa/th/fN.png "&thumb"`, then
+  `node thumb.js qa/th/f1.png thumb_part1.jpg 1 "METAL SPOON|SINKS" "METAL SHIP|FLOATS?!" 230 150 132` and
+  `node thumb.js qa/th/f2.png thumb_part2.jpg 2 "ONE BOOT|SOAKS" "ONE STAYS|DRY!" 230 150 132`). Cues and preview mixes rebuilt (-16 LUFS).
+- **Stage 3 should watch in motion:** the two journeys (the hull's growth and the door pass at 3:03-3:08; the roll at 2:08-2:13, which turns
+  the view over twice); each look-closer's cut in and out; the blocks' bob and sink, the hand lifting away; the bowl's fill against Heart's
+  "lower. And lower."; the three sliding pages of the drop test and the lens's water; the wax hand's rub; the low slides (dare boards, the
+  board, trays, the raincoat and shoe, the boots in `treated`); the rain's density; the otter's and snail's idle loops and waves.
 - Stills: `PART=1|2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg` (prints page errors). Draw one expression: `node probe.js out.jpg 1 '<js>'`.
-- Bake a static set: `NODE_PATH=$(npm root -g) node bake.js <name>` (writes `bg/<name>.png` and `bg/manifest.js`).
-- After any change to `script.py`: `/home/user/heart-tts/venv/bin/python make_voice.py`, `python3 build_tl.py 1` and `2`, `python3 make_todo.py`;
-  after any change to a cue: `node dump_cues.js P && node song.js P`.
-- Then write progress/ep10.json (pct 75, "Stage 2: drawing done (Fable)", next "Stage 3: render (Opus)").
 
 ## Stage 3 (Opus): `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`)
 - Output `ep10_partP.mp4` (ignored), `ep10_partP.srt`, `sheet_partP.png`; check stills around every swap, card, look-closer and reveal.
