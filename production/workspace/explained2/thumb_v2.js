@@ -33,7 +33,7 @@ const THUMBS = {
         <path d="M0 453 ${Array.from({ length: 33 }, () => 'q10 -9 20 0 t20 0').join(' ')}" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>` },
       { cut: 'tub', x: 640, y: 415, w: 430, line: '#fff', lw: 7, glow: INK },
       { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
-    words: [{ t: 'A METAL SHIP', x: 1250, y: 104, size: 92, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FLOATS?!', x: 1256, y: 214, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+    words: [{ t: 'SHIP FLOATS,', x: 1250, y: 106, size: 100, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'HOW?', x: 1256, y: 222, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 
   ep09_2: { ep: 'ep09', part: 2, out: 'ep09/thumb_v2_part2.jpg', old: 'ep09/thumb_part2.jpg',
     bg: { c: ['#7CFFB2', '#12B76A', '#05603A'], at: [860, 420], rays: .2 },
