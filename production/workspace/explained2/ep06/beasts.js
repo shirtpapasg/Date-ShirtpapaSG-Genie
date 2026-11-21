@@ -75,7 +75,8 @@ function batWing(sd, sp, fl, o = {}) { const up = Math.sin(fl) * 60 * sp, sh = [
   return `<path d="${edge}" fill="url(#batW)" stroke="#2A1A14" stroke-width="5" stroke-linejoin="round" opacity="${o.thin ? .92 : 1}"/>${lit > .02 ? `<path d="${edge}" fill="#FFB070" opacity="${n2(.35 * lit)}"/>` : ""}
     <path d="M${n2(sh[0])} ${sh[1]} L${n2(wr[0])} ${n2(wr[1])}" stroke="#6E4A36" stroke-width="12" stroke-linecap="round"/>${tips.map((p) => `<path d="M${n2(wr[0])} ${n2(wr[1])} L${n2(p[0])} ${n2(p[1])}" stroke="#6E4A36" stroke-width="6" stroke-linecap="round"/>`).join("")}
     <path d="M${n2(wr[0])} ${n2(wr[1])} l${sd * 4} -22" stroke="#2A1A14" stroke-width="6" stroke-linecap="round"/>`; }
-function fruitBat(o = {}) { const sp = o.wings || 0, fl = o.flap || 0, bl = o.blink, by = o.baby || 0;
+function fruitBat(o = {}) { return fruitBatF(o); }
+function fruitBatOld(o = {}) { const sp = o.wings || 0, fl = o.flap || 0, bl = o.blink, by = o.baby || 0;
   const head = `<g transform="translate(0 -232)"><path d="M-26 -26 Q-58 -60 -44 -82 Q-24 -74 -8 -40z M26 -26 Q58 -60 44 -82 Q24 -74 8 -40z" fill="#6A4026" stroke="#2A1A14" stroke-width="5" stroke-linejoin="round"/><path d="M-30 -36 Q-50 -62 -42 -76 M30 -36 Q50 -62 42 -76" fill="none" stroke="#E8D2B8" stroke-width="3" stroke-linecap="round" opacity=".8"/>
     <ellipse cx="0" cy="0" rx="46" ry="42" fill="url(#batF)" stroke="#5E3A22" stroke-width="4"/><path d="M-20 14 Q0 54 20 14 Q10 6 0 6 Q-10 6 -20 14z" fill="#9A6A44" stroke="#5E3A22" stroke-width="4"/><ellipse cx="0" cy="34" rx="10" ry="7" fill="#3A2218"/><circle cx="-4" cy="33" r="2" fill="#000"/><circle cx="4" cy="33" r="2" fill="#000"/>
     ${bl ? `<path d="M-30 -6 q10 6 18 0 M12 -6 q10 6 18 0" stroke="#2A1A14" stroke-width="4" fill="none"/>` : `<circle cx="-20" cy="-6" r="12" fill="#1A100C"/><circle cx="20" cy="-6" r="12" fill="#1A100C"/><circle cx="-16" cy="-11" r="4" fill="#fff"/><circle cx="24" cy="-11" r="4" fill="#fff"/>`}</g>`;
