@@ -99,6 +99,11 @@ Also read:
   4. A pause of about **1.5 s** lets the class repeat the line, with the beat continuing softly.
   5. Repeat for every line, then optionally once all together.
 - **Lock-ins:**
+  - **Everything the child needs to choose stays on screen through the whole countdown (teacher, 2026-11-21):** the answer cards,
+    the picture in the ring AND its clue labels (e.g. "fins", "scales", "gills"). Nothing that was shown with the question is
+    taken away while the ring drains; it helps the child decide.
+  - **Clue labels sit ON TOP of the ring's picture frame**, fully visible and readable, never tucked behind or clipped by the
+    yellow ring (draw them above the frame).
   - A closed question with 2 or 3 choices.
   - Answered with the body: point left or right, or fingers 1, 2, 3.
   - A ring timer of 5 to 6 s, ticking that speeds up, a bell, then "LOCKED IN!".
