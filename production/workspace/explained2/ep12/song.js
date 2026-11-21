@@ -1,4 +1,4 @@
-// song.js: the whole soundtrack of EP11 (EP1's engine, as EP5; EP8 added the canteen ambience, library one-shots; EP10 the sea wash; EP11 adds the goldfish tank's soft bubbles (`tank`) in the living room; Part 2's corridor uses the `night` crickets ("sfx") and a few new synth sounds) -> out/mix.wav. Every sound comes from an event in cues.json (dump_cues.js), every voice line
+// song.js: the whole soundtrack of EP12 (EP1's engine, as EP5; EP8 added the canteen ambience, library one-shots; EP10 the sea wash; EP11 the tank's soft bubbles (`tank`); EP12 uses `birds` softly outdoors (the walkway, the car park), `tank` at the aquarium shop, and adds three synth sounds: the mynah's two-note call, a bright metal clang and its long slow-motion ring) -> out/mix.wav. Every sound comes from an event in cues.json (dump_cues.js), every voice line
 // from tl.json. Synth = the animation-studio plugin's audio engine (audio/, copied from short1/engine/audio); ambiences from the sau
 // sfx library (rain, birds). Sound palette = STYLE_GUIDE section 12.   node song.js
 const path = require('path'), fs = require('fs');
@@ -35,7 +35,7 @@ for (const [a, b] of C.R.wonder) { const prog = [['D3', 'A3', 'F#4', 'A4'], ['B2
 const loop = (file, a, b, g, fade = .6) => { const len = { 'rain.wav': 5, 'ep07_birds.wav': 5, 'ep08_birds.wav': 5.6, 'ep05_kids.wav': 4.6, 'sea_wash.wav': 5 }[file]; for (let t = a; t < b; t += len - .15) { const x = MIX.loadAudio(path.join(SFX, file), { at: t, length: DUR }); const i0 = Math.round(a * SR), i1 = Math.round(b * SR);
     for (let i = Math.round(t * SR); i < Math.min(N, Math.round((t + len) * SR)); i++) { const e = Math.min(1, (i - i0) / (fade * SR), (i1 - i) / (fade * SR)); if (e <= 0) continue; amb.L[i] += x.L[i] * g * e; amb.R[i] += x.R[i] * g * e; } } };
 for (const [a, b] of C.R.rain) loop('rain.wav', a, b, .5);
-for (const [a, b] of C.R.birds) loop('ep08_birds.wav', a, b, .22);
+for (const [a, b] of C.R.birds) loop('ep08_birds.wav', a, b, .16);   // EP12: softly outdoors (the walkway, the car park)
 for (const [a, b] of (C.R.sea || [])) loop('sea_wash.wav', a, b, .14, 1.0);   // EP10: small waves at the beach shelter, East Coast Park
 for (const [a, b] of (C.R.tank || [])) for (let t = a + .3, i = 0; t < b - .5; t += 1.3 + .9 * ((i * 7) % 5) / 5, i++) MIX.loadAudio(path.join(SFX, 'bubble.wav'), { at: t, length: DUR }).mixInto(amb, .045 + .02 * (i % 3) / 2);   // EP11: the goldfish tank's soft bubbles (the living room)
 for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0);   // EP8: the school canteen at recess, children far away
@@ -47,6 +47,10 @@ const RISE = ['C5', 'D5', 'E5', 'G5', 'A5', 'C6', 'D6', 'E6', 'G6', 'A6', 'C7'],
 const mar = (n, t, g = .5, o = {}) => { const x = I.marimba(typeof n === 'number' ? n : m(n), o); game.addMono(x, t, g); verb.addMono(x, t, g * .35); };
 const chordAt = (t, notes, g = .1, d = 2.2) => { for (const n of notes) { const { L, R } = I.padNote(m(n), d, { cutoff: 1500, attack: .03, release: 1.4 }); pad.addStereo(L, R, t, g); } };
 const P = {
+  // EP12: the mynah's two-note call (a bright whistle up, then down); the trolley's metal CLANG (a bright ring + a thud); the same, long and low (slow motion)
+  mynah: (t) => { [[2650, 0], [1980, .2]].forEach(([f, d]) => { const x = I.bell(f, .09, 1.1, 1.4); amb.addMono(x, t + d, .09, .4); verb.addMono(x, t + d, .06); }); amb.addMono(I.whistle(.18), t + .38, .04, .4); },
+  clang: (t) => { const a = I.bell(620, .9, 2.2, 2.7), b = I.bell(1490, .5, 2.8, 3.1); game.addMono(a, t, .34); game.addMono(b, t, .16); verb.addMono(a, t, .18); game.addMono(I.thud(120, .07), t, .6); game.addMono(I.rim(1.2, 61), t, .3); },
+  clangslow: (t) => { const a = I.bell(310, 2.6, 1.1, 2.7), b = I.bell(745, 1.8, 1.4, 3.1); wonder.addMono(a, t, .3); wonder.addMono(b, t, .12); verb.addMono(a, t, .2); wonder.addMono(I.thud(70, .2), t, .5); },
   koel: (t) => { for (let j = 0; j < 2; j++) { const x = I.whistle(.3); amb.addMono(x, t + j * .42, .05 + .02 * j, -.5); verb.addMono(x, t + j * .42, .05); } },
   mrt: (t) => { amb.addMono(I.noiseSweep(3.2, 90, 260, { q: .8, pink: true }), t, .1, .4); },
   clink: (t) => { game.addMono(I.bell(2100, .12, 2.5, 2.7), t, .2); game.addMono(I.thud(180, .04), t, .5); game.addMono(I.rim(1.3, 2), t, .3); },
