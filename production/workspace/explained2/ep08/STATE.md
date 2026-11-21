@@ -56,3 +56,6 @@ Three stages: **Stage 1 (setup, done 2026-11-20)** · Stage 2: Fable draws the s
 ## Stage 3: `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`).
 - Stills: `PART=2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg`. Bake backgrounds: `node bake.js <names>`.
 - Status: see ../progress/ep08.json
+
+## On resume (teacher, 21 Nov)
+Before Stage 3, apply the 21 Nov rules in SERIES_FORMAT.md, especially section 1b LOOK-CLOSER: each material gets a slow zoom-in on the real thing with the evidence shown (sand melting, clay in the kiln, sap from the cut), held 6-10 s, Heart describing what we see, one verdict tag. Also: Heart names the hidden animal at the start; no orphan labels.
