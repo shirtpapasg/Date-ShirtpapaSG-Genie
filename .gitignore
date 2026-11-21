@@ -64,3 +64,5 @@ production/workspace/explained2/ep06f/qa/_st/
 production/workspace/explained2/*/voice.log
 production/workspace/explained2/*/*.log
 production/workspace/explained2/refs/
+production/workspace/explained2/*/qa/_w/
+production/workspace/explained2/*/qa/_*/
