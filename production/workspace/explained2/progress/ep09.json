@@ -1,1 +1,1 @@
-{"pct": 25, "step": "Script done (Fable)", "next": "Stage 1 setup (Opus)", "updated": "2026-11-21T14:31:27Z"}
+{"pct": 50, "step": "Stage 1 setup done (Opus)", "next": "Stage 2: drawing (Fable)", "detail": "Engine from EP8 (21 Nov fixes kept), script.py word for word, 117 voices (fragile = FRAJ-ile via sg_pron), timelines P1 5:09.9 / P2 4:57.3 (with the five look-closer holds, no cuts), sound -16.0 LUFS, p1/p2 wired with placeholders, SCENES_TODO.md, placeholder stills with no page errors.", "updated": "2026-11-21T15:56:00Z"}
