@@ -50,14 +50,8 @@ function skinDisc(kind, r = 150, t = 0) { let s = "";
   const id = "sd" + kind + r; return `<clipPath id="${id}"><circle r="${r}"/></clipPath><g filter="url(#drop)"><circle r="${r + 10}" fill="#fff"/></g><g clip-path="url(#${id})">${s}</g><circle r="${r}" fill="none" stroke="#fff" stroke-width="6"/>`; }
 
 /* ---------- reptiles on picture boards (each drawn about 500 px wide, origin = its middle) ---------- */
-const snakeArt = (t = 0) => { const w = 6 * Math.sin(t * 2); return `<path d="M-230 60 Q-170 ${n2(-10 + w)} -100 40 Q-30 ${n2(90 - w)} 40 30 Q110 ${n2(-30 + w)} 170 10" fill="none" stroke="#2E5A2A" stroke-width="44" stroke-linecap="round"/><path d="M-230 60 Q-170 ${n2(-10 + w)} -100 40 Q-30 ${n2(90 - w)} 40 30 Q110 ${n2(-30 + w)} 170 10" fill="none" stroke="#6AB04A" stroke-width="34" stroke-linecap="round"/><path d="M-230 60 Q-170 ${n2(-10 + w)} -100 40 Q-30 ${n2(90 - w)} 40 30 Q110 ${n2(-30 + w)} 170 10" fill="none" stroke="#C8E890" stroke-width="8" stroke-dasharray="4 14" opacity=".6"/>
-  <ellipse cx="190" cy="4" rx="44" ry="28" fill="#6AB04A" stroke="#2E5A2A" stroke-width="5" transform="rotate(-14 190 4)"/><circle cx="204" cy="-6" r="6" fill="#1E1C16"/><path d="M232 -2 l26 -4 m-26 4 l26 8" stroke="#C86A9A" stroke-width="4" stroke-linecap="round"/>`; };
-const turtleArt = (t = 0) => `<path d="M-130 30 L-150 70 M-60 40 L-70 74 M90 40 L100 74 M150 30 L170 66" stroke="#4E5A2E" stroke-width="26" stroke-linecap="round"/><path d="M-130 30 L-150 70 M-60 40 L-70 74 M90 40 L100 74 M150 30 L170 66" stroke="#8A9A5A" stroke-width="18" stroke-linecap="round"/>
-  <path d="M150 0 Q210 ${n2(-30 + 4 * Math.sin(t * 2))} 250 -10 Q262 14 236 22 Q196 30 160 26z" fill="#8A9A5A" stroke="#4E5A2E" stroke-width="5"/><path d="M180 -6 l50 -4 M180 10 l56 2" stroke="#E8D84A" stroke-width="5"/><circle cx="232" cy="-8" r="6" fill="#1E1C16"/>
-  <path d="M-200 30 Q-190 -110 0 -120 Q190 -110 200 30z" fill="url(#trtl)" stroke="#3A4422" stroke-width="7"/><path d="M-200 30 H200" stroke="#3A4422" stroke-width="7"/>${[[-120, -40], [-40, -70], [40, -70], [120, -40], [0, -10]].map(([x, y]) => `<path d="M${x - 40} ${y} l20 -30 h40 l20 30 l-20 30 h-40z" fill="none" stroke="#3A4422" stroke-width="4" opacity=".7"/>`).join("")}<path d="M-120 -90 Q0 -120 110 -90" fill="none" stroke="#fff" stroke-width="7" opacity=".2"/>`;
-const crocArt = (t = 0) => `<path d="M-120 20 L-140 70 M-60 24 L-50 70 M80 20 L90 70 M140 18 L160 66" stroke="#3E4A2A" stroke-width="28" stroke-linecap="round"/><path d="M-120 20 L-140 70 M-60 24 L-50 70 M80 20 L90 70 M140 18 L160 66" stroke="#7E8A5A" stroke-width="20" stroke-linecap="round"/>
-  <path d="M-180 0 Q-260 ${n2(10 + 6 * Math.sin(t * 2))} -300 30 Q-250 40 -170 36 Q0 50 180 30 L300 30 Q310 10 290 0 Q240 -20 180 -24 Q0 -50 -180 0z" fill="url(#croc)" stroke="#3E4A2A" stroke-width="6"/>${Array.from({ length: 12 }, (_, i) => `<path d="M${-260 + i * 36} ${n2(-2 - 18 * Math.sin(Math.PI * i / 11))} l12 -16 l12 16" fill="#56603C" stroke="#3E4A2A" stroke-width="3"/>`).join("")}
-  <path d="M180 10 L296 16" stroke="#3E4A2A" stroke-width="4"/>${[200, 222, 244, 266].map((x) => `<path d="M${x} 12 l5 8 l5 -8" fill="#fff"/>`).join("")}<circle cx="196" cy="-22" r="10" fill="#C8B84A" stroke="#3E4A2A" stroke-width="4"/><circle cx="198" cy="-22" r="4" fill="#1E1C16"/>`;
+// (Fable redraw, 21 Nov) the snake, the turtle and the crocodile are drawn in fable_art.js
+const snakeArt = (t = 0) => snakeF(t), turtleArt = (t = 0) => turtleF(t), crocArt = (t = 0) => crocF(t);
 // a clutch of reptile eggs in a hollow in the soil; one is hatching (u 0..1), a tiny lizard looks out
 function eggClutch(u = 0, t = 0) { const egg = (x, y, r = 0) => `<g transform="translate(${x} ${y}) rotate(${r})"><ellipse rx="40" ry="56" fill="#F4F0E2" stroke="#C8BEA0" stroke-width="5"/><ellipse cx="-12" cy="-20" rx="10" ry="16" fill="#fff" opacity=".7"/></g>`;
   const cr = clamp(u * 2), op = clamp(u * 2 - .6);
@@ -68,11 +62,8 @@ function eggClutch(u = 0, t = 0) { const egg = (x, y, r = 0) => `<g transform="t
   <path d="M-260 40 Q-200 100 0 110 Q200 100 260 40" fill="none" stroke="#9A7A5A" stroke-width="10"/>`; }
 
 /* ---------- a thermometer standing on two little feet: a glass tube with a red column, no numbers. lev 0..1. origin = its feet ---------- */
-const thermo = (lev, h = 300, o = {}) => { const top = -h, bot = -60, col = lerp(bot, top + 30, clamp(lev));
-  return `<ellipse cx="0" cy="4" rx="56" ry="9" fill="${P.ink}" opacity=".25" filter="url(#b4)"/><path d="M-40 0 L-20 -30 H20 L40 0" fill="none" stroke="#8A5A36" stroke-width="10" stroke-linecap="round"/>
-  <g filter="url(#dropS)"><rect x="-22" y="${top}" width="44" height="${h - 40}" rx="22" fill="#F4FAFF" stroke="#9AB0C8" stroke-width="5"/><circle cx="0" cy="${bot + 12}" r="34" fill="#F4FAFF" stroke="#9AB0C8" stroke-width="5"/></g>
-  <rect x="-9" y="${n2(col)}" width="18" height="${n2(bot + 14 - col)}" rx="9" fill="#E8463A"/><circle cx="0" cy="${bot + 12}" r="24" fill="#E8463A"/>${o.glow ? `<circle cx="0" cy="${n2(col)}" r="${n2(18 + 8 * o.glow)}" fill="${P.sun}" opacity="${n2(.6 * o.glow)}" filter="url(#b4)"/>` : ""}
-  <rect x="-14" y="${top + 14}" width="8" height="${h - 90}" rx="4" fill="#fff" opacity=".8"/>`; };
+// (Fable redraw) the same plain thermometer as the journeys (fable_art.js thermoF), standing on its bulb
+const thermo = (lev, h = 300, o = {}) => thermoF(0, -46, lev, "", { H: h - 96, glow: o.glow });
 
 /* ---------- the fruit bat (a lesser dog-faced fruit bat). Drawn standing up (head up, feet at the origin); hang() turns it upside down.
    o: wings 0 (folded, wrapped round like a cloak) .. 1 (spread wide), flap (radians), blink, baby (0..1: a baby tucked at its chest, drinking), wk (wing glow) ---------- */
@@ -119,12 +110,7 @@ function catNursing(t = 0) { const kit = (x, ph, col) => `<g transform="translat
   ${kit(-110, 0, "#F2C080")}${kit(-10, 1.3, "#E8D8C4")}${kit(90, 2.6, "#D9A060")}`; }
 
 /* ---------- the sea turtle, from above, swimming (head to the right). o: dark (a silhouette under the water), stroke (flipper phase) ---------- */
-function seaTurtle(o = {}) { const s = Math.sin(o.stroke || 0), dk = o.dark;
-  const fc = dk ? "#1E2E40" : "#7A9A6A", ln = dk ? "#1E2E40" : "#3E5A3A";
-  const fl = (sd, front) => front ? `<path d="M60 ${sd * 60} Q${n2(120 + 30 * s)} ${n2(sd * (150 + 40 * s))} ${n2(40 + 60 * s)} ${n2(sd * (250 + 20 * s))} Q20 ${sd * 160} 10 ${sd * 70}z" fill="${fc}" stroke="${ln}" stroke-width="5"/>`
-    : `<path d="M-120 ${sd * 50} Q${n2(-170 - 10 * s)} ${n2(sd * (90 + 14 * s))} ${n2(-200 - 10 * s)} ${n2(sd * (110 + 10 * s))} Q-150 ${sd * 110} -100 ${sd * 60}z" fill="${fc}" stroke="${ln}" stroke-width="5"/>`;
-  return fl(-1, 1) + fl(1, 1) + fl(-1, 0) + fl(1, 0) + `<path d="M130 0 Q150 -36 200 -30 Q240 -16 240 0 Q240 16 200 30 Q150 36 130 0z" fill="${fc}" stroke="${ln}" stroke-width="5"/>${dk ? "" : `<circle cx="206" cy="-16" r="6" fill="#1E1C16"/><circle cx="206" cy="16" r="6" fill="#1E1C16"/><path d="M160 -14 l20 6 l-4 14 l-20 -2z M180 6 l20 2 l-4 12 l-18 -4z" fill="none" stroke="${ln}" stroke-width="3"/>`}
-  <ellipse cx="-10" cy="0" rx="160" ry="120" fill="${dk ? "#1E2E40" : "#8A6A3A"}" stroke="${dk ? "#1E2E40" : "#5A4222"}" stroke-width="7"/>${dk ? "" : [[-80, -50], [0, -60], [80, -40], [-80, 50], [0, 60], [80, 40], [-110, 0], [-20, 0], [70, 0]].map(([x, y]) => `<path d="M${x - 34} ${y} l17 -28 h34 l17 28 l-17 28 h-34z" fill="${["#A07A42", "#8A6232", "#B08A52"][(x + y + 300) % 3]}" stroke="#5A4222" stroke-width="4"/>`).join("") + `<path d="M-120 -70 Q-10 -110 100 -70" fill="none" stroke="#fff" stroke-width="7" opacity=".2"/>`}`; }
+function seaTurtle(o = {}) { return seaTurtleF(o); }
 // a sea turtle on a beach at night, laying eggs in a hole she dug in the sand (side view, small)
 const turtleNest = (t = 0) => `<rect x="-300" y="-300" width="600" height="600" fill="#1E2450"/><circle cx="190" cy="-180" r="40" fill="#FFF6D8"/>${[[-200, -200], [-120, -240], [40, -210], [-40, -150], [100, -250]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3" fill="#fff" opacity=".7"/>`).join("")}<path d="M-300 -60 Q0 -90 300 -40 V300 H-300z" fill="#2A4A7A"/><path d="M-300 0 Q0 -20 300 10 V300 H-300z" fill="#D8C49A"/>
   <ellipse cx="-30" cy="100" rx="110" ry="40" fill="#B8A07A"/><g transform="translate(-30 96)">${[[-30, 0], [0, 6], [30, 0], [-14, -10], [16, -10]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="15" fill="#F8F4E8" stroke="#C8BEA0" stroke-width="3"/>`).join("")}</g>
