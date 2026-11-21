@@ -10,7 +10,9 @@ Existing files are kept (safe to re-run after a restart)."""
 import os, sys, json, re, wave, subprocess, numpy as np, soundfile as sf, parselmouth
 from parselmouth.praat import call
 H = os.path.dirname(os.path.abspath(__file__)); SPR = os.path.join(H, "..", "characters", "sprites"); sys.path.insert(0, SPR); sys.path.insert(0, H)
+sys.path.insert(0, os.path.join(H, ".."))
 import voice_maker as vm, talk_voice as tv
+from sg_pron import needs_fix, speak_line, to_phonemes   # "live" / "lives" = "leev" (teacher, 21 Nov), from approved phonemes
 from script import SEQS, PRON, CHANT, CHANT_CAPS
 SEQ = SEQS[1] + SEQS[2]
 import pocketsphinx
@@ -33,7 +35,7 @@ def up48(x, sr):
 def heart(text, excited=False, gap=.45, spd=.95):
     speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if excited else (spd, 1.6, 1.0, 0.0); parts = []
     for p in sents(pron(text)):
-        a, sr = K().create(p, voice="af_heart", speed=speed, lang="en-us"); x = a.astype(np.float64)
+        a, sr = speak_line(K(), p, voice="af_heart", speed=speed) if needs_fix(p) else K().create(p, voice="af_heart", speed=speed, lang="en-us"); x = a.astype(np.float64)
         snd = parselmouth.Sound(x, SR); m = call(snd, "To Manipulation", 0.01, 120, 500); pt = call(m, "Extract pitch tier")
         med = call(snd.to_pitch(time_step=0.01, pitch_floor=120, pitch_ceiling=500), "Get quantile", 0, 0, 0.5, "Hertz")
         call(pt, "Formula", f"{med * shift} * 2 ^ ({swing} * log2(self / {med}))"); call([pt, m], "Replace pitch tier")
@@ -43,9 +45,16 @@ def heart(text, excited=False, gap=.45, spd=.95):
     x = np.concatenate(parts[:-1]); sp = x[np.abs(x) > 0.003]
     return np.clip(x * (10 ** ((-21.7 + gain) / 20) / np.sqrt(np.mean(sp ** 2))), -0.98, 0.98), SR
 
-def buddy(who, text, gap=.16):
-    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * .93   # a little slower (the teacher: about 10% slower overall)
-    x, sr = vm.speak(K(), pron(text), c, gap=gap + .06, para_gap=0)
+class _Fix:
+    """Kokoro for a buddy line with a fixed word: each sentence that has one is spoken from sg_pron's phonemes (same voice mix, same speed)."""
+    def __init__(s, k): s.k = k
+    def get_voice_style(s, v): return s.k.get_voice_style(v)
+    def create(s, text, **kw):
+        if needs_fix(text): return s.k.create(to_phonemes(text, kw.get("lang", "en-us")), voice=kw["voice"], speed=kw["speed"], lang=kw.get("lang", "en-us"), is_phonemes=True)
+        return s.k.create(text, **kw)
+def buddy(who, text, gap=.16, bs=.93):
+    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * bs   # .93: a little slower (the teacher: about 10% slower overall); .88: the slower reading pace (cards)
+    x, sr = vm.speak(_Fix(K()), pron(text), c, gap=gap + .06, para_gap=0)
     idx = np.where(np.abs(x) > .01)[0]; x = x[max(0, idx[0] - 240): idx[-1] + 2400].astype(np.float64)
     sp = x[np.abs(x) > .003]; return np.clip(x * (10 ** (-18 / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98), sr
 
@@ -208,16 +217,16 @@ for it in SEQ:
         continue
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
-    if os.path.exists(j) and json.load(open(j)).get("text") == text and os.path.exists(f) and (not o.get("shout") or "know" in json.load(open(j))): continue
+    if os.path.exists(j) and json.load(open(j)).get("text") == text and json.load(open(j)).get("who") == who and os.path.exists(f) and (not o.get("shout") or "know" in json.load(open(j))) and (not needs_fix(text) or json.load(open(j)).get("leev")): continue
     kn = None
     if o.get("shout"): x, kn, sw = shout(text); sr = SR
-    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .45), o.get("speed", .95)) if who == "heart" else buddy(who, text)
+    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .45), o.get("speed", .95)) if who == "heart" else buddy(who, text, bs=o.get("bs", .93))
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     words, ok = align(text, f)
     if kn is not None: D_ = len(x) / 48000; words = [{"w": "Now", "a": .005, "b": round(sw[1]["a"], 3)}, {"w": "you", "a": round(sw[1]["a"], 3), "b": round(kn, 3)}, {"w": "know!", "a": round(kn, 3), "b": round(D_, 3)}]; ok = True
     if not ok: bad.append(id)
     op, lv = tv.envelope(x, 48000); lvl = tv.level(x, 48000, op)
     json.dump({"who": who, "text": text, "dur": round(len(x) / 48000, 3), "words": words, "aligned": ok, "fps": 30,
-               "open": [round(float(v), 2) for v in op], "mouth": tv.mouth_track(lvl), "stress": tv.stresses(lv), **({"know": round(kn, 3)} if kn is not None else {})}, open(j, "w"))
+               **({"leev": True} if needs_fix(text) else {}), "open": [round(float(v), 2) for v in op], "mouth": tv.mouth_track(lvl), "stress": tv.stresses(lv), **({"know": round(kn, 3)} if kn is not None else {})}, open(j, "w"))
     print(id, who, round(len(x) / 48000, 2), "ok" if ok else "PROPORTIONAL", flush=True)
 print("not aligned:", bad)

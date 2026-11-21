@@ -8,6 +8,11 @@ SEQ items:
   ("mark", name)                       name the cursor time (used by sound and picture)
   ("chant", id)                        the buddies' chant, call and response: a line, a bar for the viewers ("YOUR TURN!"), ... then all together
   ("unison", id, text, {opts})         the three buddies say a short line together (opts: pre, post, quiet)
+
+Version 2 (21 Nov 2026, the teacher's notes): a buddy reads the three goal cards (g1xx Pip in Part 1, g2xx Momo in Part 2); the buddy who says
+"Say it with me!" reads the Mark Sentence card (never Heart), with 2.5 s of stillness after it; the hidden animal is no longer the lizard (Part 1: a
+duck behind the boardwalk rail; Part 2: the frog on a mangrove root) and its lines do not depend on the animal; Part 2 opens with a calm recap under
+Heart's "Last time..." line (words unchanged). "live" is said "leev" (sg_pron). opts: bs = a buddy's speed factor (default .93; .88 = the slower reading pace).
 """
 H, P, B, M = "heart", "pip", "basil", "momo"
 # the chant: line 1 is three words on clap, clap, stomp; line 2 is one phrase
@@ -48,7 +53,7 @@ SEQ1 = [
  ("say", "a204", H, "Did you lock in your answer? One group, or three? Hold on to it.", {"pre": .6, "post": .5}),
  # ---- 3 · the game (the field-trip card slides in during the cold open)
  ("scene", "game"),
- ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. And a lizard is hiding. Find it!", {"pre": .5, "post": .4}),
+ ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .5, "post": .4}),
  # ---- 4 · Round Zero: a warm-up
  ("scene", "r0card"), ("wait", 1.1),
  ("scene", "r0"),
@@ -58,16 +63,21 @@ SEQ1 = [
  ("unison", "u403", "Two!", {"pre": .5, "post": .1}),
  ("say", "a404", H, "Animals are unable to make their own food. They depend on other living things for food.", {"pre": .45}),
  ("say", "a405", H, "Two fingers? One finger up!", {"pre": .5, "post": .6}),
- # ---- 5 · today's goals (no voice) and the countdown
- ("scene", "goals"), ("wait", 4.3),
+ # ---- 5 · today's goals, read aloud by Pip (word for word as printed; about 0.4 s between cards), and the countdown
+ ("scene", "goals"), ("wait", .5),
+ ("say", "g100", P, "Today you'll learn…", {"pre": .2, "bs": .88}),
+ ("say", "g101", P, "What an animal is.", {"pre": .5, "bs": .88}),
+ ("say", "g102", P, "How scientists group animals.", {"pre": .4, "bs": .88}),
+ ("say", "g103", P, "What makes a frog an amphibian.", {"pre": .4, "bs": .88}),
+ ("wait", 1.0),
  *COUNT,
  # ---- 6 · what an animal is
  ("scene", "parts"),
  ("say", "a501", H, "So, what is an animal? Look at the frog. A head. A body. And limbs. Its legs are its limbs.", {"pre": .5, "post": .4, "gap": .5}),
  ("scene", "mark1"),
  ("say", "a502", P, "Say it with me!", {"pre": .8}), ("wait", .8),
- ("say", "a503", H, "Animals are living things that usually have parts such as a head, a body and limbs.", {"pre": 0}),
- ("wait", 2.0),
+ ("say", "a503", P, "Animals are living things that usually have parts such as a head, a body and limbs.", {"pre": 0, "bs": .88}),
+ ("wait", 2.5),
  # ---- 7 · where animals live; outer coverings; observable characteristics
  ("scene", "homes"),
  ("say", "a601", H, "Some animals live only on land, while some live only in water. There are also some animals that can live both on land and in water.", {"pre": .5, "post": .5}),
@@ -107,8 +117,8 @@ SEQ1 = [
  ("say", "a1001", H, "The answer is three. Both!", {"pre": 0, "post": .4}),
  ("scene", "mark2"),
  ("say", "a1002", M, "Say it with me!", {"pre": .8}), ("wait", .8),
- ("say", "a1003", H, "Amphibians are animals that can live both on land and in water. Amphibians usually have four legs.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_amphibians"), ("wait", 1.9),
+ ("say", "a1003", M, "Amphibians are animals that can live both on land and in water. Amphibians usually have four legs.", {"pre": 0, "bs": .88}),
+ ("wait", 2.5), ("mark", "kw_amphibians"), ("wait", 1.9),
  ("scene", "skin"),
  ("say", "a1004", H, "Amphibians can breathe through their skin as well as their lungs.", {"pre": .5}),
  ("say", "a1005", H, "They have protective moist skin to prevent them from drying out when they are on land.", {"pre": .5}),
@@ -131,7 +141,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "a1201", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .7}),
  ("scene", "liz"),
- ("say", "a1202", H, "Did you spot the lizard? It was on the boardwalk rail. Does it live on land, in water, or both? Tell someone at home.", {"pre": .7, "post": .7}),
+ ("say", "a1202", H, "Did you spot the hidden animal? It was the duck, behind the boardwalk rail! Tell someone at home.", {"pre": .7, "post": .7}),
  *kwrecap(["Outer covering", "Observable characteristics", "Amphibians", "Moist skin"]),
  # ---- 13 · the cliffhanger: a fish that hops on the mud
  ("scene", "cliff"), ("wait", .4),
@@ -142,15 +152,19 @@ SEQ1 = [
 ]
 
 SEQ2 = [
- # ---- 1 · silent recap montage
- ("scene", "recap"), ("wait", 4.0),
- # ---- 2 · "Last time..."
- ("scene", "lasttime"),
- ("say", "b201", H, "Last time, we met a frog. It is an amphibian, with moist skin. Its outer covering is an observable characteristic. Two more animals to spot!", {"pre": .5, "post": .5}),
- # ---- 3 · today's goals (no voice) and the game
- ("scene", "goals"), ("wait", 3.9),
+ # ---- 1-2 · the calm recap: two Part 1 pictures, one at a time, each held, each with a label, under Heart's "Last time..." (the words are unchanged);
+ #            then the new question ("Two more animals to spot!")
+ ("scene", "recap"), ("wait", 1.0),
+ ("say", "b201", H, "Last time, we met a frog. It is an amphibian, with moist skin. Its outer covering is an observable characteristic. Two more animals to spot!", {"pre": 0, "post": 1.5}),
+ # ---- 3 · today's goals, read aloud by Momo (word for word as printed; about 0.4 s between cards), and the game
+ ("scene", "goals"), ("wait", .5),
+ ("say", "g200", M, "Today you'll learn…", {"pre": .2, "bs": .88}),
+ ("say", "g201", M, "How to spot a bird.", {"pre": .5, "bs": .88}),
+ ("say", "g202", M, "What makes a fish a fish.", {"pre": .4, "bs": .88}),
+ ("say", "g203", M, "The fish that hops on land.", {"pre": .4, "bs": .88}),
+ ("wait", 1.0),
  ("scene", "game"),
- ("say", "b301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .5}),
+ ("say", "b301", H, "Lock in first. A little animal is hiding in this video. Can you spot it?", {"pre": .5, "post": .5}),
  # ---- 4 · the kingfisher; Round 1: is a penguin a bird?
  ("scene", "bird"),
  ("say", "b401", H, "Look up! A kingfisher. It has a beak. It has wings. And its outer covering?", {"pre": .5, "post": .4, "gap": .5}),
@@ -169,8 +183,8 @@ SEQ2 = [
  ("say", "b411", H, "Birds lay eggs.", {"pre": .6, "post": .5}),
  ("scene", "mark1"),
  ("say", "b412", B, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "b413", H, "Birds have an outer covering of feathers.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_feathers"), ("wait", 1.9),
+ ("say", "b413", B, "Birds have an outer covering of feathers.", {"pre": 0, "bs": .88}),
+ ("wait", 2.5), ("mark", "kw_feathers"), ("wait", 1.9),
  ("scene", "birdans"),
  ("say", "b414", H, "The answer is one. A penguin has feathers. So it is a bird.", {"pre": .4}),
  ("say", "b415", P, "So flying is not the clue. Feathers are!", {"pre": .4}),
@@ -183,8 +197,8 @@ SEQ2 = [
  ("wait", .3), ("mark", "kw_fins"), ("wait", 1.9),
  ("scene", "mark2"),
  ("say", "b503", M, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "b504", H, "Fish have an outer covering of scales.", {"pre": 0}),
- ("wait", 2.0), ("mark", "kw_scales"), ("wait", 1.9),
+ ("say", "b504", M, "Fish have an outer covering of scales.", {"pre": 0, "bs": .88}),
+ ("wait", 2.5), ("mark", "kw_scales"), ("wait", 1.9),
  ("scene", "gills"),
  ("say", "b505", H, "Fish usually breathe through their gills.", {"pre": .5}),
  ("wait", .3), ("mark", "kw_gills"), ("wait", 1.9),
@@ -240,7 +254,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "b1201", H, "Show me your score hand! More than two? You beat the Buddies. Four fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "b1202", H, "Did you spot the lizard? It was on a mangrove root. Is a lizard's skin moist, or dry? Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "b1202", H, "Did you spot the hidden animal? It was the frog, on a mangrove root! Tell someone at home.", {"pre": .5, "post": .5}),
  # ---- 13 · the dare for Episode 6
  ("scene", "dare"), ("wait", 1.1),
  ("say", "b1301", H, "Three more animal groups to go: insects, reptiles and mammals. Here is an ant. And a spider. Only one is an insect! Can you tell which, by counting its legs? Lock in your answer for next time.", {"pre": 0, "post": .6}),
