@@ -19,9 +19,9 @@ FIX = {
     "Pulau Semakau": {"ph": "pˈuːlaʊ, sɜːmˈɑːkaʊ"},
     "Semakau": {"ph": "sɜːmˈɑːkaʊ"},
     # teacher, 2026-11-21 (P3 EP5 Part 1 at 1:34, "Some animals live only on land"): "you read 'live' wrongly. It should be read
-    # as 'leaf'" -> the verb, said "liv" (rhymes with "give"), never "laiv". Whole word only ("living", "alive", "olive" untouched).
-    "live": {"ph": "lˈɪv"},
-    "lives": {"ph": "lˈɪvz"},
+    # as 'leaf'" -> the verb, said "leev" (long ee, as in 'leaf' with a v), never "laiv". Whole word only ("living", "alive", "olive" untouched).
+    "live": {"ph": "lˈiːv"},  # "leev": the teacher's "leaf" (clip M)
+    "lives": {"ph": "lˈiːvz"},
 }
 _tok = None
 def _tokz():
