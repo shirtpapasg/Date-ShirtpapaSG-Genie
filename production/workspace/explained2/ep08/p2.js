@@ -12,26 +12,27 @@ const p2Items = (t, o = {}) => { const g = o.glow || {}; return glowDisc(QX.penc
   + (o.pencil === false ? "" : TF(QX.pencil, TY + 22, .8, woodPencil())) + (o.shoe === false ? "" : TF(o.shoeX || QX.shoe, TY + 8, .62 * (1 + .2 * (o.shoeK || 0)), shoe(o.shoeO || {}))) + (o.tee === false ? "" : TF(QX.tee, TY + 4, .72 * (1 + .2 * (o.teeK || 0)), tshirt())); };
 const view2 = (t, o = {}, cam = CAMW) => canteenView(t, { noitems: true, liz2: o.liz2, items: (o.back || "") + p2Items(t, o) + (o.front || "") }, cam);
 
-/* ============ 1 · the silent recap montage: three shots of Part 1, one second each ============ */
+/* ============ 1-2 · the calm recap under Heart's "Last time..." (teacher, 2026-11-21, SERIES_FORMAT section 2): no fast montage.
+   Three pictures from Part 1, one at a time, centred and large, each held at least 2.5 s with a gentle push-in and one short label:
+   the spoon (objects are made of materials); where glass and ceramic come from (one picture, two rows); the board, three tiles to go. ============ */
 const TCAM = [1.75, 620, 800];
 // the thumbnail's frame: the white school shoe on the table, the rubber-tree picture board behind it (the cut and the cup), Momo surprised
 const THUMB2 = (t) => canteenView(t, { noitems: true, items: picBoard("rubberTree", 574, BACKY + 26, 1, { sc: .94, id: "th" }) + TF(814, TY + 34, .75, shoe()) }, TCAM) + buddy("momo", 190, 800, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
-if (SCN.recap) SC.recap = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); const i = Math.min(2, Math.floor((t - s.t0) / 1.0)), u = t - s.t0 - i; let v;
-  if (i === 0) { const cam = [2.0, 1150, 866]; v = canteenView(t, { sand: 1 }, cam) + pline(1060, 500, gx(cam, CX.spoon - 60), gy(cam, TY + 24)) + pline(1500, 640, gx(cam, CX.spoon + 80), gy(cam, TY + 22)) + TF(1060, 490, spring(t, s.t0 + .1, .4), kindTag("OBJECT", "spoon", OBJC)) + TF(1500, 630, spring(t, s.t0 + .25, .4), kindTag("MATERIAL", "metal", MATC)); }
-  else if (i === 1) { const cam = [2.1, 860, 820]; v = canteenView(t, { sand: 1, spoon: false, glow: { jar: .5 } }, cam) + pline(gx(cam, CX.sand + 34), gy(cam, TY + 8), gx(cam, CX.jar - 78), gy(cam, TY - 30)); }
-  else v = bg("under") + TF(700, 620, 1.9, dropsDisc(t, 150, "rc")) + TF(1320, 500, spring(t, s.t0 + 2.2, .4), `<g filter="url(#drop)"><circle r="110" fill="url(#gSun)"/></g>${T(0, 54, "?", 160, P.ink)}`);
-  return v + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.5 * (1 - clamp(u / .18)))}"/>` + tpill(960, 60, "Part 1", 34, P.ink, P.sun, { w: 700, ls: 3 }); };
-
-/* ============ 2 · "Last time..." ============ */
-const BIGB = [960, 1040, 1.3];
-SC.lasttime = (t, s) => { const L = "j201", t0 = W(L, "objects") - .1, tS = W(L, "sand") - .1, tC = W(L, "clay") - .1, t3 = W(L, "three") - .15, q = t >= t3 ? .5 + .5 * Math.sin((t - t3) * 6) : 0;
-  const flash = {}; ["metal", "ceramic", "glass", "plastic"].forEach((k, i) => { flash[k] = pulse(t, t0 + i * .42, .05, .5); }); flash.glass = Math.max(flash.glass, pulse(t, W(L, "glass") - .1, .05, .6)); flash.ceramic = Math.max(flash.ceramic, pulse(t, W(L, "ceramic") - .1, .05, .6));
-  return view2(t) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>` + TF(BIGB[0], BIGB[1], BIGB[2] * spring(t, s.t0 + .05, .5), board7(t, { flash, src: { glass: pulse(t, tS, .05, 1.2), ceramic: pulse(t, tC, .05, 1.2) }, q: { wood: q, rubber: q, fabric: q } }))
-    + (t >= t3 ? TF(960, 150, spring(t, t3, .45), tpill(0, 0, "Three materials to go!", 64, P.sun, P.ink, { w: 700 })) : "") + HUD(t); };
+const recapCard = (inner, lab) => `<g filter="url(#drop)"><rect x="-690" y="-360" width="1380" height="720" rx="44" fill="#E3C9A8"/><rect x="-674" y="-344" width="1348" height="688" rx="32" fill="url(#gPaper)"/></g>${tpill(-540, -360, "Part 1", 34, P.ink, P.sun, { w: 700, ls: 3 })}${inner}${lab ? tpill(0, 262, lab, 56, P.ink, "#fff", { w: 700 }) : ""}`;
+const srcRow = (y, src, obj, lab, k = 1) => k < .02 ? "" : `<g transform="translate(0 ${y})" opacity="${n2(Math.min(1, k))}"><g transform="translate(-500 0)">${src}</g>${pline(-390, -70, -300, -70, 1, P.ink)}<g transform="translate(-190 0)">${obj}</g></g>` + TF(290, y - 80, Math.min(1.04, k), tpill(0, 0, lab, 46, "#fff", P.ink, { w: 700 }));
+SC.lasttime = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); const L = "j201", tB = W(L, "glass") - .2, tR2 = W(L, "ceramic") - .15, tC = W(L, "three") - .2, sl = (t0) => eio((t - t0) / .55);
+  const push = (t0) => 1 + .04 * clamp((t - t0) / 4), card = (x, t0, inner) => `<g transform="translate(${n2(960 + x)} 520) scale(${n2(push(t0))})">${inner}</g>`, q = .5 + .5 * Math.sin((t - tC) * 3.2);
+  const A = recapCard(TF(0, -10, 2.3, spoon()) + pline(-330, -190, -230, -30, 1, P.ink) + pline(330, -190, 250, -40, 1, P.ink) + TF(-330, -200, 1, kindTag("OBJECT", "spoon", OBJC)) + TF(330, -200, 1, kindTag("MATERIAL", "metal", MATC)), "Objects are made of materials");
+  const B = recapCard(srcRow(-40, TF(0, 0, 1.25, sandPile()), TF(0, 0, .82, glassJar()), "Glass is made from sand", spring(t, tB + .45, .45)) + srcRow(270, TF(0, 0, 1.25, clayLump()), TF(0, 0, .82, bowl()), "Ceramic is made from clay", spring(t, tR2, .45)));
+  let out = bg("daystage");
+  if (t < tB + .6) out += card(-2000 * sl(tB), s.t0, A);
+  if (t >= tB && t < tC + .6) out += card(2000 * (1 - sl(tB)) - 2000 * sl(tC), tB, B);
+  if (t >= tC) out += `<g transform="translate(${n2(960 + 2000 * (1 - sl(tC)))} 0)">` + TF(0, 990, 1.22 * push(tC), board7(t, { q: { wood: q, rubber: q, fabric: q } })) + TF(0, 190, 1, tpill(0, 0, "Three materials to go!", 64, P.sun, P.ink, { w: 700 })) + `</g>`;
+  return out + HUD(t); };
 
 /* ============ 3 · today's goals, the game ============ */
 const tile3 = [["wood", -52], ["rubber", 0], ["fabric", 52]].map(([k, x]) => `<rect x="${x - 22}" y="-22" width="44" height="44" rx="10" fill="${MATK[k].col}" stroke="#fff" stroke-width="4"/>`).join("");
-SC.goals = (t, s) => goals3(t, s, [["Wood, rubber and fabric", TF(0, 0, 1.1, tile3)], ["Where each one comes from", TF(0, 38, 1.5, miniTree())], ["Count the parts", TF(0, 36, .3, shoe())]]);
+SC.goals = (t, s) => goals3(t, s, [["Wood, rubber and fabric", TF(0, 0, 1.1, tile3)], ["Where each one comes from", TF(0, 38, 1.5, miniTree())], ["Count the parts", TF(0, 36, .3, shoe())]], ["j311", "j312", "j313", "j314"], "basil");
 SC.game = (t, s) => gameScene(t, s, "j301", false);
 
 /* ============ 4 · wood: the bench and the pencil; wood comes from trees ============ */

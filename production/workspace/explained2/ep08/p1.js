@@ -37,7 +37,7 @@ SC.hook = (t, s) => { const L = "g203", tw_ = [W(L, "plastic") - .2, W(L, "metal
 /* ============ 3 · the game; 4 · today's goals (the countdown is in common.js) ============ */
 SC.game = (t, s) => gameScene(t, s, "g301", true);
 const tile4 = [["metal", -78], ["ceramic", -26], ["glass", 26], ["plastic", 78]].map(([k, x]) => `<rect x="${x - 22}" y="-22" width="44" height="44" rx="10" fill="${MATK[k].col}" stroke="#fff" stroke-width="4"/>`).join("");
-SC.goals = (t, s) => goals3(t, s, [["Objects and materials", TF(-14, 0, .5, spoon())], ["Four of the 7 materials", TF(0, 0, 1.1, tile4)], ["Where each one comes from", TF(0, 32, .62, sandPile())]]);
+SC.goals = (t, s) => goals3(t, s, [["Objects and materials", TF(-14, 0, .5, spoon())], ["Four of the 7 materials", TF(0, 0, 1.1, tile4)], ["Where each one comes from", TF(0, 32, .62, sandPile())]], ["g401", "g402", "g403", "g404"], "pip");
 
 /* ============ 5 · object and material: the spoon ============ */
 const CAMS = [2.0, 1150, 866], SPX = gx(CAMS, CX.spoon), SPY = gy(CAMS, TY + 30), BOWLX = gx(CAMS, CX.spoon + 112 * .7);

@@ -1,9 +1,9 @@
 // p2cues.js: Part 2's sound events (called from sound_cues.js with its helpers). Every event hangs on the same cue as the picture.
 window.CUES2 = (E, R, h) => { const S = SCN, { lock, chant, sayit, G, C, mark, splash } = h;
   // 1-3 the recap, "Last time", goals, the game
-  for (let i = 0; i < 4; i++) E(S.recap.t0 + i * 1.0 + .02, "clack"); E(S.recap.t0 + 2.1, "warm"); E(S.recap.t0 + 3.1, "flap"); E(S.recap.t0 + 3.3, "curious"); C(S.recap.t0 + .2, S.lasttime.t0 + .4); R.night.push([S.lasttime.t0, S.goals.t0]);
+  E(S.recap.t0 + .1, "softpop", 0); E(W("f201", "reptiles") - .3, "softpop", 1); E(LT("f202") - .25, "softpop", 2); E(LE("f202") + .1, "curious");   // the calm recap: one soft pop per picture (no clacks) C(S.recap.t0 + .2, S.lasttime.t0 + .4); R.night.push([S.lasttime.t0, S.goals.t0]);
   E(LT("f201"), "pluck", 0); E(W("f201", "six") - .2, "softpop", 0); E(W("f201", "reptiles") - .1, "softpop", 2); E(W("f201", "basil") - .1, "chime"); E(LE("f202") - .3, "rise", 5);
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("f301", "lizard") - .1, "chek"); E(W("f301", "lizard") + .8, "chek");
+  ["f3g1", "f3g2", "f3g3"].forEach((id, i) => E(LT(id) - .1, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("f301", "lizard") - .1, "chek"); E(W("f301", "lizard") + .8, "chek");
   // 4 Palm Valley at dusk: crickets, soft wingbeats; Round 1
   R.night.push([S.palms.t0, S.r1card.t0 + .2]); E(S.palms.t0 + .9, "flap", 0); E(S.palms.t0 + 1.3, "flap", 1); E(S.r1card.t0, "roundcard");
   lock(MK("ring0_1"), 5, "f402", ["f403", "f404", "f405"], [W("f401", "one", 1), W("f401", "two")]);

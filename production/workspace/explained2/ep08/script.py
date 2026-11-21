@@ -31,7 +31,7 @@ CUTS: SERIES_FORMAT section 3 / script section 6. Put a tag in CUTS to drop that
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
 # ---- cuts (script section 6, in its order). Part 1: goals, biscuits, boxlines, glassuses. Part 2: recap, together, rubberuses, planks.
-CUTS = set()
+CUTS = {"recap"}   # teacher, 2026-11-21 (SERIES_FORMAT section 2): no fast recap montage; the calm recap pictures are under j201 ("Last time...")
 cut = lambda tag, items: [] if tag in CUTS else items
 
 # the chant (Part 2): the seven names in the book's order, one name per beat (clap, clap, stomp); YOUR TURN! after each line; then all together
@@ -79,7 +79,9 @@ SEQ1 = [
  ("scene", "game"),
  ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. And find the lizard!", {"pre": .4, "post": .4}),
  # ---- 4 · today's goals (no voice) and the countdown
- ("scene", "goals"), ("wait", 3.0 if "goals" in CUTS else 4.0),
+ # teacher, 2026-11-21 (SERIES_FORMAT section 11, step 3): a buddy READS the three goal cards aloud, word for word as printed (Part 1: Pip)
+ ("scene", "goals"), ("say", "g401", P, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "g402", P, "Objects and materials.", {"pre": .3, "post": .3}),
+ ("say", "g403", P, "Four of the seven materials.", {"pre": .3, "post": .3}), ("say", "g404", P, "Where each one comes from.", {"pre": .3, "post": .9}),
  *COUNT,
  # ---- 5 · object and material: the spoon
  ("scene", "spoon"),
@@ -186,9 +188,11 @@ SEQ2 = [
  *cut("recap", [("scene", "recap"), ("wait", 3.0)]),
  # ---- 2 · "Last time..."
  ("scene", "lasttime"),
- ("say", "j201", H, "Last time: objects are made of materials. Glass is made from sand. Ceramic is made from clay. Three materials to go!", {"pre": .4, "post": .3}),
+ ("say", "j201", H, "Last time: objects are made of materials. Glass is made from sand. Ceramic is made from clay. Three materials to go!", {"pre": .4, "post": 1.6}),   # post 1.6: the board (the third recap picture) holds 2.5 s
  # ---- 3 · today's goals (no voice) and the game
- ("scene", "goals"), ("wait", 4.0),
+ # (Part 2: Basil reads the three goal cards)
+ ("scene", "goals"), ("say", "j311", B, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "j312", B, "Wood, rubber and fabric.", {"pre": .3, "post": .3}),
+ ("say", "j313", B, "Where each one comes from.", {"pre": .3, "post": .3}), ("say", "j314", B, "Count the parts.", {"pre": .3, "post": .9}),
  ("scene", "game"),
  ("say", "j301", H, "Lock in first. And find the new lizard!", {"pre": .4, "post": .4}),
  # ---- 4 · wood

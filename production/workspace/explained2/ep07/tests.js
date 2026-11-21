@@ -10,7 +10,7 @@ window.TESTS = {
   fungi: (t) => closeBg() + TF(330, 900, 1, bigMushroom()) + TF(850, 560, 1, mushroomUnder() + sporeDust(2.5, .6)) + TF(1300, 980, 1, picCardK(TF(0, 110, .7, punnet()), 300, 320, "a")) + TF(1640, 980, 1, picCardK(TF(0, 0, .5, tempehPic()), 300, 320, "b"))
     + TF(1300, 560, .6, sortTray(0, 620)) + TF(1640, 560, .6, sortTray(1)) + TF(1500, 250, 1, tummy()) + TF(1300, 120, 1, safeBadge("Never pick wild mushrooms!")),
   scopes: (t) => closeBg() + TF(250, 1000, 1, scopeOld()) + TF(560, 1000, 1, scopeMid()) + TF(980, 1000, 1, microscope()) + TF(1500, 330, 1, roundView(mouldMicro(t), 250, "a")) + TF(1560, 800, 1, roundView(bactField(t), 220, "b")) + TF(1180, 900, 1, yoghurtCup()) + TF(1300, 900, 1, yoghurtDrink()) + TF(300, 400, .8, bodyOutline(t)),
-  table: (t) => bg("stage2") + TF(960, 1070, 1, clueTable(t, { lit: { A0: 1, B1: .5 }, badge: [1, 0, 0], rub: 1, write: 1, pics: [TF(0, 14, .22, nestFern()), TF(0, 40, .6, mushroom()), TF(6, 40, .34, kingfisher({}))], pk: [1, 1, 1] })),
+  table: (t) => bg("stage2") + TF(960, 1070, 1, clueTable(t, { lit: { A0: 1, B1: .5 }, badge: [1, 0, 0], rub: 1, write: 1, pics: [TF(0, 10, .13, nestFern()), TF(0, 30, .44, mushroom()), TF(6, 30, .26, kingfisher({}))], pk: [1, 1, 1] })),
   map: (t) => bg("stage2") + TF(960, 1010, 1.08, mapBoard(t, {}, { flash: [0, 0, 1, 0] })),
   canteen: (t) => canteenFar(t) + TF(960, 520, 1, sandwich()) + [0, 1, 2].map((i) => TF(300 + i * 430, 1060, .7, dare8(i))).join("") + TF(1650, 1040, 1, sandPile()),
 };

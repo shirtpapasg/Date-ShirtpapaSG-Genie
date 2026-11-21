@@ -16,7 +16,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   { const c = "g203"; ["plastic", "metal", "glass"].forEach((w, i) => E(W(c, w) - .1, "pip", i)); E(tT - .05, "whoosh"); [.26, .61].forEach((d, i) => E(tT + d, "slam", i)); }
   // 3 the game; 4 goals, countdown
   E(S.game.t0 + .15, "sting"); { const b = "g301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "lizard") - .1, "chek"); E(W(b, "lizard") + .9, "chek"); }
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
+  [0, 1, 2].forEach((i) => E(LT(["g402", "g403", "g404"][i]) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 the spoon: a soft pop, the magnifier slides, a clink on "Metal!"; Mark Sentence 1
   K(S.spoon.t0, S.mark1.t0); E(LT("g501") - .1, "softpop", 1); E(W("g502", "what") - .2, "slide"); E(W("g502", "metal") - .05, "clink"); E(W("g502", "metal", 1) - .05, "tag", 1); mark("g503", "g504");
   // 6 HOLD ON! Basil's rule
@@ -48,8 +48,8 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   } else {
   // 1-3 the recap, "Last time", goals, the game
   if (S.recap) { for (let i = 0; i < 3; i++) E(S.recap.t0 + i * 1.0 + .02, "clack"); E(S.recap.t0 + 1.4, "tag", 1); E(S.recap.t0 + 2.4, "drip", 2); C(S.recap.t0 + .2, S.lasttime.t0 + .4); }
-  { const L = "j201"; K(S.lasttime.t0, S.goals.t0); [0, 1, 2, 3].forEach((i) => E(LT(L) + .2 + i * .35, "softpop", i)); E(W(L, "sand") - .1, "chime2", 0); E(W(L, "clay") - .1, "chime2", 1); [0, 1, 2].forEach((i) => E(W(L, "three") - .1 + i * .2, "pip", i)); }
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("j301", "lizard") - .1, "chek"); E(W("j301", "lizard") + .8, "chek");
+  { const L = "j201"; K(S.lasttime.t0, S.goals.t0); E(W(L, "objects") - .2, "softpop", 0); E(W(L, "sand") - .1, "chime2", 0); E(W(L, "clay") - .1, "chime2", 1); [0, 1, 2].forEach((i) => E(W(L, "three") - .1 + i * .2, "pip", i)); }
+  [0, 1, 2].forEach((i) => E(LT(["j312", "j313", "j314"][i]) - .1, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("j301", "lizard") - .1, "chek"); E(W("j301", "lizard") + .8, "chek");
   // 4 wood: a knock on wood, the pencil, the trees, a saw stroke, a page flip
   K(S.wood.t0, S.r1card.t0); E(W("j401", "bench") - .1, "knock"); E(W("j401", "bench") + .15, "knock"); E(W("j401", "pencil") - .1, "softpop", 2); E(S.trees.t0 + .1, "slide");
   if (has("j403")) E(W("j403", "cut") - .1, "rub"); E(W("j404", "paper") - .1, "flip");

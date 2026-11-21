@@ -61,8 +61,13 @@ SEQ1 = [
  # ---- 3 · the game
  ("scene", "game"),
  ("say", "g301", H, "You lock in first. One finger for every point. And find the lizard!", {"pre": .4, "post": .4}),
- # ---- 4 · today's goals (no voice) and the countdown
- ("scene", "goals"), ("wait", 4.3),
+ # ---- 4 · today's goals, READ ALOUD by a buddy (rulebook section 11 step 3, teacher 21 Nov: "make one of the pet buddies read these 3"):
+ #      Momo says "Today you'll learn..." and then each card, word for word as printed, about .4 s between cards. Then the countdown.
+ ("scene", "goals"),
+ ("say", "g401", M, "Today you'll learn...", {"pre": .5}),
+ ("say", "g402", M, "How fungi get their food.", {"pre": .53}),
+ ("say", "g403", M, "How fungi spread.", {"pre": .53}),
+ ("say", "g404", M, "Useful or harmful fungi.", {"pre": .53, "post": .5}),
  *COUNT,
  # ---- 5 · Day 1: seal the bag
  ("scene", "day1"), ("wait", .4),
@@ -169,16 +174,20 @@ SEQ1 = [
 ]
 
 SEQ2 = [
- # ---- 1 · silent recap montage (four shots of Part 1, one second each)
- ("scene", "recap"), ("wait", 4.0),
- # ---- 2 · "Last time..."
- ("scene", "lasttime"),
+ # ---- 1-2 · the calm recap (rulebook section 2, teacher 21 Nov: no fast montage). The old silent 4 s montage is gone: three pictures of
+ #      Part 1, one at a time, centred and large, each held 2.5 s or more with its own label, UNDER Heart's "Last time..." line
+ #      (the Day 10 bag "Bread mould: a harmful fungus" · the risen dough "Yeast: a useful fungus" · the clean hands "We washed our hands. Why?").
+ ("scene", "lasttime"), ("wait", .6),
  ("say", "j201", H, "Last time, bread mould grew in our bag: a harmful fungus. Yeast made dough rise: a useful fungus. Then we washed our hands. Why?", {"pre": .5}),
  ("scene", "pipclean"),
  ("say", "j202", P, "They look clean. I see nothing on them!", {"pre": .5}),
  ("say", "j203", H, "Look closer, Pip. We need a microscope!", {"pre": .4, "post": .4}),
- # ---- 3 · today's goals (no voice) and the game
- ("scene", "goals"), ("wait", 4.3),
+ # ---- 3 · today's goals, READ ALOUD by a buddy (rulebook section 11 step 3, teacher 21 Nov): Basil reads the three cards; then the game
+ ("scene", "goals"),
+ ("say", "j251", B, "Today you'll learn...", {"pre": .5}),
+ ("say", "j252", B, "How we see bacteria.", {"pre": .53}),
+ ("say", "j253", B, "Harmful or useful bacteria.", {"pre": .53}),
+ ("say", "j254", B, "The whole chapter on one map.", {"pre": .53, "post": .5}),
  ("scene", "game"),
  ("say", "j301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .4}),
  # ---- 4 · the microscope, and bacteria

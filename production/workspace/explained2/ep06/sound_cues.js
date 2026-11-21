@@ -16,7 +16,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 4 Round 1
   E(S.r1card.t0, "roundcard"); lock(MK("ring0_1"), 5, "e402", ["e403", "e404", "e405"], [W("e401", "one", 2), W("e401", "two")]); E(LE("e405") + .1, "softpop", 3);
   // 5 goals, countdown
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
+  ["e5g1", "e5g2", "e5g3"].forEach((id, i) => E(LT(id) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 6 count the legs
   E(S.ant.t0 + .1, "whoosh"); E(MK("antIn") - .1, "whooshout"); ["one", "two", "three", "four", "five", "six"].forEach((w, i) => E(W("e601", w) - .04, "xylo", i)); E(W("e601", "six", 1), "tag", 1);
   E(W("e602", "feelers") - .1, "chime2", 0); E(W("e602", "feelers") + .15, "chime2", 1); [0, 1, 2].forEach((i) => E(W("e602", "three") - .05 + i * .5, "softpop", i * 2));

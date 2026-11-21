@@ -58,8 +58,12 @@ SEQ1 = [
  ("say", "e403", P, "Two. It is tiny, and it crawls. Like a bug!", {"pre": .5}),
  ("say", "e404", B, "One! The ant!", {"pre": .4}),
  ("say", "e405", M, "One! But how do we know?", {"pre": .4, "post": .5}),
- # ---- 5 · today's goals (no voice) and the countdown
- ("scene", "goals"), ("wait", 4.3),
+ # ---- 5 · today's goals, read aloud by Basil, word for word as printed (rulebook section 11, step 3; teacher, 21 Nov), and the countdown
+ ("scene", "goals"), ("wait", .5),
+ ("say", "e5g0", B, "Today you'll learn...", {"pre": .2}),
+ ("say", "e5g1", B, "How to spot an insect.", {"pre": .55}),
+ ("say", "e5g2", B, "How to spot a reptile.", {"pre": .55}),
+ ("say", "e5g3", B, "What cold-blooded means.", {"pre": .55, "post": .9}),
  *COUNT,
  # ---- 6 · count the legs: the ant, the spider
  ("scene", "ant"), ("mark", "antIn"), ("wait", 1.0),
@@ -147,13 +151,17 @@ SEQ1 = [
 
 SEQ2 = [
  # ---- 1 · silent recap montage
- ("scene", "recap"), ("wait", 4.0),
+ ("scene", "recap"), ("wait", 1.2),   # the calm recap: picture 1 arrives, then Heart's "Last time" plays over the pictures (rulebook section 2; teacher, 21 Nov)
  # ---- 2 · "Last time..."
  ("scene", "lasttime"),
  ("say", "f201", H, "Last time, we counted legs. Insects have six. And we met the reptiles, with dry, scaly skin. Like Basil!", {"pre": .5}),
  ("say", "f202", B, "Cold-blooded, and proud!", {"pre": .4, "post": .4}),
- # ---- 3 · today's goals (no voice) and the game
- ("scene", "goals"), ("wait", 3.9),
+ # ---- 3 · today's goals, read aloud by Pip, word for word as printed (rulebook section 11, step 3; teacher, 21 Nov), and the game
+ ("scene", "goals"), ("wait", .5),
+ ("say", "f3g0", P, "Today you'll learn...", {"pre": .2}),
+ ("say", "f3g1", P, "How to spot a mammal.", {"pre": .55}),
+ ("say", "f3g2", P, "Which one does not belong.", {"pre": .55}),
+ ("say", "f3g3", P, "Same and different, with a reason.", {"pre": .55, "post": .9}),
  ("scene", "game"),
  ("say", "f301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .4}),
  # ---- 4 · Palm Valley at dusk; Round 1: is a bat a bird?

@@ -29,12 +29,17 @@ SC.count = (t, s) => { const L = "h501", ws = [["Are you ready?", LT(L), 150, "#
     + `<g transform="translate(960 ${cur ? 470 : 430}) scale(${n2(k)})"><g transform="translate(0 ${size * .05})" opacity=".8">${T(0, size * .35, txt, size, P.ink, { ls: cur ? 0 : 4 })}</g>${T(0, size * .35 - 6, txt, size, col, { ls: cur ? 0 : 4 })}</g>`
     + buddy("pip", 300, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("basil", 960, 1070, 230, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("momo", 1620, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + HUD(t); };
 
-/* ============ today's goals: three chips drop in and light up in turn (about 1.3 s each); nothing is spoken ============ */
-function goals3(t, s, goals) { const cues = [0, 1, 2].map((i) => s.t0 + .4 + i * 1.22), cols = ["gBlue", "gPurple", "gOrange"];
-  let out = bg("stage2") + OP(ramp(t, s.t0 + .1, .3), T(960, 210, "Today you’ll learn", 76, "#fff", { w: 600 }));
-  goals.forEach(([g, ic], i) => { const k = spring(t, cues[i] - .12, .5); if (k < .02) return; const x = 380 + i * 580, y = 560 + (1 - eo((t - cues[i] + .12) / .3)) * -220, lit = pulse(t, cues[i], .05, 1.3), ls = wrap(g, 46, 450, 700);
-    out += TF(x, y, k * (1 + .05 * lit), `<g transform="rotate(${[-2, 1.5, -1.5][i]})"><g filter="url(#${lit > .25 ? "glowS" : "drop"})"><rect x="-255" y="-190" width="510" height="400" rx="46" fill="url(#gPaper)"/><rect x="-255" y="-190" width="510" height="150" rx="46" fill="url(#${cols[i]})"/><rect x="-255" y="-90" width="510" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -112)">${ic}</g>${ls.map((l, j) => T(0, 66 + j * 56 - (ls.length - 1) * 22, l, 46, P.ink)).join("")}</g>`); });
-  return out + buddy("pip", 180, 1060, 250, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [cues[2] + 1.0, "cheer"]] }) + HUD(t); }
+/* ============ today's goals: a buddy READS the three cards aloud, word for word (teacher, 2026-11-21, SERIES_FORMAT section 11 step 3).
+   The three cards drop in at the start; the title lights as "Today you'll learn" is said; each card lifts and glows while it is read.
+   ids = [title line, card 1, card 2, card 3]; who = the reader (lip-sync on the sit sprites, a small hop to each card) ============ */
+function goals3(t, s, goals, ids, who = "pip") { const cols = ["gBlue", "gPurple", "gOrange"], cues = [0, 1, 2].map((i) => ids ? LT(ids[i + 1]) : s.t0 + .4 + i * 1.22), ends = [0, 1, 2].map((i) => ids ? LE(ids[i + 1]) : cues[i] + 1.1);
+  const tT = ids ? LT(ids[0]) : s.t0, tl = ids ? pulse(t, tT, .05, 1.0) : 0;
+  let out = bg("stage2") + OP(ramp(t, s.t0 + .1, .3), TF(960, 190, 1 + .06 * tl, T(0, 20, "Today you’ll learn", 76, tl > .3 ? P.sun : "#fff", { w: 600 })));
+  goals.forEach(([g, ic], i) => { const tin = ids ? s.t0 + .25 + i * .14 : cues[i] - .12, k = spring(t, tin, .5); if (k < .02) return; const lit = ids ? ss(cues[i] - .12, cues[i] + .08, t) * (1 - ss(ends[i] + .1, ends[i] + .35, t)) : pulse(t, cues[i], .05, 1.3);
+    const x = 380 + i * 580, y = 570 + (1 - eo((t - tin) / .3)) * -220 - 30 * lit, ls = wrap(g, 46, 450, 700), read = ids ? (t >= ends[i] + .1 ? 1 : 0) : 0;
+    out += TF(x, y, k * (1 + .07 * lit), `<g transform="rotate(${[-2, 1.5, -1.5][i]})">${lit > .05 ? `<rect x="-270" y="-205" width="540" height="430" rx="58" fill="${P.sun}" opacity="${n2(.9 * lit)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="-255" y="-190" width="510" height="400" rx="46" fill="url(#gPaper)"/><rect x="-255" y="-190" width="510" height="150" rx="46" fill="url(#${cols[i]})"/><rect x="-255" y="-90" width="510" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -112)">${ic}</g>${ls.map((l, j) => T(0, 66 + j * 56 - (ls.length - 1) * 22, l, 46, P.ink)).join("")}${read ? TF(214, -150, spring(t, ends[i] + .1, .35), tickBadge(26)) : ""}</g>`); });
+  const hops = ids ? cues.map((c) => [c - .2, 22]) : [];
+  return out + buddy(who, 180, 1060, 250, t, { aura: true, in: s.t0 + .2, poses: ids ? [[s.t0, "sit"], [ends[2] + .2, "cheer"]] : [[s.t0, who === "basil" ? "cheer" : "pointing"], [cues[2] + 1.0, "cheer"]], jump: hops, nohop: true }) + HUD(t); }
 
 /* ============ the lock-in (fingers 1, 2, 3): the same routine every time ============
    c: { cards: [text, ...] (2 or 3 cream answer cards), q, tq, tc: [t1, ...] (each card pops as Heart says it), ring0, dur, lock (Heart's "Locked in!" line), obj(t) -> svg at the ring centre (430, 470),
