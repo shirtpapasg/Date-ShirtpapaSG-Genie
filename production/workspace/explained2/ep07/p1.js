@@ -25,11 +25,11 @@ SC.callback = (t, s) => { const a = "g201", b = "g202", tM = W(a, "mould") - .1,
   const g1 = pulse(t, tM, .06, 1.2), g2 = pulse(t, tY, .06, 1.2), sl = bagPt(TR, 0, 268), bg_ = bagPt(TR, 0, 0);
   const gS = pulse(t, W(b, "slice") - .1, .08, .9), gB = pulse(t, W(b, "bag") - .1, .08, .9), gD = pulse(t, W(b, "days") - .1, .08, 1.1);
   return kitchenView(t, { day: 1, dayGlow: gD, tray: { into: 0, seal: 0 }, boards: boards(g1, g2, at1, at2),
-      under: "", front: glowDisc(sl[0], sl[1], 90, gS) + glowDisc(bg_[0], bg_[1], 110, gB) })
+      under: "", front: glowDisc(sl[0], sl[1], 70, gS * .8) + glowDisc(bg_[0], bg_[1], 80, gB * .8) })
     + OP(big, tagAt(t, s.t0, [at1[0], at1[1]], "mould") + tagAt(t, s.t0, [at2[0], at2[1]], "yeast"))
-    + (t >= tM && t < tB + .3 ? OP(1 - ramp(t, tB, .25), TF(440, 940, .44 * spring(t, tM, .45), ansCard(1, "Mould", { pulse: g1 })) + (t >= tY ? TF(1470, 936, .44 * spring(t, tY, .45), ansCard(2, "Yeast", { pulse: g2 })) : "") + popTag(t, tF, 960, 610, "Both are fungi!", 54)) : "")
-    + (t < tB ? sPip(t) + sBasil(t, { poses: [[s.t0, "sit"]], out: tB - .1 }) : sPip(t, { out: tB })) + sMomo(t)
-    + buddy("basil", 250, 1060, 330, t, { aura: true, in: tB, poses: [[tB, "cheer"], [LT(b) - .12, "sit"], [LE(b) + .1, "cheer"]], nohop: true }) + say(b, 620, 560, t, { size: 46, tail: -240, maxW: 560 }) + HUD(t); };
+    + (t >= tM && t < tB + .3 ? OP(1 - ramp(t, tB, .25), TF(250, 930, .6 * spring(t, tM, .45), ansCard(1, "Mould", { pulse: g1, size: 54 })) + (t >= tY ? TF(1640, 926, .6 * spring(t, tY, .45), ansCard(2, "Yeast", { pulse: g2, size: 54 })) : "") + popTag(t, tF, 960, 610, "Both are fungi!", 54)) : "")
+    + sPip(t, { out: s.t0 + .1 }) + sBasil(t, { poses: [[s.t0, "sit"]], out: s.t0 + .15 }) + sMomo(t, { out: s.t0 + .2 }) + (t > tB + .2 ? sMomo(t, { in: tB + .2 }) : "")
+    + buddy("basil", 212, 1060, 300, t, { aura: true, in: tB, poses: [[tB, "cheer"], [LT(b) - .12, "sit"], [LE(b) + .1, "cheer"]], nohop: true }) + say(b, 560, 600, t, { size: 46, tail: -220, maxW: 560 }) + HUD(t); };
 SC.title = (t, s) => { const u = t - s.t0, k = slamK(u, .02);
   return kitchenView(t, { day: 1, tray: { into: 0, seal: 0 }, boards: boards() }, [1.12 - .04 * clamp(u / 2), 900, 640]) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.68 * clamp(u / .15))}"/>`
     + slamLine(390, "BREAD IN A BAG", 170, "#fff", k, 6) + slamLine(600, "10 DAYS. WHAT GREW?", 150, P.sun, k, 4)
@@ -55,15 +55,15 @@ SC.day1 = (t, s) => { const L = "g501", tS = W(L, "slice") - .15, tZ = W(L, "sea
 const CAMD = [1.45, 690, 700];
 const lizOn = (t) => { const a = (k) => ss(L0() + k * DS, L0() + k * DS + .15, t) * (1 - ss(L0() + (k + 1.7) * DS, L0() + (k + 1.7) * DS + .15, t)); return Math.max(a(2.0), a(6.0)); };
 SC.days = (t, s) => { const u = (t - L0()) / DS, d = Math.min(10, 2 + Math.floor(u + 1e-6)), dc = Math.min(10, 2 + u), night = d >= 10 ? 0 : .5 - .5 * Math.cos(2 * Math.PI * u), t4 = L0() + 2 * DS;
-  return kitchenView(t, { night, day: d, dayFlip: L0() + (d - 2) * DS, liz: lizOn(t), tray: { day: dc, drops: ss(8.6, 10, dc) } }, CAMD)
+  return kitchenView(t, { night, day: d, dayFlip: L0() + (d - 2) * DS, snail: lizOn(t), tray: { day: dc, drops: ss(8.6, 10, dc) } }, CAMD)
     + buddy("pip", 130, 1064, 190, t, { aura: true, tag: false, in: s.t0 + .1, poses: [[s.t0, "sit"], [t4 + .3, "surprised"]], look: 5 }) + buddy("basil", 1590, 1066, 180, t, { aura: true, tag: false, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [t4 + .45, "surprised"]], look: 5 })
-    + buddy("momo", 1800, 1064, 190, t, { aura: true, tag: false, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [t4 + .6, "surprised"]], look: 6 }) + speeded(t, s.t0 + .1, s.t1 - .3, 960, 1020) + HUD(t); };
-const HT = [900, 640, 1.0], RG = [300, 520];
-const holdView = (t, o = {}) => closeBg() + TF(1330, 520, 1, dayPill(t, 10)) + TF(HT[0], HT[1], HT[2], tray({ ...D10, glow: o.glow || 0 }));
+    + buddy("momo", 1800, 1064, 190, t, { aura: true, tag: false, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [t4 + .6, "surprised"]], look: 6 }) + speeded(t, s.t0 + .1, s.t1 - .3, 560, 62) + HUD(t); };
+const HT = [860, 660, 1.0], RG = [300, 520];
+const holdView = (t, o = {}) => closeBg() + TF(1318, 610, 1, dayPill(t, 10)) + TF(HT[0], HT[1], HT[2], tray({ ...D10, glow: o.glow || 0 }));
 SC.holdon = (t, s) => { const a = "g602", b = "g603", c = "g604", d = "g605", r0 = MK("ring0_1"), bell = MK("bell_1"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, tN = W(c, "never") - .1, tBg = W(c, "bag") - .1, ring = t >= tX && t < bell + .8;
   return holdView(t, { glow: pulse(t, tBg, .1, 1.6) })
     + buddy("momo", 1640, 1060, 360, t, { aura: true, flip: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT(a) - .12, "sit"], [LE(a) + .15, "pointing"], [tH, "surprised"], [tOne, "sit"], [LT(d) - .12, "oops"], [LE(d) + .3, "sit"]], look: t < tH ? 7 : 0, nohop: true })
-    + say(a, 1380, 330, t, { size: 44, tail: 200, x: true, maxW: 560 }) + say(d, 1500, 470, t, { size: 50, tail: 120 })
+    + say(a, 1420, 300, t, { size: 44, tail: 200, x: true, maxW: 560 }) + say(d, 1560, 440, t, { size: 50, tail: 60 })
     + (ring ? OP(1 - ss(bell + .5, bell + .8, t), TF(RG[0], RG[1], spring(t, tX, .4), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : rs.frac, t < r0 ? 5 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RG[0], RG[1] + 6, .5, crossedArms()) })}</g>`) + youPill(RG[0], RG[1] - 178, 1.0) + tpill(RG[0], RG[1] + 220, "cross your arms", 30, P.ink, "#fff")) : "")
     + standCard(t, tN, 300, 960, "Never touch or sniff mould.", "The bag stays shut.", { maxW: 400 })
     + stamp(t, tH, 900, 400, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 300, 330, "+1", "arms crossed") + HUD(t); };
@@ -158,7 +158,7 @@ SCORE.push([W("g1213", "one") - .1, 3, 2]);
 
 /* ============ 13 · score hand, the lizard ============ */
 SC.final = (t, s) => { const L = "g1301"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]]); };
-SC.liz = (t, s) => { const L = "g1302"; return lizReveal(t, s, L, kitchenView(t, { night: 1, day: 5, liz: 1, tray: { day: 5 } }), KT.fridgeLiz[0], KT.fridgeLiz[1], W(L, "is") - .1, "Is a lizard a fungus?", 150, 80); };
+SC.liz = (t, s) => { const L = "g1302"; return lizReveal(t, s, L, kitchenView(t, { night: 1, day: 5, snail: 1, tray: { day: 5 } }), KT.snail[0] - 14, KT.snail[1] - 30, W(L, "is") - .1, "Is a snail a fungus?", 60, 130); };
 
 /* ============ 14 · the cliffhanger: the bag is binned, still shut; hands are washed. But they look clean! ============ */
 const CAMC = [1.1, 1180, 640];

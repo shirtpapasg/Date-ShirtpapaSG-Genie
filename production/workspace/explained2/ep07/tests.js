@@ -1,7 +1,7 @@
 // tests.js: asset sheets for checking the drawings (page.html?test=name). Not used by the episode.
 window.TESTS = {
-  kitchen: (t) => kitchenView(t, { day: 1, tray: { into: 0, seal: 0 }, liz: 1, cliz: 1, boards: TF(KT.b1[0], KT.b1[1], KT.b1[2], dareBoard(0)) + TF(KT.b2[0], KT.b2[1], KT.b2[2], dareBoard(1)) }),
-  night: (t) => kitchenView(t, { night: 1, day: 7, tray: { day: 7 }, liz: 1 }),
+  kitchen: (t) => kitchenView(t, { day: 1, tray: { into: 0, seal: 0 }, snail: 1, boards: TF(KT.b1[0], KT.b1[1], KT.b1[2], dareBoard(0)) + TF(KT.b2[0], KT.b2[1], KT.b2[2], dareBoard(1)) }),
+  night: (t) => kitchenView(t, { night: 1, day: 7, tray: { day: 7 }, snail: 1 }) + TF(1500, 700, 2, cuteSnail(t)) + TF(1500, 950, 2, cuteAnt(t)),
   trays: (t) => closeBg() + [1, 4, 6, 8, 10].map((d, i) => TF(200 + i * 380, 330, .52, tray({ day: d, drops: d > 9 ? 1 : 0 }))).join("") + TF(330, 780, .8, tray({ into: 0, seal: 0 })) + TF(960, 780, .8, tray({ into: .5, seal: 0 })) + TF(1590, 780, .8, tray({ into: 1, seal: .5, glow: 1 })),
   big: (t) => closeBg() + TF(960, 600, 1.45, tray({ day: 10, drops: 1 })),
   props: (t) => closeBg() + TF(250, 900, 1, doughBowl(0)) + TF(600, 900, 1, doughBowl(1)) + TF(880, 900, 1, yeastPacket()) + TF(1100, 900, 1, dayPill(t, 10)) + TF(1350, 900, 1, pedalBin(0)) + TF(1600, 900, 1, pedalBin(1)) + TF(1800, 900, 1.5, soapPump()),

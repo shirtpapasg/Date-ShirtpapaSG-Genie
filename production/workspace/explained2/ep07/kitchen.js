@@ -16,7 +16,7 @@ const XDEFS9 = () => `${lg("kWall", [[0, "#FBF5E6"], [1, "#F1E6D0"]])}${lg("kFlo
   <clipPath id="kWin"><rect x="524" y="140" width="612" height="376" rx="6"/></clipPath>`;
 
 /* ---------- the set ---------- */
-const KT = { back: 646, front: 962, tray: [800, 806, .58], pill: [1078, 915], bowl: [1250, 884, .8], packet: [1396, 896, .62], b1: [490, 770, .5], b2: [1440, 752, .5], bin: [1700, 966], fridgeLiz: [236, 470], clock: [1250, 236], clockLiz: [1296, 176] };
+const KT = { back: 646, front: 962, tray: [800, 806, .58], pill: [1078, 915], bowl: [1250, 884, .8], packet: [1396, 896, .62], b1: [490, 770, .5], b2: [1440, 752, .5], bin: [1700, 966], snail: [650, 506], clock: [1250, 236] };
 const MAGNETS = [[112, 420, "#FF6F61", "heart"], [206, 402, "#FFC83A", "round"], [286, 452, "#3A8DFF", "fish"], [118, 540, "#43BF6C", "leaf"], [270, 560, "#9B6BFF", "round"], [180, 610, "#FF9838", "A"]];
 const magnet = ([x, y, c, k]) => `<g transform="translate(${x} ${y})"><ellipse cx="2" cy="4" rx="22" ry="20" fill="#2B2147" opacity=".18"/>` + (k === "heart" ? `<path d="M0 18 C-26 -2 -22 -22 -8 -22 C-2 -22 0 -16 0 -12 C0 -16 2 -22 8 -22 C22 -22 26 -2 0 18z" fill="${c}"/>`
   : k === "fish" ? `<ellipse rx="22" ry="13" fill="${c}"/><path d="M-18 0 L-34 -12 V12z" fill="${c}"/><circle cx="10" cy="-3" r="3" fill="#fff"/>` : k === "leaf" ? `<path d="M-20 12 Q-18 -18 18 -18 Q16 14 -20 12z" fill="${c}"/><path d="M-16 10 L12 -12" stroke="#fff" stroke-width="3" opacity=".6"/>`
@@ -125,17 +125,32 @@ const yeastPacket = (glow = 0) => `<g ${glow > .05 ? 'filter="url(#glowS)"' : ""
 // the day pill: a small flip card standing on the table (origin = its base)
 function dayPill(t, day, tflip = -9, glow = 0) { const f = clamp((t - tflip) / .2), sq = tflip > -5 && f < 1 ? 1 - .55 * Math.sin(Math.PI * f) : 1, bump = 1 + .1 * pulse(t, tflip + .1, .02, .25) + .1 * glow;
   return `<ellipse cx="0" cy="3" rx="86" ry="10" fill="${P.ink}" opacity=".25" filter="url(#b4)"/><path d="M-44 0 L-30 -22 H30 L44 0z" fill="url(#kTableF)"/><g transform="translate(0 -84) scale(${n2(bump)})" ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="-78" y="-72" width="156" height="140" rx="26" fill="${P.ink}"/><path d="M-78 -46 Q-78 -72 -52 -72 H52 Q78 -72 78 -46 V-28 H-78z" fill="url(#gSun)"/>${T(0, -36, "DAY", 32, P.ink, { ls: 8 })}<g transform="translate(0 20) scale(1 ${n2(sq)})">${T(0, 30, day, 86, "#fff")}</g></g>`; }
-// the little house lizard among the fridge magnets (teacher's note 11: a round head, small eyes, a soft rim light). a = 0..1 shown
-const fridgeLiz = (t, a = 1) => a < .02 ? "" : OP(a, TF(KT.fridgeLiz[0], KT.fridgeLiz[1], .62, `<g transform="rotate(38)">${houseLiz({ t })}</g>`));
-const clockLiz = (t, a = 1) => a < .02 ? "" : OP(a, TF(KT.clockLiz[0], KT.clockLiz[1], .5, `<g transform="rotate(118)">${houseLiz({ t })}</g>`));
+/* the hidden animals (rulebook section 4, teacher 21 Nov: not always the lizard; an animal that belongs to the place; cute AND alive):
+   Part 1: a little garden snail on the window glass on damp nights; Part 2: an ant walking along the sink's edge by the soap pump. */
+// a little snail, side view, facing left (origin = under its shell; about 150 long): a soft body, a round spiral shell, two eye stalks with big eyes, a small smile.
+// It is alive: it stretches and gathers as it creeps, its stalks sway, it blinks.
+function cuteSnail(t = 0) { const st = .5 + .5 * Math.sin(t * 2.2), sway = 5 * Math.sin(t * 1.7), bl = ((t + .7) % 3.3) < .13, hx = -70 - 14 * st;
+  const eye = (x, y) => `<circle cx="${n2(x)}" cy="${n2(y)}" r="11" fill="#fff" stroke="#B88A5A" stroke-width="2.5"/>` + (bl ? `<path d="M${n2(x - 7)} ${n2(y)} q7 5 14 0" fill="none" stroke="${P.ink}" stroke-width="3" stroke-linecap="round"/>` : `<circle cx="${n2(x - 2)}" cy="${n2(y + 1)}" r="6" fill="${P.ink}"/><circle cx="${n2(x - 4)}" cy="${n2(y - 2)}" r="2.2" fill="#fff"/>`);
+  return `<g filter="url(#rimS)"><path d="M${n2(hx - 6)} -8 Q${n2(hx - 22)} -34 ${n2(hx)} -44 Q${n2(hx + 30)} -40 -30 -34 L60 -30 Q${n2(86 + 8 * (1 - st))} -20 ${n2(92 + 10 * (1 - st))} 0 Q0 6 ${n2(hx - 6)} 0z" fill="#F6D7AE" stroke="#B88A5A" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M${n2(hx + 4)} -42 Q${n2(hx - 2 + sway)} -70 ${n2(hx - 8 + sway)} -86 M${n2(hx + 24)} -42 Q${n2(hx + 24 + sway)} -72 ${n2(hx + 22 + sway)} -90" fill="none" stroke="#B88A5A" stroke-width="9" stroke-linecap="round"/><path d="M${n2(hx + 4)} -42 Q${n2(hx - 2 + sway)} -70 ${n2(hx - 8 + sway)} -86 M${n2(hx + 24)} -42 Q${n2(hx + 24 + sway)} -72 ${n2(hx + 22 + sway)} -90" fill="none" stroke="#F6D7AE" stroke-width="5" stroke-linecap="round"/>
+    ${eye(hx - 8 + sway, -92)}${eye(hx + 22 + sway, -96)}<path d="M${n2(hx - 6)} -20 q8 7 17 1" fill="none" stroke="#8A5E34" stroke-width="3" stroke-linecap="round"/><circle cx="${n2(hx + 20)}" cy="-22" r="6" fill="#FF8FB1" opacity=".6"/>
+    <g transform="translate(22 -58) rotate(${n2(3 * Math.sin(t * 2.2))})"><circle r="52" fill="#E89A4E" stroke="#9A5A22" stroke-width="5"/><path d="M0 -36 a36 36 0 1 1 -36 36 a25 25 0 1 1 25 25 a14 14 0 1 1 14 -14" fill="none" stroke="#9A5A22" stroke-width="5" stroke-linecap="round"/><ellipse cx="-18" cy="-28" rx="13" ry="7" fill="#fff" opacity=".45" transform="rotate(-30 -18 -28)"/></g></g>`; }
+// a little ant, side view, walking to the left (origin = the ground under it; about 120 long): head, thorax, abdomen, six legs, two feelers; a big eye and a smile
+function cuteAnt(t = 0) { const w = t * 9, bob = 2 * Math.sin(w * 2), bl = ((t + 1.1) % 2.9) < .12; let legs = "";
+  [[-12, 0], [0, 2.1], [12, 4.2]].forEach(([x, ph]) => { for (const sd of [0, 1]) { const a = Math.sin(w + ph + sd * Math.PI) * 13; legs += `<path d="M${x} ${n2(-22 + bob)} L${n2(x + (sd ? 6 : -6) + a * .4)} -12 L${n2(x + a + (sd ? 8 : -10))} 0" fill="none" stroke="${sd ? "#5E2E18" : "#7A3E20"}" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>`; } });
+  return `<g filter="url(#rimS)">${legs}<g transform="translate(0 ${n2(bob)})"><ellipse cx="38" cy="-28" rx="26" ry="19" fill="#9A4A26" stroke="#5E2E18" stroke-width="3.5"/><ellipse cx="30" cy="-34" rx="10" ry="5" fill="#fff" opacity=".3"/><ellipse cx="0" cy="-26" rx="15" ry="12" fill="#B05A30" stroke="#5E2E18" stroke-width="3.5"/>
+    <g transform="rotate(${n2(4 * Math.sin(w * .5))} -30 -32)"><circle cx="-32" cy="-34" r="19" fill="#B05A30" stroke="#5E2E18" stroke-width="3.5"/><path d="M-40 -50 Q-52 -72 -64 -66 M-28 -52 Q-34 -76 -46 -78" fill="none" stroke="#5E2E18" stroke-width="3.5" stroke-linecap="round"/><circle cx="-64" cy="-66" r="3.5" fill="#5E2E18"/><circle cx="-46" cy="-78" r="3.5" fill="#5E2E18"/>
+      ${bl ? `<path d="M-45 -37 q6 4 12 0" fill="none" stroke="${P.ink}" stroke-width="3" stroke-linecap="round"/>` : `<circle cx="-39" cy="-37" r="8" fill="#fff"/><circle cx="-41" cy="-36" r="4.6" fill="${P.ink}"/><circle cx="-43" cy="-38.5" r="1.7" fill="#fff"/>`}<path d="M-46 -24 q6 5 13 1" fill="none" stroke="#5E2E18" stroke-width="2.6" stroke-linecap="round"/></g></g></g>`; }
+// the snail on the window glass (a = 0..1 shown); it creeps a little to the left
+const winSnail = (t, a = 1) => a < .02 ? "" : OP(a, TF(KT.snail[0] - 14 * Math.sin(t * .35), KT.snail[1], .62, cuteSnail(t)));
 
 /* ---------- the kitchen as a view ----------
    o: night 0..1; day, dayFlip, dayGlow (the pill; day 0 hides it); tray {...} or false; trayGlow; label; rise (the dough); bowl (false hides bowl + packet); packetGlow;
-      boards (svg standing at the back of the table); front (svg on the table, drawn last); liz, cliz (the two lizards 0..1); bin 0..1 (lid open) or false; under (svg on the floor, behind the table)
+      boards (svg standing at the back of the table); front (svg on the table, drawn last); snail (the hidden snail on the window 0..1); bin 0..1 (lid open) or false; under (svg on the floor, behind the table)
    cam: [zoom, cx, cy] */
 const kx = (cam, x) => 960 + (x - cam[1]) * cam[0], ky = (cam, y) => 540 + (y - cam[2]) * cam[0];
 function kitchenView(t, o = {}, cam = [1, 960, 540]) { const N = o.night || 0, TR = KT.tray;
-  let s = (N < .99 ? bg("kitchen") : "") + (N > .01 ? OP(N, bg("kitchen_night")) : "") + fridgeLiz(t, o.liz || 0) + clockLiz(t, o.cliz || 0);
+  let s = (N < .99 ? bg("kitchen") : "") + (N > .01 ? OP(N, bg("kitchen_night")) : "") + winSnail(t, o.snail || 0);
   if (o.bin !== false) s += TF(KT.bin[0], KT.bin[1], 1, pedalBin(o.bin || 0) + (o.binIn || ""));
   s += (o.under || "") + (o.boards || "");
   if (o.tray !== false) s += (o.trayGlow ? `<ellipse cx="${TR[0]}" cy="${TR[1]}" rx="260" ry="150" fill="${P.sun}" opacity="${n2(.6 * o.trayGlow)}" filter="url(#b30)"/>` : "") + TF(TR[0], TR[1], TR[2], tray(o.tray || {})) + (o.label === false ? "" : trayLabel(TR[0], KT.front + 26, .8));

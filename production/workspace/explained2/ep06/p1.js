@@ -40,7 +40,7 @@ const antSpiderRing = (tt) => ringClip(`<rect x="250" y="290" width="360" height
 SC.r1 = (t, s) => { const L = "e401";
   return lockN(t, { cards: ["The ant", "The spider"], q: "Which one is an insect?", tq: W(L, "which") - .1, tc: [W(L, "one", 2), W(L, "two")], ring0: MK("ring0_1"), dur: 5, lock: "e402", obj: antSpiderRing,
     picks: [{ who: "pip", id: "e403", word: "2", x: true }, { who: "basil", id: "e404", word: "1" }, { who: "momo", id: "e405", word: "1" }],
-    over: (tt) => popTag(tt, LE("e405") + .1, 960, 690, "Let’s check!", 52) }); };
+    over: (tt) => popTag(tt, LE("e405") + .1, 1560, 330, "Let’s check!", 56) }); };
 
 /* ============ 5 · today's goals ============ */
 SC.goals = (t, s) => goals3(t, s, [["How to spot an insect", TF(0, 34, .17, antBig({ walk: t * 6 }))], ["How to spot a reptile", TF(-24, 40, .17, monitor({ t, tongue: tongueAt(t, 0, 3) }))], ["What cold-blooded means", TF(0, 46, .34, thermo(.35 + .3 * Math.sin(t * 1.5), 300))]]);
@@ -114,8 +114,8 @@ SCORE.push([W("e803", "one") - .1, 2, 1]);
 /* ============ 9 · Round 2: the monitor lizard ============ */
 SC.r2 = (t, s) => { const L = "e901", tM = W(L, "monitor") - .1, tS = W(L, "skin") - .15;
   return lockN(t, { cards: ["Amphibians", "Reptiles", "Mammals"], q: "Which group?", tq: W(L, "which") - .1, tc: [W(L, "one"), W(L, "two", 1), W(L, "three")], ring0: MK("ring0_3"), dur: 5, lock: "e902",
-    obj: (tt) => ringClip(`<rect x="250" y="290" width="360" height="360" fill="#9FD6DE"/><path d="M250 520 Q430 500 610 520 V660 H250z" fill="#B59A70"/><path d="M250 560 Q430 548 610 560 V660 H250z" fill="#7CC85A"/>` + TF(380, 575, .4, monitor({ t: tt, tongue: tongueAt(tt, 0, 3.3) + (tt > tM && tt < tM + .5 ? Math.sin(Math.PI * (tt - tM) / .5) : 0) })))
-      + (tt >= tS ? TF(150, 300, spring(tt, tS, .45), skinDisc("scaly", 86, tt)) + TF(150, 172, spring(tt, tS + .2, .4), tpill(0, 0, "dry and scaly", 30, "#fff", P.ink, { w: 700 })) : ""),
+    obj: (tt) => ringClip(`<rect x="250" y="290" width="360" height="360" fill="#9FD6DE"/><path d="M250 520 Q430 500 610 520 V660 H250z" fill="#B59A70"/><path d="M250 560 Q430 548 610 560 V660 H250z" fill="#7CC85A"/>` + TF(380, 575, .4, monitor({ t: tt, tongue: tongueAt(tt, 0, 3.3) + (tt > tM && tt < tM + .5 ? Math.sin(Math.PI * (tt - tM) / .5) : 0) }))),
+    clue: (tt) => (tt >= tS ? TF(150, 300, spring(tt, tS, .45), skinDisc("scaly", 86, tt)) + TF(150, 172, spring(tt, tS + .2, .4), tpill(0, 0, "dry and scaly", 34, "#fff", P.ink, { w: 700 })) : ""),
     picks: [{ who: "pip", id: "e904", word: "2" }, { who: "basil", id: "e905", word: "2" }, { who: "momo", id: "e903", word: "1", x: true }], react: [[LT("e905") + .1, "basil", "cheer"]] }); };
 
 /* ============ 10 · the reveal: reptiles, and Basil is one ============ */
@@ -167,7 +167,7 @@ SC.basilsun = (t, s) => { const L = "e1203", tC = W(L, "always") - .1, tS = W(L,
 /* ============ 13 · score hand, the lizard ============ */
 SC.final = (t, s) => { const L = "e1301"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]], TF(1290, 1062, .36, sixBoard(t, ST()))); };
 SC.liz = (t, s) => { const L = "e1302"; return lizReveal(t, s, L, lakeView(t, { liz: 0 }, [1, 960, 540]), GD.lamp[0] - 2, GD.lamp[1] - LAMPH - 116, W(L, "is", 1) - .1, "Is it an insect?", 0, 180)
-  + buddy("basil", 1760, 1060, 200, t, { aura: true, flip: true, in: s.t0 + .4, poses: [[s.t0, "sit"], [W(L, "reptile") - .1, "cheer"]] }); };
+  + buddy("basil", 1760, 1060, 200, t, { aura: true, flip: true, in: s.t0 + .4, poses: [[s.t0, "sit"], [W(L, "insect") - .1, "cheer"]] }); };
 
 /* ============ 14 · the cliffhanger: wings, at night ============ */
 SC.cliff = (t, s) => { const L = "e1401", dk = ss(s.t0, s.t0 + 3.2, t), tW = W(L, "wings") - .2, tQ = W(L, "bird") - .2, tP = W(L, "find") - .1, e = eio((t - s.t0) / 3), cam = [lerp(1.02, 1.12, e), lerp(960, 1300, e), lerp(560, 420, e)];

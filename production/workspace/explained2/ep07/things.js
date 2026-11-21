@@ -59,7 +59,7 @@ function kidHand(side = -1, o = {}) { const F = [[-76, -86, 150, 46, -9], [-26, 
   if (o.shine) { fx += `<g opacity="${n2(o.shine)}"><path d="M-70 -200 q4 -40 14 -60 M30 -210 q4 -40 12 -60 M-60 20 Q-40 -20 0 -30" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".9"/>${[[-96, -150, 1], [96, -60, .8], [10, 100, .7], [-20, -250, .7]].map(([x, y, k]) => `<g transform="translate(${x} ${y}) scale(${k})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`).join("")}</g>`; }
   return `<g transform="scale(${side < 0 ? 1 : -1} 1)">${s}${fx}${top}</g>`; }
 /* the kitchen sink, close: a steel basin, the tap above, the soap pump, two hands under the tap.
-   o: water 0..1 (the tap runs), soap, shine, prints, glowTip, hands (false hides them), dy (the hands' lift) */
+   o: water 0..1 (the tap runs), soap, shine, prints, glowTip, hands (false hides them), dy (the hands' lift), ant = [x, k] (Part 2's hidden ant on the sink's edge) */
 const SINK = { lh: [806, 700], rh: [1114, 700], k: 1.0, tip: [806 - 76 + 20, 700 - 86 - 122] };
 function sinkView(t, o = {}) { const w = o.water || 0; let str = "", sp = "";
   if (w > .02) { for (let i = 0; i < 5; i++) str += `<path d="M${n2(944 + i * 8)} 250 Q${n2(946 + i * 8 + 5 * Math.sin(t * 9 + i))} 420 ${n2(942 + i * 9)} 600" stroke="#fff" stroke-width="3" opacity=".7" fill="none"/>`;
@@ -71,7 +71,7 @@ function sinkView(t, o = {}) { const w = o.water || 0; let str = "", sp = "";
     <circle cx="960" cy="930" r="70" fill="#6E7A88"/><circle cx="960" cy="930" r="56" fill="#3A404C"/><path d="M910 930 H1010 M960 880 V980" stroke="#8794A6" stroke-width="9" stroke-linecap="round"/>
     <g fill="none" stroke-linecap="round"><path d="M1180 356 V170 Q1180 60 1070 60 Q960 60 960 170 V230" stroke="#7E8A9A" stroke-width="72"/><path d="M1180 356 V170 Q1180 60 1070 60 Q960 60 960 170 V230" stroke="url(#kChrome)" stroke-width="60"/><path d="M1166 330 V176 Q1164 84 1076 78" stroke="#fff" stroke-width="9" opacity=".85"/></g>
     <rect x="1130" y="300" width="100" height="62" rx="16" fill="url(#kChrome)" stroke="#7E8A9A" stroke-width="5"/><rect x="1230" y="262" width="130" height="36" rx="18" fill="url(#kChrome)" stroke="#7E8A9A" stroke-width="5"/><rect x="922" y="222" width="76" height="30" rx="10" fill="url(#kChrome)" stroke="#7E8A9A" stroke-width="5"/>
-    <g transform="translate(1540 372)">${soapPump(2.1)}</g>
+    <g transform="translate(1540 372)">${soapPump(2.1)}</g>${o.ant ? TF(o.ant[0], 331, .8 * (o.ant[1] === undefined ? 1 : o.ant[1]), cuteAnt(t)) : ""}
     ${w > .02 ? OP(w, `<path d="M934 250 H986 L1000 620 H920z" fill="#BFE6FF" opacity=".75"/><path d="M944 250 H962 L966 620 H938z" fill="#fff" opacity=".6"/>${str}`) : ""}
     ${o.hands === false ? "" : `<g transform="translate(0 ${n2(o.dy || 0)})">${TF(SINK.lh[0], SINK.lh[1], SINK.k, kidHand(-1, o))}${TF(SINK.rh[0], SINK.rh[1], SINK.k, kidHand(1, { ...o, glowTip: 0 }))}</g>`}${w > .02 ? OP(w, sp) : ""}`; }
 

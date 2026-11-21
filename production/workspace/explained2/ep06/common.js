@@ -45,6 +45,8 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
   c.cards.forEach((txt, i) => { const k = spring(t, c.tc[i] - .08, .45); if (k < .02) return; const turn = t >= c.ring0 && t < bell ? (Math.floor((t - c.ring0) / .5) % n === i ? 1 : 0) : 0, said = pulse(t, c.tc[i], .04, .5), lit = c.ans === i + 1 && c.tAns !== undefined && t >= c.tAns ? spring(t, c.tAns, .45) : 0;
     main += TF(x0 + i * dx, CY, k, ansCard(i + 1, txt, { pulse: Math.max(turn * (.4 + rs.tick), said), lit, w: n === 2 ? 340 : 286 })); });
   main += ringTimer(RX, CY, t < bell ? rs.frac : 0, t < bell ? rs.secs : 0, t, { tick: rs.tick, shut, inner: `<circle cx="${RX}" cy="${CY}" r="172" fill="url(#mSky)"/>` + c.obj(t) });
+  // clue labels are drawn ON TOP of the ring frame and stay through the whole countdown (rulebook section 4, Lock-ins; teacher, 21 Nov)
+  if (c.clue) main += c.clue(t);
   if (shut > .05) main += `<circle cx="${RX}" cy="${CY}" r="${n2(RING_R + 40 + 80 * (1 - shut))}" fill="none" stroke="${P.sun}" stroke-width="6" opacity="${n2(shut * .8)}"/>`;
   const top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
   // the buddies wait with their picks face down; after the bell each card flips as its buddy speaks

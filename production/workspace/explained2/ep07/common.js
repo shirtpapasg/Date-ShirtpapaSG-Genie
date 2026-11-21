@@ -69,9 +69,10 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
   return bg("stage") + `<g transform="translate(960 ${n2(lerp(505, 330, zb))}) scale(${n2(gs)}) translate(-960 -470)">${main}</g>` + top + `<rect y="800" width="1920" height="280" fill="url(#xFloor)"/>` + (c.pre ? c.pre(t) : "") + note + buds + cards + demo + bubs + (c.over ? c.over(t) : "")
     + stamp(t, tS, 960, lerp(505, 330, zb)) + bellIcon(t, c.ring0) + HUD(t, { score: c.score !== false }); }
 
-/* ============ Mark Sentence card: the buddy beside it SAYS "Say it with me!", 0.8 s, then Heart reads; the card holds 2 s ============ */
+/* ============ Mark Sentence card: the buddy beside it SAYS "Say it with me!", 0.8 s, then READS THE WHOLE CARD in their own voice (rulebook
+   sections 4 and 7, teacher 21 Nov: never Heart); the words light up as they are read; the card holds 2.5 s ============ */
 function markScene(t, s, o) { const S = TL.lines[o.sayId], ts = S.t, p0 = o.who === "basil" ? "cheer" : "pointing";
-  const poses = [[s.t0, p0], [ts - .12, "sit"], [S.end + .15, p0], ...(o.poses || [])].sort((a, b) => a[0] - b[0]);
+  const R = TL.lines[o.id], poses = [[s.t0, p0], [ts - .12, "sit"], [R.end + .25, p0], ...(o.poses || [])].sort((a, b) => a[0] - b[0]);   // sitting (lip-sync) from "Say it with me!" to the end of the reading: the buddy reads the card
   return bg("stage2") + (o.under || "") + markCard(t, { footer: "P3 · Diversity · Classification of living things", ...o, t0: s.t0 + .1 }) + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses, jump: [[ts - .1, 26]], nohop: true, wave: true })
     + say(o.sayId, 330, 388, t, { size: 44, tail: 0 }) + (o.extra || "") + HUD(t); }
 
@@ -153,9 +154,11 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130) { const 
     + (t >= tTell ? TF(960, 970, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + logo(t); }
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
-function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "lizard"), tFind = W(L, "find");
+// EP7 (rulebook section 4, 21 Nov): the hidden animal is not named: "A little animal is hiding in this video. Can you spot it?" A paw print and a "?"
+const mystery = (t, r) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/></g><g transform="rotate(${n2(5 * Math.sin(t * 4))}) scale(${n2(r / 150)})" fill="${P.ink2}" opacity=".85"><ellipse cx="0" cy="34" rx="46" ry="38"/><ellipse cx="-56" cy="-18" rx="19" ry="25" transform="rotate(-24 -56 -18)"/><ellipse cx="-20" cy="-52" rx="19" ry="26" transform="rotate(-8 -20 -52)"/><ellipse cx="22" cy="-52" rx="19" ry="26" transform="rotate(8 22 -52)"/><ellipse cx="58" cy="-18" rx="19" ry="25" transform="rotate(24 58 -18)"/></g>`;
+function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "little"), tFind = W(L, "spot");
   let out = bg("stage");
-  if (full) { const tYou = W(L, "you"), tBud = TL.lines[L].words.some((w) => norm(w.w) === "buddies") ? W(L, "buddies") : W(L, "first"),   // EP7's short line: the buddies come in on "first" tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
+  if (full) { const tYou = W(L, "you"), tBud = TL.lines[L].words.some((w) => norm(w.w) === "buddies") ? W(L, "buddies") : W(L, "first"), tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
     out += `<g transform="translate(960 ${n2(lerp(-200, 190, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.45 + .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3), { you: 0, bud: 0 })}</g>`;
     const nf = t >= tOne ? 1 : 0, youIn = spring(t, tYou - .1, .5);
     if (youIn > .02) { const px = lerp(400, 330, ph2), cx = lerp(880, 760, ph2), cs = lerp(1.15, 1.9, ph2), cy = lerp(700, 800, ph2);
@@ -165,11 +168,11 @@ function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "lizar
       if (nf && ph2 > .5) out += TF(1010, 560, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
     out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(1010 620) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
     [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = tBud + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
-    if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), `<g filter="url(#drop)"><circle r="150" fill="${P.paper}"/></g><g transform="translate(-10 20) scale(2.1) rotate(${n2(4 * Math.sin(t * 5))})">${cicak()}</g><g transform="translate(110 -100) rotate(12)"><circle r="46" fill="url(#gSun)"/>${T(0, 22, "?", 64, P.ink)}</g>`) + TF(1440, 640, spring(t, tFind, .4), tpill(0, 0, "Find the lizard!", 40, P.ink, P.sun, { w: 700 }));
+    if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), mystery(t, 150) + `<g transform="translate(110 -100) rotate(12)"><circle r="46" fill="url(#gSun)"/>${T(0, 22, "?", 64, P.ink)}</g>`) + TF(1440, 640, spring(t, tFind, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 }));
     return out + logo(t); }
-  // Part 2: "Lock in first. And find the new lizard!"
+  // Part 2: "Lock in first. A little animal is hiding in this video. Can you spot it?"
   out += `<g transform="translate(960 ${n2(lerp(-200, 170, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.35, { you: 0, bud: 0 })}</g>`;
   out += TF(560, 560, spring(t, tLock - .15, .5), `<g transform="scale(.8)">${ringTimer(0, 0, clamp(1 - (t - tLock) / 3), 5, t)}</g>` + TF(0, 0, .95, `<g filter="url(#dropS)">${countHand(t > tLock + .7 ? 3 : t > tLock + .35 ? 2 : 1)}</g>`)) + (t >= tLock ? TF(560, 880, spring(t, tLock + .1, .4), tpill(0, 0, "You lock in first", 42, "#fff", P.ink, { w: 700 })) + youPill(560, 330, 1.2) : "");
-  if (t >= tFind - .25) out += TF(1360, 540, spring(t, tFind - .25, .5), `<g filter="url(#drop)"><circle r="170" fill="${P.paper}"/></g><g transform="translate(-10 20) scale(2.4) rotate(${n2(4 * Math.sin(t * 5))})">${cicak()}</g><g transform="translate(124 -112) rotate(12)"><circle r="50" fill="url(#gSun)"/>${T(0, 24, "?", 70, P.ink)}</g>`) + TF(1360, 790, spring(t, tC - .2, .4), tpill(0, 0, "Find the new lizard!", 42, P.ink, P.sun, { w: 700 }));
+  if (t >= tC - .25) out += TF(1360, 540, spring(t, tC - .25, .5), mystery(t, 170) + `<g transform="translate(124 -112) rotate(12)"><circle r="50" fill="url(#gSun)"/>${T(0, 24, "?", 70, P.ink)}</g>`) + TF(1360, 790, spring(t, tFind - .2, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 }));
   [["pip", 1010, 880], ["basil", 960, 1066], ["momo", 1750, 1060]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 220, t, { aura: true, in: s.t0 + .2 + i * .1, flip: i === 1, poses: [[s.t0, "cheer"], [s.t0 + 1.6, "sit"]], wave: true }); });
   return out + logo(t); }

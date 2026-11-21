@@ -67,14 +67,14 @@ LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n
 
 SEQ1 = [
  # ---- 1 · silent cold open: the school canteen at recess (7 s). 0:03 the board slides in; 0:05 Pip and Basil pop in
- ("scene", "cold"), ("wait", 3.0), ("mark", "boardIn"), ("wait", 2.0), ("mark", "budsIn"), ("wait", 2.0),
+ ("scene", "cold"), ("wait", 2.6), ("mark", "boardIn"), ("wait", 1.8), ("mark", "budsIn"), ("wait", 1.6),   # 6.0 s (was 7.0): the buddies now read the goals and the Mark Sentences, so 1.5 s of silent picture time was trimmed to stay under 5:15
  # ---- 2 · the new chapter, and the question (opens from EP7's dare)
  ("scene", "callback"),
  ("say", "g201", H, "Last time, we asked: a plastic box, a metal box and a glass jar. One of them was made from sand! Which one?", {"pre": .3}),
  ("say", "g202", H, "We have sorted living things. Now, non-living things. What are they made of?", {"pre": .5, "post": .3}),
  ("scene", "hook"),
  ("say", "g203", H, "A plastic box. A metal box. A glass jar. Did you lock in your answer?", {"pre": .4}),
- ("mark", "title"), ("wait", 2.3),
+ ("mark", "title"), ("wait", 2.1),
  # ---- 3 · the game
  ("scene", "game"),
  ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
@@ -179,7 +179,7 @@ SEQ1 = [
  # ---- 13 · the cliffhanger: white drops
  ("scene", "cliff"), ("wait", .5),
  ("say", "g1301", H, "Three materials to go! The sole of your school shoe is rubber. Some rubber starts as white drops! Where do the drops come from? Find out in Part Two!", {"pre": .3}),
- ("mark", "cliffend"), ("wait", 1.2),
+ ("mark", "cliffend"), ("wait", .9),
  # ---- 14 · "Now you know!" and the outro
  *NYK,
 ]

@@ -81,7 +81,7 @@ SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); c
 
 /* ============ 2 · the callback to Episode 5's dare ============ */
 SC.callback = (t, s) => { const a = "e201", b = "e202", CAMW = [1.03, 960, 565], tw_ = [W(a, "amphibians"), W(a, "birds"), W(a, "fish")], t3 = W(a, "three", 1), tM = LT(b) - .5, big = eio((t - s.t0) / .6) * (1 - eio((t - tM + .5) / .5));
-  const at = [lerp(BD[0], 1010, big), lerp(BD[1], 1046, big), lerp(BD[2], .92, big)], fl = [0, 1, 2].map((i) => pulse(t, tw_[i] - .05, .05, .9)).concat([0, 0, 0]), pl = [0, 0, 0].concat([0, 1, 2].map((i) => pulse(t, t3 + i * .35, .05, .8) + (t > t3 + 1.4 && t < tM ? .4 + .3 * Math.sin(t * 5 + i) : 0)));
+  const late = eio((t - tM + .5) / .5), at = [lerp(lerp(BD[0], 1215, late), 1010, big), lerp(BD[1], 1046, big), lerp(lerp(BD[2], .42, late), .92, big)], fl = [0, 1, 2].map((i) => pulse(t, tw_[i] - .05, .05, .9)).concat([0, 0, 0]), pl = [0, 0, 0].concat([0, 1, 2].map((i) => pulse(t, t3 + i * .35, .05, .8) + (t > t3 + 1.4 && t < tM ? .4 + .3 * Math.sin(t * 5 + i) : 0)));
   const tA = W(b, "ant") - .15, tS = W(b, "spider") - .15, gA = pulse(t, tA, .1, 1.6), gS = pulse(t, tS, .1, 1.6), side = big > .05;
   // the ant and the spider, each in a round window, as Momo names them
   const win = (x, y, tt, inner, lab) => t < tt ? "" : TF(x, y, spring(t, tt, .45), `<g filter="url(#drop)"><circle r="150" fill="${P.paper}"/></g><circle r="138" fill="#EAF6E8"/><clipPath id="cw${x}"><circle r="138"/></clipPath><g clip-path="url(#cw${x})">${inner}</g>` + TF(0, 176, 1, tpill(0, 0, lab, 40, "#fff", P.ink, { w: 700 })) + `<g transform="translate(108 -108)"><circle r="32" fill="url(#gSun)" stroke="#fff" stroke-width="4"/>${T(0, 15, "?", 44, P.ink)}</g>`);
@@ -214,8 +214,8 @@ SC.shrink = (t, s) => { const u = t - td, p = pov(t), bob = 4 * Math.sin(t * 2.2
 
 /* ---- back out to normal size: the monitor swims in the lake, head up, tail sweeping; the two thermometers have come down together ---- */
 const swimMon = (t, x, y, k) => `<g>${TF(x, y, k, monitor({ pose: "swim", t }))}<rect x="${x - 900 * k}" y="${y}" width="${1500 * k}" height="${200 * k}" fill="#4FA3B5" opacity=".55"/><path d="M${n2(x - 660 * k)} ${y + 2} Q${x} ${y - 10} ${n2(x + 460 * k)} ${y + 2}" fill="none" stroke="#fff" stroke-width="5" opacity=".7"/>${[0, 1, 2].map((i) => { const u = ((t) * .8 + i / 3) % 1; return `<ellipse cx="${n2(x - 600 * k - 120 * u)}" cy="${y + 4}" rx="${n2(40 + 160 * u)}" ry="${n2(8 + 14 * u)}" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(.7 * (1 - u))}"/>`; }).join("")}</g>`;
-SC.pullout = (t, s) => { const e = eo((t - s.t0) / 1.2), cam = [lerp(3.2, 1.2, e), lerp(980, 900, e), lerp(640, 600, e)];
-  return lakeW(t, { mon: false, items: swimMon(t, 980, 640, .5) }, cam) + fTag(t, s.t0 + 1.0, s.t1, "in the sun: warm", 250, 520, 46, "#FFE27A") + fTag(t, s.t0 + 1.5, s.t1, "in the water: cool", 250, 1080, 46, "#BFE6FF")
+SC.pullout = (t, s) => { const e = eo((t - s.t0) / 1.2), cam = [lerp(3.2, 1.2, e), lerp(800, 900, e), lerp(640, 600, e)];
+  return lakeW(t, { mon: false, items: swimMon(t, 800, 640, .5) }, cam) + fTag(t, s.t0 + 1.0, s.t1, "in the sun: warm", 250, 520, 46, "#FFE27A") + fTag(t, s.t0 + 1.5, s.t1, "in the water: cool", 250, 1080, 46, "#BFE6FF")
     + thermoF(1640, 700, placeT(t), "PLACE", { k: e, H: 290 }) + thermoF(1800, 700, lizT(t), "LIZARD", { k: e, H: 290, fill: P.basil }) + wipe(t, s.t0, "#BFE6FF") + OP(e, HUD(t)); };
 
 /* ============ 12 · cold-blooded: the book's words name what you just lived through ============ */
