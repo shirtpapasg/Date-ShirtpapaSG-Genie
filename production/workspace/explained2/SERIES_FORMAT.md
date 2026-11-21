@@ -90,7 +90,7 @@ Also read:
 - **"Say it with me / us!" is always SPOKEN, never just a bubble.**
   - The buddy next to the card (or all three) says it aloud with lip-sync and an inviting gesture.
   - Then a **0.8 s pause**.
-  - Then Heart reads, so children say it together.
+  - Then THAT BUDDY reads the card (not Heart), so children say it together with the buddy.
   - This applies to every Mark Sentence card and every chant.
 - **The chant is call-and-response:**
   1. A buddy or all three say "Say it with us!", then pause 0.8 s.
