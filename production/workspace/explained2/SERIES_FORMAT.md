@@ -114,9 +114,15 @@ Also read:
 - **"HOLD ON!"** (not "FOUL!"): a buddy uses a bad rule or an unfair test, and the viewer crosses their arms.
 - **Showdown:** a buddy's homework with one mistake to spot, for double points.
 - **Score hand:** one finger per point. A perfect game ends in a high five.
-- **The hidden lizard** (a cute little house lizard, never "cicak"):
-  - Hide it somewhere in EVERY part.
-  - ALWAYS reveal it before the part ends: "Did you spot the lizard? … Tell someone at home."
+- **The hidden animal (teacher, 2026-11-21: "swap the hidden animal and not always the lizard. Use the related animal appearing
+  in the video. The ending question shouldn't matter when the hidden animal changes"):**
+  - Each part hides a small, cute animal that BELONGS to that video's topic or setting (e.g. a frog among the lily pads in an
+    amphibian episode, an ant on a stall in a canteen, a snail on the damp kitchen wall), not always the lizard.
+  - Drawn to the "cute AND alive" rule, small but findable, in the same place for a few scenes.
+  - The opening rules line and the reveal never depend on which animal it is: say "A little animal is hiding in this video. Can you
+    spot it?" and reveal with "Did you spot the hidden animal? It was the [animal], [where]! … Tell someone at home." The reveal
+    circles it, as before.
+  - Say "lizard", never "cicak", when it is a lizard.
 - **Key-word read-along before the end of every part:**
   1. The shelf moves to the centre and grows.
   2. Heart: "Let's read today's key words together! Ready?"
@@ -267,7 +273,7 @@ order). Send the teacher the finished parts and the list of things to check; the
 8. The chant as call-and-response.
 9. The reveal or payoff.
 10. The score hand.
-11. The lizard reveal.
+11. The hidden-animal reveal.
 12. The key-word read-along.
 13. Next episode's dare, or the Part 2 tease.
 14. "Say it with us!", then the class shouts "Now you know!".
