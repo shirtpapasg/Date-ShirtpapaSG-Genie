@@ -35,13 +35,13 @@ SC.game = (t, s) => gameScene(t, s, "a302", true);
 const padObj = (inner) => `<ellipse cx="430" cy="600" rx="150" ry="36" fill="#5FB7C9"/>` + TF(430, 590, .6, lilyPad(190, "#66CC5C")) + inner;
 SC.r0 = (t, s) => { const L = "a401", tU = LT("u403"), tcap = LT("a404"), tc = W("a405", "one") - .1;
   return lockN(t, { cards: ["Yes", "No"], q: "Can an animal make its own food?", tq: W(L, "can") - .1, tc: [W(L, "one"), W(L, "two")], ring0: MK("ring0_0"), dur: 5, lock: "a402", ans: 2, tAns: tU + .35,
-    obj: (tt) => padObj(TF(410, 586, .62, frog({ throat: tt, blink: frogBlink(tt) }))) + (tt >= tcap ? TF(430, 350, spring(tt, tcap + .4, .4), tpill(0, 0, "It must find food", 30, P.sun, P.ink, { w: 700 })) : ""),
+    obj: (tt) => padObj(TF(410, 586 - 26 * hop(tt % 3.2, 1.2, .4), .62, frog({ ext: .8 * hop(tt % 3.2, 1.2, .4) }))) + (tt >= tcap ? TF(430, 350, spring(tt, tcap + .4, .4), tpill(0, 0, "It must find food", 30, P.sun, P.ink, { w: 700 })) : ""),
     picks: ["pip", "basil", "momo"].map((who) => ({ who, id: "u403", word: "2" })), react: [[tU + .5, "pip", "cheer"], [tU + .5, "momo", "cheer"], [tU + .5, "basil", "cheer"], [tU + 2.0, "pip", "sit"], [tU + 2.0, "momo", "sit"], [tU + 2.0, "basil", "sit"]],
     over: (tt) => bookCap(tt, "a404", "Animals are unable to make their own food. They depend on other living things for food.", 590, { size: 44, maxW: 1150, t1: LT("a405") - .15 }) + coin(tt, tc, 960, 640, "+1", "if you showed two fingers") }); };
 SCORE.push([W("a405", "one") - .1, 1, 1]);
 
 /* ============ 5 · today's goals ============ */
-SC.goals = (t, s) => goals3(t, s, [["What an animal is", TF(-14, 56, .5, frog())], ["How scientists group animals", TF(-10, -6, .56, magnifier(80))], ["What makes a frog an amphibian", TF(0, 0, .36, swatch("skin"))]]);
+SC.goals = (t, s) => goals3(t, s, [["What an animal is", TF(-14, 56, .5, frog())], ["How scientists group animals", TF(-10, -6, .56, magnifier(80))], ["What makes a frog an amphibian", TF(0, 0, .36, swatch("skin"))]], "pip", ["g100", "g101", "g102", "g103"]);
 
 /* ============ 6 · what an animal is ============ */
 SC.parts = (t, s) => { const L = "a501", e = eio((t - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMF[0], e), lerp(CAMW[1], CAMF[1], e), lerp(CAMW[2], CAMF[2], e)], tw_ = [W(L, "head") - .1, W(L, "body") - .1, W(L, "limbs") - .1], tQ = LT(L);
@@ -123,7 +123,7 @@ function ruleBoard(t, o = {}) { const pics = [waterPic + TF(-10, 20, .6, frog({ 
   <g filter="url(#drop)"><rect x="-540" y="-640" width="1080" height="570" rx="30" fill="${P.basil}"/><rect x="-520" y="-622" width="1040" height="534" rx="18" fill="url(#gPaper)"/></g>
   ${T(0, -530, "If it swims, it is a fish.", 68, P.ink)}${(o.x || 0) > .02 ? `<path d="M-400 -552 H400" stroke="${P.coral}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${n2(800 * Math.min(1, o.x))} 900"/>` + TF(-462, -552, Math.min(1.1, o.x), xBadge(30)) : ""}
   <g transform="translate(0 -170)">${s}</g>`; }
-const lizShow = (t, t0) => 1 - ramp(t, t0, .25) * (1 - ramp(t, t0 + 3.2, .2));
+const lizShow = (t, t0) => 1 - ramp(t, t0, .4);   // the hidden duck pops up behind the rail and stays to the end of the scene
 SC.rule = (t, s) => { const a = "a1101", b = "a1102", c = "a1103", d = "a1104", r0 = MK("ring0_2"), bell = MK("bell_2"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, ring = t >= tX && t < bell + .8;
   const pk = [spring(t, W(a, "frog") - .15, .4), spring(t, W(a, "duck") - .15, .4)], fish = spring(t, W(a, "so") - .1, .4) * (1 - ramp(t, W(c, "many") - .1, .3)), xk = spring(t, W(c, "many") - .1, .4), cov = spring(t, W(c, "look") - .1, .4), tLk = W(c, "look") - .1;
   return wetView(t, { liz: lizShow(t, LT(a) + 1.0) }, CAMW) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".18"/>` + TF(RB[0], RB[1], RB[2], ruleBoard(t, { pk, fish, x: xk, cov }))
@@ -136,12 +136,12 @@ SCORE.push([W("a1103", "one") - .1, 3, 2]);
 
 /* ============ 12 · score hand, the lizard ============ */
 SC.final = (t, s) => { const L = "a1201"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]], TF(1260, 1062, .42, trailCard(t, { 0: 0 }))); };
-SC.liz = (t, s) => { const L = "a1202"; return lizReveal(t, s, L, wetView(t, { liz: 0 }, CAMW), gx(CAMW, LIZXY[0] - 6), gy(CAMW, LIZXY[1] - 4), W(L, "does") - .1, "On land, in water, or both?", 60, 10); };
+SC.liz = (t, s) => { const L = "a1202"; return lizReveal(t, s, L, wetView(t, { liz: 0 }, CAMW), gx(CAMW, HIDD[0]), gy(CAMW, HIDD[1]), W(L, "it") - .1, "It was the duck, behind the rail!", 60, 10, 78); };
 
 /* ============ 13 · the cliffhanger: a fish that hops on the mud ============ */
 SC.cliff = (t, s) => { const L = "a1301", e = eio((t - s.t0) / 1.2), cam = [lerp(1.04, 1.55, e), lerp(960, 1450, e), lerp(580, 740, e)], tF = W(L, "fins") - .2, tHp = W(L, "hops") - .2, tQ = W(L, "is") - .1, tP = W(L, "find") - .1;
   const hops = [0, 1, 2].map((i) => tHp + i * .42), hx = hops.reduce((x, th) => x + 70 * eio((t - th) / .34), 0), hy = hops.reduce((y, th) => y + hop(t, th, .34, 46), 0), out = eo((t - (LT(L) + .2)) / .7);
-  const mud = { x: MUDXY[0] + 210 - hx, y: lerp(MUDXY[1] + 80, MUDXY[1] + 26, out) - hy - (hx / 210) * 26, prop: .4 + .6 * out, fin: ss(tF - .2, tF + .3, t) };
+  const mud = { x: MUDXY[0] + 210 - hx, y: lerp(MUDXY[1] + 80, MUDXY[1] + 26, out) - hy - (hx / 210) * 26, prop: .4 + .6 * out, fin: ss(tF - .2, tF + .3, t), push: hops.reduce((a, th) => Math.max(a, pulse(t, th + .05, .08, .3)), 0) };
   return wetView(t, { mud }, cam) + OP(pulse(t, tF, .1, 1.2), `<circle cx="${n2(gx(cam, mud.x + 10))}" cy="${n2(gy(cam, mud.y - 60))}" r="150" fill="none" stroke="${P.sun}" stroke-width="8"/>`)
     + ["pip", "basil", "momo"].map((w, i) => buddy(w, 190 + i * 250, 1062, 185, t, { aura: true, tag: false, in: s.t0 + .15 + i * .1, poses: [[s.t0, "sit"], [tHp, "surprised"], [tQ, w === "basil" ? "arms_crossed" : "thinking"]] })).join("")
     + (t >= tQ ? TF(1240, 420, spring(t, tQ, .45), tpill(0, 0, "A fish, or an amphibian?", 56, P.ink, "#fff", { w: 700 })) : "")

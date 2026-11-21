@@ -51,9 +51,12 @@ BG.wetland = () => { const r = rndm(77); let far = "", reeds = "", rail = "", pl
   <g transform="translate(${WSIGN[0]} ${WSIGN[1]})"><ellipse cx="0" cy="3" rx="60" ry="9" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><rect x="-13" y="-190" width="26" height="190" rx="6" fill="url(#fWood)" stroke="#8A5E34" stroke-width="4"/><g filter="url(#dropS)"><rect x="-170" y="-330" width="340" height="150" rx="16" fill="url(#fWood)" stroke="#8A5E34" stroke-width="6"/><rect x="-156" y="-316" width="312" height="122" rx="10" fill="#FFF3DC"/></g>
   ${T(0, -272, "SUNGEI BULOH", 34, "#1F8A4C", { ls: 2 })}${T(0, -234, "WETLAND RESERVE", 27, "#1F8A4C", { ls: 1 })}${T(0, -204, "Singapore", 22, P.ink2, { w: 600 })}</g>
   <g style="mix-blend-mode:screen"><path d="M1100 -120 L2000 -120 L1500 1200 L400 1200z" fill="#FFE9A8" opacity=".1" filter="url(#b30)"/></g>`; };
-// the little house lizard on the boardwalk rail. hide 0..1 = it scoots behind the rail
-const lizOnRail = (t, hide = 0) => hide >= 1 ? "" : `<g transform="translate(${LIZXY[0]} ${LIZXY[1] + 8 * hide}) rotate(-4) scale(${n2(.8)} ${n2(.8 * (1 - hide))})"><g transform="rotate(${n2(3 * Math.sin(t * 5))})">${cicak()}</g></g>`;
-const lizOnRoot = (t, hide = 0) => hide >= 1 ? "" : `<g transform="translate(1712 668) rotate(-58) scale(${n2(.74)} ${n2(.74 * (1 - hide))})"><g transform="rotate(${n2(3 * Math.sin(t * 5))})">${cicak()}</g></g>`;
+// THE HIDDEN ANIMAL (version 2; teacher, 21 Nov: "swap the hidden animal and not always the lizard. Use the related animal appearing in the video").
+// Part 1: a little duck swimming behind the boardwalk rail (only its head, neck and back show over the rail). hide 0..1 = it ducks down behind the rail
+const HIDD = [1410, 836], HIDF = [1700, 664];
+const lizOnRail = (t, hide = 0) => hide >= 1 ? "" : `<clipPath id="hidC"><rect x="1200" y="600" width="420" height="254"/></clipPath><g clip-path="url(#hidC)"><g transform="translate(${n2(1400 + 5 * Math.sin(t * .8))} ${n2(888 + 80 * hide)}) scale(.44)">${duck(t)}</g></g>`;
+// Part 2: the frog from Part 1, sitting on a mangrove root. hide 0..1 = it slips behind the root
+const lizOnRoot = (t, hide = 0) => hide >= 1 ? "" : `<g transform="translate(${HIDF[0]} ${HIDF[1] + 30}) rotate(-16) scale(${n2(.36)} ${n2(.36 * (1 - hide))})">${frog({ ph: 3, wet: .5 })}</g>`;
 // ripples on the water (they drift slowly)
 const ripples = (t) => `<g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".4">${[0, 1, 2, 3, 4, 5, 6].map((i) => { const x = ((i * 331 + t * (14 + i * 3)) % 2200) - 140, y = 520 + ((i * 97) % 300); return `<path d="M${n2(x)} ${y} q24 -8 48 0"/>`; }).join("")}</g>`;
 /* the wetland seen from the boardwalk. o: frog (false | {ext, wet, x, y, rot} | undefined = sitting on its leaf), kf (false | {flap, fish}), fish (false | undefined = swimming),
@@ -63,7 +66,7 @@ function wetView(t, o = {}, cam = [1, 960, 540]) { const f = o.frog === undefine
     + (o.fish === false ? "" : OP(.8, TF(fx, FISHXY[1] + 8 * Math.sin(t * 1.3), .5, `<g transform="scale(${fd} 1)">${fishG({ wag: t })}</g>`)) + `<ellipse cx="${n2(fx)}" cy="${FISHXY[1]}" rx="120" ry="52" fill="#5FB7C9" opacity=".3"/>`)
     + (f === false ? "" : TF(f.x === undefined ? FROGXY[0] - 30 : f.x, f.y === undefined ? FROGXY[1] : f.y, f.k || .8, `<g transform="rotate(${n2(f.rot || 0)})">${frog({ blink: frogBlink(t), throat: t, ...f })}</g>`))
     + (k === false ? "" : TF(KFXY[0], KFXY[1], .62, kingfisher({ bob: 1.5 * Math.sin(t * 1.7), ...k })))
-    + (o.mud ? TF(o.mud.x === undefined ? MUDXY[0] : o.mud.x, (o.mud.y === undefined ? MUDXY[1] : o.mud.y), o.mud.k || .62, mudskipper({ blink: ((t + .4) % 2.9) < .12, ...o.mud })) : "") + (o.items || ""), cam[0], cam[1], cam[2]); }
+    + (o.mud ? TF(o.mud.x === undefined ? MUDXY[0] : o.mud.x, (o.mud.y === undefined ? MUDXY[1] : o.mud.y), o.mud.k || .62, mudskipper({ prop: .82 + .18 * Math.sin(t * 1.6), push: .25 * Math.max(0, Math.sin(t * 1.6 + 2)), ...o.mud })) : "") + (o.items || ""), cam[0], cam[1], cam[2]); }
 // a picture board on two short legs (a framed drawing that stands on the boardwalk). origin = the middle of its feet
 function wboard(inner, w = 330, h = 290, id = "wb", o = {}) { const lab = o.lab, size = o.size || 32;
   return `<ellipse cx="0" cy="4" rx="${w * .5}" ry="14" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M${-w * .3} 0 V-60 M${w * .3} 0 V-60" stroke="#8A5A36" stroke-width="14" stroke-linecap="round"/><clipPath id="c_${id}"><rect x="${-w / 2}" y="${-h - 50}" width="${w}" height="${h}" rx="18"/></clipPath>

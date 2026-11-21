@@ -12,11 +12,11 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   [0, 1, 2, 3].forEach((i) => E(W("a201", "four") - .1 + i * .14, "softpop", i)); E(W("a201", "animals") - .1, "chime"); ["frog", "bird", "fish"].forEach((w, i) => E(W("a203", w) - .15, "pip", i));
   E(S.title.t0 + .05, "whoosh"); [.26, .61, LT("a204") - S.title.t0 + .16].forEach((d, i) => E(S.title.t0 + d, "slam", i));
   // 3 the game
-  E(S.game.t0 + .15, "sting"); { const b = "a302"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "lizard") - .1, "chek"); E(W(b, "lizard") + .9, "chek"); }
+  E(S.game.t0 + .15, "sting"); { const b = "a302"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "animal") - .1, "curious"); E(W(b, "spot") - .2, "softpop", 2); }
   // 4 Round Zero
   E(S.r0card.t0, "roundcard"); lock(MK("ring0_0"), 5, "a402", ["u403"], [W("a401", "one"), W("a401", "two")]); E(LT("u403") + .35, "tag"); E(LT("a404") + .3, "chime"); E(W("a405", "one") - .1, "coin");
   // 5 goals, countdown
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
+  ["g101", "g102", "g103"].forEach((id, i) => E(LT(id) - .12, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 6 what an animal is
   R.birds.push([S.parts.t0, S.mark1.t0]); ["head", "body", "limbs"].forEach((w, i) => E(W("a501", w) - .1, "softpop", i)); E(W("a501", "legs") - .1, "pop", 1); mark("a502", "a503");
   // 7 homes, coverings, observable characteristics
@@ -34,19 +34,19 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   R.birds.push([S.skin.t0, S.listcard.t0]); E(W("a1004", "skin") - .1, "softpop", 0); E(W("a1004", "lungs") - .1, "softpop", 2); E(W("a1005", "moist") - .1, "chime2", 1); E(W("a1005", "drying") - .2, "pop", 1);
   E(W("a1006", "eggs") - .1, "drip", 2); ["frogs", "toads", "salamanders"].forEach((w, i) => E(W("a1007", w) - .1, "softpop", i)); E(MK("stamp1") + .25, "stamp"); E(LT("a1008") + .4, "pop", 2); E(W("a1009", "one") - .1, "coin");
   // 11 HOLD ON!
-  E(S.listcard.t0, "roundcard"); { const a = "a1101", b = "a1102", c = "a1103", r0 = MK("ring0_2"); E(S.rule.t0 + .2, "scribble"); ["frog", "duck"].forEach((w, i) => E(W(a, w) - .15, "rise", i)); E(W(a, "so") - .1, "boop", 1); E(LT(a) + 1.2, "chek", .45); E(LT(a) + 2.1, "chek", .45);
+  E(S.listcard.t0, "roundcard"); { const a = "a1101", b = "a1102", c = "a1103", r0 = MK("ring0_2"); E(S.rule.t0 + .2, "scribble"); ["frog", "duck"].forEach((w, i) => E(W(a, w) - .15, "rise", i)); E(W(a, "so") - .1, "boop", 1); E(LT(a) + 1.2, "drip", 1);
     E(W(b, "something") - .1, "boop", 2); E(W(b, "hold") - .1 + .14, "stamp"); ringTicks(r0, 5).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + 5, "bell"); E(r0, "bellicon"); E(W(c, "one") - .1, "coin"); E(W(c, "many") - .1, "rub"); E(W(c, "look") - .1, "tag"); E(LT("a1104") + .1, "boop", 0); }
   // 12 the score hand, the lizard
-  E(S.final.t0 + .1, "sting"); E(W("a1201", "high") + .2, "slap"); E(W("a1201", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
+  E(S.final.t0 + .1, "sting"); E(W("a1201", "high") + .2, "slap"); E(W("a1201", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "curious"); E(W("a1202", "it") - .1, "tag");
   // 13 the cliffhanger
   { const L = "a1301", tH = W(L, "hops") - .2; R.birds.push([S.cliff.t0, S.nyk.t0]); E(S.cliff.t0 + .1, "whoosh"); E(W(L, "fins") - .2, "curious"); [0, 1, 2].forEach((i) => { E(tH + i * .42, "hop", i); E(tH + i * .42 + .34, "tap"); }); E(W(L, "is") - .1, "lowdrum"); E(W(L, "find") - .1, "slam", 1); }
   G(S.title.t0 + 1.0, MK("ring0_0")); G(LT("u403") - .3, S.count.t0 - .2); C(S.parts.t0 + .3, LT("a503") - .4); G(S.homes.t0, S.r1card.t0); G(S.r1.t0, MK("ring0_1")); G(LT("a803") - .5, S.waitw.t1 - 1.5);
   G(S.reveal.t0 + 1.4, LT("a1003") - .4); C(S.skin.t0 + .3, LT("a1007") - .3); G(LT("a1007"), S.listcard.t0); G(S.rule.t0, LT("a1102") - .1); G(LT("a1103"), S.rule.t1); G(S.final.t0, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.cliff.t0); C(S.cliff.t0 + .3, S.nyk.t0 - .2);
   } else {
   // 1-3 the recap, "Last time", goals, the game
-  for (let i = 0; i < 4; i++) E(S.recap.t0 + i * 1.0 + .02, "clack"); splash(S.recap.t0 + 1.8); E(S.recap.t0 + 2.4, "stamp"); E(S.recap.t0 + 3.2, "curious"); C(S.recap.t0 + .2, S.lasttime.t0 + .4); R.birds.push([S.lasttime.t0, S.goals.t0]);
-  E(LT("b201"), "pluck", 0); E(W("b201", "amphibian") - .1, "softpop", 0); E(W("b201", "moist") - .1, "softpop", 1); E(W("b201", "outer") - .1, "chime"); E(W("b201", "two") - .2, "pop", 1); E(W("b201", "two"), "pop", 2);
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("b301", "lizard") - .1, "chek"); E(W("b301", "lizard") + .8, "chek");
+  // the calm recap: no clacks, no splash; a soft pop as each label arrives, calm music under Heart
+  { const L = "b201"; E(S.recap.t0 + .5, "softpop", 0); E(W(L, "moist") - .15, "softpop", 1); E(W(L, "its") - .3, "chime"); E(W(L, "observable") - .15, "softpop", 2); E(W(L, "two") - .1, "pop", 1); E(W(L, "two") + .2, "pop", 2); C(S.recap.t0 + .2, S.goals.t0 + .3); R.birds.push([S.recap.t0, S.goals.t0]); }
+  ["g201", "g202", "g203"].forEach((id, i) => E(LT(id) - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("b301", "animal") - .1, "curious"); E(W("b301", "spot") - .2, "softpop", 2);
   // 4 the kingfisher, Round 1, the bird clues
   R.birds.push([S.bird.t0, S.r1card.t0]); E(S.bird.t0 + .1, "whoosh"); E(S.bird.t0 + .6, "koel"); E(W("b401", "beak") - .1, "softpop", 0); E(W("b401", "wings") - .1, "softpop", 2); E(W("b401", "wings") + .1, "rustle"); E(W("b401", "outer") - .2, "curious");
   E(S.r1card.t0, "roundcard"); { const L = "b402"; E(W(L, "cannot") - .1, "rustle"); lock(MK("ring0_1"), 5, "b403", ["b404", "b405", "b406"], [W(L, "one", 1), W(L, "two")]); }
@@ -64,15 +64,15 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 8 the reveal
   E(S.reveal.t0, "whooshout"); E(W("b801", "three") - .1, "tag"); E(LT("b802") + .3, "chime"); E(MK("stamp3") + .25, "stamp"); E(W("b803", "one") - .1, "coin");
   // 9 the Showdown
-  E(S.showcard.t0, "roundcard"); { const b = "b902", c = "b903", r0 = MK("ring0_3"); E(S.show.t0 + .1, "paper"); R.roll.push([LT(c), W(c, "one", 1)]); E(LT(b) + .6, "chek", .45); E(LT(b) + 1.5, "chek", .45); [W(c, "one", 1), W(c, "two"), W(c, "three")].forEach((t, i) => E(t - .05, "pip", i));
+  E(S.showcard.t0, "roundcard"); { const b = "b902", c = "b903", r0 = MK("ring0_3"); E(S.show.t0 + .1, "paper"); R.roll.push([LT(c), W(c, "one", 1)]); E(LT(b) + .6, "drip", 1); [W(c, "one", 1), W(c, "two"), W(c, "three")].forEach((t, i) => E(t - .05, "pip", i));
     ringTicks(r0, 6).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + 6, "bell"); E(r0, "bellicon"); E(LT("b904") + .06, "stamp"); E(LT("b905") + .01, "pick", 0); E(LT("b906") + .01, "pick", 1); E(LT("b907"), "boop", 2); }
   E(S.fixed.t0 + .15, "rub"); E(S.fixed.t0 + .65, "scribble"); E(LE("b908") - .2, "softpop", 3); E(LT("b909") - .2, "pop", 1); E(W("b909", "scales") - .1, "boop", 0); E(W("b909", "gills") - .1, "boop", 1); E(W("b910", "two") - .1, "coin2"); E(W("b910", "two") + .5, "coin2", 1);
   // 10 three stamps, the chant
   E(S.stamps.t0 + .1, "reveal"); [0, 1, 2].forEach((i) => E(LT("b1001") + .2 + i * .5, "rise", i * 2)); sayit("u1002"); chant("c1003");
   // 12-13 the score hand, the lizard, the dare
-  E(S.final.t0 + .1, "sting"); E(W("b1201", "high") + .2, "slap"); E(W("b1201", "four") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
+  E(S.final.t0 + .1, "sting"); E(W("b1201", "high") + .2, "slap"); E(W("b1201", "four") - .1, "pip", 2); E(S.liz.t0 + .5, "curious"); E(W("b1202", "it") - .1, "tag");
   { const L = "b1301"; for (let i = 0; i < 6; i++) E(S.dare.t0 + .1 + i * .1, "softpop", i % 4); ["insects", "reptiles", "mammals"].forEach((w, i) => E(W(L, w) - .1, "rise", i * 2)); E(W(L, "ant") - .25, "pop", 0); E(W(L, "spider") - .25, "pop", 2); E(W(L, "only") - .1, "curious"); E(W(L, "counting") - .2, "clack"); E(W(L, "lock") - .1, "sting"); }
-  G(S.lasttime.t0 + .5, S.bird.t0); C(S.bird.t0 + .3, S.r1card.t0); G(S.r1.t0, MK("ring0_1")); G(LT("b404") - .5, LT("b413") - .4); G(S.birdans.t0, S.fish.t0 + 1.5); G(S.r2.t0, MK("ring0_2")); G(LT("b603") - .5, S.waitw.t1 - 1.5);
+  G(S.goals.t0 + .3, S.bird.t0); C(S.bird.t0 + .3, S.r1card.t0); G(S.r1.t0, MK("ring0_1")); G(LT("b404") - .5, LT("b413") - .4); G(S.birdans.t0, S.fish.t0 + 1.5); G(S.r2.t0, MK("ring0_2")); G(LT("b603") - .5, S.waitw.t1 - 1.5);
   G(S.reveal.t0 + 1.4, S.showcard.t0); G(S.show.t0 + .3, MK("ring0_3")); G(LT("b905") - .5, LT("u1002") - .3); G(S.final.t0, S.dare.t0 + .3); C(S.dare.t0 + .5, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2);
   }
   // key words: a soft chime as the term pops, a pop as it lands on the shelf

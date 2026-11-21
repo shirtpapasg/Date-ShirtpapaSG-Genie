@@ -10,47 +10,57 @@ const lab = (t, t0, q, ps, txt, size = 54) => t < t0 ? "" : ps.map((p) => lineTo
 const uwView = (t) => { let pl = ""; for (let i = 0; i < 16; i++) { const x = -60 + i * 132 + 40 * hash(i, 3), h = 120 + 240 * hash(i, 5), sw = 24 * Math.sin(t * 1.1 + i); pl += `<path d="M${n2(x)} 1100 Q${n2(x + sw)} ${n2(1100 - h * .6)} ${n2(x - sw * .5)} ${n2(1100 - h)}" fill="none" stroke="${i % 3 ? "#2F8A5C" : "#49A86A"}" stroke-width="${n2(12 + 14 * hash(i, 7))}" stroke-linecap="round" opacity=".8"/>`; }
   return `<rect width="1920" height="1080" fill="url(#uwF)"/>${uwRays(t)}<ellipse cx="960" cy="1130" rx="1300" ry="120" fill="#C9B88A" opacity=".8"/>${pl}` + [0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const v = ((t * .12 + hash(i, 3)) % 1); return `<circle cx="${n2(200 + hash(i, 5) * 1500 + 20 * Math.sin(t + i))}" cy="${n2(1000 - 900 * v)}" r="${n2(6 + 8 * hash(i, 7))}" fill="none" stroke="#fff" stroke-width="3" opacity="${n2(.5 * Math.sin(Math.PI * v))}"/>`; }).join(""); };
 
-/* ============ 1 · silent recap montage (four shots, 1 s each) ============ */
+/* ============ 1-2 · the calm recap under "Last time..." ============ */
 const THUMB2 = (t) => wetView(t, { mud: { prop: 1 }, frog: false, kf: false }, [2.3, 1400, 700]) + buddy("basil", 230, 800, 290, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
-SC.recap = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); const i = Math.min(3, Math.floor((t - s.t0) / 1.0)), u = t - s.t0 - i; let v;
-  if (i === 0) v = wetView(t, {}, [1.04 + .04 * u, 960, 580]);
-  else if (i === 1) { const j = clamp((u - .3) / .5); v = wetView(t, { kf: false, fish: false, frog: { ext: j > 0 && j < 1 ? 1 : 0, x: FROGXY[0] - 30 + 190 * j, y: FROGXY[1] - 150 * Math.sin(Math.PI * j) + 40 * j, rot: -24 + 60 * j } }, [2.0, 660, 700]); }
-  else if (i === 2) v = bg("daystage") + TF(960, 1012, 1.12, trailCard(t, { 0: s.t0 + 2.4 })) + stampPress(t, s.t0 + 2.4, 960, 1012, 1.12, 0);
-  else v = wetView(t, { mud: { prop: .5 + .5 * Math.sin(u * 6) } }, CAMM) + TF(1500, 330, spring(t, s.t0 + 3.2, .4), `<g filter="url(#drop)"><circle r="90" fill="url(#gSun)"/></g>${T(0, 44, "?", 130, P.ink)}`);
-  return v + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.5 * (1 - clamp(u / .18)))}"/>` + tpill(960, 60, "Part 1", 34, P.ink, P.sun, { w: 700, ls: 3 }); };
-
-/* ============ 2 · "Last time..." ============ */
-SC.lasttime = (t, s) => { const L = "b201", tF = W(L, "frog") - .2, tA = W(L, "amphibian") - .1, tM = W(L, "moist") - .1, tO = W(L, "outer") - .1, tT = W(L, "two") - .2, g = pulse(t, tF + .2, .2, 2.0), g2 = pulse(t, tT + .3, .2, 2.0), fxn = FISHXY[0] + 110 * Math.sin(t * .5);
-  return wetView(t, { back: glowDisc(FROGXY[0] - 20, FROGXY[1] - 60, 160, g) + glowDisc(KFXY[0], KFXY[1] - 60, 130, g2) + glowDisc(fxn, FISHXY[1], 120, g2), frog: { wet: t >= tM ? .5 + .5 * Math.sin((t - tM) * 4) : 0 } }, CAMW)
-    + (t >= tA ? TF(gx(CAMW, 560), gy(CAMW, 560), spring(t, tA, .45), tpill(0, 0, "amphibian", 44, P.leafDeep, "#fff", { w: 700 })) : "") + (t >= tM ? TF(gx(CAMW, 330), gy(CAMW, 640), spring(t, tM, .45), tpill(0, 0, "moist skin", 40, "#fff", P.ink, { w: 700 })) : "")
-    + (t >= tO ? TF(700, 330, spring(t, tO, .45) * (1 - ramp(t, tT - .1, .25)), tpill(0, 0, "outer covering = an observable characteristic", 38, P.sun, P.ink, { w: 700 })) : "")
-    + (t >= tT ? [[KFXY[0] + 110, KFXY[1] - 150], [FISHXY[0] + 20, FISHXY[1] - 110]].map(([x, y], i) => TF(gx(CAMW, x), gy(CAMW, y), spring(t, tT + i * .2, .4), `<g filter="url(#dropS)"><circle r="40" fill="url(#gSun)"/></g>${T(0, 20, "?", 58, P.ink)}`)).join("") : "")
-    + tcard(t, { 0: 0 }, { pulse: [0, g2, g2] }) + wPip(t, { in: s.t0 + .1 }) + wBasil(t, { in: s.t0 + .2 }) + wMomo(t, { in: s.t0 + .3, poses: [[s.t0, "sit"], [tT, "pointing"]] }) + HUD(t); };
+// version 2 (teacher, 21 Nov, on 0:00-0:04: "the blinking around is too quick and i see no meaning to the kids... too fast with no focus"):
+// NO montage. Two Part 1 pictures, one at a time, large and centred, each held, each with a label that says what it means, a gentle push-in, soft
+// dissolves, under Heart's "Last time..." line (her words are unchanged). Then the new question: "Two more animals to spot!"
+SC.recap = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); const L = "b201", tM = W(L, "moist") - .15, tB = W(L, "its") - .3, tOb = W(L, "observable") - .15, tC = W(L, "two") - .35, x2 = ss(tB - .35, tB + .35, t), x3 = ss(tC - .35, tC + .35, t);
+  const big = (x, y, txt, size, fill, ink, k) => k < .02 ? "" : TF(x, y, Math.min(1, k), tpill(0, 0, txt, size, fill, ink, { w: 700 })); let out = "";
+  // picture 1: the frog on its leaf (held about 5 s)
+  if (x2 < 1) { const u = clamp((t - s.t0) / (tB + .35 - s.t0)), z = 2.0 + .16 * u;
+    out += `<g transform="translate(960 600) scale(${n2(z * 1000) / 1000}) translate(-585 -700)">${wetView(t, { kf: false, fish: false, frog: { wet: t >= tM ? .5 + .5 * Math.sin((t - tM) * 4) : 0 } }, [1, 960, 540])}</g>` + big(960, 190, "The frog: an amphibian", 64, P.leafDeep, "#fff", ramp(t, s.t0 + .5, .5)) + big(960, 930, "with moist skin", 56, "#fff", P.ink, ramp(t, tM, .5)); }
+  // picture 2: its outer covering, seen close (held about 3.5 s)
+  if (x2 > 0 && x3 < 1) { const u = clamp((t - tB + .35) / (tC - tB + .7)), z = 1 + .06 * u;
+    out += OP(x2, bg("daystage") + `<g transform="translate(960 560) scale(${n2(z * 1000) / 1000}) translate(-960 -560)"><ellipse cx="520" cy="770" rx="230" ry="22" fill="${P.ink}" opacity=".14"/>${TF(540, 764, 1.45, frog({ wet: 1 }))}
+      <path d="M560 640 L1010 560" stroke="#fff" stroke-width="7" stroke-linecap="round"/><circle cx="560" cy="640" r="11" fill="#fff"/>${TF(1230, 560, 1.75, swatch("skin", t))}${TF(1330, 650, 1, magnifier(120))}</g>`
+      + big(960, 150, "Its outer covering: moist skin", 60, P.sun, P.ink, ramp(t, tB, .5)) + big(960, 985, "an observable characteristic: we can see it", 54, "#fff", P.ink, ramp(t, tOb, .5))); }
+  // the new question: two more animals to spot
+  if (x3 > 0) { const g2 = pulse(t, tC + .5, .3, 2.4), fxn = FISHXY[0] + 110 * Math.sin(t * .5);
+    out += OP(x3, wetView(t, { back: glowDisc(KFXY[0], KFXY[1] - 60, 130, g2) + glowDisc(fxn, FISHXY[1], 120, g2) }, [1.04 + .03 * clamp((t - tC) / 3), 960, 580])
+      + [[KFXY[0] + 110, KFXY[1] - 150], [FISHXY[0] + 20, FISHXY[1] - 110]].map(([x, y], i) => TF(gx(CAMW, x), gy(CAMW, y), spring(t, tC + .4 + i * .3, .5), `<g filter="url(#dropS)"><circle r="40" fill="url(#gSun)"/></g>${T(0, 20, "?", 58, P.ink)}`)).join("")
+      + big(700, 250, "Two more animals to spot!", 58, P.sun, P.ink, ramp(t, tC + .2, .5)) + tcard(t, { 0: 0 }, { pulse: [0, g2, g2] }) + wPip(t, { in: tC }) + wBasil(t, { in: tC + .1 }) + wMomo(t, { in: tC + .2, poses: [[tC, "sit"], [tC + .8, "pointing"]] })); }
+  return out + OP(1 - x3, tpill(960, 62, "Last time, in Part 1", 34, P.ink, P.sun, { w: 700, ls: 2 })) + logo(t); };
 
 /* ============ 3 · today's goals, the game ============ */
-SC.goals = (t, s) => goals3(t, s, [["How to spot a bird", TF(0, 0, .5, feather())], ["What makes a fish a fish", TF(0, 0, .52, fishG())], ["The fish that hops on land", TF(-14, 44, .5, mudskipper())]]);
+SC.goals = (t, s) => goals3(t, s, [["How to spot a bird", TF(0, 0, .5, feather())], ["What makes a fish a fish", TF(0, 0, .52, fishG())], ["The fish that hops on land", TF(-14, 44, .5, mudskipper())]], "momo", ["g200", "g201", "g202", "g203"]);
 SC.game = (t, s) => gameScene(t, s, "b301", false);
 
 /* ============ 4 · the kingfisher; Round 1: is a penguin a bird? ============ */
 const CAMK = [2.5, 950, 380], kp = (x, y) => [gx(CAMK, KFXY[0] + x * .62), gy(CAMK, KFXY[1] + y * .62)];
 SC.bird = (t, s) => { const L = "b401", e = eio((t - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMK[0], e), lerp(CAMW[1], CAMK[1], e), lerp(CAMW[2], CAMK[2], e)], tB = W(L, "beak") - .1, tWg = W(L, "wings") - .1, tO = W(L, "outer") - .2;
-  return wetView(t, { kf: { flap: .5 * pulse(t, tWg + .2, .15, .6) } }, cam) + lab(t, tB, [470, 300], [kp(-110, -152)], "beak") + lab(t, tWg, [1420, 620], [kp(34, -66)], "wings")
+  const spr = ss(tWg - .1, tWg + .35, t) * (1 - ss(tO - .5, tO - .1, t));
+  return wetView(t, { kf: { spread: spr, beat: spr * Math.sin((t - tWg) * 7) } }, cam) + lab(t, tB, [470, 300], [kp(-110, -152)], "beak") + lab(t, tWg, [1500, 640], [kp(130 * spr + 40, -150 * spr - 60)], "wings")
     + (t >= tO ? TF(1330, 330, spring(t, tO, .45), tpill(0, 0, "outer covering?", 56, P.sun, P.ink, { w: 700 })) : "")
     + buddy("momo", 250, 1056, 250, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [tO, "thinking"]] }) + HUD(t); };
 SC.r1 = (t, s) => { const L = "b402", tNo = W(L, "cannot") - .1;
   return lockN(t, { cards: ["Yes", "No"], q: "Is a penguin a bird?", tq: W(L, "is") - .1, tc: [W(L, "one", 1), W(L, "two")], ring0: MK("ring0_1"), dur: 5, lock: "b403",
-    obj: (tt) => `<ellipse cx="430" cy="606" rx="140" ry="30" fill="#DDF4FF"/>` + TF(430, 604, .78, penguin({ flap: tt >= tNo ? Math.abs(Math.sin((tt - tNo) * 7)) * (1 - ss(tNo + 1.2, tNo + 1.6, tt)) : 0 })),
+    obj: (tt) => `<ellipse cx="430" cy="606" rx="140" ry="30" fill="#DDF4FF"/>` + TF(430 + 46 * Math.sin(tt * .9), 606, .7, penguin({ walk: tt * 6, flap: Math.max(tt >= tNo ? Math.abs(Math.sin((tt - tNo) * 7)) * (1 - ss(tNo + 1.4, tNo + 1.8, tt)) : 0, .9 * Math.abs(Math.sin(tt * 7)) * ss(.55, .9, Math.sin(tt * .9 + 1))) })),
     picks: [{ who: "pip", id: "b404", word: "2", x: true }, { who: "momo", id: "b405", word: "1" }, { who: "basil", id: "b406", word: "1" }], react: [[LE("b404") + .1, "pip", "thinking"], [LE("b405") + .1, "momo", "pointing"], [LE("b406") + .1, "basil", "cheer"]] }); };
 const nestEggs = `<ellipse cx="0" cy="70" rx="150" ry="50" fill="#8A5A36"/><g stroke="#B8865A" stroke-width="7" stroke-linecap="round" fill="none"><path d="M-140 60 q140 60 280 0 M-120 80 q120 44 240 0 M-130 50 q60 -20 120 0 M10 50 q60 -20 120 0"/></g>` + [-56, 0, 56].map((x) => TF(x, 28, 1.0, egg())).join("");
 SC.birds = (t, s) => { const ids = ["b408", "b409", "b410", "b411"], caps = ["Birds live largely on land. Birds have beaks that enable them to pick up food.", "Birds have wings and can usually fly.", "Some birds such as ostriches and penguins cannot fly.", "Birds lay eggs."];
   const tw_ = [W("b408", "beaks") - .2, W("b409", "wings") - .2, W("b410", "ostriches") - .2, W("b411", "eggs") - .3], labs = ["beak", "wings", "cannot fly", "eggs"], fl = Math.abs(Math.sin(t * 6));
-  const pics = [landPic + TF(40, 110, .62, kingfisher({ fish: 1 })), `<rect x="-300" y="-300" width="600" height="600" fill="#BFE6FF"/>` + TF(10, 60 + 10 * Math.sin(t * 6), .6, kingfisher({ flap: fl })), landPic + TF(-70, 130, .46, ostrich()) + TF(84, 130, .5, penguin()), landPic + TF(0, 20, .8, nestEggs)];
-  return bg("daystage") + pics.map((p, i) => { const k = spring(t, tw_[i], .45); return k < .02 ? "" : TF(300 + i * 440, 1000, k * (1 + .04 * pulse(t, tw_[i] + .3, .1, .8)), wboard(p, 360, 330, "bd" + i, { lab: labs[i], size: 40 })); }).join("")
+  // version 2: bigger boards; the kingfisher holds a fish in its BEAK; on the WINGS card it faces us with both wings spread and beating; the ostrich
+  // steps and bobs its long neck; the penguin waddles and flaps its flippers (teacher, 21 Nov: "the penguin is not cute and not animated properly")
+  const sky = `<rect x="-300" y="-300" width="600" height="600" fill="#BFE6FF"/><g fill="#fff" opacity=".8"><ellipse cx="-110" cy="-130" rx="70" ry="20"/><ellipse cx="120" cy="150" rx="80" ry="20"/></g>`;
+  const pics = [landPic + TF(64, 150, .9, kingfisher({ fish: 1 })), sky + TF(8, 124 + 9 * Math.sin(t * 5), .8, kingfisher({ spread: 1, beat: Math.sin(t * 5), ph: 2 })),
+    landPic + TF(-98 + 6 * Math.sin(t * .9), 176, .5, ostrich({ step: t * 4.2 })) + TF(84 + 12 * Math.sin(t * 1.1), 176, .56, penguin({ walk: t * 6, flap: Math.max(0, Math.sin(t * 1.9)) * Math.abs(Math.sin(t * 8)), ph: 1 })), landPic + TF(0, 40, .9, nestEggs)];
+  return bg("daystage") + pics.map((p, i) => { const k = spring(t, tw_[i], .45); return k < .02 ? "" : TF(280 + i * 453, 1010, k * (1 + .04 * pulse(t, tw_[i] + .3, .1, .8)), wboard(p, 400, 420, "bd" + i, { lab: labs[i], size: 42 })); }).join("")
     + ids.map((id, i) => bookCap(t, id, caps[i], 170, { size: 46, maxW: 1250, x: 800, t1: ids[i + 1] ? LT(ids[i + 1]) - .25 : 1e9 })).join("")
     + (t >= W("b409", "usually") - .05 && t < LT("b410") - .25 ? TF(740, 330, spring(t, W("b409", "usually") - .05, .4), tpill(0, 0, "usually: not always!", 38, P.sun, P.ink, { w: 700 })) : "") + HUD(t); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "b413", sayId: "b412", who: "basil", n: "1 of 2", text: "Birds have an outer covering of feathers.", keys: ["outer", "covering", "feathers."], size: 78, y: 256, extra: TF(1480, 880, spring(t, s.t0 + .5, .5) * .62, swatch("feathers", t)) + TF(1160, 880, spring(t, s.t0 + .6, .5) * .7, feather()) });
 SC.birdans = (t, s) => { const a = "b414", b = "b415", tA = W(a, "one") - .1, tF = W(a, "feathers") - .1, tB = W(a, "bird") - .1, ts = MK("stamp2") + .25, tc = W("b416", "one", 1) - .1, lit = t >= tA ? spring(t, tA, .45) : 0;
-  return bg("daystage") + `<ellipse cx="760" cy="1000" rx="230" ry="26" fill="${P.ink}" opacity=".16"/>` + TF(760, 1000, 1.7, penguin({ flap: .5 + .5 * Math.sin(t * 3) })) + lab(t, tF, [1120, 560], [[800, 800]], "feathers") + (t >= tB ? TF(760, 380, spring(t, tB, .45), `<g transform="rotate(-4)">${tpill(0, 0, "a BIRD", 70, P.leafDeep, "#fff", { w: 700, ls: 3 })}</g>`) : "")
+  return bg("daystage") + `<ellipse cx="760" cy="1000" rx="230" ry="26" fill="${P.ink}" opacity=".16"/>` + TF(760 + 30 * Math.sin(t * 1.0), 1000, 1.7, penguin({ walk: t * 5.5, flap: Math.max(0, Math.sin(t * 2.2)) * Math.abs(Math.sin(t * 8)) })) + lab(t, tF, [1120, 560], [[800, 800]], "feathers") + (t >= tB ? TF(760, 380, spring(t, tB, .45), `<g transform="rotate(-4)">${tpill(0, 0, "a BIRD", 70, P.leafDeep, "#fff", { w: 700, ls: 3 })}</g>`) : "")
     + TF(1180, 960, .5, ansCard(1, "Yes", { lit })) + tcard(t, { 0: 0, 1: ts }) + stampPress(t, ts, CARD[0], CARD[1], CARD[2], 1)
     + buddy("pip", 260, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT(b) - .12, "sit"], [LE(b) + .1, "cheer"], [LE(b) + 2.0, "sit"]], nohop: true }) + say(b, 420, 520, t, { size: 44, tail: -130, maxW: 520 })
     + wMomo(t, { in: s.t0 + .2 }) + coin(t, tc, 1180, 560, "+1", "if you showed one finger") + HUD(t); };
@@ -77,8 +87,10 @@ SC.gills = (t, s) => { const a = "b505", b = "b506", tG = W(a, "gills") - .15, t
 /* ============ 6 · Round 2: the animal on the mud ============ */
 SC.r2 = (t, s) => { const L = "b601", tHp = W(L, "hops") - .2, tw_ = [W(L, "fins") - .1, W(L, "scales") - .1, W(L, "gills") - .1];
   return lockN(t, { cards: ["An amphibian", "A bird", "A fish"], q: "What is it?", tq: W(L, "what") - .1, tc: [W(L, "one"), W(L, "two", 1), W(L, "three")], ring0: MK("ring0_2"), dur: 5, lock: "b602",
-    obj: (tt) => { const hy = [0, 1, 2].reduce((y, i) => y + hop(tt, tHp + i * .4, .34, 30), 0); return `<ellipse cx="430" cy="610" rx="165" ry="40" fill="#8A7054"/><ellipse cx="430" cy="604" rx="150" ry="30" fill="#A98C6C"/>` + TF(446, 600 - hy, .62, mudskipper({ blink: ((tt + .4) % 2.9) < .12 }))
-      + ["fins", "scales", "gills"].map((w, i) => tt >= tw_[i] && tt < MK("ring0_2") - .4 ? TF(430 + (i - 1) * 118, 366 - (i === 1 ? 46 : 0), spring(tt, tw_[i], .4), tpill(0, 0, w, 30, "#fff", P.ink, { w: 700 })) : "").join(""); },
+    obj: (tt) => { const hy = [0, 1, 2].reduce((y, i) => y + hop(tt, tHp + i * .4, .34, 30), 0); return `<ellipse cx="430" cy="610" rx="165" ry="40" fill="#8A7054"/><ellipse cx="430" cy="604" rx="150" ry="30" fill="#A98C6C"/>` + TF(446, 600 - hy, .62, mudskipper({ push: [0, 1, 2].reduce((a, i) => Math.max(a, pulse(tt, tHp + i * .4 + .05, .08, .3)), .3 * Math.max(0, Math.sin(tt * 1.6))) }))
+; },
+    // the clues: on top of the ring frame, from the moment Heart says them to the end of the round (never taken away during the countdown)
+    clue: (tt) => ["fins", "scales", "gills"].map((w, i) => tt >= tw_[i] ? TF(430 + [-168, 0, 168][i], 470 - [150, 222, 150][i], spring(tt, tw_[i], .4), tpill(0, 0, w, 38, "#fff", P.ink, { w: 700 })) : "").join(""),
     picks: [{ who: "basil", id: "b603", word: "1", x: true }, { who: "pip", id: "b604", word: "3" }, { who: "momo", id: "b605", word: "3" }], react: [[LE("b603") + .1, "basil", "arms_crossed"], [LE("b604") + .1, "pip", "pointing"], [LE("b605") + .1, "momo", "pointing"]] }); };
 
 /* ============ 7 · be the mudskipper ============ */
@@ -106,8 +118,8 @@ function fieldNotes(t, o = {}) { const lit = o.lit || [0, 0, 0], rub = o.rub || 
     <g transform="translate(400 0)">${pic}</g>${i === 2 && o.x ? TF(-448, 0, o.x, xBadge(26)) : ""}</g><path d="M-410 ${y + 74} H410" stroke="${P.ink2}" stroke-width="2.5" stroke-dasharray="3 9" opacity=".4"/>`; });
   return `<ellipse cx="0" cy="4" rx="330" ry="18" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-200 0 L-90 -400 M200 0 L90 -400 M0 0 V-300" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><rect x="-330" y="-176" width="660" height="20" rx="10" fill="#8A5A36"/>
   <g filter="url(#drop)"><rect x="-480" y="-810" width="960" height="640" rx="26" fill="url(#gPaper)" stroke="${P.momo}" stroke-width="8"/></g>${T(0, -716, "My field notes", 56, P.ink)}${s}${o.tick ? TF(410, -250, o.tick, tickBadge(40)) : ""}`; }
-const NOTE = [980, 1056, .95], lizShow = (t, t0) => 1 - ramp(t, t0, .25) * (1 - ramp(t, t0 + 3.2, .2));
-const showView = (t, o = {}) => wetView(t, { mud: {}, lizR: o.liz === undefined ? 1 : o.liz }, CAMW) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".16"/>` + TF(NOTE[0], NOTE[1], NOTE[2], fieldNotes(t, o.notes || {})) + (o.side || "");
+const NOTE = [980, 1056, .95], lizShow = (t, t0) => 1 - ramp(t, t0, .4);   // the hidden frog climbs onto the root and stays
+const showView = (t, o = {}) => wetView(t, { mud: {}, frog: false, lizR: o.liz === undefined ? 1 : o.liz }, CAMW) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".16"/>` + TF(NOTE[0], NOTE[1], NOTE[2], fieldNotes(t, o.notes || {})) + (o.side || "");
 SC.show = (t, s) => { const a = "b901", b = "b902", c = "b903", r0 = MK("ring0_3"), bell = MK("bell_3"), rs = ringState(t, r0, 6), tLz = LT(b) + .3;
   const tr = [W(b, "one"), W(b, "two"), W(b, "three")], tcn = [W(c, "one", 1), W(c, "two"), W(c, "three")], tP = LT("b905"), tB = LT("b906"), tO = LT("b907");
   const lit = [0, 1, 2].map((i) => t < LT(c) ? (t >= tr[i] - .1 && t < (tr[i + 1] || LE(b)) - .1 ? 1 : 0) : 0), badge = [0, 1, 2].map((i) => Math.max(pulse(t, tcn[i], .04, .5), t >= r0 && t < bell ? (Math.floor((t - r0) / .5) % 3 === i ? .5 + .5 * rs.tick : 0) : 0));
@@ -120,7 +132,7 @@ SC.show = (t, s) => { const a = "b901", b = "b902", c = "b903", r0 = MK("ring0_3
     + stamp(t, LT("b904") - .08, 960, 480) + bellIcon(t, r0) + HUD(t); };
 SC.fixed = (t, s) => { const b = "b908", h = "b909", tc = W("b910", "two") - .1, rub = ss(s.t0 + .15, s.t0 + .6, t), wr = ss(s.t0 + .6, LT(b) + .9, t), tS = W(h, "scales") - .1, tG = W(h, "gills") - .1, tH = LT(h) - .2;
   const star = `<rect x="-300" y="-300" width="600" height="600" fill="#BFE6FF"/><rect x="-300" y="60" width="600" height="300" fill="#F1DDB0"/>` + TF(0, 20, 1.1, seaStar());
-  return showView(t, { notes: { fixing: true, rub, write: wr, tick: spring(t, LE(b) - .2, .45) } })
+  return showView(t, { liz: 0, notes: { fixing: true, rub, write: wr, tick: spring(t, LE(b) - .2, .45) } })
     + (t >= tH ? TF(250, 1050, spring(t, tH, .45), wboard(star, 380, 330, "ss", { lab: "also called a sea star", size: 32 })) + (t >= tS ? TF(250, 570, spring(t, tS, .4), tpill(0, 0, "no scales", 40, P.ink, "#fff", { w: 700 })) : "") + (t >= tG ? TF(250, 490, spring(t, tG, .4), tpill(0, 0, "no gills", 40, P.ink, "#fff", { w: 700 })) : "") : "")
     + buddy("momo", 1720, 1060, 270, t, { aura: true, flip: true, poses: [[s.t0, "sit"], [LE(b) + .1, "cheer"], [LE(b) + 2, "sit"]], nohop: true }) + say(b, 1640, 520, t, { size: 46, tail: 80, maxW: 520 })
     + bookCap(t, h, "Starfish are not fish! This is because they do not have scales or gills.", 150, { size: 44, maxW: 1150, x: 760 }) + coin(t, tc, 1500, 380, "+2", "if you showed three fingers") + HUD(t); };
@@ -135,7 +147,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002" });
 
 /* ============ 12 · score hand, the lizard ============ */
 SC.final = (t, s) => { const L = "b1201"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "four") - .1, null, 4]], TF(1260, 1062, .42, trailCard(t, ALL3))); };
-SC.liz = (t, s) => { const L = "b1202"; return lizReveal(t, s, L, wetView(t, { mud: {}, lizR: 0 }, CAMW), gx(CAMW, 1712), gy(CAMW, 668), W(L, "is") - .1, "Is its skin moist, or dry?", -210); };
+SC.liz = (t, s) => { const L = "b1202"; return lizReveal(t, s, L, wetView(t, { mud: {}, frog: false, lizR: 0 }, CAMW), gx(CAMW, HIDF[0] + 4), gy(CAMW, HIDF[1] + 8), W(L, "it") - .1, "It was the frog, on a mangrove root!", -210, 130, 78); };
 
 /* ============ 13 · the dare for Episode 6 ============ */
 const SIX = [["AMPHIBIANS", "#2FA65A"], ["BIRDS", "#F08A24"], ["FISH", "#3A8DFF"], ["INSECTS", "#8A6FD6"], ["REPTILES", "#8A6FD6"], ["MAMMALS", "#8A6FD6"]];

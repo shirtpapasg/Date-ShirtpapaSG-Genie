@@ -1,7 +1,7 @@
 // render.js: frames -> out/chunks/c_NNNN.mp4 (300 frames each; finished chunks are kept, so a restart loses little), then out/video.mp4.
 //   NODE_PATH=$(npm root -g) node render.js <part> [workers=3] [t0 t1]     With t0 t1 it renders only that span to out/clip_<t0>.mp4 (with sound).
 const { chromium } = require('playwright'); const { spawn, spawnSync } = require('child_process'); const fs = require('fs'), path = require('path');
-const PART = +(process.argv[2] || 1), TL = JSON.parse(fs.readFileSync(path.join(__dirname, `tl_p${PART}.json`))), FPS = 30, CH = 300, OUT = path.join(__dirname, 'out');
+const PART = +(process.argv[2] || 1), TL = JSON.parse(fs.readFileSync(path.join(__dirname, `tl_p${PART}.json`))), FPS = 30, CH = 300, OUT = path.join(__dirname, process.env.EP_OUT ? path.join(process.env.EP_OUT, 'out') : 'out');   // EP_OUT=v2 -> v2/out (the live renders are never touched)
 const W = +(process.argv[3] || 3), clip = process.argv[4] !== undefined ? [+process.argv[4], +process.argv[5]] : null;
 const F0 = clip ? Math.round(clip[0] * FPS) : 0, F1 = clip ? Math.round(clip[1] * FPS) : Math.ceil(TL.END * FPS), dir = path.join(OUT, clip ? 'clipchunks' : `chunks_p${PART}`);
 if (clip) fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
@@ -17,5 +17,5 @@ async function worker(id) { const b = await chromium.launch(); const p = await b
 (async () => { const all = jobs.map(name); const t0 = Date.now(); await Promise.all(Array.from({ length: W }, (_, i) => worker(i)));
   const list = path.join(dir, 'list.txt'); fs.writeFileSync(list, all.map(f => `file '${f}'`).join('\n'));
   const vid = path.join(OUT, clip ? `clip_${clip[0]}_v.mp4` : `video_p${PART}.mp4`); spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', vid], { stdio: 'inherit' });
-  if (clip && fs.existsSync(path.join(OUT, `mix_p${PART}.wav`))) spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', vid, '-ss', String(clip[0]), '-t', String(clip[1] - clip[0]), '-i', path.join(OUT, `mix_p${PART}.wav`), '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', path.join(OUT, `clip_${clip[0]}.mp4`)], { stdio: 'inherit' });
+  if (clip && fs.existsSync(path.join(__dirname, 'out', `mix_p${PART}.wav`))) spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', vid, '-ss', String(clip[0]), '-t', String(clip[1] - clip[0]), '-i', path.join(__dirname, 'out', `mix_p${PART}.wav`), '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', path.join(OUT, `clip_${clip[0]}.mp4`)], { stdio: 'inherit' });
   console.log('done in', ((Date.now() - t0) / 1000 | 0), 's ->', vid); })();
