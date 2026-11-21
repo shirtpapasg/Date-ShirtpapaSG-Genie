@@ -77,3 +77,21 @@ The .mp4 / .srt / sheet_part*.png in this folder are the OLD Opus render: they n
   P1 Round 2 clue "dry and scaly" above the ring at +0.6 and +4.6 s; outro 5.2 s (P1) / 4.8 s (P2) after the shout; reveal "Did you spot the hidden animal?".
 - Uploaded: Part 1 n_NzfK47Sgc, Part 2 NpkenGlnOVQ; both playlists after 2WuoSmh7xWY; sO31eHgDCGI out of the playlists, description points to Part 1.
 - Render chunks deleted after the upload.
+
+## 21 Nov 2026: v2 patch (teacher: "Heart no longer shares what animal to find" + the orphan YOU tag), LIVE
+- New rule (SERIES_FORMAT "The hidden animal"): Heart names it at the start with a small picture. Re-recorded ONLY e301 / f301
+  ("A little grasshopper / squirrel is hiding in this video. Can you spot it?") and e1302 / f1302 ("Did you spot the grasshopper? It was on the
+  lamp post! Is it an insect? Tell someone at home." / "Did you spot the squirrel? It was on the palm trunk! Is it cold-blooded, or warm-blooded?
+  Tell someone at home."). Old takes kept in out/live/voice/.
+- Rules scene (common.js gameScene(t, s, L, full, an, pic) + hidPic): on the animal's name the paper disc shows hopperF / squirrelF (fable_art.js,
+  moving and blinking) for 1.5 s, then the bush with two eyes pops in, then "Can you spot it?". Sound cue "curious" now on the animal's name.
+- Part 1 outro: no YOU tag (no orphan labels): nykScene(t, s, prop, { you: false }) in fable1.js. Part 2 keeps YOU over the lizard.
+- Each re-recorded line's length change was snapped to whole frames with its "post" in script.py (+6, -27 frames in Part 1; -2, -33 in Part 2),
+  so only the changed spans were rendered (out/patch_v2.sh) and spliced between untouched spans of the live render with ../kit_resplice.sh
+  (segment muxer at the 300-frame keyframes; the concat demuxer's inpoint/outpoint let extra frames through, do not use it).
+  Spans: P1 20-30.2, 260.2-279.3, 299.3-end; P2 20-29.93, 259.93-278.83. Every seam checked frame-identical to the live render (PSNR inf).
+- ep06_part1.mp4 312.63 s (9379 frames), ep06_part2.mp4 312.30 s (9369 frames); both -16.0 LUFS; new .srt and sheet_part*.png.
+  Check stills: qa/fix_p1_rules.jpg, qa/fix_p2_rules.jpg (page), qa/v2_p1_checks.jpg, qa/v2_p2_checks.jpg (from the final files).
+- Uploaded with upload_v2.json (same titles, descriptions, tags, thumbnails; after arTMOT9X1iE; replaces n_NzfK47Sgc, NpkenGlnOVQ, retire_old):
+  Part 1 https://www.youtube.com/watch?v=fNZuqF2zDww , Part 2 https://www.youtube.com/watch?v=Ojuq9XJI66E . Old ones out of both playlists, public,
+  pointing to the new Part 1. Render spans deleted after the upload.

@@ -75,3 +75,17 @@ lines, the buddies' card readings), new `.srt`, `upload_v2.json`, upload. The th
   https://www.youtube.com/watch?v=M2PLrTN65vM , Part 2 https://www.youtube.com/watch?v=arTMOT9X1iE . Both playlists: EP4 Part 2 (HCDeYV32P8w) ->
   M2PLrTN65vM -> arTMOT9X1iE -> EP6 n_NzfK47Sgc -> NpkenGlnOVQ (checked). v1 O1KiFUs7pkE / 2WuoSmh7xWY left the playlists, stay public, and their
   descriptions start with "NEW VERSION" pointing to M2PLrTN65vM. Captions (.srt) not sent by the uploader.
+
+## VERSION 3 LIVE (21 Nov 2026: the hidden animal named at the start)
+- Teacher: "Heart no longer shares what animal to find in the video". Re-recorded ONLY a302 / b301 ("A little duck / frog is hiding in this
+  video. Can you spot it?") and a1202 / b1202 ("Did you spot the duck? It was behind the boardwalk rail! Tell someone at home." / "Did you spot
+  the frog? It was on a mangrove root! Tell someone at home."). The v2 takes, timelines and mixes are kept in v3/out/live/.
+- Rules scene (common.js gameScene(..., an, pic) + mysteryPic): on the animal's name the mystery disc shows duck() / frog() (animals.js) for 1.5 s,
+  then the "?" comes back; the pill now says "A little duck / frog is hiding!". Cue "curious" on the animal's name.
+- Line length changes snapped to whole frames ("post" in script.py), so only the changed spans were rendered with EP_OUT=v3 (v3/patch_v3.sh)
+  and spliced into the v2 render with ../kit_resplice.sh: P1 20-39.8 and 259.8-268.83 s, P2 20-29.83 and 259.83-268.83 s; seams frame-identical.
+- v3/ep05_part1.mp4 304.33 s, v3/ep05_part2.mp4 308.03 s, both -16.0 LUFS, new v3/*.srt, v3/sheet_part*.png; stills v3/qa/fix_p*_rules.jpg,
+  v3/qa/v3_checks.jpg. v1 (ep05_partP.*) and v2 (v2/) files untouched; thumbnails reused from v2/.
+- YouTube (upload_v3.json, after HCDeYV32P8w, replaces M2PLrTN65vM / arTMOT9X1iE, retire_old): Part 1 https://www.youtube.com/watch?v=zexMf4fY7Ms ,
+  Part 2 https://www.youtube.com/watch?v=1FGxQNHwrUo . Both playlists checked: HCDeYV32P8w -> zexMf4fY7Ms -> 1FGxQNHwrUo -> fNZuqF2zDww -> Ojuq9XJI66E.
+  Render spans deleted after the upload.
