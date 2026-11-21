@@ -1,0 +1,212 @@
+// water.js: EP10's sets and props (Stage 2). Loaded after tests.js, before common.js.
+// Sets (baked in bg/): BG.beach (a beach shelter at East Coast Park, bright morning), BG.beachR (the same under grey clouds; the rain is drawn
+// live), BG.vdrain (the void deck of an HDB block on a rainy afternoon: EP9's void deck + a row of flower pots at the open edge, a covered
+// walkway with a metal roof, the block opposite). Views: beachView(t, o, cam), deckView(t, o, cam), seaView(t, o).
+// Props: OUR TUB (tubSvg), the two blocks and the two spoons (same size, same shape), the steel bowl and the jug, an adult's hands, the giant
+// container ship (shipSide, shipInside), the raincoat on its stand, the fabric boots, the block of SHOE WAX, the dropper and the cup, the trays,
+// the four tiles, Basil's notes, EP11's dare boards, the hidden animals (otterArt, snailArt). Pure functions of their arguments.
+const XDEFS10 = () => `${lg("wSea", [[0, "#48AEE6"], [1, "#1C7CC2"]])}${lg("wSeaG", [[0, "#7C9CAE"], [1, "#4F7488"]])}${lg("wSkyG", [[0, "#8793A3"], [1, "#C9D0D8"]])}${lg("wSand", [[0, "#F8E9BC"], [1, "#E8CF92"]])}${lg("wSandG", [[0, "#DDD1AE"], [1, "#C2B48E"]])}
+  ${lg("wWater", [[0, "#BFE8FB", .78], [1, "#79C4EE", .86]])}${lg("wTubG", [[0, "#F2FAFF", .55], [1, "#DCEFFA", .4]])}${lg("tSteel", [[0, "#F2F5F9"], [.5, "#C9D1DC"], [1, "#9AA5B4"]], 1, 0)}
+  ${lg("vdFloor", [[0, "#F1EADF"], [1, "#CFC5B4"]])}${lg("vdStone", [[0, "#F8F4EC"], [1, "#E4DCCE"]])}${lg("vdCeil", [[0, "#C9C1B4"], [1, "#E6E0D5"]])}${lg("wPave", [[0, "#EBDCC8"], [1, "#CDB99E"]])}
+  ${lg("wHull", [[0, "#46546A"], [1, "#27303F"]])}${lg("wHullR", [[0, "#D8472F"], [1, "#A9301E"]])}${lg("wCoat", [[0, "#FFE56E"], [1, "#F4B920"]])}${lg("wCoatH", [[0, "#F4B920"], [.5, "#FFE56E"], [1, "#EFAE14"]], 1, 0)}
+  ${lg("wBoot", [[0, "#DDBE84"], [1, "#BE9A5E"]])}${lg("wBootW", [[0, "#A98450"], [1, "#8A6A3C"]])}${lg("wRub", [[0, "#FCFCFA"], [1, "#D9DDE3"]])}${lg("wTimber", [[0, "#8A5A36"], [1, "#B37A48"]])}${lg("wTile", [[0, "#E57A56"], [1, "#B9502F"]])}
+  ${lg("wRoofM", [[0, "#DDE3EA"], [1, "#9AA5B4"]])}${lg("wWax", [[0, "#FFF6DC"], [1, "#EAD9A8"]])}${lg("wRock", [[0, "#A9A39A"], [1, "#6F6A64"]])}${lg("wDeep", [[0, "#2C7FC0"], [1, "#0F3F78"]])}
+  <pattern id="wWv" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 3.5 H14 M0 10.5 H14" stroke="#7E6238" stroke-width="2" opacity=".4"/><path d="M3.5 0 V14 M10.5 0 V14" stroke="#F3E2B8" stroke-width="2" opacity=".5"/></pattern>
+  <pattern id="wWvW" width="16" height="16" patternUnits="userSpaceOnUse"><path d="M0 4 H16 M0 12 H16" stroke="#8D97B2" stroke-width="2.2" opacity=".35"/><path d="M4 0 V16 M12 0 V16" stroke="#fff" stroke-width="2.2" opacity=".8"/></pattern>
+  <clipPath id="wRingA"><circle cx="-70" cy="0" r="66"/></clipPath><clipPath id="wRingB"><circle cx="70" cy="0" r="66"/></clipPath>`;
+const TYB = 872;                                     // where things stand on the round stone table (both sets)
+
+/* ====================================================================================================================================
+   small props
+   ==================================================================================================================================== */
+// the two blocks: EXACTLY the same size and shape (w x h), one wood, one metal. origin = centre
+const blockW = (w = 64, h = 44) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="5" fill="url(#cWood)" stroke="#7A4C26" stroke-width="4"/><path d="M${-w * .36} ${-h * .2} q${w * .3} -6 ${w * .7} 0 M${-w * .4} ${h * .06} q${w * .34} 7 ${w * .78} 0 M${-w * .3} ${h * .3} q${w * .3} -5 ${w * .6} 0" fill="none" stroke="#7A4C26" stroke-width="2.5" stroke-linecap="round" opacity=".55"/><path d="M${-w * .38} ${-h * .36} H${w * .2}" stroke="#F0C89A" stroke-width="3" stroke-linecap="round" opacity=".8"/>`;
+const blockM = (w = 64, h = 44) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="5" fill="url(#cSteel)" stroke="#5E6B7C" stroke-width="4"/><path d="M${-w * .36} ${-h * .3} H${w * .26}" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".95"/><path d="M${w * .1} ${h * .26} H${w * .36}" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".5"/>`;
+// the two spoons: the same shape (bowl at the left, handle to the right, 150 long). origin = centre
+const spoonSh = (fill, line, hi) => `<rect x="-36" y="-6" width="111" height="12" rx="6" fill="${fill}" stroke="${line}" stroke-width="3.5"/><ellipse cx="-47" cy="0" rx="28" ry="13" fill="${fill}" stroke="${line}" stroke-width="3.5"/><ellipse cx="-50" cy="-3" rx="15" ry="5" fill="${hi}" opacity=".7"/>`;
+const spoonW = () => spoonSh("url(#cWood)", "#7A4C26", "#F0C89A"), spoonM = () => spoonSh("url(#tSteel)", "#5E6B7C", "#fff");
+// the stainless-steel bowl, side on (150 wide, 62 deep). origin = the middle of its base
+const bowlSteel = () => `<path d="M-75 -62 Q-72 -8 -26 0 H26 Q72 -8 75 -62z" fill="url(#cSteel)" stroke="#5E6B7C" stroke-width="4" stroke-linejoin="round"/><ellipse cx="0" cy="-62" rx="75" ry="8" fill="#EEF2F6" stroke="#5E6B7C" stroke-width="4"/><path d="M-56 -46 Q-50 -20 -28 -10" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".9"/>`;
+// a clear jug of water with a handle (spout to the left). origin = base middle; about 120 x 150. fill 0..1
+const jugSvg = (fill = .7) => `<path d="M40 -120 Q92 -118 90 -76 Q88 -40 42 -38" fill="none" stroke="#9CC4DA" stroke-width="11" stroke-linecap="round"/><path d="M-46 -${n2(8 + 122 * fill)} H46 V-10 Q46 0 36 0 H-36 Q-46 0 -46 -10z" fill="#6CBDEC" opacity=".8"/><path d="M-46 -${n2(8 + 122 * fill)} H46" stroke="#fff" stroke-width="3"/>
+  <path d="M-60 -150 L-46 -136 V-10 Q-46 0 -36 0 H36 Q46 0 46 -10 V-150z" fill="url(#wTubG)" stroke="#6FA8C9" stroke-width="5" stroke-linejoin="round"/><path d="M-30 -120 V-30" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".7"/>${[-104, -76, -48].map((y) => `<path d="M22 ${y} h16" stroke="#6FA8C9" stroke-width="3"/>`).join("")}`;
+// OUR TUB: a clear plastic tub, side on, 440 x 280, three-quarters full. origin = base middle. o.level (0..1), o.inner (things in the water,
+// tub coordinates), o.over (things in front of the water but behind the front wall's shine), o.label: false to leave the sticker off
+const TUB = { W: 440, H: 280, lv: .75 }; TUB.ys = -TUB.H * TUB.lv; TUB.fl = -8;
+function tubSvg(o = {}) { const W = TUB.W, H = TUB.H, lv = o.level === undefined ? TUB.lv : o.level, ys = -H * lv, hw = (y) => 200 + 20 * (-y / H), wv = o.t === undefined ? 0 : Math.sin(o.t * 2.2) * 2;
+  return `<ellipse cx="0" cy="6" rx="${W * .52}" ry="14" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-220 ${-H} H220 L200 0 H-200z" fill="url(#wTubG)"/>
+    <path d="M${n2(-hw(ys))} ${n2(ys)} H${n2(hw(ys))} L200 -4 Q200 0 194 0 H-194 Q-200 0 -200 -4z" fill="url(#wWater)"/>${o.inner || ""}
+    <path d="M${n2(-hw(ys) + 4)} ${n2(ys)} q${n2(hw(ys) / 4)} ${n2(-4 + wv)} ${n2(hw(ys) / 2)} 0 t${n2(hw(ys) / 2)} 0 t${n2(hw(ys) / 2)} 0 t${n2(hw(ys) / 2 - 8)} 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>${o.over || ""}
+    <path d="M-220 ${-H} L-200 -4 Q-200 0 -194 0 H194 Q200 0 200 -4 L220 ${-H}" fill="none" stroke="#6FA8C9" stroke-width="6" stroke-linejoin="round"/><rect x="-232" y="${-H - 10}" width="464" height="16" rx="8" fill="#DCEFFA" stroke="#6FA8C9" stroke-width="5"/>
+    <path d="M-196 ${-H + 26} L-184 -40" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".7"/><path d="M192 ${-H + 40} L186 -120" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".5"/>
+    ${o.label === false ? "" : `<g transform="translate(138 ${-H + 38}) rotate(-2)"><rect x="-64" y="-19" width="128" height="38" rx="7" fill="#FFF8EA" stroke="#C9A772" stroke-width="3"/>${T(0, 10, "OUR TUB", 25, P.ink, { ls: 1 })}</g>`}`; }
+// what is in the tub (tub coordinates). st: { wb, mb, ws, ms } = 1 when that thing is in the water at rest; bowl: "float" | "sunk"
+const TIN = { wb: [-96, TUB.ys + 1], mb: [96, TUB.fl - 22], ws: [78, TUB.ys + 3], ms: [-84, TUB.fl - 9], bowlF: [-10, TUB.ys + 46], bowlS: [-40, TUB.fl] };
+function tubThings(st = {}, t = 0) { const bob = (ph) => 2.2 * Math.sin(t * 1.9 + ph);
+  return (st.ms ? TF(TIN.ms[0], TIN.ms[1], 1, spoonM(), 2) : "") + (st.mb ? TF(TIN.mb[0], TIN.mb[1], 1, blockM()) : "") + (st.bowl === "sunk" ? TF(TIN.bowlS[0], TIN.bowlS[1], 1, bowlSteel()) : "")
+    + (st.wb ? TF(TIN.wb[0], TIN.wb[1] + bob(0), 1, blockW(), 2 * Math.sin(t * 1.3)) : "") + (st.ws ? TF(TIN.ws[0], TIN.ws[1] + bob(2), 1, spoonW(), 1.5 * Math.sin(t * 1.1 + 1)) : "") + (st.bowl === "float" ? TF(TIN.bowlF[0], TIN.bowlF[1] + bob(1), 1, bowlSteel(), 1.2 * Math.sin(t * 1.2)) : ""); }
+// a small tray on the table with the things that are not in the tub. origin = base middle; 300 wide
+function propTray(st = {}) { return `<ellipse cx="0" cy="6" rx="170" ry="10" fill="${P.ink}" opacity=".18" filter="url(#b4)"/><path d="M-150 -20 H150 L164 0 H-164z" fill="#F4E6CC" stroke="#C9A772" stroke-width="4" stroke-linejoin="round"/><rect x="-164" y="0" width="328" height="12" rx="5" fill="#E3C9A8" stroke="#C9A772" stroke-width="3"/>
+    ${st.wb ? "" : TF(-104, -42, 1, blockW())}${st.mb ? "" : TF(-28, -42, 1, blockM())}${st.ws ? "" : TF(66, -40, .95, spoonW(), -6)}${st.ms ? "" : TF(74, -16, .95, spoonM(), 3)}`; }
+// an adult's arm coming down from above, holding a thing by its top (origin = the middle of the thing's top edge). thing = svg centred below
+const holdDown = (thing, dy = 22, col) => adultArm(col) + `<g transform="translate(0 ${dy})">${thing}</g><rect x="-34" y="-12" width="22" height="34" rx="11" fill="${SKIN}" stroke="${SKIN2}" stroke-width="4"/><rect x="14" y="-12" width="22" height="34" rx="11" fill="${SKIN}" stroke="${SKIN2}" stroke-width="4"/>`;
+// a round bead of water (r), with its highlight; wob = a little wobble (-1..1)
+const bead = (r = 20, wob_ = 0, col = "#8FD3F8") => `<g transform="scale(${n2(1 + .1 * wob_)} ${n2(1 - .1 * wob_)})"><ellipse cx="0" cy="${n2(r * .78)}" rx="${n2(r * .9)}" ry="${n2(r * .22)}" fill="${P.ink}" opacity=".16"/><path d="M${-r} 0 A${r} ${n2(r * .92)} 0 0 1 ${r} 0 Q${r} ${n2(r * .66)} 0 ${n2(r * .7)} Q${-r} ${n2(r * .66)} ${-r} 0z" fill="${col}" stroke="#3E9BD4" stroke-width="${n2(Math.max(2, r * .12))}" opacity=".92"/><ellipse cx="${n2(-r * .36)}" cy="${n2(-r * .4)}" rx="${n2(r * .3)}" ry="${n2(r * .18)}" fill="#fff" opacity=".95" transform="rotate(-28 ${n2(-r * .36)} ${n2(-r * .4)})"/><circle cx="${n2(r * .4)}" cy="${n2(r * .2)}" r="${n2(r * .1)}" fill="#fff" opacity=".7"/></g>`;
+// a falling drop (teardrop), r = its width / 2
+const tear = (r = 12, col = "#8FD3F8") => `<path d="M0 ${n2(-r * 2.1)} Q${n2(r * 1.2)} ${n2(-r * .2)} ${r} ${n2(r * .3)} A${r} ${r} 0 1 1 ${-r} ${n2(r * .3)} Q${n2(-r * 1.2)} ${n2(-r * .2)} 0 ${n2(-r * 2.1)}z" fill="${col}" stroke="#3E9BD4" stroke-width="${n2(Math.max(2, r * .16))}"/><ellipse cx="${n2(-r * .35)}" cy="${n2(r * .1)}" rx="${n2(r * .22)}" ry="${n2(r * .4)}" fill="#fff" opacity=".9"/>`;
+// a glass dropper, tip down (origin = the tip). about 40 x 210
+const dropper = (full = 1) => `<path d="M-5 0 L-11 -60 V-130 H11 V-60 L5 0z" fill="#EAF8FF" stroke="#6FA8C9" stroke-width="4" stroke-linejoin="round" opacity=".95"/><path d="M-4 -4 L-9 -58 V-${n2(60 + 50 * full)} H9 V-58 L4 -4z" fill="#6CBDEC" opacity=".85"/><rect x="-17" y="-142" width="34" height="14" rx="5" fill="#8E9AA8"/><path d="M-15 -142 Q-22 -206 0 -208 Q22 -206 15 -142z" fill="#E8604E" stroke="#A83A2C" stroke-width="4" stroke-linejoin="round"/><path d="M-7 -190 Q-10 -170 -8 -152" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".6"/>`;
+// a small clear cup of water (origin = base middle)
+const cupSvg = () => `<path d="M-34 -70 H34 L28 0 H-28z" fill="url(#wTubG)" stroke="#6FA8C9" stroke-width="4" stroke-linejoin="round"/><path d="M-32 -46 H32 L28 -2 H-28z" fill="#6CBDEC" opacity=".8"/><path d="M-31 -46 H31" stroke="#fff" stroke-width="3"/><path d="M-22 -60 L-18 -12" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".7"/>`;
+// the block of SHOE WAX: a cold, pale block with a paper band (never a candle). origin = base middle; 130 x 62
+const waxBlock = () => `<ellipse cx="0" cy="4" rx="74" ry="8" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><rect x="-65" y="-62" width="130" height="62" rx="12" fill="url(#wWax)" stroke="#B9A56A" stroke-width="4"/><path d="M-54 -52 H30" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".9"/><rect x="-65" y="-44" width="130" height="32" fill="#2B2147"/><rect x="-65" y="-44" width="130" height="4" fill="${P.sun}"/><rect x="-65" y="-16" width="130" height="4" fill="${P.sun}"/>${T(0, -20, "SHOE WAX", 19, "#fff", { ls: 1.5 })}`;
+
+/* ---------- the board OUR 3 WATER TESTS: a cream board on a low stand. origin = the middle of the stand's feet; 760 x 420 + the stand ---------- */
+function board3Art(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow; let rows = "";
+  TESTS.forEach(([n, w], i) => { const y = -322 + i * 98, on = ticked(i, t), k = on ? spring(t, tickT(i), .4) : 0;
+    rows += (g === i ? `<rect x="-350" y="${y - 44}" width="700" height="88" rx="22" fill="${P.sun}" opacity="${n2(.4 + .22 * Math.sin(t * 5))}"/>` : `<rect x="-350" y="${y - 44}" width="700" height="88" rx="22" fill="#fff" opacity=".55"/>`)
+      + `<circle cx="-296" cy="${y}" r="34" fill="url(#gSun)"/>` + T(-296, y + 17, n, 46, P.ink) + T(-240, y + 17, w, 50, P.ink, { a: "start", ls: 1 }) + `<rect x="246" y="${y - 34}" width="68" height="68" rx="12" fill="#fff" stroke="${P.ink}" stroke-width="5"/>`
+      + (k > .02 ? TF(280, y, Math.min(1.25, k), `<path d="M-26 -2 L-8 20 L32 -28" fill="none" stroke="#fff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/><path d="M-26 -2 L-8 20 L32 -28" fill="none" stroke="${GOODC}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>`) : ""); });
+  return `<ellipse cx="0" cy="4" rx="330" ry="16" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-220 0 V-70 M220 0 V-70" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><path d="M-262 0 h84 M178 0 h84" stroke="#8A5A36" stroke-width="14" stroke-linecap="round"/>
+    <g filter="url(#drop)"><rect x="-384" y="-486" width="768" height="432" rx="30" fill="#3B2A8C"/><rect x="-372" y="-474" width="744" height="408" rx="20" fill="url(#gPaper)"/></g><rect x="-250" y="-506" width="500" height="64" rx="32" fill="#3B2A8C"/>${T(0, -460, "OUR 3 WATER TESTS", 38, "#fff", { ls: 3 })}` + rows; }
+
+/* ====================================================================================================================================
+   the hidden animals: cute AND alive (SERIES_FORMAT section 6). Both are centred on (0, 0), about 200 px, for the badge; the sets scale them.
+   ==================================================================================================================================== */
+// a little otter (the smooth-coated otter of Singapore's coasts): a smooth brown head held up out of the water, a pale chin and throat, little
+// round ears, a broad dark nose, whiskers, a long low back and the tip of a thick tail. It paddles on the spot, bobs, blinks, twitches its
+// whiskers; o.wave = 0..1 lifts a paw and waves
+function otterArt(t, o = {}) { const bob = 5 * Math.sin(t * 2.3), wv = o.wave || 0, pd = Math.sin(t * 6), tw_ = 4 * Math.sin(t * 9) * (Math.sin(t * 1.3) > .5 ? 1 : .15), tilt = 4 * Math.sin(t * 1.1) - 10 * wv;
+  const rip = (x, y, rx, ph) => { const v = ((t * .6 + ph) % 1); return `<ellipse cx="${x}" cy="${y}" rx="${n2(rx * (.6 + .7 * v))}" ry="${n2(rx * .16 * (.6 + .7 * v))}" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(.9 * (1 - v))}"/>`; };
+  const whisk = [-1, 1].map((sd) => [0, 1, 2].map((i) => `<path d="M${sd * 16} ${n2(-22 + i * 5)} l${sd * 34} ${n2(-8 + i * 9 + tw_ * sd)}" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".95"/>`).join("")).join("");
+  const paw = (x, up, rot) => `<g transform="translate(${x} ${n2(34 - up)}) rotate(${n2(rot)})"><ellipse cx="0" cy="0" rx="13" ry="17" fill="#8A5E3E" stroke="#5E3F28" stroke-width="3.5"/><path d="M-6 -11 v7 M0 -13 v8 M6 -11 v7" stroke="#5E3F28" stroke-width="2.4" stroke-linecap="round"/></g>`;
+  return rip(-10, 46, 96, 0) + rip(30, 50, 80, .5)
+    + `<g transform="translate(0 ${n2(bob * .5)})"><path d="M10 40 Q60 6 118 30 Q132 36 126 44 H10z" fill="#7A5236" stroke="#5E3F28" stroke-width="4" stroke-linejoin="round"/><path d="M136 44 q22 ${n2(-18 + 6 * pd)} 44 ${n2(-10 + 8 * pd)}" fill="none" stroke="#7A5236" stroke-width="15" stroke-linecap="round"/></g>`
+    + `<g transform="translate(-34 ${n2(bob)}) rotate(${n2(tilt)})"><path d="M-30 44 Q-36 0 -8 -4 H22 Q44 4 36 44z" fill="#8A5E3E" stroke="#5E3F28" stroke-width="4" stroke-linejoin="round"/><path d="M-18 44 Q-18 14 4 12 Q24 16 22 44z" fill="#F0DDBE"/>
+      <circle cx="-38" cy="-58" r="12" fill="#7A5236" stroke="#5E3F28" stroke-width="4"/><circle cx="42" cy="-58" r="12" fill="#7A5236" stroke="#5E3F28" stroke-width="4"/><circle cx="-38" cy="-57" r="5" fill="#E8B79A"/><circle cx="42" cy="-57" r="5" fill="#E8B79A"/>
+      <ellipse cx="2" cy="-34" rx="52" ry="44" fill="#9A6A46" stroke="#5E3F28" stroke-width="4"/><ellipse cx="2" cy="-16" rx="36" ry="25" fill="#F5E6CC"/><path d="M-30 -66 Q2 -82 34 -66" fill="none" stroke="#B98A62" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+      ${cuteEye(-20, -44, 10, t, .4)}${cuteEye(24, -44, 10, t, .4)}<ellipse cx="2" cy="-28" rx="12" ry="8.5" fill="#3B2A2A"/><ellipse cx="-1" cy="-31" rx="4" ry="2" fill="#fff" opacity=".7"/><path d="M2 -20 V-13 M-11 -10 Q-4 -4 2 -13 Q8 -4 15 -10" fill="none" stroke="#5E3F28" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="-30" cy="-22" r="7" fill="#FF9FB0" opacity=".55"/><circle cx="34" cy="-22" r="7" fill="#FF9FB0" opacity=".55"/>${whisk}</g>`
+    + paw(-74, 6 + 5 * pd, -14) + (wv > .05 ? `<g transform="translate(28 ${n2(4 - 44 * wv + bob)}) rotate(${n2(18 * Math.sin(t * 11) * wv)} 0 30)">${paw(0, 34, 8)}</g>` : paw(10, 6 - 5 * pd, 12))
+    + `<path d="M-110 44 q14 -7 28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round" opacity=".95"/>`; }
+// a little garden snail: a round swirled shell, a soft body, two eye stalks with big friendly eyes, a smile. It glides, stretches its neck,
+// waves an eye stalk (o.wave = 0..1). It faces left. centred on (0, 0)
+function snailArt(t, o = {}) { const st = .5 + .5 * Math.sin(t * 1.4), nk = 10 * st + 14 * (o.wave || 0), gl = 3 * Math.sin(t * .9), wv = o.wave || 0, sw1 = 7 * Math.sin(t * 2.1) + 26 * wv * Math.sin(t * 9), sw2 = 6 * Math.sin(t * 1.7 + 1);
+  const stalk = (x, a, ph) => `<g transform="translate(${x} -30) rotate(${n2(a)})"><path d="M0 0 Q-3 -24 0 -46" fill="none" stroke="#C99A62" stroke-width="12" stroke-linecap="round"/><path d="M0 0 Q-3 -24 0 -46" fill="none" stroke="#F3D9A8" stroke-width="7" stroke-linecap="round"/><circle cx="0" cy="-52" r="15" fill="#FFF8EA" stroke="#C99A62" stroke-width="3.5"/>${cuteEye(-1, -52, 9.5, t, ph)}</g>`;
+  return `<g transform="translate(${n2(gl)} 0)"><ellipse cx="6" cy="62" rx="104" ry="7" fill="#fff" opacity=".5"/>
+    <path d="M${n2(-70 - nk)} 30 Q${n2(-80 - nk)} 56 -40 58 H80 Q112 58 100 44 Q60 34 20 30z" fill="#F3D9A8" stroke="#C99A62" stroke-width="5" stroke-linejoin="round"/>
+    <g transform="translate(${n2(-58 - nk)} 26)"><path d="M26 30 Q-34 34 -30 -6 Q-26 -36 4 -34 Q30 -30 30 4z" fill="#F3D9A8" stroke="#C99A62" stroke-width="5" stroke-linejoin="round"/>${stalk(-16, -14 + sw1, .2)}${stalk(12, 10 + sw2, .2)}
+      <path d="M-18 6 Q-6 18 8 6" fill="none" stroke="#A8743A" stroke-width="4" stroke-linecap="round"/><circle cx="-24" cy="2" r="6" fill="#FF9FB0" opacity=".6"/><circle cx="14" cy="2" r="6" fill="#FF9FB0" opacity=".6"/></g>
+    <g transform="translate(30 -8) rotate(${n2(2 * Math.sin(t * 1.4))})"><circle r="62" fill="#E8964A" stroke="#9A5A22" stroke-width="6"/><path d="M0 -46 A46 46 0 1 1 -46 0 A32 32 0 1 1 -14 32 A19 19 0 1 1 5 13 A8 8 0 1 1 -3 5" fill="none" stroke="#9A5A22" stroke-width="7" stroke-linecap="round"/><path d="M-36 -34 Q-12 -54 22 -44" fill="none" stroke="#FFD9A0" stroke-width="8" stroke-linecap="round" opacity=".8"/></g></g>`; }
+
+/* ====================================================================================================================================
+   the giant container ship, side on, bow to the right. origin = the middle of its WATERLINE (y = 0); 1340 long, 150 above the water,
+   120 below (the red part). Drawn from photos of real container ships: a long dark hull, a red band under the waterline, a white bridge
+   tower at the back with a funnel, coloured containers stacked on deck.
+   ==================================================================================================================================== */
+const CCOL = ["#E8604E", "#3A8DFF", "#F2B84B", "#2EA3A0", "#8B6BE8", "#F58DB0", "#6FBF5A", "#E8604E", "#3A8DFF"];
+function shipSide(o = {}) { let cont = "";
+  for (let c = 0; c < 12; c++) { const n = 2 + Math.floor(hash(c, 5) * 2.99); for (let r = 0; r < n; r++) { const x = -402 + c * 80, y = -150 - (r + 1) * 44, col = CCOL[(c * 3 + r * 5) % CCOL.length]; cont += `<rect x="${x}" y="${y}" width="76" height="42" rx="3" fill="${col}" stroke="#2B2147" stroke-width="2.5"/>${[14, 28, 42, 56].map((dx) => `<path d="M${x + dx} ${y + 6} v30" stroke="#2B2147" stroke-width="1.6" opacity=".3"/>`).join("")}<path d="M${x + 5} ${y + 6} h66" stroke="#fff" stroke-width="2.5" opacity=".35"/>`; } }
+  let win = ""; for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) win += `<rect x="${-596 + c * 28}" y="${-282 + r * 30}" width="18" height="14" rx="3" fill="#6CBDEC"/>`;
+  return `<rect x="-470" y="-306" width="46" height="160" rx="5" fill="#E8604E" stroke="#2B2147" stroke-width="4"/><rect x="-470" y="-306" width="46" height="30" rx="5" fill="#2B2147"/>
+    <rect x="-612" y="-300" width="132" height="152" fill="#F7F9FB" stroke="#2B2147" stroke-width="4"/><rect x="-628" y="-338" width="164" height="42" rx="6" fill="#F7F9FB" stroke="#2B2147" stroke-width="4"/><rect x="-618" y="-328" width="144" height="18" rx="4" fill="#2E5A7C"/><path d="M-546 -338 V-384 M-566 -366 H-526" stroke="#2B2147" stroke-width="5" stroke-linecap="round"/>${win}
+    ${cont}<path d="M-650 -150 H694 L640 0 H-650z" fill="url(#wHull)" stroke="#1B2230" stroke-width="5" stroke-linejoin="round"/><path d="M-650 -150 H694" stroke="#8E9AA8" stroke-width="6"/><path d="M-640 -128 H672" stroke="#fff" stroke-width="3" opacity=".25"/>
+    <path d="M-650 0 H640 Q622 62 596 98 Q580 120 548 120 H-592 Q-646 120 -650 62z" fill="url(#wHullR)" stroke="#7E2416" stroke-width="5" stroke-linejoin="round"/><path d="M-650 -5 H642" stroke="#fff" stroke-width="5" opacity=".9"/>
+    <circle cx="612" cy="-96" r="9" fill="#1B2230"/><path d="M612 -88 v26" stroke="#1B2230" stroke-width="4"/>${[-560, -520, -480].map((x) => `<circle cx="${x}" cy="-104" r="7" fill="#9FD8F5" stroke="#1B2230" stroke-width="3"/>`).join("")}
+    ${o.q ? `<g transform="translate(60 -74) scale(${n2(o.q)})"><circle r="54" fill="url(#gSun)" stroke="#2B2147" stroke-width="5"/>${T(0, 28, "?", 84, P.ink)}</g>` : ""}`; }
+// the see-through window in the hull (ship coordinates): big rooms and tall empty spaces with metal walls, ladders and small doors for scale,
+// an engine room at the back. k = 0..1 how far the window has opened (from its middle). The air is a pale tint (never clouds).
+const SWIN = { x0: -360, x1: 500, y0: -116, y1: 96 };
+function shipInside(k, t = 0) { if (k <= .01) return ""; const { x0, x1, y0, y1 } = SWIN, cx = (x0 + x1) / 2, hw = (x1 - x0) / 2 * k, w = x1 - x0, h = y1 - y0, walls = [-190, 20, 250];
+  const ladder = (x, ya, yb) => `<path d="M${x} ${ya} V${yb} M${x + 12} ${ya} V${yb}" stroke="#6E7A88" stroke-width="2.6"/>${Array.from({ length: Math.floor((yb - ya) / 12) }, (_, i) => `<path d="M${x} ${ya + 6 + i * 12} h12" stroke="#6E7A88" stroke-width="2.2"/>`).join("")}`;
+  const door = (x, y) => `<rect x="${x}" y="${y - 30}" width="17" height="30" rx="7" fill="#7C8898" stroke="#4A5564" stroke-width="2.5"/><circle cx="${x + 12}" cy="${y - 15}" r="2" fill="#F5D27A"/>`;
+  let ribs = ""; for (let x = x0 + 30; x < x1; x += 43) ribs += `<path d="M${x} ${y0} V${y1}" stroke="#B4C3D2" stroke-width="2.5" opacity=".6"/>`;
+  const rooms = `<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="#F0F8FC"/>${ribs}<rect x="${x0}" y="${y1 - 12}" width="${w}" height="12" fill="#8E9AA8"/><rect x="${x0}" y="${y0}" width="${w}" height="9" fill="#AEB8C4"/>
+    ${walls.map((x) => `<rect x="${x - 6}" y="${y0}" width="12" height="${h}" fill="#8E9AA8" stroke="#5E6B7C" stroke-width="2.5"/>`).join("")}
+    <rect x="${x0}" y="-18" width="${walls[0] - x0 - 6}" height="8" fill="#8E9AA8"/><rect x="${walls[1] + 6}" y="-34" width="80" height="7" fill="#8E9AA8"/>
+    <g transform="translate(${x0 + 86} ${y1 - 12})"><rect x="-56" y="-46" width="112" height="46" rx="6" fill="#5E6B7C" stroke="#3E4A5A" stroke-width="3"/><rect x="-44" y="-66" width="26" height="22" rx="4" fill="#7C8898" stroke="#3E4A5A" stroke-width="3"/><rect x="-8" y="-66" width="26" height="22" rx="4" fill="#7C8898" stroke="#3E4A5A" stroke-width="3"/><circle cx="38" cy="-22" r="13" fill="#F2B84B" stroke="#3E4A5A" stroke-width="3"/><path d="M38 -22 l${n2(9 * Math.cos(t * 3))} ${n2(9 * Math.sin(t * 3))}" stroke="#3E4A5A" stroke-width="3" stroke-linecap="round"/><path d="M-31 -66 V-96 H-70" fill="none" stroke="#7C8898" stroke-width="6"/></g>
+    ${ladder(x0 + 150, -10, y1 - 12)}${ladder(walls[0] + 22, y0 + 12, y1 - 12)}${ladder(walls[1] + 30, -27, y1 - 12)}${ladder(walls[2] + 180, y0 + 12, y1 - 12)}
+    ${door(walls[0] - 34, -18)}${door(walls[0] + 150, y1 - 12)}${door(walls[1] + 130, y1 - 12)}${door(walls[2] + 60, y1 - 12)}${door(walls[1] + 56, -34)}
+    <rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="#DDF4FF" opacity=".28"/>`;
+  return `<clipPath id="swC"><rect x="${n2(cx - hw)}" y="${y0}" width="${n2(2 * hw)}" height="${h}" rx="${n2(Math.min(26, hw))}"/></clipPath><g clip-path="url(#swC)">${rooms}</g>
+    <rect x="${n2(cx - hw)}" y="${y0}" width="${n2(2 * hw)}" height="${h}" rx="${n2(Math.min(26, hw))}" fill="none" stroke="#FFF8EA" stroke-width="9"/><rect x="${n2(cx - hw)}" y="${y0}" width="${n2(2 * hw)}" height="${h}" rx="${n2(Math.min(26, hw))}" fill="none" stroke="#2B2147" stroke-width="3" opacity=".6"/>`; }
+// the sea in front of a ship (drawn over the hull's red part so it is seen THROUGH the water): from the waterline (y = 0) down. w, h = size
+const seaOver = (t, w = 2400, h = 700, op = .62, col = "#2E86C9") => `<rect x="${-w / 2}" y="0" width="${w}" height="${h}" fill="${col}" opacity="${op}"/><path d="M${-w / 2} 0 ${Array.from({ length: Math.ceil(w / 60) }, (_, i) => `q15 ${n2(-9 + 3 * Math.sin(t * 2 + i))} 30 0 t30 0`).join(" ")}" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  ${[0, 1, 2, 3, 4, 5].map((i) => { const v = ((t * .12 + i / 6) % 1); return `<path d="M${n2(-w / 2 + ((i * 397) % w) + 40 * Math.sin(t + i))} ${n2(40 + i * 70)} h${90 + i * 20}" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="${n2(.3 * Math.sin(Math.PI * v))}"/>`; }).join("")}`;
+// the full-frame sea with the giant ship (the set the ship's look-closer zooms in from). o.q = the ? on its hull, o.grey
+function seaView(t, o = {}) { const sc = o.sc || .98, x = o.x || 960, y = o.y || 640, bob = 3 * Math.sin(t * .8);
+  return `<rect width="1920" height="1080" fill="url(#cSky)"/><circle cx="1560" cy="170" r="70" fill="#FFF3B8"/><circle cx="1560" cy="170" r="120" fill="#FFF3B8" opacity=".35" filter="url(#b30)"/>${[[300, 180, 1.2], [760, 110, .8], [1180, 230, 1]].map(([cx, cy, k]) => `<g transform="translate(${n2(cx + 14 * Math.sin(t * .1 + cx))} ${cy}) scale(${k})" opacity=".95"><ellipse cx="0" cy="0" rx="120" ry="34" fill="#fff"/><ellipse cx="-50" cy="-24" rx="60" ry="34" fill="#fff"/><ellipse cx="34" cy="-30" rx="70" ry="40" fill="#fff"/></g>`).join("")}
+    <rect y="${y - 60}" width="1920" height="${1140 - y}" fill="url(#wSea)"/><path d="M0 ${y - 60} H1920" stroke="#fff" stroke-width="3" opacity=".6"/>
+    <g transform="translate(${x} ${n2(y + bob)}) scale(${sc})">${shipSide({ q: o.q })}${seaOver(t, 2400, 700)}</g>`; }
+
+/* ====================================================================================================================================
+   BG.beach / BG.beachR: a beach shelter at East Coast Park (static, baked). The roof on round pillars, a round stone table with stone stools
+   (the same table as the void deck's), the sand, coconut palms, the sea with a row of giant ships at anchor on the horizon (each with a clear
+   waterline), breakwater rocks at the left. BG.beachR: the same under grey clouds (the rain itself is drawn live, outside the shelter only).
+   ==================================================================================================================================== */
+const HZ = 470, OTT = [452, 604];                    // the horizon; the otter swims on the spot by the rocks
+const farShip = (x, k, cols) => { let c = ""; for (let i = 0; i < 7; i++) for (let r = 0; r < 1 + ((i * 5 + cols) % 3); r++) c += `<rect x="${-96 + i * 30}" y="${-40 - (r + 1) * 15}" width="28" height="14" fill="${CCOL[(i + r + cols) % CCOL.length]}" stroke="#2B2147" stroke-width="1.2"/>`;
+  return `<g transform="translate(${x} ${HZ + 14}) scale(${k})"><rect x="-150" y="-92" width="34" height="54" fill="#F7F9FB" stroke="#2B2147" stroke-width="2.5"/><rect x="-114" y="-80" width="12" height="42" fill="#E8604E" stroke="#2B2147" stroke-width="2"/>${c}<path d="M-160 -40 H176 L160 -8 H-160z" fill="#3A4658" stroke="#1B2230" stroke-width="2.5" stroke-linejoin="round"/><path d="M-160 -8 H160 L158 2 H-160z" fill="#D8452E"/><path d="M-170 3 H180" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>`; };
+function palm(x, y, h, lean, seed = 1) { const tx = x + lean, ty = y - h; let tr = "", fr = "";
+  for (let i = 0; i < 12; i++) { const u = i / 12, px = x + lean * u * u, py = y - h * u; tr += `<path d="M${n2(px - 16 + 5 * u)} ${n2(py)} q${n2(16 - 5 * u)} -7 ${n2(32 - 10 * u)} 0" fill="none" stroke="#6E5236" stroke-width="3" opacity=".6"/>`; }
+  [-168, -140, -112, -84, -52, -24, 8, 200, 228].forEach((a, i) => { const an = a * Math.PI / 180, L = h * (.42 + .1 * hash(i, seed)), ex = tx + Math.cos(an) * L, ey = ty + Math.sin(an) * L * .8 + L * .34, mx = tx + Math.cos(an) * L * .55, my = ty + Math.sin(an) * L * .7 - L * .12;
+    fr += `<path d="M${n2(tx)} ${n2(ty)} Q${n2(mx)} ${n2(my)} ${n2(ex)} ${n2(ey)} Q${n2(mx + 6)} ${n2(my + L * .2)} ${n2(tx)} ${n2(ty + 10)}z" fill="${i % 2 ? "#3E9A54" : "#4FB266"}" stroke="#2B7A40" stroke-width="3" stroke-linejoin="round"/><path d="M${n2(tx)} ${n2(ty)} Q${n2(mx)} ${n2(my + 6)} ${n2(ex)} ${n2(ey)}" fill="none" stroke="#2B7A40" stroke-width="2.5"/>`; });
+  return `<path d="M${x - 17} ${y} Q${x - 10 + lean * .3} ${y - h * .5} ${tx - 9} ${ty} H${tx + 9} Q${x + 22 + lean * .3} ${y - h * .5} ${x + 17} ${y}z" fill="#9A7A56" stroke="#6E5236" stroke-width="4" stroke-linejoin="round"/>${tr}${fr}<circle cx="${tx - 8}" cy="${ty + 12}" r="11" fill="#7A5A36"/><circle cx="${tx + 10}" cy="${ty + 14}" r="11" fill="#8A6A44"/>`; }
+// the round stone table and its stools (shared by both sets; the same geometry as EP9's void deck table)
+function stoneTable(back) { const r = rndm(31); const stool = (x, y, k) => `<g transform="translate(${x} ${y}) scale(${k})"><rect x="-120" y="0" width="240" height="260" fill="#CFC6B6"/><rect x="-120" y="0" width="60" height="260" fill="#DAD2C4"/><rect x="70" y="0" width="50" height="260" fill="#BDB3A2"/><ellipse cx="0" cy="0" rx="120" ry="30" fill="url(#vdStone)" stroke="#B5AA97" stroke-width="4"/></g>`;
+  let speck = ""; for (let i = 0; i < 150; i++) { const an = r() * 6.283, rr = Math.sqrt(r()), x = 960 + Math.cos(an) * rr * 800, y = 862 + Math.sin(an) * rr * 108; speck += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(2 + r() * 3)}" fill="${["#B9AE9A", "#D9A08A", "#8FA5A0", "#fff"][i % 4]}" opacity=".55"/>`; }
+  return stool(610, 724, .8) + stool(1310, 724, .8) + `<ellipse cx="960" cy="1120" rx="900" ry="60" fill="${P.ink}" opacity=".2" filter="url(#b10)"/><path d="M720 960 Q760 1080 700 1188 H1220 Q1160 1080 1200 960z" fill="#C4BAA9"/><path d="M720 960 Q760 1080 700 1188 H840 Q860 1080 830 960z" fill="#D3CABB"/>
+    <ellipse cx="960" cy="908" rx="842" ry="124" fill="#BFB5A4"/><rect x="118" y="862" width="1684" height="46" fill="#BFB5A4"/><ellipse cx="960" cy="862" rx="842" ry="124" fill="url(#vdStone)" stroke="#fff" stroke-width="4"/>${speck}
+    <path d="M330 800 Q960 730 1590 800" fill="none" stroke="#fff" stroke-width="22" opacity=".3" stroke-linecap="round"/>` + stool(540, 1066, 1.05) + stool(1380, 1066, 1.05); }
+function beachBG(grey) { const r = rndm(77); let s = "";
+  // the sky, the sun or the grey clouds
+  s += `<rect x="-192" y="-108" width="2304" height="${HZ + 110}" fill="url(#${grey ? "wSkyG" : "cSky"})"/>`;
+  if (grey) { for (let i = 0; i < 16; i++) { const x = -160 + i * 150 + r() * 40, y = 96 + r() * 110; s += `<ellipse cx="${n2(x)}" cy="${n2(y)}" rx="${n2(150 + r() * 90)}" ry="${n2(50 + r() * 34)}" fill="${i % 3 ? "#6F7B8C" : "#7F8B9B"}"/>`; } s += `<rect x="-192" y="-108" width="2304" height="230" fill="#667284"/><g opacity=".6">${[[380, 330, 1], [1000, 300, 1.3], [1560, 350, .9]].map(([x, y, k]) => `<ellipse cx="${x}" cy="${y}" rx="${200 * k}" ry="${40 * k}" fill="#A9B3BF"/>`).join("")}</g>`; }
+  else s += `<circle cx="1500" cy="190" r="56" fill="#FFF6C8"/><circle cx="1500" cy="190" r="110" fill="#FFF3B8" opacity=".4" filter="url(#b30)"/>${[[420, 220, 1.1], [900, 150, .8], [1240, 300, .9], [1760, 330, .7]].map(([x, y, k]) => `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cx="0" cy="0" rx="120" ry="30" fill="#fff"/><ellipse cx="-50" cy="-22" rx="58" ry="32" fill="#fff"/><ellipse cx="36" cy="-28" rx="68" ry="38" fill="#fff"/></g>`).join("")}`;
+  // the sea, the ships at anchor on the horizon (each with a red band at its waterline)
+  s += `<rect x="-192" y="${HZ}" width="2304" height="200" fill="url(#${grey ? "wSeaG" : "wSea"})"/><path d="M-192 ${HZ} H2112" stroke="#fff" stroke-width="2.5" opacity=".7"/>` + farShip(770, .52, 0) + farShip(1130, .78, 2) + farShip(1470, .6, 4) + farShip(1735, .42, 1);
+  for (let i = 0; i < 26; i++) { const y = HZ + 26 + r() * 150, x = -150 + r() * 2200; s += `<path d="M${n2(x)} ${n2(y)} q${n2(14 + (y - HZ) * .12)} -5 ${n2(28 + (y - HZ) * .24)} 0" fill="none" stroke="#fff" stroke-width="${n2(2 + (y - HZ) * .012)}" stroke-linecap="round" opacity=".5"/>`; }
+  if (grey) s += `<rect x="-192" y="${HZ - 60}" width="2304" height="120" fill="#C9D0D8" opacity=".35" filter="url(#b10)"/>`;
+  // the breakwater rocks at the left, reaching into the sea
+  const rock = (x, y, w, h, i) => `<path d="M${x - w / 2} ${y} Q${x - w * .56} ${y - h * .7} ${x - w * .2} ${y - h} Q${x + w * .22} ${y - h * 1.1} ${x + w * .46} ${y - h * .6} Q${x + w * .6} ${y - h * .1} ${x + w / 2} ${y}z" fill="${["#9C968C", "#8A847B", "#AAA398"][i % 3]}" stroke="#5E5A54" stroke-width="3.5" stroke-linejoin="round"/><path d="M${x - w * .26} ${y - h * .78} Q${x} ${y - h * .94} ${x + w * .24} ${y - h * .7}" fill="none" stroke="#D6D0C6" stroke-width="5" stroke-linecap="round" opacity=".8"/>`;
+  [[-120, 612, 170, 96], [10, 590, 190, 110], [150, 606, 180, 96], [270, 620, 150, 74], [-40, 648, 200, 84], [110, 652, 190, 80], [250, 660, 170, 66], [352, 646, 110, 48], [380, 668, 120, 44]].forEach(([x, y, w, h], i) => { s += rock(x, y, w, h, i); });
+  s += `<path d="M300 668 q40 -8 80 0 t80 0" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/>`;
+  // the sand, the foam line, a sandcastle bucket, the palms
+  s += `<path d="M-192 664 Q300 650 700 668 T1500 662 T2112 668 V780 H-192z" fill="url(#${grey ? "wSandG" : "wSand"})"/><path d="M-192 664 Q300 650 700 668 T1500 662 T2112 668" fill="none" stroke="#fff" stroke-width="7" opacity=".85"/>`;
+  for (let i = 0; i < 60; i++) s += `<circle cx="${n2(-150 + r() * 2200)}" cy="${n2(684 + r() * 60)}" r="${n2(1.5 + r() * 2)}" fill="#C9A86A" opacity=".5"/>`;
+  s += palm(700, 706, 430, 60, 3) + palm(1556, 712, 400, -70, 8) + `<g transform="translate(1250 716)"><path d="M-20 -30 H20 L15 0 H-15z" fill="#E8604E" stroke="#A83A2C" stroke-width="3"/><path d="M-20 -30 Q0 -52 20 -30" fill="none" stroke="#A83A2C" stroke-width="3"/><path d="M34 0 l12 -34" stroke="#3A8DFF" stroke-width="5" stroke-linecap="round"/><ellipse cx="50" cy="-38" rx="9" ry="7" fill="#3A8DFF"/></g>`;
+  if (grey) s += `<rect x="-192" y="${HZ}" width="2304" height="320" fill="#5A6A80" opacity=".16"/>`;
+  // the shelter's paved floor
+  s += `<rect x="-192" y="742" width="2304" height="450" fill="url(#wPave)"/><rect x="-192" y="742" width="2304" height="12" fill="#F6ECDA"/>`; for (let i = -14; i <= 14; i++) s += `<path d="M${960 + i * 90} 754 L${960 + i * 300} 1200" stroke="#B5A183" stroke-width="2" opacity=".45"/>`;
+  [770, 796, 836, 900, 1000, 1150].forEach((y) => { s += `<path d="M-192 ${y} H2112" stroke="#B5A183" stroke-width="2" opacity=".45"/>`; });
+  // the roof: timber rafters seen from below, a beam, the clay-tile eave; two round pillars
+  s += `<rect x="-192" y="-108" width="2304" height="150" fill="url(#wTimber)"/>${Array.from({ length: 13 }, (_, i) => `<path d="M${960 + (i - 6) * 150} 42 L${960 + (i - 6) * 210} -108" stroke="#6E4526" stroke-width="16"/>`).join("")}<rect x="-192" y="34" width="2304" height="34" fill="#6E4526"/><rect x="-192" y="34" width="2304" height="7" fill="#9A6A3E"/>
+    ${Array.from({ length: 40 }, (_, i) => `<path d="M${-192 + i * 58} 68 h58 v10 q-29 22 -58 0z" fill="url(#wTile)" stroke="#8E3A20" stroke-width="2.5"/>`).join("")}`;
+  const pillar = (x) => `<rect x="${x - 46}" y="64" width="92" height="700" fill="#F3EEE4"/><rect x="${x - 46}" y="64" width="22" height="700" fill="#fff"/><rect x="${x + 20}" y="64" width="26" height="700" fill="#D9D0C0"/><rect x="${x - 56}" y="700" width="112" height="70" rx="6" fill="#D9D0C0" stroke="#B5AA97" stroke-width="3"/><rect x="${x - 56}" y="64" width="112" height="26" fill="#D9D0C0"/>`;
+  s += pillar(130) + pillar(1790);
+  if (grey) s += `<rect x="-192" y="-108" width="2304" height="1296" fill="#3F4C66" opacity=".12"/>`;
+  return s + stoneTable(); }
+BG.beach = () => beachBG(false);
+BG.beachR = () => beachBG(true);
+// fine, straight rain inside a clip (x0..x1, y0..y1): outside the shelter / the void deck only. dens = how many lines; k = 0..1 how hard
+function rainIn(t, x0, y0, x1, y1, dens = 70, k = 1, id = "rn", seed = 3) { if (k <= .01) return ""; let s = "", sp = "";
+  for (let i = 0; i < dens; i++) { const sp_ = 1.5 + hash(i, seed + 2) * .9, v = (t * sp_ + hash(i, seed + 4)) % 1, x = x0 + hash(i, seed) * (x1 - x0), y = y0 - 60 + v * (y1 - y0 + 120), L = 26 + 30 * hash(i, seed + 6); if (hash(i, seed + 8) > k) continue;
+    s += `<path d="M${n2(x)} ${n2(y)} v${n2(L)}" stroke="#fff" stroke-width="${n2(1.6 + hash(i, seed + 1))}" stroke-linecap="round" opacity="${n2(.38 + .3 * hash(i, seed + 9))}"/>`; }
+  return `<clipPath id="${id}"><rect x="${x0}" y="${y0}" width="${x1 - x0}" height="${y1 - y0}"/></clipPath><g clip-path="url(#${id})">${s}</g>` + sp; }
+// little splash rings where the rain lands (a row of points)
+const splashes = (t, pts, k = 1) => pts.map(([x, y], i) => { const v = (t * 1.7 + hash(i, 12)) % 1; return hash(i, 5) > k ? "" : `<ellipse cx="${x}" cy="${y}" rx="${n2(4 + 16 * v)}" ry="${n2(1.5 + 5 * v)}" fill="none" stroke="#fff" stroke-width="2.5" opacity="${n2(.8 * (1 - v))}"/>`; }).join("");
+/* beachView(t, o, cam): the beach shelter with what stands on the table. o.rain (0..1: the grey set + rain), o.otter: false to hide, o.wave,
+   o.tub: false | state for tubThings ({wb, mb, ws, ms, bowl}); o.tray: false | true (the things not in the tub lie on the tray); o.bowl / o.jug: on the table;
+   o.board: board3 options; o.back / o.items / o.front: world svg; o.glowShips */
+const BX = { tray: 400, tub: 960, bowl: 1262, jug: 1392, board: 1610 }, TUBS = .9;
+const otterSwim = (t, wave = 0, k = 1) => TF(OTT[0], OTT[1], .36 * k, otterArt(t, { wave }));
+function beachView(t, o = {}, cam = [1, 960, 540]) { const rn = o.rain || 0, st = o.tub || {};
+  const glint = [0, 1, 2, 3, 4, 5, 6].map((i) => { const v = (t * .25 + i / 7) % 1; return `<path d="M${n2(520 + i * 190 + 30 * Math.sin(t * .4 + i))} ${HZ + 40 + (i * 37) % 120} h${44 + i * 6}" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="${n2(.55 * Math.sin(Math.PI * v))}"/>`; }).join("");
+  return CAM(bg(rn ? "beachR" : "beach") + glint + (o.glowShips ? glowDisc(1130, HZ - 10, 190, o.glowShips) + glowDisc(1470, HZ - 6, 140, o.glowShips) + glowDisc(770, HZ - 4, 120, o.glowShips) : "") + (o.otter === false ? "" : otterSwim(t, o.wave || 0))
+    + (rn ? rainIn(t, 180, 86, 1744, 742, 80, rn, "rnB") + splashes(t, [[420, 690], [640, 700], [900, 694], [1150, 702], [1380, 692], [1620, 700], [560, 560], [1000, 600], [1300, 540], [1500, 620]], rn) : "") + (o.back || "")
+    + (o.tray === false ? "" : TF(BX.tray, TYB + 26, .9, propTray(st))) + (o.tub === false ? "" : TF(o.tubX || BX.tub, TYB + 30, TUBS, tubSvg({ t, inner: tubThings(st, t) + (o.tubIn || ""), over: o.tubOver || "" })))
+    + (o.bowl ? TF(BX.bowl, TYB + 24, .9, `<ellipse cx="0" cy="4" rx="84" ry="8" fill="${P.ink}" opacity=".2" filter="url(#b4)"/>` + bowlSteel()) : "") + (o.jug ? TF(BX.jug, TYB + 20, .9, `<ellipse cx="0" cy="4" rx="64" ry="8" fill="${P.ink}" opacity=".2" filter="url(#b4)"/>` + jugSvg()) : "")
+    + (o.items || "") + (o.board ? TF(o.boardX || BX.board, TYB + 30, o.boardS || .44, board3(t, o.board)) : "") + (o.front || ""), cam[0], cam[1], cam[2]); }
+const CAMB = [1.04, 960, 600];
+// where a point of the tub (tub coordinates) is in the world
+const tubW = (x, y, tx = BX.tub) => [tx + x * TUBS, TYB + 30 + y * TUBS];

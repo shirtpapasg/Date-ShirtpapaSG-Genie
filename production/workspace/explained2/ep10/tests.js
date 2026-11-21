@@ -16,13 +16,8 @@ const tickT = (i) => { const mk = TL.marks[TESTS[i][2]]; return PART === 2 && i 
 const ticked = (i, t) => t >= tickT(i);
 // STAGE 1 placeholder of the board (functional: rows, ticks, a glowing row). Stage 2 redraws it on its low stand, standing on the table or ground.
 // o.glow = row index that glows (0..2) or -1; origin = the middle of the stand's feet
-function board3(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow; let rows = "";
-  TESTS.forEach(([n, w], i) => { const y = -330 + i * 100, on = ticked(i, t), k = on ? spring(t, tickT(i), .4) : 0;
-    rows += (g === i ? `<rect x="-350" y="${y - 44}" width="700" height="88" rx="20" fill="${P.sun}" opacity="${n2(.35 + .2 * Math.sin(t * 5))}"/>` : "")
-      + T(-320, y + 16, n + "  " + w, 50, P.ink, { a: "start" }) + `<rect x="236" y="${y - 34}" width="68" height="68" rx="12" fill="#fff" stroke="${P.ink}" stroke-width="5"/>`
-      + (k > .02 ? TF(270, y, k, `<path d="M-24 0 L-6 20 L28 -24" fill="none" stroke="${GOODC}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>`) : ""); });
-  return `<path d="M-200 0 V-60 M200 0 V-60" stroke="#8A5A36" stroke-width="14" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-380" y="-470" width="760" height="420" rx="26" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(0, -405, "OUR 3 WATER TESTS", 46, P.ink, { ls: 4 }) + rows + tpill(0, -80, "STAGE 2: draw", 22, P.coral, "#fff"); }
+// Stage 2: the drawn board is board3Art (water.js); the name and arguments are kept.
+function board3(t, o = {}) { return board3Art(t, o); }
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start with their picture, revealed at the end.
    Part 1: a little OTTER swimming on the spot by the breakwater rocks at the left of the beach (every wide shot of the beach), head up.
@@ -31,7 +26,7 @@ function board3(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow; let r
    (the otter paddles and bobs, lifts its head, whiskers twitch; the snail glides, stretches its neck, waves an eye stalk). ---------- */
 // STAGE 1 placeholder art (centred on 0, 0, about 200 px): a grey disc with the animal's name. Stage 2: otterArt(t) / snailArt(t).
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["otter", hiddenPH("otter")] : ["snail", hiddenPH("snail")];
+const HIDDEN = PART === 1 ? ["otter", (t) => TF(4, 8, 1.02, otterArt(t))] : ["snail", (t) => TF(4, 6, 1.0, snailArt(t))];   // Stage 2: drawn in water.js
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#DDF4FF" : "#CFEFD6"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[0], n2(r * .24), P.ink, "#fff", { w: 700 }));
 
