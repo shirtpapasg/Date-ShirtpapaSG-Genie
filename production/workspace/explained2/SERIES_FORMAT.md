@@ -75,7 +75,7 @@ Also read:
 - **New key word:** when a key word is said for the first time, it pops LARGE with a chime and holds about 2.0 s (was 1.5 s), then
   flies to the key-word shelf. Heart pauses about 0.6 s after saying a new term before the next sentence, and the new term is said
   slowly and clearly (a little slower than the rest of the line).
-- **Mark Sentence cards:** hold about 2.5 s of stillness after Heart finishes reading (was 2 s).
+- **Mark Sentence cards:** hold about 2.5 s of stillness after the buddy finishes reading (was 2 s).
 - **Definitions** (e.g. "similarities: characteristics that things have in common"):
   - on a light, readable strip (dark text on cream),
   - read aloud,
@@ -210,6 +210,10 @@ Also read:
   - It slides aside during the shrink, full-screen cards, the cold open and the countdown.
   - It becomes the read-along at the end of the part.
 - **Mark Sentence card:**
+  - **READ BY THE BUDDY, not Heart (teacher, 2026-11-21: "all these 'Mark sentence' should be read by the pet buddy, not Heart.
+    The pet buddies also said 'Say it with me'").** The buddy who says "Say it with me!" then reads the whole card aloud, word for
+    word, in their own voice (Character Voice Kit, the slower pace), while the words light up as they are read. Heart may introduce
+    the card but never reads it. Rotate the reading buddy between cards; Basil gets his share.
   - cream, with "MARK SENTENCE" and an "n of N" tag;
   - highlighter on the key words;
   - a footer with the level, theme and topic.
