@@ -30,7 +30,29 @@ Three stages: **Stage 1 (setup, done 2026-11-20)** · Stage 2: Fable draws the s
   what to reuse from ep01-ep06, what is new, its marks and lines; the poses; the choices made where the script was unclear.
 - Checks: `qa/p1_check.jpg`, `qa/p2_check.jpg` (placeholder stills, no page errors). No video rendered.
 
-## Stage 2 (next): draw the scenes (Fable). Read `SCENES_TODO.md` first.
+## Stage 2: done (2026-11-21). Every scene is drawn; no `phScene` placeholder is left in `p1.js` / `p2.js`.
+- New files: `canteen.js` (BG.canteen, BG.stall = the noodle stall close, BG.under = under the table, all baked in `bg/`; the three
+  containers, spoon, sand pile, ceramic bowl and soup spoon, clay lump, pencil, the white canvas school shoe with its four parts that
+  light up, the folded T-shirt and its weave, the white-drops disc, the school bag; THE 7 MATERIALS board `board7` / `boardAt`; shared
+  helpers `pline`, `ltag`, `kindTag`, `sPip`...), `pics.js` (27 picture-board drawings `PIC.*`, the cow / tree / rock card drawings),
+  `probe.js` (draw any expression: `node probe.js out.jpg 1 '<js>'`). `shrink.js` holds both journeys. `page.html` loads them.
+- Changed in the shared files: `materials.js` (`tileT(k)`: a tile fills when its popped name lands on it, never before; `namePop`
+  redrawn: one low hop to the tile's top edge, a small copy for the shelf words), `sound_cues.js` (the tile stamp uses `tileT`, so the
+  stamp for GLASS, METAL and PLASTIC is 0.55 s later than in Stage 1's mix: **re-run dump_cues + song**, which `build_part.sh` does),
+  `trail.js` (`ansCard` takes `o.icon`), `common.js` (`lockN` passes `c.icons`; `bookCaption` takes `o.keys` to highlight words),
+  `lib.js` (SAP pops at [1480, 850], size 100, under the card's right corner).
+- Checks: stills at every scene start and end and round every mark in both parts (460 frames): no page errors. Contact sheets
+  `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg`; the journeys `qa/journey_sand.jpg`, `qa/journey_sap.jpg`. Thumbnails `thumb_part1.jpg`,
+  `thumb_part2.jpg` (frames `qa/th/f1.png`, `f2.png`; commands as in EP5: `node thumb_still.js N 1 qa/th/fN.png "&thumb"`, then
+  `node thumb.js qa/th/f1.png thumb_part1.jpg 1 "THIS JAR" "WAS ONCE|SAND!" 250 170 150` and
+  `node thumb.js qa/th/f2.png thumb_part2.jpg 2 "YOUR|SCHOOL SHOE" "CAME FROM|A TREE?" 190 140 132`).
+- **No video was rendered in Stage 2** (not even a test clip): motion was judged from stills only. Stage 3 should watch the two
+  journeys, the board's slide-in, the name hops and the camera drop in the cliffhanger in motion.
+- Deviations from the script are listed in the Stage 2 report (hand-over); the main ones: the spoon's two tags (OBJECT / MATERIAL)
+  appear under Mark Sentence 1, not in the spoon scene (the MATERIAL pop fills that scene's last 2 s); the white-drops close-up in
+  Part 2 Round 1 is the ring picture, not a pop beside the shoe; Part 2's table holds a pencil, the shoe and the T-shirt; Part 1's
+  lizard is on the classroom window beside the noodle stall (seen in the Round 2 ring picture); a small round inset of the shoe
+  shows where "you" are in the last stop of the sap journey.
 ## Stage 3: `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`).
 - Stills: `PART=2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg`. Bake backgrounds: `node bake.js <names>`.
 - Status: see ../progress/ep08.json
