@@ -1,0 +1,134 @@
+{
+ "video": "ep03b/ep03b",
+ "lines": [
+  {
+   "segment": "news",
+   "sentence": 3,
+   "text": "And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five.",
+   "t_old": 115.774,
+   "t_new": 115.704,
+   "dur_old": 5.962,
+   "dur_new": 6.159,
+   "silence_before": 0.5,
+   "silence_after": 1.873,
+   "caption_drift_s": [
+    -0.17,
+    0.17
+   ],
+   "speech_dB_new": -21.61,
+   "speech_dB_old": -21.55,
+   "speech_dB_same_segment": [
+    -20.49,
+    -21.96,
+    -21.91
+   ],
+   "mix_dB_new_sentence": -15.24,
+   "mix_dB_old_sentence": -16.51,
+   "mix_dB_neighbours_old_new": [
+    -17.66,
+    -16.32,
+    -17.68,
+    -16.36
+   ]
+  },
+  {
+   "segment": "n1",
+   "sentence": 4,
+   "text": "All that was left was ash, which a barge carried to Semakau Landfill.",
+   "t_old": 136.061,
+   "t_new": 136.051,
+   "dur_old": 3.936,
+   "dur_new": 3.925,
+   "silence_before": 0.56,
+   "silence_after": 2.021,
+   "caption_drift_s": [
+    -0.02,
+    0.02
+   ],
+   "speech_dB_new": -22.02,
+   "speech_dB_old": -21.95,
+   "speech_dB_same_segment": [
+    -21.58,
+    -21.55,
+    -21.72,
+    -21.35
+   ],
+   "mix_dB_new_sentence": -15.16,
+   "mix_dB_old_sentence": -16.41,
+   "mix_dB_neighbours_old_new": [
+    -17.81,
+    -16.47,
+    -17.67,
+    -16.33
+   ]
+  },
+  {
+   "segment": "close",
+   "sentence": 1,
+   "text": "Rubbish we can't recycle is burnt, and its ash goes to Semakau, our only landfill, which could be full by about twenty thirty-five.",
+   "t_old": 192.088,
+   "t_new": 192.023,
+   "dur_old": 7.892,
+   "dur_new": 8.02,
+   "silence_before": 0.505,
+   "silence_after": 0.506,
+   "caption_drift_s": [
+    -0.095,
+    0.095
+   ],
+   "speech_dB_new": -21.76,
+   "speech_dB_old": -21.68,
+   "speech_dB_same_segment": [
+    -20.66,
+    -22.19,
+    -21.58
+   ],
+   "mix_dB_new_sentence": -15.2,
+   "mix_dB_old_sentence": -16.48,
+   "mix_dB_neighbours_old_new": [
+    -17.73,
+    -16.39,
+    -17.16,
+    -15.81
+   ]
+  }
+ ],
+ "final_gain": {
+  "mix_before_gain_LUFS": -17.34,
+  "mix_true_peak": -3.48,
+  "gain_dB": 1.34,
+  "peak_limiter": false
+ },
+ "checks": {
+  "lufs_old": -17.3,
+  "lufs_new": -16.0,
+  "video_stream_identical": true,
+  "streams_old": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "213.266667"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "213.300000"
+   }
+  ],
+  "streams_new": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "213.266667"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "213.300000"
+   }
+  ],
+  "audio_away_from_fix_residual_dB": -32.8,
+  "fixed_gain_dB": 1.34,
+  "audio_lag_ms": 0.0
+ }
+}

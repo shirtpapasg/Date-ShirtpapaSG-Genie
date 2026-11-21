@@ -11,8 +11,8 @@ const tSand = W("g201", "sand") - .1;               // the sand pile pops on the
 
 /* ============ 1 · the silent cold open: the school canteen at recess ============ */
 // the thumbnail's frame (thumb_still.js ... "&thumb"): the glass jar large, the pile of sand beside it, joined by the plain line; Basil surprised
-const THUMB1 = (t) => { const cam = [1.9, 640, 760]; return canteenView(t, { noitems: true, items: TF(520, TY + 30, 1.0, sandPile()) + TF(880, TY + 6, 1.12, glassJar()) }, cam)
-  + pline(gx(cam, 590), gy(cam, TY - 16), gx(cam, 770), gy(cam, TY - 60)) + buddy("basil", 190, 800, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t); };
+const THUMB1 = (t) => { const cam = [1.9, 640, 760]; return canteenView(t, { noitems: true, items: TF(724, TY + 40, 1.12, glassJar()) + TF(966, TY + 42, 1.25, sandPile()) }, cam)
+  + pline(gx(cam, 900), gy(cam, TY + 10), gx(cam, 830), gy(cam, TY - 40)) + buddy("basil", 190, 800, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t); };
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("boardIn"), tp = MK("budsIn"), z = 1.02 + .02 * eio(t / 7);
   return canteenView(t, {}, [z, 960, 600]) + boardSlide(t, tb, BRD[0], BRD[1], BRD[2])
     + sMomo(t, { poses: [[0, "sit"], [tb + .55, "surprised"], [tb + 1.9, "sit"]] }) + sPip(t, { in: tp, poses: [[tp, "waving"], [tp + 1.4, "sit"]], wave: true }) + sBasil(t, { in: tp + .25, poses: [[tp + .25, "surprised"]] })
@@ -94,7 +94,7 @@ SC.reveal = (t, s) => { const a = "g901", e = eo((t - s.t0) / 1.0), cam = [lerp(
     + buddy("momo", 1720, 1056, 220, t, { aura: true, flip: true, in: s.t0 + .55, poses: [[s.t0, "sit"], [tA, "surprised"], [tA + 1.8, "sit"]] }) + wipe(t, s.t0, "#EAF6FF") + HUD(t); };
 // the teaching view for glass, metal and plastic: the table, the hero container a little bigger, picture boards standing along the back of the
 // table (world coordinates, behind the containers), the board big at the bottom right
-const BACKY = 762;
+
 const teachView = (t, o, cam = [1.03, 900, 640]) => canteenView(t, { sand: 1, ...o }, cam) + boardAt(t, ...BRDT);
 SC.glass = (t, s) => { const a = "g902", tn = MK("nm_glass"), tu = Math.max(MK("uses_glass"), tileT("glass")) + .3, tc = W("g903", "one") - .1, h = spring(t, s.t0, .5);
   const uses = [["window", "window"], ["bulb", "light bulb"], ["specs", "spectacles"]].map(([p, lab], i) => picBoard(p, 1150 + i * 250, BACKY, spring(t, tu + i * .22, .45), { sc: .64, lab, size: 44, id: "u" })).join("");
@@ -146,7 +146,7 @@ SC.liz = (t, s) => { const L = "g1202"; return lizReveal(t, s, L, stallView(t, {
 SC.cliff = (t, s) => { const L = "g1301", tD = W(L, "sole") - .5, d = eio((t - tD) / .7), tR = W(L, "rubber") - .1, tW = W(L, "white") - .3, tQ = W(L, "where") - .1, tP = W(L, "find") - .1, q = .5 + .5 * Math.sin((t - s.t0) * 5), sh = [1150, 960, 1.15];
   const top = d < 1 ? `<g transform="translate(0 ${n2(-1080 * d)})">${canteenView(t, { sand: 1 }, CAMW)}<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>${boardAt(t, 960, 900, 1.25, { q: { wood: q, rubber: q, fabric: q } })}${TF(960, 180, spring(t, s.t0 + .2, .45), tpill(0, 0, "Three materials to go!", 60, P.sun, P.ink, { w: 700 }))}</g>` : "";
   const under = d > 0 ? `<g transform="translate(0 ${n2(1080 * (1 - d))})">${bg("under")}${TF(520, 960, 1.0, schoolBag())}${TF(sh[0], sh[1], sh[2], shoe({ sole: t >= tR - .4 ? .55 + .45 * Math.sin((t - tR) * 4) : 0 }))}
-    ${ltag(t, tR, 1000, 560, "rubber", sh[0] - 60, sh[1] - 22 * sh[2], { size: 52, fill: MATK.rubber.col, ink: "#fff" })}${t >= tW ? TF(1560, 640, spring(t, tW, .5), dropsDisc(t, 150, "cl")) : ""}</g>` : "";
+    ${ltag(t, tR, 800, 790, "rubber", sh[0] - 240 * sh[2], sh[1] - 26 * sh[2], { size: 52, fill: MATK.rubber.col, ink: "#fff" })}${t >= tW ? TF(1560, 640, spring(t, tW, .5), dropsDisc(t, 150, "cl")) : ""}</g>` : "";
   return top + under + (t >= tQ ? TF(1130, 270, spring(t, tQ, .45), tpill(0, 0, "Where do the drops come from?", 54, P.ink, "#fff", { w: 700 })) : "")
     + (d >= 1 ? buddy("basil", 130, 1062, 170, t, { aura: true, tag: false, in: tD + .7, poses: [[tD + .7, "sit"], [tW, "surprised"], [tQ, "arms_crossed"]] }) + buddy("pip", 320, 1064, 150, t, { aura: true, tag: false, in: tD + .8, poses: [[tD + .8, "sit"], [tQ, "thinking"]] }) : "")
     + (t >= tP ? TF(560, 470, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + HUD(t); };

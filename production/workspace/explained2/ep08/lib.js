@@ -223,7 +223,7 @@ function wipe(t, tc, col, cx = 960, cy = 540) { const a = .3, b = .26; if (t < t
    EP8: an entry may carry o.at = [x, y] (and o.size): it pops THERE without dimming the frame (SAP pops beside the Mark Sentence card). */
 const KWHOLD = 2.0;
 const KW = (PART === 1 ? [["OBJECT", "kw_object", 1], ["MATERIAL", "kw_material", 1], ["CERAMIC", "kw_ceramic", 1], ["CLAY", "kw_clay", 1]]
-  : [["RUBBER", "kw_rubber", 1], ["SAP", "kw_sap", 1, null, { at: [1500, 790], size: 110 }], ["FABRIC", "kw_fabric", 1]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+  : [["RUBBER", "kw_rubber", 1], ["SAP", "kw_sap", 1, null, { at: [1480, 850], size: 100 }], ["FABRIC", "kw_fabric", 1]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, hook: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
