@@ -29,14 +29,19 @@ SC.count = (t, s) => { const L = "h501", ws = [["Are you ready?", LT(L), 150, "#
     + `<g transform="translate(960 ${cur ? 470 : 430}) scale(${n2(k)})"><g transform="translate(0 ${size * .05})" opacity=".8">${T(0, size * .35, txt, size, P.ink, { ls: cur ? 0 : 4 })}</g>${T(0, size * .35 - 6, txt, size, col, { ls: cur ? 0 : 4 })}</g>`
     + buddy("pip", 300, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("basil", 960, 1070, 230, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("momo", 1620, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + HUD(t); };
 
-/* ============ today's goals: three chips drop in and light up in turn (about 1.3 s each); nothing is spoken ============ */
-function goals3(t, s, goals) { const cues = [0, 1, 2].map((i) => s.t0 + .4 + i * 1.22), cols = ["gBlue", "gPurple", "gOrange"];
-  let out = bg("stage2") + OP(ramp(t, s.t0 + .1, .3), T(960, 210, "Today you’ll learn", 76, "#fff", { w: 600 }));
-  goals.forEach(([g, ic], i) => { const k = spring(t, cues[i] - .12, .5); if (k < .02) return; const x = 380 + i * 580, y = 560 + (1 - eo((t - cues[i] + .12) / .3)) * -220, lit = pulse(t, cues[i], .05, 1.3), ls = wrap(g, 46, 450, 700);
-    out += TF(x, y, k * (1 + .05 * lit), `<g transform="rotate(${[-2, 1.5, -1.5][i]})"><g filter="url(#${lit > .25 ? "glowS" : "drop"})"><rect x="-255" y="-190" width="510" height="400" rx="46" fill="url(#gPaper)"/><rect x="-255" y="-190" width="510" height="150" rx="46" fill="url(#${cols[i]})"/><rect x="-255" y="-90" width="510" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -112)">${ic}</g>${ls.map((l, j) => T(0, 66 + j * 56 - (ls.length - 1) * 22, l, 46, P.ink)).join("")}</g>`); });
-  return out + buddy("pip", 180, 1060, 250, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [cues[2] + 1.0, "cheer"]] }) + HUD(t); }
+/* ============ today's goals: a buddy READS the three cards aloud (rulebook section 11 step 3, teacher 21 Nov) ============
+   who says "Today you'll learn..." (ids[0]) and then each card, word for word (ids[1..3]). The three cards drop in at the start and wait;
+   each one lifts and glows while it is read. goals = [[text, icon svg], ...] */
+function goals3(t, s, goals, who, ids) { const cols = ["gBlue", "gPurple", "gOrange"], t0 = LT(ids[0]), fl = who === "pip";
+  let out = bg("stage2") + TF(960, 200, 1 + .05 * pulse(t, t0, .05, .5), OP(ramp(t, s.t0 + .1, .3), T(0, 0, "Today you’ll learn", 76, speaking(who, t) && speaking(who, t) === TL.lines[ids[0]] ? P.sun : "#fff", { w: 600 })));
+  goals.forEach(([g, ic], i) => { const tin = s.t0 + .15 + i * .14, k = spring(t, tin, .5); if (k < .02) return; const a = LT(ids[i + 1]) - .12, b = LE(ids[i + 1]) + .25, on = ss(a, a + .22, t) * (1 - ss(b, b + .3, t)), done = t >= b ? 1 : 0;
+    const x = 560 + i * 500, y = 600 + (1 - eo((t - tin) / .3)) * -220 - 44 * on, ls = wrap(g, 44, 400, 700), dim = t < a ? .62 : 1;
+    out += TF(x, y, k * (1 + .08 * on), `<g transform="rotate(${[-2, 1.5, -1.5][i] * (1 - on)})" opacity="${dim}">${on > .05 ? `<rect x="-240" y="-196" width="480" height="412" rx="60" fill="${P.sun}" opacity="${n2(.85 * on)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="-225" y="-186" width="450" height="392" rx="44" fill="url(#gPaper)"/><rect x="-225" y="-186" width="450" height="150" rx="44" fill="url(#${cols[i]})"/><rect x="-225" y="-86" width="450" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -110)">${ic}</g>${ls.map((l, j) => T(0, 70 + j * 54 - (ls.length - 1) * 22, l, 44, P.ink)).join("")}${done ? TF(180, -160, spring(t, b, .4), tickBadge(26)) : ""}</g>`); });
+  const poses = [[s.t0, who === "basil" ? "cheer" : "waving"], [t0 - .12, "sit"], [LE(ids[3]) + .15, "cheer"]];
+  return out + buddy(who, 170, 1060, 300, t, { aura: true, in: s.t0 + .1, poses, wave: true, nohop: true, jump: [1, 2, 3].map((i) => [LT(ids[i]) - .14, 16]) }) + HUD(t); }
 
 /* ============ the lock-in (fingers 1, 2, 3): the same routine every time ============
+   EP7: c.labels(t) -> clue labels drawn on top of the ring and kept through the countdown; a pick { who, tf, word } flips at tf without a line.
    c: { cards: [text, ...] (2 or 3 cream answer cards), q, tq, tc: [t1, ...] (each card pops as Heart says it), ring0, dur, lock (Heart's "Locked in!" line), obj(t) -> svg at the ring centre (430, 470),
         picks: [{who, id, word, x, fixed}] (fixed = that buddy has answered already), ans + tAns (the right card glows), pre(t), over(t), react, score } */
 function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, picks = c.picks, tb0 = Math.min(...picks.filter((p) => p.id).map((p) => LT(p.id))) - .5, rs = ringState(t, c.ring0, c.dur);
@@ -46,10 +51,12 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
     main += TF(x0 + i * dx, CY, k, ansCard(i + 1, txt, { pulse: Math.max(turn * (.4 + rs.tick), said), lit, w: n === 2 ? 340 : 286 })); });
   main += ringTimer(RX, CY, t < bell ? rs.frac : 0, t < bell ? rs.secs : 0, t, { tick: rs.tick, shut, inner: `<circle cx="${RX}" cy="${CY}" r="172" fill="url(#mSky)"/>` + c.obj(t) });
   if (shut > .05) main += `<circle cx="${RX}" cy="${CY}" r="${n2(RING_R + 40 + 80 * (1 - shut))}" fill="none" stroke="${P.sun}" stroke-width="6" opacity="${n2(shut * .8)}"/>`;
+  // clue labels: drawn ON TOP of the ring frame and kept on screen for the whole countdown (rulebook section 4, teacher 21 Nov)
+  if (c.labels) main += c.labels(t);
   const top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
   // the buddies wait with their picks face down; after the bell each card flips as its buddy speaks
   const X0 = { pip: 600, basil: 960, momo: 1320 }, tin = c.tin || c.ring0 - .3; let buds = "", bubs = "", cards = "";
-  ["pip", "basil", "momo"].forEach((who, i) => { const pk = picks.find((p) => p.who === who), tf = pk.fixed ? tin : LT(pk.id), uni = pk.id && TL.lines[pk.id].who === "chant", sp = t >= tb0 && speaking(who, t), hh = lerp(224, 320, zb) * (sp && !uni ? 1.06 : 1), x = lerp(X0[who], [400, 960, 1520][i], zb);
+  ["pip", "basil", "momo"].forEach((who, i) => { const pk = picks.find((p) => p.who === who), tf = pk.tf !== undefined ? pk.tf : pk.fixed ? tin : LT(pk.id), uni = pk.id && TL.lines[pk.id].who === "chant", sp = t >= tb0 && speaking(who, t), hh = lerp(224, 320, zb) * (sp && !uni ? 1.06 : 1), x = lerp(X0[who], [400, 960, 1520][i], zb);
     const poses = pk.fixed ? [[tin, "sit"]] : [[tin, who === "basil" ? "arms_crossed" : "thinking"], [tf - .12, "sit"]];
     for (const [tt, w2, p2] of c.react || []) if (w2 === who) poses.push([tt, p2]); poses.sort((a, b) => a[0] - b[0]);
     buds += buddy(who, x, 1062, hh, t, { aura: true, auraO: .85, in: tin + i * .12, poses });
@@ -96,9 +103,9 @@ function chantScene(t, s, id, o = {}) { const L = TL.lines[id], beats = chantBea
   const jumps = beats.filter((b) => b[1] === "s" && !b[2]).map((b) => [b[0] - .2, 30]), by = 1066, bh = 270, xs = [620, 990, 1360], tin = s.t0 + .15;
   let buds = ""; ["pip", "basil", "momo"].forEach((w, i) => { const sq = 1 - .05 * clap; buds += `<g transform="translate(${xs[i]} ${by}) scale(${n2(1 / sq)} ${n2(sq)}) translate(${-xs[i]} ${-by})">${buddy(w, xs[i], by, bh, t, { aura: true, in: tin + i * .08, jump: t >= L.t ? jumps : [], poses: [[s.t0, "sit"], [L.end - .28, "cheer"]] })}</g>`;
     fx += OP(clap, `<g stroke="${P.sun}" stroke-width="7" stroke-linecap="round"><path d="M${xs[i] - bh * .5} ${by - bh * .8} l-26 -22 M${xs[i] + bh * .5} ${by - bh * .8} l26 -22 M${xs[i]} ${by - bh * 1.08} v-30"/></g>`) + OP(stomp, `<ellipse cx="${xs[i]}" cy="${by}" rx="${n2(bh * (.5 + .4 * (1 - stomp)))}" ry="${n2(22 + 16 * (1 - stomp))}" fill="none" stroke="#fff" stroke-width="6"/>`); });
-  // the full trail card stands beside them on its stand; its three stamps flash in time
-  const board = TF(230, 1040, .74, trailCard(t, { 0: 0, 1: 0, 2: 0 }, { flash: chantFlash(t, L) }));
-  return bg("stage2") + board + chantLines(t, L, { x: 900, y0: 330, dy: 150, size: 74 }) + (o.head || "") + buds + fx + yourTurn(t, L, 1730, 700, .95) + say(o.sayId || "u1002", 960, 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
+  // EP7: the small chapter map stands beside them (o.board(flash) draws it); its branches and the two trays flash in time
+  const board = o.board ? o.board(chantFlash(t, L)) : "";
+  return bg("stage2") + board + chantLines(t, L, { x: o.x || 900, y0: 330, dy: 150, size: o.size || 74 }) + (o.head || "") + buds + fx + yourTurn(t, L, 1730, 700, .95) + say(o.sayId || "u1002", 960, 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
 
 /* ============ the score hand ============ */
 function finalScene(t, s, L, bud, tips, extra = "") { // tips: [[time, text, big]]; the last one is HIGH FIVE
@@ -148,7 +155,7 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130) { const 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
 function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "lizard"), tFind = W(L, "find");
   let out = bg("stage");
-  if (full) { const tYou = W(L, "you"), tBud = W(L, "buddies"), tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
+  if (full) { const tYou = W(L, "you"), tBud = TL.lines[L].words.some((w) => norm(w.w) === "buddies") ? W(L, "buddies") : W(L, "first"),   // EP7's short line: the buddies come in on "first" tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
     out += `<g transform="translate(960 ${n2(lerp(-200, 190, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.45 + .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3), { you: 0, bud: 0 })}</g>`;
     const nf = t >= tOne ? 1 : 0, youIn = spring(t, tYou - .1, .5);
     if (youIn > .02) { const px = lerp(400, 330, ph2), cx = lerp(880, 760, ph2), cs = lerp(1.15, 1.9, ph2), cy = lerp(700, 800, ph2);

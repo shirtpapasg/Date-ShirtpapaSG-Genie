@@ -50,7 +50,7 @@ SC.trees = (t, s) => { const a = "j402", b = "j403", c = "j404", tA = s.t0 + .1,
 /* ============ 5 · Round 1: where do the white drops come from? ============ */
 const CAMSHOE = [1.7, 700, 800];
 SC.r1 = (t, s) => { const tL = LT(L1), a = "j501", tSo = W(a, "sole") - .2;
-  return lockN(t, { cards: ["A cow", "A tree", "A rock"], icons: [TF(0, 0, 1.0, cowIcon(t)), TF(0, -4, 1.1, treeIcon()), TF(0, -2, 1.1, rockIcon())], q: "Where do the white drops come from?", tq: W(L1, "where") - .1, tc: [W(L1, "one"), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "j503", tin: W(L1, "where") - .3,
+  return lockN(t, { cards: ["A cow", "A tree", "A rock"], tag: "white drops", icons: [TF(0, 0, 1.0, cowIcon(t)), TF(0, -4, 1.1, treeIcon()), TF(0, -2, 1.1, rockIcon())], q: "Where do the white drops come from?", tq: W(L1, "where") - .1, tc: [W(L1, "one"), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "j503", tin: W(L1, "where") - .3,
     obj: (tt) => TF(430, 470, 1, dropsDisc(tt, 166, "rg")), picks: [{ who: "momo", id: "j504", word: "1", x: true }, { who: "pip", id: "j505", word: "2" }, { who: "basil", id: "j506", word: "2" }],
     react: [[LE("j504") + .1, "momo", "thinking"], [LE("j505") + .1, "pip", "pointing"], [LE("j506") + .1, "basil", "cheer"]],
     pre: (tt) => { if (tt >= tL - .3) return wipe(tt, tL - .04, P.indigo, 430, 470); const e = eio((tt - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMSHOE[0], e), lerp(CAMW[1], CAMSHOE[1], e), lerp(CAMW[2], CAMSHOE[2], e)], gl = tt >= tSo ? .55 + .45 * Math.sin((tt - tSo) * 4) : 0;
@@ -82,7 +82,7 @@ SC.fabric = (t, s) => { const a = "j801", b = "j802", e = eio((t - s.t0) / 1.0),
 // the T-shirt's collar label, turned to the camera (the ring picture)
 const labelRing = (tt) => `<g clip-path="url(#cRing)"><rect x="250" y="290" width="360" height="360" fill="#F4F6FA"/><rect x="250" y="290" width="360" height="360" fill="url(#cWeave)"/><path d="M250 330 Q430 470 610 330 V290 H250z" fill="#D5DCEA"/><path d="M250 330 Q430 470 610 330" fill="none" stroke="#2EA3A0" stroke-width="26"/><path d="M250 330 Q430 470 610 330" fill="none" stroke="#57C4BE" stroke-width="7" stroke-dasharray="6 10"/>
   <g transform="translate(430 500) rotate(-3)"><g filter="url(#dropS)"><rect x="-128" y="-66" width="256" height="132" rx="10" fill="#fff" stroke="#9AA6C0" stroke-width="4"/></g><path d="M-116 -54 H116" stroke="#9AA6C0" stroke-width="3" stroke-dasharray="8 6"/>${T(0, 0, "100%", 50, P.ink)}${T(0, 46, "cotton", 46, P.ink)}</g></g>`;
-SC.r2 = (t, s) => lockN(t, { cards: ["An animal", "A plant"], q: "Where does cotton come from?", tq: W(L2, "where") - .1, tc: [W(L2, "one"), W(L2, "two", 1)], ring0: MK("ring0_r2"), dur: 5, lock: "j804",
+SC.r2 = (t, s) => lockN(t, { cards: ["An animal", "A plant"], tag: "the T-shirt’s label", q: "Where does cotton come from?", tq: W(L2, "where") - .1, tc: [W(L2, "one"), W(L2, "two", 1)], ring0: MK("ring0_r2"), dur: 5, lock: "j804",
   obj: labelRing, picks: [{ who: "basil", id: "j805", word: "1", x: true }, { who: "momo", id: "j806", word: "2" }, { who: "pip", id: "j807", word: "2" }],
   react: [[LE("j805") + .1, "basil", "surprised"], [LE("j806") + .1, "momo", "pointing"], [LE("j807") + .1, "pip", "cheer"]] });
 // a source and an object on one board, joined by one plain line

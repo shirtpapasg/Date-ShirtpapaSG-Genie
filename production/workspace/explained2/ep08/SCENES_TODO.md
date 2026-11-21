@@ -34,7 +34,7 @@ No new pose is needed for EP8. Off-model drafts for Basil pointing/waving are in
 - **Chant colours:** the stamp colours (charcoal rubber, slate metal) do not read on the dark stage, so the chant words light white (`PCOL` in common.js); add colour on the board tiles instead.
 - **No cuts were needed:** both parts are under 5:15. The cut tags still work (`CUTS` in script.py) if a later change makes a part longer.
 
-## Part 1 · "This Jar Was Once SAND! What Are Things Made Of?" · 5:09.0
+## Part 1 · "This Jar Was Once SAND! What Are Things Made Of?" · 5:13.2
 
 ### 0:00.0 – 0:07.0 · `cold` · 1 · Silent cold open: the school canteen at recess (7.0 s)
 
@@ -65,358 +65,354 @@ No new pose is needed for EP8. Off-model drafts for Basil pointing/waving are in
 - **New:** Nothing.
 - **Lines:** `g301`
 
-### 0:36.1 – 0:40.1 · `goals` · 4 · Today's goals (4.0 s)
+### 0:36.1 – 0:44.3 · `goals` · 4 · Today's goals (8.1 s)
 
 - **Draw:** Three chips: **Objects and materials** · **Four of the 7 materials** · **Where each one comes from**. Nothing spoken.
 - **Reuse:** WIRED: `goals3` (common.js). Only the three chip icons are empty strings.
 - **New:** Three small icons: the spoon with tags; four tiles; a source (a sand pile).
+- **Lines:** `g401`, `g402`, `g403`, `g404`
 
-### 0:40.1 – 0:45.8 · `count` · 4 · The countdown (5.7 s)
+### 0:44.3 – 0:50.0 · `count` · 4 · The countdown (5.7 s)
 
 - **Draw:** As every episode.
 - **Reuse:** WIRED (common.js).
 - **New:** Nothing.
 - **Lines:** `h501`
 
-### 0:45.8 – 0:56.5 · `spoon` · 5 · Object and material: the spoon (10.7 s)
+### 0:50.0 – 1:00.6 · `spoon` · 5 · Object and material: the spoon (10.7 s)
 
 - **Draw:** Camera moves in on the metal spoon; Pip points. OBJECT pops (`kw_object`, already drawn by the shelf in lib.js); a small tag stays by the spoon: *object: a thing you use*. A magnifying glass on its little feet slides low over the spoon's bowl; inside it a round close-up of the shiny surface. On "Metal!" the tag *metal* pops by the close-up. MATERIAL pops (`kw_material`). Two tags side by side, joined to the spoon by plain lines (no arrowheads): *OBJECT: spoon* · *MATERIAL: metal*.
 - **Reuse:** `lensStand` (ep04/ep4.js: a magnifying glass on a stand, nothing floats) or `magnifier` (materials.js); `standTag` (trail.js) for tags; `CAM` (lib.js) for the move-in.
 - **New:** The spoon close-up (shiny metal surface with a highlight).
-- **Marks:** `kw_object` 0:48.4, `kw_material` 0:54.5
+- **Marks:** `kw_object` 0:52.5, `kw_material` 0:58.6
 - **Lines:** `g501`, `g502`
 
-### 0:56.5 – 1:06.5 · `mark1` · 5 · MARK SENTENCE 1 of 2 (definition 3.24) (10.0 s)
+### 1:00.6 – 1:10.7 · `mark1` · 5 · MARK SENTENCE 1 of 2 (definition 3.24) (10.0 s)
 
 - **Draw:** Pip says "Say it with me!"; 0.8 s; Heart reads; *Materials* and *objects* highlighted; the spoon stands under the card; holds 2.5 s.
 - **Reuse:** WIRED: `markScene` (common.js).
 - **New:** Pass the spoon as `under`/`extra`.
 - **Lines:** `g503`, `g504`
 
-### 1:06.5 – 1:07.6 · `listcard` · 6 · Round card BASIL'S RULE (1.1 s)
+### 1:10.7 – 1:11.8 · `listcard` · 6 · Round card BASIL'S RULE (1.1 s)
 
 - **Reuse:** WIRED (common.js).
 - **New:** Nothing.
 
-### 1:07.6 – 1:33.4 · `rule` · 6 · HOLD ON! Basil's rule (25.8 s)
+### 1:11.8 – 1:37.5 · `rule` · 6 · HOLD ON! Basil's rule (25.8 s)
 
 - **Draw:** Basil's board on an easel on the floor: a window drawing, *A window is made of glass.* and under it in teal *So a window is a MATERIAL!* (his bubble has the ✗ chip). One classroom window glows behind. HOLD ON! stamp on "Hold on"; the YOU ring with crossed arms, 5 s (`ring0_hold` to `bell_hold`). Coin **+1** *arms crossed*. The teal line struck through with a ✗. Two tags joined by plain lines: *OBJECT: window* (to the whole window) · *MATERIAL: glass* (to one pane). Basil oops, then cheer. Score 1 : 0 (already in `SCORE`).
 - **Reuse:** EP5 p1.js `SC.rule` (the whole HOLD ON! routine: ring, crossed arms, stamp, coin, strike-through); Basil's easel notes in trail.js (`notebook`, NBX) / ep06 `SC.rule`.
 - **New:** A window drawing (louvre window) on Basil's board.
-- **Marks:** `ring0_hold` 1:17.5, `bell_hold` 1:22.5
+- **Marks:** `ring0_hold` 1:21.6, `bell_hold` 1:26.6
 - **Lines:** `g601`, `g602`, `g603`, `g604`
 
-### 1:33.4 – 1:34.5 · `r1card` · 7 · Round card ROUND 1 (1.1 s)
+### 1:37.5 – 1:38.6 · `r1card` · 7 · Round card ROUND 1 (1.1 s)
 
 - **Reuse:** WIRED.
 - **New:** Nothing.
 
-### 1:34.5 – 2:03.2 · `r1` · 7 · Round 1: which one was made from sand? (28.7 s)
+### 1:38.6 – 2:07.4 · `r1` · 7 · Round 1: which one was made from sand? (28.7 s)
 
 - **Draw:** Lock-in with three cards (WIRED). In the ring: the three containers in a row with the small pile of sand in front. Momo 2 (✗), Pip 3, Basil 3.
 - **Reuse:** WIRED: `lockN` (common.js) with cards, picks and reactions. Only `obj` (the ring picture) is a placeholder `ringPH`.
 - **New:** The ring picture: the three containers + sand pile.
-- **Marks:** `ring0_r1` 1:44.7, `bell_r1` 1:49.7
+- **Marks:** `ring0_r1` 1:48.8, `bell_r1` 1:53.8
 - **Lines:** `g701`, `g702`, `g703`, `g704`, `g705`
 
-### 2:03.2 – 2:07.6 · `waitw` · 8 · Be a grain of sand! (the dive) (4.3 s)
+### 2:07.4 – 2:11.7 · `waitw` · 8 · Be a grain of sand! (the dive) (4.3 s)
 
 - **Draw:** Back at the table: the small pile of sand. Pill **Be a grain of sand!** The camera dives into the pile; a sand-coloured wipe. The shelf slides aside (already: SHELF_HIDE).
 - **Reuse:** EP5 p1.js / p2.js `SC.waitw` (the dive camera, `wipe`).
 - **New:** Nothing beyond the canteen and the sand pile.
 - **Lines:** `g801`
 
-### 2:07.6 – 2:37.5 · `shrink` · 8 · BE A GRAIN OF SAND (first-person journey) (30.0 s)
+### 2:11.7 – 2:41.7 · `shrink` · 8 · BE A GRAIN OF SAND (first-person journey) (30.0 s)
 
 - **Draw:** Marks: `pile` (you are one pale grain among thousands; grains as big as boulders, pale gold, a little see-through at the edges; far above a factory roof; tag *You: a grain of sand*) · `scoop` (a huge metal edge slides under you; grains tumble; you ride up, tip, slide down a chute towards a glowing orange opening; word strip *furnace: a very hot oven* 3.5 s from the word "furnace"; tag *Very hot! Only in a factory.* for the whole hot section) · `melt` (everything glows orange; edges soften and round, grain joins grain; your own edge at the bottom of the frame runs like syrup; no grains left, only slow glowing orange liquid; tags *You melt* · *speeded up*) · `mould` (the liquid pours in a slow thick ribbon into a grey metal jar shape; the camera pours with it and spreads round the inside; tag *a mould: the shape of a jar*) · `cool` (orange fades through amber to clear; you are inside the jar wall: through yourself the canteen table, big and a little bent, the three buddies in their discs looking in; tags *You cool* · *hard again* · *clear*) · `isglass` (a highlight runs along the curve; tag large **You are glass.**). Calm, no game sounds.
 - **Reuse:** shrink.js helpers `youTag`, `feelTag`, `hexL` (kept); EP5 `ep05/shrink.js` and EP6 `ep06/shrink.js`/`ep06f/f6.js` `SC.shrink` (dive, scale world, wipe in/out); `bookCaption`/word strip as in EP5.
 - **New:** The whole sand world: giant grains, scoop, chute, furnace mouth, glowing liquid, mould, the cooling jar wall seen from inside.
-- **Marks:** `dive` 2:07.6, `pile` 2:09.6, `scoop` 2:13.6, `melt` 2:19.6, `mould` 2:24.8, `cool` 2:28.7, `isglass` 2:35.0
+- **Marks:** `dive` 2:11.7, `pile` 2:13.7, `scoop` 2:17.7, `melt` 2:23.8, `mould` 2:29.0, `cool` 2:32.8, `isglass` 2:39.1
 - **Lines:** `g802`, `g803`, `g804`, `g805`, `g806`, `g807`
 
-### 2:37.5 – 2:41.5 · `reveal` · 9 · Pull back out: the answer is three (4.0 s)
+### 2:41.7 – 2:45.6 · `reveal` · 9 · Pull back out: the answer is three (4.0 s)
 
 - **Draw:** Pull back to the table. The shelf returns. Answer card **3 The glass jar** glows; the sand pile and the jar joined by one plain line. Pip and Basil cheer; Momo surprised.
 - **Reuse:** EP5 p1.js `SC.reveal` (pull-out camera, answer card glow `ansCard(..., {lit})`).
 - **New:** Nothing new.
-- **Marks:** `pullout` 2:37.5
+- **Marks:** `pullout` 2:41.7
 - **Lines:** `g901`
 
-### 2:41.5 – 2:51.1 · `glass` · 9 · Glass is made from sand (9.6 s)
+### 2:45.6 – 2:55.2 · `glass` · 9 · Glass is made from sand (9.6 s)
 
 - **Draw:** Cream strip (`bookCaption`, g902) ≥ 3.5 s. Then GLASS pops (`nm_glass`, placeholder pop in materials.js `namePop`) and hops low to its tile; at `tile_glass` the tile fills ice grey with a small jar, source slot: a little pile, *sand*. At `uses_glass` (cuttable) three small picture boards pop behind the jar: *window* · *light bulb* · *spectacles*. Coin **+1** *if you showed three fingers*; score 2 : 1 (in `SCORE`).
 - **Reuse:** `bookCaption` (common.js); `wboard` (materials.js) for picture boards; `coin` (lib.js).
 - **New:** The filled GLASS tile; window, light bulb, spectacles pictures.
-- **Marks:** `nm_glass` 2:45.3, `tile_glass` 2:47.3, `uses_glass` 2:47.3
+- **Marks:** `nm_glass` 2:49.4, `tile_glass` 2:51.4, `uses_glass` 2:51.4
 - **Lines:** `g902`, `g903`
 
-### 2:51.1 – 3:05.0 · `metal` · 10 · Metal (13.9 s)
+### 2:55.2 – 3:09.2 · `metal` · 10 · Metal (13.9 s)
 
 - **Draw:** The metal snack box big. A picture board slides in low: a rock face with shiny streaks, a digger at its foot. Two cream strips one after the other (g1002, g1003; each ≥ 3.5 s). On "Gold, iron, copper and aluminium" four small boards pop in a row: *gold: a ring* · *iron: a gate* · *copper: a wire* · *aluminium: a drink can* (realism: can silver, wire orange-brown, gate dark grey, ring yellow). METAL pops (`nm_metal`) and hops to its tile; `tile_metal`: slate, a small spoon; source: a rock, *dug up from the ground*.
 - **Reuse:** `wboard` picture boards; `slideX` (hotel.js).
 - **New:** Rock face with shiny streaks + digger; ring, gate, wire, can.
-- **Marks:** `nm_metal` 3:02.6, `tile_metal` 3:04.6
+- **Marks:** `nm_metal` 3:06.8, `tile_metal` 3:08.8
 - **Lines:** `g1001`, `g1002`, `g1003`
 
-### 3:05.0 – 3:18.9 · `plastic` · 10 · Plastic (13.9 s)
+### 3:09.2 – 3:23.1 · `plastic` · 10 · Plastic (13.9 s)
 
 - **Draw:** The plastic snack box big. A board slides in low: an oil well, a pipe going deep down to a dark pool (tag *oil, deep under the ground*) and a small factory. Cream strip (g1005). PLASTIC pops (`nm_plastic`), hops to its tile; `tile_plastic`: hot pink, a small box; source: a dark drop, *oil*. Basil surprised, then his joke (g1006, cuttable).
 - **Reuse:** `wboard`; Basil `surprised` pose.
 - **New:** Oil well + pipe + factory board.
-- **Marks:** `nm_plastic` 3:12.4, `tile_plastic` 3:14.4
+- **Marks:** `nm_plastic` 3:16.6, `tile_plastic` 3:18.6
 - **Lines:** `g1004`, `g1005`, `g1006`
 
-### 3:18.9 – 3:20.0 · `r2card` · 11 · Round card ROUND 2 (1.1 s)
+### 3:23.1 – 3:24.2 · `r2card` · 11 · Round card ROUND 2 (1.1 s)
 
 - **Reuse:** WIRED.
 - **New:** Nothing.
 
-### 3:20.0 – 3:49.8 · `r2` · 11 · Round 2: ceramic (29.8 s)
+### 3:24.2 – 3:53.9 · `r2` · 11 · Round 2: ceramic (29.8 s)
 
 - **Draw:** Before the cards (placeholder `pre` covers it): the camera turns to the noodle stall; a white glazed bowl with a blue rim and its soup spoon on the counter. CERAMIC pops (`kw_ceramic`, shelf) and a copy hops to the edge of its tile and waits. Then the lock-in (WIRED): **1 Sand · 2 Clay · 3 Oil**; the bowl in the ring. **The hidden lizard sits on a classroom window behind the canteen for about 3 s**, from about `ring0_r2` + 1. Pip 1 (✗), Momo 2, Basil 2.
 - **Reuse:** `lockN` WIRED; `cicak()` (props.js) for the lizard, placed like `lizOnTrunk` (ep04) / `lizOnRail` (ep05/wetland.js).
 - **New:** The noodle stall close-up; the ceramic bowl and soup spoon.
-- **Marks:** `kw_ceramic` 3:22.5, `ring0_r2` 3:31.6, `bell_r2` 3:36.6
+- **Marks:** `kw_ceramic` 3:26.7, `ring0_r2` 3:35.7, `bell_r2` 3:40.7
 - **Lines:** `g1101`, `g1102`, `g1103`, `g1104`, `g1105`, `g1106`
 
-### 3:49.8 – 3:58.0 · `clay` · 11 · The answer is two: clay (8.1 s)
+### 3:53.9 – 4:02.1 · `clay` · 11 · The answer is two: clay (8.1 s)
 
 - **Draw:** Answer card **2 Clay** glows. A board slides in low: a spade in soil and a grey-brown lump of clay. Cream strip (g1108). CLAY pops (`kw_clay`, shelf).
 - **Reuse:** `soilHeap` (ep04/ep4.js); `wboard`.
 - **New:** Spade, lump of clay.
-- **Marks:** `kw_clay` 3:56.0
+- **Marks:** `kw_clay` 4:00.1
 - **Lines:** `g1107`, `g1108`
 
-### 3:58.0 – 4:06.1 · `kiln` · 11 · Shaped, then baked in a kiln (8.1 s)
+### 4:02.1 – 4:10.2 · `kiln` · 11 · Shaped, then baked in a kiln (8.1 s)
 
 - **Draw:** Two boards in turn: hands shaping the lump into a bowl; then a brick kiln with its door open, glowing orange inside, the bowl on a shelf. Word strip *kiln: a very hot oven for baking clay* (3.5 s from "kiln"). Tag *Very hot! Only in a factory.* At `bowlback` the finished glazed bowl hops back to the counter; small tag *It can break easily*.
 - **Reuse:** `adultHand` (trail.js) for the hands; `wboard`.
 - **New:** Hands shaping clay; the brick kiln.
-- **Marks:** `bowlback` 4:05.1
+- **Marks:** `bowlback` 4:09.2
 - **Lines:** `g1109`
 
-### 4:06.1 – 4:18.7 · `mark2` · 11 · MARK SENTENCE 2 of 2 (3.4 s1 + 3.6) (12.6 s)
+### 4:10.2 – 4:22.9 · `mark2` · 11 · MARK SENTENCE 2 of 2 (3.4 s1 + 3.6) (12.6 s)
 
 - **Draw:** Basil says "Say it with me!" (inviting hop: he has no pointing pose); Heart reads; highlights *Ceramic*, *clay*, *Glass*, *sand*. Under the card: the lump of clay beside the bowl, the sand pile beside the jar. Holds 2.5 s. At `tile_ceramic` the CERAMIC tile fills (terracotta), a small bowl, source *clay*. Coin **+1**; score 3 : 2. Four tiles now full.
 - **Reuse:** WIRED: `markScene` (common.js).
 - **New:** Pass the under-card props; the tile fill can show on a small board.
-- **Marks:** `tile_ceramic` 4:15.1
+- **Marks:** `tile_ceramic` 4:19.3
 - **Lines:** `g1110`, `g1111`, `g1112`
 
-### 4:18.7 – 4:23.4 · `final` · 12 · The score hand (4.7 s)
+### 4:22.9 – 4:27.6 · `final` · 12 · The score hand (4.7 s)
 
 - **Draw:** 3 fingers = high five.
 - **Reuse:** WIRED: `finalScene` (common.js).
 - **New:** Optional `extra`: the board.
 - **Lines:** `g1201`
 
-### 4:23.4 – 4:31.4 · `liz` · 12 · Did you spot the lizard? (8.0 s)
+### 4:27.6 – 4:35.5 · `liz` · 12 · Did you spot the lizard? (8.0 s)
 
 - **Draw:** A replay of the classroom window with a ring round the little lizard. Question pill *What material is a window made of?* · *Tell someone at home!*
 - **Reuse:** `lizReveal(t, s, "g1202", view, lx, ly, W("g1202", "what") - .1, "What material is a window made of?")` (common.js) once the canteen view exists.
 - **New:** Nothing new.
 - **Lines:** `g1202`
 
-### 4:31.4 – 4:45.6 · `kwrecap` · 12 · Key-word read-along: OBJECT · MATERIAL · CERAMIC · CLAY (14.2 s)
+### 4:35.5 – 4:49.7 · `kwrecap` · 12 · Key-word read-along: OBJECT · MATERIAL · CERAMIC · CLAY (14.2 s)
 
 - **Reuse:** WIRED (common.js + lib.js shelf).
 - **New:** Nothing.
 - **Lines:** `h860`, `hk_object`, `uk_object`, `hk_material`, `uk_material`, `hk_ceramic`, `uk_ceramic`, `hk_clay`, `uk_clay`, `h864`
 
-### 4:45.6 – 4:57.3 · `cliff` · 13 · Cliffhanger: white drops (11.7 s)
+### 4:49.7 – 5:01.4 · `cliff` · 13 · Cliffhanger: white drops (11.7 s)
 
 - **Draw:** The board: four tiles full, three still dashed (**WOOD · RUBBER · FABRIC**); they pulse. The camera drops under the table: a school bag on the floor and one white canvas school shoe; its sole glows; tag *rubber*. A round close-up pops beside the shoe: white drops falling one by one on a plain dark background (**no tree shown**). Pill *Where do the drops come from?* **PART 2** slams in on "Find out in Part Two".
 - **Reuse:** `backpack()` (trail.js) for the school bag; EP5 p1.js `SC.cliff` (the PART 2 slam).
 - **New:** The white canvas lace-up school shoe (reused in Part 2: whole, side on, and with its four parts lit); the white-drops close-up.
-- **Marks:** `cliffend` 4:56.1
+- **Marks:** `cliffend` 5:00.2
 - **Lines:** `g1301`
 
-### 4:57.3 – 5:09.0 · `nyk` · 14 · "Now you know!" and the outro (11.7 s)
+### 5:01.4 – 5:13.2 · `nyk` · 14 · "Now you know!" and the outro (11.7 s)
 
 - **Draw:** EP1's ending exactly; the glass jar and the board stand between the buddies.
 - **Reuse:** WIRED: `nykScene(t, s, prop)` (common.js); prop is "" for now.
 - **New:** Pass the jar + board as the prop.
 - **Lines:** `u1300`, `h1304a`, `h1304o`, `h1304t`, `h1305`, `u1305`
 
-## Part 2 · "Your School Shoe Came from a TREE? The 7 Materials" · 4:56.3
+## Part 2 · "Your School Shoe Came from a TREE? The 7 Materials" · 4:57.1
 
-### 0:00.0 – 0:03.0 · `recap` · 1 · Silent recap montage (cuttable) (3.0 s)
-
-- **Draw:** Three shots of Part 1, one second each, tagged *Part 1*: the spoon with its two tags; the sand pile joined to the glass jar; the white drops with a big **?**.
-- **Reuse:** EP5 p2.js `SC.recap`; Part 1's own drawings.
-- **New:** Nothing new.
-
-### 0:03.0 – 0:12.2 · `lasttime` · 2 · Last time... (9.2 s)
+### 0:00.0 – 0:10.1 · `lasttime` · 2 · Last time... (10.1 s)
 
 - **Draw:** The canteen table and the board. METAL, CERAMIC, GLASS, PLASTIC glow in turn; on "sand" the GLASS source slot pulses, on "clay" the CERAMIC one; then the three dashed tiles pulse: **WOOD · RUBBER · FABRIC**.
 - **Reuse:** The canteen set and board from Part 1 (`tileFull()` in materials.js already says which tiles are full in Part 2).
 - **New:** Nothing new.
 - **Lines:** `j201`
 
-### 0:12.2 – 0:16.2 · `goals` · 3 · Today's goals (4.0 s)
+### 0:10.1 – 0:16.9 · `goals` · 3 · Today's goals (6.8 s)
 
 - **Draw:** **Wood, rubber and fabric** · **Where each one comes from** · **Count the parts**.
 - **Reuse:** WIRED: `goals3`.
 - **New:** Three icons.
+- **Lines:** `j311`, `j312`, `j313`, `j314`
 
-### 0:16.2 – 0:19.5 · `game` · 3 · The game (short) (3.3 s)
+### 0:16.9 – 0:20.2 · `game` · 3 · The game (short) (3.3 s)
 
 - **Draw:** The ring, the lizard with a question mark.
 - **Reuse:** WIRED: `gameScene(t, s, "j301", false)`.
 - **New:** Nothing.
 - **Lines:** `j301`
 
-### 0:19.5 – 0:26.3 · `wood` · 4 · Wood: the bench and the pencil (6.9 s)
+### 0:20.2 – 0:27.1 · `wood` · 4 · Wood: the bench and the pencil (6.9 s)
 
 - **Draw:** The canteen bench, close: grain lines run along it. Momo points at it. A pencil lies on the table; it glows on "your pencil". WOOD pops (`nm_wood`) and waits by its tile.
 - **Reuse:** `pencil` (props.js, recolour to a wooden pencil); `fWood` gradient (props.js XDEFS).
 - **New:** Bench close-up with grain.
-- **Marks:** `nm_wood` 0:24.3
+- **Marks:** `nm_wood` 0:25.1
 - **Lines:** `j401`
 
-### 0:26.3 – 0:35.6 · `trees` · 4 · Wood comes from trees (9.3 s)
+### 0:27.1 – 0:36.4 · `trees` · 4 · Wood comes from trees (9.3 s)
 
 - **Draw:** A board slides in low: tall trees. Cream strip (j402). Then a second board: a trunk lying down, cut lengthwise into long flat planks, grain showing (with the cuttable line j403); then a third, small: an exercise book, tag *paper*. At `tile_wood` the WOOD tile fills (chestnut), a small plank, source: a tree, *trees*.
 - **Reuse:** `rainTree` (ep06/gardens.js) or `TREE`/`trunk` (ep04/ep4.js) for trees; `notebook` (trail.js) style for the exercise book.
 - **New:** Trunk cut into planks.
-- **Marks:** `tile_wood` 0:34.6
+- **Marks:** `tile_wood` 0:35.4
 - **Lines:** `j402`, `j403`, `j404`
 
-### 0:35.6 – 0:36.7 · `r1card` · 5 · Round card ROUND 1 (1.1 s)
+### 0:36.4 – 0:37.5 · `r1card` · 5 · Round card ROUND 1 (1.1 s)
 
 - **Reuse:** WIRED.
 - **New:** Nothing.
 
-### 0:36.7 – 1:08.5 · `r1` · 5 · Round 1: where do the white drops come from? (31.8 s)
+### 0:37.5 – 1:09.3 · `r1` · 5 · Round 1: where do the white drops come from? (31.8 s)
 
 - **Draw:** Before the cards (placeholder `pre`): the white canvas school shoe stands on the table side on; its sole glows. RUBBER pops (`kw_rubber`, shelf); a copy waits by its tile. The round close-up of white drops pops beside the shoe. Then the lock-in (WIRED): **1 A cow · 2 A tree · 3 A rock**, with small drawings on the cards. Momo 1 (✗), Pip 2, Basil 2.
 - **Reuse:** `lockN` WIRED; `ansCard` takes only text: add the small drawings.
 - **New:** Cow, tree, rock card drawings.
-- **Marks:** `kw_rubber` 0:39.7, `ring0_r1` 0:51.3, `bell_r1` 0:56.3
+- **Marks:** `kw_rubber` 0:40.4, `ring0_r1` 0:52.1, `bell_r1` 0:57.1
 - **Lines:** `j501`, `j502`, `j503`, `j504`, `j505`, `j506`
 
-### 1:08.5 – 1:12.8 · `waitw` · 6 · Be a drop of sap! (the dive) (4.3 s)
+### 1:09.3 – 1:13.6 · `waitw` · 6 · Be a drop of sap! (the dive) (4.3 s)
 
 - **Draw:** Pill **Be a drop of sap!** The camera dives into the round close-up of white drops; a white wipe. The shelf slides aside.
 - **Reuse:** EP5 `SC.waitw`.
 - **New:** Nothing new.
 - **Lines:** `j601`
 
-### 1:12.8 – 1:38.6 · `shrink` · 6 · BE A DROP OF SAP (first-person journey) (25.8 s)
+### 1:13.6 – 1:39.4 · `shrink` · 6 · BE A DROP OF SAP (first-person journey) (25.8 s)
 
 - **Draw:** Marks: `intree` (a dim warm brown-gold space just under the bark; you are a round white drop among others, moving slowly in thin channels; light glows through the bark; tags *You: a drop of sap* · *inside a rubber tree*) · `cut` (a bright thin line of daylight opens across the bark above you, slanting down to the right; you slide out: grey-brown trunk, green leaves, morning sun, a plantation row far behind; tags *a thin cut in the bark* · *The tree keeps growing*) · `cup` (you run down the slanting cut with other white drops, hang at its lower end, fall into a small cup tied to the trunk; white all round; tag *the cup*) · `factory` (a dip to white; you are part of a thick pale sheet between two big rollers; it turns from white to creamy, springy solid; tags *a factory* · *speeded up* · *made into rubber*) · `sole` (a metal shape with a zigzag pattern presses down; when it lifts, you ARE the zigzag; the camera turns: you are under a white canvas shoe looking down at the canteen floor; tag *the sole of a school shoe*) · `steps` (the shoe takes two steps: the floor comes up, your zigzag bends, flattens, springs away; again; tag *You bend with every step*).
 - **Reuse:** shrink.js helpers; EP5/EP6 journeys as models.
 - **New:** The whole sap world: under the bark, the tapping cut and cup, rollers, the sole mould, the canteen floor from under a shoe.
-- **Marks:** `dive` 1:12.8, `intree` 1:14.8, `cut` 1:18.9, `cup` 1:23.7, `factory` 1:27.3, `sole` 1:30.5, `steps` 1:35.2
+- **Marks:** `dive` 1:13.6, `intree` 1:15.6, `cut` 1:19.6, `cup` 1:24.5, `factory` 1:28.1, `sole` 1:31.3, `steps` 1:35.9
 - **Lines:** `j602`, `j603`, `j604`, `j605`, `j606`, `j607`
 
-### 1:38.6 – 1:42.3 · `reveal` · 7 · Pull back out: the answer is two, a tree (3.6 s)
+### 1:39.4 – 1:43.1 · `reveal` · 7 · Pull back out: the answer is two, a tree (3.6 s)
 
 - **Draw:** Pull back to the table and the shoe. The shelf returns. Answer card **2 A tree** glows; a board slides in low: a rubber tree with the thin diagonal cut and the cup (white sap). Momo surprised, then cheers.
 - **Reuse:** EP5 `SC.reveal`.
 - **New:** Rubber tree with cut and cup (also the Part 2 thumbnail).
-- **Marks:** `pullout` 1:38.6
+- **Marks:** `pullout` 1:39.4
 - **Lines:** `j701`
 
-### 1:42.3 – 1:57.5 · `mark1` · 7 · MARK SENTENCE 1 of 2 (definition 3.5) (15.2 s)
+### 1:43.1 – 1:58.3 · `mark1` · 7 · MARK SENTENCE 1 of 2 (definition 3.5) (15.2 s)
 
 - **Draw:** Basil says "Say it with me!" (inviting hop); Heart reads. SAP pops large BESIDE the card on "sap" (`kw_sap`; lib.js draws it at [1500, 790] with no dimming; move it if the card covers it) and flies to the shelf. On the second sentence a small oil-well board pops under the card, tag *or made by man, using oil*. Holds 2.5 s. At `tile_rubber` the RUBBER tile fills (charcoal), a small sole, source: a tree and a dark drop, *sap of a rubber tree, or oil*. At `uses_rubber` (cuttable) four small boards: *rain boots* · *bicycle tyre* · *rubber bands* · *ball*. Coin **+1**; score 1 : 1.
 - **Reuse:** WIRED: `markScene`; the oil-well board from Part 1's plastic scene.
 - **New:** Rain boots, tyre, rubber bands, ball.
-- **Marks:** `kw_sap` 1:45.7, `tile_rubber` 1:53.6, `uses_rubber` 1:53.6
+- **Marks:** `kw_sap` 1:46.5, `tile_rubber` 1:54.3, `uses_rubber` 1:54.3
 - **Lines:** `j702`, `j703`, `j704`
 
-### 1:57.5 – 2:06.2 · `fabric` · 8 · Fabric: the school T-shirt (8.7 s)
+### 1:58.3 – 2:07.0 · `fabric` · 8 · Fabric: the school T-shirt (8.7 s)
 
 - **Draw:** A white school T-shirt folded on the table; a round close-up shows its weave. FABRIC pops (`kw_fabric`, shelf); a copy waits by its tile. Cream strip (j802); *animals* and *plants* highlighted.
 - **Reuse:** `bookCaption` (highlighting needs `bookCap` from trail.js or a small edit).
 - **New:** The folded T-shirt and the weave close-up.
-- **Marks:** `kw_fabric` 1:58.6
+- **Marks:** `kw_fabric` 1:59.4
 - **Lines:** `j801`, `j802`
 
-### 2:06.2 – 2:07.3 · `r2card` · 8 · Round card ROUND 2 (1.1 s)
+### 2:07.0 – 2:08.1 · `r2card` · 8 · Round card ROUND 2 (1.1 s)
 
 - **Reuse:** WIRED.
 - **New:** Nothing.
 
-### 2:07.3 – 2:32.1 · `r2` · 8 · Round 2: where does cotton come from? (24.8 s)
+### 2:08.1 – 2:32.9 · `r2` · 8 · Round 2: where does cotton come from? (24.8 s)
 
 - **Draw:** The T-shirt's collar label turns to the camera: *100% cotton* (in the ring). Two cards **1 An animal · 2 A plant** (WIRED). Basil 1 (✗), Momo 2, Pip 2.
 - **Reuse:** `lockN` WIRED.
 - **New:** The collar label.
-- **Marks:** `ring0_r2` 2:16.5, `bell_r2` 2:21.5
+- **Marks:** `ring0_r2` 2:17.3, `bell_r2` 2:22.3
 - **Lines:** `j803`, `j804`, `j805`, `j806`, `j807`
 
-### 2:32.1 – 2:45.5 · `r2ans` · 8 · Cotton, wool, silk (13.4 s)
+### 2:32.9 – 2:46.2 · `r2ans` · 8 · Cotton, wool, silk (13.4 s)
 
 - **Draw:** Answer card **2 A plant** glows. Three boards pop in a row as Heart names them, each a source joined to an object by one plain line: a cotton plant with white bolls and the T-shirt (*cotton: a plant*); a fluffy sheep and a sweater (*wool: sheep*); a pale oval cocoon and a scarf (*silk: a kind of caterpillar*). Coin **+1**; score 2 : 2. At `tile_fabric` the FABRIC tile fills (dark mustard), a small T-shirt, source: a sheep and a plant, *animals or plants*. Basil oops, then cheer (j810).
 - **Reuse:** `wboard`; `cottonDish` (props.js) has cotton wool.
 - **New:** Cotton plant with bolls, sheep, sweater, cocoon, scarf.
-- **Marks:** `tile_fabric` 2:41.9
+- **Marks:** `tile_fabric` 2:42.7
 - **Lines:** `j808`, `j809`, `j810`
 
-### 2:45.5 – 2:46.5 · `showcard` · 9 · Round card SHOWDOWN · DOUBLE POINTS (1.0 s)
+### 2:46.2 – 2:47.2 · `showcard` · 9 · Round card SHOWDOWN · DOUBLE POINTS (1.0 s)
 
 - **Reuse:** WIRED.
 - **New:** Nothing.
 
-### 2:46.5 – 3:18.4 · `show` · 9 · Showdown: Pip's notes (31.9 s)
+### 2:47.2 – 3:19.2 · `show` · 9 · Showdown: Pip's notes (31.9 s)
 
 - **Draw:** Pip's notes on an easel on the floor, three lines with small drawings: **1** Wood comes from trees. **2** Glass is made from sand. **3** A school shoe is made of one material. The school shoe on the table beside the easel. **The new hidden lizard sits under the wooden bench for about 3 s** (from about `ring0_show` + 1). The YOU ring with a counting hand, 6 s (`ring0_show` to `bell_show`). LOCKED IN! Momo 3, Basil 3; Pip oops.
 - **Reuse:** EP5 p2.js `SC.show` + Momo's field notes easel (ep05/p2.js line ~101) and trail.js `notebook`; `cicak()`.
 - **New:** Pip's notes content.
-- **Marks:** `ring0_show` 3:05.2, `bell_show` 3:11.2
+- **Marks:** `ring0_show` 3:06.0, `bell_show` 3:12.0
 - **Lines:** `j901`, `j902`, `j903`, `j904`, `j905`
 
-### 3:18.4 – 3:38.3 · `count4` · 9 · Count the parts (School Lab 3.1, Part a) (19.9 s)
+### 3:19.2 – 3:39.1 · `count4` · 9 · Count the parts (School Lab 3.1, Part a) (19.9 s)
 
 - **Draw:** The shoe big, side on. Four parts light up one at a time, each with a plain label line and a counter ticking **1, 2, 3, 4**: the sole (*rubber*), the canvas top (*fabric*), the lace rings (*metal*), the hard lace tips (*plastic*); the matching board tiles flash. Big tag **1 object · 4 materials**. Line 3 on Pip's notes rubbed out and rewritten in green: *A school shoe is made of four materials.* Coin **+2**; score 4 : 2.
 - **Reuse:** EP5 p2.js `SC.fixed` (rub out and rewrite); `counter` (lib.js).
 - **New:** The shoe with its four parts lit.
 - **Lines:** `j906`, `j907`, `j908`, `j909`
 
-### 3:38.3 – 3:51.0 · `seven` · 10 · MARK SENTENCE 2 of 2 (definition 3.1): the full board (12.7 s)
+### 3:39.1 – 3:51.8 · `seven` · 10 · MARK SENTENCE 2 of 2 (definition 3.1): the full board (12.7 s)
 
 - **Draw:** The board comes to the centre, full, seven tiles with source slots; the card opens above it. Momo says "Say it with me!" with an inviting wave; Heart reads slowly; each tile flashes as its name is said; the seven names highlighted. Holds 2.5 s.
 - **Reuse:** WIRED: `markScene` (text, keys). Put the board under the card (`under`).
 - **New:** The full board, big.
 - **Lines:** `j1001`, `j1002`
 
-### 3:51.0 – 4:09.9 · `chant` · 10 · The chant (call and response) (18.9 s)
+### 3:51.8 – 4:10.6 · `chant` · 10 · The chant (call and response) (18.9 s)
 
 - **Draw:** Clap, clap, stomp. "Say it with us!"; 0.8 s; three lines "Wood! Metal! Ceramic!" / "Rubber! Glass!" / "Plastic! Fabric!", each followed by **YOUR TURN!** and a soft bar; then *All together!* once. Each tile jumps on its word.
 - **Reuse:** WIRED: `chantScene` (common.js). Pass `o.board = (t, flash) => svg` (flash = {wood: 0..1, ...} from `chantFlash`).
 - **New:** Nothing beyond the board.
 - **Lines:** `u1002`, `c1003`
 
-### 4:09.9 – 4:14.5 · `final` · 11 · The score hand (4.6 s)
+### 4:10.6 – 4:15.3 · `final` · 11 · The score hand (4.6 s)
 
 - **Draw:** 4 fingers = high five.
 - **Reuse:** WIRED.
 - **New:** Optional board/shoe.
 - **Lines:** `j1101`
 
-### 4:14.5 – 4:21.7 · `liz` · 11 · Did you spot the lizard? (7.2 s)
+### 4:15.3 – 4:22.5 · `liz` · 11 · Did you spot the lizard? (7.2 s)
 
 - **Draw:** A replay of the bench with a ring round the little lizard under it. Question pill *Where does wood come from?* · *Tell someone at home!*
 - **Reuse:** `lizReveal(t, s, "j1102", view, lx, ly, W("j1102", "where") - .1, "Where does wood come from?")`.
 - **New:** Nothing new.
 - **Lines:** `j1102`
 
-### 4:21.7 – 4:33.2 · `dare` · 12 · The dare for Episode 9 (11.5 s)
+### 4:22.5 – 4:34.0 · `dare` · 12 · The dare for Episode 9 (11.5 s)
 
 - **Draw:** Two picture boards on the table: a **rubber band** and a **wooden ice-cream stick**, each with its tile colour as a small corner tag (*rubber* · *wood*). Two cards **1 The rubber band · 2 The ice-cream stick**. Basil, big in his disc, asks the question; banner **NEXT · Snap it or bend it? · Lock in your answer!** Small tag under the boards: *Just think. Do not break things!*
 - **Reuse:** EP6 `SC.dare` (ep06f/f6.js); `ansCard`.
 - **New:** Rubber band, ice-cream stick.
 - **Lines:** `j1201`, `j1202`, `j1203`
 
-### 4:33.2 – 4:44.6 · `kwrecap` · 13 · Key-word read-along: RUBBER · SAP · FABRIC (11.4 s)
+### 4:34.0 – 4:45.4 · `kwrecap` · 13 · Key-word read-along: RUBBER · SAP · FABRIC (11.4 s)
 
 - **Reuse:** WIRED.
 - **New:** Nothing.
 - **Lines:** `h860`, `hk_rubber`, `uk_rubber`, `hk_sap`, `uk_sap`, `hk_fabric`, `uk_fabric`, `h864`
 
-### 4:44.6 – 4:56.3 · `nyk` · 14 · "Now you know!" and the outro (11.7 s)
+### 4:45.4 – 4:57.1 · `nyk` · 14 · "Now you know!" and the outro (11.7 s)
 
 - **Draw:** EP1's ending; the full board and the school shoe stand between the buddies.
 - **Reuse:** WIRED: `nykScene`.

@@ -118,7 +118,7 @@ SC.plastic = (t, s) => { const a = "g1004", b = "g1005", j = "g1006", tB = LT(a)
 /* ============ 11 · Round 2: ceramic ============ */
 const SBRD = [1500, 1066, .5];
 SC.r2 = (t, s) => { const tL = LT(L2), tz = MK("ring0_r2") + 1;
-  return lockN(t, { cards: ["Sand", "Clay", "Oil"], q: "What is ceramic made from?", tq: W(L2, "what") - .1, tc: [W(L2, "one"), W(L2, "two"), W(L2, "three")], ring0: MK("ring0_r2"), dur: 5, lock: "g1103", tin: W(L2, "what") - .3,
+  return lockN(t, { cards: ["Sand", "Clay", "Oil"], tag: "a ceramic bowl", q: "What is ceramic made from?", tq: W(L2, "what") - .1, tc: [W(L2, "one"), W(L2, "two"), W(L2, "three")], ring0: MK("ring0_r2"), dur: 5, lock: "g1103", tin: W(L2, "what") - .3,
     obj: (tt) => bowlRing(tt, lizShow(tt, tz)), picks: [{ who: "pip", id: "g1104", word: "1", x: true }, { who: "momo", id: "g1105", word: "2" }, { who: "basil", id: "g1106", word: "2" }],
     react: [[LE("g1104") + .1, "pip", "thinking"], [LE("g1105") + .1, "momo", "pointing"], [LE("g1106") + .1, "basil", "cheer"]],
     pre: (tt) => tt < tL - .3 ? stallView(tt, { back: glowDisc(STALLB[0], STALLB[1] - 70, 220, pulse(tt, W("g1101", "bowl") - .1, .1, 1.4)) }, [1.02 + .03 * eio((tt - s.t0) / 4), 800, 620]) + boardAt(tt, ...SBRD)
