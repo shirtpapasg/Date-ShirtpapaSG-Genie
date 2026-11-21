@@ -67,7 +67,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(W("j504", "three") - .1, "tag"); if (has("j505")) E(LT("j505") - .05, "boop", 0); E(W("j506", "one") - .1, "coin");
   // 6 Mark Sentence 1 (OPAQUE pops beside it); row 3: a hop and a stamp; two toks and two clicks (the mat, the tray), two more hops; the strip
   mark("j601", "j602"); NT(S.row3.t0, S.lcthree.t0 + .3); E(MK("row3") + .2, "hop", 2); E(MK("row3") + 1.0, "stamp");
-  E(MK("mat") - .35, "tok"); click(MK("mat") + .15, .14); E(MK("mat") - .1, "hop", 0); E(MK("tray") - .35, "clink"); click(MK("tray") + .15, .14); E(MK("tray") - .1, "hop", 1);
+  E(MK("mat") - .35, "tok"); click(MK("mat") + .15, .14); E(MK("mat") - .1, "hop", 0); E(MK("tray") - .35, "clink"); /* Stage 2: the torch stays on from mat + .15 (one click); no second click at the tray */ E(MK("tray") - .1, "hop", 1);
   { const L = "j604"; ["rubber,", "wood", "metal"].forEach((w, i) => E(W(L, w.replace(",", "")) - .1, "softpop", i)); }
   // 7 LOOK CLOSER three in a row: three clicks; a bright ting, a faint shh, then quiet; a chime on the bracket
   lcin(S.lcthree.t0 + .1); [0, .25, .5].forEach((d) => click(S.lcthree.t0 + 1.0 + d, .12)); ting(MK("c1"), .06); shh(MK("c2"), .03); E(MK("c3") + .1, "boop", 1); E(MK("bracket") - .05, "chime2", 1); verdict("v_three");

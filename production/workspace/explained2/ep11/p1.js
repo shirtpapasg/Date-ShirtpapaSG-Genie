@@ -1,6 +1,7 @@
 // p1.js: PART 1, "The TORCH Test: Which Glass Lets Only SOME Light Through?": the torch test, transparent, frosted glass, translucent.
 // Segments 1-15 of p3_ep11_script.md (version 1, 21 Nov 2026; the teacher's go-ahead in its section 12).
-// STAGE 1 (setup): the shared routines are wired (the calm recap of EP10's dare with EP10's own three boards and cards, the title slam, game,
+// STAGE 2 (drawn): the sets, the test table and the props are in flat.js, the look-closer pictures in closer.js, the journey in shrink.js.
+// (Stage 1's notes:) the shared routines are wired (the calm recap of EP10's dare with EP10's own three boards and cards, the title slam, game,
 // goals read by Pip, countdown, the HOLD ON! ring with its picture and both clue labels on top of the ring, round card, the Round 1 lock-in with
 // EP10's three boards in the ring and their three clue labels on top of it, Mark Sentences read by the buddy, the book strips, the board OUR
 // TORCH TEST as a functional placeholder, the LOOK-CLOSER frame, score hand, read-along, "Now you know!"); every scene with new art is a phScene
@@ -11,14 +12,29 @@ const L1 = "g901";
 SCORE.push([W("g803", "one") - .1, 1, 0]);
 SCORE.push([W("g1007", "one") - .1, 2, 1]);
 const FOOT = "P3 · Diversity of Materials · Transparency";
-const stageNote = (txt, y = 1000) => T(960, y, "(Stage 2: " + txt + ")", 24, "#fff", { w: 500 });
 const DARE = [["dClear", "clear glass"], ["dFrost", "frosted glass"], ["dDoor", "a wooden door"]];
 // EP10's dare board with its small torch in front of it (EP10 p2.js SC.dare, the same art); origin = the board's centre
 const dareBoard = (i, x, y, sc, o = {}) => picBoard(DARE[i][0], x, y, 1, { sc, lab: o.lab === false ? undefined : DARE[i][1], size: 44, id: "p1d" + i + (o.id || "") }) + TF(x + 110 * sc, y + 95 * sc, 1.1 * sc, torch());
 
-/* 1 · silent cold open: the living room of an HDB flat at dusk */
-SC.cold = (t, s) => phScene(t, s, "1 · Cold open: the living room of an HDB flat at dusk (no voice)", ["Clear glass window with an orange-violet sky; a white wooden bedroom door; the bathroom door ajar, its frosted window glowing softly; sofa; a standing lamp turned low. On a shelf by the window, small: a glass fish tank (plants, lid, bubbles) with the little GOLDFISH (every wide shot of the room). On the dining table: the torch on its stand (off) on the TORCH MARK, the empty holder, the card OUR CARD, the rack of framed sheets, Basil's wind-up robot.",
-  "MK boardsIn: EP10's three dare boards slide in low along the table with dust and stand at the back (dareBoard(), ep10dare.js). MK budsIn: Pip, Basil (surprised), Momo pop in. Pill: An HDB flat, Singapore. Small print upper left (torchRule, wired). No title."]) + torchRule(t, .7);
+/* the living room and its table (flat.js tableView). RK = the sheets waiting in the rack; the robot's places on the table (rig x) */
+const RK0 = ["clear", "frost", "door"], BOT_FAR = -960, BOT_HOME = -640, CAM0 = [1, 960, 540], CAMLC = [1.1, 880, 740], CAMH = [1.25, 528, 610], CREAM = "#FFF6D8";
+const V = (t, o = {}, cam) => tableView(t, { rack: ["frost", "door"], bot: { x: BOT_HOME }, dim: 1, ...o }, cam);
+const buds = (t, o = {}) => sPip(t, o.pip) + sBasil(t, o.basil) + sMomo(t, o.momo);
+// a label over the table view with a plain line to its thing (world coordinates through the camera)
+const wlab = (t, t0, cam, x, y, txt, wx, wy, o = {}) => { if (t < t0) return ""; const a = o.t1 === undefined ? 1 : 1 - ramp(t, o.t1, .25); return a <= .01 ? "" : OP(a, pline(x, y, fgx(cam, wx), fgy(cam, wy), ramp(t, t0, .2)) + TF(x, y, spring(t, t0, .4), tpill(0, 0, txt, o.size || 40, o.fill || "#fff", o.ink || P.ink, { w: 700 }))); };
+// the robot seen straight through a sheet, in a small cream frame (beside the book's strip)
+const frontCard = (t, kind, id) => `<clipPath id="${id}"><rect x="-150" y="-160" width="300" height="320" rx="22"/></clipPath><g filter="url(#dropS)"><rect x="-159" y="-169" width="318" height="338" rx="28" fill="#FFF8EA"/></g><g clip-path="url(#${id})">${roomBack(300, 320, .45)}${TF(0, 136, .6, frontView(kind, t, { id: id + "f" }))}</g>`;
+// the thumbnail's frame (thumb_still.js ... "&thumb"): the split of the frosted-glass look-closer, bright; Basil surprised at the left
+const thumbBack = (night) => `<rect width="1920" height="1080" fill="${hx2(night ? "#CFC8DA" : "#EBCDBB", night ? "#35315F" : "#3F3768", .45)}"/><rect y="792" width="1920" height="288" fill="${hx2(night ? "#F2EFE8" : "#D9A871", night ? "#77719A" : "#6E5478", .45)}"/><path d="M0 792 H1920" stroke="#fff" stroke-width="5" opacity=".4"/>`;
+const THUMB1 = (t) => thumbBack() + TF(660, 806, .72, rig(t, { sheet: "clear", on: 1, dim: .45, id: "tha" })) + TF(1530, 806, .72, rig(t, { sheet: "frost", on: 1, dim: .45, id: "thb" })) + buddy("basil", 200, 480, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t);
+
+/* 1 · silent cold open: the living room of an HDB flat at dusk; EP10's three dare boards slide in low at the back of the table */
+const DBX = [1250, 1440, 1630];
+SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("boardsIn"), tp = MK("budsIn");
+  const boards = [0, 1, 2].map((i) => { const t0 = tb + i * .16, [x, d] = slideX(t, t0, .7, 2400, DBX[i], TBY - 22); return t < t0 ? "" : d + dareBoard(i, x, TBY - 110, .46, { id: "c" }); }).join("");
+  return tableView(t, { rack: RK0, rig: {}, bot: { x: BOT_FAR }, board: false, back: boards }, [1.02 + .02 * eio(t / 7), 960, 548])
+    + sPip(t, { in: tp, poses: [[tp, "waving"], [tp + 1.4, "sit"]], wave: true }) + sBasil(t, { in: tp + .2, poses: [[tp + .2, "surprised"]] }) + sMomo(t, { in: tp + .4, poses: [[tp + .4, "waving"], [tp + 1.7, "sit"]], wave: true })
+    + lowerPill(60, 96, "An HDB flat,", "Singapore") + torchRule(t, .7); };
 
 /* 2 · "Last time...": EP10's dare, word for word. ONE calm picture: EP10's three boards side by side, centred and large, a gentle push-in,
    the big ? above them, EP10's three cards under them; as Heart says each card its board steps forward and its card lights (>= 2.5 s each) */
@@ -30,8 +46,9 @@ SC.lasttime = (t, s) => { const L = "g202", tc = [W(L, "one", 1), W(L, "two"), W
       + (t >= W(L, "which") - .1 ? TF(960, 240, spring(t, W(L, "which") - .1, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="50" fill="url(#gSun)"/></g>${T(0, 26, "?", 78, P.ink)}`) : "")
       + ["Clear glass", "Frosted glass", "A wooden door"].map((c, i) => TF(560 + i * 400, 880, .5 * spring(t, tc[i] - .1, .45), ansCard(i + 1, c, { w: 430, h: 290, size: 50, pulse: cur === i ? .9 : pulse(t, tc[i], .04, .9) }))).join("")   /* each card lights as Heart says it (no tick: the answer is Round 1's) */
       + TF(960, 1010, spring(t, W(L, "which") - .1, .4), tpill(0, 0, "Which one lets only some light pass through?", 40, P.sun, P.ink, { w: 700 }))) + HUD(t); };
-SC.tests = (t, s) => phScene(t, s, "2 · Back at the table: the board OUR TORCH TEST", ["Back in the living room. The board OUR TORCH TEST slides in low and stands at the end of the table, centred between the discs: MOST LIGHT · ONLY SOME LIGHT · NO LIGHT, three empty rows. Pill: Hold on to your answer!",
-  "Placeholder board below: torchBoard() in tests.js (functional rows, tiles, stamped words; redraw it)."]) + TF(1500, 1060, .5, torchBoard(t)) + torchRule(t);
+// back at the table: the board OUR TORCH TEST slides in low and stands at the end of the table
+const view0 = (t, s0) => { const [bx, bd] = slideX(t, s0 + .15, .7, 2500, BDX, TBY + 8); return tableView(t, { rack: RK0, rig: {}, bot: { x: BOT_FAR }, boardX: bx, items: bd, board: {} }); };
+SC.tests = (t, s) => { const L = "g203"; return view0(t, SCN.tests.t0) + buds(t, { momo: { poses: [[SCN.tests.t0, "sit"], [SCN.tests.t0 + .9, "pointing"]] } }) + (t >= LT(L) - .1 ? TF(960, 250, spring(t, LT(L) - .1, .45), tpill(0, 0, "Hold on to your answer!", 56, P.ink, "#fff", { w: 700 })) : "") + torchRule(t) + HUD(t); };
 // the title slam over the dimmed table (WIRED; Stage 2's drawn room shows through): SEE-THROUGH? BLURRY? (white) then OR BLOCKED?! (sun yellow).
 // The second slam is the first thing to cut if Part 1 runs long (script section 6: a picture beat only).
 const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(150, 150 * 1720 / tw(txt, 150, 700, "Fredoka", 4)), col, k);
@@ -42,43 +59,52 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lc
 SC.game = (t, s) => gameScene(t, s, "g301", true);
 SC.goals = (t, s) => goals3(t, s, [["The torch test", ""], ["Transparent", ""], ["Translucent", ""]], ["g401", "g402", "g403", "g404"], "pip");
 
-/* 5 · the torch test is set up: three things, the safety rule (the small print grows to the middle for Heart's sentence: WIRED); Basil's robot */
-SC.setup = (t, s) => { const b = "g502", g = ss(LT(b) - .3, LT(b) + .2, t) * (1 - ss(LE(b) + .2, LE(b) + .7, t));
-  return phScene(t, s, "5 · The torch test is set up", ["The test table from the side, large and clear, on the dining table. As Heart names each thing it lifts a little and its label shows: the torch on its stand (torch, on \"torch\"), the holder with its slot (sheet goes here, on \"sheet\"), the white card (card, on \"card\"). A plain line on the table joins the three.",
-    "g502: the small print grows to the middle (wired below) with a small picture of the torch pointing at the card and a green tick, then goes back to its corner."])
-    + (g > .01 ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * g)}"/>` + TF(lerp(300, 960, g), lerp(196, 520, g), lerp(1, 2, g), finePrint(t, -9, TORCH_RULE, 0, 0)) + OP(g, TF(1180, 640, 1, tickBadge(40)) + stageNote("beside it: the torch pointing at the card", 620)) : torchRule(t)); };
-SC.robot = (t, s) => phScene(t, s, "5 · Basil: \"So my robot will hide for me!\"", ["Basil big in his disc (cheer pose). EP1's wind-up robot (props.js robotRig / robotWalk) is slid low along the table to stand by the rack, with dust puffs (it never floats). Tag: Basil's robot. A boing, a small wind-up tick-tick."]) + torchRule(t);
+/* 5 · the torch test is set up: three things, the safety rule (the small print grows to the middle for Heart's sentence); Basil's robot */
+const CAMS = [1.12, 900, 720];
+SC.setup = (t, s) => { const a = "g501", b = "g502", g = ss(LT(b) - .3, LT(b) + .2, t) * (1 - ss(LE(b) + .2, LE(b) + .7, t)), cam = camL(CAM0, CAMS, eio((t - s.t0) / 1.0)), tT = W(a, "torch", 1) - .1, tS = W(a, "sheet") - .1, tC = W(a, "card") - .1, hop = (t0) => 22 * pulse(t, t0, .08, .5);
+  const tw_ = rw(TORX, AX - 40), hw = rw(0, -24), cw = rw(CARDX, -310);
+  return tableView(t, { rack: RK0, bot: { x: BOT_FAR }, board: {}, rig: { lift: { torch: hop(tT), holder: hop(tS), card: hop(tC) }, line: ramp(t, tC + .5, .7) } }, cam)
+    + OP(1 - g, wlab(t, tT, cam, 520, 400, "torch", tw_[0], tw_[1], { size: 48 }) + wlab(t, tS, cam, 930, 520, "sheet goes here", hw[0], hw[1], { size: 44 }) + wlab(t, tC, cam, 1330, 400, "card", cw[0], cw[1] + 40, { size: 48 })) + buds(t)
+    + (g > .01 ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * g)}"/>` + TF(lerp(300, 960, g), lerp(196, 430, g), lerp(1, 2, g), finePrint(t, -9, TORCH_RULE, 0, 0)) + OP(g, TF(900, 700, 1, rigCard(t, { on: 1, dim: .7 }, 520, 250, "su")) + TF(1230, 700, 1, tickBadge(44))) : torchRule(t)) + HUD(t); };
+SC.robot = (t, s) => { const a = "g503", cam = camL(CAMS, [1.35, 520, 690], eio((t - s.t0) / .7)), [x, d] = slideX(t, s.t0 + .1, 1.0, BOT_FAR, BOT_HOME, 0), bw = rw(x, -175);
+  return tableView(t, { rack: RK0, rig: {}, bot: { x, dust: d }, board: {} }, cam) + (t >= s.t0 + 1.2 ? TF(fgx(cam, bw[0]) + 10, fgy(cam, bw[1]) - 44, spring(t, s.t0 + 1.2, .4), tpill(0, 0, "Basil’s robot", 44, "#fff", P.ink, { w: 700 })) : "")
+    + buddy("basil", 230, 1060, 270, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "cheer"], [LE(a) + .3, "sit"]], nohop: true }) + say(a, 620, 330, t, { size: 44, tail: -260, maxW: 620 }) + torchRule(t) + HUD(t); };
 
-/* 6 · sheet one: clear glass; [LOOK CLOSER] the torch on clear glass */
-SC.sheet1 = (t, s) => phScene(t, s, "6 · Sheet one: clear glass", ["An adult's hands lift the framed sheet of clear glass from the rack and set it upright in the holder (a soft wooden tok). Tag: clear glass. Small print beside the frame for 3 s: An adult holds the glass. The camera starts to move in on \"Look closer\" (the set the look-closer zooms in from)."]) + torchRule(t);
-SC.lcclear = (t, s) => lcPH(t, s, { title: "The torch on clear glass; the robot behind it", v: "v_clear", verdict: VSTYLE("MOST LIGHT PASSES THROUGH", 0), fx: 960, fy: 600,
-  beats: [["on1", "torch on: the beam"], ["spot1", "the bright spot lands"], ["off1", "torch off, room light up"], ["robot1", "the robot is set behind; the camera swings round"], ["v_clear", "verdict"]],
-  notes: ["Torch, sheet and card fill the window from the side; the room dims. MK on1: an adult's finger presses the switch (click); a soft pale cone from the lens to the glass and on past it, just as bright; a faint glint shows the glass. Labels: the light goes in · the light comes out.",
-    "MK spot1: a bright round spot with a clean edge lands on the card (a small ting); label a bright spot. MK off1: torch off, the room light comes up a little. MK robot1: a hand sets the robot behind the glass; the camera swings round to look straight through: the robot is SHARP (eyes, red button, two yellow buttons, key). Label We see it clearly.",
-    "No shadow anywhere (the torch is off while the robot is behind the glass). Verdict MOST LIGHT PASSES THROUGH (green) at v_clear."] });
-SC.clearans = (t, s) => phScene(t, s, "6 · Momo: \"I can see every button!\"", ["Pull back a little. Momo big in her disc (surprised pose) beside the table; the robot seen through the clear glass (g605, cuttable: she is surprised in silence)."]) + torchRule(t);
+/* 6 · sheet one: clear glass (an adult's hands set it in the holder; the room dims); [LOOK CLOSER] the torch on clear glass (closer.js clearArt) */
+SC.sheet1 = (t, s) => { const a = "g601", cam = camL(CAM0, CAMLC, eio((t - (W(a, "look") - .3)) / 1.0)), hw = rw(0, -300), tT = W(a, "clear") - .1;
+  return V(t, { dim: ss(s.t0 + .3, s.t0 + 2.0, t), rig: swapSheet(t, s.t0, null, "clear", 0, .55), board: {} }, cam) + wlab(t, tT, cam, 600, 420, "clear glass", hw[0] - 30, hw[1] + 60, { size: 46 })
+    + OP(ramp(t, s.t0 + .5, .3) * (1 - ramp(t, s.t0 + 3.5, .3)), TF(600, 330, 1, finePrint(t, -9, "An adult holds the glass.", 0, 0))) + buds(t) + torchRule(t) + HUD(t); };
+const lcSetV = (o) => (tt) => V(tt, { board: {}, ...o }, CAMLC);
+SC.lcclear = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 960, fy: 555, bgc: LCBG, art: clearArt, set: lcSetV({ rig: { sheet: "clear" } }), verdict: VSTYLE("MOST LIGHT PASSES THROUGH", 0), tv: MK("v_clear") });
+SC.clearans = (t, s) => { const b = "g605"; return V(t, { rig: { sheet: "clear", robot: 1 }, bot: false, board: false }, camL([1.3, 900, 770], [1.9, 960, 770], eo((t - s.t0) / .6)))
+  + buddy("momo", 1700, 1060, 280, t, { aura: true, flip: true, in: s.t0 + .1, poses: [[s.t0, "surprised"]], nohop: true }) + (HAS(b) ? say(b, 1560, 610, t, { size: 46, tail: 120, maxW: 420 }) : "") + torchRule(t) + HUD(t); };
 
 /* 7 · Mark Sentence 1 (Momo): TRANSPARENT pops beside the card after its last word (lib.js o.at); row 1 of the board; the book's strip */
 SC.mark1 = (t, s) => markScene(t, s, { id: "g703", sayId: "g702", who: "momo", n: "1 of 2", text: "Some materials allow most light to pass through them. These materials are transparent.", keys: ["most", "light", "pass", "through", "transparent."], size: 62, y: 250, footer: FOOT,
-  extra: (HAS("g701") ? OP(ramp(t, LT("g701") - .1, .3) * (1 - ramp(t, LT("g702") - .2, .3)), T(1150, 175, "Here are the book's words.", 44, "#fff", { w: 600 })) : "") + stageNote("under the card: the clear glass with its beam and the bright spot", 1040) });
-SC.row1 = (t, s) => phScene(t, s, "7 · Row 1: MOST LIGHT · TRANSPARENT", ["Back at the table. MK row1: the clear glass's tile hops low onto the board's first row and TRANSPARENT is stamped beside it in green (torchBoard below, functional). The book's sentence on a cream strip (wired, >= 3.5 s); beside it, the robot seen through the glass."])
-  + bookCaption(t, "g704", "You can clearly see objects placed behind transparent materials.", 120, { size: 46, keys: ["clearly", "see", "placed", "behind"] }) + TF(1500, 1060, .5, torchBoard(t, { glow: 0 })) + torchRule(t);
+  extra: (HAS("g701") ? OP(ramp(t, LT("g701") - .1, .3) * (1 - ramp(t, LT("g702") - .2, .3)), T(1150, 175, "Here are the book's words.", 44, "#fff", { w: 600 })) : "") + TF(830, 930, spring(t, s.t0 + .4, .5), rigCard(t, { sheet: "clear", on: 1 }, 440, 230, "m1")) });
+SC.row1 = (t, s) => V(t, { rig: { sheet: "clear", robot: 1 }, bot: false, board: { glow: t < stampT(0) ? 0 : -1 } }) + TF(620, 440, spring(t, s.t0 + .3, .45), frontCard(t, "clear", "fc1"))
+  + bookCaption(t, "g704", "You can clearly see objects placed behind transparent materials.", 120, { size: 42, x: 850, keys: ["clearly", "see", "placed", "behind"] }) + buds(t) + torchRule(t) + HUD(t);
 
 /* 8 · HOLD ON! Basil moves the torch. WIRED (model: EP10 SC.holdon): the HOLD ON! stamp, the YOU ring with crossed arms (5 s), the picture in
    the ring with its two clue labels ON TOP of the ring frame, kept through the countdown and Heart's rule, the bell, the coin. Stage 2 draws the
    table behind (the hands change the sheets at swap1; the torch slides off the TORCH MARK at push) and the picture in the ring. */
-const RG = [1240, 520], RR = 150;
+const RG = [1240, 400], RR = 150;
+// the table behind the ring: the hands change the sheets (swap1), the robot goes back to its place, Basil's torch slides off the TORCH MARK (push)
+const holdTable = (t, back) => { const m = MK("swap1"), [rx, rd] = slideX(t, m + .05, .8, 0, BOT_HOME, 0), [dx, pd] = back === undefined ? slideX(t, MK("push"), .9, 0, 230, 0) : slideX(t, back, .55, 230, 0, 0);
+  return V(t, { rack: ["clear", "door"], bot: back !== undefined || t >= m + .85 ? { x: BOT_HOME } : false, board: {}, rig: { ...(back === undefined ? swapSheet(t, m, "clear", "frost", .28, .6) : { sheet: "frost" }), robot: back === undefined && t < m + .85 ? { x: rx, dust: rd } : 0, dx, dust: TF(TORX, 0, 1, pd), markGlow: back === undefined ? 0 : pulse(t, back + .55, .1, 1.6) } }, CAMH); };
 SC.holdon = (t, s) => { const a = "g801", b = "g802", c = "g803", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, ring = t >= tX && t < LE(c) + .4;
-  const pic = `<rect x="${RG[0] - 120}" y="${RG[1] - 50}" width="240" height="100" rx="16" fill="#fff" opacity=".85"/>${T(RG[0], RG[1] - 6, "torch far off its mark,", 22, P.ink)}${T(RG[0], RG[1] + 24, "up close to the sheet", 22, P.ink)}`;
+  const pic = `<circle cx="${RG[0]}" cy="${RG[1]}" r="127" fill="${LCBG}"/>` + TF(RG[0] + 8, RG[1] + 22, .26, rig(t, { sheet: "frost", dx: 230, dim: .8, id: "hr" }));
   const labels = TF(RG[0] - 150, RG[1] - RR - 34, spring(t, tX + .2, .4), tpill(0, 0, "the sheet: changed", 28, "#fff", P.ink, { w: 700 })) + TF(RG[0] + 160, RG[1] - RR - 34, spring(t, tX + .35, .4), tpill(0, 0, "the torch: moved", 28, "#fff", P.ink, { w: 700 }));
-  return bg("stage2") + stageNote("the table behind, dimmed: swap1 frosted glass in; push the torch slides off its mark", 160)
+  return holdTable(t) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>`
     + buddy("basil", 330, 1060, 300, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [LT(a) - .12, "cheer"], [LE(a) + .3, "sit"], [W(c, "torch") - .12, "surprised"], [LE(c) + .1, "sit"]], nohop: true })
     + say(a, 560, 300, t, { size: 42, tail: -200, maxW: 640 })
-    + (ring ? OP(1 - ss(LE(c) + .1, LE(c) + .4, t), TF(RG[0], RG[1], spring(t, tX, .4), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 24, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: pic + (t < bell + .3 ? OP(.85, TF(RG[0], RG[1] + 40, .38, crossedArms())) : "") })}</g>`)
+    + (ring ? OP(1 - ss(LE(c) + .1, LE(c) + .4, t), TF(RG[0], RG[1], spring(t, tX, .4), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 24, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: pic + (t < bell + .3 ? TF(RG[0], RG[1] + 76, .26, crossedArms()) : "") })}</g>`)
       + labels + youPill(RG[0] - 250, RG[1] + 120, 1.0) + tpill(RG[0], RG[1] + RR + 60, "cross your arms", 30, P.ink, "#fff")) : "")
     + (t >= W(c, "good") - .1 ? TF(960, 960, spring(t, W(c, "good") - .1, .4), tpill(0, 0, "In a good test, we change one thing only: the sheet.", 38, P.sun, P.ink, { w: 700 })) : "")
-    + stamp(t, tH, 900, 420, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1680, 860, "+1", "arms crossed") + torchRule(t) + HUD(t); };
-SC.fixtorch = (t, s) => phScene(t, s, "8 · Basil: \"Oops! Same torch. Same place.\"", ["Basil: oops pose, then sit. MK back: the torch slides back along the table to the TORCH MARK; the line glows (a soft tok). Tags over the table, one by one: same torch · same place · only the sheet changes (they stay if g804 is cut)."]) + torchRule(t);
+    + stamp(t, tH, 900, 420, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1640, 560, "+1", "arms crossed") + torchRule(t) + HUD(t); };
+SC.fixtorch = (t, s) => { const b = "g804", hb = HAS(b), tg = hb ? [W(b, "same") - .1, W(b, "same", 1) - .1, LE(b) - .1] : [s.t0 + .5, s.t0 + 1.3, s.t0 + 2.1];
+  return holdTable(t, MK("back")) + ["same torch", "same place", "only the sheet changes"].map((x, i) => t >= tg[i] ? TF(1330, 300 + i * 84, spring(t, tg[i], .4), tpill(0, 0, x, 44, i === 2 ? P.sun : "#fff", P.ink, { w: 700 })) : "").join("")
+    + buddy("basil", 330, 1060, 300, t, { aura: true, poses: [[s.t0, "oops"], [(hb ? LE(b) : s.t0 + 2.4) + .2, "sit"]], nohop: true }) + (hb ? say(b, 600, 300, t, { size: 44, tail: -220, maxW: 560 }) : "") + torchRule(t) + HUD(t); };
 
 /* 9 · Round 1: the dare from EP10 (a short 3 s ring). EP10's three boards in the ring (real art); clue labels clear glass · frosted glass · wood
    on top of the ring frame, kept through the countdown (lockN c.labels) */
@@ -89,36 +115,40 @@ SC.r1 = (t, s) => lockN(t, { cards: ["Clear glass", "Frosted glass", "A wooden d
   picks: [{ who: "pip", id: "g903", word: "3", x: true }, { who: "momo", id: "g904", word: "2" }, { who: "basil", id: "g905", word: "2" }],
   react: [[LE("g903") + .1, "pip", "thinking"], [LE("g904") + .1, "momo", "pointing"], [LE("g905") + .1, "basil", "cheer"]] });
 
-/* 10 · [LOOK CLOSER] the torch on frosted glass (FROSTED GLASS pops inside it: lib.js o.at); before and after; the blurry robot; the answer */
-SC.lcfrost = (t, s) => lcPH(t, s, { title: "The torch on frosted glass, beside the clear glass; the blurry robot", v: "v_frost", verdict: VSTYLE("ONLY SOME LIGHT PASSES THROUGH", 1), fx: 960, fy: 600,
-  setNote: "the test table from the side, the frosted glass in the holder, the torch back on its TORCH MARK (the look-closer zooms in from here)",
-  beats: [["kw_frosted_glass", "FROSTED GLASS pops"], ["on2", "torch on"], ["glow2", "the soft glow on the card"], ["split", "before / after split"], ["off2", "torch off"], ["robot2", "robot behind; camera swings round"], ["v_frost", "verdict"]],
-  notes: ["Torch, frosted sheet and card fill the window; the room dims. FROSTED GLASS pops at the upper right (wired). MK on2: click; the beam reaches the sheet; the SHEET ITSELF glows softly; behind it no clean beam, only a wide, faint, soft-edged glow on the card (MK glow2; label a soft, dim glow). Label the light goes in.",
-    "MK split: the frame splits. Left: a held picture of the clear glass with its bright spot (tag clear glass · a bright spot). Right: the frosted glass, live (tag frosted glass · a soft glow). MK off2: torch off, room light up. MK robot2: a hand sets the robot behind the frosted glass; the camera swings round: a soft blur of its colours, no edges, no buttons (the kit's soft blur). Label a blurry shape.",
-    "Verdict ONLY SOME LIGHT PASSES THROUGH (blue) at v_frost. No shadow; nothing about why frosted glass is frosted."] });
-SC.frostans = (t, s) => phScene(t, s, "10 · The answer is two: frosted glass!", ["Back to the round's cards: answer card 2 Frosted glass glows. Pip: surprised pose, then a nod (g1006, cuttable: he nods in silence). Coin +1 if you showed two fingers. Score 2 : 1 (SCORE, wired)."]);
+/* 10 · [LOOK CLOSER] the torch on frosted glass (closer.js frostArt; FROSTED GLASS pops inside it: lib.js o.at); the answer */
+const RK2 = ["clear", "door"];
+SC.lcfrost = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 960, fy: 555, bgc: LCBG, art: frostArt, set: lcSetV({ rack: RK2, rig: { sheet: "frost" } }), verdict: VSTYLE("ONLY SOME LIGHT PASSES THROUGH", 1), tv: MK("v_frost") });
+SC.frostans = (t, s) => { const a = "g1005", b = "g1006", c = "g1007", tA = W(a, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, tc = W(c, "one") - .1, hb = HAS(b);
+  return bg("stage2") + TF(1000, 470, 1.05 * spring(t, s.t0 + .1, .45), ansCard(2, "Frosted glass", { lit, w: 330 })) + TF(1450, 440, spring(t, s.t0 + .25, .45), rigCard(t, { sheet: "frost", on: 1 }, 520, 290, "fa"))
+    + (t >= s.t0 + .6 ? TF(1450, 640, spring(t, s.t0 + .6, .4), ansTag("only some light", 1, 38)) : "")
+    + buddy("pip", 330, 1060, 300, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [tA, "surprised"], [LT(b) - .12, "sit"], [LE(b) + .1, "cheer"]] : [[s.t0, "sit"], [tA, "surprised"], [tA + 1.6, "sit"]], jump: [[tA + 1.7, 14]], nohop: true }) + (hb ? say(b, 600, 640, t, { size: 44, tail: -200, maxW: 520 }) : "")
+    + buddy("basil", 1720, 1062, 190, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]] }) + coin(t, tc, 1000, 850, "+1", "if you showed two fingers") + HUD(t); };
 
 /* 11 · Mark Sentence 2 (Basil): TRANSLUCENT pops beside the card; row 2 of the board; the book's strip */
 SC.mark2 = (t, s) => markScene(t, s, { id: "g1102", sayId: "g1101", who: "basil", n: "2 of 2", text: "Some materials allow only some light to pass through them. These materials are translucent.", keys: ["only", "some", "light", "pass", "through", "translucent."], size: 60, y: 250, footer: FOOT,
-  extra: stageNote("under the card: the frosted glass with its soft glow", 1040) });
-SC.row2 = (t, s) => phScene(t, s, "11 · Row 2: ONLY SOME LIGHT · TRANSLUCENT", ["MK row2: the frosted glass's tile hops low onto the second row and TRANSLUCENT is stamped beside it in blue (torchBoard below). The book's sentence on a cream strip (wired, >= 3.5 s); beside it, the blurred robot behind the frosted glass. Two rows filled; row 3 NO LIGHT empty."])
-  + bookCaption(t, "g1103", "You cannot clearly see the objects placed behind translucent materials.", 120, { size: 44, keys: ["cannot", "clearly", "see", "placed", "behind"] }) + TF(1500, 1060, .5, torchBoard(t, { glow: 1 })) + torchRule(t);
+  extra: TF(830, 930, spring(t, s.t0 + .4, .5), rigCard(t, { sheet: "frost", on: 1 }, 440, 230, "m2")) });
+SC.row2 = (t, s) => V(t, { rack: RK2, rig: { sheet: "frost", robot: 1 }, bot: false, board: { glow: t < stampT(1) ? 1 : -1 } }) + TF(620, 440, spring(t, s.t0 + .3, .45), frontCard(t, "frost", "fc2"))
+  + bookCaption(t, "g1103", "You cannot clearly see the objects placed behind translucent materials.", 120, { size: 40, x: 850, keys: ["cannot", "clearly", "see", "placed", "behind"] }) + buds(t) + torchRule(t) + HUD(t);
 
-/* 12 · BE THE LIGHT (the first-person journey) */
-SC.waitw = (t, s) => phScene(t, s, "12 · Be the light! (the glide in)", ["Pill Be the light! The camera glides down the table to the back of the torch; a soft cream wipe at the scene end. The shelf slides aside (SHELF_HIDE)."]);
-SC.shrink = (t, s) => phScene(t, s, "12 · BE THE LIGHT (first person, present tense)", ["MK torch: inside the torch, a small dark room, a tiny bulb, a shiny cup all round it; the edges of the view glow softly (you are light). Tags You: light · inside the torch. A click (the word Click!): the view rushes forward out of the lens; the table top stretches away like a wide plain. Tag out you fly.",
-  "MK glass: ahead only a faint glint and the wooden frame; it slides past, nothing slows you. Tag clear glass · straight through. MK card: a white wall rushes up; a bright ring spreads where you land. Tag a bright spot. MK again: a soft cream blink, back in the torch; tag again!",
-  "MK frost: a pale cloudy wall fills the view; part of the view goes on through, dimmer; the wall glows. Tag frosted glass · only some pass through. The card comes up slowly: a faint wide glow (tag a soft glow). Calm pad; no shadows, no P4 ideas."]);
-
-/* 13 · pull back out; the score hand, the goldfish (lizReveal in common.js), the key words (kwrecap in common.js) */
-SC.pullout = (t, s) => phScene(t, s, "13 · Pull back out to the table", ["Whoosh out of the light's world to the living room table (0.8 s)."]);
+/* 12 · BE THE LIGHT: the glide down the table to the back of the torch (the journey itself is SC.shrink in shrink.js); 13 · pull back out */
+const TBK = [485, 752];
+SC.waitw = (t, s) => { const L = "g1201", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), m = Math.max(e * .5, dive), cam = [1 + .22 * e + 3.6 * dive, lerp(960, TBK[0], m), lerp(540, TBK[1], m)], tP = W(L, "be") - .2;
+  return V(t, { rack: RK2, rig: { sheet: "frost" }, board: {} }, cam)
+    + OP(1 - dive * 1.6, buds(t, { momo: { poses: [[s.t0, "sit"], [tP, "cheer"]] } })
+      + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the light!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, CREAM, 960, 540); };
+SC.pullout = (t, s) => V(t, { rack: RK2, rig: { sheet: "frost" }, board: {} }, camL([4.4, TBK[0], TBK[1]], CAM0, eo((t - s.t0) / .75))) + wipe(t, s.t0, CREAM) + HUD(t);
 SC.final = (t, s) => { const L = "g1301"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
-SC.liz = (t, s) => phScene(t, s, "13 · Did you spot the goldfish? (lizReveal in common.js)", ["A replay of the wide living room with a ring round the little goldfish in the glass tank on the shelf; it swims to the front, blows a bubble and waves its tail. Pill: Tell someone at home! Use lizReveal(t, s, \"g1302\", view, x, y, tq, \"It was in the glass tank, on the shelf!\")."]);
+SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1; return lizReveal(t, s, L, V(t, { dim: 0, rack: RK2, rig: { sheet: "frost" }, board: {}, wave: ss(tq - .2, tq + .3, t) }), GF[0], GF[1], tq, "It was in the glass tank, on the shelf!", 0, 110, 86, 2.0); };
 
-/* 14 · the cliffhanger: the white door */
-SC.cliff = (t, s) => phScene(t, s, "14 · Cliffhanger: a wooden door, painted white", ["The table from the torch's side. MK doorIn: an adult's hands set the piece of a white wooden door in the holder (white front, bare wood on its edges, a small round knob; tags wood · painted white); the robot is slid low behind it, out of sight. The torch is still OFF. Basil big in his disc (cheer).",
-  "A big ? pops on the door on \"How much light\". PART 2 slams in on \"Find out in Part Two!\" (model: ep10/p1.js SC.cliff). The board (below) centred between the discs: rows 1-2 filled, row 3 NO LIGHT glows empty."]) + TF(1500, 1060, .5, torchBoard(t, { glow: 2 })) + torchRule(t);
+/* 14 · the cliffhanger: an adult's hands set the piece of a white wooden door in the holder; the robot is slid low behind it, out of sight */
+const CAMK = [1.08, 900, 600];
+SC.cliff = (t, s) => { const a = "g1401", b = "g1402", c = "g1403", dI = MK("doorIn"), [rx, rd] = slideX(t, dI + .9, .8, BOT_HOME, 0, 0), tQ = W(b, "how") - .1, tP = W(c, "find") - .1, dw = rw(0, -170), tW = W(b, "wooden") - .1, tH = W(b, "white") - .1;
+  return V(t, { dim: 0, rack: ["clear", "frost"], bot: false, board: { glow: 2 }, rig: { ...swapSheet(t, dI, null, "door", 0, .5), robot: { x: rx, dust: rd } } }, CAMK)
+    + wlab(t, tW, CAMK, 800, 470, "wood", dw[0] - 30, dw[1] - 40, { size: 44 }) + wlab(t, tH, CAMK, 1190, 470, "painted white", dw[0] + 30, dw[1] - 40, { size: 44 })
+    + (t >= tQ ? TF(fgx(CAMK, dw[0]), fgy(CAMK, dw[1]), spring(t, tQ, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="46" fill="url(#gSun)"/></g>${T(0, 24, "?", 72, P.ink)}`) : "")
+    + buddy("basil", 200, 1060, 200, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [LT(a) - .12, "cheer"], [LE(a) + .4, "sit"], [tQ, "arms_crossed"]], nohop: true }) + say(a, 500, 500, t, { size: 44, tail: -220, maxW: 520 })
+    + (t >= tP ? TF(960, 330, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + torchRule(t) + HUD(t); };
 
 /* 15 · "Now you know!": the board OUR TORCH TEST (two rows filled) centred in the free space between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(920, 1040, .62, torchBoard(t)), { bx: [200, 1715, 1375], hx: 470 });
+SC.nyk = (t, s) => nykScene(t, s, TF(920, 1046, .62, torchBoard(t)), { bx: [200, 1715, 1375], hx: 470 });
 })(); }

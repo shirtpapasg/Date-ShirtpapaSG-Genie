@@ -6,7 +6,7 @@ go-ahead in its section 12: transparency taught last, in Part 2; the HOLD ON! on
 plastic box; the OPAQUE tag white with a dark border; goldfish and moth; FROSTED GLASS a key word; the EP12 dare keeps glass, metal, fabric;
 on upload EP11 replaces the classic X7Ys0KAaYyg; the four new words use Kokoro's own sounds). EP10 is live (its playlists' anchor for EP11).
 
-Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · Stage 2: Fable draws the scenes (`SCENES_TODO.md`) · Stage 3: render (Opus).
+Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing, done 2026-11-21, Fable)** · Stage 3: render (Opus).
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep11_script.md` is untouched.
@@ -95,17 +95,60 @@ night from inside, the door, the frosted pane, the clear window and the corridor
 the tank, the moth by the corridor lamp. No shadow anywhere. Reused as they are: EP10's three dare boards and torches (ep10dare.js), EP10's
 three cards.
 
-## Stage 2 (Fable): draw every scene in SCENES_TODO.md
-- Replace each `phScene` / `lcPH` / `ringPH` / `hiddenPH` / `torchBoard` placeholder; keep the function names and arguments the scenes call.
-- New sets in new files loaded before common.js in page.html; bake static sets: `NODE_PATH=$(npm root -g) node bake.js flat corridor`.
-- Keep each action on its mark (on1.., off1.., robot1.., swap, mat, tray, doorIn, ...); if one must move, move its cue in sound_cues.js too.
+## Stage 2: done (2026-11-21, Fable). Every scene is drawn; no `phScene` / `lcPH` / `ringPH` / `hiddenPH` placeholder is left in `p1.js` / `p2.js`.
+**Lengths unchanged: Part 1 4:54.6 (294.6 s), Part 2 5:04.5 (304.5 s).** `script.py`, the voices and the timelines were not touched (no cut used).
+- **New file** `flat.js` (page.html loads it after ep10dare.js): `BG.flat` / `BG.flatD` (the HDB living room at dusk / dimmer for the tests,
+  baked), `BG.corridor` (the corridor at night, baked) (`node bake.js flat flatD corridor` after any change to them); `tableView(t, o, cam)`
+  = a set with everything on its table; `rig(t, o)` = the side-on torch test (torch on its stand on the TORCH MARK, holder, OUR CARD, a sheet
+  `clear | frost | door | mat | tray | boxC | boxF`, the soft pale beam, the spot / the soft glow, EP1's robot BEHIND the sheet (sharp /
+  blurred / hidden), an adult's hands `hand` / `finger`); `frontView` (looking straight through a sheet); `rigCard` (the test in a small
+  frame); `swapSheet` / `setHand` / `pressAny` (the hands on their marks); `TILEPIC` (the board's seven tiles); `tankSvg` + `goldfishArt`,
+  `mothArt` + `mothLive`; `pipNotes`; `lunchBox`; `PIC.trGlass / trMetal / trFabric` (the EP12 trolley boards); `XDEFS10` (gradients, blurs).
+- **Changed:** `tests.js` (`torchBoard` drawn: rows in the three answer styles, picture tiles, `o.tg` tile glow; `HIDDEN` = the drawn
+  goldfish / moth), `closer.js` (the five arts `clearArt`, `frostArt`, `doorArt`, `threeArt`, `boxArt`, `splitPic`, `verdictPills`),
+  `shrink.js` (both journeys), `p1.js` / `p2.js` (all scenes), `sound_cues.js` (ONE change: the second torch click at `tray + .15` is
+  removed, because in row 3 the torch goes on once at `mat + .15` and stays on while the hands change the mat for the tray).
+- **LOOK CLOSER as built** (shared frame: push-in, set dims, no score / shelf / buddies / hidden animal, one verdict held 2.5 s):
+  | Scene | Part, time (verdict) | What is shown | Verdict |
+  |---|---|---|---|
+  | `lcclear` | P1 1:02.5-1:24.0 (1:21.5) | a finger presses the switch (on1); the beam goes into the glass and out, just as bright; the view widens to the card: a bright spot with a clean edge (spot1); torch off (off1), the room lightens; a hand sets the robot behind the glass (robot1); the camera swings round: the robot sharp | MOST LIGHT PASSES THROUGH (green) |
+  | `lcfrost` | P1 2:37.7-3:06.2 (3:03.7) | FROSTED GLASS pops; torch on (on2): the sheet itself glows, behind it only a wide faint fan; a soft glow on the card (glow2); split (split): clear glass · a bright spot / frosted glass · a soft glow; torch off (off2); the robot set behind (robot2); swing: a soft blur of its colours | ONLY SOME LIGHT PASSES THROUGH (blue) |
+  | `lcdoor` | P2 0:54.1-1:20.1 (1:17.6) | torch on (on3): the beam ENDS on the brightly lit white front; the camera slides behind (behind): the card as dim as the corridor, no bright spot · no glow; torch off (off3); swing to the door's front; a hand lifts the door (lift): the robot is there; the door goes back | NO LIGHT PASSES THROUGH (white, dark border and letters) |
+  | `lcthree` | P2 1:52.2-2:08.8 (2:06.3) | three test lines one above the other (clear glass, frosted glass, wooden door), the same torch; the cards light in turn (c1 a bright spot, c2 a soft glow, c3 no spot, no glow); a plain bracket: How much light? | three pills: MOST (green) · ONLY SOME (blue) · NONE (white, dark border) |
+  | `lcbox` | P2 3:20.6-3:41.5 (3:39.0) | a hand sets the clear box in the holder; torch on (on4): a bright spot; the hands change the boxes (swap; the torch stays on, the spot shows for a moment between them): a soft glow; split (split2): plastic · a bright spot / plastic · a soft glow | three pills: BOTH PLASTIC (dark) · ONE TRANSPARENT (green) · ONE TRANSLUCENT (blue) |
+- **Journeys:** BE THE LIGHT (P1 3:36.4-4:01.3: inside the torch (the shiny cup, the lens ahead, the tiny bulb), Click!, out over the table
+  plain, the wooden frame with a glint grows and slides past, the card rushes up, a bright ring; again: the cloudy wall fills the view and
+  glows, beyond it the view is dimmer and the card has a wide soft glow) · BE THE LIGHT OF THE LAMP (P2 2:24.5-2:46.8: the flat from up by
+  the lamp, the white front door rushes up, lights up and stops you; the frosted pane, the corridor beyond a dim blur; the clear window's
+  frame slides past, the corridor sharp: parapet, plants, night sky, lit windows). The edges of the view glow all the way.
+- **Hidden animals** (named by Heart with the drawn badge; the reveal rings them): the **goldfish** in the glass tank on the shelf by the
+  window (`GF` [1372, 420]) in every wide shot of the living room (it swims to and fro, bubbles; at the reveal it comes forward and waves its
+  tail); the **moth** by the corridor's ceiling lamp (`MOTH` [1000, 168], a slow loop) in every wide corridor shot (at the reveal it flutters
+  down to the wall, opens its wings and waves a feeler). Neither is in a look-closer or a journey.
+- **No shadow** is drawn anywhere: the things on the tables have no contact shadows; the robot is behind a see-through sheet only while the
+  torch is off (behind the door / mat / tray no light reaches it). (EP10's own dare boards keep their small torch's soft base, unchanged.)
+- **Deviations from the script / SCENES_TODO** (picture only): the side view is seen from a little towards the torch, so each sheet and
+  the card show their front, and the robot "behind the sheet" is seen THROUGH it at table scale too (hidden by the door); the cliffhanger
+  uses this same view (not a separate view from the torch's side); the camera's "swing round" is a quick turn to a front view; the spot
+  "lands" by the view widening to the card (light is at once); the robot goes back to its place by the rack as the sheets change in HOLD ON!;
+  the HOLD ON!, fixtorch, robot and cliff scenes shift / zoom the table so nothing stands behind a buddy's disc (the board is out of frame in
+  HOLD ON! and Momo's close-up); `lcthree` is three side views stacked (not a view from above) and its torches are already on; row 3: one
+  click (see sound_cues), the tray's front lit from `tray - .35`; the Showdown and the dare are on the dimmed / cleared corridor table; the
+  waiting cloudy box stands left of the torch; `fix` has no small print (the strips need the room); "Last time" (Part 1) stays on the stage;
+  the buddies stay small in both `waitw` glides; the robot is EP1's rig unchanged (one red, one yellow button and a blue bar).
+- **Checks (stills only; no video rendered):** stills every 0.45 s of both parts: no page errors. `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg`
+  (a frame about every 3 s), `qa/lc_p1.jpg`, `qa/lc_p2.jpg` (the five look-closers as strips), `qa/journey_light.jpg`, `qa/journey_lamp.jpg`.
+  Thumbnails `thumb_part1.jpg`, `thumb_part2.jpg` (`node thumb_still.js N 1 qa/th/fN.png "&thumb"`, then
+  `node thumb.js qa/th/f1.png thumb_part1.jpg 1 "CLEAR GLASS" "FROSTED GLASS?!" 230 150 132` and
+  `node thumb.js qa/th/f2.png thumb_part2.jpg 2 "A WHITE DOOR" "LIGHT? NONE!" 230 150 132`). Cues and preview mixes rebuilt (-16.0 LUFS).
+- **Stage 3 should watch in motion:** every hand (sheets in and out at sheet1, swap1, doorIn, mat, tray, the boxes; the finger on the
+  switch at each on / off mark; the robot set behind the glass) against its sound; the two camera swings and the door lift (lift .. +1.3);
+  the widening to the card at spot1 / glow2 and the slide behind the door; both splits' cream flash; the low slides (dare boards, the board,
+  the robot at `robot`, HOLD ON! and the cliff, the torch push and its way back, the trolley boards); the journeys' rushes (Click! at
+  3:41, the frame pass at 3:46, the door stop at 2:32, the window pass at 2:42); the row-3 swaps (fast: 0.5-0.6 s each); the frosted
+  robot's blur (heavy filter: check render speed in `lcfrost` 2:57-3:06, row2 and the frosted journey); the goldfish's turn-around and the
+  moth's flutter and landing; label overlaps on the long book strips (row1 / row2 are 42 / 40 px, shifted left of the shelf).
 - Stills: `PART=1|2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg` (prints page errors). Draw one expression: `node probe.js out.jpg 1 '<js>'`.
-- After any timeline change: `python3 build_tl.py 1|2`, `python3 make_todo.py`, `node dump_cues.js P`, `node song.js P` (all with
-  `NODE_PATH=$(npm root -g)`).
-- Thumbnails (script section 7): Part 1 a bright frame of `lcfrost`'s split (clear glass with its bright spot left, frosted glass with its soft
-  glow right), words CLEAR GLASS / FROSTED GLASS?!, Basil surprised at the left; Part 2 a bright frame of `lcdoor` (the beam ending on the
-  bright white door, the card behind with no spot), words A WHITE DOOR / LIGHT? NONE!, Momo surprised at the left. `node thumb_still.js N 1
-  qa/th/fN.png "&thumb"`, then `node thumb.js qa/th/f1.png thumb_part1.jpg 1 "CLEAR GLASS" "FROSTED GLASS?!" ...` (as EP10).
 
 ## Stage 3 (Opus): `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`)
 - Output `ep11_partP.mp4` (ignored), `ep11_partP.srt`, `sheet_partP.png`; check stills around every swap, card, look-closer and reveal.

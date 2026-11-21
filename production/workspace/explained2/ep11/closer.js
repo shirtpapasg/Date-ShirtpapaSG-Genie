@@ -42,3 +42,58 @@ const lcStep = (x, y, n, k = 1) => TF(x, y, k, `<g filter="url(#dropS)"><circle 
 const lcClock = (t, t0, t1, x, y) => OP(ramp(t, t0, .25) * (1 - ramp(t, t1, .25)), `<g transform="translate(${x} ${y})"><g filter="url(#dropS)"><rect x="-190" y="-40" width="380" height="80" rx="40" fill="${P.ink}"/></g><circle cx="-146" cy="0" r="27" fill="#fff"/><path d="M-146 0 L${n2(-146 + 19 * Math.sin((t - t0) * 7))} ${n2(-19 * Math.cos((t - t0) * 7))}" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/><path d="M-146 0 L${n2(-146 + 12 * Math.sin((t - t0) * .6))} ${n2(-12 * Math.cos((t - t0) * .6))}" stroke="${P.coral}" stroke-width="5" stroke-linecap="round"/>${T(32, 14, "speeded up", 40, "#fff", { w: 600 })}</g>`);
 // a small "slow motion" tag inside the window (EP10)
 const slowTag = (t, t0, x = 668, y = -350) => TF(x, y, spring(t, t0, .4), `<g filter="url(#dropS)"><rect x="-128" y="-30" width="256" height="60" rx="30" fill="${P.ink}"/></g><path d="M-98 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(16, 12, "slow motion", 32, "#fff", { w: 600 })}`);
+
+/* ====================================================================================================================================
+   EP11 STAGE 2: the five look-closer pictures. Each is the torch test seen large from the side (flat.js rig()), in a dim room so the
+   soft pale beam shows, with every action on its own timeline mark (the sound sits on the same mark); then, with the torch OFF, an
+   adult's hand sets the robot behind the sheet and the camera swings round to look straight through it (frontView()).
+   NO SHADOW anywhere: the robot is behind a see-through sheet only while the torch is off.
+   ==================================================================================================================================== */
+const AR = 1.4, ARX = 20, ARY = 237, LCBG = "#3F3768", LCBGN = "#35315F";
+const ap = (ac, rx, ry) => [(ARX + rx * AR - ac[1]) * ac[0], (ARY + ry * AR - ac[2]) * ac[0]];
+const artSide = (t, ro, ac, dim, night) => `<g transform="scale(${n2(ac[0])}) translate(${n2(-ac[1])} ${n2(-ac[2])})">${roomBack(3000, 790, dim, night)}${TF(ARX, ARY, AR, rig(t, { night, ...ro, dim }))}</g>`;
+const artFront = (t, kind, dim, night, o = {}) => roomBack(3000, 790, dim, night) + TF(0, ARY + 60, 1.22, frontView(kind, t, o));
+// the camera swings round (a quick turn about the upright axis)
+const swing = (t, t0, a, b) => { const u = (t - t0) / .5; return u <= 0 ? a() : u >= 1 ? b() : u < .5 ? `<g transform="scale(${n2(1 - 2 * u)} 1)">${a()}</g>` : `<g transform="scale(${n2(2 * u - 1)} 1)">${b()}</g>`; };
+// before and after, side by side: two tests with the same torch (the left one a held picture). kinds, tags; dim; k = the tags' pop
+const splitPic = (t, kinds, tags, dim, night, k = 1, id = "sp", sc = .8) => [0, 1].map((i) => { const x = i ? 415 : -415; return `<clipPath id="${id}${i}"><rect x="${x - 415}" y="-395" width="830" height="790"/></clipPath><g clip-path="url(#${id}${i})">${roomBack(3000, 790, dim, night)}${TF(x + 28, ARY, sc, rig(t, { sheet: kinds[i], on: 1, dim, id: id + "r" + i }))}</g>` + TF(x, -236, k, tpill(0, 0, tags[i], 38, "#fff", P.ink, { w: 700 })); }).join("") + `<path d="M0 -395 V395" stroke="#FFF8EA" stroke-width="12"/>`;
+// a verdict in clear parts: pills in the three answer styles (k = 0 green, 1 blue, 2 white with a dark border, -1 plain dark), landing one after another
+function verdictPills(t, tv, parts, size = 56) { if (tv === undefined || t < tv) return ""; const gap = 20, ws = parts.map(([x]) => tw(x, size, 700, "Fredoka", 2) + size * 1.3), tot = ws.reduce((a, b) => a + b, 0) + gap * (parts.length - 1) + 92, f = Math.min(1, 1560 / tot), u0 = t - tv; let x = -tot / 2 + 92, out = "";
+  parts.forEach(([txt, k], i) => { const u = t - tv - i * .14, kk = u <= 0 ? 0 : lerp(2.2, 1, eo(u / .16)) + .06 * wob(t, tv + i * .14 + .16, .45);
+    if (kk) out += TF(x + ws[i] / 2, 0, kk, k < 0 ? `<g filter="url(#dropS)"><rect x="${n2(-ws[i] / 2)}" y="${n2(-size * .75)}" width="${n2(ws[i])}" height="${n2(size * 1.5)}" rx="${n2(size * .75)}" fill="${P.ink}"/></g>` + T(0, n2(size * .35), txt, size, "#fff", { ls: 2 }) : ansTag(txt, k, size)); x += ws[i] + gap; });
+  return (u0 < .5 ? `<circle cx="960" cy="${LCW.y + LCW.h / 2}" r="${n2(160 + 700 * eo(u0 / .5))}" fill="none" stroke="${P.sun}" stroke-width="${n2(18 * (1 - u0 / .5))}" opacity="${n2(1 - u0 / .5)}"/>` : "") + TF(960, LCW.y + LCW.h / 2 - 4, f, `<g transform="rotate(-1.5)">${TF(-tot / 2 + 40, 0, spring(t, tv, .4), tickBadge(34))}${out}</g>`); }
+const LL = (t, ac, t0, x, y, txt, rx, ry, t1) => { const [px, py] = ap(ac, rx, ry); return lcLab(t, t0, x, y, txt, px, py, { t1, size: 40 }); };
+
+/* Part 1 · the torch on clear glass: the beam goes in and out, a bright spot with a clean edge; then the robot, sharp */
+function clearArt(t) { const on1 = MK("on1"), sp = MK("spot1"), off = MK("off1"), rb = MK("robot1"), on = t >= on1 && t < off, e = eio((t - (sp - 1.0)) / .8), ac = [lerp(1.2, 1, e), lerp(-250, 0, e), lerp(50, 0, e)], dim = lerp(.85, .4, ss(off, off + .6, t)), tS = rb + 1.15;
+  const side = () => artSide(t, { sheet: "clear", on, id: "lca", ring: pulse(t, sp + .1, .02, .6), finger: pressAny(t, on1, off), robot: t >= rb ? { hand: setHand(t, rb, .6) } : 0 }, ac, dim);
+  return swing(t, tS, side, () => artFront(t, "clear", dim)) + LL(t, ac, W("g602", "goes") - .1, -330, -250, "the light goes in", -190, AX, sp - 1.0) + LL(t, ac, W("g602", "out") - .1, 470, -250, "the light comes out", 150, AX, sp - 1.0)
+    + LL(t, ac, sp + .2, 300, -236, "a bright spot", CARDX - 8, AX - 20, off) + (t >= tS + .5 ? lcLab(t, W("g604", "clearly") - .25, 540, -150, "We see it clearly", 150, -40, { size: 40 }) : ""); }
+/* Part 1 · the torch on frosted glass: the sheet itself glows, only a wide soft glow on the card; beside the clear glass; the robot a blur */
+function frostArt(t) { const on2 = MK("on2"), gl = MK("glow2"), sp = MK("split"), off = MK("off2"), rb = MK("robot2"), on = t >= on2 && t < off, e = eio((t - (gl - .9)) / .8), ac = [lerp(1.2, 1, e), lerp(-250, 0, e), lerp(50, 0, e)], dim = lerp(.85, .4, ss(off, off + .6, t)), tS = rb + 1.15, s1 = off - .45, spl = t >= sp && t < s1;
+  const side = () => artSide(t, { sheet: "frost", on, id: "lcf", finger: pressAny(t, on2, off), robot: t >= rb ? { hand: setHand(t, rb, .6) } : 0 }, ac, dim);
+  return (spl ? splitPic(t, ["clear", "frost"], ["clear glass · a bright spot", "frosted glass · a soft glow"], .85, false, spring(t, sp + .25, .4), "lcs") : swing(t, tS, side, () => artFront(t, "frost", dim, false, { id: "lcff" })))
+    + dipIn(t, sp) + dipIn(t, s1) + (spl || t >= s1 ? "" : LL(t, ac, W("g1002", "goes") - .1, -330, -250, "the light goes in", -190, AX, gl - .9) + LL(t, ac, gl + .15, 300, -236, "a soft, dim glow", CARDX - 8, AX - 30, sp))
+    + (t >= tS + .5 ? lcLab(t, W("g1004", "blurry") - .15, 540, -150, "a blurry shape", 120, -40, { size: 40 }) : ""); }
+const dipIn = (t, tc, d = .22) => { const a = 1 - Math.abs(t - tc) / d; return a <= 0 ? "" : `<rect x="-840" y="-400" width="1680" height="800" fill="#FFF8EA" opacity="${n2(ss(0, 1, a))}"/>`; };
+/* Part 2 · the torch on the white wooden door: its front is brightly lit and the beam ENDS there; behind it no spot and no glow; the robot
+   is still behind it (an adult's hand lifts the door for a moment) */
+function doorArt(t) { const on3 = MK("on3"), bh = MK("behind"), off = MK("off3"), lf = MK("lift"), on = t >= on3 && t < off, e = eio((t - bh) / 1.4) * (1 - eio((t - off) / .5)), ac = [lerp(1.06, 1.3, e), lerp(-110, 330, e), lerp(20, 40, e)], dim = lerp(.8, .4, ss(off, off + .6, t)), tS = off + .7, up = ss(lf, lf + .4, t) * (1 - ss(lf + .9, lf + 1.3, t));
+  const side = () => artSide(t, { sheet: "door", on, id: "lcd", finger: pressAny(t, on3, off), robot: 1 }, ac, dim, true);
+  return swing(t, tS, side, () => artFront(t, "door", dim, true, { lift: up })) + LL(t, ac, W("j501", "front") - .1, -360, -250, "the front is bright", -14, AX - 50, bh)
+    + LL(t, ac, W("j502", "no") - .1, 600, -210, "no bright spot", CARDX + 10, AX - 40, off) + LL(t, ac, W("j502", "no", 1) - .1, 610, 110, "no glow", CARDX + 14, AX + 60, off)
+    + (t >= tS + .5 && (t < lf - .1 || t >= lf + 1.4) ? lcLab(t, t < lf ? tS + .7 : lf + 1.4, 560, -170, "We cannot see the robot", 120, -40, { size: 40 }) : ""); }
+/* Part 2 · three sheets, the same torch, three cards: a bright spot, a soft glow, nothing. How much light? */
+function threeArt(t) { const c = [MK("c1"), MK("c2"), MK("c3")], br = MK("bracket"), s0 = SCN.lcthree.t0, kinds = ["clear", "frost", "door"], tags = ["clear glass", "frosted glass", "wooden door"], caps = ["a bright spot", "a soft glow", "no spot, no glow"], Y = [-90, 94, 278];
+  let s = `<rect x="-840" y="-400" width="1680" height="800" fill="${LCBGN}"/>` + Y.map((y) => `<rect x="-840" y="${y - 8}" width="1680" height="44" fill="#77719A" opacity=".55"/>`).join("");
+  kinds.forEach((k, i) => { const a = lerp(.55, 1, ss(c[i] - .2, c[i] + .1, t)), p = pulse(t, c[i], .03, .8);
+    s += OP(a, TF(-150, Y[i], .5, rig(t, { sheet: k, on: 1, dim: .85, night: true, id: "l3" + i }))) + (p > .02 ? `<ellipse cx="38" cy="${Y[i] - 84}" rx="${n2(52 + 40 * (1 - p))}" ry="${n2(84 + 40 * (1 - p))}" fill="none" stroke="${P.sun}" stroke-width="${n2(7 * p + 1)}" opacity="${n2(p)}"/>` : "")
+      + lcLab(t, s0 + 1.2 + i * .35, -620, Y[i] - 84, tags[i], -196, Y[i] - 84, { size: 36 }) + (t >= c[i] ? TF(246, Y[i] - 84, spring(t, c[i] + .05, .4), tpill(0, 0, caps[i], 32, "#fff", P.ink, { w: 700 })) : ""); });
+  if (t >= br) { const k = ramp(t, br, .5), y0 = Y[0] - 170, y1 = Y[2] + 2; s += `<path d="M392 ${y0} h24 V${n2(lerp(y0, y1, k))}${k >= 1 ? " h-24" : ""}" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>` + TF(622, 10, spring(t, br + .35, .45), tpill(0, 0, "How much light?", 36, P.sun, P.ink, { w: 700 })); }
+  return s; }
+/* Part 2 · two plastic lunch boxes, the same torch, the same place: the clear one gives a bright spot, the cloudy one a soft glow */
+function boxArt(t) { const s0 = SCN.lcbox.t0, on4 = MK("on4"), sw = MK("swap"), sp = MK("split2"), on = t >= on4, st = t < sw ? { sheet: "boxC", hand: setHand(t, s0 - .05, .55) } : swapSheet(t, sw, "boxC", "boxF", .3, 1.0), ac = [1, 0, 0], spl = t >= sp, busy = t >= sw - .1 && t < sw + 1.2;
+  if (spl) return splitPic(t, ["boxC", "boxF"], ["plastic · a bright spot", "plastic · a soft glow"], .8, true, spring(t, sp + .25, .4), "lcx") + dipIn(t, sp);
+  return artSide(t, { ...st, on, id: "lcb", ring: pulse(t, on4 + .35, .02, .6), finger: pressAny(t, on4) }, ac, .8, true) + dipIn(t, sp)
+    + (busy ? "" : LL(t, ac, t < sw ? s0 + 1.7 : sw + 1.2, 40, -250, "plastic", 6, -246, 1e9)) + LL(t, ac, s0 + 2.3, -520, -236, "same torch · same place", TORX, AX - 34, 1e9)
+    + LL(t, ac, W("j1102", "bright") - .1, 520, -236, "a bright spot", CARDX - 8, AX - 20, sw) + LL(t, ac, W("j1103", "soft") - .1, 520, -236, "a soft glow", CARDX - 8, AX - 30, 1e9); }

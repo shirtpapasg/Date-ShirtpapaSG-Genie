@@ -29,18 +29,17 @@ const TILES = () => { const S = TL.scenes.find((x) => x.name === "fix"), m = (k)
        [0, "clear box", S ? S.t0 + .3 : 1e9], [1, "cloudy box", S ? S.t0 + .7 : 1e9]]; };
 const stampT = (r) => { const ts = TILES().filter((x) => x[0] === r).map((x) => x[2]); return ts.length ? Math.min(...ts) + .8 : 1e9; };
 const headT = () => PART === 2 && TL.marks.heading !== undefined ? TL.marks.heading : 1e9;
-// STAGE 1 placeholder of the board (functional: rows, tiles hopping on, stamped words, the heading). Stage 2 redraws it on its low stand
-// (the tiles as small pictures). o.glow = row index that glows (0..2) or -1; o.flash = [3] (the chant). origin = the middle of the stand's feet
-function torchBoard(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow, fl = o.flash || [0, 0, 0]; let rows = "";
-  ROWS.forEach(([lab, word], i) => { const y = -350 + i * 110, st = stampT(i), k = t >= st ? spring(t, st, .4) : 0, glow = Math.max(g === i ? .35 + .2 * Math.sin(t * 5) : 0, fl[i]);
-    rows += (glow > .02 ? `<rect x="-430" y="${y - 50}" width="860" height="100" rx="20" fill="${P.sun}" opacity="${n2(Math.min(.8, glow))}"/>` : "")
-      + T(-410, y + 14, lab, 34, P.ink, { a: "start" });
-    TILES().filter((x) => x[0] === i).forEach(([r, nm, tin], j) => { if (t < tin) return; const kk = tin < 0 ? 1 : spring(t, tin, .35), hop = tin < 0 ? 0 : 30 * Math.sin(Math.PI * clamp((t - tin) / .35));
-      rows += TF(-40 + j * 78, y - hop, kk, `<rect x="-34" y="-36" width="68" height="72" rx="10" fill="#fff" stroke="${P.ink}" stroke-width="3"/>${T(0, 6, nm.split(" ").map((w) => w[0]).join("").toUpperCase(), 22, P.ink)}`); });
-    rows += k > .02 ? TF(300, y, k, ansTag(word, i, 26)) : `<rect x="196" y="${y - 22}" width="210" height="44" rx="22" fill="none" stroke="${P.ink}" stroke-width="3" stroke-dasharray="8 6" opacity=".4"/>`; });
-  const hk = t >= headT() ? spring(t, headT(), .4) : 0;
-  return `<path d="M-220 0 V-60 M220 0 V-60" stroke="#8A5A36" stroke-width="14" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-450" y="-${hk > 0 ? 560 : 500}" width="900" height="${hk > 0 ? 510 : 450}" rx="26" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(0, -440, "OUR TORCH TEST", 46, P.ink, { ls: 4 }) + (hk > .02 ? TF(0, -510, hk, `<rect x="-230" y="-30" width="460" height="60" rx="30" fill="${P.ink}"/>${T(0, 14, "TRANSPARENCY", 40, P.sun, { ls: 4 })}`) : "") + rows + tpill(0, -84, "STAGE 2: draw (tiles = pictures)", 22, P.coral, "#fff"); }
+// The board, drawn (Stage 2): a cream board on a low wooden stand; each row a soft band in its answer colour with its label (MOST LIGHT green,
+// ONLY SOME LIGHT blue, NO LIGHT white with a dark border), picture tiles (flat.js TILEPIC) that hop on low, and the book's word stamped in the
+// row's style. o.glow = row index that glows (0..2) or -1; o.flash = [3] (the chant). origin = the middle of the stand's feet; 900 wide
+function torchBoard(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow, fl = o.flash || [0, 0, 0], hk = t >= headT() ? spring(t, headT(), .4) : 0, top = hk > 0 ? -606 : -526; let rows = "";
+  ROWS.forEach(([lab, word], i) => { const y = -370 + i * 118, st = stampT(i), k = t >= st ? spring(t, st, .4) : 0, glow = Math.max(g === i ? .35 + .2 * Math.sin(t * 5) : 0, fl[i]), lw = tw(lab, 27, 700, "Fredoka", 2) + 35;
+    rows += `<rect x="-432" y="${y - 53}" width="864" height="106" rx="22" fill="${["#DDF3E3", "#DCEBFF", "#ECE8F6"][i]}"/>` + (glow > .02 ? `<rect x="-432" y="${y - 53}" width="864" height="106" rx="22" fill="${P.sun}" opacity="${n2(Math.min(.8, glow))}"/>` : "") + TF(-420 + lw / 2, y, 1, ansTag(lab, i, 27));
+    TILES().filter((x) => x[0] === i).forEach(([r, nm, tin], j) => { if (t < tin) return; const kk = tin < 0 ? 1 : spring(t, tin, .35), hop = tin < 0 ? 0 : 34 * Math.sin(Math.PI * clamp((t - tin) / .35));
+      rows += (o.tg && o.tg[nm] > .05 ? `<rect x="${-78 + j * 82 - 44}" y="${y - 49}" width="88" height="98" rx="16" fill="${P.sun}" opacity="${n2(Math.min(1, o.tg[nm]))}"/>` : "") + TF(-78 + j * 82, y - hop, kk * (1 + .12 * (o.tg && o.tg[nm] || 0)), `<g filter="url(#dropS)"><rect x="-37" y="-42" width="74" height="84" rx="11" fill="#fff"/></g>${TILEPIC[nm]}`); });
+    rows += k > .02 ? TF(302, y, k, `<g transform="rotate(-2)">${ansTag(word, i, 26)}</g>`) : `<rect x="190" y="${y - 23}" width="224" height="46" rx="23" fill="none" stroke="${P.ink}" stroke-width="3" stroke-dasharray="8 6" opacity=".35"/>`; });
+  return `<path d="M-250 0 L-230 -80 M250 0 L230 -80" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><rect x="-300" y="-16" width="100" height="16" rx="7" fill="#8A5A36"/><rect x="200" y="-16" width="100" height="16" rx="7" fill="#8A5A36"/><g filter="url(#drop)"><rect x="-456" y="${top}" width="912" height="${-64 - top}" rx="28" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="7"/></g>`
+    + T(0, -458, "OUR TORCH TEST", 46, P.ink, { ls: 4 }) + (hk > .02 ? TF(0, -548, hk, `<g transform="rotate(-1.5)"><g filter="url(#dropS)"><rect x="-250" y="-34" width="500" height="68" rx="34" fill="${P.ink}"/></g>${T(0, 16, "TRANSPARENCY", 46, P.sun, { ls: 5 })}</g>`) : "") + rows; }
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start with their picture, revealed at the end.
    Part 1: a little GOLDFISH swimming slowly in the small glass fish tank on the shelf by the window of the living room (every wide shot of
@@ -50,7 +49,7 @@ function torchBoard(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow, f
    soft furry cream-brown body, two feathery feelers, wings that open and close). Not on screen during a [LOOK CLOSER]. ---------- */
 // STAGE 1 placeholder art (centred on 0, 0, about 200 px): a grey disc with the animal's name. Stage 2: goldfishArt(t) / mothArt(t).
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["goldfish", hiddenPH("goldfish")] : ["moth", hiddenPH("moth")];
+const HIDDEN = PART === 1 ? ["goldfish", (t) => TF(-6, 14, 1.05, goldfishArt(t))] : ["moth", (t) => TF(0, 14, 1.0, mothArt(t))];
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#DDF4FF" : "#2B2A5E"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[0], n2(r * .24), P.ink, "#fff", { w: 700 }));
 
