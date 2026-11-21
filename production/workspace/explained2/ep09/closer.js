@@ -147,13 +147,14 @@ function bendArt(t) { const a = "j501", b = "j502", CY = -70, TRY = 262, REST = 
   const open = hb ? clamp((t - tLet) / .2) : clamp((t - tBk + .1) / .2), away = hb ? 700 * ei((t - tLet - .25) / .5) : 700 * (1 - eo((t - tSw - .55) / .5)) + 700 * ei((t - tBk - .05) / .5);
   const hR = hb ? [pR[0] + 14, CY + pR[1]] : [ex - 8, CY + ey + (snap ? 30 * snap : 0)], hL = hb ? [pL[0] - 14, CY + pL[1]] : [-ex + 8, CY + ey + (snap ? 30 * snap : 0)], tilt = hb ? 0 : deg * .5 + 16 * snap;
   const hands = away < 690 ? TF(hR[0] + away, hR[1], 1, glovePinch(open), tilt) + `<g transform="translate(${n2(hL[0] - away)} ${n2(hL[1])}) rotate(${n2(-tilt)}) scale(-1 1)">${glovePinch(open)}</g>` : "";
+  // (Stage 3: the band's "no crack" pill sits BESIDE the band on the tray, not under the stick that is about to crack)
   // the magnifying lens: on the band's tightest bend (smooth, whole), then on the OUTSIDE of the stick's bend (a pale crack opens)
   const lensB = lcLens(440, -215, 124, spring(t, tNc, .45) * (1 - ramp(t, tSw - .1, .25)), `<rect x="-200" y="-200" width="400" height="400" fill="#FFF3DC"/><g transform="scale(2.4) translate(-150 0)">${bandSvg(0, 1)}</g>`, "lnB", 150, CY - 40);
   const tLs = tBd + .5, lensS = lcLens(440, -215, 124, spring(t, tLs, .45) * (1 - ramp(t, tSn + .9, .25)), `<rect x="-200" y="-200" width="400" height="400" fill="#FFF3DC"/><g transform="scale(3.2) translate(0 ${n2(22 + (snap ? 10 : 0))})">${stickSvg({ bend: Math.max(.01, deg), crack: snap ? 0 : crack, snap: snap * .22 })}</g>`, "lnS", 20, CY - 34);
   return `<rect x="-900" y="${TRY - 2}" width="1800" height="200" fill="#C9A06A"/>` + TF(0, TRY, 1, trayBase(1620, "#F4F7FA", "#8E9AA8")) + (fin > .02 ? `<ellipse cx="${FIN[0][0]}" cy="${FIN[0][1]}" rx="290" ry="170" fill="${GOODC}" opacity="${n2(.4 * fin * (.7 + .3 * Math.sin(t * 4)))}" filter="url(#b10)"/>` : "")
     + (hb ? stick + band : band + stick) + hands + lensB + lensS + lcAdult(t, LT(a) - .2, "An adult does the test.", "Just watch!") + lcSlow(t, LT(a) + .3)
     + (t >= tNc + .3 && t < tSw ? TF(440, -52, spring(t, tNc + .3, .4) * (1 - ramp(t, tSw - .1, .2)), tpill(0, 0, "no crack", 46, GOODC, "#fff", { w: 700 })) : "")
-    + (t >= tSw + .7 ? TF(lerp(REST[0][0], FIN[0][0], fin), lerp(REST[0][1] - 106, FIN[0][1] - 170, fin), spring(t, tSw + .7, .4), tpill(0, 0, "no crack", 42, GOODC, "#fff", { w: 700 })) : "")
+    + (t >= tSw + .7 ? TF(lerp(REST[0][0] - 330, FIN[0][0], fin), lerp(REST[0][1] + 4, FIN[0][1] - 170, fin), spring(t, tSw + .7, .4), tpill(0, 0, "no crack", 42, GOODC, "#fff", { w: 700 })) : "")
     + (t >= tBk + .5 ? TF(lerp(REST[1][0], FIN[1][0], fin), lerp(REST[1][1] - 100, FIN[1][1] - 150, fin), spring(t, tBk + .5, .4), tpill(0, 0, "It breaks", 42, WEAKC, "#fff", { w: 700 })) : ""); }
 
 /* ---------- 5 · three tubes, the same length and thickness, each clamped at one end with the same weight on the free end ---------- */
