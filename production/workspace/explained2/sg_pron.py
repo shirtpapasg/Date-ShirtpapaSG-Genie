@@ -18,6 +18,10 @@ FIX = {
     # teacher, 2026-11-20: 'pulau semakau is "pu-lao, sir-ma-kao"' -> approved clip I (stress on MA)
     "Pulau Semakau": {"ph": "pˈuːlaʊ, sɜːmˈɑːkaʊ"},
     "Semakau": {"ph": "sɜːmˈɑːkaʊ"},
+    # teacher, 2026-11-21 (P3 EP5 Part 1 at 1:34, "Some animals live only on land"): "you read 'live' wrongly. It should be read
+    # as 'leaf'" -> the verb, said "liv" (rhymes with "give"), never "laiv". Whole word only ("living", "alive", "olive" untouched).
+    "live": {"ph": "lˈɪv"},
+    "lives": {"ph": "lˈɪvz"},
 }
 _tok = None
 def _tokz():
@@ -27,15 +31,22 @@ def _tokz():
         _tok = Tokenizer()
     return _tok
 
-def needs_fix(text):
-    return any(k in text for k in FIX)
-
 def _pattern():
-    return re.compile("(" + "|".join(re.escape(k) for k in sorted(FIX, key=len, reverse=True)) + ")")
+    # whole words only, any capital letters ("Live" at the start of a sentence too)
+    keys = "|".join(re.escape(k) for k in sorted(FIX, key=len, reverse=True))
+    return re.compile("((?<![A-Za-z])(?:" + keys + ")(?![A-Za-z]))", re.IGNORECASE)
+
+def _key(word):
+    for k in FIX:
+        if k.lower() == word.lower(): return k
+    return None
+
+def needs_fix(text):
+    return bool(_pattern().search(text))
 
 def to_phonemes(text, lang="en-us"):
     """The whole line as phonemes with the fixed names in place (no pitch fall)."""
-    out = [FIX[p]["ph"] if p in FIX else _tokz().phonemize(p, lang=lang) for p in _pattern().split(text) if p and p.strip()]
+    out = [FIX[_key(p)]["ph"] if _key(p) else _tokz().phonemize(p, lang=lang) for p in _pattern().split(text) if p and p.strip()]
     return " ".join(x.strip() for x in out if x.strip())
 
 def _fall(audio, sr, semis, tail):
@@ -58,18 +69,24 @@ def _trim(x, th=0.01):
     return x[nz[0]:nz[-1] + 1] if len(nz) else x
 
 def speak_line(k, text, voice="af_heart", speed=0.90, lang="en-us", gap_in=0.08, gap_out=0.22):
-    """Say a line that contains a fixed name. Returns (audio float32, sample rate)."""
-    parts = [p for p in _pattern().split(text) if p and p.strip()]
+    """Say a line with fixed words. Returns (audio float32, sample rate).
+    Words without a "fall" are spoken in one natural pass from phonemes. Only a name with a "fall" (Sungei Buloh) is said on its
+    own, pitched down, and joined back with short gaps."""
+    falls = [w for w in FIX if FIX[w].get("fall")]
+    fp = re.compile("((?<![A-Za-z])(?:" + "|".join(re.escape(w) for w in falls) + ")(?![A-Za-z]))", re.IGNORECASE) if falls else None
+    parts = [p for p in (fp.split(text) if fp else [text]) if p and p.strip()]
     pieces, sr = [], 24000
-    for i, p in enumerate(parts):
-        if p in FIX:
-            a, sr = k.create(FIX[p]["ph"], voice=voice, speed=speed, lang=lang, is_phonemes=True)
-            if FIX[p].get("fall"): a = _fall(a, sr, FIX[p]["fall"], FIX[p].get("tail", 0.32))
-            pieces.append(("name", _trim(a)))
+    for p in parts:
+        key = _key(p)
+        if key and FIX[key].get("fall"):
+            f = FIX[key]
+            a, sr = k.create(f["ph"], voice=voice, speed=speed, lang=lang, is_phonemes=True)
+            pieces.append(("name", _trim(_fall(a, sr, f["fall"], f.get("tail", 0.32)))))
         else:
             q = p.strip().lstrip(",").strip()
             if not q: continue
-            a, sr = k.create(q, voice=voice, speed=speed, lang=lang)
+            if needs_fix(q): a, sr = k.create(to_phonemes(q, lang), voice=voice, speed=speed, lang=lang, is_phonemes=True)
+            else: a, sr = k.create(q, voice=voice, speed=speed, lang=lang)
             pieces.append(("text", _trim(a)))
     out = []
     for j, (kind, a) in enumerate(pieces):

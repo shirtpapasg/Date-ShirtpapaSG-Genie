@@ -83,7 +83,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // key words: a soft chime as the term pops, a pop as it lands on the shelf; material names: the chime, then a hop onto the tile; a tile fills: the stamp
   for (const k of KW) { if (k.big) E(k.t, "term"); E(k.tl, "shelfpop", k.i); }
   for (const n of NAMES) { if (!n.shelf) { E(n.t, "term"); E(n.th + .55, "hop", 2); } else E(n.th + .7, "hop", 1); }
-  for (const m of MAT) { const mk = TL.marks["tile_" + m.k]; if (mk !== undefined) E(mk + .15, "stamp"); }
+  for (const m of MAT) { const mk = tileT(m.k); if (mk !== undefined) E(mk + .15, "stamp"); }   // Stage 2: a tile fills when its name lands on it (tileT in materials.js)
   // the key-word read-along; the ending: "Say it with us!", "Ready? One, two...", "Now you know!", then the outro plays out
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); sayit("u1300"); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];

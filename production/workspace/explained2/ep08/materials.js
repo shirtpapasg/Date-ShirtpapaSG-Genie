@@ -15,7 +15,9 @@ const MAT = [
 ];
 const MATK = Object.fromEntries(MAT.map((m) => [m.k, m]));
 // when each tile is full at t (Part 2 starts with METAL, CERAMIC, GLASS and PLASTIC already full): 0 = dashed "?", 1 = full
-const tileFull = (k, t) => { const m = MATK[k]; if (PART === 2 && m.part === 1) return 1; const mk = TL.marks["tile_" + k]; return mk !== undefined && t >= mk ? 1 : 0; };
+// when a tile fills on screen: at its tile_* mark, but never before its popped name has hopped onto it (the hop lands at th + .55)
+const tileT = (k) => { const mk = TL.marks["tile_" + k]; if (mk === undefined) return undefined; const n = NAMES.find((q) => q.k === k); return n && !n.shelf ? Math.max(mk, n.th + .55) : mk; };
+const tileFull = (k, t) => { const m = MATK[k]; if (PART === 2 && m.part === 1) return 1; const mk = tileT(k); return mk !== undefined && t >= mk ? 1 : 0; };
 
 /* ---------- the material names that pop large (2.0 s, a chime) and then hop low to their tile. GLASS, METAL, PLASTIC and WOOD pop at
    their nm_* mark. CERAMIC, RUBBER and FABRIC are shelf key words (lib.js KW): they pop at their kw_* mark and fly to the shelf, and a
@@ -23,15 +25,18 @@ const tileFull = (k, t) => { const m = MATK[k]; if (PART === 2 && m.part === 1) 
 const NAMES = (PART === 1 ? [["glass", "nm_glass"], ["metal", "nm_metal"], ["plastic", "nm_plastic"], ["ceramic", "kw_ceramic", true]]
   : [["wood", "nm_wood"], ["rubber", "kw_rubber", true], ["fabric", "kw_fabric", true]]).filter(([k, mk]) => TL.marks[mk] !== undefined)
   .map(([k, mk, shelf]) => ({ k, mk, shelf: !!shelf, t: TL.marks[mk], th: TL.marks[mk] + KWHOLD, ...MATK[k] }));
-// where the board's tile is on screen in the current scene (Stage 2 sets BOARD_AT per scene; this placeholder points bottom right)
-window.BOARD_AT = window.BOARD_AT || ((k, t, s) => [1640 + 40 * MAT.findIndex((m) => m.k === k) - 120, 960]);
-// placeholder drawing: the name in a pill of its stamp colour, large in the middle for KWHOLD, then a low hop to its tile (.6 s)
+// where the board's tile is on screen: canteen.js sets BOARD_AT each time it places the board (boardAt)
+window.BOARD_AT = window.BOARD_AT || ((k, t, s) => [1640, 960, .46]);
+// the name in a pill of its stamp colour: large in the middle for KWHOLD (GLASS, METAL, PLASTIC, WOOD), then one low hop to the top edge of
+// its tile (it lands at th + .55; the tile fills as it lands, or the name waits there). The shelf words (CERAMIC, RUBBER, FABRIC) are popped
+// by lib.js; a small copy in the stamp colour hops from the middle to the tile and lands at th + .7.
+const NAMELAND = (n) => n.th + (n.shelf ? .7 : .55);
 function namePop(t, s) { let out = "";
-  for (const n of NAMES) { if (n.shelf || t < n.t || t > n.th + .6) continue; const a = clamp((t - n.t) / .2), kk = spring(t, n.t, .5);
-    if (t < n.th) { out += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * a)}"/>` + TF(960, 470, kk * (1 + .02 * Math.sin((t - n.t) * 3)), `<g filter="url(#drop)"><rect x="${n2(-tw(n.name, 130, 700, "Fredoka", 9) / 2 - 90)}" y="-110" width="${n2(tw(n.name, 130, 700, "Fredoka", 9) + 180)}" height="220" rx="110" fill="${n.col}"/></g>` + T(0, 46, n.name, 130, "#fff", { ls: 9 }))
-      + OP(a, tpill(960, 650, "MATERIAL", 34, P.ink, "#fff", { w: 700, ls: 5 })); continue; }
-    const e = eio((t - n.th) / .6), [bx, by] = BOARD_AT(n.k, t, s), x = lerp(960, bx, e), y = lerp(470, by, e) - 140 * Math.sin(Math.PI * e);
-    out += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * (1 - e))}"/>` + TF(x, y, lerp(1, .3, e), `<g filter="url(#drop)"><rect x="${n2(-tw(n.name, 130, 700, "Fredoka", 9) / 2 - 90)}" y="-110" width="${n2(tw(n.name, 130, 700, "Fredoka", 9) + 180)}" height="220" rx="110" fill="${n.col}"/></g>` + T(0, 46, n.name, 130, "#fff", { ls: 9 })); }
+  for (const n of NAMES) { const land = NAMELAND(n); if (t < n.t || t > land) continue; const w = tw(n.name, 130, 700, "Fredoka", 9), big = (sc) => `<g filter="url(#drop)"><rect x="${n2(-w / 2 - 90)}" y="-110" width="${n2(w + 180)}" height="220" rx="110" fill="${n.col}"/><rect x="${n2(-w / 2 - 78)}" y="-98" width="${n2(w + 156)}" height="196" rx="98" fill="none" stroke="#fff" stroke-width="7" opacity=".85"/></g>` + T(0, 46, n.name, 130, "#fff", { ls: 9 });
+    if (!n.shelf && t < n.th) { const a = clamp((t - n.t) / .2), kk = spring(t, n.t, .5);
+      out += `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * a)}"/>` + TF(960, 470, kk * (1 + .02 * Math.sin((t - n.t) * 3)), big()) + OP(a, tpill(960, 650, "MATERIAL", 34, P.ink, "#fff", { w: 700, ls: 5 })); continue; }
+    const t0 = n.shelf ? n.th + .2 : n.th; if (t < t0) continue; const e = clamp((t - t0) / (land - t0)), [bx, by, bs] = BOARD_AT(n.k, t, s), x = lerp(960, bx, eio(e)), y = lerp(470, by, e * e) - 150 * Math.sin(Math.PI * e) * (1 - e * .4);
+    out += (n.shelf ? "" : `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.5 * (1 - e))}"/>`) + TF(x, y, lerp(n.shelf ? .5 : 1, 25 * (bs || .46) / 130, eio(e)), big()); }
   return out; }
 window.OVER2 = (t, s) => namePop(t, s);
 
