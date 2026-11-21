@@ -31,7 +31,7 @@ CUTS: SERIES_FORMAT section 3 / script section 6. Put a tag in CUTS to drop that
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
 # ---- cuts (script section 6, in its order). Part 1: goals, biscuits, boxlines, glassuses. Part 2: recap, together, rubberuses, planks.
-CUTS = {"recap"}   # teacher, 2026-11-21 (SERIES_FORMAT section 2): no fast recap montage; the calm recap pictures are under j201 ("Last time...")
+CUTS = {"recap", "boxlines", "glassuses", "rubberuses"}   # boxlines / glassuses / rubberuses: script section 6 (non-teaching), cut on 2026-11-21 to make room for the LOOK-CLOSER moments. "recap": teacher, 2026-11-21 (SERIES_FORMAT section 2): no fast recap montage; the calm recap pictures are under j201 ("Last time...")
 cut = lambda tag, items: [] if tag in CUTS else items
 
 # the chant (Part 2): the seven names in the book's order, one name per beat (clap, clap, stomp); YOUR TURN! after each line; then all together
@@ -45,6 +45,10 @@ SLOW = {"speed": .85, "gap": 1.0, "soft": True}   # the journeys: softer and slo
 slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 HOLD = lambda mk: ("hold", mk, 2.0, .6)            # a new term's pop: 2.0 s on screen; Heart waits at least .6 s
 STRIP = 3.5                                         # a book sentence's cream strip: at least 3.5 s on screen
+# LOOK CLOSER (teacher, 2026-11-21, SERIES_FORMAT section 1b): a slow zoom-in on the real thing with the evidence shown happening. Heart describes
+# what we SEE, slowly, in short sentences (LC), then the book's words; the close-up holds 6-10 s and ends on ONE verdict tag (mark v_*).
+# Scenes named lc*: the score and the shelf are away. Never cut for length.
+LC = {"speed": .87, "gap": .6}
 
 def kwrecap(words):
     out = [("scene", "kwrecap"), ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5})]
@@ -77,7 +81,7 @@ SEQ1 = [
  ("mark", "title"), ("wait", 2.1),
  # ---- 3 · the game
  ("scene", "game"),
- ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
+ ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. A little sparrow is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  # ---- 4 · today's goals (no voice) and the countdown
  # teacher, 2026-11-21 (SERIES_FORMAT section 11, step 3): a buddy READS the three goal cards aloud, word for word as printed (Part 1: Pip)
  ("scene", "goals"), ("say", "g401", P, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "g402", P, "Objects and materials.", {"pre": .3, "post": .3}),
@@ -131,20 +135,33 @@ SEQ1 = [
  # ---- 9 · the reveal: glass
  ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.0),
  ("say", "g901", H, "The answer is three. The glass jar!", {"pre": 0, "post": .3}),
+ # [LOOK CLOSER] sand melting into glass: the furnace, cut open
+ ("scene", "lcglass"),
+ ("say", "g904", H, "Look closer. Here is the sand, in a furnace. Watch!", {**LC, "pre": .5}),
+ ("say", "g905", H, "When sand is heated until it is very hot, it melts and becomes clear.", {"pre": .5, "hold": STRIP}),
+ ("mark", "v_glass"), ("wait", 1.5),
  ("scene", "glass"),
  ("say", "g902", H, "Glass is made from sand.", {"pre": .4, "term": ["glass is made"], "hold": STRIP}),
  ("mark", "nm_glass"), HOLD("nm_glass"), ("mark", "tile_glass"),
  *cut("glassuses", [("mark", "uses_glass"), ("wait", 1.0)]),
  ("say", "g903", H, "Three fingers? One finger up!", {"pre": .2, "post": .4}),
  # ---- 10 · metal and plastic
- ("scene", "metal"),
+ # [LOOK CLOSER] metal: the rock under the magnifying glass
+ ("scene", "lcmetal"), ("wait", 1.0),
  *cut("boxlines", [("say", "g1001", H, "Now, the metal box.", {"pre": .5})]),
- ("say", "g1002", H, "Metals can be dug up from the ground.", {"pre": .4, "term": ["metals can"], "hold": STRIP}),
+ ("say", "g1011", H, "Look closer at this rock. Shiny bits! That is metal, in the rock.", {**LC, "pre": .3}),
+ ("say", "g1002", H, "Metals can be dug up from the ground.", {"pre": .5, "term": ["metals can"], "hold": STRIP}),
+ ("mark", "v_metal"), ("wait", 1.3),
+ ("scene", "metal"),
  ("say", "g1003", H, "Gold, iron, copper and aluminium are metals that are found naturally in the ground.", {"pre": .2, "hold": STRIP}),
  ("mark", "nm_metal"), HOLD("nm_metal"), ("mark", "tile_metal"), ("wait", .4),
- ("scene", "plastic"),
+ # [LOOK CLOSER] plastic: oil goes into the factory, plastic comes out
+ ("scene", "lcplastic"), ("wait", 1.0),
  *cut("boxlines", [("say", "g1004", H, "And the plastic box.", {"pre": .4})]),
- ("say", "g1005", H, "Plastic is made in factories using oil that comes from deep under the ground.", {"pre": .4, "term": ["plastic is made"], "hold": STRIP}),
+ ("say", "g1012", H, "Look closer. Dark, sticky oil goes into the factory. Plastic comes out!", {**LC, "pre": .3}),
+ ("say", "g1005", H, "Plastic is made in factories using oil that comes from deep under the ground.", {"pre": .5, "term": ["plastic is made"], "hold": STRIP}),
+ ("mark", "v_plastic"), ("wait", 1.3),
+ ("scene", "plastic"),
  ("mark", "nm_plastic"), HOLD("nm_plastic"), ("mark", "tile_plastic"),
  *cut("biscuits", [("say", "g1006", B, "My snack box was oil? Good thing my biscuits do not taste like oil!", {"pre": .3, "post": .5})]),
  # ---- 11 · Round 2: ceramic (the hidden animal, a sparrow, is on the classroom window from the ring on; teacher, 2026-11-21: not always the lizard)
@@ -163,8 +180,12 @@ SEQ1 = [
  ("say", "g1108", H, "Clay can be found in soil dug from the ground.", {"pre": .4, "term": ["clay can"], "hold": STRIP}),
  ("mark", "kw_clay"), HOLD("kw_clay"),
  ("scene", "kiln"),
- ("say", "g1109", H, "The clay is shaped. Then it is baked in a very hot oven, called a kiln.", {"pre": .3, "holdw": ["kiln", 3.0]}),
- ("mark", "bowlback"), ("wait", 1.0),
+ ("say", "g1109", H, "The clay is shaped. Then it is baked in a very hot oven, called a kiln.", {"pre": .3, "holdw": ["kiln", 1.6]}),
+ # [LOOK CLOSER] clay goes into the kiln soft and comes out hard (the kiln, cut open; the word strip stays)
+ ("scene", "lckiln"),
+ ("say", "g1113", H, "Look closer. The clay bowl is soft. Into the kiln it goes!", {**LC, "pre": .4}),
+ ("say", "g1114", H, "Heating hardens ceramic, but it can break easily.", {"pre": .6, "hold": STRIP}),
+ ("mark", "v_ceramic"), ("wait", 1.5),
  ("scene", "mark2"),
  ("say", "g1110", B, "Say it with me!", {"pre": .6}), ("wait", .8),
  ("say", "g1111", B, "Ceramic is a material made from clay. Glass is made from sand.", {"pre": 0}),
@@ -174,7 +195,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "g1201", H, "Show me your score hand! Three fingers? High five!", {"pre": .5, "post": .6}),
  ("scene", "liz"),
- ("say", "g1202", H, "Did you spot the hidden animal? It was the sparrow, on the classroom window! What material is a window made of? Tell someone at home.", {"pre": .6, "post": .6}),
+ ("say", "g1202", H, "Did you spot the sparrow? It was on the classroom window! What material is a window made of? Tell someone at home.", {"pre": .6, "post": .6}),
  *kwrecap(["Object", "Material", "Ceramic", "Clay"]),
  # ---- 13 · the cliffhanger: white drops
  ("scene", "cliff"), ("wait", .5),
@@ -195,14 +216,20 @@ SEQ2 = [
  ("scene", "goals"), ("say", "j311", B, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "j312", B, "Wood, rubber and fabric.", {"pre": .3, "post": .3}),
  ("say", "j313", B, "Where each one comes from.", {"pre": .3, "post": .3}), ("say", "j314", B, "Count the parts.", {"pre": .3, "post": .9}),
  ("scene", "game"),
- ("say", "j301", H, "Lock in first. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
+ ("say", "j301", H, "Lock in first. A little sheep is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  # ---- 4 · wood
  ("scene", "wood"),
  ("say", "j401", H, "First, wood. This bench is made of wood. So is your pencil.", {"pre": .4, "term": ["first, wood"]}),
  ("mark", "nm_wood"), HOLD("nm_wood"),
  ("scene", "trees"),
  ("say", "j402", H, "Wood comes from the trees in fields and forests.", {"pre": .2, "term": ["wood comes"], "hold": STRIP}),
- *cut("planks", [("say", "j403", H, "The trunks are cut into long, flat planks.", {"pre": .4})]),
+ # [LOOK CLOSER] wood: the trunk is sawn into planks; the same lines in the plank and in the bench
+ ("scene", "lcwood"),
+ ("say", "j405", H, "Look closer at this tree trunk.", {**LC, "pre": .5}),
+ ("say", "j403", H, "The trunks are cut into long, flat planks.", {"pre": .5}),
+ ("say", "j406", H, "See the lines in the plank? The bench has the same lines!", {**LC, "pre": .5}),
+ ("mark", "v_wood"), ("wait", 1.4),
+ ("scene", "paper"),
  ("say", "j404", H, "Paper is made from wood too!", {"pre": .4}),
  ("mark", "tile_wood"), ("wait", 1.0),
  # ---- 5 · Round 1: where do the white drops come from?
@@ -236,6 +263,11 @@ SEQ2 = [
  # ---- 7 · the reveal: rubber
  ("scene", "reveal"), ("mark", "pullout"), ("wait", 1.0),
  ("say", "j701", H, "The answer is two. A tree!", {"pre": 0, "post": .3}),
+ # [LOOK CLOSER] the cut in the bark: white sap, drop by drop, into the cup; then rubber
+ ("scene", "lcsap"),
+ ("say", "j705", H, "Look closer at the cut. White sap! Drop by drop, it fills the cup.", {**LC, "pre": .5}),
+ ("say", "j706", H, "At the factory, the sap is made into rubber.", {**LC, "pre": .5}),
+ ("mark", "v_rubber"), ("wait", 1.5),
  ("scene", "mark1"),
  ("say", "j702", B, "Say it with me!", {"pre": .6}), ("wait", .8),
  # SAP pops large BESIDE the card on "sap" (2.0 s) while the reading goes on; its sentence is said slowly and followed by >= .65 s
@@ -247,6 +279,11 @@ SEQ2 = [
  ("scene", "fabric"),
  ("say", "j801", H, "Last one: fabric. Like this school T-shirt.", {"pre": .4, "term": ["last one: fabric"], "kw": [["kw_fabric", "fabric"]]}),
  HOLD("kw_fabric"),
+ # [LOOK CLOSER] the weave of the T-shirt: threads going over and under
+ ("scene", "lcfabric"),
+ ("say", "j811", H, "Look closer at the T-shirt. Threads! Over, under, over, under. Woven threads make fabric.", {**LC, "pre": .5}),
+ ("mark", "v_fabric"), ("wait", 1.5),
+ ("scene", "fabricb"),
  ("say", "j802", H, "Fabric is a material that can come from animals or plants.", {"pre": .2, "hold": STRIP}),
  ("scene", "r2card"), ("wait", 1.1),
  ("scene", "r2"),
@@ -286,7 +323,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "j1101", H, "Show me your score hand! Four fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "j1102", H, "Did you spot the hidden animal? It was the ant, under the wooden bench! Where does wood come from? Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "j1102", H, "Did you spot the sheep? It was in the field, beside the trees! Where does wood come from? Tell someone at home.", {"pre": .5, "post": .5}),
  # ---- 12 · the dare for Episode 9
  ("scene", "dare"), ("wait", .5),
  ("say", "j1201", H, "Next time, we test the materials! A rubber band. A wooden ice-cream stick. Which one can bend without breaking?", {"pre": 0}),

@@ -225,7 +225,7 @@ const KWHOLD = 2.0;
 const KW = (PART === 1 ? [["OBJECT", "kw_object", 1], ["MATERIAL", "kw_material", 1], ["CERAMIC", "kw_ceramic", 1], ["CLAY", "kw_clay", 1]]
   : [["RUBBER", "kw_rubber", 1], ["SAP", "kw_sap", 1, null, { at: [1480, 850], size: 100 }], ["FABRIC", "kw_fabric", 1]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
-const SHELF_HIDE = { cold: 1, hook: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1 };
+const SHELF_HIDE = { cold: 1, hook: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lcglass: 1, lcmetal: 1, lcplastic: 1, lckiln: 1, lcwood: 1, lcsap: 1, lcfabric: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
 const KWLINE = PART === 1 ? ["hk_object", "hk_material", "hk_ceramic", "hk_clay"] : ["hk_rubber", "hk_sap", "hk_fabric"];

@@ -42,10 +42,13 @@ SC.wood = (t, s) => { const L = "j401", e = eio((t - s.t0) / 1.0), cam = [lerp(C
     + (t >= tB ? ltag(t, tB, 1000, 760, "made of wood", gx(CAMB, 760), gy(CAMB, 1004), { size: 44, fill: MATK.wood.col, ink: "#fff" }) : "") + (t >= tP ? ltag(t, tP, 400, 420, "your pencil", gx(CAMB, QX.pencil), gy(CAMB, TY + 6), { size: 40 }) : "")
     + buddy("momo", 1700, 1056, 230, t, { aura: true, flip: true, in: s.t0 + .15, poses: [[s.t0, "pointing"], [tP, "cheer"], [tP + 1.4, "sit"]], nohop: true }) + HUD(t); };
 const teach2 = (t, o, cam = [1.03, 900, 640]) => view2(t, o, cam) + boardAt(t, ...BRDT);
-SC.trees = (t, s) => { const a = "j402", b = "j403", c = "j404", tA = s.t0 + .1, tB = LT(b) - .3, tC = LT(c) - .25, [ax, ad] = slideX(t, tA, .7, 2500, 1330, BACKY), [bx, bd] = slideX(t, tB, .7, 2500, 1660, BACKY);
-  const back = ad + picBoard("trees", ax, BACKY, 1, { sc: .9, id: "t" }) + (t >= tB ? bd + picBoard("planks", bx, BACKY, 1, { sc: .9, lab: "long, flat planks", size: 36, id: "t2" }) : "");
+// the "trees" picture carries Part 2's hidden sheep (PIC.treesS): it grazes in the field through trees, the start of the look-closer and paper
+SC.trees = (t, s) => { const a = "j402", b = "j403", c = "j404", tA = s.t0 + .1, tB = SCN.lcwood.t0 + .1, tC = LT(c) - .25, [ax, ad] = slideX(t, tA, .7, 2500, 1330, BACKY), [bx, bd] = slideX(t, tB, .7, 2500, 1660, BACKY);
+  const back = ad + picBoard("treesS", ax, BACKY, 1, { sc: .9, id: "t", t }) + (t >= tB ? bd + picBoard("planks", bx, BACKY, 1, { sc: .9, lab: "long, flat planks", size: 36, id: "t2" }) : "");
   return teach2(t, { glow: { pencil: .25 }, back: back + (t >= tC ? picBoard("book", 1010, BACKY, spring(t, tC, .45), { sc: .62, lab: "paper", size: 46, id: "t3" }) : "") })
     + bookCaption(t, a, "Wood comes from the trees in fields and forests.", 170, { size: 52, t1: tC - .1 }) + sPip(t, { in: s.t0 + .1 }) + sBasil(t, { in: s.t0 + .2, poses: [[s.t0, "sit"], [tileT("wood"), "cheer"]], nohop: true }) + HUD(t); };
+
+SC.paper = (t, s) => SC.trees(t, { ...s, t0: SCN.trees.t0 });
 
 /* ============ 5 · Round 1: where do the white drops come from? ============ */
 const CAMSHOE = [1.7, 700, 800];
@@ -68,7 +71,7 @@ SC.reveal = (t, s) => { const a = "j701", e = eo((t - s.t0) / 1.0), cam = [lerp(
   return view2(t, { tee: false, back: t >= tA + .1 ? bd + picBoard("rubberTree", bx, BACKY + 20, 1, { sc: .95, t, id: "rv" }) : "" }, cam) + TF(1620, 700, .62 * spring(t, s.t0 + .5, .45), ansCard(2, "A tree", { lit, icon: TF(0, -4, 1.1, treeIcon()) }))
     + buddy("momo", 230, 1056, 230, t, { aura: true, in: s.t0 + .5, poses: [[s.t0, "sit"], [tA, "surprised"], [tA + 1.3, "cheer"]] }) + buddy("pip", 470, 1060, 170, t, { aura: true, tag: false, in: s.t0 + .6, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]], nohop: true }) + wipe(t, s.t0, "#FFF8EA") + HUD(t); };
 const USES = [["boots", "rain boots"], ["tyre", "bicycle tyre"], ["bands", "rubber bands"], ["ball", "ball"]];
-SC.mark1 = (t, s) => { const b = "j703", tO = W(b, "oil") - .5, tT = tileT("rubber"), tU = MK("uses_rubber") + .5, tc = W("j704", "one") - .1;
+SC.mark1 = (t, s) => { const b = "j703", tO = W(b, "oil") - .5, tT = tileT("rubber"), tU = (MK("uses_rubber") || tT - .3) + .5, tc = W("j704", "one") - .1;
   return markScene(t, s, { id: b, sayId: "j702", who: "basil", n: "1 of 2", text: "Rubber can come from the sap of a rubber tree. It can also be made by man using oil from the ground.", keys: ["rubber", "sap", "tree.", "oil", "ground."], size: 56, y: 176,
     extra: picBoard("oil", 800, 1066, spring(t, tO, .45) * (1 - ramp(t, tU - .3, .25)), { sc: .6, id: "mo" }) + (t >= tO + .2 && t < tU ? TF(800, 822, spring(t, tO + .2, .4) * (1 - ramp(t, tU - .3, .25)), tpill(0, 0, "or made by man, using oil", 32, "#fff", P.ink, { w: 700 })) : "")
       + USES.map(([p, lab], i) => picBoard(p, 700 + i * 196, 1016, spring(t, tU + i * .18, .45), { sc: .52, lab, size: 54, t, id: "us" + i })).join("")
@@ -76,8 +79,9 @@ SC.mark1 = (t, s) => { const b = "j703", tO = W(b, "oil") - .5, tT = tileT("rubb
 
 /* ============ 8 · fabric; Round 2: where does cotton come from? ============ */
 const CAMT = [1.6, 1000, 800];
+SC.fabricb = (t, s) => SC.fabric(t, { ...s, t0: SCN.fabric.t0, b: 1 });
 SC.fabric = (t, s) => { const a = "j801", b = "j802", e = eio((t - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMT[0], e), lerp(CAMW[1], CAMT[1], e), lerp(CAMW[2], CAMT[2], e)], tW = MK("kw_fabric") + KWHOLD + .1, tT = W(a, "t-shirt") - .2;
-  return view2(t, { glow: { tee: pulse(t, tT, .1, 1.4) } }, cam) + (t >= tW ? pline(620, 520, gx(CAMT, QX.tee - 60), gy(CAMT, TY - 70), ramp(t, tW, .2)) + TF(540, 440, spring(t, tW, .5), weave(150, "fb")) + TF(540, 640, spring(t, tW + .2, .4), tpill(0, 0, "woven threads", 36, "#fff", P.ink, { w: 700 })) : "")
+  return view2(t, { glow: { tee: pulse(t, tT, .1, 1.4) } }, cam) + (s.b && t >= tW ? pline(620, 520, gx(CAMT, QX.tee - 60), gy(CAMT, TY - 70), ramp(t, tW, .2)) + TF(540, 440, spring(t, tW, .5), weave(150, "fb")) + TF(540, 640, spring(t, tW + .2, .4), tpill(0, 0, "woven threads", 36, "#fff", P.ink, { w: 700 })) : "")
     + boardAt(t, 1560, 1066, .44) + bookCaption(t, b, "Fabric is a material that can come from animals or plants.", 170, { size: 48, keys: ["animals", "plants."] }) + buddy("momo", 200, 1056, 210, t, { aura: true, in: s.t0 + .15, poses: [[s.t0, "pointing"], [s.t0 + 1.6, "sit"]] }) + HUD(t); };
 // the T-shirt's collar label, turned to the camera (the ring picture)
 const labelRing = (tt) => `<g clip-path="url(#cRing)"><rect x="250" y="290" width="360" height="360" fill="#F4F6FA"/><rect x="250" y="290" width="360" height="360" fill="url(#cWeave)"/><path d="M250 330 Q430 470 610 330 V290 H250z" fill="#D5DCEA"/><path d="M250 330 Q430 470 610 330" fill="none" stroke="#2EA3A0" stroke-width="26"/><path d="M250 330 Q430 470 610 330" fill="none" stroke="#57C4BE" stroke-width="7" stroke-dasharray="6 10"/>
@@ -111,7 +115,7 @@ SC.show = (t, s) => { const a = "j901", b = "j902", r0 = MK("ring0_show"), bell 
   const tr = [W(a, "one"), W(a, "two"), W(a, "three")], tcn = [W(b, "one"), W(b, "two"), W(b, "three")], tM = LT("j904"), tB = LT("j905"), tO = LE("j905") + .1;
   const lit = [0, 1, 2].map((i) => t < LT(b) ? (t >= tr[i] - .1 && t < (tr[i + 1] || LE(a)) - .1 ? 1 : 0) : 0), badge = [0, 1, 2].map((i) => Math.max(pulse(t, tcn[i], .04, .5), t >= r0 && t < bell ? (Math.floor((t - r0) / .5) % 3 === i ? .5 + .5 * rs.tick : 0) : 0));
   const nf = t >= tcn[2] - .1 ? 3 : t >= tcn[1] - .1 ? 2 : 1, ringOn = t >= tcn[0] - .3 && t < bell + .8, RX = 235, RY = 560;
-  return showView(t, { liz: 1 - ramp(t, tLz, .5), notes: { lit, badge, x: spring(t, tM + .5, .4) } })
+  return showView(t, { notes: { lit, badge, x: spring(t, tM + .5, .4) } })
     + buddy("pip", 1750, 1060, 230, t, { aura: true, flip: true, in: s.t0 + .1, poses: [[s.t0, "cheer"], [LT(a) - .12, "sit"], [LE(a) + .2, "thinking"], [tO, "oops"]], nohop: true }) + say(a, 1560, 330, t, { size: 40, tail: 150, maxW: 560 })
     + (ringOn ? OP(1 - ss(bell + .5, bell + .8, t), TF(RX, RY, spring(t, tcn[0] - .3, .4), `<g transform="translate(${-RX} ${-RY})">${ringTimer(RX, RY, t < r0 ? 1 : rs.frac, t < r0 ? 6 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RX, RY + 60, .62, countHand(nf)) })}</g>`) + youPill(RX, RY - 178, 1.0) + tpill(RX, RY + 222, "line 1, 2 or 3?", 30, P.ink, "#fff")) : "")
     + (t >= bell + .9 ? buddy("momo", 150, 1062, 200, t, { aura: true, in: bell + .9, poses: [[bell + .9, "thinking"], [tM - .12, "sit"], [LE("j904") + .1, "pointing"]] }) + pickNum("momo", 290, 990, t, tM - .1, "3") + buddy("basil", 420, 1062, 180, t, { aura: true, in: bell + 1.0, poses: [[bell + 1, "arms_crossed"], [tB - .12, "sit"], [LE("j905") + .1, "cheer"]], nohop: true }) + pickNum("basil", 540, 990, t, tB - .1, "3")
@@ -137,8 +141,10 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", board: (tt, fla
 
 /* ============ 11 · the score hand and the lizard ============ */
 SC.final = (t, s) => { const L = "j1101"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "four") - .1, null, 4]], TF(1250, 1062, .36, board7(t))); };
-SC.liz = (t, s) => { const L = "j1102", tN = W(L, "ant") - .15; return `<rect width="1920" height="1080" fill="#C2B49E"/>` + lizReveal(t, s, L, view2(t, { pencil: false, tee: false, shoeX: SHX, liz2: 0 }, CAMSH), gx(CAMSH, LIZ2[0]), gy(CAMSH, LIZ2[1]), W(L, "where") - .1, "Where does wood come from?", 0, -170)
-  + (t >= tN ? TF(960, 190, spring(t, tN, .45), tpill(0, 0, "The ant, under the wooden bench!", 50, P.sun, P.ink, { w: 700 })) : ""); };
+// the hidden sheep, revealed: the "trees" picture board again (the field beside the trees), with a ring round the sheep
+const SHEEPXY = [gx([1.03, 900, 640], 1330 + SHEEPAT[0] * .9), gy([1.03, 900, 640], BACKY + (-195 + SHEEPAT[1] - 16) * .9)];
+SC.liz = (t, s) => { const L = "j1102", tN = W(L, "field") - .3; return lizReveal(t, s, L, teach2(t, { back: picBoard("treesS", 1330, BACKY, 1, { sc: .9, id: "t", t }) }), SHEEPXY[0], SHEEPXY[1], W(L, "where") - .1, "Where does wood come from?", 0, 40, 46, 2.3)
+  + (t >= tN ? TF(960, 150, spring(t, tN, .45), tpill(0, 0, "The sheep, in the field beside the trees!", 50, P.sun, P.ink, { w: 700 })) : ""); };
 
 /* ============ 12 · the dare for Episode 9 ============ */
 SC.dare = (t, s) => { const a = "j1201", b = "j1202", c = "j1203", tR = W(a, "rubber") - .2, tS = W(a, "wooden") - .2, tQ = W(a, "which") - .15, tB = LT(b) - .1, tL = LT(c) - .1, DXs = [880, 1400];
@@ -151,5 +157,5 @@ SC.dare = (t, s) => { const a = "j1201", b = "j1202", c = "j1203", tR = W(a, "ru
     + buddy("basil", 300, 1056, 360, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [tQ, "arms_crossed"], [tB - .1, "sit"], [LE(b) + .1, "cheer"]], nohop: true }) + say(b, 420, 520, t, { size: 52, tail: -60 }) + HUD(t); };
 
 /* ============ 14 · "Now you know!": the full board and the school shoe stand between the buddies ============ */
-SC.nyk = (t, s) => nykScene(t, s, TF(640, 1044, .5, shoe()) + TF(950, 1046, .38, board7(t)));
+SC.nyk = (t, s) => nykScene(t, s, TF(740, 1044, .42, shoe()) + TF(1040, 1046, .34, board7(t)), { bx: [200, 1730, 1420], hx: 470 });
 })(); }

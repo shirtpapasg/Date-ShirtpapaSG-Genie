@@ -96,7 +96,7 @@ SC.reveal = (t, s) => { const a = "g901", e = eo((t - s.t0) / 1.0), cam = [lerp(
 // table (world coordinates, behind the containers), the board big at the bottom right
 
 const teachView = (t, o, cam = [1.03, 900, 640]) => canteenView(t, { sand: 1, ...o }, cam) + boardAt(t, ...BRDT);
-SC.glass = (t, s) => { const a = "g902", tn = MK("nm_glass"), tu = Math.max(MK("uses_glass"), tileT("glass")) + .3, tc = W("g903", "one") - .1, h = spring(t, s.t0, .5);
+SC.glass = (t, s) => { const a = "g902", tn = MK("nm_glass"), tu = Math.max(MK("uses_glass") || 0, tileT("glass")) + .3, tc = W("g903", "one") - .1, h = spring(t, s.t0, .5);
   const uses = [["window", "window"], ["bulb", "light bulb"], ["specs", "spectacles"]].map(([p, lab], i) => picBoard(p, 1150 + i * 250, BACKY, spring(t, tu + i * .22, .45), { sc: .64, lab, size: 44, id: "u" })).join("");
   return teachView(t, { hero: { jar: h }, glow: { jar: .35 }, back: uses }) + pline(gx([1.03, 900, 640], CX.sand + 30), gy([1.03, 900, 640], TY + 8), gx([1.03, 900, 640], CX.jar - 92), gy([1.03, 900, 640], TY - 30))
     + bookCaption(t, a, "Glass is made from sand.", 170, { size: 64, t1: tn - .1 }) + sPip(t, { in: s.t0 + .1 }) + sBasil(t, { in: s.t0 + .2, poses: [[s.t0, "sit"], [tileT("glass"), "cheer"], [tileT("glass") + 1.6, "sit"]], nohop: true })
@@ -104,16 +104,16 @@ SC.glass = (t, s) => { const a = "g902", tn = MK("nm_glass"), tu = Math.max(MK("
 
 /* ============ 10 · metal and plastic ============ */
 const METALS = [["ring", "gold: a ring"], ["gate", "iron: a gate"], ["wire", "copper: a wire"], ["can", "aluminium: a can"]];
-SC.metal = (t, s) => { const a = "g1001", b = "g1002", c = "g1003", tB = LT(a) + .5, tC = LT(c) - .25, h = spring(t, s.t0 + .1, .5);
-  const [rx, rd, rq] = slideX(t, tB, .7, 2400, 1180, BACKY), out = eio((t - tC) / .5), tg = [W(c, "gold"), W(c, "iron"), W(c, "copper"), W(c, "aluminium")].map((x) => x - .15);
-  const back = (t >= tB && out < 1 ? rd + picBoard("rock", rx + out * 1400, BACKY, 1, { sc: .92, id: "m" }) : "") + METALS.map(([p, lab], i) => picBoard(p, 1070 + i * 240, BACKY, spring(t, tg[i], .45), { sc: .66, lab, size: 42, id: "m" + i })).join("");
-  return teachView(t, { hero: { metal: h }, glow: { metal: .35 }, back }) + bookCaption(t, b, "Metals can be dug up from the ground.", 170, { size: 54, t1: tC })
+// (the rock and "Metals can be dug up from the ground." are the look-closer SC.lcmetal in closer.js; here: the four metals, then METAL pops)
+SC.metal = (t, s) => { const c = "g1003", tg = [W(c, "gold"), W(c, "iron"), W(c, "copper"), W(c, "aluminium")].map((x) => x - .15);
+  const back = METALS.map(([p, lab], i) => picBoard(p, 1078 + i * 216, BACKY, spring(t, tg[i], .45), { sc: .6, lab, size: 42, id: "m" + i })).join("");
+  return teachView(t, { hero: { metal: 1 }, glow: { metal: .35 }, back })
     + bookCap(t, c, "Gold, iron, copper and aluminium are metals that are found naturally in the ground.", 150, { size: 46, maxW: 1250, t1: MK("nm_metal") - .1 })
-    + sPip(t) + sBasil(t) + buddy("momo", 430, 1064, 140, t, { aura: true, tag: false, in: s.t0 + .2, poses: [[s.t0, "sit"], [tB + .7, "pointing"], [tC, "sit"]] }) + HUD(t); };
-SC.plastic = (t, s) => { const a = "g1004", b = "g1005", j = "g1006", tB = LT(a) + .4, h = spring(t, s.t0 + .1, .5), tJ = LT(j), tO = W(b, "oil") - .1;
-  const [ox, od] = slideX(t, tB, .7, 2400, 1280, BACKY), back = t >= tB ? od + picBoard("oil", ox, BACKY, 1, { sc: 1.0, lab: "oil, deep under the ground", size: 30, id: "p" }) : "";
-  return teachView(t, { hero: { plastic: h, metal: 1 - ramp(t, s.t0, .4) }, glow: { plastic: .35 }, back }) + bookCap(t, b, "Plastic is made in factories using oil that comes from deep under the ground.", 150, { size: 46, maxW: 1250, t1: MK("nm_plastic") - .1 })
-    + buddy("basil", 150, 1062, 200, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tO, "surprised"], [tJ - .12, "sit"], [LE(j) + .1, "cheer"]], nohop: true }) + say(j, 560, 520, t, { size: 44, tail: -330, maxW: 640 }) + HUD(t); };
+    + sPip(t) + sBasil(t) + buddy("momo", 430, 1064, 140, t, { aura: true, tag: false, in: s.t0 + .2, poses: [[s.t0, "sit"], [tg[0], "pointing"], [tg[3] + .8, "sit"]] }) + HUD(t); };
+// (the oil, the factory and the book's sentence are the look-closer SC.lcplastic; here: PLASTIC pops and hops to its tile, then Basil's joke)
+SC.plastic = (t, s) => { const j = "g1006", tJ = TL.lines[j] ? LT(j) : 1e9, back = picBoard("oil", 1280, BACKY, 1, { sc: 1.0, lab: "oil, deep under the ground", size: 30, id: "p" });
+  return teachView(t, { hero: { plastic: 1 }, glow: { plastic: .35 }, back })
+    + buddy("basil", 150, 1062, 200, t, { aura: true, poses: [[s.t0, "surprised"], [tJ - .12, "sit"], [TL.lines[j] ? LE(j) + .1 : 1e9, "cheer"]], nohop: true }) + (TL.lines[j] ? say(j, 560, 520, t, { size: 44, tail: -330, maxW: 640 }) : "") + HUD(t); };
 
 /* ============ 11 · Round 2: ceramic ============ */
 const SBRD = [1500, 1066, .5];
@@ -126,7 +126,7 @@ SC.r2 = (t, s) => { const tL = LT(L2), tz = MK("ring0_r2") + 1;
 SC.clay = (t, s) => { const a = "g1107", b = "g1108", tA = W(a, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, tB = LT(b) - .5, [bx, bd] = slideX(t, tB, .7, -500, 300, 800);
   return stallView(t, { liz: 0 }, [1.04, 800, 620]) + (t >= tB ? bd + picBoard("clay", bx, 800, 1, { sc: 1.05, id: "c" }) : "") + TF(1560, 700, .62 * spring(t, s.t0 + .15, .45), ansCard(2, "Clay", { lit })) + boardAt(t, ...SBRD)
     + bookCaption(t, b, "Clay can be found in soil dug from the ground.", 170, { size: 54 }) + buddy("basil", 150, 1062, 190, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.8, "sit"]], nohop: true }) + HUD(t); };
-SC.kiln = (t, s) => { const L = "g1109", tS = W(L, "shaped") - .2, tK = W(L, "baked") - .2, tW = W(L, "kiln") - .1, tb = MK("bowlback"), j = clamp((t - tb + .45) / .45), bx = lerp(1010, STALLB[0], eio(j)), hopY = 90 * Math.sin(Math.PI * j);
+SC.kiln = (t, s) => { const L = "g1109", tS = W(L, "shaped") - .2, tK = W(L, "baked") - .2, tW = W(L, "kiln") - .1, tb = 1e9, j = 0, bx = 0, hopY = 0;   // (the bowl comes out of the kiln in the look-closer SC.lckiln)
   const lump = t < tK ? TF(STALLB[0], STALLB[1], 1.3 * (1 - ramp(t, tK - .3, .3)), clayLump()) : "";
   return stallView(t, { liz: 0, bowl: false, items: lump + (j > 0 ? TF(bx, STALLB[1] - hopY, 1.15 * Math.min(1, j * 3), bowl()) + (j >= 1 ? TF(STALLB[0] + 300, STALLB[1] + 24, 1.1 * spring(t, tb, .4), soupSpoon()) + dust(STALLB[0], STALLB[1] + 6, (t - tb) / .4, 1.6) : "") : "") }, [1.04, 800, 620])
     + picBoard("clay", 300, 800, 1 - ramp(t, tS - .2, .25), { sc: 1.05, id: "c" }) + picBoard("hands", 300, 800, spring(t, tS, .45), { sc: 1.05, lab: "shaped", size: 38, id: "k" }) + picBoard("kiln", 1130, 800, spring(t, tK, .45), { sc: 1.05, t, id: "k2" })
@@ -153,5 +153,5 @@ SC.cliff = (t, s) => { const L = "g1301", tD = W(L, "sole") - .5, d = eio((t - t
     + (t >= tP ? TF(560, 470, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + HUD(t); };
 
 /* ============ 14 · "Now you know!": the glass jar and the board stand between the buddies ============ */
-SC.nyk = (t, s) => nykScene(t, s, TF(590, 1040, .95, glassJar()) + TF(690, 1044, .6, sandPile()) + TF(940, 1046, .38, board7(t)));
+SC.nyk = (t, s) => nykScene(t, s, TF(700, 1040, .8, glassJar()) + TF(800, 1044, .55, sandPile()) + TF(1030, 1046, .34, board7(t)), { bx: [200, 1730, 1420], hx: 470 });
 })(); }

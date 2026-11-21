@@ -1,7 +1,7 @@
 // common.js: the scenes both parts share (EP1's approved routines, adapted for EP3): the HUD, round cards, the countdown, the goals, the
 // three-choice lock-in, Mark Sentence cards, the chant (call and response), the score hand, the key-word read-along, "Now you know!".
 window.SC = window.SC || {};
-const HUD = (t, o = {}) => (o.logo === false ? "" : logo(t)) + (o.score === false ? "" : scoreboard(t));
+const HUD = (t, o = {}) => window._noHud ? "" : (o.logo === false ? "" : logo(t)) + (o.score === false ? "" : scoreboard(t));
 const dayCounter = (t, day, tflip = -9, x = 60, y = 110, s = .8) => counter(t, day, tflip, x, y, s, { nodots: true });
 // a plain caption for the book's own words: a cream strip, the words appear as Heart says them. off = index of the first word in the line
 function bookCaption(t, id, text, y = 150, o = {}) { const L = TL.lines[id], size = o.size || 52, toks = text.split(" "), fam = "Atkinson Hyperlegible", sp = tw(" ", size, 700, fam), total = tw(text, size, 700, fam), off = o.off || 0, x0 = (o.x || 960) - total / 2;
@@ -55,7 +55,7 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
   if (c.tag && t >= c.tq) main += TF(RX, CY - RING_R - 14, spring(t, c.tq, .4), tpill(0, 0, c.tag, 34, "#fff", P.ink, { w: 700 }));
   if (c.labels) main += c.labels(t);
   if (shut > .05) main += `<circle cx="${RX}" cy="${CY}" r="${n2(RING_R + 40 + 80 * (1 - shut))}" fill="none" stroke="${P.sun}" stroke-width="6" opacity="${n2(shut * .8)}"/>`;
-  const top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
+  const top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, c.q.length > 28 ? 52 : 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
   // the buddies wait with their picks face down; after the bell each card flips as its buddy speaks
   const X0 = { pip: 600, basil: 960, momo: 1320 }, tin = c.tin || c.ring0 - .3; let buds = "", bubs = "", cards = "";
   ["pip", "basil", "momo"].forEach((who, i) => { const pk = picks.find((p) => p.who === who), tf = pk.fixed ? tin : LT(pk.id), uni = pk.id && TL.lines[pk.id].who === "chant", sp = t >= tb0 && speaking(who, t), hh = lerp(224, 320, zb) * (sp && !uni ? 1.06 : 1), x = lerp(X0[who], [400, 960, 1520][i], zb);
@@ -134,15 +134,17 @@ SC.kwrecap = (t, s) => { const ids = KWLINE, us = KWLINE.map((k) => "u" + k.slic
   return out + HUD(t); };
 
 /* ============ "Now you know!": exactly EP1's ending (notes 14-16). Behind the buddies: the hotel as it stands at the end of this part ============ */
-function nykScene(t, s, prop) { const U = "u1300", L = "h1305", tN = LT(L), tOne = LT("h1304o"), tTwo = LT("h1304t"), tR = LT("h1304a");
+function nykScene(t, s, prop, o = {}) { const BX = o.bx || [300, 1650, 1275], HX = o.hx || 530; const U = "u1300", L = "h1305", tN = LT(L), tOne = LT("h1304o"), tTwo = LT("h1304t"), tR = LT("h1304a");
   const t0 = Math.floor(TL.lines[L].know * 30 + 1e-6) / 30, k = lerp(2.6, 1, eo((t - t0) / .16)) + .07 * wob(t, t0 + .16, .5), on = t >= t0;
   let rays = ""; for (let i = 0; i < 18; i++) { const a = i * 20 + (t - s.t0) * 9; rays += `<path d="M960 520 L${n2(960 + Math.cos(a * Math.PI / 180) * 1600)} ${n2(520 + Math.sin(a * Math.PI / 180) * 1600)} L${n2(960 + Math.cos((a + 9) * Math.PI / 180) * 1600)} ${n2(520 + Math.sin((a + 9) * Math.PI / 180) * 1600)}z" fill="#FFE27A" opacity=".5"/>`; }
   let out = `<rect width="1920" height="1080" fill="url(#gSun)"/>${rays}<circle cx="960" cy="520" r="420" fill="#FFF3B8" opacity=".7" filter="url(#b60)"/>` + prop;
   const loop = []; for (let j = 0; j < 9; j++) loop.push([t0 + 1.0 + j * .62, 34]);
-  [["pip", 300, false], ["basil", 1650, true], ["momo", 1275, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1040, 320, t, { aura: true, flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, "waving"], [LT(U) - .12, "sit"], [LE(U) + .15, "pointing"], [tN - .1, "sit"], [t0, "cheer"]], wave: true, nohop: true, jump: [[tOne - .16, 26], [tTwo - .16, 26], [t0 - .02, 90], ...loop.map(([a, b]) => [a + i * .1, b])] }); });
+  [["pip", BX[0], false], ["basil", BX[1], true], ["momo", BX[2], true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1040, 320, t, { aura: true, flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, "waving"], [LT(U) - .12, "sit"], [LE(U) + .15, "pointing"], [tN - .1, "sit"], [t0, "cheer"]], wave: true, nohop: true, jump: [[tOne - .16, 26], [tTwo - .16, 26], [t0 - .02, 90], ...loop.map(([a, b]) => [a + i * .1, b])] }); });
   out += say(U, 960, 430, t, { size: 60, col: P.basil, tail: 0, merge: true });
   const cnt = t >= tTwo ? "2" : t >= tOne ? "1" : t >= tR ? "Ready?" : ""; if (cnt && t < tN - .04) { const tc = cnt === "2" ? tTwo : cnt === "1" ? tOne : tR; out += TF(960, 300, lerp(1.8, 1, eo((t - tc) / .14)), `<text x="0" y="60" font-family="Fredoka" font-weight="700" font-size="${cnt.length > 1 ? 150 : 230}" text-anchor="middle" fill="#fff" stroke="${P.ink}" stroke-width="26" stroke-linejoin="round" paint-order="stroke">${cnt}</text>`); }
-  out += OP(ramp(t, LT(U), .3), TF(790, 590, 1, youPill(0, 0, 1.1)) + (on ? OP(pulse(t, t0, .02, 1.4), `<g stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M700 570 l-40 -22 M880 570 l40 -22 M790 545 v-36"/></g>`) : ""));
+  // YOU: the viewer's two hands, up and cheering, with their tag (no orphan labels: the tag stands with the hands it names)
+  { const hu = on ? 26 * Math.abs(Math.sin((t - t0) * 5)) * clamp(1.6 - (t - t0) * .3) : 0; out += OP(ramp(t, LT(U), .3), [-1, 1].map((sd) => `<g transform="translate(${HX + sd * 62} ${n2(640 - hu)}) scale(${sd * .5} .5) rotate(${-10})" filter="url(#dropS)">${countHand(5)}</g>`).join("") + youPill(HX, 520 - hu, 1.0)
+    + (on ? OP(pulse(t, t0, .02, 1.4), `<g stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M${HX - 100} 520 l-40 -22 M${HX + 100} 520 l40 -22 M${HX} 470 v-36"/></g>`) : "")); }
   if (!on && t >= tN - .03) { const y2 = W(L, "you"); out += TF(960, 300, 1, `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="150" text-anchor="middle" letter-spacing="4" fill="#fff" stroke="${P.ink}" stroke-width="26" stroke-linejoin="round" paint-order="stroke">Now${t >= y2 ? " you" : ""}…</text>`); }
   if (on) { out += `<g transform="translate(960 300) scale(${n2(k * (1 + .015 * Math.sin((t - t0) * 3)))}) rotate(-3)"><text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="190" text-anchor="middle" letter-spacing="4" fill="#fff" stroke="${P.ink}" stroke-width="30" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">Now you know!</text><text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="190" text-anchor="middle" letter-spacing="4" fill="#fff">Now you know!</text></g>`;
     { const u = t - t0, cols = [P.coral, P.aqua, P.purple, "#fff", P.pink, P.leaf, P.blue]; for (let i = 0; i < 70; i++) { const an = hash(i, 11) * Math.PI * 2, sp = 500 + hash(i, 13) * 900, x = 960 + Math.cos(an) * sp * (1 - Math.exp(-u * 2.2)) * .9, y = 320 + Math.sin(an) * sp * (1 - Math.exp(-u * 2.2)) * .55 + 240 * u * u, o = clamp(1.6 - u * .45); if (o <= 0 || y > 1100) continue;
@@ -151,13 +153,13 @@ function nykScene(t, s, prop) { const U = "u1300", L = "h1305", tN = LT(L), tOne
     for (let i = 0; i < 22; i++) { const life = 1.1 + hash(i, 3) * .8, v = (((t - t0) + hash(i, 5) * 3) % life) / life, x = 120 + hash(i, 7) * 1680, y = 120 + hash(i, 9) * 560 + 50 * v; out += `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2((.5 + hash(i, 2) * .7) * Math.sin(Math.PI * v))}) rotate(${n2(90 * v + 20 * i)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`; } }
   return out + logo(t); }
 /* ============ the hidden animal, revealed: a replay of its shot with a ring around it ============ */
-function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, 1.7, u);
-  return `<g transform="translate(960 540) scale(${n2(zz)}) translate(${n2(-lerp(960, lx + dx, u))} ${n2(-lerp(540, ly + dy, u))})">${view}<circle cx="${lx}" cy="${ly}" r="${n2(88 + 6 * Math.sin(t * 6))}" fill="none" stroke="${P.sun}" stroke-width="9"/></g>`
+function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u);
+  return `<g transform="translate(960 540) scale(${n2(zz)}) translate(${n2(-lerp(960, lx + dx, u))} ${n2(-lerp(540, ly + dy, u))})">${view}<circle cx="${lx}" cy="${ly}" r="${n2(rr + rr * .07 * Math.sin(t * 6))}" fill="none" stroke="${P.sun}" stroke-width="${n2(9 * rr / 88 + 2)}"/></g>`
     + (t >= tq ? TF(960, 830, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw(qtext, 58, 700) / 2 - 60)}" y="-60" width="${n2(tw(qtext, 58, 700) + 120)}" height="120" rx="60" fill="${P.ink}"/></g>${T(0, 20, qtext, 58, "#fff")}`) : "")
     + (t >= tTell ? TF(960, 970, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + logo(t); }
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
-function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "animal"), tFind = W(L, "spot");   // teacher, 2026-11-21: "A little animal is hiding in this video. Can you spot it?" (never which animal)
+function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, HIDDEN[0]), tFind = W(L, "spot");   // teacher, 2026-11-21: Heart NAMES the animal ("A little sparrow is hiding in this video. Can you spot it?") and its picture is shown
   let out = bg("stage");
   if (full) { const tYou = W(L, "you"), tBud = W(L, "buddies"), tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
     out += `<g transform="translate(960 ${n2(lerp(-200, 190, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.45 + .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3), { you: 0, bud: 0 })}</g>`;
