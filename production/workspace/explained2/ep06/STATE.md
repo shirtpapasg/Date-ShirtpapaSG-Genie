@@ -22,3 +22,14 @@ Part 2 "Is a Bat a BIRD? How to Spot a Mammal". Script: `../p3_ep06_script.md` (
 - Thumbnails: `node thumb_still.js N 1 qa/th/fN.png "&thumb"` then `node thumb.js ...` (see ep05/STATE.md).
 - Upload: `upload.json` is written; DO NOT run the uploader (the teacher decides after the comparison with Fable's clips).
 - Status: see ../progress/ep06.json
+
+## Finished (21 Nov 2026): rendered, NOT uploaded (the teacher decides after the comparison with Fable's clips)
+- Part 1 `ep06_part1.mp4` 5:10.27, Part 2 `ep06_part2.mp4` 5:14.30; both 1920x1080 30 fps, -16.0 LUFS; `.srt`, `sheet_part1.png`,
+  `sheet_part2.png`, `thumb_part1.jpg`, `thumb_part2.jpg`, `upload.json` (playlists after 2WuoSmh7xWY, replaces sO31eHgDCGI, retire_old).
+- Comparison moments: P1 cold open 0:00.00-0:07.00 (the callback and title end 0:19.57); P1 "Be a scale!" 3:21.28-3:55.32 (the shrink itself
+  3:25.28-3:52.32); P2 ending, read-along to the end of the outro, 4:49.91-5:14.30 ("Now you know!" 5:02.95).
+- After the finish: the buddies' name tags are hidden from the "Now you know!" shout on (no text in the bottom fifth of the outro;
+  common.js nykScene), and the fruit bat hangs from the board's corner in Part 2's ending. Last chunks of both parts re-rendered.
+- Checks: count-in onsets measured on the mix 1.000/0.999 s apart, the blast on "know"; "Say it with me!/us!" then 0.8 s; no EP6 line
+  needs sg_pron (no "live").
+- Stills of the monitor: qa/still_monitor_p1_3m00s.jpg (Part 1 3:00.5), qa/still_scale_journey_p1_3m36s.jpg (Part 1 3:36.5).

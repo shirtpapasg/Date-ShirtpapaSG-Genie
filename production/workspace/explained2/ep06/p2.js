@@ -168,5 +168,5 @@ SC.dare = (t, s) => { const L = "f1401", tMo = W(L, "mould") - .2, tYe = W(L, "y
     + buddy("basil", 1760, 1060, 220, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "thinking"], [tU, "surprised"], [tU + 1.4, "arms_crossed"]] })
     + (t >= tN ? TF(930, 1010, lerp(1.6, 1, eo((t - tN) / .16)) + .04 * wob(t, tN + .16, .4), `<g filter="url(#drop)"><rect x="-720" y="-60" width="1440" height="120" rx="50" fill="${P.ink}"/></g>${T(-580, 18, "NEXT", 44, P.sun, { ls: 8 })}${T(80, 18, "Fungi and bacteria · Lock in your answer!", 42, "#fff")}`) : "") + HUD(t); };
 const ansCardS = (n, txt) => `<g filter="url(#dropS)"><rect x="-150" y="-60" width="300" height="120" rx="30" fill="url(#gPaper)"/></g><circle cx="-90" cy="0" r="40" fill="#EDE4FF"/>${T(-90, 22, n, 60, "#3B2A8C")}${T(40, 16, txt, 46, P.ink)}`;
-SC.nyk = (t, s) => nykScene(t, s, TF(1000, 1046, .36, sixBoard(t, ALL6)) + TF(1000 + 330 * .36, 1046 - 590 * .36, .12, hangBat({ blink: ((t + .4) % 2.9) < .12 })));
+SC.nyk = (t, s) => nykScene(t, s, TF(1000, 1046, .36, sixBoard(t, ALL6)) + TF(1000 - 352 * .36 - 16, 1046 - 596 * .36 + 6, .24, `<g transform="rotate(${n2(3 * Math.sin(t * 2))})">${hangBat({ blink: ((t + .4) % 2.9) < .12 })}</g>`));
 })(); }
