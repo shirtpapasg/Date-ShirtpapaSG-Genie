@@ -452,7 +452,7 @@ The title lines; the goal chips; the location pills (A Primary 3 classroom, Sing
 ### H. Words to check for sound (see `PRONUNCIATION.md`; no new Singapore name is spoken)
 - **No hard new name is spoken.** "HDB" is not said. No school, shop, zoo or place name is said aloud ("the zoo" only).
 - **"fragile" is not spoken in this episode** (Basil says "A goat's knock could break it!" so that no buddy voice has to say it).
-- **engineers** ("en-juh-NEERZ") is a key word, said by Heart five times and by Basil once: listen in both voices, and in the read-along where it stands alone.
+- **engineers** ("en-juh-NEERZ") is a key word, said by Heart, Basil and Momo: listen in all three voices, and in the read-along where it stands alone.
 - **use** in "intended use", "its own use" and "the intended use of the object" is the noun: **"yooss"**, never "yooz" (as in EP12). Kokoro may guess the verb: listen in every voice, and fix by phonemes if needed. "used" in Mark Sentence 3.30 is the verb ("yoozd"): correct as it is.
 - **diversity** ("dy-VER-suh-tee"; the British "dy", as in EP1), **extinct** ("ik-STINGKT"), **suitable** ("SOO-tuh-buhl"), **salamander** ("SAL-uh-man-duh"), **macaw** ("muh-KAW"), **flamingo**, **koi** ("koy"), **amphibians**, **dragonfly**: expected to be right; listen once in each voice that says them (Basil says salamander, macaw, flamingo, koi and amphibians in his zoo map).
 - "Zip!" and "Bump!" in the first journey are sounds, not words to teach: if Kokoro reads either oddly, drop the word and keep the sound effect.
