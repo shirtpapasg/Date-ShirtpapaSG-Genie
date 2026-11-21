@@ -11,7 +11,7 @@ SEQ items:
 """
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
-# the chant (Part 2): each line is a question on the two claps and its answer on the stomp; YOUR TURN! after each line; then all together once
+# the chant (Part 2): each line is a question on the two claps and its answer on the stomp; YOUR TURN! after each line (the all-together pass was cut, 21 Nov 2026, for length)
 CHANT = [("Six legs?", "Insect!"), ("Dry, scaly skin?", "Reptile!"), ("Hair or fur?", "Mammal!")]
 CHANT_CAPS = ([.66, .82, .66], [.62, .7, .66])
 # how the TTS should say a word (the caption/script text is unchanged)

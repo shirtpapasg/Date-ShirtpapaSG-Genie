@@ -57,8 +57,9 @@ def stretch(x, sr, dur):
     return call(snd, "Lengthen (overlap-add)", 75, 600, f).values[0] if abs(f - 1) > .02 else x
 
 BAR = 1.8   # the chant: one line per bar: the question on the two claps, the answer on the stomp (half a bar)
-# call and response: line 1, a bar for the viewers ("YOUR TURN!"), line 2, a bar, line 3, a bar; then all three together once
-SLOTS = [(0, 0), (1, 2), (2, 4), (0, 6), (1, 7), (2, 8)]; NBARS = 9; NCALL = 3
+# call and response: line 1, a bar for the viewers ("YOUR TURN!"), line 2, a bar, line 3, a bar. The all-together pass (bars 6-8) was cut on
+# 21 Nov 2026 to keep Part 2 under 5:15 (the script's cut order, section 6); voice/c1103 was trimmed to match. Old: SLOTS + [(0, 6), (1, 7), (2, 8)], NBARS = 9
+SLOTS = [(0, 0), (1, 2), (2, 4)]; NBARS = 6; NCALL = 3
 def phrase_set(texts, cap=None):
     """each buddy says each text; every text is stretched to one length so the three land together. -> {who: [audio]}, durations"""
     raw = {}
