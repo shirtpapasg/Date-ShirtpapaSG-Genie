@@ -13,13 +13,18 @@ const tickT = (i) => { const mk = TL.marks[TESTS[i][2]]; return PART === 2 && i 
 const ticked = (i, t) => t >= tickT(i);
 // STAGE 1 placeholder of the board (functional: rows, ticks, a glowing row). Stage 2 redraws it on its low stand, standing on the table or ground.
 // o.glow = row index that glows (0..2) or -1; origin = the middle of the stand's feet
+const _rowIcon = (i) => i === 0 ? `<rect x="-9" y="-26" width="18" height="34" rx="3" fill="#fff" stroke="${P.ink}" stroke-width="4"/><path d="M0 8 V18" stroke="${P.ink}" stroke-width="4"/><rect x="-18" y="18" width="36" height="12" rx="5" fill="#E8B23E" stroke="${P.ink}" stroke-width="4"/>`
+  : i === 1 ? `<path d="M-14 -8 H14 L10 26 H-10z" fill="#DDF4FF" stroke="${P.ink}" stroke-width="4" stroke-linejoin="round"/><path d="M-16 -18 V-30 M0 -16 V-30 M16 -18 V-30" stroke="${P.ink}" stroke-width="4" stroke-linecap="round"/>`
+  : `<path d="M-24 14 Q0 -34 24 14" fill="none" stroke="${P.ink}" stroke-width="13" stroke-linecap="round"/><path d="M-24 14 Q0 -34 24 14" fill="none" stroke="#C8925A" stroke-width="6" stroke-linecap="round"/>`;
 function board3(t, o = {}) { const g = o.glow === undefined ? -1 : o.glow; let rows = "";
-  TESTS.forEach(([n, w], i) => { const y = -330 + i * 100, on = ticked(i, t), k = on ? spring(t, tickT(i), .4) : 0;
-    rows += (g === i ? `<rect x="-250" y="${y - 44}" width="500" height="88" rx="20" fill="${P.sun}" opacity="${n2(.35 + .2 * Math.sin(t * 5))}"/>` : "")
-      + T(-150, y + 16, n + "  " + w, 52, P.ink, { a: "start" }) + `<rect x="150" y="${y - 34}" width="68" height="68" rx="12" fill="#fff" stroke="${P.ink}" stroke-width="5"/>`
-      + (k > .02 ? TF(184, y, k, `<path d="M-24 0 L-6 20 L28 -24" fill="none" stroke="${GOODC}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>`) : ""); });
-  return `<path d="M-150 0 V-60 M150 0 V-60" stroke="#8A5A36" stroke-width="14" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-290" y="-470" width="580" height="420" rx="26" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(0, -405, "OUR 3 TESTS", 46, P.ink, { ls: 4 }) + rows + tpill(0, -80, "STAGE 2: draw", 22, P.coral, "#fff"); }
+  TESTS.forEach(([n, w], i) => { const y = -322 + i * 98, on = ticked(i, t), k = on ? spring(t, tickT(i), .4) : 0, u = t - tickT(i);
+    rows += (g === i ? `<rect x="-262" y="${y - 45}" width="524" height="90" rx="22" fill="${P.sun}" opacity="${n2(.5 + .25 * Math.sin(t * 5))}"/>` : `<rect x="-262" y="${y - 45}" width="524" height="90" rx="22" fill="#fff" opacity=".55"/>`)
+      + `<g transform="translate(-218 ${y})"><circle r="30" fill="${P.ink}"/>${T(0, 15, n, 42, "#fff")}</g>` + T(-166, y + 19, w, 56, P.ink, { a: "start", ls: 3 }) + TF(88, y, 1, _rowIcon(i))
+      + `<rect x="158" y="${y - 34}" width="68" height="68" rx="14" fill="#fff" stroke="${P.ink}" stroke-width="5"/>`
+      + (k > .02 ? TF(192, y, k, `<path d="M-24 0 L-6 20 L30 -26" fill="none" stroke="#1F8A4C" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`) + (u >= 0 && u < .5 ? `<circle cx="192" cy="${y}" r="${n2(40 + 90 * eo(u / .5))}" fill="none" stroke="${GOODC}" stroke-width="${n2(10 * (1 - u / .5))}"/>` : "") : ""); });
+  return `<ellipse cx="0" cy="4" rx="270" ry="16" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-170 0 V-70 M170 0 V-70" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><rect x="-220" y="-12" width="440" height="16" rx="8" fill="#8A5A36"/>
+    <g filter="url(#drop)"><rect x="-296" y="-482" width="592" height="436" rx="28" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="7"/><path d="M-296 -402 V-454 Q-296 -482 -268 -482 H268 Q296 -482 296 -454 V-402z" fill="${P.ink}"/></g>`
+    + T(0, -422, "OUR 3 TESTS", 46, "#fff", { ls: 5 }) + rows; }
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start with their picture, revealed at the end.
    Part 1: a little SPIDER hanging on its thread by the letterboxes (void deck), bobbing (every wide shot of the void deck).
