@@ -132,3 +132,43 @@ flower pot. Reused: EP9's two dare boards (being drawn now in ep09/) and EP9's t
   after EP9 Part 2's key `explained-p3-ep09-part2`; `retire_old`: the classic "Strong, Bendy, Floaty: Testing Materials (Part A)"
   5fBBrJMrAcU leaves the playlists and points to EP9 and EP10; never deleted).
 - Status: see ../progress/ep10.json
+
+## 21 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE
+- Rendered with `./build_part.sh 1|2` (10 s chunks kept in `out/chunks_p1`, `out/chunks_p2`; about 11 min a part). `ep10_part1.mp4` 290.20 s
+  (**4:50.2**), `ep10_part2.mp4` 308.97 s (**5:09.0**); 1920x1080 30 fps; both -16.0 LUFS, true peak -1.3 dBFS. Captions `ep10_part1.srt`
+  (136 cues), `ep10_part2.srt` (132 cues), 0 overlapping cues; contact sheets `sheet_part1.png`, `sheet_part2.png`. Every look-closer verdict is
+  held 2.5 s (v_* to the scene end). Nothing was cut.
+- Checked (frame strips from the rendered files, `qa/stage3/`): the cold open (EP9's two dare boards slide onto the table, "Water play? Always
+  with an adult." on screen; P2 the same line under the void-deck pill); the calm recaps; the otter / snail named at the start with their
+  picture ("a little otter" / "a little snail") and ringed at the end with Heart's pill; goal cards read by Basil (P1) / Momo (P2), each lifting
+  with a tick; Mark Sentences read by the "Say it with me!" buddy (Momo, Basil · Pip, Basil); the HOLD ON! ring with both pictures and both clue
+  tags (very heavy · floats, light · sinks) above it through the countdown; Round 1 lock-ins (clue tags metal · floats, plastic · fabric on top of
+  the ring through the countdown); all five look-closers in and out (the blocks: hand lowers, lets go, the wooden block dips and bobs, the metal
+  one goes straight down with bubbles, the hands lift away; the ship's hull window and the split; the bowl sits lower on "lower. And lower."
+  and rests on the bottom; the drop test's three pages and the water between the threads in the lens; the wax hand's rub and the SHOE WAX
+  label, "An adult rubs on cold shoe wax. No candles. No flame." on screen throughout); BE THE AIR (the hull grows, the door pass 183-188 s,
+  the door shuts on "The door shuts" 192-194 s, the lamp, the porthole and fish); BE A RAINDROP (the city from above, the child in the yellow
+  raincoat, splat, the roll 128-132 s: an abstract yellow slope turning over, readable as rolling; off the edge onto the weave, the sock); the
+  low slides (dare boards, board, trays, raincoat and shoe, tiles, both boots in `treated`); rain density (moderate, never hides a prop); the
+  showdown, the chant, EP11's dare boards, key words, "Now you know!". EP10's cold-open boards are EP9's own art (`PIC.spoonTub` / `PIC.ship`
+  identical to ep09/voiddeck.js); EP9's live ending shows them with two pills each ("metal" + "sinks" / "floats"), EP10 with one tag
+  "metal · sinks" / "metal · floats": same pictures, same words, close enough.
+- Fixed (small, local):
+  - P1 sound, the blocks look-closer: all four plops came early (both blocks at the cut-in, 51.0 s, though the metal block is only let go at
+    56.6 s; both spoons at 61.9 s, though they are let go at 64.0 / 66.2 s). Each plop now sits on its own release (`sound_cues.js`, from
+    closer.js `blocksArt` tR1 / tR2 / tS1 / tS2), and the tok on the metal spoon's landing (67.6 s). Sound only: cues, mix and mux redone.
+  - P2 `treated`: the wet boot on NOT WATERPROOF stood in front of the board and hid row 3 "WAX IT". The board stands 110 px further right in
+    that scene only (`p2.js` SC.treated); chunks 180-200 s re-rendered.
+- Not changed (noted): the title slam's first line overshoots the frame edges for a few frames as it lands (as in earlier episodes); in the
+  showdown Momo's "Two!" bubble springs in while Pip's bubble is still fading (about 0.2 s); the "trapped air" tag in the journey shows about
+  1.5 s (the key word pops again in Mark Sentence 2).
+- For a human ear: "Splat!" (f703) and "absorbs" (f504): `qa/absorb_splat_check.m4a` (both as they are in the final mix). Not re-recorded.
+- Thumbnails `thumb_part1.jpg` (METAL SPOON SINKS / METAL SHIP FLOATS?!, the ship and the spoon in the tub, surprised Basil) and
+  `thumb_part2.jpg` (ONE BOOT SOAKS / ONE STAYS DRY!, the wet boot and the waxed boot with a bead, surprised Pip) read well; unchanged.
+- Uploaded with `upload.json` (Made for Kids, public; checked against ep09/upload.json's shape; both playlists PLb8LpPqxQI4E and PLPfEuT7l4KjI
+  right after EP9 Part 2 mbUzXp6CKbs via the key `explained-p3-ep09-part2`; `retire_old`: the classic 5fBBrJMrAcU "Strong, Bendy, Floaty:
+  Testing Materials (Part A)" left both playlists and its description now starts with "▶ NEW VERSION: ..." pointing to EP10 Part 1; it stays
+  public, never deleted). The School Lab 3.5 line is left out of the descriptions until that lab is signed off.
+  Part 1 https://www.youtube.com/watch?v=d0jyiDdL2sA , Part 2 https://www.youtube.com/watch?v=HjN5HO7qFnY .
+- Left for the teacher: listen once (Splat!, absorbs); watch the five look-closers, both journeys and the otter / snail reveals. The old
+  video's NEW VERSION line names EP10 only (the uploader writes one line); if it should also name EP9 (strength / flexibility), add it by hand.

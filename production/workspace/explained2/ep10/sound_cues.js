@@ -22,9 +22,9 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   [0, 1, 2].forEach((i) => E(LT(["e402", "e403", "e404"][i]) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 two blocks (two soft taps); LOOK CLOSER the tub: two plops, a bob, a line of bubbles, a soft tok on the bottom; the spoons the same; the strip; tick 1
   K(S.blocks.t0, S.lcblocks.t0 + .3); E(W("e501", "wood") - .1, "tap"); E(W("e501", "metal") - .1, "tap"); lcin(S.lcblocks.t0 + .1);
-  fx(LT("e502") - .8, "ep06_plop.wav", .2); fx(LT("e502") - .7, "ep06_plop.wav", .16); E(W("e502", "bobs") - .05, "boop", 0);
+  fx(LT("e502") - .08, "ep06_plop.wav", .2); fx(LT("e503") - .1, "ep06_plop.wav", .16); E(W("e502", "bobs") - .05, "boop", 0);
   [0, 1, 2, 3].forEach((i) => E(W("e503", "goes") + i * .22, "bubble", i)); E(W("e503", "down") + .1, "tok");
-  fx(MK("spoons") + .3, "ep06_plop.wav", .14); fx(MK("spoons") + .55, "ep06_plop.wav", .12); E(W("e504", "sinks") - .2, "bubble", 3); E(W("e504", "sinks") + .2, "tok"); verdict("v_wood");
+  fx(W("e504", "wooden") - .22, "ep06_plop.wav", .14); fx(W("e504", "metal") - .22, "ep06_plop.wav", .12); E(W("e504", "metal") - .05, "bubble", 3); E(W("e504", "metal") - .25 + 1.4, "tok"); verdict("v_wood");   // Stage 3: each block and spoon plops as the hand lets it go (closer.js blocksArt tR1 / tR2 / tS1 / tS2); the tok as the metal spoon lands
   K(S.woodstrip.t0, S.holdon.t1); E(W("e505", "wood") - .1, "softpop", 0); E(W("e505", "metals") - .1, "softpop", 1); if (has("e506")) E(LT("e506") - .1, "boing"); tick("tick1");
   // 6 HOLD ON! (Momo's rule): a soft hmm, the stamp, ticks that speed up, a bell, a coin, a soft pop; Mark Sentence 1
   { const a = "e601", b = "e602", c = "e603", r0 = MK("ring0_hold"); E(LT(a) - .05, "boop", 1); E(W(b, "something") - .1, "boop", 2); E(W(b, "hold") - .1 + .14, "stamp");
