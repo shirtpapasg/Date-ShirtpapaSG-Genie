@@ -437,3 +437,9 @@ The title lines; the goal chips; the location pills (The void deck of an HDB blo
 14. **The dare for EP10:** "A metal spoon sinks. But a giant metal ship floats! What is inside the ship that helps it to float? One, wood. Two, air. Three, more metal." EP10's opening should start "Last time, we asked: a metal spoon sinks, but a giant metal ship floats! What is inside the ship that helps it to float?" with the same two boards and three cards.
 15. **Questions for the teacher:** (a) "fragile": the Singapore sound "FRAJ-ile" needs a test clip (section 10 H). (b) Is it right to hold EP8's dare until Part 2 (choice 1), or should flexibility come first? (c) Is the glass cup breaking in the drop box (slow motion, big pieces, an adult's gloved hands, "Never try it") acceptable on a Made for Kids video, or should it be a ceramic plate, or only the metal cup with the glass cup described on a strip? (d) A spider as the hidden animal: fine if it is drawn cute, or swap it for another animal?
 16. A human must listen before the sound can be called checked: the agents can only measure it (-16 LUFS).
+
+## 12. Teacher's answers (2026-11-21)
+- (a) "fragile" is said "FRAJ-ile" (clip B); it is in `sg_pron.py` and PRONUNCIATION.md.
+- (b) Keep the book's order: strength first; EP8's dare is answered in Part 2 Round 1.
+- (c) The glass cup breaking in the drop box is OK (adult's gloved hands, slow motion, "Never try it"), with the metal cup bouncing too.
+- (d) The cute spider stays as Part 1's hidden animal.

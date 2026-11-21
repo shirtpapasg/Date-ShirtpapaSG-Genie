@@ -22,6 +22,7 @@ FIX = {
     # as 'leaf'" -> the verb, said "leev" (long ee, as in 'leaf' with a v), never "laiv". Whole word only ("living", "alive", "olive" untouched).
     "live": {"ph": "lˈiːv"},  # "leev": the teacher's "leaf" (clip M)
     "lives": {"ph": "lˈiːvz"},
+    "fragile": {"ph": "fɹˈædʒaɪl"},             # "FRAJ-ile" (teacher, 2026-11-21, clip B)
 }
 _tok = None
 def _tokz():
