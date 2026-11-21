@@ -36,14 +36,14 @@ SC.goals = (t, s) => goals3(t, s, [["Wood, rubber and fabric", TF(0, 0, 1.1, til
 SC.game = (t, s) => gameScene(t, s, "j301", false);
 
 /* ============ 4 · wood: the bench and the pencil; wood comes from trees ============ */
-const CAMB = [1.8, 420, 1130];
+const CAMB = [1.8, 375, 1130];
 SC.wood = (t, s) => { const L = "j401", e = eio((t - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMB[0], e), lerp(CAMW[1], CAMB[1], e), lerp(CAMW[2], CAMB[2], e)], tB = W(L, "bench") - .15, tP = W(L, "pencil") - .2;
   return view2(t, { glow: { pencil: pulse(t, tP, .1, 1.6) }, front: benchNear() + `<path d="M190 986 H1730 L1806 1030 H114z" fill="${P.sun}" opacity="${n2(.4 * pulse(t, tB, .1, 1.2))}"/>` }, cam)
     + (t >= tB ? ltag(t, tB, 1000, 760, "made of wood", gx(CAMB, 760), gy(CAMB, 1004), { size: 44, fill: MATK.wood.col, ink: "#fff" }) : "") + (t >= tP ? ltag(t, tP, 400, 420, "your pencil", gx(CAMB, QX.pencil), gy(CAMB, TY + 6), { size: 40 }) : "")
     + buddy("momo", 1700, 1056, 230, t, { aura: true, flip: true, in: s.t0 + .15, poses: [[s.t0, "pointing"], [tP, "cheer"], [tP + 1.4, "sit"]], nohop: true }) + HUD(t); };
 const teach2 = (t, o, cam = [1.03, 900, 640]) => view2(t, o, cam) + boardAt(t, ...BRDT);
 // the "trees" picture carries Part 2's hidden sheep (PIC.treesS): it grazes in the field through trees, the start of the look-closer and paper
-SC.trees = (t, s) => { const a = "j402", b = "j403", c = "j404", tA = s.t0 + .1, tB = SCN.lcwood.t0 + .1, tC = LT(c) - .25, [ax, ad] = slideX(t, tA, .7, 2500, 1330, BACKY), [bx, bd] = slideX(t, tB, .7, 2500, 1660, BACKY);
+SC.trees = (t, s) => { const a = "j402", b = "j403", c = "j404", tA = s.t0 + .1, tB = SCN.paper.t0 + .1, tC = LT(c) - .25, [ax, ad] = slideX(t, tA, .7, 2500, 1330, BACKY), [bx, bd] = slideX(t, tB, .7, 2500, 1660, BACKY);
   const back = ad + picBoard("treesS", ax, BACKY, 1, { sc: .9, id: "t", t }) + (t >= tB ? bd + picBoard("planks", bx, BACKY, 1, { sc: .9, lab: "long, flat planks", size: 36, id: "t2" }) : "");
   return teach2(t, { glow: { pencil: .25 }, back: back + (t >= tC ? picBoard("book", 1010, BACKY, spring(t, tC, .45), { sc: .62, lab: "paper", size: 46, id: "t3" }) : "") })
     + bookCaption(t, a, "Wood comes from the trees in fields and forests.", 170, { size: 52, t1: tC - .1 }) + sPip(t, { in: s.t0 + .1 }) + sBasil(t, { in: s.t0 + .2, poses: [[s.t0, "sit"], [tileT("wood"), "cheer"]], nohop: true }) + HUD(t); };
@@ -118,8 +118,8 @@ SC.show = (t, s) => { const a = "j901", b = "j902", r0 = MK("ring0_show"), bell 
   return showView(t, { notes: { lit, badge, x: spring(t, tM + .5, .4) } })
     + buddy("pip", 1750, 1060, 230, t, { aura: true, flip: true, in: s.t0 + .1, poses: [[s.t0, "cheer"], [LT(a) - .12, "sit"], [LE(a) + .2, "thinking"], [tO, "oops"]], nohop: true }) + say(a, 1560, 330, t, { size: 40, tail: 150, maxW: 560 })
     + (ringOn ? OP(1 - ss(bell + .5, bell + .8, t), TF(RX, RY, spring(t, tcn[0] - .3, .4), `<g transform="translate(${-RX} ${-RY})">${ringTimer(RX, RY, t < r0 ? 1 : rs.frac, t < r0 ? 6 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RX, RY + 60, .62, countHand(nf)) })}</g>`) + youPill(RX, RY - 178, 1.0) + tpill(RX, RY + 222, "line 1, 2 or 3?", 30, P.ink, "#fff")) : "")
-    + (t >= bell + .9 ? buddy("momo", 150, 1062, 200, t, { aura: true, in: bell + .9, poses: [[bell + .9, "thinking"], [tM - .12, "sit"], [LE("j904") + .1, "pointing"]] }) + pickNum("momo", 290, 990, t, tM - .1, "3") + buddy("basil", 420, 1062, 180, t, { aura: true, in: bell + 1.0, poses: [[bell + 1, "arms_crossed"], [tB - .12, "sit"], [LE("j905") + .1, "cheer"]], nohop: true }) + pickNum("basil", 540, 990, t, tB - .1, "3")
-      + say("j904", 300, 720, t, { size: 42, tail: -110, maxW: 520 }) + say("j905", 560, 700, t, { size: 42, tail: -100, maxW: 560 }) : "")
+    + (t >= bell + .9 ? buddy("momo", 150, 1062, 200, t, { aura: true, in: bell + .9, poses: [[bell + .9, "thinking"], [tM - .12, "sit"], [LE("j904") + .1, "pointing"]] }) + pickNum("momo", 290, 990, t, tM - .1, "3") + buddy("basil", 520, 1062, 180, t, { aura: true, in: bell + 1.0, poses: [[bell + 1, "arms_crossed"], [tB - .12, "sit"], [LE("j905") + .1, "cheer"]], nohop: true }) + pickNum("basil", 640, 990, t, tB - .1, "3")
+      + say("j904", 300, 720, t, { size: 42, tail: -110, maxW: 520 }) + say("j905", 495, 700, t, { size: 42, tail: 20, maxW: 560 }) : "")
     + stamp(t, LT("j903") - .08, 700, 420) + bellIcon(t, r0) + HUD(t); };
 const SH4 = [600, 720, 1.35], sp = (x, y) => [SH4[0] + x * SH4[2], SH4[1] + y * SH4[2]];
 const PARTS = [["sole", "rubber", "rubber", [1000, 830], sp(150, -22)], ["top", "fabric", "fabric", [210, 470], sp(-170, -110)], ["rings", "metal", "metal", [1010, 610], sp(112, -89)], ["tips", "plastic", "plastic", [900, 330], sp(52, -156)]];
@@ -143,7 +143,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", board: (tt, fla
 SC.final = (t, s) => { const L = "j1101"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "four") - .1, null, 4]], TF(1262, 1062, .28, board7(t))); };
 // the hidden sheep, revealed: the "trees" picture board again (the field beside the trees), with a ring round the sheep
 const SHEEPXY = [gx([1.03, 900, 640], 1330 + SHEEPAT[0] * .9), gy([1.03, 900, 640], BACKY + (-195 + SHEEPAT[1] - 16) * .9)];
-SC.liz = (t, s) => { const L = "j1102", tN = W(L, "field") - .3; return lizReveal(t, s, L, teach2(t, { back: picBoard("treesS", 1330, BACKY, 1, { sc: .9, id: "t", t }) }), SHEEPXY[0], SHEEPXY[1], W(L, "where") - .1, "Where does wood come from?", 0, 40, 46, 2.3)
+SC.liz = (t, s) => { const L = "j1102", tN = W(L, "field") - .3; return lizReveal(t, s, L, view2(t, { back: picBoard("treesS", 1330, BACKY, 1, { sc: .9, id: "t", t }) }, [1.03, 900, 640]), SHEEPXY[0], SHEEPXY[1], W(L, "where") - .1, "Where does wood come from?", 0, 40, 46, 2.3)
   + (t >= tN ? TF(960, 150, spring(t, tN, .45), tpill(0, 0, "The sheep, in the field beside the trees!", 50, P.sun, P.ink, { w: 700 })) : ""); };
 
 /* ============ 12 · the dare for Episode 9 ============ */

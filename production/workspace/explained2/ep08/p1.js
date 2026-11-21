@@ -74,7 +74,7 @@ SC.rule = (t, s) => { const a = "g601", b = "g602", c = "g603", d = "g604", r0 =
 
 /* ============ 7 · Round 1: which one was made from sand? ============ */
 const ring3 = (tt) => `<g clip-path="url(#cRing)"><rect x="250" y="520" width="360" height="140" fill="url(#cTable)"/><path d="M250 520 H610" stroke="#fff" stroke-width="4" opacity=".8"/>${TF(318, 548, .36, plasticBox())}${TF(430, 548, .36, metalBox())}${TF(540, 552, .4, glassJar())}${TF(430, 612, .5, sandPile())}</g>`;
-SC.r1 = (t, s) => lockN(t, { cards: ["The plastic box", "The metal box", "The glass jar"], q: "Which one was made from sand?", tq: W(L1, "which") - .1, tc: [W(L1, "one", 1), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "g702",
+SC.r1 = (t, s) => lockN(t, { cards: ["The plastic box", "The metal box", "The glass jar"], tag: "a pile of sand", q: "Which one was made from sand?", tq: W(L1, "which") - .1, tc: [W(L1, "one", 1), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "g702",
   obj: ring3, picks: [{ who: "momo", id: "g703", word: "2", x: true }, { who: "pip", id: "g704", word: "3" }, { who: "basil", id: "g705", word: "3" }],
   react: [[LE("g703") + .1, "momo", "thinking"], [LE("g704") + .1, "pip", "pointing"], [LE("g705") + .1, "basil", "cheer"]] });
 
