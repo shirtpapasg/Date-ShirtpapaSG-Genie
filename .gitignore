@@ -66,3 +66,4 @@ production/workspace/explained2/*/*.log
 production/workspace/explained2/refs/
 production/workspace/explained2/*/qa/_w/
 production/workspace/explained2/*/qa/_*/
+production/workspace/explained2/**/out/
