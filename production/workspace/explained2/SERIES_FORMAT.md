@@ -245,7 +245,10 @@ order). Send the teacher the finished parts and the list of things to check; the
 
 1. Silent cold open (a real Singapore place).
 2. Hook and practice lock-in.
-3. Rules and goals (the "Today you'll learn" chips).
+3. Rules and goals (the "Today you'll learn" chips). **A buddy READS the three goal cards aloud** (teacher, 2026-11-21: "make one
+   of the pet buddies read these 3"): the buddy on screen says "Today you'll learn…" and then each goal, word for word as printed,
+   and each card lifts and glows while it is read (about 0.4 s pause between cards). Rotate the reader between episodes and parts so
+   each buddy gets a turn, and give Basil his share.
 4. "Are you ready? Three! Two! One! Go!"
 5. Two rounds of lock-ins, each with its evidence and its Mark Sentence. A "Say it with me!" before each card.
 6. The first-person "be the thing" journey into the micro-world (the series signature; see section 1).
