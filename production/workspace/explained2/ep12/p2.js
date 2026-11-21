@@ -68,7 +68,7 @@ SC.lccar = (t, s) => lcPH(t, s, { title: "One car, part by part: tyres, seats, w
 /* 8 · Mark Sentence 2 (Momo): 3.27, the tag "function = the job of a part" for the whole card; Heart's plain re-say (j803): each part pulses (p1..p4) */
 SC.mark2 = (t, s) => { const parts = [["tyres", "STRONG"], ["seats", "FLEXIBLE"], ["windscreen", "WATERPROOF"], ["body", "STRONG"]];
   return markScene(t, s, { id: "j802", sayId: "j801", who: "momo", n: "2 of 2", text: "The materials are selected for the different functions of the parts based on their physical properties.", keys: ["different", "functions", "physical", "properties."], size: 62, y: 230, footer: FOOT,
-    extra: (t >= s.t0 + .6 ? TF(1150, 735, spring(t, s.t0 + .6, .4), tpill(0, 0, "function = the job of a part", 34, "#FFF8EA", P.ink, { w: 700 })) : "")
+    extra: (t >= s.t0 + .6 ? TF(1150, 800, spring(t, s.t0 + .6, .4), tpill(0, 0, "function = the job of a part", 34, "#FFF8EA", P.ink, { w: 700 })) : "")
       + parts.map(([p, c], i) => { const mk = MK("p" + (i + 1)), g = pulse(t, mk, .05, .6), x = 760 + i * 250; return TF(x, 930, 1 + .25 * g, tpill(0, 0, p, 28, "#fff", P.ink, { w: 700 })) + TF(x, 995, 1 + .25 * g, propChip(c, 22)); }).join("")
       + stageNote("under the card: the car with its four labelled parts; each part pulses once with its chip at MK p1..p4", 1062) }); };
 
@@ -99,12 +99,12 @@ SC.show = (t, s) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = 
 /* the fix: line 2 rubbed out and rewritten in green (rub), the tip card (tip), +2 */
 SC.fix = (t, s) => { const rb = MK("rub"), rub = ss(rb, rb + .5, t), fix = ss(rb + .4, rb + 1.2, t), tip = MK("tip");
   return bg("stage2") + TF(760, 900, .62, momoNotes(t, { rub, fix, lit: [0, fix * .6, 0] }))
-    + (t >= tip ? TF(1500, 560, spring(t, tip, .45), `<g filter="url(#drop)"><rect x="-330" y="-120" width="660" height="240" rx="30" fill="url(#gPaper)"/></g>${T(-280, -28, "1 Name the property.", 46, P.ink, { a: "start" })}${T(-280, 52, "2 Link it to the job.", 46, P.ink, { a: "start" })}` + stageNote("tip card: plain lines from \"property\" to waterproof, from \"job\" to rain on the windscreen and dry seats", 0)) : "")
+    + (t >= tip ? TF(1500, 560, spring(t, tip, .45), `<g filter="url(#drop)"><rect x="-330" y="-120" width="660" height="240" rx="30" fill="url(#gPaper)"/></g>${T(-280, -28, "1 Name the property.", 46, P.ink, { a: "start" })}${T(-280, 52, "2 Link it to the job.", 46, P.ink, { a: "start" })}` + stageNote("the tip card: plain lines from \"property\" to waterproof, from \"job\" to rain on the windscreen and dry seats", 140)) : "")
     + coin(t, W("j1006", "two") - .1, 1700, 860, "+2", "line 2") + carRules(t) + HUD(t); };
 /* the board MATCH THE JOB, all seven rows, a green tick at the end of each (ticks); the book's strip 3.30 item 3; SUITABLE pops (lib.js o.at) */
 SC.board = (t, s) => { const L = "j1008";
   return bg("stage2") + stageNote("the car park behind; the board on its low stand, centred between the discs", 1062) + TF(960, 1010, .62, matchBoard(t))
-    + bookCaption(t, L, "It is important to choose a material whose physical property", 110, { size: 46, keys: ["physical", "property"] }) + bookCaption(t, L, "is suitable for the intended use of the object.", 200, { size: 46, off: 10, keys: ["suitable", "intended", "use"] }) + carRules(t) + HUD(t); };
+    + bookCaption(t, L, "It is important to choose a material whose physical property", 330, { size: 46, keys: ["physical", "property"] }) + bookCaption(t, L, "is suitable for the intended use of the object.", 420, { size: 46, off: 10, keys: ["suitable", "intended", "use"] }) + carRules(t) + HUD(t); };
 
 /* 11 · the chant: call and response (common.js chantScene); the board MATCH THE JOB behind the buddies, its PURPOSE / PROPERTY / MATERIAL columns
    flashing on their lines (matchBoard({flash}), placeholder at the lower left; Stage 2: the drawn board, centred and big enough to read) */

@@ -49,7 +49,7 @@ function matchBoard(t, o = {}) { const RT = ROWT(), fl = o.flash || [0, 0, 0], X
   BROWS.forEach((row, r) => { const y = top + 175 + r * 76, ts = RT[r]; if (o.row === r) s += `<rect x="-580" y="${y - 34}" width="1160" height="68" rx="12" fill="${P.sun}" opacity=".35"/>`;
     s += `<path d="M-575 ${y + 38} H575" stroke="${P.ink}" stroke-width="2" stroke-dasharray="3 9" opacity=".3"/>`;
     row.forEach((cell, i) => { const t0 = ts[i]; if (t < t0) return; const k = t0 < 0 ? 1 : spring(t, t0, .35), hop = t0 < 0 ? 0 : 22 * Math.sin(Math.PI * clamp((t - t0) / .35));
-      let inner; if (i === 3) { let cx = 0; inner = cell.map((w) => { const sz = 20, ww = tw(w, sz, 700, "Fredoka", 2) + sz * 1.5, g = TF(cx + ww / 2, 0, 1, CHIPC[w] ? propChip(w, sz) : tpill(0, 0, w, sz, "#fff", P.ink, { w: 700 })); cx += ww + 6; return g; }).join(""); }
+      let inner; if (i === 3) { let cx = 0; inner = cell.map((w) => { const sz = cell.length > 2 ? 15 : 19, ww = tw(w, sz, 700, "Fredoka", 2) + sz * 1.5, g = TF(cx + ww / 2, 0, 1, CHIPC[w] ? propChip(w, sz) : tpill(0, 0, w, sz, "#fff", P.ink, { w: 700 })); cx += ww + 6; return g; }).join(""); }
       else if (i === 1) inner = T(0, 9, cell, 24, P.ink, { a: "start", w: 600 });
       else inner = `<rect x="-6" y="-26" width="${n2(tw(cell, 24, 700) + 22)}" height="52" rx="10" fill="#fff" stroke="${P.ink}" stroke-width="3"/>` + T(5, 9, cell, 24, P.ink, { a: "start" });
       s += TF(X[i], y - hop, k, inner); });
