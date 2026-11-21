@@ -15,11 +15,11 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   R.hum.push([0, S.title.t0 + .2]); R.birds.push([.3, S.title.t0]); E(.5, "kettle"); E(2.0, "koel"); E(1.1, "curious"); E(tb + .1, "slide"); E(tb + .55, "slide"); [0, 1, 2].forEach((i) => E(tb + 1.4 + i * .12, "pop", i));
   // 2 the callback, the title
   E(W("g201", "mould") - .1, "softpop", 0); E(W("g201", "yeast") - .1, "softpop", 2); E(W("g201", "fungi") - .1, "chime"); ["slice", "bag", "days"].forEach((w, i) => E(W("g202", w) - .1, "pip", i));
-  E(S.title.t0 + .05, "whoosh"); E(MK("slam1") + .2, "slam", 0); E(MK("slam2") + .2, "slam", 2);
+  E(S.title.t0 + .05, "whoosh"); E(MK("slam1") + .2, "slam", 0);
   // 3 the game
   E(S.game.t0 + .15, "sting"); { const b = "g301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "lizard") - .1, "chek"); E(W(b, "lizard") + .9, "chek"); }
   // 4 goals, countdown
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
+  ["g402", "g403", "g404"].forEach((id, i) => E(LT(id) - .06, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 Day 1: the slice slides into the bag, the zip, a click
   R.hum.push([S.day1.t0, S.patches.t1]); E(W("g501", "slice") - .1, "slide"); E(W("g501", "seal") - .05, "zip"); E(W("g501", "seal") + .55, "click"); E(W("g501", "one") - .15, "pip", 0);
   // 6 ten days (calm bed, a soft tick per day, a low "ooh" on Day 4, two quiet "chek-chek" while the lizard is on the fridge), HOLD ON!
@@ -52,13 +52,12 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   G(S.reveal.t0 + 1.0, LT("g1002") - .3); C(LE("g1003") + .3, S.mushroom.t0); G(S.mushroom.t0 + .3, MK("gillsdust")); C(MK("gillsdust") + .2, S.mark2.t0); C(LE("g1105") + .3, S.r2card.t0);
   G(S.r2.t0, MK("ring0_3")); G(LT("u1203") - .3, MK("traysIn")); C(MK("traysIn") + .2, S.final.t0); G(S.final.t0, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.cliff.t0); C(S.cliff.t0 + .3, S.nyk.t0 - .2);
   } else {
-  // 1 the silent recap montage: four clacks, a zip, running water
-  for (let i = 0; i < 4; i++) E(S.recap.t0 + i * 1.0 + .02, "clack"); E(S.recap.t0 + .35, "zip"); E(S.recap.t0 + 2.3, "curious"); R.water.push([S.recap.t0 + 3.0, S.recap.t1 + .2]); C(S.recap.t0 + .2, S.lasttime.t0 + .4);
-  // 2 "Last time...": a pluck, two soft pops, running water; Pip, a boop, a curious note
-  R.hum.push([S.lasttime.t0, S.goals.t0]); E(LT("j201"), "pluck", 0); E(W("j201", "harmful") - .1, "softpop", 0); E(W("j201", "useful") - .1, "softpop", 2); R.water.push([W("j201", "washed") - .3, S.pipclean.t0 + 1.2]);
+  // 1-2 the calm recap under "Last time..." (rulebook section 2, 21 Nov: no montage, no clacks): the calm bed, a pluck, one soft pop as each of
+  // the three pictures settles (the picture changes at RECAP2 and RECAP3, set in p2.js from the same words), running water for the hands
+  C(S.lasttime.t0 + .1, S.pipclean.t0); R.hum.push([S.lasttime.t0, S.goals.t0]); E(LT("j201"), "pluck", 0); E(S.lasttime.t0 + .25, "softpop", 0); E(W("j201", "yeast") - .3, "softpop", 1); E(W("j201", "then") - .3, "softpop", 2); R.water.push([W("j201", "washed") - .3, S.pipclean.t0 + 1.2]);
   E(LT("j202") - .05, "boop", 1); E(W("j203", "microscope") - .1, "curious");
   // 3 goals, the game
-  [0, 1, 2].forEach((i) => E(S.goals.t0 + .4 + i * 1.22 - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("j301", "lizard") - .1, "chek"); E(W("j301", "lizard") + .8, "chek");
+  ["j252", "j253", "j254"].forEach((id, i) => E(LT(id) - .06, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("j301", "lizard") - .1, "chek"); E(W("j301", "lizard") + .8, "chek");
   // 4 the microscope (a slide, a pop, the key-word chime), three microscopes (three rising notes, a soft zoom), the three shapes
   E(S.microscope.t0 + .1, "slide"); E(S.microscope.t0 + .55, "softpop", 1); [0, 1, 2].forEach((i) => E(S.scopes.t0 + .3 + i * .55, "rise", i * 2)); E(W("j402", "smaller") - .3, "whoosh");
   ["rod-shaped", "sphere-shaped", "spiral-shaped"].forEach((w, i) => E(W("j403", w) - .1, "softpop", i)); E(W("j404", "bacterium") - .1, "pip", 0); E(W("j404", "bacteria") - .1, "pip", 2); E(LE("j405") + .1, "chime");
@@ -90,7 +89,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(S.final.t0 + .1, "sting"); E(W("j1201", "high") + .2, "slap"); E(W("j1201", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "chek"); E(S.liz.t0 + 1.4, "chek");
   // 13 the dare for Episode 8: three soft pops, a soft pour of sand, a curious note, a boing, a sting
   { const L = "j1301"; ["plastic", "metal", "glass"].forEach((w, i) => E(W(L, w) - .15, "softpop", i)); E(W(L, "sand") - .05, "pour"); E(W(L, "which") - .1, "curious"); E(W(L, "lock") - .1, "sting"); E(W("j1302", "crunchy") - .05, "boing"); }
-  G(S.lasttime.t0 + .5, S.microscope.t0 + .2); C(S.microscope.t0 + .3, S.waitw.t0); G(S.pullout.t0 + .4, S.harmful.t0 + .3); C(S.harmful.t0 + .3, S.r1card.t0);
+  G(S.pipclean.t0 + .3, S.microscope.t0 + .2); C(S.microscope.t0 + .3, S.waitw.t0); G(S.pullout.t0 + .4, S.harmful.t0 + .3); C(S.harmful.t0 + .3, S.r1card.t0);
   G(S.r1.t0, MK("ring0_1")); G(LT("j703") - .5, S.mark1.t0); C(LE("j708") + .3, S.showcard.t0); G(S.show.t0 + .3, MK("ring0_2")); G(LT("j805") - .5, S.map.t0); C(S.map.t0 + .3, LT("u1002") - .3);
   C(S.exambanner.t0 + .4, S.final.t0); G(S.final.t0, S.dare.t0 + .3); C(S.dare.t0 + .5, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2);
   }

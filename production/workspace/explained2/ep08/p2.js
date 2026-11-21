@@ -50,7 +50,7 @@ SC.trees = (t, s) => { const a = "j402", b = "j403", c = "j404", tA = s.t0 + .1,
 /* ============ 5 · Round 1: where do the white drops come from? ============ */
 const CAMSHOE = [1.7, 700, 800];
 SC.r1 = (t, s) => { const tL = LT(L1), a = "j501", tSo = W(a, "sole") - .2;
-  return lockN(t, { cards: ["A cow", "A tree", "A rock"], icons: [TF(0, 0, 1.0, cowIcon()), TF(0, -4, 1.1, treeIcon()), TF(0, -2, 1.1, rockIcon())], q: "Where do the white drops come from?", tq: W(L1, "where") - .1, tc: [W(L1, "one"), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "j503", tin: W(L1, "where") - .3,
+  return lockN(t, { cards: ["A cow", "A tree", "A rock"], icons: [TF(0, 0, 1.0, cowIcon(t)), TF(0, -4, 1.1, treeIcon()), TF(0, -2, 1.1, rockIcon())], q: "Where do the white drops come from?", tq: W(L1, "where") - .1, tc: [W(L1, "one"), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "j503", tin: W(L1, "where") - .3,
     obj: (tt) => TF(430, 470, 1, dropsDisc(tt, 166, "rg")), picks: [{ who: "momo", id: "j504", word: "1", x: true }, { who: "pip", id: "j505", word: "2" }, { who: "basil", id: "j506", word: "2" }],
     react: [[LE("j504") + .1, "momo", "thinking"], [LE("j505") + .1, "pip", "pointing"], [LE("j506") + .1, "basil", "cheer"]],
     pre: (tt) => { if (tt >= tL - .3) return wipe(tt, tL - .04, P.indigo, 430, 470); const e = eio((tt - s.t0) / 1.0), cam = [lerp(CAMW[0], CAMSHOE[0], e), lerp(CAMW[1], CAMSHOE[1], e), lerp(CAMW[2], CAMSHOE[2], e)], gl = tt >= tSo ? .55 + .45 * Math.sin((tt - tSo) * 4) : 0;
@@ -87,11 +87,11 @@ SC.r2 = (t, s) => lockN(t, { cards: ["An animal", "A plant"], q: "Where does cot
   react: [[LE("j805") + .1, "basil", "surprised"], [LE("j806") + .1, "momo", "pointing"], [LE("j807") + .1, "pip", "cheer"]] });
 // a source and an object on one board, joined by one plain line
 const half = (inner, x, id) => `<clipPath id="hf_${id}"><rect x="-118" y="-118" width="236" height="236" rx="18"/></clipPath><g transform="translate(${x} 0)"><g clip-path="url(#hf_${id})"><g transform="scale(.82)">${inner}</g></g><rect x="-118" y="-118" width="236" height="236" rx="18" fill="none" stroke="#C9D2E8" stroke-width="5"/></g>`;
-const pairPic = (src, obj, id) => `<rect x="-300" y="-200" width="600" height="400" fill="#FFF8EA"/>` + half(PIC[src](), -138, id + "a") + half(obj, 138, id + "b") + `<path d="M-30 0 H30" stroke="${P.ink}" stroke-width="7" stroke-linecap="round"/><circle cx="-30" cy="0" r="7" fill="${P.ink}"/><circle cx="30" cy="0" r="7" fill="${P.ink}"/>`;
+const pairPic = (src, obj, id, tt = 0) => `<rect x="-300" y="-200" width="600" height="400" fill="#FFF8EA"/>` + half(PIC[src](tt), -138, id + "a") + half(obj, 138, id + "b") + `<path d="M-30 0 H30" stroke="${P.ink}" stroke-width="7" stroke-linecap="round"/><circle cx="-30" cy="0" r="7" fill="${P.ink}"/><circle cx="30" cy="0" r="7" fill="${P.ink}"/>`;
 const teePic = () => pbg("#DDF4FF", "#C4E6F7", 100) + TF(0, 110, .9, tshirt());
 SC.r2ans = (t, s) => { const a = "j808", j = "j810", tA = W(a, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, tw_ = [W(a, "cotton") - .15, W(a, "wool") - .15, W(a, "silk") - .15], tc = W("j809", "one") - .1;
   const rows = [["cotton", teePic(), "cotton: a plant"], ["sheep", PIC.sweater(), "wool: sheep"], ["cocoon", PIC.scarf(), "silk: a kind of caterpillar"]];
-  return bg("daystage") + rows.map(([src, obj, lab], i) => { const k = spring(t, tw_[i], .45); return k < .02 ? "" : TF(330 + i * 470, 800, .84 * k * (1 + .04 * pulse(t, tw_[i] + .3, .1, .8)), wboard(pairPic(src, obj, "pp" + i), 520, 260, "pr" + i, { lab, size: 40 })); }).join("")
+  return bg("daystage") + rows.map(([src, obj, lab], i) => { const k = spring(t, tw_[i], .45); return k < .02 ? "" : TF(330 + i * 470, 800, .84 * k * (1 + .04 * pulse(t, tw_[i] + .3, .1, .8)), wboard(pairPic(src, obj, "pp" + i, t), 520, 260, "pr" + i, { lab, size: 40 })); }).join("")
     + TF(1700, 600, .6 * spring(t, s.t0 + .15, .45), ansCard(2, "A plant", { lit })) + boardAt(t, 1300, 1066, .42)
     + buddy("basil", 170, 1066, 200, t, { aura: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [W(a, "wool") - .1, "oops"], [W(a, "wool") + 1.2, "sit"], [LE(j) + .1, "cheer"]], nohop: true }) + say(j, 600, 890, t, { size: 44, tail: -300, maxW: 640 }) + buddy("momo", 520, 1066, 150, t, { aura: true, tag: false, in: s.t0 + .3, poses: [[s.t0, "sit"], [tA, "cheer"], [tA + 1.6, "sit"]], nohop: true })
     + coin(t, tc, 960, 330, "+1", "if you showed two fingers") + HUD(t); };

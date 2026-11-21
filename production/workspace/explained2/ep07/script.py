@@ -51,13 +51,13 @@ MARKHOLD = ("wait", 2.5)            # a Mark Sentence card holds 2.5 s after Hea
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 SEQ1 = [
  # ---- 1 · silent cold open: a kitchen table in an HDB flat (7 s); EP6's two boards slide in at 3 s
- ("scene", "cold"), ("wait", 3.0), ("mark", "coldBoards"), ("wait", 4.0),
+ ("scene", "cold"), ("wait", 3.0), ("mark", "coldBoards"), ("wait", 3.5),   # 6.5 s (was 7.0: .5 s of picture-only time given to the goals that Momo now reads)
  # ---- 2 · the callback to Episode 6's dare
  ("scene", "callback"),
  ("say", "g201", H, "Last time, we asked: mould on bread, or yeast for making bread? Both are fungi! Which one is useful?", {"pre": .3}),
  ("say", "g202", B, "Let's find out! One slice of bread. One bag. Ten days!", {"pre": .5, "post": .2}),
  # CUT 1 (script section 6, Part 1 ran 5:18.6): the title card's second slam. Both title lines slam in together at "slam1".
- ("scene", "title"), ("mark", "slam1"), ("wait", 2.1),
+ ("scene", "title"), ("mark", "slam1"), ("wait", 1.9),
  # ---- 3 · the game
  ("scene", "game"),
  ("say", "g301", H, "You lock in first. One finger for every point. And find the lizard!", {"pre": .4, "post": .4}),
@@ -134,7 +134,7 @@ SEQ1 = [
  ("say", "g1105", H, "Fungi can reproduce very quickly through spores.", {"pre": 0, "term": ["spores"]}),
  MARKHOLD, *KWPOP("kw_spores"),
  # ---- 12 · Round 2: the dare from Episode 6. Useful or harmful?
- ("scene", "r2card"), ("wait", 1.4),
+ ("scene", "r2card"), ("wait", 1.1),
  ("scene", "r2"),
  ("say", "g1201", H, "Now, the question from last time! Which fungus is useful? One, mould. Two, yeast. Show me your fingers!", {"pre": .1}),
  *LOCK(3, 3.0),
@@ -168,7 +168,7 @@ SEQ1 = [
  ("say", "g1401", H, "Day ten. The bag goes into the bin, still shut. Then we wash our hands.", {"pre": .3}),
  ("say", "g1402", P, "But they look clean!", {"pre": .5}),
  ("say", "g1403", H, "So what is on them? Find out in Part Two!", {"pre": .5}),
- ("mark", "cliffend"), ("wait", 1.2),
+ ("mark", "cliffend"), ("wait", .9),
  # ---- 15 · "Now you know!" and the outro
  *NYK,
 ]
