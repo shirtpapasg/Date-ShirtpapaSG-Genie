@@ -152,7 +152,7 @@ function woodArt(t) { const b = "j403", c = "j406", tCut = W(b, "cut") - .2, tPl
     ${up > 0 ? TF(lerp(470, -40, up), lerp(194, -30, up), lerp(.5, 1.5, up), plankBig(560, 54, 4, true)) : ""}
     ${be > 0 ? TF(-40, lerp(520, 150, be), 1, `<path d="M-380 44 V150 M380 44 V150" stroke="url(#cSteelH)" stroke-width="24"/>${plankBig(840, 84, 7, true)}`) : ""}
     ${lcLab(t, LT("j405") + .5, -560, 318, "a tree trunk", LX - 160, LY + 20, { t1: tSee - .4, size: 42 })}${lcClock(t, tCut, tSee - .5, -560, -70)}${lcLab(t, tPl + .3, 620, 60, "long, flat planks", 520, 210, { t1: tSee - .4, size: 42 })}
-    ${lcLab(t, tSee + .5, -600, -150, "lines in the plank", -330, -44, { size: 42 })}${lcLab(t, tBench + .5, 470, 300, "the bench: the same lines", 300, 176, { fill: MATK.wood.col, ink: "#fff", size: 42 })}`; }
+    ${lcLab(t, tSee + .5, -600, -150, "lines in the plank", -330, -44, { size: 42 })}${lcLab(t, tBench + .5, 470, 30, "the bench: the same lines", 330, 130, { fill: MATK.wood.col, ink: "#fff", size: 42 })}`; }
 const TV2 = [1.03, 900, 640];
 SC.lcwood = (t, s) => lookCloser(t, s, { tz: LT("j405") - .15, fx: gx(TV2, 1330), fy: gy(TV2, BACKY - 180), art: woodArt, bgc: "#CFEFD6", verdict: ["WOOD: from the trunks of trees", MATK.wood.col], tv: MK("v_wood"),
   over: (tt) => lcStrip(tt, "j403", "The trunks are cut into long, flat planks.", { size: 48, keys: ["trunks", "planks."], t1: LT("j406") - .2 }) });

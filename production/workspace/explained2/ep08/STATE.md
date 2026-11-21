@@ -18,7 +18,7 @@ Three stages: **Stage 1 (setup, done 2026-11-20)** · Stage 2: Fable draws the s
 - Timeline: `python3 build_tl.py 1|2`. New in EP8: `kw` word marks, `("hold", mark, 2.0, .6)` (a new term holds 2.0 s; Heart waits
   >= .6 s), `hold` 3.5 s for cream book strips, `holdw` for the kiln word strip. lib.js `KWHOLD` = 2.0 (was 1.5); Mark Sentence cards
   hold 2.5 s (the timeline's waits).
-- **Lengths: Part 1 5:09.0 (309.0 s), Part 2 4:56.3 (296.3 s).** Both under 5:15: no cuts.
+- **Lengths (Stage 1): Part 1 5:09.0 (309.0 s), Part 2 4:56.3 (296.3 s).** (Now: see Stage 2b.)
 - Sound: `sound_cues.js` -> `node dump_cues.js P` -> `node song.js P` -> `out/mix_pP.wav` (both done, -16.0 LUFS, no missing sounds).
   New: canteen ambience (`R.canteen`, sau sfx `ep05_kids.wav`), library one-shots (`sfx`: hiss, flame_roar, hum, gurgle, squeeze,
   press), synth boing / tok / bubble / pomf / cloth / baa / twang.
@@ -53,6 +53,56 @@ Three stages: **Stage 1 (setup, done 2026-11-20)** · Stage 2: Fable draws the s
   Part 2 Round 1 is the ring picture, not a pop beside the shoe; Part 2's table holds a pencil, the shoe and the T-shirt; Part 1's
   lizard is on the classroom window beside the noodle stall (seen in the Round 2 ring picture); a small round inset of the shoe
   shows where "you" are in the last stop of the sap journey.
+## Stage 2b: done (2026-11-21). The teacher's 21 Nov rules (SERIES_FORMAT 1b, 2, 4, 6, 7, 11) are in. Ready for Stage 3.
+**Lengths now: Part 1 5:45.2 (345.2 s), Part 2 5:24.0 (324.0 s).** Both are over the 5:15 guide because of the seven look-closer moments (never
+cut for length). Already cut (script section 6, non-teaching): "Now, the metal box.", "And the plastic box.", the waits for the "uses" boards
+after GLASS and RUBBER (the boards still show). What could still go, in order: Part 1: Basil's biscuit joke `g1006` (4.9 s; he then has 6 lines
+to Pip's 8), the cold open down to 4 s (2 s), the spoken describing lines of the metal and plastic look-closers `g1011` / `g1012` (11 s; the
+zoom would then run under the book sentence only). Part 2: the chant's all-together bar (`CUTS` "together", 5.4 s; `make_voice.py` re-makes
+the chant), `j405` "Look closer at this tree trunk." (2 s). No teaching line was cut.
+- **LOOK CLOSER (new file `closer.js`, loaded after common.js; scenes `lc*` in `script.py`, all in lib.js `SHELF_HIDE`).** One frame for all:
+  `lookCloser(t, s, o)`: the scene before is drawn without its HUD (`lcSet`, `window._noHud`) and pushed in on the thing, the set dims, a large
+  close-up window opens from that point, a LOOK CLOSER tag, plain label lines (`lcLab`), the book sentence on the cream strip (`lcStrip`), a slow
+  push-in all the way, ONE verdict tag (`lcVerdict`) at the `v_*` mark. No score, no shelf, no buddies.
+  | Scene | Part, time | Close-up held | What is shown | Heart | Verdict |
+  |---|---|---|---|---|---|
+  | `lcglass` | P1 2:47-2:59 | 10.5 s | a furnace cut open: the sand heats, glows, melts, then clears; thermometer | g904 + g905 (book: "When sand is heated until it is very hot, it melts and becomes clear.") | GLASS: melted sand |
+  | `lcmetal` | P1 3:07-3:19 | 9.4 s | the rock under a magnifying glass: shiny bits | g1011 + g1002 (book) | METAL: dug up from the ground |
+  | `lcplastic` | P1 3:27-3:41 | 12.0 s | oil pours into the factory machine; plastic boxes come out | g1012 + g1005 (book) | PLASTIC: made from oil |
+  | `lckiln` | P1 4:33-4:43 | 9.4 s | the kiln cut open: a finger dents the soft clay bowl; in; fire (speeded up); out, hard | g1113 + g1114 (book: "Heating hardens ceramic, but it can break easily.") | CERAMIC: clay, baked hard |
+  | `lcwood` | P2 0:33-0:43 | 8.9 s | a trunk sawn into planks (speeded up); the plank's lines; the bench with the same lines | j405, j403, j406 | WOOD: from the trunks of trees |
+  | `lcsap` | P2 1:53-2:03 | 9.0 s | bark close: the thin cut, white sap runs and drips into the cup (cut open, speeded up); AT THE FACTORY sap -> rubber -> sole | j705, j706 | RUBBER: from the sap of a tree |
+  | `lcfabric` | P2 2:21-2:30 | 8.0 s | the T-shirt's weave: one thread followed over, under, over, under | j811 | FABRIC: woven threads |
+- **Hidden animals, named by Heart at the start with their picture** (`HIDDEN`, `hiddenBadge` in pics.js; "a little sparrow" / "a little sheep",
+  *Can you spot it?*): Part 1 the **sparrow** on the classroom window sill beside the noodle stall (from Round 2's ring to the kiln; it bobs,
+  pecks, flicks its tail), reveal `g1202`. Part 2 the **sheep** (wool; Basil's "like a sheep!") grazing in the field of the "trees" picture board
+  (`PIC.treesS`, in `trees`, the look-closer's field and `paper`; it walks, chews, flicks an ear), reveal `j1102` "It was in the field, beside the
+  trees!" with a ring on the board (`SHEEPXY`). The ant under the bench is gone (`lizUnderBench` is unused). Lines re-recorded: g301, g1202, j301, j1102.
+- **Already in from the 04:30 pass, checked again:** the calm recap in Part 2 (`lasttime`: three pictures, 3.3 / 4.1 / 2.7 s, a label each, under
+  "Last time..."); Part 1 opens on EP7's dare on the live table (no montage). Goal cards read aloud (Pip in Part 1, Basil in Part 2; each card
+  lifts and glows, then a tick). Mark Sentences read by the buddy who says "Say it with me!" (Pip, Basil · Basil, Momo; 0.8 s pause, 2.5 s hold).
+  Lines by buddy: Part 1 Pip 8, Basil 7 (most words), Momo 2; Part 2 Basil 11, Momo 5, Pip 4.
+- **Lock-ins:** the ring's clue tag sits on top of the ring and stays to the end (`lockN` `c.tag` / `c.labels`); a long question is drawn smaller
+  so it clears the bell ("Where do the white drops come from?").
+- **Layout fixes:** "Now you know!": the YOU tag stands with two cheering hands (EP7's `nykScene`, `{ bx, hx }`), props between the discs;
+  the score-hand board and the chant board no longer touch a disc; the dare's cards are wider (no clipped words) and its small print sits under
+  them; the metal book strip clears the shelf.
+- **sg_pron:** `make_voice.py` now sends every Heart and buddy text through `../sg_pron.py` (EP7's `_FixK`). No EP8 line has a listed word.
+- **Voice:** only changed lines were recorded (15: g301, g904, g905, g1011, g1012, g1113, g1114, g1202, j301, j405, j406, j705, j706, j811, j1102);
+  look-closer describing lines at Heart .87 with .6 s between sentences (`LC` in script.py). All aligned.
+- **Sound:** `sound_cues.js` has the look-closer cues (a soft whoosh in, the thing's own sounds, the stamp + a chime on the verdict; the calm bed
+  under them); `cues_p*.json` and `out/mix_p*.wav` rebuilt, both -16.0 LUFS.
+- **Checks (stills only, no page errors):** `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg` (a frame every 3 s), `qa/lc_p1.jpg`, `qa/lc_p2.jpg` (the seven
+  look-closers as strips), `qa/journey_sand.jpg`, `qa/journey_sap.jpg`, `qa/recap_p2.jpg`. `SCENES_TODO.md` regenerated (`make_todo.py`).
+  `../p3_ep08_script.md`: an update note at the top, **[LOOK CLOSER]** rows, the hidden animals, the new sentences in section 10 D.
+- **Deviations from the script (beyond the above):** the kiln's bowl no longer hops back to the counter (it comes out in the look-closer;
+  "It can break easily" is now the book's sentence, spoken, plus the tag); "The trunks are cut into long, flat planks." is said inside the wood
+  look-closer; the weave disc shows only with the book sentence after the fabric look-closer; `paper` and `fabricb` are new scene names that
+  reuse `SC.trees` / `SC.fabric`.
+- **Stage 3, watch in motion:** each look-closer's push-in (the set zooms about the thing while the window opens from it) and its cut back out;
+  the sand slumping as it melts; the magnifying glass sliding in; boxes on the belt; the finger denting the bowl, the bowl's hops in and out;
+  the saw and the planks stacking, the plank rising, the bench sliding in; the sap running along the cut and the drops; the thread's head moving
+  with "over, under"; the sheep's walk in the small picture (it flips when it turns); plus the items listed under Stage 2.
 ## Stage 3: `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`).
 - Stills: `PART=2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg`. Bake backgrounds: `node bake.js <names>`.
 - Status: see ../progress/ep08.json
