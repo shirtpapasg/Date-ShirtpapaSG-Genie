@@ -6,6 +6,7 @@ Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: pitch swing x1.6, 
 Buddies = the Character Voice Kit voices exactly as in characters/sprites/talk_voice.py (voice_maker.CHARACTERS, -18 dB RMS), 12% slower.
 Chant  = each buddy says each call and each answer; every phrase is stretched to one length so the three land together.
 Word times: pocketsphinx forced alignment (sau/build_tl.py's method); a line it cannot align is spread by word length.
+Pronunciation: every line with a word on ../PRONUNCIATION.md (sg_pron.needs_fix) is said through sg_pron.speak_line (teacher, 21 Nov).
 Existing files are kept (safe to re-run after a restart)."""
 import os, sys, json, re, wave, subprocess, numpy as np, soundfile as sf, parselmouth
 from parselmouth.praat import call
@@ -16,10 +17,19 @@ SEQ = SEQS[1] + SEQS[2]
 import pocketsphinx
 from pocketsphinx import Decoder
 D = "/home/user/heart-tts"; SR = 24000; V = f"{H}/voice"; os.makedirs(V, exist_ok=True)
+sys.path.insert(0, os.path.join(H, ".."))
+from sg_pron import needs_fix, speak_line   # the teacher's approved pronunciations (../PRONUNCIATION.md): Sungei Buloh, Semakau, "live"
+class _FixK:
+    """Kokoro, but any text with a name or word on the pronunciation list is said through sg_pron.speak_line (Heart and the buddies)."""
+    def __init__(self, k): self.k = k
+    def create(self, text, voice="af_heart", speed=1.0, lang="en-us", **kw):
+        if not kw.get("is_phonemes") and needs_fix(text): return speak_line(self.k, text, voice=voice, speed=speed, lang=lang)
+        return self.k.create(text, voice=voice, speed=speed, lang=lang, **kw)
+    def __getattr__(self, n): return getattr(self.k, n)     # get_voice_style etc. go straight to Kokoro
 _k = None
 def K():
     global _k
-    if _k is None: _k = vm.load(D + "/kokoro.onnx", D + "/voices.bin")
+    if _k is None: _k = _FixK(vm.load(D + "/kokoro.onnx", D + "/voices.bin"))
     return _k
 sents = lambda t: [p for p in re.split(r"(?<=[.!?])\s+", t) if p.strip()]
 def pron(t):

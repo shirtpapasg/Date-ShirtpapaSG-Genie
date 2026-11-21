@@ -3,7 +3,7 @@ P3 EP7 "A mushroom is NOT a plant: fungi and bacteria": Part 1 "We Sealed Bread 
 "Your Hands LOOK Clean. What Is Living on Them?" (bacteria, the table of clues, the chapter map). Script: `../p3_ep07_script.md` (Fable).
 Three stages: 1 setup (Opus) -> 2 scenes (Fable) -> 3 render (Opus). Status: `../progress/ep07.json`.
 
-## Stage 1 (setup): DONE (20 Nov 2026)
+## Stage 1 (setup): DONE (20-21 Nov 2026)
 - Engine copied from `ep05/` (no `out/`, voices, renders, QA). EP5's scenes were cleared: `p1.js` and `p2.js` are empty stubs that list the
   scenes to draw; `shrink.js` keeps only the generic journey helpers (`youTag`, `feelTag`, `uwRays`, `uwSpecks`, `hexL`); `bg/wetland.png` removed.
   Shared code kept as is: lib.js, common.js, props.js, hotel.js, garden.js, trail.js, wetland.js (its animals are reused on the map), main.js,
@@ -18,6 +18,9 @@ Three stages: 1 setup (Opus) -> 2 scenes (Fable) -> 3 render (Opus). Status: `..
 - Voices: `voice/` (all recorded; ritual lines shared with EP6 were copied from `ep06/voice`). Re-run
   `/home/user/heart-tts/venv/bin/python make_voice.py` after a text change: it keeps finished files and records only changed lines.
   Not aligned (spread by word length, harmless): `hk_yeast`, `j202`.
+- Pronunciation (teacher, 21 Nov): `make_voice.py` sends every Heart and buddy text through `../sg_pron.py` (`needs_fix` -> `speak_line`):
+  Sungei Buloh, (Pulau) Semakau, "live"/"lives" said "liv". No EP7 line contains any of them (checked 21 Nov), so nothing was re-recorded;
+  a future line with one is fixed automatically.
 - Timelines: `python3 build_tl.py 1|2` -> Part 1 **5:15.4**, Part 2 **5:15.4**.
 - Cuts (script section 6; Part 1 first came to 5:18.6): 1 the title's second slam; 2 Heart's "Day ten!"; 3 Momo's "Is it dust?" (Heart now
   says "It is not dust. It grew!"). Part 2 came to 5:15.9: no script cut; 0.5 s came out of two picture-only waits (`pullout`, `dare`).
