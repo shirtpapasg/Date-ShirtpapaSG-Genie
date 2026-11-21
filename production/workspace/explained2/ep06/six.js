@@ -29,12 +29,13 @@ function lakeView(t, o = {}, cam = [1, 960, 540]) { const dk = o.dusk || 0; let 
   for (let i = 0; i < 10; i++) { const a = Math.max(0, Math.sin(t * 1.7 + i * 2.1)); if (a > .6) s += `<g transform="translate(${n2(200 + hash(i, 4) * 1500)} ${n2(520 + hash(i, 6) * 150)}) scale(${n2((a - .6) * 1.6)})"><path d="M0-14 Q2-2 14 0 Q2 2 0 14 Q-2 2 -14 0 Q-2-2 0-14z" fill="#fff" opacity="${n2(1 - dk * .5)}"/></g>`; }
   s += o.back || "";
   if (o.web !== false) s += TF(GD.web[0], GD.web[1], .28, spiderWeb(330, t, { op: .8, w: 3.4 }) + `<g transform="rotate(${n2(1.5 * Math.sin(t * .8))})">${spiderBig({ id: "lk" })}</g>`);
-  if (o.hop !== false) s += TF(GD.hopper[0], GD.hopper[1], .13, `<g transform="rotate(-62)">${grasshopper({})}</g>`);
+  if (o.hop !== false && !(o.liz !== undefined && o.liz < 1)) s += TF(GD.hopper[0], GD.hopper[1], .13, `<g transform="rotate(-62)">${grasshopper({})}</g>`);
   if (o.mon !== false) { const m = o.mon || {}; s += TF(m.x || GD.liz[0], m.y || GD.liz[1], m.k || .34, monitor({ t, tongue: m.tongue !== undefined ? m.tongue : tongueAt(t, 2.0, 7.3), ...m })); }
   if (o.ants !== false) for (let i = 0; i < 7; i++) { const x = 860 + ((i * 52 + t * 18) % 380), ph = t * 9 + i * 1.7; s += TF(x, 898 - (i % 2) * 6, .075, antSmall(ph)); }
   if (dk > .01) s += `<rect x="-400" y="-300" width="2720" height="1700" fill="#5A4A8A" opacity="${n2(.32 * dk)}" style="mix-blend-mode:multiply"/>`;
   s += TF(GD.lamp[0], GD.lamp[1], 1, lampPost(o.lampLit || 0, LAMPH));
-  if (o.liz !== undefined && o.liz < 1) s += `<g transform="translate(${GD.lamp[0]} ${GD.lamp[1] - 250}) scale(${n2(.62 * (1 - o.liz))})">${houseLiz({ t })}</g>`;
+  // the hidden animal (teacher, 21 Nov: a related animal, not always the lizard): the grasshopper hops from its grass blade up onto the lamp post's arm
+  if (o.liz !== undefined && o.liz < 1) s += `<g transform="translate(${GD.lamp[0] - 2} ${GD.lamp[1] - LAMPH - 96 - 60 * o.liz}) scale(${n2(.34 * (1 - o.liz))})">${hopperF(t)}</g>`;
   s += o.items || "";
   return CAM(s, cam[0], cam[1], cam[2]); }
 // a forked tongue flick every few seconds (0..1)

@@ -9,7 +9,7 @@ const ROOST = [[400, 262], [560, 276], [720, 250]];
 function palmView(t, o = {}, cam = [1, 960, 540]) { let s = bg("palmvalley") + dusks(t, 20, 5);
   ROOST.forEach(([x, y], i) => { if (o.hide && o.hide.includes(i)) return; s += TF(x, y, .4, `<g transform="rotate(${n2(2 * Math.sin(t * .9 + i))})">${hangBat({ blink: ((t + i) % 3.3) < .12, baby: i === 1 ? (o.baby || 0) : 0 })}</g>`); });
   s += TF(PV.lamp[0], PV.lamp[1], 1, lampPost(1, 420)) + TF(PV.lamp[0] + 70, PV.lamp[1] - 360, .42, moth(t));
-  if (o.liz !== undefined && o.liz < 1) s += `<g transform="translate(${PV.trunk[0] + 8} ${PV.trunk[1] - 330}) rotate(8) scale(${n2(.6 * (1 - o.liz))})">${houseLiz({ t })}</g>`;
+  if (o.liz !== undefined && o.liz < 1) s += `<g transform="translate(${PV.trunk[0] + 8} ${PV.trunk[1] - 330}) rotate(6) scale(${n2(.42 * (1 - o.liz))})">${squirrelF(t)}</g>`;   // the hidden animal: a plantain squirrel on the palm trunk
   s += o.items || "";
   return CAM(s, cam[0], cam[1], cam[2]); }
 

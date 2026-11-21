@@ -166,7 +166,7 @@ SC.basilsun = (t, s) => { const L = "e1203", tC = W(L, "always") - .1, tS = W(L,
 
 /* ============ 13 · score hand, the lizard ============ */
 SC.final = (t, s) => { const L = "e1301"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "more") - .1, "More than two? You beat the Buddies!", 3], [W(L, "three") - .1, null, 3]], TF(1290, 1062, .36, sixBoard(t, ST()))); };
-SC.liz = (t, s) => { const L = "e1302"; return lizReveal(t, s, L, lakeView(t, { liz: 0 }, [1, 960, 540]), GD.lamp[0], GD.lamp[1] - 250, W(L, "is") - .1, "Is it a reptile?", 0, 60)
+SC.liz = (t, s) => { const L = "e1302"; return lizReveal(t, s, L, lakeView(t, { liz: 0 }, [1, 960, 540]), GD.lamp[0] - 2, GD.lamp[1] - LAMPH - 116, W(L, "is", 1) - .1, "Is it an insect?", 0, 180)
   + buddy("basil", 1760, 1060, 200, t, { aura: true, flip: true, in: s.t0 + .4, poses: [[s.t0, "sit"], [W(L, "reptile") - .1, "cheer"]] }); };
 
 /* ============ 14 · the cliffhanger: wings, at night ============ */

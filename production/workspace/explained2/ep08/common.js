@@ -71,9 +71,10 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
   return bg("stage") + `<g transform="translate(960 ${n2(lerp(505, 330, zb))}) scale(${n2(gs)}) translate(-960 -470)">${main}</g>` + top + `<rect y="800" width="1920" height="280" fill="url(#xFloor)"/>` + (c.pre ? c.pre(t) : "") + note + buds + cards + demo + bubs + (c.over ? c.over(t) : "")
     + stamp(t, tS, 960, lerp(505, 330, zb)) + bellIcon(t, c.ring0) + HUD(t, { score: c.score !== false }); }
 
-/* ============ Mark Sentence card: the buddy beside it SAYS "Say it with me!", 0.8 s, then Heart reads; the card holds 2.5 s (the timeline's wait) ============ */
-function markScene(t, s, o) { const S = TL.lines[o.sayId], ts = S.t, p0 = o.who === "basil" ? "cheer" : "pointing";
-  const poses = [[s.t0, p0], [ts - .12, "sit"], [S.end + .15, p0], ...(o.poses || [])].sort((a, b) => a[0] - b[0]);
+/* ============ Mark Sentence card: the buddy beside it SAYS "Say it with me!", 0.8 s, then the SAME BUDDY reads the whole card aloud, word for word
+   (teacher, 2026-11-21: Heart never reads a card). The words light up as the buddy reads them (lip-sync on the sit sprites); the card holds 2.5 s ============ */
+function markScene(t, s, o) { const S = TL.lines[o.sayId], R = TL.lines[o.id], ts = S.t, p0 = o.who === "basil" ? "cheer" : "pointing", own = R.who === o.who;
+  const poses = [[s.t0, p0], [ts - .12, "sit"], ...(own ? [[R.end + .2, p0]] : [[S.end + .15, p0]]), ...(o.poses || [])].sort((a, b) => a[0] - b[0]);
   return bg("stage2") + (o.under || "") + markCard(t, { footer: "P3 · Diversity · Materials", ...o, t0: s.t0 + .1 }) + buddy(o.who, 330, 960, 400, t, { aura: true, in: s.t0 + .15, poses, jump: [[ts - .1, 26]], nohop: true, wave: true })
     + say(o.sayId, 330, 388, t, { size: 44, tail: 0 }) + (o.extra || "") + HUD(t); }
 

@@ -91,7 +91,8 @@ SEQ1 = [
  HOLD("kw_material"),
  ("scene", "mark1"),
  ("say", "g503", P, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "g504", H, "Materials are used to make objects. Objects are things you use for different purposes.", {"pre": 0}),
+ # teacher, 2026-11-21 (SERIES_FORMAT sections 4 and 7): the buddy who says "Say it with me!" READS the Mark Sentence card; Heart never reads a card
+ ("say", "g504", P, "Materials are used to make objects. Objects are things you use for different purposes.", {"pre": 0}),
  ("wait", 2.5),
  # ---- 6 · HOLD ON! Basil's rule
  ("scene", "listcard"), ("wait", 1.1),
@@ -166,7 +167,7 @@ SEQ1 = [
  ("mark", "bowlback"), ("wait", 1.0),
  ("scene", "mark2"),
  ("say", "g1110", B, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "g1111", H, "Ceramic is a material made from clay. Glass is made from sand.", {"pre": 0}),
+ ("say", "g1111", B, "Ceramic is a material made from clay. Glass is made from sand.", {"pre": 0}),
  ("wait", 2.5), ("mark", "tile_ceramic"), ("wait", .8),
  ("say", "g1112", H, "Two fingers? One finger up!", {"pre": .2, "post": .5}),
  # ---- 12 · score hand, the lizard, the key words
@@ -238,7 +239,7 @@ SEQ2 = [
  ("scene", "mark1"),
  ("say", "j702", B, "Say it with me!", {"pre": .6}), ("wait", .8),
  # SAP pops large BESIDE the card on "sap" (2.0 s) while the reading goes on; its sentence is said slowly and followed by >= .65 s
- ("say", "j703", H, "Rubber can come from the sap of a rubber tree. It can also be made by man using oil from the ground.", {"pre": 0, "term": ["the sap of"], "kw": [["kw_sap", "sap"]]}),
+ ("say", "j703", B, "Rubber can come from the sap of a rubber tree. It can also be made by man using oil from the ground.", {"pre": 0, "term": ["the sap of"], "kw": [["kw_sap", "sap"]]}),
  ("wait", 2.5), ("mark", "tile_rubber"),
  *cut("rubberuses", [("mark", "uses_rubber"), ("wait", 1.2)]),
  ("say", "j704", H, "Two fingers? One finger up!", {"pre": .2, "post": .4}),
@@ -277,7 +278,7 @@ SEQ2 = [
  # ---- 10 · seven tiles, and the chant
  ("scene", "seven"),
  ("say", "j1001", M, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "j1002", H, "Wood, metal, ceramic, rubber, glass, plastic and fabric are some of the materials we use to make the things we need.", {"pre": 0, "speed": .84}),
+ ("say", "j1002", M, "Wood, metal, ceramic, rubber, glass, plastic and fabric are some of the materials we use to make the things we need.", {"pre": 0, "speed": .84}),
  ("wait", 2.5),
  ("scene", "chant"),
  *CHANTSEQ,

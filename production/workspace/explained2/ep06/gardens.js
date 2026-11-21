@@ -9,7 +9,7 @@ const XDEFS6 = () => `${lg("gdSky", [[0, "#8CCBFF"], [.55, "#CDEBFF"], [1, "#FFF
   ${rg("gdLampG", [[0, "#FFF2C0", 1], [.35, "#FFD27A", .7], [1, "#FFB040", 0]])}${rg("gdSun", [[0, "#FFFBE6", 1], [.3, "#FFF0B0", .8], [1, "#FFE08A", 0]])}
   <filter id="gdB6" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>`;
 
-const GD = { liz: [740, 744], web: [262, 772], ants: [560, 902], hopper: [1060, 800], lamp: [1250, 902], palms: 1720, gazebo: [1080, 478] };
+const GD = { liz: [740, 744], web: [262, 772], ants: [560, 902], hopper: [1410, 806], lamp: [1250, 902], palms: 1720, gazebo: [1080, 478] };
 // a rain tree: a wide, flat umbrella of small leaf clusters over a leaning trunk; darker underneath, lit on top. origin = the foot of the trunk
 function rainTree(r, s = 1, dark = 0) { let under = "", c = "", hi = "";
   const cols = dark ? ["#2F5E48", "#3A6E50", "#244E3E"] : ["#4E9E52", "#5DB05C", "#43904C"];

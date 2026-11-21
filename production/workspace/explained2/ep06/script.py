@@ -78,7 +78,7 @@ SEQ1 = [
  ("say", "e606", P, "Oops! Count the legs!", {"pre": .4, "post": .4}),
  ("scene", "mark1"),
  ("say", "e607", M, "Say it with me!", {"pre": .7}), ("wait", .8),
- ("say", "e608", H, "Insects have six legs and a pair of feelers. The body of insects is divided into the head, thorax and abdomen.", {"pre": 0, "term": ["insects", "thorax"]}),
+ ("say", "e608", M, "Insects have six legs and a pair of feelers. The body of insects is divided into the head, thorax and abdomen.", {"pre": 0, "term": ["insects", "thorax"]}),
  ("wait", 2.5), ("mark", "kw_insects"), ("wait", 2.5), ("mark", "kw_hta"), ("wait", 2.4),
  ("scene", "shell"),
  ("say", "e609", H, "Insects have an outer covering that is usually hard and shell-like.", {"pre": .5, "post": .5}),
@@ -131,7 +131,7 @@ SEQ1 = [
  # ---- 12 · cold-blooded
  ("scene", "mark2"),
  ("say", "e1201", B, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "e1202", H, "Reptiles are cold-blooded animals. This means that they do not have a constant body temperature like humans. Their body temperature changes with the environment that they are in.", {"pre": 0, "term": ["cold-blooded"]}),
+ ("say", "e1202", B, "Reptiles are cold-blooded animals. This means that they do not have a constant body temperature like humans. Their body temperature changes with the environment that they are in.", {"pre": 0, "term": ["cold-blooded"]}),
  ("wait", 2.5), ("mark", "kw_cold"), ("wait", 2.4),
  ("scene", "basilsun"),
  ("say", "e1203", B, "Cold-blooded does not mean I am always cold. I warm up in the sun!", {"pre": .4, "post": .5}),
@@ -194,7 +194,7 @@ SEQ2 = [
  ("say", "f603", B, "Fur! Not feathers!", {"pre": .4, "post": .3}),
  ("scene", "mark1"),
  ("say", "f604", P, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "f605", H, "Mammals are animals that have hair or fur as their outer covering.", {"pre": 0, "term": ["mammals"]}),
+ ("say", "f605", P, "Mammals are animals that have hair or fur as their outer covering.", {"pre": 0, "term": ["mammals"]}),
  ("wait", 2.5),
  # ---- 7 · milk, and warm-blooded
  ("scene", "fur4"),
@@ -249,7 +249,7 @@ SEQ2 = [
  ("say", "f1201", H, "Exam corner!", {"pre": .3, "post": .2}),
  ("scene", "mark2"),
  ("say", "f1202", M, "Say it with me!", {"pre": .5}), ("wait", .8),
- ("say", "f1203", H, "Living things such as plants and animals can be classified based on common observable characteristics. There are different types of plants and animals.", {"pre": 0, "term": ["classified"]}),
+ ("say", "f1203", M, "Living things such as plants and animals can be classified based on common observable characteristics. There are different types of plants and animals.", {"pre": 0, "term": ["classified"]}),
  ("wait", 2.5),
  # ---- 13 · score hand and the lizard
  ("scene", "final"),

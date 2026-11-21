@@ -60,7 +60,8 @@ SEQ1 = [
  ("scene", "title"), ("mark", "slam1"), ("wait", 1.9),
  # ---- 3 · the game
  ("scene", "game"),
- ("say", "g301", H, "You lock in first. One finger for every point. And find the lizard!", {"pre": .4, "post": .4}),
+ # the hidden animal (rulebook section 4, teacher 21 Nov): not always the lizard, and the rules line never names it. Part 1 hides a little snail.
+ ("say", "g301", H, "You lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  # ---- 4 · today's goals, READ ALOUD by a buddy (rulebook section 11 step 3, teacher 21 Nov: "make one of the pet buddies read these 3"):
  #      Momo says "Today you'll learn..." and then each card, word for word as printed, about .4 s between cards. Then the countdown.
  ("scene", "goals"),
@@ -120,7 +121,8 @@ SEQ1 = [
  ("say", "g1001", H, "The answer is two. From the bread!", {"pre": 0, "post": .4}),
  ("scene", "mark1"),
  ("say", "g1002", B, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "g1003", H, "Fungi are living things that do not make their own food. Fungi grow on another object. They produce a substance to break down the other object into simpler substances and absorb them as food.", {"pre": 0, "term": ["absorb"]}),
+ # Mark Sentence cards are READ BY THE BUDDY who says "Say it with me!", never by Heart (rulebook sections 4 and 7, teacher 21 Nov)
+ ("say", "g1003", B, "Fungi are living things that do not make their own food. Fungi grow on another object. They produce a substance to break down the other object into simpler substances and absorb them as food.", {"pre": 0, "term": ["absorb"]}),
  MARKHOLD, *KWPOP("kw_absorb"),
  ("say", "g1004", H, "Two fingers? One finger up!", {"pre": .5, "post": .3}),
  # ---- 11 · a mushroom: cap, stalk, gills, spores
@@ -131,7 +133,7 @@ SEQ1 = [
  ("say", "g1103", H, "Mushrooms have spores that are found in gills under the cap. When the wind blows, the spores are dispersed.", {"pre": .5, "term": ["dispersed"], "strip": True, "post": .4}),
  ("scene", "mark2"),
  ("say", "g1104", M, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "g1105", H, "Fungi can reproduce very quickly through spores.", {"pre": 0, "term": ["spores"]}),
+ ("say", "g1105", M, "Fungi can reproduce very quickly through spores.", {"pre": 0, "term": ["spores"]}),
  MARKHOLD, *KWPOP("kw_spores"),
  # ---- 12 · Round 2: the dare from Episode 6. Useful or harmful?
  ("scene", "r2card"), ("wait", 1.1),
@@ -161,7 +163,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "g1301", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .6}),
  ("scene", "liz"),
- ("say", "g1302", H, "Did you spot the lizard? It was on the fridge, with the magnets. Is a lizard a fungus? Tell someone at home.", {"pre": .6, "post": .6}),
+ ("say", "g1302", H, "Did you spot the hidden animal? It was the snail, on the window! Is a snail a fungus? Tell someone at home.", {"pre": .6, "post": .6}),
  *kwrecap(["Bread mould", "Absorb", "Spores", "Yeast"]),
  # ---- 14 · the cliffhanger: clean hands?
  ("scene", "cliff"), ("wait", .6),
@@ -189,7 +191,7 @@ SEQ2 = [
  ("say", "j253", B, "Harmful or useful bacteria.", {"pre": .53}),
  ("say", "j254", B, "The whole chapter on one map.", {"pre": .53, "post": .5}),
  ("scene", "game"),
- ("say", "j301", H, "Lock in first. And find the new lizard!", {"pre": .5, "post": .4}),
+ ("say", "j301", H, "Lock in first. A little animal is hiding in this video. Can you spot it?", {"pre": .5, "post": .4}),
  # ---- 4 · the microscope, and bacteria
  ("scene", "microscope"),
  ("say", "j401", H, "A microscope allows us to see very small things.", {"pre": .6, "term": ["microscope"], "strip": True}),
@@ -223,7 +225,7 @@ SEQ2 = [
  ("say", "j601", H, "Bacteria can be harmful when they cause you to fall sick.", {"pre": .5, "term": ["harmful"], "strip": True}),
  *KWPOP("kw_harmful"),
  ("say", "j602", H, "So wash your hands with soap before you eat.", {"pre": .5, "post": .6}),
- # ---- 7 · Round 1: are all bacteria harmful? (the new lizard is on the kitchen clock)
+ # ---- 7 · Round 1: are all bacteria harmful? (Part 2's hidden animal, an ant, walks by the soap pump in the scene before, `harmful`)
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
  ("say", "j701", H, "Round one. Are all bacteria harmful? One, yes. Two, no. Show me with your fingers.", {"pre": .1}),
@@ -236,7 +238,7 @@ SEQ2 = [
  ("say", "j706", H, "The answer is two.", {"pre": .2, "post": .3}),
  ("scene", "mark1"),
  ("say", "j707", B, "Say it with me!", {"pre": .6}), ("wait", .8),
- ("say", "j708", H, "Some bacteria are harmful, while others are useful to us.", {"pre": 0, "term": ["useful"]}),
+ ("say", "j708", B, "Some bacteria are harmful, while others are useful to us.", {"pre": 0, "term": ["useful"]}),
  MARKHOLD, *KWPOP("kw_useful"),
  ("scene", "body"),
  ("say", "j709", H, "Useful bacteria in our body help us to break down food.", {"pre": .5, "strip": True}),
@@ -271,13 +273,13 @@ SEQ2 = [
  ("say", "j1101", H, "Exam corner!", {"pre": .3, "post": .2}),
  ("scene", "mark2"),
  ("say", "j1102", P, "Say it with me!", {"pre": .5}), ("wait", .8),
- ("say", "j1103", H, "Living things can be classified based on common observable characteristics. Scientists have classified different living things into groups such as plants, animals, fungi and bacteria.", {"pre": 0}),
+ ("say", "j1103", P, "Living things can be classified based on common observable characteristics. Scientists have classified different living things into groups such as plants, animals, fungi and bacteria.", {"pre": 0}),
  MARKHOLD,
  # ---- 12 · score hand and the lizard
  ("scene", "final"),
  ("say", "j1201", H, "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "j1202", H, "Did you spot the lizard? It was on the kitchen clock. Can you see a lizard without a microscope? Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "j1202", H, "Did you spot the hidden animal? It was the ant, by the soap! Can you see an ant without a microscope? Tell someone at home.", {"pre": .5, "post": .5}),
  # ---- 13 · the dare for Episode 8
  ("scene", "dare"), ("wait", .3),
  ("say", "j1301", H, "Next time, something new: materials! A plastic box, a metal box and a glass jar. One of them was made from sand. Which one? Lock in your answer!", {"pre": 0, "post": .3}),
