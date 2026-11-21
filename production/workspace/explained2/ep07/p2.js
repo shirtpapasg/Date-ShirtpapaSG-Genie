@@ -77,8 +77,8 @@ SC.r1 = (t, s) => { const L = "j701";
     labels: (tt) => popTag(tt, W(L, "bacteria") - .1, 430, 250, "bacteria", 40, "#3A8DFF", "#fff"),
     picks: [{ who: "pip", id: "j705", word: "2" }, { who: "basil", id: "j703", word: "1", x: true }, { who: "momo", id: "j704", word: "2" }], react: [[LE("j703") + .1, "basil", "arms_crossed"]] }); };
 const CAMY = [1.2, 640, 640];
-SC.yoghurt = (t, s) => { const L = "j706", tA = W(L, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, op = ss(s.t0 + .05, s.t0 + .4, t), [x1, l1, d1] = hopLow(t, s.t0 + 1.25, 330, 640, 900, 3, .22), [x2, l2, d2] = hopLow(t, s.t0 + 1.5, 330, 800, 910, 3, .22);
-  return kitchenView(t, { tray: false, bowl: false, under: fridgeOpen(op), front: d1 + d2 + (t > s.t0 + .55 ? TF(x1, 900 - l1, 1.0, yoghurtCup()) : "") + (t > s.t0 + .8 ? TF(x2, 910 - l2, 1.0, yoghurtDrink()) : "") + TF(1040, 880, .66, ansCard(2, "No", { lit, size: 70 })) }, CAMY)
+SC.yoghurt = (t, s) => { const L = "j706", tA = W(L, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, op = ss(s.t0 + .05, s.t0 + .4, t), [x1, l1, d1] = hopLow(t, s.t0 + 1.5, 330, 640, 900, 3, .22), [x2, l2, d2] = hopLow(t, s.t0 + 1.25, 330, 800, 910, 3, .22);
+  return kitchenView(t, { tray: false, bowl: false, under: fridgeOpen(op), front: d1 + d2 + (t > s.t0 + .8 ? TF(x1, 900 - l1, 1.0, yoghurtCup()) : "") + (t > s.t0 + .55 ? TF(x2, 910 - l2, 1.0, yoghurtDrink()) : "") + TF(1040, 880, .66, ansCard(2, "No", { lit, size: 70 })) }, CAMY)
     + buddy("pip", 1730, 1050, 200, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [tA, "cheer"]] }) + HUD(t); };
 SC.mark1 = (t, s) => { const L = "j708", tH = W(L, "harmful") - .1, tU = W(L, "useful") - .1, g = (q) => t < q ? 0 : pulse(t, q, .05, 1.2);
   const under = TF(1700, 560, .74, trayWith(1, handsCard("mh"), 1, g(tH))) + TF(1700, 960, .74, trayWith(0, yogCard("my"), 1, g(tU)));

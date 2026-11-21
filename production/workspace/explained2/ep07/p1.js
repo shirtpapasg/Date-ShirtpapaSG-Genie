@@ -150,10 +150,10 @@ const cardPic = (i, t, rise = 0, glow = 0) => i === 0 ? picCardK(TF(0, 110, .7, 
 SC.trays = (t, s) => { const q = "g1206", tI = MK("traysIn"), mk = ["b_mush", "b_dough", "b_tempeh", "b_mould"].map((k) => MK(k) + .35), tc = W("g1213", "one") - .1;
   const [ux, ud] = slideX(t, tI + .05, .5, -700, UX, TY), [hx, hd] = slideX(t, tI + .4, .5, 2400, HX, TY), rise = ss(mk[1] + .9, W("g1210", "rise") + .4, t), tE = W("g1208", "edible") - .1, tNv = W("g1209", "never") - .1;
   // LOOK CLOSER (rulebook 1b): the dough card comes forward and grows while the yeast works; the rest dims; one verdict tag; then it goes back to its tray
-  const zk = ss(mk[1] + .5, mk[1] + 1.2, t) * (1 - ss(MK("kw_yeast") - .6, MK("kw_yeast") - .15, t)), tV = W("g1210", "rise") + .25; let cards = "", hero = "";
+  const zk = ss(mk[1] + .5, mk[1] + 1.2, t) * (1 - ss(MK("kw_yeast") - .6, MK("kw_yeast") - .15, t)), tV = W("g1210", "bread") - .05; let cards = "", hero = "";
   mk.forEach((tl, i) => { if (t < tl - .8) return; const [x, lift, ds, sq] = hopLow(t, tl, i === 3 ? 2100 : -200, SLOT[i], TY - 60), z = i === 1 ? zk : 0;
     const one = TF(lerp(x, 960, z), lerp(TY - 62 - lift, 990, z), lerp(CK, 2.5, z), `<g transform="scale(1 ${n2(sq)})">${cardPic(i, t, rise, i === 1 ? pulse(t, W("g1210", "yeast") - .1, .1, 1.5) : 0)}</g>`);
-    if (z > .01) hero = `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * z)}"/>` + one + popTag(t, tV, 1420, 560, "The dough is bigger: useful!", 44, "#2FA65A", "#fff", MK("kw_yeast") - .5); else cards += ds + one; });
+    if (z > .01) hero = `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * z)}"/>` + one + popTag(t, tV, 1420, 560, "The dough is bigger: useful!", 44, "#2FA65A", "#fff", MK("kw_yeast") - .25); else cards += ds + one; });
   const st = (id, txt, o = {}, next) => strip(t, id, txt, 150, { size: 44, maxW: 1180, x: 860, t1: next ? LT(next) - .32 : LE(id) + .6, ...o });
   return closeBg() + ud + hd + (t >= tI ? TF(ux, TY, 1, sortTray(0, 1190)) + TF(hx, TY, 1, sortTray(1, 420)) : "") + cards + hero
     + buddy("pip", 300, 1060, 360, t, { aura: true, in: s.t0 + .05, out: tI - .05, poses: [[s.t0, "thinking"], [LT(q) - .12, "sit"]] }) + say(q, 760, 470, t, { size: 46, tail: -300, x: true, maxW: 600 })
@@ -161,7 +161,7 @@ SC.trays = (t, s) => { const q = "g1206", tI = MK("traysIn"), mk = ["b_mush", "b
     + st("g1210", "Yeast is another useful fungus as it is commonly used in baking bread to make the dough rise.", { keys: ["useful"], t1: MK("kw_yeast") - .1 }) + st("g1211", "Tempeh is made with a useful fungus.", { keys: ["useful"] }, "g1212")
     + st("g1212", "Bread mould is an example of harmful fungi. Eating mouldy bread can cause us to fall sick.", { keys: ["harmful"], t1: LT("g1213") - .2 })
     + popTag(t, tE, SLOT[0], 474, "edible = safe to eat", 32, "#fff", P.ink) + (t >= tNv ? TF(SLOT[0] + 60, 400, spring(t, tNv, .45), safeBadge("Never pick wild mushrooms!", 30)) : "")
-    + (t >= mk[1] + .6 ? OP(ramp(t, mk[1] + .6, .25), TF(lerp(SLOT[1], 470, zk), lerp(474, 560, zk), 1, `<rect x="-196" y="-27" width="392" height="54" rx="27" fill="${P.ink}" opacity=".9"/><path d="M-170 -11 l14 11 l-14 11z M-154 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up: about 1 hour", 28, "#fff", { w: 600 })}`)) : "")
+    + (t >= mk[1] + .6 ? OP(ramp(t, mk[1] + .6, .25), TF(lerp(SLOT[1], 400, zk), lerp(474, 560, zk), 1, `<rect x="-196" y="-27" width="392" height="54" rx="27" fill="${P.ink}" opacity=".9"/><path d="M-170 -11 l14 11 l-14 11z M-154 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up: about 1 hour", 28, "#fff", { w: 600 })}`)) : "")
     + popTag(t, mk[2] + .3, SLOT[2], 474, "tempeh", 36, "#fff", P.ink) + (t >= mk[3] + .5 ? TF(SLOT[3] + 130, 500, spring(t, mk[3] + .5, .45), tummy(1.1)) : "")
     + coin(t, tc, 1350, 380, "+1", "if you showed two fingers") + HUD(t); };
 SCORE.push([W("g1213", "one") - .1, 3, 2]);
@@ -173,9 +173,10 @@ SC.liz = (t, s) => { const L = "g1302"; return lizReveal(t, s, L, kitchenView(t,
 /* ============ 14 · the cliffhanger: the bag is binned, still shut; hands are washed. But they look clean! ============ */
 const CAMC = [1.1, 1180, 640];
 SC.cliff = (t, s) => { const L = "g1401", p = "g1402", h = "g1403", tThen = W(L, "then") - .25;
-  if (t < tThen) { const tGo = W(L, "bag") - .5, tBin = W(L, "bin") - .1, st = bagPt(TR, 0, 0), u1 = eio((t - tGo - .5) / 1.25), dr = ei((t - (tBin - .3)) / .3), down = eo((t - (tGo - .5)) / .5), lift = t >= tGo ? 1 : 0;
-    const bx = lerp(st[0], KT.bin[0], u1), by = lerp(st[1], KT.bin[1] - 300, u1) - 46 * Math.sin(Math.PI * u1) * 0 + dr * 150, open = ss(tGo + .7, tGo + 1.2, t) * (1 - ss(tBin + .05, tBin + .28, t)), gone = t > tBin + .02;
-    const carried = gone ? "" : `<g transform="translate(${n2(bx)} ${n2(by)})"><g transform="translate(0 ${n2(-700 * (1 - down))})"><g transform="translate(40 -66)">${glovedArm()}</g></g>${lift ? `<g transform="scale(.56)">${bagAlone(10, { rot: lerp(30, 8, u1) })}</g>` : ""}</g>`;
+  if (t < tThen) { const tGo = W(L, "bag") - .5, tBin = W(L, "bin") - .1, st = bagPt(TR, 0, 0), u1 = eio((t - tGo - .3) / 1.0), tArr = tGo + 1.3, dr = ei((t - tArr) / .3), ret = ei((t - tArr - .3) / .5), down = eo((t - (tGo - .5)) / .5), lift = t >= tGo ? 1 : 0;
+    const bx = lerp(st[0], KT.bin[0], u1), by = lerp(st[1], KT.bin[1] - 300, u1), open = ss(tGo + .6, tGo + 1.0, t) * (1 - ss(tArr + .35, tArr + .6, t)), gone = t > tArr + .3;
+    // the gloved hand carries the bag to the open bin, lets it drop in, then lifts away (it never just vanishes)
+    const carried = ret >= 1 ? "" : `<g transform="translate(${n2(bx)} ${n2(by)})"><g transform="translate(0 ${n2(-700 * (1 - down) - 760 * ret)})"><g transform="translate(40 -66)">${glovedArm()}</g></g>${lift && !gone ? `<g opacity="${n2(1 - dr)}" transform="translate(0 ${n2(dr * 150)}) scale(.56)">${bagAlone(10, { rot: lerp(30, 8, u1) })}</g>` : ""}</g>`;
     return kitchenView(t, { day: 10, tray: lift ? { noBag: true } : D10, rise: 1, bin: open, front: carried + (gone ? "" : ""), binIn: "" }, CAMC)
       + popTag(t, W(L, "still") - .1, kx(CAMC, KT.bin[0]) - 10, ky(CAMC, KT.bin[1] - 330), "still shut", 46, P.sun, P.ink) + wipe(t, tThen, "#DCE3EA", 1500, 400) + HUD(t); }
   const tW = W(L, "wash") - .3, tQ = LE(p) + .1, tP = W(h, "find") - .1, wat = ss(tW, tW + .3, t) * (1 - ss(LT(p) - .5, LT(p) - .1, t));

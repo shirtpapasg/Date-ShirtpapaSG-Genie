@@ -1,3 +1,5 @@
+> STALE (Stage 3, 21 Nov): written before Stage 2. Its descriptions (the lizard, the old recap montage) no longer match the built scenes; see STATE.md and p1.js / p2.js.
+
 # EP7 scenes to draw (Stage 2, for the artist)
 
 P3 EP7 "A mushroom is NOT a plant: fungi and bacteria". Script: `../p3_ep07_script.md`. Stage 1 (setup) is done: `script.py`, the voices,

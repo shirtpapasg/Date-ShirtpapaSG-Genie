@@ -47,7 +47,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 13 the score hand, the hidden animal (the snail on the window)
   E(S.final.t0 + .1, "sting"); E(W("g1301", "high") + .2, "slap"); E(W("g1301", "three") - .1, "pip", 2); E(S.liz.t0 + .5, "softpop", 1); E(S.liz.t0 + 1.4, "chime2", 0);
   // 14 the cliffhanger: the bin lid, running water, a low drum, a slam
-  { const L = "g1401"; E(S.cliff.t0 + .1, "whoosh"); E(W(L, "bin") + .1, "binlid"); R.water.push([W(L, "wash") - .3, LE("g1403") + .3]); E(W("g1402", "clean") + .1, "curious"); E(W("g1403", "what") - .1, "lowdrum"); E(W("g1403", "find") - .1, "slam", 1); }
+  { const L = "g1401"; E(S.cliff.t0 + .1, "whoosh"); E(W(L, "bin") + .3, "binlid"); R.water.push([W(L, "wash") - .3, LE("g1403") + .3]); E(W("g1402", "clean") + .1, "curious"); E(W("g1403", "what") - .1, "lowdrum"); E(W("g1403", "find") - .1, "slam", 1); }
   G(S.title.t0 + 1.0, S.count.t0 - .2); G(S.day1.t0 + .2, S.days.t0); G(S.holdon.t0, LT("g603") - .1); G(LT("g604"), S.patches.t0 + .2); C(LE("g702"), S.r1card.t0); G(S.r1.t0, MK("ring0_2")); G(LT("g803") - .5, S.waitw.t1 - 1.5);
   G(S.reveal.t0 + 1.0, LT("g1002") - .3); C(LE("g1003") + .3, S.mushroom.t0); G(S.mushroom.t0 + .3, MK("gillsdust")); C(MK("gillsdust") + .2, S.mark2.t0); C(LE("g1105") + .3, S.r2card.t0);
   G(S.r2.t0, MK("ring0_3")); G(LT("u1203") - .3, MK("traysIn")); C(MK("traysIn") + .2, S.final.t0); G(S.final.t0, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.cliff.t0); C(S.cliff.t0 + .3, S.nyk.t0 - .2);

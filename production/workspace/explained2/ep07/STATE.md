@@ -74,3 +74,33 @@ Stage 3 should watch the two journeys, the bag being binned (`cliff`), the yoghu
 One part end to end: `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`).
 10 s chunks are kept in `out/chunks_pP/`. Then thumbnails (`thumb_still.js`, `thumb.js`), `upload.json`, and the upload (SERIES_FORMAT
 section 10, Autopilot). Never commit .mp4 or .wav.
+
+## 21 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE
+- Rendered with `./build_part.sh 1|2` (10 s chunks kept in `out/chunks_p1`, `out/chunks_p2`, so a later patch only re-renders the chunks it touches).
+  `ep07_part1.mp4` 317.17 s (5:17.2), `ep07_part2.mp4` 315.50 s (5:15.5); 1920x1080 30 fps, both -16.0 LUFS, 0 page errors.
+  Captions `ep07_part1.srt` (137 cues), `ep07_part2.srt` (139 cues); contact sheets `sheet_part1.png`, `sheet_part2.png`.
+- Checked (stills across both parts `qa/c1a-f.jpg`, `qa/c2a-f.jpg`; from the final files `qa/stage3_p1.jpg`, `qa/stage3_p2.jpg`; motion strips
+  `qa/m/`, `qa/m_bin.jpg`, `qa/m_yog.jpg`): hidden snail / ant named by Heart at the start with their picture and "Can you spot it?"; snail on the
+  window during the time-lapse, ant by the soap pump, both circled in the reveal; goal cards read by Momo (P1) / Basil (P2), each lifting; Mark
+  Sentences read by the buddy who said "Say it with me!"; lock-in clues ("Nobody fed it!", "1 mould / 2 yeast", "bacteria", "line 1, 2 or 3?")
+  above the ring and kept to the bell; calm recap (three held pictures, one label each); look-closer holds (time-lapse 7.6 s, magnifier 12.8 s,
+  dough about 6.5 s, round view 14 s); the two journeys play smoothly; count-in onsets measured on the files 1.00 / 1.00 s apart (P1 308.93/309.93/310.93,
+  P2 307.26/308.26/309.26); thumbnails read well. Showdown reveal, dare, chant and yoghurt scene checked.
+- Fixed (small, local; only the touched chunks re-rendered):
+  - Lock-in question longer than 28 characters drawn at 52 px (common.js lockN): P1 Round 1's "How does the mould get its food?" ran under the bell.
+  - P1 Mark Sentence 1: the "+1 if you showed two fingers" coin was cut off at the bottom (now under the card).
+  - P1 mushroom strip ("Mushrooms have spores ... dispersed.") ran into the key-word shelf: narrower (x 860, maxW 1180).
+  - P1 dough look-closer: the verdict "The dough is bigger: useful!" showed for 0.3 s; now from "bread" to just before the YEAST pop (2.2 s).
+    The "speeded up: about 1 hour" tag no longer overlaps the zoomed card.
+  - P1 bag into the bin: the bag vanished half way (its end was tied to the word "bin"); now the gloved hand carries it all the way, it drops in,
+    the lid shuts and the hand lifts away; bin-lid sound moved with it (sound_cues.js, W("bin") + .3).
+  - P1 outro: the YOU hands covered the USEFUL tray's label; nykScene(t, s, prop, { bx, hx }) now takes buddy / hand positions; P1 uses
+    Pip 230, Momo 1340, Basil 1700, hands 490, trays at 743 / 997 (scale .8). Part 2's outro is unchanged.
+  - P2 yoghurt: Pip's disc was cut off at the right edge (now 1730); the drink leads so cup and drink never pass through each other.
+  - P2 Showdown: Momo's pick card was cut off at the right edge (Momo 1752, card 1850).
+  - P2 chant: the two empty USEFUL / HARMFUL trays now carry their pictures (yoghurt; hands with the tummy ache).
+- Uploaded with `upload.json` (Made for Kids, public; both playlists after Ojuq9XJI66E; replaces hPr9v0QXres, retire_old: it stays public, out of
+  the playlists, its description points to Part 1): Part 1 https://www.youtube.com/watch?v=v1WKPqkfQ7w , Part 2 https://www.youtube.com/watch?v=PBoXgjYIun4 .
+- Left for the teacher: Part 1 is 5:17.2 (2 s over the 5:15 guide; not cut, as asked; next cut would be Basil's "Nice cap!"). Part 2's outro has the
+  small concept map in the bottom fifth (as EP6 v2's). The white glove that points at Pip's fingertip in `pipclean` is plain; a human should listen once.
+- `SCENES_TODO.md` is stale (marked at its top).
