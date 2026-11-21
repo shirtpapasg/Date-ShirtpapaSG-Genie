@@ -61,3 +61,17 @@ Checks: `qa/v2_p1.jpg`, `qa/v2_p1b.jpg`, `qa/v2_p2_open.jpg`, `qa/v2_p2_birds.jp
 `qa/v2_zoo_birds.jpg` (every animal); single stills `qa/v2_*_pN_*.jpg`. Before: `qa/v2_before_*.jpg`.
 Still to do (Stage 3): render both parts with `EP_OUT=v2`, watch the penguin, ostrich and wing motion once in the film, LISTEN to the new takes (the "leev"
 lines, the buddies' card readings), new `.srt`, `upload_v2.json`, upload. The thumbnails still use the frames `&thumb` (new animals: remake them with `thumb_still.js`).
+
+## VERSION 2 LIVE (21 Nov 2026, Stage 3: Opus)
+- Rendered with `EP_OUT=v2 ./build_part.sh 1|2` (the script takes `/tmp/explained_render.lock` itself around render and finish; do not wrap the
+  whole script in the same lock, it would wait on itself). `v2/ep05_part1.mp4` 305.5 s, `v2/ep05_part2.mp4` 309.2 s, 1920x1080 30 fps, both -16.0 LUFS.
+  New `v2/ep05_partP.srt`, `v2/sheet_partP.png`; check stills `v2/qa/p1_checks.jpg`, `v2/qa/p2_checks.jpg`. Render chunks deleted after the upload.
+- Thumbnails: `node thumb_still.js N 1 v2/th/fN.png "&thumb"`, then `node thumb.js v2/th/f1.png v2/thumb_part1.jpg 1 "ONE GROUP" "OR THREE?"` and
+  `node thumb.js v2/th/f2.png v2/thumb_part2.jpg 2 "THIS FISH|WALKS ON" "LAND!" 230` (same words and layout as v1; before/after: `v2/th/compare.jpg`).
+- Checks passed (no re-render): "Say it with me!" -> buddy reading after 0.96 s (all four); goal cards read by Pip / Momo with the card glowing;
+  Part 2 lock-in clues (fins, scales, gills) above the ring through the countdown; calm Part 2 recap; chant (Part 2) and key-word read-along (both);
+  "One!", "two!", "Now you know!" 1.00 s apart with the blast (about +5 dB) on "know"; outro 5.6 s; hidden-animal lines generic, reveals duck / frog.
+- YouTube (`upload_v2.json`, same titles, descriptions and tags as v1; the v1 descriptions never named the lizard): Part 1
+  https://www.youtube.com/watch?v=M2PLrTN65vM , Part 2 https://www.youtube.com/watch?v=arTMOT9X1iE . Both playlists: EP4 Part 2 (HCDeYV32P8w) ->
+  M2PLrTN65vM -> arTMOT9X1iE -> EP6 n_NzfK47Sgc -> NpkenGlnOVQ (checked). v1 O1KiFUs7pkE / 2WuoSmh7xWY left the playlists, stay public, and their
+  descriptions start with "NEW VERSION" pointing to M2PLrTN65vM. Captions (.srt) not sent by the uploader.
