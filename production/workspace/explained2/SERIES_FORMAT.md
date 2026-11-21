@@ -285,6 +285,16 @@ order). Send the teacher the finished parts and the list of things to check; the
    towards monetising it. Keep the old one up, take it out of the main level playlist, and point it to the new episode
    (a card, the end screen or a line in the description). Ask the teacher before making it unlisted or private:
    watch time on unlisted or private videos does not count towards YouTube's public watch hours.
+6. **The pipeline runs ahead on its own (teacher, 2026-11-21: "always write script automatically once 2 episode before is live,
+   one episode before start rendering").** When episode N goes live, without waiting to be asked:
+   - start building episode N+1 (setup, drawing, render, checks, upload), and
+   - start writing the script for episode N+2.
+   Example: EP8 live → build EP9 and write the EP10 script; EP9 live → build EP10 and write the EP11 script. Follow the P3 series
+   plan (`Plans/videos/P3-series-plan.md` in the 2nd brain) row by row. One agent per job and the right model for each (Fable:
+   scripts and drawing; Opus: setup, voices, render, checks, uploads, fixes); a script and a build may run side by side, but never
+   two builds or two renders at once. A script's questions for the teacher go to the teacher when it is written; the build of that
+   episode waits only for answers that change what is said or shown. Pauses the teacher asks for (e.g. "episode 7 & 8 can wait")
+   override this rule until they say go.
 
 ## 11. Episode template (one part, about 4 to 5 min)
 
