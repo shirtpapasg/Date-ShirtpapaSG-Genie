@@ -54,9 +54,13 @@ Also read:
   - a tease of Part 2 ("Find out in Part 2!"),
   - its own score,
   - its own key-word recap.
-- **Part 2** opens with:
-  - a short silent recap montage,
-  - then a "Last time…" line that is TRUE to what Part 1 showed.
+- **Part 2** opens with a calm, focused recap (teacher, 2026-11-21, on EP5 Part 2 0:00–0:04: "the blinking around is too quick and
+  i see no meaning to the kids… too fast with no focus"):
+  - NO fast flashing montage. At most 2 or 3 pictures from Part 1, each held at least 2.5 s, one at a time, centred and large,
+    with a gentle push-in (no blinking, flicker or fast cuts);
+  - each picture has one short label that says what it means (e.g. "The frog: moist skin");
+  - Heart speaks over them: the "Last time…" line, TRUE to what Part 1 showed, so every picture has a meaning;
+  - about 8–10 s in all, then the new question of Part 2.
 - Each part keeps its own score ("You vs the Buddies").
 
 ## 3. Pacing (the teacher: "too fast… no time for students to digest")
