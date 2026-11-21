@@ -32,7 +32,7 @@ Rules kept here (SERIES_FORMAT.md section 10):
 - IDs are kept in explained_uploaded.json (gitignored), so a re-run skips what is done. A quota error stops the run
   cleanly; run it again after the daily reset (08:00 UTC) to finish.
 """
-import json, os, sys, time, urllib.request, urllib.error
+import json, os, re, sys, time, urllib.request, urllib.error
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from yt import call, API, UP
 
@@ -103,8 +103,6 @@ for pl in cfg.get('playlists', []):
     for p, vid in zip(cfg['parts'], ids):
         if not goes_in(p, pl): print("  playlist", pl['id'], "skipped for", p['key'], "(a Short goes only in the Shorts playlist)"); continue
         if vid in have: pos = have.index(vid) + 1; continue
-        if CHECK and anchor and anchor not in have and anchor in [q['key'] for c in [cfg] for q in c['parts']] + list(done):
-            print("  playlist", pl['id'], f"would insert {p['key']} after {anchor}"); continue
         if CHECK and anchor and anchor not in have and not re.fullmatch(r'[\w-]{11}', anchor):
             print("  playlist", pl['id'], f"would insert {p['key']} after part '{anchor}' once that is uploaded"); continue
         if anchor and anchor not in have: sys.exit(f"STOPPED: 'after' {pl.get('after')} is not in playlist {pl['id']}")
