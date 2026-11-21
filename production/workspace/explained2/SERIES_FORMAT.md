@@ -174,6 +174,12 @@ Also read:
 - **Every label and small print fits fully inside the frame.** Label lines never cross other objects.
 - Frames are a pure function of t. Render in 10 s chunks so restarts lose little.
 
+- **Animals are cute AND alive (teacher, 2026-11-21, on EP5's penguin: "not cute and not animated properly").** Every animal is
+  drawn in the buddies' warm, rounded, big-eyed style (soft shapes, a face with friendly eyes and a highlight, a little smile) while
+  keeping its true shape from real photos (a penguin: upright, black back and flippers, white belly, orange feet and beak; an
+  ostrich: long neck, big round body, long legs). And every animal moves: an idle loop (blink, breathe, small bob) plus its own
+  action where it appears (a penguin waddles and flaps its flippers, a bird hops or flutters, a fish swims, a frog hops). Never a
+  stiff still sticker.
 - **Props never hide behind the buddies (teacher, 2026-11-21).** A board or prop that shares the frame with the buddy discs is
   centred in the free space between them and big enough to read (the EP6 outro's SIX ANIMAL GROUPS board: centred between Pip
   and Momo, 30% taller); it never sits behind or under a disc.
