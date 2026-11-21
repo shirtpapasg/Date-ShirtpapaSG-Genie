@@ -14,7 +14,7 @@ const PBX = [1420, 1650], PBY = TYD - 62;                // EP8's two picture bo
 const dareBoards = (t, tb, o = {}) => [["band1", "rubber", MATK.rubber.col], ["stick", "wood", MATK.wood.col]].map(([nm, tg, col], i) => { const t0 = tb + i * .45; if (t < t0) return ""; const [bx, ds] = slideX(t, t0, .7, 2400, PBX[i], PBY);
   return ds + picBoard(nm, bx, PBY, 1, { sc: .56, id: "c" + i }) + (t >= t0 + .8 ? TF(bx - 70, PBY - 196, spring(t, t0 + .8, .4), `<g transform="rotate(-8)">${tpill(0, 0, tg, 30, col, "#fff", { w: 700 })}</g>`) : ""); }).join("");
 // the thumbnail's frame (thumb_still.js ... "&thumb"): the two strips on the stand, the paper strip's tear opening at 3, the fabric strip whole; Momo surprised
-const THUMB1 = (t) => { const cam = [1.72, 1010, 760]; return deckView(t, { spider: false, stand: { paper: { n: 3, tear: .62, ck: 0 }, fabric: { n: 3, taut: 1 } } }, cam)
+const THUMB1 = (t) => { const cam = [1.72, 1180, 760]; return deckView(t, { spider: false, stand: { paper: { n: 3, tear: .62, count: false }, fabric: { n: 3, taut: 1, count: false } } }, cam) + TF(gx(cam, DK.stand - 250), gy(cam, TYD - 270), 1.5, counterPill(3, 0, 1))
   + buddy("momo", 215, 800, 250, t, { aura: true, tag: false, pose: "surprised", still: true }) + logo(t); };
 SC.cold = (t, s) => { if (location.search.includes("thumb")) return THUMB1(t); const tb = MK("boardsIn"), tp = MK("budsIn"), z = 1.02 + .02 * eio(t / 7);
   return deckView(t, { bag: true, tray: true, stand: {}, flat: true, back: dareBoards(t, tb) }, [z, 960, 600])
@@ -89,7 +89,7 @@ SC.pullout = (t, s) => { const L = "g901", e = eo((t - s.t0) / 1.0), cam = [lerp
     + wipe(t, s.t0, THREADC) + HUD(t); };
 const pushPull = (t) => { const R = "g903", t1 = W(R, "pulled") - .05, t2 = W(R, "pushed") - .05, one = (x, t0, pic, lab) => { const on = t >= t0, l = on ? pulse(t, t0, .05, 1.0) : 0; return TF(x, 930, (1 + .1 * l), OP(on ? 1 : .5, (l > .05 ? `<circle r="112" fill="${P.sun}" opacity="${n2(.7 * l)}" filter="url(#b10)"/>` : "") + pic + tpill(0, 118, lab, 40, on ? P.ink : "#fff", on ? "#fff" : P.ink, { w: 700 }))); };
   return one(900, t1, pullPic(), "pulled") + one(1180, t2, pushPic(t >= t2 ? pulse(t, t2, .05, .6) : 0), "pushed"); };
-SC.mark2 = (t, s) => markScene(t, s, { id: "g903", sayId: "g902", who: "basil", n: "2 of 2", text: "The strength of a material is its ability to be pulled or pushed without breaking or tearing.", keys: ["strength", "pulled", "or", "pushed", "without", "breaking", "tearing."], size: 62, y: 190, footer: FOOT,
+SC.mark2 = (t, s) => markScene(t, s, { id: "g903", sayId: "g902", who: "basil", n: "2 of 2", text: "The strength of a material is its ability to be pulled or pushed without breaking or tearing.", keys: ["strength", "pulled", "or", "pushed", "without", "breaking", "tearing."], size: 60, y: 190, w: 940, footer: FOOT,
   extra: pushPull(t) + TF(1620, 1056, .5, board3(t, { glow: t >= MK("tick1") - .6 && t < MK("tick1") + 1.2 ? 0 : -1 })) });
 
 /* ============ 10 · test two: DROP, and HOLD ON! ============ */
@@ -132,7 +132,7 @@ SC.cliff = (t, s) => { const a = "g1301", b = "g1302", c = "g1303", tB = W(a, "b
   return deckView(t, { long: true, stand: false, board: { glow: t >= tB ? 2 : -1 }, boardS: .56, boardX: 1560, front: brd("band1", 0, tR, "a rubber band") + brd("stick", 1, tS, "a wooden ice-cream stick") }, CAMD)
     + (t >= s.t0 + .2 ? TF(960, 190, spring(t, s.t0 + .2, .45) * (1 - ramp(t, tR - .2, .25)), tpill(0, 0, "Two tests done!", 60, P.sun, P.ink, { w: 700 })) : "")
     + (t >= tQ ? TF(gx(CAMD, 955), gy(CAMD, TYD - 100), spring(t, tQ, .5) * (1 + .06 * Math.sin(t * 5)), `<g filter="url(#dropS)"><circle r="62" fill="url(#gSun)"/></g>${T(0, 32, "?", 96, P.ink)}`) : "")
-    + buddy("basil", 190, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [tR, "surprised"], [LT(b) - .12, "sit"], [LE(b) + .1, "surprised"]] : [[s.t0, "sit"], [tR, "surprised"]] }) + (hb ? say(b, 480, 560, t, { size: 48, tail: -220, maxW: 600 }) : "") + sMomo(t, { poses: [[s.t0, "sit"], [tQ, "thinking"]] })
+    + buddy("basil", 190, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [tR, "surprised"], [LT(b) - .12, "sit"], [LE(b) + .1, "surprised"]] : [[s.t0, "sit"], [tR, "surprised"]] }) + (hb ? say(b, 430, 470, t, { size: 46, tail: -220, maxW: 520 }) : "") + sMomo(t, { poses: [[s.t0, "sit"], [tQ, "thinking"]] })
     + (t >= tP ? TF(960, 400, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="190" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="30" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + HUD(t); };
 
 /* ============ 14 · "Now you know!": the board OUR 3 TESTS stands centred in the free space between the buddies ============ */

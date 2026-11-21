@@ -225,7 +225,7 @@ const KWHOLD = 2.0;
 // EP9: FRAGILE and STRONG pop BESIDE the book's strip as Heart reads "Glass is fragile, but metal is strong." (o.at, no dimming); FLEXIBLE and
 // RIGID pop beside Momo's Mark Sentence card as she reads them. Shelf order = read-along order (the script's): STRONG sits above FRAGILE.
 const KW = (PART === 1 ? [["PHYSICAL PROPERTY", "kw_property", 1], ["STRENGTH", "kw_strength", 1], ["STRONG", "kw_strong", 1, null, { at: [1370, 800], size: 100 }], ["FRAGILE", "kw_fragile", 1, null, { at: [550, 800], size: 100 }]]
-  : [["FLEXIBILITY", "kw_flexibility", 1], ["FLEXIBLE", "kw_flexible", 1, null, { at: [1080, 900], size: 90 }], ["RIGID", "kw_rigid", 1, null, { at: [1560, 900], size: 90 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+  : [["FLEXIBILITY", "kw_flexibility", 1], ["FLEXIBLE", "kw_flexible", 1, null, { at: [940, 905], size: 84 }], ["RIGID", "kw_rigid", 1, null, { at: [1400, 905], size: 84 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lcpaper: 1, lcpull: 1, lcdrop: 1, lcbend: 1, lctubes: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;

@@ -6,7 +6,7 @@ section 12: "fragile" is said FRAJ-ile; strength first, EP8's dare answered in P
 the metal cup bouncing too; the cute spider stays as Part 1's hidden animal). **EP9 replaces no old video on upload** (the classic
 5fBBrJMrAcU stays in the playlists until EP10 is live; EP10 then retires it).
 
-Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · Stage 2: Fable draws the scenes (`SCENES_TODO.md`) · Stage 3: render (Opus).
+Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing, done 2026-11-21, Fable)** · Stage 3: render and upload (Opus).
 
 ## Stage 1: done
 - **Engine copied from `ep08/`** with EP7/EP8's 21 Nov fixes kept: buddies read the goal cards (`goals3`) and the Mark Sentences (`markScene`),
@@ -64,12 +64,54 @@ property tiles, the EP10 dare boards (spoon in a tub of water; a giant metal shi
 `bendArt`, `tubesArt`). Two journeys (inside a fabric bag's weave; a rubber band at a chicken rice stall). Two hidden animals, cute and alive:
 the spider on its thread by the letterboxes, the caterpillar on the slide's handrail. Reused: EP8's THE 7 MATERIALS board and the two dare boards.
 
-## Stage 2 (Fable): draw the scenes in `SCENES_TODO.md`
-- Stills: `PART=1|2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg` (prints page errors). Draw one expression: `node probe.js out.jpg 1 '<js>'`.
-- Bake a static set: `NODE_PATH=$(npm root -g) node bake.js <name>` (writes `bg/<name>.png` and `bg/manifest.js`).
-- After any change to `script.py`: `/home/user/heart-tts/venv/bin/python make_voice.py`, `python3 build_tl.py 1` and `2`, `python3 make_todo.py`;
-  after any change to a cue: `node dump_cues.js P && node song.js P`.
-- Then write progress/ep09.json (pct 75, "Stage 2: drawing done (Fable)", next "Stage 3: render (Opus)").
+## Stage 2: done (2026-11-21, Fable). Every scene is drawn; no `phScene` / `lcPH` / `ringPH` placeholder is left in `p1.js` / `p2.js`.
+**Lengths unchanged: Part 1 5:09.9, Part 2 4:57.3** (no picture-only time added, no cut used; `script.py` and the voices untouched).
+- **New file `voiddeck.js`** (loaded after tests.js; gradients `XDEFS9`, added to main.js): the sets `BG.voiddeck`, `BG.voiddeckL` (long afternoon
+  light, the cliffhanger), `BG.playground`, all baked in `bg/`; `deckView` / `playView` (things stand at `TYD` / `TYP`; places `DK`, `PK`);
+  OUR TEST STAND (`testStand`: clamps, `stripSvg` paper / fabric with bend, tear from the left edge, the dropped piece; `hangerSvg`, weights,
+  mat, `counterPill` WEIGHTS: n), `stripsFlat`, `weightTray`, `fabricBag(full)`, the gloved hands `glovePinch` / `gloveFinger`, `metalCup`,
+  `glassCup(crack)`, `glassPieces` (five big pieces), `dropBox`, `safetyCard`, the rubber band `bandPts` / `bandSvg(fold, twist)`, the stick
+  `stickSvg({bend, crack, snap})`, `bandTray`, `ansTray` FLEXIBLE / RIGID, `tubeSvg` / `tubeClamp` / `hookWeight` / `tubeRig`, the five property
+  tiles `propTile`, goal icons, `pullPic` / `pushPic`, `PIC.rtile` / `PIC.ctile` / `PIC.spoonTub` / `PIC.ship` (EP10 reuses the last two),
+  `momoNotes`, the hidden animals `spiderBody` / `spiderArt` / `spiderOnThread` and `caterpillarBody` / `caterpillarArt` / `catOnRail`.
+  `tests.js`: `board3` redrawn (same name and arguments). `closer.js`: `lcVerdict` takes two lines + small print + an x offset; the five
+  pictures `paperArt`, `pullArt`, `dropArt`, `bendArt`, `tubesArt`. `shrink.js`: both journeys. `lib.js`: FLEXIBLE / RIGID pop at [940, 905] / [1400, 905].
+- **LOOK CLOSER as built** (timeline times):
+  | Scene | Part, time | What is shown | Verdict (at) |
+  |---|---|---|---|
+  | `lcpaper` | P1 0:51.8-1:08.9 | a gloved finger pushes the strip: it bends, springs back (observe lights); one weight slides on the hanger, the strip holds, WEIGHTS: 1 (measure lights) | A PHYSICAL PROPERTY: / measure or observe, two lines (1:06.4) |
+  | `lcpull` | P1 2:02.2-2:37.0 | slow motion: weights 1, 2, 3 on the paper; lens on its left edge: a tiny tear, it runs across, the lower piece drops onto the mat (It tears); camera slides to the fabric: 3..8, lens: threads draw tight (It holds); at `bars` the two counters fly to a chart and become bars 3 and 8 | FABRIC: STRONGER THAN PAPER (2:34.5) |
+  | `lcdrop` | P1 3:55.1-4:09.2 | the DROP BOX from the side, an adult's gloved hands, "An adult does this test. Never try it." on screen all through; the metal cup falls, hits on "Clang!", bounces once, tips and rests whole (not broken, STRONG); the glass cup falls, a crack runs up on "Crack!", five big pieces stay in the box (broken) | GLASS: FRAGILE (4:06.7) |
+  | `lcbend` | P2 0:53.2-1:17.0 | gloved hands bend the band in half, into a twist, lens: no crack, it springs back to its loop; the stick bows, lens on the outside of the bend: a pale crack opens, snap, two splintered pieces; both laid side by side | IT BENDS / WITHOUT BREAKING, under the band (1:14.5) |
+  | `lctubes` | P2 2:28.6-2:50.2 | three tubes clamped level, the same weight hung on each by a gloved hand; rubber droops most, plastic a little, metal hardly; level line and drop marks; the book's two sentences on two strips | Rubber: the most flexible / Metal: the least flexible, small "among the three tubes" (2:47.7) |
+- **Journeys:** BE A THREAD (teal weave from inside: the dive into the weave, your pale thread running away with threads over / under, five books
+  land on the thud times, the handles lift and the weave goes straight, close on the crossings, the void deck and the lift door through the gaps).
+  BE A RUBBER BAND (you look out through your own loop at the chicken rice stall, two fingers close and the loop folds to a slit, the packet
+  seen from its end with you hugging its four corners (each glows), the red bag, the kitchen: a finger pulls you off, you spring to a loop: flexible).
+- **Hidden animals:** Part 1 the spider on its thread between the letterboxes and the left pillar (`SPIDER`; every void-deck view, bobs, legs
+  wiggle, blinks; waves in the reveal). Part 2 the caterpillar inching along the blue handrail of the slide (`RAIL`; arches and stretches, turns round).
+  Both named by Heart at the start with their picture (`HIDDEN[1]`), ringed in the reveal with a pill of Heart's own words.
+- **Thumbnails:** `thumb_part1.jpg`, `thumb_part2.jpg` (frames `qa/th/f1.png`, `f2.png`: `node thumb_still.js N 1 qa/th/fN.png "&thumb"`, then
+  `node thumb.js qa/th/f1.png thumb_part1.jpg 1 "PAPER vs|FABRIC" "WHICH ONE|TEARS?" 190 150 132` and
+  `node thumb.js qa/th/f2.png thumb_part2.jpg 2 "SNAP IT" "OR BEND IT?" 190 170 140`).
+- **Checks (stills only, no page errors):** `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg` (a frame every 3 s), `qa/lc_p1.jpg`, `qa/lc_p2.jpg` (the five
+  look-closers as strips), `qa/journey_thread.jpg`, `qa/journey_band.jpg`. Cues and mixes rebuilt (188 / 165 events, both -16.0 LUFS).
+  **No video was rendered.** `SCENES_TODO.md` is Stage 1's list (not regenerated; its "to draw" notes are now done).
+- **Deviations from the script:** the DROP BOX stands on the stone table, not on the ground (the table fills the front of the set), and from
+  `drop` on the test stand and the bag are tidied off the table; the hanger is already clipped to the strip when the paper look-closer opens;
+  the lock-in ring of Part 1 shows the two strips without their counter pills (too small to read); the pull test's "paper" / "fabric" tags sit
+  above the counters; the cards in the cliffhanger are number badges 1 / 2 on the two boards; the fix's two replay pictures are at the left of
+  the easel, not above it; `tiles` tags read "bends" / "breaks when bent"; the weave is teal (the bag's colour), not pale cream; in the band
+  journey only the hook and "bent in half" are seen through your own loop, the packet, bag and kitchen are seen from just outside; small added
+  pills from Heart's own words ("Two tests done!", "Today: the first two!", "On its thread, by the letterboxes!", "On the handrail of the
+  slide!", "over you" / "under you", "You bend again"); set dressing words LETTERBOXES, BLK 9, CHICKEN RICE.
+- **Stage 3, watch in motion:** each look-closer's push-in from its set; the finger's push and the strip's spring-back; weights sliding on with the
+  gloved hand (it must not cover the counter); the tear running across and the drop to the mat; the camera slide to the fabric and the pull-back
+  to the chart, the counters flying into bars; the metal cup's bounce, tip and rocking (it turns about its base) and the glass pieces settling;
+  the band's fold / unfold / twist morph (the 0.4 s unfold between "In half" and "Into a twist") and the hands following its ends; the stick's
+  snap and the hands' tilt; the band and stick swapping places at the tray; the tube weights and the hand; the journeys' dips between stops, the
+  books' landings against the thuds, the finger pulling the band off the packet (the roughest shot); the spider's bob and the caterpillar turning
+  round at the rail's ends (it flips); board and tray slide-ins; the dive cameras in both `waitw`; Momo's speech bubble beside the easel.
 
 ## Stage 3 (Opus): `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`)
 - Output `ep09_partP.mp4` (ignored), `ep09_partP.srt`, `sheet_partP.png`; check stills around every swap, card, look-closer and reveal.

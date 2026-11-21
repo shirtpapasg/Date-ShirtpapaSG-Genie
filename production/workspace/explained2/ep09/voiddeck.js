@@ -147,7 +147,7 @@ function stickSvg(o = {}) { const a = o.a || 260, h = o.h || 30, deg = o.bend ||
   return s + `</g>`; }
 // the small tray with the rubber band and the stick (the lock-in picture, the bench). origin = the middle of its foot. o.band / o.stick: false to leave one out; o.snapped
 const trayBase = (w = 420, col = "#B98A55", line = "#7A4C26") => `<ellipse cx="0" cy="6" rx="${w * .52}" ry="12" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M${-w / 2} -34 H${w / 2} L${w / 2 - 22} 0 H${-w / 2 + 22}z" fill="${col}" stroke="${line}" stroke-width="5" stroke-linejoin="round"/><path d="M${-w / 2 + 8} -34 H${w / 2 - 8}" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45"/>`;
-function bandTray(o = {}) { return trayBase(440) + (o.band === false ? "" : `<g transform="translate(-112 -40) scale(.42 .2)">${bandSvg(0, 0, { sw: 40 })}</g>`)
+function bandTray(o = {}) { return trayBase(440, "#F4F7FA", "#8E9AA8") + (o.band === false ? "" : `<g transform="translate(-112 -40) scale(.42 .2)">${bandSvg(0, 0, { sw: 40 })}</g>`)
     + (o.stick === false ? "" : `<g transform="translate(110 -44) scale(.36)">${o.snapped ? `<g transform="scale(1 .8)">${stickSvg({ snap: .5 })}</g>` : stickSvg()}</g>`); }
 // the trays FLEXIBLE (green) and RIGID (blue). origin = the middle of the foot; 360 wide. inner = what lies on it
 const ansTray = (kind, inner = "") => { const col = kind === "FLEXIBLE" ? GOODC : WEAKC, dk = kind === "FLEXIBLE" ? "#1F8A4C" : "#1F5FD0";
@@ -157,7 +157,7 @@ const ansTray = (kind, inner = "") => { const col = kind === "FLEXIBLE" ? GOODC 
 /* ---------- a tube clamped at its left end (origin = where it leaves the clamp), length L, bent by its weight: droop = the angle of its free end in degrees ---------- */
 function tubeCurve(L, deg) { const n = 26, pts = [[0, 0]]; let x = 0, y = 0; for (let i = 1; i <= n; i++) { const u = (i - .5) / n, ph = deg * Math.PI / 180 * (1 - (1 - u) * (1 - u)); x += L / n * Math.cos(ph); y += L / n * Math.sin(ph); pts.push([x, y]); } return pts; }
 const TUBEC = { rubber: ["#C8925A", "#7A4A22", "#F0C89A"], plastic: ["#8FD3F2", "#3F8FB8", "#EAF8FF"], metal: ["#C3CBD8", "#5E6B7C", "#FFFFFF"] };
-function tubeSvg(kind, L, deg, o = {}) { const [c, dk, hi] = TUBEC[kind], pts = tubeCurve(L, deg), d = ptsPath(pts, false), sw = o.sw || 34, e = pts[pts.length - 1];
+function tubeSvg(kind, L, deg, o = {}) { const [c, dk, hi] = TUBEC[kind], pts = tubeCurve(L, deg), d = ptsPath(pts, false), sw = o.sw || 40, e = pts[pts.length - 1];
   return { end: e, svg: `<path d="${d}" fill="none" stroke="${dk}" stroke-width="${sw + 8}" stroke-linecap="butt"/><path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="butt"/><path d="${d}" fill="none" stroke="${hi}" stroke-width="${n2(sw * .2)}" transform="translate(0 ${n2(-sw * .24)})" opacity=".8"/>
     <g transform="translate(${n2(e[0])} ${n2(e[1])}) rotate(${n2(deg)})"><ellipse rx="${n2(sw * .2)}" ry="${n2(sw / 2 + 3)}" fill="${dk}"/><ellipse rx="${n2(sw * .1)}" ry="${n2(sw * .26)}" fill="#2B2147" opacity=".7"/></g>` }; }
 // the clamp on its post (origin = where the tube leaves the clamp); the post goes down to y = foot
@@ -296,12 +296,12 @@ const PROP5 = [["strength", (k) => `<rect x="-60" y="-78" width="120" height="14
 const propTile = (i, lit = 0, dim = 0) => `<g opacity="${n2(1 - .62 * dim)}">${lit > .03 ? `<rect x="-146" y="-166" width="292" height="332" rx="40" fill="${P.sun}" opacity="${n2(Math.min(1, lit))}" filter="url(#b10)"/>` : ""}<g filter="url(#dropS)"><rect x="-135" y="-155" width="270" height="310" rx="32" fill="#fff" stroke="${lit > .3 ? P.sun : "#E3C9A8"}" stroke-width="7"/></g><g transform="translate(0 -38)">${PROP5[i][1]()}</g>
   <rect x="-121" y="78" width="242" height="60" rx="18" fill="${P.ink}"/>${T(0, 119, PROP5[i][0], PROP5[i][0].length > 11 ? 31 : 36, "#fff")}</g>`;
 // goal icons (about 120 px, centred)
-const icoProperty = () => TF(-40, 0, .62, eyeIcon(0)) + TF(40, 0, .62, counterIcon(0, 1));
+const icoProperty = () => TF(-50, 0, .86, eyeIcon(0)) + TF(50, 0, .86, counterIcon(0, 1));
 const icoStrength = () => `<g transform="scale(.62)">${PROP5[0][1]()}</g>`;
-const icoCups = () => TF(-34, 34, .5, metalCup()) + TF(40, 34, .5, glassPieces(1));
-const icoBand = () => `<g transform="translate(0 -6) scale(.3)">${bandSvg(1, 0, { sw: 44 })}</g>`;
-const icoTrays = () => `<rect x="-78" y="-18" width="70" height="36" rx="9" fill="${GOODC}" stroke="#1F8A4C" stroke-width="4"/><rect x="8" y="-18" width="70" height="36" rx="9" fill="${WEAKC}" stroke="#1F5FD0" stroke-width="4"/>`;
-const icoNotSame = () => `<g transform="translate(-44 0) scale(.5)">${stripSvg("paper", { x: 0, y0: -70, y1: 70, w: 50, bend: 26 })}</g><g transform="translate(40 0) scale(.5)">${stripSvg("paper", { x: 0, y0: -70, y1: 70, w: 50, tear: 1, gap: 14 })}</g>${T(0, 12, "≠", 44, P.ink)}`;
+const icoCups = () => TF(-46, 42, .62, metalCup()) + TF(50, 42, .62, glassPieces(1));
+const icoBand = () => `<g transform="translate(0 -10) scale(.4)">${bandSvg(1, 0, { sw: 44 })}</g>`;
+const icoTrays = () => `<g transform="scale(1.6)"><rect x="-78" y="-18" width="70" height="36" rx="9" fill="${GOODC}" stroke="#1F8A4C" stroke-width="4"/><rect x="8" y="-18" width="70" height="36" rx="9" fill="${WEAKC}" stroke="#1F5FD0" stroke-width="4"/></g>`;
+const icoNotSame = () => `<g transform="scale(1.25)"><g transform="translate(-44 0) scale(.5)">${stripSvg("paper", { x: 0, y0: -70, y1: 70, w: 50, bend: 26 })}</g><g transform="translate(40 0) scale(.5)">${stripSvg("paper", { x: 0, y0: -70, y1: 70, w: 50, tear: 1, gap: 14 })}</g>${T(0, 12, "≠", 44, P.ink)}</g>`;
 // under Mark Sentence 2 (strength): "pulled" (the fabric strip pulled by its weights) and "pushed" (a gloved hand pushes down on a stone stool)
 const pullPic = () => `<circle r="96" fill="#FFF8EA" stroke="${P.ink}" stroke-width="5"/><rect x="-60" y="-78" width="120" height="14" rx="6" fill="#6C7A98"/><g transform="translate(0 6)">${stripSvg("fabric", { x: 0, y0: -72, y1: 6, w: 38, taut: 1 })}</g><path d="M0 14 V30" stroke="#5E6B7C" stroke-width="5"/>${[0, 1, 2].map((i) => TF(0, 62 - i * 11, .86, weightDisc())).join("")}<path d="M52 -30 V26 l-10 -12 m10 12 l10 -12" fill="none" stroke="${P.ink}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
 const pushPic = (u = 0) => `<circle r="96" fill="#FFF8EA" stroke="${P.ink}" stroke-width="5"/><clipPath id="ppc"><circle r="92"/></clipPath><g clip-path="url(#ppc)"><rect x="-54" y="30" width="108" height="80" fill="#CFC6B6"/><rect x="-54" y="30" width="26" height="80" fill="#DAD2C4"/><ellipse cx="0" cy="30" rx="54" ry="14" fill="#F4EFE6" stroke="#B5AA97" stroke-width="4"/><g transform="translate(0 ${n2(18 - 6 * u)}) rotate(-90) scale(.36)">${glovePinch(0)}</g></g><path d="M58 -40 V8 l-10 -12 m10 12 l10 -12" fill="none" stroke="${P.ink}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;

@@ -105,7 +105,7 @@ function pullArt(t) { const a = "g701", b = "g702", c = "g703", d = "g704", e = 
   const lensO = 1 - ramp(t, tB - .2, .3);
   const world = lcBar([-PX, PX], -330, 0) + `<rect x="-760" y="${P_.mat}" width="1520" height="26" rx="13" fill="#FF9E8A" stroke="#C8604E" stroke-width="4"/><rect x="-800" y="${P_.mat + 24}" width="1600" height="200" rx="16" fill="#4A5670" stroke="#2B2147" stroke-width="5"/>${T(0, P_.mat + 84, "OUR TEST STAND", 44, "#fff", { ls: 4 })}`
     + rig("paper", -PX, np, { tear, gap, slide: sp }) + rig("fabric", PX, nf, { taut, slide: sf }) + hand(-PX, sp) + hand(PX, sf)
-    + TF(-PX - 250, -282, 1, tpill(0, 0, "paper", 40, "#fff", P.ink, { w: 700 })) + TF(PX + 250, -282, 1, tpill(0, 0, "fabric", 40, "#fff", P.ink, { w: 700 }))
+    + OP(lensO, TF(-PX - 250, -282, 1, tpill(0, 0, "paper", 40, "#fff", P.ink, { w: 700 })) + TF(PX + 250, -282, 1, tpill(0, 0, "fabric", 40, "#fff", P.ink, { w: 700 })))
     + OP(lensO, lcLens(-PX - 280, 90, 150, spring(t, tE, .45), `<g transform="scale(.75)">${tearLens(tear, drop)}</g>`, "lnP", -PX - P_.w / 2, lerp(P_.y0, P_.y1, .36)) + lcLens(PX + 280, 90, 150, spring(t, tTh, .45), `<g transform="scale(.75) scale(-1 1)">${weaveLens(taut, t)}</g>`, "lnF", PX + P_.w / 2, -90))
     + (t < tB + .25 ? TF(-PX - 250, -210, 1, counterPill(np, bump(tp), 1.15)) + (t >= tS + .6 ? TF(PX + 250, -210, spring(t, tS + .6, .4), counterPill(nf, bump(tf), 1.15)) : "") : fly(-PX - 250, -210, CH[0] - 80, CH[1] + 60, 3, 0) + fly(PX + 250, -210, CH[0] + 84, CH[1] - 60, 8, 0))
     + OP(lensO, (t >= tTe ? TF(-PX - 250, -138, spring(t, tTe, .4), tpill(0, 0, "It tears", 44, WEAKC, "#fff", { w: 700 })) : "") + (t >= tHo ? TF(PX + 250, -138, spring(t, tHo, .4), tpill(0, 0, "It holds", 44, GOODC, "#fff", { w: 700 })) : "")) + chart;
@@ -131,33 +131,33 @@ function dropArt(t) { const a = "g1102", b = "g1103", FL = 286, XM = -210, XG = 
     + lcLab(t, tBr + .5, XG + 40, 60, "broken", XG + 20, FL - 70, { size: 46 }); }
 
 /* ---------- 4 · the slow bend test: the rubber band bends in half and into a twist, and is whole; the ice-cream stick bows, cracks on the outside of the bend, and snaps ---------- */
-function bendArt(t) { const a = "j501", b = "j502", CY = -70, TRY = 262, REST = [[-470, 168], [470, 176]];
+function bendArt(t) { const a = "j501", b = "j502", CY = -70, TRY = 262, REST = [[0, 190], [0, 192]], FIN = [[-400, 40], [400, 70]];
   const tA = W(a, "bends") - .25, tHf = W(a, "in") - .15, tUn = W(a, "into") - .55, tTw = W(a, "into") - .1, tNc = W(a, "no") - .2, tLet = W(a, "it") - .1, tSw = LT(b) - .25;
+  const tBd = W(b, "bends") - .15, tCk = W(b, "crack") - .15, tSn = W(b, "snap") - .02, tBk = W(b, "breaks") - .25, fin = eio((t - tBk - .75) / .6);
   const f = t < tHf ? .32 * eio((t - tA) / .7) : lerp(.32, 1, eio((t - tHf) / .8)) * (1 - eio((t - tUn) / .4)), w = eio((t - tTw) / .8) * (1 - eo((t - tLet) / .25)), wb = t > tLet ? .12 * wob(t, tLet, .6) : 0;
-  const sw = eio((t - tSw) / .8), bx = lerp(0, REST[0][0], sw), by = lerp(CY, REST[0][1], sw), bs = lerp(1, .5, sw), pts = bandPts(f, w), pR = pts[0], pL = pts[36];
-  const band = `<g transform="translate(${n2(bx)} ${n2(by)}) scale(${n2(bs * (1 + wb))} ${n2(bs * (1 - wb) * lerp(1, .5, sw))})">${bandSvg(f, w)}</g>`;
+  const sw = eio((t - tSw) / .8), bx = lerp(lerp(0, REST[0][0], sw), FIN[0][0], fin), by = lerp(lerp(CY, REST[0][1], sw), FIN[0][1], fin), bs = lerp(lerp(1, .6, sw), 1, fin), pts = bandPts(f, w), pR = pts[0], pL = pts[36];
+  const band = `<g transform="translate(${n2(bx)} ${n2(by)}) scale(${n2(bs * (1 + wb))} ${n2(bs * (1 - wb) * lerp(lerp(1, .5, sw), .82, fin))})">${bandSvg(f, w)}</g>`;
   // the stick: from the tray to the hands, bowed a little, the crack opens on the outside (top) of the bend, snap, the two pieces go back to the tray
-  const tBd = W(b, "bends") - .15, tCk = W(b, "crack") - .15, tSn = W(b, "snap") - .02, tBk = W(b, "breaks") - .25, up = eio((t - tSw - .1) / .8), dn = eio((t - tBk) / .7);
+  const up = eio((t - tSw - .1) / .8), dn = eio((t - tBk) / .7);
   const deg = t < tCk ? 20 * eio((t - tBd) / 1.3) + 1.2 * Math.sin(t * 30) * pulse(t, W(b, "listen"), .1, .8) : lerp(20, 27, eio((t - tCk) / 1.2)), crack = clamp((t - tCk) / 1.3), snap = t >= tSn ? eo((t - tSn) / .16) : 0;
-  const sk = t < tBk ? up : 1 - dn, sx = lerp(REST[1][0], 0, sk), sy = lerp(REST[1][1], CY, sk), ss_ = lerp(.5, 1, sk);
+  const sk = t < tBk ? up : 1 - dn, sx = lerp(lerp(REST[1][0], 0, sk), FIN[1][0], fin), sy = lerp(lerp(REST[1][1], CY, sk), FIN[1][1], fin), ss_ = lerp(lerp(.6, 1, sk), 1, fin);
   const stick = `<g transform="translate(${n2(sx)} ${n2(sy)}) scale(${n2(ss_)})">${stickSvg({ bend: Math.max(.01, deg * sk), crack: snap ? 0 : crack, snap })}</g>`;
   // the adult's gloved hands: on the two ends of the band, then on the two ends of the stick
   const hb = t < tSw + .15, kap = Math.max(.0001, deg * Math.PI / 180) / 520, ex = Math.sin(kap * 260) / kap, ey = (1 - Math.cos(kap * 260)) / kap * .5;
-  const open = hb ? clamp((t - tLet) / .2) : clamp((t - tBk + .1) / .2), away = hb ? 600 * ei((t - tLet - .25) / .5) : 600 * (1 - eo((t - tSw - .55) / .5)) + 600 * ei((t - tBk - .05) / .5);
+  const open = hb ? clamp((t - tLet) / .2) : clamp((t - tBk + .1) / .2), away = hb ? 700 * ei((t - tLet - .25) / .5) : 700 * (1 - eo((t - tSw - .55) / .5)) + 700 * ei((t - tBk - .05) / .5);
   const hR = hb ? [pR[0] + 14, CY + pR[1]] : [ex - 8, CY + ey + (snap ? 30 * snap : 0)], hL = hb ? [pL[0] - 14, CY + pL[1]] : [-ex + 8, CY + ey + (snap ? 30 * snap : 0)], tilt = hb ? 0 : deg * .5 + 16 * snap;
-  const hands = away < 590 ? TF(hR[0] + away, hR[1], 1, glovePinch(open), tilt) + `<g transform="translate(${n2(hL[0] - away)} ${n2(hL[1])}) rotate(${n2(-tilt)}) scale(-1 1)">${glovePinch(open)}</g>` : "";
+  const hands = away < 690 ? TF(hR[0] + away, hR[1], 1, glovePinch(open), tilt) + `<g transform="translate(${n2(hL[0] - away)} ${n2(hL[1])}) rotate(${n2(-tilt)}) scale(-1 1)">${glovePinch(open)}</g>` : "";
   // the magnifying lens: on the band's tightest bend (smooth, whole), then on the OUTSIDE of the stick's bend (a pale crack opens)
-  const lensB = lcLens(-430, -205, 124, spring(t, tNc, .45) * (1 - ramp(t, tSw - .1, .25)), `<rect x="-200" y="-200" width="400" height="400" fill="#FFF3DC"/><g transform="scale(2.6)">${bandSvg(0, 1)}</g>`, "lnB", -40, CY);
-  const tLs = tBd + .5, lensS = lcLens(430, -215, 124, spring(t, tLs, .45) * (1 - ramp(t, tBk - .1, .25)), `<rect x="-200" y="-200" width="400" height="400" fill="#FFF3DC"/><g transform="scale(3.2) translate(0 ${n2(22 + (snap ? 8 : 0))})">${stickSvg({ bend: Math.max(.01, deg), crack: snap ? 0 : crack, snap: snap * .6 })}</g>`, "lnS", 20, CY - 34);
-  const endK = ramp(t, tBk + .7, .4);
-  return `<rect x="-900" y="${TRY - 2}" width="1800" height="200" fill="#C9A06A"/>` + TF(0, TRY, 1, trayBase(1620)) + (endK > .02 ? `<ellipse cx="${REST[0][0]}" cy="${REST[0][1]}" rx="170" ry="96" fill="${GOODC}" opacity="${n2(.4 * endK * (.7 + .3 * Math.sin(t * 4)))}" filter="url(#b10)"/>` : "")
+  const lensB = lcLens(440, -215, 124, spring(t, tNc, .45) * (1 - ramp(t, tSw - .1, .25)), `<rect x="-200" y="-200" width="400" height="400" fill="#FFF3DC"/><g transform="scale(2.4) translate(-150 0)">${bandSvg(0, 1)}</g>`, "lnB", 150, CY - 40);
+  const tLs = tBd + .5, lensS = lcLens(440, -215, 124, spring(t, tLs, .45) * (1 - ramp(t, tSn + .9, .25)), `<rect x="-200" y="-200" width="400" height="400" fill="#FFF3DC"/><g transform="scale(3.2) translate(0 ${n2(22 + (snap ? 10 : 0))})">${stickSvg({ bend: Math.max(.01, deg), crack: snap ? 0 : crack, snap: snap * .22 })}</g>`, "lnS", 20, CY - 34);
+  return `<rect x="-900" y="${TRY - 2}" width="1800" height="200" fill="#C9A06A"/>` + TF(0, TRY, 1, trayBase(1620, "#F4F7FA", "#8E9AA8")) + (fin > .02 ? `<ellipse cx="${FIN[0][0]}" cy="${FIN[0][1]}" rx="290" ry="170" fill="${GOODC}" opacity="${n2(.4 * fin * (.7 + .3 * Math.sin(t * 4)))}" filter="url(#b10)"/>` : "")
     + (hb ? stick + band : band + stick) + hands + lensB + lensS + lcAdult(t, LT(a) - .2, "An adult does the test.", "Just watch!") + lcSlow(t, LT(a) + .3)
-    + (t >= tNc + .3 && t < tSw ? TF(-430, -40, spring(t, tNc + .3, .4) * (1 - ramp(t, tSw - .1, .2)), tpill(0, 0, "no crack", 46, GOODC, "#fff", { w: 700 })) : "")
-    + (t >= tSw + .7 ? TF(REST[0][0], REST[0][1] - 122, spring(t, tSw + .7, .4), tpill(0, 0, "no crack", 40, GOODC, "#fff", { w: 700 })) : "")
-    + (t >= tBk + .5 ? TF(REST[1][0], REST[1][1] - 110, spring(t, tBk + .5, .4), tpill(0, 0, "It breaks", 40, WEAKC, "#fff", { w: 700 })) : ""); }
+    + (t >= tNc + .3 && t < tSw ? TF(440, -52, spring(t, tNc + .3, .4) * (1 - ramp(t, tSw - .1, .2)), tpill(0, 0, "no crack", 46, GOODC, "#fff", { w: 700 })) : "")
+    + (t >= tSw + .7 ? TF(lerp(REST[0][0], FIN[0][0], fin), lerp(REST[0][1] - 106, FIN[0][1] - 170, fin), spring(t, tSw + .7, .4), tpill(0, 0, "no crack", 42, GOODC, "#fff", { w: 700 })) : "")
+    + (t >= tBk + .5 ? TF(lerp(REST[1][0], FIN[1][0], fin), lerp(REST[1][1] - 100, FIN[1][1] - 150, fin), spring(t, tBk + .5, .4), tpill(0, 0, "It breaks", 42, WEAKC, "#fff", { w: 700 })) : ""); }
 
 /* ---------- 5 · three tubes, the same length and thickness, each clamped at one end with the same weight on the free end ---------- */
-const TUBES = [["rubber", -700, 62], ["plastic", -190, 20], ["metal", 320, 2.5]];
+const TUBES = [["rubber", -650, 62], ["plastic", -140, 20], ["metal", 370, 2.5]];
 function tubesArt(t) { const a = "j901", b = "j902", LV = -122, L = 330, tT = W(a, "three") - .2, tWt = [W(a, "same") - .1, W(a, "same") + .3, W(a, "same") + .6], tMo = W(a, "most") - .5, tLe = W(a, "least") - .5, tS = LT(b) - .35, tv = MK("v_tubes");
   const hi = [Math.max(pulse(t, W(b, "rubber") - .05, .08, 1.2), 0), Math.max(pulse(t, W(b, "plastic") - .05, .08, 1.0), pulse(t, W(b, "plastic", 1) - .05, .08, 1.2)), pulse(t, W(b, "metal") - .05, .08, 1.2)]; let s = "";
   TUBES.forEach(([kind, x, dmax], i) => { const k = t >= tWt[i] ? spring(t, tWt[i] + .05, .9) : 0, deg = dmax * k, tb = tubeSvg(kind, L, deg), ex = x + tb.end[0], ey = LV + tb.end[1], hu = (t - tWt[i] + .35) / .35;
@@ -168,4 +168,4 @@ function tubesArt(t) { const a = "j901", b = "j902", LV = -122, L = 330, tT = W(
       + (k > .5 && tb.end[1] > 14 ? `<path d="M${n2(x + L)} ${LV} V${n2(ey)}" stroke="${P.ink}" stroke-width="4" stroke-dasharray="3 9" stroke-linecap="round" opacity=".55"/><path d="M${n2(x + L - 14)} ${n2(ey)} h28" stroke="${P.ink}" stroke-width="4" stroke-linecap="round" opacity=".55"/>` : ""); });
   return `<rect x="-900" y="262" width="1800" height="200" fill="#A8743C"/><path d="M-900 262 H900" stroke="#7A4C26" stroke-width="5"/><path d="M-810 ${LV} H800" stroke="${P.ink2}" stroke-width="4" stroke-dasharray="14 12" opacity=".45"/>` + s
     + (t >= tT + .5 && t < tS ? TF(0, -300, spring(t, tT + .5, .4) * (1 - ramp(t, tS - .25, .2)), tpill(0, 0, "same length · same thickness", 44, P.ink, "#fff", { w: 700 })) : "")
-    + lcLab(t, tMo, -560, 200, "bends the most", -520, 60, { size: 42, t1: tv - .15 }) + lcLab(t, tLe, 560, 20, "bends the least", 600, -100, { size: 42, t1: tv - .15 }); }
+    + lcLab(t, tMo, -530, 205, "bends the most", -470, 60, { size: 42, t1: tv - .15 }) + lcLab(t, tLe, 590, 20, "bends the least", 650, -100, { size: 42, t1: tv - .15 }); }
