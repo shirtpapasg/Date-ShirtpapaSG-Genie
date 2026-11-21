@@ -446,3 +446,14 @@ The title lines; the goal chips; the location pills (East Coast Park, Singapore 
 15. **The dare for EP11:** "Which one lets only some light pass through? One, clear glass. Two, frosted glass. Three, a wooden door." EP11's opening should start "Last time, we asked:" and then these words, with the same three boards, torches and cards. (The answer, frosted glass, is the book's own example of a translucent material.)
 16. **Questions for the teacher:** (a) Is it right to bust "heavy things sink, and light things float" in the HOLD ON!, although the book never mentions heavy or light? Heart only says what we see (the heavy ship floats, the light spoon sinks). (b) Is the metal bowl test welcome (it is from the series plan, not the book), and is "The water takes the place of the air." acceptable P3 wording? (c) East Coast Park for Part 1, or would you rather have the Singapore River with a ferry? (d) The white fabric school shoe for "fabric" and for the wax (the book shows waxed fabric shoes): fine, or should the wax go on boots as in the book's picture? (e) The cold block of wax with "No candles. No flame." on screen: is that enough, or should the wax be named (for example "shoe wax")? (f) An otter and a snail as the hidden animals: fine? (g) EP10 replaces the classic "Strong, Bendy, Floaty: Testing Materials (Part A)" once it is live, as you said on 21 Nov: still right? (h) Part 1 says only "East Coast Park" on screen. If you would like Heart to say a place name aloud in a later episode, it needs a test clip first.
 17. A human must listen before the sound can be called checked: the agents can only measure it (-16 LUFS).
+
+## 12. Teacher's go-ahead (2026-11-21)
+The teacher: "please start rendering Ep10. lets not wait." The open questions were answered with the recommended defaults:
+1. Momo's "heavy things sink, and light things float" stays as the HOLD ON! misconception; Heart only says what is seen.
+2. The metal bowl test stays, with "The water takes the place of the air."
+3. Part 1 stays at East Coast Park.
+4. The wax goes on rubber-soled fabric BOOTS (as in the book's picture), not the white school shoe; the drop test still compares the plastic raincoat with a fabric school shoe.
+5. The wax is named: "shoe wax" (a cold block, an adult's hands, "No candles. No flame." on screen).
+6. Otter (Part 1) and snail (Part 2) stay as the hidden animals.
+7. EP10 replaces the classic "Strong, Bendy, Floaty: Testing Materials (Part A)" 5fBBrJMrAcU on upload (retire_old).
+8. The kopi sock, the canoe and the School Lab 3.5 line stay in the description / teacher sheet.
