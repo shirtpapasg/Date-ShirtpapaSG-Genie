@@ -34,7 +34,7 @@ SC.lasttime = (t, s) => { const a = "f201", b = "f202", tI = W(a, "six") - .2, t
 
 /* ============ 3 · goals and the game ============ */
 SC.goals = (t, s) => goals3(t, s, [["How to spot a mammal", TF(0, -40, .2, hangBat({ blink: ((t + .3) % 3) < .12 }))], ["Which one does not belong", TF(-70, 56, .16, catSit(t)) + TF(10, 56, .14, macaque(t)) + TF(110, 46, .06, monitor({ t }))], ["Same and different, with a reason", TF(-60, 40, .1, fruitBat({ wings: 1, flap: t * 4 })) + TF(70, 50, .2, kingfisher({ bob: 0 }))]]);
-SC.game = (t, s) => gameScene(t, s, "f301", false);
+SC.game = (t, s) => gameScene(t, s, "f301", false, "squirrel", (t) => `<g transform="translate(0 -36) scale(.78)">${squirrelF(t)}</g>`);
 
 /* ============ 4 · Palm Valley at dusk; Round 1: is a bat a bird? ============ */
 SC.palms = (t, s) => { const u = (t - s.t0 - .8) / 1.6, fb = u > 0 && u < 1 ? TF(lerp(540, 1500, eio(u)), 262 + 140 * Math.sin(Math.PI * u) - 40 * u, lerp(.3, .36, u), fruitBat({ wings: lerp(.2, 1, ss(0, .25, u)), flap: t * 8 })) : "";

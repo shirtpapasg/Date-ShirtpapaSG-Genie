@@ -33,7 +33,7 @@ SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) 
   return lakeView(t, {}, [1.5 - .08 * clamp(u / 3), 700, 760]) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.66 * clamp(u / .2))}"/>`
     + ln(370, "SPIDER OR INSECT?", 160, "#fff", k1, 4) + ln(590, "COUNT THE LEGS!", 170, P.sun, k2, 6)
     + (u > 1.0 ? TF(960, 760, spring(t, s.t0 + 1.0, .45), tpill(0, 0, "Lock in your answer!", 46, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
-SC.game = (t, s) => gameScene(t, s, "e301", true);
+SC.game = (t, s) => gameScene(t, s, "e301", true, "grasshopper", (t) => `<g transform="translate(-14 64) scale(.95)">${hopperF(t)}</g>`);
 
 /* ============ 4 · Round 1: which one is an insect? ============ */
 const antSpiderRing = (tt) => ringClip(`<rect x="250" y="290" width="360" height="360" fill="#EAF6E8"/><path d="M250 560 Q430 540 610 560 V660 H250z" fill="#E6D8BC"/>` + TF(530, 440, .2, spiderWeb(330, tt, { op: .9, w: 4 }) + spiderBig({ id: "r1" })) + TF(350, 568, .17, antBig({ walk: tt * 7 }))) + `<path d="M430 300 V640" stroke="#fff" stroke-width="3" stroke-dasharray="6 10" opacity=".7"/>`;

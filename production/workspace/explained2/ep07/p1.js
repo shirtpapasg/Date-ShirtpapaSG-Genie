@@ -36,7 +36,7 @@ SC.title = (t, s) => { const u = t - s.t0, k = slamK(u, .02);
     + (u > .9 ? TF(960, 770, spring(t, s.t0 + .9, .45), tpill(0, 0, "Hold on to your answer!", 46, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
 
 /* ============ 3-4 · the game, today's goals (Momo reads them), the countdown ============ */
-SC.game = (t, s) => gameScene(t, s, "g301", true);
+SC.game = (t, s) => gameScene(t, s, "g301", true, TF(26, 66, 1.5, cuteSnail(t)));
 const icoFood = (t) => `<g transform="translate(0 6) scale(.36)">${slice()}<g fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"><path d="M0 0 q-40 -30 -70 -80 M0 0 q50 -20 80 -70 M0 0 q-50 30 -80 80 M0 0 q40 40 70 90 M0 0 q-70 0 -90 -10 M0 0 q60 10 92 20"/></g><circle r="20" fill="#7C9A88" stroke="#56705F" stroke-width="5"/></g>`;
 const icoSpread = (t) => `<g transform="translate(0 44) scale(.3)">${bigMushroom()}</g>` + TF(0, -8, .34, sporeDust(1.5 + (t % 3), .5, 36));
 const icoTrays = () => TF(-74, 44, .34, sortTray(0, 300, { size: 46 })) + TF(74, 44, .34, sortTray(1, 300, { size: 46 }));

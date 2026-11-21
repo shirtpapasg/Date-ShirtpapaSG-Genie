@@ -3,7 +3,7 @@ window.CUES2 = (E, R, h) => { const S = SCN, { lock, chant, sayit, G, C, mark, s
   // 1-3 the recap, "Last time", goals, the game
   E(S.recap.t0 + .1, "softpop", 0); E(W("f201", "reptiles") - .3, "softpop", 1); E(LT("f202") - .25, "softpop", 2); E(LE("f202") + .1, "curious");   // the calm recap: one soft pop per picture (no clacks) C(S.recap.t0 + .2, S.lasttime.t0 + .4); R.night.push([S.lasttime.t0, S.goals.t0]);
   E(LT("f201"), "pluck", 0); E(W("f201", "six") - .2, "softpop", 0); E(W("f201", "reptiles") - .1, "softpop", 2); E(W("f201", "basil") - .1, "chime"); E(LE("f202") - .3, "rise", 5);
-  ["f3g1", "f3g2", "f3g3"].forEach((id, i) => E(LT(id) - .1, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("f301", "animal") - .1, "curious"); E(W("f301", "spot") - .1, "softpop", 1);
+  ["f3g1", "f3g2", "f3g3"].forEach((id, i) => E(LT(id) - .1, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("f301", "squirrel") - .1, "curious"); E(W("f301", "spot") - .1, "softpop", 1);
   // 4 Palm Valley at dusk: crickets, soft wingbeats; Round 1
   R.night.push([S.palms.t0, S.r1card.t0 + .2]); E(S.palms.t0 + .9, "flap", 0); E(S.palms.t0 + 1.3, "flap", 1); E(S.r1card.t0, "roundcard");
   lock(MK("ring0_1"), 5, "f402", ["f403", "f404", "f405"], [W("f401", "one", 1), W("f401", "two")]);

@@ -245,5 +245,5 @@ SC.kwrecap = (t, s) => baseKw(t, s) + kwPictures(t, s, [
   (tt) => kwThermo(.5 + .4 * Math.sin(tt * 2.4))]);
 
 /* ============ 15 · "Now you know!": the board stands in the middle of the free space between Pip and Momo, 30% taller, clear of every disc ============ */
-SC.nyk = (t, s) => nykScene(t, s, TF(786, 1052, .47, sixBoard(t, ST())));
+SC.nyk = (t, s) => nykScene(t, s, TF(786, 1052, .47, sixBoard(t, ST())), { you: false });   // no orphan labels (teacher, 21 Nov): no YOU tag over the board
 })(); }

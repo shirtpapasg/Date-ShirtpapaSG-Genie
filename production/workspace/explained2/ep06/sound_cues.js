@@ -12,7 +12,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   ["amphibians", "birds", "fish"].forEach((w, i) => E(W("e201", w) - .05, "softpop", i)); [0, 1, 2].forEach((i) => E(W("e201", "three", 1) + i * .35, "rise", 3 + i * 2)); E(LT("e202") - .3, "curious"); E(W("e202", "ant") - .15, "pip", 0); E(W("e202", "spider") - .15, "pip", 2);
   E(S.title.t0 + .02, "whoosh"); E(S.title.t0 + .26, "slam", 0); E(S.title.t0 + .66, "slam", 2); E(S.title.t0 + 1.0, "softpop", 2);
   // 3 the game
-  E(S.game.t0 + .15, "sting"); { const b = "e301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "animal") - .1, "curious"); E(W(b, "spot") - .1, "softpop", 1); }
+  E(S.game.t0 + .15, "sting"); { const b = "e301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "grasshopper") - .1, "curious"); E(W(b, "spot") - .1, "softpop", 1); }
   // 4 Round 1
   E(S.r1card.t0, "roundcard"); lock(MK("ring0_1"), 5, "e402", ["e403", "e404", "e405"], [W("e401", "one", 2), W("e401", "two")]); E(LE("e405") + .1, "softpop", 3);
   // 5 goals, countdown

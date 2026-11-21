@@ -48,7 +48,7 @@ SEQ1 = [
  ("scene", "title"), ("wait", 2.3),
  # ---- 3 · the game
  ("scene", "game"),
- ("say", "e301", H, "It's You against the Buddies. You lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
+ ("say", "e301", H, "It's You against the Buddies. You lock in first. One finger for every point. A little grasshopper is hiding in this video. Can you spot it?", {"pre": .4, "post": 0.397333}),
  # ---- 4 · Round 1: which one is an insect?
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
@@ -139,7 +139,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "e1301", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .6}),
  ("scene", "liz"),
- ("say", "e1302", H, "Did you spot the hidden animal? It was the grasshopper, on the lamp post! Is it an insect? Tell someone at home.", {"pre": .6, "post": .6}),
+ ("say", "e1302", H, "Did you spot the grasshopper? It was on the lamp post! Is it an insect? Tell someone at home.", {"pre": .6, "post": 0.601333}),
  *kwrecap(["Insects", "Head, thorax, abdomen", "Reptiles", "Cold-blooded"]),
  # ---- 14 · the cliffhanger: wings, at night
  ("scene", "cliff"), ("wait", .6),
@@ -163,7 +163,7 @@ SEQ2 = [
  ("say", "f3g2", P, "Which one does not belong.", {"pre": .55}),
  ("say", "f3g3", P, "Same and different, with a reason.", {"pre": .55, "post": .9}),
  ("scene", "game"),
- ("say", "f301", H, "Lock in first. A little animal is hiding in this video. Can you spot it?", {"pre": .5, "post": .4}),
+ ("say", "f301", H, "Lock in first. A little squirrel is hiding in this video. Can you spot it?", {"pre": .5, "post": 0.416444}),
  # ---- 4 · Palm Valley at dusk; Round 1: is a bat a bird?
  ("scene", "palms"), ("wait", 2.1),
  ("scene", "r1card"), ("wait", 1.0),
@@ -255,7 +255,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "f1301", H, "Show me your score hand! More than two? You beat the Buddies. Four fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "f1302", H, "Did you spot the hidden animal? It was the squirrel, on the palm trunk! Is it cold-blooded, or warm-blooded? Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "f1302", H, "Did you spot the squirrel? It was on the palm trunk! Is it cold-blooded, or warm-blooded? Tell someone at home.", {"pre": .5, "post": 0.492000}),
  # ---- 14 · the dare for Episode 7
  ("scene", "dare"), ("wait", .6),
  ("say", "f1401", H, "Next time: fungi and bacteria! Mould on bread. Yeast, for making bread. Both are fungi! Which one is useful? Lock in your answer!", {"pre": 0, "post": .6}),
