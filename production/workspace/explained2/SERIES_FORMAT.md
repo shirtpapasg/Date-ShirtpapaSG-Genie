@@ -170,6 +170,9 @@ Also read:
 - **Every label and small print fits fully inside the frame.** Label lines never cross other objects.
 - Frames are a pure function of t. Render in 10 s chunks so restarts lose little.
 
+- **Props never hide behind the buddies (teacher, 2026-11-21).** A board or prop that shares the frame with the buddy discs is
+  centred in the free space between them and big enough to read (the EP6 outro's SIX ANIMAL GROUPS board: centred between Pip
+  and Momo, 30% taller); it never sits behind or under a disc.
 - **Say names right.** Singapore names Kokoro gets wrong are spoken from approved sounds: see `PRONUNCIATION.md` and `sg_pron.py`
   (e.g. Sungei Buloh = "Soon-ai, bur-low"). A new name gets a test clip for the teacher before it is used.
 - **Real animals must look real (teacher, 2026-11-20).** Draw an animal's true shape from real photos before drawing it, then simplify
