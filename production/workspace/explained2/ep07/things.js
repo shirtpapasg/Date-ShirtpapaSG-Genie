@@ -141,12 +141,12 @@ const MAPS = [["flowering", 0, -682, -310], ["non-flowering", 0, -486, -310], ["
 function mapPic(nm, t = 0) { switch (nm) {
   case "flowering": return TF(0, 40, .15, chilliPlant(t, { flower: 1, fruit: 1 }));
   case "non-flowering": return TF(0, 16, .17, nestFern());
-  case "amphibians": return TF(-6, 34, .32, frog({}));
-  case "birds": return TF(8, 40, .3, kingfisher({}));
-  case "fish": return TF(0, 0, .3, fishG({}));
-  case "insects": return TF(-4, 0, .36, ant());
-  case "reptiles": return TF(-16, 22, .1, monitor({ t }));
-  case "mammals": return TF(0, 10, .12, fruitBat({ wings: 1, flap: .5 }));
+  case "amphibians": return TF(-6, 34 - 3 * Math.abs(Math.sin(t * 2)), .32, frog({ throat: t }));
+  case "birds": return TF(8, 40, .3, kingfisher({ bob: 3 * Math.sin(t * 3) }));
+  case "fish": return TF(4 * Math.sin(t * 1.5), 0, .3, fishG({ wag: t }));
+  case "insects": return TF(-4, 2, .36, ant({ walk: t * 6 }));
+  case "reptiles": return TF(-16, 22, .1, monitor({ t, tongue: ((t % 3.3) < .5 ? Math.sin(Math.PI * (t % 3.3) / .5) : 0), breath: .5 + .5 * Math.sin(t * 2.4) }));
+  case "mammals": return TF(0, 10, .12, fruitBatF({ wings: 1, flap: t * 5 }));
   case "mushroom": return TF(0, 44, .62, mushroom());
   case "bread mould": return `<g transform="scale(.4)"><g transform="translate(0 -8)">${slice()}${mould(10)}</g></g>`;
   default: return TF(0, 0, .72, bact3()); } }

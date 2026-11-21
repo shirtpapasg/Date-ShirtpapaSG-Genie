@@ -94,7 +94,7 @@ SC.waitw = (t, s) => { const L = "g901", dive = ei((t - (s.t1 - .7)) / .7), sl =
 /* ============ 10 · the reveal, and Mark Sentence 1 ============ */
 const CAMR = [1.15, 800, 660];
 SC.reveal = (t, s) => { const L = "g1001", tA = W(L, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, e = eo((t - s.t0) / 1.1), sp = bagPt(TR, 0, 0), cam = [lerp(3.4, CAMR[0], e), lerp(sp[0], CAMR[1], e), lerp(sp[1], CAMR[2], e)];
-  return kitchenView(t, { day: 10, tray: D10, rise: 1, front: TF(520, 990, .46, ansCard(2, "From the bread", { lit })) }, cam)
+  return kitchenView(t, { day: 10, tray: D10, rise: 1, front: TF(486, 960, .66, ansCard(2, "From the bread", { lit, size: 50 })) }, cam)
     + buddy("pip", 150, 1062, 200, t, { aura: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tA, "surprised"], [tA + 1.3, "sit"]], jump: [[tA + 1.5, 14]] }) + buddy("basil", 1560, 1064, 200, t, { aura: true, flip: true, in: s.t0 + .4, poses: [[s.t0, "sit"], [tA + .1, "cheer"]] })
     + buddy("momo", 1790, 1062, 200, t, { aura: true, flip: true, in: s.t0 + .5, poses: [[s.t0, "sit"], [tA + .2, "cheer"]] }) + wipe(t, s.t0, "#FFF6E0") + HUD(t); };
 // three small pictures beside the card: the patch on the bread, the shiny film, the dots flowing in
@@ -105,7 +105,7 @@ const miniDots = (t) => thr + Array.from({ length: 9 }, (_, i) => { const u = ((
 const M1TXT = "Fungi are living things that do not make their own food. Fungi grow on another object. They produce a substance to break down the other object into simpler substances and absorb them as food.";
 SC.mark1 = (t, s) => { const L = "g1003", tG = W(L, "grow") - .1, tS = W(L, "substance") - .1, tA = W(L, "absorb") - .1, lt = (q) => t < q ? 0 : .35 + .65 * pulse(t, q, .05, 1.2), tc = W("g1004", "one") - .1;
   const under = miniDisc(1730, 330, lt(tG), `<g transform="scale(.62)">${slice()}${mould(10)}</g>`, "a") + miniDisc(1730, 570, lt(tS), miniFilm(t), "b") + miniDisc(1730, 810, lt(tA), miniDots(t), "c");
-  return markScene(t, s, { id: L, sayId: "g1002", who: "basil", n: "1 of 2", text: M1TXT, keys: ["do", "not", "make", "their", "own", "food.", "grow", "on", "another", "object.", "substance", "simpler", "substances", "absorb"], noKey: [M1TXT.split(" ").length - 1], size: 52, y: 196, x: 590, w: 960, extra: under + coin(t, tc, 1730, 560, "+1", "if you showed two fingers") }); };
+  return markScene(t, s, { id: L, sayId: "g1002", who: "basil", n: "1 of 2", text: M1TXT, keys: ["do", "not", "make", "their", "own", "food.", "grow", "on", "another", "object.", "substance", "simpler", "substances", "absorb"], noKey: [M1TXT.split(" ").length - 1, M1TXT.split(" ").lastIndexOf("object")], size: 52, y: 196, x: 590, w: 960, extra: under + coin(t, tc, 1400, 1010, "+1", "if you showed two fingers") }); };
 SCORE.push([W("g1004", "one") - .1, 2, 1]);
 // the small tag under the big ABSORB key word (drawn over the key-word pop)
 window.OVER2 = (t, s) => { const k = MK("kw_absorb"); return t >= k + .25 && t < k + 2.0 ? TF(960, 740, spring(t, k + .25, .4) * (1 - ramp(t, k + 1.85, .15)), tpill(0, 0, "absorb = take in", 46, "#fff", P.ink, { w: 700 })) : ""; };
@@ -138,22 +138,22 @@ SC.r2 = (t, s) => { const L = "g1201";
     picks: [{ who: "pip", id: "u1203", word: "2" }, { who: "basil", id: "u1203", word: "2" }, { who: "momo", id: "u1203", word: "2" }], react: [[LE("g1204") + .1, "basil", "cheer"]],
     over: (tt) => say("g1204", 960, 620, tt, { size: 44, tail: 0 }) }); };
 // the two trays on the table and the four picture boards that hop onto them
-const TY = 940, UX = 640, HX = 1500, SLOT = [350, 640, 930, 1500];
+const TY = 970, UX = 690, HX = 1640, SLOT = [300, 690, 1080, 1640], CK = 1.3;
 const cardPic = (i, t, rise = 0, glow = 0) => i === 0 ? picCardK(TF(0, 110, .7, punnet()), 270, 300, "t0", "#EAF3E4") : i === 1 ? picCardK(TF(-28, 120, .78, doughBowl(rise, { id: "tb" })) + TF(92, 124, .5, yeastPacket(glow)), 270, 300, "t1")
   : i === 2 ? picCardK(TF(0, 0, .5, tempehPic()), 270, 300, "t2") : picCardK(TF(0, 6, .56, bagAlone(10)), 270, 300, "t3", "#F1F4F9");
 SC.trays = (t, s) => { const q = "g1206", tI = MK("traysIn"), mk = ["b_mush", "b_dough", "b_tempeh", "b_mould"].map((k) => MK(k) + .35), tc = W("g1213", "one") - .1;
   const [ux, ud] = slideX(t, tI + .05, .5, -700, UX, TY), [hx, hd] = slideX(t, tI + .4, .5, 2400, HX, TY), rise = ss(mk[1] + .9, W("g1210", "rise") + .4, t), tE = W("g1208", "edible") - .1, tNv = W("g1209", "never") - .1;
-  let cards = ""; mk.forEach((tl, i) => { if (t < tl - .8) return; const [x, lift, ds, sq] = hopLow(t, tl, i === 3 ? 2100 : -200, SLOT[i], TY - 60); cards += ds + TF(x, TY - 62 - lift, 1, `<g transform="scale(1 ${n2(sq)})">${cardPic(i, t, rise, i === 1 ? pulse(t, W("g1210", "yeast") - .1, .1, 1.5) : 0)}</g>`); });
-  const st = (id, txt, o = {}, next) => strip(t, id, txt, 120, { size: 44, maxW: 1320, t1: next ? LT(next) - .32 : LE(id) + .6, ...o });
-  return closeBg() + ud + hd + (t >= tI ? TF(ux, TY, 1, sortTray(0, 900)) + TF(hx, TY, 1, sortTray(1, 400)) : "") + cards
+  let cards = ""; mk.forEach((tl, i) => { if (t < tl - .8) return; const [x, lift, ds, sq] = hopLow(t, tl, i === 3 ? 2100 : -200, SLOT[i], TY - 60); cards += ds + TF(x, TY - 62 - lift, CK, `<g transform="scale(1 ${n2(sq)})">${cardPic(i, t, rise, i === 1 ? pulse(t, W("g1210", "yeast") - .1, .1, 1.5) : 0)}</g>`); });
+  const st = (id, txt, o = {}, next) => strip(t, id, txt, 150, { size: 44, maxW: 1180, x: 860, t1: next ? LT(next) - .32 : LE(id) + .6, ...o });
+  return closeBg() + ud + hd + (t >= tI ? TF(ux, TY, 1, sortTray(0, 1190)) + TF(hx, TY, 1, sortTray(1, 420)) : "") + cards
     + buddy("pip", 300, 1060, 360, t, { aura: true, in: s.t0 + .05, out: tI - .05, poses: [[s.t0, "thinking"], [LT(q) - .12, "sit"]] }) + say(q, 760, 470, t, { size: 46, tail: -300, x: true, maxW: 600 })
     + st("g1207", "There are some fungi that are useful, while others are harmful to us.", { keys: ["useful,", "harmful"] }, "g1208") + st("g1208", "Edible mushrooms are useful since they are food for us.", { keys: ["useful"], t1: LE("g1209") + .3 })
     + st("g1210", "Yeast is another useful fungus as it is commonly used in baking bread to make the dough rise.", { keys: ["useful"], t1: MK("kw_yeast") - .1 }) + st("g1211", "Tempeh is made with a useful fungus.", { keys: ["useful"] }, "g1212")
     + st("g1212", "Bread mould is an example of harmful fungi. Eating mouldy bread can cause us to fall sick.", { keys: ["harmful"], t1: LT("g1213") - .2 })
-    + popTag(t, tE, SLOT[0], 520, "edible = safe to eat", 32, "#fff", P.ink) + (t >= tNv ? TF(SLOT[0] + 40, 440, spring(t, tNv, .45), safeBadge("Never pick wild mushrooms!", 30)) : "")
-    + (t >= mk[1] + .6 ? OP(ramp(t, mk[1] + .6, .25), TF(SLOT[1], 524, 1, `<rect x="-196" y="-27" width="392" height="54" rx="27" fill="${P.ink}" opacity=".9"/><path d="M-170 -11 l14 11 l-14 11z M-154 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up: about 1 hour", 28, "#fff", { w: 600 })}`)) : "")
-    + popTag(t, mk[2] + .3, SLOT[2], 524, "tempeh", 34, "#fff", P.ink) + (t >= mk[3] + .5 ? TF(SLOT[3] + 150, 560, spring(t, mk[3] + .5, .45), tummy(1.1)) : "")
-    + coin(t, tc, 1180, 420, "+1", "if you showed two fingers") + HUD(t); };
+    + popTag(t, tE, SLOT[0], 474, "edible = safe to eat", 32, "#fff", P.ink) + (t >= tNv ? TF(SLOT[0] + 60, 400, spring(t, tNv, .45), safeBadge("Never pick wild mushrooms!", 30)) : "")
+    + (t >= mk[1] + .6 ? OP(ramp(t, mk[1] + .6, .25), TF(SLOT[1], 474, 1, `<rect x="-196" y="-27" width="392" height="54" rx="27" fill="${P.ink}" opacity=".9"/><path d="M-170 -11 l14 11 l-14 11z M-154 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up: about 1 hour", 28, "#fff", { w: 600 })}`)) : "")
+    + popTag(t, mk[2] + .3, SLOT[2], 474, "tempeh", 36, "#fff", P.ink) + (t >= mk[3] + .5 ? TF(SLOT[3] + 130, 500, spring(t, mk[3] + .5, .45), tummy(1.1)) : "")
+    + coin(t, tc, 1350, 380, "+1", "if you showed two fingers") + HUD(t); };
 SCORE.push([W("g1213", "one") - .1, 3, 2]);
 
 /* ============ 13 · score hand, the lizard ============ */
@@ -171,10 +171,10 @@ SC.cliff = (t, s) => { const L = "g1401", p = "g1402", h = "g1403", tThen = W(L,
   const tW = W(L, "wash") - .3, tQ = LE(p) + .1, tP = W(h, "find") - .1, wat = ss(tW, tW + .3, t) * (1 - ss(LT(p) - .5, LT(p) - .1, t));
   return sinkView(t, { water: wat, shine: .0 }) + bigQ(t, tQ, 960, 440, 1.5)
     + buddy("pip", 250, 1060, 340, t, { aura: true, in: tThen + .3, poses: [[tThen, "sit"], [LE(p) + .1, "pointing"]] }) + say(p, 420, 560, t, { size: 52, tail: -120 })
-    + (t >= tP ? TF(1440, 300, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "")
+    + (t >= tP ? TF(1340, 470, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "")
     + wipe(t, tThen, "#DCE3EA", 1500, 400) + HUD(t); };
 // the ending: the two trays stand in the free space between Pip and Momo, each with its picture and its word above (no words in the bottom fifth)
-const endTrays = (t) => { const one = (x, kind, pic) => TF(x, 1046, .7, sortTray(kind, 300, { size: 1 }).replace(/<text[^>]*>(USEFUL|HARMFUL)<\/text>/, "") + TF(0, -62, 1, pic) + TF(0, -400, 1.4, tpill(0, 0, kind ? "HARMFUL" : "USEFUL", 36, kind ? "#2F78E8" : "#2FA65A", "#fff", { w: 700, ls: 3 })));
-  return one(660, 0, cardPic(1, t, 1)) + one(900, 1, cardPic(3, t)); };
+const endTrays = (t) => { const one = (x, kind, pic) => TF(x, 1046, .9, sortTray(kind, 300, { size: 1 }).replace(/<text[^>]*>(USEFUL|HARMFUL)<\/text>/, "") + TF(0, -62, 1, pic) + TF(0, -400, 1.4, tpill(0, 0, kind ? "HARMFUL" : "USEFUL", 36, kind ? "#2F78E8" : "#2FA65A", "#fff", { w: 700, ls: 3 })));
+  return one(636, 0, cardPic(1, t, 1)) + one(924, 1, cardPic(3, t)); };
 SC.nyk = (t, s) => nykScene(t, s, endTrays(t));
 })(); }

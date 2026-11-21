@@ -3,7 +3,7 @@
 // the fridge's little lizard. Pure functions of their arguments. Drawn from the real things: a white sandwich slice (square with a domed top and a
 // thin brown crust), a press-seal bag (clear, a coloured zip strip, side seams, soft highlights), bread mould (Rhizopus: white cottony fuzz first,
 // then grey-green, then grey-black middles full of tiny dark dots; it starts as small dots and spreads).
-const XDEFS9 = () => `${lg("kWall", [[0, "#FBF5E6"], [1, "#F1E6D0"]])}${lg("kFloor", [[0, "#DCCBB2"], [1, "#BFA888"]])}${lg("kTable", [[0, "#F6DDB4"], [1, "#E4BC86"]])}${lg("kTableF", [[0, "#C9975E"], [1, "#A87642"]])}
+const XDEFSK = () => `${lg("kWall", [[0, "#FBF5E6"], [1, "#F1E6D0"]])}${lg("kFloor", [[0, "#DCCBB2"], [1, "#BFA888"]])}${lg("kTable", [[0, "#F6DDB4"], [1, "#E4BC86"]])}${lg("kTableF", [[0, "#C9975E"], [1, "#A87642"]])}
   ${lg("kFridge", [[0, "#FDFEFF"], [.5, "#E9EEF5"], [1, "#CFD7E3"]], 1, 0)}${lg("kCab", [[0, "#8FD3C8"], [1, "#5FB5A8"]])}${lg("kTop", [[0, "#8B8F9C"], [1, "#6A6E7C"]])}${lg("kSky", [[0, "#8CCBFF"], [.6, "#CDEBFF"], [1, "#FFF4DA"]])}
   ${lg("kSkyN", [[0, "#161238"], [.6, "#2E2470"], [1, "#5A3F9E"]])}${lg("kCrumb", [[0, "#FFF8E8"], [1, "#F6E8C8"]])}${lg("kTray", [[0, "#FFFFFF"], [1, "#E6EBF3"]])}${lg("kBowl", [[0, "#DCEBF6"], [1, "#A3C4DE"]])}
   ${lg("kDough", [[0, "#FBF0D4"], [1, "#EBD6A6"]])}${lg("kBin", [[0, "#F4F6FA"], [.5, "#C9D1DD"], [1, "#9BA6B6"]], 1, 0)}${lg("kChrome", [[0, "#F6F9FC"], [.45, "#B9C4D2"], [.6, "#8794A6"], [1, "#DCE3EB"]], 1, 0)}

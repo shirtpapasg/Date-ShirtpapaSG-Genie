@@ -37,14 +37,14 @@ function breadGround(cam, o = {}) { let s = `<rect x="-400" y="${n2(cam.hor - 26
 const THREADS = (() => { const out = [], r = rndm(123), O = [0, 300];
   const grow = (x, z, ang, len, t0, w, lev) => { const n = Math.max(4, Math.round(len / 70)), pts = [[x, z, t0]], dt = len / 2600; let a = ang, cx = x, cz = z;
     for (let i = 1; i <= n; i++) { a += (r() - .5) * .5; cx += Math.sin(a) * len / n; cz += Math.cos(a) * len / n; if (cz < 150) { cz = 150 + r() * 30; a = a > 0 ? 1.2 : -1.2; } pts.push([cx, cz, t0 + dt * i / n]);
-      if (lev < 2 && i > 1 && i < n && r() < (lev ? .3 : .5)) grow(cx, cz, a + (r() < .5 ? -1 : 1) * (.5 + r() * .5), len * (.34 + r() * .3), t0 + dt * i / n, w * .7, lev + 1); }
+      if (lev < 2 && i > 1 && i < n && r() < (lev ? .22 : .4)) grow(cx, cz, a + (r() < .5 ? -1 : 1) * (.5 + r() * .5), len * (.34 + r() * .3), t0 + dt * i / n, w * .7, lev + 1); }
     out.push({ pts, t0, t1: t0 + dt, w }); };
-  [-1.5, -1.05, -.68, -.36, -.1, .16, .42, .74, 1.1, 1.55, 2.3, -2.3].forEach((a, i) => grow(O[0], O[1], a, 900 + r() * 1100, .02 * i, 1, 0)); return out; })();
+  [-1.45, -.9, -.45, -.08, .3, .7, 1.2, 2.2, -2.3].forEach((a, i) => grow(O[0], O[1], a, 900 + r() * 1100, .02 * i, 1, 0)); return out; })();
 function threadsSvg(cam, g, thick = 1, o = {}) { let hal = "", core = "", fl = "";
   for (const b of THREADS) { if (g <= b.t0) continue; let prev = null;
     for (let i = 0; i < b.pts.length; i++) { const [X, Z, tau] = b.pts[i]; let p = gproj(X, Z, cam); if (!p) { prev = null; continue; }
       if (prev && prev.tau < g) { let q = p; if (tau > g) { const f = (g - prev.tau) / (tau - prev.tau); q = [lerp(prev.p[0], p[0], f), lerp(prev.p[1], p[1], f), lerp(prev.p[2], p[2], f)]; }
-        const sw = Math.max(1.2, b.w * 20 * (prev.p[2] + q[2]) / 2 * thick), d = `M${n2(prev.p[0])} ${n2(prev.p[1])} L${n2(q[0])} ${n2(q[1])}`;
+        const sw = Math.max(1.4, b.w * 9 * (prev.p[2] + q[2]) / 2 * thick), d = `M${n2(prev.p[0])} ${n2(prev.p[1])} L${n2(q[0])} ${n2(q[1])}`;
         hal += `<path d="${d}" stroke-width="${n2(sw * 2.1)}"/>`; core += `<path d="${d}" stroke-width="${n2(sw)}"/>`;
         if (o.flow && tau <= g) { const u = ((o.flow * 1.3 - tau * 6) % 1 + 1) % 1; if (u < .22) fl += `<circle cx="${n2(lerp(q[0], prev.p[0], u / .22))}" cy="${n2(lerp(q[1], prev.p[1], u / .22))}" r="${n2(sw * .8)}" fill="#FFF3C4"/>`; } }
       prev = { p, tau }; } }
@@ -63,12 +63,12 @@ function dotsSvg(cam, k, ab, t) { let s = ""; if (k <= 0) return ""; for (const 
 const STALKS = (() => { const r = rndm(321), a = []; for (let i = 0; i < 74; i++) { const Z = 150 + Math.pow(r(), 1.25) * 2300; a.push([(r() - .5) * (1300 + Z * 1.5), Z, 110 + r() * 150, r(), r()]); } return a.sort((p, q) => q[1] - p[1]); })();
 function patchSvg(cam, k, t) { if (k <= 0) return ""; let fz = "", st = "", near = "", dust = "";
   for (const [X, Z, H, a, b] of STALKS) { const p = gproj(X, Z, cam); if (!p || p[0] < -200 || p[0] > 2120) continue; const kk = ss(a * .6, a * .6 + .4, k); if (kk < .02) continue; const s = p[2], hh = H * s * kk, sw = 9 * Math.sin(t * .9 + a * 9) * s, tx = p[0] + sw + (b - .5) * 40 * s, ty = p[1] - hh, hr = (20 + 12 * b) * s * ss(.3, 1, kk);
-    let one = ""; for (let j = 0; j < 4; j++) { const an = j * 1.7 + a * 6, q = (34 + 30 * hash(j, a * 99)) * s * kk; fz += `<circle cx="${n2(p[0] + Math.cos(an) * q)}" cy="${n2(p[1] + Math.sin(an) * q * .34)}" r="${n2((26 + 16 * b) * s * kk)}"/>`; }
+    let one = ""; for (let j = 0; j < 4; j++) { const an = j * 1.7 + a * 6, q = (34 + 30 * hash(j, a * 99)) * s * kk; fz += `<ellipse cx="${n2(p[0] + Math.cos(an) * q)}" cy="${n2(p[1] + Math.sin(an) * q * .34)}" rx="${n2((26 + 16 * b) * s * kk)}" ry="${n2((12 + 8 * b) * s * kk)}"/>`; }
     one += `<path d="M${n2(p[0])} ${n2(p[1])} Q${n2(p[0] + (b - .5) * 30 * s)} ${n2(p[1] - hh * .5)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#A9B8B0" stroke-width="${n2(Math.max(1.4, 8 * s))}" stroke-linecap="round"/><path d="M${n2(p[0])} ${n2(p[1])} Q${n2(p[0] + (b - .5) * 30 * s)} ${n2(p[1] - hh * .5)} ${n2(tx)} ${n2(ty)}" fill="none" stroke="#fff" stroke-width="${n2(Math.max(1, 5 * s))}" stroke-linecap="round"/>`;
     if (hr > 1) { const dk = ss(.5, 1, kk); one += `<circle cx="${n2(tx)}" cy="${n2(ty)}" r="${n2(hr)}" fill="${hexL("#B9D2C2", b > .5 ? "#56705F" : "#7C9A88", dk)}" stroke="#3F5246" stroke-width="${n2(Math.max(.8, 2.6 * s))}"/><circle cx="${n2(tx - hr * .3)}" cy="${n2(ty - hr * .34)}" r="${n2(hr * .3)}" fill="#fff" opacity=".55"/>`;
       if (kk > .85) for (let j = 0; j < 4; j++) { const v = ((t * .22 + hash(j, a * 77)) % 1), dx = (hash(j, b * 55) - .3) * 150 * s * v + 30 * s * Math.sin(v * 5 + j), dy = -200 * s * v; dust += `<circle cx="${n2(tx + dx)}" cy="${n2(ty + dy)}" r="${n2(Math.max(1.3, 4.5 * s))}" fill="#6F8E7C" opacity="${n2(.8 * Math.sin(Math.PI * v))}"/>`; } }
     if (s > 2.2) near += one; else st += one; }
-  return `<g fill="#fff" opacity=".92" filter="url(#b3)">${fz}</g>${st}<g filter="url(#b3)">${near}</g>${dust}`; }
+  return `<g fill="#fff" opacity=".8" filter="url(#b3)">${fz}</g>${st}<g filter="url(#b3)">${near}</g>${dust}`; }
 // the kitchen air: the room far away and soft, the edge of the table like a cliff, a cup as tall as a tower; big slow dust motes near you
 function airWorld(t, u) { const yH = lerp(600, 430, eio(u * 1.25)), yE = lerp(690, 1500, eio(u / .42)), cx = lerp(1330, 1640, u), ck = lerp(.8, 1.25, u), bob = 8 * Math.sin(t * .9);
   let grain = ""; for (let i = -9; i <= 9; i++) grain += `<path d="M${n2(960 + i * 40)} ${n2(yH)} L${n2(960 + i * 420)} ${n2(yE)}" stroke="#D9A868" stroke-width="${3 + Math.abs(i) % 3}" opacity=".3"/>`;
@@ -98,7 +98,7 @@ function sporeJourney(t, M, o = {}) { const u = clamp((t - M.dive) / (M.land - M
   const sp = t >= M.land ? 1 : Math.pow(clamp((u - .2) / .8), 3.2), kf = lerp(.03, 1, sp);
   // the camera on the bread: a small dip on landing; a slow rise for the patch
   const dip = t >= M.land ? wob(t, M.land, .7) : 0, rise = ss(M.patch, M.patch + 2.6, t), cam = { d: -40 * rise, h: 150 * (1 - .22 * dip) + 95 * rise, hor: 430 - 26 * rise + 3 * Math.sin(t * .7) };
-  const g = t < M.threads ? 0 : eo((t - M.threads) / 3.4) * 1.05, fk = (t - M.substance) / 2.4, dk = (t - M.breaks) / 2.0, ab = ss(M.absorb, M.patch - .1, t), pk = t < M.patch ? 0 : (t - M.patch) / 2.6, thick = 1 + .9 * ab;
+  const g = t < M.threads ? 0 : eo((t - M.threads) / 3.4) * 1.05, fk = (t - M.substance) / 2.4, dk = (t - M.breaks) / 2.0, ab = ss(M.absorb, M.patch - .1, t), pk = t < M.patch ? 0 : (t - M.patch) / 2.6, thick = 1 + .7 * ab;
   const field = () => breadGround(cam) + (fk > 0 ? OP(1 - ss(M.patch + .4, M.patch + 1.6, t), filmSvg(cam, fk, t)) : "") + (dk > 0 && ab < 1 ? dotsSvg(cam, dk, ab, t) : "") + (g > 0 ? threadsSvg(cam, g, thick, ab > 0 && ab < 1 ? { flow: t } : {}) : "") + patchSvg(cam, pk, t);
   if (t < M.land) { // in the air; the slice (on its white tray) comes up to meet you
     const fx = lerp(820, 960, eio(sp)), fy = lerp(lerp(640, 470, eio(u * 1.25)), 430, sp);
