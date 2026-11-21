@@ -107,5 +107,44 @@ the chant), `j405` "Look closer at this tree trunk." (2 s). No teaching line was
 - Stills: `PART=2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg`. Bake backgrounds: `node bake.js <names>`.
 - Status: see ../progress/ep08.json
 
+## 21 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE
+- Rendered with `./build_part.sh 1|2` (10 s chunks kept in `out/chunks_p1`, `out/chunks_p2`; a patch re-renders only the chunks it touches).
+  `ep08_part1.mp4` 349.63 s (**5:49.6**), `ep08_part2.mp4` 327.13 s (**5:27.1**); 1920x1080 30 fps; both -16.0 LUFS, true peak -1.1 / -1.2 dBFS;
+  0 page errors. Captions `ep08_part1.srt` (152 cues), `ep08_part2.srt` (158 cues); contact sheets `sheet_part1.png`, `sheet_part2.png`.
+  Lengths grew by 4.4 s / 3.1 s from Stage 2b only because the seven look-closer verdicts now hold 2.5 s (see below). Nothing was cut.
+- Checked (frame strips from the rendered chunks, `qa/m/`; stills `qa/s2a-l.jpg`; final-file checks `qa/stage3_p1_fixes.jpg`, `qa/stage3_p2_fixes.jpg`):
+  board slide-in at 0:03 (Part 1); sparrow / sheep named by Heart at the start with their picture and "Can you spot it?"; goal cards read by
+  Pip (P1) / Basil (P2), each lifting with a tick; Mark Sentences read by the buddy who said "Say it with me!" (Pip, Basil · Basil, Momo);
+  lock-in clue tags on top of the ring, kept to the bell; calm "Last time" recap (three held pictures, one label each, a "Part 1" tag);
+  sand journey (scoop, furnace, grains melt, mould, cool, clear, "You are glass"); sap journey (inside the tree, the cut, the run, the cup,
+  rollers, the sole); every look-closer push-in (set zooms and dims, window opens from the thing) and its cut back out; glass: sand glows,
+  slumps, melts, clears, thermometer; metal: magnifier slides in, shiny bits; plastic: oil in, boxes ride the belt; kiln: finger dents the soft
+  bowl, bowl hops in, fire (speeded up), hops out hard; wood: saw (speeded up), planks stack, one plank rises, the bench slides in under it with
+  the same lines; rubber: white sap runs along the cut, drips, the cup fills, AT THE FACTORY sap -> rubber -> sole; fabric: the teal thread goes
+  over / under in time with Heart's words; the sheep walks / flips in the small picture and is large in the wood look-closer (about 10 s), so it
+  is findable; reveal rings sit on the sparrow / sheep; name hops to the tiles; cliffhanger camera drop (board lifts, under the table to the bag and
+  shoe, "PART 2"); count-in onsets measured on the files 1.00 s apart (P1 341.40 / 342.40 / 343.39, P2 318.89 / 319.89 / 320.89, within 7 ms
+  of the timeline); look-closer sound cues sit at speech level (whoosh / stamp + chime about -14 to -17 dB RMS against speech -16).
+- Fixed (small, local; only the touched chunks re-rendered):
+  - The seven look-closer verdict tags showed only 1.3-1.5 s before the hard cut back out: every `v_*` wait in `script.py` is now 2.5 s
+    (teacher's priority: a stronger look-closer). This is the only length change.
+  - P1 Round 1 lock-in had no clue tag on the ring: `tag: "a pile of sand"` (p1.js SC.r1).
+  - P1 glass look-closer: the verdict covered "Only in a factory!": the safety tag moved right (closer.js glassArt, `TX + 120`).
+  - P2 wood: the pencil was cut off at the left edge when Heart says "your pencil": `CAMB` centre 420 -> 375 (p2.js).
+  - P2 wood look-closer: the planks board slid in at the frame edge during the push-in: it now slides in when we cut back out (`SC.trees` tB =
+    `SCN.paper.t0 + .1`).
+  - P2 Showdown: Momo's pick card was hidden behind Basil's disc: Basil 420 -> 520, his card 540 -> 640, his bubble 560 -> 495 (tail on him,
+    no longer over Pip's notes).
+  - P2 sheep reveal: "Where does wood come from?" / "Tell someone at home!" sat on top of the big 7 MATERIALS board (over the WOOD tile) and the
+    board ran off the right edge: the reveal now replays the set without the board (`view2` with teach2's camera, so the ring stays on the sheep).
+  - Captions: a sentence split into two cues overlapped by 0.25 s; `finish.sh` now ends each cue before the next one starts (0 overlaps).
+- Thumbnails `thumb_part1.jpg`, `thumb_part2.jpg` read well (title words large on the bright side, PART pill, surprised buddy); unchanged.
+- Uploaded with `upload.json` (Made for Kids, public; both playlists after PBoXgjYIun4 = EP7 Part 2; replaces D9NxEvJuneI, retire_old: it stays
+  public, out of both playlists, its description's first line points to Part 1):
+  Part 1 https://www.youtube.com/watch?v=5-JcNGeLviE , Part 2 https://www.youtube.com/watch?v=rfRyqc4PLXQ .
+- Left for the teacher: both parts are over the 5:15 guide (5:49.6 / 5:27.1) because of the look-closers (never cut); the next cuts, if wanted,
+  are listed under Stage 2b. During the wood look-closer's 1 s push-in the book strip "Wood comes from the trees..." zooms off the top edge
+  (camera motion, not fixed). The outro discs touch the frame edges as in EP7. A human should listen once.
+
 ## On resume (teacher, 21 Nov)
 Before Stage 3, apply the 21 Nov rules in SERIES_FORMAT.md, especially section 1b LOOK-CLOSER: each material gets a slow zoom-in on the real thing with the evidence shown (sand melting, clay in the kiln, sap from the cut), held 6-10 s, Heart describing what we see, one verdict tag. Also: Heart names the hidden animal at the start; no orphan labels.

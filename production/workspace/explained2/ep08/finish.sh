@@ -23,8 +23,10 @@ for id in tl['order']:
     for i, w in enumerate(ws):
         cur.append(w)
         if w['w'][-1] in '.!?' or i == len(ws) - 1 or len(cur) >= 12:
-            out.append(f"{n}\n{ft(cur[0]['a'])} --> {ft(cur[-1]['b'] + .25)}\n{' '.join(x['w'] for x in cur)}\n"); n += 1; cur = []
-open(f'ep08_part{PT}.srt', 'w').write('\n'.join(out))
+            out.append([cur[0]['a'], cur[-1]['b'] + .25, ' '.join(x['w'] for x in cur)]); cur = []
+out.sort(key=lambda c: c[0])
+for i in range(len(out) - 1): out[i][1] = max(out[i][0] + .3, min(out[i][1], out[i + 1][0] - .02))   # no two cues on screen at once
+open(f'ep08_part{PT}.srt', 'w').write('\n'.join(f"{i + 1}\n{ft(a)} --> {ft(b)}\n{txt}\n" for i, (a, b, txt) in enumerate(out)))
 P
 ffmpeg -y -loglevel error -pattern_type glob -i 'out/sheet/s_*.png' -vf "tile=6x5:padding=8:color=0x120E2E" -frames:v 1 sheet_part$P.png && echo sheet_part$P.png
 ffmpeg -hide_banner -i ep08_part$P.mp4 -af ebur128 -f null - 2>&1 | grep -E "^\s+I:" | tail -1
