@@ -64,6 +64,7 @@ slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 HOLD = lambda mk: ("hold", mk, 2.0, .6)            # a new term's pop: 2.0 s on screen; Heart waits at least .6 s
 STRIP = 3.5                                         # a book sentence's cream strip: at least 3.5 s on screen
 VERDICT = lambda mk: [("mark", mk), ("wait", 2.5)]  # a look-closer's one verdict tag, held 2.5 s before the pull back
+VERDICT3 = lambda mk: [("mark", mk), ("wait", 2.8)]  # Stage 3: three verdict pills land one after another (.44 s): the last one also gets 2.5 s
 
 def kwrecap(words):
     out = [("scene", "kwrecap"), ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5})]
@@ -250,7 +251,7 @@ SEQ2 = [
  ("say", "j702", H, "Most light. Only some light. No light.", {**LC, "pre": .2, "kw": [["c1", "most"], ["c2", "only"], ["c3", "no"]]}),
  ("say", "j703", H, "How much light can pass through? That has a name.", {**LC, "pre": .3, "kw": [["bracket", "how"]]}),
  ("wait", .6),
- *VERDICT("v_three"),
+ *VERDICT3("v_three"),
  # ---- 8 · Mark Sentence 2: transparency (Basil); TRANSPARENCY pops beside the card on "transparency"; the heading is stamped on the board
  ("scene", "mark2"),
  ("say", "j801", B, "Say it with me!", {"pre": .6}), ("wait", .8),
@@ -290,7 +291,7 @@ SEQ2 = [
  ("wait", .4), ("mark", "split2"), ("wait", .6),   # the frame splits: the clear box and its bright spot, the cloudy box and its soft glow
  *cut("both", [("say", "j1104", H, "Both boxes are plastic!", {**LC, "pre": 0})]),
  ("wait", .6),
- *VERDICT("v_box"),
+ *VERDICT3("v_box"),
  ("scene", "fix"),
  ("say", "j1105", H, "Glass and some plastics are transparent. Frosted glass and some plastics are translucent.", {"pre": 1.0, "hold": 2 * STRIP}),   # pre 1.0: the two tiles hop onto the board
  ("say", "j1106", H, "Two fingers? Put up two more on your score hand!", {"pre": .5, "post": .4}),

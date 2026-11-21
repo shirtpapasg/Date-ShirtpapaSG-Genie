@@ -59,7 +59,7 @@ SC.row3 = (t, s) => { const L = "j604", m = MK("mat"), y = MK("tray"), hw = rw(0
   return C(t, { rack: t < m - .95 ? RK : t < y - .85 ? ["clear", "frost", "door", "tray"] : ["clear", "frost", "door", "mat"], rig: row3Rig(t), board: { glow: t < stampT(2) ? 2 : -1, tg } }, CAMR3)
     + wlab(t, m - .1, CAMR3, 700, 470, "rubber", hw[0] - 20, hw[1] + 40, { size: 44, t1: y - .9 }) + wlab(t, y - .1, CAMR3, 700, 470, "metal", hw[0] - 20, hw[1] + 40, { size: 44, t1: LT(L) + .3 })
     + wlab(t, MK("on5") + .2, CAMR3, 1170, 450, "no spot · no glow", cw[0], cw[1] - 30, { size: 40, t1: LT(L) + .3 })
-    + bookCaption(t, L, "Rubber, wood and metal are opaque materials.", 120, { size: 46, keys: ["rubber,", "wood", "metal"] }) + bookCaption(t, L, "You cannot see objects placed behind opaque materials.", 215, { size: 42, x: 1085, off: 7, keys: ["cannot", "see", "placed", "behind"] }) + buds(t) + torchRule(t) + HUD(t); };
+    + bookCaption(t, L, "Rubber, wood and metal are opaque materials.", 120, { size: 46, keys: ["rubber,", "wood", "metal"] }) + bookCaption(t, L, "You cannot see objects placed behind opaque materials.", 215, { size: 42, x: 1175, off: 7, keys: ["cannot", "see", "placed", "behind"] }) + buds(t) + torchRule(t) + HUD(t); };
 
 /* 7 · [LOOK CLOSER] three sheets, three cards (closer.js threeArt; watched, not scored). The verdict lands in three parts, each in its answer style */
 SC.lcthree = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 960, fy: 555, bgc: LCBGN, art: threeArt, set: (tt) => C(tt, { rack: ["clear", "frost", "door", "mat"], rig: { sheet: "tray", on: 1, robot: 1 } }, CAMR3), verdict: ["", P.ink], tv: undefined,
@@ -99,7 +99,7 @@ SC.lcbox = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 960, fy: 555, bgc: LCBGN, 
 SC.fix = (t, s) => { const L = "j1105", tTip = LE(L) - .8, rub = ss(LE(L) - 1.9, LE(L) - 1.4, t), wr = ss(LE(L) - 1.4, LE(L) - .2, t), tc = W("j1106", "two") - .1;
   return C(t, { rack: RKB, rig: { sheet: "boxF" }, bot: { x: BOT_FAR }, board: false }) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".42"/>`
     + TF(1470, 1050, .5, torchBoard(t)) + TF(650, 1052, .58, pipNotes(t, { fixing: 1, rub, write: wr, x: 1 - rub, tick: spring(t, LE(L) - .1, .45) }))
-    + bookCaption(t, L, "Glass and some plastics are transparent.", 120, { size: 48, keys: ["some", "plastics"] }) + bookCaption(t, L, "Frosted glass and some plastics are translucent.", 215, { size: 48, off: 6, keys: ["some", "plastics"] })
+    + bookCaption(t, L, "Glass and some plastics are transparent.", 120, { size: 48, keys: ["some", "plastics"] }) + bookCaption(t, L, "Frosted glass and some plastics are translucent.", 215, { size: 44, x: 900, off: 6, keys: ["some", "plastics"] })
     + (t >= tTip ? TF(650, 420, spring(t, tTip, .45), `<g filter="url(#drop)"><rect x="-330" y="-80" width="660" height="160" rx="30" fill="url(#gPaper)" stroke="${P.sun}" stroke-width="7"/></g>${T(0, -14, "Do not go by the name.", 44, P.ink)}${T(0, 44, "How much light passes through?", 40, P.ink, { w: 600 })}`) : "")
     + buddy("pip", 150, 1062, 200, t, { aura: true, poses: [[s.t0, "oops"], [s.t0 + 2.2, "sit"], [tc, "cheer"]], nohop: true }) + coin(t, tc, 1470, 560, "+2", "if you showed two fingers") + HUD(t); };
 
@@ -109,7 +109,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 58, board
 /* 13 · score hand, the moth (lizReveal in common.js) */
 SC.final = (t, s) => { const L = "j1301"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "j1302", tq = W(L, "it") - .1, land = ss(s.t0 + .9, s.t0 + 2.2, t), [mx, my] = mothAt(t, land);
-  return lizReveal(t, s, L, C(t, { rack: RKB, rig: { sheet: "boxF" }, bot: { x: BOT_FAR }, land, wave: ss(tq - .2, tq + .3, t) }), mx, my, tq, "It was by the corridor lamp!", 0, 120, 62, 2.0); };
+  return lizReveal(t, s, L, C(t, { rack: RKB, rig: { sheet: "boxF" }, bot: { x: BOT_FAR }, board: false, land, wave: ss(tq - .2, tq + .3, t) }), mx, my, tq, "It was by the corridor lamp!", 0, 120, 62, 2.0); };
 
 /* 14 · the dare for Episode 12: the SAME supermarket trolley three times (glass, metal, fabric), each whole, each with a big bag of rice.
    The three boards slide in low along the cleared table (EP12 opens with these same boards and cards) */

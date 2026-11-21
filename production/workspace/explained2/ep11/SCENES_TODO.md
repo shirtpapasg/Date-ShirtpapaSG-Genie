@@ -325,7 +325,7 @@ No new pose is needed for EP11 (the script's section 3 says so).
   - `h1305` 4:48.4 HEART: Now you know!
   - `u1305` 4:48.4 CHANT: Now you know!
 
-## Part 2 · "It Is WHITE. So Can Light Pass Through a Wooden Door?" · 5:04.5
+## Part 2 · "It Is WHITE. So Can Light Pass Through a Wooden Door?" · 5:05.1
 
 ### 0:00.0 – 0:11.4 · `lasttime` · 1 · "Last time...": three calm pictures (11.4 s)
 
@@ -400,7 +400,7 @@ No new pose is needed for EP11 (the script's section 3 says so).
   - `j505` 1:22.8 MOMO: Oh! White is only its colour!
   - `j506` 1:25.4 HEART: Three fingers? One finger up!
 
-### 1:28.0 – 1:39.0 · `mark1` · 6 · Mark Sentence 1: opaque (Pip) (10.9 s)
+### 1:28.0 – 1:39.0 · `mark1` · 6 · Mark Sentence 1: opaque (Pip) (11.0 s)
 
 - **Draw:** WIRED (Pip reads; OPAQUE pops beside the card). Under the card: the white door with its bright front, the card behind with no spot.
 - **Reuse:** `markScene`.
@@ -410,161 +410,161 @@ No new pose is needed for EP11 (the script's section 3 says so).
   - `j601` 1:28.5 PIP: Say it with me!
   - `j602` 1:30.4 PIP: Some materials do not allow any light to pass through them. These materials are opaque.
 
-### 1:39.0 – 1:52.2 · `row3` · 6 · Row 3: the door, a rubber mat, a metal tray (13.3 s)
+### 1:39.0 – 1:52.3 · `row3` · 6 · Row 3: the door, a rubber mat, a metal tray (13.3 s)
 
 - **Draw:** `row3` + 0.2: the white door's tile hops onto row 3; + 1.0: OPAQUE stamped (white, dark-violet border). `mat` ("rubber"): an adult's hands set the rubber doormat in its frame in the holder; the torch is on: its front lit, the card with no spot (tok, click); its tile hops on. `tray` ("metal"): the metal tray from the shoe rack, the same (clink, click); its tile hops on. Tags *rubber* · *metal*; the torch stays on its mark. Then the book's two sentences on cream strips (WIRED, 3.5 s each); the three tiles light as Heart names rubber, wood, metal.
 - **Reuse:** the corridor set (`BG.corridor`, bake it: night) + the folding test table; `bookCaption`; `torchBoard`.
 - **New:** The framed doormat and tray (plain; lit front).
-- **Marks:** `row3` 1:39.0, `mat` 1:40.1, `tray` 1:41.4, `on5` 1:43.1
+- **Marks:** `row3` 1:39.0, `mat` 1:40.1, `tray` 1:41.5, `on5` 1:43.1
 - **Lines:**
   - `j603` 1:40.0 HEART: A rubber mat. A metal tray. Torch on: no light passes through.
-  - `j604` 1:45.2 HEART: Rubber, wood and metal are opaque materials. You cannot see objects placed behind opaque materials.
+  - `j604` 1:45.3 HEART: Rubber, wood and metal are opaque materials. You cannot see objects placed behind opaque materials.
 
-### 1:52.2 – 2:08.8 · `lcthree` · 7 · [LOOK CLOSER] Three sheets, three cards (16.5 s)
+### 1:52.3 – 2:09.1 · `lcthree` · 7 · [LOOK CLOSER] Three sheets, three cards (16.8 s)
 
 - **Draw:** The table seen from above and a little to the side; the corridor dims. Three small test lines, one above the other, each with the torch on its mark, a sheet and a card (the clear and the frosted glass as held pictures from Part 1, the door live). Tags *clear glass* · *frosted glass* · *wooden door*. The cards light one after another: `c1` a bright spot, `c2` a soft glow, `c3` no spot and no glow. `bracket`: a plain bracket joins the three cards, label *How much light?* Verdict **MOST · ONLY SOME · NONE** at `v_three` (wired as one pill with coloured words; Stage 2 may make it three pills with `ansTag`).
 - **Reuse:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js: push-in from the set, dim, the window opens, LOOK CLOSER tag, verdict `lcVerdict` at the `v_*` mark, score and shelf away). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the top 110 px for a book strip and the bottom 80 px for the verdict). Models: ep08/closer.js (seven drawn look-closers), ep01's robot window.
 - **New:** `threeArt(t)`.
-- **Marks:** `c1` 1:57.8, `c2` 1:59.5, `c3` 2:01.3, `bracket` 2:02.3, `v_three` 2:06.3
+- **Marks:** `c1` 1:57.9, `c2` 1:59.5, `c3` 2:01.4, `bracket` 2:02.4, `v_three` 2:06.3
 - **Lines:**
-  - `j701` 1:53.1 HEART: Three sheets. The same torch. Look closer.
-  - `j702` 1:57.8 HEART: Most light. Only some light. No light.
-  - `j703` 2:02.3 HEART: How much light can pass through? That has a name.
+  - `j701` 1:53.2 HEART: Three sheets. The same torch. Look closer.
+  - `j702` 1:57.9 HEART: Most light. Only some light. No light.
+  - `j703` 2:02.4 HEART: How much light can pass through? That has a name.
 
-### 2:08.8 – 2:18.4 · `mark2` · 8 · Mark Sentence 2: transparency (Basil) (9.7 s)
+### 2:09.1 – 2:18.7 · `mark2` · 8 · Mark Sentence 2: transparency (Basil) (9.7 s)
 
 - **Draw:** WIRED (Basil reads; TRANSPARENCY pops beside the card on "transparency"). Under the card: the three cards in a row.
 - **Reuse:** `markScene`.
 - **New:** A small picture.
-- **Marks:** `kw_transparency` 2:11.1
+- **Marks:** `kw_transparency` 2:11.5
 - **Lines:**
-  - `j801` 2:09.2 BASIL: Say it with me!
-  - `j802` 2:11.1 BASIL: The transparency of a material refers to how much light can pass through it.
+  - `j801` 2:09.5 BASIL: Say it with me!
+  - `j802` 2:11.4 BASIL: The transparency of a material refers to how much light can pass through it.
 
-### 2:18.4 – 2:20.5 · `heading` · 8 · The board is complete (2.1 s)
+### 2:18.7 – 2:20.8 · `heading` · 8 · The board is complete (2.1 s)
 
 - **Draw:** `heading`: TRANSPARENCY is stamped across the top of the board (functional in `torchBoard`). The board centred between the discs, big enough to read.
 - **Reuse:** the corridor set (`BG.corridor`, bake it: night) + the folding test table; `torchBoard`.
 - **New:** Nothing beyond the board.
-- **Marks:** `heading` 2:18.9
+- **Marks:** `heading` 2:19.2
 
-### 2:20.5 – 2:24.5 · `waitw` · 9 · Be the light! (the glide in) (4.0 s)
+### 2:20.8 – 2:24.8 · `waitw` · 9 · Be the light! (the glide in) (4.0 s)
 
 - **Draw:** Pill **Be the light!** The camera glides to the clear window and through it into the lit living room, up to the ceiling lamp; a soft cream wipe.
 - **Reuse:** ep10 `SC.waitw`.
 - **New:** The glide.
 - **Lines:**
-  - `j901` 2:20.9 HEART: Be the light! Shrink down. Quietly.
+  - `j901` 2:21.2 HEART: Be the light! Shrink down. Quietly.
 
-### 2:24.5 – 2:46.8 · `shrink` · 9 · BE THE LIGHT OF THE LAMP (first person) (22.4 s)
+### 2:24.8 – 2:47.2 · `shrink` · 9 · BE THE LIGHT OF THE LAMP (first person) (22.4 s)
 
 - **Draw:** `lamp`: you spread out from the ceiling lamp; the room below, warm and wide; the edges glow; tags *You: light from the lamp* · *a flat at night*. `door`: the inside of the white front door rushes up and fills the view; it lights up, bright, and the view stops (soft thud on "stop"); tag *wood · you cannot pass through*. `frost`: a soft cream blink; a pale cloudy pane; part of the view goes on, dimmer; outside the corridor is a blur of soft shapes; tag *frosted glass · only some pass through*. `clear`: a soft cream blink; a faint glint and a window frame slide past; the corridor is SHARP: parapet, plants, the night sky, the lit windows opposite; tags *clear glass · most pass through* · *out into the night*; the crickets come close. Calm; nothing about why.
 - **Reuse:** shrink.js helpers.
 - **New:** The flat from inside at night (ceiling lamp, the inside of the white front door, the frosted window, the clear window with the corridor beyond).
-- **Marks:** `dive` 2:24.5, `lamp` 2:26.5, `door` 2:29.9, `frost` 2:35.8, `clear` 2:40.4
+- **Marks:** `dive` 2:24.8, `lamp` 2:26.8, `door` 2:30.2, `frost` 2:36.1, `clear` 2:40.7
 - **Lines:**
-  - `j902` 2:26.6 HEART: You are light from a lamp, in a flat at night.
-  - `j903` 2:30.1 HEART: A wooden door. You stop. You cannot pass through.
-  - `j904` 2:36.0 HEART: A frosted window. Only some of you pass through.
-  - `j905` 2:40.6 HEART: A clear glass window. Most of you pass through, out into the night!
+  - `j902` 2:27.0 HEART: You are light from a lamp, in a flat at night.
+  - `j903` 2:30.4 HEART: A wooden door. You stop. You cannot pass through.
+  - `j904` 2:36.3 HEART: A frosted window. Only some of you pass through.
+  - `j905` 2:40.9 HEART: A clear glass window. Most of you pass through, out into the night!
 
-### 2:46.8 – 2:47.8 · `showcard` · 10 · Showdown card (1.0 s)
+### 2:47.2 – 2:48.2 · `showcard` · 10 · Showdown card (1.0 s)
 
 - **Draw:** WIRED (whoosh out of the journey).
 - **Reuse:** All.
 - **New:** Nothing.
 
-### 2:47.8 – 3:20.6 · `show` · 10 · SHOWDOWN: Pip's notes (32.7 s)
+### 2:48.2 – 3:20.9 · `show` · 10 · SHOWDOWN: Pip's notes (32.7 s)
 
 - **Draw:** Pip's notes on an easel on the ground between the discs: **1** *A metal tray is opaque.* (the tray) **2** *This box is plastic, so it is transparent.* (a cloudy lunch box: what is in it is only a soft blur) **3** *Frosted glass is translucent.* (the frosted sheet glowing). Each line lights as Pip reads it. On the table, set down by an adult's hands: the real cloudy box and a clear box of the same shape. The YOU ring with a counting hand, 6 s (`ring0_show`); lines and drawings stay through the countdown. LOCKED IN! Momo 2 (pointing), Basil 2 (cheer); Pip oops.
 - **Reuse:** ep10/p2.js `SC.show` (easel, ring, stamp, picks) and `basilNotes` (ep10/rainy.js) as the model for `pipNotes`.
 - **New:** Pip's notes on the easel; the two plastic lunch boxes.
-- **Marks:** `ring0_show` 3:06.0, `bell_show` 3:12.0
+- **Marks:** `ring0_show` 3:06.3, `bell_show` 3:12.3
 - **Lines:**
-  - `j1001` 2:48.3 PIP: My notes! One: a metal tray is opaque. Two: this box is plastic, so it is transparent. Three: frosted glass is translucent.
-  - `j1002` 2:58.2 HEART: Showdown! Double points. One line has a mistake. Line one, two, or three? Show me with your fingers.
-  - `j1003` 3:12.7 HEART: Locked in!
-  - `j1004` 3:13.8 MOMO: Two! I cannot see clearly into that box.
-  - `j1005` 3:17.0 BASIL: Two! My lunch looks blurry in there!
-  - `j1006` 3:19.7 PIP: Oops!
+  - `j1001` 2:48.6 PIP: My notes! One: a metal tray is opaque. Two: this box is plastic, so it is transparent. Three: frosted glass is translucent.
+  - `j1002` 2:58.5 HEART: Showdown! Double points. One line has a mistake. Line one, two, or three? Show me with your fingers.
+  - `j1003` 3:13.1 HEART: Locked in!
+  - `j1004` 3:14.2 MOMO: Two! I cannot see clearly into that box.
+  - `j1005` 3:17.4 BASIL: Two! My lunch looks blurry in there!
+  - `j1006` 3:20.0 PIP: Oops!
 
-### 3:20.6 – 3:41.5 · `lcbox` · 11 · [LOOK CLOSER] Two plastic boxes (21.0 s)
+### 3:20.9 – 3:42.2 · `lcbox` · 11 · [LOOK CLOSER] Two plastic boxes (21.3 s)
 
 - **Draw:** An adult's hands set the clear box in the holder, on its side (tok at +0.5 s). Torch, box and card fill the window; the corridor dims. Tags *plastic* (on both boxes) · *same torch · same place*. `on4`: click; the beam goes through the clear box; a bright spot on the card. `swap`: the hands change the boxes (two soft plastic knocks at +0.3 / +1.0; the torch stays on its mark): only a soft, dim glow reaches the card. `split2`: the frame splits: left the clear box and its bright spot, right the cloudy box and its soft glow; labels *a bright spot* · *a soft glow*. Both boxes empty and closed, the same shape and size, on their sides. Verdict **BOTH PLASTIC · ONE TRANSPARENT, ONE TRANSLUCENT** (wired, coloured words) at `v_box`.
 - **Reuse:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js: push-in from the set, dim, the window opens, LOOK CLOSER tag, verdict `lcVerdict` at the `v_*` mark, score and shelf away). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the top 110 px for a book strip and the bottom 80 px for the verdict). Models: ep08/closer.js (seven drawn look-closers), ep01's robot window. The set is a placeholder: draw the corridor table with the boxes as `set`.
 - **New:** `boxArt(t)`.
-- **Marks:** `on4` 3:24.5, `swap` 3:29.5, `split2` 3:36.0, `v_box` 3:39.0
+- **Marks:** `on4` 3:24.9, `swap` 3:29.8, `split2` 3:36.3, `v_box` 3:39.4
 - **Lines:**
-  - `j1101` 3:21.3 HEART: Let's test it. Look closer.
-  - `j1102` 3:25.3 HEART: A clear plastic box. A bright spot: most light.
-  - `j1103` 3:31.1 HEART: The cloudy plastic box. A soft glow: only some light.
-  - `j1104` 3:36.7 HEART: Both boxes are plastic!
+  - `j1101` 3:21.6 HEART: Let's test it. Look closer.
+  - `j1102` 3:25.6 HEART: A clear plastic box. A bright spot: most light.
+  - `j1103` 3:31.4 HEART: The cloudy plastic box. A soft glow: only some light.
+  - `j1104` 3:37.0 HEART: Both boxes are plastic!
 
-### 3:41.5 – 3:52.9 · `fix` · 11 · Some plastics: one material, two rows (11.4 s)
+### 3:42.2 – 3:53.6 · `fix` · 11 · Some plastics: one material, two rows (11.4 s)
 
 - **Draw:** The boxes' tiles hop onto the board (+0.3 clear box onto MOST LIGHT, +0.7 cloudy box onto ONLY SOME LIGHT; functional). The book's two sentences (WIRED strips; *some plastics* highlighted). On the easel line 2 is rubbed out (about 1.6 s before the strip ends) and rewritten in green: *This box is plastic, and it is translucent.* The tip card (WIRED). Coin +2, score 3 : 1 (wired).
 - **Reuse:** the corridor set (`BG.corridor`, bake it: night) + the folding test table; `torchBoard`; the easel.
 - **New:** The rewritten line.
 - **Lines:**
-  - `j1105` 3:42.3 HEART: Glass and some plastics are transparent. Frosted glass and some plastics are translucent.
-  - `j1106` 3:49.7 HEART: Two fingers? Put up two more on your score hand!
+  - `j1105` 3:42.9 HEART: Glass and some plastics are transparent. Frosted glass and some plastics are translucent.
+  - `j1106` 3:50.3 HEART: Two fingers? Put up two more on your score hand!
 
-### 3:52.9 – 4:14.8 · `chant` · 12 · The chant (21.9 s)
+### 3:53.6 – 4:15.4 · `chant` · 12 · The chant (21.9 s)
 
 - **Draw:** WIRED (`chantScene`): the board behind the buddies, each row flashing on its call (`torchBoard({flash})`, placeholder at the lower left). Stage 2: the drawn board, centred and big enough to read.
 - **Reuse:** All.
 - **New:** Nothing beyond the board.
 - **Lines:**
-  - `u1002` 3:53.4 CHANT: Say it with us!
-  - `c1003` 3:55.2 CHANT: the chant (3 calls, YOUR TURN! after each)
+  - `u1002` 3:54.1 CHANT: Say it with us!
+  - `c1003` 3:55.8 CHANT: the chant (3 calls, YOUR TURN! after each)
 
-### 4:14.8 – 4:22.4 · `final` · 13 · Score hand (7.6 s)
+### 4:15.4 – 4:23.0 · `final` · 13 · Score hand (7.6 s)
 
 - **Draw:** WIRED.
 - **Reuse:** All.
 - **New:** Nothing.
 - **Lines:**
-  - `j1301` 4:15.2 HEART: Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!
+  - `j1301` 4:15.8 HEART: Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!
 
-### 4:22.4 – 4:27.9 · `liz` · 13 · Did you spot the moth? (5.5 s)
+### 4:23.0 – 4:28.5 · `liz` · 13 · Did you spot the moth? (5.5 s)
 
 - **Draw:** A replay of the wide corridor with a ring round the moth by the lamp; it flutters down, lands on the wall, opens its wings and waves a feeler. `lizReveal(t, s, "j1302", view, x, y, tq, "It was by the corridor lamp!")`.
 - **Reuse:** `lizReveal`.
 - **New:** The corridor view + the moth's position.
 - **Lines:**
-  - `j1302` 4:22.8 HEART: Did you spot the moth? It was by the corridor lamp! Tell someone at home.
+  - `j1302` 4:23.4 HEART: Did you spot the moth? It was by the corridor lamp! Tell someone at home.
 
-### 4:27.9 – 4:42.3 · `dare` · 14 · The dare for Episode 12: a supermarket trolley (14.4 s)
+### 4:28.5 – 4:42.9 · `dare` · 14 · The dare for Episode 12: a supermarket trolley (14.4 s)
 
 - **Draw:** The three cards Glass · Metal · Fabric are WIRED (they light as Heart counts and take turns after "Lock in"), and the ?. Draw: three picture boards slide in low and stand side by side by the table, centred between the discs: the SAME supermarket trolley three times, each whole and unbroken, each with a big bag of rice beside it: one made of glass, one of metal, one of fabric (e.g. `PIC.trGlass`, `PIC.trMetal`, `PIC.trFabric`: EP12 opens with these same boards and cards). Banner NEXT · *Choosing materials!* · *Lock in your answer!* Basil cheer (j1402, cuttable). Nothing breaks.
 - **Reuse:** ep10/p2.js `SC.dare` (boards, ?, cards, NEXT banner).
 - **New:** The three trolley boards.
 - **Lines:**
-  - `j1401` 4:28.5 HEART: Next time: a supermarket trolley! Which material would you choose to make it? One, glass. Two, metal. Three, fabric. Lock in your answer!
-  - `j1402` 4:39.2 BASIL: A glass trolley! I could see all my snacks!
+  - `j1401` 4:29.1 HEART: Next time: a supermarket trolley! Which material would you choose to make it? One, glass. Two, metal. Three, fabric. Lock in your answer!
+  - `j1402` 4:39.8 BASIL: A glass trolley! I could see all my snacks!
 
-### 4:42.3 – 4:52.8 · `kwrecap` · 15 · Key-word read-along (10.5 s)
+### 4:42.9 – 4:53.4 · `kwrecap` · 15 · Key-word read-along (10.5 s)
 
 - **Draw:** WIRED (two words).
 - **Reuse:** All.
 - **New:** Nothing.
 - **Lines:**
-  - `h860` 4:42.8 HEART: Let's read today's key words together! Ready?
-  - `hk_opaque` 4:46.3 HEART: Opaque.
-  - `uk_opaque` 4:47.3 CHANT: Opaque.
-  - `hk_transparency` 4:48.6 HEART: Transparency.
-  - `uk_transparency` 4:49.9 CHANT: Transparency.
-  - `h864` 4:51.5 HEART: Well done!
+  - `h860` 4:43.4 HEART: Let's read today's key words together! Ready?
+  - `hk_opaque` 4:46.9 HEART: Opaque.
+  - `uk_opaque` 4:47.9 CHANT: Opaque.
+  - `hk_transparency` 4:49.3 HEART: Transparency.
+  - `uk_transparency` 4:50.5 CHANT: Transparency.
+  - `h864` 4:52.2 HEART: Well done!
 
-### 4:52.8 – 5:04.5 · `nyk` · 16 · "Now you know!" (11.7 s)
+### 4:53.4 – 5:05.1 · `nyk` · 16 · "Now you know!" (11.7 s)
 
 - **Draw:** WIRED with the placeholder board (complete: heading + three rows) between the buddies.
 - **Reuse:** All.
 - **New:** Nothing.
 - **Lines:**
-  - `u1300` 4:53.5 CHANT: Say it with us!
-  - `h1304a` 4:55.4 HEART: Ready?
-  - `h1304o` 4:56.2 HEART: One!
-  - `h1304t` 4:57.2 HEART: two!
-  - `h1305` 4:58.2 HEART: Now you know!
-  - `u1305` 4:58.2 CHANT: Now you know!
+  - `u1300` 4:54.1 CHANT: Say it with us!
+  - `h1304a` 4:56.0 HEART: Ready?
+  - `h1304o` 4:56.9 HEART: One!
+  - `h1304t` 4:57.9 HEART: two!
+  - `h1305` 4:58.9 HEART: Now you know!
+  - `u1305` 4:58.9 CHANT: Now you know!

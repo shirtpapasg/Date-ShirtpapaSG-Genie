@@ -6,7 +6,7 @@ go-ahead in its section 12: transparency taught last, in Part 2; the HOLD ON! on
 plastic box; the OPAQUE tag white with a dark border; goldfish and moth; FROSTED GLASS a key word; the EP12 dare keeps glass, metal, fabric;
 on upload EP11 replaces the classic X7Ys0KAaYyg; the four new words use Kokoro's own sounds). EP10 is live (its playlists' anchor for EP11).
 
-Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing, done 2026-11-21, Fable)** · Stage 3: render (Opus).
+Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing, done 2026-11-21, Fable)** · **Stage 3 (render, checks, upload: done 2026-11-21, Opus; LIVE)**.
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep11_script.md` is untouched.
@@ -157,3 +157,57 @@ three cards.
   `explained-p3-ep10-part2`; `retire_old`: the classic X7Ys0KAaYyg "Waterproof Or See-Through? Testing Materials (Part B)" leaves the
   playlists and points to the new episode; never deleted, stays public). If its NEW VERSION line should also name EP10, add it by hand.
 - Status: see ../progress/ep11.json
+
+## 21 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE
+- **j602 re-recorded.** Pip's "opaque" ("These materials are opaque.") with Kokoro's own oʊpˈeɪk came out with a reduced first syllable and a
+  short, open second vowel: pocketsphinx chose "oh-pack" / "oh-peck" over "opaque" for that phoneme string at five speeds (phone loop
+  "AW P IH"). Formants show a front glide (F2 2600 -> 3000 Hz, not the low F2 of "oh-PIKE" that Pip's own "oh-pike" has, about 1900 Hz),
+  so it was never "PIKE", but it was not clearly "oh-PAKE". The respelling "oh-pake" (ˈoʊpˈeɪk) decodes as "opaque" (phones OW P EY K) in 4
+  of 5 speeds. New script opt `pron` (a respelling for ONE line; the caption keeps the script's words): j602 has
+  `{"pron": {"are opaque.": "are oh-pake."}}`; make_voice.py applies it (`LINE_PRON`) and aligns "oh-pake" (EXTRA). Only j602 was
+  re-recorded (5.44 -> 5.46 s); Part 2's timeline moved by .02 s. `qa/j602_opaque_check.m4a` (11 s): the old ending, the new ending, the new
+  whole line. The chant's "Opaque!" and every other take are unchanged.
+- Rendered with `./build_part.sh 1|2` (10 s chunks in `out/chunks_p1`, `out/chunks_p2`; about 11 min a part, 3 workers). `ep11_part1.mp4`
+  294.67 s (**4:54.7**), `ep11_part2.mp4` 305.10 s (**5:05.1**); 1920x1080 30 fps; both -16.0 LUFS (true peak -1.0 / -1.3 dBFS). Captions
+  `ep11_part1.srt` (123 cues), `ep11_part2.srt` (129 cues), 0 overlapping cues; contact sheets `sheet_part1.png`, `sheet_part2.png`.
+  Render speed was fine in the frosted-blur stretches (lcfrost, row2, both journeys).
+- **Checked** (frame strips from the rendered chunks and files, `qa/stage3/`): the cold open (EP10's three boards slide in, "Never shine a torch
+  at anyone's eyes." on screen from 0.7 s; in Part 2 from the corridor shot on); the calm recaps (P1 EP10's boards with their cards; P2 three
+  pictures, each with its coloured label, the board beside the white door); the goldfish / moth named with their picture ("a little goldfish",
+  "a little moth") and ringed at the end with Heart's pill; goal cards read by Pip (P1) / Basil (P2), each ticked; the Mark Sentences read by
+  the "Say it with me!" buddy (Momo, Basil; Pip, Basil) with the key word popping beside the card; the HOLD ON! ring with "the sheet: changed"
+  / "the torch: moved" above it through the countdown; Round 1 lock-ins (P1 clear glass / frosted glass / wood; P2 wood / painted white
+  above the ring through the countdown); all five look-closers in motion: the finger on the switch at every on / off mark, the beam, the
+  widening to the card (spot1, glow2), the robot set behind the glass by a hand (robot1, robot2), the quick turn to the front, the frosted
+  robot's blur, the split's cream flash, the slide behind the door, the door lift (the robot is there; the door goes back), the three test
+  lines lighting in turn, the box swap (hand out, spot for a moment, cloudy box in, soft glow), split2; verdicts in their answer style (NO
+  LIGHT white with a dark border); row 3's fast swaps (rubber mat in, lit briefly, tray in); BE THE LIGHT (inside the torch, Click! ~3:41,
+  the frame pass, the card rush and bright ring, the cloudy wall and soft glow) and BE THE LIGHT OF THE LAMP (the door rushes up and stops
+  you ~2:32, the frosted pane blur, the window pass ~2:42 out into the night); the showdown (Pip's notes, ring on line two, picks, the two
+  boxes); the chant; score hands; the EP12 trolley boards; key words; "Now you know!". No shadow anywhere. Action sounds checked against their
+  marks in cues_p1.json / cues_p2.json (clicks on on* / off*, ting on spot1, ratchet on the robot, tok on each sheet).
+- **Fixed** (small, local; only the affected chunks re-rendered):
+  - P1 cold open: OUR CARD stood in front of EP10's first board and hid "clear glass" -> the boards stand further right (`DBX` 1320 / 1505 /
+    1690). Chunk 0-10 s.
+  - P1 row2: the strip "You cannot clearly see the objects placed behind translucent materials." ran under the shelf's TRANSPARENT pill
+    (its full stop hidden) -> size 37, x 830. Chunks 200-220 s.
+  - P1 goldfish reveal / P2 moth reveal: the board OUR TORCH TEST stood cut off at the frame's edge under Heart's pill -> no board in `liz`.
+    Chunks 240-260 s (P1), 260-270 s (P2).
+  - P2 row3: the second strip "You cannot see objects placed behind opaque materials." ran under the small print "Never shine a torch..."
+    (its "Y" hidden) -> x 1175.
+  - P2 `fix`: the strip "Frosted glass and some plastics are translucent." ran under the TRANSPARENCY pill -> size 44, x 900. Chunks 220-240 s.
+  - P2 `lcthree` / `lcbox`: three verdict pills land one after another (.44 s), so the last pill was readable only about 2.2 s -> new
+    `VERDICT3` (2.8 s) in script.py for v_three and v_box. Part 2 +0.6 s; its cues, mix and chunks from 100 s re-rendered.
+  - finish.sh: a stray `)` in the contact-sheet line stopped the stills and the .srt (Stage 1 bug); fixed.
+- Not changed (noted): the key word's fly to the shelf passes over the Mark Sentence card for a moment (as in earlier episodes); in Round 1 /
+  the showdown a buddy's bubble springs in while the one before is still fading (about .3 s); in the showdown Basil's disc touches the edge
+  of Momo's "2" card (the number stays readable); the camera's quick turn in the look-closers squeezes the view for a few frames (by design);
+  the first thumbnail's PART 1 badge covers the left torch's TORCH MARK label (the thumbnails otherwise read well; unchanged).
+- Uploaded with `upload.json` (checked against ep10/upload.json; Made for Kids, public; both playlists PLb8LpPqxQI4E and PLPfEuT7l4KjI right
+  after EP10 Part 2 HjN5HO7qFnY via the key `explained-p3-ep10-part2`; `retire_old`: the classic X7Ys0KAaYyg "Waterproof Or See-Through?
+  Testing Materials (Part B)" left both playlists and its description now starts with "▶ NEW VERSION: ..." pointing to EP11 Part 1; it stays
+  public, never deleted). The School Lab 3.6 line is left out of the descriptions until that lab is signed off.
+  Part 1 https://www.youtube.com/watch?v=ABTKBrfkDW0 , Part 2 https://www.youtube.com/watch?v=q2KJp6lKln0 .
+- Left for the teacher: listen once to `qa/j602_opaque_check.m4a` (Pip's new "opaque") and `qa/new_words_check.m4a` (the other new words);
+  watch the five look-closers, both journeys and the goldfish / moth reveals. The old video's NEW VERSION line names EP11 Part 1 only; if it
+  should also name EP10, add it by hand.
