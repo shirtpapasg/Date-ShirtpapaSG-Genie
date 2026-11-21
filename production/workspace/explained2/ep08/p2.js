@@ -131,16 +131,16 @@ SC.count4 = (t, s) => { const a = "j906", b = "j907", p = "j908", tw_ = [W(a, "s
     + boardAt(t, 420, 1066, .46, { flash }) + TF(NOTES[0] + 290, 1068, .58, pipNotes(t, { fixing, rub, write: wr, x: 1 - rub, tick: spring(t, LE(p) - .1, .45) }))
     + (fixing ? TF(1400, 440, spring(t, LT(p) + .4, .45), `<g transform="rotate(-1.5)"><g filter="url(#drop)"><rect x="-440" y="-56" width="880" height="112" rx="22" fill="url(#gPaper)" stroke="${P.pip}" stroke-width="7"/></g><circle cx="-386" cy="0" r="34" fill="${P.pip}"/>${T(-386, 16, 3, 46, "#fff")}<text x="-336" y="14" font-family="Fredoka" font-weight="600" font-size="40" fill="${P.ink}" opacity="${n2(1 - rub)}">A school shoe is made of one material.</text><text x="-336" y="14" font-family="Fredoka" font-weight="600" font-size="40" fill="#1F8A4C" style="clip-path:inset(-30px ${n2(100 - 100 * wr)}% -30px 0)">A school shoe is made of four materials.</text></g>`) : "")
     + (t >= tO ? TF(700, 170, spring(t, tO, .45) * (1 + .05 * pulse(t, W(b, "four") - .1, .03, .5)), `<g filter="url(#drop)"><rect x="-430" y="-62" width="860" height="124" rx="62" fill="${P.ink}"/></g>${T(0, 26, `1 object <tspan fill="${P.sun}">·</tspan> 4 materials`, 76, "#fff")}`) : "")
-    + buddy("pip", 1810, 1066, 150, t, { aura: true, tag: false, flip: true, in: LT(p) - .3, poses: [[LT(p) - .3, "oops"], [LT(p) + .8, "sit"], [LE(p) + .1, "cheer"]], nohop: true }) + say(p, 1380, 270, t, { size: 44, tail: 200, maxW: 560 }) + coin(t, tc, 1240, 250, "+2", "if you showed three fingers") + HUD(t); };
+    + buddy("pip", 1800, 1056, 150, t, { aura: true, tag: false, flip: true, in: LT(p) - .3, poses: [[LT(p) - .3, "oops"], [LT(p) + .8, "sit"], [LE(p) + .1, "cheer"]], nohop: true }) + say(p, 1380, 270, t, { size: 44, tail: 200, maxW: 560 }) + coin(t, tc, 1240, 250, "+2", "if you showed three fingers") + HUD(t); };
 
 /* ============ 10 · seven tiles (Mark Sentence 2 of 2), and the chant ============ */
 SC.seven = (t, s) => { const L = "j1002", flash = {}; MAT.forEach((m) => { flash[m.k] = pulse(t, W(L, m.k) - .05, .04, .55); });
   return markScene(t, s, { id: L, sayId: "j1001", who: "momo", n: "2 of 2", text: "Wood, metal, ceramic, rubber, glass, plastic and fabric are some of the materials we use to make the things we need.", keys: ["wood,", "metal,", "ceramic,", "rubber,", "glass,", "plastic", "fabric"], size: 56, y: 176,
     extra: TF(1150, 1072, .7 * spring(t, s.t0 + .25, .5), board7(t, { flash })) }); };
-SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", board: (tt, flash) => TF(236, 1066, .37, board7(tt, { flash })) });
+SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", board: (tt, flash) => TF(232, 1066, .3, board7(tt, { flash })) });
 
 /* ============ 11 · the score hand and the lizard ============ */
-SC.final = (t, s) => { const L = "j1101"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "four") - .1, null, 4]], TF(1250, 1062, .36, board7(t))); };
+SC.final = (t, s) => { const L = "j1101"; return finalScene(t, s, L, 2, [[s.t0, null, 1], [W(L, "four") - .1, null, 4]], TF(1262, 1062, .28, board7(t))); };
 // the hidden sheep, revealed: the "trees" picture board again (the field beside the trees), with a ring round the sheep
 const SHEEPXY = [gx([1.03, 900, 640], 1330 + SHEEPAT[0] * .9), gy([1.03, 900, 640], BACKY + (-195 + SHEEPAT[1] - 16) * .9)];
 SC.liz = (t, s) => { const L = "j1102", tN = W(L, "field") - .3; return lizReveal(t, s, L, teach2(t, { back: picBoard("treesS", 1330, BACKY, 1, { sc: .9, id: "t", t }) }), SHEEPXY[0], SHEEPXY[1], W(L, "where") - .1, "Where does wood come from?", 0, 40, 46, 2.3)
@@ -150,12 +150,12 @@ SC.liz = (t, s) => { const L = "j1102", tN = W(L, "field") - .3; return lizRevea
 SC.dare = (t, s) => { const a = "j1201", b = "j1202", c = "j1203", tR = W(a, "rubber") - .2, tS = W(a, "wooden") - .2, tQ = W(a, "which") - .15, tB = LT(b) - .1, tL = LT(c) - .1, DXs = [880, 1400];
   const brd = (name, i, t0, lab, col) => picBoard(name, DXs[i], 690, spring(t, t0, .45), { sc: .9, lab, size: 40, id: "d" + i }) + (t >= t0 + .25 ? TF(DXs[i] - 140, 376, spring(t, t0 + .25, .4), `<g transform="rotate(-8)">${tpill(0, 0, ["rubber", "wood"][i], 36, col, "#fff", { w: 700 })}</g>`) : "");
   return view2(t, { pencil: false, shoe: false, tee: false }, CAMW) + `<rect width="1920" height="1080" fill="#FFF8EA" opacity=".35"/>` + brd("band1", 0, tR, "a rubber band", MATK.rubber.col) + brd("stick", 1, tS, "a wooden ice-cream stick", MATK.wood.col)
-    + [["The rubber band", 0], ["The ice-cream stick", 1]].map(([txt, i]) => TF(DXs[i], 922, .66 * spring(t, tQ + i * .2, .45), ansCard(i + 1, txt, { pulse: t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0 }))).join("")
+    + [["The rubber band", 0], ["The ice-cream stick", 1]].map(([txt, i]) => TF(DXs[i], 900, .66 * spring(t, tQ + i * .2, .45), ansCard(i + 1, txt, { w: 360, pulse: t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0 }))).join("")
     + TF(1140, 110, slamK(t - s.t0, .15), `<g transform="rotate(-2)"><g filter="url(#drop)"><rect x="-150" y="-44" width="300" height="88" rx="44" fill="${P.coral}"/><rect x="-142" y="-36" width="284" height="72" rx="36" fill="none" stroke="#fff" stroke-width="5"/></g>${T(0, 20, "NEXT", 54, "#fff", { ls: 8 })}</g>`)
     + (t >= tB ? TF(1140, 212, spring(t, tB, .45), tpill(0, 0, "Snap it or bend it?", 64, P.ink, "#fff", { w: 700 })) : "") + (t >= tL ? TF(1140, 296, spring(t, tL, .45) * (1 + .03 * Math.sin(t * 8)), tpill(0, 0, "Lock in your answer!", 40, P.sun, P.ink, { w: 700 })) : "")
-    + (t >= tQ ? TF(1660, 1036, spring(t, tQ + .4, .4), tpill(0, 0, "Just think. Do not break things!", 30, P.ink, "#fff", { w: 600 })) : "")
+    + (t >= tQ ? TF(1140, 1044, spring(t, tQ + .4, .4), tpill(0, 0, "Just think. Do not break things!", 28, P.ink, "#fff", { w: 600 })) : "")
     + buddy("basil", 300, 1056, 360, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [tQ, "arms_crossed"], [tB - .1, "sit"], [LE(b) + .1, "cheer"]], nohop: true }) + say(b, 420, 520, t, { size: 52, tail: -60 }) + HUD(t); };
 
 /* ============ 14 · "Now you know!": the full board and the school shoe stand between the buddies ============ */
-SC.nyk = (t, s) => nykScene(t, s, TF(740, 1044, .42, shoe()) + TF(1040, 1046, .34, board7(t)), { bx: [200, 1730, 1420], hx: 470 });
+SC.nyk = (t, s) => nykScene(t, s, TF(686, 1044, .5, shoe()) + TF(1006, 1046, .3, board7(t)), { bx: [200, 1715, 1375], hx: 470 });
 })(); }

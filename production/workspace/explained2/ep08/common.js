@@ -55,7 +55,7 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
   if (c.tag && t >= c.tq) main += TF(RX, CY - RING_R - 14, spring(t, c.tq, .4), tpill(0, 0, c.tag, 34, "#fff", P.ink, { w: 700 }));
   if (c.labels) main += c.labels(t);
   if (shut > .05) main += `<circle cx="${RX}" cy="${CY}" r="${n2(RING_R + 40 + 80 * (1 - shut))}" fill="none" stroke="${P.sun}" stroke-width="6" opacity="${n2(shut * .8)}"/>`;
-  const top = OP(ramp(t, c.tq, .3) * (1 - zb), T(960, 106, c.q, c.q.length > 28 ? 52 : 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
+  const top = OP(ramp(t, c.tq, .3) * (1 - zb), T(c.q.length > 32 ? 930 : 960, 106, c.q, c.q.length > 32 ? 46 : c.q.length > 28 ? 52 : 62, "#fff", { w: 600 })) + OP(ramp(t, c.ring0 - .15, .2) * (1 - zb) * (t < bell ? .75 + .25 * Math.sin(t * 9) : 1), T(960, 176, "LOCK IT IN!", 40, P.sun, { ls: 8 }));
   // the buddies wait with their picks face down; after the bell each card flips as its buddy speaks
   const X0 = { pip: 600, basil: 960, momo: 1320 }, tin = c.tin || c.ring0 - .3; let buds = "", bubs = "", cards = "";
   ["pip", "basil", "momo"].forEach((who, i) => { const pk = picks.find((p) => p.who === who), tf = pk.fixed ? tin : LT(pk.id), uni = pk.id && TL.lines[pk.id].who === "chant", sp = t >= tb0 && speaking(who, t), hh = lerp(224, 320, zb) * (sp && !uni ? 1.06 : 1), x = lerp(X0[who], [400, 960, 1520][i], zb);
