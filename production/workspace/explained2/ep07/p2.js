@@ -50,7 +50,7 @@ SC.scopes = (t, s) => { const L = "j402", tV = W(L, "discover") - .2, tS = W(L, 
 const SH = [[-150, -84, bRod, 0, "rod-shaped", 330, 420], [150, -10, bRound, 1, "sphere-shaped (round)", 1590, 520], [-20, 160, bSpiral, 2, "spiral-shaped", 340, 800]];
 SC.shapes = (t, s) => { const a = "j403", b = "j404", c = "j405", tw_ = ["rod-shaped", "sphere-shaped", "spiral-shaped"].map((w) => W(a, w) - .1), VX = 960, VY = 590; let big = "", labs = "";
   SH.forEach(([x, y, f, i, nm, lx, ly]) => { const k = spring(t, tw_[i], .5); if (k < .02) return; big += `<g transform="translate(${n2(x + 5 * Math.sin(t * 1.3 + i))} ${n2(y + 5 * Math.cos(t * 1.1 + i))}) rotate(${n2(i === 1 ? 0 : -14 + 5 * Math.sin(t * .9 + i))}) scale(${n2(2.3 * k)})"><circle r="52" fill="#fff" opacity=".7"/>${f(BCOL[i])}</g>`; labs += lineTag(t, tw_[i] + .15, lx, ly, VX + x + (lx < VX ? -90 : 70), VY + y, nm, 42); });
-  return bg("stage2") + TF(VX, VY, 1, roundView(bactField(t, { dim: t >= tw_[0] }) + big, 340, "sh")) + labs
+  return bg("stage2") + TF(VX, VY, 1 + .04 * clamp((t - s.t0) / 12), roundView(bactField(t, { dim: t >= tw_[0] }) + big, 340, "sh")) + labs
     + OP(1 - ramp(t, LT(c) - .4, .3), wordBox(t, 960, 1010, "one bacterium", "many bacteria", W(b, "bacterium"), W(b, "bacteria"), LT(b) - .3))
     + strip(t, c, "Bacteria are tiny living things and they come in different shapes and sizes.", 130, { size: 42, maxW: 1180, x: 860 }) + HUD(t); };
 

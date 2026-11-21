@@ -152,7 +152,12 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, R = 88) 
 const mystery = (t, r) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/></g><g transform="rotate(${n2(5 * Math.sin(t * 3))})">${T(0, r * .34, "?", r * 1.1, P.ink)}</g><g transform="translate(${n2(r * .5 + 10 * Math.sin(t * 1.6))} ${n2(r * .42)}) scale(${n2(r / 150)})">${magnifier(54)}</g>`;
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
-function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "animal"), tFind = W(L, "spot");
+// the hidden animal named (teacher, 21 Nov: "How will the viewer know what to look out for"): on Heart's "[duck]" the mystery disc shows the
+// animal itself, cute and moving, for about 1.5 s, then the "?" comes back; the pill names it ("A little duck is hiding!")
+const mysteryPic = (t, r, tC, pic) => { const tS = tC + 1.5, a = 1 - ramp(t, tS, .25), b = spring(t, tS + .1, .45);
+  return `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/></g>` + (a > .01 ? TF(0, 0, a * (r / 150) * (1 + .04 * Math.sin((t - tC) * 6)), pic(t)) : "")
+    + (t >= tS + .1 ? `<g transform="scale(${n2(b)}) rotate(${n2(5 * Math.sin(t * 3))})">${T(0, r * .34, "?", r * 1.1, P.ink)}</g>` : "") + `<g transform="translate(${n2(r * .5 + 10 * Math.sin(t * 1.6))} ${n2(r * .42)}) scale(${n2(r / 150)})">${magnifier(54)}</g>`; };
+function gameScene(t, s, L, full, an = "animal", pic = null) { const tLock = W(L, "lock"), tC = W(L, an), tFind = W(L, "spot"), myst = (t, r) => pic ? mysteryPic(t, r, tC, pic) : mystery(t, r), hidTxt = `A little ${an} is hiding!`;
   let out = bg("stage");
   if (full) { const tYou = W(L, "you"), tBud = W(L, "buddies"), tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
     out += `<g transform="translate(960 ${n2(lerp(-200, 190, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.45 + .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3), { you: 0, bud: 0 })}</g>`;
@@ -164,11 +169,11 @@ function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, "anima
       if (nf && ph2 > .5) out += TF(1010, 560, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
     out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(1010 620) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
     [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = tBud + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
-    if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), mystery(t, 150)) + TF(1440, 640, spring(t, tC + .1, .4), tpill(0, 0, "A little animal is hiding!", 36, "#fff", P.ink, { w: 700 })) + TF(1440, 716, spring(t, tFind - .2, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 }));
+    if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), myst(t, 150)) + TF(1440, 640, spring(t, tC + .1, .4), tpill(0, 0, hidTxt, 36, "#fff", P.ink, { w: 700 })) + TF(1440, 716, spring(t, tFind - .2, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 }));
     return out + logo(t); }
   // Part 2: "Lock in first. And find the new lizard!"
   out += `<g transform="translate(960 ${n2(lerp(-200, 170, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.35, { you: 0, bud: 0 })}</g>`;
   out += TF(560, 560, spring(t, tLock - .15, .5), `<g transform="scale(.8)">${ringTimer(0, 0, clamp(1 - (t - tLock) / 3), 5, t)}</g>` + TF(0, 0, .95, `<g filter="url(#dropS)">${countHand(t > tLock + .7 ? 3 : t > tLock + .35 ? 2 : 1)}</g>`)) + (t >= tLock ? TF(560, 880, spring(t, tLock + .1, .4), tpill(0, 0, "You lock in first", 42, "#fff", P.ink, { w: 700 })) + youPill(560, 330, 1.2) : "");
-  if (t >= tC - .25) out += TF(1360, 520, spring(t, tC - .25, .5), mystery(t, 170)) + TF(1360, 760, spring(t, tC + .1, .4), tpill(0, 0, "A little animal is hiding!", 38, "#fff", P.ink, { w: 700 })) + TF(1360, 840, spring(t, tFind - .2, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 }));
+  if (t >= tC - .25) out += TF(1360, 520, spring(t, tC - .25, .5), myst(t, 170)) + TF(1360, 760, spring(t, tC + .1, .4), tpill(0, 0, hidTxt, 38, "#fff", P.ink, { w: 700 })) + TF(1360, 840, spring(t, tFind - .2, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 }));
   [["pip", 1010, 880], ["basil", 960, 1066], ["momo", 1750, 1060]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 220, t, { aura: true, in: s.t0 + .2 + i * .1, flip: i === 1, poses: [[s.t0, "cheer"], [s.t0 + 1.6, "sit"]], wave: true }); });
   return out + logo(t); }

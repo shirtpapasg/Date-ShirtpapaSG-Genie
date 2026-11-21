@@ -34,7 +34,7 @@ SC.recap = (t, s) => { if (location.search.includes("thumb")) return THUMB2(t); 
 
 /* ============ 3 · today's goals, the game ============ */
 SC.goals = (t, s) => goals3(t, s, [["How to spot a bird", TF(0, 0, .5, feather())], ["What makes a fish a fish", TF(0, 0, .52, fishG())], ["The fish that hops on land", TF(-14, 44, .5, mudskipper())]], "momo", ["g200", "g201", "g202", "g203"]);
-SC.game = (t, s) => gameScene(t, s, "b301", false);
+SC.game = (t, s) => gameScene(t, s, "b301", false, "frog", (t) => `<g transform="translate(-6 36) scale(.8)">${frog({ ph: 3, wet: .5 })}</g>`);
 
 /* ============ 4 · the kingfisher; Round 1: is a penguin a bird? ============ */
 const CAMK = [2.5, 950, 380], kp = (x, y) => [gx(CAMK, KFXY[0] + x * .62), gy(CAMK, KFXY[1] + y * .62)];

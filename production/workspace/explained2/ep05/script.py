@@ -53,7 +53,7 @@ SEQ1 = [
  ("say", "a204", H, "Did you lock in your answer? One group, or three? Hold on to it.", {"pre": .6, "post": .5}),
  # ---- 3 · the game (the field-trip card slides in during the cold open)
  ("scene", "game"),
- ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. A little animal is hiding in this video. Can you spot it?", {"pre": .5, "post": .4}),
+ ("say", "a302", H, "It's You against the Buddies. You lock in first. One finger for every point. A little duck is hiding in this video. Can you spot it?", {"pre": .5, "post": 0.385333}),
  # ---- 4 · Round Zero: a warm-up
  ("scene", "r0card"), ("wait", 1.1),
  ("scene", "r0"),
@@ -141,7 +141,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "a1201", H, "Show me your score hand! More than two? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .7}),
  ("scene", "liz"),
- ("say", "a1202", H, "Did you spot the hidden animal? It was the duck, behind the boardwalk rail! Tell someone at home.", {"pre": .7, "post": .7}),
+ ("say", "a1202", H, "Did you spot the duck? It was behind the boardwalk rail! Tell someone at home.", {"pre": .7, "post": 0.679111}),
  *kwrecap(["Outer covering", "Observable characteristics", "Amphibians", "Moist skin"]),
  # ---- 13 · the cliffhanger: a fish that hops on the mud
  ("scene", "cliff"), ("wait", .4),
@@ -164,7 +164,7 @@ SEQ2 = [
  ("say", "g203", M, "The fish that hops on land.", {"pre": .4, "bs": .88}),
  ("wait", 1.0),
  ("scene", "game"),
- ("say", "b301", H, "Lock in first. A little animal is hiding in this video. Can you spot it?", {"pre": .5, "post": .5}),
+ ("say", "b301", H, "Lock in first. A little frog is hiding in this video. Can you spot it?", {"pre": .5, "post": 0.479111}),
  # ---- 4 · the kingfisher; Round 1: is a penguin a bird?
  ("scene", "bird"),
  ("say", "b401", H, "Look up! A kingfisher. It has a beak. It has wings. And its outer covering?", {"pre": .5, "post": .4, "gap": .5}),
@@ -254,7 +254,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "b1201", H, "Show me your score hand! More than two? You beat the Buddies. Four fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "b1202", H, "Did you spot the hidden animal? It was the frog, on a mangrove root! Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "b1202", H, "Did you spot the frog? It was on a mangrove root! Tell someone at home.", {"pre": .5, "post": 0.513333}),
  # ---- 13 · the dare for Episode 6
  ("scene", "dare"), ("wait", 1.1),
  ("say", "b1301", H, "Three more animal groups to go: insects, reptiles and mammals. Here is an ant. And a spider. Only one is an insect! Can you tell which, by counting its legs? Lock in your answer for next time.", {"pre": 0, "post": .6}),

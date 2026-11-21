@@ -55,9 +55,11 @@ SC.day1 = (t, s) => { const L = "g501", tS = W(L, "slice") - .15, tZ = W(L, "sea
 const CAMD = [1.45, 690, 700];
 const lizOn = (t) => { const a = (k) => ss(L0() + k * DS, L0() + k * DS + .15, t) * (1 - ss(L0() + (k + 1.7) * DS, L0() + (k + 1.7) * DS + .15, t)); return Math.max(a(2.0), a(6.0)); };
 SC.days = (t, s) => { const u = (t - L0()) / DS, d = Math.min(10, 2 + Math.floor(u + 1e-6)), dc = Math.min(10, 2 + u), night = d >= 10 ? 0 : .5 - .5 * Math.cos(2 * Math.PI * u), t4 = L0() + 2 * DS;
-  return kitchenView(t, { night, day: d, dayFlip: L0() + (d - 2) * DS, snail: lizOn(t), tray: { day: dc, drops: ss(8.6, 10, dc) } }, CAMD)
-    + buddy("pip", 130, 1064, 190, t, { aura: true, tag: false, in: s.t0 + .1, poses: [[s.t0, "sit"], [t4 + .3, "surprised"]], look: 5 }) + buddy("basil", 1590, 1066, 180, t, { aura: true, tag: false, flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [t4 + .45, "surprised"]], look: 5 })
-    + buddy("momo", 1800, 1064, 190, t, { aura: true, tag: false, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [t4 + .6, "surprised"]], look: 6 }) + speeded(t, s.t0 + .1, s.t1 - .3, 560, 62) + HUD(t); };
+  // LOOK CLOSER (rulebook 1b): the camera pushes in slowly on the bag, the score and the shelf step back, the buddies wait until Day 10; one verdict tag
+  const e = eio((t - s.t0) / 6.4), cam = [lerp(CAMD[0], 1.78, e), lerp(CAMD[1], 770, e), lerp(CAMD[2], 716, e)], t10 = L0() + 8 * DS;
+  return kitchenView(t, { night, day: d, dayFlip: L0() + (d - 2) * DS, snail: lizOn(t), tray: { day: dc, drops: ss(8.6, 10, dc) } }, cam)
+    + buddy("pip", 130, 1064, 190, t, { aura: true, tag: false, in: t10 + .05, poses: [[t10, "surprised"]], look: 5 }) + buddy("momo", 1800, 1064, 190, t, { aura: true, tag: false, flip: true, in: t10 + .15, poses: [[t10, "surprised"]], look: 6 })
+    + popTag(t, t10 + .1, 960, 250, "It grew!", 64) + speeded(t, s.t0 + .1, t10 + .2, 560, 62) + logo(t); };
 const HT = [860, 660, 1.0], RG = [300, 520];
 const holdView = (t, o = {}) => closeBg() + TF(1318, 610, 1, dayPill(t, 10)) + TF(HT[0], HT[1], HT[2], tray({ ...D10, glow: o.glow || 0 }));
 SC.holdon = (t, s) => { const a = "g602", b = "g603", c = "g604", d = "g605", r0 = MK("ring0_1"), bell = MK("bell_1"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, tN = W(c, "never") - .1, tBg = W(c, "bag") - .1, ring = t >= tX && t < bell + .8;
@@ -70,10 +72,14 @@ SC.holdon = (t, s) => { const a = "g602", b = "g603", c = "g604", d = "g605", r0
 SCORE.push([W("g604", "one") - .1, 1, 0]);
 
 /* ============ 7 · what the fuzzy patches are ============ */
-SC.patches = (t, s) => { const a = "g702", b = "g703", c = "g704", tG = W(a, "grew") - .1, t0 = LT(a) + .1, out = ss(LT(c) - .5, LT(c) - .1, t);
-  return closeBg() + TF(1560, 610, 1, dayPill(t, 10)) + TF(820, 690, .92, tray(D10))
+SC.patches = (t, s) => { const a = "g702", b = "g703", c = "g704", tG = W(a, "grew") - .1, t0 = LT(a) + .1, out = Math.max(ss(LT(c) - .5, LT(c) - .1, t), ss(LT(b) - .5, LT(b) - .15, t));
+  const tMg = LT(b) - .35, mg = ss(tMg, tMg + .7, t) * (1 - ss(LT(c) - .7, LT(c) - .25, t)), src = bagPt([820, 690, .92], -38, -56), MX = 1420, MY = 560;   // LOOK CLOSER (rulebook 1b): a magnifier on one patch
+  const magn = mg < .02 ? "" : `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.3 * mg)}"/><path d="M${n2(src[0])} ${n2(src[1])} L${MX - 200} ${MY}" stroke="#fff" stroke-width="5" stroke-dasharray="4 12" stroke-linecap="round" opacity="${n2(mg)}"/><circle cx="${n2(src[0])}" cy="${n2(src[1])}" r="34" fill="none" stroke="#fff" stroke-width="5" opacity="${n2(mg)}"/>`
+    + TF(MX, MY, mg * (1 + .04 * clamp((t - tMg) / 6)), `<path d="M190 190 L330 330" stroke="#5E3F28" stroke-width="54" stroke-linecap="round"/>` + roundView(`<g transform="translate(0 -40)">${mouldMicro(t, .86)}</g>`, 262, "mgf"))
+    + (mg > .9 ? lineTag(t, tMg + 1.0, 1010, 330, MX - 150, MY + 150, "threads", 44) + lineTag(t, tMg + 1.5, 1790, 250, MX + 96, MY - 88, "spores", 44) : "");
+  return closeBg() + OP(1 - mg, TF(1560, 610, 1, dayPill(t, 10))) + TF(820, 690, .92, tray(D10))
     + OP(1 - out, [4, 6, 10].map((d, i) => { const k = spring(t, t0 + i * .35, .45); return k < .02 ? "" : TF(480 + i * 300, 190, k * (.74 + i * .1), dayFrame(d)); }).join("") + popTag(t, tG, 1430, 190, "It grew!", 56))
-    + strip(t, b, "Bread mould is a fungus that grows on bread.", 1000, { size: 50, t1: LT(c) - .3 })
+    + magn + strip(t, b, "Bread mould is a fungus that grows on bread.", 1000, { size: 50, t1: LT(c) - .3 })
     + wordBox(t, 960, 190, "one fungus", "many fungi", W(c, "fungus"), W(c, "fungi"), LT(c) - .35) + HUD(t); };
 
 /* ============ 8 · Round 1: how does the mould get its food? ============ */
@@ -143,15 +149,19 @@ const cardPic = (i, t, rise = 0, glow = 0) => i === 0 ? picCardK(TF(0, 110, .7, 
   : i === 2 ? picCardK(TF(0, 0, .5, tempehPic()), 270, 300, "t2") : picCardK(TF(0, 6, .56, bagAlone(10)), 270, 300, "t3", "#F1F4F9");
 SC.trays = (t, s) => { const q = "g1206", tI = MK("traysIn"), mk = ["b_mush", "b_dough", "b_tempeh", "b_mould"].map((k) => MK(k) + .35), tc = W("g1213", "one") - .1;
   const [ux, ud] = slideX(t, tI + .05, .5, -700, UX, TY), [hx, hd] = slideX(t, tI + .4, .5, 2400, HX, TY), rise = ss(mk[1] + .9, W("g1210", "rise") + .4, t), tE = W("g1208", "edible") - .1, tNv = W("g1209", "never") - .1;
-  let cards = ""; mk.forEach((tl, i) => { if (t < tl - .8) return; const [x, lift, ds, sq] = hopLow(t, tl, i === 3 ? 2100 : -200, SLOT[i], TY - 60); cards += ds + TF(x, TY - 62 - lift, CK, `<g transform="scale(1 ${n2(sq)})">${cardPic(i, t, rise, i === 1 ? pulse(t, W("g1210", "yeast") - .1, .1, 1.5) : 0)}</g>`); });
+  // LOOK CLOSER (rulebook 1b): the dough card comes forward and grows while the yeast works; the rest dims; one verdict tag; then it goes back to its tray
+  const zk = ss(mk[1] + .5, mk[1] + 1.2, t) * (1 - ss(MK("kw_yeast") - .6, MK("kw_yeast") - .15, t)), tV = W("g1210", "rise") + .25; let cards = "", hero = "";
+  mk.forEach((tl, i) => { if (t < tl - .8) return; const [x, lift, ds, sq] = hopLow(t, tl, i === 3 ? 2100 : -200, SLOT[i], TY - 60), z = i === 1 ? zk : 0;
+    const one = TF(lerp(x, 960, z), lerp(TY - 62 - lift, 990, z), lerp(CK, 2.5, z), `<g transform="scale(1 ${n2(sq)})">${cardPic(i, t, rise, i === 1 ? pulse(t, W("g1210", "yeast") - .1, .1, 1.5) : 0)}</g>`);
+    if (z > .01) hero = `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * z)}"/>` + one + popTag(t, tV, 1420, 560, "The dough is bigger: useful!", 44, "#2FA65A", "#fff", MK("kw_yeast") - .5); else cards += ds + one; });
   const st = (id, txt, o = {}, next) => strip(t, id, txt, 150, { size: 44, maxW: 1180, x: 860, t1: next ? LT(next) - .32 : LE(id) + .6, ...o });
-  return closeBg() + ud + hd + (t >= tI ? TF(ux, TY, 1, sortTray(0, 1190)) + TF(hx, TY, 1, sortTray(1, 420)) : "") + cards
+  return closeBg() + ud + hd + (t >= tI ? TF(ux, TY, 1, sortTray(0, 1190)) + TF(hx, TY, 1, sortTray(1, 420)) : "") + cards + hero
     + buddy("pip", 300, 1060, 360, t, { aura: true, in: s.t0 + .05, out: tI - .05, poses: [[s.t0, "thinking"], [LT(q) - .12, "sit"]] }) + say(q, 760, 470, t, { size: 46, tail: -300, x: true, maxW: 600 })
     + st("g1207", "There are some fungi that are useful, while others are harmful to us.", { keys: ["useful,", "harmful"] }, "g1208") + st("g1208", "Edible mushrooms are useful since they are food for us.", { keys: ["useful"], t1: LE("g1209") + .3 })
     + st("g1210", "Yeast is another useful fungus as it is commonly used in baking bread to make the dough rise.", { keys: ["useful"], t1: MK("kw_yeast") - .1 }) + st("g1211", "Tempeh is made with a useful fungus.", { keys: ["useful"] }, "g1212")
     + st("g1212", "Bread mould is an example of harmful fungi. Eating mouldy bread can cause us to fall sick.", { keys: ["harmful"], t1: LT("g1213") - .2 })
     + popTag(t, tE, SLOT[0], 474, "edible = safe to eat", 32, "#fff", P.ink) + (t >= tNv ? TF(SLOT[0] + 60, 400, spring(t, tNv, .45), safeBadge("Never pick wild mushrooms!", 30)) : "")
-    + (t >= mk[1] + .6 ? OP(ramp(t, mk[1] + .6, .25), TF(SLOT[1], 474, 1, `<rect x="-196" y="-27" width="392" height="54" rx="27" fill="${P.ink}" opacity=".9"/><path d="M-170 -11 l14 11 l-14 11z M-154 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up: about 1 hour", 28, "#fff", { w: 600 })}`)) : "")
+    + (t >= mk[1] + .6 ? OP(ramp(t, mk[1] + .6, .25), TF(lerp(SLOT[1], 470, zk), lerp(474, 560, zk), 1, `<rect x="-196" y="-27" width="392" height="54" rx="27" fill="${P.ink}" opacity=".9"/><path d="M-170 -11 l14 11 l-14 11z M-154 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up: about 1 hour", 28, "#fff", { w: 600 })}`)) : "")
     + popTag(t, mk[2] + .3, SLOT[2], 474, "tempeh", 36, "#fff", P.ink) + (t >= mk[3] + .5 ? TF(SLOT[3] + 130, 500, spring(t, mk[3] + .5, .45), tummy(1.1)) : "")
     + coin(t, tc, 1350, 380, "+1", "if you showed two fingers") + HUD(t); };
 SCORE.push([W("g1213", "one") - .1, 3, 2]);

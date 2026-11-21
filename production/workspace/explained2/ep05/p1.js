@@ -29,7 +29,7 @@ SC.title = (t, s) => { const u = t - s.t0, a = (d) => { const k = clamp((u - d) 
   return wetView(t, {}, [1.5 - .08 * clamp(u / 5), 800, 620]) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.66 * clamp(u / .2))}"/>`
     + ln(250, "FEATHERS, SCALES", 150, "#fff", k1, 4) + ln(420, "OR MOIST SKIN?", 150, "#fff", k2, 4) + ln(630, "ONE GROUP OR THREE?", 150, P.sun, k3, 4)
     + (t >= W(L, "lock") - .1 ? TF(960, 770, spring(t, W(L, "lock") - .1, .45), tpill(0, 0, "Did you lock in your answer? Hold on to it!", 40, P.ink, "#fff", { w: 600 })) : "") + OP(clamp((u - .2) / .3), logo(t)); };
-SC.game = (t, s) => gameScene(t, s, "a302", true);
+SC.game = (t, s) => gameScene(t, s, "a302", true, "duck", (t) => `<g transform="translate(-8 40) scale(.92)">${duck(t)}</g>`);
 
 /* ============ 4 · Round Zero: a warm-up ============ */
 const padObj = (inner) => `<ellipse cx="430" cy="600" rx="150" ry="36" fill="#5FB7C9"/>` + TF(430, 590, .6, lilyPad(190, "#66CC5C")) + inner;

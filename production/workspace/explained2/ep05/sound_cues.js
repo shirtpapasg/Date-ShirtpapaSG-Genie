@@ -12,7 +12,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   [0, 1, 2, 3].forEach((i) => E(W("a201", "four") - .1 + i * .14, "softpop", i)); E(W("a201", "animals") - .1, "chime"); ["frog", "bird", "fish"].forEach((w, i) => E(W("a203", w) - .15, "pip", i));
   E(S.title.t0 + .05, "whoosh"); [.26, .61, LT("a204") - S.title.t0 + .16].forEach((d, i) => E(S.title.t0 + d, "slam", i));
   // 3 the game
-  E(S.game.t0 + .15, "sting"); { const b = "a302"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "animal") - .1, "curious"); E(W(b, "spot") - .2, "softpop", 2); }
+  E(S.game.t0 + .15, "sting"); { const b = "a302"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, "duck") - .1, "curious"); E(W(b, "spot") - .2, "softpop", 2); }
   // 4 Round Zero
   E(S.r0card.t0, "roundcard"); lock(MK("ring0_0"), 5, "a402", ["u403"], [W("a401", "one"), W("a401", "two")]); E(LT("u403") + .35, "tag"); E(LT("a404") + .3, "chime"); E(W("a405", "one") - .1, "coin");
   // 5 goals, countdown
@@ -46,7 +46,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 1-3 the recap, "Last time", goals, the game
   // the calm recap: no clacks, no splash; a soft pop as each label arrives, calm music under Heart
   { const L = "b201"; E(S.recap.t0 + .5, "softpop", 0); E(W(L, "moist") - .15, "softpop", 1); E(W(L, "its") - .3, "chime"); E(W(L, "observable") - .15, "softpop", 2); E(W(L, "two") - .1, "pop", 1); E(W(L, "two") + .2, "pop", 2); C(S.recap.t0 + .2, S.goals.t0 + .3); R.birds.push([S.recap.t0, S.goals.t0]); }
-  ["g201", "g202", "g203"].forEach((id, i) => E(LT(id) - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("b301", "animal") - .1, "curious"); E(W("b301", "spot") - .2, "softpop", 2);
+  ["g201", "g202", "g203"].forEach((id, i) => E(LT(id) - .12, "softpop", i)); E(S.game.t0 + .15, "sting"); E(W("b301", "frog") - .1, "curious"); E(W("b301", "spot") - .2, "softpop", 2);
   // 4 the kingfisher, Round 1, the bird clues
   R.birds.push([S.bird.t0, S.r1card.t0]); E(S.bird.t0 + .1, "whoosh"); E(S.bird.t0 + .6, "koel"); E(W("b401", "beak") - .1, "softpop", 0); E(W("b401", "wings") - .1, "softpop", 2); E(W("b401", "wings") + .1, "rustle"); E(W("b401", "outer") - .2, "curious");
   E(S.r1card.t0, "roundcard"); { const L = "b402"; E(W(L, "cannot") - .1, "rustle"); lock(MK("ring0_1"), 5, "b403", ["b404", "b405", "b406"], [W(L, "one", 1), W(L, "two")]); }
