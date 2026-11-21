@@ -1,0 +1,42 @@
+{
+ "episode": "SAU EP02 Short 1",
+ "title": "Is gas power secretly sunlight?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s1b",
+   "sun",
+   "THE SUN",
+   "#ff5d73"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "Is the gas that makes our electricity secretly sunlight?"
+  },
+  {
+   "id": "s1b",
+   "scene": "sun",
+   "text": "Millions of years ago, tiny sea creatures got their energy from the Sun. When they died, they were buried under layers of rock, and slowly turned into natural gas."
+  },
+  {
+   "id": "s1c",
+   "scene": "convert",
+   "text": "Today, Singapore burns that gas to make about ninety-three out of every hundred units of our electricity. So when you switch on a light, you're using very, very old sunlight!"
+  },
+  {
+   "id": "s1d",
+   "scene": "think",
+   "text": "So, is gas power really solar power? Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

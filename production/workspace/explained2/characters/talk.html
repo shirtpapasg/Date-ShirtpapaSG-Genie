@@ -1,0 +1,24 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Talk test for the buddy rigs: node ../kit/render.js talk.html talk.mp4 0 180 30 1920 1080 -->
+<style>
+  @font-face{font-family:Fredoka;font-weight:600;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2) format("woff2")}
+  @font-face{font-family:Fredoka;font-weight:700;src:url(../fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2) format("woff2")}
+  html,body{margin:0;background:#221A57;overflow:hidden} svg{display:block} text{font-family:Fredoka}
+</style></head><body>
+<svg id="v" xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+<script src="buddies.js"></script>
+<script>
+const B = Buddies, AURA = { pip: "#B9A6FF", basil: "#7FE3C4", momo: "#FFB38A" };
+const CAST = [["pip", 400, "I say it is alive!", "happy", 0, 2], ["basil", 960, "Hmm. Does it grow?", "thinking", 2, 4], ["momo", 1520, "Lock it in with me!", "cheering", 4, 6]];
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), ease = k => { k = clamp(k); return k * k * (3 - 2 * k); };
+window.render = t => { let out = `<rect width="1920" height="1080" fill="#221A57"/><ellipse cx="960" cy="1150" rx="1300" ry="330" fill="#3B2A8C"/>`;
+  CAST.forEach(([who, x, line, expr, a, b]) => { const on = t >= a + .1 && t < b - .15, y = 900, h = 430 * B.REL[who];
+    out += `<circle cx="${x}" cy="${y - 200}" r="266" fill="${AURA[who]}" opacity="${on ? .95 : .55}"/>`;
+    out += B.draw(who, x, y, h, t, { expr: on ? expr : "happy", talking: on, gesture: on ? undefined : "rest", facing: who === "momo" ? "left" : "right", look: on ? 0 : (who === "basil" ? 0 : .4) });
+    const k = ease((t - a) / .25) * (1 - ease((t - b + .25) / .25));
+    if (k > 0.01) out += `<g transform="translate(${x} ${300 - 20 * (1 - k)})" opacity="${k}"><rect x="-250" y="-52" width="500" height="104" rx="52" fill="#fff"/><path d="M-24 46 L0 86 L24 46Z" fill="#fff"/><text y="16" font-size="46" font-weight="600" text-anchor="middle" fill="#2B2147">${line}</text></g>`;
+    out += `<rect x="${x - 80}" y="${y + 40}" width="160" height="52" rx="26" fill="${AURA[who]}"/><text x="${x}" y="${y + 78}" font-size="32" font-weight="700" text-anchor="middle" fill="#2B2147">${who[0].toUpperCase() + who.slice(1)}</text>`; });
+  document.getElementById("v").innerHTML = out; };
+document.fonts.ready.then(() => { window.render(0); window.READY = true; });
+</script></body></html>

@@ -1,0 +1,11 @@
+// zoo.js: every EP5 animal on one sheet, to judge the drawings and their idle loops. node zoo.js out.jpg t [set]
+const { chromium } = require('playwright'); const path = require('path');
+(async () => { const [out, t = "1", set = "all"] = process.argv.slice(2); const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); const errs = []; p.on('pageerror', e => errs.push(e.message));
+  await p.goto('file://' + path.resolve(__dirname, 'page.html') + '?part=2'); await p.waitForFunction(() => window.READY === true, null, { timeout: 60000 });
+  await p.evaluate(([t, set]) => { AT = t; const L = (x, y, s) => T(x, y, s, 30, P.ink);
+    const sets = { all: () => TF(230, 420, 1.2, frog()) + L(230, 470, "frog") + TF(640, 420, 1.2, frog({ pal: TOADPAL, warts: true, ph: 2 })) + L(640, 470, "toad") + TF(1080, 420, 1.2, salamander()) + L(1080, 470, "salamander") + TF(1480, 330, 1.0, fishG()) + L(1480, 470, "fish") + TF(1780, 330, .6, fishG({ pal: GUPPAL, bigTail: 1.7, fancy: 1 })) + L(1780, 470, "guppy")
+        + TF(230, 980, 1.2, mudskipper()) + L(260, 1040, "mudskipper") + TF(640, 900, .8, duck()) + L(640, 960, "duck") + TF(1020, 980, .9, hen()) + L(1020, 1040, "hen") + TF(1300, 860, .8, seaStar()) + L(1300, 1040, "sea star") + TF(1560, 660, .8, ant()) + L(1560, 760, "ant") + TF(1560, 900, .8, spider()) + L(1560, 1040, "spider") + TF(1790, 700, .7, fishG({ pal: CODPAL, spots: 1, barbel: 1, cod: 1 })) + L(1790, 780, "cod"),
+      birds: () => TF(260, 620, 1.5, kingfisher()) + L(260, 680, "kingfisher") + TF(760, 620, 1.3, kingfisher({ spread: 1, beat: Math.sin(t * 8) })) + L(760, 680, "wings spread") + TF(1250, 640, 1.5, penguin({ walk: t * 6, flap: .5 + .5 * Math.sin(t * 9) })) + L(1250, 700, "penguin: waddle + flap") + TF(1680, 640, 1.3, ostrich({ step: t * 5 })) + L(1680, 700, "ostrich: step + neck bob")
+        + TF(260, 1000, .9, penguin()) + L(430, 1000, "idle") + TF(700, 1000, .7, ostrich()) + TF(1100, 1010, .9, kingfisher({ fish: 1 })) + TF(1500, 1000, .9, kingfisher({ spread: .5 })) };
+    document.getElementById("dyn").innerHTML = `<rect width="1920" height="1080" fill="#DFF1FF"/>` + sets[set](); }, [+t, set]);
+  await p.screenshot({ path: out, type: 'jpeg', quality: 90 }); console.log(out, errs.length ? 'ERRORS ' + errs.join(' | ') : 'no page errors'); await b.close(); })();

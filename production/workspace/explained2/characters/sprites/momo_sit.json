@@ -1,0 +1,95 @@
+{
+ "size": [
+  1200,
+  896
+ ],
+ "states": {
+  "closed": {
+   "file": "momo_sit_closed.png",
+   "bbox": [
+    236,
+    44,
+    885,
+    851
+   ]
+  },
+  "half": {
+   "file": "momo_sit_half.png",
+   "bbox": [
+    236,
+    44,
+    885,
+    851
+   ]
+  },
+  "wide": {
+   "file": "momo_sit_wide.png",
+   "bbox": [
+    236,
+    44,
+    885,
+    851
+   ]
+  },
+  "blink": {
+   "file": "momo_sit_blink.png",
+   "bbox": [
+    236,
+    44,
+    885,
+    851
+   ]
+  },
+  "half_blink": {
+   "file": "momo_sit_half_blink.png",
+   "bbox": [
+    236,
+    44,
+    885,
+    851
+   ]
+  },
+  "wide_blink": {
+   "file": "momo_sit_wide_blink.png",
+   "bbox": [
+    236,
+    44,
+    885,
+    851
+   ]
+  }
+ },
+ "anchors": {
+  "hips": [
+   650,
+   845
+  ],
+  "neck": [
+   650,
+   440
+  ],
+  "neck_band": [
+   405,
+   470
+  ],
+  "head_xmin": [
+   385,
+   415
+  ],
+  "tail": {
+   "root": [
+    420,
+    720
+   ],
+   "xband": [
+    415,
+    345
+   ],
+   "ymin": [
+    410,
+    450
+   ]
+  },
+  "ground_y": 851
+ }
+}

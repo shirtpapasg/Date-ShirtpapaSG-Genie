@@ -1,0 +1,1 @@
+window.BAKED=["_grain","canteen","daystage","stage","stage2","stall","under"];

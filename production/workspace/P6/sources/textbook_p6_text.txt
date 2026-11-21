@@ -1,0 +1,1029 @@
+P6 Inspiring Science Textbook (Standard), MOE/Marshall Cavendish. Drive id 1gTZSnjGLHP2ktmvVf_KR_9N9gwB3FOfA. For Teachers' Use Only: paraphrase, never copy.
+
+INSPIRING SCIENCE SCIENCE SCIENCE SCIENCE TEXTBOOK TEXTBOOK
+INSPIRING INSPIRING INSPIRING
+6 666 PPPPP((SSRRRRRtandardtandardIMARIMARIMARIMARIMAR) ) Y Y YY Y
+Tan Aik Ling (PhD) & Jennifer Yeo (PhD)
+INSPIRING SCIENCE SCIENCE SCIENCE SCIENCE TEXTBOOK TEXTBOOK
+INSPIRING INSPIRING INSPIRING
+6 666 PPPPP((SSRRRRRtandardtandardIMARIMARIMARIMARIMAR) ) Y Y YY Y
+Tan Aik Ling (PhD) & Jennifer Yeo (PhD)
+© 2026 Curriculum Planning & Development Division
+Ministry of Education, Government of Singapore MOE Building 1 North Buona Vista Drive
+Singapore 138675
+Published by Marshall Cavendish Education Times Centre, 1 New Industrial Road, Singapore 536196 Customer Service Hotline: (65) 6213 9688 E-mail: cs@mceducation.com
+Website: www.mceducation.com
+First published 2026
+All rights reserved. No part of this publication may be reproduced, stored in a retrieval system or transmitted, in any form or by any means, electronic,
+mechanical, photocopying, recording or otherwise, without the prior permission of the copyright owner. Any requests for permission should be addressed to the Publisher.
+Marshall Cavendish is a registered trademark of Times Publishing Limited.
+ISBN 978-981-4970-36-5
+Printed in Singapore
+Preface
+The Inspiring Science series is written based on the Primary Science Syllabus 2023 by the Ministry of Education, Singapore. This series provides opportunities for students to understand the ways of thinking and doing Science.
+This textbook comprises different themes to help students appreciate connections between life and physical sciences. This encourages coherence and integration of scientific ideas and makes the learning of Science meaningful for students.
+Students explore Science by thinking and doing, and by understanding themselves and the world around them through real-world contexts.
+We hope that the Inspiring Science series will be a trusted companion for students in their four-year journey of Science learning in primary school and lay a strong foundation that will spark their curiosity for Science learning in future.
+The series includes the following components:
+• Inspiring Science Textbook (Primary)
+• Inspiring Science Activity Book (Primary)
+We ask questions to deepen our thinking as we learn Science\!
+Ali Belle Chen Devi Mr Bala Mrs Lim
+iii
+Features of the Textbook
+The chapter opener highlights contexts relevant to our daily lives.
+I’m Inspired
+Photosynthesis 9 What I Am Learning highlights concepts to be learnt in the chapter.
+How How do do organisms organisms in in a a community community interact interact to to stay stay alive? alive?
+Different populations of organisms in a habitat
+Let’s Think and Do
+Objects have weight because gravitational force pulls them downwards.
+depend on one another. This interdependence allows organisms to meet their energy needs.
+Analysing and interpreting data
+Look at the three organisms below. In which habitat can you find them? What is the relationship between them?
+Duckweed Water snail Frog
+Did you know that we weigh differently in space and on the Earth? This is The three organisms can be found in a pond. The duckweed is eaten
+because as we move further away from the Earth, the gravitational force by the water snail, which is in turn eaten by the frog. The interactions
+that the Earth exerts on us decreases. Thus, we weigh less in space. between the three organisms can be represented by a food chain. Let us see how energy is transferred in the food chain below.
+duckweed water snail frog
+A food chain always begins with a producer. In the food chain above, the duckweed is the producer. The duckweed makes food using light from the Sun during photosynthesis. The food is stored in the plant.
+When the water snail eats the duckweed, it gets energy from the duckweed. The water snail is a consumer. When the frog eats the water snail, it obtains energy from the water snail. The frog is also a consumer.
+In the topic of Photosynthesis, you have learnt that An animal that hunts and eats another animal is a
+energy is transferred predator. The animal that is eaten is called prey.
+to different living When the frog eats the water snail, the frog is the predator and the water snail is the prey.
+things through different ways.
+Let’s Think and Do highlights the ways of thinking and doing Science.
+Both the boy and the object have weight.
+Let’s Connect
+Less gravitational force acts on the man when he is in space than when he is on the Earth.
+84 Interactions
+Let’s Inquire shows the links between the Textbook, the Activity
+iv
+Book and SLS.
+The Sun gives off light and heat. These forms of energy are important for supporting life on Earth as they help living things to see and keep warm. Light and heat can also be converted to other forms of energy for things to work.
+Understanding energy is important because it helps us to understand how things work and how we can use energy more efficiently and sustainably. By learning about the different forms of energy, we can make better choices about how we use and conserve energy in our daily lives.
+18 Energy
+CHAPTER2
+What What I I Am Am Learning Learning
+• What is energy?
+• What are the different forms of energy?
+• What is energy conversion?
+• Where does the energy we use come from?
+• How can we help to conserve energy?
+Energy Energy Conversion Conversion
+I’m Inspired highlights some of the works of scientists as well as exemplary values, ethics and attitudes.
+Let’s Connect highlights the links between the themes and the topics.
+boy
+object
+What is the difference between
+SLS mass and weight?
+Let’s InquireAB: Activity 3.5 SLS: Gravitational Force
+How does a cactus carry out photosynthesis if it has needle-like leaves?
+Jon Baptist van Helmont was one of the earliest scientists to contribute to our knowledge of photosynthesis. He wanted to prove that plants carry out photosynthesis by absorbing substances from the soil. He planted a willow tree in soil under the Sun and watered the plant every day. After five years, he measured the mass of the plant and soil separately, and found that the mass of the plant increased while the mass of the soil remained constant. He realised that his results did not support his hypothesis.
+The mass of the willow tree increased over five years.
+Scientists discovered much later that carbon dioxide is one of the gases present in the air. They used this information to relook at van Helmont’s experiment. They then concluded that plants absorb carbon dioxide from the air during photosynthesis.
+stem leaves
+63 Interaction of Forces
+Let’s Connect
+In the topic of Interactions Within the Environment, you will learn how living things have different adaptations to obtain food.
+Science Around Us
+62 Interactions
+Science Around Us highlights relevant information that is interesting and shows how Science is applicable to us in our everyday life.
+Let’s Apply allows us to apply skills and processes in different contexts.
+1\. Siti wound up a toy and then released it. She observed that the toy
+made a sound as it moved across the floor.
+What form of energy did the toy have when Siti wound it up? What forms of energy did the toy have when she released it?
+The main energy conversion that takes place is:
+A B + C
+Which of the following correctly identifies A, B and C?
+38 Energy
+Let’s Let’s Apply Apply
+A B C (1) potential energy sound energy heat energy (2) kinetic energy kinetic energy heat energy (3) potential energy kinetic energy sound energy (4) kinetic energy potential energy sound energy
+Use the information below to answer Questions 2 and 3.
+Ali skateboarded from point X to point Y and then to point Z on the ramp shown below.
+The water level on the Earth changes throughout each day in a pattern called tides.
+When the water rises to its highest level and covers much of the shore, this is called high tide. When the water falls to its lowest level and moves away from the shore, this is called low tide.
+Low tide
+Why do high tides and low tides occur? How is this related to forces?
+In space, the Earth orbits, or moves around, the Sun while the Moon orbits the Earth.
+Earth
+Moon
+The Moon and the Earth exert gravitational force on each other. The Moon’s gravitational force exerted on the Earth is one of the main reasons why there are high tides and low tides.
+low tide
+Earth
+Moon
+high tide
+low tide high tide
+ramp
+point X
+point Z
+point Y
+High tide
+Sun
+Bold words highlight concepts learnt in the topic.
+Depletion of Natural Resources Rapid economic growth and increase in the world population have led to an increased demand for fuels and other natural resources such as metals. Natural resources are being used more quickly than they can be replenished. This can result in depletion of natural resources. If natural resources are depleted, humans would not have enough food, water and materials.
+Saving the Earth
+Pollution, deforestation, global warming and depletion of natural resources are challenges that the world faces today. Scientists and governments across the world are working tirelessly to find solutions to these problems. Conservation efforts to protect endangered plants and animals are supported by governments. Reforestation is also carried out by communities to restore forests that have been destroyed. Everyone can play a part to save the Earth.
+What positive impact on the environment can you make?
+Buy only things that you really need.
+Reuse or repurpose things.
+Let’s Explore
+As part of the efforts to become a Zero Waste Nation, recycling bins are placed around Singapore. What are some items that
+Recycle metal cans, plastic bottles and newspapers.
+can be recycled?
+100 Interactions
+Let’s Explore provides opportunities for us to apply our understanding of the concepts and skills through contexts.
+The theme closure highlights the essential takeaways for the theme.
+v
+Interactions
+There are many different types of interactions around us. You have learnt how organisms interact with one another and with the environment around them. You have also learnt about other types of interactions such as forces.
+Your first task is to observe the picture below and
+identify the different types of interactions. Share
+with your classmates some of the interactions
+you have identified in the picture.
+mangrove trees
+butterflies
+plovers sea hibiscus
+mudskippers
+110
+Interactions
+Table of contents
+Chapter Topic Page
+Theme – Energy
+1 Photosynthesis 2
+• What do living things need to carry out life processes?
+• Where does the energy in living things come from?
+• How is energy from the Sun used by plants?
+• How do plants and animals obtain energy from food?
+2 Energy Conversion 18
+• What is energy?
+• What are the different forms of energy?
+• What is energy conversion?
+• Where does the energy we use come from?
+• How can we help to conserve energy?
+Theme Closure – Energy 46
+vi
+Chapter Topic Page
+Theme – Interactions
+3 Interaction of Forces 48
+• What is a force?
+• What are the effects of forces?
+• What are the different types of forces?
+4 Interactions Within the Environment 74
+• What makes up an environment?
+• What affects the survival of an organism in an environment?
+• Where do different organisms live?
+• How do organisms in a community interact to stay alive?
+5 Surviving in the Environment 88
+• How do organisms survive well in an environment?
+• How do the actions of humans affect the environment?
+Theme Closure – Interactions 110vii
+I think all the processes in What do you
+living things are equally important think is the most
+for their survival. This includes important process
+photosynthesis in plants.
+No, it is breathing because we need
+air to live. I agree, Belle\! Photosynthesis
+is an important process. Plants use light from the Sun to make food for themselves and other living things.
+2 Energy
+I know\! It is digestion\! The food we eat is in living things?
+digested and absorbed into the blood to give us energy.
+Plants make their own food in the form of sugar through photosynthesis. Photosynthesis is a process whereby plants use water, carbon dioxide and light to produce sugar and oxygen. Light is absorbed by a green substance called chlorophyll, which is usually found in leaves. Plants use the sugar they produce to carry out life processes for survival. The sugar produced by plants is also used by animals for energy.
+CHAPTER1
+Photosynthesis Photosynthesis
+What What I I Am Am Learning Learning
+• What do living things need to carry out life processes?
+• Where does the energy in living things come from?
+• How is energy from the Sun used by plants?
+• How do plants and animals obtain energy from food?
+What What do do living living things things need need to to carry carry out out life life processes? processes?
+Belle, why aren’t you having lunch? You may not have enough energy for your exercise later\!
+Living things need energy to carry out life processes such as moving, growing and reproducing.
+People need energy to move around. Animals need energy to reproduce.
+In the topic of Living and Non-Living Things, you have learnt that living things need water, food and air to survive. Plants need energy to grow.
+Let’s Connect
+Did you know that you need energy even when you are sleeping, sitting or doing nothing? Energy is required to keep us alive.
+3 Photosynthesis
+Living things like plants and animals need energy to survive.
+The energy that plants need comes from the sugar produced during photosynthesis. The energy that animals need comes from the food they eat.
+What do you eat to get energy?
+The amount of energy in food is measured in calories. Food with more calories gives us more energy.
+Let’s SLS Inquire4 Energy AB: Activity 1.1 (Part A)
+Examples of food which gives us energy
+Science Around Us
+When we take in more calories than we need, our body stores the extra calories as body fat. The stored fat may be used by our body in future. To lose excess body fat, we should exercise regularly and take in enough calories for our daily activities. Planning our meals carefully can help our body to maintain a healthy percentage of fat.
+As it is often difficult to keep track of the number of calories we take in, people have devised different ways to do so. For example, some people keep a food log by recording what they eat at each meal, while others take photos of their food before they eat. How would you keep track of your calorie intake and activity level?
+The nutrition facts on some food labels give us an idea of how much energy is provided by each serving of food. Besides the amount of energy that the food provides, the nutrition facts also state the types and amounts of nutrients that are present in the food. These nutrients include carbohydrates, proteins and fats. Reading the nutrition facts helps us to plan the food we eat so that we can have a balanced diet.
+Each serving of this food provides 135 calories.
+Energy from food can come from carbohydrates, proteins and fats. Each gram of carbohydrate or protein provides 4 calories, while each gram of fat provides 9 calories. Besides energy, some food also provides us with important vitamins and minerals to keep our body healthy.
+What is your favourite food? How much energy does each serving of your favourite food provide?
+Each serving of this food provides 310 calories.
+SLS
+Let’s InquireAB: Activity 1.1 (Part B)
+Living things need energy to carry out life processes.
+5 Photosynthesis
+Where Where does does the the energy energy in in living living things things come come from? from?
+The Sun makes the weather hot, but it is our primary source of energy\!
+The Sun provides the Earth with heat and light.
+Heat from the Sun keeps the Earth warm so that living things can survive. Without the Sun, the Earth would be too cold for living things to survive.
+Light from the Sun is absorbed by plants during photosynthesis. The sugar produced is stored and used by plants for energy. When animals eat plants, they get the energy stored in the plants.
+What a hot day\! The Sun is shining so brightly\!
+6 Energy
+Let’s Connect
+Have you ever wondered where Singapore gets its food supply? According to a Singapore Food Statistics report, more than 90% of Singapore’s food is imported from other countries, while about 10% is locally produced. Under the 30 by 30 goal, Singapore hopes to be able to supply 30% of its people’s nutritional needs by the year 2030. Find out how we can achieve the 30 by 30 goal.
+In the theme of Energy, you have learnt how light and heat can be useful in everyday life.
+Let’s Explore
+Energy can be transferred to living things through different ways. An example is shown below.
+Light energy from the Sun is used by grass to carry out photosynthesis.
+When a rabbit eats the grass, energy is transferred from the grass to the rabbit.
+fox
+The Sun is the primary source of energy as living things get energy directly or indirectly from it.
+Let’s SLS InquireAB: Activity 1.2 All living things depend directly or indirectly on
+SLS: Energy from the Sun for energy.
+the Sun
+Photosynthesis
+7
+Sun
+grass
+rabbit
+When a fox eats the rabbit, energy is transferred from the rabbit to the fox.
+How How is is energy energy from from the the Sun Sun used used by by plants? plants?
+Those plants are in the shade. Are they getting enough light for photosynthesis?
+These plants are carrying out photosynthesis.
+During photosynthesis, plants produce sugar and oxygen using light, water and carbon dioxide. The leaves of plants contain chlorophyll, which traps light so that photosynthesis can take place. Leaves also take in carbon dioxide and give out oxygen through tiny openings found on them.
+AB: Activity 1.3 (Part A) SLS: Photosynthesis
+oxygen
+light sugar
+Different plants need different amounts of light to grow well. Some plants need more light than others.
+SLS
+Let’s Inquirecarbon dioxidewater 8 Energy
+How does a cactus carry out photosynthesis if it has needle-like leaves?
+stem leaves
+I’m Inspired
+Jon Baptist van Helmont was one of the earliest scientists to contribute to our knowledge of photosynthesis. He wanted to prove that plants carry out photosynthesis by absorbing substances from the soil. He planted a willow tree in soil under the Sun and watered the plant every day. After five years, he measured the mass of the plant and soil separately, and found that the mass of the plant increased while the mass of the soil remained constant. He realised that his results did not support his hypothesis.
+The mass of the willow tree increased over five years.
+Scientists discovered much later that carbon dioxide is one of the gases present in the air. They used this information to relook at van Helmont’s experiment. They then concluded that plants absorb carbon dioxide from the air during photosynthesis.
+Photosynthesis
+9
+Let’s Connect
+In the topic of Interactions Within the Environment, you will learn how living things have different adaptations to obtain food.
+During photosynthesis, sugar is produced. Excess sugar produced is converted to starch. The starch can be stored in different parts of plants, such as the leaves, roots and even the stem.
+We can determine whether a plant has carried out photosynthesis by testing its leaves for starch using iodine solution. The colour of iodine solution changes from brown to blue-black in the presence of starch. The change in colour of iodine solution allows us to conclude that the plant has made food.
+SLS
+Let’s InquireAB: Activity 1.3 (Part B) SLS: Factors Affecting Photosynthesis Science Around Us
+Potatoes are underground storage stems, while sweet potatoes are underground storage roots. The food made by these kinds of plants is stored in the stem or roots. Potatoes and sweet potatoes are rich in starch. When you eat these foods, you obtain energy from the food made by the plants during photosynthesis.
+Plants use light, water and carbon dioxide to produce sugar and oxygen during photosynthesis.
+The food made by the sweet potato plant is stored in the roots.
+10 Energy
+The food made by the potato plant is stored in the stem.
+How How do do plants plants and and animals animals obtain obtain energy energy from from food? food?
+The energy needed by plants and animals for their life processes is released from food during a process called respiration. This process requires oxygen and releases energy together with carbon dioxide and water.
+Respiration
+Food contains energy which is released during respiration.
+Animals obtain energy from the food they
+SLS eat. When some animals eat plants, they obtain energy from the food made by plants. Let’s InquireRespiration in animals allows energy to be released from the food they eat.
+AB: Activity 1.4 SLS: Respiration in Living Things
+I am respiring while the plants are photosynthesising.
+It is more accurate to say that the plants are photosynthesising and respiring. Plants respire all the time, just like us.
+Energy released from food
+11 Photosynthesis
+Living things carry out respiration to get energy.
+Photosynthesis Respiration It occurs in plants. It occurs in both
+plants and animals. It occurs only in the presence of light.
+12 Energy
+It occurs all the time, both during the day and at night. Carbon dioxide is taken in and oxygen is given out.
+Let’s SLS Oxygen is taken in and carbon dioxide is Inquiregiven out.
+AB: Activity 1.5
+Plants and animals obtain energy from food through respiration.
+The two processes of photosynthesis and respiration are important. During photosynthesis, plants use light energy to make food. During respiration, energy stored in food is released for plants and animals to use. Since plants and animals need energy for their life processes, they carry out respiration all the time.
+The table below shows the differences between photosynthesis and respiration.
+Use the information below to answer Questions 1 and 2.
+Chen wanted to investigate if the amount of light affects the rate of photosynthesis using the set-up shown below.
+He measured the distance between the flask and the torch, d, and counted the number of bubbles produced by the plant for five minutes. He repeated the investigation with different distances between the flask and the torch.
+1\. The bubbles contain the gas produced during photosynthesis.
+What is the gas?
+(1) Oxygen
+(2) Nitrogen
+(3) Water vapour
+(4) Carbon dioxide
+Let’s Let’s Apply Apply
+water
+plant
+flask
+Photosynthesis
+13
+bubbles
+d
+torch
+2\. Which graph most likely shows the results of Chen’s investigation?
+(1) Number of bubbles
+(2)
+Number of bubbles
+d (cm)
+d (cm)
+(3) Number of bubbles
+(4)
+Number of bubbles
+d (cm)
+d (cm)
+How does the amount of light change when the torch is moved closer to the plant?
+How does the amount of light affect the rate of photosynthesis?
+14 Energy
+3\. Mrs Lim placed a plant in the dark for two days to remove starch
+from its leaves. After that, she partly covered one of the leaves with black paper. Then, she placed the plant under the Sun for one day as shown below.
+After one day, Mrs Lim plucked the leaf covered with black paper and removed the black paper from it.
+part P
+part Q (covered with black paper)
+part R
+She then used iodine solution to test the leaf for starch. When starch is present, the colour of iodine solution changes from brown to blue-black.
+On which part(s) of the leaf did the colour of iodine solution remain unchanged?
+(1) P only
+(2) Q only
+(3) P and R only
+(4) Q and R only
+Photosynthesis
+15
+leaf black paper
+4\. Siti conducted an experiment to find out how the amount of carbon
+dioxide in water affects the rate of photosynthesis.
+bubble
+plant
+She then presented her results in a graph as shown below.
+Rate of photosynthesis
+Amount of carbon dioxide
+(a) Describe how changing the amount of carbon dioxide in the water
+affected the rate of photosynthesis. (b) Siti claimed that the experiment can be conducted in a completely
+dark room. Do you agree? Explain your answer.
+16 Energy
+water
+1\. Living things need energy to carry out life processes.
+2\. The Sun is the primary source of energy as living things get energy
+directly or indirectly from it.
+3\. Plants use light, water and carbon dioxide to produce sugar and
+oxygen during photosynthesis.
+4\. Plants and animals obtain energy from food through respiration.
+What I Have What I Have Learnt Learnt
+Carbon dioxide Heat Water Light
+The Sun
+Primary source of energy
+needs produces
+which is the
+is used by come from
+to get
+through
+Photosynthesis
+17
+Photosynthesis Photosynthesis
+Sugar (food)
+Plants and animals
+Energy
+Respiration
+Oxygenis needed
+for
+The Sun gives off light and heat. These forms of energy are important for supporting life on Earth as they help living things to see and keep warm. Light and heat can also be converted to other forms of energy for things to work.
+Understanding energy is important because it helps us to understand how things work and how we can use energy more efficiently and sustainably. By learning about the different forms of energy, we can make better choices about how we use and conserve energy in our daily lives.
+18 Energy
+CHAPTER2
+Energy Energy Conversion Conversion
+What What I I Am Am Learning Learning
+• What is energy?
+• What are the different forms of energy?
+• What is energy conversion?
+• Where does the energy we use come from?
+• How can we help to conserve energy?
+What is energy? What is energy?
+As you walk down a busy street, you see and hear different things happening. There are cars and buses moving past as well as people walking and talking. There is the sound of engines. Some people are using their mobile phones. All of these activities require energy.
+Energy is required for things to work. It allows cars, buses, animals and people to move. It also allows electrical devices such as mobile phones, lights and computers to work. Although we cannot see energy, we can observe its effects all around us.
+19 Energy Conversion
+20 Energy
+What What are are the the different different forms forms of of energy? energy?
+We can identify the form of energy that a body has by its motion, position and interactions with other bodies.
+Kinetic energy
+Kinetic energy is a form of energy that a moving object has. When an object is moving, we say that it has kinetic energy.
+The toy car has kinetic energy when it is moving.
+The blades of the fan have kinetic energy when they are spinning.
+The bird has kinetic energy when it is flying.
+The flag has kinetic energy when
+The girl has kinetic energy when it is flapping.
+she is on a moving skateboard.
+The pencil has kinetic energy when it is rolling.
+The kinetic energy of an object depends on its speed and mass. The kinetic energy of an object increases when its speed increases. Some examples are shown below.
+A rabbit has more kinetic energy when it hops faster.
+As one of the rabbits increases its speed, its kinetic energy increases.
+The blades of a fan have more kinetic energy when they spin faster.
+As the speed of the fan blades increases, their kinetic energy increases.
+A ball has more kinetic energy when it rolls faster.
+As the speed of the ball increases, its kinetic energy increases.
+21 Energy Conversion
+The kinetic energy of an object increases when its mass increases.
+Travelling at the same speed, a bus full of passengers has more kinetic energy than the same bus without passengers. This is because it has a greater mass.
+Rolling at the same speed, a heavier ball has more kinetic energy than a lighter ball.
+All moving objects have kinetic energy. Kinetic energy is present in our daily lives.
+The bus has more kinetic energy when it is full of passengers than when it is travelling at the same speed without passengers.
+The iron ball with a greater mass has more kinetic energy than the football when both of them are rolling at the same speed.
+22 Energy
+Potential energy
+Potential energy is a form of energy that an object has because of its position or state. It is also called stored energy. It is the energy that an object possesses because of its height, its state of being stretched or compressed, or the chemicals it contains.
+Potential energy due to height
+When an object is at a position above the ground, it is said to have potential energy. The potential energy that an object has due to its height above the ground is also known as gravitational potential energy.
+The bird resting on the tree has potential energy because of its position above the ground.
+The toy car placed at the top of the bookshelf has potential energy because of its position above the ground.
+The pencil on the table has potential energy because of its position above the ground.
+Energy Conversion
+23
+The higher an object is above the ground, the more potential energy it has.
+The book has more potential energy when placed on the higher shelf than when placed on the lower shelf.
+The bird resting on the higher tree branch has more potential energy than the bird resting on the lower tree branch.
+Besides height, the amount of gravitational potential energy is affected by the mass of an object too. For example, a thick book with a greater mass has more potential energy than a thin book placed on the same shelf.
+24 Energy
+Potential energy due to stretching or compressing
+When an object is stretched or compressed, it has potential energy. This type of potential energy is known as elastic potential energy.
+When the springs of the seesaw are stretched or compressed, they have potential energy.
+When the elastic band of the slingshot is stretched, it has potential energy.
+When the child jumps on the trampoline, its stretched surface and springs have potential energy.
+When the plunger in the toy is pulled, the compressed spring attached to the plunger has potential energy.
+25 Energy Conversion
+26 Energy
+Potential energy in chemicals
+Some objects contain chemicals. These chemicals store energy that can be released when they interact with other chemicals. The energy stored in chemicals is called chemical potential energy.
+Batteries contain chemicals. The potential energy of the chemicals in a battery allows current to flow. When current flows in electrical devices such as a torch and an electric fan, they can work.Food contains potential
+energy. When food is eaten and then digested by our body, the potential energy of the food allows us to carry out activities.
+Fuels, such as coal, petrol and natural gas, contain potential energy. When fuels are burnt, the potential energy of the fuels allows machines such as vehicles to function.
+Light energy
+Light energy is a form of energy that allows us to see. It can come from different sources. We can see an object when light from it enters our eyes. This light can either be given off or reflected by the object.
+Electrical energy
+Electrical energy is a form of energy present in a closed circuit. It allows electrical devices to work.
+Let’s Connect
+When the lamp is switched on, electrical energy present in the closed circuit allows the lamp to light up.
+When the laptop is switched on, electrical energy present in the closed circuit allows the laptop to work.
+In the topic of Light, you have learnt about sources of light.
+Let’s Connect
+In the topic of Electrical Systems, you have learnt that current flows in a closed circuit.
+When the switch is turned on, electrical energy present in the closed circuit allows the refrigerator to keep things cold.
+Sun
+Lighted bulb
+Fire
+Firefly
+27 Energy Conversion
+28 Energy
+Sound energy
+Sound energy is energy that allows us to hear.
+Sound energy produced by the piano allows the audience to hear and enjoy the music.
+Sound energy produced by the mother allows the children to hear what she is saying.
+Heat energy
+Heat energy is the form of energy related to changes in temperature. You have learnt in Primary 4 that
+• when an object gains heat energy, its temperature may increase.
+• when an object loses heat energy, its temperature may decrease.
+Therefore, heat energy may cause changes in the temperature of an object.
+Sound energy produced by the doorbell allows us to know that someone is at the door.
+Sound energy produced by dolphins helps them to communicate with other dolphins.
+Let’s Connect
+In the topic of Heat, you have learnt about the effects of heat in our everyday lives.
+SLS
+Let’s InquireAB: Activity 2.1
+SLS: Forms of Energy
+Let’s Explore
+Many activities happen around us daily. For example, in the school field, there are children running, walking, jumping, playing and doing different forms of exercise.
+Choose an activity happening around you. What is/are the form(s) of energy involved in the activity?
+There are different forms of energy, such as kinetic energy, potential energy, light energy, electrical energy, sound energy and heat energy.
+What What is is energy energy conversion? conversion?
+Chen, why are you looking
+Have you ever so puzzled?
+wondered where the energy for the toy car to move comes from?
+Hmm… That’s a good question\! The toy car moves only when the switch is switched on. Could the energy come from the battery?
+Let’s investigate\!
+Energy Conversion
+29
+Energy can be converted from one form to another.
+When the switch in an electric circuit is closed, current flows in the circuit. The bulb in the circuit lights up and becomes hot.
+The chemicals in a battery possess potential energy. When a battery is connected to a bulb in a closed circuit, the potential energy of the chemicals is converted to electrical energy. The electrical energy is then converted to light and heat energy when the bulb lights up.
+When an apple is hanging on a tree, it has potential energy due to its height above the ground. The apple has no kinetic energy because it is not moving.
+When the apple falls from the tree, it has kinetic energy because it is moving. As the apple falls, its potential energy decreases due to the decrease in height. We say that the potential energy of the apple is converted to kinetic energy as it falls.
+Let’s SLS Inquirepotential energy electrical energy
+AB: Activity 2.2 (Part A) SLS: Energy Conversion
+is converted to is converted to
+potential energy is converted to kinetic energy 30 Energy
+light and heat energy
+When the elastic band of a slingshot is stretched and then released, the stone placed on the elastic band is released into the air.
+When the stone is just released from the elastic band, the potential energy of the stretched elastic band is converted to kinetic energy of the moving stone.
+potential energy is converted to kinetic energy When a radio is plugged into an electrical socket and switched on, it produces sound.
+For the radio to produce sound, electrical
+SLS energy is converted to sound energy.
+Let’s Inquireelectrical
+energy is converted to
+sound energy AB: Activity 2.2
+(Part B)
+31 Energy Conversion
+Let’s Explore
+A cyclist riding a bicycle
+What other examples of energy conversion around yourself can you identify?
+Energy can be converted from one form to another.
+Where Where does does the the energy energy Let’s Connect we we use use come come from? from?
+In the topic of Photosynthesis, you
+We have looked at different forms of energy and
+have learnt that the energy in our food how they can be converted to other forms. Where
+comes indirectly does the energy we use come from?
+from the Sun.
+Chen, do you know what the source of the energy of this lamp is?
+Electrical energy is converted to light energy in the lamp. I wonder where we get this electrical energy from.
+32 Energy
+Identify the energy conversion in each of the following.
+Water boiling in an electric kettle
+A man pushing a box up a ramp
+A boy throwing a ball into the air
+Mrs Lim, where does electrical energy come from?
+Hmm… What are fossil fuels?
+This is what I have found, Devi\!
+I have found this too, Chen\!
+Fossil fuels are formed from the remains of plants and animals that lived millions of years ago.
+Energy from the Sun had helped these plants and animals to survive. When the plants and animals died, they were buried deep underground. Over time, their remains turned into fossil fuels, storing the energy from the Sun. Thus, energy from fossil fuels comes from the Sun.
+Energy Conversion
+33
+Electrical energy can come from fossil fuels.
+Coal, petroleum and natural gas are examples of fossil fuels. When fossil fuels are burnt, the potential energy in them is converted to other forms of energy such as electrical energy and kinetic energy. Electrical energy allows a bulb to light up, while kinetic energy allows a car to move.
+Fossil fuels take millions of years to form and hence are limited. They are a non-renewable source of energy. This means that they cannot be replaced once they are used up. In Singapore, 95% of electricity is generated from natural gas.
+Alternative sources of energy
+Because of today’s modern lifestyle, a lot of energy is needed for our electrical devices, such as mobile phones, computers and lights, to function.
+We are using fossil fuels at a much faster rate than they are formed. As fossil fuels can run out, we need to conserve energy. We can do this by using energy more efficiently, reducing wastage and looking for alternative sources of energy that are renewable.
+Some of these alternative sources of energy include moving water, wind and solar energy. All these energy sources can be traced back to the Sun.
+Light from the Sun can be converted to electrical energy by solar panels.
+34 Energy
+Heat from the Sun causes the water cycle to take place. Water falls to the Earth as rain and gathers in water bodies such as rivers. Energy from the moving water in rivers can be harnessed to generate electricity.
+Wind, or moving air, can also be harnessed to generate electricity. Wind occurs due to the uneven heating of the Earth’s surface by the Sun.
+SLS
+Let’s InquireAB: Activity 2.3
+SLS: Energy Resources
+The energy that we use comes directly or indirectly from the Sun.
+Energy Conversion
+35
+How can we help to How can we help to conserve energy? conserve energy?
+Energy resources such as fossil fuels can be depleted if not used wisely. We need to take action to conserve energy by using it efficiently and reducing wastage.
+We can take simple steps in our daily lives to conserve energy.
+36 Energy
+Besides the following ways, what else can we do to use energy efficiently and sustainably?
+Switch off lights when not in use.
+Use the fan to cool down instead of the air conditioner.
+Use energy-efficient appliances that require less energy to work.
+Use the water heater only when necessary.
+Use public transport, walk or cycle instead of driving.
+Use insulating materials to reduce heat gain in the house during the day.
+Science Around Us
+Biofuels come from animal and plant waste.
+Both nuclear energy and biofuels can cause less pollution compared to fossil fuels. Research is ongoing to make them a possible alternative to fossil fuels in the future.
+Let’s We need to use energy efficiently and sustainably.
+SLS
+InquireAB: Activity 2.4
+Energy Conversion
+37
+There are limited energy resources on Earth. Thus, scientists are always looking for other possible sources of energy that are renewable. Renewable energy is the energy that comes from sources that do not run out.
+Wind, moving water and solar energy are renewable energy sources that can be harnessed to produce electricity. While these are natural sources of energy, they are dependent on weather conditions. Power plants that use these energy sources to generate electricity also require large amounts of land and are expensive to build.
+Nuclear energy is released from radioactive substances such as uranium. Energy can also be released from biofuels which are made from animal and plant waste.
+Nuclear energy is produced naturally by some chemicals, such as uranium and plutonium.
+1\. Siti wound up a toy and then released it. She observed that the toy
+made a sound as it moved across the floor.
+What form of energy did the toy have when Siti wound it up? What forms of energy did the toy have when she released it?
+The main energy conversion that takes place is:
+A B + C
+Which of the following correctly identifies A, B and C?
+38 Energy
+Let’s Let’s Apply Apply
+A B C (1) potential energy sound energy heat energy (2) kinetic energy kinetic energy heat energy (3) potential energy kinetic energy sound energy (4) kinetic energy potential energy sound energy
+Use the information below to answer Questions 2 and 3.
+Ali skateboarded from point X to point Y and then to point Z on the ramp shown below.
+ramp
+point X
+point Z
+point Y
+2\. Which graph below correctly shows how the amount of Ali’s kinetic
+energy changed when he moved from point X to point Y and then to point Z?
+(1) Amount of kinetic
+(2) energy (units)
+Amount of kinetic energy (units)
+3\. Which of the following best explains why Ali could not reach higher
+than point Z?
+(1) He had used up all his energy.
+(2) He did not have enough potential energy to move up further.
+(3) All of his kinetic energy had been converted to potential energy.
+(4) Some of his kinetic energy had been converted to other forms
+of energy.
+Amount of kinetic energy (units)
+Point
+Amount of kinetic energy (units)
+Point XPoint
+X
+Point YY
+ZZ
+XX
+YY Z(3) (4)
+Z
+At which point would Ali have the most kinetic energy? At which point would he have the least kinetic energy?
+39 Energy Conversion
+4\. Devi wanted to find out if the amount of potential energy of an object
+depends on its mass. She hung four balls of similar size but different masses, A, B, C and D, as shown below.
+A
+B
+Which two balls should Devi use for her investigation?
+(1) A and C
+(2) A and D
+(3) B and C
+(4) C and D
+What is the aim of the investigation? Which variable should be changed? C1 kg
+3 kg
+3 kg
+D1 kg
+sand
+40 Energy
+5\. Chen made a toy jumper by tying a rubber band around a folded
+piece of cardboard. He pressed down on the cardboard to stretch the rubber band, and then released the cardboard. He observed that the toy jumper moved up into the air.
+(a) Fill in the boxes below to show the energy conversion involved
+when the toy jumper moved up into the air.
+(stretched
+(moving toy
+(moving toy rubber band)
+jumper)
+jumper)
+What form of energy does the stretched rubber band have? What forms of energy does the moving toy jumper have?
+(b) Chen wanted to make the toy jumper move up higher in the air.
+State what he can do and explain your answer.
+How can we increase the amount of energy of the stretched rubber band?
+cardboard
+stretched rubber band
+toy jumper moving in the air
+toy jumper on the ground
+41 Energy Conversion
+\+
+6\. The diagrams below show how a wind power plant generates
+electricity. Wind turns the blades of the wind turbine, producing electricity in the generator.
+(a) Fill in the boxes below to show the energy conversion involved.
+(wind) (blades of
+wind turbine)
+A group of scientists conducted an experiment to investigate how the length of the blades of a wind turbine affects the amount of electricity generated. electrical energy
+(generator)
+length of blade
+42 Energy
+blade generator
+The results of the experiment were recorded in the table below.
+Length of blades of wind turbine (m)
+(b) Based on the results of the experiment, what can the group of
+scientists conclude?
+Amount of electricity generated (units) 40 2 60 5 75 9 110 12
+What do you observe about the length of the blades of a wind turbine and the amount of electricity generated?
+(c) Besides changing the length of the blades of the wind turbine, what
+can make the wind turbine generate more electricity?
+Energy Conversion
+43
+1\. There are different forms of energy, such as kinetic energy, potential
+energy, light energy, electrical energy, sound energy and heat energy.
+2\. Energy can be converted from one form to another.
+3\. The energy that we use comes directly or indirectly from the Sun.
+4\. We should use energy efficiently and sustainably.
+Sound energy
+is
+Energy that allows us to hear
+44 Energy
+What What I I Have Have Learnt Learnt
+Energy due to height
+exists in different
+Forms
+Potential energy
+Energy that is related to state or position
+such as
+Kinetic
+Light
+Electrical energy
+energy
+energy
+is
+is
+is
+is
+Energy
+Energy
+Energy that is
+that
+that is related to
+allows us
+present motionto seein a
+closed circuit. examples
+Energy
+Energy in due to
+chemicals stretching or compressing
+Energy Energy
+can be allows
+can be obtained from
+Converted
+Things
+Sources from one form
+to work of energyto another
+that are
+RenewableNon-renewable Heat
+examples energy
+Wind
+examples
+Energy that
+Water may cause temperature to change
+is
+Coal
+can run out and need to be Petroleum
+conserved
+Sun
+by
+Natural gas
+Using alternatives that
+Using energy
+Reducing are renewable sources
+efficiently
+wastage of energy
+Energy Conversion
+45
+Energy
+Energy is needed for living things to carry out activities. It is also needed for non-living things such as machines to work. There are different forms of energy, such as heat, light, kinetic energy and potential energy. Energy can be converted from one form to another.
+46 Energy
+The picture below shows a birthday party. Observe the different activities in the picture. Discuss with your classmates the various forms of energy and energy conversions involved in each activity.
+Your next task is to observe different activities in a theme park, as shown in the Activity Book. How do you apply the concept of energy conversion to the different activities?
+Let’s SLS
+InquireThematic Activity: A Day at the Theme Park
+Theme Closure 47
+Have you ever been on a swing, played with a kite, or jumped on a trampoline at a park? What makes objects move, change their direction of movement, or change in shape? These activities involve forces. When a force is applied on an object, it can produce an effect on the object.
+As you explore the interaction of forces, you will discover the science behind the activities that you carry out in everyday life. Understanding forces will also allow you to predict, control and even invent amazing things\!
+What What I I Am Am Learning Learning
+• What is a force?
+• What are the effects of forces?
+• What are the different types of forces?
+48 Interactions
+CHAPTER3
+Interaction Interaction of Forces of Forces
+What What is is a a force? force?
+A force is a push or a pull. A push or a pull is the action involved when an object interacts with another object.
+Let us look at some examples of forces present in the activities taking place at a school field.
+When Belle hits a ball with a baseball bat, the bat pushes the ball. In Science, we can describe this action as a force exerted on the ball by the bat.
+When Ali pulls a cart, we can describe this action as a force exerted on the cart by Ali.
+When Chen kicks a ball, his foot pushes the ball. How would you describe this action?
+SLS
+Let’s InquireAB: Activity 3.1
+Interaction of Forces
+49
+50 Interactions
+The examples on the previous page show that the objects are in contact when they push or pull each other. However, in some cases, the objects need not be in contact for one object to exert a force on another object. Examples of such forces include magnets attracting or repelling each other and an object falling downwards when it is released. You will learn more about these examples later in this chapter.
+attract
+repel
+Magnetic forces are exerted by magnets.
+The ball falls after being thrown upwards because a force pulls it downwards.
+A force is a push or a pull.
+Let’s Explore Look around you. What examples of pushes and pulls can you identify in your everyday life?
+What are the effects of forces? What are the effects of forces?
+A force may produce one or more effects on the object that it is exerted on.
+A force can change the shape of an object
+Stretching or pressing down on plasticine can change its shape.
+Kneading bread dough can change its shape.
+Squeezing a soft toy can change its shape. Interaction of Forces
+51
+52 Interactions
+A force can change the motion of an object
+A force can move a stationary object.
+Kicking a stationary ball can make it move.
+A force can slow down or stop a moving object.
+Pressing down on a moving toy car can make it stop.
+A force can speed up a moving object.
+Pushing a moving trolley with more force can speed it up.
+A force can change the direction of a moving object. Hitting a moving tennis ball can change its direction.
+A force can
+• change the shape of an object. SLS • move a stationary object. Let’s Inquire• speed up, slow down or stop a moving
+object.
+• change the direction of a moving object.
+AB: Activity 3.2 SLS: Force and Its Effects
+What What are are the the different different types types of of forces? forces?
+There are different types of forces. In this section, you will learn about magnetic force, frictional force, gravitational force and elastic spring force.
+Magnetic force
+Magnets can attract magnetic materials, such as iron and steel. They can also attract or repel other magnets. The force exerted by magnets on magnetic materials and other magnets is known as magnetic force.
+Magnetic force of attraction is exerted when a magnet is brought close to a magnetic material such as an iron nail.
+Similarly, magnetic force is exerted when magnets attract or repel each other. When the North pole of a magnet is brought close to the South pole of another magnet, each magnet exerts a magnetic force of attraction on the other magnet.
+Let’s SLS InquireAB: Activity 3.3 SLS: Magnetic Force
+Let’s Connect
+In the topic of Magnets, you have learnt how magnets interact with magnetic materials and other magnets.
+When the North pole of a magnet is brought close to the North pole of another magnet, each magnet exerts a magnetic force of repulsion on the other magnet.
+The examples above show that magnetic force can act on objects even when they are not in contact with a magnet.
+Interaction of Forces
+53
+The iron nail is attracted to the magnet and moves towards it.
+The magnets attract and move towards each other.
+The magnets repel and move away from each other.
+Ali pushing the box
+frictional force
+54 Interactions
+Frictional force
+Frictional force is the force that opposes motion when two objects rub against each other. It can cause moving objects to slow down and eventually stop.
+When Ali pushes a box with enough force, it slides on the ground. Frictional force is exerted on the box by the ground. Hence, this slows the box down.
+I wonder why the discs slow down and eventually come to a stop.
+What do you think will happen if we push the discs on a smoother surface?
+When the brake handles on a bicycle are squeezed, the frictional force between the brake pads and the wheel rim slows the bicycle down.
+brake pads
+wheel rim
+A man swimming forward needs to push against the water due to the frictional force exerted by the water on his body.
+A feather falling through the air slows down due to the frictional force exerted by the air on the feather.
+55 Interaction of Forces
+I’m Inspired
+56 Interactions
+For a long time, people believed that an object would stop moving unless a force was continually exerted to move the object. However, this belief did not explain certain observations, such as why an object could continue moving even after the force exerted on it was removed. An example is an arrow moving even after being released from a bow.
+To find out more about motion, Galileo Galilei carried out experiments using balls and slopes. Even though he did not have a clock, he devised ways to measure time in his experiments, such as using water clocks. His findings deepened our understanding of forces and motion, and were further developed by other scientists. This shows how scientific knowledge is continually refined over time.
+Galileo’s experiments using balls and slopes
+Understanding forces such as frictional force is important as it leads to designs that reduce frictional force during movement. For example, a racing car has a streamlined shape to reduce the frictional force between the car and air. This allows the car to move faster.
+The streamlined shape of a racing car reduces the frictional force between the car and air.
+Frictional force plays an important role in our everyday lives.
+Frictional force keeps us from slipping when we walk on the ground. When an object moves on a smooth surface, the frictional force acting on the object is less than when the object moves on a rough surface. This is why we slip more easily when we walk on a smooth surface.
+Frictional force allows us to hold objects. When we hold a glass of water with our hand, the frictional force between our hand and the glass prevents the glass from slipping from our hand. However, it is difficult to hold the glass of water when our hand is oily. This is because oil reduces the frictional force between our hand and the glass.
+Let’s Explore
+Frictional force can be useful in our daily lives. Look around you. What are some examples in which frictional force is useful?
+Anti-slip strips on the floor
+57 Interaction of Forces
+Water reduces the frictional force between Devi’s shoes and the floor.
+Oil reduces the frictional force between Chen’s hand and the glass.
+Let’s InquireSLS
+58 Interactions
+Frictional force is useful in our daily lives, but it can also cause problems for us.
+Frictional force can cause an object to undergo wear and tear. As we walk or run, frictional force between the soles of our shoes and the ground causes the soles to wear out. Over time, the soles become thinner and smoother, reducing the frictional force between the soles and the ground. This can cause us to slip more easily.
+Frictional force causes the soles of shoes to wear out.
+Frictional force can cause heat to be produced. In many household appliances such as blenders and drills, frictional force is exerted when their parts are moving. Overheating occurs when these appliances are in use for a long period of time. This can damage the appliances.
+Frictional force causes heat to be produced in the moving parts of blenders and drills.
+AB: Activity 3.4 SLS: Frictional Force
+How can we reduce frictional force in situations where it is not useful?
+We can use a lubricant such as oil to reduce the frictional force between the moving parts of a machine.
+oil
+Using oil to reduce the frictional force between the moving parts of the machine
+We can also use wheels to reduce the frictional force between an object and the ground.
+Using wheels to reduce the frictional force between the box and the ground
+Let’s Connect
+In the topic of Energy Conversion, you have learnt that energy is converted from one form to another. When an object is moving, some kinetic energy is converted to heat energy due to the frictional force between the object and the surface it moves on.
+wheels59 Interaction of Forces
+Gravitational force
+Gravitational force is the pull that the Earth exerts on all objects. As objects are matter and have mass, they fall towards the Earth when released from a height.
+Look at what happens after the ball is thrown upwards.
+60 Interactions
+I wonder why the ball falls towards the ground.
+Gravitational force acts on objects all the time.
+Gravitational force acts on an object that is not moving.
+Gravitational force acts on an object even when it is moving upwards. It causes the object to fall to the ground eventually.
+Gravitational force acts on an object that is moving in water.
+gravitational force
+gravitational force
+61 Interaction of Forces
+gravitational force
+Science Around Us
+62 Interactions
+The water level on the Earth changes throughout each day in a pattern called tides.
+When the water rises to its highest level and covers much of the shore, this is called high tide. When the water falls to its lowest level and moves away from the shore, this is called low tide.
+Low tide
+Why do high tides and low tides occur? How is this related to forces?
+In space, the Earth orbits, or moves around, the Sun while the Moon orbits the Earth.
+Earth
+Moon
+The Moon and the Earth exert gravitational force on each other. The Moon’s gravitational force exerted on the Earth is one of the main reasons why there are high tides and low tides.
+low tide
+Earth
+Moon
+high tide
+low tide high tide
+High tide
+Sun
+Objects have weight because gravitational force pulls them downwards.
+boy
+object
+Both the boy and the object have weight.
+Did you know that we weigh differently in space and on the Earth? This is because as we move further away from the Earth, the gravitational force that the Earth exerts on us decreases. Thus, we weigh less in space.
+Less gravitational force acts on the man when he is in space than when he is on the Earth.
+What is the difference between
+SLS mass and weight?
+Let’s InquireAB: Activity 3.5 SLS: Gravitational Force
+63 Interaction of Forces
+A watermelon, which has a greater mass than an apple, has greater gravitational force acting on it.
+64 Interactions
+Mass is a measure of the amount of matter in an object. Weight is caused by the gravitational force that the Earth exerts on an object. Mass does not change with location, while weight may change from place to place.
+An object with a greater mass has greater gravitational force acting on it. Hence, it has a greater weight. For example, a watermelon has a greater mass than an apple. Thus, the gravitational force acting on the watermelon is greater than that acting on the apple. As a result, the watermelon has a greater weight than the apple.
+Science Around Us
+Satellites are objects that orbit the Earth in space. Satellites launched by humans can send signals to devices to provide directions, weather forecasts and other information. Satellites orbit the Earth continuously due to the gravitational force that the Earth exerts on them.
+satellite
+Earth
+Elastic spring force
+I wonder why the mattress returns to its original shape when I stand up.
+In the topic of Diversity of Materials, you have learnt that different materials have different properties.
+I think the springs within the mattress allow it to do so.Elastic spring force is the push or pull exerted by an object that is stretched or compressed.
+Let’s Connect
+Interaction of Forces
+65
+When you stretch a rubber band, it exerts an elastic spring force. When you stop stretching the rubber band, the elastic spring force makes it return to its original shape.
+When you compress a rubber ball, it exerts an elastic spring force. When you stop compressing the rubber ball, the elastic spring force makes it return to its original shape.
+An object exerts more elastic spring force if more force is needed to stretch or compress it.
+SLS
+Let’s InquireAB: Activity 3.6
+SLS: Elastic Spring Force
+66 Interactions
+Science Around Us
+Did you know that many fun activities in the playground make use of elastic spring force? When you jump on a trampoline, its springs stretch. The elastic spring force exerted by the springs allows you to bounce up and down.
+When you sit on a spring rider, the elastic spring force exerted by the spring allows you to move forward and backward.
+Besides elastic spring force, what other forces are present in the playground?
+SLS
+Let’s InquireAB: Activity 3.7
+Different types of forces include magnetic force, frictional force, gravitational force and elastic spring force.
+Interaction of Forces
+67
+1\. Which of the following does not show a force
+in action?
+(1) Ben hitting a shuttlecock
+(2) Catherine pushing an eraser
+(3) Adeline stretching a rubber band
+(4) David’s hands gaining heat from warm water
+2\. Belle uses a pair of tongs to hold a biscuit.
+Which two forces are acting on the biscuit? A Frictional force B Magnetic force C Gravitational force D Elastic spring force
+(1) A and C
+(2) A and D
+(3) B and C
+(4) B and D
+tongs biscuit
+68 Interactions
+Let’s Let’s Apply Apply
+What is a force?
+What force prevents the biscuit from slipping out of the tongs? What force causes the biscuit to fall downwards when released?
+Use the information below to answer Questions 3 and 4.
+The diagram below shows a wooden block moving on surface X at point A and stopping at point B on a table.
+3\. Which of the following correctly shows the force(s) acting on the block
+at points A and B? (✓: present, ✗: absent)
+Point A Point B Frictional force
+4\. Chen wants to make the block move beyond point B. Which of the
+following should he do?
+(1) Use a longer table.
+(2) Use a shorter table.
+(3) Replace surface X with a rougher surface.
+(4) Replace surface X with a smoother surface.
+Gravitational force
+Frictional force
+Gravitational force (1) ✓ ✓ ✓ ✓ (2) ✓ ✓ ✗ ✓ (3) ✗ ✗ ✓ ✓ (4) ✗ ✗ ✓ ✗
+surface Xwooden block
+A
+table B
+Frictional force opposes movement, while gravitational force pulls all objects towards the Earth. At which point(s) do these forces act on the block?
+What can reduce the frictional force acting on an object?
+Interaction of Forces
+69
+5\. Devi used the set-up below to find out how the mass of an object
+affects the length of a spring.
+She recorded the results of her experiment in the table below.
+(a) State the force exerted by the spring when it was stretched. (b) What is the relationship between the mass of the object and the
+length of the spring?
+length of spring
+object
+Mass of object (g) Length of spring (cm)
+100 10 200 15 300 20
+What would happen to the spring if the object hung on it was removed? Observe how the length of the spring changed when different objects were hung on it.
+70 Interactions
+6\. Elias used a launcher to push a block across two different surfaces,
+Y and Z. He measured the distance, d, moved by the block on each surface after it came to a stop.
+His results are shown in the table below.
+Surface Distance, d, moved by the block (cm) 1st try 2nd try 3rd try Y 6 5 6 Z 1 2 1
+(a) State the force that caused the block to stop moving. (b) Give a reason why Elias conducted his experiment three times for
+each surface. (c) Based on the table above, compare the distances moved by the block on surface Y and on surface Z. Explain the difference. (d) Elias’ teacher shared that it is better to push the block using the
+launcher instead of his fingers. Explain why.
+What is the force that opposes movement? What are the factors that can affect the distance moved by the block?
+launcher
+push
+block d
+surface71 Interaction of Forces
+What What I I Have Have Learnt Learnt
+1\. A force is a push or a pull.
+2\. A force can
+• change the shape of an object.
+• move a stationary object.
+• speed up, slow down or stop a moving object.
+• change the direction of a moving object.
+3\. Different types of forces include magnetic force, frictional force,
+gravitational force and elastic spring force.
+• Change in shape
+• Start moving
+• Speed up
+• Slow down
+• Stop moving
+• Change the direction of motion
+can be
+Pushes Pulls
+can cause objects to
+72 Interactions
+Forces Forces
+include
+Magnetic force
+Magnets are brought close to magnetic materials and other magnets
+Attraction or repulsion
+Two objects that are in contact rub against each other
+Objects to slow down or stop moving
+Objects downwards
+Objects to have weight
+Gravitational Frictional force
+force
+Elastic spring force
+acts when acts when
+causing
+causing pulls
+causing
+acts when
+Objects such as springs are stretched or compressed
+causingObjects to return to their original shapes
+Interaction of Forces
+73

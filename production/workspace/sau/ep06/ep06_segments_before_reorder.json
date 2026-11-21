@@ -1,0 +1,429 @@
+{
+ "episode": "SAU EP06",
+ "title": "Where does your food go?",
+ "tag": "🌏 TheOneApp, Explored · EP 6 · Digestion",
+ "intro": {
+  "goals": [
+   [
+    "🦷",
+    "How your body breaks food down",
+    "first"
+   ],
+   [
+    "🩸",
+    "How digested food gets into your blood",
+    "second"
+   ],
+   [
+    "🚽",
+    "Where the leftovers go",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "How does oxygen get",
+  "to your muscles? 🫁"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🦷",
+    "Food is broken down into simpler substances",
+    "breaks",
+    0.12,
+    "#f77f00"
+   ],
+   [
+    "🩸",
+    "Small intestine: digested food into the blood",
+    "small",
+    0.3,
+    "#e63946"
+   ],
+   [
+    "💧",
+    "Large intestine: water taken back",
+    "large",
+    0.5,
+    "#3a86ff"
+   ]
+  ],
+  "tease": "🫁 Next time: how does oxygen get to your muscles?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "digestive",
+   "DIGESTIVE SYSTEM",
+   "#f77f00"
+  ],
+  [
+   "textbook",
+   "small",
+   "SMALL INTESTINE",
+   "#e63946"
+  ],
+  [
+   "textbook",
+   "large",
+   "LARGE INTESTINE",
+   "#3a86ff"
+  ],
+  [
+   "fibre",
+   "fibre",
+   "FIBRE",
+   "#2a9d8f"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "canteenBite",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep05_kids",
+     0
+    ],
+    [
+     "ep06_clink",
+     0.8
+    ],
+    [
+     "ep06_chomp",
+     3.3
+    ],
+    [
+     "ep05_munch",
+     3.65
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Chomp! Last time, your food's energy helped you run and jump. But what happens to the food inside you? And the bits your body can't use: where do they go?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why does Singapore buy food from many different countries, instead of just one? If one country has a flood, a disease, or stops selling, we can still buy from the others. Don't put all your eggs in one basket!"
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how your body breaks food down. Second, how digested food gets into your blood. And third, where the leftovers go. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's a Singapore fact. Every flush goes on a journey too. Used water flows through deep tunnels to water reclamation plants, where it is cleaned. Some of it becomes ultra-clean new water, which can meet up to forty per cent of Singapore's water needs.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "flush",
+     1.6,
+     330,
+     290
+    ],
+    [
+     "deep",
+     1.45,
+     520,
+     560
+    ],
+    [
+     "plants",
+     1.5,
+     800,
+     420
+    ],
+    [
+     "some",
+     1.35,
+     940,
+     380
+    ],
+    [
+     "forty",
+     1.1,
+     620,
+     465
+    ]
+   ]
+  },
+  {
+   "id": "d1",
+   "scene": "povMouth",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ep06_chomp",
+     0.9
+    ],
+    [
+     "splash",
+     0.98
+    ],
+    [
+     "ep06_chomp",
+     1.95
+    ],
+    [
+     "splash",
+     2.03
+    ],
+    [
+     "ep06_chomp",
+     3.0
+    ],
+    [
+     "splash",
+     3.08
+    ],
+    [
+     "ep06_squish",
+     3.7
+    ],
+    [
+     "whoosh",
+     4.4
+    ]
+   ]
+  },
+  {
+   "id": "d2",
+   "scene": "povGullet",
+   "silent": 4.0,
+   "sfx": [
+    [
+     "ep05_gulp",
+     0
+    ],
+    [
+     "ep06_squish",
+     0.02
+    ],
+    [
+     "ep06_squish",
+     1.12
+    ],
+    [
+     "pass_by",
+     1.7
+    ],
+    [
+     "ep06_squish",
+     2.22
+    ],
+    [
+     "ep06_squish",
+     3.32
+    ],
+    [
+     "pad_wonder",
+     3.85
+    ]
+   ]
+  },
+  {
+   "id": "d3",
+   "scene": "povStomach",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "splash",
+     0
+    ],
+    [
+     "tank_swirl",
+     0.2
+    ],
+    [
+     "ep06_gurgle",
+     1.0
+    ],
+    [
+     "bubble",
+     2.4
+    ],
+    [
+     "ep06_gurgle",
+     3.0
+    ],
+    [
+     "bubble",
+     4.2
+    ]
+   ]
+  },
+  {
+   "id": "d4",
+   "scene": "povSmall",
+   "silent": 7.0,
+   "sfx": [
+    [
+     "pass_by",
+     0.3
+    ],
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "pop",
+     2.5
+    ],
+    [
+     "pop",
+     2.8
+    ],
+    [
+     "sparkle",
+     3.9
+    ],
+    [
+     "pad_wonder",
+     3.55
+    ],
+    [
+     "sparkle",
+     4.6
+    ],
+    [
+     "reveal",
+     3.75
+    ],
+    [
+     "ep06_squish",
+     5.6
+    ],
+    [
+     "pass_by",
+     6.1
+    ]
+   ]
+  },
+  {
+   "id": "d5",
+   "scene": "povLarge",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep06_slurp",
+     0.4
+    ],
+    [
+     "ep06_slurp",
+     1.3
+    ],
+    [
+     "ep06_slurp",
+     2.2
+    ],
+    [
+     "ep06_squish",
+     2.9
+    ],
+    [
+     "ep06_slurp",
+     3.2
+    ],
+    [
+     "ep06_squish",
+     3.8
+    ],
+    [
+     "thud",
+     4.3
+    ]
+   ]
+  },
+  {
+   "id": "d6",
+   "scene": "povExit",
+   "silent": 3.5,
+   "sfx": [
+    [
+     "riser",
+     0.25
+    ],
+    [
+     "deep",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "d7",
+   "scene": "toilet",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "ep06_plop",
+     0.6
+    ],
+    [
+     "splash",
+     0.64
+    ],
+    [
+     "click",
+     2.35
+    ],
+    [
+     "ep06_flush",
+     2.45
+    ]
+   ]
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that journey? You were a bit of fibre from a green vegetable. Teeth chewed you, the gullet squeezed you down, and the stomach churned you. In the small intestine, your rice and egg friends were digested and passed into the blood. But fibre can't be digested, so you moved on. The large intestine took back water, and then, plop!",
+   "hold": 1.0
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Four, you learn about the digestive system: the mouth, gullet, stomach, small intestine and large intestine. Digestive juices break food down into simpler substances. In the small intestine, digested food passes into the blood, which carries it around the body. In the large intestine, water is taken back. Food that cannot be digested leaves the body through the anus.",
+   "hold": 1.0
+  },
+  {
+   "id": "fibre",
+   "scene": "fibre",
+   "text": "Fibre can't be digested, but it's still important. It helps food move smoothly through your intestines. Vegetables, fruit and wholegrain foods are full of fibre."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Chew a piece of plain bread for one whole minute without swallowing. Does it start to taste sweet? That's your saliva breaking starch into sugar!"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! In an adult, the small intestine is about six metres long. That's longer than a car! Why do you think it is so long? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Your digestive system breaks food down into simpler substances. The small intestine passes digested food into your blood. The large intestine takes back water. And what's left goes, plop! Next time: how does oxygen get to your muscles?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

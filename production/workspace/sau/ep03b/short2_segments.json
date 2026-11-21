@@ -1,0 +1,251 @@
+{
+ "episode": "SAU EP03 Part 2 Short 2",
+ "title": "What happens to rubbish you throw away?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [],
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "What happens to the rubbish you throw away?"
+  },
+  {
+   "id": "r1",
+   "scene": "kitchen",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "pop",
+     0.3
+    ],
+    [
+     "whoosh",
+     1.65
+    ],
+    [
+     "thud",
+     2.2
+    ],
+    [
+     "pop",
+     2.25
+    ],
+    [
+     "pop",
+     2.5
+    ],
+    [
+     "click",
+     2.9
+    ],
+    [
+     "click",
+     3.3
+    ],
+    [
+     "whoosh",
+     3.5
+    ],
+    [
+     "rush",
+     4.2
+    ]
+   ]
+  },
+  {
+   "id": "r2",
+   "scene": "povChute",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "pipe_rush",
+     0
+    ],
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     0.9
+    ],
+    [
+     "pass_by",
+     1.7
+    ],
+    [
+     "pass_by",
+     2.3
+    ],
+    [
+     "pass_by",
+     2.8
+    ],
+    [
+     "pass_by",
+     3.2
+    ],
+    [
+     "pass_by",
+     3.55
+    ],
+    [
+     "pass_by",
+     3.85
+    ],
+    [
+     "boom",
+     4.3
+    ],
+    [
+     "thud",
+     4.33
+    ]
+   ]
+  },
+  {
+   "id": "r5",
+   "scene": "povFurnace",
+   "silent": 7.5,
+   "sfx": [
+    [
+     "rush",
+     0
+    ],
+    [
+     "ignite",
+     0.1
+    ],
+    [
+     "roar",
+     0.4
+    ],
+    [
+     "crackle",
+     0.8
+    ],
+    [
+     "flash",
+     2.15
+    ],
+    [
+     "pad_wonder",
+     2.3
+    ],
+    [
+     "flame_roar",
+     2.4
+    ],
+    [
+     "bubble",
+     3.0
+    ],
+    [
+     "hiss",
+     3.4
+    ],
+    [
+     "turbine_spool",
+     3.5
+    ],
+    [
+     "spark",
+     4.85
+    ],
+    [
+     "generator_hum",
+     4.9
+    ],
+    [
+     "power_up",
+     5.7
+    ],
+    [
+     "pop",
+     2.5
+    ],
+    [
+     "pop",
+     2.8
+    ],
+    [
+     "pop",
+     3.4
+    ],
+    [
+     "pop",
+     4.15
+    ],
+    [
+     "pop",
+     4.9
+    ],
+    [
+     "pop",
+     5.5
+    ]
+   ]
+  },
+  {
+   "id": "r6",
+   "scene": "povAsh",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "hiss",
+     0
+    ],
+    [
+     "whirr",
+     0.2
+    ],
+    [
+     "pop",
+     0.35
+    ],
+    [
+     "crackle",
+     0.3
+    ],
+    [
+     "reveal",
+     1.3
+    ],
+    [
+     "sparkle",
+     3.0
+    ],
+    [
+     "pad_wonder",
+     3.6
+    ]
+   ]
+  },
+  {
+   "id": "s2b",
+   "scene": "recap",
+   "text": "You were a takeaway box, covered in curry. Down the chute you went, into a truck, and to a waste-to-energy plant in Tuas."
+  },
+  {
+   "id": "s2c",
+   "scene": "recap",
+   "text": "You were burnt, and the heat made electricity. All that was left was ash, which a barge carried to Semakau Landfill."
+  },
+  {
+   "id": "s2d",
+   "scene": "recap",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

@@ -1,0 +1,563 @@
+{
+ "episode": "SAU EP03 Part 2",
+ "title": "Where does our rubbish go? (Part 2)",
+ "tag": "🌏 TheOneApp, Explored · EP 3 · Part 2",
+ "intro": {
+  "goals": [
+   [
+    "🔥",
+    "What happens to rubbish we can't recycle",
+    "first"
+   ],
+   [
+    "🏝️",
+    "Why our only landfill is filling up",
+    "second"
+   ],
+   [
+    "💪",
+    "What you can do",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "Where does all this",
+  "rain come from? 🌧️"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🔥",
+    "Rubbish we can't recycle is burnt",
+    "burnt",
+    0.12,
+    "#f77f00"
+   ],
+   [
+    "🏝️",
+    "Its ash goes to Semakau, full by about 2035",
+    "semakau",
+    0.3,
+    "#6c757d"
+   ],
+   [
+    "♻️",
+    "Reduce, reuse, recycle right!",
+    "reduce",
+    0.6,
+    "#2a9d8f"
+   ]
+  ],
+  "tease": "🌧️ Next time: where does all this rain come from?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "news",
+   "landfill",
+   "LANDFILL",
+   "#6c757d"
+  ],
+  [
+   "textbook",
+   "reduce",
+   "REDUCE",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "reuse",
+   "REUSE",
+   "#3a86ff"
+  ],
+  [
+   "textbook",
+   "recycle",
+   "RECYCLE",
+   "#06d6a0"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "chute0",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "click",
+     1.35
+    ],
+    [
+     "footsteps",
+     1.76
+    ],
+    [
+     "footsteps",
+     2.3
+    ],
+    [
+     "pop",
+     3.55
+    ],
+    [
+     "click",
+     4.3
+    ],
+    [
+     "whoosh",
+     4.55
+    ],
+    [
+     "thud",
+     5.0
+    ],
+    [
+     "boom",
+     5.02
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Down the chute it goes! But where does your rubbish go after that? Singapore is a small island with only one landfill left, and it is filling up."
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, the question from part one. Why is recycling a can better than digging up new metal? Making a can from recycled aluminium uses much less energy, and we don't have to dig up more rock from the ground. And aluminium can be recycled again and again, without wearing out."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome back to TheOneApp, Explored! This is part two. Today, you'll learn three things. First, what happens to rubbish we can't recycle. Second, why our only landfill is filling up. And third, what you can do. Let's get started!"
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "r1",
+   "scene": "kitchen",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "pop",
+     0.3
+    ],
+    [
+     "whoosh",
+     1.65
+    ],
+    [
+     "thud",
+     2.2
+    ],
+    [
+     "pop",
+     2.25
+    ],
+    [
+     "pop",
+     2.5
+    ],
+    [
+     "click",
+     2.9
+    ],
+    [
+     "click",
+     3.3
+    ],
+    [
+     "whoosh",
+     3.5
+    ],
+    [
+     "rush",
+     4.2
+    ]
+   ]
+  },
+  {
+   "id": "r2",
+   "scene": "povChute",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "pipe_rush",
+     0
+    ],
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     0.9
+    ],
+    [
+     "pass_by",
+     1.7
+    ],
+    [
+     "pass_by",
+     2.3
+    ],
+    [
+     "pass_by",
+     2.8
+    ],
+    [
+     "pass_by",
+     3.2
+    ],
+    [
+     "pass_by",
+     3.55
+    ],
+    [
+     "pass_by",
+     3.85
+    ],
+    [
+     "boom",
+     4.3
+    ],
+    [
+     "thud",
+     4.33
+    ]
+   ]
+  },
+  {
+   "id": "r3",
+   "scene": "povTruck2",
+   "silent": 4.0,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "thud",
+     0.25
+    ],
+    [
+     "thud",
+     0.5
+    ],
+    [
+     "thud",
+     0.72
+    ],
+    [
+     "whirr",
+     1.1
+    ],
+    [
+     "squeeze",
+     1.7
+    ],
+    [
+     "rumble",
+     2.0
+    ],
+    [
+     "boom",
+     3.75
+    ]
+   ]
+  },
+  {
+   "id": "r4",
+   "scene": "povClaw",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "deep",
+     0
+    ],
+    [
+     "whirr",
+     0.5
+    ],
+    [
+     "riser",
+     0
+    ],
+    [
+     "boom",
+     3.0
+    ],
+    [
+     "thud",
+     3.1
+    ],
+    [
+     "click",
+     3.0
+    ],
+    [
+     "whirr",
+     3.6
+    ],
+    [
+     "rush",
+     3.8
+    ]
+   ]
+  },
+  {
+   "id": "r5",
+   "scene": "povFurnace",
+   "silent": 7.5,
+   "sfx": [
+    [
+     "rush",
+     0
+    ],
+    [
+     "ignite",
+     0.1
+    ],
+    [
+     "roar",
+     0.4
+    ],
+    [
+     "crackle",
+     0.8
+    ],
+    [
+     "flash",
+     2.15
+    ],
+    [
+     "pad_wonder",
+     2.3
+    ],
+    [
+     "flame_roar",
+     2.4
+    ],
+    [
+     "bubble",
+     3.0
+    ],
+    [
+     "hiss",
+     3.4
+    ],
+    [
+     "turbine_spool",
+     3.5
+    ],
+    [
+     "spark",
+     4.85
+    ],
+    [
+     "generator_hum",
+     4.9
+    ],
+    [
+     "power_up",
+     5.7
+    ],
+    [
+     "pop",
+     2.5
+    ],
+    [
+     "pop",
+     2.8
+    ],
+    [
+     "pop",
+     3.4
+    ],
+    [
+     "pop",
+     4.15
+    ],
+    [
+     "pop",
+     4.9
+    ],
+    [
+     "pop",
+     5.5
+    ]
+   ]
+  },
+  {
+   "id": "r6",
+   "scene": "povAsh",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "hiss",
+     0
+    ],
+    [
+     "whirr",
+     0.2
+    ],
+    [
+     "pop",
+     0.35
+    ],
+    [
+     "crackle",
+     0.3
+    ],
+    [
+     "reveal",
+     1.3
+    ],
+    [
+     "sparkle",
+     3.0
+    ],
+    [
+     "pad_wonder",
+     3.6
+    ]
+   ]
+  },
+  {
+   "id": "r7",
+   "scene": "barge",
+   "silent": 5.5,
+   "sfx": [
+    [
+     "ping",
+     0.15
+    ],
+    [
+     "ping",
+     0.5
+    ],
+    [
+     "splash",
+     0.8
+    ],
+    [
+     "wind",
+     0.6
+    ],
+    [
+     "pad_wonder",
+     2.0
+    ],
+    [
+     "splash",
+     2.6
+    ],
+    [
+     "chime",
+     4.8
+    ]
+   ]
+  },
+  {
+   "id": "r8",
+   "scene": "semakau",
+   "silent": 7.0,
+   "sfx": [
+    [
+     "splash",
+     0.3
+    ],
+    [
+     "pop",
+     0.5
+    ],
+    [
+     "pop",
+     0.85
+    ],
+    [
+     "pop",
+     1.2
+    ],
+    [
+     "rumble",
+     1.1
+    ],
+    [
+     "splash",
+     2.4
+    ],
+    [
+     "rumble",
+     3.6
+    ],
+    [
+     "splash",
+     4.6
+    ],
+    [
+     "stinger",
+     6.15
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. In twenty twenty-five, Singapore threw away more rubbish than ever before. Only about one in every ten things thrown away from our homes was recycled. And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five."
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "hold": 1.0,
+   "text": "Did you feel that journey? You were a takeaway box, covered in curry. Down the chute you went, into a truck, and to a waste-to-energy plant in Tuas. You were burnt, and the heat made electricity. All that was left was ash, which a barge carried to Semakau Landfill."
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "hold": 1.0,
+   "text": "Now for the textbook link! In Primary Six, you learn how people affect the environment. Everything we throw away took materials and energy to make. So first, reduce: use less. Then reuse: use things again. And then recycle what's left."
+  },
+  {
+   "id": "act",
+   "scene": "act",
+   "hold": 1.0,
+   "text": "So what can you do? Bring your own container when you buy takeaway. Return your drink cans and bottles for ten cents. And keep your recycling clean and dry, so it really gets recycled."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! For one day, count everything your family throws away. How many things could you have reused or recycled?"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why shouldn't you put a greasy food box in the blue recycling bin? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Rubbish we can't recycle is burnt, and its ash goes to Semakau, our only landfill, which could be full by about twenty thirty-five. So reduce, reuse, and recycle right. Next time: where does all this rain come from?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

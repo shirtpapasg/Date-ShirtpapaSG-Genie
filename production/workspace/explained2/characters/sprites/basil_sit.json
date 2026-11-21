@@ -1,0 +1,136 @@
+{
+ "size": 1024,
+ "states": {
+  "closed": {
+   "file": "basil_sit_closed.png",
+   "bbox": [
+    92,
+    126,
+    890,
+    917
+   ]
+  },
+  "half": {
+   "file": "basil_sit_half.png",
+   "bbox": [
+    92,
+    126,
+    890,
+    917
+   ]
+  },
+  "wide": {
+   "file": "basil_sit_wide.png",
+   "bbox": [
+    92,
+    126,
+    890,
+    917
+   ]
+  },
+  "blink": {
+   "file": "basil_sit_blink.png",
+   "bbox": [
+    92,
+    126,
+    890,
+    917
+   ]
+  },
+  "half_blink": {
+   "file": "basil_sit_half_blink.png",
+   "bbox": [
+    92,
+    126,
+    890,
+    917
+   ]
+  },
+  "wide_blink": {
+   "file": "basil_sit_wide_blink.png",
+   "bbox": [
+    92,
+    126,
+    890,
+    917
+   ]
+  }
+ },
+ "fit": {
+  "half": {
+   "body_scale": 1.1044,
+   "body_rot": 0.09,
+   "body_inliers": 171,
+   "head_rot_vs_body": 2.64
+  },
+  "wide": {
+   "body_scale": 0.9669,
+   "body_rot": -0.01,
+   "body_inliers": 189,
+   "head_rot_vs_body": 7.88
+  },
+  "blink": {
+   "body_scale": 1.1424,
+   "body_rot": 0.16,
+   "body_inliers": 106,
+   "head_rot_vs_body": -2.58
+  }
+ },
+ "anchors": {
+  "hips": [
+   640,
+   911
+  ],
+  "neck": [
+   650,
+   472
+  ],
+  "neck_band": [
+   432,
+   500
+  ],
+  "head_xmin": [
+   372,
+   394
+  ],
+  "tail": {
+   "root": [
+    445,
+    790
+   ],
+   "xband": [
+    445,
+    335
+   ],
+   "ymin": [
+    400,
+    440
+   ]
+  },
+  "ground_y": 917
+ },
+ "eyes": {
+  "L": {
+   "c": [
+    567,
+    266
+   ],
+   "r": [
+    66,
+    72
+   ],
+   "ang": 0
+  },
+  "R": {
+   "c": [
+    802,
+    232
+   ],
+   "r": [
+    35,
+    60
+   ],
+   "ang": 0
+  }
+ }
+}

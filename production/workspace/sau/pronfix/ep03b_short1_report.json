@@ -1,0 +1,99 @@
+{
+ "video": "ep03b/short1",
+ "lines": [
+  {
+   "segment": "s1c",
+   "sentence": 0,
+   "text": "And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five.",
+   "t_old": 11.554,
+   "t_new": 11.484,
+   "dur_old": 5.962,
+   "dur_new": 6.159,
+   "silence_before": 0.48,
+   "silence_after": 19.173,
+   "caption_drift_s": [
+    -0.17,
+    0.17
+   ],
+   "speech_dB_new": -21.74,
+   "speech_dB_old": -21.67,
+   "speech_dB_same_segment": [],
+   "mix_dB_new_sentence": -14.71,
+   "mix_dB_old_sentence": -16.53,
+   "mix_dB_neighbours_old_new": [
+    -17.2,
+    -15.38,
+    -22.4,
+    -20.56
+   ]
+  },
+  {
+   "segment": "s1d",
+   "sentence": 1,
+   "text": "Rubbish we can't recycle is burnt, and a barge carries its ash to Semakau.",
+   "t_old": 38.158,
+   "t_new": 38.188,
+   "dur_old": 4.582,
+   "dur_new": 4.605,
+   "silence_before": 0.6,
+   "silence_after": 0.517,
+   "caption_drift_s": [
+    -0.03,
+    0.03
+   ],
+   "speech_dB_new": -21.81,
+   "speech_dB_old": -21.73,
+   "speech_dB_same_segment": [
+    -20.41,
+    -21.93,
+    -21.9
+   ],
+   "mix_dB_new_sentence": -14.73,
+   "mix_dB_old_sentence": -16.36,
+   "mix_dB_neighbours_old_new": [
+    -18.63,
+    -16.79,
+    -16.46,
+    -14.57
+   ]
+  }
+ ],
+ "final_gain": {
+  "mix_before_gain_LUFS": -17.83,
+  "mix_true_peak": -2.88,
+  "gain_dB": 1.83,
+  "peak_limiter": true
+ },
+ "checks": {
+  "lufs_old": -17.8,
+  "lufs_new": -16.0,
+  "video_stream_identical": true,
+  "streams_old": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "52.933333"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "53.000000"
+   }
+  ],
+  "streams_new": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "52.933333"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "53.002000"
+   }
+  ],
+  "audio_away_from_fix_residual_dB": -32.6,
+  "fixed_gain_dB": 1.84,
+  "audio_lag_ms": 0.0
+ }
+}

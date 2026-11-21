@@ -1,0 +1,176 @@
+{
+ "episode": "SAU EP03 Short 2",
+ "title": "How does a magnet sort cans?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s2b",
+   "aluminium",
+   "ALUMINIUM",
+   "#adb5bd"
+  ],
+  [
+   "s2c",
+   "magnets",
+   "MAGNETS",
+   "#e63946"
+  ]
+ ],
+ "close": {
+  "rows": [
+   [
+    "🥫",
+    "A magnet pulls out the steel cans",
+    "magnet",
+    0.15,
+    "#e63946"
+   ],
+   [
+    "🧊",
+    "Aluminium cans: squashed into a block",
+    "squashed",
+    0.4,
+    "#2a9d8f"
+   ],
+   [
+    "🔥",
+    "Melted, and made into new cans",
+    "melted",
+    0.55,
+    "#f77f00"
+   ]
+  ],
+  "tease": "▶ Watch the full episode!",
+  "teaseWord": "watch"
+ },
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "How does a magnet sort drink cans?"
+  },
+  {
+   "id": "s2b",
+   "scene": "textbook",
+   "text": "In Primary Three, you learn about materials. A drink can is made of a metal called aluminium. Metals can be melted and shaped again and again."
+  },
+  {
+   "id": "s2c",
+   "scene": "textbook",
+   "text": "And magnets attract steel, but not aluminium. That's how a magnet sorts cans!"
+  },
+  {
+   "id": "c4",
+   "scene": "povSort",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "ep03_belt",
+     0
+    ],
+    [
+     "ep03_clank",
+     2.48
+    ],
+    [
+     "ep03_clank",
+     3.0
+    ],
+    [
+     "ep03_clank",
+     3.43
+    ],
+    [
+     "pad_tension",
+     3.55
+    ],
+    [
+     "ep03_clank",
+     3.86
+    ],
+    [
+     "ep03_clank",
+     4.22
+    ],
+    [
+     "pass_by",
+     4.45
+    ]
+   ]
+  },
+  {
+   "id": "c5",
+   "scene": "povBale",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "ep03_press",
+     0.2
+    ],
+    [
+     "boom",
+     2.05
+    ],
+    [
+     "pop",
+     2.85
+    ]
+   ]
+  },
+  {
+   "id": "c6",
+   "scene": "povMelt",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "roar",
+     0
+    ],
+    [
+     "ignite",
+     0.8
+    ],
+    [
+     "pad_wonder",
+     1.65
+    ],
+    [
+     "crackle",
+     2.0
+    ],
+    [
+     "bubble",
+     2.8
+    ],
+    [
+     "hiss",
+     3.0
+    ],
+    [
+     "bubble",
+     3.5
+    ],
+    [
+     "bubble",
+     4.1
+    ],
+    [
+     "bubble",
+     4.7
+    ]
+   ]
+  },
+  {
+   "id": "s2d",
+   "scene": "close",
+   "text": "So remember. A magnet pulls out the steel cans. The aluminium cans are squashed into a block, melted, and made into brand-new cans. Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

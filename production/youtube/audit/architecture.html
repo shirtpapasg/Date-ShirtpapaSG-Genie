@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+body{margin:0;background:#fbfaf3;font-family:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;color:#1d2a44}
+.c{width:1920px;height:1080px;position:relative;padding:48px 64px;box-sizing:border-box}
+h1{margin:0 0 6px;font-size:40px} .sub{color:#4d5b76;font-size:22px;margin:0 0 28px}
+.box{position:absolute;border:3px solid #1f8a4c;border-radius:18px;background:#fff;padding:18px 22px;box-sizing:border-box;font-size:22px;line-height:1.35}
+.box b{display:block;font-size:26px;margin-bottom:6px} .box small{display:block;color:#4d5b76;font-size:19px;margin-top:6px}
+.google{border-color:#1c6ed6} .people{border-color:#c77a00;background:#fff8dd}
+svg{position:absolute;left:0;top:0;width:1920px;height:1080px;pointer-events:none}
+.lbl{position:absolute;font-size:19px;color:#1c6ed6;background:#fbfaf3;padding:2px 8px;border-radius:6px}
+.lbl.g{color:#1f8a4c}
+.note{position:absolute;left:64px;bottom:44px;font-size:19px;color:#4d5b76;max-width:1790px}
+</style></head><body><div class="c">
+<h1>TheOneApp Publisher · architecture</h1>
+<p class="sub">How the API client, the teacher's YouTube channel and the study app fit together · Google Cloud project 780560926873 · October 2026</p>
+<svg><defs><marker id="a" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1c6ed6"/></marker><marker id="g" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#1f8a4c"/></marker></defs>
+<line x1="470" y1="330" x2="560" y2="330" stroke="#1f8a4c" stroke-width="4" marker-end="url(#g)"/>
+<line x1="960" y1="290" x2="1320" y2="290" stroke="#1c6ed6" stroke-width="4" marker-end="url(#a)"/>
+<line x1="960" y1="400" x2="1320" y2="400" stroke="#1c6ed6" stroke-width="4" marker-end="url(#a)"/>
+<line x1="1530" y1="470" x2="1530" y2="660" stroke="#1c6ed6" stroke-width="4" marker-end="url(#a)"/>
+<line x1="1320" y1="760" x2="960" y2="760" stroke="#1c6ed6" stroke-width="4" marker-end="url(#a)"/>
+<line x1="560" y1="760" x2="470" y2="760" stroke="#1f8a4c" stroke-width="4" marker-end="url(#g)"/>
+<line x1="250" y1="440" x2="250" y2="660" stroke="#1f8a4c" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#g)"/>
+</svg>
+<div class="box people" style="left:64px;top:220px;width:406px;height:220px"><b>Teacher (channel owner)</b>Signs in once with Google (device-code flow), approves the YouTube scope, runs the tool from a terminal.<small>Only user of the API client</small></div>
+<div class="box" style="left:560px;top:180px;width:400px;height:300px"><b>TheOneApp Publisher</b>Python command-line tool.<br>Reads the upload kit (titles, descriptions, tags, thumbnails).<br>Dry run first, then publish.<small>Stores one OAuth token, mode 600, never shared</small></div>
+<div class="lbl" style="left:985px;top:222px;width:310px;text-align:center">videos.insert · videos.update<br>thumbnails.set · playlists.*<br>playlistItems.insert</div>
+<div class="lbl" style="left:985px;top:410px;width:310px;text-align:center">channels.list · videos.list<br>playlistItems.list (read own channel)</div>
+<div class="box google" style="left:1320px;top:180px;width:420px;height:290px"><b>YouTube Data API v3</b>OAuth 2.0, scope<br><span style="font-size:18px">https://www.googleapis.com/auth/youtube</span><small>Access revocable at Google security settings</small></div>
+<div class="box google" style="left:1320px;top:660px;width:420px;height:215px"><b>YouTube channel “TheOneApp”</b>Public, made-for-kids videos in the playlist “TheOneApp, Explained”.<small>UCu8usghTv_5K0FuJykeCGKg</small></div>
+<div class="lbl" style="left:985px;top:690px;width:310px;text-align:center">privacy-enhanced embed<br>(youtube-nocookie.com)</div>
+<div class="box" style="left:560px;top:660px;width:400px;height:215px"><b>TheOneApp (web app)</b>theoneapp-sg.vercel.app · Vercel<br>Videos page lists episodes and embeds them.<small>No YouTube API calls from the app</small></div>
+<div class="lbl g" style="left:468px;top:690px;width:90px;text-align:center;font-size:17px">watch,<br>then<br>practise</div>
+<div class="box people" style="left:64px;top:660px;width:406px;height:215px"><b>Pupils, aged 9–12</b>Use TheOneApp with a teacher's or parent's knowledge. No accounts today; no ads.<small>Privacy policy and terms linked in the app</small></div>
+<div class="lbl g" style="left:262px;top:530px">pastes the video<br>links into the app</div>
+<p class="note">Data flow: the API client touches only the owner's channel. Viewer data is never read or stored. Privacy policy: theoneapp-sg.vercel.app/privacy.html · Terms: theoneapp-sg.vercel.app/terms.html</p>
+</div></body></html>

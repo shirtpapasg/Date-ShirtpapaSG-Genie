@@ -1,0 +1,1769 @@
+CURRICULAR RESOURCE INTEGRATION AND INNOVATION FOR SINGAPORE PRIMARY SCIENCE Teachers as Pedagogical Designers for Implementation Integrity
+
+Curricular Resource Integration and Innovation for Singapore Primary Science: Teachers as Pedagogical Designers for Implementation Integrity © 2025 Ministry of Education and National Institute of Education
+
+To cite this: Chin, T. Y., Tan, A.-L., Lee, Y. J., Chang, J., Neo, M., Teh, D., Poonam, K., Tan, P. H., Goh, S. F, Chow, G., Wu, Z.B., Tan, S.T., & Ng, I (2025). Curricular resource integration and innovation for Singapore primary science: Teachers as pedagogical designers for implementation integrity. Singapore: Ministry of Education and National Institute of Education.
+
+This monograph describes the key features of the 2023 Primary Science Syllabus in Singapore and how classroom learning experiences have been organised through the use of integrated curriculum resources. Based on observations of Primary 3 and 4 science classrooms and interviews of teachers and students, we propose a thinking frame, the Content-Student-Resource \[CSR\] Cycle, for teacher planning and reflection. This thinking frame helps to understand how local science teachers have customised their teaching of content through the use of curriculum resources. The CSR Cycle enables teachers to plan and reflect on various pedagogical considerations with sensitivity to their implementation contexts. We exemplify the CSR Cycle with selected stories of actual classroom practices.
+
+ISBN 978-981-94-2974-5
+
+Funding This study was funded by Singapore Ministry of Education (MOE) under the Education Research Funding Program (OER 33/22 TAL) and administered by National Institute of Education (NIE), Nanyang Technological University (NTU), Singapore. Any opinions, findings, conclusions, and recommendations expressed in this material are those of the author(s) and do not necessarily reflect the views of the Singapore MOE and NIE.
+
+Ethical Consideration The data reported in this study is approved by NTU IRB-2022-1114.
+
+Acknowledgements We would like to thank the schools, teachers, and students for allowing us into their classrooms. Being in the classrooms to observe how science learning takes place is a privilege that we do not take for granted. Hence, our heartfelt appreciation goes to the Principals, teachers, and students. We would also like to acknowledge the generous and meaningful feedback from all our colleagues who have taken time to read the drafts of this monograph.
+
+Prologue
+
+Section A: Singapore Science Curricular and Pedagogical Frameworks A1. How is the 2023 Primary Science Syllabus organised? A2. How is a topic organised? A3. How is a lesson organised?
+
+Section B: An Integrated Suite of Resources B1. What are the design considerations? B2. What makes up the integrated suite of resources?
+
+Section C: Stories from Science Classrooms: Teaching and Learning Experiences C1. Diversity of Living and Non-Living Things
+
+Seeing the “Invisible” C2. Diversity of Materials
+
+Check your “Special” Book C3. Cycles in Plants and Animals (Life Cycles)
+
+We can Wiggle like a Worm C4. Interaction of Forces (Magnet)
+
+Attract or Repel? C5. Cycles in Matter and Water (Matter)
+
+Same Volume, Same Mass? Think Again\! C6. Human System (Digestive System)
+
+Grandma says, “Chew your Food”. Is she right? C7. Plant System (Plant Parts and Functions)
+
+Is Cactus a Plant? C8. Energy Forms and Uses (Light)
+
+Can Ben see the Minion in a dark room? C9. Energy Forms and Uses (Heat)
+
+Did the ring expand or did the ball contract?
+
+Epilogue
+
+CONTENTS
+
+156891112121521263135424955616672
+
+Prologue
+
+The Primary Science Thematic Syllabus, organised in five themes of Diversity, Cycles, Systems, Interactions and Energy, was first conceptualised and implemented from 2001. These themes support students to appreciate the connection between Physical and Life Sciences in the real world. The syllabus was reviewed and enhanced regularly for implementation in 2008, 2014 and 2023.
+
+To encourage teaching and learning as inquiry, the Science Curriculum Framework, centred on “Science as an inquiry” was first introduced in 2004. This was further enhanced in 2019 to highlight the importance of “Science for Life and Society”, anchored on the vision of “Inquire, Innovate and Inspire”. The development of core ideas, practices, values, ethics and attitudes are also emphasised with “Students as Inquirers” and “Teachers and Partners as Facilitators”.
+
+“The Science as Inquiry framework gave teachers, teacher educators and curriculum planners a common language to talk about what and how science is learned in the classrooms. This collective purpose has galvanised us to raise the quality of science learning and teaching in Singapore. Two decades on, we know that students here know what the practice of inquiry is. Kudos to our teachers who made it happen in every science classroom.” Dr Poon Chew Leng Deputy Director, Sciences Branch Curriculum Planning and Development Division (2003–2008)
+
+Figure 1 Review of Science Curriculum Framework
+
+1
+
+For the current 2023 Primary Science Syllabus, an integrated suite of resources was developed for the first time. The suite included the Textbook, Activity Book, Science Pack Activity Resource Kits for Learning (SPARKLE) hands-on kit, Student Learning Space (SLS) supported by the Teaching and Learning Guide. SPARKLE is at the heart of the integrated resources, to encourage hands-on and minds-on learning experiences.
+
+Besides translating the ideas reflected in the Science Curriculum Framework and thematic syllabus into the integrated suite of resources, the meaningful and coherent sequence of learning at the topic and lesson levels are also emphasised through the Conceptual Flow Diagram (CFD) and 3C (Capture, Construct, and Consolidate) Pedagogical Framework respectively. The CFD provides an overview of conceptual progression across a topic. The 3C Pedagogical Framework serves to help teachers structure their lessons for students to engage with specific scientific phenomena, build explanations, and consolidate their learning systematically.
+
+‘Tell me and I forget. Teach me and I remember. Involve me and I learn.’ – Benjamin Franklin “This encapsulates the approach that Singapore has taken in the development of the primary science syllabus and suite of teaching and learning resources across the years. Children are naturally inquisitive. The beauty of the primary science syllabus lies in its ability to activate this sense of curiosity in young learners, steering this curiosity into evidence-based sensemaking through play, and laying the foundation for a lifelong competency to be able to practice inquiry in their daily lives. This effort would not have been possible without the partnership of the National Institute of Education and Science Centre Singapore. May our students experience the joy of learning and see science come alive\!” Mdm Lee Lin Yee Director, Sciences Branch Curriculum Planning and Development Division (2020–2023)
+
+“The 3C pedagogical framework was developed with teachers and for teachers. It draws on both research and the expertise and experiences of practising teachers in Singapore. Together with the range of resources that the Science Curriculum Specialists have put into the hands of teachers, this has helped us move forward in helping our students stay engaged and curious about science.” Dr Poon Chew Leng
+
+2
+
+Over the years, CPDD, AST and NIE have worked in close partnership, from syllabus conceptualisation, to resource development as well as professional development. With the development of the integrated suite of resources for the first time for the 2023 Primary Science Syllabus, this monograph captures the curricular and resource considerations over syllabus cycles and more importantly, stories of how the syllabus and resources are translated into science teaching and learning across topics. Teachers have shown agency in customising resources considering curricular intent and students’ needs, showing professionalism in implementing the curriculum with integrity.
+
+“Primary Science learning should transcend the endless practice of worksheets. It should pique our children’s curiosity to learn through doing and exploring. This conviction led us to address a fundamental challenge: How can we enable teachers to deliver an engaging, hands-on Science curriculum despite constraints of time, facilities and resources in the primary school setting? This project is a remarkable collaboration among domain experts in curriculum design, pedagogy, educational research and science edutainment. I am glad this multi-year initiative has culminated in an invaluable resource for our teachers in their important work of kindling a lasting passion for discovery among our young learners. Indeed, the success of this endeavour demonstrates what we can achieve with a united vision for Science education.“ Sin Kim Ho Divisional Director Curriculum Planning and Development Division (2018–2022)
+
+3
+
+“The partnership between CPDD Curriculum Specialist, AST Master Teachers, NIE Lecturers and Schools has deepened the pedagogical content knowledge of teachers for quality student learning. This strong partnership and teacher commitment have helped to build a culture of teacher-led professionalism and pride in the Primary Science Fraternity. Let us continue to champion professional collaboration and learning. When we unite in partnership and collaboration, we create a symphony of knowledge, a harmony of growth and a legacy of learning that is beyond the classroom walls. It is our desire to cultivate students’ love and passion for science so that they are inspired to learn and use Science meaningfully in their everyday lives and in the society.” Mrs Chua Yen Ching Divisional Director Curriculum Planning and Development Division (2011–2013)
+
+Section Pedagogical Science Curricular Frameworks A and Syllabus How is the organised?
+
+5 Themes Diversity Cycles Systems Interactions Energy
+
+9 Topics (in P3 and P4) Diversity of Living Things
+
+Diversity of Materials Cycles of Plants and Animals (Life Cycle) Interaction of Forces (Magnet)
+
+Plant System (Plant Parts and Functions) Human System (Digestive System) Cycles in Matter and Water (Matter) Energy Forms and Uses (Light) Energy Forms and Uses (Heat)
+
+3C Pedagogical Framework Lesson How is a organised?
+
+Conceptual Flow Diagram How Topic is a organised?
+
+Key Idea
+
+question
+
+Linking Essential Takeaways
+
+Key Inquiry Questions
+
+Key Idea
+
+Key Idea Let’s Create question Linking question
+
+Linking Key Idea
+
+Capture
+
+Construct
+
+Consolidate
+
+5
+
+A1. How is the 2023 Primary Science Syllabus organised? The Primary Science Syllabus aims to provide students with experiences/opportunities to:
+
+• build on their interest and stimulate their curiosity about themselves and their environment
+
+• acquire basic scientific concepts to help them understand themselves and the world around them
+
+• develop skills, dispositions, and attitudes for scientific inquiry
+
+• apply scientific concepts and skills in making responsible decisions
+
+• appreciate how Science influences people and the environment
+
+Table 1 Overview of Themes, Essential Takeaways, and Key Inquiry Questions
+
+Themes Diversity Cycles Systems Interactions Energy Essential Takeaways
+
+There is a great variety of living and non-living things around us.
+
+We classify living and non-living things based on their similarities and differences.
+
+Maintaining the diversity of living and non-living things is important for survival.
+
+There are repeated patterns of change around us.
+
+Understanding cycles helps us to make predictions about events and processes around us.
+
+A system is made of different parts. Each part has its own unique function.
+
+Different parts of a system influence and work together to perform function(s).
+
+There are interactions among us, living and non-living things in the environment.
+
+Interactions within the environment can have positive or negative impacts.
+
+Conservation is important to ensure continuity of life and availability of resources.
+
+Energy is required for things to work.
+
+There are various forms of energy and they can be converted from one form to another.
+
+Some sources of energy can be depleted and we play an important role in energy conservation.
+
+Key Inquiry Questions
+
+What can we observe around us?
+
+How can we classify the great variety of living and non-living things?
+
+Why is it important to maintain diversity?
+
+What makes a cycle?
+
+How does a cycle help us predict events and processes?
+
+Why are cycles important to life?
+
+What is a system?
+
+How do different parts and systems work together to perform function(s)?
+
+Why is it important to understand how parts/ systems work together?
+
+What are the types of interactions around us?
+
+How do interactions affect the environment and us?
+
+Why is it important for us to conserve the environment?
+
+What are the different forms of energy around us?
+
+How is energy used in everyday life? Why is it important to conserve energy?
+
+6
+
+With the aims in mind, the syllabus is organised into five themes: Diversity, Cycles, Systems, Energy, and Interactions
+
+• These themes encompass a core body of concepts in both the life and physical sciences. This body of concepts has been chosen because it provides a broad-based understanding of the environment, and it will help build a foundation upon which students can rely on for further study.
+
+• To help teachers and students appreciate and understand the themes, essential takeaways and key inquiry questions are included for each theme. These essential takeaways and questions can guide teachers and engage students in
+
+Levels P3 P4 P5 P6 Themes Diversity Cycles Systems Interactions Energy
+
+Topics Diversity of living
+
+and non-living things (General characteristics and classification)
+
+Diversity of materials
+
+Cycles in plants and animals (Life cycles)
+
+Interaction of forces (Magnets)
+
+uncovering the important ideas at the heart of each theme. They can also use these questions to raise more specific questions for the respective topics under each theme.
+
+Although the content of the syllabus is organised into five themes, the topics under each theme are not to be viewed as compartmentalised blocks of knowledge. In general, there are no clear boundaries between these themes. There may be topics common to different themes. Hence, a conscious effort is needed to demonstrate the relationship between themes whenever possible.
+
+Table 2 Overview of Themes and Topics across Levels
+
+Plant system (Plant parts and functions)
+
+Human system (Digestive system)
+
+Cycles in matter and water (Matter)
+
+Energy forms and uses (Light)
+
+Energy forms and uses (Heat)
+
+Cycles in plants and animals (Reproduction)
+
+Cycles in matter and water (Water)
+
+Plant system (Respiratory and circulatory systems)
+
+Human system (Respiratory and circulatory systems)
+
+Electrical system
+
+Energy forms and uses (Photosynthesis)
+
+Energy Conversion
+
+Interaction of forces (Frictional force, gravitational force, elastic spring force)
+
+Interactions within the environment
+
+7
+
+A2. How is a topic organised? For each topic in the syllabus, the sequence of learning of concepts is presented in a Conceptual Flow Diagram (CFD). The diagram supports teachers in designing students’ learning experiences across a topic. Some of the features in a CFD are shown in Figure 2, in the topic of Diversity of Living and Non-living things.
+
+Figure 2 Conceptual Flow Diagram for a Topic: Diversity of Living and Non-living Things
+
+8
+
+A3. How is a lesson organised? The 3C Pedagogical Framework1 guides the sequencing of learning within a key idea, where a teacher captures students’ attention, facilitates students’ construction of concepts and skills, and consolidates the learning of the students. Table 3 shows some guiding questions that can help teachers in the planning.
+
+Stage What How Capture ideas and interest
+
+Table 3 Overview of 3C and Guiding Questions
+
+Teacher generates interest for the lesson and activates students’ prior knowledge.
+
+• What are some of the students’ prior knowledge?
+
+• What is the next concept that students are learning?
+
+• How can teachers elicit students’ prior knowledge?
+
+• How can teachers generate students’ interest for learning the next concept?
+
+Construct understanding
+
+Teacher develops concepts, skills and attitudes through hands- on and minds-on learning experiences.
+
+• What concepts and skills do students have to learn?
+
+• Are there content gaps to bridge?
+
+• How can teachers teach and help students construct the concepts?
+
+• How can teachers bridge the content gaps?
+
+Consolidate learning
+
+Teacher summarises learning and encourages application in new contexts.
+
+• What is the key idea in this lesson?
+
+• What are other ideas learned that are connected to this idea?
+
+• How can teachers help students apply what they have learnt?
+
+• How can students summarise their learning?
+
+1 Poon, C. L., Lee, Y. J., Tan, A. L., & Lim, S. L. (2010). Knowing Inquiry as Practice and Theory: Developing a Pedagogical Framework with Elementary School Teachers.
+
+9
+
+Section B An Integrated Suite of Resources
+
+In Primary Science, an integrated suite of resources comprising the Textbook (TB), Activity Book (AB), Science Pack Activity Resource Kits for Learning (SPARKLE), Student Learning Space (SLS)2, Young Scientist Badge Scheme (YSBS) and Teaching and Learning Guide (TLG) is developed. Each resource plays unique yet complementary functions in supporting science teaching and learning across different themes and topics.
+
+2 SLS is Ministry of Education’s core platform for teaching and learning and is one of MOE’s key initiatives to transform the learning experiences of Singaporean students.
+
+11
+
+B1. What are the design considerations? The integrated suite of resources supports teaching and learning of science, while developing students’ 21st century competencies such as Critical, Adaptive and Inventive Thinking (CAIT) and Communication, Collaboration and Information Skills (CCI). The following design considerations guide the development of these resources:
+
+Alignment with primary science curriculum These resources are intentionally designed to provide clarity on curriculum intention and to progressively develop students’ understanding of core ideas, practices, values, ethics, and attitudes through various features.
+
+Engaging students in hands-on and minds-on inquiry-based experiences The resources are designed to encourage students to:
+
+• Be Inspired by science: Incorporation of real- world applications helps students appreciate the relevance of science in their everyday lives.
+
+• Inquire like scientists: Inquiry-based learning experiences encourage students to engage in the practices of science. Given students’ concrete operational stage of development, hands-on inquiry learning experiences are complemented by meaningful online learning to facilitate students in making connections.
+
+• Innovate using science: Students apply concepts and practices to generate solutions such as creating toys and solving problems posed in the Let’s Create learning experiences.
+
+12
+
+Accessible and easy to use Resources are designed to cater to diverse students’ needs. In the Textbook and Activity Book, there is coherence and consistency in the structure across topics and levels to guide learning experiences while reducing cognitive load. In SPARKLE, design features (e.g., colour, size, grip) are included to ensure safety and ease of manipulation, as well as support students with special needs (e.g., colour blindness). Teachers are also provided with flexibility and agency to customise resources according to their students’ needs.
+
+B2. What makes up the integrated suite of resources? Each resource embodies the design considerations above, and serves unique yet complementary functions in the teaching and learning of science.
+
+Textbook The Textbook is a source of age-appropriate knowledge. Features in the Textbook (e.g., Science Around Us, Let’s Think and Do, I’m Inspired, comics and characters) develop core ideas, practices, values, ethics and attitudes as well as encourage scientific discourse. The Textbook also acts as an organising frame and link to learning experiences in other resources (e.g., AB and SLS) through the “Let’s Inquire” feature.
+
+Activity Book and SPARKLE The Activity Book and SPARKLE are tightly coupled to encourage hands-on and minds-on investigations. Students collaborate to conduct investigations, analyse and interpret data, as well as construct explanations to deepen conceptual understanding and develop science practices. For example, in Diversity of Materials, students conduct
+
+Young investigations suggested in the Activity Book using
+
+Scientist Badge Scheme SPARKLE objects made of different materials but
+
+(YSBS) identical sizes to learn about the properties of
+
+The YSBS3 extends science learning beyond the materials and the nature of a fair investigation.
+
+curriculum and classroom, encouraging students to be inspired by science in their daily lives. For Student Learning Space (SLS)
+
+example, students apply heat concepts to creatively The resources in SLS (e.g., videos, animations and
+
+build a solar oven, or explore the Earth’s rotation interactives) tap on the affordances of technology
+
+to understand the phenomenon of day and night. to complement hands-on learning experiences.
+
+These tasks encourage students to take ownership Abstract concepts can be represented through
+
+of learning driven by personal curiosity and interest. rich visuals to develop concepts. For example, a video showing temperature changes through colour
+
+Teaching and Learning Guide (TLG) variation helps students visualise heat flow and
+
+The TLG4 offers teachers guidance on concept distinguish between heat and temperature. SLS can
+
+sequencing and resource integration, leveraging also support assessment for learning where teachers
+
+the unique functions of each resource. Additionally, can tap on the “quick check questions” to assess
+
+the TLG offers suggestions for alternative learning students’ understanding and provide feedback.
+
+experiences to address diverse learning needs. Although the TLG provides a guide to teachers on teaching and learning of science, it is not meant to be prescriptive as teachers have the agency to customise the resources according to their schools’ contexts, and students’ needs.
+
+3 Young Scientist Badge Scheme is designed to inspire interest in and encourage the exploration of Science, Technology, Engineering and Mathematics (STEM) disciplines among primary school students. 4 Teaching and Learning Guide is designed to support Singapore teachers in using the integrated suite of resources.
+
+13
+
+Diversity 1 Non-Living Seeing the of “invisible”
+
+Things
+
+Living and
+
+\#Exploration \#Curiosity
+
+4 Interaction (Magnets)
+
+Attract or Repel?
+
+of Forces
+
+\# Embodied Experiences \# Multi-modal Representations 7
+
+Plant Parts Is Cactus System and a plant?
+
+Functions)
+
+(Plant
+
+\#Making sense of information \# Comparing
+
+Section C Stories from Science Classrooms: Teaching and Learning ExperienceS
+
+2 \#Communicating ideas \#Handling infomation
+
+5 \# Making sense of data and developing explanations \# Investigation
+
+8
+
+\#Modelling \#Representing light rays
+
+Diversity of Materials Check your ‘special’ book
+
+Cycles in Matter and Water (Matter) Same volume, same mass? Think again\!
+
+Energy Forms and Uses (Light) Can Ben see the minion in a dark room?
+
+15
+
+Cycles 3 Animals We can wiggle in (Life Plants like Cycles) a and
+
+worm
+
+\#Role play \#Embodied Experiences
+
+6 Human System) “Chew your System Grandma Food”. (Digestive
+
+Is says,
+
+she right?
+
+\# Modelling \# Science-Math Connections 9
+
+Energy (Heat) did the ball Did Forms contract?
+
+the ring and expand Uses or
+
+\#Demonstration \# Observation and discussion
+
+Following the release of the revised Science Curriculum Framework in 2019 and the 2023 Primary Science Syllabus and resources, teachers in Singapore have played key roles in translating their understanding of the framework, syllabus and resources and customising curriculum resources into meaningful learning experiences for their students. Finding out teachers’ pedagogical reasoning as they work with the curricular disciplinary ideas and resources within their unique classroom contexts therefore are important to understand how teachers enact the syllabus with implementation integrity.
+
+Based on observations of 50 P3 and P4 science lessons using the integrated suite of resources across nine topics in the P3 and P4 syllabus, we have developed a thinking frame – the Content- Student-Resource (CSR) Cycle – for teacher
+
+planning and reflection (see Figure 3). The CSR Cycle is grounded in empirical data, based on teachers’ pedagogical considerations and practices. It offers a powerful way to analyse the various roles that resources play in teachers’ planning and enactment of science learning experiences. These classroom interactions include those between teachers-resources, teachers-students, students- students, and students-resources.
+
+The CSR Cycle assists teachers in lesson planning and enactment, enabling them to achieve “Students as curious and creative inquirers” as well as “Teachers as designers and orchestrators of learning experiences.” In addition, it serves to put ideas from the CFD (considerations of Content) and 3Cs (teaching strategies to be adopted) together in a coherent plan for meaningful science learning.
+
+Figure 3 Content-Student-Resource Cycle for Planning and Reflection
+
+16
+
+What was its inspiration? City, Elmore, Fiarman and Teitel (2009) made the case that it is essential to consider students and teachers in the presence of content matter for every successful learning task to occur. This tight but dynamic coordination comprised what is known as the instructional core. Hence, anything that enhances the relationships between these elements or within each of the three elements will improve learning. Placing great importance on the interacting roles of teachers, students, and content matter were also expressed in research on curriculum making by a leading geneticist and educator Joseph Schwab (1973). He identified these three elements (and others) as “commonplaces” of curriculum, which is to say that these were all to be regarded as right or true by conventional wisdom.
+
+We propose, however, that the teacher is the chief designer of instruction who considers how their students learn best and the resources needed to develop their understanding of the content. Thus, from this perspective, we replace the role of teachers that is already present in every enactment of instruction within school contexts, with “resources” (e.g., Textbooks, Activity Books, SPARKLE kits, SLS) since these tangible materials are key in facilitating teaching and learning experiences. Similar to the instructional core, within each element, teachers may ask questions about their relevant characteristics or features in order to carry out learning effectively. For example, with respect to content matter, teachers have to make decisions about the selection of appropriate learning outcomes, the sequence of their presentation, and how fast or slow their pacing should be within a lesson or topic. As teachers know too well, every class is very different; what worked very well in one class might not transfer well in another simply because of different classroom environments and many other factors.
+
+17
+
+This is where other parts of the thinking frame will come in. A thoughtful teacher brings with him/her knowledge of his/her students and their learning needs, and the science resources that are available to adopt or more often, to adapt. Each element is important as much as the interactions or relationships between these three major elements in the thinking frame. We also substituted tasks (i.e. what students are actually doing) in the model by City et al. (2009) with intended/achieved learning interactions or experiences given our focus on teacher’s use of resources during planning and implementation. Hence, by naming the thinking frame as the Content-Student-Resource (CSR) Cycle, science teachers can use it in planning and understanding the implementation of science syllabus and resources. Indeed, developing the CSR Cycle was motivated by questions that teachers raised frequently—What is the content intended for this lesson? What is the profile of my students? What learning experiences do I want to create? What are the curriculum resources available? What teaching strategies should I adopt? How do I make connections between students’ spontaneous ideas and scientific knowledge?
+
+As all these questions are iterative during lesson planning and enactment, there is no fixed starting point. We can thus approach the CSR Cycle from any of its three apices (content, students or resources), and indeed all three elements of this thinking frame should be considered together. The questions in the rectangular grey boxes (see Figure 3) represent some of the critical thinking processes that teachers often ask themselves as they make pedagogical decisions and reflect to connect each part. Finally, we placed the intended and actual learning experiences that students are engaged in right at the centre to help teachers envisage their intended learning interactions or experiences and reflect on their enacted or achieved learning experiences after the completion of teaching.
+
+In As resources are not self-acting, Cohen,
+
+the next section, we present nine stories of Raudenbush, and Ball (2003) highlighted the
+
+how P3 and P4 Science teachers customised need to probe interactions between teachers and
+
+the integrated suite of resources with different students over specific content to offer finer clues
+
+pedagogies to support student experiences and to the role resources play in instruction. Teachers
+
+exploration. These stories were curated keeping are key in facilitating learning experiences and
+
+in mind the developing literacy and numeracy exploration, by choosing and sequencing resources.
+
+competencies of young children. We were also They also have to balance the use of teacher-
+
+mindful of what research has reported about guided and student-centred learning experiences
+
+science learning in young children—(1) students that support students to switch between everyday
+
+learn through active participation in science and scientific concepts to achieve conceptual
+
+practices (NGSS, 2013), (2) students should understanding. Vygotsky’s theory suggests
+
+engage in reasoning publicly as they develop claims that ‘good learning’ takes place in the Zone of
+
+from evidence (Zembal-Saul, 2009), (3) students Proximal Development: A place where learners are
+
+should build explanations where they actively cognitively stretched, but still receive assistance
+
+coordinate theory and evidence (Herrenkohl et al, from others. Hence, educative experiences are
+
+1999), (4) students should develop proficiency to those experiences that are both challenging and
+
+apply, explore, and learn science concepts as they suitably supported. Research findings have shown
+
+participate in science practices such as developing that curriculum materials and teachers’ knowledge,
+
+models, analysing data, and constructing when used meaningfully during instructional actions
+
+explanations, and (5) students should develop and bridge what students observe and manipulate
+
+revise science ideas themselves. with the intended scientific concepts (Leinhardt, Zigmond, & Cooley, 1981).
+
+References City, E. A., Elmore, R. F., Fiarman, S. E., & Teitel, L. (2009). Instructional rounds education: A network approach to
+
+improving teaching and learning. Cambridge, Massachusetts, USA: Harvard Education Press. Cohen, D. K., Raudenbush, S. W., & Ball, D. L. (2003). Resources, instruction and research. Educational Evaluation
+
+and Policy Analysis, 2(25), 119-142. Leinhardt, G., Zigmond, N., & Cooley, W., (1981). Reading instruction and its effects. American Educational Research
+
+Journal, 18(3), 343-361. Murphy, C. (2012). Vygotsky and primary science. In: Fraser, B., Tobin, K., McRobbie, C. (Eds). Second International Handbook of Science Education. Springer International Handbooks of Education, vol 24. Springer, Dordrecht. https://doi.org/10.1007/978-1-4020-9041-7\_14 NGSS Lead States (2013). Next Generation Science Standards: For states, by states. Washington, DC: The National
+
+Academies Press. Schwab, J. (1973). The practical 3: Translation into curriculum. School Review, 81(4), 501–22. Strandberg, L. (2007). Vygotsky, a practical friend. Children in Europe, pp16-18. 10.12968/prps.2007.1.75.38588
+
+18
+
+Table 4 An Overview of Stories from P3 and P4 Science Classrooms
+
+Topics Pedagogies /Focus Overview 1 Diversity of Living
+
+and Non-Living Things
+
+• Exploration
+
+• Curiosity
+
+Seeing the ‘invisible’
+
+• Using the microscope as a tool for exploration.
+
+• Collecting and using empirical evidence in science
+
+2 Diversity of
+
+Materials
+
+• Communicating Ideas
+
+• Handling Information
+
+Check your ‘special’ book
+
+• Developing language to communicate observations
+
+• Handling information in Textbooks
+
+3 Cycles in Plants
+
+and Animals (Life Cycles)
+
+• Role play
+
+• Embodied Experiences
+
+We can wiggle like a worm
+
+• Embodying key characteristics and behaviour of organisms in different stages of life cycle of an insect
+
+4 Interaction of Forces
+
+(Magnets)
+
+• Multimodal Representations
+
+• Embodied Experiences
+
+Attract or Repel?
+
+• Experiencing interactions of magnets through body movement, slide animation, hands-on exploration, and diagram annotation
+
+5 Cycles in Matter
+
+and Water (Matter)
+
+• Investigations
+
+• Making sense of data and developing explanations
+
+Same volume, same mass: Think again\!
+
+• Using questions to scaffold sense-making of data to develop explanations
+
+6 Human System
+
+(Digestive System)
+
+• Modelling
+
+• Science-math Connections
+
+Grandma says, “Chew your Food”. Is she right?
+
+• Visualising human digestive system
+
+• Investigating role of surface area in digesting food
+
+7 Plant System
+
+(Plant Parts and Functions)
+
+• Making sense of information
+
+• Comparing
+
+Is cactus a plant?
+
+• Applying scientific concepts in decision making
+
+• Comparing similarities and differences of different plants
+
+8 Energy Forms and
+
+Uses (Light)
+
+• Modelling
+
+• Representing light rays
+
+Can Ben see the minion in a dark room?
+
+• Observations as evidence for claim that light is needed for sight
+
+• Representing light rays to communicate science ideas related to light
+
+9 Energy Forms and
+
+Uses (Heat)
+
+• Demonstration
+
+• Observation and discussion
+
+Did the ring expand or did the ball contract?
+
+• Making abstract concept of expansion and contraction more concrete
+
+19
+
+Section Classrooms: Learning Stories from Experiences Teaching C Science and Nine stories are represented in this section. The stories describe events in classrooms where scientific concepts are presented and discussed, as well as where scientific practices and values are practised. The stories should be read with the following questions in mind:
+
+• What are the learning outcomes that each teacher was trying to achieve?
+
+• How were the integrated suite of resources adopted or adapted to achieve the learning outcomes?
+
+• What were the pedagogies used by each teacher to enact the lesson?
+
+• What were evidence of learning by students?
+
+• How did content, resources, and students interact to enact the learning experience?
+
+C1. Seeing the ‘Invisible’ Bacteria and fungi are microscopic organisms that are not visible to our unaided eyes. As such, compared to larger living things such as cats, lions, or even elephants, students tend to be less familiar with the structures and behaviours of bacteria and fungi (Byrne, 2011). Consequently, students are curious about the world that is ‘invisible’ to them. Ruiz-Gallardo and Panos (2018) found that primary school students often hold negative or erroneous ideas about microorganisms. For instance, microbes are often associated with diseases and morphically resemble miniature versions of
+
+animals with arms and legs (Byrne, 2011). With tools such as microscopes, students are able to see microscopic living things and objects, thereby demystifying the world of microbes. The use of tools to facilitate the work of scientists characterises the empirical nature of scientific inquiry where knowledge is evidence-based. To a very large extent, the advancement of scientific knowledge is dependent on the tools available for examining the world around us.
+
+To help students understand the diversity of living things around them, they can be introduced to organisms that are not immediately visible with their unaided eyes. Allowing young children to explore with hand-lenses or portable microscopes offers excellent opportunities for inquiry and exploration. In the classrooms that we visited, students were instantly excited when they received the microscopes. They were quick to examine their school bags, hair follicles on their arms and whatever objects that caught their attention.
+
+In this chapter, Mr J used the Student Learning Space (SLS) as a medium for students to watch videos and learn ideas pertaining to the discovery of microorganisms. He also used SLS for students to present their ideas and facilitated whole class discussions on exploration with the microscope.
+
+21
+
+Mr J’s Class – Increasing Student Agency in Exploring and Gathering Evidence Curricular Intent Resource Use
+
+Capture
+
+Preparing students for the lesson by stating the theme/topic and resources for the day
+
+Mr J started the lesson by getting two students to distribute the worksheets taken from the Activity Book to every student. He introduced the lesson by stating that they were continuing with the topic of living and non-living things and the diversity of organisms. He told students that they would be working with the microscopes and tablets for the lesson. Group leaders were assigned to collect two tablets per group of four students. Another member of the group was to collect the SPARKLE Kits. The whole SPARKLE kit was given to each group instead of only the required components for the day.
+
+Handing out the whole SPARKLE kit provided an opportunity to teach students responsibility to take care of the resources provided for them.
+
+Mr J informed the class that he had assigned the lesson on Student Learning Space (SLS), and they would learn in pairs before going through the materials together as a class. Each pair of students was given an iPad to respond, and one member of each pair logged into their SLS account.
+
+Discussing story of scientist in pairs
+
+Mr J played the SLS video of Alexander Fleming as a scientist who studied causes of diseases. The students watched the video as a class and then discussed in pairs. Mr J played the video again and reminded students to pay attention to answer questions related to the discovery of penicillin.
+
+Using SLS video to learn about the discovery of penicillin
+
+Communication of ideas through text
+
+Once the video was stopped, the students started discussing and recording their ideas using “I see, I think, I wonder” in the iPads. Some students were asking their partners how to spell words such as ‘diseases’. Mr J used the SLS to pace and monitor the progress of students’ learning.
+
+Using SLS to pace and check students’ progress and support peer critique of ideas
+
+22
+
+Keying in observations and questions for SLS Video in iPads
+
+Mr J’s Class – Increasing Student Agency in Exploring and Gathering Evidence Curricular Intent Resource Use
+
+Once the students had submitted their responses, Mr J showed on the screen all the students’ SLS responses and facilitated a whole class discussion on what different pairs see, think, and wonder. Construct
+
+Following the whole class discussion, Mr J explained how to use the portable microscope. The student started to explore slides of organisms, using the microscope in the SPARKLE kits. Besides looking at the slides, students were exploring other objects they were interested in.
+
+Using portable microscope and slides from SPARKLE for exploration
+
+Communicating observations through text
+
+After students examined the slides under the microscope, Mr J facilitated a whole class discussion. He asked everyone if bacteria and fungi were microscopic. Following students’ concurrence that bacteria and fungi were microscopic, Mr J affirmed their responses and reminded the class to record their observations.
+
+Recording observation, using the scaffolding in Activity Book
+
+Upon completion of slides A, B and C on bacteria, Mr J told students to work on slides D, E, and F on fungi. Students focused on “identifying” what they saw. To focus students on describing their observations, Mr J provided them with scaffolds in the form of helping words.
+
+23
+
+Observing slides of bacteria and fungi on iPad guided by Activity Book
+
+Using the Activity Book to record observations
+
+Mr J’s Class – Increasing Student Agency in Exploring and Gathering Evidence Curricular Intent Resource Use
+
+Consolidation
+
+Consolidating learning of bacteria and fungi
+
+Mr J told the class that he hoped that they found observing bacteria and fungi a fun activity. He summarised that the students have learnt about some bacteria and fungi through the SLS video.
+
+He asked students to watch the penicillin video and to complete the Activity Book in their pairs as part of the consolidation for the lesson.
+
+Referencing SLS video to recap concepts learnt
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+24
+
+discussions The microscope enabled students to observe the
+
+with peers, formed more informed world of “invisible” organisms and objects. The
+
+ideas of what microorganisms looked like. In Mr exploration followed by discussions with peers
+
+J’s class, the tool (microscope) formed the core of and Mr J allowed students to compare their mental
+
+the lesson as students used it to observe things models of microorganisms with the expressed
+
+around them. The secondary tool used to make model (Byrne, 2011) depicted by their peers and
+
+students’ ideas of their observation visible was Mr J through pair work, whole class discussion
+
+SLS. These two tools framed the structure of the and recording of their observations in the Activity
+
+lesson and the interactions between students and Book. Observations made in this activity allowed
+
+Mr J. In this lesson, what was valued as evidence to students to confront their initial ideas of the
+
+shape students’ ideas about microorganisms were characteristics of microorganisms and through
+
+empirical observations (McNeill & Berland, 2017).
+
+References Byrne, J. (2011). Models of micro-organisms: Children’s knowledge and understanding of micro-organisms from 7 to 14
+
+years old. International Journal of Science Education, 33(14), 1927-1961. DOI: 10.1080/09500693.2010.536999. McNeill, K. L., & Berland, L. (2017). What is (or should be) scientific evidence use in K-12 classrooms? Journal of
+
+Research in Science Teaching, 54(5), 672-689. DOI: 10.1002/tea.21381. Ruiz-Gallardo, J. -R., & Panos, E. (2018). Primary school students’ conceptions about microorganism. Influence of
+
+theoretical and practical methodologies on learning. Research in Science & Technological Education, 36(2), 165- 184. https://doi.org/10.1080/02635143.2017.1386646.
+
+25
+
+C2. Check Your ‘Special’ Book One key idea in the theme of Diversity is that objects around us are made of different types of materials that have different properties and functions. The properties of materials afforded their application and use under different conditions. In this chapter, Mdm F facilitated students’ construction of the concept of properties and uses of materials. She engaged them with experiences such as naming the materials used to make various objects around them. By emphasising the skills of comparison, students were introduced to objects with similar functions but made of different materials. Mdm F worked with her class of Primary 3 students by developing language competencies to appreciate the great diversity of materials and their application in everyday objects.
+
+Mdm F’s Class – Developing Language to Communicate Observations Curricular Intent Resource Use
+
+Capture
+
+Mdm F started the lesson by reminding students about the choice of materials in building houses from the SLS video on “Three Little Pigs” that she assigned.
+
+Using SLS to prepare students for lessons
+
+She proceeded to remind students that they previously carried out several activities on materials and asked students to refer to the Activity Book if they could not remember. She narrated how they identified objects around them, examined objects in their pencil cases, and worked together with their friends during group work while comparing materials. She reminded them of the questions they asked such as the number of materials that various objects are made of, and whether they are made of one, two or three materials. She recalled a student whose pen was made up of three different materials.
+
+Using Activity Book to recall learning experiences on materials
+
+To help students recall their SPARKLE experience in the previous lesson, Mdm F used questions to help students re-state the idea that “same objects … can be made up of different materials”.
+
+26
+
+Primarily, students examined various pairs of objects made from different materials from the SPARKLE kits. They also made comparisons and recorded their ideas in the Activity Book. Students were encouraged to refer to the Textbook should they be uncertain of how to spell specific words to express their ideas or should they need to check up the properties of various materials. Mdm F reminded students that the Textbook would help them to communicate their ideas. By harnessing different resources, Mdm F orchestrated a multi- modal learning experience that was characterised by interactions between student-resources, student- student, teacher-student, and teacher-resources.
+
+Mdm F’s Class – Developing Language to Communicate Observations Curricular Intent Resource Use
+
+Harnessing students’ prior conceptions and using them as starting points for the upcoming investigation
+
+Mdm F then explicitly told students that they would still be working with the SPARKLE kits, but she would like to share some interesting ideas that students entered in the SLS first.
+
+Referencing SPARKLE experience to
+
+Mdm F moved on to help students learn scientific vocabulary
+
+compare objects
+
+related to materials. She said, “The different words, hard,
+
+being made of
+
+soft etc. they are the WHAT of materials? Starts with a “P.”
+
+different materials
+
+With these prompts, the students replied, “property”. Mdm F continued to show other students’ responses from SLS. Putting their ideas in public space for discussion was an important practice of science.
+
+Communicating properties of materials
+
+Following the whole class review using SLS, Mdm F repeated that students would be observing materials from the SPARKLE kits. Mdm F reminded them that they should use their five senses to make observations and classifications.
+
+Using SLS to share students’ ideas
+
+Construct
+
+Mdm F first distributed the SPARKLE kits to each group. Students promptly cleared their tables and explored the SPARKLE kits on their own. The students settled into their group work with ease as they knew their respective roles within their groups.
+
+Conducting investigations - observing different materials
+
+Once the students were settled within their groups, Mdm F instructed them to refer to the activity entitled “Let’s group them\!” in the Activity Book. Mdm F projected the aims, materials and procedures required for the activity on the PowerPoint slide. She also highlighted where the procedure could be found in the Activity Book and instructed the class to read individually. All the students settled in to read. The visual instructions through the slide and Activity Book complemented the verbal instructions to support students’ exploration.
+
+Using Activity Book and Word Splash to guide students’ investigation of materials
+
+27
+
+Sharing students’ ideas of materials in public space
+
+Mdm F’s Class – Developing Language to Communicate Observations Curricular Intent Resource Use
+
+For instance, she reminded the students to circle the words ‘similar’ and ‘different’. She also guided them in recording their observations with helping words on the whiteboard.
+
+Further, Mdm F reminded students to look up the Textbook, Activity Book or the word splash on the board if they needed help. While students were working in their groups, Mdm F was guiding students one group at a time. When Mdm F noticed that some students had difficulties spelling some words, she reminded them to take out their ‘special book’ (Textbook). Students were often observed referencing the Textbook for ideas.
+
+Using Textbook as reference to communicate ideas on materials
+
+Besides referencing the Textbook, students used their sense of touch to compare similar objects made from different materials.
+
+Conducting investigation – classifying materials in different ways
+
+For students who completed the comparison and recording of observations in their Activity Book, Mdm F challenged them to re-classify the materials in another way.
+
+28
+
+Exploring different materials with sense of touch
+
+Preparing students for exploration of materials
+
+Mdm F’s Class – Developing Language to Communicate Observations Curricular Intent Resource Use
+
+Consolidate
+
+Communicating ideas of classification in public spaces
+
+Mdm F facilitated a whole class discussion and co- constructed together with the students three ways to group objects on the screen. Using questions, Mdm F also showed students’ classification on the screen. As the lesson came to an end, Mdm F instructed the students to return the objects to the SPARKLE kit box. While the students were given the whole SPARKLE kit, they only took the materials they needed and replaced them after use. Students showed agency and a sense of responsibility to care for the resources provided to them.
+
+Learning responsible ways to use science materials in SPARKLE
+
+For the exit ticket, Mdm F asked the students to reflect on what they had learnt. They highlighted that they learnt about materials, specifically the grouping of materials based on function.
+
+Reading Textbook and watching SLS video as reinforcement of
+
+To reinforce students’ learning, Mdm F reminded them to
+
+learning and as
+
+read the Textbook to consolidate their learning and watch
+
+preparation for
+
+the SLS video to prepare for the next lesson on classification
+
+next lesson
+
+of objects.
+
+29
+
+Classifying materials in different ways
+
+Packing SPARKLE resources after use
+
+Language that is “used as a tool to enable teachers and students to exchange ideas during interaction forms the fundamental basis for adopting a sociocultural perspective to examine classroom interactions since language systems are social and cultural artefacts” (Tan & Tang, 2019, p. 547). Language is not just the ability to speak or write but consists of a system of meaning-making resources (Halliday, 1978). For students to engage meaningfully with others during science learning, they must be able to communicate their ideas in an unambiguous and logical manner. Vygotsky (1962) opined that language provides the means for groups of individuals to think together. In the absence of language, ideas and thoughts are
+
+transient and cannot be reproduced in other contexts as there is no ‘carrier’ for the ideas.
+
+Consequently, connecting students’ observations and experiences to ways of communicating the observation is a crucial step in learning. The tool of choice to facilitate connection between students’ observations and language development for sense-making and communication is the Textbook. The Textbook is a means through which students interact with the authors’ ideas and learn from the authors. By consulting the Textbook, students learn how to express their ideas in a scientifically legitimate manner with appropriate vocabulary and expression. References Halliday, M. A. K. (1978). Language as social semiotic: The social interpretation of language and meaning. London:
+
+Edward Arnold. Tan, A.-L., & Tang, K. S. (2019). The role of dialogue in science epistemic practices. In N. Mercer, R. Wegerif, and L.
+
+Major (Eds.), The Routledge International Handbook of Research on Dialogic Education (pp.547-558). Routledge. Vygotsky, L. (1962). Thought and language. Cambridge, MA: MIT press.
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+30
+
+C3. We Can Wiggle Like a Worm Teaching the life cycles of animals can be challenging as it involves complex biological processes that can be difficult to observe in real life. In the classroom, images or diagrams of the various life cycle stages are often used. These static images or representations may be difficult for young learners to understand as they could seem abstract or disconnected. As such, other modes of representation such as videos are used to supplement students’ learning to demonstrate changes in the life cycle, such as the transformation of a caterpillar into a butterfly, that are otherwise
+
+difficult for students to directly observe. Furthermore, life cycles are also affected by ecological factors such as an animal’s habitat, seasonal changes, and more. While real-life examples such as mealworms can be easily sourced, we usually observe the life cycles of unfamiliar animals through visual representations.
+
+In this story, we explore how Mrs L used various modes of representation to (1) teach her students about the different life cycles of animals and (2) assess her students’ learning through embodied experiences of role play to simulate each stage of a chosen life cycle.
+
+Mrs L’s Class– Engaging in Embodied Experiences through Role Play Curricular Intent Resource Use
+
+Capture
+
+To establish the learning outcomes and expectations, Mrs L began the lesson by introducing the learning objectives, emphasising that students would identify the life cycles of frog, chicken, and cockroach, compare the similarities and differences between the young and adult animals of different life cycles, as well as understand that the life cycles are repeated patterns of change. In addition, she shared her expectation that students should be able to demonstrate their learning by drawing the life cycles of these animals.
+
+Using Textbook to communicate learning outcomes
+
+Posing questions to elicit prior knowledge
+
+To activate students’ prior knowledge, Mrs L asked, “How do these animals change over time?” Student J shared that the chicken eggs would take time to hatch before going on to the next stage, while student Y expressed that the egg would change because it would grow. Mrs L built on their responses by probing further, asking, “How will you see that the animal has grown?” Upon hearing the response “by the looks and the size”, Mrs L invited her student to elaborate further, providing students with the opportunity to think more deeply. This resulted in student R noting that the animal would “look older” at stages 2 and 3 of its life cycle.
+
+31
+
+Using the soft- copy Textbook in Teacher’s slide
+
+Mrs L’s Class– Engaging in Embodied Experiences through Role Play Curricular Intent Resource Use
+
+Surfacing and debunking a common alternative conception
+
+Encouraging critical thinking
+
+This surfaced the common alternative conception that the stages of a life cycle can be numbered. Mrs L took this opportunity to debunk this alternative conception by encouraging her students to share thoughts on why the stages should not be numbered. She then highlighted student Y’s response that life cycles are continuous, as such they do not have a start or end point. She supported her statement by taking students through the life cycle of a mealworm, tapping on their recent personal experience and observations in caring for their mealworms by (1) probing them to consider what gave rise to the mealworm egg, (2) recalling the stages observed, (3) looking at one of their mealworm samples.
+
+Using live mealworm for observation and discussion
+
+Construct
+
+Using multimodal representations of life cycles to reinforce and concretise students’ learning
+
+Next, Mrs L showed screenshots taken from the SLS video on the life cycles of chicken, frog, and cockroach. She used these examples to illustrate the similarities and differences between the young and adult of the 3-stage life cycles, asking students to describe how the characteristics of animals have changed.
+
+Mrs L then played one of the SLS videos on life cycles and paused from time to time to further reinforce students’ understanding of how animals change through their life cycles. For example, she drew students’ attention to the arrows showing the continuous movement and change from one stage of the life cycle to another.
+
+Using screenshots of life cycles of cockroach, chicken and frog from SLS video to facilitate comparison
+
+Communicating - Making sense of information
+
+Mrs L then assigned students to work on the Activity Book, reminding them to refer to the Textbook if they had questions. In this activity, students named the stages in the life cycles of cockroach, chicken, and frog, drew arrows to indicate the direction of change, and compared whether the young of the animal looked similar/different from the adult.
+
+32
+
+Highlighting screenshots of the life cycles of three animals from SLS Video
+
+Mrs L’s Class– Engaging in Embodied Experiences through Role Play Curricular Intent Resource Use
+
+Consolidate
+
+Collecting evidence of students’ learning
+
+Lastly, Mrs L checked her students’ understanding on life cycle in two ways. Firstly, she handed out Post-its as exit tickets for students to write down what they have learnt and ask any questions they still had. Secondly, students worked in groups of three or four to choose an animal and then planned how they would enact the stages in its life cycle for their classmates who would guess the correct stage being performed in the next lesson. Experiencing embodied learning experiences through social interaction in role play
+
+Students formed their groups and discussed life cycles enthusiastically. While some wiggled their bodies to represent the young (larva) of a mealworm beetle, others took to the floor crouched in position to represent the egg or moved their bodies to represent the caterpillar. The students actively engaged with each other as they determined the best way to represent the stages in the life cycle of an animal of their choice.
+
+Using Activity Book and Post-Its (exit tickets) for consolidation
+
+Mrs L concluded her class by sharing a student’s response in the exit ticket and informing the class that they would enact their chosen life cycle and stage for their peers to guess in the next lesson.
+
+33
+
+Assessing students’ learning through “Exit Ticket”
+
+Role modelling a stage in the life cycle of an animal
+
+represent Role-playing involves acting out a specific function
+
+the egg of the insect since it does not or part of an entity. It is a common teaching strategy
+
+move. Through discussions and negotiations with that is widely used in the creative arts, literature or
+
+their peers in the same group, students practised social studies. In science learning, role-playing can
+
+defending their ideas with evidence, illustrating be used to develop students’ ability to observe living
+
+their inventive thinking, communication, and things and depict them to accurately communicate
+
+collaboration. Students also had fun—evidenced their forms and behaviours. Engaging young
+
+from the higher noise levels from laughter—and learners in role-playing offers opportunities for them
+
+were cognitively engaged. to develop skills of taking initiatives, communicating their ideas, problem-solving, being self-aware, and
+
+Role-playing was only possible because Mrs L has working cooperatively in teams (Craciun, 2010).
+
+equipped students with the necessary knowledge and ideas related to life cycle. Mrs L identified As observed in Mrs L’s classroom, during the
+
+potential alternative conceptions (starting and role-playing activities, students made use of their
+
+ending of life cycle) and intentionally raised them knowledge of insect life cycles learnt earlier and
+
+as questions for whole class discussions. She used applied them to make decisions on how they
+
+videos and diagrams from SLS and the Activity would represent the wiggling larval stage of the
+
+Book to focus students’ attention as they learnt the insect. Students also wondered how they could
+
+concepts.
+
+Reference Craciun, D. (2010). Role-playing as a creative method in science education. Journal of Science and Arts, 1(12), 175-
+
+182\.
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+34
+
+C4. Attract or Repel? Playing with magnets is an enjoyable experience for students as they observe how magnets interact with other magnets and materials in different types of toys and everyday objects. As magnetic forces are invisible, observing the effects when magnets interact with other objects is fascinating for young learners. Common alternative conceptions here include “all magnetic materials are magnets” and “objects are magnets if they can be attracted”.
+
+Miss F’s Class – Attract or Repel: Multiple Representation and Embodied Experiences Curricular Intent Resource Use
+
+Capture
+
+Miss F piqued the students’ curiosity by showing a physical levitating toy. She passed Student A’s ruler between the toy and magnet, and showed how she could turn the toy freely. Students chorused excitedly, “Magnet\! Woo\!”.
+
+Using teacher- sourced artefacts for demonstration
+
+Appreciating core idea of interaction through observation and discussion
+
+Next, Miss F showed a levitating globe on the slides and asked students why the toy could “spin” in the air. “Levitating\! Floating\!”, Students B and C responded sequentially.
+
+35
+
+In this chapter, we join Miss F’s class to appreciate how she provided opportunities for Primary 3 students in using movement, hands-on activities, annotation to experience and explain interactions between magnets. In her lesson plan, Miss F indicated that she hoped that through the lesson, students would appreciate the use of magnets in everyday applications, and be able to observe, explore, and describe how different types of magnets exert push or pull.
+
+Observing a levitating toy
+
+Observing a levitating globe
+
+Miss F’s Class – Attract or Repel: Multiple Representation and Embodied Experiences Curricular Intent Resource Use
+
+Connecting application of magnets to everyday experiences
+
+Miss F highlighted that the similar observations between the levitating toy and globe were due to magnets. After the whole class observation and discussion of levitating toy and globe, Miss F shared that magnets are found everywhere and hence the class was learning about magnets. She showed a picture of electrical appliances including a computer on the slide and elicited other examples of uses of magnets. “Phone, refrigerator, television\!”, several students cited examples spontaneously one after another.
+
+Developing vocabulary to communicate science ideas
+
+Students went on to identify the location of magnets in selected appliances such as the refrigerator and explained how magnets worked. Miss F highlighted the concept of interaction between magnets.
+
+Student D: Magnet and magnet stick together. Student D: Attract. Teacher: You need how many magnets to work? Student F: Two. Teacher: The two magnets interact…
+
+Construct
+
+Sequencing learning experiences meaningfully, to understand the interaction of magnets in different ways
+
+Miss F introduced the SPARKLE Kit. Before starting the investigation, she revisited Student D’s and Student E’s observations of “magnets sticking” and “attracting” each other respectively. Miss F noticed and complimented Student F for using a hand movement to show attraction (bringing two hands together).
+
+Preparing for investigation using SPARKLE
+
+36
+
+Discussing uses of magnets in electrical appliances
+
+Miss F’s Class – Attract or Repel: Multiple Representation and Embodied Experiences Curricular Intent Resource Use
+
+Body Movement. Miss F shared that students would be investigating “push” and “pull” using the Activity Book. She asked students to show her what “pushing” and “pulling” meant, imagining their hands as magnets. Seeing mixed responses from the class, Miss F invited two students to demonstrate “pushing” and “pulling”.
+
+Using body movements and slide animation to understand “pull” and “push”
+
+After the demonstration with two students, Miss F invited the whole class to use their hands to show “pushing” and “pulling”.
+
+Slide Animation. After the hand movement, Miss F showed a slide animation of arrows (representing magnets) moving away from each other (push) and moving towards each other (pull).
+
+37
+
+Representing ‘push’ in a diagram
+
+Representing ‘pull’ in a diagram
+
+Learning to show a ‘push’
+
+Learning to show a ‘pull’
+
+Miss F’s Class – Attract or Repel: Multiple Representation and Embodied Experiences Curricular Intent Resource Use
+
+Hands-on Exploration. Following the whole class body movement and slide animation, students started exploring how each pair of different magnets (bar, ring, rod, U-shaped) interacted using both the SPARKLE kit and Activity Book. Miss F observed and complimented her students for playing with magnet creatively.
+
+Hands-on exploration using SPARKLE and Activity Book
+
+Representing interactions of different types of magnets in diagrams
+
+Annotation. Next, Miss F introduced concepts of “interaction”, as well as “arrows to show the direction of push and pull”. Using a pair of bar magnets, she also guided students to draw and annotate the arrows (push or pull) as students recorded their observations of magnet interactions. Then, students went on to observe, draw and annotate arrows for other pairs of magnets (button, rod, U-shaped).
+
+Exploring and observing interaction of magnets
+
+38
+
+Representing observations using Activity Book
+
+Miss F’s Class – Attract or Repel: Multiple Representation and Embodied Experiences Curricular Intent Resource Use
+
+Using questions to connect observations and concepts of attraction and repulsion
+
+Besides observing the interactions of the magnets, Miss F also asked students if the magnets pushed or pulled each other when the same-coloured parts of two magnets faced each other. “Pushed\!”, students chorused. She also facilitated discussion of different coloured parts of two magnets facing each other resulting in “pulls”. She also asked students why some students did not see any interaction when certain parts of the magnets were put near each other. This led to the introduction of the concept of “poles of magnets”.
+
+Consolidate
+
+Miss F summarised students’ observation and description of interactions of magnets through investigation using SPARKLE. She highlighted how magnets interact and referred to students’ initial ideas of magnets sticking to each other but have now learnt that magnets “push” or “repel” as well as “pull” or “attract”.
+
+She encouraged her students to read the Textbook to reinforce what they have learnt in class.
+
+Using Textbook to consolidate learning
+
+39
+
+Referencing Textbook to consolidate learning
+
+In this lesson, students explored and described the interactions of magnets, beginning with ideas of “magnets sticking to each other” and “magnets pulling each other”, and eventually developed concepts of “magnets attracted to each other”. This illustrates what Vygotsky (1934/1994) described as the nature of concept development, beginning with spontaneous concepts and eventually “scientific” concepts. The progress of language from common everyday language to more specialised use of attraction of magnet is evidence of growth in scientific knowledge and the process is facilitated by both the teacher and the resources. In this example, the teacher and the resources serve as mediators of learning to enable students to move in the zone of proximal development.
+
+Examining the pedagogical and resource considerations across the entire lesson, Miss F
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+40
+
+started the lesson with a physical levitating toy and pictures of everyday appliances that students could relate to. She facilitated a whole class discussion, eliciting students’ observations of magnets, progressing from “sticking”, to “pulling”, and finally to “attracting”. Both the physical toy and pictures have scaffolded students in articulating their ideas on how magnets interact, such as “magnets sticking to each other” to allow the refrigerator door to close.
+
+While Miss F began the lesson with a more teacher- guided whole class discussion to engage students in talking about interaction between magnets, she designed a more student-centred hands-on exploration in the next part of the lesson using the SPARKLE kit. Students explored different pairs of magnets such as bar, ring, rod, U-shaped magnets in groups of four. After the hands-on exploration of interactions of different magnets, teacher guided
+
+students in recording their observations of magnets “pushing” and “pulling” in the Activity Book. Guided by the diagrams of magnets, each student not only identified the interaction as “push” or “pull”, but also annotated the direction of movement of magnets with arrows. This gradual move from teacher- guided to student-centered teaching strategies or a mixture of both is found to be useful for students’ success in learning scientific practices (Bell et al., 2005). During the group discussion, students explored different ways of arranging the magnets to observe and describe the patterns of interactions. In a review of 2008–2017 studies on teaching strategies for scientific practices, Suarman et al. (2020) found that “experimenting” and “discussing”, and a combination of experimenting and discussing were the most used teaching strategies to achieve cognitive and affective teaching goals.
+
+Besides the intentional design of teacher-guided and student-centred learning experiences, it is interesting to observe teacher’s inclusion of embodied experiences to support students in appreciating interactions of magnets. The planned experiences of “moving hands to experience the pull and push between magnets”, to “observing animation of magnets”, to “playing with SPARKLE magnets” have supported students in their final tasks of “annotating diagrams with texts (pull and push) and arrows showing magnet interaction” in the Activity Book. The design considerations in this study are supported by the two-dimensional taxonomy developed by Skulmowski and Rey (2018). Their taxonomy included “bodily engagement” (i.e. how much bodily activity is involved) and task integration (i.e. whether bodily activities are related to a learning task in a meaningful way or not).
+
+References Bell, R. L., Smetana, L., & Binns, I. (2005). Simplifying inquiry instruction. The Science Teacher, 72(7), 30–33. Skulmowski and Rey Cognitive Research (2018). Principles and implications, 3(6), https://doi.org/10.1186/s41235-018-
+
+0092-9 Suarman, H, Hsu, Y.-S., Zhang, W. X., Kuo, Y.-R., & Wu, J.-Y. (2020). Features and trends of teaching strategies for scientific practices from a review of 2008–2017 articles, International Journal of Science Education, 42(7), 1183- 1206. Vygotsky, L. S. (1934/1994). The development of academic concepts in school aged children. In R. van der Veer & J.
+
+Valsiner (Eds.). The Vygotsky reader (pp. 355-370). Oxford: Blackwell.
+
+41
+
+C5. Same Volume, Same Mass: Think Again\! In the topic of matter, students learn about the three states of matter and their observable properties. Knowing the three states of matter forms the foundation for understanding the particulate theory of matter at higher levels of study in science. The topic also introduces students to the scientific practice of accurate measurement of mass and volume using appropriate tools. In this chapter, Ms A provided opportunities for her students to
+
+investigate if objects of the same volume have the same mass by tapping on technology to make her students’ thinking visible.
+
+To carry out scientific investigations, students posed questions, designed and conducted the investigations. In designing and conducting investigations, students learn to formulate hypothesis and also choose appropriate scientific apparatus to collect data.
+
+Ms A’s Class – Same Volume, Same Mass? Sensemaking of Data Curricular Intent Resource Use
+
+Capture
+
+Encourage student agency in expressing prior knowledge and posing questions
+
+Ms A facilitated students in recalling their prior knowledge on matter by jotting down “3-2-1” pointers in their Science Journal (3 ideas they remembered, 2 ideas they found interesting and wanted to find out more, 1 question they still have).
+
+42
+
+Examples of students’ notes in Science Journal
+
+Ms A’s Class – Same Volume, Same Mass? Sensemaking of Data Curricular Intent Resource Use
+
+Ms A introduced a concept cartoon where two characters discussed if balls A and B of the same volume would have the same mass. Students discussed in groups, on which character they agreed with, and stating the reasons for their choices.
+
+Using teacher produced Concept Cartoon to encourage students’ discussion
+
+Ms A facilitated a whole class discussion on how the mass and volume of objects can be measured accurately.
+
+Communicating, evaluating and defending ideas with evidence
+
+Ms A: Who do you agree with? Student: I agree with James. I can see the volume is the same, but the mass is different because the inside is not the same. Ms A:Ok, you can see that the volume is the same. It is just visual. How can you find out that they have the same volume? Student: Use a measuring cylinder. Ms A: How about mass? Student: Use a weighing scale. Ms A:Ok, class, can someone add on about measurement of volume of solid? Do we use only measuring cylinders? Student: We need water, then we need the volume of solid and water, then minus volume of water.
+
+Construct
+
+Designing investigations
+
+To find out which character in the concept cartoon was right, Ms A highlighted that a fair investigation should be conducted. She shared that an investigation was fair when any results collected was due to the changed variable. Ms A next played a video showing an investigation to determine the best soap to remove dirt from clothes. While the video was playing, students were encouraged to jot down notes in their Science Journal. Ms A also wrote key pointers on the whiteboard to guide students in thinking and recapping the three variables for the investigation: constant variables, changed variable, and measured variable.
+
+Using Textbook, video and slides to strengthen understanding of processes in an investigation
+
+43
+
+Using Concept Cartoon to facilitate discussion
+
+Ms A’s Class – Same Volume, Same Mass? Sensemaking of Data Curricular Intent Resource Use
+
+Ms A recapped the different types of variables shown in the video through class discussion:
+
+Ms A: What is the variable kept the same called? Student: Constant variable. Ms A: Yes, all the variables must be kept the same, with only one variable changed. What is that called? Student: Changed variable Ms A: Why is only one variable changed? This is to make sure results collected are due to that one changed variable. What are the results called? Student: Measured variable
+
+Ms A also reinforced the concept of hypothesis through classroom discussion:
+
+Ms A: What is hypothesis? Student: Make a guess of what would happen? Ms A: Just a guess? Anyone wants to add on? Student: An educated guess? Ms A: Yes, an educated guess, not just a random guess. It is something you have information already on it. This is what scientists do; they have some information first.
+
+44
+
+Preparing to work with evidence
+
+Learning about variables
+
+Ms A’s Class – Same Volume, Same Mass? Sensemaking of Data Curricular Intent Resource Use
+
+Ms A invited students to share their hypothesis based on what was discussed in the concept cartoon shown earlier. Using the Textbook, Ms A highlighted and added notes on concepts related to a fair investigation such as hypothesis, constant variables, changed variable and measured variable. Students were encouraged to annotate their Textbook and modelled how it could be used for learning.
+
+Guiding students to use Textbook to facilitate learning on their own
+
+To support students in appreciating the process of investigation, Ms A shared, “You begin with a hypothesis, then you identify your variables. Then, you investigate to observe, then back again if your hypothesis matches. If it does not match, check back again, and think if there could be another explanation.”
+
+Using teacher- produced artefact to summarise process of investigation
+
+From the hypothesis, Ms A invited students to share the variables related to their experiment (variables to be changed, kept the same, measured) using an ICT Tool.
+
+Through this tool, students’ thinking was made visible, where Ms A discussed different student responses. For example, in the discussion, Ms A highlighted the importance of clarity in responses.
+
+45
+
+Annotating concepts in Textbook
+
+Showing slide on experimental process
+
+Ms A’s Class – Same Volume, Same Mass? Sensemaking of Data Curricular Intent Resource Use
+
+Assessing students’ understanding of variables by making their thinking visible with an ICT tool
+
+Conducting investigations analysing, and interpreting data
+
+Conducting Investigations. Once students agreed on the different variables involved, students conducted the investigation following the steps in the Activity Book and using Balls A and B provided in the SPARKLE kit. Ms A reminded students on proper use of apparatus (e.g., tare the electronic balance before measuring mass of balls, place electronic balance on a flat surface).
+
+Analysing and Interpreting Data. Students recorded their observations using the ICT Tool. Ms A facilitated a whole class discussion using the following questions:
+
+• What are the similarities in the class results?
+
+• What are the differences in the class results?
+
+The class concluded that although the volumes of both balls were the same, the mass of ball A was greater than ball B. The class also observed the masses recorded by groups differed slightly, which could be due to how the balls were weighed.
+
+Using Activity Book and SPARKLE to scaffold investigation
+
+Comparing results among different groups before drawing a conclusion
+
+Ms A referred students to their hypothesis, and whether their conclusion was the same as their initial hypothesis based on the evidence collected.
+
+46
+
+ICT tool for sharing students’ ideas in public space
+
+Recording observations using ICT tool
+
+Ms A’s Class – Same Volume, Same Mass? Sensemaking of Data Curricular Intent Resource Use
+
+Consolidate
+
+At the end of the lesson, Ms A recapped the investigation process and highlighted the importance of fair tests and accurate measurements.
+
+Students filled in exit tickets at the end of the lesson. This allowed Ms A to check for students’ understanding for the whole lesson.
+
+Providing opportunities for students to reflect on their learning Assessing
+
+through an exit learning through
+
+ticket Exit Ticket
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+47
+
+The concept cartoon was used as a stimulus to elicit students’ ideas about mass and volume and to set them thinking about how they can measure mass and volume of objects. The cartoon also scaffolded students in discussing how they can design an investigation to support their claims of which character from the concept cartoon is correct. To support students in designing the investigation and collecting data, Ms A guided the students through the process of hypothesis setting, ensuring fairness and comparability in collecting data. By
+
+discussing the process of investigation explicitly before the students engaged with the hands-on, Ms A not only prepared the students to confidently work with the SPARKLE kits but also primed them to conduct their investigations in a thoughtful manner. Research studies have found explicit instructions of inquiry skills (for example explaining experimental design, how data can be treated) to be more effective for fifth and sixth grade students in Dutch classrooms (Kruit et al., 2018) and in upper secondary students (Vorholzer et al., 2020).
+
+References Kruit, P. M., Oostdam, R. J., & Van den Berg, E. (2018). Effects of explicit instruction on the acquisition of students’
+
+science inquiry skills in grades 5 and 6 of primary education, International Journal of Science Education, 40(4), 421- 441. DOI: 10.1080/09500693.2018.1428777. Vorholzer, A., von Aufschnaiter, C., & Boone, W. J. (2020). Fostering upper secondary students’ ability to engage in
+
+practices of scientific investigation: a comparative analysis of an explicit and an implicit instructional approach. Research in Science Education, 50, 333-359. https://doi.org/10.1007/S11165-018-9691-1.
+
+48
+
+C6. Grandma says, “Chew your Food”. Is she right? Learning about the digestive system in primary science has always been exciting for students as they discover how their body works. Of particular interest to students is how they can ‘see’ what is inside their body, make sense of familiar experiences such as chewing their food, and be
+
+able to explain their experiences in more scientific ways. A common alternative conception is that the human digestive system is two-dimensional. In this chapter, we enter Mr P’s classroom to understand how he led his class of Primary 4 students through hands-on modelling and personal examples to visualise the human digestive system and digestion of food.
+
+Mr P’s Class – Modelling and Understanding the Digestive System and Digestion of Food Curricular Intent Resource Use
+
+Capture
+
+Mr P reviewed his students’ prior knowledge of the main functions of digestive system. “Breaking food into simple substances” and “gives us energy”, Students A and B shared. He elaborated on the role of digestives juices in saliva and highlighted that the lesson would focus on how food is absorbed.
+
+Mr P revisited the arrangement of parts of digestive system on the SPARKLE kit apron by different groups. He asked how the model of digestive system aprons was useful in understanding the human digestive system. Students acknowledged that Mr P could not open up the body to show them the different parts.
+
+Using SPARKLE to discuss usefulness and limitations of models
+
+Posing questions Mr P went on to discuss possible limitations of the model,
+
+“Do you think the model shows you exactly how the human digestive system looks like?”. “No”, “Not exactly”, Mostly”, a few students responded. Mr P probed deeper on why food needs to be broken down. “So that food has greater surface area”, “break into smaller pieces, digest faster”, a few students explained.
+
+Construct
+
+Connecting to everyday experiences
+
+Next, Mr P introduced one of the class’s favourite food— pizza. He reminded students about their group activity with the SPARKLE apron and also showed a picture of himself wearing it. He asked students to imagine themselves as pieces of pizza travelling from the mouth to the large intestine.
+
+49
+
+Mr P’s Class – Modelling and Understanding the Digestive System and Digestion of Food Curricular Intent Resource Use
+
+Visualising and modelling the human digestive system
+
+Students chorused the parts of the human digestive system in sequence confidently, “Mouth, gullet, stomach, small intestine, large intestine”. He reminded students not to mix up “gullet” and “windpipe”, something he noticed in the last lesson.
+
+To reinforce the parts and functions of the human digestive system, students were asked to look at a diagram of the human digestive system with a list of jumbled up functions in the Activity Book. Most students filled the parts before matching each part with its functions. A few matched the functions with the diagram of the human digestive system, before labelling the parts. After individual student work, the teacher went through the matched parts-functions as a whole class.
+
+Visualising digestive system with diagram in Activity Book
+
+Relating parts of digestive system to functions
+
+50
+
+Visualising with SPARKLE
+
+Mr P’s Class – Modelling and Understanding the Digestive System and Digestion of Food Curricular Intent Resource Use
+
+Posing questions After matching the parts with their functions in the human
+
+digestive system, Mr P focused students on parts of the human digestive system where digestion happens. He also addressed earlier student S’ question on what digestive juice was. He introduced the concept of “enzyme” which they will learn later in secondary school. Another student asked, “Why the stomach is not harmed by the digestive juice?”. Mr P told the class that they could further discuss gastric pain in a later lesson.
+
+Mr P shared his grandma’s advice to chew food before swallowing. In response, Student S shared her mum’s cautionary advice on choking if she did not chew her food. After providing the authentic context for investigation, Mr P introduced the SPARKLE magnetic cubes, markers and procedures in the Activity Book to explore if his grandma and Student S’ Mum were correct. In groups, students compared the surface areas of cubes (representing whole piece of pizza) before and after the cubes were “broken” into eight pieces.
+
+Modelling food digestion using SPARKLE
+
+Following the group exploration, Mr P facilitated a whole class discussion on the number of surfaces they counted, before and after the cubes (pizza) were “broken” into pieces. When the food was “broken” into eight smaller pieces, there were more surface areas exposed to the digestive juices, increasing from 24 to 48. Mr P also highlighted the important role of teeth in breaking food into smaller pieces to facilitate swallowing. He also related to crushing medicine pills to facilitate eating and digestion. He and the class concluded that his grandma and Student S’s Mum were correct.
+
+Relating surface area to volume
+
+51
+
+Mr P’s Class – Modelling and Understanding the Digestive System and Digestion of Food Curricular Intent Resource Use
+
+Making connections across maths and science on concept of surface area
+
+Next, Mr P asked the class if digestion was completed in the mouth. “No,” students shared that digestion continued in the “stomach” and “small intestine”. He reminded students of their challenges in fitting the length of small intestine on the SPARKLE apron and the importance of why the small intestine had to be long to facilitate the absorption of digested food. To deepen students’ understanding of food absorption, he showed two hand towels and asked students whether the “Towel A with protruding ridges”, or the “Towel B with flat surface” was able to better absorb water. “(Towel) A”, students responded in chorus. He led students to relate “Towel A with ridges” to the “wall of small intestine”, which allows digested food to be better absorbed.
+
+Drawing analogy to everyday objects or experiences
+
+Using everyday objects as analogies of small intestine
+
+52
+
+Recording in Activity Book
+
+Mr P’s Class – Modelling and Understanding the Digestive System and Digestion of Food Curricular Intent Resource Use
+
+Consolidate
+
+Making connections across topics
+
+To conclude the lesson, Mr P revisited the overall function of the human digestive system in breaking down food into simple substances and that students will learn how energy is released from digested food at upper primary.
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+53
+
+In this lesson, Mr P used a modelling-based teaching and learning approach. Students explored the parts and functions of the human digestive system, in particular how the surface area affects the absorption of digested food at the small intestine.
+
+Mr P first used the SPARKLE apron to engage students in modelling the human digestive system, including the mouth, gullet, stomach, small intestine and large intestine. Such a modelling experience supports students in visualising the parts and relative positions in the human digestive system, appreciating how the various parts come together to break down food into simple substances before being absorbed at the small intestine. After modelling the parts of the human digestive system, the teacher next used the SPARKLE cubes to engage students in comparing the surface area of food before and after breaking into pieces.
+
+The use of modelling in the human digestive system and absorption of digested food adds to the few empirical studies reported on modeling-based teaching and learning of topics such as materials and water cycle in the elementary grades (Acher,
+
+Arca, & Sanmartí, 2007; Forbes, Vo, Zangori, & Schwarz, 2015). Such studies are valuable as “Developing and using models” is one of the eight practices of science in which students should be engaged (NRC, 2012, NGSS, 2013).
+
+It is interesting to observe how the teacher’s simple customisation of the integrated suite of resources to incorporate everyday conversations (e.g. grandmother’s advice on chewing food) and everyday familiar artefacts (e.g. different types of towels) have made the students’ investigations more meaningful and deepened their understanding of the concept of food absorption. This highlights the important complementary roles of curricular designers in putting together educational curricular materials, as well as teachers in customising them based on students’ needs. Arias et al. (2016) suggests that when designers of educative curriculum materials are purposeful in creating materials, it “may support the creation of rich learning opportunities called for new reforms, allowing for ambitious science teaching and learning.”
+
+References Acher, A., Arca, M., & Sanmartí, N. (2007). Modeling as a teaching learning process for understanding materials: A case
+
+study in primary education. Science Education, 91(3), 398–418. Arias, A. M., Bismack, A. S., Davis, E. A., & Palincsar, A. S. (2016). Interacting with a suite of educative features:
+
+Elementary science teachers’ use of educative curriculum materials. Journal of Research in Science Teaching, 53(3), 422–449. https://doi.org/10.1002/tea.21250 Forbes, C. T., Vo, T., Zangori, L., & Schwarz, C. (2015). Using models scientifically: Scientific models help students
+
+understand the water cycle. Science & Children, 53(2), 42–49. National Research Council. (2012). A framework for K-12 science education: Practices, crosscutting concepts, and core
+
+ideas. Committee on a Conceptual Framework for New K-12 Science Education Standards. NGSS Lead States. (2013). Next generation science standards: For states, by states. Washington, DC: National
+
+Academies Press.
+
+54
+
+C7. Is Cactus a Plant? Scientific knowledge are statements of generalisation about specific phenomena. Given that variabilities exist in nature, there are exceptions to generalised scientific knowledge. Exceptions are generally more common in life sciences since groups of living things may be genetically dissimilar and hence display different behaviours or characteristics. For instance, mammals are groups of organisms that give birth to their young alive, have hair, and are warm-blooded.
+
+The platypus is a mammal with exception since they have hair, are warm-blooded but they lay eggs. Engagement with generalisations and exceptions in science typically take the form of scientific argumentations, such as with the claims-evidence- reasoning framework (McNeill & Krajcik, 2011). In this chapter, we enter Ms J’s classroom where she provided opportunities for students to discuss if a cactus is a plant based on the characteristics of plants that the students have just learnt.
+
+Ms J’s Class – Is Cactus a plant? Comparing and Reasoning Curricular Intent Resource Use
+
+Capture
+
+Ms J began her lesson by showing a photograph of a Cactus plant on the slide and asking students what it was. The students responded that it was a cactus. She then asked if a Cactus was a plant. The students replied, “Yes\!”. Ms. J asked how they knew it was a plant. Student A responded, “It has a stem and leaves”. When asked which part was the stem, Student A pointed to the green part, and Student B added, “There are flowers, which makes it a plant”.
+
+Using teacher produced resource to elicit students’ knowledge of plants
+
+Ms J then asked where a Cactus could be found. She also confirmed with students that a Cactus is indeed a plant and encouraged the class to look for the plant in the school garden.
+
+Posing questions and demonstrating critical thinking in discussing plant adaptation
+
+She introduced the cactus spikes as needle-like leaves and asked if they looked like normal leaves. The students replied, “No\!”, noting that they looked different. Ms J explained that these leaves were adapted to their environment. Student C asked why so many needles were needed, and Student D responded, “Animals might damage the plant”. Student E mentioned that “sometimes the plant is food for insects”.
+
+55
+
+Facilitating class discussion if Cactus is a plant
+
+Ms J’s Class – Is Cactus a plant? Comparing and Reasoning Curricular Intent Resource Use
+
+Ms J added that Cactus fruit juice can be found in supermarkets and asked if anyone had seen it. She explained that the Cactus’ stem stores water for long periods. Student F expressed interest in knowing the other purposes of the needles.
+
+Comparing with other examples of plants
+
+Using different sources of information -online resource and Textbook to explore plants
+
+Next, Ms J showed a photograph of a typical plant from an online search and discussed how leaves typically trap sunlight. She highlighted that in Cacti, sunlight is trapped by the stem.
+
+Posing questions Ms J referred students to their Textbooks. She read aloud
+
+from the text, explaining that leaves, stems and roots differ in plants to help them survive in different environments.
+
+56
+
+Using the Textbook as a resource to guide comparison
+
+Comparing a typical plant with the Cactus
+
+Ms J’s Class – Is Cactus a plant? Comparing and Reasoning Curricular Intent Resource Use
+
+Comparing diversity of leaves
+
+Ms J encouraged students to think about different types of leaves, explaining that they can have various shapes, such as oval or round. She then showed a photograph of a purple leaf and asked whether it could still make food. The students answered affirmatively and mentioned seeing leaves in various colours such as pink, white, yellow, orange, and brown. Ms J remarked that blue leaves are rare in Singapore but encouraged students to explore plants in the school garden while reminding them not to damage the plants.
+
+Construct
+
+Ms J handed out Activity Book. She explained that students would be comparing the similarities and differences between plant parts, focusing on their functions.
+
+Using Activity Book to guide investigation
+
+Observing and comparing plants
+
+Students were given some time to examine various plant cards in groups. Some plants were familiar to the students, while others were new. The cards showed information on the leaves, stems, and roots of the plants. After a while, Ms J asked the students to share their observations of the plant parts.
+
+Using plant cards from SPARKLE to focus students’ exploration
+
+57
+
+Observing and comparing leaves
+
+Using the Activity Book as a guide for investigation
+
+Ms J’s Class – Is Cactus a plant? Comparing and Reasoning Curricular Intent Resource Use
+
+Connecting to everyday experiences
+
+Besides examining the plant cards, Ms J facilitated discussion of common plants that students might have come across. For example, she asked whether grass was a flowering or non-flowering plant. She explained that grass was actually a flowering plant, but the flowers are often cut by grasscutters, making them less visible. Students shared other examples such as Aloe Vera, which they had eaten, bougainvillea found along roads, and pandan leaves used for bread. Ms J also asked whether plants such as the Mimosa Plant had a weak or strong stem. A student responded that it needs support.
+
+Students were told to explore the two plant cards - Papaya Plant (labelled Plant A) and the Aglaonema Plant (labelled Plant B). The teacher invited them to find similarities and differences between the leaves, stems, and roots of the two plants. The Textbook was displayed on the slide for reference.
+
+Using SPARKLE plant cards and Textbook to facilitate comparison Ms J suggested that students could start by discussing the colour or shape of leaves. She asked them which part of their body they used to observe, and the students responded, “Eyes\!”.
+
+Comparing similarities and differences of plants
+
+Students also discussed the similarities and differences between stems. Ms J referred to the Textbook and online resources, pointing out that some stems are strong and woody while others are weak.
+
+Using Textbook to guide students with concept and vocabulary development
+
+Using Textbook to guide students with concept and vocabulary development
+
+58
+
+Ms J’s Class – Is Cactus a plant? Comparing and Reasoning Curricular Intent Resource Use
+
+Ms J next directed students to compare the similarities and differences in the roots of both plants. The teacher reminded the students to specify which plant they were referring to while comparing. Students recorded their observations and comparisons of leaves, stems and roots in the Activity Book.
+
+Using Activity Book to record observations
+
+Consolidate
+
+Posing questions After observing various plants and their parts, students were
+
+encouraged to write down questions about the two plant picture cards they had observed. Ms J prompted students to be specific with their questions and provided an example, “Can the pink part of leaves also make food?”
+
+Using Activity Book to ask questions on plant parts and functions
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+59
+
+comparing Ms J presented students with the parts of a
+
+different plant parts. common plant and contrasted it with the Cactus,
+
+The SPARKLE plant cards, in particular, offered an atypical plant. Students had to apply their
+
+a visual dimension that facilitated students’ knowledge of plant parts to decide if the Cactus
+
+investigation of plant parts. These cards showed was a plant. They had to justify their claims
+
+the plant parts such as leaves, stems, and roots, using evidence and reasoning. The introduction
+
+thus enabling students to compare and examine of exceptions to general scientific concepts that
+
+both familiar and unfamiliar plant parts. This allowed students learn is pedagogically challenging
+
+students an engaging learning experience which (Shemwell et al., 2015) and hence Ms J’s classroom
+
+facilitated connections between their observations offered insights into how young students can be
+
+and prior experiences. Ms J effectively utilised supported to engage with scientific argumentation
+
+the cards as a teaching resource for promoting and decision making. Ms J carefully organised
+
+collaborative learning and discourse. Furthermore, and adapted the resources, including SPARKLE
+
+Ms J’s decision to project sections of the Textbook cards, online pictures, and Textbook. Each resource
+
+allowed students to verify information as they was deliberately selected to elicit students’ prior
+
+compared the plant parts. knowledge and engage them in observing and
+
+References McNeill, K. L., & Krajcik, J. S. (2011). Supporting grade 5-8 students in constructing explanations in science: The claim,
+
+evidence, and reasoning framework for talk and writing. London: Pearson. Shemwell, J. T., Gwarjanki, K. R., Capps, D. K., Avargil, S., & Meyer, J. L. (2015). Supporting teachers to attend to
+
+generalization in science classroom argumentation. International Journal of Science Education, 37(4), 599-628. https://doi.org/10.1080/09500693.2014.1000428.
+
+60
+
+C8. Can Ben See the Minion in a Dark Room? Light allows us to see fascinating phenomena. Phenomena related to light are closely connected to students’ everyday experiences and can be explained using different properties of light. For example, understanding the process of seeing an object involves a combination of various properties of light: A light source gives out light, light travels through space, light reflects when hitting a surface and entering our eyes. Bendall, Goldberg, and Galili (1993) described two naïve conceptions about behaviour of light as: (1) the light from each point of a light source goes out preferentially in one direction rather than in all directions, and (2) light has the
+
+tendency to spread out from its source. These naïve conceptions can be changed by intentionally engaging students in inquiry about the phenomena.
+
+To facilitate student understanding of light, it is important to connect the phenomena they observe or investigate with the properties of light inherent in these phenomena. In developing ideas that connect observed phenomena with the properties of light, using visual diagrams can be more effective than relying solely on verbal descriptions. In Mr J’s classroom, we learn how to connect what students observe or investigate with what they have already learnt about the properties of light in constructing explanations.
+
+Mr J’s Class – Can Ben See the Bright Yellow Minion? Modelling and Communication Curricular Intent Resource Use
+
+Capture
+
+Mr J discussed in the previous lesson, examples of natural and man-made light sources. He then presented the pictures of light sources (e.g., stars, torch, burning candle, the Sun). Recapping prior knowledge on light sources
+
+Mr J then asked the focus question for the lesson, “How does Ben see the light bulb?”. He referred students to the Textbook for examples. He developed students’ ideas “How do we see light sources (A picture of Ben)” with follow-up scaffolding questions, including “Why can we see light sources?”. While students annotated the relevant concepts in the Textbook to explain how they see light sources. Mr J also annotated “Light enters his eyes directly” in the Textbook through his device.
+
+Using Textbook to illustrate and explain how light sources are seen
+
+61
+
+Using Textbook to show how to represent light entering the eyes
+
+Mr J’s Class – Can Ben See the Bright Yellow Minion? Modelling and Communication Curricular Intent Resource Use
+
+Using visual model to explain a phenomenon
+
+Mr J: This picture shows how it happens. What do you see? Student: An arrow. Mr J: Thank you. It is an arrow. (drawing the arrow with a red mark). This arrow shows us how the light actually travels. It comes from the light source and comes into our eyes.
+
+Communicating science ideas
+
+Then, the students were asked to write down their ideas about “How does Ben see the light bulb?” on their personal whiteboards. The students shared their ideas with peers for feedback. Mr J guided students to use words such as “travel” and “enter his eyes directly.”
+
+Using whiteboard to share ideas for peer feedback
+
+Mr J shared one student’s answers through iPad. After that, he used diagrams and texts to consolidate the concept of “how light enters the eyes”.
+
+Construct
+
+Raising a focus question
+
+Using a picture of Ben, and unlit light bulb and a minion, Mr J asked the question, “When the light bulb is switched off, can Ben see the bright yellow minion?”.
+
+Using slides to share a focus question
+
+Having a discussion based on students’ perspectives
+
+When the students provided mixed responses of “Yes” or “No”, Mr J then asked students to justify their answers on whether the minion can be seen without light. One student argued that it could not be seen because it lacked its own light. Another suggested that it could be seen due to its bright colour. Mr J asked again, “What about shiny objects? Can these be seen in the dark?”.
+
+The students again replied with mixed responses on whether a shiny medal, a diamond, a mirror can be seen in the dark. Mr J showed real shiny objects (i.e. glass ball, medal). This discussion elicited what students learnt so far about light sources as well as their alternative conceptions about light sources.
+
+Presenting tangible objects to elicit prior conception on whether shiny objects can be seen in the dark
+
+Communicating ideas using a Whiteboard
+
+62
+
+Mr J’s Class – Can Ben See the Bright Yellow Minion? Modelling and Communication Curricular Intent Resource Use
+
+Mr J guided students on how to use the SPARKLE kit to conduct investigation. He demonstrated how to place the three cones (bright yellow, shiny and silver cones) in the box and how to cover the box to have a completely dark environment. The students started to conduct the investigation and recorded their observations in the Activity Book. Most of them observed that they could not see anything when the light was off.
+
+Conducting investigations and communicating observation
+
+Using SPARKLE to conduct an investigation
+
+Communicating observations based on evidence
+
+After the investigation, Mr J revisited the same question, “Can Ben see the Minion?” This time, the students answered “NO” and explained they couldn’t see shiny and bright objects in the dark. Their responses showed a change in conceptions.
+
+63
+
+Investigating in groups to observe different objects
+
+Observing different objects from SPARKLE
+
+Mr J’s Class – Can Ben See the Bright Yellow Minion? Modelling and Communication Curricular Intent Resource Use
+
+Mr J asked a series of questions to scaffold students in explaining light sources and how objects are seen. The questions included, “Are the bright/shiny objects light sources? Do they give off light?” “What can we do if we want to see them?” A student suggested, “If we switch on the light, we will be able to see.”
+
+Using Activity Book to record observations of how objects are seen
+
+Conducting investigations based on students’ suggestions
+
+To investigate the student’s suggestion, Mr J first demonstrated how to switch on the light source on card D (placed in slot 9 of the light box) before students observed three cones again with the light turned on. The students concluded that the Minion is not a light source and can only be seen if there is a light source.
+
+Consolidate
+
+Constructing explanations
+
+When consolidating the lesson, Mr J asked students to read the Textbook explanations and diagrams with a guiding question “How do we explain that we can see objects that don’t give off light?”. He used the Textbook diagram to illustrate how arrows are used to show how light travels.
+
+Using Textbook to illustrate how objects can be seen
+
+Students then illustrated how they could see the cones in the Activity Book. Some of the student-generated drawings were accurate while others revealed conceptual gaps, e.g. missing arrowheads, double arrowheads, arrowheads in the wrong direction. Mr J highlighted the students whose drawing showed gaps in their knowledge.
+
+Using Textbook to model how light rays can be represented
+
+64
+
+alternative This lesson provides a good example of connecting
+
+conceptions (e.g., bright objects are what students know with what they observe
+
+sources of light). Besides, Mr J also intentionally during their investigation using the SPARKLE kit.
+
+designed interesting connections, for example, To explain how the bright yellow Minion can be
+
+making connections between students’ favourite seen, Mr J used questioning to activate students’
+
+character “Minions” and the “yellow cone” used prior concepts (e.g., light sources), and scaffold
+
+in the investigation. Such connections supported investigations involving three cones (bright yellow,
+
+students in exploring how different objects can be shiny and silver cones) to address students’
+
+seen. Reference Bendall, S. Goldberg, F., Galili, I. (1993). Prospective elementary teachers’ priority knowledge about light. Journal of
+
+Research in Science Teaching, 30, 1169-1187.
+
+Mr J’s Class – Can Ben See the Bright Yellow Minion? Modelling and Communication Curricular Intent Resource Use
+
+Using and developing visual models to demonstrate how objects can be seen
+
+Using student diagrams in Activity Book to assess students’ understanding and provide feedback
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+Examples of students’ drawing
+
+65
+
+C9. Did the Ring Expand or Did the Ball Contract? The phenomena caused by heat transfer can be observed indirectly in various ways, such as through colour changes (visually), the sense of touch (tactilely), or the measurement of temperature (numerically). In this way, students are engaged in thinking of heat-related phenomena through observation, hands-on learning and data collection. This story illustrates how demonstrations, coupled
+
+with good questioning can effectively support students in understanding heat transfer in solids, liquids and gases, and pique students’ curiosity in raising questions. In this chapter, we step into Ms M’s classroom to learn: (1) how to facilitate a series of demonstrations to observe, interpret, and understand heat-related phenomena, and (2) how a blend of closed and open-ended questions can be raised and discussed during demonstrations about heat.
+
+Ms M’s Class – Expand or Contract – Demonstration, Questioning, Explanation Curricular Intent Resource Use
+
+Capture
+
+Prepare students on how to observe demonstrations and communicate
+
+Ms M began by reminding students that they would need to make careful observation with their eyes and think with their minds. To guide students’ thinking processes during a demonstration, the teacher encouraged them to ‘Predict, Observe, Explain’ (POE) and ‘Observe, Link, Connect’ (OLC), which she had written on the whiteboard. She explained that they would first predict what might happen, closely observe the experiment and explain their observations. They would also link their observations with what they have learnt and connect them to everyday examples. This process encourages deeper understanding and critical thinking throughout the experiment.
+
+Using Whiteboard to focus students on predicting, observing and explaining as well as making links and connections
+
+Recapping prior knowledge about heat
+
+Ms M elicited students’ prior knowledge, prompting them with questions like, “What is heat? How do you know when heat is flowing or has been transferred?” The students explained that heat transfer could be observed or measured in various ways; by touch, using a thermometer to measure temperature, using a thermal camera, and checking the change in an object through colour or states of matter.
+
+66
+
+Visualising relationship between POE and OLC
+
+Ms M’s Class – Expand or Contract – Demonstration, Questioning, Explanation Curricular Intent Resource Use
+
+Giving examples of heat gain and loss in everyday life
+
+After that, Ms M engaged the class by relating to familiar experiences, such as barbecuing or roasting marshmallows. She also showed photographs of everyday objects undergoing heat gain and loss, before starting the demonstrations.
+
+Using slides to discuss examples of heat gain and loss in everyday life
+
+Construct
+
+Raising a focus question
+
+Predicting and having a whole class discussion
+
+Ms M began the first demonstration by introducing the metal ball and ring. She encouraged students to predict, observe, and explain, as guided by the Activity Book. Throughout the demonstration, the question “Will (or Did) the metal ball pass through the metal ring?” guided the whole-class discussion and students’ thinking. Students first predicted whether the metal ball would pass through the ring after being heated, tapping on prior knowledge. Then, students observed the effects of heat on the ball and ring.
+
+Writing a prediction in Activity Book
+
+Observing and discussing the effect of heat gain and loss on metal and ball
+
+Using metal ball and ring to conduct the first demonstration
+
+67
+
+Conducting investigation on solids
+
+Discussing examples of heat gain and heat loss in everyday life
+
+Ms M’s Class – Expand or Contract – Demonstration, Questioning, Explanation Curricular Intent Resource Use
+
+Finally, students explained their observations guided by questioning. The questions encouraged students to connect their observations to prior knowledge about heat transfer (heat gain or heat loss), deepening their understanding of how heat can cause materials to expand or contract. The questions scaffolded students in actively predicting, observing, and explaining what happened and why it happened. Constructing explanations
+
+Recording explanation of phenomenon in Activity Book
+
+Observing and discussing the effect of heat gain and loss on red coloured water
+
+In the second demonstration, Ms M used a glass tube filled with red-coloured water to show the effects of heat on liquids. Ms M began by placing the set-up in a container of hot water. As the liquid in the glass tube gained heat, students could observe the red coloured water rising, demonstrating the expansion of the liquid as it gained heat. The rise in the water level visually showed how liquids increased in volume when heated. As the water level reached the top of the glass tube, all the students shouted in unison, ‘Overflow\! Overflow\!’ They were thrilled and excitedly yelled, ‘YAY\!’ when the red coloured water overflowed from the glass tube. Next, Ms M cooled the liquid by placing the set-up in a container of ice. The students observed the red water level dropping as the liquid cooled, showing the contraction of the liquid.
+
+Using red coloured water to conduct the second demonstration
+
+68
+
+Conducting investigation on liquids
+
+Explaining observations in Activity Book
+
+Ms M’s Class – Expand or Contract – Demonstration, Questioning, Explanation Curricular Intent Resource Use
+
+Discussing student-generated questions and explanation on the epistemic functions of materials
+
+This experiment reinforced the concept of thermal expansion and contraction in liquids, providing an engaging visual demonstration of how heat transfer affected the volume of a liquid. After the demonstration, one student asked, ‘Why did we colour the water red in this experiment?’ Ms M complimented this student-generated question and engaged the whole class in a brief discussion. Another student explained, ‘If the water is the same colour, we cannot see the water level clearly because the colour of the water and glass are very similar.’ This shows how the engaging demonstration can foster students’ curiosity and inquiring minds, deepening their understanding of the functions of materials in experiments.
+
+In the third demonstration, Ms M showed how heat affected the expansion and contraction of gases through an experiment using a balloon. Ms M began by heating the flask with the Bunsen burner, causing the air (or gas) inside the flask to expand.
+
+Using flask with balloon to conduct the third demonstration
+
+As the gas gained heat, it expanded, causing the balloon attached to the flask’s neck to inflate. Students observed the effect of heating the flask of gas, as the balloon expanded. After that, the flask was placed in the ice and then the balloon began to deflate as the gas cooled.
+
+Observing and discussing the effect of heat gain and loss on size of balloon
+
+Record explanation of phenomenon in Activity Book
+
+69
+
+Conducting investigation on gases
+
+Ms M’s Class – Expand or Contract – Demonstration, Questioning, Explanation Curricular Intent Resource Use
+
+Constructing explanations
+
+Ms M also posed questions to guide students’ discussions while conducting the demonstration. Like in the previous demonstrations, the students also recorded their predictions, observations, and explanations in their Activity Books. Following guiding questions, the students predicted, observed and explained the balloon’s inflation and deflation using scientific concepts of heat gain and heat loss. The class discussions allowed students to demonstrate their understanding of scientific practices, such as posing questions and constructing explanations, through collaborative knowledge building.
+
+Consolidate
+
+Providing feedback on students’ questions and explanations
+
+Ms M concluded the lesson by revisiting the lesson objective. She consolidated students’ learning by guiding them to conclude that heat gain or loss can cause matter to expand or contract respectively. She also encouraged students to write down their questions and explanations from the demonstrations in their Activity Books. She planned to review their questions to assess their understanding.
+
+70
+
+This lesson illustrates how a series of demonstrations coupled with good questioning engaged students in understanding and appreciating the effect of heat gain and loss on solids, liquids and gases. During the three demonstrations, students were active inquirers by asking questions. Through these engaging demonstrations, students were guided by key questions to predict, observe, and explain the effects of heat on solids, liquids and gases.
+
+During the demonstration, questions raised by Ms M and students play critical roles in collective sense-making to understand the concept of heat. The demonstration, coupled with questions revealed preconceptions, triggered curiosity, and facilitated whole-class discussions fostering the class’s collaborative knowledge building and deeper understanding on science concepts and practices. Research evidence (for example Shon, 2001) suggests that effective demonstration has positive impact on students’ conceptual understanding of heat.
+
+Reference Shon, M. (2001). Demonstrations of lessons: Teaching authentic inquiry in science lessons. Asia Pacific Education
+
+Review, 2, 35-44.
+
+Planning and Reflecting Using the Content-Student-Resource Cycle
+
+71
+
+EPIlogue
+
+It has been 24 years since the themes of Diversity, Cycles, Systems, Interactions and Energy were introduced in the 2001 Primary Science Syllabus. Over the years, the Primary Science Syllabus has not only strengthened students’ appreciation of the connections between the Physical and Life Sciences, but has also emphasised and promoted scientific practices, values, attitudes and ethics among our primary children.
+
+It is inspiring to see our teachers enact well designed opportunities for students to engage in diverse ways of thinking and doing across different topics and contexts. We see students question, conduct investigations, communicate and explain using evidence. We are deeply encouraged by these shifts towards inquiry-based and hands-on learning in our classrooms. We take heart as these pedagogies take root in our teachers’ practices.
+
+Syllabus Design and Implementation, a Tight Ecosystem of Partnerships Syllabus review cycles are part of a continuous process, not a single episode of change. Changes across syllabus cycles built on one another in virtuous loops to develop conceptual understanding, scientific practices, values, attitudes and ethics through the curriculum, as we ride the wave of each cycle towards our goal for all students to appreciate Science for Life and Society.
+
+The game changer in the latest iteration of syllabus review and implementation has been the conceptualisation and development of our integrated suite of resources (Textbook, Activity Book, SPARKLE hands-on manipulatives, Student Learning Space, Teaching and Learning Guide for Teachers) to empower teaching and learning in Science classrooms throughout our schools. This is made possible only by the close partnerships across the Curriculum Planning and Development Division 1 and Academy of Singapore Teachers in the Ministry of Education, the National Institute of Education, and Science Centre Singapore. At the heart of it, it is our teachers who are the stars, as they skilfully translate syllabus and resources into practice.
+
+“To a young learner, Science is not a subject, but a journey of discovery from asking ‘why’ and ‘how’. The Science teacher is responsible for turning this early curiosity and wonder into a lifelong learning adventure, where a question could be the seed for future innovation. Developed through the close partnership between CPDD, AST, NIE and schools, the 3C pedagogical framework and the resources, particularly SPARKLE, empower our teachers in teaching and students in learning of Science, and lead the way towards developing future generations of STEM leaders and advocates.” Ong Kong Hong Divisional Director Curriculum Planning and Development Division (2023–current)
+
+72
+
+Student Centricity and Teacher Agency, Implemention Integrity of Curriculum With the concerted support of our ecosystem of stakeholders, the Primary Science Syllabus and Resources were designed with an emphasis on student-centricity, focused on students and their learning. Teachers play key roles in customising the resources – making professional decisions on content focus, considering students’ needs and progress, as well as selecting the resources to use – often in collaborative dialogue with other science teachers. The range of good classroom practices led to the development of the “Content- Student-Resource” Planning and Reflection Tool, by teachers, for teachers. Such teacher ownership and leadership have enabled the implementation integrity of the curriculum - guided by the aim and learning outcomes of the syllabus while allowing flexibility in curriculum enactment and resource customisation to meet schools’ and students’ needs.
+
+We are heartened to see teachers skilfully exploring a range of pedagogies to cultivate curiosity, creativity and student agency, aligned with the key outcomes of STEM Education in Singapore, even as students learn science. If anything, these classroom innovations have enhanced academic rigour. In the Trends in International Mathematics and Sciences Study (TIMSS) 2023, Primary 4 students reported enjoying science. They also applied and reasoned scientifically in various contexts, in line with our effort to future-proof learners by developing 21st century competencies such as critical, adaptive and inventive thinking in students.
+
+73
+
+As a Primary Science Fraternity, Looking to the Future Syllabus review and implementation span generations of Curriculum and Resource Developers; Master Teachers and Teacher Educators; Science Key Personnels and Teacher Leaders; and Science Education Researchers. All play important and complementary roles in growing our next generation of scientifically literate citizens.
+
+The world today is characterised by change and disruption, accelerated by technological advancements. What promise and possibilities might this hold for the learning of science? How can we prepare our students for such a future?
+
+“The primary science curriculum is a labour of love put together by all who care that our children experience the joy, discovery and wonders of science. It is awe-inspiring to behold that encased in each syllabus is the goodness of all the syllabuses before it. Indeed, our children are nourished by the wisdom of generations who had gone before us when they interact with the curriculum. The current syllabus sets a new bar in offering pupils a heads-on, hearts-on and hands-on experience to engage with Science through the integrated suite of resources. Kudos to our dedicated CPDD, AST, NIE, Science Centre and school colleagues for the tight partnership that made this a reality. You give our primary science pupils the SPARKLE in their eyes\!” Teo Kok Hong Director, Sciences Branch Curriculum Planning and Development Division (2024–current)
+
+How do we balance between the timeless and the timely in the learning of science? At the primary level, students flourish through concrete and tactile learning. How can emerging technologies enrich and extend this learning for our younger students? What other ingredients would secure the future for them, as learners and participants of science?
+
+As a Primary Science Fraternity, we have the unique privilege to steer and shape the earliest experiences of our children with science. Let us continue to spark their wonder, curiosity and imagination as we envision the next primary science curriculum, out of our love for the child and our craft.
+
+74

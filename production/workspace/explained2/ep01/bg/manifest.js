@@ -1,0 +1,1 @@
+window.BAKED=["_grain","boxfar","boxfar_day","boxfar_night","boxfar_rain","daystage","garden","micro","room","stage","stage2"];

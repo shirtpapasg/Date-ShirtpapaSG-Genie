@@ -1,0 +1,547 @@
+{
+ "episode": "SAU EP07",
+ "title": "How does oxygen get to your muscles?",
+ "tag": "🌏 TheOneApp, Explored · EP 7 · Oxygen",
+ "intro": {
+  "goals": [
+   [
+    "🫁",
+    "How air gets into your lungs",
+    "first"
+   ],
+   [
+    "❤️",
+    "How your blood carries oxygen",
+    "second"
+   ],
+   [
+    "💪",
+    "What your muscles do with it",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "What did the",
+  "crocodile eat? 🐊"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🫁",
+    "Lungs: oxygen passes into the blood",
+    "lungs",
+    0.12,
+    "#3a86ff"
+   ],
+   [
+    "❤️",
+    "Heart: pumps blood around the body",
+    "heart",
+    0.32,
+    "#e63946"
+   ],
+   [
+    "💪",
+    "Cells: oxygen releases energy from food",
+    "energy",
+    0.52,
+    "#f77f00"
+   ]
+  ],
+  "tease": "🐊 Next time: what did the crocodile eat?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "respiratory",
+   "RESPIRATORY SYSTEM",
+   "#3a86ff"
+  ],
+  [
+   "textbook",
+   "circulatory",
+   "CIRCULATORY SYSTEM",
+   "#e63946"
+  ],
+  [
+   "textbook",
+   "oxygen",
+   "OXYGEN",
+   "#06d6a0"
+  ],
+  [
+   "textbook",
+   "carbon",
+   "CARBON DIOXIDE",
+   "#6c757d"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "peRun",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "ep07_whistle",
+     0.05
+    ],
+    [
+     "ep07_run",
+     0.1
+    ],
+    [
+     "ep07_pant",
+     2.9
+    ],
+    [
+     "ep07_pant",
+     4.0
+    ],
+    [
+     "ep07_heart",
+     3.0
+    ],
+    [
+     "ep07_heart",
+     3.4
+    ],
+    [
+     "ep07_heart",
+     3.8
+    ],
+    [
+     "ep07_heart",
+     4.2
+    ],
+    [
+     "ep07_heart",
+     4.6
+    ],
+    [
+     "ep07_heart",
+     5.0
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Huff, puff! When you run, you breathe faster and your heart pounds. Why? Your muscles are calling for oxygen!"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why is the small intestine so long? Its walls are covered in tiny finger-like bumps too. All that length gives a huge surface, so lots of digested food can pass into the blood."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how air gets into your lungs. Second, how your blood carries oxygen. And third, what your muscles do with it. Let's get started!"
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "o1",
+   "scene": "airOut",
+   "silent": 6.4,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.0
+    ],
+    [
+     "ep07_birds",
+     0.0
+    ],
+    [
+     "ep07_pant",
+     0.32
+    ],
+    [
+     "pop",
+     0.8
+    ],
+    [
+     "reveal",
+     1.44
+    ],
+    [
+     "sun_whoosh",
+     2.56
+    ]
+   ]
+  },
+  {
+   "id": "o2",
+   "scene": "povNose",
+   "silent": 6.4,
+   "sfx": [
+    [
+     "ep07_sniff",
+     0.0
+    ],
+    [
+     "pass_by",
+     2.08
+    ],
+    [
+     "pass_by",
+     3.2
+    ],
+    [
+     "pass_by",
+     4.32
+    ],
+    [
+     "rush",
+     1.44
+    ]
+   ]
+  },
+  {
+   "id": "o3",
+   "scene": "povWindpipe",
+   "silent": 7.2,
+   "sfx": [
+    [
+     "pipe_rush",
+     0.0
+    ],
+    [
+     "pad_wonder",
+     1.12
+    ],
+    [
+     "pass_by",
+     2.56
+    ],
+    [
+     "pass_by",
+     4.16
+    ],
+    [
+     "pass_by",
+     5.6
+    ]
+   ]
+  },
+  {
+   "id": "o4",
+   "scene": "povAirSac",
+   "silent": 8.0,
+   "sfx": [
+    [
+     "reveal",
+     0.16
+    ],
+    [
+     "bubble",
+     1.6
+    ],
+    [
+     "bubble",
+     2.72
+    ],
+    [
+     "bubble",
+     3.84
+    ],
+    [
+     "ep07_squish",
+     6.24
+    ],
+    [
+     "splash",
+     6.88
+    ]
+   ]
+  },
+  {
+   "id": "o5",
+   "scene": "povRBC",
+   "silent": 6.4,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.0
+    ],
+    [
+     "ep07_flow",
+     0.0
+    ],
+    [
+     "pass_by",
+     1.44
+    ],
+    [
+     "thud",
+     2.88
+    ],
+    [
+     "sparkle",
+     3.36
+    ],
+    [
+     "rush",
+     3.52
+    ]
+   ]
+  },
+  {
+   "id": "o6",
+   "scene": "povHeart",
+   "silent": 8.0,
+   "sfx": [
+    [
+     "ep07_flow",
+     0.0
+    ],
+    [
+     "ep07_heart",
+     2.35
+    ],
+    [
+     "ep07_heart",
+     4.27
+    ],
+    [
+     "boom",
+     4.32
+    ],
+    [
+     "pipe_rush",
+     4.64
+    ],
+    [
+     "pass_by",
+     5.44
+    ]
+   ]
+  },
+  {
+   "id": "o7",
+   "scene": "povArtery",
+   "silent": 7.2,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.0
+    ],
+    [
+     "ping",
+     0.32
+    ],
+    [
+     "whoosh",
+     2.24
+    ],
+    [
+     "ep07_flow",
+     2.56
+    ],
+    [
+     "pass_by",
+     3.84
+    ],
+    [
+     "pass_by",
+     5.12
+    ],
+    [
+     "pass_by",
+     6.08
+    ]
+   ]
+  },
+  {
+   "id": "o8",
+   "scene": "povMuscle",
+   "silent": 10.4,
+   "sfx": [
+    [
+     "ep07_squish",
+     0.0
+    ],
+    [
+     "pop",
+     0.8
+    ],
+    [
+     "flash",
+     3.09
+    ],
+    [
+     "power_up",
+     3.12
+    ],
+    [
+     "ep07_twitch",
+     3.15
+    ],
+    [
+     "ep07_twitch",
+     4.11
+    ],
+    [
+     "pop",
+     3.6
+    ],
+    [
+     "pop",
+     3.84
+    ],
+    [
+     "pad_wonder",
+     6.96
+    ],
+    [
+     "sun_whoosh",
+     6.72
+    ],
+    [
+     "ding",
+     8.0
+    ]
+   ]
+  },
+  {
+   "id": "o9",
+   "scene": "povReturn",
+   "silent": 8.0,
+   "sfx": [
+    [
+     "ping",
+     0.32
+    ],
+    [
+     "whoosh",
+     2.16
+    ],
+    [
+     "ep07_flow",
+     2.4
+    ],
+    [
+     "ep07_heart",
+     4.51
+    ],
+    [
+     "boom",
+     4.56
+    ],
+    [
+     "pipe_rush",
+     4.8
+    ]
+   ]
+  },
+  {
+   "id": "o10",
+   "scene": "povExhale",
+   "silent": 7.2,
+   "sfx": [
+    [
+     "ep07_squish",
+     0.32
+    ],
+    [
+     "bubble",
+     0.8
+    ],
+    [
+     "pipe_rush",
+     1.76
+    ],
+    [
+     "ep07_exhale",
+     4.16
+    ],
+    [
+     "flash",
+     4.72
+    ],
+    [
+     "ep07_birds",
+     4.8
+    ],
+    [
+     "chime",
+     5.28
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's an amazing fact. Your heart beats about a hundred thousand times every day. And it pumps your blood all the way around your body in about one minute.",
+   "hold": 1.0
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that journey? You were oxygen in the playground air. You were breathed in through the nose, down the windpipe, and into a tiny air sac. You passed into the blood, and a red blood cell carried you. The heart pumped you to a leg muscle, where you helped release energy from food. Carbon dioxide was made, and it rode the blood back to the lungs, and out!",
+   "hold": 1.0
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Five, you learn about the respiratory and circulatory systems. When you breathe in, oxygen enters your lungs and passes into your blood. Your heart pumps blood through blood vessels to every part of your body. Your cells use oxygen to release energy from food, and they make carbon dioxide. The blood carries carbon dioxide back to your lungs, and you breathe it out.",
+   "hold": 1.0,
+   "shots": [
+    [
+     "heart",
+     1.12,
+     600,
+     430
+    ],
+    [
+     "cells",
+     1.15,
+     600,
+     520
+    ],
+    [
+     "carries",
+     1.0,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Count how many times you breathe in thirty seconds, and feel your pulse on your wrist. Now jump on the spot for one minute, and count again. What changed? Why?"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why does your face turn red after you've been running? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Your lungs pass oxygen into your blood. Your heart pumps that blood around your body. Your cells use oxygen to release energy from food, and the carbon dioxide they make is carried back to your lungs and breathed out. Next time: what did the crocodile eat?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

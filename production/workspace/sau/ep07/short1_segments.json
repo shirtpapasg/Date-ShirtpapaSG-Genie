@@ -1,0 +1,184 @@
+{
+ "episode": "SAU EP07 Short 1",
+ "title": "How does oxygen get to your muscles?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "How does oxygen get to your muscles?"
+  },
+  {
+   "id": "o1",
+   "scene": "airOut",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.0
+    ],
+    [
+     "ep07_birds",
+     0.0
+    ],
+    [
+     "ep07_pant",
+     0.27
+    ],
+    [
+     "pop",
+     0.68
+    ],
+    [
+     "reveal",
+     1.21
+    ],
+    [
+     "sun_whoosh",
+     2.16
+    ]
+   ]
+  },
+  {
+   "id": "o4",
+   "scene": "povAirSac",
+   "silent": 6.75,
+   "sfx": [
+    [
+     "reveal",
+     0.14
+    ],
+    [
+     "bubble",
+     1.35
+    ],
+    [
+     "bubble",
+     2.3
+    ],
+    [
+     "bubble",
+     3.24
+    ],
+    [
+     "ep07_squish",
+     5.27
+    ],
+    [
+     "splash",
+     5.8
+    ]
+   ]
+  },
+  {
+   "id": "o5",
+   "scene": "povRBC",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.0
+    ],
+    [
+     "ep07_flow",
+     0.0
+    ],
+    [
+     "pass_by",
+     1.21
+    ],
+    [
+     "thud",
+     2.43
+    ],
+    [
+     "sparkle",
+     2.83
+    ],
+    [
+     "rush",
+     2.97
+    ]
+   ]
+  },
+  {
+   "id": "o8",
+   "scene": "povMuscle",
+   "silent": 8.78,
+   "sfx": [
+    [
+     "ep07_squish",
+     0.0
+    ],
+    [
+     "pop",
+     0.68
+    ],
+    [
+     "flash",
+     2.61
+    ],
+    [
+     "power_up",
+     2.63
+    ],
+    [
+     "ep07_twitch",
+     2.66
+    ],
+    [
+     "ep07_twitch",
+     3.47
+    ],
+    [
+     "pop",
+     3.04
+    ],
+    [
+     "pop",
+     3.24
+    ],
+    [
+     "pad_wonder",
+     5.87
+    ],
+    [
+     "sun_whoosh",
+     5.67
+    ],
+    [
+     "ding",
+     6.75
+    ]
+   ]
+  },
+  {
+   "id": "s1b",
+   "scene": "recap",
+   "text": "You were oxygen in the playground air. You were breathed in through the nose, down the windpipe, and into a tiny air sac."
+  },
+  {
+   "id": "s1c",
+   "scene": "recap",
+   "text": "You passed into the blood, and a red blood cell carried you. The heart pumped you to a leg muscle, where you helped release energy from food."
+  },
+  {
+   "id": "s1d",
+   "scene": "recap",
+   "text": "Carbon dioxide was made, and it rode the blood back to the lungs, and out!"
+  },
+  {
+   "id": "s1e",
+   "scene": "recap",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "text": "Now you know!",
+   "excited": true
+  }
+ ]
+}
