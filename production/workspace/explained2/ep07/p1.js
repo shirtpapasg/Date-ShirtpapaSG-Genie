@@ -111,7 +111,7 @@ const miniDots = (t) => thr + Array.from({ length: 9 }, (_, i) => { const u = ((
 const M1TXT = "Fungi are living things that do not make their own food. Fungi grow on another object. They produce a substance to break down the other object into simpler substances and absorb them as food.";
 SC.mark1 = (t, s) => { const L = "g1003", tG = W(L, "grow") - .1, tS = W(L, "substance") - .1, tA = W(L, "absorb") - .1, lt = (q) => t < q ? 0 : .35 + .65 * pulse(t, q, .05, 1.2), tc = W("g1004", "one") - .1;
   const under = miniDisc(1730, 330, lt(tG), `<g transform="scale(.62)">${slice()}${mould(10)}</g>`, "a") + miniDisc(1730, 570, lt(tS), miniFilm(t), "b") + miniDisc(1730, 810, lt(tA), miniDots(t), "c");
-  return markScene(t, s, { id: L, sayId: "g1002", who: "basil", n: "1 of 2", text: M1TXT, keys: ["do", "not", "make", "their", "own", "food.", "grow", "on", "another", "object.", "substance", "simpler", "substances", "absorb"], noKey: [M1TXT.split(" ").length - 1, M1TXT.split(" ").lastIndexOf("object")], size: 52, y: 196, x: 590, w: 960, extra: under + coin(t, tc, 1400, 1010, "+1", "if you showed two fingers") }); };
+  return markScene(t, s, { id: L, sayId: "g1002", who: "basil", n: "1 of 2", text: M1TXT, keys: ["do", "not", "make", "their", "own", "food.", "grow", "on", "another", "object.", "substance", "simpler", "substances", "absorb"], noKey: [M1TXT.split(" ").length - 1, M1TXT.split(" ").lastIndexOf("object")], size: 52, y: 196, x: 590, w: 960, extra: under + coin(t, tc, 1070, 972, "+1", "if you showed two fingers") }); };
 SCORE.push([W("g1004", "one") - .1, 2, 1]);
 // the small tag under the big ABSORB key word (drawn over the key-word pop)
 window.OVER2 = (t, s) => { const k = MK("kw_absorb"); return t >= k + .25 && t < k + 2.0 ? TF(960, 740, spring(t, k + .25, .4) * (1 - ramp(t, k + 1.85, .15)), tpill(0, 0, "absorb = take in", 46, "#fff", P.ink, { w: 700 })) : ""; };
@@ -128,7 +128,7 @@ SC.mushroom = (t, s) => { const a = "g1101", b = "g1102", c = "g1103", tC = W(a,
     + (t > tD ? TF(MC[0], MC[1] - 30, 1.12, sporeDust(t - tD, wind)) : "") + streaks
     + buddy("basil", 1600, 1060, 340, t, { aura: true, flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tGi + .3, "cheer"], [LT(b) - .12, "sit"], [LE(b) + .1, "cheer"]], nohop: t < LE(b) })
     + say(b, 1560, 470, t, { size: 46, tail: 60, maxW: 440 })
-    + strip(t, c, "Mushrooms have spores that are found in gills under the cap. When the wind blows, the spores are dispersed.", 130, { size: 42, maxW: 1240, x: 900, keys: ["dispersed."] })
+    + strip(t, c, "Mushrooms have spores that are found in gills under the cap. When the wind blows, the spores are dispersed.", 130, { size: 42, maxW: 1180, x: 860, keys: ["dispersed."] })
     + popTag(t, tDi + .4, 1400, 262, "dispersed = spread far and wide", 34, P.ink, "#fff") + HUD(t); };
 SC.mark2 = (t, s) => { const L = "g1105", tR = W(L, "spores") - .1, g = t < tR ? 0 : .35 + .65 * pulse(t, tR, .05, 1.2), u = t - s.t0;
   const under = miniDisc(1730, 400, g, `<rect x="-100" y="-100" width="200" height="200" fill="#EAF3E4"/>` + TF(0, 70, .36, bigMushroom()) + TF(0, 30, .3, sporeDust(1 + (u % 3), .3, 40)), "m") + miniDisc(1730, 700, g, `<g transform="scale(.62)">${slice()}${mould(10)}</g>` + TF(0, -10, .4, sporeDust(1.5 + (u % 3), .3, 40).replace(/#7A4A2E/g, "#4E6E5E")), "p");
@@ -184,7 +184,7 @@ SC.cliff = (t, s) => { const L = "g1401", p = "g1402", h = "g1403", tThen = W(L,
     + (t >= tP ? TF(1340, 470, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "")
     + wipe(t, tThen, "#DCE3EA", 1500, 400) + HUD(t); };
 // the ending: the two trays stand in the free space between Pip and Momo, each with its picture and its word above (no words in the bottom fifth)
-const endTrays = (t) => { const one = (x, kind, pic) => TF(x, 1046, .9, sortTray(kind, 300, { size: 1 }).replace(/<text[^>]*>(USEFUL|HARMFUL)<\/text>/, "") + TF(0, -62, 1, pic) + TF(0, -400, 1.4, tpill(0, 0, kind ? "HARMFUL" : "USEFUL", 36, kind ? "#2F78E8" : "#2FA65A", "#fff", { w: 700, ls: 3 })));
-  return one(636, 0, cardPic(1, t, 1)) + one(924, 1, cardPic(3, t)); };
-SC.nyk = (t, s) => nykScene(t, s, endTrays(t));
+const endTrays = (t) => { const one = (x, kind, pic) => TF(x, 1046, .8, sortTray(kind, 300, { size: 1 }).replace(/<text[^>]*>(USEFUL|HARMFUL)<\/text>/, "") + TF(0, -62, 1, pic) + TF(0, -400, 1.3, tpill(0, 0, kind ? "HARMFUL" : "USEFUL", 36, kind ? "#2F78E8" : "#2FA65A", "#fff", { w: 700, ls: 3 })));
+  return one(743, 0, cardPic(1, t, 1)) + one(997, 1, cardPic(3, t)); };
+SC.nyk = (t, s) => nykScene(t, s, endTrays(t), { bx: [230, 1700, 1340], hx: 490 });
 })(); }

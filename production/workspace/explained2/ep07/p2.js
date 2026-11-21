@@ -79,7 +79,7 @@ SC.r1 = (t, s) => { const L = "j701";
 const CAMY = [1.2, 640, 640];
 SC.yoghurt = (t, s) => { const L = "j706", tA = W(L, "two") - .1, lit = t >= tA ? spring(t, tA, .45) : 0, op = ss(s.t0 + .05, s.t0 + .4, t), [x1, l1, d1] = hopLow(t, s.t0 + 1.25, 330, 640, 900, 3, .22), [x2, l2, d2] = hopLow(t, s.t0 + 1.5, 330, 800, 910, 3, .22);
   return kitchenView(t, { tray: false, bowl: false, under: fridgeOpen(op), front: d1 + d2 + (t > s.t0 + .55 ? TF(x1, 900 - l1, 1.0, yoghurtCup()) : "") + (t > s.t0 + .8 ? TF(x2, 910 - l2, 1.0, yoghurtDrink()) : "") + TF(1040, 880, .66, ansCard(2, "No", { lit, size: 70 })) }, CAMY)
-    + buddy("pip", 1800, 1062, 200, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [tA, "cheer"]] }) + HUD(t); };
+    + buddy("pip", 1730, 1050, 200, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [tA, "cheer"]] }) + HUD(t); };
 SC.mark1 = (t, s) => { const L = "j708", tH = W(L, "harmful") - .1, tU = W(L, "useful") - .1, g = (q) => t < q ? 0 : pulse(t, q, .05, 1.2);
   const under = TF(1700, 560, .74, trayWith(1, handsCard("mh"), 1, g(tH))) + TF(1700, 960, .74, trayWith(0, yogCard("my"), 1, g(tU)));
   return markScene(t, s, { id: L, sayId: "j707", who: "basil", n: "1 of 2", text: "Some bacteria are harmful, while others are useful to us.", keys: ["harmful,", "useful"], size: 72, y: 250, x: 600, w: 900, extra: under }); };
@@ -99,7 +99,7 @@ SC.show = (t, s) => { const a = "j801", b = "j802", c = "j803", r0 = MK("ring0_2
   return bg("stage2") + TF(NOTE[0], NOTE[1], NOTE[2], clueTable(t, { lit, rows, badge }))
     + buddy("pip", 1700, 1060, 260, t, { aura: true, flip: true, in: s.t0 + .1, poses: [[s.t0, "waving"], [LT(b) - .12, "sit"], [LE(b) + .2, "thinking"], [tO - .12, "oops"]], wave: true }) + say(b, 1560, 300, t, { size: 42, tail: 120, maxW: 480 }) + say("j807", 1560, 800, t, { size: 56, tail: 100 })
     + (ringOn ? OP(1 - ss(bell + .5, bell + .8, t), TF(RX, RY, spring(t, tcn[0] - .3, .4), `<g transform="translate(${-RX} ${-RY})">${ringTimer(RX, RY, t < r0 ? 1 : rs.frac, t < r0 ? 6 : rs.secs, t, { R: 128, sw: 22, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(RX, RY + 60, .62, countHand(nf)) })}</g>`) + youPill(RX, RY - 178, 1.0) + tpill(RX, RY + 222, "line 1, 2 or 3?", 30, P.ink, "#fff")) : "")
-    + (t >= bell + .9 ? buddy("basil", 1500, 720, 190, t, { aura: true, flip: true, in: bell + .9, poses: [[bell + .9, "arms_crossed"], [tB - .12, "sit"], [LE("j805") + .1, "cheer"]] }) + pickNum("basil", 1400, 670, t, tB - .1, "1") + buddy("momo", 1780, 720, 190, t, { aura: true, flip: true, in: bell + 1.0, poses: [[bell + 1, "thinking"], [tM - .12, "sit"], [LE("j806") + .1, "pointing"]] }) + pickNum("momo", 1880, 670, t, tM - .1, "1")
+    + (t >= bell + .9 ? buddy("basil", 1500, 720, 190, t, { aura: true, flip: true, in: bell + .9, poses: [[bell + .9, "arms_crossed"], [tB - .12, "sit"], [LE("j805") + .1, "cheer"]] }) + pickNum("basil", 1400, 670, t, tB - .1, "1") + buddy("momo", 1752, 720, 190, t, { aura: true, flip: true, in: bell + 1.0, poses: [[bell + 1, "thinking"], [tM - .12, "sit"], [LE("j806") + .1, "pointing"]] }) + pickNum("momo", 1850, 670, t, tM - .1, "1")
       + say("j805", 1600, 400, t, { size: 38, tail: -100, maxW: 480 }) + say("j806", 1640, 410, t, { size: 40, tail: 140, maxW: 460 }) : "")
     + stamp(t, LT("j804") - .08, 860, 480) + bellIcon(t, r0) + HUD(t); };
 SC.fixed = (t, s) => { const h = "j808", tc = W("j809", "two") - .1, rub = ss(s.t0 + .15, s.t0 + .6, t), wr = ss(s.t0 + .65, s.t0 + 1.5, t), tR = W(h, "read") - .1;
@@ -118,7 +118,7 @@ SC.map = (t, s) => { const [bx, dd] = slideX(t, s.t0 + .1, .7, 2900, 960, 1040),
     + strip(t, L, "Fungi and bacteria are also living things.", 1010, { size: 46 }) + HUD(t); };
 
 /* ============ 10 · the chant ============ */
-SC.chant = (t, s) => chantScene(t, s, "c1003", { x: 1000, size: 70, board: (fl) => TF(226, 1040, .26, mapBoard(t, {}, { flash: [0, 0, fl[0], fl[1]] })) + TF(1630, 1044, .5, sortTray(0, 300, { flash: fl[2] })) + TF(1806, 1044, .5, sortTray(1, 300, { flash: fl[2] })) });
+SC.chant = (t, s) => chantScene(t, s, "c1003", { x: 1000, size: 70, board: (fl) => TF(226, 1040, .26, mapBoard(t, {}, { flash: [0, 0, fl[0], fl[1]] })) + TF(1630, 1030, .46, trayWith(0, yogCard("cy"), 1, fl[2])) + TF(1806, 1030, .46, trayWith(1, handsCard("ch"), 1, fl[2])) });
 
 /* ============ 11 · Exam corner ============ */
 SC.exambanner = (t, s) => bg("stage") + examBanner(t, s.t0 + .05, 960, 520, 1.6) + HUD(t);
