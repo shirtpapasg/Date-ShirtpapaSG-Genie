@@ -42,8 +42,8 @@ SC.goals = (t, s) => goals3(t, s, [["One object, different materials", ""], ["Ma
 
 /* 4 · Round 1: a bottle for school (clue labels must not break when dropped · see the water inside on top of the ring, kept through the countdown) */
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1");
-const r1labels = (t) => [["must not break when dropped", W(L1, "must") - .1], ["see the water inside", W(L1, "see") - .1]].map(([l, tq], i) => t < tq ? "" : TF(430 + (i ? 150 : -120), 470 - RING_R - 14 - (i ? 0 : 50), spring(t, tq, .4), tpill(0, 0, l, 28, "#fff", P.ink, { w: 700 }))).join("");
-SC.r1 = (t, s) => lockN(t, { cards: ["Plastic", "Glass", "Metal"], labels: r1labels, q: "Which bottle for school?", tq: W(L1, "water") - .1, tc: [W(L1, "one", 1), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 6, lock: "j402",
+SC.r1 = (t, s) => lockN(t, { cards: ["Plastic", "Glass", "Metal"], clues: [["must not break when dropped", W(L1, "must") - .1], ["see the water inside", W(L1, "see") - .1]], q: "Which bottle for school?", tq: W(L1, "water") - .1, tc: [W(L1, "one", 1), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 6, lock: "j402", lead: "momo",
+  t0: s.t0, pics: BKINDS.map((k, i) => TF(0, 108, 1.0, bottleSvg(k, { id: "r1b" + i }))),
   obj: (tt) => TF(410, 590, 1.12, bagS({ pocket: true })), picks: [{ who: "momo", id: "j403", word: "3", x: true }, { who: "basil", id: "j404", word: "1" }, { who: "pip", id: "j405", word: "1" }],
   react: [[LE("j403") + .1, "momo", "thinking"], [LE("j404") + .1, "basil", "cheer"], [LE("j405") + .1, "pip", "pointing"]] });
 
@@ -125,7 +125,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 54, x: 48
 /* 12 · score hand, the squirrel (lizReveal in common.js): it runs along the branch, sits up and flicks its tail */
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1, u = clamp((t - (s.t0 + 1.4)) / .9), run = 150 * (1 - eio(u)) * (t >= s.t0 + 1.4 ? 1 : 1);
-  return lizReveal(t, s, L, V(t, { board: {}, sq: { run: t < s.t0 + 1.4 ? 150 : run, up: ss(s.t0 + 2.4, s.t0 + 2.8, t), flick: t > s.t0 + 2.8 ? 22 * Math.sin((t - s.t0) * 9) : 0 } }), SQ[0] - 6 + (t < s.t0 + 1.4 ? 150 : run), SQ[1] - 36, tq, "It was on the tree by the cars!", 0, 190, 78, 1.9, { from: () => SC.final(SCN.final.t1 - .04, SCN.final) }); };
+  return lizReveal(t, s, L, V(t, { board: {}, sq: { run: t < s.t0 + 1.4 ? 150 : run, up: ss(s.t0 + 2.4, s.t0 + 2.8, t), flick: t > s.t0 + 2.8 ? 22 * Math.sin((t - s.t0) * 9) : 0 } }), SQ[0] - 6 + (t < s.t0 + 1.4 ? 150 : run), SQ[1] - 36, tq, "It was on the tree by the cars!", 0, 0, 78, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "j1202t", ir: 220, qx: 560, qy: 760, fact: (tt) => factBeat(tt, "j1202f", squirrelNest) }); };
 
 /* 13 · the dare for Episode 13: the SAME school bag three times, its strap torn off at one end, each with a new strap lying beside it
    (PIC.bagFabric / bagMetal / bagWood: EP13 opens with these same boards and cards) */

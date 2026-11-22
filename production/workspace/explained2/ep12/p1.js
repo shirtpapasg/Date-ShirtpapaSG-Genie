@@ -81,9 +81,9 @@ SC.things = (t, s) => { const [bx, bd] = slideX(t, s.t0 + .1, .6, 2300, 930, TRY
    of the ring frame, kept through the countdown (lockN c.labels); EP11's boards small on the three cards (real art) */
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1", "YOUR ANSWER FROM LAST TIME");
 const r1labels = (t) => { const tq = W(L1, "glass") - .1; return t < tq ? "" : ["for heavy groceries", "gets knocked"].map((l, i) => TF(430 + (i ? 130 : -140), 470 - RING_R - 14 - (i ? 0 : 46), spring(t, tq + i * .15, .4), tpill(0, 0, l, 30, "#fff", P.ink, { w: 700 }))).join(""); };
-SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, labels: r1labels, q: DARE_LABEL, tq: W(L1, "glass") - .1, tc: [W(L1, "glass"), W(L1, "metal"), W(L1, "fabric")], ring0: MK("ring0_r1"), dur: 3, lock: "g702",
-  icons: [0, 1, 2].map((i) => dareBoard(i, 0, 0, .36, { lab: false, id: "r1i" })),
-  obj: (tt) => TF(440, 580, .74, trolleyS({ load: LOADED })), over: (tt) => qMark(tt, W(L1, "glass") - .1, 1262, 210, 40),
+SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, clues: [["for heavy groceries", W(L1, "glass") - .1], ["gets knocked", W(L1, "glass") + .05]], q: DARE_LABEL, tq: W(L1, "glass") - .1, tc: [W(L1, "glass"), W(L1, "metal"), W(L1, "fabric")], ring0: MK("ring0_r1"), dur: 3, lock: "g702", lead: "basil",
+  t0: s.t0, pics: DARE.map(([nm]) => TF(0, 4, .96, PIC[nm]())),
+  obj: (tt) => TF(440, 580, .74, trolleyS({ load: LOADED })),
   picks: [{ who: "pip", id: "g704", word: "3", x: true }, { who: "basil", id: "g703", word: "1", x: true }, { who: "momo", id: "g705", word: "2" }],
   react: [[LE("g703") + .1, "basil", "cheer"], [LE("g704") + .1, "pip", "thinking"], [LE("g705") + .1, "momo", "pointing"]] });
 
@@ -156,7 +156,7 @@ SC.pullout = (t, s) => V(t, { trol: { load: LOADED }, board: {} }, camL([4.6, TB
 SC.final = (t, s) => { const L = "g1301"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1, u = t - (s.t0 + 1.6);
   const act = { hop: u > 0 ? 26 * Math.abs(Math.sin(Math.PI * clamp(u / .45))) + 14 * Math.abs(Math.sin(Math.PI * clamp((u - .6) / .4))) : 0, flap: pulse(t, s.t0 + 2.3, .12, .5), tilt: u > 1.4 ? 16 * Math.sin((u - 1.4) * 7) : undefined };
-  return lizReveal(t, s, L, V(t, { trol: { load: LOADED }, mynah: act }), MYNAH[0] + 6, MYNAH[1] - 30, tq, "It was on the trolley bay sign!", 200, 150, 70, 1.9, { from: () => SC.final(SCN.final.t1 - .04, SCN.final) }); };
+  return lizReveal(t, s, L, V(t, { trol: { load: LOADED }, mynah: act }), MYNAH[0] + 6, MYNAH[1] - 30, tq, "It was on the trolley bay sign!", 0, 0, 70, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "g1302t", ir: 220, qx: 560, qy: 760, fact: (tt) => factBeat(tt, "g1302f", mynahNest) }); };
 
 /* 14 · the cliffhanger: the trolley from above; three water bottles stand in a row in its fold-down flap (plastic, glass, metal) */
 SC.cliff = (t, s) => { const a = "g1401", c = "g1403", TX = 900, TY = 580, S = 1.45, tP = W(c, "find") - .1, tb = [MK("b1"), MK("b2"), MK("b3")], bx = (i) => TX + S * (-266 + i * 62), by = TY + S * 104;

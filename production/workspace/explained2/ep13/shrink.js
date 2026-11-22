@@ -43,6 +43,15 @@ if (PART === 1) SC.shrink = (t, s) => { const tin = MK("jin"), tz = MK("jzipclos
       + strapsUp + wall(-1, 1, BOOKC[1]) + wall(1, 1, BOOKC[3]) + wall(-1, 0, BOOKC[2]) + wall(1, 0, BOOKC[4]) + specks
       + `<path d="M-40 1090 L260 ${n2(900 + bump * .4)} H1660 L1960 1090z" fill="${BOOKC[0]}" stroke="${P.ink}" stroke-width="8" stroke-linejoin="round"/><rect x="760" y="${n2(940 + bump * .4)}" width="400" height="110" rx="14" fill="#fff" opacity=".9"/><path d="M800 ${n2(980 + bump * .4)} H1120 M800 ${n2(1016 + bump * .4)} H1010" stroke="${P.ink}" stroke-width="8" opacity=".4" stroke-linecap="round"/>`
       + `<rect width="1920" height="1080" fill="#3A1A00" opacity="${n2(.3 * dark)}"/>`
+      // EP13 v2 (teacher, 22 Nov: "Can we bring the 3 pet buddies along? Or even include the audience"): the three buddies, shrunk, ride along on
+      // the top edge of YOUR book (Momo from behind, looking up with you); they hold on as the zip closes, wobble as the bag lifts, cheer when the
+      // straps hold; your own bookmark ribbon hangs from your cover. Small and low, so the view still reads.
+      + (() => { const wob_ = (t >= tst ? 6 * Math.sin((t - tst) * 3.2) * (t < tb ? 1 : Math.exp(-(t - tb) * 2)) : 0), by = 905 + bump * .4, kin = (d) => s.t0 + 1.2 + d;
+        const rib = `<path d="M1500 ${n2(by - 4)} Q${n2(1520 + 14 * Math.sin(t * 2.2))} ${n2(by + 70)} ${n2(1505 + 10 * Math.sin(t * 2.2 + 1))} 1090" fill="none" stroke="#E11D48" stroke-width="30" stroke-linecap="butt"/><path d="M1490 1060 L1505 1090 L1520 1060" fill="#E11D48"/>`;
+        const ride = (who, x, h, ps, fl, jmp) => buddy(who, x, by + 6, h, t, { aura: true, auraO: .55, flip: fl, in: kin(x / 2000), poses: ps, look: wob_ * (fl ? -1 : 1), jump: jmp, tag: false });
+        return rib + ride("pip", 470, 220, [[s.t0, "sit"], [tz - .2, "surprised"], [tz + 1.6, "thinking"], [tst + .2, "arms_crossed"], [tt + .1, "cheer"], [tb, "oops"], [tb + .7, "sit"]], false, [[tt + .15, 26]])
+          + ride("momo", 960, 210, [[s.t0, "back"], [tt + .05, "cheer"], [tb, "surprised"], [tb + .8, "back"]], false, [[tt + .2, 30]])
+          + ride("basil", 1440, 210, [[s.t0, "sit"], [tz - .1, "arms_crossed"], [tu, "surprised"], [tt + .15, "cheer"], [tb, "surprised"]], true, [[tt + .25, 26]]); })()
       + feelTag(t, tz + .5, tst - .3, "metal zip · closes") + feelTag(t, tt + .2, tb - .2, "fabric straps · no tear");
   }
   if (t >= CUT - .4) {   // a cut-away at the bottom of the bag: you and the other books on the dry floor; outside, a thin shining line of water against the plastic base
@@ -52,6 +61,11 @@ if (PART === 1) SC.shrink = (t, s) => { const tin = MK("jin"), tz = MK("jzipclos
     v += `<path d="M-40 ${FYy} H${WX} V${FYy - 210} Q${WX} ${FYy - 250} ${WX + 40} ${FYy - 250} H${WX + 70} V${FYy + 80} H-40z" fill="url(#sBase)" stroke="#2B2147" stroke-width="8" stroke-linejoin="round"/><path d="M0 ${FYy + 22} H${WX - 30}" stroke="#fff" stroke-width="8" opacity=".3" stroke-linecap="round"/><rect x="-40" y="${FYy + 80}" width="2000" height="300" fill="#C9D6DC"/><path d="M-40 ${FYy + 80} H1960" stroke="#A9B8C0" stroke-width="5"/>`;
     const wk = ramp(t, tw_ - .6, .8); v += OP(wk, `<path d="M${WX + 70} ${FYy + 50} Q${WX + 200} ${n2(FYy + 44 + 4 * Math.sin(t * 3))} ${WX + 330} ${FYy + 52} T${WX + 640} ${FYy + 50} V${FYy + 80} H${WX + 70}z" fill="#9BD8FF" opacity=".9"/><path d="M${WX + 74} ${FYy + 50} Q${WX + 200} ${n2(FYy + 44 + 4 * Math.sin(t * 3))} ${WX + 330} ${FYy + 52} T${WX + 640} ${FYy + 50}" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round"/>` + lcGlint(WX + 180, FYy + 44, 18, t) + lcGlint(WX + 400, FYy + 48, 14, t, 2));
     v += t >= tw_ ? ltag(t, tw_ + .1, WX + 330, FYy - 330, "water", WX + 300, FYy + 44, { size: 44 }) + ltag(t, tw_ + .9, 620, FYy + 190, "dry", 700, FYy + 30, { size: 44, fill: GOODC, ink: "#fff" }) + [0, 1, 2].map((i) => lcGlint(300 + i * 330, FYy + 36, 14, t, i * 1.7)).join("") : "";
+    // EP13 v2: the buddies peek over the tops of the books beside you; YOUR book is named; they gasp at the water, cheer when you stay dry
+    v += TF(595, FYy - 650 + sh, spring(t, CUT + .2, .4), tpill(0, 0, "you", 40, P.sun, P.ink, { w: 700 }))
+      + buddy("pip", 330, FYy - 560 + sh + 8, 170, t, { aura: true, auraO: .6, in: CUT + .3, poses: [[CUT, "sit"], [tw_ - .1, "surprised"], [tg, "cheer"]], tag: false, jump: [[tg + .05, 30]] })
+      + buddy("momo", 860, FYy - 540 + sh + 8, 160, t, { aura: true, auraO: .6, in: CUT + .45, poses: [[CUT, "back"], [tw_ + .4, "surprised"], [tg, "cheer"]], tag: false, jump: [[tg + .12, 30]] })
+      + buddy("basil", 1110, FYy - 590 + sh + 8, 170, t, { aura: true, auraO: .6, flip: true, in: CUT + .6, poses: [[CUT, "sit"], [tw_, "arms_crossed"], [tg, "cheer"]], tag: false, jump: [[tg + .2, 30]] });
     v += feelTag(t, tw_ - .8, s.t1 - .5, "plastic base · water stays out", 300) + (t >= tg ? TF(960, 520, spring(t, tg, .5) * (1 + .05 * Math.sin(t * 5)), `<g filter="url(#glowS)">${propChip("WATERPROOF", 80)}</g>`) : "");
     out = t < CUT ? out : v; }
   return out + dip(t, CUT, "#FFF6D8", .4) + youTag(t, tin, "You: a book") + OP(ramp(t, tin + .6, .4) * (1 - ramp(t, tz, .3)), tpill(960, 76, "inside the bag", 36, P.ink, P.sun, { w: 700 })) + wipe(t, s.t0, "#FFF6D8") + logo(t); };

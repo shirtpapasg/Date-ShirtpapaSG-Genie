@@ -4,7 +4,7 @@
 // front view, as on EP12's dare boards), the exercise books (bookC, bookFlat), the three candidate straps (strapBand), the classroom chair seen
 // from behind (chairS), the teacher's table (tTable), an adult's hand (aHand), the paper and the pencil drawing (bagDrawing), the sample tiles
 // (sampleTile), the dropper, the short metal zip (zipShort), the hard-hat card, the wet-floor picture, the hidden butterfly (butterfly).
-const XDEFS13 = () => `${lg("sBag", [[0, "#FFA64D"], [1, "#F27A12"]])}${lg("sPocket", [[0, "#FFC07A"], [1, "#FFA347"]])}${lg("sBase", [[0, "#66739A"], [1, "#39435A"]])}${lg("sSteel", [[0, "#F4F7FB"], [.5, "#B9C3D4"], [1, "#8490A8"]])}
+const XDEFS13 = () => `<filter id="dimF" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values=".25 .25 .25 0 .42  .25 .25 .25 0 .42  .25 .25 .25 0 .45  0 0 0 1 0"/></filter>${lg("sBag", [[0, "#FFA64D"], [1, "#F27A12"]])}${lg("sPocket", [[0, "#FFC07A"], [1, "#FFA347"]])}${lg("sBase", [[0, "#66739A"], [1, "#39435A"]])}${lg("sSteel", [[0, "#F4F7FB"], [.5, "#B9C3D4"], [1, "#8490A8"]])}
   ${lg("sWood", [[0, "#D9A56A"], [1, "#A9703C"]])}${lg("sChair", [[0, "#7DB7E8"], [1, "#4C8CCB"]])}${lg("sWall", [[0, "#FFF6E0"], [1, "#FBE7C4"]])}${lg("sWall2", [[0, "#FBEBCB"], [1, "#F3DAB0"]])}${lg("sFloor", [[0, "#D9E2D2"], [1, "#B5C4B0"]])}
   ${lg("sSky", [[0, "#8FD0FF"], [1, "#E6F6FF"]])}${lg("sDesk", [[0, "#F2D7A6"], [1, "#DDB97C"]])}${lg("vdSteel", [[0, "#F2F5F9"], [.5, "#C9D1DC"], [1, "#9AA5B4"]], 1, 0)}${lg("vdBrass", [[0, "#F5D27A"], [1, "#C9922E"]])}${lg("vdGlove", [[0, "#FFD76A"], [1, "#F0A93A"]])}
   ${lg("gSkyG", [[0, "#8FD0FF"], [.7, "#DDF2FF"], [1, "#F4FBFF"]])}${lg("gGrass", [[0, "#9FDB7F"], [1, "#6FBF5E"]])}${lg("gPond", [[0, "#8FD6F2"], [1, "#4FA8D8"]])}${lg("gEarth", [[0, "#E7CFA2"], [1, "#CFAE78"]])}${lg("gRail", [[0, "#E0B07A"], [.5, "#C48A4E"], [1, "#9A6535"]])}
@@ -53,7 +53,7 @@ function bag13(o = {}) { const zo = clamp(o.zip || 0), op = clamp(o.open || 0), 
   const all = straps + body + base + zip;
   if (!o.lit) return all;
   const part = { straps, body, zip, base }[o.lit];
-  return OP(.28, all) + `<g filter="url(#glowS)">${part}</g>`; }
+  return `<g filter="url(#dimF)">${all}</g>` + `<g filter="url(#glowS)">${part}</g>`; }   // EP13 v2: the other parts greyed but OPAQUE (no see-through "ghost")
 // exercise books: the cover (96 x 128, origin = its centre) and lying flat, seen from the side (128 x 14, origin = its bottom middle)
 const bookC = (i, sc = 1) => TF(0, 0, sc, `<rect x="-48" y="-64" width="96" height="128" rx="7" fill="${BOOKC[i % 5]}" stroke="${P.ink}" stroke-width="4"/><rect x="-48" y="-64" width="16" height="128" rx="6" fill="${P.ink}" opacity=".22"/><rect x="-20" y="-40" width="56" height="34" rx="5" fill="#fff"/><path d="M-12 -28 H28 M-12 -17 H16" stroke="${P.ink}" stroke-width="3" opacity=".5" stroke-linecap="round"/>`);
 const bookFlat = (i) => `<rect x="-64" y="-14" width="128" height="14" rx="4" fill="${BOOKC[i % 5]}" stroke="${P.ink}" stroke-width="3.5"/><path d="M-58 -5 H58" stroke="#fff" stroke-width="3" opacity=".7"/>`;

@@ -95,7 +95,7 @@ function strapsArt(t) { const t1 = MK("lay1"), t2 = MK("lay2"), t3 = MK("lay3"),
       + (t >= tp - .35 && t < tp + .5 ? OP(1 - ramp(t, tp + .2, .3), aHand(anchor[0] + 30, anchor[1] - 6, 180, 1.1)) + lcHit(anchor[0], anchor[1] - 30, pulse(t, tp, .02, .4)) : "")
       + (hp ? OP(ramp(t, tl - .35, .2), aHand(hp[0] + 6, hp[1] + 26, 90, 1.25)) : "")
       + (t >= tn ? pline(anchor[0] + 20, anchor[1], 360, -150, ramp(t, tn, .2)) + TF(480, -130, spring(t, tn, .45), weaveRing(150, "seam", "st")) : "")
-      + lcLab(t, tn + .5, -590, 205, "a bag full of books", -380, 60, { size: 40 }) + lcLab(t, tn + .9, 590, 80, "no tear", 520, 10, { size: 46, fill: GOODC, ink: "#fff" })
+      + lcLab(t, tn + .5, -610, -10, "a bag full of books", -400, 40, { size: 40 }) + lcLab(t, tn + .9, 590, 80, "no tear", 520, 10, { size: 46, fill: GOODC, ink: "#fff" })
       + chipAt(t, tS, 600, 190, "STRONG", 42) + chipAt(t, tv + .15, 350, 190, "FLEXIBLE", 42); }
   return kB <= 0 ? A : kB >= 1 ? B : A + OP(kB, B); }
 

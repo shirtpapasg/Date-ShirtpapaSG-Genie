@@ -43,7 +43,7 @@ for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0); 
 // real-place scene, low and ducked under speech, crossfading between places. Walkway: shoppers murmuring, a child's laugh now and then, a
 // trolley rattling past, the checkout scanner's beep, the door chime. Aquarium shop: the filter bubbling and its hum. Car park: wind in the
 // rain tree, a car passing far off (the birds are the BD regions above). Library sounds only (../../sau/sfx), each loaded once.
-{ const LIB = {}, lib = (f) => LIB[f] || (LIB[f] = MIX.loadAudio(path.join(SFX, f), {})), AK = +(process.env.AMBK || 6);   // AK: the bed's level (measured: the place bed sits about 12 dB under Heart)
+{ const LIB = {}, lib = (f) => LIB[f] || (LIB[f] = MIX.loadAudio(path.join(SFX, f), {})), AK = +(process.env.AMBK || 12);   // AK: the bed's level (measured: the place bed sits about 12 dB under Heart)
   const put = (f, t, g, pan = 0) => { const x = lib(f), i0 = Math.round(t * SR), a = (pan + 1) * Math.PI / 4, gl = Math.cos(a) * Math.SQRT2, gr = Math.sin(a) * Math.SQRT2; for (let i = 0; i < x.n && i0 + i < N; i++) { if (i0 + i < 0) continue; amb.L[i0 + i] += x.L[i] * g * gl * AK; amb.R[i0 + i] += x.R[i] * g * gr * AK; } };
   const PL = PART == 1 ? { walk: { cold: 1, board: 1, title: .5, game: .45, trolley: 1, lcjob: .45, things: 1, lcmetal: .45, glass: .8, fabric: 1, metalans: .8, holdon: .35, fishnext: .8, tankrow: .7, waitw: .9, pullout: .8, liz: 1, cliff: .35 }, tank: { fishnext: .6, lctank: 1, tankrow: .8 } }
     : { park: { place: 1, game: .45, boot: 1, lcbottles: .45, bottleans: .8, lccar: .45, waitw: .9, show: .3, fix: .3, board: .3, liz: 1, dare: .5 } };

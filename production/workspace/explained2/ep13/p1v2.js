@@ -33,7 +33,7 @@ const tableStuff = (o) => (o.bag === "lying" ? bagLying() : o.bag === "new" ? ba
 const V = (t, o = {}, cam) => VC(t, { bfly: o.bfly, items: (o.back || "") + tableStuff(o) + (o.board === undefined ? "" : brdAt(t, o.boardP || HOME, o.board)) + (o.items || "") }, cam);
 const VD = (t, o = {}, cam, a = .62) => V(t, o, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${a}"/>`;
 // buddy slots in the classroom: L (left), R2 (right of centre), R1 (right); sizes 1.5x the old discs
-const SL = { L: 300, R2: 1190, R1: 1630 };
+const SL = { L: 300, R2: 1190, R1: 1605 };
 const bud = (who, slot, h, t, o = {}) => buddy(who, SL[slot], 1062, h, t, { aura: true, flip: slot !== "L", ...o });
 // a gentle nod (agreeing) as a lean that bobs for d seconds
 const nodAt = (t, t0, d = 1.2, a = 5) => t < t0 || t > t0 + d ? 0 : a * Math.sin((t - t0) * 9) * (1 - (t - t0) / d);
@@ -42,7 +42,7 @@ const poses = (...p) => p.filter((x) => x && x[0] !== undefined).sort((a, b) => 
 
 /* ---------- a face that peeks in from a lower corner of a look-closer panel and reacts (gasp / nod / thinking) ---------- */
 function peek(t, who, tin, tout, ps, o = {}) { const k = ss(tin, tin + .45, t) * (1 - ss(tout - .35, tout, t)); if (k <= .01) return "";
-  const W_ = LCW, x0 = W_.x - W_.w / 2, y0 = W_.y - W_.h / 2, side = o.side || -1, h = o.h || 600, x = side < 0 ? x0 + (o.dx || 200) : x0 + W_.w - (o.dx || 200), bottom = y0 + W_.h, y = bottom + h * .52 + (1 - k) * h * .62;
+  const W_ = LCW, x0 = W_.x - W_.w / 2, y0 = W_.y - W_.h / 2, side = o.side || -1, h = o.h || 480, x = side < 0 ? x0 + (o.dx || 200) : x0 + W_.w - (o.dx || 200), bottom = y0 + W_.h, y = bottom + h * .52 + (1 - k) * h * .62;
   let look = o.look || 0; for (const [tn, d, a] of o.nods || []) look += nodAt(t, tn, d, a);
   return `<clipPath id="pk_${who}"><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" rx="44"/></clipPath><g clip-path="url(#pk_${who})">` + buddy(who, x, y, h, t, { aura: true, flip: side > 0, poses: ps, look, nohop: true, tag: false }) + `</g>`
     + OP(k, TF(x + (side < 0 ? 0 : 0), bottom - 26, 1, nameTag(who, 30))); }
@@ -135,7 +135,7 @@ SC.r1 = (t, s) => { const tq = W(L1, "fabric") - .1, tc = [W(L1, "fabric"), W(L1
   const tPip = LT("g505"), tMomo = LT("g504"), tBas = LT("g503"), tin2 = bell + .15, zb = ss(bell + .1, bell + .6, t), up = lerp(0, -70, zb), gs = lerp(1, .9, zb);
   // the ring and its picture
   const inner = `<circle cx="0" cy="0" r="172" fill="url(#mSky)"/>` + TF(0, 96, .78, bag13({ strapR: "torn", id: "rg" }));
-  let main = bigRing(t, R1X, R1Y, R1S, r0, dur, inner) + clue(t, tq + .1, R1X - 170, R1Y - 275, DARE_CLUES[0]) + clue(t, tq + .25, R1X + 150, R1Y - 196, DARE_CLUES[1]);
+  let main = bigRing(t, R1X, R1Y, R1S, r0, dur, inner) + clue(t, tq + .1, R1X - 170, R1Y - 275, DARE_CLUES[0]) + clue(t, tq + .25, R1X - 210, R1Y - 150, DARE_CLUES[1]);
   // the cards: each pops as Heart says it; while the ring drains the highlight steps card to card ON the ticks
   [0, 1, 2].forEach((i) => { const k = spring(t, tc[i] - .08, .45); if (k < .02) return; const step = t >= r0 && t < bell ? (Math.floor((t - r0) * 2) % 3 === i ? 1 : 0) : 0;
     main += TF(CX3[i], CY3, k * .92, strapCard(i, { pulse: Math.max(step * (.5 + rs.tick), pulse(t, tc[i], .04, .5)) })); });
@@ -164,7 +164,7 @@ SC.r1 = (t, s) => { const tq = W(L1, "fabric") - .1, tc = [W(L1, "fabric"), W(L1
 SC.lcstraps = (t, s) => { const tl = MK("lift"), tn = MK("notear"), tv = MK("v_straps");
   return lookCloser(t, s, { tz: s.t0, fx: CL.chx, fy: 690, art: strapsArt, set: (tt) => V(tt, { bag: "lying", bfly: false }, camL(CAM0, [1.3, 1020, 740], eio((tt - s.t0) / 1.0))),
     verdict: [`FABRIC: <tspan fill="#fff">FLEXIBLE AND STRONG</tspan>`, GOODC, { plain: "FABRIC: FLEXIBLE AND STRONG", vx: 1080 }], tv, over: (tt) => smallPrint(tt, s.t0 + 1.2, FORCE_RULE),
-    top: (tt) => peek(tt, "pip", s.t0 + 1.6, s.t1 + 1, poses([s.t0, "thinking"], [MK("lay1") + .3, "pointing"], [MK("lay2") + .2, "thinking"], [MK("lift") - .1, "surprised"], [tn + .2, "cheer"], [tv, "cheer"]), { nods: [[tn + .3, 1.4, 6], [tv + .1, 1.6, 6]] }) }); };
+    top: (tt) => peek(tt, "pip", s.t0 + 1.6, s.t1 + 1, poses([s.t0, "thinking"], [MK("lay1") + .3, "pointing"], [MK("lay2") + .2, "thinking"], [MK("lift") - .1, "surprised"], [tn + .2, "cheer"], [tv, "cheer"]), { h: 470, dx: 170, nods: [[tn + .3, 1.4, 6], [tv + .1, 1.6, 6]] }) }); };
 
 /* ============ the answer: ONE set of big numbered strap cards, the verdict tags ON them; card 1 glows; Basil (big) goes "oops"; the coin clear of the shelf ============ */
 SC.strapans = (t, s) => { const L = "g605", tA = W(L, "one") - .1, tOne = W(L, "one", 2) - .1, hb = HAS("g606"), tg = MK("boardtags");
@@ -203,16 +203,16 @@ function bagArt2(t) { const S = BH.S, FY = BH.FY, TY = BH.TY, CH = BH.CH, RAILY 
   // where each part is (art coords, before the push-in)
   const PP = { straps: [bx - 62, hung ? RAILY + 20 : by - 250 * S], body: [bx, by - 100 * S], zip: [bx, by - 172 * S], base: [bx, by - 18 * S] };
   // the push-in: on each part as it is named (p_*) and as it does its job (u_*); back out between
-  let C = [430, 60], Z = 1; const zk = (a, b) => ss(a, a + .5, t) * (1 - ss(b - .4, b, t));
-  const beats = [...tp.map((x, i) => [x - .25, i < 3 ? tp[i + 1] - .05 : tp[3] + 2.3, PARTN[i], 1.75]), ...tu.map((x, i) => [x - .5, x + 1.7, PARTN[i], 1.45])];
-  for (const [a, b, p, zz] of beats) { const kk = zk(a, b); if (kk > 0) { C = [lerp(C[0], PP[p][0], kk), lerp(C[1], PP[p][1], kk)]; Z = lerp(Z, zz, kk); } }
-  const F = [410, 20], map = (p) => [F[0] + Z * (p[0] - C[0]) + (1 - Math.min(1, (Z - 1) / .45)) * (C[0] - F[0]) * 0, 0];
-  const M = (p) => Z === 1 ? p : [F[0] + Z * (p[0] - C[0]) * 1 + (C[0] - F[0]) * (1 - clamp((Z - 1) / .45)), F[1] + Z * (p[1] - C[1]) + (C[1] - F[1]) * (1 - clamp((Z - 1) / .45))];
-  const zt = Z === 1 ? "" : (() => { const e = clamp((Z - 1) / .45), ox = lerp(C[0], F[0], e), oy = lerp(C[1], F[1], e); return `translate(${n2(ox)} ${n2(oy)}) scale(${n2(Z)}) translate(${n2(-C[0])} ${n2(-C[1])})`; })();
+  // the push-in: C = the part (art), F = where it lands, Z = the zoom; blended in and out on the beats (one smooth move, never a cut)
+  const FY_ = { straps: -170, body: 70, zip: -20, base: 190 }; let C = [470, 0], F = [470, 0], Z = 1; const zk = (a, b) => ss(a, a + .5, t) * (1 - ss(b - .4, b, t));
+  const beats = [...tp.map((x, i) => [x - .25, i < 3 ? tp[i + 1] - .05 : tp[3] + 2.3, PARTN[i], 1.45]), ...tu.map((x, i) => [x - .5, x + 1.7, PARTN[i], 1.3])];
+  for (const [a, b, p, zz] of beats) { const kk = zk(a, b); if (kk > 0) { C = [lerp(C[0], PP[p][0], kk), lerp(C[1], PP[p][1], kk)]; F = [lerp(F[0], 470, kk), lerp(F[1], FY_[p], kk)]; Z = lerp(Z, zz, kk); } }
+  const e = clamp((Z - 1) / .3), O = [lerp(C[0], F[0], e), lerp(C[1], F[1], e)], M = (p) => [O[0] + Z * (p[0] - C[0]), O[1] + Z * (p[1] - C[1])];
+  const zt = Z === 1 ? "" : `translate(${n2(O[0])} ${n2(O[1])}) scale(${n2(Z)}) translate(${n2(-C[0])} ${n2(-C[1])})`;
   // the straps over the rail while it hangs
   const hs = hung ? [-1, 1].map((sd) => ribbon([[bx + sd * 58 * S, by - 236 * S], [bx + sd * 62, RAILY - 30]], 28, sd > 0 ? {} : { plain: true, col: "#F58A2E", edge: BAGL }) + `<path d="M${bx + sd * 62 - 18} ${n2(RAILY - 31)} h36" stroke="${sd > 0 ? "#8A3A06" : BAGL}" stroke-width="10" stroke-linecap="round"/>`).join("") : "";
   const bag = `<g transform="translate(${n2(bx)} ${n2(by)}) rotate(${n2(rot)}) scale(${S} ${n2(S * sq)})">${bag13({ strapR: hung ? "none" : "new", strapL: hung ? "none" : "ok", zip: zo, open: zo, books: nb, lit, id: "lb" })}</g>`;
-  const hsL = hung ? (lit === "straps" ? `<g filter="url(#glowS)">${hs}</g>` : lit ? OP(.28, hs) : hs) : "";
+  const hsL = hung ? (lit === "straps" ? `<g filter="url(#glowS)">${hs}</g>` : lit ? `<g filter="url(#dimF)">${hs}</g>` : hs) : "";
   let fly = "", stack = ""; [0, 1, 2, 3, 4].forEach((i) => { const ti = tb + .1 + i * .22, u = clamp((t - (ti - .22)) / .22); if (t >= ti) return; if (u <= 0) { stack += TF(400 + (i % 2) * 8, TY - (4 - i) * 19, 1.25, bookFlat(i)); return; }
     const x = lerp(400, P0[0], eio(u)), y = lerp(TY - 50, TY - 176 * S - 60, eio(u)) - 90 * Math.sin(Math.PI * u); fly += TF(x, y, 1.0, bookC(i), 20 * (1 - u)) + aHand(x + 36, y - 20, 160, .9); });
   const zp = qbz(ZA[0], ZA[1], ZA[2], 1 - zo * .92), zx = bx + S * zp[0], zy = by + S * zp[1], hv = (a, b) => ramp(t, a, .2) * (1 - ramp(t, b, .25));
@@ -222,10 +222,10 @@ function bagArt2(t) { const S = BH.S, FY = BH.FY, TY = BH.TY, CH = BH.CH, RAILY 
   const scene = lcRoom(FY) + lcTable(TY, -20, 480) + `<rect x="450" y="${TY + 26}" width="22" height="${FY - TY - 26}" fill="#8E9AA8"/>` + stack
     + `<ellipse cx="${P2[0]}" cy="${FY + 6}" rx="${n2(190 * ud)}" ry="${n2(12 * ud)}" fill="${P.ink}" opacity=".18" filter="url(#b4)"/>` + TF(CH[0], CH[1], CH[2], chairS()) + bag + hsL + fly + hands + lcHit(P2[0] + 150, FY - 8, pulse(t, tu[3], .02, .35), 26);
   // the labels: BIG, in the free space below the board, each with ONE line to its part (drawn outside the push-in so they stay big)
-  const LX = -300, LY = 190; let labs = lcLab(t, th + .75, LX, LY, "to carry books to school", ...M([P1[0] - 100, P1[1] - 140]), { size: 46, t1: tp[0] - .25 });
+  const LX = -60, LY = 200; let labs = lcLab(t, th + .75, LX, LY, "to carry books to school", ...M([P1[0] - 100, P1[1] - 140]), { size: 46, t1: tp[0] - .25 });
   PARTN.forEach((p, i) => { labs += lcLab(t, tp[i], LX, LY, p, ...M(PP[p]), { size: 76, t1: (i < 3 ? tp[i + 1] : tp[3] + 2.4) - .2, fill: PARTC[p], ink: "#fff" }); });
   const uses = ["straps · carry the bag", "body · holds the books", "zip · opens and closes", "base · sits on the floor"];
-  uses.forEach((w, i) => { labs += lcLab(t, tu[i] + .1, LX + 20, LY, w, ...M(PP[PARTN[i]]), { size: 48, t1: i < 3 ? tu[i + 1] - .2 : tv - .1, fill: PARTC[PARTN[i]], ink: "#fff" }); });
+  uses.forEach((w, i) => { labs += lcLab(t, tu[i] + .1, LX - 40, LY + 40, w, ...M(PP[PARTN[i]]), { size: 48, t1: i < 3 ? tu[i + 1] - .2 : tv - .1, fill: PARTC[PARTN[i]], ink: "#fff" }); });
   return `<g transform="${zt}">${scene}</g>` + labs; }
 SC.lcbag = (t, s) => { const ge = eio((t - s.t0) / 1.0), tv = MK("v_bag"), tp = PARTN.map((p) => MK("p_" + p)), tu = PARTN.map((p) => MK("u_" + p));
   return lookCloser(t, s, { tz: s.t0, fx: BGX, fy: 660, art: bagArt2, set: (tt) => V(tt, { bag: "new" }, CAMB), verdict: [...VSTYLE("ONE BAG · FOUR PARTS · FOUR USES", "sun").slice(0, 2), { ...(VSTYLE("ONE BAG · FOUR PARTS · FOUR USES", "sun")[2] || {}), vx: 1110 }], tv,
@@ -249,7 +249,7 @@ SC.holdon = (t, s) => { const a = "g901", b = "g902", c = "g903", r0 = MK("ring0
   const lean = t >= r0 && t < bell ? -5 + 4 * Math.sin((t - r0) * Math.PI * 2) : 0, pj = []; for (let i = 0; i < 5; i++) pj.push([r0 + i, 14]);
   const pip = bud("pip", "R2", 450, t, { in: s.t0 + .05, poses: poses([s.t0, "cheer"], [LT(a) + .1, "sit"], [LE(a) + .15, "pointing"], [tS0 + .2, "cheer"], [tX + .3, "thinking"], [r0, "cheer"], [bell, "oops"], [W(c, "each") - .12, "surprised"], [LE(c) - 1.6, "waving"], [LE(c) + .2, "sit"]), look: lean + nodAt(t, LE(c) - 1.5, 1.4, 5), jump: pj, nohop: t >= r0 && t < bell, wave: true });
   return (room ? OP(1 - st, room) : "") + OP(st, bg("stage") + `<rect y="820" width="1920" height="260" fill="url(#xFloor)"/>`) + stage + pip
-    + say(a, 1180, 360, t, { size: 44, tail: 60, maxW: 640 })
+    + say(a, 1300, 330, t, { size: 44, tail: -80, maxW: 560 })
     + stampHold(t, tH, tH + .85, HR[0], HR[1], "HOLD ON!") + stampHold(t, bell, bell + 1.1, HR[0], HR[1] + 60, "ARMS CROSSED!", 96) + bellIcon(t, r0, 1160, 260) + coin(t, tOne, 1660, 470, "+1", "arms crossed") + HUD(t); };
 SC.wetfloor = (t, s) => { const tw_ = MK("wetpic"), [px, pd] = slideX(t, tw_, .55, -600, 640, 1040);
   return VD(t, { bag: "full", board: {}, boardP: HOME }, undefined, .45) + (t >= tw_ ? pd + TF(px, 1040, 1.05, easelS(TF(0, 0, .96, wetFloorPic(t)), 470, 330)) : "")
@@ -259,11 +259,11 @@ SC.wetfloor = (t, s) => { const tw_ = MK("wetpic"), [px, pd] = slideX(t, tw_, .5
 /* ============ 10 · draw it: the paper slides onto the table, DRAW IT glows; the camera goes to the paper; [LOOK CLOSER] the drawing ============ */
 SC.draw = (t, s) => { const u = eo((t - MK("paper")) / .5), cam = camL(CAM0, CAMP, eio((t - (s.t1 - 1.3)) / 1.3));
   return V(t, { bag: "full", paper: lerp(PX + 500, PX, u), board: {}, boardP: HOME }, cam) + OP(1 - eio((t - (s.t1 - 1.3)) / 1.0), bud("basil", "R1", 400, t, { poses: poses([s.t0, "sit"], [MK("paper") + .2, "pointing"], [MK("glow4"), "cheer"]) }) + bud("pip", "R2", 400, t, { poses: poses([s.t0, "oops"], [MK("paper") + .4, "thinking"], [MK("glow4") + .3, "cheer"]) })) + HUD(t); };
-SC.lcdraw = (t, s) => { const g0 = eio((t - (s.t0 + .2)) / .9), g1 = eio((t - (MK("v_draw") + .15)) / .8), p = L3(L3(HOME, DOCK, g0), HOME, g1), tv = MK("v_draw");
+SC.lcdraw = (t, s) => { const g0 = eio((t - (s.t0 + .2)) / .9), g1 = eio((t - (s.t1 - .85)) / .8), p = L3(L3(HOME, DOCK, g0), HOME, g1), tv = MK("v_draw");
   return lookCloser(t, s, { tz: s.t0, fx: PX, fy: 760, art: drawArt, set: (tt) => V(tt, { bag: "full", paper: PX, bfly: false }, CAMP), verdict: [`OUR DESIGN: A SUITABLE MATERIAL FOR EACH PART`, GOODC, { vx: 1030 }], tv,
     over: (tt) => lcClock(tt, MK("pencil"), MK("fill4"), 1540, 880),
     top: (tt) => brdAt(tt, p, g0 > .5 && g1 < .5 ? { small: true } : {}) + peek(tt, "pip", s.t0 + 1.5, tv - .2, poses([s.t0, "thinking"], [MK("drop1") + .1, "surprised"], [MK("drop2") + .1, "surprised"], [MK("wpchip"), "cheer"], [MK("zc2"), "pointing"], [MK("zipchip"), "cheer"], [MK("fabhop2"), "thinking"], [MK("strongchip2"), "cheer"]),
-      { h: 520, dx: 150, nods: [[MK("wpchip") + .1, 1, 5], [MK("zipchip") + .1, 1, 5], [MK("strongchip2") + .1, 1, 5]] }) }); };
+      { h: 500, dx: 170, side: 1, nods: [[MK("wpchip") + .1, 1, 5], [MK("zipchip") + .1, 1, 5], [MK("strongchip2") + .1, 1, 5]] }) }); };
 SC.pipfix = (t, s) => V(t, { bag: "full", easel: true, board: {}, boardP: HOME }, camL(CAMP, CAM0, eo((t - s.t0) / .7)))
   + bud("pip", "R2", 440, t, { in: s.t0 + .1, poses: poses([s.t0, "surprised"], [HAS("g1006") ? LT("g1006") + .5 : s.t0 + 1, "sit"], [HAS("g1006") ? LE("g1006") + .2 : s.t0 + 1.2, "cheer"]), jump: [[HAS("g1006") ? LE("g1006") + .25 : s.t0 + 1.3, 20]] })
   + bud("basil", "R1", 380, t, { poses: poses([s.t0, "sit"], [LT("g1006") + .8, "surprised"], [LE("g1006") + .2, "cheer"]), look: nodAt(t, LE("g1006") + .3, 1.2, 5) })
@@ -289,24 +289,34 @@ SC.final = (t, s) => { const L = "g1301", thi = W(L, "high") - .05, tips = [[s.t
     + TF(960, 760 - 60 * hi, 1.85 * spring(t, s.t0 + .25, .5) * (1 + .1 * hi), `<g filter="url(#drop)">${countHand(nf)}</g>`) + youPill(960, 430, 1.3)
     + OP(hi, `<g stroke="${P.sun}" stroke-width="12" stroke-linecap="round">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const an = -Math.PI * (.05 + i * .1125), r1 = 300 + 60 * (1 - hi), r2 = r1 + 80; return `<path d="M${n2(960 + Math.cos(an) * r1)} ${n2(640 + Math.sin(an) * r1)} L${n2(960 + Math.cos(an) * r2)} ${n2(640 + Math.sin(an) * r2)}"/>`; }).join("")}</g>`)
     + (t >= thi ? TF(1420, 480, spring(t, thi, .4), tpill(0, 0, "HIGH FIVE!", 56, P.sun, P.ink, { w: 700, ls: 4 })) : "");
-  [["pip", 300, false, 440], ["basil", 1330, true, 360], ["momo", 1680, true, 420]].forEach(([w, x, fl, h], i) => { out += buddy(w, x, 1062, h, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [W(L, "beat") - .1, "cheer"], [W(L, "beat") + 1.2, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
+  [["pip", 300, false, 420], ["basil", 1290, true, 340], ["momo", 1690, true, 390]].forEach(([w, x, fl, h], i) => { out += buddy(w, x, 1062, h, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [W(L, "beat") - .1, "cheer"], [W(L, "beat") + 1.2, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
   return out + logo(t); };
-const LZ = { T: [700, 420], r: 200, Z: 3.0 };
+const LZ = { T: [560, 380], r: 230, Z: 3.6 };
 // the fun fact's picture: a magnifier on the butterfly's wing: tiny scales like roof tiles, and a drop of water rolling off
 function wingScales(t, t0, tw0, x, y, r = 170) { const k = t < t0 ? 0 : spring(t, t0, .45); if (k < .02) return ""; let sc = "";
   for (let j = 0; j < 9; j++) for (let i = 0; i < 9; i++) { const sx = -r + i * 44 + (j % 2) * 22, sy = -r + j * 40; sc += `<path d="M${sx - 20} ${sy} Q${sx - 20} ${sy + 34} ${sx} ${sy + 38} Q${sx + 20} ${sy + 34} ${sx + 20} ${sy}z" fill="${(i + j) % 3 ? "#F59E0B" : "#FBBF24"}" stroke="#92400E" stroke-width="3"/>`; }
   const u = t < tw0 ? -1 : (t - tw0) / 1.6, dx = u < 0 ? -40 : lerp(-40, 120, eio(u)), dy = u < 0 ? -40 : lerp(-40, 140, ei(u));
   return TF(x, y, k, `<clipPath id="wsc"><circle r="${r}"/></clipPath><g filter="url(#drop)"><circle r="${r + 12}" fill="#fff"/></g><g clip-path="url(#wsc)"><rect x="${-r}" y="${-r}" width="${2 * r}" height="${2 * r}" fill="#B45309"/>${sc}${u >= 0 && u < 1.1 ? TF(dx, dy, 1.6, waterDrop(16)) : ""}</g><circle r="${r}" fill="none" stroke="${P.ink}" stroke-width="12"/><path d="M${n2(r * .72)} ${n2(r * .72)} L${n2(r * 1.3)} ${n2(r * 1.3)}" stroke="#5E3F28" stroke-width="26" stroke-linecap="round"/>`)
-    + (t >= t0 + .3 ? TF(x, y - r - 56, spring(t, t0 + .3, .4), tpill(0, 0, "tiny scales", 44, "#fff", P.ink, { w: 700 })) : "") + (t >= tw0 + .4 ? TF(x, y + r + 56, spring(t, tw0 + .4, .4), tpill(0, 0, "water rolls off", 44, GOODC, "#fff", { w: 700 })) : ""); }
+    + (t >= t0 + .3 ? TF(x, y - r - 56, spring(t, t0 + .3, .4), tpill(0, 0, "tiny scales", 44, "#fff", P.ink, { w: 700 })) : "") + (t >= tw0 + .4 ? TF(x + r + 200, y - 60, spring(t, tw0 + .4, .4), tpill(0, 0, "water rolls off", 44, GOODC, "#fff", { w: 700 })) : ""); }
 SC.liz = (t, s) => { const L = "g1302", F = "g1303", E = "g1304", tq = W(L, "it") - .1, tR = W(L, HIDDEN[0]) + .1, tz = s.t0 + .35, u = eio((t - tz) / 1.3), kc = clamp((t - (tz + 1.05)) / .6), f0 = 1 - clamp((t - s.t0) / .45), uf = t - (s.t0 + 1.6);
   const world = V(t, { bag: "full", easel: true, board: {}, boardP: HOME, bfly: { open: uf > 0 && uf < 1.6 ? .5 + .5 * Math.sin(uf * 22) : (uf >= 1.6 ? 1 : undefined), up: 60 * (uf > 0 && uf < 1.6 ? Math.sin(Math.PI * clamp(uf / 1.6)) : 0) } });
   const ringK = t < tR ? 0 : spring(t, tR, .5), tF = LT(F), tT = W(E, "tell") - .1;
-  let out = circleShot(world, u, [BFLY[0], BFLY[1] - 4], LZ.T, LZ.Z, LZ.r, kc, "z") + (ringK > .02 ? `<circle cx="${LZ.T[0]}" cy="${LZ.T[1]}" r="${n2((120 + 8 * Math.sin(t * 6)) * ringK)}" fill="none" stroke="${P.sun}" stroke-width="12"/>` + popSpark(t, tR, LZ.T[0], LZ.T[1], 150) : "");
-  out += (t >= tq ? OP(1 - ramp(t, tF - .3, .3), TF(LZ.T[0], 720, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw("It was on the plant by the window!", 54, 700) / 2 - 56)}" y="-58" width="${n2(tw("It was on the plant by the window!", 54, 700) + 112)}" height="116" rx="58" fill="${P.ink}"/></g>${T(0, 19, "It was on the plant by the window!", 54, "#fff")}`)) : "");
-  out += wingScales(t, MK("ffscales") - .1, MK("ffwater"), 1240, 420) + (t >= tF - .1 ? pline(LZ.T[0] + 40, LZ.T[1] - 10, 1076, 400, ramp(t, MK("ffscales"), .25)) : "");
-  out += bud("momo", "R1", 420, t, { in: tF - .5, poses: poses([tF - .5, "surprised"], [tF + .4, "sit"], [LE(F) + .1, "cheer"], [tT, "pointing"]), jump: [[MK("ffwater") - .1, 24]] }) + say(F, 1180, 760, t, { size: 40, tail: 300, maxW: 600 });
-  out += (t >= tT ? TF(LZ.T[0], 760, spring(t, tT, .45), tpill(0, 0, "Tell someone at home!", 56, P.sun, P.ink, { w: 700 })) : "");
+  let out = circleShot(world, u, [BFLY[0], BFLY[1] - 16], LZ.T, LZ.Z, LZ.r, kc, "z") + (ringK > .02 ? `<circle cx="${LZ.T[0]}" cy="${LZ.T[1]}" r="${n2((120 + 8 * Math.sin(t * 6)) * ringK)}" fill="none" stroke="${P.sun}" stroke-width="12"/>` + popSpark(t, tR, LZ.T[0], LZ.T[1], 150) : "");
+  out += (t >= tq ? OP(1 - ramp(t, tT - .4, .3), TF(LZ.T[0], 668, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw("It was on the plant by the window!", 54, 700) / 2 - 56)}" y="-58" width="${n2(tw("It was on the plant by the window!", 54, 700) + 112)}" height="116" rx="58" fill="${P.ink}"/></g>${T(0, 19, "It was on the plant by the window!", 54, "#fff")}`)) : "");
+  out += wingScales(t, MK("ffscales") - .1, MK("ffwater"), 1130, 380) + (t >= tF - .1 ? pline(LZ.T[0] + 60, LZ.T[1] - 10, 966, 380, ramp(t, MK("ffscales"), .25)) : "");
+  out += bud("momo", "R1", 420, t, { in: tF - .5, poses: poses([tF - .5, "surprised"], [tF + .4, "sit"], [LE(F) + .1, "cheer"], [tT, "pointing"]), jump: [[MK("ffwater") - .1, 24]] }) + say(F, 1130, 870, t, { size: 40, tail: 280, maxW: 620 });
+  out += (t >= tT ? TF(LZ.T[0], 668, spring(t, tT, .45), tpill(0, 0, "Tell someone at home!", 60, P.sun, P.ink, { w: 700 })) : "");
   return (f0 > .01 ? out + OP(f0, SC.final(SCN.final.t1 - .04, SCN.final)) : out) + logo(t); };
+
+/* ============ the key-word read-along: the buddies 1.5x, along the bottom right, mouthing along ============ */
+SC.kwrecap = (t, s) => { const ids = KWLINE, us = KWLINE.map((k) => "u" + k.slice(1)), tw_ = LT("h864");
+  let turn = -1; us.forEach((u, i) => { if (t >= LT(u) - .2 && t < LE(u) + .45) turn = i; });
+  let out = bg("stage2") + OP(ramp(t, s.t0 + .2, .3) * (1 - ramp(t, LT(ids[0]) - .3, .3)), T(960, 190, "Let’s read today’s key words together!", 70, "#fff", { w: 600 })) + OP(ramp(t, LT(ids[0]) - .3, .3), T(960, 170, "KEY WORDS", 54, P.sun, { ls: 10 }));
+  out += TF(330, 480, 1, youPill(0, 0, 1.3) + `<g transform="translate(0 130) scale(${n2(1 + (turn >= 0 ? .12 + .05 * Math.sin(t * 10) : 0))})" opacity="${turn >= 0 ? 1 : .35}"><g filter="url(#dropS)"><rect x="-110" y="-64" width="220" height="128" rx="50" fill="#fff"/><path d="M-30 60 L-56 108 L16 62z" fill="#fff"/></g>${[-52, 0, 52].map((x, i) => `<circle cx="${x}" cy="${n2(turn >= 0 ? -8 * Math.abs(Math.sin(t * 7 + i)) : 0)}" r="15" fill="${P.ink}"/>`).join("")}</g>` + (turn >= 0 ? TF(0, 300, spring(t, LT(us[turn]) - .2, .3), tpill(0, 0, "Say it!", 44, P.coral, "#fff", { w: 700 })) : ""));
+  const hops = us.map((u) => [LT(u) - .15, 22]);
+  [["pip", 1610, 570, 250], ["basil", 1700, 1066, 290], ["momo", 290, 1066, 250]].forEach(([w, x, y, h], i) => { out += buddy(w, x, y, h, t, { aura: true, flip: i < 2, in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [...hops, [tw_, 40]] }); });
+  if (t >= tw_) out += TF(330, 300, spring(t, tw_, .45), `<g transform="rotate(-4)"><g filter="url(#drop)"><rect x="-230" y="-64" width="460" height="128" rx="64" fill="url(#gSun)"/></g>${T(0, 24, "Well done!", 70, P.ink)}</g>`);
+  return out + HUD(t); };
 
 /* ============ 14 · the cliffhanger: the camera goes to THEN: TEST IT beside the board, then to the new strap with its big ? ============ */
 SC.cliff = (t, s) => { const tP = W("g1403", "part") - .1, tc = MK("testcard"), tq = MK("q"), c1 = eio((t - tc) / 1.0) * (1 - eio((t - (tq - .2)) / 1.0)), c2 = eio((t - (tq - .2)) / 1.0) * (1 - eio((t - (tP - .6)) / .8));
@@ -314,5 +324,5 @@ SC.cliff = (t, s) => { const tP = W("g1403", "part") - .1, tc = MK("testcard"), 
   return V(t, { items: easelOn(PX) + bagUp({}, BGX) + qMark(t, tq, BGX, 520), board: {}, boardP: HOME }, cam)
     + bud("basil", "R1", 420, t, { in: s.t0 + .1, poses: poses([s.t0, "cheer"], [LT("g1401") - .12, "sit"], [LT("g1402"), "surprised"], [LE("g1402") - 1.2, "thinking"], [LE("g1402"), "sit"], [tP, "cheer"]), look: nodAt(t, W("g1402", "test") + .1, 1.2, 5) })
     + say("g1401", 1420, 470, t, { size: 42, tail: 160, maxW: 480 }) + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + HUD(t); };
-SC.nyk = (t, s) => nykScene(t, s, TF(760, 1040, .34, planBoard(t)), { bx: [290, 1630, 1220], hx: 760, bh: 400 });
+SC.nyk = (t, s) => nykScene(t, s, TF(790, 1045, .3, planBoard(t)), { bx: [290, 1640, 1275], hx: 790, bh: 400 });
 })(); }
