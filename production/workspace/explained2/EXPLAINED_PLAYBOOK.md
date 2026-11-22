@@ -130,6 +130,10 @@ two look-closers per part, each walking the child's path:**
 6. **Hold it** 6–10 s or more with the thing's own sound, music low; then **one verdict tag** held ≥ 2.5 s; then the buddy reads the
    book's sentence (now a name for something the child already understands).
 Mark these as **[LOOK CLOSER]** in the script. Never cut them for length.
+**The approved look (teacher, 22 Nov: "this 'Look Closer' segment is good!"):** EP13's strap look-closer,
+`reference/lookcloser_good_ep13_straps.webp`: LOOK CLOSER banner, one cream panel over the blurred set, the real object big and
+doing the action, a magnifier circle linked to the exact spot showing the evidence, short labels, one green verdict pill, safety
+small print. Build every look-closer to this look.
 
 ### 3.3 The "be the thing" journey (the series signature)
 At least one per episode (20–40 s): the camera IS the particle / drop / light / seed; second person, present tense ("You are a drop

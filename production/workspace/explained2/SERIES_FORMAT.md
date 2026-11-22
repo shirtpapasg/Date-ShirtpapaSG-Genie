@@ -67,6 +67,13 @@ the plant turning to the window):
 Scripts mark these moments as **[LOOK CLOSER]** in the "On screen" column; each key word / goal of the episode has one. They are
 separate from (and in addition to) the "BE THE THING" journey, and they are never cut for length.
 
+**Approved example (teacher, 2026-11-22: "this 'Look Closer' segment is good!"):** EP13 Part 1's strap look-closer
+(`reference/lookcloser_good_ep13_straps.webp`, code in `ep13/`). Copy what works: the LOOK CLOSER banner on top; one clean cream
+panel over the softly blurred set; the real object big and doing the action (an adult's hand lifts the bag full of books by the
+fabric strap); a magnifier circle linked by a plain line to the exact spot, showing the evidence up close (the stitched seam);
+short plain labels ("a bag full of books"); one green verdict pill ("no tear"); the safety small print in a corner
+("We do not force it.").
+
 ## 1c. Explain from the learner's seat (teacher, 2026-11-22; from EP14 on)
 
 The teacher, on EP11: "leaning back to the previous version of pushing out facts, and not focusing the perspective of young learners,
