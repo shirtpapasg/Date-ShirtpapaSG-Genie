@@ -10,6 +10,7 @@ Ideas", pp. 59-72): it stays in the playlists until a later episode also covers 
 EP11 is live (its playlists' anchor for EP12: `explained-p3-ep11-part2`).
 
 Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · **Stage 3 (render, checks, upload: done 2026-11-22, Opus; LIVE)**.
+**Current live version: EP12 v2 (teacher fixes, 22 Nov): Part 1 https://www.youtube.com/watch?v=vqSehdxTCg8 , Part 2 https://www.youtube.com/watch?v=D2U_Zom1Wzs** (the first upload G03-LFQEld8 / ussXaa1fQUQ is retired: public, out of the playlists, pointing to the new Part 1).
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep12_script.md` is untouched.
@@ -315,3 +316,28 @@ No timeline mark, word or sound cue moved (`tl_p*.json`, `sound_cues.js`, `scrip
   of the new transitions.
 - Not done here: no video rendered, no sound mixed, nothing uploaded. The thumbnails and `sheet_part*.png` still show the old board until
   Stage 3 re-renders.
+
+## 22 Nov 2026: teacher's-eye review, re-render and re-upload (EP12 v2, Opus; LIVE)
+- **Review** (a separate Opus agent, not the drawing agent): `NOTES_REVIEW.md`. The trolley reads as a trolley on its wheels everywhere,
+  centred and behind no disc in `nyk`; both push-ins are one smooth shot that lands on the animal; the reveals melt in, push in and ring the
+  animal; the P2 `dare` pull-back has no jump. Fixed in the drawing code (no mark, word or sound cue moved):
+  - P2 `chant`: the chart .68 -> .88 (words about 18 -> 23-24 px), discs smaller in the bottom-left corner (bh 165 at 100 / 305 / 510), chant
+    lines higher (y0 185, dy 92) so the trolley's grip clears line 3, YOU hands + YOUR TURN! at (1100, 300) scale .8 (`chantScene` takes
+    `o.ts`), the bubble at (330, 750).
+  - P2 `nyk`: the trolley .78 -> .90 at x 880 (words about 21 -> 24-25 px); Pip 110, Momo 1625, Basil 1820 (bh 200), YOU hands at 110,
+    "Say it with us!" at y 330.
+  - P2 car park: `BDS` .30, `BDX` 1660, `BDY` PGROUND - 12: the trolley's wheel clear of Momo's disc and its red grip off the metal bottle.
+  - P1 `game`: the mynah lands at x 1400 (the score hand no longer covers the sign's "T"); the small lock-in ring at (200, 470) left of the
+    answer hand (it sat on the TROLLEYS sign); "+1" at (880, 470); "Can you spot it?" at (1730, 430) off the mynah's beak.
+  - Noted, not changed: in P1 `waitw` and P2 `boot` / `waitw` the camera's push lets the frame cut the board's right end and Momo's disc
+    touch its rim for about 2 s (background, as with the old whiteboard).
+- **Re-rendered in full** (`./build_part.sh 1|2`, chunks cleared first): `ep12_part1.mp4` 314.87 s (5:14.9), `ep12_part2.mp4` 314.83 s
+  (5:14.8), both **-16.0 LUFS**; timelines identical to before, so `ep12_part1.srt` / `ep12_part2.srt` are byte-identical (no overlaps);
+  new `sheet_part1.png`, `sheet_part2.png`. No page errors. Frames of every changed scene from the finished mp4s: `qa/stage3_v2/`.
+- **Re-uploaded** with `upload_v2.json` (keys `explained-p3-ep12v2-part1/-part2`; same titles, descriptions, tags and new-style thumbnails;
+  `replaces` G03-LFQEld8, ussXaa1fQUQ, `retire_old`): **Part 1 https://www.youtube.com/watch?v=vqSehdxTCg8 , Part 2
+  https://www.youtube.com/watch?v=D2U_Zom1Wzs**. Both playlists now run EP11 P2 (q2KJp6lKln0) -> EP12v2 P1 -> EP12v2 P2 -> EP13 P1
+  (FO1Y_KSZU-c) -> EP13 P2 (8lQ1-1ruveY) (PLb8LpPqxQI4E 22-26, PLPfEuT7l4KjI 40-44). The old two are out of the playlists, still public,
+  each with a first line "▶ NEW VERSION: ... vqSehdxTCg8". The classic _gRJ0NwV6p0's first line now reads "choosing materials
+  https://www.youtube.com/watch?v=vqSehdxTCg8 · design like an engineer ..." (only that line edited).
+- Episode guide (`production/episode-guide/gen.mjs`, `explained-episode-guide.html`) carries the new IDs.
