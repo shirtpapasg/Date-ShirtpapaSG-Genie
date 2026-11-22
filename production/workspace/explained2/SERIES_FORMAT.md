@@ -304,6 +304,10 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
 - **Every sample, tile or picture is named on screen (teacher, 2026-11-22, on EP13's material samples: "missing information
   'plastic' on the darker material and 'fabric' for the orange material").** When a material sample, tile or picture is shown, its
   name appears with it in a readable label. `reference/labels_missing_ep13_samples.png`.
+- **Every tag points to what it describes (teacher, 2026-11-22, on EP13's design verdict: "poor display of visual information…
+  Which is flexible, strong and waterproof? Where's the arrows, or you can even consider colour coding").** Property chips and tags
+  never float free: each sits beside the part it belongs to, joined by an arrow or line, and parts are colour-coded (the part, its
+  label and its chips share one colour). `reference/chips_bad_ep13_unlinked_properties.webp`.
 - **Objects never float or fly.**
   - Things travel low along the ground in small hops with dust puffs, or are carried or slid by the buddies.
   - Nothing hangs above the buddies' heads.
