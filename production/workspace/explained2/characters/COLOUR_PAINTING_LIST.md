@@ -92,3 +92,14 @@ Each one is a full body, sitting, with the same size of head and body as the sit
 1. The three sitting sets first (pictures 1–12). Without them a buddy cannot talk or blink.
 2. Then the most-used poses: Basil cheer (27), Pip pointing (21), Momo pointing (14), Momo cheer (13), Momo surprised (15).
 3. Then the rest.
+
+## Status, 22 Nov (Basil)
+
+- **Accepted, cut out** (`poses/basil_c_*.png`): oops, waving, thinking, surprised. They match each other (darker, richer teal,
+  cream beard, teal spikes on head and back, teal-grey eyes with a white ring).
+- **Redo: pointing.** Off-model: a bigger egg-shaped body, a flatter head, small eyes, and two human hands with index fingers.
+  Paint it like the four above: ONE front leg out to the viewer's right, his own lizard toes.
+- **Redo: cheer** (sent mid-task, not saved). Off-model: egg body, plain tail without bands, human hands.
+- **Sitting set:** half, wide and blink (sent mid-task, not saved) are lighter teal-grey with dark eyes; the closed one sent was
+  try 1 (teal beard), which does not match them. All 4 must be ONE picture with only the face changed, AND in the same colours as
+  the four accepted poses, or the colour flashes when he swaps pose. Choose one palette for all of Basil.
