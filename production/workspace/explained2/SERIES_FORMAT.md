@@ -106,6 +106,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   Every buddy is at least 1.5× the size used in EP12–EP13. Each scene is composed so the buddies are spread across the frame (one
   left and one right, or a large speaker in the foreground with the others on the other side), never bunched in one corner; cards,
   props and look-closer panels sit in the space between them. Scene plans give each buddy's position and size.
+  **Approved scene (teacher, 2026-11-22: "this is a good example of a good scene"):** EP13's Mark Sentence 1
+  (`reference/scene_good_ep13_marksentence.webp`): the reading buddy BIG on the left (about half the frame height), the card large on
+  the right, a small visual recap of the evidence along the bottom (the three straps with SUITABLE / NOT FOR THIS JOB and the
+  property chips), the key-word pill under the score. Balanced left/right, nothing bunched, nothing cut off. Use this as the size
+  and balance target for buddies.
 - **Buddies teach.** Each scientific term is explained by a buddy in their own words, in a short back-and-forth with another buddy or
   the viewer ("Rotation means the Earth spins round and round, like my globe!"), with a picture beside them; Heart hosts, sets up
   the question and confirms, but the buddies carry the explaining. Full, natural sentences (section 5 "Talk like people").
