@@ -243,6 +243,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - **The hidden animal moves (teacher, 2026-11-22: in EP12 and EP13 it "stays at the same spot… makes things easy to guess and
     lost the fun, giving a sloppy vibe").** It hides in a different, fair place in each scene where it could really be (another
     branch, a ledge, a leaf, half behind a curtain), small but findable; scripts and SCENES_TODO list its spot per scene.
+  - **The reveal ends with a surprising fun fact (teacher, 2026-11-22: "instead of finding this animal and tell someone at home
+    (about what?)… It must be a fun fact which most children are shocked to find out! Then it makes sense to share. Just finding an
+    animal that is not related to the episode is sloppy script writing").** The hidden animal is chosen for a link to the episode's
+    science, and the reveal goes: "Did you spot the [animal]? It was [where]!" → a buddy, excited, gives one short TRUE surprising
+    fact about that animal that links to the episode's idea (with a small picture) → "Tell someone at home!". Fact-check it.
+    `reference/reveal_bad_ep12_no_funfact.webp`.
   - **Order in the game segment (teacher, 2026-11-22):** talk about finding the hidden animal FIRST (Heart names it, a line or two
     that makes the search fun, "keep your eyes open"), and only then explain the fingers / lock-in and the score.
 - **Key-word read-along before the end of every part:**
