@@ -74,6 +74,16 @@ fabric strap); a magnifier circle linked by a plain line to the exact spot, show
 short plain labels ("a bag full of books"); one green verdict pill ("no tear"); the safety small print in a corner
 ("We do not force it.").
 
+**Use the whole panel, and let a buddy react (teacher, 2026-11-22, on EP13's bag-parts look-closer: "a lot of wasted space, when the
+main focus is 'Our Design Plan' which now is so small… the 'base', 'zip' and 'fabric' segment can be bigger, higher emphasis. Also,
+why don't you insert one of the pet buddies in, focusing on its face, looking shocked / agreeing").** This updates step 1 above
+(the buddies no longer leave completely):
+- The thing explained fills the panel; no big empty cream areas. A board being filled is LARGE beside the object (about half the
+  panel), never a thumbnail in a corner. Each part or label being named gets its own big moment: push in on that part, big label.
+- A buddy's FACE peeks in from a lower corner of the panel (a close-up, about a quarter to a third of the panel's height), reacting
+  live on the beats: eyes wide / gasp at the reveal, nod and smile when agreeing, a thinking face while it happens.
+- Never semi-transparent "ghost" overlaps of two objects. Bad examples: `reference/lookcloser_bad_ep13_bag_*`.
+
 ## 1c. Explain from the learner's seat (teacher, 2026-11-22; from EP14 on)
 
 The teacher, on EP11: "leaning back to the previous version of pushing out facts, and not focusing the perspective of young learners,

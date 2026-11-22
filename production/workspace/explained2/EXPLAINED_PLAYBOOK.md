@@ -134,6 +134,8 @@ Mark these as **[LOOK CLOSER]** in the script. Never cut them for length.
 `reference/lookcloser_good_ep13_straps.webp`: LOOK CLOSER banner, one cream panel over the blurred set, the real object big and
 doing the action, a magnifier circle linked to the exact spot showing the evidence, short labels, one green verdict pill, safety
 small print. Build every look-closer to this look.
+**And (teacher, 22 Nov):** use the whole panel (a board being filled is large, about half the panel; each named part gets its own
+big moment); a buddy's face peeks in from a lower corner and reacts (gasp, nod, thinking); never ghost overlaps.
 
 ### 3.3 The "be the thing" journey (the series signature)
 At least one per episode (20–40 s): the camera IS the particle / drop / light / seed; second person, present tense ("You are a drop
