@@ -75,10 +75,19 @@ Worst first. **FIXED** = changed in the code and checked in a new still and in t
     and render show no page errors.
 
 ## Listen-proxy (measured on the stems, `STEMS=1 node song.js P`)
-- The place beds (living room, garden) are at least 22 dB under every speech line (P2), so ambience never masks
-  speech; median speech is 7.5 dB over everything else together.
-- Lowest margins are by design: "One! two!" under the Now-you-know music (the class counts with it), and Heart's first
-  game line over the game sting (+1.7 dB). Captions (`.srt`) follow the aligned words; no cue overlaps.
+- The place beds (living room, garden) are at least 16 dB (P1) / 22 dB (P2) under every speech line, so ambience never
+  masks speech; median speech is 8.1 dB (P1) / 7.5 dB (P2) over everything else together.
+- Lowest margins are music/sound moments by design: "One! two!" under the Now-you-know music (the class counts with it),
+  Heart's "Three! Two! One! Go!" over its count-in hits, and "Find out in Part Two!" under the PART 2 slam (-3.1 dB on
+  "Part Two", which is also on screen big). Worth the teacher's ear: the slam could land after the words.
+- Captions (`.srt`, made by finish.sh from the aligned words): no cue overlaps, none under 0.3 s.
+
+## Checked in the Stage 3 render
+- Countdowns (`qa/countdowns_p1.txt`, `_p2.txt`): numbers step exactly 1.000 s, tocks on the seconds, bell on 0; the
+  arc now matches the number (1/3 left while 1 shows).
+- Both mixes -16.0 LUFS; lengths 5:34.5 / 5:28.3.
+- Left as is: in the globe look-closer the moved bubble's right edge just touches the "S" of "Singapore" (P1 2:09–2:12);
+  the word stays readable.
 
 ## Needs the teacher's eye or a new painting
 - Chick wings for the Be-a-chick journey (first person): a painted pair would read better than code shapes.

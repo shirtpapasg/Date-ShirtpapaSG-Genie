@@ -11,8 +11,7 @@ RVRoaWWKjEM (pp. 73-79) stays in the playlists until EP15 is live: NO "replaces"
 "leev" via sg_pron, a clip only if a problem is heard) **plus the ONE change of 22 Nov: full, human sentences** (section 12.1: 43 lines).
 EP13 is live (its playlists' anchor for EP14: `explained-p3-ep13-part2`; EP13 Part 1 = FO1Y_KSZU-c, Part 2 = 8lQ1-1ruveY).
 
-Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · **Stage 1 colour (done 2026-11-22, Opus)** · **Stage 2 (drawing, sound, render, done 2026-11-22, Opus: the Fable agent hit its limit)** · Stage 2.5 (the teacher's-eye review, a fresh
-Opus agent) · Stage 3 (render, checks, upload, Opus).
+Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · **Stage 1 colour (done 2026-11-22, Opus)** · **Stage 2 (drawing, sound, render, done 2026-11-22, Opus: the Fable agent hit its limit)** · **Stage 2.5 (the teacher's-eye review, done 2026-11-22: NOTES_REVIEW.md)** · **Stage 3 (render, checks, upload: done, LIVE 2026-11-22)**.
 
 ## Stage 1: done (2026-11-22, Opus)
 - **The script change (teacher, 22 Nov): full, human sentences.** Every spoken line of `p3_ep14_script.md` was gone through: 43 spoken facts,
@@ -345,3 +344,20 @@ Not uploaded: a fresh reviewer checks the render against EP1 first (`qa/ep1_comp
     visible; fixed in garden14.js (Math.max) after the render.
 - `upload.json` unchanged from Stage 1 (titles / descriptions per script section 7, the new thumbnails, both playlists after
   `explained-p3-ep13-part2` = 8lQ1-1ruveY, public, Made for Kids as the uploader sets, no "replaces"). The uploader was NOT run.
+
+## Stage 3 done, live (2026-11-22, Opus: a fresh teacher's-eye reviewer, then fixes, one render, upload)
+- **Live:** Part 1 https://youtu.be/YoxJL8fjAkc · Part 2 https://youtu.be/q7OR-eImAsk (public, Made for Kids, thumbnails set; both
+  playlists PLb8LpPqxQI4E and PLPfEuT7l4KjI right after EP13 Part 2 8lQ1-1ruveY; no replaces: RVRoaWWKjEM stays until EP15).
+- **Review:** `NOTES_REVIEW.md` (28 numbered notes, worst first, from stills of every scene and every buddy line against EP1).
+- **Fixed before the render:** Round 1 cards showed only rooftops (the Sun / globe / cloud cut off); the Sun small print on card 3; every
+  pick bubble covered the answer cards (lockN: stage shrinks to .55 and rises, bubbles under the cards); the ring empty in the last
+  second (ringState: the arc shows the number, steps on the tick); ring badge / card badge, lead pick card / card 1, "1, 2 or 3 fingers"
+  under the hand; lcsky labels on each other; the bubble over the torch (lcglobe) and over the chick (lchens) (lib.js autoSay takes a
+  scene's free spot: `window._BUBAT`); Cycle check bubbles over the board; HOLD ON! answer Pip big; lclight board bigger and clean
+  until the lights fill it; game and key-word buddies spread; cliff PART 2 off the strip; loose x chips -> pick cards; YOU on the red
+  dot; chick wings rounder with YOU, Week / speeded-up pills clear; Momo in the dare; Last time pictures bigger; THEN photo in at once;
+  height labels bow out for LIVING tags; the ladybird fun fact fills from the first word; no egg-like patch on hen wings.
+- **Render:** `ep14_part1.mp4` 5:34.5, `ep14_part2.mp4` 5:28.3 (not in git), both -16.0 LUFS; `ep14_part1.srt`, `ep14_part2.srt`;
+  `sheet_part1.png`, `sheet_part2.png`; countdowns re-measured (`qa/countdowns_p1.txt`, `_p2.txt`: 1.000 s steps, bell on 0).
+- **For the teacher:** `qa/ep14_highlights.jpg` (10 labelled stills of the new style). Needs a painting / the teacher's eye: chick
+  wings (first person), a grown-up's hand, Momo's arms-crossed talking set, the PART 2 slam over "Part Two" (NOTES_REVIEW listen-proxy).
