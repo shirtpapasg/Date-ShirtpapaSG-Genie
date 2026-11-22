@@ -78,7 +78,7 @@ SC.zooplan = (t, s) => { const tg = MK("goatcard"), [gx, gd] = slideX(t, tg, .5,
     + buds(t) + wipe(t, s.t0, CREAM) + HUD(t); };
 /* [LOOK CLOSER] a goat home at a zoo in Singapore (a new place, unnamed): the goat pushes the wooden rail: no break; the goats seen between the rails */
 SC.lcgoat = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 960, fy: 700, art: goatArt, set: (tt) => VZ(tt), verdict: [`THE FENCE: WOOD · <tspan fill="#fff">STRONG</tspan>`, GOODC, { plain: "THE FENCE: WOOD · STRONG" }], tv: MK("v_goat"),
-  over: (tt) => smallPrint(tt, s.t0 + 1.2, GOAT_RULE) + OP(ramp(tt, s.t0 + 1.4, .4), TF(300, 1012, 1, tpill(0, 0, "A zoo in Singapore", 32, "#fff", P.ink, { w: 700 }))) });
+  over: (tt) => smallPrint(tt, s.t0 + 1.2, GOAT_RULE) + OP(ramp(tt, s.t0 + 1.4, .4) * (1 - ramp(tt, MK("v_goat") - .35, .3)), TF(300, 1012, 1, tpill(0, 0, "A zoo in Singapore", 32, "#fff", P.ink, { w: 700 }))) });
 /* back in the garden: the wood tile hops onto the last box (woodtile: five ticks); Basil: "Not glass!" with the picture card of the pen with a
    glass wall and the blue tag NOT FOR THIS JOB on it (glasstag). WIRED with the placeholder board and card */
 const glassPen = (t) => `<g filter="url(#drop)"><rect x="-216" y="-146" width="432" height="292" rx="22" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="6"/></g><clipPath id="gpc"><rect x="-198" y="-128" width="396" height="256" rx="12"/></clipPath><g clip-path="url(#gpc)"><rect x="-198" y="-128" width="396" height="256" fill="#BFE6FF"/><rect x="-198" y="-10" width="396" height="140" fill="#E7CFA2"/>${TF(-60, 96, .62, goatS(t, GOATS[0]))}${TF(110, 80, -.5, goatS(t, GOATS[1]), 0, .5)}
@@ -126,7 +126,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", x: 1210, size: 
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1, th = s.t0 + 2.3, u = clamp((t - th) / .5), sq = pulse(t, th, .25, .1) * (t < th ? 1 : 0) + (u >= 1 ? .6 * pulse(t, th + .5, .01, .3) : 0);
   const fx = lerp(FROG[0], FROG2[0], u), fy = lerp(FROG[1], FROG2[1], u) - 70 * Math.sin(Math.PI * u);
-  return lizReveal(t, s, L, V(t, { n: 9, bag: false, board: {}, frog: { x: fx, y: fy, sq, puff: t < th - .3 ? (.5 + .5 * Math.sin(t * 9)) : 0 } }) + (u >= 1 ? `<ellipse cx="${FROG2[0]}" cy="${FROG2[1] + 6}" rx="${n2(30 + 90 * clamp((t - th - .5) / .6))}" ry="${n2(6 + 16 * clamp((t - th - .5) / .6))}" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(1 - clamp((t - th - .5) / .6))}"/>` : ""), lerp(FROG[0], FROG2[0], u), lerp(FROG[1], FROG2[1], u) - 26, tq, "It was on the lily pad in the pond!", -150, -190, 62, 1.9); };
+  return lizReveal(t, s, L, V(t, { n: 9, bag: false, board: {}, frog: { x: fx, y: fy, sq, puff: t < th - .3 ? (.5 + .5 * Math.sin(t * 9)) : 0 } }) + (u >= 1 ? `<ellipse cx="${FROG2[0]}" cy="${FROG2[1] + 6}" rx="${n2(30 + 90 * clamp((t - th - .5) / .6))}" ry="${n2(6 + 16 * clamp((t - th - .5) / .6))}" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(1 - clamp((t - th - .5) / .6))}"/>` : ""), lerp(FROG[0], FROG2[0], u), lerp(FROG[1], FROG2[1], u) - 26, tq, "It was on the lily pad in the pond!", -150, -190, 62, 1.9, 830, 560); };   // Stage 3: the pills to the left, so the frog and its ring stay clear
 
 /* 13 · the dare for Episode 14: the Sun. The three cards, the ?, the banner and "Lock in your answer!" are wired; Stage 2 draws the three boards */
 const DRX = [700, 1080, 1460];

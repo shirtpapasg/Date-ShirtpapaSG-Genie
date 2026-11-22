@@ -11,7 +11,7 @@ replaces the classic _gRJ0NwV6p0** ("Why That Material? A Glass Trolley And Othe
 to EP12 and EP13); (k) the School Lab 3.8 line stays out until signed off; (l) no extra test clips unless a problem is heard).
 EP12 is live (its playlists' anchor for EP13: `explained-p3-ep12-part2`; EP12 Part 1 = G03-LFQEld8, Part 2 = ussXaa1fQUQ).
 
-Three stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · Stage 3 (render, checks, upload, Opus).
+Three stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · **Stage 3 (render, checks, upload: done 2026-11-22, Opus; LIVE)**.
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep13_script.md` is untouched.
@@ -217,3 +217,59 @@ used, no mark moved: every action is drawn AT its own mark). No video rendered.
   https://www.youtube.com/watch?v=G03-LFQEld8 · then A METAL Strap? https://www.youtube.com/watch?v=<EP13 Part 1 id>". (The tool skips a
   description that already starts with "▶ NEW VERSION", so a re-run will not overwrite the edit.)
 - Status: see ../progress/ep13.json
+
+## 22 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE (released as it is, the teacher's word)
+- Rendered with `./build_part.sh 1|2` (10 s chunks in `out/chunks_p1`, `out/chunks_p2`; about 10-12 min a part, 3 workers). `ep13_part1.mp4`
+  314.80 s (**5:14.8**), `ep13_part2.mp4` 312.57 s (**5:12.6**); 1920x1080 30 fps; both **-16.0 LUFS** (true peak -1.3 dBFS). No time added, no
+  cut used, no mark moved: every fix below is picture only. Captions `ep13_part1.srt` (140 cues), `ep13_part2.srt` (145 cues), 0 overlapping
+  cues; contact sheets `sheet_part1.png`, `sheet_part2.png`. No page errors (stills.js after each fix).
+- **Checked** (frame strips from the rendered files, dense round every action mark; a set of them in `qa/stage3/`): the cold open (the tipped
+  bag, EP12's three boards stand in, place pill); the calm recaps (P1 EP12's boards with their cards; P2 three pictures, one at a time, each with
+  its label); the butterfly / frog named by Heart with their picture ("a little butterfly", "a little frog") and ringed at the end ("It was on the
+  plant by the window!", "It was on the lily pad in the pond!"); goal cards read by Basil (P1) / Momo (P2), each lifted and ticked; Mark Sentences
+  read by the "Say it with me!" buddy (Basil, Pip; Basil, Momo), DESIGN / EXTINCT popping after the card; lock-in clues above the ring through the
+  countdown (P1 Round 1 *must bend* / *must not tear*; HOLD ON! *four parts* / *four uses* / *one material?*; P2 Round 1 *same length* / *same
+  width* / *old strap: 5*); the "Now you know!" ending. In motion, from Stage 2's list: (1) every hand (the strap lowered onto the rail, the bar /
+  stick laid and lifted, the clip, the books, the lift, the zip, the hang, the set-down, the pencil, the dropper, the short zip, the glove in the
+  test); (2) the cross-fade at `clip` and the bag's swing after `lift`; (3) the planks (fixed, below); (4) `lcbag`: to the chair at `hang`, down
+  to the floor AT `u_base`, the lit parts; (5) `lcdraw`: each drop lands AT `drop1` / `drop2` (plip / pff on the mark), the three hops, the
+  labels turning to *base · plastic* etc.; (6) `lctest`: each weight reaches the hanger AT its mark with a tok and the counter's click (checked
+  frame by frame at w1, w2, w5, w9), the glove draws back, nothing tears (the old strap only as the held picture); (7) `lcgoat`: walk-up, the
+  rub at `push1` and the head push at `push2` land on their knocks, the glide; (8) the board's tiles, the HOLD ON! fabric tiles, THEN: TEST IT
+  at `testcard`, Part 2's wipe and refill, the ticks; (9) both journeys (the zip closing overhead, the cream dip, the numbers 6-9 rising and
+  growing); (10) both reveals (fixed P2, below), the dragonfly's hop to line 4, the zoo map; (11) the dimmed set round the look-closer windows:
+  nothing readable leaks. Every action sound sits on its mark in `cues_pP.json` (lay1-3, clip, lift, zip1, u_base, drop1/2, zo1, jzipclose,
+  w1-w9, push1/2).
+- **Fixed** (small, local; only the affected chunks re-rendered):
+  - P1 `lcstraps`: the metal bar and the wooden stick read as LEANING (a long slanted trapezoid from above the rail down to the lower rail) ->
+    each now lies straight across the top rail like a balanced see-saw (`closer.js` plank: far end 150 above, near end 160 below the rail, no
+    skew, clear of the lower rail; the rock kept; *stays straight* points at the far end). Chunks 70-90 s.
+  - P1 `wetfloor`: Basil's wet-floor picture on its easel landed on top of the board OUR DESIGN PLAN (title hidden) -> it lands at x 890,
+    between the bag and the board (`p1.js` slideX). Chunks 180-200 s.
+  - P1 `lcdraw`: the dropper floated with no hand -> a hand holds it by its bulb, from above (`closer.js`). Chunk 200-210 s.
+  - P2 `lcgoat`: the verdict banner covered the end of the pill *A zoo in Singapore* -> the pill fades out just before the verdict
+    (`p2.js`). Chunk 140-150 s.
+  - P2 `liz`: the two pills ("It was on the lily pad in the pond!", "Tell someone at home!") sat on top of the frog and its ring through the
+    hop -> they stand to the left (x 560; `common.js` `lizReveal` takes `py`, `px`; Part 1 unchanged). Chunks 260-280 s.
+  - Captions: Pip's "Two." and "A dragonfly has six legs." started .28 s apart, so the .3 s minimum made two cues overlap -> `finish.sh` joins a
+    cue to the next one when they start under .6 s apart ("Two. A dragonfly has six legs.").
+- Not changed (noted): the title slam's first frames are larger than the screen (a slam); the round cards' small pictures; the "+1 arms crossed"
+  coin passes over the shelf's INTENDED USE pill for a moment; the zoomed butterfly reveal crops the board behind (background); the cliffhanger's
+  THEN: TEST IT card is small beside the board (about 20 px letters at 1080p; Heart says "They test!"); Part 2's small print *An adult adds the
+  weights.* also shows on the game screen; in BE THE NEW STRAP the next weight flies in over the pond for a moment; in `lcgoat` the goat walking
+  back looks long for a few frames of the glide.
+- **Listen check (machine; not by ear):** Whisper (small.en and base.en, CPU) hears every flagged take right: Pip's "Engineers." and
+  "Extinct.", Basil's "Intended use.", Momo's j1004 "...will become extinct. This means that they will all die out." word for word, the other
+  read-along takes, and Basil's j902 ("flamingo, macaw"). No re-record. A human should still listen once (`qa/new_words_check.m4a`).
+- Thumbnails: `thumb_part1.jpg` (METAL STRAP?) and `thumb_part2.jpg` (5 OR 9?) read well at 320 px; uploaded as they are.
+- Uploaded with `upload.json` (checked against ep12/upload.json and the live EP12 keys in explained_uploaded.json; Made for Kids, public;
+  both playlists PLb8LpPqxQI4E (positions 25, 26) and PLPfEuT7l4KjI (43, 44) right after EP12 Part 2 ussXaa1fQUQ via `explained-p3-ep12-part2`;
+  `"replaces": ["_gRJ0NwV6p0"]`, `retire_old`: the classic "Why That Material? A Glass Trolley And Other Bad Ideas" left both playlists; it
+  stays PUBLIC, never deleted). **Part 1 https://www.youtube.com/watch?v=FO1Y_KSZU-c , Part 2 https://www.youtube.com/watch?v=8lQ1-1ruveY .**
+- The old video's first description line, written by hand after the upload (API, `yt.call`, description only; the rest kept): "▶ NEW
+  VERSION: choosing materials https://www.youtube.com/watch?v=G03-LFQEld8 · design like an engineer https://www.youtube.com/watch?v=FO1Y_KSZU-c".
+  (The uploader skips a description that starts with "▶ NEW VERSION", so a re-run keeps it.)
+- Left for the teacher: listen to Pip's "Engineers." / "Extinct.", Basil's "Intended use.", Momo's "will become extinct"; watch the five
+  look-closers (the planks now lie flat across the rail), both journeys and the butterfly / frog reveals. The School Lab 3.8 line stays out of
+  the descriptions until that lab is signed off.
+

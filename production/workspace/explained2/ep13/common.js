@@ -154,10 +154,10 @@ function nykScene(t, s, prop, o = {}) { const BX = o.bx || [300, 1650, 1275], HX
     for (let i = 0; i < 22; i++) { const life = 1.1 + hash(i, 3) * .8, v = (((t - t0) + hash(i, 5) * 3) % life) / life, x = 120 + hash(i, 7) * 1680, y = 120 + hash(i, 9) * 560 + 50 * v; out += `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2((.5 + hash(i, 2) * .7) * Math.sin(Math.PI * v))}) rotate(${n2(90 * v + 20 * i)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`; } }
   return out + logo(t); }
 /* ============ the hidden animal, revealed: a replay of its shot with a ring around it ============ */
-function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u);
+function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7, py = 830, px = 960) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u);
   return `<g transform="translate(960 540) scale(${n2(zz)}) translate(${n2(-lerp(960, lx + dx, u))} ${n2(-lerp(540, ly + dy, u))})">${view}<circle cx="${lx}" cy="${ly}" r="${n2(rr + rr * .07 * Math.sin(t * 6))}" fill="none" stroke="${P.sun}" stroke-width="${n2(9 * rr / 88 + 2)}"/></g>`
-    + (t >= tq ? TF(960, 830, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw(qtext, 58, 700) / 2 - 60)}" y="-60" width="${n2(tw(qtext, 58, 700) + 120)}" height="120" rx="60" fill="${P.ink}"/></g>${T(0, 20, qtext, 58, "#fff")}`) : "")
-    + (t >= tTell ? TF(960, 970, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + logo(t); }
+    + (t >= tq ? TF(px, py, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw(qtext, 58, 700) / 2 - 60)}" y="-60" width="${n2(tw(qtext, 58, 700) + 120)}" height="120" rx="60" fill="${P.ink}"/></g>${T(0, 20, qtext, 58, "#fff")}`) : "")
+    + (t >= tTell ? TF(px, py + 140, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + logo(t); }
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
 function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, HIDDEN[0]), tFind = W(L, "spot");   // teacher, 2026-11-21: Heart NAMES the animal ("A little sparrow is hiding in this video. Can you spot it?") and its picture is shown
