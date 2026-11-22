@@ -83,6 +83,21 @@ EP14 on every script is written this way, by Opus:
 - The buddies stay cute and alive in every frame and react to what we see; scenes are real places with life in them.
 - Full guide for any agent or account: `EXPLAINED_PLAYBOOK.md`.
 
+## 1d. Trial from EP14: big buddies in the world, and buddies who teach (teacher, 2026-11-22)
+
+The teacher: "I want to try a new episode with the pet buddies not having the colour circular background. Let them blend in. Also,
+make them bigger so the cute pet buddies can create a more relatable connection with the viewer. Focus more on their dialogue and how
+they explain / teach scientific terms." From EP14 (a trial; if the teacher likes it, it becomes the rule):
+- **No aura discs.** The buddies stand IN the scene: on the floor, the table, the window ledge, with a soft contact shadow and the
+  scene's light on them (a warm rim light at dawn, cooler at night). This replaces "buddies always sit in their circular aura disc"
+  (section 5) for the trial. Signature colours stay on their name tags, speech-bubble borders and pick cards.
+- **Bigger.** A speaking buddy is about 40–55% of the frame height (two-shot / close-up framing like a children's show), not small
+  in a corner. Props are scaled to sit naturally beside them; the camera frames the buddy who talks, and moves (never jump-cuts)
+  between them.
+- **Buddies teach.** Each scientific term is explained by a buddy in their own words, in a short back-and-forth with another buddy or
+  the viewer ("Rotation means the Earth spins round and round, like my globe!"), with a picture beside them; Heart hosts, sets up
+  the question and confirms, but the buddies carry the explaining. Full, natural sentences (section 5 "Talk like people").
+
 ## 2. Length and parts
 
 - **Each video is about 3 to 5 minutes.** A topic that needs more is split into **Part 1 and Part 2**.
