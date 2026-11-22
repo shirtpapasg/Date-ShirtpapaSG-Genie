@@ -54,6 +54,22 @@ const THUMBS = {
       { cut: 'frost', x: 850, y: 262, w: 400, line: '#fff', lw: 7, glow: '#FFE45C', rot: 3 },
       { buddy: 'pip_surprised', x: -20, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHY', x: 456, y: 190, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'start' }, { t: 'BLURRY?', x: 1256, y: 148, size: 112, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+
+  // EP12 (Stage 2): these two ARE the uploaded thumbnails (ep12/thumb_part1.jpg, thumb_part2.jpg): no old style was made for EP12
+  ep12_1: { ep: 'ep12', part: 1, out: 'ep12/thumb_part1.jpg', old: 'ep12/thumb_part1.jpg',
+    bg: { c: ['#FFD1E3', '#FF4F8B', '#B0124F'], at: [850, 420], rays: .2 },
+    cuts: { trolley: `TF(850, 590, 2.2, riceSack()) + TF(1010, 590, 2.1, drinkB(1)) + TF(1066, 590, 2.1, drinkB(0)) + TF(960, 500, 3.4, trolley("glass"))` },
+    layers: [
+      { cut: 'trolley', x: 520, y: 246, w: 590, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'GLASS', x: 1250, y: 112, size: 118, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'TROLLEY?', x: 1256, y: 224, size: 128, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep12_2: { ep: 'ep12', part: 2, out: 'ep12/thumb_part2.jpg', old: 'ep12/thumb_part2.jpg',
+    bg: { c: ['#FFF27A', '#FF9A1F', '#D9480F'], at: [860, 430], rays: .2 },
+    cuts: { car: `TF(960, 800, 2.2, carSide())` },
+    layers: [
+      { cut: 'car', x: 440, y: 320, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHY 4', x: 1250, y: 118, size: 124, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MATERIALS?', x: 1256, y: 232, size: 118, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);

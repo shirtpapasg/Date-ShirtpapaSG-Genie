@@ -9,7 +9,7 @@ is plastic, (f) the fish tank, (g) mynah and squirrel, (h) key words as written,
 Ideas", pp. 59-72): it stays in the playlists until a later episode also covers pp. 66-72, (m) no extra test clips unless a problem is heard).
 EP11 is live (its playlists' anchor for EP12: `explained-p3-ep11-part2`).
 
-Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · Stage 2 (drawing, Fable) · Stage 3 (render, checks, upload, Opus).
+Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · Stage 3 (render, checks, upload, Opus).
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep12_script.md` is untouched.
@@ -120,18 +120,82 @@ landing, the floor rushing past, the knock; BE A DROP OF WATER: the spout, the w
 the tyre, the ground and a drain cover). Two hidden animals, cute and alive: the mynah on the TROLLEYS sign, the squirrel on the rain tree.
 Reused as they are: EP11's three trolley boards (ep11dare.js), EP9's drop-box picture (ep09drop.js), the property chips.
 
-## Stage 2 (Fable): draw every `phScene` / `lcPH` / `ringPH` / `hiddenPH` placeholder; keep the marks (or move a mark in script.py and rebuild)
-- After any change: `python3 build_tl.py 1 && python3 build_tl.py 2 && python3 make_todo.py`, `NODE_PATH=$(npm root -g) node dump_cues.js P &&
-  node song.js P` (mixes), and stills: `PART=1|2 ./sheet.sh name cols t1 t2 ...` -> `qa/name.jpg` (prints page errors); one expression:
-  `node probe.js out.jpg 1 '<js>'`; bake sets: `node bake.js walk park`.
-- Keep each part at about 5:15 or under; the cut candidates are listed above.
+## Stage 2: done (2026-11-22, Fable). Every scene is drawn; no `phScene` / `lcPH` / `ringPH` / `hiddenPH` placeholder is left in `p1.js` / `p2.js`.
+**Lengths unchanged: Part 1 5:14.8 (314.8 s), Part 2 5:14.8 (314.8 s).** `script.py`, the voices, the timelines and `sound_cues.js` were not touched
+(no cut used, no mark moved: every action is drawn AT its own mark). No video rendered.
+- **New file** `walk.js` (page.html loads it after pics.js, before tests.js): `XDEFS12` (gradients, the weave / brushed-steel patterns);
+  `BG.walk` / `BG.walkD` (the covered walkway: SUPERMARKET front with shelves, rice sacks and crates, the trolley bay with its TROLLEYS sign on
+  a post, the letterbox row, a plant, the AQUARIUM shop; `walkD` = dimmed) and `BG.park` / `BG.parkD` (the open-air car park: the block, the
+  covered linkway, the grass verge, the rain tree with its low branch, marked lots), all baked (`node bake.js walk walkD park parkD` after any
+  change); `VW(t, o, cam)` / `VP(t, o, cam)` = a set with its live things (the tank with swimming guppies and the mynah / the squirrel, the car,
+  the trolley, the folding table with the three bottles) under a camera `[zoom, cx, cy]`; `trolleyS({load, rot, dip, rat, flap})` (side view;
+  `load` = how far above its place each thing still is), `bayRow`, `baySign`, `trolleyTop`; `riceSack`, `drinkB`, `tinC`; `bottleSvg(kind, {glow})`
+  (plastic / glass / metal, the same shape); `tankSvg` + `guppy` / `guppyAt`; `carSide({boot, bags, lit, dim})` + `CARPT`; `foldTable`, `canW`
+  (the watering can), `shopBag`, `basketS`, `towelS`, `scissorsS`, `raincoatS`, `clothBag({rice, fold, lift})`, `riceSmall`; `aHand(x, y, rot, sc,
+  flip)` (the adult's hand, by its fingertips); `mynahBird` / `mynahArt`, `squirrelBody` / `squirrelArt`; `TILE` / `SWATCH` (the board's picture
+  and material tiles); `bagS` + `PIC.bagFabric / bagMetal / bagWood` (**EP13 opens with these boards**).
+- **Changed:** `tests.js` (`matchBoard` drawn: a wooden-framed board on a low stand, picture tiles, material swatches, ONE car picture with a
+  bracket beside rows 4-7, `o.good` = the green SUITABLE tag above the MATERIAL column; `HIDDEN` = the drawn mynah / squirrel; `trolleyRule`
+  sits just under the logo (y 126) so it does not cover the SUPERMARKET sign), `closer.js` (the five arts `jobArt`, `metalArt`, `tankArt`,
+  `bottleArt`, `carArt`; `recapPic` (Part 2's three recap pictures), `tickTable`, `bottlePic`, `crossBadge`, `LOADED`), `shrink.js` (both
+  journeys), `p1.js` / `p2.js` (all scenes; `momoNotes` drawn on an easel with a small drawing on each line, the tip card's picture `rainPic`).
+  `../thumb_v2.js`: entries `ep12_1`, `ep12_2`.
+- **LOOK CLOSER as built** (shared frame: slow push-in, the set dims, no score / shelf / buddies / hidden animal, one verdict held 2.5 s):
+  | Scene | Part, time (verdict) | What is shown | Verdict |
+  |---|---|---|---|
+  | `lcjob` | P1 0:54.6-1:15.3 (1:12.8) | two hands lower the sack RICE 10 kg: it lands at `rice` and the trolley dips on its wheels; four bottles, three tins drop in on their marks; labels handle: to push · basket: holds the groceries · wheels: roll; one hand takes the handle and the loaded trolley rolls across the window (`push` to `stop`); PURPOSE pops | ITS PURPOSE: TO CARRY HEAVY GROCERIES (sun-yellow letters on cream, dark border) |
+  | `lcmetal` | P1 1:54.6-2:22.7 (2:20.2) | push-in to the bottom of the basket; two panels side by side (basket empty / with the heavy sack): the same bar along ONE dashed guide line, *metal bars*, *still straight*; the wide view: the hand pushes the trolley into the back of the last trolley in the bay (contact at `clang`, a small bounce back, the bottles rattle); *slow motion*: once more, 2.4 x slower; a round close-up where metal met metal: smooth, glints; *a hard knock* · *no crack* · *no break*; chip STRONG; EP11's metal board with RIGHT FOR THE JOB (`goodtag`) | METAL: STRONG (green) |
+  | `lctank` | P1 3:28.4-3:52.5 (3:50.0) | the planted tank (lid, bubbles, six guppies swimming); a magnifier follows one guppy (enlarged, sharp); *glass*, *We see every fish clearly*, chip TRANSPARENT; the view glides down to the bottom edge and the wooden shelf (little sparkles: dry); *full of water*, *the shelf: dry*, chip WATERPROOF; back to the whole tank with both chips; small print *We do not tap the glass.* upper right for the whole shot | GLASS: TRANSPARENT AND WATERPROOF (green) |
+  | `lcbottles` | P2 0:55.4-1:29.4 (1:26.9) | three bottles on the table over a cream tick table; row 1: a magnifier glides along the table under them (*dry*), three ticks; row 2: a soft light from behind, the water line shows in plastic and glass (*the water* x2), metal *cannot see inside* (a cross); row 3: a hand carries the plastic bottle out over the ground, lets go .42 s before `land`, it lands on its side, bounces once, rolls; the hand picks it up and turns it (*no crack · no leak*, tick) and puts it back; a hand rests on the glass bottle (not lifted), the tag *We do not drop glass.* on that bottle; the book's strip; a cross under glass, a tick under metal; a green ring round the plastic bottle; *At home, on a table: glass is fine.* · *Handle it carefully.* | FOR SCHOOL: THE PLASTIC BOTTLE (green) |
+  | `lccar` | P2 1:54.1-2:27.8 (2:25.3) | four close-ups, each with ONE label line and its chip: the front tyre under the wheel arch, a palm pushes its side (*it does not give*, STRONG); the seat through the open door, a hand presses: the cushion dips and comes back (FLEXIBLE); the windscreen from the front, the watering can tips and water runs down in streams and beads and off the bottom edge, the two seats behind sharp (*the seats: dry*; WATERPROOF then TRANSPARENT); the door panel, a fist knocks twice (two plain rings; STRONG); then the whole car, the four parts lit one by one with label + chip; PARTS pops | ONE CAR · FOUR MATERIALS (green) |
+- **Journeys:** BE THE METAL (P1 4:01.0-4:24.3: you look along the bottom of the basket: the bars run away like shining rails, the wire sides
+  and the ceiling above; the underside of the sack RICE 10 kg comes down and settles (the view dips a little, the rails stay straight); the
+  floor's lines rush past between the bars and the pillars slide by; the wire back of the next trolley rushes up, a white flash, one shake,
+  whole again; the chip STRONG glows) · BE A DROP OF WATER (P2 2:46.7-3:08.1: inside the green spout, the round opening and the sky; out,
+  the tilted windscreen rises from below; Splash! rings, the view against the glass; through it the two woven seats, large and sharp, beads
+  of water on your side; the blue painted slope with the sky in it; the black wall of the tyre's grooves rushing past; a puddle, rings, a
+  drain cover a little way off). The edges of the water view wobble all the way.
+- **Hidden animals** (named by Heart with the drawn badge; the reveal rings them): the **mynah** on top of the TROLLEYS sign (`MYNAH`
+  [250, 358]; it bobs, tilts its head, blinks) in every walkway shot, also the dimmed ones (at the reveal it hops twice, flaps once and
+  nods); the **squirrel** on the low branch of the rain tree (`SQ` [1340, 442]; its tail flicks, it blinks) in every car-park shot that shows
+  the tree (at the reveal it runs along the branch, sits up and flicks its tail). Neither is in a look-closer or a journey.
+- **Thumbnails (new style, THUMBNAIL_V2.md; these are the files upload.json uploads):** `thumb_part1.jpg` = **GLASS TROLLEY?** (white /
+  yellow; Basil surprised, EP11's glass trolley with the rice and two bottles in it, a pink-red burst, chip 1); `thumb_part2.jpg` =
+  **WHY 4 MATERIALS?** (Momo surprised, the car, an orange burst, chip 2). No PART badge. Both at 320 px: `qa/thumbs.jpg`.
+  Remake: `NODE_PATH=$(npm root -g) node ../thumb_v2.js ep12_1 ep12_2` (from `explained2/`). The script's old-style thumbnail words
+  (section 7) are NOT used.
+- **Deviations from the script / SCENES_TODO** (picture only): the trolley is seen from the side everywhere (the push-in "down through the
+  side of the basket" is a zoom on the side view; the bars before / after are two side close-ups of ONE bar with its cross rods); the knock
+  is side-on and its slow replay is the same view (no zoom) with the close-up as a round inset; the trolley stays loaded from `lcjob` on,
+  except in the glide into BE THE METAL (empty basket, as the journey starts with the sack coming down); the camera "turn" to the
+  aquarium shop is a pan and zoom; the trolley "from above" (cliffhanger, recap) is a plan view with the three bottles drawn upright in the
+  flap section; the car is a side view in every wide shot (the "front quarter" view is not drawn; `allfour` is the side view, where all
+  four parts show), the boot is at the car's left end; *We do not drop glass.* is a tag ON the glass bottle (a line from the side would
+  have crossed the metal bottle); `things`: the hand carries each thing from the basket to its place (it lands at its mark), the tags
+  stand above with a plain line; `fabric`: both tags stay, Pip's bag is plain lilac cotton with no name on it (a tag *Pip's bag: fabric*
+  shows before the lift); `metalans`: EP11's boards left, the board MATCH THE JOB right, on the dimmed walkway; "Last time" (Part 1) stays
+  on the stage; the Showdown, the fix, the big board and the dare stand on the dimmed, cleared car park (no car, so no car small print in
+  `show`, `fix`, `board`; the game scene has none either); the chant's lines are on the left and the board on the right of them (behind
+  nobody); the tip card stands on its own low stand; the watering can in `waitw` is held above the car's front.
+- **Checks (stills only):** stills every 0.45 s of both parts: no page errors. `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg` (a frame about every
+  3 s), `qa/lc_p1.jpg`, `qa/lc_p2.jpg` (the five look-closers as strips), `qa/journey_metal.jpg`, `qa/journey_drop.jpg`, `qa/thumbs.jpg`.
+  Cues re-dumped (unchanged counts) and both preview mixes rebuilt at -16.0 LUFS.
+- **For Stage 3 to watch in motion:** (1) the hands: every hand is the same simple arm with a blue sleeve, moved by its fingertips (the two
+  hands lowering the sack in `lcjob`, the push, the bag lift in `fabric`, the drop in `lcbottles`, the palm / press / knuckles in `lccar`,
+  the boot lid at `bootshut`): check none pops or crosses a label; (2) the sack's landing at `rice` and the knock at `clang` / the slow
+  replay's contact at `slowmo + .8` against their sounds; (3) the plastic bottle's fall (released at `land - .42`), bounce and roll, and its
+  trip back to the table before `rest`; (4) the water on the windscreen (2.6 s from `pour`) and the can's tilt; (5) the magnifier following
+  the guppy in `lctank` and the glide down / back; (6) the board's rows hopping on at `row1o` / `row1p` / `row1m` / `row2` / `row3` /
+  `carrows` (during `lccar` the board is outside the window, so the car's rows are first SEEN in `mark2`-`board`: fine, but say so if the
+  teacher asks) and the seven ticks; (7) the chant: the board's columns flash and the SUITABLE tag pops on line 3; (8) both reveals (the
+  mynah's hop, the squirrel's run) and their rings; (9) the cliffhanger's PART 2 slam over the bottles' tags; (10) the journeys' cuts
+  (the dips between the drop's stops are short: 0.2 s).
 
 ## Stage 3 (Opus): `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`)
 - Output `ep12_partP.mp4` (ignored), `ep12_partP.srt`, `sheet_partP.png`; check stills around every action mark, card, look-closer and reveal.
 - A human listens to `qa/new_words_check.m4a` (Pip's read-along "Use." at 0:15.7 first) before upload.
-- Thumbnails (script section 7): Part 1 white A TROLLEY, sun-yellow MADE OF GLASS?! (the three dare boards and the real loaded trolley; Basil
-  cheering left); Part 2 white ONE CAR, sun-yellow 4 MATERIALS! (the whole car with its four label lines; Momo surprised left):
-  `node thumb_still.js N t qa/th/fN.png` then `node thumb.js qa/th/fN.png thumb_partN.jpg N "WHITE" "YELLOW"`.
+- Thumbnails are DONE in the new style (Stage 2 above): `thumb_part1.jpg` (GLASS TROLLEY?), `thumb_part2.jpg` (WHY 4 MATERIALS?); look at
+  `qa/thumbs.jpg` once more before upload. Do not remake them with the old `thumb.js`.
 - Upload with `production/youtube/explained_upload.py ep12/upload.json` (Made for Kids, public, both playlists after EP11 Part 2's key
   `explained-p3-ep11-part2`; nothing replaced or retired: _gRJ0NwV6p0 stays).
 - Status: see ../progress/ep12.json

@@ -1,5 +1,6 @@
 // p1.js: PART 1, "A GLASS Trolley? Why Supermarket Trolleys Are Made of METAL": objects and purposes, properties decide uses, EP11's dare answered.
 // Segments 1-15 of p3_ep12_script.md (version 1, 21 Nov 2026; the teacher's go-ahead in its section 12).
+// STAGE 2 (drawn, 2026-11-22): the sets and props are in walk.js, the look-closer pictures in closer.js, the journey in shrink.js. (Stage 1 notes below.)
 // STAGE 1 (setup): the shared routines are wired (the calm recap of EP11's dare with EP11's own three trolley boards and cards, the title slam,
 // game, goals read by Momo, countdown, Mark Sentences read by Pip / Basil, Round 1's lock-in with its two clue labels on top of the ring and the
 // trolley boards on the cards, the book's strip with EP9's real drop-box picture, the boards' job tags, the HOLD ON! ring with its picture and
