@@ -161,6 +161,13 @@ EP14 on every script is written this way, by Opus:
     of it on screen for a moment, so children know what to look for. The reveal at the end: "Did you spot the [grasshopper]? It was
     [where]! … Tell someone at home." The reveal circles it, as before. Nothing else in the episode depends on which animal it is.
   - Say "lizard", never "cicak", when it is a lizard.
+  - **The hidden-animal moments are one smooth shot (teacher, 2026-11-22): "the transition to be from [the real scene], directly
+    zoom into the [animal], then the other objects to pop out… more smooth and not disjoint, having no unnecessary cutting of
+    scene."** Never hard-cut from the real place to a separate game screen. Stay in the real place, push the camera in smoothly
+    (about 1–1.5 s, ease in-out) straight onto the animal while the rest dims or blurs behind; then the game objects pop out over
+    it one after another (the name badge by the real animal, the YOU hand and ring, "You lock in first", the score pill, the buddy
+    discs). The reveal at the end works the same way: back in (or smoothly into) the real place, push in on the animal, ring it.
+    In general, avoid unnecessary cuts: when the next beat is in the same place, move the camera instead of cutting.
 - **Key-word read-along before the end of every part:**
   1. The shelf moves to the centre and grows.
   2. Heart: "Let's read today's key words together! Ready?"

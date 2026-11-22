@@ -142,6 +142,9 @@ book's words name what the child just lived. True at P3 level.
 - "HOLD ON!": a buddy uses a bad rule or an unfair test; the viewer crosses their arms.
 - Showdown: a buddy's homework with one mistake, double points. Score hand: one finger per point; a perfect game ends in a high five.
 - Hidden animal: topic-related, cute and alive, named by Heart at the start with its picture, revealed and circled at the end.
+- **Hidden-animal moments are one smooth shot (teacher, 22 Nov):** from the real place, the camera pushes straight in onto the
+  animal, then the badge, the YOU hand and ring, the score pill and the buddy discs pop out over it. No hard cut to a separate game
+  screen; the reveal works the same way. Avoid unnecessary cuts anywhere: in the same place, move the camera instead of cutting.
 - Key-word read-along before each part ends; "Say it with us!", then the class shouts "Now you know!" (1.0 s count-in, happy blast);
   about 4 s of animated outro; nothing in the bottom fifth of the frame at the end.
 
@@ -262,7 +265,7 @@ New Singapore names get a test clip for the teacher before use.
 - [ ] Every scene is a real place with life in it; nothing floats; no prop hides behind a disc; no orphan labels; nothing cut off.
 - [ ] Every spoken fact, clue and verdict is a full, natural sentence (no 2–3 word fragments).
 - [ ] Book wording exact on cards and key words; no wrong idea said by Heart; the non-textbook list is ready.
-- [ ] Hidden animal named at the start and revealed; goal cards and Mark Sentences read by buddies with "Say it with me!" + 0.8 s.
+- [ ] Hidden animal named at the start and revealed, each as one smooth push-in from the real place (no jump cut); goal cards and Mark Sentences read by buddies with "Say it with me!" + 0.8 s.
 - [ ] Each part ≤ about 5:15; -16 LUFS; `.srt` with no overlaps; thumbnails readable at 320 px.
 - [ ] The teacher has seen the preview (once that step is agreed), and a human has listened.
 - [ ] Upload with `--check` first; never delete an old video; update the guide, send links and `.srt`, update the handoff.
