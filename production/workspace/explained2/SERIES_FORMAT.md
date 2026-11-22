@@ -315,8 +315,16 @@ order). Send the teacher the finished parts and the list of things to check; the
    watch time on unlisted or private videos does not count towards YouTube's public watch hours.
 6. **Quality before speed (teacher, 2026-11-22: "focus on improving the quality so audience can notice the differences rather than
    having us waste token and resources").** This replaces the run-ahead rule below until the teacher says otherwise: ONE episode at
-   a time, no scripts written ahead, no extras. Each episode: Opus script → Fable drawing → **6–8 key stills to the teacher** →
-   fixes → Opus render, checks, upload. Spend the effort on what viewers see: cute, reacting buddies; smooth camera with no needless
+   a time, no scripts written ahead, no extras. Each episode: Opus script → Fable drawing → **a "teacher's eye" review** → fixes →
+   Opus render, checks, upload — automatically, without waiting for the teacher (teacher, 22 Nov: "Ultimately I want a workflow
+   that automates, not waiting for me. Save the rules, follow my directions, put in more effort"; asked to choose between full
+   automation (A) and approval before render (B), the teacher chose A). The teacher's-eye review is a separate Opus agent that has
+   not drawn the episode: it looks at 6–8 key stills per part plus frame strips of every transition, and judges them the way the
+   teacher did EP1 (`EP01_vs_EP04_NOTES.md`, `ep01/NOTES_ROUND3.md`, this rulebook): is every buddy cute and reacting? anything
+   floating, cut off, hidden behind a disc, unreadable on a phone? any needless cut? does each look-closer show the why? any 2–3
+   word spoken fragment? It writes its notes to `epNN/NOTES_REVIEW.md`; the drawing agent fixes every note; the reviewer checks
+   again; only then render. The key stills are also sent to the teacher for information (not a gate); the teacher's notes,
+   whenever they come, are fixed in a re-render. Spend the effort on what viewers see: cute, reacting buddies; smooth camera with no needless
    cuts; real places with life; deep, visual explanations; full human sentences.
 7. *(Paused 22 Nov)* **The pipeline runs ahead on its own (teacher, 2026-11-21: "always write script automatically once 2 episode before is live,
    one episode before start rendering").** When episode N goes live, without waiting to be asked:
