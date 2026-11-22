@@ -55,6 +55,33 @@ const AURA = { pip: P.pip, basil: P.basil, momo: P.momo }, TINT = { pip: "#EDE4F
 const nameTag = (who, size = 32) => { const w = tw(BNAME[who], size, 700) + size * 1.5, h = size * 1.5; return `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="${P[who]}"/><rect x="${n2(-w / 2 + 3)}" y="${n2(-h / 2 + 3)}" width="${n2(w - 6)}" height="${n2(h - 6)}" rx="${n2(h / 2 - 3)}" fill="none" stroke="#fff" stroke-width="3" opacity=".85"/></g>` + T(0, n2(size * .35), BNAME[who], size, "#fff"); };
 const DISC_DX = { pip: -.06, basil: -.10, momo: -.08 };
 function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.0 }[who]; const k = Math.floor((t + ph) / per), tb = k * per - ph + hash(k, who.length) * 1.4; return t >= tb && t < tb + .1; }
+/* v3 (teacher, 22 Nov: "no buddy ever frozen"): every buddy on screen reacts to every sentence someone else says. At each sentence start
+   (Heart's or another buddy's) the buddy swaps to a reaction pose (squash, hard cut, overshoot, hop: never a cross-fade) chosen from what is
+   said (a question: thinking; a "no / break / not": oops or surprised; an exclamation: cheer or surprised; else pointing / arms crossed or a
+   nod-hop), holds it about 1.4 s, then pops back to the sitting (talking) sprite well before its own line. Explicit scene poses win: the
+   auto reaction only runs while the scene's own pose is "sit". The three buddies are staggered so they never all pop on the same frame. */
+const REACT_DLY = { pip: .12, basil: .27, momo: .42 };
+let _trig = null;
+function reactTriggers() { if (_trig) return _trig; const out = [];
+  for (const id of TL.order) { const L = TL.lines[id]; if (!L || L.who === "chant" || !L.words || !L.words.length) continue; let st = true, cur = null;
+    L.words.forEach((w, i) => { if (st) { cur = { t: w.a, who: L.who, id, txt: "" }; out.push(cur); } cur.txt += (cur.txt ? " " : "") + w.w; st = /[.!?]$/.test(w.w); }); }
+  out.sort((a, b) => a.t - b.t); out.forEach((o, i) => { o.k = i; }); return (_trig = out); }
+let _own = {};
+function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id) => TL.lines[id]).filter((L) => L && (L.who === who || (L.who === "chant"))).map((L) => L.t).sort((x, y) => x - y)); for (const x of a) if (x > t) return x; return 1e9; }
+function reactPose(who, txt, k) { const r = hash(k, who.length + 3), q = /\?$/.test(txt), neg = /\b(not|no|never|break|breaks|broke|bad|cannot|can't|fragile|crack|oh no|oops|knock|clang)\b/i.test(txt), ex = /!$/.test(txt);
+  if (who === "basil") return q ? (r < .5 ? "arms_crossed" : "surprised") : neg ? (r < .5 ? "oops" : "surprised") : ex ? (r < .55 ? "cheer" : "surprised") : (r < .45 ? "arms_crossed" : r < .6 ? "surprised" : null);
+  if (q) return r < .65 ? "thinking" : "pointing";
+  if (neg) return r < .5 ? "oops" : "surprised";
+  if (ex) return r < .5 ? "cheer" : "surprised";
+  return r < .4 ? "pointing" : r < .6 ? (who === "pip" ? "thinking" : "thinking") : r < .75 ? "surprised" : null; }
+// -> { t0, t1, pose (null = a nod-hop) } of the reaction running at t, or null
+function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact || o.still) return null; const T0 = Math.max(S.t0 - .05, o.in !== undefined ? o.in + .6 : -9), d = REACT_DLY[who] || .2;
+  const tr = reactTriggers(); let i = -1; for (let j = tr.length - 1; j >= 0; j--) { if (tr[j].t + d <= t) { i = j; break; } } if (i < 0) return null;
+  for (; i >= 0; i--) { const g = tr[i]; if (g.t < T0) return null; if (g.who === who) continue; const t0 = g.t + d; if (t0 < tsw + .7) return null;
+    let nt = 1e9; for (let j = i + 1; j < tr.length; j++) if (tr[j].who !== who) { nt = tr[j].t + d; break; }
+    const t1 = Math.min(t0 + 1.45, nt - .08, nextOwn(who, g.t) - .3, nxt - .2); if (t1 - t0 < .55) { if (t < t0 + .4) return { t0, t1: t0 + .4, pose: null }; continue; }
+    const pose = reactPose(who, g.txt, g.k * 3 + who.length); return { t0, t1, pose: pose && SPR[`${who}_${pose}`] ? pose : null }; }
+  return null; }
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
    o.poses = [[time, pose], ...] (pose swaps POP with a squash and a stretch, never a cross-fade; default pose "sit")
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
@@ -63,7 +90,11 @@ function buddy(who, x, y, h, t, o = {}) {
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99;
   for (const [tp, p] of o.poses || []) if (t >= tp) { pose = p; tsw = tp; }
-  let nxt = 99; for (const [tp] of o.poses || []) if (tp > t) { nxt = tp; break; }
+  let nxt = 1e9; for (const [tp] of o.poses || []) if (tp > t) { nxt = tp; break; }
+  let nodH = 0;
+  if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);   // v3: never frozen
+    if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
+      else if (!R.pose && t < R.t0 + .5) nodH = hop(t, R.t0, .36, 1); } }
   let k = o.k || 1; if (o.in !== undefined) { if (t < o.in) return ""; k *= spring(t, o.in, .5); } if (o.out !== undefined && t > o.out) { k *= 1 - eo((t - o.out) / .2); if (k < .02) return ""; }
   const ph = { pip: .9, basil: 0, momo: 1.9 }[who];
   let sy = 1, sx = 1, rot = 0, lift = 0;
@@ -80,6 +111,7 @@ function buddy(who, x, y, h, t, o = {}) {
     if (pose === "cheer" && !o.nohop) { const e = ss(.1, .22, u) * (1 - ss(1.9, 2.3, u)), sA = Math.abs(Math.sin(Math.PI * 2.6 * (u - .1))); lift -= 24 * sA * e * (h / 380); const q2 = (.05 * Math.pow(1 - sA, 3) - .03 * sA) * e; sy *= 1 - q2; sx *= 1 + .8 * q2; rot += 1.6 * Math.sin(Math.PI * 2.6 * (u - .1)) * e; }
     if (pose === "waving" || (who === "basil" && o.wave && pose === "cheer")) { const e = ss(.2, .4, u) * (1 - ss(1.9, 2.3, u)), sA = Math.sin(2 * Math.PI * 2.1 * u); rot += 4.6 * sA * e; sy *= 1 - .02 * Math.abs(sA) * e; } }
   const nod = nodOf(who, t), q = (pose === "sit" ? .016 : .022) * nod; sy *= 1 - q; sx *= 1 + .8 * q; rot += 1.1 * nod * (o.flip ? -1 : 1); if (pose !== "sit") lift -= 5 * nod;
+  if (nodH) { lift -= nodH * h * .05; rot += 3 * nodH * (o.flip ? -1 : 1); sy *= 1 + .03 * nodH; }
   for (const [tj, hj] of o.jump || []) { lift -= hop(t, tj, .36) * hj; const a = ss(tj - .12, tj, t) * (t < tj ? 1 : 0); sy *= 1 - .08 * a; sx *= 1 + .06 * a; const w = wob(t, tj + .36, .35); if (t > tj + .36) { sy *= 1 - .08 * w; sx *= 1 + .06 * w; } }
   if (o.rock) rot += o.rock * Math.sin(2 * Math.PI * t / .7);
   rot += o.look || 0;
@@ -97,6 +129,23 @@ function buddy(who, x, y, h, t, o = {}) {
   return out + fx;
 }
 
+/* v3 (teacher, 22 Nov: "this does not give me the 'hard knock' vibe… make use of Pip, Momo or Basil, showing an angry / shocked face"):
+   every impact is FELT. jolt(t, t0, a) -> [dx, dy] a quick camera shake (a few frames); impactFX = a white flash, a cartoon burst with its
+   word ("BONK!", "CLANG!", "THUD!") at the contact point, speed lines; faceCam = a buddy's face popping in big, in a round frame with the
+   buddy's colour, reacting (poses swap with the usual pop). */
+const jolt = (t, t0, a = 26) => { const u = t - t0; if (u < 0 || u > .5) return [0, 0]; const k = Math.exp(-u * 8); return [n2(a * k * Math.sin(u * 72)), n2(a * .7 * k * Math.cos(u * 57))]; };
+const JOLT = (t, times, inner, a) => { let dx = 0, dy = 0; for (const t0 of times) { const [x, y] = jolt(t, t0, a); dx += x; dy += y; } return dx || dy ? `<g transform="translate(${dx} ${dy})">${inner}</g>` : inner; };
+function impactFX(t, t0, x, y, word = "BONK!", o = {}) { const u = t - t0, d = o.d || .95; if (u < -.02 || u > d) return ""; const sc = o.s || 1, k = lerp(.4, 1, eo(u / .1)) * (1 + .08 * wob(t, t0 + .1, .35)), fade = 1 - ss(d - .3, d, t);
+  let pts = ""; for (let i = 0; i < 24; i++) { const r = i % 2 ? 92 : 170 + 26 * hash(i, 5), an = i * Math.PI / 12 + .1; pts += `${n2(Math.cos(an) * r)},${n2(Math.sin(an) * r * .78)} `; }
+  let lines = ""; for (let i = 0; i < 10; i++) { const an = i * Math.PI / 5 + .3, r0 = 200 + 160 * eo(u / .35), r1 = r0 + 90 * (1 - eo(u / .5)); lines += `<path d="M${n2(Math.cos(an) * r0)} ${n2(Math.sin(an) * r0 * .78)} L${n2(Math.cos(an) * r1)} ${n2(Math.sin(an) * r1 * .78)}" stroke="#fff" stroke-width="12" stroke-linecap="round"/>`; }
+  const flash = o.flash === false ? "" : `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.55 * pulse(t, t0 + .01, .01, .22))}"/>`;
+  return flash + OP(fade, `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(k * sc)}) rotate(${o.rot === undefined ? -8 : o.rot})">${lines}<polygon points="${pts}" fill="${o.col || P.sun}" stroke="${P.ink}" stroke-width="10" stroke-linejoin="round"/>
+    <text x="0" y="${n2(o.size ? o.size * .36 : 26)}" font-family="Fredoka" font-weight="700" font-size="${o.size || 74}" text-anchor="middle" letter-spacing="2" fill="#fff" stroke="${P.ink}" stroke-width="14" stroke-linejoin="round" paint-order="stroke">${word}</text></g>`); }
+// a buddy's face close-up, popping in at t0 and out at t1, in a round frame (x, y = centre, r = radius). poses = [[t, pose], ...]
+function faceCam(who, t, t0, t1, x, y, r, poses, o = {}) { if (t < t0 - .01 || t > t1 + .3) return ""; const k = spring(t, t0, .45) * (1 - ei((t - t1) / .25)); if (k < .02) return "";
+  const h = r * 3.1, id = "fc" + who + Math.round(x) + Math.round(y);
+  return `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(k)}) rotate(${o.rot || 0})"><g filter="url(#drop)"><circle r="${r + 12}" fill="${P[who]}"/></g><clipPath id="${id}"><circle r="${r}"/></clipPath><circle r="${r}" fill="${TINT[who]}"/>
+    <g clip-path="url(#${id})">${buddy(who, (o.dx || 0) * r, h * .93 - r * .25, h, t, { poses, tag: false, shadow: false, flip: o.flip, nofx: true, noreact: !!o.noreact })}</g><circle r="${r}" fill="none" stroke="#fff" stroke-width="6" opacity=".9"/></g>`; }
 /* ---------- speech bubble: white pill, Fredoka 600; a ✗ chip at the START for an idea that is not right ---------- */
 function bubble(x, y, lines, t, t0, t1, o = {}) {
   if (t < t0 || t > t1 + .25) return ""; const size = o.size || 40, k = spring(t, t0, .4) * (1 - eo((t - t1) / .2));
@@ -176,10 +225,11 @@ function ringTimer(cx, cy, frac, secs, t, o = {}) { const R = o.R || RING_R, C =
   return `<circle cx="${cx}" cy="${cy}" r="${R + 34}" fill="${P.night}" opacity=".7"/><circle cx="${cx}" cy="${cy}" r="${R - 22}" fill="#fff" opacity=".1"/>${o.inner || ""}
   <circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="${sw}"/>
   ${frac > .004 ? `<g transform="translate(${cx} ${cy}) scale(-1 1) rotate(-90)"><circle r="${R}" fill="none" stroke="${P.sun}" stroke-width="${sw + 12}" opacity="${n2(.45 + .3 * tick)}" filter="url(#b10)" stroke-dasharray="${n2(C * frac)} ${n2(C)}"/><circle r="${R}" fill="none" stroke="url(#gSunU)" stroke-width="${n2(sw + 4 * tick)}" stroke-linecap="round" stroke-dasharray="${n2(C * frac)} ${n2(C)}"/></g>` : `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="${P.sun}" stroke-width="${sw}" opacity="${n2(o.shut || 0)}"/>`}
-  ${secs === null ? "" : `<g transform="translate(${cx} ${cy + R}) scale(${n2(1 + .12 * tick)})" filter="url(#dropS)"><circle r="54" fill="url(#gSun)"/><circle r="54" fill="none" stroke="${P.night}" stroke-width="8"/>${T(0, 24, secs, 70, P.ink)}</g>`}`; }
+  ${secs === null ? "" : `<g transform="translate(${cx} ${cy + R}) scale(${n2((1 + .12 * tick) * (o.chg > -5 ? 1 + .45 * Math.exp(-Math.max(0, t - o.chg) * 9) * (t >= o.chg ? 1 : 0) : 1) * (o.ns || 1))})" filter="url(#dropS)"><circle r="54" fill="url(#gSun)"/><circle r="54" fill="none" stroke="${P.night}" stroke-width="8"/>${T(0, 24, secs, 70, P.ink)}</g>`}`; }
 // ring ticks: soft wood ticks that speed up over the last 3 s (the same list drives the sound)
 function ringTicks(t0, dur) { const out = []; for (let b = 0; b < dur; b++) { const left = dur - b, div = left > 3 ? 1 : left > 1 ? 2 : 4; for (let j = 0; j < div; j++) out.push(t0 + b + j / div); } return out; }
-function ringState(t, t0, dur) { const frac = clamp(1 - (t - t0) / dur), secs = Math.max(0, Math.ceil(dur - (t - t0) - 1e-6)); let tick = 0; if (t >= t0 && t < t0 + dur) for (const tt of ringTicks(t0, dur)) tick = Math.max(tick, pulse(t, tt, .01, .12)); return { frac: t < t0 ? 1 : frac, secs: t < t0 ? dur : secs, tick }; }
+function ringState(t, t0, dur) { const e = t - t0, b = Math.floor(e), frac = clamp(1 - (b + eo((e - b) / .35)) / dur), secs = Math.max(0, Math.ceil(dur - e - 1e-6)); let tick = 0; if (t >= t0 && t < t0 + dur) for (const tt of ringTicks(t0, dur)) tick = Math.max(tick, pulse(t, tt, .01, .12));   // v3: the ring drains one step per second, ON the tick, and the number pops as it changes
+  return { frac: t < t0 ? 1 : frac, secs: t < t0 ? dur : secs, tick, chg: t >= t0 && t <= t0 + dur + .5 ? t0 + Math.min(dur, Math.max(0, b)) : -9 }; }
 // a choice card (left blue / right orange / purple)
 function choiceCard(x, y, kind, label, sub, o = {}) { const g = { green: ["gGreen", "#1F8A4C"], blue: ["gBlue", P.blueDeep], orange: ["gOrange", P.orangeDeep], purple: ["gPurple", "#6B3FD0"] }[kind], flip = o.flip || 1, w = o.w || 480, h = o.h || 430, pls = o.pulse || 0, dim = o.dim === undefined ? 1 : o.dim, lit = o.lit || 0;
   return `<g transform="translate(${x} ${y}) rotate(${flip * 2.2}) scale(${n2(1 + .03 * pls + .05 * lit)})" opacity="${n2(dim)}">${lit ? `<rect x="${-w / 2 - 14}" y="${-h / 2 - 22}" width="${w + 28}" height="${h + 36}" rx="64" fill="${P.sun}" opacity="${n2(.8 * lit)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="50" fill="${g[1]}"/><rect x="${-w / 2}" y="${-h / 2 - 12}" width="${w}" height="${h}" rx="50" fill="url(#${g[0]})"/></g>

@@ -7,7 +7,7 @@
 // jzipclose, jbump, jw1, jw6..jw9 ...: script.py), the same mark the picture uses, never on a guess; Stage 2 keeps its drawing on those marks
 // (a thing that lands, lands AT its mark; each weight slides on AT its number).
 window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t * 1000) / 1000, k, v }), S = SCN, R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [] };
-  const lock = (r0, dur, lockId, picks, tc) => { (tc || []).forEach((t, i) => E(t, i % 2 ? "cardR" : "cardL")); ringTicks(r0, dur).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + dur, "bell"); E(LT(lockId) - .08 + .14, "stamp"); E(r0, "bellicon"); picks.forEach((id, i) => E(LT(id) - .1 + .11, "pick", i)); };
+  const lock = (r0, dur, lockId, picks, tc, tStamp) => { (tc || []).forEach((t, i) => E(t, i % 2 ? "cardR" : "cardL")); ringTicks(r0, dur).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + dur, "bell"); E(tStamp !== undefined ? tStamp : LT(lockId) - .08 + .14, "stamp"); E(r0, "bellicon"); picks.forEach((id, i) => E(LT(id) - .1 + .11, "pick", i)); };
   const chant = (id) => { const L = TL.lines[id]; for (const [bt, k, soft] of chantBeats(L)) E(bt, k === "c" ? "clap" : "stomp", soft ? .35 : 1); E(L.end - .28, "sparkle"); for (let i = 0; i < L.ncall; i++) E(L.t + (L.slots[i][1] + 1) * L.bar, "turn", i); if (L.slots.length > L.ncall) E(L.t + L.slots[L.ncall][1] * L.bar, "softpop", 3); };
   const sayit = (id) => E(LT(id) - .05, "softpop", 2), G = (a, b) => { if (b > a + 1) R.groove.push([a, b]); }, C = (a, b) => { if (b > a + 1) R.calm.push([a, b]); }, BD = (a, b) => { if (b > a + 1) R.birds.push([a, b]); }, TK = (a, b) => { if (b > a + 1) R.tank.push([a, b]); };
   const mark = (say, read) => { sayit(say); E(LE(read) + .25, "chime"); };
@@ -27,7 +27,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(S.game.t0 + .15, "sting"); { const b = "g301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, HIDDEN[0]) - .1, "curious"); E(W(b, HIDDEN[0]) + .2, "flutter"); E(W(b, "spot") - .1, "pip", 2); }
   [0, 1, 2].forEach((i) => E(LT(["g402", "g403", "g404"][i]) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 Round 1: the round card, the short ring (3 s); Basil's pick (a boing)
-  E(S.r1card.t0, "roundcard"); { const L = "g501"; lock(MK("ring0_r1"), 3, "g502", ["g503", "g504", "g505"], [W(L, "fabric"), W(L, "metal"), W(L, "wood")]); E(LE("g503") + .05, "boing"); }
+  E(S.r1card.t0, "roundcard"); { const L = "g501"; lock(MK("ring0_r1"), 3, "g502", ["g503", "g504", "g505"], [W(L, "fabric"), W(L, "metal"), W(L, "wood")], MK("ring0_r1") + 3 + .06);   /* EP13 v2: LOCKED IN! slams ON the bell (0) */ E(LE("g503") + .05, "boing"); }
   // 6 LOOK CLOSER three straps: a soft cloth flop (lay1), a light metal tink and a wooden tok, each rocking once (lay2, lay3); the bar and the stick lifted
   //   away (clear), a click (clip), five soft book thups .3 s apart (books), the strap's creak as it goes tight (lift); a soft pop on each chip; the verdict
   lcin(S.lcstraps.t0 + .1); E(MK("lay1"), "cloth"); E(MK("lay1") + .05, "pomf"); E(MK("flexchip") + .1, "softpop", 0);
