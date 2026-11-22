@@ -374,3 +374,6 @@ match: `NOTES_REVIEW_V3.md`. Previews for the teacher (nothing uploaded; the liv
   the clue line that crossed the number badge.
 - **Not uploaded.** `upload_v2.json` is the live set; a v3 upload needs the teacher's OK, then an `upload_v3.json` with `replaces` the v2
   IDs (vqSehdxTCg8, D2U_Zom1Wzs) and `retire_old`.
+
+## 22 Nov: v3 LIVE
+Teacher: "so much better!" / "upload the change into the new episode now". Uploaded v3: Part 1 3gryN39MnNY, Part 2 sAaYWPH8L90 (upload_v3.json). Replaced v2 vqSehdxTCg8 / D2U_Zom1Wzs (out of the playlists, first line points to the new part 1). v1 G03-LFQEld8 / ussXaa1fQUQ and the classic _gRJ0NwV6p0 now point straight to 3gryN39MnNY. Known small limits left: car under Mark Sentence 2 small, ending buddies partly cropped, empty corner in the bottle look-closer.
