@@ -11,7 +11,7 @@ replaces the classic _gRJ0NwV6p0** ("Why That Material? A Glass Trolley And Othe
 to EP12 and EP13); (k) the School Lab 3.8 line stays out until signed off; (l) no extra test clips unless a problem is heard).
 EP12 is live (its playlists' anchor for EP13: `explained-p3-ep12-part2`; EP12 Part 1 = G03-LFQEld8, Part 2 = ussXaa1fQUQ).
 
-Three stages: **Stage 1 (setup, done 2026-11-22, Opus)** · Stage 2 (drawing + thumbnails, Fable) · Stage 3 (render, checks, upload, Opus).
+Three stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · Stage 3 (render, checks, upload, Opus).
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep13_script.md` is untouched.
@@ -131,18 +131,78 @@ the straps pulling tight, the bump on a wet floor, the plastic base; BE THE NEW 
 tear). Two hidden animals, cute and alive: the butterfly on the plant outside the louvre window, the frog on its lily pad. Reused as they are:
 EP12's three school-bag dare boards (ep12dare.js), the property chips.
 
-## Stage 2 (Fable): drawing
-- Draw every `phScene` / `lcPH` / `ringPH` / `hiddenPH` placeholder in `p1.js` / `p2.js` (SCENES_TODO.md has the list with times, marks and
-  lines); keep every action AT its mark (if a drawing needs an action earlier or later, move the mark in script.py and rebuild; never the sound
-  alone). New sets in new files before common.js in page.html; gradients in `XDEFS13()`; bake: `NODE_PATH=$(npm root -g) node bake.js <names>`.
-- Check stills: `PART=1 ./sheet.sh p1_sheet 10 <times...>` (and `node stills.js`, `node probe.js`); no page errors.
-- If anything changes the timeline: `python3 build_tl.py P`, `python3 make_todo.py`, `NODE_PATH=$(npm root -g) node dump_cues.js P`, `node song.js P`.
-- **Thumbnails, NEW style (`../THUMBNAIL_V2.md`)**: add entries `ep13_1` / `ep13_2` to `THUMBS` in `../thumb_v2.js` (ep: 'ep13', out:
-  'ep13/thumb_part1.jpg' / 'ep13/thumb_part2.jpg', old: the same; a burst colour not used by EP12 (pink, orange): e.g. teal-green or violet; the
-  cuts are SVG expressions run in ep13/page.html with Stage 2's own drawing functions; one buddy big and surprised; 0-3 words that open a question
-  and never give the answer, e.g. Part 1 "METAL STRAP?" over the three straps on the chair, Part 2 "5 OR 9?" over the two straps on the stand);
-  then from `explained2/`: `export NODE_PATH=$(npm root -g); node thumb_v2.js ep13_1 ep13_2` and `node thumb_v2.js sheet`; look at the 320 px
-  copies, put a 320 px sheet in `qa/thumbs.jpg`. The script's old-style thumbnail words (section 7) are NOT used; do not use the old `thumb.js`.
+## Stage 2: done (2026-11-22, Fable). Every scene is drawn; no `phScene` / `lcPH` / `ringPH` / `hiddenPH` placeholder is left in `p1.js` / `p2.js`.
+**Lengths unchanged: Part 1 5:14.8 (314.8 s), Part 2 5:12.5 (312.5 s).** `script.py`, the voices and the timelines were not touched (no cut
+used, no mark moved: every action is drawn AT its own mark). No video rendered.
+- **New files** (page.html loads them after pics.js, before tests.js): `school.js` (`XDEFS13`; `BG.classroom` / `classroomD`, baked; `VC(t, o, cam)`
+  with the two live ceiling fans and the butterfly at `BFLY`; `bag13(o)` = the real ORANGE school bag, front view like EP12's boards (straps
+  `ok` / `torn` / `tornflat` / `new` / `none`, `pull`, `zip`, `open`, `books`, `lit`); `bookC`, `bookFlat`, `booksOut`, `bookStack`; `strapBand`
+  (fabric / metal / wood), `ribbon`; `chairS` (seen from behind), `tTable`, `deskS`; `aHand`; `bagDrawing(k, o)` (the pencil drawing: `mat`,
+  `tags`, `left`), `drawingPic`, `paperS`, `pencilHand`; `sampleTile` (fabric / plastic / wood; `wet`, `bead`), `dropper`, `waterDrop`,
+  `zipShort(u)`; `hardHatCard`, `easelS`, `wetFloorPic`; `butterfly` / `butterflyArt`) and `garden13.js` (`BG.garden` / `gardenD`, `BG.goatpen`,
+  baked; `VG(t, o, cam)` with the pond's rings and the frog at `FROG`; `VZ(t)` = the goat pen with its three live goats behind the fence;
+  EP9's `glovePinch`, `weightDisc`, `hangerSvg`, `counterPill` (copied; the hanger's rod is longer so nine weights fit); `newStrap`,
+  `oldStrapCard` (the HELD PICTURE of the old strap: torn, five weights, *before the video*), `stand13` (EP9's stand: the picture card on the
+  left clamp, the live new strap on the right), `weightRow`; `goatS` + `GOATS`, `penFence`, `hayHeap`, `trough`, `shelterS`; `frog` / `frogArt`,
+  `lilyPad`; `ZOO.name(t)` = the twelve animals; `PIC.sunAway` / `sunEarth` / `sunCloud` + `NEXT_PICS` = **the three dusk boards EP14 opens
+  with**). Bake after a change: `node bake.js classroom classroomD garden gardenD goatpen`.
+- **Changed:** `tests.js` (`planBoard` drawn: a wooden-framed board on a low stand, five boxes with NO numbers, picture tiles `PLAN_PIC`, the
+  card THEN: TEST IT on its own feet beside the row, `o.small` for the little board in the look-closers; `zooEasel`, `zooMap`, `chapterMap`
+  drawn; `HIDDEN` = the drawn butterfly / frog), `closer.js` (the five arts `strapsArt`, `bagArt`, `drawArt`, `testArt`, `goatArt`; `lcRoom`,
+  `lcTable`, `lcHit`, `weaveRing`), `shrink.js` (both journeys), `p1.js` / `p2.js` (all scenes), `lib.js` (TEST pops at [1440, 262]),
+  `sound_cues.js` (**a Stage 1 slip put right**: Part 2 has ONE mark `strongchip`, the goat fence's; the journey's sparkle now sits on Heart's
+  "strong" (`W("j604", "strong")`) and the fence's chip has its own soft pop), `../thumb_v2.js` (`ep13_1`, `ep13_2`).
+- **LOOK CLOSER as built** (shared frame: slow push-in, the set dims, no score / shelf / buddies / hidden animal, one verdict held 2.5 s):
+  | Scene | Part, time (verdict) | What is shown | Verdict |
+  |---|---|---|---|
+  | `lcstraps` | P1 1:08.2-1:36.6 (1:34.1) | the chair's top rail across the window; a hand lowers the fabric strap onto it (`lay1`): it hangs down on both sides, *bends round it*, chip FLEXIBLE; the metal bar (`lay2`) and the wooden stick (`lay3`) are laid across like see-saws and rock once, *stays straight* x2; both lifted away (`clear`); the bag on the table: the new strap clipped on (`clip`), five books fly in one by one (`books`), a hand lifts the bag by the strap alone (`lift`: the strap straight, one swing); a magnifier on the seam (`notear`), *a bag full of books*, *no tear*, STRONG | FABRIC: FLEXIBLE AND STRONG (green, both chips) |
+  | `lcbag` | P1 2:11.9-2:44.7 (2:42.2) | five books slide into the open bag (`booksin`), a hand closes the zip (`zip1`), two hands hang it on the chair (`hang`), *to carry books to school*; each part lit with its name while the rest is dimmed (`p_*`); INTENDED USE pops; each part does its job with its label: it swings on the chair (`u_straps`), the top is opened: five books (`u_body`), the zip is run closed (`u_zip`), the bag is set down on the floor (`u_base`); the little board top left | ONE BAG · FOUR PARTS · FOUR USES (sun-yellow on cream, dark border) |
+  | `lcdraw` | P1 3:14.0-3:43.7 (3:41.2) | the paper: a hand with a pencil draws the bag and four label lines (*speeded up*); the plastic and fabric tiles: a drop from the dropper stays a bead on plastic (`drop1`), sinks into the fabric as a dark patch (`drop2`); the plastic tile hops onto the base (*base · plastic*), WATERPROOF; the short metal zip run open, close, open, close (`zo1`..`zc2`), hops on (*zip · metal*), STRONG; the fabric tile and the strap hop on (*straps · fabric*, *body · fabric*), FLEXIBLE, STRONG | OUR DESIGN: A SUITABLE MATERIAL FOR EACH PART (green) |
+  | `lctest` | P2 0:53.8-1:23.7 (1:21.2) | left the HELD PICTURE of the old strap (torn, five weights, *before the video*), right the new strap, live; *same length* / *same width* marks; a gloved hand slides a weight on AT each number (`w1`..`w9`), the two counters in the middle (5 and 1..9), a plain line joins them at `link5`; the hand opens, empty; a magnifier on the weave (*no tear*, *9 weights*); *old strap: 5* · *new strap: 9*; TEST pops; a tick on the small card THEN: TEST IT (left edge). Nothing tears | TESTED: THE NEW STRAP IS STRONGER (green) |
+  | `lcgoat` | P2 2:06.6-2:24.2 (2:21.8) | its own place (the goat pen; pill *A zoo in Singapore*, small print *We look. We do not feed the goats.*): three wooden rails; a goat walks up behind them (`goatwalk`), rubs its side on the middle rail (`push1`), lowers its head and pushes with its forehead (`push2`): the rail does not move; *a wooden fence*, *the goat pushes*, *no break*, STRONG; the camera glides to the gap (`glide`) while the goat trots back; through the gap the three goats, the hay, the trough, the shelter (*we can see the goats*) | THE FENCE: WOOD · STRONG (green, with the chip) |
+- **Journeys:** BE A BOOK (P1 4:01.2-4:23.5: you look up from your own cover; the other books like tall walls; the open top bright with the
+  ceiling fan far away; the metal teeth close overhead from one end to the other and the light turns orange; the straps' shadows go tight, the
+  walls sway, streaks run down as you rise; a bump; then a cut-away at the bottom of the bag: you and the books on the dry floor, the thick
+  plastic base, outside a thin shining line of water and a wet-floor sign; *water* / *dry*; WATERPROOF glows) · BE THE NEW STRAP (P2
+  1:33.9-1:54.7: your woven length like a long orange road down to the hanger, the table, the padded tray and the pond far below; a weight
+  slides on at `jw1` and `jw2`, the view dips, the weave's edges draw straight; *pulled tight*; 6 · 7 · 8 · 9 rise past you; *9 weights · you do
+  not tear*; STRONG glows on Heart's "strong").
+- **Hidden animals** (named by Heart with the drawn badge; the reveal rings them): the **butterfly** (a plain tiger; `BFLY` [1262, 398]) on the
+  potted plant outside the first louvre window, in every classroom shot (it opens and closes its wings; at the reveal it flutters up and
+  settles); the **frog** (`FROG` [1575, 1024]) on a lily pad in the pond, in every garden shot (it blinks, its throat puffs; at the reveal it
+  hops to the next pad, rings on the water). Neither is in a look-closer or a journey.
+- **Thumbnails (new style; the files upload.json uploads):** `thumb_part1.jpg` = **METAL STRAP?** (white / yellow; Pip surprised, the orange bag
+  with its torn strap and the metal bar, a teal-green burst, chip 1); `thumb_part2.jpg` = **5 OR 9?** (yellow; Basil surprised, the new strap
+  with five weights and a sixth sliding on, a violet burst, chip 2). Both at 320 px: `qa/thumbs.jpg`. Remake (from `explained2/`):
+  `NODE_PATH=$(npm root -g) node thumb_v2.js ep13_1 ep13_2`.
+- **Deviations from the script / SCENES_TODO** (picture only): the bag is drawn from the FRONT everywhere (as on EP12's boards), so the chair
+  is seen from behind, not side-on, and in `lcstraps` the rail runs across the window: the fabric strap hangs over it, the bar and the stick
+  lie across it pointing towards us (the three hang on ONE rail, left to right); the cold open's boards stand beside the table (not in front
+  of it); `engineers` is the table top seen from above (three long straps in a row with their tags, the hard-hat card); the three small discs
+  are all at the lower left in the classroom and the garden; `strapans`, `holdon`, `wetfloor`, `testans`, `notglass`, the Showdown, `fix`,
+  `zoomap` and the dare stand on the dimmed set; the wet-floor picture stands on an easel; the paper on the table is a small sheet, the finished
+  drawing then stands on a small easel on the table (`pipfix`, the glide, `cliff`); in `lctest` the old strap is a photo card hanging from the
+  left clamp (in the wide garden too), the two counters stand between the straps and *old strap: 5* · *new strap: 9* land under them; the
+  goat that pushed walks back to the other two during the glide (so three goats are seen through the gap); the 3, 4, 5th weights are not
+  shown in the journey (the stack is seen from above; only the numbers 6-9 rise); the chant's board is at the left, its lines at the right;
+  the dare's three dusk boards stand under their cards; *Never look at the Sun.* is small print at the lower right of the dare.
+- **Checks (stills only):** stills every 0.45 s of both parts: no page errors. `qa/p1_sheet.jpg`, `qa/p2_sheet.jpg` (a frame every 2.7 s),
+  `qa/lc_straps.jpg`, `lc_bag.jpg`, `lc_draw.jpg`, `lc_test.jpg`, `lc_goat.jpg`, `qa/journey_book.jpg`, `qa/journey_strap.jpg`, `qa/thumbs.jpg`
+  (Stage 1's placeholder sheets `p1_check.jpg` / `p2_check.jpg` are removed). Cues re-dumped (215 / 207 events) and both preview mixes rebuilt
+  at -16.0 LUFS (peak -1.5 dBFS). `SCENES_TODO.md` is Stage 1's list (not regenerated).
+- **For Stage 3 to watch in motion:** (1) the hands (one simple arm with a blue sleeve, moved by its fingertips; the yellow glove in the
+  test): the strap and the planks being lowered in `lcstraps` (the hand comes from above / the right and may sit partly outside the window),
+  the lift, the books flying in, the zip pulls, the hang and the set-down in `lcbag`, the pencil, the dropper, the short zip in `lcdraw`; (2)
+  the cross-fade from the rail to the bag at `clip` (0.3 s before the mark) and the bag's single swing after `lift`; (3) the planks' rock at
+  `lay2` / `lay3` against the tink / tok; (4) `lcbag`: the bag's path to the chair at `hang` (0.8 s) and down to the floor (it lands AT
+  `u_base`), the lit parts; (5) `lcdraw`: each drop lands AT `drop1` / `drop2`, the three hops, the labels turning to *base · plastic* etc.;
+  (6) `lctest`: each weight reaches the hanger AT its mark (0.45 s slide), the counter's bump, the glove drawing back between weights; (7)
+  `lcgoat`: the walk-up, the rub and the head push against the knock sounds, the glide (2.2 s) with the goat shrinking as it walks back;
+  (8) the board: tiles hopping on at `fill1` / `fill23` / `fill4` / `fill5` (seen on the little board inside the look-closers), the fabric
+  tiles of the HOLD ON!, THEN: TEST IT sliding in at `testcard`, Part 2's wipe and refill, the tick at `testtick` (also on the art's own
+  small card), the chant's flashes; (9) both journeys' cuts (the cream dip 1.5 s after `jbump`), the zip closing overhead, the numbers 6-9;
+  (10) both reveals and their rings; the easel's dragonfly hop at `dfly`; the zoo map's twelve idle loops and the glow at `glowall`;
+  (11) the dimmed set's own words (OUR TEST STAND, the board) showing faintly round the look-closer window.
 
 ## Stage 3 (Opus): `./build_part.sh P` (timeline, cues, song, `flock /tmp/explained_render.lock node render.js P 3`, `finish.sh P`)
 - Output `ep13_partP.mp4` (ignored), `ep13_partP.srt`, `sheet_partP.png`; check stills around every action mark, card, look-closer and reveal;

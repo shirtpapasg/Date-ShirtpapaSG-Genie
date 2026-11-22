@@ -228,7 +228,7 @@ const KWHOLD = 2.0;
 // EXTINCT (beside Mark Sentence 2, after Momo's last word). All o.at (no dimming), 2.0 s, then they fly to the shelf. Shelf order =
 // read-along order (the script's). Move an o.at if the drawing needs it.
 const KW = (PART === 1 ? [["ENGINEERS", "kw_engineers", 1, null, { at: [1380, 300], size: 100 }], ["DESIGN", "kw_design", 1, null, { at: [1430, 930], size: 100 }], ["INTENDED USE", "kw_intended_use", 1, null, { at: [1360, 300], size: 90 }]]
-  : [["TEST", "kw_test", 1, null, { at: [1420, 300], size: 110 }], ["DIVERSITY", "kw_diversity", 1, null, { at: [1450, 410], size: 90 }], ["EXTINCT", "kw_extinct", 1, null, { at: [1430, 930], size: 100 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+  : [["TEST", "kw_test", 1, null, { at: [1440, 262], size: 100 }], ["DIVERSITY", "kw_diversity", 1, null, { at: [1450, 410], size: 90 }], ["EXTINCT", "kw_extinct", 1, null, { at: [1430, 930], size: 100 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lcstraps: 1, lcbag: 1, lcdraw: 1, lctest: 1, lcgoat: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;

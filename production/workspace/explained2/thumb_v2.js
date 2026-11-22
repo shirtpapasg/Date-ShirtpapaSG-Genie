@@ -70,6 +70,20 @@ const THUMBS = {
       { cut: 'car', x: 440, y: 320, w: 790, line: '#fff', lw: 8, glow: INK },
       { buddy: 'momo_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHY 4', x: 1250, y: 118, size: 124, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MATERIALS?', x: 1256, y: 232, size: 118, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep13_1: { ep: 'ep13', part: 1, out: 'ep13/thumb_part1.jpg', old: 'ep13/thumb_part1.jpg',
+    bg: { c: ['#C8FFF0', '#12B8A0', '#066B66'], at: [860, 430], rays: .2 },
+    cuts: { bag: `TF(900, 800, 2.5, bag13({ strapR: "torn", id: "th" })) + TF(1420, 470, 1, strapBand("metal", 620, 62), -68)` },
+    layers: [
+      { cut: 'bag', x: 470, y: 262, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'METAL', x: 1250, y: 116, size: 128, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'STRAP?', x: 1256, y: 236, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep13_2: { ep: 'ep13', part: 2, out: 'ep13/thumb_part2.jpg', old: 'ep13/thumb_part2.jpg',
+    bg: { c: ['#EBD9FF', '#8B4DF0', '#3F1C96'], at: [860, 430], rays: .2 },
+    cuts: { strap: `newStrap(960, 60, 300, 120) + TF(960, 300, 3.2, hangerSvg(5, { slide: [5, .72] })) + '<rect x="760" y="20" width="400" height="70" rx="16" fill="#39435A" stroke="#2B2147" stroke-width="8"/>'` },
+    layers: [
+      { cut: 'strap', x: 660, y: 250, w: 440, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: '5 OR 9?', x: 1250, y: 150, size: 165, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);

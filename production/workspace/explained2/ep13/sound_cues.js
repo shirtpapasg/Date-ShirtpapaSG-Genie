@@ -84,11 +84,11 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   E(W("j506", "three") - .1, "tag"); E(W("j506", "one") - .1, "coin");
   // 6 be the new strap: the calm pad; a soft deep tok for each weight (jw1, jw2, jw6..jw9), close; a low creak that settles (jtight); a sparkle (strongchip)
   E(W("j601", "be") - .2, "pop", 2); E(S.waitw.t1 - .6, "shrink"); R.wonder.push([MK("dive") + .5, S.zooplan.t0 + .5]);
-  ["jw1", "jw2", "jw6", "jw7", "jw8", "jw9"].forEach((k) => E(MK(k), "pomf")); E(MK("jtight"), "creak"); E(MK("strongchip") + .1, "sparkle");
+  ["jw1", "jw2", "jw6", "jw7", "jw8", "jw9"].forEach((k) => E(MK(k), "pomf")); E(MK("jtight"), "creak"); E(W("j604", "strong") + .1, "sparkle");   /* Stage 2: the journey's STRONG is on Heart's word (the mark "strongchip" is the goat fence's chip in this part) */
   // 7 the plan again: five quick hops off (wipe), a goat's small meh (goatcard), four low hops (zfill1..zfill4), a glow (zglow5). LOOK CLOSER the goat home:
   //   hooves on packed earth (goatwalk), a soft wooden thunk as the goat leans (push1, push2), a meh, hay rustling (glide); the verdict; a hop and five ticks (woodtile); Basil: NOT FOR THIS JOB (glasstag), a boing
   E(S.zooplan.t0, "whooshout"); BD(S.zooplan.t0, S.mark1.t0); [0, 1, 2, 3, 4].forEach((i) => E(MK("wipe") + i * .09, "hop", 4 - i)); E(MK("goatcard"), "meh"); ["zfill1", "zfill2", "zfill3", "zfill4"].forEach((k, i) => E(MK(k), "hop", i)); E(MK("zglow5"), "chime2", 0); E(MK("zglow5") + .3, "curious");
-  lcin(S.lcgoat.t0 + .1); for (let k = 0; k < 6; k++) E(MK("goatwalk") + k * .16, "step", .6); E(MK("push1"), "knock"); E(MK("push2"), "knock"); E(MK("push2") + .8, "meh"); E(MK("glide"), "whoosh"); E(MK("glide") + .3, "rustle"); E(MK("seegoats") + .4, "meh"); verdict("v_goat");
+  lcin(S.lcgoat.t0 + .1); for (let k = 0; k < 6; k++) E(MK("goatwalk") + k * .16, "step", .6); E(MK("push1"), "knock"); E(MK("push2"), "knock"); E(MK("push2") + .8, "meh"); E(MK("strongchip") + .1, "softpop", 2); E(MK("glide"), "whoosh"); E(MK("glide") + .3, "rustle"); E(MK("seegoats") + .4, "meh"); verdict("v_goat");
   E(MK("woodtile"), "hop", 3); for (let r = 0; r < 5; r++) E(MK("woodtile") + .2 + r * .12, "tap"); E(MK("glasstag"), "tag", 1); if (has("j706")) E(LE("j706") + .05, "boing");
   // 8 Mark Sentence 1
   mark("j801", "j802");

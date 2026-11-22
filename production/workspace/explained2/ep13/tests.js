@@ -38,56 +38,76 @@ const PLAN = () => { const m = MKS;
     glow: [[m("box1"), m("fill1")], [m("glow23"), m("fill23")], [m("glow23"), m("fill23") + .3], [m("glow4"), m("fill4")], [m("glow5"), m("fill5")]], test: m("testcard"), testTick: 1e9 };
   return { tiles: "goat", pre: "bag", off: m("wipe"), fill: [m("zfill1"), m("zfill2"), m("zfill3"), m("zfill4"), m("woodtile")],
     glow: [[m("zfill1") - 1.2, m("zfill1")], [-9, -9], [-9, -9], [-9, -9], [m("zglow5"), m("woodtile")]], test: -1, testTick: m("testtick") }; };
-/* STAGE 1 placeholder of the board (functional: five boxes, tiles that hop on, ticks, glows, the test card). Stage 2 redraws it on its low
-   stand with picture tiles. o.flash = [boxes 1-4, box 5 (+ the green SUITABLE tag), the test card] (the chant); o.small: no tile words (far
-   away). origin = the middle of the stand's feet; about 1500 wide, 560 tall (+ the test card to the right) */
-function planBoard(t, o = {}) { const pl = PLAN(), fl = o.flash || [0, 0, 0], X0 = -600, DX = 300, top = -620, Wb = 1500; let s = "";
-  BOXES.forEach((b, i) => { const x = X0 + i * DX, y = top + 120, g = Math.max(pl.glow[i][0] <= t && t < pl.glow[i][1] + .3 ? .7 + .3 * Math.sin(t * 6) : 0, i < 4 ? fl[0] : fl[1]);
-    if (i) s += `<path d="M${x - DX + 120} ${y + 150} H${x - 120}" stroke="${P.ink}" stroke-width="5" opacity=".55"/>`;
-    if (g > .02) s += `<rect x="${x - 134}" y="${y - 14}" width="268" height="328" rx="26" fill="${P.sun}" opacity="${n2(.55 * Math.min(1, g))}"/>`;
-    s += `<rect x="${x - 120}" y="${y}" width="240" height="300" rx="20" fill="#fff" stroke="${P.ink}" stroke-width="4"/>` + wrap(b, 26, 210, 700).map((l, j) => T(x, y + 44 + j * 30, l, 26, P.ink, { ls: 1 })).join("");
-    // the tile(s) in this box: the bag's (Part 1; Part 2 until wipe) then the goat home's (Part 2)
-    const tf = pl.fill[i]; let tile = null, k = 0;
-    if (pl.pre && t < pl.off + .5) { tile = PLAN_TILES[pl.pre][i]; const u = (t - pl.off) / .45; k = t < pl.off ? 1 : 1 - eo(u); }
-    else if (t >= tf) { tile = PLAN_TILES[pl.tiles][i]; k = spring(t, tf, .35); }
-    if (tile && k > .02) { const hp = t >= tf && t < tf + .35 ? 26 * Math.sin(Math.PI * (t - tf) / .35) : 0, yy = y + 190 - hp - (pl.pre && t >= pl.off ? 60 * (1 - k) : 0);
-      s += TF(x, yy, k, `<rect x="-104" y="-70" width="208" height="140" rx="14" fill="#FFF3DC" stroke="#E3C9A8" stroke-width="3"/>` + (o.small ? "" : wrap(tile, 22, 190, 600).slice(0, 4).map((l, j, a) => T(0, 8 + j * 26 - (a.length - 1) * 13, l, 22, P.ink, { w: 600 })).join(""))); }
-    const ticked = (pl.pre && t < pl.off) || (t >= tf && tf < 1e8); if (ticked) s += TF(x + 104, y + 6, t >= tf && tf > 0 ? spring(t, tf + .15, .35) : 1, tickBadge(22)); });
-  // HOLD ON! (Part 1): four small fabric tiles hop towards the last box at fabhop, and back off at fabback
+/* STAGE 2 (drawn): the board on its low stand, a wooden frame, five boxes with NO numbers joined by plain lines, small PICTURE tiles that hop
+   on, a tick on each filled box, the glow, the four fabric tiles of the HOLD ON!, the green SUITABLE tag (chant), the card THEN: TEST IT on
+   its own little feet beside the board. o.flash = [boxes 1-4, box 5 (+ SUITABLE), the test card]; o.small: no box words, bigger pictures (the
+   little board at the edge of a look-closer). origin = the middle of the stand's feet; about 1540 wide, 620 tall (+ the test card at the right) */
+const _mini4 = () => ["straps", "body", "zip", "base"].map((p, i) => TF(-48 + (i % 2) * 96, -8 + Math.floor(i / 2) * 84, .27, bag13({ lit: p, tag: false, id: "m" + i }))).join("");
+const _penSketch = () => `<g fill="none" stroke="${PEN}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M-80 -6 H80 M-80 22 H80 M-80 50 H80 M-66 -22 V62 M0 -22 V62 M66 -22 V62"/><path d="M-40 -30 L-10 -58 L20 -30z M-32 -30 V-6 M12 -30 V-6"/></g>`;
+const PLAN_PIC = { bag: [() => TF(-30, 62, .52, bag13({ tag: false, id: "t0" })) + TF(52, 30, .5, bookC(0)) + TF(66, 44, .5, bookC(2)),
+    () => TF(0, 64, .5, bag13({ tag: false, id: "t1" })) + [[-76, -40, -40, -34], [78, 0, 30, -4], [-80, 20, -24, -20], [80, 52, 40, 54]].map(([a, b, c, d], i) => `<path d="M${a} ${b} L${c} ${d}" stroke="${P.ink}" stroke-width="4" stroke-linecap="round"/><circle cx="${a}" cy="${b}" r="9" fill="${[P.coral, P.blue, P.leaf, P.purple][i]}"/>`).join(""),
+    _mini4, () => TF(0, 2, .25, drawingPic({ words: false })), () => TF(-52, -22, .5, sampleTile("fabric")) + TF(50, -22, .5, sampleTile("plastic")) + TF(0, 44, .5, zipShort(0))],
+  goat: [() => TF(-10, 64, .62, goatS(0, GOATS[0])), () => TF(0, 0, .5, penFence(-170, 170, [40, 80, 120], { th: 20, step: 150, off: 20, bot: 150 })) + TF(-34, -6, .32, shelterS()) + TF(50, 2, .5, trough()),
+    () => TF(0, 0, .56, TF(0, 150, .8, goatS(0, GOATS[1])) + penFence(-170, 170, [-40, 30, 100], { th: 22, step: 300, off: 20, bot: 150 })), () => TF(0, 0, 1, paperS(190, 150) + TF(0, -10, 1, _penSketch())), () => TF(0, 4, .9, sampleTile("wood"))] };
+function planBoard(t, o = {}) { const pl = PLAN(), fl = o.flash || [0, 0, 0], X0 = -600, DX = 300, top = -620, Wb = 1500, sm = o.small; let s = "";
+  BOXES.forEach((b, i) => { const x = X0 + i * DX, y = top + 138, g = Math.max(pl.glow[i][0] <= t && t < pl.glow[i][1] + .3 ? .7 + .3 * Math.sin(t * 6) : 0, i < 4 ? fl[0] : fl[1]);
+    if (i) s += `<path d="M${x - DX + 120} ${y + 180} H${x - 120}" stroke="${P.ink}" stroke-width="7" stroke-linecap="round" opacity=".6"/>`;
+    if (g > .02) s += `<rect x="${x - 136}" y="${y - 16}" width="272" height="382" rx="28" fill="${P.sun}" opacity="${n2(.75 * Math.min(1, g))}"/>`;
+    s += `<rect x="${x - 120}" y="${y}" width="240" height="350" rx="20" fill="#fff" stroke="${P.ink}" stroke-width="5"/>` + (sm ? "" : wrap(b, 32, 220, 700).map((l, j, a) => T(x, y + (a.length > 1 ? 40 : 58) + j * 34, l, 32, P.ink, { ls: 1 })).join(""));
+    const tf = pl.fill[i]; let kind = null, k = 0;
+    if (pl.pre && t < pl.off + .5) { kind = pl.pre; const u = (t - pl.off - i * .06) / .45; k = t < pl.off + i * .06 ? 1 : 1 - eo(u); }
+    else if (t >= tf) { kind = pl.tiles; k = spring(t, tf, .35); }
+    if (kind && k > .02) { const hp = t >= tf && t < tf + .35 ? 30 * Math.sin(Math.PI * (t - tf) / .35) : 0, cy = sm ? y + 175 : y + 220, yy = cy - hp - (pl.pre && t >= pl.off && kind === pl.pre ? 90 * Math.sin(Math.PI * (1 - k)) : 0);
+      s += TF(x, yy, k * (sm ? 1.5 : 1.12), `<rect x="-98" y="-90" width="196" height="180" rx="14" fill="#FFF3DC" stroke="#E3C9A8" stroke-width="4"/>` + PLAN_PIC[kind][i]()); }
+    const ticked = (pl.pre && t < pl.off) || (t >= tf && tf < 1e8); if (ticked) s += TF(x + 104, y + 336, t >= tf && tf > 0 ? spring(t, tf + .15, .35) : 1, tickBadge(sm ? 44 : 32)); });
+  // HOLD ON! (Part 1): four small fabric tiles hop towards the last box at fabhop, and back off the board at fabback
   const fh = MKS("fabhop"), fb = MKS("fabback");
-  if (t >= fh && t < fb + .8) { const out = ss(fb, fb + .6, t); [0, 1, 2, 3].forEach((i) => { const u = clamp((t - fh - i * .08) / .45), hx = lerp(X0 + 150 + i * 70, X0 + 4 * DX - 60 + (i % 2) * 120, eo(u)), hy = top + 330 + (i > 1 ? 60 : 0) - 60 * Math.sin(Math.PI * u) + 260 * out;
-    s += OP(1 - out, TF(hx, hy, .9, `<rect x="-52" y="-24" width="104" height="48" rx="10" fill="#FFD7A8" stroke="#C97A2E" stroke-width="3"/>` + T(0, 9, "fabric", 22, "#8A4A12"))); }); }
-  // the green SUITABLE tag over the last box in the chant's line 2
-  if (fl[1] > .05) s += OP(Math.min(1, fl[1] * 1.5), TF(X0 + 4 * DX, top + 60, 1, jobTag(t, 0, 24)));
-  // THEN: TEST IT, beside the board (outside the row of five), joined by one plain curved line
-  const tc = pl.test; if (t >= tc) { const k = tc < 0 ? 1 : spring(t, tc, .45), sx = Wb / 2 + 170, g = fl[2], tt = pl.testTick;
-    s += OP(k, `<path d="M${X0 + 4 * DX + 120} ${top + 260} Q${sx - 60} ${top + 120} ${sx} ${top + 200}" fill="none" stroke="${P.ink}" stroke-width="5" opacity=".55"/>`)
-      + TF(sx, top + 290 - 40 * (1 - eo((t - tc) / .3)), k * (1 + .1 * g), `${g > .02 ? `<rect x="-140" y="-84" width="280" height="168" rx="24" fill="${P.sun}" opacity="${n2(.6 * g)}"/>` : ""}<rect x="-124" y="-70" width="248" height="140" rx="20" fill="#FFF8EA" stroke="${P.ink}" stroke-width="4"/>${T(0, -10, "THEN:", 30, P.ink, { ls: 2 })}${T(0, 34, "TEST IT", 36, P.ink, { ls: 2 })}` + (t >= tt ? TF(110, -60, spring(t, tt, .35), tickBadge(24)) : "")); }
-  return `<path d="M-420 0 V-70 M420 0 V-70" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><g filter="url(#drop)"><rect x="${-Wb / 2 - 20}" y="${top}" width="${Wb + 40}" height="560" rx="28" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(0, top + 74, "OUR DESIGN PLAN", 50, P.ink, { ls: 5 }) + s + tpill(0, -40, "STAGE 2: draw (tiles = small pictures)", 22, P.coral, "#fff"); }
+  if (t >= fh && t < fb + .8) { const out = ss(fb, fb + .6, t); [0, 1, 2, 3].forEach((i) => { const u = clamp((t - fh - i * .08) / .45), hx = lerp(X0 + 150 + i * 70, X0 + 4 * DX - 56 + (i % 2) * 112, eo(u)), hy = top + 330 + (i > 1 ? 86 : 0) - 70 * Math.sin(Math.PI * u) + 300 * out - 40 * Math.sin(Math.PI * out);
+    s += OP(1 - out, TF(hx, hy, .62, sampleTile("fabric"))); }); }
+  if (fl[1] > .05) s += OP(Math.min(1, fl[1] * 1.5), TF(X0 + 4 * DX, top + 520, 1, jobTag(t, 0, 30)));
+  // THEN: TEST IT, on its own little feet beside the board (outside the row of five), joined to it by one plain curved line
+  const tc = pl.test; let card = ""; if (t >= tc) { const k = tc < 0 ? 1 : ramp(t, tc, .3), sx = Wb / 2 + 150 + (tc < 0 ? 0 : 700 * (1 - eio((t - tc) / .5))), g = fl[2], tt = pl.testTick;
+    card = OP(k, `<path d="M${X0 + 4 * DX + 120} ${top + 300} Q${Wb / 2 + 60} ${top + 190} ${n2(sx - 100)} ${top + 300}" fill="none" stroke="${P.ink}" stroke-width="7" stroke-linecap="round" opacity=".6"/>`)
+      + (t < tc + .5 && tc > 0 ? dust(sx + 120, -4, (t - tc) * 2, 2.2) : "")
+      + TF(sx, 0, 1, `<path d="M-60 0 V-250 M60 0 V-250" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/>` + TF(0, top + 320, 1 + .12 * g, `${g > .02 ? `<rect x="-118" y="-100" width="236" height="200" rx="26" fill="${P.sun}" opacity="${n2(.8 * g)}"/>` : ""}<g filter="url(#dropS)"><rect x="-100" y="-84" width="200" height="168" rx="20" fill="#FFF8EA" stroke="${P.ink}" stroke-width="5"/></g>${T(0, -22, "THEN:", 38, P.ink, { ls: 2 })}${T(0, 26, "TEST", 46, P.coral, { ls: 2 })}${T(0, 66, "IT", 40, P.coral, { ls: 2 })}` + (t >= tt ? TF(88, -74, spring(t, tt, .35), tickBadge(34)) : ""))); }
+  return `<ellipse cx="0" cy="4" rx="${Wb * .5}" ry="18" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-520 0 V-80 M520 0 V-80" stroke="#8A5A36" stroke-width="20" stroke-linecap="round"/><g filter="url(#drop)"><rect x="${-Wb / 2 - 20}" y="${top}" width="${Wb + 40}" height="560" rx="30" fill="#C98F56" stroke="#7A4C26" stroke-width="6"/></g><rect x="${-Wb / 2 - 2}" y="${top + 18}" width="${Wb + 4}" height="524" rx="18" fill="url(#gPaper)"/>`
+    + T(0, top + 92, "OUR DESIGN PLAN", sm ? 76 : 58, P.ink, { ls: 6 }) + s + card; }
 
 /* ---------- Basil's zoo map (Part 2 Showdown) and the full zoo map (script section 5, segments 9-10). All twelve animals are the book's own
    list for "Design my zoo!" (pp. 71-72). ---------- */
 const MAP_LINES = [["FISH", "goldfish, koi"], ["BIRDS", "flamingo, macaw, dragonfly"], ["AMPHIBIANS", "frog, salamander"]], MAP_FIX = ["INSECTS", "dragonfly, beetle"];
 const ZONES = [["FISH", "goldfish", "koi"], ["INSECTS", "dragonfly", "beetle"], ["AMPHIBIANS", "frog", "salamander"], ["REPTILES", "crocodile", "snake"], ["BIRDS", "flamingo", "macaw"], ["MAMMALS", "hippopotamus", "goat"]];
-// STAGE 1 placeholder: the easel MY ZOO (functional: each line lights as Basil reads it, the lines stay through the countdown; at dfly the
-// dragonfly's drawing hops down off line 2 onto a new fourth line written in green). o.lit [3]; o.fix 0..1. origin = the easel's feet
-function zooEasel(t, o = {}) { const lit = o.lit || [0, 0, 0], fx = o.fix || 0; let s = "";
-  MAP_LINES.forEach(([g, a], i) => { const y = -560 + i * 120, txt = i === 1 && fx > .5 ? "flamingo, macaw" : a; if (lit[i] > .02) s += `<rect x="-560" y="${y - 50}" width="1120" height="96" rx="16" fill="${P.sun}" opacity="${n2(.35 * lit[i])}"/>`;
-    s += T(-520, y + 14, (i + 1) + "", 44, P.basil, { a: "start" }) + T(-470, y + 12, g + ": " + txt, 38, P.ink, { a: "start", w: 600 }) + tpill(420, y, "drawings", 20, "#fff", P.ink2, { w: 500 }); });
-  if (fx > 0) s += OP(fx, T(-520, -560 + 3 * 120 + 14, "4", 44, "#1F8A4C", { a: "start" }) + T(-470, -560 + 3 * 120 + 12, MAP_FIX[0] + ": " + MAP_FIX[1], 38, "#1F8A4C", { a: "start", w: 700 }));
-  return `<path d="M-260 0 L-130 -260 M260 0 L130 -260" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-600" y="-740" width="1200" height="600" rx="30" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(-560, -650, "MY ZOO", 52, P.basil, { a: "start", ls: 4 }) + s + tpill(0, -165, "STAGE 2: easel + a small drawing of each animal", 22, P.coral, "#fff"); }
-// STAGE 1 placeholder: the full zoo map (six zones, two animals each, each with a small idle loop in Stage 2). o.pop = when the zones pop; o.glow 0..1 (all twelve glow)
+// STAGE 2 (drawn): the easel MY ZOO: a sheet of paper with ruled lines; on each line its number, the group and a small drawing of each animal
+// with its name; each line lights as Basil reads it; at dfly the dragonfly's drawing hops down off line 2 onto a new fourth line written in
+// green (4 INSECTS: dragonfly, beetle). o.lit [3]; o.fix 0..1. origin = the easel's feet; the paper is 1240 x 640
+const EROW = (i) => -640 + i * 132, ESLOT = (j) => -130 + j * 250;
+const eAnimal = (t, name, x, y, o = {}) => TF(x, y, 1, TF(0, 2, .72, ZOO[name](t)) + T(58, 12, name, 28, o.ink || P.ink, { w: 600, a: "start" }));
+function zooEasel(t, o = {}) { const lit = o.lit || [0, 0, 0], fx = clamp(o.fix || 0); let s = "";
+  MAP_LINES.forEach(([g, a], i) => { const y = EROW(i); if (lit[i] > .02) s += `<rect x="-600" y="${y - 62}" width="1200" height="126" rx="18" fill="${P.sun}" opacity="${n2(.5 * lit[i])}"/>`;
+    s += `<path d="M-590 ${y + 64} H590" stroke="#C9D6EA" stroke-width="4"/>` + `<circle cx="-545" cy="${y}" r="34" fill="${P.basil}"/>` + T(-545, y + 17, i + 1, 48, P.ink) + T(-490, y + 15, g, i === 2 ? 40 : 44, P.ink, { a: "start", ls: 1 });
+    a.split(", ").forEach((nm, j) => { if (nm === "dragonfly") return; s += eAnimal(t, nm, ESLOT(j), y); }); });
+  // the dragonfly: on line 2 (slot 2), then it hops down to line 4 (slot 0)
+  const u = eio(fx), dx = lerp(ESLOT(2), ESLOT(0), u), dy = lerp(EROW(1), EROW(3), u) - 130 * Math.sin(Math.PI * u);
+  if (fx > 0) { const y = EROW(3), G = "#1F8A4C"; s += OP(clamp(fx * 2), `<circle cx="-545" cy="${y}" r="34" fill="#BFF0C8" stroke="${G}" stroke-width="4"/>` + T(-545, y + 17, "4", 48, G) + T(-490, y + 15, MAP_FIX[0], 44, G, { a: "start", ls: 1 })) + OP(clamp(fx * 3 - 2), eAnimal(t, "beetle", ESLOT(1), y, { ink: G })); }
+  s += eAnimal(t, "dragonfly", dx, dy, { ink: fx > .5 ? "#1F8A4C" : P.ink });
+  return `<ellipse cx="0" cy="4" rx="420" ry="16" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-330 0 L-170 -300 M330 0 L170 -300 M0 -60 V-300" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><rect x="-520" y="-112" width="1040" height="18" rx="8" fill="#A9703C" stroke="#7A4C26" stroke-width="4"/>
+    <g filter="url(#drop)"><rect x="-620" y="-800" width="1240" height="690" rx="22" fill="#FFFDF4" stroke="#E3D6B8" stroke-width="6"/></g>` + T(-580, -728, "MY ZOO", 52, "#0E8F7E", { a: "start", ls: 4 }) + T(590, -734, "by Basil", 30, P.ink2, { a: "end", w: 500 }) + `<path d="M-590 -706 H590" stroke="#C9D6EA" stroke-width="4"/>` + s; }
+// STAGE 2 (drawn): the full zoo map: six zones (a pond, a garden, a marsh, a sandy bank, an aviary, a paddock), two animals in each, every one
+// with its small idle loop and its name. o.pop = when the zones pop; o.glow 0..1 (a soft glow round all twelve). origin: the map is 1520 x 700, its centre at (0, -220)
+const ZCOL = [["#CDEBFA", "#7FB4D6"], ["#DDF4C8", "#7FAF5A"], ["#D5F1E4", "#5CB89A"], ["#F6E7C4", "#C9A76E"], ["#E6E0FA", "#9B8CBF"], ["#F9E3CF", "#D9A06A"]];
 function zooMap(t, o = {}) { let s = ""; const t0 = o.pop === undefined ? -9 : o.pop, g = o.glow || 0;
-  ZONES.forEach(([z, a, b], i) => { const x = -480 + (i % 3) * 480, y = -380 + Math.floor(i / 3) * 300, k = spring(t, t0 + i * .15, .4); if (k < .02) return;
-    s += TF(x, y, k, `${g > .02 ? `<rect x="-224" y="-134" width="448" height="268" rx="30" fill="${P.sun}" opacity="${n2(.5 * g)}"/>` : ""}<rect x="-210" y="-120" width="420" height="240" rx="24" fill="#EAF6DD" stroke="#7FAF5A" stroke-width="5"/>${T(0, -60, z, 34, P.ink, { ls: 2 })}${T(0, 10, a, 30, P.ink, { w: 600 })}${T(0, 56, b, 30, P.ink, { w: 600 })}`); });
-  return `<g filter="url(#drop)"><rect x="-760" y="-560" width="1520" height="680" rx="34" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="6"/></g>` + T(0, -490, "OUR ZOO", 44, P.ink, { ls: 5 }) + s + tpill(0, 110, "STAGE 2: draw the zones and the twelve animals", 22, P.coral, "#fff"); }
-// STAGE 1 placeholder: the chapter's map (p. 70) under Mark Sentence 1 of Part 2, small and silent: seven material tiles, five property chips, one
-// plain line to "suitable for making objects", with the school bag and the goat fence at its end. origin = its centre (about 1100 x 150)
-const MATS = ["wood", "metal", "ceramic", "rubber", "glass", "plastic", "fabric"], PROPS5 = ["strength", "flexibility", "float or sink", "waterproof", "transparency"];
-const chapterMap = () => MATS.map((m, i) => TF(-500 + i * 120, -40, 1, tpill(0, 0, m, 20, "#fff", P.ink, { w: 600 }))).join("") + PROPS5.map((p, i) => TF(-430 + i * 170, 20, 1, tpill(0, 0, p, 18, GOODC, "#fff", { w: 600 }))).join("")
-  + `<path d="M420 -10 H520" stroke="${P.ink}" stroke-width="3"/>` + TF(600, -10, 1, tpill(0, 0, "suitable for making objects", 18, "#FFF8EA", P.ink, { w: 700 })) + tpill(0, 62, "STAGE 2: draw (with the school bag and the goat fence at its end)", 18, P.coral, "#fff");
+  ZONES.forEach(([z, a, b], i) => { const x = -490 + (i % 3) * 490, y = -350 + Math.floor(i / 3) * 310, k = spring(t, t0 + i * .15, .4); if (k < .02) return;
+    const an = (nm, ax) => (g > .02 ? `<ellipse cx="${ax}" cy="20" rx="${n2(100 + 6 * Math.sin(t * 5 + ax))}" ry="74" fill="${P.sun}" opacity="${n2(.75 * g)}" filter="url(#b4)"/>` : "") + TF(ax, 14, 1.08, ZOO[nm](t + i)) + T(ax, 112, nm, nm.length > 9 ? 26 : 30, P.ink, { w: 600 });
+    s += TF(x, y, k, `<rect x="-228" y="-140" width="456" height="280" rx="26" fill="${ZCOL[i][0]}" stroke="${ZCOL[i][1]}" stroke-width="6"/><g transform="translate(0 -104)">${tpill(0, 0, z, 30, ZCOL[i][1], "#fff", { w: 700, ls: 2 })}</g>${an(a, -108)}${an(b, 108)}`); });
+  return `<g filter="url(#drop)"><rect x="-770" y="-590" width="1540" height="720" rx="34" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="7"/></g>` + T(0, -524, "OUR ZOO", 46, P.ink, { ls: 6 }) + s; }
+// STAGE 2 (drawn): the chapter's map (p. 70), small and silent: seven material tiles, five property chips, one plain line to "suitable for
+// making objects", with the school bag and the goat fence at its end. origin = its centre (about 1180 x 170)
+const MATS = [["wood", "#C98F56", "#fff"], ["metal", "#B9C3D4", P.ink], ["ceramic", "#F4EFE6", P.ink], ["rubber", "#4A4A55", "#fff"], ["glass", "#CDEBFA", P.ink], ["plastic", "#FF8FB1", P.ink], ["fabric", "#F47A14", "#fff"]], PROPS5 = ["strength", "flexibility", "float or sink", "waterproof", "transparency"];
+const chapterMap = () => `<g filter="url(#dropS)"><rect x="-600" y="-88" width="1200" height="176" rx="22" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="5"/></g>`
+  + MATS.map(([m, c, ink], i) => `<rect x="${-580 + i * 106}" y="-72" width="98" height="46" rx="10" fill="${c}" stroke="${P.ink}" stroke-width="3"/>` + T(-531 + i * 106, -41, m, 22, ink, { w: 600 })).join("")
+  + T(-590, 4, "materials", 20, P.ink2, { a: "start", w: 500 }) + PROPS5.map((p, i) => TF(-506 + i * 150, 44, 1, tpill(0, 0, p, 19, GOODC, "#fff", { w: 600 }))).join("") + T(-590, 84, "physical properties", 20, P.ink2, { a: "start", w: 500 })
+  + `<path d="M170 0 H250" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/>` + T(420, -44, "suitable for", 22, P.ink, { w: 700 }) + T(420, -20, "making objects", 22, P.ink, { w: 700 })
+  + TF(340, 76, .32, bag13({ strapR: "new", tag: false, id: "cm" })) + TF(500, 30, .3, penFence(-150, 150, [-40, 20, 80], { th: 22, step: 130, off: 20, bot: 130 }));
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start with their picture, revealed at the end.
    Part 1: a little BUTTERFLY (a plain tiger: orange wings with black tips and white spots, a small body, big friendly eyes with a highlight, a
@@ -97,7 +117,7 @@ const chapterMap = () => MATS.map((m, i) => TF(-500 + i * 120, -40, 1, tpill(0, 
    AND alive (SERIES_FORMAT section 6). Free, never touched. Not on screen during a [LOOK CLOSER] or a journey. ---------- */
 // STAGE 1 placeholder art (centred on 0, 0, about 200 px): a grey disc with the animal's name. Stage 2: butterflyArt(t) / frogArt(t).
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["butterfly", hiddenPH("butterfly")] : ["frog", hiddenPH("frog")];
+const HIDDEN = PART === 1 ? ["butterfly", butterflyArt] : ["frog", frogArt];   // STAGE 2: the drawn animals (school.js, garden13.js)
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#FFF0DA" : "#E3F5D8"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[0], n2(r * .24), P.ink, "#fff", { w: 700 }));
 
