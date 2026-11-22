@@ -1,8 +1,9 @@
 # Coloured buddies: the painting list for EP14
 
 **Update 22 Nov: Pip stays grey** (the purple try looked "very weird"; chinchillas are grey). His current paintings are kept, so
-skip every Pip line below (pictures 5–8 and 20–26). **Basil:** paint one test first (`basil_sit_closed`, teal-grey) and decide
-from it before painting his other ten. Momo goes ahead: 10 pictures left (her arms crossed is done).
+skip every Pip line below (pictures 5–8 and 20–26). **Basil is teal** (his test, "this looks cool!", is
+`basil_sit_closed`: done). Paint his other ten to match it exactly: same teal-grey, bright teal beard and tail bands, cream
+throat and belly, dark teal outline. Pictures 10–12 copy that picture and change only the face. Momo: 10 pictures left (her arms crossed is done). Basil: 10 left. **20 pictures in all.**
 
 Teacher's request, 22 Nov 2026: from EP14 the buddies are in colour. Each line below is one picture.
 

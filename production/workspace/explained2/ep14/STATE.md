@@ -241,3 +241,6 @@ Teacher: from EP14 the buddies are in colour; EP14 mentions it casually (script 
 
 ## 22 Nov: Pip stays grey
 Teacher: Pip remains grey. EP14 colour lines updated (script 12.3): Momo has her colours; Pip is happy to stay grey; Basil decided after a test.
+
+## 22 Nov: Basil teal
+Teacher approved the teal Basil test ("this looks cool!"). Cast from EP14: Momo coral, Pip grey (unchanged), Basil teal. Basil line added (script 12.3). Waiting for 20 paintings (Momo 10, Basil 10).

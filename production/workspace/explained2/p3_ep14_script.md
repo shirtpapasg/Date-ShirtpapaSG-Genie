@@ -604,7 +604,7 @@ The teacher (22 Nov): "I want to try a new episode with the pet buddies not havi
 ### 12.3 The buddies in colour (teacher, 2026-11-22)
 
 The teacher: "for episode 14 onwards, just casually mention the creator has budget to add colours for us." From EP14 the buddies
-are the teacher's new coloured paintings (Momo coral; Pip stays grey; Basil after a test; first test:
+are the teacher's new coloured paintings (Momo coral; Pip stays grey; Basil teal; tests:
 `characters/sprites/colour_test/momo_coral_arms_crossed.jpg`). EP14 says so once, lightly; later episodes never mention it.
 
 **Where:** Part 1, Segment 3, the moment the three buddies pop in for the rules (before Heart's "You against the Buddies!").
@@ -615,11 +615,12 @@ About 6 s; take it back from the Part 1 cut list (section 6) if the part runs ov
 | **Momo** | "Did you notice? I have my colours now! The creator finally had the budget to paint me." | Momo hops forward and does a little twirl to show off her coral fur. |
 | **Pip** | "I am staying grey, and I love it. Real chinchillas are grey, you know!" | Pip arms crossed, chin up, proud; Momo giggles. A soft sparkle sound. |
 
-**Update 22 Nov:** Pip stays grey (the teacher's purple try looked "very weird"). If Basil is painted teal after his test, add:
-**Basil:** "Teal really suits me. I think I look very handsome today." (proud pose, chin up). If Basil stays grey, Pip's line
-stands alone.
+| **Basil** | "And I am teal now. I think I look very handsome today." | Basil arms crossed, chin up, proud; a soft sparkle; Pip and Momo giggle. |
+
+**Update 22 Nov:** Pip stays grey (the teacher's purple try looked "very weird"); Basil is teal (his test: "this looks cool!").
+About 9 s in all; take it back from the Part 1 cut list if the part runs over 5:20.
 
 The joke is said once and moves on: no card, no key word, no pause for the class.
-**Holds:** drawing EP14 waits for the coloured sitting sets (Momo, and Basil if he is coloured) (4 each: mouth closed, half, wide, eyes closed) and the
+**Holds:** drawing EP14 waits for the coloured sitting sets (Momo and Basil) (4 each: mouth closed, half, wide, eyes closed) and the
 coloured poses EP14 uses (cheer, pointing, surprised, thinking, waving, oops, arms crossed). The Opus pass before drawing
 records these two lines with the fun-fact lines and retimes both parts.

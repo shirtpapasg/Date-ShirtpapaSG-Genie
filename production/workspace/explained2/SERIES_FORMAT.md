@@ -287,7 +287,9 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - No 3D. No code-drawn redraws of the buddies.
   - Fur stays natural, never recoloured, up to EP13. **From EP14 the buddies are in colour** (teacher, 22 Nov): the teacher's
     own coloured paintings: Momo coral (a ginger-cat colour); **Pip stays grey** (teacher, 22 Nov: the purple try looked "very weird";
-    chinchillas are grey, and his current paintings are kept); Basil to be decided after a test painting (teal-grey or keep grey).
+    chinchillas are grey, and his current paintings are kept); **Basil teal** (teacher, 22 Nov: "this looks cool!";
+    test `characters/sprites/colour_test/basil_teal_sit_try1.jpg`: teal-grey scales, bright teal #14B8A6 beard and tail bands,
+    cream throat and belly, dark teal outline).
     Never green, blue or sun-yellow on a buddy. Never recolour the old grey art with code; use only the teacher's coloured paintings, and never
     mix grey and coloured buddies in one episode. EP14 mentions it once, casually ("The creator finally had the budget to paint
     me"; Pip is happy to stay grey); later episodes do not. Test picture: `characters/sprites/colour_test/momo_coral_arms_crossed.jpg`.
