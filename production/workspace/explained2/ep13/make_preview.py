@@ -59,12 +59,17 @@ def build_pairs():
             for i in ims: c.paste(i, (x, (h - i.height) // 2)); x += i.width + 8
             return c
         a, b = strip(OLD, to), strip(NEW, tn); h = max(a.height, b.height)
-        cell = Image.new("RGB", (2 * W + 60, h + 74), (255, 248, 234)); d = ImageDraw.Draw(cell)
-        d.text((16, 10), lab, fill=(43, 33, 71), font=F(22))
-        d.text((16, 40), "BEFORE (live) " + " / ".join(mmss(t) for t in to), fill=(160, 60, 40), font=F(18)); d.text((W + 44, 40), "AFTER (new) " + " / ".join(mmss(t) for t in tn), fill=(30, 130, 70), font=F(18))
-        cell.paste(a, (16, 66)); cell.paste(b, (W + 44, 66)); cells.append(cell)
+        fl = F(21); words = lab.split(" "); lines = [""]
+        for w_ in words:
+            if fl.getlength((lines[-1] + " " + w_).strip()) > 2 * W + 20: lines.append(w_)
+            else: lines[-1] = (lines[-1] + " " + w_).strip()
+        dy = 28 * (len(lines) - 1)
+        cell = Image.new("RGB", (2 * W + 60, h + 74 + dy), (255, 248, 234)); d = ImageDraw.Draw(cell)
+        for j, l in enumerate(lines): d.text((16, 10 + 28 * j), l, fill=(43, 33, 71), font=fl)
+        d.text((16, 40 + dy), "BEFORE (live) " + " / ".join(mmss(t) for t in to), fill=(160, 60, 40), font=F(18)); d.text((W + 44, 40 + dy), "AFTER (new) " + " / ".join(mmss(t) for t in tn), fill=(30, 130, 70), font=F(18))
+        cell.paste(a, (16, 66 + dy)); cell.paste(b, (W + 44, 66 + dy)); cells.append(cell)
     head = Image.new("RGB", (cells[0].width, 90), (43, 33, 71)); d = ImageDraw.Draw(head)
-    d.text((16, 14), f"EP13 Part {P}: before (left) and after (right): the 22 Nov fixes, picture by picture", fill=(255, 215, 90), font=F(30)); d.text((16, 54), "Not uploaded. Words, timing and sounds kept (one new line: the fun fact at the reveal).", fill=(255, 255, 255), font=F(20))
+    d.text((16, 14), f"EP13 Part {P}: before (left) · after (right), the 22 Nov fixes", fill=(255, 215, 90), font=F(30)); d.text((16, 54), "Not uploaded. Words, timing and sounds kept (one new line: the fun fact at the reveal).", fill=(255, 255, 255), font=F(20))
     out = Image.new("RGB", (cells[0].width, 90 + sum(c.height for c in cells)), (255, 248, 234)); out.paste(head, (0, 0)); y = 90
     for c in cells: out.paste(c, (0, y)); y += c.height
     q = 82; f = f"{H}/qa/preview_p{P}_before_after.jpg"
@@ -97,4 +102,7 @@ def build_clips():
     d = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout); print(f, f"{d:.1f} s", os.path.getsize(f) // 1000, "KB")
 LT = lambda i: LN[i]["t"]; LE = lambda i: LN[i]["end"]
 if __name__ == "__main__":
-    build_pairs(); build_countdown(); build_clips()
+    what = sys.argv[2:] or ["pairs", "countdown", "clips"]
+    if "pairs" in what: build_pairs()
+    if "countdown" in what: build_countdown()
+    if "clips" in what: build_clips()

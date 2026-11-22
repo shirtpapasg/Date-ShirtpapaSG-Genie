@@ -12,8 +12,8 @@ def ticks(t0, dur):
         out += [t0 + b + j / div for j in range(div)]
     return out
 # rings: (name, r0, dur, badge box in 1080p pixels: the sun disc under the ring)
-RINGS = (lambda: {"1": [("Round 1", M["ring0_r1"], 3, (500, 500 + 196 * 1.2, 1.2)), ("HOLD ON!", M["ring0_hold"], 5, (700, 480 + 196 * 1.25, 1.25))],
-         "2": [("Round 1", M["ring0_r1"], 6, (500, 520 + 196 * 1.2, 1.2)), ("Showdown", M["ring0_show"], 6, (1560, 400 + 196 * .95, .95))]}[P] if P == "2" else [("Round 1", M["ring0_r1"], 3, (500, 500 + 196 * 1.2, 1.2)), ("HOLD ON!", M["ring0_hold"], 5, (700, 480 + 196 * 1.25, 1.25))])()
+if P == "1": RINGS = [("Round 1", M["ring0_r1"], 3, (500, 500 + 196 * 1.2, 1.2)), ("HOLD ON!", M["ring0_hold"], 5, (700, 480 + 196 * 1.25, 1.25))]
+else: RINGS = [("Round 1", M["ring0_r1"], 6, (500, 520 + 196 * 1.2, 1.2)), ("Showdown", M["ring0_show"], 6, (1560, 400 + 196 * .95, .95))]
 SR = 48000
 def audio(a, b):
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-ss", f"{a}", "-t", f"{b - a}", "-i", V, "-ac", "1", "-ar", str(SR), "-af", "highpass=f=1800,lowpass=f=8000", "-f", "f32le", "-"], capture_output=True).stdout

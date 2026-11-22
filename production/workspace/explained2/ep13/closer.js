@@ -80,7 +80,7 @@ function strapsArt(t) { const t1 = MK("lay1"), t2 = MK("lay2"), t3 = MK("lay3"),
         + (kind === "metal" ? `<path d="M${n2(fx - 10)} ${n2(fy + 14)} L${n2(nx - 22)} ${n2(ny - 14)}" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".8"/>` : `<path d="M${n2(fx - 8)} ${n2(fy + 20)} L${n2(nx - 18)} ${n2(ny - 30)} M${n2(fx + 10)} ${n2(fy + 60)} L${n2(nx + 20)} ${n2(ny - 60)}" stroke="#7A4C26" stroke-width="3.5" stroke-linecap="round" opacity=".55"/>`)
         + OP(t < tc - .3 ? 1 - ramp(t, t0 + .12, .3) : ramp(t, tc - .3, .2), aHand(x0 + 58, RY + 60 + dy, 180, 1.2))); };
     const labs = lcLab(t, t1 + .5, -400, -320, "bends round it", -396, -112, { size: 42, t1: gone }) + lcLab(t, t2 + .5, 0, -340, "stays straight", 0, -196, { size: 42, t1: tc - .1 }) + lcLab(t, t3 + .5, 400, -340, "stays straight", 400, -196, { size: 42, t1: tc - .1 })
-      + fadeAt(t, gone, chipAt(t, MK("flexchip"), -640, -160, "FLEXIBLE", 40));
+      + fadeAt(t, gone, (t >= MK("flexchip") ? pline(-545, -160, -440, -110, ramp(t, MK("flexchip"), .25)) : "") + chipAt(t, MK("flexchip"), -660, -160, "FLEXIBLE", 40));
     A = lcRoom(330) + `<path d="M-640 ${RY} V420 M640 ${RY} V420" stroke="#8E9AA8" stroke-width="44" stroke-linecap="round"/><path d="M-652 ${RY} V420 M628 ${RY} V420" stroke="#fff" stroke-width="8" opacity=".5"/><rect x="-690" y="230" width="1380" height="70" rx="35" fill="url(#sChair)" stroke="#2F6CA8" stroke-width="7"/>`
       + back + `<rect x="-740" y="${RY - 48}" width="1480" height="96" rx="48" fill="url(#sChair)" stroke="#2F6CA8" stroke-width="8"/><path d="M-690 ${RY - 22} H690" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity=".5"/>` + front + plank("metal", X[1], t2) + plank("wood", X[2], t3) + h1 + labs; }
   if (kB > 0) { const TY = 255, BX = -240, S = 1.5, uL = eio((t - tl) / .6), lift = 84 * uL, rot = -8 * uL + 6 * wob(t, tl + .45, 1.1) * (t >= tl ? 1 : 0), isNew = t >= tp;
@@ -96,7 +96,7 @@ function strapsArt(t) { const t1 = MK("lay1"), t2 = MK("lay2"), t3 = MK("lay3"),
       + (hp ? OP(ramp(t, tl - .35, .2), aHand(hp[0] + 6, hp[1] + 26, 90, 1.25)) : "")
       + (t >= tn ? pline(anchor[0] + 20, anchor[1], 360, -150, ramp(t, tn, .2)) + TF(480, -130, spring(t, tn, .45), weaveRing(150, "seam", "st")) : "")
       + lcLab(t, tn + .5, -610, -10, "a bag full of books", -400, 40, { size: 40 }) + lcLab(t, tn + .9, 590, 80, "no tear", 520, 10, { size: 46, fill: GOODC, ink: "#fff" })
-      + chipAt(t, tS, 600, 190, "STRONG", 42) + chipAt(t, tv + .15, 350, 190, "FLEXIBLE", 42); }
+      + (t >= tS ? pline(560, 165, 410, 0, ramp(t, tS, .25)) : "") + chipAt(t, tS, 640, 200, "STRONG", 42) + chipAt(t, tv + .15, 420, 200, "FLEXIBLE", 42); }
   return kB <= 0 ? A : kB >= 1 ? B : A + OP(kB, B); }
 
 /* 2 · lcbag: the school bag doing its job, then part by part. booksin: five books slide in; zip1: the zip is closed; hang: the bag is hung on

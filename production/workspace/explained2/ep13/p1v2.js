@@ -158,7 +158,7 @@ SC.r1 = (t, s) => { const tq = W(L1, "fabric") - .1, tc = [W(L1, "fabric"), W(L1
     buds += buddy(who, x, 1066, hh, t, { aura: true, auraO: .9, flip: who === "momo", in: tin, poses: ps, look, jump: who === "basil" ? secJ : [], nohop: who === "basil" && t < bell });
     if (t > tin + .2) cards += pickNum(who, x + hh * .62 * (who === "momo" ? -1 : 1), 1066 - hh * .32, t, LT(picks[who][0]) - .1, picks[who][1]);
     bubs += say(picks[who][0], x + (who === "momo" ? -120 : who === "pip" ? 60 : 0), 1066 - hh - 120, t, { x: who !== "pip", tail: who === "momo" ? 120 : who === "pip" ? -60 : 0, maxW: 560, size: 42 }); });
-  return out + buds + cards + bubs + stampHold(t, bell, lockE + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1160, 260) + HUD(t); };
+  return out + buds + cards + bubs + stampHold(t, bell, lockE + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1110, 166) + HUD(t); };
 
 /* ============ 6 · [LOOK CLOSER] the straps (the approved look, kept): Pip's face peeks in (it is his answer) and reacts ============ */
 SC.lcstraps = (t, s) => { const tl = MK("lift"), tn = MK("notear"), tv = MK("v_straps");
@@ -250,7 +250,7 @@ SC.holdon = (t, s) => { const a = "g901", b = "g902", c = "g903", r0 = MK("ring0
   const pip = bud("pip", "R2", 450, t, { in: s.t0 + .05, poses: poses([s.t0, "cheer"], [LT(a) + .1, "sit"], [LE(a) + .15, "pointing"], [tS0 + .2, "cheer"], [tX + .3, "thinking"], [r0, "cheer"], [bell, "oops"], [W(c, "each") - .12, "surprised"], [LE(c) - 1.6, "waving"], [LE(c) + .2, "sit"]), look: lean + nodAt(t, LE(c) - 1.5, 1.4, 5), jump: pj, nohop: t >= r0 && t < bell, wave: true });
   return (room ? OP(1 - st, room) : "") + OP(st, bg("stage") + `<rect y="820" width="1920" height="260" fill="url(#xFloor)"/>`) + stage + pip
     + say(a, 1300, 330, t, { size: 44, tail: -80, maxW: 560 })
-    + stampHold(t, tH, tH + .85, HR[0], HR[1], "HOLD ON!") + stampHold(t, bell, bell + 1.1, HR[0], HR[1] + 60, "ARMS CROSSED!", 96) + bellIcon(t, r0, 1160, 260) + coin(t, tOne, 1660, 470, "+1", "arms crossed") + HUD(t); };
+    + stampHold(t, tH, tH + .85, HR[0], HR[1], "HOLD ON!") + stampHold(t, bell, bell + 1.1, HR[0], HR[1] + 60, "ARMS CROSSED!", 96) + bellIcon(t, r0, 1110, 166) + coin(t, tOne, 1660, 470, "+1", "arms crossed") + HUD(t); };
 SC.wetfloor = (t, s) => { const tw_ = MK("wetpic"), [px, pd] = slideX(t, tw_, .55, -600, 640, 1040);
   return VD(t, { bag: "full", board: {}, boardP: HOME }, undefined, .45) + (t >= tw_ ? pd + TF(px, 1040, 1.05, easelS(TF(0, 0, .96, wetFloorPic(t)), 470, 330)) : "")
     + bud("pip", "R2", 420, t, { poses: poses([s.t0, "sit"], [LT("g904") + .3, "surprised"], [LE("g904"), "oops"]) })
@@ -261,9 +261,9 @@ SC.draw = (t, s) => { const u = eo((t - MK("paper")) / .5), cam = camL(CAM0, CAM
   return V(t, { bag: "full", paper: lerp(PX + 500, PX, u), board: {}, boardP: HOME }, cam) + OP(1 - eio((t - (s.t1 - 1.3)) / 1.0), bud("basil", "R1", 400, t, { poses: poses([s.t0, "sit"], [MK("paper") + .2, "pointing"], [MK("glow4"), "cheer"]) }) + bud("pip", "R2", 400, t, { poses: poses([s.t0, "oops"], [MK("paper") + .4, "thinking"], [MK("glow4") + .3, "cheer"]) })) + HUD(t); };
 SC.lcdraw = (t, s) => { const g0 = eio((t - (s.t0 + .2)) / .9), g1 = eio((t - (s.t1 - .85)) / .8), p = L3(L3(HOME, DOCK, g0), HOME, g1), tv = MK("v_draw");
   return lookCloser(t, s, { tz: s.t0, fx: PX, fy: 760, art: drawArt, set: (tt) => V(tt, { bag: "full", paper: PX, bfly: false }, CAMP), verdict: [`OUR DESIGN: A SUITABLE MATERIAL FOR EACH PART`, GOODC, { vx: 1030 }], tv,
-    over: (tt) => lcClock(tt, MK("pencil"), MK("fill4"), 1540, 880),
-    top: (tt) => brdAt(tt, p, g0 > .5 && g1 < .5 ? { small: true } : {}) + peek(tt, "pip", s.t0 + 1.5, tv - .2, poses([s.t0, "thinking"], [MK("drop1") + .1, "surprised"], [MK("drop2") + .1, "surprised"], [MK("wpchip"), "cheer"], [MK("zc2"), "pointing"], [MK("zipchip"), "cheer"], [MK("fabhop2"), "thinking"], [MK("strongchip2"), "cheer"]),
-      { h: 500, dx: 170, side: 1, nods: [[MK("wpchip") + .1, 1, 5], [MK("zipchip") + .1, 1, 5], [MK("strongchip2") + .1, 1, 5]] }) }); };
+    over: (tt) => lcClock(tt, MK("pencil"), MK("fill4"), 1450, 250),
+    top: (tt) => brdAt(tt, p, g0 > .5 && g1 < .5 ? { small: true } : {}) + [[s.t0 + 1.5, LT("g1003") - .4], [MK("zo1") - 1.6, tv - .2]].map(([pa, pb]) => peek(tt, "pip", pa, pb, poses([s.t0, "thinking"], [MK("drop1") + .1, "surprised"], [MK("drop2") + .1, "surprised"], [MK("wpchip"), "cheer"], [MK("zc2"), "pointing"], [MK("zipchip"), "cheer"], [MK("fabhop2"), "thinking"], [MK("strongchip2"), "cheer"]),
+      { h: 400, dx: 105, side: 1, nods: [[MK("wpchip") + .1, 1, 5], [MK("zipchip") + .1, 1, 5], [MK("strongchip2") + .1, 1, 5]] })).join("") }); };
 SC.pipfix = (t, s) => V(t, { bag: "full", easel: true, board: {}, boardP: HOME }, camL(CAMP, CAM0, eo((t - s.t0) / .7)))
   + bud("pip", "R2", 440, t, { in: s.t0 + .1, poses: poses([s.t0, "surprised"], [HAS("g1006") ? LT("g1006") + .5 : s.t0 + 1, "sit"], [HAS("g1006") ? LE("g1006") + .2 : s.t0 + 1.2, "cheer"]), jump: [[HAS("g1006") ? LE("g1006") + .25 : s.t0 + 1.3, 20]] })
   + bud("basil", "R1", 380, t, { poses: poses([s.t0, "sit"], [LT("g1006") + .8, "surprised"], [LE("g1006") + .2, "cheer"]), look: nodAt(t, LE("g1006") + .3, 1.2, 5) })

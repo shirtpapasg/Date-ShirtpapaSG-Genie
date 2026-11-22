@@ -273,3 +273,29 @@ used, no mark moved: every action is drawn AT its own mark). No video rendered.
   look-closers (the planks now lie flat across the rail), both journeys and the butterfly / frog reveals. The School Lab 3.8 line stays out of
   the descriptions until that lab is signed off.
 
+
+## 22 Nov 2026: Improved Part 1 (and Part 2), the teacher's-eye redo: awaiting the teacher's OK; NOT uploaded
+The teacher, after watching EP12/EP13: "ALL these are important and you did not make these mistakes when creating episode 1" ("Basic"). The live
+videos (FO1Y_KSZU-c, 8lQ1-1ruveY) stay as they are until the teacher has seen the preview. Old live files kept for comparison:
+`out/ep13_part1_OLD.mp4`, `out/ep13_part2_OLD.mp4` (not in git).
+- **Files:** `p1v2.js` / `p2v2.js` (loaded after p1.js / p2.js; they replace the parts' scenes), `v2common.js` (shared: `peek` the reacting buddy
+  face in a look-closer, `bigRing` the countdown that pulses on every tick and pops its number on each whole second, `stampHold`, `clue` (Fredoka
+  60 clue labels), `circleShot` (EP12 v2's push-in + the black-ringed circle on the blue stage), `animalLabel`, `picCard` (ONE big numbered picture
+  card)); `bagArt2` (p1v2.js, the bag look-closer redrawn for the whole panel); `closer.js` (`partChip`, `sName`, the drawing colour-coded, the strap
+  chips tied by a line); `school.js` (`PARTC` part colours, `bagDrawing({cc})`, `dimF` = opaque greying instead of the 28 % see-through "ghost");
+  `trail.js adultHand` (four fingers and a thumb); `lib.js ringTicks` (a short ring's first second is one plain tick); `common.js` (`goals3` layout
+  option, `nykScene` buddy size); `shrink.js` (the buddies ride along; your bookmark; "you" on your book); `sound_cues.js` / `song.js` (the game bed
+  rests under every countdown; LOCKED IN! on the bell; place beds: classroom, eco-garden, zoo); `script.py` + `../p3_ep13_script.md` section 12 (the
+  ONE word change: a fun fact at each reveal, g1303 Momo / j1203 Pip, Heart's reveal line split round it); `spr/` (the back views basil_back,
+  momo_back via prep_sprites.py). Review notes: `NOTES_REVIEW_P1.md`. Tools: `make_preview.py P`, `measure_ring.py P`.
+- **Part 1: rendered, 5:22.2 (322.2 s; was 5:14.8: the fun fact), -16.0 LUFS, 143 captions, 0 overlapping.** `ep13_part1.mp4` (not in git).
+  Preview: `qa/preview_p1_before_after.jpg`, `qa/preview_p1_countdown_vs_ep1.jpg`, `qa/preview_p1_clips.mp4`; ring timing `qa/ring_check_p1.txt`,
+  `qa/ring_badges_p1.png`.
+- **What EP1 had and EP12/EP13 lost (keep it from EP14 on):** the engine is the same (ep01/ep13 `ringTimer`, `buddy`, `stamp` are identical); the
+  loss was in how the scenes used it. EP1: the ring big in the centre with the thing itself moving inside it (the walking robot); both choice cards
+  pulsing on every tick; the YOU hand swinging between the choices; the buddies in a row, reacting; the bell, then LOCKED IN!. EP12/EP13: the ring
+  pushed to the side and shrunk (0.74; HOLD ON! a 150 px ring on the dimmed room with the board), its picture still, the card glow cycling every
+  0.5 s off the beat, the 104 bpm game groove playing on under the 1 s ticks (the "rhythm is off"), a 3 s ring ticking twice a second from its
+  first second, HOLD ON!'s Pip sitting still through it, LOCKED IN! 0.7 s after the bell, the +1 coin over the shelf, discs 120 px in a corner.
+  From EP14 on: `bigRing` (or the same ideas), one big buddy fidgeting on the beat, no music under a countdown, the stamp ON the bell, and check
+  it in the rendered file (`measure_ring.py`).

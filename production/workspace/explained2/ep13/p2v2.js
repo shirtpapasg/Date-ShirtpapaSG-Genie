@@ -74,7 +74,7 @@ SC.r1 = (t, s) => { const tq = W(L1, "how") - .1, tc = [W(L1, "one", 1), W(L1, "
     buds += buddy(who, x, 1066, hh, t, { aura: true, auraO: .9, flip: who === "pip", in: tin, poses: ps, look, jump: who === "momo" ? secJ : [], nohop: who === "momo" && t < bell });
     if (t > tin + .2) cards += pickNum(who, x + hh * .62 * (who === "pip" ? -1 : 1), 1066 - hh * .32, t, LT(picks[who][0]) - .1, picks[who][1]);
     bubs += say(picks[who][0], x + (who === "pip" ? -120 : who === "basil" ? 60 : 0), 1066 - hh - 120, t, { x: who === "momo", tail: who === "pip" ? 120 : who === "basil" ? -60 : 0, maxW: 560, size: 42 }); });
-  return out + buds + cards + bubs + weightsRule(t) + stampHold(t, bell, lockE + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1180, 240) + HUD(t); };
+  return out + buds + cards + bubs + weightsRule(t) + stampHold(t, bell, lockE + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1180, 160) + HUD(t); };
 
 /* 5 · [LOOK CLOSER] the test (the approved frame): Momo's face peeks in (she said "A strap is a strap!") and gasps as the new strap passes five */
 SC.lctest = (t, s) => { const tv = MK("v_test");
@@ -125,7 +125,7 @@ SC.show = (t, s) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), tS = 
     + buddy("basil", 200, 1062, 400, t, { aura: true, in: s.t0 + .1, poses: poses([s.t0, "cheer"], [LT("j902") - .12, "sit"], [LE("j902") + .2, "cheer"], [r0, "arms_crossed"], [bell, "surprised"], [LT("j905") - .1, "oops"], [LE("j906"), "surprised"]), look: t >= r0 && t < bell ? -5 * Math.sin((t - r0) * Math.PI * 2) : 0 })
     + say("j902", 660, 230, t, { size: 38, tail: -300, maxW: 820 })
     + picks.map(([w, id, n, x]) => buddy(w, x, 1062, 330, t, { aura: true, in: tin2 + (w === "momo" ? .12 : 0), poses: [[tin2, "thinking"], [LT(id) - .12, "sit"], [LE(id) + .1, w === "pip" ? "pointing" : "cheer"]], flip: true }) + (t > tin2 + .2 ? pickNum(w, x - 200, 940, t, LT(id) - .1, n) : "") + say(id, x - 120, 600, t, { size: 38, maxW: 520, tail: 120 })).join("")
-    + stampHold(t, bell, LE("j904") + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1180, 240) + HUD(t); };
+    + stampHold(t, bell, LE("j904") + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1180, 160) + HUD(t); };
 SC.fix = (t, s) => { const d = MK("dfly"), fix = ss(d, d + .8, t), hb = HAS("j908");
   return VD(t, {}, .5) + TF(EAS[0], EAS[1], EAS[2], zooEasel(t, { fix, lit: [0, fix * .6 * (1 - ss(d + 1.5, d + 2.2, t)), 0] })) + coin(t, W("j907", "two") - .1, 1620, 560, "+2", "line 2")
     + buddy("basil", 200, 1062, 400, t, { aura: true, in: s.t0 + .05, poses: poses([s.t0, "surprised"], [d + .3, "oops"], [hb ? LE("j908") + .2 : s.t0 + 3, "cheer"]) }) + (hb ? say("j908", 560, 330, t, { size: 42, tail: -300, maxW: 600 }) : "")
