@@ -55,15 +55,71 @@ const AURA = { pip: P.pip, basil: P.basil, momo: P.momo }, TINT = { pip: "#EDE4F
 const nameTag = (who, size = 32) => { const w = tw(BNAME[who], size, 700) + size * 1.5, h = size * 1.5; return `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="${P[who]}"/><rect x="${n2(-w / 2 + 3)}" y="${n2(-h / 2 + 3)}" width="${n2(w - 6)}" height="${n2(h - 6)}" rx="${n2(h / 2 - 3)}" fill="none" stroke="#fff" stroke-width="3" opacity=".85"/></g>` + T(0, n2(size * .35), BNAME[who], size, "#fff"); };
 const DISC_DX = { pip: -.06, basil: -.10, momo: -.08 };
 function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.0 }[who]; const k = Math.floor((t + ph) / per), tb = k * per - ph + hash(k, who.length) * 1.4; return t >= tb && t < tb + .1; }
+/* ---------- EP13 v2 (ported from ep14/lib.js, teacher 22 Nov, SERIES_FORMAT section 6): "Talking means a moving mouth" and "Reactions follow
+   the answer". A speaking buddy always shows its talking sprite (lip-sync + blinks) and pops back to its pose after the line; listeners answer a
+   line with a pose only when the line gives a reason (a question: thinking; a problem: oops / surprised; a celebration: cheer), ONE listener per
+   line, else a nod; no buddy swaps pose more than once in 6 s; at each reveal the wrong buddy is shy (oops), the right one confident (arms
+   crossed / the smiling sit); hands-up cheer ONLY when something is learnt (a key word or a verdict / tag lands, a mistake is fixed, the score is
+   won, "Now you know!"). ---------- */
+const REACT_DLY = { pip: .12, basil: .27, momo: .42 };
+let _trig = null;
+function reactTriggers() { if (_trig) return _trig; const out = [];
+  for (const id of TL.order) { const L = TL.lines[id]; if (!L || L.who === "chant" || !L.words || !L.words.length) continue; let st = true, cur = null;
+    L.words.forEach((w) => { if (st) { cur = { t: w.a, who: L.who, id, txt: "" }; out.push(cur); } cur.txt += (cur.txt ? " " : "") + w.w; st = /[.!?]$/.test(w.w); }); }
+  out.sort((a, b) => a.t - b.t); out.forEach((o, i) => { o.k = i; }); return (_trig = out); }
+let _own = {};
+function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id) => TL.lines[id]).filter((L) => L && (L.who === who || (L.who === "chant"))).map((L) => L.t).sort((x, y) => x - y)); for (const x of a) if (x > t) return x; return 1e9; }
+let _learn = null;
+function learnAt(t) { if (!_learn) { _learn = [];
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|boardtags$|testtick$|woodtile$|dfly$|fill5$|wpglow$|glowall$)/.test(k)) _learn.push([v - .4, v + 4]);
+    for (const s of TL.scenes || []) { if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); if (s.name === "chant") _learn.push([s.t1 - 2, s.t1]); }
+    for (const id of ["g1301", "j1201"]) if (TL.lines[id]) { const w = TL.lines[id].words.find((x) => norm(x.w) === "high"); if (w) _learn.push([w.a - .3, w.a + 3]); } }
+  return _learn.some(([a, b]) => t >= a && t < b); }
+// EP13's reveals: who picked right and who picked wrong (w = a word of a line, m = a mark, l = a line's start)
+const OUTCOMES = PART === 1 ? [{ at: "w:g605:one", right: ["pip"], wrong: ["basil", "momo"] }, { at: "m:bell_hold", right: [], wrong: ["pip"] }]
+  : [{ at: "w:j506:three", right: ["basil", "pip"], wrong: ["momo"] }, { at: "l:j905", right: ["pip", "momo"], wrong: ["basil"] }];
+function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id, wd] = o.at.split(":"), t0 = k === "m" ? TL.marks[id] : !HAS(id) ? undefined : k === "w" ? W(id, wd) : LT(id); if (t0 === undefined || t < t0 || t > t0 + 4) continue;
+    if (o.wrong.includes(who)) return { t0, pose: "oops" };
+    if (o.right.includes(who)) return { t0, pose: SPR[`${who}_arms_crossed`] ? "arms_crossed" : "sit" }; }
+  return null; }
+function reactPose(who, txt) { const q = /\?$/.test(txt), neg = /\b(not|no|never|break|breaks|broke|bad|cannot|can't|tear|tore|torn|oops|ouch|knock|soak)\b/i.test(txt),
+    yay = /!$/.test(txt) && /\b(yes|right|correct|well done|great|amazing|you got it|we did it|hooray|now you know|high five)\b/i.test(txt);
+  if (q) return "thinking"; if (neg) return who === "basil" ? "oops" : "surprised"; if (yay) return "cheer"; return null; }
+function reactChosen(g) { const L = ["pip", "basil", "momo"].filter((w) => w !== g.who); return L[g.k % L.length]; }
+function reactPoseAt(tr, i, who) { const g = tr[i]; if (g.who === who || reactChosen(g) !== who) return null; const ps = reactPose(who, g.txt); if (!ps || (ps === "cheer" && !learnAt(g.t))) return null;
+  for (let j = i - 1; j >= 0 && g.t - tr[j].t < 6; j--) { const h = tr[j]; if (h.who !== who && reactChosen(h) === who && reactPose(who, h.txt)) return null; } return ps; }
+function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact || o.still) return null; const T0 = Math.max(S.t0 - .05, o.in !== undefined ? o.in + .6 : -9), d = REACT_DLY[who] || .2;
+  const tr = reactTriggers(); let i = -1; for (let j = tr.length - 1; j >= 0; j--) { if (tr[j].t + d <= t) { i = j; break; } } if (i < 0) return null;
+  for (; i >= 0; i--) { const g = tr[i]; if (g.t < T0) return null; if (g.who === who) continue; const t0 = g.t + d; if (t0 < tsw + .7) return null;
+    let nt = 1e9; for (let j = i + 1; j < tr.length; j++) if (tr[j].who !== who) { nt = tr[j].t + d; break; }
+    const t1 = Math.min(t0 + 1.45, nt - .08, nextOwn(who, g.t) - .3, nxt - .2); if (t1 - t0 < .55) { if (t < t0 + .4) return { t0, t1: t0 + .4, pose: null }; continue; }
+    const pose = reactPoseAt(tr, i, who); return { t0, t1, pose: pose && SPR[`${who}_${pose}`] ? pose : null }; }
+  return null; }
+// a scene's own pose list, thinned so a listener never swaps more than once in 6 s (the first pose and "back" views always kept)
+const _thin = new WeakMap();
+function thinPoses(ps) { if (!ps || !ps.length) return ps; if (_thin.has(ps)) return _thin.get(ps); const s = [...ps].sort((a, b) => a[0] - b[0]), out = [s[0]]; let last = s[0][0];
+  for (let i = 1; i < s.length; i++) { if (s[i][0] - last >= 6 || s[i][1] === "back") { out.push(s[i]); last = s[i][0]; } } _thin.set(ps, out); return out; }
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
    o.poses = [[time, pose], ...] (pose swaps POP with a squash and a stretch, never a cross-fade; default pose "sit")
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
    o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
 function buddy(who, x, y, h, t, o = {}) {
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
-  let pose = o.pose || "sit", tsw = -99;
-  for (const [tp, p] of o.poses || []) if (t >= tp) { pose = p; tsw = tp; }
-  let nxt = 99; for (const [tp] of o.poses || []) if (tp > t) { nxt = tp; break; }
+  let pose = o.pose || "sit", tsw = -99; const PS = o.keepPose ? o.poses : thinPoses(o.poses);
+  for (const [tp, p] of PS || []) if (t >= tp) { pose = p; tsw = tp; }
+  let nxt = 1e9; for (const [tp] of PS || []) if (tp > t) { nxt = tp; break; }
+  { const spk = o.keepPose ? null : speaking(who, t);
+    if (spk && pose !== "sit" && pose !== "back") { if (spk.t > tsw) tsw = spk.t; pose = "sit"; nxt = Math.min(nxt, spk.end + .05); }
+    else if (spk && pose === "back") { if (spk.t > tsw) tsw = spk.t; pose = "sit"; nxt = Math.min(nxt, spk.end + .05); }   // never speaks in the back view
+    else if (!spk && pose !== "sit" && pose !== "back" && !o.keepPose) { for (const id of TL.order) { const L = TL.lines[id];
+      if (L.who === who && L.end + .05 > tsw && L.end + .05 <= t && t - L.end < 1.5) tsw = L.end + .05; } } }
+  if (!speaking(who, t) && !o.keepPose) { const oc = outcomeAt(who, t);
+    if (oc) { pose = oc.pose; if (oc.t0 > tsw) tsw = oc.t0; nxt = Math.min(nxt, oc.t0 + 4); }
+    else if (pose === "cheer" && !learnAt(t)) pose = SPR[`${who}_arms_crossed`] && /ans|r1$|show|holdon/i.test((window._S || {}).name || "") ? "arms_crossed" : "sit"; }
+  let nodH = 0;
+  if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);
+    if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
+      else if (!R.pose && t < R.t0 + .5) nodH = hop(t, R.t0, .36, 1); } }
   let k = o.k || 1; if (o.in !== undefined) { if (t < o.in) return ""; k *= spring(t, o.in, .5); } if (o.out !== undefined && t > o.out) { k *= 1 - eo((t - o.out) / .2); if (k < .02) return ""; }
   const ph = { pip: .9, basil: 0, momo: 1.9 }[who];
   let sy = 1, sx = 1, rot = 0, lift = 0;
@@ -81,6 +137,7 @@ function buddy(who, x, y, h, t, o = {}) {
     if (pose === "waving" || (who === "basil" && o.wave && pose === "cheer")) { const e = ss(.2, .4, u) * (1 - ss(1.9, 2.3, u)), sA = Math.sin(2 * Math.PI * 2.1 * u); rot += 4.6 * sA * e; sy *= 1 - .02 * Math.abs(sA) * e; } }
   const nod = nodOf(who, t), q = (pose === "sit" ? .016 : .022) * nod; sy *= 1 - q; sx *= 1 + .8 * q; rot += 1.1 * nod * (o.flip ? -1 : 1); if (pose !== "sit") lift -= 5 * nod;
   for (const [tj, hj] of o.jump || []) { lift -= hop(t, tj, .36) * hj; const a = ss(tj - .12, tj, t) * (t < tj ? 1 : 0); sy *= 1 - .08 * a; sx *= 1 + .06 * a; const w = wob(t, tj + .36, .35); if (t > tj + .36) { sy *= 1 - .08 * w; sx *= 1 + .06 * w; } }
+  if (nodH) { lift -= nodH * h * .05; rot += 3 * nodH * (o.flip ? -1 : 1); sy *= 1 + .03 * nodH; }
   if (o.rock) rot += o.rock * Math.sin(2 * Math.PI * t / .7);
   rot += o.look || 0;
   let name;

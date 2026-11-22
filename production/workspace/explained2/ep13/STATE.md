@@ -313,3 +313,23 @@ may be incomplete. On resume: re-run the render + finish for both parts, check (
 -16 LUFS, .srt), then UPLOAD without another preview (teacher: "upload the new episode now. Let me take a look"):
 replaces FO1Y_KSZU-c, 8lQ1-1ruveY; retire_old; playlists after "explained-p3-ep12v3-part2"; point the classic _gRJ0NwV6p0's
 "design like an engineer" link to the new Part 1. Then add EP13's before/after sheet to explained2/tutorial/.
+- **Later the same day (teacher, after EP14; SERIES_FORMAT section 6): "Talking means a moving mouth" and "Reactions follow the answer"**, ported
+  from ep14/lib.js into `lib.js` (EP13 stays in the GREY buddies): a speaking buddy always shows its talking sprite (lip-sync + blinks; never in
+  the back view) and pops back to its pose after the line; listeners answer a line with a pose only for a reason (a question: thinking; a problem
+  word: oops / surprised; a celebration: cheer), ONE listener per line, else a nod (`reactTriggers`, `reactPose`, `reactChosen`, `reactAt`);
+  a scene's own pose list is thinned so no buddy swaps more than once in 6 s (`thinPoses`); hands-up cheer only while something is learnt
+  (`learnAt`: a key word, a verdict or tag, the test tick, the wood tile, the dragonfly fix, the last box, the score hand's high five, the end
+  of the chant, the read-along, "Now you know!"), otherwise arms crossed in answer scenes or the sit pose; EP13's `OUTCOMES`: Part 1 the answer
+  "one" (Pip right; Basil, Momo shy) and HOLD ON!'s bell (Pip shy); Part 2 the answer "three" (Basil, Pip right; Momo shy) and the Showdown picks
+  (Pip, Momo right; Basil shy). Dialogue checked: each correct answer's reason is said by a buddy who got it right (Pip, "My strap bends over my
+  shoulder"; Pip and Momo in the Showdown) or by Heart; no host reply to a cut buddy line (no cut used). `main.js` sets `window._S`.
+  Both parts re-rendered in full after this (the earlier copy-splices are gone).
+- **Re-rendered in full (22 Nov, after the rules port): Part 1 5:22.2, Part 2 5:20.5, both -16.0 LUFS, decode clean, captions 143 / 149 with no
+  overlaps, every countdown tick within 5 ms of plan and every number change ON its whole-second tick (`qa/ring_badges_p1.png`,
+  `qa/ring_badges_p2.png`).** Upload config ready: `upload_v2.json` (keys explained-p3-ep13v2-part1/-part2, replaces FO1Y_KSZU-c and
+  8lQ1-1ruveY with retire_old, both playlists after explained-p3-ep12v4-part2; `--check` passed: it inserts the two parts right after EP12 v4
+  Part 2 = Mb9XNdpTSrk, so EP14 v2 stays after them). **NOT uploaded yet: the upload command was refused by this session's permission
+  system**, so it waits for the owner to allow it (or to run `python3 production/youtube/explained_upload.py
+  production/workspace/explained2/ep13/upload_v2.json` themselves). After the upload: change the classic _gRJ0NwV6p0's first description line
+  "design like an engineer https://www.youtube.com/watch?v=FO1Y_KSZU-c" to the new Part 1 (keep "choosing materials ... zCCVRRtDffc"), check
+  both playlists' order (EP12 v4, EP13 v2, EP14 v2), and send the new .srt files.
