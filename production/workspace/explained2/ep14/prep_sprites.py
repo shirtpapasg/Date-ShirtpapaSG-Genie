@@ -15,7 +15,7 @@ def put(name, src, ax, ay, bh):
 for f in os.listdir(O):
     if f.endswith(".png"): os.remove(f"{O}/{f}")           # no stale grey sprite may survive a re-run
 SET = {"pip": "pip", "basil": "basil_c", "momo": "momo_c"}   # buddy -> the sprite set EP14 uses (coloured Momo and Basil)
-RENAME = {("momo", "pointing"): "pointing_cut"}             # cropped painting: only where the tail side is hidden
+RENAME = {}   # (Momo's cropped pointing was replaced by an uncropped painting on 22 Nov: plain "pointing" now)
 BH = {}
 for b, src in SET.items():
     m = json.load(open(f"{S}/{src}_sit.json")); x0, y0, x1, y1 = m["states"]["closed"]["bbox"]; hx, hy = m["anchors"]["hips"]; BH[b] = y1 - y0

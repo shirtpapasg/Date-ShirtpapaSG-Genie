@@ -28,7 +28,7 @@ POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on his
 POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
   "oops": ("momo_c_oops.jpg", None), "waving": ("momo_c_waving.jpg", None), "thinking": ("momo_c_thinking.jpg", None),
   "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None),
-  "pointing": ("momo_c_pointing.jpg", None)}   # NOTE: this painting is cropped: the tail ends in a straight cut at the left. Use only
+  "pointing": ("momo_c_pointing.jpg", None)}   # uncropped re-send (22 Nov) replaced the cropped one. Was:
                                                 # where her tail side is hidden (off-frame, behind a prop, waist-up); an uncropped one is asked for
 SITREF = {}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
