@@ -67,6 +67,22 @@ the plant turning to the window):
 Scripts mark these moments as **[LOOK CLOSER]** in the "On screen" column; each key word / goal of the episode has one. They are
 separate from (and in addition to) the "BE THE THING" journey, and they are never cut for length.
 
+## 1c. Explain from the learner's seat (teacher, 2026-11-22; from EP14 on)
+
+The teacher, on EP11: "leaning back to the previous version of pushing out facts, and not focusing the perspective of young learners,
+requiring a combination of visual and more in-depth explanations". And on recent episodes: "the visuals has lesser emphasis on the
+cuteness of the pet buddies, the explanations are less in depth, and the visuals less engaging." EP13 was released as it was; from
+EP14 on every script is written this way:
+- **The chain of questions comes first** (as `pilot_p3_ep01_script.md` "How the segments chain"): 7–9 lines, each answer opening the
+  next question, from the hook to the link into the next episode (a story carrying on where possible, not only a quiz dare).
+- **Fewer ideas, deeper: two LOOK-CLOSERs per part**, each walking the child's path: a buddy asks the child's question in a child's
+  words → a buddy guesses wrong as children really do → we see it happen up close → the WHY with a simple picture model (arrows,
+  dots, cut-aways), true at the level taught → back to the child's life → verdict → the buddy reads the book's sentence.
+- **Heart may explain the why in simple words beyond the book's own verbs**; exact book wording stays for Mark Sentences,
+  definitions and key words.
+- The buddies stay cute and alive in every frame and react to what we see; scenes are real places with life in them.
+- Full guide for any agent or account: `EXPLAINED_PLAYBOOK.md`.
+
 ## 2. Length and parts
 
 - **Each video is about 3 to 5 minutes.** A topic that needs more is split into **Part 1 and Part 2**.
