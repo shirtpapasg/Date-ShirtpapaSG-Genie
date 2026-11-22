@@ -276,5 +276,76 @@
    "body_h": 791,
    "hips_above_feet": 6
   }
+ },
+ "basil_c": {
+  "oops": {
+   "file": "poses/basil_c_oops.png",
+   "src": "basil_c_oops.jpg",
+   "anchor": [
+    550.9,
+    815.0
+   ],
+   "scale": 0.9838,
+   "size": [
+    879,
+    839
+   ]
+  },
+  "waving": {
+   "file": "poses/basil_c_waving.png",
+   "src": "basil_c_waving.jpg",
+   "anchor": [
+    550.9,
+    815.0
+   ],
+   "scale": 0.9838,
+   "size": [
+    984,
+    839
+   ]
+  },
+  "thinking": {
+   "file": "poses/basil_c_thinking.png",
+   "src": "basil_c_thinking.jpg",
+   "anchor": [
+    559.3,
+    815.0
+   ],
+   "scale": 0.9838,
+   "size": [
+    840,
+    839
+   ]
+  },
+  "surprised": {
+   "file": "poses/basil_c_surprised.png",
+   "src": "basil_c_surprised.jpg",
+   "anchor": [
+    559.3,
+    815.0
+   ],
+   "scale": 0.9838,
+   "size": [
+    840,
+    839
+   ]
+  },
+  "pointing": {
+   "file": "poses/basil_c_pointing.png",
+   "src": "basil_c_pointing.jpg",
+   "anchor": [
+    539.4,
+    815.0
+   ],
+   "scale": 1.0259,
+   "size": [
+    937,
+    838
+   ]
+  },
+  "_sit": {
+   "body_h": 791,
+   "hips_above_feet": 6
+  }
  }
 }

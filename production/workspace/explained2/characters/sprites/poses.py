@@ -21,6 +21,10 @@ POSES = {  # buddy: {pose: (file, crop or None)}
   "basil": {"cheer": ("basil_cheer_mouth_wide.jpg", None), "oops": ("basil_oops.jpg", None), "surprised": ("basil_surprised.jpg", None),
             "arms_crossed": ("basil_arms_crossed.jpg", None), "back": ("basil_back.png", None)},
 }
+POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on grey Basil's sitting scale until his coloured sitting set is cut
+  "oops": ("basil_c_oops.jpg", None), "waving": ("basil_c_waving.jpg", None), "thinking": ("basil_c_thinking.jpg", None),
+  "surprised": ("basil_c_surprised.jpg", None), "pointing": ("basil_c_pointing.jpg", None)}
+SITREF = {"basil_c": "basil"}   # which sitting sprite sets the scale and foot line
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
@@ -44,7 +48,7 @@ def bbox(alpha):
 if __name__ == "__main__":
     os.makedirs(f"{H}/poses", exist_ok=True); os.makedirs(f"{H}/qa", exist_ok=True); meta = {}
     for who, poses in POSES.items():
-        sit = json.load(open(f"{H}/{who}_sit.json")); sim = cv2.imread(f"{H}/{who}_sit_closed.png", -1)
+        ref = SITREF.get(who, who); sit = json.load(open(f"{H}/{ref}_sit.json")); sim = cv2.imread(f"{H}/{ref}_sit_closed.png", -1)
         sx0, sy0, sx1, sy1 = sit["states"]["closed"]["bbox"]; sit_h = sy1 - sy0; hips = sit["anchors"]["hips"]
         off = hips[0] - body_cx(sim[..., 3], sy0, sy1)                       # the sitting sprite's hips, relative to its body centre
         foot = sy1 - hips[1]                                                 # hips sit this far above the lowest pixel
