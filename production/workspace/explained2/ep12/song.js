@@ -16,6 +16,11 @@ const MOTIF = [['E5', 0, 1], ['G5', 1, 1], ['C6', 2, 2], ['A5', 4, 1], ['G5', 5,
 const K = I.kick({ punch: .6, tail: .2 }), CL = I.clap({ decay: .1 }), SH = [I.shaker(.7, 15), I.shaker(1, 16)];
 let barN = 0;
 if (C.R.outro) C.R.groove.push(C.R.outro);
+// v3 (teacher, 22 Nov, on EP13: "The countdown timer rhythm is off!"): the game bed's beat (104 BPM) fought the ring's once-a-second ticks.
+// The bed now stops for every countdown (ring0 -> bell + .4 s), so only the ticks keep time; the whole-second ticks are the loud "tock".
+{ const W = Object.keys(TL.marks).filter((k) => k.startsWith('ring0_')).map((k) => [TL.marks[k] - .12, TL.marks['bell_' + k.slice(6)] + .45]); const out = [];
+  for (const [a, b] of C.R.groove) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); out.push(...segs); }
+  C.R.groove = out; }
 for (const [a, b] of C.R.groove) for (let t0 = a, bi = 0; t0 + BEAT * 3.2 < b; t0 += BEAT * 4, bi++, barN++) { const [root, chord] = CH[bi % 4];
   for (let s = 0; s < 8; s++) { const t = t0 + s * BEAT / 2; if (t > b - .1) break;
     if (s === 0 || s === 4) drums.addMono(K, t, .5); if (s === 2 || s === 6) { drums.addMono(CL, t, .3); verb.addMono(CL, t, .1); }
@@ -95,7 +100,7 @@ const P = {
   whoosh: (t) => { game.addMono(I.noiseSweep(.45, 500, 3200, { q: 1.3 }), t - .1, .2); },
   slam: (t, v) => { game.addMono(K, t, .9); game.addMono(I.thud(80 - 6 * v, .11), t, .9); game.addMono(I.thwack(), t, .16); if (v === 2) { const c = I.crash(4); game.addMono(c, t, .12); } },
   cardL: (t) => { game.addMono(I.pop(1500, 1), t, .5, -.6); mar('E5', t, .3); }, cardR: (t) => { game.addMono(I.pop(1900, 2), t, .5, .6); mar('G5', t, .3); },
-  tick: (t, v) => { game.addMono(I.woodTick(v ? 1.25 : 1.5), t, v ? .7 : .42); },
+  tick: (t, v) => { if (v) { game.addMono(I.woodTick(1.1), t, .95); game.addMono(I.thud(150, .04), t, .35); } else game.addMono(I.woodTick(1.6), t, .26); },   // v3: the whole second is a loud tock, the in-between ticks soft
   bell: (t) => { const b1 = I.bell(1568, .5, 1.4, 2.0), b2 = I.bell(2349, .35, 1.0, 2.0); game.addMono(b1, t, .42); game.addMono(b2, t, .18); verb.addMono(b1, t, .25); },
   peep: (t) => { const x = I.whistle(.28); game.addMono(x, t, .16); game.addMono(x, t + .34, .14); verb.addMono(x, t, .08); const b1 = I.bell(1568, .4, 1.2, 2.0); game.addMono(b1, t, .2); },
   bellicon: () => {},
