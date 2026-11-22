@@ -138,6 +138,8 @@ function VC(t, o = {}, cam) { return cam3(bg(o.dim ? "classroomD" : "classroom")
    its material's colour (the sample has hopped onto it); o.words: false = no label words (small copies)
    ==================================================================================================================================== */
 const PEN = "#5A5470";
+// EP13 v2: one colour per part of the bag (never the answer green / blue or the YOU yellow), used on the drawing, its labels and its chips
+const PARTC = { straps: "#7C3AED", zip: "#DB2777", body: "#B45309", base: "#334155" };
 function bagDrawing(k = 1, o = {}) { const m = o.mat || {}, seg = (i, n = 9) => clamp(k * n - i), st = (u) => `pathLength="1" stroke-dasharray="1" stroke-dashoffset="${n2(1 - u)}"`, pen = `fill="none" stroke="${PEN}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"`;
   const bodyD = `M-100 -40 V-170 Q-100 -250 -40 -250 H40 Q100 -250 100 -170 V-40`, baseD = `M-104 -44 H104 V-14 Q104 0 90 0 H-90 Q-104 0 -104 -14z`, sR = `M56 -238 Q182 -206 152 -112 Q136 -62 102 -32`, sL = `M-56 -238 Q-182 -206 -152 -112 Q-136 -62 -102 -32`, zD = `M-96 -176 Q0 -138 96 -176`;
   let s = "";
@@ -146,10 +148,14 @@ function bagDrawing(k = 1, o = {}) { const m = o.mat || {}, seg = (i, n = 9) => 
   if (m.zip > .02) s += OP(m.zip, `<path d="${zD}" fill="none" stroke="#C9D2E0" stroke-width="13" stroke-linecap="round"/>`);
   s += `<path d="${bodyD}" ${pen} ${st(seg(0))}/><path d="M-28 -246 Q0 -292 28 -246" ${pen} ${st(seg(1))}/><rect x="-58" y="-124" width="116" height="74" rx="14" ${pen} ${st(seg(1))}/><path d="${sL}" ${pen} stroke-width="14" opacity=".9" ${st(seg(2))}/><path d="${sR}" ${pen} stroke-width="14" opacity=".9" ${st(seg(3))}/>
     <path d="${zD}" ${pen} stroke-dasharray="${seg(4) >= 1 ? ".03 .03" : "1"}" ${seg(4) >= 1 ? `pathLength="1"` : st(seg(4))}/><path d="${baseD}" ${pen} ${st(seg(5))}/>`;
+  // EP13 v2 (teacher, 22 Nov: "Which is flexible, strong and waterproof? ... consider colour coding"): o.cc = each part outlined in its own
+  // colour (PARTC) as its label appears; the label's part word in the same colour
+  if (o.cc) { const lu = (i) => clamp(k * 9 - 6 - i * .7), cs = (d, c, a, w = 9) => a > .01 ? `<path d="${d}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity="${n2(a)}"/>` : "";
+    s += cs(bodyD, PARTC.body, lu(2)) + cs(sL, PARTC.straps, lu(0), 12) + cs(sR, PARTC.straps, lu(0), 12) + cs(zD, PARTC.zip, lu(1), 10) + cs(baseD, PARTC.base, lu(3)); }
   if (o.words !== false) { const tg = o.tags || {}, labs = o.left ? [["straps", -150, -150, -235, -250, "end", "fabric"], ["zip", -70, -160, -235, -185, "end", "metal"], ["body", -100, -100, -235, -110, "end", "fabric"], ["base", -104, -22, -235, -10, "end", "plastic"]]
       : [["straps", 178, -210, 300, -250, "start", "fabric"], ["body", -100, -100, -250, -130, "end", "fabric"], ["zip", 60, -158, 300, -120, "start", "metal"], ["base", -104, -22, -250, -10, "end", "plastic"]];
     labs.forEach(([w, px, py, lx, ly, an, mat], i) => { const u = clamp(k * 9 - 6 - i * .7); if (u <= 0) return; const fs = o.fs || 44, on = (tg[w] || 0) > .5;
-      s += `<path d="M${px} ${py} L${n2(lerp(px, lx, u))} ${n2(lerp(py, ly, u))}" stroke="${PEN}" stroke-width="4" stroke-linecap="round"/>` + OP(clamp(u * 2 - 1), `<text x="${lx + (an === "start" ? 12 : -12)}" y="${ly + fs * .32}" font-family="Fredoka" font-weight="600" font-size="${fs}" fill="${PEN}" text-anchor="${an}">${w}${on ? ` · <tspan fill="#1F8A4C" font-weight="700">${mat}</tspan>` : ""}</text>`); }); }
+      s += `<path d="M${px} ${py} L${n2(lerp(px, lx, u))} ${n2(lerp(py, ly, u))}" stroke="${PEN}" stroke-width="4" stroke-linecap="round"/>` + OP(clamp(u * 2 - 1), `<text x="${lx + (an === "start" ? 12 : -12)}" y="${ly + fs * .32}" font-family="Fredoka" font-weight="600" font-size="${fs}" fill="${PEN}" text-anchor="${an}">${o.cc ? `<tspan fill="${PARTC[w]}" font-weight="700">${w}</tspan>` : w}${on ? ` · <tspan fill="${o.cc ? P.ink : "#1F8A4C"}" font-weight="700">${mat}</tspan>` : ""}</text>`); }); }
   return s; }
 const paperS = (w, h) => `<g filter="url(#dropS)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="10" fill="#FFFDF4" stroke="#E3D6B8" stroke-width="5"/></g>`;
 // the finished drawing as a small picture (paper + drawing + materials). origin = its centre; 760 x 560 at sc = 1

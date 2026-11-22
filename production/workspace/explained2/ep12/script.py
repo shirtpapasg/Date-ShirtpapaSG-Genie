@@ -115,7 +115,7 @@ SEQ1 = [
  ("say", "g202", H, DARE_Q, {"pre": .4, "gap": 1.8, "post": 2.0}),   # gap 1.8 / post 2.0: each board is forward >= 2.5 s (checked on the timeline)
  ("scene", "board"), ("mark", "boardIn"),
  ("say", "g203", H, "Hold on to your answer!", {"pre": 1.2, "post": .5}),   # pre 1.2: the board slides in first
- ("scene", "title"), ("mark", "title"), ("wait", 2.4),
+ ("scene", "title"), ("mark", "title"), ("wait", 1.8),   # v3: 2.4 -> 1.8 (the fun fact needs the time)
  # ---- 3 · the game, and the hidden mynah (Heart names it; its picture pops)
  ("scene", "game"),
  ("say", "g301", H, "You against the Buddies! Lock in first. One finger for every point. A little mynah is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
@@ -219,14 +219,17 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "g1301", H, "Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!", {"pre": .3, "post": .6}),
  ("scene", "liz"),
- ("say", "g1302", H, "Did you spot the mynah? It was on the trolley bay sign! Tell someone at home.", {"pre": .6, "post": .6}),
+ ("say", "g1302", H, "Did you spot the mynah? It was on the trolley bay sign!", {"pre": .4, "post": .3}),
+ # v3 (teacher, 22 Nov): a TRUE, surprising fun fact about the hidden animal that links to the episode, so "Tell someone at home" has something to tell
+ ("say", "g1302f", B, "Here's a fun fact! Mynahs build their nests from dry grass, twigs, string, and even bits of plastic!", {"pre": .2, "post": .3}),
+ ("say", "g1302t", H, "Tell someone at home!", {"pre": .1, "post": .5}),
  *kwrecap(["Purpose", "Physical properties"]),
  # ---- 14 · the cliffhanger: three water bottles in the trolley
  ("scene", "cliff"), ("wait", .4),
  ("say", "g1401", B, "Look! Three water bottles in our trolley!", {"pre": .3}),
  ("say", "g1402", H, "One plastic. One glass. One metal. The same object, three materials! Which one is right for school?", {"pre": .4, "kw": [["b1", "plastic"], ["b2", "glass"], ["b3", "metal"], ["q", "which"]]}),
  ("say", "g1403", H, "Find out in Part Two!", {"pre": .4}),
- ("mark", "cliffend"), ("wait", .9),
+ ("mark", "cliffend"), ("wait", .6),
  # ---- 15 · "Now you know!" and the outro
  *NYK,
 ]
@@ -236,7 +239,7 @@ SEQ2 = [
  ("scene", "lasttime"),
  ("say", "j101", H, "Last time, the trolley was metal: strong. The fish tank was glass: transparent and waterproof. Now: three water bottles!", {"pre": .4, "post": 1.6}),   # post 1.6: the third picture holds 2.5 s
  # ---- 2 · the new place (the car park beside the block), the game, and the hidden squirrel
- ("scene", "place"), ("wait", 2.0),
+ ("scene", "place"), ("wait", 1.3),   # v3: 2.0 -> 1.3 (the fun fact needs the time)
  ("scene", "game"),
  ("say", "j201", H, "Lock in first. A little squirrel is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  # ---- 3 · today's goals (Pip reads the three cards)
@@ -307,7 +310,7 @@ SEQ2 = [
  ("mark", "jseats"),
  ("say", "j904", H, "Through the glass, you see the fabric seats, dry inside.", {**SLOW, "pre": 0, "post": 1.0}),
  ("say", "j905", H, "You roll over the metal, past the rubber tyre, to the ground.", {**SLOW, "pre": .3, "kw": [["jslope", "metal"], ["jtyre", "rubber"], ["jground", "ground"]]}),
- ("wait", 1.5),
+ ("wait", 1.2),
  # ---- 10 · Showdown: Momo's notes (double points)
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
@@ -330,7 +333,10 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "j1201", H, "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "j1202", H, "Did you spot the squirrel? It was on the tree by the cars! Tell someone at home.", {"pre": .5, "post": .5}),
+ ("say", "j1202", H, "Did you spot the squirrel? It was on the tree by the cars!", {"pre": .3, "post": .3}),
+ # v3 (teacher, 22 Nov): the hidden animal's fun fact (true; links to "different materials for different jobs")
+ ("say", "j1202f", B, "Fun fact! A squirrel's nest has strong twigs outside and soft leaves inside. Different materials for different jobs!", {"pre": .2, "post": .3}),
+ ("say", "j1202t", H, "Tell someone at home!", {"pre": .1, "post": .5}),
  # ---- 13 · the dare for Episode 13
  ("scene", "dare"), ("wait", .5),
  ("say", "j1301", H, NEXT_DARE, {"pre": 0}),

@@ -237,7 +237,11 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "g1301", H, "Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!", {"pre": .3, "post": .5}),
  ("scene", "liz"),
- ("say", "g1302", H, "Did you spot the butterfly? It was on the plant by the window! Tell someone at home.", {"pre": .6, "post": .6}),
+ # EP13 v2 (teacher, 22 Nov: the reveal must end on "a fun fact which most children are shocked to find out! Then it makes sense to share"):
+ # Heart's reveal line is split round ONE new buddy line, a true fun fact tied to the episode's science (waterproof); words otherwise unchanged
+ ("say", "g1302", H, "Did you spot the butterfly? It was on the plant by the window!", {"pre": .6, "post": .2}),
+ ("say", "g1303", M, "Wow! Butterfly wings are covered in tiny scales, like little tiles. Water rolls off, so the wings stay dry!", {"pre": .3, "post": .2, "kw": [["ffscales", "scales"], ["ffwater", "water"]]}),
+ ("say", "g1304", H, "Tell someone at home!", {"pre": .3, "post": .6}),
  *kwrecap(["Engineers", "Design", "Intended use"]),
  # ---- 14 · the cliffhanger: will the new strap really hold? (THEN: TEST IT slides in on "Not yet"; a big ? over the new strap)
  ("scene", "cliff"), ("wait", .3),
@@ -346,7 +350,10 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "j1201", H, "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "j1202", H, "Did you spot the frog? It was on the lily pad in the pond! Tell someone at home.", {"pre": .5, "post": .5}),
+ # EP13 v2 (teacher, 22 Nov): the reveal ends on a true fun fact tied to the episode (designing a zoo home), then "Tell someone at home!"
+ ("say", "j1202", H, "Did you spot the frog? It was on the lily pad in the pond!", {"pre": .5, "post": .2}),
+ ("say", "j1203", P, "Guess what! Some frogs have sticky toe pads. They can climb up smooth glass! So a frog's zoo home needs a lid.", {"pre": .3, "post": .2, "kw": [["fftoes", "sticky"], ["ffglass", "glass"], ["fflid", "lid"]]}),
+ ("say", "j1204", H, "Tell someone at home!", {"pre": .3, "post": .5}),
  # ---- 13 · the dare for Episode 14
  ("scene", "dare"), ("wait", .5),
  ("say", "j1301", H, NEXT_DARE, {"pre": 0}),

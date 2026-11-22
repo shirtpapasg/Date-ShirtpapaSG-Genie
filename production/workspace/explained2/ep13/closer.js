@@ -33,7 +33,7 @@ function lookCloser(t, s, o) { const tz = o.tz, e = eio((t - tz) / 1.0), op = ei
       <g clip-path="url(#lcB)"><g filter="url(#drop)"><rect x="${x0 - 14}" y="${y0 - 14}" width="${W_.w + 28}" height="${W_.h + 28}" rx="56" fill="#FFF8EA"/></g><g clip-path="url(#lcA)"><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" fill="${o.bgc || "#FFF3DC"}"/>
         <g transform="translate(${W_.x} ${W_.y}) scale(${n2(push * 1000) / 1000})">${o.art(t)}</g></g><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" rx="44" fill="none" stroke="${P.ink}" stroke-width="5" opacity=".25"/></g>`
       + (op < 1 ? `<circle cx="${n2(cx)}" cy="${n2(cy)}" r="${n2(40 + 1160 * op)}" fill="none" stroke="${P.sun}" stroke-width="${n2(14 * (1 - op))}"/>` : ""); }
-  return out + (o.over ? OP(op, o.over(t)) : "") + lcTag(t, tz + .1) + lcVerdict(t, o.tv, o.verdict[0], o.verdict[1], o.verdict[2] || {}) + logo(t); }
+  return out + (o.over ? OP(op, o.over(t)) : "") + (o.top ? o.top(t) : "") + lcTag(t, tz + .1) + lcVerdict(t, o.tv, o.verdict[0], o.verdict[1], o.verdict[2] || {}) + logo(t); }
 // the book's sentence inside the close-up (the cream strip at the top of the window)
 const lcStrip = (t, id, text, o = {}) => bookCaption(t, id, text, 262, { size: 50, ...o });
 // small helpers for the pictures
@@ -128,6 +128,13 @@ function bagArt(t) { const S = 1.35, TY = 200, FY = 318, CH = [300, FY + 12, 1.4
   return lcRoom(FY) + lcTable(TY, -900, -300) + `<rect x="-330" y="${TY + 26}" width="22" height="${FY - TY - 26}" fill="#8E9AA8"/>` + stack
     + `<ellipse cx="${P2[0]}" cy="${FY + 6}" rx="${n2(190 * ud)}" ry="${n2(12 * ud)}" fill="${P.ink}" opacity=".18" filter="url(#b4)"/>` + TF(CH[0], CH[1], CH[2], chairS()) + bag + hsL + fly + hands + lcHit(P2[0] + 150, FY - 8, pulse(t, tu[3], .02, .35), 26) + labs; }
 
+// and every sample is named (teacher, 22 Nov: "'plastic' on the darker material and 'fabric' for the orange material")
+const sName = (txt, k = 1) => k < .03 ? "" : TF(0, 104, k, `<text x="0" y="0" font-family="Fredoka" font-weight="700" font-size="46" fill="${PEN}" text-anchor="middle" stroke="#FFF8EA" stroke-width="10" stroke-linejoin="round" paint-order="stroke">${txt}</text>`);
+// a property chip tied to its part: [word, (t2, word2) ...] in a row from (x, y) (art coords), outlined in the part's colour, one line to the part
+function partChip(t, t0, x, y, words, part, pt, size = 34) { if (t < t0) return ""; const col = PARTC[part]; let s = pline(x - 6, y, pt[0], pt[1], ramp(t, t0, .25), col), cx = x, tt = t0;
+  for (let i = 0; i < words.length; i++) { const w = words[i]; if (typeof w === "number") { tt = w; continue; } if (t < tt) break; const ww = tw(w, size, 700, "Fredoka", 3) + size * 1.5 + 12;
+    s += TF(cx + ww / 2, y, spring(t, tt, .4), `<rect x="${n2(-ww / 2)}" y="${n2(-size * .875 - 6)}" width="${n2(ww)}" height="${n2(size * 1.75 + 12)}" rx="${n2(size * .875 + 6)}" fill="${col}"/>` + propChip(w, size)); cx += ww + 10; }
+  return s; }
 /* 3 · lcdraw: the paper fills the window. pencil: an adult's hand with an ordinary pencil draws the bag, part by part (speeded up), and four
    plain label lines; then a sample is tried right beside the part it is for: drop1 / drop2 (a drop on plastic stays a bead; on fabric it
    sinks in), plastichop; the short metal zip run open, close, open, close (zo1..zc2), ziphop; fabhop2 (the fabric tile and the strap) */
@@ -140,19 +147,23 @@ function drawArt(t) { const tp = MK("pencil"), tf4 = MK("fill4"), d1 = MK("drop1
   const pen = OP(ramp(t, tp - .4, .3) * (1 - ramp(t, tf4 + .1, .3)), TF(pt[0], pt[1], 1.1, pencilHand()));
   // BASE: the plastic tile and the fabric tile, the dropper and its two drops
   const ta = LT("g1003") - .2, PL = [410, 175], FB = [610, 175], sl = 700 * (1 - ramp(t, ta, .45)), out = t >= tzm[0] - 2.0 ? 700 * ei((t - (tzm[0] - 2.0)) / .5) : 0;
-  const hp = hopTo(tph, PL, L2W(0, -22)), dropTile = t < tph + .45 ? TF(hp[0] + sl, hp[1], 1.15 * (1 - .55 * hp[2]), sampleTile("plastic", { bead: t >= d1 ? spring(t, d1, .3) : 0 })) : "";
-  const fabTile = out < 690 ? TF(FB[0] + sl + out, FB[1], 1.15, sampleTile("fabric", { wet: ramp(t, d2, .6) })) : "";
+  const hp = hopTo(tph, PL, L2W(0, -22)), dropTile = t < tph + .45 ? TF(hp[0] + sl, hp[1], 1.15 * (1 - .55 * hp[2]), sampleTile("plastic", { bead: t >= d1 ? spring(t, d1, .3) : 0 }) + sName("plastic", 1 - ramp(t, tph - .1, .2))) : "";
+  const fabTile = out < 690 ? TF(FB[0] + sl + out, FB[1], 1.15, sampleTile("fabric", { wet: ramp(t, d2, .6) }) + sName("fabric")) : "";
   const dx = t < d1 + .25 ? PL[0] + 6 : lerp(PL[0] + 6, FB[0] + 6, eio((t - d1 - .25) / .5)), dq = Math.max(pulse(t, d1 - .32, .1, .3), pulse(t, d2 - .32, .1, .3)), dvis = ramp(t, ta + .5, .3) * (1 - ramp(t, d2 + .5, .3));
   const fall = (td, x) => t >= td - .3 && t < td ? TF(x, lerp(40, 150, ei((t - (td - .3)) / .3)), 1, waterDrop(11)) : "";
   const dyp = 22 - 120 * (1 - ramp(t, ta + .5, .4)) - 200 * ramp(t, d2 + .4, .4), drp = OP(dvis, TF(dx, dyp, 1.3, dropper(dq)) + aHand(dx + 4, dyp - 150, 90, .95)) + fall(d1, PL[0] + 6) + fall(d2, FB[0] + 6) + (t >= d1 && t < d1 + .4 ? lcHit(PL[0] + 6, PL[1] - 20, pulse(t, d1, .02, .3), 20) : "");
   // ZIP: the short metal zip, run open and closed by one hand (AT zo1, zc1, zo2, zc2)
   const tz0 = LT("g1004") - .2, ZP = [500, -50], zs = 700 * (1 - ramp(t, tz0, .45)), zu = t < tzm[0] ? 0 : t < tzm[1] ? eio((t - tzm[0]) / .34) : t < tzm[2] ? 1 - eio((t - tzm[1]) / .34) : t < tzm[3] ? eio((t - tzm[2]) / .3) : 1 - eio((t - tzm[3]) / .34);
-  const zh = hopTo(tzh, ZP, L2W(0, -158)), zipS = t >= tz0 && t < tzh + .45 ? TF(zh[0] + zs, zh[1], 1.3 * (1 - .4 * zh[2]), zipShort(zu)) + OP(ramp(t, tz0 + .4, .25) * (1 - ramp(t, tzm[3] + .5, .3)), aHand(ZP[0] + 1.3 * lerp(120, -120, zu) - 30, ZP[1] - 6, 100, 1.0)) : "";
+  const zh = hopTo(tzh, ZP, L2W(0, -158)), zipS = t >= tz0 && t < tzh + .45 ? TF(zh[0] + zs, zh[1], 1.3 * (1 - .4 * zh[2]), zipShort(zu) + OP(1 - ramp(t, tzh - .1, .2), TF(0, -20, .8, sName("metal zip")))) + OP(ramp(t, tz0 + .4, .25) * (1 - ramp(t, tzm[3] + .5, .3)), aHand(ZP[0] + 1.3 * lerp(120, -120, zu) - 30, ZP[1] - 6, 100, 1.0)) : "";
   // STRAPS AND BODY: the fabric tile's dry twin and the strap from before
-  const tf0 = LT("g1005") - .2, F2 = [400, -255], SP = [600, -200], fs = 700 * (1 - ramp(t, tf0, .45)), fh = hopTo(tfh, F2, L2W(0, -150)), sh = hopTo(tfh + .08, SP, L2W(150, -150));
-  const fab = t >= tf0 && t < tfh + .55 ? TF(fh[0] + fs, fh[1], 1.15 * (1 - .5 * fh[2]), sampleTile("fabric")) + TF(sh[0] + fs, sh[1], 1 - .5 * sh[2], strapBand("fabric", 300, 34), -14) : "";
-  const chips = chipAt(t, MK("wpchip"), 450, 178, "WATERPROOF", 38) + chipAt(t, MK("zipchip"), 480, -50, "STRONG", 38) + chipAt(t, MK("flexchip2"), 440, -262, "FLEXIBLE", 38) + chipAt(t, MK("strongchip2"), 500, -186, "STRONG", 38);
-  return `<rect x="-900" y="-420" width="1800" height="840" fill="#E3C594"/>${wgrain(-880, 880, -300, 6, 3)}${wgrain(-880, 880, 300, 6, 9)}` + TF(-250, 0, 1, paperS(990, 690)) + TF(DX, DY, DS, bagDrawing(k, { mat, tags, left: true, fs: 36 }))
+  const tf0 = LT("g1005") - .2, F2 = [400, -255], SP = [660, -165], fs = 700 * (1 - ramp(t, tf0, .45)), fh = hopTo(tfh, F2, L2W(0, -150)), sh = hopTo(tfh + .08, SP, L2W(150, -150));
+  const fab = t >= tf0 && t < tfh + .55 ? TF(fh[0] + fs, fh[1], 1.15 * (1 - .5 * fh[2]), sampleTile("fabric") + sName("fabric", 1 - ramp(t, tfh - .1, .2))) + TF(sh[0] + fs, sh[1], 1 - .5 * sh[2], strapBand("fabric", 300, 34), -14) : "";
+  // EP13 v2 (teacher, 22 Nov: "Which is flexible, strong and waterproof? Where's the arrows"): each chip sits in its part's row (the row of the
+  // part's label), outlined in the part's colour, with a line to that part on the drawing. No free-floating chips.
+  const row = (part, ly) => DY + DS * ly, PT = { straps: L2W(160, -196), zip: L2W(92, -168), body: L2W(100, -96), base: L2W(104, -20) };
+  const chips = partChip(t, MK("wpchip"), 300, row("base", -10), ["WATERPROOF"], "base", PT.base) + partChip(t, MK("zipchip"), 300, row("zip", -185), ["STRONG"], "zip", PT.zip)
+    + partChip(t, MK("flexchip2"), 300, row("straps", -250), ["FLEXIBLE", MK("strongchip2"), "STRONG"], "straps", PT.straps) + partChip(t, MK("flexchip2") + .08, 300, row("body", -110), ["FLEXIBLE", MK("strongchip2") + .08, "STRONG"], "body", PT.body);
+  return `<rect x="-900" y="-420" width="1800" height="840" fill="#E3C594"/>${wgrain(-880, 880, -300, 6, 3)}${wgrain(-880, 880, 300, 6, 9)}` + TF(-250, 0, 1, paperS(990, 690)) + TF(DX, DY, DS, bagDrawing(k, { mat, tags, left: true, fs: 36, cc: true }))
     + fabTile + dropTile + drp + zipS + fab + chips + pen; }
 
 /* 4 · lctest: left, the HELD PICTURE of the old strap (a photo card, "before the video": thin and worn, torn across just under the clamp,

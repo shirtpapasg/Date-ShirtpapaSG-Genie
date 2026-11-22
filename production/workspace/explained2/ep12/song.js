@@ -39,6 +39,29 @@ for (const [a, b] of C.R.birds) loop('ep08_birds.wav', a, b, .16);   // EP12: so
 for (const [a, b] of (C.R.sea || [])) loop('sea_wash.wav', a, b, .14, 1.0);   // EP10: small waves at the beach shelter, East Coast Park
 for (const [a, b] of (C.R.tank || [])) for (let t = a + .3, i = 0; t < b - .5; t += 1.3 + .9 * ((i * 7) % 5) / 5, i++) MIX.loadAudio(path.join(SFX, 'bubble.wav'), { at: t, length: DUR }).mixInto(amb, .045 + .02 * (i % 3) / 2);   // EP11: the goldfish tank's soft bubbles (the living room)
 for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0);   // EP8: the school canteen at recess, children far away
+// ---------- v3 (teacher, 22 Nov: "no sound effects of shoppers, laughter, bells… the quality indeed dipped"): a living place bed under every
+// real-place scene, low and ducked under speech, crossfading between places. Walkway: shoppers murmuring, a child's laugh now and then, a
+// trolley rattling past, the checkout scanner's beep, the door chime. Aquarium shop: the filter bubbling and its hum. Car park: wind in the
+// rain tree, a car passing far off (the birds are the BD regions above). Library sounds only (../../sau/sfx), each loaded once.
+{ const LIB = {}, lib = (f) => LIB[f] || (LIB[f] = MIX.loadAudio(path.join(SFX, f), {}));
+  const put = (f, t, g, pan = 0) => { const x = lib(f), i0 = Math.round(t * SR), a = (pan + 1) * Math.PI / 4, gl = Math.cos(a) * Math.SQRT2, gr = Math.sin(a) * Math.SQRT2; for (let i = 0; i < x.n && i0 + i < N; i++) { if (i0 + i < 0) continue; amb.L[i0 + i] += x.L[i] * g * gl; amb.R[i0 + i] += x.R[i] * g * gr; } };
+  const PL = PART == 1 ? { walk: { cold: 1, board: 1, title: .5, game: .45, trolley: 1, lcjob: .45, things: 1, lcmetal: .45, glass: .8, fabric: 1, metalans: .8, holdon: .35, fishnext: .8, tankrow: .7, waitw: .9, pullout: .8, liz: 1, cliff: .35 }, tank: { fishnext: .6, lctank: 1, tankrow: .8 } }
+    : { park: { place: 1, game: .45, boot: 1, lcbottles: .45, bottleans: .8, lccar: .45, waitw: .9, show: .3, fix: .3, board: .3, liz: 1, dare: .5 } };
+  const env = (map) => { const e = new Float32Array(N); for (const sc of TL.scenes) { const g = map[sc.name] || 0; if (!g) continue; const i0 = Math.round(sc.t0 * SR), i1 = Math.min(N, Math.round(sc.t1 * SR)); for (let i = i0; i < i1; i++) e[i] = g; }
+    const out = new Float32Array(N), w = Math.round(.6 * SR); let acc = 0; for (let i = 0; i < N; i++) { acc += e[i] - (i - w >= 0 ? e[i - w] : 0); out[i] = acc / w; } return out; };   // a 0.6 s crossfade between places
+  const bed = (f, len, E, g) => { const x = lib(f), L = Math.round((len - .15) * SR); for (let s0 = 0; s0 < N; s0 += L) { let any = false; for (let i = s0; i < Math.min(N, s0 + x.n); i += 4800) if (E[i] > .01) { any = true; break; } if (!any) continue;
+      for (let i = 0; i < x.n && s0 + i < N; i++) { const k = E[s0 + i] * g * Math.min(1, i / 7200, (x.n - i) / 7200); if (k <= 0) continue; amb.L[s0 + i] += x.L[i] * k; amb.R[s0 + i] += x.R[i] * k; } } };
+  const every = (E, a, b, seed, fn) => { const r = (k) => { const v = Math.sin(k * 127.1 + seed * 311.7) * 43758.5453; return v - Math.floor(v); }; for (let t = 1 + r(0) * a, k = 1; t < DUR - 1; t += a + (b - a) * r(k), k++) { const g = E[Math.round(t * SR)]; if (g > .3) fn(t, g, r(k + 50)); } };
+  if (PL.walk) { const E = env(PL.walk); bed('ep05_kids.wav', 4.6, E, .075); bed('ep05_kids.wav', 4.6, E.map((v, i) => E[Math.min(N - 1, i + 2.3 * SR | 0)]), .045);
+    every(E, 9, 15, 1, (t, g, r) => put('ep05_laugh.wav', t, .07 * g, r * 1.4 - .7));                      // a child laughs somewhere
+    every(E, 6, 10, 2, (t, g, r) => { put('ep03_beep.wav', t, .018 * g, .7); put('ep03_beep.wav', t + .32, .015 * g, .7); });   // the checkout scanner
+    every(E, 15, 22, 3, (t, g) => put('ep05_bell.wav', t, .03 * g, -.5));                                    // the automatic door's chime
+    every(E, 11, 17, 4, (t, g, r) => { put('ep03_roll.wav', t, .028 * g, r < .5 ? -.6 : .6); put('footsteps.wav', t + .4, .05 * g, r < .5 ? -.3 : .3); }); }   // a trolley rattles past, steps
+  if (PL.tank) { const E = env(PL.tank); bed('hum.wav', 5.2, E, .03); every(E, .22, .55, 5, (t, g, r) => put('bubble.wav', t, (.02 + .02 * r) * g, r * 1.2 - .6)); }   // the filter bubbling
+  if (PL.park) { const E = env(PL.park); bed('wind.wav', 6, E, .05); every(E, 13, 20, 6, (t, g, r) => put('pass_by.wav', t, .055 * g, r < .5 ? -.7 : .7)); every(E, 19, 27, 7, (t, g) => put('ep05_kids.wav', t, .035 * g, .4)); }   // wind in the rain tree, a far car, children on the linkway
+  // foley the v2 mix did not have: the boot's lid (P2), the watering can's stream (P2), bottles clinking as the bag goes in
+  if (PART == 2) { if (TL.marks.bootshut) put('door_open.wav', TL.marks.bootshut - .5, .25, -.2); if (TL.marks.pour) for (let k = 0; k < 4; k++) put('splash.wav', TL.marks.pour + .1 + k * .55, .05, .2); if (TL.marks.bagin2) put('ep03_clink.wav', TL.marks.bagin2 + .05, .12, -.2); }
+}
 for (const [a, b] of C.R.night) for (let t = a + .2; t < b - .3; t += .42) for (let j = 0; j < 3; j++) amb.addMono(I.bell(4300 + (j % 2) * 180, .022, .6, 1.5), t + j * .055, .04, ((t * 7) % 2) - 1);
 for (const [a, b] of C.R.roll) for (let t = a; t < b; t += .07) game.addMono(I.tom(92, .08, (t * 100) | 0), t, .07 + .1 * (t - a) / (b - a));
 // ---------- one-shots

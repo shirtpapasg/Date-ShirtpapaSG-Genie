@@ -229,7 +229,7 @@ EP11 asked: a supermarket trolley; which material would you choose to make it: g
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 4:22 | Pull back out to the walkway. The score hand, as in every episode (2 fingers = high five in this part). | **Heart:** "Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!" | Whoosh out, sting, a slap. | The buddies have no point in this part, so one finger is enough to win. |
-| 4:29 | A replay of the wide walkway with a ring round the little mynah on top of the **TROLLEYS** sign; it hops, flaps once and bobs its head. Pill: *Tell someone at home!* | **Heart:** "Did you spot the mynah? It was on the trolley bay sign! Tell someone at home." | The mynah's two-note call, a sparkle. | Always revealed, in the rulebook's words. The mynah belongs to the place; nothing depends on it. |
+| 4:29 | A replay of the wide walkway with a ring round the little mynah on top of the **TROLLEYS** sign; it hops, flaps once and bobs its head. Pill: *Tell someone at home!* | **Heart:** "Did you spot the mynah? It was on the trolley bay sign!" **Basil** (v3, excited; beside a small picture of a mynah's nest with its materials labelled: dry grass, twigs, string, plastic): "Here's a fun fact! Mynahs build their nests from dry grass, twigs, string, and even bits of plastic!" **Heart:** "Tell someone at home!" | The mynah's two-note call, a sparkle. | Always revealed. v3 (teacher, 22 Nov): a true, surprising fun fact that links to materials, so there is something to tell at home. |
 | 4:36 | The shelf comes to the centre and grows. Each word lights up as Heart says it, then about 1.2 s for the class (the buddies mouth along, the YOU bubble shows *Say it!*): **PURPOSE · PHYSICAL PROPERTIES**. *Well done!* | **Heart:** "Let's read today's key words together! Ready?"<br>**Heart:** "Purpose."<br>**Pip, Basil and Momo together (quietly, with the class):** "Purpose."<br>**Heart:** "Physical properties."<br>**Pip, Basil and Momo together (quietly, with the class):** "Physical properties."<br>**Heart:** "Well done!" | A glow per word, a sparkle. | The read-along. |
 
 ### Segment 14 · The cliffhanger: three water bottles (4:45-4:57)
@@ -347,7 +347,7 @@ EP11 asked: a supermarket trolley; which material would you choose to make it: g
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 4:21 | The score hand (3 fingers = high five). | **Heart:** "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!" | Sting, a slap. | The buddies have 1 point in this part. |
-| 4:28 | A replay of the wide car park with a ring round the little squirrel on the low branch of the rain tree; it runs along the branch, sits up and flicks its tail. Pill: *Tell someone at home!* | **Heart:** "Did you spot the squirrel? It was on the tree by the cars! Tell someone at home." | A tiny "chk-chk", a sparkle. | Always revealed, in the rulebook's words. |
+| 4:28 | A replay of the wide car park with a ring round the little squirrel on the low branch of the rain tree; it runs along the branch, sits up and flicks its tail. Pill: *Tell someone at home!* | **Heart:** "Did you spot the squirrel? It was on the tree by the cars!" **Basil** (v3, excited; beside a small picture of a squirrel's nest, labelled: strong twigs outside, soft leaves inside): "Fun fact! A squirrel's nest has strong twigs outside and soft leaves inside. Different materials for different jobs!" **Heart:** "Tell someone at home!" | A tiny "chk-chk", a sparkle. | Always revealed. v3 (teacher, 22 Nov): a true fun fact that links to "different materials for different jobs". |
 
 ### Segment 13 · The dare for Episode 13 (4:35-4:50)
 
@@ -496,3 +496,13 @@ The title lines; the goal chips; the location pills (A neighbourhood supermarket
 ## 12. Teacher's go-ahead (2026-11-21)
 The teacher said "resume" with the recommended answers on the table: (a) keep fabric as the trolley's third card; (b) "rigid" stays out for the trolley; (c) the windscreen shows WATERPROOF and TRANSPARENT (waterproof first); (d) no glass trolley breaks; (e) the school bottle answer is plastic; (f) the fish tank replaces curtains/gloves/tiles (those go on the teacher sheet); (g) mynah and squirrel stay; (h) key words as written; (i) HDB car park; (j) EP13 dare: fabric, metal, wood; (k) School Lab 3.7 line stays out until signed off; (m) no extra test clips unless the builder hears a problem.
 (l) Correction: the classic "Why That Material? A Glass Trolley And Other Bad Ideas" _gRJ0NwV6p0 covers pp. 59–72. EP12 (pp. 59–65) does NOT replace it; it stays in the playlists until a later episode also covers pp. 66–72 (as was done for "Strong, Bendy, Floaty").
+
+**v3 note (teacher, 2026-11-22, on Part 1's mynah reveal: "instead of finding this animal and tell someone at home (about what? you didn't
+specify), this ends up with a boring sharing. It must be a fun fact which most children are shocked to find out!").** The only word change
+of the v3 redo: each hidden-animal reveal now ends with a true fun fact said by Basil that links to this episode's science, then Heart's
+"Tell someone at home!". Part 1 (mynah; Singapore's common and Javan mynahs nest in holes and line them with dry grass, twigs, string and
+litter such as plastic): "Here's a fun fact! Mynahs build their nests from dry grass, twigs, string, and even bits of plastic!" Part 2
+(plantain squirrel; a ball-shaped nest, or drey, with a shell of twigs and a softer lining of leaves): "Fun fact! A squirrel's nest has
+strong twigs on the outside, and soft leaves on the inside. Different materials for different jobs!" Both are non-textbook sentences
+for the teacher's list (section 10). Each is shown with a small labelled picture of the nest.
+
