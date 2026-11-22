@@ -399,8 +399,12 @@ order). Send the teacher the finished parts and the list of things to check; the
    Mark Sentence, a hidden-animal moment, a board scene) and asks "would a 9-year-old on a phone see what matters as clearly as in
    EP1?" It also checks every 22 Nov rule one by one: buddies 1.5× and balanced; camera on what is talked about; look-closers use the
    whole panel with a reacting buddy face; boards keep their home position; countdowns take the stage; one set of numbered choice
-   cards; hidden animal in its black-ringed circle on blue and moving between scenes; no ghost overlaps; full sentences. Any "no"
-   is a note to fix before render. The key stills are also sent to the teacher for information (not a gate); the teacher's notes,
+   cards; hidden animal in its black-ringed circle on blue and moving between scenes; no ghost overlaps; full sentences; **no buddy
+   ever frozen — every buddy on screen reacts to what happens, every line; no pill, "+1" or label overlapping the key-word shelf or
+   anything else; every countdown's numbers step once per second exactly with the ticks, the ring drains in step and the bell lands
+   on 0 (measured in the rendered video)** (teacher, 22 Nov, on EP13's HOLD ON!: "Pip is basically not doing anything here… the
+   '+1' arms crossed is covered by the keyword… The countdown timer rhythm is off! Basic"; `reference/holdon_bad_ep13_frozen_pip_overlap.webp`).
+   Any "no" is a note to fix before render. The key stills are also sent to the teacher for information (not a gate); the teacher's notes,
    whenever they come, are fixed in a re-render. Spend the effort on what viewers see: cute, reacting buddies; smooth camera with no needless
    cuts; real places with life; deep, visual explanations; full human sentences.
 7. *(Paused 22 Nov)* **The pipeline runs ahead on its own (teacher, 2026-11-21: "always write script automatically once 2 episode before is live,
