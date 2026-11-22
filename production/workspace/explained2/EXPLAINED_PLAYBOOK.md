@@ -164,6 +164,8 @@ book's words name what the child just lived. True at P3 level.
   the teacher):** buddies stay present and react in a corner during look-closers instead of disappearing; more poses (thinking,
   laughing, pointing, proud, scared).
 - Always in their aura disc next to real props; never green, blue or sun-yellow.
+- **From EP14 (trial, teacher 22 Nov):** no discs; buddies stand in the scene, at least 1.5× their EP12–EP13 size, the speaker
+  about half the frame height; every scene balanced, buddies spread across the frame, never bunched in one corner.
 
 ### 3.6 Scenes that feel made with care (the 22 Nov concern)
 The polish bar from `STYLE_GUIDE.md`: pause on any frame and it should work as a poster. One clear subject, three depth planes, one

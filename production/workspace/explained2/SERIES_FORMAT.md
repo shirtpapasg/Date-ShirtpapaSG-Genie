@@ -101,6 +101,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
 - **Bigger.** A speaking buddy is about 40–55% of the frame height (two-shot / close-up framing like a children's show), not small
   in a corner. Props are scaled to sit naturally beside them; the camera frames the buddy who talks, and moves (never jump-cuts)
   between them.
+- **50% more space, balanced layout (teacher, 2026-11-22: "I want the audience to connect more to the pet buddy characters. Make
+  the characters bigger and occupy 50% more space. Ensure you consider the layout of this scene, not too clustered at one side").**
+  Every buddy is at least 1.5× the size used in EP12–EP13. Each scene is composed so the buddies are spread across the frame (one
+  left and one right, or a large speaker in the foreground with the others on the other side), never bunched in one corner; cards,
+  props and look-closer panels sit in the space between them. Scene plans give each buddy's position and size.
 - **Buddies teach.** Each scientific term is explained by a buddy in their own words, in a short back-and-forth with another buddy or
   the viewer ("Rotation means the Earth spins round and round, like my globe!"), with a picture beside them; Heart hosts, sets up
   the question and confirms, but the buddies carry the explaining. Full, natural sentences (section 5 "Talk like people").
