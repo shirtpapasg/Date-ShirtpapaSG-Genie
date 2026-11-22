@@ -58,7 +58,7 @@ function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
    o.poses = [[time, pose], ...] (pose swaps POP with a squash and a stretch, never a cross-fade; default pose "sit")
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
-   o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
+   o.mouth (0..2) / o.eyes "shut": a yawn or a doze in the sit pose (EP14); o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
 function buddy(who, x, y, h, t, o = {}) {
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99;
@@ -84,7 +84,7 @@ function buddy(who, x, y, h, t, o = {}) {
   if (o.rock) rot += o.rock * Math.sin(2 * Math.PI * t / .7);
   rot += o.look || 0;
   let name;
-  if (pose === "sit") { const m = ["closed", "half", "wide"][mouthOf(who, t)], b = blinkAt(who, t); name = `${who}_sit_` + (b ? (m === "closed" ? "blink" : m + "_blink") : m); }
+  if (pose === "sit") { const m = ["closed", "half", "wide"][o.mouth !== undefined && !speaking(who, t) ? o.mouth : mouthOf(who, t)], b = o.eyes === "shut" || blinkAt(who, t); name = `${who}_sit_` + (b ? (m === "closed" ? "blink" : m + "_blink") : m); }
   else name = `${who}_${pose}`;
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = o.flip ? -1 : 1;

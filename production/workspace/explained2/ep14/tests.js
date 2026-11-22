@@ -35,23 +35,26 @@ const MKS = (k) => TL.marks[k] === undefined ? 1e9 : TL.marks[k];     // a mark,
    STAGE 1 placeholder (functional: every tile, tick, tag and glow lands ON its mark). Stage 2 redraws it on its low stand with picture tiles
    (a small sun sky / a starry sky; the three pencils; three round lamps; an egg, a chick, an adult chicken). origin = the middle of the stand's
    feet; about 900 wide (1500 with two rings), 760 tall. ---------- */
-const TILE_W = { day: "day time", night: "nighttime", green: "green", amber: "amber", red: "red", egg: "an egg", chick: "a chick", adult: "an adult chicken", pen1: "long pencil", pen2: "shorter", pen3: "a stub" };
+const TILE_W = { day: "day time", night: "nighttime", green: "green", amber: "amber", red: "red", egg: "an egg", chick: "a chick", adult: "an adult chicken" };
+// STAGE 2 (drawn): the picture tiles are flat14.js tilePic (a tiny bright sky, a tiny starry sky, three round lamps, an egg, a chick, an adult
+// chicken) and pencilTile (a long pencil, a shorter one, a stub with its shavings). The board stands on a low wooden stand.
 // one ring (centre cx, cy, radius R): slots evenly round it from the top, clockwise; tiles [[key, k]] (k = 0..1 how far it has landed);
 // lit = 0..1 how many arrows are lit (round and round when run); glow = 0..1 (the chant's flash)
-function cycRing(t, cx, cy, R, tiles, lit, run, glow = 0, small = false) { const n = Math.max(2, tiles.length); let s = "";
-  if (glow > .02) s += `<circle cx="${cx}" cy="${cy}" r="${R + 70}" fill="${P.sun}" opacity="${n2(.35 * glow)}"/>`;
-  for (let i = 0; i < n; i++) { const a0 = -Math.PI / 2 + (i + .22) * 2 * Math.PI / n, a1 = -Math.PI / 2 + (i + .78) * 2 * Math.PI / n, on = run ? (Math.floor((t * 1.6) % n) === i ? 1 : .55) : (lit * n > i ? 1 : 0);
-    const x0 = cx + R * Math.cos(a0), y0 = cy + R * Math.sin(a0), x1 = cx + R * Math.cos(a1), y1 = cy + R * Math.sin(a1), col = on ? P.ink : "#C9BBA6", ah = a1 + Math.PI / 2;
-    s += `<path d="M${n2(x0)} ${n2(y0)} A${R} ${R} 0 0 1 ${n2(x1)} ${n2(y1)}" fill="none" stroke="${col}" stroke-width="${on ? 9 : 7}" stroke-linecap="round" opacity="${on ? 1 : .8}"/>`
-      + `<path d="M${n2(x1 + 18 * Math.cos(ah + 2.6))} ${n2(y1 + 18 * Math.sin(ah + 2.6))} L${n2(x1)} ${n2(y1)} L${n2(x1 + 18 * Math.cos(ah - 2.6))} ${n2(y1 + 18 * Math.sin(ah - 2.6))}" fill="none" stroke="${col}" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>`; }
-  tiles.forEach(([key, k], i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a); s += `<circle cx="${n2(x)}" cy="${n2(y)}" r="56" fill="#fff" stroke="#E3C9A8" stroke-width="4" stroke-dasharray="8 6"/>`;
-    if (k > .02) s += TF(x, y - 40 * Math.sin(Math.PI * clamp(k)) * (k < 1 ? 1 : 0), clamp(k * 1.2), `<circle r="58" fill="#FFF3DC" stroke="${P.ink}" stroke-width="4"/>` + (small ? "" : wrap(TILE_W[key] || key, 22, 100, 600).map((l, j, A) => T(0, 8 + j * 24 - (A.length - 1) * 12, l, 22, P.ink, { w: 600 })).join(""))); });
+function cycRing(t, cx, cy, R, tiles, lit, run, glow = 0, small = false, id = "") { const n = Math.max(2, tiles.length); let s = "";
+  if (glow > .02) s += `<circle cx="${cx}" cy="${cy}" r="${R + 84}" fill="${P.sun}" opacity="${n2(.4 * glow)}"/>`;
+  for (let i = 0; i < n; i++) { const a0 = -Math.PI / 2 + (i + .24) * 2 * Math.PI / n, a1 = -Math.PI / 2 + (i + .76) * 2 * Math.PI / n, on = run ? (Math.floor((t * 1.6) % n) === i ? 1 : .6) : (lit * n > i ? 1 : 0);
+    const x0 = cx + R * Math.cos(a0), y0 = cy + R * Math.sin(a0), x1 = cx + R * Math.cos(a1), y1 = cy + R * Math.sin(a1), col = on ? (on === 1 && run ? "#E39B00" : P.ink) : "#D2C2A8", ah = a1 + Math.PI / 2;
+    s += `<path d="M${n2(x0)} ${n2(y0)} A${R} ${R} 0 0 1 ${n2(x1)} ${n2(y1)}" fill="none" stroke="${col}" stroke-width="${on ? 11 : 8}" stroke-linecap="round" opacity="${on ? 1 : .85}"/>`
+      + `<path d="M${n2(x1 + 24 * Math.cos(ah + 2.6))} ${n2(y1 + 24 * Math.sin(ah + 2.6))} L${n2(x1)} ${n2(y1)} L${n2(x1 + 24 * Math.cos(ah - 2.6))} ${n2(y1 + 24 * Math.sin(ah - 2.6))}" fill="none" stroke="${col}" stroke-width="${on ? 10 : 8}" stroke-linecap="round" stroke-linejoin="round"/>`; }
+  tiles.forEach(([key, k], i) => { const a = -Math.PI / 2 + i * 2 * Math.PI / n, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a); s += `<circle cx="${n2(x)}" cy="${n2(y)}" r="62" fill="#fff" stroke="#D2C2A8" stroke-width="4" stroke-dasharray="9 7"/>`;
+    if (k > .02) s += TF(x, y - 46 * Math.sin(Math.PI * clamp(k)) * (k < 1 ? 1 : 0), clamp(k * 1.2), tilePic(key, t, id + i)) + (small || k < .9 ? "" : T(n2(x), n2(y + 98), TILE_W[key] || key, 30, P.ink, { w: 600 })); });
   return s; }
 const BOX2 = ["IT CHANGES", "IT REPEATS"];
-const tickBox = (x, y, label, on, glow = 0) => `${glow > .02 ? `<rect x="${x - 196}" y="${y - 58}" width="392" height="116" rx="24" fill="${P.sun}" opacity="${n2(.5 * glow)}"/>` : ""}<rect x="${x - 180}" y="${y - 44}" width="360" height="88" rx="18" fill="#fff" stroke="${P.ink}" stroke-width="4"/><rect x="${x - 160}" y="${y - 26}" width="52" height="52" rx="10" fill="#fff" stroke="${P.ink}" stroke-width="5"/>`
-  + T(x + 30, y + 12, label, 34, P.ink, { ls: 2 }) + (on > .02 ? TF(x - 134, y, spring(on, 0, 1), `<path d="M-18 0 L-5 14 L22 -18" fill="none" stroke="${GOODC}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`) : "");
+const tickBox = (x, y, label, on, glow = 0) => `${glow > .02 ? `<rect x="${x - 200}" y="${y - 60}" width="400" height="120" rx="26" fill="${P.sun}" opacity="${n2(.55 * glow)}"/>` : ""}<rect x="${x - 184}" y="${y - 46}" width="368" height="92" rx="20" fill="#fff" stroke="${P.ink}" stroke-width="4"/><rect x="${x - 164}" y="${y - 28}" width="56" height="56" rx="12" fill="${on > .5 ? "#E5F7EA" : "#fff"}" stroke="${P.ink}" stroke-width="5"/>`
+  + T(x + 32, y + 13, label, 36, P.ink, { ls: 2 }) + (on > .02 ? TF(x - 136, y, spring(on, 0, 1), `<path d="M-20 0 L-6 16 L24 -20" fill="none" stroke="${GOODC}" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>`) : "");
 function CYC(t, o = {}) { const m = MKS, k = (mk, d = .35) => t < m(mk) ? 0 : clamp((t - m(mk)) / d);
   if (o.show === "daynight") return { tiles: [["day", 1], ["night", 1]], lit: 1, run: 1, ticks: [1, 1], tag: [0, 1], row: null };
+  if (o.show === "empty") return { tiles: [["egg", 0], ["chick", 0], ["adult", 0]], lit: 0, run: 0, ticks: [0, 0], tag: null, row: null };
   if (PART === 1) { const off = k("tilesoff", .4);
     if (t >= m("lighttiles")) return { tiles: [["green", k("lighttiles")], ["amber", k("lighttiles", .5)], ["red", k("lighttiles", .6)]], lit: 1, run: 1, ticks: [1, 1], tag: [0, 1], row: null };
     if (t >= m("tilesoff")) return { tiles: [["day", 1 - off], ["night", 1 - off]], lit: 0, run: 0, ticks: [k("penchg"), 0], tag: t >= m("pentag") ? [1, k("pentag")] : null,
@@ -59,34 +62,46 @@ function CYC(t, o = {}) { const m = MKS, k = (mk, d = .35) => t < m(mk) ? 0 : cl
     return { tiles: [["day", k("tileday")], ["night", k("tilenight")]], lit: k("ringrun", .8), run: t >= m("ringrun") + .8 ? 1 : 0, ticks: [k("tick1"), k("tick2")], tag: t >= m("tagcycle") ? [0, k("tagcycle")] : null, row: null }; }
   return { tiles: [["egg", k("tegg")], ["chick", k("tchick")], ["adult", k("tadult")]], lit: t >= m("tback") ? 1 : (k("tegg") > 0 ? (t >= m("tadult") ? .67 : t >= m("tchick") ? .34 : 0) : 0), run: t >= m("tback") + .6 ? 1 : 0,
     ticks: [k("tick1"), k("tick2")], tag: t >= m("tagcycle") ? [0, k("tagcycle")] : null, title: k("tagcycle"), row: null }; }
-function cycleBoard(t, o = {}) { const fl = o.flash || [0, 0, 0], top = -760; let s = "", Wb = o.two ? 1500 : 900;
+function cycleBoard(t, o = {}) { const fl = o.flash || [0, 0, 0], top = -800, id = o.id || (o.two ? "c2" : o.small ? "cs" : "c1"); let s = "", Wb = o.two ? 1500 : 900;
   if (o.two) { // the reveal: two closed rings side by side, one non-living, one living
-    const ticks = 1; s += tickBox(-200, top + 140, BOX2[0], ticks, fl[2]) + tickBox(200, top + 140, BOX2[1], ticks, fl[2]);
-    s += cycRing(t, -380, top + 460, 170, [["day", 1], ["night", 1]], 1, 1, fl[0], o.small) + cycRing(t, 380, top + 460, 170, [["egg", 1], ["chick", 1], ["adult", 1]], 1, 1, fl[1], o.small);
-    s += TF(-380, top + 700, 1, tpill(0, 0, "non-living: day and night", 30, "#fff", P.ink, { w: 700 })) + TF(380, top + 700, 1, tpill(0, 0, "living: a chicken", 30, "#fff", P.ink, { w: 700 }));
-    if (fl[2] > .05) s += OP(Math.min(1, fl[2] * 1.5), TF(0, top + 460, 1, cycTag(t, 0, 30)));
+    s += tickBox(-210, top + 150, BOX2[0], 1, fl[2]) + tickBox(210, top + 150, BOX2[1], 1, fl[2]);
+    s += cycRing(t, -380, top + 440, 150, [["day", 1], ["night", 1]], 1, 1, fl[0], true, id + "a") + cycRing(t, 380, top + 440, 150, [["egg", 1], ["chick", 1], ["adult", 1]], 1, 1, fl[1], true, id + "b");
+    s += TF(-380, top + 690, 1, tpill(0, 0, "non-living: day and night", 34, "#fff", P.ink, { w: 700 })) + TF(380, top + 690, 1, tpill(0, 0, "living: a chicken", 34, "#fff", P.ink, { w: 700 }));
+    if (fl[2] > .05) s += OP(Math.min(1, fl[2] * 1.5), TF(0, top + 440, 1, cycTag(t, 0, 34)));
   } else { const c = CYC(t, o);
-    s += tickBox(-210, top + 140, BOX2[0], c.ticks[0]) + tickBox(210, top + 140, BOX2[1], c.ticks[1]);
-    s += cycRing(t, 0, top + 450, 180, c.tiles, c.lit, c.run, 0, o.small);
-    if (c.row) c.row.forEach(([key, k], i) => { if (k < .02) return; const x = lerp(-120 + i * 120, -230 + i * 230, c.rowk), y = lerp(top + 450, top + 690, c.rowk) - 50 * Math.sin(Math.PI * k) * (k < 1 ? 1 : 0);
-      s += TF(x, y, clamp(k * 1.2), `<rect x="-90" y="-36" width="180" height="72" rx="14" fill="#FFE9A8" stroke="#C9952E" stroke-width="4"/>` + (o.small ? "" : T(0, 9, TILE_W[key], 24, "#6B4A10", { w: 600 }))); });
-    if (c.tag) s += TF(0, top + 450 - 60 * (1 - eo(c.tag[1] / .7)), spring(c.tag[1], 0, .6), cycTag(t, c.tag[0], 34));
-    if (c.title > .02) s += TF(0, top + 230, spring(c.title, 0, .6), tpill(0, 0, "A LIFE CYCLE", 40, P.sun, P.ink, { w: 700, ls: 3 })); }
-  return `<path d="M${-Wb * .32} 0 V-70 M${Wb * .32} 0 V-70" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><g filter="url(#drop)"><rect x="${-Wb / 2}" y="${top}" width="${Wb}" height="720" rx="28" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(0, top + 66, "CYCLE CHECK", 48, P.ink, { ls: 5 }) + s + tpill(0, -30, "STAGE 2: draw (tiles = small pictures)", 20, P.coral, "#fff"); }
+    s += tickBox(-214, top + 150, BOX2[0], c.ticks[0]) + tickBox(214, top + 150, BOX2[1], c.ticks[1]);
+    s += cycRing(t, 0, top + 438, 170, c.tiles, c.lit, c.run, 0, o.small || !!c.row, id);
+    if (c.row) c.row.forEach(([key, k], i) => { if (k < .02) return; const x = lerp(-150 + i * 150, -250 + i * 250, c.rowk), y = lerp(top + 438, top + 684, c.rowk) - 56 * Math.sin(Math.PI * k) * (k < 1 ? 1 : 0);
+      s += TF(x, y, clamp(k * 1.2) * lerp(.72, 1, c.rowk), pencilTile(key, t)); });
+    if (c.tag) s += TF(0, top + 438 - 60 * (1 - eo(c.tag[1] / .7)), spring(c.tag[1], 0, .6), cycTag(t, c.tag[0], 36));
+    if (c.title > .02) s += TF(0, top + 236, spring(c.title, 0, .6), tpill(0, 0, "A LIFE CYCLE", 40, P.sun, P.ink, { w: 700, ls: 3 })); }
+  return `<ellipse cx="0" cy="2" rx="${Wb * .5}" ry="16" fill="${P.ink}" opacity=".25" filter="url(#b4)"/><path d="M${-Wb * .34} 0 L${-Wb * .3} -90 L${-Wb * .26} 0 M${Wb * .34} 0 L${Wb * .3} -90 L${Wb * .26} 0" fill="none" stroke="#8A5A36" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M${-Wb * .34} -26 H${Wb * .34}" stroke="#A9703C" stroke-width="12" stroke-linecap="round"/>
+    <g filter="url(#drop)"><rect x="${-Wb / 2}" y="${top}" width="${Wb}" height="750" rx="30" fill="#B07A44"/><rect x="${-Wb / 2 + 12}" y="${top + 12}" width="${Wb - 24}" height="726" rx="22" fill="url(#gPaper)"/></g><rect x="${-Wb / 2 + 12}" y="${top + 12}" width="${Wb - 24}" height="84" rx="22" fill="#FFE9B8"/>`
+    + T(0, top + 74, "CYCLE CHECK", 52, P.ink, { ls: 6 }) + s; }
 
 /* ---------- Pip's notes on an easel (Part 2 Showdown; script section 5, segment 9): the heading MY NOTES and three ruled lines, each with a
    small drawing; line 2 is the mistake. STAGE 1 placeholder (functional: each line lights as Pip reads it, the lines stay through the
    countdown; at strike line 2 is struck through once; at bend it is rewritten under it in green and its little drawing bends from a ROW into
    a RING with an arrow from the adult back to the egg). o.lit [3]; o.strike 0..1; o.fix 0..1. origin = the easel's feet ---------- */
-const NOTES = [["Day and night are a cycle.", "(a sun and a moon on a ring)"], ["A life cycle ends at the adult.", "(egg, chick, adult chicken in a ROW, a full stop)"], ["A teddy bear has no life cycle.", "(the teddy bear)"]], NOTE_FIX = "A life cycle repeats: the adult has young.";
-function notesEasel(t, o = {}) { const lit = o.lit || [0, 0, 0], st = o.strike || 0, fx = o.fix || 0; let s = "";
-  NOTES.forEach(([txt, pic], i) => { const y = -560 + i * 130 + (i === 2 ? 50 * fx : 0); if (lit[i] > .02) s += `<rect x="-560" y="${y - 50}" width="1120" height="100" rx="16" fill="${P.sun}" opacity="${n2(.35 * lit[i])}"/>`;
-    s += T(-520, y + 14, (i + 1) + "", 44, P.pip, { a: "start" }) + T(-470, y + 12, txt, 38, P.ink, { a: "start", w: 600 }) + tpill(400, y, i === 1 && fx > .5 ? "(the row bends into a RING)" : pic, 18, "#fff", P.ink2, { w: 500 });
-    if (i === 1 && st > .02) s += `<path d="M-480 ${y} H${n2(-480 + 760 * st)}" stroke="${P.ink}" stroke-width="6" stroke-linecap="round"/>`; });
-  if (fx > 0) s += OP(fx, T(-470, -560 + 130 + 66, NOTE_FIX, 36, "#1F8A4C", { a: "start", w: 700 }));
-  return `<path d="M-260 0 L-130 -260 M260 0 L130 -260" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-600" y="-740" width="1200" height="600" rx="30" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(-560, -650, "MY NOTES", 52, P.pip, { a: "start", ls: 4 }) + s + tpill(0, -165, "STAGE 2: easel + a small drawing on each line", 22, P.coral, "#fff"); }
+const NOTES = [["Day and night are a cycle.", ""], ["A life cycle ends at the adult.", ""], ["A teddy bear has no life cycle.", ""]], NOTE_FIX = "A life cycle repeats: the adult has young.";
+// STAGE 2 (drawn): a real easel (three legs, a ledge), a sheet of paper, Pip's heading and a small drawing at the end of each line: the day
+// and night tiles on their ring · an egg, a chick and an adult chicken in a ROW with a full stop (it bends into a RING at o.fix, with a green
+// arrow from the adult back to the egg) · the teddy bear.
+const miniArrow = (x0, y0, x1, y1, col = P.ink, w = 6) => { const a = Math.atan2(y1 - y0, x1 - x0); return `<path d="M${n2(x0)} ${n2(y0)} L${n2(x1)} ${n2(y1)} M${n2(x1 + 14 * Math.cos(a + 2.6))} ${n2(y1 + 14 * Math.sin(a + 2.6))} L${n2(x1)} ${n2(y1)} L${n2(x1 + 14 * Math.cos(a - 2.6))} ${n2(y1 + 14 * Math.sin(a - 2.6))}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`; };
+function notesEasel(t, o = {}) { const lit = o.lit || [0, 0, 0], st = o.strike || 0, fx = o.fix || 0, Y0 = -606, DY = 136; let s = "";
+  NOTES.forEach(([txt], i) => { const y = Y0 + i * DY + (i === 2 ? 60 * fx : 0); if (lit[i] > .02) s += `<rect x="-566" y="${n2(y - 56)}" width="1132" height="${i === 1 && fx > 0 ? n2(112 + 60 * fx) : 112}" rx="18" fill="${P.sun}" opacity="${n2(.38 * lit[i])}"/>`;
+    s += `<path d="M-540 ${n2(y + 50 + (i === 1 ? 60 * fx : 0))} H540" stroke="#D9C9A8" stroke-width="3"/><circle cx="-506" cy="${n2(y)}" r="30" fill="${P.pip}"/>` + T(-506, n2(y + 15), (i + 1) + "", 42, "#fff") + T(-454, n2(y + 14), txt, 42, i === 1 && st > .5 ? "#8E86A8" : P.ink, { a: "start", w: 600 });
+    if (i === 1 && st > .02) s += `<path d="M-458 ${n2(y + 2)} H${n2(-458 + (tw(txt, 42, 600) + 12) * st)}" stroke="${P.coral}" stroke-width="7" stroke-linecap="round"/>`;
+    if (i === 0) s += TF(352, y, .4, tilePic("day", t, "n0")) + TF(476, y, .4, tilePic("night", t, "n1")) + `<path d="M380 ${n2(y - 22)} Q414 ${n2(y - 44)} 448 ${n2(y - 22)}" fill="none" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/><path d="M448 ${n2(y + 22)} Q414 ${n2(y + 44)} 380 ${n2(y + 22)}" fill="none" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/><path d="M438 ${n2(y - 34)} l10 12 l-15 4 M390 ${n2(y + 34)} l-10 -12 l15 -4" fill="none" stroke="${P.ink}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`;
+    else if (i === 1) { const e = eio(fx), cx = 414, cy = y + 30 * e, R = 62, row = [[312, y], [414, y], [516, y]], ring = [-90, 30, 150].map((a) => [cx + R * Math.cos(a * Math.PI / 180) * 1.25, cy + R * Math.sin(a * Math.PI / 180)]), P3 = row.map((p, k) => [lerp(p[0], ring[k][0], e), lerp(p[1], ring[k][1], e)]);
+      const short = (a, b, col, w) => { const d = Math.hypot(b[0] - a[0], b[1] - a[1]), ux = (b[0] - a[0]) / d, uy = (b[1] - a[1]) / d; return miniArrow(a[0] + ux * 30, a[1] + uy * 30, b[0] - ux * 32, b[1] - uy * 32, col, w); };
+      s += short(P3[0], P3[1], P.ink, 5) + short(P3[1], P3[2], P.ink, 5) + (fx > .55 ? OP(clamp((fx - .55) / .3), short(P3[2], P3[0], "#1F8A4C", 7)) : "") + ["egg", "chick", "adult"].map((k, q) => TF(P3[q][0], P3[q][1], .38, tilePic(k, t, "n" + (q + 2)))).join("")
+        + OP(1 - clamp(fx * 3), `<circle cx="556" cy="${n2(y + 16)}" r="8" fill="${P.ink}"/>`); }
+    else s += TF(414, y + 6, .3, teddy()); });
+  if (fx > 0) s += OP(fx, T(-454, Y0 + DY + 72, NOTE_FIX, 40, "#1F8A4C", { a: "start", w: 700 }));
+  return `<ellipse cx="0" cy="2" rx="420" ry="18" fill="${P.ink}" opacity=".25" filter="url(#b4)"/><path d="M-250 -720 L-400 0 M250 -720 L400 0 M0 -740 L0 -60" stroke="#8A5A36" stroke-width="20" stroke-linecap="round"/><rect x="-420" y="-176" width="840" height="24" rx="10" fill="#A9703C" stroke="#7E4F27" stroke-width="4"/>
+    <g filter="url(#drop)"><rect x="-600" y="-790" width="1200" height="616" rx="18" fill="#FFFDF6"/></g><rect x="-600" y="-790" width="1200" height="96" rx="18" fill="#EDE4FF"/><circle cx="-540" cy="-778" r="12" fill="#C9D2DC" stroke="#8E9AA8" stroke-width="4"/><circle cx="540" cy="-778" r="12" fill="#C9D2DC" stroke="#8E9AA8" stroke-width="4"/>`
+    + T(-540, -716, "MY NOTES", 56, P.pip, { a: "start", ls: 5 }) + TF(-180, -734, 1, `<g transform="rotate(-18)">${pencil14(90, { h: 16 })}</g>`) + s; }
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start, revealed at the end, each as ONE smooth push-in from the
    real place (teacher, 2026-11-22; common.js gameScene / lizReveal). Part 1: a little OWL (a small brown owl with little ear tufts, a round
@@ -97,11 +112,11 @@ function notesEasel(t, o = {}) { const lit = o.lit || [0, 0, 0], st = o.strike |
    Free, never touched. Not on screen during a [LOOK CLOSER] or a journey. ---------- */
 // STAGE 1 placeholder art (centred on 0, 0, about 200 px): a grey disc with the animal's name. Stage 2: owlArt(t, o) / ladybirdArt(t, o).
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["owl", hiddenPH("owl")] : ["ladybird", hiddenPH("ladybird")];
+const HIDDEN = PART === 1 ? ["owl", (t) => TF(0, 86, 1.25, owlArt(t, { open: 1 }))] : ["ladybird", (t) => TF(-8, 0, 2.6, ladybird14(t, { open: .5 + .5 * Math.sin(t * 2) }))];   // Stage 2: the drawn animals (flat14.js, garden14.js)
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#FFF0DA" : "#E3F5D8"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[0], n2(r * .24), P.ink, "#fff", { w: 700 }));
 // where the animal sits in the wide shot (the world the push-ins go into). Stage 2 moves these to the drawn tree / leaf.
-const OWL = [1530, 330], LADY = [1210, 560];
+const OWL = [OWLW[0], OWLW[1]], LADY = LADYW(.5);   // Stage 2: the drawn branch (flat14.js OWLW) and leaf (garden14.js LADYW)
 // STAGE 1 placeholder "real places" for the smooth push-ins (gameScene R.world, lizReveal view): a paper card naming the set, with the animal's
 // placeholder where it sits. Stage 2 replaces them with the drawn sets: VF(t, o) (the living room) and VG(t, o) (the garden).
 function setPH(t, title, notes, at, name) { let out = bg("stage2") + `<g filter="url(#drop)"><rect x="140" y="120" width="1640" height="840" rx="40" fill="url(#gPaper)"/></g>`
