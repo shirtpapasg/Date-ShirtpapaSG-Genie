@@ -120,3 +120,8 @@ Each one is a full body, sitting, with the same size of head and body as the sit
   all five poses are cut out and match (`poses/basil_c_*.png`; the older darker four are in git history).
 - **Still needed for Basil:** sitting set mouth closed, half open, wide open (blink is in), and cheer.
 - **Still needed for Momo:** talking set small "o" and big "o" (closed and blink are in), and pointing.
+
+## 22 Nov ~08:30 UTC: PAUSED (usage limit)
+All Basil paintings are in. A helper was building Basil's coloured talking set (align_set.py, qa_set.py, basil_c_sit_*.png,
+basil_c_sit.json, qa/basil_c_*.png) and was stopped part-way: check its QA images before using them. Momo still needs her small "o"
+and big "o" (arms-crossed talking set) and pointing.

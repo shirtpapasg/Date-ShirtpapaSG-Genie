@@ -306,3 +306,10 @@ videos (FO1Y_KSZU-c, 8lQ1-1ruveY) stay as they are until the teacher has seen th
 - **Status: Improved Part 1 and Part 2, 22 Nov: awaiting the teacher's OK; not uploaded.** On the teacher's OK: re-upload both parts as new
   videos with `upload.json` (titles unchanged), retire FO1Y_KSZU-c / 8lQ1-1ruveY the usual way (never delete; ask before unlisting), and point
   the classic _gRJ0NwV6p0's first description line to the new Part 1. The captions changed (the fun fact): send the new `.srt` files.
+
+## 22 Nov ~08:30 UTC: PAUSED by the teacher (model usage at 90%; resume after the Thursday reset)
+The EP13 redo agent was stopped while the final renders were running; those renders were killed, so ep13_part1/2.mp4 on disk
+may be incomplete. On resume: re-run the render + finish for both parts, check (EP1 benchmark, countdown rhythm, ffprobe,
+-16 LUFS, .srt), then UPLOAD without another preview (teacher: "upload the new episode now. Let me take a look"):
+replaces FO1Y_KSZU-c, 8lQ1-1ruveY; retire_old; playlists after "explained-p3-ep12v3-part2"; point the classic _gRJ0NwV6p0's
+"design like an engineer" link to the new Part 1. Then add EP13's before/after sheet to explained2/tutorial/.

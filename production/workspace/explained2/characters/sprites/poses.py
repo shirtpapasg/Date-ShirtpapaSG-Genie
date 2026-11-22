@@ -21,14 +21,14 @@ POSES = {  # buddy: {pose: (file, crop or None)}
   "basil": {"cheer": ("basil_cheer_mouth_wide.jpg", None), "oops": ("basil_oops.jpg", None), "surprised": ("basil_surprised.jpg", None),
             "arms_crossed": ("basil_arms_crossed.jpg", None), "back": ("basil_back.png", None)},
 }
-POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on grey Basil's sitting scale until his coloured sitting set is cut
+POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on his coloured sitting set (basil_c_sit.json)
   "oops": ("basil_c_oops.jpg", None), "waving": ("basil_c_waving.jpg", None), "thinking": ("basil_c_thinking.jpg", None),
   "surprised": ("basil_c_surprised.jpg", None), "pointing": ("basil_c_pointing.jpg", None),
   "cheer": ("basil_c_sheet_sit_cheer.jpg", (512, 505, 1024, 950))}   # from a 2x2 sheet: small, upscaled 2x (softer)
 POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
   "oops": ("momo_c_oops.jpg", None), "waving": ("momo_c_waving.jpg", None), "thinking": ("momo_c_thinking.jpg", None),
   "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None)}
-SITREF = {"basil_c": "basil", "momo_c": "momo"}   # which sitting sprite sets the scale and foot line
+SITREF = {"momo_c": "momo"}   # which sitting sprite sets the scale and foot line (basil_c: its own coloured set, basil_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
