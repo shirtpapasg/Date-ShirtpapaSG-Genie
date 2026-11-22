@@ -84,6 +84,21 @@ const THUMBS = {
       { cut: 'strap', x: 660, y: 250, w: 440, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: '5 OR 9?', x: 1250, y: 150, size: 165, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP14 (the first episode with the buddies in colour: the teacher's coloured Momo and Basil, characters/sprites/poses/*_c_*)
+  ep14_1: { ep: 'ep14', part: 1, out: 'ep14/thumb_part1.jpg', old: 'ep14/thumb_part1.jpg',
+    bg: { c: ['#FFC27A', '#F0703A', '#2B1D70'], at: [860, 430], rays: .22 },
+    cuts: { globe: `TF(520, 600, 1.7, torch14(1)) + TF(1000, 600, 1, globe14(300, SGLL[0], { lit: 1, dot: true, stand: false, id: "th1", dotR: 30 }))` },
+    layers: [
+      { cut: 'globe', x: 470, y: 270, w: 760, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_c_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHO', x: 1250, y: 118, size: 128, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MOVED?', x: 1256, y: 240, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep14_2: { ep: 'ep14', part: 2, out: 'ep14/thumb_part2.jpg', old: 'ep14/thumb_part2.jpg',
+    bg: { c: ['#F4FFB0', '#9BE15D', '#2E9E4F'], at: [860, 430], rays: .22 },
+    cuts: { tree: `TF(960, 760, 1.55, '<ellipse cx="-10" cy="206" rx="170" ry="18" fill="#2B2147" opacity=".2"/><path d="M-76 204 Q-50 0 -58 -330 H26 Q18 0 56 204 Q20 186 -8 204 Q-40 186 -76 204z" fill="url(#g14Trunk)" stroke="#5E3F28" stroke-width="5" stroke-linejoin="round"/>' + [[-200, -330, 170, 90, "#2F8048"], [-20, -390, 210, 100, "#3E9E5A"], [180, -330, 180, 90, "#2F8048"], [-90, -300, 130, 56, "#58B56C"], [120, -290, 140, 56, "#58B56C"]].map(([x, y, rx, ry, c]) => '<ellipse cx="' + x + '" cy="' + y + '" rx="' + rx + '" ry="' + ry + '" fill="' + c + '"/>').join("") + [[-180, -250], [-60, -240], [90, -246], [200, -262]].map(([x, y]) => fruit14(x, y, 1.4)).join("") + TF(-190, 204 - 86 * 1.1, 1.1, teddy() + worn14()) + '<path d="M-330 20 H-60" stroke="#FFD23A" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18"/>')` },
+    layers: [
+      { cut: 'tree', x: 560, y: 270, w: 520, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_c_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHY NOT', x: 1250, y: 118, size: 118, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'TEDDY?', x: 1256, y: 236, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);

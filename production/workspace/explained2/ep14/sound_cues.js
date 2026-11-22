@@ -7,7 +7,7 @@
 // pen1..pen3, penrow, penchg, pentag, lighttiles, card1..card3; photo, pair1..3, nestwalk, settle, chicksout, tegg, tchick, tadult, tback,
 // strike, bend, h_gm / h_m / h_c, jcrack, jtap1..jtap3 ...: script.py), the same mark the picture uses, never on a guess; Stage 2 keeps its
 // drawing on those marks (a tile lands AT its mark; each lamp lights AT its word).
-window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t * 1000) / 1000, k, v }), S = SCN, R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [] };
+window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t * 1000) / 1000, k, v }), S = SCN, R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [] };
   const lock = (r0, dur, lockId, picks, tc) => { (tc || []).forEach((t, i) => E(t, i % 2 ? "cardR" : "cardL")); ringTicks(r0, dur).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + dur, "bell"); E(LT(lockId) - .08 + .14, "stamp"); E(r0, "bellicon"); picks.forEach((id, i) => E(LT(id) - .1 + .11, "pick", i)); };
   const chant = (id) => { const L = TL.lines[id]; for (const [bt, k, soft] of chantBeats(L)) E(bt, k === "c" ? "clap" : "stomp", soft ? .35 : 1); E(L.end - .28, "sparkle"); for (let i = 0; i < L.ncall; i++) E(L.t + (L.slots[i][1] + 1) * L.bar, "turn", i); if (L.slots.length > L.ncall) E(L.t + L.slots[L.ncall][1] * L.bar, "softpop", 3); };
   const sayit = (id) => E(LT(id) - .05, "softpop", 2), G = (a, b) => { if (b > a + 1) R.groove.push([a, b]); }, C = (a, b) => { if (b > a + 1) R.calm.push([a, b]); }, BD = (a, b) => { if (b > a + 1) R.birds.push([a, b]); }, NT = (a, b) => { if (b > a + 1) R.night.push([a, b]); };
@@ -91,6 +91,13 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   G(S.game.t0, S.goals.t1); G(S.r1.t0, MK("ring0_r1")); G(LT("j403") - .5, S.lcthen.t0); C(S.lcthen.t0 + .2, S.thenans.t0); G(S.thenans.t0, S.lcchick.t0); C(S.lcchick.t0 + .2, S.waitw.t0); C(S.ring.t0, S.mark1.t0); C(S.mark1.t0 + .3, LT("j803") - .4);
   G(S.show.t0 + .3, MK("ring0_show")); G(LT("j904") - .5, S.lchens.t0); C(S.lchens.t0 + .2, S.mark2.t0); C(S.mark2.t0 + .3, LT("j1003") - .4); G(S.final.t0, S.dare.t0 + .3); C(S.dare.t0 + .5, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2);
   }
+  // EP14 (SERIES_FORMAT 9, "every place sounds alive"): each real place has its own low bed under everything said there, crossfading between
+  // places: the HDB living room (the fan's soft hum, birds and far traffic outside the window, a bus passing now and then); the community garden
+  // (birds, far children at the void deck, the hen's soft clucks, leaves). The look-closers keep the bed of the place they look into.
+  { const ROOM = ["cold", "back", "title", "curtains", "lcsky", "lcglobe", "globeans", "momo", "waitw", "pullout", "cyclecheck", "holdon", "pipdown", "lclight", "cliff"],
+      GARDEN = ["place", "lcthen", "thenans", "lcchick", "strip", "waitw", "pullout", "ring", "show", "fix", "lchens", "dare"], LIST = PART === 1 ? ROOM : GARDEN, out = [];
+    for (const sc of TL.scenes) if (LIST.includes(sc.name)) { const last = out[out.length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else out.push([sc.t0, sc.t1]); }
+    (PART === 1 ? R.room : R.garden).push(...out.filter(([a, b]) => b - a > 1)); }
   // key words: a soft chime as the term pops, a pop as it lands on the shelf
   for (const k of KW) { if (k.big) E(k.t, "term"); E(k.tl, "shelfpop", k.i); }
   // the key-word read-along; the ending: "Say it with us!", "Ready? One, two...", "Now you know!", then the outro plays out

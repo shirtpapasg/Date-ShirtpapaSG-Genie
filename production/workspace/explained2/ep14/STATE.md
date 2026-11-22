@@ -11,7 +11,7 @@ RVRoaWWKjEM (pp. 73-79) stays in the playlists until EP15 is live: NO "replaces"
 "leev" via sg_pron, a clip only if a problem is heard) **plus the ONE change of 22 Nov: full, human sentences** (section 12.1: 43 lines).
 EP13 is live (its playlists' anchor for EP14: `explained-p3-ep13-part2`; EP13 Part 1 = FO1Y_KSZU-c, Part 2 = 8lQ1-1ruveY).
 
-Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · **Stage 1 colour (done 2026-11-22, Opus)** · Stage 2 (drawing + thumbnails, Fable) · Stage 2.5 (the teacher's-eye review, a fresh
+Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · **Stage 1 colour (done 2026-11-22, Opus)** · **Stage 2 (drawing, sound, render, done 2026-11-22, Opus: the Fable agent hit its limit)** · Stage 2.5 (the teacher's-eye review, a fresh
 Opus agent) · Stage 3 (render, checks, upload, Opus).
 
 ## Stage 1: done (2026-11-22, Opus)
@@ -283,3 +283,65 @@ Drawing (Stage 2) can start: everything below is wired and timed. Read `../p3_ep
 - **Checks:** stills of the colour moment, Momo's Mark Sentence (coloured talking set), and both fun-fact panels: no page errors.
   `qa/p1_check.jpg` / `qa/p2_check.jpg` were not regenerated (times moved; Stage 2 makes new sheets).
 - `SCENES_TODO.md` regenerated (make_todo.py, todo_trial.py: the colour moment and fact poses per line, note 12 = the coloured pose list).
+
+## Stage 2 done: drawn in the trial style, sound beds, rendered (2026-11-22, Opus; the Fable agent hit its monthly limit, so Opus drew it)
+Not uploaded: a fresh reviewer checks the render against EP1 first (`qa/ep1_compare_p1.jpg`, `qa/ep1_compare_p2.jpg`), then Stage 3 uploads.
+- **Renders:** `ep14_part1.mp4` (5:34.5, -16.0 LUFS), `ep14_part2.mp4` (5:28.3, -16.0 LUFS) (not in git), `ep14_part1.srt`, `ep14_part2.srt`,
+  `sheet_part1.png`, `sheet_part2.png` (30 stills each, finish.sh). Lengths as accepted for the trial (5:34 / 5:28).
+- **The trial engine (shared code, ep14 only):** `lib.js`: `TRIAL` = no aura discs anywhere (a contact shadow only); EP12 v3's "never frozen"
+  reactions (`reactAt`: every buddy on screen reacts to every sentence someone else says); EP12 v3's ring timer (number pop on each change,
+  `chg`) and `jolt` / `impactFX` / `faceCam`; **automatic speech bubbles** (`autoSay`, called by main.js): every buddy line gets its cream
+  bubble with the speaker's colour beside the speaker's head (where `buddy()` drew it this frame) unless the scene drew its own `say()`;
+  `SHELF_AWAY(t)` slides the key-word shelf aside for a countdown. `common.js`: EP12 v3's countdown (`SC.count`), `lockN` (the stage, ONE set of
+  big numbered picture cards, clue labels >= 54 px on top of the ring joined by lines, ONE big buddy fidgeting through the countdown, the YOU
+  hand counting with the ticks, the others pop in for the picks), `iris` + `lizReveal` (black-ringed circle on the blue starry stage) with
+  EP14's drawn **fun-fact panels** (`funFact` + `ffOwlDay` / `ffOwlNight`, `ffLarva` / `ffPupa` / `ffLady`: labelled, colour-coded, the
+  fact buddy big at the right with its bubble); a new `gameScene` (push-in -> iris circle centre-left, FIND first with the finder big at the
+  right, the colour moment with sparkles on the twirl and on "handsome", then the circle glides to the upper left and the hands, pill and
+  other buddies pop in); every routine's buddies at trial sizes (goals reader 540, Mark Sentence reader 560 with the card large at the
+  right; a second speaker after the card pops in at the right while the card steps back; final 380-440; read-along 340; chant 360-380;
+  ending 420); EP12 v3's `riders` (the buddies ride along in both journeys). `closer.js`: the panel fills the frame (1800 x 866) and
+  `lcPeekAuto` puts the FACE of whoever speaks (or spoke last / speaks next) in a lower corner of every look-closer (`peekSide` l / r / c).
+- **Part 1** (`p1.js`): every buddy 1.6x (speakers 1.75-2.2x) standing in the room with a contact shadow, spread left / centre / right; the
+  owl hides somewhere new by scene (`OWLAT` + flat14.js `owl.at`: the branch tip, the trunk's fork, in the leaves' shade; the game and the
+  reveal use the branch Heart names); Round 1 on the stage with the dare boards on the numbered cards; **HOLD ON! redone**: the room gives way
+  to the blue stage, the ring R 215 in the centre with the three pencils, IT CHANGES ✓ / IT REPEATS ? as big clue labels joined to the ring,
+  the YOU crossed arms, Basil alone fidgeting, the board glides out and back, the shelf slides aside.
+- **Part 2** (`p2.js`, every placeholder replaced): the recap's three pictures (the board, the globe-and-torch model, the hen / chick /
+  teddy cards); the garden (`VG`) in every garden scene with its life; the ladybird hides somewhere new (`LB` + garden14.js `lady.at`: the
+  planter sign, the bench, the stake, the bush, the dish rim, a fruit; the game and the reveal use the leaf Heart names); Round 1 with the old
+  photo in the ring, four clue labels and three picture cards (the boy and the tree / all three / only the tree, with up arrows); the
+  look-closers on thenArt / chickArt / hensArt; the answer with THEN / NOW on the bench; the strip over the garden with Pip and Momo; Be a
+  chick (glide into the nest, the journey with riders and the chick's wing tips, pull back out); the ring on the board at its home; the
+  Showdown (Pip's easel at its home, the countdown on the blue stage with the ring and the counting hand, Pip alone fidgeting, picks after the
+  bell); the fix; Mark Sentence 2 with the three chickens labelled; the chant; the reveal; the mango dare (three numbered picture boards).
+- **Sound:** `sound_cues.js` R.room (the living room: soft birds outside, the fan's hum, a bus passing now and then) and R.garden (birds,
+  far children, clucks, leaves) under every scene of that place; `song.js`: the game bed stops for every countdown (EP12 v3) and the whole
+  seconds are the loud tock, so only the ticks keep time. Both mixes -16.0 LUFS.
+- **Countdowns measured in the rendered files** (`measure_countdowns.py P` -> `qa/countdowns_p1.txt`, `qa/countdowns_p2.txt`): the number
+  changes once per second exactly (1.000 s steps; the frame is the first one after the tick, +1 frame), the whole-second tocks land on the
+  ring's seconds, the bell on 0. P1 Round 1 (3 s): 71.28 / 72.28 / 73.28 / 74.28, the bell 74.25; HOLD ON! (5 s): 244.07 ... 249.07 in 1.000 s steps, the bell 249.04. P2 Round 1 (6 s): 49.00 ... 55.00, the bell 54.97; Showdown (6 s): 199.03 ... 205.03, the bell 205.03. No music and no place bed under any countdown (only the ticks, faster in the last 3 s, and the bell).
+- **Thumbnails** (`../thumb_v2.js` ep14_1 / ep14_2, the coloured Momo / Basil from `characters/sprites/poses/*_c_*`): `thumb_part1.jpg`
+  WHO MOVED? (Momo surprised; the torch lighting the globe's left half, the red dot on the edge between light and dark; the beam comes from the
+  left, not the right edge, so the globe's map stays the right way round), `thumb_part2.jpg` WHY NOT TEDDY? (Basil surprised; the tall tree
+  with its fruits, the worn teddy bear at its foot with one flat height line).
+- **Self-check (rulebook section 10, rule 6), what is known to be still weak:** 
+  - Look-closers: the speaker's face and its bubble sit in a lower corner and sometimes cover a label or part of the picture (lcsky's row of
+    four skies, lcglobe's "the torch stays still" for a moment, the THEN picture's bottom in lcthen); lclight's small CYCLE CHECK picture in
+    the panel is small (the rule asks for a board about half the panel).
+  - lchens (rendered): the label "a grandmother hen" is partly under the small print at the top left. FIXED in p2.js after the render (the
+    small print moved to the bottom): the next render of Part 2 picks it up.
+  - Lock-ins: the ring's number badge touches card 2's number badge; the lead buddy's face-down pick card touches card 1.
+  - Hidden animals: the owl and the ladybird move between scenes, but scenes on the blue stage / cards have no animal (by design); the owl in
+    `back` / `title` sits on the game's branch (so the push-in does not jump).
+  - Countdown ring: it drains one step a second on the tick (EP12 v3's design), so the arc is empty during the last second while the
+    number still shows 1.
+  - The chick journey's first-person wing tips are small and read a little like leaves; Part 1's journey has the buddies riding along
+    but no "you are here" hands (the You: tag only).
+  - The dare (Part 2) has Basil and Pip; Momo is not in that scene. Momo's talking sprite is her arms-crossed painting (as decided), so
+    her "sit" lines all look arms-crossed.
+  - Thumbnail 1: the torch beam comes from the left (STATE asked for the right edge) so the globe's map is not mirrored.
+  - One console error at Part 2 154.4 s (a full-width grass rect off the bottom of the frame with a negative height in chickJourney): not
+    visible; fixed in garden14.js (Math.max) after the render.
+- `upload.json` unchanged from Stage 1 (titles / descriptions per script section 7, the new thumbnails, both playlists after
+  `explained-p3-ep13-part2` = 8lQ1-1ruveY, public, Made for Kids as the uploader sets, no "replaces"). The uploader was NOT run.

@@ -78,7 +78,7 @@ function rainTree(h, t, o = {}) { const hh = h24(h), N = nightK(h), dawn = bump(
     if (gold > .05 && i > 2 && i < 6) s += `<ellipse cx="${n2(x + dx - rx * .2)}" cy="${n2(y + dy - ry * .45)}" rx="${n2(rx * .62)}" ry="${n2(ry * .32)}" fill="#FFE08A" opacity="${n2(.5 * gold)}"/>`; });
   // a few hanging leaf sprays that stir, and (o.bird) a small bird on a higher branch
   for (let i = 0; i < 7; i++) { if (i === 2) continue; const x = 1130 + i * 82, y = 410 + 30 * hash(i, 3), r = 6 * Math.sin(t * 1.3 + i * 1.7); s += `<g transform="translate(${x} ${n2(y)}) rotate(${n2(r)})"><ellipse cx="0" cy="26" rx="26" ry="34" fill="${lc(i % 2 ? "#58B56C" : "#3E9E5A")}"/></g>`; }
-  if (o.owl !== false) s += TF(1300, 524, 1, owlArt(t, { ...(o.owl || {}), shade: N * .55 + dawn * .25 }));
+  if (o.owl !== false) s += TF((o.owl && o.owl.at) ? o.owl.at[0] : 1300, (o.owl && o.owl.at) ? o.owl.at[1] : 524, (o.owl && o.owl.at && o.owl.at[2]) || 1, owlArt(t, { ...(o.owl || {}), shade: N * .55 + dawn * .25 }));
   if (o.bird !== undefined) { const u = o.bird, bx = 1215 + 40 * clamp(u), by = 478 - 60 * Math.sin(Math.PI * clamp(u)) - (u > 1 ? (u - 1) * 420 : 0), bxx = bx + (u > 1 ? (u - 1) * 500 : 0); if (u > -.2 && u < 1.9) s += TF(bxx, by + (u < 0 ? u * 600 : 0), 1, `<ellipse cx="0" cy="-14" rx="20" ry="14" fill="${lc("#F2C14E")}"/><circle cx="14" cy="-28" r="11" fill="${lc("#F2C14E")}"/><path d="M24 -29 l12 3 l-12 4z" fill="#F08A3A"/><circle cx="17" cy="-30" r="2.6" fill="#2B2147"/><path d="M-16 -16 l-22 ${n2(-6 + 10 * Math.sin(t * 20) * (u > 1 || u < 0 ? 1 : 0))}" stroke="${lc("#D99A2A")}" stroke-width="8" stroke-linecap="round"/>`); }
   return s; }
 /* THE LITTLE OWL (a small scops-type owl: round brown body, little ear tufts, a pale face, eyes shut in the day). origin = its feet on the
@@ -280,7 +280,7 @@ function globeArt(t) { const m = MK, ton = m("torchon"), lit = clamp((t - ton) /
   // labels with plain lines
   s += lcLab(t, m("lab_earth"), 610, 196, "our Earth", gx + R * .82, gy + R * .5, { t1: m("pin") - .1, size: 46 }) + lcLab(t, m("lab_sun"), -560, -236, "our Sun", GA.tor[0] + 60, GA.tor[1] - 90, { t1: m("pin") - .1, size: 46 })
     + (dz > 0 ? lcLab(t, m("lab_sg"), -90, -250, "Singapore", gx + dx - 10, gy + dy - 16, { t1: m("turn") + .2, size: 46 }) : "")
-    + lcLab(t, m("pin"), -585, 338, "the torch stays still", -560, GA.ty + 34, { size: 38 }) + lcLab(t, m("turn"), 640, 250, "the globe turns", gx + 178, gy + 112, { size: 38, t1: m("v_globe") - .3 });
+    + lcLab(t, m("pin"), -300, 340, "the torch stays still", -560, GA.ty + 34, { size: 38 }) + lcLab(t, m("turn"), 640, 250, "the globe turns", gx + 178, gy + 112, { size: 38, t1: m("v_globe") - .3 });
   return s; }
 
 /* ====================================================================================================================================

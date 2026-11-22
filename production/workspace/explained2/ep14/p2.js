@@ -1,5 +1,7 @@
 // p2.js: PART 2, "The Boy GREW. The Tree GREW. Why Not the TEDDY BEAR?": cycles in living things, what a life cycle is, why life cycles
 // matter. Segments 1-15 of p3_ep14_script.md (version 1, 22 Nov 2026; the teacher's go-ahead and the 22 Nov full-sentence change in section 12).
+// STAGE 2 (drawn 2026-11-22, the trial: big buddies standing in the garden, no discs, the buddies teach; every scene in the community garden
+// (garden14.js VG) with its life (the hen and chicks, the leaves, a butterfly, clouds); the ladybird hides somewhere new each scene).
 // STAGE 1 (setup): the shared routines are wired (the calm three-picture recap with its labels, the game as ONE smooth push-in from the garden
 // onto the ladybird (common.js gameScene, EP12 v2), goals read by Basil, round card, the lock-in with its four clue labels on top of the ring,
 // the answer, the book's strip C0.2, the board CYCLE CHECK as a functional placeholder (the chicken's three tiles, the last arrow back to the
@@ -16,129 +18,153 @@ SCORE.push([W("j906", "two") - .1, 3, 1]);
 const FOOT = "P3 · Cycles · Life cycles of plants and animals";
 const stageNote = (txt, y = 1000) => T(960, y, "(Stage 2: " + txt + ")", 24, "#fff", { w: 500 });
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
-const henRule = (t, t0 = -9) => smallPrint(t, t0, HEN_RULE);   // "We look. We do not chase or touch the chickens." whenever the chickens are in the picture
+const henRule = (t, t0 = -9, t1) => t1 !== undefined ? OP(1 - ramp(t, t1, .3), smallPrint(t, t0, HEN_RULE)) : smallPrint(t, t0, HEN_RULE);   // "We look. We do not chase or touch the chickens." whenever the chickens are in the picture
 const card = (x, y, txt, k = 1) => TF(x, y, k, `<g filter="url(#drop)"><rect x="-140" y="-120" width="280" height="240" rx="20" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="6"/></g>` + T(0, 12, txt, 34, P.ink));
 
 /* 1 · "Last time...": three calm pictures from Part 1, one at a time, each >= 2.5 s, centred and large, a gentle push-in, one label each
    (switch on "and" and "But": pic2, pic3). ROTATION, CYCLE and REPEATED PATTERN are NOT put on Part 2's shelf: it holds only this part's words. */
+const globePic = (t) => `<g filter="url(#drop)"><rect x="-560" y="-330" width="1120" height="620" rx="36" fill="#141B48"/></g>` + [...Array(18)].map((_, i) => `<circle cx="${n2((hash(i, 3) - .5) * 1060)}" cy="${n2((hash(i, 5) - .5) * 560)}" r="${n2(2 + 2 * hash(i, 7))}" fill="#fff" opacity=".7"/>`).join("")
+  + `<path d="M-300 -30 L120 -230 L120 230 L-300 30z" fill="#FFF3B8" opacity=".28"/>` + TF(-380, 40, 1.5, torch14(1)) + TF(200, 0, 1, globe14(210, SGLL[0] + 10 - t * 6, { lit: 1, dot: true, id: "rcg", dotR: 14 }))
+  + T(-380, 200, "the torch: our Sun", 34, "#fff", { w: 600 }) + T(200, 270, "the globe: our Earth", 34, "#fff", { w: 600 });
 SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i = t >= tb[2] ? 2 : t >= tb[1] ? 1 : 0, labs = ["Day and night: a cycle", "It repeats because the Earth turns", "Do living things have cycles too?"];
-  const what = ["(the board's closed ring with the row of four small skies: bright, dark, bright, dark; wired: the functional board)", "the globe and the torch, the red dot in the light (Part 1's look-closer)", "the three picture cards: a hen, a chick, a teddy bear, with the big ?"];
   const z = 1 + .05 * eio((t - tb[i]) / 4), k = ramp(t, tb[i] + .05, .5);
-  const pic = i === 0 ? TF(960, 860, .78, cycleBoard(t, { show: "daynight" })) : i === 2 ? ["a hen", "a chick", "a teddy bear"].map((c, j) => card(640 + j * 320, 560, c, .95)).join("") + qMark(t, tb[2] + .3, 960, 340)
-    : `<g filter="url(#drop)"><rect x="410" y="200" width="1100" height="640" rx="36" fill="url(#gPaper)"/></g>${tpill(960, 250, "PICTURE 2 · STAGE 2: TO DRAW", 26, P.coral, "#fff", { w: 700 })}${wrap(what[1], 40, 960, 600).map((l, j) => T(960, 460 + j * 56, l, 40, P.ink, { w: 600 })).join("")}`;
+  const pic = i === 0 ? TF(960, 900, .82, cycleBoard(t, { show: "daynight" })) : i === 2 ? ["hen", "chick", "teddy"].map((c, j) => TF(600 + j * 360, 560, 1.15 * spring(t, tb[2] + .1 + j * .15, .45), picCard14(c, t))).join("") + qMark(t, tb[2] + .5, 960, 250)
+    : TF(960, 520, 1, globePic(t));
   return bg("stage2") + OP(ramp(t, s.t0, .3), T(960, 110, "Last time…", 60, "#fff", { w: 600 }))
-    + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${pic}</g>` + TF(960, 960, spring(t, tb[i] + .3, .4), tpill(0, 0, labs[i], 46, "#fff", P.ink, { w: 700 }))) + HUD(t); };
+    + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${pic}</g>` + TF(960, 975, spring(t, tb[i] + .3, .4), tpill(0, 0, labs[i], 46, "#fff", P.ink, { w: 700 }))) + HUD(t); };
 
-/* 2 · the new place (a community garden beside an HDB block), the game and the hidden ladybird (ONE smooth push-in from the garden onto the
-   ladybird on its leaf, the place pill slipping away; common.js gameScene); 3 · goals (Basil reads) */
-const placePill = () => TF(960, 1010, 1, tpill(0, 0, "A community garden, Singapore", 40, P.ink, "#fff", { w: 700 }));
-SC.place = (t, s) => gardenPH(t) + OP(ramp(t, s.t0 + .3, .4), placePill()) + henRule(t, s.t0 + .3) + HUD(t);
-SC.game = (t, s) => gameScene(t, s, ["j201a", "j201b", "j201c"], false, { world: (tt) => gardenPH(tt), A: LADY, T: [1360, 500], Z: 2.6, ly: -190, pre: () => placePill() }) + henRule(t);
+/* the garden (garden14.js VG) in the light of its moment; the buddies stand on the path and the lawn; G = VG + an optional camera; the
+   ladybird's spot for each scene (teacher, 22 Nov: it hides somewhere new each time; never in a look-closer) */
+const LB = { place: [168, 650, 0], thenans: [820, 702, 0], strip: [1226, 530, -90], waitw: [1645, 690, 30], pullout: [1645, 690, 30], ring: [1226, 476, -90], show: [1092, 922, 0], fix: [1092, 922, 0], dare: [1655, 318, 60], chant: [168, 650, 0] };
+const G = (t, o = {}, cam) => VG(t, { lady: o.lady !== undefined ? o.lady : (LB[(window._S || {}).name] ? { at: LB[window._S.name] } : {}), ...o }, cam);
+const bp = (who, x, h, t, o = {}) => buddy(who, x, o.y || 1076, h, t, o);
+
+/* 2 · the new place (a wide establishing look, a slow push), the game and the hidden ladybird (ONE smooth push-in from the garden onto the
+   ladybird on its leaf, then the iris; common.js gameScene); 3 · goals (Basil reads) */
+const placePill = () => lowerPill(60, 96, "A community garden, Singapore ·", "morning");
+SC.place = (t, s) => G(t, {}, [1 + .04 * eio((t - s.t0) / 2.5), 1200, 600]) + OP(ramp(t, s.t0 + .3, .4), placePill()) + henRule(t, s.t0 + .3) + HUD(t);
+SC.game = (t, s) => gameScene(t, s, ["j201a", "j201b", "j201c"], false, { world: (tt) => VG(tt, { lady: { open: ss(W("j201a", "ladybird") - .1, W("j201a", "ladybird") + .3, tt) * (1 - ss(W("j201a", "ladybird") + 1, W("j201a", "ladybird") + 1.4, tt)) } }, [1.04, 1200, 600]),
+  A: LADY, T: [700, 440], Z: 3.4, pre: () => placePill() }) + henRule(t, -9, SCN.game.t0 + 1.0);
 SC.goals = (t, s) => goals3(t, s, [["Cycles in living things", ""], ["What a life cycle is", ""], ["Why life cycles matter", ""]], ["j301", "j302", "j303", "j304"], "basil");
 
-/* 4 · Round 1: which ones are bigger today? (four clue labels a boy · a young tree · a teddy bear · long ago on top of the ring, kept through
-   the countdown); an adult's hand holds up the old photo (photo: Stage 2 draws it in the ring) */
+/* 4 · Round 1: which ones are bigger today? In the ring: the old photo Tree Planting Day; four clue labels on top of the ring frame, kept through
+   the countdown; ONE set of big numbered picture cards (the boy and the tree / all three / only the tree, each with an up arrow) */
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1");
-const r1labels = (t) => { const tq = W(L1, "today") - .1; return t < tq ? "" : ["a boy", "a young tree", "a teddy bear", "long ago"].map((l, i) => TF(430 + (i - 1.5) * 150, 470 - RING_R - 14 - (i % 2 ? 48 : 0), spring(t, tq + i * .12, .4), tpill(0, 0, l, 24, "#fff", P.ink, { w: 700 }))).join(""); };
-SC.r1 = (t, s) => lockN(t, { cards: ["The boy and the tree", "All three", "Only the tree"], labels: r1labels, q: "Today, which ones are bigger?", tq: W(L1, "today") - .1, tc: [W(L1, "one", 1), W(L1, "two"), W(L1, "three", 1)], ring0: MK("ring0_r1"), dur: 6, lock: "j402",
-  obj: ringPH("the old photo: Tree Planting Day (a hand holds it up)"),
+const upA = (x, y, k = 1) => TF(x, y, k, `<path d="M0 40 V-30" stroke="#2FA35A" stroke-width="12" stroke-linecap="round"/><path d="M-22 -10 L0 -36 L22 -10" fill="none" stroke="#2FA35A" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>`);
+const tinyTree = (k = 1) => TF(0, 0, k, `<path d="M0 0 Q-4 -60 2 -120" fill="none" stroke="#8A5E3A" stroke-width="10" stroke-linecap="round"/>` + [[-20, -120], [16, -134], [-2, -96], [22, -104], [-24, -88]].map(([x, y], i) => `<ellipse cx="${x}" cy="${y}" rx="22" ry="13" transform="rotate(${-30 + i * 25} ${x} ${y})" fill="${i % 2 ? "#6CC27A" : "#58B56C"}" stroke="#2F8048" stroke-width="3"/>`).join(""));
+const cardPic = (i) => { const boy = TF(-70, 80, .5, person14(230)), tree = TF(30, 80, 1, tinyTree(1)), ted = TF(105, 62, .3, teddy());
+  return `<rect x="-200" y="-140" width="400" height="280" fill="#DFF3D2"/>` + (i === 0 ? boy + tree + upA(-70, -70, .8) + upA(30, -70, .8) : i === 1 ? boy + tree + ted + upA(-70, -70, .8) + upA(30, -70, .8) + upA(105, -20, .8) : tree + upA(30, -70, .8)); };
+SC.r1 = (t, s) => lockN(t, { cards: ["The boy and the tree", "All three", "Only the tree"], clues: [["a boy", W(L1, "today") - .1], ["a young tree", W(L1, "today")], ["a teddy bear", W(L1, "today") + .1], ["long ago", W(L1, "today") + .2]], csize: 34, lead: "momo",
+  pics: [0, 1, 2].map(cardPic), q: "Today, which ones are bigger?", tq: W(L1, "today") - .1, tc: [W(L1, "one", 1), W(L1, "two"), W(L1, "three", 1)], ring0: MK("ring0_r1"), dur: 6, lock: "j402",
+  obj: (tt) => TF(430, 462, .33, photo14(tt), -2),
   picks: [{ who: "momo", id: "j403", word: "2", x: true }, { who: "basil", id: "j404", word: "1" }, { who: "pip", id: "j405", word: "1" }],
   react: [[LE("j403") + .1, "momo", "cheer"], [LE("j404") + .1, "basil", "cheer"], [LE("j405") + .1, "pip", "pointing"]] });
 
-/* 5 · [LOOK CLOSER] then and now: the old photo (THEN) and the same place today (NOW), side by side; three pairs light one after another, each
-   with a faint height line; the two tags (wired at placeholder places: Stage 2 moves them onto the man, the tree, the teddy bear); GROW pops */
-SC.lcthen = (t, s) => lcPH(t, s, { title: "Then and now: the same place, the same framing", v: "v_then", verdict: [`LIVING THINGS GROW OVER TIME`, GOODC], fx: 960, fy: 560,
-  beats: [["thenpic", "THEN: the old photo (Tree Planting Day)"], ["nowpic", "NOW: the place today"], ["pair1", "the boy and the man light"], ["line1", "the height line rises: taller"], ["pair2", "the young tree and the tall tree"], ["line2", "the line rises steeply"], ["fruits", "label fruits"], ["pair3", "the teddy bear and the teddy bear"], ["line3", "the line is FLAT: the same size"], ["tagliving", "LIVING on the man and the tree"], ["kw_grow", "GROW pops"], ["tagnon", "NON-LIVING on the teddy bear"], ["v_then", "verdict"]],
-  notes: ["The camera pushes in until two pictures fill the window, side by side, the same spot in the same framing (the garden dims and blurs; the buddies and the cards step back). Left, headed THEN: the old photo (a colour print, a little faded, a white border, the hand-written words Tree Planting Day): a boy of about nine seen from the side, a young tree as tall as he is, tied to a stake, a brown teddy bear sitting at its foot.",
-    "Right, headed NOW: the same spot today: a man seen from the side, his hand on the trunk; the tree three storeys tall with a thick trunk and red fruits among the leaves (a rambutan tree; NOT named); the same teddy bear, a little worn, sitting on the garden bench. Three pairs light one after another (MK pair1, pair2, pair3), each with a faint height line from left to right: it rises (line1: taller), rises steeply (line2: taller · fruits), is flat (line3: the same size).",
-    "Tags (EP1's, in EP1's colours; wired here at placeholder places): green LIVING on the man and on the tree (tagliving), blue NON-LIVING on the teddy bear (tagnon). Life: leaves move in the NOW picture; the photo is still (it is a photo). Sound: a soft rising note under the first two lines, a flat bup under the third (wired)."],
-  over: (tt) => tagAt(tt, MK("tagliving"), 1220, 330, 0, "LIVING", 30) + tagAt(tt, MK("tagliving") + .2, 1520, 330, 0, "LIVING", 30) + tagAt(tt, MK("tagnon"), 1450, 760, 1, "NON-LIVING", 30) });
-/* the answer is one: the boy and the tree; Momo surprised, then a nod; coin. WIRED with the cards */
-SC.thenans = (t, s) => { const tA = MK("ansglow") - .1;
-  return bg("stage2") + stageNote("the garden behind; the old photo and the place today, small, on a picture board", 120)
-    + ["The boy and the tree", "All three", "Only the tree"].map((c, i) => TF(760 + i * 300, 420, .5 * spring(t, s.t0 + .1 + i * .08, .4), ansCard(i + 1, c, { w: 430, h: 290, size: 48, lit: i === 0 && t >= tA ? spring(t, tA, .45) : 0 }))).join("")
-    + coin(t, MK("coin1") - .1, 1690, 300, "+1", "if you showed one finger")
-    + buddy("momo", 330, 1060, 300, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [tA + 1, "sit"]], jump: [[tA + 1.2, 20]] }) + henRule(t) + HUD(t); };
+/* 5 · [LOOK CLOSER] then and now (garden14.js thenArt: THEN the old photo, NOW the same place today; three pairs light, each with its height
+   line: it rises, rises steeply, is FLAT; LIVING on the man and the tree, NON-LIVING on the teddy bear; GROW pops). The speaker's face peeks in */
+const gardenSoft = (t) => G(t, { lady: false }, [1.1, 960, 700]);
+SC.lcthen = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 960, fy: 560, art: thenArt, bgc: "#FFF3DC", verdict: [`LIVING THINGS GROW OVER TIME`, GOODC], tv: MK("v_then"), set: gardenSoft, peekSide: "c", peekH: 430 });
+/* the answer is one: the boy and the tree. The THEN / NOW pictures stand on the bench; the three cards above; Momo big at the left (her guess was
+   three: surprised, then a good-sport nod); coin */
+const photoPair = (t, k = 1) => TF(-150, 0, .3 * k, photo14(t, 0, "pp1"), -3) + TF(150, -6, .3 * k, `<g filter="url(#drop)"><rect x="-394" y="-324" width="788" height="648" rx="26" fill="#fff"/></g>` + scene14(true, t, 0, "pp2"), 2);
+SC.thenans = (t, s) => { const tA = MK("ansglow") - .1, u = eio((t - s.t0) / 1.2);
+  return G(t, {}, [lerp(1.35, 1.05, u), 900, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".18"/>` + TF(900, 640, spring(t, s.t0 + .1, .5), photoPair(t)) + TF(745, 455, 1, tpill(0, 0, "THEN", 30, P.ink, "#fff", { w: 700 })) + TF(1050, 455, 1, tpill(0, 0, "NOW", 30, P.sun, P.ink, { w: 700 }))
+    + ["The boy and the tree", "All three", "Only the tree"].map((c, i) => TF(640 + i * 300, 260, .5 * spring(t, s.t0 + .1 + i * .08, .4), ansCard(i + 1, c, { w: 430, h: 290, size: 48, lit: i === 0 && t >= tA ? spring(t, tA, .45) : 0 }))).join("")
+    + coin(t, MK("coin1") - .1, 1200, 520, "+1", "if you showed one finger")
+    + bp("momo", 300, 500, t, { in: s.t0 + .1, poses: [[s.t0, "surprised"], [tA + 1, "oops"], [tA + 2.4, "sit"]], jump: [[tA + 1.2, 20]] })
+    + bp("basil", 1480, 380, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [tA + .2, "cheer"]] }) + bp("pip", 1760, 350, t, { in: s.t0 + .3, flip: true, poses: [[s.t0, "sit"], [tA + .3, "cheer"]] }) + henRule(t) + HUD(t); };
 
-/* 6 · [LOOK CLOSER] one chick, week after week (the week pill on its marks, wired); then chicks of its own; REPRODUCE pops; then the strip C0.2 */
-SC.lcchick = (t, s) => lcPH(t, s, { title: "One chick, week after week: it grows, then it has young", v: "v_chick", verdict: [`IT GROWS · THEN IT HAS YOUNG`, GOODC], fx: 900, fy: 760,
-  beats: [["wk1", "Week 1: small and downy; it pecks"], ["labsame", "label the same chick (the pale patch on its wing)"], ["wk6", "Week 6: feathers coming, long legs; it scratches"], ["wk12", "Week 12: a young bird; it stretches a wing"], ["wk24", "Week 24: an adult chicken; it shakes its feathers"], ["nestwalk", "she walks to the bush: a nest with four eggs"], ["settle", "she settles on the nest"], ["later3", "a soft dissolve: 3 weeks later"], ["chicksout", "she walks out, three chicks behind her"], ["labyoung", "labels the adult · its young"], ["kw_reproduce", "REPRODUCE pops"], ["v_chick", "verdict"]],
-  notes: ["The camera glides low across the grass and pushes in slowly on ONE chick, the one with a pale patch on its wing, until it fills most of the window (the garden dims; the buddies step back). Four held pictures of the same chick in the same place, each a SOFT DISSOLVE from the one before (never a flicker), each AT its mark: wk1 small and downy, pecking; wk6 feathers coming, long legs, scratching the ground; wk12 a young bird stretching a wing (the pale patch); wk24 an adult chicken shaking its feathers. Labels the same chick · bigger · an adult chicken.",
-    "Then the same adult walks to the bush (nestwalk): under it, a nest of dry leaves with four eggs; she settles (settle). Soft dissolve, the week pill 3 weeks later (later3): she walks out across the grass with three small chicks in a line behind her (chicksout); they peck where she pecks. Labels the adult · its young (labyoung). Nobody touches the nest. The free chickens of many estates (red junglefowl kind): the hen brown and plain, the chicks small, yellow-brown and striped.",
-    "Wired: the week pill (lower left), speeded up, the small print We look. We do not chase or touch the chickens. Sound: cheeps that turn into low clucks, scratching on dry leaves, three thin cheeps."],
-  over: (tt) => henRule(tt, s.t0 + 1.2) + stepPill(tt, WEEKS, 390, 905) + speeded(tt, MK("wk1") + .5, MK("chicksout") + 1, 1660, 905) });
+/* 6 · [LOOK CLOSER] one chick, week after week (garden14.js chickArt: the same chick at weeks 1, 6, 12, 24; the nest; three chicks of its own;
+   REPRODUCE pops); then the strip C0.2 over the garden */
+SC.lcchick = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1300, fy: 860, art: chickArt, bgc: "#BFE6F7", verdict: [`IT GROWS · THEN IT HAS YOUNG`, GOODC], tv: MK("v_chick"), set: (tt) => G(tt, {}, [1.05, 1200, 700]), peekSide: "r", peekH: 470,
+  over: (tt) => henRule(tt, s.t0 + 1.2) + stepPill(tt, WEEKS, 390, 960) + speeded(tt, MK("wk1") + .5, MK("chicksout") + 1, 1660, 160) });
 SC.strip = (t, s) => { const L = "j605", txt = "Cycles in living things happen when living things grow and have young. Their life cycles follow a repeated pattern of change.";
-  return bg("stage2") + stageNote("the garden behind; under the strip, small: the NOW picture and the hen with her chicks", 1040)
+  return G(t, {}, [1.05, 1200, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".35"/>`
     + (HAS(L) ? [txt.split(". ")[0] + ".", txt.split(". ")[1]].map((p, i) => bookCaption(t, L, p, 330 + i * 120, { size: 44, off: i ? txt.split(". ")[0].split(" ").length : 0, keys: ["grow", "have", "young", "repeated", "pattern", "change"] })).join("")
-      : OP(ramp(t, s.t0, .3), T(960, 360, txt, 36, "#fff", { w: 600 }))) + henRule(t) + HUD(t); };
+      : OP(ramp(t, s.t0, .3), [txt.split(". ")[0] + ".", txt.split(". ")[1]].map((p, i) => `<g filter="url(#dropS)"><rect x="${n2(960 - tw(p, 46, 700, "Atkinson Hyperlegible") / 2 - 44)}" y="${248 + i * 130}" width="${n2(tw(p, 46, 700, "Atkinson Hyperlegible") + 88)}" height="84" rx="20" fill="url(#gPaper)"/></g>` + T(960, 305 + i * 130, p, 46, P.ink, { fam: "Atkinson Hyperlegible", w: 700 })).join("")))
+    + bp("pip", 300, 420, t, { in: s.t0 + .1, poses: [[s.t0, "thinking"], [s.t0 + 1.6, "pointing"]] }) + bp("momo", 1640, 420, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [s.t0 + 2, "cheer"]] }) + henRule(t) + HUD(t); };
 
-/* 7 · BE A CHICK (the first-person journey). The tags are wired (shrink.js feelTag) on their marks */
-SC.waitw = (t, s) => phScene(t, s, "7 · Be a chick! (the glide in)", ["Pill Be a chick! The camera glides to the nest under the bush and into one egg; a soft cream wipe at the scene end. The shelf slides aside (SHELF_HIDE)."]);
-SC.shrink = (t, s) => { const e = S2 => MK(S2);
-  return phScene(t, s, "7 · BE A CHICK (first person, present tense)", ["MK jegg: inside the egg: a warm orange-pink glow all round you; the curved shell very close (a soft slow heartbeat, the hen's clucks muffled). MK jhatch / jcrack (\"Crack!\"): a crack of white light, then another (a crisp crack each); MK jlight: the shell opens; MK jout: the garden, huge: grass blades like trees, the hen's feet, large and gentle, beside you.",
-    "MK jgrow / jpeck (\"eat\"): you peck at the ground; MK jrise (\"grow\"): the view rises a little, then a little more, as the weeks go by (a small week pill 1, 6, 12, 24; speeded up): the grass is low now; you can see over the planter bed. MK jadult / jnest: your own nest of dry leaves, seen from above; you settle; MK jlay (\"egg\"): when you stand, there is an egg in it. MK jagain: the egg rocks; jtap1..jtap3: three small taps from inside; MK jnew: a crack: a new chick. Calm pad; no game sounds; nothing about how an egg comes to hold a chick."])
+/* 7 · Be a chick! The buddies wave us off; ONE glide to the nest under the bush and into one egg (a soft cream wipe); the first-person journey
+   (garden14.js chickJourney) with the three buddies shrunk down riding along and reacting at each stop; one pull back out */
+const camNest = (t, s) => { const d = ei((t - (s.t1 - 1.6)) / 1.6), e = eio((t - s.t0) / 1.2); return [1 + .15 * e + 6 * d, lerp(1000, NESTW[0], Math.max(e * .4, d)), lerp(600, NESTW[1], Math.max(e * .4, d))]; };
+SC.waitw = (t, s) => { const L = "j701", tP = LT(L) - .1, dive = ei((t - (s.t1 - 1.4)) / 1.4);
+  return G(t, { nest: { n: 4 } }, camNest(t, s)) + OP(1 - dive * 1.7, bp("pip", 260, 360, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bp("momo", 620, 340, t, { in: s.t0 + .15, poses: [[s.t0, "cheer"], [tP + .5, "waving"]], wave: true })
+    + bp("basil", 1740, 380, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "cheer"]], wave: true })
+    + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a chick!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, CREAM14, 960, 540); };
+const wingTips = (t, t0, t1) => { const a = ramp(t, t0, .5) * (1 - ramp(t, t1, .4)); if (a < .02) return ""; const fl = 6 * Math.sin(t * 7);
+  return OP(a, [-1, 1].map((sd) => `<g transform="translate(${960 + sd * 330} ${n2(1110 - 8 * Math.abs(Math.sin(t * 3)))}) scale(${sd} 1) rotate(${n2(-20 + fl)})"><path d="M0 0 Q-40 -150 40 -190 Q60 -120 70 -40 Q40 -10 0 0z" fill="#F7D27A" stroke="#C99A3A" stroke-width="6"/><path d="M14 -60 q20 -40 34 -96 M30 -40 q16 -30 28 -70" stroke="#E3AE52" stroke-width="5" fill="none" stroke-linecap="round"/></g>`).join("")); };
+SC.shrink = (t, s) => { const e = (S2) => MK(S2), rp = (w, extra) => [[e("jcrack"), "surprised"], [e("jout") + .2, "cheer"], [e("jrise") + .3, w === "basil" ? "pointing" : "thinking"], [e("jnest") + .2, "sit"], [e("jnew") + .1, "cheer"], ...(extra || [])];
+  return chickJourney(t, s) + wingTips(t, e("jout") - .2, e("jadult")) + riders(t, s, { tin: e("jegg") - .4, h: 170, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] }, poses: { pip: rp("pip"), basil: rp("basil"), momo: rp("momo") }, jolts: [e("jcrack"), e("jnew")] })
     + feelTag(t, e("jegg") + .3, e("jhatch") - .1, "You: a chick · inside an egg", 160) + feelTag(t, e("jout"), e("jgrow") - .1, "you hatch", 160) + feelTag(t, e("jrise"), e("jadult") - .1, "you grow", 160)
     + feelTag(t, e("jlay") - .1, e("jagain") - .1, "an adult chicken · an egg", 160) + feelTag(t, e("jnew"), e("jnew") + 2.4, "a new chick · again", 160); };
+SC.pullout = (t, s) => { const u = eo((t - s.t0) / .6); return G(t, { nest: { n: 4 } }, [lerp(4, 1.05, u), NESTW[0], NESTW[1]]) + bp("pip", 260, 360, t, { in: s.t0 + .2, poses: [[s.t0 + .2, "cheer"]] }) + bp("basil", 1740, 380, t, { in: s.t0 + .25, flip: true, poses: [[s.t0 + .25, "cheer"]] }) + wipe(t, s.t0, CREAM14) + HUD(t); };
 
-/* 8 · pull back out; the ring closes on the board CYCLE CHECK (tegg, tchick, tadult, tback, two ticks, A CYCLE + A LIFE CYCLE); LIFE CYCLE pops.
-   WIRED with the placeholder board */
-SC.pullout = (t, s) => phScene(t, s, "8 · Pull back out to the garden", ["Whoosh out of the egg, back to the garden (0.6 s)."]);
-SC.ring = (t, s) => bg("stage2") + stageNote("the garden behind; the board on its low stand by the bench; the hen and her chicks far behind", 120) + TF(960, 1060, .78, cycleBoard(t))
-  + buddy("pip", 230, 1060, 240, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [MK("tback"), "surprised"], [MK("tagcycle"), "cheer"]] }) + buddy("basil", 1690, 1060, 240, t, { aura: true, flip: true, in: s.t0 + .15, poses: [[s.t0, "sit"], [MK("tagcycle"), "cheer"]], jump: [[MK("tagcycle"), 30]] })
-  + buddy("momo", 1450, 1060, 200, t, { aura: true, flip: true, in: s.t0 + .2, poses: [[s.t0, "pointing"], [MK("tagcycle"), "cheer"]] }) + HUD(t);
+/* 8 · the ring closes on the board CYCLE CHECK at its home by the bench (tegg, tchick, tadult, tback, two ticks, A CYCLE + A LIFE CYCLE);
+   LIFE CYCLE pops. Pip big at the left reads the ring; Momo and Basil at the right; the hen and her chicks behind */
+const boardHome = (t, o = {}) => TF(1150, 1070, .8, cycleBoard(t, o));
+SC.ring = (t, s) => G(t, {}, [1 + .04 * eio((t - s.t0) / 8), 1150, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".12"/>` + boardHome(t)
+  + bp("pip", 300, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [MK("tback"), "surprised"], [LE("j801p") + .2, "pointing"], [MK("tagcycle"), "cheer"]] }) + bp("momo", 1580, 340, t, { flip: true, in: s.t0 + .2, poses: [[s.t0, "thinking"], [MK("tagcycle"), "cheer"]] })
+  + bp("basil", 1800, 360, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "sit"], [MK("tagcycle"), "cheer"]], jump: [[MK("tagcycle"), 30]] }) + say("j801p", 620, 300, t, { size: 40, tail: -200, maxW: 600 }) + henRule(t) + HUD(t);
 /* Mark Sentence 1 (Basil): 4.2; under the card: the ring with its three tiles, the arrows going round */
 SC.mark1 = (t, s) => markScene(t, s, { id: "j803", sayId: "j802", who: "basil", n: "1 of 2", text: "A life cycle is a repeated pattern of change as a living thing grows over time and reproduces.", keys: ["repeated", "pattern", "change", "grows", "over", "time", "reproduces"], size: 62, y: 240, footer: FOOT,
   under: TF(1180, 1060, .32, cycleBoard(t, { small: true })) });
 
-/* 9 · Showdown: Pip's notes (double points). WIRED: the easel MY NOTES as a functional placeholder (each line lights as Pip reads it (line 2
-   only when "notes13" is cut: lines one and three are then lit without being read); the three lines stay through the countdown), the YOU ring
-   with a counting hand (6 s), LOCKED IN!, the picks Basil 2, Momo 2; Pip oops */
+/* 9 · Showdown: Pip's notes (double points). Pip's easel MY NOTES at its home in the garden; Pip big at the left reads it; for the countdown the
+   garden gives way to the blue game stage: the easel (the question) stays, the ring is big at the right with the counting YOU hand, Pip fidgets;
+   then Basil and Momo pop in for their picks */
+const EAS = [880, 980, .78];
+window.SHELF_AWAY = (t) => { const a = MK("ring0_show") - .6, b = MK("bell_show") + .5; return ss(a, a + .35, t) * (1 - ss(b, b + .35, t)); };
 const noteLit = (t) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), L = "j902", ks = ["l1", "l2", "l3"], has = ks.map((k) => TL.marks[k] !== undefined), ends = [MKS("l2"), MKS("l3") < 1e8 ? MKS("l3") : LE(L) + .2, LE(L) + .2];
   return [0, 1, 2].map((i) => { if (has[i] && t >= MK(ks[i]) - .1 && t < ends[i]) return 1; if (!has[i] && t >= LT(L) && t < bell) return .45; return t >= r0 && t < bell ? .45 : 0; }); };
-SC.show = (t, s) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 6), tS = LT("j903") - .08, R = [1600, 330];
-  const picks = [["basil", "j904", "2", 960], ["momo", "j905", "2", 1320]];
-  return bg("stage2") + stageNote("the garden behind, dimmed; Pip's easel stands on the ground between the discs", 140) + TF(860, 900, .72, notesEasel(t, { lit: noteLit(t) }))
-    + (t >= LT("j901") ? TF(R[0], R[1], spring(t, LT("j901"), .4), `<g transform="scale(.6)">${ringTimer(0, 0, t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 6 : t < bell ? rs.secs : 0, t, { tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(0, 0, .85, `<g filter="url(#dropS)">${countHand(3)}</g>`) })}</g>` + youPill(-150, -130, .9)) : "")
-    + buddy("pip", 230, 1060, 260, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT("j902") - .12, "sit"], [LE("j902") + .2, "thinking"], [LT("j904") - .1, "oops"]] }) + say("j902", 520, 330, t, { size: 36, tail: -220, maxW: 780 })
-    + picks.map(([w, id, n, x]) => buddy(w, x + 300, 1060, 230, t, { aura: true, in: r0 - .3, poses: [[r0 - .3, w === "basil" ? "arms_crossed" : "thinking"], [LT(id) - .12, "sit"], [LE(id) + .1, "cheer"]], flip: true }) + (t > r0 ? pickNum(w, x + 300 - 150, 900, t, LT(id) - .1, n) : "") + say(id, x + 100, 560, t, { size: 38, maxW: 520, tail: 140 })).join("")
+SC.show = (t, s) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 6), tS = LT("j903") - .08, inT = t >= r0 && t < bell, R = [1520, 420], RR = 200;
+  const st = ss(r0 - .6, r0 - .1, t) * (1 - ss(bell + .6, bell + 1.1, t)), bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 0, nf = inT ? (Math.floor(t - r0) % 3) + 1 : 3;
+  const picks = [["basil", "j904", "2", 1420], ["momo", "j905", "2", 1760]];
+  return G(t, { hens: true }, [1 + .03 * eio((t - s.t0) / 10), 900, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>` + OP(st, bg("stage"))
+    + TF(EAS[0], EAS[1], EAS[2], notesEasel(t, { lit: noteLit(t) }))
+    + (t >= r0 - .6 ? OP(st, TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 6 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
+      inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/>` + TF(R[0], R[1] + 30 + bob * .3, .75, `<g filter="url(#dropS)">${countHand(nf)}</g>`) })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 40, P.ink, "#fff", { w: 700 }))) : "")
+    + bp("pip", 260, 500, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "pointing"], [LT("j902") - .12, "sit"], [LE("j902") + .2, "thinking"], [bell - 1.6, "oops"], [bell, "surprised"], [LT("j904") - .1, "oops"]], jump: [[bell + .02, 26]] })
+    + say("j902", 560, 230, t, { size: 38, tail: -200, maxW: 700 })
+    + picks.map(([w, id, n, x]) => bp(w, x, 380, t, { in: bell + .3, flip: true, poses: [[bell + .3, w === "basil" ? "arms_crossed" : "thinking"], [LT(id) - .12, "sit"], [LE(id) + .1, "cheer"]] }) + (t > bell + .5 ? pickNum(w, x - 170, 900, t, LT(id) - .1, n) : "") + say(id, x - 240, 520, t, { size: 38, maxW: 520, tail: 200 })).join("")
     + stamp(t, tS, 960, 460) + bellIcon(t, r0) + HUD(t); };
-/* the fix: line 2 struck through once (strike), rewritten under it in green; its drawing bends from a row into a ring (bend); +2; Pip surprised,
-   then cheer (j907, cut "forgotegg": the oops pose in silence) */
-SC.fix = (t, s) => { const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("bend"), MK("bend") + .8, t), hb = HAS("j907");
-  return bg("stage2") + TF(860, 900, .72, notesEasel(t, { strike: st, fix: fx, lit: [0, fx * .6, 0] })) + coin(t, MK("coin2") - .1, 1700, 860, "+2", "line 2")
-    + buddy("pip", 230, 1060, 260, t, { aura: true, in: s.t0 + .05, poses: [[s.t0, "oops"], [MK("bend"), "surprised"], [hb ? LE("j907") + .2 : MK("bend") + 1.6, "cheer"]] }) + (hb ? say("j907", 520, 330, t, { size: 40, tail: -220, maxW: 600 }) : "") + HUD(t); };
+/* the fix: line 2 struck through once (strike), rewritten under it in green; its drawing bends from a row into a ring (bend); +2; Pip surprised, then cheer */
+SC.fix = (t, s) => { const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("bend"), MK("bend") + .8, t);
+  return G(t, {}, [1.03, 900, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>` + TF(EAS[0], EAS[1], EAS[2], notesEasel(t, { strike: st, fix: fx, lit: [0, fx * .6, 0] })) + coin(t, MK("coin2") - .1, 1560, 520, "+2", "line 2")
+    + bp("pip", 260, 500, t, { in: s.t0 + .05, poses: [[s.t0, "oops"], [MK("bend"), "surprised"], [MK("bend") + 1.6, "cheer"]] })
+    + bp("basil", 1500, 360, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [MK("bend") + .2, "cheer"]] }) + bp("momo", 1780, 350, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "sit"], [MK("bend") + .35, "cheer"]] }) + HUD(t); };
 
-/* 10 · [LOOK CLOSER] three chickens together at the water dish; Mark Sentence 2 (Momo): 4.1, third sentence ("live" = "leev"), with the tag
-   ensure = make sure for the whole card; under the card: the three chickens */
-SC.lchens = (t, s) => lcPH(t, s, { title: "Three chickens together: a grandmother hen, a mother hen, a chick", v: "v_hens", verdict: [`THE SAME KIND, AGAIN AND AGAIN`, GOODC], fx: 1200, fy: 820,
-  beats: [["h_gm", "label a grandmother hen"], ["h_m", "label a mother hen"], ["h_c", "label a chick"], ["heads", "all three lift their heads together"], ["v_hens", "verdict"]],
-  notes: ["The camera glides low to the water dish and pushes in slowly until three chickens fill most of the window, side by side (the garden dims and blurs; the buddies step back). An old hen with paler feathers drinks; beside her the adult with the pale patch on her wing (the chick we followed); beside her one of her chicks, which dips its beak as they do. A plain label line to each AT its mark: a grandmother hen (h_gm) · a mother hen (h_m) · a chick (h_c).",
-    "MK heads: all three lift their heads together. Three turns of the ring standing side by side, all of the same kind. Sound: three small sips, low clucks, one cheep (wired). Small print (wired): We look. We do not chase or touch the chickens."],
-  over: (tt) => henRule(tt, s.t0 + 1.2) });
+/* 10 · [LOOK CLOSER] three chickens together at the water dish (garden14.js hensArt); Mark Sentence 2 (Momo): 4.1, third sentence ("live" =
+   "leev"), with the tag ensure = make sure; under the card: the three chickens */
+SC.lchens = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1010, fy: 930, art: hensArt, bgc: "#CDEBB8", verdict: [`THE SAME KIND, AGAIN AND AGAIN`, GOODC], tv: MK("v_hens"), set: (tt) => G(tt, {}, [1.05, 1000, 800]), peekSide: "r", peekH: 470,
+  over: (tt) => finePrint(tt, s.t0 + 1.2, HEN_RULE, 420, 1046) });   // (the small print at the bottom: at the top it hid the label "a grandmother hen")
+const threeHens = (t) => [[-170, 3, .5, "#D9C7A8"], [10, 3, .5, null], [170, 0, 1.1, null]].map(([x, age, k, pale], i) => TF(x, 0, k, chicken14(t, { age, act: "peck", ph: i * 1.3, patch: i === 1 }))).join("")
+  + T(-170, 50, "grandmother hen", 22, "#fff", { w: 600 }) + T(10, 50, "mother hen", 22, "#fff", { w: 600 }) + T(170, 50, "chick", 22, "#fff", { w: 600 });
 SC.mark2 = (t, s) => markScene(t, s, { id: "j1003", sayId: "j1002", who: "momo", n: "2 of 2", text: "Life cycles ensure that living things of the same kind can continue to live on Earth.", keys: ["same", "kind", "continue", "to", "live", "on", "earth"], size: 64, y: 240, footer: FOOT,
-  extra: (t >= s.t0 + .6 ? TF(1180, 820, spring(t, s.t0 + .6, .4), tpill(0, 0, "ensure = make sure", 36, "#FFF8EA", P.ink, { w: 700 })) : "") + stageNote("under the card: the three chickens, small", 1040) });
+  extra: (t >= s.t0 + .6 ? TF(1450, 790, spring(t, s.t0 + .6, .4), tpill(0, 0, "ensure = make sure", 36, "#FFF8EA", P.ink, { w: 700 })) : ""), under: TF(980, 960, spring(t, s.t0 + .5, .5), threeHens(t)) });
 
-/* 11 · the chant: call and response (common.js chantScene); the board CYCLE CHECK with its TWO closed rings behind the buddies, each line's part
-   flashing on its call (cycleBoard({two, flash}); Stage 2: the drawn board, centred and big enough to read) */
-SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 52, x: 560, y0: 260, dy: 120, xs: [230, 500, 770], bh: 200, tx: 1480, ty: 540, sayX: 520, sayY: 640,
-  board: (tt, flash) => TF(1290, 1066, .5, cycleBoard(tt, { two: true, flash, small: true })) });
+/* 11 · the chant: call and response (common.js chantScene); the board CYCLE CHECK with its TWO closed rings at the right, each line's part flashing */
+SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 52, x: 620, y0: 260, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1180, ty: 520, sayX: 620, sayY: 600,
+  board: (tt, flash) => TF(1460, 1066, .5, cycleBoard(tt, { two: true, flash, small: true })) });
 
-/* 12 · score hand, the ladybird (lizReveal in common.js: the score hand melts into the real garden, ONE push-in onto the ladybird, the ring
-   pops on its name) */
+/* 12 · score hand, the ladybird (lizReveal: the score hand melts into the real garden, ONE push-in onto the ladybird, the iris, the ring on its
+   name; Pip's fun fact with its pictures: a larva like a tiny crocodile, a pupa, a ladybird) */
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
-SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1;
-  return lizReveal(t, s, L, gardenPH(t), LADY[0], LADY[1], tq, "It was on a leaf of the young tree!", 0, 170, 76, 2.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "j1204",
-    fact: { id: "j1203", items: [["ff_larva", "larva", "DRAW: a spiky dark larva, like a tiny crocodile"], ["ff_pupa", "pupa", "DRAW: the pupa on a leaf"], ["ff_adult", "ladybird", "DRAW: the red ladybird with black spots"]] } }); };
+SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1, tR = W(L, HIDDEN[0]) + .1;
+  return lizReveal(t, s, L, VG(t, { lady: { open: ss(tR + .3, tR + .6, t) * (1 - ss(tR + 1.8, tR + 2.2, t)) } }), LADY[0], LADY[1], tq, "It was on a leaf of the young tree!", 0, 170, 76, 3.4, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 560, qy: 770, tx: 560, ty: 900, tell: "j1204",
+    fact: { id: "j1203", w: 820, items: [["ff_larva", "larva", ffLarva], ["ff_pupa", "pupa", ffPupa], ["ff_adult", "ladybird", ffLady]], cols: ["#3B3550", "#C9741E", "#D8352A"] } }); };
 
-/* 13 · the dare for Episode 15: a mango, one big seed. The three cards, the ?, the banner and "Lock in your answer!" are wired; Stage 2 draws the three boards */
-const DRX = [560, 960, 1360];
-SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "what") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, hb = HAS("j1302");
-  return phScene(t, s, "13 · The dare for Episode 15: what will the seed grow into first?", ["MK dareIn: three picture boards slide in low and stand side by side, centred between the discs: a mango cut open with its one big flat seed, three times; beside the seed, on the first board a small mango, on the second a flower, on the third a young plant with two leaves. A big ? pops above them (wired). Banner (wired). Basil cheer, then sit, rubbing his tummy (a small hop) (j1302, cut \"nextjoke\" if needed). The garden's light is bright; a juicy squish on \"mango\"."])
-    + NEXT_CARDS.map((txt, i) => TF(DRX[i], 690, .5 * spring(t, tc[i], .45), ansCard(i + 1, txt, { w: 430, h: 290, size: 50, pulse: Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0) }))).join("")
-    + TF(960, 150, spring(t, s.t0 + .2, .45), tpill(0, 0, "NEXT · What will the seed grow into first?", 46, P.ink, P.sun, { w: 700 }))
-    + qMark(t, tQ, 960, 560, 44) + (t >= tL ? TF(1250, 470, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 40, P.sun, P.ink, { w: 700 })) : "")
-    + buddy("basil", 200, 1060, 230, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "cheer"], [LT("j1302") - .12, "sit"]] : [[s.t0, "sit"], [tL, "cheer"]], jump: hb ? [[LT("j1302") + .3, 18]] : [], nohop: true }) + (hb ? say("j1302", 520, 950, t, { size: 36, tail: -160, maxW: 520 }) : ""); };
+/* 13 · the dare for Episode 15: a mango, one big seed. ONE set of three big numbered picture boards (garden14.js PIC.mangoA / B / C), the ?,
+   the banner; Basil big at the left (a juicy squish on "mango", he rubs his tummy), Pip and Momo at the right */
+const DRX = [700, 1080, 1460];
+SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "what") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, tM = W(a, "mango") - .1;
+  return G(t, {}, [1.04, 1080, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>`
+    + ["mangoA", "mangoB", "mangoC"].map((nm, i) => { const t0 = MK("dareIn") + .5 + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, DRX[i], 860);
+      return d + TF(x, 640, 1 + .05 * pl, picBoard(nm, 0, 0, 1, { sc: 1.0, lab: NEXT_CARDS[i].toLowerCase(), size: 34, id: "dr" + i, t })) + numBadge(t, tc[i] - .05, x - 150, 500, i + 1, .9); }).join("")
+    + TF(1080, 150, spring(t, s.t0 + .2, .45), tpill(0, 0, "NEXT · What will the seed grow into first?", 46, P.ink, P.sun, { w: 700 }))
+    + qMark(t, tQ, 1080, 330, 44) + (t >= tL ? TF(1080, 990, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
+    + bp("basil", 260, 500, t, { in: s.t0 + .1, poses: [[s.t0, "cheer"], [tM + .3, "sit"], [tL, "cheer"]], jump: [[tM + .1, 22]], nohop: true })
+    + bp("pip", 1790, 340, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "thinking"], [tc[2] + .3, "pointing"]] }) + HUD(t); };
 
 /* 15 · "Now you know!": the board CYCLE CHECK with its two closed rings, their arrows going round, centred between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(860, 1040, .5, cycleBoard(t, { two: true })), { bx: [200, 1715, 1375], hx: 470 });
+SC.nyk = (t, s) => nykScene(t, s, TF(860, 1040, .5, cycleBoard(t, { two: true })), { bx: [220, 1720, 1400], hx: 470 });
 })(); }

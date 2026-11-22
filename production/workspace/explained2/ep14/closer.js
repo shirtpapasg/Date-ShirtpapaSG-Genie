@@ -8,7 +8,7 @@
 // together). They are in SHELF_HIDE (lib.js). EP14 Stage 1 wires them with lcPH (tests.js): the real lookCloser frame with a placeholder
 // art(); Stage 2 draws each art(t) (and its set) and keeps the frame. EP13's five arts are in ep13/closer.js, EP12's in ep12/closer.js
 // (models: the hands, the before / after with a guide line, the magnifier, the speeded-up clock).
-const LCW = { x: 960, y: 565, w: 1660, h: 790 };                       // the close-up window on screen
+const LCW = { x: 960, y: 572, w: 1800, h: 866 };                       // the close-up window on screen (EP14 trial: the panel fills the frame)                       // the close-up window on screen
 const lcPrev = (s) => TL.scenes[TL.scenes.indexOf(s) - 1];
 // the scene before, drawn without its HUD (the set we zoom in from)
 const lcSet = (t, s, name) => { const p = name ? { ...lcPrev(s), name } : lcPrev(s); window._noHud = true; let v = ""; try { v = SC[p.name](t, p); } finally { window._noHud = false; } return v; };
@@ -31,7 +31,7 @@ function lookCloser(t, s, o) { const tz = o.tz, e = eio((t - tz) / 1.0), op = ei
   if (op > 0) { const cx = lerp(o.fx, W_.x, op), cy = lerp(o.fy, W_.y, op), push = 1 + .055 * clamp((t - tz - 1) / Math.max(1, s.t1 - tz - 1));
     out += `<clipPath id="lcA"><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" rx="44"/></clipPath><clipPath id="lcB"><circle cx="${n2(cx)}" cy="${n2(cy)}" r="${n2(40 + 1160 * op)}"/></clipPath>
       <g clip-path="url(#lcB)"><g filter="url(#drop)"><rect x="${x0 - 14}" y="${y0 - 14}" width="${W_.w + 28}" height="${W_.h + 28}" rx="56" fill="#FFF8EA"/></g><g clip-path="url(#lcA)"><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" fill="${o.bgc || "#FFF3DC"}"/>
-        <g transform="translate(${W_.x} ${W_.y}) scale(${n2(push * 1000) / 1000})">${o.art(t)}</g></g><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" rx="44" fill="none" stroke="${P.ink}" stroke-width="5" opacity=".25"/></g>`
+        <g transform="translate(${W_.x} ${W_.y}) scale(${n2(push * (o.as || 1.06) * 1000) / 1000})">${o.art(t)}</g>${lcPeekAuto(t, s, o)}</g><rect x="${x0}" y="${y0}" width="${W_.w}" height="${W_.h}" rx="44" fill="none" stroke="${P.ink}" stroke-width="5" opacity=".25"/></g>`
       + (op < 1 ? `<circle cx="${n2(cx)}" cy="${n2(cy)}" r="${n2(40 + 1160 * op)}" fill="none" stroke="${P.sun}" stroke-width="${n2(14 * (1 - op))}"/>` : ""); }
   return out + (o.over ? OP(op, o.over(t)) : "") + lcTag(t, tz + .1) + lcVerdict(t, o.tv, o.verdict[0], o.verdict[1], o.verdict[2] || {}) + logo(t); }
 // the book's sentence inside the close-up (the cream strip at the top of the window)
@@ -45,3 +45,15 @@ const lcStep = (x, y, n, k = 1) => TF(x, y, k, `<g filter="url(#dropS)"><circle 
 const lcClock = (t, t0, t1, x, y) => OP(ramp(t, t0, .25) * (1 - ramp(t, t1, .25)), `<g transform="translate(${x} ${y})"><g filter="url(#dropS)"><rect x="-190" y="-40" width="380" height="80" rx="40" fill="${P.ink}"/></g><circle cx="-146" cy="0" r="27" fill="#fff"/><path d="M-146 0 L${n2(-146 + 19 * Math.sin((t - t0) * 7))} ${n2(-19 * Math.cos((t - t0) * 7))}" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/><path d="M-146 0 L${n2(-146 + 12 * Math.sin((t - t0) * .6))} ${n2(-12 * Math.cos((t - t0) * .6))}" stroke="${P.coral}" stroke-width="5" stroke-linecap="round"/>${T(32, 14, "speeded up", 40, "#fff", { w: 600 })}</g>`);
 // a small "slow motion" tag inside the window (EP10)
 const slowTag = (t, t0, x = 668, y = -350) => TF(x, y, spring(t, t0, .4), `<g filter="url(#dropS)"><rect x="-128" y="-30" width="256" height="60" rx="30" fill="${P.ink}"/></g><path d="M-98 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(16, 12, "slow motion", 32, "#fff", { w: 600 })}`);
+
+/* EP14 trial (teacher, 22 Nov: "insert one of the pet buddies in, focusing on its face, looking shocked / agreeing"; the buddies teach inside
+   the look-closers): the FACE of the buddy who speaks (or spoke last, or speaks next) peeks in from a lower corner of the panel, about a third
+   of its height, reacting on the beats by itself (lib.js reactAt: never frozen); a new speaker pops in with a squash. o.peekSide "l" / "r" or
+   a function of t; o.peekWho to force a buddy. Its bubble comes from autoSay (lib.js), beside the face. */
+function lcPeekAuto(t, s, o) { if (o.peek === false) return ""; const ids = TL.order.filter((id) => { const L = TL.lines[id]; return L && ["pip", "basil", "momo"].includes(L.who) && L.t >= s.t0 - .1 && L.t < s.t1; });
+  let who = o.peekWho, tin = s.t0 + 1.2, cur = null; if (!who) { if (!ids.length) return ""; for (const id of ids) if (TL.lines[id].t - .5 <= t) cur = id; if (!cur) cur = ids[0]; who = TL.lines[cur].who;
+    const k = ids.indexOf(cur); let j = k; while (j > 0 && TL.lines[ids[j - 1]].who === who) j--; tin = Math.max(tin, j > 0 ? TL.lines[ids[j]].t - .5 : tin); }
+  if (t < tin - .05) return ""; const W_ = LCW, x0 = W_.x - W_.w / 2, y1 = W_.y + W_.h / 2, side = typeof o.peekSide === "function" ? o.peekSide(t) : (o.peekSide || "l"), h = o.peekH || 520;
+  const up = eo((t - tin) / .45), x = side === "l" ? x0 + 200 : side === "c" ? W_.x : x0 + W_.w - 200, y = y1 + h * .42 + (1 - up) * h * .75, L = cur ? TL.lines[cur] : null;
+  const poses = [[tin, "surprised"]]; if (L) poses.push([L.t - .12, "sit"], [L.end + .2, L.text.includes("?") ? "thinking" : "cheer"]); if (o.peekEv) for (const e of o.peekEv) if (e[1] === who) poses.push([e[0], e[2]]); poses.sort((a, b) => a[0] - b[0]);
+  return buddy(who, x, y, h, t, { in: tin, poses, peek: true, tag: false, shadow: false, flip: side === "r", nohop: true }); }
