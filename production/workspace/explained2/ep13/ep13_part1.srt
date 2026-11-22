@@ -1,0 +1,559 @@
+1
+00:00:06,300 --> 00:00:07,679
+Last time, we asked:
+
+2
+00:00:07,699 --> 00:00:08,779
+A school bag!
+
+3
+00:00:09,079 --> 00:00:11,749
+Its strap must bend, and it must not tear.
+
+4
+00:00:12,029 --> 00:00:13,839
+Which material would you choose?
+
+5
+00:00:13,904 --> 00:00:14,974
+One, fabric.
+
+6
+00:00:16,564 --> 00:00:17,534
+Two, metal.
+
+7
+00:00:19,114 --> 00:00:20,114
+Three, wood.
+
+8
+00:00:21,962 --> 00:00:23,472
+Hold on to your answer!
+
+9
+00:00:25,944 --> 00:00:27,404
+You against the Buddies!
+
+10
+00:00:27,674 --> 00:00:28,904
+Lock in first.
+
+11
+00:00:29,174 --> 00:00:30,984
+One finger for every point.
+
+12
+00:00:31,274 --> 00:00:34,014
+A little butterfly is hiding in this video.
+
+13
+00:00:34,264 --> 00:00:35,504
+Can you spot it?
+
+14
+00:00:36,075 --> 00:00:37,225
+Today you'll learn:
+
+15
+00:00:37,422 --> 00:00:38,762
+What engineers do.
+
+16
+00:00:38,963 --> 00:00:40,243
+The design steps.
+
+17
+00:00:40,443 --> 00:00:41,813
+Design a school bag.
+
+18
+00:00:42,318 --> 00:00:43,258
+Are you ready?
+
+19
+00:00:43,698 --> 00:00:44,468
+Three!
+
+20
+00:00:44,848 --> 00:00:45,508
+Two!
+
+21
+00:00:45,878 --> 00:00:46,528
+One!
+
+22
+00:00:46,948 --> 00:00:47,668
+Go!
+
+23
+00:00:49,057 --> 00:00:51,587
+Round one: the question from last time!
+
+24
+00:00:51,867 --> 00:00:53,477
+Fabric, metal, or wood?
+
+25
+00:00:53,767 --> 00:00:55,077
+Show me your fingers!
+
+26
+00:00:58,549 --> 00:00:59,529
+Locked in!
+
+27
+00:00:59,657 --> 00:01:00,267
+Two!
+
+28
+00:01:00,447 --> 00:01:01,187
+Metal!
+
+29
+00:01:01,357 --> 00:01:02,757
+Nothing can tear that!
+
+30
+00:01:02,807 --> 00:01:03,487
+Three!
+
+31
+00:01:03,787 --> 00:01:04,947
+Wood is strong!
+
+32
+00:01:05,002 --> 00:01:05,592
+One.
+
+33
+00:01:06,012 --> 00:01:08,192
+My strap bends over my shoulder.
+
+34
+00:01:09,141 --> 00:01:10,291
+Look closer.
+
+35
+00:01:10,861 --> 00:01:13,221
+Three straps, over the back of a chair.
+
+36
+00:01:13,345 --> 00:01:15,465
+The fabric strap bends round it.
+
+37
+00:01:16,035 --> 00:01:17,605
+Fabric is flexible.
+
+38
+00:01:17,711 --> 00:01:19,511
+The metal bar stays straight.
+
+39
+00:01:20,071 --> 00:01:21,861
+The wooden stick stays straight.
+
+40
+00:01:22,431 --> 00:01:23,941
+No good on a shoulder!
+
+41
+00:01:27,353 --> 00:01:30,383
+Now the fabric strap lifts a bag full of books.
+
+42
+00:01:30,963 --> 00:01:31,913
+No tear!
+
+43
+00:01:32,503 --> 00:01:33,863
+Fabric is strong.
+
+44
+00:01:37,002 --> 00:01:38,302
+The answer is one.
+
+45
+00:01:38,602 --> 00:01:39,452
+Fabric!
+
+46
+00:01:39,732 --> 00:01:40,712
+One finger?
+
+47
+00:01:41,032 --> 00:01:42,232
+One finger up!
+
+48
+00:01:42,430 --> 00:01:43,160
+Oops.
+
+49
+00:01:43,240 --> 00:01:44,860
+A metal bar on my shoulder?
+
+50
+00:01:45,080 --> 00:01:45,900
+Ouch!
+
+51
+00:01:46,029 --> 00:01:47,249
+We did not guess.
+
+52
+00:01:47,519 --> 00:01:48,999
+We checked the properties.
+
+53
+00:01:49,269 --> 00:01:51,159
+That is what engineers do!
+
+54
+00:01:52,109 --> 00:01:53,799
+So we are engineers too!
+
+55
+00:01:53,846 --> 00:01:56,476
+Engineers design and make new products.
+
+56
+00:01:56,838 --> 00:01:57,988
+Say it with me!
+
+57
+00:01:58,702 --> 00:02:03,022
+Knowing the physical properties of a material is important when designing and
+
+58
+00:02:03,042 --> 00:02:04,632
+making new products.
+
+59
+00:02:08,084 --> 00:02:09,874
+Engineers follow a plan.
+
+60
+00:02:10,154 --> 00:02:12,174
+First: what is the object for?
+
+61
+00:02:12,826 --> 00:02:13,956
+Look closer.
+
+62
+00:02:14,566 --> 00:02:15,656
+Books go in.
+
+63
+00:02:16,236 --> 00:02:18,906
+A school bag is for carrying books to school.
+
+64
+00:02:21,226 --> 00:02:22,706
+Then: its parts.
+
+65
+00:02:23,356 --> 00:02:24,216
+Straps.
+
+66
+00:02:24,786 --> 00:02:25,716
+A body.
+
+67
+00:02:26,306 --> 00:02:27,196
+A zip.
+
+68
+00:02:27,766 --> 00:02:28,726
+A base.
+
+69
+00:02:28,842 --> 00:02:32,462
+And what each part must do: its intended use.
+
+70
+00:02:33,172 --> 00:02:34,812
+The straps carry the bag.
+
+71
+00:02:35,412 --> 00:02:37,092
+The body holds the books.
+
+72
+00:02:37,672 --> 00:02:39,532
+The zip opens and closes.
+
+73
+00:02:40,102 --> 00:02:41,872
+The base sits on the floor.
+
+74
+00:02:45,097 --> 00:02:47,117
+Fabric is flexible and strong.
+
+75
+00:02:47,297 --> 00:02:49,587
+So I will make every part of fabric!
+
+76
+00:02:49,708 --> 00:02:51,268
+Something is not right.
+
+77
+00:02:51,538 --> 00:02:53,718
+If you can spot it, cross your arms.
+
+78
+00:02:53,998 --> 00:02:54,958
+Hold on!
+
+79
+00:03:00,371 --> 00:03:01,501
+Arms crossed?
+
+80
+00:03:01,771 --> 00:03:02,931
+One finger up!
+
+81
+00:03:03,221 --> 00:03:05,011
+Each part has its own use.
+
+82
+00:03:05,281 --> 00:03:07,121
+So we choose part by part.
+
+83
+00:03:07,474 --> 00:03:08,414
+Hold on, Pip!
+
+84
+00:03:08,594 --> 00:03:10,854
+My bag sits on a wet canteen floor!
+
+85
+00:03:11,278 --> 00:03:12,858
+Now we draw the design.
+
+86
+00:03:13,148 --> 00:03:14,258
+Look closer.
+
+87
+00:03:18,568 --> 00:03:19,908
+Last, we choose.
+
+88
+00:03:20,478 --> 00:03:21,838
+Part by part.
+
+89
+00:03:21,895 --> 00:03:23,465
+The base: plastic.
+
+90
+00:03:24,045 --> 00:03:26,185
+The drop of water stays on top.
+
+91
+00:03:26,725 --> 00:03:28,575
+Plastic is waterproof.
+
+92
+00:03:28,638 --> 00:03:30,138
+The zip: metal.
+
+93
+00:03:30,748 --> 00:03:32,828
+Open, close, open, close.
+
+94
+00:03:33,428 --> 00:03:34,448
+No break.
+
+95
+00:03:35,048 --> 00:03:36,318
+Metal is strong.
+
+96
+00:03:36,382 --> 00:03:38,762
+The straps and the body: fabric.
+
+97
+00:03:39,332 --> 00:03:40,872
+Flexible and strong.
+
+98
+00:03:44,019 --> 00:03:44,739
+Oh!
+
+99
+00:03:44,989 --> 00:03:47,409
+A fabric base would soak up the water!
+
+100
+00:03:47,839 --> 00:03:49,089
+Say it with me!
+
+101
+00:03:49,801 --> 00:03:53,411
+The materials are selected for the different functions of the parts based
+
+102
+00:03:53,431 --> 00:03:55,061
+on their physical properties.
+
+103
+00:03:57,691 --> 00:03:58,581
+Be a book!
+
+104
+00:03:58,861 --> 00:03:59,851
+Shrink down.
+
+105
+00:04:00,131 --> 00:04:01,061
+Quietly.
+
+106
+00:04:03,343 --> 00:04:05,763
+You are a book, inside the school bag.
+
+107
+00:04:06,426 --> 00:04:07,166
+Zip!
+
+108
+00:04:07,966 --> 00:04:09,916
+The metal zip closes above you.
+
+109
+00:04:10,579 --> 00:04:12,539
+The fabric straps pull tight.
+
+110
+00:04:13,319 --> 00:04:14,359
+Up you go!
+
+111
+00:04:15,017 --> 00:04:15,737
+Bump!
+
+112
+00:04:16,577 --> 00:04:17,667
+A wet floor.
+
+113
+00:04:18,457 --> 00:04:20,727
+The plastic base keeps the water out.
+
+114
+00:04:21,497 --> 00:04:22,757
+You stay dry!
+
+115
+00:04:24,332 --> 00:04:25,792
+Show me your score hand!
+
+116
+00:04:26,072 --> 00:04:27,462
+One finger or more?
+
+117
+00:04:27,782 --> 00:04:29,142
+You beat the Buddies.
+
+118
+00:04:29,412 --> 00:04:30,442
+Two fingers?
+
+119
+00:04:30,722 --> 00:04:31,732
+High five!
+
+120
+00:04:32,304 --> 00:04:33,964
+Did you spot the butterfly?
+
+121
+00:04:34,244 --> 00:04:36,134
+It was on the plant by the window!
+
+122
+00:04:36,404 --> 00:04:37,704
+Tell someone at home.
+
+123
+00:04:38,432 --> 00:04:40,632
+Let's read today's key words together!
+
+124
+00:04:40,922 --> 00:04:41,682
+Ready?
+
+125
+00:04:41,969 --> 00:04:42,939
+Engineers.
+
+126
+00:04:44,504 --> 00:04:45,364
+Design.
+
+127
+00:04:46,734 --> 00:04:48,024
+Intended use.
+
+128
+00:04:49,727 --> 00:04:50,667
+Well done!
+
+129
+00:04:51,464 --> 00:04:52,674
+Our design is done!
+
+130
+00:04:52,824 --> 00:04:54,427
+Let's make a thousand bags!
+
+131
+00:04:54,447 --> 00:04:55,707
+Not yet, Basil!
+
+132
+00:04:56,007 --> 00:04:57,767
+Will the new strap really hold?
+
+133
+00:04:58,057 --> 00:04:59,687
+Engineers do not guess.
+
+134
+00:04:59,957 --> 00:05:00,957
+They test!
+
+135
+00:05:01,016 --> 00:05:02,606
+Find out in Part Two!
+
+136
+00:05:03,766 --> 00:05:04,867
+Say it with us!
+
+137
+00:05:05,667 --> 00:05:06,417
+Ready?
+
+138
+00:05:06,541 --> 00:05:07,201
+One!
+
+139
+00:05:07,541 --> 00:05:08,241
+two!
+
+140
+00:05:08,546 --> 00:05:09,721
+Now you know!

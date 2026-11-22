@@ -124,7 +124,7 @@ SC.holdon = (t, s) => { const a = "g901", b = "g902", c = "g903", r0 = MK("ring0
     + (ring ? OP(1 - ss(LE(c) + .1, LE(c) + .4, t), TF(RG[0], RG[1], spring(t, tX, .4), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 24, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: pic + (t < bell + .3 ? OP(.85, TF(RG[0], RG[1] + 40, .38, crossedArms())) : "") })}</g>`)
       + labels + youPill(RG[0] - 250, RG[1] + 120, 1.0) + tpill(RG[0], RG[1] + RR + 60, "cross your arms", 30, P.ink, "#fff")) : "")
     + stamp(t, tH, 900, 420, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1680, 300, "+1", "arms crossed") + HUD(t); };
-SC.wetfloor = (t, s) => { const tw_ = MK("wetpic"), [px, pd] = slideX(t, tw_, .55, 2500, 1250, 1010);
+SC.wetfloor = (t, s) => { const tw_ = MK("wetpic"), [px, pd] = slideX(t, tw_, .55, 2500, 890, 1010);
   return VD(t, { bag: "full" }) + TF(BRD[0], BRD[1], BRD[2], planBoard(t)) + (t >= tw_ ? pd + TF(px, 1010, 1, easelS(TF(0, 0, .96, wetFloorPic(t)), 470, 330)) : "")
     + buddy("basil", 300, 1060, 280, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT("g904") + .6, "sit"]] }) + say("g904", 560, 430, t, { size: 40, tail: -160, maxW: 520 }) + HUD(t); };
 
