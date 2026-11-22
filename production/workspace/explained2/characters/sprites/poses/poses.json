@@ -282,12 +282,12 @@
    "file": "poses/basil_c_oops.png",
    "src": "basil_c_oops.jpg",
    "anchor": [
-    550.9,
+    551.7,
     815.0
    ],
-   "scale": 0.9838,
+   "scale": 0.9975,
    "size": [
-    879,
+    878,
     839
    ]
   },
@@ -295,12 +295,12 @@
    "file": "poses/basil_c_waving.png",
    "src": "basil_c_waving.jpg",
    "anchor": [
-    550.9,
+    563.4,
     815.0
    ],
-   "scale": 0.9838,
+   "scale": 1.0193,
    "size": [
-    984,
+    970,
     839
    ]
   },
@@ -308,12 +308,12 @@
    "file": "poses/basil_c_thinking.png",
    "src": "basil_c_thinking.jpg",
    "anchor": [
-    559.3,
+    564.6,
     815.0
    ],
-   "scale": 0.9838,
+   "scale": 1.0193,
    "size": [
-    840,
+    860,
     839
    ]
   },
@@ -321,12 +321,12 @@
    "file": "poses/basil_c_surprised.png",
    "src": "basil_c_surprised.jpg",
    "anchor": [
-    559.3,
+    567.2,
     815.0
    ],
-   "scale": 0.9838,
+   "scale": 1.0193,
    "size": [
-    840,
+    931,
     839
    ]
   },

@@ -113,3 +113,10 @@ Each one is a full body, sitting, with the same size of head and body as the sit
 - **Still to paint:** pointing.
 - **Basil pointing** (second try, sent mid-task, not saved): lighter teal like his sitting set, one arm: good; re-send.
 - **Disk note:** the cloud disk filled up on 22 Nov; EP1–EP11 render leftovers were deleted with the teacher's OK (finals kept).
+
+## Status, 22 Nov, later (Basil)
+
+- **Basil is one shade now:** the teacher repainted oops, waving, thinking and surprised in the lighter teal. With pointing,
+  all five poses are cut out and match (`poses/basil_c_*.png`; the older darker four are in git history).
+- **Still needed for Basil:** sitting set mouth closed, half open, wide open (blink is in), and cheer.
+- **Still needed for Momo:** talking set small "o" and big "o" (closed and blink are in), and pointing.

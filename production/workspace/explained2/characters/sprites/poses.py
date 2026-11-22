@@ -29,7 +29,7 @@ POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
   "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None)}
 SITREF = {"basil_c": "basil", "momo_c": "momo"}   # which sitting sprite sets the scale and foot line
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
-HOLES = {("pip", "waving"): [(150, 590)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
+HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
 ADJ = {}      # (buddy, pose): extra scale, set by eye from qa/poses_<buddy>.png
 DX = {}       # (buddy, pose): anchor nudge in source px
