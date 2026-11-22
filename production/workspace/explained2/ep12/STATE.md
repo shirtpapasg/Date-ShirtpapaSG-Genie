@@ -355,7 +355,7 @@ match: `NOTES_REVIEW_V3.md`. Previews for the teacher (nothing uploaded; the liv
   align "Here's" / "squirrel's"; the mouth track is from the audio). script.py and p3_ep12_script.md (rows + section 12 note) updated.
   To stay near 5:20, picture-only waits were trimmed: P1 the title's hold 2.4 -> 1.8 s, the cliffhanger's end .9 -> .6, the reveal's pre
   .6 -> .4; P2 the car park's opening 2.0 -> 1.3 s, the journey's end 1.5 -> 1.2, the reveal's pre .5 -> .3, the fact shortened.
-  **Lengths: Part 1 5:20.1 (320.1 s), Part 2 5:21.0 (321.0 s).** All marks after the reveal moved with the timeline (the picture and the
+  **Rendered: `ep12_part1.mp4` 320.13 s (5:20.1), `ep12_part2.mp4` 321.03 s (5:21.0), both -16.0 LUFS; 1920x1080 30 fps.** All marks after the reveal moved with the timeline (the picture and the
   sound key on marks, so they moved together); `.srt` rebuilt by finish.sh (no overlaps).
 - **New / changed files:** `v3.js` (new: fun-fact cards and nests, `lcPeek`, `riders`, `partTag` / `PARTC`, `numBadge`), `lib.js` (`reactAt`
   never-frozen reactions, `jolt` / `JOLT` / `impactFX` / `faceCam`, ring drains in steps and the number pops, `SHELF_WIN`), `common.js`
@@ -367,3 +367,10 @@ match: `NOTES_REVIEW_V3.md`. Previews for the teacher (nothing uploaded; the liv
   pop and sparkle, the impact thuds, the splash). `spr/` rebuilt with `prep_sprites.py` (Momo's and Basil's back views).
 - **Sound:** the place bed (`song.js`, after "ambiences"): measured on the stems about 15 dB under the voice in the walkway (AMBK 12),
   ducked under speech; both mixes -16.0 LUFS. A human should listen once.
+- **Countdowns measured in the renders** (`qa/countdown_p*.jpg`, NOTES_REVIEW_V3): numbers step once a second on the tock, bell on 0
+  (0-3 ms). The game bed now stops for every countdown (`song.js`): its 104 BPM beat was what made the rhythm feel off.
+- **Render notes:** Part 2's first render died with the disk full (22 Nov, about 07:50; the coordinator freed space); re-rendered in full,
+  every chunk checked with ffprobe (33 x 10 s). Chunks deleted after muxing. Part 1's HOLD ON! chunks (180-210 s) were re-rendered once for
+  the clue line that crossed the number badge.
+- **Not uploaded.** `upload_v2.json` is the live set; a v3 upload needs the teacher's OK, then an `upload_v3.json` with `replaces` the v2
+  IDs (vqSehdxTCg8, D2U_Zom1Wzs) and `retire_old`.

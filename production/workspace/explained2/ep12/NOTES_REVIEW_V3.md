@@ -64,7 +64,14 @@ rendered video just before / just after every whole second).
 | `liz`, `dare` | dimmed replay; duplicate card row -> circle + FUN FACT (squirrel's nest); badges on the bag boards | EP1 reveal / dare | clear |
 
 ## Countdowns measured (in the rendered video)
-(filled in after the render: see below)
+Measured on `ep12_part1.mp4` / `ep12_part2.mp4` (`qa/countdown_p1.jpg`, `qa/countdown_p2.jpg`: the number badge 50 ms before and 70 ms after
+every whole second). In all four countdowns (P1 Round 1 3 s, P1 HOLD ON! 5 s, P2 Round 1 6 s, P2 Showdown 6 s) the number steps exactly once
+per second, on the second (3-2-1-0, 5-4-3-2-1-0, 6-...-0), popping as it changes; 0 shows on the bell. Audio: every whole-second "tock" and the
+bell peak within 0-3 ms of the number's change (the very first tick of each sits under the game bed's last note 75 ms earlier). The ring
+drains one step per second, eased over the first .35 s after each tock.
+**Found and fixed while measuring:** the game bed (104 BPM: a shaker every .29 s) kept playing under the countdowns, so the ear heard its beat,
+not the ring's seconds (the "rhythm is off" fault). The bed now stops for every countdown (ring start -> bell + .45 s) and the whole-second
+tick is a loud "tock" with the in-between speed-up ticks soft (`song.js`).
 
 ## Not done / left for the teacher
 - Pip's back view is not used (not yet delivered); Basil's back view arrived late and is not used in EP12 (Momo's is).
