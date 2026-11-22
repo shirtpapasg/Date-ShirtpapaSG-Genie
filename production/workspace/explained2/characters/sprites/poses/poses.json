@@ -343,6 +343,19 @@
     839
    ]
   },
+  "cheer": {
+   "file": "poses/basil_c_cheer.png",
+   "src": "basil_c_sheet_sit_cheer.jpg",
+   "anchor": [
+    515.8,
+    815.0
+   ],
+   "scale": 1.9411,
+   "size": [
+    900,
+    839
+   ]
+  },
   "_sit": {
    "body_h": 791,
    "hips_above_feet": 6

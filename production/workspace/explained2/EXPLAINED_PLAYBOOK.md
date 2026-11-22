@@ -276,6 +276,11 @@ New Singapore names get a test clip for the teacher before use.
   each episode before upload? (5) swap the three pilot thumbnails onto EP9 P2, EP10 P1, EP11 P1? (6) the 17 questions on buddies,
   scenes and depth (buddies in scenes, more poses, real places, camera movement, background life, lighting, depth, pace of releases).
 
+- **The cast from EP14 and for P4 (teacher, 22 Nov):** Momo coral, Pip grey, Basil teal (the teacher's own coloured paintings;
+  `characters/COLOUR_PAINTING_LIST.md`). P4 keeps the same three buddies, no new main characters: "The P4 scripts should give
+  the buddies sharper jokes and tougher questions, not new faces." A guest character only where it teaches, for one or two
+  episodes (full reasoning: 2nd brain `Plans/videos/P4-series-plan.md`, "Cast").
+
 ## 9. Checklist before any episode goes live
 - [ ] The chain of questions holds from hook to the next episode; each answer opens the next question.
 - [ ] Each key idea has a look-closer that shows the WHY from the child's seat, ends on a verdict, and links to the child's life.

@@ -23,7 +23,8 @@ POSES = {  # buddy: {pose: (file, crop or None)}
 }
 POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on grey Basil's sitting scale until his coloured sitting set is cut
   "oops": ("basil_c_oops.jpg", None), "waving": ("basil_c_waving.jpg", None), "thinking": ("basil_c_thinking.jpg", None),
-  "surprised": ("basil_c_surprised.jpg", None), "pointing": ("basil_c_pointing.jpg", None)}
+  "surprised": ("basil_c_surprised.jpg", None), "pointing": ("basil_c_pointing.jpg", None),
+  "cheer": ("basil_c_sheet_sit_cheer.jpg", (512, 505, 1024, 950))}   # from a 2x2 sheet: small, upscaled 2x (softer)
 POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
   "oops": ("momo_c_oops.jpg", None), "waving": ("momo_c_waving.jpg", None), "thinking": ("momo_c_thinking.jpg", None),
   "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None)}
