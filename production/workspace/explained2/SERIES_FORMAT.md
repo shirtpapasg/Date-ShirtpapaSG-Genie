@@ -314,6 +314,10 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   Which is flexible, strong and waterproof? Where's the arrows, or you can even consider colour coding").** Property chips and tags
   never float free: each sits beside the part it belongs to, joined by an arrow or line, and parts are colour-coded (the part, its
   label and its chips share one colour). `reference/chips_bad_ep13_unlinked_properties.webp`.
+- **Feel the big moments (teacher, 2026-11-22, on EP12's "a hard knock": "this does not give me the 'hard knock' vibe. You can
+  actually make use of Pip, Momo or Basil, showing an angry / shocked face!").** Every impact or surprise beat is felt: a quick camera
+  jolt, an impact flash and burst timed to the sound, and a close-up of a buddy's face reacting big (shocked, wincing, grumpy), then
+  the follow-up feeling (relief, a cheer). A label alone is never enough. `reference/impact_bad_ep12_hardknock_flat.webp`.
 - **Objects never float or fly.**
   - Things travel low along the ground in small hops with dust puffs, or are carried or slid by the buddies.
   - Nothing hangs above the buddies' heads.
