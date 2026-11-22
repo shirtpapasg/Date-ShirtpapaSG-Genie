@@ -1,0 +1,230 @@
+{
+ "phonemes": {
+  "engineers": "\u02cc\u025bnd\u0292\u026an\u02c8\u026a\u0279z",
+  "intended use": "\u026ant\u02c8\u025bnd\u1d7bd j\u02c8u\u02d0s",
+  "diversity": "da\u026av\u02c8\u025c\u02d0s\u1d7b\u027ei",
+  "extinct": "\u025bkst\u02c8\u026a\u014bkt",
+  "salamander": "s\u02c8\u00e6l\u0250m\u02cc\u00e6nd\u025a",
+  "macaw": "m\u02c8\u00e6k\u0254\u02d0",
+  "mcaw": "m\u0259k\u02c8\u0254\u02d0"
+ },
+ "takes": [
+  {
+   "take": "Basil, goal card: \"What engineers do.\"",
+   "id": "g402",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"That is what engineers do!\"",
+   "id": "g701",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo: \"So we are engineers too!\"",
+   "id": "g702",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"Engineers design and make new products.\"",
+   "id": "g703",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"Engineers follow a plan.\"",
+   "id": "g801",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"Engineers do not guess.\"",
+   "id": "g1402",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, Part 2 recap: \"like engineers\"",
+   "id": "j101",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"After designing, engineers test their product.\"",
+   "id": "j505",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, read-along: \"Engineers.\"",
+   "id": "hk_engineers",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, read-along",
+   "id": "uk_engineers",
+   "word": "engineers",
+   "heard": "wrong wwr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, read-along",
+   "id": "uk_engineers",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, read-along",
+   "id": "uk_engineers",
+   "word": "engineers",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, look-closer: \"its intended use\"",
+   "id": "g804",
+   "word": "use",
+   "heard": "? ???",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Heart, HOLD ON!: \"Each part has its own use.\"",
+   "id": "g903",
+   "word": "use",
+   "heard": "right rrr",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Heart, read-along: \"Intended use.\"",
+   "id": "hk_intended_use",
+   "word": "use",
+   "heard": "? ???",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Pip, read-along: \"Intended use.\"",
+   "id": "uk_intended_use",
+   "word": "use",
+   "heard": "right rrw",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Basil, read-along: \"Intended use.\"",
+   "id": "uk_intended_use",
+   "word": "use",
+   "heard": "wrong www",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Momo, read-along: \"Intended use.\"",
+   "id": "uk_intended_use",
+   "word": "use",
+   "heard": "right rrw",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Basil, Mark Sentence 3.30: \"the intended use of the object\"",
+   "id": "j802",
+   "word": "use",
+   "heard": "right rrr",
+   "tail_voiced": 1.0
+  },
+  {
+   "take": "Heart, the strip D3: \"maintain diversity\"",
+   "id": "j1002",
+   "word": "diversity",
+   "heard": "right ?r?",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, read-along: \"Diversity.\"",
+   "id": "hk_diversity",
+   "word": "diversity",
+   "heard": "right r??",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, read-along",
+   "id": "uk_diversity",
+   "word": "diversity",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, read-along",
+   "id": "uk_diversity",
+   "word": "diversity",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, read-along",
+   "id": "uk_diversity",
+   "word": "diversity",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, Mark Sentence 1.22: \"will become extinct\"",
+   "id": "j1004",
+   "word": "extinct",
+   "heard": "wrong www",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, read-along: \"Extinct.\"",
+   "id": "hk_extinct",
+   "word": "extinct",
+   "heard": "right r??",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, read-along",
+   "id": "uk_extinct",
+   "word": "extinct",
+   "heard": "wrong www",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, read-along",
+   "id": "uk_extinct",
+   "word": "extinct",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, read-along",
+   "id": "uk_extinct",
+   "word": "extinct",
+   "heard": "right rrw",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, zoo map: \"Frog and salamander.\"",
+   "id": "j902",
+   "word": "salamander",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, zoo map: \"Flamingo, macaw\" (spoken as \"mcaw\")",
+   "id": "j902",
+   "word": "macaw",
+   "heard": "right rrr",
+   "tail_voiced": null
+  }
+ ]
+}
