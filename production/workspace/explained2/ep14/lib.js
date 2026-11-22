@@ -235,7 +235,7 @@ function ringTimer(cx, cy, frac, secs, t, o = {}) { const R = o.R || RING_R, C =
   ${secs === null ? "" : `<g transform="translate(${cx} ${cy + R}) scale(${n2((1 + .12 * tick) * (o.chg > -5 ? 1 + .45 * Math.exp(-Math.max(0, t - o.chg) * 9) * (t >= o.chg ? 1 : 0) : 1) * (o.ns || 1))})" filter="url(#dropS)"><circle r="54" fill="url(#gSun)"/><circle r="54" fill="none" stroke="${P.night}" stroke-width="8"/>${T(0, 24, secs, 70, P.ink)}</g>`}`; }
 // ring ticks: soft wood ticks that speed up over the last 3 s (the same list drives the sound)
 function ringTicks(t0, dur) { const out = []; for (let b = 0; b < dur; b++) { const left = dur - b, div = left > 3 ? 1 : left > 1 ? 2 : 4; for (let j = 0; j < div; j++) out.push(t0 + b + j / div); } return out; }
-function ringState(t, t0, dur) { const e = t - t0, b = Math.floor(e), frac = clamp(1 - (b + eo((e - b) / .35)) / dur), secs = Math.max(0, Math.ceil(dur - e - 1e-6)); let tick = 0; if (t >= t0 && t < t0 + dur) for (const tt of ringTicks(t0, dur)) tick = Math.max(tick, pulse(t, tt, .01, .12));   // v3: the ring drains one step per second, ON the tick, and the number pops as it changes
+function ringState(t, t0, dur) { const e = t - t0, b = Math.floor(e), frac = clamp(lerp(Math.min(dur, dur - b + 1), dur - b, eo((e - b) / .35)) / dur), secs = Math.max(0, Math.ceil(dur - e - 1e-6)); let tick = 0; if (t >= t0 && t < t0 + dur) for (const tt of ringTicks(t0, dur)) tick = Math.max(tick, pulse(t, tt, .01, .12));   // v3: the ring drains one step per second, ON the tick, and the number pops as it changes
   return { frac: t < t0 ? 1 : frac, secs: t < t0 ? dur : secs, tick, chg: t >= t0 && t <= t0 + dur + .5 ? t0 + Math.min(dur, Math.max(0, b)) : -9 }; }
 // a choice card (left blue / right orange / purple)
 function choiceCard(x, y, kind, label, sub, o = {}) { const g = { green: ["gGreen", "#1F8A4C"], blue: ["gBlue", P.blueDeep], orange: ["gOrange", P.orangeDeep], purple: ["gPurple", "#6B3FD0"] }[kind], flip = o.flip || 1, w = o.w || 480, h = o.h || 430, pls = o.pulse || 0, dim = o.dim === undefined ? 1 : o.dim, lit = o.lit || 0;
@@ -317,5 +317,6 @@ function autoSay(t) { if (window._noAuto) return ""; let out = ""; const BP = wi
     let by = b.y - b.h * 1.02 - bh / 2 - 30, bx = b.x + dir * b.h * .35;
     if (b.peek && Math.abs(b.x - 960) < 10) { bx = 520; by = 900; }
     if (by < 140 + bh / 2) { by = Math.max(140 + bh / 2, b.y - b.h * .8); bx = b.x + dir * (b.h * .45 + maxW / 2 + 40); }
+    const ov = (window._BUBAT || {})[L.who] || (window._BUBAT || {})['*']; if (ov) { bx = ov[0]; by = ov[1]; }
     bx = clamp(bx, 360, 1560); out += say(id, bx, by, t, { size, maxW, tail: clamp(b.x - bx, -260, 260) * (by > b.y - b.h * .9 ? 0 : 1) }); }
   return out; }

@@ -92,7 +92,7 @@ SC.waitw = (t, s) => { const L = "j701", tP = LT(L) - .1, dive = ei((t - (s.t1 -
     + bp("basil", 1740, 380, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "cheer"]], wave: true })
     + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a chick!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, CREAM14, 960, 540); };
 const wingTips = (t, t0, t1) => { const a = ramp(t, t0, .5) * (1 - ramp(t, t1, .4)); if (a < .02) return ""; const fl = 6 * Math.sin(t * 7);
-  return OP(a, [-1, 1].map((sd) => `<g transform="translate(${960 + sd * 330} ${n2(1110 - 8 * Math.abs(Math.sin(t * 3)))}) scale(${sd} 1) rotate(${n2(-20 + fl)})"><path d="M0 0 Q-40 -150 40 -190 Q60 -120 70 -40 Q40 -10 0 0z" fill="#F7D27A" stroke="#C99A3A" stroke-width="6"/><path d="M14 -60 q20 -40 34 -96 M30 -40 q16 -30 28 -70" stroke="#E3AE52" stroke-width="5" fill="none" stroke-linecap="round"/></g>`).join("")); };
+  return OP(a, [-1, 1].map((sd) => `<g transform="translate(${960 + sd * 360} ${n2(1120 - 10 * Math.abs(Math.sin(t * 3)))}) scale(${sd * 1.2} 1.2) rotate(${n2(-14 + fl)})"><path d="M-60 0 Q-96 -110 -40 -176 Q-6 -210 30 -186 Q22 -160 48 -150 Q40 -122 66 -112 Q58 -84 82 -72 Q90 -30 70 0z" fill="#FBDC70" stroke="#C99A3A" stroke-width="6" stroke-linejoin="round"/><path d="M-30 -40 Q-36 -110 -6 -150 M4 -30 Q4 -90 30 -118 M30 -24 Q36 -62 58 -80" stroke="#E8B54A" stroke-width="5" fill="none" stroke-linecap="round"/><ellipse cx="-30" cy="-120" rx="14" ry="26" fill="#fff" opacity=".35" transform="rotate(20 -30 -120)"/></g>`).join("") + youPill(960, 1010 - 6 * Math.abs(Math.sin(t * 3)), 1.3)); };
 SC.shrink = (t, s) => { const e = (S2) => MK(S2), rp = (w, extra) => [[e("jcrack"), "surprised"], [e("jout") + .2, "cheer"], [e("jrise") + .3, w === "basil" ? "pointing" : "thinking"], [e("jnest") + .2, "sit"], [e("jnew") + .1, "cheer"], ...(extra || [])];
   return chickJourney(t, s) + wingTips(t, e("jout") - .2, e("jadult")) + riders(t, s, { tin: e("jegg") - .4, h: 170, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] }, poses: { pip: rp("pip"), basil: rp("basil"), momo: rp("momo") }, jolts: [e("jcrack"), e("jnew")] })
     + feelTag(t, e("jegg") + .3, e("jhatch") - .1, "You: a chick · inside an egg", 160) + feelTag(t, e("jout"), e("jgrow") - .1, "you hatch", 160) + feelTag(t, e("jrise"), e("jadult") - .1, "you grow", 160)
@@ -135,7 +135,7 @@ SC.fix = (t, s) => { const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(
 
 /* 10 · [LOOK CLOSER] three chickens together at the water dish (garden14.js hensArt); Mark Sentence 2 (Momo): 4.1, third sentence ("live" =
    "leev"), with the tag ensure = make sure; under the card: the three chickens */
-SC.lchens = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1010, fy: 930, art: hensArt, bgc: "#CDEBB8", verdict: [`THE SAME KIND, AGAIN AND AGAIN`, GOODC], tv: MK("v_hens"), set: (tt) => G(tt, {}, [1.05, 1000, 800]), peekSide: "r", peekH: 470,
+SC.lchens = (t, s) => (window._BUBAT = { '*': [1480, 260] }, "") + lookCloser(t, s, { tz: s.t0, fx: 1010, fy: 930, art: hensArt, bgc: "#CDEBB8", verdict: [`THE SAME KIND, AGAIN AND AGAIN`, GOODC], tv: MK("v_hens"), set: (tt) => G(tt, {}, [1.05, 1000, 800]), peekSide: "r", peekH: 470,
   over: (tt) => finePrint(tt, s.t0 + 1.2, HEN_RULE, 420, 1046) });   // (the small print at the bottom: at the top it hid the label "a grandmother hen")
 const threeHens = (t) => [[-170, 3, .5, "#D9C7A8"], [10, 3, .5, null], [170, 0, 1.1, null]].map(([x, age, k, pale], i) => TF(x, 0, k, chicken14(t, { age, act: "peck", ph: i * 1.3, patch: i === 1 }))).join("")
   + T(-170, 50, "grandmother hen", 22, "#fff", { w: 600 }) + T(10, 50, "mother hen", 22, "#fff", { w: 600 }) + T(170, 50, "chick", 22, "#fff", { w: 600 });
@@ -151,19 +151,20 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 52, x: 62
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1, tR = W(L, HIDDEN[0]) + .1;
   return lizReveal(t, s, L, VG(t, { lady: { open: ss(tR + .3, tR + .6, t) * (1 - ss(tR + 1.8, tR + 2.2, t)) } }), LADY[0], LADY[1], tq, "It was on a leaf of the young tree!", 0, 170, 76, 3.4, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 560, qy: 770, tx: 560, ty: 900, tell: "j1204",
-    fact: { id: "j1203", w: 820, items: [["ff_larva", "larva", ffLarva], ["ff_pupa", "pupa", ffPupa], ["ff_adult", "ladybird", ffLady]], cols: ["#3B3550", "#C9741E", "#D8352A"] } }); };
+    fact: { id: "j1203", w: 820, items: [["ff_larva", "larva", ffLarva], ["ff_pupa", "pupa", ffPupa], [W("j1203", "ladybird"), "ladybird", ffLady]], cols: ["#3B3550", "#C9741E", "#D8352A"] } }); };
 
 /* 13 · the dare for Episode 15: a mango, one big seed. ONE set of three big numbered picture boards (garden14.js PIC.mangoA / B / C), the ?,
    the banner; Basil big at the left (a juicy squish on "mango", he rubs his tummy), Pip and Momo at the right */
-const DRX = [700, 1080, 1460];
+const DRX = [640, 990, 1340];
 SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "what") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, tM = W(a, "mango") - .1;
   return G(t, {}, [1.04, 1080, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>`
     + ["mangoA", "mangoB", "mangoC"].map((nm, i) => { const t0 = MK("dareIn") + .5 + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, DRX[i], 860);
-      return d + TF(x, 640, 1 + .05 * pl, picBoard(nm, 0, 0, 1, { sc: 1.0, lab: NEXT_CARDS[i].toLowerCase(), size: 34, id: "dr" + i, t })) + numBadge(t, tc[i] - .05, x - 150, 500, i + 1, .9); }).join("")
+      return d + TF(x, 640, .9 * (1 + .05 * pl), picBoard(nm, 0, 0, 1, { sc: 1.0, lab: NEXT_CARDS[i].toLowerCase(), size: 34, id: "dr" + i, t })) + numBadge(t, tc[i] - .05, x - 135, 514, i + 1, .9); }).join("")
     + TF(1080, 150, spring(t, s.t0 + .2, .45), tpill(0, 0, "NEXT · What will the seed grow into first?", 46, P.ink, P.sun, { w: 700 }))
-    + qMark(t, tQ, 1080, 330, 44) + (t >= tL ? TF(1080, 990, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
+    + qMark(t, tQ, 990, 330, 44) + (t >= tL ? TF(990, 990, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
     + bp("basil", 260, 500, t, { in: s.t0 + .1, poses: [[s.t0, "cheer"], [tM + .3, "sit"], [tL, "cheer"]], jump: [[tM + .1, 22]], nohop: true })
-    + bp("pip", 1790, 340, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "thinking"], [tc[2] + .3, "pointing"]] }) + HUD(t); };
+    + bp("momo", 1575, 330, t, { flip: true, in: s.t0 + .2, poses: [[s.t0, "thinking"], [tM + .3, "surprised"], [tc[1] + .3, "pointing"], [tL + .2, "cheer"]], jump: [[tM + .15, 20]] })
+    + bp("pip", 1800, 320, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "thinking"], [tc[2] + .3, "pointing"]] }) + HUD(t); };
 
 /* 15 · "Now you know!": the board CYCLE CHECK with its two closed rings, their arrows going round, centred between the buddies */
 SC.nyk = (t, s) => nykScene(t, s, TF(860, 1040, .5, cycleBoard(t, { two: true })), { bx: [220, 1720, 1400], hx: 470 });

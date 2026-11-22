@@ -63,8 +63,8 @@ function choiceCard3(n, label, pic, o = {}) { const w = o.w || 320, h = o.h || 3
 function clue3(x, y, txt, k, size = 58, maxW = 560) { if (k < .02) return ""; const ls = wrap(txt, size, maxW, 700), w = Math.max(...ls.map((l) => tw(l, size, 700))) + size * 1.1, h = ls.length * size * 1.12 + size * .62;
   return TF(x, y, k, `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(Math.min(h / 2, size * .8))}" fill="#fff" stroke="${P.ink}" stroke-width="5"/></g>` + ls.map((l, j) => T(0, n2((j - (ls.length - 1) / 2) * size * 1.12 + size * .35), l, size, P.ink)).join("")); }
 function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT(c.lock) - .08, picks = c.picks, tb0 = Math.min(...picks.filter((p) => p.id).map((p) => LT(p.id))) - .5, rs = ringState(t, c.ring0, c.dur);
-  const zb = ss(tb0 - .4, tb0 + .3, t), gs = lerp(1, .6, zb), shut = pulse(t, bell, .01, .6), RX = 960, CY = 415, RR = 215, inT = t >= c.ring0 && t < bell, b = Math.floor(t - c.ring0);
-  const CW = n === 2 ? 400 : 370, CX = n === 2 ? [880, 1320] : [730, 1115, 1500], CYC = 900;
+  const zb = ss(tb0 - .4, tb0 + .3, t), gs = lerp(1, .55, zb), shut = pulse(t, bell, .01, .6), RX = 960, CY = 395, RR = 215, inT = t >= c.ring0 && t < bell, b = Math.floor(t - c.ring0);
+  const CW = n === 2 ? 400 : 370, CX = n === 2 ? [880, 1320] : [730, 1115, 1500], CYC = 905;
   let main = "";
   c.cards.forEach((txt, i) => { const k = spring(t, c.tc[i] - .08, .45); if (k < .02) return; const turn = inT && ((b % n) === i) ? 1 : 0, said = pulse(t, c.tc[i], .04, .5), lit = c.ans === i + 1 && c.tAns !== undefined && t >= c.tAns ? spring(t, c.tAns, .45) : 0;
     main += TF(CX[i], CYC - 30 * (1 - Math.min(1, k)), k, choiceCard3(i + 1, txt, c.pics ? c.pics[i] : "", { w: CW, h: 330, size: c.csize || 40, pulse: Math.max(turn * (.5 + rs.tick), said), lit, id: "l" })); });
@@ -83,12 +83,12 @@ function lockN(t, c) { const n = c.cards.length, bell = c.ring0 + c.dur, tS = LT
     for (const [tt, w2, p2] of c.react || []) if (w2 === who) poses.push([tt, p2]); poses.sort((a, b2) => a[0] - b2[0]);
     const fid = isL && inT ? 1 : 0, lean = isL ? 7 * ss(c.ring0 - .3, c.ring0 + .3, t) * (1 - ss(bell, bell + .3, t)) : 0;
     buds += buddy(who, x, 1062, hh, t, { in: tIn, poses, rock: fid * 2.2, look: lean, jump: isL ? [[bell + .02, 30]] : [] });
-    if (t > tIn + .2) cards += pickNum(who, x + hh * .62, 1062 - hh * .3, t, pk.fixed ? tIn + .3 : tf - .1, pk.word);
-    if (pk.id && !uni) bubs += say(pk.id, x + (i === 0 ? 60 : i === 2 ? -60 : 0), 1062 - hh - 88, t, { x: pk.x, tail: i === 0 ? -60 : i === 2 ? 60 : 0, maxW: 600, size: 42 }); });
+    if (t > tIn + .2) cards += pickNum(who, x + hh * (isL ? lerp(.5, .62, zb) : .62), 1062 - hh * (isL ? lerp(.22, .3, zb) : .3), t, pk.fixed ? tIn + .3 : tf - .1, pk.word);
+    if (pk.id && !uni) bubs += say(pk.id, x + (i === 0 ? 60 : i === 2 ? -60 : 0), 556 + (Math.max(...sentPages(pk.id).map((p) => wrap(p.text, 42, 600).length)) * 42 * 1.22 + 40) / 2, t, { x: pk.x, tail: i === 0 ? -60 : i === 2 ? 60 : 0, maxW: 600, size: 42 }); });
   // YOU: the counting hand on the right; it shows the choices as Heart says them, then bobs and counts 1-2-3 in step with the ticks
   const nf = inT ? (b % n) + 1 : t >= bell ? null : (n > 2 && t >= c.tc[2] - .1 ? 3 : t >= c.tc[1] - .1 ? 2 : 1), ya = ramp(t, c.tc[0] - .15, .25) * (1 - zb), bob = inT ? 16 * Math.sin((t - c.ring0) * Math.PI * 2) : 6 * Math.sin(t * 3);
-  const demo = OP(ya, TF(1775, 800 + bob, 1.05 * (1 + .12 * (inT ? rs.tick : pulse(t, c.tc[Math.max(0, (nf || 1) - 1)], .03, .3))), `<g filter="url(#dropS)">${countHand(nf === null ? 0 : nf)}</g>`) + youPill(1775, 570 + bob * .6, 1.2) + (t < c.ring0 ? tpill(1760, 1035, n === 2 ? "1 or 2 fingers" : "1, 2 or 3 fingers", 30, P.ink, "#fff") : ""));
-  return bg("stage") + `<g transform="translate(960 ${n2(lerp(0, -28, zb))}) scale(${n2(gs)}) translate(-960 0)">${main}</g>` + top + demo + buds + cards + bubs + (c.pre ? c.pre(t) : "") + (c.over ? c.over(t) : "")
+  const demo = OP(ya, TF(1775, 800 + bob, 1.05 * (1 + .12 * (inT ? rs.tick : pulse(t, c.tc[Math.max(0, (nf || 1) - 1)], .03, .3))), `<g filter="url(#dropS)">${countHand(nf === null ? 0 : nf)}</g>`) + youPill(1775, 570 + bob * .6, 1.2) + (t < c.ring0 ? tpill(1775, 478 + bob * .6, n === 2 ? "1 or 2 fingers" : "1, 2 or 3 fingers", 30, P.ink, "#fff") : ""));
+  return bg("stage") + `<g transform="translate(960 ${n2(lerp(0, -50, zb))}) scale(${n2(gs)}) translate(-960 0)">${main}</g>` + top + demo + buds + cards + bubs + (c.pre ? c.pre(t) : "") + (c.over ? c.over(t) : "")
     + stamp(t, tS, 960, lerp(430, 250, zb)) + bellIcon(t, c.ring0) + HUD(t, { score: c.score !== false }); }
 
 /* ============ Mark Sentence card: the buddy beside it SAYS "Say it with me!", 0.8 s, then the SAME BUDDY reads the whole card aloud, word for word
@@ -151,9 +151,9 @@ SC.kwrecap = (t, s) => { const ids = KWLINE, us = KWLINE.map((k) => "u" + k.slic
   let turn = -1; us.forEach((u, i) => { if (t >= LT(u) - .2 && t < LE(u) + .45) turn = i; });
   let out = bg("stage2") + OP(ramp(t, s.t0 + .2, .3) * (1 - ramp(t, LT(ids[0]) - .3, .3)), T(960, 190, "Let’s read today’s key words together!", 70, "#fff", { w: 600 }))
     + OP(ramp(t, LT(ids[0]) - .3, .3), T(960, 170, "KEY WORDS", 54, P.sun, { ls: 10 }));
-  out += TF(330, 480, 1, youPill(0, 0, 1.3) + `<g transform="translate(0 130) scale(${n2(1 + (turn >= 0 ? .12 + .05 * Math.sin(t * 10) : 0))})" opacity="${turn >= 0 ? 1 : .35}"><g filter="url(#dropS)"><rect x="-110" y="-64" width="220" height="128" rx="50" fill="#fff"/><path d="M-30 60 L-56 108 L16 62z" fill="#fff"/></g>${[-52, 0, 52].map((x, i) => `<circle cx="${x}" cy="${n2(turn >= 0 ? -8 * Math.abs(Math.sin(t * 7 + i)) : 0)}" r="15" fill="${P.ink}"/>`).join("")}</g>`
+  out += TF(400, 470, 1, youPill(0, 0, 1.3) + `<g transform="translate(0 130) scale(${n2(1 + (turn >= 0 ? .12 + .05 * Math.sin(t * 10) : 0))})" opacity="${turn >= 0 ? 1 : .35}"><g filter="url(#dropS)"><rect x="-110" y="-64" width="220" height="128" rx="50" fill="#fff"/><path d="M-30 60 L-56 108 L16 62z" fill="#fff"/></g>${[-52, 0, 52].map((x, i) => `<circle cx="${x}" cy="${n2(turn >= 0 ? -8 * Math.abs(Math.sin(t * 7 + i)) : 0)}" r="15" fill="${P.ink}"/>`).join("")}</g>`
     + (turn >= 0 ? TF(0, 300, spring(t, LT(us[turn]) - .2, .3), tpill(0, 0, "Say it!", 44, P.coral, "#fff", { w: 700 })) : ""));
-  [["pip", 1290, 1076], ["basil", 1560, 1076], ["momo", 1800, 1076]].forEach(([w, x, y], i) => { out += buddy(w, x, y, 340, t, { flip: true, in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [[tw_, 40]] }); });
+  [["pip", 165, 1076], ["basil", 1555, 1076], ["momo", 1778, 1076]].forEach(([w, x, y], i) => { out += buddy(w, x, y, 335, t, { flip: w !== "pip", in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [[tw_, 40]] }); });
   if (t >= tw_) out += TF(330, 900, spring(t, tw_, .45), `<g transform="rotate(-4)"><g filter="url(#drop)"><rect x="-230" y="-64" width="460" height="128" rx="64" fill="url(#gSun)"/></g>${T(0, 24, "Well done!", 70, P.ink)}</g>`);
   return out + HUD(t); };
 
@@ -208,10 +208,10 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88,
 function funFact(t, f) { const L = TL.lines[f.id], t0 = MK("ff_in") - .1; if (!L || t < t0 - .4 || t > L.end + 1.6) return ""; const k = spring(t, t0, .45) * (1 - ss(L.end + 1.2, L.end + 1.5, t));
   const n = f.items.length, w = f.w || 780, h = f.h || 560, gap = 24, bw = (w - 60 - gap * (n - 1)) / n, bh = 330, cols = f.cols || ["#E8A23A", "#5B6BD6", "#2FA35A"];
   let g = `<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="34" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="7"/></g>` + TF(-w / 2 + 150, -h / 2, 1, tpill(0, 0, "FUN FACT!", 40, P[L.who], "#fff", { w: 700, ls: 3 }));
-  f.items.forEach(([mk, lab, pic], i) => { const x = -w / 2 + 30 + i * (bw + gap) + bw / 2, a = MK(mk) - .1; if (t < a) return; const q = spring(t, a, .4), id = "ff" + PART + i, col = cols[i % cols.length];
+  f.items.forEach(([mk, lab, pic], i) => { const x = -w / 2 + 30 + i * (bw + gap) + bw / 2, a = (typeof mk === "number" ? mk : MK(mk)) - .1; if (t < a) return; const q = spring(t, a, .4), id = "ff" + PART + i, col = cols[i % cols.length];
     g += TF(x, -10, q, `<clipPath id="${id}"><rect x="${n2(-bw / 2)}" y="${-bh / 2}" width="${n2(bw)}" height="${bh}" rx="24"/></clipPath><g clip-path="url(#${id})">${pic(t, bw, bh)}</g><rect x="${n2(-bw / 2)}" y="${-bh / 2}" width="${n2(bw)}" height="${bh}" rx="24" fill="none" stroke="${col}" stroke-width="7"/>`
       + `<path d="M0 ${bh / 2} V${bh / 2 + 26}" stroke="${col}" stroke-width="6"/>` + tpill(0, bh / 2 + 60, lab, n > 2 ? 32 : 36, col, "#fff", { w: 700 }));
-    if (i > 0 && f.arrows !== false) g += OP(q, `<path d="M${n2(x - bw / 2 - gap + 2)} -10 l${gap - 4} 0" stroke="${P.ink}" stroke-width="5"/><path d="M${n2(x - bw / 2 - 8)} -20 l8 10 l-8 10" fill="none" stroke="${P.ink}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`); });
+    const aP = i > 0 ? (typeof f.items[i - 1][0] === "number" ? f.items[i - 1][0] : MK(f.items[i - 1][0])) - .1 : 0; if (i > 0 && f.arrows !== false && t >= aP) g += OP(spring(t, Math.max(a, aP), .4), `<path d="M${n2(x - bw / 2 - gap + 2)} -10 l${gap - 4} 0" stroke="${P.ink}" stroke-width="5"/><path d="M${n2(x - bw / 2 - 8)} -20 l8 10 l-8 10" fill="none" stroke="${P.ink}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`); });
   const fx = f.at ? f.at[0] : 1130, fy = f.at ? f.at[1] : 430;
   return TF(fx, fy, k, g) + popSpark(t, t0, fx - w / 2 + 150, fy - h / 2, 140)
     + say(f.id, 1360, 830, t, { size: 38, maxW: 470, tail: 280 }) + buddy(L.who, 1745, 1076, 430, t, { in: t0 - .3, poses: [[t0 - .3, "cheer"], [L.t - .14, "sit"], [L.end + .15, "cheer"]], flip: true, nohop: true }); }
@@ -255,7 +255,7 @@ function gameScene(t, s, L0, full, R) { const LF = L0[0], L = L0[L0.length - 1],
       + (t >= tOne ? TF(800, 470, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="58" fill="url(#gSun)"/></g>${T(0, 23, "+1", 58, P.ink)}`) : ""); }
   // the buddies, big, on the right half: the finder speaks big in front; the others pop in for the colours (Part 1) or the rules
   const finder = TL.lines[LB].who, CM = { momo: "g301c", pip: "g301p", basil: "g301t" }, CP = { momo: "waving", pip: "arms_crossed", basil: "cheer" };
-  const POS = finder === "momo" ? { momo: [1440, 1066, 520], pip: [1090, 1040, 350], basil: [1730, 1040, 350] } : { basil: [1520, 1066, 530], pip: [1150, 1040, 350], momo: [1800, 1040, 350] };
+  const POS = finder === "momo" ? { momo: [1400, 1066, 520], pip: [1065, 1040, 310], basil: [1762, 1040, 330] } : { basil: [1410, 1066, 530], pip: [1065, 1040, 310], momo: [1765, 1040, 330] };
   const fA = ["thinking", "pointing", "waving"];
   for (const w of ["pip", "basil", "momo"]) { const [x, y, h] = POS[w], isF = w === finder, cl = full && HAS(CM[w]) ? CM[w] : null;
     const tin = isF ? LT(LB) - .5 : (cl ? Math.min(LT(cl) - .5, LT(CM.momo) + (w === "pip" ? .4 : .8)) : tRule + (w === "pip" ? .1 : .25));
@@ -264,7 +264,7 @@ function gameScene(t, s, L0, full, R) { const LF = L0[0], L = L0[L0.length - 1],
     if (cl) ps.push([LT(cl) - .12, CP[w]], [LE(cl) + .3, "sit"]);
     if (full && w === "momo") ps.push([LT(CM.momo) - .12, "waving"], [LE(CM.momo) + .2, "sit"]);
     ps.push([tOne - .1, "cheer"]); ps.sort((a, b) => a[0] - b[0]);
-    out += buddy(w, x, y, h * (speaking(w, t) ? 1.05 : 1), t, { in: tin, poses: ps, flip: x > 1500, wave: true, look: isF ? -4 : 0, twirl: full && w === "momo" && HAS("g301c") ? [MK("twirl") - .1] : [], jump: [[tLock + .02, 18]] });
+    out += buddy(w, x, y, h * (speaking(w, t) ? 1.05 : 1), t, { in: tin, poses: ps, flip: x > 1300, wave: true, look: isF ? -4 : 0, twirl: full && w === "momo" && HAS("g301c") ? [MK("twirl") - .1] : [], jump: [[tLock + .02, 18]] });
     // a sparkle on Momo's twirl and on Basil's "handsome" (script 12.3)
     if (full && w === "momo" && TL.marks.twirl !== undefined) out += popSpark(t, MK("twirl"), x, y - h * .6, h * .7);
     if (full && w === "basil" && TL.marks.handsome !== undefined) out += popSpark(t, MK("handsome"), x, y - h * .6, h * .7); }
