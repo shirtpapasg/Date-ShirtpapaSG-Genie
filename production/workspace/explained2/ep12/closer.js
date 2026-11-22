@@ -58,10 +58,11 @@ const dropDy = (t, t0, h = 300, d = .45) => t < t0 - d ? undefined : t >= t0 ? 0
    (.18 s apart), tins from `tins` (.2 s apart); three plain labels; a hand takes the handle and pushes from `push` to `stop` */
 function jobArt(t) { const S = 2.15, GY = 300, tr = MK("rice"), tb = MK("bottles"), tt = MK("tins"), tp = MK("push"), ts = MK("stop"), X0 = -330, X1 = 150;
   const u = eio((t - tp) / (ts - tp)), x = lerp(X0, X1, u), rot = (x - X0) / (17 * S) * 57.3;
-  const load = { rice: dropDy(t, tr, 330, .5), bot: [0, 1, 2, 3].map((i) => dropDy(t, tb + i * .18, 260, .3)), tins: [0, 1, 2].map((i) => dropDy(t, tt + i * .2, 220, .28)) };
+  const load = { rice: t < tr - 1.3 ? undefined : t >= tr ? 0 : -200 * (1 - (.5 * eio((t - tr + 1.3) / 1.3) + .5 * (t - tr + 1.3) / 1.3)),   // Stage 3: lowered by the hands over 1.3 s (it used to drop in .5 s and pop in ahead of them)
+    bot: [0, 1, 2, 3].map((i) => dropDy(t, tb + i * .18, 260, .3)), tins: [0, 1, 2].map((i) => dropDy(t, tt + i * .2, 220, .28)) };
   const dip = t < tr ? 0 : 3 + 9 * wob(t, tr, .5) + 3 * pulse(t, tb, .02, .3) + 2 * pulse(t, tt, .02, .3);
   // the hands: lowering the sack (until it lands), then one hand on the handle for the push
-  const sy = load.rice === undefined ? -999 : GY + S * (-196 + load.rice), up = ramp(t, tr + .1, .4), hs = t < tr - .5 ? "" : OP(1 - ramp(t, tr + .3, .3), aHand(x - 110, sy - 200 * up, 90, 1.3) + aHand(x + 20, sy - 200 * up, 90, 1.3));
+  const sy = load.rice === undefined ? -999 : GY + S * (-196 + load.rice), up = ramp(t, tr + .1, .4), hs = t < tr - 1.3 ? "" : OP(1 - ramp(t, tr + .3, .3), aHand(x - 110, sy - 200 * up, 90, 1.3) + aHand(x + 20, sy - 200 * up, 90, 1.3));
   const hk = ramp(t, tp - .55, .4) * (1 - ramp(t, ts + .5, .4)), hp = hk < .02 ? "" : aHand(x - 188 * S - 160 * (1 - hk), GY - 270 * S, 8, 1.4);
   const tl = tt + 1.0, t1 = tp - .3, bx = x, lab = lcLab(t, tl, -330, -340, "handle: to push", bx - 170 * S, GY - 268 * S, { size: 40, t1 }) + lcLab(t, tl + .25, 440, -200, "basket: holds the groceries", bx + 60 * S, GY - 200 * S, { size: 40, t1 }) + lcLab(t, tl + .5, 420, 200, "wheels: roll", bx + 78 * S + 30, GY - 30, { size: 40, t1 });
   const lines = u > .02 && u < .98 ? [0, 1, 2].map((i) => `<path d="M${n2(x - 420 - i * 60)} ${GY - 120 - i * 90} h${-70 - i * 20}" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity="${n2(.8 * Math.sin(Math.PI * u))}"/>`).join("") : "";
@@ -120,8 +121,9 @@ const recapPic = (i, t) => i === 0 ? lcWall(290) + TF(185 + 39, 290, 1.5, bayRow
 const crossBadge = (r = 30) => `<circle r="${r}" fill="#7A869E" stroke="#fff" stroke-width="${n2(r * .16)}"/><path d="M${n2(-r * .38)} ${n2(-r * .38)} L${n2(r * .38)} ${n2(r * .38)} M${n2(r * .38)} ${n2(-r * .38)} L${n2(-r * .38)} ${n2(r * .38)}" stroke="#fff" stroke-width="${n2(r * .26)}" stroke-linecap="round"/>`;
 const BROWL = ["WATERPROOF", "SEE THE WATER", "DOES NOT BREAK EASILY"], BCX = [-330, -110, 110], BRY = [76, 144, 212], BSC = 1.05;
 // the tick table: tr[r] = when row r's label appears; tm[r][c] = [time, tick (1) or cross (0)] for each mark
+// Stage 3: row labels start at -766 (sizes 28 / 25) so the verdict push-in does not cut their first letters
 const tickTable = (t, tr, tm) => { let s = `<g filter="url(#dropS)"><rect x="-814" y="38" width="1060" height="212" rx="20" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="5"/></g>` + [110, 178].map((y) => `<path d="M-800 ${y} H232" stroke="${P.ink}" stroke-width="2" opacity=".25"/>`).join("") + [-440, -220, 0].map((x) => `<path d="M${x} 48 V240" stroke="${P.ink}" stroke-width="2" opacity=".25"/>`).join("");
-  BROWL.forEach((l, r) => { if (t >= tr[r]) s += OP(ramp(t, tr[r], .3), T(-794, BRY[r] + 10, l, r === 2 ? 27 : 30, P.ink, { a: "start", ls: 1 })); tm[r].forEach((m, c) => { if (m && t >= m[0]) s += TF(BCX[c], BRY[r], spring(t, m[0], .35), m[1] ? tickBadge(24) : crossBadge(24)); }); }); return s; };
+  BROWL.forEach((l, r) => { if (t >= tr[r]) s += OP(ramp(t, tr[r], .3), T(-766, BRY[r] + 10, l, r === 2 ? 25 : 28, P.ink, { a: "start", ls: 1 })); tm[r].forEach((m, c) => { if (m && t >= m[0]) s += TF(BCX[c], BRY[r], spring(t, m[0], .35), m[1] ? tickBadge(24) : crossBadge(24)); }); }); return s; };
 function bottleArt(t, s) { const tDry = MK("dry"), tK = MK("ticks1"), tBk = MK("backlight"), tS = [MK("see1"), MK("see2"), MK("see3")], tLand = MK("land"), tT3 = MK("tick3"), tRest = MK("rest"), tNo = MK("noglass"), tV = MK("v_bottle"), tJ4 = LT("j504"), tJ6 = LT("j506"), BY = 10, GY = 270, DX = 520;
   const glow = ramp(t, tBk, .6) * (1 - ramp(t, tJ4 - .2, .4));
   // the plastic bottle's trip: table -> held at knee height over the ground -> let go -> lands on its side, bounces once, rolls -> picked up, turned -> back on the table
@@ -144,7 +146,7 @@ function bottleArt(t, s) { const tDry = MK("dry"), tK = MK("ticks1"), tBk = MK("
     + tickTable(t, [s.t0 + 2.2, tBk - .3, tJ4], tm) + best + TF(BCX[1], BY, BSC, bottleSvg("glass", { glow, id: "lb1" })) + TF(BCX[2], BY, BSC, bottleSvg("metal")) + glide + pb + hand + rest + seeL
     + (t >= tJ4 + 1.0 && t < tBack ? TF(DX + 30, -300, spring(t, tJ4 + 1.0, .4) * (1 - ramp(t, tBack - .3, .25)), tpill(0, 0, t < tLand ? "a drop, from knee height" : t < tT3 ? "it bounces" : "no crack · no leak", 32, "#fff", P.ink, { w: 700 })) : "")
     + (t >= tNo ? TF(BCX[1], BY - 62, spring(t, tNo, .4), tpill(0, 0, GLASS_RULE, 26, P.ink, "#fff", { w: 600 })) : "")
-    + (t >= tV + .5 ? TF(560, -120, spring(t, tV + .5, .4), tpill(0, 0, "At home, on a table: glass is fine.", 26, "#fff", P.ink, { w: 700 })) + TF(560, -66, spring(t, tV + .65, .4), tpill(0, 0, "Handle it carefully.", 26, "#fff", P.ink, { w: 700 })) : ""); }
+    + (t >= tV + .5 ? TF(515, -120, spring(t, tV + .5, .4), tpill(0, 0, "At home, on a table: glass is fine.", 30, "#fff", P.ink, { w: 700 })) + TF(515, -66, spring(t, tV + .65, .4), tpill(0, 0, "Handle it carefully.", 30, "#fff", P.ink, { w: 700 })) : ""); }
 // the three bottles with their finished tick table (the small picture under Mark Sentence 1)
 const bottlePic = () => `<rect x="-470" y="10" width="720" height="24" rx="10" fill="#F4F7FB" stroke="#7A869E" stroke-width="5"/>` + tickTable(1e6, [0, 0, 0], [[[0, 1], [0, 1], [0, 1]], [[0, 1], [0, 1], [0, 0]], [[0, 1], [0, 0], [0, 1]]]) + BKINDS.map((k, i) => TF(BCX[i], 10, BSC, bottleSvg(k, { id: "bp" + i }))).join("");
 

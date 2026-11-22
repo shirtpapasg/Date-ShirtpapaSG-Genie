@@ -34,7 +34,7 @@ SC.cold = (t, s) => { const tb = MK("boardsIn"), tp = MK("budsIn");
   const boards = [0, 1, 2].map((i) => { const t0 = tb + i * .3; if (t < t0) return ""; const [x, d] = slideX(t, t0, .7, 2500, CBX[i], WFLOOR + 60); return d + dareBoard(i, x, WFLOOR - 40, .58, { lab: false, id: "c" }); }).join("");
   return V(t, { back: boards }, [1.02 + .02 * eio(t / 6), 960, 548])
     + sPip(t, { in: tp, poses: [[tp, "waving"], [tp + 1.4, "sit"]], wave: true }) + sBasil(t, { in: tp + .2, poses: [[tp + .2, "cheer"]] }) + sMomo(t, { in: tp + .4, poses: [[tp + .4, "waving"], [tp + 1.7, "sit"]], wave: true })
-    + lowerPill(60, 96, "A neighbourhood supermarket,", "Singapore") + trolleyRule(t, .7); };
+    + lowerPill(60, 96, "A neighbourhood supermarket,", "Singapore") + finePrint(t, .7, TROLLEY_RULE, 1180, 1010); };   // Stage 3: on the floor, bottom middle (it sat on top of the place label)
 
 /* 2 · "Last time...": EP11's dare, word for word. ONE calm picture: EP11's three boards side by side, centred and large, a gentle push-in,
    the big ? above them, EP11's three cards under them; as Heart says each card its board steps forward and its card lights (>= 2.5 s each). WIRED */
@@ -72,7 +72,7 @@ SC.things = (t, s) => { const [bx, bd] = slideX(t, s.t0 + .1, .6, 2300, 930, TRY
   THINGS.forEach(([mk, art, job, mat], i) => { const t0 = MK(mk), x1 = 1130 + i * 190, u = eio((t - (t0 - .45)) / .45), sc = 1.15; if (t < t0 - .45) return;
     const x = lerp(BX, x1, u), y = lerp(TRY - 110, TRY, u) - 150 * Math.sin(Math.PI * u) - 18 * pulse(t, t0 + .05, .08, .5);
     it += TF(x, y, sc * (.7 + .3 * u), art()) + OP(1 - ramp(t, t0 + .15, .3), aHand(x - 70, y - 60 - 40 * ramp(t, t0 + .1, .3), 25, .9));
-    const ty = [660, 590, 520][i]; tags += (t >= t0 ? pline(x1, ty + 30, x1, TRY - (i === 1 ? 180 : 96), ramp(t, t0, .2)) + TF(x1 + (i === 2 ? -40 : 0), ty, spring(t, t0, .4), tpill(0, 0, job, 30, "#fff", P.ink, { w: 700 })) + TF(x1 + (i === 2 ? -40 : 0), ty - 58, spring(t, t0 + .2, .4), tpill(0, 0, mat, 30, P.ink, "#fff", { w: 700 })) : ""); });
+    const ty = [660, 590, 436][i];   /* Stage 3: the raincoat's tags higher (they hid the scissors' "metal") */ tags += (t >= t0 ? pline(x1, ty + 30, x1, TRY - (i === 1 ? 180 : 96), ramp(t, t0, .2)) + TF(x1 + (i === 2 ? -40 : 0), ty, spring(t, t0, .4), tpill(0, 0, job, 30, "#fff", P.ink, { w: 700 })) + TF(x1 + (i === 2 ? -40 : 0), ty - 58, spring(t, t0 + .2, .4), tpill(0, 0, mat, 30, P.ink, "#fff", { w: 700 })) : ""); });
   return V(t, { trol: { load: LOADED }, items: bd + TF(bx, TRY, 1.15, basketS()) + it }) + tags + buds(t) + trolleyRule(t) + HUD(t); };
 
 /* 7 · Round 1: the dare from EP11 (a short 3 s ring). In the ring: the loaded trolley; clue labels for heavy groceries · gets knocked on top
@@ -103,7 +103,7 @@ SC.fabric = (t, s) => { const tI = MK("bagin"), tU = MK("baglift"), tD = MK("bag
   const hands = t < tI + .1 ? (ry === undefined ? "" : aHand(BX, TRY - 262 + ry, 90, .9)) : t >= tU - .5 && t < tF + .1 ? OP(ramp(t, tU - .5, .25) * (1 - ramp(t, tD, .15)), aHand(BX - 40, TRY - 190 * S - 96 - lift, 90, .8) + aHand(BX + 40, TRY - 190 * S - 96 - lift, 90, .8)) : "";
   const bag = (inBag ? "" : (ry === undefined ? "" : TF(BX, TRY - 200 + ry, 1.2, riceSmall()))) + TF(BX, TRY, S, clothBag({ rice: inBag ? 1 : 0, fold, lift: lift / S }));
   return V(t, { trol: { load: LOADED }, items: dareBoard(2, 1490, WFLOOR - 50, .6, { lab: false, id: "fb" }) + bag + hands })
-    + (t >= tU ? TF(880, 560, spring(t, tU, .4), tpill(0, 0, "holds the rice", 36, "#fff", P.ink, { w: 700 })) : "") + (t >= tF ? TF(1180, 630, spring(t, tF, .4), tpill(0, 0, "bends and folds", 36, "#fff", P.ink, { w: 700 })) : "")
+    + (t >= tU ? TF(830, 560, spring(t, tU, .4), tpill(0, 0, "holds the rice", 36, "#fff", P.ink, { w: 700 })) : "") + (t >= tF ? TF(1180, 630, spring(t, tF, .4), tpill(0, 0, "bends and folds", 36, "#fff", P.ink, { w: 700 })) : "")
     + chipAt(t, tF + .3, 1180, 700, "FLEXIBLE", 34) + boardTag(t, 2, 1490, 600, 24) + (t < tU ? TF(BX, TRY - 400, spring(t, s.t0 + .15, .4) * (1 - ramp(t, tU - .2, .2)), tpill(0, 0, "Pip’s bag: fabric", 34, P.ink, "#fff", { w: 700 })) : "")
     + buddy("pip", 240, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [tF + .2, "surprised"], [LT("g808") - .12, "sit"]], jump: [[LE("g808") + .1, 20]] }) + say("g808", 430, 520, t, { size: 40, tail: -120, maxW: 440 }) + trolleyRule(t) + HUD(t); };
 /* 8d · the answer is two: metal. EP11's boards with their tags; card 2 glows; coin; the board's first row is completed (row1m) */
@@ -134,7 +134,7 @@ SC.holdon = (t, s) => { const a = "g1001", b = "g1002", c = "g1003", r0 = MK("ri
 // Basil: the camera turns towards the aquarium shop next door (turn); the glass card slides back low to its place (slideback)
 SC.fishnext = (t, s) => { const cam = camL(CAM0, CAMT, eio((t - MK("turn") - .1) / 1.2)), [cx, cd] = slideX(t, MK("slideback"), .6, 2300, 1010, 1040);
   return V(t, { trol: { load: LOADED } }, cam) + (t >= MK("slideback") ? cd + TF(cx, 950, .4, ansCard(1, "Glass", { w: 286, h: 380, size: 52 })) : "")
-    + buddy("basil", 440, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT("g1004") + .6, "sit"]] }) + say("g1004", 640, 600, t, { size: 40, tail: -120, maxW: 480 }) + trolleyRule(t) + HUD(t); };
+    + buddy("basil", 1260, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT("g1004") + .6, "sit"]] }) + say("g1004", 980, 640, t, { size: 40, tail: 160, maxW: 480 }) + trolleyRule(t) + HUD(t); };
 
 /* 11 · [LOOK CLOSER] a glass fish tank: every fish seen clearly (TRANSPARENT), the shelf under it dry (WATERPROOF) */
 SC.lctank = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1240, fy: 590, bgc: "#E6F6FF", art: tankArt, set: (tt) => V(tt, { trol: { load: LOADED }, mynah: false }, CAMT), verdict: [`GLASS: TRANSPARENT AND WATERPROOF`, GOODC], tv: MK("v_tank") })
@@ -164,7 +164,7 @@ SC.cliff = (t, s) => { const a = "g1401", c = "g1403", TX = 900, TY = 580, S = 1
   return `<rect width="1920" height="1080" fill="#DCCBAA"/>${fl}<ellipse cx="${TX + 10}" cy="${TY + 30}" rx="600" ry="320" fill="${P.ink}" opacity=".14" filter="url(#b10)"/>` + TF(TX, TY, S, trolleyTop()) + bots + tags + qMark(t, MK("q"), bx(1), 190, 54)
     + TF(1590, 1056, .38, matchBoard(t))
     + buddy("basil", 250, 1060, 250, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT(a) - .12, "sit"], [LE(a) + .3, "surprised"]], nohop: true }) + say(a, 470, 800, t, { size: 40, tail: -160, maxW: 520 })
-    + (t >= tP ? TF(960, 330, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + trolleyRule(t) + HUD(t); };
+    + (t >= tP ? TF(880, 905, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + trolleyRule(t) + HUD(t); }; /* Stage 3: PART 2 slams in below the trolley (it covered the glass / metal tags) */
 
 /* 15 · "Now you know!": the board MATCH THE JOB (two full rows) centred in the free space between the buddies */
 SC.nyk = (t, s) => nykScene(t, s, TF(920, 1040, .5, matchBoard(t)), { bx: [200, 1715, 1375], hx: 470 });

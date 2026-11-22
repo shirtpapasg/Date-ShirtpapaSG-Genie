@@ -9,7 +9,7 @@ is plastic, (f) the fish tank, (g) mynah and squirrel, (h) key words as written,
 Ideas", pp. 59-72): it stays in the playlists until a later episode also covers pp. 66-72, (m) no extra test clips unless a problem is heard).
 EP11 is live (its playlists' anchor for EP12: `explained-p3-ep11-part2`).
 
-Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · Stage 3 (render, checks, upload, Opus).
+Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · **Stage 3 (render, checks, upload: done 2026-11-22, Opus; LIVE)**.
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep12_script.md` is untouched.
@@ -199,3 +199,59 @@ Reused as they are: EP11's three trolley boards (ep11dare.js), EP9's drop-box pi
 - Upload with `production/youtube/explained_upload.py ep12/upload.json` (Made for Kids, public, both playlists after EP11 Part 2's key
   `explained-p3-ep11-part2`; nothing replaced or retired: _gRJ0NwV6p0 stays).
 - Status: see ../progress/ep12.json
+
+## 22 Nov 2026: Stage 3 (Opus): rendered, checked, LIVE
+- Rendered with `./build_part.sh 1|2` (10 s chunks in `out/chunks_p1`, `out/chunks_p2`; about 10-11 min a part, 3 workers). `ep12_part1.mp4`
+  314.87 s (**5:14.9**), `ep12_part2.mp4` 314.83 s (**5:14.8**); 1920x1080 30 fps; both **-16.0 LUFS** (true peak -1.3 / -1.4 dBFS). No time
+  added, no cut used, no mark moved: every fix below is picture only. Captions `ep12_part1.srt` (136 cues), `ep12_part2.srt` (133 cues),
+  0 overlapping cues; contact sheets `sheet_part1.png`, `sheet_part2.png`. No page errors.
+- **Checked** (frame strips from the rendered files, `qa/stage3/`; dense strips round every action mark): the cold open (EP11's three boards
+  slide in; small print from 0.7 s); the calm recaps (P1 EP11's boards with their cards; P2 three pictures, one at a time, each with its label);
+  the mynah / squirrel named by Heart with their picture ("a little mynah", "a little squirrel") and ringed at the end with Heart's pill
+  ("It was on the trolley bay sign!", "It was on the tree by the cars!"); goal cards read by Momo (P1) / Pip (P2), each lifted and ticked;
+  Mark Sentences read by the "Say it with me!" buddy (Pip, Basil; Basil, Momo) with the key word popping; lock-in clues above the ring through
+  the countdown (P1 Round 1 "for heavy groceries" / "gets knocked"; HOLD ON! "glass: fragile" / "bad for a trolley" / "bad for everything?";
+  P2 Round 1 "must not break when dropped" / "see the water inside"); the calm recap. In motion (from the drawing agent's list): (1) every
+  hand (sack, push, bag lift, bottle drop / pick-up / return, palm, press, knuckles, boot lid, the can) - none crosses a label after the fixes;
+  (2) the sack lands at `rice` on the thump, the trolley meets the bay's last trolley exactly at `clang` (129.25) and in the slow replay at
+  `slowmo + .8` (132.75), each on its sound, then bounces back; (3) the plastic bottle is let go at `land - .42`, lands on its side at `land`,
+  bounces, rolls, is picked up, turned (*no crack · no leak*) and back on the table before `rest`; (4) water streams down the windscreen
+  from `pour`, the can tilted, the seats behind stay sharp; (5) the magnifier follows one guppy, the view glides to the dry shelf and back;
+  (6) the board's rows hop on, the car's four rows first seen in `mark2`/`board`, the seven ticks at `ticks`; (7) the chant: PURPOSE /
+  PROPERTY / MATERIAL columns flash on their lines and the green SUITABLE tag pops above MATERIAL on line 3; (8) both reveals and rings;
+  (9) PART 2 slam (moved, below); (10) BE A DROP OF WATER's dips are soft 0.2 s fades and each stop's label then reads about 1 s
+  (slope, tyre: short but clear); (11) the bottle look-closer (below). Verdicts held 2.5 s, readable; no glass breaks on screen (EP9's held
+  picture only); small print where scripted (trolley rule, car rules, *We do not tap the glass.*, *We do not drop glass.*).
+- **Fixed** (small, local; only the affected chunks re-rendered):
+  - P1 cold open: the small print "Trolleys are for groceries, not for rides." sat on top of the place label (and the SUPERMARKET sign) ->
+    `finePrint` on the floor, bottom middle (1180, 1010). Chunk 0-10 s.
+  - P1 `lcjob`: the RICE sack dropped in .5 s from above the window (ease-in), so it popped in ahead of the two hands, which only showed
+    after it had landed -> the hands lower it over 1.3 s (`closer.js` jobArt: blend of ease-in-out and linear, still landing ON `rice`).
+    Chunk 50-60 s.
+  - P1 `things`: the raincoat's tags ("plastic", "keeps you dry in the rain") hid the scissors' "metal" tag -> raised (y 436). Chunks 80-100 s.
+  - P1 `fabric`: the lifting hands touched the end of "holds the rice" -> the tag 50 px left. Chunks 150-170 s.
+  - P1 `fishnext`: after the turn to the aquarium Basil's disc covered the loaded trolley -> Basil at x 1260 (bottom middle), his bubble to
+    his left. Chunk 200-210 s.
+  - P1 `cliff`: the PART 2 slam covered the glass / metal tags -> it lands below the trolley (880, 905). Chunk 300-310 s.
+  - P2 `lcbottles`: at the verdict push-in the tick table's row labels lost their first letters at the window's edge -> labels start at
+    -766 (sizes 28 / 25, also in Mark Sentence 1's small picture); "At home, on a table: glass is fine." / "Handle it carefully." 26 -> 30 px
+    and 45 px left. The bottles (scale 1.05) and *We do not drop glass.* (26 px, about 27 px on screen) read clearly at 1080p: unchanged
+    (bigger would push the tag over the plastic bottle's green ring). Chunks 50-110 s.
+  - P2 `board`: the book strip "...whose physical property" ran under the SUITABLE shelf pill (its last letter hidden) -> both lines 70 px
+    lower (320 / 410). Chunks 230-250 s.
+- Not changed (noted): the key word's fly to the shelf passes over the Mark Sentence's small picture for a moment (as before); the glass
+  scene's book strip touches the top edge of EP11's glass board (its FRAGILE chip stays readable); in the two walkway / car-park buddy shots the
+  trolley bay's wheels sit behind Pip's disc and, in the dimmed `bottleans`, the parked trolley behind Momo's (background only); the hand in
+  `things` passes over the scissors' tag line (not the tag) for a moment; the plastic bottle is carried in front of the other two on its
+  way out and back; the chant's SUITABLE tag shows only while line 3 flashes (by design); EP11's metal board with RIGHT FOR THE JOB in
+  `lcmetal` shows 1.3 s (the verdict METAL: STRONG holds 2.5 s).
+- **Listen check (not done by ear here):** Pip's read-along "Use." (should be "yooss", `qa/new_words_check.m4a` 0:15.7) and Heart's
+  "fragile" in g805 (FRAJ-ile) were machine-checked in Stage 1 (right sound, soft final "s" for Pip); no re-record. A human should listen once.
+- Thumbnails: the new-style `thumb_part1.jpg` (GLASS TROLLEY?) and `thumb_part2.jpg` (WHY 4 MATERIALS?) read well at 320 px (`qa/thumbs.jpg`);
+  uploaded as they are.
+- Uploaded with `upload.json` (checked against ep11/upload.json and the live EP11 keys in explained_uploaded.json; Made for Kids, public; both
+  playlists PLb8LpPqxQI4E (positions 23, 24) and PLPfEuT7l4KjI (41, 42) right after EP11 Part 2 q2KJp6lKln0 via `explained-p3-ep11-part2`;
+  **no "replaces", no retire_old**: the classic _gRJ0NwV6p0 stays in both playlists, right after EP12 Part 2, untouched).
+  **Part 1 https://www.youtube.com/watch?v=G03-LFQEld8 , Part 2 https://www.youtube.com/watch?v=ussXaa1fQUQ .**
+- Left for the teacher: listen to Pip's "Use." and Heart's "fragile" (above); watch the five look-closers, both journeys and the mynah /
+  squirrel reveals. The School Lab 3.7 line stays out of the descriptions until that lab is signed off.

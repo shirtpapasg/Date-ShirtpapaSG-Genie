@@ -113,7 +113,7 @@ SC.fix = (t, s) => { const rb = MK("rub"), rub = ss(rb, rb + .5, t), fix = ss(rb
 /* the board MATCH THE JOB, all seven rows, a green tick at the end of each (ticks); the book's strip 3.30 item 3; SUITABLE pops (lib.js o.at) */
 SC.board = (t, s) => { const L = "j1008";
   return VP(t, { dim: 1, car: false, table: false, trolley: false }) + brd(t, {}, .7, 860, 1066)
-    + bookCaption(t, L, "It is important to choose a material whose physical property", 250, { size: 46, keys: ["physical", "property"] }) + bookCaption(t, L, "is suitable for the intended use of the object.", 340, { size: 46, off: 10, keys: ["suitable", "intended", "use"] }) + HUD(t); };
+    + bookCaption(t, L, "It is important to choose a material whose physical property", 320, { size: 46, keys: ["physical", "property"] }) + bookCaption(t, L, "is suitable for the intended use of the object.", 410, { size: 46, off: 10, keys: ["suitable", "intended", "use"] }) + HUD(t); };   // Stage 3: both lines 70 px lower (the SUITABLE shelf pill covered the end of "property")
 
 /* 11 · the chant: call and response (common.js chantScene); the board MATCH THE JOB stands behind the buddies, centred, its PURPOSE /
    PROPERTY / MATERIAL columns flashing on their lines; the green tag SUITABLE by the MATERIAL column on line 3 */
