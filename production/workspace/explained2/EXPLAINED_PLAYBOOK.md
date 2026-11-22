@@ -148,6 +148,8 @@ book's words name what the child just lived. True at P3 level.
   a bell, "LOCKED IN!"; options, ring picture and clue labels stay on screen throughout; the buddies reveal after the viewer, each
   with a one-line reason; the wrong idea rotates; a buddy can be right for the wrong reason (no point).
 - "HOLD ON!": a buddy uses a bad rule or an unfair test; the viewer crosses their arms.
+- **Countdowns take the stage (teacher, 22 Nov):** ring and picture big and central, clue labels large (≥ ~40 px at 1080p),
+  background cleared to the blue stage or strongly dimmed, nothing else on screen but one big reacting buddy.
 - Showdown: a buddy's homework with one mistake, double points. Score hand: one finger per point; a perfect game ends in a high five.
 - Hidden animal: topic-related, cute and alive, named by Heart at the start with its picture, revealed and circled at the end.
 - **Hidden-animal moments are one smooth shot (teacher, 22 Nov):** from the real place, the camera pushes straight in onto the

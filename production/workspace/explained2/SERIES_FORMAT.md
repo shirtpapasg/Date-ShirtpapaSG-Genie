@@ -193,6 +193,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - **Clue labels sit ON TOP of the ring's picture frame**, fully visible and readable, never tucked behind or clipped by the
     yellow ring (draw them above the frame).
   - A closed question with 2 or 3 choices.
+  - **The countdown takes the stage (teacher, 2026-11-22, on EP13's HOLD ON!: "this bag with the countdown is so small, I can barely
+    see the 3 descriptive words. How do you want the young viewers to know what to focus on?").** During every lock-in, HOLD ON! and
+    Showdown countdown the ring and its picture are big and central (about half the frame height); clue labels are large and
+    readable on a phone (cap height at least ~40 px at 1080p, high contrast); the background clears to the blue game stage or dims
+    strongly; only the question's elements stay on screen (boards and other props leave; at most one buddy, big, reacting at the
+    side). Bad example: `reference/countdown_bad_ep13_holdon_toosmall.webp`.
   - **One set of choice cards, big and numbered (teacher, 2026-11-22, on EP13's dare round: "the option 1 2 and 3 is a waste of
     space, repeating the textbox above… Put the number 1, 2 and 3 right beside the options above, make the textbox bigger showing a
     noticeable difference among the 3 options").** Never show a picture card AND a separate number card for the same choice. Each
