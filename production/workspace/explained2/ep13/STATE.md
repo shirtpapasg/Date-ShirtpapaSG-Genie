@@ -299,3 +299,10 @@ videos (FO1Y_KSZU-c, 8lQ1-1ruveY) stay as they are until the teacher has seen th
   first second, HOLD ON!'s Pip sitting still through it, LOCKED IN! 0.7 s after the bell, the +1 coin over the shelf, discs 120 px in a corner.
   From EP14 on: `bigRing` (or the same ideas), one big buddy fidgeting on the beat, no music under a countdown, the stamp ON the bell, and check
   it in the rendered file (`measure_ring.py`).
+- **Part 2: rendered, 5:20.5 (320.5 s; was 5:12.6: the fun fact), -16.0 LUFS, 149 captions, 0 overlapping.** `ep13_part2.mp4` (not in git).
+  Review notes `NOTES_REVIEW_P2.md`; preview `qa/preview_p2_before_after.jpg`, `qa/preview_p2_countdown_vs_ep1.jpg`, `qa/preview_p2_clips.mp4`;
+  ring timing `qa/ring_check_p2.txt`. Small picture fixes after the full render were spliced in at chunk boundaries (keyframes) with ffmpeg's
+  concat `inpoint` / `outpoint` (P1 60-100 s, P2 20-60, 80-90, 270-300 s), audio re-muxed from `out/mix_pP.wav`.
+- **Status: Improved Part 1 and Part 2, 22 Nov: awaiting the teacher's OK; not uploaded.** On the teacher's OK: re-upload both parts as new
+  videos with `upload.json` (titles unchanged), retire FO1Y_KSZU-c / 8lQ1-1ruveY the usual way (never delete; ask before unlisting), and point
+  the classic _gRJ0NwV6p0's first description line to the new Part 1. The captions changed (the fun fact): send the new `.srt` files.

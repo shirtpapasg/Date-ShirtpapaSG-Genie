@@ -48,7 +48,7 @@ SC.goals = (t, s) => goals3(t, s, [["Test your design", ""], ["Design a zoo home
 /* 4 · Round 1: the countdown takes the stage. Left: the ring, big (the old strap's picture and the new strap, the two counters), the three clues
    ON its frame; right: ONE set of big numbered cards, each drawing the weights big (fewer than five · five · more than five) */
 const wStack = (n, more) => { let s = `<path d="M0 -150 V${-150 + 40}" stroke="#5E6B7C" stroke-width="6"/><rect x="-60" y="-112" width="120" height="10" rx="5" fill="#7C8898" stroke="#4A5564" stroke-width="3"/>`;
-  for (let i = 0; i < n; i++) s += TF(0, -96 + i * 22, 1.6, weightDisc()); return TF(0, 20, 1.35, s + (more ? TF(0, -96 + n * 22 + 26, 1, T(0, 20, "…", 60, P.ink)) : "")); };
+  for (let i = 0; i < n; i++) s += TF(0, -96 + i * 22, 1.6, weightDisc()); return TF(0, n > 5 ? -10 : 10, n > 5 ? 1.0 : 1.25, s + (more ? TF(0, -96 + n * 22 + 18, 1, T(0, 16, "…", 48, P.ink)) : "")); };
 const WPIC = [wStack(3), wStack(5), wStack(8, true)], WTXT = ["Fewer than five", "Five", "More than five"];
 const R1X = 500, R1Y = 520, R1S = 1.2, CX3 = [1080, 1400, 1720], CY3 = 470;
 SC.r1 = (t, s) => { const tq = W(L1, "how") - .1, tc = [W(L1, "one", 1), W(L1, "two"), W(L1, "three")], r0 = MK("ring0_r1"), dur = 6, bell = r0 + dur, lockE = LE("j402"), rs = ringState(t, r0, dur);
@@ -74,7 +74,7 @@ SC.r1 = (t, s) => { const tq = W(L1, "how") - .1, tc = [W(L1, "one", 1), W(L1, "
     buds += buddy(who, x, 1066, hh, t, { aura: true, auraO: .9, flip: who === "pip", in: tin, poses: ps, look, jump: who === "momo" ? secJ : [], nohop: who === "momo" && t < bell });
     if (t > tin + .2) cards += pickNum(who, x + hh * .62 * (who === "pip" ? -1 : 1), 1066 - hh * .32, t, LT(picks[who][0]) - .1, picks[who][1]);
     bubs += say(picks[who][0], x + (who === "pip" ? -120 : who === "basil" ? 60 : 0), 1066 - hh - 120, t, { x: who === "momo", tail: who === "pip" ? 120 : who === "basil" ? -60 : 0, maxW: 560, size: 42 }); });
-  return out + buds + cards + bubs + weightsRule(t) + stampHold(t, bell, lockE + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1180, 160) + HUD(t); };
+  return out + buds + cards + bubs + stampHold(t, bell, lockE + .15, 960, 470, "LOCKED IN!") + bellIcon(t, r0, 1180, 160) + HUD(t); };
 
 /* 5 · [LOOK CLOSER] the test (the approved frame): Momo's face peeks in (she said "A strap is a strap!") and gasps as the new strap passes five */
 SC.lctest = (t, s) => { const tv = MK("v_test");
@@ -176,7 +176,7 @@ SC.liz = (t, s) => { const L = "j1202", F = "j1203", E = "j1204", tq = W(L, "it"
 /* 13 · the dare for Episode 14: ONE set of big numbered picture cards (the dusk boards with their words on them); Basil big at the right */
 const DRX = [440, 860, 1280];
 SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "why") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, hb = HAS("j1302");
-  const cards = NEXT_CARDS.map((txt, i) => { const k = spring(t, tc[i], .45); if (k < .02) return ""; return TF(DRX[i], 640, k, picCard(i + 1, TF(0, 0, .82, PIC[NEXT_PICS[i]](t)), txt, { w: 380, h: 470, size: 40, pulse: Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0) })); }).join("");
+  const cards = NEXT_CARDS.map((txt, i) => { const k = spring(t, tc[i], .45); if (k < .02) return ""; return TF(DRX[i], 640, k, picCard(i + 1, TF(0, 0, .6, PIC[NEXT_PICS[i]](t)), txt, { w: 380, h: 470, size: 40, pulse: Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0) })); }).join("");
   return VD(t, { gold: ramp(t, s.t0, 1.5) }, .5) + cards
     + TF(860, 150, spring(t, s.t0 + .2, .45), tpill(0, 0, "NEXT · Why does the Sun come back?", 52, P.ink, P.sun, { w: 700 }))
     + qMark(t, tQ, 1500, 300, 50) + (t >= tL ? TF(860, 262, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 42, P.sun, P.ink, { w: 700 })) : "") + finePrint(t, s.t0 + 1.4, "Never look at the Sun.", 300, 1046)

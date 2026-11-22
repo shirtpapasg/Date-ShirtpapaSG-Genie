@@ -48,7 +48,7 @@ def pairs_p2():
         ("8 · Showdown countdown takes the stage; Basil big beside his map", [191.0], [191.0]),
         ("9 · The chant: the board big, the buddies 1.5x", [246.0], [246.0]),
         ("10 · Journey: the buddies ride along on the new strap", [107.5], [107.5]),
-        ("11 · The dare: ONE set of big numbered picture cards", [288.0], [S["dare"]["t0"] + 9.0]),
+        ("11 · The dare: ONE set of big numbered picture cards", [291.0], [S["dare"]["t0"] + 13.0]),
         ("12 · The reveal ends on a fun fact (new line, Pip)", [268.0], [sh + 9.0]),
     ]
 def build_pairs():
