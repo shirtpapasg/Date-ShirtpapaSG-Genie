@@ -39,23 +39,27 @@ const ROWT = () => { const m = (k) => TL.marks[k] === undefined ? 1e9 : TL.marks
   if (PART === 1) return [[m("row1o") + .2, m("row1p"), m("row1m"), m("row1m") + .3], four(m("row2") + .1), ...Array(5).fill([1e9, 1e9, 1e9, 1e9])];
   const c = m("carrows"); return [[-1, -1, -1, -1], [-1, -1, -1, -1], four(m("row3") + .1), ...[0, 1, 2, 3].map((i) => four(c + .2 + i * .25, .12))]; };
 const tickT = (r) => PART === 2 && TL.marks.ticks !== undefined ? TL.marks.ticks + r * .14 : 1e9;
-// STAGE 1 placeholder of the board (functional: columns, rows that fill cell by cell, chips, ticks). Stage 2 redraws it on its low stand with
-// picture tiles (and one picture of the car beside rows 4-7). o.col = a column that glows (0..3) or -1; o.flash = [purpose, property, material]
-// (the chant); o.row = a row that glows. origin = the middle of the stand's feet
-function matchBoard(t, o = {}) { const RT = ROWT(), fl = o.flash || [0, 0, 0], X = [-560, -330, 90, 300], W = 1180, top = -720; let s = "";
+// STAGE 2: the drawn board on its low stand: picture tiles (walk.js TILE) for the objects, swatches (SWATCH) for the materials, ONE picture of
+// the car beside rows 4-7 (a plain bracket). o.col = a column that glows (0..3) or -1; o.flash = [purpose, property, material] (the chant);
+// o.row = a row that glows; o.good = the green tag SUITABLE by the MATERIAL column (the chant's third line). origin = the middle of the stand's feet
+function matchBoard(t, o = {}) { const RT = ROWT(), fl = o.flash || [0, 0, 0], X = [-590, -300, 40, 228], Wd = 1220, top = -730, CW = [282, 332, 180, 372]; let s = "";
   const colG = [o.col === 0 ? 1 : 0, Math.max(o.col === 1 ? 1 : 0, fl[0]), Math.max(o.col === 2 ? 1 : 0, fl[2]), Math.max(o.col === 3 ? 1 : 0, fl[1])];
-  COLS.forEach((c, i) => { const g = colG[i]; if (g > .02) s += `<rect x="${X[i] - 14}" y="${top + 70}" width="${[220, 410, 200, 290][i]}" height="580" rx="14" fill="${P.sun}" opacity="${n2(.45 * Math.min(1, g))}"/>`;
-    s += T(X[i], top + 112, c, 30, P.ink, { a: "start", ls: 2 }); });
-  BROWS.forEach((row, r) => { const y = top + 175 + r * 76, ts = RT[r]; if (o.row === r) s += `<rect x="-580" y="${y - 34}" width="1160" height="68" rx="12" fill="${P.sun}" opacity=".35"/>`;
-    s += `<path d="M-575 ${y + 38} H575" stroke="${P.ink}" stroke-width="2" stroke-dasharray="3 9" opacity=".3"/>`;
+  COLS.forEach((c, i) => { const g = colG[i]; if (g > .02) s += `<rect x="${X[i] - 10}" y="${top + 76}" width="${CW[i]}" height="596" rx="14" fill="${P.sun}" opacity="${n2(.5 * Math.min(1, g))}"/>`;
+    s += `<rect x="${X[i] - 6}" y="${top + 84}" width="${CW[i] - 8}" height="44" rx="10" fill="${P.ink}"/>` + T(X[i] + CW[i] / 2 - 10, top + 117, c, 28, "#fff", { ls: 3 }); });
+  const carT = RT[3][0]; if (t >= carT) { const k = carT < 0 ? 1 : spring(t, carT, .35), y0 = top + 175 + 3 * 76, y1 = top + 175 + 6 * 76;
+    s += OP(Math.min(1, k), `<path d="M${X[0] + 96} ${y0 - 26} h-12 V${y1 + 26} h12" fill="none" stroke="${P.ink}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`) + TF(X[0] + 38, (y0 + y1) / 2 - (carT < 0 ? 0 : 22 * Math.sin(Math.PI * clamp((t - carT) / .35))), k, `<g transform="rotate(-90)">${TILE.car()}</g>` + T(0, 76, "car", 22, P.ink)); }
+  BROWS.forEach((row, r) => { const y = top + 175 + r * 76, ts = RT[r], part = r >= 3; if (o.row === r) s += `<rect x="-600" y="${y - 35}" width="1200" height="70" rx="12" fill="${P.sun}" opacity=".4"/>`;
+    if (r < 6) s += `<path d="M${part ? X[0] + 100 : -596} ${y + 38} H596" stroke="${P.ink}" stroke-width="2" stroke-dasharray="3 9" opacity=".3"/>`;
     row.forEach((cell, i) => { const t0 = ts[i]; if (t < t0) return; const k = t0 < 0 ? 1 : spring(t, t0, .35), hop = t0 < 0 ? 0 : 22 * Math.sin(Math.PI * clamp((t - t0) / .35));
-      let inner; if (i === 3) { let cx = 0; inner = cell.map((w) => { const sz = cell.length > 2 ? 15 : 19, ww = tw(w, sz, 700, "Fredoka", 2) + sz * 1.5, g = TF(cx + ww / 2, 0, 1, CHIPC[w] ? propChip(w, sz) : tpill(0, 0, w, sz, "#fff", P.ink, { w: 700 })); cx += ww + 6; return g; }).join(""); }
-      else if (i === 1) inner = T(0, 9, cell, 24, P.ink, { a: "start", w: 600 });
-      else inner = `<rect x="-6" y="-26" width="${n2(tw(cell, 24, 700) + 22)}" height="52" rx="10" fill="#fff" stroke="${P.ink}" stroke-width="3"/>` + T(5, 9, cell, 24, P.ink, { a: "start" });
-      s += TF(X[i], y - hop, k, inner); });
-    const tt = tickT(r); if (t >= tt) s += TF(555, y, spring(t, tt, .35), tickBadge(22)); });
-  return `<path d="M-300 0 V-70 M300 0 V-70" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><g filter="url(#drop)"><rect x="${-W / 2 - 20}" y="${top}" width="${W + 40}" height="660" rx="28" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>`
-    + T(0, top + 58, "MATCH THE JOB", 46, P.ink, { ls: 5 }) + s + tpill(0, -40, "STAGE 2: draw (tiles = pictures)", 22, P.coral, "#fff"); }
+      let inner, x = X[i]; if (i === 3) { let cx = 0; const sz = cell.length > 1 ? 15.5 : 20; inner = cell.map((w, j) => { const z = j === 2 ? 14 : sz, ww = tw(w, z, 700, "Fredoka", CHIPC[w] ? 3 : 0) + z * 1.5; if (j === 2) cx = 0; const g = TF(cx + ww / 2, cell.length > 2 ? (j === 2 ? 17 : -15) : 0, 1, CHIPC[w] ? propChip(w, z) : tpill(0, 0, w, z, "#fff", P.ink, { w: 700 })); cx += ww + 4; return g; }).join(""); x -= 2; }
+      else if (i === 1) { const ls = wrap(cell, 23, CW[1] - 16, 600); inner = ls.map((l, j) => T(0, 8 + (j - (ls.length - 1) / 2) * 26, l, 23, P.ink, { a: "start", w: 600 })).join(""); }
+      else if (i === 2) inner = TF(20, 0, 1, SWATCH[cell]) + T(46, 9, cell, 25, P.ink, { a: "start" });
+      else { const fs = part ? 19 : 21, ls = wrap(cell, fs, part ? 120 : 196, 700), x0 = part ? 108 : 0; inner = TF(x0 + 32, 0, part ? .86 : 1, TILE[cell]()) + ls.map((l, j) => T(x0 + (part ? 64 : 72), 7 + (j - (ls.length - 1) / 2) * 23, l, fs, P.ink, { a: "start" })).join(""); }
+      s += TF(x, y - hop, k, inner); });
+    const tt = tickT(r); if (t >= tt) s += TF(596, y, spring(t, tt, .35), tickBadge(20)); });
+  if (o.good) s += TF(X[2] + 80, top - 30, o.good, jobTag(t, 0, 34));
+  return `<path d="M-330 0 L-300 -90 M330 0 L300 -90 M-390 0 H-270 M270 0 H390" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><g filter="url(#drop)"><rect x="${-Wd / 2 - 20}" y="${top}" width="${Wd + 40}" height="672" rx="28" fill="#C99A62"/><rect x="${-Wd / 2 - 6}" y="${top + 14}" width="${Wd + 12}" height="644" rx="18" fill="url(#gPaper)"/></g>`
+    + T(0, top + 62, "MATCH THE JOB", 46, P.ink, { ls: 5 }) + s; }
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start with their picture, revealed at the end.
    Part 1: a little MYNAH on top of the TROLLEYS sign of the trolley bay (every wide shot of the walkway): black body, a yellow beak, yellow
@@ -65,7 +69,7 @@ function matchBoard(t, o = {}) { const RT = ROWT(), fl = o.flash || [0, 0, 0], X
    friendly eyes with a highlight, a little smile, an idle loop. Free, never touched. Not on screen during a [LOOK CLOSER]. ---------- */
 // STAGE 1 placeholder art (centred on 0, 0, about 200 px): a grey disc with the animal's name. Stage 2: mynahArt(t) / squirrelArt(t).
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["mynah", hiddenPH("mynah")] : ["squirrel", hiddenPH("squirrel")];
+const HIDDEN = PART === 1 ? ["mynah", mynahArt] : ["squirrel", squirrelArt];   // STAGE 2: the drawn animals (walk.js)
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#DDF4FF" : "#E3F5D8"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[0], n2(r * .24), P.ink, "#fff", { w: 700 }));
 
