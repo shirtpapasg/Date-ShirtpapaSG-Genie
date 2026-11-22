@@ -347,5 +347,89 @@
    "body_h": 791,
    "hips_above_feet": 6
   }
+ },
+ "momo_c": {
+  "oops": {
+   "file": "poses/momo_c_oops.png",
+   "src": "momo_c_oops.jpg",
+   "anchor": [
+    399.1,
+    831.0
+   ],
+   "scale": 1.0113,
+   "size": [
+    705,
+    855
+   ]
+  },
+  "waving": {
+   "file": "poses/momo_c_waving.png",
+   "src": "momo_c_waving.jpg",
+   "anchor": [
+    394.2,
+    831.0
+   ],
+   "scale": 0.9461,
+   "size": [
+    760,
+    855
+   ]
+  },
+  "thinking": {
+   "file": "poses/momo_c_thinking.png",
+   "src": "momo_c_thinking.jpg",
+   "anchor": [
+    394.2,
+    831.0
+   ],
+   "scale": 0.9472,
+   "size": [
+    651,
+    855
+   ]
+  },
+  "surprised": {
+   "file": "poses/momo_c_surprised.png",
+   "src": "momo_c_surprised.jpg",
+   "anchor": [
+    411.3,
+    831.0
+   ],
+   "scale": 1.0075,
+   "size": [
+    713,
+    855
+   ]
+  },
+  "cheer": {
+   "file": "poses/momo_c_cheer.png",
+   "src": "momo_c_cheer.jpg",
+   "anchor": [
+    402.2,
+    831.0
+   ],
+   "scale": 1.0453,
+   "size": [
+    766,
+    855
+   ]
+  },
+  "arms_crossed": {
+   "file": "poses/momo_c_arms_crossed.png",
+   "src": "momo_c_arms_crossed.jpg",
+   "anchor": [
+    405.8,
+    831.0
+   ],
+   "scale": 0.989,
+   "size": [
+    658,
+    855
+   ]
+  },
+  "_sit": {
+   "body_h": 807,
+   "hips_above_feet": 6
+  }
  }
 }

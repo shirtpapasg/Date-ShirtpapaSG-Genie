@@ -24,7 +24,10 @@ POSES = {  # buddy: {pose: (file, crop or None)}
 POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on grey Basil's sitting scale until his coloured sitting set is cut
   "oops": ("basil_c_oops.jpg", None), "waving": ("basil_c_waving.jpg", None), "thinking": ("basil_c_thinking.jpg", None),
   "surprised": ("basil_c_surprised.jpg", None), "pointing": ("basil_c_pointing.jpg", None)}
-SITREF = {"basil_c": "basil"}   # which sitting sprite sets the scale and foot line
+POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
+  "oops": ("momo_c_oops.jpg", None), "waving": ("momo_c_waving.jpg", None), "thinking": ("momo_c_thinking.jpg", None),
+  "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None)}
+SITREF = {"basil_c": "basil", "momo_c": "momo"}   # which sitting sprite sets the scale and foot line
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
