@@ -72,6 +72,19 @@ function reactTriggers() { if (_trig) return _trig; const out = [];
   out.sort((a, b) => a.t - b.t); out.forEach((o, i) => { o.k = i; }); return (_trig = out); }
 let _own = {};
 function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id) => TL.lines[id]).filter((L) => L && (L.who === who || (L.who === "chant"))).map((L) => L.t).sort((x, y) => x - y)); for (const x of a) if (x > t) return x; return 1e9; }
+/* teacher, 22 Nov: "the pet buddies reactions [must] be logical and not random. The wrong answer should show shy face, whereas the
+   correct one should be confident/smile. celebrate with hands high up only when achieved/learnt something new". */
+let _learn = null;
+function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you know!"
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|tagcycle$|tagliving$|tagnon$|bend$)/.test(k)) _learn.push([v - .4, v + 4]);
+    for (const s of TL.scenes || []) if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); }
+  return _learn.some(([a, b]) => t >= a && t < b); }
+const OUTCOMES = (PART === 1 ? [{ at: "m:ansglow", right: ["basil"], wrong: ["momo", "pip"] }, { at: "l:g1203", right: ["pip"], wrong: ["basil"] }]
+  : [{ at: "m:ansglow", right: ["basil", "pip"], wrong: ["momo"] }, { at: "l:j904", right: ["basil", "momo"], wrong: ["pip"] }]);
+function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id] = o.at.split(":"), t0 = k === "m" ? MK(id) : (HAS(id) ? LT(id) : undefined); if (t0 === undefined || t < t0 || t > t0 + 4) continue;
+    if (o.wrong.includes(who)) return { t0, pose: "oops" };   // shy: paw on the head, a sheepish smile
+    if (o.right.includes(who)) return { t0, pose: SPR[`${who}_arms_crossed`] ? "arms_crossed" : "sit" }; }   // confident smile
+  return null; }
 function reactPose(who, txt, k) {   // teacher, 22 Nov: "the pet buddies movement are really random in some scene". A pose swap now only
   // answers something in the line: a question -> thinking; a problem word -> oops/surprised; a celebration -> cheer. Anything else: a nod.
   const q = /\?$/.test(txt), neg = /\b(not|no|never|break|breaks|broke|bad|cannot|can't|fragile|crack|oh no|oops|knock|clang)\b/i.test(txt),
@@ -79,7 +92,7 @@ function reactPose(who, txt, k) {   // teacher, 22 Nov: "the pet buddies movemen
   if (q) return "thinking"; if (neg) return who === "basil" ? "oops" : "surprised"; if (yay) return "cheer"; return null; }
 // only ONE listener answers a line with a pose (they take turns); the other nods; and no buddy swaps pose more than once in 6 s
 function reactChosen(g) { const L = ["pip", "basil", "momo"].filter((w) => w !== g.who); return L[g.k % L.length]; }
-function reactPoseAt(tr, i, who) { const g = tr[i]; if (g.who === who || reactChosen(g) !== who) return null; const ps = reactPose(who, g.txt, g.k); if (!ps) return null;
+function reactPoseAt(tr, i, who) { const g = tr[i]; if (g.who === who || reactChosen(g) !== who) return null; const ps = reactPose(who, g.txt, g.k); if (!ps || (ps === "cheer" && !learnAt(g.t))) return null;
   for (let j = i - 1; j >= 0 && g.t - tr[j].t < 6; j--) { const h = tr[j]; if (h.who !== who && reactChosen(h) === who && reactPose(who, h.txt, h.k)) return null; } return ps; }
 // -> { t0, t1, pose (null = a nod-hop) } of the reaction running at t, or null
 function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact || o.still) return null; const T0 = Math.max(S.t0 - .05, o.in !== undefined ? o.in + .6 : -9), d = REACT_DLY[who] || .2;
@@ -105,6 +118,9 @@ function buddy(who, x, y, h, t, o = {}) {
     if (spk && pose !== "sit" && pose !== "back") { if (spk.t > tsw) tsw = spk.t; pose = "sit"; nxt = Math.min(nxt, spk.end + .05); }
     else if (!spk && pose !== "sit" && pose !== "back" && !o.keepPose) { for (const id of TL.order) { const L = TL.lines[id];   // back to the pose: pop again
       if (L.who === who && L.end + .05 > tsw && L.end + .05 <= t && t - L.end < 1.5) tsw = L.end + .05; } } }
+  if (!speaking(who, t) && !o.keepPose) { const oc = outcomeAt(who, t);
+    if (oc) { pose = oc.pose; if (oc.t0 > tsw) tsw = oc.t0; nxt = Math.min(nxt, oc.t0 + 4); }
+    else if (pose === "cheer" && !learnAt(t)) pose = SPR[`${who}_arms_crossed`] && /answer|lock/i.test((window._S || {}).name || "") ? "arms_crossed" : "sit"; }   // hands up only when something is learnt
   let nodH = 0;
   if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);   // v3: never frozen
     if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }

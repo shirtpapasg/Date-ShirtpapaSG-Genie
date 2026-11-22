@@ -318,6 +318,18 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   thinking; a problem: oops/surprised; a celebration: cheer); otherwise a small nod. No buddy swaps pose more than once in 6 s unless the
   staging asks for it. Never "pointing" at nothing. (Code: ep14/lib.js buddy() and reactPose/reactPoseAt.)
 
+- **Reactions follow the answer, and only the right buddy explains it (teacher, 22 Nov: "i need the pet buddies reactions to be logical
+  and not random. The wrong answer should show shy face, whereas the correct one should be confident/smile. celebrate with hands high
+  up only when achieved/learnt something new"; "correct answers should be read only by the one that gave correct answer. wrong pet
+  buddies can speak if dialogue make sense").**
+  - At each answer reveal: a buddy who picked wrong shows the shy pose (oops: paw on the head, sheepish smile); a buddy who picked right
+    shows a confident smile (arms crossed, or the smiling sit pose). Every episode lists its reveals (lib.js `OUTCOMES`: who was right, who was wrong).
+  - Hands-up cheering only when something is achieved or learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you
+    know!". Everywhere else a cheer becomes a smile and a nod (lib.js `learnAt`).
+  - The explanation of a correct answer is spoken only by a buddy who got it right. A buddy who got it wrong may speak when it makes sense
+    (a question, "So the Sun only looks as if it moves!", fixing their own mistake). Every line a host answers ("Yes, Momo!") must have
+    its buddy line kept; never cut one without the other.
+
 ## 6. Motion (reference: `characters/sprites/pose_test_robot_round.mp4`, approved "exactly what I want")
 
 - **Pose swaps:**
