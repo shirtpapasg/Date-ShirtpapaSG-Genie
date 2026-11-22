@@ -96,8 +96,8 @@ const ringPH = (txt) => (tt) => `<circle cx="430" cy="470" r="150" fill="#fff" o
 // beside the glass bottle (lcbottles, from mark noglass).
 const TROLLEY_RULE = "Trolleys are for groceries, not for rides.", TANK_RULE = "We do not tap the glass.", GLASS_RULE = "We do not drop glass.";
 const CAR_RULES = ["The car is parked and switched off.", "In a car park, stay with an adult."];
-const smallPrint = (t, t0, txt, i = 0) => { const w = tw(txt, 28, 500) + 60; return finePrint(t, t0, txt, Math.max(40 + w / 2, 300), 196 + i * 64); };
-const trolleyRule = (t, t0 = -9) => smallPrint(t, t0, TROLLEY_RULE);
+const smallPrint = (t, t0, txt, i = 0, y0 = 196) => { const w = tw(txt, 28, 500) + 60; return finePrint(t, t0, txt, Math.max(40 + w / 2, 300), y0 + i * 64); };
+const trolleyRule = (t, t0 = -9) => smallPrint(t, t0, TROLLEY_RULE, 0, 126);   // Stage 2: just under the logo, clear of the SUPERMARKET sign
 const carRules = (t, t0 = -9) => smallPrint(t, t0, CAR_RULES[0], 0) + smallPrint(t, t0 + .15, CAR_RULES[1], 1);
 // the dare blocks' on-screen words (script section 3; the same as script.py DARE_CARDS / DARE_LABEL / NEXT_CARDS): Block A (fabric), Block B
 const DARE_CARDS = ["Glass", "Metal", "Fabric"], DARE_LABEL = "Which material would you choose to make it?", NEXT_CARDS = ["Fabric", "Metal", "Wood"];

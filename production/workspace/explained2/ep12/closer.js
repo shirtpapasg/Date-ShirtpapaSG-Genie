@@ -44,3 +44,68 @@ const lcStep = (x, y, n, k = 1) => TF(x, y, k, `<g filter="url(#dropS)"><circle 
 const lcClock = (t, t0, t1, x, y) => OP(ramp(t, t0, .25) * (1 - ramp(t, t1, .25)), `<g transform="translate(${x} ${y})"><g filter="url(#dropS)"><rect x="-190" y="-40" width="380" height="80" rx="40" fill="${P.ink}"/></g><circle cx="-146" cy="0" r="27" fill="#fff"/><path d="M-146 0 L${n2(-146 + 19 * Math.sin((t - t0) * 7))} ${n2(-19 * Math.cos((t - t0) * 7))}" stroke="${P.ink}" stroke-width="5" stroke-linecap="round"/><path d="M-146 0 L${n2(-146 + 12 * Math.sin((t - t0) * .6))} ${n2(-12 * Math.cos((t - t0) * .6))}" stroke="${P.coral}" stroke-width="5" stroke-linecap="round"/>${T(32, 14, "speeded up", 40, "#fff", { w: 600 })}</g>`);
 // a small "slow motion" tag inside the window (EP10)
 const slowTag = (t, t0, x = 668, y = -350) => TF(x, y, spring(t, t0, .4), `<g filter="url(#dropS)"><rect x="-128" y="-30" width="256" height="60" rx="30" fill="${P.ink}"/></g><path d="M-98 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(16, 12, "slow motion", 32, "#fff", { w: 600 })}`);
+
+/* ====================================================================================================================================
+   EP12 STAGE 2: the five look-closer pictures. Each art(t) is centred on (0, 0) inside +-830 x +-395 (the top 110 px are kept for the book's
+   strip, the bottom 80 px for the verdict). No buddy, no score, no hidden animal inside the window.
+   ==================================================================================================================================== */
+const LOADED = { rice: 0, bot: [0, 0, 0, 0], tins: [0, 0, 0] };
+const lcWall = (gy = 290) => `<rect x="-900" y="-420" width="1800" height="840" fill="#FFF1D6"/><rect x="-900" y="${gy}" width="1800" height="200" fill="#DCCBAA"/><path d="M-900 ${gy} H900" stroke="#B9A684" stroke-width="5"/>${[-700, -420, -140, 140, 420, 700].map((x) => `<path d="M${x} ${gy} l${x * .12} 130" stroke="#B9A684" stroke-width="3" opacity=".6"/>`).join("")}`;
+// a thing that is lowered in and lands exactly at t0 (dy = how far above its place it still is)
+const dropDy = (t, t0, h = 300, d = .45) => t < t0 - d ? undefined : t >= t0 ? 0 : -h * (1 - ei((t - (t0 - d)) / d));
+
+/* 1 · lcjob: a trolley doing its job. The sack RICE 10 kg lands AT `rice` (the trolley dips on its wheels), four bottles from `bottles`
+   (.18 s apart), tins from `tins` (.2 s apart); three plain labels; a hand takes the handle and pushes from `push` to `stop` */
+function jobArt(t) { const S = 2.15, GY = 300, tr = MK("rice"), tb = MK("bottles"), tt = MK("tins"), tp = MK("push"), ts = MK("stop"), X0 = -330, X1 = 150;
+  const u = eio((t - tp) / (ts - tp)), x = lerp(X0, X1, u), rot = (x - X0) / (17 * S) * 57.3;
+  const load = { rice: dropDy(t, tr, 330, .5), bot: [0, 1, 2, 3].map((i) => dropDy(t, tb + i * .18, 260, .3)), tins: [0, 1, 2].map((i) => dropDy(t, tt + i * .2, 220, .28)) };
+  const dip = t < tr ? 0 : 3 + 9 * wob(t, tr, .5) + 3 * pulse(t, tb, .02, .3) + 2 * pulse(t, tt, .02, .3);
+  // the hands: lowering the sack (until it lands), then one hand on the handle for the push
+  const sy = load.rice === undefined ? -999 : GY + S * (-196 + load.rice), up = ramp(t, tr + .1, .4), hs = t < tr - .5 ? "" : OP(1 - ramp(t, tr + .3, .3), aHand(x - 110, sy - 200 * up, 90, 1.3) + aHand(x + 20, sy - 200 * up, 90, 1.3));
+  const hk = ramp(t, tp - .55, .4) * (1 - ramp(t, ts + .5, .4)), hp = hk < .02 ? "" : aHand(x - 188 * S - 160 * (1 - hk), GY - 270 * S, 8, 1.4);
+  const tl = tt + 1.0, t1 = tp - .3, bx = x, lab = lcLab(t, tl, -330, -340, "handle: to push", bx - 170 * S, GY - 268 * S, { size: 40, t1 }) + lcLab(t, tl + .25, 440, -200, "basket: holds the groceries", bx + 60 * S, GY - 200 * S, { size: 40, t1 }) + lcLab(t, tl + .5, 420, 200, "wheels: roll", bx + 78 * S + 30, GY - 30, { size: 40, t1 });
+  const lines = u > .02 && u < .98 ? [0, 1, 2].map((i) => `<path d="M${n2(x - 420 - i * 60)} ${GY - 120 - i * 90} h${-70 - i * 20}" stroke="#fff" stroke-width="10" stroke-linecap="round" opacity="${n2(.8 * Math.sin(Math.PI * u))}"/>`).join("") : "";
+  return lcWall(GY) + `<ellipse cx="${n2(x)}" cy="${GY + 4}" rx="${200 * S * .6}" ry="16" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + lines + TF(x, GY, S, trolleyS({ load, dip, rot })) + hs + hp + lab; }
+
+/* 2 · lcmetal: the loaded metal trolley. bars / line: the bottom bars before and after, side by side, along ONE plain straight guide line;
+   pullbk: the whole trolley and the bay; clang: the knock (AT the mark), a small bounce back; slowmo: once more, slowly; closeup: where metal
+   met metal: smooth, whole. No dent, no crack, no sparks. The word "rigid" is never used. */
+const barPanel = (t, x, title, sack, kLine) => { const w = 700, h = 430; let rods = ""; for (let i = 0; i < 9; i++) rods += `<circle cx="${-300 + i * 75}" cy="96" r="13" fill="url(#wSteel)" stroke="${METD}" stroke-width="4"/>`; let up = ""; for (let i = 0; i < 9; i++) up += `<path d="M${-300 + i * 75} 70 V-220" stroke="${MET}" stroke-width="7" opacity=".55"/>`;
+  return TF(x, 20, 1, `<clipPath id="bp${sack ? 1 : 0}"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="26"/></clipPath><g filter="url(#dropS)"><rect x="${-w / 2 - 8}" y="${-h / 2 - 8}" width="${w + 16}" height="${h + 16}" rx="32" fill="#fff"/></g><g clip-path="url(#bp${sack ? 1 : 0})"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#F3E6CC"/>${up}
+      ${sack ? `<path d="M-250 70 Q-290 -40 -250 -230 H250 Q290 -40 250 70 Q0 84 -250 70z" fill="#FFF6DE" stroke="#C9A772" stroke-width="7"/><path d="M-262 -150 H262" stroke="#E8604E" stroke-width="12"/>${T(0, -30, "RICE", 96, "#C4502E", { ls: 6 })}${T(0, 30, "10 kg", 40, "#8A6A3A", { w: 600 })}` : ""}
+      <rect x="-360" y="70" width="720" height="28" rx="14" fill="url(#wSteel)" stroke="${METD}" stroke-width="5"/><path d="M-340 78 H340" stroke="#fff" stroke-width="5" opacity=".8"/>${rods}
+      ${kLine > .01 ? `<path d="M-330 136 H${n2(-330 + 660 * kLine)}" stroke="${P.coral}" stroke-width="7" stroke-dasharray="22 12"/>` : ""}</g>`
+    + TF(0, -h / 2 - 2, 1, tpill(0, 0, title, 36, P.ink, "#fff", { w: 700 }))); };
+function metalArt(t) { const tB = MK("bars"), tL = MK("line"), tP = MK("pullbk"), tC = MK("clang"), tS = MK("slowmo"), tU = MK("closeup"), tV = MK("v_metal"), GY = 290, XC = -40, S = 1.5, L = "g804";
+  if (t < tB) { const u = eio((t - (tB - 2.6)) / 2.2), z = lerp(1.7, 3.6, u); return lcWall(292) + `<g transform="translate(0 ${n2(lerp(292, 300 + 98 * z, u))}) scale(${n2(z)})">${trolleyS({ load: LOADED, dip: 3 })}</g>`; }
+  if (t < tP) { const kl = eo((t - tL) / .7), a = ramp(t, tB, .3) * (1 - ramp(t, tP - .25, .25));
+    return lcWall(292) + OP(a, barPanel(t, -400, "basket empty", false, kl) + barPanel(t, 400, "with the heavy sack", true, kl)
+      + (t >= tB + .4 ? pline(0, -150, -200, 100, ramp(t, tB + .4, .2)) + pline(0, -150, 200, 100, ramp(t, tB + .4, .2)) + TF(0, -150, spring(t, tB + .4, .4), tpill(0, 0, "metal bars", 40, "#fff", P.ink, { w: 700 })) : "")
+      + (t >= tL + .5 ? TF(0, 262, spring(t, tL + .5, .4), tpill(0, 0, "still straight", 44, P.ink, "#fff", { w: 700 })) : "")); }
+  // the wide view: the bay on the right, the loaded trolley pushed in at walking pace; XC = where its middle is when its front meets the last trolley
+  const slow = t >= tS, t0 = slow ? tS + .8 : tC, tm = slow ? (t - t0) / 2.4 : t - t0;   // tm = time since the knock (slow motion: 2.4 x slower)
+  const xa = slow ? XC - 190 * clamp((t0 - t) / .8) : XC - 190 * (tC - t), x = tm < 0 ? Math.max(-640, xa) : XC - 18 * Math.sin(Math.PI * clamp(tm / .5)) * Math.exp(-tm * 1.2) - 6 * (1 - Math.exp(-tm * 3));
+  const rat = tm < 0 ? 0 : 6 * Math.exp(-tm * 3) * Math.cos(tm * 34), close = ss(tU, tU + .6, t), CX = XC + 150 * S, CY = GY - 170 * S;
+  const wide = lcWall(GY) + TF(690, GY, .78, baySign()) + TF(CX + 26 * S, GY, S, bayRow(2))
+    + `<ellipse cx="${n2(x)}" cy="${GY + 4}" rx="230" ry="14" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + TF(x, GY, S, trolleyS({ load: LOADED, dip: 3, rot: x * 2.3, rat })) + (tm < .5 || (slow && t < tU) ? aHand(x - 188 * S, GY - 270 * S, 8, 1.1) : OP(1 - ramp(t, t0 + .5, .3), aHand(x - 188 * S - 60 * ramp(t, t0 + .5, .3), GY - 270 * S, 8, 1.1)));
+  const view = wide;
+  // the close-up: where metal met metal (the front of our basket against the back bar of the next one): smooth and whole
+  const cu = close < .02 ? "" : OP(close, `<rect x="-900" y="-420" width="1800" height="840" fill="${P.night}" opacity=".45"/>` + pline(420, -40, CX - 20, CY + 60, close) + TF(470, -60, .6 + .4 * close, `<clipPath id="mcu"><circle r="250"/></clipPath><g filter="url(#drop)"><circle r="262" fill="#fff"/></g><g clip-path="url(#mcu)"><rect x="-260" y="-260" width="520" height="520" fill="#F3E6CC"/>
+      <rect x="-300" y="-60" width="300" height="120" rx="60" fill="url(#wSteel)" stroke="${METD}" stroke-width="8"/><path d="M-280 -28 H-40" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity=".85"/>
+      <rect x="-4" y="-300" width="120" height="600" rx="50" fill="url(#wSteelH)" stroke="${METD}" stroke-width="8"/><path d="M30 -240 V240" stroke="#fff" stroke-width="12" stroke-linecap="round" opacity=".8"/>${lcGlint(-30, -70, 30, t)}${lcGlint(84, 110, 22, t, 2)}</g><circle r="250" fill="none" stroke="${P.ink}" stroke-width="10"/>`)
+      + lcLab(t, tU + .5, -420, -260, "a hard knock", 440, -60, { size: 42 }) + (t >= W(L, "no") - .1 ? TF(-580, -160, spring(t, W(L, "no") - .1, .4), tpill(0, 0, "no crack", 44, "#fff", P.ink, { w: 700 })) : "") + (t >= W(L, "no", 1) - .1 ? TF(-320, -160, spring(t, W(L, "no", 1) - .1, .4), tpill(0, 0, "no break", 44, "#fff", P.ink, { w: 700 })) : "")
+      + chipAt(t, W(L, "strong") - .1, 470, 230, "STRONG", 44)
+      + (t >= tV - .5 ? picBoard("trMetal", -560, 130, spring(t, tV - .5, .45), { sc: .66, id: "lcm" }) + (t >= MK("goodtag") ? TF(-560, 10 - 60 * (1 - eo((t - MK("goodtag")) / .25)), spring(t, MK("goodtag"), .45), jobTag(t, 0, 26)) : "") : ""));
+  return OP(ramp(t, tP - .05, .3), view) + (slow && t < tU + .3 ? OP(1 - ramp(t, tU, .3), slowTag(t, tS)) : "") + cu; }
+
+/* 3 · lctank: the planted glass tank fills the window. lens: a magnifier holds on one fish (sharp: fan tail, eye, fins); glide: the camera
+   glides down the glass to the bottom edge and the stand's shelf; dry: dry wood, no drip. Nobody taps. */
+function tankArt(t) { const S = 1.5, FY = 470, tLn = MK("lens"), tG = MK("glide"), tD = MK("dry"), back = LT("g1104") - .3, g = eio((t - tG) / 2.0) * (1 - eio((t - back) / 1.0)), z = 1 + .4 * g, ty = lerp(0, 60 - (FY - 220 * S) * 1.4, g);
+  const [fx, fy] = guppyAt(0, t), mx = fx * S, my = FY + fy * S, lk = ramp(t, tLn, .35) * (1 - ramp(t, tG - .2, .3));
+  const lens = lk < .02 ? "" : OP(lk, `<path d="M${n2(mx + 105)} ${n2(my + 105)} l80 80" stroke="${P.ink}" stroke-width="26" stroke-linecap="round"/><clipPath id="tkl"><circle cx="${n2(mx)}" cy="${n2(my)}" r="140"/></clipPath><g clip-path="url(#tkl)"><rect x="${n2(mx - 150)}" y="${n2(my - 150)}" width="300" height="300" fill="#BFEAFB"/><g transform="translate(${n2(mx)} ${n2(my)}) scale(${4.2 * guppyAt(0, t)[2]} 4.2) translate(8 0)">${guppy(0, t)}</g></g><circle cx="${n2(mx)}" cy="${n2(my)}" r="140" fill="none" stroke="${P.ink}" stroke-width="12"/><circle cx="${n2(mx)}" cy="${n2(my)}" r="140" fill="none" stroke="${P.sun}" stroke-width="5"/>`);
+  const tA = W("g1101", "glass") - .1, tE = W("g1102", "every") - .2, tT = W("g1102", "transparent") - .1, tW = W("g1103", "waterproof") - .1, a1 = { size: 40, t1: tG - .2 };
+  const dryMark = t >= tD ? OP(ramp(t, tD, .3), `<g transform="translate(0 ${FY - 205 * S})">${[-200, -60, 80, 220].map((x, i) => `<g transform="translate(${x} 0) scale(${n2(.6 + .4 * Math.sin(t * 3 + i))})"><path d="M0 -12 Q2 -2 12 0 Q2 2 0 12 Q-2 2 -12 0 Q-2 -2 0 -12z" fill="#fff"/></g>`).join("")}</g>`) : "";
+  const scene = lcWall(FY) + `<rect x="-900" y="-420" width="1800" height="${FY + 420}" fill="#E6F6FF"/><path d="M-900 ${FY} H900" stroke="#B9A684" stroke-width="5"/>` + TF(0, FY, S, tankSvg(t, { id: "lc" })) + dryMark;
+  return `<g transform="translate(0 ${n2(ty)}) scale(${n2(z)})">${scene}${lens}</g>`
+    + lcLab(t, tA, -620, 40, "glass", -258 * S, 40, a1) + lcLab(t, tE, -590, -250, "We see every fish clearly", -250, -150, { size: 36, t1: tG - .2 }) + OP(1 - ramp(t, tG - .2, .25) * (1 - ramp(t, MK("v_tank") - .6, .3)), chipAt(t, tT, -610, 180, "TRANSPARENT", 40))
+    + lcLab(t, tD - .9, -620, -220, "full of water", -300, -120, { size: 40, t1: back }) + lcLab(t, tD + .1, 560, 250, "the shelf: dry", 300, 86, { size: 42, t1: back }) + OP(1 - ramp(t, back, .25) * (1 - ramp(t, MK("v_tank") - .6, .3)), chipAt(t, tW, 620, t < MK("v_tank") - .6 ? -160 : 180, "WATERPROOF", 40)); }

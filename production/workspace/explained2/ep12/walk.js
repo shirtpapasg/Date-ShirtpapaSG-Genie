@@ -47,7 +47,7 @@ const baySign = () => `<rect x="-8" y="-360" width="16" height="360" rx="6" fill
 function trolleyTop(o = {}) { let g = ""; for (let i = 0; i <= 12; i++) g += `<path d="M${-300 + i * 50} -150 V150" stroke="${MET}" stroke-width="4"/>`; for (let j = 0; j <= 6; j++) g += `<path d="M-300 ${-150 + j * 50} H300" stroke="${MET}" stroke-width="4"/>`;
   return `<path d="M-300 -150 H300 L270 150 H-300z" fill="#E9EEF7"/><g opacity=".55">${g}</g>
     ${TF(120, 96, 1.5, riceSack())}${[0, 1, 2].map((i) => TF(-70 + i * 46, -70 + (i % 2) * 22, 1.6, `<circle r="15" fill="url(#wSteelH)" stroke="${METD}" stroke-width="3"/><circle r="9" fill="none" stroke="${METD}" stroke-width="2"/>`)).join("")}${[0, 1].map((i) => TF(-20 + i * 60, 60, 1.5, `<circle r="13" fill="${["#FF9838", "#43BF6C"][i]}" stroke="${P.ink}" stroke-width="3"/><circle r="6" fill="#fff" stroke="${P.ink}" stroke-width="2"/>`)).join("")}
-    <path d="M-300 -150 H300 L270 150 H-300z" fill="none" stroke="${METD}" stroke-width="12" stroke-linejoin="round"/><path d="M-150 -150 V150" stroke="${METD}" stroke-width="9"/><rect x="-294" y="-144" width="138" height="288" fill="#FFF8EA" opacity=".55"/>
+    <path d="M-300 -150 H300 L270 150 H-300z" fill="none" stroke="${METD}" stroke-width="12" stroke-linejoin="round"/><path d="M-100 -150 V150" stroke="${METD}" stroke-width="9"/><rect x="-294" y="-144" width="188" height="288" fill="#FFF8EA" opacity=".55"/>
     <path d="M-300 -120 H-350 V120 H-300" fill="none" stroke="${METD}" stroke-width="12" stroke-linejoin="round"/><rect x="-364" y="-90" width="28" height="180" rx="14" fill="#E8604E" stroke="#B8402E" stroke-width="5"/>`; }
 
 /* ---------- the three water bottles: the same height and shape, full and closed. origin = base centre; 84 wide, 210 tall.
