@@ -53,8 +53,8 @@ SC.r1 = (t, s) => lockN(t, { cards: ["Plastic", "Glass", "Metal"], clues: [["mus
 
 /* 5 · [LOOK CLOSER] three bottles, one of each material: the tick table (WATERPROOF, SEE THE WATER, DOES NOT BREAK EASILY); the book's strip */
 const CAMB = [1.25, 1250, 700];
-SC.lcbottles = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1020, fy: 720, bgc: "#EAF6FF", art: (tt) => bottleArt(tt, s), jolt: [MK("land")], fxs: (tt) => impactFX(tt, MK("land"), 1330, 560, "BONK!", { s: .62 }),
-  peek: { who: "momo", side: "r", h: 410, dy: .52, dx: 120, ax: -40, as: .95, ev: [[MK("dry") - .3, "back"], [MK("see1") - .1, "surprised"], [MK("see3") + .6, "thinking"], [MK("land") - .5, "oops"], [MK("land") + .03, "surprised"], [MK("tick3") + .2, "cheer"], [MK("noglass") - .1, "sit"], [MK("v_bottle") + .1, "cheer"]] }, set: (tt) => V(tt, { car: { boot: 1, bags: BOOTBAGS }, board: {}, sq: false, items: trolBag }, CAMB), verdict: VSTYLE("FOR SCHOOL: THE PLASTIC BOTTLE", 0), tv: MK("v_bottle"),
+SC.lcbottles = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1020, fy: 720, bgc: "#EAF6FF", art: (tt) => bottleArt(tt, s), jolt: [MK("land")], fxs: (tt) => impactFX(tt, MK("land"), 1300, 540, "BONK!", { s: .6 }),
+  peek: { who: "momo", side: "r", h: 400, dy: .53, dx: 105, ax: -10, ay: -10, as: 1.0, ev: [[MK("dry") - .3, "back"], [MK("see1") - .1, "surprised"], [MK("see3") + .6, "thinking"], [MK("land") - .5, "oops"], [MK("land") + .03, "surprised"], [MK("tick3") + .2, "cheer"], [MK("noglass") - .1, "sit"], [MK("v_bottle") + .1, "cheer"]] }, set: (tt) => V(tt, { car: { boot: 1, bags: BOOTBAGS }, board: {}, sq: false, items: trolBag }, CAMB), verdict: VSTYLE("FOR SCHOOL: THE PLASTIC BOTTLE", 0), tv: MK("v_bottle"),
   over: (tt) => lcStrip(tt, "j506", "Glass is not as strong as plastic or metal.", { keys: ["not", "as", "strong"] }) });
 /* the answer is one: plastic; Momo's correction; the third row fills on the board (row3) */
 SC.bottleans = (t, s) => { const L = "j507", tA = W(L, "one") - .1, tOne = W(L, "one", 2) - .1, hm = HAS("j508");
@@ -66,7 +66,7 @@ SC.bottleans = (t, s) => { const L = "j507", tA = W(L, "one") - .1, tOne = W(L, 
 
 /* 6 · Mark Sentence 1 (Basil): 3.26; USE pops right after "use" (lib.js o.at) */
 SC.mark1 = (t, s) => markScene(t, s, { id: "j602", sayId: "j601", who: "basil", n: "1 of 2", text: "An object can be made from different materials. The choice of materials depends on the use of the object.", keys: ["different", "materials.", "depends", "on", "use"], size: 62, y: 250, footer: FOOT,
-  extra: TF(1280, 990, .42 * spring(t, s.t0 + .4, .5), bottlePic()) });
+  extra: TF(1290, 945, .42 * spring(t, s.t0 + .4, .5), bottlePic()) });
 
 /* 7 · the shopping goes into the car (bagin2, bootshut); [LOOK CLOSER] one car, part by part */
 SC.boot = (t, s) => { const tI = MK("bagin2"), tS = MK("bootshut"), u = eio((t - (tI - .4)) / .4), bx = lerp(TRPX, CARX - 300, u), by = lerp(PGROUND - 66, PGROUND - 96, u) - 130 * Math.sin(Math.PI * u), boot = 1 - eio((t - (tS - .35)) / .35);
@@ -125,7 +125,7 @@ SC.fix = (t, s) => { const rb = MK("rub"), rub = ss(rb, rb + .5, t), fix = ss(rb
     + (t >= tip ? td + TF(tx, 0, 1, `<path d="M-200 1040 L-170 950 M200 1040 L170 950" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-340" y="430" width="680" height="530" rx="30" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>${T(-300, 510, "1 Name the property.", 46, P.ink, { a: "start" })}${T(-300, 700, "2 Link it to the job.", 46, P.ink, { a: "start" })}`
       + (t >= tip + .7 ? `<path d="M-40 528 V560 H40 V580" fill="none" stroke="${P.ink}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>` + TF(40, 606, spring(t, tip + .7, .4), propChip("WATERPROOF", 30)) : "")
       + (t >= tip + 1.1 ? `<path d="M190 718 V750 H130 V770" fill="none" stroke="${P.ink}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>` + TF(60, 850, spring(t, tip + 1.1, .4), rainPic(t)) + TF(-190, 850, spring(t, tip + 1.2, .4), tpill(0, 0, "rain outside,", 26, "#fff", P.ink, { w: 700 })) + TF(-190, 900, spring(t, tip + 1.3, .4), tpill(0, 0, "dry seats inside", 26, "#fff", P.ink, { w: 700 })) : "")) : "")
-    + coin(t, W("j1006", "two") - .1, 1700, 300, "+2", "line 2") + HUD(t); };
+    + coin(t, W("j1006", "two") - .1, 1640, 360, "+2", "line 2") + HUD(t); };
 /* the board MATCH THE JOB, all seven rows, a green tick at the end of each (ticks); the book's strip 3.30 item 3; SUITABLE pops (lib.js o.at) */
 SC.board = (t, s) => { const L = "j1008";
   return VP(t, { dim: 1, car: false, table: false, trolley: false }) + brd(t, {}, .94, 975, 1066)

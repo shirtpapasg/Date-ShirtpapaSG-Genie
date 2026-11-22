@@ -10,7 +10,7 @@ Ideas", pp. 59-72): it stays in the playlists until a later episode also covers 
 EP11 is live (its playlists' anchor for EP12: `explained-p3-ep11-part2`).
 
 Three stages: **Stage 1 (setup, done 2026-11-21, Opus)** · **Stage 2 (drawing + thumbnails, done 2026-11-22, Fable)** · **Stage 3 (render, checks, upload: done 2026-11-22, Opus; LIVE)**.
-**Current live version: EP12 v2 (teacher fixes, 22 Nov): Part 1 https://www.youtube.com/watch?v=vqSehdxTCg8 , Part 2 https://www.youtube.com/watch?v=D2U_Zom1Wzs** (the first upload G03-LFQEld8 / ussXaa1fQUQ is retired: public, out of the playlists, pointing to the new Part 1).
+**v3, 22 Nov — awaiting teacher's OK; not uploaded** (see the last section and `NOTES_REVIEW_V3.md`). **Current live version: EP12 v2 (teacher fixes, 22 Nov): Part 1 https://www.youtube.com/watch?v=vqSehdxTCg8 , Part 2 https://www.youtube.com/watch?v=D2U_Zom1Wzs** (the first upload G03-LFQEld8 / ussXaa1fQUQ is retired: public, out of the playlists, pointing to the new Part 1).
 
 ## Stage 1: done
 - **No script change was needed** (the teacher's answers are the script's own recommendations). `p3_ep12_script.md` is untouched.
@@ -341,3 +341,29 @@ No timeline mark, word or sound cue moved (`tl_p*.json`, `sound_cues.js`, `scrip
   each with a first line "▶ NEW VERSION: ... vqSehdxTCg8". The classic _gRJ0NwV6p0's first line now reads "choosing materials
   https://www.youtube.com/watch?v=vqSehdxTCg8 · design like an engineer ..." (only that line edited).
 - Episode guide (`production/episode-guide/gen.mjs`, `explained-episode-guide.html`) carries the new IDs.
+
+## v3, 22 Nov — awaiting teacher's OK; not uploaded (Opus redo to the EP1 standard)
+The teacher on v2: "Quality really dropped quite extensively"; "ALL these are important and you did not make these mistakes when creating
+episode 1." Every 22 Nov rule applied (picture, layout, animation, sound); the full list, old -> new per rule and per scene, with the EP1
+match: `NOTES_REVIEW_V3.md`. Previews for the teacher (nothing uploaded; the live v2 stays live): `qa/preview_p1_before_after.jpg`,
+`qa/preview_p2_before_after.jpg`, `qa/preview_p1_clips.mp4`, `qa/preview_p2_clips.mp4`, `qa/teachers_eye_p*_old_new_ep1.jpg`,
+`qa/countdown_p*.jpg`. The v2 renders are kept as `out/ep12_part1_OLD.mp4`, `out/ep12_part2_OLD.mp4` (ignored).
+- **The one word change (teacher, 22 Nov, on the mynah reveal: "It must be a fun fact which most children are shocked to find out!"):**
+  g1302 / j1202 split; Basil's new lines g1302f "Here's a fun fact! Mynahs build their nests from dry grass, twigs, string, and even bits
+  of plastic!" and j1202f "Fun fact! A squirrel's nest has strong twigs outside and soft leaves inside. Different materials for different
+  jobs!", then Heart g1302t / j1202t "Tell someone at home!" (make_voice.py; Basil's two takes are spread by length: pocketsphinx could not
+  align "Here's" / "squirrel's"; the mouth track is from the audio). script.py and p3_ep12_script.md (rows + section 12 note) updated.
+  To stay near 5:20, picture-only waits were trimmed: P1 the title's hold 2.4 -> 1.8 s, the cliffhanger's end .9 -> .6, the reveal's pre
+  .6 -> .4; P2 the car park's opening 2.0 -> 1.3 s, the journey's end 1.5 -> 1.2, the reveal's pre .5 -> .3, the fact shortened.
+  **Lengths: Part 1 5:20.1 (320.1 s), Part 2 5:21.0 (321.0 s).** All marks after the reveal moved with the timeline (the picture and the
+  sound key on marks, so they moved together); `.srt` rebuilt by finish.sh (no overlaps).
+- **New / changed files:** `v3.js` (new: fun-fact cards and nests, `lcPeek`, `riders`, `partTag` / `PARTC`, `numBadge`), `lib.js` (`reactAt`
+  never-frozen reactions, `jolt` / `JOLT` / `impactFX` / `faceCam`, ring drains in steps and the number pops, `SHELF_WIN`), `common.js`
+  (`lockN` rewritten: the countdown takes the stage, `choiceCard3`, `clue3`; `iris`; `gameScene` / `lizReveal` circle + stage; goals, count,
+  score hand, read-along sizes), `canteen.js` (`BUDL` set buddies 1.5x), `closer.js` (`lookCloser` takes `peek`, `jolt`, `fxs`; bigger
+  `jobArt`; named bottles; colour-coded car), `shrink.js` (YOU presence, riders, impacts, Basil's / Pip's face), `trail.js` (`adultHand`:
+  four fingers and a thumb), `walk.js` (`carSide` `o.pc` part colours; the car park's trolley at `TRPX` 330), `p1.js` / `p2.js` (scene by
+  scene), `main.js` (`window._S`), `page.html` (v3.js), `song.js` (the place beds + foley; `AMBK`), `sound_cues.js` (iris whooshes, the fact's
+  pop and sparkle, the impact thuds, the splash). `spr/` rebuilt with `prep_sprites.py` (Momo's and Basil's back views).
+- **Sound:** the place bed (`song.js`, after "ambiences"): measured on the stems about 15 dB under the voice in the walkway (AMBK 12),
+  ducked under speech; both mixes -16.0 LUFS. A human should listen once.

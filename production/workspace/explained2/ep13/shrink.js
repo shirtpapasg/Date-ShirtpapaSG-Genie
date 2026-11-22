@@ -52,7 +52,7 @@ if (PART === 1) SC.shrink = (t, s) => { const tin = MK("jin"), tz = MK("jzipclos
         return rib + ride("pip", 470, 220, [[s.t0, "sit"], [tz - .2, "surprised"], [tz + 1.6, "thinking"], [tst + .2, "arms_crossed"], [tt + .1, "cheer"], [tb, "oops"], [tb + .7, "sit"]], false, [[tt + .15, 26]])
           + ride("momo", 960, 210, [[s.t0, "back"], [tt + .05, "cheer"], [tb, "surprised"], [tb + .8, "back"]], false, [[tt + .2, 30]])
           + ride("basil", 1440, 210, [[s.t0, "sit"], [tz - .1, "arms_crossed"], [tu, "surprised"], [tt + .15, "cheer"], [tb, "surprised"]], true, [[tt + .25, 26]]); })()
-      + feelTag(t, tz + .5, tst - .3, "metal zip · closes") + feelTag(t, tt + .2, tb - .2, "fabric straps · no tear");
+      + feelTag(t, tz + .5, tst - .3, "metal zip · closes", 640) + feelTag(t, tt + .2, tb - .2, "fabric straps · no tear", 640);
   }
   if (t >= CUT - .4) {   // a cut-away at the bottom of the bag: you and the other books on the dry floor; outside, a thin shining line of water against the plastic base
     const WX = 1300, FYy = 800, sh = t < CUT + 1 ? 8 * wob(t, CUT, .5) : 0; let v = `<rect width="1920" height="1080" fill="#E8731A"/><rect width="1920" height="1080" fill="url(#sWv)" opacity=".45"/><rect x="${WX + 70}" width="560" height="1080" fill="#EAF3F8"/><rect x="${WX + 70}" y="${FYy + 80}" width="560" height="300" fill="#C9D6DC"/>`
@@ -66,7 +66,7 @@ if (PART === 1) SC.shrink = (t, s) => { const tin = MK("jin"), tz = MK("jzipclos
       + buddy("pip", 330, FYy - 560 + sh + 8, 170, t, { aura: true, auraO: .6, in: CUT + .3, poses: [[CUT, "sit"], [tw_ - .1, "surprised"], [tg, "cheer"]], tag: false, jump: [[tg + .05, 30]] })
       + buddy("momo", 860, FYy - 540 + sh + 8, 160, t, { aura: true, auraO: .6, in: CUT + .45, poses: [[CUT, "back"], [tw_ + .4, "surprised"], [tg, "cheer"]], tag: false, jump: [[tg + .12, 30]] })
       + buddy("basil", 1110, FYy - 590 + sh + 8, 170, t, { aura: true, auraO: .6, flip: true, in: CUT + .6, poses: [[CUT, "sit"], [tw_, "arms_crossed"], [tg, "cheer"]], tag: false, jump: [[tg + .2, 30]] });
-    v += feelTag(t, tw_ - .8, s.t1 - .5, "plastic base · water stays out", 300) + (t >= tg ? TF(960, 520, spring(t, tg, .5) * (1 + .05 * Math.sin(t * 5)), `<g filter="url(#glowS)">${propChip("WATERPROOF", 80)}</g>`) : "");
+    v += feelTag(t, tw_ - .8, s.t1 - .5, "plastic base · water stays out", 540) + (t >= tg ? TF(960, 520, spring(t, tg, .5) * (1 + .05 * Math.sin(t * 5)), `<g filter="url(#glowS)">${propChip("WATERPROOF", 80)}</g>`) : "");
     out = t < CUT ? out : v; }
   return out + dip(t, CUT, "#FFF6D8", .4) + youTag(t, tin, "You: a book") + OP(ramp(t, tin + .6, .4) * (1 - ramp(t, tz, .3)), tpill(960, 76, "inside the bag", 36, P.ink, P.sun, { w: 700 })) + wipe(t, s.t0, "#FFF6D8") + logo(t); };
 
@@ -87,5 +87,11 @@ if (PART === 2) SC.shrink = (t, s) => { const th = MK("jhang"), w1 = MK("jw1"), 
   // the numbers rising past you
   let nums = ""; tws.forEach((x, i) => { const u = (t - x) / 1.3; if (u <= 0 || u >= 1) return; nums += TF(VX + (i % 2 ? 150 : -150) * (1 + 2 * u), lerp(VY + 60, 1000, u * u), .5 + 2.6 * u, `<text x="0" y="40" font-family="Fredoka" font-weight="700" font-size="120" text-anchor="middle" fill="#fff" stroke="${P.ink}" stroke-width="16" stroke-linejoin="round" paint-order="stroke" opacity="${n2(Math.sin(Math.PI * Math.min(1, u * 1.15)))}">${6 + i}</text>`); });
   return `<g transform="translate(960 ${n2(540 + 10 * dipk)}) scale(${n2(z)}) translate(-960 -540)">${far}${wts}${road}</g>` + nums
-    + feelTag(t, tt, tws[0] - .3, "pulled tight") + feelTag(t, tws[3] + .5, s.t1 - .4, "9 weights · you do not tear") + (t >= tS ? TF(960, 520, spring(t, tS, .5) * (1 + .05 * Math.sin(t * 5)), `<g filter="url(#glowS)">${propChip("STRONG", 90)}</g>`) : "")
+    // EP13 v2: the three buddies ride along on YOUR woven length (Momo from behind, looking down the road with you); they wobble as each weight
+    // pulls, hold on as you go tight, cheer at six to nine and at "strong"
+    + (() => { const wb = dipk * 8, ride = (who, x, h, ps, fl, jm) => buddy(who, x, 1062 + 6 * dipk, h, t, { aura: true, auraO: .55, flip: fl, in: th + .6 + x / 4000, poses: ps, look: (fl ? -1 : 1) * wb, jump: jm, tag: false });
+      return ride("pip", 560, 220, [[s.t0, "sit"], [w1 - .05, "surprised"], [tt, "arms_crossed"], [tws[0], "cheer"]], false, tws.map((x) => [x + .05, 22]))
+        + ride("momo", 960, 210, [[s.t0, "back"], [tS - .2, "cheer"]], false, [[tS, 30]])
+        + ride("basil", 1370, 220, [[s.t0, "sit"], [w2 - .05, "surprised"], [tt, "arms_crossed"], [tws[1], "cheer"]], true, tws.map((x) => [x + .1, 22])); })()
+    + feelTag(t, tt, tws[0] - .3, "pulled tight", 640) + feelTag(t, tws[3] + .5, s.t1 - .4, "9 weights · you do not tear", 640) + (t >= tS ? TF(960, 520, spring(t, tS, .5) * (1 + .05 * Math.sin(t * 5)), `<g filter="url(#glowS)">${propChip("STRONG", 90)}</g>`) : "")
     + youTag(t, th, "You: the new strap") + OP(ramp(t, th + .6, .4) * (1 - ramp(t, w1 - .3, .3)), tpill(960, 76, "hanging from the stand", 36, P.ink, P.sun, { w: 700 })) + wipe(t, s.t0, "#FFF6D8") + logo(t); };

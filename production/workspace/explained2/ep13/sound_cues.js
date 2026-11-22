@@ -6,7 +6,7 @@
 // action's own MARK (lay1-3, clear, clip, books, lift, booksin, zip1, hang, u_zip, u_base, drop1, drop2, zo1..zc2, w1..w9, push1, push2,
 // jzipclose, jbump, jw1, jw6..jw9 ...: script.py), the same mark the picture uses, never on a guess; Stage 2 keeps its drawing on those marks
 // (a thing that lands, lands AT its mark; each weight slides on AT its number).
-window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t * 1000) / 1000, k, v }), S = SCN, R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [] };
+window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t * 1000) / 1000, k, v }), S = SCN, R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [], zoo: [] };
   const lock = (r0, dur, lockId, picks, tc, tStamp) => { (tc || []).forEach((t, i) => E(t, i % 2 ? "cardR" : "cardL")); ringTicks(r0, dur).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + dur, "bell"); E(tStamp !== undefined ? tStamp : LT(lockId) - .08 + .14, "stamp"); E(r0, "bellicon"); picks.forEach((id, i) => E(LT(id) - .1 + .11, "pick", i)); };
   const chant = (id) => { const L = TL.lines[id]; for (const [bt, k, soft] of chantBeats(L)) E(bt, k === "c" ? "clap" : "stomp", soft ? .35 : 1); E(L.end - .28, "sparkle"); for (let i = 0; i < L.ncall; i++) E(L.t + (L.slots[i][1] + 1) * L.bar, "turn", i); if (L.slots.length > L.ncall) E(L.t + L.slots[L.ncall][1] * L.bar, "softpop", 3); };
   const sayit = (id) => E(LT(id) - .05, "softpop", 2), G = (a, b) => { if (b > a + 1) R.groove.push([a, b]); }, C = (a, b) => { if (b > a + 1) R.calm.push([a, b]); }, BD = (a, b) => { if (b > a + 1) R.birds.push([a, b]); }, TK = (a, b) => { if (b > a + 1) R.tank.push([a, b]); };
@@ -75,7 +75,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   BD(S.place.t0, S.goals.t1 - .3); TK(S.place.t0, S.goals.t0); fx(S.place.t0 + .5, "ep05_bell.wav", .02, "amb"); E(S.game.t0 + .15, "sting"); E(W("j201", HIDDEN[0]) - .1, "curious"); E(W("j201", HIDDEN[0]) + .2, "ribbit"); E(W("j201", "spot") - .1, "pip", 2);
   [0, 1, 2].forEach((i) => E(LT(["j302", "j303", "j304"][i]) - .1, "softpop", i));
   // 4 Round 1 (6 s ring)
-  E(S.r1card.t0, "roundcard"); { const L = "j401"; lock(MK("ring0_r1"), 6, "j402", ["j403", "j404", "j405"], [W(L, "one", 1), W(L, "two"), W(L, "three")]); E(LE("j404") + .05, "boing"); }
+  E(S.r1card.t0, "roundcard"); { const L = "j401"; lock(MK("ring0_r1"), 6, "j402", ["j403", "j404", "j405"], [W(L, "one", 1), W(L, "two"), W(L, "three")], MK("ring0_r1") + 6 + .06);   /* EP13 v2: LOCKED IN! slams ON the bell */ E(LE("j404") + .05, "boing"); }
   // 5 LOOK CLOSER the test: two soft taps (rulerL, rulerW); for each weight a small tok and a counter click ON its number (w1..w9), each a little higher from six on;
   //   the strap's soft creak; a chime as the two fives pulse (link5); a held breath of quiet at nine, a soft pop (lens9); the verdict; a tick on the test card (testtick)
   lcin(S.lctest.t0 + .1); BD(S.lctest.t0, S.testans.t1); E(MK("rulerL"), "tap"); E(MK("rulerW"), "tap");
@@ -94,7 +94,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   mark("j801", "j802");
   // 9 the Showdown: the round card; Basil's map (paper, a soft tick on each line as he reads it), the drum roll, the counting hand; the fix: a hop, a scribble (dfly), two coins
   E(S.showcard.t0, "roundcard"); { const a = "j902", b = "j903", r0 = MK("ring0_show"); E(S.show.t0 + .1, "paper"); ["one", "two", "three"].forEach((w, i) => { if (TL.lines[a].words.some((x) => norm(x.w) === w)) E(W(a, w) - .05, "pip", i); }); R.roll.push([LT(b), W(b, "one", 1)]);
-    lock(r0, 6, "j904", ["j905", "j906"]); E(LT("j905") - .1, "boop", 2); }
+    lock(r0, 6, "j904", ["j905", "j906"], undefined, r0 + 6 + .06); E(LT("j905") - .1, "boop", 2); }
   E(MK("dfly"), "hop", 2); E(MK("dfly") + .4, "scribble"); E(W("j907", "two") - .1, "coin2"); E(W("j907", "two") + .5, "coin2", 1); if (has("j908")) E(LT("j908") - .05, "boing");
   // 10 the zoo map: six soft pops (zones), the strip (DIVERSITY pops: the key-word chime below); Mark Sentence 2 (EXTINCT pops after it); a warm chord as all twelve glow (glowall)
   [0, 1, 2, 3, 4, 5].forEach((i) => E(MK("zones") + i * .15, "softpop", i)); E(LT("j1002") - .05, "softpop", 0); mark("j1003", "j1004"); E(MK("glowall"), "chime2", 1);
@@ -111,4 +111,16 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // the key-word read-along; the ending: "Say it with us!", "Ready? One, two...", "Now you know!", then the outro plays out
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); sayit("u1300"); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+  // EP13 v2 (teacher, 22 Nov: "I still recall there's raining sound during episode 1 ... no sound effects of shoppers, laughter, bells"): a living
+  // place bed under every real-place scene, low and ducked under speech (song.js): the classroom after school (the ceiling fans' whirr, children
+  // far down the corridor, a laugh now and then, birds beyond the louvres, a far school bell), the eco-garden (birds, the pond's trickle, insects,
+  // a frog now and then), the zoo's goat home (birds, visitors far off, a goat's meh).
+  const place = (k, a, b) => { if (b > a + 1) R[k].push([a, b]); }, has_ = (n) => !!S[n];
+  if (PART === 1) { place("room", 0, S.title.t0 + .5); place("room", S.strapans.t0, S.engineers.t0); place("room", S.plan.t0, S.mark2.t0); place("room", S.waitw.t0, S.shrink.t0 + .3); place("room", S.pullout.t0, S.final.t0); place("room", S.liz.t0, S.kwrecap.t0); place("room", S.cliff.t0, S.nyk.t0);
+    for (const [a, b] of R.room) for (let x = a + 3.5, i = 0; x < b - 1; x += 9 + 5 * ((i * 7) % 3), i++) E(x, "sfx", { f: "ep05_laugh.wav", g: .022, bus: "amb" });
+    E(S.plan.t0 + 1.2, "sfx", { f: "ep05_bell.wav", g: .018, bus: "amb" }); E(S.cliff.t0 + 2, "sfx", { f: "ep05_bell.wav", g: .016, bus: "amb" }); }
+  else { const gs = ["place", "game", "lctest", "testans", "waitw", "zooplan", "notglass", "fix", "zoomap", "liz", "dare"].filter(has_);
+    for (const n of gs) place(n === "lcgoat" ? "zoo" : "garden", S[n].t0, S[n].t1); place("zoo", S.lcgoat.t0, S.lcgoat.t1);
+    for (const [a, b] of R.garden) for (let x = a + 1.8, i = 0; x < b - .8; x += 6 + 4 * ((i * 5) % 3), i++) E(x, "ribbit", .25);
+    for (const [a, b] of R.zoo) { E(a + 1.0, "meh"); E(b - 3, "meh"); } }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

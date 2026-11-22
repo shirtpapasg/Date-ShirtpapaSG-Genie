@@ -32,13 +32,17 @@ for (const [a, b] of C.R.wonder) { const prog = [['D3', 'A3', 'F#4', 'A4'], ['B2
   for (let t = a, i = 0; t < b; t += step, i++) { const d = Math.min(step + 1.6, b - t + 1.2); for (const n of prog[i % 4]) { const { L, R } = I.padNote(m(n), d, { cutoff: 700, attack: 1.6, release: 2.2, detune: .16 }); wonder.addStereo(L, R, t, .16); }
     for (let k = 0; k < 3; k++) { const x = I.bell(m(prog[i % 4][3 - (k % 2)]) * 0 + 440 * Math.pow(2, (m(prog[i % 4][2 + (k % 2)]) + 12 - 69) / 12), .9, 1.6, 2.0); wonder.addMono(x, t + 1.2 + k * 1.5, .05, k % 2 ? .4 : -.4); verb.addMono(x, t + 1.2 + k * 1.5, .06); } } }
 // ---------- ambiences
-const loop = (file, a, b, g, fade = .6) => { const len = { 'rain.wav': 5, 'ep07_birds.wav': 5, 'ep08_birds.wav': 5.6, 'ep05_kids.wav': 4.6, 'sea_wash.wav': 5 }[file]; for (let t = a; t < b; t += len - .15) { const x = MIX.loadAudio(path.join(SFX, file), { at: t, length: DUR }); const i0 = Math.round(a * SR), i1 = Math.round(b * SR);
+const loop = (file, a, b, g, fade = .6) => { const len = { 'rain.wav': 5, 'ep07_birds.wav': 5, 'ep08_birds.wav': 5.6, 'ep05_kids.wav': 4.6, 'sea_wash.wav': 5, 'hum.wav': 5.2, 'ep07_flow.wav': 5, 'ep09_buzz.wav': 4.2, 'ep07_birds.wav': 5 }[file]; for (let t = a; t < b; t += len - .15) { const x = MIX.loadAudio(path.join(SFX, file), { at: t, length: DUR }); const i0 = Math.round(a * SR), i1 = Math.round(b * SR);
     for (let i = Math.round(t * SR); i < Math.min(N, Math.round((t + len) * SR)); i++) { const e = Math.min(1, (i - i0) / (fade * SR), (i1 - i) / (fade * SR)); if (e <= 0) continue; amb.L[i] += x.L[i] * g * e; amb.R[i] += x.R[i] * g * e; } } };
 for (const [a, b] of C.R.rain) loop('rain.wav', a, b, .5);
 for (const [a, b] of C.R.birds) loop('ep08_birds.wav', a, b, .16);   // EP12: softly outdoors (the walkway, the car park)
 for (const [a, b] of (C.R.sea || [])) loop('sea_wash.wav', a, b, .14, 1.0);   // EP10: small waves at the beach shelter, East Coast Park
 for (const [a, b] of (C.R.tank || [])) for (let t = a + .3, i = 0; t < b - .5; t += 1.3 + .9 * ((i * 7) % 5) / 5, i++) MIX.loadAudio(path.join(SFX, 'bubble.wav'), { at: t, length: DUR }).mixInto(amb, .045 + .02 * (i % 3) / 2);   // EP11: the goldfish tank's soft bubbles (the living room)
-for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0);   // EP8: the school canteen at recess, children far away
+for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0);
+// EP13 v2: the place beds (low; amb ducks under every voice line): the classroom, the eco-garden, the zoo's goat home
+for (const [a, b] of (C.R.room || [])) { loop('hum.wav', a, b, .05, 1.0); loop('ep05_kids.wav', a, b, .035, 1.2); loop('ep08_birds.wav', a, b, .06, 1.0); }
+for (const [a, b] of (C.R.garden || [])) { loop('ep07_birds.wav', a, b, .07, 1.0); loop('ep07_flow.wav', a, b, .05, 1.0); loop('ep09_buzz.wav', a, b, .012, 1.2); }
+for (const [a, b] of (C.R.zoo || [])) { loop('ep08_birds.wav', a, b, .08, 1.0); loop('ep05_kids.wav', a, b, .05, 1.2); }   // EP8: the school canteen at recess, children far away
 for (const [a, b] of C.R.night) for (let t = a + .2; t < b - .3; t += .42) for (let j = 0; j < 3; j++) amb.addMono(I.bell(4300 + (j % 2) * 180, .022, .6, 1.5), t + j * .055, .04, ((t * 7) % 2) - 1);
 for (const [a, b] of C.R.roll) for (let t = a; t < b; t += .07) game.addMono(I.tom(92, .08, (t * 100) | 0), t, .07 + .1 * (t - a) / (b - a));
 // ---------- one-shots

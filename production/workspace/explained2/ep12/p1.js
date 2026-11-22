@@ -102,7 +102,7 @@ SC.lcmetal = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 700, fy: 830, art: metal
 /* 8b · glass: EP9's drop box (a held picture, REAL art: ep09drop.js), the book's strip 3.13a, FRAGILE / STRONG; the blue tag on the glass board. WIRED */
 SC.glass = (t, s) => { const L = "g805", t0 = MK("ep9"), fw = ss(t0, t0 + .5, t), tb = MK("badglass"), hb = HAS("g806");
   return VW(t, { dim: 1 })
-    + dareBoard(0, 330, 640 - 30 * fw, .8 * (1 + .12 * fw), { id: "gl" }) + boardTag(t, 0, 330, 830, 28) + chipAt(t, W(L, "fragile") + .1, 330, 420, "FRAGILE", 30)
+    + dareBoard(0, 330, 730 - 30 * fw, .8 * (1 + .12 * fw), { id: "gl" }) + boardTag(t, 0, 330, 910, 28) + chipAt(t, W(L, "fragile") + .1, 330, 530, "FRAGILE", 30)   /* v3: below the book's strips */
     + OP(ramp(t, t0 + .2, .4), TF(1000, 690, 1, `<g filter="url(#drop)"><rect x="-330" y="-250" width="660" height="430" rx="24" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="6"/></g><clipPath id="g9c"><rect x="-310" y="-230" width="620" height="390" rx="16"/></clipPath><g clip-path="url(#g9c)"><rect x="-310" y="-230" width="620" height="390" fill="#F4EDE1"/>${TF(0, 120, .9, ep9DropPic({ lab: false }))}</g>`)
       + TF(1000, 418, 1, tpill(0, 0, "from Episode 9", 28, P.ink, "#fff", { w: 600 })) + chipAt(t, W(L, "fragile") + .1, 1150, 520, "FRAGILE", 28) + chipAt(t, W(L, "strong") + .1, 850, 520, "STRONG", 28))
     + bookCaption(t, L, "Glass is fragile, but metal is strong.", 268, { size: 50, keys: ["fragile,", "strong."] }) + bookCaption(t, L, "A glass cup breaks easily when it is dropped, but a metal cup does not.", 358, { size: 46, off: 7, keys: ["breaks", "easily"] })
@@ -150,9 +150,9 @@ SC.holdon = (t, s) => { const a = "g1001", b = "g1002", c = "g1003", r0 = MK("ri
     + stamp(t, tH, 960, 430, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1740, 330, "+1", "arms crossed") + (st < 1 ? OP(1 - st, trolleyRule(t)) : "") + HUD(t);
   return v; };
 // Basil: the camera turns towards the aquarium shop next door (turn); the glass card slides back low to its place (slideback)
-SC.fishnext = (t, s) => { const cam = camL(CAM0, CAMT, eio((t - MK("turn") - .1) / 1.2)), [cx, cd] = slideX(t, MK("slideback"), .6, 2300, 1010, 1040);
+SC.fishnext = (t, s) => { const cam = camL(CAM0, CAMT, eio((t - MK("turn") - .1) / 1.2)), [cx, cd] = slideX(t, MK("slideback"), .6, 2300, 800, 1040);   // v3: clear of Basil's bigger disc
   return V(t, { trol: { load: LOADED } }, cam) + (t >= MK("slideback") ? cd + TF(cx, 950, .4, ansCard(1, "Glass", { w: 286, h: 380, size: 52 })) : "")
-    + buddy("basil", 1240, 1066, 340, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [LT("g1004") - .12, "sit"], [LE("g1004") + .1, "pointing"]] }) + say("g1004", 920, 560, t, { size: 42, tail: 200, maxW: 500 }) + trolleyRule(t) + HUD(t); };
+    + buddy("basil", 1240, 1066, 340, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "back"], [LT("g1004") - .14, "sit"], [LE("g1004") + .1, "pointing"]] })   /* v3: Basil looks at the aquarium with us (back view), then turns to speak */ + say("g1004", 920, 560, t, { size: 42, tail: 200, maxW: 500 }) + trolleyRule(t) + HUD(t); };
 
 /* 11 · [LOOK CLOSER] a glass fish tank: every fish seen clearly (TRANSPARENT), the shelf under it dry (WATERPROOF) */
 // v3: Momo watches the tank from the lower right in her back view, as we do; she turns round (a pose swap) to gasp at the fish and nod at the dry shelf

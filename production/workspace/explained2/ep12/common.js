@@ -139,7 +139,7 @@ function finalScene(t, s, L, bud, tips, extra = "") { // tips: [[time, text, big
     + TF(960, 760 - 60 * hi, 1.85 * spring(t, s.t0 + .25, .5) * (1 + .1 * hi), `<g filter="url(#drop)">${countHand(nf)}</g>`) + youPill(960, 430, 1.3)
     + OP(hi, `<g stroke="${P.sun}" stroke-width="12" stroke-linecap="round">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const an = -Math.PI * (.05 + i * .1125), r1 = 300 + 60 * (1 - hi), r2 = r1 + 80; return `<path d="M${n2(960 + Math.cos(an) * r1)} ${n2(640 + Math.sin(an) * r1)} L${n2(960 + Math.cos(an) * r2)} ${n2(640 + Math.sin(an) * r2)}"/>`; }).join("")}</g>`)
     + tip + (t >= thi ? TF(1350, 480, spring(t, thi, .4), tpill(0, 0, "HIGH FIVE!", 52, P.sun, P.ink, { w: 700, ls: 4 })) : "") + extra;
-  [["pip", 230, false], ["basil", 1330, true], ["momo", 1690, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1066, i === 1 ? 330 : 390, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
+  [["pip", 215, false], ["basil", 1260, true], ["momo", 1720, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1066, i === 1 ? 300 : 380, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
   return out + logo(t); }
 
 /* ============ the key-word read-along: the shelf comes to the centre, big; Heart says each word, then it is YOUR turn ============ */
@@ -229,5 +229,5 @@ function gameScene(t, s, L, full, R) { const tLock = W(L, "lock"), tC = W(L, HID
   out += TF(560, 560, spring(t, tH, .5), `<g transform="scale(.8)">${ringTimer(0, 0, clamp(1 - (t - tLock) / 3), 5, t)}</g>` + TF(0, 0, .95, `<g filter="url(#dropS)">${countHand(t > tLock + .7 ? 3 : t > tLock + .35 ? 2 : 1)}</g>`)) + popSpark(t, tH, 560, 560, 250)
     + (t >= tH ? TF(560, 880, spring(t, tH + .1, .4), tpill(0, 0, "You lock in first", 42, "#fff", P.ink, { w: 700 })) + youPill(560, 330, 1.2 * spring(t, tH + .05, .4)) : "");
   out += lab + (t >= tFind - .1 ? TF(R.qx || 1360, R.qy || 790, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 })) : "");
-  [["pip", 1010, 880], ["basil", 960, 1066], ["momo", 1750, 1060]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 220, t, { aura: true, in: tP + .15 + i * .12, flip: i === 1, poses: [[s.t0, "cheer"], [tP + 1.6, "sit"]], wave: true }); });
+  [["pip", 1010, 880], ["basil", 1010, 1066], ["momo", 1750, 1066]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 310, t, { aura: true, in: tP + .15 + i * .12, flip: i === 1, poses: [[s.t0, "cheer"], [tP + 1.6, "sit"]], wave: true }); });
   return out + logo(t); }

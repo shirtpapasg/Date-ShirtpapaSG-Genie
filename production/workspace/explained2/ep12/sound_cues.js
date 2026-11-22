@@ -102,4 +102,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // the key-word read-along; the ending: "Say it with us!", "Ready? One, two...", "Now you know!", then the outro plays out
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); sayit("u1300"); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+  // v3: the iris closing round the hidden animal (game, reveal), the fun-fact card's pop and its sparkle, the countdown's last-second gasp
+  E(S.game.t0 + 1.12, "whoosh"); E(S.liz.t0 + 1.5, "whoosh"); { const f = PART === 1 ? "g1302f" : "j1202f"; if (TL.lines[f]) { E(LT(f) - .4, "pop", 2); E(LT(f) - .38, "sparkle"); } }
+  if (PART === 1) { E(MK("rice") + .02, "potthud"); E(MK("jclang") + .02, "slam", 1); } else { E(MK("land") + .02, "pomf"); E(MK("jsplash"), "sfx", { f: "splash.wav", g: .35 }); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

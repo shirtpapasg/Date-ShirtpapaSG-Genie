@@ -243,7 +243,7 @@ const gx = (cam, x) => camX(cam, x), gy = (cam, y) => camY(cam, y);
 // (h 225 / 205 / 225); BUDL holds each part's layout (p1.js / p2.js set it); o.at = [x, y, h] overrides it for one scene; the one who
 // speaks grows a little (x1.12) while speaking, and every buddy shows its name tag while it talks.
 const BUDL = { pip: [150, 1064, 225, false], basil: [1530, 1056, 205, true], momo: [1775, 1064, 225, true] };
-const sBud = (who, t, o = {}) => { const [x, y, h, fl] = o.at || BUDL[who], sp = speaking(who, t), g = sp ? 1 + .12 * spring(t, sp.t - .2, .4) * (1 - ramp(t, sp.end + .1, .3)) : 1; return buddy(who, o.at ? o.at[0] : x, o.at ? o.at[1] : y, (o.at ? o.at[2] : h) * g, t, { aura: true, flip: o.at && o.at[3] !== undefined ? o.at[3] : fl, ...o }); };
+const sBud = (who, t, o = {}) => { const [x, y, h, fl] = o.at || BUDL[who], g = 1; return buddy(who, o.at ? o.at[0] : x, o.at ? o.at[1] : y, (o.at ? o.at[2] : h) * g, t, { aura: true, flip: o.at && o.at[3] !== undefined ? o.at[3] : fl, ...o }); };
 const sPip = (t, o = {}) => sBud("pip", t, o), sBasil = (t, o = {}) => sBud("basil", t, o), sMomo = (t, o = {}) => sBud("momo", t, o);
 // one plain label line that touches the part (no arrowhead), and a label with its line
 const pline = (x1, y1, x2, y2, a = 1, col = "#fff") => a < .02 ? "" : OP(Math.min(1, a), `<path d="M${n2(x1)} ${n2(y1)} L${n2(x2)} ${n2(y2)}" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" opacity=".35"/><path d="M${n2(x1)} ${n2(y1)} L${n2(x2)} ${n2(y2)}" stroke="${col}" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(x2)}" cy="${n2(y2)}" r="8" fill="${col}"/>`);

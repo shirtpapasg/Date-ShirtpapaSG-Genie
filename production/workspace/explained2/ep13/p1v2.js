@@ -71,10 +71,10 @@ function stampHold(t, t0, t1, x, y, txt, size = 124) { if (t < t0 || t > t1 + .2
 const clue = (t, t0, x, y, txt) => t < t0 ? "" : TF(x, y, spring(t, t0, .4), tpill(0, 0, txt, 60, "#fff", P.ink, { w: 700 }));
 
 /* ============ 1 · the silent cold open: the classroom after school; the torn bag; EP12's three boards stand in on the desks; the buddies pop in ============ */
-const CBX = [1160, 1400, 1640], CBY = 690;
+const CBX = [1190, 1420, 1650], CBY = 668;
 const coldBoards = (t, tb) => [0, 1, 2].map((i) => { const t0 = tb + i * .3; if (t < t0) return ""; const [x, d] = slideX(t, t0, .7, 2500, CBX[i], CBY); return d + dareBoard(i, x, CBY, .5, { lab: false, id: "c" }); }).join("");
-const coldBuds = (t, tp, o = {}) => bud("pip", "L", 380, t, { in: tp, poses: poses([tp, "waving"], [tp + 1.4, "sit"], o.pip), wave: true }) + buddy("basil", 1010, 1062, 330, t, { aura: true, in: tp + .2, poses: poses([tp + .2, "cheer"], [tp + 2.2, "sit"], o.basil) })
-  + buddy("momo", 1700, 1062, 360, t, { aura: true, flip: true, in: tp + .4, poses: poses([tp + .4, "waving"], [tp + 1.7, "sit"], o.momo), wave: true });
+const coldBuds = (t, tp, o = {}) => bud("pip", "L", 380, t, { in: tp, poses: poses([tp, "waving"], [tp + 1.4, "sit"], o.pip), wave: true }) + buddy("basil", 1095, 1062, 320, t, { aura: true, in: tp + .2, poses: poses([tp + .2, "cheer"], [tp + 2.2, "sit"], o.basil) })
+  + buddy("momo", 1720, 1062, 340, t, { aura: true, flip: true, in: tp + .4, poses: poses([tp + .4, "waving"], [tp + 1.7, "sit"], o.momo), wave: true });
 SC.cold = (t, s) => { const tb = MK("boardsIn"), tp = MK("budsIn");
   return V(t, { bag: "lying", items: coldBoards(t, tb) }, [1.02 + .02 * eio(t / 6), 960, 548]) + coldBuds(t, tp) + lowerPill(60, 96, "A Primary 3 classroom,", "Singapore"); };
 
@@ -188,7 +188,7 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "g705", sayId: "g704", who: "basil", 
 /* ============ 8 · the plan: OUR DESIGN PLAN is introduced BIG (the camera is on it), Basil big beside it; box 1 glows on "First" ============ */
 SC.plan = (t, s) => { const ti = MK("planIn"), [bx, bd] = slideX(t, ti + .05, .75, 2700, BIGB[0], BIGB[1]), dimk = ramp(t, ti, .6);
   return V(t, { bag: "new" }, camL(CAM0, [1.12, 760, 600], eio((t - ti) / 1.4))) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * dimk)}"/>` + (t >= ti ? bd + TF(bx, BIGB[1], BIGB[2], planBoard(t, {})) : "")
-    + buddy("basil", 300, 1062, 420, t, { aura: true, in: s.t0 + .05, poses: poses([s.t0, "sit"], [ti + .8, "cheer"], [MK("box1") - .1, "surprised"], [MK("box1") + .9, "sit"]), look: nodAt(t, MK("box1") + 1.0, 1.0, 5) }) + HUD(t); };
+    + buddy("basil", 300, 1062, 420, t, { aura: true, in: s.t0 + .05, poses: poses([s.t0, "back"], [ti + 1.3, "cheer"], [MK("box1") - .1, "surprised"], [MK("box1") + .9, "sit"]), look: nodAt(t, MK("box1") + 1.0, 1.0, 5) }) + HUD(t); };
 
 /* ============ [LOOK CLOSER] the bag, part by part: the whole panel. OUR DESIGN PLAN glides from the push-in to its HOME (top left) and stays there,
    large; the bag does its job on the right; each named part gets its own push-in, big label and light; Basil's face peeks in at the lower left ============ */
@@ -304,7 +304,7 @@ SC.liz = (t, s) => { const L = "g1302", F = "g1303", E = "g1304", tq = W(L, "it"
   let out = circleShot(world, u, [BFLY[0], BFLY[1] - 16], LZ.T, LZ.Z, LZ.r, kc, "z") + (ringK > .02 ? `<circle cx="${LZ.T[0]}" cy="${LZ.T[1]}" r="${n2((120 + 8 * Math.sin(t * 6)) * ringK)}" fill="none" stroke="${P.sun}" stroke-width="12"/>` + popSpark(t, tR, LZ.T[0], LZ.T[1], 150) : "");
   out += (t >= tq ? OP(1 - ramp(t, tT - .4, .3), TF(LZ.T[0], 668, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw("It was on the plant by the window!", 54, 700) / 2 - 56)}" y="-58" width="${n2(tw("It was on the plant by the window!", 54, 700) + 112)}" height="116" rx="58" fill="${P.ink}"/></g>${T(0, 19, "It was on the plant by the window!", 54, "#fff")}`)) : "");
   out += wingScales(t, MK("ffscales") - .1, MK("ffwater"), 1130, 380) + (t >= tF - .1 ? pline(LZ.T[0] + 60, LZ.T[1] - 10, 966, 380, ramp(t, MK("ffscales"), .25)) : "");
-  out += bud("momo", "R1", 420, t, { in: tF - .5, poses: poses([tF - .5, "surprised"], [tF + .4, "sit"], [LE(F) + .1, "cheer"], [tT, "pointing"]), jump: [[MK("ffwater") - .1, 24]] }) + say(F, 1130, 870, t, { size: 40, tail: 280, maxW: 620 });
+  out += bud("momo", "R1", 420, t, { in: s.t0 + 1.4, poses: poses([s.t0 + 1.4, "back"], [tF - .45, "surprised"], [tF + .4, "sit"], [LE(F) + .1, "cheer"], [tT, "pointing"]), jump: [[MK("ffwater") - .1, 24]] }) + say(F, 1130, 870, t, { size: 40, tail: 280, maxW: 620 });
   out += (t >= tT ? TF(LZ.T[0], 668, spring(t, tT, .45), tpill(0, 0, "Tell someone at home!", 60, P.sun, P.ink, { w: 700 })) : "");
   return (f0 > .01 ? out + OP(f0, SC.final(SCN.final.t1 - .04, SCN.final)) : out) + logo(t); };
 
