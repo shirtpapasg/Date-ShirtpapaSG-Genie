@@ -22,7 +22,7 @@ def main(name, mp4=False):
     meta = json.load(open(f"{H}/{name}_sit.json")); im = {s: cv2.imread(f"{H}/{name}_sit_{s}.png", -1) for s in ORDER}
     x0, y0, x1, y1 = meta["states"]["closed"]["bbox"]; E = meta["eyes"]
     hx0 = max(0, min(e["c"][0] - e["r"][0] for e in E.values()) - 150); hx1 = min(1024, max(e["c"][0] + e["r"][0] for e in E.values()) + 110)
-    hy0 = max(0, min(e["c"][1] - e["r"][1] for e in E.values()) - 90); hy1 = min(1024, meta["anchors"]["neck"][1] + 40)
+    hy0 = max(0, min(e["c"][1] - e["r"][1] for e in E.values()) - 90); hy1 = min(1024, meta["anchors"].get("neck", [0, 430])[1] + 40)
     head = lambda a, z=2: cv2.resize(on(a, BG)[hy0:hy1, hx0:hx1], None, fx=z, fy=z, interpolation=cv2.INTER_CUBIC)
     # states sheet
     full = [label(cv2.resize(on(im[s], BG)[y0 - 20:y1 + 20, x0 - 20:x1 + 20], None, fx=.5, fy=.5, interpolation=cv2.INTER_AREA).copy(), s, 22, .6) for s in ORDER]
@@ -53,7 +53,7 @@ def main(name, mp4=False):
             dd = (np.abs(im[s].astype(int) - im[prev].astype(int)).max(2) > 0).astype(np.uint8) * 255
             d = cv2.cvtColor(cv2.resize(dd[hy0:hy1, hx0:hx1], None, fx=1.5, fy=1.5, interpolation=cv2.INTER_NEAREST), cv2.COLOR_GRAY2BGR)
             ys, xs = np.where(dd); label(d, f"changed vs {prev}: y {ys.min()}-{ys.max()}" if len(ys) else "no change", 30, .6)
-            cv2.putText(d, f"body below neck: {int(dd[meta['anchors']['neck'][1]:].astype(bool).sum())} px", (10, 60), 0, .6, (0, 255, 0), 2)
+            cv2.putText(d, f"body below neck: {int(dd[meta['anchors'].get('neck', [0, 430])[1]:].astype(bool).sum())} px", (10, 60), 0, .6, (0, 255, 0), 2)
         tiles.append(np.vstack([t, d])); prev = s
     cv2.imwrite(f"{H}/qa/{name}_cycle.png", cv2.resize(np.hstack(tiles), None, fx=.6, fy=.6, interpolation=cv2.INTER_AREA))
     if mp4:
@@ -100,4 +100,6 @@ def pose_swap(name):
     cv2.imwrite(f"{H}/qa/{name}_poseswap.png", cv2.resize(sheet, None, fx=.5, fy=.5, interpolation=cv2.INTER_AREA))
 
 if __name__ == "__main__":
-    for n in [a for a in sys.argv[1:] if not a.startswith("--")]: main(n, "--mp4" in sys.argv); pose_swap(n); head_turn(n)
+    for n in [a for a in sys.argv[1:] if not a.startswith("--")]:
+        main(n, "--mp4" in sys.argv); pose_swap(n)
+        if "neck" in json.load(open(f"{H}/{n}_sit.json"))["anchors"]: head_turn(n)   # only sets with talk_render anchors (not momo_c)

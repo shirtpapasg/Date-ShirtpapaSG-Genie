@@ -366,7 +366,7 @@
    "file": "poses/momo_c_oops.png",
    "src": "momo_c_oops.jpg",
    "anchor": [
-    399.1,
+    400.1,
     831.0
    ],
    "scale": 1.0113,
@@ -379,7 +379,7 @@
    "file": "poses/momo_c_waving.png",
    "src": "momo_c_waving.jpg",
    "anchor": [
-    394.2,
+    395.2,
     831.0
    ],
    "scale": 0.9461,
@@ -392,7 +392,7 @@
    "file": "poses/momo_c_thinking.png",
    "src": "momo_c_thinking.jpg",
    "anchor": [
-    394.2,
+    395.2,
     831.0
    ],
    "scale": 0.9472,
@@ -405,7 +405,7 @@
    "file": "poses/momo_c_surprised.png",
    "src": "momo_c_surprised.jpg",
    "anchor": [
-    411.3,
+    412.3,
     831.0
    ],
    "scale": 1.0075,
@@ -418,7 +418,7 @@
    "file": "poses/momo_c_cheer.png",
    "src": "momo_c_cheer.jpg",
    "anchor": [
-    402.2,
+    403.2,
     831.0
    ],
    "scale": 1.0453,
@@ -431,12 +431,25 @@
    "file": "poses/momo_c_arms_crossed.png",
    "src": "momo_c_arms_crossed.jpg",
    "anchor": [
-    405.8,
+    406.8,
     831.0
    ],
    "scale": 0.989,
    "size": [
     658,
+    855
+   ]
+  },
+  "pointing": {
+   "file": "poses/momo_c_pointing.png",
+   "src": "momo_c_pointing.jpg",
+   "anchor": [
+    314.4,
+    831.0
+   ],
+   "scale": 0.8762,
+   "size": [
+    620,
     855
    ]
   },

@@ -127,7 +127,8 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 52, x: 56
    pops on its name) */
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1;
-  return lizReveal(t, s, L, gardenPH(t), LADY[0], LADY[1], tq, "It was on a leaf of the young tree!", 0, 170, 76, 2.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final) }); };
+  return lizReveal(t, s, L, gardenPH(t), LADY[0], LADY[1], tq, "It was on a leaf of the young tree!", 0, 170, 76, 2.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "j1204",
+    fact: { id: "j1203", items: [["ff_larva", "larva", "DRAW: a spiky dark larva, like a tiny crocodile"], ["ff_pupa", "pupa", "DRAW: the pupa on a leaf"], ["ff_adult", "ladybird", "DRAW: the red ladybird with black spots"]] } }); };
 
 /* 13 · the dare for Episode 15: a mango, one big seed. The three cards, the ?, the banner and "Lock in your answer!" are wired; Stage 2 draws the three boards */
 const DRX = [560, 960, 1360];

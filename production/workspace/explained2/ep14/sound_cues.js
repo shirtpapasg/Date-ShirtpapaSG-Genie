@@ -24,7 +24,8 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   BD(S.back.t0, tT); [0, 1, 2].forEach((i) => E(LT("g204") - .3 + i * .1, "pip", i));
   E(tT - .05, "whoosh"); [.26, .61].forEach((d, i) => E(tT + d, "slam", i));
   // 3 the game: the push-in onto the owl (a soft whoosh), a tiny soft "hoo" on its name; 4 goals (Pip reads), countdown
-  E(S.game.t0 + .05, "whoosh"); E(S.game.t0 + 1.1, "sting"); { const a = "g301a", b = "g301b"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(a, HIDDEN[0]) - .1, "curious"); E(W(a, HIDDEN[0]) + .2, "hoo"); E(W(a, "spot") - .1, "pip", 2); E(LT("g301m") - .05, "pop", 1); }
+  E(S.game.t0 + .05, "whoosh"); E(S.game.t0 + 1.1, "sting"); { const a = "g301a", b = "g301b"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(a, HIDDEN[0]) - .1, "curious"); E(W(a, HIDDEN[0]) + .2, "hoo"); E(W(a, "spot") - .1, "pip", 2); E(LT("g301m") - .05, "pop", 1);
+    if (HAS("g301c")) { E(MK("twirl") - .05, "sparkle"); E(W("g301p", "grey") - .05, "pop", 1); E(W("g301t", "handsome"), "sparkle"); } }   // the buddies in colour (script 12.3)
   [0, 1, 2].forEach((i) => E(LT(["g402", "g403", "g404"][i]) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 Round 1: the round card, the short ring (3 s); Basil's pick (a boing)
   E(S.r1card.t0, "roundcard"); { const L = "g501"; lock(MK("ring0_r1"), 3, "g502", ["g503", "g504", "g505"], [W(L, "why"), W(L, "come"), W(L, "show")]); E(LE("g505") + .05, "boing"); }
@@ -52,7 +53,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 13 Pip (a pop); LOOK CLOSER the traffic light: the glide (a whoosh), far traffic, the soft "tock" of a signal changing ON each lamp; the small board's tiles (lighttiles); the verdict
   { E(LT("g1301") - .05, "pop", 0); E(MK("glide") + .1, "whoosh"); for (let x = MK("glide") + .5; x < MK("v_light") + 2; x += 2.6) E(x, "mrt"); ["lampG", "lampA", "lampR", "lampG2"].forEach((k) => E(MK(k), "signal")); E(MK("lighttiles"), "hop", 1); E(MK("lighttiles") + .25, "tap"); verdict("v_light"); }
   // 14 score hand, the owl (the score hand melts into the room: a soft whoosh; a tiny soft hoo; the ring's sparkle on its name)
-  E(S.final.t0 + .1, "sting"); E(W("g1401", "high") + .2, "slap"); E(W("g1401", "two") - .1, "pip", 2); BD(S.liz.t0, S.kwrecap.t0); E(S.liz.t0 + .1, "whoosh"); E(S.liz.t0 + 1.6, "hoo"); E(W("g1402", "owl") + .2, "sparkle");
+  E(S.final.t0 + .1, "sting"); E(W("g1401", "high") + .2, "slap"); E(W("g1401", "two") - .1, "pip", 2); BD(S.liz.t0, S.kwrecap.t0); E(S.liz.t0 + .1, "whoosh"); E(S.liz.t0 + 1.6, "hoo"); E(W("g1402", "owl") + .2, "sparkle"); if (HAS("g1403")) ["ff_in", "ff_day", "ff_night"].forEach((m, i) => E(MK(m) - .05, "pop", i % 3));   // the fun fact's panel and pictures
   // 15 the cliffhanger: a soft pluck, the curious note on the ? (q), three low hops (card1..card3), a low drum, the slam
   { BD(S.cliff.t0, S.nyk.t0); E(LT("g1501") - .05, "pluck", 2); E(MK("q") - .05, "curious"); ["card1", "card2", "card3"].forEach((k, i) => E(MK(k), "hop", i)); E(LT("g1503") - .2, "lowdrum"); E(W("g1503", "part") - .1, "slam", 1); }
   G(tT + .9, S.count.t0 - .2); G(S.r1.t0, S.lcsky.t0); C(S.lcsky.t0 + .2, S.globeans.t0); G(S.globeans.t0, S.momo.t0); C(S.momo.t0, S.waitw.t0); C(S.mark1.t0 + .2, LT("g1002") - .4);
@@ -85,7 +86,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   // 11 the chant
   sayit("u1002"); chant("c1003");
   // 12-13 the score hand, the ladybird (the score hand melts into the garden: a soft whoosh; a tiny buzz as it flies to the next leaf; a sparkle); the dare: three board slides, a juicy squish, a boing, a sting
-  E(S.final.t0 + .1, "sting"); E(W("j1201", "high") + .2, "slap"); E(W("j1201", "three") - .1, "pip", 2); BD(S.liz.t0, S.liz.t1); E(S.liz.t0 + .1, "whoosh"); E(S.liz.t0 + 1.8, "buzz"); E(W("j1202", "ladybird") + .3, "sparkle");
+  E(S.final.t0 + .1, "sting"); E(W("j1201", "high") + .2, "slap"); E(W("j1201", "three") - .1, "pip", 2); BD(S.liz.t0, S.liz.t1); E(S.liz.t0 + .1, "whoosh"); E(S.liz.t0 + 1.8, "buzz"); E(W("j1202", "ladybird") + .3, "sparkle"); if (HAS("j1203")) ["ff_in", "ff_larva", "ff_pupa", "ff_adult"].forEach((m, i) => E(MK(m) - .05, "pop", i % 3));
   { const L = "j1301"; BD(S.dare.t0, S.kwrecap.t0); [0, .3, .6].forEach((d) => E(MK("dareIn") + .2 + d, "slide")); ["one", "two", "three"].forEach((w, i) => E(W(L, w) - .1, "softpop", i)); E(W(L, "mango") + .1, "squish"); if (has("j1302")) E(LT("j1302") + .1, "boing"); E(W(L, "lock") - .1, "sting"); }
   G(S.game.t0, S.goals.t1); G(S.r1.t0, MK("ring0_r1")); G(LT("j403") - .5, S.lcthen.t0); C(S.lcthen.t0 + .2, S.thenans.t0); G(S.thenans.t0, S.lcchick.t0); C(S.lcchick.t0 + .2, S.waitw.t0); C(S.ring.t0, S.mark1.t0); C(S.mark1.t0 + .3, LT("j803") - .4);
   G(S.show.t0 + .3, MK("ring0_show")); G(LT("j904") - .5, S.lchens.t0); C(S.lchens.t0 + .2, S.mark2.t0); C(S.mark2.t0 + .3, LT("j1003") - .4); G(S.final.t0, S.dare.t0 + .3); C(S.dare.t0 + .5, S.kwrecap.t0); C(S.kwrecap.t0 + .3, S.nyk.t0 - .2);

@@ -27,8 +27,10 @@ POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on his
   "cheer": ("basil_c_sheet_sit_cheer.jpg", (512, 505, 1024, 950))}   # from a 2x2 sheet: small, upscaled 2x (softer)
 POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
   "oops": ("momo_c_oops.jpg", None), "waving": ("momo_c_waving.jpg", None), "thinking": ("momo_c_thinking.jpg", None),
-  "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None)}
-SITREF = {"momo_c": "momo"}   # which sitting sprite sets the scale and foot line (basil_c: its own coloured set, basil_c_sit.json, from align_set.py)
+  "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None),
+  "pointing": ("momo_c_pointing.jpg", None)}   # NOTE: this painting is cropped: the tail ends in a straight cut at the left. Use only
+                                                # where her tail side is hidden (off-frame, behind a prop, waist-up); an uncropped one is asked for
+SITREF = {}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138

@@ -73,7 +73,7 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return ro
    The owl opens its eyes for a moment on its name (so it reads as an owl), looks at us, and goes back to sleep; a small bird lands above it. */
 const owlOpen = (t, t0) => ss(t0 - .15, t0 + .2, t) * (1 - ss(t0 + 1.25, t0 + 1.7, t));
 SC.game = (t, s) => { const tO = W("g301a", "owl"), cE = camBack(SCN.title.t1), A = camPt(cE, OWL);
-  return gameScene(t, s, ["g301a", "g301m", "g301b"], true, { world: (tt) => V(tt, { h: 7.2 + .02 * (tt - s.t0), clk: 7.1, dark: .4, sun: .16, fan: 1.4, items: boards3(tt, "gm"), owl: { open: owlOpen(tt, tO), look: 3 * Math.sin(tt * 2) }, bird: (tt - s.t0 - 2.2) / 1.5 }, cE),
+  return gameScene(t, s, ["g301a", "g301m", "g301c", "g301p", "g301t", "g301b"], true, { world: (tt) => V(tt, { h: 7.2 + .02 * (tt - s.t0), clk: 7.1, dark: .4, sun: .16, fan: 1.4, items: boards3(tt, "gm"), owl: { open: owlOpen(tt, tO), look: 3 * Math.sin(tt * 2) }, bird: (tt - s.t0 - 2.2) / 1.5 }, cE),
     A, T: [1400, 440], Z: 3.1, dim0: .78, ly: -168, r0: 210, qx: 1420, qy: 640, pre: (tt) => budsBack(tt) + TITLE(1, 1) }); };
 SC.goals = (t, s) => goals3(t, s, [["Day and night", ""], ["What a cycle is", ""], ["Cycle or not?", ""]], ["g401", "g402", "g403", "g404"], "pip");
 
@@ -207,7 +207,8 @@ SC.lclight = (t, s) => lookCloser(t, s, { tz: s.t0, fx: camPt(camDown(s.t0), TLW
    its name: it opens one eye, looks at us, and closes it again), the key words (kwrecap in common.js) */
 SC.final = (t, s) => { const L = "g1401"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "g1402", tq = W(L, "it") - .1, tR = W(L, "owl") + .1, wk = ss(tR + .45, tR + .75, t) * (1 - ss(tR + 2.3, tR + 2.7, t));
-  return lizReveal(t, s, L, V(t, DAY({ h: 10.6, clk: 10.6, sun: .7, owl: { wink: wk, look: 2 }, bird: (t - s.t0 - 2.6) / 1.5 })), OWL[0], OWL[1], tq, "It was on the tree outside the window!", -150, 66, 44, 2.7, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), px: 700 }); };
+  return lizReveal(t, s, L, V(t, DAY({ h: 10.6, clk: 10.6, sun: .7, owl: { wink: wk, look: 2 }, bird: (t - s.t0 - 2.6) / 1.5 })), OWL[0], OWL[1], tq, "It was on the tree outside the window!", -150, 66, 44, 2.7, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), px: 700, tell: "g1404",
+    fact: { id: "g1403", items: [["ff_day", "day: asleep", "DRAW: the owl asleep on a branch, the Sun up"], ["ff_night", "night: awake", "DRAW: the owl awake, big eyes, the Moon and stars"]] } }); };
 
 /* 15 · the cliffhanger: do living things have cycles too? Momo big (thinking, then a hop as the cards come); a small cream card living and
    non-living things with "living" glowing and a big ? over it (q); three picture cards slide in low and stand on the floor (card1..card3: a

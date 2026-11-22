@@ -53,6 +53,10 @@ P.pip = "#8B5CF6"; P.basil = "#14B8A6"; P.momo = "#FB7158";
 const AURA = { pip: P.pip, basil: P.basil, momo: P.momo }, TINT = { pip: "#EDE4FF", basil: "#D5F7F2", momo: "#FFE3DC" }, BNAME = { pip: "Pip", basil: "Basil", momo: "Momo" };
 // a small name tag: the name in white on the buddy's colour
 const nameTag = (who, size = 32) => { const w = tw(BNAME[who], size, 700) + size * 1.5, h = size * 1.5; return `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="${P[who]}"/><rect x="${n2(-w / 2 + 3)}" y="${n2(-h / 2 + 3)}" width="${n2(w - 6)}" height="${n2(h - 6)}" rx="${n2(h / 2 - 3)}" fill="none" stroke="#fff" stroke-width="3" opacity=".85"/></g>` + T(0, n2(size * .35), BNAME[who], size, "#fff"); };
+// EP14 in colour: poses the teacher has not painted in colour yet (prep_sprites.py copies only coloured Momo / Basil files)
+// Momo "pointing" -> waving (every EP14 use is an inviting or showing gesture; "pointing_cut" = her cropped coloured pointing, tail side
+// hidden only); Basil "arms_crossed" -> thinking (he waits / considers). A painted one, when it comes, is used automatically.
+const POSE_SUB = { momo: { pointing: "waving" }, basil: { arms_crossed: "thinking" } };
 const DISC_DX = { pip: -.06, basil: -.10, momo: -.08 };
 function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.0 }[who]; const k = Math.floor((t + ph) / per), tb = k * per - ph + hash(k, who.length) * 1.4; return t >= tb && t < tb + .1; }
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
@@ -82,16 +86,17 @@ function buddy(who, x, y, h, t, o = {}) {
   const nod = nodOf(who, t), q = (pose === "sit" ? .016 : .022) * nod; sy *= 1 - q; sx *= 1 + .8 * q; rot += 1.1 * nod * (o.flip ? -1 : 1); if (pose !== "sit") lift -= 5 * nod;
   for (const [tj, hj] of o.jump || []) { lift -= hop(t, tj, .36) * hj; const a = ss(tj - .12, tj, t) * (t < tj ? 1 : 0); sy *= 1 - .08 * a; sx *= 1 + .06 * a; const w = wob(t, tj + .36, .35); if (t > tj + .36) { sy *= 1 - .08 * w; sx *= 1 + .06 * w; } }
   if (o.rock) rot += o.rock * Math.sin(2 * Math.PI * t / .7);
+  let twk = 1; for (const tw0 of o.twirl || []) { const u = clamp((t - tw0) / .7); if (u > 0 && u < 1) { twk = Math.cos(2 * Math.PI * eio(u)); lift -= 18 * Math.sin(Math.PI * u) * (h / 380); } }   // a little twirl (EP14 Momo, "I have my colours now!")
   rot += o.look || 0;
   let name;
   if (pose === "sit") { const m = ["closed", "half", "wide"][o.mouth !== undefined && !speaking(who, t) ? o.mouth : mouthOf(who, t)], b = o.eyes === "shut" || blinkAt(who, t); name = `${who}_sit_` + (b ? (m === "closed" ? "blink" : m + "_blink") : m); }
-  else name = `${who}_${pose}`;
+  else name = `${who}_${POSE_SUB[who] && POSE_SUB[who][pose] && !SPR[`${who}_${pose}`] ? POSE_SUB[who][pose] : pose}`;
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = o.flip ? -1 : 1;
   let out = "";
   if (o.aura) { const R = h * .62 * Math.min(1, k), cx = x + DISC_DX[who] * h * fl; out += `<circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="${AURA[who]}" opacity="${o.auraO || .9}"/><circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="url(#gSpot)"/>`; }
   if (o.shadow !== false) out += `<ellipse cx="${n2(x)}" cy="${n2(y - h * .01)}" rx="${n2(h * .36 * sx * k * (1 + lift / 400))}" ry="${n2(h * .06 * k)}" fill="${P.ink}" opacity="${n2(.3 * (1 + lift / 200))}" filter="url(#b4)"/>`;
-  out += `<g transform="translate(${n2(x)} ${n2(y + lift)}) rotate(${n2(rot)}) scale(${n2(s0 * sx * fl * 1000) / 1000} ${n2(s0 * sy * 1000) / 1000}) translate(${-S.ax} ${-S.ay})" ${o.rim === false ? "" : `filter="url(#${o.rim || "rimB"})"`}><use href="#s_${name}"/></g>`;
+  out += `<g transform="translate(${n2(x)} ${n2(y + lift)}) rotate(${n2(rot)}) scale(${n2(s0 * sx * twk * fl * 1000) / 1000} ${n2(s0 * sy * 1000) / 1000}) translate(${-S.ax} ${-S.ay})" ${o.rim === false ? "" : `filter="url(#${o.rim || "rimB"})"`}><use href="#s_${name}"/></g>`;
   if (o.tag !== false) { const sp = speaking(who, t), a = (o.in !== undefined ? spring(t, o.in + .15, .4) * (1 - ss(o.in + 2.4, o.in + 2.7, t)) : 0), b = sp ? spring(t, sp.t - .04, .35) : 0, kt = Math.max(a, b) * Math.min(1, k);
     if (kt > .03) { const size = clamp(h * .115, 26, 40); out += TF(x, Math.min(y + 4, 1080 - size * .95), kt, nameTag(who, size)); } }
   return out + fx;

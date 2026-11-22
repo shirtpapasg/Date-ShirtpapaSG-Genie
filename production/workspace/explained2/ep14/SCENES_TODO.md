@@ -19,7 +19,7 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 11. **Speech bubbles:** every buddy line has its cream bubble with the speaker's colour border and tail, beside the speaker's head, never over a face, the prop being explained or the clue labels. Lip-sync on every line; a fresh pose or reaction on every line (squash, hard cut, overshoot, hop; never a cross-fade).
 14. **The journeys bring company (teacher, 22 Nov: "I love these shrink-down scenes! Can we bring the 3 pet buddies along? Or even include the audience, like what you did for 'A frog, a bird and a fish'").** In BE THE LITTLE RED DOT and BE A CHICK: a *You: a ...* tag and the viewer's own presence in first person (EP5's "You: a frog" with the viewer's frog hands: here a "you are here" glow with tiny waving hands; the chick's wing tips and feet), AND the three buddies shrunk down riding along beside the viewer, cute and alive, reacting at each stop, never covering what is shown. This replaces the old "no buddies in the journeys" rule. The journeys' words are unchanged (Heart, second person).
 13. **Also from the rulebook's 22 Nov notes** (`../SERIES_FORMAT.md`, with pictures in `../reference/`): match the approved examples (EP13 Mark Sentence 1: the reader BIG on the left, the card large on the right, a small recap along the bottom: `scene_good_ep13_marksentence.webp`; EP13's strap look-closer: `lookcloser_good_ep13_straps.webp`); human hands have four fingers and a thumb (the adult's hands on the curtains, sticker, torch, globe and photo; the YOU hands); every tile, sample or picture is named on screen (the CYCLE CHECK tiles: *day time*, *nighttime*, the three pencils, *green* / *amber* / *red*, *egg* / *chick* / *adult chicken*); every tag points to what it describes with a plain line, colour-coded with its part; no pill, coin or "+1" overlaps the key-word shelf; no buddy is ever frozen (every buddy on screen reacts on every line); countdowns are ANIMATED as in EP1 (the ring pulses on each tick, the number pops, the YOU hand bobs, LOCKED IN! slams; the buddies lean in, fidget, cover their eyes, then a pose swap on each reveal; the numbers step exactly once a second with the ticks, the bell on 0): reuse EP1's lock-in and reveal routines (`../ep01/`).
-12. **Poses that exist:** Pip and Momo: sit (talking), cheer, oops, surprised, arms_crossed, pointing, thinking, waving. Basil: sit, cheer, oops, surprised, arms_crossed (no pointing / thinking / waving: an inviting hop instead). The look-closer FACES are crops of the sit / surprised / cheer / oops / thinking sprites (no new art needed; a new "gasp" or "aww" face, made from the buddy's own picture by editing the face only, is welcome).
+12. **Poses that exist (EP14 is IN COLOUR, teacher 22 Nov):** Momo (coral) and Basil (teal) come ONLY from their coloured paintings; Pip stays grey, unchanged. Never a grey Momo or Basil in EP14. `prep_sprites.py` copies only those files into spr/ under the plain names. **Pip:** sit (talking), cheer, oops, surprised, arms_crossed, pointing, thinking, waving. **Momo:** sit = her ARMS-CROSSED talking set (closed / half / wide / blink, the teacher's four paintings, `momo_c_sit_*`), cheer, oops, surprised, thinking, waving, arms_crossed; **no full pointing:** lib.js `POSE_SUB` turns her "pointing" into WAVING (every EP14 use is an inviting or showing gesture); `pointing_cut` is her coloured pointing, whose painting is CROPPED (the tail ends in a straight cut): use it only where her tail side is hidden (off-frame, behind a prop, waist-up). **Basil:** sit (`basil_c_sit_*`), cheer (from a small sheet, upscaled: a little softer), oops, surprised, thinking, waving, pointing (NEW in colour: use them for his inviting hops); **no arms_crossed:** `POSE_SUB` turns it into THINKING. No back views in colour yet (none in EP14). The look-closer FACES are crops of the sit / surprised / cheer / oops / thinking sprites (no new art needed).
 
 ### Where each recurring prop lives (its HOME)
 
@@ -56,11 +56,13 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ## Choices made for the trial (22 Nov) where the script was unclear
 
 - **The buddies teach** (script section 12.2): each term is explained by a buddy in their own words; Heart sets up, names the book's term on its slow line (the key-word pop stays on Heart's line for ROTATION, CYCLE, REPRODUCE, LIFE CYCLE; GROW pops on Pip's line), and confirms. In the look-closers the buddies describe what we see; the speaker's FACE is the corner face.
-- **The game segment is reordered**: g301a / j201a (Heart names the animal), g301m (Momo) / j201b (Basil) make the search fun, g301b / j201c (Heart) the fingers and lock-in rules. `gameScene` takes the three line ids.
-- **Cuts used to keep each part at about 5:15** (script section 6 and 12.2; never teaching): Part 1 `title2` (shorter title hold), `napback` (Basil's rotation line takes its place), `pencilback` (Basil's oops: the poses carry it), `mrt` (Basil's MRT comparison), `yesmomo` (Heart: "Yes, Momo!"); Part 2 `forgotegg`, `notes13`, `darkwarm`, `kitten` (Momo's "Do I have a life cycle too?"), `nextjoke` (Basil's mango joke: the tummy-rub pose carries it), `c02silent` (the strip C0.2 shown 3.5 s, not read).
-- **Lengths (trial voices):** Part 1 5:17.1, Part 2 5:16.8.
+- **The game segment is reordered**: g301a / j201a (Heart names the animal), g301m (Momo) / j201b (Basil) make the search fun, g301b / j201c (Heart) the fingers and lock-in rules. `gameScene` takes the line ids [find, buddy, ..., rules].
+- **The buddies in colour (script 12.3, Stage 1 colour pass)**: Part 1's game has g301c (Momo: waving + a twirl), g301p (Pip: arms crossed), g301t (Basil: cheer, as he has no coloured arms crossed) between Momo's search line and the rules; wired in `gameScene` (poses) and lib.js (`o.twirl`).
+- **Fun-fact reveals (SERIES_FORMAT 4, script 12.4)**: each reveal is Heart "Did you spot ...? It was ...!" -> a buddy's fun fact with a labelled picture panel (`funFact` placeholder in common.js, marks `ff_*`) -> Heart "Tell someone at home!" (its own line; `lizReveal` o.tell). Part 1 Momo: most owls sleep in the day and wake up at night. Part 2 Pip: a baby ladybird looks nothing like its parent: a spiky larva like a tiny crocodile, then a pupa, then a ladybird.
+- **Cuts used to keep each part near 5:15** (after the colour pass the parts run over: see the lengths) (script section 6 and 12.2; never teaching): Part 1 `title2` (shorter title hold), `napback` (Basil's rotation line takes its place), `pencilback` (Basil's oops: the poses carry it), `mrt` (Basil's MRT comparison), `yesmomo` (Heart: "Yes, Momo!"), `lookmoves` (Momo's "Oh! So the Sun only looks as if it moves!", added in the colour pass: the colour lines and the fun fact add about 20 s; the scene `momo` keeps her surprised pose and the dotted path); Part 2 `forgotegg`, `notes13`, `darkwarm`, `kitten` (Momo's "Do I have a life cycle too?"), `nextjoke` (Basil's mango joke: the tummy-rub pose carries it), `c02silent` (the strip C0.2 shown 3.5 s, not read).
+- **Lengths (trial voices):** Part 1 5:34.4, Part 2 5:28.2.
 
-## Part 1 · "Why Does the Sun Come BACK Every Morning?" · 5:17.1
+## Part 1 · "Why Does the Sun Come BACK Every Morning?" · 5:34.4
 
 ### 0:00.0 – 0:06.0 · `cold` · 1 · Silent cold open: an HDB flat before sunrise (6.0 s)
 
@@ -122,26 +124,33 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Reuse:** Everything (Stage 2's `back` scene shows through the dim). · **New:** Nothing.
 - **Marks:** `title` 0:24.1
 
-### 0:25.7 – 0:38.9 · `game` · 3 · The game, and the hidden owl (ONE smooth push-in) (13.3 s)
+### 0:25.7 – 0:53.3 · `game` · 3 · The game, and the hidden owl (ONE smooth push-in) (27.6 s)
 
 - **Draw:** WIRED (`gameScene`, EP12 v2): from the dimmed living room the camera pushes straight in (1.1 s, ease in-out) onto the owl on its branch outside the window, the title words slipping away; the rest softly dims (`spotDim`); then the game's things pop out over it on their words: the score pill glides to the middle, the YOU hands, "You lock in first", the the buddies, the name label *a little owl* by the REAL owl (`animalLabel`), *Can you spot it?*. No cut to the purple stage. Pass the drawn room as `R.world` (now `flatPH`) and the owl's place as `OWL` (tests.js).
-- **Frame (trial: who, where, how big; the main prop):** FIND first (g301a, g301m), THEN the rules (g301b). Find: from the room the camera pushes onto the owl (high fork of the rain tree), then the IRIS: a circle about 46% of the frame high, centre-left (x 720, y 470), the owl inside it with a thick BLACK ring (about 16 px); everything outside becomes the blue-violet starry game stage with the soft spotlight beam (EP7-EP11's game screen). The label *a little owl* under the circle, *Can you spot it?* to its right. Momo pops in FG-R (h 520, 48%), turned towards the circle, for her line. Rules: the circle shrinks to the upper left (h 30%); the score pill glides to top centre; the YOU answer hand and score hand pop at centre-left; Pip MG-C (h 340) and Basil MG-R (h 360) pop in beside Momo; the three spread across the right half, the hands and the pill in the left half.
+- **Frame (trial: who, where, how big; the main prop):** FIND first (g301a, g301m), then THE BUDDIES IN COLOUR (g301c Momo, g301p Pip, g301t Basil: script 12.3, said once, lightly, as they pop in; no card, no pause), THEN the rules (g301b). Colour moment: Momo hops forward FG-R (h 520) and twirls to show off her coral fur; Pip MG-C (h 340) and Basil MG-R (h 360) beside her, each big enough to read their colours; a soft sparkle on Momo's twirl and on Basil's "handsome"; Pip and Momo giggle at Basil. Find: from the room the camera pushes onto the owl (high fork of the rain tree), then the IRIS: a circle about 46% of the frame high, centre-left (x 720, y 470), the owl inside it with a thick BLACK ring (about 16 px); everything outside becomes the blue-violet starry game stage with the soft spotlight beam (EP7-EP11's game screen). The label *a little owl* under the circle, *Can you spot it?* to its right. Momo pops in FG-R (h 520, 48%), turned towards the circle, for her line. Rules: the circle shrinks to the upper left (h 30%); the score pill glides to top centre; the YOU answer hand and score hand pop at centre-left; Pip MG-C (h 340) and Basil MG-R (h 360) pop in beside Momo; the three spread across the right half, the hands and the pill in the left half.
 - **Camera (zoom target per line):** g301a: push-in onto the owl (1.1 s ease in-out), iris on "owl"; g301m: a gentle drift right to take in Momo beside the circle; g301b: a slow pull back so the hands, pill and buddies all fit. No cut.
 - **Poses per line:**
   - `g301a`: (Heart) the owl opens its eyes for about 1 s on its name, then closes them.
   - `g301m`: Momo pointing at the circle, then a hand over her eyes like a lookout, scanning left and right; a wink at the viewer on "keep your eyes open".
+  - `g301c`: Momo WAVING with a little twirl on "colours" (wired: `twirl` mark, lib.js `o.twirl`), then sit (lip-sync, her coloured arms-crossed talking set).
+  - `g301p`: Pip ARMS CROSSED, chin up, proud (wired); Momo giggles.
+  - `g301t`: Basil CHEER (no coloured arms-crossed Basil yet; the script wanted arms crossed), chin up on "handsome"; Pip and Momo giggle.
   - `g301b`: Basil cheer on "Buddies!"; Pip waving; on "fingers" all three hold up one, two, three fingers in turn (Pip 1, Basil 2, Momo 3); cheer on "every point".
 - **Hidden animal:** The owl: the HIGH fork of the rain tree, in the leaves' shade (the game spot).
 - **Life:** The owl breathes and blinks open-shut once; leaves of the rain tree stir; a bird lands on the branch above and flies off.
 - **Light:** First sunlight: the top of the rain tree catches warm gold; the owl sits in soft shade.
 - **Keep from the partial Stage 2 / Stage 1:** common.js `gameScene` (now takes [find, buddy, rules] line ids; push-in, labels, hands, pill; REPLACE spotDim with the iris + black ring + blue-violet stage), p1.js `SC.game`'s world (VF) and `owlOpen`.
 - **Reuse:** `gameScene` (common.js); the drawn room. · **New:** Nothing new beyond the room and the owl. **Choice:** the script's round picture of the owl with open eyes is replaced by the push-in (the 22 Nov rule); so that it reads as an owl, let it open its eyes slowly for about 1 s on Heart's "owl" (it is day: it closes them again by "Can you spot it?").
+- **Marks:** `twirl` 0:35.0, `handsome` 0:46.1
 - **Lines:**
   - `g301a` 0:26.0 HEART: A little owl is hiding in this video. Can you spot it?
   - `g301m` 0:29.9 MOMO: It hides somewhere new each time, so keep your eyes open!
-  - `g301b` 0:33.2 HEART: You against the Buddies! Lock in first with your fingers. One finger for every point.
+  - `g301c` 0:33.3 MOMO: Did you notice? I have my colours now! The creator finally had the budget to paint me.
+  - `g301p` 0:39.2 PIP: I am staying grey, and I love it. Real chinchillas are grey, you know!
+  - `g301t` 0:44.0 BASIL: And I am teal now. I think I look very handsome today.
+  - `g301b` 0:47.5 HEART: You against the Buddies! Lock in first with your fingers. One finger for every point.
 
-### 0:38.9 – 0:45.8 · `goals` · 4 · Today's goals (Pip reads) (6.9 s)
+### 0:53.3 – 1:00.1 · `goals` · 4 · Today's goals (Pip reads) (6.9 s)
 
 - **Draw:** WIRED (`goals3`): Pip reads the three chips word for word: **Day and night** · **What a cycle is** · **Cycle or not?**; each card lifts and glows while it is read, then a tick.
 - **Frame (trial: who, where, how big; the main prop):** The goal card screen: Pip FG-L (h 520, 48%) beside the three chips, which stand large at centre-right (each about 18% high). Basil and Momo MG-R (h 330) at the far right edge, peeking at the chips.
@@ -157,12 +166,12 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** common.js `goals3` (move Pip, add Basil and Momo at the right, sizes).
 - **Reuse:** `goals3`. · **New:** Nothing.
 - **Lines:**
-  - `g401` 0:39.5 PIP: Today you'll learn:
-  - `g402` 0:41.0 PIP: Day and night.
-  - `g403` 0:42.4 PIP: What a cycle is.
-  - `g404` 0:44.0 PIP: Cycle or not?
+  - `g401` 0:53.8 PIP: Today you'll learn:
+  - `g402` 0:55.3 PIP: Day and night.
+  - `g403` 0:56.8 PIP: What a cycle is.
+  - `g404` 0:58.4 PIP: Cycle or not?
 
-### 0:45.8 – 0:51.5 · `count` · 4 · The countdown (5.7 s)
+### 1:00.1 – 1:05.8 · `count` · 4 · The countdown (5.7 s)
 
 - **Draw:** WIRED (common.js `SC.count`).
 - **Frame (trial: who, where, how big; the main prop):** The countdown screen, the three buddies spread L / C / R (h 360 each).
@@ -175,9 +184,9 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** common.js `SC.count` (resize, no aura).
 - **Reuse:** All. · **New:** Nothing.
 - **Lines:**
-  - `h501` 0:46.0 HEART: Are you ready? Three! Two! One! Go!
+  - `h501` 1:00.4 HEART: Are you ready? Three! Two! One! Go!
 
-### 0:51.5 – 0:52.6 · `r1card` · 5 · Round card (1.1 s)
+### 1:05.8 – 1:06.9 · `r1card` · 5 · Round card (1.1 s)
 
 - **Draw:** WIRED: ROUND 1 · YOUR ANSWER FROM LAST TIME.
 - **Frame (trial: who, where, how big; the main prop):** The round card.
@@ -190,7 +199,7 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** `roundCard`.
 - **Reuse:** All. · **New:** Nothing.
 
-### 0:52.6 – 1:12.2 · `r1` · 5 · Round 1: the dare (a short 3 s ring) (19.6 s)
+### 1:06.9 – 1:26.5 · `r1` · 5 · Round 1: the dare (a short 3 s ring) (19.6 s)
 
 - **Draw:** WIRED (`lockN`): EP13's three boards small on the cards, the question, the clue labels *every evening: it goes* · *every morning: it comes back* ON TOP of the ring frame through the countdown, the 3 s ring, LOCKED IN!, the picks Momo 1, Pip 3, Basil 2 (no x chip yet: the look-closers decide). Small print *Never look at the Sun.* (wired, upper right). Draw the ring's picture: the far blocks with the Sun's edge between them (replace `ringPH`).
 - **Frame (trial: who, where, how big; the main prop):** COUNTDOWN TAKES THE STAGE (teacher, 22 Nov): while the ring runs, the background clears to the blue-violet game stage; the ring with its picture is BIG and central (about half the frame height); the clue labels are large and readable on a phone (cap height >= 40 px at 1080p, dark text on cream or white on ink, on top of the ring's frame); only the question's elements stay (boards and props glide out); at most ONE buddy stays, big (h 420+), reacting at the side. Round 1 (a 3 s ring): the ring with the dawn skyline big at centre, its two clue labels *every evening: it goes* · *every morning: it comes back* large on top of its frame, and under it ONE set of three big numbered picture cards (each card = EP13's dare board picture + its big number + its words: 1 The Sun moves away · 2 The Earth turns · 3 Clouds hide the Sun; about 40% of the frame high each), the question above. No separate row of 1/2/3 number cards. During the ring only Basil stays, big at the right, eyes on the ring. After LOCKED IN! the ring shrinks away and the buddies stand under their picks, spread L / C / R: Momo under card 1 (L), Basil under card 2 (C), Pip under card 3 (R); the one speaking grows to h 500 as the camera goes to them, the others h 340.
@@ -206,15 +215,15 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** The ring picture: dawn gold behind dark blocks.
 - **Keep from the partial Stage 2 / Stage 1:** `lockN` (rebuild its cards as ONE big numbered picture-card set, using `dareBoard` pictures); the clue labels on top of the ring.
 - **Reuse:** `lockN`, EP13's boards. · **New:** The ring picture (a small dawn skyline, the Sun's edge soft).
-- **Marks:** `ring0_r1` 0:56.9, `bell_r1` 0:59.9
+- **Marks:** `ring0_r1` 1:11.2, `bell_r1` 1:14.2
 - **Lines:**
-  - `g501` 0:52.8 HEART: Round one! Why does the Sun come back? Show me your fingers!
-  - `g502` 1:00.6 HEART: Locked in!
-  - `g503` 1:01.7 MOMO: One! I see the Sun move across the sky!
-  - `g504` 1:04.9 PIP: Three! It was cloudy last night, so the clouds hid the Sun.
-  - `g505` 1:09.0 BASIL: Two! The Earth turns, just like my spinning globe!
+  - `g501` 1:07.1 HEART: Round one! Why does the Sun come back? Show me your fingers!
+  - `g502` 1:15.0 HEART: Locked in!
+  - `g503` 1:16.1 MOMO: One! I see the Sun move across the sky!
+  - `g504` 1:19.2 PIP: Three! It was cloudy last night, so the clouds hid the Sun.
+  - `g505` 1:23.4 BASIL: Two! The Earth turns, just like my spinning globe!
 
-### 1:12.2 – 1:43.5 · `lcsky` · 6 · [LOOK CLOSER] The sky from our window, two days, speeded up (31.3 s)
+### 1:26.5 – 1:57.8 · `lcsky` · 6 · [LOOK CLOSER] The sky from our window, two days, speeded up (31.3 s)
 
 - **Draw:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js: push-in from the set, dim, the window opens, LOOK CLOSER tag, the verdict `lcVerdict` at the `v_*` mark, score and shelf away; the NOW: label shows the current picture beat). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv, over })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the bottom 80 px for the verdict), keeping the wired `over` (small print, pills, tags). Models: ep13/closer.js, ep12/closer.js. Inside: the window's view alone: the far blocks, the sky. `clk0` Monday 7:00 am: the Sun comes up behind the far blocks (soft disc, never pushed in on) and climbs out of the top of the window; `sunup` the sky goes bright blue, the light on the blocks moves; `dusk` 7:30 pm: the light on the blocks turns warm and long, the sky orange, deep blue, then dark (the Sun sets BEHIND the block: no sunset in an east window); `lampson` the flats' windows and the street lamps come on one by one; `stars` stars in a CLEAR sky; `noclouds` / `nosun` plain label lines *a clear sky* · *no clouds* · *no Sun* (hold about 5 s on the starry sky); `tue7` bright again, `tue730` dark, `wed7` bright. Under the view a row of four small skies builds at `row1..row4` (wired placeholders: draw each as a tiny sky). Verdict DAY AND NIGHT: A REPEATED PATTERN (sun-yellow on cream, wired) at `v_sky`. Wired: the clock pill (`stepPill(CLOCK)`), *speeded up*, *Never look at the Sun.*, the cream tags *day time* / *nighttime* (move them onto the sky), the speaking buddy's FACE in a lower corner (trial: Pip, then Basil).
 - **Frame (trial: who, where, how big; the main prop):** [LOOK CLOSER] The window's view FILLS the panel (the far blocks, the sky, the junction; no cream margins). Under it, inside the panel's lower edge, the row of four small skies builds large (each about 12% of the panel high). One buddy FACE peeks from a lower corner, a third of the panel high, the one whose idea it is: Pip's face lower-LEFT (it is his clouds card) for g601-g605; Basil's face lower-RIGHT for g603b and g607b (he swaps in with a pop, Pip ducks down).
@@ -230,15 +239,15 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** The time-lapse itself: dawn gold → bright blue morning → golden afternoon → orange dusk → deep-blue night with stars → dawn → … Keep the key light on the far blocks moving with the Sun.
 - **Keep from the partial Stage 2 / Stage 1:** flat14.js `skyArt`, `skyHour`, `skyView` (all lights), `tinySky`; closer.js `lookCloser`, `lcVerdict`; tests.js `stepPill(CLOCK)`, `dnTag`. Make the panel full-bleed (no cream border space) and add the buddy-face corner (`peekFace(who, corner, expr)`: a crop of the sit sprite, head and shoulders).
 - **Reuse:** `lookCloser`; `stepPill`, `dnTag`, `speeded`. · **New:** The window view in every light (a function of the clock: dawn, morning, noon, golden afternoon, dusk, night, dawn), the four small skies.
-- **Marks:** `clk0` 1:16.6, `sunup` 1:18.6, `tagday` 1:22.0, `dusk` 1:23.0, `lampson` 1:25.2, `tagnight` 1:26.9, `stars` 1:28.7, `noclouds` 1:30.1, `nosun` 1:31.6, `tue7` 1:35.1, `tue730` 1:36.8, `row1` 1:37.8, `row2` 1:38.0, `row3` 1:38.3, `row4` 1:38.5, `wed7` 1:40.4, `v_sky` 1:41.0
+- **Marks:** `clk0` 1:30.9, `sunup` 1:32.9, `tagday` 1:36.3, `dusk` 1:37.4, `lampson` 1:39.5, `tagnight` 1:41.2, `stars` 1:43.0, `noclouds` 1:44.5, `nosun` 1:45.9, `tue7` 1:49.4, `tue730` 1:51.1, `row1` 1:52.1, `row2` 1:52.3, `row3` 1:52.6, `row4` 1:52.8, `wed7` 1:54.7, `v_sky` 1:55.3
 - **Lines:**
-  - `g601` 1:13.1 HEART: Look closer. This is the sky from our window, speeded up.
-  - `g602p` 1:17.5 PIP: First, the Sun comes up behind the blocks, and the sky gets bright. That is day time!
-  - `g603b` 1:23.9 BASIL: Then the sky goes dark, and the lamps come on. That is nighttime: pyjama time!
-  - `g605` 1:29.3 PIP: Look, there are no clouds tonight, and still no Sun. So clouds are not hiding the Sun!
-  - `g607b` 1:35.6 BASIL: Then it is morning again, and night again. Day, night, day, night: it changes, and it repeats!
+  - `g601` 1:27.4 HEART: Look closer. This is the sky from our window, speeded up.
+  - `g602p` 1:31.9 PIP: First, the Sun comes up behind the blocks, and the sky gets bright. That is day time!
+  - `g603b` 1:38.2 BASIL: Then the sky goes dark, and the lamps come on. That is nighttime: pyjama time!
+  - `g605` 1:43.6 PIP: Look, there are no clouds tonight, and still no Sun. So clouds are not hiding the Sun!
+  - `g607b` 1:49.9 BASIL: Then it is morning again, and night again. Day, night, day, night: it changes, and it repeats!
 
-### 1:43.5 – 1:46.6 · `curtains` · 7 · So why does it repeat? (3.2 s)
+### 1:57.8 – 2:01.0 · `curtains` · 7 · So why does it repeat? (3.2 s)
 
 - **Draw:** The living room. `curtains`: an adult's hands draw the curtains (curtain rings); the room goes dim. On the low table: the globe and the torch (EP11's) lying on its pile of four books at the height of the globe's middle, about a metre away, pointing at the globe. `sticker` ("Look"): a hand presses a small round red sticker onto the globe, on Singapore (the tip of the Malay Peninsula, just above the Equator; a small pat).
 - **Frame (trial: who, where, how big; the main prop):** Momo FG-L (h 540, 50%) beside the low table, looking up at the camera; the table with the globe and the torch C (the globe about as tall as Momo's head); Pip MG-R on the sofa (h 340), Basil MG-R on the floor by the table's far end (h 360). An adult's hands draw the curtains (behind) and press the red sticker on the globe.
@@ -251,12 +260,12 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Morning, dimmed by the curtains: cool, low; one thin warm slit of sunlight at the curtain's edge.
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.curtains` (curtain14, arm14, the sticker), resize the buddies, no aura.
 - **Reuse:** the living-room set (`BG.flat` + a live `VF(t, o)`: the HDB living room by the east window; bake the static parts) with the owl asleep on the rain tree outside the window; EP11's torch (ep11/ art). · **New:** The globe on its stand; the four books; the adult's hands (EP13's simple arm with a blue sleeve); the red sticker; the curtains (open / closed).
-- **Marks:** `curtains` 1:43.5, `sticker` 1:46.0
+- **Marks:** `curtains` 1:57.8, `sticker` 2:00.4
 - **Lines:**
-  - `g701m` 1:43.9 MOMO: But why does it keep repeating?
-  - `g701` 1:45.8 HEART: Look closer.
+  - `g701m` 1:58.2 MOMO: But why does it keep repeating?
+  - `g701` 2:00.1 HEART: Look closer.
 
-### 1:46.6 – 2:11.4 · `lcglobe` · 7 · [LOOK CLOSER] The globe and the torch (a model) (24.7 s)
+### 2:01.0 – 2:25.7 · `lcglobe` · 7 · [LOOK CLOSER] The globe and the torch (a model) (24.7 s)
 
 - **Draw:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js: push-in from the set, dim, the window opens, LOOK CLOSER tag, the verdict `lcVerdict` at the `v_*` mark, score and shelf away; the NOW: label shows the current picture beat). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv, over })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the bottom 80 px for the verdict), keeping the wired `over` (small print, pills, tags). Models: ep13/closer.js, ep12/closer.js. Inside: the globe fills most of the window, the torch at the edge; the rest of the room dark. `torchon`: an adult's hand switches the torch on (a click): EXACTLY half of the globe is lit, the half facing the torch, the edge soft. Plain label lines on Heart's words: *our Earth* (`lab_earth`), *our Sun* (`lab_sun`), *Singapore* (to the red dot, `lab_sg`); *the torch stays still* with a small pin mark on the table beside it (`pin`), *the globe turns* with a curved line round the globe (`turn`). From `turn` the hand turns the globe slowly TOWARDS THE EAST (anticlockwise from above), never stopping: the red dot in the middle of the light (`dday`: cream tag, wired), across the edge into the shadow (`ddark`; `dnight`: cream tag, wired), round the far side and into the light again (`dlight`). The torch never moves; the pin mark is still beside it at the end. Verdict THE EARTH TURNS (green, wired) at `v_globe`. Small print (wired) *A model. Never shine a torch at anyone's eyes.*
 - **Frame (trial: who, where, how big; the main prop):** [LOOK CLOSER] The globe FILLS most of the panel (about 70% of its height), the torch at the left edge with its beam; the room dark. The labels pop big one by one (*our Earth* · *our Sun* · *Singapore* · *the torch stays still* · *the globe turns*). A buddy FACE in a lower corner, a third of the panel high, lit by the torch from one side: the face of whoever speaks swaps in with a pop (Pip lower-RIGHT for g703p, Basil lower-RIGHT for g704b and g706b, Momo lower-LEFT for g705m).
@@ -272,15 +281,15 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** A dark room; the torch is the ONE key light, warm white from one side; the lit half glows, the night half deep blue.
 - **Keep from the partial Stage 2 / Stage 1:** flat14.js `globeArt`, `globeTheta`, `globe14` (exactly half lit), `torch14`, `books4`, `arm14`; closer.js `lookCloser`.
 - **Reuse:** `lookCloser`; `dnTag`; EP11's torch. · **New:** The globe close-up with its lit half and terminator (a function of the turn angle: the dot's position must match the marks), the torch's beam, the hand on the globe, the pin mark.
-- **Marks:** `torchon` 1:47.7, `lab_earth` 1:49.3, `lab_sun` 1:51.2, `lab_sg` 1:53.1, `pin` 1:56.0, `turn` 1:57.5, `dday` 1:58.3, `ddark` 2:01.7, `dnight` 2:04.1, `dlight` 2:07.7, `v_globe` 2:08.9
+- **Marks:** `torchon` 2:02.1, `lab_earth` 2:03.7, `lab_sun` 2:05.5, `lab_sg` 2:07.4, `pin` 2:10.3, `turn` 2:11.8, `dday` 2:12.6, `ddark` 2:16.0, `dnight` 2:18.4, `dlight` 2:22.0, `v_globe` 2:23.2
 - **Lines:**
-  - `g702` 1:48.5 HEART: A globe is our Earth. A torch is our Sun. The red dot is Singapore.
-  - `g703p` 1:54.2 PIP: Watch. The torch stays still, and only the globe turns.
-  - `g704b` 1:58.6 BASIL: The red dot faces the torch, so it is day time.
-  - `g705m` 2:02.0 MOMO: Now it turns away, into the dark, so it is nighttime!
-  - `g706b` 2:05.3 BASIL: It keeps turning, so the red dot comes into the light again.
+  - `g702` 2:02.8 HEART: A globe is our Earth. A torch is our Sun. The red dot is Singapore.
+  - `g703p` 2:08.5 PIP: Watch. The torch stays still, and only the globe turns.
+  - `g704b` 2:13.0 BASIL: The red dot faces the torch, so it is day time.
+  - `g705m` 2:16.4 MOMO: Now it turns away, into the dark, so it is nighttime!
+  - `g706b` 2:19.7 BASIL: It keeps turning, so the red dot comes into the light again.
 
-### 2:11.4 – 2:25.4 · `globeans` · 7 · The answer is two: the Earth turns (ROTATION pops) (14.1 s)
+### 2:25.7 – 2:39.7 · `globeans` · 7 · The answer is two: the Earth turns (ROTATION pops) (14.1 s)
 
 - **Draw:** WIRED with EP13's real boards: the green tick on board 2 and small x chips on boards 1 and 3 and by Momo and Pip (`ticks`), card 2 glows (`ansglow`), the coin (`coin1`), ROTATION pops (lib.js o.at), Basil's rotation line g709r (his {NAP_BACK} is cut: "napback"). Draw the living room behind: `curtainsopen`: the curtains open again and morning light floods in.
 - **Frame (trial: who, where, how big; the main prop):** The curtains open; morning light floods in. The answer: ONE set of three big numbered picture cards (as Round 1) across the left 60% of the frame, card 2 glowing; Basil FG-R (h 560, 52%) for the rotation line, the globe on the table beside him (he can flick it); Momo MG-C (h 340) and Pip MG-C-R (h 340) between the cards and Basil, each with their small x chip.
@@ -294,13 +303,13 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Morning sun floods in as the curtains open: warm, bright, long window shadows across the floor.
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.globeans` (camL14, dareBoard, tickChip / xChip, the curtains): rebuild the answer cards as one picture-card set; resize the buddies, no aura.
 - **Reuse:** EP13's boards; `ansCard`; `coin`. · **New:** The room with the curtains opening.
-- **Marks:** `curtainsopen` 2:11.4, `ansglow` 2:12.4, `ticks` 2:13.0, `coin1` 2:15.5, `kw_rotation` 2:18.7
+- **Marks:** `curtainsopen` 2:25.7, `ansglow` 2:26.7, `ticks` 2:27.3, `coin1` 2:29.9, `kw_rotation` 2:33.0
 - **Lines:**
-  - `g707` 2:11.7 HEART: The answer is two: the Earth turns! Two fingers? One finger up!
-  - `g708` 2:16.8 HEART: Scientists call this turning: rotation.
-  - `g709r` 2:20.8 BASIL: Rotation means the Earth spins round and round, like my globe when I flick it!
+  - `g707` 2:26.1 HEART: The answer is two: the Earth turns! Two fingers? One finger up!
+  - `g708` 2:31.1 HEART: Scientists call this turning: rotation.
+  - `g709r` 2:35.2 BASIL: Rotation means the Earth spins round and round, like my globe when I flick it!
 
-### 2:25.4 – 2:29.8 · `momo` · 8 · Momo: "So the Sun only looks as if it moves!" (4.4 s)
+### 2:39.7 – 2:40.8 · `momo` · 8 · Momo: "So the Sun only looks as if it moves!" (1.1 s)
 
 - **Draw:** The living room, full morning light. Momo (trial: no disc) (wired: surprised, then cheer with a hop on Heart's "Yes, Momo!"). Beside her, in a plain frame standing on the table: the window's view with a faint dotted line where the Sun climbed, and under it the small globe with its curved turning line. Small print *Never look at the Sun.* (wired).
 - **Frame (trial: who, where, how big; the main prop):** Momo FG-L (h 560, 52%), the framed picture (the window view with the dotted Sun path, and the small turning globe) on the floor C-R, about 45% of the frame high; Basil MG-R (h 340), Pip MG-R on the sofa (h 330).
@@ -314,10 +323,9 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `framePic`, `SC.momo` (resize, no aura).
 - **Reuse:** the living-room set (`BG.flat` + a live `VF(t, o)`: the HDB living room by the east window; bake the static parts) with the owl asleep on the rain tree outside the window · **New:** The small framed picture.
 - **Lines:**
-  - `g801` 2:25.7 MOMO: Oh! So the Sun only looks as if it moves!
-  - `g802` 2:28.9 HEART: Yes, Momo!
+  - `g802` 2:40.0 HEART: Yes, Momo!
 
-### 2:29.8 – 2:34.2 · `waitw` · 9 · Be the little red dot! (the glide in) (4.4 s)
+### 2:40.8 – 2:45.3 · `waitw` · 9 · Be the little red dot! (the glide in) (4.4 s)
 
 - **Draw:** Pill **Be the little red dot!** (wired via the scene name: draw it). The camera glides to the globe on the table and into the red sticker; a soft cream wipe at the scene end. The shelf slides aside (SHELF_HIDE).
 - **Frame (trial: who, where, how big; the main prop):** The globe on the table C, large; the three buddies MG at the table's edge, spread L / C / R (h 340): on "Shrink down" they shrink WITH the viewer and dive into the red sticker alongside the camera (they ride along in the journey).
@@ -330,9 +338,9 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.waitw`.
 - **Reuse:** the living-room set (`BG.flat` + a live `VF(t, o)`: the HDB living room by the east window; bake the static parts) with the owl asleep on the rain tree outside the window; the globe. · **New:** The glide.
 - **Lines:**
-  - `g901` 2:30.2 HEART: Be the little red dot! Shrink down. Quietly.
+  - `g901` 2:41.2 HEART: Be the little red dot! Shrink down. Quietly.
 
-### 2:34.2 – 2:57.0 · `shrink` · 9 · BE THE LITTLE RED DOT (the first-person journey) (22.8 s)
+### 2:45.3 – 3:08.1 · `shrink` · 9 · BE THE LITTLE RED DOT (the first-person journey) (22.8 s)
 
 - **Draw:** First person, present tense. `jdot`: the real Earth now, seen from just above it: its surface curves away under you, sea and land and cloud, and a tiny warm glow marks where you are (tag wired). `jday`: far to one side the Sun, large and steady; your side is bright (tag wired). `jturn` / `jaway`: the whole view swings slowly; the Sun slides to the curved edge of the Earth and is gone behind it; `jnight`: the sky black (tag wired); `jstars`: stars; below you the small lights of a city. `jback` / `jlight`: the view keeps swinging the same way; a thin bright line grows along the other edge; the Sun is there again, in the same far place as before (tag *one full turn · 24 hours*, wired); `jmorning`: one bird. EXACTLY half of the Earth lit. Small print *A drawing. Never look at the real Sun.* (wired). Nothing about why the Earth turns, the Moon or seasons.
 - **Frame (trial: who, where, how big; the main prop):** JOURNEY WITH COMPANY (teacher, 22 Nov: "Can we bring the 3 pet buddies along? Or even include the audience", like EP5's "You: a frog"). The child IS the little red dot, in first person: a tag *You: the little red dot* (top left) and the viewer's own presence at the bottom centre of the frame: a soft warm "you are here" glow on the Earth's surface round the viewer's spot, with two tiny cartoon hands (four fingers and a thumb) at the bottom edge that wave, point and shade the eyes on the beats. The three buddies, SHRUNK to ride along beside the viewer (each about 22-26% of the frame high, standing on the Earth's curved surface at the lower left and lower right, Pip and Momo left, Basil right, so the centre stays clear), cute and alive, never covering the Sun, the edge of light and dark, the stars or the tags. They are lit like the viewer: bright warm on the day side, cool blue with a starlit rim at night.
@@ -347,14 +355,14 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Day side bright and warm from one fixed side (the Sun), the edge of light and dark soft, the night side deep blue-black, then the dawn line.
 - **Keep from the partial Stage 2 / Stage 1:** flat14.js `dotJourney` (the Earth, the steady Sun, half lit, the night side, the dawn line); shrink.js helpers (`feelTag`, `topTag`); add the viewer's glow + hands and the three small buddies (sprites, no aura; their own contact shadow on the Earth's surface).
 - **Reuse:** shrink.js helpers (`feelTag`, `dip`, `topTag`); ep13/shrink.js and ep12/shrink.js as models. · **New:** The whole journey (SC.shrink in shrink.js; keep the wired tags).
-- **Marks:** `dive` 2:34.2, `jdot` 2:36.2, `jday` 2:39.8, `jturn` 2:44.0, `jaway` 2:45.8, `jnight` 2:48.3, `jstars` 2:50.0, `jback` 2:51.3, `jlight` 2:53.1, `jmorning` 2:55.4
+- **Marks:** `dive` 2:45.3, `jdot` 2:47.3, `jday` 2:50.8, `jturn` 2:55.0, `jaway` 2:56.8, `jnight` 2:59.4, `jstars` 3:01.0, `jback` 3:02.3, `jlight` 3:04.1, `jmorning` 3:06.5
 - **Lines:**
-  - `g902` 2:36.4 HEART: You are a tiny dot on the Earth: Singapore.
-  - `g903` 2:39.9 HEART: Your side of the Earth faces the Sun, so it is day time!
-  - `g904` 2:44.1 HEART: The Earth turns, and you turn away from the Sun. Now it is nighttime, and you can see the stars!
-  - `g905` 2:51.4 HEART: The Earth keeps turning, and the light comes back. Good morning!
+  - `g902` 2:47.4 HEART: You are a tiny dot on the Earth: Singapore.
+  - `g903` 2:51.0 HEART: Your side of the Earth faces the Sun, so it is day time!
+  - `g904` 2:55.2 HEART: The Earth turns, and you turn away from the Sun. Now it is nighttime, and you can see the stars!
+  - `g905` 3:02.5 HEART: The Earth keeps turning, and the light comes back. Good morning!
 
-### 2:57.0 – 2:57.6 · `pullout` · 10 · Pull back out (0.6 s)
+### 3:08.1 – 3:08.7 · `pullout` · 10 · Pull back out (0.6 s)
 
 - **Draw:** Whoosh out of the red dot, back to the living room in full morning light (0.6 s).
 - **Frame (trial: who, where, how big; the main prop):** Pull back to the room; the three buddies grow back to size with the viewer and land at the table's edge (h 340) L / C / R.
@@ -366,9 +374,9 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Full morning.
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.pullout`.
 - **Reuse:** the living-room set (`BG.flat` + a live `VF(t, o)`: the HDB living room by the east window; bake the static parts) with the owl asleep on the rain tree outside the window · **New:** The pull-out.
-- **Marks:** `pullout` 2:57.0
+- **Marks:** `pullout` 3:08.1
 
-### 2:57.6 – 3:14.1 · `mark1` · 10 · Mark Sentence 1 (Basil): C0.3 (16.5 s)
+### 3:08.7 – 3:25.1 · `mark1` · 10 · Mark Sentence 1 (Basil): C0.3 (16.5 s)
 
 - **Draw:** WIRED (`markScene`): Basil says "Say it with me!" with an inviting hop, 0.8 s, then reads the card (two sentences, "24" said "twenty-four"); highlights *day*, *night*, *rotation*, *Earth*, *24*, *hours*; the card holds 2.5 s. Under the card, small and silent: draw the globe with its turning line and a clock whose hand goes round twice, *24 hours* under it (replace the stage note).
 - **Frame (trial: who, where, how big; the main prop):** The Mark Sentence card large at centre-right (about 55% of the frame wide); Basil FG-L (h 540, 50%) for the card; under the card the small globe with its turning line and the 24-hour clock (each about 18% high). For g1003p Pip steps in FG-R (h 520) and the clock grows to about 35% of the frame between Pip and the card.
@@ -383,11 +391,11 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** common.js `markScene`, `markCard` (move the reader, add Pip and the clock; no aura).
 - **Reuse:** `markScene`, `markCard`. · **New:** The small globe and the 24-hour clock under the card.
 - **Lines:**
-  - `g1001` 2:58.1 BASIL: Say it with me!
-  - `g1002` 2:59.9 BASIL: The repeated change between day and night is caused by the rotation of the Earth. This rotation takes 24 hours.
-  - `g1003p` 3:10.1 PIP: So one full turn takes 24 hours: one day and one night!
+  - `g1001` 3:09.1 BASIL: Say it with me!
+  - `g1002` 3:11.0 BASIL: The repeated change between day and night is caused by the rotation of the Earth. This rotation takes 24 hours.
+  - `g1003p` 3:21.2 PIP: So one full turn takes 24 hours: one day and one night!
 
-### 3:14.1 – 3:32.0 · `cyclecheck` · 11 · What a cycle is: the board CYCLE CHECK (17.9 s)
+### 3:25.1 – 3:43.0 · `cyclecheck` · 11 · What a cycle is: the board CYCLE CHECK (17.9 s)
 
 - **Draw:** WIRED with the placeholder board (`cycleBoard`, tests.js): `boardIn` it slides in low and stands centred between the buddies; `tileday` / `tilenight` the two tiles hop onto the ring; `ringrun` the arrows light one after the other, round and round; `tick1` IT CHANGES, `tick2` IT REPEATS; `tagcycle` green A CYCLE; CYCLE pops (lib.js o.at, upper right). **Redraw the board** on its low stand (keep `cycleBoard(t, o)` and its marks): a cream board, two tick boxes, a ring of plain curved lines with small arrowheads all running the same way, round slots for PICTURE tiles (a tiny bright sky for *day time*, a tiny starry sky for *nighttime*), NO numbers, no "Stage 1", no START. Draw the living room behind.
 - **Frame (trial: who, where, how big; the main prop):** The board CYCLE CHECK LARGE at centre (about 60% of the frame high, on its low stand on the floor), Pip FG-L (h 520) beside its left edge for g1104p, Basil FG-R (h 540) beside its right edge for g1105b; Momo MG-C behind the board's top corner (h 330). The room behind in bright morning.
@@ -401,13 +409,13 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Bright morning, a sunbeam across the board.
 - **Keep from the partial Stage 2 / Stage 1:** tests.js `cycleBoard` + `CYC()` (the marks; redraw it as the real board), p1.js `SC.cyclecheck` (resize, no aura), flat14.js `tilePic`, `tinySky`.
 - **Reuse:** `cycleBoard` (functional), `slideX`. · **New:** The drawn board and its picture tiles.
-- **Marks:** `boardIn` 3:14.1, `tileday` 3:15.1, `tilenight` 3:16.7, `tick1` 3:17.5, `ringrun` 3:19.1, `tick2` 3:20.3, `tagcycle` 3:29.7, `kw_cycle` 3:30.0
+- **Marks:** `boardIn` 3:25.1, `tileday` 3:26.2, `tilenight` 3:27.7, `tick1` 3:28.5, `ringrun` 3:30.2, `tick2` 3:31.4, `tagcycle` 3:40.7, `kw_cycle` 3:41.0
 - **Lines:**
-  - `g1104p` 3:14.5 PIP: Let me check. Day changes into night, so it changes. It happens again and again, so it repeats!
-  - `g1105b` 3:21.2 BASIL: The same changes, again and again, like my school week. That is a repeated pattern!
-  - `g1101` 3:26.2 HEART: Yes, Basil! A repeated pattern of change is called a cycle.
+  - `g1104p` 3:25.5 PIP: Let me check. Day changes into night, so it changes. It happens again and again, so it repeats!
+  - `g1105b` 3:32.3 BASIL: The same changes, again and again, like my school week. That is a repeated pattern!
+  - `g1101` 3:37.2 HEART: Yes, Basil! A repeated pattern of change is called a cycle.
 
-### 3:32.0 – 3:42.9 · `mark2` · 11 · Mark Sentence 2 (Momo): C0.1 (10.9 s)
+### 3:43.0 – 3:53.9 · `mark2` · 11 · Mark Sentence 2 (Momo): C0.1 (10.9 s)
 
 - **Draw:** WIRED (`markScene`): Momo says "Say it with me!" (pointing), 0.8 s, reads the card (two sentences); highlights *repeated patterns*, *change*, *living*, *non-living*; REPEATED PATTERN pops after the last word (o.at). Under the card: the board with its closed ring (wired small).
 - **Frame (trial: who, where, how big; the main prop):** The card large at centre-left; Momo FG-R (h 540) for the card; under the card the board with its closed ring (about 25% high).
@@ -420,12 +428,12 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** A card screen (EP1's stage): no set light; keep the stage's warm spotlight and the soft bokeh drifting.
 - **Keep from the partial Stage 2 / Stage 1:** common.js `markScene`.
 - **Reuse:** `markScene`. · **New:** Nothing new (the drawn board, small).
-- **Marks:** `kw_repeated_pattern` 3:40.1
+- **Marks:** `kw_repeated_pattern` 3:51.1
 - **Lines:**
-  - `g1102` 3:32.4 MOMO: Say it with me!
-  - `g1103` 3:34.4 MOMO: Cycles are repeated patterns of change. They happen in living and non-living things.
+  - `g1102` 3:43.5 MOMO: Say it with me!
+  - `g1103` 3:45.5 MOMO: Cycles are repeated patterns of change. They happen in living and non-living things.
 
-### 3:42.9 – 4:06.0 · `holdon` · 12 · HOLD ON! "My pencil ... is a cycle!" (23.2 s)
+### 3:53.9 – 4:17.1 · `holdon` · 12 · HOLD ON! "My pencil ... is a cycle!" (23.2 s)
 
 - **Draw:** WIRED: Basil (trial: no disc), the board at the right (`tilesoff` the day-and-night tiles hop off; `pen1..pen3` three pencil tiles hop towards the ring: a long pencil, a shorter one, a stub with shavings; `penrow` they settle in a ROW under the ring; `penchg` one tick; `pentag` blue NOT A CYCLE), the HOLD ON! stamp, the YOU ring with crossed arms (5 s), the clue labels *IT CHANGES ✓* · *IT REPEATS ?* ON TOP of the ring frame through the countdown, the bell, the coin. Draw the three pencils in the ring (replace the placeholder circle) and the living room behind, dimmed.
 - **Frame (trial: who, where, how big; the main prop):** Basil FG-L (h 560, 52%) with his three pencils on the floor in front of him (each pencil at its real size beside him: the long one about as long as his arm); the board on its stand at centre-right, large (about 50% high), its two boxes and ring; For the countdown (g1202 to the bell): COUNTDOWN TAKES THE STAGE (teacher, 22 Nov): while the ring runs, the background clears to the blue-violet game stage; the ring with its picture is BIG and central (about half the frame height); the clue labels are large and readable on a phone (cap height >= 40 px at 1080p, dark text on cream or white on ink, on top of the ring's frame); only the question's elements stay (boards and props glide out); at most ONE buddy stays, big (h 420+), reacting at the side. the HOLD ON! ring with the three pencils big at centre, *IT CHANGES ✓* · *IT REPEATS ?* large on top of it, the crossed-arms YOU hand at its right; the board glides out to the right, Pip and Momo step out; Basil stays at the left, big, surprised. After the bell the board glides back to its HOME and Pip steps forward FG-R (h 500) for g1205p, Momo MG-R (h 340) beside the board.
@@ -440,14 +448,14 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Morning, the set slightly dimmed for the game.
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.holdon` (RG ring, pencil14, shavings14, the labels on top of the ring); resize and spread the buddies, no aura.
 - **Reuse:** `ringTimer`, `stamp`, `coin`, `cycleBoard`. · **New:** The three pencil tiles (an ordinary yellow-and-black pencil: long, shorter, a stub with a pile of shavings).
-- **Marks:** `tilesoff` 3:42.9, `pen1` 3:43.4, `pen2` 3:43.9, `pen3` 3:44.5, `ring0_hold` 3:53.0, `bell_hold` 3:58.0, `penrow` 4:01.4, `penchg` 4:01.7, `pentag` 4:05.0
+- **Marks:** `tilesoff` 3:53.9, `pen1` 3:54.4, `pen2` 3:55.0, `pen3` 3:55.5, `ring0_hold` 4:04.0, `bell_hold` 4:09.0, `penrow` 4:12.4, `penchg` 4:12.8, `pentag` 4:16.1
 - **Lines:**
-  - `g1201` 3:43.2 BASIL: My pencil gets shorter and shorter, so it changes. That means it is a cycle!
-  - `g1202` 3:48.0 HEART: Something is not right. If you can spot it, cross your arms. Hold on!
-  - `g1203` 3:58.7 HEART: Arms crossed? One finger up!
-  - `g1205p` 4:01.3 PIP: The pencil changes, but it never grows long again, so the change does not repeat.
+  - `g1201` 3:54.3 BASIL: My pencil gets shorter and shorter, so it changes. That means it is a cycle!
+  - `g1202` 3:59.0 HEART: Something is not right. If you can spot it, cross your arms. Hold on!
+  - `g1203` 4:09.7 HEART: Arms crossed? One finger up!
+  - `g1205p` 4:12.4 PIP: The pencil changes, but it never grows long again, so the change does not repeat.
 
-### 4:06.0 – 4:10.4 · `pipdown` · 13 · Pip: "Then look down there, at the traffic light!" (4.4 s)
+### 4:17.1 – 4:21.4 · `pipdown` · 13 · Pip: "Then look down there, at the traffic light!" (4.4 s)
 
 - **Draw:** The living room by the window. Pip (trial: no disc) (wired: pointing, a hop on "down"); through the window, far below and small, the road junction and its traffic light (the set the look-closer glides into).
 - **Frame (trial: who, where, how big; the main prop):** Pip FG-R (h 540) on the window ledge inside the grille, pointing down; through the window, the junction and its traffic light below (the traffic light about 20% of the frame high); Basil MG-L (h 340) and Momo MG-C (h 340) turning to look.
@@ -460,9 +468,9 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.pipdown`, flat14.js `trafficLight` (small).
 - **Reuse:** the living-room set (`BG.flat` + a live `VF(t, o)`: the HDB living room by the east window; bake the static parts) with the owl asleep on the rain tree outside the window · **New:** The junction seen from upstairs.
 - **Lines:**
-  - `g1301` 4:06.3 PIP: Then look down there, at the traffic light! I think it is a cycle.
+  - `g1301` 4:17.4 PIP: Then look down there, at the traffic light! I think it is a cycle.
 
-### 4:10.4 – 4:27.5 · `lclight` · 13 · [LOOK CLOSER] The traffic light at the junction below (17.1 s)
+### 4:21.4 – 4:38.6 · `lclight` · 13 · [LOOK CLOSER] The traffic light at the junction below (17.1 s)
 
 - **Draw:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js: push-in from the set, dim, the window opens, LOOK CLOSER tag, the verdict `lcVerdict` at the `v_*` mark, score and shelf away; the NOW: label shows the current picture beat). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv, over })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the bottom 80 px for the verdict), keeping the wired `over` (small print, pills, tags). Models: ep13/closer.js, ep12/closer.js. Inside: `glide` the camera glides through the window and down and pushes in until the traffic light fills most of the window; the road and the flat dim and blur. A real Singapore traffic light: three round lamps in a column, red on top, amber, green at the bottom, on a black board with a white edge. Each lamp lights ON Heart's word, about 2 s apart (checked: 2.18 / 1.94 / 2.02 s): `lampG` green, `lampA` amber, `lampR` red, `lampG2` green again (no red with amber). A plain label line by each as it lights: *green* · *amber* · *red* · *green again*. Hold on the second green. `lighttiles`: on the small board at the top left (wired) three lamp tiles sit on the ring, both boxes ticked. Verdict A CYCLE (green, wired) at `v_light`. Nobody is on the road.
 - **Frame (trial: who, where, how big; the main prop):** [LOOK CLOSER] The traffic light FILLS most of the panel (about 75% of its height); each lamp's label pops BIG beside it as it lights. Pip's face lower-LEFT (a third of the panel) for the lamps (his idea); Basil's face pops in lower-RIGHT for g1304b; the small board at the lower centre grows to a third of the panel as its three tiles land (lighttiles).
@@ -476,13 +484,13 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Bright late-morning street light; each lamp's own coloured glow on the black board.
 - **Keep from the partial Stage 2 / Stage 1:** flat14.js `lightArt`, `trafficLight`; closer.js `lookCloser`.
 - **Reuse:** `lookCloser`; `cycleBoard({small})`. · **New:** The traffic light close-up (lamps on / off states), the junction blurred behind.
-- **Marks:** `glide` 4:10.4, `lampG` 4:13.0, `lampA` 4:15.2, `lampR` 4:17.1, `lampG2` 4:19.1, `lighttiles` 4:21.5, `v_light` 4:25.0
+- **Marks:** `glide` 4:21.4, `lampG` 4:24.0, `lampA` 4:26.2, `lampR` 4:28.1, `lampG2` 4:30.2, `lighttiles` 4:32.6, `v_light` 4:36.1
 - **Lines:**
-  - `g1302` 4:11.6 HEART: Look closer.
-  - `g1303` 4:13.0 HEART: Green. Amber. Red. Green again!
-  - `g1304b` 4:20.6 BASIL: It changes and it repeats, just like day and night, so it is a cycle too!
+  - `g1302` 4:22.6 HEART: Look closer.
+  - `g1303` 4:24.0 HEART: Green. Amber. Red. Green again!
+  - `g1304b` 4:31.6 BASIL: It changes and it repeats, just like day and night, so it is a cycle too!
 
-### 4:27.5 – 4:35.3 · `final` · 14 · Score hand (7.7 s)
+### 4:38.6 – 4:46.3 · `final` · 14 · Score hand (7.7 s)
 
 - **Draw:** WIRED (`finalScene`): 2 fingers = high five.
 - **Frame (trial: who, where, how big; the main prop):** The score-hand screen: the hand large C; the buddies spread L / R (h 360).
@@ -495,24 +503,29 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** `finalScene` (resize, no aura).
 - **Reuse:** All. · **New:** Nothing.
 - **Lines:**
-  - `g1401` 4:27.8 HEART: Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!
+  - `g1401` 4:38.8 HEART: Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!
 
-### 4:35.3 – 4:41.4 · `liz` · 14 · Did you spot the owl? (ONE smooth push-in) (6.1 s)
+### 4:46.3 – 4:58.7 · `liz` · 14 · Did you spot the owl? (ONE smooth push-in) (12.4 s)
 
 - **Draw:** WIRED (`lizReveal`, EP12 v2): the score hand melts into the real room (no jump cut), the camera pushes in on the owl on its branch, the ring POPS round it on "owl"; the pills *It was on the tree outside the window!* and *Tell someone at home!* (moved left with `px` so the owl and its ring stay clear). Pass the drawn room (`VF`) as the view and `OWL`. The owl opens one eye, looks at us and closes it again.
 - **Frame (trial: who, where, how big; the main prop):** The reveal (same circle as the game): the score hand melts into the real room, the camera pushes in onto the rain tree, then the IRIS: the owl in its circle (about 46% high) with the thick BLACK ring, the blue-violet starry stage outside; the pills *It was on the tree outside the window!* · *Tell someone at home!* to its right; the three buddies pop in at the right (h 360), cheering.
 - **Camera (zoom target per line):** The melt, one push-in onto the owl, the iris; a tiny drift.
 - **Poses per line:**
-  - `g1402`: The owl opens one eye, looks at us, closes it; the buddies cheer and wave at it on "Tell someone at home".
+  - `g1402`: The owl opens one eye, looks at us, closes it; the buddies cheer.
+  - `g1403`: THE FUN FACT (SERIES_FORMAT 4): Momo FG-R (h 500), excited (surprised on "fun fact", then lip-sync); the labelled picture panel opens on `ff_in` beside her: on `ff_day` the owl ASLEEP on a branch under a bright Sun, label *day: asleep*; on `ff_night` the owl AWAKE, big round eyes, under the Moon and stars, label *night: awake* (wired placeholder: common.js `funFact`; draw the two pictures, keep marks and labels).
+  - `g1404`: Heart: the pill *Tell someone at home!* pops (wired, on "tell"); the buddies cheer and wave at the owl.
 - **Hidden animal:** The REPLAY spot = the high fork of the rain tree (Heart: "on the tree outside the window").
 - **Life:** The owl breathes, opens one eye, closes it; leaves stir; a bird hops on a higher branch.
 - **Light:** Late morning: the tree in bright sun, the owl in the leafy shade.
 - **Keep from the partial Stage 2 / Stage 1:** common.js `lizReveal` (replace the yellow ring with the iris + black ring + blue-violet stage), p1.js `SC.liz`.
 - **Reuse:** `lizReveal`. · **New:** The owl's reveal action (o.open).
+- **Marks:** `ff_in` 4:51.2, `ff_day` 4:53.5, `ff_night` 4:54.3
 - **Lines:**
-  - `g1402` 4:35.7 HEART: Did you spot the owl? It was on the tree outside the window! Tell someone at home.
+  - `g1402` 4:46.8 HEART: Did you spot the owl? It was on the tree outside the window!
+  - `g1403` 4:50.8 MOMO: Here is a fun fact! Most owls sleep in the day and wake up at night. Our day time is their bedtime!
+  - `g1404` 4:57.2 HEART: Tell someone at home!
 
-### 4:41.4 – 4:54.4 · `kwrecap` · 14 · Key words read-along (13.1 s)
+### 4:58.7 – 5:11.7 · `kwrecap` · 14 · Key words read-along (13.1 s)
 
 - **Draw:** WIRED (common.js `SC.kwrecap`): ROTATION · CYCLE · REPEATED PATTERN.
 - **Frame (trial: who, where, how big; the main prop):** The read-along shelf large C; the buddies spread L / C / R in front (h 360).
@@ -525,16 +538,16 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** common.js `SC.kwrecap` (resize, no aura).
 - **Reuse:** All. · **New:** Nothing.
 - **Lines:**
-  - `h860` 4:41.9 HEART: Let's read today's key words together! Ready?
-  - `hk_rotation` 4:45.4 HEART: Rotation.
-  - `uk_rotation` 4:46.5 CHANT: Rotation.
-  - `hk_cycle` 4:48.0 HEART: Cycle.
-  - `uk_cycle` 4:48.9 CHANT: Cycle.
-  - `hk_repeated_pattern` 4:50.2 HEART: Repeated pattern.
-  - `uk_repeated_pattern` 4:51.5 CHANT: Repeated pattern.
-  - `h864` 4:53.2 HEART: Well done!
+  - `h860` 4:59.2 HEART: Let's read today's key words together! Ready?
+  - `hk_rotation` 5:02.7 HEART: Rotation.
+  - `uk_rotation` 5:03.8 CHANT: Rotation.
+  - `hk_cycle` 5:05.3 HEART: Cycle.
+  - `uk_cycle` 5:06.2 CHANT: Cycle.
+  - `hk_repeated_pattern` 5:07.5 HEART: Repeated pattern.
+  - `uk_repeated_pattern` 5:08.8 CHANT: Repeated pattern.
+  - `h864` 5:10.5 HEART: Well done!
 
-### 4:54.4 – 5:05.4 · `cliff` · 15 · The cliffhanger: do living things have cycles too? (11.0 s)
+### 5:11.7 – 5:22.7 · `cliff` · 15 · The cliffhanger: do living things have cycles too? (11.0 s)
 
 - **Draw:** WIRED: Momo big (thinking), the small cream card *living and non-living things* with *living* glowing and a big **?** (`q`), three small picture cards sliding in low on Heart's words (`card1..card3`: a hen, a chick, a teddy bear: draw them), PART 2 slams in. Draw the living room behind.
 - **Frame (trial: who, where, how big; the main prop):** Momo FG-C-L (h 560) on the rug; the small cream card *living and non-living things* with the big ? above her shoulder; the three picture cards (a hen, a chick, a teddy bear) slide in low on the floor at the right, each about 30% high; Pip MG-L (h 340) on the sofa, Basil MG-R (h 360) beside the cards.
@@ -548,13 +561,13 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Bright late morning.
 - **Keep from the partial Stage 2 / Stage 1:** p1.js `SC.cliff`, flat14.js `picCard14`.
 - **Reuse:** the living-room set (`BG.flat` + a live `VF(t, o)`: the HDB living room by the east window; bake the static parts) with the owl asleep on the rain tree outside the window · **New:** The three picture cards (a brown hen, a small striped chick, a brown teddy bear).
-- **Marks:** `q` 4:56.8, `card1` 5:00.5, `card2` 5:01.2, `card3` 5:01.8, `cliffend` 5:04.7
+- **Marks:** `q` 5:14.2, `card1` 5:17.8, `card2` 5:18.5, `card3` 5:19.1, `cliffend` 5:22.0
 - **Lines:**
-  - `g1501` 4:55.0 MOMO: The Earth is non-living. Do living things have cycles too?
-  - `g1502` 4:58.8 HEART: Good question, Momo! A hen, a chick and a teddy bear will show us.
-  - `g1503` 5:03.4 HEART: Find out in Part Two!
+  - `g1501` 5:12.3 MOMO: The Earth is non-living. Do living things have cycles too?
+  - `g1502` 5:16.1 HEART: Good question, Momo! A hen, a chick and a teddy bear will show us.
+  - `g1503` 5:20.7 HEART: Find out in Part Two!
 
-### 5:05.4 – 5:17.1 · `nyk` · 16 · "Now you know!" and the outro (11.7 s)
+### 5:22.7 – 5:34.4 · `nyk` · 16 · "Now you know!" and the outro (11.7 s)
 
 - **Draw:** WIRED (`nykScene`): EP1's ending; the board CYCLE CHECK with the day-and-night ring closed and both boxes ticked, its arrows going round, centred in the free space between the buddies, big enough to read (Stage 2's drawn board). Nothing in the bottom fifth; the YOU tag only with the YOU hands.
 - **Frame (trial: who, where, how big; the main prop):** EP1's ending; the board CYCLE CHECK centred between the buddies, big enough to read; the buddies L / C / R (h 380), not bunched.
@@ -567,14 +580,14 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** common.js `nykScene` (resize, no aura).
 - **Reuse:** All. · **New:** Nothing.
 - **Lines:**
-  - `u1300` 5:06.1 CHANT: Say it with us!
-  - `h1304a` 5:08.0 HEART: Ready?
-  - `h1304o` 5:08.9 HEART: One!
-  - `h1304t` 5:09.9 HEART: two!
-  - `h1305` 5:10.9 HEART: Now you know!
-  - `u1305` 5:10.9 CHANT: Now you know!
+  - `u1300` 5:23.4 CHANT: Say it with us!
+  - `h1304a` 5:25.3 HEART: Ready?
+  - `h1304o` 5:26.2 HEART: One!
+  - `h1304t` 5:27.2 HEART: two!
+  - `h1305` 5:28.2 HEART: Now you know!
+  - `u1305` 5:28.2 CHANT: Now you know!
 
-## Part 2 · "The Boy GREW. The Tree GREW. Why Not the TEDDY BEAR?" · 5:16.8
+## Part 2 · "The Boy GREW. The Tree GREW. Why Not the TEDDY BEAR?" · 5:28.2
 
 ### 0:00.0 – 0:10.3 · `lasttime` · 1 · "Last time...": a calm recap (three pictures) (10.3 s)
 
@@ -975,22 +988,27 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Lines:**
   - `j1201` 4:24.9 HEART: Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!
 
-### 4:32.2 – 4:38.1 · `liz` · 12 · Did you spot the ladybird? (ONE smooth push-in) (5.9 s)
+### 4:32.2 – 4:49.5 · `liz` · 12 · Did you spot the ladybird? (ONE smooth push-in) (17.4 s)
 
 - **Draw:** WIRED (`lizReveal`, EP12 v2): the score hand melts into the real garden, the camera pushes in on the ladybird on its leaf, the ring POPS round it on "ladybird"; the pills. Pass the drawn garden (`VG`) and `LADY`. The ladybird lifts its wing cases, flies a hand's width to the next leaf and settles (move the ring with it, as EP13's frog).
 - **Frame (trial: who, where, how big; the main prop):** The reveal: the push-in onto the young tree, the IRIS (the ladybird in its circle, thick BLACK ring, the blue-violet stage outside), the pills to its right, the buddies popping in at the right (h 360).
 - **Camera (zoom target per line):** The melt, the push-in, the iris; follow its little flight inside the circle.
 - **Poses per line:**
   - `j1202`: The ladybird lifts its wing cases and flies a hand's width to the next leaf; the buddies cheer.
+  - `j1203`: THE FUN FACT: Pip FG-R (h 500), step by step (pointing at each picture: his own pose), the panel opens on `ff_in`; three labelled pictures in a row joined by arrows: `ff_larva` a spiky dark larva with orange spots, long like a tiny crocodile, label *larva*; `ff_pupa` the rounded pupa stuck on a leaf, label *pupa*; `ff_adult` the red ladybird with black spots, label *ladybird*; Momo and Basil surprised on "crocodile" (wired placeholder: common.js `funFact`).
+  - `j1204`: Heart: *Tell someone at home!* pops; the buddies cheer.
 - **Hidden animal:** The REPLAY spot = a leaf of the young tree (Heart: "on a leaf of the young tree").
 - **Life:** The ladybird flies; the leaves bob as it lands.
 - **Light:** Bright sun through the young tree's leaves.
 - **Keep from the partial Stage 2 / Stage 1:** common.js `lizReveal` (iris + black ring), `LADY`.
 - **Reuse:** `lizReveal`. · **New:** The ladybird's little flight (o.fly).
+- **Marks:** `ff_in` 4:37.0, `ff_larva` 4:42.7, `ff_pupa` 4:45.9, `ff_adult` 4:46.9
 - **Lines:**
-  - `j1202` 4:32.5 HEART: Did you spot the ladybird? It was on a leaf of the young tree! Tell someone at home.
+  - `j1202` 4:32.5 HEART: Did you spot the ladybird? It was on a leaf of the young tree!
+  - `j1203` 4:36.5 PIP: Here is a fun fact! A baby ladybird looks nothing like its parent. It hatches as a spiky larva, like a tiny crocodile. Then it becomes a pupa, and then a ladybird!
+  - `j1204` 4:48.1 HEART: Tell someone at home!
 
-### 4:38.1 – 4:52.6 · `dare` · 13 · The dare for Episode 15: a mango, one big seed (14.5 s)
+### 4:49.5 – 5:04.0 · `dare` · 13 · The dare for Episode 15: a mango, one big seed (14.5 s)
 
 - **Draw:** WIRED: the three cards 1 A mango · 2 A flower · 3 A young plant, the big **?**, the banner *NEXT · What will the seed grow into first?*, *Lock in your answer!*, Basil's joke (j1302). Draw: `dareIn` three picture boards slide in low and stand side by side, centred between the buddies: a mango cut open with its one big flat seed, three times; beside the seed, on the first board a small mango, on the second a flower, on the third a young plant with two leaves (they open EP15: `PIC.mangoA / mangoB / mangoC`, keep them reusable).
 - **Frame (trial: who, where, how big; the main prop):** ONE set of three big numbered picture cards (the three mango boards: a mango cut open with its seed + a small mango / a flower / a young plant; each about 40% high), across the frame; Basil FG-L (h 500), Pip MG-C (h 340), Momo MG-R (h 340) spread under them.
@@ -1002,11 +1020,11 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Light:** Bright late morning in the garden.
 - **Keep from the partial Stage 2 / Stage 1:** garden14.js `mangoCut`, `mangoBg` (PIC.mangoA / B / C), p2.js `SC.dare` (replace its `phScene`).
 - **Reuse:** the garden set (`BG.garden14` + a live `VG(t, o)`: the community garden beside an HDB block; bake the static parts) with the ladybird on its leaf · **New:** The three mango dare boards.
-- **Marks:** `dareIn` 4:38.1
+- **Marks:** `dareIn` 4:49.5
 - **Lines:**
-  - `j1301` 4:38.8 HEART: Next time: a mango! Inside it, there is one big seed. We plant the seed. What will it grow into first? One, a mango. Two, a flower. Three, a young plant. Lock in your answer!
+  - `j1301` 4:50.2 HEART: Next time: a mango! Inside it, there is one big seed. We plant the seed. What will it grow into first? One, a mango. Two, a flower. Three, a young plant. Lock in your answer!
 
-### 4:52.6 – 5:05.1 · `kwrecap` · 14 · Key words read-along (12.5 s)
+### 5:04.0 – 5:16.5 · `kwrecap` · 14 · Key words read-along (12.5 s)
 
 - **Draw:** WIRED: GROW · REPRODUCE · LIFE CYCLE.
 - **Frame (trial: who, where, how big; the main prop):** The read-along shelf C; buddies L / C / R (h 360).
@@ -1019,16 +1037,16 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** `SC.kwrecap`.
 - **Reuse:** All. · **New:** Nothing.
 - **Lines:**
-  - `h860` 4:53.1 HEART: Let's read today's key words together! Ready?
-  - `hk_grow` 4:56.6 HEART: Grow.
-  - `uk_grow` 4:57.4 CHANT: Grow.
-  - `hk_reproduce` 4:58.6 HEART: Reproduce.
-  - `uk_reproduce` 4:59.7 CHANT: Reproduce.
-  - `hk_life_cycle` 5:01.2 HEART: Life cycle.
-  - `uk_life_cycle` 5:02.3 CHANT: Life cycle.
-  - `h864` 5:03.9 HEART: Well done!
+  - `h860` 5:04.6 HEART: Let's read today's key words together! Ready?
+  - `hk_grow` 5:08.1 HEART: Grow.
+  - `uk_grow` 5:08.9 CHANT: Grow.
+  - `hk_reproduce` 5:10.1 HEART: Reproduce.
+  - `uk_reproduce` 5:11.1 CHANT: Reproduce.
+  - `hk_life_cycle` 5:12.6 HEART: Life cycle.
+  - `uk_life_cycle` 5:13.8 CHANT: Life cycle.
+  - `h864` 5:15.3 HEART: Well done!
 
-### 5:05.1 – 5:16.8 · `nyk` · 15 · "Now you know!" and the outro (11.7 s)
+### 5:16.5 – 5:28.2 · `nyk` · 15 · "Now you know!" and the outro (11.7 s)
 
 - **Draw:** WIRED (`nykScene`): EP1's ending; the board CYCLE CHECK with its two closed rings, their arrows going round, centred between the buddies, big enough to read. Nothing in the bottom fifth.
 - **Frame (trial: who, where, how big; the main prop):** EP1's ending; the board's two rings centred between the buddies L / C / R (h 380).
@@ -1041,9 +1059,9 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 - **Keep from the partial Stage 2 / Stage 1:** `nykScene`.
 - **Reuse:** All. · **New:** Nothing.
 - **Lines:**
-  - `u1300` 5:05.8 CHANT: Say it with us!
-  - `h1304a` 5:07.7 HEART: Ready?
-  - `h1304o` 5:08.6 HEART: One!
-  - `h1304t` 5:09.6 HEART: two!
-  - `h1305` 5:10.6 HEART: Now you know!
-  - `u1305` 5:10.6 CHANT: Now you know!
+  - `u1300` 5:17.2 CHANT: Say it with us!
+  - `h1304a` 5:19.1 HEART: Ready?
+  - `h1304o` 5:20.0 HEART: One!
+  - `h1304t` 5:21.0 HEART: two!
+  - `h1305` 5:22.0 HEART: Now you know!
+  - `u1305` 5:22.0 CHANT: Now you know!

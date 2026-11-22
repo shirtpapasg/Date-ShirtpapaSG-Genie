@@ -165,10 +165,19 @@ const popSpark = (t, t0, x, y, r = 90) => { const u = (t - t0) / .5; if (u <= 0 
 const animalLabel = (t, t0, x, y, size = 44) => t < t0 ? "" : TF(x, y, spring(t, t0, .5), `<g filter="url(#dropS)"><path d="M-16 ${n2(size * .7)} L0 ${n2(size * 1.25)} L16 ${n2(size * .7)}z" fill="${P.ink}"/></g>` + tpill(0, 0, "a little " + HIDDEN[0], size, P.ink, "#fff", { w: 700 })) + popSpark(t, t0, x, y, 150);
 /* the reveal: the picture melts from the score hand into the real place (o.from = the last frame of the scene before, no jump cut), the camera
    pushes in on the animal, and the ring pops round it on its name. o.px / o.py (EP13 Stage 3): where the two pills stand, clear of the animal and its ring */
-function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7, o = {}) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u), tR = W(L, HIDDEN[0]) + .1, kr = t < tR ? 0 : spring(t, tR, .5), fade = 1 - clamp((t - s.t0) / .45);
+function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7, o = {}) { const tTell = W(o.tell || L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u), tR = W(L, HIDDEN[0]) + .1, kr = t < tR ? 0 : spring(t, tR, .5), fade = 1 - clamp((t - s.t0) / .45);
   return `<g transform="translate(960 540) scale(${n2(zz)}) translate(${n2(-lerp(960, lx + dx, u))} ${n2(-lerp(540, ly + dy, u))})">${view}${kr ? `<circle cx="${lx}" cy="${ly}" r="${n2((rr + rr * .07 * Math.sin(t * 6)) * kr)}" fill="none" stroke="${P.sun}" stroke-width="${n2(9 * rr / 88 + 2)}"/>` + popSpark(t, tR, lx, ly, rr * 1.25) : ""}</g>`
     + (t >= tq ? TF(o.px || 960, o.py || 830, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw(qtext, 58, 700) / 2 - 60)}" y="-60" width="${n2(tw(qtext, 58, 700) + 120)}" height="120" rx="60" fill="${P.ink}"/></g>${T(0, 20, qtext, 58, "#fff")}`) : "")
+    + (o.fact ? funFact(t, o.fact) : "")
     + (t >= tTell ? TF(o.px || 960, (o.py || 830) + 140, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + (fade > .01 && o.from ? OP(fade, o.from()) : "") + logo(t); }
+/* the reveal's fun fact (SERIES_FORMAT 4, teacher 22 Nov): a labelled picture panel that opens on the buddy's "fun" (mark ff_in) and
+   fills one labelled picture per mark. Stage 1: a PLACEHOLDER (cream panel, a box per picture naming what to draw, its label); Stage 2
+   draws the pictures (keep the marks and labels). f = { id, at: [x, y], w, h, items: [[mark, label, "DRAW: ..."], ...] } */
+function funFact(t, f) { const t0 = MK("ff_in") - .1; if (t < t0 || t > TL.lines[f.id].end + 1.2) return ""; const k = spring(t, t0, .45) * (1 - ss(TL.lines[f.id].end + .9, TL.lines[f.id].end + 1.2, t));
+  const n = f.items.length, w = f.w || 1180, h = f.h || 380, bw = (w - 60) / n - 20; let g = `<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="36" fill="#FFF8EA"/></g>` + tpill(-w / 2 + 130, -h / 2, "Fun fact!", 34, P.sun, P.ink, { w: 700 });
+  f.items.forEach(([mk, lab, draw], i) => { const x = -w / 2 + 40 + i * (bw + 20) + bw / 2, a = MK(mk) - .1; if (t < a) return; const q = spring(t, a, .4);
+    g += TF(x, 0, q, `<rect x="${n2(-bw / 2)}" y="-120" width="${n2(bw)}" height="200" rx="20" fill="#E9E1F7" stroke="${P.ink}" stroke-width="3" stroke-dasharray="10 8"/>` + T(0, -20, draw, 22, P.ink, { w: 500 }) + tpill(0, 130, lab, 32, P.ink, "#fff")); });
+  return TF(f.at ? f.at[0] : 960, f.at ? f.at[1] : 470, k, g); }
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
 function gameScene(t, s, L0, full, R) { const LF = Array.isArray(L0) ? L0[0] : L0, L = Array.isArray(L0) ? L0[L0.length - 1] : L0;   // EP14 trial (teacher, 22 Nov): FIND the animal first (LF: Heart names it, a buddy makes the search fun), THEN the fingers / lock-in rules (L)
@@ -191,7 +200,10 @@ function gameScene(t, s, L0, full, R) { const LF = Array.isArray(L0) ? L0[0] : L
       out += youPill(lerp(640, 330, ph2), lerp(470, 400, ph2), 1.3 * youIn) + popSpark(t, tH, 640, 640, 260);
       if (nf && ph2 > .5) out += TF(880, 470, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
     out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(200 470) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
-    [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = Math.min(Math.max(tBud, tP + .1), Array.isArray(L0) ? LT(L0[1]) - .3 : 1e9) + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
+    const CM = { momo: "g301c", pip: "g301p", basil: "g301t" }, CP = { momo: "waving", pip: "arms_crossed", basil: "cheer" };   // EP14: the buddies in colour (script 12.3)
+    [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = Math.min(Math.max(tBud, tP + .1), Array.isArray(L0) ? LT(L0[1]) - .3 : 1e9) + i * .14, cl = HAS(CM[w]) ? CM[w] : null;
+      const ps = [[tt - .08, pz], [tt + 1.4, "sit"]]; if (cl) ps.push([LT(cl) - .12, CP[w]], [LE(cl) + .3, "sit"]); ps.sort((a, b) => a[0] - b[0]);
+      out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: ps, wave: true, twirl: cl && w === "momo" ? [MK("twirl") - .1] : [] }); });
     out += lab + (t >= tFind - .1 ? TF(R.qx || 1440, R.qy || 640, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 })) : "");
     return out + logo(t); }
   // Part 2: "Lock in first. A little ladybird is hiding in this video. Can you spot it?"

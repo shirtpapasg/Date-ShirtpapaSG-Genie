@@ -11,7 +11,7 @@ RVRoaWWKjEM (pp. 73-79) stays in the playlists until EP15 is live: NO "replaces"
 "leev" via sg_pron, a clip only if a problem is heard) **plus the ONE change of 22 Nov: full, human sentences** (section 12.1: 43 lines).
 EP13 is live (its playlists' anchor for EP14: `explained-p3-ep13-part2`; EP13 Part 1 = FO1Y_KSZU-c, Part 2 = 8lQ1-1ruveY).
 
-Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · Stage 2 (drawing + thumbnails, Fable) · Stage 2.5 (the teacher's-eye review, a fresh
+Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · **Stage 1 colour (done 2026-11-22, Opus)** · Stage 2 (drawing + thumbnails, Fable) · Stage 2.5 (the teacher's-eye review, a fresh
 Opus agent) · Stage 3 (render, checks, upload, Opus).
 
 ## Stage 1: done (2026-11-22, Opus)
@@ -244,3 +244,42 @@ Teacher: Pip remains grey. EP14 colour lines updated (script 12.3): Momo has her
 
 ## 22 Nov: Basil teal
 Teacher approved the teal Basil test ("this looks cool!"). Cast from EP14: Momo coral, Pip grey (unchanged), Basil teal. Basil line added (script 12.3). Waiting for 20 paintings (Momo 10, Basil 10).
+
+## Stage 1 done: the buddies in colour, the colour moment and the fun facts (2026-11-22, Opus)
+Drawing (Stage 2) can start: everything below is wired and timed. Read `../p3_ep14_script.md` section 12.4 and SCENES_TODO.md note 12.
+- **Sprites (EP14 is the first episode in colour).** `prep_sprites.py` now copies ONLY coloured Momo / Basil files into `spr/` under the
+  plain names (`momo_sit_closed`, `basil_cheer` ...), so no scene code changed; Pip is his grey set, unchanged. It empties `spr/` first,
+  so no grey Momo / Basil can survive a re-run.
+  - **Basil (teal):** `../characters/sprites/basil_c_sit_*` (closed, half, wide, blink, half_blink, wide_blink; the helper's set was
+    checked and is right: only the face changes, 0 px below the neck, no seam) + poses oops, waving, thinking, surprised, pointing, cheer
+    (cheer is cut from a 2x2 sheet and enlarged: a little softer). **No coloured arms_crossed:** lib.js `POSE_SUB` turns "arms_crossed"
+    into thinking.
+  - **Momo (coral):** her talking set is the ARMS-CROSSED painting: `momo_c_sit_*` from the teacher's four paintings
+    (`poses_inbox/momo_c_talk_{closed,half,wide,blink}.jpg`, built with `align_set.py momo_c`: the base is the closed painting, the half /
+    wide mouths and the blink lids are patched in; the other three are cropped paintings but only their faces are used) + poses oops,
+    waving, thinking, surprised, cheer, arms_crossed. **"pointing" = waving** (POSE_SUB; every EP14 use is an inviting / showing
+    gesture). Her coloured pointing painting is cropped (a straight cut through the tail): it is in the set as `momo_pointing_cut`
+    (pose "pointing_cut"), for shots where her tail side is hidden ONLY. An uncropped one has been asked for; when it arrives, add it to
+    poses.py, drop the RENAME in prep_sprites.py and re-run poses.py + prep_sprites.py (POSE_SUB then steps aside by itself).
+  - `poses.py` puts momo_c and basil_c poses on their OWN coloured sitting sets (SITREF empty). QA: `../characters/sprites/qa/`
+    `basil_c_{states,cycle,edges,seams,poseswap,headturn}.png`, `momo_c_{states,cycle,edges,seams,poseswap}.png`, `poses_momo_c.png`,
+    `poses_basil_c.png`. No coloured back views exist: none is used in EP14.
+- **The colour moment (script 12.3)**, Part 1 game, between Momo's search line and the rules: g301c Momo (waving + a twirl on
+  "colours": lib.js `o.twirl`, mark `twirl`), g301p Pip (arms crossed, chin up), g301t Basil (cheer: no coloured arms crossed). Wired in
+  `gameScene` (common.js; it takes the line ids [find, buddy, ..., rules]); a sparkle on the twirl and on "handsome", a pop on "grey".
+- **Fun-fact reveals (rulebook 4)**: Heart "Did you spot ...? It was ...!" -> a buddy's fact with a labelled picture -> Heart "Tell
+  someone at home!" (own line; `lizReveal(..., { tell, fact })`). Part 1 g1402 / **g1403 Momo** "Here is a fun fact! Most owls sleep in
+  the day and wake up at night. Our day time is their bedtime!" (marks ff_in, ff_day, ff_night: *day: asleep* / *night: awake*) / g1404.
+  Part 2 j1202 / **j1203 Pip** "Here is a fun fact! A baby ladybird looks nothing like its parent. It hatches as a spiky larva, like a tiny
+  crocodile. Then it becomes a pupa, and then a ladybird!" (marks ff_in, ff_larva, ff_pupa, ff_adult) / j1204. The panel is a placeholder
+  (common.js `funFact`: dashed boxes saying what to draw, the labels); Stage 2 draws the pictures. Fact-checked (script 12.4).
+- **Voices:** 9 lines recorded with make_voice.py (Heart via Kokoro + sg_pron; buddies via the Character Voice Kit, x.88): g301c 5.6 s,
+  g301p 4.5 s, g301t 3.2 s, g1402 3.6 s, g1403 6.0 s, g1404 1.0 s, j1202 3.6 s, j1203 11.2 s, j1204 1.0 s. No word on PRONUNCIATION.md's list.
+  Pip's g301p is spread by word length (his pitched-up voice does not force-align, like g402; "chinchillas" added to the aligner's words).
+- **Timing:** CUTS + `lookmoves` (the last Part 1 item of section 6). **Part 1 5:34.4, Part 2 5:28.2**: over the 5:15-5:25 target, as
+  section 6 is used up and nothing teaching may go. Options for the teacher in script 12.4 (recommended: accept for this trial).
+- **Sound:** sound_cues.js has the new cues; `node dump_cues.js 1|2` -> cues_p1.json (219), cues_p2.json (201). **The mixes
+  (`node song.js P`) were NOT rebuilt** (wav, not committed): Stage 2 rebuilds them after drawing, as its checklist says.
+- **Checks:** stills of the colour moment, Momo's Mark Sentence (coloured talking set), and both fun-fact panels: no page errors.
+  `qa/p1_check.jpg` / `qa/p2_check.jpg` were not regenerated (times moved; Stage 2 makes new sheets).
+- `SCENES_TODO.md` regenerated (make_todo.py, todo_trial.py: the colour moment and fact poses per line, note 12 = the coloured pose list).

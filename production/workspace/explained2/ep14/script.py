@@ -59,7 +59,9 @@ Marks the picture and the sound use (EP10 Stage 3's lesson: every sound lands on
 
 TRIAL (teacher, 22 Nov; script section 12.2, SERIES_FORMAT 1d): the buddies teach. Every term is explained by a buddy in their own words
   (Pip step by step, Basil with funny comparisons, Momo asking the "but why?"); Heart sets up, names the book's term on its slow line and
-  confirms. The game segment finds the hidden animal first (g301a / g301m / g301b; j201a / j201b / j201c), then the rules. New line ids
+  confirms. The game segment finds the hidden animal first (g301a / g301m / g301b; j201a / j201b / j201c), then the rules. Stage 1 (colour,
+  22 Nov): the buddies-in-colour lines g301c (Momo) / g301p (Pip) / g301t (Basil) before g301b (script 12.3); the reveals end with a buddy's
+  fun fact and Heart's "Tell someone at home!" (g1402 + g1403 Momo + g1404; j1202 + j1203 Pip + j1204; script 12.4). New line ids
   carry the speaker's letter (g602p Pip, g603b Basil, g701m Momo...). New cut tags: mrt (g803b Basil's MRT comparison), kitten (j804m Momo
   + j804 Heart). Lengths with the cuts below: Part 1 5:17.1, Part 2 5:16.8.
 
@@ -80,7 +82,7 @@ CUTS: script section 6 (non-teaching, in its order). Put a tag in CUTS to drop t
 """
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
-CUTS = {"forgotegg", "notes13", "napback", "title2", "pencilback", "mrt", "yesmomo", "kitten", "darkwarm", "c02silent", "nextjoke"}   # trial (22 Nov): Part 2 keeps Stage 1's two cuts; Part 1 drops {NAP_BACK} (Basil's rotation line takes its place)
+CUTS = {"forgotegg", "notes13", "napback", "title2", "pencilback", "mrt", "yesmomo", "kitten", "darkwarm", "c02silent", "nextjoke", "lookmoves"}   # + lookmoves (Stage 1 colour, 22 Nov: the colour lines and the fun facts add ~20 s)   # trial (22 Nov): Part 2 keeps Stage 1's two cuts; Part 1 drops {NAP_BACK} (Basil's rotation line takes its place)
 cut = lambda tag, items: [] if tag in CUTS else items
 
 # ---- the dare blocks (script section 3) ----
@@ -151,6 +153,10 @@ SEQ1 = [
  ("scene", "game"),
  ("say", "g301a", H, "A little owl is hiding in this video. Can you spot it?", {"pre": .4, "post": .2}),
  ("say", "g301m", M, "It hides somewhere new each time, so keep your eyes open!", {"pre": .3, "post": .1}),
+ # the buddies in colour (script 12.3, teacher 22 Nov): said once, lightly, as the three pop in for the rules; no card, no pause
+ ("say", "g301c", M, "Did you notice? I have my colours now! The creator finally had the budget to paint me.", {"pre": .4, "post": .1, "kw": [["twirl", "colours"]]}),
+ ("say", "g301p", P, "I am staying grey, and I love it. Real chinchillas are grey, you know!", {"pre": .3, "post": .1}),
+ ("say", "g301t", B, "And I am teal now. I think I look very handsome today.", {"pre": .3, "post": .2, "kw": [["handsome", "handsome"]]}),
  ("say", "g301b", H, "You against the Buddies! Lock in first with your fingers. One finger for every point.", {"pre": .3, "post": .4}),
  # ---- 4 · today's goals (Pip reads the three cards, word for word) and the countdown
  ("scene", "goals"), ("say", "g401", P, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "g402", P, "Day and night.", {"pre": .3, "post": .3}),
@@ -260,7 +266,11 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "g1401", H, "Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!", {"pre": .3, "post": .5}),
  ("scene", "liz"),
- ("say", "g1402", H, "Did you spot the owl? It was on the tree outside the window! Tell someone at home.", {"pre": .6, "post": .6}),
+ # the reveal ends with a surprising, TRUE fact linked to the topic (SERIES_FORMAT 4, teacher 22 Nov), a buddy says it with a labelled
+ # picture (ff_day: an owl asleep in the day, ff_night: the owl awake at night), then Heart: "Tell someone at home!"
+ ("say", "g1402", H, "Did you spot the owl? It was on the tree outside the window!", {"pre": .6, "post": .2}),
+ ("say", "g1403", M, "Here is a fun fact! Most owls sleep in the day and wake up at night. Our day time is their bedtime!", {"pre": .3, "post": .2, "kw": [["ff_in", "fun"], ["ff_day", "day"], ["ff_night", "night"]]}),
+ ("say", "g1404", H, "Tell someone at home!", {"pre": .3, "post": .6}),
  *kwrecap(["Rotation", "Cycle", "Repeated pattern"]),
  # ---- 15 · the cliffhanger: do living things have cycles too? (a hen, a chick, a teddy bear slide in; PART 2 slams in)
  ("scene", "cliff"), ("wait", .3),
@@ -385,7 +395,10 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "j1201", H, "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "j1202", H, "Did you spot the ladybird? It was on a leaf of the young tree! Tell someone at home.", {"pre": .5, "post": .5}),
+ # the fun fact (SERIES_FORMAT 4): Pip, step by step, with a labelled picture row (ff_larva, ff_pupa, ff_adult), then Heart's "Tell someone at home!"
+ ("say", "j1202", H, "Did you spot the ladybird? It was on a leaf of the young tree!", {"pre": .5, "post": .2}),
+ ("say", "j1203", P, "Here is a fun fact! A baby ladybird looks nothing like its parent. It hatches as a spiky larva, like a tiny crocodile. Then it becomes a pupa, and then a ladybird!", {"pre": .3, "post": .2, "kw": [["ff_in", "fun"], ["ff_larva", "larva"], ["ff_pupa", "pupa"], ["ff_adult", "ladybird", 1]]}),
+ ("say", "j1204", H, "Tell someone at home!", {"pre": .3, "post": .5}),
  # ---- 13 · the dare for Episode 15 (a mango, one big seed)
  ("scene", "dare"), ("mark", "dareIn"), ("wait", .5),
  ("say", "j1301", H, NEXT_DARE, {"pre": 0}),

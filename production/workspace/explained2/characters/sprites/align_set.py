@@ -21,8 +21,11 @@ H = os.path.dirname(os.path.abspath(__file__)); S = 1024
 sys.path.insert(0, H); from cutout import cutout, on
 QA_BG = (0x8C, 0x2A, 0x3B)
 
-EYES_MOMO_C = {"L": dict(c=(0, 0), r=(1, 1), ang=0), "R": dict(c=(0, 0), r=(1, 1), ang=0)}; NECK_MOMO_C = 420
-LIDS_MOMO_C = {}; DRAWN_MOMO_C = {}
+MOMO_EYES = {"L": dict(c=(578, 296), r=(58, 32), ang=0), "R": dict(c=(746, 274), r=(44, 32), ang=0)}
+MOMO_MOUTH = {"half": dict(centre=(690, 350), inner=[(645, 302), (740, 302), (746, 372), (622, 372), (620, 335)]),
+              "wide": dict(centre=(690, 360), inner=[(645, 302), (740, 302), (746, 416), (622, 416), (620, 335)])}
+MOMO_ALLOW = [(600, 298), (790, 288), (815, 445), (575, 445)]
+MOMO_LIDS = {"L": dict(src=(578, 296), dst=(578, 296), sx=1.0, sy=1.0, rot=0, grow=6), "R": dict(src=(746, 274), dst=(746, 274), sx=1.0, sy=1.0, rot=0, grow=6)}
 CONFIG = {
   "basil_c": dict(
     src={"closed": "poses_inbox/basil_c_sit_closed.jpg", "half": "poses_inbox/basil_c_sit_half.jpg",
@@ -45,19 +48,18 @@ CONFIG = {
     anchors=dict(hips=[628, None], neck=[650, 495], neck_band=[455, 522], head_xmin=[375, 395],
                  tail=dict(root=[450, 790], xband=[450, 340], ymin=[415, 455])),
   ),
-  # Momo in colour (coral): her talking base is the ARMS-CROSSED painting (teacher, 22 Nov). Only closed + blink are painted so far;
-  # half / wide are a SMALL DRAWN MOUTH (drawn_mouth below: an opening under her own "w" smile; the rulebook's one-face fallback,
-  # SERIES_FORMAT 6 "Talking") until the teacher paints them: then add them to `states` / `src` and re-run (the drawn ones are replaced).
+  # Momo in colour (coral): her talking base is the ARMS-CROSSED painting (teacher, 22 Nov): closed (smug smile), half (small "o"),
+  # wide (big "o"), blink (eyes shut, happy). The half / wide paintings are cropped (tail cut at the left, wide's feet on the bottom
+  # edge): harmless here, only their face patches are used; the body is the closed painting's.
   "momo_c": dict(
-    states=("blink",),
-    src={"closed": "poses_inbox/momo_c_talk_closed.jpg", "blink": "poses_inbox/momo_c_talk_blink.jpg"},
-    fallback={},
+    src={"closed": "poses_inbox/momo_c_talk_closed.jpg", "half": "poses_inbox/momo_c_talk_half.jpg",
+         "wide": "poses_inbox/momo_c_talk_wide.jpg", "blink": "poses_inbox/momo_c_talk_blink.jpg"},
+    fallback={}, prefit="head", eye_refine=False,     # her half / wide eyes are painted wide open: fit on SIFT, not on eye templates                        # cropped variants: pre-fit from the top of the ears, not the bbox
     body_h=807, ground_y=851, centre_x=560,          # grey Momo: bbox 236..885 x 44..851 (the same pixel scale and feet line)
-    eyes=EYES_MOMO_C, neck_y=NECK_MOMO_C,
-    mouth={}, allow=[], jaw_band=None, seam_r=0,
-    lids=LIDS_MOMO_C, lid_inset=6,
-    drawn_mouth=DRAWN_MOMO_C,
-    anchors=dict(hips=[None, None], hips_dx=6),       # hips x = body centre + 6 (grey Momo: 650 vs 644.5); talk_render anchors not set
+    eyes=MOMO_EYES, neck_y=430,
+    mouth=MOMO_MOUTH, allow=MOMO_ALLOW, jaw_band=None, seam_r=150,
+    lids=MOMO_LIDS, lid_inset=6,
+    anchors=dict(hips=[None, None], hips_dx=6),       # hips x = body centre + 6 (grey Momo: 650 vs 644.5); talk_render's head/tail anchors not set
   ),
 }
 
@@ -174,29 +176,6 @@ def seam_mask(base, var, inner, forbid, centre, R=330, nth=900):
     path = np.array(path[::-1]); pts = np.stack([cx + np.cos(th) * rr[path], cy + np.sin(th) * rr[path]], 1)
     return poly(pts), pts, float(diff[np.clip(pts[:, 1].round().astype(int), 0, S - 1), np.clip(pts[:, 0].round().astype(int), 0, S - 1)].mean())
 
-def drawn_mouth(B, d):
-    """a small open mouth DRAWN under the painted closed smile (no painted half / wide yet): an opening that hangs from the middle of
-    the smile, outlined in the painting's own line colour, dark inside with a pink tongue. Returns (premultiplied image, (mask, pts)).
-    d: centre (x, y) of the opening's top, half-width w, depth h, line colour (BGR), the line width."""
-    Z = 4; cx, cy = d["c"]; w, h = d["w"], d["h"]; big = np.zeros((S * 0 + 1, 1), np.uint8)
-    x0, y0 = int(cx - w - 12), int(cy - 12); x1, y1 = int(cx + w + 12), int(cy + h + 12); W, Hh = (x1 - x0) * Z, (y1 - y0) * Z
-    t = np.linspace(0, np.pi, 60); top = [(cx + w * np.cos(a), cy + .18 * h * np.sin(a) * 0) for a in np.linspace(0, np.pi, 2)]
-    # the opening: a flat top along the smile, a rounded bottom (half an ellipse)
-    pts = [(cx + w * np.cos(a), cy + h * np.sin(a)) for a in np.linspace(0, np.pi, 60)] + [(cx - w, cy - 1), (cx + w, cy - 1)]
-    P = np.int32([((x - x0) * Z, (y - y0) * Z) for x, y in pts])
-    fill = np.zeros((Hh, W), np.uint8); cv2.fillPoly(fill, [P], 255, cv2.LINE_AA)
-    tong = np.zeros((Hh, W), np.uint8); cv2.ellipse(tong, (int((cx - x0) * Z), int((cy + h * .95 - y0) * Z)), (int(w * .62 * Z), int(h * .55 * Z)), 0, 0, 360, 255, -1, cv2.LINE_AA)
-    tong = cv2.bitwise_and(tong, fill)
-    line = np.zeros((Hh, W), np.uint8); cv2.polylines(line, [P], True, 255, int(d["lw"] * Z), cv2.LINE_AA)
-    def down(m): return cv2.resize(m, (x1 - x0, y1 - y0), interpolation=cv2.INTER_AREA).astype(np.float32) / 255
-    f, tg, ln = down(fill), down(tong), down(line)
-    out = B.copy(); reg = out[y0:y1, x0:x1]
-    def lay(reg, a, bgr):
-        c = np.float32(bgr)[::-1][::-1] / 255; a = a[..., None]; reg[..., :3] = reg[..., :3] * (1 - a) + c * a * reg[..., 3:]; return reg
-    reg = lay(reg, f, d["inside"]); reg = lay(reg, tg, d["tongue"]); reg = lay(reg, ln, d["line"]); out[y0:y1, x0:x1] = reg
-    m = np.zeros((S, S), bool); m[y0:y1, x0:x1] = (np.maximum(f, ln) > 0)
-    return out, (m, np.float32(pts))
-
 # ---------------------------------------------------------------------------------------------------------------- sources
 def read_src(cfg, s):
     """the painting for state s (BGR, its own size) and the factor it was enlarged by (1 unless it came from a small fallback)"""
@@ -215,6 +194,19 @@ def prefit(alpha_src, Bbox):
     """scale + shift that puts this painting's bbox (height, feet line, centre) on the base's"""
     x0, y0, x1, y1 = bbox(alpha_src); bx0, by0, bx1, by1 = Bbox; s = (by1 - by0) / (y1 - y0)
     return np.float32([[s, 0, (bx0 + bx1) / 2 - s * (x0 + x1) / 2], [0, s, by1 - s * y1]])
+
+def prefit_head(alpha_src, alpha_base, neck_y):
+    """for a cropped painting: scale from the head's height (top of the ears to the base's neck line, measured as the same fraction of
+    the height) and the head's x centre; good enough for SIFT to finish the fit"""
+    def head(a, y1=None):
+        ys, xs = np.where(a > 128); y0 = ys.min(); return y0
+    yb0 = head(alpha_base); ys0 = head(alpha_src)
+    xb = np.where(alpha_base[yb0:neck_y] > 128)[1]; hb = neck_y - yb0
+    ybot = np.where(alpha_src > 128)[0].max(); xs_ = np.where(alpha_src > 128)
+    # source body height ~ its lowest pixel (feet may touch the edge): use the ears-to-feet span, the same pose as the base
+    s = (np.where(alpha_base > 128)[0].max() - yb0) / (ybot - ys0)
+    ny = ys0 + hb / s; xh = np.where(alpha_src[ys0:int(ny)] > 128)[1]
+    return np.float32([[s, 0, (xb.min() + xb.max()) / 2 - s * (xh.min() + xh.max()) / 2], [0, s, yb0 - s * ys0]])
 
 # ---------------------------------------------------------------------------------------------------------------- build
 def grid(im8, step=20, box=None, z=2):
@@ -239,7 +231,8 @@ def build(name, grid_only=False):
     V = {}; Mpre = {}; src = {}; STATES = cfg.get("states", ("half", "wide", "blink"))
     for st in STATES:
         im, up = read_src(cfg, st); c = cutout(im); src[st] = pm(c)
-        Mpre[st] = prefit(c[..., 3], bbox(B8[..., 3])); V[st] = unpm(warp(src[st], Mpre[st]))
+        Mpre[st] = prefit(c[..., 3], bbox(B8[..., 3])) if cfg.get("prefit") != "head" else prefit_head(c[..., 3], B8[..., 3], NECK_Y)
+        V[st] = unpm(warp(src[st], Mpre[st]))
         cv2.imwrite(f"{H}/work/{name}/{st}_prefit.png", V[st])
     if grid_only:
         hb = (300, 0, 1000, 560)
@@ -255,7 +248,7 @@ def build(name, grid_only=False):
         Mh, hi_, hg = sift_sim(V8, B8, 0, NECK_Y); sch, roth = sim_info(Mh); print(f"    head fit (SIFT) scale {sch:.3f} rot {roth:+.2f} deg, {hi_}/{hg} matches")
         meta["fit"][st] = dict(body_scale=round(float(sc * Mpre[st][0, 0]), 4), body_rot=round(float(rot), 2), body_inliers=ni, head_rot_vs_body=round(float(roth - rot), 2))
         if st != "blink":
-            Me = eye_fit(V8, B8, Mh, EYES); sce, rote = sim_info(Me); print(f"    head fit (eyes)  scale {sce:.3f} rot {rote:+.2f} deg")
+            Me = eye_fit(V8, B8, Mh, EYES) if cfg.get("eye_refine", True) else Mh; sce, rote = sim_info(Me); print(f"    head fit (eyes)  scale {sce:.3f} rot {rote:+.2f} deg")
             W = warp(src[st], compose(Me, Mpre[st])); cv2.imwrite(f"{H}/work/{name}/{st}_headfit.png", unpm(W)); z = cfg["mouth"][st]
             inner = poly(z["inner"]); allow = poly(cfg["allow"])
             ab, av = B[..., 3] > .5, W[..., 3] > .5
@@ -279,8 +272,6 @@ def build(name, grid_only=False):
                 res = membrane(cur, Wl, m, iters=2500); f = feather(m, 1.5)[..., None]; cur = np.clip(cur * (1 - f) + res * f, 0, 1); lidm |= m
             out["blink"] = cur; masks["blink"] = lidm
     lid = masks["blink"]; fl = feather(lid, 1.5)[..., None]
-    if cfg.get("drawn_mouth"):
-        for st in ("half", "wide"): out[st], masks[st] = drawn_mouth(B, cfg["drawn_mouth"][st]); meta["source"][st] = "drawn mouth (code), stand-in"
     for st in ("half", "wide"):
         out[st + "_blink"] = np.clip(out[st] * (1 - fl) + out["blink"] * fl, 0, 1)
         ov = (masks[st][0] & cv2.dilate(lid.astype(np.uint8), np.ones((5, 5), np.uint8)) > 0).sum(); print(f"{st}: mouth patch and lids overlap {ov} px")

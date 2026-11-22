@@ -125,3 +125,14 @@ Each one is a full body, sitting, with the same size of head and body as the sit
 All Basil paintings are in. A helper was building Basil's coloured talking set (align_set.py, qa_set.py, basil_c_sit_*.png,
 basil_c_sit.json, qa/basil_c_*.png) and was stopped part-way: check its QA images before using them. Momo still needs her small "o"
 and big "o" (arms-crossed talking set) and pointing.
+
+## Status, 22 Nov, Stage 1 colour pass (EP14)
+- **Built:** Basil's talking set `basil_c_sit_*` (closed / half / wide / blink + half_blink / wide_blink; only the face changes; QA
+  `sprites/qa/basil_c_{states,cycle,edges,seams,poseswap,headturn}.png`) and Momo's ARMS-CROSSED talking set `momo_c_sit_*` from the four
+  paintings `momo_c_talk_{closed,half,wide,blink}.jpg` (QA `sprites/qa/momo_c_{states,cycle,edges,seams,poseswap}.png`). poses.py puts
+  every coloured pose on its own coloured sitting set (same size, same feet line). EP14's sprite set uses only these for Momo and Basil.
+- **Momo pointing** (`momo_c_pointing.jpg`) is cut out (`poses/momo_c_pointing.png`) but the painting is cropped: the tail ends in a
+  straight cut at the left. EP14 uses waving in its place (or the cropped one where the tail side is hidden). **Please re-send it
+  uncropped** (the whole tail and both feet inside the picture, a white margin all round).
+- **Still missing for EP14:** Basil **arms crossed** in colour (EP14 uses thinking, and cheer for his "handsome" line); a full-size
+  Basil **cheer** would be sharper than the one cut from the 2x2 sheet (optional).
