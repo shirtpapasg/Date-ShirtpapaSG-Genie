@@ -298,6 +298,9 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
 - **Talking:**
   - lip-sync on the talking sprites;
   - a small drawn mouth plus a syllable bounce on one-face poses.
+- **Human hands have four fingers and a thumb (teacher, 2026-11-22, on EP13's drawing look-closer: "this is good. But please, human
+  has 4 fingers and a thumb").** Every human hand (drawing hand, adult hands, gloved hands, the YOU hands) is drawn with four fingers
+  and a thumb in natural proportions. `reference/lookcloser_good_ep13_drawing_but_3fingers.webp` (good scene, wrong hand).
 - **Objects never float or fly.**
   - Things travel low along the ground in small hops with dust puffs, or are carried or slid by the buddies.
   - Nothing hangs above the buddies' heads.
