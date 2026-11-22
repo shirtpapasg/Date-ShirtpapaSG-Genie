@@ -311,6 +311,13 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     scale and foot line as the sitting sprite (poses.json), so a swap never changes size. A back view never speaks; turn to a
     front pose before the buddy's line.
 
+- **Talking means a moving mouth, and reactions must mean something (teacher, 22 Nov, EP14 P1 3:30–3:37: "both pip and basil mouth
+  not moving"; "the pet buddies movement are really random in some scene").** Pose paintings have no moving mouth, so a buddy who is
+  speaking is always shown in its talking sprite (lip-sync and blinks), popping back to its pose after the line. Listeners do not swap to
+  random poses on every sentence: only ONE listener answers a line with a pose, and only when the line gives a reason (a question:
+  thinking; a problem: oops/surprised; a celebration: cheer); otherwise a small nod. No buddy swaps pose more than once in 6 s unless the
+  staging asks for it. Never "pointing" at nothing. (Code: ep14/lib.js buddy() and reactPose/reactPoseAt.)
+
 ## 6. Motion (reference: `characters/sprites/pose_test_robot_round.mp4`, approved "exactly what I want")
 
 - **Pose swaps:**

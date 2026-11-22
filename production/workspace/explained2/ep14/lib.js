@@ -72,19 +72,22 @@ function reactTriggers() { if (_trig) return _trig; const out = [];
   out.sort((a, b) => a.t - b.t); out.forEach((o, i) => { o.k = i; }); return (_trig = out); }
 let _own = {};
 function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id) => TL.lines[id]).filter((L) => L && (L.who === who || (L.who === "chant"))).map((L) => L.t).sort((x, y) => x - y)); for (const x of a) if (x > t) return x; return 1e9; }
-function reactPose(who, txt, k) { const r = hash(k, who.length + 3), q = /\?$/.test(txt), neg = /\b(not|no|never|break|breaks|broke|bad|cannot|can't|fragile|crack|oh no|oops|knock|clang)\b/i.test(txt), ex = /!$/.test(txt);
-  if (who === "basil") return q ? (r < .5 ? "arms_crossed" : "surprised") : neg ? (r < .5 ? "oops" : "surprised") : ex ? (r < .55 ? "cheer" : "surprised") : (r < .45 ? "arms_crossed" : r < .6 ? "surprised" : null);
-  if (q) return r < .65 ? "thinking" : "pointing";
-  if (neg) return r < .5 ? "oops" : "surprised";
-  if (ex) return r < .5 ? "cheer" : "surprised";
-  return r < .4 ? "pointing" : r < .6 ? (who === "pip" ? "thinking" : "thinking") : r < .75 ? "surprised" : null; }
+function reactPose(who, txt, k) {   // teacher, 22 Nov: "the pet buddies movement are really random in some scene". A pose swap now only
+  // answers something in the line: a question -> thinking; a problem word -> oops/surprised; a celebration -> cheer. Anything else: a nod.
+  const q = /\?$/.test(txt), neg = /\b(not|no|never|break|breaks|broke|bad|cannot|can't|fragile|crack|oh no|oops|knock|clang)\b/i.test(txt),
+    yay = /!$/.test(txt) && /\b(yes|right|correct|well done|great|amazing|you got it|we did it|hooray|now you know)\b/i.test(txt);
+  if (q) return "thinking"; if (neg) return who === "basil" ? "oops" : "surprised"; if (yay) return "cheer"; return null; }
+// only ONE listener answers a line with a pose (they take turns); the other nods; and no buddy swaps pose more than once in 6 s
+function reactChosen(g) { const L = ["pip", "basil", "momo"].filter((w) => w !== g.who); return L[g.k % L.length]; }
+function reactPoseAt(tr, i, who) { const g = tr[i]; if (g.who === who || reactChosen(g) !== who) return null; const ps = reactPose(who, g.txt, g.k); if (!ps) return null;
+  for (let j = i - 1; j >= 0 && g.t - tr[j].t < 6; j--) { const h = tr[j]; if (h.who !== who && reactChosen(h) === who && reactPose(who, h.txt, h.k)) return null; } return ps; }
 // -> { t0, t1, pose (null = a nod-hop) } of the reaction running at t, or null
 function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact || o.still) return null; const T0 = Math.max(S.t0 - .05, o.in !== undefined ? o.in + .6 : -9), d = REACT_DLY[who] || .2;
   const tr = reactTriggers(); let i = -1; for (let j = tr.length - 1; j >= 0; j--) { if (tr[j].t + d <= t) { i = j; break; } } if (i < 0) return null;
   for (; i >= 0; i--) { const g = tr[i]; if (g.t < T0) return null; if (g.who === who) continue; const t0 = g.t + d; if (t0 < tsw + .7) return null;
     let nt = 1e9; for (let j = i + 1; j < tr.length; j++) if (tr[j].who !== who) { nt = tr[j].t + d; break; }
     const t1 = Math.min(t0 + 1.45, nt - .08, nextOwn(who, g.t) - .3, nxt - .2); if (t1 - t0 < .55) { if (t < t0 + .4) return { t0, t1: t0 + .4, pose: null }; continue; }
-    const pose = reactPose(who, g.txt, g.k * 3 + who.length); return { t0, t1, pose: pose && SPR[`${who}_${pose}`] ? pose : null }; }
+    const pose = reactPoseAt(tr, i, who); return { t0, t1, pose: pose && SPR[`${who}_${pose}`] ? pose : null }; }
   return null; }
 function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.0 }[who]; const k = Math.floor((t + ph) / per), tb = k * per - ph + hash(k, who.length) * 1.4; return t >= tb && t < tb + .1; }
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
@@ -96,6 +99,12 @@ function buddy(who, x, y, h, t, o = {}) {
   let pose = o.pose || "sit", tsw = -99;
   for (const [tp, p] of o.poses || []) if (t >= tp) { pose = p; tsw = tp; }
   let nxt = 1e9; for (const [tp] of o.poses || []) if (tp > t) { nxt = tp; break; }
+  // teacher, 22 Nov (EP14 P1 3:30): "both pip and basil mouth not moving". Pose paintings have no mouths, so a buddy SPEAKING always
+  // shows its talking sprite (lip-sync + blinks), with the usual pose-swap pop at the start of the line; the pose returns after the line.
+  { const spk = o.keepPose ? null : speaking(who, t);
+    if (spk && pose !== "sit" && pose !== "back") { if (spk.t > tsw) tsw = spk.t; pose = "sit"; nxt = Math.min(nxt, spk.end + .05); }
+    else if (!spk && pose !== "sit" && pose !== "back" && !o.keepPose) { for (const id of TL.order) { const L = TL.lines[id];   // back to the pose: pop again
+      if (L.who === who && L.end + .05 > tsw && L.end + .05 <= t && t - L.end < 1.5) tsw = L.end + .05; } } }
   let nodH = 0;
   if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);   // v3: never frozen
     if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
