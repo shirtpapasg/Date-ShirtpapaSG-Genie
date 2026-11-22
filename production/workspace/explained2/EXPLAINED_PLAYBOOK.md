@@ -141,7 +141,8 @@ of water…"); a real path through the science with a short card at each stop; c
 book's words name what the child just lived. True at P3 level.
 
 ### 3.4 The game (the child plays)
-- Lock-ins: a closed question with 2–3 choices, answered with the body (point, fingers 1/2/3); a 5–6 s ring timer that speeds up,
+- Lock-ins: ONE set of choice cards — each a big picture card with its number badge beside it, the difference between the
+  choices drawn big and obvious; never a picture card plus a separate number card (teacher, 22 Nov). A closed question with 2–3 choices, answered with the body (point, fingers 1/2/3); a 5–6 s ring timer that speeds up,
   a bell, "LOCKED IN!"; options, ring picture and clue labels stay on screen throughout; the buddies reveal after the viewer, each
   with a one-line reason; the wrong idea rotates; a buddy can be right for the wrong reason (no point).
 - "HOLD ON!": a buddy uses a bad rule or an unfair test; the viewer crosses their arms.

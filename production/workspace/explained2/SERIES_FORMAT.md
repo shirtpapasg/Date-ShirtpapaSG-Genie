@@ -164,6 +164,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - **Clue labels sit ON TOP of the ring's picture frame**, fully visible and readable, never tucked behind or clipped by the
     yellow ring (draw them above the frame).
   - A closed question with 2 or 3 choices.
+  - **One set of choice cards, big and numbered (teacher, 2026-11-22, on EP13's dare round: "the option 1 2 and 3 is a waste of
+    space, repeating the textbox above… Put the number 1, 2 and 3 right beside the options above, make the textbox bigger showing a
+    noticeable difference among the 3 options").** Never show a picture card AND a separate number card for the same choice. Each
+    choice is ONE large picture card with its number badge (1, 2, 3) right beside or on it; the picture makes the difference between
+    the choices obvious at a glance (draw the thing that differs big: the fabric strap, the metal bar, the wooden stick), with a short
+    label. Verdict tags (SUITABLE / NOT FOR THIS JOB) sit on those same cards. Bad example: `reference/lockin_cards_duplicated_ep13_BAD.webp`.
   - Answered with the body: point left or right, or fingers 1, 2, 3.
   - A ring timer of 5 to 6 s, ticking that speeds up, a bell, then "LOCKED IN!".
   - The buddies reveal AFTER the viewer, each with a one-line reason.
