@@ -94,7 +94,8 @@ look), `MOTION_GUIDE.md`, `pilot_p3_ep01_script.md` (the reference script), `ep0
 - No orphan labels (a stray "YOU" tag). Props never hide behind buddy discs.
 - **LOOK-CLOSER** (21 Nov): every key idea gets EP1's zoom-in-and-describe treatment (section 3.2).
 - Say names right (section 7). Never delete old videos (section 6).
-- The pipeline runs ahead: when episode N is live, build N+1 and write the script for N+2.
+- (Paused 22 Nov) The pipeline ran ahead: when episode N is live, build N+1 and write the script for N+2. Now: quality before
+  speed, one episode at a time, key stills to the teacher before render.
 
 ### 22 Nov: the quality problem (the most recent and most important)
 - Recent episodes: less cute buddies, less in-depth explanations, less engaging visuals; EP11 pushed facts again instead of the
@@ -202,7 +203,7 @@ key light, nothing touching the frame edge by accident, no text over a face or p
 | Script | **Opus** (teacher, 22 Nov: Opus wrote EP1–EP3, the scripts the teacher is happiest with; Opus writes every script from EP14 on) | `p3_epNN_script.md`: segment tables (time, on screen, exact words, sound, why), the chain, [LOOK CLOSER] rows, Shorts, teacher sheet, non-textbook list, questions for the teacher with recommendations |
 | Stage 1 setup | Opus | `epNN/`: engine copied from the newest episode, `script.py`, voices (`make_voice.py`), timelines (`build_tl.py`), sound cues, placeholder scenes, `SCENES_TODO.md`, `STATE.md`, `upload.json` |
 | Stage 2 drawing | Fable | every scene drawn, look-closers, journeys, animals, new-style thumbnails, stills + contact sheets |
-| **Teacher preview (proposed 22 Nov)** | — | 6–8 key stills or a 60 s preview per part; the teacher's notes fixed before render |
+| **Teacher preview (22 Nov, quality first)** | — | 6–8 key stills per part to the teacher; the teacher's notes fixed before render |
 | Stage 3 render, checks, upload | Opus | `./build_part.sh 1|2` (timeline, cues, song, `render.js` in 10 s chunks under `/tmp/explained_render.lock`, `finish.sh`), -16 LUFS, `.srt`, frame-strip checks, upload |
 - One agent per job; never two renders at once. Usage limits reset every 5 hours: resume the same agent after a reset.
 - Each episode folder's `STATE.md` is the source of truth for where it stands; `progress/epNN.json` feeds the progress bars.

@@ -313,7 +313,12 @@ order). Send the teacher the finished parts and the list of things to check; the
    towards monetising it. Keep the old one up, take it out of the main level playlist, and point it to the new episode
    (a card, the end screen or a line in the description). Ask the teacher before making it unlisted or private:
    watch time on unlisted or private videos does not count towards YouTube's public watch hours.
-6. **The pipeline runs ahead on its own (teacher, 2026-11-21: "always write script automatically once 2 episode before is live,
+6. **Quality before speed (teacher, 2026-11-22: "focus on improving the quality so audience can notice the differences rather than
+   having us waste token and resources").** This replaces the run-ahead rule below until the teacher says otherwise: ONE episode at
+   a time, no scripts written ahead, no extras. Each episode: Opus script → Fable drawing → **6–8 key stills to the teacher** →
+   fixes → Opus render, checks, upload. Spend the effort on what viewers see: cute, reacting buddies; smooth camera with no needless
+   cuts; real places with life; deep, visual explanations; full human sentences.
+7. *(Paused 22 Nov)* **The pipeline runs ahead on its own (teacher, 2026-11-21: "always write script automatically once 2 episode before is live,
    one episode before start rendering").** When episode N goes live, without waiting to be asked:
    - start building episode N+1 (setup, drawing, render, checks, upload), and
    - start writing the script for episode N+2.
