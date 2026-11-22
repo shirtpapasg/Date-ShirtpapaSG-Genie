@@ -116,7 +116,7 @@ for title,steps in STEPS:
             o.append(f'<div class="{cls}">'+''.join(f'<img src="{img(n)}" alt="screenshot I sent">' for n in imgs)+'</div>')
         if res: o.append(f'<div class="res"><b>What changed:</b> {html.escape(res)}</div>')
         o.append('</div>')
-o.append('<h2>The result: Episode 12, before and after</h2><p>OLD = the version that was live; NEW = the redo, now on YouTube (Part 1: youtube.com/watch?v=3gryN39MnNY · Part 2: youtube.com/watch?v=sAaYWPH8L90).</p>')
+o.append('<h2>The result: Episode 12, before and after</h2><p>OLD = the version that was live; NEW = the redo, now on YouTube (Part 1: youtube.com/watch?v=zCCVRRtDffc · Part 2: youtube.com/watch?v=Mb9XNdpTSrk).</p>')
 for f in ['preview_p1_before_after.jpg','preview_p2_before_after.jpg']:
     o.append(f'<div class="full"><img src="{b64(QA+f,1600,80)}" alt="EP12 before and after"></div>')
 o.append('<p class="sub">Episode 13\'s redo follows the same notes; its before/after sheet is added when it is finished.</p></body></html>')

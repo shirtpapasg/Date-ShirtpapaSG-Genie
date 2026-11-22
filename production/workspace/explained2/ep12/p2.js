@@ -154,5 +154,5 @@ SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "which") - .15, tc = [W(a, "o
     + buddy("basil", 215, 1066, 340, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [LT("j1302") - .12, "sit"], [LE("j1302") + .1, "cheer"]] : [[s.t0, "sit"], [tL, "cheer"]], nohop: true }) + (hb ? say("j1302", 560, 900, t, { size: 40, tail: -200, maxW: 520 }) : "") + carRules(t) + HUD(t); };
 
 /* 15 · "Now you know!": the board MATCH THE JOB, complete and ticked, centred in the free space between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(900, 1040, .78, matchBoard(t)), { bx: [165, 1800, 1590], bh: 280, hx: 165, sayY: 330 });
+SC.nyk = (t, s) => nykScene(t, s, TF(900, 1040, .78, matchBoard(t)), { bx: [165, 1750, 1405], bh: 280, hx: 165, sayY: 330 });
 })(); }

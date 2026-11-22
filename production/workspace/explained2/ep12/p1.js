@@ -187,5 +187,5 @@ SC.cliff = (t, s) => { const a = "g1401", c = "g1403", TX = 900, TY = 580, S = 1
     + (t >= tP ? TF(880, 905, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + trolleyRule(t) + HUD(t); }; /* Stage 3: PART 2 slams in below the trolley (it covered the glass / metal tags) */
 
 /* 15 · "Now you know!": the board MATCH THE JOB (two full rows) centred in the free space between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(900, 1040, .74, matchBoard(t)), { bx: [175, 1790, 1580], bh: 290, hx: 175, sayY: 400 });   // teacher, 22 Nov: the trolley board, big; the discs smaller and at the sides, YOU above Pip
+SC.nyk = (t, s) => nykScene(t, s, TF(900, 1040, .74, matchBoard(t)), { bx: [175, 1745, 1395], bh: 290, hx: 175, sayY: 400 });   // teacher, 22 Nov: the trolley board, big; the discs smaller and at the sides, YOU above Pip
 })(); }
