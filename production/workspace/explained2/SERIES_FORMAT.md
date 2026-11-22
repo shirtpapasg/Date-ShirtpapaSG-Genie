@@ -183,6 +183,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     it one after another (the name badge by the real animal, the YOU hand and ring, "You lock in first", the score pill, the buddy
     discs). The reveal at the end works the same way: back in (or smoothly into) the real place, push in on the animal, ring it.
     In general, avoid unnecessary cuts: when the next beat is in the same place, move the camera instead of cutting.
+    **Update (teacher, 2026-11-22, on EP12 v2):** after the smooth push-in lands, the animal sits in a CIRCLE with a thick BLACK
+    RING, and everything outside the circle turns into the blue-violet game layout (the starry stage with the soft spotlight beam)
+    instead of a dimmed grey scene; then the game objects pop over it. The reveal uses the same circle and ring.
+  - **The hidden animal moves (teacher, 2026-11-22: in EP12 and EP13 it "stays at the same spot… makes things easy to guess and
+    lost the fun, giving a sloppy vibe").** It hides in a different, fair place in each scene where it could really be (another
+    branch, a ledge, a leaf, half behind a curtain), small but findable; scripts and SCENES_TODO list its spot per scene.
 - **Key-word read-along before the end of every part:**
   1. The shelf moves to the centre and grows.
   2. Heart: "Let's read today's key words together! Ready?"
