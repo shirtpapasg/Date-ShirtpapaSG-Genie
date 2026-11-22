@@ -57,7 +57,7 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lc
 
 /* 3 · the game, and the hidden mynah; 4 · goals (Momo reads) and the countdown (count is in common.js) */
 // teacher, 22 Nov: no cut to the purple stage: the dimmed walkway of the title stays, the camera pushes straight in on the mynah on its sign
-SC.game = (t, s) => gameScene(t, s, "g301", true, { world: (tt) => V(tt, { board: {} }), A: [MYNAH[0] + 4, MYNAH[1] - 28], T: [1330, 470], Z: 3, dim0: .78, ly: -150, qx: 1655, qy: 400,
+SC.game = (t, s) => gameScene(t, s, "g301", true, { world: (tt) => V(tt, { board: {} }), A: [MYNAH[0] + 4, MYNAH[1] - 28], T: [1400, 470], Z: 3, dim0: .78, ly: -150, qx: 1730, qy: 430,
   pre: (tt) => OP(.5, buds(tt) + trolleyRule(tt)) + slamFit(400, "A TROLLEY", "#fff", 1) + slamFit(610, "MADE OF GLASS?!", P.sun, 1) });
 SC.goals = (t, s) => goals3(t, s, [["Objects have purposes", ""], ["Properties decide uses", ""], ["Why a trolley is metal", ""]], ["g401", "g402", "g403", "g404"], "momo");
 

@@ -110,7 +110,7 @@ function chantScene(t, s, id, o = {}) { const L = TL.lines[id], beats = chantBea
     fx += OP(clap, `<g stroke="${P.sun}" stroke-width="7" stroke-linecap="round"><path d="M${xs[i] - bh * .5} ${by - bh * .8} l-26 -22 M${xs[i] + bh * .5} ${by - bh * .8} l26 -22 M${xs[i]} ${by - bh * 1.08} v-30"/></g>`) + OP(stomp, `<ellipse cx="${xs[i]}" cy="${by}" rx="${n2(bh * (.5 + .4 * (1 - stomp)))}" ry="${n2(22 + 16 * (1 - stomp))}" fill="none" stroke="#fff" stroke-width="6"/>`); });
   // EP12: the board MATCH THE JOB stands behind them, centred and big enough to read; each line's column flashes on its call. Stage 2 passes o.board(t, flash) -> svg
   const board = o.board ? o.board(t, chantFlash(t, L)) : "";
-  return bg("stage2") + board + chantLines(t, L, { x: o.x || 900, y0: o.y0 || 330, dy: o.dy || 150, size: o.size || 58 }) + (o.head || "") + buds + fx + yourTurn(t, L, o.tx || 1730, o.ty || 700, .95) + say(o.sayId || "u1002", o.sayX || 960, o.sayY || 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
+  return bg("stage2") + board + chantLines(t, L, { x: o.x || 900, y0: o.y0 || 330, dy: o.dy || 150, size: o.size || 58 }) + (o.head || "") + buds + fx + yourTurn(t, L, o.tx || 1730, o.ty || 700, o.ts || .95) + say(o.sayId || "u1002", o.sayX || 960, o.sayY || 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
 
 /* ============ the score hand ============ */
 function finalScene(t, s, L, bud, tips, extra = "") { // tips: [[time, text, big]]; the last one is HIGH FIVE
@@ -188,8 +188,8 @@ function gameScene(t, s, L, full, R) { const tLock = W(L, "lock"), tC = W(L, HID
       out += TF(px, lerp(640, 600, ph2), youIn * lerp(1.2, .9, ph2), `<g filter="url(#dropS)">${countHand(t >= tLock ? 2 : 0)}</g>`) + OP(1 - ph2, tpill(400, 880, "answer hand", 30, "#fff", P.ink));
       out += TF(cx, cy, youIn * cs * (1 + .06 * pulse(t, tOne, .02, .2)), `<g filter="url(#dropS)">${countHand(ph2 > .5 ? nf : 0)}</g>`) + OP(1 - ph2, tpill(880, 990, "score hand", 30, "#fff", P.ink));
       out += youPill(lerp(640, 330, ph2), lerp(470, 400, ph2), 1.3 * youIn) + popSpark(t, tH, 640, 640, 260);
-      if (nf && ph2 > .5) out += TF(1010, 560, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
-    out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(1010 620) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
+      if (nf && ph2 > .5) out += TF(880, 470, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
+    out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(200 470) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
     [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = Math.max(tBud, tP + .1) + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
     out += lab + (t >= tFind - .1 ? TF(R.qx || 1440, R.qy || 640, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 })) : "");
     return out + logo(t); }
