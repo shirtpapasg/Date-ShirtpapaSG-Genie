@@ -494,3 +494,14 @@ The title lines; the goal chips; the location pills (An HDB flat, Singapore · e
 
 ## 12. Teacher's go-ahead
 Not given yet (22 Nov 2026). Until the teacher answers, the builder uses the recommended answer to each question in section 11, item 21, as with EP13 ("use your recommendation").
+
+## 12. Teacher's go-ahead (2026-11-22)
+The teacher: "continue with episode 14 scripts. no changes to be made for now". So this script is built as written (no rewrite to the
+22 Nov "learner's seat" standard yet), with the recommended answers: (a) the day-and-night card uses "The repeated change between day
+and night is caused by the rotation of the Earth. This rotation takes 24 hours." unless the printed p. 73 differs; (b) globe and torch
+as the model, the Sun only as a drawing, safety lines on screen; (c) "Be the little red dot"; (d) pencil (not a cycle) and traffic
+light (a cycle); (e) the two "side facing the Sun" sentences as tags and on the teacher sheet; (f) the chicken as "egg, chick, adult
+chicken" without "stage"; (g) the predicting theme question on the teacher sheet only; (h) boy, tree and teddy bear, tree unnamed;
+(i) owl and ladybird; (j) EP15 dare: mango, flower, young plant; (k) the classic RVRoaWWKjEM (pp. 73–79) stays in the playlists
+until EP15 is live; (l) School Lab 4.1 line stays out until signed off; (m) "live" = "leev" via sg_pron, clip only if the builder
+hears a problem. Build starts when EP13 is live (Stage 1 Opus, Stage 2 Fable drawing, Stage 3 Opus).
