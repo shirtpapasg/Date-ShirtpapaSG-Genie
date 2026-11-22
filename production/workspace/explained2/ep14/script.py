@@ -57,6 +57,12 @@ Marks the picture and the sound use (EP10 Stage 3's lesson: every sound lands on
   row into a ring), coin2; lchens: h_gm / h_m / h_c (a label line to each as Heart names it), heads (all three lift their heads together);
   dareIn (the three mango boards slide in).
 
+TRIAL (teacher, 22 Nov; script section 12.2, SERIES_FORMAT 1d): the buddies teach. Every term is explained by a buddy in their own words
+  (Pip step by step, Basil with funny comparisons, Momo asking the "but why?"); Heart sets up, names the book's term on its slow line and
+  confirms. The game segment finds the hidden animal first (g301a / g301m / g301b; j201a / j201b / j201c), then the rules. New line ids
+  carry the speaker's letter (g602p Pip, g603b Basil, g701m Momo...). New cut tags: mrt (g803b Basil's MRT comparison), kitten (j804m Momo
+  + j804 Heart). Lengths with the cuts below: Part 1 5:17.1, Part 2 5:16.8.
+
 CUTS: script section 6 (non-teaching, in its order). Put a tag in CUTS to drop that beat (then rebuild the timeline; make_voice for the
   re-recorded short lines).
   Part 1: title2 (the title's second slam: a picture beat only), napback (g709 Basil {NAP_BACK}: the cheer pose in silence), noclouds
@@ -74,7 +80,7 @@ CUTS: script section 6 (non-teaching, in its order). Put a tag in CUTS to drop t
 """
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
-CUTS = {"forgotegg", "notes13", "napback"}   # trial (22 Nov): Part 2 keeps Stage 1's two cuts; Part 1 drops {NAP_BACK} (Basil's rotation line takes its place)
+CUTS = {"forgotegg", "notes13", "napback", "title2", "pencilback", "mrt", "yesmomo", "kitten", "darkwarm", "c02silent", "nextjoke"}   # trial (22 Nov): Part 2 keeps Stage 1's two cuts; Part 1 drops {NAP_BACK} (Basil's rotation line takes its place)
 cut = lambda tag, items: [] if tag in CUTS else items
 
 # ---- the dare blocks (script section 3) ----
@@ -137,15 +143,15 @@ SEQ1 = [
  ("scene", "lasttime"),
  ("say", "g201", H, "Last time, we asked:", {"pre": .4}),
  ("say", "g202", H, DARE_Q1, {"pre": .3}),
- ("say", "g203", H, DARE_Q2, {"pre": .4, "gap": 1.8, "post": 2.4}),
+ ("say", "g203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "g204", H, "Hold on to your answer!", {"pre": .4, "post": .3}),
- ("scene", "title"), ("mark", "title"), ("wait", 2.2),
+ ("scene", "title"), ("mark", "title"), ("wait", 1.6 if "title2" in CUTS else 2.2),   # title2 cut: both slams land by .55 s; a shorter hold
  # ---- 3 · the game, and the hidden owl (Heart names it; ONE smooth push-in from the living room onto the owl on its branch)
  ("scene", "game"),
  ("say", "g301a", H, "A little owl is hiding in this video. Can you spot it?", {"pre": .4, "post": .2}),
- ("say", "g301m", M, "Where could it be? It might hide somewhere new each time, so keep your eyes open the whole time!", {"pre": .3, "post": .2}),
- ("say", "g301b", H, "You against the Buddies! Show one, two or three fingers to answer. You lock in first. One finger for every point.", {"pre": .3, "post": .4}),
+ ("say", "g301m", M, "It hides somewhere new each time, so keep your eyes open!", {"pre": .3, "post": .1}),
+ ("say", "g301b", H, "You against the Buddies! Lock in first with your fingers. One finger for every point.", {"pre": .3, "post": .4}),
  # ---- 4 · today's goals (Pip reads the three cards, word for word) and the countdown
  ("scene", "goals"), ("say", "g401", P, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "g402", P, "Day and night.", {"pre": .3, "post": .3}),
  ("say", "g403", P, "What a cycle is.", {"pre": .3, "post": .3}), ("say", "g404", P, "Cycle or not?", {"pre": .3, "post": .7}),
@@ -153,49 +159,45 @@ SEQ1 = [
  # ---- 5 · Round 1: the dare from EP13 (a short 3 s ring: the answer was locked in at the end of EP13)
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
- ("say", "g501", H, "Round one: the question from last time! " + DARE_SHORT + " Show me your fingers!", {"pre": .1}),
+ ("say", "g501", H, "Round one! " + DARE_SHORT + " Show me your fingers!", {"pre": .1}),
  *LOCK("r1", 3.0),
  ("say", "g502", H, "Locked in!", {"pre": 0}),
  ("say", "g503", M, CARD1_PICK, {"pre": .5}),
  ("say", "g504", P, CARD3_PICK, {"pre": .4}),
  ("say", "g505", B, "Two! The Earth turns, just like my spinning globe!", {"pre": .4}),
- ("wait", .3),
+ ("wait", .15),
  # ---- 6 · [LOOK CLOSER] the sky from our window, two days, speeded up: bright, dark (a clear night: no clouds, no Sun), bright, dark
  ("scene", "lcsky"),
- ("say", "g601", H, "Look closer. This is the sky from our window, speeded up.", {**LC, "pre": 1.2, "kw": [["clk0", "speeded"]]}),
- ("wait", .2),
- ("say", "g602p", P, "First, the Sun comes up behind the blocks, and the sky gets bright. That is day time!", {"pre": 0, "post": .2, "kw": [["sunup", "up"], ["tagday", "day"]]}),
- ("wait", .5), ("mark", "dusk"), ("wait", 1.2),   # the clock pill runs to Monday 7:30 pm: the light turns warm, the sky orange, deep blue
- ("say", "g603b", B, "Then the sky goes dark, and the street lamps come on. That is nighttime, and time for my pyjamas!", {"pre": 0, "post": .2, "kw": [["lampson", "lamps"], ["tagnight", "nighttime"]]}),
- ("wait", .4), ("mark", "stars"), ("wait", .8),
- ("say", "g604m", M, "Look, there are no clouds tonight. But there is still no Sun!", {"pre": 0, "post": .2, "kw": [["noclouds", "clouds"], ["nosun", "sun"]]}),
- ("wait", 1.0),   # hold on the starry sky (about 5 s with the line)
- *cut("noclouds", [("say", "g605", P, "Oh! There are no clouds, so clouds are not hiding the Sun!", {"pre": .2, "post": .2})]),
- ("mark", "tue7"),
- *(cut("againnight", [("say", "g606b", B, "Then it is morning again, and night again. It just keeps going!", {"pre": .4, "post": .2, "kw": [["tue730", "night"]]})]) or [("wait", 1.4), ("mark", "tue730"), ("wait", 1.4)]),
- ("wait", .6), ("mark", "wed7"), ("wait", .5),
- ("say", "g607", H, "Day, night, day, night. It changes, and it repeats!", {**LC, "pre": 0, "kw": [["row1", "day", 0], ["row2", "night", 0], ["row3", "day", 1], ["row4", "night", 1]]}),
- ("wait", .5),
+ ("say", "g601", H, "Look closer. This is the sky from our window, speeded up.", {**LC, "gap": .6, "pre": 1.2, "kw": [["clk0", "speeded"]]}),
+ ("say", "g602p", P, "First, the Sun comes up behind the blocks, and the sky gets bright. That is day time!", {"pre": .1, "kw": [["sunup", "up"], ["tagday", "day"]]}),
+ ("wait", .2), ("mark", "dusk"), ("wait", .7),   # the clock pill runs to Monday 7:30 pm: the light turns warm, the sky orange, deep blue
+ ("say", "g603b", B, "Then the sky goes dark, and the lamps come on. That is nighttime: pyjama time!", {"pre": 0, "kw": [["lampson", "lamps"], ["tagnight", "nighttime"]]}),
+ ("wait", .2), ("mark", "stars"), ("wait", .5),
+ ("say", "g605", P, "Look, there are no clouds tonight, and still no Sun. So clouds are not hiding the Sun!", {"pre": 0, "kw": [["noclouds", "clouds"], ["nosun", "sun", 0]]}),
+ ("wait", .7),   # hold on the starry sky
+ ("mark", "tue7"), ("wait", .3),
+ ("say", "g607b", B, "Then it is morning again, and night again. Day, night, day, night: it changes, and it repeats!", {"pre": .1, "kw": [["tue730", "night", 0], ["row1", "day", 0], ["row2", "night", 1], ["row3", "day", 1], ["row4", "night", 2]]}),
+ ("mark", "wed7"), ("wait", .6),
  *VERDICT("v_sky"),
  # ---- 7 · the curtains; [LOOK CLOSER] the globe and the torch (the torch stays still; the red dot turns into the light and out of it); the answer
  ("scene", "curtains"), ("mark", "curtains"),
- ("say", "g701m", M, "But why does it keep going? Where does the Sun go at night?", {"pre": .6, "post": .1}),
- ("say", "g701", H, "Let's find out with a model. Look closer.", {"pre": .3, "kw": [["sticker", "look"]]}),
+ ("say", "g701m", M, "But why does it keep repeating?", {"pre": .5}),
+ ("say", "g701", H, "Look closer.", {"pre": .3, "kw": [["sticker", "closer"]]}),
  ("scene", "lcglobe"),
  ("wait", 1.1), ("mark", "torchon"), ("wait", .6),   # the push-in; a hand switches the torch on: half of the globe is lit
- ("say", "g702", H, "A globe is our Earth. A torch is our Sun. The red dot is Singapore.", {**LC, "pre": 0, "kw": [["lab_earth", "earth"], ["lab_sun", "sun"], ["lab_sg", "singapore"]]}),
+ ("say", "g702", H, "A globe is our Earth. A torch is our Sun. The red dot is Singapore.", {**LC, "gap": .55, "pre": 0, "kw": [["lab_earth", "earth"], ["lab_sun", "sun"], ["lab_sg", "singapore"]]}),
  ("wait", .2),
- ("say", "g703p", P, "Watch carefully. The torch stays still, and only the globe turns.", {"pre": 0, "post": .2, "kw": [["pin", "still"], ["turn", "turns"]]}),
- ("wait", .4), ("mark", "dday"), ("wait", .3),
- ("say", "g704b", B, "The red dot faces the torch, so it is day time in Singapore. Good morning!", {"pre": 0, "post": .2}),
- ("wait", .6), ("mark", "ddark"), ("wait", .3),
- ("say", "g705m", M, "Oh! Now the red dot turns away, into the dark, so it is nighttime!", {"pre": 0, "post": .2, "kw": [["dnight", "nighttime"]]}),
- ("wait", .6),
- ("say", "g706p", P, "And the globe keeps turning, so the red dot comes into the light again.", {"pre": 0, "post": .2, "kw": [["dlight", "light"]]}),
- ("wait", .8),
+ ("say", "g703p", P, "Watch. The torch stays still, and only the globe turns.", {"pre": 0, "kw": [["pin", "still"], ["turn", "turns"]]}),
+ ("wait", .2), ("mark", "dday"), ("wait", .2),
+ ("say", "g704b", B, "The red dot faces the torch, so it is day time.", {"pre": 0}),
+ ("wait", .3), ("mark", "ddark"), ("wait", .2),
+ ("say", "g705m", M, "Now it turns away, into the dark, so it is nighttime!", {"pre": 0, "kw": [["dnight", "nighttime"]]}),
+ ("wait", .3),
+ ("say", "g706b", B, "It keeps turning, so the red dot comes into the light again.", {"pre": .1, "kw": [["dlight", "light"]]}),
+ ("wait", .5),
  *VERDICT("v_globe"),
  ("scene", "globeans"), ("mark", "curtainsopen"),
- ("say", "g707", H, "The answer is two. The Sun stays still, and the Earth turns! Two fingers? One finger up!", {"pre": .5, "kw": [["ansglow", "two"], ["ticks", "sun"], ["coin1", "one", 0]]}),
+ ("say", "g707", H, "The answer is two: the Earth turns! Two fingers? One finger up!", {"pre": .5, "kw": [["ansglow", "two"], ["ticks", "earth"], ["coin1", "one", 0]]}),
  ("say", "g708", H, "Scientists call this turning: rotation.", {"pre": .4, "term": ["rotation"], "kw": [["kw_rotation", "rotation"]]}),
  HOLD("kw_rotation"),
  ("say", "g709r", B, "Rotation means the Earth spins round and round, like my globe when I flick it!", {"pre": .2, "post": .2}),
@@ -204,17 +206,17 @@ SEQ1 = [
  ("scene", "momo"),
  *cut("lookmoves", [("say", "g801", M, "Oh! So the Sun only looks as if it moves!", {"pre": .4})]),
  ("say", "g802", H, "Yes, Momo!" if "yesmomo" in CUTS else "Yes, Momo! We are the ones turning.", {"pre": .3, "post": .1}),
- ("say", "g803b", B, "It is like riding the MRT. The trees outside seem to move, but we are the ones moving!", {"pre": .3, "post": .3}),
+ *cut("mrt", [("say", "g803b", B, "It is like riding the MRT. The trees outside seem to move, but we are the ones moving!", {"pre": .3, "post": .3})]),
  # ---- 9 · BE THE LITTLE RED DOT (the first-person journey): one full turn of the Earth
  ("scene", "waitw"),
  ("say", "g901", H, "Be the little red dot! Shrink down. Quietly.", {"pre": .5, "post": .5}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 2.0),
  ("mark", "jdot"),
- ("say", "g902", H, "You are a tiny dot on the Earth: Singapore.", {**SLOW, "pre": 0, "post": 1.0}),
+ ("say", "g902", H, "You are a tiny dot on the Earth: Singapore.", {**SLOW, "pre": 0, "post": .8}),
  ("mark", "jday"),
- ("say", "g903", H, "Your side of the Earth faces the Sun, so it is day time!", {**SLOW, "pre": .2, "post": 1.0}),
+ ("say", "g903", H, "Your side of the Earth faces the Sun, so it is day time!", {**SLOW, "pre": .2, "post": .8}),
  ("mark", "jturn"),
- ("say", "g904", H, "The Earth turns, and you turn away from the Sun. Now it is nighttime, and you can see the stars!", {**SLOW, "pre": .2, "post": 1.0, "kw": [["jaway", "away"], ["jnight", "nighttime"], ["jstars", "stars"]]}),
+ ("say", "g904", H, "The Earth turns, and you turn away from the Sun. Now it is nighttime, and you can see the stars!", {**SLOW, "pre": .2, "post": .8, "kw": [["jaway", "away"], ["jnight", "nighttime"], ["jstars", "stars"]]}),
  ("mark", "jback"),
  ("say", "g905", H, "The Earth keeps turning, and the light comes back. Good morning!", {**SLOW, "pre": .2, "kw": [["jlight", "light"], ["jmorning", "morning"]]}),
  ("wait", 1.0),
@@ -224,24 +226,24 @@ SEQ1 = [
  ("say", "g1001", B, "Say it with me!", {"pre": .6}), ("wait", .8),
  ("say", "g1002", B, "The repeated change between day and night is caused by the rotation of the Earth. This rotation takes 24 hours.", {"pre": 0, "gap": .6, "pron": {"24": "twenty-four"}}),
  ("wait", 2.5),
- ("say", "g1003p", P, "So one full turn of the Earth takes 24 hours. That is one day time and one nighttime, all together!", {"pre": .2, "post": .2, "pron": {"24": "twenty-four"}}),
+ ("say", "g1003p", P, "So one full turn takes 24 hours: one day and one night!", {"pre": .2, "post": .2, "pron": {"24": "twenty-four"}}),
  # ---- 11 · what a cycle is: the board CYCLE CHECK (two ticks; the ring closes; A CYCLE; CYCLE pops on "cycle"); Mark Sentence 2 (Momo, C0.1)
  ("scene", "cyclecheck"), ("mark", "boardIn"),
- ("say", "g1101", H, "Day, night, day, night. A repeated pattern of change has a name: a cycle.", {"pre": .9, "term": ["cycle"], "kw": [["tileday", "day", 0], ["tilenight", "night", 0], ["ringrun", "day", 1], ["kw_cycle", "cycle"]]}),
+ ("say", "g1104p", P, "Let me check. Day changes into night, so it changes. It happens again and again, so it repeats!", {"pre": .5, "kw": [["tileday", "day", 0], ["tilenight", "night", 0], ["tick1", "changes", 1], ["ringrun", "again", 0], ["tick2", "repeats"]]}),
+ ("say", "g1105b", B, "The same changes, again and again, like my school week. That is a repeated pattern!", {"pre": .2}),
+ ("say", "g1101", H, "Yes, Basil! A repeated pattern of change is called a cycle.", {"pre": .3, "term": ["cycle"], "kw": [["tagcycle", "called"], ["kw_cycle", "cycle"]]}),
  HOLD("kw_cycle"),
- ("say", "g1104p", P, "Let me check it on our board. Does it change? Yes, day changes into night. Does it repeat? Yes, again and again. So it is a cycle!", {"pre": .1, "post": .2, "kw": [["tick1", "yes", 0], ["tick2", "yes", 1], ["tagcycle", "so"]]}),
  ("scene", "mark2"),
  ("say", "g1102", M, "Say it with me!", {"pre": .6}), ("wait", .8),
  ("say", "g1103", M, "Cycles are repeated patterns of change. They happen in living and non-living things.", {"pre": 0, "gap": .6}),
  ("wait", .3), ("mark", "kw_repeated_pattern"), ("wait", 2.2), HOLD("kw_repeated_pattern"),   # REPEATED PATTERN pops after the last word; the card holds 2.5 s
- ("say", "g1105b", B, "A repeated pattern means the same changes happen again and again, in the same order. Like my week: school days, the weekend, then school days again!", {"pre": .2, "post": .2}),
  # ---- 12 · HOLD ON! Basil: "My pencil ... is a cycle!" (a bad rule: the child crosses their arms)
  ("scene", "holdon"), ("mark", "tilesoff"),
  ("say", "g1201", B, "My pencil gets shorter and shorter, so it changes. That means it is a cycle!", {"pre": .5, "post": .2, "kw": [["pen1", "pencil"], ["pen2", "shorter", 0], ["pen3", "shorter", 1]]}),
  ("say", "g1202", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .3}),
  *LOCK("hold")[:-1], ("wait", .5),
  ("say", "g1203", H, "Arms crossed? One finger up!", {"pre": 0, "post": .1}),
- ("say", "g1205p", P, "Let me check the board. The pencil changes, but it never grows long again, so the change does not repeat.", {"pre": .3, "post": .2, "kw": [["penrow", "pencil"], ["penchg", "changes"], ["pentag", "not"]]}),
+ ("say", "g1205p", P, "The pencil changes, but it never grows long again, so the change does not repeat.", {"pre": .3, "post": .2, "kw": [["penrow", "pencil"], ["penchg", "changes"], ["pentag", "not"]]}),
  *cut("pencilback", [("say", "g1204", B, "Oops! You are right, Pip. My pencil is not a cycle!", {"pre": .3, "post": .2})]),
  # ---- 13 · Pip finds one: [LOOK CLOSER] the traffic light at the junction below (green, amber, red, green again)
  ("scene", "pipdown"),
@@ -251,8 +253,8 @@ SEQ1 = [
  ("wait", .3),
  ("say", "g1303", H, "Green. Amber. Red. Green again!", {**LC, "pre": 0, "gap": 1.45, "kw": [["lampG", "green", 0], ["lampA", "amber"], ["lampR", "red"], ["lampG2", "green", 1]]}),
  ("wait", .5),
- ("say", "g1304b", B, "It changes, and it repeats, just like day and night. So the traffic light is a cycle too!", {"pre": .1, "post": .2, "kw": [["lighttiles", "repeats"]]}),
- ("wait", .4),
+ ("say", "g1304b", B, "It changes and it repeats, just like day and night, so it is a cycle too!", {"pre": .1, "kw": [["lighttiles", "repeats"]]}),
+ ("wait", .2),
  *VERDICT("v_light"),
  # ---- 14 · score hand, the owl, the key words
  ("scene", "final"),
@@ -278,8 +280,8 @@ SEQ2 = [
  ("scene", "place"), ("wait", 2.0),
  ("scene", "game"),
  ("say", "j201a", H, "A little ladybird is hiding in this video. Can you spot it?", {"pre": .4, "post": .2}),
- ("say", "j201b", B, "I bet it is on a leaf, or maybe on a flower. It likes to move, so keep looking the whole time!", {"pre": .3, "post": .2}),
- ("say", "j201c", H, "Show me one, two or three fingers, and lock in first. One finger for every point.", {"pre": .3, "post": .4}),
+ ("say", "j201b", B, "Maybe it is on a leaf, or on a flower. Keep looking!", {"pre": .3, "post": .2}),
+ ("say", "j201c", H, "Lock in first with your fingers. One finger for every point.", {"pre": .3, "post": .4}),
  # ---- 3 · today's goals (Basil reads the three cards)
  ("scene", "goals"), ("say", "j301", B, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "j302", B, "Cycles in living things.", {"pre": .3, "post": .3}),
  ("say", "j303", B, "What a life cycle is.", {"pre": .3, "post": .3}), ("say", "j304", B, "Why life cycles matter.", {"pre": .3, "post": .9}),
@@ -296,16 +298,16 @@ SEQ2 = [
  # ---- 5 · [LOOK CLOSER] then and now (the boy and the man; the young tree and the tall tree; the teddy bear, the same size); GROW pops
  ("scene", "lcthen"),
  ("say", "j501", H, "Look closer. Here is the same place, then and now.", {**LC, "pre": 1.2, "kw": [["thenpic", "then"], ["nowpic", "now"]]}),
+ ("wait", .2),
+ ("say", "j502b", B, "Whoa! The boy is a man now, and he is much taller!", {"pre": 0, "kw": [["pair1", "boy"], ["line1", "taller"]]}),
  ("wait", .4),
- ("say", "j502b", B, "Whoa! The boy is a man now, and he is much taller than before!", {"pre": 0, "post": .2, "kw": [["pair1", "boy"], ["line1", "taller"]]}),
- ("wait", .8),
- ("say", "j503p", P, "And the young tree is a tall tree now, with fruits on it.", {"pre": 0, "post": .2, "kw": [["pair2", "young"], ["line2", "tall"], ["fruits", "fruits"]]}),
- ("wait", .8),
- ("say", "j504m", M, "But the teddy bear is still the same size. Why did it not grow?", {"pre": 0, "post": .2, "kw": [["pair3", "teddy"], ["line3", "same"]]}),
- ("wait", .5),
- ("say", "j505p", P, "Because the teddy bear is non-living. Living things grow over time, but non-living things do not.", {"pre": .1, "post": .2, "kw": [["tagnon", "non-living", 0], ["tagliving", "living", 0], ["kw_grow", "grow", 0]]}),
+ ("say", "j503p", P, "And the young tree is a tall tree now, with fruits.", {"pre": 0, "kw": [["pair2", "young"], ["line2", "tall"], ["fruits", "fruits"]]}),
+ ("wait", .4),
+ ("say", "j504m", M, "But the teddy bear is the same size. Why did it not grow?", {"pre": 0, "kw": [["pair3", "teddy"], ["line3", "same"]]}),
+ ("wait", .2),
+ ("say", "j505p", P, "Because it is non-living. Living things grow over time, and non-living things do not.", {"pre": .1, "kw": [["tagnon", "non-living", 0], ["tagliving", "living", 0], ["kw_grow", "grow", 0]]}),
  HOLD("kw_grow"),
- ("say", "j507b", B, "Growing means getting bigger over time. My height marks on the kitchen door go higher every year!", {"pre": .1, "post": .2}),
+ ("say", "j507b", B, "Growing means getting bigger, like my height marks on the door!", {"pre": .1}),
  *VERDICT("v_then"),
  ("scene", "thenans"),
  ("say", "j506", H, "The answer is one: the boy and the tree grew bigger! One finger? One finger up!", {"pre": .5, "post": .3, "kw": [["ansglow", "one", 0], ["coin1", "one", 2]]}),
@@ -313,15 +315,16 @@ SEQ2 = [
  ("scene", "lcchick"), ("mark", "wk1"),
  ("say", "j601", H, "Look closer. Here is one chick. Week after week, it grows.", {**LC, "pre": 1.4, "kw": [["labsame", "chick"], ["wk6", "week", 0]]}),   # pre 1.4: the camera glides low across the grass
  ("wait", 1.0), ("mark", "wk12"), ("wait", 2.6),
- ("say", "j602m", M, "Now it is big and fully grown. Is it an adult chicken now?", {"pre": 0, "post": .1, "kw": [["wk24", "now"]]}),
- ("say", "j602p", P, "Yes, Momo. It is fully grown, so we call it an adult.", {"pre": .2, "post": .2}),
- ("wait", 1.4), ("mark", "nestwalk"), ("wait", 1.4), ("mark", "settle"), ("wait", 1.0), ("mark", "later3"), ("wait", .8), ("mark", "chicksout"), ("wait", 1.2),
- ("say", "j603b", B, "And look! Now it has chicks of its own. Its young are its babies, like little copies of her!", {"pre": 0, "post": .2, "kw": [["labyoung", "young"]]}),
+ ("say", "j602m", M, "It is so big now. Is it an adult chicken?", {"pre": 0, "kw": [["wk24", "it", 0]]}),
+ ("wait", .3), ("mark", "nestwalk"),
+ ("say", "j602p", P, "Yes! It is fully grown, so we call it an adult.", {"pre": .1}),
+ ("wait", .3), ("mark", "settle"), ("wait", 1.0), ("mark", "later3"), ("wait", .8), ("mark", "chicksout"), ("wait", .8),
+ ("say", "j603b", B, "And look! It has chicks of its own. Its young are its babies!", {"pre": 0, "kw": [["labyoung", "young"]]}),
  ("wait", .2),
  ("say", "j604", H, "Living things reproduce and have young.", {**LC, "pre": 0, "term": ["reproduce"], "kw": [["kw_reproduce", "reproduce"]]}),
  HOLD("kw_reproduce"),
  ("say", "j606m", M, "What does reproduce mean?", {"pre": .1, "post": .1}),
- ("say", "j606b", B, "It means making more of your own kind. One hen had chicks, and now there are more chickens!", {"pre": .2, "post": .2}),
+ ("say", "j606b", B, "It means making more of your own kind. Now there are more chickens!", {"pre": .2}),
  *VERDICT("v_chick"),
  ("scene", "strip"), ("mark", "strip"),
  *(cut("c02silent", [("say", "j605", H, "Cycles in living things happen when living things grow and have young. Their life cycles follow a repeated pattern of change.", {"pre": .5, "hold": STRIP, "post": .2})]) or [("wait", 3.8)]),
@@ -330,13 +333,13 @@ SEQ2 = [
  ("say", "j701", H, "Be a chick! Shrink down. Quietly.", {"pre": .5, "post": .5}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 2.0),
  ("mark", "jegg"),
- ("say", "j702", H, "You are a chick, inside an egg." if "darkwarm" in CUTS else "You are a chick, inside an egg. It is dark and warm in here.", {**SLOW, "pre": 0, "post": 1.0}),
+ ("say", "j702", H, "You are a chick, inside an egg." if "darkwarm" in CUTS else "You are a chick, inside an egg. It is dark and warm in here.", {**SLOW, "pre": 0, "post": .8}),
  ("mark", "jhatch"),
- ("say", "j703", H, "Crack! Light comes in, and you hatch.", {**SLOW, "pre": .2, "post": 1.0, "kw": [["jcrack", "crack"], ["jlight", "light"], ["jout", "hatch"]]}),
+ ("say", "j703", H, "Crack! Light comes in, and you hatch.", {**SLOW, "pre": .2, "post": .8, "kw": [["jcrack", "crack"], ["jlight", "light"], ["jout", "hatch"]]}),
  ("mark", "jgrow"),
- ("say", "j704", H, "You eat, and you grow, week after week.", {**SLOW, "pre": .2, "post": 1.0, "kw": [["jpeck", "eat"], ["jrise", "grow"]]}),
+ ("say", "j704", H, "You eat, and you grow, week after week.", {**SLOW, "pre": .2, "post": .8, "kw": [["jpeck", "eat"], ["jrise", "grow"]]}),
  ("mark", "jadult"),
- ("say", "j705", H, "Now you are an adult chicken. You lay an egg.", {**SLOW, "pre": .2, "post": 1.0, "kw": [["jnest", "adult"], ["jlay", "egg"]]}),
+ ("say", "j705", H, "Now you are an adult chicken. You lay an egg.", {**SLOW, "pre": .2, "post": .8, "kw": [["jnest", "adult"], ["jlay", "egg"]]}),
  ("mark", "jagain"),
  ("say", "j706", H, "Tap, tap, tap. A new chick hatches, and round we go again!", {**SLOW, "pre": .2, "kw": [["jtap1", "tap", 0], ["jtap2", "tap", 1], ["jtap3", "tap", 2], ["jnew", "new"]]}),
  ("wait", 1.0),
@@ -367,7 +370,7 @@ SEQ2 = [
  # ---- 10 · [LOOK CLOSER] three chickens together (a grandmother hen, a mother hen, a chick), and Mark Sentence 2 (Momo, 4.1 third sentence)
  ("scene", "lchens"),
  ("say", "j1001", H, "Look closer.", {**LC, "pre": 1.4}),
- ("say", "j1001b", B, "It is like a chicken family photo: a grandmother hen, a mother hen and a chick!", {"pre": .1, "post": .2, "kw": [["h_gm", "grandmother"], ["h_m", "mother"], ["h_c", "chick"]]}),
+ ("say", "j1001b", B, "It is like a chicken family photo: a grandmother hen, a mother hen and a chick!", {"pre": .1, "kw": [["h_gm", "grandmother"], ["h_m", "mother"], ["h_c", "chick"]]}),
  ("say", "j1001m", M, "So chickens come again and again, all of the same kind!", {"pre": .1, "post": .2, "kw": [["heads", "chickens"]]}),
  ("wait", .6),
  *VERDICT("v_hens"),

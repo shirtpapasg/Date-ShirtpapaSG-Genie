@@ -72,8 +72,8 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return ro
    words and the buddies of the shot before slipping away; then the game's things pop out over it (common.js gameScene; teacher, 22 Nov).
    The owl opens its eyes for a moment on its name (so it reads as an owl), looks at us, and goes back to sleep; a small bird lands above it. */
 const owlOpen = (t, t0) => ss(t0 - .15, t0 + .2, t) * (1 - ss(t0 + 1.25, t0 + 1.7, t));
-SC.game = (t, s) => { const tO = W("g301", "owl"), cE = camBack(SCN.title.t1), A = camPt(cE, OWL);
-  return gameScene(t, s, "g301", true, { world: (tt) => V(tt, { h: 7.2 + .02 * (tt - s.t0), clk: 7.1, dark: .4, sun: .16, fan: 1.4, items: boards3(tt, "gm"), owl: { open: owlOpen(tt, tO), look: 3 * Math.sin(tt * 2) }, bird: (tt - s.t0 - 2.2) / 1.5 }, cE),
+SC.game = (t, s) => { const tO = W("g301a", "owl"), cE = camBack(SCN.title.t1), A = camPt(cE, OWL);
+  return gameScene(t, s, ["g301a", "g301m", "g301b"], true, { world: (tt) => V(tt, { h: 7.2 + .02 * (tt - s.t0), clk: 7.1, dark: .4, sun: .16, fan: 1.4, items: boards3(tt, "gm"), owl: { open: owlOpen(tt, tO), look: 3 * Math.sin(tt * 2) }, bird: (tt - s.t0 - 2.2) / 1.5 }, cE),
     A, T: [1400, 440], Z: 3.1, dim0: .78, ly: -168, r0: 210, qx: 1420, qy: 640, pre: (tt) => budsBack(tt) + TITLE(1, 1) }); };
 SC.goals = (t, s) => goals3(t, s, [["Day and night", ""], ["What a cycle is", ""], ["Cycle or not?", ""]], ["g401", "g402", "g403", "g404"], "pip");
 
@@ -118,15 +118,15 @@ SC.lcglobe = (t, s) => lookCloser(t, s, { tz: s.t0, fx: camPt(CAMT, GLB)[0], fy:
    boards stand in front of the sofa: the green tick on board 2, small x chips on boards 1 and 3 and by Momo and Pip (ticks); card 2 glows
    (ansglow); coin (coin1); ROTATION pops on "rotation" (lib.js o.at); Basil's {NAP_BACK} (cheer, a proud hop: he was right) */
 const ABX = [300, 570, 840];
-SC.globeans = (t, s) => { const tA = MK("ansglow") - .1, tT = MK("ticks"), hb = HAS("g709"), u = t - s.t0, c = 1 - eio(u / 1.1), cam = camL14(CAMT, CAM0F, eio(u / 1.4));
+SC.globeans = (t, s) => { const tA = MK("ansglow") - .1, tT = MK("ticks"), hb = HAS("g709r"), u = t - s.t0, c = 1 - eio(u / 1.1), cam = camL14(CAMT, CAM0F, eio(u / 1.4));
   return V(t, { ...DAY({ h: 8.9, clk: 8.9 }), dark: .6 * c, sun: .9 * (1 - c), curt: c, swayK: 2 * (1 - clamp((u - 1) / 2)), bird: (u - 5) / 1.6 }, cam)
     + [0, 1, 2].map((i) => `<ellipse cx="${ABX[i]}" cy="902" rx="100" ry="10" fill="${P.ink}" opacity=".2"/>` + dareBoard(i, ABX[i], 790, .68 * (.74 + .26 * spring(t, s.t0 + .1 + i * .1, .5)), { id: "ga" }) + (i === 1 ? tickChip(t, tT, ABX[i] + 96, 690) : xChip(t, tT + .15 * i, ABX[i] + 96, 690))).join("")
     + DARE_CARDS.map((c2, i) => TF(ABX[i], 985, .38 * spring(t, s.t0 + .3 + i * .08, .4), ansCard(i + 1, c2, { w: 430, h: 290, size: 50, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }))).join("")
     + coin(t, MK("coin1") - .1, 600, 330, "+1", "if you showed two fingers")
     + bd("momo", 1250, 190, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tT + .2, "surprised"], [tT + 1.4, "oops"], [tT + 2.6, "sit"], [MK("kw_rotation"), "cheer"]], look: -3 }) + xChip(t, tT + .4, 1330, 880, .8)
     + bd("pip", 1480, 185, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tT + .3, "oops"], [tT + 1.7, "sit"], [MK("kw_rotation") + .15, "pointing"]], jump: [[tT + 1.8, 12]] }) + xChip(t, tT + .5, 1556, 884, .8)
-    + bd("basil", 1740, 250, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tT, "cheer"], [tT + 1.8, "arms_crossed"], [MK("kw_rotation") - .1, "sit"], ...(hb ? [[LT("g709") - .12, "cheer"]] : [])], jump: [[tT + .05, 44], ...(hb ? [[W("g709", "turn") - .1, 26]] : [])] })
-    + (hb ? say("g709", 1440, 600, t, { size: 38, tail: 160, maxW: 540 }) : "") + sunRule(t) + HUD(t); };
+    + bd("basil", 1740, 250, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tT, "cheer"], [tT + 1.8, "arms_crossed"], [MK("kw_rotation") - .1, "sit"], ...(hb ? [[LT("g709r") - .12, "cheer"]] : [])], jump: [[tT + .05, 44], ...(hb ? [[W("g709r", "spins") - .1, 26]] : [])] })
+    + (hb ? say("g709r", 1440, 600, t, { size: 38, tail: 160, maxW: 540 }) : "") + sunRule(t) + HUD(t); };
 
 /* 8 · "It only looks as if it moves!": Momo big (she gasps, then cheers with a hop on "Yes, Momo!"); a plain frame stands on the floor
    beside the table: our window's view with a faint dotted line where the Sun climbed, and under it the small globe with its turning line.
@@ -186,7 +186,7 @@ SC.holdon = (t, s) => { const a = "g1201", b = "g1202", c = "g1203", r0 = MK("ri
   const push = 1 + .05 * eio((t - s.t0) / 4) * (1 - eio((t - tX) / 1));
   return V(t, DAY({ h: 10, clk: 10 }), [push, 700, 600]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".42"/>` + TF(1560, 1066, .52, cycleBoard(t, { id: "ho" }))
     + bd("pip", 760, 170, t, { in: tX - .2, out: LE(c) + .5, poses: [[tX - .2, "thinking"], [r0 - .4, "arms_crossed"]], look: 3 }) + bd("momo", 1010, 170, t, { in: tX - .1, out: LE(c) + .6, poses: [[tX - .1, "surprised"], [r0 - .2, "arms_crossed"]] })
-    + bd("basil", 300, 310, t, { in: s.t0 + .1, poses: [[s.t0, "cheer"], [LE(a) + .3, "arms_crossed"], [W(b, "not") - .1, "surprised"], [tH + .5, "sit"], [W(c, "not") - .12, "surprised"], [hb ? LT("g1204") - .12 : LE(c) + .1, "oops"], [hb ? LE("g1204") + .3 : LE(c) + 1.4, "sit"]], jump: [[W(a, "cycle") - .1, 30], [hb ? LE("g1204") + .35 : LE(c) + 1.5, 14]], nohop: true })
+    + bd("basil", 300, 310, t, { in: s.t0 + .1, poses: [[s.t0, "cheer"], [LE(a) + .3, "arms_crossed"], [W(b, "not") - .1, "surprised"], [tH + .5, "sit"], [W("g1205p", "not") - .12, "surprised"], [hb ? LT("g1204") - .12 : W("g1205p", "repeat") - .1, "oops"], [hb ? LE("g1204") + .3 : LE("g1205p") + .6, "sit"]], jump: [[W(a, "cycle") - .1, 30], [hb ? LE("g1204") + .35 : LE("g1205p") + .65, 14]], nohop: true })
     + say(a, 600, 290, t, { size: 40, tail: -240, maxW: 640 }) + (hb ? say("g1204", 600, 290, t, { size: 40, tail: -240, maxW: 640 }) : "")
     + (ring ? OP(1 - ss(LE(c) + .1, LE(c) + .4, t), TF(RG[0], RG[1], spring(t, tX, .4), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 24, tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: pic })}</g>`)
       + labels + TF(RG[0] + 250, RG[1] + 40, .5 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(RG[0] + 250, RG[1] - 60, 1.0) + tpill(RG[0], RG[1] + RR + 60, "cross your arms", 32, P.ink, "#fff")) : "")

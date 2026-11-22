@@ -15,17 +15,17 @@ ALT = {"rotation": ("R OW T EY SH AH N", "R AA T AH SH AH N"), "reproduce": ("R 
        "cycle": ("S AY K AH L", "S IH K AH L"), "cycles": ("S AY K AH L Z", "S IH K AH L Z"), "live": ("L IY V", "L AY V")}
 B3 = lambda id, word, lab: [(id, word, 0, w, f"{w.capitalize()}, {lab}") for w in ("pip", "basil", "momo")]
 # (id, word, nth, who-track or None, label)
-TAKES = [("g708", "rotation", 0, None, "Heart: \"Scientists call this turning: rotation.\""), ("g1002", "rotation", 0, None, "Basil, Mark Sentence C0.3: \"the rotation of the Earth\""),
+TAKES = [("g708", "rotation", 0, None, "Heart: \"Scientists call this turning: rotation.\""), ("g709r", "rotation", 0, None, "Basil: \"Rotation means the Earth spins round and round...\""), ("g1002", "rotation", 0, None, "Basil, Mark Sentence C0.3: \"the rotation of the Earth\""),
   ("g1002", "rotation", 1, None, "Basil, Mark Sentence C0.3: \"This rotation takes 24 hours.\""), ("hk_rotation", "rotation", 0, None, "Heart, read-along: \"Rotation.\""), *B3("uk_rotation", "rotation", "read-along"),
-  ("g403", "cycle", 0, None, "Pip, goal card: \"What a cycle is.\""), ("g404", "cycle", 0, None, "Pip, goal card: \"Cycle or not?\""), ("g1101", "cycle", 0, None, "Heart: \"...has a name: a cycle.\""),
+  ("g403", "cycle", 0, None, "Pip, goal card: \"What a cycle is.\""), ("g404", "cycle", 0, None, "Pip, goal card: \"Cycle or not?\""), ("g1101", "cycle", 0, None, "Heart: \"...is called a cycle.\""),
   ("g1103", "cycles", 0, None, "Momo, Mark Sentence C0.1: \"Cycles are repeated patterns of change.\""), ("g1201", "cycle", 0, None, "Basil, HOLD ON!: \"That means it is a cycle!\""),
-  ("g1204", "cycle", 0, None, "Basil: \"so it is not a cycle!\""), ("g1301", "cycle", 0, None, "Pip: \"I think it is a cycle.\""), ("g1304", "cycle", 0, None, "Heart, look-closer: \"the traffic light is a cycle!\""),
+  ("g1301", "cycle", 0, None, "Pip: \"I think it is a cycle.\""), ("g1304b", "cycle", 0, None, "Basil, look-closer: \"so it is a cycle too!\""),
   ("g1501", "cycles", 0, None, "Momo: \"Do living things have cycles too?\""), ("hk_cycle", "cycle", 0, None, "Heart, read-along: \"Cycle.\""), *B3("uk_cycle", "cycle", "read-along"),
   ("j101", "cycle", 0, None, "Heart, Part 2 recap: \"That is a cycle\""), ("j303", "cycle", 0, None, "Basil, goal card: \"What a life cycle is.\""), ("j304", "cycles", 0, None, "Basil, goal card: \"Why life cycles matter.\""),
-  ("j801", "cycle", 0, None, "Heart: \"that is a life cycle!\""), ("j803", "cycle", 0, None, "Basil, Mark Sentence 4.2: \"A life cycle is...\""), ("j902", "cycle", 0, None, "Pip, his notes: \"a life cycle ends at the adult\""),
+  ("j801", "cycle", 0, None, "Heart: \"It goes round and round: that is a life cycle!\""), ("j803", "cycle", 0, None, "Basil, Mark Sentence 4.2: \"A life cycle is...\""), ("j902", "cycle", 0, None, "Pip, his notes: \"a life cycle ends at the adult\""),
   ("j905", "cycle", 0, None, "Momo, Showdown: \"A life cycle repeats\""), ("j1003", "cycles", 0, None, "Momo, Mark Sentence 4.1: \"Life cycles ensure...\""),
   ("hk_life_cycle", "cycle", 0, None, "Heart, read-along: \"Life cycle.\""), *B3("uk_life_cycle", "cycle", "read-along: \"Life cycle.\""),
-  ("j604", "reproduce", 0, None, "Heart, look-closer: \"Living things reproduce and have young.\""), ("hk_reproduce", "reproduce", 0, None, "Heart, read-along: \"Reproduce.\""), *B3("uk_reproduce", "reproduce", "read-along"),
+  ("j604", "reproduce", 0, None, "Heart, look-closer: \"Living things reproduce and have young.\""), ("j606m", "reproduce", 0, None, "Momo: \"What does reproduce mean?\""), ("hk_reproduce", "reproduce", 0, None, "Heart, read-along: \"Reproduce.\""), *B3("uk_reproduce", "reproduce", "read-along"),
   ("j803", "reproduces", 0, None, "Basil, Mark Sentence 4.2: \"...grows over time and reproduces.\""),
   ("j1003", "live", 0, None, "Momo, Mark Sentence 4.1: \"can continue to live on Earth\" (sg_pron: leev)")]
 norm = lambda w: "".join(c for c in w.lower() if c.isalpha())

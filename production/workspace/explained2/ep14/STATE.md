@@ -11,7 +11,7 @@ RVRoaWWKjEM (pp. 73-79) stays in the playlists until EP15 is live: NO "replaces"
 "leev" via sg_pron, a clip only if a problem is heard) **plus the ONE change of 22 Nov: full, human sentences** (section 12.1: 43 lines).
 EP13 is live (its playlists' anchor for EP14: `explained-p3-ep13-part2`; EP13 Part 1 = FO1Y_KSZU-c, Part 2 = 8lQ1-1ruveY).
 
-Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · Stage 2 (drawing + thumbnails, Fable) · Stage 2.5 (the teacher's-eye review, a fresh
+Stages: **Stage 1 (setup, done 2026-11-22, Opus)** · **Stage 1b (Trial: buddies teach, done 2026-11-22, Opus)** · Stage 2 (drawing + thumbnails, Fable) · Stage 2.5 (the teacher's-eye review, a fresh
 Opus agent) · Stage 3 (render, checks, upload, Opus).
 
 ## Stage 1: done (2026-11-22, Opus)
@@ -151,6 +151,50 @@ reveal). The smooth push-ins: pass the drawn sets to `gameScene` (`R.world`) and
 are: EP13's three dusk dare boards (ep13dare.js), EP11's torch, the rules scene, ring, cards, coins, stamps, the ending.
 **Every scene to the 22 Nov visual standard** (SCENES_TODO.md writes it out per scene): a fresh pose or reaction on every buddy line; a gentle
 push or drift, no needless cuts; life in the background (the fan, birds, the sky changing, leaves, the chickens); the light of that moment.
+
+## Stage 1b: Trial: buddies teach (done 2026-11-22, Opus)
+The teacher (22 Nov): "I want to try a new episode with the pet buddies not having the colour circular background. Let them blend in. Also,
+make them bigger so the cute pet buddies can create a more relatable connection with the viewer. Focus more on their dialogue and how they
+explain / teach scientific terms." (`../SERIES_FORMAT.md` 1d.) EP14 is the trial. **Stage 2 draws the trial style: read `SCENES_TODO.md`'s
+"THE TRIAL" section first; it replaces the 22 Nov visual standard and the aura-disc rule below wherever they differ.**
+- **Dialogue** (`../p3_ep14_script.md` section 12.2, the tables of sections 4-5, section 6 and section 10 D): every term (day and night,
+  rotation, 24 hours, cycle, repeated pattern, grow, adult / young, reproduce, life cycle, the same kind) is explained by a buddy in their own
+  words in a short back-and-forth tied to what we see and the child's life; Heart hosts, names the book's term on its slow line (the key-word
+  pops stay on Heart's lines, GROW on Pip's) and confirms; Pip careful and step by step, Basil bold with comparisons (globe, pyjamas, school
+  week, height marks, family photo) and the most lines, Momo curious ("But why does it keep repeating?", "Why did it not grow?", "What does
+  reproduce mean?"). Book wording, cards, game beats, look-closers, journeys, dare and hidden animals unchanged; full sentences.
+- **The game segment, both parts: FIND the hidden animal first** (Heart names it; Momo / Basil make the search fun), then the fingers and
+  lock-in rules (teacher, 22 Nov). `gameScene` (common.js) now takes `[find, buddy, rules]` line ids.
+- **Lines per speaker** (goal cards = one; "Say it with me!" + card = one): Part 1 Heart 38, Basil 10, Pip 9, Momo 7; Part 2 Heart 32,
+  Basil 10, Momo 7, Pip 6. Heart's words 428 -> 300 and 429 -> 317.
+- **Voices:** 50 new or changed lines recorded with `make_voice.py` (Heart via sg_pron; the buddies via the Character Voice Kit, x.88); all
+  aligned except j801p and the two Stage 1 ones (g402, hk_reproduce: spread by word length). New dictionary words: MRT, pyjama(s). 21 voice
+  files of lines no longer spoken removed (g301, g602-g607, g703-g706, g1304, j201, j502-j505, j602, j603...). `script.py` checked against the
+  markdown both ways, sentence by sentence and speaker by speaker: every script.py sentence is in the tables; the only table sentences not in
+  script.py are the CUTS.
+- **Timelines** (`build_tl.py`): **Part 1 5:17.1, Part 2 5:16.8** with CUTS = title2, napback, pencilback, mrt (new), yesmomo; forgotegg,
+  notes13, darkwarm, kitten (new), nextjoke, c02silent (the strip shown 3.5 s, not read). No teaching line, look-closer hold, journey step,
+  new-term pause or card hold was cut; the trimmed waits were picture beats inside look-closers, now filled by the buddies.
+- **Sound:** `sound_cues.js` (the new line ids; a pop as each buddy joins the hidden-animal search) -> `dump_cues.js` 214 / 197 events ->
+  `song.js` -> out/mix_p1.wav, out/mix_p2.wav, both **-16.0 LUFS**. Every action still on its own mark (tiles and ticks now land on Pip's words).
+- **Words check** refreshed (`check_words.py` -> `qa/new_words_check.m4a`, 2:04): Basil's "rotation" (g709r), "cycle" in g1101 / g1304b heard
+  right; **Momo's "What does reproduce mean?" (j606m) is flagged** (phonemes right, the "s" runs into "mean"): listen first.
+- **Placeholder stills:** `qa/p1_check.jpg`, `qa/p2_check.jpg` (every scene start / middle, every mark, every line start): **no page errors**.
+  The new buddy lines have no speech bubbles yet in the placeholders (Stage 2 draws every bubble).
+- **Staging for Stage 2** (`SCENES_TODO.md`, generated by `make_todo.py` from the timelines + `todo_trial.py`): for every scene, who is in
+  frame, where (L / C / R, FG / MG) and how big; the camera and its zoom target per line; each buddy's pose per line; the hidden animal's
+  hiding place; life; light; what to keep. The trial rules written there: no aura discs (contact shadow, the scene's light, colours only on
+  name tags / bubble borders / pick cards); buddies at least 1.5x their EP12-EP13 size, the speaker 45-55% of the frame height; balanced
+  layouts (never bunched on one side); the camera frames whoever talks and moves smoothly (no jump cuts); the camera pushes in on whatever a
+  line names (boards, globe, photo, clock) with the speaker big beside it; each recurring board keeps ONE home (listed) and glides, never
+  jumps; countdowns take the stage (the ring big and central, clue labels >= 40 px cap height, the blue game stage, one big buddy at most);
+  lock-ins use ONE set of big numbered picture cards; look-closers fill the panel, boards large, each named part its own push-in and big
+  label, and the speaker's FACE peeks in from a lower corner reacting on the beats (no ghost overlaps); the hidden animal: push-in -> iris
+  wipe with a thick BLACK ring -> the blue-violet starry game stage -> the game objects pop; the same circle at the reveal; the owl and the
+  ladybird change their hiding place scene by scene (each spot listed; the reveal replays the spot Heart names).
+- **Kept from the partial Stage 2 commit (eecdae5):** all of flat14.js and garden14.js (sets, props, look-closer arts, journeys, animals),
+  bg/flat.png, bg/garden14.png, the camera keys and action timing of p1.js; to change: every buddy call (no aura, new sizes and places),
+  `lookCloser` (full-bleed + `peekFace`), `gameScene` / `lizReveal` (the iris), `lockN` (one picture-card set), the countdown staging.
 
 ## Stage 2 (Fable): drawing and thumbnails
 - Draw every scene of `SCENES_TODO.md` into new files (e.g. `flat14.js`, `garden14.js`; add them to page.html after pics.js; gradients in

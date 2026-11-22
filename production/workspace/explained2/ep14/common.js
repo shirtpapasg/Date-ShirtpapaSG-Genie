@@ -171,7 +171,8 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88,
     + (t >= tTell ? TF(o.px || 960, (o.py || 830) + 140, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + (fade > .01 && o.from ? OP(fade, o.from()) : "") + logo(t); }
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
-function gameScene(t, s, L, full, R) { const tLock = W(L, "lock"), tC = W(L, HIDDEN[0]), tFind = W(L, "spot");   // teacher, 2026-11-21: Heart NAMES the animal ("A little sparrow is hiding in this video. Can you spot it?")
+function gameScene(t, s, L0, full, R) { const LF = Array.isArray(L0) ? L0[0] : L0, L = Array.isArray(L0) ? L0[L0.length - 1] : L0;   // EP14 trial (teacher, 22 Nov): FIND the animal first (LF: Heart names it, a buddy makes the search fun), THEN the fingers / lock-in rules (L)
+  const tLock = W(L, "lock"), tC = W(LF, HIDDEN[0]), tFind = W(LF, "spot");   // teacher, 2026-11-21: Heart NAMES the animal ("A little sparrow is hiding in this video. Can you spot it?")
   // teacher, 22 Nov: no cut to the purple stage. R = { world(t) (the real place, no HUD), A (the animal in the world), T (where it lands on
   // screen), Z, pre(t) (the scene before's own labels and small discs, which slip away), dim0 (how dark the picture already was) }: ONE push-in
   // (ease in-out, 1.1 s) straight onto the animal, the rest softly dimmed; THEN the game's things pop out over it. Words and cues: unchanged.
@@ -190,7 +191,7 @@ function gameScene(t, s, L, full, R) { const tLock = W(L, "lock"), tC = W(L, HID
       out += youPill(lerp(640, 330, ph2), lerp(470, 400, ph2), 1.3 * youIn) + popSpark(t, tH, 640, 640, 260);
       if (nf && ph2 > .5) out += TF(880, 470, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
     out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(200 470) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
-    [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = Math.max(tBud, tP + .1) + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
+    [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = Math.min(Math.max(tBud, tP + .1), Array.isArray(L0) ? LT(L0[1]) - .3 : 1e9) + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
     out += lab + (t >= tFind - .1 ? TF(R.qx || 1440, R.qy || 640, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 })) : "");
     return out + logo(t); }
   // Part 2: "Lock in first. A little ladybird is hiding in this video. Can you spot it?"

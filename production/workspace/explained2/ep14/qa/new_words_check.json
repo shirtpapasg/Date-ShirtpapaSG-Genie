@@ -18,6 +18,13 @@
    "tail_voiced": null
   },
   {
+   "take": "Basil: \"Rotation means the Earth spins round and round...\"",
+   "id": "g709r",
+   "word": "rotation",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
    "take": "Basil, Mark Sentence C0.3: \"the rotation of the Earth\"",
    "id": "g1002",
    "word": "rotation",
@@ -74,7 +81,7 @@
    "tail_voiced": null
   },
   {
-   "take": "Heart: \"...has a name: a cycle.\"",
+   "take": "Heart: \"...is called a cycle.\"",
    "id": "g1101",
    "word": "cycle",
    "heard": "right ??r",
@@ -95,13 +102,6 @@
    "tail_voiced": null
   },
   {
-   "take": "Basil: \"so it is not a cycle!\"",
-   "id": "g1204",
-   "word": "cycle",
-   "heard": "right rr?",
-   "tail_voiced": null
-  },
-  {
    "take": "Pip: \"I think it is a cycle.\"",
    "id": "g1301",
    "word": "cycle",
@@ -109,10 +109,10 @@
    "tail_voiced": null
   },
   {
-   "take": "Heart, look-closer: \"the traffic light is a cycle!\"",
-   "id": "g1304",
+   "take": "Basil, look-closer: \"so it is a cycle too!\"",
+   "id": "g1304b",
    "word": "cycle",
-   "heard": "right ??r",
+   "heard": "right rrr",
    "tail_voiced": null
   },
   {
@@ -172,7 +172,7 @@
    "tail_voiced": null
   },
   {
-   "take": "Heart: \"that is a life cycle!\"",
+   "take": "Heart: \"It goes round and round: that is a life cycle!\"",
    "id": "j801",
    "word": "cycle",
    "heard": "? ???",
@@ -240,6 +240,13 @@
    "word": "reproduce",
    "heard": "right rrr",
    "tail_voiced": 0.9333333333333333
+  },
+  {
+   "take": "Momo: \"What does reproduce mean?\"",
+   "id": "j606m",
+   "word": "reproduce",
+   "heard": "wrong www",
+   "tail_voiced": 1.0
   },
   {
    "take": "Heart, read-along: \"Reproduce.\"",

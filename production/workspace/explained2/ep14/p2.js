@@ -33,7 +33,7 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
    ladybird on its leaf, the place pill slipping away; common.js gameScene); 3 · goals (Basil reads) */
 const placePill = () => TF(960, 1010, 1, tpill(0, 0, "A community garden, Singapore", 40, P.ink, "#fff", { w: 700 }));
 SC.place = (t, s) => gardenPH(t) + OP(ramp(t, s.t0 + .3, .4), placePill()) + henRule(t, s.t0 + .3) + HUD(t);
-SC.game = (t, s) => gameScene(t, s, "j201", false, { world: (tt) => gardenPH(tt), A: LADY, T: [1360, 500], Z: 2.6, ly: -190, pre: () => placePill() }) + henRule(t);
+SC.game = (t, s) => gameScene(t, s, ["j201a", "j201b", "j201c"], false, { world: (tt) => gardenPH(tt), A: LADY, T: [1360, 500], Z: 2.6, ly: -190, pre: () => placePill() }) + henRule(t);
 SC.goals = (t, s) => goals3(t, s, [["Cycles in living things", ""], ["What a life cycle is", ""], ["Why life cycles matter", ""]], ["j301", "j302", "j303", "j304"], "basil");
 
 /* 4 · Round 1: which ones are bigger today? (four clue labels a boy · a young tree · a teddy bear · long ago on top of the ring, kept through

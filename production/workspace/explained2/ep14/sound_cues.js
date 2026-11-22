@@ -24,7 +24,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   BD(S.back.t0, tT); [0, 1, 2].forEach((i) => E(LT("g204") - .3 + i * .1, "pip", i));
   E(tT - .05, "whoosh"); [.26, .61].forEach((d, i) => E(tT + d, "slam", i));
   // 3 the game: the push-in onto the owl (a soft whoosh), a tiny soft "hoo" on its name; 4 goals (Pip reads), countdown
-  E(S.game.t0 + .05, "whoosh"); E(S.game.t0 + 1.1, "sting"); { const b = "g301"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(b, HIDDEN[0]) - .1, "curious"); E(W(b, HIDDEN[0]) + .2, "hoo"); E(W(b, "spot") - .1, "pip", 2); }
+  E(S.game.t0 + .05, "whoosh"); E(S.game.t0 + 1.1, "sting"); { const a = "g301a", b = "g301b"; [0, .5, 1].forEach((d, i) => E(W(b, "one") + d, "pip", i)); E(W(a, HIDDEN[0]) - .1, "curious"); E(W(a, HIDDEN[0]) + .2, "hoo"); E(W(a, "spot") - .1, "pip", 2); E(LT("g301m") - .05, "pop", 1); }
   [0, 1, 2].forEach((i) => E(LT(["g402", "g403", "g404"][i]) - .1, "softpop", i)); ["three", "two", "one"].forEach((w, i) => E(W("h501", w), "drum", i)); E(W("h501", "go"), "cymbal");
   // 5 Round 1: the round card, the short ring (3 s); Basil's pick (a boing)
   E(S.r1card.t0, "roundcard"); { const L = "g501"; lock(MK("ring0_r1"), 3, "g502", ["g503", "g504", "g505"], [W(L, "why"), W(L, "come"), W(L, "show")]); E(LE("g505") + .05, "boing"); }
@@ -38,7 +38,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   //   turn without a stop (a low swell every .9 s), a soft chime on each cream tag; the verdict; the answer: a tag, the x chips, a coin; the curtains open
   { E(MK("curtains"), "curtain"); E(MK("sticker"), "tap"); lcin(S.lcglobe.t0 + .1); E(MK("torchon"), "click"); ["lab_earth", "lab_sun", "lab_sg"].forEach((k, i) => E(MK(k), "pip", i)); E(MK("pin"), "tap");
     for (let x = MK("turn"); x < MK("v_globe") + 2.2; x += .9) E(x, "rumble"); E(MK("dday") + .1, "chime2", 0); E(MK("dnight") + .05, "chime2", 0); E(MK("dlight") + .1, "chime2", 1); verdict("v_globe");
-    E(MK("curtainsopen"), "curtain"); BD(MK("curtainsopen") + .3, S.waitw.t0); E(MK("ansglow") - .1, "tag", 0); [0, .15, .3].forEach((d, i) => E(MK("ticks") + d, "pop", i)); E(MK("coin1") - .1, "coin"); if (has("g709")) E(LE("g709") + .05, "boing"); }
+    E(MK("curtainsopen"), "curtain"); BD(MK("curtainsopen") + .3, S.waitw.t0); E(MK("ansglow") - .1, "tag", 0); [0, .15, .3].forEach((d, i) => E(MK("ticks") + d, "pop", i)); E(MK("coin1") - .1, "coin"); if (has("g709r")) E(LE("g709r") + .05, "boing"); }
   // 8 Momo (a pop, a soft chime); 9 be the little red dot: the calm pad, a low slow hum that never stops (the turn), night: a soft high shimmer, morning: one bird
   { if (has("g801")) E(LT("g801") - .05, "pop", 1); E(LT("g802") + .1, "chime2", 0); E(W("g901", "be") - .2, "pop", 2); E(S.waitw.t1 - .6, "shrink"); R.wonder.push([MK("dive") + .5, S.pullout.t0 + .5]);
     for (let x = MK("jdot"); x < S.pullout.t0; x += 2.2) E(x, "hum"); NT(MK("jnight") - .2, MK("jlight")); E(MK("jstars") + .1, "sparkle"); E(MK("jmorning") + .1, "morning"); }
@@ -60,7 +60,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => ev.push({ t: Math.round(t
   } else {
   // 1-3 the calm recap (a soft pop under each picture, a low drum on the last), the garden (leaves, a hen's low clucks, chicks cheeping, a far rooster), the game (the push-in, a tiny buzz on the ladybird), goals (Basil reads)
   { const L = "j101"; C(S.lasttime.t0 + .2, S.place.t0); E(S.lasttime.t0 + .1, "pluck", 0); E(LT(L) - .05, "softpop", 0); E(MK("pic2") - .1, "softpop", 1); E(MK("pic3") - .1, "softpop", 2); E(MK("pic3") + .1, "lowdrum", .5); }
-  BD(S.place.t0, S.goals.t1 - .3); E(S.place.t0 + .3, "cluck"); E(S.place.t0 + .9, "cheep", 1); E(S.place.t0 + 1.4, "rooster"); E(S.game.t0 + .05, "whoosh"); E(S.game.t0 + 1.1, "sting"); E(W("j201", HIDDEN[0]) - .1, "curious"); E(W("j201", HIDDEN[0]) + .2, "buzz"); E(W("j201", "spot") - .1, "pip", 2);
+  BD(S.place.t0, S.goals.t1 - .3); E(S.place.t0 + .3, "cluck"); E(S.place.t0 + .9, "cheep", 1); E(S.place.t0 + 1.4, "rooster"); E(S.game.t0 + .05, "whoosh"); E(S.game.t0 + 1.1, "sting"); E(W("j201a", HIDDEN[0]) - .1, "curious"); E(W("j201a", HIDDEN[0]) + .2, "buzz"); E(W("j201a", "spot") - .1, "pip", 2); E(LT("j201b") - .05, "pop", 1); E(W("j201c", "lock") - .1, "pip", 1);
   [0, 1, 2].forEach((i) => E(LT(["j302", "j303", "j304"][i]) - .1, "softpop", i));
   // 4 Round 1 (6 s ring): the photo's paper (photo)
   E(S.r1card.t0, "roundcard"); { const L = "j401"; E(MK("photo") + .1, "paper"); lock(MK("ring0_r1"), 6, "j402", ["j403", "j404", "j405"], [W(L, "one", 1), W(L, "two"), W(L, "three", 1)]); E(LE("j404") + .05, "boing"); }
