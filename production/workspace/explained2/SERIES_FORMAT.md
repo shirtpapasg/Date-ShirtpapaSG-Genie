@@ -394,7 +394,13 @@ order). Send the teacher the finished parts and the list of things to check; the
    teacher did EP1 (`EP01_vs_EP04_NOTES.md`, `ep01/NOTES_ROUND3.md`, this rulebook): is every buddy cute and reacting? anything
    floating, cut off, hidden behind a disc, unreadable on a phone? any needless cut? does each look-closer show the why? any 2–3
    word spoken fragment? It writes its notes to `epNN/NOTES_REVIEW.md`; the drawing agent fixes every note; the reviewer checks
-   again; only then render. The key stills are also sent to the teacher for information (not a gate); the teacher's notes,
+   again; only then render. **EP1 is the benchmark (teacher, 22 Nov: "ALL these are important and you did not make these mistakes
+   when creating episode 1"):** the reviewer puts each key still next to EP1's matching kind of scene (a lock-in, a look-closer, a
+   Mark Sentence, a hidden-animal moment, a board scene) and asks "would a 9-year-old on a phone see what matters as clearly as in
+   EP1?" It also checks every 22 Nov rule one by one: buddies 1.5× and balanced; camera on what is talked about; look-closers use the
+   whole panel with a reacting buddy face; boards keep their home position; countdowns take the stage; one set of numbered choice
+   cards; hidden animal in its black-ringed circle on blue and moving between scenes; no ghost overlaps; full sentences. Any "no"
+   is a note to fix before render. The key stills are also sent to the teacher for information (not a gate); the teacher's notes,
    whenever they come, are fixed in a re-render. Spend the effort on what viewers see: cute, reacting buddies; smooth camera with no needless
    cuts; real places with life; deep, visual explanations; full human sentences.
 7. *(Paused 22 Nov)* **The pipeline runs ahead on its own (teacher, 2026-11-21: "always write script automatically once 2 episode before is live,
