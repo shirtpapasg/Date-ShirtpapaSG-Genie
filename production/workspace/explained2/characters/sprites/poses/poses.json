@@ -334,13 +334,13 @@
    "file": "poses/basil_c_pointing.png",
    "src": "basil_c_pointing.jpg",
    "anchor": [
-    539.4,
+    563.1,
     815.0
    ],
-   "scale": 1.0259,
+   "scale": 1.0193,
    "size": [
-    937,
-    838
+    948,
+    839
    ]
   },
   "_sit": {
