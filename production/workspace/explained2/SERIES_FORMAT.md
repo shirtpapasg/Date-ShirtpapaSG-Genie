@@ -111,6 +111,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   the right, a small visual recap of the evidence along the bottom (the three straps with SUITABLE / NOT FOR THIS JOB and the
   property chips), the key-word pill under the score. Balanced left/right, nothing bunched, nothing cut off. Use this as the size
   and balance target for buddies.
+- **The camera goes to what is being talked about (teacher, 2026-11-22, on EP13's "OUR DESIGN PLAN" scene: "when talking about
+  'Our design plan', you need to zoom into the plan, showing a bigger image of it. The 3 pet buddies are too small to make any
+  impact in this scene").** Whenever a line names or explains a board, chart, card or object, the camera smoothly pushes in so that
+  thing fills most of the frame while it is talked about, then eases back; the speaking buddy stays big beside it. A wide shot of a
+  place is only a brief establishing moment. Bad example: `reference/scene_bad_ep13_designplan_toosmall.webp`.
 - **Buddies teach.** Each scientific term is explained by a buddy in their own words, in a short back-and-forth with another buddy or
   the viewer ("Rotation means the Earth spins round and round, like my globe!"), with a picture beside them; Heart hosts, sets up
   the question and confirms, but the buddies carry the explaining. Full, natural sentences (section 5 "Talk like people").

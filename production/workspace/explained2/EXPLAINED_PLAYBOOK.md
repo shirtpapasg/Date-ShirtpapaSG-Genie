@@ -164,6 +164,8 @@ book's words name what the child just lived. True at P3 level.
   the teacher):** buddies stay present and react in a corner during look-closers instead of disappearing; more poses (thinking,
   laughing, pointing, proud, scared).
 - Always in their aura disc next to real props; never green, blue or sun-yellow.
+- **The camera goes to what is being talked about (teacher, 22 Nov):** when a line names a board, chart or object, push in so it
+  fills most of the frame, the speaking buddy big beside it; wide shots only briefly to set the place.
 - **Approved scene (teacher, 22 Nov):** `reference/scene_good_ep13_marksentence.webp` — the reading buddy big on the left,
   the card large on the right, a small evidence recap along the bottom; the size and balance target.
 - **From EP14 (trial, teacher 22 Nov):** no discs; buddies stand in the scene, at least 1.5× their EP12–EP13 size, the speaker
