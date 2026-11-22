@@ -267,285 +267,293 @@ Rotation means the Earth spins round and round, like my globe when
 I flick it!
 
 68
-00:02:39,971 --> 00:02:41,021
-Yes, Momo!
+00:02:40,046 --> 00:02:40,676
+Oh!
 
 69
-00:02:41,223 --> 00:02:42,643
-Be the little red dot!
+00:02:40,906 --> 00:02:43,231
+So the Sun only looks as if it moves!
 
 70
-00:02:42,923 --> 00:02:43,913
-Shrink down.
+00:02:43,251 --> 00:02:44,301
+Yes, Momo!
 
 71
-00:02:44,193 --> 00:02:45,123
-Quietly.
+00:02:44,503 --> 00:02:45,923
+Be the little red dot!
 
 72
-00:02:47,411 --> 00:02:50,471
-You are a tiny dot on the Earth: Singapore.
+00:02:46,203 --> 00:02:47,193
+Shrink down.
 
 73
-00:02:50,983 --> 00:02:53,913
-Your side of the Earth faces the Sun, so it is day
+00:02:47,473 --> 00:02:48,403
+Quietly.
 
 74
-00:02:53,933 --> 00:02:54,663
-time!
+00:02:50,691 --> 00:02:53,751
+You are a tiny dot on the Earth: Singapore.
 
 75
-00:02:55,182 --> 00:02:58,032
-The Earth turns, and you turn away from the Sun.
+00:02:54,263 --> 00:02:57,193
+Your side of the Earth faces the Sun, so it is day
 
 76
-00:02:58,812 --> 00:03:01,952
-Now it is nighttime, and you can see the stars!
+00:02:57,213 --> 00:02:57,943
+time!
 
 77
-00:03:02,476 --> 00:03:05,446
-The Earth keeps turning, and the light comes back.
+00:02:58,462 --> 00:03:01,312
+The Earth turns, and you turn away from the Sun.
 
 78
-00:03:06,246 --> 00:03:07,316
-Good morning!
+00:03:02,092 --> 00:03:05,232
+Now it is nighttime, and you can see the stars!
 
 79
-00:03:09,116 --> 00:03:10,276
-Say it with me!
+00:03:05,756 --> 00:03:08,726
+The Earth keeps turning, and the light comes back.
 
 80
-00:03:10,985 --> 00:03:14,725
-The repeated change between day and night is caused by the rotation
+00:03:09,526 --> 00:03:10,596
+Good morning!
 
 81
-00:03:14,745 --> 00:03:15,715
-of the Earth.
-
-82
-00:03:16,395 --> 00:03:18,745
-This rotation takes 24 hours.
-
-83
-00:03:21,151 --> 00:03:25,231
-So one full turn takes 24 hours: one day and one night!
-
-84
-00:03:25,510 --> 00:03:26,170
-Let me check.
-
-85
-00:03:26,190 --> 00:03:29,450
-Day changes into night, so it changes.
-
-86
-00:03:29,680 --> 00:03:32,239
-It happens again and again, so it repeats!
-
-87
-00:03:32,259 --> 00:03:35,469
-The same changes, again and again, like my school week.
-
-88
-00:03:35,659 --> 00:03:37,225
-That is a repeated pattern!
-
-89
-00:03:37,245 --> 00:03:38,345
-Yes, Basil!
-
-90
-00:03:38,615 --> 00:03:41,835
-A repeated pattern of change is called a cycle.
-
-91
-00:03:43,455 --> 00:03:44,745
+00:03:12,396 --> 00:03:13,556
 Say it with me!
 
+82
+00:03:14,265 --> 00:03:18,005
+The repeated change between day and night is caused by the rotation
+
+83
+00:03:18,025 --> 00:03:18,995
+of the Earth.
+
+84
+00:03:19,675 --> 00:03:22,025
+This rotation takes 24 hours.
+
+85
+00:03:24,431 --> 00:03:28,511
+So one full turn takes 24 hours: one day and one night!
+
+86
+00:03:28,790 --> 00:03:29,450
+Let me check.
+
+87
+00:03:29,470 --> 00:03:32,730
+Day changes into night, so it changes.
+
+88
+00:03:32,960 --> 00:03:35,519
+It happens again and again, so it repeats!
+
+89
+00:03:35,539 --> 00:03:38,749
+The same changes, again and again, like my school week.
+
+90
+00:03:38,939 --> 00:03:40,505
+That is a repeated pattern!
+
+91
+00:03:40,525 --> 00:03:41,625
+Yes, Basil!
+
 92
-00:03:45,453 --> 00:03:47,853
-Cycles are repeated patterns of change.
+00:03:41,895 --> 00:03:45,115
+A repeated pattern of change is called a cycle.
 
 93
-00:03:48,383 --> 00:03:51,063
-They happen in living and non-living things.
+00:03:46,735 --> 00:03:48,025
+Say it with me!
 
 94
-00:03:54,285 --> 00:03:57,185
-My pencil gets shorter and shorter, so it changes.
+00:03:48,733 --> 00:03:51,133
+Cycles are repeated patterns of change.
 
 95
-00:03:57,385 --> 00:03:58,915
-That means it is a cycle!
+00:03:51,663 --> 00:03:54,343
+They happen in living and non-living things.
 
 96
-00:03:59,037 --> 00:04:00,597
-Something is not right.
+00:03:57,565 --> 00:04:00,465
+My pencil gets shorter and shorter, so it changes.
 
 97
-00:04:00,867 --> 00:04:03,047
-If you can spot it, cross your arms.
+00:04:00,665 --> 00:04:02,195
+That means it is a cycle!
 
 98
-00:04:03,327 --> 00:04:04,287
-Hold on!
+00:04:02,317 --> 00:04:03,877
+Something is not right.
 
 99
-00:04:09,700 --> 00:04:10,830
-Arms crossed?
+00:04:04,147 --> 00:04:06,327
+If you can spot it, cross your arms.
 
 100
-00:04:11,100 --> 00:04:12,310
-One finger up!
+00:04:06,607 --> 00:04:07,567
+Hold on!
 
 101
-00:04:12,362 --> 00:04:15,862
-The pencil changes, but it never grows long again, so the change
+00:04:12,980 --> 00:04:14,110
+Arms crossed?
 
 102
-00:04:15,882 --> 00:04:17,182
-does not repeat.
+00:04:14,380 --> 00:04:15,590
+One finger up!
 
 103
-00:04:17,379 --> 00:04:19,629
-Then look down there, at the traffic light!
+00:04:15,642 --> 00:04:19,142
+The pencil changes, but it never grows long again, so the change
 
 104
-00:04:19,829 --> 00:04:21,609
-I think it is a cycle.
+00:04:19,162 --> 00:04:20,462
+does not repeat.
 
 105
-00:04:22,637 --> 00:04:23,817
-Look closer.
+00:04:20,659 --> 00:04:22,909
+Then look down there, at the traffic light!
 
 106
-00:04:24,025 --> 00:04:24,865
-Green.
+00:04:23,109 --> 00:04:24,889
+I think it is a cycle.
 
 107
-00:04:26,205 --> 00:04:26,865
-Amber.
+00:04:25,917 --> 00:04:27,097
+Look closer.
 
 108
-00:04:28,145 --> 00:04:28,885
-Red.
+00:04:27,305 --> 00:04:28,145
+Green.
 
 109
-00:04:30,165 --> 00:04:31,225
-Green again!
+00:04:29,485 --> 00:04:30,145
+Amber.
 
 110
-00:04:31,638 --> 00:04:34,738
-It changes and it repeats, just like day and night, so it
+00:04:31,425 --> 00:04:32,165
+Red.
 
 111
-00:04:34,758 --> 00:04:36,128
-is a cycle too!
+00:04:33,445 --> 00:04:34,505
+Green again!
 
 112
-00:04:38,808 --> 00:04:40,268
-Show me your score hand!
+00:04:34,918 --> 00:04:38,018
+It changes and it repeats, just like day and night, so it
 
 113
-00:04:40,548 --> 00:04:41,938
-One finger or more?
+00:04:38,038 --> 00:04:39,408
+is a cycle too!
 
 114
-00:04:42,258 --> 00:04:43,618
-You beat the Buddies.
+00:04:42,088 --> 00:04:43,548
+Show me your score hand!
 
 115
-00:04:43,888 --> 00:04:44,918
-Two fingers?
+00:04:43,828 --> 00:04:45,218
+One finger or more?
 
 116
-00:04:45,198 --> 00:04:46,208
-High five!
+00:04:45,538 --> 00:04:46,898
+You beat the Buddies.
 
 117
-00:04:46,780 --> 00:04:48,130
-Did you spot the owl?
+00:04:47,168 --> 00:04:48,198
+Two fingers?
 
 118
-00:04:48,420 --> 00:04:50,640
-It was on the tree outside the window!
+00:04:48,478 --> 00:04:49,488
+High five!
 
 119
-00:04:50,778 --> 00:04:52,258
-Here is a fun fact!
+00:04:50,060 --> 00:04:51,410
+Did you spot the owl?
 
 120
-00:04:52,338 --> 00:04:54,988
-Most owls sleep in the day and wake up at night.
+00:04:51,700 --> 00:04:53,920
+It was on the tree outside the window!
 
 121
-00:04:55,048 --> 00:04:57,068
-Our day time is their bedtime!
+00:04:54,058 --> 00:04:55,538
+Here is a fun fact!
 
 122
-00:04:57,196 --> 00:04:58,476
-Tell someone at home!
+00:04:55,618 --> 00:04:58,268
+Most owls sleep in the day and wake up at night.
 
 123
-00:04:59,205 --> 00:05:01,405
-Let's read today's key words together!
+00:04:58,328 --> 00:05:00,348
+Our day time is their bedtime!
 
 124
-00:05:01,695 --> 00:05:02,455
-Ready?
+00:05:00,476 --> 00:05:01,756
+Tell someone at home!
 
 125
-00:05:02,742 --> 00:05:03,762
-Rotation.
+00:05:02,485 --> 00:05:04,685
+Let's read today's key words together!
 
 126
-00:05:05,312 --> 00:05:06,142
-Cycle.
-
-127
-00:05:07,470 --> 00:05:08,790
-Repeated pattern.
-
-128
-00:05:10,534 --> 00:05:11,474
-Well done!
-
-129
-00:05:12,271 --> 00:05:13,901
-The Earth is non-living.
-
-130
-00:05:14,021 --> 00:05:16,080
-Do living things have cycles too?
-
-131
-00:05:16,100 --> 00:05:17,500
-Good question, Momo!
-
-132
-00:05:17,800 --> 00:05:20,630
-A hen, a chick and a teddy bear will show us.
-
-133
-00:05:20,695 --> 00:05:22,285
-Find out in Part Two!
-
-134
-00:05:23,445 --> 00:05:24,546
-Say it with us!
-
-135
-00:05:25,347 --> 00:05:26,097
+00:05:04,975 --> 00:05:05,735
 Ready?
 
+127
+00:05:06,022 --> 00:05:07,042
+Rotation.
+
+128
+00:05:08,592 --> 00:05:09,422
+Cycle.
+
+129
+00:05:10,750 --> 00:05:12,070
+Repeated pattern.
+
+130
+00:05:13,814 --> 00:05:14,754
+Well done!
+
+131
+00:05:15,551 --> 00:05:17,181
+The Earth is non-living.
+
+132
+00:05:17,301 --> 00:05:19,360
+Do living things have cycles too?
+
+133
+00:05:19,380 --> 00:05:20,780
+Good question, Momo!
+
+134
+00:05:21,080 --> 00:05:23,910
+A hen, a chick and a teddy bear will show us.
+
+135
+00:05:23,975 --> 00:05:25,565
+Find out in Part Two!
+
 136
-00:05:26,220 --> 00:05:26,880
-One!
+00:05:26,725 --> 00:05:27,826
+Say it with us!
 
 137
-00:05:27,220 --> 00:05:27,920
-two!
+00:05:28,627 --> 00:05:29,377
+Ready?
 
 138
-00:05:28,225 --> 00:05:29,400
+00:05:29,500 --> 00:05:30,160
+One!
+
+139
+00:05:30,500 --> 00:05:31,200
+two!
+
+140
+00:05:31,505 --> 00:05:32,680
 Now you know!
