@@ -17,6 +17,7 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 9. **Look-closers (teacher, 22 Nov, on EP13's bag look-closer).** The thing being explained FILLS the panel (no big empty cream areas); a board being filled is LARGE (about half the panel) beside the object, never a thumbnail in a corner; each part or label being named gets its own big moment (push in on that part, a big label). And one buddy's FACE peeks in from a lower corner (a head-and-shoulders crop of the sprite, 1/4-1/3 of the panel height; the one who is speaking or whose idea it is), reacting live and changing expression on the beats (eyes widen and a gasp at a reveal, nods and smiles when agreeing, a thinking face while it happens). Never semi-transparent ghost overlaps of two objects (dissolves are quick and clean, one picture at a time). The buddies now SPEAK inside the look-closers (they teach): the face in the corner is the speaker's, swapping with a pop when the speaker changes.
 10. **The hidden animal (teacher, 22 Nov).** The game segment talks about FINDING it first (Heart names it, a buddy makes the search fun), THEN the fingers / lock-in rules. Picture: the real place -> a smooth push-in onto the animal -> an IRIS wipe: the animal sits in a CIRCLE with a thick BLACK ring (about 16 px), everything outside it becomes the old blue-violet game layout (the dark blue-violet starry stage with the soft spotlight beam of EP7-EP11's game screen), not the dimmed grey scene -> the label *a little owl / ladybird* by the circle, *Can you spot it?*, then the score pill, the YOU hand and ring, and the buddies pop in over the blue layout. The reveal at the end uses the same circle and black ring. **The animal changes its hiding place scene by scene** (never one spot all episode: in EP12 and EP13 it sat in one place, "too easy and felt sloppy"): a fair, findable place in each scene where it could really be, sometimes partly hidden, never in a look-closer; each scene below names its spot. The reveal replays the spot Heart names.
 11. **Speech bubbles:** every buddy line has its cream bubble with the speaker's colour border and tail, beside the speaker's head, never over a face, the prop being explained or the clue labels. Lip-sync on every line; a fresh pose or reaction on every line (squash, hard cut, overshoot, hop; never a cross-fade).
+14. **The journeys bring company (teacher, 22 Nov: "I love these shrink-down scenes! Can we bring the 3 pet buddies along? Or even include the audience, like what you did for 'A frog, a bird and a fish'").** In BE THE LITTLE RED DOT and BE A CHICK: a *You: a ...* tag and the viewer's own presence in first person (EP5's "You: a frog" with the viewer's frog hands: here a "you are here" glow with tiny waving hands; the chick's wing tips and feet), AND the three buddies shrunk down riding along beside the viewer, cute and alive, reacting at each stop, never covering what is shown. This replaces the old "no buddies in the journeys" rule. The journeys' words are unchanged (Heart, second person).
 13. **Also from the rulebook's 22 Nov notes** (`../SERIES_FORMAT.md`, with pictures in `../reference/`): match the approved examples (EP13 Mark Sentence 1: the reader BIG on the left, the card large on the right, a small recap along the bottom: `scene_good_ep13_marksentence.webp`; EP13's strap look-closer: `lookcloser_good_ep13_straps.webp`); human hands have four fingers and a thumb (the adult's hands on the curtains, sticker, torch, globe and photo; the YOU hands); every tile, sample or picture is named on screen (the CYCLE CHECK tiles: *day time*, *nighttime*, the three pencils, *green* / *amber* / *red*, *egg* / *chick* / *adult chicken*); every tag points to what it describes with a plain line, colour-coded with its part; no pill, coin or "+1" overlaps the key-word shelf; no buddy is ever frozen (every buddy on screen reacts on every line); countdowns are ANIMATED as in EP1 (the ring pulses on each tick, the number pops, the YOU hand bobs, LOCKED IN! slams; the buddies lean in, fidget, cover their eyes, then a pose swap on each reveal; the numbers step exactly once a second with the ticks, the bell on 0): reuse EP1's lock-in and reveal routines (`../ep01/`).
 12. **Poses that exist:** Pip and Momo: sit (talking), cheer, oops, surprised, arms_crossed, pointing, thinking, waving. Basil: sit, cheer, oops, surprised, arms_crossed (no pointing / thinking / waving: an inviting hop instead). The look-closer FACES are crops of the sit / surprised / cheer / oops / thinking sprites (no new art needed; a new "gasp" or "aww" face, made from the buddy's own picture by editing the face only, is welcome).
 
@@ -319,10 +320,10 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ### 2:29.8 – 2:34.2 · `waitw` · 9 · Be the little red dot! (the glide in) (4.4 s)
 
 - **Draw:** Pill **Be the little red dot!** (wired via the scene name: draw it). The camera glides to the globe on the table and into the red sticker; a soft cream wipe at the scene end. The shelf slides aside (SHELF_HIDE).
-- **Frame (trial: who, where, how big; the main prop):** The globe on the table C, large; the three buddies MG at the table's edge, spread L / C / R (h 340), waving the viewer off.
+- **Frame (trial: who, where, how big; the main prop):** The globe on the table C, large; the three buddies MG at the table's edge, spread L / C / R (h 340): on "Shrink down" they shrink WITH the viewer and dive into the red sticker alongside the camera (they ride along in the journey).
 - **Camera (zoom target per line):** One continuous glide into the red sticker, then the cream wipe.
 - **Poses per line:**
-  - `g901`: Pip and Momo waving, Basil cheer, all three lean towards the globe.
+  - `g901`: Pip and Momo waving at the viewer to come along, Basil cheer; on "Shrink down. Quietly." all three shrink (a squash, a sparkle) and hop into the glide.
 - **Hidden animal:** Not in this scene (the glide fills the frame with the globe).
 - **Life:** Fan; sunbeams.
 - **Light:** Full morning.
@@ -334,14 +335,17 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ### 2:34.2 – 2:57.0 · `shrink` · 9 · BE THE LITTLE RED DOT (the first-person journey) (22.8 s)
 
 - **Draw:** First person, present tense. `jdot`: the real Earth now, seen from just above it: its surface curves away under you, sea and land and cloud, and a tiny warm glow marks where you are (tag wired). `jday`: far to one side the Sun, large and steady; your side is bright (tag wired). `jturn` / `jaway`: the whole view swings slowly; the Sun slides to the curved edge of the Earth and is gone behind it; `jnight`: the sky black (tag wired); `jstars`: stars; below you the small lights of a city. `jback` / `jlight`: the view keeps swinging the same way; a thin bright line grows along the other edge; the Sun is there again, in the same far place as before (tag *one full turn · 24 hours*, wired); `jmorning`: one bird. EXACTLY half of the Earth lit. Small print *A drawing. Never look at the real Sun.* (wired). Nothing about why the Earth turns, the Moon or seasons.
-- **Frame (trial: who, where, how big; the main prop):** The journey (the child is the dot). No buddies.
-- **Camera (zoom target per line):** The camera IS the dot (one continuous swing).
+- **Frame (trial: who, where, how big; the main prop):** JOURNEY WITH COMPANY (teacher, 22 Nov: "Can we bring the 3 pet buddies along? Or even include the audience", like EP5's "You: a frog"). The child IS the little red dot, in first person: a tag *You: the little red dot* (top left) and the viewer's own presence at the bottom centre of the frame: a soft warm "you are here" glow on the Earth's surface round the viewer's spot, with two tiny cartoon hands (four fingers and a thumb) at the bottom edge that wave, point and shade the eyes on the beats. The three buddies, SHRUNK to ride along beside the viewer (each about 22-26% of the frame high, standing on the Earth's curved surface at the lower left and lower right, Pip and Momo left, Basil right, so the centre stays clear), cute and alive, never covering the Sun, the edge of light and dark, the stars or the tags. They are lit like the viewer: bright warm on the day side, cool blue with a starlit rim at night.
+- **Camera (zoom target per line):** The camera IS the dot: one continuous slow swing with the Earth's turn (never a cut); the buddies ride with the camera (they stay in place in the frame while the world swings past).
 - **Poses per line:**
-  - `g902-g905`: (no buddies)
+  - `g902`: The viewer's hands wave hello at the bottom edge; the buddies pop in small beside the glow (a hop each), Momo looks down at the glow in wonder.
+  - `g903`: Day side: all three squint and shade their eyes at the far, steady Sun (never looking straight at it: small print stays); Basil stretches out as if sunbathing.
+  - `g904`: As the Sun slips behind the Earth's edge: the three WAVE GOODBYE to the Sun, the viewer's hands wave too; at night Pip points up at the stars, Momo gasps at the city lights below, Basil does a sleepy yawn.
+  - `g905`: The thin bright line grows: a big GASP from all three at the sunrise, then cheer and a hop on "Good morning!", the viewer's hands clap.
 - **Hidden animal:** Not in this scene.
 - **Life:** Clouds drift over the sea below; city lights twinkle at night; the stars; one bird at morning.
 - **Light:** Day side bright and warm from one fixed side (the Sun), the edge of light and dark soft, the night side deep blue-black, then the dawn line.
-- **Keep from the partial Stage 2 / Stage 1:** flat14.js `dotJourney`; shrink.js helpers.
+- **Keep from the partial Stage 2 / Stage 1:** flat14.js `dotJourney` (the Earth, the steady Sun, half lit, the night side, the dawn line); shrink.js helpers (`feelTag`, `topTag`); add the viewer's glow + hands and the three small buddies (sprites, no aura; their own contact shadow on the Earth's surface).
 - **Reuse:** shrink.js helpers (`feelTag`, `dip`, `topTag`); ep13/shrink.js and ep12/shrink.js as models. · **New:** The whole journey (SC.shrink in shrink.js; keep the wired tags).
 - **Marks:** `dive` 2:34.2, `jdot` 2:36.2, `jday` 2:39.8, `jturn` 2:44.0, `jaway` 2:45.8, `jnight` 2:48.3, `jstars` 2:50.0, `jback` 2:51.3, `jlight` 2:53.1, `jmorning` 2:55.4
 - **Lines:**
@@ -353,7 +357,7 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ### 2:57.0 – 2:57.6 · `pullout` · 10 · Pull back out (0.6 s)
 
 - **Draw:** Whoosh out of the red dot, back to the living room in full morning light (0.6 s).
-- **Frame (trial: who, where, how big; the main prop):** Pull back to the room; the three buddies at the table's edge (h 340) L / C / R.
+- **Frame (trial: who, where, how big; the main prop):** Pull back to the room; the three buddies grow back to size with the viewer and land at the table's edge (h 340) L / C / R.
 - **Camera (zoom target per line):** One continuous pull back from the sticker.
 - **Poses per line:**
   - `(none)`: A hop each as they come into view.
@@ -765,10 +769,10 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ### 2:19.3 – 2:23.2 · `waitw` · 7 · Be a chick! (the glide in) (3.9 s)
 
 - **Draw:** Pill **Be a chick!**. The camera glides to the nest under the bush and into one egg; a soft cream wipe at the scene end. The shelf slides aside (SHELF_HIDE).
-- **Frame (trial: who, where, how big; the main prop):** The bush with the nest C, large; the buddies at the edges L / R (h 340), waving.
+- **Frame (trial: who, where, how big; the main prop):** The bush with the nest C, large; the buddies at the edges L / R (h 340): on "Shrink down" they shrink WITH the viewer and glide into the egg alongside the camera (they ride along in the journey).
 - **Camera (zoom target per line):** One continuous glide into one egg.
 - **Poses per line:**
-  - `j701`: Pip and Momo waving, Basil cheer.
+  - `j701`: Pip and Momo beckon the viewer, Basil cheer; on "Shrink down. Quietly." all three shrink (squash, sparkle), Pip with a finger to his lips.
 - **Hidden animal:** The ladybird: on a leaf of the bush above the nest.
 - **Life:** The hen shifts on the nest; leaves.
 - **Light:** Dappled shade under the bush.
@@ -780,14 +784,18 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ### 2:23.2 – 2:45.5 · `shrink` · 7 · BE A CHICK (the first-person journey) (22.3 s)
 
 - **Draw:** First person, present tense. `jegg`: inside the egg: a warm orange-pink glow all round you; the curved shell very close (a soft slow heartbeat; the hen's clucks, muffled) (tag wired). `jhatch` / `jcrack` ("Crack!"): a crack of white light, then another; `jlight`: the shell opens; `jout`: the garden, huge: grass blades like trees, the hen's feet, large and gentle, beside you (tag *you hatch*). `jgrow` / `jpeck` ("eat"): you peck at the ground; `jrise` ("grow"): the view rises a little, then a little more, as the weeks go by (a small week pill 1, 6, 12, 24; *speeded up*): the grass is low now; you can see over the planter bed (tag *you grow*). `jadult` / `jnest`: your own nest of dry leaves, seen from above; you settle; `jlay` ("egg"): when you stand, there is an egg in it (tag *an adult chicken · an egg*). `jagain`: the egg rocks; `jtap1..jtap3`: three small taps from inside; `jnew`: a crack: a new chick (tag *a new chick · again*). Nothing about how an egg comes to hold a chick (P5), nothing about stages.
-- **Frame (trial: who, where, how big; the main prop):** The journey (the child is the chick). No buddies.
-- **Camera (zoom target per line):** The camera IS the chick, rising with the weeks.
+- **Frame (trial: who, where, how big; the main prop):** JOURNEY WITH COMPANY (teacher, 22 Nov). The child IS the chick, in first person: a tag *You: a chick* (top left) and the viewer's own little chick body at the bottom of the frame (two small fluffy yellow-brown wing tips at the lower left and right edges, and two small orange feet when the view looks down), moving on the beats like EP5's frog hands. The three buddies, SHRUNK to chick size, ride along beside the viewer (each about 22-26% of the frame high at the start, at the lower left (Pip, Momo) and lower right (Basil), never covering the crack of light, the hen, the nest or the tags); inside the egg they sit snug against the warm curved shell beside you; after the hatch they stand in the grass; as the weeks go by they grow a little with you (the camera rises; they stay the same share of the frame). Lit like the viewer: warm orange-pink inside the egg, bright white at the hatch, morning sun in the garden, dappled shade at the nest. They keep a polite distance from the hen (a real hen beside them; nobody touches her).
+- **Camera (zoom target per line):** The camera IS the chick: tiny and low at the hatch, rising steadily with each week (one continuous rise), looking down at the nest at the end; the buddies ride with the camera.
 - **Poses per line:**
-  - `j702-j706`: (no buddies)
+  - `j702`: Inside the egg: the viewer's wing tips twitch; the buddies curled up snug (Momo yawns, Pip whispers "shh" with a paw, Basil listens to the heartbeat with his head against the shell).
+  - `j703`: On "Crack!": all three GASP and jump back, then CHEER as you hatch; the viewer's wings flap at the edges.
+  - `j704`: Growing: the viewer's beak pecks into frame; Basil copies the pecking (funny), Pip measures himself against a grass blade, Momo points at how far you can see now.
+  - `j705`: The adult and the egg: the buddies lean in to look at the new egg, Momo with paws on cheeks ("aww"), Pip nodding.
+  - `j706`: Tap, tap, tap: the three count the taps on their fingers, then a big cheer and a hop on "round we go again!"; the viewer's wings flap.
 - **Hidden animal:** Not in this scene.
 - **Life:** Grass blades sway like trees; an ant walks past at chick height; the hen's feet step gently; leaves rustle.
 - **Light:** Inside the egg: a warm orange-pink glow; the hatch: bright white light; the garden: morning sun; the nest: dappled shade.
-- **Keep from the partial Stage 2 / Stage 1:** garden14.js `chickJourney`.
+- **Keep from the partial Stage 2 / Stage 1:** garden14.js `chickJourney` (inside the egg, the hatch, the garden from chick height, the nest, the new egg), `chicken14` (the hen's feet), `egg14`; add the viewer's wing tips / feet and the three small buddies (sprites, no aura; soft contact shadows on the grass and the nest).
 - **Reuse:** shrink.js helpers; ep13/shrink.js as a model. · **New:** The whole journey (SC.shrink in shrink.js; keep the wired tags).
 - **Marks:** `dive` 2:23.2, `jegg` 2:25.2, `jhatch` 2:27.9, `jcrack` 2:28.1, `jlight` 2:29.7, `jout` 2:31.0, `jgrow` 2:32.1, `jpeck` 2:32.4, `jrise` 2:33.1, `jadult` 2:35.2, `jnest` 2:36.2, `jlay` 2:38.5, `jagain` 2:39.6, `jtap1` 2:39.8, `jtap2` 2:40.1, `jtap3` 2:40.4, `jnew` 2:42.0
 - **Lines:**
@@ -800,7 +808,7 @@ The teacher: "I want to try a new episode with the pet buddies not having the co
 ### 2:45.5 – 2:46.1 · `pullout` · 8 · Pull back out (0.6 s)
 
 - **Draw:** Whoosh out of the egg, back to the garden (0.6 s).
-- **Frame (trial: who, where, how big; the main prop):** Pull back to the garden; the buddies by the board L / C / R (h 340).
+- **Frame (trial: who, where, how big; the main prop):** Pull back to the garden; the buddies grow back to size with the viewer and land by the board L / C / R (h 340).
 - **Camera (zoom target per line):** One continuous pull back.
 - **Poses per line:**
   - `(none)`: A hop each.

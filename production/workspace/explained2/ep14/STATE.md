@@ -192,6 +192,9 @@ explain / teach scientific terms." (`../SERIES_FORMAT.md` 1d.) EP14 is the trial
   label, and the speaker's FACE peeks in from a lower corner reacting on the beats (no ghost overlaps); the hidden animal: push-in -> iris
   wipe with a thick BLACK ring -> the blue-violet starry game stage -> the game objects pop; the same circle at the reveal; the owl and the
   ladybird change their hiding place scene by scene (each spot listed; the reveal replays the spot Heart names).
+- **The journeys bring company (teacher, 22 Nov):** in BE THE LITTLE RED DOT and BE A CHICK the viewer is present in first person (a
+  *You: ...* tag; a "you are here" glow with tiny waving hands; the chick's wing tips and feet, like EP5's frog hands) and the three buddies
+  shrink down with the viewer and ride along beside them, reacting at each stop (SCENES_TODO `shrink`, `waitw`, `pullout`). Words unchanged.
 - **Kept from the partial Stage 2 commit (eecdae5):** all of flat14.js and garden14.js (sets, props, look-closer arts, journeys, animals),
   bg/flat.png, bg/garden14.png, the camera keys and action timing of p1.js; to change: every buddy call (no aura, new sizes and places),
   `lookCloser` (full-bleed + `peekFace`), `gameScene` / `lizReveal` (the iris), `lockN` (one picture-card set), the countdown staging.
