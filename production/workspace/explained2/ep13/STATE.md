@@ -333,3 +333,6 @@ replaces FO1Y_KSZU-c, 8lQ1-1ruveY; retire_old; playlists after "explained-p3-ep1
   production/workspace/explained2/ep13/upload_v2.json` themselves). After the upload: change the classic _gRJ0NwV6p0's first description line
   "design like an engineer https://www.youtube.com/watch?v=FO1Y_KSZU-c" to the new Part 1 (keep "choosing materials ... zCCVRRtDffc"), check
   both playlists' order (EP12 v4, EP13 v2, EP14 v2), and send the new .srt files.
+
+## 22 Nov ~15:00: v2 LIVE
+Uploaded by the main session after the teacher OKd it (the redo agent's upload was blocked by permissions): Part 1 HcwbIH3rnhk, Part 2 tCqnQReFySw (upload_v2.json), replacing FO1Y_KSZU-c / 8lQ1-1ruveY (public, pointing to HcwbIH3rnhk). Playlists: EP12 v4 -> EP13 v2 -> EP14 v2 verified in both. Classic _gRJ0NwV6p0 points to zCCVRRtDffc and HcwbIH3rnhk.
