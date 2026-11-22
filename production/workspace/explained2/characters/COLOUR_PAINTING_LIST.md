@@ -1,4 +1,8 @@
-# Coloured buddies: the painting list for EP14 (33 pictures)
+# Coloured buddies: the painting list for EP14
+
+**Update 22 Nov: Pip stays grey** (the purple try looked "very weird"; chinchillas are grey). His current paintings are kept, so
+skip every Pip line below (pictures 5–8 and 20–26). **Basil:** paint one test first (`basil_sit_closed`, teal-grey) and decide
+from it before painting his other ten. Momo goes ahead: 10 pictures left (her arms crossed is done).
 
 Teacher's request, 22 Nov 2026: from EP14 the buddies are in colour. Each line below is one picture.
 
@@ -20,7 +24,7 @@ Teacher's request, 22 Nov 2026: from EP14 the buddies are in colour. Each line b
 | Buddy | Main fur or scales | Markings | Light parts | Ears, nose |
 |---|---|---|---|---|
 | **Momo** (cat) | coral #FB7158 | darker coral-red tabby stripes on the head, back, legs and tail | cream muzzle, chest, belly, paw tips and tail tip | pink inner ears (not lilac), small pink nose |
-| **Pip** (chinchilla) | soft lavender-grey (grey with a clear purple tint, about #B8A9E6) | slightly deeper lavender #8B5CF6 in the shading and the tail | white-cream belly, chest and muzzle | big round ears, pink inside; small pink nose |
+| ~~**Pip**~~ (stays grey, unchanged) | ~~soft lavender-grey (grey with a clear purple tint, about #B8A9E6) | slightly deeper lavender #8B5CF6 in the shading and the tail | white-cream belly, chest and muzzle | big round ears, pink inside; small pink nose |
 | **Basil** (bearded dragon) | teal-grey scales (about #7FB5AE) | deeper teal #14B8A6 on the spiky beard, the back spikes and the tail bands | cream throat, belly and the soles of his feet | no outer ears; small dark nostrils |
 
 ## The sitting set (4 per buddy, 12 in total)

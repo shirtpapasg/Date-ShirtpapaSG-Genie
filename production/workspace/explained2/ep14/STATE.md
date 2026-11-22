@@ -238,3 +238,6 @@ explain / teach scientific terms." (`../SERIES_FORMAT.md` 1d.) EP14 is the trial
 
 ## 22 Nov: buddies in colour from EP14
 Teacher: from EP14 the buddies are in colour; EP14 mentions it casually (script section 12.3). Drawing waits for the coloured sitting sets (4 per buddy) and the coloured poses EP14 uses. The Opus pass before drawing records the two lines with the fun facts and retimes.
+
+## 22 Nov: Pip stays grey
+Teacher: Pip remains grey. EP14 colour lines updated (script 12.3): Momo has her colours; Pip is happy to stay grey; Basil decided after a test.
