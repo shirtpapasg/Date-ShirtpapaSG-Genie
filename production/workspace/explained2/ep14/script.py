@@ -82,7 +82,7 @@ CUTS: script section 6 (non-teaching, in its order). Put a tag in CUTS to drop t
 """
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
-CUTS = {"forgotegg", "notes13", "napback", "title2", "pencilback", "mrt", "yesmomo", "kitten", "darkwarm", "c02silent", "nextjoke", "lookmoves"}   # + lookmoves (Stage 1 colour, 22 Nov: the colour lines and the fun facts add ~20 s)   # trial (22 Nov): Part 2 keeps Stage 1's two cuts; Part 1 drops {NAP_BACK} (Basil's rotation line takes its place)
+CUTS = {"forgotegg", "notes13", "napback", "title2", "pencilback", "mrt", "yesmomo", "kitten", "darkwarm", "nextjoke", "lookmoves"}   # c02silent RESTORED (teacher, 22 Nov: "part 2, 2:18 missing narration": Heart reads the book strip C0.2) # + lookmoves (Stage 1 colour, 22 Nov: the colour lines and the fun facts add ~20 s)   # trial (22 Nov): Part 2 keeps Stage 1's two cuts; Part 1 drops {NAP_BACK} (Basil's rotation line takes its place)
 cut = lambda tag, items: [] if tag in CUTS else items
 
 # ---- the dare blocks (script section 3) ----
