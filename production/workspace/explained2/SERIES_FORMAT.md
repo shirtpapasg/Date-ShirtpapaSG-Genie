@@ -37,6 +37,12 @@ Also read:
     spine of a part. Calm music, Heart's voice soft, room to breathe (the quiet-wonder look of Journey to the Microcosmos), so the
     loud game beats around it land harder.
   - True at the level taught: no P5/P6 labels in P3 (no "cells", "chloroplast" in P3). Nothing may teach a wrong idea.
+  - **The viewer and the buddies come along (teacher, 2026-11-22: "I love these shrink-down scenes! Can we bring the 3 pet buddies
+    along? Or even include the audience, like what you did for 'A frog, a bird and a fish'").** Each journey shows a "You: a …" tag
+    and the viewer's own presence in first person (as EP5's "You: a frog" with the viewer's frog hands,
+    `reference/journey_good_ep05_you_a_frog.webp`), and the three buddies shrunk down riding along, cute and alive, reacting at each
+    stop, never covering what is shown. Approved journey look: `reference/journey_good_ep13_insidebag.webp`. (This replaces "the
+    buddies are in neither journey".)
 - Real Singapore places always: HDB flat, void deck, community garden, canteen, MRT, Kranji farm.
 - Exam-exact: every definition and key word is quoted word for word from the textbook (the P3 to P6 plan's `definitions` files).
   - Every non-textbook sentence goes on an approval list for the teacher before rendering.
