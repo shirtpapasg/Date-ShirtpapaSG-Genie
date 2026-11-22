@@ -259,6 +259,19 @@
     839
    ]
   },
+  "back": {
+   "file": "poses/basil_back.png",
+   "src": "basil_back.png",
+   "anchor": [
+    628.9,
+    815.0
+   ],
+   "scale": 1.6077,
+   "size": [
+    919,
+    1065
+   ]
+  },
   "_sit": {
    "body_h": 791,
    "hips_above_feet": 6

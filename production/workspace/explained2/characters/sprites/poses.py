@@ -19,13 +19,14 @@ POSES = {  # buddy: {pose: (file, crop or None)}
            "surprised": ("momo_surprised.jpg", None), "arms_crossed": ("momo_arms_crossed.jpg", None), "pointing": ("momo_pointing.jpg", None),
            "waving": ("momo_waving.jpg", None), "back": ("momo_back.png", None)},
   "basil": {"cheer": ("basil_cheer_mouth_wide.jpg", None), "oops": ("basil_oops.jpg", None), "surprised": ("basil_surprised.jpg", None),
-            "arms_crossed": ("basil_arms_crossed.jpg", None)},
+            "arms_crossed": ("basil_arms_crossed.jpg", None), "back": ("basil_back.png", None)},
 }
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
 ADJ = {}      # (buddy, pose): extra scale, set by eye from qa/poses_<buddy>.png
 DX = {}       # (buddy, pose): anchor nudge in source px
+FEET = {("basil", "back"): 508}   # (buddy, pose): the feet line in source px, when something else (Basil's tail, seen from behind) hangs lower
 try: exec(open(f"{H}/poses_adj.py").read())
 except FileNotFoundError: pass
 
@@ -62,8 +63,9 @@ if __name__ == "__main__":
             cut = cutout(im, seal=SEAL.get((who, pose), 0)); x0, y0, x1, y1 = bbox(cut[..., 3])
             Tm = np.full(im.shape[:2], 175, np.float32); Tm[int(y1 - .09 * (y1 - y0)):] = SHADOW_T   # second pass: the shadow under the feet is darker than the paper
             cut = cutout(im, T=Tm, seal=SEAL.get((who, pose), 0)); x0, y0, x1, y1 = bbox(cut[..., 3])
-            s = sit_h / (y1 - y0) * ADJ.get((who, pose), 1.0)
-            ax = body_cx(cut[..., 3], y0, y1) + off / s + DX.get((who, pose), 0); ay = float(y1)
+            yf = FEET.get((who, pose), y1)                                   # feet line (normally the lowest pixel)
+            s = sit_h / (yf - y0) * ADJ.get((who, pose), 1.0)
+            ax = body_cx(cut[..., 3], y0, yf) + off / s + DX.get((who, pose), 0); ay = float(yf)
             # resample once to the sitting scale, tight canvas + margin
             m = 24; w, h = int((x1 - x0) * s) + 2 * m, int((y1 - y0) * s) + 2 * m
             M = np.float32([[s, 0, m - x0 * s], [0, s, m - y0 * s]])

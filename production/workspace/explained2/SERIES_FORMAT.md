@@ -298,7 +298,8 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - Make each from the buddy's own picture, one buddy per image, 1024 px, white background, no shadow.
   - Make talking/blink states by editing only the face.
   - Keep each buddy one consistent model.
-  - **Back views (teacher's paintings, 22 Nov):** `poses/momo_back.png` (Pip's to come). Use them when a buddy looks INTO the scene
+  - **Back views (teacher's paintings, 22 Nov):** `poses/momo_back.png`, `poses/basil_back.png` (Pip's to come). Basil's tail, seen from behind, lies on the ground towards the camera
+    below his feet line: give him floor below him or let the frame crop the tail tip. Use them when a buddy looks INTO the scene
     with the viewer: riding along on a journey, peering into the micro-world, watching the hidden animal, facing the board. Same
     scale and foot line as the sitting sprite (poses.json), so a swap never changes size. A back view never speaks; turn to a
     front pose before the buddy's line.
