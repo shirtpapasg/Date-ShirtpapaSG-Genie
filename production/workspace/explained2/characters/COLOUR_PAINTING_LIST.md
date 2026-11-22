@@ -103,3 +103,13 @@ Each one is a full body, sitting, with the same size of head and body as the sit
 - **Sitting set:** half, wide and blink (sent mid-task, not saved) are lighter teal-grey with dark eyes; the closed one sent was
   try 1 (teal beard), which does not match them. All 4 must be ONE picture with only the face changed, AND in the same colours as
   the four accepted poses, or the colour flashes when he swaps pose. Choose one palette for all of Basil.
+
+## Status, 22 Nov (Momo)
+
+- **Accepted, cut out** (`poses/momo_c_*.png`): oops, waving, thinking, surprised, cheer, arms crossed. One consistent model.
+  Printed labels under the drawings were removed before cutting (no labels next time, please).
+- **Talking set on the arms-crossed pose** (sent mid-task, not saved; re-send): closed smile, small "o", big "o", eyes shut
+  happy. Good idea: the arms-crossed pose becomes her talking base. All four must be the identical body with only the face changed.
+- **Still to paint:** pointing.
+- **Basil pointing** (second try, sent mid-task, not saved): lighter teal like his sitting set, one arm: good; re-send.
+- **Disk note:** the cloud disk filled up on 22 Nov; EP1–EP11 render leftovers were deleted with the teacher's OK (finals kept).
