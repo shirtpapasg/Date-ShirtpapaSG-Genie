@@ -285,7 +285,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
 - **Art:**
   - The buddies are the teacher's own paintings, animated as cut-out sprites: `characters/sprites/` and `characters/sprites/poses/`.
   - No 3D. No code-drawn redraws of the buddies.
-  - Fur stays natural, never recoloured.
+  - Fur stays natural, never recoloured, up to EP13. **From EP14 the buddies are in colour** (teacher, 22 Nov): the teacher's
+    own coloured paintings, Momo coral, Pip lavender-purple, Basil teal-grey (never green, blue or sun-yellow), with blush on the
+    cheeks and pink inner ears. Never recolour the old grey art with code; use only the teacher's coloured paintings, and never
+    mix grey and coloured buddies in one episode. EP14 mentions it once, casually ("The creator finally had the budget to paint
+    us"); later episodes do not. Test picture: `characters/sprites/colour_test/momo_coral_arms_crossed.jpg`.
 - **Signature colours** (the same in TheOneApp, free and credit buddies):
   - Pip: purple #8B5CF6.
   - Basil: teal #14B8A6.

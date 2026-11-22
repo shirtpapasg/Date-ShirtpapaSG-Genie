@@ -235,3 +235,6 @@ explain / teach scientific terms." (`../SERIES_FORMAT.md` 1d.) EP14 is the trial
   classic RVRoaWWKjEM stays in the playlists until EP15 is live (then EP15's upload.json replaces it and its NEW VERSION line points to EP14 and EP15).
 - After the upload: the episode guide, the links and `.srt` files to the teacher, the SecondBrain handoff (`Plans/videos/P3-new/HANDOFF.md`).
 - Status: see ../progress/ep14.json
+
+## 22 Nov: buddies in colour from EP14
+Teacher: from EP14 the buddies are in colour; EP14 mentions it casually (script section 12.3). Drawing waits for the coloured sitting sets (4 per buddy) and the coloured poses EP14 uses. The Opus pass before drawing records the two lines with the fun facts and retimes.

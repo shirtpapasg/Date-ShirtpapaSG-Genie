@@ -600,3 +600,22 @@ The teacher (22 Nov): "I want to try a new episode with the pet buddies not havi
 **Lines per speaker (goal cards = one line; "Say it with me!" + its card = one line):** Part 1 Heart 38 (every ritual and read-along line counted), Basil 10, Pip 9, Momo 7. Part 2 Heart 32, Basil 10, Momo 7, Pip 6, plus the chant.
 
 **For the teacher to decide** (recommendation first): (1) The parts run 5:17 and 5:17: **accept** (2 s over), or cut Momo's game line / Pip's "24 hours" line (not recommended: the second is a term). (2) The strip C0.2 is shown 3.5 s without being read (`c02silent`): **accept**, or have Heart read it and cut Basil's "Growing means..." comparison. (3) Basil's MRT comparison ("the trees outside seem to move, but we are the ones moving") and Momo's "Do I have a life cycle too?" ("Cats have a life cycle too, and so do you!") are written and voiced-ready but cut for length: say if either should come back (each about 5-8 s). (4) Basil now explains "rotation" as "the Earth spins round and round": the book says "rotation"; "spins" is our word (non-textbook list, section 10 D). (5) If the trial works, the rulebook's section 5 ("buddies always sit in their circular aura disc") is replaced by section 1d for every episode after EP14.
+
+### 12.3 The buddies in colour (teacher, 2026-11-22)
+
+The teacher: "for episode 14 onwards, just casually mention the creator has budget to add colours for us." From EP14 the buddies
+are the teacher's new coloured paintings (Momo coral, Pip lavender-purple, Basil teal-grey; first test:
+`characters/sprites/colour_test/momo_coral_arms_crossed.jpg`). EP14 says so once, lightly; later episodes never mention it.
+
+**Where:** Part 1, Segment 3, the moment the three buddies pop in for the rules (before Heart's "You against the Buddies!").
+About 6 s; take it back from the Part 1 cut list (section 6) if the part runs over 5:20.
+
+| Who | Exact words | On screen |
+|---|---|---|
+| **Momo** | "Did you notice? We have our colours now! The creator finally had the budget to paint us." | Momo hops forward and does a little twirl to show off her coral fur; Pip cheers. |
+| **Basil** | "Teal really suits me. I think I look very handsome today." | Basil strikes a proud pose (arms crossed, chin up); Pip and Momo giggle. A soft sparkle sound on each buddy. |
+
+The joke is said once and moves on: no card, no key word, no pause for the class.
+**Holds:** drawing EP14 waits for all three coloured sitting sets (4 each: mouth closed, half, wide, eyes closed) and the
+coloured poses EP14 uses (cheer, pointing, surprised, thinking, waving, oops, arms crossed). The Opus pass before drawing
+records these two lines with the fun-fact lines and retimes both parts.
