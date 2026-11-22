@@ -187,6 +187,11 @@ EP14 on every script is written this way, by Opus:
     "Say it with me!" moments, explains things he gets right, cracks the jokes, and reacts on screen (his bold guesses are right
     about half the time).
   - They are good sports, and nobody is ever made to feel silly.
+- **Talk like people, in full sentences (teacher, 2026-11-22).** Heart and the buddies must sound more human-like. Avoid 2–3 word
+  fragments such as "No water." or "Not living." Say the whole thought as a natural sentence with its reason, e.g. "The robot does
+  not drink any water, so it is a non-living thing." Short exclamations are fine as reactions ("Wow!", "Oh no!"), but every fact,
+  clue or verdict is spoken as a full sentence that says what we saw and why it matters. On-screen tags and verdict labels may stay
+  short; the spoken line beside them is a sentence.
 - **Art:**
   - The buddies are the teacher's own paintings, animated as cut-out sprites: `characters/sprites/` and `characters/sprites/poses/`.
   - No 3D. No code-drawn redraws of the buddies.

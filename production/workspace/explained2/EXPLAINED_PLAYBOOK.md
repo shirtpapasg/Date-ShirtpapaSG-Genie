@@ -175,6 +175,9 @@ key light, nothing touching the frame edge by accident, no text over a face or p
   into parts rather than trim teaching.
 
 ### 3.8 Words
+- **Full, human sentences (teacher, 22 Nov).** Heart and the buddies never speak in 2–3 word fragments ("No water.", "Not
+  living."). Each fact, clue or verdict is a natural sentence with its reason: "The robot does not drink any water, so it is a
+  non-living thing." Short reactions ("Wow!") are fine; on-screen tags may stay short.
 - Exam-exact: every definition and key word is the textbook's wording (from `P3-definitions.md`). Every non-textbook sentence goes on
   a list for the teacher.
 - Nothing may teach a wrong idea; wrong ideas are only a buddy's guess, corrected within seconds by evidence.
@@ -257,6 +260,7 @@ New Singapore names get a test clip for the teacher before use.
 - [ ] Each key idea has a look-closer that shows the WHY from the child's seat, ends on a verdict, and links to the child's life.
 - [ ] The buddies are cute in every frame, react to everything, and Basil has the most lines.
 - [ ] Every scene is a real place with life in it; nothing floats; no prop hides behind a disc; no orphan labels; nothing cut off.
+- [ ] Every spoken fact, clue and verdict is a full, natural sentence (no 2–3 word fragments).
 - [ ] Book wording exact on cards and key words; no wrong idea said by Heart; the non-textbook list is ready.
 - [ ] Hidden animal named at the start and revealed; goal cards and Mark Sentences read by buddies with "Say it with me!" + 0.8 s.
 - [ ] Each part ≤ about 5:15; -16 LUFS; `.srt` with no overlaps; thumbnails readable at 320 px.
