@@ -12,6 +12,7 @@ const L1 = "j401";
 // the scores (script section 3): Round 1 1 : 1, Showdown 3 : 1
 SCORE.push([W("j507", "one", 2) - .1, 1, 1]);
 SCORE.push([W("j1006", "two") - .1, 3, 1]);
+SHELF_WIN.push([SCN.r1.t0, SCN.r1.t1], [SCN.show.t0, SCN.show.t1]);   // v3: the shelf steps aside for the countdowns
 const FOOT = "P3 · Diversity of Materials · Choosing materials";
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 
@@ -19,7 +20,7 @@ const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) 
 const BDX = 1660, BDY = PGROUND - 12, BDS = .30, CAM0 = [1, 960, 540], CAMC = [1.2, 760, 720], CREAM = "#FFF6D8";
 const brd = (t, o, sc = BDS, x = BDX, y = BDY) => TF(x, y, sc, matchBoard(t, o));
 const buds = (t, o = {}) => sPip(t, o.pip) + sBasil(t, o.basil) + sMomo(t, o.momo);
-const V = (t, o = {}, cam) => VP(t, { ...o, items: (o.board === undefined ? "" : brd(t, o.board)) + (o.items || "") }, cam);
+const V = (t, o = {}, cam) => VP(t, { ...o, items: (o.items || "") }, cam);   // v3: no small board in the wide shots
 const BOOTBAGS = TF(-316, -96, .5, shopBag()) + TF(-286, -92, .5, shopBag("#FF8FB1"));
 
 /* 1 · "Last time...": three calm pictures from Part 1, one at a time, each >= 2.5 s, centred and large, a gentle push-in, one label each.
@@ -31,7 +32,10 @@ SC.lasttime = (t, s) => { const L = "j101", tb = [s.t0, W(L, "the", 1) - .2, W(L
       + (i === 2 ? qMark(t, tb[2] + .3, 790, 330, 56) : "") + (i === 0 ? TF(1010, 330, 1, propChip("STRONG", 40)) : "") + TF(960, 960, spring(t, tb[i] + .3, .4), tpill(0, 0, labs[i], 46, "#fff", P.ink, { w: 700 }))) + HUD(t); };
 
 /* 2 · the new place (the car park beside the HDB block), the game and the hidden squirrel; 3 · goals (Pip reads) */
-const trolBag = TF(210, PGROUND + 30 - 96, .8, shopBag("#FF8FB1"));
+const trolBag = TF(TRPX, PGROUND + 30 - 92, .76, shopBag("#FF8FB1"));
+// v3: Part 2's set layout: Pip on the left, Basil and Momo on the right (the folding table and the bottles between them); the board MATCH THE
+// JOB is not set dressing in the wide car-park shots any more (it was behind the discs): it stands at its home in the answer scene and the board scenes
+Object.assign(BUDL, { pip: [120, 1064, 225, false], basil: [1560, 1058, 205, true], momo: [1790, 1064, 225, true] });
 SC.place = (t, s) => V(t, { car: { boot: 1, bags: BOOTBAGS }, board: {}, items: trolBag }, [1.03 - .03 * eio((t - s.t0) / 2), 960, 540]) + buds(t)
   + TF(960, 1010, spring(t, s.t0 + .2, .45), tpill(0, 0, "The car park of an HDB block, Singapore", 40, P.ink, "#fff", { w: 700 })) + carRules(t, s.t0 + .3) + HUD(t);
 // teacher, 22 Nov: no cut to the purple stage: the car park stays, the camera pushes straight in on the squirrel on its branch
@@ -49,32 +53,34 @@ SC.r1 = (t, s) => lockN(t, { cards: ["Plastic", "Glass", "Metal"], clues: [["mus
 
 /* 5 · [LOOK CLOSER] three bottles, one of each material: the tick table (WATERPROOF, SEE THE WATER, DOES NOT BREAK EASILY); the book's strip */
 const CAMB = [1.25, 1250, 700];
-SC.lcbottles = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1020, fy: 720, bgc: "#EAF6FF", art: (tt) => bottleArt(tt, s), set: (tt) => V(tt, { car: { boot: 1, bags: BOOTBAGS }, board: {}, sq: false, items: trolBag }, CAMB), verdict: VSTYLE("FOR SCHOOL: THE PLASTIC BOTTLE", 0), tv: MK("v_bottle"),
+SC.lcbottles = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 1020, fy: 720, bgc: "#EAF6FF", art: (tt) => bottleArt(tt, s), jolt: [MK("land")], fxs: (tt) => impactFX(tt, MK("land"), 1330, 560, "BONK!", { s: .62 }),
+  peek: { who: "momo", side: "r", h: 410, dy: .52, dx: 120, ax: -40, as: .95, ev: [[MK("dry") - .3, "back"], [MK("see1") - .1, "surprised"], [MK("see3") + .6, "thinking"], [MK("land") - .5, "oops"], [MK("land") + .03, "surprised"], [MK("tick3") + .2, "cheer"], [MK("noglass") - .1, "sit"], [MK("v_bottle") + .1, "cheer"]] }, set: (tt) => V(tt, { car: { boot: 1, bags: BOOTBAGS }, board: {}, sq: false, items: trolBag }, CAMB), verdict: VSTYLE("FOR SCHOOL: THE PLASTIC BOTTLE", 0), tv: MK("v_bottle"),
   over: (tt) => lcStrip(tt, "j506", "Glass is not as strong as plastic or metal.", { keys: ["not", "as", "strong"] }) });
 /* the answer is one: plastic; Momo's correction; the third row fills on the board (row3) */
 SC.bottleans = (t, s) => { const L = "j507", tA = W(L, "one") - .1, tOne = W(L, "one", 2) - .1, hm = HAS("j508");
   return VP(t, { dim: 1, car: { boot: 1, bags: BOOTBAGS }, items: trolBag })
-    + ["Plastic", "Glass", "Metal"].map((c, i) => TF(700 + i * 290, 400, .5 * spring(t, s.t0 + .1 + i * .08, .4), ansCard(i + 1, c, { w: 430, h: 290, size: 58, lit: i === 0 && t >= tA ? spring(t, tA, .45) : 0 }))).join("")
-    + coin(t, tOne, 1680, 380, "+1", "if you showed one finger") + brd(t, { row: t >= MK("row3") ? 2 : -1 }, .56, 1230, 1050)
-    + buddy("momo", 300, 1060, 290, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [hm ? LT("j508") - .12 : tA + 1, "sit"]], jump: [[hm ? LE("j508") + .1 : tA + 1.2, 20]] })
-    + (hm ? say("j508", 360, 600, t, { size: 40, tail: -60, maxW: 480 }) : (t >= tA + .8 ? TF(420, 600, spring(t, tA + .8, .4), tpill(0, 0, "Strong, but we cannot see the water", 36, "#fff", P.ink, { w: 700 })) : "")) + carRules(t) + HUD(t); };
+    + ["Plastic", "Glass", "Metal"].map((c, i) => TF(720 + i * 330, 400, .9 * spring(t, s.t0 + .1 + i * .08, .4), choiceCard3(i + 1, c, TF(0, 108, 1.0, bottleSvg(BKINDS[i], { id: "ba" + i })), { w: 320, h: 330, lit: i === 0 && t >= tA ? spring(t, tA, .45) : 0, id: "ba", tag: TF(0, 196, 1, jobTag(t, i === 0 ? 0 : 1, 22, i === 0 ? "FOR SCHOOL" : i === 1 ? "BREAKS EASILY" : "CANNOT SEE IN")) }))).join("")
+    + coin(t, tOne, 1740, 360, "+1", "if you showed one finger") + brd(t, { row: t >= MK("row3") ? 2 : -1 }, .56, 1230, 1050)
+    + buddy("momo", 230, 1066, 380, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "surprised"], [hm ? LT("j508") - .12 : tA + 1, "sit"]], jump: [[hm ? LE("j508") + .1 : tA + 1.2, 20]] })
+    + (hm ? say("j508", 420, 560, t, { size: 42, tail: -100, maxW: 480 }) : (t >= tA + .8 ? TF(420, 600, spring(t, tA + .8, .4), tpill(0, 0, "Strong, but we cannot see the water", 36, "#fff", P.ink, { w: 700 })) : "")) + carRules(t) + HUD(t); };
 
 /* 6 · Mark Sentence 1 (Basil): 3.26; USE pops right after "use" (lib.js o.at) */
 SC.mark1 = (t, s) => markScene(t, s, { id: "j602", sayId: "j601", who: "basil", n: "1 of 2", text: "An object can be made from different materials. The choice of materials depends on the use of the object.", keys: ["different", "materials.", "depends", "on", "use"], size: 62, y: 250, footer: FOOT,
-  extra: TF(1250, 1002, .27 * spring(t, s.t0 + .4, .5), bottlePic()) });
+  extra: TF(1280, 990, .42 * spring(t, s.t0 + .4, .5), bottlePic()) });
 
 /* 7 · the shopping goes into the car (bagin2, bootshut); [LOOK CLOSER] one car, part by part */
-SC.boot = (t, s) => { const tI = MK("bagin2"), tS = MK("bootshut"), u = eio((t - (tI - .4)) / .4), bx = lerp(210, CARX - 300, u), by = lerp(PGROUND - 66, PGROUND - 96, u) - 130 * Math.sin(Math.PI * u), boot = 1 - eio((t - (tS - .35)) / .35);
+SC.boot = (t, s) => { const tI = MK("bagin2"), tS = MK("bootshut"), u = eio((t - (tI - .4)) / .4), bx = lerp(TRPX, CARX - 300, u), by = lerp(PGROUND - 66, PGROUND - 96, u) - 130 * Math.sin(Math.PI * u), boot = 1 - eio((t - (tS - .35)) / .35);
   const cam = camL(CAM0, CAMC, eio((t - (LT("j701") - .2)) / 1.0));
   return V(t, { car: { boot, bags: BOOTBAGS + (t >= tI ? TF(-300, -90, .5, shopBag("#FF8FB1")) : "") }, board: {}, items: (t < tI ? TF(bx, by, .8, shopBag("#FF8FB1")) + (t >= tI - .5 ? aHand(bx, by - 96, 90, .8) : "") : "") + (t >= tS - .5 && t < tS + .4 ? aHand(CARX - 345 - 40 * boot, PGROUND - 250 - 190 * boot, 90, .6) : "") }, cam) + buds(t) + carRules(t) + HUD(t); };
-SC.lccar = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 930, fy: 700, bgc: "#DDF1FF", art: carArt, set: (tt) => V(tt, { board: {}, sq: false }, CAMC), verdict: VSTYLE("ONE CAR · FOUR MATERIALS", 0), tv: MK("v_car") });
+SC.lccar = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 930, fy: 700, bgc: "#DDF1FF", art: carArt, jolt: [MK("knock"), MK("knock") + .25], fxs: (tt) => impactFX(tt, MK("palm"), 820, 560, "PUSH!", { s: .6, flash: false }) + impactFX(tt, MK("knock"), 920, 660, "KNOCK!", { s: .6, d: .5, flash: false }) + impactFX(tt, MK("knock") + .25, 980, 600, "KNOCK!", { s: .6, d: .6 }),
+  peek: { who: "basil", side: (tt) => tt < MK("seats") ? "r" : tt < MK("screen") ? "r" : tt < MK("body") ? "r" : "r", h: 420, dy: .5, dx: 150, ax: -40, as: .96, ev: [[MK("palm") - .1, "surprised"], [MK("palm") + 1.2, "sit"], [MK("press") + .1, "surprised"], [MK("press") + 1.4, "cheer"], [MK("pour") + .2, "surprised"], [MK("pour") + 1.8, "sit"], [MK("knock") + .02, "oops"], [MK("knock") + 1.3, "sit"], [MK("allfour") + .4, "cheer"]] }, set: (tt) => V(tt, { board: {}, sq: false }, CAMC), verdict: VSTYLE("ONE CAR · FOUR MATERIALS", 0), tv: MK("v_car") });
 
 /* 8 · Mark Sentence 2 (Momo): 3.27, the tag "function = the job of a part" for the whole card; Heart's plain re-say (j803): each part pulses (p1..p4) */
 SC.mark2 = (t, s) => { const parts = [["tyres", "STRONG"], ["seats", "FLEXIBLE"], ["windscreen", "WATERPROOF"], ["body", "STRONG"]], g = parts.map((_, i) => pulse(t, MK("p" + (i + 1)), .05, .9));
   return markScene(t, s, { id: "j802", sayId: "j801", who: "momo", n: "2 of 2", text: "The materials are selected for the different functions of the parts based on their physical properties.", keys: ["different", "functions", "physical", "properties."], size: 62, y: 230, footer: FOOT,
     extra: (t >= s.t0 + .6 ? TF(1150, 790, spring(t, s.t0 + .6, .4), tpill(0, 0, "function = the job of a part", 34, "#FFF8EA", P.ink, { w: 700 })) : "")
-      + TF(880, 1062, .52 * spring(t, s.t0 + .4, .5), carSide({ lit: g, dim: Math.max(...g) * .5 }))
-      + parts.map(([p, c], i) => { const x = 1200 + (i % 2) * 380, y = 900 + (i >> 1) * 96; return TF(x, y, 1 + .2 * g[i], tpill(0, 0, p, 30, g[i] > .1 ? P.sun : "#fff", P.ink, { w: 700 })) + TF(x + 30, y + 42, 1 + .2 * g[i], propChip(c, 20)); }).join("") }); };
+      + TF(1060, 1050, .62 * spring(t, s.t0 + .4, .5), carSide({ pc: PARTC, lit: g.map((v) => Math.max(v, .35)), dim: Math.max(...g) * .4 }))   /* v3: each part colour-coded and joined to its label and chip */
+      + parts.map(([p, c], i) => { const x = [830, 1560, 1500, 680][i], y = [985, 985, 822, 830][i], px = 1060 + CARPT[i][0] * .62, py = 1050 + CARPT[i][1] * .62; return OP(spring(t, s.t0 + .6 + i * .1, .4) > .5 ? 1 : 0, `<g transform="translate(${x} ${y}) scale(${n2(1 + .2 * g[i])}) translate(${-x} ${-y})">` + partTag(t, s.t0 + .6 + i * .1, x, y, p, c, px, py, PARTC[i], 30, 22) + `</g>`); }).join("") }); };
 
 /* 9 · BE A DROP OF WATER: the glide up to the spout of the watering can, held by an adult's hand above the windscreen (the journey is SC.shrink) */
 const CANP = [CARX + 340, PGROUND - 340], SPOUT = [CANP[0] - 138, CANP[1] - 94];
@@ -98,13 +104,20 @@ function momoNotes(t, o = {}) { const lit = o.lit || [0, 0, 0]; let s = "";
     + T(-560, -690, "Momo’s notes", 48, P.momo || P.coral, { a: "start" }) + T(540, -690, "Why this material?", 44, P.ink, { a: "end" }) + s; }
 const noteLit = (t) => { const L = "j1001", ws = ["one", "two", "three"].map((w) => TL.lines[L].words.some((x) => norm(x.w) === w) ? W(L, w) : 1e9), r0 = MK("ring0_show");
   return [0, 1, 2].map((i) => { const a = ws[i], b = i < 2 ? ws[i + 1] : LE(L); return t >= a - .1 && t < Math.min(b, LE(L) + .2) ? 1 : t >= r0 && t < MK("bell_show") ? .45 : 0; }); };
-SC.show = (t, s) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 6), tS = LT("j1003") - .08, R = [1640, 330];
-  const picks = [["basil", "j1004", "2", 960], ["pip", "j1005", "2", 1320]];
-  return VP(t, { dim: 1, car: false, table: false, trolley: false }) + TF(760, 900, .88, momoNotes(t, { lit: noteLit(t) }))
-    + (t >= LT("j1002") ? TF(R[0], R[1], spring(t, LT("j1002"), .4), `<g transform="scale(.6)">${ringTimer(0, 0, t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 6 : t < bell ? rs.secs : 0, t, { tick: rs.tick, shut: pulse(t, bell, .01, .6), inner: TF(0, 0, .85, `<g filter="url(#dropS)">${countHand(3)}</g>`) })}</g>` + youPill(-130, -140, .9)) : "")
-    + buddy("momo", 210, 1060, 240, t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT("j1001") - .12, "sit"], [LE("j1001") + .2, "pointing"], [LT("j1004") - .1, "oops"]] }) + (t < LE("j1001") + .5 ? say("j1001", 700, 840, t, { size: 34, tail: -260, maxW: 760 }) : "")
-    + picks.map(([w, id, n, x]) => buddy(w, x + 300, 1060, 230, t, { aura: true, in: r0 - .3, poses: [[r0 - .3, w === "basil" ? "arms_crossed" : "thinking"], [LT(id) - .12, "sit"], [LE(id) + .1, w === "basil" ? "cheer" : "pointing"]], flip: true }) + (t > r0 ? pickNum(w, x + 300 - 150, 900, t, LT(id) - .1, n) : "") + say(id, x + 100, 790, t, { size: 34, maxW: 520, tail: 140 })).join("")
-    + stamp(t, tS, 960, 460) + bellIcon(t, r0) + HUD(t); };
+// v3: the Showdown takes the stage: the car park clears to the blue starry stage; Momo's notes big on the left (the question), the ring big on
+// the right with YOUR counting hand under it; Momo big in front, fidgeting and hand-to-head through the countdown; Basil and Pip pop in only
+// after the bell, each flipping a pick and swapping pose as they answer.
+SC.show = (t, s) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 6), tS = LT("j1003") - .08, R = [1530, 420], RR = 200, inT = t >= r0 && t < bell, b = Math.floor(t - r0), tb0 = LT("j1004") - .6, zb = ss(tb0 - .2, tb0 + .4, t);
+  const picks = [["basil", "j1004", "2", 1180], ["pip", "j1005", "2", 1560]], st = 1;
+  let v = bg("stage") + TF(lerp(700, 600, zb), lerp(930, 820, zb), lerp(.86, .7, zb), momoNotes(t, { lit: noteLit(t) }));
+  if (t >= LT("j1002")) { const rk = spring(t, LT("j1002"), .4) * (1 - zb * .35);
+    v += TF(R[0], R[1], rk * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">` + ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 6 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
+      inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="url(#mSky)"/>` + TF(R[0], R[1] + 20, .95, `<g filter="url(#dropS)">${countHand(inT ? (b % 3) + 1 : t >= bell ? 2 : 3)}</g>`) }) + `</g>`)
+      + OP(1 - zb, youPill(R[0] - 240, R[1] - 170, 1.1) + T(R[0], R[1] + RR + 110, "line 1, 2 or 3?", 46, "#fff", { w: 600 })); }
+  v += buddy("momo", lerp(200, 170, zb), 1066, lerp(380, 320, zb), t, { aura: true, in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT("j1001") - .12, "sit"], [LE("j1001") + .2, "pointing"], [r0 - .1, "thinking"], [bell - 1.5, "oops"], [bell, "surprised"], [LT("j1004") + .3, "oops"]], rock: inT ? 2.2 : 0 })
+    + (t < LE("j1001") + .5 ? say("j1001", 760, 200, t, { size: 34, tail: -260, maxW: 820, down: true }) : "")
+    + picks.map(([w, id, n, x]) => t < tb0 - .1 ? "" : buddy(w, x, 1066, 300, t, { aura: true, in: tb0 - .1 + (w === "pip" ? .12 : 0), poses: [[tb0 - .1, w === "basil" ? "arms_crossed" : "thinking"], [LT(id) - .12, "sit"], [LE(id) + .1, w === "basil" ? "cheer" : "pointing"]], flip: true }) + pickNum(w, x - 190, 940, t, LT(id) - .1, n) + say(id, x - 60, 690, t, { size: 38, maxW: 560, tail: 60 })).join("")
+    + stamp(t, tS, 1300, 420) + bellIcon(t, r0) + HUD(t); return v; };
 /* the fix: line 2 rubbed out and rewritten in green (rub), the tip card (tip) with its two plain lines and small picture, +2 */
 const rainPic = (t) => `<rect x="-120" y="-80" width="240" height="160" rx="18" fill="#DDF1FF" stroke="#7FB6D6" stroke-width="5"/><path d="M-90 60 L-60 -50 H60 L90 60z" fill="#EAF8FF" stroke="#1F5FA0" stroke-width="6" stroke-linejoin="round"/><rect x="-34" y="-20" width="26" height="20" rx="7" fill="url(#wWeave)"/><rect x="10" y="-20" width="26" height="20" rx="7" fill="url(#wWeave)"/><path d="M-40 4 H-4 V50 H-44z M4 4 H40 L44 50 H4z" fill="url(#wWeave)"/>${[0, 1, 2, 3, 4].map((i) => { const v = ((t * .9 + i * .23) % 1); return `<path d="M${-80 + i * 40} ${n2(-76 + 50 * v)} l-4 14" stroke="#4DB8F0" stroke-width="5" stroke-linecap="round" opacity="${n2(1 - v * .5)}"/>`; }).join("")}`;
 SC.fix = (t, s) => { const rb = MK("rub"), rub = ss(rb, rb + .5, t), fix = ss(rb + .4, rb + 1.2, t), tip = MK("tip"), [tx, td] = slideX(t, tip, .6, 2500, 1500, 1040);
@@ -120,7 +133,7 @@ SC.board = (t, s) => { const L = "j1008";
 
 /* 11 · the chant: call and response (common.js chantScene); the board MATCH THE JOB stands behind the buddies, centred, its PURPOSE /
    PROPERTY / MATERIAL columns flashing on their lines; the green tag SUITABLE by the MATERIAL column on line 3 */
-SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 54, x: 480, y0: 185, dy: 92, xs: [100, 305, 510], bh: 165, tx: 1100, ty: 300, ts: .8, sayX: 330, sayY: 750, board: (tt, flash) => TF(1265, 1066, .88, matchBoard(tt, { flash, good: flash[2] > .05 ? Math.min(1, flash[2] * 3) : 0 })) });
+SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 54, x: 480, y0: 185, dy: 92, xs: [150, 470, 1790], bh: 250, tx: 1100, ty: 300, ts: .8, sayX: 330, sayY: 690, board: (tt, flash) => TF(1180, 1066, .76, matchBoard(tt, { flash, good: flash[2] > .05 ? Math.min(1, flash[2] * 3) : 0 })) });   // v3: the buddies 1.5x and spread (two left, Momo right), the board between them
 
 /* 12 · score hand, the squirrel (lizReveal in common.js): it runs along the branch, sits up and flicks its tail */
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
@@ -129,17 +142,17 @@ SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1, u = clamp((t - (s.
 
 /* 13 · the dare for Episode 13: the SAME school bag three times, its strap torn off at one end, each with a new strap lying beside it
    (PIC.bagFabric / bagMetal / bagWood: EP13 opens with these same boards and cards) */
-const DRX = [560, 960, 1360];
+const DRX = [640, 1060, 1480];
 SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "which") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, hb = HAS("j1302");
-  const boards = NEXT_CARDS.map((m, i) => { const t0 = s.t0 + .3 + i * .25; if (t < t0) return ""; const [x, d] = slideX(t, t0, .7, 2500, DRX[i], 660); return d + picBoard("bag" + m, x, 640, 1, { sc: .8, id: "dr" + i }); }).join("");
+  const boards = NEXT_CARDS.map((m, i) => { const t0 = s.t0 + .3 + i * .25; if (t < t0) return ""; const [x, d] = slideX(t, t0, .7, 2500, DRX[i], 660); return d + picBoard("bag" + m, x, 640, 1, { sc: 1.0, id: "dr" + i }); }).join("");
   // teacher, 22 Nov: no jump cut out of the squirrel's reveal: the camera pulls back from the branch to the whole car park while it dims
   const pu = eio((t - s.t0) / .8), back = pu >= 1 ? "" : OP(1 - ss(.55, 1, pu), `<g transform="translate(960 540) scale(${n2(lerp(1.9, 1, pu))}) translate(${n2(-lerp(SQ[0] - 6, 960, pu))} ${n2(-lerp(SQ[1] - 36 + 190, 540, pu))})">${V(t, { board: {}, sq: { up: 1 - pu } })}</g>`);
   return VP(t, { dim: 1, car: false, table: false, trolley: false }) + back + boards
     + TF(960, 150, spring(t, s.t0 + .2, .45), tpill(0, 0, "NEXT · Design a school bag!", 50, P.ink, P.sun, { w: 700 }))
-    + NEXT_CARDS.map((txt, i) => TF(DRX[i], 800, .46 * spring(t, tc[i], .45), ansCard(i + 1, txt, { w: 430, h: 290, size: 58, pulse: Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0) }))).join("")
-    + qMark(t, tQ, 960, 262, 44) + (t >= tL ? TF(1250, 950, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
-    + buddy("basil", 200, 1060, 230, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [LT("j1302") - .12, "sit"], [LE("j1302") + .1, "cheer"]] : [[s.t0, "sit"], [tL, "cheer"]], nohop: true }) + (hb ? say("j1302", 520, 950, t, { size: 38, tail: -160, maxW: 480 }) : "") + carRules(t) + HUD(t); };
+    + NEXT_CARDS.map((txt, i) => numBadge(t, tc[i], DRX[i] - 150, 500, i + 1, 1.05 + .25 * Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0))).join("")   /* v3: ONE set of choices: the badge on each board */
+    + qMark(t, tQ, 960, 262, 44) + (t >= tL ? TF(1060, 960, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 48, P.sun, P.ink, { w: 700 })) : "")
+    + buddy("basil", 215, 1066, 340, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [LT("j1302") - .12, "sit"], [LE("j1302") + .1, "cheer"]] : [[s.t0, "sit"], [tL, "cheer"]], nohop: true }) + (hb ? say("j1302", 560, 900, t, { size: 40, tail: -200, maxW: 520 }) : "") + carRules(t) + HUD(t); };
 
 /* 15 · "Now you know!": the board MATCH THE JOB, complete and ticked, centred in the free space between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(880, 1040, .9, matchBoard(t)), { bx: [110, 1820, 1625], bh: 200, hx: 110, sayY: 330 });
+SC.nyk = (t, s) => nykScene(t, s, TF(900, 1040, .78, matchBoard(t)), { bx: [165, 1800, 1590], bh: 280, hx: 165, sayY: 330 });
 })(); }

@@ -239,7 +239,12 @@ const schoolBag = () => `<ellipse cx="0" cy="6" rx="210" ry="18" fill="${P.ink}"
 /* ---------- shared by both parts' scenes ---------- */
 const BACKY = 762, BRD = [1480, 1066, .4], BRDT = [1500, 1066, .56], CAMW = [1.04, 960, 600];
 const gx = (cam, x) => camX(cam, x), gy = (cam, y) => camY(cam, y);
-const sPip = (t, o = {}) => buddy("pip", 100, 1064, 150, t, { aura: true, tag: false, ...o }), sBasil = (t, o = {}) => buddy("basil", 262, 1064, 136, t, { aura: true, tag: false, ...o }), sMomo = (t, o = {}) => buddy("momo", 1826, 1064, 150, t, { aura: true, tag: false, flip: true, ...o });
+// v3 (teacher, 22 Nov: buddies 1.5x bigger, spread across the frame, never bunched in a corner): the set buddies are 1.5x their v2 size
+// (h 225 / 205 / 225); BUDL holds each part's layout (p1.js / p2.js set it); o.at = [x, y, h] overrides it for one scene; the one who
+// speaks grows a little (x1.12) while speaking, and every buddy shows its name tag while it talks.
+const BUDL = { pip: [150, 1064, 225, false], basil: [1530, 1056, 205, true], momo: [1775, 1064, 225, true] };
+const sBud = (who, t, o = {}) => { const [x, y, h, fl] = o.at || BUDL[who], sp = speaking(who, t), g = sp ? 1 + .12 * spring(t, sp.t - .2, .4) * (1 - ramp(t, sp.end + .1, .3)) : 1; return buddy(who, o.at ? o.at[0] : x, o.at ? o.at[1] : y, (o.at ? o.at[2] : h) * g, t, { aura: true, flip: o.at && o.at[3] !== undefined ? o.at[3] : fl, ...o }); };
+const sPip = (t, o = {}) => sBud("pip", t, o), sBasil = (t, o = {}) => sBud("basil", t, o), sMomo = (t, o = {}) => sBud("momo", t, o);
 // one plain label line that touches the part (no arrowhead), and a label with its line
 const pline = (x1, y1, x2, y2, a = 1, col = "#fff") => a < .02 ? "" : OP(Math.min(1, a), `<path d="M${n2(x1)} ${n2(y1)} L${n2(x2)} ${n2(y2)}" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" opacity=".35"/><path d="M${n2(x1)} ${n2(y1)} L${n2(x2)} ${n2(y2)}" stroke="${col}" stroke-width="5" stroke-linecap="round"/><circle cx="${n2(x2)}" cy="${n2(y2)}" r="8" fill="${col}"/>`);
 const ltag = (t, t0, x, y, txt, px, py, o = {}) => t < t0 ? "" : pline(x, y, px, py, ramp(t, t0, .2)) + TF(x, y, spring(t, t0, .4), tpill(0, 0, txt, o.size || 40, o.fill || "#fff", o.ink || P.ink, { w: 700 }));

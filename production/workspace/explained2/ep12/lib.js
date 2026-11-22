@@ -135,7 +135,7 @@ function buddy(who, x, y, h, t, o = {}) {
    buddy's colour, reacting (poses swap with the usual pop). */
 const jolt = (t, t0, a = 26) => { const u = t - t0; if (u < 0 || u > .5) return [0, 0]; const k = Math.exp(-u * 8); return [n2(a * k * Math.sin(u * 72)), n2(a * .7 * k * Math.cos(u * 57))]; };
 const JOLT = (t, times, inner, a) => { let dx = 0, dy = 0; for (const t0 of times) { const [x, y] = jolt(t, t0, a); dx += x; dy += y; } return dx || dy ? `<g transform="translate(${dx} ${dy})">${inner}</g>` : inner; };
-function impactFX(t, t0, x, y, word = "BONK!", o = {}) { const u = t - t0, d = o.d || .95; if (u < -.02 || u > d) return ""; const sc = o.s || 1, k = lerp(.4, 1, eo(u / .1)) * (1 + .08 * wob(t, t0 + .1, .35)), fade = 1 - ss(d - .3, d, t);
+function impactFX(t, t0, x, y, word = "BONK!", o = {}) { const u = t - t0, d = o.d || .95; if (u < -.02 || u > d) return ""; const sc = o.s || 1, k = lerp(.4, 1, eo(u / .1)) * (1 + .08 * wob(t, t0 + .1, .35)), fade = 1 - ss(t0 + d - .3, t0 + d, t);
   let pts = ""; for (let i = 0; i < 24; i++) { const r = i % 2 ? 92 : 170 + 26 * hash(i, 5), an = i * Math.PI / 12 + .1; pts += `${n2(Math.cos(an) * r)},${n2(Math.sin(an) * r * .78)} `; }
   let lines = ""; for (let i = 0; i < 10; i++) { const an = i * Math.PI / 5 + .3, r0 = 200 + 160 * eo(u / .35), r1 = r0 + 90 * (1 - eo(u / .5)); lines += `<path d="M${n2(Math.cos(an) * r0)} ${n2(Math.sin(an) * r0 * .78)} L${n2(Math.cos(an) * r1)} ${n2(Math.sin(an) * r1 * .78)}" stroke="#fff" stroke-width="12" stroke-linecap="round"/>`; }
   const flash = o.flash === false ? "" : `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.55 * pulse(t, t0 + .01, .01, .22))}"/>`;
@@ -283,8 +283,10 @@ const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcar
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
 const KWLINE = PART === 1 ? ["hk_purpose", "hk_physical_properties"] : ["hk_use", "hk_parts", "hk_suitable"];
+// v3: the shelf also slides aside during every countdown and lock-in (SHELF_WIN: [t0, t1] windows; nothing may overlap it)
+const SHELF_WIN = []; const shelfOff = (t) => { let k = 0; for (const [a, b] of SHELF_WIN) k = Math.max(k, Math.min(eo((t - a) / .3), 1 - eo((t - b) / .35))); return clamp(k); };
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
-  const hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
+  const hide = Math.max(shelfOff(t), hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0)); let out = "", top = "";
   const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;
   for (const k of KW) { if (t < k.t) continue; const size = 34, ww = tw(k.w, size, 700, "Fredoka", size * .07) + size * 1.3, sx = 1826 - ww / 2 + hide * (ww + 160), sy = 136 + k.i * 57, tf = k.tl - .5;
     if (k.big && t < tf) { // the new term, large, held KWHOLD (2.0 s)

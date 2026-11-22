@@ -27,19 +27,19 @@ SC.count = (t, s) => { const L = "h501", ws = [["Are you ready?", LT(L), 150, "#
   const jumps = ws.slice(1).map((w) => [w[1] - .18, 60]);
   return bg("stage") + (cur ? `<circle cx="960" cy="470" r="${n2(ringR)}" fill="none" stroke="${col}" stroke-width="${n2(22 * (1 - eo((t - t0) / .6)))}" opacity=".8"/><circle cx="960" cy="470" r="330" fill="${P.night}" opacity=".5"/>` : "")
     + `<g transform="translate(960 ${cur ? 470 : 430}) scale(${n2(k)})"><g transform="translate(0 ${size * .05})" opacity=".8">${T(0, size * .35, txt, size, P.ink, { ls: cur ? 0 : 4 })}</g>${T(0, size * .35 - 6, txt, size, col, { ls: cur ? 0 : 4 })}</g>`
-    + buddy("pip", 300, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("basil", 960, 1070, 230, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + buddy("momo", 1620, 1050, 300, t, { aura: true, jump: jumps, poses: [[ws[4][1] - .05, "cheer"]] }) + HUD(t); };
+    + buddy("pip", 250, 1066, 400, t, { aura: true, jump: jumps, poses: [[ws[1][1] - .1, "surprised"], [ws[3][1] - .1, "sit"], [ws[4][1] - .05, "cheer"]] }) + buddy("basil", 960, 1120, 300, t, { aura: true, jump: jumps, poses: [[ws[2][1] - .1, "arms_crossed"], [ws[4][1] - .05, "cheer"]] }) + buddy("momo", 1670, 1066, 400, t, { aura: true, flip: true, jump: jumps, poses: [[ws[1][1] - .05, "thinking"], [ws[3][1] - .1, "sit"], [ws[4][1] - .05, "cheer"]] }) + HUD(t); };
 
 /* ============ today's goals: a buddy READS the three cards aloud, word for word (teacher, 2026-11-21, SERIES_FORMAT section 11 step 3).
    The three cards drop in at the start; the title lights as "Today you'll learn" is said; each card lifts and glows while it is read.
    ids = [title line, card 1, card 2, card 3]; who = the reader (lip-sync on the sit sprites, a small hop to each card) ============ */
 function goals3(t, s, goals, ids, who = "pip") { const cols = ["gBlue", "gPurple", "gOrange"], cues = [0, 1, 2].map((i) => ids ? LT(ids[i + 1]) : s.t0 + .4 + i * 1.22), ends = [0, 1, 2].map((i) => ids ? LE(ids[i + 1]) : cues[i] + 1.1);
   const tT = ids ? LT(ids[0]) : s.t0, tl = ids ? pulse(t, tT, .05, 1.0) : 0;
-  let out = bg("stage2") + OP(ramp(t, s.t0 + .1, .3), TF(960, 190, 1 + .06 * tl, T(0, 20, "Today you’ll learn", 76, tl > .3 ? P.sun : "#fff", { w: 600 })));
+  let out = bg("stage2") + OP(ramp(t, s.t0 + .1, .3), TF(1190, 190, 1 + .06 * tl, T(0, 20, "Today you’ll learn", 76, tl > .3 ? P.sun : "#fff", { w: 600 })));
   goals.forEach(([g, ic], i) => { const tin = ids ? s.t0 + .25 + i * .14 : cues[i] - .12, k = spring(t, tin, .5); if (k < .02) return; const lit = ids ? ss(cues[i] - .12, cues[i] + .08, t) * (1 - ss(ends[i] + .1, ends[i] + .35, t)) : pulse(t, cues[i], .05, 1.3);
-    const x = 380 + i * 580, y = 570 + (1 - eo((t - tin) / .3)) * -220 - 30 * lit, ls = wrap(g, 46, 450, 700), read = ids ? (t >= ends[i] + .1 ? 1 : 0) : 0;
-    out += TF(x, y, k * (1 + .07 * lit), `<g transform="rotate(${[-2, 1.5, -1.5][i]})">${lit > .05 ? `<rect x="-270" y="-205" width="540" height="430" rx="58" fill="${P.sun}" opacity="${n2(.9 * lit)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="-255" y="-190" width="510" height="400" rx="46" fill="url(#gPaper)"/><rect x="-255" y="-190" width="510" height="150" rx="46" fill="url(#${cols[i]})"/><rect x="-255" y="-90" width="510" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -112)">${ic}</g>${ls.map((l, j) => T(0, 66 + j * 56 - (ls.length - 1) * 22, l, 46, P.ink)).join("")}${read ? TF(214, -150, spring(t, ends[i] + .1, .35), tickBadge(26)) : ""}</g>`); });
+    const x = 690 + i * 500, y = 560 + (1 - eo((t - tin) / .3)) * -220 - 30 * lit, ls = wrap(g, 46, 450, 700), read = ids ? (t >= ends[i] + .1 ? 1 : 0) : 0;
+    out += TF(x, y, k * .88 * (1 + .07 * lit), `<g transform="rotate(${[-2, 1.5, -1.5][i]})">${lit > .05 ? `<rect x="-270" y="-205" width="540" height="430" rx="58" fill="${P.sun}" opacity="${n2(.9 * lit)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="-255" y="-190" width="510" height="400" rx="46" fill="url(#gPaper)"/><rect x="-255" y="-190" width="510" height="150" rx="46" fill="url(#${cols[i]})"/><rect x="-255" y="-90" width="510" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -112)">${ic}</g>${ls.map((l, j) => T(0, 66 + j * 56 - (ls.length - 1) * 22, l, 46, P.ink)).join("")}${read ? TF(214, -150, spring(t, ends[i] + .1, .35), tickBadge(26)) : ""}</g>`); });
   const hops = ids ? cues.map((c) => [c - .2, 22]) : [];
-  return out + buddy(who, 180, 1060, 250, t, { aura: true, in: s.t0 + .2, poses: ids ? [[s.t0, "sit"], [ends[2] + .2, "cheer"]] : [[s.t0, who === "basil" ? "cheer" : "pointing"], [cues[2] + 1.0, "cheer"]], jump: hops, nohop: true }) + HUD(t); }
+  return out + buddy(who, 215, 1066, 380, t, { aura: true, in: s.t0 + .2, poses: ids ? [[s.t0, "sit"], [ends[2] + .2, "cheer"]] : [[s.t0, who === "basil" ? "cheer" : "pointing"], [cues[2] + 1.0, "cheer"]], jump: hops, nohop: true }) + HUD(t); }
 
 /* ============ the lock-in (fingers 1, 2, 3), v3 (teacher, 22 Nov: "the countdown takes the stage"; "I no longer see the animation on the
    countdown, nor the interactive pet buddies' reactions"; "one set of big numbered choice cards").
@@ -139,7 +139,7 @@ function finalScene(t, s, L, bud, tips, extra = "") { // tips: [[time, text, big
     + TF(960, 760 - 60 * hi, 1.85 * spring(t, s.t0 + .25, .5) * (1 + .1 * hi), `<g filter="url(#drop)">${countHand(nf)}</g>`) + youPill(960, 430, 1.3)
     + OP(hi, `<g stroke="${P.sun}" stroke-width="12" stroke-linecap="round">${[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => { const an = -Math.PI * (.05 + i * .1125), r1 = 300 + 60 * (1 - hi), r2 = r1 + 80; return `<path d="M${n2(960 + Math.cos(an) * r1)} ${n2(640 + Math.sin(an) * r1)} L${n2(960 + Math.cos(an) * r2)} ${n2(640 + Math.sin(an) * r2)}"/>`; }).join("")}</g>`)
     + tip + (t >= thi ? TF(1350, 480, spring(t, thi, .4), tpill(0, 0, "HIGH FIVE!", 52, P.sun, P.ink, { w: 700, ls: 4 })) : "") + extra;
-  [["pip", 230, false], ["basil", 610, false], ["momo", 1600, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1060, i === 1 ? 250 : 300, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
+  [["pip", 230, false], ["basil", 1330, true], ["momo", 1690, true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1066, i === 1 ? 330 : 390, t, { aura: true, flip: fl, poses: [[s.t0, "sit"], [thi - .15, "cheer"]], jump: [[thi + .05, 90]] }); });
   return out + logo(t); }
 
 /* ============ the key-word read-along: the shelf comes to the centre, big; Heart says each word, then it is YOUR turn ============ */
@@ -149,7 +149,7 @@ SC.kwrecap = (t, s) => { const ids = KWLINE, us = KWLINE.map((k) => "u" + k.slic
     + OP(ramp(t, LT(ids[0]) - .3, .3), T(960, 170, "KEY WORDS", 54, P.sun, { ls: 10 }));
   out += TF(330, 480, 1, youPill(0, 0, 1.3) + `<g transform="translate(0 130) scale(${n2(1 + (turn >= 0 ? .12 + .05 * Math.sin(t * 10) : 0))})" opacity="${turn >= 0 ? 1 : .35}"><g filter="url(#dropS)"><rect x="-110" y="-64" width="220" height="128" rx="50" fill="#fff"/><path d="M-30 60 L-56 108 L16 62z" fill="#fff"/></g>${[-52, 0, 52].map((x, i) => `<circle cx="${x}" cy="${n2(turn >= 0 ? -8 * Math.abs(Math.sin(t * 7 + i)) : 0)}" r="15" fill="${P.ink}"/>`).join("")}</g>`
     + (turn >= 0 ? TF(0, 300, spring(t, LT(us[turn]) - .2, .3), tpill(0, 0, "Say it!", 44, P.coral, "#fff", { w: 700 })) : ""));
-  [["pip", 1600, 520], ["basil", 1770, 790], ["momo", 1600, 1060]].forEach(([w, x, y], i) => { out += buddy(w, x, y, 200, t, { aura: true, flip: true, in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [[tw_, 40]] }); });
+  [["pip", 1560, 560], ["basil", 1790, 820], ["momo", 1560, 1066]].forEach(([w, x, y], i) => { out += buddy(w, x, y, 280, t, { aura: true, flip: true, in: s.t0 + .15 + i * .08, tag: false, poses: [[s.t0, "sit"], [tw_, "cheer"]], jump: [[tw_, 40]] }); });
   if (t >= tw_) out += TF(330, 900, spring(t, tw_, .45), `<g transform="rotate(-4)"><g filter="url(#drop)"><rect x="-230" y="-64" width="460" height="128" rx="64" fill="url(#gSun)"/></g>${T(0, 24, "Well done!", 70, P.ink)}</g>`);
   return out + HUD(t); };
 

@@ -108,16 +108,16 @@ function tankSvg(t, o = {}) { const id = "tk" + (o.id || ""), x0 = -TKW / 2;
 /* ---------- the plain family car, side view (no badge, no number plate; parked, switched off, empty). origin = the ground under its middle;
    it faces right; 720 long. o.boot 0..1 (the boot lid, at the left end, open), o.lit = [tyres, seats, windscreen, body] 0..1 (a part lit),
    o.dim 0..1 (everything not lit is dimmed), o.door 0..1 (front door open: used small) ---------- */
-function carSide(o = {}) { const lit = o.lit || [0, 0, 0, 0], dm = o.dim || 0, D = (i) => 1 - dm * (1 - lit[i]), glowC = (i, inner) => lit[i] > .02 ? OP(lit[i], `<g filter="url(#b10)" opacity=".9">${inner}</g>`) : "";
+function carSide(o = {}) { const lit = o.lit || [0, 0, 0, 0], dm = o.dim || 0, D = (i) => 1 - dm * (1 - lit[i]), gc = (i) => o.pc ? o.pc[i] : "#FFE27A", glowC = (i, inner) => lit[i] > .02 ? OP(lit[i], `<g filter="url(#b10)" opacity=".9">${inner}</g>`) : "";
   const bodyP = "M-350 -70 Q-356 -150 -330 -176 L-250 -262 Q-236 -278 -200 -278 H70 Q110 -278 150 -244 L232 -178 Q330 -168 344 -140 Q356 -110 350 -70 Q350 -52 330 -52 H-330 Q-350 -52 -350 -70z";
   const tyre = (x) => `<circle cx="${x}" cy="-56" r="58" fill="#2A2A36" stroke="#15151E" stroke-width="6"/><circle cx="${x}" cy="-56" r="44" fill="none" stroke="#4A4A5A" stroke-width="5" stroke-dasharray="7 9"/><circle cx="${x}" cy="-56" r="26" fill="#C9D1DC" stroke="#7A869E" stroke-width="5"/><circle cx="${x}" cy="-56" r="7" fill="#7A869E"/>`;
   const seat = (x) => `<rect x="${x - 26}" y="-250" width="46" height="34" rx="12" fill="url(#wSeat)" stroke="#51477A" stroke-width="4"/><path d="M${x - 34} -210 Q${x - 44} -150 ${x - 26} -150 H${x + 30} Q${x + 34} -200 ${x + 22} -214z" fill="url(#wSeat)" stroke="#51477A" stroke-width="4" stroke-linejoin="round"/>`;
   const win = "M-232 -182 L-186 -246 Q-178 -256 -160 -256 H-30 V-182z M-10 -182 V-256 H62 Q92 -256 120 -232 L180 -182z", screen = "M150 -244 L232 -178 L196 -182 L128 -240z";
-  return glowC(3, `<path d="${bodyP}" fill="#FFE27A" stroke="#FFE27A" stroke-width="26"/>`) + glowC(0, `<circle cx="-212" cy="-56" r="74" fill="#FFE27A"/><circle cx="216" cy="-56" r="74" fill="#FFE27A"/>`)
+  return glowC(3, `<path d="${bodyP}" fill="${gc(3)}" stroke="${gc(3)}" stroke-width="26"/>`) + glowC(0, `<circle cx="-212" cy="-56" r="74" fill="${gc(0)}"/><circle cx="216" cy="-56" r="74" fill="${gc(0)}"/>`)
     + OP(D(3), `<path d="${bodyP}" fill="url(#wCar)" stroke="#1F5FA0" stroke-width="7" stroke-linejoin="round"/><path d="M-330 -120 H338" stroke="#fff" stroke-width="4" opacity=".35"/><path d="M-20 -182 V-60 M-246 -182 H190" stroke="#1F5FA0" stroke-width="4" opacity=".7" fill="none"/><rect x="-6" y="-166" width="44" height="12" rx="6" fill="#D6E9FA" stroke="#1F5FA0" stroke-width="3"/><rect x="-206" y="-166" width="44" height="12" rx="6" fill="#D6E9FA" stroke="#1F5FA0" stroke-width="3"/>
       <path d="M318 -150 Q346 -146 346 -124 L322 -124z" fill="#FFF3B8" stroke="#1F5FA0" stroke-width="4"/><path d="M-348 -150 Q-338 -160 -330 -150 V-126 H-350z" fill="#FF6F61" stroke="#1F5FA0" stroke-width="4"/>`)
-    + `<path d="${win}" fill="#3B3560"/>` + OP(D(1), glowC(1, `<path d="${win}" fill="#FFE27A"/>`) + seat(-110) + seat(60)) + `<path d="${win}" fill="url(#wGlassC)" opacity=".42"/><path d="${win}" fill="none" stroke="#1F5FA0" stroke-width="6" stroke-linejoin="round"/>`
-    + OP(D(2), glowC(2, `<path d="${screen}" fill="#FFE27A" stroke="#FFE27A" stroke-width="22"/>`) + `<path d="${screen}" fill="#EAF8FF" stroke="#7FB6D6" stroke-width="6" stroke-linejoin="round"/><path d="M158 -230 L206 -190" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`)
+    + `<path d="${win}" fill="#3B3560"/>` + OP(D(1), glowC(1, `<path d="${win}" fill="${gc(1)}"/>`) + seat(-110) + seat(60)) + `<path d="${win}" fill="url(#wGlassC)" opacity=".42"/><path d="${win}" fill="none" stroke="#1F5FA0" stroke-width="6" stroke-linejoin="round"/>`
+    + OP(D(2), glowC(2, `<path d="${screen}" fill="${gc(2)}" stroke="${gc(2)}" stroke-width="22"/>`) + `<path d="${screen}" fill="#EAF8FF" stroke="#7FB6D6" stroke-width="6" stroke-linejoin="round"/><path d="M158 -230 L206 -190" stroke="#fff" stroke-width="5" stroke-linecap="round"/>`)
     + (o.boot ? OP(D(3), `<path d="M-340 -168 L-262 -250 L-262 -84 H-346z" fill="#2B2147"/><path d="M-336 -96 H-266" stroke="#51477A" stroke-width="8"/>${o.bags || ""}<g transform="translate(-250 -264) rotate(${n2(84 * o.boot)})"><path d="M0 0 L-84 84 Q-106 108 -102 190 L-88 190 L-70 96 L10 12z" fill="url(#wCar)" stroke="#1F5FA0" stroke-width="6" stroke-linejoin="round"/><path d="M-66 86 L-8 26 L-20 20 L-76 80z" fill="#EAF8FF" opacity=".8"/></g>`) : "")
     + OP(D(0), tyre(-212) + tyre(216)); }
 // where the four parts are on carSide (for label lines): tyres, seats, windscreen, body
@@ -178,7 +178,7 @@ function VW(t, o = {}, cam) { return cam3(bg(o.dim ? "walkD" : "walk") + (o.tank
 
 /* BG.park: the open-air car park beside the block, bright: marked lots, a covered linkway behind, a grass verge with a rain tree, the block
    beyond. PGROUND = where the car stands; SQ = the squirrel's place on the low branch */
-const PGROUND = 880, SQ = [1340, 442], CARX = 730, TABX = 1300;
+const PGROUND = 880, SQ = [1340, 442], CARX = 730, TABX = 1300, TRPX = 330;   // v3: the trolley a little further right, clear of Pip's bigger disc
 BG.park = () => { let win = ""; for (let r = 0; r < 7; r++) for (let c = 0; c < 11; c++) win += `<rect x="${-150 + c * 86}" y="${70 + r * 62}" width="52" height="34" rx="4" fill="${(r * 3 + c) % 5 ? "#CFE9FB" : "#FFE9A8"}" stroke="#C9B58F" stroke-width="3"/>`;
   let lots = ""; [-40, 300, 1160, 1500, 1860].forEach((x) => { lots += `<path d="M${x} 660 L${n2(960 + (x - 960) * 1.5)} 1190" stroke="#fff" stroke-width="10" opacity=".9"/>`; });
   const leaf = (x, y, r, c) => `<ellipse cx="${x}" cy="${y}" rx="${r * 1.5}" ry="${r}" fill="${c}"/>`;
@@ -195,7 +195,7 @@ BG.parkD = () => BG.park() + `<rect x="-192" y="-108" width="2304" height="1296"
 /* the car park, live: the baked set + the squirrel on the low branch (o.sq: false | { up, run, flick }) + the car (o.car: carSide's options or
    false) + the trolley beside the boot (o.trolley) + the folding table with the three bottles (o.table, o.bottles) + o.items, under a camera */
 function VP(t, o = {}, cam) { const sq = o.sq === false ? "" : OP(o.dim ? .55 : 1, TF(SQ[0] + ((o.sq || {}).run || 0), SQ[1], .6, squirrelBody(t, o.sq || {})));
-  return cam3(bg(o.dim ? "parkD" : "park") + sq + OP(o.dim ? .45 : 1, (o.trolley === false ? "" : TF(210, PGROUND + 30, .9, trolleyS(o.trolley || {})))
+  return cam3(bg(o.dim ? "parkD" : "park") + sq + OP(o.dim ? .45 : 1, (o.trolley === false ? "" : TF(TRPX, PGROUND + 30, .85, trolleyS(o.trolley || {})))
     + (o.car === false ? "" : `<ellipse cx="${CARX}" cy="${PGROUND + 2}" rx="380" ry="20" fill="${P.ink}" opacity=".22" filter="url(#b4)"/>` + TF(CARX, PGROUND, 1, carSide(o.car || {})))
     + (o.table === false ? "" : TF(TABX, PGROUND + 20, 1, foldTable(260)) + (o.bottles === false ? "" : BKINDS.map((k, i) => TF(TABX - 80 + i * 80, PGROUND - 156, .42, bottleSvg(k, { id: "pk" + i }))).join("")))) + (o.items || ""), cam); }
 

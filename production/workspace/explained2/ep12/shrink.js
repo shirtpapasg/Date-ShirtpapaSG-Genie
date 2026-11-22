@@ -8,7 +8,7 @@
 // journeys (ep05/shrink.js) and EP6's are the models: dive, youTag, feelTag, wipe in and out.
 // The generic helpers below are EP5's, kept as they were.
 const hexL = (a, b, u) => { const pa = [1, 3, 5].map((i) => parseInt(a.substr(i, 2), 16)), pb = [1, 3, 5].map((i) => parseInt(b.substr(i, 2), 16)); return "#" + pa.map((v, i) => Math.round(lerp(v, pb[i], clamp(u))).toString(16).padStart(2, "0")).join(""); };
-const youTag = (t, t0, txt) => OP(ramp(t, t0, .4), tpill(60 + tw(txt, 34, 600) / 2 + 26, 76, txt, 34, P.ink, "#fff", { w: 600 }));
+const youTag = (t, t0, txt) => OP(ramp(t, t0, .4), tpill(60 + tw(txt, 46, 700) / 2 + 34, 86, txt, 46, P.ink, P.sun, { w: 700 }));   // v3: bigger, sun-yellow words (YOU)
 // a soft tag that names what you feel (bottom centre, above the bottom fifth)
 const feelTag = (t, t0, t1, txt, y = 790, x = 960) => t < t0 || t > t1 + .3 ? "" : TF(x, y, spring(t, t0, .45) * (1 - ramp(t, t1, .25)), tpill(0, 0, txt, 46, "#fff", P.ink, { w: 700 }));
 // light rays under water
@@ -54,6 +54,18 @@ if (PART === 1) { (() => {
     else { const d = (t - tO) * 1.25, stopU = clamp((t - tC) / .4), dd = t < tC ? d : (tC - tO) * 1.25, kk = t < tK - .9 ? 0 : t < tC ? lerp(.12, 2.3, ei((t - (tK - .9)) / (tC - tK + .9))) : 2.3, sh = t >= tC ? 26 * wob(t, tC, .45) * Math.cos((t - tC) * 40) : 0, bump = t < tC ? 5 * Math.sin(t * 31) : 0;
       v = `<g transform="translate(${n2(sh)} ${n2(bump)})">${floorRush(dd)}${kk > 0 ? nextBack(kk) : ""}<g opacity=".97">${rails(.6)}</g>${TF(960, -200, 1, `<path d="M-1000 0 H1000 V250 Q0 330 -1000 250z" fill="#FFF6DE" stroke="#C9A772" stroke-width="12"/>`)}</g>`
         + (t >= tC ? `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.95 * pulse(t, tC + .01, .01, .45))}"/>` : ""); }
+    // v3 (teacher, 22 Nov): YOU are the bar (your own bar glows under you, a YOU tag on it, as EP5's frog hands); the three buddies ride along,
+    // shrunk down, on the bars at the edges: they look up at the sack, bump on the THUMP, cheer as you roll, and at the CLANG the view jolts,
+    // a burst lands where the next trolley hits and Basil's face pops in big: shocked, rubbing his head, then a cheer: "No crack!"
+    const mine = t < tO ? `<path d="M${VX} ${VY} L${VX - 110} 1100 H${VX + 110}z" fill="url(#wSteelH)" stroke="${P.sun}" stroke-width="12" stroke-linejoin="round" opacity=".95"/><path d="M${VX} ${VY} L${VX - 30} 1100" stroke="#fff" stroke-width="8" opacity=".85"/>` : "";
+    v = JOLT(t, [tT, tC], v + mine, 34) + OP(ramp(t, tB, .4), TF(960, 1012, 1, youPill(0, 0, 1.15)));
+    const rp = { pip: [[tR - .2, "surprised"], [tT + .05, "oops"], [tO + .2, "cheer"], [tK - .6, "surprised"], [tC + .05, "oops"], [tNb, "cheer"]],
+      basil: [[tR, "surprised"], [tT + .05, "surprised"], [tT + 1.0, "sit"], [tO + .3, "cheer"], [tK - .5, "arms_crossed"], [tC + .05, "oops"], [tNb + .1, "cheer"]],
+      momo: [[s.t0 + .8, "back"], [tT + .05, "surprised"], [tT + 1.1, "back"], [tO + .4, "cheer"], [tO + 2.2, "back"], [tC + .05, "surprised"], [tNb + .2, "cheer"]] };
+    v += riders(t, s, { tin: tB + .3, poses: rp, jolts: [tT, tC], noreact: true })
+      + impactFX(t, tT, 960, 360, "THUMP!", { s: .8, flash: false }) + impactFX(t, tC, 960, 420, "CLANG!", { s: 1.25, d: 1.1 })
+      + faceCam("basil", t, tC + .08, tNb + 1.2, 1560, 520, 175, [[tC + .08, "surprised"], [tC + .75, "oops"], [tNb - .05, "cheer"]], { rot: 6, noreact: true })
+      + (t >= tNb ? TF(1560, 760, spring(t, tNb, .4) * (1 - ramp(t, tNb + 1.4, .3)), tpill(0, 0, "No crack!", 46, GOODC, "#fff", { w: 700 })) : "");
     return v + `<radialGradient id="jV1" cx=".5" cy=".5" r=".75"><stop offset=".62" stop-color="${P.ink}" stop-opacity="0"/><stop offset="1" stop-color="${P.ink}" stop-opacity=".4"/></radialGradient><rect width="1920" height="1080" fill="url(#jV1)"/>` + dip(t, tO, JC12, .3) + wipe(t, s.t0, JC12)
       + TF(0, 62, 1, youTag(t, tB, "You: a metal bar")) + feelTag(t, tB + .5, tR - .2, "the bottom of the trolley") + feelTag(t, tR + .2, tNo - .1, "a heavy bag of rice") + feelTag(t, tNo, tO - .3, "you do not bend") + feelTag(t, tO + .2, tK - .5, "rolling")
       + feelTag(t, tC + .5, tNb - .1, "a hard knock") + feelTag(t, tNb, tS - .1, "you do not break") + (t >= tS ? TF(960, 780, spring(t, tS, .45) * (1 + .04 * Math.sin(t * 5)), `<circle r="150" fill="${JC12}" opacity=".6" filter="url(#b30)"/>` + propChip("STRONG", 76)) : "") + logo(t); };
@@ -83,7 +95,15 @@ if (PART === 2) { (() => {
     else if (t < tTy) v = slope((t - tSl) * 1.3);
     else if (t < tGr) v = tyreWall((t - tTy) * 1.2);
     else v = ground(t, tGr);
+    // v3: YOU are the drop (its clear front edge under you, a YOU tag), the three buddies ride along inside it at the edges, reacting at each
+    // stop: the SPLASH jolts and bursts; they peer at the dry seats, whoosh down the slope, gasp at the tyre, cheer on the ground
+    v = JOLT(t, [tPl], v, 30) + OP(ramp(t, tSp, .4), `<path d="M560 1100 Q600 930 960 900 Q1320 930 1360 1100z" fill="#BDEBFF" opacity=".55" stroke="#fff" stroke-width="10"/><path d="M700 1000 Q780 950 880 940" stroke="#fff" stroke-width="12" stroke-linecap="round" fill="none" opacity=".8"/>` + TF(960, 1000, 1, youPill(0, 0, 1.15)));
+    const rp = { pip: [[tG - .4, "surprised"], [tPl + .05, "oops"], [tSe + .3, "pointing"], [tSl + .1, "cheer"], [tTy, "surprised"], [tGr + .2, "cheer"]],
+      basil: [[tG - .3, "surprised"], [tPl + .05, "surprised"], [tSe + .5, "arms_crossed"], [tSl + .15, "cheer"], [tTy + .1, "surprised"], [tGr + .3, "cheer"]],
+      momo: [[s.t0 + .8, "back"], [tPl + .05, "surprised"], [tSe + .2, "back"], [tSl + .2, "cheer"], [tTy + .1, "back"], [tGr + .4, "cheer"]] };
+    v += riders(t, s, { tin: tSp + .3, poses: rp, jolts: [tPl], noreact: true, at: { pip: [230, 1040], momo: [400, 1046], basil: [1690, 1048] } }) + impactFX(t, tPl, 960, 560, "SPLASH!", { s: .9, col: "#7FD0F5" })
+      + faceCam("pip", t, tPl + .1, tPl + 1.6, 1560, 500, 160, [[tPl + .1, "surprised"], [tPl + .9, "cheer"]], { rot: -5, noreact: true });
     return v + wob2(t) + dip(t, tSl, "#BDEBFF", .22) + dip(t, tTy, "#8ED3F2", .18) + dip(t, tGr, "#BDEBFF", .18) + wipe(t, s.t0, JC12)
-      + TF(0, 62, 1, youTag(t, tSp, "You: a drop of water")) + feelTag(t, tSp + .6, tOut, "in the watering can") + (t >= tPl && t < tPl + .9 ? TF(960, 400, spring(t, tPl, .3) * (1 - ramp(t, tPl + .7, .2)), tpill(0, 0, "Splash!", 90, "#fff", P.ink, { w: 700 })) : "")
+      + TF(0, 62, 1, youTag(t, tSp, "You: a drop of water")) + feelTag(t, tSp + .6, tOut, "in the watering can") + ""
       + feelTag(t, tPl + 1.0, tSe - .4, t < tNo ? "glass" : "glass · you cannot pass through") + feelTag(t, tSe + .1, tSl - .25, "fabric seats · dry inside") + feelTag(t, tSl + .05, tTy - .2, "metal body") + feelTag(t, tTy + .05, tGr - .2, "rubber tyre") + feelTag(t, tGr + .1, s.t1 + 1, "the ground") + logo(t); };
 })(); }

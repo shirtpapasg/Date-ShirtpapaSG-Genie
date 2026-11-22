@@ -44,5 +44,15 @@ function lcPeek(t, s, pk) { if (!pk) return ""; const tin = s.t0 + 1.2 + (pk.dt 
    its reactions (poses = per buddy [[t, pose]]); jolt = shake times. ---------- */
 function riders(t, s, o = {}) { const tin = o.tin || s.t0 + .8, P0 = o.at || { pip: [210, 1040], basil: [1690, 1048], momo: [380, 1034] }; let out = "";
   for (const who of ["momo", "pip", "basil"]) { const [x, y] = P0[who], j = (o.jolts || []).reduce((a, tj) => a + (t >= tj && t < tj + .4 ? 1 : 0), 0);
-    out += buddy(who, x, y, o.h || 165, t, { in: tin + ({ pip: 0, basil: .15, momo: .3 })[who], poses: (o.poses || {})[who] || [], flip: x > 960, tag: false, rim: "rimB", jump: (o.jolts || []).map((tj) => [tj, 34]), noreact: !!o.noreact }); }
+    out += buddy(who, x, y, o.h || 190, t, { in: tin + ({ pip: 0, basil: .15, momo: .3 })[who], poses: (o.poses || {})[who] || [], flip: x > 960, tag: false, rim: "rimB", jump: (o.jolts || []).map((tj) => [tj, 34]), noreact: !!o.noreact }); }
   return out; }
+// a choice's number badge (sun yellow, ink number), sitting ON the picture board it belongs to
+const numBadge = (t, t0, x, y, n, k = 1) => t < t0 ? "" : TF(x, y, spring(t, t0, .45) * k, `<g filter="url(#dropS)"><circle r="52" fill="url(#gSun)" stroke="${P.ink}" stroke-width="7"/></g>${T(0, 25, n, 68, P.ink)}`);
+
+// the car's four parts, colour-coded: the part, its label, its line and its chip share one colour (teacher, 22 Nov, "Where's the arrows, or
+// you can even consider colour coding"). Order as CARPT: tyres, seats, windscreen, body.
+const PARTC = ["#F08A24", "#9B5DE5", "#1E96D6", "#E0445A"];
+const partChip = (word, col, size = 30) => tpill(0, 0, word, size, col, "#fff", { w: 700, ls: 2 });
+// a part's label (white words on the part's colour) + its chip under it, joined to the part by a line in the same colour
+const partTag = (t, t0, x, y, txt, chip, px, py, col, size = 40, csz = 30) => t < t0 ? "" : OP(ramp(t, t0, .2), `<path d="M${x} ${y} L${px} ${py}" stroke="${col}" stroke-width="8" stroke-linecap="round"/><circle cx="${px}" cy="${py}" r="12" fill="${col}" stroke="#fff" stroke-width="4"/>`)
+  + TF(x, y, spring(t, t0, .4), tpill(0, 0, txt, size, col, "#fff", { w: 700 })) + (chip ? TF(x, y + size * 1.55, spring(t, t0 + .15, .4), partChip(chip, col, csz)) : "");
