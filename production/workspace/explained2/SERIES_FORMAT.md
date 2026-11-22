@@ -404,6 +404,10 @@ order). Send the teacher the finished parts and the list of things to check; the
    anything else; every countdown's numbers step once per second exactly with the ticks, the ring drains in step and the bell lands
    on 0 (measured in the rendered video)** (teacher, 22 Nov, on EP13's HOLD ON!: "Pip is basically not doing anything here… the
    '+1' arms crossed is covered by the keyword… The countdown timer rhythm is off! Basic"; `reference/holdon_bad_ep13_frozen_pip_overlap.webp`).
+   **The countdown is animated and the buddies react, as in EP1** (teacher, 22 Nov: "I no longer see the animation on the
+   countdown, nor the interactive pet buddies' reactions"): the ring pulses on each tick, the number pops as it changes, the YOU
+   hand bobs, "LOCKED IN!" slams in; the buddies lean in, fidget and cover their eyes during the countdown, then each reveal has a
+   pose swap (cheer, groan, good-sport shrug). Reuse EP1's lock-in and reveal routines (ep01/); never ship a still countdown.
    Any "no" is a note to fix before render. The key stills are also sent to the teacher for information (not a gate); the teacher's notes,
    whenever they come, are fixed in a re-render. Spend the effort on what viewers see: cute, reacting buddies; smooth camera with no needless
    cuts; real places with life; deep, visual explanations; full human sentences.
