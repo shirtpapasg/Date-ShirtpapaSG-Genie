@@ -126,6 +126,10 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   impact in this scene").** Whenever a line names or explains a board, chart, card or object, the camera smoothly pushes in so that
   thing fills most of the frame while it is talked about, then eases back; the speaking buddy stays big beside it. A wide shot of a
   place is only a brief establishing moment. Bad example: `reference/scene_bad_ep13_designplan_toosmall.webp`.
+- **Things stay where they were (teacher, 2026-11-22: EP13's OUR DESIGN PLAN sat top-left in the look-closer, then jumped to the
+  bottom in the next scene, "shifted its position unnecessarily when it can just remain at the top left as before").** A recurring
+  board, chart or prop keeps one home position and size across consecutive scenes; if it must move, it glides there in view, never
+  jumps across a cut. Bad example: `reference/continuity_bad_ep13_designplan_jumps.webp`.
 - **Buddies teach.** Each scientific term is explained by a buddy in their own words, in a short back-and-forth with another buddy or
   the viewer ("Rotation means the Earth spins round and round, like my globe!"), with a picture beside them; Heart hosts, sets up
   the question and confirms, but the buddies carry the explaining. Full, natural sentences (section 5 "Talk like people").
