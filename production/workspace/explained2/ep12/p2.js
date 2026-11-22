@@ -16,7 +16,7 @@ const FOOT = "P3 · Diversity of Materials · Choosing materials";
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 
 /* the car park (walk.js VP): the car, the trolley beside its boot, the folding table with the three bottles, the board beside it, the discs */
-const BDX = 1650, BDY = PGROUND + 24, BDS = .36, CAM0 = [1, 960, 540], CAMC = [1.2, 760, 720], CREAM = "#FFF6D8";
+const BDX = 1640, BDY = PGROUND + 24, BDS = .32, CAM0 = [1, 960, 540], CAMC = [1.2, 760, 720], CREAM = "#FFF6D8";
 const brd = (t, o, sc = BDS, x = BDX, y = BDY) => TF(x, y, sc, matchBoard(t, o));
 const buds = (t, o = {}) => sPip(t, o.pip) + sBasil(t, o.basil) + sMomo(t, o.momo);
 const V = (t, o = {}, cam) => VP(t, { ...o, items: (o.board === undefined ? "" : brd(t, o.board)) + (o.items || "") }, cam);
@@ -34,7 +34,10 @@ SC.lasttime = (t, s) => { const L = "j101", tb = [s.t0, W(L, "the", 1) - .2, W(L
 const trolBag = TF(210, PGROUND + 30 - 96, .8, shopBag("#FF8FB1"));
 SC.place = (t, s) => V(t, { car: { boot: 1, bags: BOOTBAGS }, board: {}, items: trolBag }, [1.03 - .03 * eio((t - s.t0) / 2), 960, 540]) + buds(t)
   + TF(960, 1010, spring(t, s.t0 + .2, .45), tpill(0, 0, "The car park of an HDB block, Singapore", 40, P.ink, "#fff", { w: 700 })) + carRules(t, s.t0 + .3) + HUD(t);
-SC.game = (t, s) => gameScene(t, s, "j201", false);
+// teacher, 22 Nov: no cut to the purple stage: the car park stays, the camera pushes straight in on the squirrel on its branch
+const PLACEV = { car: { boot: 1, bags: BOOTBAGS }, board: {}, items: trolBag };
+SC.game = (t, s) => gameScene(t, s, "j201", false, { world: (tt) => V(tt, PLACEV), A: [SQ[0] - 6, SQ[1] - 36], T: [1360, 500], Z: 2.6, ly: -190,
+  pre: (tt) => buds(tt) + TF(960, 1010, 1, tpill(0, 0, "The car park of an HDB block, Singapore", 40, P.ink, "#fff", { w: 700 })) + carRules(tt, SCN.place.t0 + .3) });
 SC.goals = (t, s) => goals3(t, s, [["One object, different materials", ""], ["Many materials, one object", ""], ["Choosing a suitable material", ""]], ["j301", "j302", "j303", "j304"], "pip");
 
 /* 4 · Round 1: a bottle for school (clue labels must not break when dropped · see the water inside on top of the ring, kept through the countdown) */
@@ -112,29 +115,31 @@ SC.fix = (t, s) => { const rb = MK("rub"), rub = ss(rb, rb + .5, t), fix = ss(rb
     + coin(t, W("j1006", "two") - .1, 1700, 300, "+2", "line 2") + HUD(t); };
 /* the board MATCH THE JOB, all seven rows, a green tick at the end of each (ticks); the book's strip 3.30 item 3; SUITABLE pops (lib.js o.at) */
 SC.board = (t, s) => { const L = "j1008";
-  return VP(t, { dim: 1, car: false, table: false, trolley: false }) + brd(t, {}, .7, 860, 1066)
-    + bookCaption(t, L, "It is important to choose a material whose physical property", 320, { size: 46, keys: ["physical", "property"] }) + bookCaption(t, L, "is suitable for the intended use of the object.", 410, { size: 46, off: 10, keys: ["suitable", "intended", "use"] }) + HUD(t); };   // Stage 3: both lines 70 px lower (the SUITABLE shelf pill covered the end of "property")
+  return VP(t, { dim: 1, car: false, table: false, trolley: false }) + brd(t, {}, .94, 975, 1066)
+    + bookCaption(t, L, "It is important to choose a material whose physical property", 306, { size: 43, keys: ["physical", "property"] }) + bookCaption(t, L, "is suitable for the intended use of the object.", 388, { size: 43, off: 10, keys: ["suitable", "intended", "use"] }) + HUD(t); };   // Stage 3: both lines 70 px lower (the SUITABLE shelf pill covered the end of "property")
 
 /* 11 · the chant: call and response (common.js chantScene); the board MATCH THE JOB stands behind the buddies, centred, its PURPOSE /
    PROPERTY / MATERIAL columns flashing on their lines; the green tag SUITABLE by the MATERIAL column on line 3 */
-SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 54, x: 500, y0: 340, dy: 120, board: (tt, flash) => TF(1250, 730, .46, matchBoard(tt, { flash, good: flash[2] > .05 ? Math.min(1, flash[2] * 3) : 0 })) });
+SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 54, x: 500, y0: 290, dy: 108, xs: [135, 390, 645], bh: 200, tx: 1400, ty: 425, sayX: 420, sayY: 690, board: (tt, flash) => TF(1375, 1066, .68, matchBoard(tt, { flash, good: flash[2] > .05 ? Math.min(1, flash[2] * 3) : 0 })) });
 
 /* 12 · score hand, the squirrel (lizReveal in common.js): it runs along the branch, sits up and flicks its tail */
 SC.final = (t, s) => { const L = "j1201"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "j1202", tq = W(L, "it") - .1, u = clamp((t - (s.t0 + 1.4)) / .9), run = 150 * (1 - eio(u)) * (t >= s.t0 + 1.4 ? 1 : 1);
-  return lizReveal(t, s, L, V(t, { board: {}, sq: { run: t < s.t0 + 1.4 ? 150 : run, up: ss(s.t0 + 2.4, s.t0 + 2.8, t), flick: t > s.t0 + 2.8 ? 22 * Math.sin((t - s.t0) * 9) : 0 } }), SQ[0] - 6 + (t < s.t0 + 1.4 ? 150 : run), SQ[1] - 36, tq, "It was on the tree by the cars!", 0, 190, 78, 1.9); };
+  return lizReveal(t, s, L, V(t, { board: {}, sq: { run: t < s.t0 + 1.4 ? 150 : run, up: ss(s.t0 + 2.4, s.t0 + 2.8, t), flick: t > s.t0 + 2.8 ? 22 * Math.sin((t - s.t0) * 9) : 0 } }), SQ[0] - 6 + (t < s.t0 + 1.4 ? 150 : run), SQ[1] - 36, tq, "It was on the tree by the cars!", 0, 190, 78, 1.9, { from: () => SC.final(SCN.final.t1 - .04, SCN.final) }); };
 
 /* 13 · the dare for Episode 13: the SAME school bag three times, its strap torn off at one end, each with a new strap lying beside it
    (PIC.bagFabric / bagMetal / bagWood: EP13 opens with these same boards and cards) */
 const DRX = [560, 960, 1360];
 SC.dare = (t, s) => { const a = "j1301", tQ = W(a, "which") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, hb = HAS("j1302");
   const boards = NEXT_CARDS.map((m, i) => { const t0 = s.t0 + .3 + i * .25; if (t < t0) return ""; const [x, d] = slideX(t, t0, .7, 2500, DRX[i], 660); return d + picBoard("bag" + m, x, 640, 1, { sc: .8, id: "dr" + i }); }).join("");
-  return VP(t, { dim: 1, car: false, table: false, trolley: false }) + boards
+  // teacher, 22 Nov: no jump cut out of the squirrel's reveal: the camera pulls back from the branch to the whole car park while it dims
+  const pu = eio((t - s.t0) / .8), back = pu >= 1 ? "" : OP(1 - ss(.55, 1, pu), `<g transform="translate(960 540) scale(${n2(lerp(1.9, 1, pu))}) translate(${n2(-lerp(SQ[0] - 6, 960, pu))} ${n2(-lerp(SQ[1] - 36 + 190, 540, pu))})">${V(t, { board: {}, sq: { up: 1 - pu } })}</g>`);
+  return VP(t, { dim: 1, car: false, table: false, trolley: false }) + back + boards
     + TF(960, 150, spring(t, s.t0 + .2, .45), tpill(0, 0, "NEXT · Design a school bag!", 50, P.ink, P.sun, { w: 700 }))
     + NEXT_CARDS.map((txt, i) => TF(DRX[i], 800, .46 * spring(t, tc[i], .45), ansCard(i + 1, txt, { w: 430, h: 290, size: 58, pulse: Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 3 === i ? .8 : 0) : 0) }))).join("")
     + qMark(t, tQ, 960, 262, 44) + (t >= tL ? TF(1250, 950, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
     + buddy("basil", 200, 1060, 230, t, { aura: true, in: s.t0 + .1, poses: hb ? [[s.t0, "sit"], [LT("j1302") - .12, "sit"], [LE("j1302") + .1, "cheer"]] : [[s.t0, "sit"], [tL, "cheer"]], nohop: true }) + (hb ? say("j1302", 520, 950, t, { size: 38, tail: -160, maxW: 480 }) : "") + carRules(t) + HUD(t); };
 
 /* 15 · "Now you know!": the board MATCH THE JOB, complete and ticked, centred in the free space between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(920, 1040, .5, matchBoard(t)), { bx: [200, 1715, 1375], hx: 470 });
+SC.nyk = (t, s) => nykScene(t, s, TF(868, 1040, .78, matchBoard(t)), { bx: [125, 1800, 1578], bh: 220, hx: 125, sayY: 360 });
 })(); }

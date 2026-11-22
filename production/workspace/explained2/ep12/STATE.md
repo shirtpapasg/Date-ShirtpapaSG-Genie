@@ -255,3 +255,63 @@ Reused as they are: EP11's three trolley boards (ep11dare.js), EP9's drop-box pi
   **Part 1 https://www.youtube.com/watch?v=G03-LFQEld8 , Part 2 https://www.youtube.com/watch?v=ussXaa1fQUQ .**
 - Left for the teacher: listen to Pip's "Use." and Heart's "fragile" (above); watch the five look-closers, both journeys and the mynah /
   squirrel reveals. The School Lab 3.7 line stays out of the descriptions until that lab is signed off.
+
+## Teacher fixes, 22 Nov (drawing only; Stage 3 must re-render the chunks listed; nothing rendered or uploaded here)
+No timeline mark, word or sound cue moved (`tl_p*.json`, `sound_cues.js`, `script.py` untouched). Files: `tests.js`, `common.js`, `p1.js`, `p2.js`.
+
+### 1 · The trolley board ("change the object to a trolley instead of a whiteboard. A glass trolley episode.")
+- **`matchBoard` (tests.js) is now a big supermarket trolley** in the episode's own trolley art (`trolleyFrame`: walk.js's MET / METD / METL
+  metal, the wire grid, the red grip, the dark wheels on their forks) with the chart MATCH THE JOB **clipped to the side of its basket** (two
+  metal clips over the rim). Wheels on the ground; origin = the ground under the basket's middle. The cream whiteboard on legs is gone.
+- **The chart is laid out per part so the words are big** (`MBL`): Part 1 = two tall rows (words 36 units, purposes 34, chips 30, chips
+  stacked); Part 2 = seven rows of different heights (words 27, purposes 26, chips 25 side by side, "does not break easily" on its own line).
+  Cells still appear at `ROWT()` and ticks at `tickT()`; `o.col` / `o.flash` / `o.row` / `o.good` work as before.
+- **Sizes on screen** (trolley + chart width; smallest table word at 1080p): P1 `nyk` 1200 px = 62 % (words 29 / 27 px, chips 24 px);
+  P2 `board` 1457 px with the chart 1231 px = 64 % (25 / 24 / 23.5 px: the seven rows cannot reach 26 px in that height under the two caption
+  lines); P2 `nyk` 1209 px = 63 % (21 / 20 px: seven rows under the title); P2 `chant` 1054 px (18 px); in the wide walkway / car-park
+  shots it is set dressing (P1 .45, P2 .32) and is read in the board scenes above.
+- **Scenes re-laid for it:** `nyk` both parts (discs 220 px at the sides: Pip 125, Momo 1578, Basil 1800; the trolley centred in the free
+  space between them, never behind a disc; the YOU hands and tag above Pip; "Say it with us!" a little higher: `nykScene` takes `bh`, `sayY`);
+  P2 `board` (the trolley at .94, the two book lines at 306 / 388, 43 px); P2 `chant` (lines top left, discs 200 px bottom left, the trolley on
+  the floor at the right at .68, YOU hands above it, the bubble over the discs: `chantScene` takes `xs`, `bh`, `tx`, `ty`, `sayX`, `sayY`);
+  P1 walkway `BDX` 1220; P1 `mark1` .42; P2 car park `BDS` .32, `BDX` 1640.
+
+### 2 · The hidden-animal moments ("from the real scene, directly zoom into the animal, then the other objects pop out ... no unnecessary cutting")
+- **`gameScene` (common.js) no longer cuts to the purple stage.** It takes `R = { world, A, T, Z, pre, dim0, ... }`: the real place stays,
+  ONE push-in (`pushCam`, ease in-out, 1.1 s) carries the animal to its place on screen (mynah x3 to 1330, 470; squirrel x2.6 to 1360, 500),
+  the rest softly dimmed round it (`spotDim`); the scene before's small discs, rule lines, caption and title words slip away in .3 s; the score
+  pill GLIDES from its corner to the middle. Then the game's things pop out over the zoomed place, each on its old word (never before the push
+  has landed): the YOU hand(s) / ring and "You lock in first" with a sparkle (`popSpark`), the buddy discs, the name label
+  (`animalLabel`: "a little mynah / squirrel" with a tail, standing by the REAL animal; the picture-in-a-circle badge is no longer used
+  here), "Can you spot it?".
+- **`lizReveal`**: the picture melts from the score hand into the real place (`o.from`, .45 s, no jump cut), pushes in as before, and the
+  ring POPS round the animal on its name (with the sparkle cue) instead of being there from the first frame.
+- **P2 `dare`**: its first .8 s pulls back from the squirrel's branch to the whole car park while it dims (same place: no cut).
+- Still cuts (card screens, not the real place): game -> goals (both parts), P1 reveal -> key-word recap.
+
+### Changed scenes and the 10 s chunks to re-render
+| Part | Scenes (time) | Chunks (index = floor(t / 10)) |
+|---|---|---|
+| P1 | `board` 22.32-24.86, `title` 24.86-27.26, `game` 27.26-36.84 | 2, 3 |
+| P1 | `trolley` 50.77-54.61, `lcjob` 54.61-75.31, `mark1` 75.31-85.81 | 5, 6, 7, 8 |
+| P1 | `lcmetal` 114.57-142.71 | 11, 12, 13, 14 |
+| P1 | `metalans` 164.63-170.81 | 16, 17 |
+| P1 | `tankrow` 232.52-237.05, `waitw` 237.05-241.04 | 23, 24 |
+| P1 | `pullout` 264.30-265.10, `liz` 272.93-278.59 | 26, 27 |
+| P1 | `cliff` 289.33-303.13, `nyk` 303.13-314.84 | 28, 29, 30, 31 |
+| P2 | `place` 9.57-11.57, `game` 11.57-17.32 | 0, 1 |
+| P2 | `lcbottles` 55.44-89.36, `bottleans` 89.36-97.91 | 5, 6, 7, 8, 9 |
+| P2 | `boot` 109.60-114.07, `lccar` 114.07-147.77 | 10, 11, 12, 13, 14 |
+| P2 | `waitw` 162.30-166.67 | 16 |
+| P2 | `board` 230.88-240.58, `chant` 240.58-262.43 | 23, 24, 25, 26 |
+| P2 | `liz` 270.04-275.63, `dare` 275.63-276.43 (the pull-back only) | 27 |
+| P2 | `nyk` 303.09-314.81 | 30, 31 |
+
+### Checks (stills only)
+- Stills every 0.45 s of both parts: no page errors.
+- `qa/trolley_board/pP_<time>.jpg`: before (left) / after (right) of every affected scene, both parts (67 pairs).
+- `qa/trolley_board/check_320px.jpg`: P1 `nyk`, P2 `board`, P2 `nyk`, P1 `waitw` at 320 px.
+- `qa/trolley_board/strip_p1_game_pushin.jpg`, `strip_p2_game_pushin.jpg`, `strip_p1_reveal.jpg`, `strip_p2_reveal_pullback.jpg`: frame strips
+  of the new transitions.
+- Not done here: no video rendered, no sound mixed, nothing uploaded. The thumbnails and `sheet_part*.png` still show the old board until
+  Stage 3 re-renders.

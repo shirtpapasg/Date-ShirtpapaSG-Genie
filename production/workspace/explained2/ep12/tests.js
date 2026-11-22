@@ -39,27 +39,50 @@ const ROWT = () => { const m = (k) => TL.marks[k] === undefined ? 1e9 : TL.marks
   if (PART === 1) return [[m("row1o") + .2, m("row1p"), m("row1m"), m("row1m") + .3], four(m("row2") + .1), ...Array(5).fill([1e9, 1e9, 1e9, 1e9])];
   const c = m("carrows"); return [[-1, -1, -1, -1], [-1, -1, -1, -1], four(m("row3") + .1), ...[0, 1, 2, 3].map((i) => four(c + .2 + i * .25, .12))]; };
 const tickT = (r) => PART === 2 && TL.marks.ticks !== undefined ? TL.marks.ticks + r * .14 : 1e9;
-// STAGE 2: the drawn board on its low stand: picture tiles (walk.js TILE) for the objects, swatches (SWATCH) for the materials, ONE picture of
-// the car beside rows 4-7 (a plain bracket). o.col = a column that glows (0..3) or -1; o.flash = [purpose, property, material] (the chant);
-// o.row = a row that glows; o.good = the green tag SUITABLE by the MATERIAL column (the chant's third line). origin = the middle of the stand's feet
-function matchBoard(t, o = {}) { const RT = ROWT(), fl = o.flash || [0, 0, 0], X = [-590, -300, 40, 228], Wd = 1220, top = -730, CW = [282, 332, 180, 372]; let s = "";
+// TROLLEY BOARD (teacher, 22 Nov 2026: "change the object to a trolley instead of a whiteboard. A glass trolley episode."): the board is a big
+// supermarket trolley (walk.js trolleyS's metal: MET / METD / METL, the red grip, the wire grid, the dark wheels on their forks) with the chart
+// MATCH THE JOB clipped to the side of its basket. Wheels on the ground; origin = the ground under the basket's middle. The chart is laid out
+// per part so its words are big: Part 1 two tall rows (36 px words), Part 2 seven rows (26 px words). o.col = a column that glows (0..3) or -1;
+// o.flash = [purpose, property, material] (the chant); o.row = a row that glows; o.good = the green tag SUITABLE above the MATERIAL column.
+// The cells still appear at ROWT()'s times and the ticks at tickT(): no timing lives here. MBL.W / MBL.TOP: the chart's width, the rim's height.
+const MBL = (() => { const L = PART === 1
+  ? { W: 1260, X: [-610, -294, 62, 274], CW: [300, 340, 196, 340], tF: 50, tH: 74, hH: 50, hF: 30, RH: [124, 124], F: 36, FP: 34, FC: 30, ts: 1.45, ss: 1.4, stack: true, gb: 104, padB: 44, rim: 52, tail: 20 }
+  : { W: 1310, X: [-639, -319, 11, 165], CW: [306, 318, 142, 446], tF: 44, tH: 62, hH: 44, hF: 24, RH: [50, 66, 100, 50, 50, 66, 50], F: 27, FP: 26, FC: 25, ts: 1.1, ss: 1, stack: false, gb: 70, padB: 14, rim: 40, tail: 12 };
+  L.H = L.tH + L.hH + 10 + L.RH.reduce((a, b) => a + b, 0) + L.tail; L.bot = -(L.gb + L.padB); L.top = L.bot - L.H; L.TOP = -(L.top - L.rim); return L; })();
+function trolleyFrame() { const L = MBL, hw = L.W / 2, yb = -L.gb, yt = L.top - L.rim, xl0 = -hw - 30, xr0 = hw + 30, xl1 = -hw - 62, xr1 = hw + 80, st = `fill="none" stroke-linecap="round" stroke-linejoin="round"`, wr = L.gb > 90 ? 28 : 24, ry = -(2 * wr + 10);
+  const wheel = (x) => `<g transform="translate(${x} ${-wr})"><path d="M0 -4 L${x < 0 ? 12 : -12} ${ry + wr}" stroke="${METD}" stroke-width="13" stroke-linecap="round"/><circle r="${wr}" fill="#3A4258" stroke="#232A3B" stroke-width="7"/><path d="M${-wr * .62} 0 H${wr * .62} M0 ${-wr * .62} V${wr * .62}" stroke="#9AA5BD" stroke-width="5" stroke-linecap="round"/><circle r="6.5" fill="${METL}"/></g>`;
+  const body = `M${xl1} ${yt} H${xr1} L${xr0} ${yb} H${xl0}z`; let grid = ""; const nv = Math.round((xr1 - xl1) / 74), nh = Math.max(3, Math.round((yb - yt) / 74));
+  for (let i = 1; i < nv; i++) { const u = i / nv; grid += `<path d="M${n2(lerp(xl1, xr1, u))} ${yt} L${n2(lerp(xl0, xr0, u))} ${yb}" stroke="${MET}" stroke-width="5"/>`; }
+  for (let j = 1; j < nh; j++) { const v = j / nh, y = lerp(yt, yb, v); grid += `<path d="M${n2(lerp(xl1, xl0, v))} ${n2(y)} H${n2(lerp(xr1, xr0, v))}" stroke="${MET}" stroke-width="5"/>`; }
+  const clip = (x) => `<path d="M${x} ${yt - 10} V${L.top + 22}" ${st} stroke="${METD}" stroke-width="15"/><path d="M${x} ${yt - 10} V${L.top + 22}" ${st} stroke="${METL}" stroke-width="5"/><circle cx="${x}" cy="${L.top + 24}" r="9" fill="${METL}" stroke="${METD}" stroke-width="4"/>`;
+  return `<ellipse cx="0" cy="4" rx="${hw + 60}" ry="16" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + wheel(-hw + 130) + wheel(hw - 110)
+    + `<path d="M${xl0 + 14} ${ry} H${xr0 - 26} M${xl0 + 6} ${yb} L${xl0 + 14} ${ry} M${xr0 - 6} ${yb} L${xr0 - 26} ${ry}" ${st} stroke="${METD}" stroke-width="13"/><path d="M${xl0 + 14} ${ry} H${xr0 - 26}" ${st} stroke="${METL}" stroke-width="4" opacity=".8"/>
+      <path d="${body}" fill="#DCE4F2" opacity=".5"/><g ${st}>${grid}</g>
+      <path d="${body}" ${st} stroke="${METD}" stroke-width="13"/><path d="M${xl1 + 6} ${yt - 4} H${xr1 - 6}" ${st} stroke="${METL}" stroke-width="4"/><path d="M${xl0} ${yb} H${xr0}" ${st} stroke="${MET}" stroke-width="16"/><path d="M${xl0 + 4} ${yb - 4} H${xr0 - 4}" ${st} stroke="${METL}" stroke-width="4" opacity=".9"/>
+      <path d="M${xl1} ${yt} l-62 -44" ${st} stroke="${METD}" stroke-width="15"/><rect x="${xl1 - 98}" y="${yt - 64}" width="60" height="34" rx="17" fill="#E8604E" stroke="#B8402E" stroke-width="6"/>`
+    + `<g filter="url(#drop)"><rect x="${-hw}" y="${L.top}" width="${L.W}" height="${L.H}" rx="26" fill="#C99A62"/><rect x="${-hw + 12}" y="${L.top + 12}" width="${L.W - 24}" height="${L.H - 24}" rx="16" fill="url(#gPaper)"/></g>` + clip(-hw * .52) + clip(hw * .52); }
+function matchBoard(t, o = {}) { const L = MBL, RT = ROWT(), fl = o.flash || [0, 0, 0], X = L.X, CW = L.CW, top = L.top, hy = top + L.tH, y0 = hy + L.hH + 10; let s = "";
+  const RY = []; { let y = y0; L.RH.forEach((h) => { RY.push(y + h / 2); y += h; }); } const yEnd = y0 + L.RH.reduce((a, b) => a + b, 0);
   const colG = [o.col === 0 ? 1 : 0, Math.max(o.col === 1 ? 1 : 0, fl[0]), Math.max(o.col === 2 ? 1 : 0, fl[2]), Math.max(o.col === 3 ? 1 : 0, fl[1])];
-  COLS.forEach((c, i) => { const g = colG[i]; if (g > .02) s += `<rect x="${X[i] - 10}" y="${top + 76}" width="${CW[i]}" height="596" rx="14" fill="${P.sun}" opacity="${n2(.5 * Math.min(1, g))}"/>`;
-    s += `<rect x="${X[i] - 6}" y="${top + 84}" width="${CW[i] - 8}" height="44" rx="10" fill="${P.ink}"/>` + T(X[i] + CW[i] / 2 - 10, top + 117, c, 28, "#fff", { ls: 3 }); });
-  const carT = RT[3][0]; if (t >= carT) { const k = carT < 0 ? 1 : spring(t, carT, .35), y0 = top + 175 + 3 * 76, y1 = top + 175 + 6 * 76;
-    s += OP(Math.min(1, k), `<path d="M${X[0] + 96} ${y0 - 26} h-12 V${y1 + 26} h12" fill="none" stroke="${P.ink}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`) + TF(X[0] + 38, (y0 + y1) / 2 - (carT < 0 ? 0 : 22 * Math.sin(Math.PI * clamp((t - carT) / .35))), k, `<g transform="rotate(-90)">${TILE.car()}</g>` + T(0, 76, "car", 22, P.ink)); }
-  BROWS.forEach((row, r) => { const y = top + 175 + r * 76, ts = RT[r], part = r >= 3; if (o.row === r) s += `<rect x="-600" y="${y - 35}" width="1200" height="70" rx="12" fill="${P.sun}" opacity=".4"/>`;
-    if (r < 6) s += `<path d="M${part ? X[0] + 100 : -596} ${y + 38} H596" stroke="${P.ink}" stroke-width="2" stroke-dasharray="3 9" opacity=".3"/>`;
+  COLS.forEach((c, i) => { const g = colG[i]; if (g > .02) s += `<rect x="${X[i] - 8}" y="${hy - 6}" width="${CW[i] + 10}" height="${yEnd - hy + 10}" rx="14" fill="${P.sun}" opacity="${n2(.5 * Math.min(1, g))}"/>`;
+    s += `<rect x="${X[i] - 4}" y="${hy}" width="${CW[i] + 2}" height="${L.hH}" rx="11" fill="${P.ink}"/>` + T(X[i] + CW[i] / 2 - 3, hy + L.hH / 2 + L.hF * .36, c, L.hF, "#fff", { ls: L.stack ? 3 : 1.5 }); });
+  const carT = RT[3][0]; if (L.RH.length > 3 && t >= carT) { const k = carT < 0 ? 1 : spring(t, carT, .35), ya = RY[3] - L.RH[3] / 2 + 8, yb = RY[6] + L.RH[6] / 2 - 8;
+    s += OP(Math.min(1, k), `<path d="M${X[0] + 86} ${ya} h-12 V${yb} h12" fill="none" stroke="${P.ink}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`) + TF(X[0] + 36, (ya + yb) / 2 - 14 - (carT < 0 ? 0 : 22 * Math.sin(Math.PI * clamp((t - carT) / .35))), k * 1.15, `<g transform="rotate(-90)">${TILE.car()}</g>` + T(0, 64, "car", 23, P.ink)); }
+  BROWS.forEach((row, r) => { if (r >= L.RH.length) return; const y = RY[r], rh = L.RH[r], ts = RT[r], part = r >= 3; if (o.row === r) s += `<rect x="${-L.W / 2 + 16}" y="${y - rh / 2 + 3}" width="${L.W - 32}" height="${rh - 6}" rx="14" fill="${P.sun}" opacity=".4"/>`;
+    if (r < L.RH.length - 1) s += `<path d="M${part ? X[0] + 92 : -L.W / 2 + 22} ${y + rh / 2} H${L.W / 2 - 22}" stroke="${P.ink}" stroke-width="2" stroke-dasharray="3 9" opacity=".3"/>`;
     row.forEach((cell, i) => { const t0 = ts[i]; if (t < t0) return; const k = t0 < 0 ? 1 : spring(t, t0, .35), hop = t0 < 0 ? 0 : 22 * Math.sin(Math.PI * clamp((t - t0) / .35));
-      let inner, x = X[i]; if (i === 3) { let cx = 0; const sz = cell.length > 1 ? 15.5 : 20; inner = cell.map((w, j) => { const z = j === 2 ? 14 : sz, ww = tw(w, z, 700, "Fredoka", CHIPC[w] ? 3 : 0) + z * 1.5; if (j === 2) cx = 0; const g = TF(cx + ww / 2, cell.length > 2 ? (j === 2 ? 17 : -15) : 0, 1, CHIPC[w] ? propChip(w, z) : tpill(0, 0, w, z, "#fff", P.ink, { w: 700 })); cx += ww + 4; return g; }).join(""); x -= 2; }
-      else if (i === 1) { const ls = wrap(cell, 23, CW[1] - 16, 600); inner = ls.map((l, j) => T(0, 8 + (j - (ls.length - 1) / 2) * 26, l, 23, P.ink, { a: "start", w: 600 })).join(""); }
-      else if (i === 2) inner = TF(20, 0, 1, SWATCH[cell]) + T(46, 9, cell, 25, P.ink, { a: "start" });
-      else { const fs = part ? 19 : 21, ls = wrap(cell, fs, part ? 120 : 196, 700), x0 = part ? 108 : 0; inner = TF(x0 + 32, 0, part ? .86 : 1, TILE[cell]()) + ls.map((l, j) => T(x0 + (part ? 64 : 72), 7 + (j - (ls.length - 1) / 2) * 23, l, fs, P.ink, { a: "start" })).join(""); }
+      let inner; const x = X[i];
+      if (i === 3) { const z = L.FC, chips = cell.filter((w) => CHIPC[w]), rest = cell.filter((w) => !CHIPC[w]), gap = z * 1.9;
+        if (L.stack) inner = cell.map((w, j) => { const ww = tw(w, z, 700, "Fredoka", 3) + z * 1.5; return TF(ww / 2, (j - (cell.length - 1) / 2) * gap, 1, CHIPC[w] ? propChip(w, z) : tpill(0, 0, w, z, "#fff", P.ink, { w: 700 })); }).join("");
+        else { let cx = 0; const yy = rest.length ? -gap / 2 : 0; inner = chips.map((w) => { const ww = tw(w, z, 700, "Fredoka", 1) + z * 1.5, g = TF(cx + ww / 2, yy, 1, tpill(0, 0, w, z, CHIPC[w], "#fff", { w: 700, ls: 1 })); cx += ww + 6; return g; }).join("")
+          + rest.map((w) => TF((tw(w, z, 700) + z * 1.5) / 2, gap / 2, 1, tpill(0, 0, w, z, "#fff", P.ink, { w: 700 }))).join(""); } }
+      else if (i === 1) { const ls = wrap(cell, L.FP, CW[1] - 6, 600); inner = ls.map((l, j) => T(0, L.FP * .34 + (j - (ls.length - 1) / 2) * L.FP * 1.14, l, L.FP, P.ink, { a: "start", w: 600 })).join(""); }
+      else if (i === 2) inner = TF(17 * L.ss + 2, 0, L.ss, SWATCH[cell]) + T(34 * L.ss + 14, L.F * .35, cell, L.F, P.ink, { a: "start" });
+      else { const sc = part ? .76 : Math.min(L.ts, (rh - 6) / 58), x0 = part ? 90 : 0, tx = x0 + 64 * sc + 12, ls = wrap(cell, L.F, CW[0] - tx - 4, 700); inner = TF(x0 + 32 * sc + 2, 0, sc, TILE[cell]()) + ls.map((l, j) => T(tx, L.F * .35 + (j - (ls.length - 1) / 2) * L.F * 1.1, l, L.F, P.ink, { a: "start" })).join(""); }
       s += TF(x, y - hop, k, inner); });
-    const tt = tickT(r); if (t >= tt) s += TF(596, y, spring(t, tt, .35), tickBadge(20)); });
-  if (o.good) s += TF(X[2] + 80, top - 30, o.good, jobTag(t, 0, 34));
-  return `<path d="M-330 0 L-300 -90 M330 0 L300 -90 M-390 0 H-270 M270 0 H390" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><g filter="url(#drop)"><rect x="${-Wd / 2 - 20}" y="${top}" width="${Wd + 40}" height="672" rx="28" fill="#C99A62"/><rect x="${-Wd / 2 - 6}" y="${top + 14}" width="${Wd + 12}" height="644" rx="18" fill="url(#gPaper)"/></g>`
-    + T(0, top + 62, "MATCH THE JOB", 46, P.ink, { ls: 5 }) + s; }
+    const tt = tickT(r); if (t >= tt) s += TF(L.W / 2 - 34, y, spring(t, tt, .35), tickBadge(18)); });
+  if (o.good) s += TF(X[2] + CW[2] / 2, top - L.rim - 44, o.good, jobTag(t, 0, 34));
+  return trolleyFrame() + T(0, top + L.tH * .5 + L.tF * .42, "MATCH THE JOB", L.tF, P.ink, { ls: 5 }) + s; }
 
 /* ---------- the hidden animals (teacher, 2026-11-21): named by Heart at the start with their picture, revealed at the end.
    Part 1: a little MYNAH on top of the TROLLEYS sign of the trolley bay (every wide shot of the walkway): black body, a yellow beak, yellow

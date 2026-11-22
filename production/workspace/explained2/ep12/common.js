@@ -105,12 +105,12 @@ function chantLines(t, L, o = {}) { const bar = L.bar, st = chantState(L, t); le
 // EP12: which column of the board MATCH THE JOB flashes now: [PURPOSE (line 1), PROPERTY (line 2), MATERIAL (line 3)], on each word of that line's call and answer
 function chantFlash(t, L) { const f = [0, 0, 0]; for (const w of L.words) { const i = w.slot; if (i >= 0 && i < 3) f[i] = Math.max(f[i], pulse(t, w.a, .03, .35)); } return f; }
 function chantScene(t, s, id, o = {}) { const L = TL.lines[id], beats = chantBeats(L); let fx = "", clap = 0, stomp = 0; for (const [bt, k, soft] of beats) { const g = soft ? .45 : 1; if (k === "c") clap = Math.max(clap, pulse(t, bt, .03, .18) * g); else stomp = Math.max(stomp, pulse(t, bt, .03, .25) * g); }
-  const jumps = beats.filter((b) => b[1] === "s" && !b[2]).map((b) => [b[0] - .2, 30]), by = 1066, bh = 270, xs = [620, 990, 1360], tin = s.t0 + .15;
+  const jumps = beats.filter((b) => b[1] === "s" && !b[2]).map((b) => [b[0] - .2, 30]), by = 1066, bh = o.bh || 270, xs = o.xs || [620, 990, 1360], tin = s.t0 + .15;
   let buds = ""; ["pip", "basil", "momo"].forEach((w, i) => { const sq = 1 - .05 * clap; buds += `<g transform="translate(${xs[i]} ${by}) scale(${n2(1 / sq)} ${n2(sq)}) translate(${-xs[i]} ${-by})">${buddy(w, xs[i], by, bh, t, { aura: true, in: tin + i * .08, jump: t >= L.t ? jumps : [], poses: [[s.t0, "sit"], [L.end - .28, "cheer"]] })}</g>`;
     fx += OP(clap, `<g stroke="${P.sun}" stroke-width="7" stroke-linecap="round"><path d="M${xs[i] - bh * .5} ${by - bh * .8} l-26 -22 M${xs[i] + bh * .5} ${by - bh * .8} l26 -22 M${xs[i]} ${by - bh * 1.08} v-30"/></g>`) + OP(stomp, `<ellipse cx="${xs[i]}" cy="${by}" rx="${n2(bh * (.5 + .4 * (1 - stomp)))}" ry="${n2(22 + 16 * (1 - stomp))}" fill="none" stroke="#fff" stroke-width="6"/>`); });
   // EP12: the board MATCH THE JOB stands behind them, centred and big enough to read; each line's column flashes on its call. Stage 2 passes o.board(t, flash) -> svg
   const board = o.board ? o.board(t, chantFlash(t, L)) : "";
-  return bg("stage2") + board + chantLines(t, L, { x: o.x || 900, y0: o.y0 || 330, dy: o.dy || 150, size: o.size || 58 }) + (o.head || "") + buds + fx + yourTurn(t, L, 1730, 700, .95) + say(o.sayId || "u1002", 960, 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
+  return bg("stage2") + board + chantLines(t, L, { x: o.x || 900, y0: o.y0 || 330, dy: o.dy || 150, size: o.size || 58 }) + (o.head || "") + buds + fx + yourTurn(t, L, o.tx || 1730, o.ty || 700, .95) + say(o.sayId || "u1002", o.sayX || 960, o.sayY || 640, t, { size: 52, col: P.basil, tail: 0, merge: true }) + HUD(t); }
 
 /* ============ the score hand ============ */
 function finalScene(t, s, L, bud, tips, extra = "") { // tips: [[time, text, big]]; the last one is HIGH FIVE
@@ -140,8 +140,8 @@ function nykScene(t, s, prop, o = {}) { const BX = o.bx || [300, 1650, 1275], HX
   let rays = ""; for (let i = 0; i < 18; i++) { const a = i * 20 + (t - s.t0) * 9; rays += `<path d="M960 520 L${n2(960 + Math.cos(a * Math.PI / 180) * 1600)} ${n2(520 + Math.sin(a * Math.PI / 180) * 1600)} L${n2(960 + Math.cos((a + 9) * Math.PI / 180) * 1600)} ${n2(520 + Math.sin((a + 9) * Math.PI / 180) * 1600)}z" fill="#FFE27A" opacity=".5"/>`; }
   let out = `<rect width="1920" height="1080" fill="url(#gSun)"/>${rays}<circle cx="960" cy="520" r="420" fill="#FFF3B8" opacity=".7" filter="url(#b60)"/>` + prop;
   const loop = []; for (let j = 0; j < 9; j++) loop.push([t0 + 1.0 + j * .62, 34]);
-  [["pip", BX[0], false], ["basil", BX[1], true], ["momo", BX[2], true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1040, 320, t, { aura: true, flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, "waving"], [LT(U) - .12, "sit"], [LE(U) + .15, "pointing"], [tN - .1, "sit"], [t0, "cheer"]], wave: true, nohop: true, jump: [[tOne - .16, 26], [tTwo - .16, 26], [t0 - .02, 90], ...loop.map(([a, b]) => [a + i * .1, b])] }); });
-  out += say(U, 960, 430, t, { size: 60, col: P.basil, tail: 0, merge: true });
+  [["pip", BX[0], false], ["basil", BX[1], true], ["momo", BX[2], true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1040, o.bh || 320, t, { aura: true, flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, "waving"], [LT(U) - .12, "sit"], [LE(U) + .15, "pointing"], [tN - .1, "sit"], [t0, "cheer"]], wave: true, nohop: true, jump: [[tOne - .16, 26], [tTwo - .16, 26], [t0 - .02, 90], ...loop.map(([a, b]) => [a + i * .1, b])] }); });
+  out += say(U, 960, o.sayY || 430, t, { size: 60, col: P.basil, tail: 0, merge: true });
   const cnt = t >= tTwo ? "2" : t >= tOne ? "1" : t >= tR ? "Ready?" : ""; if (cnt && t < tN - .04) { const tc = cnt === "2" ? tTwo : cnt === "1" ? tOne : tR; out += TF(960, 300, lerp(1.8, 1, eo((t - tc) / .14)), `<text x="0" y="60" font-family="Fredoka" font-weight="700" font-size="${cnt.length > 1 ? 150 : 230}" text-anchor="middle" fill="#fff" stroke="${P.ink}" stroke-width="26" stroke-linejoin="round" paint-order="stroke">${cnt}</text>`); }
   // YOU: the viewer's two hands, up and cheering, with their tag (no orphan labels: the tag stands with the hands it names)
   { const hu = on ? 26 * Math.abs(Math.sin((t - t0) * 5)) * clamp(1.6 - (t - t0) * .3) : 0; out += OP(ramp(t, LT(U), .3), [-1, 1].map((sd) => `<g transform="translate(${HX + sd * 62} ${n2(640 - hu)}) scale(${sd * .5} .5) rotate(${-10})" filter="url(#dropS)">${countHand(5)}</g>`).join("") + youPill(HX, 520 - hu, 1.0)
@@ -154,29 +154,50 @@ function nykScene(t, s, prop, o = {}) { const BX = o.bx || [300, 1650, 1275], HX
     for (let i = 0; i < 22; i++) { const life = 1.1 + hash(i, 3) * .8, v = (((t - t0) + hash(i, 5) * 3) % life) / life, x = 120 + hash(i, 7) * 1680, y = 120 + hash(i, 9) * 560 + 50 * v; out += `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2((.5 + hash(i, 2) * .7) * Math.sin(Math.PI * v))}) rotate(${n2(90 * v + 20 * i)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#fff"/></g>`; } }
   return out + logo(t); }
 /* ============ the hidden animal, revealed: a replay of its shot with a ring around it ============ */
-function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u);
-  return `<g transform="translate(960 540) scale(${n2(zz)}) translate(${n2(-lerp(960, lx + dx, u))} ${n2(-lerp(540, ly + dy, u))})">${view}<circle cx="${lx}" cy="${ly}" r="${n2(rr + rr * .07 * Math.sin(t * 6))}" fill="none" stroke="${P.sun}" stroke-width="${n2(9 * rr / 88 + 2)}"/></g>`
+/* teacher, 22 Nov 2026 ("the transition to be from the real scene, directly zoom into the animal, then the other objects pop out ... no
+   unnecessary cutting of scene"): the hidden-animal moments stay in the REAL place. pushCam = one smooth push-in that carries the world point
+   (ax, ay) to the screen point (tx, ty) at zoom Z; spotDim = the rest of the picture softly dimmed round the animal (nothing is cut away);
+   popSpark = the small sparkle of a pop. */
+const pushCam = (inner, u, ax, ay, tx, ty, Z) => `<g transform="translate(${n2(lerp(ax, tx, u))} ${n2(lerp(ay, ty, u))}) scale(${n2(lerp(1, Z, u) * 1000) / 1000}) translate(${-ax} ${-ay})">${inner}</g>`;
+const spotDim = (k, x, y, r0 = 250, r1 = 900, a = .74) => k <= .01 ? "" : `<radialGradient id="spotDimG" gradientUnits="userSpaceOnUse" cx="${n2(x)}" cy="${n2(y)}" r="${r1}"><stop offset="${n2(r0 / r1)}" stop-color="${P.night}" stop-opacity="0"/><stop offset="1" stop-color="${P.night}" stop-opacity="${a}"/></radialGradient><rect width="1920" height="1080" fill="url(#spotDimG)" opacity="${n2(Math.min(1, k))}"/>`;
+const popSpark = (t, t0, x, y, r = 90) => { const u = (t - t0) / .5; if (u <= 0 || u >= 1) return ""; let g = ""; for (let i = 0; i < 6; i++) { const a = (i * 60 + 20) * Math.PI / 180, d = r * (.55 + .65 * eo(u)); g += TF(x + Math.cos(a) * d, y + Math.sin(a) * d, (1 - u) * (i % 2 ? 1.2 : .8), `<path d="M0 -14 L4 -4 L14 0 L4 4 L0 14 L-4 4 L-14 0 L-4 -4z" fill="#fff"/>`); } return g; };
+// the name label that stands by the REAL animal (it replaces the picture-in-a-circle badge): a pill with a little tail pointing down at it
+const animalLabel = (t, t0, x, y, size = 44) => t < t0 ? "" : TF(x, y, spring(t, t0, .5), `<g filter="url(#dropS)"><path d="M-16 ${n2(size * .7)} L0 ${n2(size * 1.25)} L16 ${n2(size * .7)}z" fill="${P.ink}"/></g>` + tpill(0, 0, "a little " + HIDDEN[0], size, P.ink, "#fff", { w: 700 })) + popSpark(t, t0, x, y, 150);
+/* the reveal: the picture melts from the score hand into the real place (o.from = the last frame of the scene before, no jump cut), the camera
+   pushes in on the animal, and the ring pops round it on its name */
+function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88, zmax = 1.7, o = {}) { const tTell = W(L, "tell") - .1, u = eio((t - s.t0 - .2) / 1.3), zz = lerp(1, zmax, u), tR = W(L, HIDDEN[0]) + .1, kr = t < tR ? 0 : spring(t, tR, .5), fade = 1 - clamp((t - s.t0) / .45);
+  return `<g transform="translate(960 540) scale(${n2(zz)}) translate(${n2(-lerp(960, lx + dx, u))} ${n2(-lerp(540, ly + dy, u))})">${view}${kr ? `<circle cx="${lx}" cy="${ly}" r="${n2((rr + rr * .07 * Math.sin(t * 6)) * kr)}" fill="none" stroke="${P.sun}" stroke-width="${n2(9 * rr / 88 + 2)}"/>` + popSpark(t, tR, lx, ly, rr * 1.25) : ""}</g>`
     + (t >= tq ? TF(960, 830, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw(qtext, 58, 700) / 2 - 60)}" y="-60" width="${n2(tw(qtext, 58, 700) + 120)}" height="120" rx="60" fill="${P.ink}"/></g>${T(0, 20, qtext, 58, "#fff")}`) : "")
-    + (t >= tTell ? TF(960, 970, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + logo(t); }
+    + (t >= tTell ? TF(960, 970, spring(t, tTell, .45), tpill(0, 0, "Tell someone at home!", 44, P.sun, P.ink, { w: 700 })) : "") + (fade > .01 && o.from ? OP(fade, o.from()) : "") + logo(t); }
 
 /* ============ the game: You against the Buddies (full in Part 1, one breath in Part 2) ============ */
-function gameScene(t, s, L, full) { const tLock = W(L, "lock"), tC = W(L, HIDDEN[0]), tFind = W(L, "spot");   // teacher, 2026-11-21: Heart NAMES the animal ("A little sparrow is hiding in this video. Can you spot it?") and its picture is shown
-  let out = bg("stage");
-  if (full) { const tYou = W(L, "you"), tBud = W(L, "buddies"), tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one");
-    out += `<g transform="translate(960 ${n2(lerp(-200, 190, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.45 + .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3), { you: 0, bud: 0 })}</g>`;
-    const nf = t >= tOne ? 1 : 0, youIn = spring(t, tYou - .1, .5);
+function gameScene(t, s, L, full, R) { const tLock = W(L, "lock"), tC = W(L, HIDDEN[0]), tFind = W(L, "spot");   // teacher, 2026-11-21: Heart NAMES the animal ("A little sparrow is hiding in this video. Can you spot it?")
+  // teacher, 22 Nov: no cut to the purple stage. R = { world(t) (the real place, no HUD), A (the animal in the world), T (where it lands on
+  // screen), Z, pre(t) (the scene before's own labels and small discs, which slip away), dim0 (how dark the picture already was) }: ONE push-in
+  // (ease in-out, 1.1 s) straight onto the animal, the rest softly dimmed; THEN the game's things pop out over it. Words and cues: unchanged.
+  const tz = s.t0 + .05, dz = 1.1, tP = tz + dz - .1, u = eio((t - tz) / dz), gone = clamp((t - s.t0) / .3), ax = R.T[0], ay = R.T[1];
+  let out = pushCam(R.world(t), u, R.A[0], R.A[1], ax, ay, R.Z) + (R.dim0 && u < 1 ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(R.dim0 * (1 - u))}"/>` : "") + spotDim(u, ax, ay, R.r0 || 250)
+    + (gone < 1 && R.pre ? OP(1 - gone, TF(0, 60 * gone, 1, R.pre(t))) : "");
+  // the score pill glides from its corner to the middle (it never leaves the picture)
+  const sb = (y1, s1, extra = 0) => { const k = eio((t - (s.t0 + .1)) / .55); return scoreboard(t, lerp(1640, 960, k), lerp(70, y1, k), lerp(.62, s1, k) + extra, { you: 0, bud: 0 }); };
+  const lab = animalLabel(t, tC - .1, ax + (R.lx || 0), ay + (R.ly || -200), R.ls || 44);
+  if (full) { const tYou = W(L, "you"), tBud = W(L, "buddies"), tb = W(L, "every") - .3, ph2 = ss(tb, tb + .4, t), tOne = W(L, "one"), tH = Math.max(tYou - .1, tP);
+    out += sb(190, 1.45, .12 * pulse(t, tYou, .02, .3) + .12 * pulse(t, tBud, .02, .3));
+    const nf = t >= tOne ? 1 : 0, youIn = spring(t, tH, .5);
     if (youIn > .02) { const px = lerp(400, 330, ph2), cx = lerp(880, 760, ph2), cs = lerp(1.15, 1.9, ph2), cy = lerp(700, 800, ph2);
       out += TF(px, lerp(640, 600, ph2), youIn * lerp(1.2, .9, ph2), `<g filter="url(#dropS)">${countHand(t >= tLock ? 2 : 0)}</g>`) + OP(1 - ph2, tpill(400, 880, "answer hand", 30, "#fff", P.ink));
       out += TF(cx, cy, youIn * cs * (1 + .06 * pulse(t, tOne, .02, .2)), `<g filter="url(#dropS)">${countHand(ph2 > .5 ? nf : 0)}</g>`) + OP(1 - ph2, tpill(880, 990, "score hand", 30, "#fff", P.ink));
-      out += youPill(lerp(640, 330, ph2), lerp(470, 400, ph2), 1.3 * youIn);
+      out += youPill(lerp(640, 330, ph2), lerp(470, 400, ph2), 1.3 * youIn) + popSpark(t, tH, 640, 640, 260);
       if (nf && ph2 > .5) out += TF(1010, 560, spring(t, tOne, .35), `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 28, "+1", 70, P.ink)}`); }
     out += OP(pulse(t, tLock + .2, .2, 1.4) * (1 - ph2), `<g transform="translate(1010 620) scale(.42)">${ringTimer(0, 0, .62, 3, t)}</g>`);
-    [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = tBud + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
-    if (t >= tC - .1) out += TF(1440, 430, spring(t, tC - .1, .5), hiddenBadge(t, 150)) + TF(1440, 640, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 }));
+    [["pip", 1170, "waving"], ["basil", 1455, "cheer"], ["momo", 1740, "waving"]].forEach(([w, x, pz], i) => { const tt = Math.max(tBud, tP + .1) + i * .14; out += buddy(w, x, 1030, 225, t, { aura: true, in: tt - .08, poses: [[tt - .08, pz], [tt + 1.4, "sit"], [tFind, "cheer"]], wave: true }); });
+    out += lab + (t >= tFind - .1 ? TF(R.qx || 1440, R.qy || 640, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 40, P.ink, P.sun, { w: 700 })) : "");
     return out + logo(t); }
-  // Part 2: "Lock in first. And find the new lizard!"
-  out += `<g transform="translate(960 ${n2(lerp(-200, 170, eo((t - s.t0) / .4)))})">${scoreboard(t, 0, 0, 1.35, { you: 0, bud: 0 })}</g>`;
-  out += TF(560, 560, spring(t, tLock - .15, .5), `<g transform="scale(.8)">${ringTimer(0, 0, clamp(1 - (t - tLock) / 3), 5, t)}</g>` + TF(0, 0, .95, `<g filter="url(#dropS)">${countHand(t > tLock + .7 ? 3 : t > tLock + .35 ? 2 : 1)}</g>`)) + (t >= tLock ? TF(560, 880, spring(t, tLock + .1, .4), tpill(0, 0, "You lock in first", 42, "#fff", P.ink, { w: 700 })) + youPill(560, 330, 1.2) : "");
-  if (t >= tC - .1) out += TF(1360, 540, spring(t, tC - .1, .5), hiddenBadge(t, 170)) + TF(1360, 790, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 }));
-  [["pip", 1010, 880], ["basil", 960, 1066], ["momo", 1750, 1060]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 220, t, { aura: true, in: s.t0 + .2 + i * .1, flip: i === 1, poses: [[s.t0, "cheer"], [s.t0 + 1.6, "sit"]], wave: true }); });
+  // Part 2: "Lock in first. A little squirrel is hiding in this video. Can you spot it?"
+  const tH = Math.max(tLock - .15, tP);
+  out += sb(170, 1.35);
+  out += TF(560, 560, spring(t, tH, .5), `<g transform="scale(.8)">${ringTimer(0, 0, clamp(1 - (t - tLock) / 3), 5, t)}</g>` + TF(0, 0, .95, `<g filter="url(#dropS)">${countHand(t > tLock + .7 ? 3 : t > tLock + .35 ? 2 : 1)}</g>`)) + popSpark(t, tH, 560, 560, 250)
+    + (t >= tH ? TF(560, 880, spring(t, tH + .1, .4), tpill(0, 0, "You lock in first", 42, "#fff", P.ink, { w: 700 })) + youPill(560, 330, 1.2 * spring(t, tH + .05, .4)) : "");
+  out += lab + (t >= tFind - .1 ? TF(R.qx || 1360, R.qy || 790, spring(t, tFind - .1, .4), tpill(0, 0, "Can you spot it?", 42, P.ink, P.sun, { w: 700 })) : "");
+  [["pip", 1010, 880], ["basil", 960, 1066], ["momo", 1750, 1060]].slice(1).forEach(([w, x, y], i) => { out += buddy(w, x, y, 220, t, { aura: true, in: tP + .15 + i * .12, flip: i === 1, poses: [[s.t0, "cheer"], [tP + 1.6, "sit"]], wave: true }); });
   return out + logo(t); }

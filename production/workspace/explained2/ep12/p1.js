@@ -22,7 +22,7 @@ const boardChip = (t, i, x, y, size = 24) => { const t0 = MK(["ep9", "goodtag", 
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 
 /* the walkway (walk.js VW): the free trolley out in front, the board MATCH THE JOB, the three small discs */
-const TRX = 620, TRY = 1000, BDX = 1190, BDY = 1034, BDS = .45, CAM0 = [1, 960, 540], CAMT = [1.22, 1420, 610], CREAM = "#FFF6D8";
+const TRX = 620, TRY = 1000, BDX = 1220, BDY = 1034, BDS = .45, CAM0 = [1, 960, 540], CAMT = [1.22, 1420, 610], CREAM = "#FFF6D8";
 const trol = (o = {}, x = TRX, sc = 1.2) => `<ellipse cx="${x}" cy="${TRY + 4}" rx="${n2(180 * sc)}" ry="14" fill="${P.ink}" opacity=".16" filter="url(#b4)"/>` + TF(x, TRY, sc, trolleyS(o));
 const brd = (t, o, x = BDX) => TF(x, BDY, BDS, matchBoard(t, o));
 const buds = (t, o = {}) => sPip(t, o.pip) + sBasil(t, o.basil) + sMomo(t, o.momo);
@@ -56,7 +56,9 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lc
   + slamFit(400, "A TROLLEY", "#fff", slamK(u, .05)) + slamFit(610, "MADE OF GLASS?!", P.sun, slamK(u, .55)) + HUD(t); };
 
 /* 3 · the game, and the hidden mynah; 4 · goals (Momo reads) and the countdown (count is in common.js) */
-SC.game = (t, s) => gameScene(t, s, "g301", true);
+// teacher, 22 Nov: no cut to the purple stage: the dimmed walkway of the title stays, the camera pushes straight in on the mynah on its sign
+SC.game = (t, s) => gameScene(t, s, "g301", true, { world: (tt) => V(tt, { board: {} }), A: [MYNAH[0] + 4, MYNAH[1] - 28], T: [1330, 470], Z: 3, dim0: .78, ly: -150, qx: 1655, qy: 400,
+  pre: (tt) => OP(.5, buds(tt) + trolleyRule(tt)) + slamFit(400, "A TROLLEY", "#fff", 1) + slamFit(610, "MADE OF GLASS?!", P.sun, 1) });
 SC.goals = (t, s) => goals3(t, s, [["Objects have purposes", ""], ["Properties decide uses", ""], ["Why a trolley is metal", ""]], ["g401", "g402", "g403", "g404"], "momo");
 
 /* 5 · what is a trolley for? The OBJECT column glows, the trolley's tile hops low onto the first row (row1o); [LOOK CLOSER] a trolley doing its job */
@@ -66,7 +68,7 @@ SC.lcjob = (t, s) => lookCloser(t, s, { tz: s.t0, fx: 760, fy: 800, art: jobArt,
 
 /* 6 · Mark Sentence 1 (Pip): 3.24; the trolley's row gets its purpose (row1p); the towel, the scissors, the raincoat (things: cuttable line) */
 SC.mark1 = (t, s) => markScene(t, s, { id: "g602", sayId: "g601", who: "pip", n: "1 of 2", text: "Materials are used to make objects. Objects are things you use for different purposes.", keys: ["materials", "objects", "purposes."], size: 62, y: 250, footer: FOOT,
-  extra: TF(840, 1046, spring(t, s.t0 + .4, .5) * .6, trolleyS({ load: LOADED })) + TF(1450, 1062, .36, matchBoard(t, { row: t >= MK("row1p") - .2 ? 0 : -1 })) });
+  extra: TF(840, 1046, spring(t, s.t0 + .4, .5) * .6, trolleyS({ load: LOADED })) + TF(1440, 1062, .42, matchBoard(t, { row: t >= MK("row1p") - .2 ? 0 : -1 })) });
 const THINGS = [["towel", towelS, "absorbs water", "fabric"], ["scissors", scissorsS, "cut", "metal"], ["raincoat", raincoatS, "keeps you dry in the rain", "plastic"]];
 SC.things = (t, s) => { const [bx, bd] = slideX(t, s.t0 + .1, .6, 2300, 930, TRY), BX = 930; let it = "", tags = "";
   THINGS.forEach(([mk, art, job, mat], i) => { const t0 = MK(mk), x1 = 1130 + i * 190, u = eio((t - (t0 - .45)) / .45), sc = 1.15; if (t < t0 - .45) return;
@@ -154,7 +156,7 @@ SC.pullout = (t, s) => V(t, { trol: { load: LOADED }, board: {} }, camL([4.6, TB
 SC.final = (t, s) => { const L = "g1301"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1, u = t - (s.t0 + 1.6);
   const act = { hop: u > 0 ? 26 * Math.abs(Math.sin(Math.PI * clamp(u / .45))) + 14 * Math.abs(Math.sin(Math.PI * clamp((u - .6) / .4))) : 0, flap: pulse(t, s.t0 + 2.3, .12, .5), tilt: u > 1.4 ? 16 * Math.sin((u - 1.4) * 7) : undefined };
-  return lizReveal(t, s, L, V(t, { trol: { load: LOADED }, mynah: act }), MYNAH[0] + 6, MYNAH[1] - 30, tq, "It was on the trolley bay sign!", 200, 150, 70, 1.9); };
+  return lizReveal(t, s, L, V(t, { trol: { load: LOADED }, mynah: act }), MYNAH[0] + 6, MYNAH[1] - 30, tq, "It was on the trolley bay sign!", 200, 150, 70, 1.9, { from: () => SC.final(SCN.final.t1 - .04, SCN.final) }); };
 
 /* 14 · the cliffhanger: the trolley from above; three water bottles stand in a row in its fold-down flap (plastic, glass, metal) */
 SC.cliff = (t, s) => { const a = "g1401", c = "g1403", TX = 900, TY = 580, S = 1.45, tP = W(c, "find") - .1, tb = [MK("b1"), MK("b2"), MK("b3")], bx = (i) => TX + S * (-266 + i * 62), by = TY + S * 104;
@@ -167,5 +169,5 @@ SC.cliff = (t, s) => { const a = "g1401", c = "g1403", TX = 900, TY = 580, S = 1
     + (t >= tP ? TF(880, 905, lerp(2.2, 1, eo((t - tP) / .16)) + .05 * wob(t, tP + .16, .4), `<text x="0" y="50" font-family="Fredoka" font-weight="700" font-size="170" text-anchor="middle" letter-spacing="6" fill="${P.sun}" stroke="${P.ink}" stroke-width="28" stroke-linejoin="round" paint-order="stroke" filter="url(#drop)">PART 2</text>`) : "") + trolleyRule(t) + HUD(t); }; /* Stage 3: PART 2 slams in below the trolley (it covered the glass / metal tags) */
 
 /* 15 · "Now you know!": the board MATCH THE JOB (two full rows) centred in the free space between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, TF(920, 1040, .5, matchBoard(t)), { bx: [200, 1715, 1375], hx: 470 });
+SC.nyk = (t, s) => nykScene(t, s, TF(862, 1040, .8, matchBoard(t)), { bx: [125, 1800, 1578], bh: 220, hx: 125, sayY: 400 });   // teacher, 22 Nov: the trolley board, big; the discs smaller and at the sides, YOU above Pip
 })(); }
