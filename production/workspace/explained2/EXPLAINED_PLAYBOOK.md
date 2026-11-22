@@ -193,7 +193,7 @@ key light, nothing touching the frame edge by accident, no text over a face or p
 ### 4.2 Stages and who does them
 | Stage | Model | Output |
 |---|---|---|
-| Script | Fable (writing and drawing) | `p3_epNN_script.md`: segment tables (time, on screen, exact words, sound, why), the chain, [LOOK CLOSER] rows, Shorts, teacher sheet, non-textbook list, questions for the teacher with recommendations |
+| Script | **Opus** (teacher, 22 Nov: Opus wrote EP1–EP3, the scripts the teacher is happiest with; Opus writes every script from EP14 on) | `p3_epNN_script.md`: segment tables (time, on screen, exact words, sound, why), the chain, [LOOK CLOSER] rows, Shorts, teacher sheet, non-textbook list, questions for the teacher with recommendations |
 | Stage 1 setup | Opus | `epNN/`: engine copied from the newest episode, `script.py`, voices (`make_voice.py`), timelines (`build_tl.py`), sound cues, placeholder scenes, `SCENES_TODO.md`, `STATE.md`, `upload.json` |
 | Stage 2 drawing | Fable | every scene drawn, look-closers, journeys, animals, new-style thumbnails, stills + contact sheets |
 | **Teacher preview (proposed 22 Nov)** | — | 6–8 key stills or a 60 s preview per part; the teacher's notes fixed before render |
@@ -246,8 +246,8 @@ New Singapore names get a test clip for the teacher before use.
 ## 8. Where the series stands (22 Nov 2026)
 - **Live:** P3 EP1–EP12, two parts each (links in `Plans/videos/P3-new/HANDOFF.md` and the episode guide).
 - **EP13** (design like an engineer): the teacher said release it as it is (22 Nov); it is the last episode in the old way.
-- **EP14 onwards** (from day and night, cycles): the script is rewritten with the chain and the learner's-path look-closers (two per
-  part, deeper), then drawn from there.
+- **EP14 onwards** (from day and night, cycles): once EP13 is live, **Opus** rewrites the EP14 script with the chain and the
+  learner's-path look-closers (two per part, deeper), then it is drawn from there. Opus writes every later script too.
 - **Open questions for the teacher:** (4) a short preview of
   each episode before upload? (5) swap the three pilot thumbnails onto EP9 P2, EP10 P1, EP11 P1? (6) the 17 questions on buddies,
   scenes and depth (buddies in scenes, more poses, real places, camera movement, background life, lighting, depth, pace of releases).
