@@ -188,6 +188,19 @@
     855
    ]
   },
+  "back": {
+   "file": "poses/momo_back.png",
+   "src": "momo_back.png",
+   "anchor": [
+    333.1,
+    831.0
+   ],
+   "scale": 1.281,
+   "size": [
+    637,
+    854
+   ]
+  },
   "_sit": {
    "body_h": 807,
    "hips_above_feet": 6

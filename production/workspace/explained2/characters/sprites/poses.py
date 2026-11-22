@@ -17,7 +17,7 @@ POSES = {  # buddy: {pose: (file, crop or None)}
           "pointing": ("pointing_draft2_sheet.jpg", (440, 15, 815, 432))},
   "momo": {"cheer": ("momo_cheer_mouth_open.jpg", None), "oops": ("momo_oops.jpg", None), "thinking": ("momo_thinking.jpg", None),
            "surprised": ("momo_surprised.jpg", None), "arms_crossed": ("momo_arms_crossed.jpg", None), "pointing": ("momo_pointing.jpg", None),
-           "waving": ("momo_waving.jpg", None)},
+           "waving": ("momo_waving.jpg", None), "back": ("momo_back.png", None)},
   "basil": {"cheer": ("basil_cheer_mouth_wide.jpg", None), "oops": ("basil_oops.jpg", None), "surprised": ("basil_surprised.jpg", None),
             "arms_crossed": ("basil_arms_crossed.jpg", None)},
 }
