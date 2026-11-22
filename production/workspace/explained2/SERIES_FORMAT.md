@@ -387,6 +387,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
 - A light bouncy bed, ducked under speech.
 - A calm pad for the shrink.
 - Effects: a woodblock tick that speeds up for lock-ins, a bell, a "LOCKED IN!" stamp, pops on pose swaps, the clap-clap-stomp chant beat, and a soft chime on new key words.
+- **Every place sounds alive (teacher, 2026-11-22: "I still recall there's raining sound during episode 1. Now for this supermarket
+  scene, there's no sound effects of shoppers, laughter, bells… the quality indeed dipped").** Each real place has its own ambience
+  bed, low and ducked under speech, crossfading between places (rain on the window, a supermarket's murmur, laughter, scanner beeps
+  and door chime; a classroom's fans and distant school bell; a pond's frogs and trickle; birds and distant traffic outdoors), plus
+  foley on every action (wheels, clinks, zips, drops, knocks). Use the repo's sound libraries or synthesize; no copyrighted downloads.
 - Loudness about -16 LUFS.
 - A human must listen before upload: the agents can only measure the sound.
 
