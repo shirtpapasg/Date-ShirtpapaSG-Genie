@@ -143,3 +143,6 @@ The hidden animals (snail P1, weaver ant P2) must never appear again at the spot
 
 ## Teacher note 23 Nov: Basil too big
 Basil looked much bigger than Momo and Pip in the kitchen (0:05). Fixed: lib.js SIZE_K basil .88 everywhere, and the kitchen Basil (on the counter, further back) 460 -> 400 before the factor. The fix round must check the buddy sizes in EVERY scene (same depth = same size, further back = smaller, nobody >15% bigger at the same depth).
+
+## 23 Nov: v2 LIVE
+Teacher: "ok to upload". Part 1 _EhWglg1APE, Part 2 YQTvuQj5aQ8 (after EP14 v3 in both playlists); classic RVRoaWWKjEM retired (points to the new Part 1). YouTube chapters applied; app moments in TheOneApp PR #254 (branch claude/explained-timestamps, commit 55e139f).
