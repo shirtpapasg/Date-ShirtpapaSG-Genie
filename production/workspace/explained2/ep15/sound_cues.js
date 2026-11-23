@@ -44,4 +44,42 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+  // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): each real place has its own low bed under everything said there. Part 1: the HDB
+  // kitchen after rain (drips from the wet ledge, birds, the fan) and the common corridor (birds, a far bus, the neighbour's wind chime);
+  // Part 2: the community garden (birds, far children at the void deck, leaves) and the seed bank's cold-room hum. Plus foley ON the marks.
+  { const ROOM = ["cold", "back", "title", "plant", "lcobserve", "lcseed", "seedans", "waitw", "pullout", "measure", "strip", "holdon", "cliff"],
+      GARDEN = ["place", "lcadult", "adultans", "seeds", "waitw", "pullout", "fruitcut", "ring", "show", "fix", "nomore", "dare"], LIST = PART === 1 ? ROOM : GARDEN, out = [];
+    for (const sc of TL.scenes) if (LIST.includes(sc.name)) { const last = out[out.length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else out.push([sc.t0, sc.t1]); }
+    (PART === 1 ? R.room : R.garden).push(...out.filter(([a, b]) => b - a > 1));
+    const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus });
+    if (PART === 1) {
+      // the kitchen: drips on the wet ledge; the corridor: the neighbour's wind chime now and then
+      for (const n of ["cold", "back", "title"]) if (S[n]) for (let t = S[n].t0 + .4, i = 0; t < S[n].t1; t += 1.3 + .4 * (i % 3), i++) sfx(t, "drip.wav", .05 + .02 * (i % 2));
+      for (const n of ["plant", "seedans", "measure", "holdon", "cliff", "waitw"]) if (S[n]) for (let t = S[n].t0 + 1.2, i = 0; t < S[n].t1 - .5; t += 4.5 + 1.5 * (i % 2), i++) E(t, "windchime", i);
+      // the cold open: the knife on the board, the seed set on the saucer; the boards slide (wired); the planting: the seed into the soil, two pats, water
+      E(mk("cutmango") + .35, "knock"); E(mk("cutmango") + .5, "sfx", { f: "ep07_squish.wav", g: .14 }); E(mk("cutmango") + 2.3, "tok");
+      E(mk("potin"), "pomf"); E(mk("soilpat"), "pomf"); E(mk("soilpat") + .4, "pomf"); for (let i = 0; i < 6; i++) E(mk("water") + i * .17, "drip", i);
+      // the look-closers: the journal opens, a magnifier glint, a gentle touch, a sniff, the pencil; the root's soft creak, the shoot's pop, leaves unfold
+      E(mk("journal"), "flip"); E(mk("look"), "window"); E(mk("touch"), "rub"); sfx(mk("smell"), "ep07_sniff.wav", .3, "game"); E(mk("write"), "scribble"); E(mk("write") + .9, "scribble");
+      ["d10", "d20", "d30", "d45"].forEach((k) => E(mk(k), "rise", 1)); E(mk("root"), "creak"); E(mk("shoot"), "crack", 1); E(mk("leaves"), "leafrise"); E(mk("green"), "chime2", 0); E(mk("oldseed"), "softpop", 1);
+      // the journey: the soil creaks as you swell, the root, the shoot breaking into the light
+      E(mk("jswell"), "stretch"); E(mk("jroot"), "creak"); E(mk("jshoot"), "creak"); E(mk("jlight"), "reveal"); E(mk("jleaves"), "leafrise");
+      // the ruler: it slides in, clacks on the table, slides into the pot; the measurements
+      E(mk("rulerin") - .5, "slide"); E(mk("rtable") - .2, "clack"); E(mk("r20"), "pop", 1); E(mk("rzero"), "slide"); E(mk("rsoil") + .3, "clack"); E(mk("r12"), "tag", 0);
+      E(mk("q"), "curious"); E(mk("treein"), "whoosh");
+    } else {
+      E(mk("potdown") + .9, "pomf");
+      for (const n of ["seeds", "nomore"]) if (S[n]) E(S[n].t0 + 1.5, "sfx", { f: "ep05_leaf.wav", g: .08, bus: "amb" });
+      ["stem", "trunk", "flowers", "tips"].forEach((k, i) => E(mk(k), "pop", i)); E(mk("tagadult"), "tag", 0);
+      E(mk("jpetals"), "leafrise"); E(mk("jgreen"), "softpop", 2); E(mk("jbig"), "stretch"); E(mk("jseed"), "window"); E(mk("jripe"), "chime2", 1);
+      E(mk("cutfruit") + .3, "knock"); E(mk("cutfruit") + .45, "sfx", { f: "ep07_squish.wav", g: .16 });
+      ["tseed", "tyoung", "tadult"].forEach((k, i) => E(mk(k), "hop", i)); E(mk("tback"), "sparkle");
+      E(mk("l3"), "pop", 2); E(mk("strike"), "scribble"); E(mk("bend"), "tag", 0);
+      // the seed bank: the cold room's steady hum, the trays, a jar set down, the heavy door
+      if (S.lcbank) for (let t = mk("bankin"); t < S.lcbank.t1 - .5; t += 5) sfx(t, "hum.wav", .06);
+      E(mk("dry"), "rustle"); E(mk("jars"), "tok"); E(mk("jars") + .5, "tok"); E(mk("cold"), "clunk");
+      if (S.dare) { E(S.dare.t0 + .4, "sfx", { f: "ep06_plop.wav", g: .12, bus: "amb" }); E(S.dare.t0 + 1.6, "bubble", 1); E(S.dare.t0 + 2.4, "bubble", 2); }
+    } }
+  // no ambience one-shots under a countdown (only the ticks keep time)
+  { const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["windchime", "sfx", "drip"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

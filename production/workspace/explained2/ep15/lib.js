@@ -111,9 +111,9 @@ function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.
    o.mouth (0..2) / o.eyes "shut": a yawn or a doze in the sit pose (EP14); o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
 function buddy(who, x, y, h, t, o = {}) {
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
-  let pose = o.pose || "sit", tsw = -99;
-  for (const [tp, p] of o.poses || []) if (t >= tp) { pose = p; tsw = tp; }
-  let nxt = 1e9; for (const [tp] of o.poses || []) if (tp > t) { nxt = tp; break; }
+  let pose = o.pose || "sit", tsw = -99; const PS = (o.poses || []).slice().sort((a, b) => a[0] - b[0]);   // EP15: poses in time order
+  for (const [tp, p] of PS) if (t >= tp) { pose = p; tsw = tp; }
+  let nxt = 1e9; for (const [tp] of PS) if (tp > t) { nxt = tp; break; }
   // teacher, 22 Nov (EP14 P1 3:30): "both pip and basil mouth not moving". Pose paintings have no mouths, so a buddy SPEAKING always
   // shows its talking sprite (lip-sync + blinks), with the usual pose-swap pop at the start of the line; the pose returns after the line.
   { const spk = o.keepPose ? null : speaking(who, t);
@@ -136,7 +136,7 @@ function buddy(who, x, y, h, t, o = {}) {
   // an overshoot that settles in about 0.3 s, a tiny hop, a ring of sparkles and two dust puffs. Never a cross-fade.
   const ant = ss(nxt - .1, nxt, t); sy *= 1 - .10 * ant; sx *= 1 + .08 * ant; let fx = "";
   if (tsw > -90 && !(o.in !== undefined && Math.abs(tsw - o.in) < .3)) { const u = t - tsw, w = Math.exp(-u * 9) * Math.cos(u * 23); sy *= 1 + .13 * w; sx *= 1 - .09 * w; lift -= 15 * Math.sin(Math.PI * clamp(u / .22)) * (h / 380);
-    if (u < .4 && !o.nofx) { const e = 1 - Math.pow(1 - u / .4, 2), cy = y - h * .52;
+    if (u >= 0 && u < .4 && !o.nofx) { const e = 1 - Math.pow(1 - u / .4, 2), cy = y - h * .52;
       for (let i = 0; i < 6; i++) { const an = (-90 + (i - 2.5) * 44 + 8 * (who.length % 3)) * Math.PI / 180, r = h * (.5 + .22 * e), sc = (i % 2 ? .55 : .8) * Math.pow(Math.sin(Math.PI * Math.min(u / .4, 1)), .6) * h / 380; fx += `<g transform="translate(${n2(x + Math.cos(an) * r * 1.05)} ${n2(cy + Math.sin(an) * r * .92)}) scale(${n2(sc)}) rotate(${n2(40 * u)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#FFF3DC"/></g>`; }
       for (const sg of [-1, 1]) fx += `<ellipse cx="${n2(x + sg * h * (.3 + .22 * e))}" cy="${n2(y + 4 - 10 * e)}" rx="${n2((26 + 30 * e) * h / 380)}" ry="${n2((12 + 12 * e) * h / 380)}" fill="#DDD3FF" opacity="${n2(.42 * (1 - e))}" filter="url(#b4)"/>`; }
     // cheering: little hops with a squash on each landing; waving: a side-to-side rock with the whole body
@@ -153,6 +153,7 @@ function buddy(who, x, y, h, t, o = {}) {
   else name = `${who}_${POSE_SUB[who] && POSE_SUB[who][pose] && !SPR[`${who}_${pose}`] ? POSE_SUB[who][pose] : pose}`;
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = o.flip ? -1 : 1;
+  if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek });   // EP15 QA (qa/buddy_faces): which face is on screen, where
   let out = "";
   if (o.tag !== false || o.peek) (window._BP = window._BP || {})[who] = { x, y, h: h * k, flip: !!o.flip, peek: !!o.peek };
   if (o.aura && !TRIAL) { const R = h * .62 * Math.min(1, k), cx = x + DISC_DX[who] * h * fl; out += `<circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="${AURA[who]}" opacity="${o.auraO || .9}"/><circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="url(#gSpot)"/>`; }

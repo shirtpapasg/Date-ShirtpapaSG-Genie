@@ -8,7 +8,7 @@ all non-teaching cuts: `../p3_ep15_script.md` section 6 lists what else could go
 The script: `../p3_ep15_script.md` (version 1, Opus, 22-23 Nov 2026; its segment tables are generated from `script.py` + the timelines).
 
 Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** (paused by the teacher on 22 Nov, resumed "continue" 23 Nov)
-· Stage 2 (drawing: Fable) · Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md) · Stage 3 (render, checks, upload: Opus).
+· **Stage 2 (drawing, sound, full render, self-check): DONE 2026-11-23, Opus** · Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md: NEXT; the teacher also wants to review the buddies' faces first: qa/buddy_faces_p1/p2.jpg) · Stage 3 (render, checks, upload: Opus).
 
 ## Stage 1 done (2026-11-23)
 - **Engine copied from `../ep14/`** (its final, live engine): lib.js, common.js, closer.js, shrink.js, props.js, hotel.js, garden.js, trail.js,
@@ -39,7 +39,44 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** (
   deleted or unlisted). **Not run.** Thumbnails (`thumb_part1.jpg`, `thumb_part2.jpg`) are Stage 2's (THUMBNAIL_V2: P1 WHAT GROWS FIRST? +
   Basil surprised + the seed's root and shoot; P2 WHICH CAME FIRST? + Momo thinking + the cut mango and its seed with a loop arrow).
 
-## For Stage 2 (Fable): start here
+## Stage 2 done (2026-11-23, Opus)
+- **New art files** (loaded after ep14dare.js in page.html): `home15.js` (shared props: hand15 with four fingers and a thumb, the mango, its
+  ONE big flat hairy seed, mango leaves red -> green, youngPlant15 at any age, OUR terracotta pot, a clear 30 cm ruler at CM = 18 px, the
+  snail; the HDB kitchen after rain `BG.kitchen15` + `VK`; the common corridor `BG.corridor15` + `VC` with our pot on its plant stand (the
+  table) and the old mango tree's crown beyond the parapet; look-closer arts `obsArt` (the seed and the journal) and `seedArt` (the window in
+  the pot, Day 1 to Day 45); the journey `seedJourney`; `strip15`, a two-line book strip), `garden15.js` (the weaver ant; the community
+  garden `BG.garden15` + `VG15` with the old mango tree, its flower sprays, green mangoes, red new leaves, the leaf nest, the pond and its
+  tadpoles; `adultArt`, `loopBoard` OUR MANGO'S LIFE CYCLE (no numbers, no start, no end), `hwEasel` (Momo's homework), `bankArt`, the
+  journey `flowerJourney`, the fun-fact pictures ffTeeth / ffScrape / ffNest / ffBaby / ffTree, the dare's cards PIC.fish15 / frog15 / liz15,
+  `recapPic` for Part 2's "Last time..."). Baked: bg/kitchen15, corridor15, garden15 (`node bake.js kitchen15 corridor15 garden15`).
+- **p1.js / p2.js**: every placeholder replaced; every mark kept. The hidden animal moves scene to scene (`SNAILC` in home15.js, `ANTAT`
+  in garden15.js), pushes in to its black-ringed circle, the reveals end with the labelled fun-fact panels.
+- **Engine fixes**: lib.js buddy() sorts its pose list (an unsorted list gave a NaN sparkle in HOLD ON!); common.js funFact takes `sx, sy`
+  for its bubble; `g14Mango` (EP14's dare boards' gradient) was missing in EP15: now in XDEFS15.
+- **Sound** (sound_cues.js Stage 2 block, song.js): beds per place (R.room: the kitchen and the corridor; R.garden: the garden, no hens),
+  drips in the kitchen, the neighbour's wind chime in the corridor (new synth `windchime`), the seed bank's hum; foley on the marks
+  (knife, squish, seed on saucer, soil pats, water drops, journal, pencil, sniff, root creak, shoot pop, leaves, ruler slide/clack, tiles,
+  strike, jars, cold-room door, the pond). No music under the countdowns (song.js gaps, as EP14). Mix at -16 LUFS.
+- **Thumbnails** (thumb_v2.js `ep15_1`, `ep15_2`): P1 WHAT GROWS FIRST? + Basil surprised + the seed with its root and red-leaved shoot
+  (sky-blue burst); P2 WHICH CAME FIRST? + Momo thinking + the cut mango, its seed, a loop arrow to a young plant (pink burst).
+- measure_countdowns.py and compare_ep1.py point at EP15 (P2's rings are 5 s).
+- **Rendered 2026-11-23** (build_part.sh, one at a time under /tmp/explained_render.lock; chunks deleted after muxing): `ep15_part1.mp4`
+  5:28.0, -16.0 LUFS; `ep15_part2.mp4` 5:41.9, -16.0 LUFS (both 1920x1080, 30 fps; not committed). `ep15_part1.srt`, `ep15_part2.srt`,
+  `sheet_part1.png`, `sheet_part2.png`. Part 1's sound was re-mixed once after the render (a wind chime fell inside the HOLD ON!
+  countdown: sound_cues.js now drops ambience one-shots in every countdown window) and re-muxed onto the same picture.
+- **Countdowns measured** (measure_countdowns.py): P1 Round 1 numbers at 60.381/61.381/62.381/63.381 (steps 1.000 s), bell onset 63.348 =
+  the timeline; P1 HOLD ON! steps 1.000 s x5, bell 254.013; P2 Round 1 steps 1.000 s x5, bell 54.234; P2 Showdown steps 1.000 s x5, bell
+  192.49. Only ticks and the bell under each countdown.
+- **QA for the teacher** (qa/): `buddy_faces_p1.jpg` / `buddy_faces_p2.jpg` (every buddy face/pose actually on screen, up to 4 moments each,
+  with time and scene; made by sampling buddy() through a debug hook `window._POSE` in lib.js, off by default), `preview_p1_clips.mp4`
+  (65 s) and `preview_p2_clips.mp4` (73 s), 720p with sound (not committed), `ep1_compare_p1.jpg` / `ep1_compare_p2.jpg`, `thumbs.jpg`,
+  the drawing-stage sheets p1a-p1d, p2a-p2e.
+- **Known weak spots (for the reviewer)**: P2 1:36-1:42 the two tags "young plant: no flowers, no fruits" / "only the adult plant: flowers
+  and fruits" run past the look-closer panel's edges in the render (fixed in garden15.js after the render: needs a re-render of that span);
+  the two journeys are simple (soil and sky / a branch and the growing fruit); sprays of flowers on the old tree read as cream cones; the
+  hands in the cold open come in from above at an angle; key words pop large over the pot in seedans (engine behaviour, as EP14).
+
+## For Stage 2 (Fable): start here (done)
 - Read `SCENES_TODO.md` top to bottom (the rules block first), then `../p3_ep15_script.md` sections 3 and 11.
 - New sets in new files (e.g. `home15.js`: the kitchen + the corridor + the pot with its window + the journal + the ruler; `garden15.js`: the
   garden, the old mango tree, the loop board, Momo's easel, the seed bank, the two journeys, the snail and the weaver ant), loaded after

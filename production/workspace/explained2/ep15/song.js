@@ -50,7 +50,7 @@ for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0); 
 for (const [a, b] of (C.R.room || [])) { loop('ep07_birds.wav', a, b, .055, 1.2); for (let t = a; t < b; t += 1.0) amb.addMono(I.noiseSweep(1.1, 180, 170, { q: .4, pink: true }), t, .012, 0);
   for (let t = a + 4, i = 0; t < b - 4; t += 13 + 5 * (i % 3), i++) MIX.loadAudio(path.join(SFX, 'pass_by.wav'), { at: t, length: DUR }).mixInto(amb, .035); }
 for (const [a, b] of (C.R.garden || [])) { loop('ep08_birds.wav', a, b, .1, 1.2); loop('ep05_kids.wav', a, b, .03, 1.5);
-  for (let t = a + 1.5, i = 0; t < b - 1; t += 5.5 + 2.5 * ((i * 5) % 3), i++) MIX.loadAudio(path.join(SFX, i % 2 ? 'ep05_leaf.wav' : 'ep05_cluck.wav'), { at: t, length: DUR }).mixInto(amb, i % 2 ? .05 : .04); }
+  for (let t = a + 1.5, i = 0; t < b - 1; t += 5.5 + 2.5 * ((i * 5) % 3), i++) MIX.loadAudio(path.join(SFX, 'ep05_leaf.wav'), { at: t, length: DUR }).mixInto(amb, .05); }   // EP15: no hens in this garden
 for (const [a, b] of C.R.night) for (let t = a + .2; t < b - .3; t += .42) for (let j = 0; j < 3; j++) amb.addMono(I.bell(4300 + (j % 2) * 180, .022, .6, 1.5), t + j * .055, .04, ((t * 7) % 2) - 1);
 for (const [a, b] of C.R.roll) for (let t = a; t < b; t += .07) game.addMono(I.tom(92, .08, (t * 100) | 0), t, .07 + .1 * (t - a) / (b - a));
 // ---------- one-shots
@@ -113,6 +113,7 @@ const P = {
   bell: (t) => { const b1 = I.bell(1568, .5, 1.4, 2.0), b2 = I.bell(2349, .35, 1.0, 2.0); game.addMono(b1, t, .42); game.addMono(b2, t, .18); verb.addMono(b1, t, .25); },
   peep: (t) => { const x = I.whistle(.28); game.addMono(x, t, .16); game.addMono(x, t + .34, .14); verb.addMono(x, t, .08); const b1 = I.bell(1568, .4, 1.2, 2.0); game.addMono(b1, t, .2); },
   bellicon: () => {},
+  windchime: (t, v) => { for (let j = 0; j < 4; j++) { const x = I.bell([2093, 2637, 3136, 2349][(j + (v || 0)) % 4], .05, 1.8, 2.2); amb.addMono(x, t + j * .13 + .02 * ((v || 0) % 3), .035, .4); verb.addMono(x, t + j * .13, .03); } },   // EP15: the neighbour's wind chime
   stamp: (t) => { game.addMono(I.thud(72, .12), t, .95); game.addMono(I.thwack(), t, .22); },
   pick: (t, v) => { game.addMono(I.paperFwip(1.1, 3 + v), t - .09, .12); game.addMono(I.pop(1700, 5 + v), t, .55); mar(PICK[v % 3], t, .5, { thock: .5 }); },
   tag: (t, v) => { const d = I.ting(88); game.addMono(d, t, .6); verb.addMono(d, t, .3); game.addMono(I.thud(95, .07), t, .5); if (!v) { chordAt(t, ['C4', 'E4', 'G4', 'C5']); ['C5', 'E5', 'G5'].forEach((n, i) => mar(n, t + i * .07, .28)); } },

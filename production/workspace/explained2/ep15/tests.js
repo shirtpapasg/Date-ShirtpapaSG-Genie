@@ -21,7 +21,7 @@ const MKS = (k) => TL.marks[k] === undefined ? 1e9 : TL.marks[k];     // a mark,
    scene, SCENES_TODO), Part 2 a little WEAVER ANT (on the old mango tree's leaves and branches: a new spot in every scene). Cute and alive,
    free, never touched. Not on screen during a [LOOK CLOSER] or a journey. HIDDEN = [the word Heart says (W lookup), art(t), the label]. ---------- */
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["snail", hiddenPH("snail"), "snail"] : ["ant", hiddenPH("weaver ant"), "weaver ant"];   // Stage 2: snailArt(t, o) / weaverAnt(t, o)
+const HIDDEN = PART === 1 ? ["snail", (t) => TF(-10, 40, .9, snail15(t)), "snail"] : ["ant", (t) => TF(-10, 30, 1.3, weaverAnt(t, {})), "weaver ant"];   // Stage 2: the drawn animals (home15.js / garden15.js)
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#E6F2DA" : "#FFF0DA"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[2], n2(r * .24), P.ink, "#fff", { w: 700 }));
 // where the animal sits in the wide shot the push-ins go into (Stage 2 moves these to the drawn ledge / leaf)

@@ -99,6 +99,20 @@ const THUMBS = {
       { cut: 'tree', x: 560, y: 270, w: 520, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_c_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHY NOT', x: 1250, y: 118, size: 118, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'TEDDY?', x: 1256, y: 236, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep15_1: { ep: 'ep15', part: 1, out: 'ep15/thumb_part1.jpg', old: 'ep15/thumb_part1.jpg',
+    bg: { c: ['#D8F6FF', '#38B6FF', '#1B3FA0'], at: [860, 430], rays: .22 },
+    cuts: { seed: `'<rect x="560" y="600" width="800" height="300" rx="40" fill="#5A3A22"/>' + '<path d="M820 700 Q790 790 840 890" fill="none" stroke="#F6EEDF" stroke-width="30" stroke-linecap="round"/>' + '<path d="M900 640 Q930 530 990 450" fill="none" stroke="#9CB85A" stroke-width="30" stroke-linecap="round"/>' + '<g transform="translate(990 450) rotate(-40)">' + leaf15(130, 30, "#D2503F", "#8E2E26") + '</g><g transform="translate(990 450) rotate(200)">' + leaf15(130, 30, "#D2503F", "#8E2E26") + '</g>' + TF(960, 680, 2.3, mangoSeed(1, -8))` },
+    layers: [
+      { cut: 'seed', x: 560, y: 230, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_c_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHAT GROWS', x: 1250, y: 112, size: 104, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 236, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep15_2: { ep: 'ep15', part: 2, out: 'ep15/thumb_part2.jpg', old: 'ep15/thumb_part2.jpg',
+    bg: { c: ['#FFE6F2', '#FF6FA8', '#7A1E5A'], at: [860, 430], rays: .22 },
+    cuts: { mango: `TF(860, 640, 2.0, mangoCutOpen(1, true)) + '<path d="M1060 520 Q1250 330 1330 560" fill="none" stroke="#43BF6C" stroke-width="26" stroke-linecap="round"/><path d="M1300 520 L1336 600 L1376 530z" fill="#43BF6C"/>' + TF(1360, 820, 1.5, '<ellipse cx="0" cy="6" rx="90" ry="22" fill="#77502F"/>' + youngPlant15(1, { h: 120, n: 4, red: 0, k: 1, sw: 0 }))` },
+    layers: [
+      { cut: 'mango', x: 520, y: 260, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_c_thinking', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH CAME', x: 1250, y: 112, size: 104, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 236, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);
