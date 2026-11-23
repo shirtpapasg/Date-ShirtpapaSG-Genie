@@ -42,6 +42,7 @@ moments, each checked against SERIES_FORMAT 5's one-job-per-pose table; reasons 
 | 25 | P1 lceggs, lcchick, liz, holdon | The first render was taken before round 1's pose fixes (4, 5, 11, 12) and the moved "+1" coin | those spans re-rendered |
 | 26 | P2 nymphans | Pip's pick card over Momo's cheek; Momo's card on her own edge | both above the heads |
 | 27 | P2 show | Basil's and Momo's pick cards between their faces; their bubbles over line 3 of the sheet | Basil's card at his left, Momo's above her head; the reveal bubbles above the sheet |
+| 28b | P2 lcnymph | The wings beat pushed in on the adult only: the nymph's bare back ("no wings yet") was off the frame, and the earlier part labels' lines crossed both insects | the camera shows both backs; the legs / feelers / back-legs labels leave before the wings beat; Momo's bubble at the top centre |
 | 28 | Both | Countdowns measured in the rendered files: every number steps 1.000 s, with the ticks; the bell lands on 0 (P1 Round 1 61.134, HOLD ON! 193.895; P2 Round 1 49.329, Showdown 219.412) | nothing to fix |
 
 ## Checked and fine
