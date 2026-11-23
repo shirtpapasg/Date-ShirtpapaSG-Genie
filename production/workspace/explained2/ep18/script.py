@@ -257,7 +257,7 @@ SEQ2 = [
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
  ("say", "d801", H, "Showdown! Double points. Momo's homework has one mistake. Line one, two, or three? Show me with your fingers.", {"pre": .5}),
- ("say", "d802m", M, "My homework! One: in both, the young do not look like the adult. Two: the mosquito larva lives near the water surface, but the beetle larva lives on land. Three: the mosquito has four stages, but the beetle has three.", {"pre": .4, "post": .2, "kw": [["l1", "one"], ["l2", "two"], ["l3", "three"]]}),
+ ("say", "d802m", M, "One: in both, the young do not look like the adult. Two: the mosquito larva lives near the water surface, but the beetle larva lives on land. Three: the mosquito has four stages, but the beetle has three.", {"pre": .4, "post": .2, "kw": [["l1", "one"], ["l2", "two"], ["l3", "three"]]}),
  *LOCK("show", 5.0),
  ("say", "d803", H, "Locked in!", {"pre": 0}),
  ("say", "d804b", B, "Three! The mealworm turns into a pupa before it becomes a beetle. So the beetle has four stages too!", {"pre": .5}),
@@ -287,7 +287,7 @@ SEQ2 = [
  *(cut("fewer", [("say", "d1005", H, "When there are not enough plants for butterflies to lay their eggs on, there will be fewer larvae. This will result in fewer pupae and adult butterflies.", {"pre": .3, "hold": STRIP, "pron": LARVAE, "kw": [["fewer", "fewer"]]})]) or []),
  ("say", "d1006m", M, "With too few lime plants, there would be fewer larvae, fewer pupae and fewer butterflies. So we plant more, and the cycle keeps going!", {"pre": .2, "pron": LARVAE, "kw": [["fewer", "fewer"], ["plant", "plant"]]}),
  *cut("gardens", [("say", "d1007b", B, "That is why some schools and parks in Singapore plant butterfly gardens!", {"pre": .2})]),
- ("mark", "theme"), ("wait", 1.5),
+ ("mark", "theme"), ("wait", .8),   # Stage 1: 1.5 -> .8 for length (script section 6)
  # ---- 11 · the chant
  ("scene", "chant"),
  *CHANTSEQ,
