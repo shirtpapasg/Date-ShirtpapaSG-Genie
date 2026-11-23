@@ -35,7 +35,7 @@ const cutHands = (t) => { const tc = MK("cutmango"), u = (t - tc) / 2.6; if (u <
 const kitchenBoard = (t) => { const tc = MK("cutmango"); return { cut: ss(tc + .3, tc + .55, t), seedOut: ss(tc + 1.4, tc + 2.3, t) }; };
 SC.cold = (t, s) => { const tb = MK("boardsIn"), tp = MK("budsIn");
   return VK(t, { board: kitchenBoard(t), over: boards3(t, "c", tb) + cutHands(t) }, camCold(t))
-    + bd("basil", 1660, 768, 460, t, { in: tp, poses: [[tp, "sit"], [tp + 1.1, "cheer"]], eyes: t < tp + 1 ? "shut" : undefined, k: 1 + .03 * Math.sin(t * 9) * (t < tp + 1 ? 1 : 0), flip: true, look: -6, nohop: true })
+    + bd("basil", 1660, 768, 400, t, { in: tp, poses: [[tp, "sit"], [tp + 1.1, "cheer"]], eyes: t < tp + 1 ? "shut" : undefined, k: 1 + .03 * Math.sin(t * 9) * (t < tp + 1 ? 1 : 0), flip: true, look: -6, nohop: true })
     + bd("momo", 330, 1076, 420, t, { in: tp + .2, poses: [[tp + .2, "thinking"]], look: 4 }) + bd("pip", 640, 1076, 340, t, { in: tp + .4, poses: [[tp + .4, "waving"]], jump: [[tp + .45, 24]], wave: true })
     + OP(ramp(t, .5, .5), lowerPill(60, 96, "An HDB flat, Singapore ·", "morning")) + knife(t, MK("cutmango") - .4); };
 

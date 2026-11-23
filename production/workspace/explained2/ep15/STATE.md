@@ -93,3 +93,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** (
 
 ## Teacher note 23 Nov (for the fix round)
 The hidden animals (snail P1, weaver ant P2) must never appear again at the spot where the game push-in introduced them, and never twice in the same spot (SERIES_FORMAT 4). Check every scene's spot.
+
+## Teacher note 23 Nov: Basil too big
+Basil looked much bigger than Momo and Pip in the kitchen (0:05). Fixed: lib.js SIZE_K basil .88 everywhere, and the kitchen Basil (on the counter, further back) 460 -> 400 before the factor. The fix round must check the buddy sizes in EVERY scene (same depth = same size, further back = smaller, nobody >15% bigger at the same depth).

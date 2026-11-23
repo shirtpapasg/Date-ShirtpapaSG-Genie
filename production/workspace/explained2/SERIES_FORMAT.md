@@ -334,6 +334,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     (a question, "So the Sun only looks as if it moves!", fixing their own mistake). Every line a host answers ("Yes, Momo!") must have
     its buddy line kept; never cut one without the other.
 
+- **The three buddies stay in proportion (teacher, 23 Nov, EP15 kitchen: "I find the size of basil being too big compared to the
+  rest").** Basil's painting is much wider and heavier than Pip's and Momo's at the same height, so he is drawn at 0.88 of the
+  others' height (lib.js SIZE_K). Buddies at the same depth get the same size; a buddy further back (on a counter, behind a
+  table) is smaller, never bigger. No buddy is more than about 15% bigger than another at the same depth, unless the speaker is
+  briefly enlarged (1.05) while talking. The review step checks the sizes of every buddy in every scene.
+
 ## 6. Motion (reference: `characters/sprites/pose_test_robot_round.mp4`, approved "exactly what I want")
 
 - **Pose swaps:**
