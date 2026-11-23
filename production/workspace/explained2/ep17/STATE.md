@@ -101,7 +101,7 @@ Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md, fixes, re-render): DONE 2026-1
   pupaArt, wrigArt, plateArt; the journeys bflyJourney, mosqJourney; the recap, ring, idea, dengue, fun-fact and dare pictures, the chant
   board). p1.js / p2.js: every placeholder replaced; every mark kept.
 - **Hidden-animal spots actually used** (changed from SCENES_TODO where the spot was not visible in the frame): P1 moth: void deck pillar
-  (cold, back, title, game: intro) · a lime leaf at the plant's left (answer1) · under a leaf at the top (lime) · the fence post (waitw) ·
+  (cold, back, title, game: intro) · a lime leaf at the plant's left (answer1: now the tip leaf of its own twig, the moth sitting on it) · on a leaf at the top (lime: drawn in front of the crown since 23 Nov, it was hidden behind the new leaves) · the fence post (waitw) ·
   the watering can on the pot's LEFT (larva) · the top of Pip's easel (holdon) · the board's top-left corner (ring) · REVEAL the side of
   the pot (liz). P2 dragonfly: a bamboo stake's tip (place, game: intro) · the pail's rim (waitw) · the tap (mosqans) · Basil's easel top
   (show) · on top of the letterboxes (fix) · the corridor railing (plate) · REVEAL the watering can's handle (liz).
@@ -116,3 +116,28 @@ Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md, fixes, re-render): DONE 2026-1
   Bottom right kept free.
 - **App:** `app_moments.json` (17A / 17B, keys O.cycles / CH.animalCycles, titles <= 64 characters, positive words only: checked in
   make_moments.py) and `production/youtube/chapters_p3.json` "EP17_P1" / "EP17_P2" (the main session swaps in the video ids).
+
+## Leaves on twigs, full fades (23 Nov 2026, the teacher's rule "Plants grow the way real plants grow, and what is gone is gone")
+- **The lime plant (`sets17.js` limePlant) is a real plant now** (EP18's `limePlant18` approach): the trunk, eight branches (`LIMEBR`) and
+  eight side twigs (`LIMETW`), every leaf on a short leaf stalk (`limeLeaf`); the old 72 hash-scattered `LIMELEAVES` are gone. Same pot, same
+  crown (x 815..1505, y 205..675), so nothing else in the scenes moved. The caterpillar's twig (answer1's twig, LT_CAT) is real wood, its
+  leaves hanging below; the chewed leaf sits on a stalk at the caterpillar's head; the young leaf at LT_EGG on a stalk at the egg branch's tip
+  (the egg moved 6 / 4 px with it: `camGlide` in p1.js follows, LT_EGG - [82, 26]); the pupa hangs from the pupa branch's end; `o.cut`
+  still drops about 10% of the leaves. Hidden moth: answer1's leaf (820, 330) is the tip leaf of a twig off the egg branch; the lime scene's
+  moth (on a top leaf) is drawn in front of the crown (`MOTHAT` 5th field "front").
+- **Other plants:** the far corner's bean vines (`BG.corner17`, re-baked: `node bake.js corner17`) carry their leaves on the vines; the
+  flower pots on plates (`plantPotPlate`, corner and corridor) have stems from the soil, leaves on the stems and the pink flower on its
+  stem (it floated before); inside the pupa (`pupaArt`) the two leaves come in on twigs from the panel's edges; the journey's out-of-focus
+  leaves (`leafField`) hang from the out-of-focus branch; the ring picture, Part 2's recap picture and the egg tile (`bPic`) leaves got their
+  stalks / twig. New helpers in sets17.js: `stalkLeaf17`, `leafyTwig17`. Unchanged (fine): fallen leaves floating on water (pail, plate),
+  the legs look-closer's leaves (on the twig), the planter herbs.
+- **Fades checked:** nothing that is gone stays as a ghost (the plate's water, its leaves and the hand fade to 0; the mosquito loop's dimmed
+  tiles carry their "no eggs / no wrigglers ..." labels on purpose; the journey's background leaves are out of focus, not gone).
+- Stills checked at every plant scene (P1 cold, back, answer1, lime, waitw dive, pullout, larva, lcpupa, ring, final; P2 recap, place,
+  waitw, show, plate). Both parts re-rendered whole (below).
+- **Re-rendered 23 Nov (after the leaf fix), both parts whole** (`./build_part.sh 1` and `2`, audio unchanged): `ep17_part1.mp4` **319.53 s**
+  (9586 frames), `ep17_part2.mp4` **327.47 s** (9824 frames), 1920x1080 30 fps, **-16.0 LUFS** both; srt and sheet_part1/2.png rebuilt;
+  chunks deleted. Part 2's Showdown fix poses (Basil oops, Pip and Momo arms crossed through the fix) come from p2.js, so they are in the full
+  render (checked at 176, 185, 195 s); `out/fix_170.mp4` (the old splice) is no longer needed. Countdowns unchanged: P1 Round 1 54.866..57.866,
+  HOLD ON! 190.638..195.638 (1 frame after the tick, as before), P2 Round 1 45.264..50.264, Showdown 161.248..166.248, all 1.000 s steps.
+  `qa/highlights.jpg` and `qa/preview_p1_clips.mp4` (67.8 s) / `_p2` (64.7 s) rebuilt. Thumbnails not touched (no plant in them).
