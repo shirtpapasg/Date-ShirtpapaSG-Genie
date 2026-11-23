@@ -19,8 +19,10 @@ SEQ items (as EP16): ("scene", name) · ("say", id, who, text, {opts}) · ("wait
 ("chant", id) · ("unison", id, text, {opts}). say opts: pre / post (s; build_tl scales by .75), speed, gap, soft, term, kw [[mark, word, nth]],
 hold, after [id, s], pron {text: spoken as} (the caption keeps the script's words).
 
-Respellings: "larvae" "LAR-vee", "pupae" "PEW-pee" (LARVAE). Check "observable" ("ob-ZER-vuh-bul") and "cicada" ("sih-KAH-duh") in the Stage 1
-test clip. No new Singapore name is spoken.
+Respellings: none. "larvae" and "pupae" are Kokoro's own (EP17's clip: the old "pew-pee" respelling stressed both halves, so LARVAE is
+empty). Stage 1 test clip ../pron_clips/Heart_ep18_new_words.m4a: "cicada(s)" is said "sih-KAH-duh" through ../sg_pron.py (Kokoro's own is the
+American "sih-KAY-duh"; waiting for the teacher's listen); similarities, differences, observable characteristics, honeybee, mealworm, beetle,
+seventeen, repeated, physical features are Kokoro's own. No new Singapore name is spoken.
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
@@ -71,7 +73,7 @@ slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 HOLD = lambda mk: ("hold", mk, 2.0, .6)
 STRIP = 3.5
 VERDICT = lambda mk: [("mark", mk), ("wait", 2.5)]
-LARVAE = {"larvae": "larvee", "pupae": "pew-pee"}
+LARVAE = {}   # Stage 1: Kokoro's own "larvae" / "pupae" are right (EP17's clip); the old respelling stressed both halves of "pupae"
 
 def kwrecap(words, pron=None):
     out = [("scene", "kwrecap"), ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5})]

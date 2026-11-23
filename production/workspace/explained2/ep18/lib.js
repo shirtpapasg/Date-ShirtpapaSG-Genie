@@ -1,4 +1,4 @@
-// lib.js: the engine's helpers (from EP1, adapted for EP5: key words; EP8: the new pace, a new term holds 2.0 s; EP10 to EP15: their key words). Everything returns SVG strings and is a pure function of its arguments (a frame depends only on t).
+// lib.js: the engine's helpers (from EP1, adapted for EP5: key words; EP8: the new pace, a new term holds 2.0 s; EP10 to EP18: their key words). Everything returns SVG strings and is a pure function of its arguments (a frame depends only on t).
 // Needs kit/style.js (P, defs, T, pill, G, groundShadow, logoPill, hand, teddy, leaf ...), tl.js (TL) and spr/manifest.js (SPR).
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, u) => a + (b - a) * u;
 const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
@@ -75,13 +75,16 @@ function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id)
    correct one should be confident/smile. celebrate with hands high up only when achieved/learnt something new". */
 let _learn = null;
 function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you know!"
-    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|tagadult$|tback$|bend$|jyoung$|jnew$)/.test(k))   /* EP15 */ _learn.push([v - .4, v + 4]);
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|jfrog$|jmosq$|jagain$|rewrite$|plant$)/.test(k))   /* EP18: a key word, a verdict, the raindrop's last stops (three stages, four stages), the egg back at an egg, Momo's homework rewritten, the lime plants back (the loop goes on) */ _learn.push([v - .4, v + 4]);
     for (const s of TL.scenes || []) if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); }
   return _learn.some(([a, b]) => t >= a && t < b); }
-// EP15 (script section 3): Part 1 Round 1 Basil right (a young plant), Momo (a mango) and Pip (a flower) wrong; HOLD ON Pip right, Basil wrong.
-// Part 2 Round 1 Basil and Momo right (the adult plant), Pip wrong (young plant); Showdown Basil and Pip right, Momo (her homework) wrong.
-const OUTCOMES = (PART === 1 ? [{ at: "m:ansglow", right: ["basil"], wrong: ["momo", "pip"] }, { at: "l:g1203", right: ["pip"], wrong: ["basil"] }]
-  : [{ at: "m:ansglow", right: ["basil", "momo"], wrong: ["pip"] }, { at: "l:j904", right: ["basil", "pip"], wrong: ["momo"] }]);
+// EP18 (script section 3, OUTCOMES): Part 1 Round 1 (EP17's dare: answer 2, different) Pip right; Momo (1, the same) wrong at ansglow;
+// Basil picked 2 for the WRONG reason (size): no point, never confident: he listens at ansglow and is shy at Heart's k804 ("Basil picked
+// two, but size does not tell us about a life cycle"). HOLD ON! (Pip: frog and grasshopper exactly the same) Basil, Momo right / Pip wrong
+// at k1003. Part 2 Round 1 (which came first? 3, neither) Pip, Momo right / Basil (1, the egg) wrong at ansglow; Showdown (Momo's homework,
+// line 3) Basil, Pip right / Momo wrong at Basil's reveal d804b.
+const OUTCOMES = (PART === 1 ? [{ at: "m:ansglow", right: ["pip"], wrong: ["momo"] }, { at: "l:k804", right: [], wrong: ["basil"] }, { at: "l:k1003", right: ["basil", "momo"], wrong: ["pip"] }]
+  : [{ at: "m:ansglow", right: ["pip", "momo"], wrong: ["basil"] }, { at: "l:d804b", right: ["basil", "pip"], wrong: ["momo"] }]);
 function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id] = o.at.split(":"), t0 = k === "m" ? MK(id) : (HAS(id) ? LT(id) : undefined); if (t0 === undefined || t < t0 || t > t0 + 4) continue;
     if (o.wrong.includes(who)) return { t0, pose: "oops" };   // shy: paw on the head, a sheepish smile
     if (o.right.includes(who)) return { t0, pose: SPR[`${who}_arms_crossed`] ? "arms_crossed" : "sit" }; }   // confident smile
@@ -310,16 +313,17 @@ function wipe(t, tc, col, cx = 960, cy = 540) { const a = .3, b = .26; if (t < t
    The shelf slides off to the right during the first-person shrink and full-screen cards, and glows once at the end of the part as a recap.
    EP8: an entry may carry o.at = [x, y] (and o.size): it pops THERE without dimming the frame (SAP pops beside the Mark Sentence card). */
 const KWHOLD = 2.0;
-// EP15: Part 1 OBSERVING (inside the look-closer lcobserve on Heart's "observing"), SEED (inside lcseed on Heart's "seed"), YOUNG PLANT (on
-// Heart's "young plant" in seedans); Part 2 ADULT PLANT (inside lcadult on the strip's first "adult"), THREE STAGES (beside the board in
-// ring), SEED BANK (inside lcbank on Heart's "seed bank"). All o.at (no dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it.
-const KW = (PART === 1 ? [["OBSERVING", "kw_observing", 1, null, { at: [1380, 300], size: 100 }], ["SEED", "kw_seed", 1, null, { at: [1440, 300], size: 110 }], ["YOUNG PLANT", "kw_young_plant", 1, null, { at: [1380, 300], size: 100 }]]
-  : [["ADULT PLANT", "kw_adult_plant", 1, null, { at: [1380, 300], size: 100 }], ["THREE STAGES", "kw_three_stages", 1, null, { at: [1380, 300], size: 96 }], ["SEED BANK", "kw_seed_bank", 1, null, { at: [1400, 300], size: 100 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+// EP18: Part 1 SIMILARITIES and DIFFERENCES (inside the look-closer lccompare, on Heart's "similarities" / "differences" in k603: two
+// spots so the two never overlap), OBSERVABLE CHARACTERISTICS (on Heart's "observable" in answer); Part 2 REPEATED and NO FIRST OR LAST
+// STAGE (inside lcloop, on Heart's "repeated" / "first" in d703), PHYSICAL FEATURES (inside lcbeetle on Heart's "physical"). All o.at (no
+// dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it.
+const KW = (PART === 1 ? [["SIMILARITIES", "kw_similarities", 1, null, { at: [560, 300], size: 84 }], ["DIFFERENCES", "kw_differences", 1, null, { at: [1360, 300], size: 84 }], ["OBSERVABLE CHARACTERISTICS", "kw_observable_characteristics", 1, null, { at: [960, 300], size: 70 }]]
+  : [["REPEATED", "kw_repeated", 1, null, { at: [560, 300], size: 96 }], ["NO FIRST OR LAST STAGE", "kw_no_first_or_last_stage", 1, null, { at: [1240, 300], size: 70 }], ["PHYSICAL FEATURES", "kw_physical_features", 1, null, { at: [1300, 300], size: 84 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
-const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lcobserve: 1, lcseed: 1, lcadult: 1, lcbank: 1 };
+const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lccompare: 1, lcyoung: 1, lcloop: 1, lcbeetle: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
-const KWLINE = PART === 1 ? ["hk_observing", "hk_seed", "hk_young_plant"] : ["hk_adult_plant", "hk_three_stages", "hk_seed_bank"];
+const KWLINE = PART === 1 ? ["hk_similarities", "hk_differences", "hk_observable_characteristics"] : ["hk_repeated", "hk_no_first_or_last_stage", "hk_physical_features"];
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
   let hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
   const away = window.SHELF_AWAY ? window.SHELF_AWAY(t) : 0; hide = Math.max(hide, away); const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;
