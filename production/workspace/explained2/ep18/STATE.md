@@ -124,3 +124,17 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 - **QA tools ready:** make_preview.sh spans (EP18), make_moments.py (app_moments.json + chapters_p3.json EP18_P1 / EP18_P2 written),
   highlights.py (EP18 stills). Next: render (`./build_part.sh 1` and `2` under /tmp/explained_render.lock, only with >= 4 GB free), then
   measure_countdowns.py, compare_ep1.py, faces_sheet.js/.py, highlights.py, make_preview.sh.
+- **Render NOT done (blocked, 23 Nov 16:50):** the hard rule needs >= 4 GB free on / before a full render; the shared disk stayed at 1.9 to
+  2.7 GB from 14:49 to 16:50 (no render running at the end; the space is other agents' files, which this agent may not delete). Resume:
+  check `df -h /` (>= 4 GB), then `./build_part.sh 1` and `./build_part.sh 2` (they take /tmp/explained_render.lock), then
+  `python3 measure_countdowns.py 1|2`, `python3 compare_ep1.py 1|2`, `python3 highlights.py`, `./make_preview.sh`; delete out/chunks_p* after.
+  A render needs only about 0.5 GB per part (EP17: video 110-120 MB, chunks about the same).
+- **Self-check done on the page (no render needed):** a sweep of both parts every 0.25 s (no errors, no NaN); contact stills of every scene,
+  fixed: Pip's sheet / Momo's sheet hidden behind the speaker, the compare look-closer's verdict over the strips and its pan cutting the
+  loops, EP17's dare-card labels clipped ("froa"), the hen standing on (not sitting in) her nest, the cliffhanger's nest off the bottom of the
+  frame, the answer's dare cards over the board's banner, the young look-closer's labels and bubbles overlapping (the nymph now smaller than the
+  adult), the fun-fact question pill over the panel, the chick's own wings drawn off-screen, the new egg not centred in the golden circle, the
+  5.17 strip under the shelf, the theme board too small to read, the chant board and the dare's magnet under the shelf, a 1-frame
+  Basil pointing at the end of HOLD ON!. Pose audit: P1 32 / P2 31 moments, each with its reason (qa/buddy_faces_p1/p2.jpg).
+- **Still weak:** the OUR CYCLES THEME board is on screen only about 2 s (the script's .8 s hold); the raindrop's fall is simple; the
+  chick's view of the mother hen is a big head and body from the corner; Momo's v2 talking sprite has her arms crossed (the cast's own art).
