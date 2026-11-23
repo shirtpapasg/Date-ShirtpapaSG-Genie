@@ -44,7 +44,7 @@ Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md, fixes, re-render): DONE 2026-1
   finish.sh's contact-sheet marks and compare_ep1.py's scenes (EP17), `make_todo.py` -> `SCENES_TODO.md` (full staging per scene and
   per line, every pose WITH ITS REASON, the hidden animal's spot per scene, real places with ambience and foley on the marks),
   `upload.json`.
-- **Pronunciation** (the clip above): **fixed** in ../sg_pron.py and ../PRONUNCIATION.md (waiting for the teacher's listen): "prolegs"
+- **Pronunciation** (the clip above): **fixed** in ../sg_pron.py and ../PRONUNCIATION.md (APPROVED by the teacher 23 Nov 2026, EP17 review page): "prolegs"
   (pɹˈoʊlˌɛɡz), "Aedes albopictus" / "Aedes aegypti" (the script's respelling "Ay-ee-deez" read as "EYE-ee-deez": the AEDES respelling in
   script.py is now empty). Dropped b906's "pupae" respelling (Kokoro's own is right). Left to Kokoro: larva(e), pupa, pupal, wriggler(s),
   dengue, stagnant, cocoon, dragonfly, nymph, moth.

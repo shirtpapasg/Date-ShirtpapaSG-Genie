@@ -32,7 +32,7 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** �
 
 - **No new sg_pron fix:** Kokoro's own "aluminium" is already the British "al-yoo-MIN-ee-um" (its phonemes ˌæljʊmˈɪniəm; only the American
   spelling "aluminum" gives ɐlˈuːmɪnəm), so there is no BEFORE / AFTER pair and no "waiting" row; `../PRONUNCIATION.md` has a "Checked and
-  left to Kokoro (P3 EP19)" paragraph marked waiting for the teacher's listen. "lives" is the teacher's existing entry. `../sg_pron.py` is
+  left to Kokoro (P3 EP19)" paragraph now APPROVED by the teacher (23 Nov 2026: "EP19 words OK"). "lives" is the teacher's existing entry. `../sg_pron.py` is
   unchanged.
 - The voices are already recorded. If the teacher hears a word wrong: add an entry to `../sg_pron.py`, delete those lines'
   `voice/<id>.json`, re-run `make_voice.py` (heart-tts python) and `build_tl.py 1|2`, `node dump_cues.js 1|2`, `python3 make_todo.py`.
