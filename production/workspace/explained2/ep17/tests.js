@@ -69,3 +69,7 @@ const NEXT_CARDS = ["Yes, the same", "No, different"];
 // the fun-fact panel's pictures (common.js funFact items [mark, label, pic(t, w, h)]): Stage 1 placeholders that say what to draw
 const ffPH = (txt) => (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF3DC"/>` + wrap(txt, 24, w - 40, 500).map((l, j, A) => T(0, 10 + j * 30 - (A.length - 1) * 15, l, 24, P.ink)).join("");
 const FF = (items) => items.map(([m, l, d]) => [m, l, typeof d === "string" ? ffPH(d) : d]);
+// a book strip that holds more than one sentence: ONE cream strip per sentence (lcStrip is one line; two sentences would run off the frame),
+// each from its first word until the next sentence starts, the last one until the strip's hold ends
+const lcStrips = (t, id, text, o = {}) => { const ss = text.match(/[^.!?]+[.!?]+/g).map((x) => x.trim()), W_ = TL.lines[id].words; let off = 0, out = "";
+  ss.forEach((s, i) => { const n = s.split(" ").length, t1 = i < ss.length - 1 ? W_[off + n].a - .35 : o.t1; out += lcStrip(t, id, s, { ...o, off, t1 }); off += n; }); return out; };

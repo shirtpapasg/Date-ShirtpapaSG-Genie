@@ -2,10 +2,10 @@
 P3 EP17 "The caterpillar that becomes a butterfly: 4 stages" (Ch 5, Life Cycles of Animals, pp. 86-89). Part 1 "Is a Caterpillar a
 NYMPH? The Butterfly's Secret Stage" (EP16's dare answered: not a nymph; a worm? the legs look-closer: six legs and PROLEGS; be a butterfly
 egg; LARVA; HOLD ON! the pupa is just resting? PUPA; inside the pupa look-closer; OUR BUTTERFLY'S LIFE CYCLE; the moth; the cliffhanger:
-something wriggling in a pail of rainwater) **P1LEN**. Part 2 "What's WRIGGLING in This Pail of Rainwater?" (Round 1: what comes after the
+something wriggling in a pail of rainwater) **5:19.5**. Part 2 "What's WRIGGLING in This Pail of Rainwater?" (Round 1: what comes after the
 wriggler? the wrigglers look-closer: WRIGGLER; be a mosquito egg; the answer: the pupa; the Showdown: Basil's homework, DENGUE; the
 flower-pot plate in an HDB corridor: STAGNANT WATER; the chant; the dragonfly; the dare into EP18: a frog and a mosquito, the same life
-cycle?) **P2LEN**.
+cycle?) **5:27.4**.
 The script: `../p3_ep17_script.md` (version 1, Opus, 23 Nov 2026). The source of every spoken word: `script.py`.
 
 Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â· Stage 2 (drawing, sound, full render, self-check: Fable)
@@ -49,9 +49,10 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   script.py is now empty). Dropped b906's "pupae" respelling (Kokoro's own is right). Left to Kokoro: larva(e), pupa, pupal, wriggler(s),
   dengue, stagnant, cocoon, dragonfly, nymph, moth.
 - **Voices** (`voice/`, `make_voice.py`, log `voice.log`): every line recorded (Heart: Kokoro af_heart via sg_pron; buddies: the
-  Character Voice Kit, 12% slower), aligned (pocketsphinx; new dictionary words in EXTRA). PROPORTIONAL_NOTE
-- **Timelines:** `python3 build_tl.py 1|2` -> tl_p1/2.json/js: **Part 1 P1LEN, Part 2 P2LEN** (target 5:15-5:35). CUTS_NOTE
-  `node dump_cues.js 1|2` -> cues. A sweep rendering every 0.25 s of both parts in the page: no errors, no NaN.
+  Character Voice Kit, 12% slower), aligned (pocketsphinx; new dictionary words in EXTRA). Four lines the aligner missed were spread by word length (PROPORTIONAL): a404, a505, hk_prolegs (one word), b502p (its `tube` mark is approximate).
+- **Timelines:** `python3 build_tl.py 1|2` -> tl_p1/2.json/js: **Part 1 5:19.5, Part 2 5:27.4** (target 5:15-5:35). Both inside the target: **no cut** beyond the script's section 6 list (`CUTS` unchanged).
+  `node dump_cues.js 1|2` -> cues. A sweep rendering every 0.25 s of both parts in the page: no errors, no NaN. Cues: 87 / 104 events.
+- **Book strips with two sentences** (a1102, a1201, b806) are shown one sentence at a time (`lcStrips`, tests.js): one line at 50 px ran off the frame.
 - **Scores:** Part 1 Round 1 1 : 1, HOLD ON! 2 : 1; Part 2 Round 1 1 : 1, Showdown 3 : 1.
 - **upload.json:** both parts public, Made for Kids (the uploader sets it), playlists PLb8LpPqxQI4E and PLPfEuT7l4KjI right after
   `explained-p3-ep16-part2`; **`replaces: ["2Atm-edXKVk"]`, `retire_old: true`** (the classic P3 no. 10 "A Tadpole Has No Legs. So How
