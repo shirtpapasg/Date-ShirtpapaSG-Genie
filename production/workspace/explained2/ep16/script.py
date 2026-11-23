@@ -26,8 +26,8 @@ Marks the picture and the sound share (every action sound lands ON its mark; Sta
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
   Part 1: wriggle, cardsIn, budsIn (cold open: the pond at dawn, tadpoles wriggle past the egg clump; EP15's three dare cards slide in), title;
   lceggs: clump, dots (the magnifier on one egg), fish (a little fish nibbles and slides off), sun (the sun on the jelly: it stays wet);
-  the journey (dive, jegg, jhatch, jtadpole, jback, jfront, jtail, jpad, jfrog); holdon: board5 (Pip's row of five pictures), legs (the two
-  tadpoles with legs get one bracket "still the young"); ring: tegg / tyoung / tadult / tback (the frog board's tiles hop onto the loop;
+  the journey (dive, jegg, jhatch, jtadpole, jback, jfront, jtail, jpad, jfrog); holdon: board (Pip's row of four pictures), bracket (the tadpole
+  and the tadpole with legs get one bracket "the young"; Stage 1: renamed from "legs", which lcchick also uses); ring: tegg / tyoung / tadult / tback (the frog board's tiles hop onto the loop;
   the last arrow from the frog back to the eggs); henIn (the hen and chicks walk in); lcchick: beak, wings, legs, peck, pairs (the
   side-by-side: chick+hen LOOKS LIKE THE ADULT, tadpole+frog DOES NOT); hop, skin (the cliffhanger).
   Part 2: pic1 / pic2 / pic3 (recap); hop (the little grasshopper hops onto a blade of grass); lcnymph: pairin, legs, feelers, jump, wings;
@@ -151,7 +151,7 @@ SEQ1 = [
  ("say", "e702", H, "You are a tiny egg, inside the soft, clear jelly. A fish swims by, but you are safe.", {**SLOW, "pre": 0, "post": .8}),
  ("say", "e703", H, "Days go by. You wriggle out of the jelly. You are a tadpole, with a round body and a long tail!", {**SLOW, "pre": .2, "post": .8, "kw": [["jhatch", "wriggle"], ["jtadpole", "tadpole"]]}),
  ("say", "e704", H, "Weeks go by. Two back legs grow out, and then two front legs.", {**SLOW, "pre": .2, "post": .8, "kw": [["jback", "back"], ["jfront", "front"]]}),
- ("say", "e705", H, "Your tail shrinks away. You climb onto a lily pad, and you breathe the air. You are a frog!", {**SLOW, "pre": .2, "kw": [["jtail", "tail"], ["jpad", "lily"], ["jfrog", "frog", 1]]}),
+ ("say", "e705", H, "Your tail shrinks away. You climb onto a lily pad, and you breathe the air. You are a frog!", {**SLOW, "pre": .2, "kw": [["jtail", "tail"], ["jpad", "lily"], ["jfrog", "frog"]]}),
  ("wait", 1.0),
  # ---- 9 · pull back out; the answer (only Momo, who was right, explains); TADPOLE pops; the book's caption strip
  ("scene", "pullout"), ("mark", "pullout"), ("wait", .6),
@@ -168,7 +168,7 @@ SEQ1 = [
  ("say", "e902", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .3}),
  *LOCK("hold")[:-1], ("wait", .5),
  ("say", "e903", H, "Arms crossed? One finger up!", {"pre": 0, "post": .1}),
- ("say", "e904b", B, "A tadpole with legs is still the young. It is still growing into the adult, so the frog has three stages!", {"pre": .3, "post": .2, "kw": [["legs", "legs"], ["tegg", "three"]]}),
+ ("say", "e904b", B, "A tadpole with legs is still the young. It is still growing into the adult, so the frog has three stages!", {"pre": .3, "post": .2, "kw": [["bracket", "legs"], ["tegg", "three"]]}),
  *cut("pipoops", [("say", "e908p", P, "Oops! The legs are just the young growing up.", {"pre": .3, "post": .1})]),
  ("scene", "ring"), ("mark", "tyoung"), ("wait", .6), ("mark", "tadult"), ("wait", .6),
  *(cut("roundgoes", [("say", "e906", H, "And the adult frog lays new eggs, so round and round it goes.", {"pre": .3, "kw": [["tback", "eggs"]]})]) or [("mark", "tback"), ("wait", 1.2)]),
@@ -202,7 +202,7 @@ SEQ1 = [
  ("scene", "final"),
  ("say", "e1301", H, "Show me your score hand! One finger or more? You beat the Buddies. Two fingers? High five!", {"pre": .3, "post": .5}),
  ("scene", "liz"),
- ("say", "e1302", H, "Did you spot the tree frog? It was on a big leaf, high above the pond!", {"pre": .6, "post": .2}),
+ ("say", "e1302", H, "Did you spot the tree frog? It was on the garden tap, beside the pond!", {"pre": .6, "post": .2}),
  ("say", "e1303", M, "Here is a fun fact! This tree frog lays its eggs in a ball of foam, on a leaf above the pond. When the tadpoles hatch, they drop into the water!", {"pre": .3, "post": .2, "kw": [["ff_in", "fun"], ["ff_foam", "foam"], ["ff_drop", "drop"]]}),
  ("say", "e1304", H, "Tell someone at home!", {"pre": .3, "post": .6}),
  *kwrecap(["Jelly-like covering", "Tadpole", "Chick"]),
@@ -266,7 +266,7 @@ SEQ2 = [
  ("say", "f704p", P, "But why would a grasshopper take off its skin?", {"pre": .2}),
  ("say", "f705", H, "Its outer skin is hard, and it cannot stretch. So when the nymph grows, the old skin gets too tight.", {**LC, "pre": .3, "kw": [["tight", "tight"]]}),
  *cut("shirt", [("say", "f706b", B, "Like my old school shirt! I grew bigger, so it did not fit me any more.", {"pre": .2})]),
- ("wait", .4),
+ *VERDICT("v_skin"),   # Stage 1: the look-closer's verdict THE OLD SKIN IS TOO TIGHT (script segment 6) had no mark
  # ---- 8 · BE THE NYMPH (the journey: the moult lived from inside; the buddies ride along on the next blade of grass)
  ("scene", "waitw"),
  ("say", "f801", H, "Be the nymph! Shrink down. Quietly.", {"pre": .5, "post": .5}),
@@ -310,7 +310,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "f1301", H, "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "f1302", H, "Did you spot the praying mantis? It was on a stem, pretending to be a leaf!", {"pre": .5, "post": .2}),
+ ("say", "f1302", H, "Did you spot the praying mantis? It was on a sunflower, keeping very still!", {"pre": .5, "post": .2}),
  ("say", "f1303b", B, "Here is a fun fact! The praying mantis is a close cousin of the cockroach. Its eggs are in an egg case too, and lots of tiny nymphs hatch out together!", {"pre": .3, "post": .2, "kw": [["ff_in", "fun"], ["ff_cousin", "cousin"], ["ff_case", "case"], ["ff_babies", "nymphs"]]}),
  ("say", "f1304", H, "Tell someone at home!", {"pre": .3, "post": .5}),
  # ---- 13 · the dare for Episode 17 (the lime plant at the garden's edge: a caterpillar)

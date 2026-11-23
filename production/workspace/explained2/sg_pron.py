@@ -23,6 +23,9 @@ FIX = {
     "live": {"ph": "lˈiːv"},  # "leev": the teacher's "leaf" (clip M)
     "lives": {"ph": "lˈiːvz"},
     "fragile": {"ph": "fɹˈædʒaɪl"},             # "FRAJ-ile" (teacher, 2026-11-21, clip B)
+    # P3 EP16 Stage 1 (Opus, 2026-11-23): Kokoro's own "mantis" is "mˈæntiz" (ends in a z, "man-teez"); the dictionary sound is "MAN-tis".
+    # Test clips pron_clips/Heart_ep16_new_words.m4a (before/after). Not a Singapore name: an English word Kokoro misreads (like "fragile").
+    "mantis": {"ph": "mˈæntɪs"},
 }
 _tok = None
 def _tokz():

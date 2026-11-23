@@ -1,0 +1,54 @@
+{
+ "key": "explained-p3-ep16",
+ "parts": [
+  {
+   "key": "explained-p3-ep16-part1",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep16/ep16_part1.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep16/thumb_part1.jpg",
+   "title": "Fish, Frog or Lizard? What Does a TADPOLE Become? (Part 1) | 3-Stage Life Cycles of Animals",
+   "description": "A tadpole lives in water and has a tail. Will it grow into a fish, a frog or a lizard? Lock in your answer from last time, look closer at frog eggs in their jelly, be a frog egg from the jelly to the lily pad, and find out why a chick looks like a hen but a tadpole does not look like a frog. Part 1 of Primary 3 Science, Life Cycles of Animals.\n\nIn this part:\n• Look closer: frog eggs and their jelly-like covering (why the jelly?)\n• Be a frog egg: egg, tadpole, legs, frog\n• HOLD ON! Is a tadpole with legs a new stage?\n• Look closer: a chick beside a hen (compare the body parts, not the colour)\n• Spot the hidden tree frog!\n\nKey words: jelly-like covering, tadpole, chick.\nWatch Part 2: why did this grasshopper leave its skin behind? Last episode: one mango seed to a tree full of mangoes.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nA chick looks like a hen. A tadpole doesn't look like a frog! P3 Science, Chapter 5, Life Cycles of Animals (pp. 80 to 85): the three-stage life cycle (the egg, the young and the adult), which young look like the adult and which do not, and what moulting is. Also fits US NGSS 3-LS1-1 (Grade 3: life cycles).\nSafety and care: we look at frog eggs and leave them in the pond. We watch chickens from a distance and never chase them. We look at insects and do not touch them.\nTry it at home: next time you pass a pond or a canal after rain, look for frog eggs in jelly or tadpoles. In the grass, look for a small grasshopper with no wings: it is a nymph. You might even find an empty skin it left behind!\nDid you know? Singapore's four-lined tree frog makes a foam nest for its eggs. Frogs call loudly after a thunderstorm. Some HDB estates have chickens that walk about freely.\nIn the US, children watch bullfrog tadpoles in a pond, and chicks hatch at the county fair: the same three stages.\n\n#PrimaryScience #Singapore #LifeCycles #TheOneAppExplained",
+   "tags": [
+    "life cycle of a frog",
+    "frog life cycle for kids",
+    "tadpole to frog",
+    "three stage life cycle",
+    "life cycle of a chicken",
+    "jelly-like covering",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  },
+  {
+   "key": "explained-p3-ep16-part2",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep16/ep16_part2.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep16/thumb_part2.jpg",
+   "title": "Why Did This Grasshopper Leave Its SKIN Behind? (Part 2) | Nymphs and Moulting",
+   "description": "A little grasshopper with no wings, and an empty grasshopper on the grass. What happened? Look closer at the young beside an adult, find out why the old skin comes off, be the nymph as it moults, and spot the mistake in Pip's cockroach homework. Part 2 of Primary 3 Science, Life Cycles of Animals.\n\nIn this part:\n• Look closer: a young grasshopper beside an adult (a nymph has no wings yet)\n• Look closer: the empty skin (why a nymph moults)\n• Be the nymph: the moult, from inside\n• Showdown: find the mistake in Pip's cockroach homework (the egg case)\n• A chant to remember it all\n• Spot the hidden praying mantis!\n\nKey words: nymph, moulting, egg case.\nWatch Part 1 first! Next episode: a caterpillar. Is it a nymph?\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nA chick looks like a hen. A tadpole doesn't look like a frog! P3 Science, Chapter 5, Life Cycles of Animals (pp. 80 to 85): the three-stage life cycle (the egg, the young and the adult), which young look like the adult and which do not, and what moulting is. Also fits US NGSS 3-LS1-1 (Grade 3: life cycles).\nSafety and care: we look at frog eggs and leave them in the pond. We watch chickens from a distance and never chase them. We look at insects and do not touch them.\nTry it at home: next time you pass a pond or a canal after rain, look for frog eggs in jelly or tadpoles. In the grass, look for a small grasshopper with no wings: it is a nymph. You might even find an empty skin it left behind!\nDid you know? Singapore's four-lined tree frog makes a foam nest for its eggs. Frogs call loudly after a thunderstorm. Some HDB estates have chickens that walk about freely.\nIn the US, children watch bullfrog tadpoles in a pond, and chicks hatch at the county fair: the same three stages.\n\n#PrimaryScience #Singapore #LifeCycles #TheOneAppExplained",
+   "tags": [
+    "life cycle of a grasshopper",
+    "nymph",
+    "moulting",
+    "grasshopper moulting",
+    "cockroach life cycle",
+    "three stage life cycle",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLb8LpPqxQI4E",
+   "after": "explained-p3-ep15-part2"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "explained-p3-ep15-part2"
+  }
+ ],
+ "_note": "No replaces: the classic P3 no. 10 'A Tadpole Has No Legs. So How Does It Become A Frog?' (2Atm-edXKVk) covers pp. 80-89 (three AND four stages); EP16 covers pp. 80-85 only. It stays in the playlists until EP17 (four stages, pp. 86-89) is live; EP17's upload.json then sets replaces [2Atm-edXKVk] + retire_old (as EP14/EP15 did with RVRoaWWKjEM). School Lab 5.1 line left out (the bench numbers the stages)."
+}
