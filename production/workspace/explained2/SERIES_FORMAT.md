@@ -354,6 +354,27 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   re-upload: replace the part in TheOneApp videos.js (moments from tl_pN.json, 1.5 s before each idea, with keys) and add YouTube
   chapters to its description (production/youtube/apply_chapters.py). An old link to a replaced video must never stay in the app.
 
+- **Every reaction must have a reason, or it goes numb (teacher, 23 Nov: "before using these characters freely in the video, make sure
+  it makes sense to produce that reactions. Else viewer might find it numb and not have any useful effects in a long run").**
+  A pose is a signal: if it shows up without a reason, children stop reading it. So each pose has ONE job and is used only for it:
+  | Pose | Only when |
+  |---|---|
+  | talking sprite | the buddy is speaking |
+  | smile / nod (sit) | listening; the default |
+  | thinking | a question has just been asked, before the answer |
+  | worried | during a countdown or a guess, before the answer is revealed |
+  | oops (shy) | this buddy just got it wrong |
+  | arms crossed (confident) | this buddy just got it right |
+  | surprised | a real surprise: a fun fact, an unexpected result |
+  | cheer (hands up) | something is learnt or achieved: a key word lands, a mistake is fixed, "Now you know!" |
+  | laughing | a line that is meant to be funny |
+  | pointing | showing a specific thing on screen |
+  | waving | hello and goodbye only |
+  - Most of the time the buddies just listen (smile, blink, a small nod). Strong reactions are rare so they stay strong: no buddy
+    shows a strong pose (cheer, surprised, laughing, worried) more than about once a minute, unless the scene calls for it.
+  - Before using a pose, the script or the staging must name the reason (SCENES_TODO lists it per line). The review checks every pose
+    against this table; a pose with no reason is replaced by listening.
+
 ## 6. Motion (reference: `characters/sprites/pose_test_robot_round.mp4`, approved "exactly what I want")
 
 - **Pose swaps:**
