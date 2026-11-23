@@ -375,6 +375,15 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - Before using a pose, the script or the staging must name the reason (SCENES_TODO lists it per line). The review checks every pose
     against this table; a pose with no reason is replaced by listening.
 
+- **Plants grow the way real plants grow, and what is gone is gone (teacher, 2026-11-23, on EP15 Part 2's "Be a mango flower"
+  journey: "The flower should be gone but there is still a faint image of the flower. Also, the leaves of the tree must branch out
+  from the branches, not in mid-air").**
+  - Every leaf joins a stem, a twig or a branch: its base sits on the wood with a short leaf stalk; no leaf floats in the air, and
+    a bush's leaves sit on the bush's mass. Never scatter leaves at random positions over a scene.
+  - When the story says a thing is gone (petals fall, the flowers are gone, a pupa case is empty), it fades out COMPLETELY. Never
+    leave it at low opacity as a ghost, unless the script asks for a memory or an outline on purpose and a label says so.
+  - The review checks both on every still that shows a plant or a removed thing.
+
 ## 6. Motion (reference: `characters/sprites/pose_test_robot_round.mp4`, approved "exactly what I want")
 
 - **Pose swaps:**

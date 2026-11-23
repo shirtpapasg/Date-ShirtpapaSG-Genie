@@ -194,9 +194,18 @@ function flowerJourney(t, s) { const m = MK, tF = m("jflower"), tP = m("jpetals"
   // light through the leaves (soft circles), leaves at the edges, the branch
   for (let i = 0; i < 18; i++) o += `<circle cx="${n2(1920 * hash(i, 101) + 20 * Math.sin(t * .4 + i))}" cy="${n2(1080 * hash(i, 103))}" r="${n2(40 + 70 * hash(i, 105))}" fill="#FFF6C8" opacity="${n2(.18 + .12 * Math.sin(t + i))}"/>`;
   let v = `<path d="M-300 ${300} Q500 200 1100 330 Q1500 420 2300 380" fill="none" stroke="#7A5230" stroke-width="70" stroke-linecap="round"/>`;
-  for (let i = 0; i < 14; i++) { const x = -200 + 2300 * hash(i, 111), y = 120 + 420 * hash(i, 113); v += `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(360 * hash(i, 115) + 5 * Math.sin(t + i))}) scale(3)">${leaf15(70, 16, i % 2 ? "#4FA866" : "#3E9E5A", "#2A6E3E")}</g>`; }
+  /* every leaf grows FROM the branch (teacher, 23 Nov 2026: "the leaves of the tree must branch out from the branches, not in mid-air"):
+     its base sits on the branch's edge and a short stalk joins it to the wood; above the branch they point up and out, below it down and out */
+  const brP = (x) => { const seg = x < 1100 ? [[-300, 300], [500, 200], [1100, 330]] : [[1100, 330], [1500, 420], [2300, 380]];
+    const [a, b, c] = seg; let lo = 0, hi = 1; for (let k = 0; k < 24; k++) { const u = (lo + hi) / 2, px = (1 - u) * (1 - u) * a[0] + 2 * u * (1 - u) * b[0] + u * u * c[0]; if (px < x) lo = u; else hi = u; }
+    const u = (lo + hi) / 2, py = (1 - u) * (1 - u) * a[1] + 2 * u * (1 - u) * b[1] + u * u * c[1], dx = 2 * (1 - u) * (b[0] - a[0]) + 2 * u * (c[0] - b[0]), dy = 2 * (1 - u) * (b[1] - a[1]) + 2 * u * (c[1] - b[1]);
+    return [py, Math.atan2(dy, dx) * 180 / Math.PI]; };
+  for (let i = 0; i < 14; i++) { const x = -120 + 2140 * (i + .5 * hash(i, 111)) / 14, side = i % 2 === 0 ? -1 : 1, [y, ang] = brP(x);
+    const out = (ang + side * (45 + 90 * hash(i, 115)) + 4 * Math.sin(t * .8 + i)) * Math.PI / 180, bx = x + 18 * Math.cos(out), by = y + side * 30 + 18 * Math.sin(out);
+    v += `<path d="M${n2(x)} ${n2(y + side * 12)} L${n2(bx)} ${n2(by)}" stroke="#5E3E22" stroke-width="9" stroke-linecap="round"/>`
+      + `<g transform="translate(${n2(bx)} ${n2(by)}) rotate(${n2(out * 180 / Math.PI)}) scale(${n2(2.6 + .7 * hash(i, 121))})">${leaf15(70, 16, i % 2 ? "#4FA866" : "#3E9E5A", "#2A6E3E")}</g>`; }
   // the spray you are part of: hundreds of tiny flowers (they fall away around you too)
-  const fall = ss(tP - .3, tP + 2.2, t); v += OP(1 - .8 * fall, flowerSpray(t, 960, 900, 6.2, 0, { big: true }));
+  const fall = ss(tP - .3, tP + 2.2, t); v += OP(1 - fall, flowerSpray(t, 960, 900, 6.2, 0, { big: true }));   // gone completely once the petals have fallen (teacher, 23 Nov 2026: no faint ghost of the flowers)
   v += `<g transform="translate(960 ${n2(760 + sink)}) rotate(${n2(bend)})">`;
   // you: a tiny green mango that grows (a curved skin filling the bottom of the view), then ripe
   if (t > tP - .2) { const r = lerp(240, 900, grow), col = mixC("#9CCB5A", "#FFB43A", ripe), col2 = mixC("#5E9A34", "#E0701E", ripe), a = ss(tP - .2, tG, t);
