@@ -9,7 +9,7 @@ teacher approved. In code: `sg_pron.py`: `if needs_fix(text): audio, sr = speak_
 | Pulau Semakau (and "Semakau" alone) | "pu-lao, sir-MA-kao" (stress on "ma"; short pause after "pu-lao") | pˈuːlaʊ, sɜːmˈɑːkaʊ | teacher, 2026-11-20 (clip I). Fixed in the live Explored EP03 Part 2, its two Shorts, EP10 and EP10 Short 2 on 2026-11-21 (re-uploaded; see THEONEAPP_EXPLORED.md) |
 | live / lives (the verb) | "leev" (long ee, like "leaf" with a v), never "laiv"; whole word only | lˈiːv / lˈiːvz | teacher, 2026-11-21 ("should be read as 'leaf'"; clip M) |
 | fragile | "FRAJ-ile" (rhymes with "mile"), never the American "FRAJ-uhl" | fɹˈædʒaɪl | teacher, 2026-11-21 (clip B, `pron_clips/Heart_fragile_B_FRAJ-ile.m4a`) |
-| mantis ("praying mantis") | "MAN-tis", never Kokoro's own "man-teez" (it ends the word in a z) | mˈæntɪs | Opus, 2026-11-23, P3 EP16 Stage 1: an English word Kokoro misreads (like "fragile"); clip `pron_clips/Heart_ep16_new_words.m4a` (5th sentence before the fix, 6th after). **Waiting for the teacher's listen.** |
+| mantis ("praying mantis") | "MAN-tis", never Kokoro's own "man-teez" (it ends the word in a z) | mˈæntɪs | Opus, 2026-11-23, P3 EP16 Stage 1: an English word Kokoro misreads (like "fragile"); clip `pron_clips/Heart_ep16_new_words.m4a` (5th sentence before the fix, 6th after). **Approved by the teacher (23 Nov), with nymph, moulting, jelly-like and HDB as Kokoro says them.** |
 
 Before adding a new Singapore name, make a test clip of Heart saying it in a sentence, send it to the teacher, and add it here
 only once approved.

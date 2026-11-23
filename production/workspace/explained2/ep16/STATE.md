@@ -79,3 +79,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 - Some staging notes in the script's segment tables predate the 23 Nov one-job-per-pose rule (e.g. Basil "cheer" while waving the viewer
   into a journey): SCENES_TODO.md is the one to follow.
 - School Lab 5.1 stays out of the description until its bench stops numbering the stages.
+
+## 23 Nov: teacher approved the voices
+The three "praying mantis" lines and the new-words clip (nymph, moulting, mantis, jelly-like, HDB) are approved as recorded.
