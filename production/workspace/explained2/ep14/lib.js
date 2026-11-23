@@ -107,7 +107,8 @@ function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.
    o.poses = [[time, pose], ...] (pose swaps POP with a squash and a stretch, never a cross-fade; default pose "sit")
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
    o.mouth (0..2) / o.eyes "shut": a yawn or a doze in the sit pose (EP14); o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
-function buddy(who, x, y, h, t, o = {}) {
+const SIZE_K = { basil: .88 };   // teacher, 23 Nov: keep the three buddies in proportion
+function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99;
   for (const [tp, p] of o.poses || []) if (t >= tp) { pose = p; tsw = tp; }

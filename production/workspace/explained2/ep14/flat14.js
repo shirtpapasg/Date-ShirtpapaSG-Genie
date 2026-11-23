@@ -187,9 +187,10 @@ function VF(t, o = {}, cam) { const h = o.h === undefined ? 9 : o.h, dark = o.da
   for (let i = 0; i < 3; i++) { const a = t * fsp + i * 2.094, tx = 210 * Math.cos(a), ty = 44 * Math.sin(a), L = Math.hypot(tx, ty), rot = Math.atan2(ty, tx) * 180 / Math.PI; s += `<g transform="translate(430 62) rotate(${n2(rot)})"><rect x="26" y="-13" width="${n2(L - 26)}" height="26" rx="13" fill="${Math.sin(a) > 0 ? "#F4F7FB" : "#DDE4EE"}" stroke="#9AA5B4" stroke-width="3"/></g>`; }
   s += `<ellipse cx="430" cy="64" rx="24" ry="10" fill="#C9D2DC"/>`;
   // on the low table: the torch on its four books (left), the globe (right)
-  if (o.torch !== false) s += TF(TOR[0], TABY, .9, books4()) + TF(TOR[0], TOR[1], .9, torch14(0));
-  if (o.globe !== false) { const g = o.globe || {}; s += `<ellipse cx="${GLB[0]}" cy="${TABY + 2}" rx="56" ry="8" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>` + TF(GLB[0], GLB[1], 1, globe14(GLR, g.lon === undefined ? 60 : g.lon, { dot: !!g.dot, dotK: g.dotK, id: "vfg" })); }
-  if (o.items) s += o.items;
+  let front = "";   // teacher, 23 Nov: "The globe is not full circle. It should be in front of the window": table things are drawn AFTER the window
+  if (o.torch !== false) front += TF(TOR[0], TABY, .9, books4()) + TF(TOR[0], TOR[1], .9, torch14(0));
+  if (o.globe !== false) { const g = o.globe || {}; front += `<ellipse cx="${GLB[0]}" cy="${TABY + 2}" rx="56" ry="8" fill="${P.ink}" opacity=".25" filter="url(#b4)"/>` + TF(GLB[0], GLB[1], 1, globe14(GLR, g.lon === undefined ? 60 : g.lon, { dot: !!g.dot, dotK: g.dotK, id: "vfg" })); }
+  if (o.items) front += o.items;
   // the room's dimness (not the window: the sky lights itself)
   if (dark > .02) s += `<path fill-rule="evenodd" d="M-200 -120 H2120 V1200 H-200z M${W_.x} ${W_.y} h${W_.w} v${W_.h} h${-W_.w}z" fill="#141B45" opacity="${n2(.62 * dark)}"/>`;
   // the window: its view, the frame, the grille, the sill
@@ -198,6 +199,8 @@ function VF(t, o = {}, cam) { const h = o.h === undefined ? 9 : o.h, dark = o.da
   s += `<rect x="${W_.x - 9}" y="${W_.y - 9}" width="${W_.w + 18}" height="${W_.h + 18}" rx="6" fill="none" stroke="${fr}" stroke-width="18"/><path d="M${W_.x + W_.w / 3} ${W_.y} v${W_.h} M${W_.x + W_.w * 2 / 3} ${W_.y} v${W_.h}" stroke="${fr}" stroke-width="12"/>`
     + [1, 2, 3, 4, 5].filter((i) => i % 2).map((i) => `<path d="M${n2(W_.x + i * W_.w / 6)} ${W_.y} v${W_.h}" stroke="${gr}" stroke-width="4"/>`).join("") + `<path d="M${W_.x} ${n2(W_.y + W_.h / 3)} h${W_.w} M${W_.x} ${n2(W_.y + W_.h * 2 / 3)} h${W_.w}" stroke="${gr}" stroke-width="4"/>`
     + `<rect x="${W_.x - 30}" y="${W_.y + W_.h + 6}" width="${W_.w + 60}" height="22" rx="8" fill="${mixH("#F4E3C4", "#5A5F8E", dark * .6)}"/>`;
+  if (front) { const a = dark > .02 ? .62 * dark : 0, k = [0x14, 0x1B, 0x45].map((c) => c / 255 * a), m = 1 - a;   // the room's dimness, applied to the table things too
+    s += a ? `<filter id="vfDim" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="${m} 0 0 0 ${n2(k[0])} 0 ${m} 0 0 ${n2(k[1])} 0 0 ${m} 0 ${n2(k[2])} 0 0 0 1 0"/></filter><g filter="url(#vfDim)">${front}</g>` : front; }
   // the curtains on their rod, the cord at the right
   const glow = c * (1 - nightK(h));
   s += `<path d="M826 112 H1756" stroke="${mixH("#B88A2A", "#4A4470", dark * .6)}" stroke-width="10" stroke-linecap="round"/>` + curtain14(846, lerp(946, 1284, c), t, dark, glow, .6 + (o.swayK || 0)) + curtain14(1714, lerp(1614, 1276, c), t, dark, glow, .6 + (o.swayK || 0));
