@@ -1,0 +1,94 @@
+# EP18 build state (for a resume after a restart)
+P3 EP18 "Frog vs mosquito: same or different? How to compare" (Ch 5, Life Cycles of Animals, pp. 90-98; the Cycles theme closes). Part 1
+"Frog vs Mosquito: SAME or DIFFERENT? Count the Stages!" (EP17's dare answered: different; SIMILARITIES and DIFFERENCES; be a raindrop:
+three stages and four; OBSERVABLE CHARACTERISTICS; HOLD ON! frog and grasshopper "exactly the same"; the young beside their parents; the
+cicada; the cliffhanger: the hen on her eggs) **P1LEN**. Part 2 "Which Came First, the Chicken or the EGG?" (Round 1: neither; be an egg;
+REPEATED, NO FIRST OR LAST STAGE; the Showdown: Momo's mosquito and mealworm-beetle homework; PHYSICAL FEATURES; the butterfly lays an
+egg, 5.17 and the theme's three questions; the chant; the honeybee; the dare into EP19: a magnet, a steel pin and a copper wire) **P2LEN**.
+The script: `../p3_ep18_script.md` (version 1, Opus, 23 Nov 2026). The source of every spoken word: `script.py`.
+
+Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** · Stage 2 (drawing, sound, full render, self-check: Fable)
+· Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md) · Stage 3 (render, checks, upload: Opus).
+
+## For the teacher to listen to (before Stage 3)
+- **`../pron_clips/Heart_ep18_new_words.m4a`** (68 s, 11 sentences, 1.2 s apart): 1 similarities, differences · 2 observable
+  characteristics · 3 "A little cicada is hiding..." AFTER the fix ("sih-KAH-duh") · 4 the same BEFORE (Kokoro's own American
+  "sih-KAY-duh") · 5 Basil's cicada fun fact (after the fix; "seventeen"; "live underground" = "leev") · 6 honeybee · 7 Pip: a queen
+  honeybee, a thousand eggs · 8 Basil: mealworm, beetle (Kokoro's soft American t in "beetle") · 9 repeated, no first or last stage ·
+  10 physical features · 11 flower-pot plate, wrigglers, larvae.
+- The voices are already recorded WITH the cicada fix (k301a, k301b, k1202, k1203b). If the teacher prefers "sih-KAY-duh": delete the two
+  `cicada` entries in `../sg_pron.py`, delete those four `voice/<id>.json`, re-run make_voice.py and build_tl.py.
+- The fun facts (no web access here): periodical cicadas in the eastern US spend 17 years underground as nymphs (very sure); a western
+  honeybee queen at her peak lays 1,500 to 2,000 eggs a day (the line says "can lay more than a thousand"; "hundreds" is the very safe
+  version, script section 3).
+
+## Stage 1 done (2026-11-23)
+- **Engine copied from `../ep15/`** (the newest finished engine, its v2-cast redo, committed 7aac825): lib.js (`SIZE_K` basil **.94**,
+  `POSE_SUB` worried -> thinking for Pip and Momo, one job per pose: reactPose only "thinking" after a real question, cheer only when
+  learnt or `o.achieved`, the `_POSE` QA hook), common.js (lockN: the lead thinks, then is WORRIED through the countdown; markScene: the
+  reader points at the card in the pause; one size at one depth), closer.js (faces listen; poses only via `peekEv`), shrink.js, props.js,
+  hotel.js, garden.js, trail.js, materials.js, canteen.js, pics.js, song.js, music.js, audio/, render.js, finish.sh (ep18 names, EP18
+  contact-sheet marks), bake.js, build_part.sh, build_all.sh, dump_cues.js, probe.js, stills.js, sheet.sh, measure_countdowns.py (ep18
+  names; same ring lengths as EP15: P1 3 s and 5 s, P2 5 s and 5 s), compare_ep1.py (EP18 scenes), build_tl.py, make_voice.py (header +
+  EXTRA), main.js (+ `XDEFS18()` if it exists), page.html (tests.js + ep17dare.js), the QA tools pose_audit.js, faces_sheet.js/.py,
+  make_preview.sh (its spans are still EP15's: set them after the render); bg/ stage, stage2, daystage, _grain; the ritual voices h501,
+  h860, h864, h1304a/o/t, h1305, u1300, u1305, u1002. NOT copied: EP15's scene art (home15.js, garden15.js, its p1/p2, tests.js,
+  ep14dare.js), pose_reasons.json, highlights.py, make_moments.py (EP15-only; copy and point them at EP18 at Stage 3).
+- **Sprites** (`prep_sprites.py` with the heart-tts venv python, 41 sprites, identical to EP15's): Pip (grey), `momo_v2`, `basil_v2`.
+- **Changed for EP18:** lib.js `OUTCOMES` (P1: Round 1 at `ansglow` Pip right / Momo wrong; **Basil right card, wrong reason (size): no
+  point, never confident: he listens at ansglow and is shy at Heart's k804**; HOLD ON! at k1003 Basil, Momo right / Pip wrong. P2: Round 1
+  at `ansglow` Pip, Momo right / Basil wrong; Showdown at d804b Basil, Pip right / Momo wrong), `learnAt` (kw_*, v_*, jfrog, jmosq, jagain,
+  rewrite, plant), `KW` / `KWLINE` (P1 SIMILARITIES, DIFFERENCES (two spots: both land in k603), OBSERVABLE CHARACTERISTICS; P2 REPEATED,
+  NO FIRST OR LAST STAGE, PHYSICAL FEATURES; all o.at), `SHELF_HIDE` (+ lccompare, lcyoung, lcloop, lcbeetle); common.js `PHR` (the
+  chant). New: `ep17dare.js` (a STUB: EP17's dare cards are not drawn yet; copy them in at Stage 2 and set `DARE_PICS`), `tests.js`
+  (HIDDEN, CICADA / CICADA_R, BEE / BEE_R (intro / reveal spots), deckPH, gardenPH, lcPH, ringPH, the small print, SAMEC / DIFFC /
+  WRIGC / MEALC, cmpChip, dots (the journey's tally), ffPH / FF), `p1.js` / `p2.js` (placeholders; the shared routines wired: recap with
+  EP17's two cards, title, gameScene push-ins, goals (Momo / Basil), lock-ins (P1 two cards 3 s, P2 three cards 5 s), look-closer frames
+  with their SAME / DIFFERENT chips, the raindrop's two dot counters, journey tags + riders, Mark Sentences (Pip, Momo / Basil, Pip), the
+  5.17 strip, chant, score hands, lizReveal + funFact, the dare's three cards, read-along, Now you know), `sound_cues.js` (a GENERIC Stage 1
+  plan; the places' ambience and foley per scene in SCENES_TODO), `make_todo.py` -> `SCENES_TODO.md` (full staging per scene and per line,
+  every pose WITH ITS REASON (few: listening is the default; about 30 pose moments a part, most wired), the hidden animal's spot per scene,
+  the void deck and the garden with ambience and foley on the marks, "Changed from the script's tables"), `upload.json`.
+- **Script changes at Stage 1** (script.py and ../p3_ep18_script.md): the LARVAE respelling ("larvee", "pew-pee") is now empty: Kokoro's
+  own "larvae" / "pupae" are right (EP17's clip; the respelling stressed both halves). No line words changed; no cut beyond section 6's
+  list (CUTS_NOTE).
+- **Pronunciation**: "cicada(s)" = "sih-KAH-duh" through ../sg_pron.py (new entries; ../PRONUNCIATION.md row "waiting for the teacher's
+  listen"). Left to Kokoro (same clip): similarities, differences, observable characteristics, honeybee, mealworm, beetle, seventeen,
+  repeated, physical features, wrigglers, larvae.
+- **Voices** (`voice/`, `make_voice.py`, log `voice.log`): every line recorded (Heart: Kokoro af_heart via sg_pron; buddies: the
+  Character Voice Kit, 12% slower), aligned (pocketsphinx; new dictionary words in EXTRA: beetle's, flower-pot, pupae, wriggler(s),
+  wriggles). PROPORTIONAL_NOTE Re-running make_voice.py keeps finished files and records only changed lines.
+- **Timelines:** `python3 build_tl.py 1|2` -> tl_p1/2.json/js: **Part 1 P1LEN, Part 2 P2LEN** (target 5:15-5:35). `node dump_cues.js 1|2`
+  -> cues. A sweep rendering every 0.25 s of both parts in the page: no errors, no NaN.
+- **Scores:** Part 1 Round 1 1 : 0, HOLD ON! 2 : 0; Part 2 Round 1 1 : 1, Showdown 3 : 1.
+- **upload.json:** both parts public, Made for Kids (the uploader sets it), playlists PLb8LpPqxQI4E and PLPfEuT7l4KjI right after
+  `explained-p3-ep17-part2`; **`replaces: ["xaCprQPXVYY"]`, `retire_old: true`**: the classic P3 no. 11 "Frog Or Mosquito: Who Changes
+  More? Comparing Life Cycles" covers exactly pp. 90-98 (lab 5.2; ../../episode-guide/explained-episode-guide.html), so EP18 retires it
+  (out of both playlists, a NEW VERSION first line; never deleted or unlisted). Part 2's title drops the script's "and" (YouTube's
+  100-character limit: "Which Came First, the Chicken or the EGG? (Part 2) | No First or Last Stage, Why Life Cycles Matter").
+  Titles and descriptions from script section 7. School Lab 5.2 line left out (the bench numbers the stages). **Not run.** Upload only
+  after EP17 is live.
+- **Thumbnails (Stage 2, THUMBNAIL_V2, thumb_v2.js `ep18_1`, `ep18_2`):** P1 **SAME?!** + Momo surprised + a frog and a friendly mosquito
+  face to face on a lily pad's edge, each with its loop (three tiles, four tiles); warm yellow to orange-red burst. P2 **WHICH FIRST?** +
+  Basil surprised + the hen on her nest with a big egg in front, a ? between; magenta to deep purple burst. Alternates: FROG = MOSQUITO? /
+  EGG OR HEN?
+
+## For Stage 2 (Fable): start here
+- Read `SCENES_TODO.md` top to bottom (the rules block first, especially rules 4 to 6 and "Changed from the script's tables"), then
+  `../p3_ep18_script.md` sections 3 (Realism) and 11.
+- Places: our block's void deck with the LIFE CYCLE DAY board (new) and EP15 to EP17's garden edge (the hen's nest, the ixora, the lime
+  plant). Borrow ../ep15/garden15.js and EP16 / EP17's garden art once drawn; put EP18's sets in new files (e.g. `deck18.js`, `edge18.js`)
+  loaded after ep17dare.js in page.html. Replace the placeholders; keep every mark (the sound keys on them).
+- Models: ../ep16 and ../ep17 (once drawn) `SC.holdon`, `SC.show` / `SC.fix`, `SC.dare`, the look-closers; ../ep15 the same; EP14's
+  day-and-night loop (../ep14/) for `lcloop`.
+- Before rendering: copy EP17's two dare-card pictures into ep17dare.js; diff this engine against ../ep16 and ../ep17 once they are
+  finished and take any later engine fixes (not the EP-only parts: OUTCOMES, KW, KWLINE, PHR, learnAt marks); pass `o.achieved` for
+  Basil's cheer after Part 2's Mark Sentence 1 (his own mistake fixed). Then `./build_part.sh 1` and `2`, contact sheets, the
+  teacher's-eye review, fixes, upload (`--check` first).
+
+## Open points
+- The cicada respelling waits for the teacher's listen (above).
+- ROOM_NOTE
+- The theme board's answer chips (C1 to C3) are on screen only; the teacher may want them spoken (script section 12, point 4).
+- 5.13 and 5.17a are not read in full (length): 5.13 is shown by the young look-closer, 5.17a is Momo's own words.
+- Pip has no back-view painting yet (Part 1's cliff asks for back views of Momo and Pip watching the nest).

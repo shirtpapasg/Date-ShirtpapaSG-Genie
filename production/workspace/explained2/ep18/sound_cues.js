@@ -11,16 +11,6 @@
 // finger's whoosh round the loop (finger), day birds and night crickets (daynight), the bran rustle of the mealworm tub (beetle, meal),
 // still water (wrig), the easel's strike and rewrite (strike, rewrite), a soft flutter (butterfly, lay), a magnet's clack (dareIn).
 // song.js's garden bed says "no hens" (EP15): EP18's garden edge HAS the hen.
-window.CUES to cues_p<N>.json;
-// song.js plays it. As in EP15, every sound hangs on the SAME mark the picture uses (script.py lists them). Stage 1 is GENERIC and driven by
-// the timeline: the rituals (round cards, lock-in ticks / bell / stamp, picks, Mark Sentences, key-word chimes, verdict stamps, journeys,
-// the chant, the score hand, the reveal, the read-along, the "Now you know!" blast) and the beds (groove for the game, calm for teaching,
-// wonder for the journeys, birds outdoors). STAGE 2 adds the garden's own life and foley on their marks (SERIES_FORMAT 9; the script's Sound
-// column): the pond at dawn (frogs calling, fading as the light comes; drips from the leaves; ripples as the tadpoles pass: wriggle), the
-// grass (rustle, grasshopper clicks: hop; the hen's clucks and the chicks' peeps: henIn, peck; a far bus); underwater hush and bubbles in
-// the frog-egg journey (a soft bloop as the fish bumps the jelly: fish; a pop as you hatch: jhatch; a splash and birds at jpad); munching
-// (jeat), a tight creak (jtight), a soft crack (jsplit), an unfolding rustle (jwings); a click per label in the look-closers; the easel's
-// strike (strike); a croak on the tree frog's name. song.js's garden bed has "no hens" (EP15): EP16's grassy edge DOES have the hen.
 window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.push({ t: Math.round(t * 1000) / 1000, k, v }); }, S = SCN, M_ = TL.marks,
   R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [] };
   const has = (id) => !!TL.lines[id], mk = (k) => M_[k];

@@ -55,8 +55,8 @@ SC.nymphans = (t, s) => { const tA = MK("ansglow");
   return VG16(t, { items: hopOn(t, HOP2, -9) }, [1.04 + .03 * eio((t - s.t0) / 5), 1000, 600]) + ["The young", "The adult"].map((c, i) => TF(820 + i * 280, 210, .5 * spring(t, s.t0 + .2 + i * .08, .4), choiceCard3(i + 1, c, hopCard(i, t), { w: 400, h: 330, size: 36, lit: i === 0 && t >= tA ? spring(t, tA, .45) : 0, id: "na" }))).join("") + xChip16(t, tA + .2, 1180, 130)
     + coin(t, MK("coin1") - .1, 960, 450, "+1", "if you showed one finger")
     + bd("basil", 400, 1050, 400, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("basil", 560, 830, t, s.t0 + .3, "2") : "") + xChip16(t, tA + .4, 600, 770, .7)
-    + bd("momo", 1330, 1046, 390, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("momo", 1180, 840, t, s.t0 + .35, "1") : "")
-    + bd("pip", 1680, 1076, 520, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 30]] }) + (t > s.t0 + .3 ? pickNum("pip", 1480, 790, t, s.t0 + .3, "1") : "") + melt(t, s, "lcnymph", .4) + HUD(t); };
+    + bd("momo", 1330, 1046, 390, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("momo", 1330, 600, t, s.t0 + .35, "1") : "")
+    + bd("pip", 1680, 1076, 520, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 30]] }) + (t > s.t0 + .3 ? pickNum("pip", 1690, 490, t, s.t0 + .3, "1") : "") + melt(t, s, "lcnymph", .4) + HUD(t); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "f602", sayId: "f601", who: "momo", n: "1 of 2", text: "The life cycle of a grasshopper has three stages. The stages are the egg, the young and the adult. The young of the grasshopper is called a nymph.", keys: ["three", "stages", "egg", "young", "adult", "nymph"], size: 50, y: 220, footer: FOOT,
   under: TF(1200, 1070, .36 * spring(t, s.t0 + .4, .5), loopBoard16(t, { tiles: [0, 0, 0], back: 0, pics: hopPic, names: HOPN, title: "THE GRASSHOPPER", id: "m1g", labels: false })) });
 
@@ -111,7 +111,7 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "f1002", sayId: "f1001", who: "basil"
 const EAS = [860, 1064, 1];
 window.SHELF_AWAY = (t) => { if (PART !== 2) return 0; const a = MK("ring0_show") - .6, b = MK("bell_show") + .5; return ss(a, a + .35, t) * (1 - ss(b, b + .35, t)); };
 const hwLit16 = (t) => { const L = "f1102p", bell = MK("bell_show"), ls = [MK("l1"), MK("l2"), MK("l3")]; return [0, 1, 2].map((i) => { if (t >= ls[i] - .1 && t < (i < 2 ? ls[i + 1] - .1 : LE(L) + .3)) return 1; if (t >= LT(L) && t < bell) return .4; return 0; }); };
-SC.show = (t, s) => { window._BUBAT = { pip: [1250, 260] }; const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 5), tS = LT("f1104") - .08, inT = t >= r0 && t < bell, R = [1500, 420], RR = 200;
+SC.show = (t, s) => { window._BUBAT = { pip: [1250, 260], basil: [1450, 235], momo: [1450, 235] }; const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 5), tS = LT("f1104") - .08, inT = t >= r0 && t < bell, R = [1500, 420], RR = 200;
   const st = ss(r0 - .6, r0 - .1, t) * (1 - ss(bell + .6, bell + 1.1, t)), bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 0, nf = inT ? (Math.floor(t - r0) % 3) + 1 : 3, ez = eio((t - LT("f1102p") + .4) / 1.2) * (1 - eio((t - r0 + 1) / .8)), ez2 = eio((t - r0 + 1) / .8) * (1 - eio((t - bell - .6) / .8));
   const picks = [["basil", "f1105b", "3", 1500], ["momo", "f1106m", "3", 1790]], mant = st < .05 ? mantisAt(t, EAS[0] + 196 * EAS[2], EAS[1] - 130 * EAS[2], .3) : "";
   return VG16(t, { mantisAt: false }, [1.03 + .03 * eio((t - s.t0) / 10), 900, 640]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".25"/>` + OP(st, bg("stage"))
@@ -119,7 +119,7 @@ SC.show = (t, s) => { window._BUBAT = { pip: [1250, 260] }; const r0 = MK("ring0
     + (t >= r0 - .6 ? OP(st, TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
       inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/>` + TF(R[0], R[1] + 30 + bob * .3, .75, `<g filter="url(#dropS)">${countHand(nf)}</g>`) })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 44, P.ink, "#fff", { w: 700 }))) : "")
     + bd("pip", 220, 1076, 500, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "waving"], [s.t0 + 2.2, "sit"], [r0 - .3, "worried"], [bell + .35, "sit"]], wave: true, jump: [[bell + .02, 26]] })
-    + picks.map(([w, id, n, x]) => bd(w, x, 1076, 360, t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"], [LE(id) + .1, "arms_crossed"]] }) + (t > bell + .5 ? pickNum(w, x - 170, 900, t, LT(id) - .1, n) : "")).join("")
+    + picks.map(([w, id, n, x]) => bd(w, x, 1076, 360, t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"], [LE(id) + .1, "arms_crossed"]] }) + (t > bell + .5 ? (w === "basil" ? pickNum(w, x - 200, 960, t, LT(id) - .1, n) : pickNum(w, x + 10, 640, t, LT(id) - .1, n)) : "")).join("")
     + stamp(t, tS, 960, 460) + bellIcon(t, r0) + HUD(t); };
 /* the fix: line 3 struck (strike) and rewritten in green (rewrite: ≠ becomes =; Pip's mistake is fixed); the book's strip (Heart reads it); the
    egg case pops out big beside line 2 with a cut-away of its two neat rows of eggs (case), EGG CASE pops; a small cockroach loop slides under

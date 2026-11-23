@@ -1,0 +1,255 @@
+{
+ "_note": "EP16, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles and the animal life-cycle chapter's constant: check its real name in videos.js, CH.animalCycles is a placeholder), set url to the uploaded video ids. The classic P3 no. 10 (2Atm-edXKVk) stays until EP17 is live (upload.json has no replaces).",
+ "entries": [
+  {
+   "no": "16A",
+   "art": "🐸",
+   "topic": "Life Cycles",
+   "title": "Fish, Frog or Lizard? What Does a TADPOLE Become? (Part A)",
+   "len": "5:25",
+   "url": "https://www.youtube.com/watch?v=<EP16_P1>",
+   "moments": [
+    {
+     "at": "0:52",
+     "what": "Round 1: what will the tadpole grow into?",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e501",
+     "_t": 53.8
+    },
+    {
+     "at": "1:16",
+     "what": "Where do tadpoles come from? A frog lays eggs",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e601p",
+     "_t": 77.75
+    },
+    {
+     "at": "1:23",
+     "what": "Frog eggs in a clump of clear jelly, each dark dot an egg",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e604",
+     "_t": 85.45
+    },
+    {
+     "at": "1:37",
+     "what": "Frog eggs have a jelly-like covering: it protects them and keeps them wet",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e608",
+     "_t": 99.07
+    },
+    {
+     "at": "1:58",
+     "what": "Journey: be a frog egg, hatch into a tadpole and grow into a frog",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e701",
+     "_t": 119.92
+    },
+    {
+     "at": "2:39",
+     "what": "The young of the frog is called a tadpole",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e802",
+     "_t": 161.21
+    },
+    {
+     "at": "2:49",
+     "what": "A tadpole does not look like the adult frog",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e805",
+     "_t": 171.14
+    },
+    {
+     "at": "2:54",
+     "what": "HOLD ON! Is a tadpole with legs a new stage? No: three stages",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e901p",
+     "_t": 176.28
+    },
+    {
+     "at": "3:24",
+     "what": "A life cycle with three stages: the egg, the young and the adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e1001",
+     "_t": 206.03
+    },
+    {
+     "at": "3:33",
+     "what": "A hen and her chicks: does every young animal look different?",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e1101p",
+     "_t": 215.06
+    },
+    {
+     "at": "3:47",
+     "what": "Look at the body parts, not the colour: a chick looks like the adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e1104",
+     "_t": 229.43
+    },
+    {
+     "at": "4:15",
+     "what": "Some young animals look like their parents, while some do not",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "e1201",
+     "_t": 256.88
+    }
+   ]
+  },
+  {
+   "no": "16B",
+   "art": "🦗",
+   "topic": "Life Cycles",
+   "title": "Why Did This Grasshopper Leave Its SKIN Behind? (Part B)",
+   "len": "5:30",
+   "url": "https://www.youtube.com/watch?v=<EP16_P2>",
+   "moments": [
+    {
+     "at": "0:32",
+     "what": "Round 1: a little grasshopper with no wings: young or adult?",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f401",
+     "_t": 34.4
+    },
+    {
+     "at": "1:05",
+     "what": "A young grasshopper beside an adult: six legs, two feelers, no wings yet",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f501",
+     "_t": 66.71
+    },
+    {
+     "at": "1:17",
+     "what": "A young grasshopper is called a nymph",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f504",
+     "_t": 79.4
+    },
+    {
+     "at": "1:33",
+     "what": "The life cycle of a grasshopper has three stages",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f601",
+     "_t": 95.29
+    },
+    {
+     "at": "1:48",
+     "what": "An empty grasshopper skin on the grass: why?",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f701m",
+     "_t": 109.51
+    },
+    {
+     "at": "2:07",
+     "what": "The outer skin is hard and cannot stretch, so it gets too tight",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f705",
+     "_t": 128.76
+    },
+    {
+     "at": "2:16",
+     "what": "Journey: be the nymph, shed your skin and grow wings",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f801",
+     "_t": 138.33
+    },
+    {
+     "at": "2:50",
+     "what": "Shedding the old outer skin to grow bigger is called moulting",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f901",
+     "_t": 172.4
+    },
+    {
+     "at": "3:02",
+     "what": "As a young insect grows, it sheds its outer skin: moulting",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f1001",
+     "_t": 183.71
+    },
+    {
+     "at": "3:14",
+     "what": "Showdown: the cockroach's young looks like the adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f1101",
+     "_t": 196.43
+    },
+    {
+     "at": "3:56",
+     "what": "Cockroach eggs are found in an egg case",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "f1108",
+     "_t": 237.5
+    }
+   ]
+  }
+ ]
+}

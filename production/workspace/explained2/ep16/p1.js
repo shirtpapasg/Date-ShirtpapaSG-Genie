@@ -94,13 +94,13 @@ SC.shrink = (t, s) => { const m = MK, tF = W("e702", "fish"), tP = m("jpad"), le
     + riders(t, s, { tin: m("jegg") + .6, h: 200, at: { pip: [210, 1040], basil: [1690, 1046], momo: [420, 1036] }, poses: rp })
     + youTag(t, m("jegg"), "You: a frog egg") + feelTag(t, m("jtadpole"), m("jback") - .1, "a tadpole", 160) + feelTag(t, m("jback") + .2, m("jtail") - .1, "back legs, then front legs", 160) + feelTag(t, m("jfrog"), m("jfrog") + 3, "a frog", 160)
     + speeded(t, m("jhatch"), m("jfrog") + 1.2, 1700, 140); };
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VP16(t, { frog: { x: 1380, y: 780, k: .7 } }, [1 + 2.4 * u, 1380, 760]) + bd("momo", 380, 1076, 540, t, { in: s.t0 + .2 }) + bd("basil", 1500, 1052, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1760, 1048, 380, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VP16(t, { frog: { x: 1120, y: 884, k: .7 } }, [1 + 2.4 * u, 1120, 860]) + bd("momo", 380, 1076, 540, t, { in: s.t0 + .2 }) + bd("basil", 1500, 1052, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1760, 1048, 380, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 9 · the answer is two: a frog. A small pond frog on a lily pad (four legs, webbed back feet, moist skin, no tail); EP15's three cards small
    along the top: card 2 the green tick at ansglow, x chips on cards 1 and 3 and by Pip and Basil; the coin; TADPOLE pops (lib.js o.at); then
    the book's caption on its cream strip beside a big tadpole picture with three label lines (lives in water · a tail · does not look like the
    adult), the frog small beside it. Momo (right) explains; Pip and Basil were wrong (shy). The tree frog on the bench's back rail */
-const FROGA = [1380, 780];
+const FROGA = [1120, 884];
 const tadCard = (t, k) => { if (k < .01) return ""; const c = `<g filter="url(#drop)"><rect x="-470" y="-250" width="940" height="500" rx="34" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="7"/></g><rect x="-450" y="-230" width="560" height="460" rx="24" fill="#8FD3E0"/>${uwRays(t, "#fff", .0)}`
     + TF(-120, -10, 3.2, tadpole16(t, 0)) + `<rect x="150" y="-230" width="300" height="460" rx="24" fill="#DFF3D2"/>` + TF(300, 120, .9, frog16(t)) + TF(300, 170, 1, tpill(0, 0, "the adult", 30, "#fff", P.ink, { w: 700 }))
     + lcLab(t, LT("e805") - .1, -250, -170, "lives in water", -280, -100, { size: 38 }) + lcLab(t, W("e805", "tail") - .1, -360, 120, "a tail", -300, 0, { size: 38 }) + lcLab(t, W("e805", "does") - .1, -110, 196, "does not look like the adult", -40, 50, { size: 32, fill: "#FFE2C0", ink: "#B4531A" });
@@ -111,9 +111,9 @@ SC.frogans = (t, s) => { const tA = MK("ansglow"), tK = MK("kw_tadpole"), e = ei
     + coin(t, MK("coin1") - .1, 1420, 470, "+1", "if you showed two fingers") + tadCard(t, spring(t, LT("e805") - .5, .5) * (1 - ss(s.t1 - .3, s.t1, t)))
     + strip15(t, "e805", "It lives in water. It has a tail and does not look like the adult.", 150, { keys: ["water", "tail", "adult"], maxW: 1500, size: 48 })
     + bd("momo", 380, 1076, 540, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("e803m") + .1, "pointing"], [LE("e803m") + 2.2, "sit"], [tK - .3, "cheer"]], achieved: false })
-    + bd("basil", 1560, 1052, 380, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [LT("e805") - .2, "thinking"]] }) + (t > s.t0 + .35 ? pickNum("basil", 1410, 830, t, s.t0 + .35, "3") : "") + xChip16(t, tA + .4, 1450, 760, .7)
-    + bd("pip", 1800, 1048, 380, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1650, 830, t, s.t0 + .4, "1") : "") + xChip16(t, tA + .5, 1690, 760, .7)
-    + (t > s.t0 + .3 ? pickNum("momo", 560, 790, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .3, 600, 720, .7) + melt(t, s, "pullout", .3) + HUD(t); };
+    + bd("basil", 1520, 1052, 380, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [LT("e805") - .2, "thinking"]] }) + (t > s.t0 + .35 ? pickNum("basil", 1520, 620, t, s.t0 + .35, "3") : "") + xChip16(t, tA + .4, 1575, 565, .7)
+    + bd("pip", 1800, 1048, 380, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1800, 610, t, s.t0 + .4, "1") : "") + xChip16(t, tA + .5, 1855, 555, .7)
+    + (t > s.t0 + .3 ? pickNum("momo", 600, 640, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .3, 655, 585, .7) + melt(t, s, "pullout", .3) + HUD(t); };
 
 /* 10 · HOLD ON! Pip's board of four on his low easel by the pond (art16.js fourBoard). Pip big at the left reads it, pointing; the HOLD ON!
    stamp; the countdown takes the stage (the blue game stage, the ring big and central with his row in it, the clue labels a tadpole with legs ·
