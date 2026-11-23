@@ -158,6 +158,20 @@ const THUMBS = {
       { cut: 'hen', x: 470, y: 240, w: 790, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep19_1: { ep: 'ep19', part: 1, out: 'ep19/thumb_part1.jpg', old: 'ep18/thumb_part1.jpg',
+    bg: { c: ['#DDF3FF', '#3A8DFF', '#14204E'], at: [860, 430], rays: .22 },
+    cuts: { mag: `TF(980, 330, 2.6, magnet19(1)) + pullArrows(.3, 760, 650, 860, 470, 1, '#43BF6C', 3) + TF(760, 700, 2.4, pin18()) + TF(1300, 720, 2.3, wire18()) + TF(1300, 610, 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'mag', x: 500, y: 290, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'ONE?!', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep19_2: { ep: 'ep19', part: 2, out: 'ep19/thumb_part2.jpg', old: 'ep18/thumb_part2.jpg',
+    bg: { c: ['#F4FFC0', '#7CCB2A', '#0E5E3A'], at: [860, 430], rays: .22 },
+    cuts: { cu: `TF(960, 300, 2.4, magnet19(1)) + TF(1000, 640, 2.6, wire18()) + TF(1480, 880, 1.6, can19(1, 1)) + TF(1000, 600, 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'cu', x: 520, y: 270, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'COPPER?!', x: 1256, y: 180, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);

@@ -263,7 +263,7 @@ function magnetArt(t) { const tR = MKS("rock"), tL = MKS("lodestone"), tI = MKS(
   if (t >= tL && t < tI + .2) { const k = spring(t, tL, .45) * (1 - ss(tI - .9, tI - .3, t)), rx = fx + 80 * fk, ry = 40 + 150 * fk;
     s += `<clipPath id="lcLodeC"><circle cx="0" cy="0" r="176"/></clipPath>` + OP(Math.min(1, k * 1.5), `<path d="M${n2(rx + 60)} ${n2(ry - 40)} L${n2(230)} ${n2(-40)}` + `" stroke="${P.ink}" stroke-width="7" opacity=".45"/>`)
       + TF(400, -40, k, `<circle r="180" fill="#E6E2EE"/><g clip-path="url(#lcLodeC)">${TF(0, 20, 1.25, lodestone19(t, { nails: true }))}</g><circle r="180" fill="none" stroke="${P.ink}" stroke-width="14"/><circle r="180" fill="none" stroke="#fff" stroke-width="5" opacity=".7"/>`)
-      + OP(1 - ss(tI - .9, tI - .3, t), lcLab(t, tL + .4, 330, 205, "a lodestone", 380, 130, { size: 44 })); }
+      + OP(1 - ss(tI - .9, tI - .3, t), lcLab(t, tL + .4, 140, 215, "a lodestone", 330, 120, { size: 44 })); }
   // RIGHT: Basil's magnet, big; the paint curls back and shows grey metal; Momo's guess (a plastic toy) crossed out
   const ki = t >= tI - .6 ? spring(t, tI - .6, .5) : 0, cut = ss(tI, tI + 1.0, t);
   if (ki > .02) s += TF(230, 40, 2.0 * ki, magnet19(t, { cut })) + (t >= tI + .9 ? lcLab(t, tI + .9, 120, 235, "metal inside: usually iron or steel", 110, 90, { size: 40 }) : "")
@@ -421,7 +421,7 @@ const BIG = { towel: (t) => towel19(1.4), foil: (t) => foil19(1.3, t), ruler: (t
 const passMag = (t, x, y, k = 1) => TF(x, y, k, TF(0, -40, .62, magnet19(t, { glint: false })) + TF(-10, -60, .5, holdHand(1, 0)));
 function metalsArt(t) { const tP = MKS("pass"), tK = MKS("kw_non_magnetic_materials"), tM = MKS("metals"), aside = ss(tM - .8, tM, t);
   let s = "";
-  if (aside < 1) { let g = ""; ROW8.forEach(([kd, nm, mat], i) => { const r = Math.floor(i / 4), x = -500 + (i % 4) * 333, y = r ? 90 : -170, ta = tP + (r ? 3 : 0) + (i % 4) * .7 + .35;
+  if (aside < 1) { let g = ""; ROW8.forEach(([kd, nm, mat], i) => { const r = Math.floor(i / 4), x = -465 + (i % 4) * 310, y = r ? 90 : -170, ta = tP + (r ? 3 : 0) + (i % 4) * .7 + .35;
       g += TF(x, y, 1, BIG[kd](t)) + TF(x, y + 105, 1, tpill(0, 0, nm, 32, "#fff", P.ink, { w: 700 }) + T(0, 52, "(" + mat + ")", 26, mat.startsWith("metal") ? "#8A5A30" : P.ink2, { w: 600 })) + (t >= ta ? TF(x + 110, y - 70, spring(t, ta, .45), tpill(0, 0, "not attracted", 22, NONC, "#fff", { w: 700 })) : ""); });
     for (const r of [0, 1]) { const a = tP + r * 3, u = clamp((t - a) / 2.8); if (t > a - .3 && t < a + 3.1) g += passMag(t, lerp(-760, 760, u), (r ? 90 : -170) - 60, .9); }
     s += TF(-1400 * eio(aside), 0, 1, g); }
@@ -435,7 +435,7 @@ function metalsArt(t) { const tP = MKS("pass"), tK = MKS("kw_non_magnetic_materi
       b += T(x, 100, nm, 42, P.ink) + T(x, 138, ex, 22, P.ink2, { w: 600 }) + (done ? TF(x, 200, spring(t, tM + 3.2 + i * .15, .4), tpill(0, 0, mg ? "magnetic" : "non-magnetic", 30, mg ? MAGC : NONC, "#fff", { w: 700 })) : "");
       if (near > .2) b += pullArrows(t, x, -90, x, -200, near, MAGC, 2); });
     if (t > tM && u < 1) b += passMag(t, mx, -215, 1);
-    s += TF(1400 * (1 - eio(k)), 0, 1, b); }
+    s += TF(1400 * (1 - eio(k)), -20, .9, b); }
   return s; }
 // Basil's homework sheet on his easel (the Showdown): My magnet test, three ruled lines with a small drawing each (drawn to match his spoken
 // lines: the iron nail, the wooden ruler, the foil). o.lit [l1, l2, l3], o.strike / o.fix 0..1 (line 3 struck and rewritten in green)
