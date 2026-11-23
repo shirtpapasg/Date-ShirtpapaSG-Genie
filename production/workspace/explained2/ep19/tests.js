@@ -54,16 +54,7 @@ const cornerPH = (t, at = SNAIL) => setPH(t, "The recycling corner at the void d
    t0]] (half 0 = ATTRACTED green, 1 = NOT ATTRACTED blue); an item shows from t0 on, slid low into its half (never across a cut). In Part 2 the
    halves' labels flip to the book's names at the mark `groups` (MAGNETIC MATERIALS / NON-MAGNETIC MATERIALS) and stay so. Stage 2 draws the
    real tray and objects (keep the call). ---------- */
-const TRAY1 = [["steel pin", 0, "trayPin"], ["copper wire", 1, "trayWire"]];
-const TRAY2 = [["steel pin", 0, 0], ["copper wire", 1, 0], ["food tin", 0, "ansglow"], ["drink can", 1, "ansglow"], ["8 book objects", 1, "v_metals"], ["iron nail, paper clip", 0, "groups"]];
-function trayPH(t, x, y, k = 1, items = PART === 1 ? TRAY1 : TRAY2) { const flip = PART === 2 && t >= MKS("groups") - .2, f = flip ? ss(MKS("groups") - .2, MKS("groups") + .2, t) : 0;
-  const lab = (i) => flip ? ["MAGNETIC MATERIALS", "NON-MAGNETIC MATERIALS"][i] : ["ATTRACTED", "NOT ATTRACTED"][i];
-  let s = `<g filter="url(#dropS)"><rect x="-430" y="-110" width="860" height="220" rx="26" fill="#EDE6D6" stroke="${P.ink}" stroke-width="5"/></g>`
-    + `<rect x="-414" y="-94" width="404" height="188" rx="18" fill="${MAGC}" opacity=".28"/><rect x="10" y="-94" width="404" height="188" rx="18" fill="${NONC}" opacity=".28"/>`
-    + [0, 1].map((i) => TF(i ? 212 : -212, -132, 1 + .08 * pulse(t, MKS("groups"), .05, .5), tpill(0, 0, lab(i), flip ? 24 : 28, i ? NONC : MAGC, "#fff", { w: 700 }))).join("");
-  const n = [0, 0];
-  for (const [l, h, m] of items) { const t0 = typeof m === "string" ? MKS(m) : m; if (t < t0) continue; const j = n[h]++; s += TF((h ? 212 : -212) + (j % 2 ? 100 : -100), -40 + Math.floor(j / 2) * 64, spring(t, t0, .4), tpill(0, 0, l, 24, "#fff", P.ink, { w: 500 })); }
-  return TF(x, y, k, s + (f > 0 && f < 1 ? `<rect x="-430" y="-150" width="860" height="40" fill="#fff" opacity="${n2(.5 * Math.sin(f * Math.PI))}"/>` : "")); }
+// Stage 2: TRAY1, TRAY2 and the tray itself (tray19, alias trayPH) are drawn in art19.js.
 
 /* ---------- LOOK CLOSER, Stage 1: the real lookCloser frame (closer.js: push-in, dim, the window opens from the thing, the LOOK CLOSER tag,
    the verdict at v_*) with a placeholder art() that lists what Stage 2 draws inside the window. o: { title, notes: [..], verdict: [text, colour, opts],
