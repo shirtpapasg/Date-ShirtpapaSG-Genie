@@ -143,6 +143,21 @@ const THUMBS = {
       { cut: 'pail', x: 480, y: 280, w: 660, line: '#fff', lw: 8, glow: INK },
       { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: "WHAT'S IN", x: 1250, y: 112, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'HERE?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP18 (the v2 cast)
+  ep18_1: { ep: 'ep18', part: 1, out: 'ep18/thumb_part1.jpg', old: 'ep18/thumb_part1.jpg',
+    bg: { c: ['#FFF6C0', '#FFB020', '#E0401E'], at: [860, 430], rays: .22 },
+    cuts: { pair: `'<ellipse cx="960" cy="800" rx="520" ry="110" fill="#58B56C" stroke="#2F8048" stroke-width="10"/>' + TF(740, 790, 2.5, frog16(1)) + TF(1250, 620, -2.5, mosq17(1, { wing: .3 }), 0, 2.5) + TF(680, 300, 1, loopN(1, frogPic, 3, { R: 120, r: 60, id: 'tf', sw: 12 })) + TF(1260, 300, 1, loopN(1, mPic, 4, { R: 120, r: 54, id: 'tm', sw: 12 }))` },
+    layers: [
+      { cut: 'pair', x: 500, y: 236, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'SAME?!', x: 1256, y: 190, size: 160, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep18_2: { ep: 'ep18', part: 2, out: 'ep18/thumb_part2.jpg', old: 'ep18/thumb_part2.jpg',
+    bg: { c: ['#FFE0F6', '#E040A0', '#3B1474'], at: [860, 430], rays: .22 },
+    cuts: { hen: `TF(820, 880, 2.1, henNest18(1, {})) + '<ellipse cx="1420" cy="800" rx="120" ry="155" fill="#FFF6E6" stroke="#D9C9A8" stroke-width="12"/><ellipse cx="1380" cy="730" rx="34" ry="22" fill="#fff"/>' + TF(1240, 430, 1, '<circle r="95" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 55, '?', 160, '#2B2147'))` },
+    layers: [
+      { cut: 'hen', x: 470, y: 240, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);
