@@ -12,7 +12,7 @@
 // still water (wrig), the easel's strike and rewrite (strike, rewrite), a soft flutter (butterfly, lay), a magnet's clack (dareIn).
 // song.js's garden bed says "no hens" (EP15): EP18's garden edge HAS the hen.
 window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.push({ t: Math.round(t * 1000) / 1000, k, v }); }, S = SCN, M_ = TL.marks,
-  R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [] };
+  R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [], hens: [], deck: [] };
   const has = (id) => !!TL.lines[id], mk = (k) => M_[k];
   const G = (a, b) => { if (b > a + 1) R.groove.push([a, b]); }, C = (a, b) => { if (b > a + 1) R.calm.push([a, b]); }, BD = (a, b) => { if (b > a + 1) R.birds.push([a, b]); };
   const GAME = /^(game|goals|count|r1card|r1|showcard|show|holdon|final|answer|eggans|fix|dare|cliff)$/, CALM = /^(lasttime|board|lc|mark|beetle|closure|place|kwrecap|back|pullout)/;
@@ -50,4 +50,50 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+  // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): the VOID DECK (R.deck: the fan's hum, far children, birds outside, a far bus) and
+  // the GARDEN'S EDGE (R.garden: birds, far children, leaves; R.hens: the hen's clucks only while she is on screen); rain over the pond; foley ON
+  // the marks. No ambience one-shot under a countdown (only the ticks keep time).
+  { const DECK = PART === 1 ? ["cold", "back", "title", "board", "answer", "holdon", "liz"] : ["show", "fix", "beetle", "dare"], GARD = PART === 1 ? ["cliff"] : ["place", "waitw", "pullout", "eggans", "closure", "liz"];
+    const spans = (L) => { const out = []; for (const sc of TL.scenes) if (L.includes(sc.name)) { const last = out[out.length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else out.push([sc.t0, sc.t1]); } return out.filter(([a, b]) => b - a > 1); };
+    R.deck.push(...spans(DECK)); R.garden.push(...spans(GARD)); const all = [...R.deck, ...R.garden]; R.birds = R.birds.filter(([a, b]) => !all.some(([x, y]) => a >= x - .1 && b <= y + .1));
+    const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus }), clk = (t, i = 0) => E(t, "pop", i % 3);
+    if (PART === 1) {
+      // the void deck: a cicada's buzz from the rain tree that fades as we look for it; a bicycle bell as the child passes; the cicada on its name
+      E(.3, "cicada", 2.4); E(1.4, "bikebell"); E(W("k301a", "cicada") + .1, "cicada", 1.0); E(W("k1202", "cicada") + .3, "cicada", 1.0);
+      if (S.board) E(LT("k601m") + .3, "tap");
+      // the look-closer: a tick as each chip lands on the SAME strip; a soft bong as the ? waits on DIFFERENT
+      E(mk("same1") + .5, "tick", 1); E(mk("same1"), "plip"); E(mk("same2") + .6, "tick", 1); E(mk("same2") + .1, "boop", 1); E(mk("count") + .3, "boop", 2);
+      // be a raindrop: the shower; a plop into the pond, bubbles, frogs calling, a splash, still water, a thin soft whine
+      if (S.waitw) R.rain.push([S.waitw.t0 + .3, S.pullout.t0]);
+      if (S.shrink) { for (let t = mk("jpond") + .6, i = 0; t < mk("jsplash"); t += 1.1 + .4 * (i % 3), i++) E(t, "bubble", i); sfx(mk("jpond") + .3, "underwater.wav", .06, "wonder"); }
+      sfx(mk("jpond") - .05, "ep06_plop.wav", .2, "wonder"); E(mk("jtadpole") + .3, "bubble", 2); E(mk("jfrog") + .2, "ribbit"); E(mk("jfrog") + 1.6, "ribbit"); sfx(mk("jsplash") - .05, "splash.wav", .2, "wonder");
+      E(mk("jwrig"), "drip", 1); E(mk("jpupa"), "rise", 1); E(mk("jmosq") + .4, "whine"); E(mk("jmosq") + 1.5, "whine");
+      // the answer: two soft dot-pops; HOLD ON!: Pip's sheet rustles, the empty chip pops
+      E(mk("three"), "softpop", 0); E(mk("four"), "softpop", 1); E(mk("pipboard") - .1, "paper"); E(W("k1004b", "young") - .2, "pop", 2);
+      // the young: a frog's croak, a grasshopper's click, a tick and a bong on the chips
+      E(mk("tad") + .1, "ribbit"); E(mk("nymph") + .1, "chek", .7); E(mk("same3"), "tick", 1); E(mk("diff3"), "boop", 1);
+      // the cliffhanger: the hen's soft clucks
+      if (S.cliff) R.hens.push([S.cliff.t0, S.cliff.t1]); E(mk("hen"), "cluck"); E(mk("nest"), "cluck", .8); E(mk("nest") + .3, "rustle");
+    } else {
+      // the garden: the hen stands and turns her eggs; bees hum among the ixora; the bee's buzz on its name
+      for (const n of ["place", "waitw", "pullout", "eggans"]) if (S[n]) R.hens.push([S[n].t0, S[n].t1]);
+      E(mk("henIn"), "cluck"); E(mk("henIn") + .7, "rustle"); E(13.9, "bzz", 1.2); E(W("d201a", "honeybee") + .1, "bzz", .9); E(W("d1202", "honeybee") + .3, "bzz", .9);
+      // be an egg: a warm hush and a heartbeat under the hen; crack!; peeps; a cluck; a rustle; a whoosh round the golden circle
+      if (S.shrink) { for (let t = mk("jegg") + .4; t < mk("jhatch") - .3; t += 1.1) E(t, "heartbeat"); }
+      E(mk("jhatch"), "crack"); E(mk("jhatch") + .25, "crack", 1); E(mk("jchick") - .2, "peep"); E(mk("jchick") + 1.2, "cheep", 1); for (let k = 0; k < 4; k++) sfx(mk("jchick") + 2 + k * 1.3, "ep05_peck.wav", .12, "wonder");
+      E(mk("jhen"), "cluck"); E(mk("jlay"), "rustle"); E(mk("jagain") + .2, "leafrise");
+      // the loop: a soft tick as the finger lands and a whoosh round; day birds then night crickets
+      E(mk("finger"), "tick", 1); E(mk("finger") + .2, "whoosh"); E(mk("finger") + 3.8, "tick", 1); E(mk("daynight"), "morning"); R.night.push([mk("daynight") + 2, mk("daynight") + 4.2]);
+      // the Showdown: paper on each line; the fix: a marker strike and a squeak of the green marker
+      ["l1", "l2", "l3"].forEach((k) => E(mk(k), "paper")); E(mk("strike"), "scribble"); E(mk("rewrite"), "squeak"); E(mk("rewrite") + .1, "scribble");
+      // the mealworm tub: bran rustling; the larvae: a drip of still water, dry bran
+      if (S.beetle) { E(S.beetle.t0 + .3, "rustle"); sfx(S.beetle.t0 + 1.2, "ep05_leaf.wav", .1, "game"); }
+      E(mk("wrig") + .1, "drip", 2); E(mk("meal") + .1, "rustle");
+      // why life cycles matter: a soft flutter, a tiny tick as the egg is laid, a warm chime as the board's answers light
+      E(mk("butterfly") - 1.2, "flutter"); E(mk("butterfly") - .3, "flutter"); E(mk("lay") + .3, "plip"); E(mk("plant") + .2, "leafrise"); E(mk("theme") - .5, "chime");
+      // the dare: the magnet's soft clack on the board
+      E(mk("dareIn") + .2, "clack");
+    } }
+  // no ambience one-shots under a countdown (only the ticks keep time)
+  { const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["sfx", "drip", "chek", "ribbit", "cluck", "peep", "bubble", "cicada", "bzz"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

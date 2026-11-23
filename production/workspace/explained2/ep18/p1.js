@@ -143,7 +143,7 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [700, 280] };
   return holdWorld(t, camHold(t)) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".08"/>` + (ring ? OP(st, bg("stage")) : "")
     + (ring ? OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 640 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 470 + bob * .6, 1.2) + TF(1700, 860, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
-    + bd("basil", 1740, 1076, 500, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "sit"], [LE(d) + .1, "pointing"], [LE(d) + 2.4, "sit"]], look: -3 })
+    + bd("basil", 1740, 1076, 500, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "sit"]], look: -3 })
     + bd("momo", 1480, 1030, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "sit"]] })
     + bd("pip", 200, 1076, 520, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("k1001p") + .1, "pointing"], [LE("k1001p") + 2.2, "sit"], [LE(b) - .2, "thinking"], [r0 - .2, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 30]], nohop: true })
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + melt(t, s, "mark1", .4) + HUD(t); };

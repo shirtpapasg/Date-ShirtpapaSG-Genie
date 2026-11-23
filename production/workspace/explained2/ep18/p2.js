@@ -153,10 +153,10 @@ SC.liz = (t, s) => { const L = "d1202", tq = W(L, "it") - .1, b = BEEAT.liz, tb 
 /* 13 · the dare for Episode 19: the void deck: Basil's red-and-blue bar magnet holds a card on the board's metal clip; a steel pin and a short
    copper wire on the table; ONE set of THREE big numbered picture cards slides in low (dareIn); the banner; Momo and Pip think (a question,
    no hints), Basil a proud smile by his magnet */
-const MAGP = [1380, 240];
+const MAGP = [640, 250];
 SC.dare = (t, s) => { const a = "d1301", tQ = W(a, "which") - .15, tc = [W(a, "one", 1) - .1, W(a, "two") - .1, W(a, "three") - .1], tL = W(a, "lock") - .1, e1 = eio((t - s.t0 - 1) / 1.6), e2 = eio((t - W(a, "pin") + .2) / 1.2), e3 = eio((t - tQ + .5) / 1.4);
   const cam = [lerp(lerp(lerp(1.8, 1.6, e2), 1.04, e3), 1.8, 0), lerp(lerp(MAGP[0] - 120, 1000, e2), 1000, e3), lerp(lerp(MAGP[1] + 120, 860, e2), 600, e3)];
-  const items = `<rect x="${MAGP[0] - 10}" y="${MAGP[1] - 70}" width="40" height="260" rx="6" fill="#B9C4D0" stroke="#7A8798" stroke-width="4"/>` + TF(MAGP[0] - 60, MAGP[1] + 70, 1, `<g filter="url(#dropS)"><rect x="-90" y="-60" width="180" height="130" rx="10" fill="#FFFDF6" transform="rotate(${n2(-4 + 2 * Math.sin(t * 3))})"/></g>` + T(0, 0, "NEXT TIME:", 22, P.ink) + T(0, 34, "magnets!", 26, "#C4581E"))
+  const items = `<rect x="${MAGP[0] - 10}" y="${MAGP[1] - 70}" width="40" height="260" rx="6" fill="#B9C4D0" stroke="#7A8798" stroke-width="4"/>` + TF(MAGP[0] + 70, MAGP[1] + 70, 1, `<g filter="url(#dropS)"><rect x="-90" y="-60" width="180" height="130" rx="10" fill="#FFFDF6" transform="rotate(${n2(-4 + 2 * Math.sin(t * 3))})"/></g>` + T(0, 0, "NEXT TIME:", 22, P.ink) + T(0, 34, "magnets!", 26, "#C4581E"))
     + TF(MAGP[0] + 10, MAGP[1] + 10, .55, magnet18(), 90);
   const table = TF(TABLE18[0] - 90, TABLE18[1] - 22, .8, pin18()) + TF(TABLE18[0] + 120, TABLE18[1] - 10, .8, wire18());
   return VDK(t, { cicAt: false, items, front: table }, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.3 * e3)}"/>`

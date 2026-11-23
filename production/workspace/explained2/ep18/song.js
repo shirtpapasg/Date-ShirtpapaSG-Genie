@@ -22,7 +22,7 @@ if (C.R.outro) C.R.groove.push(C.R.outro);
   for (const [a, b] of C.R.groove) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); out.push(...segs); }
   C.R.groove = out;
   // EP14: the places' beds pause too (no clucks or buses among the ticks)
-  for (const key of ['room', 'garden']) { const o2 = []; for (const [a, b] of (C.R[key] || [])) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); o2.push(...segs); } C.R[key] = o2; } }
+  for (const key of ['room', 'garden', 'hens', 'deck']) { const o2 = []; for (const [a, b] of (C.R[key] || [])) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); o2.push(...segs); } C.R[key] = o2; } }
 for (const [a, b] of C.R.groove) for (let t0 = a, bi = 0; t0 + BEAT * 3.2 < b; t0 += BEAT * 4, bi++, barN++) { const [root, chord] = CH[bi % 4];
   for (let s = 0; s < 8; s++) { const t = t0 + s * BEAT / 2; if (t > b - .1) break;
     if (s === 0 || s === 4) drums.addMono(K, t, .5); if (s === 2 || s === 6) { drums.addMono(CL, t, .3); verb.addMono(CL, t, .1); }
@@ -50,7 +50,12 @@ for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0); 
 for (const [a, b] of (C.R.room || [])) { loop('ep07_birds.wav', a, b, .055, 1.2); for (let t = a; t < b; t += 1.0) amb.addMono(I.noiseSweep(1.1, 180, 170, { q: .4, pink: true }), t, .012, 0);
   for (let t = a + 4, i = 0; t < b - 4; t += 13 + 5 * (i % 3), i++) MIX.loadAudio(path.join(SFX, 'pass_by.wav'), { at: t, length: DUR }).mixInto(amb, .035); }
 for (const [a, b] of (C.R.garden || [])) { loop('ep08_birds.wav', a, b, .1, 1.2); loop('ep05_kids.wav', a, b, .03, 1.5);
-  for (let t = a + 1.5, i = 0; t < b - 1; t += 5.5 + 2.5 * ((i * 5) % 3), i++) MIX.loadAudio(path.join(SFX, 'ep05_leaf.wav'), { at: t, length: DUR }).mixInto(amb, .05); }   // EP15: no hens in this garden
+  for (let t = a + 1.5, i = 0; t < b - 1; t += 5.5 + 2.5 * ((i * 5) % 3), i++) MIX.loadAudio(path.join(SFX, 'ep05_leaf.wav'), { at: t, length: DUR }).mixInto(amb, .05); }   // EP15: no hens in this garden bed
+// EP18: our block's void deck (sound_cues.js R.deck): the ceiling fan's soft hum, children's voices far off, a bicycle bell now and then, a far bus
+for (const [a, b] of (C.R.deck || [])) { loop('ep05_kids.wav', a, b, .045, 1.5); loop('ep08_birds.wav', a, b, .04, 1.5); for (let t = a; t < b; t += 1.0) amb.addMono(I.noiseSweep(1.1, 140, 150, { q: .5, pink: true }), t, .016, 0);
+  for (let t = a + 3, i = 0; t < b - 3; t += 14 + 4 * (i % 3), i++) MIX.loadAudio(path.join(SFX, 'pass_by.wav'), { at: t, length: DUR }).mixInto(amb, .03); }
+// EP16: the hen and her chicks, ONLY while they are on screen (sound_cues.js R.hens): her low clucks and the chicks' peeps, under the speech
+for (const [a, b] of (C.R.hens || [])) for (let t = a + .3, i = 0; t < b - .4; t += 1.7 + .6 * (i % 3), i++) { if (i % 2) MIX.loadAudio(path.join(SFX, 'ep05_cluck.wav'), { at: t, length: DUR }).mixInto(amb, .07); else for (let k = 0; k < 3; k++) amb.addMono(I.tom(240 - k * 18, .07, 340 + k), t + k * .13, .06, -.2); const x = I.whistle(.16); amb.addMono(x, t + .8, .05, .3); }
 for (const [a, b] of C.R.night) for (let t = a + .2; t < b - .3; t += .42) for (let j = 0; j < 3; j++) amb.addMono(I.bell(4300 + (j % 2) * 180, .022, .6, 1.5), t + j * .055, .04, ((t * 7) % 2) - 1);
 for (const [a, b] of C.R.roll) for (let t = a; t < b; t += .07) game.addMono(I.tom(92, .08, (t * 100) | 0), t, .07 + .1 * (t - a) / (b - a));
 // ---------- one-shots
@@ -74,6 +79,10 @@ const P = {
   hum: (t) => { const x = I.padNote(m('D2'), 2.6, { cutoff: 260, attack: .6, release: .8 }); wonder.addStereo(x.L, x.R, t, .08); },
   signal: (t) => { game.addMono(I.woodTick(.8), t, .45); game.addMono(I.thud(210, .03), t, .3); },
   buzz: (t) => { for (let k = 0; k < 14; k++) amb.addMono(I.rim(.9 + .04 * (k % 2), 330 + k), t + k * .022, .035, .3); },
+  // EP18: the cicada's buzz (a fast rim roll that swells and fades), the honeybee's soft buzz, a thin soft mosquito whine (never scary)
+  cicada: (t, v) => { const d = v || 1.2; for (let x = 0; x < d; x += .018) amb.addMono(I.rim(1.25 + .05 * Math.sin(x * 40), 400 + Math.round(x * 100)), t + x, .045 * Math.sin(Math.PI * x / d), .4); },
+  bzz: (t, v) => { const d = v || .8; for (let x = 0; x < d; x += .022) amb.addMono(I.rim(.75 + .03 * Math.sin(x * 30), 500 + Math.round(x * 100)), t + x, .03 * Math.sin(Math.PI * x / d), -.2); },
+  whine: (t) => { for (let k = 0; k < 3; k++) { const x = I.bell(1180 + 40 * k, .5, 6, 2.0); wonder.addMono(x, t + k * .12, .02); } },
   cluck: (t, v) => { const g = v || 1; for (let k = 0; k < 3; k++) amb.addMono(I.tom(240 - k * 18, .07, 340 + k), t + k * .13, .14 * g, -.2); },
   rooster: (t) => { const x = I.whistle(.5); amb.addMono(x, t, .015, .7); verb.addMono(x, t, .02); },
   heartbeat: (t) => { wonder.addMono(I.thud(55, .12), t, .35); wonder.addMono(I.thud(50, .1), t + .28, .25); },

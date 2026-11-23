@@ -99,3 +99,28 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 - The theme board's answer chips (C1 to C3) are on screen only; the teacher may want them spoken (script section 12, point 4).
 - 5.13 and 5.17a are not read in full (length): 5.13 is shown by the young look-closer, 5.17a is Momo's own words.
 - Pip has no back-view painting yet (Part 1's cliff asks for back views of Momo and Pip watching the nest).
+
+## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-23 (resume from here)
+- **Drawn (all placeholders replaced, every mark kept):** `art18.js` (new): the cicada (`cicada18`, its nymph), the honeybee (`bee18`, the
+  queen), the mealworm, its pupa and the beetle, the hen sitting on her straw nest (`henNest18`), ONE loop style for every life cycle
+  (`loopN`: n tiles round curved arrows, no numbers), the LIFE CYCLE DAY board with its COMPARE FRAME (`lcdBoard`, `compareFrame`), our void
+  deck (`BG.deck18` baked + `VDK`: the rain tree outside, the fan, a pigeon, a child cycling past), the garden's edge (`VGE` on EP17's baked
+  `lime17`: ixora, the low bush over the nest, the lime plant with small white flowers, the watering can), the four look-closers
+  (`compareArt`, `youngArt`, `loopArt` + `dayNight18`, `larvaeArt`), the two journeys (`rainJourney`, `eggJourney18`), Pip's sheet, Momo's
+  homework, the mealworm tub, the theme board, the picture model, the dare's magnet / pin / wire, the chant board, the recap and fun-fact
+  pictures. Borrowed unchanged (headers say so): `home15.js`, `garden15.js`, `pond16.js`, `art16.js` (from ../ep16), `art17.js`, `sets17.js`,
+  `lc17.js` (from ../ep17, 23 Nov snapshot). `ep17dare.js`: EP17's own dare cards (twoLoops with = / â‰ ; their two name labels lifted 16 px
+  because at y 120 choiceCard3 clipped their tails: "froa"; EP17's own dare has the same clip). Baked: deck18, void17, lime17, pond16, grass16.
+- **Engine:** main.js also calls XDEFS16 / XDEFS17; common.js markScene passes `o.achieved` (Basil's cheer after Part 2's Mark Sentence 1).
+- **Hidden animals:** cicada intro on the rain tree's trunk (cold/back/title/game), then the pillar by the letterboxes (board), the flower pot's
+  rim by the pond (waitw: was "planter wall", the pond set has none), the side of the letterboxes behind a flyer (answer), the top of Pip's
+  easel (holdon), the REVEAL on the board's easel leg. Honeybee intro on an ixora flower (place/game), then a yellow flower of the bush over the
+  nest (waitw), the bench's armrest (eggans), the top of Momo's easel (show), the watering can's spout (fix), the tub's lid (beetle), the lime
+  pot's rim (closure), the REVEAL on a white flower of the lime plant. Never on screen in a look-closer, a journey or a countdown.
+- **Part 1 cliffhanger adapted:** no back views (Pip has no back painting): Momo and Pip face the nest from the right, front views turned in.
+- **Sound:** song.js = EP16's (with R.hens) + R.deck (the void deck bed) + cicada / bzz / whine one-shots; sound_cues.js Stage 2 block (beds
+  per place, rain over the pond, foley on the marks). Mixes -16.0 LUFS.
+- **Poses:** pose_audit.js: Part 1 32 moments, Part 2 31, every one with its reason in `pose_reasons.json`.
+- **QA tools ready:** make_preview.sh spans (EP18), make_moments.py (app_moments.json + chapters_p3.json EP18_P1 / EP18_P2 written),
+  highlights.py (EP18 stills). Next: render (`./build_part.sh 1` and `2` under /tmp/explained_render.lock, only with >= 4 GB free), then
+  measure_countdowns.py, compare_ep1.py, faces_sheet.js/.py, highlights.py, make_preview.sh.
