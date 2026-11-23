@@ -172,6 +172,21 @@ const THUMBS = {
       { cut: 'cu', x: 520, y: 270, w: 740, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'COPPER?!', x: 1256, y: 180, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep20_1: { ep: 'ep20', part: 1, out: 'ep20/thumb_part1.jpg', old: 'ep19/thumb_part1.jpg',
+    bg: { c: ['#FFE6F4', '#D9468F', '#3A1450'], at: [860, 430], rays: .22 },
+    cuts: { ring: `TF(960, 1000, 1.45, rings20(1, { glowTop: PUSHC, glowBot: PUSHC, bob: 0 })) + ppArrows(1, 960, 1000 + 1.45 * ringGapY(1), 'push', 1, { dir: 'v', gap: 16, len: 60, w: 26 }) + TF(1250, 1000 + 1.45 * ringGapY(1), 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'ring', x: 590, y: 95, w: 470, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'IT', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FLOATS?!', x: 1256, y: 240, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep20_2: { ep: 'ep20', part: 2, out: 'ep20/thumb_part2.jpg', old: 'ep19/thumb_part2.jpg',
+    bg: { c: ['#E8FFF8', '#2EC4B6', '#0E2E5A'], at: [860, 430], rays: .22 },
+    cuts: { mags: `TF(620, 600, 1.7, bar20(1, { flip: true, glint: false })) + TF(1300, 600, 1.7, bar20(1, { glint: false })) + ppArrows(1, 960, 600, 'push', 1, { gap: 20, len: 70, w: 30 })
+      + '<path d="M1110 420 Q1300 280 1490 420" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round"/><path d="M1110 420 Q1300 280 1490 420" fill="none" stroke="#2B2147" stroke-width="16" stroke-linecap="round"/><path d="M1440 360 L1494 424 L1420 438" fill="none" stroke="#2B2147" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>'` },
+    layers: [
+      { cut: 'mags', x: 520, y: 300, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'FLIP IT,', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SNAP!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);

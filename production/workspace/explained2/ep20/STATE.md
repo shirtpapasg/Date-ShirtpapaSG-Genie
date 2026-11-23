@@ -131,8 +131,40 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 6. Pip has no back-view painting (the P1 cliffhanger uses Momo's back view and a front view of Pip turned in, as EP18 / EP19).
 
 ## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-23 (resume from here)
-- New files: `art20.js` (helpers copied from EP15/16/19, the spider, the lizard, bar20 / rings20 / tray20 / plant20, the train, Dad's bars,
-  the toolbox), `sets20.js` (the science room SR20 on baked `bg/sci20.png`, THE POLES BOARD `poles20`, the HDB kitchen KT20 on baked
-  `bg/kit20.png`, WHICH POLES FACE? `fridgeCard20`, the hidden animals' spots SPAT / LZAT), `lc20.js` (the look-closers, the journeys, the
-  pictures). page.html loads them after ep19dare.js. Re-bake with `node bake.js sci20 kit20` after a change to BG.sci20 / BG.kit20.
-- Part 1 and Part 2 drawn (p1.js, p2.js); sweeps 0 bad. Next: sound (sound_cues.js Stage 2 block), QA, renders.
+- **New files:** `art20.js` (helpers copied UNCHANGED from EP15/16/19: hand15, bird15, camPt, eye16, blink16, xChip16, tickChip16, camOn,
+  camMix, holdHand; the topic's arrows fatArrow / ppArrows / chevrons; the JUMPING SPIDER spider20 / spiderAt (eight legs, two big glossy
+  front eyes, a silk line); the HOUSE LIZARD lizard20 / lizardAt (seen from above on the wall, five-toed pads, see-through, `squash` for the
+  ceiling); bar20 (red N / blue S, `flip` = turned round), barOnPencils, clip20, ring20 / rings20 (Pip's pencil: `gap`, `press`, `finger`,
+  `topY`, `topSy` for the flip), tray20 (the class stationery tray), plant20 (every leaf on a stem with a stalk), pipNote, the wooden train,
+  greyBar (Dad's bars A / B), toolbox20, nail20, wbMag), `sets20.js` (the SCIENCE ROOM: BG.sci20 baked to bg/sci20.png + SR20 live: the fan,
+  the plant, a child passing in the corridor, THE POLES BOARD `poles20` filling on kw_poles / stars / board2, `polesCard`; the HDB KITCHEN:
+  BG.kit20 baked + KT20 live: the laundry, the TV's glow, the ceiling light, a moth; WHICH POLES FACE? `fridgeCard20` / `fridgeCardAt`
+  filling on ns / sn / nn / ss, the rule at `rule`, the note at `note`; the hidden animals' spots SPAT / LZAT), `lc20.js` (lcPolesArt,
+  lcPushPullArt, ringJourney, lcLikeArt, lcTestArt, trainJourney, and the pictures: ringP1 / ringHold / ringP2, recapP2, r1Pic, the fun facts,
+  markPoles / markPairs, pipSheet, chantBoard20, darePic20, hangingMagnet). page.html loads them after ep19dare.js. Re-bake after a change to
+  BG.sci20 / BG.kit20: `node bake.js sci20 kit20`. tests.js placeholders are no longer called (kept as Stage 1 left them).
+- **p1.js / p2.js** rewritten: every scene drawn to SCENES_TODO, every action AT its mark. Sweeps (every 0.25 s): 0 bad, 0 page errors.
+- **Changed from SCENES_TODO (and why):**
+  - The repel test (lctest) is staged TRUE to the physics: in the first pass each end of bar B is met by the end of Basil's magnet that
+    attracts it (so "pulls both bars, at both ends" is true); then the magnet is TURNED ROUND at bar B's right end and that end pushes it
+    away; bar A is tested again and only pulls. SCENES_TODO's "the red end at all four ends pulls" would be wrong for bar B (a magnet:
+    its North end would push a red North end). Bars stacked (A above B) so the magnet can reach both ends of each.
+  - No back views (the poses folder's back paintings are not in the v2 set: style mixing): front views turned in, as EP19.
+  - The cliffhanger: pairs2 turns the LEFT magnet (so a red end meets a red end); blueends turns both (two blue ends).
+  - The journey "be the top ring" looks DOWN the pencil from the top ring (your rim at the bottom edge); the push comes UP at you (magenta
+    arrows pointing at your rim, a "pushing up on you" chip). The finger is drawn as a hand with four fingers and a thumb (Pip's finger, as
+    the script says), the paw in the train journey as a soft shadow and a "Basil turns you round" pill (no code-drawn buddy parts).
+  - The dare's magnet hangs from a string tied to a ruler laid across two piles of books on the table (no hand: Basil hung it).
+  - The lizard's reveal: upside down on the ceiling above the fridge, drawn foreshortened on the ceiling strip.
+  - P2 Pip's homework is drawn to what he SAYS (n802p); the rewrite as SCENES_TODO.
+- **Sound** (sound_cues.js Stage 2 block): Part 1 the science room on EP18's R.deck bed (the fan's hum, children far off, birds) + a far
+  school bell, foley on every mark (the pencil slid in, the clips' tinkle, the magnifiers, the slide down the pencil, the springy riser,
+  the presses and boings, the flip / CLICK, the pencils' rolling rattle); Part 2 the flat on R.room + a neighbour's pot-lid clink, a far TV,
+  the lizard's "chik", the train's wooden rattle, the wheels, the box ticks, the toolbox clunk, the clicks and roll-back of the repel test.
+  The Stage 1 foley offsets were moved onto the picture (click / snap / jclick at the mark; flip +.9 / flipr +.6 / jturn +1.3; press boing
+  +1.7; flipback boing +1.5). Part 1 mix -16.0 LUFS.
+- **QA so far:** stills of every scene checked by eye and fixed (cameras off the board's label rows, the push / pull layout, mirrored
+  letters on turned magnets, the POLES BOARD's crowded bottom, two-row pairs in lclike, the homework easel); pose_audit both parts;
+  pose_reasons.json written; thumbnails (`../thumb_v2.js` ep20_1 IT FLOATS?! + Pip surprised, magenta burst; ep20_2 FLIP IT, SNAP! + Basil
+  surprised, teal burst); app_moments.json + chapters_p3.json EP20_P1 / EP20_P2 (make_moments.py); make_preview.sh spans set; highlights.py.
+- **Next:** render Part 1 (running), measure countdowns, faces sheets, compare_ep1, then Part 2, finish, review pack, `--check`.

@@ -96,7 +96,7 @@ SC.lclike = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camFr(SC
   return JOLT(t, [tSn], lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcLikeArt, bgc: "#FFF8EA", set: (tt) => frWorld(tt, cE), verdict: [`UNLIKE ATTRACT · LIKE REPEL`, GOODC], tv: MK("v_like"), peek: false,
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [MK("sstoo") + .1, "oops"]])
       + peekFace("pip", "l", tt, tp, tb - .4, [[LE("n703p") + .1, "cheer"], [LE("n703p") + 2.1, "sit"]], { achieved: true })
-      + peekFace("basil", "l", tt, tb, undefined, [[LE("n707b") + .1, "cheer"], [LE("n707b") + 2.1, "sit"], [tRg + .1, "pointing"], [tRg + 2.6, "sit"]], { achieved: true }) }), 20)
+      + peekFace("basil", "l", tt, tb, undefined, [[LE("n707b") + .1, "cheer"], [Math.min(LE("n707b") + 2.1, tRg - .1), "sit"], [tRg + .1, "pointing"], [tRg + 2.6, "sit"]], { achieved: true }) }), 20)
     + faceCam("momo", t, tSn + .05, tSn + 1.9, 1600, 330, 150, [[tSn, "oops"]], { noreact: true }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n712", sayId: "n711", who: "pip", n: "1 of 2", text: "Unlike poles attract and like poles repel.", keys: ["Unlike", "attract", "like", "repel"], size: 76, y: 260, footer: FOOT, achieved: true,
   under: fridgeCardAt(t, 1460, 800, .72 * spring(t, s.t0 + .4, .5), { id: "mk" }) });
@@ -173,7 +173,7 @@ SC.dare = (t, s) => { const a = "n1201", tQ = MK("spinq") - .15, tc = [W(a, "one
       return d + TF(x, 850, 1, choiceCard3(i + 1, c, darePic20(i, t), { w: 420, h: 330, size: 32, pulse: pl, id: "dr" })); }).join("")
     + (t >= tQ ? TF(1000, 150, spring(t, tQ, .45), tpill(0, 0, "NEXT · Where does it stop?", 52, P.ink, P.sun, { w: 700 })) : "")
     + (t >= tL ? TF(1000, 1030, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
-    + bd("basil", 230, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] })
+    + bd("basil", 230, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]], noreact: true })
     + bd("pip", 1560, 1060, 400, t, { flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [MK("spinq") + .2, "thinking"]], jump: [[MK("spin") - .2, 16]] })
     + bd("momo", 1790, 1066, 400, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [MK("spinq") + .35, "thinking"]] }) + melt(t, s, "liz", .4) + HUD(t); };
 SC.nyk = (t, s) => nykScene(t, s, fridgeCardAt(t, 930, 690, .98, { id: "ny" }) + TF(1290, 1030, .3, rings20(t)), { bx: [230, 1730, 1500], hx: 430 });
