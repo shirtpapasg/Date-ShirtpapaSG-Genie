@@ -70,6 +70,8 @@ const P = {
   // EP14: the owl's soft "hoo" (two low breathy notes), Basil's big yawn, a lift door far away, curtain rings, the torch's click, the globe's
   // soft slow rumble on its stand, the journey's low steady hum (the turn), a traffic signal changing (tock), the ladybird's tiny buzz, a
   // hen's low cluck, a far rooster, a soft slow heartbeat inside the egg, a hen's small sip, a juicy squish (the mango)
+  // EP19: a rock pigeon's soft coo (three low breathy notes)
+  coo: (t, v) => { const g = v || 1; for (const [d, f] of [[0, 'G3'], [.22, 'A3'], [.5, 'F3']]) { const x = I.padNote(m(f), .2, { cutoff: 650, attack: .03, release: .14 }); amb.addStereo(x.L, x.R, t + d, .07 * g); amb.addMono(I.noiseSweep(.2, 420, 300, { q: .7, pink: true }), t + d, .02 * g); } },
   hoo: (t) => { for (const [d, f] of [[0, 'D4'], [.42, 'B3']]) { const x = I.padNote(m(f), .34, { cutoff: 500, attack: .06, release: .2 }); amb.addStereo(x.L, x.R, t + d, .05); amb.addMono(I.noiseSweep(.3, 400, 300, { q: .6, pink: true }), t + d, .015); } },
   yawn: (t) => { amb.addMono(I.noiseSweep(1.0, 700, 260, { q: .5, pink: true }), t, .05); for (let k = 0; k < 6; k++) amb.addMono(I.pizz(m('A3') - k * .8, { seed: 300 + k }), t + .1 + k * .12, .03); },
   lift: (t) => { amb.addMono(I.bell(1320, .3, 2.2, 2.0), t, .02); amb.addMono(I.noiseSweep(.9, 300, 160, { q: .8, pink: true }), t + .3, .03); },

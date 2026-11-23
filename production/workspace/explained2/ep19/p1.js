@@ -209,7 +209,7 @@ SC.cliff = (t, s) => { const tP = W("m1202", "part") - .1, tw0 = MK("wire"), cam
   const wpS = camPt(cam, [wireP[0], wireP[1] + 10]), stS = camPt(cam, [TX - 150, TY - 66]), irS = camPt(cam, [TX - 60, TY - 66]);
   return VD19(t, { pig: false, titems: TRAY1B, top: mag }, cam) + qMark(t, tw0 + .6, q[0], q[1])
     + linkChip(t, MK("metal"), wpS[0] + 120, wpS[1] + 170, wpS[0], wpS[1], 1, "copper: a metal", 40) + linkChip(t, MK("metal") + .25, stS[0] - 150, stS[1] + 170, stS[0], stS[1], 0, "steel", 40) + linkChip(t, MK("metal") + .4, irS[0] - 20, irS[1] + 260, irS[0], irS[1], 0, "iron", 40)
-    + bd("basil", 280, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "pointing"], [LT("m1201b") - .1, "sit"], [LE("m1201b") + .1, "thinking"]], look: 4 })
+    + bd("basil", 280, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("m1201b") + .1, "thinking"]], look: 4 })
     + bd("momo", 1480, 1076, 440, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], look: -6, jump: [[LT("m1202") + .2, 20]] })
     + bd("pip", 1760, 1070, 440, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]], look: -6, jump: [[LT("m1202") + .35, 20]] })
     + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + melt(t, s, "kwrecap", .4) + HUD(t); };

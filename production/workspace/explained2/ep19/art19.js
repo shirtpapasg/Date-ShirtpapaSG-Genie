@@ -150,9 +150,9 @@ const TABLE19 = [1000, 914], BAN = [900, 420], PIPE = [610, 1430, 104], NB19 = [
 // the hidden animals' spots [x, y, k, flip] in the world: PIGAT (Part 1, the rock pigeon) and SNAT (Part 2, the land snail); INTRO = the game's
 // push-in; never used again; the REVEAL a new spot (SERIES_FORMAT 4)
 const PIGAT = { cold: [1180, 93, .34, 1], back: [1180, 93, .34, 1], title: [1180, 93, .34, 1], theme: [1180, 93, .34, 1], game: [1180, 93, .34, 1],
-  table: [300, 250, .34, 1], waitw: [300, 166, .3, 1], answer: [NB19[0] - 20, 318, .34, 1], holdon: [POT19[0] + 70, 618, .34, -1], sticky: [TABLE19[0] + 440, 960, .34, -1], liz: [RACK[0] + 40, 668, .34, -1] };
-const SNAT = { place: [BIN19[0] + 98, 770, .3, 0, -1], game: [BIN19[0] + 98, 770, .3, 0, -1], waitw: [1300, 1010, .26, 0, 1], tinans: [TABLE19[0] + 66, TABLE19[1] + 110, .24, -90, 1], table: [585, 742, .26, 0, -1],
-  show: [700, 1074, .26, 0, 1], fix: [PLNT19[0] + 40, PLNT19[1] - 118, .26, 0, 1], liz: [POT19[0] - 40, 618, .26, -14, 1] };
+  table: [1560, 792, .34, -1], waitw: [340, 250, .3, 1], answer: [560, 762, .34, 1], holdon: [POT19[0] + 70, 618, .34, -1], sticky: [1290, 874, .3, -1], liz: [RACK[0] + 40, 668, .34, -1] };
+const SNAT = { place: [BIN19[0] + 98, 770, .3, 0, -1], game: [BIN19[0] + 98, 770, .3, 0, -1], waitw: [1200, 1012, .26, 0, 1], tinans: [TABLE19[0] + 66, TABLE19[1] + 110, .24, -90, 1], table: [585, 742, .26, 0, -1],
+  show: [895, 1072, .26, 0, 1], fix: [POT19[0] - 70, 616, .26, 0, 1], liz: [POT19[0] - 52, 546, .26, -18, 1] };
 // the afternoon light: warm from the open side, sun patches on the floor
 const afternoon19 = `<rect x="-200" y="-120" width="2320" height="1320" fill="#FFB054" opacity=".08"/><path d="M1590 712 L2120 712 L2120 1200 L1200 1200z" fill="#FFF2C4" opacity=".3"/><path d="M1590 760 L1380 1200 L1180 1200 L1520 760z" fill="#FFF2C4" opacity=".22"/><path d="M1590 84 L2120 84 L2120 712 L1590 712z" fill="#FFD890" opacity=".12"/>`;
 // the INTERACTIONS banner on EP18's two easels and their metal frame (absolute)
@@ -358,3 +358,143 @@ function pinJourney(t, s) { const m = MK, tT = m("jtable"), tP = m("jpipe"), tF 
   // looking down from the magnet's end: the wire, the eraser and the ruler lie exactly where they were
   if (t >= tK + .4) o += linkChip(t, tK + .6, 640, 560, 900, 700, 0, "pulled", 44) + linkChip(t, tK + .9, 1500, 420, 1400 , 610 * drop + hor - 360 * drop + 40, 1, "not pulled", 44);
   return o; }
+
+/* ================================================================ PART 2 PICTURES ================================================================ */
+// Round 1's card pictures (400 x 280: -200..200, -140..140): the drink can, the food tin, both; the ring: the magnet above the two cans
+const canPic = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill="${["#EAF3F7", "#EEF1F5", "#FFF8EA"][i]}"/>` + (i === 0 ? TF(0, 110, 1.15, can19(1, t)) : i === 1 ? TF(0, 110, 1.25, tin19(1, t)) : TF(-80, 110, .95, can19(1, t)) + TF(90, 110, 1.0, tin19(1, t)));
+const ringP2 = (t) => `<circle cx="430" cy="470" r="180" fill="#FFF8EA"/>` + TF(430, 375, .7, magnet19(t)) + TF(360, 610, .78, can19(1, t)) + TF(510, 610, .82, tin19(1, t)) + T(360, 640, "drink can", 22, P.ink) + T(510, 640, "food tin", 22, P.ink);
+// the recap pictures (1040 x 600)
+const recapP2 = (i, t) => { let s = `<rect x="-520" y="-300" width="1040" height="600" fill="${["#F2E8D6", "#FFF3DC", "#E4EEFB"][i]}"/>`;
+  if (i === 0) s += TF(0, -10, 2.4, magnet19(t, { cut: 1 })) + lcLab(t, 0, 0, 200, "grey metal inside", -150, 0, { size: 36 });
+  else if (i === 1) s += `<rect x="-520" y="140" width="1040" height="160" fill="#E3DACA"/>` + TF(-40, -170, 2.0, `<g transform="rotate(90)">${magnet19(t, { glint: false })}</g>`) + TF(-90, 150, 1.4, pin18(), 72) + TF(40, 170, 1.3, nail19(1, 100)) + T(-250, 120, "steel pin", 36, P.ink) + T(250, 140, "iron nail", 36, P.ink);
+  else s += tray19(t, 0, 60, 1.05, [["wire", 1, 0]], { noflip: true }) + TF(200, -200, 1, `<g filter="url(#dropS)"><circle r="70" fill="url(#gSun)"/></g>${T(0, 36, "?", 110, P.ink)}`);
+  return s; };
+// the aluminium-can journey (Part 2): BE AN ALUMINIUM CAN. The camera IS the can: the bin's round opening, clunk into the bin, a truck tips
+// you out at a recycling plant, the moving belt, the giant magnet (a flat block on chains) lifts the steel tins, you roll right on
+function canJourney(t, s) { const m = MK, tB = m("jbin"), tC = m("jclunk"), tT = m("jtruck"), tBe = m("jbelt"), tM = m("jmagnet"), tG = m("jclang"), tR = m("jroll"); let o = "";
+  const rim = (y, col = "#D9E0EA") => `<path d="M-200 ${y + 260} Q960 ${y - 40} 2120 ${y + 260} V1300 H-200z" fill="${col}" stroke="#7E8898" stroke-width="10"/><path d="M-200 ${y + 300} Q960 ${y} 2120 ${y + 300}" stroke="#2EC4B6" stroke-width="40" fill="none" opacity=".9"/><path d="M200 ${y + 160} Q960 ${y - 10} 1700 ${y + 160}" stroke="#fff" stroke-width="12" fill="none" opacity=".6"/>`;
+  if (t < tC + .3) {   // 1 · at the bin's opening, then clunk: you drop in
+    const u = ss(tC - .4, tC + .3, t), sh = t > tC && t < tC + .4 ? 10 * Math.sin(t * 60) : 0;
+    o += `<rect width="1920" height="1080" fill="#BFD4E6"/>` + TF(960 + sh, 470 - 900 * u, 1 + 1.6 * u, `<rect x="-900" y="-560" width="1800" height="1200" fill="#2F6FD6"/><circle r="330" fill="#0E1A3A" stroke="#1A3E8A" stroke-width="20"/><circle r="330" fill="none" stroke="#9EC4FF" stroke-width="6" opacity=".6"/>${T(0, 470, "Recyclables", 90, "#fff")}<path d="M-120 -100 Q-40 -200 60 -150" stroke="#2A4A8A" stroke-width="8" fill="none" opacity=".6"/>`);
+    o += dip(t, tC + .1, "#0E1A3A", .35);
+  } else if (t < tT) {   // 2 · inside the bin: dim blue, plastic bottles, paper, food tins around you
+    const sh = t < tC + .5 ? 8 * Math.sin(t * 50) : 0, sway = 6 * Math.sin(t * .9);
+    o += `<rect width="1920" height="1080" fill="#16244A"/><ellipse cx="960" cy="-120" rx="420" ry="160" fill="#BFD4E6" opacity=".5"/>` + uwRays(t, "#9EC4FF", .06);
+    o += TF(260 + sh, 560 + sway, 1.6, bottle19(), -40) + TF(1620 + sh, 620, 1.9, tin19(1, t), 20) + TF(1200, 380 - sway, 1.4, `<rect x="-140" y="-90" width="280" height="180" fill="#F4F0E6" stroke="#B8B0A0" stroke-width="5" transform="rotate(14)"/><path d="M-110 -50 h200 M-110 -10 h180 M-110 30 h200" stroke="#9A9284" stroke-width="6" transform="rotate(14)"/>`) + TF(640, 300 + sway, 1.2, can19(1, t), -70) + TF(1500, 260, 1.1, bottle19(), 70);
+    o += lcLab(t, tC + .6, 420, 260, "plastic bottle", 300, 420, { size: 36 }) + lcLab(t, tC + 1.0, 1640, 250, "food tin", 1620, 420, { size: 36 }) + lcLab(t, tC + 1.4, 1150, 640, "paper", 1200, 440, { size: 36 });
+    o += `<rect width="1920" height="1080" fill="#0A1230" opacity=".25"/>` + dip(t, tT, "#FFFFFF", .4);
+  } else {   // 3 · the recycling plant: a huge hall, high windows, a long moving belt; the giant magnet above; the steel tins leap up; you roll on
+    const run = (t - tBe) * 220, hor = 420;
+    o += `<rect width="1920" height="1080" fill="#DCE4EC"/>` + [...Array(6)].map((_, i) => `<rect x="${80 + i * 310}" y="40" width="220" height="200" rx="10" fill="#F4FAFF" stroke="#B8C4D0" stroke-width="6"/><path d="M${190 + i * 310} 40 V240 M${80 + i * 310} 140 H${300 + i * 310}" stroke="#B8C4D0" stroke-width="5"/>`).join("")
+      + `<rect x="0" y="${hor}" width="1920" height="660" fill="#B8C0CA"/>` + [...Array(5)].map((_, i) => `<path d="M${i * 480} 0 L${i * 480 + 30} ${hor}" stroke="#A8B2BE" stroke-width="18"/>`).join("");
+    if (t < tBe) { const u = clamp((t - tT) / (tBe - tT)); o += TF(lerp(1500, 1300, u), 600, 1.3, `<rect x="-300" y="-160" width="420" height="260" rx="18" fill="#2FA35A" stroke="#1E6E3C" stroke-width="8"/><rect x="120" y="-60" width="200" height="160" rx="14" fill="#E9EEF5" stroke="#7E8898" stroke-width="8"/><circle cx="-200" cy="110" r="50" fill="#3A3A4A"/><circle cx="220" cy="110" r="50" fill="#3A3A4A"/>`, -18 * ss(tT, tT + 1.5, t)) + TF(960, 880, 1, `<path d="M-700 120 L-260 -120 H260 L700 120z" fill="#8A929E"/>`); }
+    // the belt: a long band from the bottom of the frame to the far end of the hall
+    o += `<path d="M560 ${hor + 30} H1360 L1920 1080 H0z" fill="#4A4E5A"/><path d="M600 ${hor + 30} H1320 L1820 1080 H100z" fill="#5E6270"/>`;
+    for (let i = 0; i < 14; i++) { const v = ((i / 14) + run / 3000) % 1, y = hor + 30 + (1080 - hor - 30) * v * v; o += `<path d="M${n2(lerp(600, 100, v * v))} ${n2(y)} H${n2(lerp(1320, 1820, v * v))}" stroke="#3A3E48" stroke-width="${n2(2 + 6 * v)}"/>`; }
+    // the things riding the belt with you (they come towards the magnet with you)
+    const items = [[-.3, .55, "tin"], [.25, .5, "bottle"], [-.12, .75, "paper"], [.3, .82, "tin"], [-.36, .9, "can"], [.05, .38, "tin"]];
+    const tinsUp = [tG, tG + 1.3, tG + 2.6];
+    let iTin = 0; items.forEach(([dx, v0, kd], i) => { const v = v0, y = hor + 30 + (1080 - hor - 30) * v * v, x = 960 + dx * lerp(800, 1900, v * v), k = .5 + 1.6 * v * v; let up = 0, ty = 0;
+      if (kd === "tin") { const tu = tinsUp[iTin++]; up = t >= tM ? ss(tu - .1, tu + .5, t) : 0; ty = -lerp(0, y - 250, eio(up)); }
+      if (t >= tBe) o += TF(x, y + ty, k * (1 - .35 * up), kd === "tin" ? tin19(1, t) : kd === "can" ? can19(1, t) : kd === "bottle" ? bottle19() : `<rect x="-120" y="-60" width="240" height="60" fill="#F4F0E6" stroke="#B8B0A0" stroke-width="5"/><path d="M-100 -40 h180 M-100 -22 h160" stroke="#9A9284" stroke-width="5"/>`)
+        + (kd === "tin" && up > .02 && up < .98 ? pullArrows(t, x, y - 80, x, 300, 1, MAGC, 3) : ""); });
+    // the giant magnet: a big flat block on chains, above the belt
+    if (t >= tM - .5) { const k = ss(tM - .5, tM + .6, t), my = lerp(-200, 210, eio(k)) + 140 * ss(tR - .5, tR + 2.5, t);
+      o += `<path d="M760 ${my - 400} L800 ${my - 60} M1160 ${my - 400} L1120 ${my - 60}" stroke="#5E646E" stroke-width="10" stroke-dasharray="20 8"/><g filter="url(#drop)"><rect x="660" y="${my - 70}" width="600" height="150" rx="16" fill="#5A6070" stroke="#2E323C" stroke-width="8"/></g><rect x="680" y="${my - 54}" width="560" height="30" rx="10" fill="#8E96A4"/>${T(960, my + 46, "MAGNET", 54, "#E8ECF2", { ls: 8 })}`
+        + `<rect x="660" y="${my + 80}" width="600" height="14" fill="#2E323C" opacity=".4"/>`;
+      tinsUp.forEach((tu, i) => { if (t >= tu + .5) o += TF(760 + i * 200, my + 150, .75, tin19(1, t)); });
+      if (t >= tG + .3) o += linkChip(t, tG + .4, 1520, 240, 1160, my + 120, 0, "steel: attracted", 42); }
+    // you: your own silver rim at the bottom, rolling on
+    const rl = t >= tR ? 10 * Math.sin((t - tR) * 9) : 0;
+    o += TF(rl, 0, 1, rim(820)) + (t >= tR + .3 ? linkChip(t, tR + .4, 1340, 700, 1100, 900, 1, "aluminium: not attracted", 42) : "");
+    // at the end: the aluminium cans tumble onto their own pile
+    if (t >= s.t1 - 4) { const u = ss(s.t1 - 4, s.t1 - 2.6, t); o += TF(1640, 620, 1, [...Array(7)].map((_, i) => TF((i % 4) * 70 - 100, -Math.floor(i / 4) * 60 - 60 * (1 - u) * (i % 2), .55, can19(1, t), 80 + i * 23)).join("")) + lcLab(t, s.t1 - 3.4, 1640, 400, "aluminium cans", 1640, 520, { size: 34 }); }
+  }
+  return o; }
+// a flattened paper box the riders sit on (the journey's belt)
+const riderBox = (t, x, y, k) => TF(x, y + 3 * Math.sin(t * 2), k, `<path d="M-260 30 L-220 -20 H230 L270 30z" fill="#C99A5E" stroke="#7A5226" stroke-width="6"/><path d="M-180 0 H200" stroke="#A8783E" stroke-width="4"/>`);
+// [LOOK CLOSER] not all metals (lcmetals): the book's eight objects, each BIG and named with its material; the magnet glides along each row and
+// nothing moves (a blue tag on each); then the METALS family: iron and steel jump to the magnet, copper and aluminium stay
+const ROW8 = [["towel", "cotton towel", "fabric"], ["foil", "aluminium foil", "metal: aluminium"], ["ruler", "wooden ruler", "wood"], ["bowl", "ceramic bowl", "ceramic"], ["eraser", "eraser", "rubber"], ["wire", "copper wire", "metal: copper"], ["bottle", "plastic bottle", "plastic"], ["cup", "glass cup", "glass"]];
+const BIG = { towel: (t) => towel19(1.4), foil: (t) => foil19(1.3, t), ruler: (t) => ruler19(.95), bowl: (t) => TF(0, 50, 1.05, bowl19()), eraser: (t) => eraser19(1.5), wire: (t) => TF(0, 0, 1.15, wire18()), bottle: (t) => TF(0, 105, .78, bottle19()), cup: (t) => TF(0, 70, .85, cup19()),
+  nail: (t) => nail19(1.2), pin: (t) => TF(0, 0, 1.1, pin18()), tin: (t) => TF(0, 70, .75, tin19(1, t)), can: (t) => TF(0, 78, .7, can19(1, t)), clip: (t) => clip19(1.6) };
+const passMag = (t, x, y, k = 1) => TF(x, y, k, TF(0, -40, .62, magnet19(t, { glint: false })) + TF(-10, -60, .5, holdHand(1, 0)));
+function metalsArt(t) { const tP = MKS("pass"), tK = MKS("kw_non_magnetic_materials"), tM = MKS("metals"), aside = ss(tM - .8, tM, t);
+  let s = "";
+  if (aside < 1) { let g = ""; ROW8.forEach(([kd, nm, mat], i) => { const r = Math.floor(i / 4), x = -500 + (i % 4) * 333, y = r ? 90 : -170, ta = tP + (r ? 3 : 0) + (i % 4) * .7 + .35;
+      g += TF(x, y, 1, BIG[kd](t)) + TF(x, y + 105, 1, tpill(0, 0, nm, 32, "#fff", P.ink, { w: 700 }) + T(0, 52, "(" + mat + ")", 26, mat.startsWith("metal") ? "#8A5A30" : P.ink2, { w: 600 })) + (t >= ta ? TF(x + 110, y - 70, spring(t, ta, .45), tpill(0, 0, "not attracted", 22, NONC, "#fff", { w: 700 })) : ""); });
+    for (const r of [0, 1]) { const a = tP + r * 3, u = clamp((t - a) / 2.8); if (t > a - .3 && t < a + 3.1) g += passMag(t, lerp(-760, 760, u), (r ? 90 : -170) - 60, .9); }
+    s += TF(-1400 * eio(aside), 0, 1, g); }
+  if (t >= tK) s += TF(560, -300, spring(t, tK + .3, .45) * (1 - ss(tK + 5, tK + 5.4, t)), tpill(0, 0, "non = not", 40, P.ink, "#fff", { w: 700 }));
+  if (aside > 0) { const k = aside, cols = [["iron", "a nail", ["nail"], 1], ["steel", "a pin, the food tin", ["pin", "tin"], 1], ["copper", "the wire", ["wire"], 0], ["aluminium", "the foil, the drink can", ["foil", "can"], 0]];
+    let b = `<g filter="url(#drop)"><rect x="-640" y="-390" width="1280" height="640" rx="30" fill="#FFFDF6" stroke="#C9A974" stroke-width="7"/></g>` + T(0, -325, "METALS", 60, P.ink, { ls: 10 });
+    const u = clamp((t - tM - .3) / 2.8), mx = lerp(-700, 700, u), done = t >= tM + 3.2;
+    cols.forEach(([nm, ex, kinds, mg], i) => { const x = -435 + i * 290, near = mg ? Math.max(0, 1 - Math.abs(mx - x) / 150) : 0, jy = -120 * eio(near);
+      b += `<rect x="${x - 135}" y="-265" width="270" height="420" rx="24" fill="${done ? (mg ? "#E6F6E8" : "#E4EEFB") : "#F6F2EA"}" stroke="${done ? (mg ? MAGC : NONC) : "#D9C9A8"}" stroke-width="${done ? 10 : 4}"/>`;
+      kinds.forEach((kd, j) => { b += TF(x + (kinds.length > 1 ? (j ? 60 : -60) : 0), -20 + jy + (kd === "tin" || kd === "can" ? 40 : 0), kinds.length > 1 ? .62 : .8, BIG[kd](t)); });
+      b += T(x, 100, nm, 42, P.ink) + T(x, 138, ex, 22, P.ink2, { w: 600 }) + (done ? TF(x, 200, spring(t, tM + 3.2 + i * .15, .4), tpill(0, 0, mg ? "magnetic" : "non-magnetic", 30, mg ? MAGC : NONC, "#fff", { w: 700 })) : "");
+      if (near > .2) b += pullArrows(t, x, -90, x, -200, near, MAGC, 2); });
+    if (t > tM && u < 1) b += passMag(t, mx, -215, 1);
+    s += TF(1400 * (1 - eio(k)), 0, 1, b); }
+  return s; }
+// Basil's homework sheet on his easel (the Showdown): My magnet test, three ruled lines with a small drawing each (drawn to match his spoken
+// lines: the iron nail, the wooden ruler, the foil). o.lit [l1, l2, l3], o.strike / o.fix 0..1 (line 3 struck and rewritten in green)
+const HW19 = ["1  The iron nail is attracted to the magnet, so it is made of a magnetic material.", "2  The wooden ruler is not attracted to the magnet, so it is made of a non-magnetic material.", "3  The aluminium foil is shiny and grey, like the steel pin, so it is made of a magnetic material."];
+const basilSheet = (t, o = {}) => { const lit = o.lit || [0, 0, 0], st = o.strike || 0, fx = o.fix || 0; let s = T(0, -850, "My magnet test", 48, P.basil);
+  const Y = [-760, -560, -360];
+  HW19.forEach((txt, i) => { const y = Y[i], ls = wrap(txt, 31, 460, 600), g = lit[i];
+    s += (g > .02 ? `<rect x="-340" y="${y - 40}" width="680" height="${ls.length * 40 + 36}" rx="12" fill="${P.sun}" opacity="${n2(.45 * g)}"/>` : "") + `<path d="M-330 ${y + ls.length * 40 - 4} H330" stroke="#B9C4D0" stroke-width="3"/>`
+      + ls.map((l, j) => `<text x="-330" y="${y + j * 40}" font-family="Fredoka" font-weight="600" font-size="31" fill="${P.ink}">${esc(l)}</text>`).join(""); });
+  s += TF(250, -730, .28, `<g transform="rotate(90)">${magnet19(t, { glint: false })}</g>`) + TF(250, -660, .32, nail19(1, 90)) + TF(250, -520, .42, ruler19(1, -20)) + TF(220, -330, .45, foil19(1, t)) + TF(290, -300, .3, pin18(), -30);
+  if (st > .01) s += `<path d="M-330 -372 L${n2(-330 + 640 * st)} -372 M-330 -332 L${n2(-330 + 640 * st)} -332 M-330 -292 L${n2(-330 + 400 * st)} -292" stroke="${NONC}" stroke-width="7" stroke-linecap="round"/>`;
+  if (fx > .01) { const ls = wrap("The aluminium foil is not attracted to the magnet, so it is made of a non-magnetic material.", 31, 650, 600); s += OP(fx, `<rect x="-344" y="-262" width="688" height="${ls.length * 40 + 20}" rx="12" fill="#E2F6E6"/>` + ls.map((l, j) => `<text x="-330" y="${-232 + j * 40}" font-family="Fredoka" font-weight="600" font-size="31" fill="#1F8A4C">${esc(l)}</text>`).join("")); }
+  return easel18(s); };
+// the playground beside the void deck (wet, bright after the rain): the swing frame with two seats, the slide, a fence, a mynah; o.push (the
+// swing's push, a time) and the seat's swing
+function PG19(t, o = {}, cam) { const tp = o.push === undefined ? 1e9 : o.push, u = t - tp, ang = t < tp ? 0 : 34 * Math.exp(-u * .25) * Math.sin(u * 2.4);
+  let s = `<rect x="-200" y="-120" width="2320" height="760" fill="url(#e17Sky)"/><g opacity=".55">${farBlocks(-150, 2150, 380, 7, 1)}</g>` + clouds17(t, [[300, 120, 1], [1300, 80, .8]])
+    + `<rect x="-200" y="560" width="2320" height="700" fill="#7CC97A"/><path d="M-200 700 H2120 V1300 H-200z" fill="#3E8E9A"/>` + wetSheen(700, 820, 300, 30, t) + wetSheen(1500, 960, 260, 24, t, .3)
+    + [...Array(30)].map((_, i) => `<path d="M${-180 + i * 80} 640 V560" stroke="#6E7A84" stroke-width="8"/>`).join("") + `<path d="M-200 580 H2120 M-200 620 H2120" stroke="#6E7A84" stroke-width="8"/>`
+    + TF(1550 + 20 * Math.sin(t * .4), 560, .8, bird15(t, 1, 2.1));
+  // the slide (right)
+  s += `<path d="M1600 760 L1640 330 M1760 760 L1720 330" stroke="#E0453A" stroke-width="18"/><rect x="1610" y="320" width="140" height="30" rx="8" fill="#FFC83A"/><path d="M1750 340 Q1900 420 2000 760" stroke="#FFC83A" stroke-width="60" fill="none" stroke-linecap="round"/>` + drips15(t, [[1980, 740, .4, 60], [1700, 352, 1.3, 400]]);
+  // the swing frame: two A-frames and a top bar; two seats on chains (the left one is pushed)
+  const L = 500, R = 1200, top = 300; s += `<ellipse cx="850" cy="780" rx="460" ry="30" fill="${P.ink}" opacity=".18"/><path d="M${L} ${top} L${L - 110} 770 M${L} ${top} L${L + 110} 770 M${R} ${top} L${R - 110} 770 M${R} ${top} L${R + 110} 770" stroke="#2F6FD6" stroke-width="22" stroke-linecap="round"/><rect x="${L - 20}" y="${top - 22}" width="${R - L + 40}" height="34" rx="14" fill="#3A80E8" stroke="#1A3E8A" stroke-width="5"/>`;
+  [[700, ang], [1000, 3 * Math.sin(t * .8)]].forEach(([x, a]) => { s += `<g transform="rotate(${n2(a)} ${x} ${top})"><path d="M${x - 70} ${top} V${top + 380} M${x + 70} ${top} V${top + 380}" stroke="#8E96A4" stroke-width="7" stroke-dasharray="14 6"/><rect x="${x - 95}" y="${top + 372}" width="190" height="30" rx="10" fill="#1E1E2A"/></g>`; });
+  if (o.items) s += o.items;
+  return cam ? CAM(s, cam[0], cam[1], cam[2]) : s; }
+// [LOOK CLOSER] how magnets interact (lcinteract): the tray fills the panel; the magnet meets each object in a line above it in turn: the iron
+// nail, a steel paper clip and the food tin move to it and slide into the green half; the wooden ruler, the eraser and the drink can do nothing
+// and slide into the blue half; at `groups` the halves get the book's names
+const NEAR = [["nail", 1], ["ruler", 0], ["clip", 1], ["eraser", 0], ["tin", 1], ["can", 0]];
+function interactArt(t) { const tN = MKS("near"), base = [["pin", 0, 0], ["wire", 1, 0], ["towel", 1, 0], ["foil", 1, 0], ["bowl", 1, 0], ["bottle", 1, 0], ["cup", 1, 0]];
+  const ts = NEAR.map((_, i) => tN + i * 1.2), items = base.concat(NEAR.map(([kd, mg], i) => [kd, mg ? 0 : 1, ts[i] + .9]));
+  let s = tray19(t, 0, 180, 1.3, items);
+  NEAR.forEach(([kd, mg], i) => { const x = -625 + i * 250, y = -150, a = ts[i]; if (t >= a + .9) return; const jy = mg ? -50 * eio(clamp((t - a - .25) / .3)) : 0, go = clamp((t - a - .55) / .35), gx = lerp(x, mg ? -200 : 200, eio(go)), gy = lerp(y + jy, 180, eio(go));
+    s += TF(gx, gy, lerp(.8, .5, go), BIG[kd](t)) + (t < a ? TF(x, y + 70, 1, T(0, 0, OBJNAME[kd], 26, P.ink)) : "");
+    if (t >= a - .2 && t < a + .7) s += passMag(t, x, y - 95, .85) + (mg ? pullArrows(t, x, y - 10, x, y - 90, 1, MAGC, 2) : "");
+    if (t >= a + .15 && t < a + 1.4) s += TF(x, y - 230, spring(t, a + .15, .4) * (1 - ss(a + 1.1, a + 1.4, t)), tpill(0, 0, mg ? "interacts" : "no interaction", 30, mg ? MAGC : NONC, "#fff", { w: 700 })); });
+  return s; }
+// the chant board (Part 2): the test table, each line's part flashing on its call (1 the green half: the nail and the pin; 2 the blue half: the
+// copper wire and the foil; 3 the magnet passing over the foil)
+const chantBoard19 = (t, f) => { let s = `<g filter="url(#drop)"><rect x="-360" y="-330" width="720" height="660" rx="30" fill="url(#gPaper)" stroke="#C9A974" stroke-width="7"/></g>` + T(0, -260, "OUR MAGNET TEST", 40, P.ink, { ls: 3 });
+  s += [0, 1].map((i) => `<rect x="${i ? 10 : -330}" y="-200" width="320" height="250" rx="20" fill="${i ? "#E4EEFB" : "#E6F6E8"}" stroke="${i ? NONC : MAGC}" stroke-width="${n2(5 + 10 * f[i])}"/>` + (f[i] > .05 ? `<rect x="${i ? 10 : -330}" y="-200" width="320" height="250" rx="20" fill="${P.sun}" opacity="${n2(.35 * f[i])}"/>` : "")).join("")
+    + TF(-240, -90, .7, nail19(1, -20)) + TF(-100, -60, .75, pin18(), 20) + TF(110, -100, .75, wire18()) + TF(250, -60, .55, foil19(1, t)) + T(-170, 30, "Magnetic!", 36, MAGC) + T(170, 30, "Non-magnetic!", 34, NONC);
+  s += `<rect x="-330" y="80" width="660" height="220" rx="20" fill="#FFF8EA" stroke="${P.ink}" stroke-width="${n2(3 + 9 * f[2])}"/>` + TF(60, 230, .6, foil19(1, t)) + passMag(t, 60 + 120 * Math.sin(t * 1.6) * (f[2] > .05 ? 1 : 0), 190, .7) + T(-190, 200, "Test it!", 40, P.ink);
+  return s; };
+// the fun fact (Basil): the deep sea and its hot spring; the scaly-foot snail; a magnet gives it a little tug
+const ffDeep19 = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#0E2A5A"/><rect x="${-w / 2}" y="${h / 2 - 70}" width="${w}" height="70" fill="#2A2A36"/>` + uwRays(t, "#5A8ACA", .05).replace(/1100/g, "200")
+  + `<path d="M-40 ${h / 2 - 70} L-20 ${h / 2 - 150} H20 L40 ${h / 2 - 70}z" fill="#3A3A46"/>` + [...Array(8)].map((_, i) => { const u = ((t * .6 + i / 8) % 1); return `<circle cx="${n2(Math.sin(i * 2 + t) * 14 * u)}" cy="${n2(h / 2 - 150 - u * (h - 160))}" r="${n2(4 + 8 * u)}" fill="#BFE3FF" opacity="${n2(.7 * (1 - u))}"/>`; }).join("") + `<ellipse cx="0" cy="${h / 2 - 160}" rx="30" ry="12" fill="#FF9A5A" opacity=".5"/>`;
+const ffSnail19 = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#1E3A6A"/><rect x="${-w / 2}" y="${h / 2 - 60}" width="${w}" height="60" fill="#3A3A46"/>` + TF(-10, h / 2 - 58, .95, scalyFoot19(t)) + lcLab(t, MK("ff_snail") + .4, 0, -h / 2 + 50, "scaly foot", -40, h / 2 - 80, { size: 24 });
+const ffTug19 = (t, w, h) => { const u = ss(MK("ff_magnet") + .3, MK("ff_magnet") + 1.2, t); return `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF8EA"/><rect x="${-w / 2}" y="${h / 2 - 60}" width="${w}" height="60" fill="#E3DACA"/>` + TF(-40 + 26 * u, h / 2 - 58, .75, scalyFoot19(t)) + TF(w / 2 - 60, h / 2 - 120, .38, magnet19(t), 90) + pullArrows(t, 10, h / 2 - 110, w / 2 - 90, h / 2 - 110, u > .02 ? 1 : 0, MAGC, 2); };
+// the dare (into EP20): a pencil upright in a lump of plasticine; two ring magnets on it, the top one floating (a clear gap). o.n (how many
+// rings are on: 0..2, may be fractional while one slides on), o.t1 (the second's landing)
+const pencilRings = (t, o = {}) => { const n = o.n === undefined ? 2 : o.n, bob = 6 * Math.sin(t * 2.4);
+  let s = `<ellipse cx="0" cy="6" rx="150" ry="22" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-120 0 Q-110 -60 0 -66 Q110 -60 120 0z" fill="#E86A8A" stroke="#A8405E" stroke-width="5"/>`
+    + `<rect x="-16" y="-520" width="32" height="470" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M-16 -520 L0 -570 L16 -520z" fill="#F2D6A8" stroke="#B8861C" stroke-width="4"/><path d="M-6 -552 L0 -570 L6 -552z" fill="#3A3A4A"/><rect x="-10" y="-510" width="8" height="450" fill="#FFE08A"/>`;
+  if (n > 0) s += TF(0, -84, 1, ringMag19(1));
+  if (n > 1) s += TF(0, lerp(-560, -250 + bob, clamp(n - 1)), 1, ringMag19(1)) + (n >= 2 ? `<path d="M-120 -112 V-226 M120 -112 V-226" stroke="${P.ink}" stroke-width="4" stroke-dasharray="8 8" opacity=".5"/>` + tpill(-230, -170, "a gap!", 30, "#fff", P.ink, { w: 700 }) : "");
+  return s; };
+// the dare's two card pictures: 1 a pull (arrows towards each other), 2 a push (arrows apart)
+const nextPic = (i) => `<rect x="-200" y="-140" width="400" height="280" fill="${i ? "#FFF0D6" : "#EAF3F7"}"/>` + TF(0, -50, .9, ringMag19()) + TF(0, 60, .9, ringMag19())
+  + (i ? `<path d="M0 -20 V-110 M-16 -92 L0 -112 L16 -92 M0 30 V120 M-16 102 L0 122 L16 102" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" fill="none"/>` : `<path d="M150 -100 V-20 M134 -38 L150 -18 L166 -38 M150 130 V40 M134 58 L150 38 L166 58" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" fill="none"/>`);
