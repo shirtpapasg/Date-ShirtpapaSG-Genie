@@ -4,7 +4,7 @@ exactly with the ticks, the bell lands on 0). Picture: the ring's number badge i
 are the loudest short transients there; the music is ducked out under countdowns). Prints both lists and the offsets from the timeline."""
 import sys, json, subprocess, numpy as np, wave
 P = sys.argv[1]; tl = json.load(open(f'tl_p{P}.json')); M = tl['marks']; FPS = 30
-CD = {'1': [('Round 1', 'ring0_r1', 3, (960, 640)), ('HOLD ON!', 'ring0_hold', 5, (960, 645))], '2': [('Round 1', 'ring0_r1', 5, (960, 640)), ('Showdown', 'ring0_show', 5, (1520, 620))]}[P]
+CD = {'1': [('Round 1', 'ring0_r1', 3, (960, 640)), ('HOLD ON!', 'ring0_hold', 5, (960, 645))], '2': [('Round 1', 'ring0_r1', 5, (960, 640)), ('Showdown', 'ring0_show', 5, (1440, 640))]}[P]
 def frames(t0, t1, cx, cy, s=90):
     cmd = ['ffmpeg', '-v', 'error', '-ss', f'{t0:.3f}', '-i', f'ep18_part{P}.mp4', '-t', f'{t1 - t0:.3f}', '-vf', f'crop={2*s}:{2*s}:{cx-s}:{cy-s},format=gray', '-f', 'rawvideo', '-']
     raw = subprocess.run(cmd, capture_output=True).stdout; n = len(raw) // (4 * s * s); return np.frombuffer(raw[:n * 4 * s * s], np.uint8).reshape(n, 2 * s, 2 * s).astype(float)

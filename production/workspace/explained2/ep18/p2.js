@@ -139,7 +139,7 @@ SC.closure = (t, s) => { window._BUBAT = { momo: [960, 230] }; const tl = MK("la
     + bd("basil", 1400, 1000, 380, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [tp + .1, "cheer"], [tp + 2.3, "sit"]] })
     + bd("pip", 1720, 1076, 500, t, { in: s.t0 + .2, flip: true }) + melt(t, s, "mark2", .4) + HUD(t); };
 SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 50, x: 620, y0: 260, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1180, ty: 520, sayX: 620, sayY: 600,
-  board: (tt, flash) => TF(1500, 560, .9, chantBoard18(tt, flash)) });
+  board: (tt, flash) => TF(1440, 650, .82, chantBoard18(tt, flash)) });
 
 /* 12 · score hand, the honeybee (lizReveal onto a white flower of the lime plant: the REVEAL spot, never the intro ixora) and Pip's fun fact: a
    queen honeybee on her comb (ff_queen); the cells filling with eggs past 1000 in one day (ff_eggs). Basil points at the bee as it is ringed;
