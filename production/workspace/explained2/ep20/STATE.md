@@ -135,4 +135,4 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   the toolbox), `sets20.js` (the science room SR20 on baked `bg/sci20.png`, THE POLES BOARD `poles20`, the HDB kitchen KT20 on baked
   `bg/kit20.png`, WHICH POLES FACE? `fridgeCard20`, the hidden animals' spots SPAT / LZAT), `lc20.js` (the look-closers, the journeys, the
   pictures). page.html loads them after ep19dare.js. Re-bake with `node bake.js sci20 kit20` after a change to BG.sci20 / BG.kit20.
-- Part 1 drawn (p1.js); sweep 0 bad. Part 2: next.
+- Part 1 and Part 2 drawn (p1.js, p2.js); sweeps 0 bad. Next: sound (sound_cues.js Stage 2 block), QA, renders.

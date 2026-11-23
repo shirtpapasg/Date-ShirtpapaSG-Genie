@@ -5,97 +5,176 @@
 // homework: attracted, so a magnet?), is it a magnet? (Dad's two grey bars: THE REPEL TEST; Mark Sentence 6.13), the chant, the lizard, the
 // dare into EP21 (a bar magnet hanging on a string, spun: where does it stop?).
 // Segments 1-14 of ../p3_ep20_script.md section 5 (version 1, 23 Nov 2026).
-// STAGE 1 (setup): shared routines WIRED (the calm 3-picture recap frame, the game as ONE smooth push-in onto the lizard, Pip's goal cards,
-// Round 1's lock-in with THREE numbered cards, the look-closer frames (lcPH), both Mark Sentences, the Showdown card, the chant, the score
-// hand, the lizard's reveal with its fun-fact panel, the dare's two cards, the read-along, "Now you know!", the fridge card's placeholder
-// (tests.js fridgeCardPH: its boxes fill on their marks, the rule at `rule`, the note card at `note`)); every scene with new art is a phScene
-// placeholder. STAGE 2 draws them (SCENES_TODO.md: the full staging per scene and per line).
+// STAGE 2 (drawn 2026-11-23): Pip's HDB flat that evening (sets20.js KT20: the kitchen with the dusk window, the laundry poles, the curtain
+// rail, the plant, the sink, the ceiling light, the fridge with WHICH POLES FACE? (it fills on ns, sn, nn, ss; the rule at `rule`; the note
+// at `note`), the small table; through the doorway the living room: the clock, the TV cabinet, the toy box, the wooden track). The buddies
+// stand IN the scene, big; the camera drifts or pushes in and never cuts inside the flat; the wrong buddy stays shy and the right ones
+// confident through every fix (lib.js OUTCOMES `to`). Every action is drawn AT its mark.
 if (PART === 2) { (() => {
 const L1 = "n401";
 // the scores (script section 3): Round 1 1 : 1 (Momo and Pip right: the Buddies score), Showdown 3 : 1 (built on Pip's mistake: no point)
 SCORE.push([MK("coin1") - .1, 1, 1]);
 SCORE.push([MK("coin2") - .1, 3, 1]);
 const FOOT = "P3 · Interactions · Properties of Magnets";
-const ph = (title, ...notes) => (t, s) => phScene(t, s, title, notes.concat(["Full staging: SCENES_TODO.md."])) + HUD(t);
 const R1 = ["They still push apart", "They pull together", "Nothing happens"];
-const fridge = (t, k = .5, x = 1500, y = 600) => fridgeCardPH(t, x, y, k);
+const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
+// the table's props (world): Pip's pencil with the rings (PEN2), Basil's toy train (TRAIN), two bar magnets (MAGS), Dad's bars (BARS)
+const PEN2 = [360, 846], TRAIN = [700, 840], MAGS = [[640, 826], [840, 826]], BARS = [[600, 822], [800, 822]];
+const ringsT = (t, o = {}) => TF(PEN2[0], PEN2[1], .42, rings20(t, o));
+const trainOn = (t, x = TRAIN[0], y = TRAIN[1], k = .5) => TF(x, y, k, trainToy(t));
+const camKit = camOn([960, 520], 1.06, 960, 540);
+window.SHELF_AWAY = (t) => { if (PART !== 2) return 0; const w = SCN.waitw; return ss(w.t0 + .3, w.t0 + .8, t) * (1 - ss(SCN.pullout.t1, SCN.pullout.t1 + .4, t)); };
 
-/* 1 · "Last time...": three pictures from Part 1, one at a time, centred and large, a gentle push-in, one label each (>= 2.5 s each). WIRED frame */
-SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i = t >= tb[2] ? 2 : t >= tb[1] ? 1 : 0, labs = ["Two poles: the strongest pull", "The top ring floats on a push", "Turn it over, and it pulls"],
-    draws = ["the bar magnet lifted from the clips, bunches at both ends, two gold stars", "the floating ring, magenta arrows in the gap", "the ring turned over and snapped down, a green chip"], u = t - tb[i], z = 1 + .05 * eio(u / 4), k = ramp(t, tb[i], .5);
+/* 1 · "Last time...": three pictures from Part 1, one at a time, centred and large, a gentle push-in, one label each (>= 2.5 s each) */
+SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i = t >= tb[2] ? 2 : t >= tb[1] ? 1 : 0, labs = ["Two poles: the strongest pull", "The top ring floats on a push", "Turn it over, and it pulls"], u = t - tb[i], z = 1 + .05 * eio(u / 4), k = ramp(t, tb[i], .5);
   return bg("stage2") + OP(ramp(t, s.t0, .3), T(960, 110, "Last time…", 60, "#fff", { w: 600 }))
-    + OP(k, TF(960, 540, z, `<g filter="url(#drop)"><rect x="-520" y="-300" width="1040" height="600" rx="36" fill="url(#gPaper)"/></g>` + (i === 1 ? TF(0, 220, .6, pencilRings(t)) : T(0, 0, "(Stage 2: " + draws[i] + ")", 32, P.ink, { w: 500 }))))
+    + OP(k, TF(960, 520, z, `<g filter="url(#drop)"><rect x="-534" y="-314" width="1068" height="628" rx="40" fill="#FFF8EA"/></g><clipPath id="rcP"><rect x="-520" y="-300" width="1040" height="600" rx="30"/></clipPath><g clip-path="url(#rcP)">${recapP2(i, t)}</g>`))
     + OP(k, TF(960, 930, spring(t, tb[i] + .1, .4), tpill(0, 0, labs[i], 46, P.sun, P.ink, { w: 700 }))) + HUD(t); };
-SC.kitchen = ph("2 · Pip's HDB kitchen, that evening: Basil's toy train", "PIP'S HDB FLAT that evening: the KITCHEN (a white fridge with the cream card WHICH POLES FACE? on its door at its HOME (right, about 40% of the frame high), held by four round whiteboard magnets, its four boxes empty; a ceiling light on; the window open with laundry poles and the next HDB block; a potted plant on the sill, every leaf on a stem; a small table with Pip's pencil and rings) and, through the doorway, the LIVING ROOM (a wooden toy train track on the floor, a wall clock, a TV cabinet, a toy box). MK train: Basil comes in from the living room holding up a wooden toy train: an engine and a carriage, joined (showing it: no pose swap). Location pill: Pip's home, an HDB flat, Singapore · evening. Basil big at the left (h ~480); Pip big at the right by the fridge (h ~500); Momo mid-ground. A slow drift from the fridge card to Basil's train. The lizard on the kitchen wall beside the ceiling light (the intro spot: the game pushes in here; never used again).");
-const kitchen0 = SC.kitchen; SC.kitchen = (t, s) => kitchen0(t, s) + fridge(t, .45, 1560, 640);
-SC.game = (t, s) => gameScene(t, s, ["n202", "n203m", "n204"], false, { world: (tt) => kitchenPH(tt), A: LIZARD, T: [680, 440], Z: 2.6, ly: -150, qx: 1730, qy: 430 }) + smallPrint(t, LT("n204"), LOOK_RULE);
+/* 2 · Pip's HDB kitchen, that evening: the fridge card at its HOME on the fridge door; Basil's wooden toy train (an engine and a carriage,
+   joined) slides in low along the table on `train`. The lizard on the kitchen wall beside the ceiling light (the intro spot) */
+const trainIn = (t) => { const a = MK("train"), u = eio(clamp((t - a + .5) / .6)); return trainOn(t, lerp(TRAIN[0] - 520, TRAIN[0], u)) + (u > 0 && u < 1 ? dust(lerp(TRAIN[0] - 520, TRAIN[0], u) - 140, TRAIN[1], (t * 3) % 1, .6) : ""); };
+const kitBuds = (t, t0, o = {}) => bd("basil", 250, 1076, 480, t, { in: t0, poses: [[t0, "sit"]], look: 3, out: o.out }) + bd("momo", 1110, 1010, 400, t, { in: t0 + .1, flip: true, poses: [[t0, "sit"]], out: o.out })
+  + bd("pip", 1710, 1076, 500, t, { in: t0 + .05, flip: true, poses: [[t0, "sit"]], out: o.out });
+SC.kitchen = (t, s) => KT20(t, { tableTop: ringsT(t) + trainIn(t) }, camKit) + kitBuds(t, s.t0 - .5, { out: s.t1 - .25 }) + OP(ramp(t, s.t0 + .1, .3), lowerPill(60, 96, "Pip's home, an HDB flat, Singapore ·", "evening")) + melt(t, s, "lasttime", .45) + HUD(t);
+SC.game = (t, s) => { const p = LZAT.intro;
+  return gameScene(t, s, ["n202", "n203m", "n204"], false, { world: (tt) => KT20(tt, { tableTop: ringsT(tt) + trainOn(tt) }, camKit), A: camPt(camKit, [p[0], p[1]]), T: [680, 440], Z: 2.6, dim0: 0 }) + smallPrint(t, LT("n204"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Unlike and like poles", ""], ["Why the ring floats", ""], ["Is it a magnet?", ""]], ["n301", "n302", "n303", "n304"], "pip");
 
-/* 4 · Round 1: two magnets push apart; Basil turns one round. THREE big numbered picture cards; the clue labels they push apart · turn one
-   round ON TOP of the ring; the ring's picture: two bar magnets on round pencils pushed apart, a curved turn arrow over the right one
-   (ringPH). Basil leads (worried through the countdown) */
+/* 4 · Round 1: two magnets push apart; Basil turns one round. THREE big numbered picture cards (they still push apart · they pull together ·
+   nothing happens); the clue labels they push apart · turn one round ON TOP of the ring; in the ring two bar magnets on round pencils pushed
+   apart, a curved turn arrow over the right one. Basil leads (thinking, then worried); Pip's line is cut: his number card is shown fixed */
 SC.r1 = (t, s) => lockN(t, { t0: W(L1, "what") - .35, cards: R1, clues: [["they push apart", W(L1, "push")], ["turn one round", W(L1, "turns")]], csize: 36, lead: "basil",
-  pics: ["two bar magnets with a gap, magenta arrows apart", "the two magnets meeting, green arrows", "the two magnets still, a small zzz"].map((x) => T(0, 108, "(" + x + ")", 24, P.ink, { w: 500 })), q: "What happens?", tq: W(L1, "what") - .1,
-  tc: [W(L1, "one"), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "n402", obj: ringPH("two bar magnets on round pencils, pushed apart; a turn arrow over the right one"),
+  pics: [0, 1, 2].map((i) => r1Pic(i, t)), q: "What happens?", tq: W(L1, "what") - .1,
+  tc: [W(L1, "one"), W(L1, "two"), W(L1, "three")], ring0: MK("ring0_r1"), dur: 5, lock: "n402", obj: ringP2,
   picks: [{ who: "momo", id: "n403m", word: "2" }, (HAS("n404p") ? { who: "pip", id: "n404p", word: "2" } : { who: "pip", fixed: true, word: "2" }), { who: "basil", id: "n405b", word: "1" }] });
 
-/* 5 · BE A TOY TRAIN CARRIAGE (the journey; the buddies ride along on the open wagon behind you: common.js riders). Tags WIRED */
-SC.waitw = ph("5 · Be a toy train carriage! (the glide to the track)", "Pill Be a toy train carriage! The camera glides from the kitchen through the doorway to the wooden track on the living-room floor. The buddies wave the viewer off (goodbye), then shrink (a pop each) and follow. The shelf slides aside. The lizard on the living room's wall clock as the camera passes (new spot).");
-SC.shrink = (t, s) => phScene(t, s, "5 · BE A TOY TRAIN CARRIAGE (first person, present tense)", ["MK jtrack: YOU are a wooden toy carriage (your own front edge with a small round magnet in it at the bottom of the frame). The wooden track is a wide road; MK jengine: the engine ahead is a big red wooden engine, its back magnet a round disc (tag to scale: a toy carriage). MK jroll / jaway / jnever: you roll closer; MAGENTA push arrows grow between your front and the engine's back; the engine rolls away down the track; you never touch it (tag no touching; the gap stays). MK jturn: a giant paw (Basil's, big and soft) lifts you, turns you round IN HIS PAW (held, never floating) and sets you back on the track; your other end, a different small magnet, faces the engine. MK jclick: roll closer: GREEN pull arrows; whoosh, CLICK: you are joined. MK jsame: a small side-by-side: same carriage · same engine · only the end facing it changed.",
-  "The three buddies ride along, shrunk (h ~170), on the open wagon behind you at the lower edges (riders). Calm pad, Heart soft. The camera IS the carriage: a roll, a chase, a lift and turn, a click; never a cut. Full staging: SCENES_TODO.md."])
-  + youTag(t, MK("jtrack"), "You: a toy train carriage") + feelTag(t, MK("jengine"), MK("jroll") - .2, "to scale: a toy carriage", 160) + feelTag(t, MK("jnever"), MK("jturn") - .2, "no touching", 160)
-  + ppChip(t, MK("jaway") + .3, 960, 560, 1, "push") + ppChip(t, MK("jclick") + .3, 960, 560, 0, "pull")
-  + (t >= MK("jsame") ? [["same carriage", 560], ["same engine", 960], ["only the end facing it changed", 1360]].map(([w, x], i) => TF(x, 820, spring(t, MK("jsame") + .3 * i, .45), tpill(0, 0, w, 30, "#fff", P.ink, { w: 600 }))).join("") : "")
-  + riders(t, s, { tin: MK("jtrack") + .6, h: 200, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] } });
-SC.pullout = ph("5 · Pull back out to the living room", "Whoosh back out to the living room (0.6 s): Basil's paws holding the carriage joined to the engine. The buddies pop back (a hop each).");
+/* 5 · Be a toy train carriage! One glide from the kitchen through the doorway to the wooden track on the living-room floor; the buddies wave
+   the viewer off (goodbye) and shrink (a pop each). The lizard on the living room's wall clock as the camera passes */
+const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camKit, camOn([900, 728], 6, 960, 640), u * u); };
+SC.waitw = (t, s) => { const L = "n501", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1110, 1710][i]; return bd(w, x, [1076, 1010, 1076][i], [470, 390, 490][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  return KT20(t, { tableTop: ringsT(t) + trainOn(t), items: TF(900, 724, .16, trainToy(t)) }, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a toy train carriage!", 72, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#C08A54", 960, 600); };
+SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jaway") + .1, "surprised"], [m("jaway") + 2.3, "sit"]] };
+  return trainJourney(t, s) + riders(t, s, { tin: m("jtrack") + .6, h: 190, at: { pip: [200, 1044], basil: [1720, 1050], momo: [390, 1040] }, poses: rp })
+    + youTag(t, MK("jtrack"), "You: a toy train carriage") + feelTag(t, MK("jengine"), MK("jroll") - .2, "to scale: a toy carriage", 160) + feelTag(t, MK("jnever"), MK("jturn") - .2, "no touching", 160)
+    + (t >= MK("jaway") + .3 && t < MK("jturn") ? TF(1420, 520, spring(t, MK("jaway") + .3, .45), tpill(0, 0, "push", 44, PUSHC, "#fff", { w: 700 })) : "") + (t >= MK("jclick") + .3 ? TF(1420, 520, spring(t, MK("jclick") + .3, .45), tpill(0, 0, "pull", 44, PULLC, "#fff", { w: 700 })) : "")
+    + (t >= MK("jsame") ? [["same carriage", 520], ["same engine", 960], ["only the end facing it changed", 1400]].map(([w, x], i) => TF(x, 800, spring(t, MK("jsame") + .3 * i, .45), tpill(0, 0, w, 32, "#fff", P.ink, { w: 700 }))).join("") : ""); };
+// the pull back out: the kitchen; through the doorway, the carriage joined to the engine on the track
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
+  return KT20(t, { tableTop: ringsT(t), items: TF(900, 724, .16, trainToy(t)) }, camMix(camOn([960, 600], 1.12, 960, 580), camOn([900, 728], 5, 960, 640), u))
+    + bd("momo", 250, 1076, 500, t, { in: s.t0 + .2 }) + bd("basil", 1110, 1010, 420, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1710, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
-/* 6 · the answer: two, they pull together. The three cards small along the top: card 2 glows at ansglow (WIRED), an x chip on card 1 */
-SC.r1ans = (t, s) => ph("6 · The answer is two: they pull together", "The kitchen doorway, the fridge card at its HOME on the right. The three numbered cards small along the top (wired): card 2 glows (ansglow), an x chip on card 1 and by Basil; the coins YOU +1 and BUDDIES +1 (two of three were right). Momo big at the left (h ~500) and Pip big at the right by the fridge (h ~500): arms crossed (right, OUTCOMES, to the end of the scene); Basil mid-ground centre (h ~420) with the train: oops (wrong), shy to the end of the scene. Gentle push to card 2, back. The lizard on the kitchen window frame, by the laundry poles (new spot).")(t, s)
-  + R1.map((c, i) => TF(640 + i * 320, 170, .3, ansCard(i + 1, c, { w: 430, h: 290, size: 40, lit: i === 1 && t >= MK("ansglow") ? 1 : 0 }))).join("") + tagAt(t, MK("ansglow") + .3, 640, 270, 1, "not this one", 26) + fridge(t, .45, 1560, 660);
+/* 6 · the answer is two: they pull together. The three cards small at the top left (card 2 lit at ansglow; "not this one" on card 1); the
+   coins YOU +1 and BUDDIES +1. Momo and Pip (right) confident, Basil (wrong) shy to the END of the scene (OUTCOMES `to`). The lizard on the
+   kitchen window frame, by the laundry poles */
+const camAns2 = camOn([960, 600], 1.12, 960, 580);
+SC.r1ans = (t, s) => { const tA = MK("ansglow");
+  return KT20(t, { tableTop: ringsT(t), items: TF(900, 724, .16, trainToy(t)) }, camAns2)
+    + `<g filter="url(#drop)"><rect x="30" y="40" width="640" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + R1.map((c, i) => TF(150 + i * 200, 135, .42, choiceCard3(i + 1, c, r1Pic(i, t), { w: 400, h: 330, size: 34, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0, id: "ra" + i }))).join("")
+    + tagAt(t, tA + .3, 150, 222, 1, "not this one", 22)
+    + coin(t, MK("coin1") - .1, 960, 330, "+1", "if you showed two fingers")
+    + bd("momo", 250, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("momo", 420, 640, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .2, 470, 585, .7)
+    + bd("basil", 1110, 1010, 420, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("basil", 980, 700, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .25, 1030, 645, .7)
+    + bd("pip", 1710, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1870, 640, t, s.t0 + .4, "2") : "") + tickChip16(t, tA + .3, 1850, 580, .7)
+    + melt(t, s, "pullout", .3) + HUD(t); };
 
-/* 7 · Momo's guess (two North poles?), then [LOOK CLOSER] like and unlike poles: the fridge card FILLS the panel, each box with its own pair
-   of magnets (ns, sn: ATTRACT green; nn, ss: REPEL magenta); UNLIKE POLES and LIKE POLES pop (lib.js o.at); the rings' payoff (rings, floats;
-   flipr, snap); Mark Sentence 1 (Pip, 6.14), and the rule written across the real fridge card (rule: the reveal) */
-SC.fridge = ph("7 · \"They must both be North poles!\" (Momo at the fridge)", "The kitchen: the fridge with WHICH POLES FACE? at its HOME (right); two red-and-blue bar magnets on the small table, Pip's rings beside them. Momo big at the left (h ~500) by the table (talking, sure of herself; then thinking AFTER her line: \"Right?\" is a real question); Basil big at the right (h ~480) by the fridge; Pip mid-ground. Push in on the card's four empty boxes. The lizard on top of the fridge's side, near the back (new spot).");
-const fridge0 = SC.fridge; SC.fridge = (t, s) => fridge0(t, s) + fridge(t, .45, 1560, 640);
-SC.lclike = (t, s) => lcPH(t, s, { title: "Like and unlike poles: WHICH POLES FACE?", v: "v_like", verdict: [`UNLIKE ATTRACT · LIKE REPEL`, GOODC], fx: 1500, fy: 600,
-  beats: [["ns", "a North pole (red, N) meets a South pole (blue, S): they pull together, click; box 1 fills ATTRACT (green)"], ["sn", "the same the other way round: box 2 ATTRACT (green)"], ["kw_unlike_poles", "UNLIKE POLES pops, a line to the two green boxes"], ["nn", "North meets North: they push apart, the gap stays; box 3 REPEL (magenta)"], ["ss", "South meets South: they push apart too; box 4 REPEL (magenta)"], ["kw_like_poles", "LIKE POLES pops, a line to the two magenta boxes"], ["rings", "Pip's two rings on the pencil, BIG: the top ring's underside N, the bottom ring's top face N (magenta: like poles: repel)"], ["floats", "it floats"], ["flipr", "the top ring is turned over (a curved arrow): its underside now S over the N below"], ["snap", "green: unlike poles: attract, it snaps down, click"], ["v_like", "verdict"]],
-  notes: ["The WHICH POLES FACE? card FILLS about two thirds of the panel (left), each box with its own pair of real bar magnets beside it (right) and its own push-in; the rings' beat labels the facing faces (in our picture: North and North). Old labels fade out COMPLETELY when the picture changes.",
-    "A buddy's FACE peeks in from a lower corner: Momo first (thinking: her idea is tested; OOPS at \"South pole to South pole... too!\" and SHY to the verdict, a small nod at the verdict: the 23 Nov rule), Pip (teaching UNLIKE POLES; cheer: his first this part), Basil (teaching LIKE POLES; cheer: his Round 1 miss is over, this is new), Basil's face pointing at the gap in the rings beat, Momo's face surprised at the click (the answer to EP19's dare)."],
-  over: (tt) => fridgeCardPH(tt, 1500, 1000, .3) });
-SC.mark1 = (t, s) => markScene(t, s, { id: "n712", sayId: "n711", who: "pip", n: "1 of 2", text: "Unlike poles attract and like poles repel.", keys: ["Unlike", "attract", "like", "repel"], size: 76, y: 260, footer: FOOT, achieved: true, under: fridgeCardPH(t, 1300, 860, .32) });
+/* 7 · Momo at the table: "When two magnets push apart, they must both be North poles. Right?" Two red-and-blue bar magnets on the table,
+   Pip's rings beside them; the camera pushes in on the card's four empty boxes (straight into the look-closer). Momo talks, then thinks (a real
+   question). The lizard on top of the fridge's side */
+const camFr = (t) => { const s = SCN.fridge, u = eio((t - s.t0 - .6) / (s.t1 - s.t0 - .6)); return camMix(camAns2, camOn([1440, 455], 1.75, 1120, 520), u); };
+const frWorld = (t, cam) => KT20(t, { tableTop: ringsT(t) + MAGS.map(([x, y]) => TF(x, y - 20, .4, bar20(t))).join("") }, cam);
+SC.fridge = (t, s) => frWorld(t, camFr(t))
+  + bd("momo", 250, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("n701m") + .1, "thinking"]], look: 3 })
+  + bd("pip", 560, 1010, 370, t, { in: s.t0 + .15 }) + bd("basil", 1720, 1076, 480, t, { in: s.t0 + .2, flip: true }) + HUD(t);
+/* [LOOK CLOSER] like and unlike poles (lc20.js lcLikeArt). Faces: Momo at the right the whole time (her idea, two North poles, is tested:
+   thinking; oops ON `sstoo`, and she stays shy to the end, also through the snap's close-up: the 23 Nov rule); at the left Pip (teaching
+   UNLIKE POLES; cheer after his line: achieved), then Basil (teaching LIKE POLES; cheer after his line: achieved; pointing at the gap ON
+   `rings`) */
+const peekFace = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
+  return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved }); };
+SC.lclike = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camFr(SCN.fridge.t1), p = camPt(cE, [1440, 455]), tm = s.t0 + 1.2, tp = LT("n703p") - .5, tb = LT("n707b") - .5, tRg = MK("rings"), tSn = MK("snap");
+  return JOLT(t, [tSn], lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcLikeArt, bgc: "#FFF8EA", set: (tt) => frWorld(tt, cE), verdict: [`UNLIKE ATTRACT · LIKE REPEL`, GOODC], tv: MK("v_like"), peek: false,
+    over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [MK("sstoo") + .1, "oops"]])
+      + peekFace("pip", "l", tt, tp, tb - .4, [[LE("n703p") + .1, "cheer"], [LE("n703p") + 2.1, "sit"]], { achieved: true })
+      + peekFace("basil", "l", tt, tb, undefined, [[LE("n707b") + .1, "cheer"], [LE("n707b") + 2.1, "sit"], [tRg + .1, "pointing"], [tRg + 2.6, "sit"]], { achieved: true }) }), 20)
+    + faceCam("momo", t, tSn + .05, tSn + 1.9, 1600, 330, 150, [[tSn, "oops"]], { noreact: true }); };
+SC.mark1 = (t, s) => markScene(t, s, { id: "n712", sayId: "n711", who: "pip", n: "1 of 2", text: "Unlike poles attract and like poles repel.", keys: ["Unlike", "attract", "like", "repel"], size: 76, y: 260, footer: FOOT, achieved: true,
+  under: fridgeCardAt(t, 1460, 800, .72 * spring(t, s.t0 + .4, .5), { id: "mk" }) });
 
-/* 8 · Showdown: Pip's homework, My magnet test (Stage 2: model ../ep16/p2.js SC.show / SC.fix and ../ep19's Showdown: the ring big and central
-   with the three line numbers as the choice cards, the lines lit as he reads them (l1..l3), line 3 struck (strike) and rewritten in green
-   (rewrite); a big ? lands by the nail (qnail)) */
-SC.show = ph("8 · Showdown: Pip's homework, My magnet test", "Pip's homework sheet on a small easel by the fridge, LARGE, titled My magnet test, three ruled lines, each with a small drawing: 1 The North pole of my magnet attracted the South pole of Momo's magnet. Unlike poles attract. (N meeting S, green arrows) · 2 Two South poles pushed each other away. Like poles repel. (S facing S, magenta arrows) · 3 My magnet attracted the iron nail, so the iron nail is a magnet. (a nail on the end of a magnet). The lines light as Pip reads them (MK l1, l2, l3). The YOU ring (5 s) big and central with the three line numbers as the ONE set of numbered cards; only Pip at the side. LOCKED IN!; Basil reveals (arms crossed after his line: right; Momo arms crossed: right; Pip oops: wrong, SHY through the strike, the rewrite and the coin). The lizard on the curtain rail above the kitchen window (new spot; never in the countdown).");
-SC.fix = ph("8 · The fix", "MK strike: line 3 struck through (kept, as a strike-through); MK rewrite: rewritten below it in green My magnet attracted the iron nail. That does not prove that it is a magnet.; MK qnail: a big ? lands by the nail (the question for the look-closer). The coin +2 (coin2). Pip big at the left by his easel: still OOPS (shy) at the green rewrite; Basil and Momo at the right: still arms crossed. Push in on line 3, then the rewrite, back. The lizard on the curtain rail (as show: the same scene's spot continues).");
+/* 8 · Showdown: Pip's homework on a small easel by the fridge (lc20.js pipSheet, drawn to match what he SAYS). The lines light as he reads
+   them (l1, l2, l3). The YOU ring (5 s) big on the blue stage, the sheet big beside it; only Pip at the side (worried). LOCKED IN!; Basil
+   reveals (OUTCOMES at n804b: Basil and Momo confident, Pip shy, through the whole fix). The lizard on the curtain rail above the window */
+const EAS = [1060, 1090, .55];
+const hwLit = (t) => { const ms = [MK("l1"), MK("l2"), MK("l3"), LE("n802p") + .2]; return [0, 1, 2].map((i) => ss(ms[i] - .1, ms[i] + .3, t) * (1 - ss(ms[i + 1] - .2, ms[i + 1] + .2, t))); };
+const camShow = (t) => { const e = eio((t - LT("n802p") + .6) / 1.2) * (1 - eio((t - MK("ring0_show") + 1) / .8)); return camMix(camOn([960, 560], 1.06, 960, 540), camOn([EAS[0], EAS[1] - 270], 1.75, 1000, 560), e); };
+const showWorld = (t, cam, o = {}) => { const r0 = MK("ring0_show"), bell = MK("bell_show"), lz = o.lizard !== undefined ? o.lizard : (t < r0 - 1 || t > bell + 1 ? LZAT.show : false);
+  return KT20(t, { lizard: lz, tableTop: ringsT(t) + MAGS.map(([x, y]) => TF(x, y - 20, .4, bar20(t))).join(""), front: TF(EAS[0], EAS[1], EAS[2], pipSheet(t, o.sheet || { lit: hwLit(t) })) }, cam); };
+SC.show = (t, s) => { window._BUBAT = { basil: [1500, 230], momo: [1330, 250], pip: [700, 300] }; const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 5), tS = LT("n803") - .08, inT = t >= r0 && t < bell, R = [1440, 430], RR = 200;
+  const st = ss(r0 - .6, r0 - .1, t) * (1 - ss(bell + .6, bell + 1.1, t)), bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 0, nf = inT ? (Math.floor(t - r0) % 3) + 1 : 3, tB = LT("n804b");
+  return showWorld(t, camShow(t)) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".06"/>` + OP(st, bg("stage"))
+    + (st > .01 ? OP(st, TF(620, 1110, .9, pipSheet(t, { lit: [0, 0, 0] })) + TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
+      inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/>` + TF(R[0], R[1] + 30 + bob * .3, .75, `<g filter="url(#dropS)">${countHand(nf)}</g>`) })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 48, P.ink, "#fff", { w: 700 }))) : "")
+    + bd("pip", 210, 1076, 480, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "sit"], [W("n801", "pips") + .2, "pointing"], [LT("n802p") - .3, "sit"], [r0 - .3, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 26]] })
+    + bd("momo", 1450, 1020, 380, t, { in: bell + .4, flip: true, poses: [[bell + .4, "sit"]] }) + (t > bell + .6 ? pickNum("momo", 1330, 700, t, tB - .1, "3") : "")
+    + bd("basil", 1720, 1076, 480, t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"]] }) + (t > bell + .5 ? pickNum("basil", 1580, 640, t, tB - .1, "3") : "")
+    + stamp(t, tS, 960, 460) + bellIcon(t, r0) + melt(t, s, "showcard", .3) + HUD(t); };
+/* the fix: line 3 struck (strike) and rewritten in green (rewrite); a big ? by the nail (qnail: the question for the next look-closer); the coin
+   +2 (coin2). Pip shy through the whole fix; Basil and Momo confident. The lizard on top of the TV cabinet, through the doorway */
+SC.fix = (t, s) => { window._BUBAT = { '*': [1330, 250] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), q = t >= MK("qnail") ? spring(t, MK("qnail"), .45) : 0;
+  const cam = camMix(camOn([EAS[0], EAS[1] - 250], 1.6, 960, 560), camOn([1000, 600], 1.12, 960, 580), eio(clamp((t - MK("coin2") + .4) / 1.2)));
+  return showWorld(t, cam, { lizard: LZAT.fix, sheet: { strike: st, fix: fx, lit: [0, 0, 0], q } })
+    + coin(t, MK("coin2") - .1, 1560, 330, "+2", "line 3")
+    + bd("pip", 210, 1076, 480, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] }) + bd("momo", 1450, 1020, 380, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] }) + bd("basil", 1720, 1076, 480, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] }) + HUD(t); };
 
-/* 9 · Pip's question (how can I prove it?), then [LOOK CLOSER] Dad's two grey bars: both are attracted at both ends (pullall); the magnet
-   turned round (turn): one end of bar B pushes it away (push), bar A never (never); Basil sees it (bmagnet); THE REPEL TEST pops (lib.js
-   o.at); the note card under the fridge card (note); Mark Sentence 2 (Basil, 6.13) */
-SC.bars = ph("9 · \"How can I prove it is a magnet?\" (Pip and Dad's two grey bars)", "The kitchen: the small table; Dad's red TOOLBOX open on a chair; two plain, unpainted grey metal bars on the table, the same size and shape, with paper tags A and B; Basil's red-and-blue bar magnet beside them on round pencils. Pip big at the left (h ~500) by the bars (talking, still a little shy; thinking AFTER his line: his own real question); Momo big at the right (h ~500); Basil mid-ground with his magnet. Push in on the two bars. Small print: Ask an adult before you borrow things from the toolbox (wired). The lizard on the side of the toy box, seen through the living-room doorway (new spot).");
-const bars0 = SC.bars; SC.bars = (t, s) => bars0(t, s) + smallPrint(t, s.t0 + .4, TOOLBOX_RULE) + fridge(t, .4, 1600, 620);
-SC.lctest = (t, s) => lcPH(t, s, { title: "Is it a magnet? The repel test", v: "v_test", verdict: [`IT REPELS, SO IT IS A MAGNET`, GOODC], fx: 960, fy: 640,
-  beats: [["bars", "the two grey bars, BIG, side by side (left A, right B); Basil's red-and-blue magnet on its pencils below them"], ["pullall", "the magnet's red end to each end of A, then of B: all four ends pull it in (green arrows, a green pulled tag at each end); label both are attracted"], ["turn", "the magnet turned round (curved arrow): its blue end goes to each end"], ["push", "A's ends pull (green); B's first end pulls; B's other end PUSHES it away: it rolls back on its pencils, the gap stays (magenta, pushed away!)"], ["never", "bar A only ever pulls"], ["bmagnet", "a green tick and MAGNET on B; not a magnet on A"], ["kw_the_repel_test", "THE REPEL TEST pops"], ["note", "ease back: the note card Is it a magnet? Test: does it repel? under the fridge card"], ["v_test", "verdict"]],
-  notes: ["The magnet is moved LOW along the table to each end in turn (never flying). Bar B is a magnet with no paint; bar A is iron. Say the test the book's way; never 'only a magnet can be repelled'.",
-    "A buddy's FACE peeks in from a lower corner: Pip first (thinking: his question is answered; a small nod at the verdict, no cheer: his mistake was the Showdown's), Basil (surprised as bar B pushes his magnet away; then talking, pointing at bar B), Momo (teaching THE REPEL TEST, pointing at the magenta tag; cheer: her first this part)."],
-  over: (tt) => ppChip(tt, MKS("pullall") + .6, 1640, 230, 0, "pulled") + ppChip(tt, MKS("push") + .3, 1640, 300, 1, "pushed away!") });
-SC.mark2 = (t, s) => markScene(t, s, { id: "n908", sayId: "n907", who: "basil", n: "2 of 2", text: "A magnet can attract or repel another magnet. You can confirm that an object is a magnet if it repels another magnet.", keys: ["attract", "repel", "confirm", "repels"], size: 56, y: 240, footer: FOOT, achieved: true, poses: [[LE("n908") + .2, "cheer"], [LE("n908") + 2.0, "sit"]] });
-SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 50, x: 620, y0: 260, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1180, ty: 520, sayX: 620, sayY: 600,
-  board: (tt, flash) => TF(1460, 900, 1, `<rect x="-280" y="-230" width="560" height="420" rx="30" fill="#FFF8EA" stroke="${P.ink}" stroke-width="4"/>` + T(0, -40, "the fridge card (Stage 2)", 34, P.ink) + T(0, 6, "1 the two green boxes · 2 the two", 22, P.ink, { w: 500 }) + T(0, 36, "magenta boxes · 3 bar B pushing away", 22, P.ink, { w: 500 }) + T(0, 80, "(flash " + flash.map((f) => (f > .3 ? 1 : 0)).join("") + ")", 24, P.ink, { w: 500 })) });
+/* 9 · Pip: "Then how can I prove that something is a magnet?" Dad's red toolbox open on a chair; two plain grey bars (tags A and B) on the
+   table; Basil's red-and-blue magnet on its round pencils. Pip talks (still a little shy), then thinks (his own real question). The camera
+   pushes in on the bars (into the look-closer). The lizard on the side of the toy box, through the doorway */
+const chair20 = (x, y) => `<path d="M${x - 90} ${y} V${y - 150} M${x + 90} ${y} V${y - 150} M${x - 90} ${y - 150} V${y - 380}" stroke="#8A5A30" stroke-width="14" stroke-linecap="round"/><rect x="${x - 110}" y="${y - 170}" width="220" height="30" rx="8" fill="#B07A42" stroke="#7A5226" stroke-width="5"/><rect x="${x - 100}" y="${y - 380}" width="20" height="200" rx="6" fill="#B07A42"/>`;
+const barsWorld = (t, cam) => KT20(t, { items: chair20(120, 1000) + TF(120, 830, .7, toolbox20()), tableTop: ringsT(t) + BARS.map(([x, y], i) => TF(x, y, .5, greyBar(i ? "B" : "A"))).join("") + barOnPencils(t, 920, 800, .32, { glint: false }) }, cam);
+const camBars = (t) => { const s = SCN.bars, u = eio((t - s.t0 - .4) / (s.t1 - s.t0 - .4)); return camMix(camOn([900, 640], 1.15, 960, 580), camOn([720, 800], 1.9, 960, 620), u); };
+SC.bars = (t, s) => barsWorld(t, camBars(t))
+  + bd("pip", 250, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("n901p") + .1, "thinking"]], look: 3 })
+  + bd("basil", 1430, 1010, 400, t, { in: s.t0 + .15, flip: true }) + bd("momo", 1720, 1076, 500, t, { in: s.t0 + .2, flip: true }) + smallPrint(t, s.t0 + .4, TOOLBOX_RULE) + HUD(t);
+/* [LOOK CLOSER] is it a magnet? (lc20.js lcTestArt). Faces: Pip at the right the whole time (his question is answered: thinking; then
+   listening: his mistake was fixed in the Showdown, no cheer); at the left Basil (pointing at bar B ON `push`; then teaching "bar B is the
+   magnet"), then Momo (teaching THE REPEL TEST; cheer after her line: a key word learnt, achieved) */
+SC.lctest = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camBars(SCN.bars.t1), p = camPt(cE, [720, 800]), tm = s.t0 + 1.2, tPu = MK("push"), tmo = LT("n906m") - .5;
+  return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcTestArt, bgc: "#FFF8EA", set: (tt) => barsWorld(tt, cE), verdict: [`IT REPELS, SO IT IS A MAGNET`, GOODC], tv: MK("v_test"), peek: false,
+    over: (tt) => peekFace("pip", "r", tt, tm, undefined, [[tm + .2, "thinking"], [W("n903", "basils") - .2, "sit"]])
+      + peekFace("basil", "l", tt, tPu - 1.2, tmo - .3, [[tPu + .1, "pointing"], [tPu + 2.4, "sit"]]) + peekFace("momo", "l", tt, tmo, undefined, [[LE("n906m") + .1, "cheer"], [LE("n906m") + 2.1, "sit"]], { achieved: true }) }); };
+SC.mark2 = (t, s) => markScene(t, s, { id: "n908", sayId: "n907", who: "basil", n: "2 of 2", text: "A magnet can attract or repel another magnet. You can confirm that an object is a magnet if it repels another magnet.", keys: ["attract", "repel", "confirm", "repels"], size: 56, y: 240, footer: FOOT, achieved: true, poses: [[LE("n908") + .2, "cheer"], [LE("n908") + 2.0, "sit"]],
+  under: TF(1300, 930, .8 * spring(t, s.t0 + .4, .5), `<g filter="url(#dropS)"><rect x="-420" y="-120" width="840" height="240" rx="30" fill="#FFF8EA"/></g>` + TF(-120, 10, .9, greyBar("B")) + barOnPencils(t, 230, -10, .6, { glint: false }) + ppArrows(t, 75, -10, "push", 1, { gap: 10, len: 34, w: 14 }) + T(80, 96, "it repels: a magnet", 34, PUSHC)) });
+SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 46, x: 600, y0: 260, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1290, ty: 560, sayX: 620, sayY: 600,
+  board: (tt, flash) => TF(1700, 660, .7, chantBoard20(tt, flash)) });
 
 /* 11 · score hand, the lizard (lizReveal onto the lizard upside down on the ceiling above the fridge: the REVEAL spot, never the intro wall
-   by the light) and Momo's fun-fact panel: the lizard walking upside down on a ceiling (ff_ceiling), a magnifier on one toe pad, rows of
-   tiny hairs (ff_toe), two crossed-out icons, a glue tube and a magnet (ff_no) */
+   by the light) and Momo's fun fact: tiny hairs on a toe pad (ff_toe), walking upside down (ff_ceiling), no glue and no magnet (ff_no). Pip
+   points at the lizard as it is ringed, then is surprised ON ff_ceiling (a fun fact); Basil listens */
 SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
-SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1;
-  return lizReveal(t, s, L, kitchenPH(t, LIZARD_R), LIZARD_R[0], LIZARD_R[1], tq, "It was upside down on the ceiling!", -120, 160, 80, 2.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "n1104",
-    fact: { id: "n1103m", at: [1300, 560], w: 960, h: 420, items: FF([["ff_toe", "tiny hairs", "DRAW: a magnifier on one wide toe pad: rows of tiny hairs"], ["ff_ceiling", "upside down!", "DRAW: the lizard walking upside down on a ceiling, its toes on it"], ["ff_no", "no glue · no magnet", "DRAW: two small crossed-out icons, a glue tube and a magnet"]]) } }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
-/* 12 · the dare for Episode 21 (the kitchen, the fridge card complete: Basil ties a string round the middle of his bar magnet and holds it up
-   (string: it hangs level from his paw, never floating); Pip gives it a gentle spin (spin); the picture cuts to the cards BEFORE it stops; ONE
-   set of TWO big numbered cards slides in low (dareIn): 1 A different way every time · 2 The same way every time). No compass, no N-S line */
-SC.dare = (t, s) => phScene(t, s, "12 · The dare for Episode 21", ["The kitchen: the fridge card complete. MK string: Basil ties a string round the middle of his bar magnet and holds the string up: the magnet hangs level from his paw (never floating). MK spin: Pip gives it a gentle spin; it turns, slows... and the picture cuts to the cards BEFORE it stops (no answer shown). MK dareIn: TWO big numbered cards slide in low (wired placeholders: draw 1 A different way every time, three small hanging magnets pointing three different ways · 2 The same way every time, three small hanging magnets all pointing the same way); the banner NEXT · Where does it stop?, Lock in your answer!. No compass, no N-S line on the floor, no North or South written. Basil big at the left (h ~480) holding the string (a proud smile, no pose swap); Pip and Momo at the right (thinking ON \"Where does it stop?\": a question has just been asked; no hints). Not the lizard (revealed). Full staging: SCENES_TODO.md."])
-  + NEXT_CARDS.map((c, i) => { const t0 = MK("dareIn") + .5 + i * .25; return t < t0 ? "" : TF(780 + i * 360, 860, .42 * spring(t, t0, .45), ansCard(i + 1, c, { w: 430, h: 290, size: 40 })); }).join("") + HUD(t);
-SC.nyk = (t, s) => nykScene(t, s, fridgeCardPH(t, 960, 800, .5) + TF(1240, 1040, .3, pencilRings(t)), { bx: [220, 1720, 1400], hx: 470 });
+SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = LZAT.liz, tc = W(L, "lizard");
+  return lizReveal(t, s, L, KT20(t, { lizard: c, tableTop: ringsT(t) }), c[0], c[1] + 10, tq, "It was upside down on the ceiling!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
+    fact: { id: "n1103m", at: [1270, 400], w: 900, h: 440, items: [["ff_toe", "tiny hairs", ffToe20], ["ff_ceiling", "upside down!", ffCeil20], ["ff_no", "no glue · no magnet", ffNo20]], cols: ["#E8A23A", "#5B6BD6", "#D6402E"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("n1103m") - .3, "sit"], [MK("ff_ceiling") + .1, "surprised"], [MK("ff_ceiling") + 2.2, "sit"]] })
+    + bd("basil", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+
+/* 12 · the dare for Episode 21: the kitchen table, the fridge card complete. Basil has hung his bar magnet on a string (tied round its middle,
+   to a ruler laid across two piles of books): it hangs LEVEL (string). Pip gives it a gentle spin (spin): it turns, slows... and the cards slide
+   in BEFORE it stops (no answer shown). ONE set of TWO big numbered cards (dareIn); NEXT · Where does it stop?; Lock in your answer! No compass,
+   no N-S line, no North or South written anywhere. Basil a proud smile; Pip and Momo think on "Where does it stop?" (a question; no hints) */
+const HANG = [700, 560];
+const books = (x, y) => TF(x, y, 1, [["#E0453A", 0], ["#3A8DFF", 1], ["#43BF6C", 2], ["#FFC83A", 3]].map(([c, i]) => `<rect x="-60" y="${-26 - i * 26}" width="120" height="24" rx="4" fill="${c}" stroke="${P.ink}" stroke-width="3"/>`).join(""));
+const spinAng = (t) => { const a = MK("spin"); if (t < a) return 4 * Math.sin(t * 1.3); const u = t - a; return 400 * (1 - Math.exp(-u * .45)) + 16 * u; };   // it slows but never settles in this scene
+const dareWorld = (t, cam) => KT20(t, { tableTop: books(HANG[0] - 220, 836) + books(HANG[0] + 220, 836) + `<rect x="${HANG[0] - 290}" y="${836 - 116}" width="580" height="18" rx="6" fill="#E2B477" stroke="#9A6A34" stroke-width="4"/>`
+  + TF(HANG[0], 836 - 100, .55, hangingMagnet(t, spinAng(t))) + ringsT(t) }, cam);
+SC.dare = (t, s) => { const a = "n1201", tQ = MK("spinq") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1], tL = W(a, "lock") - .1, e2 = eio(clamp((t - MK("dareIn") - .2) / 1.4));
+  const cam = camMix(camOn([HANG[0], 760], 1.75, 960, 520), camOn([900, 640], 1.15, 960, 520), e2);
+  return dareWorld(t, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.3 * e2)}"/>`
+    + NEXT_CARDS.map((c, i) => { const t0 = MK("dareIn") + .5 + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, 600 + i * 400, 1020);
+      return d + TF(x, 850, 1, choiceCard3(i + 1, c, darePic20(i, t), { w: 420, h: 330, size: 32, pulse: pl, id: "dr" })); }).join("")
+    + (t >= tQ ? TF(1000, 150, spring(t, tQ, .45), tpill(0, 0, "NEXT · Where does it stop?", 52, P.ink, P.sun, { w: 700 })) : "")
+    + (t >= tL ? TF(1000, 1030, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
+    + bd("basil", 230, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] })
+    + bd("pip", 1560, 1060, 400, t, { flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [MK("spinq") + .2, "thinking"]], jump: [[MK("spin") - .2, 16]] })
+    + bd("momo", 1790, 1066, 400, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [MK("spinq") + .35, "thinking"]] }) + melt(t, s, "liz", .4) + HUD(t); };
+SC.nyk = (t, s) => nykScene(t, s, fridgeCardAt(t, 930, 690, .98, { id: "ny" }) + TF(1290, 1030, .3, rings20(t)), { bx: [230, 1730, 1500], hx: 430 });
 })(); }

@@ -140,3 +140,170 @@ const ffFar20 = (t, w, h) => { const u = clamp((t - MKS("ff_far")) / 1.4); let s
 const markPoles = (t, x, y, k) => TF(x, y, k, `<g filter="url(#dropS)"><rect x="-430" y="-150" width="860" height="300" rx="30" fill="#FFF8EA"/></g>` + TF(0, -30, 1.6, bar20(t, { glint: false })) + [-1, 1].map((sd) => clipChain(t, sd * 200, 4, 2, sd, .45) + clipChain(t, sd * 160, 4, 2, sd + 2, .45) + TF(sd * 330, -40, 1.2, star20())).join(""));
 const markPairs = (t, x, y, k) => TF(x, y, k, `<g filter="url(#dropS)"><rect x="-560" y="-130" width="1120" height="260" rx="30" fill="#FFF8EA"/></g>` + TF(-430, -10, .62, bar20(t, { glint: false })) + TF(-230, -10, .62, bar20(t, { glint: false })) + ppArrows(t, -330, -70, "pull", 1, { gap: 12, len: 40, w: 14 }) + T(-330, 100, "attract (pull)", 34, PULLC)
   + TF(220, -10, .62, bar20(t, { glint: false, flip: true })) + TF(440, -10, .62, bar20(t, { glint: false })) + ppArrows(t, 330, -70, "push", 1, { gap: 12, len: 40, w: 14 }) + T(330, 100, "repel (push)", 34, PUSHC));
+
+/* ================================================================ Part 2 ================================================================ */
+// the Part 2 recap's three pictures (1040 x 600, centred): the bar magnet lifted from the clips (bunches at both ends, two gold stars); the
+// floating ring (magenta arrows in the gap); the ring turned over and snapped down (a green chip)
+const recapP2 = (i, t) => { let s = `<rect x="-520" y="-300" width="1040" height="600" fill="${["#F2E8D6", "#FFF3DC", "#E6F6E8"][i]}"/>`;
+  if (i === 0) s += TF(0, -70, 2.2, bar20(t, { glint: false })) + [-1, 1].map((sd, j) => clipChain(t, sd * 260, -24, 3, j, .7) + clipChain(t, sd * 200, -24, 2, j + 2, .7) + TF(sd * 400, -90, 2, star20())).join("") + clipChain(t, 30, -24, 1, 3, .7);
+  else if (i === 1) s += TF(0, 290, .9, rings20(t, { glowTop: PUSHC, glowBot: PUSHC })) + ppArrows(t, 0, 290 + .9 * ringGapY(1), "push", 1, { dir: "v", gap: 12, len: 40, w: 16 }) + TF(260, 290 + .9 * ringGapY(1), 1, tpill(0, 0, "a push", 40, PUSHC, "#fff", { w: 700 }));
+  else s += TF(0, 290, .9, rings20(t, { gap: 0, topY: RG_BOT - 24, topSy: -1 })) + linkChip(t, -9, 300, 40, 90, 290 + .9 * (RG_BOT - 12), 0, "a pull: it snaps down", 40);
+  return s; };
+// Round 1's three card pictures (400 x 280) and the ring's picture: two bar magnets on round pencils, pushed apart; a curved turn arrow over the right one
+const r1Pic = (i, t) => { let s = `<rect x="-200" y="-140" width="400" height="280" fill="${["#FBE6F0", "#E6F6E8", "#EEF1F5"][i]}"/>`, K = .48, H = 150 * K;
+  if (i === 0) s += barOnPencils(t, -110, 0, K, { glint: false, flip: true }) + barOnPencils(t, 110, 0, K, { glint: false }) + ppArrows(t, 0, -20, "push", 1, { gap: 8, len: 30, w: 12 });
+  else if (i === 1) s += barOnPencils(t, -H, 0, K, { glint: false, flip: true }) + barOnPencils(t, H, 0, K, { glint: false, flip: true }) + ppArrows(t, 0, -56, "pull", 1, { gap: 8, len: 30, w: 12 });
+  else s += barOnPencils(t, -110, 0, K, { glint: false, flip: true }) + barOnPencils(t, 110, 0, K, { glint: false, flip: true }) + T(0, -60, "z z z", 40, "#8A949E");
+  return s; };
+const ringP2 = (t) => { const K = .62; return `<circle cx="430" cy="470" r="190" fill="#FFF8EA"/>` + barOnPencils(t, 330, 500, K, { glint: false, flip: true }) + barOnPencils(t, 530, 500, K, { glint: false })
+  + ppArrows(t, 430, 470, "push", 1, { gap: 6, len: 22, w: 10 }) + `<path d="M450 380 Q530 320 610 380" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round"/><path d="M585 352 L612 382 L576 392" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`; };
+
+// BE A TOY TRAIN CARRIAGE (P2 shrink): the camera IS the carriage, looking down the wooden track (a wide road). z: the engine's distance (in
+// carriage lengths; the ground at distance z is at y 430 + 650 / z). First the end of you with a RED (North) magnet faces the engine's red
+// (North) back magnet: a push, it rolls away untouched. Basil turns you round: your other end, with a BLUE (South) magnet, faces it: a pull, CLICK.
+function trainJourney(t, s) { const m = MK, tT = m("jtrack"), tE = m("jengine"), tR = m("jroll"), tA = m("jaway"), tN = m("jnever"), tTu = m("jturn"), tC = m("jclick"), tS = m("jsame");
+  const HZ = 430, gy = (z) => HZ + 650 / z;
+  let z; if (t < tR) z = 6; else if (t < tA) z = lerp(6, 2.3, eio((t - tR) / (tA - tR))); else if (t < tTu) z = lerp(2.3, 4.2, eo((t - tA) / 2.2)); else if (t < tC - 2.4) z = 4.2; else z = lerp(4.2, 1.45, ei(clamp((t - tC + 2.4) / 2.4)));
+  const turn = clamp((t - tTu) / 2.6), lift = Math.sin(Math.PI * turn), spinA = 360 * eio(turn), back = turn >= .5, roll = (t - s.t0) * 60 + (t > tA && t < tTu ? 0 : 0);
+  const myMag = back || t >= tTu + 1.3 ? SOUTHC : NORTHC, myL = myMag === NORTHC ? "N" : "S";
+  let w = `<rect width="1920" height="1080" fill="#F6D29C"/><rect x="0" y="0" width="1920" height="${HZ}" fill="#F2C88A"/>`
+    + `<rect x="120" y="${HZ - 300}" width="560" height="300" rx="20" fill="#8A5A30" opacity=".7" filter="url(#b10)"/><rect x="200" y="${HZ - 520}" width="400" height="230" rx="14" fill="#1E2030" opacity=".7" filter="url(#b10)"/>`
+    + `<rect x="1300" y="${HZ - 260}" width="420" height="260" rx="20" fill="#FF9838" opacity=".75" filter="url(#b10)"/><circle cx="960" cy="${HZ - 300}" r="90" fill="#FFFDF6" stroke="#8A5A30" stroke-width="12" opacity=".7" filter="url(#b4)"/>`
+    + `<rect x="0" y="${HZ}" width="1920" height="${1080 - HZ}" fill="#C08A54"/>` + [...Array(9)].map((_, i) => { const y = gy(8 / (i + 1)); return `<path d="M0 ${n2(y)} H1920" stroke="#A8743E" stroke-width="${n2(1 + i * .6)}"/>`; }).join("");
+  // the wooden track: a wide road with two grooves, converging to the horizon; its planks slide under you
+  const tw0 = 820; w += `<path d="M${960 - tw0} 1080 L${960 - 40} ${HZ} L${960 + 40} ${HZ} L${960 + tw0} 1080z" fill="#E2BA82" stroke="#A8743E" stroke-width="6"/>`
+    + [-.42, .42].map((f) => `<path d="M${n2(960 + f * tw0)} 1080 L${n2(960 + f * 40)} ${HZ}" stroke="#A8743E" stroke-width="14"/><path d="M${n2(960 + f * tw0 - 18)} 1080 L${n2(960 + f * 40 - 1)} ${HZ}" stroke="#8A5A30" stroke-width="5"/>`).join("");
+  for (let i = 0; i < 10; i++) { const zz = ((((i + 1) * .9 - roll / 120) % 9) + 9) % 9 + .9, y = gy(zz), hw = 40 + (tw0 - 40) * (y - HZ) / (1080 - HZ); w += `<path d="M${n2(960 - hw)} ${n2(y)} H${n2(960 + hw)}" stroke="#C99A5E" stroke-width="${n2(2 + 4 * (y - HZ) / 650)}" opacity=".7"/>`; }
+  // the engine ahead (its back, with its RED North magnet), at distance z
+  if (t >= tE - .2) { const k = 2.4 / z, y = gy(z), a = ramp(t, tE - .2, .4); w += OP(a, TF(960, y, k, `<ellipse cx="0" cy="6" rx="200" ry="20" fill="${P.ink}" opacity=".22"/><rect x="-180" y="-300" width="360" height="270" rx="26" fill="#E0453A" stroke="#8A2418" stroke-width="8"/><rect x="-120" y="-420" width="240" height="140" rx="20" fill="#E0453A" stroke="#8A2418" stroke-width="8"/><rect x="-80" y="-400" width="160" height="90" rx="12" fill="#BFE6FF" stroke="#8A2418" stroke-width="6"/>`
+      + wheel20(-120, -30, 50, t, t * 3) + wheel20(120, -30, 50, t, t * 3) + `<path d="M-180 -120 H180" stroke="#C9A06A" stroke-width="16"/><circle cx="0" cy="-170" r="54" fill="${NORTHC}" stroke="${P.ink}" stroke-width="8"/>` + T(0, -150, "N", 60, "#fff")));
+    if (t >= tE + .3 && t < tR + .8) w += TF(960 + 220 * k + 140, y - 260 * k, spring(t, tE + .3, .45), tpill(0, 0, "the engine", 40, "#fff", P.ink, { w: 700 })); }
+  // the push (magenta) between your front and the engine's back; then the pull (green) after you are turned round
+  const gTop = gy(z) - 170 * 2.4 / z, gBot = 920;
+  if (t >= tR && t < tTu) { const k = ramp(t, tR, .5) * (1 - ramp(t, tTu - .5, .4)); w += OP(k, fatArrow(960, gBot - 40, 960, Math.min(gBot - 140, gTop + 120), PUSHC, 26) + fatArrow(960, gTop + 40, 960, gTop - 70, PUSHC, 26 * 2.4 / z + 8)) + chevrons(t, 760, gBot - 60, 760, gTop + 40, k, PUSHC, 3, 1.4) + chevrons(t, 1160, gBot - 60, 1160, gTop + 40, k, PUSHC, 3, 1.4); }
+  if (t >= tC - 2.4 && t < tC + .2) { const k = ramp(t, tC - 2.4, .5); w += OP(k, fatArrow(960, gTop - 80, 960, gTop + 30, PULLC, 22) + fatArrow(960, gBot + 20, 960, gBot - 90, PULLC, 26)) + chevrons(t, 760, gTop + 20, 760, gBot - 40, k, PULLC, 3, 1.4) + chevrons(t, 1160, gTop + 20, 1160, gBot - 40, k, PULLC, 3, 1.4); }
+  if (t >= tC) w += impactFX(t, tC, 960, 820, "CLICK!", { s: .9 });
+  // the turn: Basil's paw lifts you (a big soft shadow), the world swings round, you are set back down: your OTHER end faces the engine now
+  let out = turn > 0 && turn < 1 ? `<g transform="translate(960 ${n2(540 + 160 * lift)}) rotate(${n2(spinA * .12 * Math.sin(Math.PI * turn))}) scale(${n2(1 + .25 * lift)} ${n2(1 + .1 * lift)}) translate(-960 -540)" filter="${lift > .3 ? "url(#b4)" : "none"}">${w}</g>` : w;
+  if (turn > 0 && turn < 1) out += `<rect width="1920" height="1080" fill="#14B8A6" opacity="${n2(.18 * lift)}"/><path d="M${n2(960 - 900 * Math.cos(Math.PI * turn))} 300 Q960 ${n2(180 - 60 * lift)} ${n2(960 + 900 * Math.cos(Math.PI * turn))} 300" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" opacity="${n2(lift)}"/>`
+    + TF(960, 170, spring(t, tTu + .1, .45) * (1 - ramp(t, tTu + 2.4, .3)), tpill(0, 0, "Basil turns you round", 44, P.basil, "#fff", { w: 700 }));
+  // YOU: your own front edge at the bottom of the frame, with its small round magnet (red N first; after the turn, the other end: blue S)
+  out += `<g transform="translate(0 ${n2(-120 * lift)})"><path d="M120 1080 L200 930 H1720 L1800 1080z" fill="#2EB5A6" stroke="#1E7A70" stroke-width="8"/><rect x="190" y="914" width="1540" height="30" rx="12" fill="#C9A06A" stroke="#8A6A3A" stroke-width="5"/>`
+    + `<circle cx="960" cy="1010" r="62" fill="${myMag}" stroke="${P.ink}" stroke-width="8"/>` + T(960, 1034, myL, 64, "#fff") + `</g>`;
+  if (t >= tT + .6 && t < tE) out += TF(960, 830, spring(t, tT + .6, .45), tpill(0, 0, "your magnet", 36, "#fff", P.ink, { w: 700 }));
+  if (t >= tTu + 1.6 && t < tC - .8) out += TF(1260, 960, spring(t, tTu + 1.6, .45), tpill(0, 0, "your other end", 36, "#fff", P.ink, { w: 700 }));
+  return out; }
+
+// [LOOK CLOSER] like and unlike poles (P2 lclike): WHICH POLES FACE? big at the right, filling box by box (the same marks as the real card),
+// each box's own pair of bar magnets meeting at the left (pull: they click; push: the gap stays); then Pip's rings, big: the two faces that
+// meet are both North poles (in our picture): like poles repel, so it floats; turned over, a South pole meets a North pole: it snaps down.
+const LK_PAIRS = { ns: [true, true, 0], sn: [false, false, 0], nn: [true, false, 1], ss: [false, true, 1] };   // [left flip, right flip, push]: flip true = [S|N]
+function lcLikeArt(t) { const m = MKS, tRg = m("rings"), tFl = m("floats"), tFr = m("flipr"), tSn = m("snap"), tU = m("kw_unlike_poles"), tL = m("kw_like_poles");
+  const ring = ss(tRg - .8, tRg, t), cx = lerp(200, 430, ring), cy = lerp(-30, -70, ring), ck = lerp(1.35, 1.0, ring);
+  let s = "", lines = "";
+  // the pairs, two rows at a time (ns and sn together, then nn and ss): each pair slides in low from the left, then meets (a pull: click) or
+  // stays apart (a push) ON its own mark; a line joins its gap to its box on the card; they slide out before the next two come
+  const box0 = (i) => [cx - 200 * ck + ((i % 2 ? 210 : 14) + 88) * ck, cy - 215 * ck + (74 + (i < 2 ? 0 : 132) + 59) * ck];
+  const NAMES = { ns: "North + South", sn: "South + North", nn: "North + North", ss: "South + South" };
+  [["ns", 0, -200], ["sn", 1, 20], ["nn", 2, -200], ["ss", 3, 20]].forEach(([key, i, Y]) => { const t0 = m(key), first = i < 2 ? m("ns") : m("nn"), end = i < 2 ? m("nn") - 1.0 : tRg - .8;
+    if (t < first - 1.4 || t > end + .4) return; const [lf, rf, push] = LK_PAIRS[key], K = .85, H = 150 * K, inn = eio(clamp((t - first + 1.4) / .9)), gone = ss(end - .2, end + .3, t), u = clamp((t - t0) / .5);
+    const xl = push ? -620 : lerp(-640, -470 - H, eio(u)), xr = push ? lerp(-300, -250, eo(u)) : lerp(-300, -470 + H, eio(u));
+    const L = lerp(-1050, xl, inn) - 700 * gone, R = lerp(-700, xr, inn) - 700 * gone, a = Math.min(inn, 1 - gone), gx = (L + H + R - H) / 2, col = push ? PUSHC : PULLC, done = t >= t0;
+    s += OP(a, barOnPencils(t, L, Y, K, { flip: lf, glint: false }) + barOnPencils(t, R, Y, K, { flip: rf, glint: false })
+      + TF(-470, Y - 92, 1, tpill(0, 0, NAMES[key] + (done ? (push ? ": REPEL" : ": ATTRACT") : ""), 32, done ? col : "#fff", done ? "#fff" : P.ink, { w: 700 })));
+    if (done) { const [bx, by] = box0(i); s += OP(1 - gone, ppArrows(t, gx, Y, push ? "push" : "pull", ramp(t, t0, .3), { gap: push ? 18 : 8, len: 36, w: 14 }) + (push ? "" : impactFX(t, t0 + .15, gx, Y, "CLICK!", { s: .42, flash: false, size: 58, col: PULLC, d: .6 })) + ""); lines += OP(1 - gone, pline(gx, Y, bx, by, ramp(t, t0, .3), col)); } });
+  if (t >= m("sstoo") && t < tRg - .4) s += OP(1 - ss(tRg - 1.0, tRg - .5, t), TF(-280, 200, spring(t, m("sstoo"), .45), tpill(0, 0, "South and South push apart too!", 32, "#fff", PUSHC, { w: 700 })));
+  s = lines + fridgeCard20(t, [cx - 200 * ck, cy - 215 * ck, cx + 200 * ck, cy + 215 * ck], { id: "lk" }) + s;
+  // UNLIKE POLES -> the two green boxes; LIKE POLES -> the two magenta boxes (lines from the key word while it is big)
+  const boxC = (i) => [cx - 200 * ck + ((i % 2 ? 210 : 14) + 88) * ck, cy - 215 * ck + (74 + (i < 2 ? 0 : 132) + 59) * ck];
+  if (t >= tU && t < tU + 2.6) { const k = ramp(t, tU + .1, .4) * (1 - ramp(t, tU + 2.3, .3)); [0, 1].forEach((i) => { const [x, y] = boxC(i); s += pline(-377, -230, x, y, k, PULLC); }); }
+  if (t >= tL && t < tL + 2.6) { const k = ramp(t, tL + .1, .4) * (1 - ramp(t, tL + 2.3, .3)); [2, 3].forEach((i) => { const [x, y] = boxC(i); s += pline(377, -230, x, y, k, PUSHC); }); }
+  // Pip's rings, BIG, their facing faces named (in our picture: North and North: like poles repel, it floats; turned over: South over North:
+  // unlike poles attract, it snaps down). The old labels go COMPLETELY when the picture changes.
+  if (ring > .02) { const RK = .92, RX = -330, RY = 330, f0 = clamp((t - tFr) / 1.0), snapped = t >= tSn, gapK = snapped ? 0 : 1;
+    let top; if (t < tFr) top = {}; else if (t < tFr + .5) top = { topY: lerp(RG_TOP, -440, eio((t - tFr) / .5)) }; else if (t < tFr + 1.1) top = { topY: -440, topSy: Math.cos(Math.PI * eio((t - tFr - .5) / .6)) };
+    else if (t < tSn - .25) top = { topY: lerp(-440, RG_TOP + 20, eio((t - tFr - 1.1) / 1.2)), topSy: -1 }; else if (t < tSn) top = { topY: lerp(RG_TOP + 20, RG_BOT - 24, ei((t - tSn + .25) / .25)), topSy: -1 }; else top = { topY: RG_BOT - 24, topSy: -1 };
+    const flipped = t >= tFr + .8, gcol = flipped ? PULLC : PUSHC;
+    s += OP(ring, TF(RX, RY, RK, rings20(t, { ...top, glowTop: t < tFr ? PUSHC : flipped ? PULLC : undefined, glowBot: t < tFr || flipped ? gcol : undefined })));
+    const gy0 = RY + RK * ringGapY(1), botF = RY + RK * (RG_BOT - 8), topU = RY + RK * (RG_TOP + 26);
+    if (t < tFr) s += OP(ring, lcLab(t, tRg + .4, RX + 330, topU - 60, "N", RX + 80, topU, { fill: NORTHC, ink: "#fff", size: 44, t1: tFr - .2 }) + lcLab(t, tRg + .8, RX + 330, botF + 20, "N", RX + 80, botF, { fill: NORTHC, ink: "#fff", size: 44, t1: tFr - .2 })
+      + (t >= tRg + 1.2 ? OP(1 - ramp(t, tFr - .2, .25), ppArrows(t, RX, gy0, "push", ramp(t, tRg + 1.2, .3), { dir: "v", gap: 10, len: 30, w: 14 })) : "")
+      + (t >= tRg + 2.2 ? OP(1 - ramp(t, tFr - .2, .25), TF(RX + 380, gy0 - 10, spring(t, tRg + 2.2, .45), tpill(0, 0, "like poles: repel", 40, PUSHC, "#fff", { w: 700 }))) : "")
+      + (t >= tRg + 1.6 ? OP(1 - ramp(t, tFr - .2, .25), TF(RX, RY - 640 * RK + 60, spring(t, tRg + 1.6, .4), tpill(0, 0, "in our picture", 28, "#fff", P.ink, { w: 600 }))) : "")
+      + (t >= tFl ? OP(1 - ramp(t, tFr - .2, .25), TF(RX + 380, gy0 + 70, spring(t, tFl, .45), tpill(0, 0, "it floats", 34, "#fff", P.ink, { w: 700 }))) : ""));
+    if (t >= tFr && t < tFr + 1.3) s += OP(1 - ramp(t, tFr + 1.0, .3), `<path d="M${RX - 130} ${RY - 470 * RK} Q${RX} ${RY - 600 * RK} ${RX + 130} ${RY - 470 * RK}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round"/><path d="M${RX + 102} ${RY - 506 * RK} L${RX + 132} ${RY - 468 * RK} L${RX + 88} ${RY - 460 * RK}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`);
+    if (flipped) { const tf = tFr + .8, uy = snapped ? RY + RK * (RG_BOT - 30) : RY + RK * (top.topY + 26);
+      s += lcLab(t, tf + .3, RX + 330, uy - 70, "S", RX + 80, uy, { fill: SOUTHC, ink: "#fff", size: 44 }) + lcLab(t, tf + .5, RX + 330, botF + 50, "N", RX + 80, botF + 6, { fill: NORTHC, ink: "#fff", size: 44 })
+        + (t >= tSn - 2.4 && !snapped ? ppArrows(t, RX, (uy + botF) / 2, "pull", ramp(t, tSn - 2.4, .3), { dir: "v", gap: 8, len: 30, w: 14 }) : "")
+        + (t >= tSn - 1.2 ? TF(RX + 380, uy - 160, spring(t, tSn - 1.2, .45), tpill(0, 0, "unlike poles: attract", 40, PULLC, "#fff", { w: 700 })) : "")
+        + (snapped ? impactFX(t, tSn, RX + 60, botF - 20, "CLICK!", { s: .7 }) : ""); } }
+  return s; }
+
+// [LOOK CLOSER] is it a magnet? THE REPEL TEST (P2 lctest): Dad's two grey bars, BIG (A on top, B below), and Basil's red-and-blue magnet on
+// its pencils, moved LOW along the table to each end in turn. Every end pulls it in (the end of the magnet that faces each bar end is the one
+// that attracts it); then the magnet is turned round: one end of bar B PUSHES it away (it rolls back, the gap stays); bar A only ever pulls.
+// (True to the physics: a magnet's turned-round end meets the same pole of B, so B pushes; iron A pulls either end.)
+function lcTestArt(t) { const m = MKS, tB = m("bars"), tP = m("pullall"), tT = m("turn"), tPu = m("push"), tN = m("never"), tM = m("bmagnet"), tK = m("kw_the_repel_test"), tNo = m("note");
+  const YA = -150, YB = 40, BL = 170, K = .8, H = 150 * K, GP = 18;
+  // [time, bar row, side (-1 left / 1 right), magnet flipped?, result "pull" | "push"]
+  const seq = [[tP, YA, -1, true, "pull"], [tP + 1.6, YA, 1, false, "pull"], [tP + 3.2, YB, -1, true, "pull"], [tP + 4.8, YB, 1, true, "pull"],
+    [tT + .2, YB, 1, false, "turn"], [tPu, YB, 1, false, "push"], [tN + .2, YA, 1, false, "pull"], [tN + 1.6, YA, -1, true, "pull"]];
+  let cur = -1; for (let i = 0; i < seq.length; i++) if (t >= seq[i][0] - .6) cur = i;
+  let s = `<rect x="-800" y="-360" width="1600" height="720" rx="20" fill="#F2E2C4" opacity=".5"/>`;
+  s += TF(0, YA, 1.13, greyBar("A")) + TF(0, YB, 1.13, greyBar("B"));
+  if (t >= tB) s += TF(-560, YA, spring(t, tB + .3, .45), tpill(0, 0, "bar A", 34, "#fff", P.ink, { w: 700 })) + TF(-560, YB, spring(t, tB + .6, .45), tpill(0, 0, "bar B", 34, "#fff", P.ink, { w: 700 })) + (t < tP ? TF(0, YB + 150, spring(t, tB + 1, .45), tpill(0, 0, "they look exactly the same", 34, "#fff", P.ink, { w: 700 })) : "");
+  // the pulled tags stay at each end once tested
+  for (let i = 0; i <= cur; i++) { const [t0, y, sd, , r] = seq[i]; if (r !== "pull" || t < t0 + .2 || i >= 6) continue; const x = sd * (BL + 6); s += TF(x, y - 74, spring(t, t0 + .2, .4), tpill(0, 0, "pulled", 26, PULLC, "#fff", { w: 700 })); }
+  // the magnet: it glides low between the stops (never flying), turned to face each end; at a "pull" it is drawn in to touch; at the "push" it rolls back
+  if (cur >= 0 && t >= tP - .8) { const [t0, y, sd, fl, r] = seq[cur], prev = cur > 0 ? seq[cur - 1] : [t0 - 1, YB + 200, -1, true, ""];
+    const stopX = (q) => q[2] * (BL + GP + H + 70), touchX = (q) => q[2] * (BL + H + 2);
+    const u = eio(clamp((t - t0 + .6) / .6)), px = lerp(prev[4] === "push" ? stopX(prev) + prev[2] * 120 : touchX(prev), stopX(seq[cur]), u), py = lerp(prev[1], y, u) + (prev[1] === y && prev[2] !== sd ? 110 * Math.sin(Math.PI * u) : 0);
+    let x = px, rollb = 0; if (r === "pull" && t >= t0) x = lerp(stopX(seq[cur]), touchX(seq[cur]), ei(clamp((t - t0) / .3))); if (r === "push" && t >= t0) { rollb = 120 * eo(clamp((t - t0 - .1) / .8)); x = stopX(seq[cur]) + sd * rollb; }
+    const tsx = r === "turn" ? Math.max(.03, Math.abs(Math.cos(Math.PI * clamp((t - t0) / .9)))) : 1;
+    s += `<g transform="translate(${n2(x)} ${n2(py)}) scale(${n2(tsx)} 1)">` + barOnPencils(t, 0, 0, K, { flip: r === "turn" ? (t - t0 < .45 ? true : false) : seq[cur][3], glint: false, roll: x - px }) + `</g>`;
+    if (r === "turn" && t < t0 + 1.4) s += OP(1 - ramp(t, t0 + 1.1, .3), `<path d="M${x - 130} ${py - 80} Q${x} ${py - 170} ${x + 130} ${py - 80}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round"/><path d="M${x + 102} ${py - 112} L${x + 132} ${py - 78} L${x + 88} ${py - 70}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>` + TF(x, py - 190, 1, tpill(0, 0, "turned round", 30, "#fff", P.ink, { w: 700 })));
+    if (r === "pull" && t >= t0 - .3 && t < t0 + .9) s += ppArrows(t, sd * (BL + 2), y, "pull", ramp(t, t0 - .3, .2) * (1 - ramp(t, t0 + .6, .3)), { gap: 6, len: 30, w: 12 });
+    if (r === "push" && t >= t0) { const gx = sd * (BL + (GP + rollb) / 2 + 6); s += ppArrows(t, gx, y, "push", ramp(t, t0, .3), { gap: 10 + rollb * .3, len: 34, w: 14 }) + chevrons(t, sd * (BL + 20), y - 60, sd * (BL + 140), y - 60, 1, PUSHC, 2, .8)
+      + TF(sd * (BL + 150), y + 110, spring(t, t0 + .3, .45), tpill(0, 0, "pushed away!", 36, PUSHC, "#fff", { w: 700 })); } }
+  if (t >= tP + 6.4 && t < tT) s += TF(0, YB + 150, spring(t, tP + 6.4, .45), tpill(0, 0, "both are attracted", 38, PULLC, "#fff", { w: 700 }));
+  if (t >= tN + .4) s += TF(470, YA, spring(t, tN + .4, .45), tpill(0, 0, "bar A only ever pulls", 32, "#fff", P.ink, { w: 700 }));
+  if (t >= tM) s += TF(0, YB + 150, spring(t, tM, .5), `<g filter="url(#dropS)"><rect x="-190" y="-40" width="380" height="80" rx="40" fill="${GOODC}"/></g>` + TF(-140, 0, 1, tickBadge(26)) + T(30, 14, "B: a MAGNET", 38, "#fff"))
+    + TF(-560, YA + 74, spring(t, tM + .4, .45), tpill(0, 0, "not a magnet", 28, WEAKC, "#fff", { w: 700 }));
+  if (t >= tNo) s += TF(560, -300, spring(t, tNo, .45), `<g filter="url(#dropS)"><rect x="-200" y="-44" width="400" height="88" rx="10" fill="#FFFDF4" stroke="#C9B48A" stroke-width="4"/></g>` + T(0, -6, "Is it a magnet?", 30, P.ink) + T(0, 30, "Test: does it repel?", 30, PUSHC) + wbMag(0, -44, "#9B6BFF", 16));
+  return s; }
+
+// Pip's homework (the Showdown): My magnet test, drawn to match what Pip SAYS; o.lit [3], o.strike, o.fix (the green rewrite), o.q (the ? by the nail)
+const HW20 = ["1  A North pole attracted a South pole.", "2  Two South poles pushed apart.", "3  My magnet attracted the iron nail, so the nail is a magnet."];
+const pipSheet = (t, o = {}) => { const lit = o.lit || [0, 0, 0], st = o.strike || 0, fx = o.fix || 0, Y = [-180, -30, 120];
+  let s = T(-40, -270, "My magnet test", 48, P.pip) + T(250, -270, "Pip", 30, "#8A949E");
+  HW20.forEach((txt, i) => { const y = Y[i], ls = wrap(txt, 33, 420, 600), g = lit[i];
+    s += (g > .02 ? `<rect x="-340" y="${y - 40}" width="680" height="${ls.length * 42 + 36}" rx="12" fill="${P.sun}" opacity="${n2(.45 * g)}"/>` : "") + `<path d="M-330 ${y + ls.length * 42 - 4} H330" stroke="#B9C4D0" stroke-width="3"/>`
+      + ls.map((l, j) => `<text x="-330" y="${y + j * 42}" font-family="Fredoka" font-weight="600" font-size="33" fill="${P.ink}">${esc(l)}</text>`).join(""); });
+  s += TF(215, Y[0] + 18, .22, bar20(t, { glint: false, flip: true })) + TF(282, Y[0] + 18, .22, bar20(t, { glint: false, flip: true })) + ppArrows(t, 248, Y[0] - 15, "pull", 1, { gap: 4, len: 14, w: 6 })
+    + TF(200, Y[1] + 18, .22, bar20(t, { glint: false })) + TF(292, Y[1] + 18, .22, bar20(t, { glint: false, flip: true })) + ppArrows(t, 246, Y[1] - 15, "push", 1, { gap: 6, len: 14, w: 6 })
+    + TF(200, Y[2] + 70, .26, bar20(t, { glint: false })) + TF(260, Y[2] + 70, .3, nail20(1, 0));
+  if (st > .01) s += [0, 1, 2].map((j) => `<path d="M-330 ${Y[2] - 12 + j * 42} L${n2(-330 + (j < 2 ? 440 : 300) * st)} ${Y[2] - 12 + j * 42}" stroke="${WEAKC}" stroke-width="7" stroke-linecap="round"/>`).join("");
+  if (fx > .01) { const ls = wrap("My magnet attracted the iron nail. That does not prove that it is a magnet.", 31, 650, 600); s += OP(fx, `<rect x="-344" y="${Y[2] + 118}" width="688" height="${ls.length * 40 + 20}" rx="12" fill="#E2F6E6"/>` + ls.map((l, j) => `<text x="-330" y="${Y[2] + 148 + j * 40}" font-family="Fredoka" font-weight="600" font-size="31" fill="#1F8A4C">${esc(l)}</text>`).join("")); }
+  if (o.q) s += TF(300, Y[2] - 20, o.q, `<g filter="url(#dropS)"><circle r="40" fill="url(#gSun)"/></g>${T(0, 21, "?", 62, P.ink)}`);
+  return smallEasel(s, 720, 700); };
+// the chant's board: WHICH POLES FACE? (complete); each line flashes its part: line 1 the two green boxes, line 2 the two magenta boxes,
+// line 3 bar B pushing the magnet away (a small picture under the card)
+const chantBoard20 = (t, f) => { let s = fridgeCard20(t, [-230, -420, 230, 75], { all: true, id: "ch" });
+  const box = (i) => [-230 + ((i % 2 ? 210 : 14)) * 1.15, -420 + (74 + (i < 2 ? 0 : 132)) * 1.15];
+  [[0, 1, 0, PULLC], [2, 3, 1, PUSHC]].forEach(([a, b, k, c]) => { if (f[k] > .05) [a, b].forEach((i) => { const [x, y] = box(i); s += `<rect x="${n2(x - 6)}" y="${n2(y - 6)}" width="${n2(176 * 1.15 + 12)}" height="${n2(118 * 1.15 + 12)}" rx="14" fill="none" stroke="${c}" stroke-width="${n2(4 + 10 * f[k])}" opacity="${n2(f[k])}"/>`; }); });
+  s += `<rect x="-230" y="110" width="460" height="170" rx="20" fill="#FFF8EA" stroke="${P.ink}" stroke-width="${n2(3 + 9 * f[2])}"/>` + TF(-60, 200, .5, greyBar("B")) + barOnPencils(t, 140 + 20 * f[2], 190, .36, { glint: false }) + ppArrows(t, 50 + 10 * f[2], 190, "push", 1, { gap: 8, len: 20, w: 9 });
+  return s; };
+// the fun fact (the lizard): tiny hairs on a toe pad, walking upside down on a ceiling, no glue and no magnet
+const ffToe20 = (t, w, h) => { let s = `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#F3E9DC"/>` + TF(-60, 70, .9, `<g transform="rotate(-20)">${lizard20(t, {})}</g>`, 0);
+  s += `<clipPath id="ffToeC"><circle cx="40" cy="-40" r="96"/></clipPath><circle cx="40" cy="-40" r="96" fill="#FFF1E6"/><g clip-path="url(#ffToeC)">` + [...Array(9)].map((_, r) => [...Array(12)].map((_, c) => `<path d="M${-50 + c * 16} ${-110 + r * 16} q4 -8 8 0" stroke="#A98A78" stroke-width="3" fill="none"/>`).join("")).join("") + `</g><circle cx="40" cy="-40" r="96" fill="none" stroke="${P.ink}" stroke-width="9"/><path d="M-30 30 L-60 70" stroke="${P.ink}" stroke-width="5"/>`;
+  return s; };
+const ffCeil20 = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FBEBD2"/><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="70" fill="#F7F2EA"/><path d="M${-w / 2} ${-h / 2 + 70} H${w / 2}" stroke="#E2D6C2" stroke-width="5"/>` + lizardAt(t, 20 * Math.sin(t * .8), -h / 2 + 50, .42, 90, { flick: true }) + `<path d="M-40 60 Q0 20 40 60" fill="none" stroke="${P.ink}" stroke-width="5" stroke-dasharray="8 8"/>` + T(0, 110, "upside down!", 28, P.ink);
+const ffNo20 = (t, w, h) => { const x = (cx, cy) => `<path d="M${cx - 70} ${cy - 70} L${cx + 70} ${cy + 70} M${cx + 70} ${cy - 70} L${cx - 70} ${cy + 70}" stroke="#D6402E" stroke-width="14" stroke-linecap="round"/>`;
+  return `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF8EA"/>` + TF(-60, -50, .9, `<rect x="-30" y="-70" width="60" height="120" rx="12" fill="#F2F2F2" stroke="#8A949E" stroke-width="5"/><rect x="-14" y="-96" width="28" height="30" rx="6" fill="#E8B04A"/><rect x="-30" y="-20" width="60" height="30" fill="#5B9FD0"/>`) + x(-60, -50)
+    + TF(60, 80, .32, bar20(t, { glint: false })) + x(60, 80); };
+// the dare's two card pictures: three small magnets hanging on strings: pointing three different ways / all pointing the same way
+const hangMag = (x, y, a, t) => `<path d="M${x} ${y - 70} V${y - 8}" stroke="${P.ink}" stroke-width="3"/><g transform="translate(${x} ${y}) scale(${n2(Math.max(.06, Math.abs(Math.cos(a * Math.PI / 180))))} 1)">${TF(0, 0, .3, bar20(t, { glint: false, flip: Math.cos(a * Math.PI / 180) < 0 }))}</g>`;
+const darePic20 = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill="${i ? "#E6F6E8" : "#FFF0D6"}"/><path d="M-170 -90 H170" stroke="#8A5A30" stroke-width="10" stroke-linecap="round"/>`
+  + [-110, 0, 110].map((x, j) => hangMag(x, 0, i ? 0 : [0, 70, 150][j], t)).join("") + (i ? "" : T(0, 100, "?", 40, "#8A949E"));
+// a bar magnet hanging level from a string (the dare): spin = its turn about the string (degrees); origin = where the string is tied above
+const hangingMagnet = (t, spin, k = 1) => TF(0, 0, k, `<path d="M0 0 V200" stroke="${P.ink}" stroke-width="4"/><path d="M-10 236 q10 -16 20 0" stroke="${P.ink}" stroke-width="5" fill="none"/>` + `<g transform="translate(0 240) scale(${n2(Math.max(.05, Math.abs(Math.cos(spin * Math.PI / 180))))} 1)">${bar20(t, { glint: false, flip: Math.cos(spin * Math.PI / 180) < 0 })}</g>`);

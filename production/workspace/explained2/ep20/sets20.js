@@ -168,8 +168,8 @@ const kitLife = (t) => { const [a, b, c] = KT.tv, fl = .5 + .5 * Math.sin(t * 7)
    game: never used again); then the living room's wall clock (waitw), the kitchen window frame by the laundry poles (r1ans), the top of the
    fridge's side near the back (fridge), the curtain rail above the kitchen window (show), the top of the TV cabinet seen through the doorway
    (fix), the side of the toy box through the doorway (bars); the REVEAL: upside down on the ceiling above the fridge (liz). */
-const LZAT = { intro: [1110, 92, .2, 90, { lift: true }], waitw: [948, 268, .13, 30, {}], r1ans: [652, 330, .2, 0, {}], fridge: [1690, 150, .2, -10, {}], show: [400, 108, .18, 90, {}],
-  fix: [940, 548, .14, 80, {}], bars: [1068, 700, .13, 10, {}], liz: [1450, 22, .22, 170, { flick: true }] };
+const LZAT = { intro: [1110, 92, .2, 90, { lift: true }], waitw: [948, 268, .13, 30, {}], r1ans: [652, 330, .2, 0, {}], fridge: [1700, 250, .2, -10, {}], show: [400, 108, .18, 90, {}],
+  fix: [940, 548, .14, 80, {}], bars: [1068, 700, .13, 10, {}], liz: [1450, 14, .26, 100, { flick: true, squash: .42 }] };
 ['kitchen', 'game'].forEach((k) => { LZAT[k] = LZAT.intro; });
 // KT20: the live kitchen. o: card (true: the fridge card at its HOME), table (true), tableTop (props on the table, world), items, front,
 // lizard (a LZAT entry | false), dim
@@ -193,7 +193,7 @@ const table20 = (t, top = "") => { const [x0, y, x1] = KT.table; return `<ellips
 const FBOX = [["North + South", "ns", 0, ["N", "S"]], ["South + North", "sn", 0, ["S", "N"]], ["North + North", "nn", 1, ["N", "N"]], ["South + South", "ss", 1, ["S", "S"]]];
 const miniPair = (a, b, k = 1, push = false) => { const end = (p, x, w) => `<rect x="${x}" y="-18" width="${w}" height="36" rx="6" fill="${p === "N" ? NORTHC : SOUTHC}" stroke="${P.ink}" stroke-width="3"/>` + T(x + w / 2, 11, p, 26, "#fff");
   const g = push ? 40 : 6; return TF(0, 0, k, end(a === "N" ? "S" : "N", -g / 2 - 120, 60) + end(a, -g / 2 - 60, 60) + end(b, g / 2, 60) + end(b === "N" ? "S" : "N", g / 2 + 60, 60)); };
-function fridgeCard20(t, r, o = {}) { const [x0, y0, x1, y1] = r, w = x1 - x0, h = y1 - y0, k = w / 400, cx = (x0 + x1) / 2;
+function fridgeCard20(t, r, o = {}) { if (r[2] - r[0] < 2) return ""; const [x0, y0, x1, y1] = r, w = x1 - x0, h = y1 - y0, k = w / 400, cx = (x0 + x1) / 2;
   let s = `<g filter="url(#dropS)"><rect x="0" y="0" width="400" height="${n2(h / k)}" rx="14" fill="#FFF6E2" stroke="#D9C49A" stroke-width="4"/></g>` + T(200, 50, "WHICH POLES FACE?", 32, P.ink);
   const H = h / k, bw = 176, bh = 118;
   FBOX.forEach(([lab, m, rep, [a, b]], i) => { const bx = i % 2 ? 210 : 14, by = 74 + (i < 2 ? 0 : bh + 14), on = o.all || t >= MKS(m), f = o.all ? 1 : ss(MKS(m) - .05, MKS(m) + .35, t), col = rep ? PUSHC : PULLC;

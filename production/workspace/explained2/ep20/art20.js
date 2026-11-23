@@ -79,7 +79,7 @@ const spiderAt = (t, x, y, k = .3, o = {}) => { let s = "";
 // the HOUSE LIZARD seen from above (it is ON the wall or the ceiling), head up, origin = the middle of its body. o.dash (a time): a quick little
 // dash; o.flick: the tail curls; o.lift: one toe pad lifts
 function lizard20(t, o = {}) { const sh = blink16(t, 1.4), tl = 18 * Math.sin(t * 1.6) + (o.flick ? 22 * Math.sin(t * 5) : 0), br = 1 + .03 * Math.sin(t * 2.7), hd = 6 * Math.sin(t * .9);
-  const body = "#D9BBA6", bodyL = "#A98A78", dark = "#8E705E";
+  const body = "#D9B8A2", bodyL = "#7E6050", dark = "#7A5C4C";
   const foot = (x, y, a, lift) => { let s = `<g transform="translate(${x} ${y}) rotate(${a})${lift ? " scale(1.08)" : ""}">`;
     for (let i = 0; i < 5; i++) { const fa = (-50 + i * 25) * Math.PI / 180, L = 26 + (i === 2 ? 4 : 0); s += `<path d="M0 0 L${n2(Math.sin(fa) * L)} ${n2(-Math.cos(fa) * L)}" stroke="${bodyL}" stroke-width="5" stroke-linecap="round"/><ellipse cx="${n2(Math.sin(fa) * (L + 3))}" cy="${n2(-Math.cos(fa) * (L + 3))}" rx="6" ry="5" fill="${body}" stroke="${bodyL}" stroke-width="2.5"/>`; }
     return s + `</g>`; };
@@ -94,7 +94,7 @@ function lizard20(t, o = {}) { const sh = blink16(t, 1.4), tl = 18 * Math.sin(t 
     + `<path d="M-10 -128 q10 6 20 0" stroke="${dark}" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="-16" cy="-88" r="4" fill="#FFAFA0" opacity=".6"/><circle cx="16" cy="-88" r="4" fill="#FFAFA0" opacity=".6"/></g></g>`; }
 // the lizard at (x, y), k its size, rot (0 = head up; 180 = upside down on the ceiling), o passed on; o.dash (a time): it darts a little
 const lizardAt = (t, x, y, k = .26, rot = 0, o = {}) => { const d = o.dash !== undefined ? 26 * eo(clamp((t - o.dash) / .25)) : 0, a = rot * Math.PI / 180;
-  return `<g transform="translate(${n2(x - Math.sin(a) * d * -1)} ${n2(y - Math.cos(a) * d)}) rotate(${rot}) scale(${k})">${lizard20(t, o)}</g>`; };
+  return `<g transform="translate(${n2(x - Math.sin(a) * d * -1)} ${n2(y - Math.cos(a) * d)})${o.squash ? ` scale(1 ${o.squash})` : ""} rotate(${rot}) scale(${k})">${lizard20(t, o)}</g>`; };
 
 /* ================================================================ THE MAGNETS ================================================================ */
 // a BAR MAGNET (origin = its middle; 300 x 84 at k 1): red North half with a white N, blue South half with a white S. o.flip: North on the
