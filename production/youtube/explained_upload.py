@@ -126,7 +126,8 @@ if CHECK:
         for it in r.get('items', []): print("  old", old, it['status']['privacyStatus'], it['status'].get('publishAt', ''), "| would get a NEW VERSION first line |", it['snippet']['title'])
     sys.exit(0)
 if cfg.get('retire_old'):
-    first = f"▶ NEW VERSION: {cfg['parts'][0]['title'].split(' | ')[0]} https://www.youtube.com/watch?v={ids[0]}"
+    # "new_version_line" (optional): the old video's whole first line, when it is replaced by more than this episode (e.g. EP16 + EP17)
+    first = (cfg.get('new_version_line') or '').replace('{EP17_P1}', ids[0]).replace('{P1}', ids[0]) or f"▶ NEW VERSION: {cfg['parts'][0]['title'].split(' | ')[0]} https://www.youtube.com/watch?v={ids[0]}"
     for old in cfg.get('replaces', []):
         r = stop_if_error(call("GET", f"{API}/videos", {"part": "snippet", "id": old}), "old read")
         if not r.get('items'): continue
