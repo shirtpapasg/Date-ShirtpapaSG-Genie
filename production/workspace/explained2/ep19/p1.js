@@ -74,7 +74,7 @@ SC.theme = (t, s) => { const dimT = 1 - clamp((t - s.t0) / .35);
     + bd("basil", 190, 1076, 440, t, { in: s.t0 + .2, poses: [[s.t0, "sit"]], look: -4 }) + bd("momo", 420, 1070, 400, t, { in: s.t0 + .3, poses: [[s.t0, "sit"]], look: -4 })
     + bd("pip", 1740, 1076, 500, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], look: 5 }) + HUD(t); };
 SC.game = (t, s) => { const cE = camPipe, p = PIGAT.game;
-  return gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => VD19(tt, { top: magOnTable(tt) + pinWire(tt), front: dcards(tt), pig: p }, cE), A: camPt(cE, [p[0], p[1] - 22]), T: [1400, 470], Z: 2.6, dim0: 0, ly: -150, qx: 1730, qy: 430 }) + smallPrint(t, LT("m304"), PIGEON_RULE); };
+  return gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => VD19(tt, { top: magOnTable(tt) + pinWire(tt), front: dcards(tt), pig: p }, cE), A: camPt(cE, [p[0], p[1] - 22]), T: [680, 440], Z: 2.6, dim0: 0 }) + smallPrint(t, LT("m304"), PIGEON_RULE); };
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1", "YOUR ANSWER FROM LAST TIME");
 SC.goals = (t, s) => goals3(t, s, [["What a magnet is", ""], ["What attract means", ""], ["Magnetic materials", ""]], ["m401", "m402", "m403", "m404"], "pip");
 

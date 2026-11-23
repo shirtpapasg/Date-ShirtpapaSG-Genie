@@ -41,7 +41,7 @@ SC.place = (t, s) => placeWorld(t, camPlace(t))
   + bd("pip", 1440, 1010, 380, t, { in: s.t0 + .2, flip: true }) + bd("momo", 1720, 1076, 480, t, { in: s.t0 + .3, flip: true })
   + OP(ramp(t, s.t0 + .3, .5), lowerPill(60, 96, "A recycling corner, Singapore ·", "after the rain")) + melt(t, s, "lasttime", .5) + HUD(t);
 SC.game = (t, s) => { const cE = camPlace(SCN.place.t1), p = SNAT.game;
-  return gameScene(t, s, ["n202", "n203b", "n204"], false, { world: (tt) => placeWorld(tt, cE, { snail: p }), A: camPt(cE, [p[0] + 10, p[1] - 30]), T: [1400, 470], Z: 2.8, dim0: 0, ly: -150, qx: 1730, qy: 430 }) + smallPrint(t, LT("n204"), LOOK_RULE); };
+  return gameScene(t, s, ["n202", "n203b", "n204"], false, { world: (tt) => placeWorld(tt, cE, { snail: p }), A: camPt(cE, [p[0] + 10, p[1] - 30]), T: [680, 440], Z: 2.8, dim0: 0 }) + smallPrint(t, LT("n204"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Not all metals", ""], ["How magnets interact", ""], ["Test, do not guess", ""]], ["n301", "n302", "n303", "n304"], "momo");
 
 /* 4 · Round 1: which can will the magnet pull? THREE big numbered picture cards (the drink can · the food tin · both); the clue labels both are

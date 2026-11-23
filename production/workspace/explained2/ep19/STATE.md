@@ -145,5 +145,9 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 - **Done:** thumbnails (`../thumb_v2.js` ep19_1 WHICH / ONE?! + Momo surprised, blue burst; ep19_2 COPPER?! + Basil surprised, green burst),
   app_moments.json + chapters_p3.json EP19_P1 / EP19_P2 (make_moments.py: titles <= 64, no negative words: asserted), pose audit +
   qa/buddy_faces_p1/p2.jpg, qa/lines_p1/p2.jpg (a still at every buddy line), highlights.py / make_preview.sh set for EP19.
-- **Next:** `./build_part.sh 1` (running 17:38), then 2 (>= 3 GB free; delete out/chunks_p* after each), measure_countdowns.py, compare_ep1.py,
+- **Part 1 rendered** 17:52-18:05 (778 s; chunks kept); countdowns measured in the render: Round 1 (3 s) and HOLD ON! (5 s) numbers step
+  1.00 s exactly, 1 frame after each tick. qa/ep1_compare_p1.jpg made. Two fixes after the render (the game's circle was behind Basil:
+  T moved to [680, 440] in both parts; HOLD ON!'s Basil overlapped Pip): `out/rerender_p1.sh` re-renders only chunks 900-1500 and
+  5400-6900 and finishes again (queued behind other episodes' renders on the shared lock).
+- **Next:** Part 2: `./build_part.sh 2` (mix already built: -16.0 LUFS), then (>= 3 GB free; delete out/chunks_p* after each), measure_countdowns.py, compare_ep1.py,
   faces_sheet, highlights.py / make_moments.py / make_preview.sh (copy from ../ep18 and point at EP19), thumbnails (../thumb_v2.js ep19_1/2).
