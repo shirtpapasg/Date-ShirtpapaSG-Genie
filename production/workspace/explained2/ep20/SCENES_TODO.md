@@ -603,7 +603,7 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
   - `u1305` 5:27.3 CHANT: Now you know!
 
 
-## Part 2 · "Flip It and It SNAPS! Like Poles, Unlike Poles, and Is It a Magnet?" · 5:43.5
+## Part 2 · "Flip It and It SNAPS! Like Poles, Unlike Poles, and Is It a Magnet?" · 5:45.9
 
 ### 0:00.0 – 0:09.7 · `lasttime` · 1 · "Last time...": a calm recap (three pictures) (9.7 s)
 
@@ -777,7 +777,7 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Lines:**
   - `n701m` 1:44.2 MOMO: I know! When two magnets push apart, they must both be North poles. Right?
 
-### 1:49.5 – 2:37.9 · `lclike` · 7 · [LOOK CLOSER] Like and unlike poles: UNLIKE POLES, LIKE POLES; why the ring floats (48.4 s)
+### 1:49.5 – 2:40.3 · `lclike` · 7 · [LOOK CLOSER] Like and unlike poles: UNLIKE POLES, LIKE POLES; why the ring floats (50.8 s)
 
 - **Draw:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv, over })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the bottom 80 px for the verdict), keeping the wired `over` (strips, chips). The thing FILLS the panel; each named part gets its own push-in and a big label joined by a line; the speaking buddy's FACE peeks in from a lower corner (closer.js `lcPeekAuto`, wired: it listens; a pose only through `peekEv` with the reason below). Models: ../ep19 `lcattract` / `lcmetals` (the latest finished look-closers), ../ep16 `lcchick`, ep13 straps (`../reference/lookcloser_good_ep13_straps.webp`). Inside, the WHICH POLES FACE? card FILLS about two thirds of the panel (left), each box with its own pair of real bar magnets beside it (right) and its own push-in: `ns`: a North pole (red, *N*) meets a South pole (blue, *S*): they pull together, click (GREEN arrows); box 1 fills *ATTRACT* (green). `sn`: the same the other way round: box 2 *ATTRACT* (green). `kw_unlike_poles`: UNLIKE POLES pops (wired) with a line to the two green boxes. `nn`: North meets North: they push apart, the gap stays (MAGENTA arrows); box 3 *REPEL*. `ss` / `sstoo`: South meets South: they push apart too; box 4 *REPEL*. `kw_like_poles`: LIKE POLES pops (wired) with a line to the two magenta boxes. `rings`: Pip's two rings on the pencil, BIG, their facing faces labelled: the top ring's underside *N*, the bottom ring's top face *N* (magenta arrows; *like poles: repel*; small *in our picture*); `floats`: it floats. `flipr`: the top ring is turned over (a curved arrow): its underside now *S* over the *N* below; `snap`: GREEN arrows, *unlike poles: attract*: it snaps down, CLICK (a camera jolt and impact flash). The old labels FADE OUT COMPLETELY when the picture changes. Verdict *UNLIKE ATTRACT · LIKE REPEL* (green) at `v_like` (wired). The real fridge card's boxes fill on the same marks (wired placeholder).
 - **Frame (who, where, how big; the main prop):** The panel fills the frame; the speaker's face in a lower corner (Momo, then Pip, then Basil).
@@ -793,16 +793,16 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** Each pair of magnets rocks as it meets or bounces apart.
 - **Light:** Inside the panel: clean, warm kitchen light.
 - **Sound (ambience and foley, on the marks):** Wired: LOOK CLOSER whoosh, two key-word chimes, the stamp; a clack ON `ns`, `sn`, `snap`; a whoosh ON `nn`, `ss`; a boing ON `floats`; a flip ON `flipr` (wired). Add: a tick as each box on the card fills.
-- **Marks:** `ns` 1:56.4, `sn` 1:58.6, `kw_unlike_poles` 1:59.3, `nn` 2:05.9, `ss` 2:09.5, `sstoo` 2:12.7, `kw_like_poles` 2:13.3, `rings` 2:20.1, `floats` 2:28.4, `flipr` 2:29.2, `snap` 2:34.6, `v_like` 2:35.4
+- **Marks:** `ns` 1:56.4, `sn` 1:58.6, `kw_unlike_poles` 1:59.3, `nn` 2:06.9, `ss` 2:10.5, `sstoo` 2:13.7, `kw_like_poles` 2:14.3, `rings` 2:22.5, `floats` 2:30.8, `flipr` 2:31.6, `snap` 2:37.0, `v_like` 2:37.8
 - **Lines:**
   - `n702` 1:50.4 HEART: Look closer. Two bar magnets: North is red, and South is blue. North pole to South pole: they pull together.
-  - `n703p` 1:59.3 PIP: Unlike means not the same. A North pole and a South pole are unlike poles, so they attract!
-  - `n705` 2:05.9 HEART: North pole to North pole: they push apart. And South pole to South pole? They push apart too!
-  - `n707b` 2:13.3 BASIL: Like means the same. North and North, or South and South, are like poles, so they repel!
-  - `n709` 2:19.3 HEART: Now look at Pip's rings. In our picture, the two faces that meet are both North poles. Like poles repel, so the top ring floats.
-  - `n710` 2:29.2 HEART: Turn it over, and a South pole meets a North pole. Unlike poles attract, so it snaps down.
+  - `n703p` 1:59.3 PIP: Unlike poles means poles that are not the same, such as a North pole and a South pole. Unlike poles attract!
+  - `n705` 2:06.9 HEART: North pole to North pole: they push apart. And South pole to South pole? They push apart too!
+  - `n707b` 2:14.3 BASIL: Like poles means poles that are the same, such as North and North, or South and South. Like poles repel!
+  - `n709` 2:21.7 HEART: Now look at Pip's rings. In our picture, the two faces that meet are both North poles. Like poles repel, so the top ring floats.
+  - `n710` 2:31.6 HEART: Turn it over, and a South pole meets a North pole. Unlike poles attract, so it snaps down.
 
-### 2:37.9 – 2:45.4 · `mark1` · 7 · Mark Sentence 1 (Pip, 6.14), and the rule across the fridge card (7.5 s)
+### 2:40.3 – 2:47.8 · `mark1` · 7 · Mark Sentence 1 (Pip, 6.14), and the rule across the fridge card (7.5 s)
 
 - **Draw:** WIRED (`markScene`): Pip, "Say it with me!", 0.8 s, reads the card; highlights *Unlike*, *attract*, *like*, *repel*. Under the card (wired placeholder `o.under`): the WHICH POLES FACE? card, small, all four boxes filled; ON `rule` (Pip's first word) the same sentence is written across the bottom of the real fridge card (the reveal: the board is complete; wired in `fridgeCardPH`).
 - **Frame (who, where, how big; the main prop):** Pip big at the left, the card large at the right.
@@ -814,12 +814,12 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** —
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired: a soft pop on "Say it with me!", the chime after the card. Add: a marker's squeak as the rule is written ON `rule`.
-- **Marks:** `rule` 2:40.3
+- **Marks:** `rule` 2:42.7
 - **Lines:**
-  - `n711` 2:38.4 PIP: Say it with me!
-  - `n712` 2:40.3 PIP: Unlike poles attract and like poles repel.
+  - `n711` 2:40.8 PIP: Say it with me!
+  - `n712` 2:42.7 PIP: Unlike poles attract and like poles repel.
 
-### 2:45.4 – 2:46.2 · `showcard` · 8 · Showdown card (0.8 s)
+### 2:47.8 – 2:48.6 · `showcard` · 8 · Showdown card (0.8 s)
 
 - **Draw:** WIRED (section 6 `showhold`: held 0.8 s).
 - **Frame (who, where, how big; the main prop):** —
@@ -829,7 +829,7 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired.
 
-### 2:46.2 – 3:18.6 · `show` · 8 · Showdown: Pip's homework, My magnet test (32.3 s)
+### 2:48.6 – 3:21.0 · `show` · 8 · Showdown: Pip's homework, My magnet test (32.4 s)
 
 - **Draw:** Model: ../ep19/p2.js `SC.show` (Basil's homework) and ../ep16/p2.js. Pip's homework sheet on a small easel by the fridge, LARGE, titled *My magnet test*, three ruled lines, each with a small drawing, drawn to match what Pip SAYS (n802p): 1 *The North pole of my magnet attracted the South pole of Momo's magnet. Unlike poles attract.* (N meeting S, green arrows) · 2 *Two South poles pushed each other away. Like poles repel.* (S facing S, magenta arrows) · 3 *My magnet attracted the iron nail, so the iron nail is a magnet.* (a nail on the end of a magnet). The lines light as Pip reads them (`l1`, `l2`, `l3`). The YOU ring (5 s) takes the stage with the three line numbers as the ONE set of numbered choice cards; LOCKED IN!; Basil reveals.
 - **Frame (who, where, how big; the main prop):** Pip big at the left with his easel (h ~500); during the countdown the ring central, only Pip at the side; Basil and Momo at the right for the reveal.
@@ -844,14 +844,14 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** The laundry outside the window sways a little; the fan turns; the TV's glow flickers softly through the doorway.
 - **Light:** Evening: the kitchen's warm ceiling light on, the window a deep blue dusk with the next block's lit windows; a warm lamp glow in the living room.
 - **Sound (ambience and foley, on the marks):** The HDB evening bed (sound_cues.js gives EP14's indoor `R.room` for Stage 1; Stage 2 makes it the flat's own: a fan, a pot lid's clink from a neighbour's kitchen, a far-off TV, a bus outside, now and then the lizard's soft "chik-chik-chik"); wired: paper per line, ticks, bell, LOCKED IN!.
-- **Marks:** `l1` 2:54.9, `l2` 2:57.6, `l3` 3:00.3, `ring0_show` 3:04.3, `bell_show` 3:09.3
+- **Marks:** `l1` 2:57.3, `l2` 3:00.0, `l3` 3:02.7, `ring0_show` 3:06.7, `bell_show` 3:11.7
 - **Lines:**
-  - `n801` 2:46.5 HEART: Showdown! Double points. Pip's homework has one mistake. Line one, two, or three? Show me with your fingers.
-  - `n802p` 2:54.9 PIP: One: a North pole attracted a South pole. Two: two South poles pushed apart. Three: my magnet attracted the iron nail, so the nail is a magnet.
-  - `n803` 3:10.0 HEART: Locked in!
-  - `n804b` 3:11.1 BASIL: Three! My magnet attracts iron nails and steel paper clips, and they are not magnets. Being attracted does not prove it!
+  - `n801` 2:48.9 HEART: Showdown! Double points. Pip's homework has one mistake. Line one, two, or three? Show me with your fingers.
+  - `n802p` 2:57.3 PIP: One: a North pole attracted a South pole. Two: two South poles pushed apart. Three: my magnet attracted the iron nail, so the nail is a magnet.
+  - `n803` 3:12.4 HEART: Locked in!
+  - `n804b` 3:13.5 BASIL: Three! My magnet attracts iron nails and steel paper clips, and they are not magnets. Being attracted does not prove it!
 
-### 3:18.6 – 3:23.3 · `fix` · 8 · The fix (4.7 s)
+### 3:21.0 – 3:25.7 · `fix` · 8 · The fix (4.7 s)
 
 - **Draw:** `strike`: line 3 struck through (kept, as a strike-through: not "gone"); `rewrite`: rewritten below it in green *My magnet attracted the iron nail. That does not prove that it is a magnet.*; `qnail`: a big ? lands by the nail (the question for the next look-closer). The coin +2 (`coin2`).
 - **Frame (who, where, how big; the main prop):** Pip big at the left by his easel; Basil and Momo at the right.
@@ -863,11 +863,11 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** The laundry outside the window sways a little; the fan turns; the TV's glow flickers softly through the doorway.
 - **Light:** Evening: the kitchen's warm ceiling light on, the window a deep blue dusk with the next block's lit windows; a warm lamp glow in the living room.
 - **Sound (ambience and foley, on the marks):** The HDB evening bed (sound_cues.js gives EP14's indoor `R.room` for Stage 1; Stage 2 makes it the flat's own: a fan, a pot lid's clink from a neighbour's kitchen, a far-off TV, a bus outside, now and then the lizard's soft "chik-chik-chik"); wired: the strike's scribble, the marker's squeak and scribble for the rewrite, a pop for the ?, the coin.
-- **Marks:** `strike` 3:18.8, `rewrite` 3:19.2, `qnail` 3:19.6, `coin2` 3:21.7
+- **Marks:** `strike` 3:21.2, `rewrite` 3:21.6, `qnail` 3:22.0, `coin2` 3:24.1
 - **Lines:**
-  - `n805` 3:20.0 HEART: Three fingers? Put up two more on your score hand!
+  - `n805` 3:22.4 HEART: Three fingers? Put up two more on your score hand!
 
-### 3:23.3 – 3:26.1 · `bars` · 9 · "How can I prove it is a magnet?" (Pip and Dad's two grey bars) (2.8 s)
+### 3:25.7 – 3:28.5 · `bars` · 9 · "How can I prove it is a magnet?" (Pip and Dad's two grey bars) (2.8 s)
 
 - **Draw:** The kitchen: the small table; Dad's red TOOLBOX open on a chair; two plain, UNPAINTED grey metal bars on the table, the same size and shape, with paper tags *A* and *B*; Basil's red-and-blue bar magnet beside them, on round pencils. The fridge card WHICH POLES FACE? at its HOME (the fridge door, right of frame, the card about 40% of the frame high; tests.js `fridgeCardPH` is the wired placeholder: its boxes fill on `ns`, `sn`, `nn`, `ss`, the rule at `rule`, the note card at `note`; replace it with the drawn card, keep its marks). Small print *Ask an adult before you borrow things from the toolbox.* (wired).
 - **Frame (who, where, how big; the main prop):** Pip big at the left (h ~500) by the bars; Momo big at the right (h ~500); Basil mid-ground with his magnet (h ~400).
@@ -879,9 +879,9 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** Evening: the kitchen's warm ceiling light on, the window a deep blue dusk with the next block's lit windows; a warm lamp glow in the living room.
 - **Sound (ambience and foley, on the marks):** The HDB evening bed (sound_cues.js gives EP14's indoor `R.room` for Stage 1; Stage 2 makes it the flat's own: a fan, a pot lid's clink from a neighbour's kitchen, a far-off TV, a bus outside, now and then the lizard's soft "chik-chik-chik"); the toolbox's metal clunk as it is opened.
 - **Lines:**
-  - `n901p` 3:23.5 PIP: Then how can I prove that something is a magnet?
+  - `n901p` 3:25.9 PIP: Then how can I prove that something is a magnet?
 
-### 3:26.1 – 4:03.3 · `lctest` · 9 · [LOOK CLOSER] Is it a magnet? THE REPEL TEST (37.2 s)
+### 3:28.5 – 4:05.7 · `lctest` · 9 · [LOOK CLOSER] Is it a magnet? THE REPEL TEST (37.2 s)
 
 - **Draw:** WIRED: `lcPH` (tests.js) inside the real `lookCloser` frame (closer.js). Stage 2 replaces `lcPH` with `lookCloser(t, s, { tz, fx, fy, art, set, verdict, tv, over })` and draws `art(t)` (centred on 0, 0 inside +-830 x +-395; keep the bottom 80 px for the verdict), keeping the wired `over` (strips, chips). The thing FILLS the panel; each named part gets its own push-in and a big label joined by a line; the speaking buddy's FACE peeks in from a lower corner (closer.js `lcPeekAuto`, wired: it listens; a pose only through `peekEv` with the reason below). Models: ../ep19 `lcattract` / `lcmetals` (the latest finished look-closers), ../ep16 `lcchick`, ep13 straps (`../reference/lookcloser_good_ep13_straps.webp`). Inside, the panel FILLS with the two grey bars, BIG, side by side (left *A*, right *B*), and Basil's red-and-blue magnet on its pencils below them, moved LOW along the table to each end in turn: `bars`: the two bars named. `pullall`: the magnet's red end at each end of A, then of B: all four ends pull it in (GREEN arrows, a green *pulled* tag at each end; wired chip); label *both are attracted*. `turn`: the magnet is turned round (curved arrow); its blue end goes to each end: A's two ends pull again; B's first end pulls; `push`: B's other end PUSHES it away: the magnet rolls back on its pencils, the gap stays (MAGENTA arrows, a magenta *pushed away!* tag, wired chip), a small camera jolt on the roll back. `never`: bar A only ever pulls. `bmagnet`: a green tick and *MAGNET* on B; *not a magnet* on A. `kw_the_repel_test`: THE REPEL TEST pops (wired). `note`: the panel eases back: the small note card *Is it a magnet? Test: does it repel?* is added under the fridge card, held by one more round whiteboard magnet (wired placeholder). Verdict *IT REPELS, SO IT IS A MAGNET* (green) at `v_test` (wired). Never 'only a magnet can be repelled'.
 - **Frame (who, where, how big; the main prop):** The panel fills the frame; the speaker's face in a lower corner (Pip, then Basil, then Momo).
@@ -897,15 +897,15 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** The magnet rocks on its pencils at each meeting.
 - **Light:** Inside the panel: warm kitchen light.
 - **Sound (ambience and foley, on the marks):** Wired: LOOK CLOSER whoosh, the key-word chime, the stamp; a whoosh ON `push`, a clack ON `note`. Add: a soft clack for each pull from `pullall`; a little roll-back rattle for the push.
-- **Marks:** `bars` 3:29.2, `pullall` 3:37.5, `turn` 3:44.3, `push` 3:47.9, `never` 3:50.0, `bmagnet` 3:53.6, `kw_the_repel_test` 3:54.9, `note` 3:59.6, `v_test` 4:00.8
+- **Marks:** `bars` 3:31.6, `pullall` 3:39.9, `turn` 3:46.7, `push` 3:50.3, `never` 3:52.4, `bmagnet` 3:56.0, `kw_the_repel_test` 3:57.3, `note` 4:02.0, `v_test` 4:03.2
 - **Lines:**
-  - `n902` 3:27.0 HEART: Look closer. These two grey bars look exactly the same. One is a magnet. The other is just a bar of iron.
-  - `n903` 3:36.6 HEART: Basil's magnet pulls both bars, at both ends. So being pulled does not tell us which one is the magnet.
-  - `n904` 3:44.1 HEART: Now turn Basil's magnet round. One end of bar B pushes it away! Bar A never pushes.
-  - `n905b` 3:51.1 BASIL: Bar B repelled my magnet. So bar B is the magnet!
-  - `n906m` 3:54.5 MOMO: That is the repel test! If it repels a magnet, it is a magnet. Being pulled is not enough.
+  - `n902` 3:29.4 HEART: Look closer. These two grey bars look exactly the same. One is a magnet. The other is just a bar of iron.
+  - `n903` 3:39.0 HEART: Basil's magnet pulls both bars, at both ends. So being pulled does not tell us which one is the magnet.
+  - `n904` 3:46.5 HEART: Now turn Basil's magnet round. One end of bar B pushes it away! Bar A never pushes.
+  - `n905b` 3:53.5 BASIL: Bar B repelled my magnet. So bar B is the magnet!
+  - `n906m` 3:56.9 MOMO: That is the repel test! If it repels a magnet, it is a magnet. Being pulled is not enough.
 
-### 4:03.3 – 4:15.7 · `mark2` · 9 · Mark Sentence 2 (Basil, 6.13) (12.4 s)
+### 4:05.7 – 4:18.1 · `mark2` · 9 · Mark Sentence 2 (Basil, 6.13) (12.4 s)
 
 - **Draw:** WIRED (`markScene`): Basil, "Say it with me!", 0.8 s, reads the card; highlights *attract*, *repel*, *confirm*, *repels*. Under the card (Stage 2, `o.under`): bar B pushing the magnet away, small, magenta arrows.
 - **Frame (who, where, how big; the main prop):** Basil big at the left, the card large at the right.
@@ -918,10 +918,10 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired.
 - **Lines:**
-  - `n907` 4:03.7 BASIL: Say it with me!
-  - `n908` 4:05.6 BASIL: A magnet can attract or repel another magnet. You can confirm that an object is a magnet if it repels another magnet.
+  - `n907` 4:06.1 BASIL: Say it with me!
+  - `n908` 4:08.0 BASIL: A magnet can attract or repel another magnet. You can confirm that an object is a magnet if it repels another magnet.
 
-### 4:15.7 – 4:37.5 · `chant` · 10 · The chant (21.9 s)
+### 4:18.1 – 4:39.9 · `chant` · 10 · The chant (21.9 s)
 
 - **Draw:** WIRED (`chantScene`): "Say it with us!" + 0.8 s; three lines with YOUR TURN!: *Unlike poles? Attract!* · *Like poles? Repel!* · *Does it repel a magnet? Then it is a magnet!* (the answers in the topic's colours: *Attract!* green, *Repel!* magenta: common.js PCOL). Draw the board at the right (replace the placeholder): the WHICH POLES FACE? card, flashing per line (`flash`: line 1 the two green boxes; line 2 the two magenta boxes; line 3 bar B pushing the magnet away).
 - **Frame (who, where, how big; the main prop):** The three buddies left to centre (as wired), the board at the right.
@@ -935,10 +935,10 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired: clap-clap-stomp; YOUR TURN!.
 - **Lines:**
-  - `u1002` 4:16.2 CHANT: Say it with us!
-  - `c1003` 4:17.9 CHANT: Unlike poles? Attract! Like poles? Repel! Does it repel a magnet? Then it is a magnet!
+  - `u1002` 4:18.6 CHANT: Say it with us!
+  - `c1003` 4:20.3 CHANT: Unlike poles? Attract! Like poles? Repel! Does it repel a magnet? Then it is a magnet!
 
-### 4:37.5 – 4:45.4 · `final` · 11 · Show me your score hand! (7.8 s)
+### 4:39.9 – 4:47.8 · `final` · 11 · Show me your score hand! (7.8 s)
 
 - **Draw:** WIRED (`finalScene`): YOU 3 : BUDDIES 1.
 - **Frame (who, where, how big; the main prop):** As wired.
@@ -950,9 +950,9 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired: a sting, a slap.
 - **Lines:**
-  - `n1101` 4:37.9 HEART: Show me your score hand! Two fingers or more? You beat the Buddies. Three fingers? High five!
+  - `n1101` 4:40.3 HEART: Show me your score hand! Two fingers or more? You beat the Buddies. Three fingers? High five!
 
-### 4:45.4 – 5:02.5 · `liz` · 11 · The lizard's reveal and Momo's fun fact (17.1 s)
+### 4:47.8 – 5:04.9 · `liz` · 11 · The lizard's reveal and Momo's fun fact (17.1 s)
 
 - **Draw:** WIRED (`lizReveal` + Momo's `funFact`): the score hand melts into the kitchen, ONE push-in onto the lizard upside down on the ceiling above the fridge (the REVEAL spot: `LIZARD_R`), blinking, its tail curling, its toes ON the ceiling; the iris, the ring on "lizard"; *It was upside down on the ceiling!*; Momo's panel with the pictures on their marks: `ff_toe` a magnifier on one wide toe pad: rows of tiny hairs (*tiny hairs*); `ff_ceiling` the lizard walking upside down on a ceiling; `ff_no` two small crossed-out icons, a glue tube and a magnet (*no glue · no magnet*). *Tell someone at home!*. Small print *We look, and we do not touch.* (wired). Replace `kitchenPH` with the drawn kitchen.
 - **Frame (who, where, how big; the main prop):** Momo big at the right of the panel (the teller); Pip and Basil at the left.
@@ -965,13 +965,13 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** The laundry outside the window sways a little; the fan turns; the TV's glow flickers softly through the doorway.
 - **Light:** Evening: the kitchen's warm ceiling light on, the window a deep blue dusk with the next block's lit windows; a warm lamp glow in the living room.
 - **Sound (ambience and foley, on the marks):** The HDB evening bed (sound_cues.js gives EP14's indoor `R.room` for Stage 1; Stage 2 makes it the flat's own: a fan, a pot lid's clink from a neighbour's kitchen, a far-off TV, a bus outside, now and then the lizard's soft "chik-chik-chik"); wired: whoosh, a sparkle on "lizard", pops for the pictures. Add: the lizard's "chik-chik-chik" ON the push-in; a tiny magnifier chime ON `ff_toe`.
-- **Marks:** `ff_in` 4:50.8, `ff_toe` 4:53.8, `ff_ceiling` 4:58.4, `ff_no` 4:59.5
+- **Marks:** `ff_in` 4:53.2, `ff_toe` 4:56.2, `ff_ceiling` 5:00.8, `ff_no` 5:01.9
 - **Lines:**
-  - `n1102` 4:45.6 HEART: Did you spot the lizard? It was upside down on the ceiling, above the fridge!
-  - `n1103m` 4:50.4 MOMO: Here is a fun fact! A lizard's toes are covered with tiny hairs, too small to see. They help it hold on, even upside down on the ceiling, with no glue and no magnet!
-  - `n1104` 5:01.2 HEART: Tell someone at home!
+  - `n1102` 4:48.0 HEART: Did you spot the lizard? It was upside down on the ceiling, above the fridge!
+  - `n1103m` 4:52.8 MOMO: Here is a fun fact! A lizard's toes are covered with tiny hairs, too small to see. They help it hold on, even upside down on the ceiling, with no glue and no magnet!
+  - `n1104` 5:03.6 HEART: Tell someone at home!
 
-### 5:02.5 – 5:18.1 · `dare` · 12 · The dare for Episode 21 (15.6 s)
+### 5:04.9 – 5:20.4 · `dare` · 12 · The dare for Episode 21 (15.6 s)
 
 - **Draw:** Model: ../ep19/p2.js `SC.dare`. The kitchen: the fridge card complete. `string`: Basil ties a string round the middle of his bar magnet and holds the string up: the magnet hangs LEVEL from his paw (never floating). `spin`: Pip gives it a gentle spin; it turns, slows... and the picture cuts to the cards BEFORE it stops (no answer shown). `dareIn`: ONE set of TWO big numbered cards slides in low (wired placeholders: draw 1 *A different way every time*, three small hanging magnets pointing three different ways · 2 *The same way every time*, three small hanging magnets all pointing the same way); the banner *NEXT · Where does it stop?*, *Lock in your answer!*. No compass, no N-S line on the floor, and no North or South written anywhere.
 - **Frame (who, where, how big; the main prop):** Basil big at the left (h ~480) holding the string; Pip and Momo at the right (h ~400).
@@ -982,11 +982,11 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Life:** The laundry outside the window sways a little; the fan turns; the TV's glow flickers softly through the doorway.
 - **Light:** Evening: the kitchen's warm ceiling light on, the window a deep blue dusk with the next block's lit windows; a warm lamp glow in the living room.
 - **Sound (ambience and foley, on the marks):** The HDB evening bed (sound_cues.js gives EP14's indoor `R.room` for Stage 1; Stage 2 makes it the flat's own: a fan, a pot lid's clink from a neighbour's kitchen, a far-off TV, a bus outside, now and then the lizard's soft "chik-chik-chik"); the string's soft creak ON `string`, a slow whirr ON `spin` (wired); two slides ON `dareIn`; a sting on "Lock in your answer!" (wired).
-- **Marks:** `string` 5:02.5, `spin` 5:02.9, `dareIn` 5:03.2, `spinq` 5:09.0
+- **Marks:** `string` 5:04.9, `spin` 5:05.3, `dareIn` 5:05.6, `spinq` 5:11.4
 - **Lines:**
-  - `n1201` 5:03.6 HEART: Next time: Basil hangs his bar magnet on a string, so it can turn freely. He spins it again and again. Where does it stop? One, a different way every time. Two, the same way every time. Lock in your answer!
+  - `n1201` 5:06.0 HEART: Next time: Basil hangs his bar magnet on a string, so it can turn freely. He spins it again and again. Where does it stop? One, a different way every time. Two, the same way every time. Lock in your answer!
 
-### 5:18.1 – 5:31.8 · `kwrecap` · 13 · The key words (read-along) (13.7 s)
+### 5:20.4 – 5:34.2 · `kwrecap` · 13 · The key words (read-along) (13.7 s)
 
 - **Draw:** WIRED: UNLIKE POLES · LIKE POLES · THE REPEL TEST.
 - **Frame (who, where, how big; the main prop):** As wired.
@@ -1006,16 +1006,16 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired: glows.
 - **Lines:**
-  - `h860` 5:18.6 HEART: Let's read today's key words together! Ready?
-  - `hk_unlike_poles` 5:22.1 HEART: Unlike poles.
-  - `uk_unlike_poles` 5:23.3 CHANT: Unlike poles.
-  - `hk_like_poles` 5:25.0 HEART: Like poles.
-  - `uk_like_poles` 5:26.1 CHANT: Like poles.
-  - `hk_the_repel_test` 5:27.6 HEART: The repel test.
-  - `uk_the_repel_test` 5:28.9 CHANT: The repel test.
-  - `h864` 5:30.6 HEART: Well done!
+  - `h860` 5:21.0 HEART: Let's read today's key words together! Ready?
+  - `hk_unlike_poles` 5:24.5 HEART: Unlike poles.
+  - `uk_unlike_poles` 5:25.7 CHANT: Unlike poles.
+  - `hk_like_poles` 5:27.4 HEART: Like poles.
+  - `uk_like_poles` 5:28.5 CHANT: Like poles.
+  - `hk_the_repel_test` 5:30.0 HEART: The repel test.
+  - `uk_the_repel_test` 5:31.3 CHANT: The repel test.
+  - `h864` 5:33.0 HEART: Well done!
 
-### 5:31.8 – 5:43.5 · `nyk` · 14 · "Now you know!" and the outro (11.7 s)
+### 5:34.2 – 5:45.9 · `nyk` · 14 · "Now you know!" and the outro (11.7 s)
 
 - **Draw:** WIRED (`nykScene`): the finished fridge card and Pip's floating ring between the buddies.
 - **Frame (who, where, how big; the main prop):** As wired.
@@ -1033,9 +1033,9 @@ change. The script: `../p3_ep20_script.md` (sections 3 and 11 first). Every line
 - **Light:** A card screen (EP1's stage): keep the stage's warm spotlight and the soft bokeh drifting.
 - **Sound (ambience and foley, on the marks):** Wired: drums, the blast, the fade.
 - **Lines:**
-  - `u1300` 5:32.5 CHANT: Say it with us!
-  - `h1304a` 5:34.4 HEART: Ready?
-  - `h1304o` 5:35.3 HEART: One!
-  - `h1304t` 5:36.3 HEART: two!
-  - `h1305` 5:37.3 HEART: Now you know!
-  - `u1305` 5:37.3 CHANT: Now you know!
+  - `u1300` 5:34.9 CHANT: Say it with us!
+  - `h1304a` 5:36.8 HEART: Ready?
+  - `h1304o` 5:37.7 HEART: One!
+  - `h1304t` 5:38.7 HEART: two!
+  - `h1305` 5:39.7 HEART: Now you know!
+  - `u1305` 5:39.7 CHANT: Now you know!
