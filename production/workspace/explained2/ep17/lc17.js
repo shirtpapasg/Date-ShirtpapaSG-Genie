@@ -10,7 +10,7 @@
 
 /* ================================================================ PART 1 ================================================================ */
 // the ring's picture (lockN obj, drawn around (430, 470)): the caterpillar, big, munching its lime leaf
-const ringCat = (tt) => `<circle cx="430" cy="470" r="188" fill="#DFF3D2"/><g transform="translate(330 560) rotate(-12)">${leaf15(240, 80, "#58B56C", "#2F7A45")}</g><path d="M240 600 Q430 560 640 590" stroke="#7A5230" stroke-width="14" fill="none" stroke-linecap="round"/>` + TF(430, 584, .62, cat17(tt, {}), -4);
+const ringCat = (tt) => `<circle cx="430" cy="470" r="188" fill="#DFF3D2"/><path d="M336 586 Q328 574 330 558" stroke="#5E7A3A" stroke-width="10" fill="none" stroke-linecap="round"/><g transform="translate(330 560) rotate(-12)">${leaf15(240, 80, "#58B56C", "#2F7A45")}</g><path d="M240 600 Q430 560 640 590" stroke="#7A5230" stroke-width="14" fill="none" stroke-linecap="round"/>` + TF(430, 584, .62, cat17(tt, {}), -4);
 // Momo's idea (a worm?): a pink earthworm wriggling in soil, with a ? (an idea, never a fact)
 const wormIdea = (t) => { let s = `<rect x="-300" y="-200" width="600" height="400" fill="#E9D3B4"/><rect x="-300" y="40" width="600" height="160" fill="#8A5A3A"/>`;
   const pts = [...Array(9)].map((_, i) => [-130 + i * 32, 30 + 14 * Math.sin(i * .9 + t * 4)]); s += `<path d="M${pts.map(([x, y]) => `${x} ${n2(y)}`).join(" L")}" stroke="#E98A9A" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M${pts.map(([x, y]) => `${x} ${n2(y - 6)}`).join(" L")}" stroke="#F6B6C0" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>`
@@ -55,7 +55,9 @@ function pupaArt(t) { const m = MK, s0 = SCN.lcpupa.t0 + 1, tW = m("window"), tC
   const WC = pupaPt(4, -150), cam = camSeq(t, [s0, tW, tD - .4, tO, tFl], [[-60, 0, 1], [WC[0] + 60, WC[1], 1.55], [-80, -20, 1.12], [pupaPt(-14, -300)[0] + 80, pupaPt(-14, -300)[1] - 110, 1.3], [60, -60, 1]], 1.1);
   const cp = (p) => [(p[0] - cam[0]) * cam[2], (p[1] - cam[1]) * cam[2]]; let lab = "";
   const lit = { wings: pulse(t, W("a1102", "develop") + .2, .05, 1.6), feelers: pulse(t, W("a1102", "develop") + 1.1, .05, 1.6), legs: pulse(t, W("a1102", "adult") + .1, .05, 1.6) };
-  let w = `<path d="M-900 300 Q-400 260 0 320 T900 300 V500 H-900z" fill="#BFE3A8" opacity=".5"/><g transform="translate(380 220) rotate(-20)">${leaf15(260, 90, "#58B56C", "#2F7A45")}</g><g transform="translate(-620 -260) rotate(30)">${leaf15(200, 70, "#3E9E5A", "#2A6E3E")}</g>`;
+  let w = `<path d="M-900 300 Q-400 260 0 320 T900 300 V500 H-900z" fill="#BFE3A8" opacity=".5"/>`
+    + leafyTwig17([920, 330, 680, 300, 440, 262], { n: 2, len: 170, wid: 60, w: 22, u0: .25, u1: .6, spread: 40, stalk: 22, cols: ["#58B56C", "#3E9E5A"], line: "#2F7A45" })
+    + leafyTwig17([-920, -330, -760, -330, -640, -272], { n: 1, len: 200, wid: 70, w: 20, u0: .45, spread: 50, stalk: 22, cols: ["#3E9E5A", "#58B56C"], line: "#2A6E3E" });
   // the pupa (or, once the butterfly is out, the empty case), held to its stem
   w += TF(PPX, PPY, PPK, pupa17(t, { dark, win, form, split, empty, lit, id: "lp" }));
   // the labels, colour-coded and joined: pupal case (purple), wings / feelers / legs inside the window
@@ -82,7 +84,7 @@ function pupaArt(t) { const m = MK, s0 = SCN.lcpupa.t0 + 1, tW = m("window"), tC
 function leafField(t, k = 1, rot = 0, bites = 0) { const vx = 960, vy = 330; let s = `<rect width="1920" height="1080" fill="url(#e17LeafSky)"/>`;
   s += `<g transform="translate(960 600) rotate(${n2(rot)}) scale(${n2(k)}) translate(-960 -600)">`;
   // far leaves and a branch, out of focus
-  s += [[260, 200, 380, 140], [1600, 160, 420, 150], [980, 120, 300, 100]].map(([x, y, l, wd], i) => `<g transform="translate(${x} ${y}) rotate(${-30 + 40 * i})" opacity=".55" filter="url(#b6)">${leaf15(l, wd, "#58B56C", "#3E9E5A")}</g>`).join("") + `<path d="M-200 60 Q700 140 2100 40" stroke="#7A5230" stroke-width="40" fill="none" opacity=".4" filter="url(#b6)"/>`;
+  { const FB = [-200, 60, 700, 140, 2100, 40]; s += `<g opacity=".55" filter="url(#b6)"><path d="M-200 60 Q700 140 2100 40" stroke="#7A5230" stroke-width="40" fill="none" opacity=".75"/>` + [[.2, 40, 380, 140], [.5, 150, 300, 100], [.78, 30, 420, 150]].map(([u, a, l, wd], i) => { const [x, y] = qpt(FB, u); return stalkLeaf17(x, y, a, l, wd, 0, { stalk: 40, cols: ["#58B56C"], line: "#3E9E5A", stalkC: "#6E8A44" }); }).join("") + `</g>`; }
   // the leaf: a wide plane with its midrib and veins
   s += `<path d="M-700 1300 Q-560 420 ${vx} ${vy} Q2480 420 2620 1300z" fill="#5FB860" stroke="#3E9E5A" stroke-width="14"/><path d="M-700 1300 Q-560 420 ${vx} ${vy} Q2480 420 2620 1300z" fill="url(#e17LeafShine)"/>`
     + `<path d="M960 1300 L${vx} ${vy}" stroke="#A8E39A" stroke-width="34"/>` + [...Array(9)].map((_, i) => { const u = (i + 1) / 10, y = vy + (1300 - vy) * u * u, x0 = 960; return `<path d="M${x0} ${n2(y)} Q${n2(x0 - 600 * u)} ${n2(y - 60 * u)} ${n2(x0 - 1700 * u)} ${n2(y - 200 * u)} M${x0} ${n2(y)} Q${n2(x0 + 600 * u)} ${n2(y - 60 * u)} ${n2(x0 + 1700 * u)} ${n2(y - 200 * u)}" stroke="#8FD486" stroke-width="${n2(4 + 14 * u)}" fill="none"/>`; }).join("");
@@ -134,7 +136,7 @@ const ffSilk = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" heig
 // the recap pictures (Part 2's "Last time...": 1040 x 600 each, one at a time): the caterpillar on its leaf (a larva), the empty pupal case
 // and the butterfly beside it, the pail of rainwater with a ?
 const recapPic17 = (i, t) => { let s = `<rect x="-520" y="-300" width="1040" height="600" fill="${["#E3F4D8", "#EAF6E2", "#DCEFFB"][i]}"/>`;
-  if (i === 0) s += `<path d="M-520 120 Q0 60 520 110" stroke="#7A5230" stroke-width="40" fill="none"/><g transform="translate(-460 150) rotate(-20)">${leaf15(300, 100, "#58B56C", "#2F7A45")}</g>` + TF(30, 100, 1.5, cat17(t, {}));
+  if (i === 0) s += `<path d="M-520 120 Q0 60 520 110" stroke="#7A5230" stroke-width="40" fill="none"/><path d="M-464 112 Q-466 132 -460 152" stroke="#5E7A3A" stroke-width="14" fill="none" stroke-linecap="round"/><g transform="translate(-460 150) rotate(-20)">${leaf15(300, 100, "#58B56C", "#2F7A45")}</g>` + TF(30, 100, 1.5, cat17(t, {}));
   if (i === 1) s += TF(-180, 240, 1.25, pupa17(t, { empty: true })) + TF(200, -30, .85, bfly17(t, { flap: .3 + .3 * Math.sin(t * 2.5) }));
   if (i === 2) s += `<rect x="-520" y="120" width="1040" height="180" fill="#9FD08A"/>` + TF(0, 260, 1.5, pailArt17(t, { rings: [[MK("pic3") + .4, 0]], wrig: 1, id: "rc" }));
   return s; };

@@ -168,7 +168,7 @@ function dnymph17(t, o = {}) { const g = o.gulp || 0, sw = 3 * Math.sin(t * 2.4)
 
 /* ---------------------------------------------------------------- the boards ---------------------------------------------------------------- */
 // the four stage pictures, each drawn in -110..110 (a tile). kind "b" the lime butterfly, "m" the mosquito
-const bPic = (i, t) => i === 0 ? `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/><g transform="translate(-60 40) rotate(-24)">${leaf15(190, 64, "#6CC36E", "#2F8048")}</g>` + TF(50, -6, 2.4, limeEgg(1, t))
+const bPic = (i, t) => i === 0 ? `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/><path d="M-110 104 Q-84 66 -62 42" stroke="#7A5230" stroke-width="12" fill="none" stroke-linecap="round"/><g transform="translate(-60 40) rotate(-24)">${leaf15(190, 64, "#6CC36E", "#2F8048")}</g>` + TF(50, -6, 2.4, limeEgg(1, t))
   : i === 1 ? `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/><path d="M-110 54 Q0 40 110 60 V110 H-110z" fill="#7A5A34"/>` + TF(0, 56, .45, cat17(t, {}))
   : i === 2 ? `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/>` + TF(10, 84, .56, pupa17(t, {}))
   : `<rect x="-110" y="-110" width="220" height="220" fill="#DCEFFB"/>` + TF(0, 0, .5, bfly17(t, { flap: .25 + .25 * Math.sin(t * 3) }));

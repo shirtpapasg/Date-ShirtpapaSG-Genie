@@ -28,6 +28,15 @@ const benchArt17 = (bx, by, k = 1) => TF(bx, by, k, `<ellipse cx="0" cy="96" rx=
 const canArt17 = (o = {}) => TF(0, 0, o.k || 1, `<ellipse cx="0" cy="4" rx="90" ry="12" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-70 0 L-60 -120 H60 L70 0z" fill="${o.col || "#4FB0A0"}" stroke="${o.line || "#2E7A6E"}" stroke-width="5" stroke-linejoin="round"/><path d="M60 -90 L150 -160 L162 -150 L76 -70" fill="${o.col || "#4FB0A0"}" stroke="${o.line || "#2E7A6E"}" stroke-width="5" stroke-linejoin="round"/><ellipse cx="160" cy="-158" rx="18" ry="10" fill="${o.line || "#2E7A6E"}" transform="rotate(-40 160 -158)"/><path d="M-50 -120 Q0 -200 50 -120" stroke="${o.line || "#2E7A6E"}" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M-60 -60 H60" stroke="#fff" stroke-width="5" opacity=".35"/>`);
 // the handle's top (where an animal can sit), in the can's own frame
 const CANHANDLE = [0, -160];
+// a leaf on its short leaf stalk at (x, y), pointing at angle a (deg) (SERIES_FORMAT: every leaf joins a stem; no leaf floats)
+const stalkLeaf17 = (x, y, a, len, wid, i, o = {}) => { const st = o.stalk || Math.max(8, len * .18); return `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(a)})"><path d="M0 0 L${n2(st)} 0" stroke="${o.stalkC || "#5E7A3A"}" stroke-width="${n2(Math.max(2.5, wid * .14))}" stroke-linecap="round"/><g transform="translate(${n2(st - 2)} 0)">${leaf15(len, wid, (o.cols || ["#3E9E5A", "#58B56C"])[i % 2], o.line || "#2A6E3E")}</g></g>`; };
+// a leafy twig: the stem b = [x0, y0, cx, cy, x1, y1] (a quadratic curve), leaves on stalks along it (alternate sides) and one at its tip.
+// o: n, len, wid, w (stem width), wood, u0, u1, spread (deg), sw (k => sway deg), tip (false: none), seed, stalk, cols, line
+const leafyTwig17 = (b, o = {}) => { const n = o.n === undefined ? 3 : o.n, len = o.len || 60, wid = o.wid || 24, u0 = o.u0 === undefined ? .35 : o.u0, u1 = o.u1 === undefined ? .85 : o.u1, sw = o.sw || (() => 0), sd = o.seed || 0;
+  let s = `<path d="M${n2(b[0])} ${n2(b[1])} Q${n2(b[2])} ${n2(b[3])} ${n2(b[4])} ${n2(b[5])}" stroke="${o.wood || "#7A5230"}" stroke-width="${o.w || 8}" fill="none" stroke-linecap="round"/>`;
+  for (let k = 0; k < n; k++) { const u = u0 + (u1 - u0) * (n > 1 ? k / (n - 1) : 0), [x, y] = qpt(b, u); s += stalkLeaf17(x, y, qang(b, u) + ((k + sd) % 2 ? 1 : -1) * (o.spread || 50) + sw(k), len, wid, k + sd, o); }
+  if (o.tip !== false) s += stalkLeaf17(b[4], b[5], qang(b, 1) + sw(n), len, wid, n + sd, o);
+  return s; };
 
 /* ---------------------------------------------------------------- THE LIME-PLANT SIDE ---------------------------------------------------------------- */
 const POTL = [1160, 950], FENCE = { y: 650, post: [1690, 650] }, BENCHL = [420, 700], PLANTERL = [700, 760];
@@ -131,8 +140,9 @@ BG.corner17 = () => { let s = `<rect x="-200" y="-120" width="2320" height="800"
   // the planter bed with bamboo stakes (the dragonfly's intro spot: a stake's tip)
   s += `<ellipse cx="1190" cy="700" rx="320" ry="16" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><rect x="900" y="630" width="580" height="70" rx="8" fill="#C97A5A" stroke="#8A4A2E" stroke-width="5"/><rect x="910" y="614" width="560" height="22" rx="8" fill="url(#g14Soil)"/>`;
   STAKES.forEach(([x, y], i) => { s += `<path d="M${x} 630 L${x} ${y}" stroke="#D9C27A" stroke-width="12" stroke-linecap="round"/>${[0, 1, 2].map((k) => `<path d="M${x - 6} ${y + 40 + k * 50} h12" stroke="#A8904A" stroke-width="4"/>`).join("")}`;
-    s += `<path d="M${x} 600 Q${x + 40} ${n2(560 - 30 * hash(i, 3))} ${x + 30} ${y + 60} M${x} 610 Q${x - 30} 560 ${x - 26} ${y + 90}" stroke="#4E9A44" stroke-width="5" fill="none"/>`;
-    for (let k = 0; k < 5; k++) s += `<g transform="translate(${n2(x + 30 * Math.sin(k * 2 + i))} ${n2(y + 60 + k * 30)}) rotate(${n2(-40 + 80 * hash(k + i * 5, 7))})">${leaf15(40, 16, k % 2 ? "#58B56C" : "#3E9E5A", "#2A6E3E")}</g>`; });
+    // the bean vines climbing the stake: every leaf on a vine, on its own little stalk (SERIES_FORMAT: no leaf in mid-air)
+    const vo = { len: 40, wid: 16, w: 5, wood: "#4E9A44", stalk: 8, cols: ["#3E9E5A", "#58B56C"] };
+    s += leafyTwig17([x, 600, x + 40, 560 - 30 * hash(i, 3), x + 30, y + 60], { ...vo, n: 3, u0: .3, u1: .8, spread: 55, seed: i }) + leafyTwig17([x, 610, x - 30, 560, x - 26, y + 90], { ...vo, n: 2, u0: .4, u1: .8, spread: 55, seed: i + 1 }); });
   // the tap on its pipe (with a drip at the spout)
   { const [tx, ty] = TAPC; s += `<rect x="${tx - 14}" y="${ty - 200}" width="28" height="${200 + 220}" rx="8" fill="url(#e17Steel)" stroke="#6E7A8A" stroke-width="4"/><path d="M${tx} ${ty - 170} H${tx + 70} V${ty - 140}" stroke="#A9B4C2" stroke-width="22" fill="none" stroke-linejoin="round"/><path d="M${tx} ${ty - 170} H${tx + 70} V${ty - 140}" stroke="#6E7A8A" stroke-width="4" fill="none"/><rect x="${tx - 26}" y="${ty - 224}" width="52" height="16" rx="6" fill="#E0453A"/><rect x="${tx - 6}" y="${ty - 236}" width="12" height="20" fill="#B8342A"/>`; }
   // a puddle drying on the path, wet shine
@@ -154,7 +164,9 @@ function pailArt17(t, o = {}) { const w = PAILW, h = PAILH, wb = w * .78, wy = -
 // the flower pot on its little plate (origin = the plate's middle). o.k
 const plantPotPlate = (t, o = {}) => TF(0, 0, o.k || 1, `<ellipse cx="0" cy="6" rx="130" ry="20" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><ellipse cx="0" cy="0" rx="120" ry="24" fill="#C8643E" stroke="#8A3E22" stroke-width="5"/><ellipse cx="0" cy="-4" rx="102" ry="16" fill="#9FD0DE"/><ellipse cx="-30" cy="-6" rx="30" ry="4" fill="#fff" opacity=".6"/>`
   + `<path d="M-80 -10 L-96 -170 H96 L80 -10z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="5"/><rect x="-104" y="-190" width="208" height="28" rx="8" fill="#D9774A" stroke="#9A4A2A" stroke-width="5"/>`
-  + [...Array(9)].map((_, i) => `<g transform="translate(${-50 + i * 12} -188) rotate(${-120 + i * 30 + 4 * Math.sin(t * 1.2 + i)})">${leaf15(80, 26, i % 2 ? "#58B56C" : "#3E9E5A", "#2A6E3E")}</g>`).join("") + `<g transform="translate(20 -300)">${[0, 1, 2, 3, 4].map((k) => `<ellipse cx="0" cy="-14" rx="10" ry="15" fill="#F49BC4" transform="rotate(${k * 72})"/>`).join("")}<circle r="7" fill="#FFD75A"/></g>`);
+  + `<ellipse cx="0" cy="-188" rx="92" ry="9" fill="url(#p15Soil)"/>` + (() => { const sw = (j) => (k) => 4 * Math.sin(t * 1.2 + j * 2 + k), po = { len: 66, wid: 24, w: 6, wood: "#4E8A3A", stalk: 10, cols: ["#3E9E5A", "#58B56C"] };
+    return leafyTwig17([-14, -186, -40, -236, -92, -262], { ...po, n: 3, u0: .2, u1: .75, spread: 55, sw: sw(0) }) + leafyTwig17([14, -186, 50, -230, 96, -250], { ...po, n: 3, u0: .2, u1: .75, spread: 55, sw: sw(1), seed: 1 })
+      + leafyTwig17([0, -186, 8, -250, 20, -288], { ...po, n: 2, u0: .3, u1: .65, spread: 60, tip: false, sw: sw(2) }); })() + `<g transform="translate(20 -300)">${[0, 1, 2, 3, 4].map((k) => `<ellipse cx="0" cy="-14" rx="10" ry="15" fill="#F49BC4" transform="rotate(${k * 72})"/>`).join("")}<circle r="7" fill="#FFD75A"/></g>`);
 const DFLYAT = { place: [STAKES[1][0], STAKES[1][1] - 6, .34, 0], game: [STAKES[1][0], STAKES[1][1] - 6, .34, 0], waitw: [PAILC[0] + 120, PAILC[1] - PAILH - 16, .3, -20],
   mosqans: [TAPC[0] + 2, TAPC[1] - 240, .3, 0], show: null, fix: [170, 466, .3, 0], liz: [CANC[0] + 2, CANC[1] - 164, .36, -10] };
 // VCR: the live far corner. o: rings, wrig (1 hanging, 2 diving), pupae, dflyAt ([..] | false), items, front, dim, noPail
