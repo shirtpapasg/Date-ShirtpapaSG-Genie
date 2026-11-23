@@ -117,9 +117,9 @@ SC.answer = (t, s) => { window._BUBAT = { pip: [1480, 330] }; const tA = MK("ans
   return VDK(t, { cicAt: CICAT.answer, items0: flyer, dots: [MK("three"), MK("four")], glowPupa: t >= MK("four") && t < MK("four") + 3, diff: [[MK("four") + .6, "the number of stages"]] }, camAns(t))
     + [0, 1].map((i) => TF(140 + i * 210, 112, .27, dareCard3(i, t, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }))).join("") + xChip16(t, tA + .15, 200, 72, .7) + tickChip16(t, tA, 410, 72, .7)
     + coin(t, MK("coin1") - .1, 1560, 330, "+1", "if you showed two fingers") + icons
-    + bd("basil", 270, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("basil", 410, 640, t, s.t0 + .3, "2") : "") + qChip(t, tA + .3, 470, 585, .8)
-    + bd("momo", 1420, 1000, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("momo", 1300, 720, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .2, 1350, 665, .7)
-    + bd("pip", 1690, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [tK - .1, "cheer"], [tK + 2.2, "sit"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1880, 640, t, s.t0 + .4, "2") : "") + tickChip16(t, tA + .25, 1860, 580, .7)
+    + bd("basil", 270, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LT("k804") + .05, "oops"]] }) + (t > s.t0 + .3 ? pickNum("basil", 410, 640, t, s.t0 + .3, "2") : "") + qChip(t, tA + .3, 470, 585, .8)
+    + bd("momo", 1420, 1000, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [tA, "oops"]] }) + (t > s.t0 + .35 ? pickNum("momo", 1300, 720, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .2, 1350, 665, .7)
+    + bd("pip", 1690, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [tA, "arms_crossed"], [tK - .1, "cheer"], [tK + 2.2, "arms_crossed"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1880, 640, t, s.t0 + .4, "2") : "") + tickChip16(t, tA + .25, 1860, 580, .7)
     + melt(t, s, "pullout", .3) + HUD(t); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "k902", sayId: "k901", who: "pip", n: "1 of 2", text: "The life cycles of the frog and the mosquito are similar because the young do not look like the adults. However, the life cycles are different because the frog has three stages in its life cycle, while the mosquito has four stages in its life cycle.", keys: ["similar", "young", "look", "adults", "different", "three", "four", "stages"], size: 44, y: 215, footer: FOOT,
   under: TF(1560, 905, .62 * spring(t, s.t0 + .4, .5), compareFrame(t, { id: "m1", same: CHIPS_SAME, diff: CHIPS_DIFF, words: true, dots: [0, 0] })) });
@@ -143,15 +143,15 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [700, 280] };
   return holdWorld(t, camHold(t)) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".08"/>` + (ring ? OP(st, bg("stage")) : "")
     + (ring ? OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 640 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 470 + bob * .6, 1.2) + TF(1700, 860, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
-    + bd("basil", 1740, 1076, 500, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "sit"]], look: -3 })
-    + bd("momo", 1480, 1030, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "sit"]] })
-    + bd("pip", 200, 1076, 520, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("k1001p") + .1, "pointing"], [LE("k1001p") + 2.2, "sit"], [LE(b) - .2, "thinking"], [r0 - .2, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 30]], nohop: true })
+    + bd("basil", 1740, 1076, 500, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "arms_crossed"]], look: -3 })
+    + bd("momo", 1480, 1030, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "arms_crossed"]] })
+    + bd("pip", 200, 1076, 520, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("k1001p") + .1, "pointing"], [LE("k1001p") + 2.2, "sit"], [LE(b) - .2, "thinking"], [r0 - .2, "worried"], [bell + .35, "sit"], [LT(c), "oops"]], jump: [[bell + .02, 30]], nohop: true })
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + melt(t, s, "mark1", .4) + HUD(t); };
 
 /* 10 · [LOOK CLOSER] the young beside their parents (art18.js youngArt). Faces: the speakers (auto, left: Momo, then Basil); Pip at the right
    (his rule is tested: he listens; a slow nod at the end, no second oops) */
 SC.lcyoung = (t, s) => { window._BUBAT = { '*': [960, 205] }; const cE = camHold(SCN.holdon.t1), p = camPt(cE, [EAS1[0], EAS1[1] - 560 * EAS1[2]]), tm = s.t0 + 1.2;
-  const pipFace = t >= tm - .05 ? bd("pip", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, poses: [[tm, "sit"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
+  const pipFace = t >= tm - .05 ? bd("pip", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, poses: [[tm, "oops"], [LT("k1104") + .2, "sit"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: youngArt, bgc: "#FFF8EA", set: (tt) => holdWorld(tt, cE), verdict: [`ONE SAME, ONE DIFFERENT`, GOODC], tv: MK("v_young"), peekH: 470, over: () => pipFace }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "k1107", sayId: "k1106", who: "momo", n: "2 of 2", text: "When we compare, we can use observable characteristics to identify similarities and differences between the life cycles of the animals.", keys: ["compare", "observable", "characteristics", "similarities", "differences"], size: 54, y: 225, footer: FOOT,
   under: TF(1560, 905, .62 * spring(t, s.t0 + .4, .5), compareFrame(t, { id: "m2", same: CHIPS_SAME, diff: CHIPS_DIFF, words: true })) });

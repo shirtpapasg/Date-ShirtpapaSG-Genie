@@ -193,16 +193,33 @@ function VDK(t, o = {}, cam) { let s = bg("deck18");
 // planter's right end, a low bush with small yellow flowers over the hen's straw nest, the lime plant in its big pot (small white flowers)
 const NEST18 = [700, 905], BUSH18 = [660, 795], IXORA = [930, 720];
 const IXCL = [[-80, -40], [-20, -70], [40, -50], [90, -20], [-50, 0], [20, -10], [70, 20]];
-const ixoraArt = (t) => { const [x, y] = IXORA; let s = `<ellipse cx="${x}" cy="${y + 10}" rx="140" ry="74" fill="#2F7F48"/><ellipse cx="${x - 30}" cy="${y - 10}" rx="100" ry="54" fill="#3E9A5A"/>` + [...Array(14)].map((_, i) => `<g transform="translate(${n2(x - 120 + 240 * hash(i, 31))} ${n2(y - 40 + 80 * hash(i, 33))}) rotate(${n2(360 * hash(i, 35))})">${leaf15(40, 14, i % 2 ? "#2F7F48" : "#4FAE66", "#1E5E34")}</g>`).join("");
+const ixoraArt = (t) => { const [x, y] = IXORA; let s = `<ellipse cx="${x}" cy="${y + 10}" rx="140" ry="74" fill="#2F7F48"/><ellipse cx="${x - 30}" cy="${y - 10}" rx="100" ry="54" fill="#3E9A5A"/>` + [...Array(14)].map((_, i) => { const an = 2 * Math.PI * hash(i, 31), rr = Math.sqrt(hash(i, 33)), lx = x + 95 * rr * Math.cos(an), ly = y + 10 + 46 * rr * Math.sin(an); return `<g transform="translate(${n2(lx)} ${n2(ly)}) rotate(${n2(360 * hash(i, 35))})">${leaf15(34, 12, i % 2 ? "#2F7F48" : "#4FAE66", "#1E5E34")}</g>`; }).join("");
   IXCL.forEach(([dx, dy], j) => { const cx = x + dx + 1.5 * Math.sin(t * 1.2 + j), cy = y + dy; for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2, r = i ? 14 : 0, fx = cx + r * Math.cos(a), fy = cy + r * Math.sin(a) * .8;
     s += `<g transform="translate(${n2(fx)} ${n2(fy)})">${[0, 1, 2, 3].map((k) => `<ellipse cx="0" cy="-5" rx="3.6" ry="6" fill="${j % 2 ? "#F0502E" : "#F77A2A"}" transform="rotate(${k * 90 + 45})"/>`).join("")}<circle r="2" fill="#FFD75A"/></g>`; } });
   return s; };
+const BUSHC = [[-150, 0, 110], [-40, -50, 130], [90, -20, 120], [180, 20, 90], [-210, 30, 80]];
 const BUSHFL = [[-150, -40], [-80, -100], [0, -120], [90, -90], [160, -30], [-30, -60], [60, -40]];
-const bushArt = (t) => { const [x, y] = BUSH18; return `<ellipse cx="${x}" cy="${y + 40}" rx="250" ry="60" fill="#2A6E3E"/>` + [[-150, 0, 110], [-40, -50, 130], [90, -20, 120], [180, 20, 90], [-210, 30, 80]].map(([dx, dy, r], i) => `<circle cx="${x + dx}" cy="${y + dy + 2 * Math.sin(t + i)}" r="${r}" fill="${["#2F7F48", "#3E9A5A", "#358A50", "#4FAE66", "#2A6E3E"][i]}"/>`).join("")
-  + [...Array(18)].map((_, i) => `<g transform="translate(${n2(x - 220 + 440 * hash(i, 13))} ${n2(y - 130 + 150 * hash(i, 15))}) rotate(${n2(360 * hash(i, 17))})">${leaf15(34, 12, "#5FB56C", "#2A6E3E")}</g>`).join("")
+const bushArt = (t) => { const [x, y] = BUSH18; return `<ellipse cx="${x}" cy="${y + 40}" rx="250" ry="60" fill="#2A6E3E"/>` + BUSHC.map(([dx, dy, r], i) => `<circle cx="${x + dx}" cy="${y + dy + 2 * Math.sin(t + i)}" r="${r}" fill="${["#2F7F48", "#3E9A5A", "#358A50", "#4FAE66", "#2A6E3E"][i]}"/>`).join("")
+  + [...Array(18)].map((_, i) => { const C = BUSHC[i % 5], an = 2 * Math.PI * hash(i, 13), rr = (C[2] - 40) * Math.sqrt(hash(i, 15)); return `<g transform="translate(${n2(x + C[0] + rr * Math.cos(an))} ${n2(y + C[1] + rr * Math.sin(an))}) rotate(${n2(360 * hash(i, 17))})">${leaf15(30, 11, "#5FB56C", "#2A6E3E")}</g>`; }).join("")
   + BUSHFL.map(([dx, dy], i) => `<g transform="translate(${x + dx} ${y + dy})">${[0, 1, 2, 3, 4].map((k) => `<ellipse cx="0" cy="-7" rx="5" ry="8" fill="#FFE27A" transform="rotate(${k * 72})"/>`).join("")}<circle r="4" fill="#F2A23A"/></g>`).join(""); };
-// the lime plant's small white flowers (EP17's lime plant flowers now)
-const LIMEFL = [[980, 470], [1290, 300], [1080, 250], [1400, 470], [1220, 610], [1350, 380]];
+// the lime plant (EP17's pot, trunk and branches) with EVERY leaf on a twig (SERIES_FORMAT, teacher 23 Nov: no leaf floats; EP17's limePlant
+// scatters its leaves round the crown). Branches as quadratic curves; leaves in pairs along them, each on a short leaf stalk; the young leaf at
+// LT_EGG (where the butterfly lays) at the tip of its branch. The small white flowers sit at twig ends (LIMEFL).
+const LIMEBR = (() => { const [px, py] = POTL; return [[px, py - 236, px - 10, py - 420, px, py - 560], [px, py - 470, px - 90, py - 380, LT_PUPA[0], LT_PUPA[1] - 120], [px, py - 560, px + 80, py - 520, LT_CAT[0] - 20, LT_CAT[1] - 20],
+  [px, py - 600, px - 80, py - 660, LT_EGG[0], LT_EGG[1]], [px, py - 560, px + 10, py - 680, LT_TOP[0], LT_TOP[1] + 40], [px - 4, py - 520, px - 180, py - 470, 900, 470], [px + 4, py - 500, px + 200, py - 430, 1420, 470], [px + 6, py - 620, px + 180, py - 680, 1300, 290]]; })();
+const qpt = (b, u) => { const v = 1 - u; return [v * v * b[0] + 2 * v * u * b[2] + u * u * b[4], v * v * b[1] + 2 * v * u * b[3] + u * u * b[5]]; };
+const qang = (b, u) => { const dx = 2 * (1 - u) * (b[2] - b[0]) + 2 * u * (b[4] - b[2]), dy = 2 * (1 - u) * (b[3] - b[1]) + 2 * u * (b[5] - b[3]); return Math.atan2(dy, dx) * 180 / Math.PI; };
+function limePlant18(t, o = {}) { const [px, py] = POTL, sw = (i) => 2.4 * Math.sin(t * 1.1 + i * .7); let s = "", lv = "";
+  s += `<ellipse cx="${px}" cy="${py + 8}" rx="220" ry="24" fill="${P.ink}" opacity=".24" filter="url(#b4)"/><path d="M${px - 170} ${py} L${px - 196} ${py - 206} H${px + 196} L${px + 170} ${py}z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="7" stroke-linejoin="round"/><rect x="${px - 214}" y="${py - 240}" width="428" height="44" rx="12" fill="#D9774A" stroke="#9A4A2A" stroke-width="7"/><path d="M${px - 150} ${py - 160} Q${px - 140} ${py - 60} ${px - 130} ${py - 20}" stroke="#F2A27A" stroke-width="10" fill="none" opacity=".45" stroke-linecap="round"/><ellipse cx="${px}" cy="${py - 236}" rx="190" ry="14" fill="url(#p15Soil)"/>`;
+  LIMEBR.forEach((b, j) => { s += `<path d="M${b[0]} ${b[1]} Q${b[2]} ${b[3]} ${b[4]} ${b[5]}" stroke="#7A5230" stroke-width="${j ? 10 : 15}" fill="none" stroke-linecap="round"/>`;
+    const n = j ? 6 : 3; for (let k = 0; k < n; k++) { const u = j ? .3 + .66 * k / (n - 1) : .45 + .2 * k, [x, y] = qpt(b, u), a = qang(b, u), side = k % 2 ? 1 : -1, i = j * 10 + k;
+      if (j === 3 && k === n - 1) continue;   // the young leaf at LT_EGG is drawn on its own
+      lv += `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(a + side * (50 + 10 * hash(i, 5)) + sw(i))})"><path d="M0 0 L14 0" stroke="#5E7A3A" stroke-width="4"/><g transform="translate(12 0)">${leaf15(66, 28, i % 3 ? "#3E9E5A" : "#58B56C", "#2A6E3E")}<path d="M12 -8 Q30 -18 50 -10" stroke="#9FE0A8" stroke-width="3" fill="none" opacity=".6"/></g></g>`; } });
+  s += lv + `<g transform="translate(${LT_EGG[0]} ${LT_EGG[1]}) rotate(${n2(200 + sw(5))})"><path d="M0 0 L10 0" stroke="#5E7A3A" stroke-width="4"/><g transform="translate(8 0)">${leaf15(80, 26, "#8FD86A", "#3E9E5A")}</g></g>`;
+  if (o.egg !== false && o.egg !== undefined) s += TF(LT_EGG[0] - 82, LT_EGG[1] - 26, o.eggK || .9, limeEgg(1, t));
+  return s; }
+// the lime plant's small white flowers (EP17's lime plant flowers now), each at the end of a short twig
+const LIMEFL = [[900, 470], [1300, 290], [1180, 250], [1420, 470], [1310, 540], [1000, 570]];
 const limeFlowers = (t) => LIMEFL.map(([x, y], i) => `<g transform="translate(${n2(x + 2 * Math.sin(t * 1.1 + i))} ${y})">${[0, 1, 2, 3, 4].map((k) => `<ellipse cx="0" cy="-9" rx="6" ry="10" fill="#FFFDF4" stroke="#D9D2C0" stroke-width="1.5" transform="rotate(${k * 72})"/>`).join("")}<circle r="5" fill="#F7E27A"/></g>`).join("");
 // the honeybee's spot in each garden / void-deck scene [x, y, k, rot]: the INTRO (an ixora flower) only before and at the game's push-in
 const BEEAT = { place: [IXORA[0] + 20, IXORA[1] - 76, .42, 0], game: [IXORA[0] + 20, IXORA[1] - 76, .42, 0],
@@ -213,7 +230,7 @@ function VGE(t, o = {}, cam) { let s = bg("lime17") + clouds17(t, [[200, 90, 1],
   s += TF(1840 + 10 * Math.sin(t * .4), FENCE.y - 64 - hop(t % 2.3, 0, .3, 10), .9, bird15(t, 1, 1.3));
   if (o.items0) s += o.items0;
   s += ixoraArt(t) + TF(POTL[0] + 330, POTL[1] + 4, .9, canArt17());
-  s += limePlant(t, { egg: o.egg === undefined ? false : o.egg, bfly: o.bfly, bites: -3, mothAt: false }) + (o.flowers === false ? "" : limeFlowers(t));
+  s += limePlant18(t, { egg: o.egg === undefined ? false : o.egg }) + (o.flowers === false ? "" : limeFlowers(t));
   s += bushArt(t) + TF(NEST18[0], NEST18[1], .95, henNest18(t, { lift: o.lift || 0, peck: o.peck || 0, hen: o.hen, eggs: o.eggs }));
   const ba = o.beeAt === undefined ? BEEAT[(window._S || {}).name] : o.beeAt; if (ba) s += beeAt(t, ba[0], ba[1], ba[2], ba[3]);
   if (o.items) s += o.items;
@@ -333,7 +350,7 @@ function rainJourney(t, s) { const m = MK, tP = m("jpond"), tT = m("jtadpole"), 
     o += `<rect width="1920" height="1080" fill="#6FB89A"/><rect width="1920" height="${n2(sy)}" fill="#CFEFF6"/><rect y="${n2(sy - 6)}" width="1920" height="12" fill="#fff" opacity=".7"/>` + `<g opacity=".35">${uwRays(t, "#F6F0C0", .1)}</g>`;
     if (up > .02) o += OP(up, `<rect width="1920" height="${n2(sy - 6)}" fill="#BFE6FF"/><rect y="${n2(sy - 160)}" width="1920" height="160" fill="#7FBF6A"/>` + LILY.slice(0, 3).map(([x, y, r], i) => lilyPad(t, 300 + i * 600, sy - 10, r * 1.6, i)).join(""));
     const eg = 1 - ss(tT, tT + 1.6, t), dy = -500 * up;
-    o += OP(.4 + .6 * eg, TF(1080, 560 + dy, 3.2, eggClump(t, { n: Math.round(14 + 40 * eg), r: 11, R: 92 })));
+    o += OP(eg, TF(1080, 560 + dy, 3.2, eggClump(t, { n: Math.round(14 + 40 * eg), r: 11, R: 92 })));
     for (let i = 0; i < 5; i++) { const k = ss(tT + .2 * i, tT + .2 * i + .8, t); if (k < .02 || i === 0) continue; const u = ((t - tT) * .07 + hash(i, 3)) % 1; o += OP(k * (1 - up), TF(300 + 1300 * u, 380 + 420 * hash(i, 9) + 30 * Math.sin(t * 2 + i) + dy, 1.6, tadpole16(t, 0, { ph: i }), 10 * Math.sin(t * 3 + i))); }
     if (t >= tT) { const st = t < tT + 2.6 ? 0 : t < tT + 4.6 ? 1 : 2, gx = lerp(1300, 900, ss(tT, tT + 2, t)), k = ss(tT, tT + .8, t);
       o += OP(k * (1 - up), TF(gx + 30 * Math.sin(t * 1.4), 620 + 20 * Math.sin(t * 2), 3.1, tadpole16(t, st, {}), -8)) + (t >= tT + 2.6 && t < tF ? TF(gx - 120, 400, spring(t, tT + 2.6, .4), tpill(0, 0, st === 1 ? "legs grow" : "the tail shrinks", 40, "#fff", P.ink, { w: 700 })) : ""); }
@@ -437,7 +454,7 @@ const smallLime = (k = 1) => TF(0, 0, k, `<path d="M-40 0 L-48 -60 H48 L40 0z" f
 const fewerModel = (t, tf, tp) => { const gone = [0, 1, 2, 3].map((i) => ss(tf + .5 * i, tf + .5 * i + .5, t) * (1 - ss(tp + .2 * i, tp + .2 * i + .4, t))), dim = Math.max(...gone) * (1 - ss(tp, tp + .6, t)), gl = t >= tp ? pulse(t, tp + .9, .05, 2) : 0;
   let s = `<g filter="url(#drop)"><rect x="-430" y="-250" width="860" height="500" rx="30" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g>` + TF(-210, -10, 1, loopN(t, bPic, 4, { R: 120, r: 54, id: "fwb", sw: 9, dim: [dim * .9, dim * .9, dim * .9, dim * .9], fl: () => gl }))
     + T(-210, 220, "the butterfly", 30, P.ink);
-  [0, 1, 2, 3].map((i) => { s += OP(1 - .85 * gone[i], TF(120 + (i % 2) * 150, -40 + Math.floor(i / 2) * 200, 1, smallLime(.95))); });
+  [0, 1, 2, 3].map((i) => { s += OP(1 - gone[i], TF(120 + (i % 2) * 150, -40 + Math.floor(i / 2) * 200, 1, smallLime(.95))); });
   s += T(195, 220, "lime plants", 30, P.ink);
   return s; };
 // the dare (into EP19): Basil's red-and-blue bar magnet, a steel pin, a short piece of copper wire. origin = their middle

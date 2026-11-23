@@ -60,9 +60,9 @@ const camAns2 = (t) => [1.1, 900, 760];
 SC.eggans = (t, s) => { const tA = MK("ansglow");
   return VGE(t, {}, camAns2(t)) + R1C.map((c, i) => TF(700 + i * 260, 180, .4 * spring(t, s.t0 + .2 + i * .08, .4), choiceCard3(i + 1, c, r1Pic18(i, t), { w: 400, h: 330, size: 36, lit: i === 2 && t >= tA ? spring(t, tA, .45) : 0, id: "ea" + i }))).join("") + xChip16(t, tA + .2, 770, 110, .8)
     + coin(t, MK("coin1") - .1, 1560, 400, "+1", "if you showed three fingers")
-    + bd("momo", 260, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("momo", 420, 640, t, s.t0 + .3, "3") : "") + tickChip16(t, tA + .25, 470, 585, .7)
-    + bd("basil", 1200, 1010, 380, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("basil", 1070, 690, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .3, 1120, 635, .7)
-    + bd("pip", 1700, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1860, 640, t, s.t0 + .4, "3") : "") + tickChip16(t, tA + .35, 1860, 580, .7)
+    + bd("momo", 260, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tA, "arms_crossed"]] }) + (t > s.t0 + .3 ? pickNum("momo", 420, 640, t, s.t0 + .3, "3") : "") + tickChip16(t, tA + .25, 470, 585, .7)
+    + bd("basil", 1200, 1010, 380, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [tA, "oops"]] }) + (t > s.t0 + .35 ? pickNum("basil", 1070, 690, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .3, 1120, 635, .7)
+    + bd("pip", 1700, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [tA, "arms_crossed"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1860, 640, t, s.t0 + .4, "3") : "") + tickChip16(t, tA + .35, 1860, 580, .7)
     + melt(t, s, "pullout", .3) + HUD(t); };
 
 /* 7 · [LOOK CLOSER] the chicken's loop (art18.js loopArt: a child's hand follows the arrows round from the chick, then from the hen; the day-
@@ -72,9 +72,8 @@ const peekFace = (who, side, t, tin, tout, poses) => { if (t < tin - .05 || (tou
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true }); };
 SC.lcloop = (t, s) => { window._BUBAT = { '*': [1080, 220] }; const cE = camAns2(SCN.eggans.t1), p = camPt(cE, [NEST18[0], NEST18[1] - 80]), tm = s.t0 + 1.2, tN = MK("kw_no_first_or_last_stage"), tp = LT("d703") + .2;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: loopArt, bgc: "#FFF8EA", set: (tt) => VGE(tt, {}, cE), verdict: [`NO FIRST OR LAST STAGE`, GOODC], tv: MK("v_loop"), peek: false,
-    over: (tt) => peekFace("momo", "l", tt, tm, tp - .2) + peekFace("pip", "l", tt, tp, undefined, [[tN + .1, "cheer"], [tN + 2.3, "sit"]]) + peekFace("basil", "r", tt, tm) }); };
-SC.mark1 = (t, s) => markScene(t, s, { id: "d706", sayId: "d705", who: "basil", n: "1 of 2", text: "The stages in a life cycle are repeated. There is no first or last stage.", keys: ["repeated", "no", "first", "last", "stage"], size: 70, y: 250, footer: FOOT, achieved: true,
-  poses: [[LE("d706") + .1, "cheer"], [LE("d706") + 2.3, "sit"]],
+    over: (tt) => peekFace("momo", "l", tt, tm, tp - .2) + peekFace("pip", "l", tt, tp, undefined, [[tN + .1, "cheer"], [tN + 2.3, "sit"]]) + peekFace("basil", "r", tt, tm, undefined, [[tm, "oops"], [MK("kw_repeated"), "sit"]]) }); };
+SC.mark1 = (t, s) => markScene(t, s, { id: "d706", sayId: "d705", who: "basil", n: "1 of 2", text: "The stages in a life cycle are repeated. There is no first or last stage.", keys: ["repeated", "no", "first", "last", "stage"], size: 70, y: 250, footer: FOOT,
   under: TF(1300, 900, .9 * spring(t, s.t0 + .4, .5), TF(-160, 0, 1, loopN(t, chickPic, 3, { R: 82, r: 40, id: "m1c", sw: 7, run: s.t0 })) + TF(160, 0, .42, dayNight18(t, s.t0))) });
 
 /* 8 · Showdown: Momo's homework on her easel at the void deck (art18.js momoSheet). The lines light as she reads them (l1, l2, l3). The YOU
@@ -90,16 +89,16 @@ SC.show = (t, s) => { window._BUBAT = { momo: [1320, 250], basil: [1330, 250], p
   return showWorld(t, camShow(t)) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".08"/>` + OP(st, bg("stage"))
     + (st > .01 ? OP(st, TF(640, 1100, .86, momoSheet(t, { lit: [0, 0, 0] })) + TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
       inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/>` + TF(R[0], R[1] + 30 + bob * .3, .75, `<g filter="url(#dropS)">${countHand(nf)}</g>`) })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 48, P.ink, "#fff", { w: 700 }))) : "")
-    + bd("momo", 210, 1076, 500, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "sit"], [LT("d801") + 1, "pointing"], [LT("d801") + 3.4, "sit"], [r0 - .3, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 26]] })
-    + bd("pip", 1450, 1020, 380, t, { in: bell + .4, flip: true, poses: [[bell + .4, "sit"]] }) + (t > bell + .6 ? pickNum("pip", 1330, 700, t, bell + .6, "3") : "")
-    + bd("basil", 1720, 1076, 500, t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"]] }) + (t > bell + .5 ? pickNum("basil", 1580, 640, t, LT("d804b") - .1, "3") : "")
+    + bd("momo", 210, 1076, 500, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "sit"], [LT("d801") + 1, "pointing"], [LT("d801") + 3.4, "sit"], [r0 - .3, "worried"], [bell + .35, "sit"], [LT("d804b"), "oops"]], jump: [[bell + .02, 26]] })
+    + bd("pip", 1450, 1020, 380, t, { in: bell + .4, flip: true, poses: [[bell + .4, "sit"], [LT("d804b"), "arms_crossed"]] }) + (t > bell + .6 ? pickNum("pip", 1330, 700, t, bell + .6, "3") : "")
+    + bd("basil", 1720, 1076, 500, t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"], [LT("d804b"), "arms_crossed"]] }) + (t > bell + .5 ? pickNum("basil", 1580, 640, t, LT("d804b") - .1, "3") : "")
     + stamp(t, tS, 960, 460) + bellIcon(t, r0) + melt(t, s, "showcard", .3) + HUD(t); };
 /* the fix: line 3 struck (strike) and rewritten in green (rewrite); the beetle's faint pupa tile glows bright; the coin +2 (coin2). Momo nods at
    the green rewrite (listening); the honeybee on the watering can's spout by the easel */
 SC.fix = (t, s) => { window._BUBAT = { '*': [1330, 250] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), pu = ss(MK("rewrite") + .6, MK("rewrite") + 1.2, t), e = eio((t - s.t0) / 1);
   return showWorld(t, [lerp(1.2, 1.3, e), lerp(820, 700, e), lerp(700, 900, e)], { noBee: true, can: true, canBee: true, sheet: { strike: st, fix: fx, pupa: pu, lit: [0, 0, 0] } })
     + coin(t, MK("coin2") - .1, 1560, 330, "+2", "line 3")
-    + bd("momo", 210, 1076, 500, t, { in: s.t0 + .05, poses: [[s.t0, "sit"]] }) + bd("pip", 1450, 1020, 380, t, { in: s.t0 + .1, flip: true }) + bd("basil", 1720, 1076, 500, t, { in: s.t0 + .1, flip: true }) + HUD(t); };
+    + bd("momo", 210, 1076, 500, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] }) + bd("pip", 1450, 1020, 380, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] }) + bd("basil", 1720, 1076, 500, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] }) + HUD(t); };
 
 /* 9 · "So how are they different?" The void deck table: the class mealworm tub (oat bran, mealworms, the lid with air holes) beside a card of a
    jar of still water with a wriggler drawn on it. Momo talks (fixing her own count), then thinks (her real question). The honeybee on the
