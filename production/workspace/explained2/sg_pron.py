@@ -26,6 +26,13 @@ FIX = {
     # P3 EP16 Stage 1 (Opus, 2026-11-23): Kokoro's own "mantis" is "mˈæntiz" (ends in a z, "man-teez"); the dictionary sound is "MAN-tis".
     # Test clips pron_clips/Heart_ep16_new_words.m4a (before/after). Not a Singapore name: an English word Kokoro misreads (like "fragile").
     "mantis": {"ph": "mˈæntɪs"},
+    # P3 EP17 Stage 1 (Opus, 2026-11-23; WAITING FOR THE TEACHER'S LISTEN, clip pron_clips/Heart_ep17_new_words.m4a):
+    # Kokoro's own "prolegs" is "pɹˈoʊləɡz" ("PRO-lugz": the "legs" swallowed); the dictionary's is "PRO-legs" with a full "leg".
+    "prolegs": {"ph": "pɹˈoʊlˌɛɡz"},
+    # the book's two dengue mosquitoes (5.10a, read by Heart on the strip): Kokoro says "eeds" for "Aedes" (and the script's respelling
+    # "Ay-ee-deez" came out "EYE-ee-deez"); the usual sound is "ay-EE-deez al-boh-PIK-tus" / "ay-EE-deez ee-JIP-tie".
+    "Aedes albopictus": {"ph": "eɪˈiːdiːz ˌælboʊpˈɪktəs"},
+    "Aedes aegypti": {"ph": "eɪˈiːdiːz iːdʒˈɪptaɪ"},
 }
 _tok = None
 def _tokz():
