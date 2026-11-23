@@ -15,7 +15,7 @@ S = [(1, 5.5, "P1 0:05  The v2 cast in the kitchen: one size at one depth; Pip w
 W, Hh, N = 860, 484, 2; tiles = []
 for P, t, lab in S:
     f = f"{H}/out/_hl.png"; subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", str(t), "-i", f"{H}/ep15_part{P}.mp4", "-frames:v", "1", f], check=True)
-    im = Image.open(f).convert("RGB").resize((W, Hh)); tl = Image.new("RGB", (W, Hh + 50), (250, 246, 238)); tl.paste(im, (0, 0)); ImageDraw.Draw(tl).text((10, Hh + 10), lab, font=f1 if len(lab) < 62 else ImageFont.truetype(F, 22), fill=(30, 26, 60)); tiles.append(tl)
+    im = Image.open(f).convert("RGB").resize((W, Hh)); tl = Image.new("RGB", (W, Hh + 50), (250, 246, 238)); tl.paste(im, (0, 0)); ImageDraw.Draw(tl).text((10, Hh + 10), lab, font=ImageFont.truetype(F, 20), fill=(30, 26, 60)); tiles.append(tl)
 os.remove(f"{H}/out/_hl.png")
 rows = (len(tiles) + N - 1) // N; sh = Image.new("RGB", (N * W + (N + 1) * 12, 64 + rows * (Hh + 62)), (18, 14, 46)); d = ImageDraw.Draw(sh)
 d.text((14, 14), "EP15 redo with the v2 cast: highlights for review", font=ft, fill=(255, 200, 58))

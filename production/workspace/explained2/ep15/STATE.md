@@ -8,7 +8,54 @@ all non-teaching cuts: `../p3_ep15_script.md` section 6 lists what else could go
 The script: `../p3_ep15_script.md` (version 1, Opus, 22-23 Nov 2026; its segment tables are generated from `script.py` + the timelines).
 
 Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** (paused by the teacher on 22 Nov, resumed "continue" 23 Nov)
-· **Stage 2 (drawing, sound, full render, self-check): DONE 2026-11-23, Opus** · Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md: NEXT; the teacher also wants to review the buddies' faces first: qa/buddy_faces_p1/p2.jpg) · Stage 3 (render, checks, upload: Opus).
+· **Stage 2 (drawing, sound, full render, self-check): DONE 2026-11-23, Opus** · **Redo with v2 cast: DONE 2026-11-23, Opus (rendered, awaiting the teacher's review of qa/; NOT uploaded)** · Stage 2.5 (teacher's-eye review: the teacher reviews qa/buddy_faces_p1/p2.jpg, qa/preview_p*_clips.mp4, qa/highlights.jpg first) · Stage 3 (render, checks, upload: Opus).
+
+## Redo with v2 cast done (2026-11-23, Opus)
+- **Cast:** prep_sprites.py SET pip -> pip (grey, unchanged), momo -> momo_v2, basil -> basil_v2 (41 sprites; Basil now also has
+  arms_crossed, worried, laughing; Momo every pose). lib.js POSE_SUB: the old stand-ins removed; only `worried` -> thinking for Pip and
+  Momo (no worried painting yet). **SIZE_K basil .94** (was .88 for the old, wider Basil): measured on the sprites, at .94 Basil v2's painted
+  area (tail included) equals Pip's and Momo's at the same height, and his crest sits level with Pip's head; `qa/size_check.jpg` shows the
+  three side by side. Same depth = same size fixed in the kitchen (Momo 400, Pip 395), the count-in (all 420, Basil off the low centre),
+  the score hand (all 430), both "Be the ..." send-offs (Pip 410), the HOLD ON! fix (Pip 420, Momo 390).
+- **Reactions with a reason** (SERIES_FORMAT 5, one job per pose). Audit tool `pose_audit.js <part>` (samples every 0.1 s through lib.js
+  `window._POSE`, which now carries `why`: scene / outcome / react) -> out/poses_p*.json. Before: 160 pose moments (P1 85, P2 75); after:
+  75 (P1 37, P2 38). About 90 had no reason and became listening (sit, blink, nod); about 12 were changed to the pose that has the reason
+  (countdowns -> worried; send-offs -> waving goodbye; Basil's "Three, a lizard!" -> laughing; cheers moved onto the learning marks).
+  Engine: lib.js reactPose keeps only "thinking" right after a real question (not "Are you ready?" / "Three fingers?"); no automatic
+  oops / surprised / cheer from words; a cheer outside a learning mark becomes sit (never a stand-in arms-crossed); learnAt adds the
+  journeys' last stops (jyoung, jnew). common.js: lockN lead = thinking after the question, WORRIED through the countdown, listening after
+  the bell (no oops before the reveal); goals/chant/kwrecap/pop-ins/fun-fact teller/NYK listen; markScene reader points at the card in
+  the 0.8 s pause; gameScene finder points at the animal 2.5 s. closer.js: look-closer faces listen; poses only via `peekEv`. P2 Round 1
+  lead is now Basil (his painted worried face). Every kept pose and its reason: `pose_reasons.json` (read by the face sheets). In short:
+  thinking only after a question (Momo/Pip holding last time's answer; Momo's open questions; the dare); worried in all four countdowns
+  (Basil x3; Momo in the Showdown shows her thinking face); oops/arms crossed only at reveals (OUTCOMES) and while a buddy's own mistake is
+  on screen (Basil's roots idea, his table ruler, his "buy seeds" idea; Momo's homework); surprised only for red-leaves-are-normal, 12 cm
+  not 20 cm, the new seed in the cut mango; cheer only on A YOUNG PLANT COMES FIRST, the journeys' last stops, FLOWERS AND FRUITS, THREE
+  STAGES, Momo's fixed homework, SEEDS KEPT SAFE and "Now you know!" (each buddy about once a minute at most); pointing only at a named
+  thing (the hidden animal, the root, the shoot, the young plant, the ruler's zero, the old tree, the board, the card, the tadpole);
+  waving only hello (Pip, cold open) and the goodbyes into the journeys; laughing once (the lizard joke).
+- **Fixes:** the hidden animals: SNAILC/ANTAT rebuilt so neither ever returns to its intro spot or repeats a spot (snail: seedans moved off
+  the floor where Pip hid it, strip no longer repeats measure; ant: adultans off the intro leaf, waitw off the trunk, the reveal on a new
+  leaf at the left of the crown). Mango flower sprays redrawn as branched panicles (pink-red stalks, side branches and twigs, clusters of
+  tiny five-petal flowers; dots when far). Cold-open lifting hand and the P2 pot-carrying hands come in level from the sides. P2 look-closer
+  tags: in screen space at the panel's foot, joined to their plants, clear of the face, the bubble (moved to the free sky) and the verdict;
+  "tiny flowers" / "new leaves" labels no longer clipped at the panel top or under the strip. Basil's fruit-cut bubble moved off the "a new
+  seed" tag. Showdown: Momo's homework grows big for the countdown; the homework page taller so line 3's pictures and the fix never sit on
+  its words. Journey (P1) richer: a Day 1 -> Day 30 pill with "speeded up", water drops seeping down to the seed, riders bigger (h 200,
+  both journeys).
+- **Rendered 2026-11-23** (build_part.sh + finish.sh, chunks deleted): `ep15_part1.mp4` **5:28.0** (327.97 s), `ep15_part2.mp4`
+  **5:41.9** (341.93 s), both -16.0 LUFS; srt, sheet_part1/2.png, qa/ep1_compare_p1/p2.jpg. **Countdowns** (measure_countdowns.py): P1
+  Round 1 numbers 60.381/61.381/62.381/63.381 (steps 1.000), bell 63.348; P1 HOLD ON! steps 1.000 x5, bell 254.013; P2 Round 1 steps 1.000
+  x5, bell 54.234; P2 Showdown steps 1.000 x5, bell 192.49. Only ticks and the bell under them.
+- **For the teacher's review (qa/):** `buddy_faces_p1.jpg`, `buddy_faces_p2.jpg` (every pose on screen, time + reason; faces_sheet.js/.py),
+  `preview_p1_clips.mp4` (74 s) and `preview_p2_clips.mp4` (75 s), 720p with sound (make_preview.sh; not committed), `highlights.jpg`
+  (10 labelled stills; highlights.py), `size_check.jpg`.
+- **App time-stamps for upload day:** `app_moments.json` (videos.js P3 entries 15A / 15B, 12 + 14 moments, 1.5 s before each idea, keys
+  O.cycles + CH.plantCycles as names; they replace the classic no 15 RVRoaWWKjEM) and `production/youtube/chapters_p3.json` keys
+  "EP15_P1" / "EP15_P2" (swap in the video ids after upload). `python3 make_moments.py` regenerates both.
+- **Still weak / for the reviewer:** Pip and Momo have no worried painting (thinking face stands in; Momo's Showdown); the P2 pot-carrying
+  hands are level now but still float without arms; P2 lcbank's fine print briefly crosses the SEED BANK sign during the push-in; key words
+  still pop large over the pot in seedans (engine, as EP14); Part 2 is 5:41.9 (aim 5:30).
 
 ## Stage 1 done (2026-11-23)
 - **Engine copied from `../ep14/`** (its final, live engine): lib.js, common.js, closer.js, shrink.js, props.js, hotel.js, garden.js, trail.js,
