@@ -32,7 +32,7 @@ const CANHANDLE = [0, -160];
 /* ---------------------------------------------------------------- THE LIME-PLANT SIDE ---------------------------------------------------------------- */
 const POTL = [1160, 950], FENCE = { y: 650, post: [1690, 650] }, BENCHL = [420, 700], PLANTERL = [700, 760];
 BG.lime17 = () => { let s = `<rect x="-200" y="-120" width="2320" height="800" fill="url(#e17Sky)"/><g opacity=".6">${farBlocks(760, 2140, 420, 41, 1)}</g>`;
-  s += hdbBlock17(-200, 820, -120, 600, { letters: [120, 470], notice: [380, 478] });
+  s += hdbBlock17(-200, 820, -120, 600, { letters: [120, 470], notice: [520, 478] });
   s += `<rect x="-200" y="590" width="2320" height="620" fill="url(#g14Grass)"/><path d="M-200 600 Q400 584 960 596 T2120 590 V620 H-200z" fill="#B7E58F"/>`;
   for (let i = 0; i < 9; i++) s += `<circle cx="${820 + i * 160}" cy="${n2(612 + 8 * hash(i, 4))}" r="${n2(46 + 22 * hash(i, 6))}" fill="${i % 2 ? "#5FB56C" : "#7CC97A"}"/>`;
   // the green fence along the back right, with its fence post (the moth's spot in waitw)
@@ -66,7 +66,7 @@ function limePlant(t, o = {}) { const [px, py] = POTL, sw = (i) => 2.4 * Math.si
   if (o.bfly) { const b = o.bfly; s += TF(b.x, b.y, b.k || .4, bfly17(t, { flap: .5 + .5 * Math.sin(t * 9) }), b.rot || 0); }
   return s; }
 // the moth's spot in each lime-side scene [x, y, k, rot]: the intro (the void deck's pillar) is used ONLY before and at the game's push-in
-const MOTHAT = { cold: [440, 520, .34, 0], back: [440, 520, .34, 0], title: [440, 520, .34, 0], game: [440, 520, .34, 0],
+const MOTHAT = { cold: [466, 520, .34, 0], back: [466, 520, .34, 0], title: [466, 520, .34, 0], game: [466, 520, .34, 0],
   answer1: [BENCHL[0] - 120, BENCHL[1] - 58, .3, 8], lime: [LT_TOP[0] + 40, LT_TOP[1] + 30, .3, 180], waitw: [FENCE.post[0], FENCE.post[1] - 124, .3, 0],
   larva: [POTL[0] + 330, POTL[1] - 142, .3, -10], ring: null, holdon: null, liz: [POTL[0] - 120, POTL[1] - 90, .34, -6] };
 // VL: the live lime-plant side. o: dawn (0..1 the dawn tint), cat, pupa, egg, bites, bfly, can (true: the watering can by the pot), mothAt

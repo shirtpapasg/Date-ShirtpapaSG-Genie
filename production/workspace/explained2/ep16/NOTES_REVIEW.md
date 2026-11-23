@@ -34,6 +34,16 @@ moments, each checked against SERIES_FORMAT 5's one-job-per-pose table; reasons 
 | 22 | P2 moult | The skin and the grasshopper small between the buddies | both bigger (k 1.05 / 1.15), camera 1.35-1.45 |
 | 23 | Engine (from EP15's redo) | count, Mark Sentence, score hand and "Now you know!" used EP15's older poses / sizes | EP15's fixes ported: one size at one depth (420 / 430), the reader points at the card only in the pause before reading, no waving at the start of "Now you know!" |
 
+## Round 2 (on the rendered files: sheet_part1/2.png, buddy_faces_p1/p2.jpg, the countdown measurements): found and fixed
+
+| # | Where | Found | Fix (re-rendered: only the 10 s chunks that changed, rejoined frame-exactly by render.js, same mix) |
+|---|---|---|---|
+| 24 | P1 frogans | The pick cards (3, 1) sat over Basil's and Pip's faces; the little frog Heart talks about hid behind Basil | pick cards and their x / tick chips above the heads; the frog on a lily pad in the middle (1120, 884), the camera pushes to it |
+| 25 | P1 lceggs, lcchick, liz, holdon | The first render was taken before round 1's pose fixes (4, 5, 11, 12) and the moved "+1" coin | those spans re-rendered |
+| 26 | P2 nymphans | Pip's pick card over Momo's cheek; Momo's card on her own edge | both above the heads |
+| 27 | P2 show | Basil's and Momo's pick cards between their faces; their bubbles over line 3 of the sheet | Basil's card at his left, Momo's above her head; the reveal bubbles above the sheet |
+| 28 | Both | Countdowns measured in the rendered files: every number steps 1.000 s, with the ticks; the bell lands on 0 (P1 Round 1 61.134, HOLD ON! 193.895; P2 Round 1 49.329, Showdown 219.412) | nothing to fix |
+
 ## Checked and fine
 - Every speaking buddy is in its talking sprite; listeners mostly listen; strong poses (cheer, surprised) at most about once a minute per
   buddy, each with its reason (pose_reasons.json); OOPS / ARMS CROSSED only from OUTCOMES at the reveals.

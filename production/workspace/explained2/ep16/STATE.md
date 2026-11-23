@@ -6,8 +6,8 @@ Grasshopper Leave Its SKIN Behind?" (the nymph; the empty skin and why; be the n
 the egg case; the chant; the praying mantis; the dare into EP17: a caterpillar, is it a nymph?) **5:30.4**.
 The script: `../p3_ep16_script.md` (version 1, Opus, 23 Nov 2026). The source of every spoken word: `script.py`.
 
-Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** · Stage 2 (drawing, sound, full render, self-check: Fable)
-· Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md) · Stage 3 (render, checks, upload: Opus).
+Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** · **Stage 2 (drawing, sound, full render, self-check): DONE
+2026-11-23** · **Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md): DONE 2026-11-23** (the teacher's quick look next: qa/) · Stage 3 (render, checks, upload: Opus).
 
 ## Stage 1 done (2026-11-23)
 - **Engine copied from `../ep15/`** (its live engine): lib.js (EP15's v2-cast working copy: `SIZE_K` basil **.94**, `POSE_SUB` worried ->
@@ -60,7 +60,43 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** �
   + a tadpole with its back legs just out, frog eggs behind; turquoise to deep teal-green burst. P2 **EMPTY SKIN?!** + Momo surprised + the
   empty grasshopper skin and the grasshopper that came out of it; warm orange to red burst. Alternates: WHAT IS IT?! / WHO LEFT THIS?
 
-## For Stage 2 (Fable): start here
+## Stage 2 done (2026-11-23)
+- **Engine:** EP15's redo was not yet committed as "Redo with v2 cast done" when this was drawn; its later engine fixes (in its checkpointed
+  working copy) are ported: common.js count / finalScene / nyk at one size per depth (420 / 430), the Mark Sentence reader points at the card
+  only in the pause before reading, no waving at the start of "Now you know!". **The main session: diff ep16's lib.js / common.js / closer.js
+  / main.js against ep15's once EP15's redo is committed** (EP16-only parts: OUTCOMES, KW, KWLINE, SHELF_HIDE, learnAt, PHR).
+- **Art** (loaded after ep15dare.js in page.html): `home15.js` + `garden15.js` (EP15's garden helpers, copied unchanged with a header),
+  `pond16.js` (the animals: frog eggs in jelly, the tadpole at three stages, the young pond frog, the four-lined tree frog, the praying
+  mantis, the hen and chicks, the grasshopper nymph / adult / empty skin, the cute cockroach and its egg case, the foam nest, the mantis egg
+  case, the lime butterfly caterpillar; the sets BG.pond16 + VP16 (the pond side, dawn light option) and BG.grass16 + VG16 (the grassy
+  corner by the void deck); the hidden animals' spots FROGAT / MANTISAT), `art16.js` (Pip's board of four with the bracket and the loop,
+  loopBoard16 OUR FROG'S LIFE CYCLE, the four look-closers eggsArt / chickArt / nymphArt / skinArt, the two journeys eggJourney /
+  nymphJourney, Pip's cockroach homework roachSheet, the board of four loops fourLoops, the fun-fact pictures, the recap pictures, the cards).
+  Baked: bg/pond16, bg/grass16 (`node bake.js pond16 grass16`). p1.js / p2.js: every placeholder replaced, every mark kept.
+- **Timeline fixes (script.py):** P2 `l3` was on the first "three" (now ["l3", "three", 1]); P2 recap marks `pic2` / `pic3` moved to "It" /
+  "Then" (each picture now held >= 3.2 s; was 1.2 s). No audio change.
+- **Sound** (sound_cues.js Stage 2 block, song.js): one place, the garden: R.garden (birds, far children, leaves) for both sets; the pond's
+  frog chorus at dawn, drips, a trickle, bubbles; R.hens (NEW in song.js: clucks and peeps) only while the hen is on screen (hen, lcchick to
+  `pairs`); grasshopper clicks in the grass; foley on the marks (label clicks, the fish's bloop, the sun's shimmer, underwater hush, the
+  hatch, kicks, splash, ribbits, paper, the bracket, tiles, pecks, munching, creak, crack, rustle, wings, strike, scribble, the egg case).
+  No ambience one-shots under the countdowns; the beds pause there (song.js). Both mixes -16.0 LUFS.
+- **Rendered** (build_part.sh under /tmp/explained_render.lock; then rerender.sh: only the changed 10 s chunks, frame-exact):
+  `ep16_part1.mp4` **5:24.9** (324.9 s), `ep16_part2.mp4` **5:30.4** (330.4 s), 1920x1080 30 fps, -16.0 LUFS (not committed);
+  `ep16_part1.srt` / `ep16_part2.srt`, `sheet_part1.png` / `sheet_part2.png`.
+- **Countdowns measured** (measure_countdowns.py on the rendered files): P1 Round 1 numbers 58.167 / 59.167 / 60.167 / 61.167 (steps 1.000),
+  bell 61.134 = timeline; P1 HOLD ON! steps 1.000 x5, bell 193.895; P2 Round 1 steps 1.000 x5, bell 49.329; P2 Showdown steps 1.000 x5,
+  bell 219.412. Only the ticks and the bell under each.
+- **Review:** `NOTES_REVIEW.md` (28 notes, all fixed; what is still weak). QA for the teacher: `qa/highlights.jpg`, `qa/buddy_faces_p1.jpg` /
+  `_p2.jpg` (every pose on screen with its time and reason, pose_reasons.json), `qa/preview_p1_clips.mp4` / `_p2` (720p with sound, not
+  committed), `qa/ep1_compare_p1.jpg` / `_p2.jpg`, drawing sheets qa/p1a-p1e, p2a-p2d, rv1a/b, rv2a/b (every line).
+- **Thumbnails** (thumb_v2.js `ep16_1`, `ep16_2`): `thumb_part1.jpg` FISH OR FROG? + Basil (v2) surprised + a tadpole with back legs and
+  frog eggs in a pond (teal burst); `thumb_part2.jpg` EMPTY SKIN?! + Momo (v2) surprised + the empty skin on its blade and the grasshopper
+  with wings (orange-red burst).
+- **App:** `app_moments.json` (16A / 16B, 12 + 11 moments, 1.5 s before each idea; keys O.cycles + a PLACEHOLDER CH.animalCycles: check the
+  real constant in videos.js); `production/youtube/chapters_p3.json` EP16_P1 / EP16_P2.
+- Not run: the upload (the main session uploads after the teacher's quick look). Chunk folders deleted after muxing.
+
+## For Stage 2 (Fable): start here (done)
 - Read `SCENES_TODO.md` top to bottom (the rules block first, especially rule 5: every pose with its reason), then `../p3_ep16_script.md`
   sections 3 (Realism) and 11.
 - One place: EP15's community garden. Borrow its art from ../ep15/garden15.js (`BG.garden15`, `VG15`) and put EP16's sets in new files
