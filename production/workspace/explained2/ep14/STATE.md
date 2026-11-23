@@ -364,3 +364,6 @@ Not uploaded: a fresh reviewer checks the render against EP1 first (`qa/ep1_comp
 
 ## 22 Nov ~14:00: v2 live (teacher notes after watching)
 Fixes: speaking buddies always lip-sync (P1 3:30-3:37); calmer, meaningful reactions; logical reactions (shy when wrong, confident when right, cheer only when something is learnt; lib.js OUTCOMES, learnAt); P2 0:33 Round 1 photo + labels arrive with the story; P2 2:18 Heart reads the book strip C0.2 (c02silent restored); Momo's "So the Sun only looks as if it moves!" restored so Heart's "Yes, Momo!" makes sense. Lengths 5:37.7 / 5:33.1, -16 LUFS, countdowns measured exact. Uploaded: Part 1 m2Ayyhq7XKg, Part 2 xvD4HPaYjtQ (upload_v2.json), replacing YoxJL8fjAkc / q7OR-eImAsk (they stay public, pointing to the new Part 1).
+
+## 23 Nov: v3 live
+Globe drawn in front of the window (it was cut by the window frame in every room scene; teacher: "The globe is not full circle"); Basil at 0.88 (in proportion). Uploaded Part 1 zWkifG2E82A, Part 2 wIKe2y3lxgs (upload_v3.json), replacing m2Ayyhq7XKg / xvD4HPaYjtQ; all older EP14 uploads point to zWkifG2E82A. upload*.json "after" fixed to explained-p3-ep13v2-part2.
