@@ -316,7 +316,7 @@ const KWHOLD = 2.0;
 // EP16: Part 1 JELLY-LIKE COVERING (inside the look-closer lceggs on Heart's "jelly-like"), TADPOLE (on Heart's "tadpole" in frogans), CHICK
 // (inside lcchick on Heart's "chick"); Part 2 NYMPH (inside lcnymph on Heart's "nymph"), MOULTING (on Heart's "moulting" in moult), EGG CASE
 // (on Heart's "case" in fix). All o.at (no dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it.
-const KW = (PART === 1 ? [["JELLY-LIKE COVERING", "kw_jelly_like_covering", 1, null, { at: [1300, 300], size: 80 }], ["TADPOLE", "kw_tadpole", 1, null, { at: [1420, 300], size: 110 }], ["CHICK", "kw_chick", 1, null, { at: [1440, 300], size: 110 }]]
+const KW = (PART === 1 ? [["JELLY-LIKE COVERING", "kw_jelly_like_covering", 1, null, { at: [960, 470], size: 76 }], ["TADPOLE", "kw_tadpole", 1, null, { at: [1420, 300], size: 110 }], ["CHICK", "kw_chick", 1, null, { at: [1440, 300], size: 110 }]]
   : [["NYMPH", "kw_nymph", 1, null, { at: [1440, 300], size: 110 }], ["MOULTING", "kw_moulting", 1, null, { at: [1420, 300], size: 110 }], ["EGG CASE", "kw_egg_case", 1, null, { at: [1420, 300], size: 104 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lceggs: 1, lcchick: 1, lcnymph: 1, lcskin: 1 };
