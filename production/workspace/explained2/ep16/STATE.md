@@ -118,3 +118,25 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 
 ## 23 Nov: teacher approved the voices
 The three "praying mantis" lines and the new-words clip (nymph, moulting, mantis, jelly-like, HDB) are approved as recorded.
+
+## 23 Nov: every leaf on a stem (SERIES_FORMAT "Plants grow the way real plants grow, and what is gone is gone")
+- **Found** (stills of every scene, both parts, before and after: `qa/leaf_fix/before_after.jpg`): the lime plant in the grassy corner
+  (pond16.js BG.grass16: 26 leaves scattered by hash() round a bare stem; in every grass16 scene of both parts, the worst at P2 4:40);
+  the bougainvillea in the pond-side pot (pond16.js BG.pond16: 12 loose blobs round a point, not one bush); the tree frog's fun-fact
+  leaf (art16.js ffDrop: floating, no branch; ffFoam: no stalk, the frog hovering over the branch); the two grass blades in Part 2's
+  nymph look-closer (art16.js nymphArt: both ends free, in mid-air); the leaf munched in BE THE NYMPH (art16.js: no stalk or stem).
+  Nothing fades to a ghost (checked every fade of a thing the story removes: the tail, the leaf, the numbers, the jelly; all go to 0).
+- **Fixed:** pond16.js `limeTree16` (EP18's limePlant18 approach: a trunk and six branches as quadratics, every leaf on a 11 px leaf stalk
+  along a branch, one at each tip; same pot, place and crown size; branch B1 ends at (1620, 404) where P2's dare caterpillar leaf now
+  sits on its own stalk, p2.js SC.dare) and `bougain16` (one bush mass on the rim, its small leaves and pink bracts on that mass);
+  art16.js ffFoam / ffDrop (the leaf hangs from a branch on a stalk in both; the frog sits on the branch), `grassLeaf16` (nymphArt's
+  blades grow out of the ground at their left end and taper to the tip; the stretch the grasshoppers stand on is unchanged), the munched
+  leaf on a stalk and a stem from below the frame. Re-baked `bg/grass16.png`, `bg/pond16.png` (`node bake.js pond16 grass16`).
+- **Re-rendered both parts fully** (build_part.sh 1 and 2; audio rebuilt from the same cues, unchanged): `ep16_part1.mp4` 324.9 s, 9747
+  frames; `ep16_part2.mp4` 330.433 s, 9913 frames; 1920x1080 30 fps, both -16.0 LUFS. The Showdown fix (230-250 s: Pip oops, Basil and
+  Momo arms crossed through the whole fix) comes from p2.js, so it is in the new Part 2 (checked at 236 s and 245 s). Countdowns
+  re-measured: P1 Round 1 steps 1.000 x3, HOLD ON! 1.000 x5 (bell 193.895); P2 Round 1 1.000 x5 (bell 49.329), Showdown 1.000 x5
+  (numbers 214.445 ... 219.445, bell 219.412). New sheet_part1/2.png, srt, `qa/highlights.jpg`, `qa/preview_p1_clips.mp4` / `_p2`.
+  Chunk folders deleted. Thumbnails not regenerated (the lime plant is not in them; see the open point).
+- **Open point:** `thumb_part2.jpg` shows the empty skin and the grasshopper on two loose grass blades (sticker style on a burst, as
+  every thumbnail): if the teacher reads those as floating leaves, root them in a strip of ground in thumb_v2.js `ep16_2`.
