@@ -154,3 +154,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 - **Review pack:** qa/buddy_faces_p1.jpg, qa/buddy_faces_p2.jpg, qa/preview_p1_clips.mp4 (82 s), qa/preview_p2_clips.mp4 (87 s; not
   committed), qa/highlights.jpg, qa/ep1_compare_p1/p2.jpg; thumbnails thumb_part1.jpg (SAME?!) / thumb_part2.jpg (WHICH FIRST?) via
   ../thumb_v2.js ep18_1 / ep18_2; app_moments.json; chapters_p3.json EP18_P1 / EP18_P2. Not uploaded.
+
+## 23 Nov: LIVE
+Teacher: "ok to upload all". Part 1 MnDMkHAvOjc, Part 2 f2MG82O_9sA (after EP17 in both playlists); classic xaCprQPXVYY retired (NEW VERSION line -> Part 1). Chapters: chapters_p3.json.

@@ -166,3 +166,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   (the camera pushes in when they matter); the hand that holds Basil's magnet is a human hand (four fingers and a thumb: no buddy has a holding
   pose); the pin journey's magnet is shown end-on (its S END is what the pin clicks onto); Momo's note card in HOLD ON! sits behind her at
   times; the dare's pencil stands in front of the tray.
+
+## 23 Nov: LIVE
+Teacher: "ok to upload all". Part 1 LZxwTx-EccU, Part 2 JpBskDtIwb0 (after EP18 in both playlists); replaces none (EP20 retires classic VLGDU0qduEw). Known flaw left in (teacher approved as is): the INTERACTIONS banner top is cut in the first shot (P1 0:05). Chapters: chapters_p3.json.
