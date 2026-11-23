@@ -1,0 +1,285 @@
+{
+ "_note": "EP15 (v2 cast redo), for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles, CH.plantCycles), set url to the uploaded video ids. These two parts replace the classic entry no 15 (RVRoaWWKjEM, 'What Happens After You Plant A Seed? Round And Round'), which upload.json retires.",
+ "entries": [
+  {
+   "no": "15A",
+   "art": "🥭",
+   "topic": "Life Cycles",
+   "title": "We Planted a Mango SEED. What Grows FIRST? (Part A)",
+   "len": "5:28",
+   "url": "https://www.youtube.com/watch?v=<EP15_P1>",
+   "moments": [
+    {
+     "at": "0:54",
+     "what": "Round 1: what does a mango seed grow into first?",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g501",
+     "_t": 55.58
+    },
+    {
+     "at": "1:26",
+     "what": "Observing: look again and again, not only twice",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g602m",
+     "_t": 87.92
+    },
+    {
+     "at": "2:06",
+     "what": "We use our five senses to gather information about plants",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g701",
+     "_t": 127.87
+    },
+    {
+     "at": "2:16",
+     "what": "Through the window in the pot: the root grows first, then the shoot",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g801",
+     "_t": 137.83
+    },
+    {
+     "at": "2:34",
+     "what": "New mango leaves are red at first, then turn green",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g804m",
+     "_t": 155.79
+    },
+    {
+     "at": "2:55",
+     "what": "A seed grows into a young plant first",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g807",
+     "_t": 176.77
+    },
+    {
+     "at": "3:00",
+     "what": "A young plant: a thin stem, a few leaves, no flowers or fruits",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g808",
+     "_t": 181.94
+    },
+    {
+     "at": "3:10",
+     "what": "Journey: be the mango seed, the root goes down, the shoot goes up",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g901",
+     "_t": 191.78
+    },
+    {
+     "at": "3:39",
+     "what": "The seed grew into a young plant",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g1001",
+     "_t": 221.42
+    },
+    {
+     "at": "3:46",
+     "what": "Measure the height of a plant with a ruler",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g1101p",
+     "_t": 228.08
+    },
+    {
+     "at": "3:56",
+     "what": "HOLD ON! Measuring from the table is not fair",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g1201",
+     "_t": 238.32
+    },
+    {
+     "at": "4:15",
+     "what": "Put the zero of the ruler on the soil: the plant is 12 cm",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "g1204p",
+     "_t": 257.33
+    }
+   ]
+  },
+  {
+   "no": "15B",
+   "art": "🌳",
+   "topic": "Life Cycles",
+   "title": "The Mango or the Seed: Which Came FIRST? (Part B)",
+   "len": "5:42",
+   "url": "https://www.youtube.com/watch?v=<EP15_P2>",
+   "moments": [
+    {
+     "at": "0:35",
+     "what": "Round 1: an old mango tree in flower: which stage is it in?",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j401",
+     "_t": 36.69
+    },
+    {
+     "at": "1:08",
+     "what": "A young plant beside an adult plant: thin stem or thick trunk",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j501",
+     "_t": 70.41
+    },
+    {
+     "at": "1:24",
+     "what": "The young plant grew into an adult plant with flowers and fruits",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j506",
+     "_t": 85.68
+    },
+    {
+     "at": "1:40",
+     "what": "Only the adult plant has flowers and fruits",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j508",
+     "_t": 102.46
+    },
+    {
+     "at": "1:46",
+     "what": "Where do new mango seeds come from? Not the roots",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j601m",
+     "_t": 108.0
+    },
+    {
+     "at": "1:52",
+     "what": "Journey: be a mango flower that grows into a mango with a seed inside",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j603",
+     "_t": 113.53
+    },
+    {
+     "at": "2:22",
+     "what": "New seeds grow inside the fruits, not in the roots",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j801b",
+     "_t": 144.43
+    },
+    {
+     "at": "2:26",
+     "what": "Seed, young plant, adult plant, and its fruits bring new seeds",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j803p",
+     "_t": 148.45
+    },
+    {
+     "at": "2:39",
+     "what": "There are three stages in the life cycle of a plant",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j806",
+     "_t": 160.98
+    },
+    {
+     "at": "2:51",
+     "what": "Showdown: the adult plant is not the last stage",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j901",
+     "_t": 173.47
+    },
+    {
+     "at": "3:24",
+     "what": "The stages in a life cycle are repeated: no first or last stage",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j906",
+     "_t": 205.65
+    },
+    {
+     "at": "3:33",
+     "what": "Life cycles repeat so a kind of plant does not disappear",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j1001m",
+     "_t": 214.79
+    },
+    {
+     "at": "3:47",
+     "what": "Singapore's seed bank keeps seeds safe",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j1005",
+     "_t": 229.01
+    },
+    {
+     "at": "4:09",
+     "what": "A seed bank stores seeds safely until they are needed",
+     "keys": [
+      "O.cycles",
+      "CH.plantCycles"
+     ],
+     "_line": "j1101",
+     "_t": 250.87
+    }
+   ]
+  }
+ ]
+}

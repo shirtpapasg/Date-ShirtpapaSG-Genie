@@ -291,7 +291,7 @@ SEQ2 = [
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
  ("say", "f1101", H, "Showdown! Double points. Pip's homework has one mistake. Line one, two, or three? Show me with your fingers.", {"pre": .5}),
- ("say", "f1102p", P, "My homework is on the cockroach! One: it has three stages. Two: its eggs are found in an egg case. Three: its young does not look like the adult.", {"pre": .4, "post": .2, "kw": [["l1", "one"], ["l2", "two"], ["l3", "three"]]}),
+ ("say", "f1102p", P, "My homework is on the cockroach! One: it has three stages. Two: its eggs are found in an egg case. Three: its young does not look like the adult.", {"pre": .4, "post": .2, "kw": [["l1", "one"], ["l2", "two"], ["l3", "three", 1]]}),
  *cut("eww", [("say", "f1103m", M, "Eww, a cockroach! But I will be brave and look.", {"pre": .3})]),
  *LOCK("show", 5.0),
  ("say", "f1104", H, "Locked in!", {"pre": 0}),

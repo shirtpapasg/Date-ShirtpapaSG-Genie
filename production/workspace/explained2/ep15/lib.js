@@ -53,11 +53,10 @@ P.pip = "#8B5CF6"; P.basil = "#14B8A6"; P.momo = "#FB7158";
 const AURA = { pip: P.pip, basil: P.basil, momo: P.momo }, TINT = { pip: "#EDE4FF", basil: "#D5F7F2", momo: "#FFE3DC" }, BNAME = { pip: "Pip", basil: "Basil", momo: "Momo" };
 // a small name tag: the name in white on the buddy's colour
 const nameTag = (who, size = 32) => { const w = tw(BNAME[who], size, 700) + size * 1.5, h = size * 1.5; return `<g filter="url(#dropS)"><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="${P[who]}"/><rect x="${n2(-w / 2 + 3)}" y="${n2(-h / 2 + 3)}" width="${n2(w - 6)}" height="${n2(h - 6)}" rx="${n2(h / 2 - 3)}" fill="none" stroke="#fff" stroke-width="3" opacity=".85"/></g>` + T(0, n2(size * .35), BNAME[who], size, "#fff"); };
-// EP14 in colour: poses the teacher has not painted in colour yet (prep_sprites.py copies only coloured Momo / Basil files)
-// Momo "pointing" -> waving (every EP14 use is an inviting or showing gesture; "pointing_cut" = her cropped coloured pointing, tail side
-// hidden only); Basil "arms_crossed" -> thinking (he waits / considers). A painted one, when it comes, is used automatically.
+// EP15 v2 cast (prep_sprites.py): Momo v2 and Basil v2 have every pose (Basil also worried and laughing), so the old stand-ins are gone.
+// Only "worried" (during a countdown, before the reveal) has no painting for Pip and Momo yet: it shows their thinking face.
 const TRIAL = true;   // EP14 trial (teacher, 22 Nov): no aura discs; the buddies stand in the scene with a contact shadow
-const POSE_SUB = { basil: { arms_crossed: "thinking" } };   // EP15: Momo and Basil have coloured pointing; Basil has no coloured arms-crossed: thinking
+const POSE_SUB = { pip: { worried: "thinking" }, momo: { worried: "thinking" } };
 const DISC_DX = { pip: -.06, basil: -.10, momo: -.08 };
 /* v3 (teacher, 22 Nov: "no buddy ever frozen"): every buddy on screen reacts to every sentence someone else says. At each sentence start
    (Heart's or another buddy's) the buddy swaps to a reaction pose (squash, hard cut, overshoot, hop: never a cross-fade) chosen from what is
@@ -76,7 +75,7 @@ function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id)
    correct one should be confident/smile. celebrate with hands high up only when achieved/learnt something new". */
 let _learn = null;
 function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you know!"
-    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|tagadult$|tback$|bend$)/.test(k))   /* EP15 */ _learn.push([v - .4, v + 4]);
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|tagadult$|tback$|bend$|jyoung$|jnew$)/.test(k))   /* EP15 */ _learn.push([v - .4, v + 4]);
     for (const s of TL.scenes || []) if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); }
   return _learn.some(([a, b]) => t >= a && t < b); }
 // EP15 (script section 3): Part 1 Round 1 Basil right (a young plant), Momo (a mango) and Pip (a flower) wrong; HOLD ON Pip right, Basil wrong.
@@ -89,9 +88,11 @@ function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id] = o.at.sp
   return null; }
 function reactPose(who, txt, k) {   // teacher, 22 Nov: "the pet buddies movement are really random in some scene". A pose swap now only
   // answers something in the line: a question -> thinking; a problem word -> oops/surprised; a celebration -> cheer. Anything else: a nod.
-  const q = /\?$/.test(txt), neg = /\b(not|no|never|break|breaks|broke|bad|cannot|can't|fragile|crack|oh no|oops|knock|clang)\b/i.test(txt),
-    yay = /!$/.test(txt) && /\b(yes|right|correct|well done|great|amazing|you got it|we did it|hooray|now you know)\b/i.test(txt);
-  if (q) return "thinking"; if (neg) return who === "basil" ? "oops" : "surprised"; if (yay) return "cheer"; return null; }
+  // EP15 (teacher, 23 Nov: "every reaction must have a reason"): one job per pose. The only automatic pose left is "thinking", right after a
+  // real question; the viewer prompts ("Are you ready?", "Three fingers?", "One finger or more?") are not questions to think about.
+  // Surprise, shyness, confidence and cheers are staged by the scenes (and OUTCOMES), never guessed from words.
+  const q = /\?$/.test(txt) && !/^(are you ready|ready|arms crossed|one finger|two fingers|three fingers|more than one|show me)/i.test(txt.trim()) && txt.split(/\s+/).length >= 4;
+  return q ? "thinking" : null; }
 // only ONE listener answers a line with a pose (they take turns); the other nods; and no buddy swaps pose more than once in 6 s
 function reactChosen(g) { const L = ["pip", "basil", "momo"].filter((w) => w !== g.who); return L[g.k % L.length]; }
 function reactPoseAt(tr, i, who) { const g = tr[i]; if (g.who === who || reactChosen(g) !== who) return null; const ps = reactPose(who, g.txt, g.k); if (!ps || (ps === "cheer" && !learnAt(g.t))) return null;
@@ -102,18 +103,19 @@ function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact
   for (; i >= 0; i--) { const g = tr[i]; if (g.t < T0) return null; if (g.who === who) continue; const t0 = g.t + d; if (t0 < tsw + .7) return null;
     let nt = 1e9; for (let j = i + 1; j < tr.length; j++) if (tr[j].who !== who) { nt = tr[j].t + d; break; }
     const t1 = Math.min(t0 + 1.45, nt - .08, nextOwn(who, g.t) - .3, nxt - .2); if (t1 - t0 < .55) { if (t < t0 + .4) return { t0, t1: t0 + .4, pose: null }; continue; }
-    const pose = reactPoseAt(tr, i, who); return { t0, t1, pose: pose && SPR[`${who}_${pose}`] ? pose : null }; }
+    const pose = reactPoseAt(tr, i, who); return { t0, t1, pose: pose && SPR[`${who}_${pose}`] ? pose : null, txt: g.txt }; }
   return null; }
 function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.0 }[who]; const k = Math.floor((t + ph) / per), tb = k * per - ph + hash(k, who.length) * 1.4; return t >= tb && t < tb + .1; }
 /* buddy(who, x, y, h, t, o): feet at (x, y), sitting body height h.
    o.poses = [[time, pose], ...] (pose swaps POP with a squash and a stretch, never a cross-fade; default pose "sit")
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
    o.mouth (0..2) / o.eyes "shut": a yawn or a doze in the sit pose (EP14); o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
-const SIZE_K = { basil: .88 };   // teacher, 23 Nov: Basil's painting is wider and heavier; keep the three in proportion
+const SIZE_K = { basil: .94 };   // teacher, 23 Nov: keep the three in proportion. EP15 v2 cast: Basil v2 is slimmer than the old Basil; at .94 his painted area (tail included) equals Pip's and Momo's and his crest sits level with Pip's head (qa/size_check.jpg)
 function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99; const PS = (o.poses || []).slice().sort((a, b) => a[0] - b[0]);   // EP15: poses in time order
   for (const [tp, p] of PS) if (t >= tp) { pose = p; tsw = tp; }
+  let why = o.pose ? "scene" : "scene";   // EP15 QA: where the pose came from (qa/buddy_faces, pose_audit.js)
   let nxt = 1e9; for (const [tp] of PS) if (tp > t) { nxt = tp; break; }
   // teacher, 22 Nov (EP14 P1 3:30): "both pip and basil mouth not moving". Pose paintings have no mouths, so a buddy SPEAKING always
   // shows its talking sprite (lip-sync + blinks), with the usual pose-swap pop at the start of the line; the pose returns after the line.
@@ -122,11 +124,11 @@ function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
     else if (!spk && pose !== "sit" && pose !== "back" && !o.keepPose) { for (const id of TL.order) { const L = TL.lines[id];   // back to the pose: pop again
       if (L.who === who && L.end + .05 > tsw && L.end + .05 <= t && t - L.end < 1.5) tsw = L.end + .05; } } }
   if (!speaking(who, t) && !o.keepPose) { const oc = outcomeAt(who, t);
-    if (oc) { pose = oc.pose; if (oc.t0 > tsw) tsw = oc.t0; nxt = Math.min(nxt, oc.t0 + 4); }
-    else if (pose === "cheer" && !learnAt(t)) pose = SPR[`${who}_arms_crossed`] && /answer|lock/i.test((window._S || {}).name || "") ? "arms_crossed" : "sit"; }   // hands up only when something is learnt
+    if (oc) { pose = oc.pose; why = "outcome"; if (oc.t0 > tsw) tsw = oc.t0; nxt = Math.min(nxt, oc.t0 + 4); }
+    else if (pose === "cheer" && !learnAt(t) && !o.achieved) pose = "sit"; }   // hands up only when something is learnt or achieved (EP15: never a stand-in arms-crossed)
   let nodH = 0;
   if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);   // v3: never frozen
-    if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
+    if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; why = "react:" + (R.txt || ""); tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
       else if (!R.pose && t < R.t0 + .5) nodH = hop(t, R.t0, .36, 1); } }
   let k = o.k || 1; if (o.in !== undefined) { if (t < o.in) return ""; k *= spring(t, o.in, .5); } if (o.out !== undefined && t > o.out) { k *= 1 - eo((t - o.out) / .2); if (k < .02) return ""; }
   const ph = { pip: .9, basil: 0, momo: 1.9 }[who];
@@ -154,7 +156,7 @@ function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   else name = `${who}_${POSE_SUB[who] && POSE_SUB[who][pose] && !SPR[`${who}_${pose}`] ? POSE_SUB[who][pose] : pose}`;
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = o.flip ? -1 : 1;
-  if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek });   // EP15 QA (qa/buddy_faces): which face is on screen, where
+  if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek, why });   // EP15 QA (qa/buddy_faces): which face is on screen, where
   let out = "";
   if (o.tag !== false || o.peek) (window._BP = window._BP || {})[who] = { x, y, h: h * k, flip: !!o.flip, peek: !!o.peek };
   if (o.aura && !TRIAL) { const R = h * .62 * Math.min(1, k), cx = x + DISC_DX[who] * h * fl; out += `<circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="${AURA[who]}" opacity="${o.auraO || .9}"/><circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="url(#gSpot)"/>`; }

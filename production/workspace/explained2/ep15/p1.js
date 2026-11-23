@@ -30,13 +30,13 @@ const camCold = (t) => [1 + .07 * eio(t / 6), 1150, 640];
 const cutHands = (t) => { const tc = MK("cutmango"), u = (t - tc) / 2.6; if (u < -.35 || u > 1.15) return ""; let s = "";
   const kin = eio((t - tc + .4) / .4) * (1 - eio((t - tc - 1.1) / .4)), ky = 640 - 70 * ss(tc, tc + .5, t) + 70 * ss(tc + .6, tc + .9, t);
   if (kin > .01) s += TF(1060 + 520 * (1 - kin), ky, 1, `<path d="M-10 0 L-190 -6 Q-210 0 -190 10 L-10 12z" fill="url(#g15Steel)" stroke="#8A97A8" stroke-width="3"/><rect x="-10" y="-8" width="90" height="26" rx="8" fill="#5E3F28"/>` + TF(40, 4, .8, hand15({ curl: .8 }), 180, -.8));
-  const lin = eio((t - tc - 1.2) / .4) * (1 - eio((t - tc - 2.3) / .4)); if (lin > .01) { const e = eio((t - tc - 1.4) / .9); s += TF(lerp(1060, 1300, e) + 400 * (1 - lin), lerp(650, 650, e) - 70 * Math.sin(Math.PI * e) - 30, .8, hand15({ curl: .55 }), 120); }
+  const lin = eio((t - tc - 1.2) / .4) * (1 - eio((t - tc - 2.3) / .4)); if (lin > .01) { const e = eio((t - tc - 1.4) / .9); s += TF(lerp(1060, 1300, e) + 64 + 400 * (1 - lin), 650 - 70 * Math.sin(Math.PI * e) - 4, .8, hand15({ curl: .55 }), 180, -.8); }
   return s; };
 const kitchenBoard = (t) => { const tc = MK("cutmango"); return { cut: ss(tc + .3, tc + .55, t), seedOut: ss(tc + 1.4, tc + 2.3, t) }; };
 SC.cold = (t, s) => { const tb = MK("boardsIn"), tp = MK("budsIn");
   return VK(t, { board: kitchenBoard(t), over: boards3(t, "c", tb) + cutHands(t) }, camCold(t))
-    + bd("basil", 1660, 768, 400, t, { in: tp, poses: [[tp, "sit"], [tp + 1.1, "cheer"]], eyes: t < tp + 1 ? "shut" : undefined, k: 1 + .03 * Math.sin(t * 9) * (t < tp + 1 ? 1 : 0), flip: true, look: -6, nohop: true })
-    + bd("momo", 330, 1076, 420, t, { in: tp + .2, poses: [[tp + .2, "thinking"]], look: 4 }) + bd("pip", 640, 1076, 340, t, { in: tp + .4, poses: [[tp + .4, "waving"]], jump: [[tp + .45, 24]], wave: true })
+    + bd("basil", 1660, 768, 400, t, { in: tp, poses: [[tp, "sit"]], eyes: t < tp + 1 ? "shut" : undefined, k: 1 + .03 * Math.sin(t * 9) * (t < tp + 1 ? 1 : 0), flip: true, look: -6, nohop: true })
+    + bd("momo", 330, 1076, 400, t, { in: tp + .2, look: 4 }) + bd("pip", 640, 1076, 395, t, { in: tp + .4, poses: [[tp + .4, "waving"], [tp + 2.2, "sit"]], jump: [[tp + .45, 24]], wave: true })
     + OP(ramp(t, .5, .5), lowerPill(60, 96, "An HDB flat, Singapore ·", "morning")) + knife(t, MK("cutmango") - .4); };
 
 /* 2 · "Last time...": EP14's dare, word for word. ONE calm picture: the three mango boards side by side, a gentle push-in, the big ?, the
@@ -53,8 +53,8 @@ SC.lasttime = (t, s) => { const L = "g203", tc = [W(L, "one"), W(L, "two"), W(L,
    to himself (thinking), Basil is sure (a proud hop), Momo thinks */
 const camBack = (t) => { const u = clamp((t - SCN.back.t0) / (SCN.title.t1 - SCN.back.t0)); return [1.07 + .05 * eio(u), 1180, 600]; };
 const budsBack = (t) => { const s = SCN.back;
-  return bd("basil", 1660, 768, 470, t, { in: s.t0, flip: true, poses: [[s.t0, "sit"], [LT("g204") + .4, "thinking"]], jump: [[LT("g204") + .45, 20]], look: -4 })
-    + bd("momo", 330, 1076, 420, t, { in: s.t0, poses: [[s.t0, "thinking"]], look: 4 }) + bd("pip", 640, 1076, 340, t, { in: s.t0, poses: [[s.t0, "sit"], [LT("g204") + .2, "thinking"]] }); };
+  return bd("basil", 1660, 768, 470, t, { in: s.t0, flip: true, poses: [[s.t0, "sit"]], jump: [[LT("g204") + .45, 20]], look: -4 })
+    + bd("momo", 330, 1076, 400, t, { in: s.t0, poses: [[s.t0, "thinking"]], look: 4 }) + bd("pip", 640, 1076, 395, t, { in: s.t0, poses: [[s.t0, "sit"], [LT("g204") + .2, "thinking"]] }); };
 SC.back = (t, s) => (t < s.t0 + .5 ? `<rect width="1920" height="1080" fill="${P.night}"/>` : "") + VK(t, { over: boards3(t, "bk") }, camBack(t)) + budsBack(t)
   + (t >= LT("g204") - .1 ? TF(620, 330, spring(t, LT("g204") - .1, .4), tpill(0, 0, "Hold on to your answer!", 52, P.sun, P.ink, { w: 700 })) : "") + melt(t, s, "lasttime", .5) + HUD(t);
 // the title slam over the dimmed kitchen: WE PLANTED A MANGO SEED (white) then WHAT GROWS FIRST? (sun yellow)
@@ -76,8 +76,7 @@ SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, clues: DARE_CLUES.map((c, i) => 
   tc: [W(L1, "what"), W(L1, "seed"), W(L1, "show")], ring0: MK("ring0_r1"), dur: 3, lock: "g502",
   pics: [0, 1, 2].map((i) => dareBoard(i, 0, 108, .6, { lab: false, id: "r1i" })),
   obj: ringSeed,
-  picks: [{ who: "momo", id: "g503", word: "1" }, { who: "pip", id: "g504", word: "2" }, { who: "basil", id: "g505", word: "3" }],
-  react: [[LE("g503") + .1, "momo", "pointing"], [LE("g504") + .1, "pip", "thinking"], [LE("g505") + .1, "basil", "cheer"]] });
+  picks: [{ who: "momo", id: "g503", word: "1" }, { who: "pip", id: "g504", word: "2" }, { who: "basil", id: "g505", word: "3" }] });
 
 /* 6 · "How will we ever know?": the corridor. Momo big at the left asks; the camera drifts to our pot on its stand; an adult's hand presses the
    seed into the soil (potin), pats it twice (soilpat), and a little water from a small green can (water): the soil darkens */
@@ -92,8 +91,8 @@ const plantHands = (t) => { const tp = MK("potin"), tpat = MK("soilpat"), tw = M
   return s; };
 SC.plant = (t, s) => { const tp = MK("potin"), wet = ss(MK("water"), MK("water") + 1.2, t);
   return VC(t, { seed: t < tp + .1 && t > tp - .5, wet, items: plantHands(t) }, camPlant(t))
-    + bd("momo", 330, 1076, 520, t, { in: s.t0 + .05, poses: [[s.t0, "sit"], [LE("g601m") + .1, "thinking"]], look: 3 })
-    + bd("basil", 1600, 1070, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [tp + .3, "surprised"], [tp + 1.6, "sit"]], look: -5 })
+    + bd("momo", 330, 1076, 520, t, { in: s.t0 + .05, poses: [[s.t0, "sit"]], look: 3 })
+    + bd("basil", 1600, 1070, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], look: -5 })
     + bd("pip", 1800, 1066, 340, t, { in: s.t0 + .25, flip: true, poses: [[s.t0, "sit"]], jump: [[MK("water") + .2, 14]] }) + knife(t, 99999) + melt(t, s, "r1", .45) + HUD(t); };
 
 /* 7 · [LOOK CLOSER] observing like a scientist (home15.js obsArt): the seed big beside the journal; Momo's plan (look only twice) filled in by
@@ -109,7 +108,7 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "g702", sayId: "g701", who: "basil", 
    SEED pops on Heart's word; the root FIRST (down), then the hooked shoot (up), two RED leaves that turn green; the old seed still there */
 const camSeed = [1.25, 1240, 560];
 SC.lcseed = (t, s) => { window._BUBAT = { '*': [520, 300] }; const p = camPt(camSeed, [POTW[0], POTW[1] - 110]);
-  return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: seedArt, bgc: "#FFF1C8", set: (tt) => VC(tt, { wet: 1 }, camSeed), verdict: [`A YOUNG PLANT COMES FIRST`, GOODC], tv: MK("v_seed"),
+  return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: seedArt, bgc: "#FFF1C8", set: (tt) => VC(tt, { wet: 1 }, camSeed), verdict: [`A YOUNG PLANT COMES FIRST`, GOODC], tv: MK("v_seed"), peekEv: [[LT("g805") + .3, "momo", "surprised"], [LT("g805") + 2.2, "momo", "sit"], [MK("v_seed") + .2, "basil", "cheer"]],
     over: (tt) => stepPill(tt, DAYS, 1640, 205) + speeded(tt, MK("d1"), MK("v_seed"), 1640, 290) }); };
 
 /* the answer is three: a young plant. The corridor; our young plant (Day 45: a thin stem, four green leaves); EP14's three boards stand along the
@@ -119,20 +118,25 @@ SC.seedans = (t, s) => { const tA = MK("ansglow"), tK = MK("kw_young_plant"), e 
   return VC(t, { plant: PLANT45, items: [0, 1, 2].map((i) => dareBoard(i, ABX[i], ABY, .46, { lab: false, id: "sa" }) + (i === 2 ? tickChip(t, tA, ABX[i] + 70, ABY - 200) : xChip(t, tA + .15 * i, ABX[i] + 70, ABY - 200))).join("") }, cam)
     + coin(t, MK("coin1") - .1, 560, 330, "+1", "if you showed three fingers")
     + bd("momo", 190, 1076, 370, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("momo", 320, 830, t, s.t0 + .3, "1") : "") + xChip(t, tA + .4, 360, 780, .7)
-    + bd("pip", 450, 1070, 350, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [LT("g808") + .3, "pointing"]] }) + (t > s.t0 + .35 ? pickNum("pip", 570, 840, t, s.t0 + .35, "2") : "") + xChip(t, tA + .5, 610, 790, .7)
+    + bd("pip", 450, 1070, 350, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [LT("g808") + .3, "pointing"], [LE("g808") + .4, "sit"]] }) + (t > s.t0 + .35 ? pickNum("pip", 570, 840, t, s.t0 + .35, "2") : "") + xChip(t, tA + .5, 610, 790, .7)
     + bd("basil", 1660, 1076, 540, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 30]] }) + (t > s.t0 + .3 ? pickNum("basil", 1430, 760, t, s.t0 + .3, "3") : "") + tickChip(t, tA + .3, 1470, 700, .7) + HUD(t); };
 
 /* 10 · Be the mango seed! The pill, the buddies wave us off, and ONE glide to the pot and down into the soil (a soft dark wipe); the journey
    (home15.js seedJourney; the tags are wired on their marks; the buddies ride along, shrunk); then one pull back out */
 const camDive = (dive, e) => { const m = Math.max(e * .5, dive); return [1 + .25 * e + 6 * dive, lerp(1000, POTW[0], m), lerp(560, POTW[1] + POTS + 10, m)]; };
 SC.waitw = (t, s) => { const L = "g901", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VC(t, { plant: PLANT45, snail: [1180, 612] }, camDive(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 430, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1070, 360, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
-      + bd("basil", 1700, 1076, 430, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "cheer"]], wave: true })
+  return VC(t, { plant: PLANT45, snail: [1180, 612] }, camDive(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 430, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1070, 410, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+      + bd("basil", 1700, 1076, 430, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the mango seed!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#2E1C10", 960, 540); };
-SC.shrink = (t, s) => { const m = MK, rp = (w) => w === "momo" ? [[m("jseed") + .3, "surprised"], [m("jlight") + .1, "surprised"], [m("jyoung") - .1, "cheer"]] : w === "basil" ? [[m("jroot") + .2, "pointing"], [m("jlight") + .15, "surprised"], [m("jyoung"), "cheer"]] : [[m("jshoot") + .2, "thinking"], [m("jlight") + .2, "surprised"], [m("jyoung") + .1, "cheer"]];
-  return seedJourney(t, s) + riders(t, s, { tin: m("jseed") + .6, h: 170, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] }, poses: { pip: rp("pip"), basil: rp("basil"), momo: rp("momo") } })
+SC.shrink = (t, s) => { const m = MK, rp = (w) => w === "momo" ? [] : w === "basil" ? [[m("jroot") + .2, "pointing"], [m("jshoot"), "sit"]] : [[m("jshoot") + .2, "pointing"], [m("jleaves"), "sit"], [m("jyoung") + .1, "cheer"]];
+  // EP15 fix round (richer journey): the days tick by in a pill (Day 1 to Day 30, speeded up, matching the window in the pot); after the
+  // watering, drops seep down through the soil to you (you swell); the buddies ride along a little bigger
+  const tW = m("jswell"), drops = t < tW - .2 || t > tW + 3.4 ? "" : [0, 1, 2, 3, 4, 5].map((i) => { const u = clamp((t - tW - i * .35) / 1.6); if (u <= 0 || u >= 1) return ""; const x = 520 + i * 170 + 40 * hash(i, 9), y = lerp(-30, 470, ei(u));
+      return `<path d="M${n2(x)} ${n2(y - 26)} Q${n2(x + 14)} ${n2(y - 2)} ${n2(x)} ${n2(y + 8)} Q${n2(x - 14)} ${n2(y - 2)} ${n2(x)} ${n2(y - 26)}z" fill="#8FD3F0" stroke="#4BA3C9" stroke-width="3" opacity="${n2(1 - ss(.85, 1, u))}"/>`; }).join("");
+  const days = stepPill(t, [["jseed", "Day 1"], ["jswell", "Day 5"], ["jroot", "Day 10"], ["jshoot", "Day 20"], ["jleaves", "Day 30"]], 1730, 70) + speeded(t, m("jseed") + .3, s.t1 - .3, 1730, 140);
+  return seedJourney(t, s) + drops + days + riders(t, s, { tin: m("jseed") + .6, h: 200, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] }, poses: { pip: rp("pip"), basil: rp("basil"), momo: rp("momo") } })
     + youTag(t, m("jseed"), "You: a mango seed") + feelTag(t, m("jroot"), m("jshoot") - .1, "the root grows down", 160) + feelTag(t, m("jshoot") + .2, m("jleaves") - .1, "the shoot grows up", 160) + feelTag(t, m("jyoung"), m("jyoung") + 3, "a young plant", 160); };
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VC(t, { plant: PLANT45 }, camDive(u, u)) + bd("momo", 300, 1076, 430, t, { in: s.t0 + .2, poses: [[s.t0 + .2, "cheer"]] }) + bd("basil", 1700, 1076, 430, t, { in: s.t0 + .25, flip: true, poses: [[s.t0 + .25, "cheer"]] }) + wipe(t, s.t0, "#2E1C10") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VC(t, { plant: PLANT45 }, camDive(u, u)) + bd("momo", 300, 1076, 430, t, { in: s.t0 + .2 }) + bd("basil", 1700, 1076, 430, t, { in: s.t0 + .25, flip: true }) + wipe(t, s.t0, "#2E1C10") + HUD(t); };
 // Mark Sentence 2 (Momo): under the card, the time-lapse in four small pictures with arrows (the seed, the root, the shoot, the young plant)
 const lapseMini = (i, t) => { const soil = `<rect x="-80" y="0" width="160" height="70" fill="#6E4A2C"/><rect x="-80" y="-90" width="160" height="90" fill="#DCEFFB"/>`;
   const sd = TF(0, 36, .42, mangoSeed(1, -8)); const root = i >= 1 ? `<path d="M-26 44 Q-34 60 -30 ${i >= 1 ? 68 : 50}" stroke="#F6EEDF" stroke-width="6" fill="none" stroke-linecap="round"/>` : "";
@@ -175,9 +179,9 @@ SC.holdon = (t, s) => { const a = "g1201", b = "g1202", c = "g1203", d = "g1204p
   return room + (ring ? OP(st, bg("stage")) : "")
     + (ring ? OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner: pic })}</g>`)
       + labels + TF(1700, 640 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 470 + bob * .6, 1.2) + TF(1700, 860, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
-    + bd("pip", 1720, 1076, 440, t, { in: LT(d) - .5, flip: true, poses: [[LT(d) - .5, "surprised"], [LT(d) - .12, "sit"], [LE(d) + .2, "pointing"]], look: -3 })
-    + bd("momo", 760, 1066, 320, t, { in: LT(d) - .3, poses: [[LT(d) - .3, "thinking"], [t12, "surprised"], [t12 + 1.2, "sit"]] })
-    + bd("basil", 300, 1076, 520, t, { in: s.t0 + .1, rock: fid * 2.2, look: inT ? 6 : 0, poses: [[s.t0, "cheer"], [LE(a) + .3, "sit"], [W(b, "not") - .1, "surprised"], [tH + .5, "sit"], [r0 - .2, "thinking"], [bell - 1.6, "oops"], [bell, "surprised"], [LT(c) + .1, "oops"], [LE(f) - 1.2, "waving"], [LE(f) + .4, "sit"]], jump: [[W(a, "twenty") - .1, 30], [bell + .02, 30], [W(f, "handsome") - .1, 24]], nohop: true })
+    + bd("pip", 1720, 1076, 420, t, { in: LT(d) - .5, flip: true, poses: [[LT(d) - .5, "sit"], [LE(d) + .2, "pointing"]], look: -3 })
+    + bd("momo", 760, 1060, 390, t, { in: LT(d) - .3, poses: [[LT(d) - .3, "sit"], [t12, "surprised"], [t12 + 1.4, "sit"]] })
+    + bd("basil", 300, 1076, 520, t, { in: s.t0 + .1, rock: fid * 2.2, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [r0 - .2, "worried"], [bell + .35, "sit"], [LT(c) + .1, "oops"]], jump: [[W(a, "twenty") - .1, 30], [bell + .02, 30], [W(f, "handsome") - .1, 24]], nohop: true })
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1300, 700, "+1", "arms crossed") + HUD(t); };
 
 /* 14 · score hand, the snail (lizReveal: the score hand melts into the corridor, ONE push-in onto the snail on the rim of OUR pot, the iris,
@@ -192,7 +196,7 @@ SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1, sp = SNAILC.liz;
 SC.cliff = (t, s) => { const tP = W("g1503", "part") - .1, tq = MK("q"), tT = MK("treein"), e = eio((t - tT + .3) / 1.6), cam = [1 + .04 * eio((t - s.t0) / 4) + .6 * e, lerp(1000, 1640, e), lerp(560, 300, e)];
   const tip = camPt(cam, [POTW[0], POTW[1] + POTS - PLANTW4.h - 50]);
   return VC(t, { plant: PLANTW4, snail: false }, cam) + OP(1 - e, qMark(t, tq, tip[0] + 40, tip[1] - 40, 48))
-    + bd("basil", 1560, 1070, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [LT("g1502") + .2, "pointing"]], look: -4 }) + bd("pip", 1780, 1066, 340, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [LT("g1502") + .5, "surprised"]] })
+    + bd("basil", 1560, 1070, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [LT("g1502") + .2, "pointing"]], look: -4 }) + bd("pip", 1780, 1066, 340, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] })
     + bd("momo", 330, 1076, 520, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("g1501") + .1, "thinking"], [tP, "sit"]], jump: [[LT("g1503") + .1, 22]] })
     + (t >= tT + .6 ? TF(1000, 990, spring(t, tT + .6, .4), tpill(0, 0, "the old mango tree, downstairs", 40, "#fff", P.ink, { w: 700 })) : "")
     + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + HUD(t); };

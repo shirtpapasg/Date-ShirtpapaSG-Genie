@@ -55,5 +55,5 @@ function lcPeekAuto(t, s, o) { if (o.peek === false) return ""; const ids = TL.o
     const k = ids.indexOf(cur); let j = k; while (j > 0 && TL.lines[ids[j - 1]].who === who) j--; tin = Math.max(tin, j > 0 ? TL.lines[ids[j]].t - .5 : tin); }
   if (t < tin - .05) return ""; const W_ = LCW, x0 = W_.x - W_.w / 2, y1 = W_.y + W_.h / 2, side = typeof o.peekSide === "function" ? o.peekSide(t) : (o.peekSide || "l"), h = o.peekH || 520;
   const up = eo((t - tin) / .45), x = side === "l" ? x0 + 200 : side === "c" ? W_.x : x0 + W_.w - 200, y = y1 + h * .42 + (1 - up) * h * .75, L = cur ? TL.lines[cur] : null;
-  const poses = [[tin, "surprised"]]; if (L) poses.push([L.t - .12, "sit"], [L.end + .2, L.text.includes("?") ? "thinking" : "cheer"]); if (o.peekEv) for (const e of o.peekEv) if (e[1] === who) poses.push([e[0], e[2]]); poses.sort((a, b) => a[0] - b[0]);
+  const poses = [[tin, "sit"]]; /* EP15: the face listens; a pose only where the scene names its reason (o.peekEv) */ if (o.peekEv) for (const e of o.peekEv) if (e[1] === who) poses.push([e[0], e[2]]); poses.sort((a, b) => a[0] - b[0]);
   return buddy(who, x, y, h, t, { in: tin, poses, peek: true, tag: false, shadow: false, flip: side === "r", nohop: true }); }

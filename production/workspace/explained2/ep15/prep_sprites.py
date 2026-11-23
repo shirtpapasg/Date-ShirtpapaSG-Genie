@@ -14,7 +14,7 @@ def put(name, src, ax, ay, bh):
     cv2.imwrite(f"{O}/{name}.png", im, [cv2.IMWRITE_PNG_COMPRESSION, 6]); M[name] = dict(file=f"spr/{name}.png", w=im.shape[1], h=im.shape[0], ax=round(ax * K, 1), ay=round(ay * K, 1), bh=round(bh * K, 1))
 for f in os.listdir(O):
     if f.endswith(".png"): os.remove(f"{O}/{f}")           # no stale grey sprite may survive a re-run
-SET = {"pip": "pip", "basil": "basil_c", "momo": "momo_c"}   # buddy -> the sprite set EP14 uses (coloured Momo and Basil)
+SET = {"pip": "pip", "basil": "basil_v2", "momo": "momo_v2"}   # buddy -> the sprite set (EP15: the v2 cast, one style: Momo and Basil v2, Pip unchanged)
 RENAME = {}   # (Momo's cropped pointing was replaced by an uncropped painting on 22 Nov: plain "pointing" now)
 BH = {}
 for b, src in SET.items():

@@ -166,15 +166,29 @@ const oldCrown = (t, x, y, k = 1) => { const C = [[-190, 30, 150, 80, "#2F8048"]
   s += [[-200, -10], [-110, -70], [-20, -100], [70, -80], [160, -20], [220, 30], [-150, 60], [40, 20]].map(([a, b], i) => flowerSpray(t, a, b, .5, i)).join("") + [[-60, 50], [120, 60]].map(([a, b]) => `<g transform="translate(${a} ${b})">${mangoHang(.45, "g")}</g>`).join("");
   return TF(x, y, k, s); };
 // a spray (panicle) of tiny cream mango flowers; origin = its base, pointing up
-function flowerSpray(t, x, y, k = 1, ph = 0, o = {}) { const sw = 3 * Math.sin(t * 1.2 + ph); let s = `<path d="M0 0 Q${n2(sw)} -60 ${n2(sw * 1.5)} -120" stroke="#C9A55A" stroke-width="5" fill="none" stroke-linecap="round"/>`;
-  for (let i = 0; i < 9; i++) { const yy = -14 - i * 12, w = (9 - i) * 6 + 8; s += `<path d="M${n2(sw * yy / -120)} ${yy} l${-w} ${-10} M${n2(sw * yy / -120)} ${yy} l${w} ${-10}" stroke="#C9A55A" stroke-width="2.5" stroke-linecap="round"/>`;
-    for (const sd of [-1, 1]) for (let j = 0; j < 3; j++) { const fx = sw * yy / -120 + sd * w * (j + 1) / 3, fy = yy - 10 * (j + 1) / 3 - 4; s += `<circle cx="${n2(fx)}" cy="${n2(fy)}" r="${n2(o.big ? 6 : 5)}" fill="${(i + j) % 3 ? "#FFF6DA" : "#FFE6A8"}" stroke="#D9B86A" stroke-width="1.2"/>`; } }
-  return TF(x, y, k, s + `<circle cx="${n2(sw * 1.5)}" cy="-126" r="6" fill="#FFF6DA" stroke="#D9B86A" stroke-width="1.2"/>`); }
+/* a mango flower spray (a panicle), EP15 fix round (teacher's-eye review: the old sprays "read as cream cones"): a pinkish-red main stalk with
+   side branches that branch again, each twig ending in a small cluster of tiny five-petal flowers (cream, a pink-yellow centre), open and
+   airy so the stalks show between them. Origin = the stalk's foot; about 130 units tall at k = 1. */
+function flowerSpray(t, x, y, k = 1, ph = 0, o = {}) { const sw = 3 * Math.sin(t * 1.2 + ph), stk = "#B4506A", big = !!o.big;
+  const fl = (fx, fy, r, j) => big ? [0, 1, 2, 3, 4].map((q) => { const an = (q * 72 + j * 17) * Math.PI / 180; return `<ellipse cx="${n2(fx + Math.cos(an) * r * .62)}" cy="${n2(fy + Math.sin(an) * r * .62)}" rx="${n2(r * .5)}" ry="${n2(r * .36)}" transform="rotate(${n2(q * 72 + j * 17)} ${n2(fx + Math.cos(an) * r * .62)} ${n2(fy + Math.sin(an) * r * .62)})" fill="${j % 3 ? "#FFF6DA" : "#FFE9B0"}" stroke="#D7A86A" stroke-width=".7"/>`; }).join("") + `<circle cx="${n2(fx)}" cy="${n2(fy)}" r="${n2(r * .3)}" fill="${j % 2 ? "#F2A03D" : "#E2667E"}"/>`
+    : `<circle cx="${n2(fx)}" cy="${n2(fy)}" r="${n2(r)}" fill="${j % 3 ? "#FFF6DA" : "#FFE9B0"}" stroke="#D7A86A" stroke-width=".8"/>`;   // big: tiny five-petal flowers; small (far away): dots
+  const clus = (cx, cy, r, j) => fl(cx, cy - r * .9, r, j) + fl(cx - r * .95, cy + r * .2, r, j + 1) + fl(cx + r * .95, cy + r * .2, r, j + 2);
+  let st = `<path d="M0 0 Q${n2(sw)} -66 ${n2(sw * 1.5)} -132" stroke="${stk}" stroke-width="4.5" fill="none" stroke-linecap="round"/>`, fs = "";
+  const r = big ? 4.4 : 4;
+  for (let i = 0; i < 7; i++) { const yy = -16 - i * 16, bx = sw * yy / -132; for (const sd of (i % 2 ? [1, -1] : [-1, 1])) { const L = (42 - i * 5) * (sd === (i % 2 ? 1 : -1) ? 1 : .72), ex = bx + sd * L, ey = yy - L * .5;
+      st += `<path d="M${n2(bx)} ${yy} Q${n2(bx + sd * L * .5)} ${n2(yy - L * .1)} ${n2(ex)} ${n2(ey)}" stroke="${stk}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
+      // one twig off the branch, half way along, pointing up
+      const mx = bx + sd * L * .5, my = yy - L * .18, tx = mx + sd * L * .12, ty = my - L * .42; st += `<path d="M${n2(mx)} ${n2(my)} L${n2(tx)} ${n2(ty)}" stroke="${stk}" stroke-width="1.8" stroke-linecap="round"/>`;
+      fs += clus(ex, ey, r, i) + clus(tx, ty, r * .9, i + sd + 2); } }
+  fs += clus(sw * 1.5, -136, r, 1);
+  return TF(x, y, k, st + fs); }
 // a mango hanging on its stalk (origin = the stalk's top); kind "g" green (young) or "y" ripe
 const mangoHang = (k = 1, kind = "g") => `<g transform="scale(${k})"><path d="M0 0 Q4 20 0 40" stroke="#6E4324" stroke-width="5" fill="none"/><path d="M0 40 C34 38 50 70 44 104 C38 136 14 148 -8 144 C-36 140 -46 112 -40 84 C-34 58 -20 42 0 40z" fill="${kind === "g" ? "url(#g15MangoG)" : "url(#g14Mango)"}" stroke="${kind === "g" ? "#4E8A34" : "#C4581E"}" stroke-width="4"/><ellipse cx="-14" cy="80" rx="7" ry="16" fill="#fff" opacity=".35" transform="rotate(15 -14 80)"/></g>`;
 // the live corridor. o.plant = youngPlant15 options (null = no plant: only soil), o.seed (the seed lying on the soil, before planting),
 // o.snail [x, y] or false, o.items (svg drawn after the pot), o.wet 0..1 (the soil after watering), o.dim, o.crown (the old tree's crown: default on)
-const SNAILC = { plant: [880, PAR - 64], seedans: [430, 1000], waitw: [1300, 600], measure: [1500, PAR - 8], strip: [1500, PAR - 8], holdon: [1100, 820], liz: [1336, 512], cliff: [1336, 512] };
+// EP15 fix round (teacher, 23 Nov): a new spot in every scene, never the intro spot (the kitchen window ledge, SNAILK), never twice the same;
+// the reveal's spot (liz: the rim of our pot) is used only there. seedans moved off the floor (Pip covered it); strip no longer repeats measure.
+const SNAILC = { plant: [880, PAR - 64], seedans: [1020, PAR - 6], waitw: [160, 828], measure: [1500, PAR - 8], strip: [700, 560], holdon: [1100, 820], liz: [1336, 512] };
 function VC(t, o = {}, cam) { let s = bg("corridor15");
   if (o.crown !== false) s += oldCrown(t, 1640, PAR - 40, .9);
   // the laundry pole at the top with the neighbour's clothes swaying; a bird on the ledge; a far bus below (just its roof)
