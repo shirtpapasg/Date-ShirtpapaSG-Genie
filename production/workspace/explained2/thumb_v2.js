@@ -128,6 +128,21 @@ const THUMBS = {
       { cut: 'skin', x: 470, y: 210, w: 690, line: '#fff', lw: 8, glow: INK },
       { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'EMPTY', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SKIN?!', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP17 (the v2 cast: basil_v2 / momo_v2 poses, one style)
+  ep17_1: { ep: 'ep17', part: 1, out: 'ep17/thumb_part1.jpg', old: 'ep17/thumb_part1.jpg',
+    bg: { c: ['#EFFFD2', '#7CCB2E', '#1F5A1E'], at: [860, 430], rays: .22 },
+    cuts: { cat: `'<path d="M420 760 Q900 700 1500 740" stroke="#7A5230" stroke-width="40" fill="none" stroke-linecap="round"/><g transform="translate(560 770) rotate(-160)">' + leaf15(300, 100, "#58B56C", "#2F7A45") + '</g>' + TF(1380, 620, 1.05, pupa17(1, { stem: false }), -40) + TF(960, 750, 1.9, cat17(1, { legs: [.6, .6, .6], pro: [.5, .5, .5, .5, .5] }))` },
+    layers: [
+      { cut: 'cat', x: 470, y: 250, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'NYMPH?!', x: 1256, y: 190, size: 160, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep17_2: { ep: 'ep17', part: 2, out: 'ep17/thumb_part2.jpg', old: 'ep17/thumb_part2.jpg',
+    bg: { c: ['#E3F6FF', '#3FA9F5', '#3B1E8C'], at: [860, 430], rays: .22 },
+    cuts: { pail: `'<rect x="500" y="420" width="900" height="560" rx="40" fill="#BFE7E0"/><rect x="500" y="420" width="900" height="140" rx="40" fill="#DDF3FF"/><path d="M500 560 H1400" stroke="#fff" stroke-width="14"/><g transform="translate(640 556) rotate(-20)">' + leaf15(110, 40, "#C9A84A", "#8A6A2A") + '</g><g transform="translate(1240 560) rotate(170)">' + leaf15(90, 34, "#7AB85A", "#3E7A2A") + '</g>' + [[760, 0], [960, 1.3], [1160, 2.2]].map(([x, ph]) => TF(x, 560, 1.6, wrig17(1, { wig: .25, ph, lean: 16 }))).join("")` },
+    layers: [
+      { cut: 'pail', x: 470, y: 270, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: "WHAT'S IN", x: 1250, y: 112, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'HERE?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);
