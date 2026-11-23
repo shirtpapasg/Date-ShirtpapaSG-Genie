@@ -167,4 +167,20 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   letters on turned magnets, the POLES BOARD's crowded bottom, two-row pairs in lclike, the homework easel); pose_audit both parts;
   pose_reasons.json written; thumbnails (`../thumb_v2.js` ep20_1 IT FLOATS?! + Pip surprised, magenta burst; ep20_2 FLIP IT, SNAP! + Basil
   surprised, teal burst); app_moments.json + chapters_p3.json EP20_P1 / EP20_P2 (make_moments.py); make_preview.sh spans set; highlights.py.
-- **Next:** render Part 1 (running), measure countdowns, faces sheets, compare_ep1, then Part 2, finish, review pack, `--check`.
+
+## Stage 2 DONE 2026-11-23 (NOT uploaded: the teacher reviews first)
+- **Renders:** `ep20_part1.mp4` **5:33.5**, `ep20_part2.mp4` **5:45.9** (1920x1080, 30 fps, **-16.0 LUFS** both); `ep20_part1.srt` /
+  `ep20_part2.srt`; `sheet_part1.png` / `sheet_part2.png`. mp4s NOT committed (rebuild: `./build_part.sh 1` / `2`, about 13 min each under
+  the lock). Chunk folders deleted.
+- **Countdowns measured in the renders** (measure_countdowns.py): P1 Round 1 (3 s) and HOLD ON! (5 s), P2 Round 1 and the Showdown (5 s):
+  every number steps 1.00 s exactly, on the tick; the bell lands on 0.
+- **Review pack:** `qa/buddy_faces_p1.jpg` / `_p2.jpg` (every pose on screen with its reason; all match pose_reasons.json),
+  `qa/preview_p1_clips.mp4` (98.6 s) / `_p2` (96.9 s) (not committed), `qa/highlights.jpg` (14 labelled stills), `qa/ep1_compare_p1.jpg` /
+  `_p2`, `thumb_part1.jpg` (IT FLOATS?!) / `thumb_part2.jpg` (FLIP IT, SNAP!). `app_moments.json` (20A / 20B; keys O.interactions /
+  CH.magnets are PLACEHOLDERS: check videos.js; VLGDU0qduEw's moments go when these go in) and `production/youtube/chapters_p3.json`
+  EP20_P1 / EP20_P2. `explained_upload.py upload.json --check`: OK (both parts after JpBskDtIwb0 in both playlists; VLGDU0qduEw retired).
+- **Still weak / for the reviewer:** the top-ring journey looks DOWN the pencil, so the push arrows point down at your rim (a "pushing up on
+  you" chip carries the meaning); the lizard's reveal on the ceiling is a foreshortened lizard on a thin ceiling strip; the key-word pops in
+  lclike cover the card's title for 2 s; lctest stacks bar A over bar B (the book's set-up is side by side); the train journey's paw is a
+  shadow and a pill (no code-drawn buddy parts); the cards in r1ans / answer are small at the top left (as EP19). No teaching cut (Part 2 at
+  5:45.9 as the teacher accepted).
