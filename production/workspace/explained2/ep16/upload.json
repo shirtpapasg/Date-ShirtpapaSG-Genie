@@ -43,11 +43,11 @@
  "playlists": [
   {
    "id": "PLb8LpPqxQI4E",
-   "after": "explained-p3-ep15-part2"
+   "after": "explained-p3-ep15v3-part2"
   },
   {
    "id": "PLPfEuT7l4KjI",
-   "after": "explained-p3-ep15-part2"
+   "after": "explained-p3-ep15v3-part2"
   }
  ],
  "_note": "No replaces: the classic P3 no. 10 'A Tadpole Has No Legs. So How Does It Become A Frog?' (2Atm-edXKVk) covers pp. 80-89 (three AND four stages); EP16 covers pp. 80-85 only. It stays in the playlists until EP17 (four stages, pp. 86-89) is live; EP17's upload.json then sets replaces [2Atm-edXKVk] + retire_old (as EP14/EP15 did with RVRoaWWKjEM). School Lab 5.1 line left out (the bench numbers the stages)."

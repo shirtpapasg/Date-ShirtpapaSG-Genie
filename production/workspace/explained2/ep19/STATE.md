@@ -118,3 +118,29 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** �
 - The theme's word INTERACT is spoken first in Part 2 (script, rules bent 3 and open point 8).
 - The goal labels "What attract means", "How magnets interact", "Test, do not guess" are new (script open point 7).
 - Pip has no back-view painting (the P1 cliffhanger uses Momo's back view and a front view of Pip turned in, as EP18).
+
+## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-23 (resume from here)
+- **Drawn (every placeholder replaced, every mark kept):** `art19.js` (new): the rock pigeon (`pigeon19`), the land snail (`snail19`), the
+  scaly-foot snail, Basil's bar magnet with its cut-away (`magnet19`), the iron nail, paper clip, towel, foil, ruler, bowl, eraser, bottle,
+  glass cup, drink can, food tin, Mum's iron wok, the lodestone, the six shapes, ring magnets, a hand that holds (four fingers and a thumb);
+  the MAGNET TEST TABLE's tray `tray19` (alias `trayPH`; labels above the halves; flip at `groups`); our void deck `VD19` on EP18's baked
+  `deck18` (afternoon light, the grey pipe, the INTERACTIONS banner on the easels, notice board, lamp post, bicycle rack, the potted plant;
+  Part 2 wet: drips, the blue bin, the planter); the playground `PG19`; the four look-closers (`magnetArt`, `attractArt`, `metalsArt`,
+  `interactArt`), the two journeys (`pinJourney`, `canJourney`), Momo's note, the fridge inset, Basil's sheet (`basilSheet`, drawn to his
+  SPOKEN lines: the iron nail, the wooden ruler, the foil), the chant board, recap / ring / card / fun-fact / dare pictures. Borrowed unchanged
+  from ../ep18 (for their helpers): home15, garden15, pond16, art16, art17, sets17, lc17, art18 (+ baked deck18, grass16, lime17, pond16,
+  void17). `ep18dare.js`: magnet18 / pin18 / wire18 / darePic3 now come from art18.js (identical). tests.js: the Stage 1 tray removed.
+- **Hidden-animal spots (art19.js PIGAT / SNAT; changed from SCENES_TODO where the planned spot was outside the scene's camera):** pigeon:
+  the grey pipe (cold/back/theme/game: intro) · the floor by pillar B (table) · on top of the letterboxes (waitw) · the floor by pillar A
+  (answer) · the rim of the potted plant's pot (holdon; never in the ring) · the test table's far edge (sticky) · REVEAL the bicycle rack's top
+  bar. Snail: the blue bin's side (place/game: intro) · a wet fallen leaf on the floor (waitw) · the table's leg (tinans) · pillar A's base
+  (table) · the foot of Basil's easel (show; never in the ring) · the pot's rim (fix) · the swing frame's leg (interact) · REVEAL a wet leaf of
+  the potted plant.
+- **Poses (teacher's two new rules applied):** the wrong buddy shy through the WHOLE answer / fix (P1 answer: Pip, Basil; HOLD ON!: Momo; the
+  lcmagnet guess: Momo; lcattract: Basil's face shy after `gap`, NO cheer (SCENES_TODO's cheer dropped); P2 answer: Momo; lcmetals: Momo's
+  face shy after `metals`, NO cheer at v_metals; Showdown/fix: Basil); the right ones arms crossed through. Reasons: `pose_reasons.json`.
+- **Sound:** sound_cues.js Stage 2 block (void deck life, drips after the shower, the playground's birds and swing creak, foley on every mark);
+  song.js + `coo` (the pigeon). Part 1 mix measured -16.0 LUFS.
+- **Self-check so far:** sweep both parts (0 bad, 0 page errors); stills at every scene (qa/p1a-d, p2a-c, hid1/2: contact sheets).
+- **Next:** `./build_part.sh 1`, then 2 (>= 3 GB free; delete out/chunks_p* after each), measure_countdowns.py, compare_ep1.py,
+  faces_sheet, highlights.py / make_moments.py / make_preview.sh (copy from ../ep18 and point at EP19), thumbnails (../thumb_v2.js ep19_1/2).
