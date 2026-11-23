@@ -151,24 +151,24 @@ const swatchIdea = (t) => `<rect x="-300" y="-200" width="600" height="400" fill
 const PARTC = { beak: ["#FFE2C0", "#B4531A"], wings: ["#EDE4FF", "#6D28D9"], legs: ["#D7F5EE", "#0F766E"] };
 function chickArt(t) { const m = MK, tB = m("beak"), tW = m("wings"), tL = m("legs"), tP = m("peck"), tK = m("kw_chick"), tQ = m("pairs"), s0 = SCN.lcchick.t0 + 1, q = eio((t - tQ + .2) / 1.1);
   const pk = (k) => { const u = (t - tP) % 2.4; return t < tP ? 0 : u < .5 ? Math.sin(Math.PI * u / .5) : 0; }, pkd = pk();
-  const c = camSeq(t, [s0, tB, tW, tL, tP + .5, tK, tQ], [[0, 0, 1], [60, -150, 1.12], [0, -40, 1.05], [0, 120, 1.08], [0, 0, 1], [-320, 0, 1.15], [0, 0, 1]]);
+  const c = camSeq(t, [s0, tB, tW, tL, tP + .5, tK, tQ], [[0, 0, 1], [60, -120, 1.1], [0, -40, 1.04], [0, 100, 1.06], [0, 0, 1], [-300, 40, 1.12], [0, 0, 1]]);
   let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#FFF3DC"/><rect x="-1300" y="250" width="2600" height="600" fill="#B7E58F"/><path d="M-1300 250 H1300" stroke="#8FCB6A" stroke-width="6"/>`;
   // the two birds (the halves): fade to the 2x2's top row on "pairs"
-  const CK = [lerp(-430, -560, q), lerp(250, -40, q), lerp(2.3, 1.35, q)], HN = [lerp(380, 300, q), lerp(250, -40, q), lerp(1.45, .78, q)];
+  const CK = [lerp(-430, -300, q), lerp(250, -40, q), lerp(2.3, 1.5, q)], HN = [lerp(380, 460, q), lerp(250, -40, q), lerp(1.45, .74, q)];
   w += `<line x1="0" y1="-420" x2="0" y2="${n2(lerp(420, -400, q))}" stroke="#E3C9A8" stroke-width="5" stroke-dasharray="14 10" opacity="${n2(1 - q)}"/>`;
   if (t >= tP && t < tP + .8) w += [[CK[0] + 90 * CK[2] * .5, CK[1]], [HN[0] + 120 * HN[2] * .6, HN[1]]].map(([x, y]) => `<ellipse cx="${x + 30}" cy="${y}" rx="${n2(30 + 60 * (t - tP))}" ry="${n2(8 + 10 * (t - tP))}" fill="#C9A86A" opacity="${n2(.6 * (1 - (t - tP) / .8))}"/>`).join("");
   w += TF(CK[0], CK[1], CK[2], chick16(t, { peck: pkd })) + TF(HN[0], HN[1], HN[2], hen16(t, { peck: pkd }));
   w += OP(1 - q, TF(CK[0], CK[1] + 70, 1, tpill(0, 0, "chick", 44, "#fff", P.ink, { w: 700 })) + TF(HN[0], HN[1] + 70, 1, tpill(0, 0, "hen", 44, "#fff", P.ink, { w: 700 })));
   // the part labels: each joined to its part on BOTH birds (colour-coded), pulsing as named
   const parts = [["beak", tB, [CK[0] + 64 * CK[2], CK[1] - 74 * CK[2]], [HN[0] + 116 * HN[2], HN[1] - 156 * HN[2]], [-40, -330]], ["wings", tW, [CK[0] - 40 * CK[2], CK[1] - 42 * CK[2]], [HN[0] - 20 * HN[2], HN[1] - 100 * HN[2]], [-40, -180]], ["legs", tL, [CK[0] - 2 * CK[2], CK[1] - 8 * CK[2]], [HN[0], HN[1] - 20 * HN[2]], [-40, 360]]];
-  for (const [nm, t0, a, b, [lx, ly]] of parts) { if (t < t0 || q > .99) continue; const col = PARTC[nm], k = spring(t, t0, .4), pl = pulse(t, t0, .05, .5), al = 1 - q;
+  for (const [nm, t0, a, b, [lx, ly]] of parts) { if (t < t0 || q > .99) continue; const col = PARTC[nm], k = spring(t, t0, .4), pl = pulse(t, t0, .05, .5), al = (1 - q) * (1 - ss(tK - .6, tK - .2, t));
     w += OP(al, [a, b].map(([px, py]) => `<path d="M${lx} ${ly} L${n2(px)} ${n2(py)}" stroke="${col[1]}" stroke-width="6" stroke-linecap="round" stroke-dasharray="${n2(800 * ramp(t, t0, .3))} 900"/><circle cx="${n2(px)}" cy="${n2(py)}" r="${n2(14 + 10 * pl)}" fill="none" stroke="${col[1]}" stroke-width="6"/>`).join("")
       + TF(lx, ly, k, tpill(0, 0, { beak: "a beak", wings: "two wings", legs: "two legs" }[nm], 48, col[0], col[1], { w: 700 }))); }
   // the 2x2 (pairs): the bottom row tadpole + frog; the two pills
-  if (q > .01) { w += OP(q, `<path d="M-900 120 H900" stroke="#E3C9A8" stroke-width="5"/><rect x="-900" y="130" width="1800" height="700" fill="#DDF2F6"/>` + TF(-560, 300, 1.4, tadpole16(t, 0)) + TF(300, 330, .95, frog16(t)) + `<path d="M-300 250 H60" stroke="${P.ink}" stroke-width="8" stroke-dasharray="16 12"/><path d="M50 236 l18 14 l-18 14" fill="none" stroke="${P.ink}" stroke-width="8" stroke-linecap="round"/><path d="M-300 -110 H60" stroke="${P.ink}" stroke-width="8" stroke-dasharray="16 12"/><path d="M50 -124 l18 14 l-18 14" fill="none" stroke="${P.ink}" stroke-width="8" stroke-linecap="round"/>`
-      + TF(-560, -330, 1, tpill(0, 0, "chick", 36, "#fff", P.ink, { w: 700 })) + TF(300, -330, 1, tpill(0, 0, "hen", 36, "#fff", P.ink, { w: 700 })) + TF(-560, 170, 1, tpill(0, 0, "tadpole", 36, "#fff", P.ink, { w: 700 })) + TF(300, 170, 1, tpill(0, 0, "frog", 36, "#fff", P.ink, { w: 700 })))
-      + TF(660, -120, spring(t, tQ + .3, .45), tpill(0, 0, "looks like the adult", 40, LIKEC, "#fff", { w: 700 }))
-      + TF(660, 250, spring(t, tQ + .6, .45), tpill(0, 0, "does not look like the adult", 34, UNLIKEC, "#fff", { w: 700 })); }
+  if (q > .01) { w += OP(q, `<path d="M-900 120 H900" stroke="#E3C9A8" stroke-width="5"/><rect x="-900" y="130" width="1800" height="700" fill="#DDF2F6"/>` + TF(-270, 250, 1.4, tadpole16(t, 0)) + TF(460, 285, .8, frog16(t)) + `<path d="M-120 230 H300" stroke="${P.ink}" stroke-width="8" stroke-dasharray="16 12"/><path d="M290 216 l18 14 l-18 14" fill="none" stroke="${P.ink}" stroke-width="8" stroke-linecap="round"/><path d="M-120 -110 H300" stroke="${P.ink}" stroke-width="8" stroke-dasharray="16 12"/><path d="M290 -124 l18 14 l-18 14" fill="none" stroke="${P.ink}" stroke-width="8" stroke-linecap="round"/>`
+      + TF(-300, -340, 1, tpill(0, 0, "chick", 36, "#fff", P.ink, { w: 700 })) + TF(460, -340, 1, tpill(0, 0, "hen", 36, "#fff", P.ink, { w: 700 })) + TF(-300, 165, 1, tpill(0, 0, "tadpole", 36, "#fff", P.ink, { w: 700 })) + TF(460, 165, 1, tpill(0, 0, "frog", 36, "#fff", P.ink, { w: 700 })))
+      + TF(90, -190, spring(t, tQ + .3, .45), tpill(0, 0, "looks like the adult", 36, LIKEC, "#fff", { w: 700 }))
+      + TF(90, 155, spring(t, tQ + .6, .45), tpill(0, 0, "does not look like the adult", 30, UNLIKEC, "#fff", { w: 700 })); }
   return `<rect x="-900" y="-450" width="1800" height="900" fill="#FFF3DC"/>` + inCam(c, w); }
 // the small 2x2 under Mark Sentence 2
 const mini2x2 = (t, k = 1) => TF(0, 0, k, `<g filter="url(#dropS)"><rect x="-330" y="-150" width="660" height="300" rx="24" fill="#FFF8EA"/></g><rect x="-330" y="0" width="660" height="150" rx="24" fill="#DDF2F6"/>` + TF(-230, -14, .6, chick16(t, { peck: peckAt(t, 0) })) + TF(-90, -14, .34, hen16(t, { peck: peckAt(t, 1) })) + TF(-240, 70, .55, tadpole16(t, 0)) + TF(-90, 120, .34, frog16(t))
