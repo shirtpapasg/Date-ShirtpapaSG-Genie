@@ -179,3 +179,137 @@ const ffFoam = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" heig
 const ffDrop = (t, w, h) => { let s = `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#CFEAF2"/><rect x="${-w / 2}" y="50" width="${w}" height="${h}" fill="#5FB7C9"/><g transform="translate(-30 -90) rotate(8)"><path d="M-140 0 Q-60 -70 120 -10 Q20 50 -140 0z" fill="#58B56C" stroke="#2F7A45" stroke-width="5"/></g>` + TF(-30, -100, .8, foamNest16(t));
   for (let i = 0; i < 4; i++) { const u = ((t * .5 + i / 4) % 1), x = -80 + 50 * i, y = lerp(-50, 70, ei(clamp(u / .7))); s += u < .7 ? TF(x, y, .7, tadpole16(t, 0, { ph: i }), 80) : `<ellipse cx="${x}" cy="54" rx="${n2(10 + 50 * (u - .7))}" ry="${n2(4 + 10 * (u - .7))}" fill="none" stroke="#fff" stroke-width="3" opacity="${n2(1 - (u - .7) / .3)}"/>`; }
   return s; };
+
+/* ---------------------------------------------------------------- PART 2 ---------------------------------------------------------------- */
+// the grasshopper's three stages as tile pictures (eggs in the soil, the nymph, the adult with wings) and the cockroach's
+const hopPic = (i, t) => i === 0 ? `<rect x="-110" y="-110" width="220" height="220" fill="#DCEFFB"/><rect x="-110" y="-20" width="220" height="140" fill="#8A6040"/>` + [...Array(9)].map((_, j) => `<ellipse cx="${-40 + (j % 3) * 30}" cy="${30 + Math.floor(j / 3) * 18}" rx="12" ry="7" fill="#F2D28A" stroke="#B88A3A" stroke-width="2" transform="rotate(-20 ${-40 + (j % 3) * 30} ${30 + Math.floor(j / 3) * 18})"/>`).join("")
+  : i === 1 ? `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/>` + TF(-10, 52, .95, hopper16(t, {})) : `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/>` + TF(-6, 52, .8, hopper16(t, { adult: true }));
+const HOPN = ["the egg", "the young: a nymph", "the adult"];
+const roachPic = (i, t) => i === 0 ? `<rect x="-110" y="-110" width="220" height="220" fill="#FFF0D6"/>` + TF(0, 0, .9, eggCase16({})) : `<rect x="-110" y="-110" width="220" height="220" fill="#FFF0D6"/>` + TF(-14, 0, i === 1 ? 1 : .9, roach16(t, { adult: i === 2 }));
+const chickPic = (i, t) => i === 0 ? `<rect x="-110" y="-110" width="220" height="220" fill="#FFF0D6"/><ellipse cx="0" cy="10" rx="46" ry="60" fill="#FFF8EA" stroke="#D9C9A8" stroke-width="5"/>` : i === 1 ? `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/>` + TF(0, 60, 1.3, chick16(t, { peck: peckAt(t, 2) })) : `<rect x="-110" y="-110" width="220" height="220" fill="#E8F5DC"/>` + TF(-10, 80, .62, hen16(t, { peck: peckAt(t, 1) }));
+// the ring's picture (lockN obj): the little wingless grasshopper on its blade of grass, big
+const ringHop = (tt) => `<circle cx="430" cy="470" r="180" fill="#DFF3D2"/><path d="M250 660 Q380 470 640 380" stroke="#6FBF4E" stroke-width="60" fill="none" stroke-linecap="round"/><path d="M250 660 Q380 470 640 380" stroke="#3F8A3A" stroke-width="4" fill="none" opacity=".5"/>` + TF(420, 520, 1.9, hopper16(tt, { ph: 2 }), -22);
+// the two numbered cards' pictures (the young WITHOUT wings · the adult WITH long wings folded along its back)
+const hopCard = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill="${i ? "#DCEFFB" : "#E8F5DC"}"/><path d="M-200 90 Q0 70 200 96 V140 H-200z" fill="#8FCB6A"/>` + TF(i ? 0 : 10, 96, i ? 1.35 : 1.15, hopper16(t, { adult: !!i }));
+// LOOK CLOSER · the little grasshopper beside an adult: two blades of grass at the same angle; the parts joined to BOTH (six legs teal,
+// two feelers orange, big back legs violet, each pulsing as named); wings: the adult's long wings (green), a dashed outline on the young's
+// bare back (no wings yet); NYMPH pops on the young
+const HOPC = { legs: ["#D7F5EE", "#0F766E"], feelers: ["#FFE2C0", "#B4531A"], jump: ["#EDE4FF", "#6D28D9"], wings: ["#DCF5DF", "#1F8A4C"] };
+function nymphArt(t) { const m = MK, tP = m("pairin"), tL = m("legs"), tF = m("feelers"), tJ = m("jump"), tW = m("wings"), tK = m("kw_nymph"), s0 = SCN.lcnymph.t0 + 1;
+  const c = camSeq(t, [s0, tP, tL, tF, tJ, tW, tK, tK + 2.6], [[0, 60, .92], [0, 0, 1], [0, 80, 1.04], [60, -100, 1.04], [-60, 0, 1.02], [300, -40, 1.25], [-380, 20, 1.2], [0, 0, 1]]);
+  let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#E3F4FF"/><rect x="-1300" y="230" width="2600" height="600" fill="#A6DE7E"/><path d="M-1300 230 H1300" stroke="#7FC566" stroke-width="6"/>`;
+  // two blades at the same angle (as a floor under each)
+  const Y = { x: -420, y: 120, k: 1.9 }, A = { x: 360, y: 120, k: 2.35 };
+  w += [Y, A].map((b) => `<path d="M${b.x - 330} ${b.y + 40} Q${b.x} ${b.y - 20} ${b.x + 340} ${b.y + 10}" stroke="#6FBF4E" stroke-width="46" fill="none" stroke-linecap="round"/><path d="M${b.x - 330} ${b.y + 40} Q${b.x} ${b.y - 20} ${b.x + 340} ${b.y + 10}" stroke="#3F8A3A" stroke-width="4" fill="none" opacity=".5"/>`).join("");
+  const lit = (k, t0) => ({ [k]: t >= t0 ? .4 + .6 * pulse(t, t0, .05, .9) : 0 }), L = { ...lit("legs", tL), ...lit("feelers", tF), ...lit("jump", tJ), ...lit("wings", tW) };
+  w += TF(Y.x, Y.y, Y.k, hopper16(t, { lit: L, ph: 1 })) + TF(A.x, A.y, A.k, hopper16(t, { adult: true, lit: L, ph: 2.5 }));
+  w += TF(Y.x, Y.y + 120, 1, tpill(0, 0, "the little one", 40, "#fff", P.ink, { w: 700 })) + TF(A.x, A.y + 120, 1, tpill(0, 0, "an adult", 40, "#fff", P.ink, { w: 700 }));
+  // the labels, each joined to the part on BOTH grasshoppers (a part's points in each animal's own coordinates)
+  const P2 = (b, x, y) => [b.x + x * b.k, b.y + y * b.k];
+  const parts = [["legs", tL, "six legs", [0, -330], [[24, -18], [52, -8]]], ["feelers", tF, "two feelers", [40, -420], [[110, -120], [120, -126]]], ["jump", tJ, "big back legs", [0, 360], [[-50, -50], [-50, -50]]]];
+  for (const [k, t0, txt, [lx, ly], [py, pa]] of parts) { if (t < t0) continue; const col = HOPC[k], al = 1 - ss(tK - .6, tK - .2, t); if (al < .01) continue;
+    w += OP(al, [P2(Y, py[0], py[1]), P2(A, pa[0], pa[1])].map(([x, y]) => `<path d="M${lx} ${ly} L${n2(x)} ${n2(y)}" stroke="${col[1]}" stroke-width="6" stroke-dasharray="${n2(1000 * ramp(t, t0, .3))} 1100"/><circle cx="${n2(x)}" cy="${n2(y)}" r="12" fill="none" stroke="${col[1]}" stroke-width="6"/>`).join("") + TF(lx, ly, spring(t, t0, .4), tpill(0, 0, txt, 48, col[0], col[1], { w: 700 }))); }
+  // wings: the adult's long wings (green); the young's bare back: a dashed outline, "no wings yet"
+  if (t >= tW) { const al = 1 - ss(tK - .6, tK - .2, t);
+    w += OP(al, lcLab(t, tW, A.x + 40, A.y - 330, "long wings", A.x - 60 * A.k, A.y - 62 * A.k, { size: 48, fill: HOPC.wings[0], ink: HOPC.wings[1] })
+      + OP(ramp(t, tW + .5, .3), `<path d="M${n2(Y.x + 36 * Y.k)} ${n2(Y.y - 66 * Y.k)} Q${n2(Y.x - 30 * Y.k)} ${n2(Y.y - 82 * Y.k)} ${n2(Y.x - 118 * Y.k)} ${n2(Y.y - 54 * Y.k)} Q${n2(Y.x - 116 * Y.k)} ${n2(Y.y - 42 * Y.k)} ${n2(Y.x - 96 * Y.k)} ${n2(Y.y - 44 * Y.k)} Q${n2(Y.x - 20 * Y.k)} ${n2(Y.y - 54 * Y.k)} ${n2(Y.x + 36 * Y.k)} ${n2(Y.y - 48 * Y.k)}z" fill="none" stroke="#1F8A4C" stroke-width="5" stroke-dasharray="14 10"/>`)
+      + lcLab(t, tW + .5, Y.x - 60, Y.y - 330, "no wings yet", Y.x - 40 * Y.k, Y.y - 66 * Y.k, { size: 48, fill: "#fff", ink: "#1F8A4C" })); }
+  return `<rect x="-900" y="-450" width="1800" height="900" fill="#E3F4FF"/>` + inCam(c, w); }
+// Momo's idea: a grasshopper lying in the hot sun, drying up (a ?)
+const dryIdea = (t) => `<rect x="-300" y="-200" width="600" height="400" fill="#FFE9A8"/><circle cx="170" cy="-90" r="70" fill="#FFD23A" stroke="#F2A81E" stroke-width="6"/>${[...Array(8)].map((_, i) => `<path d="M170 -170 V-200" stroke="#FFB01E" stroke-width="8" stroke-linecap="round" transform="rotate(${i * 45} 170 -90)"/>`).join("")}<rect x="-300" y="80" width="600" height="140" fill="#D9C27A"/>`
+  + TF(-50, 110, 1.4, hopper16(t, { feel: 0 }), 180, -1.4) + `<path d="M-160 -40 q10 -20 0 -40 M-110 -50 q10 -20 0 -40 M-60 -40 q10 -20 0 -40" stroke="#F2A81E" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+// LOOK CLOSER · the empty skin: back-lit, see-through; the split down its back (a magnifier), the empty legs and feelers (tubes); then the why
+// as a picture model on the right: a nymph inside its hard outer skin grows, little arrows push out, the outline cannot grow and goes tight
+function skinArt(t) { const m = MK, tS = m("split"), tH = m("hollow"), tM = LT("f705") - .2, tT = m("tight"), s0 = SCN.lcskin.t0 + 1, tV = m("v_skin");
+  const c = camSeq(t, [s0, tS, tH, tH + 1.6, tM, tT, tV + .6], [[-280, 0, 1], [-200, -160, 1.25], [-80, 60, 1.2], [-420, -40, 1.25], [80, 0, 1], [300, -20, 1.15], [80, 0, 1]]);
+  let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#FFF1C8"/>` + `<circle cx="-700" cy="-500" r="420" fill="#FFE27A" opacity=".5"/><rect x="-1300" y="250" width="2600" height="600" fill="#B7E58F"/>`;
+  // the blade it hangs on, and the empty skin, big, light shining through it
+  w += `<path d="M-900 330 Q-500 160 -60 -280" stroke="#6FBF4E" stroke-width="60" fill="none" stroke-linecap="round"/>` + TF(-430, 70, 3.1, hopper16(t, { skin: true }), -30);
+  for (let i = 0; i < 5; i++) w += lcGlint(-700 + 120 * i, -120 + 60 * Math.sin(i), 16, t, i);
+  // the magnifier on the split down its back
+  const mg = ss(tS - .2, tS + .3, t) * (1 - ss(tH - .5, tH - .1, t)), SX = -480, SY = -120;
+  if (mg > .01) w += OP(mg, `<path d="M${SX} ${SY} L60 -200" stroke="#fff" stroke-width="7"/>` + TF(220, -220, spring(t, tS - .2, .45), `<g filter="url(#drop)"><circle r="208" fill="#FFF8EA"/></g><clipPath id="mgs"><circle r="190"/></clipPath><g clip-path="url(#mgs)"><rect x="-200" y="-200" width="400" height="400" fill="#F6EBC6"/><path d="M-200 -40 Q0 -70 200 -40 V200 H-200z" fill="#EADBA8" opacity=".7"/><path d="M-200 -10 Q-60 -36 0 -20 Q70 -6 200 -30" stroke="#8A6A34" stroke-width="16" fill="none" stroke-dasharray="4 0"/><path d="M-200 -10 Q-60 -36 0 -20 Q70 -6 200 -30" stroke="#FFF8EA" stroke-width="6" fill="none"/></g><circle r="190" fill="none" stroke="${P.ink}" stroke-width="10"/>`)
+    + lcLab(t, tS + .2, 220, 70, "a split down the back", 220, -210, { size: 46 }));
+  // the empty legs and feelers: tubes you can see through
+  if (t >= tH - .1 && t < tM) { const a = 1 - ss(tM - .5, tM, t); w += OP(a, lcLab(t, tH, -820, -120, "empty legs", -560, 120, { size: 48, fill: "#D7F5EE", ink: "#0F766E" }) + lcLab(t, tH + .6, -40, -430, "empty feelers", -280, -330, { size: 48, fill: "#FFE2C0", ink: "#B4531A" })); }
+  // the picture model (right half): a nymph inside its hard outer skin; it grows, the skin cannot stretch: too tight, a crack starts
+  const mo = ss(tM - .3, tM + .4, t);
+  if (mo > .01) { const g = ss(tM + 1.5, tT, t), sq = ss(tT - 1.2, tT, t), cx = 420, cy = 60;
+    w += OP(mo, `<rect x="${cx - 400}" y="-380" width="800" height="700" rx="40" fill="#FFF8EA" stroke="#E3C9A8" stroke-width="6"/>` + T(cx, -320, "Why does the skin come off?", 40, P.ink)
+      + TF(cx + 10, cy + 160, 2.2 * (1 + .14 * g), hopper16(t, { feel: .3 }))
+      + `<g transform="translate(${cx + 10} ${cy + 160}) scale(2.2)"><path d="M-92 -40 Q-90 -68 -40 -68 L20 -72 Q42 -82 56 -70 Q${80 + 4 * sq} -80 ${84 + 4 * sq} -56 Q86 -30 64 -24 L-40 -20 Q-86 -20 -92 -40z" fill="none" stroke="${mixC("#8A6A34", "#E33B2E", sq)}" stroke-width="${n2(4 + 2 * sq)}" stroke-dasharray="${sq > .5 ? "0" : "10 6"}"/></g>`
+      + (g > .2 ? [[cx - 180, cy + 20, -1, 0], [cx + 160, cy, 1, 0], [cx, cy - 60, 0, -1], [cx - 40, cy + 120, 0, 1]].map(([x, y, dx, dy]) => `<path d="M${x} ${y} l${dx * 50} ${dy * 50}" stroke="#E36A12" stroke-width="9" stroke-linecap="round"/><path d="M${x + dx * 66} ${y + dy * 66} l${-dx * 18 + dy * 14} ${-dy * 18 + dx * 14} l${-dy * 28} ${-dx * 28}z" fill="#E36A12"/>`).join("") : "")
+      + lcLab(t, tM + .4, cx - 230, -230, "a hard outer skin", cx - 130, cy - 20, { size: 38 }) + (g > .3 ? lcLab(t, tM + 1.8, cx + 220, 270, "the nymph grows", cx + 80, cy + 120, { size: 38, fill: "#FFE2C0", ink: "#B4531A" }) : "")
+      + (t >= tT - .4 ? TF(cx + 230, -200, spring(t, tT - .4, .4) * (1 + .08 * Math.sin(t * 12)), tpill(0, 0, "too tight!", 50, "#E33B2E", "#fff", { w: 700 })) + `<path d="M${cx - 40} ${cy + 10} l20 -18 l10 16 l18 -20 l12 14" stroke="#E33B2E" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="${n2(140 * ss(tT - .2, tT + .4, t))} 200"/>` : "")); }
+  return `<rect x="-900" y="-450" width="1800" height="900" fill="#FFF1C8"/>` + inCam(c, w); }
+
+// BE THE NYMPH (the journey; the camera IS the nymph on a blade of grass as big as a road)
+function nymphJourney(t, s) { const m = MK, tN = m("jnymph"), tE = m("jeat"), tTi = m("jtight"), tSp = m("jsplit"), tO = m("jout"), tHd = m("jhard"), tA = m("jagain"), tW = m("jwings");
+  const sway = 18 * Math.sin(t * .9), grow = ss(tO, tO + 1.2, t) * .12 + ss(tA, tA + 3, t) * .2, pale = ss(tO - .2, tO + .3, t) * (1 - ss(tHd - .2, tHd + 1.2, t)), hang = ss(tTi - .4, tTi + .8, t) * (1 - ss(tHd, tHd + 1.4, t));
+  let w = `<rect width="1920" height="1080" fill="url(#p16Sky)"/>`;
+  // far grass blades and the sun through them; the huge blade (a road) under you, receding to a point
+  for (let i = 0; i < 14; i++) { const x = -100 + i * 160 + 40 * Math.sin(t * .4 + i), h = 700 + 300 * hash(i, 3); w += `<path d="M${n2(x - 40)} 1100 Q${n2(x + 30 * Math.sin(t * .6 + i))} ${n2(1100 - h * .6)} ${n2(x + 60 * (hash(i, 5) - .5))} ${n2(1100 - h)} Q${n2(x + 20)} ${n2(1100 - h * .5)} ${n2(x + 40)} 1100z" fill="${i % 2 ? "#8FCB6A" : "#6FB85A"}" opacity=".8"/>`; }
+  w += `<circle cx="1500" cy="160" r="90" fill="#FFF3B8" opacity=".9"/>`;
+  w += `<g transform="rotate(${n2(sway * .2 + 30 * hang)} 960 1080)"><path d="M300 1200 L900 ${n2(80 - 30 * hang)} L1020 ${n2(80 - 30 * hang)} L1620 1200z" fill="#6FBF4E" stroke="#3F8A3A" stroke-width="8"/><path d="M960 1200 L960 ${n2(80 - 30 * hang)}" stroke="#3F8A3A" stroke-width="6" opacity=".6"/>${[...Array(6)].map((_, i) => `<path d="M${640 + i * 30} ${1100 - i * 160} L${1280 - i * 30} ${1100 - i * 160}" stroke="#5FAE46" stroke-width="3" opacity=".4"/>`).join("")}`;
+  // the leaf edge you munch: bites appear (jeat)
+  if (t >= tE - .5 && t < tTi + .5) { const nb = Math.floor(clamp((t - tE) / 2.6) * 5); w += OP(ss(tE - .5, tE, t) * (1 - ss(tTi, tTi + .5, t)), `<path d="M1040 300 Q1500 260 1700 500 Q1500 640 1040 600z" fill="#58B56C" stroke="#2F7A45" stroke-width="6"/>` + [...Array(nb)].map((_, i) => `<circle cx="${1050 + i * 4}" cy="${360 + i * 50}" r="34" fill="#BFE6FF"/>`).join("")); }
+  w += `</g>`;
+  // the old empty skin hangs on the stem below (after you wriggle out)
+  if (t >= tO + .4) w += OP(ss(tO + .4, tO + 1.2, t), TF(1360, 820, 1.6, hopper16(t, { skin: true }), 100) + TF(1240, 660, 1, tpill(0, 0, "your old skin", 36, "#fff", P.ink, { w: 700 })));
+  // a small counter of empty skins (jagain)
+  if (t >= tA) { const n = Math.min(4, 1 + Math.floor((t - tA) / .9)); w += TF(1500, 240, spring(t, tA, .4), `<g filter="url(#dropS)"><rect x="-260" y="-70" width="520" height="140" rx="40" fill="#FFF8EA"/></g>` + [...Array(n)].map((_, i) => TF(-190 + i * 110, 28, .46, hopper16(t, { skin: true }), -10)).join("") + T(0, -32, "old skins: " + n, 30, P.ink)); }
+  // YOUR body at the frame's edges: two green front legs at the bottom, two feelers at the top; on jwings, two long wings unfold at the sides
+  const bc = pale > .02 ? mixC("#7CC84A", "#F2EBC8", pale) : "#7CC84A";
+  w += [-1, 1].map((sd) => `<path d="M${960 + sd * 240} 1200 Q${960 + sd * 300} 1040 ${n2(960 + sd * (420 + 10 * Math.sin(t * 5)))} 980 l${sd * 30} 40" stroke="#3F7F2A" stroke-width="56" fill="none" stroke-linecap="round"/><path d="M${960 + sd * 240} 1200 Q${960 + sd * 300} 1040 ${n2(960 + sd * (420 + 10 * Math.sin(t * 5)))} 980 l${sd * 30} 40" stroke="${bc}" stroke-width="42" fill="none" stroke-linecap="round"/>`
+    + `<path d="M${960 + sd * 120} -20 Q${960 + sd * 260} ${n2(160 + 20 * Math.sin(t * 3 + sd))} ${960 + sd * 520} ${n2(120 + 30 * Math.sin(t * 2.4 + sd))}" stroke="#3F7F2A" stroke-width="18" fill="none" stroke-linecap="round"/>`).join("");
+  if (t >= tW - .2) { const u = eo((t - tW + .2) / 1.4); w += [-1, 1].map((sd) => `<g transform="translate(${960 + sd * 900} 760) scale(${sd} 1) rotate(${n2(-60 * (1 - u))})"><path d="M0 0 Q-300 -140 -720 ${n2(-60 + 40 * Math.sin(t * 4))} Q-420 40 0 60z" fill="#8CC84E" stroke="#3F7F2A" stroke-width="8" opacity=".95"/><path d="M0 20 Q-300 -60 -660 -40 M0 40 Q-300 0 -600 0" stroke="#4E7F2A" stroke-width="4" fill="none"/></g>`).join(""); }
+  // tight: the view squeezes at the edges; split: a crack of light opens above you; out: everything pale and soft for a moment
+  const tg = ss(tTi - .3, tTi + .6, t) * (1 - ss(tSp + .2, tSp + .8, t)), z = 1 + grow;
+  let out = `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${w}</g>`;
+  if (tg > .01) out += `<rect width="1920" height="1080" fill="none" stroke="#3F5A2A" stroke-width="${n2(200 * tg + 40 * tg * Math.sin(t * 8))}" opacity=".55"/>`;
+  if (t >= tSp - .1 && t < tO + .6) { const a = ss(tSp - .1, tSp + .5, t) * (1 - ss(tO, tO + .6, t)), op = ss(tSp, tO, t); out += OP(a, `<path d="M960 -10 L${n2(940 - 60 * op)} 200 L${n2(980 + 50 * op)} 330 L${n2(950 - 40 * op)} 470" stroke="#FFF6DA" stroke-width="${n2(14 + 80 * op)}" fill="none" stroke-linejoin="round"/><path d="M960 -10 L${n2(940 - 60 * op)} 200 L${n2(980 + 50 * op)} 330 L${n2(950 - 40 * op)} 470" stroke="#fff" stroke-width="${n2(6 + 30 * op)}" fill="none" opacity=".9"/>`); }
+  out += `<rect width="1920" height="1080" fill="#FFF8EA" opacity="${n2(.45 * pale)}"/>`;
+  return out + dip(t, tO, "#FFFFFF", .3); }
+
+// Pip's homework on his easel (origin = the easel's feet): three ruled lines, each with a small cute drawing. o.lit [3], o.strike 0..1, o.fix
+// 0..1 (line 3 rewritten in green; its drawing: the nymph and the adult side by side, the ≠ becomes =), o.case 0..1 (the egg case pops out big)
+const HWL16 = ["It has three stages.", "Its eggs are found in an egg case.", "Its young does not look like the adult."];
+function roachSheet(t, o = {}) { const lit = o.lit || [0, 0, 0], st = o.strike || 0, fx = o.fix || 0;
+  let s = `<ellipse cx="0" cy="6" rx="330" ry="20" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-240 0 L-170 -360 M240 0 L170 -360 M0 0 L0 -300" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><rect x="-440" y="-330" width="880" height="24" rx="8" fill="#8A5A36"/>`
+    + `<g filter="url(#drop)"><rect x="-420" y="-920" width="840" height="600" rx="14" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="5"/></g>${[...Array(12)].map((_, i) => `<path d="M-400 ${-850 + i * 44} H400" stroke="#DCE8F4" stroke-width="2"/>`).join("")}<path d="M-350 -910 V-330" stroke="#F4A7A0" stroke-width="3"/>`
+    + T(-320, -866, "My homework: the cockroach", 38, P.ink, { a: "start" }) + T(400, -866, "by Pip", 30, P.pip, { a: "end" });
+  const LY = [-780, -630, -480];
+  HWL16.forEach((txt, i) => { const y = LY[i], l = lit[i];
+    if (l > .02) s += `<rect x="-410" y="${y - 50}" width="820" height="${i === 2 ? 170 : 110}" rx="12" fill="${P.sun}" opacity="${n2(.35 * l)}"/>`;
+    s += TF(-380, y - 8, 1, `<circle r="26" fill="${P.ink}"/>${T(0, 10, String(i + 1), 30, "#fff")}`) + T(-336, y + 4, esc(txt), 34, i === 2 && fx > .5 ? "#9A8F86" : P.ink, { a: "start", w: 600 });
+    if (i === 2 && st > .01) s += `<path d="M-340 ${y - 8} L${n2(-340 + 660 * st)} ${y - 8}" stroke="#E33B2E" stroke-width="6" stroke-linecap="round"/>`; });
+  // the small drawings: line 1 a small loop, line 2 a small egg case, line 3 a nymph and an adult (≠, then = on the fix)
+  s += TF(330, -790, .52, miniLoop(t, roachPic, "rsl")) + TF(330, -640, .34 * (1 - .2 * (o.case || 0)), eggCase16({}));
+  const sign = fx < .5 ? T(150, -360, "≠", 60, "#E33B2E") : T(150, -360, "=", 60, P.leafDeep);
+  s += OP(fx < .5 ? 1 - 2 * fx : 2 * fx - 1, TF(30, -378, .36, roach16(t, {})) + sign + TF(280, -378, .42, roach16(t, { adult: true })) + (fx > .5 ? T(30, -334, "nymph: no wings", 22, P.leafDeep, { w: 700 }) + T(280, -334, "adult: wings", 22, P.leafDeep, { w: 700 }) : ""));
+  if (fx > .02) s += OP(clamp(fx * 1.6), T(-336, -432, "Its young looks like the adult. It has no wings yet.", 32, P.leafDeep, { a: "start", w: 700 }));
+  return s; }
+
+// the board of FOUR small loops (frog, chicken, grasshopper, cockroach): each egg · young · adult, curved arrows, no numbers. flash [3]:
+// 0 every egg/young/adult slot, 1 the chick and the tadpole, 2 the grasshopper's empty skin
+const miniLoop = (t, pic, id, fl, names) => { const P3 = [[0, -70], [70, 50], [-70, 50]]; let s = `<path d="M30 -82 Q90 -60 82 10 M44 72 Q0 100 -44 72 M-82 10 Q-90 -60 -30 -82" stroke="${P.leaf}" stroke-width="7" fill="none"/>`;
+  P3.forEach(([x, y], i) => { const f = fl ? fl(i) : 0; s += TF(x, y, .36 * (1 + .14 * f), (f > .05 ? `<circle r="${n2(118 + 20 * f)}" fill="${P.sun}" opacity="${n2(.7 * f)}"/>` : "") + tile16(pic(i, t), 104, id + i, P.leaf)); }); return s; };
+function fourLoops(t, flash = [0, 0, 0], k = 1) { const L = [["frog", frogPic], ["chicken", chickPic], ["grasshopper", hopPic], ["cockroach", roachPic]];
+  let s = `<ellipse cx="0" cy="6" rx="330" ry="20" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-240 0 L-200 -120 M240 0 L200 -120" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><g filter="url(#drop)"><rect x="-400" y="-860" width="800" height="760" rx="30" fill="url(#gPaper)" stroke="#C9A974" stroke-width="8"/></g>` + T(0, -800, "THREE STAGES", 44, P.ink, { ls: 3 });
+  L.forEach(([nm, pic], j) => { const x = j % 2 ? 190 : -190, y = j < 2 ? -590 : -270;
+    const fl = (i) => Math.max(flash[0], j === 0 && i === 1 ? flash[1] : 0, j === 1 && i === 1 ? flash[1] : 0, j === 2 && i === 1 ? flash[2] : 0);
+    s += TF(x, y, 1, miniLoop(t, pic, "fl" + j, fl)) + TF(x, y + 120, 1, tpill(0, 0, nm, 30, "#FFF8EA", P.ink, { w: 700 }));
+    if (j === 2 && flash[2] > .05) s += TF(x + 120, y - 10, .3 * (1 + .2 * flash[2]), hopper16(t, { skin: true }), -20); });
+  return TF(0, 0, k, s); }
+
+// the mantis's fun fact: cousins (ff_cousin), its egg case on a twig (ff_case), lots of tiny nymphs hatching together (ff_babies)
+const ffCousin = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#E8F5DC"/>` + TF(-70, 80, .9, mantis16(t, {})) + TF(70, 50, .55, roach16(t, { adult: true }), -90) + `<path d="M-70 -110 V-130 H70 V-60" stroke="${P.ink}" stroke-width="5" fill="none"/><circle cx="0" cy="-130" r="10" fill="${P.coral}"/>`;
+const ffMCase = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF3DC"/><path d="M${-w / 2} -60 Q0 -80 ${w / 2} -40" stroke="#7A5226" stroke-width="16" fill="none"/>` + TF(0, 10, 1, mantisCase16(1));
+const ffMBabies = (t, w, h) => { let s = `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF3DC"/><path d="M${-w / 2} -90 Q0 -110 ${w / 2} -70" stroke="#7A5226" stroke-width="16" fill="none"/>` + TF(0, -40, .7, mantisCase16(1));
+  for (let i = 0; i < 9; i++) { const u = ((t * .35 + i / 9) % 1), x = -110 + 30 * i + 10 * Math.sin(t + i), y = lerp(-10, 120, eo(u)); s += TF(x, y, .26, mantis16(t, { ph: i }), 10 * Math.sin(i)); } return s; };
+// Part 2's "Last time..." pictures: the frog loop board, the chick beside the hen, the empty grasshopper skin on its blade with a ?
+const recapPic16 = (i, t) => { let s = `<rect x="-520" y="-300" width="1040" height="600" fill="${["#DCEFFB", "#FFF3DC", "#E8F5DC"][i]}"/>`;
+  if (i === 0) s += TF(0, 300, .7, loopBoard16(t, { tiles: [0, 0, 0], back: 0, id: "rp" }));
+  else if (i === 1) s += `<rect x="-520" y="140" width="1040" height="160" fill="#B7E58F"/>` + TF(-190, 170, 2, chick16(t, { peck: peckAt(t, 0) })) + TF(230, 190, 1.15, hen16(t, { peck: peckAt(t, 1) }));
+  else s += `<rect x="-520" y="160" width="1040" height="160" fill="#8FCB6A"/><path d="M-200 300 Q-60 60 160 -160" stroke="#6FBF4E" stroke-width="54" fill="none" stroke-linecap="round"/>` + TF(-20, 60, 2.1, hopper16(t, { skin: true }), -52) + TF(260, -150, 1, `<g filter="url(#dropS)"><circle r="56" fill="url(#gSun)"/></g>${T(0, 28, "?", 86, P.ink)}`);
+  return s; };

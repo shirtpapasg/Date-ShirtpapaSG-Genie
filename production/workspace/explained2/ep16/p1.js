@@ -169,9 +169,9 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "e1202", sayId: "e1201", who: "pip", 
    never the intro leaf); Momo's fun fact: the foam nest on a leaf over the water (ff_foam), the tadpoles dropping into the pond (ff_drop)) */
 SC.final = (t, s) => { const L = "e1301"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "e1302", tq = W(L, "it") - .1, f = FROGAT.liz, tf = W(L, "frog");
-  return lizReveal(t, s, L, VP16(t, { frogAt: f }), f[0] + 4, f[1] - 18, tq, "It was on the garden tap, beside the pond!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 700, qy: 840, tx: 700, ty: 965, tell: "e1304",
+  return bd("basil", 200, 1076, 380, t, { in: s.t0 + 1.4, poses: [[s.t0 + 1.4, "sit"], [tf, "surprised"], [tf + 1.6, "pointing"], [LT("e1303") - .3, "sit"], [LT("e1304"), "waving"]], wave: true }) + lizReveal(t, s, L, VP16(t, { frogAt: f }), f[0] + 4, f[1] - 18, tq, "It was on the garden tap, beside the pond!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 700, qy: 840, tx: 700, ty: 965, tell: "e1304",
     fact: { id: "e1303", at: [1270, 470], w: 860, h: 470, items: [["ff_foam", "a ball of foam on a leaf", ffFoam], ["ff_drop", "tadpoles drop into the pond", ffDrop]], cols: ["#5B6BD6", "#2FA35A"], sx: 1490, sy: 830, poses: [[MK("ff_in") - .4, "surprised"], [LT("e1303") - .2, "sit"]] } })
-    + bd("basil", 200, 1076, 380, t, { in: s.t0 + 1.4, poses: [[s.t0 + 1.4, "sit"], [tf, "surprised"], [tf + 1.6, "pointing"], [LT("e1303") - .3, "sit"], [LT("e1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, FROG_RULE); };
+    + smallPrint(t, s.t0 + .5, FROG_RULE); };
 
 /* 13 · the cliffhanger: on the grassy edge a little green grasshopper with NO wings hops onto a blade of grass (hop); beside it on another blade,
    a pale, see-through, EMPTY grasshopper (skin), a ? pops; the camera pushes along the grass from one to the other; PART 2 slams in */
@@ -181,7 +181,7 @@ const hopIn = (t) => { const th = MK("hop"), u = clamp((t - th + .7) / .7), tip 
   const x = lerp(1300, tip[0], u), y = lerp(900, tip[1], u) - 220 * Math.sin(Math.PI * u); return blade(t, HOPB.bx, HOPB.by, HOPB.bh, HOPB.lean, "#7CC85A", 18, 4) + TF(x, y, HOPB.k, hopper16(t, { ph: 1 }), lerp(-20, HOPB.rot, u)); };
 const camCliff = (t) => { const s = SCN.cliff, u = eio((t - MK("skin") + 1) / 1.6); return [1.5 + .05 * eio((t - s.t0) / 6), lerp(860, 1000, u), 760]; };
 SC.cliff = (t, s) => { const tP = W("e1502", "part") - .1, sk = camPt(camCliff(t), bladeTip(t, SKINB.bx, SKINB.by, SKINB.bh, SKINB.lean, 2, SKINB.u));
-  return VG16(t, { mantisAt: false, skin: SKINB, items: hopIn(t) }, camCliff(t)) + qMark(t, MK("skin") + .2, sk[0] + 110, sk[1] - 150)
+  return VG16(t, { mantisAt: false, skin: SKINB, items: hopIn(t) }, camCliff(t)) + qMark(t, MK("skin") + .2, sk[0] + 70, sk[1] - 230)
     + bd("momo", 330, 1076, 520, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("e1501m") + .1, "pointing"]], look: 4 })
     + bd("basil", 1600, 1060, 420, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], look: -5 }) + bd("pip", 1810, 1052, 400, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [MK("skin") + .1, "surprised"], [MK("skin") + 2, "sit"]], jump: [[LT("e1502") + .1, 20]] })
     + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + melt(t, s, "kwrecap", .4) + HUD(t); };

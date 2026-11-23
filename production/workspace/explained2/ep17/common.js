@@ -108,7 +108,7 @@ function markScene(t, s, o) { const S = TL.lines[o.sayId], R = TL.lines[o.id], t
 // EP14: EP7's call and answer per line (script segment 11): "Day, night! Round and round!" (the day-and-night ring of CYCLE CHECK flashes),
 // "Egg, chick! Round and round!" (the chicken ring), "Change, repeat! That's a cycle!" (the two tick boxes, then the green tag A CYCLE).
 // "cycle!" in the green answer colour (the A CYCLE tag's); the rest white. No sun yellow (that is YOU).
-const PHR = ["Egg, young, adult! Three stages!", "Chicks look like hens! Tadpoles don't!", "Skin too tight? Moult and grow!"], PCOL = { "stages!": "#7FE58F", "grow!": "#7FE58F" };   // EP16 (script.py CHANT)
+const PHR = ["Egg, larva, pupa, adult! Four stages!", "The pupa does not eat! It changes inside!", "Still water? Tip it out!"], PCOL = { "stages!": "#7FE58F", "inside!": "#7FE58F", "out!": "#7FE58F" };   // EP17 (script.py CHANT)
 function chantState(L, t) { const bar = L.bar, tb = (t - L.t) / bar, S = L.slots, nc = L.ncall; let k = -1; S.forEach(([p, b], i) => { if (tb >= b) k = i; });
   const inSlot = k >= 0 && tb < S[k][1] + 1, turn = k >= 0 && k < nc && !inSlot && tb < (S[k + 1] ? S[k + 1][1] : L.nbars) && tb < L.nbars, together = k >= nc;
   return { k, ph: k >= 0 ? S[k][0] : -1, inSlot, turn, together, tb, t0: k >= 0 ? L.t + S[k][1] * bar : L.t }; }

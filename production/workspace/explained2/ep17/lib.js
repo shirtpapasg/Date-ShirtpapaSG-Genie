@@ -1,4 +1,4 @@
-// lib.js: the engine's helpers (from EP1, adapted for EP5: key words; EP8: the new pace, a new term holds 2.0 s; EP10 to EP16: their key words). Everything returns SVG strings and is a pure function of its arguments (a frame depends only on t).
+// lib.js: the engine's helpers (from EP1, adapted for EP5: key words; EP8: the new pace, a new term holds 2.0 s; EP10 to EP17: their key words). Everything returns SVG strings and is a pure function of its arguments (a frame depends only on t).
 // Needs kit/style.js (P, defs, T, pill, G, groundShadow, logoPill, hand, teddy, leaf ...), tl.js (TL) and spr/manifest.js (SPR).
 const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, u) => a + (b - a) * u;
 const ss = (a, b, x) => { const u = clamp((x - a) / (b - a)); return u * u * (3 - 2 * u); };
@@ -75,16 +75,17 @@ function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id)
    correct one should be confident/smile. celebrate with hands high up only when achieved/learnt something new". */
 let _learn = null;
 function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you know!"
-    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|tback$|bracket$|rewrite$|jfrog$|jwings$)/.test(k))   /* EP16: a key word, a verdict, the loop closes, Pip's row fixed, the homework rewritten, the journeys' last steps */ _learn.push([v - .4, v + 4]);
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_|ltback$|rewrite$|jpupa$|jfly$)/.test(k))   /* EP17: a key word, a verdict, the butterfly loop closes, Basil's homework rewritten, the journeys' last steps (a pupa; an adult mosquito) */ _learn.push([v - .4, v + 4]);
     for (const s of TL.scenes || []) if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); }
   return _learn.some(([a, b]) => t >= a && t < b); }
-// EP16 (script section 3, OUTCOMES): Part 1 Round 1 Momo right (a frog), Pip (a fish) and Basil (a lizard) wrong; HOLD ON! Basil and Momo
-// right, Pip (four stages) wrong; the look-closer guesses (no point): Momo (frogs have babies like cats) at Basil's "Each dark dot is an egg!",
-// Basil (only the colour) at Pip's "The chick has a beak...". Part 2 Round 1 Pip and Momo right (the young), Basil (the adult) wrong; the
-// look-closer guess: Momo (it dried up) at Heart's "It is empty inside"; Showdown Basil and Momo right, Pip (his homework) wrong.
-const OUTCOMES = (PART === 1 ? [{ at: "m:ansglow", right: ["momo"], wrong: ["pip", "basil"] }, { at: "l:e903", right: ["basil", "momo"], wrong: ["pip"] },
-    { at: "l:e605b", right: [], wrong: ["momo"] }, { at: "l:e1105p", right: [], wrong: ["basil"] }]
-  : [{ at: "m:ansglow", right: ["pip", "momo"], wrong: ["basil"] }, { at: "l:f702", right: [], wrong: ["momo"] }, { at: "l:f1105b", right: ["basil", "momo"], wrong: ["pip"] }]);
+// EP17 (script section 3, OUTCOMES): Part 1 Round 1 (EP16's dare, answer 2: no, not a nymph) Pip and Momo right, Basil (yes, a nymph)
+// wrong; the look-closer guess (no point) Momo (a worm) at Pip's "That is six legs, so it is an insect!" (a703p); HOLD ON! (Pip: the pupa is
+// just resting) Basil and Momo right, Pip wrong (at a1003). Part 2 Round 1 (answer 2, a pupa) Basil and Pip right, Momo (3, an adult) wrong;
+// Showdown (Basil's homework, line 3: all mosquitoes spread dengue) Pip and Momo right, Basil wrong (at Pip's reveal b804p); the look-closer
+// guess (no point) Pip (too little water for mosquitoes) when the wrigglers show in the plate (mark `wrigglers`, b903).
+const OUTCOMES = (PART === 1 ? [{ at: "m:ansglow", right: ["pip", "momo"], wrong: ["basil"] }, { at: "l:a703p", right: [], wrong: ["momo"] },
+    { at: "l:a1003", right: ["basil", "momo"], wrong: ["pip"] }]
+  : [{ at: "m:ansglow", right: ["basil", "pip"], wrong: ["momo"] }, { at: "l:b804p", right: ["pip", "momo"], wrong: ["basil"] }, { at: "m:wrigglers", right: [], wrong: ["pip"] }]);
 function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id] = o.at.split(":"), t0 = k === "m" ? MK(id) : (HAS(id) ? LT(id) : undefined); if (t0 === undefined || t < t0 || t > t0 + 4) continue;
     if (o.wrong.includes(who)) return { t0, pose: "oops" };   // shy: paw on the head, a sheepish smile
     if (o.right.includes(who)) return { t0, pose: SPR[`${who}_arms_crossed`] ? "arms_crossed" : "sit" }; }   // confident smile
@@ -313,16 +314,17 @@ function wipe(t, tc, col, cx = 960, cy = 540) { const a = .3, b = .26; if (t < t
    The shelf slides off to the right during the first-person shrink and full-screen cards, and glows once at the end of the part as a recap.
    EP8: an entry may carry o.at = [x, y] (and o.size): it pops THERE without dimming the frame (SAP pops beside the Mark Sentence card). */
 const KWHOLD = 2.0;
-// EP16: Part 1 JELLY-LIKE COVERING (inside the look-closer lceggs on Heart's "jelly-like"), TADPOLE (on Heart's "tadpole" in frogans), CHICK
-// (inside lcchick on Heart's "chick"); Part 2 NYMPH (inside lcnymph on Heart's "nymph"), MOULTING (on Heart's "moulting" in moult), EGG CASE
-// (on Heart's "case" in fix). All o.at (no dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it.
-const KW = (PART === 1 ? [["JELLY-LIKE COVERING", "kw_jelly_like_covering", 1, null, { at: [960, 470], size: 76 }], ["TADPOLE", "kw_tadpole", 1, null, { at: [1420, 300], size: 110 }], ["CHICK", "kw_chick", 1, null, { at: [1440, 300], size: 110 }]]
-  : [["NYMPH", "kw_nymph", 1, null, { at: [1440, 300], size: 110 }], ["MOULTING", "kw_moulting", 1, null, { at: [1420, 300], size: 110 }], ["EGG CASE", "kw_egg_case", 1, null, { at: [1420, 300], size: 104 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+// EP17: Part 1 PROLEGS (inside the look-closer lclegs on Heart's "prolegs"), LARVA (on Heart's "larva" in the scene larva), PUPA (on
+// Heart's "pupa" in holdon, after the HOLD ON! fix); Part 2 WRIGGLER (inside lcwriggler on Heart's "wriggler"), DENGUE (on Heart's "dengue"
+// in fix, beside the strip), STAGNANT WATER (inside lcplate on Heart's "stagnant"). All o.at (no dimming), 2.0 s, then they fly to the shelf.
+// Move an o.at if the drawing needs it (Stage 2).
+const KW = (PART === 1 ? [["PROLEGS", "kw_prolegs", 1, null, { at: [1440, 300], size: 110 }], ["LARVA", "kw_larva", 1, null, { at: [1440, 300], size: 110 }], ["PUPA", "kw_pupa", 1, null, { at: [1440, 300], size: 110 }]]
+  : [["WRIGGLER", "kw_wriggler", 1, null, { at: [1420, 300], size: 110 }], ["DENGUE", "kw_dengue", 1, null, { at: [1440, 300], size: 110 }], ["STAGNANT WATER", "kw_stagnant_water", 1, null, { at: [1300, 300], size: 92 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
-const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lceggs: 1, lcchick: 1, lcnymph: 1, lcskin: 1 };
+const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lclegs: 1, lcpupa: 1, lcwriggler: 1, lcplate: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
-const KWLINE = PART === 1 ? ["hk_jelly_like_covering", "hk_tadpole", "hk_chick"] : ["hk_nymph", "hk_moulting", "hk_egg_case"];
+const KWLINE = PART === 1 ? ["hk_prolegs", "hk_larva", "hk_pupa"] : ["hk_wriggler", "hk_dengue", "hk_stagnant_water"];
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
   let hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
   const away = window.SHELF_AWAY ? window.SHELF_AWAY(t) : 0; hide = Math.max(hide, away); const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;

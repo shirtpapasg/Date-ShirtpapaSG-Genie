@@ -1,20 +1,20 @@
-"""make_voice.py: every spoken line of EP16 (engine copied from EP15 unchanged; only this header and EXTRA changed) -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
+"""make_voice.py: every spoken line of EP17 (engine copied from EP16 unchanged; only this header and EXTRA changed) -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
   /home/user/heart-tts/venv/bin/python make_voice.py
 Heart  = Kokoro af_heart, the episodes' recipe (sau/voice.py: pitch swing x1.6, -21.7 dB), at the NEW PACE (teacher 20 Nov, as EP6):
          speed .90 with .5 s between sentences; a sentence that says a new term (opts "term") is said a little slower (x.93) and is
-         followed by at least .65 s; the journeys are slower (.85), 1.0 s between sentences and softer (-2.5 dB, opts "soft");
-         "Now you know!" excited: faster, +3 semitones, wider swing, +3 dB.
+         followed by at least .65 s; the journeys and look-closers are slower (.85), the journeys 1.0 s between sentences and softer
+         (-2.5 dB, opts "soft"); "Now you know!" excited: faster, +3 semitones, wider swing, +3 dB.
 Buddies = the Character Voice Kit voices exactly as in characters/sprites/talk_voice.py (voice_maker.CHARACTERS, -18 dB RMS), 12% slower.
 Chant  = EP7's call and response (CHANT in script.py): each buddy says each call and answer, stretched to one length so the three land
          together; the call on the bar line, the answer at ANS_AT of the bar; Basil leads the call (a little louder).
-sg_pron: every Heart and buddy text goes through ../sg_pron.py (needs_fix -> speak_line) (Sungei Buloh, Semakau, "live", "fragile", "mantis").
-         EP16: the dare e202 "It lives in water" and the caption e805 ("live(s)" = "leev(z)", the teacher's clip M); "praying mantis"
-         (f201a, f1302, f1303b): Kokoro's own "mantis" ends in a z ("man-teez"), so sg_pron says "MAN-tis" (new entry, 23 Nov,
-         ../pron_clips/Heart_ep16_new_words.m4a).
+sg_pron: every Heart and buddy text goes through ../sg_pron.py (needs_fix -> speak_line) (Sungei Buloh, Semakau, "live", "fragile", "mantis",
+         and from EP17 "prolegs", "Aedes albopictus", "Aedes aegypti"). EP17: "prolegs" (a705, a706b, a708, the read-along) is said
+         "PRO-legs" (Kokoro's own swallowed the "legs"); the dengue strip b806's two Aedes names "ay-EE-deez al-boh-PIK-tus" /
+         "ay-EE-deez ee-JIP-tie" (Kokoro said "eeds"); "lives" (b1103m) = "leevz". Test clip ../pron_clips/Heart_ep17_new_words.m4a
+         (waiting for the teacher's listen).
 Respelling: script opts "pron" {text: spoken as} re-spells words for ONE line (the caption keeps the script's words); a unison line takes
-         it too. EP16: Basil's goal card e402 "3" = "three"; "moult(s/ing/ed)" -> "molt..." (opts MOULT) although Kokoro's phonemes are the
-         same for both spellings (mˈoʊlt, checked 23 Nov), so the chant's "Moult and grow!" needs none. "nymph" (nˈɪmf), "jelly-like"
-         (dʒˈɛlɪlˈaɪk) and "HDB" (H-D-B) are Kokoro's own (test clip ../pron_clips/Heart_ep16_new_words.m4a).
+         it too. EP17: Pip's goal card a402 "4" = "four"; "moult(s)" -> "molt(s)" (opts MOULT, as EP16; the same phonemes). Kokoro's own:
+         larva, pupa, pupae, pupal, wriggler, dengue, stagnant, cocoon, dragonfly, nymph (checked 23 Nov, the same clip).
 Word times: pocketsphinx forced alignment (sau/build_tl.py's method); a line it cannot align is spread by word length.
 Existing files are kept (safe to re-run after a restart); a line whose text or options changed is recorded again."""
 import os, sys, json, re, wave, subprocess, numpy as np, soundfile as sf, parselmouth
@@ -175,7 +175,8 @@ EXTRA = {"bobs": "B AA B Z", "fragyle": "F R AE JH AY L", "letterboxes": "L EH T
          "lock-in": "L AA K IH N", "pe": "P IY IY", "windscreen": "W IH N D S K R IY N", "oh-pake": "OW P EY K", "mcaw": "M AH K AO", "koi": "K OY", "dragonfly": "D R AE G AH N F L AY", "goldfish": "G OW L D F IH SH", "eco-garden": "IY K OW G AA R D AH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
          "aww": "AA", "recycling": "R IY S AY K L IH NG", "organiser": "AO R G AH N AY Z ER", "showdown": "SH OW D AW N", "papaya": "P AH P AY AH",
          "toa": "T OW AH", "payoh": "P AA Y OW", "mynah": "M AY N AH", "dit": "D IH T", "wines": "W AY N Z", "squish": "S K W IH SH", "buddies": "B AH D IY Z",
-         "classify": "K L AE S AH F AY", "twenty-five": "T W EH N T IY F AY V", "today's": "T AH D EY Z", "sprouts": "S P R AW T S", "diversity": "D AY V ER S AH T IY", "similarities": "S IH M AH L EH R AH T IY Z", "thirty-one": "TH ER T IY W AH N", "thirty-two": "TH ER T IY T UW", "check-out": "CH EH K AW T", "pip's": "P IH P S", "plant's": "P L AE N T S", "wilting": "W IH L T IH NG", "snug": "S N AH G", "biscuit": "B IH S K AH T", "oats": "OW T S", "whoa": "W OW", "cupboard": "K AH B ER D", "kranji": "K R AA N JH IY", "touch-me-not": "T AH CH M IY N AA T", "twenty-one": "T W EH N T IY W AH N", "rematch": "R IY M AE CH", "prickles": "P R IH K AH L Z", "droops": "D R UW P S", "spores": "S P AO R Z", "reproduces": "R IY P R AH D UW S AH Z", "reproducing": "R IY P R AH D UW S IH NG", "mimosa": "M IH M OW S AH", "eyelids": "AY L IH D Z", "kittens": "K IH T AH N Z", "basil": "B AE Z AH L", "yay": "Y EY", "hatches": "HH AE CH AH Z", "inwards": "IH N W ER D Z", "responding": "R IH S P AA N D IH NG", "responded": "R IH S P AA N D AH D", "non-living": "N AA N L IH V IH NG", "mrt": "EH M AA R T IY", "pyjamas": "P AH JH AA M AH Z", "pyjama": "P AH JH AA M AH", "chinchillas": "CH IH N CH IH L AH Z", "momo's": "M OW M OW Z", "cockroach's": "K AA K R OW CH AH Z", "hdb": "EY CH D IY B IY", "jelly-like": "JH EH L IY L AY K", "molted": "M OW L T AH D", "pecks": "P EH K S", "three-stage": "TH R IY S T EY JH"}
+         "classify": "K L AE S AH F AY", "twenty-five": "T W EH N T IY F AY V", "today's": "T AH D EY Z", "sprouts": "S P R AW T S", "diversity": "D AY V ER S AH T IY", "similarities": "S IH M AH L EH R AH T IY Z", "thirty-one": "TH ER T IY W AH N", "thirty-two": "TH ER T IY T UW", "check-out": "CH EH K AW T", "pip's": "P IH P S", "plant's": "P L AE N T S", "wilting": "W IH L T IH NG", "snug": "S N AH G", "biscuit": "B IH S K AH T", "oats": "OW T S", "whoa": "W OW", "cupboard": "K AH B ER D", "kranji": "K R AA N JH IY", "touch-me-not": "T AH CH M IY N AA T", "twenty-one": "T W EH N T IY W AH N", "rematch": "R IY M AE CH", "prickles": "P R IH K AH L Z", "droops": "D R UW P S", "spores": "S P AO R Z", "reproduces": "R IY P R AH D UW S AH Z", "reproducing": "R IY P R AH D UW S IH NG", "mimosa": "M IH M OW S AH", "eyelids": "AY L IH D Z", "kittens": "K IH T AH N Z", "basil": "B AE Z AH L", "yay": "Y EY", "hatches": "HH AE CH AH Z", "inwards": "IH N W ER D Z", "responding": "R IH S P AA N D IH NG", "responded": "R IH S P AA N D AH D", "non-living": "N AA N L IH V IH NG", "mrt": "EH M AA R T IY", "pyjamas": "P AH JH AA M AH Z", "pyjama": "P AH JH AA M AH", "chinchillas": "CH IH N CH IH L AH Z", "momo's": "M OW M OW Z", "cockroach's": "K AA K R OW CH AH Z", "hdb": "EY CH D IY B IY", "jelly-like": "JH EH L IY L AY K", "molted": "M OW L T AH D", "pecks": "P EH K S", "three-stage": "TH R IY S T EY JH",
+         "prolegs": "P R OW L EH G Z", "dragonflies": "D R AE G AH N F L AY Z", "wriggles": "R IH G AH L Z", "bedsheet": "B EH D SH IY T", "mosquito's": "M AH S K IY T OW Z", "wriggling": "R IH G L IH NG", "albopictus": "AE L B OW P IH K T AH S", "four-stage": "F AO R S T EY JH", "basil's": "B AE Z AH L Z", "molts": "M OW L T S", "wriggly": "R IH G L IY", "wriggler": "R IH G L ER", "flower-pot": "F L AW ER P AA T", "wrigglers": "R IH G L ER Z", "aedes": "EY IY D IY Z", "pupae": "P Y UW P IY", "pupal": "P Y UW P AH L", "moth's": "M AO TH S", "munches": "M AH N CH AH Z", "aegypti": "IY JH IH P T AY"}
 def align(text, wav):
     toks = text.split(); ptoks = pron(text).split()
     spoken = []

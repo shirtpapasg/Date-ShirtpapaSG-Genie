@@ -21,7 +21,9 @@ hold, after [id, s], pron {text: spoken as} (the caption keeps the script's word
 
 Respellings: "moult", "moults", "moulted" (the book's British spelling) are spoken from the US spelling (MOULT), as EP16. "4" in the goal
 card is said "four". "larvae" (plural) is "LAR-vee" (pron LARVAE). Aedes albopictus / Aedes aegypti (the book's names, on the strip) are
-spoken from respellings (AEDES): "AY-ee-deez al-boh-PIK-tus" / "AY-ee-deez ee-JIP-tie". Make a test clip of each at Stage 1 and listen first.
+spoken from ../sg_pron.py (Stage 1, 23 Nov: Kokoro said "eeds", and the respelling "Ay-ee-deez" came out "EYE-ee-deez"): "ay-EE-deez
+al-boh-PIK-tus" / "ay-EE-deez ee-JIP-tie"; "prolegs" too ("PRO-legs": Kokoro's own swallowed the "legs"). "pupae" is Kokoro's own (PEW-pee).
+Test clip ../pron_clips/Heart_ep17_new_words.m4a (waiting for the teacher's listen).
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
@@ -77,7 +79,7 @@ VERDICT = lambda mk: [("mark", mk), ("wait", 2.5)]
 MOULT = {"moults": "molts", "Moults": "Molts", "moult": "molt", "moulted": "molted"}
 FOUR = {"4": "four"}
 LARVAE = {"larvae": "larvee"}
-AEDES = {"Aedes albopictus": "Ay-ee-deez al-boh-pick-tus", "Aedes aegypti": "Ay-ee-deez ee-jip-tie"}
+AEDES = {}   # Stage 1: the respelling came out "EYE-ee-deez"; the names are now in ../sg_pron.py (phonemes; test clip ../pron_clips/Heart_ep17_new_words.m4a)
 
 def kwrecap(words, pron=None):
     out = [("scene", "kwrecap"), ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5})]
@@ -282,7 +284,7 @@ SEQ2 = [
  ("say", "b803", H, "Locked in!", {"pre": 0}),
  ("say", "b804p", P, "Three. Most mosquitoes do not spread any disease. Only some kinds do.", {"pre": .5, "post": .2}),
  ("scene", "fix"), ("wait", .3), ("mark", "strike"), ("wait", .5), ("mark", "rewrite"), ("wait", .6),
- ("say", "b806", H, "Most of the mosquitoes do not spread diseases, but some do. For example, Aedes albopictus and Aedes aegypti spread dengue.", {"pre": .2, "hold": 6.0, "post": .2, "term": ["dengue"], "pron": AEDES, "kw": [["kw_dengue", "dengue"]]}),
+ ("say", "b806", H, "Most of the mosquitoes do not spread diseases, but some do. For example, Aedes albopictus and Aedes aegypti spread dengue.", {"pre": .2, "hold": 6.0, "post": .2, "term": ["dengue"], "kw": [["kw_dengue", "dengue"]]}),
  HOLD("kw_dengue"),
  ("say", "b807m", M, "Dengue is a sickness that gives people a high fever. Only some mosquitoes carry it, and they pass it on when they bite.", {"pre": .2}),
  ("say", "b808", H, "Three fingers? Put up two more on your score hand!", {"pre": .3, "post": .3, "kw": [["coin2", "two"]]}),
@@ -296,7 +298,7 @@ SEQ2 = [
  ("say", "b904", H, "Mosquito eggs are laid in stagnant water.", {**LC, "pre": .3, "term": ["stagnant water"], "kw": [["kw_stagnant_water", "stagnant"]]}),
  HOLD("kw_stagnant_water"),
  ("say", "b905b", B, "Stagnant water is still water that nobody changes. Even a tiny plate of it is enough for mosquitoes!", {"pre": .2}),
- ("say", "b906", H, "So, tip the water out. No still water means no eggs, no wrigglers and no pupae.", {**LC, "pre": .3, "pron": {"pupae": "pew-pee"}, "kw": [["tip", "tip"], ["dim", "eggs"]]}),
+ ("say", "b906", H, "So, tip the water out. No still water means no eggs, no wrigglers and no pupae.", {**LC, "pre": .3, "kw": [["tip", "tip"], ["dim", "eggs"]]}),
  ("say", "b907m", M, "And no new mosquitoes! At home, we tip out the plates, turn the pails over, and change the water in the vases.", {"pre": .2, "kw": [["pail2", "pails"], ["vase", "vases"]]}),
  *VERDICT("v_plate"),
  ("scene", "mark2"),

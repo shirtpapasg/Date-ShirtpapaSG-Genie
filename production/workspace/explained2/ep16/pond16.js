@@ -83,7 +83,7 @@ function chick16(t, o = {}) { const pk = o.peck || 0, ph = o.ph || 0, fl = [...A
 const peckAt = (t, k, every = 1.9) => { const u = ((t + k * .73) % every) / every; return u < .22 ? Math.sin(Math.PI * u / .22) : 0; };
 // the grasshopper (origin = under its feet, facing right). o.adult: long wings folded along its back; o.skin: the empty old skin (pale,
 // see-through, hollow, split down the back, no eyes); o.feel 0..1 feelers twitch; o.lit: { legs, feelers, jump, wings } 0..1 pulses
-function hopper16(t, o = {}) { const ad = !!o.adult, sk = !!o.skin, li = o.lit || {}, g = sk ? "#F4E9C8" : ad ? "#8CC84E" : "#9CD65E", d = sk ? "#BFA978" : "#3F7F2A", fo = sk ? .55 : 1, tw_ = (o.feel === undefined ? 1 : o.feel) * 6 * Math.sin(t * 5 + (o.ph || 0));
+function hopper16(t, o = {}) { const ad = !!o.adult, sk = !!o.skin, li = o.lit || {}, g = sk ? "#F6EBC6" : ad ? "#8CC84E" : "#9CD65E", d = sk ? "#A8905E" : "#3F7F2A", fo = sk ? .82 : 1, tw_ = (o.feel === undefined ? 1 : o.feel) * 6 * Math.sin(t * 5 + (o.ph || 0));
   const lw = (k, base) => base + 4 * (li[k] || 0), lc = (k) => li[k] > .05 ? mixC(d, ["#0F766E", "#E36A12", "#7C3AED", "#1F8A4C"][["legs", "feelers", "jump", "wings"].indexOf(k)], li[k]) : d;
   const blen = ad ? 1 : .92, hx = ad ? 74 : 66;
   let s = "";
