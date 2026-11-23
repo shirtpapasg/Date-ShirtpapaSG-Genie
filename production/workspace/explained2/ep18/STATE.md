@@ -138,3 +138,19 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   Basil pointing at the end of HOLD ON!. Pose audit: P1 32 / P2 31 moments, each with its reason (qa/buddy_faces_p1/p2.jpg).
 - **Still weak:** the OUR CYCLES THEME board is on screen only about 2 s (the script's .8 s hold); the raindrop's fall is simple; the
   chick's view of the mother hen is a big head and body from the corner; Momo's v2 talking sprite has her arms crossed (the cast's own art).
+
+## Stage 2 DONE (2026-11-23, after the coordinator freed space and lowered the rule to 3 GB for EP18)
+- **Teacher's two new rules applied before the final render:** every leaf on a twig (`limePlant18`: EP17's lime plant scattered its leaves;
+  the ixora's and the bush's leaves now sit on their masses; the white flowers at twig ends) and full fades (the picture model's plants, the
+  hatched frog-egg clump); shy / confident through every fix: P1 answer (Momo oops, Pip arms crossed; Basil oops from k804), HOLD ON! (Pip
+  oops, Basil and Momo arms crossed to the end; Pip's face shy in lcyoung until k1104), P2 eggans (Basil oops; Pip, Momo arms crossed; his
+  face shy in lcloop until REPEATED), Showdown and fix (Momo oops through the fix; Basil and Pip arms crossed). Basil's cheer after P2 Mark
+  Sentence 1 removed (a fixed mistake is no longer a cheer). Pose audit: P1 36, P2 37 moments, reasons in pose_reasons.json.
+- **finish.sh** had a Stage 1 syntax error (an extra parenthesis in the contact-sheet marks): fixed; the srt and sheets now build.
+- **Rendered:** `ep18_part1.mp4` **5:28.7** (328.7 s), `ep18_part2.mp4` **5:33.6** (333.6 s), 1920x1080 30 fps, -16.0 LUFS (not committed);
+  `ep18_part1/2.srt`, `sheet_part1/2.png`. Chunks deleted.
+- **Countdowns (measure_countdowns.py):** P1 Round 1 3 steps of 1.000 s, bell 59.759 = timeline; HOLD ON! 5 x 1.000, bell 231.087; P2 Round 1
+  5 x 1.000, bell 49.898; Showdown 5 x 1.000 (the number changes 1 frame after the tick, 172.369 vs 172.336), bell 177.336.
+- **Review pack:** qa/buddy_faces_p1.jpg, qa/buddy_faces_p2.jpg, qa/preview_p1_clips.mp4 (82 s), qa/preview_p2_clips.mp4 (87 s; not
+  committed), qa/highlights.jpg, qa/ep1_compare_p1/p2.jpg; thumbnails thumb_part1.jpg (SAME?!) / thumb_part2.jpg (WHICH FIRST?) via
+  ../thumb_v2.js ep18_1 / ep18_2; app_moments.json; chapters_p3.json EP18_P1 / EP18_P2. Not uploaded.
