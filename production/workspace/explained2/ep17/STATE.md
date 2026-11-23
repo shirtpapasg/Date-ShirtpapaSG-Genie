@@ -8,8 +8,8 @@ flower-pot plate in an HDB corridor: STAGNANT WATER; the chant; the dragonfly; t
 cycle?) **5:27.4**.
 The script: `../p3_ep17_script.md` (version 1, Opus, 23 Nov 2026). The source of every spoken word: `script.py`.
 
-Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** · Stage 2 (drawing, sound, full render, self-check: Fable)
-· Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md) · Stage 3 (render, checks, upload: Opus).
+Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** · **Stage 2 (drawing, sound, full render, self-check) and
+Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md, fixes, re-render): DONE 2026-11-23** · Stage 3 (checks, upload: the main session).
 
 ## For the teacher to listen to (before Stage 3)
 - **`../pron_clips/Heart_ep17_new_words.m4a`** (Heart, 11 sentences, 1.2 s apart; sentence 3 is Basil):
@@ -78,3 +78,41 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** �
 - Fun facts checked from established natural history (no web access): many moth caterpillars spin a silk cocoon (silk from the silkworm
   moth); dragonfly nymphs live underwater and eat mosquito larvae.
 - School Lab 5.1 stays out of the description until its bench stops numbering the stages.
+
+## Stage 2 done (2026-11-23): drawn, reviewed, fixed, rendered (NOT uploaded: the teacher has a quick look first)
+- **Renders:** `ep17_part1.mp4` **5:19.5**, `ep17_part2.mp4` **5:27.4** (1920x1080, 30 fps, **-16.0 LUFS** both), captions `ep17_part1.srt` /
+  `ep17_part2.srt`, contact sheets `sheet_part1.png` / `sheet_part2.png`. The mp4s are NOT committed (rebuild: `./build_part.sh 1` and `2`,
+  about 11 min each under /tmp/explained_render.lock). Chunk folders deleted after muxing.
+- **Countdowns measured in the renders** (`python3 measure_countdowns.py 1|2`): P1 Round 1 (3 s) numbers at 54.87, 55.87, 56.87, 57.87 s;
+  HOLD ON! (5 s) steps 1.00 s from 190.64 (1 frame after the tick); P2 Round 1 (5 s) steps 1.00 s exactly from 45.26; Showdown (5 s) steps
+  1.00 s from 161.25 (1 frame). Ticks and the bell on the numbers; no music and no ambience one-shot under any countdown.
+- **Engine:** compared with ../ep15's finished engine (lib.js, common.js, closer.js, main.js; tests.js is EP-only): closer.js / main.js /
+  lib.js identical apart from EP17's own parts (OUTCOMES, KW, KWLINE, learnAt marks, SHELF_HIDE). common.js: EP15's final versions of
+  `SC.count` and `finalScene` (one size at one depth), `markScene` (the reader points at the card in the pause, then reads) and `nykScene`
+  (no waving at the start) brought over; EP17's chant `PHR` kept. lib.js `KW`: STAGNANT WATER lands at [1250, 480] (clear of the magnifier).
+- **EP16's dare cards** (`ep16dare.js`): copied unchanged from ../ep16/p2.js `nextPic` (PIC.nymph16: the grasshopper nymph with a ?;
+  PIC.cat16: the caterpillar), drawn with EP16's own `hopper16` / `caterpillar16` (pond16.js, copied); `dareCard3` = EP16's choiceCard3.
+- **Borrowed art files (copied unchanged, header noted):** home15.js, garden15.js (../ep15), pond16.js, art16.js (../ep16 snapshot).
+- **New art:** `art17.js` (the animals: lime egg, caterpillar `cat17` with three pairs of true legs and five pairs of prolegs, the pupa
+  `pupa17` with silk pad and girdle (no cocoon), the lime butterfly `bfly17` / `bflySide`, the moth, a silk cocoon, the wriggler, the
+  mosquito pupa and adult, mosquito eggs, the dragonfly and its nymph; the loop board `loop4` (no numbers), `miniLoop4`, Pip's JUST RESTING!
+  board, Basil's homework sheet); `sets17.js` (BG.lime17 + VL the lime-plant side, BG.corner17 + VCR the far corner after rain with the
+  pail, BG.corr17 + VH the HDB corridor, BG.void17 + VD the void deck; all four baked in bg/); `lc17.js` (the four look-closers legsArt,
+  pupaArt, wrigArt, plateArt; the journeys bflyJourney, mosqJourney; the recap, ring, idea, dengue, fun-fact and dare pictures, the chant
+  board). p1.js / p2.js: every placeholder replaced; every mark kept.
+- **Hidden-animal spots actually used** (changed from SCENES_TODO where the spot was not visible in the frame): P1 moth: void deck pillar
+  (cold, back, title, game: intro) · a lime leaf at the plant's left (answer1) · under a leaf at the top (lime) · the fence post (waitw) ·
+  the watering can on the pot's LEFT (larva) · the top of Pip's easel (holdon) · the board's top-left corner (ring) · REVEAL the side of
+  the pot (liz). P2 dragonfly: a bamboo stake's tip (place, game: intro) · the pail's rim (waitw) · the tap (mosqans) · Basil's easel top
+  (show) · on top of the letterboxes (fix) · the corridor railing (plate) · REVEAL the watering can's handle (liz).
+- **Sound** (`sound_cues.js`, Stage 2 block): the garden bed, drips after rain, the corridor / void deck bed, foley on every mark (listed in
+  NOTES_REVIEW.md); no ambience one-shot inside a countdown.
+- **Review** (`NOTES_REVIEW.md`): 15 notes from the first full render, all fixed, both parts re-rendered whole. Open points there.
+- **For the teacher:** `qa/highlights.jpg` (10 labelled stills), `qa/buddy_faces_p1.jpg` / `_p2.jpg` (every pose on screen with its time
+  and reason, `pose_reasons.json`), `qa/preview_p1_clips.mp4` / `_p2` (720p with sound; not committed: rebuild with `./make_preview.sh`),
+  `qa/ep1_compare_p1.jpg` / `_p2` (EP1 side by side), `qa/lines_p1.jpg` / `_p2` (a still at every buddy line), `qa/thumbs.jpg`.
+- **Thumbnails (v2, `../thumb_v2.js` ep17_1 / ep17_2):** P1 **NYMPH?!** (yellow) + Basil surprised + the caterpillar with its legs and
+  prolegs, lime-green burst; P2 **WHAT'S IN / HERE?** + Momo surprised + three wrigglers hanging in still water, sky-blue to violet burst.
+  Bottom right kept free.
+- **App:** `app_moments.json` (17A / 17B, keys O.cycles / CH.animalCycles, titles <= 64 characters, positive words only: checked in
+  make_moments.py) and `production/youtube/chapters_p3.json` "EP17_P1" / "EP17_P2" (the main session swaps in the video ids).

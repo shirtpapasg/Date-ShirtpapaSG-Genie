@@ -70,12 +70,12 @@ const camAns = (t) => { const e = eio((t - MK("ansglow") + .2) / 1.6); return [1
 const bflyCard = (t, k) => k < .02 ? "" : TF(0, 0, k, `<g filter="url(#drop)"><rect x="-150" y="-130" width="300" height="260" rx="22" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="6"/></g><rect x="-136" y="-116" width="272" height="190" rx="16" fill="#DCEFFB"/>` + TF(0, -20, .5, bfly17(t, { flap: .2 + .2 * Math.sin(t * 2.4) })) + T(0, 112, "the butterfly", 34, P.ink));
 SC.answer1 = (t, s) => { const tA = MK("ansglow"), tP = MK("pair"), [px, d] = t >= tP ? slideX(t, tP, .7, 2200, 1020, 620) : [2400, ""];
   const items = `<path d="M${LT_CAT[0] - 120} ${LT_CAT[1] + 8} Q${LT_CAT[0]} ${LT_CAT[1] - 6} ${LT_CAT[0] + 130} ${LT_CAT[1]}" stroke="#7A5230" stroke-width="12" fill="none" stroke-linecap="round"/>`;
-  return VL(t, { cat: catLive(t), bites: 3, over: (t >= tP ? d + TF(px, 520, 1, bflyCard(t, 1)) + signDisc(t, tP + .5, 1205, 470, "≠", .8) : "") + TF(LT_CAT[0], LT_CAT[1] + 120, spring(t, tP + .3, .4), tpill(0, 0, "the caterpillar", 30, "#fff", P.ink, { w: 700 })) }, camAns(t))
-    + [0, 1].map((i) => TF(800 + i * 260, 210, .44 * spring(t, s.t0 + .2 + i * .08, .4), dareCard3(i, t, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }))).join("") + xChip16(t, tA + .2, 880, 140)
-    + coin(t, MK("coin1") - .1, 960, 450, "+1", "if you showed two fingers")
-    + bd("basil", 760, 1010, 390, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("basil", 900, 820, t, s.t0 + .3, "1") : "") + xChip16(t, tA + .4, 940, 760, .7)
+  return VL(t, { cat: catLive(t), bites: 3, over: (t >= tP ? d + TF(px, 440, 1, bflyCard(t, 1)) + signDisc(t, tP + .5, 1135, 470, "≠", .8) : "") + TF(LT_CAT[0] - 70, LT_CAT[1] + 110, spring(t, tP + .3, .4), tpill(0, 0, "the caterpillar", 30, "#fff", P.ink, { w: 700 })) }, camAns(t))
+    + [0, 1].map((i) => TF(1300 + i * 260, 200, .44 * spring(t, s.t0 + .2 + i * .08, .4), dareCard3(i, t, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }))).join("") + xChip16(t, tA + .2, 1380, 130)
+    + coin(t, MK("coin1") - .1, 1560, 430, "+1", "if you showed two fingers")
+    + bd("basil", 620, 1010, 390, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("basil", 760, 820, t, s.t0 + .3, "1") : "") + xChip16(t, tA + .4, 800, 760, .7)
     + bd("pip", 300, 1076, 510, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("pip", 500, 790, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .3, 540, 720, .7)
-    + bd("momo", 1700, 1076, 500, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 26]] }) + (t > s.t0 + .35 ? pickNum("momo", 1500, 800, t, s.t0 + .35, "2") : "") + tickChip16(t, tA + .35, 1540, 730, .7)
+    + bd("momo", 1700, 1076, 500, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 26]] }) + (t > s.t0 + .35 ? pickNum("momo", 1870, 800, t, s.t0 + .35, "2") : "") + tickChip16(t, tA + .35, 1890, 730, .7)
     + melt(t, s, "r1", .45) + HUD(t); };
 
 /* 7 · a worm? Close on the lime plant: the caterpillar crawls along its twig (a ripple of its body). Momo asks (then thinking: a real question);
@@ -88,7 +88,7 @@ SC.lime = (t, s) => VL(t, { cat: catCrawl(t), bites: 3 }, camLime(t))
   + ideaBubble16(t, W("a701m", "worm") - .2, s.t1 + .4, 760, 300, wormIdea(t), P.momo, -1, "ibw") + melt(t, s, "answer1", .45) + HUD(t);
 /* [LOOK CLOSER] the caterpillar's legs (lc17.js legsArt; PROLEGS pops, lib.js o.at); the book's strip on the six legs (Heart reads it). Faces:
    the speaker (auto, left: Pip, then Basil); Momo at the right until her worm guess is answered (thinking, then oops: OUTCOMES at a703p) */
-SC.lclegs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camLime(SCN.lime.t1), p = camPt(c, [LT_CAT[0], LT_CAT[1] - 30]), tm = s.t0 + 1.2, tmo = LT("a703p") + 3.9;
+SC.lclegs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camLime(SCN.lime.t1), p = camPt(c, [LT_CAT[0], LT_CAT[1] - 30]), tm = s.t0 + 1.2, tmo = LT("a703p") + 3.6;
   const moFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: legsArt, bgc: "#E6F5DA", set: (tt) => VL(tt, { cat: catCrawl(tt), bites: 3, mothAt: false }, c), verdict: [`AN INSECT, NOT A WORM`, GOODC], tv: MK("v_legs"), peekH: 470,
     peekEv: [[MK("v_legs") + .2, "basil", "sit"]],
@@ -129,7 +129,7 @@ SC.larva = (t, s) => { const k = spring(t, MK("kw_larva") - .2, .5);
    fix (pointing at the glow); PUPA pops (Basil cheers: a key word learnt). The moth on top of the easel's frame (not in the ring) */
 const EASEL = [700, 1066, .82], RG = [960, 420], RR = 215;
 window.SHELF_AWAY = (t) => { if (PART !== 1) return 0; const a = W("a1002", "cross") - .3, b = LE("a1003") + .4; return ss(a, a + .35, t) * (1 - ss(b, b + .35, t)); };
-SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [700, 280] }; const b = "a1002", c = "a1003", d = "a1004b", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell;
+SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [430, 250] }; const b = "a1002", c = "a1003", d = "a1004b", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell;
   const st = ss(tX - .1, tX + .4, t) * (1 - ss(LE(c) + .1, LE(c) + .6, t)), ring = st > .01, zz = 1 - ss(bell + .4, bell + .9, t), gl = ss(W(d, "inside") - .2, W(d, "inside") + .6, t), tp = MK("pupastill");
   const eA = eio((t - tp + .3) / 1.4), eB = eio((t - LT(d) + .3) / 1.2), cam = [1.02 + .2 * eA - .14 * eB, lerp(1000, 900, eA), lerp(600, 560, eA)];
   const brd = t >= tp - .3 ? TF(EASEL[0], EASEL[1] + 40 * (1 - spring(t, tp - .3, .45)), EASEL[2], restBoard(t, { zzz: zz, glow: gl })) : "";
@@ -141,7 +141,7 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [700, 280] };
   return room + (ring ? OP(st, bg("stage")) : "")
     + (ring ? OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 640 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 470 + bob * .6, 1.2) + TF(1700, 860, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
-    + bd("basil", 1720, 1076, 510, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "sit"], [W(d, "inside") - .1, "pointing"], [LE(d) + .6, "sit"], [MK("kw_pupa") - .1, "cheer"], [MK("kw_pupa") + 2.1, "sit"]], look: -3 })
+    + bd("basil", 1720, 1076, 510, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "sit"], [LE(d) + .05, "pointing"], [MK("kw_pupa") - .3, "sit"], [MK("kw_pupa") - .1, "cheer"], [MK("kw_pupa") + 2.1, "sit"]], look: -3 })
     + bd("momo", 1330, 1030, 370, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "sit"]] })
     + bd("pip", 300, 1076, 510, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("a1001p") + .1, "pointing"], [tX - .5, "thinking"], [r0 - .2, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 30]], nohop: true })
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + melt(t, s, "larva", .4) + HUD(t); };
@@ -161,7 +161,7 @@ SC.lcpupa = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = [1.08, 90
 const BHOME = [1400, 1070, .66];
 const lifeBoard = (t, k = BHOME[2], o = {}) => TF(BHOME[0], BHOME[1], k, loop4(t, { tiles: [MK("ltegg") + .3, MK("ltlarva"), MK("ltpupa"), MK("ltadult")], back: MK("ltback"), ...o }));
 SC.ring = (t, s) => { const e = eio((t - s.t0 - .3) / 1.6) * (1 - eio((t - MK("ltback") - .2) / 1.4));
-  return VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, can: false, over: lifeBoard(t) + mothAt(t, BHOME[0] - 205 * BHOME[2], BHOME[1] - 60 * BHOME[2], .26, { rot: -70 }) }, [1.02 + .16 * e, lerp(1000, 1400, e), lerp(600, 560, e)]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".08"/>`
+  return VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, can: false, over: lifeBoard(t) + mothAt(t, BHOME[0] - 420 * BHOME[2], BHOME[1] - 840 * BHOME[2], .26, { rot: -30 }) }, [1.02 + .16 * e, lerp(1000, 1400, e), lerp(600, 560, e)]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".08"/>`
     + bd("basil", 320, 1076, 500, t, { in: s.t0 + .05, poses: [[s.t0 + .3, "pointing"]], look: 3 }) + bd("momo", 780, 1026, 370, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + bd("pip", 1870, 1040, 360, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] })
     + lcStrips(t, "a1201", "The butterfly has four stages in its life cycle. The stages are the egg, the larva, the pupa and the adult.") + melt(t, s, "lcpupa", .35) + HUD(t); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "a1203", sayId: "a1202", who: "momo", n: "2 of 2", text: "Some animals have four stages in their life cycles. The young of these animals do not look like the adult.", keys: ["four", "stages", "young", "not", "look", "like", "adult"], size: 56, y: 225, footer: FOOT,
@@ -171,8 +171,8 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "a1203", sayId: "a1202", who: "momo",
    REVEAL spot, never the intro pillar), Pip's fun-fact panel (a silk cocoon with a pupa inside; silk), the read-along */
 SC.final = (t, s) => { const L = "a1301"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "a1302", tq = W(L, "it") - .1, a = MOTHAT.liz, tm = W(L, "moth");
-  return lizReveal(t, s, L, VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, mothAt: a, mothOpen: ss(tm + .2, tm + .6, t) * (1 - ss(tm + 1.2, tm + 1.6, t)) }), a[0], a[1], tq, "It was on the side of the lime plant's pot!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 770, tx: 760, ty: 975, tell: "a1304",
-    fact: { id: "a1303", at: [1270, 430], w: 880, h: 460, items: [["ff_cocoon", "a silk cocoon", ffCocoon], ["ff_silk", "silk", ffSilk]], cols: ["#5B6BD6", "#E36A12"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [LT("a1303"), "sit"]] } })
+  return lizReveal(t, s, L, VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, mothAt: a, mothOpen: ss(tm + .2, tm + .6, t) * (1 - ss(tm + 1.2, tm + 1.6, t)) }), a[0], a[1], tq, "It was on the side of the lime plant's pot!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 780, qy: 690, tx: 760, ty: 975, tell: "a1304",
+    fact: { id: "a1303", at: [1300, 395], w: 880, h: 460, items: [["ff_cocoon", "a silk cocoon", ffCocoon], ["ff_silk", "silk", ffSilk]], cols: ["#5B6BD6", "#E36A12"], sx: 1300, sy: 905, poses: [[MK("ff_in") - .4, "sit"]] } })
     + bd("basil", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tm + .1, "pointing"], [LT("a1303") - .3, "sit"], [LT("a1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, MOTH_RULE); };
 
 /* 14 · the cliffhanger: the garden's far corner by the tap (VCR): an old pail of rainwater, flat and still, a few leaves floating; a drop falls
@@ -180,7 +180,8 @@ SC.liz = (t, s) => { const L = "a1302", tq = W(L, "it") - .1, a = MOTHAT.liz, tm
 const camCliff = (t) => { const s = SCN.cliff, u = eio((t - MK("pail") + .4) / 2.4); return [1.2 + .55 * u, lerp(760, PAILC[0] + 40, u), lerp(760, PAILC[1] - PAILH, u)]; };
 SC.cliff = (t, s) => { const tP = W("a1402", "part") - .1, tw_ = MK("wrig"), pp = camPt(camCliff(t), [PAILC[0], PAILC[1] - PAILH]);
   return VCR(t, { dflyAt: false, rings: [[MK("pail"), 30], [MK("pail") + 2.8, -50]], wrig: t >= tw_ - .2 ? 2 : 0 }, camCliff(t)) + qMark(t, tw_ + .3, pp[0] + 200, pp[1] - 170)
-    + bd("basil", 330, 1076, 520, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tw_ + .1, "surprised"], [LE("a1401b") + .1, "thinking"]], look: 7 })
+    + (t >= MK("pail") ? OP(1 - ramp(t, tw_ + 1.2, .3), pline(pp[0] + 260, pp[1] + 260, pp[0] + 120, pp[1] + 60, ramp(t, MK("pail"), .2)) + TF(pp[0] + 300, pp[1] + 290, spring(t, MK("pail"), .4), tpill(0, 0, "an old pail of rainwater", 40, "#fff", P.ink, { w: 700 }))) : "")
+    + bd("basil", 330, 1076, 520, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("a1401b") + .1, "thinking"]], look: 7 })
     + bd("momo", 1520, 1056, 420, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], look: -6, jump: [[LT("a1402") + .1, 18]] }) + bd("pip", 1780, 1066, 440, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]], look: -5, jump: [[LT("a1402") + .2, 18]] })
     + smallPrint(t, MK("pail"), PAIL_RULE) + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + melt(t, s, "kwrecap", .4) + HUD(t); };
 /* 15 · "Now you know!": the butterfly loop board at its home, between the buddies */

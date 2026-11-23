@@ -67,8 +67,8 @@ function limePlant(t, o = {}) { const [px, py] = POTL, sw = (i) => 2.4 * Math.si
   return s; }
 // the moth's spot in each lime-side scene [x, y, k, rot]: the intro (the void deck's pillar) is used ONLY before and at the game's push-in
 const MOTHAT = { cold: [466, 520, .34, 0], back: [466, 520, .34, 0], title: [466, 520, .34, 0], game: [466, 520, .34, 0],
-  answer1: [BENCHL[0] - 120, BENCHL[1] - 58, .3, 8], lime: [LT_TOP[0] + 40, LT_TOP[1] + 30, .3, 180], waitw: [FENCE.post[0], FENCE.post[1] - 124, .3, 0],
-  larva: [POTL[0] + 330, POTL[1] - 142, .3, -10], ring: null, holdon: null, liz: [POTL[0] - 120, POTL[1] - 90, .34, -6] };
+  answer1: [820, 330, .28, -20], lime: [LT_TOP[0] + 40, LT_TOP[1] + 30, .3, 180], waitw: [FENCE.post[0], FENCE.post[1] - 124, .3, 0],
+  larva: [POTL[0] - 320, POTL[1] - 146, .3, 0], ring: null, holdon: null, liz: [POTL[0] - 120, POTL[1] - 90, .34, -6] };
 // VL: the live lime-plant side. o: dawn (0..1 the dawn tint), cat, pupa, egg, bites, bfly, can (true: the watering can by the pot), mothAt
 // ([..] | false), items (drawn before the plant), over (after the plant), dim
 function VL(t, o = {}, cam) { let s = bg("lime17") + clouds17(t, [[200, 90, 1], [1250, 60, .8], [1850, 150, .7]]);
@@ -77,7 +77,7 @@ function VL(t, o = {}, cam) { let s = bg("lime17") + clouds17(t, [[200, 90, 1], 
   s += TF(1840 + 10 * Math.sin(t * .4), FENCE.y - 64 - hop(t % 2.3, 0, .3, 10), .9, bird15(t, 1, 1.3));
   const ma = o.mothAt === undefined ? MOTHAT[(window._S || {}).name] : o.mothAt; const mothS = ma ? mothAt(t, ma[0], ma[1], ma[2], { rot: ma[3], tw: 1, open: o.mothOpen || 0 }) : "";
   if (ma && ma[1] < 600) s += mothS;   // on the void deck / far: behind the plant
-  if (o.can !== false) s += TF(POTL[0] + 330, POTL[1] + 4, .9, canArt17());
+  if (o.can !== false) s += TF(POTL[0] - 320, POTL[1] + 4, .9, canArt17());
   if (o.items) s += o.items;
   s += limePlant(t, o);
   if (ma && ma[1] >= 600) s += mothS;
@@ -124,7 +124,7 @@ const plantPotPlate = (t, o = {}) => TF(0, 0, o.k || 1, `<ellipse cx="0" cy="6" 
   + `<path d="M-80 -10 L-96 -170 H96 L80 -10z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="5"/><rect x="-104" y="-190" width="208" height="28" rx="8" fill="#D9774A" stroke="#9A4A2A" stroke-width="5"/>`
   + [...Array(9)].map((_, i) => `<g transform="translate(${-50 + i * 12} -188) rotate(${-120 + i * 30 + 4 * Math.sin(t * 1.2 + i)})">${leaf15(80, 26, i % 2 ? "#58B56C" : "#3E9E5A", "#2A6E3E")}</g>`).join("") + `<g transform="translate(20 -300)">${[0, 1, 2, 3, 4].map((k) => `<ellipse cx="0" cy="-14" rx="10" ry="15" fill="#F49BC4" transform="rotate(${k * 72})"/>`).join("")}<circle r="7" fill="#FFD75A"/></g>`);
 const DFLYAT = { place: [STAKES[1][0], STAKES[1][1] - 6, .34, 0], game: [STAKES[1][0], STAKES[1][1] - 6, .34, 0], waitw: [PAILC[0] + 120, PAILC[1] - PAILH - 16, .3, -20],
-  mosqans: [TAPC[0] + 2, TAPC[1] - 240, .3, 0], show: null, fix: [BENCHC[0] - 186, BENCHC[1] - 44, .3, 10], liz: [CANC[0] + 2, CANC[1] - 164, .36, -10] };
+  mosqans: [TAPC[0] + 2, TAPC[1] - 240, .3, 0], show: null, fix: [170, 466, .3, 0], liz: [CANC[0] + 2, CANC[1] - 164, .36, -10] };
 // VCR: the live far corner. o: rings, wrig (1 hanging, 2 diving), pupae, dflyAt ([..] | false), items, front, dim, noPail
 function VCR(t, o = {}, cam) { let s = bg("corner17") + clouds17(t, [[400, 110, .9], [1500, 70, .8]]);
   // drips from the tap and the leaves; a bird shakes its feathers on the bench

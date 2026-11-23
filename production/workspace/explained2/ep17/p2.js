@@ -43,7 +43,7 @@ SC.r1 = (t, s) => lockN(t, { t0: W(L1, "these") - .35, cards: R1, clues: [["youn
 /* 5 · [LOOK CLOSER] the wrigglers (lc17.js wrigArt; WRIGGLER pops, lib.js o.at). Faces: the speaker (auto, left: Pip, then Basil); Momo at the
    right while her pick (straight to the adult) is tested (thinking) */
 const camPail = [1.5, PAILC[0] + 40, PAILC[1] - PAILH];
-SC.lcwriggler = (t, s) => { window._BUBAT = { '*': [640, 300] }; const p = camPt(camPail, [PAILC[0], PAILC[1] - PAILH]), tm = s.t0 + 1.2, tmo = LT("b502p") + 1.5;
+SC.lcwriggler = (t, s) => { window._BUBAT = { '*': [700, 880] }; const p = camPt(camPail, [PAILC[0], PAILC[1] - PAILH]), tm = s.t0 + 1.2, tmo = LT("b502p") + 1.5;
   const moFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: wrigArt, bgc: "#DDF3FF", set: (tt) => VCR(tt, { dflyAt: false, wrig: 1 }, camPail), verdict: [`THE LARVA: A WRIGGLER`, GOODC], tv: MK("v_wriggler"), peekH: 470,
     peekEv: [[LE("b502p") + .1, "pip", "pointing"], [LE("b502p") + 2.2, "pip", "sit"]],
@@ -101,7 +101,7 @@ SC.show = (t, s) => { window._BUBAT = { basil: [1250, 260], pip: [1560, 300] }; 
 /* the fix: line 3 struck (strike) and rewritten in green (rewrite: only one of the five mosquitoes keeps a small badge; Basil's mistake is
    fixed: a smile and a nod); the book's strip (Heart reads it, one sentence at a time); DENGUE pops; Momo explains it beside a calm picture (a
    child resting in bed, cared for; only some mosquitoes carry it); the coin +2 (coin2). The dragonfly on the bench's armrest */
-SC.fix = (t, s) => { window._BUBAT = { momo: [1180, 300] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), tm = LT("b807m"), dk = spring(t, tm - .3, .5) * (1 - ss(s.t1 - .4, s.t1, t));
+SC.fix = (t, s) => { window._BUBAT = { momo: [1300, 230] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), tm = LT("b807m"), dk = spring(t, tm - .3, .5) * (1 - ss(s.t1 - .4, s.t1, t));
   return VCR(t, {}, camShow) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".25"/>` + TF(EAS[0] - 150, EAS[1] + 70, .9, mosqSheet(t, { strike: st, fix: fx, lit: [0, 0, Math.max(fx * .6, pulse(t, MK("strike"), .05, .8))] }))
     + (dk > .02 ? TF(1300, 560, dk * .95, denguePic(t)) : "") + coin(t, MK("coin2") - .1, 1640, 300, "+2", "line 3")
     + lcStrips(t, "b806", "Most of the mosquitoes do not spread diseases, but some do. For example, Aedes albopictus and Aedes aegypti spread dengue.", { t1: LE("b806") + 1.2 })
@@ -119,7 +119,7 @@ SC.plate = (t, s) => VH(t, {}, camPlate(t)) + OP(ramp(t, s.t0 + .2, .5), lowerPi
   + ideaBubble16(t, W("b902p", "surely") - .2, s.t1 + .4, 1100, 300, plateIdea(t), P.pip, 1, "ibp") + melt(t, s, "fix", .45) + HUD(t);
 /* [LOOK CLOSER] the flower-pot plate (lc17.js plateArt; STAGNANT WATER pops, lib.js o.at). Faces: the speaker (auto, left: Basil, then Momo);
    Pip at the right while his guess is tested (thinking, then oops at the wrigglers: OUTCOMES) */
-SC.lcplate = (t, s) => { window._BUBAT = { '*': [820, 870] }; const c = camPlate(SCN.plate.t1), p = camPt(c, [PLATEH[0], PLATEH[1] - 20]), tm = s.t0 + 1.2, tpo = MK("wrigglers") + 4;
+SC.lcplate = (t, s) => { window._BUBAT = { '*': [820, 870] }; const c = camPlate(SCN.plate.t1), p = camPt(c, [PLATEH[0], PLATEH[1] - 20]), tm = s.t0 + 1.2, tpo = MK("wrigglers") + 3.6;
   const pipFace = t >= tm - .05 && t < tpo + .3 ? bd("pip", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tpo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: plateArt, bgc: "#F4E9D8", set: (tt) => VH(tt, { dflyAt: false }, c), verdict: [`NO STILL WATER, NO NEW MOSQUITOES`, GOODC], tv: MK("v_plate"), peekH: 470,
     peekEv: [[MK("wrigglers") + .5, "basil", "surprised"], [MK("wrigglers") + 2.4, "basil", "sit"], [W("b907m", "plates") - .1, "momo", "pointing"]],
@@ -134,8 +134,8 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 50, x: 62
 /* 11 · score hand, the dragonfly (lizReveal onto the watering can's handle: the REVEAL spot, never the intro stake) and Momo's fun-fact panel */
 SC.final = (t, s) => { const L = "b1101"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "b1102", tq = W(L, "it") - .1, a = DFLYAT.liz, td = W(L, "dragonfly");
-  return lizReveal(t, s, L, VCR(t, { dflyAt: a, turn: ss(td, td + .5, t) }), a[0], a[1], tq, "It was on the handle of the watering can!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 770, tx: 760, ty: 975, tell: "b1104",
-    fact: { id: "b1103m", at: [1270, 430], w: 880, h: 460, items: [["ff_nymph", "a dragonfly nymph", ffNymph], ["ff_gobble", "it gobbles up wrigglers", ffGobble]], cols: ["#2E7AB8", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [LT("b1103m"), "sit"]] } })
+  return lizReveal(t, s, L, VCR(t, { dflyAt: a, turn: ss(td, td + .5, t) }), a[0], a[1], tq, "It was on the handle of the watering can!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 780, qy: 690, tx: 760, ty: 975, tell: "b1104",
+    fact: { id: "b1103m", at: [1300, 395], w: 880, h: 460, items: [["ff_nymph", "a dragonfly nymph", ffNymph], ["ff_gobble", "it gobbles up wrigglers", ffGobble]], cols: ["#2E7AB8", "#2FA35A"], sx: 1300, sy: 905, poses: [[MK("ff_in") - .4, "sit"]] } })
     + bd("pip", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [td + .1, "pointing"], [LT("b1103m") - .3, "sit"], [LT("b1104"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, DRAGON_RULE); };
 /* 12 · the dare for Episode 18: the void deck beside the garden (sets17.js VD); the frog's loop (EP16) and the mosquito's loop on two small boards
    on the stone table; ONE set of TWO big numbered picture cards slides in low (1 Yes, the same: =, 2 No, different: ≠); the banner; Momo and
@@ -143,7 +143,7 @@ SC.liz = (t, s) => { const L = "b1102", tq = W(L, "it") - .1, a = DFLYAT.liz, td
 const smallBoard = (inner, title) => `<g filter="url(#dropS)"><rect x="-170" y="-200" width="340" height="300" rx="20" fill="url(#gPaper)" stroke="#C9A974" stroke-width="6"/></g>` + T(0, -160, title, 28, P.ink) + inner + `<path d="M-120 100 l-20 60 M120 100 l20 60" stroke="#8A5A36" stroke-width="10" stroke-linecap="round"/>`;
 const DRX = [760, 1180];
 SC.dare = (t, s) => { const a = "b1401", tQ = W(a, "same") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1], tL = W(a, "lock") - .1, e = eio((t - MK("dareIn") - .2) / 1.6), cam = [lerp(1.5, 1.04, e), lerp(TABLEV[0], 1000, e), lerp(TABLEV[1] - 120, 620, e)];
-  const boards = TF(TABLEV[0] - 160, TABLEV[1] - 50, .9, smallBoard(TF(0, -30, .5, miniLoop(t, frogPic, "dfr", null)), "frog")) + TF(TABLEV[0] + 170, TABLEV[1] - 50, .9, smallBoard(TF(0, -30, .42, miniLoop4(t, mPic, "dmq", [0, 0, 0, 0], 70)), "mosquito"));
+  const boards = TF(TABLEV[0] - 175, TABLEV[1] - 160, 1.1, smallBoard(TF(0, -24, .95, miniLoop(t, frogPic, "dfr", null)), "frog")) + TF(TABLEV[0] + 185, TABLEV[1] - 160, 1.1, smallBoard(TF(0, -24, .72, miniLoop4(t, mPic, "dmq", [0, 0, 0, 0], 70)), "mosquito"));
   return VD(t, { items: boards }, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.28 * e)}"/>`
     + NEXT_CARDS.map((c, i) => { const t0 = MK("dareIn") + .5 + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, DRX[i], 1020);
       return d + TF(x, 880, .8, choiceCard3(i + 1, c, twoLoops(t, i ? "≠" : "=", "dr" + i), { w: 400, h: 330, size: 36, pulse: pl, id: "dr" })); }).join("")
@@ -151,6 +151,6 @@ SC.dare = (t, s) => { const a = "b1401", tQ = W(a, "same") - .15, tc = [W(a, "on
     + (t >= tL ? TF(970, 1010, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")
     + bd("basil", 260, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] })
     + bd("momo", 1540, 1070, 380, t, { flip: true, in: s.t0 + .2, poses: [[s.t0, "sit"], [tQ + .2, "thinking"]] })
-    + bd("pip", 1800, 1066, 380, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tQ + .3, "thinking"]] }) + melt(t, s, "liz", .4) + HUD(t); };
+    + bd("pip", 1830, 1066, 380, t, { flip: true, in: s.t0 + .3, poses: [[s.t0, "sit"], [tQ + .3, "thinking"]] }) + melt(t, s, "liz", .4) + HUD(t); };
 SC.nyk = (t, s) => nykScene(t, s, TF(960, 860, 1, TF(-200, 0, .9, miniLoop4(t, bPic, "nkb", [0, 0, 0, 0], 64)) + TF(200, 0, .9, miniLoop4(t, mPic, "nkm", [0, 0, 0, 0], 64))), { bx: [230, 1720, 1440], hx: 470 });
 })(); }
