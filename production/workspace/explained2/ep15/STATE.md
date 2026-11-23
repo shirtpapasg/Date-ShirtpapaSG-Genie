@@ -146,3 +146,12 @@ Basil looked much bigger than Momo and Pip in the kitchen (0:05). Fixed: lib.js 
 
 ## 23 Nov: v2 LIVE
 Teacher: "ok to upload". Part 1 _EhWglg1APE, Part 2 YQTvuQj5aQ8 (after EP14 v3 in both playlists); classic RVRoaWWKjEM retired (points to the new Part 1). YouTube chapters applied; app moments in TheOneApp PR #254 (branch claude/explained-timestamps, commit 55e139f).
+
+## 23 Nov: Part 2 v3 LIVE (RCwRXpameIk)
+Teacher's notes on the live Part 2: (1) the mango-flower journey left a faint ghost of the flowers and its leaves floated in mid-air;
+(2) in the Showdown fix Momo should be shy and Basil and Pip confident. Fixed in garden15.js (flowerJourney: flowers fade to 0, every leaf
+on the branch by a short stalk) and p2.js (SC.fix poses); both became SERIES_FORMAT rules. Re-rendered 110-150 s and 200-220 s and spliced
+frame-exact (10258 frames, audio unchanged). Teacher: "Replace EP15 Part 2". Uploaded with upload_v3.json: RCwRXpameIk right after Part 1
+in both playlists; the old YQTvuQj5aQ8 left the playlists and got a NEW VERSION first line (still public, never deleted). Chapters applied
+(chapters_p3.json key RCwRXpameIk). App: videos.js 15B now links RCwRXpameIk (theoneapp PR #254, commit d186ba0). Local renders deleted
+(teacher approved).
