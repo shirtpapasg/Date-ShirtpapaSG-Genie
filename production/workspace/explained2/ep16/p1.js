@@ -78,7 +78,7 @@ SC.lceggs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const p = camPt(cam
   const momoFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: eggsArt, bgc: "#DDF2E8", set: (tt) => VP16(tt, {}, camPond(SCN.pond.t1)), verdict: [`EGGS KEPT SAFE AND WET`, GOODC], tv: MK("v_eggs"), peekH: 470,
     peekEv: [[LE("e607p") + .1, "pip", "thinking"], [MK("v_eggs") + .1, "basil", "cheer"]],
-    over: (tt) => momoFace + strip15(tt, "e608", "Frog eggs have a jelly-like covering. The covering protects the eggs from being eaten by other animals. It also keeps the eggs from drying out.", 150, { keys: ["jelly-like", "covering", "protects", "eaten", "drying"], maxW: 1500, size: 46, t1: LE("e608") + .8 }) + smallPrint(tt, s.t0 + 1.0, EGG_RULE) }); };
+    over: (tt) => momoFace + strip15(tt, "e608", "Frog eggs have a jelly-like covering. The covering protects the eggs from being eaten by other animals. It also keeps the eggs from drying out.", 150, { keys: ["jelly-like", "covering", "protects", "eaten", "drying"], maxW: 1500, size: 46, t1: LE("e608") + .8 }) + finePrint(tt, s.t0 + 1.0, EGG_RULE, 1480, 1044) }); };
 
 /* 8 · Be a frog egg! The pill; the buddies wave the viewer off; ONE glide down to the water and under the surface (a soft blue-green wipe);
    the journey (art16.js eggJourney; the buddies ride along, shrunk, on a sunken leaf, then on the lily pad); one pull back out */
@@ -107,7 +107,7 @@ const tadCard = (t, k) => { if (k < .01) return ""; const c = `<g filter="url(#d
   return TF(1110, 640, k, c); };
 SC.frogans = (t, s) => { const tA = MK("ansglow"), tK = MK("kw_tadpole"), e = eio((t - tA + .4) / 1.4) * (1 - eio((t - LT("e805") + .8) / 1.2)), cam = [1.05 + .3 * e, lerp(1000, FROGA[0], e), lerp(700, FROGA[1] - 40, e)], tc = ss(LT("e805") - .6, LT("e805") - .1, t);
   return VP16(t, { frog: { x: FROGA[0], y: FROGA[1], k: .7, hop: hop(t, W("e803m", "hops"), .4) }, frogAt: [70, 712, .4, 0, 0] }, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.35 * tc)}"/>`
-    + [0, 1, 2].map((i) => dareBoard(i, 760 + i * 200, 250, .32, { lab: false, id: "fa" }) + (i === 1 ? tickChip16(t, tA, 760 + i * 200 + 60, 120) : xChip16(t, tA + .15 * i, 760 + i * 200 + 60, 120, .8))).join("")
+    + OP(1 - tc, [0, 1, 2].map((i) => dareBoard(i, 760 + i * 200, 250, .32, { lab: false, id: "fa" }) + (i === 1 ? tickChip16(t, tA, 760 + i * 200 + 60, 120) : xChip16(t, tA + .15 * i, 760 + i * 200 + 60, 120, .8))).join(""))
     + coin(t, MK("coin1") - .1, 1420, 470, "+1", "if you showed two fingers") + tadCard(t, spring(t, LT("e805") - .5, .5) * (1 - ss(s.t1 - .3, s.t1, t)))
     + strip15(t, "e805", "It lives in water. It has a tail and does not look like the adult.", 150, { keys: ["water", "tail", "adult"], maxW: 1500, size: 48 })
     + bd("momo", 380, 1076, 540, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("e803m") + .1, "pointing"], [LE("e803m") + 2.2, "sit"], [tK - .3, "cheer"]], achieved: false })
