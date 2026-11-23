@@ -26,12 +26,12 @@ const shape20 = (i, t) => { const R = NORTHC, B = SOUTHC, G = "#8E96A4", Rd = "#
 function lcPolesArt(t) { const m = MKS, tD = m("dip"), tL = m("lift"), tB = m("bunch"), tM = m("middle"), tP = m("kw_poles"), tN = m("north"), tR = m("red"), tBl = m("blue"), tA = m("kw_attraction"), tS = m("stars"), tSh = m("shapes"), tRp = m("ringpoles");
   const out = ss(tSh - 1.1, tSh - .3, t), drop = ss(tSh - 1.6, tSh - 1.0, t);   // the clips drop back, then the whole picture goes (no ghost)
   let s = "";
-  if (out < .999) { const my = t < tL ? lerp(-560, 175, eio((t - tD) / 1.1)) : lerp(175, -30, eio((t - tL) / 1.4)), MK2 = 2.1, half = 150 * MK2;
+  if (out < .999) { const my = t < tL ? lerp(-560, 175, eio((t - tD) / 1.1)) : lerp(175, -60, eio((t - tL) / 1.4)), MK2 = 1.85, half = 150 * MK2;
     const lifted = t >= tL + .35, ay = my + 42 * MK2 * .5;
     let a = TF(-60, 395 + 360 * eio((t - tL - .9) / 1.2), 1.7, tray20(t, { taken: t >= tL ? clamp((t - tL) / .6) : 0 }));
     // the clips leap UP to the two ends (towards the magnet) as it lifts, and hang in chains; one or two near the middle at most
     if (lifted) { const u = eo((t - tL - .35) / .5), dy = (1 - u) * 160 + drop * 420, op = 1 - drop;
-      a += OP(op, [[-half + 26, 3, 0], [-half + 74, 2, 1], [-half + 120, 2, 2], [half - 26, 3, 3], [half - 74, 2, 4], [half - 120, 2, 5], [40, 1, 6]].map(([x, n, ph]) => clipChain(t, x, ay + dy, n, ph, .68)).join("")); }
+      a += OP(op, [[-half + 26, 3, 0], [-half + 74, 2, 1], [-half + 120, 2, 2], [half - 26, 3, 3], [half - 74, 2, 4], [half - 120, 2, 5], [40, 1, 6]].map(([x, n, ph]) => clipChain(t, x, ay + dy, n, ph, .6)).join("")); }
     a += TF(0, my, MK2, bar20(t, { glint: !lifted }));
     // the magnifiers: one on each end (bunches), then one on the bare middle; they go when POLES lands
     const zoomEnd = (sd) => TF(-sd * 60, -10, 1.6, `<rect x="-120" y="-90" width="240" height="40" fill="${sd < 0 ? NORTHC : SOUTHC}"/>` + clipChain(t, -sd * 30, -50, 3, sd, .75) + clipChain(t, sd * 20, -50, 2, sd + 1, .75));
@@ -42,13 +42,13 @@ function lcPolesArt(t) { const m = MKS, tD = m("dip"), tL = m("lift"), tB = m("b
     if (t >= tN) a += lcLab(t, tR - .1, -half + 40, -190, "N · North pole", -half + 60, my - 44, { fill: NORTHC, ink: "#fff", size: 40 });
     if (t >= tN) a += lcLab(t, tBl - .1, half - 40, -190, "S · South pole", half - 60, my - 44, { fill: SOUTHC, ink: "#fff", size: 40 });
     if (t >= tN && t < tR - .1) a += TF(0, -190, spring(t, tN, .4), tpill(0, 0, "two poles: North and South", 40, "#fff", P.ink, { w: 700 }));
-    if (t >= tA) a += TF(0, -110, spring(t, tA + .3, .45), tpill(0, 0, "attraction = the pull", 40, PULLC, "#fff", { w: 700 }));
+    if (t >= tA) a += pline(-560, -150, -half + 40, my + 70, ramp(t, tA + .4, .3), PULLC) + TF(-560, -150, spring(t, tA + .3, .45), tpill(0, 0, "attraction = the pull", 38, PULLC, "#fff", { w: 700 }));
     if (t >= tS) a += [-1, 1].map((sd, i) => TF(sd * (half + 70), my - 10, spring(t, tS + .15 * i, .5) * (1 + .06 * Math.sin(t * 4 + i)), star20(2)) + TF(sd * (half + 70), my + 90, spring(t, tS + .3 + .15 * i, .45), tpill(0, 0, "strongest pull", 32, "#F5B700", P.ink, { w: 700 }))).join("");
     s += OP(1 - out, a); }
   // every shape has two poles (in EP19's book order), then the ring's poles on its two flat sides
   if (t >= tSh - .3) { const big = ss(tRp - .1, tRp + .8, t);
     SHAPES20.forEach((nm, i) => { const a0 = tSh + i * .35; if (t < a0) return; const isR = i === 4, x = lerp(-650 + i * 260, isR ? -260 : -650 + i * 260, isR ? big : 0), y = lerp(-60, isR ? -40 : 300, big), k0 = spring(t, a0, .45), kk = isR ? lerp(1, 2.4, big) : lerp(1, .55, big);
-      s += TF(x, y, k0 * kk, `<g filter="url(#dropS)"><rect x="-118" y="-120" width="236" height="250" rx="24" fill="#fff" stroke="#E3C9A8" stroke-width="5"/></g>` + TF(0, -10, i === 1 || i === 5 ? .95 : 1.05, shape20(i, t)) + T(0, 104, nm, 32, P.ink)); });
+      if (!isR && big > .98) return; s += OP(isR ? 1 : 1 - big, TF(x, y, k0 * kk, `<g filter="url(#dropS)"><rect x="-118" y="-120" width="236" height="250" rx="24" fill="#fff" stroke="#E3C9A8" stroke-width="5"/></g>` + TF(0, -10, i === 1 || i === 5 ? .95 : 1.05, shape20(i, t)) + T(0, 104, nm, 32, P.ink))); });
     if (big > .05) s += OP(big, lcLab(t, tRp + .6, 60, -230, "N on top", -200, -110, { fill: NORTHC, ink: "#fff", size: 38 }) + lcLab(t, tRp + 1.0, 60, 120, "S underneath", -200, 20, { fill: SOUTHC, ink: "#fff", size: 38 })
       + TF(470, 40, spring(t, tRp + 1.4, .45) * .62, rings20(t, { glowTop: PUSHC, glowBot: PUSHC })) + TF(470, 140, spring(t, tRp + 1.6, .4), tpill(0, 0, "Pip's rings", 30, P.pip, "#fff", { w: 700 }))); }
   return s; }
@@ -56,24 +56,25 @@ function lcPolesArt(t) { const m = MKS, tD = m("dip"), tL = m("lift"), tB = m("b
 // [LOOK CLOSER] pull or push? two bar magnets on round pencils (P1 lcpushpull). Top row: a red end and a blue end roll together and click
 // (they start to roll BEFORE they touch). Bottom row: one is turned round; two red ends: one rolls away; the gap never closes.
 function lcPushPullArt(t) { const m = MKS, tR = m("roll"), tPl = m("pull"), tC = m("click2"), tPs = m("push"), tA = m("away"), tK = m("kw_repel"), tB = m("board2");
-  const K = 1.2, HL = 150 * K, Y1 = -150, Y2 = 140;
+  const K = 1.2, HL = 150 * K, Y1 = -140, Y2 = 110, XL = -390, XR = 200;
   let s = `<rect x="-800" y="${Y1 + 70}" width="1600" height="16" rx="8" fill="#E6D3B4"/>` + (t >= tPs - .3 ? `<rect x="-800" y="${Y2 + 70}" width="1600" height="16" rx="8" fill="#E6D3B4" opacity="${n2(ramp(t, tPs - .3, .3))}"/>` : "");
-  // TOP: left [N|S] at -330; right [N|S] starts at +260 and rolls left (slowly at first, before they touch), clicks at click2
-  { const uR = clamp((t - tPl - .4) / (tC - tPl - .4)), xr = lerp(260, -330 + 2 * HL, uR * uR), roll = xr - 260;
-    s += TF(0, 0, 1, barOnPencils(t, -330, Y1, K, { glint: false }) + barOnPencils(t, xr, Y1, K, { roll }));
-    if (t >= tPl && t < tC) s += ppArrows(t, (-330 + HL + xr - HL) / 2, Y1, "pull", ramp(t, tPl, .3), { gap: 8, len: 50, w: 16 }) + chevrons(t, xr - HL + 60, Y1 - 70, xr - HL - 10, Y1 - 70, 1, PULLC, 2, .8);
+  // TOP: left [N|S]; right [N|S] starts apart and rolls left (slowly at first, BEFORE they touch), clicks at click2
+  { const uR = clamp((t - tPl - .4) / (tC - tPl - .4)), xr = lerp(XR, XL + 2 * HL, uR * uR), roll = xr - XR;
+    s += barOnPencils(t, XL, Y1, K, { glint: false }) + barOnPencils(t, xr, Y1, K, { roll });
+    if (t >= tPl && t < tC) s += ppArrows(t, (XL + HL + xr - HL) / 2, Y1, "pull", ramp(t, tPl, .3), { gap: 8, len: 50, w: 16 }) + chevrons(t, xr - HL + 60, Y1 - 70, xr - HL - 10, Y1 - 70, 1, PULLC, 2, .8);
     if (t >= tPl + .6 && t < tC) s += `<path d="M${n2(xr + HL + 20)} ${Y1 - 20} h50 M${n2(xr + HL + 30)} ${Y1 + 10} h70 M${n2(xr + HL + 20)} ${Y1 + 40} h40" stroke="${P.ink}" stroke-width="5" stroke-linecap="round" opacity=".35"/>`;
-    if (t >= tC) s += impactFX(t, tC, -330 + HL, Y1, "CLICK!", { s: .5, flash: false, size: 64, col: PULLC, d: .7 });
-    s += lcLab(t, tPl + .2, -330 + HL - 40, Y1 - 150, "a red end and a blue end", -330 + HL - 20, Y1 - 50, { size: 36 });
-    s += linkChip(t, tC + .2, 330, Y1 - 150, -330 + HL + 10, Y1 - 30, 0, "pull", 40); }
-  // BOTTOM: left [S|N] (red end right) at -330; the right one is turned round (blue end -> red end facing), then rolls AWAY as the left comes closer
-  if (t >= tPs - .3) { const k = ramp(t, tPs - .3, .3), fl = clamp((t - tPs - .2) / .8), sx = Math.cos(Math.PI * fl), xl = lerp(-330, -220, eio((t - tA) / 1.4)), push = clamp((t - tA - .2) / 2.2), xr = 260 + 210 * eo(push);
-    s += OP(k, barOnPencils(t, xl, Y2, K, { flip: true, glint: false }) + `<g transform="translate(${n2(xr)} ${Y2}) scale(${n2(Math.abs(sx) < .02 ? .02 : sx)} 1) translate(${n2(-xr)} ${-Y2})">` + barOnPencils(t, xr, Y2, K, { flip: fl < .5, roll: xr - 260 }) + `</g>`);
-    if (fl > 0 && fl < 1.3) s += OP(1 - ss(1, 1.3, (t - tPs - .2) / .8), `<path d="M${xr - 150} ${Y2 - 90} Q${xr} ${Y2 - 190} ${xr + 150} ${Y2 - 90}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round"/><path d="M${xr + 120} ${Y2 - 122} L${xr + 152} ${Y2 - 88} L${xr + 108} ${Y2 - 80}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>` + TF(xr, Y2 - 200, 1, tpill(0, 0, "turned round", 32, "#fff", P.ink, { w: 700 })));
+    if (t >= tC) s += impactFX(t, tC, XL + HL, Y1, "CLICK!", { s: .5, flash: false, size: 64, col: PULLC, d: .7 });
+    s += lcLab(t, tPl + .2, XL + HL - 40, Y1 - 150, "a red end and a blue end", XL + HL - 20, Y1 - 50, { size: 36, t1: tB - .3 });
+    s += linkChip(t, tC + .2, 330, Y1 - 150, XL + HL + 10, Y1 - 30, 0, "pull", 40); }
+  // BOTTOM: left [S|N] (its red end on the right); the right one [S|N] is turned round to [N|S] (a red end faces the red end), then, as the
+  // left one is slid closer, the right one rolls AWAY, never touched; the gap never closes
+  if (t >= tPs - .3) { const k = ramp(t, tPs - .3, .3), fl = clamp((t - tPs - .2) / .8), sx = Math.max(.03, Math.abs(Math.cos(Math.PI * fl))), xl = lerp(XL, XL + 110, eio((t - tA) / 1.4)), push = clamp((t - tA - .2) / 2.2), xr = XR + 170 * eo(push);
+    s += OP(k, barOnPencils(t, xl, Y2, K, { flip: true, glint: false }) + `<g transform="translate(${n2(xr)} ${Y2}) scale(${n2(sx)} 1) translate(${n2(-xr)} ${-Y2})">` + barOnPencils(t, xr, Y2, K, { flip: fl < .5, roll: xr - XR }) + `</g>`);
+    if (fl > 0 && t < tPs + 1.4) s += OP(1 - ramp(t, tPs + 1.1, .3), `<path d="M${xr - 150} ${Y2 - 90} Q${xr} ${Y2 - 190} ${xr + 150} ${Y2 - 90}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round"/><path d="M${xr + 120} ${Y2 - 122} L${xr + 152} ${Y2 - 88} L${xr + 108} ${Y2 - 80}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>` + TF(xr, Y2 - 200, 1, tpill(0, 0, "turned round", 32, "#fff", P.ink, { w: 700 })));
     if (t >= tA) { const gx = (xl + HL + xr - HL) / 2; s += ppArrows(t, gx, Y2, "push", ramp(t, tA, .3), { gap: 16, len: 46, w: 16 }) + chevrons(t, xr - HL + 10, Y2 - 70, xr - HL + 90, Y2 - 70, 1, PUSHC, 2, .8)
-      + lcLab(t, tA + .3, gx - 20, Y2 + 190, "two red ends: the gap never closes", gx, Y2 + 40, { size: 34 }) + linkChip(t, tA + .8, 560, Y2 - 150, gx + 10, Y2 - 30, 1, "push", 40); } }
+      + lcLab(t, tA + .3, gx - 60, Y2 - 140, "two red ends: the gap never closes", gx, Y2 - 46, { size: 34, t1: tB - .3 }) + linkChip(t, tA + .8, 560, Y2 - 150, gx + 10, Y2 - 30, 1, "push", 40); } }
   // the board's two pairs: it depends which poles face
-  if (t >= tB) s += TF(-120, 300, spring(t, tB, .45), `<g filter="url(#dropS)"><rect x="-400" y="-50" width="800" height="100" rx="50" fill="#fff" stroke="${P.ink}" stroke-width="4"/></g>` + T(0, 14, "it depends which poles face", 40, P.ink));
+  if (t >= tB) s += TF(-40, -330, spring(t, tB, .45), `<g filter="url(#dropS)"><rect x="-420" y="-46" width="840" height="92" rx="46" fill="#fff" stroke="${P.ink}" stroke-width="4"/></g>` + T(0, 14, "it depends which poles face", 42, P.ink));
   return s; }
 
 // BE THE TOP RING MAGNET (P1 shrink): the camera IS the top ring, looking DOWN along the pencil (your own dark grey rim round the bottom

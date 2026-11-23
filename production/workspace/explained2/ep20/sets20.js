@@ -77,7 +77,7 @@ const corridorKid = (t, t0) => { const u = clamp((t - t0) / 3.2); if (u <= 0 || 
    science poster (bench), the rim of the class plant's pot (holdon), the top of the bookshelf by the door (pushpull); the REVEAL: hanging on
    its silk thread under the edge of the front bench (liz). Spare, unused: the fan's switch box. */
 const SPAT = { intro: [446, 168, .3, { silk: 34 }], waitw: [920, 582, .28, { line: [1000, 560] }], answer: [1146, 772, .26, { rot: 0, line: [1146, 740] }], bench: [1330, 142, .26, { line: [1296, 140] }],
-  holdon: [428, 486, .26, { line: [440, 476] }], pushpull: [1626, 296, .28, { line: [1660, 300] }], liz: [790, 940, .34, { silk: 84 }] };
+  holdon: [428, 486, .26, { line: [440, 476] }], pushpull: [1530, 296, .28, { line: [1500, 300] }], liz: [790, 940, .34, { silk: 84 }] };
 ['cold', 'back', 'title', 'today', 'game'].forEach((k) => { SPAT[k] = SPAT.intro; });
 // SR20: the live science room. o: board (true), bench (the props on the front bench, world coordinates), front (in front of the bench),
 // spider (a SPAT entry | false; default the scene's own), child (a time), dim, items (between the back wall and the front bench)
@@ -98,19 +98,19 @@ function SR20(t, o = {}, cam) { const sc = (window._S || {}).name, sp = o.spider
    "it depends which poles face" (board2). Once filled, a part stays filled. o.k: the whole board's scale about its centre (for a card) */
 function poles20(t, o = {}) { const [x0, y0, x1, y1] = SR.wb, cx = (x0 + x1) / 2, on = (m) => t >= MKS(m) || o.all, f = (m) => o.all ? 1 : ss(MKS(m) - .1, MKS(m) + .5, t);
   let s = T(cx, y0 + 62, "THE POLES BOARD", 44, "#2B5FC4", { ls: 3 }) + `<path d="M${cx - 230} ${y0 + 78} H${cx + 230}" stroke="#2B5FC4" stroke-width="4"/>`;
-  const mx = cx, my = y0 + 205, mw = 460, mh = 110;
+  const mx = cx, my = y0 + 175, mw = 440, mh = 96;
   if (!on("kw_poles")) s += `<rect x="${mx - mw / 2}" y="${my - mh / 2}" width="${mw}" height="${mh}" rx="14" fill="none" stroke="#5A6070" stroke-width="6" stroke-dasharray="18 12"/>` + T(mx, my + 14, "a bar magnet", 34, "#8A949E", { w: 600 });
   else s += OP(f("kw_poles"), `<rect x="${mx - mw / 2}" y="${my - mh / 2}" width="${mw / 2}" height="${mh}" rx="14" fill="${NORTHC}" stroke="#9A2A1E" stroke-width="6"/><rect x="${mx}" y="${my - mh / 2}" width="${mw / 2}" height="${mh}" rx="14" fill="${SOUTHC}" stroke="#1E3E8A" stroke-width="6"/>`
-    + T(mx - mw / 4, my + 26, "N", 76, "#fff") + T(mx + mw / 4, my + 26, "S", 76, "#fff"));
+    + T(mx - mw / 4, my + 24, "N", 68, "#fff") + T(mx + mw / 4, my + 24, "S", 68, "#fff"));
   // the two label boxes under the ends: empty, then "North pole" / "South pole" and POLES between them
-  [[-1, "North pole", NORTHC], [1, "South pole", SOUTHC]].forEach(([sd, w, c]) => { const bx = mx + sd * (mw / 2 - 70), by = my + 110;
+  [[-1, "North pole", NORTHC], [1, "South pole", SOUTHC]].forEach(([sd, w, c]) => { const bx = mx + sd * (mw / 2 - 70), by = my + 96;
     s += `<path d="M${bx} ${my + mh / 2 + 4} V${by - 26}" stroke="#5A6070" stroke-width="4"/><rect x="${bx - 100}" y="${by - 26}" width="200" height="52" rx="10" fill="#fff" stroke="#5A6070" stroke-width="4" ${on("kw_poles") ? "" : 'stroke-dasharray="10 8"'}/>`
       + (on("kw_poles") ? OP(f("kw_poles"), T(bx, by + 11, w, 30, c)) : ""); });
-  if (on("kw_poles")) s += OP(f("kw_poles"), TF(mx, my + 112, 1, `<rect x="-62" y="-24" width="124" height="48" rx="24" fill="url(#gSun)" stroke="${P.ink}" stroke-width="3"/>` + T(0, 10, "POLES", 28, P.ink)));
+  if (on("kw_poles")) s += OP(f("kw_poles"), TF(mx, my + 98, 1, `<rect x="-62" y="-24" width="124" height="48" rx="24" fill="url(#gSun)" stroke="${P.ink}" stroke-width="3"/>` + T(0, 10, "POLES", 28, P.ink)));
   if (on("stars")) s += OP(f("stars"), [-1, 1].map((sd) => TF(mx + sd * (mw / 2 - 20), my - mh / 2 - 26, 1 + .06 * Math.sin(t * 4 + sd), `<path d="M0 -30 L9 -9 L31 -9 L13 5 L20 27 L0 14 L-20 27 L-13 5 L-31 -9 L-9 -9z" fill="#F5B700" stroke="#9A6A00" stroke-width="3"/>`)).join("") + T(mx, my - mh / 2 - 22, "strongest pull at the ends", 26, "#9A6A00", { w: 600 }));
-  if (on("board2")) { const yy = y1 - 70, k = f("board2"); s += OP(k, TF(cx - 170, yy, .36, bar20(t, { glint: false })) + TF(cx - 60, yy, .36, bar20(t, { glint: false })) + ppArrows(t, cx - 115, yy - 44, "pull", 1, { gap: 10, len: 30, w: 10 })
-    + TF(cx + 70, yy, .36, bar20(t, { glint: false, flip: true })) + TF(cx + 180, yy, .36, bar20(t, { glint: false })) + ppArrows(t, cx + 125, yy - 44, "push", 1, { gap: 10, len: 30, w: 10 })
-    + T(cx - 115, yy + 50, "pull", 26, PULLC) + T(cx + 125, yy + 50, "push", 26, PUSHC) + T(cx + 30, yy + 82, "it depends which poles face", 24, P.ink, { w: 600 })); }
+  if (on("board2")) { const yy = y1 - 82, k = f("board2"); s += OP(k, TF(cx - 225, yy, .34, bar20(t, { glint: false })) + TF(cx - 123, yy, .34, bar20(t, { glint: false })) + ppArrows(t, cx - 174, yy - 34, "pull", 1, { gap: 8, len: 26, w: 9 })
+    + TF(cx + 115, yy, .34, bar20(t, { glint: false, flip: true })) + TF(cx + 225, yy, .34, bar20(t, { glint: false })) + ppArrows(t, cx + 170, yy - 34, "push", 1, { gap: 8, len: 26, w: 9 })
+    + T(cx - 174, yy + 42, "pull", 26, PULLC) + T(cx + 170, yy + 42, "push", 26, PUSHC) + T(cx, yy + 70, "it depends which poles face", 22, P.ink, { w: 600 })); }
   return o.k ? TF(cx, (y0 + y1) / 2, o.k, `<g transform="translate(${-cx} ${-(y0 + y1) / 2})">${s}</g>`) : s; }
 // THE POLES BOARD as its own card (Now you know!): the whiteboard frame + the filled board, centred on (x, y)
 const polesCard = (t, x, y, k = 1) => { const [x0, y0, x1, y1] = SR.wb, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;

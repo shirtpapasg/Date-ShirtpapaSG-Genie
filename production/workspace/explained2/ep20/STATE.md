@@ -129,3 +129,10 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 5. From the script's own open points: THE REPEL TEST is our own shelf word; 6.10 / 6.11 are not read aloud (they came back first only if
    Part 2 had room: it has none); the goal labels "Where the pull is strongest", "Unlike and like poles", "Why the ring floats" are new.
 6. Pip has no back-view painting (the P1 cliffhanger uses Momo's back view and a front view of Pip turned in, as EP18 / EP19).
+
+## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-23 (resume from here)
+- New files: `art20.js` (helpers copied from EP15/16/19, the spider, the lizard, bar20 / rings20 / tray20 / plant20, the train, Dad's bars,
+  the toolbox), `sets20.js` (the science room SR20 on baked `bg/sci20.png`, THE POLES BOARD `poles20`, the HDB kitchen KT20 on baked
+  `bg/kit20.png`, WHICH POLES FACE? `fridgeCard20`, the hidden animals' spots SPAT / LZAT), `lc20.js` (the look-closers, the journeys, the
+  pictures). page.html loads them after ep19dare.js. Re-bake with `node bake.js sci20 kit20` after a change to BG.sci20 / BG.kit20.
+- Part 1 drawn (p1.js); sweep 0 bad. Part 2: next.

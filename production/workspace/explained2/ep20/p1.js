@@ -100,7 +100,7 @@ SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
 /* 7 · the answer is two: a push. EP19's two cards small at the top left (card 2 lit at ansglow; "not a pull" on card 1); the coins YOU +1 and
    BUDDIES +1. Pip and Basil (right) confident, Momo (wrong) shy, to the END of the scene (OUTCOMES `to`). Pip explains: the camera pushes to
    the gap and magenta arrows push up in it on "pushes". The spider on the leg of a lab stool */
-const camAns = (t) => { const a = eio((t - LT("m702p") + .3) / 1.2) * (1 - eio((t - LE("m702p") - .4) / 1.2)); return camMix(camOn([960, 640], 1.22, 960, 600), camOn([GAP[0], GAP[1] - 20], 1.85, 960, 560), a); };
+const camAns = (t) => { const a = eio((t - LT("m702p") + .3) / 1.2) * (1 - eio((t - LE("m702p") - .4) / 1.2)); return camMix(camOn([960, 640], 1.22, 960, 600), camOn([GAP[0], 800], 1.85, 960, 600), a); };
 SC.answer = (t, s) => { window._BUBAT = { pip: [1250, 300] }; const tA = MK("ansglow"), tPu = W("m702p", "pushes") - .1;
   const arrows = t >= tPu ? ppArrows(t, GAP[0], GAP[1], "push", ramp(t, tPu, .3) * (1 - ramp(t, LE("m702p") + 2, .4)), { dir: "v", gap: 14, len: 34, w: 12 }) : "";
   return room(t, camAns(t), { top: arrows })
@@ -158,7 +158,7 @@ const topRing = (t) => { const f0 = MK("flip"), c = MK("click"), fb = MK("flipba
 const flipArrow = (t, f0) => { const k = ramp(t, f0 + .7, .2) * (1 - ramp(t, f0 + 1.7, .3)); if (k < .02) return ""; const x = PEN[0], y = PEN[1] + PK * -470;
   return OP(k, `<path d="M${x - 120} ${y - 20} Q${x} ${y - 140} ${x + 120} ${y - 20}" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round"/><path d="M${x - 120} ${y - 20} Q${x} ${y - 140} ${x + 120} ${y - 20}" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round"/><path d="M${x + 92} ${y - 54} L${x + 122} ${y - 18} L${x + 78} ${y - 8}" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`); };
 const camHold = (t) => { const a = eio((t - MK("try") + .8) / 1.2) * (1 - eio((t - W("m902", "cross") + .6) / .8)), b = eio((t - MK("flip") + 1.2) / 1.2);
-  return camMix(camMix(camOn([780, 700], 1.26, 960, 620), camOn([GAP[0] - 80, GAP[1] - 40], 1.75, 960, 560), a), camOn([GAP[0], GAP[1] - 60], 1.7, 960, 560), b); };
+  return camMix(camMix(camOn([880, 610], 1.12, 960, 560), camOn([GAP[0] - 80, 790], 1.75, 960, 600), a), camOn([GAP[0], 790], 1.7, 960, 600), b); };
 const holdWorld = (t, cam) => { const r0 = MK("ring0_hold"), bell = MK("bell_hold"); return SR20(t, { spider: t < r0 - 1 || t > bell + 1 ? SPAT.holdon : false,
   bench: TF(TRAY[0] - 60, TRAY[1], .5, tray20(t)) + TF(NOTEP[0], NOTEP[1], NOTEP[2], pipNote(t)) + TF(MAG[0] + 40, MAG[1] - 18, .4, bar20(t)) + ringsAt(t, topRing(t)) + flipArrow(t, MK("flip")) }, cam); };
 const RG = [960, 420], RR = 215;
@@ -202,7 +202,7 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "m1010", sayId: "m1009", who: "basil"
    then is surprised ON ff_grass (a fun fact); Momo listens */
 SC.final = (t, s) => { const L = "m1101"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = SPAT.liz, tc = W(L, "spider");
-  return lizReveal(t, s, L, SR20(t, { spider: c, bench: benchProps(t) }), c[0], c[1] - 22, tq, "It was hanging under the bench!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 700, tx: 960, ty: 985, tell: "m1104",
+  return lizReveal(t, s, L, SR20(t, { spider: c, bench: benchProps(t) }), c[0], c[1] - 22, tq, "It was hanging under the bench!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1104",
     fact: { id: "m1103b", at: [1270, 400], w: 900, h: 440, items: [["ff_grass", "baby spiders", ffGrass20], ["ff_up", "the wind lifts them", ffUp20], ["ff_far", "far away!", ffFar20]], cols: ["#4BA862", "#5B6BD6", "#E8A23A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
     + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("m1103b") - .3, "sit"], [MK("ff_grass") + .1, "surprised"], [MK("ff_grass") + 2.2, "sit"]] })
     + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
@@ -213,15 +213,17 @@ SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = SPAT.liz, tc =
    Basil big at the left (talks, then thinks after his line: his own tricky question); Momo and Pip at the right, turned in to watch */
 const CLX = 1060, CLY = 822;
 const cliffMags = (t) => { const p1 = MK("pairs1"), p2 = MK("pairs2"), be = MK("blueends"), K = .42, H = 150 * K;
-  let lx = CLX - 200, rx = CLX + 200, lf = false, rf = false, rsx = 1, lsx = 1;
+  // pairs1: [N|S] + [N|S] (a blue end meets a red end): they slide together and click. pairs2: the LEFT one is turned round, [S|N] + [N|S]:
+  // two red ends push apart. blueends: both turned round, [N|S] + [S|N]: the two BLUE ends come slowly together and stop just before they meet
+  let lx = CLX - 200, rx = CLX + 200, lsx = 1, rsx = 1, lf = false, rf = false;
   if (t >= p1 - .8) { const u = eio(clamp((t - p1 + .8) / .8)); lx = lerp(CLX - 200, CLX - H, u); rx = lerp(CLX + 200, CLX + H, u); }
-  if (t >= p2 - .9) { const f = clamp((t - p2 + .9) / .5); rsx = Math.cos(Math.PI * f); rf = f > .5; rx = lerp(CLX + H, CLX + H + 40, clamp((t - p2 + .9) / .3)); if (t >= p2) { const u = eo(clamp((t - p2) / .6)); rx = lerp(CLX + H + 40, CLX + 220, u); lx = lerp(CLX - H, CLX - 200, u); } }
-  if (t >= be - .7) { const f = clamp((t - be + .7) / .5); lsx = Math.cos(Math.PI * f); lf = f > .5; const g = clamp((t - be - .2) / 1.8); lx = lerp(CLX - 200, CLX - H - 26, eio(g)); rx = lerp(CLX + 220, CLX + H + 26, eio(g)); }
-  const one = (x, sx, fl, ro) => `<g transform="translate(${n2(x)} ${CLY - 30}) scale(${n2(Math.abs(sx) < .03 ? .03 : sx)} 1)">${barOnPencils(t, 0, 0, K, { flip: fl, glint: false, roll: ro })}</g>`;
-  return one(lx, lsx, lf, lx - CLX) + one(rx, rsx, !rf, rx - CLX); };
-const camCliff = (t) => { const s = SCN.cliff, u = eio((t - s.t0) / 4); return camMix(camOn([CLX - 40, CLY - 160], 1.35, 960, 560), camOn([CLX, CLY - 40], 2.1, 1000, 600), u); };
+  if (t >= p2 - .9) { const f = clamp((t - p2 + .9) / .5); lsx = Math.cos(Math.PI * f); lf = f > .5; lx = lerp(CLX - H, CLX - H - 40, clamp((t - p2 + .9) / .3)); if (t >= p2) { const u = eo(clamp((t - p2) / .6)); lx = lerp(CLX - H - 40, CLX - 220, u); rx = lerp(CLX + H, CLX + 200, u); } }
+  if (t >= be - .7) { const f = clamp((t - be + .7) / .5); lsx = Math.cos(Math.PI * f); rsx = lsx; lf = f <= .5; rf = f > .5; const g = clamp((t - be - .2) / 1.8); lx = lerp(CLX - 220, CLX - H - 26, eio(g)); rx = lerp(CLX + 200, CLX + H + 26, eio(g)); }
+  const one = (x, sx, fl, ro) => `<g transform="translate(${n2(x)} ${CLY - 30}) scale(${n2(Math.max(.03, Math.abs(sx)))} 1)">${barOnPencils(t, 0, 0, K, { flip: fl, glint: false, roll: ro })}</g>`;
+  return one(lx, lsx, lf, lx - CLX) + one(rx, rsx, rf, rx - CLX); };
+const camCliff = (t) => { const s = SCN.cliff, u = eio((t - MK("blueends") + 1) / 2.5); return camMix(camOn([CLX - 40, 600], 1.12, 960, 560), camOn([CLX, 880], 2.0, 1000, 640), u); };
 SC.cliff = (t, s) => { const tP = W("m1202", "part") - .1, cam = camCliff(t), g = camPt(cam, [CLX, CLY - 30]);
-  return SR20(t, { spider: false, bench: TF(TRAY[0] - 60, TRAY[1], .5, tray20(t)) + TF(PEN[0] - 120, PEN[1], PK, rings20(t)) + cliffMags(t) }, cam)
+  return SR20(t, { spider: false, bench: TF(TRAY[0] - 60, TRAY[1], .5, tray20(t)) + TF(PEN[0] - 330, PEN[1], PK, rings20(t)) + cliffMags(t) }, cam)
     + linkChip(t, MK("pairs1") + .4, g[0] - 160, g[1] - 230, g[0], g[1] - 40, 0, "pull", 44, MK("pairs2") - .9) + linkChip(t, MK("pairs2") + .5, g[0] + 160, g[1] - 230, g[0], g[1] - 40, 1, "push", 44, MK("blueends") - .7)
     + (t >= MK("blueends") + 1.6 ? TF(g[0], g[1] - 40, 1, `<circle r="14" fill="none" stroke="${P.sun}" stroke-width="5" opacity="${n2(.5 + .5 * Math.sin(t * 8))}"/>`) + TF(g[0] + 300, g[1] - 300, spring(t, MK("blueends") + 1.6, .45), tpill(0, 0, "two blue ends?", 40, SOUTHC, "#fff", { w: 700 })) : "")
     + qMark20(t, MK("blueends") + 2.0, g[0], g[1] - 200, 64)
@@ -230,5 +232,5 @@ SC.cliff = (t, s) => { const tP = W("m1202", "part") - .1, cam = camCliff(t), g 
     + bd("pip", 1760, 1070, 440, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]], look: -6, jump: [[LT("m1202") + .35, 20]] })
     + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + melt(t, s, "kwrecap", .4) + HUD(t); };
 /* 13 · "Now you know!": THE POLES BOARD (filled) and the floating ring between the buddies */
-SC.nyk = (t, s) => nykScene(t, s, polesCard(t, 920, 700, .78) + TF(1230, 1020, .32, rings20(t)), { bx: [230, 1720, 1460], hx: 470 });
+SC.nyk = (t, s) => nykScene(t, s, polesCard(t, 930, 720, .95) + TF(1300, 1030, .3, rings20(t)), { bx: [230, 1730, 1500], hx: 430 });
 })(); }
