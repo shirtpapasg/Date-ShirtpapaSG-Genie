@@ -113,6 +113,21 @@ const THUMBS = {
       { cut: 'mango', x: 520, y: 260, w: 740, line: '#fff', lw: 8, glow: INK },
       { buddy: 'momo_c_thinking', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHICH CAME', x: 1250, y: 112, size: 104, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 236, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP16 (the v2 cast: basil_v2 / momo_v2 poses, one style)
+  ep16_1: { ep: 'ep16', part: 1, out: 'ep16/thumb_part1.jpg', old: 'ep16/thumb_part1.jpg',
+    bg: { c: ['#D9FFF6', '#1FC7B0', '#0B4F4A'], at: [860, 430], rays: .22 },
+    cuts: { tad: `'<ellipse cx="960" cy="640" rx="600" ry="330" fill="#5FB7C9"/><ellipse cx="900" cy="520" rx="380" ry="60" fill="#BDEBF5" opacity=".5"/>' + TF(1270, 470, 2.1, eggClump(1, { n: 46, r: 13, R: 90 })) + TF(980, 720, 4.6, tadpole16(1, 1, { swim: false }), -6)` },
+    layers: [
+      { cut: 'tad', x: 470, y: 250, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'FISH OR', x: 1250, y: 112, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FROG?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep16_2: { ep: 'ep16', part: 2, out: 'ep16/thumb_part2.jpg', old: 'ep16/thumb_part2.jpg',
+    bg: { c: ['#FFF0C8', '#FF8A2A', '#B3261E'], at: [860, 430], rays: .22 },
+    cuts: { skin: `'<path d="M520 1000 Q820 760 900 300" stroke="#6FBF4E" stroke-width="54" fill="none" stroke-linecap="round"/><path d="M1060 1000 Q1240 900 1500 860" stroke="#7CC85A" stroke-width="54" fill="none" stroke-linecap="round"/>' + TF(770, 700, 3.0, hopper16(1, { skin: true }), -62) + TF(1240, 900, 2.6, hopper16(1, { adult: true }), -8)` },
+    layers: [
+      { cut: 'skin', x: 470, y: 210, w: 690, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'EMPTY', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SKIN?!', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);
