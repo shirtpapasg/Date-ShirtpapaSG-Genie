@@ -142,5 +142,8 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 - **Sound:** sound_cues.js Stage 2 block (void deck life, drips after the shower, the playground's birds and swing creak, foley on every mark);
   song.js + `coo` (the pigeon). Part 1 mix measured -16.0 LUFS.
 - **Self-check so far:** sweep both parts (0 bad, 0 page errors); stills at every scene (qa/p1a-d, p2a-c, hid1/2: contact sheets).
-- **Next:** `./build_part.sh 1`, then 2 (>= 3 GB free; delete out/chunks_p* after each), measure_countdowns.py, compare_ep1.py,
+- **Done:** thumbnails (`../thumb_v2.js` ep19_1 WHICH / ONE?! + Momo surprised, blue burst; ep19_2 COPPER?! + Basil surprised, green burst),
+  app_moments.json + chapters_p3.json EP19_P1 / EP19_P2 (make_moments.py: titles <= 64, no negative words: asserted), pose audit +
+  qa/buddy_faces_p1/p2.jpg, qa/lines_p1/p2.jpg (a still at every buddy line), highlights.py / make_preview.sh set for EP19.
+- **Next:** `./build_part.sh 1` (running 17:38), then 2 (>= 3 GB free; delete out/chunks_p* after each), measure_countdowns.py, compare_ep1.py,
   faces_sheet, highlights.py / make_moments.py / make_preview.sh (copy from ../ep18 and point at EP19), thumbnails (../thumb_v2.js ep19_1/2).

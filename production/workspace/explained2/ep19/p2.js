@@ -169,12 +169,12 @@ SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = SNAT.liz, tc =
 /* 12 · the dare for Episode 20: the test table, complete. A pencil stands upright in a lump of plasticine; Pip slides on two ring magnets (rings):
    the top one stops in mid-air and FLOATS above the bottom one, a clear gap (float). ONE set of TWO big numbered cards slides in low (dareIn):
    1 A pull · 2 A push. Pip a proud smile; Basil and Momo think on "What holds it up?" (a question; no hints) */
-const PEN = [TX - 160, TY + 60];
+const PEN = [TX + 250, TY + 64];
 SC.dare = (t, s) => { const a = "n1201", tR = MK("rings"), tF = MK("float"), tQ = W(a, "what") - .15, tc = [W(a, "one") - .1, W(a, "two") - .1], tL = W(a, "lock") - .1;
   const n = t < tR ? 0 : t < tR + .5 ? 1 : 1 + eio(clamp((t - tR - .5) / (tF - tR - .5))), e1 = eio(clamp((t - tR) / 1.2)), e2 = eio(clamp((t - tQ + .6) / 1.4));
   const cam = camMix(camMix(camOn([TX, TY - 60], 1.2, 960, 640), camOn([PEN[0], PEN[1] - 170], 2.3, 960, 520), e1), camOn([TX, TY - 120], 1.25, 960, 520), e2);
   return VD19(t, { snail: false, top: magT(t) + TF(PEN[0], PEN[1], .5, pencilRings(t, { n })) }, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.3 * e2)}"/>`
-    + NEXT_CARDS.map((c, i) => { const t0 = Math.max(MK("dareIn") + .5, tQ) + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, 780 + i * 380, 1020);
+    + NEXT_CARDS.map((c, i) => { const t0 = Math.max(MK("dareIn") + .5, tQ) + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, 600 + i * 370, 1020);
       return d + TF(x, 860, .8, choiceCard3(i + 1, c, nextPic(i), { w: 400, h: 330, size: 40, pulse: pl, id: "dr" })); }).join("")
     + (t >= tQ ? TF(1000, 150, spring(t, tQ, .45), tpill(0, 0, "NEXT · What holds it up?", 52, P.ink, P.sun, { w: 700 })) : "")
     + (t >= tL ? TF(1000, 1030, spring(t, tL, .45), tpill(0, 0, "Lock in your answer!", 44, P.sun, P.ink, { w: 700 })) : "")

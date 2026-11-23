@@ -48,26 +48,58 @@ BG.lime17 = () => { let s = `<rect x="-200" y="-120" width="2320" height="800" f
   for (let i = 0; i < 44; i++) { const x = -160 + hash(i, 3) * 2240, y = 660 + hash(i, 7) * 520; if (x > 560 && x < 900 && y > 760) continue; s += `<path d="M${n2(x)} ${n2(y)} q4 -18 0 -26 M${n2(x + 9)} ${n2(y)} q8 -14 10 -22 M${n2(x - 8)} ${n2(y)} q-6 -12 -10 -18" stroke="#58A84E" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>`; }
   return s; };
 // the lime plant's branches and leaves (live: they sway). The pot's rim top is at POTL[1] - 230. Twigs where the animals sit:
-//   LT_CAT the caterpillar's leaf twig (right), LT_EGG a young leaf's tip (top left), LT_PUPA the stem where it hangs (left low branch)
+//   LT_CAT the caterpillar's twig (right), LT_EGG a young leaf's tip (top left), LT_PUPA the stem where it hangs (left low branch)
+// EVERY LEAF ON A TWIG (SERIES_FORMAT, teacher 23 Nov 2026: "the leaves of the tree must branch out from the branches, not in mid-air"; EP18's
+//   limePlant18 approach): the trunk, eight branches and their side twigs as quadratic curves; leaves in pairs along them, each on a short
+//   leaf stalk. The caterpillar's twig (answer1's twig) is real wood now, with the chewed leaf on a stalk at the caterpillar's head; the moth's
+//   answer1 leaf (820, 330) is the tip leaf of a twig off the egg branch. Same crown as before (x 815..1505, y 205..675).
 const LT_CAT = [1330, 560], LT_EGG = [980, 330], LT_PUPA = [1000, 690], LT_TOP = [1180, 210];
-const LIMELEAVES = (() => { const out = []; for (let i = 0; i < 72; i++) { const a = hash(i, 61) * Math.PI * 2, d = 50 + 250 * Math.sqrt(hash(i, 63)); out.push([POTL[0] + Math.cos(a) * d * 1.15, 440 + Math.sin(a) * d * .78, 360 * hash(i, 65), i]); } return out; })();
-function limePlant(t, o = {}) { const [px, py] = POTL, sw = (i) => 2.4 * Math.sin(t * 1.1 + i * .7); let s = "";
+// the wood: [x0, y0, cx, cy, x1, y1, width, leaves] (leaves: how many along it; "down" = only hanging below, for the caterpillar's twig)
+const LIMEBR = (() => { const [px, py] = POTL; return [
+  [px, py - 236, px - 10, py - 420, px, py - 560, 15, 3],                          // 0 the trunk
+  [px, py - 470, px - 90, py - 380, LT_PUPA[0], LT_PUPA[1] - 120, 10, 5],          // 1 the pupa's branch (it hangs at the end)
+  [px + 2, py - 520, px + 25, py - 390, 1212, 567, 10, 3],                         // 2 to the caterpillar's twig
+  [px, py - 600, px - 80, py - 660, LT_EGG[0], LT_EGG[1], 10, 6],                  // 3 the egg's branch (the young leaf at its tip)
+  [px, py - 560, px + 10, py - 680, LT_TOP[0], LT_TOP[1] + 40, 10, 6],             // 4 the top
+  [px - 4, py - 520, px - 180, py - 470, 900, 470, 10, 6],                         // 5 left
+  [px + 4, py - 500, px + 200, py - 430, 1420, 470, 10, 6],                        // 6 right
+  [px + 6, py - 620, px + 180, py - 680, 1300, 290, 10, 6],                        // 7 top right
+  [1212, 567, LT_CAT[0], LT_CAT[1] - 6, LT_CAT[0] + 130, LT_CAT[1], 9, "down"],     // 8 the caterpillar's twig
+  [1075, 292, 975, 330, 888, 346, 7, "tip"]]; })();                                // 9 the moth's leaf twig (answer1: its tip leaf)
+const qpt = (b, u) => { const v = 1 - u; return [v * v * b[0] + 2 * v * u * b[2] + u * u * b[4], v * v * b[1] + 2 * v * u * b[3] + u * u * b[5]]; };
+const qang = (b, u) => { const dx = 2 * (1 - u) * (b[2] - b[0]) + 2 * u * (b[4] - b[2]), dy = 2 * (1 - u) * (b[3] - b[1]) + 2 * u * (b[5] - b[3]); return Math.atan2(dy, dx) * 180 / Math.PI; };
+// side twigs off the branches: [branch, u, angle (deg), length]; each carries three leaves (one each side, one at its tip)
+const LIMETW = [[5, .45, 150, 100], [5, .5, -145, 90], [6, .55, 35, 100], [6, .45, -55, 90], [7, .6, -35, 80], [1, .45, -125, 80], [4, .5, -150, 70], [3, .35, -110, 70]]
+  .map(([j, u, an, len]) => { const b = LIMEBR[j], [x0, y0] = qpt(b, u), r = an * Math.PI / 180, x1 = x0 + len * Math.cos(r), y1 = y0 + len * Math.sin(r);
+    return [x0, y0, (x0 + x1) / 2 + 12 * Math.sin(r), (y0 + y1) / 2 - 12 * Math.cos(r), x1, y1, 6, "twig"]; });
+// one leaf on its stalk at (x, y), pointing at angle a (deg)
+const limeLeaf = (x, y, a, i, len = 66, wid = 28) => `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(a)})"><path d="M0 0 L14 0" stroke="#5E7A3A" stroke-width="4" stroke-linecap="round"/><g transform="translate(12 0)">${leaf15(len, wid, i % 3 ? "#3E9E5A" : "#58B56C", "#2A6E3E")}<path d="M12 -8 Q30 -18 50 -10" stroke="#9FE0A8" stroke-width="3" fill="none" opacity=".6"/></g></g>`;
+function limePlant(t, o = {}) { const [px, py] = POTL, sw = (i) => 2.4 * Math.sin(t * 1.1 + i * .7); let s = "", lv = "";
+  const keep = (i) => !(o.cut && hash(i, 9) < .1);   // o.cut: a few leaves gone (as before)
   // the big terracotta pot (EP16's: the same pot, the same rim)
   s += `<ellipse cx="${px}" cy="${py + 8}" rx="220" ry="24" fill="${P.ink}" opacity=".24" filter="url(#b4)"/><path d="M${px - 170} ${py} L${px - 196} ${py - 206} H${px + 196} L${px + 170} ${py}z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="7" stroke-linejoin="round"/><rect x="${px - 214}" y="${py - 240}" width="428" height="44" rx="12" fill="#D9774A" stroke="#9A4A2A" stroke-width="7"/><path d="M${px - 150} ${py - 160} Q${px - 140} ${py - 60} ${px - 130} ${py - 20}" stroke="#F2A27A" stroke-width="10" fill="none" opacity=".45" stroke-linecap="round"/><ellipse cx="${px}" cy="${py - 236}" rx="190" ry="14" fill="url(#p15Soil)"/>`;
-  // the trunk and branches
-  s += `<path d="M${px} ${py - 236} Q${px - 10} ${py - 420} ${px} ${py - 560} M${px} ${py - 470} Q${px - 90} ${py - 380} ${LT_PUPA[0]} ${LT_PUPA[1] - 120} M${px} ${py - 560} Q${px + 80} ${py - 520} ${LT_CAT[0] - 20} ${LT_CAT[1] - 20} M${px} ${py - 600} Q${px - 80} ${py - 660} ${LT_EGG[0] + 20} ${LT_EGG[1] + 30} M${px} ${py - 560} Q${px + 10} ${py - 680} ${LT_TOP[0]} ${LT_TOP[1] + 40}" stroke="#7A5230" stroke-width="13" fill="none" stroke-linecap="round"/>`;
-  LIMELEAVES.forEach(([x, y, r, i]) => { if (o.cut && hash(i, 9) < .1) return; s += `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(r + sw(i))})">${leaf15(70, 30, i % 3 ? "#3E9E5A" : "#58B56C", "#2A6E3E")}<path d="M12 -8 Q30 -18 50 -10" stroke="#9FE0A8" stroke-width="3" fill="none" opacity=".6"/></g>`; });
-  // the chewed leaf the caterpillar eats (its edge bitten away), the young leaf with the egg at its tip
-  { const bites = o.bites || 0; s += `<g transform="translate(${LT_CAT[0] + 30} ${LT_CAT[1] - 30}) rotate(${n2(-8 + sw(3) * .5)})"><path d="M0 0 Q40 -50 110 -40 Q150 -10 140 30 Q90 60 0 0z" fill="#58B56C" stroke="#2A6E3E" stroke-width="3"/>${[...Array(Math.round(3 + bites))].map((_, i) => `<circle cx="${110 - i * 18}" cy="${-36 + i * 4}" r="12" fill="url(#e17Sky)"/>`).join("")}<path d="M6 0 Q70 -16 136 24" stroke="#2A6E3E" stroke-width="2" fill="none" opacity=".6"/></g>`; }
-  s += `<g transform="translate(${LT_EGG[0]} ${LT_EGG[1]}) rotate(${n2(200 + sw(5))})">${leaf15(80, 26, "#8FD86A", "#3E9E5A")}</g>`;
-  if (o.egg !== false) s += TF(LT_EGG[0] - 76, LT_EGG[1] - 22, o.eggK || .9, limeEgg(1, t));
-  if (o.cat) { const c = o.cat; s += TF(c.x || LT_CAT[0], c.y || LT_CAT[1], c.k || .5, cat17(t, c.o || {}), c.rot === undefined ? -6 : c.rot) + `<path d="M${(c.x || LT_CAT[0]) - 140} ${(c.y || LT_CAT[1]) + 6} Q${c.x || LT_CAT[0]} ${(c.y || LT_CAT[1]) - 10} ${(c.x || LT_CAT[0]) + 140} ${(c.y || LT_CAT[1]) - 4}" stroke="#7A5230" stroke-width="10" fill="none" stroke-linecap="round" opacity="0"/>`; }
+  // the wood (trunk, branches, twigs), then the leaves on it
+  [...LIMEBR, ...LIMETW].forEach((b, j) => { s += `<path d="M${n2(b[0])} ${n2(b[1])} Q${n2(b[2])} ${n2(b[3])} ${n2(b[4])} ${n2(b[5])}" stroke="#7A5230" stroke-width="${b[6]}" fill="none" stroke-linecap="round"/>`;
+    const kind = b[7];
+    if (kind === "twig") { [[.45, -1], [.75, 1]].forEach(([u, side], k) => { const i = 100 + j * 10 + k, [x, y] = qpt(b, u); if (keep(i)) lv += limeLeaf(x, y, qang(b, u) + side * (45 + 10 * hash(i, 5)) + sw(i), i, 58, 25); });
+      const i = 100 + j * 10 + 5; if (keep(i)) lv += limeLeaf(b[4], b[5], qang(b, 1) + sw(i), i, 58, 25); return; }
+    if (kind === "tip") { const i = 95; lv += limeLeaf(b[4], b[5], qang(b, 1) + sw(i) * .4, i, 62, 26); [.45].forEach((u) => { const [x, y] = qpt(b, u); lv += limeLeaf(x, y, qang(b, u) - 55 + sw(96), 96); }); return; }
+    if (kind === "down") { [[.2, 70], [.85, 60]].forEach(([u, d], k) => { const i = 90 + k, [x, y] = qpt(b, u); if (keep(i)) lv += limeLeaf(x, y, qang(b, u) + d + sw(i), i); }); lv += limeLeaf(b[4], b[5], qang(b, 1) + 10 + sw(92), 92); return; }
+    const n = kind; for (let k = 0; k < n; k++) { const u = j ? .3 + .66 * k / (n - 1) : .45 + .2 * k, [x, y] = qpt(b, u), a = qang(b, u), side = k % 2 ? 1 : -1, i = j * 10 + k;
+      if (j === 3 && k === n - 1) continue;   // the young leaf at LT_EGG is drawn on its own
+      if (keep(i)) lv += limeLeaf(x, y, a + side * (50 + 10 * hash(i, 5)) + sw(i), i); } });
+  s += lv;
+  // the chewed leaf the caterpillar eats (its edge bitten away), on its stalk from the caterpillar's twig; the young leaf with the egg at its tip
+  { const bites = o.bites || 0, [sx, sy] = qpt(LIMEBR[8], .6); s += `<path d="M${n2(sx)} ${n2(sy)} Q${n2(sx - 4)} ${n2(sy - 14)} ${LT_CAT[0] + 30} ${LT_CAT[1] - 30}" stroke="#5E7A3A" stroke-width="5" fill="none" stroke-linecap="round"/><g transform="translate(${LT_CAT[0] + 30} ${LT_CAT[1] - 30}) rotate(${n2(-8 + sw(3) * .5)})"><path d="M0 0 Q40 -50 110 -40 Q150 -10 140 30 Q90 60 0 0z" fill="#58B56C" stroke="#2A6E3E" stroke-width="3"/>${[...Array(Math.round(3 + bites))].map((_, i) => `<circle cx="${110 - i * 18}" cy="${-36 + i * 4}" r="12" fill="url(#e17Sky)"/>`).join("")}<path d="M6 0 Q70 -16 136 24" stroke="#2A6E3E" stroke-width="2" fill="none" opacity=".6"/></g>`; }
+  s += `<g transform="translate(${LT_EGG[0]} ${LT_EGG[1]}) rotate(${n2(200 + sw(5))})"><path d="M0 0 L10 0" stroke="#5E7A3A" stroke-width="4"/><g transform="translate(8 0)">${leaf15(80, 26, "#8FD86A", "#3E9E5A")}</g></g>`;
+  if (o.egg !== false) s += TF(LT_EGG[0] - 82, LT_EGG[1] - 26, o.eggK || .9, limeEgg(1, t));
+  if (o.cat) { const c = o.cat; s += TF(c.x || LT_CAT[0], c.y || LT_CAT[1], c.k || .5, cat17(t, c.o || {}), c.rot === undefined ? -6 : c.rot); }
   if (o.pupa) { const p = o.pupa; s += TF(p.x || LT_PUPA[0], p.y || LT_PUPA[1], p.k || .42, pupa17(t, p.o || { stem: false })); }
   if (o.bfly) { const b = o.bfly; s += TF(b.x, b.y, b.k || .4, bfly17(t, { flap: .5 + .5 * Math.sin(t * 9) }), b.rot || 0); }
   return s; }
 // the moth's spot in each lime-side scene [x, y, k, rot]: the intro (the void deck's pillar) is used ONLY before and at the game's push-in
 const MOTHAT = { cold: [466, 520, .34, 0], back: [466, 520, .34, 0], title: [466, 520, .34, 0], game: [466, 520, .34, 0],
-  answer1: [820, 330, .28, -20], lime: [LT_TOP[0] + 40, LT_TOP[1] + 30, .3, 180], waitw: [FENCE.post[0], FENCE.post[1] - 124, .3, 0],
+  answer1: [820, 330, .28, -20], lime: [LT_TOP[0] + 40, LT_TOP[1] + 30, .3, 180, "front"], waitw: [FENCE.post[0], FENCE.post[1] - 124, .3, 0],
   larva: [POTL[0] - 320, POTL[1] - 146, .3, 0], ring: null, holdon: null, liz: [POTL[0] - 120, POTL[1] - 90, .34, -6] };
 // VL: the live lime-plant side. o: dawn (0..1 the dawn tint), cat, pupa, egg, bites, bfly, can (true: the watering can by the pot), mothAt
 // ([..] | false), items (drawn before the plant), over (after the plant), dim
@@ -76,11 +108,11 @@ function VL(t, o = {}, cam) { let s = bg("lime17") + clouds17(t, [[200, 90, 1], 
   // a bulbul hops along the fence
   s += TF(1840 + 10 * Math.sin(t * .4), FENCE.y - 64 - hop(t % 2.3, 0, .3, 10), .9, bird15(t, 1, 1.3));
   const ma = o.mothAt === undefined ? MOTHAT[(window._S || {}).name] : o.mothAt; const mothS = ma ? mothAt(t, ma[0], ma[1], ma[2], { rot: ma[3], tw: 1, open: o.mothOpen || 0 }) : "";
-  if (ma && ma[1] < 600) s += mothS;   // on the void deck / far: behind the plant
+  if (ma && ma[1] < 600 && !ma[4]) s += mothS;   // on the void deck / far: behind the plant ("front": on a leaf, in front of the crown)
   if (o.can !== false) s += TF(POTL[0] - 320, POTL[1] + 4, .9, canArt17());
   if (o.items) s += o.items;
   s += limePlant(t, o);
-  if (ma && ma[1] >= 600) s += mothS;
+  if (ma && (ma[1] >= 600 || ma[4])) s += mothS;
   // a bee passes; dew sparkles at dawn
   { const u = (t / 11) % 1, bx = -100 + 2200 * u, by = 380 + 50 * Math.sin(u * 20); s += TF(bx, by, .9, `<ellipse cx="-4" cy="-10" rx="10" ry="6" fill="#fff" opacity=".8" transform="rotate(${n2(30 * Math.sin(t * 60))} -4 -10)"/><ellipse rx="12" ry="8" fill="#FFC83A" stroke="${P.ink}" stroke-width="2"/><path d="M-2 -7 v14 M5 -6 v12" stroke="${P.ink}" stroke-width="3"/>`); }
   if (o.dawn) { s += [[1040, 470], [1300, 390], [1210, 620], [1420, 520]].map(([x, y], i) => lcGlint(x, y, 10, t, i)).join("") + `<rect x="-200" y="-120" width="2320" height="1320" fill="url(#e17Dawn)" opacity="${n2(.4 * o.dawn)}" style="mix-blend-mode:multiply"/>`; }

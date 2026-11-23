@@ -13,7 +13,7 @@ for v in L:
     if R.get(f"{P}|{v['scene']}|{v['who']}|{v['pose']}", "").startswith("-"): continue   # behind a panel: not on screen
     im = Image.open(v["file"]).convert("RGB"); im.thumbnail((TW, TH)); tile = Image.new("RGB", (TW, TH + LH), (250, 246, 238)); tile.paste(im, ((TW - im.width) // 2, TH - im.height))
     d = ImageDraw.Draw(tile); d.rectangle([0, TH, TW, TH + 6], fill=COL[v["who"]])
-    pose = "worried*" if (v["scene"] == "show" and v["pose"] == "thinking") else v["pose"]
+    pose = v["pose"]
     d.text((8, TH + 10), f"{mm(v['t0'])}  {v['who'].capitalize()}  {pose}", font=fb, fill=(30, 26, 60))
     why = R.get(f"{P}|{v['scene']}|{v['who']}|{v['pose']}", v["why"])
     for j, ln in enumerate(textwrap.wrap(why, 33)[:4]): d.text((8, TH + 38 + j * 19), ln, font=fr, fill=(60, 56, 80))

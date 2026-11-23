@@ -98,7 +98,7 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "a708", sayId: "a707", who: "basil", 
 
 /* 8 · Be a butterfly egg! The pill; the buddies wave the viewer off (goodbye); ONE glide in to the young leaf's tip with the egg (a soft green
    wipe); the journey (lc17.js bflyJourney; the buddies ride along, shrunk, on the next lime leaf); one pull back out. The moth on the fence post */
-const camGlide = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .3 * e + 5 * dive, lerp(1100, LT_EGG[0] - 76, m), lerp(560, LT_EGG[1] - 22, m)]; };
+const camGlide = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .3 * e + 5 * dive, lerp(1100, LT_EGG[0] - 82, m), lerp(560, LT_EGG[1] - 26, m)]; };
 SC.waitw = (t, s) => { const L = "a801", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
   return VL(t, { cat: catLive(t), bites: 3, eggK: 1.2 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 460, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1066, 440, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
       + bd("basil", 1690, 1076, 460, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })

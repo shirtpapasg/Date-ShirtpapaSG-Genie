@@ -167,7 +167,7 @@ SC.holdon = (t, s) => { window._BUBAT = { pip: [1330, 260], momo: [700, 280] }; 
       + labels + TF(1700, 640 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 470 + bob * .6, 1.2) + TF(1700, 860, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
     + (t >= MK("letgo") + .5 ? linkChip(t, MK("letgo") + .6, 980, 380, camPt(camHold(t), MSIDE)[0], camPt(camHold(t), MSIDE)[1] - 30, 0, "attracted!", 44) : "")
     + (t >= tF - .1 ? TF(1360, 360, spring(t, tF - .1, .45), fridgeInset(t)) : "")
-    + bd("basil", 1420, 1000, 380, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "arms_crossed"]] })
+    + bd("basil", 1270, 1000, 380, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "arms_crossed"]] })
     + bd("pip", 1720, 1076, 500, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "arms_crossed"], [LE("m904p") + .1, "pointing"], [LE("m904p") + 1.8, "arms_crossed"]] })
     + bd("momo", 230, 1076, 500, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LT("m901m") - .9, "pointing"], [LT("m901m") - .1, "sit"], [LE(b) - .2, "thinking"], [r0 - .2, "worried"], [bell + .35, "sit"], [LT(c), "oops"]], jump: [[bell + .02, 30]], nohop: true })
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + smallPrint(t, MK("wok"), KITCHEN_RULE) + melt(t, s, "answer", .4) + HUD(t); };

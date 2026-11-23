@@ -152,7 +152,7 @@ const nextPic = (i, t) => i === 0 ? `<rect x="-200" y="-140" width="400" height=
   : `<rect x="-200" y="-140" width="400" height="280" fill="#E8F5DC"/><path d="M-200 60 Q0 20 200 70 V140 H-200z" fill="#58B56C"/>` + TF(0, 60, 1.25, caterpillar16(t));
 const DRX = [760, 1180];
 SC.dare = (t, s) => { const a = "f1401", tQ = W(a, "nymph") - .15, tc = [W(a, "one", 1) - .1, W(a, "two") - .1], tL = W(a, "lock") - .1, e = eio((t - MK("dareIn") - .2) / 1.6), cam = [lerp(2.4, 1.04, e), lerp(CAT[0] - 40, 1000, e), lerp(CAT[1] + 20, 620, e)];
-  const cat = TF(CAT[0] - 20, CAT[1] + 34, .55, caterpillar16(t), -12) + `<g transform="translate(${CAT[0] - 70} ${CAT[1] + 20}) rotate(-20)">${leaf15(90, 34, "#58B56C", "#2F7A45")}</g>`;
+  const cat = TF(CAT[0] - 20, CAT[1] + 34, .55, caterpillar16(t), -12) + `<g transform="translate(${CAT[0] - 70} ${CAT[1] + 20}) rotate(-20)"><path d="M-11 0 L3 0" stroke="#5E7A3A" stroke-width="4" stroke-linecap="round"/>${leaf15(90, 34, "#58B56C", "#2F7A45")}</g>`;   // on its stalk, at the tip of the lime tree's twig B1 (pond16.js LIME16)
   return VG16(t, { items: cat }, cam) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.28 * e)}"/>` + OP(1 - e, TF(1200, 820, spring(t, s.t0 + .2, .4), tpill(0, 0, "a caterpillar on the lime plant", 44, "#fff", P.ink, { w: 700 })))
     + NEXT_CARDS.map((c, i) => { const t0 = MK("dareIn") + .5 + i * .25, pl = Math.max(pulse(t, tc[i], .04, .6), t >= tL ? (Math.floor((t - tL) / .5) % 2 === i ? .8 : 0) : 0); if (t < t0) return ""; const [x, d] = slideX(t, t0, .6, 2400, DRX[i], 920);
       return d + TF(x, 700, .92, choiceCard3(i + 1, c, nextPic(i, t), { w: 400, h: 330, size: 40, pulse: pl, id: "dr" })); }).join("")

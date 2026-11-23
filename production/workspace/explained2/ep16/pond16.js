@@ -138,6 +138,29 @@ function caterpillar16(t, o = {}) { const ch = Math.sin(t * 8), wg = Math.sin(t 
 // left, the garden tap on its pipe beside the pond (left front), the big elephant-ear leaf leaning over the water (right back), a reed clump
 // (far side, left), a flower pot by the pond (right), Basil's flat stone (right front)
 const PD = { cx: 1040, cy: 800, rx: 760, ry: 230 }, LEAF16 = [1430, 330], TAP16 = [330, 500], POTP = [1600, 580], REED16 = [640, 470], BENCH16 = [40, 790];
+// Plants grow the way real plants grow (SERIES_FORMAT, teacher 23 Nov 2026: "the leaves of the tree must branch out from the branches, not in
+// mid-air"). Both helpers below replace leaves that were scattered by hash() round a point.
+// the bougainvillea in the pond-side pot: ONE bush mass sitting on the pot's rim; its small leaves and pink bracts sit on that mass
+const bougain16 = (px, py) => { const M = [[0, -116, 92, 26], [-56, -138, 42, 42], [0, -160, 52, 50], [56, -138, 42, 42], [-28, -190, 34, 32], [30, -194, 36, 34]];
+  let s = M.map(([x, y, rx, ry]) => `<ellipse cx="${px + x}" cy="${py + y}" rx="${rx + 4}" ry="${ry + 4}" fill="#2F7A45"/>`).join("") + M.map(([x, y, rx, ry], i) => `<ellipse cx="${px + x}" cy="${py + y}" rx="${rx}" ry="${ry}" fill="${i % 2 ? "#4FA866" : "#3E9E5A"}"/>`).join("");
+  // small leaves round the edge: each one's base inside the mass, pointing out
+  for (let i = 0; i < 11; i++) { const a = Math.PI * (1.05 + .9 * i / 10), cx = px, cy = py - 150; s += `<g transform="translate(${n2(cx + Math.cos(a) * 82)} ${n2(cy + Math.sin(a) * 64 + 12)}) rotate(${n2(a * 180 / Math.PI)})">${leaf15(30, 12, i % 2 ? "#58B56C" : "#4FA866", "#2A6E3E")}</g>`; }
+  // the pink bracts, in little bunches of three on the mass
+  [[-60, -150], [-10, -186], [40, -150], [64, -116], [-34, -118], [20, -122], [-2, -152]].forEach(([x, y], i) => { s += `<g transform="translate(${px + x} ${py + y}) rotate(${i * 37})">${[0, 1, 2].map((k) => `<ellipse cx="0" cy="-9" rx="8" ry="11" fill="${i % 2 ? "#E85A9A" : "#F27DB5"}" stroke="#B83A74" stroke-width="1.5" transform="rotate(${k * 120})"/>`).join("")}<circle r="3" fill="#FFF3C8"/></g>`; });
+  return s; };
+// the young lime tree in the big pot by the void deck: a trunk, six branches, every leaf on a short leaf stalk along a branch (EP18's
+// limePlant18 approach). Same place and size as before (crown about x 1595..1925, y 215..460). Branch B1 ends at (1620, 404): Part 2's dare
+// puts the caterpillar's leaf on that twig tip. Static (it is baked into bg/grass16).
+const LIME16 = (lx, ly) => [[lx, ly - 190, lx - 10, ly - 300, lx, ly - 440], [lx - 2, ly - 280, lx - 70, ly - 300, 1620, 404], [lx + 2, ly - 290, lx + 80, ly - 320, 1900, 410],
+  [lx - 3, ly - 350, lx - 60, ly - 400, 1640, 300], [lx + 3, ly - 365, lx + 70, ly - 400, 1895, 290], [lx, ly - 420, lx - 40, ly - 480, 1700, 225], [lx, ly - 430, lx + 40, ly - 490, 1820, 220]];
+const qpt16 = (b, u) => { const v = 1 - u; return [v * v * b[0] + 2 * v * u * b[2] + u * u * b[4], v * v * b[1] + 2 * v * u * b[3] + u * u * b[5]]; };
+const qang16 = (b, u) => { const dx = 2 * (1 - u) * (b[2] - b[0]) + 2 * u * (b[4] - b[2]), dy = 2 * (1 - u) * (b[3] - b[1]) + 2 * u * (b[5] - b[3]); return Math.atan2(dy, dx) * 180 / Math.PI; };
+const limeLeaf16 = (x, y, a, i) => `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(a)})"><path d="M0 0 L11 0" stroke="#5E7A3A" stroke-width="3.5" stroke-linecap="round"/><g transform="translate(9 0)">${leaf15(52, 22, i % 2 ? "#3E9E5A" : "#58B56C", "#2A6E3E")}</g></g>`;
+function limeTree16(lx, ly) { const B = LIME16(lx, ly); let w = "", lv = "";
+  B.forEach((b, j) => { w += `<path d="M${b[0]} ${b[1]} Q${b[2]} ${b[3]} ${b[4]} ${b[5]}" stroke="#7A5230" stroke-width="${j ? 9 : 16}" fill="none" stroke-linecap="round"/>`;
+    const us = j ? [.38, .58, .76, .9] : [.78, .9]; us.forEach((u, k) => { const [x, y] = qpt16(b, u), side = (k + j) % 2 ? 1 : -1, i = j * 10 + k; lv += limeLeaf16(x, y, qang16(b, u) + side * (48 + 16 * hash(i, 5)), i); });
+    lv += limeLeaf16(b[4], b[5], qang16(b, 1) + 12 * (hash(j, 7) - .5), j); });
+  return w + lv; }
 BG.pond16 = () => { let s = `<rect x="-200" y="-120" width="2320" height="700" fill="url(#p16Sky)"/>`;
   s += `<g opacity=".6">${farBlocks(-160, 2120, 330, 21, .9)}</g>`;
   // the HDB block close behind: its void deck (pillars, shade), the lift lobby
@@ -161,7 +184,7 @@ BG.pond16 = () => { let s = `<rect x="-200" y="-120" width="2320" height="700" f
   { const [rx, ry] = REED16; for (let i = 0; i < 14; i++) { const x = rx - 90 + i * 13, h = 150 + 90 * hash(i, 31), b = 20 * (hash(i, 33) - .5); s += `<path d="M${x} ${ry + 70} Q${n2(x + b * .5)} ${n2(ry + 70 - h * .6)} ${n2(x + b)} ${n2(ry + 70 - h)}" stroke="${i % 2 ? "#4FA866" : "#6CC36E"}" stroke-width="7" fill="none" stroke-linecap="round"/>`; if (i % 4 === 1) s += `<rect x="${n2(x + b - 7)}" y="${n2(ry + 70 - h - 10)}" width="14" height="44" rx="7" fill="#8A5A36"/>`; } }
   // the flower pot by the pond (right; a bougainvillea in it)
   { const [px, py] = POTP; s += `<ellipse cx="${px}" cy="${py + 4}" rx="80" ry="12" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M${px - 62} ${py} L${px - 76} ${py - 96} H${px + 76} L${px + 62} ${py}z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="5" stroke-linejoin="round"/><rect x="${px - 84}" y="${py - 110}" width="168" height="22" rx="8" fill="#D9774A" stroke="#9A4A2A" stroke-width="5"/>`;
-    for (let i = 0; i < 12; i++) { const a = -Math.PI * (.1 + .8 * hash(i, 41)), d = 40 + 60 * hash(i, 43); s += `<circle cx="${n2(px + Math.cos(a) * d)}" cy="${n2(py - 120 + Math.sin(a) * d * .9)}" r="${n2(20 + 8 * hash(i, 45))}" fill="${i % 3 ? "#4FA866" : "#E85A9A"}"/>`; } }
+    s += bougain16(px, py); }
   // the garden tap on its pipe (left front, beside the pond)
   { const [tx, ty] = TAP16; s += `<rect x="${tx - 10}" y="${ty}" width="20" height="190" fill="#9AA4B2" stroke="#5E6B7C" stroke-width="4"/><rect x="${tx - 26}" y="${ty + 184}" width="52" height="16" rx="6" fill="#7C8696"/><path d="M${tx} ${ty + 8} H${tx + 44} Q${tx + 60} ${ty + 8} ${tx + 60} ${ty + 30} V${ty + 44}" stroke="#B9C2CE" stroke-width="18" fill="none" stroke-linecap="round"/><path d="M${tx} ${ty + 8} H${tx + 44} Q${tx + 60} ${ty + 8} ${tx + 60} ${ty + 30} V${ty + 44}" stroke="#5E6B7C" stroke-width="3" fill="none"/><rect x="${tx - 6}" y="${ty - 26}" width="12" height="22" fill="#7C8696"/><path d="M${tx - 30} ${ty - 30} H${tx + 30}" stroke="#D9433A" stroke-width="12" stroke-linecap="round"/>`; }
   // Basil's flat stone (right front, by the water)
@@ -221,8 +244,8 @@ BG.grass16 = () => { let s = `<rect x="-200" y="-120" width="2320" height="760" 
     s += `<g transform="translate(${px + 420} ${py - 20})"><ellipse cx="0" cy="-90" rx="110" ry="90" fill="#3E9E5A"/><ellipse cx="-50" cy="-120" rx="60" ry="50" fill="#58B56C"/><ellipse cx="50" cy="-70" rx="60" ry="46" fill="#4FA866"/>${[[-60, -130], [40, -150], [70, -70], [-20, -60]].map(([x, y]) => `<g transform="translate(${x} ${y})">${[0, 1, 2, 3, 4].map((k) => `<ellipse cx="0" cy="-16" rx="12" ry="18" fill="#E8403A" transform="rotate(${k * 72})"/>`).join("")}<circle r="6" fill="#FFD75A"/></g>`).join("")}</g>`;
     for (let i = 0; i < 8; i++) s += `<g transform="translate(${px + 120 + i * 28} ${py - 22})"><ellipse cx="-8" cy="-14" rx="9" ry="16" fill="#58B56C" transform="rotate(-24 -8 -14)"/><ellipse cx="8" cy="-14" rx="9" ry="16" fill="#43A85C" transform="rotate(24 8 -14)"/></g>`; }
   // the lime plant in its big pot (right edge)
-  { const [lx, ly] = LIMEP; s += `<ellipse cx="${lx}" cy="${ly + 6}" rx="150" ry="18" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M${lx - 120} ${ly} L${lx - 140} ${ly - 170} H${lx + 140} L${lx + 120} ${ly}z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="6" stroke-linejoin="round"/><rect x="${lx - 152}" y="${ly - 196}" width="304" height="34" rx="10" fill="#D9774A" stroke="#9A4A2A" stroke-width="6"/><path d="M${lx} ${ly - 190} Q${lx - 10} ${ly - 300} ${lx} ${ly - 380}" stroke="#7A5230" stroke-width="16" fill="none"/>`;
-    for (let i = 0; i < 26; i++) { const a = hash(i, 61) * Math.PI * 2, d = 40 + 110 * Math.sqrt(hash(i, 63)); s += `<g transform="translate(${n2(lx + Math.cos(a) * d * 1.1)} ${n2(ly - 420 + Math.sin(a) * d * .8)}) rotate(${n2(360 * hash(i, 65))})">${leaf15(52, 22, i % 2 ? "#3E9E5A" : "#58B56C", "#2A6E3E")}</g>`; } }
+  { const [lx, ly] = LIMEP; s += `<ellipse cx="${lx}" cy="${ly + 6}" rx="150" ry="18" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M${lx - 120} ${ly} L${lx - 140} ${ly - 170} H${lx + 140} L${lx + 120} ${ly}z" fill="url(#p15Pot)" stroke="#9A4A2A" stroke-width="6" stroke-linejoin="round"/><rect x="${lx - 152}" y="${ly - 196}" width="304" height="34" rx="10" fill="#D9774A" stroke="#9A4A2A" stroke-width="6"/>`;
+    s += limeTree16(lx, ly); }
   for (let i = 0; i < 40; i++) { const x = -160 + hash(i, 3) * 2240, y = 640 + hash(i, 7) * 540; s += `<path d="M${n2(x)} ${n2(y)} q4 -18 0 -26 M${n2(x + 9)} ${n2(y)} q8 -14 10 -22 M${n2(x - 8)} ${n2(y)} q-6 -12 -10 -18" stroke="#58A84E" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>`; }
   return s; };
 // the sunflower in the planter bed (live: it nods); origin = its stem's foot. The mantis's reveal spot is on its stem under the flower head
