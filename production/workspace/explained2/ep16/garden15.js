@@ -1,4 +1,4 @@
-// EP16: copied unchanged from ../ep15/garden15.js (EP15 Stage 2, commit 3d87cb5): the community garden BG.garden15, its pond, the old mango tree. EP16 draws its own pond side and grassy corner in pond16.js, borrowing these pieces.
+// EP16: copied unchanged from ../ep15/garden15.js (EP15, its redo working copy of 23 Nov): the community garden BG.garden15, its pond, the old mango tree. EP16 draws its own pond side and grassy corner in pond16.js, borrowing these pieces.
 // garden15.js: EP15's Part 2 sets and props (Stage 2, drawn 2026-11-23). Loaded after home15.js.
 // THE COMMUNITY GARDEN BG.garden15 (baked) + VG15(t, o, cam) live: the big OLD MANGO TREE (thick trunk, wide crown, sprays of tiny cream
 //   flowers, small green mangoes, bunches of red new leaves at the tips, the weaver ants' leaf nest high up), our young plant in its pot on the
@@ -60,7 +60,10 @@ function oldTree(t, o = {}) { const [x0, y0] = TRK; let s = `<ellipse cx="${x0 +
 // the weaver ants' nest: leaves sewn together with fine white silk (origin = its middle)
 const leafNest = (t) => `<ellipse rx="96" ry="66" fill="#3E9E5A" stroke="#2A6E3E" stroke-width="4"/>${[...Array(9)].map((_, i) => `<g transform="rotate(${i * 40 + 10}) translate(30 0)">${leaf15(74, 18, i % 2 ? "#58B56C" : "#4FA866", "#2A6E3E")}</g>`).join("")}${[...Array(14)].map((_, i) => { const a = i / 14 * Math.PI * 2; return `<path d="M${n2(70 * Math.cos(a))} ${n2(46 * Math.sin(a))} l${n2(16 * Math.cos(a + 1.4))} ${n2(12 * Math.sin(a + 1.4))}" stroke="#fff" stroke-width="2.5" opacity=".9"/>`; }).join("")}<path d="M-60 -10 Q0 -40 60 -6 M-50 20 Q0 0 56 24" stroke="#fff" stroke-width="2" fill="none" opacity=".8" stroke-dasharray="3 5"/>`;
 // the ant's spots, scene by scene (teacher, 22 Nov: it hides somewhere new each time; small but findable)
-const ANTAT = { place: [1236, 600, 0, -90], game: [900, 380, 0, 0], adultans: [968, 400, 0, 0], seeds: [1340, 790, 1, 0], waitw: [1190, 520, 0, -90], fruitcut: [1060, 790, 0, -90], fix: null, nomore: [1640, 300, 1, 0], dare: [700, 726, 1, 0], liz: [900, 380, 0, 0], ring: null, show: null };
+// EP15 fix round (teacher, 23 Nov): never again at the game's intro spot (game: the low left leaf by the flowers), never twice in one spot.
+// adultans moved off the intro leaf (to the bench's back rail), waitw off the trunk (place uses the trunk: now on a hanging mango), and the
+// reveal (liz) on a different leaf: the far left of the crown.
+const ANTAT = { place: [1236, 600, 0, -90], game: [900, 380, 0, 0], adultans: [1120, 668, 1, 0], seeds: [1340, 790, 1, 0], waitw: [1316, 372, 0, -30], fruitcut: [1060, 790, 0, -90], fix: null, nomore: [1640, 300, 1, 0], dare: [700, 726, 1, 0], liz: [690, 262, 0, 0], ring: null, show: null };
 function VG15(t, o = {}, cam) { let s = bg("garden15");
   [[300, 90, 1], [1250, 60, .8], [1850, 150, .7]].forEach(([x, y, k], i) => { const cx = (x + t * (7 + 2 * i) + 400) % 2500 - 300; s += TF(cx, y, k, `<g opacity=".95"><ellipse cx="0" cy="0" rx="130" ry="34" fill="#fff"/><ellipse cx="-50" cy="-26" rx="62" ry="40" fill="#fff"/><ellipse cx="34" cy="-36" rx="76" ry="50" fill="#fff"/></g>`); });
   // the pond's ripples, its tadpoles (o.tad), a bird hopping on the grass
@@ -99,9 +102,9 @@ function adultArt(t) { const m = MK, tP = m("pairin"), tS = m("stem"), tT = m("t
   { const [fc, lc] = leafC(1 - .15 * Math.sin(t)); w += `<g transform="translate(950 -262)">${[-50, -25, 0, 25, 50].map((b, i) => `<g transform="rotate(${b + 30 + 3 * Math.sin(t * 1.5 + i)})">${leaf15(110, 22, fc, lc)}</g>`).join("")}</g>`; }
   // the labels (a plain line to the exact part), colour-coded: teal for the young plant, mango orange for the adult plant
   const lab = (t0, x, y, txt, px, py, c, t1) => lcLab(t, t0, x, y, txt, px, py, { size: 46, fill: c[0], ink: c[1], t1 });
-  w += lab(tS, -760, -200, "a thin stem", -470, 204 + POTS * 1.55 - 120, YC, tT - .3) + lab(tT, 160, 300, "a thick trunk", 330, 200, AC, tF - .3) + lab(tF, 300, -440, "tiny flowers", 600, -330, AC, tTi - .3)
-    + lab(tTi, 760, -440, "new leaves: still growing", 1010, -330, AC, tK - .9);
-  if (t >= tA - .1) w += TF(-400, 300, spring(t, tA - .1, .45), tpill(0, 0, "young plant: no flowers, no fruits", 32, YC[0], YC[1], { w: 700 })) + TF(400, 300, spring(t, tA + .3, .45), tpill(0, 0, "only the adult plant: flowers and fruits", 32, AC[0], AC[1], { w: 700 }));
+  w += lab(tS, -760, -200, "a thin stem", -470, 204 + POTS * 1.55 - 120, YC, tT - .3) + lab(tT, 160, 300, "a thick trunk", 330, 200, AC, tF - .3) + lab(tF, 240, -330, "tiny flowers", 600, -330, AC, tTi - .3)
+    + lab(tTi, 700, -330, "new leaves: still growing", 1010, -330, AC, Math.min(tK - .9, LT("j506") - .5));
+  // (EP15 fix round: the two summary tags moved out of the zoomed art to p2.js lcadult, in screen space, clear of the face and the bubble)
   return `<rect x="-900" y="-450" width="1800" height="900" fill="#DCEFFB"/><g transform="scale(${n2(z)}) translate(${n2(-fx)} ${n2(-fy)})">${w}</g>`; }
 
 /* =============================================================================================================================
@@ -139,16 +142,16 @@ const miniPic = (i, t, k = .4) => TF(0, 0, k, `<circle r="104" fill="#fff" strok
 const stopSign = (k = 1) => TF(0, 0, k, `<path d="M-17 -41 H17 L41 -17 V17 L17 41 H-17 L-41 17 V-17z" fill="#E33B2E" stroke="#fff" stroke-width="5"/>${T(0, 9, "STOP", 22, "#fff")}`);
 function hwEasel(t, o = {}) { const lit = o.lit || [0, 0, 0], st = o.strike || 0, fx = o.fix || 0;
   let s = `<ellipse cx="0" cy="6" rx="330" ry="20" fill="${P.ink}" opacity=".22" filter="url(#b4)"/><path d="M-240 0 L-170 -360 M240 0 L170 -360 M0 0 L0 -300" stroke="#8A5A36" stroke-width="18" stroke-linecap="round"/><rect x="-420" y="-330" width="840" height="24" rx="8" fill="#8A5A36"/>`
-    + `<g filter="url(#drop)"><rect x="-400" y="-900" width="800" height="580" rx="14" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="5"/></g>${[...Array(12)].map((_, i) => `<path d="M-380 ${-830 + i * 44} H380" stroke="#DCE8F4" stroke-width="2"/>`).join("")}<path d="M-330 -890 V-330" stroke="#F4A7A0" stroke-width="3"/>`
-    + T(-300, -850, "My homework", 40, P.ink, { a: "start" }) + T(370, -850, "by Momo", 30, P.momo, { a: "end" });
-  HWL.forEach((txt, i) => { const y = -760 + i * 150, l = lit[i]; const ls = wrap(txt, 34, 640, 600);
+    + `<g filter="url(#drop)"><rect x="-400" y="-960" width="800" height="640" rx="14" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="5"/></g>${[...Array(13)].map((_, i) => `<path d="M-380 ${-890 + i * 44} H380" stroke="#DCE8F4" stroke-width="2"/>`).join("")}<path d="M-330 -950 V-330" stroke="#F4A7A0" stroke-width="3"/>`
+    + T(-300, -910, "My homework", 40, P.ink, { a: "start" }) + T(370, -910, "by Momo", 30, P.momo, { a: "end" });   // EP15 fix: a taller page, so line 3's pictures and the fix never sit on its words
+  HWL.forEach((txt, i) => { const y = -830 + i * 120, l = lit[i]; const ls = wrap(txt, 34, 640, 600);
     if (l > .02) s += `<rect x="-390" y="${y - 44}" width="780" height="${44 + ls.length * 42}" rx="12" fill="${P.sun}" opacity="${n2(.3 * l)}"/>`;
     s += TF(-360, y - 6, 1, `<circle r="24" fill="${P.ink}"/>${T(0, 10, String(i + 1), 28, "#fff")}`) + ls.map((l2, j) => T(-320, y + j * 42, esc(l2), 34, i === 2 && fx > .5 ? "#9A8F86" : P.ink, { a: "start", w: 600 })).join("");
     if (i === 2 && st > .01) s += `<path d="M-325 ${y - 10} L${n2(-325 + 690 * st)} ${y - 10} M-325 ${y + 32} L${n2(-325 + 690 * st)} ${y + 32}" stroke="#E33B2E" stroke-width="6" stroke-linecap="round"/>`; });
   // line 3's pictures: a row seed -> young -> adult -> STOP; on the fix it bends into a loop (no STOP)
-  const by = -390; if (fx < .5) { const a = 1 - 2 * fx; s += OP(a, [0, 1, 2].map((i) => TF(-250 + i * 170, by, 1, miniPic(i, t, .4))).join("") + [0, 1, 2].map((i) => `<path d="M${-196 + i * 170} ${by} h56" stroke="${P.ink}" stroke-width="6"/><path d="M${-146 + i * 170} ${by - 10} l12 10 l-12 10" fill="none" stroke="${P.ink}" stroke-width="6" stroke-linecap="round"/>`).join("") + TF(260, by, 1, stopSign(1))); }
+  const by = fx < .5 ? -470 : -386; if (fx < .5) { const a = 1 - 2 * fx; s += OP(a, [0, 1, 2].map((i) => TF(-250 + i * 170, by, 1, miniPic(i, t, .4))).join("") + [0, 1, 2].map((i) => `<path d="M${-196 + i * 170} ${by} h56" stroke="${P.ink}" stroke-width="6"/><path d="M${-146 + i * 170} ${by - 10} l12 10 l-12 10" fill="none" stroke="${P.ink}" stroke-width="6" stroke-linecap="round"/>`).join("") + TF(260, by, 1, stopSign(1))); }
   else { const a = 2 * fx - 1; s += OP(a, [[-90, by - 30], [90, by - 30], [0, by + 40]].map(([x, y], i) => TF(x, y, 1, miniPic(i, t, .3))).join("") + `<path d="M-40 ${by - 60} Q0 ${by - 90} 40 ${by - 60} M126 ${by + 2} Q120 ${by + 50} 50 ${by + 60} M-50 ${by + 60} Q-120 ${by + 50} -126 ${by + 2}" fill="none" stroke="${P.leaf}" stroke-width="7" stroke-linecap="round"/>` + T(250, by + 10, "round and round!", 30, P.leaf, { w: 700 })); }
-  if (fx > .02) { const ls = wrap("The adult plant has fruits with new seeds, so round it goes again.", 34, 640, 600); s += OP(clamp(fx * 1.6), ls.map((l2, j) => T(-320, -760 + 2 * 150 + 84 + j * 40, esc(l2), 34, P.leafDeep, { a: "start", w: 700 })).join("")); }
+  if (fx > .02) { const ls = wrap("The adult plant has fruits with new seeds, so round it goes again.", 34, 640, 600); s += OP(clamp(fx * 1.6), ls.map((l2, j) => T(-320, -512 + j * 38, esc(l2), 34, P.leafDeep, { a: "start", w: 700 })).join("")); }
   return s; }
 
 /* =============================================================================================================================

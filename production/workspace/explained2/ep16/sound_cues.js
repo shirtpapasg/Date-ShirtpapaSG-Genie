@@ -9,7 +9,7 @@
 // (jeat), a tight creak (jtight), a soft crack (jsplit), an unfolding rustle (jwings); a click per label in the look-closers; the easel's
 // strike (strike); a croak on the tree frog's name. song.js's garden bed has "no hens" (EP15): EP16's grassy edge DOES have the hen.
 window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.push({ t: Math.round(t * 1000) / 1000, k, v }); }, S = SCN, M_ = TL.marks,
-  R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [] };
+  R = { groove: [], calm: [], rain: [], birds: [], night: [], wonder: [], roll: [], canteen: [], sea: [], tank: [], room: [], garden: [], hens: [] };
   const has = (id) => !!TL.lines[id], mk = (k) => M_[k];
   const G = (a, b) => { if (b > a + 1) R.groove.push([a, b]); }, C = (a, b) => { if (b > a + 1) R.calm.push([a, b]); }, BD = (a, b) => { if (b > a + 1) R.birds.push([a, b]); };
   const GAME = /^(game|goals|count|r1card|r1|showcard|show|holdon|final|frogans|nymphans|fix|dare|cliff)$/, CALM = /^(lasttime|pond|lc|mark|hen|skin|moult|ring|place|kwrecap|back|pullout)/;
@@ -46,4 +46,54 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+  // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): ONE place, the community garden. The pond side: birds, far children at the void
+  // deck, leaves (R.garden), plus frogs calling at dawn (fading as the light comes), drips from the big leaf, a trickle and bubbles; the grassy
+  // corner: the same bed, grasshopper clicks, and the HEN (R.hens: her low clucks and the chicks' peeps) only while she is on screen. Foley ON
+  // the marks. No ambience one-shot under a countdown (only the ticks keep time).
+  { const P1 = ["cold", "back", "title", "pond", "lceggs", "waitw", "pullout", "frogans", "holdon", "ring", "hen", "lcchick", "cliff"], P2 = ["place", "lcnymph", "nymphans", "skin", "lcskin", "waitw", "pullout", "moult", "show", "fix", "dare"], LIST = PART === 1 ? P1 : P2, out = [];
+    for (const sc of TL.scenes) if (LIST.includes(sc.name)) { const last = out[out.length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else out.push([sc.t0, sc.t1]); }
+    R.garden.push(...out.filter(([a, b]) => b - a > 1)); R.birds = R.birds.filter(([a, b]) => !out.some(([x, y]) => a >= x - .1 && b <= y + .1));
+    const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus }), clk = (t, i = 0) => E(t, "pop", i % 3);
+    if (PART === 1) {
+      // the pond at dawn: a frog chorus that fades as the light comes; drips from the big leaf; ripples as the tadpoles pass
+      for (let t = .2, i = 0; t < 5.6; t += .55 + .25 * (i % 3) + .12 * t, i++) E(t, "ribbit", i);
+      for (const n of ["cold", "back", "title", "pond", "frogans", "ring"]) if (S[n]) for (let t = S[n].t0 + .5, i = 0; t < S[n].t1 - .3; t += 1.6 + .5 * (i % 3), i++) E(t, "drip", i);
+      for (const n of ["pond", "frogans", "holdon"]) if (S[n]) for (let t = S[n].t0 + 1, i = 0; t < S[n].t1 - 1; t += 5.5, i++) sfx(t, "ep07_flow.wav", .05);
+      E(mk("wriggle"), "bubble", 1); E(mk("wriggle") + .4, "bubble", 2);
+      E(W("e301a", "frog") + .3, "ribbit"); E(W("e301b", "sticky") + .1, "pop", 2);
+      if (S.pond) E(W("e602m", "mother") - .2, "softpop", 1);
+      // the eggs: a click per label; the fish's soft bloop on the jelly; a warm shimmer as the sun comes out; the underwater hush
+      if (S.lceggs) for (let t = S.lceggs.t0 + 1.2; t < S.lceggs.t1 - .5; t += 5) sfx(t, "underwater.wav", .05);
+      clk(mk("clump") + .2, 0); clk(mk("dots") + .2, 1); clk(mk("kw_jelly_like_covering"), 2); sfx(mk("fish") + .5, "ep06_plop.wav", .16, "game"); E(mk("fish") + .6, "boing"); E(mk("sun") - .1, "reveal"); clk(mk("sun") + 1.4, 1);
+      // the journey: underwater hush and little bubbles; a bloop as the fish bumps the jelly; a pop as you hatch; tiny kicks; a splash and birds
+      if (S.shrink) { for (let t = mk("jegg"); t < mk("jpad"); t += 5) sfx(t, "underwater.wav", .07, "wonder"); for (let t = mk("jegg") + .7, i = 0; t < mk("jpad"); t += 1.1 + .4 * (i % 3), i++) E(t, "bubble", i); }
+      sfx(W("e702", "fish") + 1.3, "ep06_plop.wav", .14, "wonder"); E(mk("jhatch"), "pop", 2); E(mk("jhatch") + .1, "stretch"); [0, .35].forEach((d, i) => { E(mk("jback") + d, "hop", i); E(mk("jfront") + d, "hop", i + 2); }); E(mk("jtail"), "boop");
+      sfx(mk("jpad") + .2, "splash.wav", .18, "wonder"); sfx(mk("jpad") + .6, "ep08_birds.wav", .12, "wonder"); E(mk("jfrog"), "rise", 1); E(mk("jfrog") + .3, "ribbit");
+      // the answer: the little frog's croak and plop; HOLD ON!: Pip's paper rustles, the bracket, the row slides into a loop; the board's tiles
+      E(mk("ansglow") + .6, "ribbit"); sfx(W("e803m", "hops") - .05, "ep06_plop.wav", .12, "game");
+      E(mk("board") - .1, "paper"); E(mk("bracket"), "scribble"); E(mk("tegg") - .3, "whoosh"); E(mk("tyoung"), "hop", 1); E(mk("tadult"), "hop", 2); E(mk("tback"), "sparkle");
+      // the hen and her chicks (only here): clucks and peeps on henIn, little pecks; the look-closer: a click per part, pecks on peck
+      if (S.hen) { R.hens.push([mk("henIn") - .6, S.hen.t1]); E(mk("henIn"), "cluck"); E(mk("henIn") + .5, "peep"); for (let t = mk("henIn") + 1.6, i = 0; t < S.hen.t1 - .4; t += .9 + .5 * (i % 3), i++) sfx(t, "ep05_peck.wav", .08, "amb"); }
+      if (S.lcchick) R.hens.push([S.lcchick.t0, mk("pairs")]);
+      clk(mk("beak"), 0); clk(mk("wings"), 1); clk(mk("legs"), 2); for (let k = 0; k < 4; k++) sfx(mk("peck") + k * 2.4, "ep05_peck.wav", .18, "game"); E(mk("pairs"), "tag", 0);
+      // the tree frog's reveal: a croak on its name; the cliffhanger: a grasshopper's click as it hops on, the skin's ? (wired drum)
+      E(W("e1302", "frog") + .2, "ribbit"); E(mk("hop"), "chek", .7); E(mk("hop") + .1, "hop", 1); E(mk("skin") + .2, "curious");
+    } else {
+      // the grassy corner: grasshopper clicks now and then; the little one hops on (hop)
+      for (const n of ["place", "nymphans", "skin", "moult", "dare"]) if (S[n]) for (let t = S[n].t0 + .8, i = 0; t < S[n].t1 - .4; t += 3.2 + (i % 3), i++) E(t, "chek", .45);
+      E(mk("hop"), "hop", 1); E(W("f201a", "mantis") + .2, "rustle");
+      // the nymph look-closer: a click per part; the empty skin: clicks, a soft creak as the old skin goes tight
+      ["legs", "feelers", "jump", "wings"].forEach((k, i) => clk(mk(k), i)); clk(mk("split"), 0); clk(mk("hollow"), 1); clk(mk("hollow") + .6, 2); E(mk("tight") - .6, "creak");
+      if (S.skin) E(W("f701m", "dry") - .2, "softpop", 1);
+      // the journey: munching, a tight creak, a soft crack, a wriggle rustle, small ticks for the old skins, the wings unfolding
+      for (let k = 0; k < 5; k++) sfx(mk("jeat") + k * .5, "ep05_munch.wav", .14, "wonder"); E(mk("jtight"), "creak"); E(mk("jtight") + .8, "stretch"); E(mk("jsplit"), "crack"); E(mk("jout"), "rustle"); E(mk("jhard"), "chime2", 0);
+      for (let k = 0; k < 4; k++) E(mk("jagain") + k * .9, "tok"); sfx(mk("jwings"), "ep09_wings.wav", .14, "wonder"); E(mk("jwings") + .2, "rise", 1);
+      // moulting: the grasshopper hops away after Momo's line; the Showdown: paper on each line; the fix: a strike, a green scribble, the egg case
+      if (S.moult) E(LE("f902m") + .3, "hop", 2);
+      ["l1", "l2", "l3"].forEach((k) => E(mk(k), "paper")); E(mk("strike"), "scribble"); E(mk("rewrite"), "scribble"); E(mk("case") - .1, "pop", 2); E(mk("case") + 1.2, "window");
+      // the dare: the caterpillar munching on the lime plant
+      if (S.dare) for (let k = 0; k < 4; k++) sfx(S.dare.t0 + .4 + k * .55, "ep05_munch.wav", .1, "amb");
+    } }
+  // no ambience one-shots under a countdown (only the ticks keep time)
+  { const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["sfx", "drip", "chek", "ribbit", "cluck", "peep", "bubble"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

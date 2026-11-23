@@ -22,7 +22,7 @@ if (C.R.outro) C.R.groove.push(C.R.outro);
   for (const [a, b] of C.R.groove) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); out.push(...segs); }
   C.R.groove = out;
   // EP14: the places' beds pause too (no clucks or buses among the ticks)
-  for (const key of ['room', 'garden']) { const o2 = []; for (const [a, b] of (C.R[key] || [])) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); o2.push(...segs); } C.R[key] = o2; } }
+  for (const key of ['room', 'garden', 'hens']) { const o2 = []; for (const [a, b] of (C.R[key] || [])) { let segs = [[a, b]]; for (const [x, y] of W) segs = segs.flatMap(([p, q]) => (y <= p || x >= q) ? [[p, q]] : [[p, x], [y, q]].filter(([u, v]) => v - u > 1.2)); o2.push(...segs); } C.R[key] = o2; } }
 for (const [a, b] of C.R.groove) for (let t0 = a, bi = 0; t0 + BEAT * 3.2 < b; t0 += BEAT * 4, bi++, barN++) { const [root, chord] = CH[bi % 4];
   for (let s = 0; s < 8; s++) { const t = t0 + s * BEAT / 2; if (t > b - .1) break;
     if (s === 0 || s === 4) drums.addMono(K, t, .5); if (s === 2 || s === 6) { drums.addMono(CL, t, .3); verb.addMono(CL, t, .1); }
@@ -50,7 +50,9 @@ for (const [a, b] of (C.R.canteen || [])) loop('ep05_kids.wav', a, b, .1, 1.0); 
 for (const [a, b] of (C.R.room || [])) { loop('ep07_birds.wav', a, b, .055, 1.2); for (let t = a; t < b; t += 1.0) amb.addMono(I.noiseSweep(1.1, 180, 170, { q: .4, pink: true }), t, .012, 0);
   for (let t = a + 4, i = 0; t < b - 4; t += 13 + 5 * (i % 3), i++) MIX.loadAudio(path.join(SFX, 'pass_by.wav'), { at: t, length: DUR }).mixInto(amb, .035); }
 for (const [a, b] of (C.R.garden || [])) { loop('ep08_birds.wav', a, b, .1, 1.2); loop('ep05_kids.wav', a, b, .03, 1.5);
-  for (let t = a + 1.5, i = 0; t < b - 1; t += 5.5 + 2.5 * ((i * 5) % 3), i++) MIX.loadAudio(path.join(SFX, 'ep05_leaf.wav'), { at: t, length: DUR }).mixInto(amb, .05); }   // EP15: no hens in this garden
+  for (let t = a + 1.5, i = 0; t < b - 1; t += 5.5 + 2.5 * ((i * 5) % 3), i++) MIX.loadAudio(path.join(SFX, 'ep05_leaf.wav'), { at: t, length: DUR }).mixInto(amb, .05); }   // EP15: no hens in this garden bed
+// EP16: the hen and her chicks, ONLY while they are on screen (sound_cues.js R.hens): her low clucks and the chicks' peeps, under the speech
+for (const [a, b] of (C.R.hens || [])) for (let t = a + .3, i = 0; t < b - .4; t += 1.7 + .6 * (i % 3), i++) { if (i % 2) MIX.loadAudio(path.join(SFX, 'ep05_cluck.wav'), { at: t, length: DUR }).mixInto(amb, .07); else for (let k = 0; k < 3; k++) amb.addMono(I.tom(240 - k * 18, .07, 340 + k), t + k * .13, .06, -.2); const x = I.whistle(.16); amb.addMono(x, t + .8, .05, .3); }
 for (const [a, b] of C.R.night) for (let t = a + .2; t < b - .3; t += .42) for (let j = 0; j < 3; j++) amb.addMono(I.bell(4300 + (j % 2) * 180, .022, .6, 1.5), t + j * .055, .04, ((t * 7) % 2) - 1);
 for (const [a, b] of C.R.roll) for (let t = a; t < b; t += .07) game.addMono(I.tom(92, .08, (t * 100) | 0), t, .07 + .1 * (t - a) / (b - a));
 // ---------- one-shots

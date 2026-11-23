@@ -196,17 +196,17 @@ const hopCard = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill
 // bare back (no wings yet); NYMPH pops on the young
 const HOPC = { legs: ["#D7F5EE", "#0F766E"], feelers: ["#FFE2C0", "#B4531A"], jump: ["#EDE4FF", "#6D28D9"], wings: ["#DCF5DF", "#1F8A4C"] };
 function nymphArt(t) { const m = MK, tP = m("pairin"), tL = m("legs"), tF = m("feelers"), tJ = m("jump"), tW = m("wings"), tK = m("kw_nymph"), s0 = SCN.lcnymph.t0 + 1;
-  const c = camSeq(t, [s0, tP, tL, tF, tJ, tW, tK, tK + 2.6], [[0, 60, .92], [0, 0, 1], [0, 80, 1.04], [60, -100, 1.04], [-60, 0, 1.02], [300, -40, 1.25], [-380, 20, 1.2], [0, 0, 1]]);
+  const c = camSeq(t, [s0, tP, tL, tF, tJ, tW, tK, tK + 2.6], [[0, 60, .92], [0, 0, 1], [0, 0, 1.04], [60, -100, 1.04], [-60, 0, 1.02], [300, -40, 1.25], [-380, 20, 1.2], [0, 0, 1]]);
   let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#E3F4FF"/><rect x="-1300" y="230" width="2600" height="600" fill="#A6DE7E"/><path d="M-1300 230 H1300" stroke="#7FC566" stroke-width="6"/>`;
   // two blades at the same angle (as a floor under each)
   const Y = { x: -420, y: 120, k: 1.9 }, A = { x: 360, y: 120, k: 2.35 };
   w += [Y, A].map((b) => `<path d="M${b.x - 330} ${b.y + 40} Q${b.x} ${b.y - 20} ${b.x + 340} ${b.y + 10}" stroke="#6FBF4E" stroke-width="46" fill="none" stroke-linecap="round"/><path d="M${b.x - 330} ${b.y + 40} Q${b.x} ${b.y - 20} ${b.x + 340} ${b.y + 10}" stroke="#3F8A3A" stroke-width="4" fill="none" opacity=".5"/>`).join("");
   const lit = (k, t0) => ({ [k]: t >= t0 ? .4 + .6 * pulse(t, t0, .05, .9) : 0 }), L = { ...lit("legs", tL), ...lit("feelers", tF), ...lit("jump", tJ), ...lit("wings", tW) };
   w += TF(Y.x, Y.y, Y.k, hopper16(t, { lit: L, ph: 1 })) + TF(A.x, A.y, A.k, hopper16(t, { adult: true, lit: L, ph: 2.5 }));
-  w += TF(Y.x, Y.y + 120, 1, tpill(0, 0, "the little one", 40, "#fff", P.ink, { w: 700 })) + TF(A.x, A.y + 120, 1, tpill(0, 0, "an adult", 40, "#fff", P.ink, { w: 700 }));
+  w += TF(Y.x + 170, Y.y + 120, 1, tpill(0, 0, "the little one", 40, "#fff", P.ink, { w: 700 })) + TF(A.x, A.y + 120, 1, tpill(0, 0, "an adult", 40, "#fff", P.ink, { w: 700 }));
   // the labels, each joined to the part on BOTH grasshoppers (a part's points in each animal's own coordinates)
   const P2 = (b, x, y) => [b.x + x * b.k, b.y + y * b.k];
-  const parts = [["legs", tL, "six legs", [0, -330], [[24, -18], [52, -8]]], ["feelers", tF, "two feelers", [40, -420], [[110, -120], [120, -126]]], ["jump", tJ, "big back legs", [0, 360], [[-50, -50], [-50, -50]]]];
+  const parts = [["legs", tL, "six legs", [0, -250], [[24, -18], [52, -8]]], ["feelers", tF, "two feelers", [40, -420], [[110, -120], [120, -126]]], ["jump", tJ, "big back legs", [0, 360], [[-50, -50], [-50, -50]]]];
   for (const [k, t0, txt, [lx, ly], [py, pa]] of parts) { if (t < t0) continue; const col = HOPC[k], al = 1 - ss(tK - .6, tK - .2, t); if (al < .01) continue;
     w += OP(al, [P2(Y, py[0], py[1]), P2(A, pa[0], pa[1])].map(([x, y]) => `<path d="M${lx} ${ly} L${n2(x)} ${n2(y)}" stroke="${col[1]}" stroke-width="6" stroke-dasharray="${n2(1000 * ramp(t, t0, .3))} 1100"/><circle cx="${n2(x)}" cy="${n2(y)}" r="12" fill="none" stroke="${col[1]}" stroke-width="6"/>`).join("") + TF(lx, ly, spring(t, t0, .4), tpill(0, 0, txt, 48, col[0], col[1], { w: 700 }))); }
   // wings: the adult's long wings (green); the young's bare back: a dashed outline, "no wings yet"
@@ -221,17 +221,17 @@ const dryIdea = (t) => `<rect x="-300" y="-200" width="600" height="400" fill="#
 // LOOK CLOSER · the empty skin: back-lit, see-through; the split down its back (a magnifier), the empty legs and feelers (tubes); then the why
 // as a picture model on the right: a nymph inside its hard outer skin grows, little arrows push out, the outline cannot grow and goes tight
 function skinArt(t) { const m = MK, tS = m("split"), tH = m("hollow"), tM = LT("f705") - .2, tT = m("tight"), s0 = SCN.lcskin.t0 + 1, tV = m("v_skin");
-  const c = camSeq(t, [s0, tS, tH, tH + 1.6, tM, tT, tV + .6], [[-280, 0, 1], [-200, -160, 1.25], [-80, 60, 1.2], [-420, -40, 1.25], [80, 0, 1], [300, -20, 1.15], [80, 0, 1]]);
+  const c = camSeq(t, [s0, tS, tH, tH + 1.6, tM, tT, tV + .6], [[-200, 0, .95], [-180, -100, 1.1], [-300, 40, 1.15], [-240, -100, 1.15], [80, 0, 1], [300, -20, 1.15], [80, 0, 1]]);
   let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#FFF1C8"/>` + `<circle cx="-700" cy="-500" r="420" fill="#FFE27A" opacity=".5"/><rect x="-1300" y="250" width="2600" height="600" fill="#B7E58F"/>`;
   // the blade it hangs on, and the empty skin, big, light shining through it
-  w += `<path d="M-900 330 Q-500 160 -60 -280" stroke="#6FBF4E" stroke-width="60" fill="none" stroke-linecap="round"/>` + TF(-430, 70, 3.1, hopper16(t, { skin: true }), -30);
+  w += `<path d="M-900 400 Q-500 200 -40 -120" stroke="#6FBF4E" stroke-width="60" fill="none" stroke-linecap="round"/>` + TF(-420, 120, 2.4, hopper16(t, { skin: true }), -20);
   for (let i = 0; i < 5; i++) w += lcGlint(-700 + 120 * i, -120 + 60 * Math.sin(i), 16, t, i);
   // the magnifier on the split down its back
-  const mg = ss(tS - .2, tS + .3, t) * (1 - ss(tH - .5, tH - .1, t)), SX = -480, SY = -120;
-  if (mg > .01) w += OP(mg, `<path d="M${SX} ${SY} L60 -200" stroke="#fff" stroke-width="7"/>` + TF(220, -220, spring(t, tS - .2, .45), `<g filter="url(#drop)"><circle r="208" fill="#FFF8EA"/></g><clipPath id="mgs"><circle r="190"/></clipPath><g clip-path="url(#mgs)"><rect x="-200" y="-200" width="400" height="400" fill="#F6EBC6"/><path d="M-200 -40 Q0 -70 200 -40 V200 H-200z" fill="#EADBA8" opacity=".7"/><path d="M-200 -10 Q-60 -36 0 -20 Q70 -6 200 -30" stroke="#8A6A34" stroke-width="16" fill="none" stroke-dasharray="4 0"/><path d="M-200 -10 Q-60 -36 0 -20 Q70 -6 200 -30" stroke="#FFF8EA" stroke-width="6" fill="none"/></g><circle r="190" fill="none" stroke="${P.ink}" stroke-width="10"/>`)
-    + lcLab(t, tS + .2, 220, 70, "a split down the back", 220, -210, { size: 46 }));
+  const mg = ss(tS - .2, tS + .3, t) * (1 - ss(tH - .5, tH - .1, t)), SX = -474, SY = -29;
+  if (mg > .01) w += OP(mg, `<path d="M${SX} ${SY} L-110 -220" stroke="#fff" stroke-width="7"/><circle cx="${SX}" cy="${SY}" r="22" fill="none" stroke="#fff" stroke-width="6"/>` + TF(80, -240, spring(t, tS - .2, .45), `<g filter="url(#drop)"><circle r="208" fill="#FFF8EA"/></g><clipPath id="mgs"><circle r="190"/></clipPath><g clip-path="url(#mgs)"><rect x="-200" y="-200" width="400" height="400" fill="#F6EBC6"/><path d="M-200 -40 Q0 -70 200 -40 V200 H-200z" fill="#EADBA8" opacity=".7"/><path d="M-200 -10 Q-60 -36 0 -20 Q70 -6 200 -30" stroke="#8A6A34" stroke-width="16" fill="none" stroke-dasharray="4 0"/><path d="M-200 -10 Q-60 -36 0 -20 Q70 -6 200 -30" stroke="#FFF8EA" stroke-width="6" fill="none"/></g><circle r="190" fill="none" stroke="${P.ink}" stroke-width="10"/>`)
+    + lcLab(t, tS + .2, -120, 40, "a split down the back", 40, -200, { size: 46 }));
   // the empty legs and feelers: tubes you can see through
-  if (t >= tH - .1 && t < tM) { const a = 1 - ss(tM - .5, tM, t); w += OP(a, lcLab(t, tH, -820, -120, "empty legs", -560, 120, { size: 48, fill: "#D7F5EE", ink: "#0F766E" }) + lcLab(t, tH + .6, -40, -430, "empty feelers", -280, -330, { size: 48, fill: "#FFE2C0", ink: "#B4531A" })); }
+  if (t >= tH - .1 && t < tM) { const a = 1 - ss(tM - .5, tM, t); w += OP(a, lcLab(t, tH, -360, 330, "empty legs", -330, 90, { size: 48, fill: "#D7F5EE", ink: "#0F766E" }) + lcLab(t, tH + .6, 20, -280, "empty feelers", -230, -230, { size: 48, fill: "#FFE2C0", ink: "#B4531A" })); }
   // the picture model (right half): a nymph inside its hard outer skin; it grows, the skin cannot stretch: too tight, a crack starts
   const mo = ss(tM - .3, tM + .4, t);
   if (mo > .01) { const g = ss(tM + 1.5, tT, t), sq = ss(tT - 1.2, tT, t), cx = 420, cy = 60;
@@ -239,7 +239,7 @@ function skinArt(t) { const m = MK, tS = m("split"), tH = m("hollow"), tM = LT("
       + TF(cx + 10, cy + 160, 2.2 * (1 + .14 * g), hopper16(t, { feel: .3 }))
       + `<g transform="translate(${cx + 10} ${cy + 160}) scale(2.2)"><path d="M-92 -40 Q-90 -68 -40 -68 L20 -72 Q42 -82 56 -70 Q${80 + 4 * sq} -80 ${84 + 4 * sq} -56 Q86 -30 64 -24 L-40 -20 Q-86 -20 -92 -40z" fill="none" stroke="${mixC("#8A6A34", "#E33B2E", sq)}" stroke-width="${n2(4 + 2 * sq)}" stroke-dasharray="${sq > .5 ? "0" : "10 6"}"/></g>`
       + (g > .2 ? [[cx - 180, cy + 20, -1, 0], [cx + 160, cy, 1, 0], [cx, cy - 60, 0, -1], [cx - 40, cy + 120, 0, 1]].map(([x, y, dx, dy]) => `<path d="M${x} ${y} l${dx * 50} ${dy * 50}" stroke="#E36A12" stroke-width="9" stroke-linecap="round"/><path d="M${x + dx * 66} ${y + dy * 66} l${-dx * 18 + dy * 14} ${-dy * 18 + dx * 14} l${-dy * 28} ${-dx * 28}z" fill="#E36A12"/>`).join("") : "")
-      + lcLab(t, tM + .4, cx - 230, -230, "a hard outer skin", cx - 130, cy - 20, { size: 38 }) + (g > .3 ? lcLab(t, tM + 1.8, cx + 220, 270, "the nymph grows", cx + 80, cy + 120, { size: 38, fill: "#FFE2C0", ink: "#B4531A" }) : "")
+      + lcLab(t, tM + .4, cx - 230, -230, "a hard outer skin", cx - 130, cy - 20, { size: 38 }) + (g > .3 ? lcLab(t, tM + 1.8, cx + 220, 250, "the nymph grows", cx + 80, cy + 120, { size: 38, fill: "#FFE2C0", ink: "#B4531A", t1: tV - .2 }) : "")
       + (t >= tT - .4 ? TF(cx + 230, -200, spring(t, tT - .4, .4) * (1 + .08 * Math.sin(t * 12)), tpill(0, 0, "too tight!", 50, "#E33B2E", "#fff", { w: 700 })) + `<path d="M${cx - 40} ${cy + 10} l20 -18 l10 16 l18 -20 l12 14" stroke="#E33B2E" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="${n2(140 * ss(tT - .2, tT + .4, t))} 200"/>` : "")); }
   return `<rect x="-900" y="-450" width="1800" height="900" fill="#FFF1C8"/>` + inCam(c, w); }
 
@@ -250,7 +250,11 @@ function nymphJourney(t, s) { const m = MK, tN = m("jnymph"), tE = m("jeat"), tT
   // far grass blades and the sun through them; the huge blade (a road) under you, receding to a point
   for (let i = 0; i < 14; i++) { const x = -100 + i * 160 + 40 * Math.sin(t * .4 + i), h = 700 + 300 * hash(i, 3); w += `<path d="M${n2(x - 40)} 1100 Q${n2(x + 30 * Math.sin(t * .6 + i))} ${n2(1100 - h * .6)} ${n2(x + 60 * (hash(i, 5) - .5))} ${n2(1100 - h)} Q${n2(x + 20)} ${n2(1100 - h * .5)} ${n2(x + 40)} 1100z" fill="${i % 2 ? "#8FCB6A" : "#6FB85A"}" opacity=".8"/>`; }
   w += `<circle cx="1500" cy="160" r="90" fill="#FFF3B8" opacity=".9"/>`;
-  w += `<g transform="rotate(${n2(sway * .2 + 30 * hang)} 960 1080)"><path d="M300 1200 L900 ${n2(80 - 30 * hang)} L1020 ${n2(80 - 30 * hang)} L1620 1200z" fill="#6FBF4E" stroke="#3F8A3A" stroke-width="8"/><path d="M960 1200 L960 ${n2(80 - 30 * hang)}" stroke="#3F8A3A" stroke-width="6" opacity=".6"/>${[...Array(6)].map((_, i) => `<path d="M${640 + i * 30} ${1100 - i * 160} L${1280 - i * 30} ${1100 - i * 160}" stroke="#5FAE46" stroke-width="3" opacity=".4"/>`).join("")}`;
+  // the blade: a long green road from under you to its tip far ahead, bending away; its veins run to the tip; dew drops shine on it
+  w += `<g transform="rotate(${n2(sway * .2 + 26 * hang)} 960 1080)"><path d="M-160 1200 Q300 760 860 420 Q980 330 1060 ${n2(300 - 30 * hang)} Q1120 330 1160 420 Q1500 760 2080 1200z" fill="#7CC85A" stroke="#3F8A3A" stroke-width="10"/>`
+    + `<path d="M-160 1200 Q300 760 860 420 Q980 330 1060 ${n2(300 - 30 * hang)} L1040 ${n2(330 - 30 * hang)} Q960 380 880 460 Q360 820 40 1200z" fill="#5FAE46" opacity=".8"/><path d="M2080 1200 Q1500 760 1160 420 Q1120 330 1060 ${n2(300 - 30 * hang)} L1080 ${n2(330 - 30 * hang)} Q1140 400 1200 470 Q1560 820 1880 1200z" fill="#5FAE46" opacity=".8"/>`
+    + [-.66, -.33, 0, .33, .66].map((f) => `<path d="M${n2(960 + f * 1100)} 1200 Q${n2(990 + f * 340)} 700 1060 ${n2(310 - 30 * hang)}" stroke="#5FAE46" stroke-width="${f === 0 ? 10 : 5}" fill="none" opacity=".6"/>`).join("")
+    + `<path d="M-160 1200 Q300 760 860 420 Q980 330 1060 ${n2(300 - 30 * hang)}" stroke="#B7E58F" stroke-width="16" fill="none" opacity=".6"/>` + [[700, 900, 22], [1300, 760, 16], [1040, 520, 10]].map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#DDF4FF" stroke="#8FB8D6" stroke-width="3"/><circle cx="${x - r * .3}" cy="${y - r * .3}" r="${r * .3}" fill="#fff"/>`).join("");
   // the leaf edge you munch: bites appear (jeat)
   if (t >= tE - .5 && t < tTi + .5) { const nb = Math.floor(clamp((t - tE) / 2.6) * 5); w += OP(ss(tE - .5, tE, t) * (1 - ss(tTi, tTi + .5, t)), `<path d="M1040 300 Q1500 260 1700 500 Q1500 640 1040 600z" fill="#58B56C" stroke="#2F7A45" stroke-width="6"/>` + [...Array(nb)].map((_, i) => `<circle cx="${1050 + i * 4}" cy="${360 + i * 50}" r="34" fill="#BFE6FF"/>`).join("")); }
   w += `</g>`;
@@ -260,7 +264,7 @@ function nymphJourney(t, s) { const m = MK, tN = m("jnymph"), tE = m("jeat"), tT
   if (t >= tA) { const n = Math.min(4, 1 + Math.floor((t - tA) / .9)); w += TF(1500, 240, spring(t, tA, .4), `<g filter="url(#dropS)"><rect x="-260" y="-70" width="520" height="140" rx="40" fill="#FFF8EA"/></g>` + [...Array(n)].map((_, i) => TF(-190 + i * 110, 28, .46, hopper16(t, { skin: true }), -10)).join("") + T(0, -32, "old skins: " + n, 30, P.ink)); }
   // YOUR body at the frame's edges: two green front legs at the bottom, two feelers at the top; on jwings, two long wings unfold at the sides
   const bc = pale > .02 ? mixC("#7CC84A", "#F2EBC8", pale) : "#7CC84A";
-  w += [-1, 1].map((sd) => `<path d="M${960 + sd * 240} 1200 Q${960 + sd * 300} 1040 ${n2(960 + sd * (420 + 10 * Math.sin(t * 5)))} 980 l${sd * 30} 40" stroke="#3F7F2A" stroke-width="56" fill="none" stroke-linecap="round"/><path d="M${960 + sd * 240} 1200 Q${960 + sd * 300} 1040 ${n2(960 + sd * (420 + 10 * Math.sin(t * 5)))} 980 l${sd * 30} 40" stroke="${bc}" stroke-width="42" fill="none" stroke-linecap="round"/>`
+  w += [-1, 1].map((sd) => `<path d="M${960 + sd * 300} 1200 Q${960 + sd * 340} 980 ${n2(960 + sd * (460 + 10 * Math.sin(t * 5)))} 900 l${sd * 40} 60" stroke="#3F7F2A" stroke-width="84" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M${960 + sd * 300} 1200 Q${960 + sd * 340} 980 ${n2(960 + sd * (460 + 10 * Math.sin(t * 5)))} 900 l${sd * 40} 60" stroke="${bc}" stroke-width="66" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`
     + `<path d="M${960 + sd * 120} -20 Q${960 + sd * 260} ${n2(160 + 20 * Math.sin(t * 3 + sd))} ${960 + sd * 520} ${n2(120 + 30 * Math.sin(t * 2.4 + sd))}" stroke="#3F7F2A" stroke-width="18" fill="none" stroke-linecap="round"/>`).join("");
   if (t >= tW - .2) { const u = eo((t - tW + .2) / 1.4); w += [-1, 1].map((sd) => `<g transform="translate(${960 + sd * 900} 760) scale(${sd} 1) rotate(${n2(-60 * (1 - u))})"><path d="M0 0 Q-300 -140 -720 ${n2(-60 + 40 * Math.sin(t * 4))} Q-420 40 0 60z" fill="#8CC84E" stroke="#3F7F2A" stroke-width="8" opacity=".95"/><path d="M0 20 Q-300 -60 -660 -40 M0 40 Q-300 0 -600 0" stroke="#4E7F2A" stroke-width="4" fill="none"/></g>`).join(""); }
   // tight: the view squeezes at the edges; split: a crack of light opens above you; out: everything pale and soft for a moment
@@ -310,6 +314,6 @@ const ffMBabies = (t, w, h) => { let s = `<rect x="${-w / 2}" y="${-h / 2}" widt
 // Part 2's "Last time..." pictures: the frog loop board, the chick beside the hen, the empty grasshopper skin on its blade with a ?
 const recapPic16 = (i, t) => { let s = `<rect x="-520" y="-300" width="1040" height="600" fill="${["#DCEFFB", "#FFF3DC", "#E8F5DC"][i]}"/>`;
   if (i === 0) s += TF(0, 300, .7, loopBoard16(t, { tiles: [0, 0, 0], back: 0, id: "rp" }));
-  else if (i === 1) s += `<rect x="-520" y="140" width="1040" height="160" fill="#B7E58F"/>` + TF(-190, 170, 2, chick16(t, { peck: peckAt(t, 0) })) + TF(230, 190, 1.15, hen16(t, { peck: peckAt(t, 1) }));
+  else if (i === 1) s += TF(-40, 0, 1.5, mini2x2(t));
   else s += `<rect x="-520" y="160" width="1040" height="160" fill="#8FCB6A"/><path d="M-200 300 Q-60 60 160 -160" stroke="#6FBF4E" stroke-width="54" fill="none" stroke-linecap="round"/>` + TF(-20, 60, 2.1, hopper16(t, { skin: true }), -52) + TF(260, -150, 1, `<g filter="url(#dropS)"><circle r="56" fill="url(#gSun)"/></g>${T(0, 28, "?", 86, P.ink)}`);
   return s; };

@@ -218,7 +218,7 @@ SEQ1 = [
 SEQ2 = [
  # ---- 1 · "Last time...": a calm recap, three pictures from Part 1, one at a time (switch on "tadpole" and "chick"; each >= 2.5 s)
  ("scene", "lasttime"), ("mark", "pic1"),
- ("say", "f101", H, "Last time, a tadpole grew into a frog. It does not look like the adult, but a chick does. Then Momo found something strange in the grass!", {"pre": .4, "post": 1.0, "gap": .7, "kw": [["pic2", "tadpole"], ["pic3", "chick"]]}),
+ ("say", "f101", H, "Last time, a tadpole grew into a frog. It does not look like the adult, but a chick does. Then Momo found something strange in the grass!", {"pre": .4, "post": 1.0, "gap": .7, "kw": [["pic2", "it"], ["pic3", "then"]]}),
  # ---- 2 · the grassy corner of the garden; the little grasshopper; the game and the hidden praying mantis
  ("scene", "place"), ("mark", "hop"), ("wait", 2.0),
  ("scene", "game"),

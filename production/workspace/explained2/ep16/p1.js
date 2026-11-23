@@ -74,10 +74,10 @@ SC.pond = (t, s) => VP16(t, {}, camPond(t)) + bd("pip", 330, 1076, 500, t, { in:
 
 /* 7 · [LOOK CLOSER] the frog eggs in their jelly (art16.js eggsArt; JELLY-LIKE COVERING pops, lib.js o.at); the book's strip (Heart reads it).
    Two faces peek in: Basil (the speaker, auto) at the left; Momo at the right until her guess is answered (thinking, then oops: OUTCOMES) */
-SC.lceggs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const p = camPt(camPond(SCN.pond.t1), [980, 740]), tm = s.t0 + 1.2, tmo = LE("e605b") + 1.4;
+SC.lceggs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const p = camPt(camPond(SCN.pond.t1), [980, 740]), tm = s.t0 + 1.2, tmo = LT("e605b") + 3.9;
   const momoFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: eggsArt, bgc: "#DDF2E8", set: (tt) => VP16(tt, {}, camPond(SCN.pond.t1)), verdict: [`EGGS KEPT SAFE AND WET`, GOODC], tv: MK("v_eggs"), peekH: 470,
-    peekEv: [[LE("e607p") + .1, "pip", "thinking"], [MK("v_eggs") + .1, "basil", "cheer"]],
+    peekEv: [[LE("e607p") + .1, "pip", "thinking"], [W("e608", "protects") - .1, "pip", "sit"], [MK("v_eggs") + .1, "basil", "cheer"]],
     over: (tt) => momoFace + strip15(tt, "e608", "Frog eggs have a jelly-like covering. The covering protects the eggs from being eaten by other animals. It also keeps the eggs from drying out.", 150, { keys: ["jelly-like", "covering", "protects", "eaten", "drying"], maxW: 1500, size: 46, t1: LE("e608") + .8 }) + finePrint(tt, s.t0 + 1.0, EGG_RULE, 1480, 1044) }); };
 
 /* 8 · Be a frog egg! The pill; the buddies wave the viewer off; ONE glide down to the water and under the surface (a soft blue-green wipe);
@@ -136,7 +136,7 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [700, 300] };
     + bd("basil", 1740, 1076, 520, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "sit"], [LE(d) + .1, "pointing"]], look: -3 })
     + bd("momo", 1500, 1046, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "sit"]] })
     + bd("pip", 320, 1076, 520, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("e901p") + .1, "pointing"], [tX - .3, "sit"], [r0 - .2, "worried"], [bell + .35, "sit"], [MK("tegg") + .1, "cheer"], [MK("tegg") + 2.2, "sit"]], achieved: t >= MK("tegg"), jump: [[bell + .02, 30]], nohop: true })
-    + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1300, 700, "+1", "arms crossed") + melt(t, s, "frogans", .4) + HUD(t); };
+    + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + melt(t, s, "frogans", .4) + HUD(t); };
 /* 10 · the board OUR FROG'S LIFE CYCLE at its HOME (centre-right by the pond, about 55% of the frame high): the tiles land (tyoung, tadult),
    the last arrow lights from the frog back to the eggs (tback). Basil points at each; Momo cheers as the loop closes. The tree frog on the rim
    of the flower pot by the pond */
@@ -158,7 +158,7 @@ SC.hen = (t, s) => VG16(t, { hens: HENS(t), walk: t < MK("henIn") + 2.4, mantisA
   + smallPrint(t, MK("henIn"), HEN_RULE) + melt(t, s, "mark1", .45) + HUD(t);
 /* [LOOK CLOSER] the chick beside the hen (art16.js chickArt): the parts on BOTH birds, both peck, CHICK pops; the 2x2. Faces: the speaker
    (auto, left); Basil at the right until his colour rule is answered (thinking, then oops: OUTCOMES at Pip's line) */
-SC.lcchick = (t, s) => { window._BUBAT = { '*': [1360, 250] }; const p = camPt(camHen(SCN.hen.t1), [980, 860]), tm = s.t0 + 1.2, tmo = LE("e1105p") + 1.6;
+SC.lcchick = (t, s) => { window._BUBAT = { '*': [1360, 250] }; const p = camPt(camHen(SCN.hen.t1), [980, 860]), tm = s.t0 + 1.2, tmo = LT("e1105p") + 3.9;
   const basFace = t >= tm - .05 && t < tmo + .3 ? bd("basil", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: chickArt, bgc: "#FFF3DC", set: (tt) => VG16(tt, { hens: HENS(SCN.hen.t1), mantisAt: false }, camHen(SCN.hen.t1)), verdict: [`LOOKS LIKE THE ADULT`, LIKEC], tv: MK("v_chick"), peekH: 470,
     peekEv: [[MK("kw_chick") + .1, "momo", "cheer"]], over: (tt) => basFace }); };
@@ -169,9 +169,9 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "e1202", sayId: "e1201", who: "pip", 
    never the intro leaf); Momo's fun fact: the foam nest on a leaf over the water (ff_foam), the tadpoles dropping into the pond (ff_drop)) */
 SC.final = (t, s) => { const L = "e1301"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "e1302", tq = W(L, "it") - .1, f = FROGAT.liz, tf = W(L, "frog");
-  return bd("basil", 200, 1076, 380, t, { in: s.t0 + 1.4, poses: [[s.t0 + 1.4, "sit"], [tf, "surprised"], [tf + 1.6, "pointing"], [LT("e1303") - .3, "sit"], [LT("e1304"), "waving"]], wave: true }) + lizReveal(t, s, L, VP16(t, { frogAt: f }), f[0] + 4, f[1] - 18, tq, "It was on the garden tap, beside the pond!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 700, qy: 840, tx: 700, ty: 965, tell: "e1304",
-    fact: { id: "e1303", at: [1270, 470], w: 860, h: 470, items: [["ff_foam", "a ball of foam on a leaf", ffFoam], ["ff_drop", "tadpoles drop into the pond", ffDrop]], cols: ["#5B6BD6", "#2FA35A"], sx: 1490, sy: 830, poses: [[MK("ff_in") - .4, "surprised"], [LT("e1303") - .2, "sit"]] } })
-    + smallPrint(t, s.t0 + .5, FROG_RULE); };
+  return lizReveal(t, s, L, VP16(t, { frogAt: f }), f[0] + 4, f[1] - 18, tq, "It was on the garden tap, beside the pond!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 720, tx: 760, ty: 975, tell: "e1304",
+    fact: { id: "e1303", at: [1270, 440], w: 860, h: 460, items: [["ff_foam", "a ball of foam", ffFoam], ["ff_drop", "tadpoles drop in", ffDrop]], cols: ["#5B6BD6", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
+    + bd("basil", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tf, "surprised"], [tf + 1.6, "pointing"], [LT("e1303") - .3, "sit"], [LT("e1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, FROG_RULE); };
 
 /* 13 · the cliffhanger: on the grassy edge a little green grasshopper with NO wings hops onto a blade of grass (hop); beside it on another blade,
    a pale, see-through, EMPTY grasshopper (skin), a ? pops; the camera pushes along the grass from one to the other; PART 2 slams in */
