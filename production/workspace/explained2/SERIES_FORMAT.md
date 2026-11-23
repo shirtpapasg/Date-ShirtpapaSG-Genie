@@ -243,6 +243,10 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - **The hidden animal moves (teacher, 2026-11-22: in EP12 and EP13 it "stays at the same spot… makes things easy to guess and
     lost the fun, giving a sloppy vibe").** It hides in a different, fair place in each scene where it could really be (another
     branch, a ledge, a leaf, half behind a curtain), small but findable; scripts and SCENES_TODO list its spot per scene.
+    **Never at the spot where it was introduced (teacher, 2026-11-23: "the weaver ant and other animals should appear at other
+    locations, not the original place where it was first introduced").** The push-in at the game shows the children where it is
+    at that moment; after that it is never shown there again, and never twice in the same spot. The reveal says where it was in
+    the scene being revealed, not the intro spot.
   - **The reveal ends with a surprising fun fact (teacher, 2026-11-22: "instead of finding this animal and tell someone at home
     (about what?)… It must be a fun fact which most children are shocked to find out! Then it makes sense to share. Just finding an
     animal that is not related to the episode is sloppy script writing").** The hidden animal is chosen for a link to the episode's

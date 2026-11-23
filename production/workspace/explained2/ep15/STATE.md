@@ -90,3 +90,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** (
 - Fun facts checked from established natural history (no web access here): snails' radula with thousands of teeth; weaver ant larvae
   give the silk for the nest. Seed bank: Singapore's first, 2019, Singapore Botanic Gardens (definitions file + brief).
 - School Lab 4.2 stays out until its bench stops numbering the stages (the brief's warning).
+
+## Teacher note 23 Nov (for the fix round)
+The hidden animals (snail P1, weaver ant P2) must never appear again at the spot where the game push-in introduced them, and never twice in the same spot (SERIES_FORMAT 4). Check every scene's spot.
