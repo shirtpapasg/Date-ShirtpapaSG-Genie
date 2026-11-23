@@ -11,6 +11,9 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** �
 · Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md) · Stage 3 (render, checks, upload: Opus).
 
 ## For the teacher to listen to (before Stage 3)
+- **DONE 23 Nov:** the teacher said "OK to all" and chose **cicada = sih-KAY-duh** (Kokoro's own). The sg_pron entries were removed; k301a, k301b,
+  k1202 and k1203b re-recorded; tl_p1/2 rebuilt (Part 1 5:28.7, Part 2 5:33.6). The honeybee line ("more than a thousand") stays: the
+  teacher OK'd the clip that says it, and a queen at her peak lays about 1,500 to 2,000 a day.
 - **`../pron_clips/Heart_ep18_new_words.m4a`** (68 s, 11 sentences, 1.2 s apart): 1 similarities, differences · 2 observable
   characteristics · 3 "A little cicada is hiding..." AFTER the fix ("sih-KAH-duh") · 4 the same BEFORE (Kokoro's own American
   "sih-KAY-duh") · 5 Basil's cicada fun fact (after the fix; "seventeen"; "live underground" = "leev") · 6 honeybee · 7 Pip: a queen

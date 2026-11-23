@@ -8,8 +8,8 @@ Buddies = the Character Voice Kit voices exactly as in characters/sprites/talk_v
 Chant  = EP7's call and response (CHANT in script.py): each buddy says each call and answer, stretched to one length so the three land
          together; the call on the bar line, the answer at ANS_AT of the bar; Basil leads the call (a little louder).
 sg_pron: every Heart and buddy text goes through ../sg_pron.py (needs_fix -> speak_line) (Sungei Buloh, Semakau, "live", "fragile",
-         "mantis", "prolegs", "Aedes", "cicada"). EP18: "cicada(s)" = "sih-KAH-duh" (k301a, k301b, k1202, k1203b; Kokoro's own is the
-         American "sih-KAY-duh"; new entry 23 Nov, test clip ../pron_clips/Heart_ep18_new_words.m4a, waiting for the teacher's listen);
+         "mantis", "prolegs", "Aedes", "cicada"). EP18: "cicada(s)" stays Kokoro's own "sih-KAY-duh" (the teacher's choice, 23 Nov, after the
+         clip ../pron_clips/Heart_ep18_new_words.m4a);
          Basil's fun fact k1203b "some cicada nymphs live underground" ("live" = "leev", the teacher's clip M).
 Respelling: script opts "pron" {text: spoken as} re-spells words for ONE line (the caption keeps the script's words). EP18: none
          (LARVAE is empty: "larvae" / "pupae" are Kokoro's own, as EP17). Kokoro's own, checked in the same clip: similarities,

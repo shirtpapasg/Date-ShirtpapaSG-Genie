@@ -33,10 +33,7 @@ FIX = {
     # "Ay-ee-deez" came out "EYE-ee-deez"); the usual sound is "ay-EE-deez al-boh-PIK-tus" / "ay-EE-deez ee-JIP-tie".
     "Aedes albopictus": {"ph": "eɪˈiːdiːz ˌælboʊpˈɪktəs"},
     "Aedes aegypti": {"ph": "eɪˈiːdiːz iːdʒˈɪptaɪ"},
-    # P3 EP18 Stage 1 (Opus, 2026-11-23; WAITING FOR THE TEACHER'S LISTEN, clip pron_clips/Heart_ep18_new_words.m4a): Kokoro's own
-    # "cicada" is the American "sᵻkˈeɪdə" ("sih-KAY-duh"); the script (and British / Singapore usage) wants "sih-KAH-duh".
-    "cicada": {"ph": "sɪkˈɑːdə"},
-    "cicadas": {"ph": "sɪkˈɑːdəz"},
+    # "cicada": NO entry. The teacher listened (23 Nov 2026, EP18 clip) and chose Kokoro's own "sih-KAY-duh" over "sih-KAH-duh".
 }
 _tok = None
 def _tokz():
