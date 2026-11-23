@@ -2,9 +2,9 @@
 P3 EP18 "Frog vs mosquito: same or different? How to compare" (Ch 5, Life Cycles of Animals, pp. 90-98; the Cycles theme closes). Part 1
 "Frog vs Mosquito: SAME or DIFFERENT? Count the Stages!" (EP17's dare answered: different; SIMILARITIES and DIFFERENCES; be a raindrop:
 three stages and four; OBSERVABLE CHARACTERISTICS; HOLD ON! frog and grasshopper "exactly the same"; the young beside their parents; the
-cicada; the cliffhanger: the hen on her eggs) **P1LEN**. Part 2 "Which Came First, the Chicken or the EGG?" (Round 1: neither; be an egg;
+cicada; the cliffhanger: the hen on her eggs) **5:28.2**. Part 2 "Which Came First, the Chicken or the EGG?" (Round 1: neither; be an egg;
 REPEATED, NO FIRST OR LAST STAGE; the Showdown: Momo's mosquito and mealworm-beetle homework; PHYSICAL FEATURES; the butterfly lays an
-egg, 5.17 and the theme's three questions; the chant; the honeybee; the dare into EP19: a magnet, a steel pin and a copper wire) **P2LEN**.
+egg, 5.17 and the theme's three questions; the chant; the honeybee; the dare into EP19: a magnet, a steel pin and a copper wire) **5:33.6**.
 The script: `../p3_ep18_script.md` (version 1, Opus, 23 Nov 2026). The source of every spoken word: `script.py`.
 
 Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â· Stage 2 (drawing, sound, full render, self-check: Fable)
@@ -50,15 +50,18 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   every pose WITH ITS REASON (few: listening is the default; about 30 pose moments a part, most wired), the hidden animal's spot per scene,
   the void deck and the garden with ambience and foley on the marks, "Changed from the script's tables"), `upload.json`.
 - **Script changes at Stage 1** (script.py and ../p3_ep18_script.md): the LARVAE respelling ("larvee", "pew-pee") is now empty: Kokoro's
-  own "larvae" / "pupae" are right (EP17's clip; the respelling stressed both halves). No line words changed; no cut beyond section 6's
-  list (CUTS_NOTE).
+  own "larvae" / "pupae" are right (EP17's clip; the respelling stressed both halves). Part 2 was 5:37.5 with section 6's cuts in use, so three more
+  non-teaching trims: Momo's "My homework!" (d802m), the theme board's hold 1.5 s -> .8 s (both section 6's list, in order), and the
+  first half of Basil's bee tip "Bees fly from flower to flower." (d201b, now "Look for a fuzzy, striped body!": game chatter, the twin of
+  Part 1's listed tip cut). Part 1 needed no cut.
 - **Pronunciation**: "cicada(s)" = "sih-KAH-duh" through ../sg_pron.py (new entries; ../PRONUNCIATION.md row "waiting for the teacher's
   listen"). Left to Kokoro (same clip): similarities, differences, observable characteristics, honeybee, mealworm, beetle, seventeen,
   repeated, physical features, wrigglers, larvae.
 - **Voices** (`voice/`, `make_voice.py`, log `voice.log`): every line recorded (Heart: Kokoro af_heart via sg_pron; buddies: the
   Character Voice Kit, 12% slower), aligned (pocketsphinx; new dictionary words in EXTRA: beetle's, flower-pot, pupae, wriggler(s),
-  wriggles). PROPORTIONAL_NOTE Re-running make_voice.py keeps finished files and records only changed lines.
-- **Timelines:** `python3 build_tl.py 1|2` -> tl_p1/2.json/js: **Part 1 P1LEN, Part 2 P2LEN** (target 5:15-5:35). `node dump_cues.js 1|2`
+  wriggles). Only the two one-word read-along lines hk_similarities and hk_differences were spread by word
+  length (PROPORTIONAL: one word each, so exact enough). Re-running make_voice.py keeps finished files and records only changed lines.
+- **Timelines:** `python3 build_tl.py 1|2` -> tl_p1/2.json/js: **Part 1 5:28.2, Part 2 5:33.6** (target 5:15-5:35). `node dump_cues.js 1|2`
   -> cues. A sweep rendering every 0.25 s of both parts in the page: no errors, no NaN.
 - **Scores:** Part 1 Round 1 1 : 0, HOLD ON! 2 : 0; Part 2 Round 1 1 : 1, Showdown 3 : 1.
 - **upload.json:** both parts public, Made for Kids (the uploader sets it), playlists PLb8LpPqxQI4E and PLPfEuT7l4KjI right after
@@ -88,7 +91,8 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 
 ## Open points
 - The cicada respelling waits for the teacher's listen (above).
-- ROOM_NOTE
+- Part 1 (5:28.2) has room for script section 6's first line to come back (`k805b`, Basil: "Oops! I compared their sizes. Next time, I
+  will count the stages, like Pip.", about +5 s): good modelling of fixing his own reason; one line to record.
 - The theme board's answer chips (C1 to C3) are on screen only; the teacher may want them spoken (script section 12, point 4).
 - 5.13 and 5.17a are not read in full (length): 5.13 is shown by the young look-closer, 5.17a is Momo's own words.
 - Pip has no back-view painting yet (Part 1's cliff asks for back views of Momo and Pip watching the nest).

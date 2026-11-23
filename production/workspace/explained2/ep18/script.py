@@ -210,7 +210,7 @@ SEQ2 = [
  ("scene", "place"), ("mark", "henIn"), ("wait", 2.0),
  ("scene", "game"),
  ("say", "d201a", H, "A little honeybee is hiding in this video. Can you spot it?", {"pre": .4, "post": .2}),
- ("say", "d201b", B, "Bees fly from flower to flower. Look for a fuzzy, striped body!", {"pre": .3, "post": .2}),
+ ("say", "d201b", B, "Look for a fuzzy, striped body!", {"pre": .3, "post": .2}),
  ("say", "d201c", H, "Lock in first with your fingers. One finger for every point.", {"pre": .3, "post": .4}),
  # ---- 3 · today's goals (Basil reads)
  ("scene", "goals"), ("say", "d301", B, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "d302", B, "No first or last stage.", {"pre": .3, "post": .3}),
