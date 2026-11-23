@@ -195,13 +195,22 @@ const hopCard = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill
 // LOOK CLOSER · the little grasshopper beside an adult: two blades of grass at the same angle; the parts joined to BOTH (six legs teal,
 // two feelers orange, big back legs violet, each pulsing as named); wings: the adult's long wings (green), a dashed outline on the young's
 // bare back (no wings yet); NYMPH pops on the young
+// a grass blade as a filled, tapering shape along joined quadratic segments [[x0, y0, cx, cy, x1, y1], ...] (base first, tip last), wb = width at
+// the base; a pale midrib. Used where a blade must be seen growing from the ground
+function grassLeaf16(segs, wb, fill = "#6FBF4E", line = "#3F8A3A") { const pts = []; const N = 14;
+  segs.forEach((b, j) => { for (let i = j ? 1 : 0; i <= N; i++) { const u = i / N, v = 1 - u, x = v * v * b[0] + 2 * v * u * b[2] + u * u * b[4], y = v * v * b[1] + 2 * v * u * b[3] + u * u * b[5],
+    dx = 2 * v * (b[2] - b[0]) + 2 * u * (b[4] - b[2]), dy = 2 * v * (b[3] - b[1]) + 2 * u * (b[5] - b[3]), L = Math.hypot(dx, dy) || 1; pts.push([x, y, -dy / L, dx / L]); } });
+  const n = pts.length - 1, wd = (i) => { const f = i / n; return wb / 2 * (f < .82 ? 1 - .25 * f / .82 : .75 * (1 - f) / .18); };
+  const A = pts.map((p, i) => `${n2(p[0] + p[2] * wd(i))} ${n2(p[1] + p[3] * wd(i))}`), B = pts.map((p, i) => `${n2(p[0] - p[2] * wd(i))} ${n2(p[1] - p[3] * wd(i))}`).reverse();
+  return `<path d="M${A.join(" L")} L${B.join(" L")}z" fill="${fill}" stroke="${line}" stroke-width="4" stroke-linejoin="round"/><path d="M${pts.slice(0, -2).map((p) => `${n2(p[0])} ${n2(p[1])}`).join(" L")}" stroke="#9FD87A" stroke-width="5" fill="none" opacity=".7"/>`; }
 const HOPC = { legs: ["#D7F5EE", "#0F766E"], feelers: ["#FFE2C0", "#B4531A"], jump: ["#EDE4FF", "#6D28D9"], wings: ["#DCF5DF", "#1F8A4C"] };
 function nymphArt(t) { const m = MK, tP = m("pairin"), tL = m("legs"), tF = m("feelers"), tJ = m("jump"), tW = m("wings"), tK = m("kw_nymph"), s0 = SCN.lcnymph.t0 + 1;
   const c = camSeq(t, [s0, tP, tL, tF, tJ, tW, tK, tK + 2.6], [[0, 60, .92], [0, 0, 1], [0, 0, 1.04], [60, -100, 1.04], [-60, 0, 1.02], [0, -60, 1.06], [-380, 20, 1.2], [0, 0, 1]]);
   let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#E3F4FF"/><rect x="-1300" y="230" width="2600" height="600" fill="#A6DE7E"/><path d="M-1300 230 H1300" stroke="#7FC566" stroke-width="6"/>`;
-  // two blades at the same angle (as a floor under each)
+  // two blades at the same angle (as a floor under each). Each blade GROWS out of the ground at its left end and tapers to its tip
+  // (SERIES_FORMAT 23 Nov: no leaf floats in mid-air); the stretch the grasshoppers stand on is unchanged
   const Y = { x: -420, y: 120, k: 1.9 }, A = { x: 360, y: 120, k: 2.35 };
-  w += [Y, A].map((b) => `<path d="M${b.x - 330} ${b.y + 40} Q${b.x} ${b.y - 20} ${b.x + 340} ${b.y + 10}" stroke="#6FBF4E" stroke-width="46" fill="none" stroke-linecap="round"/><path d="M${b.x - 330} ${b.y + 40} Q${b.x} ${b.y - 20} ${b.x + 340} ${b.y + 10}" stroke="#3F8A3A" stroke-width="4" fill="none" opacity=".5"/>`).join("");
+  w += [Y, A].map((b) => grassLeaf16([[b.x - 470, 250, b.x - 440, b.y + 60, b.x - 330, b.y + 40], [b.x - 330, b.y + 40, b.x, b.y - 20, b.x + 340, b.y + 10]], 62)).join("");
   const lit = (k, t0) => ({ [k]: t >= t0 ? .4 + .6 * pulse(t, t0, .05, .9) : 0 }), L = { ...lit("legs", tL), ...lit("feelers", tF), ...lit("jump", tJ), ...lit("wings", tW) };
   w += TF(Y.x, Y.y, Y.k, hopper16(t, { lit: L, ph: 1 })) + TF(A.x, A.y, A.k, hopper16(t, { adult: true, lit: L, ph: 2.5 }));
   w += TF(Y.x + 170, Y.y + 120, 1, tpill(0, 0, "the little one", 40, "#fff", P.ink, { w: 700 })) + TF(A.x, A.y + 120, 1, tpill(0, 0, "an adult", 40, "#fff", P.ink, { w: 700 }));
