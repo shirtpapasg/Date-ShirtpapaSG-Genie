@@ -1,4 +1,4 @@
-// sound_cues.js: EP17 STAGE 1 sound plan (runs in the page: W, LT, LE, MK, SCN, KW, TL ...). dump_cues.js writes window.CUES to cues_p<N>.json;
+// sound_cues.js: EP17 sound plan (Stage 1 rituals and beds + Stage 2 places and foley, 23 Nov) (runs in the page: W, LT, LE, MK, SCN, KW, TL ...). dump_cues.js writes window.CUES to cues_p<N>.json;
 // song.js plays it. As in EP15 / EP16, every sound hangs on the SAME mark the picture uses (script.py lists them). Stage 1 is GENERIC and
 // driven by the timeline: the rituals (round cards, lock-in ticks / bell / stamp, picks, Mark Sentences, key-word chimes, verdict stamps,
 // journeys, the chant, the score hand, the reveal, the read-along, the "Now you know!" blast) and the beds (groove for the game, calm for
@@ -45,6 +45,63 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   if (S.liz) { E(S.liz.t0 + .1, "whoosh"); E(W(PART === 1 ? "a1302" : "b1102", HIDDEN[0]) + .2, "sparkle"); Object.keys(M_).filter((k) => /^ff_/.test(k)).forEach((k, i) => E(M_[k] - .05, "pop", i % 3)); BD(S.liz.t0, S.liz.t1); }
   if (S.cliff && has("a1402")) { E(LT("a1402") - .2, "lowdrum"); E(W("a1402", "part") - .1, "slam", 1); }
   if (mk("dareIn") !== undefined) { [0, .25].forEach((d) => E(mk("dareIn") + .5 + d, "slide")); E(W("b1401", "lock") - .1, "sting"); }
+  // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): the community garden (R.garden: birds, far children at the void deck, leaves) on
+  // the lime-plant side and at the far corner after rain (drips from the tap and the leaves, plips and rings on the pail); the HDB corridor and
+  // the void deck (R.room: a soft hum of the block, birds far off, a passing car below; a fan, a lift's ding). Foley ON the marks. No ambience
+  // one-shot under a countdown (only the ticks keep time).
+  { const P1 = ["cold", "back", "title", "answer1", "lime", "lclegs", "waitw", "pullout", "larva", "holdon", "lcpupa", "ring", "cliff"], P2 = ["place", "lcwriggler", "waitw", "pullout", "mosqans", "show", "fix"], LIST = PART === 1 ? P1 : P2, out = [];
+    for (const sc of TL.scenes) if (LIST.includes(sc.name)) { const last = out[out.length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else out.push([sc.t0, sc.t1]); }
+    R.garden.push(...out.filter(([a, b]) => b - a > 1)); R.birds = R.birds.filter(([a, b]) => !out.some(([x, y]) => a >= x - .1 && b <= y + .1));
+    const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus }), clk = (t, i = 0) => E(t, "pop", i % 3);
+    if (PART === 1) {
+      // dawn at the lime plant: a bulbul's call, the caterpillar's soft steady munch (munch), a leaf rustle
+      E(.4, "morning"); E(3.2, "mynah");
+      for (const n of ["cold", "back", "title"]) if (S[n]) for (let t = Math.max(S[n].t0, mk("munch")), i = 0; t < S[n].t1 - .2; t += .55, i++) sfx(t, "ep05_munch.wav", .07 + .02 * (i % 2), "amb");
+      sfx(1.0, "ep05_leaf.wav", .1, "amb");
+      // the answer: a soft slide as the butterfly card comes in (pair); the worm idea's bubble; the look-closer: a tick per leg pair, Pip's count,
+      // a click-click of the tiny hooks, the walk
+      E(mk("pair"), "slide"); if (S.lime) { E(W("a701m", "worm") - .2, "softpop", 1); for (let t = S.lime.t0 + .4; t < S.lime.t1 - .5; t += 1.6) sfx(t, "ep05_leaf.wav", .05, "amb"); }
+      [0, .35, .7].forEach((d, i) => E(mk("front") + .1 + d, "tok")); ["one", "two", "three"].forEach((w, i) => clk(W("a703p", w), i)); [0, 1, 2, 3, 4].forEach((i) => clk(W("a705", "prolegs") + i * .12, i));
+      E(mk("hooks"), "click"); E(mk("hooks") + .18, "click"); E(mk("grip"), "click"); E(mk("grip") + .2, "click"); E(mk("grip") + .5, "rustle");
+      // the journey: a tiny crack as you hatch, munching, a tight creak, the moult's stretch, the last soft split, a hush as the case closes
+      E(mk("jhatch"), "crack"); E(mk("jhatch") + .3, "crack", 1); E(mk("jhatch") + .5, "rise", 1);
+      for (let k = 0; k < 6; k++) sfx(mk("jmunch") + k * .55, "ep05_munch.wav", .14, "wonder"); E(mk("jtight"), "creak"); E(mk("jtight") + 1, "stretch"); E(mk("jbig"), "rise", 2);
+      E(mk("jhang") + .2, "stretch"); E(mk("jsplit"), "crack", 1); E(mk("jsplit") + .4, "creak"); E(mk("jpupa"), "hum"); E(mk("jpupa") + .2, "chime2", 0);
+      // HOLD ON!: Pip's paper on the easel; the glow inside his drawing
+      E(mk("pupastill") - .1, "paper"); E(W("a1004b", "inside") - .1, "softpop", 3);
+      // the pupa look-closer: a soft pulse in the window, a crackle as the case splits, an unfolding rustle as the wings spread, a flutter on fly
+      E(mk("window") - .2, "window"); E(mk("case"), "pop", 0); for (let t = mk("form"), i = 0; t < mk("dark") - .4; t += 1.25, i++) E(t, "heartbeat"); E(mk("dark") + .2, "hum");
+      E(mk("split"), "crack"); E(mk("split") + .25, "crack", 1); E(mk("out") + .2, "rustle"); E(mk("wings"), "cloth"); E(mk("wings") + 1.6, "cloth"); E(mk("wings") + 3.2, "cloth"); E(mk("fly"), "flutter"); E(mk("fly") + .5, "flutter");
+      if (S.lcpupa) E(W("a1103m", "cake") - .1, "softpop", 2);
+      // the board's tiles land; the last arrow lights and the loop runs round
+      ["ltegg", "ltlarva", "ltpupa", "ltadult"].forEach((k, i) => E(mk(k) + (i ? 0 : .3), "rise", i)); E(mk("ltback"), "whoosh"); E(mk("ltback") + .2, "sparkle");
+      // the moth's reveal: a soft wing flutter on its name; the cliffhanger: drips, a plip as a drop falls in (pail), tiny plinks as they wriggle
+      E(W("a1302", "moth") + .3, "flutter"); E(W("a301a", "moth") + .2, "flutter");
+      if (S.cliff) { for (let t = S.cliff.t0 + .3, i = 0; t < S.cliff.t1 - .3; t += 1.4, i++) E(t, "drip", i); E(mk("pail"), "plip"); E(mk("pail") + 2.8, "plip"); E(mk("wrig"), "bubble", 1); E(mk("wrig") + .5, "bubble", 2); E(mk("wrig") + .2, "curious"); }
+    } else {
+      // after rain at the far corner: drips from the tap and the leaves, a plip on rain, a far bus
+      for (const n of ["place", "mosqans", "show", "fix", "pullout"]) if (S[n]) for (let t = S[n].t0 + .4, i = 0; t < S[n].t1 - .3; t += 1.5 + .4 * (i % 3), i++) E(t, "drip", i);
+      E(mk("rain"), "plip"); E(mk("rain") + 5.5, "plip"); sfx(S.place.t0 + .3, "pass_by.wav", .05, "amb"); E(W("b201a", "dragonfly") + .2, "buzz");
+      // the wrigglers: plinks as they touch the surface (hang, up), a soft swish as they dive, a click on the tube
+      E(mk("hang"), "plip"); E(mk("tube"), "pop", 1); E(mk("up") - 2.4, "whoosh"); E(mk("up"), "plip"); E(mk("up") + .4, "bubble", 1); if (S.lcwriggler) sfx(S.lcwriggler.t0 + 1, "underwater.wav", .04, "amb");
+      // the journey: a pop as you hatch, the underwater hush, tiny nibbles, a squeeze and the old skin, a tumble, the split, the new wings' soft hum
+      if (S.shrink) for (let t = mk("jhatch"); t < mk("jfly") - .5; t += 5) sfx(t, "underwater.wav", .07, "wonder");
+      E(mk("jhatch"), "pop", 2); E(mk("jhatch") + .1, "bubble", 3); for (let k = 0; k < 6; k++) sfx(mk("jeat") + .3 + k * .45, "ep08_nibble.wav", .1, "wonder"); E(mk("jbig"), "creak"); E(mk("jbig") + .9, "stretch");
+      E(mk("jpupa"), "boop", 1); E(mk("jpupa") + 2, "bubble", 2); E(mk("jsplit"), "crack", 1); E(mk("jsplit") + .3, "rise", 2); E(mk("jfly"), "flutter"); E(mk("jfly") + .6, "flutter"); E(mk("jfly") + .3, "chime2", 0);
+      // the answer: a plip as a pupa tumbles; the Showdown: paper on each line; the fix: a strike, a green scribble
+      E(mk("ansglow") + .8, "plip"); ["l1", "l2", "l3"].forEach((k) => E(mk(k), "paper")); E(mk("strike"), "scribble"); E(mk("rewrite"), "scribble"); E(mk("rewrite") + .3, "chime2", 0);
+      if (S.fix) E(LT("b807m") - .3, "softpop", 2);
+      // the HDB corridor: the block's hum and birds (R.room), a lift's far ding, Pip's thought bubble; the plate: a splash as it is tipped, a soft
+      // "off" tone per dimming tile, a pop per life picture
+      for (const n of ["plate", "lcplate"]) if (S[n]) R.room.push([S[n].t0, S[n].t1]); if (S.plate) { E(S.plate.t0 + 1.4, "lift"); E(W("b902p", "surely") - .2, "softpop", 1); }
+      E(mk("water"), "pop", 0); E(mk("wrigglers"), "bubble", 1); E(mk("tip") + .7, "sfx", { f: "splash.wav", g: .14, bus: "game" }); [0, 1, 2, 3].forEach((i) => E(mk("dim") + i * .9, "boop", i));
+      E(W("b907m", "plates") - .2, "pop", 0); E(mk("pail2"), "pop", 1); E(mk("vase"), "pop", 2);
+      // the dragonfly's reveal: its wings' soft buzz; the nymph's gulp; the void deck (R.room) with a pigeon's coo
+      E(W("b1102", "dragonfly") + .3, "buzz"); E(mk("ff_gobble") + .45, "sfx", { f: "ep03_gulp.wav", g: .14, bus: "game" });
+      if (S.dare) { R.room.push([S.dare.t0, S.dare.t1]); E(S.dare.t0 + 2.5, "hoo"); }
+    } }
+  // no ambience one-shots under a countdown (only the ticks keep time)
+  { const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["sfx", "drip", "bubble", "plip", "buzz", "flutter"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];

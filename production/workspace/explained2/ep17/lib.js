@@ -319,7 +319,7 @@ const KWHOLD = 2.0;
 // in fix, beside the strip), STAGNANT WATER (inside lcplate on Heart's "stagnant"). All o.at (no dimming), 2.0 s, then they fly to the shelf.
 // Move an o.at if the drawing needs it (Stage 2).
 const KW = (PART === 1 ? [["PROLEGS", "kw_prolegs", 1, null, { at: [1440, 300], size: 110 }], ["LARVA", "kw_larva", 1, null, { at: [1440, 300], size: 110 }], ["PUPA", "kw_pupa", 1, null, { at: [1440, 300], size: 110 }]]
-  : [["WRIGGLER", "kw_wriggler", 1, null, { at: [1420, 300], size: 110 }], ["DENGUE", "kw_dengue", 1, null, { at: [1440, 300], size: 110 }], ["STAGNANT WATER", "kw_stagnant_water", 1, null, { at: [1300, 300], size: 92 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+  : [["WRIGGLER", "kw_wriggler", 1, null, { at: [1420, 300], size: 110 }], ["DENGUE", "kw_dengue", 1, null, { at: [1440, 300], size: 110 }], ["STAGNANT WATER", "kw_stagnant_water", 1, null, { at: [1250, 480], size: 92 }]]).map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, r0card: 1, r1card: 1, r2card: 1, listcard: 1, showcard: 1, count: 1, shrink: 1, recap: 1, nyk: 1, final: 1, liz: 1, lclegs: 1, lcpupa: 1, lcwriggler: 1, lcplate: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;

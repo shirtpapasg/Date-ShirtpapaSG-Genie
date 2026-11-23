@@ -171,7 +171,7 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "a1203", sayId: "a1202", who: "momo",
    REVEAL spot, never the intro pillar), Pip's fun-fact panel (a silk cocoon with a pupa inside; silk), the read-along */
 SC.final = (t, s) => { const L = "a1301"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "a1302", tq = W(L, "it") - .1, a = MOTHAT.liz, tm = W(L, "moth");
-  return lizReveal(t, s, L, VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, mothAt: a, mothOpen: ss(tm + .2, tm + .6, t) * (1 - ss(tm + 1.2, tm + 1.6, t)) }), a[0], a[1], tq, "It was on the side of the lime plant's pot!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 720, tx: 760, ty: 975, tell: "a1304",
+  return lizReveal(t, s, L, VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, mothAt: a, mothOpen: ss(tm + .2, tm + .6, t) * (1 - ss(tm + 1.2, tm + 1.6, t)) }), a[0], a[1], tq, "It was on the side of the lime plant's pot!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 770, tx: 760, ty: 975, tell: "a1304",
     fact: { id: "a1303", at: [1270, 430], w: 880, h: 460, items: [["ff_cocoon", "a silk cocoon", ffCocoon], ["ff_silk", "silk", ffSilk]], cols: ["#5B6BD6", "#E36A12"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [LT("a1303"), "sit"]] } })
     + bd("basil", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tm + .1, "pointing"], [LT("a1303") - .3, "sit"], [LT("a1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, MOTH_RULE); };
 

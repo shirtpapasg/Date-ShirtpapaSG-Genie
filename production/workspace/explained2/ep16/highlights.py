@@ -6,9 +6,9 @@ S = [(1, 4.5, "P1 0:04  Cold open: the garden pond at dawn, the v2 cast in propo
      (1, 103.0, "P1 1:43  Look closer: one egg in its jelly, JELLY-LIKE COVERING pops; the book strip"),
      (1, 157.5, "P1 2:37  The answer: Momo confident (right), Pip and Basil shy (wrong)"),
      (1, 190.0, "P1 3:10  HOLD ON! countdown: Pip's row big in the ring, Pip worried, YOU cross arms"),
-     (1, 253.5, "P1 4:13  Chick + hen look alike, tadpole + frog do not: the verdict"),
+     (1, 255.0, "P1 4:15  Chick + hen look alike, tadpole + frog do not: the verdict"),
      (1, 286.0, "P1 4:46  The tree frog on the tap; Momo's fun fact: its foam nest"),
-     (2, 78.0, "P2 1:18  Look closer: the adult's long wings, NO wings yet on the nymph"),
+     (2, 78.5, "P2 1:18  Look closer: the adult's long wings, NO wings yet on the nymph"),
      (2, 134.5, "P2 2:14  Why the skin comes off: the hard outer skin goes too tight"),
      (2, 216.0, "P2 3:36  Showdown countdown: Pip's homework big, Pip worried"),
      (2, 240.5, "P2 4:00  The egg case: two neat rows of eggs; EGG CASE")]

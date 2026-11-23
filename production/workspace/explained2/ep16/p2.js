@@ -45,7 +45,7 @@ SC.r1 = (t, s) => lockN(t, { t0: W(L1, "this") - .35, cards: ["The young", "The 
 /* 5 · [LOOK CLOSER] the little grasshopper beside an adult (art16.js nymphArt; NYMPH pops, lib.js o.at). Faces: the speaker (auto, left);
    Basil at the right while his pick is tested (thinking; shy when Momo shows the wings) */
 const camGr = [1.1, 1000, 760];
-SC.lcnymph = (t, s) => { window._BUBAT = { '*': [520, 330] }; const p = camPt(camGr, [1000, 800]), tm = s.t0 + 1.2, tmo = LE("f503m") + 1.6;
+SC.lcnymph = (t, s) => { window._BUBAT = { pip: [520, 330], momo: [960, 215] }; const p = camPt(camGr, [1000, 800]), tm = s.t0 + 1.2, tmo = LE("f503m") + 1.6;
   const basFace = t >= tm - .05 && t < tmo + .3 ? bd("basil", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"], [W("f503m", "none") + .1, "oops"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: nymphArt, bgc: "#E3F4FF", set: (tt) => VG16(tt, { mantisAt: false }, camGr), verdict: [`THE YOUNG: A NYMPH`, GOODC], tv: MK("v_nymph"), peekH: 470,
     peekEv: [[LE("f503m") + .1, "momo", "pointing"], [MK("kw_nymph") + .1, "momo", "cheer"]], over: (tt) => basFace }); };

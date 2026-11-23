@@ -196,7 +196,7 @@ const hopCard = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill
 // bare back (no wings yet); NYMPH pops on the young
 const HOPC = { legs: ["#D7F5EE", "#0F766E"], feelers: ["#FFE2C0", "#B4531A"], jump: ["#EDE4FF", "#6D28D9"], wings: ["#DCF5DF", "#1F8A4C"] };
 function nymphArt(t) { const m = MK, tP = m("pairin"), tL = m("legs"), tF = m("feelers"), tJ = m("jump"), tW = m("wings"), tK = m("kw_nymph"), s0 = SCN.lcnymph.t0 + 1;
-  const c = camSeq(t, [s0, tP, tL, tF, tJ, tW, tK, tK + 2.6], [[0, 60, .92], [0, 0, 1], [0, 0, 1.04], [60, -100, 1.04], [-60, 0, 1.02], [300, -40, 1.25], [-380, 20, 1.2], [0, 0, 1]]);
+  const c = camSeq(t, [s0, tP, tL, tF, tJ, tW, tK, tK + 2.6], [[0, 60, .92], [0, 0, 1], [0, 0, 1.04], [60, -100, 1.04], [-60, 0, 1.02], [0, -60, 1.06], [-380, 20, 1.2], [0, 0, 1]]);
   let w = `<rect x="-1300" y="-800" width="2600" height="1600" fill="#E3F4FF"/><rect x="-1300" y="230" width="2600" height="600" fill="#A6DE7E"/><path d="M-1300 230 H1300" stroke="#7FC566" stroke-width="6"/>`;
   // two blades at the same angle (as a floor under each)
   const Y = { x: -420, y: 120, k: 1.9 }, A = { x: 360, y: 120, k: 2.35 };
@@ -207,13 +207,13 @@ function nymphArt(t) { const m = MK, tP = m("pairin"), tL = m("legs"), tF = m("f
   // the labels, each joined to the part on BOTH grasshoppers (a part's points in each animal's own coordinates)
   const P2 = (b, x, y) => [b.x + x * b.k, b.y + y * b.k];
   const parts = [["legs", tL, "six legs", [0, -250], [[24, -18], [52, -8]]], ["feelers", tF, "two feelers", [40, -420], [[110, -120], [120, -126]]], ["jump", tJ, "big back legs", [0, 360], [[-50, -50], [-50, -50]]]];
-  for (const [k, t0, txt, [lx, ly], [py, pa]] of parts) { if (t < t0) continue; const col = HOPC[k], al = 1 - ss(tK - .6, tK - .2, t); if (al < .01) continue;
+  for (const [k, t0, txt, [lx, ly], [py, pa]] of parts) { if (t < t0) continue; const col = HOPC[k], al = 1 - ss(tW - .5, tW - .1, t); if (al < .01) continue;
     w += OP(al, [P2(Y, py[0], py[1]), P2(A, pa[0], pa[1])].map(([x, y]) => `<path d="M${lx} ${ly} L${n2(x)} ${n2(y)}" stroke="${col[1]}" stroke-width="6" stroke-dasharray="${n2(1000 * ramp(t, t0, .3))} 1100"/><circle cx="${n2(x)}" cy="${n2(y)}" r="12" fill="none" stroke="${col[1]}" stroke-width="6"/>`).join("") + TF(lx, ly, spring(t, t0, .4), tpill(0, 0, txt, 48, col[0], col[1], { w: 700 }))); }
   // wings: the adult's long wings (green); the young's bare back: a dashed outline, "no wings yet"
   if (t >= tW) { const al = 1 - ss(tK - .6, tK - .2, t);
-    w += OP(al, lcLab(t, tW, A.x + 40, A.y - 330, "long wings", A.x - 60 * A.k, A.y - 62 * A.k, { size: 48, fill: HOPC.wings[0], ink: HOPC.wings[1] })
+    w += OP(al, lcLab(t, tW, A.x + 60, A.y - 260, "long wings", A.x - 60 * A.k, A.y - 62 * A.k, { size: 48, fill: HOPC.wings[0], ink: HOPC.wings[1] })
       + OP(ramp(t, tW + .5, .3), `<path d="M${n2(Y.x + 36 * Y.k)} ${n2(Y.y - 66 * Y.k)} Q${n2(Y.x - 30 * Y.k)} ${n2(Y.y - 82 * Y.k)} ${n2(Y.x - 118 * Y.k)} ${n2(Y.y - 54 * Y.k)} Q${n2(Y.x - 116 * Y.k)} ${n2(Y.y - 42 * Y.k)} ${n2(Y.x - 96 * Y.k)} ${n2(Y.y - 44 * Y.k)} Q${n2(Y.x - 20 * Y.k)} ${n2(Y.y - 54 * Y.k)} ${n2(Y.x + 36 * Y.k)} ${n2(Y.y - 48 * Y.k)}z" fill="none" stroke="#1F8A4C" stroke-width="5" stroke-dasharray="14 10"/>`)
-      + lcLab(t, tW + .5, Y.x - 60, Y.y - 330, "no wings yet", Y.x - 40 * Y.k, Y.y - 66 * Y.k, { size: 48, fill: "#fff", ink: "#1F8A4C" })); }
+      + lcLab(t, tW + .5, Y.x - 80, Y.y - 260, "no wings yet", Y.x - 40 * Y.k, Y.y - 66 * Y.k, { size: 48, fill: "#fff", ink: "#1F8A4C" })); }
   return `<rect x="-900" y="-450" width="1800" height="900" fill="#E3F4FF"/>` + inCam(c, w); }
 // Momo's idea: a grasshopper lying in the hot sun, drying up (a ?)
 const dryIdea = (t) => `<rect x="-300" y="-200" width="600" height="400" fill="#FFE9A8"/><circle cx="170" cy="-90" r="70" fill="#FFD23A" stroke="#F2A81E" stroke-width="6"/>${[...Array(8)].map((_, i) => `<path d="M170 -170 V-200" stroke="#FFB01E" stroke-width="8" stroke-linecap="round" transform="rotate(${i * 45} 170 -90)"/>`).join("")}<rect x="-300" y="80" width="600" height="140" fill="#D9C27A"/>`
