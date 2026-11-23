@@ -149,5 +149,20 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   1.00 s exactly, 1 frame after each tick. qa/ep1_compare_p1.jpg made. Two fixes after the render (the game's circle was behind Basil:
   T moved to [680, 440] in both parts; HOLD ON!'s Basil overlapped Pip): `out/rerender_p1.sh` re-renders only chunks 900-1500 and
   5400-6900 and finishes again (queued behind other episodes' renders on the shared lock).
-- **Next:** Part 2: `./build_part.sh 2` (mix already built: -16.0 LUFS), then (>= 3 GB free; delete out/chunks_p* after each), measure_countdowns.py, compare_ep1.py,
-  faces_sheet, highlights.py / make_moments.py / make_preview.sh (copy from ../ep18 and point at EP19), thumbnails (../thumb_v2.js ep19_1/2).
+- **Part 2 rendered** 18:53-19:05 (722 s). Countdowns in the render: Round 1 and the Showdown (5 s each) step 1.00 s exactly, 1 frame after
+  each tick. finish.sh fixed (a Stage 1 bracket typo in its contact-sheet list stopped the .srt and sheet): both parts finished again.
+
+## Stage 2 DONE 2026-11-23 (NOT uploaded: the teacher reviews first)
+- **Renders:** `ep19_part1.mp4` **5:31.0**, `ep19_part2.mp4` **5:34.8** (1920x1080, 30 fps, **-16.0 LUFS** both); `ep19_part1.srt` /
+  `ep19_part2.srt`; `sheet_part1.png` / `sheet_part2.png`. mp4s NOT committed (rebuild: `./build_part.sh 1` / `2`, about 13 min each under the
+  lock). Chunk folders deleted.
+- **Review pack:** `qa/buddy_faces_p1.jpg` / `_p2.jpg` (every pose with its reason), `qa/preview_p1_clips.mp4` (97 s) / `_p2` (95 s) (not
+  committed), `qa/highlights.jpg` (14 labelled stills), `qa/ep1_compare_p1.jpg` / `_p2`, `qa/lines_p1.jpg` / `_p2` (a still at every buddy
+  line), `thumb_part1.jpg` (WHICH / ONE?!) / `thumb_part2.jpg` (COPPER?!). `app_moments.json` (19A / 19B; keys O.interactions / CH.magnets are
+  PLACEHOLDERS: check videos.js) and `production/youtube/chapters_p3.json` EP19_P1 / EP19_P2. `explained_upload.py upload.json --check`: OK
+  (both parts would go after explained-p3-ep18-part2 once that is up).
+- **Next (Stage 2.5 / 3):** the teacher's-eye review (NOTES_REVIEW.md), fixes, re-render, upload after EP18 is live.
+- **Still weak / for the reviewer:** the lock-in rings are the shared lockN size (as EP18); the tray's small objects are small in wide shots
+  (the camera pushes in when they matter); the hand that holds Basil's magnet is a human hand (four fingers and a thumb: no buddy has a holding
+  pose); the pin journey's magnet is shown end-on (its S END is what the pin clicks onto); Momo's note card in HOLD ON! sits behind her at
+  times; the dare's pencil stands in front of the tray.
