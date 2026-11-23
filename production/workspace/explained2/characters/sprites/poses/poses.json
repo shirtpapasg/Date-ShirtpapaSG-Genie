@@ -457,5 +457,225 @@
    "body_h": 807,
    "hips_above_feet": 6
   }
+ },
+ "momo_v2": {
+  "oops": {
+   "file": "poses/momo_v2_oops.png",
+   "src": "momo_v2_oops_final.jpg",
+   "anchor": [
+    354.4,
+    831.0
+   ],
+   "scale": 0.8762,
+   "size": [
+    660,
+    855
+   ]
+  },
+  "waving": {
+   "file": "poses/momo_v2_waving.png",
+   "src": "momo_v2_waving.jpg",
+   "anchor": [
+    353.2,
+    831.0
+   ],
+   "scale": 0.8252,
+   "size": [
+    699,
+    855
+   ]
+  },
+  "thinking": {
+   "file": "poses/momo_v2_thinking.png",
+   "src": "momo_v2_thinking.jpg",
+   "anchor": [
+    356.1,
+    831.0
+   ],
+   "scale": 0.8252,
+   "size": [
+    632,
+    855
+   ]
+  },
+  "surprised": {
+   "file": "poses/momo_v2_surprised.png",
+   "src": "momo_v2_surprised.jpg",
+   "anchor": [
+    356.1,
+    831.0
+   ],
+   "scale": 0.8252,
+   "size": [
+    632,
+    855
+   ]
+  },
+  "cheer": {
+   "file": "poses/momo_v2_cheer.png",
+   "src": "momo_v2_cheer.jpg",
+   "anchor": [
+    352.9,
+    831.0
+   ],
+   "scale": 0.8243,
+   "size": [
+    695,
+    855
+   ]
+  },
+  "pointing": {
+   "file": "poses/momo_v2_pointing.png",
+   "src": "momo_v2_pointing.jpg",
+   "anchor": [
+    352.9,
+    831.0
+   ],
+   "scale": 0.8243,
+   "size": [
+    714,
+    855
+   ]
+  },
+  "arms_crossed": {
+   "file": "poses/momo_v2_arms_crossed.png",
+   "src": "momo_v2_talk_closed.jpg",
+   "anchor": [
+    423.9,
+    831.0
+   ],
+   "scale": 0.8888,
+   "size": [
+    665,
+    855
+   ]
+  },
+  "_sit": {
+   "body_h": 807,
+   "hips_above_feet": 6
+  }
+ },
+ "basil_v2": {
+  "oops": {
+   "file": "poses/basil_v2_oops.png",
+   "src": "basil_v2_oops.jpg",
+   "anchor": [
+    449.3,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    770,
+    839
+   ]
+  },
+  "waving": {
+   "file": "poses/basil_v2_waving.png",
+   "src": "basil_v2_waving.jpg",
+   "anchor": [
+    449.3,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    837,
+    839
+   ]
+  },
+  "thinking": {
+   "file": "poses/basil_v2_thinking.png",
+   "src": "basil_v2_thinking.jpg",
+   "anchor": [
+    458.3,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    770,
+    839
+   ]
+  },
+  "worried": {
+   "file": "poses/basil_v2_worried.png",
+   "src": "basil_v2_worried.jpg",
+   "anchor": [
+    458.3,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    770,
+    839
+   ]
+  },
+  "surprised": {
+   "file": "poses/basil_v2_surprised.png",
+   "src": "basil_v2_surprised.jpg",
+   "anchor": [
+    451.3,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    816,
+    839
+   ]
+  },
+  "pointing": {
+   "file": "poses/basil_v2_pointing.png",
+   "src": "basil_v2_pointing.jpg",
+   "anchor": [
+    449.3,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    834,
+    839
+   ]
+  },
+  "cheer": {
+   "file": "poses/basil_v2_cheer.png",
+   "src": "basil_v2_cheer.jpg",
+   "anchor": [
+    342.6,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    834,
+    839
+   ]
+  },
+  "arms_crossed": {
+   "file": "poses/basil_v2_arms_crossed.png",
+   "src": "basil_v2_arms_crossed.jpg",
+   "anchor": [
+    457.9,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    770,
+    839
+   ]
+  },
+  "laughing": {
+   "file": "poses/basil_v2_laughing.png",
+   "src": "basil_v2_laugh_eyes_shut.jpg",
+   "anchor": [
+    458.7,
+    815.0
+   ],
+   "scale": 0.8205,
+   "size": [
+    769,
+    839
+   ]
+  },
+  "_sit": {
+   "body_h": 791,
+   "hips_above_feet": 6
+  }
  }
 }

@@ -30,9 +30,17 @@ POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
   "surprised": ("momo_c_surprised.jpg", None), "cheer": ("momo_c_cheer.jpg", None), "arms_crossed": ("momo_c_arms_crossed.jpg", None),
   "pointing": ("momo_c_pointing.jpg", None)}   # uncropped re-send (22 Nov) replaced the cropped one. Was:
                                                 # where her tail side is hidden (off-frame, behind a prop, waist-up); an uncropped one is asked for
+POSES["momo_v2"] = {  # Momo in Pip's style (Gemini, 23 Nov): one model, one style for all three buddies
+  "oops": ("momo_v2_oops_final.jpg", None), "waving": ("momo_v2_waving.jpg", None), "thinking": ("momo_v2_thinking.jpg", None),
+  "surprised": ("momo_v2_surprised.jpg", None), "cheer": ("momo_v2_cheer.jpg", None), "pointing": ("momo_v2_pointing.jpg", None),
+  "arms_crossed": ("momo_v2_talk_closed.jpg", None)}
+POSES["basil_v2"] = {  # Basil in Pip's style (Gemini, 23 Nov)
+  "oops": ("basil_v2_oops.jpg", None), "waving": ("basil_v2_waving.jpg", None), "thinking": ("basil_v2_thinking.jpg", None),
+  "worried": ("basil_v2_worried.jpg", None), "surprised": ("basil_v2_surprised.jpg", None), "pointing": ("basil_v2_pointing.jpg", None),
+  "cheer": ("basil_v2_cheer.jpg", None), "arms_crossed": ("basil_v2_arms_crossed.jpg", None), "laughing": ("basil_v2_laugh_eyes_shut.jpg", None)}
 SITREF = {}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
-HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
+HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)], ("basil_v2", "cheer"): [(221, 473), (183, 303)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
 ADJ = {}      # (buddy, pose): extra scale, set by eye from qa/poses_<buddy>.png
 DX = {}       # (buddy, pose): anchor nudge in source px

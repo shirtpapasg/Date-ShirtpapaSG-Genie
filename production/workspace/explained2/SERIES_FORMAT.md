@@ -314,6 +314,10 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     repainted in this style (characters/COLOUR_PAINTING_LIST.md, last section). Never mix styles once the repaints arrive.
     Outline: a little thicker than Pip's current line (between Pip's and Basil's), dark navy, same on all three, so the buddies
     read in thumbnails (teacher's choice, 23 Nov). The teacher paints with Gemini: characters/GEMINI_STYLE_BRIEF.md.
+    **The v2 sets (23 Nov) are the cast from EP15:** momo_v2 and basil_v2 (characters/sprites/build_v2.py for the talking sets, poses.py
+    POSES["momo_v2"] / ["basil_v2"] for the poses), Pip unchanged. Momo: closed/half/wide/blink (arms crossed), oops, waving,
+    thinking, surprised, cheer, pointing. Basil: closed/half/wide/blink, oops, waving, thinking, worried, surprised, pointing, cheer,
+    arms crossed, laughing. Use "worried" during a countdown before the answer, "laughing" for a funny line.
   - **Back views (teacher's paintings, 22 Nov):** `poses/momo_back.png`, `poses/basil_back.png` (Pip's to come). Basil's tail, seen from behind, lies on the ground towards the camera
     below his feet line: give him floor below him or let the frame crop the tail tip. Use them when a buddy looks INTO the scene
     with the viewer: riding along on a journey, peering into the micro-world, watching the hidden animal, facing the board. Same

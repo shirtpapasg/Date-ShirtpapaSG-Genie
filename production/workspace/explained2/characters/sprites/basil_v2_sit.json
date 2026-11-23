@@ -1,0 +1,73 @@
+{
+ "size": 1024,
+ "states": {
+  "closed": {
+   "file": "basil_v2_sit_closed.png",
+   "bbox": [
+    130,
+    126,
+    852,
+    917
+   ]
+  },
+  "half": {
+   "file": "basil_v2_sit_half.png",
+   "bbox": [
+    130,
+    126,
+    852,
+    917
+   ]
+  },
+  "wide": {
+   "file": "basil_v2_sit_wide.png",
+   "bbox": [
+    130,
+    126,
+    852,
+    917
+   ]
+  },
+  "blink": {
+   "file": "basil_v2_sit_blink.png",
+   "bbox": [
+    130,
+    126,
+    852,
+    917
+   ]
+  },
+  "half_blink": {
+   "file": "basil_v2_sit_half_blink.png",
+   "bbox": [
+    130,
+    126,
+    852,
+    917
+   ]
+  },
+  "wide_blink": {
+   "file": "basil_v2_sit_wide_blink.png",
+   "bbox": [
+    130,
+    126,
+    852,
+    917
+   ]
+  }
+ },
+ "source": {
+  "closed": "basil_v2_sit_closed.jpg",
+  "half": "basil_v2_sit_half2.jpg",
+  "wide": "basil_v2_sit_half.jpg",
+  "blink": "basil_v2_sit_blink.jpg"
+ },
+ "note": "build_v2.py: one transform for the whole set (Gemini kept the body identical)",
+ "anchors": {
+  "hips": [
+   565,
+   911
+  ],
+  "ground_y": 917
+ }
+}
