@@ -126,15 +126,15 @@ SC.show = (t, s) => { window._BUBAT = { pip: [1250, 260], basil: [1450, 235], mo
    the sheet; the coin +2 (coin2). The mantis on the easel's top */
 const caseBig = (t) => { const tc = MK("case"); if (t < tc - .1) return ""; const k = spring(t, tc - .1, .5), cut = ss(tc + 1.2, tc + 2, t);
   return TF(1480, 520, k, `<g filter="url(#drop)"><circle r="230" fill="#FFF8EA"/></g><circle r="230" fill="none" stroke="#9A5A2A" stroke-width="8"/>` + TF(0, 10, 1.9, eggCase16({ cut })) + TF(0, 170, 1, tpill(0, 0, cut > .5 ? "two neat rows of eggs" : "an egg case", 36, "#9A5A2A", "#fff", { w: 700 }))) + OP(k, `<path d="M1250 520 L${n2(EAS[0] + 380 * EAS[2])} ${n2(EAS[1] - 640 * EAS[2])}" stroke="#9A5A2A" stroke-width="6" stroke-dasharray="12 8"/>`); };
-SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 220] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), ez = 1 - eio((t - s.t0 - .2) / .8), lp = spring(t, LT("f1109b") + 2.2, .5);
+/* teacher, 23 Nov 2026 (SERIES_FORMAT: the corrected buddy stays shy, the right ones stay confident, through the whole fix) */ SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 220] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), ez = 1 - eio((t - s.t0 - .2) / .8), lp = spring(t, LT("f1109b") + 2.2, .5);
   return VG16(t, { mantisAt: false }, [1.03, 900, 640]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".25"/>` + TF(EAS[0] - 60 * (1 - ez), EAS[1], EAS[2], roachSheet(t, { strike: st, fix: fx, lit: [0, pulse(t, MK("case"), .05, 1.5), fx * .6], case: ss(MK("case"), MK("case") + .5, t) }))
     + mantisAt(t, EAS[0] - 300 * EAS[2], EAS[1] - 920 * EAS[2], .28) + caseBig(t)
     + (lp > .02 ? TF(700, 1062, .42 * lp, loopBoard16(t, { tiles: [0, 0, 0], back: 0, pics: roachPic, names: ["the egg case", "the young: a nymph", "the adult"], title: "THE COCKROACH", id: "fxl" })) : "")
     + coin(t, MK("coin2") - .1, 1640, 300, "+2", "line 3")
     + strip15(t, "f1107", "The young of the cockroach is called a nymph.", 150, { keys: ["young", "cockroach", "nymph"], maxW: 1240, x: 900, t1: LE("f1107") + 1.4 })
-    + bd("pip", 200, 1076, 470, t, { in: s.t0 + .05, poses: [[s.t0, "oops"], [MK("rewrite") + .2, "cheer"], [MK("rewrite") + 2.4, "sit"]], achieved: true })
-    + bd("momo", 1800, 1066, 360, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "sit"], [MK("case") + 1.3, "surprised"], [MK("case") + 3, "sit"], [MK("coin2") + .1, "cheer"]], achieved: t >= MK("coin2") })
-    + bd("basil", 1530, 1072, 370, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "sit"], [MK("coin2") + .15, "cheer"]], achieved: t >= MK("coin2") }) + HUD(t); };
+    + bd("pip", 200, 1076, 470, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] })
+    + bd("momo", 1800, 1066, 360, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "arms_crossed"]] })
+    + bd("basil", 1530, 1072, 370, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "arms_crossed"]] }) + HUD(t); };
 /* 10 · the chant: call and response; the board of FOUR small loops at the right, each line's part flashing on its call */
 SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 50, x: 620, y0: 260, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1180, ty: 520, sayX: 620, sayY: 600,
   board: (tt, f) => TF(1500, 1066, .74, fourLoops(tt, f)) });

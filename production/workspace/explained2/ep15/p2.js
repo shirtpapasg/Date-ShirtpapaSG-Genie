@@ -131,8 +131,11 @@ SC.show = (t, s) => { window._BUBAT = { momo: [560, 230] }; const r0 = MK("ring0
 SC.fix = (t, s) => { const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("bend"), MK("bend") + .8, t), ez = 1 - eio((t - LT("j906") + .6) / .8);
   return VG15(t, { ant: false }, [1.03, 900, 700]) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".3"/>` + TF(EAS[0] + 120 * ez, EAS[1], EAS[2] * (1 + .3 * ez), hwEasel(t, { strike: st, fix: fx, lit: [0, 0, fx * .6] })) + antAt(t, EAS[0] - 230 * EAS[2], EAS[1] - 960 * EAS[2], .26) + coin(t, MK("coin2") - .1, 1560, 520, "+2", "line 3")
     + strip15(t, "j906", "The stages in a life cycle are repeated. There is no first or last stage.", 150, { keys: ["repeated", "first", "last"], maxW: 1240, x: 900 })
-    + bd("momo", 250, 1076, 500, t, { in: s.t0 + .05, poses: [[s.t0, "oops"], [MK("bend") + .2, "cheer"], [MK("bend") + 2.6, "sit"]] })
-    + bd("basil", 1500, 1070, 380, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + bd("pip", 1780, 1066, 360, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "arms_crossed"], [LT("j906"), "sit"]] }) + HUD(t); };
+    /* teacher, 23 Nov 2026 (EP15 v3): "When Momo got corrected, she should be shy/embarrassed. Also, the other 2 pet buddies should be happy
+       to guess correct": Momo (her homework was wrong) stays shy through the whole fix, never a cheer; Basil and Pip (both picked line 3)
+       stay confident through the whole fix */
+    + bd("momo", 250, 1076, 500, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] })
+    + bd("basil", 1500, 1070, 380, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "arms_crossed"]] }) + bd("pip", 1780, 1066, 360, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "arms_crossed"]] }) + HUD(t); };
 
 /* 9 · "What if a plant had no more seeds at all?" Momo big at the left (worried), Basil big at the right (his easy idea: a shop shelf of seed
    packets, with a ?); the loop board small between them; on Heart's line its slots empty one by one (no seeds, no young plants, no adult

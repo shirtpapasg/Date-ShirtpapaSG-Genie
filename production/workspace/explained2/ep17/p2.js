@@ -101,13 +101,13 @@ SC.show = (t, s) => { window._BUBAT = { basil: [1250, 260], pip: [1560, 300] }; 
 /* the fix: line 3 struck (strike) and rewritten in green (rewrite: only one of the five mosquitoes keeps a small badge; Basil's mistake is
    fixed: a smile and a nod); the book's strip (Heart reads it, one sentence at a time); DENGUE pops; Momo explains it beside a calm picture (a
    child resting in bed, cared for; only some mosquitoes carry it); the coin +2 (coin2). The dragonfly on the bench's armrest */
-SC.fix = (t, s) => { window._BUBAT = { momo: [1300, 230] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), tm = LT("b807m"), dk = spring(t, tm - .3, .5) * (1 - ss(s.t1 - .4, s.t1, t));
+/* teacher, 23 Nov 2026 (SERIES_FORMAT: the corrected buddy stays shy, the right ones stay confident, through the whole fix) */ SC.fix = (t, s) => { window._BUBAT = { momo: [1300, 230] }; const st = ss(MK("strike"), MK("strike") + .4, t), fx = ss(MK("rewrite"), MK("rewrite") + .8, t), tm = LT("b807m"), dk = spring(t, tm - .3, .5) * (1 - ss(s.t1 - .4, s.t1, t));
   return VCR(t, {}, camShow) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".25"/>` + TF(EAS[0] - 150, EAS[1] + 70, .9, mosqSheet(t, { strike: st, fix: fx, lit: [0, 0, Math.max(fx * .6, pulse(t, MK("strike"), .05, .8))] }))
     + (dk > .02 ? TF(1300, 560, dk * .95, denguePic(t)) : "") + coin(t, MK("coin2") - .1, 1640, 300, "+2", "line 3")
     + lcStrips(t, "b806", "Most of the mosquitoes do not spread diseases, but some do. For example, Aedes albopictus and Aedes aegypti spread dengue.", { t1: LE("b806") + 1.2 })
-    + bd("basil", 220, 1076, 480, t, { in: s.t0 + .05, poses: [[s.t0, "sit"]], jump: [[MK("rewrite") + .3, 22]] })
-    + bd("momo", 1760, 1076, 480, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "sit"], [LE("b807m") + .1, "pointing"], [LE("b807m") + 2.2, "sit"]] })
-    + bd("pip", 1530, 1040, 370, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + HUD(t); };
+    + bd("basil", 220, 1076, 480, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] })
+    + bd("momo", 1760, 1076, 480, t, { flip: true, in: s.t0 + .15, poses: [[s.t0, "arms_crossed"], [LE("b807m") + .1, "pointing"], [LE("b807m") + 2.2, "arms_crossed"]] })
+    + bd("pip", 1530, 1040, 370, t, { flip: true, in: s.t0 + .1, poses: [[s.t0, "arms_crossed"]] }) + HUD(t); };
 
 /* 9 · the HDB corridor (sets17.js VH): Momo asks how the life cycle keeps us safe (then thinking); the camera eases to Pip by the potted plants,
    sure of himself (his idea as HIS thought bubble: too little water?); the push into the plate. The dragonfly on the corridor railing */

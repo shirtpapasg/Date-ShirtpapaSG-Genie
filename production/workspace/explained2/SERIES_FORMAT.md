@@ -366,7 +366,7 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   | oops (shy) | this buddy just got it wrong |
   | arms crossed (confident) | this buddy just got it right |
   | surprised | a real surprise: a fun fact, an unexpected result |
-  | cheer (hands up) | something is learnt or achieved: a key word lands, a mistake is fixed, "Now you know!" |
+  | cheer (hands up) | something is learnt or achieved: a key word lands, "Now you know!" (never the buddy whose mistake is being corrected) |
   | laughing | a line that is meant to be funny |
   | pointing | showing a specific thing on screen |
   | waving | hello and goodbye only |
@@ -374,6 +374,15 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     shows a strong pose (cheer, surprised, laughing, worried) more than about once a minute, unless the scene calls for it.
   - Before using a pose, the script or the staging must name the reason (SCENES_TODO lists it per line). The review checks every pose
     against this table; a pose with no reason is replaced by listening.
+
+- **When a buddy's mistake is corrected, that buddy stays shy; the buddies who got it right stay happy (teacher, 2026-11-23, on
+  EP15 Part 2's Showdown fix: "When Momo got corrected, she should be shy/embarrassed. Also, the other 2 pet buddies should be happy to
+  guess correct").**
+  - Through the WHOLE fix (the strike-through, the green rewrite, the Mark Sentence strip, the score), the buddy who made the mistake
+    shows oops (shy). No cheer and no confident pose for that buddy in that scene, even when the fix lands.
+  - The buddies who picked the right answer show arms crossed (confident) through the same fix; they may cheer only if they also
+    learnt something new there.
+  - This also covers a round's answer and a HOLD ON!: the reaction lasts as long as the correction is on screen, not one beat.
 
 - **Plants grow the way real plants grow, and what is gone is gone (teacher, 2026-11-23, on EP15 Part 2's "Be a mango flower"
   journey: "The flower should be gone but there is still a faint image of the flower. Also, the leaves of the tree must branch out
