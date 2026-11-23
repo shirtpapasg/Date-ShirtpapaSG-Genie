@@ -136,3 +136,24 @@ and big "o" (arms-crossed talking set) and pointing.
   uncropped** (the whole tail and both feet inside the picture, a white margin all round).
 - **Still missing for EP14:** Basil **arms crossed** in colour (EP14 uses thinking, and cheer for his "handsome" line); a full-size
   Basil **cheer** would be sharper than the one cut from the 2x2 sheet (optional).
+
+
+## 23 Nov: ONE art style for all three: Pip's (teacher's choice)
+The teacher: "the outline work for pip and the rest seems different. leading to a different artstyle." Chosen standard: **Pip's
+style**: softly painted fur with gentle shading, a medium-thickness dark navy outline (not brown, not thick and bold), glossy eyes
+with a white highlight, smooth soft colour (not flat cartoon, not watercolour). Momo and Basil keep their new colours (coral; teal
+with bright teal beard spikes and tail bands) but are repainted in Pip's style. Reference: characters/sprites/pip_sit_closed.png and
+the close-up /tmp outline_compare (Pip | Momo | Basil).
+
+### Momo to repaint in Pip's style (11)
+1. momo_c_talk_closed (arms crossed, smug smile)  2. momo_c_talk_half (small "o")  3. momo_c_talk_wide (big "o")  4. momo_c_talk_blink (eyes shut, happy)
+— these four must be the same picture with only the face changed —
+5. momo_c_oops  6. momo_c_waving  7. momo_c_thinking  8. momo_c_surprised  9. momo_c_cheer  10. momo_c_pointing (whole tail, uncropped)  11. momo_c_arms_crossed (= picture 1)
+
+### Basil to repaint in Pip's style (10)
+1. basil_c_sit_closed  2. basil_c_sit_half  3. basil_c_sit_wide  4. basil_c_sit_blink  — same picture, only the face changes —
+5. basil_c_oops  6. basil_c_waving  7. basil_c_thinking  8. basil_c_surprised  9. basil_c_pointing  10. basil_c_cheer
+Optional: basil_c_arms_crossed (he has none in colour yet).
+
+Same rules as before: 1024 x 1024, white background, no shadow, no labels, full body with a margin, one picture per message.
+Until the repaints arrive, EP15 uses the current pictures (Basil already scaled to 0.88 so he no longer looks too big).

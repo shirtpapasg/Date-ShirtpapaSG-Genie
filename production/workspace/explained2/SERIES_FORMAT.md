@@ -309,6 +309,9 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - Make each from the buddy's own picture, one buddy per image, 1024 px, white background, no shadow.
   - Make talking/blink states by editing only the face.
   - Keep each buddy one consistent model.
+  - **One art style for all three: Pip's (teacher, 23 Nov: "the outline work for pip and the rest seems different. leading to a
+    different artstyle").** Softly painted fur, medium dark-navy outline, glossy eyes; Momo and Basil keep their colours but are
+    repainted in this style (characters/COLOUR_PAINTING_LIST.md, last section). Never mix styles once the repaints arrive.
   - **Back views (teacher's paintings, 22 Nov):** `poses/momo_back.png`, `poses/basil_back.png` (Pip's to come). Basil's tail, seen from behind, lies on the ground towards the camera
     below his feet line: give him floor below him or let the frame crop the tail tip. Use them when a buddy looks INTO the scene
     with the viewer: riding along on a journey, peering into the micro-world, watching the hidden animal, facing the board. Same
