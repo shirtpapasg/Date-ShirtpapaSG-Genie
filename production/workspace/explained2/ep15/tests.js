@@ -68,3 +68,6 @@ const DAYS = [["d1", "Day 1"], ["d10", "Day 10"], ["d20", "Day 20"], ["d30", "Da
 const stepPill = (t, list, x, y, size = 34) => { const cur = list.filter(([mk]) => TL.marks[mk] !== undefined && t >= TL.marks[mk]).pop(); if (!cur) return ""; const t0 = MK(cur[0]);
   return TF(x, y, 1 + .12 * pulse(t, t0, .02, .3), `<g filter="url(#dropS)"><rect x="${n2(-tw(cur[1], size, 700) / 2 - 64)}" y="-${size}" width="${n2(tw(cur[1], size, 700) + 128)}" height="${size * 2}" rx="${size}" fill="${P.ink}"/></g><circle cx="${n2(-tw(cur[1], size, 700) / 2 - 30)}" cy="0" r="${n2(size * .45)}" fill="#fff"/><path d="M${n2(-tw(cur[1], size, 700) / 2 - 30)} 0 l0 ${n2(-size * .32)} M${n2(-tw(cur[1], size, 700) / 2 - 30)} 0 l${n2(size * .24)} 0" stroke="${P.ink}" stroke-width="4" stroke-linecap="round"/>` + T(16, n2(size * .36), cur[1], size, "#fff", { w: 700 })); };
 
+// the fun-fact panel's pictures (common.js funFact items [mark, label, pic(t, w, h)]): Stage 1 placeholders that say what to draw
+const ffPH = (txt) => (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF3DC"/>` + wrap(txt, 24, w - 40, 500).map((l, j, A) => T(0, 10 + j * 30 - (A.length - 1) * 15, l, 24, P.ink)).join("");
+const FF = (items) => items.map(([m, l, d]) => [m, l, typeof d === "string" ? ffPH(d) : d]);

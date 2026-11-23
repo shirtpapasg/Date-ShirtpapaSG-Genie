@@ -43,7 +43,7 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lc
 
 /* 3 · the game, and the hidden snail: ONE smooth push-in from the (dimmed) kitchen straight onto the snail on the window ledge (common.js
    gameScene). Stage 2: R.world = the drawn kitchen, A = the snail's spot in it. WIRED */
-SC.game = (t, s) => gameScene(t, s, ["g301a", "g301b", "g301r"], true, { world: (tt) => kitchenPH(tt), A: SNAIL, T: [1400, 470], Z: 2.4, dim0: .78, ly: -150, qx: 1730, qy: 430, pre: () => TITLE(1, 1) });
+SC.game = (t, s) => gameScene(t, s, ["g301a", "g301b", "g301r"], false, { world: (tt) => kitchenPH(tt), A: SNAIL, T: [1400, 470], Z: 2.4, dim0: .78, ly: -150, qx: 1730, qy: 430, pre: () => TITLE(1, 1) });
 SC.goals = (t, s) => goals3(t, s, [["Observing like a scientist", ""], ["What grows from a seed", ""], ["Measuring a plant", ""]], ["g401", "g402", "g403", "g404"], "momo");
 
 /* 5 · Round 1: EP14's dare (a short 3 s ring). The three mango boards on the cards; the clue labels one big seed · we plant it ON TOP of the
@@ -72,7 +72,7 @@ SC.lcseed = (t, s) => lcPH(t, s, { title: "The seed, day after day (a window in 
   beats: [["d1", "Day 1: the seed in the soil, seen through the window"], ["kw_seed", "SEED pops"], ["d10", "Day 10"], ["root", "the root pokes out FIRST and grows DOWN"], ["d20", "Day 20"], ["shoot", "a hooked shoot pushes UP to the light"], ["d30", "Day 30"], ["leaves", "two RED leaves open above the soil"], ["d45", "Day 45"], ["green", "the leaves turn green"], ["oldseed", "label: the old seed, still at the bottom of the stem"], ["v_seed", "verdict"]],
   notes: ["The pot fills the panel: a clear window in its side shows the soil in section (crumbs, a stone, a worm-free clean soil), the big flat seed lying in it. Above the soil line: the corridor's morning light. A plain label line to each part as it is named (seed · root · shoot · leaves · the old seed).",
     "Time-lapse, ONE continuous shot, the day pill on its marks, tag speeded up: the root first and down (roots grow DOWN), then the shoot bent like a hook, straightening into the light; two soft RED leaves open and droop a little (true of mango), then turn green; a few leaves, a thin stem, NO flower, NO fruit. The buddy's face peeks in (Basil, Pip, Momo in turn: surprised at the root, pointing at the shoot, worried at the red leaves, relieved at green)."],
-  over: (tt) => stepPill(tt, DAYS, 390, 905) + slowTag(tt, MK("d1"), 1660, 905) });
+  over: (tt) => stepPill(tt, DAYS, 390, 905) + speeded(tt, MK("d1"), MK("v_seed"), 1660, 905) });
 SC.seedans = ph("9 · The answer is three: a young plant (YOUNG PLANT pops)", "The corridor, the pot on the ledge with its young plant (Day 45: thin stem, a few green leaves). EP14's three mango boards small at the top: board 3 gets the green tick at ansglow, small x chips on boards 1 and 2 and by Momo and Pip; the coin at coin1. YOUNG PLANT pops on Heart's term (lib.js o.at). Basil big at the right (confident, then explains); Momo oops (shy) and her line; Pip shy then nods.");
 /* 10 · BE THE MANGO SEED (the journey; the buddies ride along, shrunk: common.js riders) */
 SC.waitw = ph("10 · Be the mango seed! (the glide in)", "Pill Be the mango seed! The camera glides to the pot and down into the soil; a soft dark wipe at the end. The buddies wave the viewer off, then shrink and come along. The shelf slides aside.");
@@ -94,7 +94,7 @@ SC.holdon = ph("13 · HOLD ON! Basil measures from the table", "The pot on the c
 SC.final = (t, s) => { const L = "g1301"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "g1302", tq = W(L, "it") - .1;
   return lizReveal(t, s, L, corridorPH(t), SNAIL[0], SNAIL[1], tq, "It was on the rim of our plant pot!", -120, 160, 80, 1.9, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "g1304",
-    fact: { id: "g1303", at: [1300, 560], w: 900, h: 420, items: [["ff_teeth", "thousands of tiny teeth", "DRAW: a snail's tongue, close up, rows of tiny teeth"], ["ff_leaf", "it scrapes soft young leaves", "DRAW: a young leaf with a scraped edge, the snail beside it"]] } }) + smallPrint(t, s.t0 + .5, SNAIL_RULE); };
+    fact: { id: "g1303", at: [1300, 560], w: 900, h: 420, items: FF([["ff_teeth", "thousands of tiny teeth", "DRAW: a snail's tongue, close up, rows of tiny teeth"], ["ff_leaf", "it scrapes soft young leaves", "DRAW: a young leaf with a scraped edge, the snail beside it"]]) } }) + smallPrint(t, s.t0 + .5, SNAIL_RULE); };
 /* 15 · the cliffhanger: Momo big (thinking); our young plant (no flowers, no mangoes) and a big ?; the old mango tree downstairs slides in
    small through the corridor parapet (treein); PART 2 slams in */
 SC.cliff = (t, s) => { const tP = W("g1503", "part") - .1; return phScene(t, s, "15 · Will it ever grow mangoes?", ["The corridor: Momo big at the left (thinking) beside our young plant (thin stem, a few leaves, NO flowers, NO mangoes; a ? pops at q). MK treein: the camera tilts over the parapet to the old mango tree in the garden below, full of tiny flowers and a few mangoes. Full staging: SCENES_TODO.md."])

@@ -35,12 +35,13 @@ Marks the picture and the sound share (every action sound lands ON its mark; Sta
 CUTS (script section 6, non-teaching, in order). Put a tag in CUTS to drop that beat, then rebuild the timeline.
   Part 1: title2 (the title's second slam hold), taste (g609p Pip's tasting rule: the small print stays), mangooops (g810m), sameway
   (g1206 Heart), handsome12 (g1205b Basil: his oops pose carries it; cut a Pip or Momo line with it).
-  Part 2: pipoops (j509p), soybean (j808p), momooops (j908m), busloop (j805b), pond (j1300m), nextjoke (j1302).
+  Part 2: pipoops (j509p), soybean (j808p), momooops (j908m), busloop (j805b), pond (j1300m), nextjoke (j1302), roundgoes (j802m), hw13 (Momo reads only
+  line three of her homework; lines one and two are shown and lit, as EP14's notes13), bankagain (j1008m).
   Never cut: a [LOOK CLOSER], a journey step, a Mark Sentence card, a book strip, a buddy's explanation of a key word.
 """
 import re
 H, P, B, M = "heart", "pip", "basil", "momo"
-CUTS = {"title2"}
+CUTS = {"title2", "taste", "mangooops", "sameway", "pipoops", "soybean", "momooops", "busloop", "pond", "nextjoke", "hw13", "bankagain", "roundgoes"}   # Stage 1 timing (22 Nov): Part 1 5:40.9 -> section 6 cuts; Part 2 6:42.3 -> section 6 cuts + the five trims of script 12.1
 cut = lambda tag, items: [] if tag in CUTS else items
 
 # ---- the dare blocks (script section 3) ----
@@ -212,7 +213,7 @@ SEQ1 = [
 SEQ2 = [
  # ---- 1 · "Last time...": a calm recap, three pictures from Part 1, one at a time (switch on "observed" and "grew"; each >= 2.5 s)
  ("scene", "lasttime"), ("mark", "pic1"),
- ("say", "j101", H, "Last time, we planted a mango seed, and we observed it like a scientist. It grew into a young plant. But will our young plant ever grow mangoes?", {"pre": .4, "post": 1.6, "gap": .75, "kw": [["pic2", "observed"], ["pic3", "grew"]]}),
+ ("say", "j101", H, "Last time, we planted a mango seed, and we observed it like a scientist. It grew into a young plant. But will our young plant ever grow mangoes?", {"pre": .4, "post": 1.2, "gap": .75, "kw": [["pic2", "observed"], ["pic3", "grew"]]}),
  # ---- 2 · the community garden beside the block; the old mango tree; an adult carries our pot down; the game and the hidden weaver ant
  ("scene", "place"), ("mark", "potdown"), ("wait", 2.0),
  ("scene", "game"),
@@ -225,8 +226,8 @@ SEQ2 = [
  # ---- 4 · Round 1: the old tree is covered in tiny flowers. Which stage? (ring 6 s)
  ("scene", "r1card"), ("wait", 1.1),
  ("scene", "r1"),
- ("say", "j401", H, "Round one. This old mango tree grew from a seed, many years ago. Now it is covered in tiny flowers. Which stage is it in? One, the seed. Two, the young plant. Three, the adult plant. Show me with your fingers.", {"pre": .3}),
- *LOCK("r1", 6.0),
+ ("say", "j401", H, "Round one. This old mango tree is covered in tiny flowers. Which stage is it in? One, the seed. Two, the young plant. Three, the adult plant. Show me with your fingers.", {"pre": .3}),
+ *LOCK("r1", 5.0),
  ("say", "j402", H, "Locked in!", {"pre": 0}),
  ("say", "j403", P, "Two. It still grows new leaves, so I think it is a young plant.", {"pre": .5}),
  ("say", "j404", B, "Three! Our young plant has no flowers, but this tree does. So it is an adult plant!", {"pre": .4}),
@@ -235,13 +236,11 @@ SEQ2 = [
  # ---- 5 · [LOOK CLOSER] our young plant beside the old tree; the book's strip (4.4, captions 2 and 3); ADULT PLANT pops
  ("scene", "lcadult"),
  ("say", "j501", H, "Look closer. Here is our young plant, beside the old tree.", {**LC, "pre": 1.2, "kw": [["pairin", "young"]]}),
- ("say", "j502m", M, "Our young plant has a thin stem and only a few leaves.", {"pre": .1, "kw": [["stem", "stem"]]}),
- ("say", "j503b", B, "And the old tree has a thick trunk, hundreds of leaves, and lots of tiny flowers!", {"pre": .2, "kw": [["trunk", "trunk"], ["flowers", "flowers"]]}),
+ ("say", "j503b", B, "Our young plant has a thin stem, but the old tree has a thick trunk and lots of tiny flowers!", {"pre": .1, "kw": [["stem", "stem"], ["trunk", "trunk"], ["flowers", "flowers"]]}),
  ("say", "j504p", P, "But look at the tips. The old tree has new red leaves too, so it is still growing.", {"pre": .2, "kw": [["tips", "tips"]]}),
- ("say", "j505", H, "Adult plants keep growing too. But only the adult plant has flowers and fruits.", {**LC, "pre": .3, "kw": [["tagadult", "only"]]}),
  ("say", "j506", H, "The young plant grew into an adult plant. The adult plant started to have flowers and fruits.", {**LC, "pre": .4, "hold": STRIP, "term": ["adult plant"], "kw": [["kw_adult_plant", "adult", 0]]}),
  HOLD("kw_adult_plant"),
- ("say", "j507b", B, "An adult plant is a grown-up plant. It is ready to have flowers and fruits!", {"pre": .2}),
+ ("say", "j507b", B, "Adult plants keep growing too. But only a grown-up plant, an adult plant, has flowers and fruits!", {"pre": .2, "kw": [["tagadult", "only"]]}),
  *VERDICT("v_adult"),
  ("scene", "adultans"),
  ("say", "j508", H, "The answer is three: the adult plant! Three fingers? One finger up!", {"pre": .5, "post": .2, "kw": [["ansglow", "three", 0], ["coin1", "one"]]}),
@@ -254,8 +253,7 @@ SEQ2 = [
  ("say", "j603", H, "Let's find out. Be a mango flower! Shrink down. Quietly.", {"pre": .5, "post": .5}),
  ("scene", "shrink"), ("mark", "dive"), ("wait", 2.0),
  ("mark", "jflower"),
- ("say", "j701", H, "You are a tiny flower on the big mango tree. A warm breeze shakes your branch.", {**SLOW, "pre": 0, "post": .8, "kw": [["jbreeze", "breeze"]]}),
- ("say", "j702", H, "Your petals fall, and you start to grow into a tiny green mango.", {**SLOW, "pre": .2, "post": .8, "kw": [["jpetals", "petals"], ["jgreen", "green"]]}),
+ ("say", "j701", H, "You are a tiny flower on the big mango tree. Your petals fall, and you start to grow into a tiny green mango.", {**SLOW, "pre": 0, "post": .8, "kw": [["jpetals", "petals"], ["jgreen", "green"]]}),
  ("say", "j703", H, "Week after week, you grow bigger and heavier. Inside you, a seed grows, big and flat.", {**SLOW, "pre": .2, "post": .8, "kw": [["jbig", "bigger"], ["jseed", "seed"]]}),
  ("say", "j704", H, "You turn yellow and sweet. You are a ripe mango, with a new seed inside!", {**SLOW, "pre": .2, "kw": [["jripe", "yellow"], ["jnew", "new"]]}),
  ("wait", 1.0),
@@ -263,7 +261,7 @@ SEQ2 = [
  ("scene", "pullout"), ("mark", "pullout"), ("wait", .6),
  ("scene", "fruitcut"), ("mark", "cutfruit"), ("wait", .6),
  ("say", "j801b", B, "Oops! The new seeds grow inside the fruits, not in the roots!", {"pre": .2}),
- ("say", "j802m", M, "And each new seed can grow into a new young plant. Round and round it goes!", {"pre": .2}),
+ *cut("roundgoes", [("say", "j802m", M, "And each new seed can grow into a new young plant. Round and round it goes!", {"pre": .2})]),
  ("scene", "ring"),
  ("say", "j803p", P, "Let me put them on our board. The seed, then the young plant, then the adult plant, and its fruits bring new seeds.", {"pre": .5, "kw": [["tseed", "seed", 0], ["tyoung", "young"], ["tadult", "adult"], ["tback", "seeds"]]}),
  ("say", "j804", H, "So a plant's life cycle goes round and round, and it has three stages.", {"pre": .3, "term": ["three stages"], "kw": [["kw_three_stages", "three"]]}),
@@ -278,8 +276,8 @@ SEQ2 = [
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
  ("say", "j901", H, "Showdown! Double points. Momo's homework has one mistake. Line one, two, or three? Show me with your fingers.", {"pre": .5}),
- ("say", "j902", M, "Here is my homework! One: the seed grows into a young plant. Two: the young plant grows into an adult plant. Three: the adult plant is the last stage, and the cycle ends.", {"pre": .4, "post": .2, "kw": [["l1", "one"], ["l2", "two"], ["l3", "three"]]}),
- *LOCK("show", 6.0),
+ ("say", "j902", M, "Here is my homework! Three: the adult plant is the last stage, and the cycle ends." if "hw13" in CUTS else "Here is my homework! One: the seed grows into a young plant. Two: the young plant grows into an adult plant. Three: the adult plant is the last stage, and the cycle ends.", {"pre": .4, "post": .2, "kw": ([] if "hw13" in CUTS else [["l1", "one"], ["l2", "two"]]) + [["l3", "three"]]}),
+ *LOCK("show", 5.0),
  ("say", "j903", H, "Locked in!", {"pre": 0}),
  ("say", "j904", B, "Three! The adult plant has fruits with new seeds, so round it goes again!", {"pre": .5}),
  ("say", "j905p", P, "Three. A life cycle goes round and round, so there is no last stage.", {"pre": .4, "post": .2}),
@@ -291,13 +289,13 @@ SEQ2 = [
  ("scene", "nomore"),
  ("say", "j1001m", M, "But what if a kind of plant had no more seeds at all?", {"pre": .5}),
  ("say", "j1002b", B, "Easy! Then we just buy more seeds at the shop!", {"pre": .3}),
- ("say", "j1004", H, "Life cycles repeat to ensure that living things continue to live. Without seeds, there are no new young plants, so that kind of plant could disappear.", {"pre": .4}),
+ ("say", "j1004", H, "Life cycles repeat to ensure that living things continue to live. With no seeds, that kind of plant could disappear.", {"pre": .4}),
  ("scene", "lcbank"),
  ("say", "j1005", H, "Look closer. In 2019, Singapore opened its first seed bank, at the Botanic Gardens.", {**LC, "pre": 1.3, "pron": Y2019, "term": ["seed bank"], "kw": [["bankin", "singapore"], ["kw_seed_bank", "seed"]]}),
  HOLD("kw_seed_bank"),
  ("say", "j1006p", P, "Scientists dry the seeds, and they keep them in jars with labels.", {"pre": .1, "kw": [["dry", "dry"], ["jars", "jars"]]}),
  ("say", "j1007b", B, "Then the jars go into a very cold room, like a giant freezer, so the seeds can wait for many years!", {"pre": .2, "kw": [["cold", "cold"]]}),
- ("say", "j1008m", M, "So if a plant is ever in trouble, its seeds are safe, ready to grow it again!", {"pre": .2, "kw": [["again", "again"]]}),
+ *cut("bankagain", [("say", "j1008m", M, "So if a plant is ever in trouble, its seeds are safe, ready to grow it again!", {"pre": .2, "kw": [["again", "again"]]})]),
  *VERDICT("v_bank"),
  ("scene", "mark2"),
  ("say", "j1101", M, "Say it with me!", {"pre": .6}), ("wait", .8),
@@ -311,7 +309,7 @@ SEQ2 = [
  ("say", "j1201", H, "Show me your score hand! More than one? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
  ("say", "j1202", H, "Did you spot the weaver ant? It was on a leaf of the old mango tree!", {"pre": .5, "post": .2}),
- ("say", "j1203", B, "Here is a fun fact! Weaver ants sew leaves together to make their nest, and the sticky thread comes from their own babies! Some mango farmers even keep them as guards, to chase away insects that eat the mangoes.", {"pre": .3, "post": .2, "kw": [["ff_in", "fun"], ["ff_nest", "nest"], ["ff_baby", "babies"], ["ff_guard", "guards"]]}),
+ ("say", "j1203", B, "Here is a fun fact! Weaver ants sew leaves together to make their nest, and the sticky thread comes from their own babies! They live in mango trees, high up in their leaf nests.", {"pre": .3, "post": .2, "kw": [["ff_in", "fun"], ["ff_nest", "nest"], ["ff_baby", "babies"], ["ff_tree", "mango"]]}),
  ("say", "j1204", H, "Tell someone at home!", {"pre": .3, "post": .5}),
  # ---- 12 · the dare for Episode 16 (the garden's little pond: tadpoles)
  ("scene", "dare"),
