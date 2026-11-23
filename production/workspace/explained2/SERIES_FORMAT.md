@@ -345,6 +345,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   table) is smaller, never bigger. No buddy is more than about 15% bigger than another at the same depth, unless the speaker is
   briefly enlarged (1.05) while talking. The review step checks the sizes of every buddy in every scene.
 
+- **Every upload is time-stamped for the app (teacher, 23 Nov: "ensure all TheOneApp Explained youtube videos are all time stamped
+  clearly, so they are linked correctly to the correct video to watch when the mindmap AI marked them").** After every upload or
+  re-upload: replace the part in TheOneApp videos.js (moments from tl_pN.json, 1.5 s before each idea, with keys) and add YouTube
+  chapters to its description (production/youtube/apply_chapters.py). An old link to a replaced video must never stay in the app.
+
 ## 6. Motion (reference: `characters/sprites/pose_test_robot_round.mp4`, approved "exactly what I want")
 
 - **Pose swaps:**
