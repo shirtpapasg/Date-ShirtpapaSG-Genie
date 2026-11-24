@@ -43,11 +43,11 @@
  "playlists": [
   {
    "id": "PLb8LpPqxQI4E",
-   "after": "explained-p3-ep21-part2"
+   "after": "explained-p3-ep21v2-part2"
   },
   {
    "id": "PLPfEuT7l4KjI",
-   "after": "explained-p3-ep21-part2"
+   "after": "explained-p3-ep21v2-part2"
   }
  ],
  "_note": "Public, Made for Kids (the uploader sets both). NO replaces and NO retire_old (script section 7): the classic P3 no. 14A 'Turn A Nail Into A Magnet, Two Ways (Part A)' (GNQn_TeCRgg, Ch 7, pp. 113-117, labs 7.1A and 7.1B; videos.js no. '22A') covers both the stroke method AND the electrical method; EP22 covers only the stroke half, so EP23 retires it (ep23/upload.json: replaces ['GNQn_TeCRgg'], retire_old true, a NEW VERSION line pointing to EP22 Part 1 ({EP22_P1}, filled by hand) and EP23 Part 1). In TheOneApp's videos.js, add EP22's two parts with their moments (from tl_p1.json / tl_p2.json, 1.5 s before each idea; keys CH.makingMagnets, O.magProps, lab:p3-7-1a); GNQn_TeCRgg stays in the app until EP23 is live. School Lab 7.1A line left out (labs_p3.json lists 7.1A as status 'review': keep it out unless the bench is live for pupils at Stage 3; script section 7 has the line). Upload EP22 only after EP21 is live. NOT RUN (Stage 1)."
