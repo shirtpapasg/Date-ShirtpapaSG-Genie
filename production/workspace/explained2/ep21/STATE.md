@@ -190,3 +190,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
 - **Still weak / for the reviewer:** the hands in the needle journey and the ship's bridge are simple; the dare's strokes are the magnet's own
   motion (no paw); the globe is our own simple drawing (one face only, so no Americas in lcearth); the trail map board outside the compass
   case in the needle journey is a plain soft rectangle; Basil gets no cheer after NEEDLE (his confident outcome runs to the scene's end).
+
+## 24 Nov: LIVE
+Teacher: "ok to upload EP21". Part 1 625GU5q6NSc, Part 2 wqEoqdTPJqk (after EP20); classic 6zA-Adh7QqU retired (NEW VERSION -> EP20 P1 + EP21 P1).
