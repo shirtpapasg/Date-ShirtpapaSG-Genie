@@ -63,9 +63,9 @@ SC.waitw = (t, s) => { const L = "n501", tP = W(L, "be") - .15, sh = W(L, "shrin
   const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1400, 1730][i]; return bd(w, x, [1076, 1010, 1076][i], [480, 390, 470][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return jetty(t, camWait(t), { ledge: ledgeProps(t) }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the compass needle!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#DDF4FF", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, rp = { pip: [[m("jpin") + 1, "thinking"], [m("jpin") + 3, "sit"]], momo: [[m("jpush") + .1, "surprised"], [m("jpush") + 2.2, "sit"]] }, a = needleAng(t) * Math.PI / 180, tip = [NP[0] + NL * Math.sin(a), NP[1] - NL * .44 * Math.cos(a)];
-  return needleJourney(t, s) + riders(t, s, { tin: m("jpin") + .6, h: 200, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] }, poses: rp })
+  return needleJourney(t, s) + riders(t, s, { tin: m("jpin") + .6, h: 200, at: { pip: [150, 1050], basil: [1760, 1052], momo: [320, 1046] }, poses: rp })
     + youTag(t, m("jpin"), "You: a compass needle") + feelTag(t, m("jpin") + .8, m("jsettle") - .2, "to scale: a compass needle", 180) + feelTag(t, m("jnorth"), m("jcome") - .2, "North", 180)
-    + linkChip(t, m("jpush") + .3, 560, 420, tip[0], tip[1], 1, "pushed away", 44, m("jturn")) + linkChip(t, m("jpull") + .3, 1250, 300, tip[0], tip[1], 0, "pulled in", 44, m("jback")) + feelTag(t, m("jns"), s.t1, "North–South again", 180); };
+    + linkChip(t, m("jpush") + .3, 700, 540, tip[0], tip[1], 1, "pushed away", 44, m("jturn")) + linkChip(t, m("jpull") + .3, 1250, 300, tip[0], tip[1], 0, "pulled in", 44, m("jback")) + feelTag(t, m("jns"), s.t1, "North–South again", 180); };
 // the pull back out: the jetty at normal size; the compass on the ledge; Basil's magnet lifted away from it
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return jetty(t, camMix(camOn([1300, 640], 1.15, 960, 560), camOn([LEDGE_C[0], LEDGE_C[1] - 14], 7.0, 960, 560), u), { ledge: ledgeProps(t, { mx: LEDGE_M[0] + 80, my: LEDGE_M[1] - 40 }) })

@@ -97,12 +97,12 @@ function magnetJourney(t, s) { const m = MK, yaw = yawMag(t), vel = Math.abs(yaw
 // the big letters N, E, S, W round its edge; outside, through the clear wall, the trail map's wooden ledge and the sea. The giant hand (an
 // adult's: four fingers and a thumb) carries the bar magnet LOW along the wood from the right: its RED end pushes your red end away
 // (magenta), turned round its BLUE end pulls your red end in (green); taken away it FADES OUT COMPLETELY and you swing back to North.
-const NP = [960, 1046], NRX = 900, NRY = 400, NL = 640;
+const NP = [960, 1046], NRX = 900, NRY = 400, NL = 560;
 function needleAng(t) { const m = MK; if (t < m("jfree")) return 50 + 3 * Math.sin(t * 2);
   if (t < m("jpush")) { const a = settle21(t, m("jfree"), 50 + 3 * Math.sin(m("jfree") * 2), 1.2, 3.1); return a * (1 - ss(m("jnorth"), m("jnorth") + .6, t)) + .8 * Math.sin(t * 9) * ss(m("jcome"), m("jpush"), t); }
-  if (t < m("jpull")) return settle21(t, m("jpush"), 0, .45, 5.2, -68);
-  if (t < m("jback") + .3) return settle21(t, m("jpull"), -68, .45, 5.2, 70);
-  return settle21(t, m("jback") + .3, 70, .9, 3.6, 0) * (1 - ss(m("jns") + .2, m("jns") + .9, t)); }
+  if (t < m("jpull")) return settle21(t, m("jpush"), 0, .45, 5.2, -60);
+  if (t < m("jback") + .3) return settle21(t, m("jpull"), -60, .45, 5.2, 62);
+  return settle21(t, m("jback") + .3, 62, .9, 3.6, 0) * (1 - ss(m("jns") + .2, m("jns") + .9, t)); }
 const dialPt = (deg, r = .85) => [NP[0] + NRX * r * Math.sin(deg * Math.PI / 180), NP[1] - NRY * r * Math.cos(deg * Math.PI / 180)];
 function needleJourney(t, s) { const m = MK, a = needleAng(t), ar = a * Math.PI / 180;
   // outside the case: the sky, the sea, the trail map's wooden ledge (seen through the clear wall: a little soft)
