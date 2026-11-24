@@ -235,8 +235,8 @@ function lcEarthArt(t) { const m = MKS, tU = m("up"), tE = m("earth"), tW = m("e
   if (t >= tW + 2.6) { const [x, y] = earthPt(103.8, 1.3, g); s += lcLab(t, tW + 2.6, cx + 330, cy + 150, "interacts", cx + x + 20, cy + y, { size: 34, fill: NSC, ink: "#fff" }); }
   // its own North and South poles: two thin lines to the top and bottom of the Earth (no colour, no magnet drawn in it)
   if (t >= tP) s += OP(ramp(t, tP, .4), pline(cx + 300, cy - 210, cx + 6, cy - g.R + 4, 1) + pline(cx + 300, cy + 210, cx + 6, cy + g.R - 4, 1) + TF(cx + 470, cy - 210, spring(t, tP, .45), tpill(0, 0, "its own North pole", 30, "#fff", P.ink, { w: 700 })) + TF(cx + 470, cy + 210, spring(t, tP + .2, .45), tpill(0, 0, "its own South pole", 30, "#fff", P.ink, { w: 700 })));
-  // chartEarth: THE SPIN CHART gets its small Earth (an inset of the chart's bottom with an arrow from the big Earth)
-  if (t >= tC) s += TF(-560, -240, spring(t, tC, .45), `<g filter="url(#drop)"><rect x="-200" y="-90" width="400" height="180" rx="14" fill="#FDFEFE" stroke="#B8C0C8" stroke-width="8"/></g><circle cx="-130" cy="0" r="50" fill="#3F7FD0" stroke="${P.ink}" stroke-width="3"/><path d="M-152 -24 q22 -12 34 4 q10 20 -10 34 q-22 2 -24 -38z" fill="#5FAE5A"/>` + T(60, -8, "Why? Earth behaves", 28, P.ink, { w: 700 }) + T(60, 26, "like a magnet", 28, P.ink, { w: 700 }) + T(0, -110, "THE SPIN CHART", 26, "#fff", { w: 700 }));
+  // (teacher 24 Nov: the SPIN CHART inset at the top left read as a stray note, joined to nothing, so it is gone. The verdict strip "THE EARTH
+  // TURNS IT: NO TOUCHING" carries this beat, and the field's SPIN CHART gets its Earth row when the panel closes.)
   return s; }
 
 /* ================================================================ Part 2 · [LOOK CLOSER] turn the compass, not the needle ================================================================ */
