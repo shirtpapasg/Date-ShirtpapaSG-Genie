@@ -184,3 +184,6 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
   lclike cover the card's title for 2 s; lctest stacks bar A over bar B (the book's set-up is side by side); the train journey's paw is a
   shadow and a pill (no code-drawn buddy parts); the cards in r1ans / answer are small at the top left (as EP19). No teaching cut (Part 2 at
   5:45.9 as the teacher accepted).
+
+## 24 Nov: LIVE
+Teacher: "ok to upload episode 20". Part 1 b3tBp6ptTvY, Part 2 A72s28TeDnU (after EP19 in both playlists); classic VLGDU0qduEw retired (NEW VERSION line -> EP19 P1 + EP20 P1). ep21/upload.json {EP20_P1} filled.
