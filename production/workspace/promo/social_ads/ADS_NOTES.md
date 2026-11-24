@@ -135,4 +135,11 @@ Left out on purpose: user numbers, ratings, testimonials, grades/AL claims, "gua
 
 ## 6. Checks (from finish.py)
 
-CHECKS
+| File | Length | Size | fps | MB | Loudness | True peak | 720p preview |
+|---|---|---|---|---|---|---|---|
+| `ad15_9x16.mp4` | 15.0 s | 1080x1920 | 30 | 3.08 | -14.1 LUFS | -1.9 dBTP | 1.24 MB |
+| `ad15_4x5.mp4` | 15.0 s | 1080x1350 | 30 | 3.24 | -14.1 LUFS | -1.9 dBTP | 1.33 MB |
+| `ad30_9x16.mp4` | 30.0 s | 1080x1920 | 30 | 6.15 | -14.1 LUFS | -1.8 dBTP | 2.44 MB |
+| `ad30_4x5.mp4` | 30.0 s | 1080x1350 | 30 | 6.29 | -14.1 LUFS | -1.8 dBTP | 2.63 MB |
+
+All H.264 High + AAC 48 kHz. Previews, contact sheets (one frame a second) and `safezones_9x16.jpg` were written to the session's scratch folder by `finish.py`.
