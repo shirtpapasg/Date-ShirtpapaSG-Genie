@@ -96,7 +96,7 @@ for (let i = 0; i < 10; i++) add(sfx, I.ting(91 + (i % 3) * 2, { gap: .06 }), MK
   for (const id of ['m04', 'b04', 'p05']) pops(LT(id) - .05, .13, 1700); chime(MK.logo, .1); ding(W('h07', 'theoneapp'), .1, 89); }
 
 /* ---------- the voices ---------- */
-for (const id of TL.order) { const L = TL.lines[id]; const b = loadAudio(path.join(__dirname, 'voice', id + '.wav')); vox.addStereo(b.L, b.R, L.t, 1); }
+for (const id of TL.order) { const L = TL.lines[id]; const b = loadAudio(path.join(__dirname, 'voice', id + '.wav')); vox.addStereo(b.L, b.R, L.t, L.gain || 1); }   // gain: script.py opts (p01, a quieter aside)
 
 /* ---------- the mix ---------- */
 const room = new Bus(N); music.mixInto(room, .22); sfx.mixInto(room, .15); const wet = reverb(room, { room: .8 });

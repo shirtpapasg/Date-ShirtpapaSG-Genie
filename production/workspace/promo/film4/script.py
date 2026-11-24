@@ -1,13 +1,13 @@
 """script.py: every spoken word of promo film 4, "The Grey Platform" (the avatar: earn it, wear it, play it).
 Voices (the teacher: "ignore the voice" of the earlier films): Heart = Kokoro af_heart (the narrator), the buddies = the Character
 Voice Kit, exactly as the "TheOneApp, Explained" episodes make them (make_voice.py). Captions show these words exactly.
-Each line: (id, who, text, opts). opts: speed / gap (Heart), keys (words highlighted yellow in the caption)."""
+Each line: (id, who, text, opts). opts: speed / gap (Heart), pace (a buddy's speed x this), gain (the line's level in the mix), keys (words highlighted yellow in the caption)."""
 LINES = [
     # 1 the Station at night
     ("h01", "heart", "At TheOneApp Station, every pupil has a character of their very own.", {"keys": ["TheOneApp", "Station,", "character"]}),
     # 2 the mystery: a grey character steps off the train
     ("m01", "momo", "Oh wait, why is that one all grey?", {"keys": ["grey?"]}),   # teacher 24 Nov 2026: "Oh wait", not "Ooh..." (educational, no teasing)
-    ("p01", "pip", "No colour yet. Let's find out how to bring it back!", {"keys": ["colour", "back!"]}),   # teacher 24 Nov 2026: softened (was "No colour. No style. Not even a hat!")
+    ("p01", "pip", "Does he know he gets 100 free credits for completing the tutorial?", {"keys": ["100", "free", "credits"], "pace": 1.08, "gain": .78}),   # teacher 24 Nov 2026: a hidden observation, the app's 100-credit welcome gift for finishing the tour (was "No colour. No style. Not even a hat!"); a quick, curious aside: a little quicker and quieter
     ("b01", "basil", "And look. The Gift Shop is dark.", {"keys": ["Gift", "Shop", "dark."]}),
     ("h02", "heart", "Here, style is not given. It is earned.", {"keys": ["earned."]}),
     # 3 the quiz: TAP TO BEGIN
@@ -33,5 +33,5 @@ LINES = [
     ("p05", "pip", "Play it.", {"keys": ["Play"]}),
     ("h07", "heart", "The only app you need to learn Science. TheOneApp.", {"keys": ["Science.", "TheOneApp."]}),
 ]
-PRON = {"TheOneApp": "The One App"}
+PRON = {"TheOneApp": "The One App", "100": "one hundred"}
 NAMES = {"heart": "Heart", "pip": "Pip", "momo": "Momo", "basil": "Basil", "trio": "Pip, Momo and Basil"}

@@ -45,7 +45,7 @@ function platform(t, o = {}) { const d = o.door || 0; let s = sky(t, 0);
 /* 2 the mystery: the doors open; a grey character steps out; the pupils and buddies stare; Basil points out the dark Gift Shop */
 SC.mystery = (t, s) => {
   const td = MK("doors"), ts = MK("stepOut"), d = eio((t - td) / .6), tl = W("b01", "look"), pan = 760 * eio((t - tl) / 1.3) * (1 - eio((t - LT("h02") - .9) / 1.1) * .45);
-  let w = platform(t, { door: d, shop: 0 });
+  let w = platform(t, { door: d, shop: 0 }) + tourPoster(1090, 712, t);
   // the crowd turn to look (they lean towards the door)
   for (const [n, x, y, h, ph] of CROWD) w += avFront(n, x, y, h, { ...idle(t, ph, .6), rot: -3 + idle(t, ph, .6).rot });
   // the grey character: walks out of the door (side view, facing right), then turns to us, a little slumped
@@ -53,11 +53,16 @@ SC.mystery = (t, s) => {
   if (t >= ts - .2) { if (wk < 1) w += avSide("you0", lerp(520, 780, wk), lerp(700, 850, eo(wk)), 300, (t - ts) * 9, { flip: true }).replace("<g transform", `<g filter="url(#sat0)" transform`);
     else w += avFront("you0", 780, 850, 300, { sat: 0, rot: -2 + .8 * Math.sin(t * 1.2), sy: 1 - .02 * Math.sin(t * 1.2) }) + sigh(t, ts + 1.6, 830, 570); }
   // the buddies: Momo and Pip by the door, Basil further along (he points at the shop)
-  w += B("momo", 1010, 912, 222, t, { poses: [[LT("m01"), "surprised"]] }) + B("pip", 1250, 918, 214, t, { poses: [[LE("p01") + .2, "thinking"]] });
+  w += B("momo", 1010, 912, 222, t, { poses: [[LT("m01"), "surprised"]] }) + B("pip", 1250, 918, 214, t, { poses: [[LE("p01") + .2, "thinking"]], look: -7 * ss(LT("p01") - .15, LT("p01") + .2, t) * (1 - ss(LE("p01"), LE("p01") + .4, t)) });   // p01, an aside: Pip leans in towards the grey character
   w += B("basil", 1640, 918, 224, t, { poses: [[W("b01", "look"), "pointing"]], flip: false });
   return `<filter id="sat0"><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncR type="linear" slope=".82"/><feFuncG type="linear" slope=".82"/><feFuncB type="linear" slope=".9"/></feComponentTransfer></filter>` +
     `<g transform="translate(${n2(-pan)} 0)">${w}</g>` + (t < td + .3 ? flash(t, s.t0, .25) : "");
 };
+// the easter egg (teacher, 24 Nov 2026): a small poster on the platform, the app's welcome gift (tour2.js GIFT = 100, once, when a new
+// pupil finishes the tour). Always there in the background; while Pip says "100 free credits" its rim glows a little.
+function tourPoster(x, yf, t) { const g = ss(W("p01", "100") - .1, W("p01", "100") + .3, t) * (1 - ss(LE("p01") + .3, LE("p01") + 1, t));
+  return `<rect x="${x - 3}" y="${yf - 130}" width="6" height="130" fill="#2E2A70"/>` + TF(x, yf - 180, .72, `<rect x="-86" y="-74" width="172" height="148" rx="16" fill="#0C1638" stroke="${C.cyan}" stroke-width="${n2(4 + 3 * g)}" stroke-opacity="${n2(.55 + .45 * g)}"${g > .02 ? ` filter="url(#neon)"` : ""}/>` +
+    TX(0, -40, "Finish the tour", 22, "#DDEBFF") + TX(0, 22, "+100", 56, C.gold) + TX(0, 54, "credits", 24, "#fff")); }
 // a small grey sigh cloud
 function sigh(t, t0, x, y) { const u = (t - t0) % 3.2; if (t < t0 || u > 1.4) return ""; const e = u / 1.4;
   return OP(Math.sin(Math.PI * e) * .8, `<g transform="translate(${n2(x + 40 * e)} ${n2(y - 60 * e)}) scale(${n2(.6 + .5 * e)})"><circle r="22" fill="#C9C3E0"/><circle cx="20" cy="6" r="16" fill="#C9C3E0"/><circle cx="-18" cy="8" r="14" fill="#C9C3E0"/></g>`); }

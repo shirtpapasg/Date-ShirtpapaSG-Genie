@@ -1,0 +1,228 @@
+{
+ "_note": "EP21, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.interactions and CH.magnets are placeholders: check the real names in videos.js), set url to the uploaded video ids. EP21 retires the classic 6zA-Adh7QqU: remove its entry (and its moments) from videos.js when these go in.",
+ "replaces": [
+  "6zA-Adh7QqU"
+ ],
+ "entries": [
+  {
+   "no": "21A",
+   "art": "🧲",
+   "topic": "Magnets",
+   "title": "Spin a Hanging Magnet. Why Does It Stop the SAME Way? (Part A)",
+   "len": "5:28",
+   "url": "https://www.youtube.com/watch?v=<EP21_P1>",
+   "moments": [
+    {
+     "at": "0:58",
+     "what": "Round 1: where does a hanging magnet stop?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m501",
+     "_t": 59.98
+    },
+    {
+     "at": "1:24",
+     "what": "Journey: be the hanging magnet, spun round and round",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m601",
+     "_t": 86.08
+    },
+    {
+     "at": "1:58",
+     "what": "The answer: it stops the same way every time",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m701",
+     "_t": 120.34
+    },
+    {
+     "at": "2:11",
+     "what": "Is it the goalpost that turns the magnet?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m801p",
+     "_t": 133.26
+    },
+    {
+     "at": "2:19",
+     "what": "Look closer: the same line in three places",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m802",
+     "_t": 141.27
+    },
+    {
+     "at": "2:36",
+     "what": "Freely suspended: hanging so that it can turn freely",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m805m",
+     "_t": 157.69
+    },
+    {
+     "at": "2:41",
+     "what": "The North-South direction",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m806b",
+     "_t": 163.5
+    },
+    {
+     "at": "3:03",
+     "what": "HOLD ON! Basil lays the magnet on a bench. Is it free?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m901b",
+     "_t": 184.62
+    },
+    {
+     "at": "3:38",
+     "what": "How does the magnet know which way is North?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1001m",
+     "_t": 220.37
+    },
+    {
+     "at": "3:47",
+     "what": "Look closer: fly up and see the whole Earth",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1003",
+     "_t": 228.72
+    },
+    {
+     "at": "3:58",
+     "what": "Earth behaves like a magnet",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1005",
+     "_t": 239.97
+    }
+   ]
+  },
+  {
+   "no": "21B",
+   "art": "🧭",
+   "topic": "Magnets",
+   "title": "Bring a Magnet Near a Compass. What Does the Needle DO? (Part B)",
+   "len": "5:30",
+   "url": "https://www.youtube.com/watch?v=<EP21_P2>",
+   "moments": [
+    {
+     "at": "0:29",
+     "what": "Round 1: a bar magnet near a compass. What happens?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n401",
+     "_t": 31.23
+    },
+    {
+     "at": "1:07",
+     "what": "Journey: be the compass needle",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n501",
+     "_t": 69.27
+    },
+    {
+     "at": "1:41",
+     "what": "The answer: the needle turns towards or away",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n601",
+     "_t": 103.32
+    },
+    {
+     "at": "1:49",
+     "what": "The needle is the small magnet inside a compass",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n602b",
+     "_t": 110.96
+    },
+    {
+     "at": "2:04",
+     "what": "Look closer: turn the compass round. What stays still?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n702",
+     "_t": 125.79
+    },
+    {
+     "at": "2:17",
+     "what": "A compass helps us find the direction",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n704m",
+     "_t": 138.93
+    },
+    {
+     "at": "2:40",
+     "what": "Showdown: Momo's compass checklist, find the line to fix",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n801",
+     "_t": 161.83
+    },
+    {
+     "at": "3:25",
+     "what": "Look closer: a ship at night and a hiker in fog",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n902",
+     "_t": 206.64
+    },
+    {
+     "at": "3:43",
+     "what": "A freely suspended magnet can tell the direction",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n905p",
+     "_t": 225.11
+    }
+   ]
+  }
+ ]
+}

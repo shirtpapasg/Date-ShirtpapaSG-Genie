@@ -131,3 +131,16 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
 7. No back views in the v2 set: the cold open and the cliffhanger use front views turned in (as EP19 / EP20).
 8. Upload order: EP21 only after EP20 is live, and only once `{EP20_P1}` in `upload.json`'s `new_version_line` is filled with EP20 Part 1's
    real id.
+
+## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-24 (resume from here)
+- **New files:** `art21.js` (helpers copied UNCHANGED from ../ep20/art20.js; XDEFS21; the BARN SWALLOW swallow21 / swallowFly / swallowAt; the SEA
+  TURTLE turtle21 / turtleAt / turtleSwim; hangMag21 (a bar magnet hanging level, turning, with its end face), spinAng, miniMag; Momo's compass
+  compass21 + settle21; cone21, chair21, broom21, bench21, giantFinger, binnacle21, smallEasel), `ep21dare.js` (SECTION A of ../ep22/ep21dare.js
+  copied UNCHANGED: nail21, clip21, clipPile21, hand21, darePic21: the dare cards are EP22's own pictures), `sets21.js` (FD21 the school field,
+  baked bg/fd21.png + live: the rain tree, the goal, the hoops, the trolley, the children, THE SPIN CHART spinChart21, the chairs, the broom
+  handle and the hanging magnet, the cones; SWAT the swallow's spots; UB21 the jetty, baked bg/ub21.png + live: the mangroves, the heron, the
+  buoy, the bumboats, THE TRAIL MAP trailMap21; TTAT the turtle's spots; BW21 the boardwalk, baked bg/bw21.png + live: the seagrass, the
+  boardwalk and its ladder; BWAT), `lc21.js` (the Earth earth21 / earthMag (an orthographic globe: place words only), magnetJourney,
+  needleJourney, peekFace, lcXY, magni21, lcPlacesArt, riseView + lcEarthArt, lcUseArt, lcNightArt, and the pictures). page.html loads them
+  after ep20dare.js; main.js adds XDEFS21. Re-bake after a change to BG.fd21 / ub21 / bw21: `node bake.js fd21 ub21 bw21`.
+- **p1.js / p2.js** rewritten: every scene drawn to SCENES_TODO, every action AT its mark. Sweeps (every 0.5 s): 0 bad, 0 page errors.

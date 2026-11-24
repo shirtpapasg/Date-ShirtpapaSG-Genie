@@ -52,8 +52,8 @@ def heart(text, excited=False, gap=.5, spd=.90, terms=(), soft=False):
     x = np.concatenate(parts[:-1]); sp = x[np.abs(x) > 0.003]
     return np.clip(x * (10 ** ((-21.7 + gain) / 20) / np.sqrt(np.mean(sp ** 2))), -0.98, 0.98), SR
 
-def buddy(who, text, gap=.16):   # gap: silence between sentences (a Mark Sentence card with two sentences: script opts "gap")
-    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * .88   # EP6/EP8: about 12% slower than default (teacher, 20 Nov)
+def buddy(who, text, gap=.16, pace=1.0):   # pace: x speed for one line (film 4 p01, a quick aside)   # gap: silence between sentences (a Mark Sentence card with two sentences: script opts "gap")
+    c = dict(vm.CHARACTERS[who]); c["speed"] = c["speed"] * .88 * pace   # EP6/EP8: about 12% slower than default (teacher, 20 Nov)
     x, sr = vm.speak(K(), pron(text), c, gap=gap + .06, para_gap=0)
     idx = np.where(np.abs(x) > .01)[0]; x = x[max(0, idx[0] - 240): idx[-1] + 2400].astype(np.float64)
     sp = x[np.abs(x) > .003]; return np.clip(x * (10 ** (-18 / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98), sr
@@ -102,7 +102,7 @@ def align(text, wav):
     else: pairs = None
     x, sr = sf.read(wav); Dn = len(x) / sr; al = []
     if pairs is not None:
-        spoken = [(i, w) for i, t in pairs for w in re.findall(r"[a-z'][a-z'\-]*[a-z]|[a-z]", t.lower())]
+        spoken = [(i, w) for i, t in pairs for w in re.findall(r"[a-z0-9'][a-z0-9'\-]*[a-z0-9]|[a-z0-9]", t.lower())]   # digits kept (film 4: "100", EXTRA)
         spoken = [(i, "fragyle" if w == "fragile" else w) for i, w in spoken]   # align "fragile" to the FRAJ-ile sound sg_pron makes (the dictionary has FRAJ-uhl)
         w16 = wav[:-4] + "_16k.wav"
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", wav, "-ar", "16000", "-ac", "1", "-c:a", "pcm_s16le", w16], check=True)
@@ -153,17 +153,17 @@ def align(text, wav):
     return [{"w": t, "a": round(tw[i][0], 3), "b": round(tw[i][1], 3)} for i, t in enumerate(toks)], ok
 
 
-EXTRA.update({"theoneapp": "DH AH W AH N AE P", "ooh": "UW", "goggles": "G AA G AH L Z", "let's": "L EH T S"})
+EXTRA.update({"100": "W AH N HH AH N D R AH D", "theoneapp": "DH AH W AH N AE P", "ooh": "UW", "goggles": "G AA G AH L Z", "let's": "L EH T S"})
 bad = []
 for id, who, text, o in LINES:
     j = f"{V}/{id}.json"; f = f"{V}/{id}.wav"
-    vo = {k: o[k] for k in ("speed", "gap") if k in o}
+    vo = {k: o[k] for k in ("speed", "gap", "pace") if k in o}
     if os.path.exists(j) and os.path.exists(f) and json.load(open(j)).get("text") == text and json.load(open(j)).get("vo", {}) == vo: continue
     LINE_PRON.clear()
     if who == "trio":
         unison(id, text); jj = json.load(open(j)); jj["who"] = "trio"; jj["vo"] = vo; json.dump(jj, open(j, "w")); print(id, "trio", jj["dur"], flush=True); continue
     if who == "heart": x, sr = heart(text, False, o.get("gap", .4), o.get("speed", .95))
-    else: x, sr = buddy(who, text)
+    else: x, sr = buddy(who, text, pace=o.get("pace", 1.0))
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     saved = dict(PRON); PRON.clear(); words, ok = align(text, f); PRON.update(saved)   # align on the script's own words ("theoneapp" is in EXTRA)
     if not ok: bad.append(id)

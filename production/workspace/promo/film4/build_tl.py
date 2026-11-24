@@ -30,7 +30,7 @@ for it in ORDER:
     elif k == "mark": marks[it[1]] = round(t + (it[2] if len(it) > 2 else 0), 3)
     elif k == "line":
         id = it[1]; who, text, o = L[id]; v = json.load(open(f"{H}/voice/{id}.json")); d = v["dur"]
-        x = {"who": "chant" if who == "trio" else who, "speaker": who, "name": NAMES[who], "text": text, "keys": o.get("keys", []), "t": round(t, 3), "dur": d, "end": round(t + d, 3),
+        x = {"who": "chant" if who == "trio" else who, "speaker": who, "name": NAMES[who], "text": text, "keys": o.get("keys", []), "gain": o.get("gain", 1), "t": round(t, 3), "dur": d, "end": round(t + d, 3),
              "words": [{"w": w["w"], "a": round(t + w["a"], 3), "b": round(t + w["b"], 3)} for w in v["words"]]}
         if who == "trio": x["tracks"] = v["tracks"]
         else: x.update(mouth=v["mouth"], open=v["open"], stress=[round(t + s, 3) for s in v["stress"]])

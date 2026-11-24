@@ -100,7 +100,8 @@
   {
    "id": "s1e",
    "scene": "shadow",
-   "text": "In Primary Four, you learn that light travels in a straight line, and when an object blocks light, it forms a shadow."
+   "text": "In Primary Four, you learn that light travels in a straight line, and when an object blocks light, it forms a shadow.",
+   "hold": 1.3
   },
   {
    "id": "s1f",
