@@ -180,3 +180,18 @@ Teacher: "ok to upload all". Part 1 LZxwTx-EccU, Part 2 JpBskDtIwb0 (after EP18 
 - **Part 2 re-rendered:** `ep19_part2.mp4` **334.77 s**, -16.0 LUFS, peak -2.0 dBFS, Kampong Walk bed (add_lofi.py), countdowns 1.00 s
   steps; tl_p2 / srt unchanged; `qa/preview_p2_720p.mp4` (not committed). upload_v2.json: explained-p3-ep19v2-part2 replaces JpBskDtIwb0;
   chapters key EP19_P2_v2 (= the live Part 2's). `--check` of Part 2 alone OK (the full file waits for the Part 1 render). Not uploaded.
+
+## v2 Part 1: the cold open speaks (2026-11-24, Opus; teacher: "Not speaking for the first few seconds", "fix the live ones too")
+- SERIES_FORMAT 11 item 1, EP22's approach: Heart's "Last time, we asked:" now starts at **0.825 s** (was 6.3 s). The void deck stays under
+  "A magnet, a steel pin and a copper wire! The pin and the wire are both metal." with every cold mark on a word of the dare: magOff on
+  "magnet" 2.26, pinIn on "pin" 3.45, cardsIn on "wire" 4.24, budsIn on "The" 5.20; "lasttime" starts .45 s before "Which" (ltIn 7.76;
+  build_tl.py's ("scene", name, {"at": mark, "d": s}), copied from ep22). sound_cues.js: the hand's "lift" now magOff + 1.9 (was a fixed
+  3.1). p1.js: camCold over the whole scene, the place card from 0.2 s. Every later Part 1 time is **5.475 s earlier**; no voice re-recorded.
+- The voice wavs were gone (only the jsons stayed). Re-made with make_voice.py's own engine (Heart bit-identical; the buddies' Character
+  Voice Kit is not bit-exact run to run: same takes within a few ms / ~3 cents). The jsons are unchanged.
+- **Render (after the n2 4-decimal fix and the lock-in ring clips, incl. the art-fix agent's EP19 P1 HOLD ON! wok / Round 1 wire moves):**
+  `ep19_part1.mp4` 325.533 s, 9766 frames, -16.0 LUFS, decodes; first word 0.825 s; Round 1 numbers 58.304 ... 61.304, HOLD ON! 194.805 ...
+  199.805 (1 frame after the ring start, as before; steps 1.000). New srt, sheet_part1.png, `qa/open_p1_first25.jpg`.
+- Records: app_moments.json (19A 5.475 s earlier), chapters_p3.json key **EP19_P1_v2**, **upload_v2.json** (explained-p3-ep19v2-part1, after
+  explained-p3-ep18v2-part2, replaces LZxwTx-EccU, retire_old). Part 2 is the art-fix agent's re-render (add it to upload_v2.json there).
+  Not uploaded.
