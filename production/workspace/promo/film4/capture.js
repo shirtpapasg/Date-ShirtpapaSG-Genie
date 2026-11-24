@@ -2,7 +2,7 @@
 //   (cd /home/user/theoneapp && python3 -m http.server 8765 --bind 127.0.0.1 &)   NODE_PATH=$(npm root -g) node capture.js [name ...]
 // The members-only check (/api/access) cannot reach a server here, so each page opens as its own catch() allows ("server unreachable:
 // let the room open"). Nothing in /home/user/theoneapp is edited: the pupil's character, purse and pet are set in this browser's storage.
-const { chromium } = require('playwright'); const fs = require('fs'), path = require('path');
+const { chromium } = require('playwright'); const fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
 const AVS = (() => { const s = fs.readFileSync(path.join(__dirname, 'avatars.js'), 'utf8'); const w = {}; new Function('window', s)(w); return w.AV; })();
 const now = new Date(), day = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
 function purse(total, spent, owned) { return { v: 1, total, spent, owned, days: { [day]: { n: 0, login: true, keys: [] } }, log: [], first: true, how: {} }; }
@@ -24,5 +24,5 @@ async function clickText(p, txt) { const el = p.getByText(txt, { exact: false })
     await p.goto('http://127.0.0.1:8765/' + S.page, { waitUntil: 'load' }); await p.waitForTimeout(2500);
     // the daily "+1 credit for coming back today" toast covers the top of every page: wait it out, or hide it for the still
     await S.steps(p); await p.addStyleTag({ content: '.cr-toast,#cr-toast,[class*="toast"]{display:none!important}' }).catch(() => {});
-    await p.waitForTimeout(400); await p.screenshot({ path: path.join(__dirname, 'shots', n + '.png') }); console.log('shot', n, p.url()); await ctx.close(); }
+    await p.waitForTimeout(400); const png = path.join(__dirname, 'shots', n + '.png'); await p.screenshot({ path: png }); execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-i', png, '-q:v', '3', png.replace(/png$/, 'jpg')]); fs.unlinkSync(png); console.log('shot', n, p.url()); await ctx.close(); }
   await b.close(); })();

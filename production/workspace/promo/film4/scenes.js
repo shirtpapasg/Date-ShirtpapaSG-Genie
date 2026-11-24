@@ -254,9 +254,20 @@ SC.end = (t, s) => {
   for (const [txt, id, x, col] of WRD) { const k = spring(t, LT(id) - .05, .45) * (1 - ramp(t, tl - .1, .35)); if (k > .02) w += TF(x, 330, k, `<rect x="-165" y="-58" width="330" height="116" rx="58" fill="${col}" stroke="#fff" stroke-width="6" filter="url(#drop)"/>${TX(0, 22, txt, 64, "#fff")}`); }
   // the end card (film 1's): the logo, the line, the name
   if (t >= tl - .1) { const k = ramp(t, tl - .1, .5);
-    w += OP(k, `<rect width="1920" height="1080" fill="#0B0726" opacity=".35"/>`) + TF(960, 170, spring(t, tl - .1, .6), logo(0, 0, 100, t));
+    w += OP(k, `<rect width="1920" height="1080" fill="#0B0726" opacity=".5"/>`) + TF(960, 170, spring(t, tl - .1, .6), logo(0, 0, 100, t));
     w += OP(ramp(t, tl + .3, .4), TX(960, 380, "The only app you need to learn Science", 58, "#fff", { stroke: "#1A1240", sw: 10 }));
     w += TF(960, 500, spring(t, W("h07", "theoneapp") - .1, .55), `<text x="0" y="0" font-family="Fredoka" font-weight="700" font-size="150" text-anchor="middle" stroke="#1A1240" stroke-width="16" stroke-linejoin="round" paint-order="stroke" filter="url(#glowS)"><tspan fill="#fff">The</tspan><tspan fill="#FFA531">One</tspan><tspan fill="#fff">App</tspan></text>`);
     w += OP(ramp(t, W("h07", "theoneapp") + .4, .4), tpill(960, 588, "theoneapp.sg", 38, "#FFF6E4", "#2B2147", { w: 700 })); }
   return w + fadeOut(t, tf + 1.0, 1.0);
 };
+
+/* the YouTube thumbnail (thumb.js renders it at 1920x1080, then it is scaled to 1280x720): the grey character becomes the styled one */
+window.renderThumb = () => { const t = 3.3; let w = station(t, { trainX: 1900, screen: "dress" }) + `<rect width="1920" height="1080" fill="#0B0726" opacity=".45"/>`;
+  w += `<circle cx="1260" cy="640" r="430" fill="url(#glowY)" opacity=".55"/>`;
+  w += avFront("you0", 520, 1010, 560, { sat: 0, rot: -3 }) + avFront("you", 1260, 1040, 760, { rot: 3 }) + sparks(3.3, 3.0, 1260, 600) + sparks(3.3, 3.12, 1260, 520, "#9FE7FF");
+  w += `<g transform="translate(860 700)"><path d="M-110 -40 H40 V-90 L130 0 L40 90 V40 H-110z" fill="${C.gold}" stroke="#1A1240" stroke-width="12" stroke-linejoin="round"/></g>`;
+  w += `<text x="960" y="200" font-family="Fredoka" font-weight="700" font-size="160" text-anchor="middle" stroke="#1A1240" stroke-width="26" stroke-linejoin="round" paint-order="stroke"><tspan fill="#fff">EARN </tspan><tspan fill="${C.gold}">YOUR STYLE</tspan></text>`;
+  w += TF(520, 420, 1, `<rect x="-140" y="-46" width="280" height="92" rx="46" fill="#6B6488" stroke="#fff" stroke-width="6"/>${TX(0, 18, "BEFORE", 52, "#fff", { ls: 3 })}`);
+  w += buddy("momo", 1760, 1075, 330, t, { pose: "surprised", tag: false, flip: true }) + buddy("pip", 170, 1075, 300, t, { pose: "cheer", achieved: true, tag: false });
+  w += TF(870, 930, 1, logo(0, 0, 86, t));
+  document.getElementById("dyn").innerHTML = w + vignette(.4); };
