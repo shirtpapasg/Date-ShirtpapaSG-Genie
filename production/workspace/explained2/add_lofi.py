@@ -106,6 +106,7 @@ def main():
                      '-vf', 'scale=1280:720', '-c:v', 'libx264', '-preset', 'medium', '-crf', '20', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k',
                      '-movflags', '+faststart', '-shortest', out])
             ps = probe(out); print(f'  sample {out}: {float(ps["format"]["duration"]):.1f} s'); return
+        backup = os.path.join(epdir, 'out', f'nolofi_p{part}.m4a')
         for attempt in range(3):
             tmp = os.path.join(epdir, f'_{key}_lofi.mp4')
             with Lock():
@@ -120,21 +121,21 @@ def main():
                 if dec.returncode != 0 or dec.stderr.strip():
                     os.remove(tmp); sys.exit(f'{tmp} does not decode cleanly:\n{dec.stderr[-2000:]}')
                 lu, tp = loudness(tmp)
+                good = tp <= -1.5 and abs(lu + 16) <= 0.5
+                if good:   # put it in place in the same lock hold (finish.sh writes the mp4 under this lock): never over a newer render
+                    now = os.stat(mp4)
+                    if (now.st_size, now.st_mtime) != (st.st_size, st.st_mtime):
+                        os.remove(tmp); sys.exit(f'{mp4} changed while the music was added (a new render?): run add_lofi.py again')
+                    if not already:   # the audio as rendered, before any Kampong Walk (a re-render gets a fresh backup)
+                        run(['ffmpeg', '-y', '-v', 'error', '-i', mp4, '-map', '0:a:0', '-c', 'copy', backup])
+                    os.replace(tmp, mp4)
             print(f'  re-muxed: {v1["nb_read_packets"]} video packets (unchanged), decodes end to end, {lu:.1f} LUFS, true peak {tp:.1f} dBTP')
-            if tp <= -1.5 and abs(lu + 16) <= 0.5: break
+            if good: break
             os.remove(tmp)
             if attempt == 2: sys.exit(f'loudness check failed: {lu} LUFS, {tp} dBTP')
             ceil = ceil * 10 ** ((-1.5 - tp - 0.15) / 20) if tp > -1.5 else ceil
             print(f'  true peak over -1.5 dBTP after AAC: mixing again with the limiter ceiling at {ceil:.3f}')
             info = mix(epdir, part, wav, ceil)
-        backup = os.path.join(epdir, 'out', f'nolofi_p{part}.m4a')
-        with Lock():   # finish.sh writes the mp4 under this lock: never put back an older picture over a newer render
-            now = os.stat(mp4)
-            if (now.st_size, now.st_mtime) != (st.st_size, st.st_mtime):
-                os.remove(tmp); sys.exit(f'{mp4} changed while the music was added (a new render?): run add_lofi.py again')
-            if not already:   # the audio as rendered, before any Kampong Walk (a re-render gets a fresh backup)
-                run(['ffmpeg', '-y', '-v', 'error', '-i', mp4, '-map', '0:a:0', '-c', 'copy', backup])
-            os.replace(tmp, mp4)
         st = os.stat(mp4)
         info.update({'when': time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime()), 'lufs': lu, 'true_peak': tp, 'duration': round(dur, 3), 'size': st.st_size, 'mtime': st.st_mtime,
                      'video_packets': int(v1['nb_read_packets']), 'backup': os.path.relpath(backup, HERE)})
