@@ -207,3 +207,18 @@ Teacher: "ok to upload episode 20". Part 1 b3tBp6ptTvY, Part 2 A72s28TeDnU (afte
 - **Part 2 re-rendered** (EP20 P1 is the opening-fix agent's): `ep20_part2.mp4` **345.9 s**, -16.0 LUFS, peak -1.6 dBFS, Kampong Walk bed
   (add_lofi.py), countdowns 1.00 s steps (measure_countdowns.py 2); `qa/preview_p2_720p.mp4` (not committed). tl_p2 / srt / cues unchanged.
   upload_v2.json: explained-p3-ep20v2-part2 replaces A72s28TeDnU; chapters key EP20_P2_v2 (= the live Part 2's). Not uploaded.
+
+## v2 Part 1: the cold open speaks (2026-11-24, Opus; teacher: "Not speaking for the first few seconds", "fix the live ones too")
+- SERIES_FORMAT 11 item 1, EP22's approach: Heart's "Last time, we asked:" now starts at **0.825 s** (was 6.3 s). The science room stays
+  under "Two ring magnets on a pencil! The top one floats in mid-air, with no glue and no string." with every cold mark on a word of the
+  dare: ringsIn on "ring" 2.46, budsIn on "The" 4.29, paw on "no" (glue) 6.15; "lasttime" starts .45 s before "What" (ltIn 8.10; build_tl.py's
+  ("scene", name, {"at": mark, "d": s}), copied from ep22). p1.js: camCold over the whole scene, the place card from 0.2 s. Every later Part 1
+  time is **5.475 s earlier**; no voice re-recorded (this episode's wavs were still on disk).
+- **Render (rendered last, after "EP20 art fixed": the pencil through the ring holes, the ring journey side view, the HOLD ON! picture; the
+  n2 4-decimal fix; the lock-in clip):** `ep20_part1.mp4` 328.067 s, 9842 frames, -16.0 LUFS, decodes; first word 0.825 s; Round 1 53.63 ...
+  56.63, HOLD ON! numbers 208.582 ... 213.582 (1 frame after the ring start; steps 1.000). New srt, sheet_part1.png,
+  `qa/open_p1_first25.jpg` (from the final mp4).
+- Records: app_moments.json (20A 5.475 s earlier), chapters_p3.json key **EP20_P1_v2**, **upload_v2.json** (explained-p3-ep20v2-part1, after
+  explained-p3-ep19v2-part2 (or JpBskDtIwb0 if EP19 Part 2 is not re-uploaded), replaces b3tBp6ptTvY, retire_old). Part 2 is the art-fix
+  agent's re-render (add it there as explained-p3-ep20v2-part2). The classic VLGDU0qduEw's NEW VERSION line still points to the old
+  b3tBp6ptTvY / LZxwTx-EccU. Not uploaded.
