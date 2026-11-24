@@ -84,11 +84,15 @@ if __name__ == "__main__":
     for f in (sys.argv[1:] or ["1", "2", "3"]):
         L = json.load(open(f"{H}/lines_film{f}.json"))
         for k, ln in enumerate(L["lines"]):
-            id = f"f{f}_{k:02d}"; wav = f"{V}/{id}.wav"; meta = f"{V}/{id}.txt"; key = ln["speaker"] + "|" + ln["text"]
-            if os.path.exists(wav) and os.path.exists(meta) and open(meta).read() == key: continue
-            who = WHO[ln["speaker"]]
-            if who == "heart": x, sr = heart(say(ln["text"]), False, .4, .95)
-            elif who == "group": x, sr = group(say(ln["text"]))
-            else: x, sr = buddy(who, say(ln["text"]))
-            x = up48(np.asarray(x, np.float64), sr); sf.write(wav, x.astype(np.float32), 48000, subtype="PCM_16"); open(meta, "w").write(key)
-            print(id, ln["speaker"], round(len(x) / 48000, 2), "s  (slot", round(ln["end"] - ln["start"], 2), ")", ln["text"], flush=True)
+            id = f"f{f}_{k:02d}"; who = WHO[ln["speaker"]]
+            # a line with a long pause on screen ("Next time... why are the Guardians asleep?") has "parts": [[text, start], ...]:
+            # each part is recorded on its own and mix.py starts it where the old voice said it
+            parts = [p[0] for p in ln["parts"]] if ln.get("parts") else [ln["text"]]
+            for j, text in enumerate(parts):
+                pid = id if len(parts) == 1 else f"{id}_{j}"; wav = f"{V}/{pid}.wav"; meta = f"{V}/{pid}.txt"; key = ln["speaker"] + "|" + text
+                if os.path.exists(wav) and os.path.exists(meta) and open(meta).read() == key: continue
+                if who == "heart": x, sr = heart(say(text), False, .4, .95)
+                elif who == "group": x, sr = group(say(text))
+                else: x, sr = buddy(who, say(text))
+                x = up48(np.asarray(x, np.float64), sr); sf.write(wav, x.astype(np.float32), 48000, subtype="PCM_16"); open(meta, "w").write(key)
+                print(pid, ln["speaker"], round(len(x) / 48000, 2), "s  (slot", round(ln["end"] - ln["start"], 2), ")", text, flush=True)

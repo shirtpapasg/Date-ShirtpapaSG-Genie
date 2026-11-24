@@ -7,128 +7,261 @@
   {
    "speaker": "Heart",
    "text": "At TheOneApp Station, every train goes somewhere new.",
-   "start": 0.0,
-   "end": 5.0
+   "start": 1.53,
+   "end": 5.0,
+   "start_rough": 0.0,
+   "end_rough": 5.0,
+   "new_start": 1.53,
+   "new_end": 4.5,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "Watch it.",
-   "start": 7.6,
-   "end": 8.3
+   "start": 7.37,
+   "end": 8.03,
+   "start_rough": 7.6,
+   "end_rough": 8.3,
+   "new_start": 7.37,
+   "new_end": 8.19,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "Quiz it!",
-   "start": 9.96,
-   "end": 11.08
+   "start": 10.05,
+   "end": 11.08,
+   "start_rough": 9.96,
+   "end_rough": 11.08,
+   "new_start": 10.05,
+   "new_end": 10.77,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "Keep it.",
-   "start": 12.36,
-   "end": 13.2
+   "start": 12.52,
+   "end": 13.14,
+   "start_rough": 12.36,
+   "end_rough": 13.2,
+   "new_start": 12.52,
+   "new_end": 13.16,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "Ooh... what is that?",
-   "start": 15.54,
-   "end": 18.44
+   "start": 16.15,
+   "end": 18.53,
+   "parts": [
+    [
+     "Ooh...",
+     15.54
+    ],
+    [
+     "what is that?",
+     17.48
+    ]
+   ],
+   "start_rough": 15.54,
+   "end_rough": 18.44,
+   "new_start": 16.15,
+   "new_end": 18.57,
+   "tempo": 1.0,
+   "part_starts": [
+    16.15,
+    17.64
+   ]
   },
   {
    "speaker": "Basil",
    "text": "It is making things forget.",
-   "start": 19.82,
-   "end": 21.44
+   "start": 19.86,
+   "end": 21.59,
+   "start_rough": 19.82,
+   "end_rough": 21.44,
+   "new_start": 19.86,
+   "new_end": 21.22,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "...Who turned off the fun?",
-   "start": 25.6,
-   "end": 27.26
+   "start": 26.41,
+   "end": 27.39,
+   "start_rough": 25.6,
+   "end_rough": 27.26,
+   "new_start": 26.41,
+   "new_end": 27.66,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "More batteries!",
-   "start": 29.22,
-   "end": 30.4
+   "start": 29.7,
+   "end": 30.49,
+   "start_rough": 29.22,
+   "end_rough": 30.4,
+   "new_start": 29.7,
+   "new_end": 30.73,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "More batteries will not help, if the electricity has no path.",
-   "start": 32.08,
-   "end": 35.36
+   "start": 32.12,
+   "end": 35.37,
+   "start_rough": 32.08,
+   "end_rough": 35.36,
+   "new_start": 32.12,
+   "new_end": 35.41,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "The circuit is open.",
-   "start": 38.72,
-   "end": 39.86
+   "start": 38.71,
+   "end": 40.06,
+   "start_rough": 38.72,
+   "end_rough": 39.86,
+   "new_start": 38.71,
+   "new_end": 39.82,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "And the fog feeds on questions nobody answered.",
-   "start": 41.14,
-   "end": 43.68
+   "start": 41.1,
+   "end": 43.73,
+   "start_rough": 41.14,
+   "end_rough": 43.68,
+   "new_start": 41.1,
+   "new_end": 43.84,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "Which one lets electricity through?",
-   "start": 46.04,
-   "end": 47.72
+   "start": 45.98,
+   "end": 47.83,
+   "start_rough": 46.04,
+   "end_rough": 47.72,
+   "new_start": 45.98,
+   "new_end": 47.88,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "We need a scientist.",
-   "start": 48.98,
-   "end": 50.12
+   "start": 49.01,
+   "end": 50.29,
+   "start_rough": 48.98,
+   "end_rough": 50.12,
+   "new_start": 49.01,
+   "new_end": 50.4,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip, Momo and Basil",
    "text": "We need you.",
-   "start": 50.96,
-   "end": 51.86
+   "start": 50.85,
+   "end": 51.86,
+   "start_rough": 50.96,
+   "end_rough": 51.86,
+   "new_start": 50.85,
+   "new_end": 51.98,
+   "tempo": 1.0
   },
   {
    "speaker": "Heart",
    "text": "Metal is a conductor of electricity.",
-   "start": 55.46,
-   "end": 57.88
+   "start": 55.83,
+   "end": 58.0,
+   "start_rough": 55.46,
+   "end_rough": 57.88,
+   "new_start": 55.83,
+   "new_end": 57.93,
+   "tempo": 1.0
   },
   {
    "speaker": "Heart",
    "text": "Electricity flows only when the circuit is closed.",
-   "start": 59.32,
-   "end": 61.86
+   "start": 59.19,
+   "end": 62.34,
+   "start_rough": 59.32,
+   "end_rough": 61.86,
+   "new_start": 59.19,
+   "new_end": 61.83,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "YES!",
-   "start": 64.82,
-   "end": 65.36
+   "start": 65.12,
+   "end": 65.54,
+   "start_rough": 64.82,
+   "end_rough": 65.36,
+   "new_start": 65.12,
+   "new_end": 65.76,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "What you learn, the fog cannot take.",
-   "start": 66.46,
-   "end": 68.34
+   "start": 66.47,
+   "end": 68.28,
+   "start_rough": 66.46,
+   "end_rough": 68.34,
+   "new_start": 66.47,
+   "new_end": 68.38,
+   "tempo": 1.0
   },
   {
    "speaker": "Heart",
    "text": "The only app you need to learn Science.",
-   "start": 70.84,
-   "end": 72.88
+   "start": 71.01,
+   "end": 72.95,
+   "start_rough": 70.84,
+   "end_rough": 72.88,
+   "new_start": 71.01,
+   "new_end": 72.93,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip, Momo and Basil",
    "text": "TheOneApp!",
-   "start": 73.58,
-   "end": 74.14
+   "start": 73.38,
+   "end": 74.31,
+   "start_rough": 73.58,
+   "end_rough": 74.14,
+   "new_start": 73.38,
+   "new_end": 74.45,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "Next time... why are the Guardians asleep?",
-   "start": 76.76,
-   "end": 80.68
+   "start": 77.18,
+   "end": 80.78,
+   "parts": [
+    [
+     "Next time...",
+     76.76
+    ],
+    [
+     "why are the Guardians asleep?",
+     79.12
+    ]
+   ],
+   "start_rough": 76.76,
+   "end_rough": 80.68,
+   "new_start": 77.18,
+   "new_end": 80.46,
+   "tempo": 1.0,
+   "part_starts": [
+    77.18,
+    79.07
+   ]
   }
  ]
 }

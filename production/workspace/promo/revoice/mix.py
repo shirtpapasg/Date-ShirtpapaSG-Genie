@@ -19,18 +19,34 @@ for ln in L:
     if len(hit): ln["start"] = round((i0 + hit[0]) / 100, 2)
     j0, j1 = int((b - .4) * 100), min(len(edb), int((b + .5) * 100)); seg = edb[j0:j1]; hit = np.where(seg > top - 26)[0]
     if len(hit): ln["end"] = round((j0 + hit[-1]) / 100, 2)
+def onset(a):
+    i0, i1 = max(0, int((a - .3) * 100)), int((a + .6) * 100); seg = edb[i0:i1] > top - 26
+    run = np.convolve(seg.astype(int), np.ones(5, int), "valid"); hit = np.where(run == 5)[0]
+    return round((i0 + hit[0]) / 100, 2) if len(hit) else a
 def atempo(x, f):
     sf.write("work/_a.wav", x, SR, subtype="FLOAT")
     subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", "work/_a.wav", "-af", f"atempo={f:.4f}", "work/_b.wav"], check=True)
     return sf.read("work/_b.wav")[0]
 vox = np.zeros(n); report = []
-for k, ln in enumerate(L):
-    x, _ = sf.read(f"voice/f{N}_{k:02d}.wav"); d = len(x) / SR
-    nxt = L[k + 1]["start"] if k + 1 < len(L) else n / SR - .3; slot = nxt - ln["start"] - .12; f = 1.0
+def place(x, t, limit, tag):
+    """x at time t; sped up (x1.15 at most) if it would run past limit; returns (end, tempo, report line or None)"""
+    global vox
+    d = len(x) / SR; slot = limit - t; f = 1.0
     if d > slot: f = min(1.15, d / slot); x = atempo(x, f); d = len(x) / SR
-    s = int(ln["start"] * SR); e = min(n, s + len(x)); vox[s:e] += x[:e - s]
-    ln["new_start"], ln["new_end"], ln["tempo"] = ln["start"], round(ln["start"] + d, 2), round(f, 3)
-    if f > 1.001 or d > slot: report.append(f'{k:02d} {ln["speaker"]}: "{ln["text"]}" {d:.2f}s in a {slot:.2f}s slot, x{f:.3f}' + (" (runs on)" if d > slot + .01 else ""))
+    s = int(t * SR); e = min(n, s + len(x)); vox[s:e] += x[:e - s]
+    msg = f'{tag} {d:.2f}s in a {slot:.2f}s slot, x{f:.3f}' + (" (runs on into the gap)" if d > slot + .01 else "") if f > 1.001 or d > slot else None
+    return t + d, f, msg
+for k, ln in enumerate(L):
+    nxt = L[k + 1]["start"] if k + 1 < len(L) else n / SR - .3
+    parts = ln.get("parts") or [[ln["text"], ln["start"]]]; ends, fs = [], []
+    for j, (text, t0) in enumerate(parts):
+        t = ln["start"] if j == 0 else onset(t0)
+        lim = (onset(parts[j + 1][1]) if j + 1 < len(parts) else nxt) - .12
+        x, _ = sf.read(f"voice/f{N}_{k:02d}.wav" if len(parts) == 1 else f"voice/f{N}_{k:02d}_{j}.wav")
+        e, f, msg = place(x, t, lim, f'{k:02d} {ln["speaker"]}: "{text}"'); ends.append(e); fs.append(f)
+        if msg: report.append(msg)
+    ln["new_start"], ln["new_end"], ln["tempo"] = ln["start"], round(ends[-1], 2), round(max(fs), 3)
+    if len(parts) > 1: ln["part_starts"] = [ln["start"]] + [onset(p[1]) for p in parts[1:]]
 # duck the bed under the new voices
 blk = 480; nb = n // blk + 1; vb = np.array([np.sqrt(np.mean(vox[i * blk:(i + 1) * blk] ** 2) + 1e-12) for i in range(nb)])
 tgt = np.where(vb > 10 ** (-45 / 20), 10 ** (-4 / 20), 1.0)

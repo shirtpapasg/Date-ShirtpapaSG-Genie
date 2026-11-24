@@ -1,0 +1,138 @@
+{
+ "film": 3,
+ "title": "TheOneApp Promotional Video 3: The Eclipse Riddle",
+ "youtube": "xtB5tcotxS8",
+ "duration": 76.783,
+ "lines": [
+  {
+   "speaker": "Heart",
+   "text": "Every night, the great lamp lights the Station.",
+   "start": 2.14,
+   "end": 5.36
+  },
+  {
+   "speaker": "Pip",
+   "text": "A riddle!",
+   "start": 10.04,
+   "end": 11.14
+  },
+  {
+   "speaker": "Momo",
+   "text": "A curse!",
+   "start": 11.64,
+   "end": 12.16
+  },
+  {
+   "speaker": "Basil",
+   "text": "...A clue.",
+   "start": 12.94,
+   "end": 13.46
+  },
+  {
+   "speaker": "Momo",
+   "text": "Shoo!",
+   "start": 15.72,
+   "end": 15.88
+  },
+  {
+   "speaker": "Pip",
+   "text": "Colour will not move it either.",
+   "start": 18.22,
+   "end": 19.94
+  },
+  {
+   "speaker": "Basil",
+   "text": "On a mind map, we link what we see.",
+   "start": 22.02,
+   "end": 24.3
+  },
+  {
+   "speaker": "Basil",
+   "text": "This dark has a shape.",
+   "start": 25.52,
+   "end": 26.88
+  },
+  {
+   "speaker": "Basil",
+   "text": "So it is a shadow.",
+   "start": 27.64,
+   "end": 29.18
+  },
+  {
+   "speaker": "Basil",
+   "text": "A shadow forms when an object blocks light.",
+   "start": 32.04,
+   "end": 34.34
+  },
+  {
+   "speaker": "Basil",
+   "text": "Closer to the light, the shadow grows.",
+   "start": 35.52,
+   "end": 37.5
+  },
+  {
+   "speaker": "Pip",
+   "text": "The airship! It is blocking the lamp!",
+   "start": 41.66,
+   "end": 44.84,
+   "parts": [
+    [
+     "The airship!",
+     41.66
+    ],
+    [
+     "It is blocking the lamp!",
+     43.32
+    ]
+   ]
+  },
+  {
+   "speaker": "Pip",
+   "text": "How do we bring the light back?",
+   "start": 46.46,
+   "end": 47.76
+  },
+  {
+   "speaker": "Pip",
+   "text": "We need a scientist.",
+   "start": 48.66,
+   "end": 50.2
+  },
+  {
+   "speaker": "Pip, Momo and Basil",
+   "text": "We need you.",
+   "start": 51.02,
+   "end": 51.76
+  },
+  {
+   "speaker": "Heart",
+   "text": "Take away what blocks the light, and the shadow is gone.",
+   "start": 55.3,
+   "end": 58.86
+  },
+  {
+   "speaker": "Momo",
+   "text": "Not a curse.",
+   "start": 62.38,
+   "end": 62.88
+  },
+  {
+   "speaker": "Basil",
+   "text": "Science.",
+   "start": 63.72,
+   "end": 64.02
+  },
+  {
+   "speaker": "Heart",
+   "text": "The only app you need to learn Science.",
+   "start": 67.1,
+   "end": 69.2
+  },
+  {
+   "speaker": "Pip, Momo and Basil",
+   "text": "TheOneApp!",
+   "start": 69.88,
+   "end": 70.48
+  }
+ ]
+}
