@@ -2,13 +2,13 @@
 import os, subprocess
 from PIL import Image, ImageDraw, ImageFont
 H = os.path.dirname(os.path.abspath(__file__)); F = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"; ft = ImageFont.truetype(F, 34)
-S = [(1, 3.4, "P1 0:03  Cold open: the hardware shop; Pip strokes the nail, head to tip, lift up and away"),
-     (1, 104.5, "P1 1:44  Be the iron nail: the giant magnet's red end lands on your head"),
-     (1, 122.6, "P1 2:02  The clips jump up and cling to your tip"),
-     (1, 156.0, "P1 2:36  Look closer: a new nail clicks onto the magnet, but it is not a magnet"),
-     (1, 168.0, "P1 2:48  Pip's nail, the magnet shut away: clips!; Pip shy (right card, wrong reason)"),
-     (1, 205.0, "P1 3:25  HOLD ON! countdown: the clips hang from the MAGNET; Basil thinking"),
-     (1, 251.0, "P1 4:11  Look closer: only the steel screwdriver attracts the clips; Momo shy"),
+S = [(1, 3.4, "P1 0:03  Cold open, Heart already speaking: the hardware shop; Pip strokes the nail, head to tip, lift away"),
+     (1, 99.0, "P1 1:39  Be the iron nail: the giant magnet's red end lands on your head"),
+     (1, 117.1, "P1 1:57  The clips jump up and cling to your tip"),
+     (1, 150.5, "P1 2:30  Look closer: a new nail clicks onto the magnet, but it is not a magnet"),
+     (1, 162.5, "P1 2:42  Pip's nail, the magnet shut away: clips!; Pip shy (right card, wrong reason)"),
+     (1, 199.5, "P1 3:19  HOLD ON! countdown: the clips hang from the MAGNET; Basil thinking"),
+     (1, 245.5, "P1 4:05  Look closer: only the steel screwdriver attracts the clips; Momo shy"),
      (2, 93.5, "P2 1:33  Be a steel paper clip: you jump to Pip's nail (a gold ripple)"),
      (2, 106.0, "P2 1:46  The answer: Momo and Pip confident, Basil shy"),
      (2, 131.0, "P2 2:11  Look closer: lift up and away, never slide back; the arrows stack"),

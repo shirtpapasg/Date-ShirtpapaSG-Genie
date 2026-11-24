@@ -26,7 +26,8 @@ hold, after [id, s], pron {text: spoken as} (the caption keeps the script's word
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures),
   strip (the cream book strip).
-  Part 1: stroke0, budsIn (cold open: Pip strokes the nail at the folding table; Basil and Momo lean in), title; board, rods (today: OUR
+  Part 1: stroke0, budsIn (cold open: Pip strokes the nail at the folding table; Basil and Momo lean in), ltIn ("Then" in m202: the dare
+  cards come in), title; board, rods (today: OUR
   FISHING GAME); away, uncle (the Round 1 picks' pictures); the journey (dive, jlie, jstroke, jslide, jtip, jlift, jback, jagain, jcarry,
   jclips); rod1 (the clipboard's Rod 1 box filled); lcnail: new, still, pull, notmag, boxed, pipjump; nopoint (the grey no-point pill);
   holdon: try, jumpmag, onmag, boxit, chipfar; lcthings: chop, things, check, stroke, away2, test, steel, list; cliff: rub, flip, qnail.
@@ -37,7 +38,7 @@ Marks the picture and the sound share (every action sound lands ON its mark; Sta
 
 CUTS (script section 6, non-teaching). Put a tag in CUTS to drop that beat, then rebuild the timeline. Those in use from the start are set
   below (section 6 of the script keeps the words so a line can come back). "If a part must lose more" (section 6, in order): Part 1
-  titleslam, woodtip, todayline, nopointline, then small pacing trims (coldtrim, backtrim, clifftrim); Part 2 anttip, fishline, onepole,
+  titleslam, woodtip, todayline, nopointline, then small pacing trims (backtrim, clifftrim; coldtrim is gone: the cold open now speaks from 0.825 s); Part 2 anttip, fishline, onepole,
   showhold, posterread. Never cut: a [LOOK CLOSER], a journey step, a Mark Sentence card, a book strip that is in use (7.2's steps 4 and
   3), the pauses around new terms, a buddy's explanation of a key word, the new nail over still clips, the four things' check before
   stroking, the magnet being put away before every test.
@@ -114,14 +115,19 @@ COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One!
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 
 SEQ1 = [
- # ---- 1 · silent cold open: a hardware shop at an HDB neighbourhood centre, Saturday morning. At the wooden folding table outside, Pip
- #          strokes an iron nail with Basil's magnet's red end, head to tip, lifting away each time (stroke0: three strokes); Basil and Momo
- #          lean in (budsIn)
- ("scene", "cold"), ("wait", .6), ("mark", "stroke0"), ("wait", 1.6), ("mark", "budsIn"), ("wait", 3.8 if "coldtrim" not in CUTS else 2.8),
+ # ---- 1 · the cold open, SPEAKING (SERIES_FORMAT 11 item 1, teacher 24 Nov 2026 on EP21: "Not speaking for the first few seconds"): a
+ #          hardware shop at an HDB neighbourhood centre, Saturday morning. At the wooden folding table outside, Pip strokes an iron nail with
+ #          Basil's magnet's red end, head to tip, lifting away each time (stroke0: the strokes go on while Heart says "again and again,
+ #          always the same way"); Basil and Momo lean in (budsIn). Heart's "Last time, we asked:" starts at 0.825 s and the shop stays on
+ #          screen UNDER the dare's first sentence (it shows exactly that); the dare cards come in at "Then" (ltIn): the scene "lasttime"
+ #          starts .3 s before that word (build_tl's ("scene", name, {"at": mark, "d": s})). Was: 6.0 s of picture and ambience before the
+ #          first word (6.3 s); now 5.475 s shorter.
+ ("scene", "cold"), ("wait", .6), ("mark", "stroke0"),
  # ---- 2 · "Last time...": EP21's dare, word for word, then the title
- ("scene", "lasttime"),
- ("say", "m201", H, "Last time, we asked:", {"pre": .4}),
- ("say", "m202", H, DARE_Q1, {"pre": .3}),
+ ("say", "m201", H, "Last time, we asked:", {"pre": .3}),
+ ("mark", "budsIn"),
+ ("say", "m202", H, DARE_Q1, {"pre": .3, "kw": [["ltIn", "then"]]}),
+ ("scene", "lasttime", {"at": "ltIn", "d": -.3}),
  ("say", "m203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "m204", H, "Hold on to your answer!", {"pre": .4, "post": .3 if "backtrim" not in CUTS else .1}),

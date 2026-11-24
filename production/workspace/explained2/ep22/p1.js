@@ -34,17 +34,20 @@ const W0 = [1, 960, 540];
 const shop = (t, cam, o = {}) => HS22(t, { top: tableProps(t, o.tp || {}) + (o.top || ""), front: o.front, bird: o.bird, boardO: o.boardO }, cam);
 const BX = { l: 300, r: 1700, m: 1440 };   // the buddies' usual places: big at the left / right (feet 1076), mid-ground (feet 1010)
 
-/* 1 · silent cold open: the hardware shop on Saturday morning. Pip, big at the left, strokes an iron nail with Basil's magnet (stroke0:
-   three strokes, head to tip, lift up and away). budsIn: Basil and Momo lean in (front views turned in); Momo waves hello. The woodpecker on
-   the angsana's trunk (the intro spot). One slow push towards Pip's stroking paws */
-const camCold = (t) => camMix(camOn([960, 600], 1.02, 960, 560), camOn([620, 760], 1.14, 700, 720), eio(t / 6));
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1): the hardware shop on Saturday morning while Heart says "Last time, we
+   asked: Pip strokes an iron nail with Basil's magnet, again and again, always the same way." Pip, big at the left, strokes the nail with
+   Basil's magnet (stroke0: one stroke every 1.4 s, head to tip, lift up and away, as many as fit before the dare cards: five). budsIn (at the
+   end of "Last time, we asked:"): Basil and Momo lean in (front views turned in); Momo waves hello. The woodpecker on the angsana's trunk (the
+   intro spot). The place card from 0.2 s (about 7.5 s on screen). One slow push towards Pip's stroking paws over the whole scene */
+const camCold = (t) => camMix(camOn([960, 600], 1.02, 960, 560), camOn([620, 760], 1.14, 700, 720), eio(t / SCN.cold.t1));
+const NSTROKE0 = () => Math.max(3, Math.min(5, Math.floor((SCN.cold.t1 - MK("stroke0")) / 1.4)));   // sound_cues.js uses the same count
 SC.cold = (t, s) => { const tb = MK("budsIn"), t0 = MK("stroke0");
   return shop(t, camCold(t), { tp: { lid: 0 } })
     + bd("basil", BX.r, 1076, 480, t, { in: tb, flip: true, poses: [[tb, "sit"]], look: -6 })
     + bd("momo", BX.m, 1010, 400, t, { in: tb + .15, flip: true, poses: [[tb + .15, "sit"], [tb + 1.0, "waving"], [tb + 3.0, "sit"]], look: -5, wave: true })
     + bd("pip", BX.l, 1076, 500, t, { in: -1, poses: [[0, "sit"]], look: 3 })
-    + held("pip", BX.l, 1076, 500, false, nailH() + strokeMarks(t, t0, 3, 1.4) + strokeHeld(t, t0, 3, 1.4))
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A hardware shop, an HDB neighbourhood centre, Singapore ·", "Saturday morning")) + smallPrint(t, s.t0 + 2.4, NAIL_RULE); };
+    + held("pip", BX.l, 1076, 500, false, nailH() + strokeMarks(t, t0, NSTROKE0(), 1.4) + strokeHeld(t, t0, NSTROKE0(), 1.4))
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A hardware shop, an HDB neighbourhood centre, Singapore ·", "Saturday morning")) + smallPrint(t, s.t0 + 2.4, NAIL_RULE); };
 
 /* 2 · "Last time...": EP21's dare, word for word. ONE calm picture: the two dare cards side by side (EP21's own, ep21dare.js), a gentle
    push-in, the big ?, each card steps forward and lights while Heart says it (>= 2.5 s each) */

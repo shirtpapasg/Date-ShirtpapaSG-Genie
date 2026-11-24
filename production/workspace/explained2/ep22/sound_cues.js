@@ -25,8 +25,9 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   { const OUT = PART === 1 ? ["cold", "back", "title", "today", "answer", "pipclaim", "holdon", "lcq2", "liz", "cliff"] : ["maker", "r1ans", "ask", "show", "fix", "lc2q", "pond", "dare", "liz"], key = PART === 1 ? "deck" : "room";
     for (const sc of TL.scenes) if (OUT.includes(sc.name)) { const last = R[key][R[key].length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else R[key].push([sc.t0, sc.t1]); }
     R[key] = R[key].filter(([a, b]) => b - a > 1); }
-  // the cold open: Pip's three strokes (a soft metal swish each, a rising whoosh on each lift), the buddies lean in
-  if (mk("stroke0") !== undefined) [0, 1.4, 2.8].forEach((d) => { E(mk("stroke0") + d, "rub"); E(mk("stroke0") + d + .8, "rise", 2); });
+  // the cold open: Pip's strokes (a soft metal swish each, a rising whoosh on each lift; as many as p1.js draws: NSTROKE0, five since the
+  // cold open speaks from 0.825 s), the buddies lean in
+  if (mk("stroke0") !== undefined) [...Array(Math.max(3, Math.min(5, Math.floor((S.cold.t1 - mk("stroke0")) / 1.4))))].map((_, i) => i * 1.4).forEach((d) => { E(mk("stroke0") + d, "rub"); E(mk("stroke0") + d + .8, "rise", 2); });
   if (mk("budsIn") !== undefined) [0, .15].forEach((d, i) => E(mk("budsIn") + d, "pop", i));
   if (mk("board") !== undefined) E(mk("board") + .1, "chime");
   if (mk("rods") !== undefined) E(mk("rods"), "softpop", 1);
