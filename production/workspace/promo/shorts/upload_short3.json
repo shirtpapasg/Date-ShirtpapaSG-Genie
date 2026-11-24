@@ -44,5 +44,6 @@
   "_note": "For Google Ads (Shorts ads must be <= 60 s). Kept out of 'parts' so explained_upload.py cannot publish it. Upload unlisted and link it in Google Ads."
  },
  "_madeForKids": "UNDECIDED (teacher). The research could not confirm that a made-for-kids video is barred from Google Ads; see SHORTS_NOTES.md section 1. The audience setting must honestly say whether the video is directed at children. NB explained_upload.py and sau_upload.py always send selfDeclaredMadeForKids: true and ignore this field.",
- "_note": "Teacher 24 Nov 2026: 'make these promo videos into shorts ... I will want to advertise it soon.' Vertical 1080x1920 60 fps Short of the whole re-voiced film (make_short.py). Not uploaded. A Short's cover is picked from its frames in the YouTube app: frame 0 is the hook title, made to be the cover."
+ "_note": "Teacher 24 Nov 2026: 'make these promo videos into shorts ... I will want to advertise it soon.' Vertical 1080x1920 60 fps Short of the whole re-voiced film (make_short.py). Not uploaded. A Short's cover is picked from its frames in the YouTube app: frame 0 is the hook title, made to be the cover.",
+ "_ok": "Teacher 24 Nov 2026: 'OK to upload the Shorts' (made for kids, like the films)"
 }
