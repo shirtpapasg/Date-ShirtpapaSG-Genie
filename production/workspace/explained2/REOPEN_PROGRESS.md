@@ -38,3 +38,5 @@
   render those after commit 3cc1bd4. I render EP19 Part 2, EP20 Part 2, EP22 Part 1 and EP22 Part 2.
 - Noted (main session): EP16 Part 1 and EP17 Part 1 are re-rendered again from the current code (commit 3cc1bd4: the lock-in ring pictures clipped), queued after EP16 Part 2. Queue: EP16 P2, EP16 P1, EP17 P2, EP17 P1, EP18 P1+P2, EP19 P1, EP21 P1+P2, EP20 P1 (after "EP20 art fixed").
 - 2026-11-24 06:46 UTC (lofi agent): **EP22 Part 1: music added** (Kampong Walk, `ep22/ep22_part1.mp4` re-muxed, video copied, 9871 frames unchanged, decodes end to end): 1 bed, **0 beat restarts, 0 hard cuts**; old beds removed (9 groove, 10 calm, 1 wonder regions, the outro groove); smooth fades to silence under countdown r1, countdown hold, now you know; bed -27.9 LUFS-S under speech (no 3 s gap without speech); -16.0 LUFS, true peak -1.7 dBTP. Old audio kept as `ep22/out/nolofi_p1.m4a`.
+- Noted (main session): EP21 Part 1 renders from the current code (Momo's faceCam at freeturn removed; she hops). My cold-open changes are still in ep21/p1.js.
+- Noted: EP21 Part 1 also picks up lc21.js (lcEarthArt without the SPIN CHART inset); the queue renders the working tree = HEAD.
