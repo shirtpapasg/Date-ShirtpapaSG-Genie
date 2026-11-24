@@ -20,6 +20,9 @@ LINES = [
     ("h04", "heart", "Day by day, the credits add up. They are earned, never bought.", {"keys": ["earned,", "never", "bought."]}),
     # 5 the Gift Shop
     ("p03", "pip", "The Gift Shop is open! Safety goggles, fifty credits.", {"keys": ["open!", "Safety", "goggles,"]}),
+    # 5b the legendary looks (v3, teacher 24 Nov 2026: "showcase some of the legendary customised suit like the newest christmas theme and
+    # the space suit"): the Gift Shop's display. The app never names a festival (tests/shop.test.mjs): "Winter Wonderland", never "Christmas".
+    ("h08", "heart", "Save up for the legendary looks. Winter Wonderland, only this season. Or the Space Explorer, rocket pack and all!", {"keys": ["legendary", "Winter", "Wonderland,", "Space", "Explorer,"]}),
     # 6 the Dressing Room
     ("b03", "basil", "The colours are free. And the goggles? Yours to keep!", {"keys": ["free.", "keep!"]}),
     ("h05", "heart", "Spin it in the mirror. Then take it into every game.", {"keys": ["mirror.", "every", "game."]}),

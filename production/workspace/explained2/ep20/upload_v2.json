@@ -19,6 +19,25 @@
     "singapore science",
     "theoneapp explained"
    ]
+  },
+  {
+   "key": "explained-p3-ep20v2-part2",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep20/ep20_part2.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep20/thumb_part2.jpg",
+   "title": "Flip It and It SNAPS! Like Poles, Unlike Poles, and Is It a Magnet? (Part 2) | Magnet Poles",
+   "description": "Two magnets push each other apart. Turn one round, and what happens? Lock in your answer, be a toy train carriage, find out which poles attract and which repel, spot the mistake in Pip's magnet homework, and learn the test that proves something is a magnet. Part 2 of Primary 3 Science, Properties of Magnets: magnet poles.\n\nIn this part:\n• Two magnets push apart. Turn one round: what happens?\n• Be a toy train carriage: pushed away, then click!\n• Look closer: unlike poles and like poles\n• Why the ring magnet floats\n• Showdown: find the mistake in Pip's magnet test\n• Look closer: is it a magnet? The repel test\n• A chant to remember it all\n• Spot the hidden lizard!\n\nKey words: unlike poles, like poles, the repel test.\nWatch Part 1 first! Next episode: Basil hangs his bar magnet on a string and spins it, again and again. Where does it stop?\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nWhy does a ring magnet float in mid-air? P3 Science, Chapter 6, Properties of Magnets (pp. 105 to 109): a magnet has two poles, a North pole and a South pole, where attraction is the strongest; magnets can attract (pull) or repel (push) one another; unlike poles attract and like poles repel; and you can confirm that an object is a magnet if it repels another magnet. The second episode of the Magnets theme. Also fits US NGSS 3-PS2-3 (Grade 3).\nSafety and care: Keep magnets away from phones, cards and little brothers and sisters, and never put a magnet in your mouth. Ask an adult before you borrow things from the toolbox. We look at spiders and lizards, and we do not touch them.\nTry it at home: With an adult, use two bar magnets or two round whiteboard magnets. Turn one round and feel the pull change into a push. (Flat fridge magnets with pictures on them do not show this well.)\nDip a magnet into the steel paper clips from your class stationery tray: they bunch at the two poles. Whiteboard magnets in your classroom have two poles too. Floating-magnet toys from a bookshop float because like poles repel.\nGrade 3 pupils in the US learn it the same way (NGSS 3-PS2-3): magnets can push and pull without touching, and which way depends on which poles face each other.\n\n#PrimaryScience #Singapore #Magnets #TheOneAppExplained",
+   "tags": [
+    "like poles repel",
+    "unlike poles attract",
+    "how to test a magnet",
+    "magnet poles",
+    "attract and repel",
+    "magnets for kids",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
   }
  ],
  "playlists": [
@@ -32,9 +51,10 @@
   }
  ],
  "replaces": [
-  "b3tBp6ptTvY"
+  "b3tBp6ptTvY",
+  "A72s28TeDnU"
  ],
  "retire_old": true,
  "new_version_line": "▶ NEW VERSION: Why Does This Magnet FLOAT? Two Poles, a Pull and a Push (Part 1) https://www.youtube.com/watch?v={P1}",
- "_note": "v2 of EP20 Part 1 (2026-11-24; teacher: \"Not speaking for the first few seconds\", \"fix the live ones too\"; SERIES_FORMAT 11 item 1): the cold open now SPEAKS (Heart's \"Last time, we asked:\" at 0.825 s, was 6.3 s; Part 1 is 5.475 s shorter). Same title, description, tags and thumbnail as the live Part 1 (b3tBp6ptTvY); file = the new render. Part 2 is NOT re-uploaded: it already speaks at 0.30 s and the live Part 2 (A72s28TeDnU) was rendered from the current code, so it stays. \"after\" = the video right before the old Part 1 in both playlists (explained-p3-ep19v2-part2); retire_old takes b3tBp6ptTvY out of both playlists and gives it the NEW VERSION first line (never deleted). Chapters: production/youtube/chapters_p3.json key EP20_P1_v2 (swap in the new id after upload). Public, Made for Kids (the uploader sets both). \"after\" = explained-p3-ep19v2-part2 (EP19's v2 Part 2, the art-fix agent's render); if EP19 Part 2 is NOT re-uploaded, set it to JpBskDtIwb0. EP20's Part 2 is the art-fix agent's re-render (not in this file): add it as explained-p3-ep20v2-part2 (replacing A72s28TeDnU), so EP21 v2 can chain after it."
+ "_note": "v2 of EP20 Part 1 (2026-11-24; teacher: \"Not speaking for the first few seconds\", \"fix the live ones too\"; SERIES_FORMAT 11 item 1): the cold open now SPEAKS (Heart's \"Last time, we asked:\" at 0.825 s, was 6.3 s; Part 1 is 5.475 s shorter). Same title, description, tags and thumbnail as the live Part 1 (b3tBp6ptTvY); file = the new render. Part 2 is NOT re-uploaded: it already speaks at 0.30 s and the live Part 2 (A72s28TeDnU) was rendered from the current code, so it stays. \"after\" = the video right before the old Part 1 in both playlists (explained-p3-ep19v2-part2); retire_old takes b3tBp6ptTvY out of both playlists and gives it the NEW VERSION first line (never deleted). Chapters: production/youtube/chapters_p3.json key EP20_P1_v2 (swap in the new id after upload). Public, Made for Kids (the uploader sets both). \"after\" = explained-p3-ep19v2-part2 (EP19's v2 Part 2, the art-fix agent's render); if EP19 Part 2 is NOT re-uploaded, set it to JpBskDtIwb0. EP20's Part 2 is the art-fix agent's re-render (not in this file): add it as explained-p3-ep20v2-part2 (replacing A72s28TeDnU), so EP21 v2 can chain after it. PART 2 (art-fix agent, 2026-11-24): explained-p3-ep20v2-part2 replaces the live Part 2 (A72s28TeDnU): re-rendered from commit 3cc1bd4 (teacher's notes on EP20's drawings): the pencil now passes THROUGH both ring magnets in every picture (rings20), the ring is lifted right off the pencil before it is turned over (lclike), and Round 1's ring picture is clipped to the ring (lockN); with the Kampong Walk bed (add_lofi.py). Same title, description, tags and thumbnail as the live Part 2; same timeline (tl_p2.json unchanged, so chapters EP20_P2_v2 = the live EP20_P2 and app_moments unchanged). Both old parts get the NEW VERSION line pointing to the new Part 1 (as EP16 v2)."
 }

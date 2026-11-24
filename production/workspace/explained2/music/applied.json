@@ -1,0 +1,54 @@
+{
+ "ep22_part1": {
+  "backup": "ep22/out/nolofi_p1.m4a",
+  "bed_gain": 0.4983,
+  "bed_in_gaps_lufs_s": null,
+  "bed_loudest_lufs_s": -23.9,
+  "bed_under_voice_lufs_s": -27.9,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 3,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    63.53,
+    67.1
+   ],
+   [
+    "countdown hold",
+    197.68,
+    203.25
+   ],
+   [
+    "now you know",
+    322.7,
+    324.38
+   ]
+  ],
+  "drive": 0.913,
+  "drive_without_bed": 0.904,
+  "duration": 329.033,
+  "final_lufs": -15.97,
+  "lufs": -16.0,
+  "mtime": 1795500755.2435248,
+  "removed": {
+   "calm": 10,
+   "groove": 9,
+   "outro": true,
+   "wonder": 1
+  },
+  "size": 168866298,
+  "true_peak": -1.7,
+  "video_packets": 9871,
+  "when": "2026-11-24 06:13 UTC",
+  "windows": {
+   "gap": 0,
+   "voice": 514
+  }
+ }
+}

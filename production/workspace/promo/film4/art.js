@@ -29,6 +29,15 @@ function ARTDEFS() { return `
   <filter id="neon" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   <filter id="b6" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
   <filter id="b18" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="18"/></filter>
+  ${rg("glowP", [[0, "#FF8FD0", .75], [1, "#FF8FD0", 0]])}${rg("glowV", [[0, "#B48CFF", .7], [1, "#B48CFF", 0]])}${rg("glowO", [[0, "#FFB25A", .85], [1, "#FFB25A", 0]])}
+  ${rg("glowWarm", [[0, "#FFD99A", .55], [.5, "#FFC36B", .18], [1, "#FFC36B", 0]])}${rg("nebV", [[0, "#7B4FD8", .42], [1, "#7B4FD8", 0]])}${rg("nebB", [[0, "#3C6FE0", .32], [1, "#3C6FE0", 0]])}
+  ${lg("winWarm", [[0, "#FFF1C2"], [1, "#FFC867"]])}${lg("roofG", [[0, "#F4F2FB"], [1, "#C9C3E2"]])}${lg("skirtG", [[0, "#3A3466"], [1, "#1C1838"]])}
+  ${lg("headBeam", [[0, "#FFF6D0", .5], [1, "#FFF6D0", 0]], 1, 0)}${lg("cone", [[0, "#FFE9B0", .38], [1, "#FFE9B0", 0]])}${lg("coneC", [[0, "#BFEFFF", .34], [1, "#BFEFFF", 0]])}
+  ${lg("floorFade", [[0, "#1E1E4A", 0], [1, "#1E1E4A", .96]])}${lg("glossFloor", [[0, "#2B2B66"], [1, "#15153A"]])}
+  ${lg("wallWarm", [[0, "#7A4A2C"], [1, "#4A2C1A"]])}${lg("shelfG", [[0, "#D39A5E"], [1, "#9A6236"]])}${lg("velvet", [[0, "#B0233F"], [.5, "#7E1530"], [1, "#B0233F"]], 1, 0)}
+  ${lg("stageG", [[0, "#3A2558"], [1, "#1A1030"]])}${lg("flameG", [[0, "#FFF7D0"], [.35, "#FFD35A"], [1, "#FF6A2A", 0]])}${lg("snowSky", [[0, "#2A3E7A"], [1, "#7FA3D8"]])}${lg("spaceSky", [[0, "#0A0624"], [1, "#2A1760"]])}
+  ${lg("goldText", [[0, "#FFF4B8"], [1, "#FFC233"]])}${lg("gridFade", [[0, "#FF5CF0", 0], [1, "#FF5CF0", .55]])}
+  ${winPat("winA", 1)}${winPat("winB", 2)}${winPat("winC", 3)}
   <clipPath id="scrClip"><rect x="0" y="0" width="1920" height="1080" rx="46"/></clipPath>
   <image id="logoImg" href="img/logo.png" width="512" height="512"/>
   ${["shop", "shop2", "dress", "dress2", "boss", "boss2", "claw"].map((k) => `<image id="shot_${k}" href="shots/${k}.jpg" width="1920" height="1080"/>`).join("")}`; }
@@ -47,8 +56,12 @@ function sky(t, day = 0, o = {}) {
   // a twinkle cross on a few stars (the films' sparkle)
   if (day < .5) for (let i = 0; i < 5; i++) { const x = hash(i, 9) * 1900 + 10, y = hash(i, 8) * 520 + 20, k = (.5 + .5 * Math.sin(t * 2 + i * 2)) * (1 - day * 2);
     st += `<path d="M${n2(x)} ${n2(y - 12 * k)} L${n2(x)} ${n2(y + 12 * k)} M${n2(x - 12 * k)} ${n2(y)} L${n2(x + 12 * k)} ${n2(y)}" stroke="#fff" stroke-width="2" opacity="${n2(.8 * k)}"/>`; }
+  // v3: a few bright stars with halos, and soft violet / blue nebula glows (films 1-3's deep night)
+  if (day < .9) for (let i = 0; i < 14; i++) { const x = hash(i, 19) * 1920, y = hash(i, 18) * 560, k = (.6 + .4 * Math.sin(t * 1.3 + i * 2.1)) * (1 - day);
+    st += `<circle cx="${n2(x)}" cy="${n2(y)}" r="16" fill="url(#glowW)" opacity="${n2(.55 * k)}"/><circle cx="${n2(x)}" cy="${n2(y)}" r="2.6" fill="#fff" opacity="${n2(k)}"/>`; }
+  const neb = day < .95 ? `<ellipse cx="420" cy="260" rx="720" ry="330" fill="url(#nebV)" opacity="${n2(1 - day)}"/><ellipse cx="1560" cy="380" rx="640" ry="300" fill="url(#nebB)" opacity="${n2(1 - day)}"/><ellipse cx="960" cy="760" rx="1300" ry="260" fill="url(#nebV)" opacity="${n2(.8 * (1 - day))}"/>` : "";
   return `<linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${s0}"/><stop offset=".55" stop-color="${s1}"/><stop offset="1" stop-color="${s2}"/></linearGradient>
-    <rect x="-400" y="-300" width="2720" height="1700" fill="url(#skyG)"/>${st}`; }
+    <rect x="-400" y="-300" width="2720" height="1700" fill="url(#skyG)"/>${neb}${st}`; }
 function moon(x, y, r = 56, o = 1) { return OP(o, `<circle cx="${x}" cy="${y}" r="${r * 3.2}" fill="url(#moonGlow)"/><path d="M${x + r * .35} ${y - r} A${r} ${r} 0 1 0 ${x + r * .9} ${y + r * .55} A${r * .78} ${r * .78} 0 1 1 ${x + r * .35} ${y - r}z" fill="#FFF6DE"/>`); }
 function sunDisc(x, y, r = 70, o = 1) { return OP(o, `<circle cx="${x}" cy="${y}" r="${r * 2.6}" fill="url(#glowY)" opacity=".7"/><circle cx="${x}" cy="${y}" r="${r}" fill="url(#sunG)"/>`); }
 // searchlights from the bay towers, sweeping slowly
@@ -57,10 +70,44 @@ function beams(t, o = 1) { let s = "";
     const a = a0 + 9 * Math.sin(t * .35 + ph); s += `<g transform="translate(${x} ${y}) rotate(${n2(a)})"><path d="M-8 0 L-90 -980 L90 -980 L8 0z" fill="url(#${g})"/></g>`; });
   return OP(o, s); }
 
+/* ---------- v3: the richer night (films 1-3's look): window patterns, a layered skyline, fireflies, foreground grass ---------- */
+// a tile of lit windows (most warm yellow, a few cyan or pink, a few dark), repeated over a building's face
+function winPat(id, seed) { let s = ""; const cols = ["#FFD86B", "#FFD86B", "#FFE9A8", "#FFD86B", "#8FE3FF", "#FFB0D8"];
+  for (let i = 0; i < 5; i++) for (let j = 0; j < 6; j++) { const h_ = hash(i * 7 + j * 13, seed); if (h_ < .34) continue;
+    s += `<rect x="${4 + i * 18}" y="${5 + j * 20}" width="9" height="11" rx="1" fill="${cols[Math.floor(hash(i + j * 5, seed + 4) * cols.length)]}" opacity="${n2(.55 + .45 * hash(i * 3 + j, seed + 8))}"/>`; }
+  return `<pattern id="${id}" width="90" height="120" patternUnits="userSpaceOnUse">${s}</pattern>`; }
+// a row of buildings across the whole width (base line y), windows from the patterns; o: seed, h0, h1, col, lit
+function skyline(y, day, t, o = {}) { const nt = 1 - day, sd = o.seed || 51; let s = "", x = -420, i = 0; const col = mix(o.col || "#1C1852", "#8796C8", day * .7);
+  while (x < 2340) { const w = 54 + hash(i, sd) * 96, h = (o.h0 || 110) + hash(i, sd + 1) ** 1.6 * (o.h1 || 240);
+    s += `<rect x="${n2(x)}" y="${n2(y - h)}" width="${n2(w)}" height="${n2(h + 60)}" fill="${col}"/>`;
+    if (hash(i, sd + 9) > .18) s += `<rect x="${n2(x + 5)}" y="${n2(y - h + 10)}" width="${n2(w - 10)}" height="${n2(h - 10)}" fill="url(#${["winA", "winB", "winC"][i % 3]})" opacity="${n2(nt * (o.lit || .9))}"/>`;
+    s += `<rect x="${n2(x)}" y="${n2(y - h)}" width="${n2(w)}" height="3" fill="${o.rim || "#4B43A8"}" opacity="${n2(.7 * nt + .2)}"/>`;
+    if (h > (o.h0 || 110) + (o.h1 || 240) * .55) { const ax = x + w / 2; s += `<path d="M${n2(ax)} ${n2(y - h)} V${n2(y - h - 34)}" stroke="${col}" stroke-width="3"/>`;
+      if (nt > .2) { const bl = .5 + .5 * Math.sin(t * 3 + i); s += `<circle cx="${n2(ax)}" cy="${n2(y - h - 36)}" r="4" fill="#FF4D6D" opacity="${n2(bl * nt)}"/><circle cx="${n2(ax)}" cy="${n2(y - h - 36)}" r="16" fill="url(#glowP)" opacity="${n2(bl * nt * .8)}"/>`; } }
+    x += w + 3 + hash(i, sd + 3) * 22; i++; }
+  return s; }
+// fireflies / floating light motes: drifting, twinkling dots with a soft halo (the films' glow in the air)
+function motes(t, n = 26, y0 = 420, y1 = 1000, o = {}) { let s = ""; const cols = o.cols || ["#FFF3B0", "#BFEFFF", "#FFC2E6"];
+  for (let i = 0; i < n; i++) { const x = (hash(i, 61) * 2200 + t * (8 + 14 * hash(i, 62))) % 2200 - 140, y = y0 + hash(i, 63) * (y1 - y0) + 18 * Math.sin(t * (.6 + hash(i, 64)) + i), a = .35 + .65 * Math.abs(Math.sin(t * (.8 + hash(i, 65)) + i * 1.7)), c = cols[i % cols.length], r = 2 + 2.2 * hash(i, 66);
+    s += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r * 5)}" fill="url(#${c === "#BFEFFF" ? "glowC" : c === "#FFC2E6" ? "glowP" : "glowY"})" opacity="${n2(a * .55 * (o.op || 1))}"/><circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r)}" fill="${c}" opacity="${n2(a * (o.op || 1))}"/>`; }
+  return s; }
+// a flower: five petals and a yellow eye (the films' ground flowers); glow adds a soft halo
+function flower(x, y, r, col, glow = 0) { let s = glow ? `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r * 3.2)}" fill="url(#glowP)" opacity="${n2(glow)}"/>` : "";
+  s += `<path d="M${n2(x)} ${n2(y + r * .6)} q${n2(-r * .3)} ${n2(r * 1.6)} ${n2(-r * .1)} ${n2(r * 2.6)}" stroke="#3C7A55" stroke-width="${n2(Math.max(1.5, r * .28))}" fill="none"/>`;
+  for (let k = 0; k < 5; k++) { const a = k * 1.2566 - 1.57; s += `<circle cx="${n2(x + Math.cos(a) * r * .62)}" cy="${n2(y + Math.sin(a) * r * .62)}" r="${n2(r * .5)}" fill="${col}"/>`; }
+  return s + `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r * .36)}" fill="#FFE27A"/>`; }
+// foreground grass tufts along the bottom edge (dark, near the camera)
+function foreGrass(t, y = 1080, o = {}) { let s = ""; const col = o.col || "#100F2C";
+  for (let i = 0; i < 44; i++) { const x = hash(i, 71) * 2100 - 90; if (o.sides && x > 420 && x < 1500) continue; const h = 40 + 70 * hash(i, 72), sw = 6 * Math.sin(t * 1.2 + i);
+    s += `<path d="M${n2(x - 10)} ${y} Q${n2(x - 4 + sw * .5)} ${n2(y - h * .6)} ${n2(x + sw)} ${n2(y - h)} Q${n2(x + 6)} ${n2(y - h * .5)} ${n2(x + 12)} ${y}z" fill="${col}"/>`; }
+  for (let i = 0; i < 9; i++) { const x = hash(i, 74) * 1900 + 10; if (o.sides && x > 420 && x < 1500) continue; s += flower(x, y - 60 - 40 * hash(i, 75), 12 + 6 * hash(i, 76), ["#FF6FA8", "#FFB14A", "#6FA8FF", "#B07BFF"][i % 4], .35); }
+  return s; }
+
 /* ---------- the Station's pieces ---------- */
-function ferris(t, cx, cy, r) { let s = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#7E6BE8" stroke-width="6" opacity=".9"/><circle cx="${cx}" cy="${cy}" r="${r * .15}" fill="#5A4CC0"/>`;
-  const a0 = t * .12; for (let i = 0; i < 12; i++) { const a = a0 + i * Math.PI / 6, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r;
-    s += `<path d="M${cx} ${cy} L${n2(x)} ${n2(y)}" stroke="#6B5BD6" stroke-width="2.5" opacity=".7"/><circle cx="${n2(x)}" cy="${n2(y + 8)}" r="11" fill="${["#FF6FA8", "#FFD23F", "#4FD8FF", "#7BE08F"][i % 4]}"/>`; }
+function ferris(t, cx, cy, r) { let s = `<circle cx="${cx}" cy="${cy}" r="${r + 30}" fill="url(#glowV)" opacity=".45"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#9A86FF" stroke-width="6" opacity=".95"/><circle cx="${cx}" cy="${cy}" r="${r * .62}" fill="none" stroke="#7E6BE8" stroke-width="3" opacity=".7"/><circle cx="${cx}" cy="${cy}" r="${r * .15}" fill="#5A4CC0"/>`;
+  const a0 = t * .12; for (let i = 0; i < 12; i++) { const a = a0 + i * Math.PI / 6, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r, col = ["#FF6FA8", "#FFD23F", "#4FD8FF", "#7BE08F"][i % 4];
+    s += `<path d="M${cx} ${cy} L${n2(x)} ${n2(y)}" stroke="#6B5BD6" stroke-width="2.5" opacity=".7"/><circle cx="${n2(x)}" cy="${n2(y + 8)}" r="30" fill="url(#glowY)" opacity=".35"/><rect x="${n2(x - 12)}" y="${n2(y - 2)}" width="24" height="20" rx="7" fill="${col}"/><rect x="${n2(x - 7)}" y="${n2(y + 2)}" width="14" height="8" rx="2" fill="#FFF3C4" opacity=".9"/>`; }
+  for (let i = 0; i < 24; i++) { const a = a0 * 1.0 + i * Math.PI / 12, on = .5 + .5 * Math.sin(t * 5 + i); s += `<circle cx="${n2(cx + Math.cos(a) * r)}" cy="${n2(cy + Math.sin(a) * r)}" r="3.2" fill="#FFF6D8" opacity="${n2(.4 + .6 * on)}"/>`; }
   s += `<path d="M${cx - 60} ${cy + r + 120} L${cx} ${cy} L${cx + 60} ${cy + r + 120}" stroke="#5A4CC0" stroke-width="8" fill="none"/>`;
   return s; }
 function block(x, y, w, h, lit = 1, seed = 1, col = "#1F1B55") { let s = `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${col}"/>`;
@@ -81,7 +128,8 @@ function school(x, y, t) { // the School Lab: a small Singapore school block wit
 function dome(t, cx, cy, r) { let g = "";
   for (let i = 1; i < 8; i++) { const a = Math.PI * i / 8, x = cx - Math.cos(a) * r; g += `<path d="M${n2(x)} ${cy} Q${n2(cx - Math.cos(a) * r * .55)} ${n2(cy - r * 1.05)} ${cx} ${cy - r}" fill="none" stroke="#B9A6FF" stroke-width="1.5" opacity=".35"/>`; g += `<path d="M${n2(2 * cx - x)} ${cy} Q${n2(cx + Math.cos(a) * r * .55)} ${n2(cy - r * 1.05)} ${cx} ${cy - r}" fill="none" stroke="#B9A6FF" stroke-width="1.5" opacity=".35"/>`; }
   for (let j = 1; j < 4; j++) { const yy = cy - r * j / 4, xx = Math.sqrt(r * r - (cy - yy) ** 2); g += `<path d="M${n2(cx - xx)} ${n2(yy)} Q${cx} ${n2(yy - 18)} ${n2(cx + xx)} ${n2(yy)}" fill="none" stroke="#B9A6FF" stroke-width="1.5" opacity=".3"/>`; }
-  return `<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy}z" fill="url(#dome)"/>${g}<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="url(#domeRim)" stroke-width="9" filter="url(#neon)"/>` + oneBadge(cx, cy - r - 34, 1, t); }
+  let lights = ""; for (let i = 0; i <= 20; i++) { const a = Math.PI + i * Math.PI / 20, on = .55 + .45 * Math.sin(t * 2.4 - i * .5); lights += `<circle cx="${n2(cx + Math.cos(a) * r)}" cy="${n2(cy + Math.sin(a) * r)}" r="4" fill="#fff" opacity="${n2(on)}"/>`; }
+  return `<ellipse cx="${cx}" cy="${cy - r * .35}" rx="${r * 1.25}" ry="${r * .95}" fill="url(#glowV)" opacity=".55"/><path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy}z" fill="url(#dome)"/><ellipse cx="${cx}" cy="${cy - 30}" rx="${r * .7}" ry="${r * .5}" fill="url(#glowP)" opacity="${n2(.28 + .08 * Math.sin(t * 1.5))}"/>${g}${lights}<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="url(#domeRim)" stroke-width="9" filter="url(#neon)"/>` + oneBadge(cx, cy - r - 34, 1, t); }
 function oneBadge(x, y, s, t) { // the "1" on the dome, with its little halo ring
   return TF(x, y, s, `<ellipse cx="0" cy="-62" rx="30" ry="10" fill="none" stroke="${C.cyan}" stroke-width="3.5" opacity="${n2(.7 + .3 * Math.sin(t * 2))}"/><path d="M0 -52 L0 -32" stroke="${C.cyan}" stroke-width="3"/>
     <rect x="-26" y="-32" width="52" height="56" rx="12" fill="#12203F" stroke="${C.cyan}" stroke-width="4" filter="url(#glowS)"/>${TX(0, 12, "1", 40, C.gold)}`); }
@@ -99,15 +147,31 @@ function airship(x, y, s, t, screen) { // the "Videos" airship with its NOW SHOW
   return TF(x, y + bob, s, `<path d="M-140 -10 L-185 -42 L-176 6z" fill="#E2475B"/><ellipse cx="0" cy="0" rx="180" ry="62" fill="#F1EEFA"/><ellipse cx="0" cy="-18" rx="150" ry="26" fill="#fff" opacity=".7"/><path d="M-178 14 Q0 70 178 14" fill="none" stroke="#E2475B" stroke-width="9"/>${TX(0, 12, "Videos", 36, "#2B2147")}
     <path d="M-60 52 L-70 96 M60 52 L70 96" stroke="#9AA4C8" stroke-width="3"/><rect x="-120" y="92" width="240" height="150" rx="12" fill="#0E2A4A" stroke="${C.cyan}" stroke-width="4"/>${TX(0, 118, "NOW SHOWING", 17, C.gold, { ls: 1 })}
     ${screen ? `<g transform="translate(-106 128) scale(${n2(212 / 1920)})"><use href="#shot_${screen}"/></g>` : ""}`); }
-function grass(day = 0, y = 820) { let s = `<rect x="-400" y="${y}" width="2720" height="${1200 - y}" fill="${mix(C.grass, DAY.grass, day)}"/>`;
-  for (let i = 0; i < 70; i++) { const x = hash(i, 11) * 2000 - 40, yy = y + 30 + hash(i, 12) * 230; s += `<path d="M${n2(x)} ${n2(yy)} l-3 -16 M${n2(x + 5)} ${n2(yy)} l2 -13" stroke="${mix("#3A3C7A", "#2F6E3A", day)}" stroke-width="2"/>`; }
-  for (let i = 0; i < 26; i++) { const x = hash(i, 21) * 1900 + 10, yy = y + 40 + hash(i, 22) * 220; s += `<circle cx="${n2(x)}" cy="${n2(yy)}" r="6" fill="${["#FF6FA8", "#FFB14A", "#6FA8FF", "#B07BFF"][i % 4]}"/><circle cx="${n2(x)}" cy="${n2(yy)}" r="2.4" fill="#FFF3B0"/>`; }
+function grass(day = 0, y = 820, t = 0) { let s = `<linearGradient id="grG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix("#2A2C66", DAY.grass, day)}"/><stop offset="1" stop-color="${mix("#121331", DAY.grass2, day)}"/></linearGradient><rect x="-400" y="${y}" width="2720" height="${1200 - y}" fill="url(#grG)"/>`;
+  s += `<rect x="-400" y="${y}" width="2720" height="5" fill="${mix("#5A6BD8", "#7FC88A", day)}" opacity=".55"/>`;
+  for (let i = 0; i < 150; i++) { const x = hash(i, 11) * 2200 - 140, yy = y + 24 + hash(i, 12) ** .8 * 250, h = 10 + 10 * hash(i, 13) * (yy - y) / 200;
+    s += `<path d="M${n2(x)} ${n2(yy)} l-3 ${n2(-h)} M${n2(x + 5)} ${n2(yy)} l2 ${n2(-h * .8)}" stroke="${mix("#4A4C92", "#2F6E3A", day)}" stroke-width="2.2" opacity=".8"/>`; }
+  for (let i = 0; i < 46; i++) { const x = hash(i, 21) * 2100 - 90, yy = y + 34 + hash(i, 22) ** .9 * 240, r = 5 + 6 * (yy - y) / 250;
+    s += flower(x, yy, r, ["#FF6FA8", "#FFB14A", "#6FA8FF", "#B07BFF", "#7BE08F"][i % 5], (1 - day) * (.25 + .2 * Math.sin(t * 1.6 + i))); }
   return s; }
 // the train: n carriages, the front at x (moving left to right means x grows)
-function train(x, y, n = 6, o = {}) { let s = ""; const W = 176;
-  for (let i = 0; i < n; i++) { const cx = x - i * (W + 8); s += `<g transform="translate(${n2(cx - W)} ${y})"><rect x="0" y="0" width="${W}" height="62" rx="${i === 0 ? 30 : 12}" fill="url(#carG)"/><rect x="6" y="44" width="${W - 12}" height="7" rx="3" fill="${C.pink}"/>` +
-      [0, 1, 2, 3].map((j) => `<rect x="${18 + j * 38}" y="12" width="26" height="22" rx="5" fill="#FFE7A6" opacity=".95"/>`).join("") + `</g>`; }
-  return OP(o.op === undefined ? 1 : o.op, `<g filter="url(#glowS)">${s}</g>`); }
+function train(x, y, n = 6, o = {}) { let s = "", glow = "", refl = ""; const W = 214, H = 72, nt = o.nt === undefined ? 1 : o.nt;
+  for (let i = 0; i < n; i++) { const L = x - i * (W + 10) - W, front = i === 0, back = i === n - 1, rl = back ? 26 : 8, rr = front ? 34 : 8;
+    let c = `<path d="M${rl} 6 H${W - rr} Q${W} 6 ${W} ${rr + 6} V${H - 6} H0 V${rl + 6} Q0 6 ${rl} 6z" fill="url(#carG)"/>`;
+    c += `<rect x="10" y="0" width="${W - 20}" height="9" rx="4.5" fill="url(#roofG)"/><rect x="${W / 2 - 28}" y="-7" width="56" height="9" rx="3" fill="#B9B3D6"/>`;
+    c += `<rect x="6" y="16" width="${W - (front ? 30 : 12)}" height="27" rx="7" fill="#2A2554"/>`;
+    for (let j = 0; j < 4; j++) { const wx = 14 + j * 46; if (wx + 34 > W - (front ? 32 : 10)) break; c += `<rect x="${wx}" y="19" width="34" height="21" rx="5" fill="url(#winWarm)" opacity="${n2(.55 + .45 * nt)}"/>`;
+      if (hash(i * 5 + j, 81) > .35) c += `<circle cx="${n2(wx + 10 + 14 * hash(i + j, 82))}" cy="33" r="5.5" fill="${["#6B4A3A", "#2E2A44", "#8A5A3A", "#3A2F2A"][(i + j) % 4]}" opacity=".75"/><path d="M${n2(wx + 3 + 14 * hash(i + j, 82))} 41 q7 -9 14 0" fill="${["#E2475B", "#4FA8FF", "#7BE08F", "#FFB14A"][(i + j) % 4]}" opacity=".7"/>`; }
+    for (const dx of [W * .3 - 11, W * .72 - 11]) c += `<rect x="${n2(dx)}" y="13" width="22" height="${H - 19}" rx="3" fill="none" stroke="#B5AED2" stroke-width="2"/><rect x="${n2(dx + 4)}" y="18" width="14" height="22" rx="2" fill="#FFE7A6" opacity=".85"/>`;
+    c += `<rect x="0" y="${H - 22}" width="${W}" height="7" fill="${C.pink}"/><rect x="0" y="${H - 13}" width="${W}" height="2.5" fill="${C.cyan}" opacity=".8"/><rect x="2" y="${H - 6}" width="${W - 4}" height="12" rx="4" fill="url(#skirtG)"/>`;
+    c += `<rect x="18" y="${H + 2}" width="44" height="9" rx="4.5" fill="#15122E"/><rect x="${W - 62}" y="${H + 2}" width="44" height="9" rx="4.5" fill="#15122E"/>`;
+    if (front) { c += `<path d="M${W - 30} 16 Q${W - 6} 18 ${W - 3} 42 L${W - 30} 42z" fill="#2A2554"/><path d="M${W - 26} 19 Q${W - 10} 22 ${W - 8} 39 L${W - 26} 39z" fill="#8FDBFF" opacity=".55"/><circle cx="${W - 9}" cy="${H - 26}" r="5" fill="#FFFBE8"/>`;
+      glow += `<circle cx="${n2(L + W - 9)}" cy="${n2(y + H - 26)}" r="34" fill="url(#glowW)" opacity="${n2(.9 * nt)}"/><path d="M${n2(L + W - 9)} ${n2(y + H - 30)} L${n2(L + W + 420)} ${n2(y + H - 90)} L${n2(L + W + 420)} ${n2(y + H + 40)}z" fill="url(#headBeam)" opacity="${n2(.8 * nt)}"/>`; }
+    if (!back) c += `<rect x="${W}" y="${H - 30}" width="10" height="16" fill="#2A2554"/>`;
+    s += `<g transform="translate(${n2(L)} ${y})">${c}</g>`;
+    glow += `<ellipse cx="${n2(L + W / 2)}" cy="${n2(y + 30)}" rx="${W * .62}" ry="44" fill="url(#glowWarm)" opacity="${n2(.55 * nt)}"/>`;
+    refl += `<rect x="${n2(L + 8)}" y="${n2(y + H + 16)}" width="${W - 16}" height="5" rx="2" fill="#FFE7A6" opacity="${n2(.35 * nt)}"/><rect x="${n2(L + 4)}" y="${n2(y + H + 24)}" width="${W - 8}" height="3" fill="${C.pink}" opacity=".3"/>`; }
+  return OP(o.op === undefined ? 1 : o.op, glow + s + (o.refl === false ? "" : refl)); }
 function viaduct(y, day = 0) { return `<rect x="-400" y="${y}" width="2720" height="16" fill="${mix(C.via, DAY.via, day)}"/><rect x="-400" y="${y}" width="2720" height="4" fill="${C.viaTop}" opacity=".8"/>` +
   [0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<rect x="${-60 + i * 300}" y="${y + 16}" width="18" height="${830 - y}" fill="${mix("#24296A", "#4B5C9E", day)}"/>`).join(""); }
 function lightRail(t, y) { let s = `<path d="M-100 ${y} H2100" stroke="#6FC8FF" stroke-width="3" opacity=".7"/>`;

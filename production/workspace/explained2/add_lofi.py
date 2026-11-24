@@ -88,7 +88,8 @@ def main():
     if missing: sys.exit(f'{len(missing)} voice wavs missing in {epdir}/voice (e.g. {missing[:3]}): re-make them with the episode\'s make_voice.py first')
     applied = json.load(open(APPLIED)) if os.path.exists(APPLIED) else {}
     key = f'{ep}_part{part}'; st = os.stat(mp4)
-    if not sample and not force and key in applied and applied[key].get('size') == st.st_size and abs(applied[key].get('mtime', 0) - st.st_mtime) < 1:
+    already = key in applied and applied[key].get('size') == st.st_size and abs(applied[key].get('mtime', 0) - st.st_mtime) < 1
+    if not sample and not force and already:
         print(f'{key}: already has Kampong Walk (music/applied.json); --force to redo'); return
     free = shutil.disk_usage(epdir).free
     if free < st.st_size + 700e6: sys.exit(f'only {free / 1e9:.1f} GB free; need {(st.st_size + 700e6) / 1e9:.1f} GB')
@@ -126,9 +127,13 @@ def main():
             print(f'  true peak over -1.5 dBTP after AAC: mixing again with the limiter ceiling at {ceil:.3f}')
             info = mix(epdir, part, wav, ceil)
         backup = os.path.join(epdir, 'out', f'nolofi_p{part}.m4a')
-        if key not in applied or not os.path.exists(backup):   # the audio as rendered, before any Kampong Walk
-            run(['ffmpeg', '-y', '-v', 'error', '-i', mp4, '-map', '0:a:0', '-c', 'copy', backup])
-        os.replace(tmp, mp4)
+        with Lock():   # finish.sh writes the mp4 under this lock: never put back an older picture over a newer render
+            now = os.stat(mp4)
+            if (now.st_size, now.st_mtime) != (st.st_size, st.st_mtime):
+                os.remove(tmp); sys.exit(f'{mp4} changed while the music was added (a new render?): run add_lofi.py again')
+            if not already:   # the audio as rendered, before any Kampong Walk (a re-render gets a fresh backup)
+                run(['ffmpeg', '-y', '-v', 'error', '-i', mp4, '-map', '0:a:0', '-c', 'copy', backup])
+            os.replace(tmp, mp4)
         st = os.stat(mp4)
         info.update({'when': time.strftime('%Y-%m-%d %H:%M UTC', time.gmtime()), 'lufs': lu, 'true_peak': tp, 'duration': round(dur, 3), 'size': st.st_size, 'mtime': st.st_mtime,
                      'video_packets': int(v1['nb_read_packets']), 'backup': os.path.relpath(backup, HERE)})

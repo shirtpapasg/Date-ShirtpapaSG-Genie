@@ -13,7 +13,8 @@ ORDER = [
     ("scene", "quiz"), ("wait", .2), ("line", "b02", .25), ("mark", "cards"), ("line", "p02", .35), ("mark", "tap"), ("line", "u01", .45),
     ("mark", "pick"), ("wait", .7), ("mark", "tick"), ("line", "h03", .3), ("mark", "coins"), ("line", "m02", .4),
     ("scene", "days"), ("wait", .3), ("line", "h04", .4), ("mark", "full", -.6),
-    ("scene", "shop"), ("mark", "shopOn"), ("wait", .5), ("line", "p03", .1), ("mark", "buy", -.2), ("wait", 1.2), ("mark", "bought", -.4),
+    ("scene", "shop"), ("mark", "shopOn"), ("wait", .5), ("line", "p03", .1), ("mark", "buy", -.2), ("wait", 1.2), ("mark", "bought", -.4), ("wait", .35),
+    ("scene", "legend"), ("wait", .45), ("line", "h08", .15), ("mark", "lift", -1.6), ("wait", 1.2),   # v3: the legendary looks (Winter Wonderland, Space Explorer)
     ("scene", "dress"), ("wait", .35), ("line", "b03", .3), ("line", "h05", .1),
     ("scene", "games"), ("wait", 3.4),
     ("scene", "versus"), ("wait", .5), ("line", "p04", .2), ("mark", "question"), ("wait", .8), ("mark", "drop"), ("wait", 1.5), ("mark", "pipGrab"), ("wait", .45),
