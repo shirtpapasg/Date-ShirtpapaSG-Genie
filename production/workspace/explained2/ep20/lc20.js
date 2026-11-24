@@ -77,50 +77,93 @@ function lcPushPullArt(t) { const m = MKS, tR = m("roll"), tPl = m("pull"), tC =
   if (t >= tB) s += TF(-40, -330, spring(t, tB, .45), `<g filter="url(#dropS)"><rect x="-420" y="-46" width="840" height="92" rx="46" fill="#fff" stroke="${P.ink}" stroke-width="4"/></g>` + T(0, 14, "it depends which poles face", 42, P.ink));
   return s; }
 
-// BE THE TOP RING MAGNET (P1 shrink): the camera IS the top ring, looking DOWN along the pencil (your own dark grey rim round the bottom
-// of the frame, the pencil's yellow paint going down from your hole). d(t): how far above the bottom ring you are (900 far; 120 floating;
-// 58 pressed). The bottom ring is a wide grey platform below you that grows as you come closer; the push (magenta) comes UP at you from it.
-function ringJourney(t, s) { const m = MK, tS = m("jslide"), tBl = m("jbelow"), tSl = m("jslow"), tPu = m("jpush"), tSt = m("jstop"), tPr = m("jpress"), tH = m("jharder"), tSp = m("jspring"), tG = m("jgap");
-  let d; if (t < tSt) { const u = clamp((t - tS + .4) / (tSt - tS + .4)); d = lerp(1100, 120, 1 - Math.pow(1 - u, 2.4)); }
-  else if (t < tPr) d = 120 + 9 * Math.sin((t - tSt) * 2.6) * Math.exp(-(t - tSt) * .4);
-  else if (t < tSp) d = lerp(120, 62, eio((t - tPr) / (tH - tPr + 1)));
-  else { const u = t - tSp; d = 120 + 40 * Math.exp(-u * 2.2) * Math.cos(u * 6) + 4 * Math.sin(t * 2.6); }
-  const F = 1500, V = [960, 380], look = ss(tG - .2, tG + 1.4, t), rx = F * 90 / d, ry = rx * (.55 + .2 * look), hx = F * 34 / d, pf = F * 9 / (d + 120), jl = t >= tPr && t < tPr + .4 ? 8 * Math.sin((t - tPr) * 60) * (1 - (t - tPr) / .4) : 0;
-  let o = `<rect width="1920" height="1080" fill="#3E4350"/><rect width="1920" height="1080" fill="#FFF4C8" opacity=".08"/>`;
-  // far below: the bench top, the pink plasticine round the pencil's foot (seen when the bottom ring is still small)
-  o += `<ellipse cx="${V[0]}" cy="${n2(V[1] + 30)}" rx="${n2(F * 140 / (d + 60))}" ry="${n2(F * 80 / (d + 60))}" fill="#E86A8A" stroke="#A8405E" stroke-width="5"/>`;
-  // the bottom ring: its top face, a wide grey platform, the pencil through its hole
-  o += `<g transform="translate(0 ${n2(jl)})"><ellipse cx="${V[0]}" cy="${V[1]}" rx="${n2(rx)}" ry="${n2(ry)}" fill="url(#gRingTop)" stroke="#22252E" stroke-width="8"/><ellipse cx="${V[0]}" cy="${V[1]}" rx="${n2(rx * .82)}" ry="${n2(ry * .82)}" fill="none" stroke="#6A7080" stroke-width="${n2(Math.max(2, rx * .02))}"/>`
-    + `<path d="M${n2(V[0] - rx * .7)} ${n2(V[1] - ry * .35)} Q${n2(V[0] - rx * .2)} ${n2(V[1] - ry * .85)} ${n2(V[0] + rx * .45)} ${n2(V[1] - ry * .72)}" stroke="#A8B0C0" stroke-width="${n2(Math.max(3, 14 * 120 / d))}" fill="none" stroke-linecap="round" opacity=".7"/>`
-    + `<ellipse cx="${V[0]}" cy="${V[1]}" rx="${n2(hx)}" ry="${n2(hx * .55)}" fill="#22252E"/><ellipse cx="${V[0]}" cy="${n2(V[1] + hx * .08)}" rx="${n2(hx * .9)}" ry="${n2(hx * .45)}" fill="#8A3A54"/><ellipse cx="${V[0]}" cy="${n2(V[1] + hx * .12)}" rx="${n2(hx * .6)}" ry="${n2(hx * .3)}" fill="#C25878"/></g>`;
-  if (t >= tBl && t < tSt + 1) o += TF(V[0] + Math.min(rx, 700) * .62, V[1] - Math.min(ry, 300) * .2 + 60, spring(t, tBl + .3, .45) * (1 - ramp(t, tSt + .6, .3)), tpill(0, 0, "the bottom ring magnet", 36, "#fff", P.ink, { w: 700 }));
-  // the pencil: from your own hole (near, wide) down into the bottom ring's hole (far); its grain slides past as you slide down
-  const pn = 92, sc = (t - s.t0) * 30 + (1100 - Math.max(d, 120)) * 1.4;
-  o += `<path d="M${V[0] - pn} 1100 L${n2(V[0] - pf)} ${V[1]} L${n2(V[0] + pf)} ${V[1]} L${V[0] + pn} 1100z" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M${V[0] - pn + 26} 1100 L${n2(V[0] - pf * .5)} ${V[1]} L${n2(V[0] - pf * .1)} ${V[1]} L${V[0] - pn + 70} 1100z" fill="#FFE08A"/>`;
-  for (let i = 0; i < 7; i++) { const u = (((i / 7) + sc / 900) % 1), e = u * u, y = lerp(V[1], 1100, e), w = lerp(pf, pn, e); o += `<path d="M${n2(V[0] - w * .6)} ${n2(y)} q${n2(w * .3)} ${n2(-4 * e)} ${n2(w * .6)} 0" stroke="#D89A1E" stroke-width="${n2(2 + 4 * e)}" fill="none" stroke-linecap="round" opacity=".75"/>`; }
-  if (t > tS && t < tSl) o += [0, 1, 2, 3].map((i) => { const a = (i * 90 + 45) * Math.PI / 180, r0 = 380 + ((t * 900 + i * 200) % 500); return `<path d="M${n2(V[0] + Math.cos(a) * r0)} ${n2(V[1] + Math.sin(a) * r0 * .7)} l${n2(Math.cos(a) * 90)} ${n2(Math.sin(a) * 60)}" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".5"/>`; }).join("");
-  // the push: MAGENTA arrows rising from the bottom ring UP at you (towards your rim), bigger and thicker as the gap shrinks
-  const pa = t < tPu ? 0 : ramp(t, tPu, .6), hard = clamp((120 - d) / 55), aw = 20 * (1 + 1.3 * hard);
-  if (pa > .02) { for (const x of [-640, -330, 330, 640]) { const y1 = 600 + Math.abs(x) * .05, y2 = 860 - Math.abs(x) * .06; o += OP(pa, fatArrow(V[0] + x, y1, V[0] + x * 1.04, y2, PUSHC, aw)); }
-    o += chevrons(t, V[0] - 480, 560, V[0] - 490, 860, pa, PUSHC, 3, 1.3 + .6 * hard) + chevrons(t, V[0] + 480, 560, V[0] + 490, 860, pa, PUSHC, 3, 1.3 + .6 * hard)
-      + (t >= tPu + .8 && t < tPr ? TF(1450, 560, spring(t, tPu + .8, .45), tpill(0, 0, "pushing up on you", 38, PUSHC, "#fff", { w: 700 })) : ""); }
-  // the gap: looking down into it: empty, a soft light shining through; chips joined to it
-  if (look > .02) o += OP(look, `<ellipse cx="960" cy="880" rx="820" ry="90" fill="#FFF8D8" opacity=".5" filter="url(#b30)"/>`)
-    + linkChip(t, tG + 1.0, 400, 690, 560, 905, 1, "a push", 46) + linkChip(t, tG + 1.4, 960, 600, 760, 915, 1, "no glue", 46) + linkChip(t, tG + 1.8, 1520, 690, 1360, 905, 1, "no string", 46);
-  // the giant finger (Pip's, a big soft shape: four fingers and a thumb) presses on you from above: a shadow, the fingertips at the top edge
+// BE THE TOP RING MAGNET (P1 shrink), REDRAWN 24 Nov 2026 as a SIDE VIEW (teacher, on the first-person view down the pencil: "I cannot
+// visualise how it actually is. It looks more like they are at the bottom of the magnet with one above them"). The camera stands beside the
+// rings, a little above them, at the size of a ring magnet, in ONE continuous shot: Pip's pencil upright in its pink plasticine on the front
+// bench, passing through the holes of BOTH rings; the bottom ring resting on the plasticine; YOU = the top ring (a sun-yellow glow outline,
+// big eyes on your rim, the "You: the top ring magnet" tag joined to you). The buddies, shrunk, stand on the bench at the pencil's foot.
+// Beats on the same marks: jslide you slide down the pencil from near its tip (the camera follows you); jbelow the camera eases back to
+// show the bottom ring (its label); jslow you slow down; jpush magenta arrows in the gap push UP on you and DOWN on the bottom ring; jstop
+// you stop in mid-air with a clear gap, bobbing ("you float"); jpress Pip's finger (four fingers and a thumb) presses you down: the gap
+// shrinks, the arrows grow; jharder harder; jspring the finger lifts and you spring back up; jgap the camera pushes in to the empty gap
+// (a soft light through it; "a push", "no glue", "no string" joined to it). World coordinates are rings20's (origin = the plasticine's
+// base; the rings' faces rx 90 ry 30; the holes rx 34 ry 11); this pencil is taller (its tip at -820: a real pencil is about five ring
+// magnets long). Nothing floats but you.
+const RJ = { y0: -700, ys: -330, yf: -250, press: 60, tip: -820 };
+const PENCIL_J = `<rect x="-16" y="-760" width="32" height="710" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M-16 -760 L0 -820 L16 -760z" fill="#F2D6A8" stroke="#B8861C" stroke-width="4"/><path d="M-6 -798 L0 -820 L6 -798z" fill="#3A3A4A"/><rect x="-10" y="-750" width="8" height="690" fill="#FFE08A"/>`
+  + [-640, -520, -400, -280, -160].map((y) => `<path d="M-9 ${y} q9 -5 18 0" stroke="#D89A1E" stroke-width="3" fill="none" stroke-linecap="round" opacity=".6"/>`).join("");
+// where you are (the top ring's centre, y) and how hard Pip presses (0..1) and how far his finger is down (0..1)
+function ringJState(t, s) { const m = MK, tSl = m("jslow"), tSt = m("jstop"), tPr = m("jpress"), tH = m("jharder"), tSp = m("jspring");
+  let y, pr = 0;
+  if (t < tSl) { const u = clamp((t - s.t0) / (tSl - s.t0)); y = lerp(RJ.y0, RJ.ys, -1.1 * u * u * u + 2.1 * u * u); }
+  else if (t < tSt) { const T = tSt - tSl, u = clamp((t - tSl) / T), v0 = (RJ.ys - RJ.y0) * .9 / (tSl - s.t0);   // you slow down and stop (no overshoot)
+    y = (2 * u ** 3 - 3 * u * u + 1) * RJ.ys + (u ** 3 - 2 * u * u + u) * T * v0 + (-2 * u ** 3 + 3 * u * u) * RJ.yf; }
+  else if (t < tSp) { pr = t < tPr ? 0 : .55 * eio((t - tPr) / .9) + .45 * eio((t - tH) / .9); y = RJ.yf + RJ.press * pr; }
+  else { const u = t - tSp; y = RJ.yf + RJ.press * Math.exp(-u * 2.2) * Math.cos(u * 6); }
+  const bob = t < tSt ? 0 : 6 * Math.sin((t - tSt) * 2.4) * ramp(t, tSt, .6) * (1 - pr);
   const fin = t < tPr - .6 || t > tSp + .9 ? 0 : t < tPr ? eo((t - tPr + .6) / .6) : t < tSp ? 1 : 1 - eo((t - tSp) / .8);
-  if (fin > .01) o += `<rect width="1920" height="1080" fill="${P.ink}" opacity="${n2(.22 * fin)}"/>` + `<g transform="translate(960 ${n2(-760 + 640 * fin)}) scale(3.4)"><g transform="rotate(90)">${hand15({ curl: .05, sleeve: "#B9A6FF", sleeveD: "#8B5CF6" })}</g></g>`
-    + (fin > .5 && t < tSp ? TF(960, 300, spring(t, tPr + .3, .4), tpill(0, 0, "Pip's finger", 36, "#fff", P.ink, { w: 700 })) : "");
-  // YOU: your own dark grey rim at the bottom of the frame, round the pencil (first person)
-  const br = 6 * Math.sin(t * 2);
-  o += `<path d="M-80 1100 L-80 ${n2(900 + br)} Q960 ${n2(800 + br)} 2000 ${n2(900 + br)} L2000 1100z" fill="#5A6070" stroke="#22252E" stroke-width="8"/><path d="M20 ${n2(930 + br)} Q960 ${n2(842 + br)} 1900 ${n2(930 + br)}" fill="none" stroke="#9AA2B2" stroke-width="12" opacity=".65"/>`
-    + `<ellipse cx="960" cy="${n2(1010 + br)}" rx="${pn + 40}" ry="44" fill="#2A2D36"/><path d="M${960 - pn} ${n2(990 + br)} V1100 H${960 + pn} V${n2(990 + br)}z" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><rect x="${960 - pn + 26}" y="${n2(990 + br)}" width="44" height="120" fill="#FFE08A"/>`;
-  return o; }
+  return { y: y + bob, pr, fin }; }
+// the camera [K, cx, cy]: following you down near the top, easing back to show both rings and the bench (jbelow), pushing in on the two
+// rings as you stop, then on the empty gap (jgap). Scale is eased in log space, so the push-ins feel even.
+function ringJCam(t, s, yY) { const m = MK, tBl = m("jbelow"), tSl = m("jslow"), tSt = m("jstop"), tG = m("jgap");
+  const mix = (a, b, u) => [Math.exp(lerp(Math.log(a[0]), Math.log(b[0]), u)), lerp(a[1], b[1], u), lerp(a[2], b[2], u)];
+  let c = [2.1, 0, yY + 120];
+  c = mix(c, [1.42, 0, -335], eio((t - tBl + 1.2) / 2.8));
+  c = mix(c, [2.8, 0, -172], eio((t - tSl - .3) / (tSt - tSl + .6)));
+  c = mix(c, [3.15, 0, -160], eio((t - tG + .2) / 1.8));
+  return [c[0], c[1] + 14 * Math.sin(t * .23), c[2]]; }
+function ringJourney(t, s, o = {}) { const m = MK, tS = m("jslide"), tBl = m("jbelow"), tSl = m("jslow"), tPu = m("jpush"), tSt = m("jstop"), tPr = m("jpress"), tH = m("jharder"), tSp = m("jspring"), tG = m("jgap");
+  const st = ringJState(t, s), yY = st.y, [K, cx, cy] = ringJCam(t, s, yY), jl = t >= tPr && t < tPr + .4 ? 6 * Math.sin((t - tPr) * 60) * (1 - (t - tPr) / .4) : 0;
+  const X = (x) => 960 + K * (x - cx), Y = (y) => 540 + K * (y - cy) + jl;
+  let o2 = "";
+  // the science room far behind, big and soft (it moves less than the bench: parallax): the pale wall, the window onto the field, the poster
+  const py = -(cy + 330) * K * .12, px = -cx * K * .1;
+  o2 += `<rect width="1920" height="1080" fill="url(#srWall)"/><g transform="translate(${n2(px)} ${n2(py)})" filter="url(#b4)" opacity=".9"><rect x="-120" y="-260" width="760" height="760" rx="20" fill="url(#srSky)" stroke="#C9D6CC" stroke-width="30"/><path d="M-120 300 Q260 250 640 300 V500 H-120z" fill="url(#srGrass)"/><path d="M260 -260 V500 M-120 120 H640" stroke="#C9D6CC" stroke-width="22"/>`
+    + `<rect x="1380" y="-120" width="420" height="540" rx="16" fill="#FFF4DC" stroke="#E3C9A8" stroke-width="12"/><rect x="1430" y="-60" width="320" height="40" rx="10" fill="#9AC4E8"/><rect x="1430" y="20" width="240" height="26" rx="8" fill="#E0B07A"/><rect x="1430" y="70" width="280" height="26" rx="8" fill="#E0B07A"/></g>`
+    + `<rect width="1920" height="1080" fill="#FFF4C8" opacity=".12"/>`;
+  const gTop = yY + 44, gBot = RG_BOT - 24, gMid = (gTop + gBot) / 2, lk = ss(tG - .2, tG + 1.4, t);
+  // the world (rings20's coordinates), through the camera
+  let w = `<rect x="-3000" y="-40" width="6000" height="900" fill="url(#srTop)"/><path d="M-3000 -40 H3000" stroke="#7A8090" stroke-width="5"/>`
+    + [-900, -560, 420, 760].map((x, i) => `<path d="M${x} ${10 + i * 22} q60 -6 140 0" stroke="#6A7080" stroke-width="4" fill="none" stroke-linecap="round" opacity=".5"/>`).join("");
+  w += `<ellipse cx="0" cy="6" rx="150" ry="22" fill="${P.ink}" opacity=".3" filter="url(#b4)"/><path d="M-120 0 Q-110 -60 0 -66 Q110 -60 120 0z" fill="#E86A8A" stroke="#A8405E" stroke-width="5"/><path d="M-80 -30 q30 -16 70 -10" stroke="#FF9AB4" stroke-width="7" fill="none" stroke-linecap="round" opacity=".8"/>`
+    + (lk > .02 ? OP(lk, `<ellipse cx="0" cy="${n2(gMid)}" rx="130" ry="${n2(Math.max(14, (gBot - gTop) * .4))}" fill="#FFF6C8" opacity=".9" filter="url(#b10)"/>`) : "")   // the empty gap: a soft light through it (behind the pencil)
+    + PENCIL_J;
+  // the bottom ring magnet, resting on the plasticine, the pencil through its hole
+  w += TF(0, RG_BOT, 1, ring20({})) + pencilThrough(RG_BOT, 1, PENCIL_J);
+  // YOU: the top ring, with a sun-yellow glow, an outline, and big eyes on your rim (they squeeze shut while Pip presses)
+  const SIL = `M-90 0 A90 30 0 0 1 90 0 V22 A90 30 0 0 1 -90 22z`, shut = st.pr > .2 || blink16(t, .4), look = t < tSt ? 1 : 0;
+  w += `<g transform="translate(0 ${n2(yY)})"><path d="${SIL}" fill="none" stroke="${P.sun}" stroke-width="${n2(16 + 4 * Math.sin(t * 3))}" opacity=".75" filter="url(#b10)"/>${ring20({})}<path d="${SIL}" fill="none" stroke="${P.sun}" stroke-width="5" stroke-linejoin="round"/>`
+    + eye16(-32, 40, 9.5, { shut, lx: look ? 0 : .3 }) + eye16(32, 40, 9.5, { shut, lx: look ? 0 : .3 }) + `<path d="M-6 47 q6 5 12 0" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".85"/></g>` + pencilThrough(yY, 1, PENCIL_J);
+  // Pip's finger: a hand (four fingers and a thumb) comes down from above onto your top face
+  if (st.fin > .01) w += TF(-4, yY - 26 - 330 * (1 - st.fin), .9, TF(0, -84, 1, hand15({ curl: .62, sleeve: "#B9A6FF", sleeveD: "#8B5CF6" }), 90));
+  o2 += `<g transform="translate(${n2(960 - K * cx)} ${n2(540 - K * cy + jl)}) scale(${n2(K)})">${w}</g>`;
+  // the push in the gap: magenta arrows at both sides of the pencil, UP on you and DOWN on the bottom ring; thicker as the gap shrinks
+  const pa = t < tPu ? 0 : ramp(t, tPu, .6), hard = clamp((st.pr - .1) / .9), aw = (20 + 12 * hard) * (1 + .05 * Math.sin(t * 7)), ex = 30 * hard;   // pressed: the arrows grow and reach onto the two rings
+  if (pa > .02) o2 += OP(pa * (.35 + .65 * hard), `<ellipse cx="${n2(X(0))}" cy="${n2(Y(gMid))}" rx="${n2(K * 95)}" ry="${n2(K * Math.max(8, (gBot - gTop) * .45))}" fill="${PUSHC}" opacity=".35" filter="url(#b10)"/>`)
+    + OP(pa, [-56, 56].map((x) => fatArrow(X(x), Y(gMid - 3), X(x), Y(gTop + 3 - ex), PUSHC, aw * K / 2.8) + fatArrow(X(x), Y(gMid + 3), X(x), Y(gBot - 3 + ex), PUSHC, aw * K / 2.8)).join(""));
+  // speed lines beside you as you slide
+  const sp = ss(tS, tS + 1, t) * (1 - ss(tSl - 1, tSl + .5, t));
+  if (sp > .02) o2 += [...Array(8)].map((_, i) => { const x = X((i % 2 ? 1 : -1) * (110 + 30 * hash(i, 3))), u = ((t * 1.6 + hash(i, 5)) % 1), y0 = Y(yY) + 260 - 520 * u; return `<path d="M${n2(x)} ${n2(y0)} v${n2(-70 - 50 * hash(i, 7))}" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity="${n2(.6 * sp * Math.sin(Math.PI * u))}"/>`; }).join("");
+  // the three buddies, shrunk, standing on the bench at the pencil's foot (in the world: they move and scale with the camera)
+  const RW = o.at || { pip: [-244, 16], momo: [-168, 26], basil: [252, 18] }, at = {};
+  for (const k in RW) at[k] = [X(RW[k][0]), Y(RW[k][1])];
+  o2 += riders(t, s, { tin: o.tin, h: 80 * K, at, poses: o.poses || {} });
+  // labels, each joined to what it names
+  const rx = X(92), lx = X(-92), yu = Y(yY + 8), ub = 1 - ramp(t, s.t1 - .5, .3);
+  o2 += OP(ub, lcLab(t, tS - .2, 1450, clamp(yu - 150, 90, 300), "You: the top ring magnet", rx, yu, { size: 38, fill: P.sun, ink: P.ink }));
+  o2 += lcLab(t, tBl + .2, 1490, Y(RG_BOT) - 150, "the bottom ring magnet", X(92), Y(RG_BOT + 8), { size: 38, t1: tPr - .4 });
+  o2 += t >= tBl && t < tSl + .3 ? TF(60 + tw("to scale: a ring magnet", 30, 600) / 2 + 26, 76, spring(t, tBl, .45) * (1 - ramp(t, tSl, .25)), tpill(0, 0, "to scale: a ring magnet", 30, P.ink, "#fff", { w: 600 })) : "";
+  o2 += lcLab(t, tPu + .8, 470, Y(gMid) - 20, "pushing up on you", X(-56), Y(gMid - 14), { size: 38, fill: PUSHC, ink: "#fff", t1: tH - .2 });
+  o2 += lcLab(t, tSt, 470, Y(yY) - 150, "you float", lx, yu - 6, { size: 42, t1: tPr - .5 });
+  o2 += lcLab(t, tPr + .3, 520, 120, "Pip's finger", X(-30), Y(yY - 170 - 330 * (1 - st.fin)), { size: 36, t1: tSp + .2 });
+  o2 += lcLab(t, tH, 470, Y(gMid) - 20, "closer = stronger push", X(-56), Y(gMid - 6), { size: 38, fill: PUSHC, ink: "#fff", t1: tSp - .1 });
+  if (t >= tG) o2 += linkChip(t, tG + 1.0, 420, Y(gMid) + 10, X(-62), Y(gMid), 1, "a push", 46) + linkChip(t, tG + 1.4, 1480, Y(gMid) - 110, X(50), Y(gMid - 6), 2, "no glue", 46) + linkChip(t, tG + 1.8, 1480, Y(gMid) + 110, X(50), Y(gMid + 6), 2, "no string", 46);
+  return o2; }
 
 // Part 1 pictures. The ring's picture in Round 1 (lockN obj, drawn round (430, 470)): the floating ring, big; a finger presses it down on
 // `press` and it springs back up when it lifts
 const ringP1 = (t) => { const tp = MKS("press"), fin = t < tp - .5 ? 0 : t < tp ? eo((t - tp + .5) / .5) : t < tp + 1.6 ? 1 : 1 - eo((t - tp - 1.6) / .5), pr = t < tp ? 0 : t < tp + 1.6 ? .55 * eo((t - tp) / .4) : .55 * (1 - eo((t - tp - 1.6) / .3));
-  return `<circle cx="430" cy="470" r="190" fill="#FFF8EA"/>` + TF(430, 665, .64, rings20(t, { press: pr, finger: fin })); };
+  return `<circle cx="430" cy="470" r="190" fill="#FFF8EA"/>` + TF(430, 595, .5, rings20(t, { press: pr, finger: fin })); };   // 24 Nov: smaller and higher, so the plasticine and the bottom ring sit above the number badge (lockN clips the picture to the circle)
 // the HOLD ON! ring's picture: the floating ring with a sad face drawn on Pip's card beside it
 const ringHold = (t) => `<circle cx="430" cy="470" r="190" fill="#FFF8EA"/>` + TF(430, 665, .64, rings20(t, {}));
 // the fun fact (the spider): baby spiders fly with no wings ("ballooning")
@@ -198,6 +241,7 @@ function trainJourney(t, s) { const m = MK, tT = m("jtrack"), tE = m("jengine"),
 // each box's own pair of bar magnets meeting at the left (pull: they click; push: the gap stays); then Pip's rings, big: the two faces that
 // meet are both North poles (in our picture): like poles repel, so it floats; turned over, a South pole meets a North pole: it snaps down.
 const LK_PAIRS = { ns: [true, true, 0], sn: [false, false, 0], nn: [true, false, 1], ss: [false, true, 1] };   // [left flip, right flip, push]: flip true = [S|N]
+const LC_UP = -650;   // 24 Nov: Pip's ring is lifted right off the pencil (its tip at -570) before it is turned over
 function lcLikeArt(t) { const m = MKS, tRg = m("rings"), tFl = m("floats"), tFr = m("flipr"), tSn = m("snap"), tU = m("kw_unlike_poles"), tL = m("kw_like_poles");
   const ring = ss(tRg - .8, tRg, t), cx = lerp(200, 430, ring), cy = lerp(-30, -70, ring), ck = lerp(1.35, 1.0, ring);
   let s = "", lines = "";
@@ -221,8 +265,8 @@ function lcLikeArt(t) { const m = MKS, tRg = m("rings"), tFl = m("floats"), tFr 
   // Pip's rings, BIG, their facing faces named (in our picture: North and North: like poles repel, it floats; turned over: South over North:
   // unlike poles attract, it snaps down). The old labels go COMPLETELY when the picture changes.
   if (ring > .02) { const RK = .92, RX = -330, RY = 330, f0 = clamp((t - tFr) / 1.0), snapped = t >= tSn, gapK = snapped ? 0 : 1;
-    let top; if (t < tFr) top = {}; else if (t < tFr + .5) top = { topY: lerp(RG_TOP, -440, eio((t - tFr) / .5)) }; else if (t < tFr + 1.1) top = { topY: -440, topSy: Math.cos(Math.PI * eio((t - tFr - .5) / .6)) };
-    else if (t < tSn - .25) top = { topY: lerp(-440, RG_TOP + 20, eio((t - tFr - 1.1) / 1.2)), topSy: -1 }; else if (t < tSn) top = { topY: lerp(RG_TOP + 20, RG_BOT - 24, ei((t - tSn + .25) / .25)), topSy: -1 }; else top = { topY: RG_BOT - 24, topSy: -1 };
+    let top; if (t < tFr) top = {}; else if (t < tFr + .5) top = { topY: lerp(RG_TOP, LC_UP, eio((t - tFr) / .5)) }; else if (t < tFr + 1.1) top = { topY: LC_UP, topSy: Math.cos(Math.PI * eio((t - tFr - .5) / .6)) };
+    else if (t < tSn - .25) top = { topY: lerp(LC_UP, RG_TOP + 20, eio((t - tFr - 1.1) / 1.2)), topSy: -1 }; else if (t < tSn) top = { topY: lerp(RG_TOP + 20, RG_BOT - 24, ei((t - tSn + .25) / .25)), topSy: -1 }; else top = { topY: RG_BOT - 24, topSy: -1 };
     const flipped = t >= tFr + .8, gcol = flipped ? PULLC : PUSHC;
     s += OP(ring, TF(RX, RY, RK, rings20(t, { ...top, glowTop: t < tFr ? PUSHC : flipped ? PULLC : undefined, glowBot: t < tFr || flipped ? gcol : undefined })));
     const gy0 = RY + RK * ringGapY(1), botF = RY + RK * (RG_BOT - 8), topU = RY + RK * (RG_TOP + 26);
@@ -231,7 +275,7 @@ function lcLikeArt(t) { const m = MKS, tRg = m("rings"), tFl = m("floats"), tFr 
       + (t >= tRg + 2.2 ? OP(1 - ramp(t, tFr - .2, .25), TF(RX + 380, gy0 - 10, spring(t, tRg + 2.2, .45), tpill(0, 0, "like poles: repel", 40, PUSHC, "#fff", { w: 700 }))) : "")
       + (t >= tRg + 1.6 ? OP(1 - ramp(t, tFr - .2, .25), TF(RX, RY - 640 * RK + 60, spring(t, tRg + 1.6, .4), tpill(0, 0, "in our picture", 28, "#fff", P.ink, { w: 600 }))) : "")
       + (t >= tFl ? OP(1 - ramp(t, tFr - .2, .25), TF(RX + 380, gy0 + 70, spring(t, tFl, .45), tpill(0, 0, "it floats", 34, "#fff", P.ink, { w: 700 }))) : ""));
-    if (t >= tFr && t < tFr + 1.3) s += OP(1 - ramp(t, tFr + 1.0, .3), `<path d="M${RX - 130} ${RY - 470 * RK} Q${RX} ${RY - 600 * RK} ${RX + 130} ${RY - 470 * RK}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round"/><path d="M${RX + 102} ${RY - 506 * RK} L${RX + 132} ${RY - 468 * RK} L${RX + 88} ${RY - 460 * RK}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`);
+    if (t >= tFr && t < tFr + 1.3) s += OP(1 - ramp(t, tFr + 1.0, .3), `<path d="M${RX - 130} ${RY - 700 * RK} Q${RX} ${RY - 800 * RK} ${RX + 130} ${RY - 700 * RK}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round"/><path d="M${RX + 102} ${RY - 736 * RK} L${RX + 132} ${RY - 698 * RK} L${RX + 88} ${RY - 690 * RK}" fill="none" stroke="${P.ink}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>`);
     if (flipped) { const tf = tFr + .8, uy = snapped ? RY + RK * (RG_BOT - 30) : RY + RK * (top.topY + 26);
       s += lcLab(t, tf + .3, RX + 330, uy - 70, "S", RX + 80, uy, { fill: SOUTHC, ink: "#fff", size: 44 }) + lcLab(t, tf + .5, RX + 330, botF + 50, "N", RX + 80, botF + 6, { fill: NORTHC, ink: "#fff", size: 44 })
         + (t >= tSn - 2.4 && !snapped ? ppArrows(t, RX, (uy + botF) / 2, "pull", ramp(t, tSn - 2.4, .3), { dir: "v", gap: 8, len: 30, w: 14 }) : "")

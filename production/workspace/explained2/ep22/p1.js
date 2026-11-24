@@ -171,7 +171,10 @@ const camHold = (t) => { const a = eio((t - MK("try") + .8) / 1.2) * (1 - eio((t
 const RG = [960, 420], RR = 215;
 SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260], pip: [1150, 300] }; const b = "m902", c = "m903", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell, tB = MK("boxit"), cam = camHold(t);
   const st = ss(tX - .1, tX + .4, t) * (1 - ss(LE(c) + .1, LE(c) + .6, t)), ring = st > .01, lidK = t < tB + .55 ? 0 : eo(clamp((t - tB - .55) / .3));
-  const inner = `<circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g transform="translate(${RG[0]} ${RG[1] + 40}) scale(1.05) translate(-430 -470)">${ringHold22(t)}</g>`;
+  // 24 Nov (the EP20 HOLD ON! fix, applied here too): the picture is centred on the ring and clipped to its inner circle (its own cream disc
+  // used to sit 40 px lower and spill over the track); smaller and re-centred so both hands (on the nail, on the magnet) stay inside the circle,
+  // all of it above the number badge
+  const inner = `<clipPath id="hoC"><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}"/></clipPath><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g clip-path="url(#hoC)"><g transform="translate(${RG[0]} ${RG[1] + 5}) scale(.7) translate(-395 -470)">${ringHold22(t)}</g></g>`;
   const labels = [["one stroke", 420, 250, -1], ["the magnet is still here", 1500, 250, 1], ["where are the clips?", 1500, 560, 1]].map(([l, x, y, sd], i) => { const t0 = tX + .2 + i * .15; return t < t0 ? "" : pline(x - sd * 190, y + 40, RG[0] + sd * RR * .8, RG[1] + (i === 2 ? RR * .4 : -RR * .6), ramp(t, t0, .2)) + clue3(x, y, l, spring(t, t0, .4), 50, 520); }).join("");
   const bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 6 * Math.sin(t * 3);
   const world = JOLT(t, [tB + .6], HS22(t, { bird: t < r0 - 1 || t > bell + 1 ? WPAT.holdon : false, top: tableProps(t, { box: false, bag: false, tray: false }) + magBox22(t, BOXH[0], BOXH[1], .42, { lid: lidK, mag: t >= tB + .7 && lidK < .95 }) }, cam), 18);

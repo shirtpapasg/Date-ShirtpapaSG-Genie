@@ -235,7 +235,8 @@ function VD19(t, o = {}, cam) { const sc = (window._S || {}).name, wet = o.wet =
 
 /* ================================================================ PART 1 PICTURES ================================================================ */
 // the lock-in ring's picture (centre 430, 470, about r 170): the bar magnet above a steel pin and a curl of copper wire, big
-const ringP1 = (t) => `<circle cx="430" cy="470" r="180" fill="#FFF8EA"/>` + TF(430, 395, .78, magnet19(t)) + TF(360, 520, .6, pin18()) + TF(520, 560, .55, wire18()) + T(360, 488, "steel pin", 22, P.ink) + T(520, 620, "copper wire", 22, P.ink);
+// 24 Nov: the copper wire and its name moved up and in, out from behind the countdown's number badge (lockN clips the picture to the circle)
+const ringP1 = (t) => `<circle cx="430" cy="470" r="180" fill="#FFF8EA"/>` + TF(430, 395, .78, magnet19(t)) + TF(360, 520, .6, pin18()) + TF(505, 545, .5, wire18()) + T(360, 488, "steel pin", 22, P.ink) + T(505, 500, "copper wire", 22, P.ink);
 // the storybook hillside (lcmagnet, the LEFT beat): a person long ago with a stick with an IRON tip; the tip is tugged down onto a dark rock.
 // origin = the frame's middle, 760 x 560. u 0..1: the tip is pulled down to the rock
 const storyHill = (t, u) => { let s = `<rect x="-380" y="-280" width="760" height="560" rx="20" fill="#F7E6C2"/><rect x="-380" y="-280" width="760" height="300" rx="20" fill="#CFE6D8" opacity=".7"/>`
@@ -362,7 +363,8 @@ function pinJourney(t, s) { const m = MK, tT = m("jtable"), tP = m("jpipe"), tF 
 /* ================================================================ PART 2 PICTURES ================================================================ */
 // Round 1's card pictures (400 x 280: -200..200, -140..140): the drink can, the food tin, both; the ring: the magnet above the two cans
 const canPic = (i, t) => `<rect x="-200" y="-140" width="400" height="280" fill="${["#EAF3F7", "#EEF1F5", "#FFF8EA"][i]}"/>` + (i === 0 ? TF(0, 110, 1.15, can19(1, t)) : i === 1 ? TF(0, 110, 1.25, tin19(1, t)) : TF(-80, 110, .95, can19(1, t)) + TF(90, 110, 1.0, tin19(1, t)));
-const ringP2 = (t) => `<circle cx="430" cy="470" r="180" fill="#FFF8EA"/>` + TF(430, 375, .7, magnet19(t)) + TF(360, 610, .78, can19(1, t)) + TF(510, 610, .82, tin19(1, t)) + T(360, 640, "drink can", 22, P.ink) + T(510, 640, "food tin", 22, P.ink);
+// 24 Nov: the cans and their names moved up and in, so the countdown's number badge no longer hides them (lockN clips the picture to the circle)
+const ringP2 = (t) => `<circle cx="430" cy="470" r="180" fill="#FFF8EA"/>` + TF(430, 365, .66, magnet19(t)) + TF(368, 560, .7, can19(1, t)) + TF(498, 560, .74, tin19(1, t)) + T(368, 590, "drink can", 22, P.ink) + T(498, 590, "food tin", 22, P.ink);
 // the recap pictures (1040 x 600)
 const recapP2 = (i, t) => { let s = `<rect x="-520" y="-300" width="1040" height="600" fill="${["#F2E8D6", "#FFF3DC", "#E4EEFB"][i]}"/>`;
   if (i === 0) s += TF(0, -10, 2.4, magnet19(t, { cut: 1 })) + lcLab(t, 0, 0, 200, "grey metal inside", -150, 0, { size: 36 });
@@ -492,13 +494,20 @@ const ffDeep19 = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" he
   + `<path d="M-40 ${h / 2 - 70} L-20 ${h / 2 - 150} H20 L40 ${h / 2 - 70}z" fill="#3A3A46"/>` + [...Array(8)].map((_, i) => { const u = ((t * .6 + i / 8) % 1); return `<circle cx="${n2(Math.sin(i * 2 + t) * 14 * u)}" cy="${n2(h / 2 - 150 - u * (h - 160))}" r="${n2(4 + 8 * u)}" fill="#BFE3FF" opacity="${n2(.7 * (1 - u))}"/>`; }).join("") + `<ellipse cx="0" cy="${h / 2 - 160}" rx="30" ry="12" fill="#FF9A5A" opacity=".5"/>`;
 const ffSnail19 = (t, w, h) => `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#1E3A6A"/><rect x="${-w / 2}" y="${h / 2 - 60}" width="${w}" height="60" fill="#3A3A46"/>` + TF(-10, h / 2 - 58, .95, scalyFoot19(t)) + lcLab(t, MK("ff_snail") + .4, 0, -h / 2 + 50, "scaly foot", -40, h / 2 - 80, { size: 24 });
 const ffTug19 = (t, w, h) => { const u = ss(MK("ff_magnet") + .3, MK("ff_magnet") + 1.2, t); return `<rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" fill="#FFF8EA"/><rect x="${-w / 2}" y="${h / 2 - 60}" width="${w}" height="60" fill="#E3DACA"/>` + TF(-40 + 26 * u, h / 2 - 58, .75, scalyFoot19(t)) + TF(w / 2 - 60, h / 2 - 120, .38, magnet19(t), 90) + pullArrows(t, 10, h / 2 - 110, w / 2 - 90, h / 2 - 110, u > .02 ? 1 : 0, MAGC, 2); };
+// the pencil passes THROUGH each ring's hole (teacher, 24 Nov 2026, on EP20: the pencil looked as if it stood behind the rings): after each
+// ring, the pencil's piece over the ring's back half is drawn again on top, from the top face's back edge (y - 30) down to the hole's front lip
+// (M-16 -30 V9.7 A34 11 0 0 0 16 9.7 V-30z in the ring's coordinates; the clip starts 9 px higher so the face's outline passes behind the pencil), cut from the pencil itself.
+const PENCIL19 = `<rect x="-16" y="-520" width="32" height="470" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M-16 -520 L0 -570 L16 -520z" fill="#F2D6A8" stroke="#B8861C" stroke-width="4"/><path d="M-6 -552 L0 -570 L6 -552z" fill="#3A3A4A"/><rect x="-10" y="-510" width="8" height="450" fill="#FFE08A"/>`;
+let _pc19 = 0;
+const pencilThrough19 = (yR) => { const id = "pcT19_" + (_pc19 = (_pc19 + 1) % 1e6); return `<clipPath id="${id}"><path d="M-34 ${n2(yR - 39)} V${n2(yR)} A34 11 0 0 0 34 ${n2(yR)} V${n2(yR - 39)}z"/></clipPath><g clip-path="url(#${id})">${PENCIL19}</g>`; };
 // the dare (into EP20): a pencil upright in a lump of plasticine; two ring magnets on it, the top one floating (a clear gap). o.n (how many
 // rings are on: 0..2, may be fractional while one slides on), o.t1 (the second's landing)
 const pencilRings = (t, o = {}) => { const n = o.n === undefined ? 2 : o.n, bob = 6 * Math.sin(t * 2.4);
   let s = `<ellipse cx="0" cy="6" rx="150" ry="22" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-120 0 Q-110 -60 0 -66 Q110 -60 120 0z" fill="#E86A8A" stroke="#A8405E" stroke-width="5"/>`
     + `<rect x="-16" y="-520" width="32" height="470" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M-16 -520 L0 -570 L16 -520z" fill="#F2D6A8" stroke="#B8861C" stroke-width="4"/><path d="M-6 -552 L0 -570 L6 -552z" fill="#3A3A4A"/><rect x="-10" y="-510" width="8" height="450" fill="#FFE08A"/>`;
-  if (n > 0) s += TF(0, -84, 1, ringMag19(1));
-  if (n > 1) s += TF(0, lerp(-560, -250 + bob, clamp(n - 1)), 1, ringMag19(1)) + (n >= 2 ? `<path d="M-120 -112 V-226 M120 -112 V-226" stroke="${P.ink}" stroke-width="4" stroke-dasharray="8 8" opacity=".5"/>` + tpill(-230, -170, "a gap!", 30, "#fff", P.ink, { w: 700 }) : "");
+  if (n > 0) s += TF(0, -84, 1, ringMag19(1)) + pencilThrough19(-84);
+  const yT = lerp(-560, -250 + bob, clamp(n - 1));
+  if (n > 1) s += TF(0, yT, 1, ringMag19(1)) + pencilThrough19(yT) + (n >= 2 ? `<path d="M-120 -112 V-226 M120 -112 V-226" stroke="${P.ink}" stroke-width="4" stroke-dasharray="8 8" opacity=".5"/>` + tpill(-230, -170, "a gap!", 30, "#fff", P.ink, { w: 700 }) : "");
   return s; };
 // the dare's two card pictures: 1 a pull (arrows towards each other), 2 a push (arrows apart)
 const nextPic = (i) => `<rect x="-200" y="-140" width="400" height="280" fill="${i ? "#FFF0D6" : "#EAF3F7"}"/>` + TF(0, -50, .9, ringMag19()) + TF(0, 60, .9, ringMag19())

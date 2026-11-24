@@ -164,7 +164,9 @@ const holdWorld = (t, cam) => { const r0 = MK("ring0_hold"), bell = MK("bell_hol
 const RG = [960, 420], RR = 215;
 SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260], pip: [1300, 250] }; const b = "m902", c = "m903", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell, tF = MK("freeturn") + 1.0, cam = camHold(t);
   const st = ss(tX - .1, tX + .4, t) * (1 - ss(LE(c) + .1, LE(c) + .6, t)), ring = st > .01;
-  const inner = `<circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g transform="translate(${RG[0]} ${RG[1] + 20}) scale(1.05) translate(-430 -470)">${holdPic(t)}</g>`;
+  // 24 Nov (the EP20 HOLD ON! fix, applied here too): the picture is centred on the ring and clipped to its inner circle (its own cream disc
+  // used to sit 20 px lower and spill over the track); placed so it sits above the number badge
+  const inner = `<clipPath id="hoC"><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}"/></clipPath><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g clip-path="url(#hoC)"><g transform="translate(${RG[0]} ${RG[1] - 10}) scale(1.05) translate(-430 -470)">${holdPic(t)}</g></g>`;
   const labels = [["on the bench", 400, 260, -1], ["nobody holding it", 1520, 260, 1], ["free?", 420, 560, -1]].map(([l, x, y, sd], i) => { const t0 = tX + .2 + i * .15; return t < t0 ? "" : pline(x - sd * 190, y + 20, RG[0] + sd * RR * .8, RG[1] + (y > 400 ? RR * .5 : -RR * .6), ramp(t, t0, .2)) + clue3(x, y, l, spring(t, t0, .4), 54, 520); }).join("");
   const bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 6 * Math.sin(t * 3), gb = camPt(cam, BNC), gm = camPt(cam, HG);
   const world = JOLT(t, [tF], holdWorld(t, cam), 10);

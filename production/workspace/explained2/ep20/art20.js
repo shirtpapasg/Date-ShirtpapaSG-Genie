@@ -120,13 +120,24 @@ const ring20 = (o = {}) => { let s = `<path d="M-90 0 A90 30 0 0 0 90 0 V22 A90 
 // Pip's pencil in its lump of plasticine with two ring magnets (EP20's bigger version of EP19's pencilRings; the same look). origin = the
 // plasticine's base. o.gap: 0..1 of the floating gap (1 = floating; 0 = touching, as when it is flipped and snaps down); o.bob; o.press: a
 // finger (four fingers and a thumb) presses the top ring down by that much (0..1); o.n: rings on (2); o.labels: [topUnder, botTop] face labels
+// The pencil passes THROUGH each ring's hole (teacher, 24 Nov: it looked as if it stood behind the rings): after each ring is drawn, the
+// pencil's piece over the ring's back half is drawn again on top (pencilThrough), from the top face's back edge down to the hole's front lip,
+// so the pencil disappears into the hole. Not while the top ring is tilted or half-way through a turn-over (then it is off the pencil).
 const RG_BOT = -84, RG_TOP = -250;
+const PENCIL20 = `<rect x="-16" y="-520" width="32" height="470" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M-16 -520 L0 -570 L16 -520z" fill="#F2D6A8" stroke="#B8861C" stroke-width="4"/><path d="M-6 -552 L0 -570 L6 -552z" fill="#3A3A4A"/><rect x="-10" y="-510" width="8" height="450" fill="#FFE08A"/>`;
+// the pencil's piece inside a ring centred at y = yR (pencil coordinates; ring hole rx 34 ry 11, top face ry 30): the shape
+// M-16 -30 V9.7 A34 11 0 0 0 16 9.7 V-30z in the ring's coordinates, cut from the pencil itself (the same yellow, outline, stripe, tip).
+// sg = -1 for a ring turned over (drawn mirrored: the piece is mirrored too). pen = the pencil's svg (default PENCIL20).
+let _pcN = 0;
+const pencilThrough = (yR, sg = 1, pen = PENCIL20) => { const id = "pcT" + (_pcN = (_pcN + 1) % 1e6), a = yR - 39 * sg;   // from 9 px above the back edge: the face's outline and glow pass BEHIND the pencil
+  return `<clipPath id="${id}"><path d="M-34 ${n2(a)} V${n2(yR)} A34 11 0 0 ${sg > 0 ? 0 : 1} 34 ${n2(yR)} V${n2(a)}z"/></clipPath><g clip-path="url(#${id})">${pen}</g>`; };
 function rings20(t, o = {}) { const n = o.n === undefined ? 2 : o.n, gap = o.gap === undefined ? 1 : o.gap, pr = o.press || 0, bob = (o.bob === undefined ? 6 : o.bob) * Math.sin(t * 2.4) * gap * (1 - pr);
-  const yTop = o.topY !== undefined ? o.topY : lerp(RG_BOT - 24, RG_TOP + 70 * pr, gap) + bob;
+  const yTop = o.topY !== undefined ? o.topY : lerp(RG_BOT - 24, RG_TOP + 70 * pr, gap) + bob, sy = o.topSy === undefined ? 1 : o.topSy;
   let s = `<ellipse cx="0" cy="6" rx="150" ry="22" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-120 0 Q-110 -60 0 -66 Q110 -60 120 0z" fill="#E86A8A" stroke="#A8405E" stroke-width="5"/><path d="M-80 -30 q30 -16 70 -10" stroke="#FF9AB4" stroke-width="7" fill="none" stroke-linecap="round" opacity=".8"/>`
-    + `<rect x="-16" y="-520" width="32" height="470" fill="#FFC83A" stroke="#B8861C" stroke-width="5"/><path d="M-16 -520 L0 -570 L16 -520z" fill="#F2D6A8" stroke="#B8861C" stroke-width="4"/><path d="M-6 -552 L0 -570 L6 -552z" fill="#3A3A4A"/><rect x="-10" y="-510" width="8" height="450" fill="#FFE08A"/>`;
-  if (n > 0) s += TF(0, RG_BOT, 1, ring20({ glowTop: o.glowBot }));
-  if (n > 1) s += `<g transform="translate(0 ${n2(yTop)}) rotate(${o.tilt || 0}) scale(1 ${n2(o.topSy === undefined ? 1 : (Math.abs(o.topSy) < .04 ? .04 : o.topSy))})">${ring20({ glowBot: o.glowTop })}</g>`;
+    + PENCIL20;
+  if (n > 0) s += TF(0, RG_BOT, 1, ring20({ glowTop: o.glowBot })) + pencilThrough(RG_BOT);
+  if (n > 1) s += `<g transform="translate(0 ${n2(yTop)}) rotate(${o.tilt || 0}) scale(1 ${n2(Math.abs(sy) < .04 ? .04 : sy)})">${ring20({ glowBot: o.glowTop })}</g>`
+    + (!o.tilt && Math.abs(Math.abs(sy) - 1) < .001 ? pencilThrough(yTop, Math.sign(sy)) : "");
   if (o.finger) s += TF(-4, yTop - 24 - 160 * (1 - o.finger), .9, holdHand(1, 0));   // a hand (four fingers and a thumb) comes down onto the top ring
   return s; }
 // where the gap is (for labels and arrows), in rings20's own coordinates

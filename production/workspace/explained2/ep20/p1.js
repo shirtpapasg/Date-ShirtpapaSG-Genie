@@ -89,11 +89,10 @@ SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, clues: DARE_CLUES.map((c, i) => 
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([GAP[0] - 40, GAP[1] - 120], 1.2, 960, 520), camOn([GAP[0], GAP[1] - 40], 4.4, 960, 540), u * u); };
 SC.waitw = (t, s) => { const L = "m601", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
   const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1380, 1700][i]; return bd(w, x, [1076, 1010, 1076][i], [470, 390, 490][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
-  return room(t, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the top ring magnet!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#3E4350", 960, 600); };
-SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jstop") + .1, "surprised"], [m("jstop") + 2.3, "sit"]], basil: [[m("jslide") + .8, "pointing"], [m("jslide") + 3.0, "sit"]] };
-  return ringJourney(t, s) + riders(t, s, { tin: m("jslide") + .6, h: 200, at: { pip: [200, 1044], basil: [1720, 1050], momo: [390, 1040] }, poses: rp })
-    + youTag(t, MK("jslide"), "You: the top ring magnet") + feelTag(t, MK("jbelow"), MK("jslow") - .2, "to scale: a ring magnet", 160) + feelTag(t, MK("jstop"), MK("jpress") - .2, "you float", 160)
-    + feelTag(t, MK("jharder"), MK("jspring") - .1, "closer = stronger push", 160); };
+  return room(t, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the top ring magnet!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#E3EEE6", 960, 600); };   // 24 Nov: the wall colour of the side-view journey that follows
+SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jstop") + .1, "surprised"], [m("jstop") + 2.3, "sit"]], basil: [[m("jbelow") + .4, "pointing"], [m("jbelow") + 2.6, "sit"]] };
+  // 24 Nov: a SIDE VIEW (lc20.js ringJourney): the buddies stand on the bench at the pencil's foot (in the world), every tag joined to what it names
+  return ringJourney(t, s, { tin: m("jslide") + .6, poses: rp }); };
 // the pull back out: the science room at normal size; the ring floating, Pip's finger lifting from it
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return room(t, camMix(camOn([GAP[0], GAP[1] - 60], 1.3, 960, 600), camOn([GAP[0], GAP[1] - 40], 4, 960, 540), u), { ro: { finger: 1 - clamp((t - s.t0) / .6) } })
@@ -144,7 +143,8 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "m810", sayId: "m809", who: "momo", n
    ring is lifted off the pencil, turned over (a big curved arrow), slid back on and let go; click: it SNAPS down, CLICK (a jolt, a flash and
    burst, Pip's face close-up, shy); flipback: turned back over, it floats again. The spider on the rim of the class plant's pot */
 const NOTEP = [600, 846, .4];
-const topRing = (t) => { const f0 = MK("flip"), c = MK("click"), fb = MK("flipback"), y0 = RG_TOP, yUp = -470, yDown = RG_BOT - 24, bob = 6 * Math.sin(t * 2.4), tr = MK("try");
+const RING_UP = -650;   // 24 Nov: the ring is lifted right OFF the pencil (its tip is at -570) before it is turned over, then slid back on
+const topRing = (t) => { const f0 = MK("flip"), c = MK("click"), fb = MK("flipback"), y0 = RG_TOP, yUp = RING_UP, yDown = RG_BOT - 24, bob = 6 * Math.sin(t * 2.4), tr = MK("try");
   // try: pressed down and let go, twice (it springs back up each time; it will not come down to touch)
   const pr = [tr, tr + 1.8].reduce((a, x) => a + (t >= x && t < x + 1.3 ? (t < x + .3 ? eo((t - x) / .3) : 1 - eo((t - x - .3) / 1)) : 0), 0);
   const fin = [tr, tr + 1.8].reduce((a, x) => Math.max(a, t >= x - .4 && t < x + 1.1 ? (t < x ? eo((t - x + .4) / .4) : t < x + .5 ? 1 : 1 - eo((t - x - .5) / .5)) : 0), 0);
@@ -154,19 +154,22 @@ const topRing = (t) => { const f0 = MK("flip"), c = MK("click"), fb = MK("flipba
   if (t < c - .25) return { topY: lerp(yUp, y0 + 30, eio((t - f0 - 1.4) / (c - .25 - f0 - 1.4))), topSy: -1 };
   if (t < c) return { topY: lerp(y0 + 30, yDown, ei((t - c + .25) / .25)), topSy: -1 };
   if (t < fb) return { topY: yDown, topSy: -1 };
-  if (t < fb + .5) return { topY: lerp(yDown, yUp + 120, eio((t - fb) / .5)), topSy: -1 };
-  if (t < fb + 1.0) return { topY: yUp + 120, topSy: -Math.cos(Math.PI * eio((t - fb - .5) / .5)) };
-  return { topY: lerp(yUp + 120, y0, eo((t - fb - 1.0) / .8)) + bob * clamp((t - fb - 1.8) / .5) }; };
-const flipArrow = (t, f0) => { const k = ramp(t, f0 + .7, .2) * (1 - ramp(t, f0 + 1.7, .3)); if (k < .02) return ""; const x = PEN[0], y = PEN[1] + PK * -470;
-  return OP(k, `<path d="M${x - 120} ${y - 20} Q${x} ${y - 140} ${x + 120} ${y - 20}" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round"/><path d="M${x - 120} ${y - 20} Q${x} ${y - 140} ${x + 120} ${y - 20}" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round"/><path d="M${x + 92} ${y - 54} L${x + 122} ${y - 18} L${x + 78} ${y - 8}" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`); };
+  if (t < fb + .6) return { topY: lerp(yDown, yUp, eio((t - fb) / .6)), topSy: -1 };
+  if (t < fb + 1.1) return { topY: yUp, topSy: -Math.cos(Math.PI * eio((t - fb - .6) / .5)) };
+  return { topY: lerp(yUp, y0, eo((t - fb - 1.1) / .9)) + bob * clamp((t - fb - 2.0) / .5) }; };
+const flipArrow = (t, f0) => { const k = ramp(t, f0 + .7, .2) * (1 - ramp(t, f0 + 1.7, .3)); if (k < .02) return ""; const x = PEN[0], y = PEN[1] + PK * RING_UP;
+  return OP(k, `<path d="M${x - 120} ${y + 5} Q${x} ${y - 90} ${x + 120} ${y + 5}" fill="none" stroke="#fff" stroke-width="18" stroke-linecap="round"/><path d="M${x - 120} ${y + 5} Q${x} ${y - 90} ${x + 120} ${y + 5}" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round"/><path d="M${x + 92} ${y - 24} L${x + 122} ${y + 7} L${x + 78} ${y + 17}" fill="none" stroke="${P.ink}" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>`); };
 const camHold = (t) => { const a = eio((t - MK("try") + .8) / 1.2) * (1 - eio((t - W("m902", "cross") + .6) / .8)), b = eio((t - MK("flip") + 1.2) / 1.2);
   return camMix(camMix(camOn([880, 610], 1.12, 960, 560), camOn([GAP[0] - 80, 790], 1.75, 960, 600), a), camOn([GAP[0], 790], 1.7, 960, 600), b); };
 const holdWorld = (t, cam) => { const r0 = MK("ring0_hold"), bell = MK("bell_hold"); return SR20(t, { spider: t < r0 - 1 || t > bell + 1 ? SPAT.holdon : false,
   bench: TF(TRAY[0] - 60, TRAY[1], .5, tray20(t)) + TF(NOTEP[0], NOTEP[1], NOTEP[2], pipNote(t)) + TF(MAG[0] + 40, MAG[1] - 18, .4, bar20(t)) + ringsAt(t, topRing(t)) + flipArrow(t, MK("flip")) }, cam); };
 const RG = [960, 420], RR = 215;
+const HOLD_PIC = [100, .49];   // the HOLD ON! ring's picture: the plasticine's base 100 px below the ring's centre, scale .49 (the pencil's tip 179 px above it)
 SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260], pip: [700, 300] }; const b = "m902", c = "m903", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell, tC = MK("click"), cam = camHold(t);
   const st = ss(tX - .1, tX + .4, t) * (1 - ss(LE(c) + .1, LE(c) + .6, t)), ring = st > .01;
-  const inner = `<circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g transform="translate(${RG[0]} ${RG[1] + 40}) scale(1.05) translate(-430 -470)">${ringHold(t)}</g>`;
+  // the ring's picture (24 Nov fix): ONE cream disc, exactly the inner circle (r = RR - 24, centred on RG), and the picture clipped to it; Pip's
+  // pencil, its plasticine and both rings (a clear gap) scaled to fit inside the circle, above the countdown's number badge
+  const inner = `<clipPath id="hoC"><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}"/></clipPath><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g clip-path="url(#hoC)">${TF(RG[0], RG[1] + HOLD_PIC[0], HOLD_PIC[1], rings20(t))}</g>`;
   const labels = [["it floats", 420, 250, -1], ["broken?", 1500, 250, 1]].map(([l, x, y, sd], i) => { const t0 = tX + .2 + i * .15; return t < t0 ? "" : pline(x - sd * 190, y + 40, RG[0] + sd * RR * .8, RG[1] - RR * .6, ramp(t, t0, .2)) + clue3(x, y, l, spring(t, t0, .4), 54, 520); }).join("");
   const bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 6 * Math.sin(t * 3), gp = camPt(cam, [GAP[0] + 60, PEN[1] + PK * (RG_BOT - 12)]);
   const world = JOLT(t, [tC], holdWorld(t, cam), 22);
