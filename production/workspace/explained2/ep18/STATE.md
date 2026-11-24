@@ -168,6 +168,8 @@ Teacher: "ok to upload all". Part 1 MnDMkHAvOjc, Part 2 f2MG82O_9sA (after EP17 
   Voice Kit is not bit-exact run to run: same takes within a few ms / ~3 cents). The jsons are unchanged.
 - **Renders (after the n2 4-decimal fix and the lock-in ring clip):** `ep18_part1.mp4` 323.233 s, 9697 frames, -16.0 LUFS, decodes; first
   word 0.825 s; Round 1 51.284 ... 54.284, HOLD ON! numbers 220.645 ... 225.645 (bell 225.612 = timeline; steps 1.000). Part 2 re-rendered
-  from the unchanged script (it already spoke at 0.30 s; one-bed music fix): see REOPEN_PROGRESS.md / below.
+  from the unchanged script (it already spoke at 0.30 s; one-bed music fix): `ep18_part2.mp4` 333.6 s, 10008 frames, -16.0 LUFS, decodes;
+  Round 1 44.898 ... 49.898, Showdown numbers 172.369 ... 177.369 (steps 1.000). New srt, sheets, `qa/open_p1_first25.jpg`. The music
+  agent adds Kampong Walk to both mp4s.
 - Records: app_moments.json (18A 5.475 s earlier), chapters_p3.json keys **EP18_P1_v2** / **EP18_P2_v2**, **upload_v2.json**
   (explained-p3-ep18v2-part1/2, after explained-p3-ep17v2-part2, replaces MnDMkHAvOjc + f2MG82O_9sA, retire_old). Not uploaded.
