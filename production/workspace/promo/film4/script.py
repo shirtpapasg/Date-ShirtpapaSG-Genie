@@ -6,8 +6,8 @@ LINES = [
     # 1 the Station at night
     ("h01", "heart", "At TheOneApp Station, every pupil has a character of their very own.", {"keys": ["TheOneApp", "Station,", "character"]}),
     # 2 the mystery: a grey character steps off the train
-    ("m01", "momo", "Ooh... why is that one all grey?", {"keys": ["grey?"]}),
-    ("p01", "pip", "No colour. No style. Not even a hat!", {"keys": ["colour.", "style.", "hat!"]}),
+    ("m01", "momo", "Oh wait, why is that one all grey?", {"keys": ["grey?"]}),   # teacher 24 Nov 2026: "Oh wait", not "Ooh..." (educational, no teasing)
+    ("p01", "pip", "No colour yet. Let's find out how to bring it back!", {"keys": ["colour", "back!"]}),   # teacher 24 Nov 2026: softened (was "No colour. No style. Not even a hat!")
     ("b01", "basil", "And look. The Gift Shop is dark.", {"keys": ["Gift", "Shop", "dark."]}),
     ("h02", "heart", "Here, style is not given. It is earned.", {"keys": ["earned."]}),
     # 3 the quiz: TAP TO BEGIN
