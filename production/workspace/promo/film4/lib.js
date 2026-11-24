@@ -9,7 +9,7 @@ const spring = (t, t0, d = .55) => { const u = (t - t0) / d; return u <= 0 ? 0 :
 const wob = (t, t0, d = .5) => { const u = (t - t0) / d; return u <= 0 ? 0 : Math.exp(-4 * u) * Math.cos(10 * u + .5); };       // settle wobble after a hit
 const pulse = (t, t0, a = .07, d = .3) => { const u = t - t0; return u < -a ? 0 : u < 0 ? ss(-a, 0, u) : Math.exp(-u / d * 3); };
 const hop = (t, t0, d = .34, h = 1) => { const u = (t - t0) / d; return u <= 0 || u >= 1 ? 0 : 4 * u * (1 - u) * h; };          // an arc: up and down
-const n2 = (v) => Math.round(v * 100) / 100;
+const n2 = (v) => Math.round(v * 10000) / 10000;   /* 4 decimals (teacher 24 Nov: slow zooms stepped "bit by bit like lag" when scale() was rounded to 0.01) */
 const hash = (i, s = 1) => { const x = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return x - Math.floor(x); };
 const rndm = (seed) => { let s = seed; return () => (s = (s * 16807) % 2147483647) / 2147483647; };
 const lg = (id, stops, x2 = 0, y2 = 1) => `<linearGradient id="${id}" x1="0" y1="0" x2="${x2}" y2="${y2}">${stops.map(([o, c, a]) => `<stop offset="${o}" stop-color="${c}"${a !== undefined ? ` stop-opacity="${a}"` : ""}/>`).join("")}</linearGradient>`;
