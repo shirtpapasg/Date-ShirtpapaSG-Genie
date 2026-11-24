@@ -74,6 +74,11 @@ def group(text):
         z = ph[w][0]; o = 480 + int(.025 * k * SR); z = z[:n - o]; mix[o: o + len(z)] += z
     return np.clip(mix * .62, -.98, .98), SR
 
+def say(text):
+    """the caption's words as spoken: a leading "..." dropped, a word in capitals ("YES!") said as a word, not spelt out"""
+    t = re.sub(r"^\.+\s*", "", text.strip())
+    return re.sub(r"\b[A-Z]{2,}\b", lambda m: m.group(0).capitalize(), t)
+
 WHO = {"Heart": "heart", "Pip": "pip", "Momo": "momo", "Basil": "basil", "Pip, Momo and Basil": "group"}
 if __name__ == "__main__":
     for f in (sys.argv[1:] or ["1", "2", "3"]):
@@ -82,8 +87,8 @@ if __name__ == "__main__":
             id = f"f{f}_{k:02d}"; wav = f"{V}/{id}.wav"; meta = f"{V}/{id}.txt"; key = ln["speaker"] + "|" + ln["text"]
             if os.path.exists(wav) and os.path.exists(meta) and open(meta).read() == key: continue
             who = WHO[ln["speaker"]]
-            if who == "heart": x, sr = heart(ln["text"], False, .4, .95)
-            elif who == "group": x, sr = group(ln["text"])
-            else: x, sr = buddy(who, ln["text"])
+            if who == "heart": x, sr = heart(say(ln["text"]), False, .4, .95)
+            elif who == "group": x, sr = group(say(ln["text"]))
+            else: x, sr = buddy(who, say(ln["text"]))
             x = up48(np.asarray(x, np.float64), sr); sf.write(wav, x.astype(np.float32), 48000, subtype="PCM_16"); open(meta, "w").write(key)
             print(id, ln["speaker"], round(len(x) / 48000, 2), "s  (slot", round(ln["end"] - ln["start"], 2), ")", ln["text"], flush=True)
