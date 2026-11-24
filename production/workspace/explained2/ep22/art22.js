@@ -170,11 +170,11 @@ function fishBoard22(t, x, y, k = 1, o = {}) { const on = (m) => o.all || t >= M
 const FISHC = ["#FF8A5B", "#7FE58F", "#F08CC0", "#9FD0FF", "#C9A6FF"];
 function pond22(t, x, y, k = 1, o = {}) { let s = `<ellipse cx="0" cy="8" rx="380" ry="20" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-340 -150 H340 L360 -110 H-360z" fill="#3A74C4" stroke="#1E4E92" stroke-width="5" stroke-linejoin="round"/>`
     + `<path d="M-330 -146 H330 L346 -116 H-346z" fill="url(#gPond)"/>` + [0, 1, 2].map((i) => `<path d="M${-260 + i * 210 + 20 * Math.sin(t + i)} -130 q20 -6 40 0" stroke="#fff" stroke-width="3" fill="none" opacity=".5"/>`).join("");
-  [[-250, -132, 0], [-120, -126, 1], [30, -134, 2], [160, -126, 3]].forEach(([fx, fy, c]) => { s += fishP(fx + 4 * Math.sin(t * 1.4 + c), fy, .62, FISHC[c]); });
-  if (o.big !== false) s += fishP(270, -130, 1.0, "#FFC83A", true);
+  [[-90, -132, 0], [40, -126, 1], [160, -134, 2], [280, -126, 3]].forEach(([fx, fy, c]) => { s += fishP(fx + 4 * Math.sin(t * 1.4 + c), fy, .62, FISHC[c]); });
+  if (o.big !== false) s += fishP(-250, -130, 1.0, "#FFC83A", true);
   s += `<path d="M-360 -110 H360 L340 0 H-340z" fill="#4A86D6" stroke="#1E4E92" stroke-width="5" stroke-linejoin="round"/><path d="M-352 -100 H352" stroke="#B9D6F6" stroke-width="4" opacity=".7"/><path d="M-340 -110 L-330 0 M340 -110 L330 0" stroke="#8A6438" stroke-width="4" opacity=".6"/>`
     + TF(-150, -54, 1, `<rect x="-150" y="-26" width="300" height="52" rx="8" fill="#FFF8EA" stroke="#8A6438" stroke-width="3" transform="rotate(-2)"/>` + T(0, 11, "THE FISHING POND", 28, "#2F6FC0"));
-  for (const [n_, kind, a] of o.rods || []) { const bx = -250 + (n_ - 1) * 140, ang = a || -58; s += rod22(t, bx, -100, ang, 320, { hook: kind, label: "Rod " + n_ }); }
+  for (const [n_, kind, a, fish] of o.rods || []) { const bx = 20 + (n_ - 1) * 140, ang = a || -58; s += rod22(t, bx, -100, ang, 320, { hook: kind, label: "Rod " + n_, fish }); }
   return TF(x, y, k, s); }
 // a ROD: a wooden chopstick from its handle end (x, y) at angle ang (deg), length L; a string from its tip down; the hook at the string's
 // end: "nail" (the magnetised nail, tied by its head, point down), "none"; o.str: the string's length; o.fish: the fish hanging on the hook
@@ -203,20 +203,20 @@ function wb22(t, x, y, k = 1, o = {}) { const on = o.all || t >= MKS("chart"), f
    ruled lines each with a small drawing; lit on l1 / l2 / l3; line 3 struck through (KEPT) at `strike`, the green rewrite below it at
    `rewrite`. o.lit [a, b, c]; o.strike 0..1; o.fix 0..1 ---------- */
 const POSTER22 = ["1  Stroke from the head to the tip, with the red end.", "2  Lift the magnet away, back to the head.", "3  Halfway, turn the magnet round and use the blue end too, for more strength."];
-function poster22(t, x, y, k = 1, o = {}) { const lit = o.lit || [1, 1, 1], st = o.strike || 0, fx = o.fix || 0, Y = [-470, -340, -210];
-  let s = `<ellipse cx="0" cy="6" rx="240" ry="16" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-190 0 L-160 -620 M190 0 L160 -620 M0 -20 L0 -600" stroke="#8A5A36" stroke-width="15" stroke-linecap="round"/><rect x="-250" y="-90" width="500" height="18" rx="7" fill="#7A4A26"/>`
-    + `<g filter="url(#drop)"><rect x="-300" y="-640" width="600" height="550" rx="14" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="6"/></g>` + T(0, -586, "How to make a fishing hook", 34, P.pip) + `<path d="M-250 -566 H250" stroke="${P.pip}" stroke-width="3"/>`;
-  POSTER22.forEach((ln, i) => { const y0 = Y[i], col = lit[i] > .5 ? P.ink : "#9AA3AB", ws = wrap(ln, 24, 330, 600);
-    if (lit[i] > .02) s += `<rect x="-286" y="${y0 - 40}" width="572" height="${ws.length * 30 + 26}" rx="10" fill="${P.sun}" opacity="${n2(.28 * lit[i])}"/>`;
-    ws.forEach((w, j) => { s += `<text x="-272" y="${y0 + j * 30}" font-family="Fredoka" font-weight="600" font-size="24" fill="${col}">${esc(w)}</text>`; });
-    s += `<path d="M-280 ${y0 + ws.length * 30 - 8} H280" stroke="#E6DCC6" stroke-width="2"/>`;
-    const px = 190, py = y0 - 4;
-    if (i === 0) s += nail21(px, py + 10, .36) + magAt(t, px - 48, py, .22, -115) + `<path d="M${px - 40} ${py + 28} H${px + 44}" stroke="${STROKEC}" stroke-width="6" stroke-linecap="round"/><path d="M${px + 34} ${py + 20} L${px + 46} ${py + 28} L${px + 34} ${py + 36}" stroke="${STROKEC}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-    if (i === 1) s += nail21(px, py + 20, .36) + `<path d="M${px + 50} ${py + 6} C${px + 50} ${py - 40} ${px - 50} ${py - 40} ${px - 50} ${py + 6}" stroke="${LIFTC}" stroke-width="5" stroke-dasharray="8 7" fill="none" stroke-linecap="round"/>`;
-    if (i === 2) s += nail21(px, py + 22, .36) + magAt(t, px + 10, py + 10, .22, -65, { flip: true }) + T(px + 70, py - 24, "↻", 34, P.ink); });
-  if (st > .01) s += `<path d="M-280 ${Y[2] - 8} L${n2(-280 + 560 * st)} ${Y[2] + 46}" stroke="#D84A3A" stroke-width="8" stroke-linecap="round"/><path d="M-280 ${Y[2] + 40} L${n2(-280 + 560 * st)} ${Y[2] - 4}" stroke="#D84A3A" stroke-width="8" stroke-linecap="round" opacity="${n2(clamp(st * 2 - 1))}"/>`;
-  if (fx > .01) s += OP(fx, `<rect x="-286" y="-150" width="572" height="70" rx="12" fill="#E6F6E8" stroke="${GOODC}" stroke-width="4"/>` + `<text x="-270" y="-106" font-family="Fredoka" font-weight="700" font-size="25" fill="${GOODC}">Keep stroking with the red end, every time.</text>`
-  );
+function poster22(t, x, y, k = 1, o = {}) { const lit = o.lit || [1, 1, 1], st = o.strike || 0, fx = o.fix || 0, Y = [-500, -360, -220];
+  let s = `<ellipse cx="0" cy="6" rx="280" ry="16" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M-220 0 L-190 -660 M220 0 L190 -660 M0 -20 L0 -640" stroke="#8A5A36" stroke-width="15" stroke-linecap="round"/><rect x="-290" y="-70" width="580" height="18" rx="7" fill="#7A4A26"/>`
+    + `<g filter="url(#drop)"><rect x="-380" y="-670" width="760" height="600" rx="14" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="6"/></g>` + T(0, -612, "How to make a fishing hook", 40, P.pip) + `<path d="M-330 -590 H330" stroke="${P.pip}" stroke-width="3"/>`;
+  POSTER22.forEach((ln, i) => { const y0 = Y[i], col = lit[i] > .5 ? P.ink : "#8A939C", ws = wrap(ln, 30, 470, 600);
+    if (lit[i] > .02) s += `<rect x="-366" y="${y0 - 40}" width="732" height="${ws.length * 36 + 22}" rx="10" fill="${P.sun}" opacity="${n2(.3 * lit[i])}"/>`;
+    ws.forEach((w, j) => { s += `<text x="-350" y="${y0 + j * 36}" font-family="Fredoka" font-weight="600" font-size="30" fill="${col}">${esc(w)}</text>`; });
+    s += `<path d="M-360 ${y0 + ws.length * 36 - 6} H360" stroke="#E6DCC6" stroke-width="2"/>`;
+    const px = 270, py = y0 - 4;
+    if (i === 0) s += nail21(px, py + 10, .38) + magAt(t, px - 50, py, .23, -115) + `<path d="M${px - 42} ${py + 30} H${px + 46}" stroke="${STROKEC}" stroke-width="6" stroke-linecap="round"/><path d="M${px + 36} ${py + 22} L${px + 48} ${py + 30} L${px + 36} ${py + 38}" stroke="${STROKEC}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+    if (i === 1) s += nail21(px, py + 20, .38) + `<path d="M${px + 52} ${py + 6} C${px + 52} ${py - 44} ${px - 52} ${py - 44} ${px - 52} ${py + 6}" stroke="${LIFTC}" stroke-width="5" stroke-dasharray="8 7" fill="none" stroke-linecap="round"/>`;
+    if (i === 2) s += nail21(px, py + 22, .38) + magAt(t, px + 10, py + 10, .23, -65, { flip: true }) + T(px + 74, py - 24, "↻", 34, P.ink); });
+  if (st > .01) s += `<path d="M-360 ${Y[2] - 12} L${n2(-360 + 720 * st)} ${Y[2] + 56}" stroke="#D84A3A" stroke-width="8" stroke-linecap="round"/><path d="M-360 ${Y[2] + 50} L${n2(-360 + 720 * st)} ${Y[2] - 6}" stroke="#D84A3A" stroke-width="8" stroke-linecap="round" opacity="${n2(clamp(st * 2 - 1))}"/>`;
+  if (fx > .01) s += OP(fx, `<rect x="-366" y="-170" width="732" height="86" rx="12" fill="#E6F6E8" stroke="${GOODC}" stroke-width="4"/>` + `<text x="-350" y="-136" font-family="Fredoka" font-weight="700" font-size="28" fill="${GOODC}">Keep stroking with the red</text><text x="-350" y="-100" font-family="Fredoka" font-weight="700" font-size="28" fill="${GOODC}">end, every time.</text>`
+    + nail21(270, -112, .38) + magAt(t, 220, -122, .23, -112) + [0, 1].map((j) => `<path d="M228 ${-150 + j * 12} H314" stroke="${STROKEC}" stroke-width="5" stroke-linecap="round"/><path d="M306 ${-156 + j * 12} L316 ${-150 + j * 12} L306 ${-144 + j * 12}" stroke="${STROKEC}" stroke-width="5" fill="none" stroke-linecap="round"/>`).join(""));
   return TF(x, y, k, s); }
 // the small rewrite picture beside the poster (the red end on the head, three one-way arrows)
 const rewritePic = (t, x, y, k = 1) => TF(x, y, k, `<g filter="url(#dropS)"><rect x="-200" y="-110" width="400" height="220" rx="24" fill="#E6F6E8" stroke="${GOODC}" stroke-width="6"/></g>` + nail21(10, 40, .9) + magAt(t, -118, 24, .42, -112)

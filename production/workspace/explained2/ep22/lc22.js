@@ -158,7 +158,7 @@ function lcWayArt(t) { const m = MKS, tP = m("pole1"), tS = m("slide"), tL = m("
   else if (t < tL + 2.4) { const u = eio(clamp((t - tL) / 2.4)); st = { x: lerp(nT, nH, u), y: top - 420 * Math.sin(Math.PI * u), rot: lerp(-118, -62, Math.sin(Math.PI * u)) }; }
   else if (t < tA) st = { x: nH, y: top, rot: -100 };
   else if (t < tA + 2.4) { const i = Math.floor((t - tA) / .8), p = ((t - tA) - i * .8) / .8, q = strokeAt(p, nH, top, nT, top, 380, .5); st = q; }
-  else st = { x: nH, y: top - 300 * eio(clamp((t - tA - 2.4) / .6)), rot: -90 };
+  else st = { x: nH, y: top - 300 * eio(clamp((t - tA - 2.4) / .6)), rot: -90, a: 1 - clamp((t - tA - 2.4) / .6) };
   // the dotted gold lift arc, the green stroke arrow along the nail, the stacked arrows (one per stroke), the crossed-out slide back
   if (t >= tS + .2 && t < tA - .3) s += strokeArrow(t, tS + .2, nH + 10, y + 90, nT, y + 90, 16);
   if (t >= tL) s += liftArc(t, tL + .2, nT, top - 30, nH, top - 30, 360, 10);
@@ -168,7 +168,7 @@ function lcWayArt(t) { const m = MKS, tP = m("pole1"), tS = m("slide"), tL = m("
   if (t >= tA - .3) for (let i = 0; i < 4; i++) { const a = i === 0 ? tA - .3 : tA + (i - 1) * .8 + .45; if (t < a) continue;
     s += strokeArrow(t, a, -380, y + 80 + i * 46, 380, y + 80 + i * 46, 12); }
   if (t >= tA) s += TF(-430, -330, spring(t, tA, .4), tpill(0, 0, "stroke " + [1, 2, 3, 4].slice(0, Math.min(4, 1 + Math.max(0, Math.floor((t - tA + .35) / .8)))).join(" · "), 34, "#fff", P.ink, { w: 700 }));
-  if (st) s += magAt(t, st.x, st.y, 1.05, st.rot, { hl: t >= tP - .2 && t < tS ? "N" : undefined });
+  if (st && st.a !== 0) s += OP(st.a === undefined ? 1 : st.a, magAt(t, st.x, st.y, 1.05, st.rot, { hl: t >= tP - .2 && t < tS ? "N" : undefined }));
   s += lcLab(t, tP + .3, nH + 360, top - 300, "one pole: the red end", nH + 40, top - 120, { size: 38, fill: NORTHC, ink: "#fff", t1: tS + .2 })
     + lcLab(t, tS + .5, nT - 300, -220, "head to tip", nT - 100, y + 90, { size: 38, fill: STROKEC, ink: "#fff", t1: tL + .2 })
     + lcLab(t, tL + .4, 0, -340, "lift up and away", 0, top - 380, { size: 38, fill: LIFTC, ink: "#fff", t1: tN - .1 })
@@ -183,18 +183,18 @@ function lcWayArt(t) { const m = MKS, tP = m("pole1"), tS = m("slide"), tL = m("
 // [LOOK CLOSER] more strokes? (P2 lcmore): three new nails, all the same, hang from a wooden rail, a stroke counter above each; the fair
 // test's chips (same); the magnet strokes all three (count: speeded up), the counters stop at ten, twenty and thirty; away: into the box;
 // dip: each dips into the clips and lifts with a bunch (a few, more, the most: drawn, never counted); bunch: a bar for each, growing
-const MRX = [-360, 0, 360], MRN = [10, 20, 30], MRB = [3, 6, 11];
+const MRX = [-360, 0, 360], MRN = [10, 20, 30], MRB = [2, 5, 12];
 function lcMoreArt(t) { const m = MKS, tSa = m("same"), tC = m("count"), tA = m("away"), tD = m("dip"), tB = m("bunch"), tK = m("kw_stronger_magnet");
-  let s = woodPanel([0, 200]) + rail22(-560, 560, -200) + trayClips22(t, 0, 250, 2.3, { n: 34 });
+  let s = woodPanel([0, 200]) + rail22(-560, 560, -230) + trayClips22(t, 0, 345, 2.2, { n: 30 });
   s += magBox22(t, -690, -280, .42, { lid: t < tA ? 0 : eo(clamp((t - tA - .15) / .3)), mag: t >= tA - .05 });
   if (t >= tSa) s += ["the same nails", "the same magnet", "the same pole", "the same way"].map((w, i) => TF(-450 + i * 300, -360, spring(t, tSa + i * .15, .4), tpill(0, 0, w, 26, "#E4E8EC", "#4A4E5A", { w: 700 }))).join("");
   const cu = clamp((t - tC) / (tA - tC - .3));   // the counters run (speeded up)
-  MRX.forEach((x, i) => { const di = tD + i * 1.15, dn = t >= di && t < di + 1.05 ? Math.sin(Math.PI * clamp((t - di) / 1.05)) : 0, yy = -30 + 160 * dn, tip = yy + 150;
+  MRX.forEach((x, i) => { const di = tD + i * 1.15, dn = t >= di && t < di + 1.05 ? Math.sin(Math.PI * clamp((t - di) / 1.05)) : 0, yy = -80 + 170 * dn, tip = yy + 150;
     const n = t < tC ? 0 : Math.min(MRN[i], Math.floor(cu * 30 + .001));
-    s += `<path d="M${x} -200 V${n2(yy - 150)}" stroke="${P.ink}" stroke-width="3"/>` + nail21(x, yy, 1, 90);
-    s += counter22(x, -270, (t < tC ? 0 : n) + " strokes", 1, n >= MRN[i] && t > tC ? "#E6F6E8" : "#fff");
-    if (t >= di + .5) s += clipBunch(t, x, tip, MRB[i], { k: 1.1, t0: di + .5, from: [x, 220] }); });
-  if (t >= tC && t < tA) { const i = Math.floor((t - tC) * 6) % 3, p = ((t - tC) * 6) % 1, x = MRX[i], sv = strokeV(p, x + 16, -150, 120, 130, .5); s += magAt(t, sv.x, sv.y, .45, sv.rot, {}) + lcClock(t, tC, tA - .1, 0, 330); }
+    s += `<path d="M${x} -230 V${n2(yy - 150)}" stroke="${P.ink}" stroke-width="3"/>` + nail21(x, yy, 1, 90);
+    s += counter22(x, -290, (t < tC ? 0 : n) + " strokes", 1, n >= MRN[i] && t > tC ? "#E6F6E8" : "#fff");
+    if (t >= di + .5) s += clipBunch(t, x, tip, MRB[i], { k: 1.1, t0: di + .5, from: [x, 260] }); });
+  if (t >= tC && t < tA) { const i = Math.floor((t - tC) * 6) % 3, p = ((t - tC) * 6) % 1, x = MRX[i], sv = strokeV(p, x + 16, -200, 70, 130, .5); s += magAt(t, sv.x, sv.y, .45, sv.rot, {}) + lcClock(t, tC, tA - .1, 0, 330); }
   s += linkChip(t, tA + .3, -420, -140, -650, -300, P.ink, "the magnet is away", 28, tD + 3);
   // the bars: a simple bar for each, growing from left to right, labelled only "more clips"
   if (t >= tB) { const k = spring(t, tB, .45); s += TF(610, -100, k, `<g filter="url(#dropS)"><rect x="-140" y="-170" width="280" height="200" rx="20" fill="#FFF8EA"/></g>` + [0, 1, 2].map((i) => { const h = 40 + i * 55; return `<rect x="${-100 + i * 70}" y="${n2(10 - h)}" width="50" height="${h}" rx="6" fill="${STROKEC}" stroke="${P.ink}" stroke-width="3"/>`; }).join("")

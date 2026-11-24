@@ -186,12 +186,12 @@ const gardenLive = (t) => TF(420, 470, .55, `<g transform="rotate(${n2(1.5 * Mat
    snack box (maker, game: never used again); then a NEW fair spot in every scene: the rim of the cardboard pond (waitw), the bottom of the
    pegboard's frame (r1ans), a wooden ruler on the bench (ask), the leg of Pip's easel (show), the rim of the craft bin under the bench (fix),
    the window frame's side post (lc2q); the REVEAL: the edge of the small sink, leading a little line of ants (liz). */
-const ANTAT = { intro: [428, 562, .34, { wave: true }], waitw: [1300, 712, .3, { walk: true, zig: true }], r1ans: [980, 470, .3, { walk: true, zig: true }], ask: [690, 832, .3, { flip: true }],
-  show: [596, 940, .3, { rot: -90 }], fix: [640, 966, .3, { walk: true }], lc2q: [616, 400, .3, { rot: -90 }], liz: [1640, 598, .36, { line: 4 }] };
+const ANTAT = { intro: [428, 562, .34, { wave: true }], waitw: [1390, 698, .3, { walk: true, zig: true }], r1ans: [980, 470, .3, { walk: true, zig: true }], ask: [690, 832, .3, { flip: true }],
+  show: [620, 930, .3, { rot: -88 }], fix: [640, 966, .3, { walk: true }], lc2q: [616, 400, .3, { rot: -90 }], liz: [1640, 598, .36, { line: 4 }] };
 ['maker', 'game'].forEach((k) => { ANTAT[k] = ANTAT.intro; });
 // MS22: the live maker space. o: bench (the props on the near workbench, world coordinates), front (in front of it), ant (an ANTAT entry |
 // false; default the scene's own), pond (THE FISHING POND at its HOME, true; o.pondO its options), wb (the FISH CAUGHT whiteboard, true), dim
-const POND = [1130, 836, .7], WB = [640, 834, .62];
+const POND = [1130, 840, .95], WB = [580, 838, .8];
 function MS22(t, o = {}, cam) { const sc = (window._S || {}).name, a = o.ant === undefined ? ANTAT[sc] : o.ant;
   let s = bg("ms22") + fan22(t, 560, 70) + fan22(t, 1400, 70) + printer22(t) + gardenLive(t);
   const antS = a ? (a[3].line ? antLine(t, a[0], a[1], a[2], a[3].line, 1) : antAt(t, a[0], a[1], a[2], { ...a[3], ph: .7 })) : "";

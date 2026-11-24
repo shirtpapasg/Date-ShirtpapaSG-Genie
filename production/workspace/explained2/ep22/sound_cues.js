@@ -97,7 +97,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   if (S.final) { E(S.final.t0 + .1, "sting"); const L = PART === 1 ? "m1101" : "n1101"; E(W(L, "high") + .2, "slap"); }
   if (S.liz) { const L = PART === 1 ? "m1102" : "n1102"; E(S.liz.t0 + .1, "whoosh"); E(W(L, HIDDEN[0]) + .2, "sparkle"); E(W(L, HIDDEN[0]) + .5, PART === 1 ? "cheep" : "pip"); Object.keys(M_).filter((k) => /^ff_/.test(k)).forEach((k, i) => E(M_[k] - .05, "pop", i % 3)); }
   if (S.cliff && has("m1202")) { E(LT("m1202") - .2, "lowdrum"); E(W("m1202", "part") - .1, "slam", 1); }
-  if (mk("dareIn") !== undefined) { [0, .25].forEach((d) => E(mk("dareIn") + .5 + d, "slide")); E(W("n1201", "lock") - .1, "sting"); }
+  if (mk("dareIn") !== undefined) { [0, .25].forEach((d) => E(W("n1201", "one") - .8 + d, "slide")); E(W("n1201", "lock") - .1, "sting"); }
   // the Showdown's paper and the fix (Pip's poster lines, the strike, the green rewrite)
   if (PART === 2) { ["l1", "l2", "l3"].forEach((k) => mk(k) !== undefined && E(mk(k), "paper")); if (mk("strike") !== undefined) { E(mk("strike"), "scribble"); E(mk("rewrite"), "squeak"); E(mk("rewrite") + .1, "scribble"); } }
   // the read-along and "Now you know!" (EP1's routine)
