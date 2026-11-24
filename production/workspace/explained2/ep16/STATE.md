@@ -155,4 +155,8 @@ The three "praying mantis" lines and the new-words clip (nymph, moulting, mantis
 - Records: app_moments.json (16A 5.475 s earlier, len 5:19), chapters_p3.json key **EP16_P1_v2** (and EP16_P2_v2 = the live Part 2's
   times), **upload_v2.json** (explained-p3-ep16v2-part1/2, after RCwRXpameIk, replaces C_Z96XgMmWg + e2wecB7r-QE, retire_old, NEW
   VERSION line to the new Part 1). Not uploaded.
-- Part 2: re-rendered from unchanged code for the one-bed music fix (main session); see below when done.
+- **Final renders (after the n2 4-decimal fix in lib.js and the lock-in ring clip, commit 3cc1bd4):** Part 1 again (09:14-09:37):
+  `ep16_part1.mp4` 319.4 s, 9582 frames, -16.0 LUFS, first word 0.825 s, countdowns as above. **Part 2 re-rendered from unchanged script**
+  (it already spoke at 0.30 s; for the one-bed music fix): `ep16_part2.mp4` 330.433 s, 9913 frames, -16.0 LUFS, decodes; Round 1 44.329 ...
+  49.329, Showdown numbers 214.445 ... 219.445 (steps 1.000, as before). The music agent adds Kampong Walk (add_lofi.py) to both mp4s.
+  The voice wavs of Part 2 were re-made the same way as Part 1's (Heart identical, buddies the same takes within jitter).
