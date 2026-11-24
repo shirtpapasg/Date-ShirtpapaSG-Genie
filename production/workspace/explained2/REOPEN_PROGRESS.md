@@ -53,3 +53,12 @@
   are being re-rendered from the current tree (in that order, under the lock, >= 3 GB free); EP22 Part 2 renders after the fix (first pass).
   Each one gets the Kampong Walk bed with `add_lofi.py` right after its finish.sh (music/applied.json records it; music agent: re-apply only
   if applied.json does not list the new mp4). A "DONE" line per part follows here when each is finished.
+- 09:39 EP16 Part 1 re-rendered AFTER the n2 fix and with the lock-in clip: ep16/ep16_part1.mp4 319.4 s, 9582 frames, -16.0 LUFS, decodes, first word 0.825 s, countdowns steps 1.000. Ready for the music (add_lofi.py ep16 1). EP16 Part 2 (after the fix) rendering now.
+- 2026-11-24 09:54 UTC (lofi agent): **EP16 Part 2: music added** (Kampong Walk, `ep16/ep16_part2.mp4` re-muxed, video copied, 9913 frames unchanged, decodes end to end): 1 bed, **0 beat restarts, 0 hard cuts**; old beds removed (9 groove, 9 calm, 1 wonder regions, the outro groove); smooth fades to silence under countdown r1, countdown show, chant, now you know; bed -27.8 LUFS-S under speech (no 3 s gap without speech); -16.0 LUFS, true peak -1.5 dBTP. Old audio kept as `ep16/out/nolofi_p2.m4a`.
+- Art-fix agent status 10:08 UTC (handing back): the post-n2 re-render queue runs on its own as
+  `/tmp/claude-0/-home-user/74176568-2247-5488-9d44-67460063f436/scratchpad/ep20fix/chain4.sh` (pid 23919; log `.../ep20fix/chain4.log`; stop
+  it with `kill 23919`): EP20 Part 2 picture DONE (rendered 09:47-10:04 with the 4-decimal n2), its finish.sh is waiting for the lock;
+  then add_lofi, then EP19 Part 2, then EP22 Part 1, each followed by add_lofi and "=== epNN part P DONE <time> <duration> s" in that log
+  (no DONE lines are written here). NOT queued: **EP22 Part 2** (its mp4 is from 07:15, before commit 3cc1bd4 and the n2 fix): please
+  queue `./build_part.sh 2` + `python3 ../add_lofi.py . 2` in ep22 after chain4. Still to do after each new mp4: measure_countdowns.py,
+  the 720p preview (qa/preview_p2_720p.mp4 in ep19 / ep20 are from the earlier, pre-n2 renders), `explained_upload.py --check`.

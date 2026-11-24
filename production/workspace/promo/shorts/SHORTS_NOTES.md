@@ -67,9 +67,10 @@ What that means for the teacher:
   `align_words.py` runs faster-whisper (small.en) on each file and adds that offset: word times are exact to the frame.
 - **End card**, last 2.3-2.6 s: logo, "Try TheOneApp free", "theoneapp.sg", over the soft, darkened last shot, in the hook's
   type and colours so the replay loops back into the hook.
-- **Audio**: the film's own mix, untouched (re-encoded to AAC 192 kb/s, 48 kHz stereo; the ad cuts join their ranges with 60 ms fades); the films were mastered to -16 LUFS,
-  true peak <= -1 dBTP.
-- **Encode**: H.264 High, CRF 18, yuv420p, BT.709, AAC 192k, +faststart.
+- **Audio**: the full Shorts carry the film's own AAC stream **copied untouched** (192 kb/s, 48 kHz; mastered to -16 LUFS,
+  true peak <= -1 dBTP). A first render re-encoded it and film 2's true peak rose to -0.2 dBTP, hence the copy. The ad cuts
+  must re-encode: their ranges are joined with 60 ms fades, +0.2 dB, and a safety limiter at -1.7 dBFS.
+- **Encode**: H.264 High, CRF 18, yuv420p, BT.709, 60 fps, +faststart.
 
 ### Files
 

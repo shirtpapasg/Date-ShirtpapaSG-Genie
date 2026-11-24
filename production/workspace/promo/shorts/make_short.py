@@ -224,11 +224,11 @@ if __name__ == '__main__':
     out = os.path.join(H, f'film{N}_short60.mp4' if CUT else f'film{N}_short.mp4')
     def audio_args(vin):
         """the whole film: its own AAC stream copied untouched (-16 LUFS, true peak <= -1 dBTP as mastered);
-        the ad cut: the kept ranges of that mix, a 60 ms fade at each join, a safety limiter at -1.7 dBFS (AAC re-encoding
+        the ad cut: the kept ranges of that mix, a 60 ms fade at each join, +0.2 dB and a safety limiter at -1.7 dBFS (AAC re-encoding
         lifts true peaks), AAC 192k"""
         if not CUT: return ['-map', f'{vin}:v', '-map', '1:a', '-c:a', 'copy']
         parts = ''.join(f'[1:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.06,afade=t=out:st={b - a - 0.06:.3f}:d=0.06[a{k}];' for k, (a, b) in enumerate(KEEP))
-        fc = parts + ''.join(f'[a{k}]' for k in range(len(KEEP))) + f'concat=n={len(KEEP)}:v=0:a=1,alimiter=limit=0.82:attack=2:release=60:level=false:asc=true[aout]'
+        fc = parts + ''.join(f'[a{k}]' for k in range(len(KEEP))) + f'concat=n={len(KEEP)}:v=0:a=1,volume=0.2dB,alimiter=limit=0.82:attack=2:release=60:level=false:asc=true[aout]'
         return ['-filter_complex', fc, '-map', f'{vin}:v', '-map', '[aout]', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000']
     if '--audio-only' in sys.argv:      # put the sound on an existing render again (the picture is copied)
         tmp = out + '.tmp.mp4'
