@@ -152,3 +152,22 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
 - **Next:** `./build_part.sh 1` then 2 (check `df -h /` >= 3 GB; the lock is shared); verify each mp4 decodes (`ffmpeg -v error -i ... -f null -`)
   and its frame count; delete out/chunks_p*; measure_countdowns.py, compare_ep1.py, make_preview.sh spans, highlights.py, make_moments.py,
   thumbnails (../thumb_v2.js), `explained_upload.py upload.json --check`.
+
+## Stage 2 DONE 2026-11-24 (NOT uploaded: the teacher reviews first)
+- **Renders:** `ep22_part1.mp4` **5:34.5** (10036 frames), `ep22_part2.mp4` **5:34.9** (10047 frames); 1920x1080, 30 fps, **-16.0 LUFS** both;
+  each decoded end to end with `ffmpeg -v error -i <mp4> -f null -` (no errors; render.js's copy-join was fine, no re-encode needed);
+  `ep22_part1.srt` / `_part2.srt`; `sheet_part1.png` / `sheet_part2.png`. mp4s NOT committed (rebuild: `./build_part.sh 1` / `2`, about 17-27
+  min each under the shared lock). Chunk folders and intermediates deleted. Part 2's render started with 2.1 GB free (another session's
+  EP21 render was using the disk; the 3 GB check could not be enforced from inside the shared lock); nothing ran short.
+- **Countdowns measured in the renders** (measure_countdowns.py): P1 Round 1 (3 s) and HOLD ON! (5 s), P2 Round 1 and the Showdown (5 s):
+  every number steps 1.00 s exactly, on the tick; the bell lands on 0.
+- **Review pack:** `qa/buddy_faces_p1.jpg` / `_p2.jpg` (every pose on screen with its reason; pose_reasons.json), `qa/preview_p1_clips.mp4`
+  (103 s) / `_p2` (109 s) (not committed), `qa/highlights.jpg` (14 labelled stills), `qa/ep1_compare_p1.jpg` / `_p2`, `thumb_part1.jpg` (MAGNET
+  NOW?! + Pip surprised, red burst) / `thumb_part2.jpg` (WHICH WAY?! + Basil surprised, cobalt burst). `app_moments.json` (22A / 22B: ADD, nothing
+  retired; keys O.interactions / CH.magnets are PLACEHOLDERS: check videos.js) and `production/youtube/chapters_p3.json` EP22_P1 / EP22_P2.
+  `explained_upload.py upload.json --check`: OK (both parts after explained-p3-ep21-part2 in both playlists, once EP21 is up).
+- **Still weak / for the reviewer:** held nails and magnets sit at the painted paws and do not follow a hop or a pose change; the journey's
+  "nail" reads like a long grey road to the vanishing point; in lcthings Basil's round surprised close-up covers the "magnet is away" chip for
+  2 s; the clip bunches in lcmore are silver on wood (readable, but small); the big gold fish in the pond scene is small at full shot; the P1
+  answer has no cheer for Basil after STROKE METHOD (0.5 s left, he cheers at Mark Sentence 1); Basil's worried face is not on screen during
+  the Showdown countdown (only Pip is, as the rule asks); the woodpecker on the pallets (HOLD ON!) is small and partly behind Momo.
