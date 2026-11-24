@@ -219,7 +219,13 @@
   {
    "id": "shadow",
    "scene": "shadow",
-   "text": "In Primary Four, you learn that light travels in a straight line, and when an object blocks light, it forms a shadow. You are coated with a special layer that changes when light shines on it. A stencil, called a mask, blocks some of the light. Where the light reaches you, the layer changes. Where the mask blocks it, the shadow keeps the pattern.",
+   "text": "In Primary Four, you learn that light travels in a straight line, and when an object blocks light, it forms a shadow.",
+   "hold": 1.5
+  },
+  {
+   "id": "shadow2",
+   "scene": "shadow",
+   "text": "You are coated with a special layer that changes when light shines on it. A stencil, called a mask, blocks some of the light. Where the light reaches you, the layer changes. Where the mask blocks it, the shadow keeps the pattern.",
    "hold": 0.8
   },
   {
@@ -271,5 +277,5 @@
    "text": "Now you know!"
   }
  ],
- "outro": 4.6
+ "outro": 4.2
 }

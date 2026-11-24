@@ -49,8 +49,8 @@ S.povSand = (() => { const s = scene("povSand", "#8ecae6", "#f2d49b"), st = s.st
     s.waves.forEach((w, i) => { const x = -100 + ((t * 90 + i * 600) % 1900); set(w, "d", `M${x} ${420 + i * 22} q40 -16 80 0 t80 0`); });
     op(s.out, 1 - ramp(k, 1.0, 1.4)); tf(s.out, `translate(${VP[0]} 760) scale(${1 + 5 * dive * dive}) translate(${-VP[0]} -760)`);
     op(s.in, ramp(k, 1.0, 1.4)); flyField(s.F, fly * 1.4 + .05 * Math.max(0, k - 2.4), 1100);
-    const me = ramp(k, 2.1, 2.6); tf(s.me, `translate(${VP[0]} ${VP[1]}) scale(${me * (1 + .03 * Math.sin(t * 3))})`); op(s.meGlow, .55 * me); s.face.blink(t);
-    showCard(s.card, t, SC.povSand.t0 + 2.3, SC.povSand.t1 + .3, SHORT ? 960 : 905); };
+    const me = ramp(k, 2.1, 2.6); tf(s.me, `translate(${VP[0]} ${VP[1]}) scale(${1.7 * me * (1 + .03 * Math.sin(t * 3))})`); op(s.meGlow, .55 * me); s.face.blink(t);
+    showCard(s.card, t, SC.povSand.t0 + 2.3, SC.povSand.t1 + .3, SHORT ? 960 : 790); };
   return s; })();
 
 S.povLight = (() => { const s = scene("povLight", "#14082b", "#3c096c"), st = s.stage, H = 330, N = 9;
@@ -61,7 +61,7 @@ S.povLight = (() => { const s = scene("povLight", "#14082b", "#3c096c"), st = s.
   s.rows = []; for (let z = 0; z < N; z++) { const r = {z, g: [], c: [], b: []}; COLS.forEach(([a, b, open]) => { r.g.push(el("path", {stroke: INK, "stroke-width": 1.5}, s.ground)); r.c.push(el("path", {stroke: INK, "stroke-width": 1.5}, s.ceil)); r.b.push(open ? el("path", {fill: "#e0aaff"}, s.beams) : null); r.open = r.open || []; r.open.push([a, b, open]); }); s.rows.push(r); }
   s.lamp = el("rect", {x: FULL.x, y: FULL.y, width: FULL.w, height: 160, fill: "#e0aaff", opacity: 0}, st);
   s.flash = fullRect(st, "#f8f0ff", 0); s.vig = vignette(st, "#c77dff", .5);
-  s.card = povCard(st, "the mask's shadow draws the pattern ✨", "#7209b7");
+  s.card = povCard(st, "the mask's shadow draws the pattern ✨", "#7209b7"); s.cm = povCard(st, "⬆ the mask", "#212529"); s.cy = povCard(st, "⬇ you, the wafer", "#7b2cbf");
   s.run = t => { const k = t - SC.povLight.t0, slide = ramp(k, .1, 1.1), lit = ramp(k, 1.7, 1.85), fl = on(k, 1.72, 2.05, .1), drawn = ramp(k, 2.2, 2.8), cam = .6 * k;
     const P = (x, z, up) => { const zz = Math.max(.35, z - cam); return [VP[0] + x * 260 / zz, VP[1] + (up ? -1 : 1) * H / zz]; };
     s.rows.forEach(r => { const z0 = r.z + 1, z1 = r.z + 2; r.open.forEach(([a, b, open], i) => {
@@ -71,5 +71,5 @@ S.povLight = (() => { const s = scene("povLight", "#14082b", "#3c096c"), st = s.
       set(r.c[i], "d", d(c)); set(r.c[i], "fill", open ? "#caf0f8" : "#212529"); op(r.c[i], open ? .25 : 1);
       if (r.b[i]) { set(r.b[i], "d", d([c[0], c[1], g[1], g[0]])); op(r.b[i], .45 * lit * (1 - .5 * ramp(k, 2.6, 3.3))); } }); });
     op(s.lamp, .5 * lit); op(s.flash, .9 * fl);
-    showCard(s.card, t, SC.povLight.t0 + 2.3, SC.povLight.t1 + .2, SHORT ? 960 : 905); };
+    showCard(s.card, t, SC.povLight.t0 + 2.3, SC.povLight.t1 + .2, SHORT ? 960 : 790); showCard(s.cm, t, SC.povLight.t0 + .3, SC.povLight.t0 + 1.7, SHORT ? -40 : 150); showCard(s.cy, t, SC.povLight.t0 + .5, SC.povLight.t0 + 1.7, SHORT ? 960 : 790); };
   return s; })();

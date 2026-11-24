@@ -142,9 +142,15 @@ VIDEOS = [
  {"id": "sau-ep10-s2", "file": f"{SAU}/ep10/short2.mp4", "thumb": f"{SAU}/ep10/thumb_short2.jpg", "at": "2026-11-23T09:00:00Z", "title": "Don't Kill The Ants! Here's Why #Shorts",
   "desc": "Ants, flies, earthworms, millipedes and woodlice are detritivores: they help break down dead things. Leave them alone! Plus: compost and recycle for less ash at Pulau Semakau. Watch the full episode: Dead things become your food?! (TheOneApp, Explored EP10)" + FOOT, "tags": ["detritivores", "compost", "pulau semakau", "shorts", "theoneapp explored"]},
 ]
+# A week's videos can also be listed in a JSON file next to the episode, epNN/upload_epNN.json (the same keys as VIDEOS).
+# Entries marked "hold": true wait for the teacher: they are uploaded only when named on the command line (e.g. sau-ep11).
+import glob
+for _f in sorted(glob.glob(os.path.join(SAU, 'ep*', 'upload_ep*.json'))):
+    _l = json.load(open(_f))
+    if isinstance(_l, list): VIDEOS += [v for v in _l if v.get('id') and v['id'] not in {x['id'] for x in VIDEOS}]
 done = json.load(open(os.path.join(HERE, 'sau_uploaded.json'))) if os.path.exists(os.path.join(HERE, 'sau_uploaded.json')) else {}
 # "live": True = already public (the teacher made it live on 18 Nov): a replacement goes up public at once.
-REPLACE = sys.argv[1:2] == ['--replace']; want = (sys.argv[2:] if REPLACE else sys.argv[1:]) or [v['id'] for v in VIDEOS]
+REPLACE = sys.argv[1:2] == ['--replace']; want = (sys.argv[2:] if REPLACE else sys.argv[1:]) or [v['id'] for v in VIDEOS if not v.get('hold')]
 ORDER = [v['id'] for v in VIDEOS]
 TITLE = {v['id']: v['title'] for v in VIDEOS}
 SHORTS_PL = 'PLO1GzAf41cwM'  # "TheOneApp Shorts": every Short on the channel

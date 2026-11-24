@@ -119,7 +119,7 @@ function kIngot(p, r, h, face) { const g = el("g", {}, p), sh = kGrad([[0, "#6c7
 function kBin(p) { const B = el("g", {}, p); el("ellipse", {cx: 0, cy: 4, rx: 170, ry: 18, fill: INK, opacity: .18}, B);
   el("path", kA({d: "M-130 -330 H130 L150 0 H-150 Z", fill: "#2d6a4f"}), B);
   B.in = el("path", kA({d: "M-110 -260 H110 L124 -26 H-124 Z", fill: "#5c3d2e", "stroke-width": 5}), B);
-  seed = 4; B.bits = []; for (let i = 0; i < 16; i++) B.bits.push(el("ellipse", {cx: -95 + rnd() * 190, cy: -230 + rnd() * 190, rx: 14 + rnd() * 10, ry: 8 + rnd() * 5, fill: ["#f4a261", "#e9c46a", "#90be6d", "#f77f00"][i % 4], stroke: INK, "stroke-width": 2.5, transform: `rotate(${rnd() * 180})`}, B));
+  seed = 4; B.bits = []; for (let i = 0; i < 16; i++) { B.bits.push(el("ellipse", {cx: -95 + rnd() * 190, cy: -230 + rnd() * 190, rx: 14 + rnd() * 10, ry: 8 + rnd() * 5, fill: ["#f4a261", "#e9c46a", "#90be6d", "#f77f00"][i % 4], stroke: INK, "stroke-width": 2.5, }, B)); B.bits[i].setAttribute("transform", `rotate(${rnd() * 180} ${B.bits[i].getAttribute("cx")} ${B.bits[i].getAttribute("cy")})`); }
   B.bugs = []; for (let i = 0; i < 22; i++) { const b = el("g", {}, B); el("ellipse", {rx: 7, ry: 4, fill: i % 3 ? "#ffffff" : "#c77dff", stroke: INK, "stroke-width": 2}, b); b.x = -95 + rnd() * 190; b.y = -235 + rnd() * 200; b.ph = rnd() * 6; B.bugs.push(b); }
   el("path", kA({d: "M-148 -350 Q-148 -372 -120 -374 H120 Q148 -372 148 -350 Z", fill: "#1b4332"}), B);
   el("rect", kA({x: -40, y: -128, width: 80, height: 0.1, fill: "none", "stroke-width": 0}), B); return B; }
@@ -167,16 +167,16 @@ S.hook = (() => { const s = scene("hook", "#10002b", "#3c096c"), st = kW(s);
   s.lt = kT(st, 600, 860, "drawn… with LIGHT ✨", 70, "#ffe14d");
   s.run = t => { const a = (w, f) => cue("hook", w, f), t0 = SC.hook.t0, tS = a("stamp", .28), tI = a("inside", .42), tB = a("billion", .55), tD = a("drawn", .82), tL = a("light", .9);
     const kIn = ramp(t, tI - .2, tI + .5); op(s.glow, .6 + .2 * Math.sin(t * 2));
-    tf(s.die, `translate(${lerp(600, 420, ramp(t, tS - .9, tS - .3))} 430) scale(${Math.max(0, pop(t, t0 - .1, .6)) * (1 + 2.5 * kIn)})`);
-    kPop(s.stamp, 780, 430, t, tS - .6); op(s.stamp, ramp(t, tS - .6, tS - .4) * (1 - kIn));
-    op(s.ld, on(t, tS - .5, tI - .2, .2)); tf(s.ld, "translate(420 660)"); set(s.ld, "x", 0); op(s.ls, on(t, tS - .4, tI - .2, .2)); tf(s.ls, "translate(780 660)"); set(s.ls, "x", 0);
-    kPop(s.sz, 600, 140, t, tS + .1); op(s.sz, on(t, tS + .1, tI - .2, .2));
+    tf(s.die, `translate(${lerp(600, 400, ramp(t, tS - .9, tS - .3))} 450) scale(${Math.max(0, pop(t, t0 - .1, .6)) * (1.3 + 2.5 * kIn)})`);
+    kPop(s.stamp, 820, 450, t, tS - .6, 1.3); op(s.stamp, ramp(t, tS - .6, tS - .4) * (1 - kIn));
+    op(s.ld, on(t, tS - .5, tI - .2, .2)); tf(s.ld, "translate(400 710)"); set(s.ld, "x", 0); op(s.ls, on(t, tS - .4, tI - .2, .2)); tf(s.ls, "translate(820 710)"); set(s.ls, "x", 0);
+    kPop(s.sz, 600, 150, t, tS + .1); op(s.sz, on(t, tS + .1, tI - .2, .2));
     op(s.in, kIn); op(s.frame, kIn); op(s.die, 1 - ramp(t, tI + .2, tI + .5));
     const sweep = ramp(t, tD - .2, tL + .9), bx = lerp(100, 1100, sweep);
     s.tiles.forEach(g => { const x = 150 + g.i * 40, lit = x < bx ? 1 : 0, f = kHash(g.i, g.j + Math.floor(t * 6)) > .5;
       set(g.r, "fill", lit ? (f ? "#ffd60a" : "#7b2cbf") : (t < tD - .2 && f && t > tB ? "#4cc9f0" : "#22223b")); });
     set(s.beam, "x", bx - 35); op(s.beam, on(t, tD - .2, tL + 1.1, .2));
-    kPop(s.num, 600, 420, t, tB - .3); op(s.num, on(t, tB - .3, tD - .3, .2)); kPop(s.lt, 0, 0, t, tL - .1); tf(s.lt, `translate(600 ${860}) scale(${Math.max(0, pop(t, tL - .1))})`); set(s.lt, "x", 0); set(s.lt, "y", 0); };
+    kPop(s.num, 600, 420, t, tB - .3); op(s.num, on(t, tB - .3, tD - .3, .2)); kPop(s.lt, 0, 0, t, tL - .1); tf(s.lt, `translate(600 ${790}) scale(${Math.max(0, pop(t, tL - .1))})`); set(s.lt, "x", 0); set(s.lt, "y", 0); };
   return s; })();
 
 // ---- LAST TIME'S ANSWER (EP10): why does a compost bin get warm inside? Decomposers give off heat as they work.
@@ -189,12 +189,12 @@ S.answer = (() => { const s = scene("answer", "#3a0ca3", "#7209b7"), st = kW(s);
   el("circle", {r: 120, fill: "none", stroke: "#fff", "stroke-width": 10}, s.mag); s.ml = chip(st, "decomposers", "#c77dff", {fs: 36});
   s.c1 = chip(st, "they give off heat 🔥", "#e63946", {fs: 40}); s.c2 = chip(st, "A busy bin is a warm bin!", "#ffbe0b", {fs: 46, ink: INK});
   s.run = t => { const a = (w, f) => cue("answer", w, f), t0 = SC.answer.t0, tD = a("decomposers", .4), tH = a("heat", .7), tB = a("busy", .85), kH = ramp(t, tH - .5, tH + 1.2);
-    kPop(s.top, 600, 50, t, t0 - .2); op(s.bg, ramp(t, t0, t0 + .3));
+    kPop(s.top, 600, 125, t, t0 - .2); op(s.bg, ramp(t, t0, t0 + .3));
     s.bin.bugs.forEach(b => { tf(b, `translate(${b.x + 5 * Math.sin(t * 3 + b.ph)} ${b.y + 4 * Math.cos(t * 2.6 + b.ph)})`); op(b, ramp(t, tD - .3, tD + .2)); });
-    kPop(s.mag, 820, 250, t, tD - .1); s.mb.forEach(b => tf(b, `translate(${b.x + 8 * Math.sin(t * 3 + b.ph)} ${b.y + 6 * Math.cos(t * 2.4 + b.ph)}) rotate(${40 * Math.sin(t + b.ph)})`)); kPop(s.ml, 820, 400, t, tD + .1);
+    kPop(s.mag, 820, 330, t, tD - .1); s.mb.forEach(b => tf(b, `translate(${b.x + 8 * Math.sin(t * 3 + b.ph)} ${b.y + 6 * Math.cos(t * 2.4 + b.ph)}) rotate(${40 * Math.sin(t + b.ph)})`)); kPop(s.ml, 820, 480, t, tD + .1);
     op(s.mag, on(t, tD - .1, tH - .3, .2)); op(s.ml, on(t, tD + .1, tH - .3, .2));
     op(s.th, ramp(t, tH - .4, tH)); s.th.set(kH); s.heat.run(t, 430, 300, 220, kH);
-    kPop(s.c1, 760, 280, t, tH); kPop(s.c2, 600, 860, t, tB - .1); };
+    kPop(s.c1, 760, 280, t, tH); kPop(s.c2, 600, 800, t, tB - .1); };
   return s; })();
 
 // ---- THE NEWS: November 2026, Nvidia (Santa Clara, California) on a real globe; the CEO steps down, and is back 11 days later
@@ -229,15 +229,15 @@ S.news = (() => { const s = scene("news", "#0b132b", "#1c2541"), st = kW(s), G =
   s.run = t => { const a = (w, f) => cue("news", w, f), t0 = SC.news.t0, tN = a("nvidia", .15), tW = a("world", .25), tF = a("founder", .3), tS = a("stepped", .36), tE = a("eleven", .46), tBk = a("came", .5), tWhy = a("why", .62), tEng = a("engines", .86);
     const kB = on(t, tF - .4, tWhy - .3, .4), kC = ramp(t, tWhy + 1.8, tWhy + 2.3);
     op(s.W, 1 - kB - kC < 0 ? 0 : 1 - Math.max(kB, kC)); tf(s.W, `translate(600 460) scale(${(1.05 + .08 * ramp(t, t0, tF)) * (1 + .1 * ramp(t, tWhy, tWhy + 2))}) translate(-600 -460)`);
-    kPop(s.date, 600, 60, t, t0 - .2); op(s.date, on(t, t0 - .2, tF - .3, .2));
-    kPop(s.pin, G.santaclara[0], G.santaclara[1], t, tN - .2, 1.1); op(s.pl, ramp(t, tN, tN + .3)); tf(s.pl, `translate(${G.santaclara[0] - 170} ${G.santaclara[1] - 40})`);
-    s.rip.forEach((r, i) => { const f = ((t - tW) * .7 + i / 3) % 1; set(r, "r", 20 + f * 260); op(r, t > tW ? (1 - f) * .8 : 0); });
+    kPop(s.date, 600, 125, t, t0 - .2); op(s.date, on(t, t0 - .2, tF - .3, .2));
+    kPop(s.pin, G.santaclara[0], G.santaclara[1], t, tN - .2, 1.1); op(s.pl, ramp(t, tN, tN + .3)); tf(s.pl, `translate(${G.santaclara[0] - 420} ${G.santaclara[1] + 50})`);
+    s.rip.forEach((r, i) => { const f = ((t - tW) * .7 + i / 3) % 1; set(r, "r", Math.max(1, 20 + f * 260)); op(r, t > tW ? (1 - f) * .8 : 0); });
     s.papers.forEach((e, i) => { tf(e, `translate(${e.px} ${e.py}) scale(${Math.max(0, pop(t, tW + .1 + i * .12))}) rotate(${(i % 2 ? 1 : -1) * 10})`); op(e, ramp(t, tW, tW + .2)); });
     op(s.B, kB); const out = ramp(t, tS + .3, tS + .9), back = ramp(t, tBk - .1, tBk + .5);
-    tf(s.plate, `translate(${400 + 900 * out * (1 - back)} ${600 - 40 * Math.sin(Math.PI * out) * (1 - back)})`); op(s.light, .7 * (1 - .7 * out + .7 * back));
+    tf(s.plate, `translate(${400 + 1300 * out * (1 - back)} ${600 - 40 * Math.sin(Math.PI * out) * (1 - back)})`); op(s.light, .7 * (1 - .7 * out + .7 * back));
     const d = t < tE - .3 ? 12 : t > tE + .8 ? 23 : Math.round(lerp(12, 23, ramp(t, tE - .3, tE + .8))); s.day.textContent = String(d);
     kPop(s.sd, 400, 140, t, tS); op(s.sd, on(t, tS, tE - .2, .2)); kPop(s.cnt, 930, 600, t, tE - .2); op(s.cnt, on(t, tE - .2, tWhy, .2)); kPop(s.bk, 400, 140, t, tBk + .1); op(s.bk, on(t, tBk + .1, tWhy - .3, .2));
-    op(s.C, kC); s.ais.forEach((g, i) => { op(g, ramp(t, tEng - .2 + i * .15, tEng + i * .15)); }); tf(s.cp, `translate(600 450) scale(${1 + .05 * Math.sin(t * 5) * ramp(t, tEng, tEng + .3)})`); kPop(s.eng, 600, 860, t, tEng); };
+    op(s.C, kC); s.ais.forEach((g, i) => { op(g, ramp(t, tEng - .2 + i * .15, tEng + i * .15)); }); tf(s.cp, `translate(600 450) scale(${1 + .05 * Math.sin(t * 5) * ramp(t, tEng, tEng + .3)})`); kPop(s.eng, 600, 800, t, tEng); };
   return s; })();
 
 // ---- GPUs draw video games: a picture is made of pixels; the GPU works out the colour of every dot, many times a second
@@ -260,31 +260,31 @@ S.pixels = (() => { const s = scene("pixels", "#14213d", "#3a0ca3"), st = kW(s),
     tf(s.card, `translate(600 ${380 - 60 * kS}) scale(${Math.max(0, pop(t, t0 - .1)) * (1 - kS)})`); s.card["f-160"] && [s.card["f-160"], s.card["f160"]].forEach(f => tf(f.bl, `rotate(${t * 400})`));
     tf(s.gl, `translate(0 ${200 - 40 * kS})`); set(s.gl, "x", 600); op(s.gl, ramp(t, t0, t0 + .3) * (1 - kS)); tf(s.gn, "translate(0 0)"); set(s.gn, "x", 600); set(s.gn, "y", 640); op(s.gn, ramp(t, a("graphics", .12), a("graphics", .12) + .3) * (1 - kS));
     const kX = ramp(t, tX - .3, tX + .6), fr = Math.floor(t * 8); op(scr, kS);
-    tf(scr, `translate(600 400) scale(${lerp(1, 1.55, kX)}) translate(${-600 + lerp(0, -170, kX)} ${-400 + lerp(0, 60, kX)})`);
+    tf(scr, `translate(600 400) scale(${lerp(1, SHORT ? 1.12 : 1.55, kX)}) translate(${-600 + lerp(0, SHORT ? 0 : -170, kX)} ${-400 + lerp(0, SHORT ? 0 : 60, kX)})`);
     s.px.forEach(r => set(r, "fill", colAt(r.i, r.j, t > tC ? fr : 0))); op(s.grid, .6 * kX);
     const sc = ((t - tC) * 3) % 1; set(s.scan, "y", Y0 + Math.floor(sc * NY) * CH / NY); op(s.scan, on(t, tC, tM + 2.5, .2));
     kPop(s.zoom, 1060, 640, t, tX + .2); op(s.zoom, on(t, tX + .2, tC, .2)); s.zc.forEach((r, i) => set(r, "fill", colAt(8 + (i / 4 | 0), 13 + i % 4, 0)));
-    kPop(s.pl, 600, 830, t, tX); op(s.pl, on(t, tX, tM - .2, .2)); kPop(s.fast, 600, 830, t, tM - .1); };
+    kPop(s.pl, 600, 800, t, tX); op(s.pl, on(t, tX, tM - .2, .2)); kPop(s.fast, 600, 800, t, tM - .1); };
   return s; })();
 
 // ---- CPU vs GPU: one very clever teacher doing sums one after another, or a whole school hall of pupils, one small sum each, all at once
 S.hall = (() => { const s = scene("hall", "#fff3d6", "#ffe0b2"), st = kW(s);
-  s.L = el("g", {}, st); el("rect", kA({x: 30, y: 150, width: 500, height: 640, rx: 30, fill: "#fff", "stroke-width": 7}), s.L);
-  s.wb = el("rect", kA({x: 80, y: 220, width: 400, height: 250, rx: 12, fill: "#f8f9fa", "stroke-width": 6}), s.L);
-  s.sums = ["3 × 4 = 12", "7 × 6 = 42", "9 × 8 = 72", "5 × 5 = 25"].map((q, i) => tx(s.L, {x: 280, y: 280 + i * 54, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#3a0ca3"}, q));
+  s.L = el("g", {}, st); el("rect", kA({x: 30, y: 210, width: 500, height: 590, rx: 30, fill: "#fff", "stroke-width": 7}), s.L);
+  s.wb = el("rect", kA({x: 80, y: 260, width: 400, height: 250, rx: 12, fill: "#f8f9fa", "stroke-width": 6}), s.L);
+  s.sums = ["3 × 4 = 12", "7 × 6 = 42", "9 × 8 = 72", "5 × 5 = 25"].map((q, i) => tx(s.L, {x: 280, y: 320 + i * 54, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#3a0ca3"}, q));
   s.tch = el("g", {transform: "translate(280 700)"}, s.L); s.tk = kKid(s.tch); tf(s.tk, "scale(.38)");
-  s.R = el("g", {}, st); el("rect", kA({x: 580, y: 150, width: 600, height: 640, rx: 30, fill: "#fff", "stroke-width": 7}), s.R); el("rect", {x: 586, y: 156, width: 588, height: 90, rx: 24, fill: "#ffd8a8"}, s.R);
-  tx(s.R, {x: 880, y: 216, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, "the school hall");
-  s.pp = []; seed = 21; for (let j = 0; j < 4; j++) for (let i = 0; i < 6; i++) { const g = el("g", {transform: `translate(${640 + i * 92} ${360 + j * 120})`}, s.R); kPupil(g, .85, ["#3a86ff", "#e63946", "#06d6a0", "#ffbe0b"][(i + j) % 4]);
+  s.R = el("g", {}, st); el("rect", kA({x: 580, y: 210, width: 600, height: 590, rx: 30, fill: "#fff", "stroke-width": 7}), s.R); el("rect", {x: 586, y: 216, width: 588, height: 70, rx: 24, fill: "#ffd8a8"}, s.R);
+  tx(s.R, {x: 880, y: 263, "text-anchor": "middle", "font-size": 34, "font-weight": 700, fill: INK}, "the school hall");
+  s.pp = []; seed = 21; for (let j = 0; j < 4; j++) for (let i = 0; i < 6; i++) { const g = el("g", {transform: `translate(${640 + i * 92} ${410 + j * 110})`}, s.R); kPupil(g, .85, ["#3a86ff", "#e63946", "#06d6a0", "#ffbe0b"][(i + j) % 4]);
     const c = kCard(g, `${2 + ((i * 3 + j * 5) % 8)}×${2 + ((i + j * 2) % 7)}`, 64); tf(c, "translate(0 -112)"); g.c = c; g.tk = kTick(g, 16); tf(g.tk, "translate(30 -130)"); s.pp.push(g); }
   s.cpu = chip(st, "CPU", "#3a86ff", {fs: 56}); s.gpu = chip(st, "GPU", "#06a77d", {fs: 56});
   s.n1 = kT(st, 280, 850, "one very clever teacher", 36, INK); s.n2 = kT(st, 880, 850, "a whole hall of pupils", 36, INK);
   s.c1 = chip(st, "one after another…", "#3a0ca3", {fs: 34}); s.c2 = chip(st, "all at the same time!", "#f72585", {fs: 38});
-  s.run = t => { const a = (w, f) => cue("hall", w, f), t0 = SC.hall.t0, tC = a("cpu", .12), tO = a("one#3", .3) , tA = a("another", .45), tG = a("gpu", .55), tH = a("hall", .65), tSa = a("same", .92);
-    op(s.L, ramp(t, t0 - .2, t0 + .2)); kPop(s.cpu, 280, 100, t, tC - .1); op(s.n1, ramp(t, a("teacher", .3) - .2, a("teacher", .3) + .1));
-    s.sums.forEach((e, i) => op(e, ramp(t, tO + i * .9, tO + i * .9 + .2))); kPop(s.c1, 280, 520, t, tA - .2);
+  s.run = t => { const a = (w, f) => cue("hall", w, f), t0 = SC.hall.t0, tC = a("cpu", .12), tO = a("one#2", .3), tA = a("another", .45), tG = a("gpu", .55), tH = a("hall", .65), tSa = a("same", .92);
+    op(s.L, ramp(t, t0 - .2, t0 + .2)); kPop(s.cpu, 280, 150, t, tC - .1); op(s.n1, ramp(t, a("teacher", .3) - .2, a("teacher", .3) + .1));
+    s.sums.forEach((e, i) => op(e, ramp(t, tO + i * .9, tO + i * .9 + .2))); kPop(s.c1, 280, 560, t, tA - .2);
     kPose(s.tk, 8 * Math.sin(t * 4) * on(t, tO, tG, .2), -60 - 40 * Math.abs(Math.sin(t * 3)) * on(t, tO, tG, .2));
-    op(s.R, ramp(t, tG - .3, tG)); kPop(s.gpu, 880, 100, t, tG - .1); op(s.n2, ramp(t, tH - .2, tH + .1));
+    op(s.R, ramp(t, tG - .3, tG)); kPop(s.gpu, 880, 150, t, tG - .1); op(s.n2, ramp(t, tH - .2, tH + .1));
     s.pp.forEach((g, i) => { op(g, ramp(t, tH - .3 + i * .02, tH + i * .02)); kPop(g.tk, 30, -130, t, tSa + (i % 3) * .03); }); kPop(s.c2, 880, 300, t, tSa + .2); };
   return s; })();
 
@@ -293,7 +293,7 @@ S.ai = (() => { const s = scene("ai", "#e0fbfc", "#c2dfe3"), st = kW(s);
   s.hall = el("g", {}, st); el("rect", kA({x: 40, y: 200, width: 360, height: 420, rx: 26, fill: "#fff", "stroke-width": 6}), s.hall);
   for (let j = 0; j < 3; j++) for (let i = 0; i < 4; i++) { const g = el("g", {transform: `translate(${95 + i * 84} ${330 + j * 110})`}, s.hall); kPupil(g, .7, ["#3a86ff", "#e63946", "#06d6a0", "#ffbe0b"][(i + j) % 4]); }
   kT(s.hall, 220, 180, "GPU", 54, "#06a77d");
-  s.nums = []; seed = 3; for (let i = 0; i < 14; i++) { const e = tx(st, {"text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#3a0ca3"}, `${1 + (rnd() * 9 | 0)}×${1 + (rnd() * 9 | 0)}`); e.ph = i / 14; e.dy = (rnd() - .5) * 160; s.nums.push(e); }
+  s.nums = []; seed = 3; for (let i = 0; i < 14; i++) { const e = tx(st, {"text-anchor": "middle", "font-size": 30, "font-weight": 700, fill: "#3a0ca3"}, `${1 + (rnd() * 9 | 0)}×${1 + (rnd() * 9 | 0)}`); e.ph = i / 14; e.vy = (rnd() - .5) * 160; s.nums.push(e); }
   s.bot = el("g", {transform: "translate(860 560)"}, st); el("rect", kA({x: -120, y: -140, width: 240, height: 230, rx: 40, fill: "#adb5bd"}), s.bot); el("rect", kA({x: -90, y: -110, width: 180, height: 110, rx: 26, fill: "#1b1b3a"}), s.bot);
   s.eyes = [-40, 40].map(x => el("circle", {cx: x, cy: -55, r: 18, fill: "#4cc9f0"}, s.bot)); el("line", kA({x1: 0, y1: -140, x2: 0, y2: -190}), s.bot); s.ant = el("circle", kA({cx: 0, cy: -200, r: 16, fill: "#e63946"}), s.bot);
   el("rect", kA({x: -150, y: 90, width: 300, height: 120, rx: 30, fill: "#868e96"}), s.bot); kT(s.bot, 0, 170, "AI", 60, "#ffe14d");
@@ -305,11 +305,11 @@ S.ai = (() => { const s = scene("ai", "#e0fbfc", "#c2dfe3"), st = kW(s);
   s.run = t => { const a = (w, f) => cue("ai", w, f), t0 = SC.ai.t0, tB = a("billions", .3), tSo = a("so", .62), tGm = a("games", .75), tT = a("teach", .9);
     const kG = ramp(t, tSo - .3, tSo + .2); op(s.hall, ramp(t, t0 - .2, t0 + .2) * (1 - kG)); op(s.bot, 1);
     tf(s.bot, `translate(${lerp(860, 1010, kG)} ${lerp(560, 450, kG)}) scale(${lerp(1, .8, kG)})`);
-    s.nums.forEach(e => { const f = ((t - t0) * .5 + e.ph) % 1; set(e, "x", lerp(420, 740, f)); set(e, "y", 420 + e.dy * Math.sin(Math.PI * f)); op(e, on(t, t0 + .5, tSo, .2) * Math.sin(Math.PI * f)); });
+    s.nums.forEach(e => { const f = ((t - t0) * .5 + e.ph) % 1; set(e, "x", lerp(420, 740, f)); set(e, "y", 420 + e.vy * Math.sin(Math.PI * f)); op(e, on(t, t0 + .5, tSo, .2) * Math.sin(Math.PI * f)); });
     const learn = clamp((t - tB) / 3); s.eyes.forEach(e => set(e, "fill", learn > .9 ? "#06d6a0" : "#4cc9f0")); op(s.ant, .5 + .5 * Math.sin(t * 8));
     op(s.pc, on(t, t0 + .3, tSo - .2, .2)); tf(s.pc, "translate(860 230)"); const show = Math.floor((t - t0) * 1.5) % 2; op(s.cat, show || learn > .9 ? 1 : 0); op(s.dog, show || learn > .9 ? 0 : 1);
     kPop(s.guess, 860, 400, t, t0 + .6); op(s.guess, on(t, t0 + .6, tB + 2.6, .2)); kPop(s.right, 860, 400, t, tB + 2.7); op(s.right, on(t, tB + 2.7, tSo - .2, .2));
-    kPop(s.bil, 600, 820, t, tB - .1); op(s.bil, on(t, tB - .1, tSo - .2, .2));
+    kPop(s.bil, 600, 800, t, tB - .1); op(s.bil, on(t, tB - .1, tSo - .2, .2));
     op(s.games, kG); tf(s.chp, `translate(600 450) scale(${1 + .06 * Math.sin(t * 6)})`); kPop(s.c1, 360, 680, t, tGm - .3); kPop(s.c2, 860, 680, t, tT - .2); };
   return s; })();
 
@@ -325,7 +325,7 @@ S.circuit = (() => { const s = scene("circuit", "#e9f5db", "#cfe1b9"), st = kW(s
   tx(s.bat, {x: 70, y: 16, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: INK}, "+"); tx(s.bat, {x: -70, y: 14, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#fff"}, "–");
   // the switch on the top wire: a lever that closes onto the contact at x 680
   s.sw = el("g", {}, st); el("circle", kA({cx: 560, cy: 300, r: 14, fill: "#adb5bd", "stroke-width": 5}), s.sw); el("circle", kA({cx: 680, cy: 300, r: 14, fill: "#adb5bd", "stroke-width": 5}), s.sw);
-  s.lev = el("g", {transform: "translate(560 300)"}, s.sw); el("rect", kA({x: 0, y: -9, width: 132, height: 18, rx: 9, fill: "#ced4da", "stroke-width": 5}), s.lev);
+  s.lev = el("g", {transform: "translate(560 300)"}, s.sw); el("rect", kA({x: 0, y: -10, width: 132, height: 20, rx: 10, fill: "#e63946", "stroke-width": 5}), s.lev);
   // the bulb at (850, 640) on the bottom wire
   s.bulb = el("g", {transform: "translate(850 640)"}, st); s.bg = el("circle", {cx: 0, cy: -100, r: 120, fill: "#ffe14d", filter: "url(#blur)", opacity: 0}, s.bulb);
   el("rect", kA({x: -50, y: -30, width: 100, height: 60, rx: 10, fill: "#868e96"}), s.bulb); s.gl = el("path", kA({d: "M-36 -30 Q-80 -110 0 -160 Q80 -110 36 -30 Z", fill: "#f8f9fa"}), s.bulb);
@@ -339,11 +339,11 @@ S.circuit = (() => { const s = scene("circuit", "#e9f5db", "#cfe1b9"), st = kW(s
   s.cl = chip(st, "switch closed: current flows ✓", "#06a77d", {fs: 36}); s.opn = chip(st, "switch open: a gap, no current ✗", "#e63946", {fs: 36});
   s.gap = el("circle", {cx: 680, cy: 300, r: 40, fill: "none", stroke: "#e63946", "stroke-width": 7, "stroke-dasharray": "10 8"}, st);
   s.run = t => { const a = (w, f) => cue("circuit", w, f), t0 = SC.circuit.t0, tC = a("closed", .3), tO = a("open", .7), tG = a("gap", .8);
-    kPop(s.h, 600, 90, t, t0 - .2); s.lb.forEach((e, i) => op(e, ramp(t, t0 + .4 + i * .2, t0 + .6 + i * .2)));
+    kPop(s.h, 600, 125, t, t0 - .2); s.lb.forEach((e, i) => op(e, ramp(t, t0 + .4 + i * .2, t0 + .6 + i * .2)));
     const closed = ramp(t, tC - .2, tC + .1) * (1 - ramp(t, tO - .1, tO + .2)); tf(s.lev, `rotate(${-32 * (1 - closed)})`);
     const flow = closed > .95 ? 1 : 0; s.dots.forEach((d, i) => { const [x, y] = at(i / 26 + (t - tC) * .12); set(d, "cx", x); set(d, "cy", y); op(d, flow); });
     op(s.bg, .85 * flow); set(s.gl, "fill", flow ? "#fff3b0" : "#f8f9fa"); set(s.fil, "stroke", flow ? "#ff9f1c" : "#6c757d");
-    kPop(s.cl, 600, 860, t, tC + .3); op(s.cl, on(t, tC + .3, tO - .2, .2)); kPop(s.opn, 600, 860, t, tO + .2); op(s.gap, on(t, tG - .2, 1e9, .2) * (.6 + .4 * Math.sin(t * 6))); };
+    kPop(s.cl, 600, 800, t, tC + .3); op(s.cl, on(t, tC + .3, tO - .2, .2)); kPop(s.opn, 600, 800, t, tO + .2); op(s.gap, on(t, tG - .2, 1e9, .2) * (.6 + .4 * Math.sin(t * 6))); };
   return s; })();
 
 // ---- TRANSISTORS: tiny switches with no moving parts; on or off, one or zero; billions flicking billions of times a second
@@ -363,12 +363,12 @@ S.switches = (() => { const s = scene("switches", "#10002b", "#240046"), st = kW
   s.q = kT(st, 600, 520, "100,000,000,000 switches?", 76, "#ffe14d"); s.qm = emo(st, 600, 300, 200, "🤔");
   s.run = t => { const a = (w, f) => cue("switches", w, f), t0 = SC.switches.t0, tN = a("no", .2), tOn = a("on", .3), tB = a("billions", .5), tW = a("works", .78), tSo = a("so", .82), tF = a("find", .95);
     const kB = ramp(t, tB - .4, tB), kQ = ramp(t, tSo - .3, tSo + .1); op(s.A, ramp(t, t0 - .2, t0 + .2) * (1 - kB));
-    kPop(s.tn, 600, 120, t, t0 + .2); op(s.tn, on(t, t0 + .2, tB - .3, .2)); kPop(s.np, 600, 210, t, tN - .1); op(s.np, on(t, tN - .1, tB - .3, .2));
+    kPop(s.tn, 600, 125, t, t0 + .2); op(s.tn, on(t, t0 + .2, tB - .3, .2)); kPop(s.np, 600, 210, t, tN - .1); op(s.np, on(t, tN - .1, tB - .3, .2));
     [s.t1, s.t0].forEach((g, k) => { const lit = k === 0; set(g.ch, "fill", lit ? "#ffd60a" : "#343a40"); g.dots.forEach((d, i) => { const f = ((t * .8 + i / 4) % 1); set(d, "cx", lerp(-150, 150, f)); set(d, "cy", 34); op(d, lit ? 1 : 0); }); op(g.lab, ramp(t, tOn - .1, tOn + .2)); });
     op(s.B, kB * (1 - .7 * kQ)); const fr = Math.floor(t * 14); s.tiles.forEach(g => set(g.r, "fill", kHash(g.i + fr, g.j) > .5 ? "#ffd60a" : "#3c096c"));
     s.bits.forEach((e, i) => { e.textContent = kHash(i, fr) > .5 ? "1" : "0"; op(e, on(t, tB + .3, tW - .3, .2)); });
     kPop(s.sp, 600, 640, t, tB + 1.2); op(s.sp, on(t, tB + 1.2, tW - .3, .2)); kPop(s.sum, 600, 470, t, tW - .1); op(s.sum, on(t, tW - .1, tSo - .2, .2));
-    op(s.q, ramp(t, tSo - .2, tSo + .1)); tf(s.q, `translate(0 ${-30 * (1 - ramp(t, tSo - .2, tSo + .3))})`); kPop(s.qm, 600, 300, t, tF - .2, 1); tf(s.qm, `translate(600 300) scale(${Math.max(0, pop(t, tF - .2))}) translate(-600 -300)`); };
+    op(s.q, ramp(t, tSo - .2, tSo + .1)); tf(s.q, `translate(0 ${-30 * (1 - ramp(t, tSo - .2, tSo + .3))})`); tf(s.qm, `translate(600 300) scale(${Math.max(0, pop(t, tF - .2))}) translate(-600 -300)`); op(s.qm, ramp(t, tF - .25, tF)); };
   return s; })();
 
 // ---- SILICA -> SILICON: inside the grain, silicon and oxygen; cleaned, melted, the oxygen taken away: almost pure silicon
@@ -390,13 +390,13 @@ S.povMelt = (() => { const s = scene("povMelt", "#1b1b3a", "#3c096c"), st = kW(s
   s.cl = chip(st, "cleaned 💧", "#3a86ff", {fs: 40}); s.ml = chip(st, "melted 🔥", "#ff6d00", {fs: 40}); s.pure = chip(st, "almost pure silicon", "#8d99ae", {fs: 46});
   s.run = t => { const a = (w, f) => cue("povMelt", w, f), t0 = SC.povMelt.t0, tSi = a("silicon", .35), tO = a("oxygen", .45), tC = a("cleaned", .6), tM = a("melted", .72), tP = a("pure", .9);
     const kB = ramp(t, tC - .4, tC); op(s.A, 1 - kB); tf(s.A, `translate(600 430) scale(${lerp(.4, 1, ramp(t, t0 - .3, t0 + .6))}) translate(-600 -430)`);
-    kPop(s.sil, 600, 60, t, t0 + .3); op(s.sil, on(t, t0 + .3, tC - .3, .2)); kPop(s.lS, 300, 830, t, tSi - .1); kPop(s.lO, 900, 830, t, tO - .1); op(s.lS, on(t, tSi - .1, tC - .3, .2)); op(s.lO, on(t, tO - .1, tC - .3, .2));
+    kPop(s.sil, 600, 125, t, t0 + .3); op(s.sil, on(t, t0 + .3, tC - .3, .2)); kPop(s.lS, 300, 800, t, tSi - .1); kPop(s.lO, 900, 800, t, tO - .1); op(s.lS, on(t, tSi - .1, tC - .3, .2)); op(s.lO, on(t, tO - .1, tC - .3, .2));
     s.si.forEach(e => set(e, "stroke-width", t > tSi && t < tO ? 7 : 4)); s.ox.forEach(o => set(o, "r", t > tO && t < tC ? 20 : 17));
     op(s.B, kB); const dip = ramp(t, tM - .3, tM + 1.2), shine = ramp(t, tP - .4, tP + .4);
     tf(s.gr, `translate(600 ${lerp(250, 470, dip)}) scale(${1 - .65 * dip})`); op(s.gr, 1 - ramp(t, tM + .9, tM + 1.3)); s.face.blink(t);
     s.drops.forEach((d, i) => { const f = ((t - tC) * 1.5 + i / 5) % 1; tf(d, `translate(${520 + i * 40} ${120 + f * 160})`); op(d, on(t, tC - .1, tM - .2, .2) * (1 - f)); });
     op(s.fire, .6 + .3 * Math.sin(t * 7) * ramp(t, tM - .3, tM)); set(s.surf, "fill", mix("#ffe8a3", "#e9ecef", shine)); set(s.melt, "fill", shine > .5 ? "#ced4da" : s.melt.getAttribute("fill"));
-    kPop(s.cl, 300, 140, t, tC - .1); op(s.cl, on(t, tC - .1, tM - .1, .2)); kPop(s.ml, 900, 140, t, tM - .1); op(s.ml, on(t, tM - .1, tP - .1, .2)); kPop(s.pure, 600, 820, t, tP - .1); };
+    kPop(s.cl, 300, 140, t, tC - .1); op(s.cl, on(t, tC - .1, tM - .1, .2)); kPop(s.ml, 900, 140, t, tM - .1); op(s.ml, on(t, tM - .1, tP - .1, .2)); kPop(s.pure, 600, 800, t, tP - .1); };
   return s; })();
 
 // ---- THE CRYSTAL: a seed crystal dipped into the melt, pulled up slowly, turning; a shiny cylinder as long as a child is tall
@@ -424,8 +424,8 @@ S.crystal = (() => { const s = scene("crystal", "#1b1b3a", "#2b2d42"), st = kW(s
     s.I.spin(t * (t > tP ? 1 : 0)); s.I.st.childNodes.forEach((e, i) => set(e, "d", (e.getAttribute("d") || "").replace(/V[-\d.]+$/, `V${90 + L}`)));
     tf(s.face, `translate(0 ${60 + L * .55}) scale(${ramp(t, tP + .5, tP + 1)})`); s.face.blink(t);
     op(s.arc, on(t, tT - .2, tG + .2, .2)); op(s.arh, on(t, tT - .2, tG + .2, .2));
-    kPop(s.l1, 330, 220, t, a("seed", .1)); op(s.l1, on(t, a("seed", .1), tG, .2)); kPop(s.l2, 870, 820, t, tD - .1); op(s.l2, on(t, tD - .1, tG, .2)); kPop(s.tu, 600, 880, t, tT - .3); op(s.tu, on(t, tT - .3, tG, .2));
-    s.BI.spin(t); s.bf.blink(t); op(s.ruler, ramp(t, tC - .3, tC)); kPop(s.sh, 600, 60, t, tG + .5); kPop(s.hl, 600, 150, t, tC - .2); kPose(s.kid, 0, -20 - 10 * Math.sin(t * 2)); };
+    kPop(s.l1, 330, 220, t, a("seed", .1)); op(s.l1, on(t, a("seed", .1), tG, .2)); kPop(s.l2, 870, 800, t, tD - .1); op(s.l2, on(t, tD - .1, tG, .2)); kPop(s.tu, 600, 800, t, tT - .3); op(s.tu, on(t, tT - .3, tG, .2));
+    s.BI.spin(t); s.bf.blink(t); op(s.ruler, ramp(t, tC - .3, tC)); kPop(s.sh, 600, 125, t, tG + .5); kPop(s.hl, 600, 215, t, tC - .2); kPose(s.kid, 0, -20 - 10 * Math.sin(t * 2)); };
   return s; })();
 
 // ---- WAFERS: sliced into thin round plates, thinner than a coin (side by side at real thickness), polished like a mirror
@@ -451,7 +451,7 @@ S.wafer = (() => { const s = scene("wafer", "#caf0f8", "#90e0ef"), st = kW(s);
     set(s.wire, "x1", 560); set(s.wire, "x2", 560); tf(s.wire, `translate(0 ${330 - 170 + 30 * Math.sin(t * 20)})`); set(s.wire, "y1", 0); set(s.wire, "y2", 340);
     tf(s.W, `translate(${lerp(600, 400, ramp(t, tC - .4, tC))} 430) scale(${Math.max(0, pop(t, tW - .1, .5))})`); op(s.W, kW2);
     op(s.shine, ramp(t, tP, tM)); op(s.refl, ramp(t, tP + .4, tM + .2)); set(s.sweep, "x", lerp(-500, 500, ((t - tP) * .6) % 1)); op(s.sweep, on(t, tP, tM + 2, .2)); s.face.blink(t);
-    op(s.T, on(t, tC - .3, tP + .2, .2)); kPop(s.tc, 950, 440, t, tC - .2); op(s.tc, on(t, tC - .2, tP + .2, .2)); kPop(s.mc, 600, 830, t, tM - .2); };
+    op(s.T, on(t, tC - .3, tP + .2, .2)); kPop(s.tc, 950, 440, t, tC - .2); op(s.tc, on(t, tC - .2, tP + .2, .2)); kPop(s.mc, 600, 800, t, tM - .2); };
   return s; })();
 
 // ---- THE CLEAN ROOM: yellow light, clean air falling from the ceiling filters, workers in suits from head to toe
@@ -463,7 +463,7 @@ S.cleanroom = (() => { const s = scene("cleanroom", "#fff3b0", "#ffe066"), st = 
   s.track = el("line", kA({x1: -200, y1: 130, x2: 1400, y2: 130, stroke: "#adb5bd", "stroke-width": 12}), s.R); s.pod = el("g", {}, s.R); el("rect", kA({x: -50, y: 0, width: 100, height: 80, rx: 14, fill: "#e9ecef"}), s.pod); el("line", kA({x1: 0, y1: -20, x2: 0, y2: 0}), s.pod);
   s.w1 = el("g", {}, s.R); kSuit(s.w1, 1.25); s.w2 = el("g", {}, s.R); kSuit(s.w2, 1.05);
   s.cmp = el("g", {}, st); [["operating theatre", 0, 7], ["clean room", 1, 1]].forEach(([n, k, dots]) => { const g = el("g", {transform: `translate(${k ? 780 : 420} 430)`}, s.cmp); el("circle", kA({r: 150, fill: "#fff", "stroke-width": 7}), g);
-    seed = 9 + k; for (let i = 0; i < dots; i++) { const r = 60 + rnd() * 70, an = rnd() * 6.28; kDust(el("g", {transform: `translate(${Math.cos(an) * r * .8} ${Math.sin(an) * r * .8})`}, g), 10 + rnd() * 6); }
+    seed = 9 + k; for (let i = 0; i < dots; i++) { const r = 60 + rnd() * 70, an = rnd() * 6.28; kDust(el("g", {transform: `translate(${Math.cos(an) * r * .8} ${Math.sin(an) * r * .8})`}, g), 22 + rnd() * 10); }
     kT(g, 0, 210, n, 38, INK); });
   s.cmpH = chip(st, "dust in the same amount of air", "#3a0ca3", {fs: 34});
   s.cr = chip(st, "the clean room", "#f77f00", {fs: 44}); s.ht = chip(st, "suits cover them from head to toe", "#3a86ff", {fs: 38});
@@ -472,7 +472,7 @@ S.cleanroom = (() => { const s = scene("cleanroom", "#fff3b0", "#ffe066"), st = 
     s.air.forEach((e, i) => { const f = ((t * .7 + (i % 6) / 6)) % 1; tf(e, `translate(${-90 + i * 80} ${40 + f * 600})`); op(e, .7 * Math.sin(Math.PI * f) * (1 - kC)); });
     tf(s.pod, `translate(${-100 + ((t - t0) * 160) % 1500} 150)`);
     tf(s.w1, `translate(${lerp(-200, 500, ramp(t, t0, t0 + 3))} 760) scale(1.25)`); tf(s.w2, `translate(1050 760) scale(1.05)`);
-    kPop(s.cr, 600, 250, t, t0 + .2); op(s.cr, on(t, t0 + .2, tCl - .3, .2)); kPop(s.ht, 600, 860, t, tH - .4); };
+    kPop(s.cr, 600, 250, t, t0 + .2); op(s.cr, on(t, t0 + .2, tCl - .3, .2)); kPop(s.ht, 600, 800, t, tH - .4); };
   return s; })();
 
 // ---- P4 TEXTBOOK: light travels in a straight line; an opaque object blocks light and forms a shadow. Then the same on you:
@@ -480,16 +480,17 @@ S.cleanroom = (() => { const s = scene("cleanroom", "#fff3b0", "#ffe066"), st = 
 S.shadow = (() => { const s = scene("shadow", "#1d3557", "#14213d"), st = kW(s);
   s.h = chip(st, "📘 Primary 4: light and shadows", "#ffbe0b", {fs: 40, ink: INK});
   // A: torch (a small bulb at L), an opaque star card, a screen with the star's shadow (rays drawn from the bulb past the card's edges)
-  s.A = el("g", {}, st); const L = [180, 450], CX = 560, SX = 1000;
+  s.A = el("g", {}, st); const L = [120, 420], CX = 470, SX = 850, HC = 70, HS = HC * (SX - L[0]) / (CX - L[0]);     // the shadow's size follows the rays
   s.torch = el("g", {transform: `translate(${L[0]} ${L[1]})`}, s.A); el("rect", kA({x: -150, y: -40, width: 140, height: 80, rx: 14, fill: "#3a86ff"}), s.torch); el("path", kA({d: "M-12 -60 L20 -60 L20 60 L-12 60 Z", fill: "#adb5bd"}), s.torch); el("circle", {cx: 0, cy: 0, r: 20, fill: "#fff3b0"}, s.torch);
   const star = k => { let d = ""; for (let i = 0; i < 10; i++) { const r = i % 2 ? 40 : 100, an = i / 10 * Math.PI * 2 - Math.PI / 2; d += (i ? "L" : "M") + (Math.cos(an) * r * k).toFixed(1) + " " + (Math.sin(an) * r * k).toFixed(1); } return d + "Z"; };
-  s.rays = el("g", {}, s.A); const R = []; for (let k = -6; k <= 6; k++) { const yy = 450 + k * 52, dx = CX - L[0], dy = yy - L[1], hit = Math.abs(k) <= 1;     // rays through y = 398..502 at the card are blocked
-    const ex = hit ? CX : SX, ey = L[1] + dy * (ex - L[0]) / dx; R.push(el("line", {x1: L[0] + 20, y1: L[1] + dy * 20 / dx, x2: ex, y2: ey, stroke: "#ffe14d", "stroke-width": 6, "stroke-linecap": "round", opacity: .9, "stroke-dasharray": "1000", "stroke-dashoffset": 1000}, s.rays)); }
-  s.R = R; el("rect", kA({x: SX, y: 120, width: 40, height: 660, fill: "#f8f9fa"}), s.A);
-  s.shd = el("path", {d: star((SX - L[0]) / (CX - L[0])), fill: "#1b1b3a", transform: `translate(${SX + 4} ${L[1]}) scale(.12 1)`}, s.A);   // the shadow on the screen (seen edge-on)
-  s.card = el("path", kA({d: star(1), fill: "#6c4f3d", "stroke-width": 5, transform: `translate(${CX} ${L[1]}) scale(.18 1)`}), s.A);
-  s.front = el("g", {transform: "translate(1100 620)"}, s.A); el("rect", kA({x: -110, y: -150, width: 220, height: 300, rx: 12, fill: "#f8f9fa"}), s.front); el("path", {d: star(1.08), fill: "#1b1b3a"}, s.front);
-  s.la = [["light source", L[0] - 60, 590], ["opaque object", CX, 640], ["shadow", 1100, 820]].map(([n, x, y]) => kT(s.A, x, y, n, 34, "#fff"));
+  s.zone = el("path", {d: `M${CX} ${L[1] - HC} L${SX} ${L[1] - HS} V${L[1] + HS} L${CX} ${L[1] + HC} Z`, fill: "#000", opacity: 0}, s.A);
+  s.rays = el("g", {}, s.A); const R = []; for (let k = -5; k <= 5; k++) { const yy = L[1] + k * 26, dx = CX - L[0], dy = yy - L[1], hit = Math.abs(k) <= 2;     // rays that meet the card stop there
+    const ex = hit ? CX - 12 : SX, ey = L[1] + dy * (ex - L[0]) / dx; R.push(el("line", {x1: L[0] + 20, y1: L[1] + dy * 20 / dx, x2: ex, y2: ey, stroke: "#ffe14d", "stroke-width": 6, "stroke-linecap": "round", opacity: .9, "stroke-dasharray": "1000", "stroke-dashoffset": 1000}, s.rays)); }
+  s.R = R; el("rect", kA({x: SX, y: 135, width: 40, height: 580, fill: "#f8f9fa"}), s.A);
+  s.shd = el("rect", {x: SX + 3, y: L[1] - HS, width: 34, height: 2 * HS, fill: "#1b1b3a", opacity: 0}, s.A);
+  s.card = el("rect", kA({x: CX - 12, y: L[1] - HC, width: 24, height: 2 * HC, fill: "#8d5524", "stroke-width": 5}), s.A);
+  s.front = el("g", {}, s.A); el("rect", kA({x: -110, y: -150, width: 220, height: 300, rx: 12, fill: "#f8f9fa"}), s.front); el("path", {d: star(1.0), fill: "#1b1b3a"}, s.front); kT(s.front, 0, -170, "the screen, from the front", 24, "#fff");
+  s.la = [["light source", L[0] - 50, 520], ["opaque object", CX, 560], ["shadow", 1080, 830]].map(([n, x, y]) => kT(s.A, x, y, n, 34, "#fff"));
   s.sl = chip(st, "light travels in a straight line", "#ffbe0b", {fs: 36, ink: INK});
   // B: the same on the wafer: a lamp, light in straight lines, the mask (glass with opaque chrome), the special layer, you (the wafer)
   s.B = el("g", {}, st); const MX = [200, 1000], MY = 330, WY = 560, BL = [[250, 340], [430, 520], [610, 700], [790, 880]];       // chrome blocks (x from..to)
@@ -503,22 +504,22 @@ S.shadow = (() => { const s = scene("shadow", "#1d3557", "#14213d"), st = kW(s);
   s.lb = [["mask", 1080, MY + 10], ["special layer", 1080, WY + 22], ["you (the wafer)", 1080, WY + 75]].map(([n, x, y]) => kT(s.B, x, y, n, 32, "#fff", {"text-anchor": "start"}));
   s.lt = kT(s.B, 900, 90, "light", 38, "#e0aaff", {"text-anchor": "start"});
   s.c1 = chip(st, "light reaches it: the layer changes", "#9d4edd", {fs: 34}); s.c2 = chip(st, "in the shadow: the pattern stays", "#1b1b3a", {fs: 34});
-  s.run = t => { const a = (w, f) => cue("shadow", w, f), t0 = SC.shadow.t0, tSt = a("straight", .12), tBl = a("blocks", .2), tSh = a("shadow", .27), tCo = a("coated", .36), tSt2 = a("stencil", .55), tR = a("reaches", .72), tK = a("keeps", .93);
-    const kB = ramp(t, tCo - .4, tCo); op(s.A, 1 - kB); op(s.B, kB); kPop(s.h, 600, 50, t, t0 - .2); op(s.h, 1 - kB);
-    const rp = ramp(t, tSt - .3, tSt + .8); s.R.forEach(r => set(r, "stroke-dashoffset", 1000 * (1 - rp))); kPop(s.sl, 600, 860, t, tSt); op(s.sl, on(t, tSt, tCo - .3, .2));
-    op(s.card, ramp(t, tBl - .2, tBl)); op(s.shd, ramp(t, tSh - .3, tSh)); kPop(s.front, 1100, 620, t, tSh); op(s.la[0], ramp(t, t0 + .5, t0 + .8)); op(s.la[1], ramp(t, tBl, tBl + .3)); op(s.la[2], ramp(t, tSh + .2, tSh + .5));
+  s.run = t => { const a = (w, f) => cue("shadow", w, f), t0 = SC.shadow.t0, tSt = a("straight", .12), tBl = a("blocks", .2), tSh = a("shadow", .27), tCo = has("shadow", "coated") ? a("coated", .36) : (SEGS("shadow")[1] ? SEGS("shadow")[1].t0 - .2 : SC.shadow.t0 - 1), tSt2 = a("stencil", .55), tR = a("reaches", .72), tK = a("keeps", .93);
+    const kB = ramp(t, tCo - .4, tCo); op(s.A, 1 - kB); op(s.B, kB); kPop(s.h, 400, 125, t, t0 - .2); op(s.h, 1 - kB);
+    const rp = ramp(t, tSt - .3, tSt + .8); s.R.forEach(r => set(r, "stroke-dashoffset", 1000 * (1 - rp))); kPop(s.sl, 600, 800, t, tSt); op(s.sl, on(t, tSt, tCo - .3, .2));
+    op(s.card, ramp(t, tBl - .4, tBl - .2)); op(s.shd, ramp(t, tBl, tSh)); op(s.zone, .3 * ramp(t, tBl, tSh)); kPop(s.front, 1080, 640, t, tSh); op(s.la[0], ramp(t, t0 + .5, t0 + .8)); op(s.la[1], ramp(t, tBl, tBl + .3)); op(s.la[2], ramp(t, tSh + .2, tSh + .5));
     // B
     s.lb.forEach((e, i) => op(e, ramp(t, [tSt2, tCo, tCo - .3][i], [tSt2, tCo, tCo - .3][i] + .3))); op(s.mask, ramp(t, tSt2 - .3, tSt2)); tf(s.mask, `translate(0 ${-60 * (1 - ramp(t, tSt2 - .3, tSt2 + .2)) - 260 * ramp(t, tK - .1, tK + .8)})`);
     const lp = ramp(t, tSt2 + .6, tR - .1); s.bR.forEach(r => { set(r, "stroke-dashoffset", 600 * (1 - lp)); op(r, .9 * (1 - ramp(t, tK - .3, tK))); }); op(s.lt, ramp(t, tSt2 + .6, tSt2 + .9));
     const ch = ramp(t, tR - .2, tR + .6), wash = ramp(t, tK + .3, tK + 1);
-    s.layer.forEach(r => { const sh = r.getAttribute("data-sh") === "1"; set(r, "fill", sh ? "#9d4edd" : mix("#9d4edd", "#fde68a", ch)); op(r, sh ? 1 : 1 - wash); });
+    s.layer.forEach(r => { const sh = r.getAttribute("data-sh") === "1"; set(r, "fill", sh ? mix("#9d4edd", "#e0aaff", wash) : mix("#9d4edd", "#fde68a", ch)); op(r, sh ? 1 : 1 - wash); });
     s.shz.forEach(r => op(r, .45 * ramp(t, tSt2 + .8, tR) * (1 - ramp(t, tK - .3, tK)))); s.yf.blink(t);
     kPop(s.c1, 600, 760, t, tR); op(s.c1, on(t, tR, tK - .3, .2)); kPop(s.c2, 600, 760, t, tK); };
   return s; })();
 
 // ---- LENSES: the pattern is shrunk through a column of lenses; each line ends thousands of times thinner than a hair
 S.lens = (() => { const s = scene("lens", "#3c096c", "#10002b"), st = kW(s);
-  s.A = el("g", {}, st); const Y = [150, 250, 340, 420, 490];
+  s.A0 = el("g", {}, st); s.A = el("g", {transform: "translate(0 70)"}, s.A0); const Y = [150, 250, 340, 420, 490];
   el("rect", kA({x: 230, y: 60, width: 340, height: 60, rx: 8, fill: "#caf0f8"}), s.A); [[260, 320], [370, 430], [480, 540]].forEach(([a, b]) => el("rect", {x: a, y: 66, width: b - a, height: 48, fill: "#212529"}, s.A));
   s.beam = el("path", {d: "M240 120 L560 120 L440 600 L360 600 Z", fill: "#e0aaff", opacity: .35}, s.A);
   Y.forEach((y, i) => { const w = 170 - i * 22; el("ellipse", kA({cx: 400, cy: y, rx: w, ry: 20, fill: "#90e0ef", opacity: .85, "stroke-width": 4}), s.A); });
@@ -527,14 +528,14 @@ S.lens = (() => { const s = scene("lens", "#3c096c", "#10002b"), st = kW(s);
   s.sm = chip(st, "the pattern shrinks", "#f72585", {fs: 38});
   // B: one hair, and a 1000-times zoom on the wafer's lines beside it
   s.B = el("g", {}, st); el("path", {d: "M780 -60 Q800 400 760 960", fill: "none", stroke: "#6f4518", "stroke-width": 120, "stroke-linecap": "round"}, s.B); el("path", {d: "M770 -60 Q790 400 750 960", fill: "none", stroke: "#a47148", "stroke-width": 40, "stroke-linecap": "round", opacity: .6}, s.B);
-  kT(s.B, 780, 880, "a hair", 40, "#fff");
+  kT(s.B, 640, 760, "a hair", 40, "#fff");
   s.zm = el("g", {transform: "translate(1060 420)"}, s.B); el("circle", kA({r: 130, fill: "#fff", "stroke-width": 8}), s.zm); const zc = kClip(s.zm, ["circle", {r: 124}]); for (let i = 0; i < 40; i++) el("rect", {x: -124 + i * 6.4, y: -124, width: 3.2, height: 248, fill: i % 2 ? "#fde68a" : "#7b2cbf"}, zc);
   el("line", kA({x1: -230, y1: 0, x2: -132, y2: 0, "stroke-dasharray": "10 8"}), s.zm); kT(s.zm, 0, 180, "lines on a chip", 30, "#fff"); kT(s.zm, 0, 215, "(zoomed in 1000 times)", 24, "#fff");
   s.th = chip(st, "thousands of times thinner than a hair", "#3a0ca3", {fs: 34});
   s.run = t => { const a = (w, f) => cue("lens", w, f), t0 = SC.lens.t0, tAg = a("again", .3), tTh = a("thousands", .6), tH = a("hair", .9);
-    op(s.A, 1); tf(s.A, `translate(${-120 * ramp(t, tTh - .6, tTh)} 0)`); op(s.beam, .25 + .15 * Math.sin(t * 5));
+    tf(s.A0, `translate(${-120 * ramp(t, tTh - .6, tTh)} 0)`); op(s.beam, .25 + .15 * Math.sin(t * 5));
     kPop(s.sm, 400, 800, t, tAg - .3); op(s.sm, on(t, tAg - .3, tTh - .4, .2));
-    op(s.B, ramp(t, tTh - .4, tTh)); kPop(s.zm, 1060, 420, t, tTh - .1); kPop(s.th, 600, 820, t, tH - .3); };
+    op(s.B, ramp(t, tTh - .4, tTh)); kPop(s.zm, 1060, 420, t, tTh - .1); kPop(s.th, 600, 800, t, tH - .3); };
   return s; })();
 
 // ---- LAYERS: the pattern etched in, metal added, again and again: layer on layer, hundreds of steps, many weeks
@@ -571,8 +572,8 @@ S.chips = (() => { const s = scene("chips", "#14213d", "#3a0ca3"), st = kW(s), R
     tf(s.saw, `translate(${lerp(240, 960, ((t - tC) * .9) % 1)} 440) rotate(${t * 900})`); op(s.saw, on(t, tC - .2, tT - .1, .2));
     tf(s.probe, `translate(600 ${380 + 30 * Math.abs(Math.sin(t * 4))})`); op(s.probe, on(t, tT - .2, tP - .1, .2)); kPop(s.ok, 690, 330, t, tT + .3); op(s.ok, on(t, tT + .3, tP, .2));
     tf(s.pk, `translate(600 430) scale(${Math.max(0, pop(t, tP))})`); op(s.pk, kP); s.pf.blink(t); op(s.pf, ramp(t, tY - .2, tY));
-    kPop(s.c0, 600, 60, t, t0); op(s.c0, on(t, t0, tC - .1, .2)); kPop(s.c1, 600, 60, t, tC - .1); op(s.c1, on(t, tC - .1, tT - .1, .2)); kPop(s.c2, 600, 60, t, tT - .1); op(s.c2, on(t, tT - .1, tP - .1, .2)); kPop(s.c3, 600, 60, t, tP - .1);
-    op(s.you, ramp(t, tY - .1, tY + .2)); tf(s.you, `translate(600 860) scale(${Math.max(0, pop(t, tY - .1))}) translate(-600 -860)`); };
+    kPop(s.c0, 600, 125, t, t0); op(s.c0, on(t, t0, tC - .1, .2)); kPop(s.c1, 600, 125, t, tC - .1); op(s.c1, on(t, tC - .1, tT - .1, .2)); kPop(s.c2, 600, 125, t, tT - .1); op(s.c2, on(t, tT - .1, tP - .1, .2)); kPop(s.c3, 600, 125, t, tP - .1);
+    op(s.you, ramp(t, tY - .1, tY + .2)); tf(s.you, `translate(600 780) scale(${Math.max(0, pop(t, tY - .1))}) translate(-600 -860)`); };
   return s; })();
 
 // ---- WHERE CHIPS ARE MADE: designed in the US (Santa Clara), the newest built in Taiwan (Hsinchu); Singapore: about 1 in 10 of the world's chips
@@ -593,7 +594,7 @@ S.chipMap = (() => { const s = scene("chipMap", "#0b132b", "#1c2541"), st = kW(s
   kT(s.B, 380, 620, "Singapore", 40, INK, {opacity: .7}); kT(s.B, 520, 110, "Malaysia", 34, INK, {opacity: .6});
   s.leg = el("g", {}, s.B); kFab(el("g", {transform: "translate(110 735)"}, s.leg), .55); kT(s.leg, 150, 746, "= chip factories (wafer fabs)", 30, "#fff", {"text-anchor": "start"});
   s.ten = el("g", {}, st); s.tc = []; for (let i = 0; i < 10; i++) { const g = el("g", {transform: `translate(${150 + i * 100} 820)`}, s.ten); kPackage(g, 76); s.tc.push(g); }
-  s.one = chip(st, "about 1 in every 10 chips in the world", "#e63946", {fs: 36});
+  s.one = chip(st, "about 1 in every 10 chips in the world", "#e63946", {fs: 36}); s.src = kT(s.ten, 1150, 890, "Source: EDB Singapore", 22, "#fff", {"text-anchor": "end"});
   s.run = t => { const a = (w, f) => cue("chipMap", w, f), t0 = SC.chipMap.t0, tD = a("designs", .1), tU = a("united", .22), tTw = a("taiwan", .38), tS = a("singapore", .55), tO = a("one", .7);
     const kB = ramp(t, tS - .3, tS + .1); op(s.W, 1 - kB); op(s.B, kB);
     kPop(s.p1, x1, y1, t, tD - .2); op(s.l1, ramp(t, tU - .2, tU)); kPop(s.d1, x1 - 30, y1 - 140, t, tD);
@@ -619,11 +620,11 @@ S.heat = (() => { const s = scene("heat", "#0b132b", "#1c2541"), st = kW(s);
   s.h4 = chip(st, "📘 Primary 4: heat flows from hotter to colder", "#ff6b35", {fs: 36});
   // C: cool water and air past the chips: a cold plate on a hot GPU, water pipes in (cool) and out (warm); fans
   s.C = el("g", {}, st); el("rect", {x: -300, y: -200, width: 1900, height: 1300, fill: "#e0fbfc"}, s.C);
-  s.gp = el("g", {transform: "translate(600 520)"}, s.C); s.gpk = kPackage(s.gp, 340); el("rect", kA({x: -150, y: -200, width: 300, height: 80, rx: 14, fill: "#90e0ef"}), s.gp); kT(s.gp, 0, -147, "cold plate", 30, INK);
-  s.pin = el("path", {d: "M-300 160 H420 Q470 160 470 210 V320", fill: "none", stroke: "#3a86ff", "stroke-width": 40, "stroke-linecap": "round"}, s.C); s.pout = el("path", {d: "M780 320 V210 Q780 160 830 160 H1500", fill: "none", stroke: "#ff922b", "stroke-width": 40, "stroke-linecap": "round"}, s.C);
+  s.gp = el("g", {transform: "translate(600 520)"}, s.C); s.gpk = kPackage(s.gp, 340); el("rect", kA({x: -150, y: -200, width: 300, height: 80, rx: 14, fill: "#90e0ef"}), s.gp); kT(s.gp, 170, -147, "cold plate", 30, INK, {"text-anchor": "start"});
+  s.pin = el("path", {d: "M-300 230 H420 Q470 230 470 280 V320", fill: "none", stroke: "#3a86ff", "stroke-width": 40, "stroke-linecap": "round"}, s.C); s.pout = el("path", {d: "M730 320 V280 Q730 230 780 230 H1500", fill: "none", stroke: "#ff922b", "stroke-width": 40, "stroke-linecap": "round"}, s.C);
   s.wd = []; for (let i = 0; i < 16; i++) s.wd.push(el("circle", {r: 9, fill: "#fff", opacity: .8}, s.C));
   s.ha2 = [0, 1, 2].map(i => { const g = kArrow(s.C, 90, "#ff6b35", 18); return g; });
-  s.lw = [["cool water in", 120, 110], ["warmer water out", 1080, 110]].map(([n, x, y]) => kT(s.C, x, y, n, 32, INK));
+  s.lw = [["cool water in", 120, 190], ["warmer water out", 1080, 190]].map(([n, x, y]) => kT(s.C, x, y, n, 32, INK));
   s.fan = el("g", {transform: "translate(170 560)"}, s.C); el("circle", kA({r: 110, fill: "#dee2e6"}), s.fan); s.fb = el("g", {}, s.fan); for (let k = 0; k < 5; k++) el("path", {d: "M0 0 Q40 -50 0 -96", fill: "none", stroke: "#495057", "stroke-width": 16, "stroke-linecap": "round", transform: `rotate(${k * 72})`}, s.fb); kT(s.fan, 0, 160, "cool air", 30, INK);
   s.eng = chip(st, "🔧 engineers: use less energy", "#06a77d", {fs: 38, ink: INK});
   s.run = t => { const a = (w, f) => cue("heat", w, f), t0 = SC.heat.t0, tE = a("electricity", .2), tHo = a("hot", .28), tR = a("remember", .32), tC = a("cool", .55), tEn = a("engineers", .74);
@@ -631,29 +632,29 @@ S.heat = (() => { const s = scene("heat", "#0b132b", "#1c2541"), st = kW(s);
     const hot = ramp(t, tE, tHo + .5); s.rk.forEach((g, i) => g.led.forEach((e, r) => set(e, "fill", mix("#3a86ff", kHash(i, r + Math.floor(t * 4)) > .4 ? "#ff6b35" : "#ffd166", hot))));
     s.bolt.forEach((e, i) => { const f = ((t - tE) * .8 + i / 6) % 1; tf(e, `translate(${i % 2 ? lerp(-100, 300, f) : lerp(1300, 900, f)} ${380 + (i % 3) * 60})`); op(e, on(t, tE - .2, tR, .2) * Math.sin(Math.PI * f)); });
     s.ht.run(t, 600, 360, 700, ramp(t, tHo - .3, tHo + .3) * (1 - kB));
-    kPop(s.c1, 600, 70, t, t0); op(s.c1, on(t, t0, tE - .2, .2)); kPop(s.c2, 600, 70, t, tE - .1); op(s.c2, on(t, tE - .1, tR - .3, .2)); kPop(s.h4, 600, 110, t, tR); op(s.h4, kB);
-    const kc = ramp(t, tC, tC + 3); s.wd.forEach((d, i) => { const f = ((t * .35 + i / 16) % 1), seg = f < .5; const x = seg ? lerp(-260, 470, f * 2) : lerp(780, 1460, f * 2 - 1), y = 160; set(d, "cx", x); set(d, "cy", y); op(d, .8 * kC); });
-    s.ha2.forEach((g, i) => { const f = ((t * .8 + i / 3) % 1); tf(g, `translate(${560 + i * 40} ${430 - f * 100}) rotate(-90)`); op(g, kC * Math.sin(Math.PI * f)); }); set(s.gpk.lid, "fill", mix("#ff6b35", "#adb5bd", kc));
-    tf(s.fb, `rotate(${t * 500})`); kPop(s.eng, 600, 860, t, tEn - .1); };
+    kPop(s.c1, 600, 125, t, t0); op(s.c1, on(t, t0, tE - .2, .2)); kPop(s.c2, 600, 125, t, tE - .1); op(s.c2, on(t, tE - .1, tR - .3, .2)); kPop(s.h4, 600, 125, t, tR); op(s.h4, kB);
+    const kc = ramp(t, tC, tC + 3); s.wd.forEach((d, i) => { const f = ((t * .35 + i / 16) % 1), seg = f < .5; const x = seg ? lerp(-260, 470, f * 2) : lerp(730, 1460, f * 2 - 1), y = 230; set(d, "cx", x); set(d, "cy", y); op(d, .8 * kC); });
+    s.ha2.forEach((g, i) => { const f = ((t * .8 + i / 3) % 1); tf(g, `translate(${520 + i * 80} ${430 - f * 100}) rotate(-90)`); op(g, kC * Math.sin(Math.PI * f)); }); set(s.gpk.lid, "fill", mix("#ff6b35", "#adb5bd", kc));
+    tf(s.fb, `rotate(${t * 500})`); kPop(s.eng, 600, 800, t, tEn - .1); };
   return s; })();
 
 // ---- TRY THIS with your class: one friend with twenty sums, or twenty friends with one sum each. Who finishes first?
 S.try = (() => { const s = scene("try", "#caffbf", "#9bf6ff"), st = kW(s);
   s.h = chip(st, "✏️ Try this with your class!", "#7209b7", {fs: 44});
-  s.L = el("g", {}, st); el("rect", kA({x: 40, y: 130, width: 440, height: 640, rx: 30, fill: "#fff", "stroke-width": 6}), s.L);
+  s.L = el("g", {}, st); el("rect", kA({x: 40, y: 190, width: 440, height: 600, rx: 30, fill: "#fff", "stroke-width": 6}), s.L);
   s.one = el("g", {transform: "translate(260 560)"}, s.L); kPupil(s.one, 1.6, "#3a86ff"); s.stack = []; for (let i = 0; i < 20; i++) s.stack.push(kCard(s.L, `${2 + i % 8}+${3 + i % 5}`, 80));
-  s.cnt = kT(s.L, 260, 730, "0 / 20 done", 40, INK);
-  s.R = el("g", {}, st); el("rect", kA({x: 520, y: 130, width: 660, height: 640, rx: 30, fill: "#fff", "stroke-width": 6}), s.R); s.pp = [];
-  for (let j = 0; j < 4; j++) for (let i = 0; i < 5; i++) { const g = el("g", {transform: `translate(${600 + i * 125} ${270 + j * 140})`}, s.R); kPupil(g, .9, ["#3a86ff", "#e63946", "#06d6a0", "#ffbe0b"][(i + j) % 4]); g.c = kCard(g, `${2 + (i + j) % 8}+${3 + i % 5}`, 66); tf(g.c, "translate(0 -112)"); g.tk = kTick(g, 18); s.pp.push(g); }
+  s.cnt = kT(s.L, 260, 760, "0 / 20 done", 40, INK);
+  s.R = el("g", {}, st); el("rect", kA({x: 520, y: 190, width: 660, height: 600, rx: 30, fill: "#fff", "stroke-width": 6}), s.R); s.pp = [];
+  for (let j = 0; j < 4; j++) for (let i = 0; i < 5; i++) { const g = el("g", {transform: `translate(${600 + i * 125} ${320 + j * 130})`}, s.R); kPupil(g, .9, ["#3a86ff", "#e63946", "#06d6a0", "#ffbe0b"][(i + j) % 4]); g.c = kCard(g, `${2 + (i + j) % 8}+${3 + i % 5}`, 66); tf(g.c, "translate(0 -112)"); g.tk = kTick(g, 18); s.pp.push(g); }
   s.timer = chip(st, "⏱️ 0 s", INK, {fs: 40});
   s.cpu = chip(st, "CPU", "#3a86ff", {fs: 54}); s.gpu = chip(st, "GPU", "#06a77d", {fs: 54}); s.win = chip(st, "🏁 finished first!", "#f72585", {fs: 38});
   s.run = t => { const a = (w, f) => cue("try", w, f), t0 = SC.try.t0, tO = a("alone", .3), tTw = a("twenty#2", .4), tWho = a("who", .6), tD = a("difference", .8);
-    kPop(s.h, 600, 60, t, t0 - .2); op(s.h, on(t, t0 - .2, tD - .3, .2)); op(s.L, ramp(t, a("one", .15) - .2, a("one", .15))); op(s.R, ramp(t, tTw - .4, tTw));
+    kPop(s.h, 600, 125, t, t0 - .2); op(s.h, on(t, t0 - .2, tD - .3, .2)); op(s.L, ramp(t, a("one", .15) - .2, a("one", .15))); op(s.R, ramp(t, tTw - .4, tTw));
     const go = tWho - .3, doneL = Math.min(20, Math.max(0, Math.floor((t - go) * 1.6))); s.cnt.textContent = `${doneL} / 20 done`;
-    s.stack.forEach((c, i) => { tf(c, `translate(${i < doneL ? 400 : 140} ${i < doneL ? 690 - (i % 10) * 10 : 690 - i * 18}) rotate(${i < doneL ? 8 : -4})`); op(c, i < doneL ? .5 : 1); });
+    s.stack.forEach((c, i) => { tf(c, `translate(${i < doneL ? 400 : 140} ${i < doneL ? 710 - (i % 10) * 10 : 710 - i * 18}) rotate(${i < doneL ? 8 : -4})`); op(c, i < doneL ? .5 : 1); });
     s.pp.forEach((g, i) => { tf(g.tk, "translate(36 -132)"); op(g.tk, t > go + .7 ? 1 : 0); tf(g.c, `translate(0 -112) scale(${t > go + .7 ? .8 : 1})`); });
-    s.timer.querySelector("text").textContent = `⏱️ ${Math.max(0, Math.floor(t - go))} s`; kPop(s.timer, 600, 830, t, go); op(s.timer, on(t, go, tD - .3, .2));
-    kPop(s.win, 850, 130, t, go + 1); kPop(s.cpu, 260, 130, t, tD - .2); kPop(s.gpu, 850, 130, t, tD); if (t > tD - .3) op(s.win, 0); };
+    s.timer.querySelector("text").textContent = `⏱️ ${Math.max(0, Math.floor(t - go))} s`; kPop(s.timer, 600, 800, t, go); op(s.timer, on(t, go, tD - .3, .2));
+    kPop(s.win, 850, 200, t, go + 1); kPop(s.cpu, 260, 200, t, tD - .2); kPop(s.gpu, 850, 200, t, tD); if (t > tD - .3) op(s.win, 0); };
   return s; })();
 
 // ---- THINK ABOUT IT: why must chip factories be even cleaner than an operating theatre? (a dust speck drifts towards the wafer)
@@ -661,19 +662,19 @@ S.think = (() => { const s = scene("think", "#3a0ca3", "#7209b7"), st = kW(s);
   s.title = kT(st, 600, 150, "🤔 Think about it!", 76, "#ffe14d");
   s.w = el("g", {transform: "translate(600 640)"}, st); el("ellipse", kA({rx: 420, ry: 90, fill: kGrad([[0, "#ced4da"], [1, "#6c757d"]])}), s.w);
   const wc = kClip(s.w, ["ellipse", {rx: 412, ry: 84}]); for (let i = 0; i < 40; i++) el("rect", {x: -420 + i * 21, y: -90, width: 9, height: 180, fill: i % 2 ? "#9d4edd" : "#fde68a", opacity: .55}, wc);
-  s.d = el("g", {}, st); kDust(s.d, 46); s.q = emo(st, 960, 330, 120, "❓");
+  s.d = el("g", {}, st); kDust(s.d, 80); s.q = emo(st, 960, 330, 120, "❓");
   s.c = chip(st, "Why must chip factories be cleaner than an operating theatre?", "#e63946", {fs: 32}); s.ans = chip(st, "Answer next time!", "#f72585", {fs: 46});
   s.run = t => { const a = (w, f) => cue("think", w, f), t0 = SC.think.t0, tC = a("cleaner", .45);
     tf(s.title, `scale(${Math.max(0, pop(t, t0 - .2))})`); set(s.title, "x", 600); tf(s.title, `translate(600 150) scale(${Math.max(0, pop(t, t0 - .2))}) translate(-600 -150)`);
     const f = clamp((t - t0) / 6); tf(s.d, `translate(${lerp(260, 640, f)} ${lerp(260, 540, f) + 18 * Math.sin(t * 2)}) rotate(${t * 30})`);
     tf(s.q, `translate(960 330) scale(${Math.max(0, pop(t, tC)) * (1 + .08 * Math.sin(t * 5))}) translate(-960 -330)`);
-    kPop(s.c, 600, 820, t, a("why", .2)); kPop(s.ans, 600, 260, t, a("next", .9)); };
+    kPop(s.c, 600, 800, t, a("why", .2)); kPop(s.ans, 600, 260, t, a("next", .9)); };
   return s; })();
 
 // ---- CLOSE: back to the chip, pull out to the grain of sand on the beach where it all started
 S.close = (() => { const s = scene("close", "#ffd6a5", "#fdffb6"), st = kW(s);
   s.beach = el("g", {}, st); el("rect", {x: -300, y: -200, width: 1900, height: 700, fill: "#8ecae6"}, s.beach); el("rect", {x: -300, y: 380, width: 1900, height: 140, fill: "#219ebc"}, s.beach);
-  el("path", {d: "M-300 500 Q300 470 600 500 T1500 490 V1100 H-300 Z", fill: "#f2d49b"}, s.beach); el("circle", {cx: 1000, cy: 120, r: 70, fill: "#ffd60a", stroke: INK, "stroke-width": 6}, s.beach);
+  el("path", {d: "M-300 500 Q300 470 600 500 T1500 490 L1800 490 V1100 H-300 Z", fill: "#f2d49b"}, s.beach); el("circle", {cx: 1000, cy: 120, r: 70, fill: "#ffd60a", stroke: INK, "stroke-width": 6}, s.beach);
   seed = 41; for (let i = 0; i < 70; i++) el("circle", {cx: -200 + rnd() * 1600, cy: 540 + rnd() * 480, r: 3 + rnd() * 4, fill: "#d4a373"}, s.beach);
   s.gr = el("g", {transform: "translate(600 700)"}, st); kGrain(s.gr, 70, 5); s.gf = kFace(s.gr, 46);
   s.ch = el("g", {}, st); s.die = el("g", {}, s.ch); kDie(s.die, 260, 330);
@@ -681,5 +682,5 @@ S.close = (() => { const s = scene("close", "#ffd6a5", "#fdffb6"), st = kW(s);
   s.run = t => { const a = (w, f) => cue("close", w, f), t0 = SC.close.t0, tD = a("drawn", .3), tA = a("all", .62), tG = a("grain", .9);
     const k = ramp(t, tA - .4, tA + .6); op(s.beach, k); tf(s.ch, `translate(600 ${lerp(430, 700, k)}) scale(${lerp(1, .1, k)})`); op(s.ch, 1 - ramp(t, tA + .2, tA + .6));
     tf(s.gr, `translate(600 700) scale(${ramp(t, tA + .2, tA + .8)})`); s.gf.blink(t);
-    kPop(s.r1, 600, 90, t, t0); kPop(s.r2, 600, 180, t, tD - .1); kPop(s.r3, 600, 270, t, tG - .2); };
+    kPop(s.r1, 600, 130, t, t0); kPop(s.r2, 600, 220, t, tD - .1); kPop(s.r3, 600, 310, t, tG - .2); };
   return s; })();

@@ -1,0 +1,25 @@
+{
+ "centre": [
+  112,
+  14
+ ],
+ "R": 1500,
+ "cx": 1350,
+ "cy": 560,
+ "disk": 500,
+ "white": "SAND",
+ "yellow": "\u2192 AI CHIP?!",
+ "titleSize": 165,
+ "banner": "How do you build a chip that helps AI think?",
+ "bannerSize": 74,
+ "labels": [
+  [
+   "Taiwan",
+   [
+    126.2,
+    23.4
+   ],
+   44
+  ]
+ ]
+}
