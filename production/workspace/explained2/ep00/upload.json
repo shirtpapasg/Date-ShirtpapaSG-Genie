@@ -1,0 +1,61 @@
+{
+ "key": "explained-p3-ep00",
+ "parts": [
+  {
+   "key": "explained-p3-ep00-partA",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/ep00_part1.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/thumb_part1.jpg",
+   "title": "Read It or Make It? Which Mind Map Do You REMEMBER? (Part 1) | Study Skills P3–P6",
+   "description": "Pip reads a ready-made mind map. Basil makes his own, from memory. Which one helps you remember more? Play the word puzzle test, find out why working something out makes it stick (scientists call it the generation effect), and spot the mistake when Momo \"makes her own\" map. A study-skills special for Primary 3 to 6 Science (Singapore), for kids aged 8 to 12, with Heart and the pet buddies Pip, Momo and Basil. Part 1 of 2.\n\nIn this part:\n• Read it or make it?\n• The word puzzle test\n• Look closer: reading a map vs making one\n• The memory test: the generation effect\n• HOLD ON! Is copying the same as making?\n• Memory first\n• Spot the hidden crow!\n\nKey words: make your own, generation effect, memory first.\nWatch Part 2: make one together in TheOneApp, check and fix, and space it out: who remembers more one week later?\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nThe science, short and honest: Scientists have tested these study habits many times: working something out yourself helps you remember it (the generation effect); drawing a map from memory and then checking it beats copying it (retrieval practice); and drawing it again after a few days beats reading it many times at once (spaced practice). One day, three days and a week is a simple plan; any spread-out days work.\nMake your own mind map in TheOneApp: tap Mind Maps, then ✏️ Make my own mind map, pick your chapter and tap ＋ Start a new mind map. When you are done, tap ✅ Mark my mind map. https://theoneapp-ten.vercel.app\nSafety and care: We look at crows and community cats, and we do not feed, chase or touch them.\n\n#StudySkills #PrimaryScience #Singapore #MindMap #TheOneAppExplained",
+   "tags": [
+    "mind map",
+    "make a mind map",
+    "study skills",
+    "how to study",
+    "generation effect",
+    "retrieval practice",
+    "spaced practice",
+    "primary science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  },
+  {
+   "key": "explained-p3-ep00-partB",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/ep00_part2.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/thumb_part2.jpg",
+   "title": "One Week, One Blank Page. Who Remembers MORE? (Part 2) | Make Your Own Mind Map",
+   "description": "Pip reads the poster five times. Basil makes his own map in TheOneApp from memory, checks it, fixes it, and draws it again on Tuesday and Thursday. Next Monday, a blank page each: who draws more? Make a mind map with us in TheOneApp, step by step (Mind Maps · Make my own mind map · Start a new mind map · Mark my mind map · Compare with the poster), spot the mistake on Pip's poster, and be an idea in a picture of Basil's memory. Part 2 of 2 of a study-skills special for Primary 3 to 6 Science (Singapore), kids aged 8 to 12.\n\nIn this part:\n• Make one together in TheOneApp\n• Look closer: Mark my mind map, then check and fix\n• Showdown: Pip's steps poster\n• Be an idea: why drawing it again works\n• Space it out: one day, three days, a week\n• Two blank pages: who remembers more?\n• Spot the hidden cat!\n\nKey words: make your own, check and fix, space it out.\nWatch Part 1: read it or make it, and the word puzzle test.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nThe science, short and honest: Scientists have tested these study habits many times: working something out yourself helps you remember it (the generation effect); drawing a map from memory and then checking it beats copying it (retrieval practice); and drawing it again after a few days beats reading it many times at once (spaced practice). One day, three days and a week is a simple plan; any spread-out days work.\nMake your own mind map in TheOneApp: tap Mind Maps, then ✏️ Make my own mind map, pick your chapter and tap ＋ Start a new mind map. When you are done, tap ✅ Mark my mind map. https://theoneapp-ten.vercel.app\nSafety and care: We look at crows and community cats, and we do not feed, chase or touch them.\n\n#StudySkills #PrimaryScience #Singapore #MindMap #TheOneAppExplained",
+   "tags": [
+    "mind map",
+    "make a mind map",
+    "study skills",
+    "how to study",
+    "generation effect",
+    "retrieval practice",
+    "spaced practice",
+    "primary science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLb8LpPqxQI4E",
+   "after": "zxerWQ9zGII"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "zxerWQ9zGII"
+  }
+ ],
+ "replaces": [
+  "zxerWQ9zGII"
+ ],
+ "retire_old": true,
+ "new_version_line": "▶ NEW VERSION (2 parts): Read It or Make It? Which Mind Map Do You REMEMBER? https://www.youtube.com/watch?v={P1}",
+ "_note": "Public, Made for Kids (the uploader sets both). Replaces the classic study-skills special zxerWQ9zGII (P3 videos.js no: 0), which stays PUBLIC (SERIES_FORMAT 10.5: never deleted; ask the teacher before unlisting): retire_old takes it out of both P3 playlists and gives it the NEW VERSION first line (the teacher's decision 7, 24 Nov 2026; done at upload time). Placement: the parts go at the START of the P3 playlists, before EP1A. explained_upload.py has no 'first position' option ('after' missing = the END of the list), so 'after' is the old video zxerWQ9zGII: the classic sits at the start of the P3 playlists (no. 0), the two parts go in right after it, then retire_old removes it, leaving Part A and Part B first. Check with --check that zxerWQ9zGII is at position 0 in both playlists before the real run; if it is not, use reorder_pl.py after the upload. TheOneApp videos.js: replace the no: 0 entry with '0A' / '0B' (app_moments.json). NOT UPLOADED."
+}

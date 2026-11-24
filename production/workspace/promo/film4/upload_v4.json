@@ -1,0 +1,32 @@
+{
+ "key": "theoneapp-promo-film4-v4",
+ "parts": [
+  {
+   "key": "theoneapp-promo-film4-v4",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/promo/film4/film4_v4.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/promo/film4/thumb_v3.jpg",
+   "title": "The Grey Platform: Earn It, Wear It, Play It (Legendary Looks) | TheOneApp",
+   "description": "At TheOneApp Station, every pupil has a character of their very own. But one character steps off the train all grey, and the Gift Shop\nis dark. (Psst: every new pupil gets 100 free credits for finishing the tour.)\n\nHere, style is not given. It is earned. Finish a quiz (which one will a magnet attract?), and the credits start to add up, day by day.\nEarned, never bought. Then visit the Gift Shop, and save up for the legendary looks: the Winter Wonderland Pack (Legendary, 300 credits,\nonly this season) and the Space Explorer Pack (Mythical, 500 credits), rocket pack and all. Try things on in the Dressing Room mirror,\nand keep what you earn. Your character comes with you into every game: Boss Clash as My Hero, and the Science Claw in Versus against\nyour own pet buddy.\n\nWhat you learn, you keep. What you earn, you wear.\n\nThe only app you need to learn Science: TheOneApp\ntheoneapp.sg\n\nFeaturing Pip, Momo and Basil, the pet buddies, with Heart as narrator.\n\n0:00 TheOneApp Station\n0:07 The grey character\n0:21 We need a scientist: TAP TO BEGIN\n0:35 Day by day: credits, earned not bought\n0:40 The Gift Shop\n0:46 The legendary looks: Winter Wonderland and Space Explorer\n0:55 The Dressing Room\n1:02 Into every game: Boss Clash\n1:05 Versus at the Science Claw\n1:18 Earn it. Wear it. Play it.\n\n#TheOneApp #PrimaryScience #Singapore #PSLEScience",
+   "tags": [
+    "TheOneApp",
+    "primary science",
+    "Singapore",
+    "PSLE science",
+    "science app for kids",
+    "learn science",
+    "pet buddies",
+    "legendary looks",
+    "avatar",
+    "Winter Wonderland",
+    "space explorer"
+   ]
+  }
+ ],
+ "playlists": [],
+ "_note": "Promo film 4 v4, teacher 24 Nov 2026: the app screen in the 'In the app' tablets (Gift Shop, Boss Clash) zoomed 'bit by bit like lag'. Cause: lib.js n2() rounded scale() to 0.01, so slow zooms stepped; it now rounds to 4 decimals. One fix only: the same frames otherwise, the same sound (out/mix.wav), the same finish (glow, -16 LUFS), the same title, description, tags and thumbnail (thumb_v3.jpg). Replaces v3 (df3FppAf_EE). Public, Made for Kids, no playlist.",
+ "replaces": [
+  "df3FppAf_EE"
+ ],
+ "retire_old": true,
+ "new_version_line": "▶ NEW VERSION (smoother zooms): The Grey Platform https://www.youtube.com/watch?v={P1}"
+}

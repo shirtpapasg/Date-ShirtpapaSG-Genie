@@ -15,7 +15,9 @@ How a frame is made (all from the film's own frame; nothing of the source projec
 - Under y 1440 (the bottom 25%, where the title, channel and buttons sit) only a soft blurred reflection of the picture.
 - Captions: every spoken line, 2-4 words at a time, from words_film<N>.json (align_words.py), centre y ~ 640, x 80..960.
 - Hook title over the opening (0 - 1.5 s), end card over the last END seconds: "Try TheOneApp free / theoneapp.sg".
-- Audio: the film's own mix, untouched (re-encoded AAC 192k). Video: H.264 High, CRF 18, yuv420p, +faststart.
+- Audio: the film's own AAC stream, copied untouched (-16 LUFS, TP <= -1); the ad cut re-encodes its joins (AAC 192k, limiter at -1.7 dBFS).
+  Video: H.264 High, CRF 18, yuv420p, +faststart.
+    python3 make_short.py <N> [--cut] --audio-only     put the sound on an existing render again (picture copied)
 """
 import json, os, sys, math, subprocess, importlib.util
 import numpy as np
@@ -93,7 +95,7 @@ def chunks(words, key):
 
 def build_captions():
     W = json.load(open(os.path.join(H, f'words_film{N}.json')))
-    key = {k.lower() for k in getattr(P, 'KEY', [])}; caps = []
+    key = {k.lower().strip('.,!?:') for k in getattr(P, 'KEY', [])}; caps = []
     for ln in W['lines']:
         cs = chunks(ln['words'], key)
         for j, c in enumerate(cs):
@@ -220,16 +222,22 @@ if __name__ == '__main__':
         out = os.path.join(SCR, f'preview{N}.jpg'); sh.save(out, quality=85); print(out); sys.exit()
 
     out = os.path.join(H, f'film{N}_short60.mp4' if CUT else f'film{N}_short.mp4')
-    # audio: the kept ranges of the film's own mix (a 60 ms fade at each join of the ad cut), AAC 192k
-    if CUT:
+    def audio_args(vin):
+        """the whole film: its own AAC stream copied untouched (-16 LUFS, true peak <= -1 dBTP as mastered);
+        the ad cut: the kept ranges of that mix, a 60 ms fade at each join, a safety limiter at -1.7 dBFS (AAC re-encoding
+        lifts true peaks), AAC 192k"""
+        if not CUT: return ['-map', f'{vin}:v', '-map', '1:a', '-c:a', 'copy']
         parts = ''.join(f'[1:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.06,afade=t=out:st={b - a - 0.06:.3f}:d=0.06[a{k}];' for k, (a, b) in enumerate(KEEP))
-        afil = ['-filter_complex', parts + ''.join(f'[a{k}]' for k in range(len(KEEP))) + f'concat=n={len(KEEP)}:v=0:a=1[aout]', '-map', '0:v', '-map', '[aout]']
-    else:
-        afil = ['-map', '0:v', '-map', '1:a']
-    enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{OW}x{OH}', '-r', str(FPS), '-i', '-', '-i', SRC] + afil +
+        fc = parts + ''.join(f'[a{k}]' for k in range(len(KEEP))) + f'concat=n={len(KEEP)}:v=0:a=1,alimiter=limit=0.82:attack=2:release=60:level=false:asc=true[aout]'
+        return ['-filter_complex', fc, '-map', f'{vin}:v', '-map', '[aout]', '-c:a', 'aac', '-b:a', '192k', '-ar', '48000']
+    if '--audio-only' in sys.argv:      # put the sound on an existing render again (the picture is copied)
+        tmp = out + '.tmp.mp4'
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', out, '-i', SRC] + audio_args(0) + ['-c:v', 'copy', '-t', f'{OUT_DUR:.4f}', '-movflags', '+faststart', tmp], check=True)
+        os.replace(tmp, out); print('new sound on', out); sys.exit()
+    enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{OW}x{OH}', '-r', str(FPS), '-i', '-', '-i', SRC] + audio_args(0) +
                            ['-c:v', 'libx264', '-profile:v', 'high', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p', '-r', str(FPS),
                             '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
-                            '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-t', f'{OUT_DUR:.4f}', '-movflags', '+faststart', out], stdin=subprocess.PIPE)
+                            '-t', f'{OUT_DUR:.4f}', '-movflags', '+faststart', out], stdin=subprocess.PIPE)
     keep = set(OUT_FRAMES); pos = {i: k for k, i in enumerate(OUT_FRAMES)}
     def jobs():
         for i, b in frames():

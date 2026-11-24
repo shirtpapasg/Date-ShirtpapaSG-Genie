@@ -47,5 +47,6 @@ KF = [
     (69.30, 1.2, 700, 1250, 880),  #   Basil, big at the left: "Next time... who stole the light?"
 ]
 END = 2.3
+CAP_Y_AT = [(16.7, 18.97, 300), (41.98, 43.72, 300)]   # Momo on the dragon's head, the unicorn's horn: captions above them
 # the <=60 s ad cut (make_short.py 2 --cut): source ranges kept; the three School Lab tests are joined on their own scene cuts
 CUT = [(0, 7.9), (9.4, 18.97), (24.63, 27.55), (28.98, 36.17), (37.5, 43.72), (44.8, 51.4), (52.4, 70.3)]

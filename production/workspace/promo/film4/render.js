@@ -1,10 +1,11 @@
-// render.js (promo film 4, from explained2/ep20/render.js): frames -> out/chunks_v3/c_NNNNNN.mp4 (300 frames each; finished chunks are kept, so a restart loses little), then out/video_v3.mp4.
+// render.js (promo film 4, from explained2/ep20/render.js): frames -> out/chunks_<VER>/c_NNNNNN.mp4 (300 frames each; finished chunks are kept, so a restart loses little), then out/video_<VER>.mp4.
+// v4 (teacher, 24 Nov 2026: the tablet zooms stepped "bit by bit like lag"): only lib.js's n2() changed (4 decimals); VER names the folders.
 // v3 (teacher, 24 Nov 2026: "looks lower quality than promo films 1-3"): 60 fps, as films 1-3 (was 30).
 //   NODE_PATH=$(npm root -g) node render.js <part> [workers=3] [t0 t1]     With t0 t1 it renders only that span to out/clip_<t0>.mp4 (with sound).
 const { chromium } = require('playwright'); const { spawn, spawnSync } = require('child_process'); const fs = require('fs'), path = require('path');
-const PART = +(process.argv[2] || 1), TL = JSON.parse(fs.readFileSync(path.join(__dirname, 'tl.json'))), FPS = 60, CH = 300, OUT = path.join(__dirname, 'out');
+const VER = 'v4', PART = +(process.argv[2] || 1), TL = JSON.parse(fs.readFileSync(path.join(__dirname, 'tl.json'))), FPS = 60, CH = 300, OUT = path.join(__dirname, 'out');
 const W = +(process.argv[3] || 3), clip = process.argv[4] !== undefined ? [+process.argv[4], +process.argv[5]] : null;
-const F0 = clip ? Math.round(clip[0] * FPS) : 0, F1 = clip ? Math.round(clip[1] * FPS) : Math.ceil(TL.END * FPS), dir = path.join(OUT, clip ? 'clipchunks' : `chunks_v3`);
+const F0 = clip ? Math.round(clip[0] * FPS) : 0, F1 = clip ? Math.round(clip[1] * FPS) : Math.ceil(TL.END * FPS), dir = path.join(OUT, clip ? 'clipchunks' : `chunks_${VER}`);
 if (clip) fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
 const jobs = []; for (let f = F0; f < F1; f += CH) jobs.push([f, Math.min(F1, f + CH)]);
 const name = (j) => path.join(dir, `c_${String(j[0]).padStart(6, '0')}.mp4`);
@@ -17,6 +18,6 @@ async function worker(id) { const b = await chromium.launch(); const p = await b
   await b.close(); }
 (async () => { const all = jobs.map(name); const t0 = Date.now(); await Promise.all(Array.from({ length: W }, (_, i) => worker(i)));
   const list = path.join(dir, 'list.txt'); fs.writeFileSync(list, all.map(f => `file '${f}'`).join('\n'));
-  const vid = path.join(OUT, clip ? `clip_${clip[0]}_v.mp4` : `video_v3.mp4`); spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', vid], { stdio: 'inherit' });
+  const vid = path.join(OUT, clip ? `clip_${clip[0]}_v.mp4` : `video_${VER}.mp4`); spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', vid], { stdio: 'inherit' });
   if (clip && fs.existsSync(path.join(OUT, 'mix.wav'))) spawnSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', vid, '-ss', String(clip[0]), '-t', String(clip[1] - clip[0]), '-i', path.join(OUT, 'mix.wav'), '-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k', '-shortest', path.join(OUT, `clip_${clip[0]}.mp4`)], { stdio: 'inherit' });
   console.log('done in', ((Date.now() - t0) / 1000 | 0), 's ->', vid); })();

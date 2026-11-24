@@ -215,6 +215,23 @@ const THUMBS = {
       { cut: 'nails', x: 580, y: 260, w: 660, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'WAY?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP0, the mind map special (THUMBNAIL_V2.md; script section 7): Part 1 READ or MAKE?! with Pip surprised, a half-made hand-drawn map
+  // (a pencil mid-branch) beside TheOneApp's crisp printed Magnets poster, a warm orange-to-brown burst; Part 2 1 WEEK LATER?! with Basil
+  // surprised, two blank pages (only "Magnets" in the middle, a pencil above each) and a calendar card Mon · Tue · Thu, an amber burst
+  ep00_1: { ep: 'ep00', part: 1, out: 'ep00/thumb_part1.jpg', old: 'ep22/thumb_part1.jpg',
+    bg: { c: ['#FFE9C2', '#F08A2A', '#4A2410'], at: [860, 430], rays: .22 },
+    cuts: { comp: `'<g filter="url(#drop)"><rect x="1036" y="196" width="808" height="488" fill="#fff"/></g>' + appImg("posterP", 1060, 220, 760, 440) + TF(760, 700, 1.05, sheet00(760, 520, { lines: false }) + TF(0, 0, .7, handMap(1, MAPB.slice(0, 3), { at: { "b2.1": 99 }, size: 44 })) + TF(250, 40, 1.2, pencil00(0)))` },
+    layers: [
+      { cut: 'comp', x: 520, y: 250, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'READ or', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MAKE?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep00_2: { ep: 'ep00', part: 2, out: 'ep00/thumb_part2.jpg', old: 'ep22/thumb_part2.jpg',
+    bg: { c: ['#FFF0C8', '#E0A020', '#3E2208'], at: [860, 430], rays: .22 },
+    cuts: { pages: `[700, 1220].map((x) => TF(x, 560, 1, sheet00(440, 480, { lines: false }) + '<ellipse rx="120" ry="72" fill="#FFF3C4" stroke="#3A2E52" stroke-width="8"/>' + T(0, 18, "Magnets", 54, "#3A2E52", { w: 700 }) + TF(150, -120, 1.1, pencil00(0)))).join("") + TF(960, 880, 1, '<g filter="url(#drop)"><rect x="-230" y="-70" width="460" height="140" rx="16" fill="#fff"/></g><rect x="-230" y="-70" width="460" height="44" rx="16" fill="#D84A3A"/>' + T(0, 44, "Mon · Tue · Thu", 50, "#3A2E52", { w: 700 }))` },
+    layers: [
+      { cut: 'pages', x: 600, y: 250, w: 640, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: '1 WEEK', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'LATER?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);
