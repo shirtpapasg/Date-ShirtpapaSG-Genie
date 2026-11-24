@@ -69,7 +69,7 @@ What that means for the teacher:
   type and colours so the replay loops back into the hook.
 - **Audio**: the full Shorts carry the film's own AAC stream **copied untouched** (192 kb/s, 48 kHz; mastered to -16 LUFS,
   true peak <= -1 dBTP). A first render re-encoded it and film 2's true peak rose to -0.2 dBTP, hence the copy. The ad cuts
-  must re-encode: their ranges are joined with 60 ms fades, +0.2 dB, and a safety limiter at -1.7 dBFS.
+  must re-encode: their ranges are joined with 60 ms fades, +0.2 dB, and a safety limiter at -2.2 dBFS (AAC re-encoding lifts true peaks by up to ~1 dB).
 - **Encode**: H.264 High, CRF 18, yuv420p, BT.709, 60 fps, +faststart.
 
 ### Files
@@ -96,11 +96,11 @@ cross-correlated against the film's own sound in each kept range (0 = in sync; u
 | File | Length | Frames | LUFS | True peak | A/V | Size | 720p preview |
 |---|---|---|---|---|---|---|---|
 | film1_short.mp4 | 1:23.0 (82.98 s) | 4979 | -16.0 | -1.3 dBTP | 0.0 ms | 50 MB | 13.5 MB |
-| film1_short60.mp4 | 0:53.0 | 3182 | -15.9 | -1.5 | 0.6 ms | 33 MB | 9.9 MB |
-| film2_short.mp4 | 1:15.6 (75.62 s) | 4537 | F2I | F2P | F2A | 57 MB | F2M |
-| film2_short60.mp4 | 0:58.3 | 3497 | G2I | G2P | G2A | 45 MB | G2M |
+| film1_short60.mp4 | 0:53.0 | 3182 | -15.9 | -2.1 | 0.6 ms | 33 MB | 9.9 MB |
+| film2_short.mp4 | 1:15.6 (75.62 s) | 4537 | -16.0 | -1.1 | 0.0 ms | 57 MB | 13.6 MB |
+| film2_short60.mp4 | 0:58.3 | 3497 | -15.7 | -1.3 | 0.6 ms | 45 MB | 11.0 MB |
 | film3_short.mp4 | 1:16.8 (76.78 s) | 4607 | -16.0 | -1.5 | 0.0 ms | 44 MB | 13.6 MB |
-| film3_short60.mp4 | 0:57.3 | 3436 | -15.5 | -1.5 | 0.6 ms | 31 MB | 10.8 MB |
+| film3_short60.mp4 | 0:57.3 | 3436 | -15.5 | -2.0 | 0.6 ms | 31 MB | 10.8 MB |
 
 Weak or hard moments (seen on the contact sheets):
 - Film 1, 0:15-0:19 (the fog arrives): the airship is far left and the buddies far right; done as a pan between them.
