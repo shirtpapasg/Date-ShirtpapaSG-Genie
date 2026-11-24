@@ -1,4 +1,7 @@
-// extra captures for EP0: the home screen (no pop-ups) and the Magnets poster as a whole element
+// capture2.js: two extra captures of TheOneApp's REAL screens for EP0 (served read-only, as capture.js): the home screen with no pop-ups
+// (home.png) and the drawn Magnets poster from "Compare with the poster" (posterP.png).
+//   NODE_PATH=$(npm root -g) node capture2.js <outdir>   then (see STATE.md) posterP.png is cropped to app/posterP.jpg (the Exit button
+//   painted over in the poster's cream) and home.png scaled to app/home.jpg; then python3 app_manifest.py
 const { chromium } = require('playwright'); const path = require('path');
 (async () => { const OUT = process.argv[2]; const b = await chromium.launch(); const ctx = await b.newContext({ viewport: { width: 1180, height: 820 }, deviceScaleFactor: 2.6 });
   await ctx.addInitScript(() => { try { if (!sessionStorage.getItem('_set')) { localStorage.setItem('sm-sfx-v1', JSON.stringify('off')); localStorage.setItem('sm-mmtour-v1', String(Date.now()));
