@@ -97,7 +97,7 @@ SC.lclike = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camFr(SC
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [MK("sstoo") + .1, "oops"]])
       + peekFace("pip", "l", tt, tp, tb - .4, [[LE("n703p") + .1, "cheer"], [LE("n703p") + 2.1, "sit"]], { achieved: true })
       + peekFace("basil", "l", tt, tb, undefined, [[LE("n707b") + .1, "cheer"], [Math.min(LE("n707b") + 2.1, tRg - .1), "sit"], [tRg + .1, "pointing"], [tRg + 2.6, "sit"]], { achieved: true }) }), 20)
-    + faceCam("momo", t, tSn + .05, tSn + 1.9, 1600, 330, 150, [[tSn, "oops"]], { noreact: true }); };
+    + faceCam("momo", t, tSn + .05, tSn + 1.9, 1010, 330, 150, [[tSn, "oops"]], { noreact: true }); };   // 24 Nov: in the free space between the pencil and the card (it covered WHICH POLES FACE?)
 SC.mark1 = (t, s) => markScene(t, s, { id: "n712", sayId: "n711", who: "pip", n: "1 of 2", text: "Unlike poles attract and like poles repel.", keys: ["Unlike", "attract", "like", "repel"], size: 76, y: 260, footer: FOOT, achieved: true,
   under: fridgeCardAt(t, 1460, 800, .72 * spring(t, s.t0 + .4, .5), { id: "mk" }) });
 

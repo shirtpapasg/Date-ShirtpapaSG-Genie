@@ -208,7 +208,7 @@ SC.lcq2 = (t, s) => shop(t, camRow(t), { tp: { tray: true, bag: false, nails: fa
 SC.lcthings = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camRow(SCN.lcq2.t1), p = camPt(cE, [860, 860]), tm = s.t0 + 1.2, tE = MK("test"), tp = LT("m1005p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcThingsArt, bgc: "#FFF8EA", set: (tt) => shop(tt, cE, { tp: { bag: false, nails: false, lid: 1 }, top: rowTop(tt) }), verdict: [`ONLY MAGNETIC OBJECTS CAN BE MAGNETISED`, GOODC], tv: MK("v_only"), peek: false,
     over: (tt) => peekFace("momo", "l", tt, tm, undefined, [[tm + .2, "thinking"]])
-      + faceCam("basil", tt, tE + .1, tE + 2.4, 1650, 330, 140, [[tE + .15, "surprised"]], { noreact: true })
+      + faceCam("basil", tt, tE + .1, tE + 2.4, 280, 470, 140, [[tE + .15, "surprised"]], { noreact: true })   // 24 Nov: at the panel's free left side (it covered the magnet's label)
       + peekFace("pip", "r", tt, tp, undefined, [[LE("m1005p") + .1, "cheer"], [LE("m1005p") + 2.2, "sit"]], { achieved: true }) }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "m1007", sayId: "m1006", who: "pip", n: "2 of 2", text: TL.lines.m1007.text, keys: ["magnetic", "object", "magnet", "stroking", "strong", "magnet."], size: 64, y: 250, footer: FOOT, achieved: true, poses: [[LE("m1007") + .2, "sit"]],
   under: markThings(t, 1250, 935, .74 * spring(t, s.t0 + .4, .5)) });
