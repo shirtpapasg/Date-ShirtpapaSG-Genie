@@ -132,7 +132,7 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
 8. Upload order: EP21 only after EP20 is live, and only once `{EP20_P1}` in `upload.json`'s `new_version_line` is filled with EP20 Part 1's
    real id.
 
-## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-24 (resume from here)
+## Stage 2 (drawing, sound, render, self-check): DONE 2026-11-24 (NOT uploaded)
 - **New files:** `art21.js` (helpers copied UNCHANGED from ../ep20/art20.js; XDEFS21; the BARN SWALLOW swallow21 / swallowFly / swallowAt; the SEA
   TURTLE turtle21 / turtleAt / turtleSwim; hangMag21 (a bar magnet hanging level, turning, with its end face), spinAng, miniMag; Momo's compass
   compass21 + settle21; cone21, chair21, broom21, bench21, giantFinger, binnacle21, smallEasel), `ep21dare.js` (SECTION A of ../ep22/ep21dare.js
@@ -176,3 +176,17 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
   thumbnails (`../thumb_v2.js` ep21_1 SAME WAY EVERY TIME?! + Momo surprised; ep21_2 THE NEEDLE MOVES?! + Pip surprised); make_moments.py ->
   app_moments.json (21A / 21B; keys O.interactions / CH.magnets are placeholders, as EP20) + production/youtube/chapters_p3.json EP21_P1 / EP21_P2;
   make_preview.sh spans; highlights.py.
+- **Renders:** `ep21_part1.mp4` **5:28.0** (9840 frames), `ep21_part2.mp4` **5:29.6** (9889 frames), 1920x1080, 30 fps, **-16.0 LUFS** both;
+  both decode end to end with no error (`ffmpeg -v error -i ... -f null -`). `ep21_part1.srt` / `_part2.srt`, `sheet_part1.png` / `_part2.png`.
+  mp4s NOT committed (rebuild: `./build_part.sh 1` / `2`, about 20-30 min each under the shared lock). Chunk folders, video_p*.mp4 and the
+  mix wavs deleted after each finish (disk was near 3 GB).
+- **Countdowns measured in the renders** (measure_countdowns.py): P1 Round 1 (3 s) and HOLD ON! (5 s), P2 Round 1 and the Showdown (5 s):
+  every number steps 1.00 s exactly, on the tick; the bell lands on 0. (The Showdown ring is at x 1340 in EP21; measure_countdowns.py updated.)
+- **Review pack:** `qa/buddy_faces_p1.jpg` / `_p2.jpg` (every pose on screen with its reason; all in pose_reasons.json), `qa/preview_p1_clips.mp4`
+  (106.5 s) / `_p2` (126.7 s) (not committed), `qa/highlights.jpg` (14 labelled stills), `qa/ep1_compare_p1.jpg` / `_p2`, `thumb_part1.jpg`
+  (SAME WAY EVERY TIME?!) / `thumb_part2.jpg` (THE NEEDLE MOVES?!), `app_moments.json` (21A / 21B), `production/youtube/chapters_p3.json`
+  EP21_P1 / EP21_P2. `explained_upload.py upload.json --check`: OK (both parts after A72s28TeDnU in both playlists; 6zA-Adh7QqU retired with
+  the NEW VERSION line naming EP20 Part 1 b3tBp6ptTvY and EP21 Part 1).
+- **Still weak / for the reviewer:** the hands in the needle journey and the ship's bridge are simple; the dare's strokes are the magnet's own
+  motion (no paw); the globe is our own simple drawing (one face only, so no Americas in lcearth); the trail map board outside the compass
+  case in the needle journey is a plain soft rectangle; Basil gets no cheer after NEEDLE (his confident outcome runs to the scene's end).
