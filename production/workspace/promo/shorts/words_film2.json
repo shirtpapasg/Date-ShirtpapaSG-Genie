@@ -1,0 +1,612 @@
+{
+ "film": 2,
+ "lines": [
+  {
+   "speaker": "Heart",
+   "text": "Three Guardians keep the Station's sparkle alight.",
+   "start": 2.73,
+   "end": 5.34,
+   "words": [
+    {
+     "w": "Three",
+     "s": 2.73,
+     "e": 2.91
+    },
+    {
+     "w": "Guardians",
+     "s": 2.91,
+     "e": 3.35
+    },
+    {
+     "w": "keep",
+     "s": 3.35,
+     "e": 3.81
+    },
+    {
+     "w": "the",
+     "s": 3.81,
+     "e": 3.97
+    },
+    {
+     "w": "Station's",
+     "s": 3.97,
+     "e": 4.63
+    },
+    {
+     "w": "sparkle",
+     "s": 4.63,
+     "e": 4.91
+    },
+    {
+     "w": "alight.",
+     "s": 4.91,
+     "e": 5.23
+    }
+   ]
+  },
+  {
+   "speaker": "Heart",
+   "text": "They have never once slept.",
+   "start": 6.32,
+   "end": 7.66,
+   "words": [
+    {
+     "w": "They",
+     "s": 6.32,
+     "e": 6.46
+    },
+    {
+     "w": "have",
+     "s": 6.46,
+     "e": 6.6
+    },
+    {
+     "w": "never",
+     "s": 6.6,
+     "e": 6.86
+    },
+    {
+     "w": "once",
+     "s": 6.86,
+     "e": 7.14
+    },
+    {
+     "w": "slept.",
+     "s": 7.14,
+     "e": 7.46
+    }
+   ]
+  },
+  {
+   "speaker": "Momo",
+   "text": "They never sleep!",
+   "start": 12.35,
+   "end": 13.49,
+   "words": [
+    {
+     "w": "They",
+     "s": 12.35,
+     "e": 12.53
+    },
+    {
+     "w": "never",
+     "s": 12.53,
+     "e": 12.81
+    },
+    {
+     "w": "sleep!",
+     "s": 12.81,
+     "e": 13.17
+    }
+   ]
+  },
+  {
+   "speaker": "Pip",
+   "text": "Then something has enchanted them.",
+   "start": 13.61,
+   "end": 15.49,
+   "words": [
+    {
+     "w": "Then",
+     "s": 13.61,
+     "e": 13.83
+    },
+    {
+     "w": "something",
+     "s": 13.83,
+     "e": 14.21
+    },
+    {
+     "w": "has",
+     "s": 14.21,
+     "e": 14.49
+    },
+    {
+     "w": "enchanted",
+     "s": 14.49,
+     "e": 15.01
+    },
+    {
+     "w": "them.",
+     "s": 15.01,
+     "e": 15.31
+    }
+   ]
+  },
+  {
+   "speaker": "Momo",
+   "text": "WAKE UP!",
+   "start": 17.34,
+   "end": 18.13,
+   "words": [
+    {
+     "w": "WAKE",
+     "s": 17.34,
+     "e": 17.66
+    },
+    {
+     "w": "UP!",
+     "s": 17.66,
+     "e": 17.92
+    }
+   ]
+  },
+  {
+   "speaker": "Basil",
+   "text": "Shouting will not do it.",
+   "start": 19.08,
+   "end": 20.24,
+   "words": [
+    {
+     "w": "Shouting",
+     "s": 19.08,
+     "e": 19.42
+    },
+    {
+     "w": "will",
+     "s": 19.42,
+     "e": 19.54
+    },
+    {
+     "w": "not",
+     "s": 19.54,
+     "e": 19.74
+    },
+    {
+     "w": "do",
+     "s": 19.74,
+     "e": 19.9
+    },
+    {
+     "w": "it.",
+     "s": 19.9,
+     "e": 20.06
+    }
+   ]
+  },
+  {
+   "speaker": "Basil",
+   "text": "Look: each one is missing something.",
+   "start": 21.48,
+   "end": 23.07,
+   "words": [
+    {
+     "w": "Look:",
+     "s": 21.48,
+     "e": 21.66
+    },
+    {
+     "w": "each",
+     "s": 21.78,
+     "e": 21.88
+    },
+    {
+     "w": "one",
+     "s": 21.88,
+     "e": 22.04
+    },
+    {
+     "w": "is",
+     "s": 22.04,
+     "e": 22.14
+    },
+    {
+     "w": "missing",
+     "s": 22.14,
+     "e": 22.34
+    },
+    {
+     "w": "something.",
+     "s": 22.34,
+     "e": 22.74
+    }
+   ]
+  },
+  {
+   "speaker": "Basil",
+   "text": "In the School Lab, we find out.",
+   "start": 24.74,
+   "end": 26.28,
+   "words": [
+    {
+     "w": "In",
+     "s": 24.74,
+     "e": 24.84
+    },
+    {
+     "w": "the",
+     "s": 24.84,
+     "e": 24.92
+    },
+    {
+     "w": "School",
+     "s": 24.92,
+     "e": 25.14
+    },
+    {
+     "w": "Lab,",
+     "s": 25.14,
+     "e": 25.42
+    },
+    {
+     "w": "we",
+     "s": 25.48,
+     "e": 25.58
+    },
+    {
+     "w": "find",
+     "s": 25.58,
+     "e": 25.8
+    },
+    {
+     "w": "out.",
+     "s": 25.8,
+     "e": 26.06
+    }
+   ]
+  },
+  {
+   "speaker": "Heart",
+   "text": "Heat flows from a hotter object to a colder one.",
+   "start": 31.58,
+   "end": 34.19,
+   "words": [
+    {
+     "w": "Heat",
+     "s": 31.58,
+     "e": 31.78
+    },
+    {
+     "w": "flows",
+     "s": 31.78,
+     "e": 32.08
+    },
+    {
+     "w": "from",
+     "s": 32.08,
+     "e": 32.38
+    },
+    {
+     "w": "a",
+     "s": 32.38,
+     "e": 32.5
+    },
+    {
+     "w": "hotter",
+     "s": 32.5,
+     "e": 32.72
+    },
+    {
+     "w": "object",
+     "s": 32.72,
+     "e": 33.16
+    },
+    {
+     "w": "to",
+     "s": 33.16,
+     "e": 33.48
+    },
+    {
+     "w": "a",
+     "s": 33.48,
+     "e": 33.6
+    },
+    {
+     "w": "colder",
+     "s": 33.6,
+     "e": 33.82
+    },
+    {
+     "w": "one.",
+     "s": 33.82,
+     "e": 34.1
+    }
+   ]
+  },
+  {
+   "speaker": "Momo",
+   "text": "One!",
+   "start": 34.7,
+   "end": 35.29,
+   "words": [
+    {
+     "w": "One!",
+     "s": 34.7,
+     "e": 34.98
+    }
+   ]
+  },
+  {
+   "speaker": "Heart",
+   "text": "Light can be reflected.",
+   "start": 39.98,
+   "end": 41.23,
+   "words": [
+    {
+     "w": "Light",
+     "s": 39.98,
+     "e": 40.24
+    },
+    {
+     "w": "can",
+     "s": 40.24,
+     "e": 40.48
+    },
+    {
+     "w": "be",
+     "s": 40.48,
+     "e": 40.58
+    },
+    {
+     "w": "reflected.",
+     "s": 40.58,
+     "e": 40.94
+    }
+   ]
+  },
+  {
+   "speaker": "Pip",
+   "text": "Two!",
+   "start": 42.04,
+   "end": 42.69,
+   "words": [
+    {
+     "w": "Two!",
+     "s": 42.04,
+     "e": 42.36
+    }
+   ]
+  },
+  {
+   "speaker": "Heart",
+   "text": "A magnet attracts iron.",
+   "start": 47.42,
+   "end": 48.79,
+   "words": [
+    {
+     "w": "A",
+     "s": 47.42,
+     "e": 47.52
+    },
+    {
+     "w": "magnet",
+     "s": 47.52,
+     "e": 47.82
+    },
+    {
+     "w": "attracts",
+     "s": 47.82,
+     "e": 48.24
+    },
+    {
+     "w": "iron.",
+     "s": 48.24,
+     "e": 48.64
+    }
+   ]
+  },
+  {
+   "speaker": "Basil",
+   "text": "Three.",
+   "start": 49.91,
+   "end": 50.5,
+   "words": [
+    {
+     "w": "Three.",
+     "s": 49.91,
+     "e": 50.21
+    }
+   ]
+  },
+  {
+   "speaker": "Momo",
+   "text": "You woke them! You did the science!",
+   "start": 55.14,
+   "end": 58.22,
+   "words": [
+    {
+     "w": "You",
+     "s": 55.14,
+     "e": 55.3
+    },
+    {
+     "w": "woke",
+     "s": 55.3,
+     "e": 55.48
+    },
+    {
+     "w": "them!",
+     "s": 55.48,
+     "e": 55.76
+    },
+    {
+     "w": "You",
+     "s": 57.05,
+     "e": 57.21
+    },
+    {
+     "w": "did",
+     "s": 57.21,
+     "e": 57.33
+    },
+    {
+     "w": "the",
+     "s": 57.33,
+     "e": 57.49
+    },
+    {
+     "w": "science!",
+     "s": 57.49,
+     "e": 57.85
+    }
+   ]
+  },
+  {
+   "speaker": "Pip",
+   "text": "And the Guardians can be your buddies too.",
+   "start": 60.15,
+   "end": 62.27,
+   "words": [
+    {
+     "w": "And",
+     "s": 60.15,
+     "e": 60.27
+    },
+    {
+     "w": "the",
+     "s": 60.27,
+     "e": 60.37
+    },
+    {
+     "w": "Guardians",
+     "s": 60.37,
+     "e": 60.79
+    },
+    {
+     "w": "can",
+     "s": 60.79,
+     "e": 61.13
+    },
+    {
+     "w": "be",
+     "s": 61.13,
+     "e": 61.31
+    },
+    {
+     "w": "your",
+     "s": 61.31,
+     "e": 61.45
+    },
+    {
+     "w": "buddies",
+     "s": 61.45,
+     "e": 61.65
+    },
+    {
+     "w": "too.",
+     "s": 61.65,
+     "e": 62.03
+    }
+   ]
+  },
+  {
+   "speaker": "Heart",
+   "text": "The only app you need to learn Science.",
+   "start": 64.52,
+   "end": 66.44,
+   "words": [
+    {
+     "w": "The",
+     "s": 64.52,
+     "e": 64.64
+    },
+    {
+     "w": "only",
+     "s": 64.64,
+     "e": 64.92
+    },
+    {
+     "w": "app",
+     "s": 64.92,
+     "e": 65.18
+    },
+    {
+     "w": "you",
+     "s": 65.18,
+     "e": 65.34
+    },
+    {
+     "w": "need",
+     "s": 65.34,
+     "e": 65.46
+    },
+    {
+     "w": "to",
+     "s": 65.46,
+     "e": 65.64
+    },
+    {
+     "w": "learn",
+     "s": 65.64,
+     "e": 65.82
+    },
+    {
+     "w": "Science.",
+     "s": 65.82,
+     "e": 66.14
+    }
+   ]
+  },
+  {
+   "speaker": "Pip, Momo and Basil",
+   "text": "TheOneApp!",
+   "start": 66.96,
+   "end": 68.04,
+   "words": [
+    {
+     "w": "TheOneApp!",
+     "s": 66.96,
+     "e": 67.68
+    }
+   ]
+  },
+  {
+   "speaker": "Basil",
+   "text": "Next time... who stole the light?",
+   "start": 70.39,
+   "end": 73.32,
+   "words": [
+    {
+     "w": "Next",
+     "s": 70.39,
+     "e": 70.63
+    },
+    {
+     "w": "time...",
+     "s": 70.63,
+     "e": 71.23
+    },
+    {
+     "w": "who",
+     "s": 72.28,
+     "e": 72.38
+    },
+    {
+     "w": "stole",
+     "s": 72.38,
+     "e": 72.62
+    },
+    {
+     "w": "the",
+     "s": 72.62,
+     "e": 72.8
+    },
+    {
+     "w": "light?",
+     "s": 72.8,
+     "e": 73.02
+    }
+   ]
+  }
+ ]
+}

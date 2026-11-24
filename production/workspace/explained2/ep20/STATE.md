@@ -187,3 +187,23 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 
 ## 24 Nov: LIVE
 Teacher: "ok to upload episode 20". Part 1 b3tBp6ptTvY, Part 2 A72s28TeDnU (after EP19 in both playlists); classic VLGDU0qduEw retired (NEW VERSION line -> EP19 P1 + EP20 P1). ep21/upload.json {EP20_P1} filled.
+
+## 24 Nov: the teacher's three drawing notes fixed (art-fix agent, Opus; commits 3cc1bd4, 19ad3e2)
+- **The pencil passes THROUGH the rings.** art20.js `rings20`: after each ring, `pencilThrough(y, sign)` draws the pencil's piece over the
+  ring's back half again (clipped from the pencil itself: `M-34 y-39 V y A34 11 0 0 0 34 y` in the pencil's coordinates, i.e. from just above
+  the top face's back edge down to the hole's front lip); skipped while the top ring is tilted or half-way through a turn-over; mirrored for
+  a ring turned over. The same in `ep19dare.js` pencilRings and ../ep19/art19.js. The ring is lifted right OFF the pencil (tip -570) before it
+  is turned over: P1 `topRing` RING_UP -650, P2 lcLikeArt LC_UP -650 (turn arrows moved above it).
+- **HOLD ON! picture** (P1 SC.holdon): one cream disc on RG, the picture clipped to r = RR - 24, `TF(RG, +100, .49, rings20)` (pencil tip
+  179 px above the centre, the plasticine above the number badge). Round 1's ringP1: `TF(430, 595, .5)`. lockN (common.js, EP16-EP22) now
+  clips every lock-in picture to the ring's inner circle.
+- **"Be the top ring magnet"** (P1 SC.shrink, lc20.js `ringJourney` / `ringJState` / `ringJCam`): a SIDE VIEW at ring size, one shot. The
+  camera follows you sliding down from near the tip (jslide), eases back to show the bottom ring and the bench (jbelow), pushes in as you
+  slow and stop (jslow-jstop), and on the empty gap (jgap). YOU: sun-yellow glow + outline, eyes on your rim (shut while pressed), the
+  "You: the top ring magnet" tag joined to you. Push arrows in the gap (up on you, down on the bottom ring), thicker and longer as Pip's
+  finger (hand15, four fingers and a thumb) presses; "a push / no glue / no string" joined to the gap. The buddies stand on the bench (world
+  positions, scaled with the camera; Basil points at jbelow, Momo surprised at jstop). Same marks, timings, sound.
+- Face close-ups: P2 Momo's oops moved to (1010, 330) (it covered WHICH POLES FACE?). P1 Pip's oops at CLICK unchanged.
+- **Part 2 re-rendered** (EP20 P1 is the opening-fix agent's): `ep20_part2.mp4` **345.9 s**, -16.0 LUFS, peak -1.6 dBFS, Kampong Walk bed
+  (add_lofi.py), countdowns 1.00 s steps (measure_countdowns.py 2); `qa/preview_p2_720p.mp4` (not committed). tl_p2 / srt / cues unchanged.
+  upload_v2.json: explained-p3-ep20v2-part2 replaces A72s28TeDnU; chapters key EP20_P2_v2 (= the live Part 2's). Not uploaded.

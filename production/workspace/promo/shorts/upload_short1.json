@@ -1,0 +1,48 @@
+{
+ "key": "theoneapp-promo-film1-short",
+ "parts": [
+  {
+   "key": "theoneapp-promo-film1-short",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/promo/shorts/film1_short.mp4",
+   "title": "A Fog That Makes You Forget?! | TheOneApp Promo 1 #Shorts",
+   "description": "The Forgetting Fog rolls into TheOneApp Station and the light goes out. Pip, Momo and Basil need a scientist to close the circuit. Are you the one? A short adventure from TheOneApp, the science study app for Primary 3 to 6 in Singapore.\n\nParents: see TheOneApp and try it free for 7 days at https://theoneapp.sg\n\nThe only app you need to learn Science: TheOneApp.",
+   "tags": [
+    "theoneapp",
+    "primary science",
+    "singapore",
+    "shorts",
+    "electricity",
+    "circuit",
+    "conductor"
+   ],
+   "madeForKids": null
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLO1GzAf41cwM",
+   "shorts": true
+  }
+ ],
+ "replaces": [],
+ "retire_old": false,
+ "ad_cut": {
+  "key": "theoneapp-promo-film1-short60-ad",
+  "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/promo/shorts/film1_short60.mp4",
+  "title": "The Forgetting Fog | TheOneApp, the science study app for P3-P6 #Shorts",
+  "description": "Your child learns Science by watching, quizzing and keeping what they learn, with Pip, Momo and Basil. TheOneApp: the science study app for Primary 3 to 6 in Singapore. Try it free for 7 days at https://theoneapp.sg",
+  "tags": [
+   "theoneapp",
+   "primary science",
+   "singapore",
+   "electricity",
+   "circuit",
+   "conductor"
+  ],
+  "madeForKids": null,
+  "privacy": "unlisted",
+  "_note": "For Google Ads (Shorts ads must be <= 60 s). Kept out of 'parts' so explained_upload.py cannot publish it. Upload unlisted and link it in Google Ads."
+ },
+ "_madeForKids": "UNDECIDED (teacher). The research could not confirm that a made-for-kids video is barred from Google Ads; see SHORTS_NOTES.md section 1. The audience setting must honestly say whether the video is directed at children. NB explained_upload.py and sau_upload.py always send selfDeclaredMadeForKids: true and ignore this field.",
+ "_note": "Teacher 24 Nov 2026: 'make these promo videos into shorts ... I will want to advertise it soon.' Vertical 1080x1920 60 fps Short of the whole re-voiced film (make_short.py). Not uploaded. A Short's cover is picked from its frames in the YouTube app: frame 0 is the hook title, made to be the cover."
+}

@@ -38,7 +38,7 @@ SRC = os.path.join(REV, f'film{N}_v2.mp4')
 probe = json.loads(subprocess.run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-count_packets', '-show_entries', 'stream=nb_read_packets,width,height',
                                    '-of', 'json', SRC], capture_output=True, text=True).stdout)['streams'][0]
 NF = int(probe['nb_read_packets']); DUR = NF / FPS
-KEEP = P.CUT if CUT else [(0, DUR)]                       # source time ranges kept, in order
+KEEP = [(round(a * FPS) / FPS, round(b * FPS) / FPS) for a, b in P.CUT] if CUT else [(0, DUR)]   # source ranges kept, snapped to frames so sound and picture cut together
 def kept(i):
     t = i / FPS; return any(a - 1e-9 <= t < b - 1e-9 for a, b in KEEP)
 OUT_FRAMES = [i for i in range(NF) if kept(i)]; OUT_DUR = len(OUT_FRAMES) / FPS
@@ -156,7 +156,7 @@ def render(frame, t, tout):
     small = im.resize((240, 135), Image.BOX)
     bw = 135 * OW / OH; bx = min(240 - bw, max(0, cx / 8 - bw / 2))
     bg = small.resize((54, 96), Image.BILINEAR, box=(bx, 0, bx + bw, 135)).filter(ImageFilter.GaussianBlur(2.2)).resize((OW, OH), Image.BICUBIC)
-    canvas = Image.eval(bg, lambda v: int(v * .52))
+    canvas = Image.eval(bg, lambda v: int(v * .6))
     pic = im.resize((OW, dh), Image.BICUBIC, box=(x0, top, x0 + w, yb))
     if Y >= 0: canvas.paste(pic, (0, Y), picmask(dh) if Y > 4 else None)
     else: canvas.paste(pic.crop((0, -Y, OW, dh)), (0, 0))
@@ -167,7 +167,9 @@ def render(frame, t, tout):
     refl = Image.eval(refl, lambda v: int(v * .7)); canvas.paste(refl, (0, PIC_BOT), G['reflmask'].crop((0, 0, OW, rh)))
     # end card: the picture dims, then the card
     ea = smooth((tout - (OUT_DUR - END)) / .35)
-    if ea > 0: canvas = Image.blend(canvas, Image.new('RGB', canvas.size, INK), .45 * ea)
+    if ea > 0:      # the picture goes soft and dark under the card
+        soft = canvas.resize((OW // 8, OH // 8), Image.BOX).filter(ImageFilter.GaussianBlur(1.2)).resize((OW, OH), Image.BICUBIC)
+        canvas = Image.blend(Image.blend(canvas, soft, ea), Image.new('RGB', canvas.size, INK), .5 * ea)
     # captions (hidden under the end card and the hook)
     for c in G['caps']:
         if c['s'] <= t < c['e'] and ea < .5:
@@ -209,17 +211,18 @@ if __name__ == '__main__':
         ts = [round(t * FPS) / FPS for t in np.arange(t0, t1, step)]
         init(); tiles = []
         for (k, b), t in zip(frames(ts), ts):
-            img = Image.frombytes('RGB', (OW, OH), render(b, t, t)).resize((216, 384), Image.BILINEAR)
+            tw = int(os.environ.get('PW', 216)); th = tw * 16 // 9
+            img = Image.frombytes('RGB', (OW, OH), render(b, t, t)).resize((tw, th), Image.BILINEAR)
             d = ImageDraw.Draw(img); d.rectangle([0, 0, 52, 14], fill='black'); d.text((2, 1), f'{t:.2f}', fill='yellow')
-            d.line([0, 288, 216, 288], fill=(255, 0, 0)); d.line([190, 0, 190, 384], fill=(255, 0, 0)); tiles.append(img)
-        cols = 10; sh = Image.new('RGB', (cols * 220, ((len(tiles) + cols - 1) // cols) * 388), 'white')
-        for k, im in enumerate(tiles): sh.paste(im, ((k % cols) * 220, (k // cols) * 388))
+            d.line([0, th * 3 // 4, tw, th * 3 // 4], fill=(255, 0, 0)); d.line([tw * 190 // 216, 0, tw * 190 // 216, th], fill=(255, 0, 0)); tiles.append(img)
+        cols = int(os.environ.get('COLS', 10)); sh = Image.new('RGB', (cols * (tw + 4), ((len(tiles) + cols - 1) // cols) * (th + 4)), 'white')
+        for k, im in enumerate(tiles): sh.paste(im, ((k % cols) * (tw + 4), (k // cols) * (th + 4)))
         out = os.path.join(SCR, f'preview{N}.jpg'); sh.save(out, quality=85); print(out); sys.exit()
 
     out = os.path.join(H, f'film{N}_short60.mp4' if CUT else f'film{N}_short.mp4')
-    # audio: the kept ranges of the film's own mix (a 30 ms fade at each join of the ad cut), AAC 192k
+    # audio: the kept ranges of the film's own mix (a 60 ms fade at each join of the ad cut), AAC 192k
     if CUT:
-        parts = ''.join(f'[1:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.03,afade=t=out:st={b - a - 0.03:.3f}:d=0.03[a{k}];' for k, (a, b) in enumerate(KEEP))
+        parts = ''.join(f'[1:a]atrim={a}:{b},asetpts=PTS-STARTPTS,afade=t=in:d=0.06,afade=t=out:st={b - a - 0.06:.3f}:d=0.06[a{k}];' for k, (a, b) in enumerate(KEEP))
         afil = ['-filter_complex', parts + ''.join(f'[a{k}]' for k in range(len(KEEP))) + f'concat=n={len(KEEP)}:v=0:a=1[aout]', '-map', '0:v', '-map', '[aout]']
     else:
         afil = ['-map', '0:v', '-map', '1:a']
