@@ -183,10 +183,9 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260],
       + labels + TF(1700, 800 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 640 + bob * .6, 1.2) + TF(1700, 990, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
     + (t >= MK("onmag") ? linkChip(t, MK("onmag") + .2, 760, 560, pawPt("basil", BH[0], BH[1], BH[2], false)[0] + 340, pawPt("basil", BH[0], BH[1], BH[2], false)[1] + 20, "#D9468F", "the clips are on the magnet!", 40, tB + .4) : "")
     + (t >= MK("chipfar") ? linkChip(t, MK("chipfar") + .2, 1150, 470, camPt(cam, [1150, 640])[0], camPt(cam, [1150, 640])[1], GOODC, "Test it with the magnet far away!", 42, MK("strip") + 1.2) : "")
-    + bd("momo", 1490, 1010, 360, t, { in: LT(c) + .45, flip: true })
+    + bd("momo", 1490, 1010, 360, t, { in: LT(c) + .45, flip: true, poses: [[tB + .6, "arms_crossed"]], jump: [[tB + .65, 22]] })   /* teacher 24 Nov: no face close-up for a calm "told you so"; Momo nods in place */
     + bd("pip", 1770, 1076, 500, t, { in: LT(c) + .3, flip: true })
     + bd("basil", BH[0], 1076, BH[2], t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [W(b, "something") + .9, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 30]], nohop: true }) + (ring ? "" : holdThings(t))
-    + faceCam("momo", t, tB + .6, tB + 2.5, 1560, 330, 150, [[tB + .6, "arms_crossed"]], { noreact: true })
     + (t >= MK("strip") ? stripTwo(t) : "")
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 960, 330, "+1", "arms crossed") + smallPrint(t, MK("try"), PHONE_RULE) + HUD(t); };
 // the cream strip 7.2 step 4 (two sentences): two lines, the words appearing as Heart says them (bookCaption, off = the second sentence's first word)

@@ -178,9 +178,8 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260],
     + linkChip(t, MK("freeturn") + .3, gm[0] + 330, gm[1] - 220, gm[0] + 40, gm[1] - 20, 0, "free to turn!", 44)
     + (t >= tF ? `<circle cx="${n2(gm[0])}" cy="${n2(gm[1])}" r="${n2(120 + 400 * eo((t - tF) / .6))}" fill="none" stroke="${NSC}" stroke-width="${n2(10 * (1 - clamp((t - tF) / .6)))}" opacity="${n2(1 - clamp((t - tF) / .6))}"/>` : "")
     + bd("pip", 1720, 1076, 500, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "arms_crossed"]] })
-    + bd("momo", 1420, 1010, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "arms_crossed"]] })
+    + bd("momo", 1420, 1010, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "arms_crossed"]], jump: [[tF + .15, 22]] })   /* teacher 24 Nov: no face close-up for a calm nod; Momo nods in place */
     + bd("basil", 250, 1076, 480, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("m901b") + .1, "pointing"], [Math.max(LE("m901b") + 1.2, W(b, "something") + .9), "thinking"], [bell + .35, "sit"]], jump: [[MK("tangle") - .05, 16], [bell + .02, 30]], nohop: true })
-    + faceCam("momo", t, tF + .1, tF + 2.2, 640, 330, 150, [[tF + .1, "arms_crossed"]], { noreact: true })
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + smallPrint(t, MK("try"), PHONE_RULE) + HUD(t); };
 
 /* 10 · Momo at the still magnet: "But how does the magnet know which way is North? Nothing is touching it!" (talks, then thinks: a real

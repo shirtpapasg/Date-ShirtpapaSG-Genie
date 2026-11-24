@@ -418,6 +418,7 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   actually make use of Pip, Momo or Basil, showing an angry / shocked face!").** Every impact or surprise beat is felt: a quick camera
   jolt, an impact flash and burst timed to the sound, and a close-up of a buddy's face reacting big (shocked, wincing, grumpy), then
   the follow-up feeling (relief, a cheer). A label alone is never enough. `reference/impact_bad_ep12_hardknock_flat.webp`.
+- **A face close-up (the round "faceCam") is only for a BIG feeling (teacher, 2026-11-24, on EP21's Momo: "Why is Momo face in the circle?").** Use it only on an impact or surprise, and only when that buddy's face shows the feeling clearly: shocked, wincing, oops, grumpy. Never use it for a calm nod or a "told you so", and never while the same buddy already stands in the shot with nothing to say. A calm reaction is a hop, a nod or a pose change on the buddy where it stands. The circle must never cover the thing being taught.
 - **Objects never float or fly.**
   - Things travel low along the ground in small hops with dust puffs, or are carried or slid by the buddies.
   - Nothing hangs above the buddies' heads.
