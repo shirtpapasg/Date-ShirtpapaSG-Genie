@@ -76,7 +76,8 @@ def group(text):
 
 def say(text):
     """the caption's words as spoken: a leading "..." dropped, a word in capitals ("YES!") said as a word, not spelt out"""
-    t = re.sub(r"^\.+\s*", "", text.strip())
+    t = re.sub(r"^\.+\s*", "", text.strip()); t = t[:1].upper() + t[1:]   # a part said as its own sentence ("Who stole the light?")
+    t = re.sub(r"\bOoh\b", "Ooooh", t)   # Kokoro's short "Ooh" in Pip's voice was heard as "Ew"; the longer spelling reads as "ooh"
     return re.sub(r"\b[A-Z]{2,}\b", lambda m: m.group(0).capitalize(), t)
 
 WHO = {"Heart": "heart", "Pip": "pip", "Momo": "momo", "Basil": "basil", "Pip, Momo and Basil": "group"}
@@ -89,7 +90,7 @@ if __name__ == "__main__":
             # each part is recorded on its own and mix.py starts it where the old voice said it
             parts = [p[0] for p in ln["parts"]] if ln.get("parts") else [ln["text"]]
             for j, text in enumerate(parts):
-                pid = id if len(parts) == 1 else f"{id}_{j}"; wav = f"{V}/{pid}.wav"; meta = f"{V}/{pid}.txt"; key = ln["speaker"] + "|" + text
+                pid = id if len(parts) == 1 else f"{id}_{j}"; wav = f"{V}/{pid}.wav"; meta = f"{V}/{pid}.txt"; key = ln["speaker"] + "|" + say(text)
                 if os.path.exists(wav) and os.path.exists(meta) and open(meta).read() == key: continue
                 if who == "heart": x, sr = heart(say(text), False, .4, .95)
                 elif who == "group": x, sr = group(say(text))

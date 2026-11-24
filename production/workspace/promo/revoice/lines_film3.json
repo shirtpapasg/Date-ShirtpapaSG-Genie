@@ -7,74 +7,129 @@
   {
    "speaker": "Heart",
    "text": "Every night, the great lamp lights the Station.",
-   "start": 2.14,
-   "end": 5.36
+   "start": 2.53,
+   "end": 4.96,
+   "start_rough": 2.14,
+   "end_rough": 5.36,
+   "new_start": 2.53,
+   "new_end": 4.9,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "A riddle!",
-   "start": 10.04,
-   "end": 11.14
+   "start": 10.51,
+   "end": 11.25,
+   "start_rough": 10.04,
+   "end_rough": 11.14,
+   "new_start": 10.51,
+   "new_end": 11.25,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "A curse!",
-   "start": 11.64,
-   "end": 12.16
+   "start": 11.67,
+   "end": 12.25,
+   "start_rough": 11.64,
+   "end_rough": 12.16,
+   "new_start": 11.67,
+   "new_end": 12.44,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "...A clue.",
-   "start": 12.94,
-   "end": 13.46
+   "start": 12.92,
+   "end": 13.63,
+   "start_rough": 12.94,
+   "end_rough": 13.46,
+   "new_start": 12.92,
+   "new_end": 13.59,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "Shoo!",
-   "start": 15.72,
-   "end": 15.88
+   "start": 15.56,
+   "end": 15.94,
+   "start_rough": 15.72,
+   "end_rough": 15.88,
+   "new_start": 15.56,
+   "new_end": 16.16,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "Colour will not move it either.",
-   "start": 18.22,
-   "end": 19.94
+   "start": 18.37,
+   "end": 20.0,
+   "start_rough": 18.22,
+   "end_rough": 19.94,
+   "new_start": 18.37,
+   "new_end": 19.99,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "On a mind map, we link what we see.",
-   "start": 22.02,
-   "end": 24.3
+   "start": 22.53,
+   "end": 24.36,
+   "start_rough": 22.02,
+   "end_rough": 24.3,
+   "new_start": 22.53,
+   "new_end": 24.32,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "This dark has a shape.",
    "start": 25.52,
-   "end": 26.88
+   "end": 27.06,
+   "start_rough": 25.52,
+   "end_rough": 26.88,
+   "new_start": 25.52,
+   "new_end": 26.71,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "So it is a shadow.",
-   "start": 27.64,
-   "end": 29.18
+   "start": 28.04,
+   "end": 29.44,
+   "start_rough": 27.64,
+   "end_rough": 29.18,
+   "new_start": 28.04,
+   "new_end": 29.02,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "A shadow forms when an object blocks light.",
-   "start": 32.04,
-   "end": 34.34
+   "start": 31.97,
+   "end": 34.42,
+   "start_rough": 32.04,
+   "end_rough": 34.34,
+   "new_start": 31.97,
+   "new_end": 34.3,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "Closer to the light, the shadow grows.",
-   "start": 35.52,
-   "end": 37.5
+   "start": 35.54,
+   "end": 37.56,
+   "start_rough": 35.52,
+   "end_rough": 37.5,
+   "new_start": 35.54,
+   "new_end": 37.4,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "The airship! It is blocking the lamp!",
-   "start": 41.66,
-   "end": 44.84,
+   "start": 41.59,
+   "end": 44.86,
    "parts": [
     [
      "The airship!",
@@ -84,55 +139,104 @@
      "It is blocking the lamp!",
      43.32
     ]
+   ],
+   "start_rough": 41.66,
+   "end_rough": 44.84,
+   "new_start": 41.59,
+   "new_end": 44.92,
+   "tempo": 1.0,
+   "part_starts": [
+    41.59,
+    43.51
    ]
   },
   {
    "speaker": "Pip",
    "text": "How do we bring the light back?",
-   "start": 46.46,
-   "end": 47.76
+   "start": 46.49,
+   "end": 48.0,
+   "start_rough": 46.46,
+   "end_rough": 47.76,
+   "new_start": 46.49,
+   "new_end": 48.06,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip",
    "text": "We need a scientist.",
-   "start": 48.66,
-   "end": 50.2
+   "start": 49.11,
+   "end": 50.39,
+   "start_rough": 48.66,
+   "end_rough": 50.2,
+   "new_start": 49.11,
+   "new_end": 50.51,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip, Momo and Basil",
    "text": "We need you.",
-   "start": 51.02,
-   "end": 51.76
+   "start": 50.9,
+   "end": 51.91,
+   "start_rough": 51.02,
+   "end_rough": 51.76,
+   "new_start": 50.9,
+   "new_end": 52.02,
+   "tempo": 1.0
   },
   {
    "speaker": "Heart",
    "text": "Take away what blocks the light, and the shadow is gone.",
-   "start": 55.3,
-   "end": 58.86
+   "start": 55.97,
+   "end": 58.93,
+   "start_rough": 55.3,
+   "end_rough": 58.86,
+   "new_start": 55.97,
+   "new_end": 58.91,
+   "tempo": 1.0
   },
   {
    "speaker": "Momo",
    "text": "Not a curse.",
-   "start": 62.38,
-   "end": 62.88
+   "start": 62.25,
+   "end": 62.94,
+   "start_rough": 62.38,
+   "end_rough": 62.88,
+   "new_start": 62.25,
+   "new_end": 63.2,
+   "tempo": 1.0
   },
   {
    "speaker": "Basil",
    "text": "Science.",
-   "start": 63.72,
-   "end": 64.02
+   "start": 63.57,
+   "end": 64.19,
+   "start_rough": 63.72,
+   "end_rough": 64.02,
+   "new_start": 63.57,
+   "new_end": 64.21,
+   "tempo": 1.0
   },
   {
    "speaker": "Heart",
    "text": "The only app you need to learn Science.",
-   "start": 67.1,
-   "end": 69.2
+   "start": 67.35,
+   "end": 69.29,
+   "start_rough": 67.1,
+   "end_rough": 69.2,
+   "new_start": 67.35,
+   "new_end": 69.27,
+   "tempo": 1.0
   },
   {
    "speaker": "Pip, Momo and Basil",
    "text": "TheOneApp!",
-   "start": 69.88,
-   "end": 70.48
+   "start": 69.73,
+   "end": 70.64,
+   "start_rough": 69.88,
+   "end_rough": 70.48,
+   "new_start": 69.73,
+   "new_end": 70.81,
+   "tempo": 1.0
   }
  ]
 }
