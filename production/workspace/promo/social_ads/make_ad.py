@@ -96,16 +96,19 @@ def src(name):
     if name not in _img: _img[name] = Image.open(os.path.join(SH, name + '.jpg')).convert('RGB')
     return _img[name]
 def typing_parts():
-    a, b = src('mk_ask'), src('mk_typed'); y0 = 1450
-    d = np.asarray(ImageChops.difference(a.crop((0, y0, a.width, 2100)), b.crop((0, y0, b.width, 2100))).convert('L')) > 40
+    """The answer box: the typed screen (focused box) with its text lines blanked is the base; the lines are then revealed left to
+    right. Only the box's inside is compared (its border changes colour on focus and must not wipe in with the words)."""
+    a, b = src('mk_ask'), src('mk_typed'); x0, y0, x1, y1 = 140, 1580, 1060, 1985
+    d = np.asarray(ImageChops.difference(a.crop((x0, y0, x1, y1)), b.crop((x0, y0, x1, y1))).convert('L')) > 40
     rows = np.where(d.any(1))[0]; lines = []; s = rows[0]; p = rows[0]
     for r in rows[1:]:
         if r - p > 12: lines.append((s, p)); s = r
         p = r
-    lines.append((s, p)); out = []
+    lines.append((s, p)); out = []; base = b.copy(); bg = b.getpixel((x0 + 20, y1 - 20)); dr = ImageDraw.Draw(base)
     for s, e in lines:
-        cols = np.where(d[s:e + 1].any(0))[0]; out.append((int(cols[0]) - 4, y0 + s - 8, int(cols[-1]) + 6, y0 + e + 10))
-    return a, b, out
+        if e - s < 15: continue   # not a line of text
+        cols = np.where(d[s:e + 1].any(0))[0]; r = (x0 + int(cols[0]) - 4, y0 + s - 8, x0 + int(cols[-1]) + 6, y0 + e + 10); out.append(r); dr.rectangle(r, fill=bg)
+    return base, b, out
 def film_frames(t0, w, h, dur):
     raw = subprocess.check_output(['ffmpeg', '-loglevel', 'error', '-ss', str(t0), '-t', str(dur + .2), '-i', FILM4, '-vf',
         f'fps={FPS},crop=1200:900:360:0,scale={w}:{h}:flags=lanczos', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'])
