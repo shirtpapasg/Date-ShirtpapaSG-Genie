@@ -21,7 +21,7 @@ for v in L:
 rows = [tiles[i:i + N] for i in range(0, len(tiles), N)]; per = (8000 - 70) // (TH + LH + 10)
 for k in range(0, len(rows), per):
     rr = rows[k:k + per]; W = N * TW + (N + 1) * 10; Ht = 70 + len(rr) * (TH + LH + 10); sh = Image.new("RGB", (W, Ht), (18, 14, 46)); d = ImageDraw.Draw(sh)
-    d.text((14, 16), f"EP20 Part {P}: every buddy pose on screen, with its reason (v2 cast){'' if k == 0 else ' (cont.)'}", font=ft, fill=(255, 200, 58))
+    d.text((14, 16), f"EP21 Part {P}: every buddy pose on screen, with its reason (v2 cast){'' if k == 0 else ' (cont.)'}", font=ft, fill=(255, 200, 58))
     for r, row in enumerate(rr):
         for c, tl in enumerate(row): sh.paste(tl, (10 + c * (TW + 10), 70 + r * (TH + LH + 10)))
     out = f"{H}/qa/buddy_faces_p{P}{'' if k == 0 else '_b'}.jpg"; sh.save(out, quality=86); print(out, sh.size)
