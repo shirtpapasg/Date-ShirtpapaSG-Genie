@@ -15,3 +15,8 @@
   make_voice.py engine, NOT re-recorded as new takes: Heart's lines come out bit-identical to the recorded json (duration, mouth envelope);
   the buddies' Character Voice Kit is not bit-exact run to run (a few ms, ~3 cents pitch, envelope correlation >= .99), so those are the
   same takes within that jitter. The jsons (word times, mouths) are unchanged.
+- Noted (main session): Part 2 of EP16, EP17, EP18 and EP21 is re-rendered from unchanged code after each Part 1 (for the one-bed music
+  fix); EP19 Part 2 and EP20 Part 2 are the art-fix agent's. upload_v2.json of 16/17/18/21 carry both parts (replaces both live ids);
+  19/20 carry Part 1 only (add the art-fix agent's Part 2 there). "after" chains: EP16 after RCwRXpameIk, EP17 after
+  explained-p3-ep16v2-part2, EP18 after ...ep17v2-part2, EP19 after ...ep18v2-part2, EP20 after ...ep19v2-part2 (or JpBskDtIwb0 if EP19
+  Part 2 is not re-uploaded), EP21 after ...ep20v2-part2 (or A72s28TeDnU). Chapters keys EPNN_P1_v2 (all six) and EPNN_P2_v2 (16/17/18/21).

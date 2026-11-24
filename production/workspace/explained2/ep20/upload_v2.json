@@ -24,11 +24,11 @@
  "playlists": [
   {
    "id": "PLb8LpPqxQI4E",
-   "after": "JpBskDtIwb0"
+   "after": "explained-p3-ep19v2-part2"
   },
   {
    "id": "PLPfEuT7l4KjI",
-   "after": "JpBskDtIwb0"
+   "after": "explained-p3-ep19v2-part2"
   }
  ],
  "replaces": [
@@ -36,5 +36,5 @@
  ],
  "retire_old": true,
  "new_version_line": "▶ NEW VERSION: Why Does This Magnet FLOAT? Two Poles, a Pull and a Push (Part 1) https://www.youtube.com/watch?v={P1}",
- "_note": "v2 of EP20 Part 1 (2026-11-24; teacher: \"Not speaking for the first few seconds\", \"fix the live ones too\"; SERIES_FORMAT 11 item 1): the cold open now SPEAKS (Heart's \"Last time, we asked:\" at 0.825 s, was 6.3 s; Part 1 is 5.475 s shorter). Same title, description, tags and thumbnail as the live Part 1 (b3tBp6ptTvY); file = the new render. Part 2 is NOT re-uploaded: it already speaks at 0.30 s and the live Part 2 (A72s28TeDnU) was rendered from the current code, so it stays. \"after\" = the video right before the old Part 1 in both playlists (JpBskDtIwb0); retire_old takes b3tBp6ptTvY out of both playlists and gives it the NEW VERSION first line (never deleted). Chapters: production/youtube/chapters_p3.json key EP20_P1_v2 (swap in the new id after upload). Public, Made for Kids (the uploader sets both)."
+ "_note": "v2 of EP20 Part 1 (2026-11-24; teacher: \"Not speaking for the first few seconds\", \"fix the live ones too\"; SERIES_FORMAT 11 item 1): the cold open now SPEAKS (Heart's \"Last time, we asked:\" at 0.825 s, was 6.3 s; Part 1 is 5.475 s shorter). Same title, description, tags and thumbnail as the live Part 1 (b3tBp6ptTvY); file = the new render. Part 2 is NOT re-uploaded: it already speaks at 0.30 s and the live Part 2 (A72s28TeDnU) was rendered from the current code, so it stays. \"after\" = the video right before the old Part 1 in both playlists (explained-p3-ep19v2-part2); retire_old takes b3tBp6ptTvY out of both playlists and gives it the NEW VERSION first line (never deleted). Chapters: production/youtube/chapters_p3.json key EP20_P1_v2 (swap in the new id after upload). Public, Made for Kids (the uploader sets both). \"after\" = explained-p3-ep19v2-part2 (EP19's v2 Part 2, the art-fix agent's render); if EP19 Part 2 is NOT re-uploaded, set it to JpBskDtIwb0. EP20's Part 2 is the art-fix agent's re-render (not in this file): add it as explained-p3-ep20v2-part2 (replacing A72s28TeDnU), so EP21 v2 can chain after it."
 }
