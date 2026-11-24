@@ -1,4 +1,56 @@
 {
+ "ep16_part1": {
+  "backup": "ep16/out/nolofi_p1.m4a",
+  "bed_gain": 0.4986,
+  "bed_in_gaps_lufs_s": -24,
+  "bed_loudest_lufs_s": -24,
+  "bed_under_voice_lufs_s": -27.9,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 3,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    52.54,
+    56.11
+   ],
+   [
+    "countdown hold",
+    183.3,
+    188.87
+   ],
+   [
+    "now you know",
+    313.07,
+    314.75
+   ]
+  ],
+  "drive": 0.92,
+  "drive_without_bed": 0.906,
+  "duration": 319.4,
+  "final_lufs": -15.96,
+  "lufs": -16.0,
+  "mtime": 1795517826.3365395,
+  "removed": {
+   "calm": 10,
+   "groove": 9,
+   "outro": true,
+   "wonder": 1
+  },
+  "size": 139917688,
+  "true_peak": -1.5,
+  "video_packets": 9582,
+  "when": "2026-11-24 10:57 UTC",
+  "windows": {
+   "gap": 1,
+   "voice": 464
+  }
+ },
  "ep16_part2": {
   "backup": "ep16/out/nolofi_p2.m4a",
   "bed_gain": 0.4963,
