@@ -1,0 +1,216 @@
+{
+ "_note": "EP22, for TheOneApp videos.js P3 after upload: ADD as two entries (no video is retired by EP22: the classic GNQn_TeCRgg stays until EP23 is live), replace keys' strings by the constants (O.interactions and CH.magnets are placeholders: check the real names in videos.js), set url to the uploaded video ids.",
+ "replaces": [],
+ "entries": [
+  {
+   "no": "22A",
+   "art": "🧲",
+   "topic": "Magnets",
+   "title": "Stroke an Iron Nail Again and Again. Is It a MAGNET Now? (Part A)",
+   "len": "5:35",
+   "url": "https://www.youtube.com/watch?v=<EP22_P1>",
+   "moments": [
+    {
+     "at": "1:01",
+     "what": "Round 1: stroke an iron nail again and again. What happens?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m501",
+     "_t": 62.78
+    },
+    {
+     "at": "1:29",
+     "what": "Journey: be the iron nail and feel the strokes",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m601",
+     "_t": 91.28
+    },
+    {
+     "at": "2:03",
+     "what": "The answer: the stroked nail attracts the clips",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m701",
+     "_t": 124.71
+    },
+    {
+     "at": "2:09",
+     "what": "The stroke method makes a magnet",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m704b",
+     "_t": 131.13
+    },
+    {
+     "at": "2:22",
+     "what": "Look closer: was the nail a magnet already?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m802",
+     "_t": 143.53
+    },
+    {
+     "at": "2:40",
+     "what": "Magnetised: Pip's nail has been made into a magnet",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m805",
+     "_t": 161.81
+    },
+    {
+     "at": "3:11",
+     "what": "HOLD ON! Basil tests his nail. What did he miss?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m901b",
+     "_t": 192.7
+    },
+    {
+     "at": "3:37",
+     "what": "Test the nail with the magnet put away",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m905s",
+     "_t": 219.1
+    },
+    {
+     "at": "3:52",
+     "what": "Look closer: copper, foil, a chopstick and a steel screwdriver",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1002",
+     "_t": 233.72
+    },
+    {
+     "at": "4:13",
+     "what": "A magnetic object can be magnetised",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1005p",
+     "_t": 254.93
+    }
+   ]
+  },
+  {
+   "no": "22B",
+   "art": "🎣",
+   "topic": "Magnets",
+   "title": "Back and Forth, or One Way? Make the STRONGEST Nail Magnet (Part B)",
+   "len": "5:35",
+   "url": "https://www.youtube.com/watch?v=<EP22_P2>",
+   "moments": [
+    {
+     "at": "0:25",
+     "what": "Round 1: back and forth, or one way?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n401",
+     "_t": 27.47
+    },
+    {
+     "at": "1:06",
+     "what": "Journey: be a steel paper clip",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n501",
+     "_t": 67.64
+    },
+    {
+     "at": "1:37",
+     "what": "The answer: one way makes the stronger nail magnet",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n601",
+     "_t": 99.03
+    },
+    {
+     "at": "1:54",
+     "what": "Look closer: lift the magnet up and away, back to the head",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n702",
+     "_t": 115.65
+    },
+    {
+     "at": "2:10",
+     "what": "Same direction: stroke the same way every time",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n705m",
+     "_t": 132.38
+    },
+    {
+     "at": "2:33",
+     "what": "Showdown: Pip's poster, find the line to fix",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n801",
+     "_t": 154.76
+    },
+    {
+     "at": "3:09",
+     "what": "Same pole: use the same end of the magnet every time",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n806b",
+     "_t": 191.33
+    },
+    {
+     "at": "3:26",
+     "what": "Look closer: ten, twenty and thirty strokes",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n902",
+     "_t": 208.14
+    },
+    {
+     "at": "3:41",
+     "what": "More strokes make a stronger magnet",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n905p",
+     "_t": 222.56
+    }
+   ]
+  }
+ ]
+}

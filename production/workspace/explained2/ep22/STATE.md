@@ -126,3 +126,29 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
    labels; the woodpecker's tongue cut-away (the fact can end after "like super-fast strokes!"); 7.1's first sentence left for EP23.
 6. No back views in the v2 set: the cold open and the cliffhanger use front views turned in (as EP19 to EP21).
 7. Upload order: EP22 only after EP21 is live. No `replaces` here; EP23's upload.json retires GNQn_TeCRgg.
+
+## Stage 2 (drawing, sound, render, self-check): IN PROGRESS 2026-11-24 (resume from here)
+- **New files:** `art22.js` (helpers copied UNCHANGED from art20.js; the WOODPECKER woodpecker22 / woodpeckerAt, the ANT ant22 / antAt / antLine;
+  the stroke magAt / strokeAt / rubAt; clipBunch (clips jump up and fall back), trayClips22; magBox22, paperBag22, screwdriver22, copper22, foil22,
+  chopstick22; OUR FISHING GAME fishBoard22; THE FISHING POND pond22 + rod22 + FISH CAUGHT wb22; Pip's poster poster22; pawPt = where a buddy's
+  paws are, for held props), `sets22.js` (HS22 the hardware shop, baked bg/hs22.png + live; MS22 the maker space, baked bg/ms22.png + live; the
+  hidden animals' spots WPAT / ANTAT), `lc22.js` (lcNailArt, lcThingsArt, nailJourney, lcWayArt, lcMoreArt, clipJourney, the ring / card / recap /
+  fun-fact / Mark Sentence pictures, chantBoard22), `ep22dare.js` (EP23's two dare cards, self-contained: EP23 copies it unchanged).
+  Re-bake after a change to BG.hs22 / BG.ms22: `node bake.js hs22 ms22`.
+- **ep21dare.js:** SECTION A now holds EP21's two dare pictures DRAWN (nail21, clip21, clipPile21, hand21, darePic21; self-contained); EP21's
+  Stage 2 (in progress in another session) has already copied Section A unchanged into ../ep21/ep21dare.js. Section B (bar20, darePic,
+  dareCard2) is EP22's own. If Section A changes again, EP21's copy must change with it.
+- **Changed from SCENES_TODO (and why):** held nails / magnets are drawn at the buddy's paws (no code-drawn paws); look-closer and card
+  hands are human hands (four fingers and a thumb); in the look-closers the things hang from a wooden rail (a fair-test rig) instead of being
+  held one by one; Basil's surprised face in lcthings is a round close-up (faceCam) so the screwdriver's clips stay clear; the P1 answer's
+  cheer after Basil's STROKE METHOD line is left out (0.5 s before the scene ends, under his confident outcome: he cheers at Mark Sentence
+  1); the P2 dare shows Momo's coil, battery and the clips jumping first (labelled), and the two cards slide in 1 s before "One" (not at the
+  dareIn mark, which came 0.6 s into the scene); the sound's card slides moved with them. The big gold fish lies at the pond's LEFT end
+  (so Momo's rod reaches it).
+- **Sound:** sound_cues.js Stage 2 block (wind chime, bicycle bell, cups, laugh, woodpecker taps, trolley roll; maker space: printer
+  whirr, stapler clack, footsteps, far bell, ant patter); both mixes -16.0 LUFS. Two Stage 1 cue bugs fixed (rise / pip without a value).
+- **QA so far:** sweeps 0 bad both parts; stills of every scene looked at and fixed; pose_audit both parts; pose_reasons.json;
+  qa/buddy_faces_p1.jpg / _p2.jpg.
+- **Next:** `./build_part.sh 1` then 2 (check `df -h /` >= 3 GB; the lock is shared); verify each mp4 decodes (`ffmpeg -v error -i ... -f null -`)
+  and its frame count; delete out/chunks_p*; measure_countdowns.py, compare_ep1.py, make_preview.sh spans, highlights.py, make_moments.py,
+  thumbnails (../thumb_v2.js), `explained_upload.py upload.json --check`.

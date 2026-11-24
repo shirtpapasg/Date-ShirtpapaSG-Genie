@@ -187,6 +187,20 @@ const THUMBS = {
       { cut: 'mags', x: 520, y: 300, w: 740, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'FLIP IT,', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SNAP!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep22_1: { ep: 'ep22', part: 1, out: 'ep22/thumb_part1.jpg', old: 'ep20/thumb_part1.jpg',
+    bg: { c: ['#FFE2D6', '#D8402E', '#4A0E16'], at: [860, 430], rays: .22 },
+    cuts: { nail: `trayClips22(1, 980, 900, 2.0, { n: 26 }) + nail21(980, 620, 2.6) + magAt(1, 760, 590, 1.0, -112) + '<path d="M1280 520 C1280 300 720 300 720 520" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round" stroke-dasharray="40 30"/><path d="M1280 520 C1280 300 720 300 720 520" fill="none" stroke="#C9932E" stroke-width="16" stroke-linecap="round" stroke-dasharray="40 30"/>'` },
+    layers: [
+      { cut: 'nail', x: 560, y: 240, w: 680, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'MAGNET', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'NOW?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep22_2: { ep: 'ep22', part: 2, out: 'ep22/thumb_part2.jpg', old: 'ep20/thumb_part2.jpg',
+    bg: { c: ['#DDEBFF', '#2F5FD0', '#0A1238'], at: [860, 430], rays: .22 },
+    cuts: { nails: `nail21(960, 470, 2.4) + backForth(1, 0, 960, 380, 620) + nail21(960, 760, 2.4) + strokeArrow(1, -9, 660, 680, 1260, 680, 24) + liftArc(1, -9, 1270, 660, 650, 660, 170, 14) + fishP(1180, 950, 1.3, '#FFC83A', true)` },
+    layers: [
+      { cut: 'nails', x: 580, y: 260, w: 660, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'WAY?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
 };
 
 const file = (p) => 'file://' + path.resolve(p);
