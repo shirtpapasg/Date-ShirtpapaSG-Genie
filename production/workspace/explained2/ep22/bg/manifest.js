@@ -1,1 +1,1 @@
-window.BAKED=["_grain","daystage","stage","stage2"];
+window.BAKED=["_grain","daystage","hs22","ms22","stage","stage2"];

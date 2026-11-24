@@ -1,0 +1,275 @@
+{
+ "episode": "SAU EP11",
+ "title": "How do you build a chip that helps AI think?",
+ "tag": "🌏 TheOneApp, Explored · EP 11 · Chips",
+ "next": [
+  "NEXT TIME",
+  "More science from",
+  "your world! 🌏"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · a new episode every Thursday",
+ "kws": [
+  [
+   "gpu",
+   "gpus",
+   "GPU",
+   "#76b900"
+  ],
+  [
+   "hall",
+   "cpu",
+   "CPU",
+   "#3a86ff"
+  ],
+  [
+   "switches",
+   "transistors",
+   "TRANSISTORS",
+   "#f72585"
+  ],
+  [
+   "melt",
+   "silicon",
+   "SILICON",
+   "#6c757d"
+  ],
+  [
+   "wafer",
+   "wafers",
+   "WAFER",
+   "#4361ee"
+  ],
+  [
+   "shadow",
+   "shadow",
+   "SHADOW",
+   "#1b1b3a"
+  ],
+  [
+   "heat",
+   "heat",
+   "HEAT FLOW",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "coldOpen",
+   "silent": 3.6,
+   "sfx": [
+    [
+     "click",
+     0.5
+    ],
+    [
+     "ep03_beep",
+     0.55
+    ],
+    [
+     "power_up",
+     0.6
+    ],
+    [
+     "sparkle",
+     2.2
+    ],
+    [
+     "whoosh",
+     2.9
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "This tiny square is about the size of a postage stamp. Inside it are more than a hundred billion switches. And every single one was drawn… with light.",
+   "hold": 0.8
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "Last time, I asked why a compost bin gets warm inside. Tiny decomposers break down the food scraps, and as they work, they give off heat. A busy bin is a warm bin!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "In November twenty twenty-six, the computer chip company Nvidia was in the news around the world. Its founder, Jensen Huang, stepped down as its boss for a short time. Then, eleven days later, he came back as CEO. Why does the whole world watch one chip company so closely? Because its chips are the engines that run today's AI.",
+   "hold": 0.8
+  },
+  {
+   "id": "gpu",
+   "scene": "pixels",
+   "text": "Nvidia's famous chips are called GPUs, graphics processing units. They were first made to draw video games. A picture on a screen is made of millions of tiny dots called pixels. To draw it, the computer works out the colour of every dot, many times every second."
+  },
+  {
+   "id": "hall",
+   "scene": "hall",
+   "text": "An ordinary computer brain, a CPU, is like one very clever teacher, solving sums one after another. A GPU is like a whole school hall of pupils, each solving one small sum, all at the same time."
+  },
+  {
+   "id": "ai",
+   "scene": "ai",
+   "text": "And it turns out AI learns in a similar way: by doing billions and billions of small multiplications. So the chip built for games became the chip that helps teach AI."
+  },
+  {
+   "id": "circuit",
+   "scene": "circuit",
+   "text": "In Primary Five, you learn about electric circuits. When the switch is closed, current flows and the bulb lights up. When the switch is open, there is a gap, and no current flows."
+  },
+  {
+   "id": "switches",
+   "scene": "switches",
+   "text": "A chip is made of tiny switches called transistors. They have no moving parts. On or off. One or zero. Billions of switches, flicking on and off billions of times a second. That is how a chip works things out."
+  },
+  {
+   "id": "sand",
+   "scene": "switches",
+   "text": "So how do you build a hundred billion switches? Let's find out."
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "c1",
+   "scene": "povSand",
+   "silent": 3.2,
+   "sfx": [
+    [
+     "sea_wash",
+     0
+    ],
+    [
+     "whoosh",
+     0.5
+    ],
+    [
+     "pass_by",
+     1.2
+    ],
+    [
+     "sparkle",
+     2.3
+    ],
+    [
+     "ping",
+     2.5
+    ]
+   ]
+  },
+  {
+   "id": "you",
+   "scene": "povSand",
+   "text": "You are a grain of sand."
+  },
+  {
+   "id": "melt",
+   "scene": "povMelt",
+   "text": "Sand is mostly silica, made of silicon and oxygen. You are cleaned and melted until you are almost pure silicon."
+  },
+  {
+   "id": "crystal",
+   "scene": "crystal",
+   "text": "A tiny seed crystal is dipped into you and pulled up slowly, turning round and round. You grow into a shiny cylinder of crystal, as long as a child is tall."
+  },
+  {
+   "id": "wafer",
+   "scene": "wafer",
+   "text": "You are sliced into thin round plates called wafers, thinner than a coin, and polished until you shine like a mirror."
+  },
+  {
+   "id": "clean",
+   "scene": "cleanroom",
+   "text": "Now you enter a clean room. The air here is cleaner than a hospital operating theatre. The workers wear suits that cover them from head to toe."
+  },
+  {
+   "id": "c2",
+   "scene": "povLight",
+   "silent": 3.4,
+   "sfx": [
+    [
+     "ep03_slide",
+     0.2
+    ],
+    [
+     "riser",
+     0.6
+    ],
+    [
+     "flash",
+     1.75
+    ],
+    [
+     "zap",
+     1.8
+    ],
+    [
+     "sparkle",
+     2.4
+    ],
+    [
+     "chime",
+     2.6
+    ]
+   ]
+  },
+  {
+   "id": "shadow",
+   "scene": "shadow",
+   "text": "In Primary Four, you learn that light travels in a straight line, and when an object blocks light, it forms a shadow. You are coated with a special layer that changes when light shines on it. A stencil, called a mask, blocks some of the light. Where the light reaches you, the layer changes. Where the mask blocks it, the shadow keeps the pattern.",
+   "hold": 0.8
+  },
+  {
+   "id": "lens",
+   "scene": "lens",
+   "text": "Lenses shrink the pattern again and again, until each line is thousands of times thinner than a hair."
+  },
+  {
+   "id": "layers",
+   "scene": "layers",
+   "text": "Then the pattern is etched in, metal is added, and it starts again. Layer on layer, hundreds of steps, over many weeks."
+  },
+  {
+   "id": "chips",
+   "scene": "chips",
+   "text": "At the end, one wafer holds many chips. They are cut apart, tested, and packed into a case. Now you are a chip!"
+  },
+  {
+   "id": "where",
+   "scene": "chipMap",
+   "text": "Nvidia designs its chips in the United States, and factories in Taiwan build the newest ones. And Singapore? About one in every ten chips in the world is made here.",
+   "hold": 0.8
+  },
+  {
+   "id": "heat",
+   "scene": "heat",
+   "text": "When thousands of GPUs work together to train an AI, they use a lot of electricity, and they get hot. Remember, heat flows from a hotter object to a colder one. So cool water and air flow past the chips to carry the heat away. Engineers are working hard to use less energy, so AI can grow without wasting electricity."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this with your class. Give one friend twenty easy sums to do alone. Then give twenty friends one sum each. Who finishes first? That is the difference between a CPU and a GPU!"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why do you think chip factories must be even cleaner than a hospital operating theatre? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "A hundred billion switches. Drawn with light and shadow. And it all started with a grain of sand.",
+   "hold": 0.8
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 4.6
+}

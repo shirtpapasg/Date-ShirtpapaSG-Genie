@@ -106,8 +106,8 @@ const pigeon22 = (t, x, y, k = 1) => { const pk = Math.max(0, Math.sin(t * 2.6))
    again); then a NEW fair spot in every scene: a branch of the frangipani by the shop (waitw), the top of the notice board (answer), a post of
    the pergola (pipclaim), the top of the pallet stack (holdon), the edge of the planter box (lcq2); the REVEAL: the wooden handle of a broom
    in the shop's rack (liz). */
-const WPAT = { intro: [302, 470, .4, { flip: true, hop: true }], waitw: [1028, 562, .36, { flip: true }], answer: [580, 518, .36, { peck: false }], pipclaim: [712, 640, .34, { flip: true }],
-  holdon: [1384, 682, .36, { peck: false }], lcq2: [940, 722, .34, { peck: false }], liz: [1717, 430, .4, { flip: true }] };
+const WPAT = { intro: [286, 508, .4, { flip: true, hop: true }], waitw: [1028, 562, .36, { flip: true }], answer: [580, 518, .36, { peck: false }], pipclaim: [712, 640, .34, { flip: true }],
+  holdon: [1392, 684, .36, { peck: false }], lcq2: [940, 722, .34, { peck: false }], liz: [1717, 430, .4, { flip: true }] };
 ['cold', 'back', 'title', 'today', 'game'].forEach((k) => { WPAT[k] = WPAT.intro; });
 // HS22: the live hardware shop. o: top (the props on the table, world coordinates), front (in front of the table), bird (a WPAT entry | false;
 // default the scene's own), table (true), board (OUR FISHING GAME at its HOME, true), dim

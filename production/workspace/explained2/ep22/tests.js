@@ -63,7 +63,7 @@ const magBox = (t, x, y, k = 1, shut = 1, withMag = true) => TF(x, y, k, `<g fil
    the window ledge), never twice in one spot; not on screen during a [LOOK CLOSER], a journey or a countdown. Free, never touched or fed.
    HIDDEN = [the word Heart says (W lookup), art(t), the label]. ---------- */
 const hiddenPH = (name) => (t) => `<circle r="92" fill="#D9D4EA" stroke="${P.ink}" stroke-width="4" stroke-dasharray="12 8"/>${T(0, -8, name, 40, P.ink)}${T(0, 34, "(Stage 2)", 24, P.ink, { w: 500 })}`;
-const HIDDEN = PART === 1 ? ["woodpecker", hiddenPH("woodpecker"), "woodpecker"] : ["ant", hiddenPH("ant"), "ant"];   // Stage 2: woodpeckerArt(t, o) / antArt(t, o)
+const HIDDEN = PART === 1 ? ["woodpecker", (t) => TF(10, 50, 1.7, woodpecker22(t, {})), "woodpecker"] : ["ant", (t) => TF(0, 30, 2.2, ant22(t, { wave: true })), "ant"];   // STAGE 2: the drawn animals (art22.js)
 const hiddenBadge = (t, r = 150) => `<g filter="url(#drop)"><circle r="${r}" fill="${P.paper}"/><circle r="${r - 10}" fill="${PART === 1 ? "#EAF2E2" : "#F2ECE2"}"/></g><g transform="scale(${n2(r / 150)})">${HIDDEN[1](t)}</g>`
   + TF(0, -r - 4, 1, tpill(0, 0, "a little " + HIDDEN[2], n2(r * .24), P.ink, "#fff", { w: 700 }));
 // where the animal sits in the wide shots the push-ins go into. INTRO = the game's push-in (the angsana trunk in the square / beside a

@@ -33,6 +33,9 @@ FIX = {
     # "Ay-ee-deez" came out "EYE-ee-deez"); the usual sound is "ay-EE-deez al-boh-PIK-tus" / "ay-EE-deez ee-JIP-tie".
     "Aedes albopictus": {"ph": "eɪˈiːdiːz ˌælboʊpˈɪktəs"},
     "Aedes aegypti": {"ph": "eɪˈiːdiːz iːdʒˈɪptaɪ"},
+    # Explored EP11 (Opus, 2026-11-24; WAITING FOR THE TEACHER'S LISTEN, clip pron_clips/Heart_explored11_new_words.mp3):
+    # Kokoro's own "Tampines" is "tˈæmpaɪnz" ("TAM-pines"); the Singapore way is "TAM-pin-ees". EP11 only shows it on its map.
+    "Tampines": {"ph": "tˈæmpɪnˌiːs"},
     # "cicada": NO entry. The teacher listened (23 Nov 2026, EP18 clip) and chose Kokoro's own "sih-KAY-duh" over "sih-KAH-duh".
 }
 _tok = None
