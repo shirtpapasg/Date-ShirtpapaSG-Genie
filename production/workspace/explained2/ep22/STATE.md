@@ -201,3 +201,9 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
   "d": -.3})`. Never a ("wait", >1) before the first say. The cold open's place card fades in from about 0.2 s and stays >= 2 s; the cold
   open's actions run while Heart speaks (count them from the scene's length, as NSTROKE0). Part 2 (and any part opening on the recap) must
   also have its first word by about 1 s (EP22 Part 2: 0.30 s).
+
+## For the NEXT episode (the engine template): Kampong Walk background music (2026-11-24)
+- `finish.sh` now ends its mux with `EXPLAINED_LOCK_HELD=1 python3 ../add_lofi.py . $P`: the soundtrack is rebuilt from song.js with the old
+  music beds (groove, calm, wonder, outro) left out and the app's Kampong Walk as the one continuous bed (SERIES_FORMAT.md 9; ../music/README.md).
+  Copy finish.sh with it (change only the ep names / sheet marks). song.js keeps its beds (add_lofi strips them in memory), so nothing else changes.
+  Every EP16-EP22 part has it (../music/applied.json).

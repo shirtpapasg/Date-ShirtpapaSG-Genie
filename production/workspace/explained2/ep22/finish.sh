@@ -3,6 +3,9 @@
 cd "$(dirname "$0")"; P=${1:-1}
 ffmpeg -y -loglevel error -i out/video_p$P.mp4 -i out/mix_p$P.wav -c:v copy -c:a aac -b:a 192k -movflags +faststart -shortest out/_ep22_p$P.mp4 && mv out/_ep22_p$P.mp4 ep22_part$P.mp4
 D=$(ffprobe -v error -show_entries format=duration -of csv=p=0 ep22_part$P.mp4); echo "ep22_part$P.mp4 $D s"
+# Kampong Walk, the one background bed of every part (SERIES_FORMAT.md 9, teacher 2026-11-24): rebuilds the soundtrack from song.js with the
+# old beds left out, re-muxes the mp4 (video copied), checks -16 LUFS / -1.5 dBTP / decode. build_part.sh already holds the render lock.
+EXPLAINED_LOCK_HELD=1 python3 ../add_lofi.py . $P || exit 1
 rm -rf out/sheet; mkdir -p out/sheet
 python3 - "$D" "$P" <<'P'
 import sys, subprocess, json
