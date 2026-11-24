@@ -121,7 +121,7 @@ function spinChart21(t, x, y, k = 1, o = {}) { const f = (m) => o.all ? 1 : ss(M
   if (on("chart1")) s += OP(f("chart1") * (1 - wipe), T(0, 156, "the same way every time!", 30, NORTHC, { w: 700 }));
   if (on("nsline")) { const re = f("nsline"); ["the field", "the classroom", "the basin"].forEach((r, i) => { const ry = -98 + i * 82; s += OP(re, T(-110, ry + 12, r, 32, P.ink) + arrow(76, ry, .8)); }); s += o.all ? nsLine(99, 0, 176, -110, 176, 70, 26) : nsLine(t, MKS("nsline"), 176, -110, 176, 70, 26); }
   if (on("chartEarth")) s += OP(f("chartEarth"), `<circle cx="-196" cy="148" r="38" fill="#3F7FD0" stroke="${P.ink}" stroke-width="3"/><path d="M-214 128 q18 -10 28 4 q8 16 -8 28 q-18 2 -20 -32z M-190 168 q14 -4 18 8 q-8 8 -18 -8z" fill="#5FAE5A"/>` + T(30, 142, "Why? Earth behaves", 27, P.ink, { w: 700 }) + T(30, 174, "like a magnet", 27, P.ink, { w: 700 }));
-  if (o.note) s += TF(150, BH / 2 + 6, 1, `<g transform="rotate(-4)"><g filter="url(#dropS)"><rect x="-120" y="-86" width="240" height="96" rx="8" fill="#FFF6B8"/></g>${T(0, -50, "On the bench:", 24, P.ink, { w: 700 })}${T(0, -20, "a different way", 24, P.ink, { w: 700 })}${T(0, 4, "every time!", 24, P.ink, { w: 700 })}</g>`);
+  if (o.note) s += TF(196, BH / 2 + 6, 1, `<g transform="rotate(-4)"><g filter="url(#dropS)"><rect x="-120" y="-86" width="240" height="96" rx="8" fill="#FFF6B8"/></g>${T(0, -50, "On the bench:", 24, P.ink, { w: 700 })}${T(0, -20, "a different way", 24, P.ink, { w: 700 })}${T(0, 4, "every time!", 24, P.ink, { w: 700 })}</g>`);
   return TF(x, y, k, s); }
 
 /* ================================================================ PULAU UBIN: THE JETTY ================================================================ */

@@ -163,3 +163,6 @@ const binnacle21 = (t, cardDeg = 0) => `<path d="M-60 120 L-40 380 H40 L60 120z"
   + `<ellipse cx="0" cy="0" rx="136" ry="76" fill="url(#glassG)"/><path d="M-90 -30 Q-40 -60 30 -60" stroke="#fff" stroke-width="8" fill="none" opacity=".4" stroke-linecap="round"/>`
   + `<circle cx="-200" cy="40" r="34" fill="#C9302A" stroke="#6E1814" stroke-width="5"/><circle cx="200" cy="40" r="34" fill="#2A8A3A" stroke="#14501E" stroke-width="5"/><path d="M-170 40 H-150 M150 40 H170" stroke="#B8923A" stroke-width="10"/>`
   + `<circle cx="0" cy="-70" r="8" fill="#FFE7A0"/><circle cx="0" cy="-70" r="28" fill="#FFE7A0" opacity=".25"/>`;
+// a small easel (copied UNCHANGED from EP20's art20.js): origin = the easel's feet
+const smallEasel = (inner, w = 520, h = 600) => `<ellipse cx="0" cy="6" rx="${w * .55}" ry="16" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><path d="M${-w * .38} 0 L${-w * .3} ${-h - 80} M${w * .38} 0 L${w * .3} ${-h - 80} M0 -30 L0 ${-h - 40}" stroke="#8A5A36" stroke-width="16" stroke-linecap="round"/><rect x="${-w * .5 - 10}" y="-200" width="${w + 20}" height="20" rx="8" fill="#7A4A26"/>`
+  + `<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h - 160}" width="${w}" height="${h - 30}" rx="16" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="6"/></g><g transform="translate(0 ${-h / 2 - 175})">${inner}</g>`;

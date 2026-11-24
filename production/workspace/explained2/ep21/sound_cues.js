@@ -40,19 +40,19 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // lock-ins: ring ticks that speed up, the bell, the LOCKED IN! stamp, the picks
   const lock = (n, dur, lockId, picks) => { const r0 = mk("ring0_" + n); if (r0 === undefined) return; ringTicks(r0, dur).forEach((t) => E(t, "tick", (t - r0) % 1 < .01 ? 1 : 0)); E(r0 + dur, "bell"); E(r0, "bellicon"); if (lockId && has(lockId)) E(LT(lockId) - .08 + .14, "stamp"); picks.forEach((id, i) => has(id) && E(LT(id) - .1 + .11, "pick", i)); };
   if (PART === 1) { lock("r1", 3, "m502", ["m503m", "m504p", "m505b"]); lock("hold", 5, null, []); if (has("m902")) E(W("m902", "hold") - .1, "stamp"); }
-  else { lock("r1", 5, "n402", ["n403m", "n404p", "n405b"]); lock("show", 5, "n803", ["n804b"]); }
+  else { lock("r1", 5, "n402", ["n403p", "n404m", "n405b"]); lock("show", 5, "n803", ["n804b"]); }
   ["coin1", "coin2"].forEach((k) => mk(k) !== undefined && E(mk(k) - .1, "coin")); if (mk("ansglow") !== undefined) E(mk("ansglow"), "chime2", 0);
   // the topic's own foley on its marks: the spin and the settle (a soft chime as the magnet / needle comes to rest), the cones, the bench
   // scrape, the hang-up, the Earth, the compass's tick and click, the push and the pull, the rose's boxes, the route, the nail's strokes
   for (const k of ["jfinger", "jagain"]) if (mk(k) !== undefined) E(mk(k) + .1, "whoosh");
-  for (const k of ["jback"]) if (mk(k) !== undefined) E(mk(k) + .1, "rise");
+  for (const k of ["jback"]) if (mk(k) !== undefined) E(mk(k) + .1, "rise", 2);
   for (const k of ["jstop", "jstop2", "jnorth", "jns", "freeturn", "shipneedle", "hiker"]) if (mk(k) !== undefined) E(mk(k) + .3, "chime", 0);
   if (mk("cones") !== undefined) { E(mk("cones") + .2, "thup"); E(mk("cones") + .5, "thup"); }
   if (mk("tangle") !== undefined) E(mk("tangle") + .1, "cloth");
   if (mk("try") !== undefined) [0, .9, 1.8].forEach((d) => E(mk("try") + d, "rub"));
   if (mk("hangup") !== undefined) E(mk("hangup") + .3, "creak");
   if (mk("basin") !== undefined) E(mk("basin") + .2, "plip");
-  if (mk("up") !== undefined) E(mk("up"), "rise");
+  if (mk("up") !== undefined) E(mk("up"), "rise", 4);
   if (mk("everywhere") !== undefined) [0, .4, .8, 1.2, 1.6, 2.0].forEach((d, i) => E(mk("everywhere") + d, "pop", i % 3));
   if (mk("compass") !== undefined) E(mk("compass") + .2, "tick", 0);
   if (mk("jcome") !== undefined) E(mk("jcome"), "rumble");
@@ -64,7 +64,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   if (mk("rose") !== undefined) [0, .4, .8, 1.2].forEach((d) => E(mk("rose") + d, "tick", 1));
   if (mk("route") !== undefined) { E(mk("route"), "reveal"); E(mk("route") + .2, "sparkle"); }
   if (mk("ship") !== undefined) E(mk("ship"), "rumble");
-  if (mk("stroke") !== undefined) [0, .2, .4].forEach((d) => E(mk("stroke") + d, "rub"));
+  if (mk("stroke") !== undefined && S.dare) for (let x = mk("stroke"); x < S.dare.t1 - .5; x += 1.5) E(x + .05, "rub");   // Stage 2: one soft metal swish per stroke (p2.js strokeAt: every 1.5 s)
   // key words: a chime as each pops; verdicts: the stamp + a chime
   for (const k of KW) E(k.t, "chime2", 1);
   for (const [k, v] of Object.entries(M_)) if (/^v_/.test(k)) { E(v + .12, "stamp"); E(v + .35, "chime2", 1); }
@@ -82,4 +82,41 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+
+  // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): the places' own life and the foley ON the marks (SCENES_TODO's Sound lines)
+  { const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus });
+    if (PART === 1) {
+      // the school field after school: a PE whistle now and then, a football thud far off, the swallow's twitter, a soft breeze
+      const FLD = ["cold", "back", "today", "answer", "goal", "holdon", "earthq", "cliff"];
+      for (const sc of TL.scenes) if (FLD.includes(sc.name) && sc.t1 - sc.t0 > 3) { sfx(sc.t0 + .6, "wind.wav", .03); if (sc.t1 - sc.t0 > 6) E(sc.t0 + 2.2, "cheep", .5); }
+      [["cold", 3.4], ["answer", 6.5], ["holdon", 2.2], ["earthq", 4.5]].forEach(([n, d]) => { if (S[n]) sfx(S[n].t0 + d, "ep07_whistle.wav", .025); });
+      [["back", .4], ["goal", 3.2], ["holdon", 30.5]].forEach(([n, d]) => { if (S[n]) E(S[n].t0 + d, "thup", 0); });
+      if (S.game) E(W("m302", "swallow") + .4, "cheep", .8);
+      // be the hanging magnet: the breeze as a slow deep whoosh, the string's long creak as you turn
+      if (S.shrink) { sfx(mk("dive") + .3, "wind.wav", .05, "wonder"); [mk("jspin") + .8, mk("jslow"), mk("jagain") + 1].forEach((x) => E(x, "creak")); E(mk("jstop") + .1, "hum"); E(mk("jstop2") + .1, "hum"); }
+      // which way?: the string's creak in the field panel, the classroom's fan and a far-off school bell, the basin's splash
+      if (S.lcplaces) { E(mk("field") + .2, "creak"); sfx(mk("room") + .1, "ep05_bell.wav", .03); E(mk("room") + .8, "hum"); [mk("field") + 2.8, mk("room") + 4.2, mk("basin") + 4.8].forEach((x) => E(x, "chime2", 0)); }
+      // fly up: a deep, soft space hum under the Earth
+      if (S.lcearth) { E(mk("earth") + .2, "hum"); E(mk("earth") + 2.8, "hum"); sfx(mk("up") + .1, "space_warp.wav", .05, "wonder"); }
+      // HOLD ON!: the tangled string; the swing that stops on the line (a soft settle)
+      if (mk("freeturn") !== undefined) E(mk("freeturn") + 1.0, "set");
+      if (S.liz) E(W("m1102", "swallow") + 1.2, "cheep", .7);
+      if (S.cliff) E(mk("compass") + 1.2, "tick", 0);
+    } else {
+      // Pulau Ubin: a bumboat's putt-putt engine fading, a far ship's horn now and then, birds in the mangroves, footsteps on the boards
+      const UBN = ["jetty", "r1ans", "trail", "show", "fix", "bwalk", "dare"];
+      for (const sc of TL.scenes) if (UBN.includes(sc.name) && sc.t1 - sc.t0 > 3) { sfx(sc.t0 + .8, "ep08_birds.wav", .04); }
+      if (S.jetty) { sfx(S.jetty.t0, "generator_hum.wav", .03); E(mk("boat") + .5, "step"); }
+      [["r1ans", 5], ["show", 4], ["dare", 9]].forEach(([n, d]) => { if (S[n]) sfx(S[n].t0 + d, "ep05_horn.wav", .02); });
+      if (S.game) { E(W("n202", "turtle") + .4, "bubble", 1); sfx(W("n202", "turtle") + .8, "breath.wav", .05); }
+      if (S.bwalk) { E(S.bwalk.t0 + .3, "step"); E(S.bwalk.t0 + .8, "step"); }
+      if (S.trail) [0, .5, 1.0].forEach((d) => E(S.trail.t0 + 1.2 + d, "click"));
+      // be the compass needle: a thin metal hum on the pin as you turn
+      if (S.shrink) { E(mk("jfree") + .1, "hum"); E(mk("jpull") + .4, "hum"); }
+      // night and far away: the ship's deep engine hum and the wash of waves at night; a damp hush of fog and a far bird call
+      if (S.lcnight) { sfx(mk("ship"), "sea_wash.wav", .08); E(mk("ship") + 1.2, "hum"); sfx(mk("fog"), "wind.wav", .04); E(mk("fog") + 1.5, "cheep", .3); }
+      if (S.liz) { sfx(W("n1102", "turtle") + .6, "splash.wav", .05); sfx(mk("ff_ocean"), "sea_wash.wav", .06); }
+      if (S.dare) E(MK("dareIn") + .2, "clink");
+    }
+    const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["sfx", "cheep", "thup", "step"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

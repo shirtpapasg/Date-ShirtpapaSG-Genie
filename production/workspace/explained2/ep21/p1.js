@@ -4,129 +4,220 @@
 // holding it, so it is free": the bench rubs; hung up, it turns freely), how does it know? (fly up to see the whole Earth: EARTH BEHAVES
 // LIKE A MAGNET; Mark Sentence 6.16), the swallow, the cliffhanger (Momo's compass needle lines up with the cones: is it a magnet?).
 // Segments 1-13 of ../p3_ep21_script.md section 4 (version 1, 24 Nov 2026).
-// STAGE 1 (setup): the shared routines are WIRED (the calm recap of EP20's dare with its TWO cards (ep20dare.js), the title slam, the game
-// as ONE smooth push-in onto the swallow (common.js gameScene), the goals read by Momo, the countdown, Round 1's lock-in with the dare's two
-// cards and the clue labels on top of the ring, the two Mark Sentences (Basil, Pip), the LOOK-CLOSER frames (lcPH inside the real
-// lookCloser), the journey's tags and riders, THE SPIN CHART's placeholder (tests.js spinChartPH: it fills on its marks), the North-South
-// line (tests.js nsLine), the score hand, the swallow's smooth reveal with its fun-fact panel, the read-along, "Now you know!"). Every scene
-// with new art is a phScene placeholder. STAGE 2 (Fable) draws them: SCENES_TODO.md has the full staging per scene and line.
+// STAGE 2 (drawn 2026-11-24): one real place, a SCHOOL FIELD on Tuesday after school (sets21.js FD21: the rain tree at the far left, the
+// goal, the school block, the floodlights and their wire, the fence, the sports shed, the PE trolley, the netball court, THE SPIN CHART at its
+// home by the wooden bench, the two plastic chairs with the broom handle and Basil's hanging magnet, the cones); the buddies stand IN the
+// scene, big, with a contact shadow; the camera drifts or pushes in and never cuts inside the field. Every pose has its reason
+// (SCENES_TODO.md, pose_reasons.json); the buddy who got it wrong stays shy and the right ones confident through the whole fix (lib.js
+// OUTCOMES `to`). Every action is drawn AT its mark.
 if (PART === 1) { (() => {
 const L1 = "m501";
 // the scores (script section 3): Round 1 1 : 1 (Pip and Basil right: the Buddies score too), HOLD ON! 2 : 1 (nothing for the Buddies)
 SCORE.push([MK("coin1") - .1, 1, 1]);
 SCORE.push([W("m903", "one") - .1, 2, 1]);
 const FOOT = "P3 · Interactions · Properties of Magnets";
-const ph = (title, ...notes) => (t, s) => phScene(t, s, title, notes.concat(["Full staging: SCENES_TODO.md."])) + HUD(t);
-const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
+const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(170, 170 * 1720 / tw(txt, 170, 700, "Fredoka", 4)), col, k);
-// Basil's bar magnet on its string (EP20's own hangingMagnet, ep20dare.js): spun at t0 it turns, slows, swings past the line and back, and
-// stops with its red end the same way (0 degrees here) every time
-const spinAng = (t, t0) => { const u = t - t0; return u < 0 ? 0 : 720 * (1 - Math.exp(-u / 1.1)) + 34 * Math.exp(-u / 1.4) * Math.sin(u * 4.2); };
-const hang = (t, t0, x = 960, y = 640, k = .5) => TF(x, y, k, `<path d="M-260 0 H260" stroke="#9A6A3A" stroke-width="22" stroke-linecap="round"/>` + hangingMagnet(t, spinAng(t, t0)));
-const chart = (t, x = 330, y = 760, k = .42) => spinChartPH(t, x, y, k);
-const cone = (x, y, k = 1) => TF(x, y, k, `<path d="M-34 0 L-10 -80 H10 L34 0z" fill="${CONEC}" stroke="#A85A12" stroke-width="4"/><rect x="-44" y="-6" width="88" height="12" rx="4" fill="${CONEC}" stroke="#A85A12" stroke-width="4"/><path d="M-22 -40 H22" stroke="#fff" stroke-width="8"/>`);
-const cones = (t, x = 960, y = 1000, k = .8) => t < MKS("cones") ? "" : cone(x - 170, y, k * spring(t, MKS("cones"), .4)) + cone(x + 170, y, k * spring(t, MKS("cones") + .3, .4)) + nsLine(t, MKS("cones") + .6, x - 170, y - 40, x + 170, y - 40, 26);
+const field = (t, cam, o = {}) => FD21(t, o, cam);
+// a quick spin that settles back to 0 (the red end to the rain tree): turns, d seconds to the stop
+const spinQ = (t, t0, turns = 1, d = 2) => { const u = t - t0; if (u <= 0) return 0; if (u > d + 1.6) return 0; return (360 * turns * (1 - Math.pow(Math.max(0, 1 - u / d), 3)) + (u > d * .7 ? 22 * Math.exp(-(u - d * .7) / .5) * Math.sin((u - d * .7) * 7) : 0)) % 360; };
+const HG = [HANG[0], HANG[1]];   // the hanging magnet's middle (world)
+window.SHELF_AWAY = (t) => { if (PART !== 1) return 0; const a = W("m902", "cross") - .3, b = LE("m903") + .4, w = SCN.waitw; return Math.max(ss(a, a + .35, t) * (1 - ss(b, b + .35, t)), ss(w.t0 + .3, w.t0 + .8, t) * (1 - ss(SCN.pullout.t1, SCN.pullout.t1 + .4, t))); };
+const coneK = (t) => { const c = MKS("cones"); return t < c ? false : [spring(t, c, .4), spring(t, c + .3, .4)]; };
+const coneLine = (t) => t >= MKS("cones") + .6 ? MKS("cones") + .6 : 0;
+// the dashed gold line between the cones: plain until lcplaces names it; with its N and S ends afterwards (nsLine draws both)
+const fieldCones = (t) => { const k = coneK(t); return k ? { cones: k, coneLine: t >= MKS("nsline") ? MKS("cones") + .6 : 0 } : {}; };
+const coneDash = (t) => { const c = MKS("cones") + .6; if (t < c || t >= MKS("nsline")) return ""; const u = eo((t - c) / .6); return `<path d="M${CONES[0][0] + 30} ${CONES[0][1] - 8} H${n2(CONES[0][0] + 30 + (CONES[1][0] - CONES[0][0] - 60) * u)}" stroke="${NSC}" stroke-width="8" stroke-dasharray="20 12"/>`; };
 
-/* 1 · silent cold open: the school field on Tuesday after school; Basil's bar magnet hangs level on its string from the broom handle across
-   two plastic chairs; Basil gives it a gentle spin (spin0) and steps back; Momo and Pip lean in (budsIn, back views); it turns, slows */
-SC.cold = (t, s) => phScene(t, s, "1 · Cold open: the hanging magnet on the school field (no voice)", ["A SCHOOL FIELD in Singapore on Tuesday after school: green grass, a red running track, white goalposts, two floodlight poles with a wire between them, a netball court with two hoops, a sports shed, a chain-link fence, the school block behind, a big RAIN TREE at the far end (every leaf cluster on a twig, on a branch, on the trunk). By a WOODEN BENCH: two plastic chairs back to back with a wooden broom handle across them; Basil's red-and-blue bar magnet hangs level from it on a thin string. THE SPIN CHART beside it (three empty rows).",
-  "MK spin0: Basil gives the magnet a gentle spin with one claw-tip and steps back; it turns, slows. MK budsIn: Momo and Pip lean in (back views), watching it turn. Pill: A school field, Singapore · Tuesday after school. The swallow on the wire between the floodlight poles (before the game). One slow push towards the turning magnet; no cut."])
-  + hang(t, MK("spin0"), 960, 700, .55) + chart(t, 1640, 800, .36);
+/* 1 · silent cold open: the school field on Tuesday after school. One slow push towards the turning magnet; no cut. spin0: Basil gives the
+   magnet a gentle spin (a swish at its end; he hops back); it turns, slows, swings past and back. budsIn: Momo and Pip lean in (front views
+   turned in), Momo waves hello to the viewer. The swallow on the floodlight wire (the intro spot) */
+const camCold = (t) => camMix(camOn([960, 600], 1.04, 960, 560), camOn([HG[0], HG[1] - 40], 1.34, 980, 540), eio(t / 6));
+SC.cold = (t, s) => { const tb = MK("budsIn"), tp = MK("spin0"), cam = camCold(t), g = camPt(cam, HG), sw = clamp((t - tp) / .45);
+  return field(t, cam, { rig: { a: spinAng(t, tp, 2, 4.4) } })
+    + (sw > 0 && sw < 1 ? OP(Math.sin(Math.PI * sw), `<path d="M${n2(g[0] + 60)} ${n2(g[1] + 70)} Q${n2(g[0] + 150)} ${n2(g[1] + 40)} ${n2(g[0] + 170 - 60 * sw)} ${n2(g[1] - 30)}" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round"/>`) : "")
+    + bd("basil", 330, 1076, 480, t, { in: .05, poses: [[0, "sit"]], look: 5, jump: [[tp - .05, 22]] })
+    + bd("momo", 1430, 1060, 470, t, { in: tb, flip: true, poses: [[tb, "sit"], [tb + .7, "waving"], [tb + 2.6, "sit"]], look: -5, wave: true })
+    + bd("pip", 1730, 1076, 500, t, { in: tb + .15, flip: true, poses: [[tb + .15, "sit"]], look: -6 })
+    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A school field, Singapore ·", "Tuesday after school")); };
 
 /* 2 · "Last time...": EP20's dare, word for word. ONE calm picture: the two dare cards side by side (EP20's own, ep20dare.js), a gentle
-   push-in, the big ?, each card steps forward and lights while Heart says it (>= 2.5 s each). WIRED */
+   push-in, the big ?, each card steps forward and lights while Heart says it (>= 2.5 s each) */
 SC.lasttime = (t, s) => { const L = "m203", tc = [W(L, "one"), W(L, "two")], z = 1 + .04 * eio((t - s.t0) / 8), k = ramp(t, s.t0 + .05, .5), cur = tc.filter((x) => t >= x - .15).length - 1;
   let cards = ""; [0, 1].forEach((i) => { const fw = cur === i ? ss(tc[i] - .15, tc[i] + .25, t) : (cur > i && i < 1 ? 1 - ss(tc[i + 1] - .15, tc[i + 1] + .25, t) : 0);
-    cards += TF(740 + i * 440, 600 + 14 * (1 - spring(t, s.t0 + .2 + i * .15, .45)), .95 * (1 + .1 * fw), dareCard2(i, { pulse: cur === i ? .9 : pulse(t, tc[i], .04, .9) }, t)); });
+    cards += TF(740 + i * 440, 600 + 14 * (1 - spring(t, s.t0 + .2 + i * .15, .45)), .95 * (1 + .1 * fw), dareCard2(i, { pulse: cur === i ? .9 : pulse(t, tc[i], .04, .9), id: "lt" + i }, t)); });
   return bg("stage2") + OP(ramp(t, s.t0, .3), T(960, 110, "Last time…", 60, "#fff", { w: 600 }))
     + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${cards}</g>`
-      + qMark(t, W("m202", "where") - .1, 960, 260)
-      + TF(960, 1000, spring(t, W("m202", "where") - .1, .4), tpill(0, 0, DARE_LABEL, 40, P.sun, P.ink, { w: 700 }))) + HUD(t); };
-SC.back = (t, s) => phScene(t, s, "2 · Back on the school field: the magnet turning", ["The school field (the cold open's set): a slow drift round the hanging magnet, turning slowly on its string; the buddies big: Pip hides one paw behind his back, Basil a secret fist, Momo a sure little smile (no pose sprites: listening). Pill: Hold on to your answer! (wired). The swallow still on the floodlight wire (before the game). Full staging: SCENES_TODO.md."])
-  + hang(t, s.t0 - 2.5, 960, 660, .5) + (t >= LT("m204") - .1 ? TF(960, 470, spring(t, LT("m204") - .1, .4), tpill(0, 0, "Hold on to your answer!", 40, P.sun, P.ink, { w: 700 })) : "");
-// the title slam over the dimmed field: SPIN IT AGAIN AND AGAIN. (white) then WHERE DOES IT STOP? (sun yellow). WIRED
+      + qMark20(t, W("m202", "where") - .1, 960, 260)
+      + TF(960, 1000, spring(t, W("m202", "where") - .1, .4), tpill(0, 0, DARE_LABEL, 40, P.sun, P.ink, { w: 700 }))) + melt(t, s, "cold", .5) + HUD(t); };
+/* back on the field: a slow drift round the hanging magnet (Basil has spun it again) that carries on under the title. Pip hides his answer
+   (a hop), Basil a secret fist (a hop), Momo a sure little smile: no pose sprites */
+const camBack = (t) => { const u = clamp((t - SCN.back.t0) / (SCN.title.t1 - SCN.back.t0)); return camMix(camOn([HG[0] - 60, HG[1] - 30], 1.36, 960, 540), camOn([HG[0] + 50, HG[1] - 40], 1.44, 960, 540), eio(u)); };
+const backBuds = (t, t0) => bd("basil", 300, 1076, 480, t, { in: t0, poses: [[t0, "sit"]], look: 4, jump: [[LT("m204") + .5, 14]] }) + bd("momo", 1430, 1060, 470, t, { in: t0 + .1, flip: true, poses: [[t0, "sit"]] })
+  + bd("pip", 1730, 1076, 500, t, { in: t0 + .05, flip: true, poses: [[t0, "sit"]], jump: [[LT("m204") + .3, 26]] });
+SC.back = (t, s) => field(t, camBack(t), { rig: { a: spinAng(t, SCN.back.t0 - 1.2, 2, 4.4) } }) + backBuds(t, s.t0 + .05) + (t >= LT("m204") - .1 ? TF(960, 300, spring(t, LT("m204") - .1, .4), tpill(0, 0, "Hold on to your answer!", 56, P.sun, P.ink, { w: 700 })) : "") + melt(t, s, "lasttime", .5) + HUD(t);
+// the title slam over the dimmed field: SPIN IT AGAIN AND AGAIN. (white) then WHERE DOES IT STOP? (sun yellow)
 const TITLE = (k1, k2) => slamFit(400, "SPIN IT AGAIN AND AGAIN.", "#fff", k1) + slamFit(610, "WHERE DOES IT STOP?", P.sun, k2);
 SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lcSet(t, s, "back") + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.78 * dim)}"/>` + TITLE(slamK(u, .05), slamK(u, .55)) + HUD(t); };
 
-/* 3 · today: the camera glides from the hanging magnet to THE SPIN CHART (its three empty rows, held about 2 s), then up to the floodlight
-   wire; the game: ONE smooth push-in from the field straight onto the swallow on the wire (common.js gameScene). Stage 2: R.world = the
-   drawn field, A = the swallow's spot in it (the INTRO spot: never used again). WIRED */
-SC.today = (t, s) => phScene(t, s, "3 · Today: THE SPIN CHART on the field", ["The field: the camera glides from the hanging magnet to THE SPIN CHART (its three empty rows Spin 1 · Spin 2 · Spin 3, held about 2 s; MK chart: a bright two-note sting), then up to the floodlight wire (the game's push-in starts there).",
-  "Basil big at the left (h ~480) by the chart, tapping it (showing it: no pose swap); Momo at the right; Pip mid-ground. The swallow on the floodlight wire (the intro spot; still before the game). Full staging: SCENES_TODO.md."])
-  + (t >= MK("chart") ? chart(t, 960, 820, .4) : "") + HUD(t);
-SC.game = (t, s) => gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => fieldPH(tt), A: SWALLOW, T: [680, 440], Z: 2.4, dim0: 0, ly: -150, qx: 1730, qy: 430 }) + smallPrint(t, LT("m304"), LOOK_RULE);
+/* 3 · today: the camera glides from the hanging magnet to THE SPIN CHART (its three empty rows, held about 2 s from `chart`), then up to the
+   floodlight wire, where the game's push-in starts (one move). Basil taps his chart (a hop: showing it, no pose) */
+const camChart = camOn([FD.chart[0] + 20, FD.chart[1] - 30], 1.45, 1100, 500), SWI = SWAT.intro, camWire = camOn([SWI[0], SWI[1] - 10], 1.8, 760, 440);
+const camToday = (t) => { const s = SCN.today, a = eio((t - s.t0) / 1.3), b = eio((t - (s.t1 - 1.5)) / 1.5); return b > 0 ? camMix(camChart, camWire, b) : camMix(camBack(SCN.title.t1), camChart, a); };
+SC.today = (t, s) => { const out = s.t1 - 1.4; window._BUBAT = { '*': [960, 250] };
+  return field(t, camToday(t), { rig: { a: spinAng(t, SCN.back.t0 - 1.2, 2, 4.4) } }) + (t >= MK("chart") ? OP(pulse(t, MK("chart"), .05, .8), `<rect width="1920" height="1080" fill="#fff" opacity=".12"/>`) : "")
+    + bd("basil", 300, 1076, 480, t, { in: s.t0 + .1, out, poses: [[s.t0, "sit"]], look: -3, jump: [[MK("chart") - .1, 18]] }) + bd("pip", 1440, 1010, 380, t, { in: s.t0 + .15, out: out + .1, flip: true, poses: [[s.t0, "sit"]] })
+    + bd("momo", 1730, 1076, 500, t, { in: s.t0 + .2, out: out + .2, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + HUD(t); };
+SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = SWI;
+  return gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => field(tt, cE), A: camPt(cE, [p[0] - 6, p[1] - 12]), T: [680, 440], Z: 2.4, dim0: 0 }) + smallPrint(t, LT("m304"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["A freely suspended magnet", ""], ["The North-South direction", ""], ["Earth is like a magnet", ""]], ["m401", "m402", "m403", "m404"], "momo");
+SC.r1card = (t, s) => roundCard(t, s, "ROUND 1", "YOUR ANSWER FROM LAST TIME");
 
 /* 5 · Round 1: EP20's dare (a short 3 s ring). EP20's two cards as the ONE set of numbered picture cards; the clue labels a string · spin,
-   spin, spin · free to turn ON TOP of the ring; the ring's picture: the magnet on its string, turning (EP20's hangingMagnet). Basil leads
-   (worried through the countdown: lockN) */
+   spin, spin · free to turn ON TOP of the ring; in the ring Basil's magnet on its string, spinning. ON `top` (Momo's pick): a small spinning
+   top pops by her, wobbles and falls over (what she means). Basil leads (thinking after the question, worried through the countdown: lockN) */
+const spinTop = (t, t0) => { if (t < t0) return ""; const u = t - t0, fall = ss(1.4, 2.0, u), wob = 14 * Math.sin(u * 9) * (1 - fall) * (.4 + u * .4);
+  return TF(0, 0, spring(t, t0, .45), `<ellipse cx="0" cy="6" rx="60" ry="10" fill="${P.ink}" opacity=".2"/><g transform="rotate(${n2(wob + 78 * fall)} 0 0)"><path d="M0 0 L-46 -70 Q0 -96 46 -70z" fill="#FF8A3A" stroke="${P.ink}" stroke-width="5"/><path d="M-30 -48 Q0 -40 30 -48" stroke="#fff" stroke-width="6" fill="none"/><ellipse cx="0" cy="-74" rx="46" ry="12" fill="#FFC23A" stroke="${P.ink}" stroke-width="5"/><rect x="-6" y="-104" width="12" height="30" rx="4" fill="${P.ink}"/></g>`); };
 SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, clues: DARE_CLUES.map((c, i) => [c, W(L1, "where") + .15 * i]), lead: "basil", csize: 32, q: DARE_LABEL, tq: W(L1, "where") - .1,
-  tc: [W(L1, "where"), W(L1, "stop")], ring0: MK("ring0_r1"), dur: 3, lock: "m502",
-  pics: [0, 1].map((i) => darePic(i, t)),
-  obj: (tt) => TF(430, 330, .55, `<path d="M-200 0 H200" stroke="#9A6A3A" stroke-width="20" stroke-linecap="round"/>` + hangingMagnet(tt, tt * 140)),
-  picks: [{ who: "momo", id: "m503m", word: "1" }, { who: "pip", id: "m504p", word: "2" }, { who: "basil", id: "m505b", word: "2" }] });
+  tc: [W(L1, "where"), W(L1, "stop")], ring0: MK("ring0_r1"), dur: 3, lock: "m502", pics: [0, 1].map((i) => darePic(i, t)), obj: ringP1,
+  picks: [{ who: "momo", id: "m503m", word: "1" }, { who: "pip", id: "m504p", word: "2" }, { who: "basil", id: "m505b", word: "2" }],
+  over: (tt) => tt < LE("m503m") + .6 ? TF(1650, 420, 1.1, spinTop(tt, MK("top"))) : "" });
 
-/* 6 · BE THE HANGING MAGNET (the journey; the buddies ride along, shrunk, on top of the magnet round the string's knot: common.js riders).
-   Tags WIRED */
-SC.waitw = ph("6 · Be the hanging magnet! (the glide down to the magnet)", "Pill Be the hanging magnet! The camera glides down to the magnet on its string. The buddies wave the viewer off (goodbye), then shrink (a pop each) and follow. The shelf slides aside. The swallow on the edge of the sports shed's roof as the camera passes (new spot).");
-SC.shrink = (t, s) => phScene(t, s, "6 · BE THE HANGING MAGNET (first person, present tense)", ["MK jspin: YOU are the bar magnet (your own red end at the bottom left, your blue end at the bottom right; the string goes up from your middle to the broom handle, a tall wooden beam high above). The field whirls round you (the goalposts, the school block, the rain tree). MK jfinger: a giant finger (an adult's, four fingers and a thumb) gives the push and FADES OUT COMPLETELY. MK jslow / jswing: the world slows; you swing past a faint dashed gold line on the grass far below, and back, each swing smaller. MK jback: soft gold ripples nudge you back (tag something turns you back). MK jstop: you stop: past your red end, the big rain tree. MK jagain: the finger spins you again; the world whirls, slows, swings. MK jstop2: you stop: the rain tree again (tag same way!); a counter spin 1 ✓ · spin 2 ✓.",
-  "The three buddies ride along, shrunk (h ~170), sitting on top of you round the string's knot at the lower edges (riders). Calm pad, Heart soft. The camera IS the magnet: a spin, a slowing, a swing, a stop; never a cut. Full staging: SCENES_TODO.md."])
-  + youTag(t, MK("jspin"), "You: a bar magnet on a string") + feelTag(t, MK("jfinger"), MK("jslow") - .2, "to scale: a bar magnet", 160) + feelTag(t, MK("jback"), MK("jstop") - .2, "something turns you back", 160)
-  + feelTag(t, MK("jstop"), MK("jagain") - .2, "the rain tree", 160) + feelTag(t, MK("jstop2"), s.t1, "same way!", 160)
-  + (t >= MK("jstop2") ? TF(1560, 300, spring(t, MK("jstop2") + .3, .45), tpill(0, 0, "spin 1 ✓ · spin 2 ✓", 32, "#fff", P.ink, { w: 700 })) : "")
-  + riders(t, s, { tin: MK("jspin") + .6, h: 200, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] } });
-SC.pullout = ph("6 · Pull back out to the field", "Whoosh out to the field, normal size (0.6 s): the magnet still, its red end towards the rain tree. The buddies pop back (a hop each).");
+/* 6 · Be the hanging magnet! The camera glides down to the magnet on its string (one glide); the buddies wave the viewer off (goodbye), then
+   each shrinks with a pop. The swallow on the edge of the sports shed's roof as the camera passes */
+const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([HG[0] + 40, HG[1] - 160], 1.2, 960, 500), camOn([HG[0], HG[1]], 4.6, 960, 560), u * u); };
+SC.waitw = (t, s) => { const L = "m601", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [300, 1430, 1730][i]; return bd(w, x, [1076, 1060, 1076][i], [470, 460, 490][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  return field(t, camWait(t), { rig: { a: 0 } }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the hanging magnet!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#CFE6F0", 960, 600); };
+SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jback") + .1, "thinking"], [m("jback") + 2.0, "sit"], [m("jstop2") + .1, "surprised"], [m("jstop2") + 2.2, "sit"]] };
+  return magnetJourney(t, s) + riders(t, s, { tin: m("jspin") + .6, h: 200, at: { pip: [230, 1000], basil: [1700, 1004], momo: [420, 996] }, poses: rp })
+    + youTag(t, m("jspin"), "You: a bar magnet on a string") + feelTag(t, m("jfinger"), m("jslow") - .2, "to scale: a bar magnet", 170) + feelTag(t, m("jback"), m("jstop") - .2, "something turns you back", 170)
+    + feelTag(t, m("jstop"), m("jagain") - .2, "the rain tree", 170) + feelTag(t, m("jstop2"), s.t1, "same way!", 170)
+    + (t >= m("jstop") ? TF(1600, 300, spring(t, m("jstop") + .3, .45), tpill(0, 0, t >= m("jstop2") ? "spin 1 ✓ · spin 2 ✓" : "spin 1 ✓", 34, "#fff", P.ink, { w: 700 })) : ""); };
+// the pull back out: the field at normal size; the magnet still, its red end towards the rain tree
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
+  return field(t, camMix(camOn([HG[0] - 80, HG[1] + 20], 1.18, 960, 580), camOn([HG[0], HG[1]], 4.6, 960, 560), u), { rig: { a: 0 } })
+    + bd("basil", 300, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", 1440, 1010, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1730, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
-/* 7 · the answer: two, the same way every time. Basil (right) explains and sets two cones under the magnet's ends (cones). WIRED: EP20's two
-   cards small along the top, the tick, THE SPIN CHART's arrows (chart1) */
-SC.answer = (t, s) => ph("7 · The answer is two: the same way every time; the two cones", "The field: the bench and THE SPIN CHART at its HOME (left, about 40% of the frame high: the same in cold, today, answer, goal, holdon, earthq, cliff, nyk). EP20's two cards small along the top (wired): card 2 lights at ansglow; an x chip on card 1; the coins YOU +1 and BUDDIES +1 (two of three were right). MK chart1: an arrow lands in each row, all the same way, and the same way every time!. MK cones: Basil sets two orange PE cones on the grass, one under each end of the still magnet (the red end's cone towards the rain tree). Pip and Basil arms crossed (right, OUTCOMES, through the whole scene); Momo oops (wrong), shy until the scene ends. The swallow on the top of the chain-link fence (new spot).")(t, s)
-  + [0, 1].map((i) => TF(810 + i * 300, 175, .42, dareCard2(i, { lit: i === 1 && t >= MK("ansglow") ? 1 : 0 }, t))).join("")
-  + tagAt(t, MK("ansglow") + .3, 810, 280, 1, "not this one", 26) + chart(t) + hang(t, -9, 1180, 640, .42) + cones(t, 1180, 1010, .7);
+/* 7 · the answer is two: the same way every time. EP20's two cards small at the top left (card 2 lit at ansglow; "not this one" on card 1);
+   the coins YOU +1 and BUDDIES +1. Pip and Basil confident, Momo shy, to the END of the scene (OUTCOMES `to`). chart1: an arrow lands in each
+   row of THE SPIN CHART, all the same way (the camera pushes to it); Basil explains; cones: he sets two orange cones under the magnet's ends.
+   The swallow on the top of the chain-link fence */
+const camAns = (t) => { const a = eio((t - MK("chart1") + .3) / 1.1) * (1 - eio((t - LT("m702b") + .2) / 1.4)), b = eio((t - LT("m702b") + .2) / 1.4);
+  return camMix(camMix(camOn([900, 620], 1.12, 960, 580), camOn([FD.chart[0] + 30, FD.chart[1] - 20], 1.55, 1060, 520), a), camOn([HG[0], HG[1] + 90], 1.42, 980, 560), b); };
+SC.answer = (t, s) => { window._BUBAT = { basil: [1000, 230] }; const tA = MK("ansglow");
+  return field(t, camAns(t), { rig: { a: 0 }, ...fieldCones(t), front: coneDash(t) })
+    + `<g filter="url(#drop)"><rect x="30" y="40" width="460" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + [0, 1].map((i) => TF(150 + i * 220, 135, .42, dareCard2(i, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }, t))).join("")
+    + tagAt(t, tA + .3, 150, 222, 1, "not this one", 22) + coin(t, MK("coin1") - .1, 1560, 400, "+1", "if you showed two fingers")
+    + bd("basil", 280, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]], jump: [[MK("cones") - .3, 20]] }) + (t > s.t0 + .3 ? pickNum("basil", 440, 640, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .2, 500, 585, .7)
+    + bd("momo", 1440, 1010, 380, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("momo", 1320, 720, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .25, 1370, 665, .7)
+    + bd("pip", 1730, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .4 ? pickNum("pip", 1880, 640, t, s.t0 + .4, "2") : "") + tickChip16(t, tA + .3, 1860, 580, .7)
+    + melt(t, s, "pullout", .3) + HUD(t); };
 
-/* 8 · Pip's guess (the steel goalpost turns it), then [LOOK CLOSER] which way? the same magnet in three places (field, room, basin), the same
-   line (sameline), named North and South (nsline); FREELY SUSPENDED (Momo) and NORTH-SOUTH DIRECTION (Basil) pop (lib.js o.at); the end
-   tags (endN, endS); Mark Sentence 1 (Basil, 6.17) */
-SC.goal = (t, s) => ph("8 · \"The goalpost turns it!\" (Pip at the magnet)", "The field: the bench and THE SPIN CHART (HOME, its three arrows); behind the hanging magnet, small, the white goalpost the red end happens to face; the two cones under it. Pip big at the left (h ~500) pointing past the magnet to the goalpost (talking, sure: his idea; thinking AFTER his line: a real question); Basil big at the right (h ~480); Momo mid-ground. A push along the magnet to the goalpost. The swallow on the goalpost's crossbar (new spot: in plain sight while Pip points there).")(t, s)
-  + chart(t) + hang(t, -9, 1180, 640, .42) + cones(t, 1180, 1010, .7);
-SC.lcplaces = (t, s) => lcPH(t, s, { title: "Which way? The same line in three places", v: "v_places", verdict: [`SAME LINE EVERY TIME: NORTH–SOUTH`, GOODC], fx: 1180, fy: 640,
-  beats: [["field", "the field: the magnet on its string from the broom handle in the middle of the field, the goalpost small and far behind (far from the goalpost); it stops; a dashed gold line under it"], ["room", "the classroom: hung from a wooden ruler across two stacks of books on a plastic-topped table in the middle of the room; the window shows the rain tree (in the classroom); it stops along a parallel line"], ["basin", "the basin: a plastic basin of water on the floor, the magnet on a round plastic lid floating in it, turning slowly (floating on a lid); it stops along the same line"], ["sameline", "the three dashed lines glow together"], ["nsline", "one big dashed gold line runs across all three panels: N at the rain-tree end, S at the other (the same line every time)"], ["kw_freely_suspended", "FREELY SUSPENDED pops (sun yellow), lines to the string and the lid"], ["kw_north_south_direction", "NORTH–SOUTH DIRECTION pops, a line to the big dashed line"], ["endN", "tag this end faces North (by the red end)"], ["endS", "tag this end faces South (by the blue end)"]],
-  notes: ["Three panels side by side, each filling a third, each with the magnet BIG, turning then stopping; the red end points the same way in all three (match it to the window's view of the rain tree). Then one big N – S line across all three. The arrows of THE SPIN CHART are wiped and rewritten as the field · the classroom · the basin (seen when the panel eases back).",
-    "A buddy's FACE peeks in from a lower corner: Pip first (thinking: his goalpost idea is tested; OOPS as the field magnet stops far from the goalpost and SHY to the verdict, a small nod at the verdict: the 23 Nov rule), Basil (surprised as all three stop on one line), Momo (teaching FREELY SUSPENDED, pointing at the string, then the lid; cheer: her first this part), Basil (teaching NORTH–SOUTH DIRECTION; a big smile and a nod: he cheers at his Mark Sentence)."],
-  over: (tt) => nsLine(tt, MKS("nsline"), 300, 820, 1620, 820, 34) + (tt >= MKS("endN") ? TF(380, 900, spring(tt, MKS("endN"), .45), tpill(0, 0, "this end faces North", 28, NSC, "#fff", { w: 700 })) : "") + (tt >= MKS("endS") ? TF(1540, 900, spring(tt, MKS("endS"), .45), tpill(0, 0, "this end faces South", 28, NSC, "#fff", { w: 700 })) : "") });
-SC.mark1 = (t, s) => markScene(t, s, { id: "m809", sayId: "m808", who: "basil", n: "1 of 2", text: "A freely suspended magnet comes to rest in the North-South direction.", keys: ["freely", "suspended", "magnet", "comes", "rest", "North-South", "direction"], size: 66, y: 250, footer: FOOT, achieved: true, poses: [[LE("m809") + .2, "cheer"], [LE("m809") + 2.0, "sit"]] });
+/* 8 · Pip: "The red end faces the goalpost. Magnets attract steel, so the goalpost turns it." The camera pushes along the magnet to the white
+   goal (the swallow sits on its crossbar, in plain sight). Pip talks (sure), then thinks (a real question) */
+const camGoal = (t) => { const s = SCN.goal, u = eio((t - s.t0 - .3) / (s.t1 - s.t0 - .3)); return camMix(camOn([HG[0], HG[1] + 40], 1.4, 1000, 560), camOn([(FD.goal[0] + FD.goal[1]) / 2 + 60, FD.goal[3] + 90], 1.85, 1080, 470), u); };
+SC.goal = (t, s) => field(t, camGoal(t), { rig: { a: 0 }, ...fieldCones(t), front: coneDash(t) })
+  + bd("pip", 280, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("m801p") + .1, "thinking"]], look: 3 })
+  + bd("momo", 1440, 1010, 380, t, { in: s.t0 + .15, flip: true }) + bd("basil", 1730, 1076, 480, t, { in: s.t0 + .2, flip: true }) + HUD(t);
+/* [LOOK CLOSER] which way? (lc21.js lcPlacesArt). Faces: Pip at the left first (his goalpost idea is tested: thinking; OOPS as the field
+   magnet stops far from the goalpost, and he stays shy to the verdict: the 23 Nov rule; he leaves when Basil comes to teach); Momo at the
+   right (teaching FREELY SUSPENDED; cheer after her line: achieved); Basil at the left (teaching NORTH-SOUTH DIRECTION; a smile and a nod) */
+SC.lcplaces = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camGoal(SCN.goal.t1), p = camPt(cE, HG), tm = s.t0 + 1.2, tO = MK("field") + 1.5, tMo = LT("m805m") - .5, tB = LT("m806b") - .5, tK = MK("kw_freely_suspended"), tK2 = MK("kw_north_south_direction");
+  const kwLines = (tt) => { let o = ""; if (tt > tK + .3 && tt < tK + 3.2) { const a = ramp(tt, tK + .3, .3) * (1 - ramp(tt, tK + 2.9, .3)); o += [lcXY(tt, s, PX[0], PY0 + 140), lcXY(tt, s, PX[2] + 80, PY0 + 250)].map(([x, y]) => pline(640, 340, x, y, a)).join(""); }
+    if (tt > tK2 + .3 && tt < tK2 + 3.2) { const a = ramp(tt, tK2 + .3, .3) * (1 - ramp(tt, tK2 + 2.9, .3)), [x, y] = lcXY(tt, s, 120, 150); o += pline(1240, 340, x, y, a); } return o; };
+  return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcPlacesArt, bgc: "#FFF8EA", set: (tt) => field(tt, cE, { rig: { a: 0 }, ...fieldCones(tt), front: coneDash(tt) }), verdict: [`SAME LINE EVERY TIME: NORTH–SOUTH`, GOODC], tv: MK("v_places"), peek: false,
+    over: (tt) => kwLines(tt) + peekFace("pip", "l", tt, tm, tB - .3, [[tm + .2, "thinking"], [tO, "oops"]])
+      + peekFace("momo", "r", tt, tMo, undefined, [[LE("m805m") + .1, "cheer"], [LE("m805m") + 2.1, "sit"]], { achieved: true })
+      + peekFace("basil", "l", tt, tB) }); };
+SC.mark1 = (t, s) => markScene(t, s, { id: "m809", sayId: "m808", who: "basil", n: "1 of 2", text: "A freely suspended magnet comes to rest in the North-South direction.", keys: ["freely", "suspended", "magnet", "comes", "rest", "North-South", "direction."], size: 66, y: 250, footer: FOOT, achieved: true, poses: [[LE("m809") + .2, "cheer"], [LE("m809") + 2.0, "sit"]],
+  under: markHang(t, 1250, 900, .7 * spring(t, s.t0 + .4, .5)) });
 
-/* 9 · HOLD ON! Basil: "nobody is holding it, so it is free" (Stage 2: model ../ep16/p1.js SC.holdon and ../ep20's HOLD ON!: the HOLD ON!
-   stamp, the YOU ring 5 s with crossed arms, the clue labels on the bench · nobody holding it · free? ON TOP of the ring, the bell, the coin;
-   then Pip hangs it back up (hangup): it turns freely and stops on the cones' line (freeturn)) */
-SC.holdon = ph("9 · HOLD ON! Basil: \"nobody is holding it, so it is free\"", "MK tangle: Basil holds up a tangled knot of string (a funny tangle). MK try: he lays the magnet flat on the WOODEN BENCH and spins it with a claw-tip: it scrapes round and stops; again: another way; a third time: another way. Three small chalk arrows on the bench, three different ways. His note card on THE SPIN CHART's tray: On the bench: a different way every time!. The HOLD ON! stamp; the YOU ring (5 s, crossed arms) big and central with the magnet on the bench as its picture and the clue labels on the bench · nobody holding it · free? on top; only Basil at the side (thinking: Heart's line is a question to him). After the bell (m903), Basil OOPS (shy) through the WHOLE fix; Pip and Momo arms crossed through it. MK rubs: a magenta chip on the bench the bench rubs: not free to turn. MK hangup: Pip untangles the string, ties it round the magnet's middle and hangs it back from the broom handle; MK freeturn: it turns freely, slows, and stops along the cones' line again (green chip free to turn!; a soft settle chime and a gentle camera nudge as it stops). The swallow on the handle of the PE equipment trolley by the sports shed (new spot); not in the ring.");
-const holdon0 = SC.holdon; SC.holdon = (t, s) => holdon0(t, s) + smallPrint(t, MK("try"), PHONE_RULE) + ppChip(t, MKS("rubs") + .3, 600, 640, 1, "the bench rubs: not free to turn") + ppChip(t, MKS("freeturn") + .3, 1300, 640, 0, "free to turn!")
-  + chart(t) + (t >= MKS("hangup") ? hang(t, MKS("hangup") + .6, 1180, 680, .42) : "") + cones(t, 1180, 1010, .7);
+/* 9 · HOLD ON! Basil: "My string got tangled, so I laid the magnet on the bench. Nobody is holding it, so it is free!" tangle: he holds up a
+   tangled knot of string; try: the magnet lies flat on the WOODEN BENCH and he spins it: it scrapes round and stops one way; again another
+   way; a third time another way (three chalk arrows on the bench's back rail). His note card on THE SPIN CHART's tray. The HOLD ON! stamp;
+   the countdown takes the stage (the blue game stage, the ring big and central with the magnet on the bench, the clue labels on the bench ·
+   nobody holding it · free? ON TOP of the ring, YOU cross your arms; only Basil at the side, thinking: it is his own idea on trial). After the
+   bell Basil stays shy through the WHOLE fix; Pip and Momo confident (OUTCOMES `to`). rubs: a magenta chip "the bench rubs: not free to
+   turn" joined to the magnet; hangup: Pip hangs it back from the broom handle; freeturn: it turns freely, slows and stops along the cones'
+   line (a gentle camera nudge as it stops; a close-up of Momo's face, a nod in her confident pose); a green chip "free to turn!". The swallow
+   on the handle of the PE trolley (not in the countdown) */
+const BNC = [FD.bench[0] + 10, FD.bench[1] - 102];   // where the magnet lies on the bench seat (world)
+const benchStops = [40, -55, 125];
+const benchAng = (t) => { const tr = MK("try"); let a = 0; for (let i = 0; i < 3; i++) { const t0 = tr + .9 * i; if (t >= t0) { const u = clamp((t - t0) / .75); a = (i ? benchStops[i - 1] : 0) + (benchStops[i] + 360 - (i ? benchStops[i - 1] : 0)) * (1 - Math.pow(1 - u, 2)); } } return a % 360; };
+const flatMag = (t, a, k = .55) => { const c = Math.cos(a * Math.PI / 180); return `<ellipse cx="0" cy="22" rx="${n2(90 * Math.max(.3, Math.abs(c)))}" ry="8" fill="${P.ink}" opacity=".25"/><g transform="scale(${n2(Math.max(.12, Math.abs(c)) * k)} ${n2(k * .62)})">${bar20(t, { glint: false, flip: c < 0 })}</g>`; };
+const chalkArrows = (t) => { const tr = MK("try"); return [0, 1, 2].map((i) => { const t0 = tr + .9 * i + .8; if (t < t0) return ""; const x = FD.bench[0] - 110 + i * 110, y = FD.bench[1] - 168, a = [180, -40, 70][i];
+  return OP(ramp(t, t0, .25), `<g transform="translate(${x} ${y}) rotate(${a})"><path d="M-26 0 H22 M8 -12 L24 0 L8 12" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/></g>`); }).join(""); };
+const tangleStr = (t, t0, t1) => t < t0 || t > t1 + .3 ? "" : OP(1 - ramp(t, t1, .3), TF(470, 690, 1.3 * spring(t, t0, .45), `<path d="M0 -120 V-60" stroke="#7A7060" stroke-width="4"/><path d="M-10 -60 c40 -30 60 30 10 30 c-60 0 -40 -50 10 -40 c50 10 20 60 -20 50 c-40 -10 -20 -60 30 -50 c30 10 30 40 -10 50 M10 -20 q30 30 0 70" stroke="#F4F2EC" stroke-width="6" fill="none"/><path d="M-10 -60 c40 -30 60 30 10 30 c-60 0 -40 -50 10 -40 c50 10 20 60 -20 50 c-40 -10 -20 -60 30 -50 c30 10 30 40 -10 50 M10 -20 q30 30 0 70" stroke="#7A7060" stroke-width="2.5" fill="none"/>`));
+const holdPic = (t) => `<circle cx="430" cy="470" r="190" fill="#FFF8EA"/>` + TF(430, 560, .9, `<path d="M-200 -60 H200 L180 0 H-180z" fill="url(#woodG)" stroke="#7A4A22" stroke-width="5"/><path d="M-170 -40 H170 M-180 -20 H180" stroke="#7A4A22" stroke-width="2" opacity=".5"/>`) + TF(430, 470, 1, flatMag(t, 30 * Math.sin(t * .8) + 20, .9))
+  + [[330, 380, 160], [430, 360, -30], [530, 390, 70]].map(([x, y, a]) => `<g transform="translate(${x} ${y}) rotate(${a})"><path d="M-26 0 H22 M8 -12 L24 0 L8 12" stroke="${P.ink}" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/></g>`).join("");
+const hangA = (t) => { const h = MK("hangup"); return t < h + .4 ? null : spinQ(t, h + .6, 1, 1.5); };
+const camHold = (t) => { const a = eio((t - MK("try") + .8) / 1.2) * (1 - eio((t - MK("hangup") + .9) / 1.1)), b = eio((t - MK("hangup") + .9) / 1.1);
+  return camMix(camMix(camOn([820, 680], 1.12, 960, 560), camOn([BNC[0], BNC[1] + 20], 1.85, 960, 620), a), camOn([HG[0] - 40, HG[1] + 60], 1.5, 1000, 560), b); };
+const holdWorld = (t, cam) => { const r0 = MK("ring0_hold"), bell = MK("bell_hold"), ha = hangA(t), onB = ha === null;
+  return field(t, cam, { swallow: t < r0 - 1 || t > bell + 1 ? SWAT.holdon : false, rig: onB ? {} : { a: ha }, ...fieldCones(t), chart: { note: t >= MK("try") + 2.4 },
+    bench: (onB ? TF(BNC[0], BNC[1], 1, flatMag(t, t >= MK("try") ? benchAng(t) : 0)) : "") + chalkArrows(t), front: coneDash(t) }); };
+const RG = [960, 420], RR = 215;
+SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260], pip: [1300, 250] }; const b = "m902", c = "m903", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell, tF = MK("freeturn") + 1.0, cam = camHold(t);
+  const st = ss(tX - .1, tX + .4, t) * (1 - ss(LE(c) + .1, LE(c) + .6, t)), ring = st > .01;
+  const inner = `<circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g transform="translate(${RG[0]} ${RG[1] + 20}) scale(1.05) translate(-430 -470)">${holdPic(t)}</g>`;
+  const labels = [["on the bench", 400, 260, -1], ["nobody holding it", 1520, 260, 1], ["free?", 420, 560, -1]].map(([l, x, y, sd], i) => { const t0 = tX + .2 + i * .15; return t < t0 ? "" : pline(x - sd * 190, y + 20, RG[0] + sd * RR * .8, RG[1] + (y > 400 ? RR * .5 : -RR * .6), ramp(t, t0, .2)) + clue3(x, y, l, spring(t, t0, .4), 54, 520); }).join("");
+  const bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 6 * Math.sin(t * 3), gb = camPt(cam, BNC), gm = camPt(cam, HG);
+  const world = JOLT(t, [tF], holdWorld(t, cam), 10);
+  return world + (ring ? OP(st, bg("stage")) : "")
+    + (ring ? OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
+      + labels + TF(1700, 640 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 470 + bob * .6, 1.2) + TF(1700, 860, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
+    + (ring ? "" : tangleStr(t, MK("tangle"), MK("try") + .4))
+    + linkChip(t, MK("rubs") + .3, gb[0] - 40, gb[1] - 200, gb[0], gb[1] - 10, 1, "the bench rubs: not free to turn", 40, MK("hangup") - .6)
+    + linkChip(t, MK("freeturn") + .3, gm[0] + 330, gm[1] - 220, gm[0] + 40, gm[1] - 20, 0, "free to turn!", 44)
+    + (t >= tF ? `<circle cx="${n2(gm[0])}" cy="${n2(gm[1])}" r="${n2(120 + 400 * eo((t - tF) / .6))}" fill="none" stroke="${NSC}" stroke-width="${n2(10 * (1 - clamp((t - tF) / .6)))}" opacity="${n2(1 - clamp((t - tF) / .6))}"/>` : "")
+    + bd("pip", 1720, 1076, 500, t, { in: LT(c) + .3, flip: true, poses: [[LT(c) + .3, "arms_crossed"]] })
+    + bd("momo", 1420, 1010, 380, t, { in: LT(c) + .45, flip: true, poses: [[LT(c) + .45, "arms_crossed"]] })
+    + bd("basil", 250, 1076, 480, t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [LE("m901b") + .1, "pointing"], [LE("m901b") + 1.6, "sit"], [W(b, "something") + .9, "thinking"], [bell + .35, "sit"]], jump: [[MK("tangle") - .05, 16], [bell + .02, 30]], nohop: true })
+    + faceCam("momo", t, tF + .1, tF + 2.2, 640, 330, 150, [[tF + .1, "arms_crossed"]], { noreact: true })
+    + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 1420, 470, "+1", "arms crossed") + smallPrint(t, MK("try"), PHONE_RULE) + HUD(t); };
 
-/* 10 · Momo's question (how does it know?), Basil's half-right guess, then [LOOK CLOSER] fly up until you see the whole Earth (up, earth);
-   little hanging magnets all over the world come to rest North-South (everywhere); EARTH BEHAVES LIKE A MAGNET pops (lib.js o.at) with its
-   own North and South poles (poles2); Basil says what it means; the small Earth on THE SPIN CHART (chartEarth); Mark Sentence 2 (Pip, 6.16) */
-SC.earthq = ph("10 · \"How does the magnet know?\" (Momo at the magnet)", "The field: the magnet on its string between the cones, THE SPIN CHART (HOME). Momo big at the left (h ~500) looking from the magnet to the sky (talking, then thinking AFTER her line: a real question); Basil big at the right (h ~480) (talking, a bold paw up: his guess); Pip mid-ground. Push in on the still magnet. The swallow on the top edge of THE SPIN CHART's frame (new spot).");
-const earthq0 = SC.earthq; SC.earthq = (t, s) => earthq0(t, s) + chart(t) + hang(t, -9, 1180, 640, .42) + cones(t, 1180, 1010, .7);
-SC.lcearth = (t, s) => lcPH(t, s, { title: "How does it know? Fly up and see the whole Earth", v: "v_earth", verdict: [`THE EARTH TURNS IT: NO TOUCHING`, GOODC], fx: 1180, fy: 600,
-  beats: [["up", "from Basil's magnet the view rises in ONE smooth move: the field and its cones, the school, the HDB blocks, the whole of Singapore (a small green island), the sea, Malaysia above it"], ["earth", "the whole round EARTH in dark space fills the panel: North at the top, South at the bottom (white place words); blue seas, green and sand-brown land, white cloud; NO red or blue patches, nothing inside it"], ["everywhere", "little hanging magnets pop on, one after another: Singapore (labelled), Japan, Australia, Africa, South America, the United States; each turns, then comes to rest along a faint line from North to South (red ends all towards North); soft gold ripples from the Earth to each (interacts)"], ["kw_earth_behaves_like_a_magnet", "EARTH BEHAVES LIKE A MAGNET pops beside the Earth"], ["poles2", "its own North and South poles under it, two thin lines to the top and bottom of the Earth"], ["chartEarth", "ease back: the small Earth drawn at the bottom of THE SPIN CHART with Why? Earth behaves like a magnet"]],
-  notes: ["NEVER said or drawn: which magnetic pole of the Earth is where, red or blue on the Earth, a bar magnet inside it (the teacher's caution, script Facts to check 1). No little magnets near the poles (they dip there). Ripples, not arrows or field lines.",
-    "A buddy's FACE peeks in from a lower corner: Momo first (thinking: her question is answered; eyes wide as the whole Earth appears: listening, no pose swap), at EARTH BEHAVES LIKE A MAGNET Basil surprised (his wild guess was close) and Momo cheer (a key word learnt; over a minute after her last), then Basil talking (teaching what it means, pointing from the Earth to Singapore's little magnet), a big smile after."] });
-SC.mark2 = (t, s) => markScene(t, s, { id: "m1008", sayId: "m1007", who: "pip", n: "2 of 2", text: "Earth behaves like a magnet with its own North and South poles. It interacts with a freely suspended magnet. This causes the freely suspended magnet to always point in the North-South direction.", keys: ["Earth", "behaves", "like", "its", "own", "North", "South", "poles.", "interacts", "always", "point", "North-South", "direction."], size: 50, y: 225, footer: FOOT, achieved: true, poses: [[LE("m1008") + .2, "cheer"], [LE("m1008") + 2.0, "sit"]] });
+/* 10 · Momo at the still magnet: "But how does the magnet know which way is North? Nothing is touching it!" (talks, then thinks: a real
+   question); Basil: "Maybe a giant magnet is hiding somewhere, turning it round!" (his guess: a bold hop after his line). The camera pushes in
+   on the still magnet (straight into the look-closer: no cut). The swallow on the top edge of THE SPIN CHART's frame */
+const camEarthq = (t) => { const s = SCN.earthq, u = eio((t - s.t0 - .3) / (s.t1 - s.t0 - .3)); return camMix(camOn([900, 600], 1.05, 960, 560), camOn([HG[0], HG[1] - 20], 1.5, 1000, 560), u); };
+SC.earthq = (t, s) => field(t, camEarthq(t), { rig: { a: 0 }, ...fieldCones(t) })
+  + bd("momo", 290, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("m1001m") + .1, "thinking"]], look: -4 })
+  + bd("pip", 1440, 1010, 380, t, { in: s.t0 + .15, flip: true }) + bd("basil", 1730, 1076, 480, t, { in: s.t0 + .2, flip: true, jump: [[LE("m1002b") + .1, 26]] }) + HUD(t);
+/* [LOOK CLOSER] fly up and see the whole Earth (lc21.js lcEarthArt). Faces: Momo at the left the whole time (her question is answered:
+   thinking; eyes wide as the Earth appears: listening; CHEER at EARTH BEHAVES LIKE A MAGNET: a key word learnt); Basil at the right from the
+   key word (surprised: his wild guess was nearly right; then he teaches what it means; a smile) */
+SC.lcearth = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camEarthq(SCN.earthq.t1), p = camPt(cE, HG), tm = s.t0 + 1.2, tK = MK("kw_earth_behaves_like_a_magnet");
+  return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcEarthArt, bgc: "#0B1033", set: (tt) => field(tt, cE, { rig: { a: 0 }, ...fieldCones(tt) }), verdict: [`THE EARTH TURNS IT: NO TOUCHING`, GOODC], tv: MK("v_earth"), peek: false,
+    over: (tt) => peekFace("momo", "l", tt, tm, undefined, [[tm + .2, "thinking"], [MK("earth") - .2, "sit"], [tK + .1, "cheer"], [tK + 2.3, "sit"]])
+      + peekFace("basil", "r", tt, tK - .3, undefined, [[tK + .15, "surprised"], [tK + 2.4, "sit"]]) }); };
+SC.mark2 = (t, s) => markScene(t, s, { id: "m1008", sayId: "m1007", who: "pip", n: "2 of 2", text: "Earth behaves like a magnet with its own North and South poles. It interacts with a freely suspended magnet. This causes the freely suspended magnet to always point in the North-South direction.", keys: ["Earth", "behaves", "like", "its", "own", "North", "South", "poles.", "interacts", "always", "point", "North-South", "direction."], size: 50, y: 225, footer: FOOT, achieved: true, poses: [[LE("m1008") + .2, "cheer"], [LE("m1008") + 2.0, "sit"]],
+  under: markEarth(t, 1250, 900, .62 * spring(t, s.t0 + .4, .5)) });
 
-/* 11 · score hand, the swallow (lizReveal: the score hand melts into the field, ONE push-in onto the swallow perched on the rim of the netball
-   hoop (the REVEAL spot, never the intro floodlight wire); Basil's fun-fact panel: a map of Asia with a dotted route of little swallows from
-   the far north to Singapore (ff_map), a small glowing Earth with a tiny swallow over it (ff_earth), a swallow flying beside a tiny compass
-   rose (ff_way)) */
+/* 11 · score hand; the swallow (lizReveal: the score hand melts into the field, ONE push-in onto the swallow on the rim of the near netball
+   hoop: the REVEAL spot, never the intro wire); Basil's fun fact (ff_map, ff_earth, ff_way). Pip points at the swallow once it is ringed,
+   Momo is surprised ON ff_earth (a real surprise), Pip waves goodbye at "Tell someone at home!" */
 SC.final = (t, s) => { const L = "m1101"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
-SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1;
-  return lizReveal(t, s, L, fieldPH(t, SWALLOW_R), SWALLOW_R[0], SWALLOW_R[1], tq, "It was on the netball hoop!", -120, 160, 80, 1.9, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), tell: "m1104",
-    fact: { id: "m1103b", at: [1300, 560], w: 960, h: 420, items: FF([["ff_map", "from far away", "DRAW: a map of Asia with a dotted route of little swallows flying from the far north down to Singapore"], ["ff_earth", "they feel the Earth's magnet", "DRAW: a small Earth with a soft glow and a tiny swallow over it (no red or blue on the Earth)"], ["ff_way", "it helps them find the way", "DRAW: a swallow flying, a tiny compass rose beside it"]]) } }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = SWAT.liz, tc = W(L, "swallow"), sw = clamp((t - s.t0 - 2.2) / 1.4);
+  const swoop = sw > 0 && sw < 1 ? TF(lerp(1300, 2100, sw), 560 - 120 * Math.sin(Math.PI * sw), .22, swallowFly(t, { look: 1, ph: 2 })) : "";
+  return lizReveal(t, s, L, field(t, null, { swallow: c, rig: { a: 0 }, ...fieldCones(t), front: swoop }), c[0] - 4, c[1] - 10, tq, "It was on the netball hoop!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1104",
+    fact: { id: "m1103b", at: [1270, 400], w: 900, h: 440, items: [["ff_map", "from far away", ffMap21], ["ff_earth", "they feel the Earth's magnet", ffEarth21], ["ff_way", "it helps them find the way", ffWay21]], cols: ["#4BA862", "#5B6BD6", "#E8A23A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .2, "pointing"], [LT("m1103b") - .3, "sit"], [LT("m1104") - .1, "waving"], [LE("m1104") + 1.6, "sit"]], wave: true })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_earth") + .1, "surprised"], [MK("ff_earth") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
-/* 12 · the cliffhanger: Momo holds her clear hiking compass flat over the cones (compass); its needle swings, slows and settles along the
-   cones' line, red end towards the rain tree; a big ? by the needle (qneedle); PART 2 */
-SC.cliff = (t, s) => { const tP = W("m1202", "part") - .1; return phScene(t, s, "12 · The cliffhanger: is the needle a magnet?", ["The field: the cones, the hanging magnet, THE SPIN CHART (HOME). MK compass: Momo holds her clear hiking compass flat over the cones; its thin red-and-white needle swings, slows, and settles along the cones' line, red end towards the rain tree (a dashed gold line from the needle to the cones). MK qneedle: a big ? pops by the needle. Momo big at the left (h ~500) with the compass (pointing at the needle before her line, thinking after it: her own question); Basil and Pip at the right, watching the needle (front views turned in). A push from Momo's paws to the needle. Small print Keep magnets away from phones and compasses. PART 2 slams in (wired)."])
-  + TF(960, 900, .5, compassPH(settle(t, MKS("compass"), 110, 1.0, 5), 0)) + cones(t, 960, 1040, .5) + qMark(t, MK("qneedle") + .2, 1130, 820)
-  + smallPrint(t, s.t0 + .3, PHONE_RULE) + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + HUD(t); };
-/* 13 · "Now you know!": THE SPIN CHART and the hanging magnet over its cones between the buddies (Stage 2: draw them; the placeholders now) */
-SC.nyk = (t, s) => nykScene(t, s, spinChartPH(t, 760, 800, .42) + hang(t, -9, 1180, 700, .36) + cones(t, 1180, 1020, .55), { bx: [230, 1720, 1420], hx: 470 });
+/* 12 · the cliffhanger: Momo holds her clear hiking compass flat over the cones (compass: a magnifier opens on it: its needle swings, slows
+   and settles along the cones' line, red end towards the rain tree); a big ? by the needle (qneedle); PART 2. Momo big at the left (talks,
+   then thinks: her own question); Basil and Pip at the right, turned in to watch the needle; all three hop on "Find out in Part Two!" */
+const camCliff = (t) => { const s = SCN.cliff, u = eio((t - s.t0) / 2.5); return camMix(camOn([HG[0], HG[1] + 120], 1.3, 1000, 560), camOn([HG[0] + 20, HG[1] + 160], 1.5, 1040, 600), u); };
+SC.cliff = (t, s) => { const tP = W("m1202", "part") - .1, cam = camCliff(t), tc = MKS("compass"), g = camPt(cam, [HG[0], CONES[0][1] - 20]), hand = [450, 870];
+  return field(t, cam, { swallow: false, rig: { a: 0 }, ...fieldCones(t) })
+    + bd("momo", 330, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("m1201m") + .1, "thinking"]], look: 3, jump: [[LT("m1202") + .1, 20]] })
+    + TF(hand[0], hand[1], .42, compass21(t, settle21(t, tc, 20, 1.0, 4.6, -90), 0, { sy: .55 }))
+    + magni21(t, tc - .1, 1420, 370, 200, hand[0] + 60, hand[1] - 20, cliffMagni(t, tc), "Momo's compass")
+    + qMark20(t, MK("qneedle") + .2, 1690, 190, 60)
+    + bd("pip", 1500, 1076, 440, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]], look: -6, jump: [[LT("m1202") + .2, 20]] })
+    + bd("basil", 1760, 1070, 440, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]], look: -6, jump: [[LT("m1202") + .35, 20]] })
+    + smallPrint(t, s.t0 + .3, PHONE_RULE) + (t >= tP ? slamFit(330, "PART 2", P.sun, slamK(t - tP, 0)) : "") + melt(t, s, "kwrecap", .4) + HUD(t); };
+/* 13 · "Now you know!": THE SPIN CHART (complete) and the hanging magnet over its cones between the buddies */
+SC.nyk = (t, s) => nykScene(t, s, nykP1(t), { bx: [230, 1760, 1570], hx: 400 });
 })(); }
