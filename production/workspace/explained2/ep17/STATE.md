@@ -141,3 +141,18 @@ Stage 2.5 (teacher's-eye review, NOTES_REVIEW.md, fixes, re-render): DONE 2026-1
   render (checked at 176, 185, 195 s); `out/fix_170.mp4` (the old splice) is no longer needed. Countdowns unchanged: P1 Round 1 54.866..57.866,
   HOLD ON! 190.638..195.638 (1 frame after the tick, as before), P2 Round 1 45.264..50.264, Showdown 161.248..166.248, all 1.000 s steps.
   `qa/highlights.jpg` and `qa/preview_p1_clips.mp4` (67.8 s) / `_p2` (64.7 s) rebuilt. Thumbnails not touched (no plant in them).
+
+## v2: the cold open speaks (2026-11-24, Opus; teacher: "Not speaking for the first few seconds", "fix the live ones too")
+- SERIES_FORMAT 11 item 1, EP22's approach: Heart's "Last time, we asked:" now starts at **0.825 s** (was 6.3 s). The lime plant stays
+  under "A caterpillar! One day, it will become a butterfly." (munch 0.6, cardsIn after a201 at 2.0, budsIn on "One" 3.57); "lasttime"
+  starts .45 s before "Is" (ltIn 6.08; build_tl.py's ("scene", name, {"at": mark, "d": s}), copied from ep22). p1.js: camCold over the
+  whole scene, the place card from 0.2 s. Every later Part 1 time is **5.475 s earlier**; no voice re-recorded.
+- The voice wavs were gone (only the jsons stayed). Re-made with make_voice.py's own engine (Heart bit-identical; the buddies' Character
+  Voice Kit is not bit-exact run to run: same takes within a few ms / ~3 cents). The jsons are unchanged.
+- **Final renders (after the n2 4-decimal fix and the lock-in ring clip, commit 3cc1bd4):** `ep17_part1.mp4` 314.067 s, 9422 frames,
+  -16.0 LUFS, decodes; first word 0.825 s; Round 1 49.391 ... 52.391, HOLD ON! 185.13 ... 190.13 (steps 1.000). `ep17_part2.mp4` re-rendered
+  from the unchanged script (it already spoke at 0.30 s; one-bed music fix; also picks up the moved wrigglers): 327.467 s, 9824 frames,
+  -16.0 LUFS, decodes; Round 1 45.264 ... 50.264, Showdown 161.248 ... 166.248 (as before). New srt, sheets, `qa/open_p1_first25.jpg`.
+- Records: app_moments.json (17A 5.475 s earlier, len 5:14), chapters_p3.json keys **EP17_P1_v2** / **EP17_P2_v2**, **upload_v2.json**
+  (explained-p3-ep17v2-part1/2, after explained-p3-ep16v2-part2, replaces TKO73GxJVB0 + 6rVLGfilVXQ, retire_old). Not uploaded. The music
+  agent adds Kampong Walk to both mp4s.
