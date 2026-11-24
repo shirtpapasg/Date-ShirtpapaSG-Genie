@@ -144,3 +144,35 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
   needleJourney, peekFace, lcXY, magni21, lcPlacesArt, riseView + lcEarthArt, lcUseArt, lcNightArt, and the pictures). page.html loads them
   after ep20dare.js; main.js adds XDEFS21. Re-bake after a change to BG.fd21 / ub21 / bw21: `node bake.js fd21 ub21 bw21`.
 - **p1.js / p2.js** rewritten: every scene drawn to SCENES_TODO, every action AT its mark. Sweeps (every 0.5 s): 0 bad, 0 page errors.
+- **Changed from SCENES_TODO (and why):**
+  - The journey "be the hanging magnet": your bar lies across the bottom of the frame (red N left, blue S right) and the field turns round you
+    as a panorama; you stop with the rain tree just past your red end. The giant finger is an adult's hand (four fingers and a thumb); it
+    pushes at jspin, on "giant finger" and at jagain, and fades out completely each time.
+  - The rain tree stands at the far LEFT of the field (the red end's way), so every resting magnet in Part 1 points left; the goal is in
+    front of it (Pip's guess). In `lcplaces` the field panel puts the small goal far off to the RIGHT (not on the line).
+  - `lcearth`: one face of a globe cannot show all six SCENES_TODO places: the little magnets sit on Europe, Africa, India, Singapore (named),
+    Japan and Australia (none near the poles); the United States is on Part 2's small Earth (lcnight, Pacific side). The rise is a map seen from
+    above (the field, the school, the HDB blocks, Singapore, Malaysia) into the globe. `chartEarth` shows THE SPIN CHART's new Earth as an inset
+    (top left) as well as on the chart itself.
+  - No code-drawn buddy parts: Basil's turns of the compass in `lcuse` are a curved arrow and a pill "Basil turns the compass"; Pip's strokes
+    in the dare are the magnet's own motion with a counter and a pill; Basil's spin in the cold open is a white swish. Held compasses are drawn
+    at the buddy's paws (screen space).
+  - The cliffhanger: Momo's compass small at her paws, and a magnifier (linked by a line) shows its needle settling along the cones' line.
+  - Momo's "pointing before her line" (cliff) and Pip's (goal) are left out: the scenes start less than 0.5 s before their lines.
+  - Basil's NEEDLE cheer (r1ans) is not shown: his confident outcome runs to the end of the scene (0.6 s after his line); he cheers at Part 2's
+    "Now you know!". Basil's pointing after m806b in lcplaces is left out (the verdict lands 0.1 s after his line).
+  - Part 2 Round 1's third card reads "It spins and spins" (fits the card; the spoken line is unchanged, as SCENES_TODO allows).
+  - The Showdown countdown shows Basil (worried) at the side, not Momo (only Basil has the reason: a countdown before the answer); Momo is
+    back for the reveal, shy through the fix.
+  - The needle journey: the bar magnet comes from the right (east) so the needle's red end swings left (pushed) and right (pulled) and stays
+    in view; the riders sit on the dial's near rim at both edges.
+- **Sound** (sound_cues.js Stage 2 block): Part 1 the field's own life (breeze, a PE whistle, a football thud, the swallow's twitter), the
+  string's creak in the journey, the classroom's bell and fan hum, a space hum under the Earth; Part 2 Pulau Ubin (birds in the mangroves, a
+  bumboat's engine, a far ship's horn, footsteps, the turtle's breath and splash), the trail map's compass clicks, the pin's hum, the night sea
+  and the fog's hush. Stage 1 bugs fixed: the `rise` cues had no value (song.js crashed), Part 2 Round 1's pick sounds named the wrong lines,
+  the dare's strokes now sound once per drawn stroke (every 1.5 s). Part 1 mix -16.0 LUFS.
+- **QA:** stills of every scene looked at and fixed (look-closer panels enlarged, labels and chips clear of the faces and bubbles, the chant
+  layout, Momo's easel, the hold-on chip, the needle tip clear of the riders); pose_audit both parts; pose_reasons.json; qa/buddy_faces_p1/p2;
+  thumbnails (`../thumb_v2.js` ep21_1 SAME WAY EVERY TIME?! + Momo surprised; ep21_2 THE NEEDLE MOVES?! + Pip surprised); make_moments.py ->
+  app_moments.json (21A / 21B; keys O.interactions / CH.magnets are placeholders, as EP20) + production/youtube/chapters_p3.json EP21_P1 / EP21_P2;
+  make_preview.sh spans; highlights.py.
