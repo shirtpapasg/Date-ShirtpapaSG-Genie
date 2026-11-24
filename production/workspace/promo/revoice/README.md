@@ -13,3 +13,11 @@ Rebuild:
 4. `/home/user/heart-tts/venv/bin/python mix.py <N> <original.mp4> <no_vocals.wav> <vocals.wav>` -> `film<N>_v2.mp4`
    (each line at the old start; atempo <= x1.15 only if it overruns the gap to the next line; bed ducked 4 dB; -16 LUFS, TP <= -1).
 5. `sample_film<N>.mp4`: 30 s, 720p, a stretch with all four voices (film 1 from 0:29, film 2 from 0:39.5, film 3 from 0:41).
+
+## 24 Nov 2026, ~05:40–05:49 UTC: newer PUBLIC copies of films 1–3, not uploaded from this session
+- nZUOyUq193w: Film 1, 1:18
+- by9XehOWfUE: Film 2, 1:12
+- pAVAJF9ye1c: Film 3, 1:10
+
+These are the copies people can watch. Our v2 uploads (VIq1qSd85R0, S4Cv2H0IG9Y, IVYktYPowNI: 1:23, 1:16, 1:17) were set private elsewhere.
+The public copies have no custom thumbnail. When new thumbnails are approved, set them on the PUBLIC ids above.
