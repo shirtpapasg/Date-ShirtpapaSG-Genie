@@ -39,10 +39,10 @@ def zones(im):
     for r in [(0, 0, W, int(.14 * Hh)), (0, int(.65 * Hh), W, Hh), (0, 0, int(.06 * W), Hh), (W - int(.06 * W), 0, W, Hh)]: d.rectangle(r, fill=(255, 40, 60, 70))
     tk = [(0, 0, W, int(.125 * Hh)), (0, Hh - int(.344 * Hh), W, Hh), (0, 0, int(.111 * W), Hh), (W - int(.111 * W), 0, W, Hh), (W - int(.278 * W), int(.438 * Hh), W, Hh)]
     for r in tk: d.rectangle(r, outline=(60, 230, 255, 255), width=4)
-    d.rectangle((120, 290, 960, 800), outline=(80, 255, 120, 255), width=5)
+    d.rectangle((120, 280, 960, 840), outline=(80, 255, 120, 255), width=5)
     d.text((24, 20), 'red: Meta Reels/Stories covered (14% / 35% / 6%)', font=f, fill=(255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0))
     d.text((24, 60), 'cyan: TikTok covered (approx. template)', font=f, fill=(255, 255, 255), stroke_width=3, stroke_fill=(0, 0, 0))
-    d.text((130, 805), 'green: where every caption and CTA sits', font=f, fill=(140, 255, 160), stroke_width=3, stroke_fill=(0, 0, 0))
+    d.text((130, 846), 'green: where every caption and CTA sits', font=f, fill=(140, 255, 160), stroke_width=3, stroke_fill=(0, 0, 0))
     return Image.alpha_composite(im, o).convert('RGB')
 src = os.path.join(H, 'ad15_9x16.mp4'); a, b = zones(frame(src, 4.2)), zones(frame(src, 14.5))
 z = Image.new('RGB', (2 * 1080 + 40, 1920), (30, 30, 40)); z.paste(a, (0, 0)); z.paste(b, (1120, 0)); z.resize((1080, 960)).save(os.path.join(OUT, 'safezones_9x16.jpg'), quality=88)

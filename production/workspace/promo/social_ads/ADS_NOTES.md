@@ -47,8 +47,8 @@ says which. **Before spending, check the layout once with Meta's safe-zone guard
 
 | | 15 s | 30 s |
 |---|---|---|
-| Story | Hook (real verdict "Half the concept is there") → the answer typed → what to keep / worth adding → the hint → 2/2 → Dark Box Lab → the videos page (P3-P6) → end card | Hook → typed answer → marked the Singapore way → the hint → 2/2 and the full answer → videos, Dark Box Lab, Mind Map → Progress Report → the fun (film 4's quiz paying +10 credits, Gift Shop, Dressing Room, Pet Buddies) → end card |
-| Heart says | "Right idea, but still losing marks in Science? / TheOneApp marks written answers the Singapore way. A hint comes first, not the answer. / Primary 3 to 6 Science. Try it free at theoneapp.sg." | "Knows the science, but still losing marks? / In TheOneApp, your child writes the answer like on paper. It is marked the Singapore way. / A hint comes first. The full answer, after the second try. / Then watch it, try it in 3D, and map it. / You get a Progress Report, with the gaps to fix. / And the fun? Finished work earns credits for the Gift Shop. Never money. / Try it free at theoneapp.sg." |
+| Story | Hook (real verdict "Half the concept is there") → the answer typed → marked: what to keep / worth adding → the hint → 2/2 → end card (v2: the PSLE line is longer, so the 15 s cut is marking only) | Hook → typed answer → marked the way answers are accepted in PSLE → the hint → 2/2 and the full answer → videos, Dark Box Lab, Mind Map → Progress Report → the fun (film 4's quiz paying +10 credits, Gift Shop, Dressing Room, Pet Buddies) → end card |
+| Heart says | "Right idea, but still losing marks in Science? / TheOneApp marks your child's written answers the way they are accepted in PSLE. A hint comes first, not the answer. / Try 7 days free at theoneapp.sg." | "Knows the science, but still losing marks? / In TheOneApp, your child writes the answer like on paper. It is marked the way answers are accepted in PSLE. / A hint comes first. The full answer, after the second try. / Then watch it, try it in 3D, and map it. / You get a Progress Report, with the gaps to fix. / And the fun? Finished work earns credits for the Gift Shop. Never money. / Try 7 days free at theoneapp.sg." |
 
 Files (not in git; `.gitignore`): `ad15_9x16.mp4`, `ad15_4x5.mp4`, `ad30_9x16.mp4`, `ad30_4x5.mp4`: 1080 x 1920 / 1080 x 1350, 30 fps,
 H.264 High (CRF 18, BT.709, +faststart), AAC 192 kb/s 48 kHz, -14 LUFS integrated. Checked numbers: section 6.
@@ -83,7 +83,7 @@ H.264 High (CRF 18, BT.709, +faststart), AAC 192 kb/s 48 kHz, -14 LUFS integrate
 ```
 (cd /home/user/theoneapp && python3 -m http.server 8765 --bind 127.0.0.1 &)
 NODE_PATH=$(npm root -g) node capture_local.js                   # app screens (read-only)
-NODE_PATH=$(npm root -g) node capture_live.js                    # ONLY if the marking shots must change: 2 live /api/mark calls
+NODE_PATH=$(npm root -g) node capture_live.js                    # ONLY if the marking shots must change: 2 live /api/mark calls (needs a member session since the lock went on)
 /home/user/heart-tts/venv/bin/python make_voice.py               # voice/<id>.wav (kept if present)
 flock /tmp/explained_render.lock python3 make_ad.py 15           # ad15_9x16.mp4, ad15_4x5.mp4
 flock /tmp/explained_render.lock python3 make_ad.py 30           # ad30_9x16.mp4, ad30_4x5.mp4
@@ -95,7 +95,7 @@ python3 make_ad.py still 30 9x16 12.0 /tmp/x.png                 # one frame, fo
 
 | Claim (ad or copy) | Source in the app / website |
 |---|---|
-| "marks written answers the Singapore way" | theoneapp.sg, "📝 Answers Marked The Singapore Way: … It is marked the way Singapore mark schemes do." (`smart-science-marking-site/index.html`); the app's marking view (`theoneapp/index.html`, `#v-mark`) and the live capture |
+| "marked the way answers are accepted in PSLE" (v2, the teacher's wording) | `api/_marking-prompt.js` line 7: "Marking rules, taken from Singapore school and PSLE mark schemes"; the server-side standards were written from the PSLE answer keys 2019-2025 (vault: Apps/science-marking.md, Reference/PSLE-Science-Papers); the website: "marked the way Singapore mark schemes do". The app's own caveat (index.html): "Marks can differ from school to school … PSLE marking changes a little every year too." Used as a description of how marking works only: no SEAB/MOE endorsement, no PSLE result |
 | "your child writes the answer like on paper" | App: "Pick a question. Write your answer like you would on paper." (`index.html`, `#stage-ask`) |
 | "A hint comes first … the full answer after the second try" | Website: "Wrong answers get a hint, not the answer. The model answer comes after the second try."; app stages `#stage-fb` → `#stage-2nd` → `#stage-done`; seen live in the capture |
 | "watch it, try it in 3D, and map it" | Website lead: "Watch it, try it in 3D, map it, then quiz yourself."; videos.html (P3 45, P4 22, P5 8, P6 12 showing); 43 simulations open, **P3 and P4 only** (website: P5/P6 "Coming"); mindmap.html |
@@ -103,7 +103,7 @@ python3 make_ad.py still 30 9x16 12.0 /tmp/x.png                 # one frame, fo
 | "Finished work earns credits for the Gift Shop. Never money." | Website: "Credits come only from finished work, never from money."; `credits.js`, `shop.html`; the Pet Buddies page: "Your first buddy was free. New buddies are earned with credits at the Gift Shop." |
 | "Primary 3–6 Science · MOE syllabus (2023)" | Website: "A science study buddy for the MOE Primary Science syllabus (2023)", "Live Now · Primary 3 To 6" |
 | "Built by a Singapore Primary Science teacher" (4:5 end card, copy) | Website heading "Built By A Singapore Primary Science Teacher" |
-| "Try it free at theoneapp.sg" | Website: "Open to try today, no sign-up" (shown while `MEMBERS_ONLY = false`); `api/stripe-webhook.js`: a subscription "that starts with the 7-day free trial" grants membership. **Teacher to confirm** (section 4) |
+| "Try 7 days free · theoneapp.sg" and "Then S$9.99 a month or S$99 a year. Cancel any time." (end card) | The teacher (24 Nov 2026: member lock on, ACCESS_LOCK=on); the live website's price cards: "7 Days Free First. Cancel in that week and you pay nothing", S$9.99/month and S$99/year (launch price to 31 Dec 2026); `api/stripe-webhook.js` grants membership on a subscription "that starts with the 7-day free trial" |
 | Prices in the copy (S$9.99 a month, S$99 a year, launch price to 31 Dec 2026) | Website price section. Used only in the optional trial line of ADS_COPY.md |
 
 Left out on purpose: user numbers, ratings, testimonials, grades/AL claims, "guaranteed", "PSLE" results, the App Store (website:
@@ -111,35 +111,39 @@ Left out on purpose: user numbers, ratings, testimonials, grades/AL claims, "gua
 
 ## 4. For the teacher to confirm before the ads run
 
-1. **"Try it free".** Is the 7-day free trial switched on in **both** Stripe payment links? The website's price section does not mention
-   a trial. If the app goes members-only, the website (and the ad copy) must say how the trial ends (auto-renews at S$9.99/month or
-   S$99/year unless cancelled). If there will be no trial, the end card must be re-rendered without "free".
-2. **Film 4 in a parent ad** (2.2 s, chipped "From our animated film"). Fine to reuse a clip of a made-for-kids film here?
-3. **The live marking capture** used two real `/api/mark` calls on the live app (a few cents of API use); `/api/log` was blocked so the
-   pupil sheet is clean. OK to keep the demo answer?
-4. **Heart's reading** of "the one app dot S G" and "Primary three to six" (listen to the previews).
-5. **CTA button** (`Learn More` now, `Sign Up` later) and whether to put the price in the primary text.
-6. TikTok asks advertisers to **label AI-generated content** in some cases; Heart is a synthetic voice. Check the toggle in TikTok Ads
-   Manager when uploading (not confirmed from TikTok's page, which could not be opened here).
+1. **The website must match the ad.** The live theoneapp.sg (checked 24 Nov 2026) shows the trial on its price cards, but it still has
+   `MEMBERS_ONLY = false`, so it also says "Open to try today, no sign-up". The Join buttons say "Opening Soon" until the payment links are
+   live. Set `MEMBERS_ONLY = true` and check that both Stripe links really start with the 7-day trial.
+2. **The price after 31 Dec 2026.** S$9.99 and S$99 are launch prices. From 1 Jan 2027 new members pay S$19.90 and S$199 (website). Any ad
+   still running then needs a new end card (`make_ad.py`, `end_card`) and new copy.
+3. **"The way accepted in PSLE".** ASAS asks for evidence before a claim runs. The evidence is the marking rules (built from Singapore
+   school and PSLE mark schemes, the PSLE answer keys 2019-2025). Keep that file of evidence. Never add "official", "approved" or a result.
+4. **Film 4 in a parent ad.** The ad uses 2.2 s of film 4, chipped "From our animated film". Is it fine to reuse a clip of a made-for-kids film here?
+5. **The live marking capture.** It used two real `/api/mark` calls (before the lock). `/api/log` was blocked, so the pupil sheet is clean.
+   Now that the lock is on, `capture_live.js` would need a member sign-in to run again. The saved shots are kept in git.
+6. **Heart's reading** of "P S L E", "seven days free" and "the one app dot S G". Listen to the previews.
+7. **TikTok's AI-content label.** Heart is a synthetic voice. Check the AI-generated content toggle when uploading.
+8. **The terms line on the end card.** I added it so the trial's cost shows in the ad itself, as free-trial guidance asks. Remove it
+   (`terms` in `end_card`) if you would rather not.
 
 ## 5. Weak spots
 
 - The official spec and policy pages could not be opened from this session; numbers are search readings and third-party measurements.
   Check with the platforms' own safe-zone overlays before spending.
-- Only hook A is rendered (B and C are in ADS_COPY.md).
+- Only hook A is rendered (B and C are in ADS_COPY.md). v2: the 15 s cut lost its Dark Box and videos beats (the PSLE line takes 7.9 s); "Primary 3–6 Science" is now on the end card only, not spoken.
 - In 9:16 the bottom third is a blurred fill by design (the apps' own text sits there), so the app picture is 880 x 720: app text is
   small but readable on a phone.
 - 30 fps (not 60): the pictures are screens and pans, so 60 adds file size and nothing visible.
 - Captions are timed by character share, not word-aligned.
 - No social proof exists yet; when real parents say something (with permission), it can be added, quoted exactly.
 
-## 6. Checks (from finish.py)
+## 6. Checks (from finish.py, v2 render, 24 Nov 2026)
 
 | File | Length | Size | fps | MB | Loudness | True peak | 720p preview |
 |---|---|---|---|---|---|---|---|
-| `ad15_9x16.mp4` | 15.0 s | 1080x1920 | 30 | 3.08 | -14.1 LUFS | -1.9 dBTP | 1.24 MB |
-| `ad15_4x5.mp4` | 15.0 s | 1080x1350 | 30 | 3.24 | -14.1 LUFS | -1.9 dBTP | 1.33 MB |
-| `ad30_9x16.mp4` | 30.0 s | 1080x1920 | 30 | 6.15 | -14.1 LUFS | -1.8 dBTP | 2.44 MB |
-| `ad30_4x5.mp4` | 30.0 s | 1080x1350 | 30 | 6.29 | -14.1 LUFS | -1.8 dBTP | 2.63 MB |
+| `ad15_9x16.mp4` | 15.0 s | 1080x1920 | 30 | 2.62 | -14.0 LUFS | -2.0 dBTP | 1.1 MB |
+| `ad15_4x5.mp4` | 15.0 s | 1080x1350 | 30 | 2.77 | -14.0 LUFS | -2.0 dBTP | 1.17 MB |
+| `ad30_9x16.mp4` | 30.0 s | 1080x1920 | 30 | 6.23 | -14.0 LUFS | -1.7 dBTP | 2.49 MB |
+| `ad30_4x5.mp4` | 30.0 s | 1080x1350 | 30 | 6.33 | -14.0 LUFS | -1.7 dBTP | 2.63 MB |
 
 All H.264 High + AAC 48 kHz. Previews, contact sheets (one frame a second) and `safezones_9x16.jpg` were written to the session's scratch folder by `finish.py`.

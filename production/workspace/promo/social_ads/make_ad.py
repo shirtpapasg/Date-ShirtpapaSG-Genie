@@ -24,30 +24,28 @@ FMT = {'9x16': dict(W=1080, H=1920, card=(100, 530, 980, 1250), cap_y=395, cap_w
 # ── the running orders. roi = the part of the screen (source px, y from / to) to keep in view; it eases from roi0 to roi1 ──
 APP = 'Real app screen'
 def S(src, t0, t1, roi0, roi1=None, cx=None, w=None, w1=None, chip=APP, **k): return dict(src=src, t0=t0, t1=t1, roi0=roi0, roi1=roi1 or roi0, cx=cx, w=w, w1=w1, chip=chip, **k)
-ADS = {
-  15: dict(T=15.0, lines=AD15, voice={'h1': .10, 'h2': 3.30, 'h3': 10.25}, end=None, shots=[
-    S('mk_fb_full', 0.0, 3.3, (380, 1330), w=1170, w1=1060),                       # hook: the real verdict "Half the concept is there"
-    S('typing', 3.3, 5.1, (1080, 2040), reveal=(3.45, 4.95)),                       # the pupil writes the answer
-    S('mk_fb_full', 5.1, 6.7, (1000, 1880), (1250, 2050)),                          # what to keep, what is worth adding
-    S('mk_fb_full', 6.7, 8.9, (1900, 2640)),                                        # the hint ("Something to think about")
-    S('mk_done_full', 8.9, 9.7, (440, 1600)),                                       # 2nd try: correct and complete, 2/2
-    S('darkbox', 9.7, 10.3, (0, 1230), cx=640, w=1517),                             # School Lab, Dark Box (P4 Light)
-    S('videos', 10.3, 12.3, (300, 1250), (500, 1450)),                              # the videos page: Primary 3, 4, 5, 6
+ADS = {   # v2 (24 Nov 2026): "the way accepted in PSLE" (longer line) and the 7-day trial; the 15 s cut is now marking only, then the end card
+  15: dict(T=15.0, lines=AD15, voice={'h1': .10, 'h2': 3.25, 'h3': 11.35}, end=None, shots=[
+    S('mk_fb_full', 0.0, 3.25, (380, 1330), w=1170, w1=1060),                      # hook: the real verdict "Half the concept is there"
+    S('typing', 3.25, 5.2, (1080, 2040), reveal=(3.4, 5.0)),                        # the pupil writes the answer
+    S('mk_fb_full', 5.2, 8.0, (1000, 1880), (1250, 2050)),                          # marked: what to keep, what is worth adding
+    S('mk_fb_full', 8.0, 10.2, (1900, 2640)),                                       # the hint ("Something to think about")
+    S('mk_done_full', 10.2, 11.3, (440, 1600)),                                     # 2nd try: correct and complete, 2/2
   ]),
-  30: dict(T=30.0, lines=AD30, voice={'a1': .10, 'a2': 3.00, 'a3': 8.60, 'a4': 13.50, 'a5': 16.70, 'a6': 20.10, 'a7': 26.70}, end=None, shots=[
+  30: dict(T=30.0, lines=AD30, voice={'a1': .10, 'a2': 3.00, 'a3': 10.05, 'a4': 14.50, 'a5': 17.45, 'a6': 20.45, 'a7': 26.00}, end=None, shots=[
     S('mk_fb_full', 0.0, 3.0, (380, 1330), w=1170, w1=1060),
-    S('typing', 3.0, 5.8, (1080, 2040), reveal=(3.3, 5.3)),
-    S('mk_fb_full', 5.8, 8.6, (1000, 1880), (1250, 2050)),
-    S('mk_fb_full', 8.6, 10.5, (1900, 2640)),
-    S('mk_done_full', 10.5, 13.4, (440, 1600), (1700, 2850)),                       # 2/2, then the full answer
-    S('videos', 13.4, 14.4, (300, 1250)),
-    S('darkbox', 14.4, 15.5, (0, 1230), cx=640, w=1517),
-    S('mapland', 15.5, 16.6, (100, 1146), cx=885, w=1290),                          # Mind Maps: the Light poster drawing itself
-    S('report_full', 16.6, 20.1, (0, 1000), (900, 2150), chip='Real report · one demo session'),
-    S('film', 20.1, 22.3, (0, 720), film=(31.6, 960, 720), chip='From our animated film'),   # the quiz pays +10 credits
-    S('shop', 22.3, 23.7, (300, 1250), (840, 1790)),
-    S('dress', 23.7, 24.8, (300, 1300)),
-    S('buddies', 24.8, 26.5, (1300, 2260)),
+    S('typing', 3.0, 5.6, (1080, 2040), reveal=(3.3, 5.2)),
+    S('mk_fb_full', 5.6, 10.0, (1000, 1880), (1250, 2050)),
+    S('mk_fb_full', 10.0, 12.0, (1900, 2640)),
+    S('mk_done_full', 12.0, 14.5, (440, 1600), (1700, 2850)),                       # 2/2, then the full answer
+    S('videos', 14.5, 15.5, (300, 1250)),
+    S('darkbox', 15.5, 16.4, (0, 1230), cx=640, w=1517),
+    S('mapland', 16.4, 17.4, (100, 1146), cx=885, w=1290),                          # Mind Maps: the Light poster drawing itself
+    S('report_full', 17.4, 20.4, (0, 1000), (900, 2150), chip='Real report · one demo session'),
+    S('film', 20.4, 22.6, (0, 720), film=(31.6, 960, 720), chip='From our animated film'),   # the quiz pays +10 credits
+    S('shop', 22.6, 24.0, (300, 1250), (840, 1790)),
+    S('dress', 24.0, 25.0, (300, 1300)),
+    S('buddies', 25.0, 26.5, (1300, 2260)),
   ]),
 }
 
@@ -178,7 +176,8 @@ def end_card(fm, u):
         return e
     name = words([('The', (255, 255, 255)), ('One', (255, 166, 43)), ('App', (255, 255, 255))], 108 if tall else 96, stroke=5)
     sub = words([('Primary 3–6 Science · MOE syllabus (2023)', (200, 214, 255))], 38 if tall else 34, 500)
-    cta1 = words([('Try it ', (255, 255, 255)), ('free', YEL), (' at', (255, 255, 255))], 64 if tall else 56, stroke=4)
+    cta1 = words([('Try ', (255, 255, 255)), ('7 days free', YEL)], 64 if tall else 56, stroke=4)   # the trial (member lock on, 24 Nov 2026)
+    terms = words([('Then S$9.99 a month or S$99 a year. Cancel any time.', (200, 214, 255))], 29 if tall else 30, 500)   # the trial's terms, on screen
     url = words([('theoneapp.sg', YEL)], 100 if tall else 86, stroke=6)
     pill = Image.new('RGBA', (url.width + 70, url.height + 34), (0, 0, 0, 0)); ImageDraw.Draw(pill).rounded_rectangle((0, 0, pill.width - 1, pill.height - 1), radius=pill.height // 2, fill=(124, 92, 255, 120), outline=YEL, width=4)
     pill.alpha_composite(url, (35, 12))
@@ -186,12 +185,12 @@ def end_card(fm, u):
     if tall:   # 9:16: every word between y 290 and 840, x 140-940 (clear of both apps' buttons and captions)
         lg = logo.resize((150, 150), Image.LANCZOS); row = Image.new('RGBA', (lg.width + 16 + name.width, max(lg.height, name.height)), (0, 0, 0, 0))
         row.alpha_composite(lg, (0, (row.height - lg.height) // 2)); row.alpha_composite(name, (lg.width + 16, (row.height - name.height) // 2 + 6))
-        put(row, W / 2, 290, 0); put(sub, W / 2, 462, 1); put(cta1, W / 2, 545, 2); put(pill, W / 2, 635, 3)   # all words end by y ~800
-        put(pip, W / 2, 900, 4)
+        put(row, W / 2, 280, 0); put(sub, W / 2, 446, 1); put(cta1, W / 2, 503, 2); put(pill, W / 2, 612, 3); put(terms, W / 2, 800, 4)   # all words end by y ~838
+        put(pip, W / 2, 900, 5)
     else:
         teach = words([('Built by a Singapore Primary Science teacher', (200, 214, 255))], 32, 500)
         put(logo, W / 2, 60, 0); put(name, W / 2, 268, 1); put(sub, W / 2, 392, 2); put(cta1, W / 2, 520, 3); put(pill, W / 2, 600, 4)
-        put(teach, W / 2, 770, 5); put(pip, W / 2, 860, 5)
+        put(terms, W / 2, 772, 5); put(teach, W / 2, 830, 5); put(pip, W / 2, 900, 6)
     return im.convert('RGB')
 
 # ── the frame ──
@@ -205,7 +204,7 @@ def footer(W):   # 4:5 feed only (no app buttons over it): the name and the addr
 class Ad:
     def __init__(s, n, fk):
         s.ad = ADS[n]; s.fm = dict(FMT[fk]); s.fm['footer'] = footer(s.fm['W']) if fk == '4x5' else None; s.fk = fk; s.caps = caption_track(s.ad)
-        s.end_t = next(a for a, b, c, l in s.caps if 'free' in c) - .15   # the end card arrives as Heart says "Try it free"
+        s.end_t = next(a for a, b, c, l in s.caps if 'free' in c) - .15   # the end card arrives as Heart says "Try 7 days free"
         s.shots = [Shot(sp, s.fm) for sp in s.ad['shots']]; s.shots[-1].sp['t1'] = s.end_t
         s.capim = {}; s.end_cache = {}
     def cap(s, c):
