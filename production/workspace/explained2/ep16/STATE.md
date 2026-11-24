@@ -140,3 +140,19 @@ The three "praying mantis" lines and the new-words clip (nymph, moulting, mantis
   Chunk folders deleted. Thumbnails not regenerated (the lime plant is not in them; see the open point).
 - **Open point:** `thumb_part2.jpg` shows the empty skin and the grasshopper on two loose grass blades (sticker style on a burst, as
   every thumbnail): if the teacher reads those as floating leaves, root them in a strip of ground in thumb_v2.js `ep16_2`.
+
+## v2: the cold open speaks (2026-11-24, Opus; teacher: "Not speaking for the first few seconds", "fix the live ones too")
+- SERIES_FORMAT 11 item 1, EP22's approach: Heart's "Last time, we asked:" now starts at **0.825 s** (was 6.3 s). The pond scene stays
+  under "A tadpole! It lives in water, and it has a tail." (wriggle 0.6, cardsIn after e201 at 2.0, budsIn on "It" 3.54); "lasttime"
+  starts .45 s before "What" (ltIn 6.14; build_tl.py's ("scene", name, {"at": mark, "d": s}), copied from ep22). p1.js: camCold over the
+  whole scene (SCN.cold.t1), the place card from 0.2 s. Every later time is **5.475 s earlier**; no voice re-recorded.
+- The voice wavs were gone (deleted earlier with the mp4s; the jsons stayed). Re-made with make_voice.py's own engine (scratchpad
+  regen_voice.py, never touching the jsons): Heart bit-identical (duration and mouth envelope = json); the buddies' Character Voice Kit is not
+  bit-exact run to run (a few ms, ~3 cents), so those are the same takes within that jitter.
+- **Part 1 re-rendered: `ep16_part1.mp4` 319.4 s (5:19.4), 9582 frames, 30 fps, -16.0 LUFS**, decodes end to end. Countdowns re-measured:
+  Round 1 numbers 52.659 ... 55.659 (steps 1.000), HOLD ON! 183.42 ... 188.42 (steps 1.000). New srt (first cue 0.825 s), sheet_part1.png,
+  `qa/open_p1_first25.jpg` (the first 25 s, checked).
+- Records: app_moments.json (16A 5.475 s earlier, len 5:19), chapters_p3.json key **EP16_P1_v2** (and EP16_P2_v2 = the live Part 2's
+  times), **upload_v2.json** (explained-p3-ep16v2-part1/2, after RCwRXpameIk, replaces C_Z96XgMmWg + e2wecB7r-QE, retire_old, NEW
+  VERSION line to the new Part 1). Not uploaded.
+- Part 2: re-rendered from unchanged code for the one-bed music fix (main session); see below when done.
