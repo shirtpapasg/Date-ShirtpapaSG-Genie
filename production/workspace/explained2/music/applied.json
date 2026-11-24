@@ -326,6 +326,58 @@
    "voice": 454
   }
  },
+ "ep18_part1": {
+  "backup": "ep18/out/nolofi_p1.m4a",
+  "bed_gain": 0.4961,
+  "bed_in_gaps_lufs_s": null,
+  "bed_loudest_lufs_s": -24.2,
+  "bed_under_voice_lufs_s": -27.8,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 3,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    51.16,
+    54.73
+   ],
+   [
+    "countdown hold",
+    220.49,
+    226.06
+   ],
+   [
+    "now you know",
+    316.89,
+    318.57
+   ]
+  ],
+  "drive": 0.93,
+  "drive_without_bed": 0.908,
+  "duration": 323.233,
+  "final_lufs": -15.97,
+  "lufs": -16.0,
+  "mtime": 1795527861.7491362,
+  "removed": {
+   "calm": 8,
+   "groove": 9,
+   "outro": true,
+   "wonder": 1
+  },
+  "size": 130886648,
+  "true_peak": -1.8,
+  "video_packets": 9697,
+  "when": "2026-11-24 13:44 UTC",
+  "windows": {
+   "gap": 0,
+   "voice": 501
+  }
+ },
  "ep19_part2": {
   "backup": "ep19/out/nolofi_p2.m4a",
   "bed_gain": 0.4998,
