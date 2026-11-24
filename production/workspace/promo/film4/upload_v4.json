@@ -23,7 +23,7 @@
   }
  ],
  "playlists": [],
- "_note": "Promo film 4 v4, teacher 24 Nov 2026: the app screen in the 'In the app' tablets (Gift Shop, Boss Clash) zoomed 'bit by bit like lag'. Cause: lib.js n2() rounded scale() to 0.01, so slow zooms stepped; it now rounds to 4 decimals. One fix only: the same frames otherwise, the same sound (out/mix.wav), the same finish (glow, -16 LUFS), the same title, description, tags and thumbnail (thumb_v3.jpg). Replaces v3 (df3FppAf_EE). Public, Made for Kids, no playlist.",
+ "_note": "Promo film 4 v4, teacher 24 Nov 2026: the app screen in the 'In the app' tablets (Gift Shop, Boss Clash) zoomed 'bit by bit like lag'. Cause: lib.js n2() rounded scale() to 0.01, so slow zooms stepped; it now rounds to 4 decimals. One fix only: the same frames otherwise, the same sound (out/mix.wav), the same finish (glow, -16 LUFS), the same title, description, tags and thumbnail (thumb_v3.jpg). Replaces v3 (df3FppAf_EE). Public, Made for Kids, no playlist. Teacher 24 Nov 2026: 'ok' (OK to replace film 4).",
  "replaces": [
   "df3FppAf_EE"
  ],

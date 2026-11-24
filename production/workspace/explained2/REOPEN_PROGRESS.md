@@ -62,3 +62,4 @@
   (no DONE lines are written here). NOT queued: **EP22 Part 2** (its mp4 is from 07:15, before commit 3cc1bd4 and the n2 fix): please
   queue `./build_part.sh 2` + `python3 ../add_lofi.py . 2` in ep22 after chain4. Still to do after each new mp4: measure_countdowns.py,
   the 720p preview (qa/preview_p2_720p.mp4 in ep19 / ep20 are from the earlier, pre-n2 renders), `explained_upload.py --check`.
+- 10:15 UTC (main session): teacher approved the EP20 fixes ('ok', stills page https://claude.ai/artifact/UrWAU1iXhQHgegm7skNpjw). EP20 Part 1 and Part 2 can go up as soon as they are rendered after the n2 fix and Kampong Walk is added.
