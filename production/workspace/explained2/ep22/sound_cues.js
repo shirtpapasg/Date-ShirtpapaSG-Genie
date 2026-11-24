@@ -26,7 +26,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
     for (const sc of TL.scenes) if (OUT.includes(sc.name)) { const last = R[key][R[key].length - 1]; if (last && sc.t0 - last[1] < .5) last[1] = sc.t1; else R[key].push([sc.t0, sc.t1]); }
     R[key] = R[key].filter(([a, b]) => b - a > 1); }
   // the cold open: Pip's three strokes (a soft metal swish each, a rising whoosh on each lift), the buddies lean in
-  if (mk("stroke0") !== undefined) [0, 1.4, 2.8].forEach((d) => { E(mk("stroke0") + d, "rub"); E(mk("stroke0") + d + .8, "rise"); });
+  if (mk("stroke0") !== undefined) [0, 1.4, 2.8].forEach((d) => { E(mk("stroke0") + d, "rub"); E(mk("stroke0") + d + .8, "rise", 2); });
   if (mk("budsIn") !== undefined) [0, .15].forEach((d, i) => E(mk("budsIn") + d, "pop", i));
   if (mk("board") !== undefined) E(mk("board") + .1, "chime");
   if (mk("rods") !== undefined) E(mk("rods"), "softpop", 1);
@@ -53,7 +53,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // Pip's nail (a rumble), you jump (a tinkle), a friend clings (a click)
   if (mk("jhead") !== undefined) E(mk("jhead") + .1, "thup");
   for (const k of ["jslide"]) if (mk(k) !== undefined) E(mk(k), "rub");
-  for (const k of ["jlift", "lift"]) if (mk(k) !== undefined) E(mk(k) + .1, "rise");
+  for (const k of ["jlift", "lift"]) if (mk(k) !== undefined) E(mk(k) + .1, "rise", 3);
   if (mk("jback") !== undefined) E(mk("jback") + .2, "thup");
   if (mk("jagain") !== undefined) [0, 1.2, 2.4].forEach((d) => { E(mk("jagain") + d, "rub"); E(mk("jagain") + d + .6, "tick", 1); });
   if (mk("jcarry") !== undefined) E(mk("jcarry"), "whoosh");
@@ -95,7 +95,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   if (has("c1003")) { E(LT("u1002") - .05, "softpop", 2); const L = TL.lines.c1003; for (const [bt, k, soft] of chantBeats(L)) E(bt, k === "c" ? "clap" : "stomp", soft ? .35 : 1); E(L.end - .28, "sparkle"); for (let i = 0; i < L.ncall; i++) E(L.t + (L.slots[i][1] + 1) * L.bar, "turn", i); }
   // the score hand, the reveal, the fun fact
   if (S.final) { E(S.final.t0 + .1, "sting"); const L = PART === 1 ? "m1101" : "n1101"; E(W(L, "high") + .2, "slap"); }
-  if (S.liz) { const L = PART === 1 ? "m1102" : "n1102"; E(S.liz.t0 + .1, "whoosh"); E(W(L, HIDDEN[0]) + .2, "sparkle"); E(W(L, HIDDEN[0]) + .5, PART === 1 ? "cheep" : "pip"); Object.keys(M_).filter((k) => /^ff_/.test(k)).forEach((k, i) => E(M_[k] - .05, "pop", i % 3)); }
+  if (S.liz) { const L = PART === 1 ? "m1102" : "n1102"; E(S.liz.t0 + .1, "whoosh"); E(W(L, HIDDEN[0]) + .2, "sparkle"); E(W(L, HIDDEN[0]) + .5, PART === 1 ? "cheep" : "pip", 1); Object.keys(M_).filter((k) => /^ff_/.test(k)).forEach((k, i) => E(M_[k] - .05, "pop", i % 3)); }
   if (S.cliff && has("m1202")) { E(LT("m1202") - .2, "lowdrum"); E(W("m1202", "part") - .1, "slam", 1); }
   if (mk("dareIn") !== undefined) { [0, .25].forEach((d) => E(W("n1201", "one") - .8 + d, "slide")); E(W("n1201", "lock") - .1, "sting"); }
   // the Showdown's paper and the fix (Pip's poster lines, the strike, the green rewrite)
@@ -103,4 +103,39 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
+  // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): the places' own life and the foley ON the marks (SCENES_TODO's Sound lines)
+  { const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus }), ROLL = (a, b) => { if (b > a + .2) R.roll.push([a, b]); };
+    const SCS = (names) => TL.scenes.filter((sc) => names.includes(sc.name) && sc.t1 - sc.t0 > 2.5);
+    if (PART === 1) {
+      // the HDB neighbourhood centre on Saturday morning: the shop's wind chime now and then, a bicycle bell, cups at a coffee shop far off,
+      // a far-off laugh, the woodpecker's faint tap-tap-tap from the trees, the auntie's market trolley rolling past (the shoppers' loop: sets22.js)
+      SCS(["cold", "back", "today", "answer", "pipclaim", "holdon", "lcq2", "cliff"]).forEach((sc, i) => { E(sc.t0 + .8 + (i % 3) * .5, "windchime", i);
+        if (sc.t1 - sc.t0 > 6) { sfx(sc.t0 + 3.2, "ep06_clink.wav", .03); [0, .13, .26].forEach((d) => E(sc.t0 + 4.4 + d, "tap", 0)); }
+        if (sc.t1 - sc.t0 > 12) { E(sc.t0 + 9, "bikebell"); sfx(sc.t0 + 11, "ep05_laugh.wav", .018); } });
+      for (const [t0, , tr] of [[9, 0, 1], [26, 0, 1]]) for (let k = 0; t0 + 42 * k < TL.END; k++) { const a = t0 + 42 * k + 1, b = t0 + 42 * k + 10; if (SCS(["cold", "back", "today", "answer", "pipclaim", "holdon", "lcq2", "cliff"]).some((sc) => a > sc.t0 && b < sc.t1)) ROLL(a, a + 2.2); }
+      // the game's push-in: the woodpecker taps; the reveal: its quick drumming on the broom handle and in the fun fact
+      if (S.game) [0, .12, .24, 1.6, 1.72, 1.84].forEach((d) => E(S.game.t0 + 1.4 + d, "tap", 0));
+      if (S.liz) { [0, .1, .2, .3].forEach((d) => E(W("m1102", "woodpecker") + .7 + d, "tap", 0)); for (let i = 0; i < 10; i++) E(MK("ff_peck") + .2 + i * .09, "tap", 0); }
+      // the journey: the table's low creak, the stroke's warm whoosh as the magnet slides along you
+      if (S.shrink) { E(MK("jlie") + .3, "creak"); E(MK("jstroke"), "whoosh"); E(MK("jtip") - .2, "softpop", 1); }
+      // HOLD ON!: the magnet's slide along the table to its box, the clink of the clips falling back into the tray
+      if (MK("boxit") !== undefined) { E(MK("boxit") + .1, "slide"); E(MK("boxit") + .35, "jingle"); E(MK("boxit") + .55, "clink"); }
+      if (MK("chop") !== undefined) E(MK("chop"), "tok");
+      if (MK("still") !== undefined) E(MK("still") + .2, "pip", 0);
+    } else {
+      // the school maker space on Monday after school: a far-off school bell, the 3D printer's soft whirr, footsteps in the corridor, a
+      // stapler's clack, children's voices far off (R.room's pass-by), the ant's tiny patter at the game and at the reveal
+      SCS(["maker", "r1ans", "ask", "show", "fix", "lc2q", "pond", "dare"]).forEach((sc, i) => { E(sc.t0 + .6, "whirr", .6); if (sc.t1 - sc.t0 > 5) E(sc.t0 + 3.5, "clack");
+        if (sc.t1 - sc.t0 > 10) sfx(sc.t0 + 6, "footsteps.wav", .03); if (i % 3 === 1) sfx(sc.t0 + 1.5, "ep05_bell.wav", .022); });
+      if (S.game) for (let i = 0; i < 8; i++) E(S.game.t0 + 1.5 + i * .11, "step", .25);
+      if (S.liz) { for (let i = 0; i < 10; i++) E(W("n1102", "ant") + .5 + i * .1, "step", .25); sfx(MK("ff_strong"), "sparkle.wav", .05); E(LE("n1103b") + .1, "pip", 2); }
+      // the journey: a faint metal jingle as the clips settle round you, the weak wobble for Basil's nail, a stronger rising hum for Pip's
+      if (S.shrink) { E(MK("jtray") + .3, "jingle"); E(MK("jwobble") + .5, "jingle"); sfx(MK("jpip") + .4, "riser.wav", .06, "wonder"); }
+      // the look-closers: the magnet slides along the nail, the strokes' ticks; the big fish's slip and splash; the coil's click on the battery
+      if (MK("fishdip") !== undefined) E(MK("fishdip") + .2, "click");
+      if (S.lcmore) for (let i = 0; i < 3; i++) E(MK("dip") + .5 + i * 1.15, "jingle");
+      if (MK("coil") !== undefined) { E(MK("coil") + 1.6, "sparkle"); E(MK("coil") + 1.6, "jingle"); }
+    }
+    // no ambience one-shot under a countdown (only the ticks keep time)
+    const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["sfx", "windchime", "bikebell", "tap", "whirr", "clack", "jingle", "slide"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

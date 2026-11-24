@@ -116,7 +116,7 @@ SC.show = (t, s) => { window._BUBAT = { basil: [1500, 230], momo: [1330, 250], p
     + (st > .01 ? OP(st, TF(680, 1100, .88, poster22(t, 0, 0, 1, { lit: [0, 0, 0] })) + TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
       inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/>` + TF(R[0], R[1] + 30 + bob * .3, .75, `<g filter="url(#dropS)">${countHand(nf)}</g>`) })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 48, P.ink, "#fff", { w: 700 }))) : "")
     + bd("pip", 230, 1076, 480, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "sit"], [W("n801", "pips") + .2, "pointing"], [LT("n802p") - .3, "sit"], [r0 - .3, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 26]] })
-    + bd("momo", 1450, 1020, 380, t, { in: bell + .4, flip: true, poses: [[bell + .4, "sit"]] }) + (t > bell + .6 ? pickNum("momo", 1330, 700, t, tB - .1, "3") : "")
+    + bd("momo", 1360, 1020, 380, t, { in: bell + .4, flip: true, poses: [[bell + .4, "sit"]] }) + (t > bell + .6 ? pickNum("momo", 1240, 700, t, tB - .1, "3") : "")
     + bd("basil", BX.r, 1076, 480, t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"], [r0 - .3, "worried"]] }) + (t > bell + .5 ? pickNum("basil", 1580, 640, t, tB - .1, "3") : "")
     + stamp(t, tS, 960, 460) + bellIcon(t, r0) + melt(t, s, "showcard", .3) + HUD(t); };
 /* the fix: line 3 struck through (strike, kept) and the green rewrite (rewrite) with its picture (the red end on the head, three one-way
@@ -127,7 +127,7 @@ SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 250], '*': [1250, 250] }; c
   const basil = t >= tCh && t < tCh + 1.6 ? bd("basil", BX.r, 1076, 480, t, { in: s.t0 + .1, flip: true, poses: [[tCh, "cheer"]], keepPose: true, achieved: true }) : bd("basil", BX.r, 1076, 480, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] });
   return showWorld(t, cam, { ant: ANTAT.fix, sheet: { strike: st, fix: fx, lit: [0, 0, 0] } })
     + coin(t, MK("coin2") - .1, 960, 330, "+2", "line 3")
-    + bd("pip", 230, 1076, 480, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] }) + bd("momo", 1450, 1020, 380, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] }) + basil
+    + bd("pip", 230, 1076, 480, t, { in: s.t0 + .05, poses: [[s.t0, "oops"]] }) + bd("momo", 1360, 1020, 380, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "arms_crossed"]] }) + basil
     + (t >= MK("strip") ? bookCaption(t, "n807s", TL.lines.n807s.text, 960, { size: 42, keys: ["same", "pole."] }) : "") + HUD(t); };
 
 /* 9 · Momo dips Rod 1 (Pip's nail) at the big gold fish (fishdip): the nail touches a clip and lifts the fish's nose; it slips off and falls

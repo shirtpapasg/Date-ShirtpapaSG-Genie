@@ -120,9 +120,9 @@ SC.answer = (t, s) => { window._BUBAT = { basil: [520, 330] }; const tA = MK("an
   return shop(t, camAns(t), { tp: { lid: 1 } })
     + `<g filter="url(#drop)"><rect x="30" y="40" width="470" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + [0, 1].map((i) => TF(150 + i * 230, 135, .42, dareCard2(i, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }, t))).join("")
     + tagAt(t, tA + .3, 150, 222, 1, "not this one", 22) + coin(t, MK("coin1") - .1, 960, 330, "+1", "if you showed two fingers") + chipAt(t, MK("coin1") + .3, 1720, 150, NOPTC, "?", 30)
-    + bd("basil", BX.l, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("m704b") + .1, "cheer"], [LE("m704b") + 2.2, "arms_crossed"]], achieved: true }) + (t > s.t0 + .3 ? pickNum("basil", 470, 640, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .2, 530, 585, .7)
+    + bd("basil", BX.l, 1076, 480, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("basil", 470, 640, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .2, 530, 585, .7)
     + bd("momo", 800, 1010, 370, t, { in: s.t0 + .15, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("momo", 960, 720, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .25, 1010, 665, .7)
-    + bd("pip", BX.r, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]] }) + pipNail(t, BX.r, 1076, 500, true) + (t > s.t0 + .4 ? pickNum("pip", 1880, 640, t, s.t0 + .4, "2") : "")
+    + bd("pip", BX.r, 1076, 500, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"]], noreact: true }) + pipNail(t, BX.r, 1076, 500, true) + (t > s.t0 + .4 ? pickNum("pip", 1880, 640, t, s.t0 + .4, "2") : "")
     + (t >= tK + .2 && t < tK + 2.4 ? pline(1300, 360, ptx + 40, pty - 20, ramp(t, tK + .2, .3), P.sun) : "")
     + melt(t, s, "pullout", .3) + HUD(t); };
 
@@ -177,8 +177,8 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1250, 260], momo: [1250, 260],
       + labels + TF(1700, 800 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 640 + bob * .6, 1.2) + TF(1700, 990, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
     + (t >= MK("onmag") ? linkChip(t, MK("onmag") + .2, 760, 560, pawPt("basil", BH[0], BH[1], BH[2], false)[0] + 340, pawPt("basil", BH[0], BH[1], BH[2], false)[1] + 20, "#D9468F", "the clips are on the magnet!", 40, tB + .4) : "")
     + (t >= MK("chipfar") ? linkChip(t, MK("chipfar") + .2, 1150, 470, camPt(cam, [1150, 640])[0], camPt(cam, [1150, 640])[1], GOODC, "Test it with the magnet far away!", 42, MK("strip") + 1.2) : "")
-    + bd("momo", 1590, 1010, 360, t, { in: LT(c) + .45, flip: true })
-    + bd("pip", BX.r + 50, 1076, 500, t, { in: LT(c) + .3, flip: true })
+    + bd("momo", 1490, 1010, 360, t, { in: LT(c) + .45, flip: true })
+    + bd("pip", 1770, 1076, 500, t, { in: LT(c) + .3, flip: true })
     + bd("basil", BH[0], 1076, BH[2], t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, look: inT ? 6 : 0, poses: [[s.t0, "sit"], [W(b, "something") + .9, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 30]], nohop: true }) + (ring ? "" : holdThings(t))
     + faceCam("momo", t, tB + .6, tB + 2.5, 1560, 330, 150, [[tB + .6, "arms_crossed"]], { noreact: true })
     + (t >= MK("strip") ? stripTwo(t) : "")
