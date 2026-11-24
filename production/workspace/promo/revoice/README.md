@@ -21,3 +21,10 @@ Rebuild:
 
 These are the copies people can watch. Our v2 uploads (VIq1qSd85R0, S4Cv2H0IG9Y, IVYktYPowNI: 1:23, 1:16, 1:17) were set private elsewhere.
 The public copies have no custom thumbnail. When new thumbnails are approved, set them on the PUBLIC ids above.
+
+## 24 Nov 2026: thumbnails chosen by the teacher ("1A, 2B, 3A") are set on the PUBLIC copies
+- nZUOyUq193w: thumb1_v3a.jpg ("IT'S COMING!", Pip and the fog)
+- by9XehOWfUE: thumb2_v3b.jpg ("HOW?!", the three sleeping Guardians)
+- pAVAJF9ye1c: thumb3_v3a.jpg ("A CURSE?!", Pip and the black eclipse)
+
+Each was checked live on i.ytimg.com. The research is in THUMBNAILS.md.
