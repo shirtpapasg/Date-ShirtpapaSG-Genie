@@ -22,7 +22,14 @@ Upload (only after the teacher's "go"): `YT_TOKEN_FILE=.yt_token.json python3 yo
 
 ## Lengths and checks
 
-LENGTHS_HERE
+| Video | Length | Frames (30 fps) | Decode check | Loudness | Size |
+|---|---|---|---|---|---|
+| ep11.mp4 (1920x1080) | 4:57.9 (297.9 s) | 8936 = ceil(END x 30) | `ffmpeg -v error ... -f null -`: no errors | -16.5 LUFS | 53 MB |
+| short1.mp4 (1080x1920) | 56.6 s | 1698 = expected | no errors | -16.5 LUFS | 11 MB |
+| short2.mp4 (1080x1920) | 52.5 s | 1575 = expected | no errors | -16.4 LUFS | 8.7 MB |
+
+Stills checked in three rounds of fixes (layout clear of the tag and captions, the shadow diagram redrawn, the Short 1 shadow diagram
+refitted to the vertical frame, a 1.3 s hold after Short 1's P4 line and 1.5 s in the episode). Contact sheets: `sheet_*.jpg`.
 
 ## Running order (episode)
 
@@ -100,4 +107,16 @@ question "Which finishes first: one friend with twenty sums, or twenty friends w
 
 ## Weak points / to watch
 
-WEAK_HERE
+- The hook's wording changed for a fact (see "Changes" 1): the teacher must OK it.
+- "Its founder": Huang is one of three co-founders. "Lenses shrink the pattern again and again": one projection lens column (many lens
+  elements) shrinks about 4 times. Both are approved words, left as they are; flagged for the teacher.
+- Clean room vs operating theatre: true by ISO classes, but no single source says it directly (to confirm before approving).
+- NBC News could not be found; the 8-K text and CBS / NPR / CNBC agree (11 days, 12 -> 23 Nov). sec.gov and nvidianews.nvidia.com do not open
+  from the cloud, so the 8-K and Nvidia's Blackwell page were read through search results only.
+- No "Welcome / Today you'll learn" card (the approved script has none; adding it would pass 5 minutes).
+- Pictures that are simple on purpose: the transistor is a block drawing (two ends, a channel, a gate), not a real cross-section; the
+  data-centre racks are icons; the AI "cat or dog" uses emoji on cards; the "1 in 10" row uses ten chip icons.
+- The globe in the news and map scenes is drawn from Natural Earth 1:50m country outlines (internal borders show faintly); the Singapore
+  map uses the 1:10m coast. Santa Clara, Hsinchu, Woodlands and Tampines are at their real longitude and latitude (geo11.py).
+- The heat scene's change from the racks to the hotter/colder diagram is a 0.3 s cross-fade, so one contact-sheet frame shows both.
+- Short 1's question "What blocks the light to make the pattern?" is answered in its own pictures (the mask); it is a recap question.
