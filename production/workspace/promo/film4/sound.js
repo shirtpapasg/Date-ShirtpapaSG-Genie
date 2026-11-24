@@ -80,6 +80,17 @@ for (let i = 0; i < 10; i++) add(sfx, I.ting(91 + (i % 3) * 2, { gap: .06 }), MK
 // 5 the Gift Shop: the lights flicker on, the screen rises, the tap, ka-ching
 { const on = MK.shopOn; for (let i = 0; i < 4; i++) add(sfx, I.tvClick(), on + .05 + i * .08, .06); chime(on + .45, .09); whoosh(on + .95, .4, .08);
   add(sfx, I.tvClick(), MK.bought - .45, .18); ding(MK.bought, .16, 88); for (let i = 0; i < 8; i++) add(sfx, I.ting(96, { gap: .04 }), MK.bought + .05 + i * .05, .05); }
+// 5b the legendary looks (v3): the marquee sparkle, the curtains' swish, snow sparkles and sleigh-bell-like glints for Winter Wonderland,
+// a whoosh as the stage turns, then the Rocket Pack's ignition rumble and a rising shimmer for the Space Explorer
+{ const tl = W('h08', 'legendary'), tw = W('h08', 'winter'), to = W('h08', 'or'), tr = W('h08', 'rocket');
+  whoosh(SCN.legend.t0, .45, .08, false);
+  chime(tl - .15, .1); for (let i = 0; i < 8; i++) add(sfx, I.ting(96 + (i % 4) * 2, { gap: .05 }), tl - .1 + i * .045, .045, (i % 2 ? .4 : -.4));
+  add(sfx, I.noiseSweep(.8, 1800, 500, { q: .7, pink: true, shape: (x) => Math.sin(Math.PI * x) }), tl + .25, .07);   // the curtains open
+  for (let i = 0; i < 14; i++) add(sfx, I.ting(98 + [0, 3, 7, 10][i % 4], { gap: .05 }), tw - .2 + i * .11, .03 + .015 * (i % 3), (i % 2 ? .5 : -.5));   // snow sparkles
+  [84, 88, 91, 96, 100].forEach((n, i) => add(sfx, I.musicBox(n, { decay: 1.2 }), tw + .05 + i * .09, .07, (i - 2) * .25));
+  whoosh(to - .25, .55, .14, true); add(sfx, I.noiseSweep(.5, 3000, 400, { q: .9 }), to + .2, .06);
+  add(sfx, I.noiseSweep(1.6, 120, 520, { q: .5, pink: true, shape: (x) => Math.min(1, x * 4) * (1 - x * .5) }), tr - .1, .12); add(sfx, I.subBoom(1.0, 70, 40), tr, .08);
+  for (let i = 0; i < 6; i++) add(sfx, I.musicBox(79 + i * 4, { decay: .7 }), tr + .2 + i * .07, .05, (i - 2.5) * .2); }
 // 6 the Dressing Room: colours swirl in, the goggles unlock, the spin
 { const tc = W('b03', 'colours'), ty = W('b03', 'yours'), tsp = W('h05', 'spin'); add(sfx, I.noiseSweep(.9, 600, 6000, { q: 2 }), tc, .07); chime(tc + .2, .07);
   pops(ty, .16, 2200); ding(ty + .05, .14, 88); chime(ty + .15, .08); whoosh(tsp, 1.6, .07); add(sfx, I.boing(), W('h05', 'take') + .1, .06); }

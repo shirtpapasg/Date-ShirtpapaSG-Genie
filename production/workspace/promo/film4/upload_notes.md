@@ -47,3 +47,15 @@ Featuring Pip, Momo and Basil, the pet buddies, with Heart as narrator.
   hidden observation, "Does he know he gets 100 free credits for completing the tutorial?" (was "No colour. No style. Not even a hat!"),
   said as a quick, quieter aside. The 100 credits are the app's own welcome gift (tour2.js GIFT = 100, once, when a new pupil finishes
   the tour). Easter egg: a small "Finish the tour +100 credits" poster stands on the platform in that scene; its rim glows as Pip says it.
+
+## v3 (24 Nov 2026; NOT uploaded: for the teacher to review). `upload_v3.json` replaces d957xsM52Q8 with a NEW VERSION line.
+- The teacher: "it looks lower quality than promo films 1-3 ... please upgrade from here. Also, showcase some of the legendary customised
+  suit like the newest christmas theme and the space suit".
+- Now 1920x1080 at 60 fps (was 30), about 88 s (was 79). Every voice line and timing kept; one line added for Heart (h08): "Save up for
+  the legendary looks. Winter Wonderland, only this season. Or the Space Explorer, rocket pack and all!"
+- The legendary looks, exactly as the app has them (avatar.js): the Winter Wonderland Pack, tier S "Legendary · 300" (on sale 13 Nov to
+  31 Dec 2026), four sets (red velvet party dress with the pom-pom hat, present and twinkly tree; green snowflake dress; red cosy jumper
+  with antlers; green reindeer jumper with earmuffs); the Space Explorer Pack, tier SS "Mythical · 500" (Space Suit, Planet Band, Rocket
+  Pack, Mini Telescope). The app never names a festival (tests/shop.test.mjs), so the film says "Winter Wonderland", not "Christmas".
+- "Earned, never bought" stays true: a chip says the outfits are "Bought with credits you earn".
+- Title: The Grey Platform: Earn It, Wear It, Play It (Legendary Looks) | TheOneApp. Thumbnail: `thumb_v3.jpg`.

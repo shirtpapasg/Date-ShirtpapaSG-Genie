@@ -10,7 +10,7 @@ const mix = (a, b, u) => { const p = (h) => [1, 3, 5].map((i) => parseInt(h.slic
 
 /* ---------- shared defs (added once by main.js) ---------- */
 function ARTDEFS() { return `
-  ${lg("dome", [[0, "#5B3FB8", .55], [1, "#2A1E6E", .25]])}
+  ${lg("dome", [[0, "#5B3FB8", .9], [1, "#2A1E6E", .82]])}
   <linearGradient id="domeRim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${C.cyan}"/><stop offset=".5" stop-color="#9B7BFF"/><stop offset="1" stop-color="${C.mag}"/></linearGradient>
   ${lg("beamB", [[0, "#6FA8FF", .0], [1, "#6FA8FF", .38]])}${lg("beamV", [[0, "#B07BFF", .0], [1, "#B07BFF", .34]])}
   ${lg("lampBeam", [[0, "#FFF4C8", .55], [1, "#FFF4C8", 0]], 1, 0)}
@@ -37,7 +37,7 @@ function ARTDEFS() { return `
   ${lg("wallWarm", [[0, "#7A4A2C"], [1, "#4A2C1A"]])}${lg("shelfG", [[0, "#D39A5E"], [1, "#9A6236"]])}${lg("velvet", [[0, "#B0233F"], [.5, "#7E1530"], [1, "#B0233F"]], 1, 0)}
   ${lg("stageG", [[0, "#3A2558"], [1, "#1A1030"]])}${lg("flameG", [[0, "#FFF7D0"], [.35, "#FFD35A"], [1, "#FF6A2A", 0]])}${lg("snowSky", [[0, "#2A3E7A"], [1, "#7FA3D8"]])}${lg("spaceSky", [[0, "#0A0624"], [1, "#2A1760"]])}
   ${lg("goldText", [[0, "#FFF4B8"], [1, "#FFC233"]])}${lg("gridFade", [[0, "#FF5CF0", 0], [1, "#FF5CF0", .55]])}
-  ${winPat("winA", 1)}${winPat("winB", 2)}${winPat("winC", 3)}
+  ${TTDEFS}${winPat("winA", 1)}${winPat("winB", 2)}${winPat("winC", 3)}
   <clipPath id="scrClip"><rect x="0" y="0" width="1920" height="1080" rx="46"/></clipPath>
   <image id="logoImg" href="img/logo.png" width="512" height="512"/>
   ${["shop", "shop2", "dress", "dress2", "boss", "boss2", "claw"].map((k) => `<image id="shot_${k}" href="shots/${k}.jpg" width="1920" height="1080"/>`).join("")}`; }
@@ -97,12 +97,11 @@ function flower(x, y, r, col, glow = 0) { let s = glow ? `<circle cx="${n2(x)}" 
   for (let k = 0; k < 5; k++) { const a = k * 1.2566 - 1.57; s += `<circle cx="${n2(x + Math.cos(a) * r * .62)}" cy="${n2(y + Math.sin(a) * r * .62)}" r="${n2(r * .5)}" fill="${col}"/>`; }
   return s + `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r * .36)}" fill="#FFE27A"/>`; }
 // foreground grass tufts along the bottom edge (dark, near the camera)
-function foreGrass(t, y = 1080, o = {}) { let s = ""; const col = o.col || "#100F2C";
-  for (let i = 0; i < 44; i++) { const x = hash(i, 71) * 2100 - 90; if (o.sides && x > 420 && x < 1500) continue; const h = 40 + 70 * hash(i, 72), sw = 6 * Math.sin(t * 1.2 + i);
-    s += `<path d="M${n2(x - 10)} ${y} Q${n2(x - 4 + sw * .5)} ${n2(y - h * .6)} ${n2(x + sw)} ${n2(y - h)} Q${n2(x + 6)} ${n2(y - h * .5)} ${n2(x + 12)} ${y}z" fill="${col}"/>`; }
-  for (let i = 0; i < 9; i++) { const x = hash(i, 74) * 1900 + 10; if (o.sides && x > 420 && x < 1500) continue; s += flower(x, y - 60 - 40 * hash(i, 75), 12 + 6 * hash(i, 76), ["#FF6FA8", "#FFB14A", "#6FA8FF", "#B07BFF"][i % 4], .35); }
+function foreGrass(t, y = 1080, o = {}) { let s = ""; const col = o.col || "#17153E";
+  for (let i = 0; i < 70; i++) { const x = hash(i, 71) * 2100 - 90; if (o.sides && x > 380 && x < 1540) continue; const h = 26 + 46 * hash(i, 72), sw = 5 * Math.sin(t * 1.2 + i), lean = (hash(i, 73) - .5) * 30;
+    s += `<path d="M${n2(x - 9)} ${y} Q${n2(x + lean * .3)} ${n2(y - h * .7)} ${n2(x + lean + sw)} ${n2(y - h)} Q${n2(x + 4 + lean * .3)} ${n2(y - h * .45)} ${n2(x + 9)} ${y}z" fill="${col}" opacity=".92"/>`; }
+  for (let i = 0; i < 12; i++) { const x = hash(i, 74) * 1900 + 10; if (o.sides && x > 380 && x < 1540) continue; s += flower(x, y - 58 - 50 * hash(i, 75), 13 + 7 * hash(i, 76), ["#FF6FA8", "#FFB14A", "#6FA8FF", "#B07BFF"][i % 4], .45); }
   return s; }
-
 /* ---------- the Station's pieces ---------- */
 function ferris(t, cx, cy, r) { let s = `<circle cx="${cx}" cy="${cy}" r="${r + 30}" fill="url(#glowV)" opacity=".45"/><circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#9A86FF" stroke-width="6" opacity=".95"/><circle cx="${cx}" cy="${cy}" r="${r * .62}" fill="none" stroke="#7E6BE8" stroke-width="3" opacity=".7"/><circle cx="${cx}" cy="${cy}" r="${r * .15}" fill="#5A4CC0"/>`;
   const a0 = t * .12; for (let i = 0; i < 12; i++) { const a = a0 + i * Math.PI / 6, x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r, col = ["#FF6FA8", "#FFD23F", "#4FD8FF", "#7BE08F"][i % 4];
@@ -172,30 +171,39 @@ function train(x, y, n = 6, o = {}) { let s = "", glow = "", refl = ""; const W 
     glow += `<ellipse cx="${n2(L + W / 2)}" cy="${n2(y + 30)}" rx="${W * .62}" ry="44" fill="url(#glowWarm)" opacity="${n2(.55 * nt)}"/>`;
     refl += `<rect x="${n2(L + 8)}" y="${n2(y + H + 16)}" width="${W - 16}" height="5" rx="2" fill="#FFE7A6" opacity="${n2(.35 * nt)}"/><rect x="${n2(L + 4)}" y="${n2(y + H + 24)}" width="${W - 8}" height="3" fill="${C.pink}" opacity=".3"/>`; }
   return OP(o.op === undefined ? 1 : o.op, glow + s + (o.refl === false ? "" : refl)); }
-function viaduct(y, day = 0) { return `<rect x="-400" y="${y}" width="2720" height="16" fill="${mix(C.via, DAY.via, day)}"/><rect x="-400" y="${y}" width="2720" height="4" fill="${C.viaTop}" opacity=".8"/>` +
-  [0, 1, 2, 3, 4, 5, 6, 7].map((i) => `<rect x="${-60 + i * 300}" y="${y + 16}" width="18" height="${830 - y}" fill="${mix("#24296A", "#4B5C9E", day)}"/>`).join(""); }
+function viaduct(y, day = 0) { return `<rect x="-400" y="${y}" width="2720" height="24" fill="${mix("#262E70", DAY.via, day)}"/><rect x="-400" y="${y}" width="2720" height="4" fill="${C.viaTop}" opacity=".9"/><rect x="-400" y="${y + 20}" width="2720" height="4" fill="#161A48"/>` +
+  [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => `<rect x="${-60 + i * 260}" y="${y + 24}" width="20" height="${830 - y}" fill="${mix("#20256A", "#4B5C9E", day)}"/><rect x="${-60 + i * 260}" y="${y + 24}" width="5" height="${830 - y}" fill="#3E49A8" opacity=".6"/>`).join("") +
+  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].map((i) => `<circle cx="${-40 + i * 130}" cy="${y + 12}" r="3" fill="#BFE9FF" opacity="${n2(.8 * (1 - day))}"/>`).join(""); }
 function lightRail(t, y) { let s = `<path d="M-100 ${y} H2100" stroke="#6FC8FF" stroke-width="3" opacity=".7"/>`;
   for (let i = 0; i < 44; i++) { const x = i * 48 - ((t * 60) % 48); s += `<circle cx="${n2(x)}" cy="${y}" r="5" fill="#BFE9FF" opacity="${n2(.6 + .4 * Math.sin(i + t * 3))}"/>`; }
   return s; }
 
 /* The whole Station, wide (the films' establishing shot). o: day (0..1), trainX (front of the train), shop (0 dark .. 1 lit), screen, fw (fireworks t0) */
-function station(t, o = {}) { const day = o.day || 0, nt = 1 - day;
+function station(t, o = {}) { const day = o.day || 0, nt = 1 - day, z = o.z || 1, cx = o.cx || 960, cy = o.cy || 600;
+  const L = (d, inner) => CAM(inner, z, cx, cy, d);   // parallax: far layers move less than near ones as the camera pushes in
   let s = sky(t, day);
-  s += moon(1270, 150 + 400 * day, 56, nt) + (day > .02 ? sunDisc(lerp(300, 1500, o.sunU === undefined ? .5 : o.sunU), 260 - 120 * Math.sin(Math.PI * (o.sunU === undefined ? .5 : o.sunU)), 64, day) : "");
-  s += beams(t, nt * .95);
-  if (o.fw !== undefined) s += fireworks(t, o.fw);
-  // far skyline
-  s += OP(1, `<g opacity="${n2(.85)}">${block(140, 610, 90, 210, nt, 3)}${block(1110, 640, 80, 180, nt, 5)}${block(1240, 600, 70, 220, nt, 7)}${block(560, 650, 70, 170, nt, 9, "#25205E")}</g>`);
-  s += towers(1560, 560, day) + supertree(1880, 820, 330, t) + supertree(1760, 830, 200, t + 1);
-  s += ferris(t, 60, 640, 170) + sign(70, 430, "Fun Fair", 22);
-  s += school(250, 700, t * .2) + lighthouse(t, 470, 820, 520, day);
-  s += dome(t, 950, 760, 330) + sign(950, 628, "TheOneApp Station", 28, { fill: "#FFF6E4" });
-  s += viaduct(738, day) + train(o.trainX === undefined ? 1640 : o.trainX, 676);
-  s += chest(1800, 830, t);
-  s += grass(day, 818) + lightRail(t, 852);
-  if (o.shop !== undefined) s += giftShopMini(1350, 838, o.shop, t);
-  s += airship(o.shipX || 300, 150, .82, t, o.screen);
+  s += L(.15, moon(1270, 150 + 400 * day, 56, nt) + (day > .02 ? sunDisc(lerp(300, 1500, o.sunU === undefined ? .5 : o.sunU), 260 - 120 * Math.sin(Math.PI * (o.sunU === undefined ? .5 : o.sunU)), 64, day) : ""));
+  s += L(.3, beams(t, nt * .95));
+  if (o.fw !== undefined) s += L(.3, fireworks(t, o.fw));
+  // far skyline (two rows of lit windows), then the near pieces
+  s += L(.4, skyline(800, day, t, { seed: 31, h0: 170, h1: 230, col: "#191548", rim: "#3A3290", lit: .7 }));
+  s += L(.6, skyline(820, day, t, { seed: 57, h0: 90, h1: 170, col: "#221C5C", lit: .95 }));
+  let m = towers(1560, 560, day) + supertree(1880, 820, 330, t) + supertree(1760, 830, 200, t + 1) + supertree(1660, 840, 150, t + 2);
+  m += ferris(t, 60, 640, 170) + sign(70, 430, "Fun Fair", 22);
+  m += `<g opacity="${n2(.95)}">${block(140, 610, 90, 210, nt, 3)}${block(1110, 640, 80, 180, nt, 5)}${block(1240, 600, 70, 220, nt, 7)}${block(560, 650, 70, 170, nt, 9, "#25205E")}</g>`;
+  m += school(250, 700, t * .2) + lighthouse(t, 470, 820, 520, day);
+  m += dome(t, 950, 760, 330) + sign(950, 628, "TheOneApp Station", 28, { fill: "#FFF6E4" });
+  m += viaduct(738, day) + train(o.trainX === undefined ? 1640 : o.trainX, 656, 6, { nt });
+  m += chest(1800, 830, t);
+  m += airship(o.shipX || 300, 150, .82, t, o.screen);
+  s += L(1, m);
+  let g = grass(day, 818, t) + lightRail(t, 852) + `<ellipse cx="960" cy="830" rx="900" ry="40" fill="url(#glowV)" opacity="${n2(.35 * nt)}"/>`;
+  if (o.shop !== undefined) g += giftShopMini(1350, 838, o.shop, t);
+  s += L(1.08, g);
+  if (o.motes !== false) s += L(1.15, motes(t, 22, 380, 980, { op: nt }));
   return s; }
+// the near layer (characters, foreground grass) under the same camera as station(t, o)
+const stationNear = (o, inner, d = 1.12) => CAM(inner, o.z || 1, o.cx || 960, o.cy || 600, d);
 // fireworks (the end card): bursts of dots, each from a list of (time, x, y, colour)
 function fireworks(t, t0) { let s = ""; const B = [[0, 1500, 260, "#FFB14A"], [.6, 420, 220, "#6FA8FF"], [1.3, 1650, 180, "#FF6FA8"], [2.0, 300, 300, "#FFD23F"], [2.6, 1420, 330, "#B07BFF"], [3.3, 560, 180, "#7BE08F"], [4.0, 1580, 240, "#FFD23F"], [4.8, 380, 250, "#FF6FA8"], [5.6, 1480, 200, "#6FA8FF"], [6.3, 480, 300, "#FFB14A"]];
   for (const [d, x, y, col] of B) { const u = (t - t0 - d) / 1.6; if (u < 0 || u > 1) continue; const r = 150 * eo(u), op = 1 - ei(u);
@@ -295,7 +303,10 @@ function caption(t) { let L = null; for (const id of TL.order) { const x = TL.li
   const a = ramp(t, L.t - .12, .18) * (1 - ss(L.end + .35, L.end + .55, t)); if (a < .01) return "";
   const keys = (L.keys || []).map(norm), size = tw(L.text, 50, 700) > 1460 ? 44 : 50, sp = tw(" ", size, 700); let x = 0, parts = [], cur = -1;
   L.words.forEach((w, i) => { if (t >= w.a - .03) cur = i; });
-  const ws = L.text.split(" "), wds = ws.map((w, i) => ({ w, x: 0, ww: tw(w, size, 700), i }));
+  let wds = L.text.split(" ").map((w, i) => ({ w, x: 0, ww: tw(w, size, 700), i }));
+  // v3: a line too long for one caption (h08, three sentences) shows one sentence at a time: the one being said
+  if (tw(L.text, size, 700) > 1500) { const ch = []; let c = []; wds.forEach((d) => { c.push(d); if (/[.!?]$/.test(d.w)) { ch.push(c); c = []; } }); if (c.length) ch.push(c);
+    wds = ch.find((c) => c.some((d) => d.i === Math.max(0, cur))) || ch[0]; }
   wds.forEach((d) => { d.x = x; x += d.ww + sp; }); const W = x - sp;
   for (const d of wds) { const said = d.i <= cur, now = d.i === cur && t < (L.words[d.i] ? L.words[d.i].b + .12 : 0), key = keys.includes(norm(d.w));
     const fill = (now || (said && key)) ? C.gold : said ? "#FFFFFF" : "#9C93C4"; parts.push(`<tspan x="${n2(d.x - W / 2)}" fill="${fill}">${esc(d.w)}</tspan>`); }
@@ -303,3 +314,67 @@ function caption(t) { let L = null; for (const id of TL.order) { const x = TL.li
   return OP(a, `<g transform="translate(960 986)"><rect x="${n2(-bw / 2)}" y="-44" width="${n2(bw)}" height="86" rx="43" fill="url(#capG)"/>
     <text y="17" font-family="Fredoka" font-weight="700" font-size="${size}" text-anchor="start">${parts.join("")}</text>
     <g transform="translate(0 -56)"><rect x="${n2(-nw / 2)}" y="-22" width="${n2(nw)}" height="44" rx="22" fill="${pc}"/>${TX(0, 10, esc(nm), 30, ink)}</g></g>`); }
+
+/* ---------- v3: the shop's tier tags, drawn as the app draws them (avatar.js tierTag + its css: C grey, U green, R blue, S gold, SS a
+   navy pill with a rainbow ring and a white dash that runs round it) ---------- */
+const TIERS3 = { C: ["Common", 30], U: ["Uncommon", 50], R: ["Rare", 100], S: ["Legendary", 300], SS: ["Mythical", 500] };
+function tierTag(x, y, tier, size, t = 0, o = {}) { const [nm, pr] = TIERS3[tier], txt = o.text || `${nm} · ${pr}`, lw = tw(tier, size, 700) + size * .3, w = lw + tw(txt, size, 700) + size * 1.2, h = size * 1.55, r = h / 2;
+  const ST = { C: ["#eef0f3", "#9aa1ad", "#3d4350"], U: ["#e3f6e8", "#3fae63", "#17592e"], R: ["#e3efff", "#3b82f6", "#173f86"], S: ["url(#ttS)", "#e0a800", "#5b4300"], SS: ["#1d2a44", "none", "#fff"] }[tier];
+  let s = `<rect x="${n2(-w / 2)}" y="${n2(-h / 2 + size * .12)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(r)}" fill="${tier === "SS" ? "#0d1526" : ST[1]}"/><rect x="${n2(-w / 2)}" y="${n2(-h / 2)}" width="${n2(w)}" height="${n2(h)}" rx="${n2(r)}" fill="${ST[0]}" stroke="${ST[1]}" stroke-width="${n2(size * .1)}"/>`;
+  if (tier === "SS") { const P = 2 * (w + 8 - h - 8) + Math.PI * (h + 8), seg = P / 6, cols = ["#ff4d6d", "#ffa630", "#ffe14d", "#4fd67a", "#4da6ff", "#a66bff"], run = (t * P / 3) % P;
+    cols.forEach((c, i) => { s += `<rect x="${n2(-w / 2 - 4)}" y="${n2(-h / 2 - 4)}" width="${n2(w + 8)}" height="${n2(h + 8)}" rx="${n2(r + 4)}" fill="none" stroke="${c}" stroke-width="${n2(size * .17)}" stroke-dasharray="0 ${n2((i * seg + run / 2) % P)} ${n2(seg)} ${n2(P)}"/>`; });
+    s += `<rect x="${n2(-w / 2 - 4)}" y="${n2(-h / 2 - 4)}" width="${n2(w + 8)}" height="${n2(h + 8)}" rx="${n2(r + 4)}" fill="none" stroke="#fff" stroke-width="${n2(size * .22)}" stroke-linecap="round" stroke-dasharray="${n2(P * .06)} ${n2(P * .94)}" stroke-dashoffset="${n2(-run * 2)}" opacity=".9"/>`; }
+  const x0 = -w / 2 + size * .6;
+  s += `<text x="${n2(x0)}" y="${n2(size * .36)}" font-family="Fredoka" font-weight="700" font-size="${size}" fill="${tier === "SS" ? "url(#ttSS)" : ST[2]}">${tier}</text>` + TX(x0 + lw, size * .36, esc(txt), size, ST[2], { a: "start", w: 600 });
+  return TF(x, y, o.k === undefined ? 1 : o.k, s, o.rot || 0); }
+const TTDEFS = `<linearGradient id="ttS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6d6"/><stop offset="1" stop-color="#ffe28a"/></linearGradient><linearGradient id="ttSS" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff8fa3"/><stop offset=".25" stop-color="#ffd166"/><stop offset=".5" stop-color="#7ee0a1"/><stop offset=".75" stop-color="#8cc8ff"/><stop offset="1" stop-color="#c9a2ff"/></linearGradient>`;
+// an app icon (avatar.js shopIcon svg) placed at (x, y), size px
+const iconAt = (svg, x, y, size) => svg.replace(/^<svg class="av-icon" viewBox="([^"]+)" width="\d+" height="\d+"/, `<svg viewBox="$1" x="${n2(x - size / 2)}" y="${n2(y - size / 2)}" width="${n2(size)}" height="${n2(size)}"`);
+
+/* ---------- v3: inside the Gift Shop: warm wood, the app's green and cream awning, string lights, pendant lamps, shelves stocked with the
+   shop's real things and their tier tags, the "Legendary looks" stage at the back. lit: 0 (dark, moonlight) .. 1 (warm). st: the stage
+   (0 curtains shut and dark, 1 open); fill(t) draws what stands on the stage ---------- */
+function shopInside(t, lit, o = {}) { const L = lit, dk = (a, b) => mix(a, b, L); let s = "";
+  s += `<rect x="-200" y="-200" width="2320" height="1500" fill="${dk("#141026", "#5A3420")}"/><rect x="-200" y="60" width="2320" height="720" fill="url(#wallWarm)" opacity="${n2(L)}"/>`;
+  for (let i = 0; i < 30; i++) s += `<rect x="${-200 + i * 80}" y="60" width="3" height="720" fill="#000" opacity=".16"/>`;
+  s += `<rect x="-200" y="560" width="2320" height="10" fill="${dk("#20182E", "#8A5532")}"/>`;
+  // the shelves, left and right, with the shop's things and their tags
+  const SH = (AVSHOP.shelf || []); let k = 0;
+  for (const [x0, x1] of [[40, 640], [1280, 1880]]) for (let r = 0; r < 3; r++) { const y = 300 + r * 160;
+    s += `<rect x="${x0}" y="${y}" width="${x1 - x0}" height="16" rx="4" fill="${dk("#2A2034", "#C88A52")}"/><rect x="${x0}" y="${y + 16}" width="${x1 - x0}" height="8" fill="${dk("#18121F", "#7A4A2C")}"/>`;
+    for (let c = 0; c < 4; c++) { const it = SH[k++ % Math.max(1, SH.length)]; if (!it) continue; const cx = x0 + 75 + c * (x1 - x0 - 150) / 3, bob = L > .5 ? 2 * Math.sin(t * 2 + k) : 0;
+      s += `<ellipse cx="${n2(cx)}" cy="${y - 2}" rx="46" ry="8" fill="#000" opacity=".25"/>` + OP(.35 + .65 * L, iconAt(it.svg, cx, y - 56 + bob, 104)) + OP(L, tierTag(cx, y + 46, it.tier, 13, t)); } }
+  // the stage at the back: an arch, velvet curtains, the marquee "Legendary looks"
+  const st = o.st || 0, sw = o.sign || 0;
+  s += `<path d="M640 780 V280 Q640 160 960 160 Q1280 160 1280 280 V780z" fill="${dk("#100C1E", "#3A1E2E")}"/>`;
+  if (st > .01 && o.fill) s += `<g clip-path="url(#stageClip)">${o.fill(t)}</g>`;
+  const cw = 330 * (1 - eio(st));
+  s += `<clipPath id="stageClip"><path d="M664 780 V284 Q664 184 960 184 Q1256 184 1256 284 V780z"/></clipPath><g clip-path="url(#stageClip)"><rect x="640" y="150" width="${n2(cw)}" height="640" fill="url(#velvet)" opacity="${n2(.4 + .6 * L)}"/><rect x="${n2(1280 - cw)}" y="150" width="${n2(cw)}" height="640" fill="url(#velvet)" opacity="${n2(.4 + .6 * L)}"/>`;
+  for (let i = 0; i < 6; i++) { s += `<path d="M${n2(640 + cw * (i + .5) / 6)} 150 V790 M${n2(1280 - cw * (i + .5) / 6)} 150 V790" stroke="#4A0A1C" stroke-width="5" opacity="${n2(.5 * (cw > 4 ? 1 : 0))}"/>`; } s += `</g>`;
+  s += `<path d="M640 780 V280 Q640 160 960 160 Q1280 160 1280 280 V780" fill="none" stroke="${dk("#3A2A1A", "#E9B44C")}" stroke-width="18"/>`;
+  for (let i = 0; i <= 22; i++) { const u = i / 22, a = Math.PI + u * Math.PI, bx = 960 + Math.cos(a) * 320, by = 280 + Math.sin(a) * 120 * (1 - Math.abs(Math.cos(a)) * 0) ; const on = sw * (.55 + .45 * Math.sin(t * 9 - i * 1.1));
+    s += `<circle cx="${n2(bx)}" cy="${n2(Math.min(280, by))}" r="7" fill="${mix("#5A4A3A", "#FFF1B0", on)}"/>` + (on > .2 ? `<circle cx="${n2(bx)}" cy="${n2(Math.min(280, by))}" r="22" fill="url(#glowY)" opacity="${n2(on * .8)}"/>` : ""); }
+  s += TF(960, 128, 1, `<rect x="-250" y="-46" width="500" height="92" rx="20" fill="${dk("#1A1226", "#2A1640")}" stroke="${mix("#4A3A2A", "#FFD23F", Math.max(sw, L * .3))}" stroke-width="6"${sw > .1 ? ' filter="url(#neon)"' : ""}/>` + TX(0, 20, "Legendary looks", 54, sw > .05 ? "url(#goldText)" : dk("#3A3040", "#8A6A40"), { op: .4 + .6 * Math.max(sw, .3 * L) }));
+  // the awning valance (the app's green and cream), the string lights, the wooden board
+  for (let i = 0; i < 16; i++) { const x = -200 + i * 145; s += `<path d="M${x} 0 h145 v60 q-72.5 30 -145 0z" fill="${i % 2 ? dk("#2C3A3A", "#EFE5CF") : dk("#163028", "#1E8A5A")}"/>`; }
+  let b = ""; for (let r = 0; r < 2; r++) for (let i = 0; i <= 24; i++) { const u = i / 24, x = -60 + u * 2040, y = 96 + r * 30 + 46 * Math.sin(Math.PI * ((u * 4) % 1)), on = L * (.7 + .3 * Math.sin(t * 4 + i + r * 3)), col = ["#FF6FA8", "#FFD23F", "#6FA8FF", "#7BE08F"][(i + r) % 4];
+    b += `<circle cx="${n2(x)}" cy="${n2(y)}" r="7" fill="${mix("#3A3466", col, on)}"/>` + (on > .3 ? `<circle cx="${n2(x)}" cy="${n2(y)}" r="22" fill="url(#glowY)" opacity="${n2(on * .6)}"/>` : ""); }
+  s += b;
+  // pendant lamps with warm cones over the shelves
+  for (const x of [340, 1580]) s += `<path d="M${x} 60 V170" stroke="#2B2147" stroke-width="4"/><path d="M${x - 44} 196 Q${x} 150 ${x + 44} 196z" fill="#2B2147"/><circle cx="${x}" cy="196" r="12" fill="${mix("#3A3466", "#FFF3C4", L)}"/>` + OP(L, `<circle cx="${x}" cy="196" r="80" fill="url(#glowY)" opacity=".8"/><path d="M${x - 40} 200 L${x - 300} 780 L${x + 300} 780 L${x + 40} 200z" fill="url(#cone)" opacity=".5"/>`);
+  // the floor: warm planks, a round rug, the glow pooled under the lamps
+  s += `<rect x="-200" y="780" width="2320" height="500" fill="${dk("#120E20", "#6B4027")}"/>`;
+  for (let i = 0; i < 9; i++) s += `<path d="M-200 ${790 + i * i * 4.4} H2120" stroke="#000" stroke-width="2" opacity=".18"/>`;
+  for (let i = 0; i < 26; i++) s += `<path d="M${n2(960 + (i - 13) * 90)} 780 L${n2(960 + (i - 13) * 260)} 1280" stroke="#000" stroke-width="2" opacity=".12"/>`;
+  s += OP(L, `<ellipse cx="960" cy="820" rx="560" ry="70" fill="url(#glowWarm)"/><ellipse cx="340" cy="840" rx="320" ry="60" fill="url(#glowWarm)" opacity=".7"/><ellipse cx="1580" cy="840" rx="320" ry="60" fill="url(#glowWarm)" opacity=".7"/>`);
+  s += `<rect x="-200" y="776" width="2320" height="8" fill="${dk("#1C1428", "#9A6136")}"/>`;
+  // the wooden board, "The Gift Shop"
+  s += `<g transform="translate(960 40)"><rect x="-200" y="-34" width="400" height="74" rx="14" fill="${dk("#3B2A22", "#9A6136")}" stroke="${dk("#2B2020", "#6B4021")}" stroke-width="6"/>${TX(0, 16, "The Gift Shop", 44, dk("#6E6488", "#FFF1D8"))}</g>`;
+  if (L < .99) s += `<rect x="-200" y="-200" width="2320" height="1500" fill="#0A0820" opacity="${n2(.45 * (1 - L))}"/>`;
+  return s; }
+// falling snow: soft flakes and little six-point sparkles (a pure function of t)
+function snow(t, n = 60, o = {}) { let s = ""; const x0 = o.x0 || 0, x1 = o.x1 || 1920, y0 = o.y0 || -40, y1 = o.y1 || 1100;
+  for (let i = 0; i < n; i++) { const sp = 60 + 80 * hash(i, 91), y = y0 + ((hash(i, 92) * (y1 - y0) + t * sp) % (y1 - y0)), x = x0 + hash(i, 93) * (x1 - x0) + 20 * Math.sin(t * (.8 + hash(i, 94)) + i), r = 2.5 + 4 * hash(i, 95);
+    if (i % 5 === 0) { const k = .6 + .4 * Math.sin(t * 5 + i); s += `<g transform="translate(${n2(x)} ${n2(y)}) rotate(${n2(t * 40 + i * 30)}) scale(${n2(r / 5 * k)})"><path d="M0 -12 V12 M-10.4 -6 L10.4 6 M-10.4 6 L10.4 -6" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/><circle r="9" fill="url(#glowW)" opacity=".8"/></g>`; }
+    else s += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(r)}" fill="#fff" opacity="${n2(.55 + .4 * hash(i, 96))}"/>`; }
+  return s; }
