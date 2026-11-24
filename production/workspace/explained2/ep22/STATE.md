@@ -4,7 +4,7 @@ Part 1 "Stroke an Iron Nail Again and Again. Is It a MAGNET Now?" (EP21's dare a
 STROKE METHOD (Basil); was it a magnet already? a new nail over still clips, the magnet pulls it but it is not a magnet, Pip's nail with the
 magnet shut away: MAGNETISED; Pip's right card, wrong reason: no point; 7.1; HOLD ON! Basil tests with the magnet still in his paw: the
 strip 7.2 step 4; what can be magnetised? copper, foil, a chopstick, a steel screwdriver: MAGNETIC OBJECT, 7.2; the woodpecker; the
-cliffhanger: Basil's back and forth with both ends) **5:34.5**. Part 2 "Back and Forth, or One Way? Make the STRONGEST Nail Magnet" (the
+cliffhanger: Basil's back and forth with both ends) **5:29.0** (5:34.5 before the opening fix below). Part 2 "Back and Forth, or One Way? Make the STRONGEST Nail Magnet" (the
 school maker space; Round 1: Basil's back-and-forth nail or Pip's one-way nail; be a steel paper clip; how do I get back to the head? lift up
 and away: SAME DIRECTION, 7.2 steps 1 and 2; the Showdown: Pip's poster, "use the blue end too": SAME POLE, the strip 7.2 step 3; more
 strokes? ten, twenty, thirty: STRONGER MAGNET, the thirty-stroke hook lifts the big fish, 7.3; the chant; the ant; the dare into EP23: a
@@ -171,3 +171,33 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
   2 s; the clip bunches in lcmore are silver on wood (readable, but small); the big gold fish in the pond scene is small at full shot; the P1
   answer has no cheer for Basil after STROKE METHOD (0.5 s left, he cheers at Mark Sentence 1); Basil's worried face is not on screen during
   the Showdown countdown (only Pip is, as the rule asks); the woodpecker on the pallets (HOLD ON!) is small and partly behind Momo.
+
+## Opening fix 2026-11-24 (Opus; teacher on EP21: "Not speaking for the first few seconds"; SERIES_FORMAT 11 item 1) - NOT uploaded
+- **Part 1** opened on 6.0 s of picture and ambience (scene `cold`), Heart's first word at 6.3 s. Now **Heart's "Last time, we asked:" starts at
+  0.825 s** over the cold open, and the hardware shop stays on screen UNDER the dare's first sentence ("Pip strokes an iron nail with Basil's
+  magnet, again and again, always the same way.": exactly what the picture shows); the dare cards (scene `lasttime`) come in .3 s before
+  "Then" (new mark `ltIn`, 7.65 s). Nothing was dropped: the place card (now from 0.2 s, on screen about 7.5 s), the establishing push-in
+  (camCold now runs over the whole scene), Pip's strokes (`stroke0` 0.6 s; as many as fit before the cards: five, was three; the sound's
+  swish / whoosh per stroke follows the same count), the buddies leaning in (`budsIn` 2.0 s, at the end of "Last time, we asked:"), Momo's
+  wave, the woodpecker on the angsana trunk (the intro spot, WPAT.cold). Every mark after m201 moved **5.475 s earlier**.
+  **Part 1 5:29.0** (329.033 s, **9871 frames**; was 5:34.5): inside 5:15-5:35. Changed: `script.py` SEQ1 head, `build_tl.py` (a scene item
+  may carry `{"at": mark, "d": s}`: it starts at a mark set earlier, e.g. a kw word inside the line just laid), `p1.js` (SC.cold: camCold,
+  NSTROKE0, the place card's fade), `sound_cues.js` (the stroke count).
+- **Part 2 unchanged:** it already opens speaking (the recap, Heart's first word at **0.30 s**; the maker-space place card comes at 9.1 s).
+  Timeline and cues rebuilt and identical, so its render (5:34.9, 10047 frames) is current and was NOT re-rendered. Note for the reviewer: the
+  maker space's place card is on screen only about 1.6 s (scene `maker`, 9.1-10.7 s) before the game's push-in.
+- **Checks:** stills of the first 25 s of both parts (`qa/open_p1_first25.jpg`, `qa/open_p2_first25.jpg`); `./build_part.sh 1` (-16.0 LUFS);
+  `ffmpeg -v error -i ep22_part1.mp4 -f null -`: no errors, 9871 frames = 329.033 s x 30; srt first cue 00:00:00,825; out/chunks_p* and the
+  intermediates deleted; measure_countdowns.py 1 / 2: every number steps 1.00 s (P1 Round 1 63.65 s, HOLD ON! 197.80 s; P2 unchanged);
+  make_preview.sh P1 spans moved 5.5 s earlier (`qa/preview_p1_clips.mp4` 104.6 s, `_p2` 109.3 s, not committed); `qa/highlights.jpg` (P1
+  times moved); `qa/buddy_faces_p1.jpg` and `qa/ep1_compare_p1.jpg` redone; `sheet_part1.png`, `ep22_part1.srt`; make_moments.py ->
+  `app_moments.json` (22A len 5:29, moments 5-6 s earlier) and `production/youtube/chapters_p3.json` EP22_P1 (0:00 Intro, 0:55, 1:24, 1:57,
+  2:16, 2:34, 3:05, 3:32, 3:46, 4:07, 4:29: all >= 10 s apart; EP22_P2 unchanged); `explained_upload.py upload.json --check`: OK (dry run).
+
+## For the NEXT episode's Stage 1 (the engine template): speak within the first second
+- Copy ep22's **build_tl.py** (the `("scene", name, {"at": mark, "d": s})` item) and **ep22's SEQ1 opening pattern** in script.py: `("scene",
+  "cold"), ("wait", .6), ("mark", "stroke0"), ("say", <first line>, H, ..., {"pre": .3})` (first word at 0.825 s), the buddies' entrance
+  mark after it, then the next line with `"kw": [["ltIn", <word where the picture should change>]]` and `("scene", "lasttime", {"at": "ltIn",
+  "d": -.3})`. Never a ("wait", >1) before the first say. The cold open's place card fades in from about 0.2 s and stays >= 2 s; the cold
+  open's actions run while Heart speaks (count them from the scene's length, as NSTROKE0). Part 2 (and any part opening on the recap) must
+  also have its first word by about 1 s (EP22 Part 2: 0.30 s).

@@ -2,7 +2,7 @@
 import os, subprocess
 from PIL import Image, ImageDraw, ImageFont
 H = os.path.dirname(os.path.abspath(__file__)); F = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"; ft = ImageFont.truetype(F, 34)
-S = [(1, 3.4, "P1 0:03  Cold open, Heart already speaking: the hardware shop; Pip strokes the nail, head to tip, lift away"),
+S = [(1, 3.4, "P1 0:03  Cold open, Heart speaking from 0.8 s: the hardware shop; Pip strokes the nail"),
      (1, 99.0, "P1 1:39  Be the iron nail: the giant magnet's red end lands on your head"),
      (1, 117.1, "P1 1:57  The clips jump up and cling to your tip"),
      (1, 150.5, "P1 2:30  Look closer: a new nail clicks onto the magnet, but it is not a magnet"),
