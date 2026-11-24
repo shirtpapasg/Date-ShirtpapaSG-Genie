@@ -29,17 +29,21 @@ const coneLine = (t) => t >= MKS("cones") + .6 ? MKS("cones") + .6 : 0;
 const fieldCones = (t) => { const k = coneK(t); return k ? { cones: k, coneLine: t >= MKS("nsline") ? MKS("cones") + .6 : 0 } : {}; };
 const coneDash = (t) => { const c = MKS("cones") + .6; if (t < c || t >= MKS("nsline")) return ""; const u = eo((t - c) / .6); return `<path d="M${CONES[0][0] + 30} ${CONES[0][1] - 8} H${n2(CONES[0][0] + 30 + (CONES[1][0] - CONES[0][0] - 60) * u)}" stroke="${NSC}" stroke-width="8" stroke-dasharray="20 12"/>`; };
 
-/* 1 · silent cold open: the school field on Tuesday after school. One slow push towards the turning magnet; no cut. spin0: Basil gives the
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the school field on Tuesday after school while Heart
+   says "Last time, we asked: Basil hangs his bar magnet on a string, so it can turn freely. He spins it again and again." The place card
+   from 0.2 s (about 7.9 s on screen). One slow push towards the turning magnet over the whole scene; no cut. spin1 (at "spins"): he spins it
+   again (the same swish and hop). spin0: Basil gives the
    magnet a gentle spin (a swish at its end; he hops back); it turns, slows, swings past and back. budsIn: Momo and Pip lean in (front views
    turned in), Momo waves hello to the viewer. The swallow on the floodlight wire (the intro spot) */
-const camCold = (t) => camMix(camOn([960, 600], 1.04, 960, 560), camOn([HG[0], HG[1] - 40], 1.34, 980, 540), eio(t / 6));
-SC.cold = (t, s) => { const tb = MK("budsIn"), tp = MK("spin0"), cam = camCold(t), g = camPt(cam, HG), sw = clamp((t - tp) / .45);
-  return field(t, cam, { rig: { a: spinAng(t, tp, 2, 4.4) } })
-    + (sw > 0 && sw < 1 ? OP(Math.sin(Math.PI * sw), `<path d="M${n2(g[0] + 60)} ${n2(g[1] + 70)} Q${n2(g[0] + 150)} ${n2(g[1] + 40)} ${n2(g[0] + 170 - 60 * sw)} ${n2(g[1] - 30)}" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round"/>`) : "")
-    + bd("basil", 330, 1076, 480, t, { in: .05, poses: [[0, "sit"]], look: 5, jump: [[tp - .05, 22]] })
+const camCold = (t) => camMix(camOn([960, 600], 1.04, 960, 560), camOn([HG[0], HG[1] - 40], 1.34, 980, 540), eio(t / SCN.cold.t1));
+const swishAt = (t, g, tp) => { const sw = clamp((t - tp) / .45); return sw > 0 && sw < 1 ? OP(Math.sin(Math.PI * sw), `<path d="M${n2(g[0] + 60)} ${n2(g[1] + 70)} Q${n2(g[0] + 150)} ${n2(g[1] + 40)} ${n2(g[0] + 170 - 60 * sw)} ${n2(g[1] - 30)}" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round"/>`) : ""; };
+SC.cold = (t, s) => { const tb = MK("budsIn"), tp = MK("spin0"), t1 = MK("spin1"), cam = camCold(t), g = camPt(cam, HG);
+  return field(t, cam, { rig: { a: spinAng(t, tp, 2, 4.4) + (t1 !== undefined ? spinAng(t, t1, 2, 4.4) : 0) } })
+    + swishAt(t, g, tp) + (t1 !== undefined ? swishAt(t, g, t1) : "")
+    + bd("basil", 330, 1076, 480, t, { in: .05, poses: [[0, "sit"]], look: 5, jump: [[tp - .05, 22]].concat(t1 !== undefined ? [[t1 - .05, 22]] : []) })
     + bd("momo", 1430, 1060, 470, t, { in: tb, flip: true, poses: [[tb, "sit"], [tb + .7, "waving"], [tb + 2.6, "sit"]], look: -5, wave: true })
     + bd("pip", 1730, 1076, 500, t, { in: tb + .15, flip: true, poses: [[tb + .15, "sit"]], look: -6 })
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A school field, Singapore ·", "Tuesday after school")); };
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A school field, Singapore ·", "Tuesday after school")); };
 
 /* 2 · "Last time...": EP20's dare, word for word. ONE calm picture: the two dare cards side by side (EP20's own, ep20dare.js), a gentle
    push-in, the big ?, each card steps forward and lights while Heart says it (>= 2.5 s each) */

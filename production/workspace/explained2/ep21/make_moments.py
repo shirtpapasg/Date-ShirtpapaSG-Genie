@@ -4,7 +4,8 @@
 Each moment: `at` = 1.5 s before the idea's first spoken line, floored to the second; `what` carries the idea's own words.
 YouTube chapters: Intro at 0:00, the moments (one less than 10 s after the previous chapter is left out of YouTube's list only), and
 "Your score, key words and next time" at the score-hand scene. EP21 retires the classic 6zA-Adh7QqU (upload.json `replaces`; its fourth moment, "A free magnet finds North",
-pp. 110-112, is EP21's): its moments in videos.js are replaced by these (and EP20's) once EP21 is live."""
+pp. 110-112, is EP21's): its moments in videos.js are replaced by these (and EP20's) once EP21 is live.
+v2 (2026-11-24): Part 1 speaks from 0.825 s; this writes chapters keys "EP21_P1_v2" and "EP21_P2_v2" (Part 2 re-rendered from unchanged code; the live keys are left alone)."""
 import json, math, os
 H = os.path.dirname(os.path.abspath(__file__)); Y = os.path.join(H, "../../../youtube/chapters_p3.json")
 K = ["O.interactions", "CH.magnets"]
@@ -30,7 +31,8 @@ PARTS = {1: [("m501", "Round 1: where does a hanging magnet stop?"),
              ("n905p", "A freely suspended magnet can tell the direction")]}
 UP = json.load(open(os.path.join(H, "upload.json")))
 mmss = lambda s: f"{int(s) // 60}:{int(s) % 60:02d}"
-out = {"_note": "EP21, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants "
+OLD = {1: "625GU5q6NSc", 2: "wqEoqdTPJqk"}
+out = {"_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP21_P1_v2); Part 2 is re-rendered from unchanged code (its times are the live " + OLD[2] + "'s; v2 for one continuous music bed, chapters key EP21_P2_v2). " + "EP21, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants "
        "(O.interactions and CH.magnets are placeholders: check the real names in videos.js), set url to the uploaded video ids. EP21 retires the "
        "classic 6zA-Adh7QqU: remove its entry (and its moments) from videos.js when these go in.", "replaces": ["6zA-Adh7QqU"], "entries": []}
 ch = json.load(open(Y))
@@ -46,7 +48,7 @@ for P, ids in PARTS.items():
         s = int(m["at"].split(":")[0]) * 60 + int(m["at"].split(":")[1])
         if s - last >= 10: cl.append([m["at"], m["what"]]); last = s
     if math.floor(fin["t0"]) - last < 10: cl.pop()
-    cl.append([mmss(math.floor(fin["t0"])), "Your score, key words and next time"]); ch[f"EP21_P{P}"] = cl
+    cl.append([mmss(math.floor(fin["t0"])), "Your score, key words and next time"]); ch.__setitem__(f"EP21_P{P}_v2", cl); P == 2 and print("P2 times unchanged; live key", OLD[2], "matches:", ch.get(OLD[2]) == cl)
 NEG = ("not ", "no ", "wrong", "never", "can't", "cannot", "don't", "won't")
 for e in out["entries"]:
     for m in e["moments"]:
@@ -55,4 +57,4 @@ for e in out["entries"]:
 json.dump(out, open(os.path.join(H, "app_moments.json"), "w"), indent=1, ensure_ascii=False)
 json.dump(ch, open(Y, "w"), indent=1, ensure_ascii=False)
 for e in out["entries"]: print(e["no"], e["len"], [m["at"] for m in e["moments"]])
-for P in (1, 2): print(f"EP21_P{P}", ch[f"EP21_P{P}"])
+print(f"EP21_P1_v2", ch[f"EP21_P1_v2"]); print("old live P1 key", OLD[1], ch.get(OLD[1]))

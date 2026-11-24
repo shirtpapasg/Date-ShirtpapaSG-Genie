@@ -28,11 +28,13 @@ const room = (t, cam, o = {}) => SR20(t, { bench: (o.under || "") + benchProps(t
 const W0 = [1, 960, 540];
 window.SHELF_AWAY = (t) => { if (PART !== 1) return 0; const a = W("m902", "cross") - .3, b = LE("m903") + .4, w = SCN.waitw; return Math.max(ss(a, a + .35, t) * (1 - ss(b, b + .35, t)), ss(w.t0 + .3, w.t0 + .8, t) * (1 - ss(SCN.pullout.t1, SCN.pullout.t1 + .4, t))); };
 
-/* 1 · silent cold open: the science room, Monday after school. One slow push towards the floating ring. ringsIn: Pip's pencil (in its lump
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the science room, Monday after school, while Heart
+   says "Last time, we asked: Two ring magnets on a pencil! The top one floats in mid-air, with no glue and no string." The place card from
+   0.2 s (about 7.4 s on screen). One slow push towards the floating ring over the whole scene. ringsIn: Pip's pencil (in its lump
    of plasticine, the two rings, the top one floating) slides in low along the bench and is set down; the top ring bobs, then settles.
    budsIn: Momo and Basil lean in, staring at the gap. paw: Basil's paw swishes through the gap (nothing there). The spider in the window
    frame's top corner on its silk line (the intro spot) */
-const camCold = (t) => camMix(camOn([960, 640], 1.08, 960, 580), camOn([GAP[0], GAP[1] - 40], 1.32, 960, 560), eio(t / 6));
+const camCold = (t) => camMix(camOn([960, 640], 1.08, 960, 580), camOn([GAP[0], GAP[1] - 40], 1.32, 960, 560), eio(t / SCN.cold.t1));
 const penIn = (t) => { const a = MK("ringsIn"), u = clamp((t - a + .7) / .7); if (t < a - .7) return ""; const x = lerp(1640, PEN[0], eio(u)); return TF(x, PEN[1], PK, rings20(t, { bob: u < 1 ? 0 : 6 })) + (u < 1 ? dust(x + 90, PEN[1], (t * 3) % 1, .6) : dust(PEN[0], PEN[1], (t - a) / .35, .8)); };
 SC.cold = (t, s) => { const tb = MK("budsIn"), tp = MK("paw"), cam = camCold(t), g = camPt(cam, GAP), sw = clamp((t - tp) / .5);
   return SR20(t, { bench: benchProps(t, { rings: false }) + penIn(t), child: .3 }, cam)
@@ -40,7 +42,7 @@ SC.cold = (t, s) => { const tb = MK("budsIn"), tp = MK("paw"), cam = camCold(t),
     + bd("pip", 1690, 1076, 500, t, { in: MK("ringsIn") - .4, flip: true, poses: [[0, "sit"]], look: -4 })
     + bd("basil", 260, 1076, 480, t, { in: tb, poses: [[tb, "sit"]], look: 6, jump: [[tp - .1, 22]] })
     + bd("momo", 1360, 1010, 400, t, { in: tb + .15, flip: true, poses: [[tb + .15, "sit"], [tp + .6, "waving"], [tp + 2.4, "sit"]], look: -5, wave: true })
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A school science room, Singapore ·", "Monday after school")); };
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A school science room, Singapore ·", "Monday after school")); };
 
 /* 2 · "Last time...": EP19's dare, word for word. ONE calm picture: the two dare cards side by side, a gentle push-in, the big ?, each card
    steps forward and lights while Heart says it (>= 2.5 s each) */

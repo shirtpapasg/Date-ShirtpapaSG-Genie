@@ -4,7 +4,7 @@
 Each moment: `at` = 1.5 s before the idea's first spoken line, floored to the second; `what` carries the idea's own words.
 YouTube chapters: Intro at 0:00, the moments (one less than 10 s after the previous chapter is left out of YouTube's list only), and
 "Your score, key words and next time" at the score-hand scene.
-v2 (2026-11-24): Part 1 speaks from 0.825 s; this writes chapters key "EP17_P1_v2" (Part 1 only; the live keys are left alone)."""
+v2 (2026-11-24): Part 1 speaks from 0.825 s; this writes chapters keys "EP17_P1_v2" and "EP17_P2_v2" (Part 2 re-rendered from unchanged code; the live keys are left alone)."""
 import json, math, os
 H = os.path.dirname(os.path.abspath(__file__)); Y = os.path.join(H, "../../../youtube/chapters_p3.json")
 K = ["O.cycles", "CH.animalCycles"]
@@ -43,7 +43,7 @@ for P in PARTS:
 UP = json.load(open(os.path.join(H, "upload.json")))
 mmss = lambda s: f"{int(s) // 60}:{int(s) % 60:02d}"
 OLD = {1: "TKO73GxJVB0", 2: "6rVLGfilVXQ"}
-out = {"_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP17_P1_v2); Part 2 is unchanged (live " + OLD[2] + "). " + "EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants "
+out = {"_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP17_P1_v2); Part 2 is re-rendered from unchanged code (its times are the live " + OLD[2] + "'s; v2 for one continuous music bed, chapters key EP17_P2_v2). " + "EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants "
        "(O.cycles, CH.animalCycles), set url to the uploaded video ids. With EP16 these two parts replace the classic P3 no 10 "
        "(2Atm-edXKVk, 'A Tadpole Has No Legs. So How Does It Become A Frog?'), which upload.json retires.", "entries": []}
 ch = json.load(open(Y))
@@ -59,7 +59,7 @@ for P, ids in PARTS.items():
         s = int(m["at"].split(":")[0]) * 60 + int(m["at"].split(":")[1])
         if s - last >= 10: cl.append([m["at"], m["what"]]); last = s
     if math.floor(fin["t0"]) - last < 10: cl.pop()
-    cl.append([mmss(math.floor(fin["t0"])), "Your score, key words and next time"]); (ch.__setitem__(f"EP17_P{P}_v2", cl) if P == 1 else print("P2 unchanged; live key", OLD[2], "matches:", ch.get(OLD[2]) == cl))
+    cl.append([mmss(math.floor(fin["t0"])), "Your score, key words and next time"]); ch.__setitem__(f"EP17_P{P}_v2", cl); P == 2 and print("P2 times unchanged; live key", OLD[2], "matches:", ch.get(OLD[2]) == cl)
 json.dump(out, open(os.path.join(H, "app_moments.json"), "w"), indent=1, ensure_ascii=False)
 json.dump(ch, open(Y, "w"), indent=1, ensure_ascii=False)
 for e in out["entries"]: print(e["no"], e["len"], [m["at"] for m in e["moments"]])

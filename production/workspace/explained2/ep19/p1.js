@@ -30,10 +30,12 @@ const dcards = (t, t0) => [0, 1, 2].map((i) => { if (t0 === undefined) return TF
 // the magnet held by a hand (four fingers and a thumb), END down, at (x, y) = its lower end; o.pin: the pin hangs from that end
 const heldMagnet = (t, x, y, k = .42, o = {}) => TF(x, y, k, TF(0, -150, 1, `<g transform="rotate(90)">${magnet19(t, { glint: false })}</g>`) + holdHand(1.15, 0).replace("translate(0 0)", "translate(0 -250)") + (o.pin ? TF(-6, 96, 1, pin18(), 78) : ""));
 
-/* 1 · silent cold open: the void deck, Saturday afternoon. One slow push towards the test table. magOff: a hand lifts Basil's magnet off the
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the void deck, Saturday afternoon, while Heart says
+   "Last time, we asked: A magnet, a steel pin and a copper wire! The pin and the wire are both metal." The place card from 0.2 s (about 7 s
+   on screen). One slow push towards the test table over the whole scene. magOff: a hand lifts Basil's magnet off the
    banner's metal frame (it held a card in EP18's dare) and sets it by the tray; pinIn: the pin and the wire are set down; cardsIn: EP18's three
    dare cards slide in low; budsIn: the buddies pop in (Momo waving hello). The pigeon on the grey pipe under the ceiling (before the game) */
-const camCold = (t) => camMix([1, 960, 540], camOn([TX, TY - 40], 1.22, 960, 660), eio(t / 6));
+const camCold = (t) => camMix([1, 960, 540], camOn([TX, TY - 40], 1.22, 960, 660), eio(t / SCN.cold.t1));
 const magCold = (t) => { const a = MK("magOff"), u = clamp((t - a) / 1.4);
   if (t < a) return TF(BAN[0] - 300, 236, .3, magnet19(t)) + `<g transform="translate(${BAN[0] - 300} 250) rotate(-3)"><rect x="-56" y="0" width="112" height="80" rx="8" fill="#FFFDF6" stroke="#D9C9A8" stroke-width="3"/>${T(0, 32, "NEXT TIME:", 16, P.ink)}${T(0, 58, "magnets!", 20, "#C4581E")}</g>`;
   if (u < .45) { const v = eio(u / .45); return TF(lerp(BAN[0] - 300, BAN[0] - 300, v), lerp(236, -120, v), .3, magnet19(t) + TF(0, -10, 1.2, holdHand(1, 0))); }
@@ -44,7 +46,7 @@ const budsDeck = (t, tp, o = {}) => bd("basil", 250, 1076, 480, t, { in: tp, pos
   + bd("momo", 1720, 1076, 480, t, { in: tp + .4, flip: true, poses: o.momo || [[tp + .4, "waving"], [tp + 2.3, "sit"]], wave: true });
 SC.cold = (t, s) => { const tp = MK("budsIn");
   return VD19(t, { items: "", top: magCold(t) + pinWire(t, MK("pinIn")), front: dcards(t, MK("cardsIn")), child: .8 }, camCold(t)) + budsDeck(t, tp)
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A void deck, Singapore ·", "Saturday afternoon")); };
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A void deck, Singapore ·", "Saturday afternoon")); };
 
 /* 2 · "Last time...": EP18's dare, word for word. ONE calm picture: the three dare cards side by side, a gentle push-in, the big ?, each card
    steps forward and lights while Heart says it (>= 2.5 s each) */

@@ -65,7 +65,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // STAGE 2 (SERIES_FORMAT 9, "every place sounds alive"): the void deck's life and foley ON the marks (SCENES_TODO's Sound lines).
   { const sfx = (t, f, g, bus = "amb") => E(t, "sfx", { f, g, bus });
     if (PART === 1) {
-      E(.4, "coo"); E(2.6, "bikebell"); E(3.1, "lift"); if (S.game) E(W("m302", "pigeon") + .15, "coo", .9);
+      E(.4, "coo"); E(2.6, "bikebell"); E(mk("magOff") + 1.9, "lift");   // v2: the hand lifts away 1.9 s after magOff (was a fixed 3.1 with magOff at 1.2) if (S.game) E(W("m302", "pigeon") + .15, "coo", .9);
       // the look-closer: wind over the hills and a far bell in the story; nails clink on the lodestone; the paint peels back; six pops for the shapes
       if (S.lcmagnet) { sfx(mk("rock") - .2, "wind.wav", .05); E(mk("rock") + .6, "windchime", 1); E(mk("lodestone") + .2, "clink"); E(mk("lodestone") + .5, "clink"); E(mk("inside") + .05, "rub"); for (let i = 0; i < 6; i++) E(mk("shapes") + i * .35, "softpop", i); }
       // be a steel pin: the fan's deep slow hum, the magnet's rumble, a rising shimmer, a whoosh and a bright CLICK, a whoosh up

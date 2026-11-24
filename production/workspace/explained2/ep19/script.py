@@ -25,7 +25,7 @@ horseshoe, interact, classify, wok, pigeon are Kokoro's own; the verb "lives" (n
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
-  Part 1: magOff, pinIn, cardsIn, budsIn (cold open: Basil lifts his magnet off the banner's metal frame; the pin and the wire are set down;
+  Part 1: magOff, pinIn, cardsIn, budsIn, ltIn (cold open, speaking from 0.825 s, all on words of the dare: Basil lifts his magnet off the banner's metal frame; the pin and the wire are set down;
   EP18's three dare cards slide in), title; theme (the INTERACTIONS banner); lcmagnet: rock (the lodestone story), lodestone, inside (the
   cut-away), shapes; the journey (dive, jtable, jfar, jtug, jclick, jlift); answer: trayPin, trayWire (into the tray's halves); holdon: wok,
   letgo, fridge; lcattract: slow, gap, steel, iron; cliff: wire, metal (the cliffhanger).
@@ -94,15 +94,20 @@ COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One!
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 
 SEQ1 = [
- # ---- 1 · silent cold open: our block's void deck, Saturday afternoon (EP18's void deck). EP18's LIFE CYCLE DAY board is down; its easels and
- #          metal frame carry the new banner OUR NEW THEME: INTERACTIONS (I1, I2 printed small). The MAGNET TEST TABLE: a shallow tray in two
- #          empty halves, ATTRACTED (green) / NOT ATTRACTED (blue), a basket of the book's objects. Basil lifts his bar magnet off the banner's
- #          metal frame (magOff); a steel pin and a copper wire are set down (pinIn); EP18's three dare cards slide in (cardsIn); buddies pop in
- ("scene", "cold"), ("wait", 1.2), ("mark", "magOff"), ("wait", 1.0), ("mark", "pinIn"), ("wait", 1.0), ("mark", "cardsIn"), ("wait", 1.3), ("mark", "budsIn"), ("wait", 1.5),
+ # ---- 1 · the cold open, SPEAKING (SERIES_FORMAT 11 item 1; teacher 24 Nov 2026: "Not speaking for the first few seconds"; the v2 of the
+ #          live episode, EP22's approach): our block's void deck, Saturday afternoon (EP18's void deck). EP18's LIFE CYCLE DAY board is down;
+ #          its easels and metal frame carry the new banner OUR NEW THEME: INTERACTIONS (I1, I2 printed small). The MAGNET TEST TABLE: a
+ #          shallow tray in two empty halves, ATTRACTED (green) / NOT ATTRACTED (blue), a basket of the book's objects. Heart's "Last time, we
+ #          asked:" starts at 0.825 s; Basil lifts his bar magnet off the banner's metal frame at "magnet" (magOff); a steel pin and a copper
+ #          wire are set down at "pin" (pinIn); EP18's three dare cards slide in at "wire" (cardsIn); buddies pop in at "The" (budsIn). The void
+ #          deck stays on screen UNDER "A magnet, a steel pin and a copper wire! The pin and the wire are both metal." (it shows exactly that);
+ #          "lasttime" starts .45 s before "Which" (ltIn; build_tl's ("scene", name, {"at": mark, "d": s})). Was: 6.0 s of picture and
+ #          ambience before the first word (6.3 s); now 5.475 s shorter.
+ ("scene", "cold"), ("wait", .6),
  # ---- 2 · "Last time...": EP18's dare, word for word, then the title
- ("scene", "lasttime"),
- ("say", "m201", H, "Last time, we asked:", {"pre": .4}),
- ("say", "m202", H, DARE_Q1, {"pre": .3}),
+ ("say", "m201", H, "Last time, we asked:", {"pre": .3}),
+ ("say", "m202", H, DARE_Q1, {"pre": .3, "kw": [["magOff", "magnet"], ["pinIn", "pin"], ["cardsIn", "wire"], ["budsIn", "the"], ["ltIn", "which"]]}),
+ ("scene", "lasttime", {"at": "ltIn", "d": -.45}),
  ("say", "m203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "m204", H, "Hold on to your answer!", {"pre": .4, "post": .3}),

@@ -1,5 +1,5 @@
 {
- "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP17_P1_v2); Part 2 is unchanged (live 6rVLGfilVXQ). EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles, CH.animalCycles), set url to the uploaded video ids. With EP16 these two parts replace the classic P3 no 10 (2Atm-edXKVk, 'A Tadpole Has No Legs. So How Does It Become A Frog?'), which upload.json retires.",
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP17_P1_v2); Part 2 is re-rendered from unchanged code (its times are the live 6rVLGfilVXQ's; v2 for one continuous music bed, chapters key EP17_P2_v2). EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles, CH.animalCycles), set url to the uploaded video ids. With EP16 these two parts replace the classic P3 no 10 (2Atm-edXKVk, 'A Tadpole Has No Legs. So How Does It Become A Frog?'), which upload.json retires.",
  "entries": [
   {
    "no": "17A",

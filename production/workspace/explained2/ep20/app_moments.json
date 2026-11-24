@@ -1,5 +1,5 @@
 {
- "_note": "EP20, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.interactions and CH.magnets are placeholders: check the real names in videos.js), set url to the uploaded video ids. EP20 retires the classic VLGDU0qduEw: remove its entry (and its moments) from videos.js when these go in.",
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP20_P1_v2); Part 2 is unchanged (live A72s28TeDnU). EP20, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.interactions and CH.magnets are placeholders: check the real names in videos.js), set url to the uploaded video ids. EP20 retires the classic VLGDU0qduEw: remove its entry (and its moments) from videos.js when these go in.",
  "replaces": [
   "VLGDU0qduEw"
  ],
@@ -9,118 +9,118 @@
    "art": "🧲",
    "topic": "Magnets",
    "title": "Why Does This Magnet FLOAT? Two Poles, a Pull and a Push (Part A)",
-   "len": "5:34",
+   "len": "5:28",
    "url": "https://www.youtube.com/watch?v=<EP20_P1>",
    "moments": [
     {
-     "at": "0:53",
+     "at": "0:47",
      "what": "Round 1: what holds up the floating ring, a pull or a push?",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m501",
-     "_t": 54.95
+     "_t": 49.48
     },
     {
-     "at": "1:18",
+     "at": "1:13",
      "what": "Journey: be the top ring magnet and feel the push",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m601",
-     "_t": 80.38
+     "_t": 74.9
     },
     {
-     "at": "2:01",
+     "at": "1:56",
      "what": "The answer: the top ring floats on a push",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m701",
-     "_t": 123.04
+     "_t": 117.56
     },
     {
-     "at": "2:11",
+     "at": "2:06",
      "what": "Which part of a magnet pulls the most?",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m801b",
-     "_t": 133.48
+     "_t": 128.01
     },
     {
-     "at": "2:18",
+     "at": "2:13",
      "what": "Look closer: steel paper clips bunch at the two ends",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m802",
-     "_t": 140.12
+     "_t": 134.65
     },
     {
-     "at": "2:35",
+     "at": "2:30",
      "what": "Every magnet has two poles: a North pole and a South pole",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m805p",
-     "_t": 157.21
+     "_t": 151.73
     },
     {
-     "at": "2:49",
+     "at": "2:44",
      "what": "Attraction is strongest at the two poles",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m807m",
-     "_t": 171.47
+     "_t": 166.0
     },
     {
-     "at": "2:55",
+     "at": "2:49",
      "what": "Every shape of magnet has two poles",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m808",
-     "_t": 176.67
+     "_t": 171.19
     },
     {
-     "at": "3:19",
+     "at": "3:14",
      "what": "HOLD ON! Pip says the floating ring is broken. Is it?",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m901p",
-     "_t": 201.37
+     "_t": 195.9
     },
     {
-     "at": "3:55",
+     "at": "3:49",
      "what": "Look closer: two bar magnets on round pencils, pull or push?",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m1002",
-     "_t": 236.68
+     "_t": 231.21
     },
     {
-     "at": "4:13",
+     "at": "4:07",
      "what": "Magnets that push each other away repel",
      "keys": [
       "O.interactions",
       "CH.magnets"
      ],
      "_line": "m1005",
-     "_t": 254.56
+     "_t": 249.09
     }
    ]
   },

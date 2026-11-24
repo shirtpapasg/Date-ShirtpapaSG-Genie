@@ -25,7 +25,7 @@ hold, after [id, s], pron {text: spoken as} (the caption keeps the script's word
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
-  Part 1: spin0, budsIn (cold open: Basil spins the hanging magnet; Momo and Pip lean in), title; chart (today: THE SPIN CHART); the journey
+  Part 1: spin0, budsIn, spin1, ltIn (cold open, speaking from 0.825 s; spin1: the second spin at "spins": Basil spins the hanging magnet; Momo and Pip lean in), title; chart (today: THE SPIN CHART); the journey
   (dive, jspin, jfinger, jslow, jswing, jback, jstop, jagain, jstop2); chart1 (an arrow in each row), cones (the two PE cones); lcplaces:
   field, room, basin, sameline, nsline, endN, endS; holdon: tangle, try, rubs, hangup, freeturn; lcearth: up, earth, everywhere, poles2,
   chartEarth; cliff: compass, qneedle.
@@ -35,7 +35,7 @@ Marks the picture and the sound share (every action sound lands ON its mark; Sta
 
 CUTS (script section 6, non-teaching). Put a tag in CUTS to drop that beat, then rebuild the timeline. Those in use from the start are set
   below (section 6 of the script keeps the words so a line can come back). "If a part must lose more" (section 6, in order): Part 1
-  titleslam, swallowtip, momotouch, todayline, then small pacing trims (coldtrim, ...); Part 2 turtletip, phonesline, roundround, showhold,
+  titleslam, swallowtip, momotouch, todayline, then small pacing trims (coldtrim is gone: the cold open speaks from 0.825 s; ...); Part 2 turtletip, phonesline, roundround, showhold,
   checklist. Never cut: a [LOOK CLOSER], a journey step, a Mark Sentence card, the pauses around new terms, a buddy's explanation of a key
   word, the Earth picture, the bar magnet near the needle.
 """
@@ -107,12 +107,18 @@ LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n
 SEQ1 = [
  # ---- 1 · silent cold open: a school field, Tuesday after school. Basil's bar magnet hangs on a string from a broom handle across two
  #          plastic chairs by the wooden bench; THE SPIN CHART beside it, empty. Basil gives it a gentle spin (spin0); Momo and Pip lean in
- #          (budsIn); it turns, slows
- ("scene", "cold"), ("wait", .6), ("mark", "spin0"), ("wait", 1.6), ("mark", "budsIn"), ("wait", 3.8 if "coldtrim" not in CUTS else 2.8),
+ #          (budsIn); it turns, slows.
+ #          v2 (SERIES_FORMAT 11 item 1; teacher 24 Nov 2026 on this episode: "Not speaking for the first few seconds"; EP22's approach):
+ #          the cold open SPEAKS. Heart's "Last time, we asked:" starts at 0.825 s; Momo and Pip lean in after it (budsIn); the field stays on
+ #          screen UNDER "Basil hangs his bar magnet on a string, so it can turn freely. He spins it again and again." (it shows exactly that):
+ #          Basil spins it a second time at "spins" (spin1); "lasttime" starts .45 s before "Where" (ltIn; build_tl's ("scene", name,
+ #          {"at": mark, "d": s})). Was: 6.0 s of picture and ambience before the first word (6.3 s); now 5.475 s shorter. coldtrim is gone.
+ ("scene", "cold"), ("wait", .6), ("mark", "spin0"),
  # ---- 2 · "Last time...": EP20's dare, word for word, then the title
- ("scene", "lasttime"),
- ("say", "m201", H, "Last time, we asked:", {"pre": .4}),
- ("say", "m202", H, DARE_Q1, {"pre": .3}),
+ ("say", "m201", H, "Last time, we asked:", {"pre": .3}),
+ ("mark", "budsIn"),
+ ("say", "m202", H, DARE_Q1, {"pre": .3, "kw": [["spin1", "spins"], ["ltIn", "where"]]}),
+ ("scene", "lasttime", {"at": "ltIn", "d": -.45}),
  ("say", "m203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "m204", H, "Hold on to your answer!", {"pre": .4, "post": .3}),

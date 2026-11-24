@@ -1,5 +1,7 @@
 """build_tl.py: script.py + voice/*.json -> tl_p<part>.json and tl_p<part>.js (window.TL): scenes, lines (absolute times, words, mouth tracks), marks.
   python3 build_tl.py 1|2      Sound (song.js) and picture (page) both read this one timeline.
+EP22: a scene item may carry {"at": mark, "d": s} to start at a mark set earlier (a kw word inside the line just laid), so a scene can
+change in the middle of a line (the cold open speaks within its first second, SERIES_FORMAT 11 item 1).
 EP8 (the new pace): say opts kw = [[mark, word, nth]] put a mark at a word (a new term pops there); hold = s keeps the cursor at least
 s after the line's start (a cream book strip: 3.5 s); holdw = [word, s] at least s after that word (a word strip); the item
 ("hold", mark, secs, gap) waits until mark + secs and at least gap after the cursor (a new term holds 2.0 s; Heart waits .6 s)."""
@@ -10,9 +12,12 @@ H = os.path.dirname(os.path.abspath(__file__)); t = 0.0; scenes = []; lines = {}
 r = lambda x: round(x, 3)
 for it in SEQ:
     k = it[0]
-    if k == "scene":
-        if scenes: scenes[-1]["t1"] = r(t)
-        scenes.append({"name": it[1], "t0": r(t)})
+    if k == "scene":   # ("scene", name) starts at the cursor; ("scene", name, {"at": mark, "d": s}) starts at a mark (+ d), e.g. a word inside the
+        # line just laid (EP22: the cold open's pictures run UNDER Heart's first lines, so the episode speaks within its first second)
+        t0 = marks[it[2]["at"]] + it[2].get("d", 0) if len(it) > 2 else t
+        assert not scenes or scenes[-1]["t0"] < t0 <= t + 1e-6, ("scene starts out of order", it[1])
+        if scenes: scenes[-1]["t1"] = r(t0)
+        scenes.append({"name": it[1], "t0": r(t0)})
     elif k == "wait": t += it[1]
     elif k == "mark": marks[it[1]] = r(t)
     elif k == "hold": t = max(t + it[3], marks[it[1]] + it[2])

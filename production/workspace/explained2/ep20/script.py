@@ -24,7 +24,7 @@ Respellings: m1010 (Mark Sentence 6.9, Basil): the card and the caption print th
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
-  Part 1: ringsIn, budsIn, paw (cold open: Pip sets the pencil down; the buddies lean in; Basil's paw through the gap), title; board (today:
+  Part 1: ringsIn, budsIn, paw, ltIn (cold open, speaking from 0.825 s, all on words of the dare: Pip sets the pencil down; the buddies lean in; Basil's paw through the gap), title; board (today:
   THE POLES BOARD); press (Pip presses the ring in his pick); the journey (dive, jslide, jbelow, jslow, jpush, jstop, jpress, jharder,
   jspring, jgap); lcpoles: dip, lift, bunch, middle, north, red, blue, stars, shapes, ringpoles; holdon: try, flip, click, flipback;
   lcpushpull: roll, pull, click2, push, away, board2; cliff: pairs1, pairs2, blueends.
@@ -98,14 +98,19 @@ COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One!
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 
 SEQ1 = [
- # ---- 1 · silent cold open: a school science room, Monday after school. THE POLES BOARD on the whiteboard, empty; the class stationery
- #          tray of steel paper clips, Basil's bar magnet, two round pencils on the front bench. Pip carries in his pencil in its lump of
- #          plasticine and sets it down (ringsIn): the top ring floats; Momo and Basil lean in (budsIn); Basil's paw through the gap (paw)
- ("scene", "cold"), ("wait", .8), ("mark", "ringsIn"), ("wait", 1.8), ("mark", "budsIn"), ("wait", 1.4), ("mark", "paw"), ("wait", 2.0),
+ # ---- 1 · the cold open, SPEAKING (SERIES_FORMAT 11 item 1; teacher 24 Nov 2026: "Not speaking for the first few seconds"; the v2 of the
+ #          live episode, EP22's approach): a school science room, Monday after school. THE POLES BOARD on the whiteboard, empty; the class
+ #          stationery tray of steel paper clips, Basil's bar magnet, two round pencils on the front bench. Heart's "Last time, we asked:"
+ #          starts at 0.825 s; Pip carries in his pencil in its lump of plasticine and sets it down at "ring" (ringsIn): the top ring floats;
+ #          Momo and Basil lean in at "The" (budsIn); Basil's paw through the gap at "no glue" (paw). The science room stays on screen UNDER
+ #          "Two ring magnets on a pencil! The top one floats in mid-air, with no glue and no string." (it shows exactly that); "lasttime"
+ #          starts .45 s before "What" (ltIn; build_tl's ("scene", name, {"at": mark, "d": s})). Was: 6.0 s of picture and ambience before
+ #          the first word (6.3 s); now 5.475 s shorter.
+ ("scene", "cold"), ("wait", .6),
  # ---- 2 · "Last time...": EP19's dare, word for word, then the title
- ("scene", "lasttime"),
- ("say", "m201", H, "Last time, we asked:", {"pre": .4}),
- ("say", "m202", H, DARE_Q1, {"pre": .3}),
+ ("say", "m201", H, "Last time, we asked:", {"pre": .3}),
+ ("say", "m202", H, DARE_Q1, {"pre": .3, "kw": [["ringsIn", "ring"], ["budsIn", "the"], ["paw", "no"], ["ltIn", "what"]]}),
+ ("scene", "lasttime", {"at": "ltIn", "d": -.45}),
  ("say", "m203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "m204", H, "Hold on to your answer!", {"pre": .4, "post": .3}),

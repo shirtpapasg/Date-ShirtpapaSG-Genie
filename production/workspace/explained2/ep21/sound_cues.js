@@ -26,6 +26,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
     R[key] = R[key].filter(([a, b]) => b - a > 1); }
   // the cold open: Basil's gentle spin (a soft whoosh, the string's creak), the buddies lean in
   if (mk("spin0") !== undefined) { E(mk("spin0"), "whoosh"); E(mk("spin0") + .4, "creak"); }
+  if (mk("spin1") !== undefined) { E(mk("spin1"), "whoosh"); E(mk("spin1") + .4, "creak"); }   // v2: the second spin at "spins" (the cold open speaks)
   if (mk("budsIn") !== undefined) [0, .15].forEach((d, i) => E(mk("budsIn") + d, "pop", i));
   if (mk("chart") !== undefined) E(mk("chart") + .1, "chime");
   if (mk("boat") !== undefined) { E(mk("boat"), "step"); E(mk("boat") + .3, "step"); }

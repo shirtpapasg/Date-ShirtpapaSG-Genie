@@ -1,113 +1,113 @@
 {
- "_note": "EP18, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles and the animal life-cycle chapter's constant: check its real name in videos.js, CH.animalCycles is a placeholder), set url to the uploaded video ids. EP18 replaces the classic P3 no. 11 (xaCprQPXVYY, upload.json replaces / retire_old): take that old entry out of videos.js when these go in.",
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP18_P1_v2); Part 2 is re-rendered from unchanged code (its times are the live f2MG82O_9sA's; v2 for one continuous music bed, chapters key EP18_P2_v2). EP18, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles and the animal life-cycle chapter's constant: check its real name in videos.js, CH.animalCycles is a placeholder), set url to the uploaded video ids. EP18 replaces the classic P3 no. 11 (xaCprQPXVYY, upload.json replaces / retire_old): take that old entry out of videos.js when these go in.",
  "entries": [
   {
    "no": "18A",
    "art": "🐸",
    "topic": "Life Cycles",
    "title": "Frog vs Mosquito: SAME or DIFFERENT? Count the Stages! (Part A)",
-   "len": "5:29",
+   "len": "5:23",
    "url": "https://www.youtube.com/watch?v=<EP18_P1>",
    "moments": [
     {
-     "at": "0:50",
+     "at": "0:45",
      "what": "Round 1: frog and mosquito, the same life cycle?",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k501",
-     "_t": 52.38
+     "_t": 46.91
     },
     {
-     "at": "1:19",
+     "at": "1:14",
      "what": "Momo found two things that are the same",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k601m",
-     "_t": 81.3
+     "_t": 75.83
     },
     {
-     "at": "1:30",
+     "at": "1:25",
      "what": "What is the same are similarities; what is different are differences",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k603",
-     "_t": 92.08
+     "_t": 86.61
     },
     {
-     "at": "1:57",
+     "at": "1:52",
      "what": "Journey: be a raindrop, count the stages of the frog and the mosquito",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k701",
-     "_t": 119.47
+     "_t": 113.99
     },
     {
-     "at": "2:42",
+     "at": "2:36",
      "what": "The answer: they are different, three stages and four",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k802",
-     "_t": 163.65
+     "_t": 158.18
     },
     {
-     "at": "3:00",
+     "at": "2:54",
      "what": "Observable characteristics: we can see them and count them",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k806",
-     "_t": 181.66
+     "_t": 176.18
     },
     {
-     "at": "3:12",
+     "at": "3:07",
      "what": "Similar because the young do not look like the adults; different in the number of stages",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k901",
-     "_t": 194.17
+     "_t": 188.7
     },
     {
-     "at": "3:32",
+     "at": "3:26",
      "what": "HOLD ON! Frog and grasshopper: three stages each, exactly the same?",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k1001p",
-     "_t": 213.58
+     "_t": 208.1
     },
     {
-     "at": "3:57",
+     "at": "3:52",
      "what": "The young beside their parents: the tadpole and the nymph",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k1101",
-     "_t": 239.01
+     "_t": 233.53
     },
     {
-     "at": "4:19",
+     "at": "4:13",
      "what": "We use observable characteristics to find similarities and differences",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "k1106",
-     "_t": 260.62
+     "_t": 255.15
     }
    ]
   },
