@@ -1,7 +1,6 @@
 [
  {
   "id": "sau-ep11",
-  "hold": true,
   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep11/ep11.mp4",
   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep11/thumb_ep11.jpg",
   "at": "2026-11-26T09:00:00Z",
@@ -20,11 +19,11 @@
    "primary 5 science",
    "singapore",
    "theoneapp explored"
-  ]
+  ],
+  "_ok": "Teacher 24 Nov 2026: 'ok upload'"
  },
  {
   "id": "sau-ep11-s1",
-  "hold": true,
   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep11/short1.mp4",
   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep11/thumb_short1.jpg",
   "at": "2026-11-27T09:00:00Z",
@@ -36,11 +35,11 @@
    "light and shadow",
    "shorts",
    "theoneapp explored"
-  ]
+  ],
+  "_ok": "Teacher 24 Nov 2026: 'ok upload'"
  },
  {
   "id": "sau-ep11-s2",
-  "hold": true,
   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep11/short2.mp4",
   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep11/thumb_short2.jpg",
   "at": "2026-11-30T09:00:00Z",
@@ -52,6 +51,7 @@
    "AI",
    "shorts",
    "theoneapp explored"
-  ]
+  ],
+  "_ok": "Teacher 24 Nov 2026: 'ok upload'"
  }
 ]
