@@ -486,6 +486,16 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   bed, low and ducked under speech, crossfading between places (rain on the window, a supermarket's murmur, laughter, scanner beeps
   and door chime; a classroom's fans and distant school bell; a pond's frogs and trickle; birds and distant traffic outdoors), plus
   foley on every action (wheels, clinks, zips, drops, knocks). Use the repo's sound libraries or synthesize; no copyrighted downloads.
+- **Background music: Kampong Walk (teacher, 2026-11-24: "you may include the same music inside the 'lofi' into the youtube videos.
+  I love the kampong walk music."; chosen: TheOneApp, Explained only, Kampong Walk only; and on EP19's old beds: they "sounded
+  disjointed").** The app's lofi tune Kampong Walk (`music/kampong_walk.wav`, rendered from the app's own `tunes.js`) is the ONE
+  background bed of every part, running continuously from start to end (never restarted, no hard cuts): it fades in at the start and out
+  at the end, sits quiet under speech (ducked so the voices stay clearly on top: about -28 LUFS short-term under speech, a little higher,
+  about -23, in the gaps), and fades smoothly to SILENT under every countdown (only the ticks and the bell), under the clap-clap-stomp
+  chant and under the "Now you know!" shout. It REPLACES the old music beds (the game groove, the calm bed, the micro-world pad, the
+  outro groove): never two musics at once. Every sound effect and ambience stays. Final loudness stays -16 LUFS integrated, true peak
+  <= -1.5 dBTP. Tool: `python3 add_lofi.py <epdir> <part>` on a finished part (rebuilds the soundtrack from the episode's own song.js
+  and cues, re-muxes the mp4 with the video copied, checks it); `finish.sh` runs it after the mux (`music/README.md`).
 - Loudness about -16 LUFS.
 - A human must listen before upload: the agents can only measure the sound.
 

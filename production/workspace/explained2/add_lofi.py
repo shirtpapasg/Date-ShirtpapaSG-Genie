@@ -13,7 +13,8 @@ same voices and effects as the finished part), with the old music beds left out 
     video packets and duration are unchanged, -16 LUFS integrated (+-0.5), true peak <= -1.5 dBTP;
   - the old audio track is kept as out/nolofi_p<P>.m4a (put it back: ffmpeg -i <mp4> -i out/nolofi_p<P>.m4a -map 0:v -map 1:a -c copy);
   - music/applied.json records the part, the levels and the new mp4's size and time.
-Heavy ffmpeg steps hold /tmp/explained_render.lock (flock), like build_part.sh.
+Heavy ffmpeg steps hold /tmp/explained_render.lock (flock), like build_part.sh; finish.sh (already under that lock) sets
+EXPLAINED_LOCK_HELD=1. In finish.sh, after the mux:  EXPLAINED_LOCK_HELD=1 python3 ../add_lofi.py . $P || exit 1
 """
 import fcntl, json, os, re, shutil, subprocess, sys, time
 
@@ -45,11 +46,14 @@ def loudness(f):
 
 class Lock:
     def __enter__(self):
+        self.f = None
+        if os.environ.get('EXPLAINED_LOCK_HELD'): return self   # finish.sh runs under build_part.sh's flock already
         self.f = open(LOCK, 'a'); t = time.time(); fcntl.flock(self.f, fcntl.LOCK_EX)
         if time.time() - t > 5: print(f'  (waited {time.time() - t:.0f} s for the render lock)')
         return self
 
     def __exit__(self, *a):
+        if not self.f: return
         fcntl.flock(self.f, fcntl.LOCK_UN); self.f.close()
 
 
@@ -60,7 +64,9 @@ def mix(epdir, part, out, ceiling=None):
     r = run(['node', os.path.join(MUSIC, 'lofi_song.js'), epdir, str(part), out], env=env)
     info = json.loads([l for l in r.stdout.splitlines() if l.startswith('LOFI ')][-1][5:])
     print(f'  mix built in {time.time() - t:.0f} s: bed {info["bed_under_voice_lufs_s"]} LUFS-S under voice, {info["bed_in_gaps_lufs_s"]} in gaps; '
-          f'master {info["final_lufs"]} LUFS; silent under {", ".join(d[0] for d in info["dips"])}')
+          f'master {info["final_lufs"]} LUFS; silent under {", ".join(d[0] for d in info["dips"])}; '
+          f'{info["continuity"]["beds"]} bed, {info["continuity"]["beat_restarts"]} beat restarts, {info["continuity"]["hard_cuts"]} hard cuts')
+    if info['continuity']['hard_cuts']: sys.exit('the bed has a hard cut: check the dips')
     return info
 
 
@@ -78,6 +84,8 @@ def main():
     p0 = probe(mp4); dur = float(p0['format']['duration'])
     if abs(dur - tl['END']) > 0.2 or abs(cues['END'] - tl['END']) > 0.01:
         sys.exit(f'{mp4} is {dur:.2f} s but tl_p{part}.json END is {tl["END"]:.2f} s and cues END {cues["END"]:.2f}: the timeline does not belong to this render')
+    missing = [i for i in tl['order'] if not os.path.exists(os.path.join(epdir, 'voice', i + '.wav'))]
+    if missing: sys.exit(f'{len(missing)} voice wavs missing in {epdir}/voice (e.g. {missing[:3]}): re-make them with the episode\'s make_voice.py first')
     applied = json.load(open(APPLIED)) if os.path.exists(APPLIED) else {}
     key = f'{ep}_part{part}'; st = os.stat(mp4)
     if not sample and not force and key in applied and applied[key].get('size') == st.st_size and abs(applied[key].get('mtime', 0) - st.st_mtime) < 1:
