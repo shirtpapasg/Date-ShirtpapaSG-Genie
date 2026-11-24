@@ -1,4 +1,113 @@
 {
+ "ep00_part1": {
+  "backup": "ep00/out/nolofi_p1.m4a",
+  "bed_gain": 0.5142,
+  "bed_in_gaps_lufs_s": -23.9,
+  "bed_loudest_lufs_s": -23.6,
+  "bed_under_voice_lufs_s": -27.8,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 3,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    76.96,
+    82.53
+   ],
+   [
+    "countdown hold",
+    204.96,
+    210.53
+   ],
+   [
+    "now you know",
+    296.29,
+    297.96
+   ]
+  ],
+  "drive": 0.895,
+  "drive_without_bed": 0.878,
+  "duration": 302.633,
+  "final_lufs": -15.96,
+  "lufs": -16.0,
+  "mtime": 1795520831.9007182,
+  "removed": {
+   "calm": 10,
+   "groove": 10,
+   "outro": true,
+   "wonder": 0
+  },
+  "size": 115745093,
+  "true_peak": -1.7,
+  "video_packets": 9079,
+  "when": "2026-11-24 11:47 UTC",
+  "windows": {
+   "gap": 6,
+   "voice": 451
+  }
+ },
+ "ep00_part2": {
+  "backup": "ep00/out/nolofi_p2.m4a",
+  "bed_gain": 0.4833,
+  "bed_in_gaps_lufs_s": null,
+  "bed_loudest_lufs_s": -23.9,
+  "bed_under_voice_lufs_s": -27.9,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 4,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    38.02,
+    41.59
+   ],
+   [
+    "countdown show",
+    148.02,
+    153.59
+   ],
+   [
+    "chant",
+    258.64,
+    277.54
+   ],
+   [
+    "now you know",
+    328.41,
+    330.08
+   ]
+  ],
+  "drive": 0.94,
+  "drive_without_bed": 0.93,
+  "duration": 334.767,
+  "final_lufs": -15.97,
+  "lufs": -16.0,
+  "mtime": 1795522439.652814,
+  "removed": {
+   "calm": 14,
+   "groove": 8,
+   "outro": true,
+   "wonder": 1
+  },
+  "size": 122602182,
+  "true_peak": -1.6,
+  "video_packets": 10043,
+  "when": "2026-11-24 12:14 UTC",
+  "windows": {
+   "gap": 0,
+   "voice": 492
+  }
+ },
  "ep16_part1": {
   "backup": "ep16/out/nolofi_p1.m4a",
   "bed_gain": 0.4986,
@@ -92,20 +201,77 @@
   "duration": 330.433,
   "final_lufs": -15.97,
   "lufs": -16.0,
-  "mtime": 1795510901.304128,
+  "mtime": 1795520480.6566975,
   "removed": {
    "calm": 9,
    "groove": 9,
    "outro": true,
    "wonder": 1
   },
-  "size": 127771897,
+  "size": 130723753,
   "true_peak": -1.5,
   "video_packets": 9913,
-  "when": "2026-11-24 09:54 UTC",
+  "when": "2026-11-24 11:41 UTC",
   "windows": {
    "gap": 0,
    "voice": 449
+  }
+ },
+ "ep17_part2": {
+  "backup": "ep17/out/nolofi_p2.m4a",
+  "bed_gain": 0.4971,
+  "bed_in_gaps_lufs_s": -23.7,
+  "bed_loudest_lufs_s": -23.7,
+  "bed_under_voice_lufs_s": -27.8,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 4,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    45.14,
+    50.71
+   ],
+   [
+    "countdown show",
+    161.09,
+    166.66
+   ],
+   [
+    "chant",
+    247.85,
+    266.75
+   ],
+   [
+    "now you know",
+    321.11,
+    322.79
+   ]
+  ],
+  "drive": 0.934,
+  "drive_without_bed": 0.911,
+  "duration": 327.467,
+  "final_lufs": -15.97,
+  "lufs": -16.0,
+  "mtime": 1795522272.056804,
+  "removed": {
+   "calm": 8,
+   "groove": 9,
+   "outro": true,
+   "wonder": 1
+  },
+  "size": 122146350,
+  "true_peak": -1.6,
+  "video_packets": 9824,
+  "when": "2026-11-24 12:11 UTC",
+  "windows": {
+   "gap": 1,
+   "voice": 454
   }
  },
  "ep19_part2": {

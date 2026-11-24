@@ -14,12 +14,12 @@ const A2 = 'Light travels in a straight line. The opaque object blocks the light
   await ctx.route('**/api/log**', r => r.abort());
   await ctx.addInitScript(() => { try { if (!sessionStorage.getItem('_s')) { sessionStorage.setItem('_s', '1'); sessionStorage.setItem('sm-classic', '1');
     for (const k of ['sm-seen-v1', 'sm-welcome-v1', 'sm-tour2-seen', 'sm-tour2-done']) localStorage.setItem(k, '1'); localStorage.setItem('sm-sfx-v1', '"off"'); } } catch (e) {}
-    // the first-visit trip card and the daily-credit toast sit over the page: hidden for the stills (the app is not changed)
-    document.addEventListener('DOMContentLoaded', () => { const st = document.createElement('style'); st.textContent = '#ft-card,.cr-toast,#cr-toast{display:none!important}'; document.head.appendChild(st); }); });
+    // the first-visit trip card, the daily-credit toast, the buddy and its tip bubbles, the music bar and the bottom bar sit over the page: hidden for the stills (the app is not changed)
+    document.addEventListener('DOMContentLoaded', () => { const st = document.createElement('style'); st.textContent = '#ft-card,.cr-toast,#cr-toast,#pip,#pip-menu,#nudge,nav.nav,#music,#tools,#wn,#fx-toast,#scene-over{display:none!important}'; document.head.appendChild(st); }); });
   const p = await ctx.newPage(); p.on('pageerror', e => console.log('  PAGEERR', e.message.slice(0, 140)));
   let marks = 0; p.on('response', r => { if (/\/api\/mark/.test(r.url())) { marks++; console.log('  /api/mark', r.status()); } });
   const hide = () => p.addStyleTag({ content: '.cr-toast,#cr-toast,[class*="toast"]{display:none!important}' }).catch(() => {});
-  const shot = async (n, full) => { await hide(); await p.waitForTimeout(500); await p.screenshot({ path: path.join(OUT, n + '.png'), fullPage: !!full }); console.log('shot', n); };
+  const shot = async (n, full) => { await hide(); await p.waitForTimeout(500); await p.screenshot({ path: path.join(OUT, n + '.jpg'), type: 'jpeg', quality: 92, fullPage: !!full }); console.log('shot', n); };
   await p.goto(APP + 'index.html', { waitUntil: 'load', timeout: 40000 }); await p.waitForTimeout(4000);
   for (const t of ["Let's Go", 'Let us go']) { const el = p.getByText(t, { exact: false }).first(); if (await el.isVisible().catch(() => false)) { await el.click().catch(() => {}); await p.waitForTimeout(800); } }
   await p.evaluate(() => goView('mark')); await p.waitForTimeout(1500);
