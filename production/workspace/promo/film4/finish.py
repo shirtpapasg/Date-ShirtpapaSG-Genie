@@ -3,6 +3,8 @@ sentence by sentence, from the aligned words), contact.jpg (one frame every 5 s,
 import json, subprocess, os
 H = os.path.dirname(os.path.abspath(__file__)); os.chdir(H); TL = json.load(open("tl.json"))
 run = lambda *a: subprocess.run(list(a), check=True)
+# render.js joins its chunks with -c copy, which gave a broken stream here (mismatched H.264 headers): join them again, re-encoded
+run("ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", "out/chunks_p1/list.txt", "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-r", "30", "out/video_p1.mp4")
 run("ffmpeg", "-y", "-loglevel", "error", "-i", "out/video_p1.mp4", "-i", "out/mix.wav", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", "out/_f.mp4")
 os.replace("out/_f.mp4", "film4.mp4")
 D = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", "film4.mp4"], capture_output=True, text=True).stdout); print("film4.mp4", round(D, 2), "s")
