@@ -11,11 +11,11 @@ S = [(1, 3.0, "P1 0:03  Cold open, Heart speaking from 0.3 s: the void deck stud
      (1, 251.0, "P1 4:11  The crow on the letterboxes; fun fact: crows remember faces for years"),
      (2, 64.0, "P2 1:04  TheOneApp's real screens: Mind Maps, Make my own mind map"),
      (2, 81.0, "P2 1:21  Basil types his map from memory, poster closed (the app draws it)"),
-     (2, 97.0, "P2 1:37  Look closer: every idea ticked, one poster idea missing"),
+     (2, 95.8, "P2 1:35  Look closer: every idea ticked, one poster idea missing"),
      (2, 99.8, "P2 1:40  Compare with the poster: Making a magnet"),
      (2, 157.0, "P2 2:37  Showdown fix: line 2 struck and rewritten; Pip shy"),
      (2, 191.5, "P2 3:11  Be an idea: on Tuesday the path clears"),
-     (2, 249.0, "P2 4:09  Next Monday: two branches vs five; Basil surprised (he picked three)")]
+     (2, 240.8, "P2 4:00  Next Monday: two branches vs five; Basil surprised (he picked three)")]
 import sys
 W, Hh, N = 860, 484, 2
 for PP in [int(a) for a in sys.argv[1:]] or [1, 2]:   # one sheet per part: qa/highlights_p<P>.jpg (python3 highlights.py 1 2)

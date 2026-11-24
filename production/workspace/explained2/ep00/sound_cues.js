@@ -86,6 +86,8 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the read-along and "Now you know!" (EP1's routine)
   E(S.kwrecap.t0 + .1, "whoosh"); KWLINE.forEach((id, i) => E(LT(id), "glow", i)); E(LT("h864"), "sparkle");
   E(S.nyk.t0 + .1, "whoosh"); E(LT("u1300") - .05, "softpop", 2); E(LT("h1304o") + .008, "drum", 0); E(LT("h1304t") + .008, "drum", 1); E(LT("h1305") + .007, "drum", 2); E(TL.lines.h1305.know, "blast"); R.outro = [TL.lines.h1305.know + 1.0, TL.END];
-  // no ambience one-shot under a countdown (only the ticks keep time)
+  // no ambience one-shot under a countdown (only the ticks keep time); the night's crickets (a steady chirp) and the rain pause there too
+  { const W2 = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]);
+    for (const key of ["night", "rain"]) R[key] = R[key].flatMap(([p, q]) => { let segs = [[p, q]]; for (const [x, y] of W2) segs = segs.flatMap(([u, v]) => (y <= u || x >= v) ? [[u, v]] : [[u, x], [y, v]].filter(([a, b]) => b - a > 1)); return segs; }); }
   { const CW = Object.keys(M_).filter((k) => k.startsWith("ring0_")).map((k) => [M_[k] - .4, M_["bell_" + k.slice(6)] + .5]); for (let i = ev.length - 1; i >= 0; i--) if (["sfx", "lift", "bounce", "caw", "tap", "scribble"].includes(ev[i].k) && CW.some(([a, b]) => ev[i].t > a && ev[i].t < b)) ev.splice(i, 1); }
   return { ev: ev.sort((a, b) => a.t - b.t), R, END: TL.END, lines: TL.order.map((id) => ({ id, t: TL.lines[id].t, who: TL.lines[id].who })) }; })();

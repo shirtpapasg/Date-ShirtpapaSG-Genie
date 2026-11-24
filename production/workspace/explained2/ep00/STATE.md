@@ -89,12 +89,36 @@ NOT uploaded. Stage 3 (upload) waits for the teacher's review.
 - The printed poster on the easel and in the Compare look-closer is the app's own Magnets poster (capture2.js, the drawn poster from Compare;
   the Exit button painted over in the poster's cream). The dare's three cards are crops of the real screens.
 
-## Checks (see "Renders" below for the numbers)
-- Stills of every scene looked at and fixed (qa/p1a-c.jpg, qa/p2a-d.jpg, qa/garden.jpg); sweeps every 0.5 s: 0 bad, 0 page errors (both parts).
+## Renders (2026-11-24, NOT uploaded)
+- `ep00_part1.mp4` **5:02.6** (302.63 s, 9079 frames), `ep00_part2.mp4` **5:34.8** (334.77 s, 10043 frames); 1920x1080, 30 fps; **-16.0 LUFS**
+  integrated both, true peak -1.7 / -1.6 dBTP; each decodes end to end (`ffmpeg -v error -i ... -f null -`: no errors). First spoken word at
+  **0.30 s** in both parts (srt first cue 00:00:00,300). `ep00_part1.srt` / `_part2.srt`; `sheet_part1.png` / `_part2.png` (not committed).
+- **Kampong Walk** added by `python3 ../add_lofi.py . 1|2` (one bed, 0 restarts, 0 hard cuts; about -27.9 LUFS-S under speech; silent under
+  every countdown, the chant and "Now you know!"; old audio kept as out/nolofi_p<P>.m4a; ../music/applied.json). Rebuild: `./build_part.sh P`
+  (about 15 min of rendering under the shared lock) then `python3 ../add_lofi.py . P`.
+- **Countdowns measured in the renders** (`measure_countdowns.py`): P1 Round 1 (5 s) and HOLD ON! (5 s), P2 Round 1 (3 s) and the Showdown
+  (5 s): every number steps 1.00 s exactly, on the tick; the bell lands on 0. (A first measurement found the night's crickets chirping every
+  0.42 s under the Showdown countdown; sound_cues.js now pauses the crickets and the rain under every countdown; Part 2's sound was remixed.)
+- **Fixed after the first render** (only those 10 s chunks re-rendered): P1 3:39 Basil's bubble covered MEMORY FIRST (moved low); P2 2:28
+  Showdown countdown: Pip covered the poster's line numbers and the day pill and key-word shelf stayed up (the poster moved, both hidden).
+- Review: `qa/preview_p1_clips.mp4` (114 s, 9.1 MB) / `_p2` (148 s, 11.9 MB) (not committed), `qa/highlights_p1.jpg` / `_p2.jpg`,
+  `thumb_part1.jpg` (READ or MAKE?!, Pip surprised) / `thumb_part2.jpg` (1 WEEK LATER?!, Basil surprised) (`../thumb_v2.js` ep00_1 / ep00_2).
+  Contact sheets qa/sheet_part1.jpg / _part2.jpg; scene stills qa/p1a-c.jpg, qa/p2a-d.jpg, qa/garden.jpg (all looked at; the fixes above
+  came from them). Sweeps every 0.5 s: 0 bad, 0 page errors.
+- Upload prep: `upload.json` (keys explained-p3-ep00-partA / partB; replaces zxerWQ9zGII, retire_old, new_version_line; `--check` OK, see
+  open point 3), `app_moments.json` (videos.js '0A' / '0B' replacing no: 0), `production/youtube/chapters_p3.json` EP00A / EP00B.
+  Intermediates (out/chunks_p*, video, mix wavs) deleted.
+
+## Still a little weak
+- Part 1's 4 s THINK! quiet: the effects stop but the Kampong Walk bed plays on there (add_lofi.py dips only for countdowns, the chant and
+  "Now you know!"); a `quiet` dip in ../music/lofi_song.js would fix it (shared tool: not changed here).
+- The app walk-through: no drawn paw on the screen, a ripple marks each tap. The journey's garden is simple (a glow along a path, blades of
+  grass). The next-Monday pages are small on the table until the look-closer. Part 1 3:39: Basil's low bubble sits over Pip's head.
 
 ## Open points
 1. The new-words clip waits for the teacher's listen.
 2. The marker's hint text is a stand-in (above); a live check of Basil's exact map on the deployed app is still to do before upload.
 3. Upload: `upload.json` sets `after: zxerWQ9zGII` (explained_upload.py has no "first position": a missing `after` means the END); with
-   retire_old the classic is removed after the two parts go in right after it, so they end up first IF the classic is at position 0 of both
-   P3 playlists. `--check` output below says where it is.
+   retire_old the classic is removed after the two parts go in right after it. `--check` (24 Nov): in PLPfEuT7l4KjI the classic is at 18,
+   directly before EP1A, so the parts land right before EP1A (as wanted); in PLb8LpPqxQI4E EP1A is at 0 and the classic at 18 (between EP10B
+   and EP11A), so there the parts land at 18-19 and must be moved to positions 0-1 by hand after the upload (or add a first-position option).
