@@ -169,3 +169,14 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 
 ## 23 Nov: LIVE
 Teacher: "ok to upload all". Part 1 LZxwTx-EccU, Part 2 JpBskDtIwb0 (after EP18 in both playlists); replaces none (EP20 retires classic VLGDU0qduEw). Known flaw left in (teacher approved as is): the INTERACTIONS banner top is cut in the first shot (P1 0:05). Chapters: chapters_p3.json.
+
+## 24 Nov: EP20's drawing notes applied here too (art-fix agent, Opus; commit 3cc1bd4)
+- The dare's pencil passes THROUGH both ring magnets (art19.js `pencilThrough19` after each ring in `pencilRings`). Round 1 (Part 2): the two
+  cans and their names moved up out from behind the countdown's number badge (`ringP2`); Round 1 (Part 1): "copper wire" too (`ringP1`).
+  Every lock-in picture is clipped to the ring's inner circle (common.js lockN). Part 1 HOLD ON!: the wok picture centred on the ring and
+  clipped (p1.js `inner`; it sat 40 px low, the wok behind the badge): Part 1 is the opening-fix agent's render.
+- Part 2's voice wavs had been deleted; re-made with make_voice.py's own engine (scratchpad regen_voice.py 19 2): every line EXACT or the
+  same take within the voice kit's jitter; the jsons unchanged.
+- **Part 2 re-rendered:** `ep19_part2.mp4` **334.77 s**, -16.0 LUFS, peak -2.0 dBFS, Kampong Walk bed (add_lofi.py), countdowns 1.00 s
+  steps; tl_p2 / srt unchanged; `qa/preview_p2_720p.mp4` (not committed). upload_v2.json: explained-p3-ep19v2-part2 replaces JpBskDtIwb0;
+  chapters key EP19_P2_v2 (= the live Part 2's). `--check` of Part 2 alone OK (the full file waits for the Part 1 render). Not uploaded.
