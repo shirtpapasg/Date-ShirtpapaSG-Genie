@@ -193,3 +193,20 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-24, Opus** Â
 
 ## 24 Nov: LIVE
 Teacher: "ok to upload EP21". Part 1 625GU5q6NSc, Part 2 wqEoqdTPJqk (after EP20); classic 6zA-Adh7QqU retired (NEW VERSION -> EP20 P1 + EP21 P1).
+
+## v2: the cold open speaks (2026-11-24, Opus; the teacher on THIS episode: "Not speaking for the first few seconds", then "fix the live ones too")
+- SERIES_FORMAT 11 item 1, EP22's approach (EP22 copied this episode's opening): Heart's "Last time, we asked:" now starts at **0.825 s**
+  (was 6.3 s). spin0 0.6 (Basil's first spin), budsIn after m201 (2.0); the field stays under "Basil hangs his bar magnet on a string, so it
+  can turn freely. He spins it again and again." and Basil spins it a SECOND time on "spins" (new mark spin1, 6.68: the same swish, hop,
+  whoosh and creak; p1.js swishAt, spinAng summed; sound_cues.js spin1); "lasttime" starts .45 s before "Where" (ltIn 8.58; build_tl.py's
+  ("scene", name, {"at": mark, "d": s}), copied from ep22). coldtrim is gone. camCold over the whole scene, the place card from 0.2 s. Every
+  later Part 1 time is **5.475 s earlier**; no voice re-recorded (this episode's wavs were still on disk).
+- **Renders (after the n2 4-decimal fix and the lock-in ring clip; also the main session's removal of Momo's faceCam at freeturn and the
+  SPIN CHART inset in lcEarthArt):** `ep21_part1.mp4` 322.533 s, 9676 frames, -16.0 LUFS, decodes; first word 0.825 s; Round 1 58.933 ...
+  61.933, HOLD ON! 193.197 ... 198.197 (steps 1.000). Part 2 re-rendered from the unchanged script (it already spoke at 0.30 s; one-bed
+  music fix): `ep21_part2.mp4` 329.633 s, 9889 frames, -16.0 LUFS, decodes; Round 1 numbers 45.513 ... 50.513, Showdown 180.879 ...
+  185.879 (1 frame after the ring start; steps 1.000). New srt, sheets, `qa/open_p1_first25.jpg`. The music agent adds Kampong Walk.
+- Records: app_moments.json (21A 5.475 s earlier), chapters_p3.json keys **EP21_P1_v2** / **EP21_P2_v2**, **upload_v2.json**
+  (explained-p3-ep21v2-part1/2, after explained-p3-ep20v2-part2 (or A72s28TeDnU if EP20 Part 2 is not re-uploaded), replaces 625GU5q6NSc +
+  wqEoqdTPJqk, retire_old). The classic 6zA-Adh7QqU's NEW VERSION line still points to the old 625GU5q6NSc (which then carries its own
+  NEW VERSION line): the main session may re-point it. Not uploaded.
