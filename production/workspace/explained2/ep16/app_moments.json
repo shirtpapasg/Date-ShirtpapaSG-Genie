@@ -1,133 +1,133 @@
 {
- "_note": "EP16, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles and the animal life-cycle chapter's constant: check its real name in videos.js, CH.animalCycles is a placeholder), set url to the uploaded video ids. The classic P3 no. 10 (2Atm-edXKVk) stays until EP17 is live (upload.json has no replaces).",
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP16_P1_v2); Part 2 is unchanged (live e2wecB7r-QE). EP16, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles and the animal life-cycle chapter's constant: check its real name in videos.js, CH.animalCycles is a placeholder), set url to the uploaded video ids. The classic P3 no. 10 (2Atm-edXKVk) stays until EP17 is live (upload.json has no replaces).",
  "entries": [
   {
    "no": "16A",
    "art": "🐸",
    "topic": "Life Cycles",
    "title": "Fish, Frog or Lizard? What Does a TADPOLE Become? (Part A)",
-   "len": "5:25",
+   "len": "5:19",
    "url": "https://www.youtube.com/watch?v=<EP16_P1>",
    "moments": [
     {
-     "at": "0:52",
+     "at": "0:46",
      "what": "Round 1: what will the tadpole grow into?",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e501",
-     "_t": 53.8
+     "_t": 48.32
     },
     {
-     "at": "1:16",
+     "at": "1:10",
      "what": "Where do tadpoles come from? A frog lays eggs",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e601p",
-     "_t": 77.75
+     "_t": 72.27
     },
     {
-     "at": "1:23",
+     "at": "1:18",
      "what": "Frog eggs in a clump of clear jelly, each dark dot an egg",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e604",
-     "_t": 85.45
+     "_t": 79.98
     },
     {
-     "at": "1:37",
+     "at": "1:32",
      "what": "Frog eggs have a jelly-like covering: it protects them and keeps them wet",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e608",
-     "_t": 99.07
+     "_t": 93.59
     },
     {
-     "at": "1:58",
+     "at": "1:52",
      "what": "Journey: be a frog egg, hatch into a tadpole and grow into a frog",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e701",
-     "_t": 119.92
+     "_t": 114.45
     },
     {
-     "at": "2:39",
+     "at": "2:34",
      "what": "The young of the frog is called a tadpole",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e802",
-     "_t": 161.21
+     "_t": 155.73
     },
     {
-     "at": "2:49",
+     "at": "2:44",
      "what": "A tadpole does not look like the adult frog",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e805",
-     "_t": 171.14
+     "_t": 165.66
     },
     {
-     "at": "2:54",
+     "at": "2:49",
      "what": "HOLD ON! Is a tadpole with legs a new stage? No: three stages",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e901p",
-     "_t": 176.28
+     "_t": 170.8
     },
     {
-     "at": "3:24",
+     "at": "3:19",
      "what": "A life cycle with three stages: the egg, the young and the adult",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e1001",
-     "_t": 206.03
+     "_t": 200.56
     },
     {
-     "at": "3:33",
+     "at": "3:28",
      "what": "A hen and her chicks: does every young animal look different?",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e1101p",
-     "_t": 215.06
+     "_t": 209.59
     },
     {
-     "at": "3:47",
+     "at": "3:42",
      "what": "Look at the body parts, not the colour: a chick looks like the adult",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e1104",
-     "_t": 229.43
+     "_t": 223.96
     },
     {
-     "at": "4:15",
+     "at": "4:09",
      "what": "Some young animals look like their parents, while some do not",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "e1201",
-     "_t": 256.88
+     "_t": 251.4
     }
    ]
   },

@@ -27,7 +27,7 @@ Test clip ../pron_clips/Heart_ep17_new_words.m4a (waiting for the teacher's list
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
-  Part 1: munch, cardsIn, budsIn (cold open: the lime plant at dawn, the caterpillar munches, EP16's two dare cards slide in), title;
+  Part 1: munch, cardsIn, budsIn, ltIn (cold open, speaking from 0.825 s: the lime plant at dawn, the caterpillar munches, EP16's two dare cards slide in), title;
   pair (the caterpillar beside a butterfly picture: the answer); lclegs: front (the three pairs of pointed legs light), stumps (the prolegs),
   hooks (the magnifier on one proleg's tiny hooks), grip (the caterpillar grips a twig and walks); the journey (dive, jegg, jhatch, jmunch,
   jtight, jbig, jhang, jsplit, jpupa); holdon: pupastill (Pip's board: the pupa with "zzz"); lcpupa: case, window (the cut-away opens),
@@ -100,13 +100,18 @@ COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One!
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 
 SEQ1 = [
- # ---- 1 · silent cold open: the community garden at dawn (EP15/EP16's garden). The lime plant in its big pot at the garden's edge (EP16's
- #          dare spot): a plump green caterpillar munches a leaf; EP16's two dare cards slide in low; the buddies pop in
- ("scene", "cold"), ("wait", 1.6), ("mark", "munch"), ("wait", 1.0), ("mark", "cardsIn"), ("wait", 1.6), ("mark", "budsIn"), ("wait", 1.8),
+ # ---- 1 · the cold open, SPEAKING (SERIES_FORMAT 11 item 1; teacher 24 Nov 2026: "Not speaking for the first few seconds"; the v2 of the
+ #          live episode, EP22's approach): the community garden at dawn (EP15/EP16's garden). The lime plant in its big pot at the garden's
+ #          edge (EP16's dare spot): a plump green caterpillar munches a leaf (munch); Heart's "Last time, we asked:" starts at 0.825 s;
+ #          EP16's two dare cards slide in low (cardsIn, after it); the buddies pop in at "One day" (budsIn). The lime plant stays on screen
+ #          UNDER "A caterpillar! One day, it will become a butterfly." (it shows exactly that); "lasttime" starts .45 s before "Is" (ltIn;
+ #          build_tl's ("scene", name, {"at": mark, "d": s})). Was: 6.0 s of picture and ambience before the first word (6.3 s); now 5.475 s shorter.
+ ("scene", "cold"), ("wait", .6), ("mark", "munch"),
  # ---- 2 · "Last time...": EP16's dare, word for word, then the title
- ("scene", "lasttime"),
- ("say", "a201", H, "Last time, we asked:", {"pre": .4}),
- ("say", "a202", H, DARE_Q1, {"pre": .3}),
+ ("say", "a201", H, "Last time, we asked:", {"pre": .3}),
+ ("mark", "cardsIn"),
+ ("say", "a202", H, DARE_Q1, {"pre": .3, "kw": [["budsIn", "one"], ["ltIn", "is"]]}),
+ ("scene", "lasttime", {"at": "ltIn", "d": -.45}),
  ("say", "a203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "a204", H, "Hold on to your answer!", {"pre": .4, "post": .3}),

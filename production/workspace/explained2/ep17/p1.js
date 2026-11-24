@@ -19,19 +19,21 @@ const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) 
 const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(170, 170 * 1720 / tw(txt, 170, 700, "Fredoka", 4)), col, k);
 const bitesAt = (t) => t < MK("munch") ? 0 : Math.min(3, (t - MK("munch")) * .5);
 
-/* 1 · silent cold open: the lime plant at dawn. ONE slow push towards the caterpillar; it munches the leaf edge (munch: bites appear); the tiny
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the lime plant at dawn while Heart says "Last time, we
+   asked: A caterpillar! One day, it will become a butterfly." The place card from 0.2 s (about 5.4 s on screen). ONE slow push towards the
+   caterpillar over the whole scene; it munches the leaf edge (munch: bites appear); the tiny
    pale egg on a young leaf's tip; EP16's two dare cards slide in low along the pot (cardsIn); the buddies pop in (budsIn): Pip on the path,
    leaning in to the caterpillar; Basil on the path behind; Momo at the right, waving hello. The moth on the void deck's pillar (before the game) */
 const CBX = [930, 1390], CBY = 930;
 const cards2 = (t, id, t0, k = .42) => [0, 1].map((i) => { if (t0 === undefined) return TF(CBX[i], CBY, k, dareCard3(i, t, { id: id + i })); const tt = t0 + i * .3; if (t < tt) return ""; const [x, d] = slideX(t, tt, .7, 2400, CBX[i], CBY + 70); return d + TF(x, CBY, k, dareCard3(i, t, { id: id + i })); }).join("");
-const camCold = (t) => [1.2 + .25 * eio(t / 6), 1280, 560];
+const camCold = (t) => [1.2 + .25 * eio(t / SCN.cold.t1), 1280, 560];
 const catLive = (t) => ({ o: { chew: true }, k: .6 });
 const budsCold = (t, tp, o = {}) => bd("basil", 650, 1006, 400, t, { in: tp, poses: [[tp, "sit"]], look: 3, jump: o.jb || [] })
   + bd("momo", 1730, 1066, 460, t, { in: tp + .2, flip: true, poses: o.momo || [[tp + .2, "waving"], [tp + 2.2, "sit"]], wave: true })
   + bd("pip", 300, 1076, 500, t, { in: tp + .35, poses: [[tp, "sit"]], look: 5, jump: o.jp || [] });
 SC.cold = (t, s) => { const tp = MK("budsIn");
   return VL(t, { dawn: 1 - .4 * ss(0, 6, t), cat: catLive(t), bites: bitesAt(t) }, camCold(t)) + cards2(t, "c", MK("cardsIn")) + budsCold(t, tp)
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A community garden, Singapore ·", "dawn")); };
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A community garden, Singapore ·", "dawn")); };
 
 /* 2 · "Last time...": EP16's dare, word for word. ONE calm picture: EP16's two dare cards side by side, a gentle push-in, the big ?; each card
    steps forward and lights while Heart says it (>= 2.5 s each) */

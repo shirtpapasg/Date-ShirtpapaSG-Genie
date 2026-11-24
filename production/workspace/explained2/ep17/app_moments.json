@@ -1,143 +1,143 @@
 {
- "_note": "EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles, CH.animalCycles), set url to the uploaded video ids. With EP16 these two parts replace the classic P3 no 10 (2Atm-edXKVk, 'A Tadpole Has No Legs. So How Does It Become A Frog?'), which upload.json retires.",
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP17_P1_v2); Part 2 is unchanged (live 6rVLGfilVXQ). EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles, CH.animalCycles), set url to the uploaded video ids. With EP16 these two parts replace the classic P3 no 10 (2Atm-edXKVk, 'A Tadpole Has No Legs. So How Does It Become A Frog?'), which upload.json retires.",
  "entries": [
   {
    "no": "17A",
    "art": "🦋",
    "topic": "Life Cycles",
    "title": "Is a Caterpillar a NYMPH? The Butterfly's Secret Stage (Part A)",
-   "len": "5:20",
+   "len": "5:14",
    "url": "https://www.youtube.com/watch?v=<EP17_P1>",
    "moments": [
     {
-     "at": "0:49",
+     "at": "0:43",
      "what": "Round 1: is the caterpillar a nymph like the young grasshopper?",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a501",
-     "_t": 50.68
+     "_t": 45.2
     },
     {
-     "at": "1:17",
+     "at": "1:12",
      "what": "A caterpillar looks nothing like a butterfly",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a601",
-     "_t": 79.16
+     "_t": 73.69
     },
     {
-     "at": "1:28",
+     "at": "1:23",
      "what": "Count the caterpillar's legs: six legs at the front",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a702",
-     "_t": 90.09
+     "_t": 84.61
     },
     {
-     "at": "1:44",
+     "at": "1:38",
      "what": "The stumps at the back are called prolegs",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a705",
-     "_t": 105.72
+     "_t": 100.24
     },
     {
-     "at": "1:50",
+     "at": "1:44",
      "what": "Prolegs have tiny hooks that grip the twig",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a706b",
-     "_t": 111.87
+     "_t": 106.39
     },
     {
-     "at": "2:13",
+     "at": "2:07",
      "what": "Journey: be a butterfly egg, hatch, munch, moult and grow",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a802",
-     "_t": 134.95
+     "_t": 129.47
     },
     {
-     "at": "2:42",
+     "at": "2:37",
      "what": "The butterfly larva is also called a caterpillar",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a901",
-     "_t": 164.46
+     "_t": 158.98
     },
     {
-     "at": "2:57",
+     "at": "2:51",
      "what": "HOLD ON! The pupa is busy inside its case",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a1001p",
-     "_t": 178.96
+     "_t": 173.49
     },
     {
-     "at": "3:23",
+     "at": "3:17",
      "what": "This stage is called the pupa",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a1005",
-     "_t": 204.93
+     "_t": 199.45
     },
     {
-     "at": "3:27",
+     "at": "3:22",
      "what": "Inside the pupal case, the body changes into a butterfly",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a1101",
-     "_t": 209.06
+     "_t": 203.58
     },
     {
-     "at": "3:49",
+     "at": "3:44",
      "what": "The pupal case splits and out comes the adult butterfly",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a1105",
-     "_t": 231.18
+     "_t": 225.7
     },
     {
-     "at": "4:03",
+     "at": "3:57",
      "what": "The butterfly has four stages: egg, larva, pupa and adult",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a1201",
-     "_t": 244.78
+     "_t": 239.3
     },
     {
-     "at": "4:14",
+     "at": "4:08",
      "what": "The young of these animals look different from the adult",
      "keys": [
       "O.cycles",
       "CH.animalCycles"
      ],
      "_line": "a1203",
-     "_t": 255.69
+     "_t": 250.21
     }
    ]
   },

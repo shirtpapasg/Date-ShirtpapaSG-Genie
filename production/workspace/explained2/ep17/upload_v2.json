@@ -1,0 +1,40 @@
+{
+ "key": "explained-p3-ep17v2",
+ "parts": [
+  {
+   "key": "explained-p3-ep17v2-part1",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep17/ep17_part1.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep17/thumb_part1.jpg",
+   "title": "Is a Caterpillar a NYMPH? The Butterfly's Secret Stage (Part 1) | 4-Stage Life Cycles of Animals",
+   "description": "A caterpillar munches a lime leaf. One day it will become a butterfly. Is it a nymph, like the young grasshopper? Lock in your answer from last time, count the caterpillar's legs up close, be a butterfly egg from the leaf to the pupa, and look inside the pupa to see what is really going on in there. Part 1 of Primary 3 Science, Life Cycles of Animals.\n\nIn this part:\n• Is the caterpillar a nymph? (last episode's dare)\n• Look closer: the caterpillar's legs (six legs and prolegs with tiny hooks)\n• Be a butterfly egg: egg, caterpillar, moult, pupa\n• HOLD ON! Is the pupa just resting?\n• Look closer: inside the pupa, and out comes a butterfly\n• The butterfly's four stages\n• Spot the hidden moth!\n\nKey words: prolegs, larva, pupa.\nWatch Part 2: what is wriggling in this pail of rainwater? Last episode: a chick looks like a hen, but a tadpole does not look like a frog.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nThe caterpillar that becomes a butterfly: 4 stages. P3 Science, Chapter 5, Life Cycles of Animals (pp. 86 to 89): the four-stage life cycle (the egg, the larva, the pupa and the adult), what the larva and the pupa do, and how knowing the mosquito's life cycle keeps us safe from dengue. Also fits US NGSS 3-LS1-1 (Grade 3: life cycles).\nSafety and care: we look at caterpillars and leave them on their plant. We never touch still water with wrigglers in it: ask an adult to tip it out. If someone has a high fever, tell an adult.\nTry it at home: check one place at home where water could sit still: a flower-pot plate, a pail, a vase. Ask an adult to tip it out or change the water. Singapore's Mozzie Wipeout steps spell B-L-O-C-K: Break up hardened soil, Lift and empty flowerpot plates, Overturn pails and wipe their rims, Change water in vases, Keep roof gutters clear and place BTI insecticide.\nDid you know? The lime butterfly lays its eggs on lime and other citrus plants; its caterpillar is the butterfly's larva. Many P3 classes keep mealworms: they are the larvae of a beetle, which has four stages too.\nIn the US, Grade 3 classrooms raise monarch caterpillars on milkweed and watch the same four stages.\n\n#PrimaryScience #Singapore #LifeCycles #TheOneAppExplained",
+   "tags": [
+    "life cycle of a butterfly",
+    "butterfly life cycle for kids",
+    "caterpillar",
+    "larva and pupa",
+    "four stage life cycle",
+    "prolegs",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLb8LpPqxQI4E",
+   "after": "e2wecB7r-QE"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "e2wecB7r-QE"
+  }
+ ],
+ "replaces": [
+  "TKO73GxJVB0"
+ ],
+ "retire_old": true,
+ "new_version_line": "▶ NEW VERSION: Is a Caterpillar a NYMPH? The Butterfly's Secret Stage (Part 1) https://www.youtube.com/watch?v={P1}",
+ "_note": "v2 of EP17 Part 1 (2026-11-24; teacher: \"Not speaking for the first few seconds\", \"fix the live ones too\"; SERIES_FORMAT 11 item 1): the cold open now SPEAKS (Heart's \"Last time, we asked:\" at 0.825 s, was 6.3 s; Part 1 is 5.475 s shorter). Same title, description, tags and thumbnail as the live Part 1 (TKO73GxJVB0); file = the new render. Part 2 is NOT re-uploaded: it already speaks at 0.30 s and the live Part 2 (6rVLGfilVXQ) was rendered from the current code, so it stays. \"after\" = the video right before the old Part 1 in both playlists (e2wecB7r-QE); retire_old takes TKO73GxJVB0 out of both playlists and gives it the NEW VERSION first line (never deleted). Chapters: production/youtube/chapters_p3.json key EP17_P1_v2 (swap in the new id after upload). Public, Made for Kids (the uploader sets both)."
+}

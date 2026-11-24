@@ -24,17 +24,19 @@ const DCX = [880, 1120], DCY = 838;
 const dcards = (t, t0, id) => [0, 1].map((i) => { if (t0 === undefined) return TF(DCX[i], DCY, .36, dareCard3(i, t, { id: id + i })); const tt = t0 + i * .3; if (t < tt) return ""; const [x, d] = slideX(t, tt, .7, i ? 2300 : -400, DCX[i], DCY + 70); return d + TF(x, DCY, .36, dareCard3(i, t, { id: id + i })); }).join("");
 const CHIPS_SAME = [[0, "eggs in water"], [0, "young unlike the adult"]], CHIPS_DIFF = [[0, "the number of stages"]];
 
-/* 1 · silent cold open: the void deck on LIFE CYCLE DAY. ONE slow push towards the COMPARE FRAME; the frog loop and the mosquito loop slide into
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the void deck on LIFE CYCLE DAY while Heart says "Last
+   time, we asked: A frog and a mosquito! Both lay their eggs in water, and both have young that look nothing like the adult." The place card
+   from 0.2 s (about 8.5 s on screen). ONE slow push towards the COMPARE FRAME over the whole scene; the frog loop and the mosquito loop slide into
    its two windows (loopsIn); EP17's two dare cards slide in low along the stone table (cardsIn); the buddies pop in (budsIn): Basil on the left
    by his stool, Pip at the table's end, Momo on the right waving hello. The cicada on the rain tree's trunk outside (before the game) */
-const camCold = (t) => [1 + .1 * eio(t / 6), lerp(960, 1000, eio(t / 6)), lerp(540, 520, eio(t / 6))];
+const camCold = (t) => { const u = eio(t / SCN.cold.t1); return [1 + .1 * u, lerp(960, 1000, u), lerp(540, 520, u)]; };
 const loopsK = (t) => [ss(MK("loopsIn"), MK("loopsIn") + .8, t), ss(MK("loopsIn") + .3, MK("loopsIn") + 1.1, t)];
 const budsDeck = (t, tp, o = {}) => bd("basil", 250, 1076, 480, t, { in: tp, poses: [[tp, "sit"]], look: 3, jump: o.jb || [] })
   + bd("pip", 1395, 1020, 380, t, { in: tp + .2, flip: true, poses: [[tp, "sit"]], jump: o.jp || [] })
   + bd("momo", 1720, 1076, 480, t, { in: tp + .4, flip: true, poses: o.momo || [[tp + .4, "waving"], [tp + 2.3, "sit"]], wave: true });
 SC.cold = (t, s) => { const tp = MK("budsIn");
   return VDK(t, { loops: loopsK(t), child: .6, front: dcards(t, MK("cardsIn"), "c") }, camCold(t)) + budsDeck(t, tp)
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A void deck, Singapore ·", "Saturday morning")); };
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A void deck, Singapore ·", "Saturday morning")); };
 
 /* 2 · "Last time...": EP17's dare, word for word. ONE calm picture: EP17's two cards side by side, a gentle push-in, the big ?, each card steps
    forward and lights while Heart says it (>= 2.5 s each) */

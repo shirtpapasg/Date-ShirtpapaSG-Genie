@@ -19,18 +19,19 @@ const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 // the picture of the scene before melts away over the new one (no hard cut from a card screen into a place)
 const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
 
-/* 1 · silent cold open: the garden pond at dawn after rain (pond16.js VP16). ONE slow push towards the egg clump; three tadpoles wriggle past
-   it (wriggle); EP15's three dare cards slide in low along the pond's front edge (cardsIn); the buddies pop in (budsIn): Basil on his flat
+/* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the garden pond at dawn after rain (pond16.js VP16)
+   while Heart says "Last time, we asked: A tadpole! It lives in water, and it has a tail." ONE slow push towards the egg clump over the whole
+   scene; the place card from 0.2 s (about 5.5 s on screen); three tadpoles wriggle past it (wriggle); EP15's three dare cards slide in low along the pond's front edge (cardsIn); the buddies pop in (budsIn): Basil on his flat
    stone, nose to the water; Momo on the bench end, thinking (what is in the jelly?); Pip on the grass, waving hello */
 const CBX = [770, 960, 1150], CBY = 1050;
 const cards3 = (t, id, t0) => [0, 1, 2].map((i) => { if (t0 === undefined) return dareBoard(i, CBX[i], CBY, .4, { lab: false, id }); const tt = t0 + i * .3; if (t < tt) return ""; const [x, d] = slideX(t, tt, .7, 2400, CBX[i], CBY + 4); return d + dareBoard(i, x, CBY, .4, { lab: false, id }); }).join("");
 const wriggle = (t) => { const t0 = MK("wriggle"); if (t < t0 - .5) return ""; return [0, 1, 2].map((i) => { const u = clamp((t - t0 - i * .35) / 4.2); return u <= 0 ? "" : `<g opacity=".85">${TF(lerp(620, 1420, u), 790 + 26 * i + 10 * Math.sin(t * 3 + i), .75, tadpole16(t, 0, { ph: i }), 4 * Math.sin(t * 5 + i))}</g>`; }).join(""); };
-const camCold = (t) => [1 + .1 * eio(t / 6), 1000, 740];
+const camCold = (t) => [1 + .1 * eio(t / SCN.cold.t1), 1000, 740];
 const budsCold = (t, tp, o = {}) => bd("basil", 1690, 992, 440, t, { in: tp, flip: true, look: -6, poses: [[tp, "sit"]], jump: o.jb || [] })
   + bd("momo", 230, 800, 360, t, { in: tp + .2, poses: [[tp + .2, o.momo || "thinking"]], look: 4 }) + bd("pip", 470, 1072, 440, t, { in: tp + .4, poses: o.pip || [[tp + .4, "waving"], [tp + 2.2, "sit"]], wave: true, jump: o.jp || [] });
 SC.cold = (t, s) => { const tp = MK("budsIn");
   return VP16(t, { dawn: 1 - .35 * ss(0, 6, t), tad: 0, items: wriggle(t) }, camCold(t)) + cards3(t, "c", MK("cardsIn")) + budsCold(t, tp)
-    + OP(ramp(t, .5, .5), lowerPill(60, 96, "A community garden, Singapore ·", "dawn")); };
+    + OP(ramp(t, .2, .4), lowerPill(60, 96, "A community garden, Singapore ·", "dawn")); };
 
 /* 2 · "Last time...": EP15's dare, word for word. ONE calm picture: the three dare cards side by side, a gentle push-in, the big ?, the three
    numbered cards; each steps forward and its card lights while Heart says it (>= 2.5 s each). WIRED */

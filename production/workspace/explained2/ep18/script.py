@@ -26,7 +26,7 @@ seventeen, repeated, physical features are Kokoro's own. No new Singapore name i
 
 Marks the picture and the sound share (every action sound lands ON its mark; Stage 2 draws each action AT its mark):
   all: kw_* (key words), ring0_* / bell_* (lock-in timers), v_* (look-closer verdicts), ansglow / coin1 / coin2, ff_* (fun-fact pictures).
-  Part 1: loopsIn, cardsIn, budsIn (cold open: the void deck, the LIFE CYCLE DAY board; the frog loop and the mosquito loop slide into the
+  Part 1: loopsIn, cardsIn, budsIn, ltIn (cold open, speaking from 0.825 s, all four on words of the dare: the void deck, the LIFE CYCLE DAY board; the frog loop and the mosquito loop slide into the
   COMPARE FRAME; EP17's two dare cards slide in), title; lccompare: frame (the two loops fill the panel), same1 / same2 (Momo's two
   similarities tick onto the SAME strip), count (the counting begins); the journey (dive, jpond, jtadpole, jfrog, jsplash, jwrig, jpupa,
   jmosq); tip (Basil tips out the plate); answer: three, four (the dots beside each loop: three, four); holdon: pipboard (Pip's sheet: frog
@@ -94,14 +94,19 @@ COUNT = [("scene", "count"), ("say", "h501", H, "Are you ready? Three! Two! One!
 LOCK = lambda n, d=5.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 
 SEQ1 = [
- # ---- 1 · silent cold open: our block's void deck on a Saturday morning, beside the community garden. The buddies' LIFE CYCLE DAY board
- #          (every loop card from EP14 to EP17 pinned on a big cork board on two easels) and its COMPARE FRAME; the frog loop and the
- #          mosquito loop slide into the frame's two windows; EP17's two dare cards slide in low; the buddies pop in
- ("scene", "cold"), ("wait", 1.6), ("mark", "loopsIn"), ("wait", 1.0), ("mark", "cardsIn"), ("wait", 1.6), ("mark", "budsIn"), ("wait", 1.8),
+ # ---- 1 · the cold open, SPEAKING (SERIES_FORMAT 11 item 1; teacher 24 Nov 2026: "Not speaking for the first few seconds"; the v2 of the
+ #          live episode, EP22's approach): our block's void deck on a Saturday morning, beside the community garden. The buddies' LIFE CYCLE
+ #          DAY board (every loop card from EP14 to EP17 pinned on a big cork board on two easels) and its COMPARE FRAME. Heart's "Last time,
+ #          we asked:" starts at 0.825 s; the frog loop and the mosquito loop slide into the frame's two windows at "frog" (loopsIn); EP17's
+ #          two dare cards slide in low at "Both" (cardsIn); the buddies pop in at "young" (budsIn). The void deck stays on screen UNDER "A frog
+ #          and a mosquito! Both lay their eggs in water, and both have young that look nothing like the adult." (the two loops show exactly
+ #          that); "lasttime" starts .45 s before "Are" (ltIn; build_tl's ("scene", name, {"at": mark, "d": s})). Was: 6.0 s of picture and
+ #          ambience before the first word (6.3 s); now 5.475 s shorter.
+ ("scene", "cold"), ("wait", .6),
  # ---- 2 · "Last time...": EP17's dare, word for word, then the title
- ("scene", "lasttime"),
- ("say", "k201", H, "Last time, we asked:", {"pre": .4}),
- ("say", "k202", H, DARE_Q1, {"pre": .3}),
+ ("say", "k201", H, "Last time, we asked:", {"pre": .3}),
+ ("say", "k202", H, DARE_Q1, {"pre": .3, "kw": [["loopsIn", "frog"], ["cardsIn", "both"], ["budsIn", "young"], ["ltIn", "are"]]}),
+ ("scene", "lasttime", {"at": "ltIn", "d": -.45}),
  ("say", "k203", H, DARE_Q2, {"pre": .4, "gap": 1.45, "post": 1.9}),
  ("scene", "back"),
  ("say", "k204", H, "Hold on to your answer!", {"pre": .4, "post": .3}),
