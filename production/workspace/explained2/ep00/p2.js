@@ -8,7 +8,7 @@ SCORE.push([MK("coin2") - .1, 2, 0]);                 // the Showdown: YOU +2
 SCORE.push([MK("coin1") - .1, 3, 1]);                 // Round 1 (answered next Monday): YOU +1, the Buddies +1 (Pip and Momo right)
 const FOOT = "Study Skills · P3 to P6 · Make your own mind map";
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
-window.SHELF_AWAY = (t) => { const w = SCN.waitw; return ss(w.t0 + .3, w.t0 + .8, t) * (1 - ss(SCN.pullout.t0 + .2, SCN.pullout.t0 + .6, t)); };
+window.SHELF_AWAY = (t) => { const w = SCN.waitw, a = MK("ring0_show") - .6, b = MK("bell_show") + .6; return Math.max(ss(w.t0 + .3, w.t0 + .8, t) * (1 - ss(SCN.pullout.t0 + .2, SCN.pullout.t0 + .6, t)), ss(a, a + .35, t) * (1 - ss(b, b + .35, t))); };   // away during the walk-in journey and the Showdown countdown
 const CAT = { intro: [255, 880, .62, { pose: "sleep" }], wall: [585, 556, .42, { pose: "wash" }], plant: [1690, 640, .55, { pose: "tail" }], bay: [1340, 560, .36, { pose: "sit" }], step: [70, 692, .5, { pose: "sun" }], mat: [VD.mat[0], VD.mat[1] + 4, .62, { pose: "sleep" }] };
 const BX = { l: 300, r: 1640, m: 1000 };
 const world = (t, cam, o = {}) => VDS(t, { when: o.when || "night", cat: o.cat, board: o.board, top: o.top || "", front: o.front, people: o.people }, cam);
@@ -96,11 +96,11 @@ const litOf = (t) => ["l1", "l2", "l3"].map((k, i) => { const a = MK(k), b = i <
 SC.show = (t, s) => { window._BUBAT = { basil: [1500, 230], momo: [1330, 250], pip: [520, 300] }; const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 5), tS = LT("b603h") - .08, inT = t >= r0 && t < bell, R = [1440, 430], RR = 200;
   const st = ss(r0 - .6, r0 - .1, t) * (1 - ss(bell + .6, bell + 1.1, t)), bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 0, nf = inT ? (Math.floor(t - r0) % 3) + 1 : 3;
   return showWorld(t, { lit: litOf(t) }) + OP(st, bg("stage"))
-    + (st > .01 ? OP(st, TF(700, 1120, .9, stepsPoster(t, {})) + TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
+    + (st > .01 ? OP(st, TF(860, 1120, .78, stepsPoster(t, {})) + TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
       inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/>` + TF(R[0], R[1] + 30 + bob * .3, .75, `<g filter="url(#dropS)">${countHand(nf)}</g>`) })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 48, P.ink, "#fff", { w: 700 }))) : "")
     + bd("pip", 230, 1076, 480, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "sit"], [LE("b601p") + .1, "sit"], [r0 - .3, "worried"], [bell + .35, "sit"]], jump: [[bell + .02, 26]] })
     + (st < .5 ? bd("momo", 1430, 1010, 360, t, { in: s.t0 + .2, flip: true }) + bd("basil", BX.r + 60, 1076, 470, t, { in: s.t0 + .25, flip: true, poses: [[s.t0, "sit"], [LT("b602h") + 1.5, "thinking"]] }) : "")
-    + stamp(t, tS, 960, 460) + bellIcon(t, r0) + melt(t, s, "showcard", .3) + dayPill(t, "Mon") + HUD(t); };
+    + stamp(t, tS, 960, 460) + bellIcon(t, r0) + melt(t, s, "showcard", .3) + OP(1 - st, dayPill(t, "Mon")) + HUD(t); };
 SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 250], '*': [1250, 250] }; const strike = ss(MK("strike"), MK("strike") + .4, t), rw = ss(MK("rewrite"), MK("rewrite") + .8, t);
   return showWorld(t, { lit: [0, ss(s.t0, s.t0 + .3, t), 0], strike, rewrite: rw })
     + bd("pip", 230, 1076, 480, t, { in: s.t0 + .05 }) + faceCam("pip", t, MK("strike") + .05, MK("strike") + 2.2, 240, 330, 140, [[MK("strike"), "oops"]], { noreact: true })

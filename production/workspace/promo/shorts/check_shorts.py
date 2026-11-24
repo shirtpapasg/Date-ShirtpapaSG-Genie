@@ -1,5 +1,5 @@
 """check_shorts.py: check every Short made by make_short.py and make its previews.
-    python3 check_shorts.py [names...]      (default: film1_short film2_short film3_short and the *_short60 ad cuts)
+    python3 check_shorts.py [names...] [--no-preview]      (default: film1_short film2_short film3_short and the *_short60 ad cuts)
 For each: decodes end to end (errors counted), frame count and stream durations (A/V within one frame), the audio's offset
 against the film it came from (cross-correlation in each kept range: 0 ms = in sync), loudness (EBU R128 integrated, true
 peak), then a 720 x 1280 preview under 15 MB and a contact sheet (one frame every 3 s) in the scratchpad. Prints a table."""
@@ -22,7 +22,8 @@ def lag_ms(a, b, sr=8000, maxlag=0.12):
 def plan(n):
     s = importlib.util.spec_from_file_location('p', os.path.join(H, f'plan_film{n}.py')); p = importlib.util.module_from_spec(s); s.loader.exec_module(p); return p
 
-names = sys.argv[1:] or [f'film{n}_short{c}' for n in (1, 2, 3) for c in ('', '60')]
+NOPREV = '--no-preview' in sys.argv      # checks only (keeps the existing preview and sheet)
+names = [a for a in sys.argv[1:] if not a.startswith('--')] or [f'film{n}_short{c}' for n in (1, 2, 3) for c in ('', '60')]
 rows = []
 for name in names:
     f = os.path.join(H, name + '.mp4')
@@ -45,6 +46,9 @@ for name in names:
                      vdur=float(v['duration']), adur=float(a['duration']), size=int(pr['format']['size']) / 1e6, errs=errs, I=I, TP=TP,
                      lag=max(lags, key=abs) if lags else None, abr=int(a.get('bit_rate', 0)) // 1000))
     # 720 x 1280 preview, capped well under 15 MB
+    prev = os.path.join(SCR, name + '_720.mp4')
+    if NOPREV:
+        rows[-1]['prev'] = os.path.getsize(prev) / 1e6 if os.path.exists(prev) else 0; continue
     prev = os.path.join(SCR, name + '_720.mp4'); vdur = float(v['duration']); kbps = int(min(1400, 13.5 * 8e3 / vdur - 96))
     run(['ffmpeg', '-v', 'error', '-y', '-i', f, '-vf', 'scale=720:1280:flags=lanczos', '-c:v', 'libx264', '-profile:v', 'high', '-preset', 'medium',
          '-b:v', f'{kbps}k', '-maxrate', f'{kbps}k', '-bufsize', f'{2 * kbps}k', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '96k', '-movflags', '+faststart', prev])

@@ -90,7 +90,31 @@ re-scored cut from the source project would be better.
 
 ## 3. Checks
 
-(filled in after the renders: see the end of this file)
+`check_shorts.py`: every file decodes end to end with no errors; H.264 High 1080 x 1920 60 fps; A/V = the Short's sound
+cross-correlated against the film's own sound in each kept range (0 = in sync; under 1 ms everywhere, a frame is 16.7 ms).
+
+| File | Length | Frames | LUFS | True peak | A/V | Size | 720p preview |
+|---|---|---|---|---|---|---|---|
+| film1_short.mp4 | 1:23.0 (82.98 s) | 4979 | -16.0 | -1.3 dBTP | 0.0 ms | 50 MB | 13.5 MB |
+| film1_short60.mp4 | 0:53.0 | 3182 | -15.9 | -1.5 | 0.6 ms | 33 MB | 9.9 MB |
+| film2_short.mp4 | 1:15.6 (75.62 s) | 4537 | F2I | F2P | F2A | 57 MB | F2M |
+| film2_short60.mp4 | 0:58.3 | 3497 | G2I | G2P | G2A | 45 MB | G2M |
+| film3_short.mp4 | 1:16.8 (76.78 s) | 4607 | -16.0 | -1.5 | 0.0 ms | 44 MB | 13.6 MB |
+| film3_short60.mp4 | 0:57.3 | 3436 | -15.5 | -1.5 | 0.6 ms | 31 MB | 10.8 MB |
+
+Weak or hard moments (seen on the contact sheets):
+- Film 1, 0:15-0:19 (the fog arrives): the airship is far left and the buddies far right; done as a pan between them.
+  0:42-0:45 (the fog of questions) and 0:50-0:54 (Momo and Basil come in at the right of the quiz) are wide, so the picture is
+  small there. 0:57-0:59: the scene's "Which one lets electricity through?" box is wider than the crop; captions moved above it.
+- Film 2, 0:02-0:16: three Guardians fly all over the frame and then the buddies are tiny under the sleeping unicorn; a fixed
+  medium crop, so a Guardian is sometimes half out of frame. 0:33-0:43: the School Lab's own label pills ("Heat flows from a
+  hotter object...", "Light can be reflected.") are wider than the tall crop and show cut at the left edge. 0:52-0:56 (all
+  Guardians awake under the rainbow) is wide and small.
+- Film 3, 0:09-0:20: the riddle (LIGHT RETURNS WHEN NOTHING BLOCKS ITS PATH) and the buddies are too far apart: the riddle
+  is shown, then the crop moves to the buddies and the riddle is half-cut at the left. 0:24-0:30: the mind map's outer nodes
+  are cut at the edges. 0:31-0:38 (torch, ball, screen) is wide.
+- Film 3's render predates a fix that also highlights key words written with punctuation ("riddle!", "shadow.", "Science."),
+  so it has fewer yellow words than films 1-2 (film 1 lacks only "TheOneApp!"). Re-render with make_short.py to get them.
 
 ## 4. Upload JSONs and the tools
 
