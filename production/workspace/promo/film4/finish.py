@@ -8,8 +8,9 @@ OUTD = sys.argv[1] if len(sys.argv) > 1 else None
 run = lambda *a: subprocess.run(list(a), check=True)
 dur = lambda f: float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f], capture_output=True, text=True).stdout)
 # join the chunks again, re-encoded (render.js's -c copy join gave mismatched H.264 headers once), with a soft bloom: the bright parts
-# (lamps, windows, neon) are blurred and screened back over the frame at 35%, the glow films 1-3 have on their lights
-BLOOM = "split[a][b];[b]curves=all='0/0 0.55/0 1/1',gblur=sigma=16[g];[a][g]blend=all_mode=screen:all_opacity=0.35,format=yuv420p"
+# (lamps, windows, neon) are blurred and screened back over the frame at 35%, the glow films 1-3 have on their lights. In RGB (gbrp):
+# the same blend on YUV planes tints the whole film purple
+BLOOM = "format=gbrp,split[a][b];[b]curves=all='0/0 0.55/0 1/1',gblur=sigma=16[g];[a][g]blend=all_mode=screen:all_opacity=0.35,format=yuv420p"
 run("ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", "out/chunks_v3/list.txt", "-vf", BLOOM, "-c:v", "libx264", "-preset", "medium", "-crf", "17", "-pix_fmt", "yuv420p", "-r", str(FPS), "out/video_v3j.mp4")
 run("ffmpeg", "-y", "-loglevel", "error", "-i", "out/video_v3j.mp4", "-i", "out/mix.wav", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", "-shortest", "out/_f.mp4")
 os.replace("out/_f.mp4", "film4_v3.mp4"); D = dur("film4_v3.mp4"); print("film4_v3.mp4", round(D, 2), "s")
