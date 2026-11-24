@@ -549,7 +549,9 @@ order). Send the teacher the finished parts and the list of things to check; the
 
 ## 11. Episode template (one part, about 4 to 5 min)
 
-1. Silent cold open (a real Singapore place).
+1. Cold open (a real Singapore place), and **a voice within the first second** (teacher, 2026-11-24, on EP21: "Not speaking for the
+   first few seconds"). No silent opening: the place card and the scene show while Heart (or a buddy) is already speaking; at most
+   about 1 s of ambience before the first word. Viewers decide in the first seconds whether to stay.
 2. Hook and practice lock-in.
 3. Rules and goals (the "Today you'll learn" chips). **A buddy READS the three goal cards aloud** (teacher, 2026-11-21: "make one
    of the pet buddies read these 3"): the buddy on screen says "Today you'll learn…" and then each goal, word for word as printed,
