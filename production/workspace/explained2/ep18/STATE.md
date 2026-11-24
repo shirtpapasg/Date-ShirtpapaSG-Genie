@@ -157,3 +157,17 @@ Stages: **Stage 1 (setup, voices, timelines, staging): DONE 2026-11-23, Opus** Â
 
 ## 23 Nov: LIVE
 Teacher: "ok to upload all". Part 1 MnDMkHAvOjc, Part 2 f2MG82O_9sA (after EP17 in both playlists); classic xaCprQPXVYY retired (NEW VERSION line -> Part 1). Chapters: chapters_p3.json.
+
+## v2: the cold open speaks (2026-11-24, Opus; teacher: "Not speaking for the first few seconds", "fix the live ones too")
+- SERIES_FORMAT 11 item 1, EP22's approach: Heart's "Last time, we asked:" now starts at **0.825 s** (was 6.3 s). The void deck stays under
+  "A frog and a mosquito! Both lay their eggs in water, and both have young that look nothing like the adult." with every cold mark on a word
+  of the dare: loopsIn on "frog" 2.26, cardsIn on "Both" 4.06, budsIn on "young" 6.84; "lasttime" starts .45 s before "Are" (ltIn 9.21;
+  build_tl.py's ("scene", name, {"at": mark, "d": s}), copied from ep22). The cold scene is 8.8 s (was 6.0 s), all of it spoken over.
+  p1.js: camCold over the whole scene, the place card from 0.2 s. Every later Part 1 time is **5.475 s earlier**; no voice re-recorded.
+- The voice wavs were gone (only the jsons stayed). Re-made with make_voice.py's own engine (Heart bit-identical; the buddies' Character
+  Voice Kit is not bit-exact run to run: same takes within a few ms / ~3 cents). The jsons are unchanged.
+- **Renders (after the n2 4-decimal fix and the lock-in ring clip):** `ep18_part1.mp4` 323.233 s, 9697 frames, -16.0 LUFS, decodes; first
+  word 0.825 s; Round 1 51.284 ... 54.284, HOLD ON! numbers 220.645 ... 225.645 (bell 225.612 = timeline; steps 1.000). Part 2 re-rendered
+  from the unchanged script (it already spoke at 0.30 s; one-bed music fix): see REOPEN_PROGRESS.md / below.
+- Records: app_moments.json (18A 5.475 s earlier), chapters_p3.json keys **EP18_P1_v2** / **EP18_P2_v2**, **upload_v2.json**
+  (explained-p3-ep18v2-part1/2, after explained-p3-ep17v2-part2, replaces MnDMkHAvOjc + f2MG82O_9sA, retire_old). Not uploaded.
