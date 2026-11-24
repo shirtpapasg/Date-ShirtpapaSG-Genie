@@ -96,7 +96,8 @@ def main():
     os.makedirs(os.path.join(epdir, 'out'), exist_ok=True)
     wav = os.path.join(epdir, 'out', f'lofi_mix_p{part}.wav')
     print(f'{key}: {dur:.2f} s')
-    info = mix(epdir, part, wav)
+    ceil = 0.80   # song.js limits at .84 (-1.5 dBTP) but AAC adds about .3 dB: start at .80 (about -1.9 dBTP) so one pass is enough
+    info = mix(epdir, part, wav, ceil)
     try:
         if sample:
             t0, out = sample; os.makedirs(os.path.dirname(os.path.abspath(out)), exist_ok=True)
@@ -123,7 +124,7 @@ def main():
             if tp <= -1.5 and abs(lu + 16) <= 0.5: break
             os.remove(tmp)
             if attempt == 2: sys.exit(f'loudness check failed: {lu} LUFS, {tp} dBTP')
-            ceil = 0.84 * 10 ** ((-1.5 - tp - 0.15) / 20) if tp > -1.5 else 0.84
+            ceil = ceil * 10 ** ((-1.5 - tp - 0.15) / 20) if tp > -1.5 else ceil
             print(f'  true peak over -1.5 dBTP after AAC: mixing again with the limiter ceiling at {ceil:.3f}')
             info = mix(epdir, part, wav, ceil)
         backup = os.path.join(epdir, 'out', f'nolofi_p{part}.m4a')
