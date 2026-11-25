@@ -1,8 +1,10 @@
 // lofi_song.js: runs an episode's OWN song.js (unchanged on disk) with Kampong Walk as the music bed, and writes the mix to <out.wav>.
 //   node lofi_song.js <epdir> <part> <out.wav> [bed.wav]
 // song.js is read and patched in memory only (three anchors, each must match once, or this stops):
-//   1. after `const C = JSON.parse(...)`: the old music regions are emptied (C.R.groove, C.R.calm, C.R.wonder and the outro groove), so the
-//      game bed, the calm bed and the micro-world pad are gone; every sound effect, ambience, roll, voice and chant stays.
+//   1. after `const C = JSON.parse(...)`: the old music regions are emptied (C.R.groove, C.R.calm and the outro groove), so the game bed
+//      and the calm bed are gone; every sound effect, ambience, roll, voice and chant stays. C.R.wonder is KEPT (teacher, 2026-11-25: "for
+//      shrink down scenes, the music should pause, like a quiet journey in the first few episodes"): the episode's own micro-world pad (a
+//      slow warm pad, soft bells, no rhythm) plays in every journey, and Kampong Walk fades out going in and back in after the pull-out.
 //   2. before `const mix = MIX.mixdown(`: the Kampong Walk bus is added to the stems (see addBed).
 //   3. the final writeWav goes to <out.wav>, and the levels are reported.
 // SERIES_FORMAT.md "Background music (Kampong Walk)" is the rule this follows.
@@ -13,6 +15,7 @@ const EPDIR = path.resolve(EP), BED = path.resolve(BED_ARG || path.join(__dirnam
 // the levels (SERIES_FORMAT.md): the bed under speech at about -28 LUFS short-term, about 4 dB higher in the gaps
 const UNDER_VOICE_LUFS = +(process.env.LOFI_UNDER || -28), DEPTH = +(process.env.LOFI_DEPTH || 0.4);
 const FADE_IN = 3.0, FADE_OUT = 4.0, DIP_OUT = 0.8, DIP_IN = 1.5;   // every dip is a smooth (smoothstep) fade, never a cut
+const J_OUT = 1.2, J_IN = 1.5;   // a journey: Kampong Walk is gone by the start of "Be a ...! Shrink down. Quietly." and comes back after the pull-out
 const { SR, Bus } = require(path.join(EPDIR, 'audio', 'dsp')); const MIX = require(path.join(EPDIR, 'audio', 'mix'));
 // LOFI_CEILING (add_lofi.py sets it only when the AAC file's true peak came out over -1.5 dBTP): a lower limiter ceiling than song.js's .84
 if (process.env.LOFI_CEILING) { const orig = MIX.master; MIX.master = (b, drive, ceiling, o) => orig(b, drive, +process.env.LOFI_CEILING, o); }
@@ -25,13 +28,19 @@ function shortTerm(L, R, gain = 1) {
   const a = kw(L), b = kw(R), cum = new Float64Array(L.length + 1); for (let i = 0; i < L.length; i++) cum[i + 1] = cum[i] + a[i] + b[i];
   const W = 3 * SR, H = SR / 2, out = []; for (let s = 0; s + W <= L.length; s += H) out.push({ t: (s + W / 2) / SR, s, lufs: -0.691 + 10 * Math.log10((cum[s + W] - cum[s]) / W + 1e-20) }); return out;
 }
+// the journey spans of a part: [[start, end]] (see addBed)
+function journeys(C, TL) { const W = C.R.wonder || [], sc = TL.scenes, cov = (s) => W.some(([a, b]) => Math.min(b, s.t1) - Math.max(a, s.t0) > 0.5);
+  const isJ = (s) => /^(waitw|shrink|pullout)$/.test(s.name) || cov(s); let sp = [];
+  for (const s of sc) { if (!isJ(s)) continue; const last = sp[sp.length - 1]; if (last && s.t0 - last[1] < 0.05) { last[1] = Math.max(last[1], s.t1); last[2].push(s.name); } else sp.push([s.t0, s.t1, [s.name]]); }
+  for (const [a, b] of W) { const o = sp.find((x) => a < x[1] && b > x[0]); if (o) { o[0] = Math.min(o[0], a); o[1] = Math.max(o[1], b); o[3] = 1; } else sp.push([a, b, ['wonder'], 1]); }
+  return sp.filter((x) => x[3] || x[2].includes('shrink')).map((x) => [x[0], x[1]]).sort((p, q) => p[0] - q[0]); }
 const median = (a) => { if (!a.length) return NaN; const s = [...a].sort((x, y) => x - y); return s[s.length >> 1]; };
 const smooth = (x) => x * x * (3 - 2 * x);
 
 const S = { info: {} };
 global.__LOFI = {
-  strip(C) { S.removed = { groove: (C.R.groove || []).length, calm: (C.R.calm || []).length, wonder: (C.R.wonder || []).length, outro: !!C.R.outro };
-    C.R.groove = []; C.R.calm = []; C.R.wonder = []; C.R.outro = null; },
+  strip(C) { S.removed = { groove: (C.R.groove || []).length, calm: (C.R.calm || []).length, outro: !!C.R.outro }; S.wonderKept = (C.R.wonder || []).length;
+    C.R.groove = []; C.R.calm = []; C.R.outro = null; },   // C.R.wonder stays: the journey's own pad
   addBed({ C, TL, voice, stems, GAIN, N }) {
     // the loop, repeated for the whole part
     const r = require('child_process').spawnSync('ffmpeg', ['-v', 'error', '-i', BED, '-f', 'f32le', '-ac', '2', '-ar', String(SR), '-'], { maxBuffer: 2 ** 31 });
@@ -45,8 +54,12 @@ global.__LOFI = {
     for (let i = 0; i < beats.length;) { let j = i; while (j + 1 < beats.length && beats[j + 1] - beats[j] < 2.5) j++; if (j > i) dips.push(['chant', beats[i] - 0.3, beats[j] + 1.0]); i = j + 1; }
     const nyk = TL.order.map((id) => TL.lines[id]).filter((L) => /now you know/i.test(L.text || '')).sort((a, b) => a.t - b.t)[0];
     if (nyk) { const bl = C.ev.find((e) => e.k === 'blast' && e.t >= nyk.t - 1 && e.t <= nyk.end + 2); dips.push(['now you know', nyk.t - 0.1, (bl ? bl.t : nyk.end) + 1.2]); }
+    // the journeys (2026-11-25): silent from the start of the "Be a ...!" scene (waitw) through the shrink-down to the end of the pull-out,
+    // where the episode's own wonder pad plays. A span = consecutive waitw / shrink / pullout scenes and any scene the C.R.wonder pad covers
+    // (EP0 Part 2's journey scene is "garden"), merged with the wonder regions themselves; kept only if it holds a shrink or a wonder region.
+    for (const sp of journeys(C, TL)) dips.push(['journey', sp[0], sp[1], J_OUT, J_IN]);
     for (let i = 0; i < N; i++) { const t = i / SR; let g = Math.min(1, smooth(Math.min(1, t / FADE_IN)), smooth(Math.max(0, Math.min(1, (END - 0.05 - t) / FADE_OUT))));
-      for (const [, a, b] of dips) { if (t >= a - DIP_OUT && t < a) g = Math.min(g, smooth((a - t) / DIP_OUT)); else if (t >= a && t <= b) g = 0; else if (t > b && t < b + DIP_IN) g = Math.min(g, smooth((t - b) / DIP_IN)); }
+      for (const [, a, b, fo = DIP_OUT, fi = DIP_IN] of dips) { if (t >= a - fo && t < a) g = Math.min(g, smooth((a - t) / fo)); else if (t >= a && t <= b) g = 0; else if (t > b && t < b + fi) g = Math.min(g, smooth((t - b) / fi)); }
       env[i] = g; bed.L[i] *= g; bed.R[i] *= g; }
     // the checks the teacher asked for (2026-11-24, EP19's old beds "sounded disjointed"): ONE bed, never restarted (the loop runs on in
     // time through every dip; its seam is folded, so a wrap is not a restart), and no hard cut: no 50 ms step of the shape over 0.2
@@ -64,7 +77,7 @@ global.__LOFI = {
     const u0 = median(st0.filter((w) => w.c === 'voice').map((w) => w.lufs));
     const g = Math.pow(10, (UNDER_VOICE_LUFS - u0) / 20);
     stems.lofi = bed; GAIN.lofi = g; S.bed = bed; S.st0 = st0; S.g = g;
-    S.info = { dips: dips.map(([k, a, b]) => [k, +a.toFixed(2), +b.toFixed(2)]), drive_without_bed: +d0.toFixed(3), bed_gain: +g.toFixed(4), depth_db: +(20 * Math.log10(1 - DEPTH)).toFixed(1) };
+    S.info = { dips: dips.map(([k, a, b]) => [k, +a.toFixed(2), +b.toFixed(2)]), wonder_kept: S.wonderKept, rule: 'journey-pause 2026-11-25', drive_without_bed: +d0.toFixed(3), bed_gain: +g.toFixed(4), depth_db: +(20 * Math.log10(1 - DEPTH)).toFixed(1) };
   },
   done(mix, M) {
     const d = (M && M.drive) || (MIX.master.last && MIX.master.last.drive), st = shortTerm(S.bed.L, S.bed.R, S.g * d);
