@@ -61,13 +61,13 @@ function lcOnArt(t) { const m = MK, tC = m("crane2"), tK = m("kw_electromagnet")
 // FOUR tall columns, each named at the top and joined to its thing: the battery alone · the iron nail alone · one end joined · both ends
 // joined; a tray of steel clips under every column. Only the last attracts the clips: the gold glow travels from the battery, round the
 // nail and back (small arrows along it); then the clips JUMP to the tip. Pip's face (shy) at the lower left; Basil's for COIL at the lower right.
-const COLX = [-660, -220, 220, 660];
+const COLX = [-630, -210, 210, 630];   // the four columns fit the panel with their names in full (no pan)
 function lcPartsArt(t) { const m = MK, tA = m("alone1"), tB = m("alone2"), tO = m("one"), tN = m("nothing"), tBo = m("both"), tF = m("flow"), tBe = m("becomes"), tK = m("kw_coil");
-  const foc = t < tB - .3 ? 0 : t < tO - .3 ? 1 : t < tBo - .3 ? 2 : 3, fx = lerp(0, COLX[foc] * .18, eio(clamp((t - tA) / 1))), z = 1 + .06 * eio(clamp((t - tA) / 1));
+  const foc = t < tB - .3 ? 0 : t < tO - .3 ? 1 : t < tBo - .3 ? 2 : 3, fx = 0, z = .97;
   let s = lcBG23() + `<rect x="-930" y="130" width="1860" height="330" fill="#E2B378"/>`;
   const NAMES = ["the battery alone", "the iron nail alone", "one end joined", "both ends joined"], T0 = [tA - .5, tB - .5, tO - .5, tBo - .5];
   COLX.forEach((x, i) => { const act = foc === i ? 1 : 0, a = t >= T0[i] ? 1 : .35;
-    s += `<rect x="${x - 205}" y="-380" width="410" height="590" rx="26" fill="#fff" opacity="${n2(.55 + .25 * act)}" stroke="${act ? P.sun : "#E3C9A8"}" stroke-width="${act ? 8 : 4}"/>` + OP(a, TF(x, -340, 1, tpill(0, 0, NAMES[i], 34, i === 3 ? GOODC : P.ink, "#fff", { w: 700 })))
+    s += `<rect x="${x - 195}" y="-380" width="390" height="590" rx="26" fill="#fff" opacity="${n2(.55 + .25 * act)}" stroke="${act ? P.sun : "#E3C9A8"}" stroke-width="${act ? 8 : 4}"/>` + OP(a, TF(x, -340, 1, tpill(0, 0, NAMES[i], 34, i === 3 ? GOODC : P.ink, "#fff", { w: 700 })))
       + trayClips22(t, x, 160, .95, { n: i === 3 && t >= tBe ? 12 : 18 }); });
   // 1 the battery alone, held by an adult's hand over the clips: nothing
   if (t >= tA - .5) { const k = ramp(t, tA - .5, .4); s += OP(k, TF(COLX[0], -10, .9, battHolder23(t, 1)) + TF(COLX[0] - 40, -60, .55, hand15({ curl: .5 }), 0)) + xBad23(t, tA + 1.2, COLX[0] + 130, 30) + (t >= tA + 1.2 ? lcLab(t, tA + 1.2, COLX[0], -230, "no clips", COLX[0], 90, { size: 34 }) : ""); }
@@ -173,7 +173,7 @@ function lcBattArt(t) { const m = MK, t1 = m("one1"), t2 = m("two2"), tD = m("di
   A += lcLab(t, t1 - .4, -640, -250, "the same nail", TURNX[0] + 40, -60, { size: 30, fill: "#E6E9EC", t1: tK - .6 }) + lcLab(t, t1 + .4, -640, -170, "the same twenty turns", TURNX[0] + 20, -150, { size: 30, fill: "#E6E9EC", t1: tK - .6 })
     + lcLab(t, t1 + 1.2, 0, 380, "the same clips", TURNX[0] + 40, 300, { size: 30, fill: "#E6E9EC", t1: tK - .6 });
   if (t >= t2 && t < tD) A += [0, 1].map((i) => { const x = TURNX[i] + (i ? 60 : 0) + 40 + (i ? -300 : -250) * 1.1, w = (i ? 414 * .7 : 226 * .85) * 1.1; return `<rect x="${n2(x - w / 2 - 12)}" y="${n2(150 - 160 * 1.1)}" width="${n2(w + 24)}" height="110" rx="20" fill="none" stroke="${P.sun}" stroke-width="7" opacity="${n2(.5 + .5 * Math.sin(t * 6))}"/>`; }).join("") + lcLab(t, t2, 60, -250, "only the batteries are different", TURNX[1] + 60 - 280, -60, { size: 32, fill: "#FFF3C8" });
-  if (t >= tF) A += lcLab(t, tF, 560, -260, "more electricity", TURNX[1] + 100, -120, { size: 34, fill: "#FFF3C8" });
+  if (t >= tF) A += lcLab(t, tF, 640, -190, "more electricity", TURNX[1] + 100, -120, { size: 34, fill: "#FFF3C8" });
   if (t >= tK + .2) A += pline(200, -230, TURNX[1] + 60 + 40 - 300 * 1.1, 40, ramp(t, tK + .2, .3), P.sun);
   return A; }
 

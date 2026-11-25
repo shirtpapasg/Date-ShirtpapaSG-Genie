@@ -10,7 +10,7 @@ const name = (j) => path.join(dir, `c_${String(j[0]).padStart(6, '0')}.mp4`);
 async function worker(id) { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); p.on('pageerror', e => console.log('PAGEERR', e.message));
   await p.goto('file://' + path.join(__dirname, 'page.html') + '?part=' + PART); await p.waitForFunction(() => window.READY === true, null, { timeout: 120000 });
   while (jobs.length) { const j = jobs.shift(), out = name(j); if (fs.existsSync(out)) continue; const tmp = out + '.part.mp4';
-    const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p', '-r', String(FPS), tmp], { stdio: ['pipe', 'inherit', 'inherit'] });
+    const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '19', '-pix_fmt', 'yuv420p', '-r', String(FPS), tmp], { stdio: ['pipe', 'inherit', 'inherit'] });
     for (let i = j[0]; i < j[1]; i++) { await p.evaluate(t => window.render(t), i / FPS); const buf = await p.screenshot({ type: 'jpeg', quality: 95 }); if (!ff.stdin.write(buf)) await new Promise(r => ff.stdin.once('drain', r)); }
     ff.stdin.end(); await new Promise(r => ff.on('close', r)); fs.renameSync(tmp, out); console.log(`worker ${id}: frames ${j[0]}-${j[1]} done (${jobs.length} chunks left)`); }
   await b.close(); }

@@ -72,8 +72,8 @@ SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
 const camAns = (t) => { const a = eio((t - MK("rows") + .3) / 1.0) * (1 - eio((t - MK("coin1") - .4) / 1.2)); return camMix(camRoom, camOn([1150, 640], 1.4, 1160, 560), a); };
 SC.r1ans = (t, s) => { const tA = MK("ansglow"), tK = MK("kw_turns_of_wire"), cam = camAns(t), [px, py] = pawPt("basil", BL[0], BL[1], BL[2], false), tp = camPt(cam, [px + 60, py - 20]);
   return sr(t, cam, { bench: benchTop(t) + trayClips22(t, 560, 900, .4, { n: 12 }) + trayClips22(t, 1360, 900, .4, { n: 12 }) + heldCoil(t, "basil", BL, 20, 6) + heldCoil(t, "momo", MR, 10, 3) })
-    + `<g filter="url(#drop)"><rect x="30" y="40" width="640" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + [0, 1, 2].map((i) => TF(140 + i * 205, 135, .42, choiceCard3(i + 1, R1[i], cardP2(i, t), { w: 400, h: 330, size: 34, id: "ra" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }))).join("")
-    + tagAt(t, tA + .3, 140, 222, 1, "not this one", 20) + tagAt(t, tA + .4, 550, 222, 1, "not this one", 20) + coin(t, MK("coin1") - .1, 860, 330, "+1", "if you showed two fingers") + coin(t, MK("coin1") + .2, 1640, 200, "+1", "Buddies")
+    + `<g filter="url(#drop)"><rect x="30" y="110" width="640" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + [0, 1, 2].map((i) => TF(140 + i * 205, 205, .42, choiceCard3(i + 1, R1[i], cardP2(i, t), { w: 400, h: 330, size: 34, id: "ra" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }))).join("")
+    + tagAt(t, tA + .3, 140, 292, 1, "not this one", 20) + tagAt(t, tA + .4, 550, 292, 1, "not this one", 20) + coin(t, MK("coin1") - .1, 860, 400, "+1", "if you showed two fingers") + coin(t, MK("coin1") + .2, 1640, 200, "+1", "Buddies")
     + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("n602b") + .05, "cheer"]], achieved: true })
     + bd("pip", 960, 1010, 400, t, { in: s.t0 + .15 }) + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .2, flip: true })
     + (t >= tK + .2 && t < tK + 2.4 ? pline(900, 360, tp[0], tp[1], ramp(t, tK + .2, .3), P.sun) : "") + melt(t, s, "pullout", .3) + HUD(t); };
@@ -81,7 +81,7 @@ SC.r1ans = (t, s) => { const tA = MK("ansglow"), tK = MK("kw_turns_of_wire"), ca
 /* 7 · Pip (big at the left, still shy) holds the two identical battery holders side by side: "But it is the same battery. How can more
    turns make it stronger?" Thinking (his own question) is shown only as the outcome allows (shy). Momo big at the right, Basil in the
    mid-ground. A push in on the two batteries. The cricket on the leg of Momo's folded easel by the wall */
-const camQ1 = (t) => { const s = SCN.lc1q, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camRoom, camOn([460, 820], 1.45, 720, 600), u); };
+const camQ1 = (t) => { const s = SCN.lc1q, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camRoom, camOn([460, 800], 1.3, 640, 660), u); };
 SC.lc1q = (t, s) => { const [px, py] = pawPt("pip", BL[0], BL[1], BL[2], false);
   return sr(t, camQ1(t), { bench: benchTop(t) }) + bd("basil", 960, 1010, 400, t, { in: s.t0 + .15, ...watchO(960, px) }) + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .1, flip: true, ...watchO(MR[0], px) })
     + bd("pip", BL[0], BL[1], BL[2], t, { in: s.t0 + .05 }) + TF(px + 20, py - 20, .34, battHolder23(t, 1)) + TF(px + 120, py + 10, .34, battHolder23(t, 1)) + HUD(t); };
@@ -93,7 +93,7 @@ const peek23 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 |
 SC.lcturns = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), [px, py] = pawPt("pip", BL[0], BL[1], BL[2], false), p = camPt(cE, [px + 70, py - 20]), tm = s.t0 + 1.2, tM = LT("n704m") - .5, tB = MK("bell");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcTurnsArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt) }), verdict: ["MORE TURNS: A STRONGER ELECTROMAGNET", GOODC], tv: MK("v_turns"), peek: false,
     over: (tt) => peek23("pip", "l", tt, tm, undefined, []) + peek23("momo", "r", tt, tM, tB + .3, [[LE("n704m") + .1, "cheer"], [LE("n704m") + 2.2, "sit"]], { achieved: true })
-      + peek23("basil", "r", tt, tB + .6, MK("v_turns") + 2, [[MK("bell") + 1.9, "surprised"], [MK("bell") + 3.6, "sit"]]) + smallPrint(tt, s.t0 + 1.4, MOMENT_RULE, 0, MK("bell") - .3) }); };
+      + peek23("basil", "r", tt, tB + .6, MK("v_turns") + 2, [[MK("bell") + 1.9, "surprised"], [MK("bell") + 3.6, "sit"]]) + lcPrint(tt, [[s.t0 + 1.4, MK("bell") - .4, MOMENT_RULE]]) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n707", sayId: "n706", who: "basil", n: "1 of 2", text: TL.lines.n707.text, keys: ["increase", "strength", "electromagnet", "number", "turns", "wire"], size: 56, y: 240, footer: FOOT, poses: [[LE("n707") + .2, "sit"]],
   under: markTurns(t, 1250, 930, .7 * spring(t, s.t0 + .4, .5)), extra: bd("pip", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
 
@@ -103,14 +103,14 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "n707", sayId: "n706", who: "basil", 
 const EAS = [700, 1050, .95];
 const camShow = (t) => { const s = SCN.show, a = eio((t - s.t0) / 1.2); return camMix(camRoom, camOn([EAS[0], EAS[1] - 330], 1.35, 760, 560), a); };
 const showWorld = (t, cam, o = {}) => sr(t, cam, { bench: benchTop(t), easel: false, bug: o.bug, front: poster23(t, EAS[0], EAS[1], EAS[2], { lit: [MK("l1"), MK("l2"), MK("l3")], strike: MKS("strike"), rewrite: MKS("rewrite") }) });
-SC.show = (t, s) => { window._BUBAT = { basil: [1450, 230], momo: [1150, 250], pip: [1250, 300] }; const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 5), tS = LT("n803") - .08, inT = t >= r0 && t < bell, R = [1440, 430], RR = 200;
+SC.show = (t, s) => { window._BUBAT = { basil: [1150, 175], momo: [1150, 175], pip: [1250, 300] }; const r0 = MK("ring0_show"), bell = MK("bell_show"), rs = ringState(t, r0, 5), tS = LT("n803") - .08, inT = t >= r0 && t < bell, R = [1440, 430], RR = 200;
   const st = ss(r0 - .6, r0 - .1, t) * (1 - ss(bell + .6, bell + 1.1, t)), bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 0, nf = inT ? (Math.floor(t - r0) % 3) + 1 : 3, tB = LT("n804b");
   return showWorld(t, camShow(t), { bug: t < r0 - 1 || t > bell + 1 ? CKAT.show : false }) + OP(st, bg("stage"))
     + (st > .01 ? OP(st, TF(680, 1100, .82, poster23(t, 0, 0, 1, { lit: [0, 0, 0] })) + TF(R[0], R[1], spring(t, r0 - .6, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-R[0]} ${-R[1]})">${ringTimer(R[0], R[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 32, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.2,
       inner: `<circle cx="${R[0]}" cy="${R[1]}" r="${RR - 24}" fill="#FFF8EA"/><clipPath id="shC"><circle cx="${R[0]}" cy="${R[1]}" r="${RR - 30}"/></clipPath><g clip-path="url(#shC)"><g transform="translate(${R[0]} ${R[1]}) scale(.8) translate(-430 -440)">${ringShow23(t)}</g></g>` })}</g>`) + youPill(R[0] - 230, R[1] - 170, 1.1) + TF(R[0], 760, 1, tpill(0, 0, "line 1, 2 or 3?", 48, P.ink, "#fff", { w: 700 })) + TF(R[0] + 260, 640 + bob * .3, .7, `<g filter="url(#dropS)">${countHand(nf)}</g>`)) : "")
     + bd("momo", 230, 1076, 480, t, { in: s.t0 + .1, rock: inT ? 2 : 0, poses: [[s.t0, "sit"], [W("n801", "momos") + .2, "pointing"], [LT("n802m") - .3, "sit"], [r0 - .3, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 26]] })
-    + bd("pip", 1360, 1020, 380, t, { in: bell + .4, flip: true, poses: [[bell + .4, "sit"]] }) + (t > bell + .6 ? pickNum("pip", 1240, 700, t, tB - .1, "3") : "")
-    + bd("basil", MR[0], MR[1], MR[2], t, { in: bell + .3, flip: true, poses: [[bell + .3, "sit"]] }) + (t > bell + .5 ? pickNum("basil", 1580, 640, t, tB - .1, "3") : "")
+    + bd("pip", 1360, 1020, 380, t, { in: bell + 1.1, flip: true, poses: [[bell + 1.1, "sit"]] }) + (t > bell + 1.3 ? pickNum("pip", 1240, 700, t, tB - .1, "3") : "")
+    + bd("basil", MR[0], MR[1], MR[2], t, { in: bell + 1.0, flip: true, poses: [[bell + 1.0, "sit"]] }) + (t > bell + 1.2 ? pickNum("basil", 1580, 640, t, tB - .1, "3") : "")
     + stamp(t, tS, 960, 460) + bellIcon(t, r0) + melt(t, s, "showcard", .3) + HUD(t); };
 SC.showcard = (t, s) => roundCard(t, s, "SHOWDOWN", "DOUBLE POINTS", P.sun);
 /* the fix: line 3 struck through (strike, kept) and the green rewrite (rewrite: Use an iron nail. Wood cannot become a magnet.); the coin +2
@@ -118,9 +118,9 @@ SC.showcard = (t, s) => roundCard(t, s, "SHOWDOWN", "DOUBLE POINTS", P.sun);
    (electrical method). Momo shy through the WHOLE fix; Basil and Pip confident */
 SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 250], '*': [1250, 250] }; const cam = camMix(camOn([EAS[0], EAS[1] - 330], 1.35, 760, 560), camOn([960, 600], 1.06, 960, 580), eio(clamp((t - MK("coin2") + .4) / 1.2))), tS = MK("strip");
   return showWorld(t, cam, {}) + bd("momo", 230, 1076, 480, t, { in: s.t0 + .1 }) + bd("pip", 1360, 1020, 380, t, { in: s.t0 + .15, flip: true }) + bd("basil", MR[0], MR[1], MR[2], t, { in: s.t0 + .1, flip: true })
-    + coin(t, MK("coin2") - .1, 960, 330, "+2", "Showdown: double points")
+    + coin(t, MK("coin2") - .1, 1700, 470, "+2", "Showdown: double points")
     + (t >= tS ? bookCaption(t, "n806s", TL.lines.n806s.text, 330, { size: 32, keys: ["iron", "steel", "stroke", "electrical"] })
-      + TF(300, 500, spring(t, tS + .3, .4), `<g filter="url(#dropS)"><rect x="-130" y="-80" width="260" height="150" rx="20" fill="#FFF8EA"/></g>` + TF(-30, -20, .5, nail22d(0, 0, 1, 0)) + clipBunch(t, 45, -20, 3, { k: .55 }) + T(0, 52, "stroke method", 26, P.ink)) + pline(300, 420, 420, 364, ramp(t, tS + .3, .3), P.ink)
+      + TF(230, 500, spring(t, tS + .3, .4), `<g filter="url(#dropS)"><rect x="-130" y="-80" width="260" height="150" rx="20" fill="#FFF8EA"/></g>` + TF(-30, -20, .5, nail22d(0, 0, 1, 0)) + clipBunch(t, 45, -20, 3, { k: .55 }) + T(0, 52, "stroke method", 26, P.ink)) + pline(230, 420, 380, 364, ramp(t, tS + .3, .3), P.ink)
       + TF(1640, 500, spring(t, tS + .6, .4), `<g filter="url(#dropS)"><rect x="-130" y="-80" width="260" height="150" rx="20" fill="#FFF8EA"/></g>` + TF(20, 40, .32, rig23(t, { n: 10, hold: [-230, -40], clips: [3, {}] })) + T(0, 52, "electrical method", 26, P.ink)) + pline(1640, 420, 1520, 364, ramp(t, tS + .6, .3), P.ink) : "")
     + HUD(t); };
 
@@ -142,7 +142,7 @@ SC.lc2q = (t, s) => { const tw = MK("swing"), tsl = MK("slip"), a = .5 * eio(cla
 SC.lcbatt = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [CR[0], CR[1] - 150]), tm = s.t0 + 1.2, tp = LT("n904p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcBattArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt, { hook: 20 }) }), verdict: ["MORE BATTERIES: A STRONGER ELECTROMAGNET", GOODC], tv: MK("v_batt"), peek: false,
     over: (tt) => peek23("basil", "l", tt, tm, undefined, []) + peek23("pip", "r", tt, tp, undefined, [[LE("n904p") + .1, "cheer"], [LE("n904p") + 2.2, "sit"]], { achieved: true })
-      + smallPrint(tt, s.t0 + 1.4, HOT_RULE, 0, MK("v_batt")) + smallPrint(tt, s.t0 + 2.0, MOMENT_RULE, 1, MK("v_batt")) }); };
+      + lcPrint(tt, [[s.t0 + 1.4, MK("dip2") - .2, HOT_RULE], [MK("dip2"), MK("v_batt") - .4, MOMENT_RULE]]) }); };
 /* the bench: HOW STRONG?'s third row fills (chart); the two-battery, twenty-turn hook on the crane comes down: the steel bolt and two steel
    caps jump up (the ring-pulls and plastic caps stay); the arm swings over the paper lorry (carry); OFF: the bolt and the caps drop into the
    lorry (drop: a clang). Basil and Momo cheer as it lands (achieved: the build works); Pip a big smile and a hop (he cheered a moment ago) */
@@ -159,7 +159,7 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "n907", sayId: "n906", who: "pip", n:
   under: markBatt(t, 1250, 930, .66 * spring(t, s.t0 + .4, .5)) });
 
 /* 10 · the chant: call and response with YOUR TURN!; the three lines flash their pictures on the board at the right */
-SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 42, x: 700, y0: 250, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1180, ty: 560, sayX: 640, sayY: 620, board: (tt, flash) => chantBoard23(tt, flash) });
+SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 38, x: 620, y0: 250, dy: 110, xs: [230, 560, 890], bh: 360, tx: 1240, ty: 600, sayX: 640, sayY: 620, board: (tt, flash) => chantBoard23(tt, flash) });
 
 /* 11 · score hand, the cricket (lizReveal: the score hand melts into the science room, ONE push-in onto the cricket on the ledge right under
    the school bell: the REVEAL spot, never the intro windowsill); Momo's fun fact: its ears are on its front legs (ff_ear); it hears the bell
@@ -176,7 +176,7 @@ SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = CKAT.liz, tc =
    big cards (1 Yes · 2 No; ep23dare.js) slides in BEFORE any clips are seen; NEXT · Is it fair?; Lock in your answer! Pip and Momo thinking */
 const slideX23 = (t, t0, d, x0, x1) => { const u = eo(clamp((t - t0) / d)); return [lerp(x0, x1, u), u < 1 ? motion22(lerp(x0, x1, u) + 220, 830, 0, .8, "#fff") : ""]; };
 SC.dare = (t, s) => { const a = "n1201", tc = [W(a, "one", 1) - .1, W(a, "two") - .1], tL = W(a, "lock") - .1, tQ = W(a, "is") - .15, tIn = tc[0] - 1.0, e2 = eio(clamp((t - tIn) / 1.2)), cs0 = MK("coil");
-  const [px, py] = pawPt("basil", 560, 1076, 480, false), pair = TF(820, 720, 1.25, darePic23(0, t).replace(/<rect x="-210" y="-150" width="420" height="300" fill="#E8F6EA"\/>/, "").replace(/<g transform="translate\(150 105\)[\s\S]*$/, ""));
+  const [px, py] = pawPt("basil", 560, 1076, 480, false), pair = TF(700, 720, 1.25, darePic23(0, t).replace(/<rect x="-210" y="-150" width="420" height="300" fill="#E8F6EA"\/>/, "").replace(/<g transform="translate\(150 105\)[\s\S]*$/, ""));
   return sr(t, camMix(camRoom, camOn([900, 640], 1.1, 960, 520), e2), { bench: benchTop(t, {}) }) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.35 * e2)}"/>`
     + bd("momo", 1480, 1010, 380, t, { in: s.t0 + .2, flip: true, poses: [[s.t0, "sit"], [tQ + .3, "thinking"]] }) + bd("pip", MR[0], MR[1], MR[2], t, { in: s.t0 + .3, flip: true, poses: [[s.t0, "sit"], [tQ + .45, "thinking"]] })
     + bd("basil", 380, 1076, 480, t, { in: s.t0 + .1, noreact: true }) + OP(1 - e2 * .7, pair)

@@ -135,8 +135,8 @@ SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
 const camAns = (t) => { const a = eio((t - MK("ansglow") + .2) / 1.0) * (1 - eio((t - MK("box1") - 1.4) / 1.2)), b = eio((t - MK("box1") + .3) / .8) * (1 - eio((t - MK("coin1") + .2) / 1)); return camMix(camMix(camOn([CLIPS[0], CLIPS[1]], 1.06, CLIPS[0], CLIPS[1]), camOn([CLIPS[0], CLIPS[1]], 1.5, CLIPS[0], CLIPS[1]), a), camOn([1150, 600], 1.35, 1200, 520), b); };
 SC.answer = (t, s) => { const tA = MK("ansglow"), tK = MK("kw_electrical_method"), cam = camAns(t), tip = camPt(cam, momoTip()), hp = camPt(cam, HOLD);
   return cs(t, cam, { top: tableTop(t, { clipN: 22 }) }) + momoOff(t, cam)
-    + `<g filter="url(#drop)"><rect x="30" y="40" width="470" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + [0, 1].map((i) => TF(150 + i * 230, 135, .42, dareCard23(i, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }, t))).join("")
-    + tagAt(t, tA + .3, 150, 222, 1, "not this one", 22) + coin(t, MK("coin1") - .1, 860, 330, "+1", "if you showed two fingers") + coin(t, MK("coin1") + .2, 1640, 200, "+1", "Buddies")
+    + `<g filter="url(#drop)"><rect x="30" y="110" width="470" height="200" rx="24" fill="#FFF8EA" opacity=".92"/></g>` + [0, 1].map((i) => TF(150 + i * 230, 205, .42, dareCard23(i, { id: "an" + i, lit: i === 1 && t >= tA ? spring(t, tA, .45) : 0 }, t))).join("")
+    + tagAt(t, tA + .3, 150, 292, 1, "not this one", 22) + coin(t, MK("coin1") - .1, 860, 400, "+1", "if you showed two fingers") + coin(t, MK("coin1") + .2, 1640, 200, "+1", "Buddies")
     + bd("momo", MO[0], MO[1], MO[2], t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("m603m") + .05, "cheer"]], achieved: true }) + (t > s.t0 + .3 ? pickNum("momo", 520, 640, t, s.t0 + .3, "2") : "") + tickChip16(t, tA + .2, 575, 585, .7)
     + bd("basil", PI[0], PI[1], 400, t, { in: s.t0 + .15, flip: true }) + (t > s.t0 + .35 ? pickNum("basil", 1290, 700, t, s.t0 + .35, "1") : "") + xChip16(t, tA + .25, 1340, 650, .7)
     + bd("pip", BA[0], BA[1], BA[2], t, { in: s.t0 + .2, flip: true }) + (t > s.t0 + .4 ? pickNum("pip", 1880, 640, t, s.t0 + .4, "2") : "") + tickChip16(t, tA + .3, 1840, 585, .7)
@@ -160,7 +160,7 @@ const peek23 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 |
 SC.lcon = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1420, 860]), tm = s.t0 + 1.2, tp = LT("m706p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcOnArt, bgc: "#FFF6E6", set: (tt) => cs(tt, cE, { top: tableTop(tt, { clips: false }) + trayClips22(tt, 1300, 900, .38, {}) }), verdict: ["IT WORKS ONLY WHILE ELECTRICITY FLOWS", GOODC], tv: MK("v_onoff"), peek: false,
     over: (tt) => peek23("basil", "l", tt, tm, tp - .2, []) + peek23("pip", "r", tt, tp, undefined, [[LE("m706p") + .1, "cheer"], [LE("m706p") + 2.2, "sit"]], { achieved: true })
-      + smallPrint(tt, MK("crane2"), YARD_RULE, 0, MK("kw_electromagnet") - .5) + smallPrint(tt, MK("on1"), MOMENT_RULE, 0, MK("crane2") - .3) }); };
+      + lcPrint(tt, [[MK("on1"), MK("crane2") - .4, MOMENT_RULE], [MK("crane2"), MK("v_onoff") - .4, YARD_RULE]]) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "m708", sayId: "m707", who: "momo", n: "1 of 2", tab: "The electrical method", text: TL.lines.m708.text, keys: ["a", "magnet", "this", "method", "electromagnet."], size: 66, y: 250, footer: FOOT, poses: [[LE("m708") + .2, "sit"]],
   under: markOnOff(t, 1250, 920, .72 * spring(t, s.t0 + .4, .5)), extra: bd("basil", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
 
@@ -175,14 +175,15 @@ const MH = [400, 1060, 480];
 const camHold = (t) => { const a = eio((t - SCN.holdon.t0) / 1.2) * (1 - eio((t - W("m802", "cross") + .6) / .8)), b = eio((t - MK("mains") + .8) / 1.2), c = eio((t - MK("strip") + .2) / 1.2);
   return camMix(camMix(camMix(camOn([960, 640], 1.06, 960, 600), camOn([260, 780], 1.35, 600, 640), a), camOn([200, 800], 1.5, 520, 560), b), camOn([960, 600], 1.0, 960, 560), c); };
 const RG = [960, 420], RR = 215;
-SC.holdon = (t, s) => { window._BUBAT = { momo: [960, 230], basil: [1180, 260], pip: [1180, 260] }; const b = "m802", c = "m803", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell, tS = MK("stop"), cam = camHold(t);
+SC.holdon = (t, s) => { window._BUBAT = { momo: [1250, 260], basil: [1180, 260], pip: [1180, 260] }; const b = "m802", c = "m803", r0 = MK("ring0_hold"), bell = MK("bell_hold"), rs = ringState(t, r0, 5), tX = W(b, "cross") - .15, tH = W(b, "hold") - .1, tOne = W(c, "one") - .1, inT = t >= r0 && t < bell, tS = MK("stop"), cam = camHold(t);
   const st = ss(tX - .1, tX + .4, t) * (1 - ss(LE(c) + .1, LE(c) + .6, t)), ring = st > .01, low = eio(clamp((t - tS - .4) / .8));
   const [px, py] = pawPt("momo", MH[0], MH[1], MH[2], true), coil = rigW(t, { head: [lerp(px, 560, low), lerp(py - 30, 846, low)], ang: lerp(100, 10, low), k: .48, free: null, n: 10 });
   const inner = `<clipPath id="hoC"><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}"/></clipPath><circle cx="${RG[0]}" cy="${RG[1]}" r="${RR - 24}" fill="#FFFDF6"/><g clip-path="url(#hoC)"><g transform="translate(${RG[0]} ${RG[1] + 5}) scale(.75) translate(-430 -470)">${ringHold23(t)}</g></g>`;
   const labels = [["one battery", 420, 250, -1], ["the wall socket", 1500, 250, 1], ["a super magnet?", 1500, 560, 1]].map(([l, x, y, sd], i) => { const t0 = tX + .2 + i * .15; return t < t0 ? "" : pline(x - sd * 190, y + 40, RG[0] + sd * RR * .8, RG[1] + (i === 2 ? RR * .4 : -RR * .6), ramp(t, t0, .2)) + clue3(x, y, l, spring(t, t0, .4), 50, 520); }).join("");
   const bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 6 * Math.sin(t * 3), sk = camPt(cam, CS.socket), [s1, s2, s3] = S3();
   const world = cs(t, cam, { top: tableTop(t, {}), bug: t < r0 - 1 || t > bell + 1 ? MPAT.holdon : false, front: coil });
-  return world + (t >= tS ? TF(sk[0], sk[1], spring(t, tS, .4) * cam[0] * .9, `<path d="M-70 -60 L70 60 M70 -60 L-70 60" stroke="#D84A3A" stroke-width="22" stroke-linecap="round"/>`) + TF(Math.max(170, sk[0] + 40), sk[1] - 120 * cam[0], spring(t, tS + .1, .4), tpill(0, 0, "NEVER!", 52, "#D84A3A", "#fff", { w: 700, ls: 3 })) : "")
+  const never = (t >= tS ? TF(sk[0], sk[1], spring(t, tS, .4) * cam[0] * .9, `<path d="M-70 -60 L70 60 M70 -60 L-70 60" stroke="#D84A3A" stroke-width="22" stroke-linecap="round"/>`) + TF(Math.max(170, sk[0] + 40), sk[1] - 120 * cam[0], spring(t, tS + .1, .4), tpill(0, 0, "NEVER!", 52, "#D84A3A", "#fff", { w: 700, ls: 3 })) : "");
+  return world
     + (t >= MK("mains") ? linkChip(t, MK("mains") + .05, sk[0] + 640, sk[1] - 250, sk[0] + 50, sk[1] - 20, "#fff", "main electrical supply", 40, undefined, P.ink) : "")
     + (ring ? OP(st, bg("stage")) + OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 800 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 640 + bob * .6, 1.2) + TF(1700, 990, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
@@ -190,12 +191,12 @@ SC.holdon = (t, s) => { window._BUBAT = { momo: [960, 230], basil: [1180, 260], 
     + bd("basil", BA[0], BA[1], BA[2], t, { in: LT(c) + .3, flip: true, jump: [[tS - .05, 30]] })
     + bd("momo", MH[0], MH[1], MH[2], t, { in: s.t0 + .1, flip: true, rock: inT ? 2.2 : 0, poses: [[s.t0, "sit"], [LE("m801m") + .05, "pointing"], [W(b, "something") + .2, "thinking"], [bell + .35, "sit"]], jump: [[MK("idea"), 22], [bell + .02, 30]], nohop: true })
     + thought(t, MK("idea") - .2, tX - .3, 760, 360, "super magnet?", { size: 52, col: P.momo, dir: -1 }) + (t >= MK("idea") - .2 && t < tX - .2 ? TF(985, 330, spring(t, MK("idea"), .4), `<path d="M0 -40 L-22 6 H0 L-12 44 L26 -8 H4 L16 -40z" fill="${P.sun}" stroke="${P.ink}" stroke-width="4" stroke-linejoin="round"/>`) : "")
-    + (t >= MK("strip") ? stripThree(t) : "")
-    + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 960, 330, "+1", "arms crossed") + smallPrint(t, s.t0 + .4, HOLD_RULE, 0, tX - .3) + HUD(t); };
+    + (t >= MK("strip") ? stripThree(t) : "") + never   /* the red cross and NEVER! on top of everything (coordinator: Momo's head covered it) */
+    + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 960, 330, "+1", "arms crossed") + smallPrint(t, LE("m801m") + .2, HOLD_RULE, 0, tX - .3) + HUD(t); };
 // the cream WARNING strip (7.5, three sentences): three lines, the words appearing as Heart reads them; WARNING in the strip's corner
 const stripThree = (t) => { const L = TL.lines.m805s, ws = L.words.map((w) => w.w), i2 = ws.findIndex((w, i) => i > 3 && w === "Do"), i3 = ws.findIndex((w, i) => i > i2 && w === "Do"), tx = (a, b) => ws.slice(a, b).join(" ");
   return bookCaption(t, "m805s", tx(0, i2), 860, { size: 30, keys: ["too", "long", "hot."] }) + bookCaption(t, "m805s", tx(i2, i3), 935, { size: 30, off: i2, keys: ["exposed", "wires"] }) + bookCaption(t, "m805s", tx(i3), 1010, { size: 30, off: i3, keys: ["main", "electrical", "supply."] })
-    + OP(ramp(t, L.t - .2, .3), TF(1700, 790, 1, tpill(0, 0, "WARNING", 34, "#D84A3A", "#fff", { w: 700, ls: 4 }))); };
+    + OP(ramp(t, L.t - .2, .3), TF(150, 935, 1, tpill(0, 0, "WARNING", 34, "#D84A3A", "#fff", { w: 700, ls: 4 }))); };
 
 /* 9 · Pip (big at the left) holds up the battery holder, peering at it: "I think the battery is a magnet, and the wire just joins it to the
    nail." Thinking after his line (he is about to test it). Basil big at the right, Momo in the mid-ground. A push in on the battery. The
@@ -209,7 +210,7 @@ SC.lc2q = (t, s) => { const [px, py] = pawPt("pip", PL[0], PL[1], PL[2], false);
 SC.lcparts = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), [px, py] = pawPt("pip", PL[0], PL[1], PL[2], false), p = camPt(cE, [px + 60, py - 20]), tm = s.t0 + 1.2, tb = LT("m905b") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcPartsArt, bgc: "#FFF6E6", set: (tt) => cs(tt, cE, { top: tableTop(tt, {}) }), verdict: ["BOTH ENDS JOINED: THE NAIL BECOMES A MAGNET", GOODC], tv: MK("v_both"), peek: false,
     over: (tt) => peek23("pip", "l", tt, tm, undefined, [[tm + .2, "thinking"]]) + peek23("basil", "r", tt, tb, undefined, [[LE("m905b") + .1, "cheer"], [LE("m905b") + 2.2, "sit"]], { achieved: true })
-      + smallPrint(tt, MK("one"), COVER_RULE, 0, MK("both") - .3) + smallPrint(tt, MK("both"), MOMENT_RULE, 0, MK("kw_coil") - .3) }); };
+      + lcPrint(tt, [[MK("one"), MK("both") - .4, COVER_RULE], [MK("both"), MK("v_both") - .4, MOMENT_RULE]]) }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "m907", sayId: "m906", who: "basil", n: "2 of 2", tab: "The electrical method: three steps", text: TL.lines.m907.text, keys: ["coil", "long", "piece", "wire", "connect", "ends", "battery.", "steel", "clips."], size: 50, y: 230, footer: FOOT, poses: [[LE("m907") + .2, "sit"]],
   under: markSteps(t, 1250, 930, .66 * spring(t, s.t0 + .4, .5)), extra: bd("pip", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
 

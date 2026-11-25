@@ -142,7 +142,7 @@ const sillPlant = (t) => TF(590, SR.sill - 6, .5, potPlant23(t, 0, -110, 1));
 const easelFolded = `<path d="M1470 430 L1440 700 M1486 430 L1500 700 M1478 420 L1476 700" stroke="#7A5230" stroke-width="10" stroke-linecap="round"/>`;
 // SR23: the live science room. o: bench (the props on the near bench), front, bug (a CKAT entry | false), hs (HOW STRONG? at its HOME, true;
 // o.hsO its options), bell (the bell's ring 0..1), easel (Momo's folded easel by the wall, true), dim
-const HSB = [1150, 852, .8];
+const HSB = [1150, 852, .7];   /* .7 (was .8): its title stays clear of the key-word shelf even in the closest camera (coordinator 25 Nov) */
 function SR23(t, o = {}, cam) { const sc = (window._S || {}).name, bd = o.bug === undefined ? CKAT[sc] : o.bug;
   let s = bg("sr23") + fan22(t, 620, 60) + fan22(t, 1320, 60) + sillPlant(t) + TF(SR.bell[0], SR.bell[1], .42, bell23(t, { ring: o.bell || 0 })) + (o.easel !== false ? easelFolded : "");
   const bugS = bd ? cricketAt(t, bd[0], bd[1], bd[2], { ...bd[3], ph: .4 }) : "";

@@ -233,6 +233,55 @@ const THUMBS = {
       { cut: 'coils', x: 560, y: 250, w: 700, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'MORE', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'TURNS?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP24 (fair tests; script section 7): Part 1 FAIR?! with Basil surprised, his two coiled nails (25 turns on the iron nail, 8 on the
+  // steel nail) over their trays and a red "?" between them, a teal-to-navy burst; Part 2 COUNT AGAIN?! with Pip surprised, a nail with its
+  // bunch of clips and the counts 9 · 8 · 9, an amber burst
+  ep24_1: { ep: 'ep24', part: 1, out: 'ep24/thumb_part1.jpg', old: 'ep23/thumb_part1.jpg',
+    bg: { c: ['#D8FFF6', '#14A8B0', '#08263E'], at: [860, 430], rays: .22 },
+    cuts: { pair: `trayClips22(1, 760, 1000, 1.6, { n: 20 }) + trayClips22(1, 1260, 1000, 1.6, { n: 20 }) + setup24(1, { x: 760, y: 900, k: 1.5, kind: 'iron', n: 25, hx: -230, hk: .55, tag: 'iron · 25 turns', tagS: 40 }) + setup24(1, { x: 1260, y: 900, k: 1.5, kind: 'steel', n: 8, hx: 230, hk: .55, tag: 'steel · 8 turns', tagS: 40 }) + TF(1010, 560, 1, '<circle r="80" fill="#fff" stroke="#D84A3A" stroke-width="12"/>' + T(0, 40, '?', 120, '#D84A3A'))` },
+    layers: [
+      { cut: 'pair', x: 540, y: 230, w: 720, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'FAIR?!', x: 1256, y: 200, size: 170, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep24_2: { ep: 'ep24', part: 2, out: 'ep24/thumb_part2.jpg', old: 'ep23/thumb_part2.jpg',
+    bg: { c: ['#FFF0C8', '#F0A01E', '#5A2A0E'], at: [860, 430], rays: .22 },
+    cuts: { count: `trayClips22(1, 900, 1010, 2.0, { n: 24 }) + setup24(1, { x: 900, y: 860, k: 1.6, kind: 'iron', n: 20, batt: 2, clips: 8, ck: 1.2, hx: -260, hk: .45 }) + TF(1260, 600, 1, tpill(0, 0, '9 · 8 · 9', 90, '#fff', '#3A2E52', { w: 700 }))` },
+    layers: [
+      { cut: 'count', x: 540, y: 240, w: 720, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'COUNT', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'AGAIN?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP25 (magnets everywhere): Part 1 STAY SHUT?! with Pip surprised, the fridge with its strip shown round the door's soft edge, an
+  // ice-blue burst; Part 2 IT FLOATS?! with Basil surprised, the floating train over its guideway with a glowing gap, a violet burst
+  ep25_1: { ep: 'ep25', part: 1, out: 'ep25/thumb_part1.jpg', old: 'ep24/thumb_part1.jpg',
+    bg: { c: ['#E6FBFF', '#3AA8E0', '#0A2A4E'], at: [860, 430], rays: .22 },
+    cuts: { fridge: `TF(1000, 1060, 1.3, fridgeStrip25(1)) + TF(1350, 560, 1, tpill(0, 0, 'magnet?', 64, '#fff', '#3A2E52', { w: 700 }))` },
+    layers: [
+      { cut: 'fridge', x: 560, y: 160, w: 680, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'STAY', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SHUT?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep25_2: { ep: 'ep25', part: 2, out: 'ep25/thumb_part2.jpg', old: 'ep24/thumb_part2.jpg',
+    bg: { c: ['#F0E6FF', '#8A4AE0', '#1A0E3E'], at: [860, 430], rays: .22 },
+    cuts: { train: `TF(1000, 760, 1.3, guideway25({ mags: true }) + maglev25(1, { gap: 46, mags: true })) + '<rect x="500" y="690" width="1000" height="16" fill="#FFF3B0" opacity=".9"/>'` },
+    layers: [
+      { cut: 'train', x: 470, y: 300, w: 800, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'IT', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FLOATS?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP26 (the CECL exam-skills special): Part 1 ONE MARK?! with Basil surprised, the Genie's lamp with the four CECL tiles, a navy-cyan
+  // burst; Part 2 ADD THE LINK! with Momo surprised, the four tiles with the green L glowing, a green burst
+  ep26_1: { ep: 'ep26', part: 1, out: 'ep26/thumb_part1.jpg', old: 'ep25/thumb_part1.jpg',
+    bg: { c: ['#DDF4FF', '#2A7AD0', '#0A1320'], at: [860, 430], rays: .22 },
+    cuts: { lamp: `TF(1000, 980, 1.0, genieLamp26(1, { rise: 1 })) + TF(1000, 1060, .75, ceclTiles26(1, {}))` },
+    layers: [
+      { cut: 'lamp', x: 520, y: 120, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'ONE', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MARK?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep26_2: { ep: 'ep26', part: 2, out: 'ep26/thumb_part2.jpg', old: 'ep25/thumb_part2.jpg',
+    bg: { c: ['#E6FFE8', '#2FA35A', '#0A2A14'], at: [860, 430], rays: .22 },
+    cuts: { tiles: `TF(1000, 760, 1.2, ceclTiles26(1, { on: [true, true, true, true] })) + '<rect x="1240" y="640" width="290" height="240" rx="30" fill="none" stroke="#FFF3B0" stroke-width="16"/>'` },
+    layers: [
+      { cut: 'tiles', x: 480, y: 300, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'ADD THE', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'LINK!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
   // P3 EP0, the mind map special (THUMBNAIL_V2.md; script section 7): Part 1 READ or MAKE?! with Pip surprised, a half-made hand-drawn map
   // (a pencil mid-branch) beside TheOneApp's crisp printed Magnets poster, a warm orange-to-brown burst; Part 2 1 WEEK LATER?! with Basil
   // surprised, two blank pages (only "Magnets" in the middle, a pencil above each) and a calendar card Mon · Tue · Thu, an amber burst

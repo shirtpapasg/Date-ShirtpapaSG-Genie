@@ -37,3 +37,7 @@ const DARE_CARDS = ["They stay on the nail", "They drop off"], DARE_LABEL = "Wha
 const NEXT_CARDS = ["Yes", "No"];
 // the fun-fact panel's pictures (common.js funFact items [mark, label, pic(t, w, h)])
 const FF = (items) => items.map(([m, l, d]) => [m, l, d]);
+
+// the small print INSIDE a look-closer (coordinator 25 Nov: "give every label its own clear space"): bottom centre, under the panel and
+// clear of the corner faces, ONE rule at a time; gone before the verdict lands there. items = [[t0, t1, txt], ...]
+const lcPrint = (t, items) => items.map(([t0, t1, txt]) => t < t0 || t > t1 + .4 ? "" : OP(1 - ramp(t, t1, .3), finePrint(t, t0, txt, 960, 1050))).join("");
