@@ -116,7 +116,11 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [900, 220], momo: [900, 220], p
     + (ring ? OP(st, bg("stage")) + OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 800 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 640 + bob * .6, 1.2) + TF(1700, 990, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
     + bd("momo", 420, 1076, 460, t, { in: LT(c) + .3, ...watchO(420, 1360) }) + bd("pip", 800, 1066, 440, t, { in: LT(c) + .4, ...watchO(800, 1360) })
-    + bd("basil", BC[0], BC[1], BC[2], t, { in: s.t0 + .1, rock: inT ? 2.2 : 0, poses: [[s.t0, "sit"], [W(b, "something") + .2, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 26]], nohop: true, ...(ring ? {} : { watch: 1480, look: 5 }) }) + (ring && st > .99 ? "" : OP(ring ? 1 - st : 1, magS))
+    // Basil stands on the counter with the magnet; while the countdown has the stage he pops out and stands at the side, big (SERIES_FORMAT 4:
+    // only the question's elements and one buddy at the side), then pops back onto the counter for the fix
+    + bd("basil", BC[0], BC[1], BC[2], t, { in: s.t0 + .1, out: tX - .25, poses: [[s.t0, "sit"], [W(b, "something") + .2, "thinking"]], nohop: true, watch: 1480, look: 5 })
+    + bd("basil", 1660, 1076, 440, t, { in: tX + .15, out: LE(c) + .2, flip: true, rock: inT ? 2.2 : 0, poses: [[tX, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 26]], nohop: true })
+    + bd("basil", BC[0], BC[1], BC[2], t, { in: LE(c) + .45, poses: [[LE(c) + .45, "sit"]], nohop: true, watch: 1480, look: 5 }) + (t > tX - .25 && t < LE(c) + .45 ? "" : magS)
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 960, 330, "+1", "arms crossed") + HUD(t); };
 
 /* 9 · Basil (still on the counter's left end, by the little whiteboard): "A whiteboard looks like plastic. So why does my magnet stick to it?"

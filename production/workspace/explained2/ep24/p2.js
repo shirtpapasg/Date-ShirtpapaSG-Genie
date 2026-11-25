@@ -144,7 +144,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 38, x: 62
 /* 11 · score hand, the sparrow (ONE push-in onto the sparrow on top of the door frame: the REVEAL spot); Pip's fun fact */
 SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = SPAT.liz, tc = W(L, "sparrow");
-  return lizReveal(t, s, L, sr(t, W0, { bench: benchTop(t, { xyO: {} }), bug: c }), c[0], c[1] - 10, tq, "It was on top of the door frame!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
+  return lizReveal(t, s, L, sr(t, W0, { bench: railing24 + benchTop(t, { xyO: {} }), bug: c }), c[0], c[1] - 10, tq, "It was on the railing, just outside the door!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103p", at: [1250, 400], w: 760, h: 440, items: [["ff_heart", "hundreds of beats a minute", ffHeart24], ["ff_count", "counted again and again", ffCount24]], cols: ["#E0453A", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
     + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103p") - .3, "sit"]] })
     + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_heart") + .2, "surprised"], [MK("ff_heart") + 1.6, "sit"], [LT("n1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };

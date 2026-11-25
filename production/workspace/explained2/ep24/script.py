@@ -201,7 +201,7 @@ SEQ2 = [
  # ---- 4 · Round 1: Momo's plan, X (one battery, ten turns) and Y (two batteries, twenty turns): fair? (the brief's quiz; ring 5 s)
  ("scene", "r1card"), ("wait", 1.2),
  ("scene", "r1"),
- ("say", "n401", H, "Round one. Here is Momo's plan. Set-up X has one battery and ten turns. Set-up Y has two batteries and twenty turns. Is her test fair? One, yes. Two, no, two things changed. Three, no, use a steel nail. Show me your fingers.", {"pre": .3}),
+ ("say", "n401", H, "Round one. Momo wants to find out if more batteries make an electromagnet stronger. Set-up X has one battery and ten turns. Set-up Y has two batteries and twenty turns. Is her test fair? One, yes. Two, no, two things changed. Three, no, use a steel nail. Show me your fingers.", {"pre": .3}),
  *LOCK("r1", 5.0),
  ("say", "n402", H, "Locked in!", {"pre": 0, "post": .2}),
  ("say", "n403m", M, "One! X and Y are both electromagnets, so it is a fair race.", {"pre": .5, "post": .4}),
@@ -271,7 +271,7 @@ SEQ2 = [
  ("scene", "final"),
  ("say", "n1101", H, "Show me your score hand! Two fingers or more? You beat the Buddies. Three fingers? High five!", {"pre": .5, "post": .5}),
  ("scene", "liz"),
- ("say", "n1102", H, "Did you spot the sparrow? It was on top of the door frame!", {"pre": .4, "post": .4}),
+ ("say", "n1102", H, "Did you spot the sparrow? It was on the railing, just outside the door!", {"pre": .4, "post": .4}),
  ("say", "n1103p", P, "Here is a fun fact! A sparrow's heart beats hundreds of times in one minute! Scientists count it again and again, to be sure.", {"pre": .3, "post": .3, "kw": [["ff_in", "fun"], ["ff_heart", "heart"], ["ff_count", "scientists"]]}),
  ("say", "n1104", H, "Tell someone at home!", {"pre": .3, "post": .5}),
  # ---- 12 · the dare for Episode 25 (Pip's HDB kitchen: the fridge door swings shut; the cards BEFORE any answer)

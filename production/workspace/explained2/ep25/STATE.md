@@ -38,6 +38,6 @@ Original series music (no Kampong Walk), quiet journeys; 5 s rings, 6 s Showdown
 - Render / decode / countdowns / loudness: see the end of this file.
 
 ## Changed from the script (and why)
-1. The whiteboard is "the little board on Pip's kitchen wall" (one room for Part 1; changed before recording, script md updated).
-2. Part 2: `usbridge` and `stridertip` cut, Round 1's question and Pip's answer line shortened (length at the EP1-10 pace).
+1. The whiteboard is drawn on Pip's kitchen wall (one room for Part 1); the recorded lines keep "Momo's magnet" and "the board in my study corner".
+2. Part 2: `usbridge` and `stridertip` cut (Round 1's question and Pip's answer keep their first, recorded wording).
 3. The HOLD ON!: Basil stands on the kitchen counter to reach the window frame (the magnet at his raised paw touches the frame's corner).

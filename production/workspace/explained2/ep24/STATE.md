@@ -42,7 +42,6 @@ p1.js, p2.js, run_both.sh (renders both parts under the shared lock, retrying a 
 ## Changed from the script (and why)
 1. Part 1: Momo's "Your iron nail picked up a lot more clips" cut (`momoclips`: the dip shows it); the woodlouse tip given to Pip, and "Now only
    the magnet is different. That is fair!" to Pip (Pip had only two lines); Round 1's question shortened (the dare was read 40 s earlier).
-2. Part 2: came out at 5:46.8, so `sparrowtip` and `basilfix` were cut (5:39.5); the sparrow is revealed "on top of the door frame" (the room
-   has no corridor railing in view); Round 1's question begins "Here is Momo's plan."
+2. Part 2: came out at 5:46.8, so `sparrowtip` and `basilfix` were cut (5:39.5); the sparrow is revealed on a corridor railing seen through the open door (drawn for the reveal; the 280-300 s span re-rendered and spliced in after the first render showed it on the door frame).
 3. Basil's fair iron-or-steel test is set up but its result is never shown (script section 3, Facts 1).
 4. The magnet race: each bar magnet hangs on a short thread from its owner's paw (nothing floats), drawn in front of the buddies.

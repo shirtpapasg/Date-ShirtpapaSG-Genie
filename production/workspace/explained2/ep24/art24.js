@@ -103,10 +103,12 @@ const WLAT = { intro: [760, 636, .32, {}], waitw: [1012, 634, .28, { dir: -1 }],
 ['cold', 'lasttime', 'back', 'today', 'game'].forEach((k) => { WLAT[k] = WLAT.intro; });
 // Part 2: the sparrow (intro: on the windowsill; revealed on top of the door frame)
 const SPAT = { intro: [560, 522, .34, { peck: true }], r1ans: [300, 262, .3, { dir: -1 }], lc1q: [880, 166, .3, {}], show: [470, 150, .3, { dir: -1 }], fix: [470, 150, .3, { dir: -1 }],
-  lc2q: [1180, 254, .3, {}], crane: [200, 522, .32, { peck: true }], liz: [1640, 118, .36, {}] };
+  lc2q: [1180, 254, .3, {}], crane: [200, 522, .32, { peck: true }], liz: [1615, 464, .38, {}] };
 ['lab', 'game'].forEach((k) => { SPAT[k] = SPAT.intro; });
 // SR24: EP23's science room (SR23) without its cricket or HOW STRONG?, with this episode's board at its home and the hidden animal
 const HSB24 = [1150, 852, .7];
+// the corridor railing seen through the open classroom door (Part 2's reveal: "on the railing, just outside the door")
+const railing24 = `<path d="M1488 474 H1732" stroke="#8C98A4" stroke-width="10" stroke-linecap="round"/><path d="M1488 474 H1732" stroke="#C9D2DA" stroke-width="4"/>` + [1500, 1560, 1620, 1680, 1724].map((x) => `<path d="M${x} 474 V640" stroke="#8C98A4" stroke-width="7"/>`).join("") + `<path d="M1488 560 H1732" stroke="#8C98A4" stroke-width="5"/>`;
 function SR24(t, o = {}, cam) { const sc = (window._S || {}).name, A = PART === 1 ? WLAT : SPAT, bd = o.bug === undefined ? A[sc] : o.bug;
   const ani = bd ? (PART === 1 ? woodlouseAt(t, bd[0], bd[1], bd[2], bd[3]) : sparrowAt(t, bd[0], bd[1], bd[2], bd[3])) : "";
   const board = o.board === false ? "" : (PART === 1 ? fairBoard24(t, HSB24[0], HSB24[1], HSB24[2], o.boardO || {}) : planBoard24(t, HSB24[0], HSB24[1], HSB24[2], o.boardO || {}));

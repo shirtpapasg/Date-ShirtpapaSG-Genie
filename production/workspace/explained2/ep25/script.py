@@ -134,12 +134,12 @@ SEQ1 = [
  # ---- 9 · Basil: why does a magnet stick to a whiteboard? [LOOK CLOSER] the steel sheet (7.12a strip); MAGNETIC WHITEBOARD (Momo); the
  #          doorstop: MAGNETIC DOORSTOP (Basil); Mark Sentence 2 (Basil): 7.12a doorstop
  ("scene", "lc2q"),
- ("say", "m901b", B, "A whiteboard looks like plastic. So why does my magnet stick to it?", {"pre": .5, "post": .3}),
+ ("say", "m901b", B, "A whiteboard looks like plastic. So why does Momo's magnet stick?", {"pre": .5, "post": .3}),
  ("scene", "lchome"),
  ("say", "m902", H, "Look closer. Under the white writing surface is a thin sheet of steel. The magnet is attracted to the steel sheet.", {**LC, "pre": 1.2, "post": .4, "kw": [["layers", "under"], ["sheet", "thin"], ["stick", "magnet", 0]]}),
  ("mark", "strip"),
  ("say", "m903s", H, BOARD, {"pre": .4, "hold": STRIP + .5}),
- ("say", "m904m", M, "A magnetic whiteboard is a whiteboard with a steel sheet under its writing surface, such as the little board on Pip's kitchen wall!", {"pre": .3, "kw": [["kw_magnetic_whiteboard", "magnetic", 0]]}),
+ ("say", "m904m", M, "A magnetic whiteboard is a whiteboard with a steel sheet under its writing surface, such as the board in my study corner!", {"pre": .3, "kw": [["kw_magnetic_whiteboard", "magnetic", 0]]}),
  HOLD("kw_magnetic_whiteboard"),
  ("say", "m905", H, "And look at Pip's bedroom door. A gust of wind blows in, but the door does not slam. The magnet on the doorstop holds the door's steel plate.", {**LC, "pre": .5, "post": .4, "kw": [["door", "look"], ["gust", "gust"], ["held", "magnet"]]}),
  ("say", "m906b", B, "A magnetic doorstop is a doorstop with a magnet that holds the door open, such as the one by Pip's bedroom door!", {"pre": .3, "kw": [["kw_magnetic_doorstop", "magnetic", 0]]}),
@@ -183,7 +183,7 @@ SEQ2 = [
  # ---- 4 · Round 1: the aluminium clips (the brief's quiz; 5 s ring)
  ("scene", "r1card"), ("wait", 1.2),
  ("scene", "r1"),
- ("say", "n401", H, "Round one. Basil swaps every steel clip for an aluminium clip. What happens now? One, the fish are caught as before. Two, no fish can be caught. Three, the fish are pushed away. Show me your fingers.", {"pre": .3}),
+ ("say", "n401", H, "Round one. Basil swaps every steel clip on the fish for an aluminium clip. What happens now? One, the fish are caught as before. Two, no fish can be caught. Three, the fish are pushed away from the rod. Show me your fingers.", {"pre": .3}),
  *LOCK("r1", 5.0),
  ("say", "n402", H, "Locked in!", {"pre": 0, "post": .2}),
  ("say", "n403b", B, "One! A clip is a clip. I will catch them all!", {"pre": .5, "post": .4}),
@@ -193,7 +193,7 @@ SEQ2 = [
  # ---- 5 · the answer
  ("scene", "r1ans"),
  ("say", "n501", H, "The answer is two! Did you show two fingers? Put one finger up!", {"pre": .4, "post": .4, "kw": [["ansglow", "two", 0], ["coin1", "one"]]}),
- ("say", "n502p", P, "A magnet does not attract aluminium, and it does not push it away either.", {"pre": .3, "post": .4, "kw": [["still", "attract"], ["steelfish", "either"]]}),
+ ("say", "n502p", P, "A magnet does not attract aluminium, and it does not push it away. With steel clips, the game works again!", {"pre": .3, "post": .4, "kw": [["still", "attract"], ["steelfish", "steel"]]}),
  # ---- 6 · Basil: why an electromagnet? [LOOK CLOSER] the scrapyard crane; Mark Sentence 1 (Momo): 7.12a crane
  ("scene", "lc1q"),
  ("say", "n601b", B, "Why does a scrapyard crane use an electromagnet? Why not a big normal magnet?", {"pre": .5, "post": .3}),

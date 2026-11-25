@@ -309,7 +309,7 @@ As EP23 (`nykScene`): "Say it with us!" (all three), 0.8 s, "Ready? One! two!" 1
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 0:39.0 | **`r1card`** ROUND 1. | (nobody) |  | The brief's quiz: a new set-up, the same skill. |
-| 0:40.0 | **`r1`** (`lockN`): THREE big numbered picture cards: 1 *Yes, it is fair* (X and Y with a green tick) · 2 *No, two things changed* (X and Y, the batteries and the coils outlined red) · 3 *No, use a steel nail* (a steel nail with a "?"); the ring's picture: X (one battery, ten turns) and Y (two batteries, twenty turns) side by side over two trays; clue labels ON TOP: *X: 1 battery · 10 turns* · *Y: 2 batteries · 20 turns* · *the same iron nails*; the 5 s ring. *Momo worried in the ring.* | Heart: "Round one. Here is Momo's plan. Set-up X has one battery and ten turns. Set-up Y has two batteries and twenty turns. Is her test fair? One, yes. Two, no, two things changed. Three, no, use a steel nail. Show me your fingers." | Ticks, bell, stamp under silence. |  |
+| 0:40.0 | **`r1`** (`lockN`): THREE big numbered picture cards: 1 *Yes, it is fair* (X and Y with a green tick) · 2 *No, two things changed* (X and Y, the batteries and the coils outlined red) · 3 *No, use a steel nail* (a steel nail with a "?"); the ring's picture: X (one battery, ten turns) and Y (two batteries, twenty turns) side by side over two trays; clue labels ON TOP: *X: 1 battery · 10 turns* · *Y: 2 batteries · 20 turns* · *the same iron nails*; the 5 s ring. *Momo worried in the ring.* | Heart: "Round one. Momo wants to find out if more batteries make an electromagnet stronger. Set-up X has one battery and ten turns. Set-up Y has two batteries and twenty turns. Is her test fair? One, yes. Two, no, two things changed. Three, no, use a steel nail. Show me your fingers." | Ticks, bell, stamp under silence. |  |
 | 1:02.5 |  | Heart: "Locked in!" |  |  |
 | 1:04.0 | *Momo talking (her pick).* | Momo: "One! X and Y are both electromagnets, so it is a fair race." |  |  |
 | 1:09.0 | *Pip talking, pointing at Basil's steel nail on the bench.* | Pip: "Three. Basil's steel nail is still here. We should use it." |  |  |
@@ -375,7 +375,7 @@ As EP23 (`nykScene`): "Say it with us!" (all three), 0.8 s, "Ready? One! two!" 1
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 5:09.0 | **`final`**: the score hand; 3 : 0. | Heart: "Show me your score hand! Two fingers or more? You beat the Buddies. Three fingers? High five!" |  |  |
-| 5:15.0 | **`liz`**: one push-in onto the sparrow on the corridor railing outside the door; the black ring. | Heart: "Did you spot the sparrow? It was on top of the door frame!" | A chirp. |  |
+| 5:15.0 | **`liz`**: one push-in onto the sparrow on the corridor railing outside the door; the black ring. | Heart: "Did you spot the sparrow? It was on the railing, just outside the door!" | A chirp. |  |
 | 5:20.0 | Fun-fact pictures: a sparrow with a heart that beats fast (*hundreds of beats in one minute!*), beside a child's heart (*yours: about eighty*); a scientist counting again (*count, count, count*). *Pip talking, excited; surprised.* | Pip: "Here is a fun fact! A sparrow's heart beats hundreds of times in one minute! Scientists count it again and again, to be sure." |  |  |
 | 5:28.0 |  | Heart: "Tell someone at home!" |  |  |
 
