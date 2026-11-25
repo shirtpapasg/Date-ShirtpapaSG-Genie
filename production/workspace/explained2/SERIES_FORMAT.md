@@ -488,6 +488,11 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   bed, low and ducked under speech, crossfading between places (rain on the window, a supermarket's murmur, laughter, scanner beeps
   and door chime; a classroom's fans and distant school bell; a pond's frogs and trickle; birds and distant traffic outdoors), plus
   foley on every action (wheels, clinks, zips, drops, knocks). Use the repo's sound libraries or synthesize; no copyrighted downloads.
+- **Background music from EP23 on: the ORIGINAL series music (teacher, 2026-11-25: "I also like the music for episode 1 to 10. For now we keep. For future episodes we use the original music.").**
+  - EP0 and EP16–EP22, already made with Kampong Walk, keep it.
+  - EP23 onwards uses the series' own beds again, as in EP1–EP10 (song.js: the game groove, the calm bed, the micro-world pad). Do NOT run add_lofi.py (removed from finish.sh).
+  - Keep the 24 Nov fix for "disjointed": a bed never restarts its beat mid-flow (one bar clock per part, so a bed resumes on the beat), and every change between beds or around a countdown is a short crossfade (0.6–1.0 s), never a hard cut.
+  - The rule below about Kampong Walk applies only to the episodes already made with it.
 - **Background music: Kampong Walk (teacher, 2026-11-24: "you may include the same music inside the 'lofi' into the youtube videos.
   I love the kampong walk music."; chosen: TheOneApp, Explained only, Kampong Walk only; and on EP19's old beds: they "sounded
   disjointed").** The app's lofi tune Kampong Walk (`music/kampong_walk.wav`, rendered from the app's own `tunes.js`) is the ONE
