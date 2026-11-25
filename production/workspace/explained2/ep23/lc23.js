@@ -100,7 +100,7 @@ function coilJourney(t, s) { const m = MK, tL = m("jlie"), tC = m("jcoil"), tOn 
   // the table top: a wide white field running to the vanishing point
   o += `<path d="M-200 ${V[1]} H2120 V1200 H-200z" fill="#F2EDE4"/>` + [...Array(13)].map((_, i) => `<path d="M${n2(V[0] + (i - 6) * 30)} ${V[1]} L${n2(V[0] + (i - 6) * 520)} 1200" stroke="#DED6C6" stroke-width="2" opacity=".7"/>`).join("");
   // the tray of steel clips: a range of silver loops just past your tip
-  const P2 = depth(11); o += trayClips22(t, P2[0] + 30, P2[1] + 46, .95, { n: t >= tJ && t < tD + .4 ? 14 : 24 });
+  const P2 = depth(11), TRY = P2[1] + 150; o += trayClips22(t, P2[0] + 30, TRY, 1.1, { n: t >= tJ && t < tD + .4 ? 14 : 24 });   // the tray well below your tip: the clips are seen to jump UP and to fall back DOWN into it
   // YOU: your body
   o += `<path d="M${n2(V[0] - hw(1.15))} 1100 L${n2(P2[0] - hw(11))} ${n2(P2[1])} L${n2(V[0])} ${n2(P2[1] - 6)} L${n2(P2[0] + hw(11))} ${n2(P2[1])} L${n2(V[0] + hw(1.15))} 1100z" fill="#8E979F" stroke="#454C54" stroke-width="5"/>`
     + `<path d="M${n2(V[0] - hw(1.15) * .45)} 1100 L${n2(V[0] - hw(11) * .4)} ${n2(P2[1])}" stroke="#D8DEE3" stroke-width="16" opacity=".8"/>`;
@@ -124,7 +124,7 @@ function coilJourney(t, s) { const m = MK, tL = m("jlie"), tC = m("jcoil"), tOn 
   if (t >= tOff - .4 && t < tG) o += OP(hA, TF(HX, HY - 170, 1.2, hand15({ curl: .62, sleeve: "#8A949E", sleeveD: "#5A6470" }), 90));
   // the pull: a gold ring glowing at your tip (only while on); the clips jump and cling, then drop when it is off
   if (gl > .01 && t >= tP - .6) o += OP(gl * clamp((t - tP + .6) / .6), `<circle cx="${P2[0]}" cy="${P2[1]}" r="${n2(46 + 8 * Math.sin(t * 7))}" fill="none" stroke="#FFD34A" stroke-width="10"/><circle cx="${P2[0]}" cy="${P2[1]}" r="${n2(80 + 14 * Math.sin(t * 5))}" fill="none" stroke="#FFF3B0" stroke-width="5" opacity=".6"/>`);
-  if (t >= tJ - .6 && t < tD + 1.2) { const sh = t < tJ ? 3 * Math.sin(t * 60) : 0; o += clipBunch(t, P2[0] + sh, P2[1] + 4, 8, { k: 1.6, t0: tJ, from: [P2[0] + 40, P2[1] + 60], drop: tD, to: [P2[0] + 30, P2[1] + 50] }); }
+  if (t >= tJ - .6 && t < tD + 1.2) { const sh = t < tJ ? 3 * Math.sin(t * 60) : 0; o += clipBunch(t, P2[0] + sh, P2[1] + 4, 8, { k: 1.6, t0: tJ, from: [P2[0] + 40, TRY - 50], drop: tD, to: [P2[0] + 30, TRY - 40] }); }
   // your flat round head, just under the bottom of the frame
   o += `<path d="M560 1080 Q960 ${n2(1040 + 4 * Math.sin(t * 2))} 1360 1080z" fill="#A7B0B8" stroke="#454C54" stroke-width="6"/>`;
   return JOLT(t, [tOn + .05, tJ + .25, tOff + .1], o, 12); }

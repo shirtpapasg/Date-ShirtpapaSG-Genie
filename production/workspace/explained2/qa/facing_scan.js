@@ -10,8 +10,8 @@
 //    function whose name looks like an animal, person or vehicle) so its output is tagged, steps render(t) every dt seconds (default
 //    0.1 s; no screenshots) and measures each tagged drawing: its centre in camera space (a CAM() zoom or pan is taken out) and whether
 //    it is mirrored on screen (the sign of its transform's x scale: TF(x, y, -k, art, rot, k) mirrors it). Both are taken in the frame
-//    of what carries the drawing (the nearest transformed group at least 3x its area: a camera, a look-closer world, a card sliding in).
-//  * BACKWARDS: an annotated drawing whose centre moves faster than 50 px/s, for at least 60 px and 0.8 s, the way its tail points
+//    of what carries the drawing (the nearest transformed group at least 2x its area: a camera, a look-closer world, a card sliding in).
+//  * BACKWARDS: an annotated drawing whose centre moves faster than 25 px/s, for at least 60 px and 0.8 s, the way its tail points
 //    (quicker jumps are cuts, whip pans and cards sliding in, not travel). Listed with
 //    the time span, the 10 s render chunks to redo, the drawing and where it is called from. Exit code 1 when any.
 //  * EYE REVIEW: unannotated animal/person/vehicle functions that travel (annotate them), and buddies whose x travels inside a scene
@@ -26,7 +26,7 @@ const path = require('path'), fs = require('fs'), http = require('http');
 const ROOT = path.resolve(__dirname, '..');
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const [ep, P = 1] = args.filter((a, i) => !a.startsWith('--') && !['--dt', '--from', '--to'].includes(args[i - 1]));
-const DIR = path.resolve(ROOT, ep), DT = +opt('--dt', .1), VMIN = 50, DMIN = 60, TMIN = .8, ALL = args.includes('--all'), MOVERS = args.includes('--movers');
+const DIR = path.resolve(ROOT, ep), DT = +opt('--dt', .1), VMIN = 25, DMIN = 60, TMIN = .8, ALL = args.includes('--all'), MOVERS = args.includes('--movers');
 const CREATURE = /fish|bird|mynah|myna|pigeon|crow|sparrow|swallow|heron|egret|bus|bike|cycl|car$|train|ship|boat|mosq|fly|flie|bee|bfly|butter|moth|dragon|dfly|cicada|beetle|ant\d|^ant|weaverAnt|frog|tadpole|cat\d|^cat$|dog|hen|chick|snail|worm|lizard|gecko|kid|child|person|shopper|walk|swim|turtle|roach|mantis|hopper|caterp|larva|wrig|spider|turtle|kids|auntie|uncle|plane/i;
 
 // the scripts page.html loads, in order
@@ -98,10 +98,10 @@ if (process.env.STATIC) { process.exit(staticScan() ? 1 : 0); }
       const one = (el, fn, cs, face) => { if (el.closest('defs,clipPath,mask,pattern,symbol,marker')) return; const r = el.getBoundingClientRect(); if (!(r.width > 2 && r.height > 2)) return;
         if (r.right < -200 || r.left > 2120) return; let op = 1; for (let e = el; e && e !== dyn; e = e.parentNode) { const a = e.getAttribute && e.getAttribute('opacity'); if (a !== null && a !== undefined && a !== '') op *= +a; if (e.getAttribute && e.getAttribute('display') === 'none') op = 0; }
         if (op < .05) return; if (!face && el.querySelector('[data-face]')) return;   // a picture or helper that holds an annotated drawing: that one is measured
-        // measured in the frame of what carries it: the nearest enclosing group at least 3x its area (a camera group, a look-closer
+        // measured in the frame of what carries it: the nearest enclosing group at least 2x its area (a camera group, a look-closer
         // world, a picture card sliding in), else the nearest CAM() group, else the scene's baked background picture. So a camera pan
         // or zoom, or a card sliding in with a creature on it, is not travel; the creature moving across its scene is.
-        let cam = null; for (let e = el.parentNode; e && e !== dyn; e = e.parentNode) { if (e.tagName !== 'g' || !e.getAttribute('transform')) continue; const q = e.getBoundingClientRect(); if (q.width * q.height >= 3 * r.width * r.height) { cam = e; break; } }
+        let cam = null; for (let e = el.parentNode; e && e !== dyn; e = e.parentNode) { if (e.tagName !== 'g' || !e.getAttribute('transform')) continue; const q = e.getBoundingClientRect(); if (q.width * q.height >= 2 * r.width * r.height) { cam = e; break; } }
         if (!cam) cam = (el.parentNode.closest && el.parentNode.closest('[data-cam]')) || bgRef; let x = r.left + r.width / 2, y = r.top + r.height / 2;
         let o = el; while (o.children.length === 1 && o.children[0].tagName === 'g') o = o.children[0]; let m = o.getScreenCTM();
         if (cam) { const ci = cam.getScreenCTM().inverse(); const pt = new DOMPoint(x, y).matrixTransform(ci); x = pt.x; y = pt.y; m = ci.multiply(m); }

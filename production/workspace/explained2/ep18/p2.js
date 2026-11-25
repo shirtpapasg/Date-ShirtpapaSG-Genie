@@ -124,14 +124,14 @@ SC.mark2 = (t, s) => markScene(t, s, { id: "d906", sayId: "d905", who: "pip", n:
    honeybee on the rim of the lime plant's pot */
 const camClose = (t) => { const a = eio((t - MK("butterfly") + 1.5) / 1.6) * (1 - eio((t - LT("d1003") + .4) / 1.4)), z = lerp(1.05, 2.1, a); return [z, lerp(1000, (2.1 * LT_EGG[0] - 960) / 1.1, a), lerp(560, (2.1 * LT_EGG[1] - 640) / 1.1, a)]; };
 const bflyPath = (t) => { const tb = MK("butterfly"), u = clamp((t - tb + 2.4) / 2.4), lx = LT_EGG[0] - 40, ly = LT_EGG[1] - 30; if (u < 1) return { x: lerp(1900, lx, eo(u)), y: lerp(160, ly, eo(u)) + 60 * Math.sin(u * 9) * (1 - u), k: .42, rot: 0 };
-  const lv = clamp((t - MK("fewer") + 3) / 2.5); return { x: lx + 700 * lv * lv, y: ly - 300 * lv, k: .42, rot: 0 }; };
+  const lv = clamp((t - MK("fewer") + 3) / 2.5); return { x: lx + 700 * lv * lv, y: ly - 300 * lv, k: .42, rot: 0, fl: lv > 0 ? -1 : 1 }; };   // fl: it flies off to the RIGHT, so the butterfly (drawn facing left) is mirrored (teacher 25 Nov 2026, SERIES_FORMAT 6x)
 SC.closure = (t, s) => { window._BUBAT = { momo: [960, 230] }; const tl = MK("lay"), bp = bflyPath(t), egg = t >= tl + .3, tf = MK("fewer"), tp = MK("plant"), th = MK("theme"), tb = tp + .5;
   const curl = t > tl - .4 && t < tl + 1 ? Math.sin(Math.PI * (t - tl + .4) / 1.4) : 0;
   const fly = bflySide(t, { slow: t > MK("butterfly") && t < tf - 3 });
   const world = VGE(t, { egg: egg ? 1 : false, items: "" }, camClose(t)), bfx = camPt(camClose(t), [bp.x, bp.y]), zk = camClose(t)[0];
   const model = t >= tf - .6 ? OP(1 - ss(tb + .4, tb + .8, t), TF(1000, 560, .95 * spring(t, tf - .6, .45), fewerModel(t, tf, tp))) : "";
   const theme = t >= tb ? TF(lerp(-500, 980, eo((t - tb) / .8)), 1076, .95, themeBoard(t, [0, 1, 2].map((i) => ss(th - .9 + .45 * i, th - .6 + .45 * i, t)))) : "";
-  return world + TF(bfx[0], bfx[1], bp.k * zk, `<g transform="rotate(${n2(-20 * curl)})">${fly}</g>`) + (t >= tl && t < tl + 2.5 ? TF(bfx[0] - 60 * zk, bfx[1] + 30 * zk, spring(t, tl, .4), tpill(0, 0, "one tiny egg", 36, "#fff", P.ink, { w: 700 })) : "")
+  return world + TF(bfx[0], bfx[1], bp.k * zk * (bp.fl || 1), `<g transform="rotate(${n2(-20 * curl)})">${fly}</g>`, 0, bp.fl < 0 ? bp.k * zk : undefined) + (t >= tl && t < tl + 2.5 ? TF(bfx[0] - 60 * zk, bfx[1] + 30 * zk, spring(t, tl, .4), tpill(0, 0, "one tiny egg", 36, "#fff", P.ink, { w: 700 })) : "")
     + (t >= tf - .6 ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.35 * ss(tf - .6, tf, t))}"/>` : "") + model + theme
     + strip15(t, "d1003", "Life cycles ensure that living things of the same kind can continue to live on Earth.", 150, { keys: ["ensure", "same", "kind", "continue"], maxW: 1150, x: 720, size: 46 })
     + bd("momo", 230, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tl - .3, "pointing"], [tl + 2.2, "sit"]] })

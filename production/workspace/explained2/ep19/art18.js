@@ -187,7 +187,7 @@ function VDK(t, o = {}, cam) { let s = bg("deck18");
   if (o.items) s += o.items;
   s += table18();
   // a pigeon walks past, now and then
-  { const u = (t / 16) % 1, x = 2150 - 2600 * u, st = Math.sin(t * 9); if (x > -100 && x < 2100) s += TF(x, 1040 + 3 * Math.abs(st), 1, `<ellipse cx="0" cy="-30" rx="40" ry="26" fill="#8A90A8"/><circle cx="-36" cy="-58" r="16" fill="#7A809A"/><circle cx="-40" cy="-60" r="3.5" fill="#E0453A"/><path d="M-52 -56 l-10 4 l10 3" fill="#E9C46A"/><path d="M-4 -40 Q20 -50 40 -24" fill="#6E7490"/><path d="M${n2(-8 + 6 * st)} -6 v10 M${n2(8 - 6 * st)} -6 v10" stroke="#E0786A" stroke-width="4"/>`); }
+  { const u = (t / 16) % 1, x = 2150 - 2600 * u, st = Math.sin(t * 9); if (x > -100 && x < 2100) s += TF(x, 1040 + 3 * Math.abs(st), 1, `<!--FACES:left pigeon--><ellipse cx="0" cy="-30" rx="40" ry="26" fill="#8A90A8"/><circle cx="-36" cy="-58" r="16" fill="#7A809A"/><circle cx="-40" cy="-60" r="3.5" fill="#E0453A"/><path d="M-52 -56 l-10 4 l10 3" fill="#E9C46A"/><path d="M-4 -40 Q20 -50 40 -24" fill="#6E7490"/><path d="M${n2(-8 + 6 * st)} -6 v10 M${n2(8 - 6 * st)} -6 v10" stroke="#E0786A" stroke-width="4"/>`); }
   if (o.front) s += o.front;
   if (o.dim) s += `<rect x="-200" y="-120" width="2320" height="1320" fill="${P.night}" opacity="${n2(o.dim)}"/>`;
   return cam ? CAM(s, cam[0], cam[1], cam[2]) : s; }

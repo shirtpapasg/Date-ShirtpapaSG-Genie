@@ -235,7 +235,7 @@ BG.void17 = () => { let s = `<rect x="-200" y="-120" width="2320" height="1320" 
 function VD(t, o = {}, cam) { let s = bg("void17");
   // the ceiling fan turning; a pigeon walking past
   s += `<path d="M960 86 V130" stroke="#6E6A60" stroke-width="8"/>` + TF(960, 140, 1, `<ellipse rx="210" ry="12" fill="#8C8272" transform="scale(${n2(Math.cos(t * 12))} 1)"/><ellipse rx="12" ry="210" fill="#8C8272" transform="scale(1 ${n2(.06)})"/><circle r="22" fill="#6E6A60"/>`);
-  { const u = (t / 14) % 1, x = 2100 - 2500 * u, st = Math.sin(t * 9); s += TF(x, 1010 + 3 * Math.abs(st), 1, `<ellipse cx="0" cy="-30" rx="40" ry="26" fill="#8A90A8"/><circle cx="-36" cy="-58" r="16" fill="#7A809A"/><circle cx="-40" cy="-60" r="3.5" fill="#E0453A"/><path d="M-52 -56 l-10 4 l10 3" fill="#E9C46A"/><path d="M-4 -40 Q20 -50 40 -24" fill="#6E7490"/><path d="M${n2(-8 + 6 * st)} -6 v10 M${n2(8 - 6 * st)} -6 v10" stroke="#E0786A" stroke-width="4"/>`); }
+  { const u = (t / 14) % 1, x = 2100 - 2500 * u, st = Math.sin(t * 9); s += TF(x, 1010 + 3 * Math.abs(st), 1, `<!--FACES:left pigeon--><ellipse cx="0" cy="-30" rx="40" ry="26" fill="#8A90A8"/><circle cx="-36" cy="-58" r="16" fill="#7A809A"/><circle cx="-40" cy="-60" r="3.5" fill="#E0453A"/><path d="M-52 -56 l-10 4 l10 3" fill="#E9C46A"/><path d="M-4 -40 Q20 -50 40 -24" fill="#6E7490"/><path d="M${n2(-8 + 6 * st)} -6 v10 M${n2(8 - 6 * st)} -6 v10" stroke="#E0786A" stroke-width="4"/>`); }
   if (o.items) s += o.items;
   if (o.front) s += o.front;
   if (o.dim) s += `<rect x="-200" y="-120" width="2320" height="1320" fill="${P.night}" opacity="${n2(o.dim)}"/>`;

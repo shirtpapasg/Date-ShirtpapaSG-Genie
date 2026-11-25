@@ -187,7 +187,7 @@ function VDK(t, o = {}, cam) { let s = bg("deck18");
   if (o.items) s += o.items;
   s += table18();
   // a pigeon walks past, now and then
-  { const u = (t / 16) % 1, x = 2150 - 2600 * u, st = Math.sin(t * 9); if (x > -100 && x < 2100) s += TF(x, 1040 + 3 * Math.abs(st), 1, `<ellipse cx="0" cy="-30" rx="40" ry="26" fill="#8A90A8"/><circle cx="-36" cy="-58" r="16" fill="#7A809A"/><circle cx="-40" cy="-60" r="3.5" fill="#E0453A"/><path d="M-52 -56 l-10 4 l10 3" fill="#E9C46A"/><path d="M-4 -40 Q20 -50 40 -24" fill="#6E7490"/><path d="M${n2(-8 + 6 * st)} -6 v10 M${n2(8 - 6 * st)} -6 v10" stroke="#E0786A" stroke-width="4"/>`); }
+  { const u = (t / 16) % 1, x = 2150 - 2600 * u, st = Math.sin(t * 9); if (x > -100 && x < 2100) s += TF(x, 1040 + 3 * Math.abs(st), 1, `<!--FACES:left pigeon--><ellipse cx="0" cy="-30" rx="40" ry="26" fill="#8A90A8"/><circle cx="-36" cy="-58" r="16" fill="#7A809A"/><circle cx="-40" cy="-60" r="3.5" fill="#E0453A"/><path d="M-52 -56 l-10 4 l10 3" fill="#E9C46A"/><path d="M-4 -40 Q20 -50 40 -24" fill="#6E7490"/><path d="M${n2(-8 + 6 * st)} -6 v10 M${n2(8 - 6 * st)} -6 v10" stroke="#E0786A" stroke-width="4"/>`); }
   if (o.front) s += o.front;
   if (o.dim) s += `<rect x="-200" y="-120" width="2320" height="1320" fill="${P.night}" opacity="${n2(o.dim)}"/>`;
   return cam ? CAM(s, cam[0], cam[1], cam[2]) : s; }
@@ -357,7 +357,7 @@ function rainJourney(t, s) { const m = MK, tP = m("jpond"), tT = m("jtadpole"), 
     o += OP(eg, TF(1080, 560 + dy, 3.2, eggClump(t, { n: Math.round(14 + 40 * eg), r: 11, R: 92 })));
     for (let i = 0; i < 5; i++) { const k = ss(tT + .2 * i, tT + .2 * i + .8, t); if (k < .02 || i === 0) continue; const u = ((t - tT) * .07 + hash(i, 3)) % 1; o += OP(k * (1 - up), TF(300 + 1300 * u, 380 + 420 * hash(i, 9) + 30 * Math.sin(t * 2 + i) + dy, 1.6, tadpole16(t, 0, { ph: i }), 10 * Math.sin(t * 3 + i))); }
     if (t >= tT) { const st = t < tT + 2.6 ? 0 : t < tT + 4.6 ? 1 : 2, gx = lerp(1300, 900, ss(tT, tT + 2, t)), k = ss(tT, tT + .8, t);
-      o += OP(k * (1 - up), TF(gx + 30 * Math.sin(t * 1.4), 620 + 20 * Math.sin(t * 2), 3.1, tadpole16(t, st, {}), -8)) + (t >= tT + 2.6 && t < tF ? TF(gx - 120, 400, spring(t, tT + 2.6, .4), tpill(0, 0, st === 1 ? "legs grow" : "the tail shrinks", 40, "#fff", P.ink, { w: 700 })) : ""); }
+      o += OP(k * (1 - up), TF(gx + 30 * Math.sin(t * 1.4), 620 + 20 * Math.sin(t * 2), -3.1, tadpole16(t, st, {}), 8, 3.1)) + (t >= tT + 2.6 && t < tF ? TF(gx - 120, 400, spring(t, tT + 2.6, .4), tpill(0, 0, st === 1 ? "legs grow" : "the tail shrinks", 40, "#fff", P.ink, { w: 700 })) : ""); }   // teacher 25 Nov 2026: the big tadpole swims in to the LEFT, so it faces left (mirrored; tilt kept head-up) (SERIES_FORMAT 6x)
     if (up > .02) o += TF(960, sy - 10 - 40 * up, 2.0 * up, `<ellipse cx="0" cy="0" rx="160" ry="44" fill="#58B56C" stroke="#2F8048" stroke-width="5"/>` + TF(0, 0, 1, frog16(t, { hop: hop(t, tF, .5) })));
     o += [...Array(8)].map((_, i) => { const u = ((t * .4 + hash(i, 2)) % 1); return `<circle cx="${n2(200 + 1500 * hash(i, 4))}" cy="${n2(1000 - 900 * u)}" r="${n2(6 + 6 * hash(i, 6))}" fill="none" stroke="#fff" stroke-width="3" opacity="${n2(.6 * (1 - u) * (1 - up))}"/>`; }).join("");
     o += dip(t, tS, "#fff", .3); }

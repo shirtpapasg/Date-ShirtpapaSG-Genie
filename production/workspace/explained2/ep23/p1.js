@@ -183,7 +183,7 @@ SC.holdon = (t, s) => { window._BUBAT = { momo: [960, 230], basil: [1180, 260], 
   const bob = inT ? 16 * Math.sin((t - r0) * Math.PI * 2) : 6 * Math.sin(t * 3), sk = camPt(cam, CS.socket), [s1, s2, s3] = S3();
   const world = cs(t, cam, { top: tableTop(t, {}), bug: t < r0 - 1 || t > bell + 1 ? MPAT.holdon : false, front: coil });
   return world + (t >= tS ? TF(sk[0], sk[1], spring(t, tS, .4) * cam[0] * .9, `<path d="M-70 -60 L70 60 M70 -60 L-70 60" stroke="#D84A3A" stroke-width="22" stroke-linecap="round"/>`) + TF(Math.max(170, sk[0] + 40), sk[1] - 120 * cam[0], spring(t, tS + .1, .4), tpill(0, 0, "NEVER!", 52, "#D84A3A", "#fff", { w: 700, ls: 3 })) : "")
-    + (t >= MK("mains") ? linkChip(t, MK("mains") + .05, sk[0] + 330, sk[1] - 40, sk[0] + 50, sk[1], "#fff", "main electrical supply", 40, undefined, P.ink) : "")
+    + (t >= MK("mains") ? linkChip(t, MK("mains") + .05, sk[0] + 640, sk[1] - 250, sk[0] + 50, sk[1] - 20, "#fff", "main electrical supply", 40, undefined, P.ink) : "")
     + (ring ? OP(st, bg("stage")) + OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 800 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 640 + bob * .6, 1.2) + TF(1700, 990, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
     + bd("pip", 1420, 1010, 380, t, { in: LT(c) + .4, flip: true })
@@ -194,8 +194,8 @@ SC.holdon = (t, s) => { window._BUBAT = { momo: [960, 230], basil: [1180, 260], 
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 960, 330, "+1", "arms crossed") + smallPrint(t, s.t0 + .4, HOLD_RULE, 0, tX - .3) + HUD(t); };
 // the cream WARNING strip (7.5, three sentences): three lines, the words appearing as Heart reads them; WARNING in the strip's corner
 const stripThree = (t) => { const L = TL.lines.m805s, ws = L.words.map((w) => w.w), i2 = ws.findIndex((w, i) => i > 3 && w === "Do"), i3 = ws.findIndex((w, i) => i > i2 && w === "Do"), tx = (a, b) => ws.slice(a, b).join(" ");
-  return bookCaption(t, "m805s", tx(0, i2), 790, { size: 30, keys: ["too", "long", "hot."] }) + bookCaption(t, "m805s", tx(i2, i3), 870, { size: 30, off: i2, keys: ["exposed", "wires"] }) + bookCaption(t, "m805s", tx(i3), 950, { size: 30, off: i3, keys: ["main", "electrical", "supply."] })
-    + OP(ramp(t, L.t - .2, .3), TF(240, 720, 1, tpill(0, 0, "WARNING", 34, "#D84A3A", "#fff", { w: 700, ls: 4 }))); };
+  return bookCaption(t, "m805s", tx(0, i2), 860, { size: 30, keys: ["too", "long", "hot."] }) + bookCaption(t, "m805s", tx(i2, i3), 935, { size: 30, off: i2, keys: ["exposed", "wires"] }) + bookCaption(t, "m805s", tx(i3), 1010, { size: 30, off: i3, keys: ["main", "electrical", "supply."] })
+    + OP(ramp(t, L.t - .2, .3), TF(1700, 790, 1, tpill(0, 0, "WARNING", 34, "#D84A3A", "#fff", { w: 700, ls: 4 }))); };
 
 /* 9 · Pip (big at the left) holds up the battery holder, peering at it: "I think the battery is a magnet, and the wire just joins it to the
    nail." Thinking after his line (he is about to test it). Basil big at the right, Momo in the mid-ground. A push in on the battery. The
