@@ -1,0 +1,202 @@
+{
+ "_note": "EP23, for TheOneApp videos.js P3 after upload: the classic GNQn_TeCRgg ('23A' in videos.js today, 'Turn A Nail Into A Magnet, Two Ways (Part A)') is RETIRED by EP22 + EP23: remove it and add EP23's two entries in its place (renumber as the app needs: the classic '23B' zAUE_ZuxcDs stays until EP24/EP25). Its moments go: 'The electrical method: an electromagnet' -> EP23 P1 'The electrical method'; 'Making a magnet stronger' -> EP23 P2 'More turns of wire'; 'Try it on experiments 7.1A and 7.1B' -> EP22 P1's stroke moment (7.1A) and EP23 P2 'More batteries' (7.1B); 'Quiz: take the battery away and the clips fall' -> EP23 P1 'Take the battery away: the clips drop'; 'The stroke method' moments -> EP22's. Keys are videos.js constant names (CH.makingMagnets, O.magProps) and strings as the old entry used.",
+ "replaces": [
+  "GNQn_TeCRgg"
+ ],
+ "entries": [
+  {
+   "no": "23A",
+   "art": "🔋",
+   "topic": "Magnets",
+   "title": "Take the Battery Away. Do the Clips STAY or DROP? (Part A)",
+   "len": "5:36",
+   "url": "https://www.youtube.com/watch?v=<EP23_P1>",
+   "moments": [
+    {
+     "at": "0:57",
+     "what": "Round 1: take the battery away. Stay or drop?",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m401",
+     "_t": 58.69
+    },
+    {
+     "at": "1:25",
+     "what": "Journey: be the iron nail in a coil",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m501",
+     "_t": 86.57
+    },
+    {
+     "at": "1:58",
+     "what": "Take the battery away: the clips drop",
+     "keys": [
+      "O.magProps",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m601",
+     "_t": 120.14
+    },
+    {
+     "at": "2:04",
+     "what": "The electrical method",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps",
+      "mix:electrical:16",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m603m",
+     "_t": 126.08
+    },
+    {
+     "at": "2:17",
+     "what": "On and off: an electromagnet",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps",
+      "mix:electrical:16"
+     ],
+     "_line": "m702",
+     "_t": 138.99
+    },
+    {
+     "at": "3:01",
+     "what": "HOLD ON! Stay safe: batteries only",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m801m",
+     "_t": 182.64
+    },
+    {
+     "at": "3:51",
+     "what": "What makes it a magnet: both ends joined",
+     "keys": [
+      "CH.makingMagnets",
+      "mix:electrical:16",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m902",
+     "_t": 232.8
+    },
+    {
+     "at": "4:13",
+     "what": "Coil: neat turns of wire round the nail",
+     "keys": [
+      "CH.makingMagnets",
+      "mix:electrical:16",
+      "lab:p3-7-1b"
+     ],
+     "_line": "m905b",
+     "_t": 254.7
+    }
+   ]
+  },
+  {
+   "no": "23B",
+   "art": "🏗️",
+   "topic": "Magnets",
+   "title": "Ten Turns or Twenty? Make the STRONGEST Electromagnet (Part B)",
+   "len": "5:45",
+   "url": "https://www.youtube.com/watch?v=<EP23_P2>",
+   "moments": [
+    {
+     "at": "0:28",
+     "what": "Round 1: ten turns or twenty?",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps",
+      "mix:electrical:20",
+      "lab:p3-7-1b"
+     ],
+     "_line": "n401",
+     "_t": 29.8
+    },
+    {
+     "at": "1:05",
+     "what": "Journey: be a steel bolt",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps",
+      "mix:electrical:20"
+     ],
+     "_line": "n501",
+     "_t": 66.95
+    },
+    {
+     "at": "1:37",
+     "what": "More turns of wire",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps",
+      "mix:electrical:20",
+      "lab:p3-7-1b"
+     ],
+     "_line": "n601",
+     "_t": 98.53
+    },
+    {
+     "at": "2:16",
+     "what": "An electromagnet in the school bell",
+     "keys": [
+      "O.magProps",
+      "mix:electrical:20"
+     ],
+     "_line": "n705",
+     "_t": 137.68
+    },
+    {
+     "at": "2:41",
+     "what": "Showdown: Momo's poster",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps"
+     ],
+     "_line": "n801",
+     "_t": 163.01
+    },
+    {
+     "at": "3:07",
+     "what": "Iron and steel can be made into magnets",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps"
+     ],
+     "_line": "n804b",
+     "_t": 188.79
+    },
+    {
+     "at": "3:32",
+     "what": "More batteries",
+     "keys": [
+      "CH.makingMagnets",
+      "mix:electrical:20",
+      "lab:p3-7-1b"
+     ],
+     "_line": "n902",
+     "_t": 213.82
+    },
+    {
+     "at": "3:50",
+     "what": "The number of batteries",
+     "keys": [
+      "CH.makingMagnets",
+      "mix:electrical:20",
+      "lab:p3-7-1b"
+     ],
+     "_line": "n904p",
+     "_t": 231.6
+    }
+   ]
+  }
+ ]
+}
