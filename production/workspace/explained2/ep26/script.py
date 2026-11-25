@@ -7,7 +7,7 @@ THE RHYTHM OF EP1-EP10 (as EP24, EP25), with a 6 s "your turn" ring before each 
 """
 import re, os
 H, P, B, M = "heart", "pip", "basil", "momo"
-CUTS = {"anttip"}   # the parts run long at the EP1-10 pace with time to try: the finder's tip goes first
+CUTS = {"anttip", "homework", "fixread"}   # the parts run long at the EP1-10 pace with time to try: the finder's tip goes first
 cut = lambda tag, items: [] if tag in CUTS else items
 NEXT_DARE = None
 CHANT = [("Choice?", "Only if you pick!"), ("Evidence?", "From the question!"), ("Concept?", "The rule I know!"), ("And the Link?", "Thus, answer it!")]
@@ -20,7 +20,7 @@ STRIP = 3.5
 slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 HOLD = lambda mk: ("hold", mk, 2.0, .6)
 VERDICT = lambda mk: [("mark", mk), ("wait", 2.5)]
-TRY = lambda n: [("mark", f"try{n}"), ("wait", 6.0)]   # "your turn": a 6 s ring with soft ticks before each model-answer part
+TRY = lambda n: [("mark", f"try{n}"), ("wait", 4.5)]   # "your turn": a 6 s ring with soft ticks before each model-answer part
 Q1 = "Mei Ling hangs two metal bars, X and Y, from strings. She brings the North pole of a magnet near each bar. Bar X moves away from the magnet. Bar Y moves towards the magnet. Which bar is a magnet? Explain your answer."
 Q2 = "Ali wants to find out if more batteries make an electromagnet stronger. Set-up A has an iron nail, ten turns of wire and one battery. Set-up B has a steel nail, twenty turns of wire and two batteries. Explain why Ali's experiment is not a fair test."
 Q3 = "Siti says that a cockroach has the same life cycle as a butterfly. Do you agree? Explain."
@@ -141,7 +141,7 @@ SEQ2 = [
  ("say", "n101", H, "Last time, the CECL Genie showed us the four parts of a full answer: Choice, Evidence, Concept and Link.", {"pron": PRON, "pre": .4, "post": .3, "kw": [["pic2", "choice"], ["pic3", "link"]]}),
  ("wait", 2.0),
  ("scene", "home"), ("wait", .4),
- ("say", "n201b", B, "Homework time! The Genie is ready.", {"pre": .3, "post": .5}),
+ *cut("homework", [("say", "n201b", B, "Homework time! The Genie is ready.", {"pre": .3, "post": .5})]), ("wait", 1.2),
  ("scene", "game"),
  ("say", "n202", H, "A little ant is hiding in this video. Can you spot it?", {"pre": .4, "post": .4}),
  *cut("anttip", [("say", "n203m", M, "Ants love sweet things. Check the counter!", {"pre": .3, "post": .3})]),
@@ -149,7 +149,7 @@ SEQ2 = [
  ("scene", "goals"), ("say", "n301b", B, "Today you'll learn:", {"pre": .7, "post": .3}), ("say", "n302b", B, "Choice: only when you must pick.", {"pre": .3, "post": .4}),
  ("say", "n303b", B, "The Link: answer what was asked.", {"pre": .3, "post": .4}), ("say", "n304b", B, "Try it yourself.", {"pre": .3, "post": .7}),
  ("scene", "question"),
- ("say", "n401", H, "Question one. " + Q2, {"pre": .5, "post": 1.2}),
+ ("say", "n401", H, "Question one. " + Q2, {"pre": .5, "post": .8}),
  ("scene", "r1card"), ("wait", 1.2),
  ("scene", "r1"),
  ("say", "n402", H, "Round one. Does this answer need a Choice? One, yes. Two, no. Show me your fingers.", {"pre": .1}),
@@ -182,12 +182,12 @@ SEQ2 = [
  ("scene", "showcard"), ("wait", 1.0),
  ("scene", "show"),
  ("say", "n701", H, "Question two. " + Q3, {"pre": .3, "post": .8}),
- ("say", "n702", H, "Showdown! Double points. Basil's answer is missing one part. Is it one, the Choice, two, the Evidence, three, the Concept, or four, the Link?", {"pre": .3, "kw": [["l1s", "one"], ["l2s", "two"], ["l3s", "three"], ["l4s", "four"]]}),
+ ("say", "n702", H, "Showdown! Double points. Basil's answer is missing one part. Which one? One, two, three, or four?", {"pre": .3, "kw": [["l1s", "one"], ["l2s", "two"], ["l3s", "three"], ["l4s", "four"]]}),
  *LOCK("show", 6.0),
  ("say", "n703", H, "Locked in!", {"pre": 0, "post": .2}),
  ("say", "n704m", M, "Four! Basil never says what the question asked: is it the same life cycle?", {"pre": .5}),
  ("scene", "fix"), ("wait", .2), ("mark", "rewrite"), ("wait", 1.0),
- ("say", "n705", H, "Thus, the cockroach and the butterfly do not have the same life cycle.", {"pre": .2, "post": .4}),
+ *cut("fixread", [("say", "n705", H, "Thus, the cockroach and the butterfly do not have the same life cycle.", {"pre": .2, "post": .4})]), ("wait", 1.4),
  ("say", "n706", H, "Four fingers? Put up two more on your score hand!", {"pre": .3, "post": .5, "kw": [["coin2", "two"]]}),
  ("scene", "waitw"),
  ("say", "n801", H, "Be the Link! Shrink down. Quietly.", {"pre": .5, "post": .5}),

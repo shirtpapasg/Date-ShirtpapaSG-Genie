@@ -82,7 +82,7 @@ SC.lcbuild = (t, s) => { window._BUBAT = { '*': [960, 905] }; const p = camPt(ca
     over: (tt) => peek26("pip", "l", tt, LT("m906p") - .5, undefined, [[LE("m906p") + .1, "cheer"], [LE("m906p") + 2.2, "sit"]], { achieved: true }) + peek26("momo", "r", tt, LT("m907m") - .5, undefined, []) }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "m909", sayId: "m908", who: "basil", n: "2 of 2", tab: "Evidence and Concept", text: TL.lines.m909.text, keys: ["Evidence", "shows", "Concept", "rule", "remember."], size: 56, y: 240, footer: FOOT, poses: [[LE("m909") + .2, "sit"]], under: markEC26(t, 1250, 930, .7 * spring(t, s.t0 + .4, .5)), extra: bd("pip", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
 /* 10 · score, the dragonfly (the REVEAL spot: a twig of the tree outside), Basil's fun fact */
-SC.final = (t, s) => { const L = "m1001"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
+SC.final = (t, s) => { const L = "m1001"; return finalScene(t, s, L, 0, [[s.t0, null, 1], [W(L, "two") - .1, null, 2]]); };
 SC.liz = (t, s) => { const L = "m1002", tq = W(L, "it") - .1, c = DFAT.liz, tc = W(L, "dragonfly");
   return lizReveal(t, s, L, sr(t, W0, { bug: c, rise: 0 }), c[0], c[1], tq, "It was on a twig of the tree outside!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1004",
     fact: { id: "m1003b", at: [1250, 400], w: 760, h: 440, items: [["ff_eyes", "huge eyes", ffEyes26], ["ff_side", "evidence from every side", ffSide26]], cols: ["#2F6FD6", "#4a90e2"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })

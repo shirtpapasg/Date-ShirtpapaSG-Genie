@@ -1,8 +1,9 @@
 // lc26.js: EP26's look-closer panels, journeys and small pictures. Look-closer art is centred on (0, 0) inside +-830 x +-395.
 // A "your turn" ring (TRY): a 6 s ring with YOUR TURN!, soft ticks (sound_cues.js), the YOU hand; nothing is revealed until it ends
-const tryRing26 = (t, t0, x, y, k = 1) => { if (t < t0 - .2 || t > t0 + 6.4) return ""; const u = clamp((t - t0) / 6), a = ramp(t, t0 - .2, .3) * (1 - ramp(t, t0 + 6.0, .3));
+const TRYD = 4.5;   // the YOUR TURN ring's length (script.py TRY)
+const tryRing26 = (t, t0, x, y, k = 1) => { if (t < t0 - .2 || t > t0 + TRYD + .4) return ""; const u = clamp((t - t0) / TRYD), a = ramp(t, t0 - .2, .3) * (1 - ramp(t, t0 + TRYD, .3));
   return OP(a, TF(x, y, k, `<circle r="92" fill="#FFF8EA" stroke="${P.ink}" stroke-width="6"/><circle r="80" fill="none" stroke="#E8DCC8" stroke-width="16"/><path d="M0 -80 A80 80 0 ${u > .5 ? 0 : 1} 1 ${n2(80 * Math.sin(2 * Math.PI * (1 - u)) * -1 * -1)} ${n2(-80 * Math.cos(2 * Math.PI * (1 - u)))}" stroke="${P.sun}" stroke-width="16" fill="none" stroke-linecap="round"/>`
-    + T(0, 22, String(Math.max(0, Math.ceil(6 - (t - t0)))), 64, P.ink) + TF(0, 136, 1, tpill(0, 0, "YOUR TURN!", 34, P.sun, P.ink, { w: 700 })))); };
+    + T(0, 22, String(Math.max(0, Math.ceil(TRYD - (t - t0)))), 64, P.ink) + TF(0, 136, 1, tpill(0, 0, "YOUR TURN!", 34, P.sun, P.ink, { w: 700 })))); };
 const qText26 = (id) => { const L = TL.lines[id]; return L ? L.text.replace(/^(Here is the question\.|Question one\.|Question two\.|Look closer\.)\s*/, "") : ""; };
 /* Part 1 look-closer 1 · BASIL'S ANSWER UNDER THE LAMP: the question card at the top (its words about X moving away glow blue at `eway`),
    Basil's answer card "X, because it moved." with 1/3 in red; the four CECL tiles: Choice lights (cred), Evidence lights as the question's

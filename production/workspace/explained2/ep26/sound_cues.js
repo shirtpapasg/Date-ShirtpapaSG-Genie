@@ -36,7 +36,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   if (PART === 1) { lock("r1", 5, "m403", ["m404b", "m405p", "m406m"]); lock("hold", 5, null, []); if (has("m802")) E(W("m802", "hold") - .1, "stamp"); }
   else { lock("r1", 5, "n403", ["n404p", "n405b", "n406m"]); lock("show", 6, "n703", ["n704m"]); }
   ["coin1", "coin2"].forEach((k) => mk(k) !== undefined && E(mk(k) - .1, "coin")); if (mk("coin1") !== undefined && PART === 2) E(mk("coin1") + .2, "coin", 1); if (mk("ansglow") !== undefined) E(mk("ansglow"), "chime2", 0);
-  for (const k of Object.keys(M_).filter((k) => /^try\d$/.test(k))) { for (let i = 0; i < 6; i++) E(M_[k] + i, "tick", 0); E(M_[k] + 6, "chime2", 1); }
+  for (const k of Object.keys(M_).filter((k) => /^try\d$/.test(k))) { for (let i = 0; i < 5; i++) E(M_[k] + i, "tick", 0); E(M_[k] + 4.5, "chime2", 1); }
   ["cred", "eblue", "b1", "b2", "b3", "b4", "e1", "c1", "l1", "fe", "fl"].forEach((k, i) => mk(k) !== undefined && E(mk(k), "softpop", i % 3));
   if (mk("jred") !== undefined) { ["jred", "jblue", "jyellow", "jgreen"].forEach((k) => E(mk(k), "click")); E(mk("jpen"), "whoosh"); for (let i = 0; i < 4; i++) E(mk("jtick") + i * .35, "scribble"); E(mk("jfull"), "sparkle"); }
   if (mk("jstretch") !== undefined) { E(mk("jstretch"), "sfx", { f: "riser.wav", g: .05, bus: "wonder" }); E(mk("jclick"), "click"); E(mk("jclick") + .1, "sparkle"); }

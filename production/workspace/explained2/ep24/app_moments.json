@@ -1,0 +1,168 @@
+{
+ "_note": "EP24, for TheOneApp videos.js P3 after upload: EP24 (fair tests) and EP25 (magnets everywhere) together replace the classic zAUE_ZuxcDs ('23B' in videos.js today: fair tests and magnets everywhere). Add EP24's two entries now; remove '23B' only when EP25 is in the app too (its fair-test moments -> EP24's, its magnets-everywhere moments -> EP25's). Keys are videos.js constant names (CH.makingMagnets, O.magProps) and strings as the old entry used; check them against videos.js when the app is updated.",
+ "replaces": [
+  "zAUE_ZuxcDs"
+ ],
+ "entries": [
+  {
+   "no": "24A",
+   "art": "⚖️",
+   "topic": "Magnets",
+   "title": "Is Basil's Test FAIR? Change Only ONE Thing (Part A)",
+   "len": "5:25",
+   "url": "https://www.youtube.com/watch?v=<EP24_P1>",
+   "moments": [
+    {
+     "at": "0:56",
+     "what": "Round 1: is Basil's test fair?",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "m401",
+     "_t": 58.31
+    },
+    {
+     "at": "1:26",
+     "what": "Journey: be a steel paper clip",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "m501",
+     "_t": 88.39
+    },
+    {
+     "at": "2:03",
+     "what": "Two things changed: an unfair test",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "m601",
+     "_t": 125.39
+    },
+    {
+     "at": "2:22",
+     "what": "Look closer: which variable did it?",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "m702",
+     "_t": 143.66
+    },
+    {
+     "at": "2:47",
+     "what": "A fair test: change only one thing",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "m705m",
+     "_t": 168.71
+    },
+    {
+     "at": "3:12",
+     "what": "HOLD ON! The magnet race: the same height",
+     "keys": [
+      "CH.makingMagnets",
+      "O.magProps"
+     ],
+     "_line": "m801m",
+     "_t": 193.68
+    },
+    {
+     "at": "3:48",
+     "what": "Make it fair: only the nail changed",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "m902",
+     "_t": 229.91
+    },
+    {
+     "at": "4:08",
+     "what": "An experiment answers a question",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "m904b",
+     "_t": 249.51
+    }
+   ]
+  },
+  {
+   "no": "24B",
+   "art": "🔁",
+   "topic": "Magnets",
+   "title": "Plan It, Test It, Count It AGAIN! Why Scientists Repeat (Part B)",
+   "len": "5:40",
+   "url": "https://www.youtube.com/watch?v=<EP24_P2>",
+   "moments": [
+    {
+     "at": "0:30",
+     "what": "Round 1: Momo's plan, X and Y. Fair?",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "n401",
+     "_t": 32.03
+    },
+    {
+     "at": "1:18",
+     "what": "A prediction",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "n503b",
+     "_t": 80.12
+    },
+    {
+     "at": "1:30",
+     "what": "Our plan: changed, kept the same, measured",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "n602",
+     "_t": 92.19
+    },
+    {
+     "at": "2:13",
+     "what": "Showdown: Pip's plan card",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "n701",
+     "_t": 134.58
+    },
+    {
+     "at": "2:46",
+     "what": "Journey: a paper clip, counted again and again",
+     "keys": [
+      "CH.makingMagnets"
+     ],
+     "_line": "n801",
+     "_t": 168.32
+    },
+    {
+     "at": "3:23",
+     "what": "Repeat the test: reliable results",
+     "keys": [
+      "CH.makingMagnets",
+      "lab:p3-7-2"
+     ],
+     "_line": "n902",
+     "_t": 204.65
+    }
+   ]
+  }
+ ]
+}

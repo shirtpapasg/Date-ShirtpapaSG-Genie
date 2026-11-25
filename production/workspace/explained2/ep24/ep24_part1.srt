@@ -1,0 +1,523 @@
+1
+00:00:00,825 --> 00:00:02,235
+Last time, we asked:
+
+2
+00:00:02,299 --> 00:00:06,829
+Basil tests which makes a stronger electromagnet, an iron nail or a
+
+3
+00:00:06,849 --> 00:00:07,849
+steel nail.
+
+4
+00:00:08,139 --> 00:00:12,309
+He coils twenty-five turns round the iron nail, but only eight turns
+
+5
+00:00:12,329 --> 00:00:13,499
+round the steel nail.
+
+6
+00:00:13,789 --> 00:00:14,979
+Is his test fair?
+
+7
+00:00:15,117 --> 00:00:16,227
+One, yes.
+
+8
+00:00:17,497 --> 00:00:18,377
+Two, no.
+
+9
+00:00:19,855 --> 00:00:21,365
+Hold on to your answer!
+
+10
+00:00:23,587 --> 00:00:25,767
+Our mini crane needs the strongest hook.
+
+11
+00:00:25,947 --> 00:00:28,717
+So I am testing an iron nail and a steel nail!
+
+12
+00:00:29,140 --> 00:00:31,760
+A little woodlouse is hiding in this video.
+
+13
+00:00:32,050 --> 00:00:33,250
+Can you spot it?
+
+14
+00:00:33,606 --> 00:00:35,996
+Woodlice love dark, damp corners.
+
+15
+00:00:36,156 --> 00:00:37,226
+Look low!
+
+16
+00:00:37,499 --> 00:00:38,959
+You against the Buddies!
+
+17
+00:00:39,229 --> 00:00:41,079
+Lock in first with your fingers.
+
+18
+00:00:41,349 --> 00:00:43,179
+One finger for every point.
+
+19
+00:00:43,835 --> 00:00:45,135
+Today you'll learn:
+
+20
+00:00:45,337 --> 00:00:47,017
+What an experiment does.
+
+21
+00:00:47,295 --> 00:00:48,835
+What a fair test is.
+
+22
+00:00:49,109 --> 00:00:50,979
+How to spot an unfair test.
+
+23
+00:00:51,476 --> 00:00:52,416
+Are you ready?
+
+24
+00:00:52,856 --> 00:00:53,626
+Three!
+
+25
+00:00:54,006 --> 00:00:54,666
+Two!
+
+26
+00:00:55,036 --> 00:00:55,686
+One!
+
+27
+00:00:56,106 --> 00:00:56,826
+Go!
+
+28
+00:00:58,315 --> 00:00:59,205
+Round one!
+
+29
+00:00:59,515 --> 00:01:01,065
+Is Basil's test fair?
+
+30
+00:01:01,355 --> 00:01:02,445
+One, yes.
+
+31
+00:01:02,725 --> 00:01:03,565
+Two, no.
+
+32
+00:01:03,865 --> 00:01:05,175
+Show me your fingers!
+
+33
+00:01:10,691 --> 00:01:11,671
+Locked in!
+
+34
+00:01:11,949 --> 00:01:12,559
+One!
+
+35
+00:01:12,709 --> 00:01:15,909
+It's my test, and my iron nail picked up the most clips.
+
+36
+00:01:16,089 --> 00:01:17,179
+Iron wins!
+
+37
+00:01:17,528 --> 00:01:21,318
+Two. The iron nail has many more turns of wire.
+
+38
+00:01:21,618 --> 00:01:23,308
+Maybe the turns did it.
+
+39
+00:01:23,657 --> 00:01:24,427
+Two.
+
+40
+00:01:24,897 --> 00:01:27,737
+Basil changed the nail, and he changed the turns too.
+
+41
+00:01:28,387 --> 00:01:29,907
+Be a steel paper clip!
+
+42
+00:01:30,167 --> 00:01:31,167
+Shrink down.
+
+43
+00:01:31,447 --> 00:01:32,377
+Quietly.
+
+44
+00:01:34,660 --> 00:01:37,560
+You are a steel paper clip, lying in a tray.
+
+45
+00:01:38,340 --> 00:01:42,440
+Above you hangs Basil's iron nail, wrapped in many, many turns of
+
+46
+00:01:42,460 --> 00:01:43,160
+wire.
+
+47
+00:01:43,745 --> 00:01:45,215
+It pulls you up, hard!
+
+48
+00:01:46,045 --> 00:01:48,955
+You cling to its tip with lots of other clips.
+
+49
+00:01:49,725 --> 00:01:52,875
+Over there, the steel nail has only a few turns.
+
+50
+00:01:53,655 --> 00:01:54,995
+Its pull is weak.
+
+51
+00:01:55,584 --> 00:01:56,604
+But you wonder.
+
+52
+00:01:57,444 --> 00:01:59,304
+Was it the iron that pulled you?
+
+53
+00:02:00,074 --> 00:02:01,514
+Or all those turns?
+
+54
+00:02:02,284 --> 00:02:03,534
+You cannot tell!
+
+55
+00:02:05,394 --> 00:02:08,484
+The answer is two: Basil's test is not fair!
+
+56
+00:02:08,724 --> 00:02:10,314
+Did you show two fingers?
+
+57
+00:02:10,594 --> 00:02:12,004
+Put one finger up!
+
+58
+00:02:12,354 --> 00:02:15,504
+A variable is a thing that can change in a test, such
+
+59
+00:02:15,524 --> 00:02:18,214
+as the kind of nail, or the number of turns!
+
+60
+00:02:18,942 --> 00:02:21,292
+But my iron nail picked up the most clips.
+
+61
+00:02:21,422 --> 00:02:22,782
+Why is that not fair?
+
+62
+00:02:23,659 --> 00:02:24,809
+Look closer.
+
+63
+00:02:25,409 --> 00:02:27,249
+Basil changed two things.
+
+64
+00:02:27,809 --> 00:02:29,619
+The kind of nail is different.
+
+65
+00:02:30,209 --> 00:02:32,509
+And the number of turns is different too.
+
+66
+00:02:32,780 --> 00:02:35,170
+The iron nail attracts more clips.
+
+67
+00:02:35,740 --> 00:02:37,540
+Was it because of the iron?
+
+68
+00:02:38,120 --> 00:02:40,360
+Or because of the twenty-five turns?
+
+69
+00:02:40,930 --> 00:02:42,300
+We cannot be sure.
+
+70
+00:02:42,649 --> 00:02:45,959
+If the experiment is not fair, we will not be sure which
+
+71
+00:02:45,979 --> 00:02:48,119
+variable can explain the results.
+
+72
+00:02:48,755 --> 00:02:51,869
+A fair test is a test where we change only one thing,
+
+73
+00:02:51,889 --> 00:02:55,383
+and keep all the other things the same, such as changing only
+
+74
+00:02:55,403 --> 00:02:56,648
+the kind of nail!
+
+75
+00:03:00,048 --> 00:03:01,348
+Say it with me!
+
+76
+00:03:02,058 --> 00:03:05,898
+To conduct a fair test, scientists need to ensure that only one
+
+77
+00:03:05,918 --> 00:03:08,258
+thing, called a variable, is changed.
+
+78
+00:03:09,058 --> 00:03:11,048
+The other variables are kept the same.
+
+79
+00:03:13,675 --> 00:03:16,425
+Pip, my magnet picked up more pins than yours!
+
+80
+00:03:16,485 --> 00:03:18,755
+So my magnet is the stronger one!
+
+81
+00:03:19,030 --> 00:03:20,590
+Something is not right.
+
+82
+00:03:20,860 --> 00:03:23,040
+If you can spot it, cross your arms.
+
+83
+00:03:23,320 --> 00:03:24,280
+Hold on!
+
+84
+00:03:29,693 --> 00:03:30,823
+Arms crossed?
+
+85
+00:03:31,093 --> 00:03:32,303
+One finger up!
+
+86
+00:03:32,580 --> 00:03:35,650
+Momo held her magnet close to the pins, and Pip held his
+
+87
+00:03:35,670 --> 00:03:36,710
+far away.
+
+88
+00:03:36,940 --> 00:03:38,530
+The distance changed too!
+
+89
+00:03:38,650 --> 00:03:41,270
+Hold them at the same height, over the same pins.
+
+90
+00:03:41,550 --> 00:03:43,810
+Now only the magnet is different.
+
+91
+00:03:43,950 --> 00:03:45,140
+That is fair!
+
+92
+00:03:45,643 --> 00:03:46,433
+Okay!
+
+93
+00:03:46,583 --> 00:03:49,033
+How do I make my iron and steel test fair?
+
+94
+00:03:49,906 --> 00:03:51,056
+Look closer.
+
+95
+00:03:51,646 --> 00:03:54,136
+Give both nails twenty turns of wire.
+
+96
+00:03:54,716 --> 00:03:58,146
+Use the same kind of battery, the same wire, and the same
+
+97
+00:03:58,166 --> 00:03:59,246
+steel clips.
+
+98
+00:03:59,535 --> 00:04:01,465
+Dip both tips the same way.
+
+99
+00:04:02,045 --> 00:04:05,295
+Now only one thing is different: the kind of nail.
+
+100
+00:04:05,875 --> 00:04:09,225
+If one nail attracts more clips, we know the nail did it!
+
+101
+00:04:09,515 --> 00:04:12,515
+An experiment is a test that we plan and do to answer
+
+102
+00:04:12,535 --> 00:04:16,895
+a question, such as: which nail makes a stronger electromagnet?
+
+103
+00:04:20,194 --> 00:04:21,354
+Say it with me!
+
+104
+00:04:22,060 --> 00:04:26,240
+When scientists plan and conduct an experiment, they answer a question or
+
+105
+00:04:26,260 --> 00:04:27,660
+test a prediction.
+
+106
+00:04:30,214 --> 00:04:31,674
+Show me your score hand!
+
+107
+00:04:31,954 --> 00:04:32,984
+Two fingers?
+
+108
+00:04:33,264 --> 00:04:34,634
+You beat the Buddies.
+
+109
+00:04:34,914 --> 00:04:35,914
+High five!
+
+110
+00:04:36,567 --> 00:04:38,117
+Did you spot the woodlouse?
+
+111
+00:04:38,407 --> 00:04:40,047
+It was under the cupboard door!
+
+112
+00:04:40,318 --> 00:04:41,628
+Here is a fun fact!
+
+113
+00:04:41,698 --> 00:04:44,168
+A woodlouse is a cousin of crabs and prawns!
+
+114
+00:04:44,288 --> 00:04:46,688
+And in a fair test, with a damp side and a dry
+
+115
+00:04:46,708 --> 00:04:49,308
+side, woodlice crawl to the damp side!
+
+116
+00:04:49,513 --> 00:04:50,793
+Tell someone at home!
+
+117
+00:04:51,522 --> 00:04:53,722
+Let's read today's key words together!
+
+118
+00:04:54,012 --> 00:04:54,772
+Ready?
+
+119
+00:04:55,059 --> 00:04:55,929
+Variable.
+
+120
+00:04:57,389 --> 00:04:58,409
+Fair test.
+
+121
+00:04:59,940 --> 00:05:00,970
+Experiment.
+
+122
+00:05:02,585 --> 00:05:03,525
+Well done!
+
+123
+00:05:04,322 --> 00:05:05,322
+My turn!
+
+124
+00:05:05,442 --> 00:05:09,252
+I will test if more batteries make our electromagnet stronger!
+
+125
+00:05:09,528 --> 00:05:11,228
+Will Momo's plan be fair?
+
+126
+00:05:11,518 --> 00:05:13,098
+Find out in Part Two!
+
+127
+00:05:14,358 --> 00:05:15,459
+Say it with us!
+
+128
+00:05:16,260 --> 00:05:17,010
+Ready?
+
+129
+00:05:17,133 --> 00:05:17,793
+One!
+
+130
+00:05:18,133 --> 00:05:18,833
+two!
+
+131
+00:05:19,138 --> 00:05:20,313
+Now you know!

@@ -1,0 +1,156 @@
+{
+ "_note": "EP25, for TheOneApp videos.js P3 after upload: with EP24 it replaces the classic zAUE_ZuxcDs ('23B': fair tests and magnets everywhere): remove '23B' once EP24 and EP25 are both in the app (its fair-test moments -> EP24's, its magnets-everywhere moments -> EP25's). Keys as the videos.js constant names; check against videos.js when the app is updated.",
+ "replaces": [
+  "zAUE_ZuxcDs"
+ ],
+ "entries": [
+  {
+   "no": "25A",
+   "art": "🧊",
+   "topic": "Magnets",
+   "title": "Why Does the Fridge Door STAY Shut? Magnets Hiding at Home (Part A)",
+   "len": "5:13",
+   "url": "https://www.youtube.com/watch?v=<EP25_P1>",
+   "moments": [
+    {
+     "at": "0:53",
+     "what": "Round 1: what keeps the fridge door closed?",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "m401",
+     "_t": 55.38
+    },
+    {
+     "at": "1:24",
+     "what": "Journey: be the magnetic strip in the fridge door",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "m501",
+     "_t": 86.37
+    },
+    {
+     "at": "2:00",
+     "what": "A magnetic strip inside the fridge door",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "m602p",
+     "_t": 122.31
+    },
+    {
+     "at": "2:42",
+     "what": "HOLD ON! Is a shiny aluminium frame magnetic?",
+     "keys": [
+      "O.magProps"
+     ],
+     "_line": "m801b",
+     "_t": 164.49
+    },
+    {
+     "at": "3:20",
+     "what": "A magnetic whiteboard: a steel sheet inside",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "m902",
+     "_t": 202.04
+    },
+    {
+     "at": "3:44",
+     "what": "A magnetic doorstop",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "m905",
+     "_t": 226.38
+    }
+   ]
+  },
+  {
+   "no": "25B",
+   "art": "🚄",
+   "topic": "Magnets",
+   "title": "A Train That FLOATS? Cranes, Trains and a Magnet Toy (Part B)",
+   "len": "5:38",
+   "url": "https://www.youtube.com/watch?v=<EP25_P2>",
+   "moments": [
+    {
+     "at": "0:30",
+     "what": "Round 1: aluminium clips in the fishing game",
+     "keys": [
+      "O.magProps",
+      "lab:p3-7-2"
+     ],
+     "_line": "n401",
+     "_t": 32.33
+    },
+    {
+     "at": "1:24",
+     "what": "The scrapyard crane: an electromagnet",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "n602",
+     "_t": 85.67
+    },
+    {
+     "at": "1:58",
+     "what": "Showdown: design a magnet toy (like poles push)",
+     "keys": [
+      "O.magProps",
+      "lab:p3-7-2"
+     ],
+     "_line": "n701",
+     "_t": 119.9
+    },
+    {
+     "at": "2:36",
+     "what": "Journey: be a floating train",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "n801",
+     "_t": 158.16
+    },
+    {
+     "at": "3:03",
+     "what": "A maglev train: the magnets repel",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "n902",
+     "_t": 185.32
+    },
+    {
+     "at": "3:21",
+     "what": "An MRI scanner",
+     "keys": [
+      "O.magProps",
+      "CH.makingMagnets"
+     ],
+     "_line": "n904",
+     "_t": 202.53
+    },
+    {
+     "at": "3:49",
+     "what": "Magnets interacting",
+     "keys": [
+      "O.magProps"
+     ],
+     "_line": "n1001s",
+     "_t": 231.35
+    }
+   ]
+  }
+ ]
+}
