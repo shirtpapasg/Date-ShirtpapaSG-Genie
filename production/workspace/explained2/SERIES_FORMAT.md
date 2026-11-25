@@ -442,6 +442,9 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     table again: the title melts away and the buddies stay; the game into "Today you'll learn": the presenter glides to the left).
   - Buddies never flicker: no appearance under about 2.5 s, no one-frame blink at the end of a melt (fixed in lib.js 25 Nov 2026).
   - The opening is where this happened most (cold open, "Last time", the place, the title, the game, the goals): check its strip at 5 fps.
+    Fixed 25-26 Nov 2026 in EP0 and EP16-EP26 (code and finished files). Left as published: the EP16-EP19 Part 1 cold opens, where the
+    buddies pop in on three wired pop sounds (`budsIn`) about 2 s before the melt into "Last time" and then stay away 7-10 s; a new
+    episode lets them arrive at least 2.5 s before the melt.
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**
   - lip-sync on the talking sprites;
