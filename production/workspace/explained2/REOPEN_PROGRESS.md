@@ -134,3 +134,6 @@
 - 19:57 UTC 25 Nov (EP27 agent): EP27 overlap fixes (coordinator review: chips vs bubbles / signpost, buddies apart, key-word pops, drain labels, level-up items 2.8 s, real videos.js keys) and re-render: ep27/ep27.mp4 6:26.6 (11598 frames), decode clean, -16.0 LUFS, -2.0 dBTP, ghost and facing scans clean; before/after in ep27/qa/before_after.jpg. NOT uploaded.
 - 20:39 UTC 25 Nov (EP27 agent): EP27 read-along fix (YOU bubble off POOR CONDUCTOR OF HEAT; Well done! off Pip's face): 350-370 s re-rendered and spliced; ep27.mp4 11598 frames, decode clean, -16.0 LUFS, -2.0 dBTP, ghost and facing clean. NOT uploaded.
 - 20:45 UTC: EP27 UPLOADED (teacher pre-approved): TK-pHf_8SFI, chapters applied, after EP22 v4 P2 in both playlists. App PR shirtpapasg/TheOneApp#267. EP24-26 uploading now.
+- 20:48 UTC: EP24 UPLOADED (teacher pre-approved): Part 1 XE_lK9BbfhU, Part 2 IX-FSJWo7pQ. Chapters applied.
+- 20:49 UTC: EP25 UPLOADED (teacher pre-approved): Part 1 2mqesk7Ntoc, Part 2 T19-tLr7tbk. Chapters applied.
+- 20:51 UTC: EP26 UPLOADED (teacher pre-approved): Part 1 TTlTybAl2Fc, Part 2 iy77Q9ymcMk. Chapters applied.
