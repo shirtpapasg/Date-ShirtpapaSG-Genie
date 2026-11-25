@@ -1,0 +1,6 @@
+facing_scan ep26 part 2: 3534 samples 0-353.4 s every 0.1 s; 23 FACES notes; 37 functions watched
+EYE REVIEW    10.4-11.3    home             buddy0         moves LEFT    337 px    from lib.js:164<p2.js:10<p2.js:23  [buddy travels]
+EYE REVIEW    11.6-12.7    game             buddy0         moves LEFT    256 px    from lib.js:164<common.js:276<p2.js:25  [buddy travels]
+EYE REVIEW   175.0-176.2   fix              buddy0         moves RIGHT   425 px    from lib.js:164<p2.js:10<p2.js:60  [buddy travels]
+EYE REVIEW   177.7-179.3   waitw            buddy0         moves RIGHT  1590 px    from lib.js:164<p2.js:10<p2.js:64  [buddy travels]
+no backwards movers (0 annotated movers face the right way, 4 for eye review)

@@ -64,6 +64,7 @@ function HOME26(t, o = {}, cam) { const sc = (window._S || {}).name, bd = o.bug 
 // o.step 0..3 (which screen), o.tap (a finger tap)
 const phone26 = (t, o = {}) => { const st = o.step || 0; let s = `<rect x="-230" y="-440" width="460" height="880" rx="56" fill="#16161C"/><rect x="-210" y="-410" width="420" height="820" rx="40" fill="${GNAVY}"/>`;
   s += `<rect x="-210" y="330" width="420" height="80" fill="#121C2C"/>` + ["Home", "Questions", "Me"].map((lab, i) => T(-140 + i * 140, 380, lab, 24, i === 1 && st >= 1 ? GCYAN : "#9aa7b6", { w: 700 })).join("");
+  if (st === 0) s += T(0, -60, "TheOneApp", 52, "#fff", { w: 700 }) + `<text x="0" y="60" font-size="80" text-anchor="middle">🧞</text>`;
   if (st >= 1) s += T(-180, -340, "Answer Questions", 30, "#fff", { a: "start", w: 700 }) + ["Practice", "Improve", "Reward"].map((lab, i) => `<rect x="-190" y="${-300 + i * 110}" width="380" height="84" rx="24" fill="#1C2A40"/>` + T(-160, -248 + i * 110, lab, 26, "#9aa7b6", { a: "start", w: 600 })).join("")
     + `<rect x="-190" y="30" width="380" height="96" rx="30" fill="#2A1D44" stroke="${st >= 2 ? "#ffc53d" : "#b388ff"}" stroke-width="${st >= 2 ? 6 : 3}"/>` + `<text x="-150" y="94" font-size="48">🧞</text>` + T(-80, 92, "CECL Genie", 34, "#fff", { a: "start", w: 700 });
   if (st >= 3) s += `<rect x="-210" y="-410" width="420" height="740" rx="40" fill="${GNAVY}"/>` + T(0, -300, "Learn the", 44, "#fff", { w: 700 }) + T(0, -246, "CECL way.", 44, "#ffc53d", { w: 700 })

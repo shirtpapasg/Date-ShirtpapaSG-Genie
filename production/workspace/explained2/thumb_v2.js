@@ -270,9 +270,9 @@ const THUMBS = {
   // burst; Part 2 ADD THE LINK! with Momo surprised, the four tiles with the green L glowing, a green burst
   ep26_1: { ep: 'ep26', part: 1, out: 'ep26/thumb_part1.jpg', old: 'ep25/thumb_part1.jpg',
     bg: { c: ['#DDF4FF', '#2A7AD0', '#0A1320'], at: [860, 430], rays: .22 },
-    cuts: { lamp: `TF(1000, 980, 1.0, genieLamp26(1, { rise: 1 })) + TF(1000, 1060, .75, ceclTiles26(1, {}))` },
+    cuts: { lamp: `TF(620, 900, .55, genieLamp26(1, { rise: 1 })) + TF(1200, 900, .5, ceclTiles26(1, {})) + TF(1200, 700, 1, '<circle r="70" fill="#fff" stroke="#D84A3A" stroke-width="10"/>' + T(0, 22, '1/3', 60, '#D84A3A'))` },
     layers: [
-      { cut: 'lamp', x: 520, y: 120, w: 740, line: '#fff', lw: 8, glow: INK },
+      { cut: 'lamp', x: 500, y: 300, w: 760, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'ONE', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MARK?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
   ep26_2: { ep: 'ep26', part: 2, out: 'ep26/thumb_part2.jpg', old: 'ep25/thumb_part2.jpg',
