@@ -104,3 +104,7 @@
 - 2026-11-25 (nyk agent): EP19 magnet cut-away also folded into ep19 v3: Part 1 frames 3000-3600 (100-120 s; the cut magnet is drawn in frames 3001-3445 of lcmagnet) and Part 2 frames 0-300 (0-10 s; the "Last time" recap picture, frames 0-142) re-rendered with the fixed magnet19 (one grey metal bar end to end under a thin paint coat). No other EP19 frames draw the cut magnet (checked frame by frame through both parts).
 - 01:55 UTC (main session): EP00 v3 UPLOADED (cheer fix): Part 1 HZ5ekiRDitM, Part 2 0P441TBya1w. Chapters applied.
 - 03:36 UTC (main session): EP16 v3 UPLOADED (cheer fix): Part 1 ElCaBcv9uLs, Part 2 DvFEJJJUvR0. Chapters applied.
+- 03:39 UTC (main session): EP17 v3 UPLOADED (cheer fix): Part 1 AFCUbPOSlFI, Part 2 L9E1Lw9tMuU. Chapters applied.
+- 03:41 UTC (main session): EP18 v3 UPLOADED (cheer fix): Part 1 AOkC-93GLsU, Part 2 hG7K1wpYWSw. Chapters applied.
+- 03:43 UTC (main session): EP19 v3 UPLOADED (cheer fix): Part 1 SKMHiboT8nk, Part 2 u_1eYb2DT5M. Chapters applied.
+- 03:44 UTC (main session): YouTube daily quota used up during EP20 v3 (Part 1 VN_za6W-7i8 uploaded, nothing else yet). EP20 and EP21 v3 resume after 08:00 UTC (send_later 08:10).
