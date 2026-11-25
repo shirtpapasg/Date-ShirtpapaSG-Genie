@@ -17,7 +17,7 @@ const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(170, 170 * 1720 / 
 
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 // the picture of the scene before melts away over the new one (no hard cut from a card screen into a place)
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 
 /* 1 · the cold open, SPEAKING from 0.825 s (SERIES_FORMAT 11 item 1; EP22's approach): the garden pond at dawn after rain (pond16.js VP16)
    while Heart says "Last time, we asked: A tadpole! It lives in water, and it has a tail." ONE slow push towards the egg clump over the whole
@@ -84,9 +84,9 @@ SC.lceggs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const p = camPt(cam
 /* 8 · Be a frog egg! The pill; the buddies wave the viewer off; ONE glide down to the water and under the surface (a soft blue-green wipe);
    the journey (art16.js eggJourney; the buddies ride along, shrunk, on a sunken leaf, then on the lily pad); one pull back out */
 const camDive = (dive, e) => { const m = Math.max(e * .4, dive); return [1 + .25 * e + 5 * dive, lerp(1000, 980, m), lerp(720, 760, m)]; };
-SC.waitw = (t, s) => { const L = "e701", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VP16(t, {}, camDive(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 440, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1072, 440, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
-      + bd("basil", 1690, 1076, 440, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
+SC.waitw = (t, s) => { /* teacher, 25 Nov 2026: the buddies pop out in turn as the camera dives (never fade with it) */ const L = "e701", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
+  return VP16(t, {}, camDive(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 440, t, { in: s.t0 + .1, out: s.t1 - 1.5, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1072, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+      + bd("basil", 1690, 1076, 440, t, { in: s.t0 + .1, out: s.t1 - 1.42, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a frog egg!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#5FA79A", 960, 540); };
 const sunkLeaf = (t, x, y, k, fl) => TF(x, y + 6 * Math.sin(t * 1.3 + x), k * (fl ? -1 : 1), `<path d="M-230 30 Q-120 -50 60 -40 Q220 -20 250 30 Q120 80 -230 30z" fill="#3E8E4A" stroke="#245E30" stroke-width="6"/><path d="M-220 28 Q0 0 240 28" stroke="#245E30" stroke-width="4" fill="none" opacity=".6"/>`, 0, k);
 SC.shrink = (t, s) => { const m = MK, tF = W("e702", "fish"), tP = m("jpad"), leaf = 1 - ss(tP - .3, tP + .4, t);
@@ -95,7 +95,7 @@ SC.shrink = (t, s) => { const m = MK, tF = W("e702", "fish"), tP = m("jpad"), le
     + riders(t, s, { tin: m("jegg") + .6, h: 200, at: { pip: [210, 1040], basil: [1690, 1046], momo: [420, 1036] }, poses: rp })
     + youTag(t, m("jegg"), "You: a frog egg") + feelTag(t, m("jtadpole"), m("jback") - .1, "a tadpole", 160) + feelTag(t, m("jback") + .2, m("jtail") - .1, "back legs, then front legs", 160) + feelTag(t, m("jfrog"), m("jfrog") + 3, "a frog", 160)
     + speeded(t, m("jhatch"), m("jfrog") + 1.2, 1700, 140); };
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VP16(t, { frog: { x: 1120, y: 884, k: .7 } }, [1 + 2.4 * u, 1120, 860]) + bd("momo", 380, 1076, 540, t, { in: s.t0 + .2 }) + bd("basil", 1500, 1052, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1760, 1048, 380, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VP16(t, { frog: { x: 1120, y: 884, k: .7 } }, [1 + 2.4 * u, 1120, 860]) + bd("momo", 380, 1076, 540, t, { in: s.t0 + .2 }) + bd("basil", 1520, 1052, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1800, 1048, 380, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 9 · the answer is two: a frog. A small pond frog on a lily pad (four legs, webbed back feet, moist skin, no tail); EP15's three cards small
    along the top: card 2 the green tick at ansglow, x chips on cards 1 and 3 and by Pip and Basil; the coin; TADPOLE pops (lib.js o.at); then

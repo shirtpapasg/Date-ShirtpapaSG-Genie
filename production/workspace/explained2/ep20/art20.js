@@ -33,7 +33,7 @@ const holdHand = (k = 1, rot = 0) => TF(0, 0, k, TF(0, -84, 1, hand15({ curl: .6
 // a chip joined to the thing it describes by a short line (SERIES_FORMAT 6). k: 0 pull (green), 1 push (magenta), 2 ink, 3 "not this" blue
 const linkChip = (t, t0, x, y, px, py, k, txt, size = 32, t1) => { if (t < t0) return ""; const a = t1 === undefined ? 1 : 1 - ramp(t, t1, .25); if (a <= .01) return "";
   return OP(a, pline(x, y, px, py, ramp(t, t0, .2)) + TF(x, y, spring(t, t0, .45), tpill(0, 0, txt, size, [PULLC, PUSHC, P.ink, WEAKC, GOODC][k], "#fff", { w: 700 }))); };
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const qMark20 = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 const XDEFS20 = () => `${lg("srWall", [[0, "#EAF3EC"], [1, "#DCEADF"]])}${lg("srFloor", [[0, "#C9D3DA"], [1, "#AEBBC6"]])}${lg("srTop", [[0, "#5A6070"], [1, "#3E4350"]])}${lg("srSky", [[0, "#9FD8FF"], [1, "#E8F7FF"]])}${lg("srGrass", [[0, "#9ED77E"], [1, "#6DBB58"]])}
   ${lg("ktWall", [[0, "#FFF1DA"], [1, "#F8E2C0"]])}${lg("ktFloor", [[0, "#E6DCCB"], [1, "#CFC2AC"]])}${lg("ktDusk", [[0, "#1E2A6E"], [.55, "#3D3F8F"], [1, "#C77A9A"]])}${lg("ktLiving", [[0, "#F6D29C"], [1, "#E8B878"]])}${lg("ktWood", [[0, "#D9A56A"], [1, "#B07A42"]])}

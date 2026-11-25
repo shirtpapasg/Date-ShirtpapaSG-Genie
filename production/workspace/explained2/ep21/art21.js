@@ -25,7 +25,7 @@ const holdHand = (k = 1, rot = 0) => TF(0, 0, k, TF(0, -84, 1, hand15({ curl: .6
 // a chip joined to the thing it describes by a short line (SERIES_FORMAT 6). k: 0 pull (green), 1 push (magenta), 2 ink, 3 "not this" blue
 const linkChip = (t, t0, x, y, px, py, k, txt, size = 32, t1) => { if (t < t0) return ""; const a = t1 === undefined ? 1 : 1 - ramp(t, t1, .25); if (a <= .01) return "";
   return OP(a, pline(x, y, px, py, ramp(t, t0, .2)) + TF(x, y, spring(t, t0, .45), tpill(0, 0, txt, size, [PULLC, PUSHC, P.ink, WEAKC, GOODC][k], "#fff", { w: 700 }))); };
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const qMark20 = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 /* ================================================================ arrows: the PULL (green, towards each other) and the PUSH (magenta, apart) ================================================================ */
 // one thick arrow from (x1, y1) to (x2, y2): white rim, coloured body, an arrowhead at (x2, y2)

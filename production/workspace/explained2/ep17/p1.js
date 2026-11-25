@@ -14,7 +14,7 @@ SCORE.push([W("a1003", "one") - .1, 2, 1]);
 const FOOT = "P3 · Life Cycles of Animals · Four-stage life cycles";
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 // the picture of the scene before melts away over the new one (no hard cut from a card screen into a place)
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(170, 170 * 1720 / tw(txt, 170, 700, "Fredoka", 4)), col, k);
 const bitesAt = (t) => t < MK("munch") ? 0 : Math.min(3, (t - MK("munch")) * .5);
@@ -101,9 +101,9 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "a708", sayId: "a707", who: "basil", 
 /* 8 · Be a butterfly egg! The pill; the buddies wave the viewer off (goodbye); ONE glide in to the young leaf's tip with the egg (a soft green
    wipe); the journey (lc17.js bflyJourney; the buddies ride along, shrunk, on the next lime leaf); one pull back out. The moth on the fence post */
 const camGlide = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .3 * e + 5 * dive, lerp(1100, LT_EGG[0] - 82, m), lerp(560, LT_EGG[1] - 26, m)]; };
-SC.waitw = (t, s) => { const L = "a801", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VL(t, { cat: catLive(t), bites: 3, eggK: 1.2 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 460, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1066, 440, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
-      + bd("basil", 1690, 1076, 460, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
+SC.waitw = (t, s) => { /* teacher, 25 Nov 2026: the buddies pop out in turn as the camera dives (never fade with it) */ const L = "a801", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
+  return VL(t, { cat: catLive(t), bites: 3, eggK: 1.2 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 460, t, { in: s.t0 + .1, out: s.t1 - 1.5, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1066, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+      + bd("basil", 1690, 1076, 460, t, { in: s.t0 + .1, out: s.t1 - 1.42, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a butterfly egg!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#86C64A", 960, 540); };
 const riderLeaf = (t, x, k, fl) => TF(x, 1110 + 6 * Math.sin(t * 1.3 + x), k * (fl ? -1 : 1), `<path d="M-320 40 Q-160 -60 80 -50 Q260 -30 300 30 Q140 90 -320 40z" fill="#58B56C" stroke="#2F7A45" stroke-width="6"/><path d="M-300 36 Q0 0 290 28" stroke="#2F7A45" stroke-width="4" fill="none" opacity=".6"/>`, 0, k);
 SC.shrink = (t, s) => { const m = MK;
@@ -112,7 +112,7 @@ SC.shrink = (t, s) => { const m = MK;
     + riders(t, s, { tin: m("jegg") + .6, h: 200, at: { pip: [230, 1060], basil: [1680, 1066], momo: [440, 1056] }, poses: rp })
     + youTag(t, m("jegg"), "You: a butterfly egg") + feelTag(t, m("jhatch") + .4, m("jtight") - .1, "a caterpillar", 160) + feelTag(t, m("jtight"), m("jbig") - .1, "too tight!", 160) + feelTag(t, m("jbig") + .2, m("jhang") - .2, "you moult a few times", 160) + feelTag(t, m("jpupa"), m("jpupa") + 3, "a pupa", 160)
     + speeded(t, m("jhatch"), m("jpupa") + 1.2, 1700, 140); };
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3 }, [1.1 + 2.6 * u, LT_PUPA[0], LT_PUPA[1] - 60]) + bd("momo", 300, 1076, 520, t, { in: s.t0 + .2 }) + bd("basil", 1560, 1046, 400, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1800, 1052, 400, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3 }, [1.1 + 2.6 * u, LT_PUPA[0], LT_PUPA[1] - 60]) + bd("momo", 290, 1076, 520, t, { in: s.t0 + .2 }) + bd("basil", 1500, 1046, 390, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1800, 1052, 390, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 9 · LARVA: the lime plant, the pupa hanging from its stem (left); the larva card at the right with three plain label lines (lc17.js larvaCard);
    LARVA pops (lib.js o.at); Momo cheers as it lands (a key word learnt), then teaches it, pointing at the card; the book's strip. The moth on

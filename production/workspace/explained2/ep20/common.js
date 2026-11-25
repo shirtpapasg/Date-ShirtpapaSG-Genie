@@ -209,7 +209,7 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88,
   out += t >= tq ? TF(o.qx || 960, o.qy || 850, spring(t, tq, .45), `<g filter="url(#drop)"><rect x="${n2(-tw(qtext, 54, 700) / 2 - 56)}" y="-56" width="${n2(tw(qtext, 54, 700) + 112)}" height="112" rx="56" fill="${P.ink}"/></g>${T(0, 19, qtext, 54, "#fff")}`) : "";
   if (o.fact) out += typeof o.fact === "function" ? o.fact(t) : funFact(t, o.fact);
   out += t >= tTell ? TF(o.tx || 960, o.ty || 975, spring(t, tTell, .45) * (1 + .04 * pulse(t, tTell + .3, .05, .6)), tpill(0, 0, "Tell someone at home!", 48, P.sun, P.ink, { w: 700 })) : "";
-  return out + (fade > .01 && o.from ? OP(fade, o.from()) : "") + logo(t); }
+  return out + (fade > .01 && o.from ? meltFrom(t, s, o.from, fade) : "") + logo(t); }
 /* the reveal's fun fact (SERIES_FORMAT 4, teacher 22 Nov): a labelled picture panel that opens on the buddy's "fun" (mark ff_in) and
    fills one labelled picture per mark. Stage 1: a PLACEHOLDER (cream panel, a box per picture naming what to draw, its label); Stage 2
    draws the pictures (keep the marks and labels). f = { id, at: [x, y], w, h, items: [[mark, label, "DRAW: ..."], ...] } */

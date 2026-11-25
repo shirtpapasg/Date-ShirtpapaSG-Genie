@@ -15,7 +15,7 @@ SCORE.push([MK("coin2") - .1, 3, 1]);
 const FOOT = "P3 · Interactions · Properties of Magnets";
 const CANS = ["The drink can", "The food tin", "Both"];
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 const [TX, TY] = TABLE19;
 const MAGAT = [TX - 250, TY + 34], TINAT = [TX + 120, TY + 50], CANAT = [TX + 250, TY + 50];

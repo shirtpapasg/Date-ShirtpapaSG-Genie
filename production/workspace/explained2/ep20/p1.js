@@ -96,7 +96,7 @@ SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jstop") + .1, "surprised
 // the pull back out: the science room at normal size; the ring floating, Pip's finger lifting from it
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return room(t, camMix(camOn([GAP[0], GAP[1] - 60], 1.3, 960, 600), camOn([GAP[0], GAP[1] - 40], 4, 960, 540), u), { ro: { finger: 1 - clamp((t - s.t0) / .6) } })
-    + bd("basil", 250, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", 1380, 1010, 390, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1700, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+    + bd("basil", 240, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", 1440, 1010, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1720, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 7 · the answer is two: a push. EP19's two cards small at the top left (card 2 lit at ansglow; "not a pull" on card 1); the coins YOU +1 and
    BUDDIES +1. Pip and Basil (right) confident, Momo (wrong) shy, to the END of the scene (OUTCOMES `to`). Pip explains: the camera pushes to

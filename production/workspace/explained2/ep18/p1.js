@@ -18,7 +18,7 @@ const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) 
 const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(170, 170 * 1720 / tw(txt, 170, 700, "Fredoka", 4)), col, k);
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 // the picture of the scene before melts away over the new one (no hard cut from a card screen into a place)
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 // EP17's two dare cards (ep17dare.js: EP17's own art, twoLoops with = / ≠)
 const DCX = [880, 1120], DCY = 838;
 const dcards = (t, t0, id) => [0, 1].map((i) => { if (t0 === undefined) return TF(DCX[i], DCY, .36, dareCard3(i, t, { id: id + i })); const tt = t0 + i * .3; if (t < tt) return ""; const [x, d] = slideX(t, tt, .7, i ? 2300 : -400, DCX[i], DCY + 70); return d + TF(x, DCY, .36, dareCard3(i, t, { id: id + i })); }).join("");
@@ -103,7 +103,7 @@ SC.shrink = (t, s) => { const m = MK;
     + feelTag(t, m("jfrog"), m("jsplash") - .1, "three stages", 160) + feelTag(t, m("jpupa"), m("jmosq") - .1, "one more stage!", 160) + feelTag(t, m("jmosq") + .3, m("jmosq") + 3.5, "four stages", 160); };
 const dotN = (t, marks) => marks.filter((m) => t >= MKS(m)).length;
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VP16(t, { frogAt: false, frog: { x: 1120, y: 884, k: .7 }, items: TF(180, 1010, .9, plate18(t)) }, [1 + 2.4 * u, 1120, 860])
-  + bd("momo", 330, 1076, 470, t, { in: s.t0 + .2 }) + bd("pip", 640, 1066, 440, t, { in: s.t0 + .25 }) + bd("basil", 1680, 1076, 470, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+  + bd("basil", 270, 1076, 500, t, { in: s.t0 + .2 }) + bd("momo", 1420, 1000, 360, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1690, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 8 · the answer is two: they are different. The void deck: the COMPARE FRAME at its home, the dot counters fill (three, four: the pupa's dot
    glows); EP17's two cards small along the top (card 2 the tick at ansglow; an x by Momo's pick; a ? by Basil's: right card, wrong reason);

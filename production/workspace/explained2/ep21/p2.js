@@ -69,7 +69,7 @@ SC.shrink = (t, s) => { const m = MK, rp = { pip: [[m("jpin") + 1, "thinking"], 
 // the pull back out: the jetty at normal size; the compass on the ledge; Basil's magnet lifted away from it
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return jetty(t, camMix(camOn([1300, 640], 1.15, 960, 560), camOn([LEDGE_C[0], LEDGE_C[1] - 14], 7.0, 960, 560), u), { ledge: ledgeProps(t, { mx: LEDGE_M[0] + 80, my: LEDGE_M[1] - 40 }) })
-    + bd("momo", 330, 1076, 500, t, { in: s.t0 + .2 }) + bd("pip", 1730, 1076, 500, t, { in: s.t0 + .25, flip: true }) + bd("basil", 1100, 1010, 420, t, { in: s.t0 + .3 }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+    + bd("momo", 300, 1076, 500, t, { in: s.t0 + .2 }) + bd("pip", 1730, 1076, 500, t, { in: s.t0 + .25, flip: true }) + bd("basil", 1180, 1010, 420, t, { in: s.t0 + .3 }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 6 · the answer is two: the needle turns. The three cards small at the top left (card 2 lit at ansglow; "not this one" on card 1); the coins.
    Momo and Basil confident, Pip shy to the END of the scene (OUTCOMES `to`). NEEDLE pops on Basil's line; needle: Momo's compass held up big

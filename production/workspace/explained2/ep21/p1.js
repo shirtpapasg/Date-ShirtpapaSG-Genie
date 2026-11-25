@@ -101,7 +101,7 @@ SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jback") + .1, "thinking"
 // the pull back out: the field at normal size; the magnet still, its red end towards the rain tree
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return field(t, camMix(camOn([HG[0] - 80, HG[1] + 20], 1.18, 960, 580), camOn([HG[0], HG[1]], 4.6, 960, 560), u), { rig: { a: 0 } })
-    + bd("basil", 300, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", 1440, 1010, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1730, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+    + bd("basil", 280, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", 1440, 1010, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1730, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 7 · the answer is two: the same way every time. EP20's two cards small at the top left (card 2 lit at ansglow; "not this one" on card 1);
    the coins YOU +1 and BUDDIES +1. Pip and Basil confident, Momo shy, to the END of the scene (OUTCOMES `to`). chart1: an arrow lands in each

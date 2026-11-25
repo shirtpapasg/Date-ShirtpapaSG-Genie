@@ -112,7 +112,7 @@ SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jclips") + .15, "surpris
 const pipNail = (t, x, y, h, flip, n = 4, o = {}) => held("pip", x, y, h, flip, nailH()) + (() => { const [tx, ty] = tipOf("pip", x, y, h, flip); return clipBunch(t, tx, ty, n, { k: .62, ...o }); })();
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return shop(t, camMix(camOn([960, 640], 1.06, 960, 600), camOn([1056, 868], 5, 960, 560), u), { tp: { lid: 1 } })
-    + bd("basil", BX.l - 20, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", BX.m, 1010, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", BX.r, 1076, 500, t, { in: s.t0 + .3, flip: true }) + (t > s.t0 + .35 ? pipNail(t, BX.r, 1076, 500, true) : "") + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+    + bd("basil", BX.l, 1076, 480, t, { in: s.t0 + .2 }) + bd("momo", 800, 1010, 370, t, { in: s.t0 + .25 }) + bd("pip", BX.r, 1076, 500, t, { in: s.t0 + .3, flip: true }) + (t > s.t0 + .35 ? pipNail(t, BX.r, 1076, 500, true) : "") + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 7 · the answer is two: the nail attracts the clips. EP21's two cards small at the top left (card 2 lit at ansglow; "not this one" on card 1);
    the coin YOU +1; by the BUDDIES pill a small grey ? (Pip's reason is tested next). The camera pushes to OUR FISHING GAME's Rod 1 box

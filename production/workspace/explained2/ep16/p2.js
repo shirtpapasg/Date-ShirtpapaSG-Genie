@@ -13,7 +13,7 @@ SCORE.push([MK("coin2") - .1, 3, 1]);
 const FOOT = "P3 · Life Cycles of Animals · Three-stage life cycles";
 
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 const numB = (t, t0, x, y, n, k = 1) => t < t0 ? "" : TF(x, y, spring(t, t0, .45) * k, `<g filter="url(#dropS)"><circle r="46" fill="url(#gSun)" stroke="${P.ink}" stroke-width="6"/></g>${T(0, 22, n, 60, P.ink)}`);
 
@@ -78,9 +78,9 @@ SC.lcskin = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camSkin(S
 /* 7 · Be the nymph! The pill, the buddies wave the viewer off, ONE glide down into the grass (a soft green wipe); the journey (art16.js
    nymphJourney; the buddies ride along, shrunk, on the next blade of grass); then one pull back out */
 const camDown = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .2 * e + 4 * dive, lerp(1000, 1060, m), lerp(640, 860, m)]; };
-SC.waitw = (t, s) => { const L = "f801", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VG16(t, { skin: SKIN2 }, camDown(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 440, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1072, 440, t, { in: s.t0 + .15, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
-      + bd("basil", 1690, 1076, 440, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
+SC.waitw = (t, s) => { /* teacher, 25 Nov 2026: the buddies pop out in turn as the camera dives (never fade with it) */ const L = "f801", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
+  return VG16(t, { skin: SKIN2 }, camDown(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 440, t, { in: s.t0 + .1, out: s.t1 - 1.5, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1072, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+      + bd("basil", 1690, 1076, 440, t, { in: s.t0 + .1, out: s.t1 - 1.42, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the nymph!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#7CC85A", 960, 540); };
 const riderBlade = (t, x, k, fl) => TF(x, 1110 + 6 * Math.sin(t * 1.3 + x), k * (fl ? -1 : 1), `<path d="M-300 20 Q0 -40 320 -10 L330 60 L-300 60z" fill="#6FBF4E" stroke="#3F8A3A" stroke-width="6"/>`, 0, k);
 SC.shrink = (t, s) => { const m = MK;
@@ -91,7 +91,7 @@ SC.shrink = (t, s) => { const m = MK;
     + speeded(t, m("jeat"), m("jwings") + 1.5, 1700, 140); };
 const ADULT2 = { bx: 1240, by: 1000, bh: 340, lean: -16, u: .78, k: .8, rot: -60 };
 const adultOn = (t, B, away = -9) => { const tip = bladeTip(t, B.bx, B.by, B.bh, B.lean, 5, B.u), u = clamp((t - away) / .8); return blade(t, B.bx, B.by, B.bh, B.lean, "#7CC85A", 18, 5) + (u >= 1 ? "" : TF(tip[0] + 600 * u, tip[1] - 300 * Math.sin(Math.PI * u * .7), B.k, hopper16(t, { adult: true, ph: 3 }), B.rot * (1 - u))); };
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VG16(t, { skin: SKIN2, items: adultOn(t, ADULT2) }, [1.4 + 2.4 * u, 1140, 760]) + bd("momo", 330, 1076, 520, t, { in: s.t0 + .2 }) + bd("basil", 1690, 1076, 520, t, { in: s.t0 + .25, flip: true }) + wipe(t, s.t0, "#7CC85A") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VG16(t, { skin: SKIN2, items: adultOn(t, ADULT2) }, [1.4 + 2.4 * u, 1140, 760]) + bd("momo", 320, 1076, 520, t, { in: s.t0 + .2 }) + bd("basil", 1690, 1076, 520, t, { in: s.t0 + .25, flip: true }) + wipe(t, s.t0, "#7CC85A") + HUD(t); };
 
 /* 8 · MOULTING: the empty skin on its blade and, beside it, the grasshopper that came out of it (a little bigger, with wings), large between the
    buddies; MOULTING pops (lib.js o.at); Momo fixes her own guess; the grasshopper hops away. The mantis on a hibiscus flower above them */

@@ -106,7 +106,7 @@ function reactChosen(g) { const L = ["pip", "basil", "momo"].filter((w) => w !==
 function reactPoseAt(tr, i, who) { const g = tr[i]; if (g.who === who || reactChosen(g) !== who) return null; const ps = reactPose(who, g.txt, g.k); if (!ps || (ps === "cheer" && !learnAt(g.t))) return null;
   for (let j = i - 1; j >= 0 && g.t - tr[j].t < 6; j--) { const h = tr[j]; if (h.who !== who && reactChosen(h) === who && reactPose(who, h.txt, h.k)) return null; } return ps; }
 // -> { t0, t1, pose (null = a nod-hop) } of the reaction running at t, or null
-function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact || o.still) return null; const T0 = Math.max(S.t0 - .05, o.in !== undefined ? o.in + .6 : -9), d = REACT_DLY[who] || .2;
+function reactAt(who, t, tsw, nxt, o) { const S = window._S; if (!S || o.noreact || o.still) return null; const T0 = Math.max(S.t0 - .05, o.react0 !== undefined ? o.react0 : o.in !== undefined ? o.in + .6 : -9), d = REACT_DLY[who] || .2;
   const tr = reactTriggers(); let i = -1; for (let j = tr.length - 1; j >= 0; j--) { if (tr[j].t + d <= t) { i = j; break; } } if (i < 0) return null;
   for (; i >= 0; i--) { const g = tr[i]; if (g.t < T0) return null; if (g.who === who) continue; const t0 = g.t + d; if (t0 < tsw + .7) return null;
     let nt = 1e9; for (let j = i + 1; j < tr.length; j++) if (tr[j].who !== who) { nt = tr[j].t + d; break; }
@@ -119,7 +119,45 @@ function blinkAt(who, t) { const per = 3.9, ph = { pip: .9, basil: 2.1, momo: 3.
    o.in = pop-in time; o.out = pop-out time; o.flip; o.aura (disc); o.rim; o.jump = [[t, height]] hops; o.rock = side-to-side rock amp (deg)
    o.mouth (0..2) / o.eyes "shut": a yawn or a doze in the sit pose (EP14); o.look = lean in degrees; o.k = extra scale; o.shadow = false to hide; o.still = no idle */
 const SIZE_K = { basil: .94 };   // teacher, 23 Nov: keep the three in proportion. EP15 v2 cast: Basil v2 is slimmer than the old Basil; at .94 his painted area (tail included) equals Pip's and Momo's and his crest sits level with Pip's head (qa/size_check.jpg)
-function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
+/* teacher, 25 Nov 2026 (EP18 P2 1:45): "There is a glitch in the animations, where pet buddies appear and reappear again for this
+   particular scene." SERIES_FORMAT: a buddy is never shown twice or half-faded in a scene change. A melt (the old scene's last frame
+   fading over the new one: melt() and lizReveal's o.from) draws that old frame WITHOUT its buddies (capBuddies notes where each one
+   stood). A buddy both scenes have GLIDES from its old spot and size to its new ones while the background melts (no second pop-in, no
+   pose pop when the pose is the same, its name tag as before); a buddy only the old scene has pops out where it stood (opaque, the usual
+   .2 s shrink). While the melt runs, the new scene's buddies are drawn ON TOP of the fading old frame (never washed out under it). QA: ../qa/buddy_ghost_scan.js steps through every scene change and lists any frame with a buddy twice or half-faded. */
+let _BCAP = null, _BDRAW = false, _BALL = null; const _MELTM = {};
+// f() with buddy() noting instead of drawing -> { svg, bud: { who: { x, y, h, o, t, hk, name } } } (the biggest copy of each buddy)
+function capBuddies(f) { const prev = _BCAP, pall = _BALL, nh = window._noHud, keep = [window._BP, window._SAID, window._BUBAT]; _BCAP = {}; _BALL = []; let svg = "", bud, all;
+  try { svg = f(); } finally { bud = _BCAP; all = _BALL; _BCAP = prev; _BALL = pall; window._noHud = nh; [window._BP, window._SAID, window._BUBAT] = keep; } return { svg, bud, all }; }
+// the melt a scene opens with, { from, d } (found by a dry run of its first frame: melt() notes itself), or null
+function meltOf(s) { const k = "@" + s.name; if (!(k in _MELTM)) { _MELTM[k] = null; if (SC[s.name]) capBuddies(() => SC[s.name](s.t0 + .02, s)); } return _MELTM[k]; }
+// the old scene's last frame as a melt draws it (no HUD), its buddies taken out
+function meltFrame(name) { return _MELTM["F" + name] || (_MELTM["F" + name] = capBuddies(() => { window._noHud = true; return SC[name](SCN[name].t1 - .04, SCN[name]); })); }
+// the buddies a scene draws at time t
+function budsAt(s, t) { const k = s.name + "@" + t.toFixed(3); return _MELTM[k] || (_MELTM[k] = capBuddies(() => SC[s.name](t, s)).bud); }
+// melt(t, s, name, d): the old scene's last frame fades out over d s (buddies glide or pop out, never fade)
+function meltScene(t, s, name, d = .4) { const k = "@" + s.name; if (!_MELTM[k]) _MELTM[k] = { from: name, d }; if (_BCAP) return "";
+  const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; const F = meltFrame(name), now = capBuddies(() => SC[s.name](t, s)).all; let top = "";
+  _BDRAW = true; try { for (const c of now) top += buddy(...c); } finally { _BDRAW = false; }   // the new scene's buddies, above the old frame
+  return OP(a, F.svg) + meltOut(F.bud, budsAt(s, s.t0 + d), t, s.t0) + top; }
+// lizReveal's o.from: the scene before fades out over .45 s, the same way
+function meltFrom(t, s, f, a) { if (_BCAP) return ""; const F = _MELTM["L" + s.name] || (_MELTM["L" + s.name] = capBuddies(f)); return OP(a, F.svg) + meltOut(F.bud, budsAt(s, s.t0 + .45), t, s.t0); }
+// the old scene's buddies the new one does not have: popped out where they stood
+function meltOut(old, now, t, t0) { const k = 1 - eo((t - t0) / .2); if (k < .02) return ""; let out = "";
+  for (const [who, c] of Object.entries(old)) if (!now[who] || c.o.peek || now[who].o.peek) out += buddy0(who, c.x, c.y, c.h, c.t, { ...c.o, k: (c.o.k || 1) * k }); return out; }
+function buddy(who, x, y, h, t, o = {}) {
+  if (_BCAP) { _BALL.push([who, x, y, h, t, o]); const P0 = window._POSE; window._POSE = []; let r; try { buddy0(who, x, y, h, t, o); r = window._POSE[0]; } finally { window._POSE = P0; }
+    if (r && r.h > 2) { const c = _BCAP[who]; if (!c || r.h > c.hk) _BCAP[who] = { x, y, h, o, t, hk: r.h, name: r.name }; } return ""; }
+  const S = window._S, M = S && !o.peek && t >= S.t0 && t < S.t1 ? meltOf(S) : null;
+  if (M && !_BDRAW && t < S.t0 + M.d) return "";   // drawn by meltScene, above the fading old frame
+  if (M) { const a = meltFrame(M.from).bud[who], b = budsAt(S, S.t0 + M.d)[who];
+    if (a && b && !a.o.peek) { const u = eio((t - S.t0) / M.d), o2 = { ...o, in: S.t0 - 3, tagIn: o.in, react0: o.in !== undefined ? o.in + .6 : undefined };
+      const pz = (n) => n.startsWith(who + "_sit") ? "sit" : n; const P0 = window._POSE; window._POSE = []; let r; try { buddy0(who, x, y, h, t, o2); r = window._POSE[0]; } finally { window._POSE = P0; }
+      if (r && pz(r.name) === pz(a.name)) o2.calmTo = S.t0 + M.d;   // the same pose on both sides: no pose pop at the change
+      if (u < 1) { o2.flip = u < .5 ? a.o.flip : o.flip; return buddy0(who, lerp(a.x, x, u), lerp(a.y, y, u), lerp(a.h, h, u), t, o2); }
+      return buddy0(who, x, y, h, t, o2); } }
+  return buddy0(who, x, y, h, t, o); }
+function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99; const PS = (o.poses || []).slice().sort((a, b) => a[0] - b[0]);   // EP15: poses in time order
   for (const [tp, p] of PS) if (t >= tp) { pose = p; tsw = tp; }
@@ -146,7 +184,7 @@ function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   // pose swap, as in the approved pose test: 3 frames of squash on the old picture, a hard cut to the new picture stretched tall,
   // an overshoot that settles in about 0.3 s, a tiny hop, a ring of sparkles and two dust puffs. Never a cross-fade.
   const ant = ss(nxt - .1, nxt, t); sy *= 1 - .10 * ant; sx *= 1 + .08 * ant; let fx = "";
-  if (tsw > -90 && !(o.in !== undefined && Math.abs(tsw - o.in) < .3)) { const u = t - tsw, w = Math.exp(-u * 9) * Math.cos(u * 23); sy *= 1 + .13 * w; sx *= 1 - .09 * w; lift -= 15 * Math.sin(Math.PI * clamp(u / .22)) * (h / 380);
+  if (tsw > -90 && !(o.in !== undefined && Math.abs(tsw - o.in) < .3) && !(o.calmTo !== undefined && tsw <= o.calmTo)) { const u = t - tsw, w = Math.exp(-u * 9) * Math.cos(u * 23); sy *= 1 + .13 * w; sx *= 1 - .09 * w; lift -= 15 * Math.sin(Math.PI * clamp(u / .22)) * (h / 380);
     if (u >= 0 && u < .4 && !o.nofx) { const e = 1 - Math.pow(1 - u / .4, 2), cy = y - h * .52;
       for (let i = 0; i < 6; i++) { const an = (-90 + (i - 2.5) * 44 + 8 * (who.length % 3)) * Math.PI / 180, r = h * (.5 + .22 * e), sc = (i % 2 ? .55 : .8) * Math.pow(Math.sin(Math.PI * Math.min(u / .4, 1)), .6) * h / 380; fx += `<g transform="translate(${n2(x + Math.cos(an) * r * 1.05)} ${n2(cy + Math.sin(an) * r * .92)}) scale(${n2(sc)}) rotate(${n2(40 * u)})"><path d="M0-32 Q4-4 32 0 Q4 4 0 32 Q-4 4 -32 0 Q-4-4 0-32z" fill="#FFF3DC"/></g>`; }
       for (const sg of [-1, 1]) fx += `<ellipse cx="${n2(x + sg * h * (.3 + .22 * e))}" cy="${n2(y + 4 - 10 * e)}" rx="${n2((26 + 30 * e) * h / 380)}" ry="${n2((12 + 12 * e) * h / 380)}" fill="#DDD3FF" opacity="${n2(.42 * (1 - e))}" filter="url(#b4)"/>`; }
@@ -170,7 +208,7 @@ function buddy(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (o.aura && !TRIAL) { const R = h * .62 * Math.min(1, k), cx = x + DISC_DX[who] * h * fl; out += `<circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="${AURA[who]}" opacity="${o.auraO || .9}"/><circle cx="${n2(cx)}" cy="${n2(y - h * .46)}" r="${n2(R)}" fill="url(#gSpot)"/>`; }
   if (o.shadow !== false) out += `<ellipse cx="${n2(x)}" cy="${n2(y - h * .01)}" rx="${n2(h * .36 * sx * k * (1 + lift / 400))}" ry="${n2(h * .06 * k)}" fill="${P.ink}" opacity="${n2(.3 * (1 + lift / 200))}" filter="url(#b4)"/>`;
   out += `<g transform="translate(${n2(x)} ${n2(y + lift)}) rotate(${n2(rot)}) scale(${n2(s0 * sx * twk * fl * 1000) / 1000} ${n2(s0 * sy * 1000) / 1000}) translate(${-S.ax} ${-S.ay})" ${o.rim === false ? "" : `filter="url(#${o.rim || "rimB"})"`}><use href="#s_${name}"/></g>`;
-  if (o.tag !== false) { const sp = speaking(who, t), a = (o.in !== undefined ? spring(t, o.in + .15, .4) * (1 - ss(o.in + 2.4, o.in + 2.7, t)) : 0), b = sp ? spring(t, sp.t - .04, .35) : 0, kt = Math.max(a, b) * Math.min(1, k);
+  if (o.tag !== false) { const sp = speaking(who, t), tI = o.tagIn !== undefined ? o.tagIn : o.in, a = (tI !== undefined ? spring(t, tI + .15, .4) * (1 - ss(tI + 2.4, tI + 2.7, t)) : 0), b = sp ? spring(t, sp.t - .04, .35) : 0, kt = Math.max(a, b) * Math.min(1, k);
     if (kt > .03) { const size = clamp(h * .115, 26, 40); out += TF(x, Math.min(y + 4, 1080 - size * .95), kt, nameTag(who, size)); } }
   return out + fx;
 }

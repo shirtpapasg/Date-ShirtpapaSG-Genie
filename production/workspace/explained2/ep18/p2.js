@@ -14,7 +14,7 @@ SCORE.push([MK("coin1") - .1, 1, 1]);
 SCORE.push([MK("coin2") - .1, 3, 1]);
 const FOOT = "P3 · Life Cycles of Animals · Comparing life cycles";
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const R1C = ["The egg", "The chicken", "Neither: it goes round"];
 
 /* 1 · "Last time...": three pictures from Part 1, one at a time, centred and large, a gentle push-in, one label each (>= 2.5 s each) */
@@ -51,7 +51,7 @@ SC.shrink = (t, s) => { const m = MK;
     + youTag(t, m("jegg"), "You: an egg") + feelTag(t, m("jchick"), m("jhen") - .1, "a chick", 160) + feelTag(t, m("jhen"), m("jlay") - .1, "an adult hen", 160) + feelTag(t, m("jlay"), m("jagain") + 2.5, "a new egg", 160)
     + speeded(t, m("jhatch"), m("jagain")); };
 const strawTuft = (t, x, y) => TF(x, y, 1, [...Array(14)].map((_, i) => `<path d="M${n2(-260 + 40 * i)} ${n2(10 - 20 * hash(i, 3))} q${n2(40 + 20 * hash(i, 5))} ${n2(-50 - 30 * hash(i, 7) + 4 * Math.sin(t + i))} ${n2(90 + 30 * hash(i, 9))} -20" stroke="${i % 3 ? "#D9B86A" : "#B8944A"}" stroke-width="12" fill="none" stroke-linecap="round"/>`).join(""));
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VGE(t, {}, [1.1 + 2.4 * u, 900, 760]) + bd("momo", 280, 1076, 470, t, { in: s.t0 + .2 }) + bd("basil", 1450, 1040, 400, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1720, 1076, 470, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VGE(t, {}, [1.1 + 2.4 * u, 900, 760]) + bd("momo", 260, 1076, 500, t, { in: s.t0 + .2 }) + bd("basil", 1200, 1010, 380, t, { in: s.t0 + .25, flip: true }) + bd("pip", 1700, 1076, 500, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 6 · the answer is three: neither. The garden: the hen on her nest; the three numbered cards small along the top (card 3 lit at ansglow, an
    x on card 1 and by Basil); the coin (the Buddies also score: two of three were right). OUTCOMES: Pip and Momo confident, Basil shy. The

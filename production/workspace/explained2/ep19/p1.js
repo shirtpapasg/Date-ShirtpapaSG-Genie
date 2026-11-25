@@ -17,7 +17,7 @@ const FOOT = "P3 · Interactions · Properties of Magnets";
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 const slamFit = (y, txt, col, k) => slamLine(y, txt, Math.min(170, 170 * 1720 / tw(txt, 170, 700, "Fredoka", 4)), col, k);
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const [TX, TY] = TABLE19;
 // the things on the table's front strip (in front of the tray): the magnet, the steel pin, the copper wire
 const MAGAT = [TX + 230, TY + 34], PINAT = [TX - 120, TY + 38], WIREAT = [TX + 20, TY + 44];
@@ -123,7 +123,7 @@ SC.shrink = (t, s) => { const m = MK, lift = ss(m("jlift"), m("jlook") + .6, t),
 const HOLDP = [TX - 140, TY - 110];
 SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6);
   return VD19(t, { top: TF(WIREAT[0], WIREAT[1], .42, wire18()) + heldMagnet(t, HOLDP[0], HOLDP[1], .42, { pin: true }) }, camMix(camOn(HOLDP, 1.3, 960, 640), camOn(HOLDP, 4, 960, 640), u))
-    + bd("momo", 1700, 1076, 500, t, { in: s.t0 + .2, flip: true }) + bd("pip", 1350, 1000, 380, t, { in: s.t0 + .25, flip: true }) + bd("basil", 240, 1076, 480, t, { in: s.t0 + .3 }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+    + bd("momo", 1700, 1076, 500, t, { in: s.t0 + .2, flip: true }) + bd("pip", 1330, 1000, 380, t, { in: s.t0 + .25, flip: true }) + bd("basil", 240, 1076, 480, t, { in: s.t0 + .3 }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 8 · the answer is one: the steel pin. The pin hangs from the magnet's END over the green half and drops into it (trayPin); the copper wire is
    slid into the blue half (trayWire). EP18's three cards small along the top (card 1 lit at ansglow; "not pulled" on cards 2 and 3); the coin

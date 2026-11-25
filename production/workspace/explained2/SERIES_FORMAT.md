@@ -412,6 +412,20 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - a hard cut to the new pose stretched tall,
   - overshoot, a small hop, sparkles and dust.
   - NEVER cross-fade.
+- **A buddy is never shown twice or half-faded in a scene change (teacher, 2026-11-25, on EP18 Part 2 at 1:45, the pull-out from
+  the egg journey into the answer: "There is a glitch in the animations, where pet buddies appear and reappear again for this
+  particular scene").** The old scene's last frame used to melt (cross-fade) over the new one WITH its buddies, while the same buddies
+  popped in again at new spots: ghost copies on top of each other, then a second entrance.
+  - A melt fades the BACKGROUND only. `melt()` (lib.js `meltScene`) and lizReveal's `o.from` (lib.js `meltFrom`) draw the old frame
+    without its buddies.
+  - A buddy in both scenes stays one buddy: it glides from its old spot and size to its new ones while the background melts (no
+    second pop-in, no pose pop if the pose is the same). The new scene's buddies are drawn above the fading old frame.
+  - Better still, the old scene ENDS on the new scene's layout: every pull-out after a journey puts the buddies exactly where the
+    answer scene has them (same x, y, size, facing), so there is nothing to move.
+  - A buddy only the old scene has pops out where it stood (the usual 0.2 s shrink), opaque. A buddy never fades with the camera
+    either: before a dive (waitw) the buddies pop out in turn.
+  - QA before every render: `node qa/buddy_ghost_scan.js epNN P` steps through every scene change at 30 fps and lists each frame
+    where a buddy shows twice or half-transparent. It must list none (a buddy card or a round face frame inside one scene is fine).
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**
   - lip-sync on the talking sprites;
@@ -498,7 +512,7 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
 
 - Heart's voice on top.
 - A light bouncy bed, ducked under speech.
-- A calm pad for the shrink.
+- A calm pad for the shrink, and no other music under it (teacher, 2026-11-25: the journey is a quiet one; see the Kampong Walk rule below).
 - Effects: a woodblock tick that speeds up for lock-ins, a bell, a "LOCKED IN!" stamp, pops on pose swaps, the clap-clap-stomp chant beat, and a soft chime on new key words.
 - **Every place sounds alive (teacher, 2026-11-22: "I still recall there's raining sound during episode 1. Now for this supermarket
   scene, there's no sound effects of shoppers, laughter, bells… the quality indeed dipped").** Each real place has its own ambience
@@ -516,10 +530,21 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   background bed of every part, running continuously from start to end (never restarted, no hard cuts): it fades in at the start and out
   at the end, sits quiet under speech (ducked so the voices stay clearly on top: about -28 LUFS short-term under speech, a little higher,
   about -23, in the gaps), and fades smoothly to SILENT under every countdown (only the ticks and the bell), under the clap-clap-stomp
-  chant and under the "Now you know!" shout. It REPLACES the old music beds (the game groove, the calm bed, the micro-world pad, the
-  outro groove): never two musics at once. Every sound effect and ambience stays. Final loudness stays -16 LUFS integrated, true peak
+  chant and under the "Now you know!" shout. It REPLACES the old game groove, calm bed and outro groove: never two musics at once.
+  Every sound effect and ambience stays. Final loudness stays -16 LUFS integrated, true peak
   <= -1.5 dBTP. Tool: `python3 add_lofi.py <epdir> <part>` on a finished part (rebuilds the soundtrack from the episode's own song.js
   and cues, re-muxes the mp4 with the video copied, checks it); `finish.sh` runs it after the mux (`music/README.md`).
+  - **The music pauses for every shrink-down journey (teacher, 2026-11-25: "for shrink down scenes, the music should pause, like a
+    quiet journey in the first few episodes. Now the background is still playing at same volume... this destroyed the magical journey
+    of shrinking down").** Kampong Walk fades smoothly OUT (1.2 s) going into every journey and back IN (1.5 s) after the pull-out,
+    never a cut: silent from the start of the "Be a ...! Shrink down. Quietly." scene (`waitw`) through the journey (`shrink`, or
+    EP0 Part 2's `garden`) to the end of the `pullout`. In the journey the episode's OWN micro-world pad plays, as in the first
+    episodes (song.js "the micro-world": a slow warm pad with soft bells, no rhythm, the `C.R.wonder` regions; never stripped), with
+    the journey's effects (the hatch pop, the underwater hush, ...). Heart's voice stays on top. `add_lofi.py` finds the journeys from
+    each part's `tl` scenes and `cues` (waitw / shrink / pullout and every scene the wonder pad covers), and reports for each one
+    that Kampong Walk is silent there and the pad's level (about -26 LUFS short-term). Applies to EP0 and EP16-EP22 (the v4 files;
+    EP20 and EP21's v3 files were rebuilt in place before their upload). Options for files with other names: `--in <mp4>` (e.g. a
+    spliced `_v3`) and `--out <new mp4>` (never overwrites).
 - Loudness about -16 LUFS.
 - A human must listen before upload: the agents can only measure the sound.
 

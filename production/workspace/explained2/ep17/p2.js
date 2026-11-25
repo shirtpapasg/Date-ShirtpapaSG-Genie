@@ -14,7 +14,7 @@ SCORE.push([MK("coin2") - .1, 3, 1]);
 const FOOT = "P3 · Life Cycles of Animals · Four-stage life cycles";
 const R1 = ["An egg", "A pupa", "An adult"], R1P = [0, 2, 3];
 const bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
-const melt = (t, s, name, d = .4) => { const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; window._noHud = true; let v = ""; try { v = SC[name](SCN[name].t1 - .04, SCN[name]); } finally { window._noHud = false; } return OP(a, v); };
+const melt = (t, s, name, d = .4) => meltScene(t, s, name, d);   // lib.js (teacher, 25 Nov 2026): the old frame melts, its buddies glide or pop out, never fade
 const qMark = (t, t0, x, y, r = 50) => t < t0 ? "" : TF(x, y, spring(t, t0, .5) * (1 + .05 * Math.sin(t * 4)), `<g filter="url(#dropS)"><circle r="${r}" fill="url(#gSun)"/></g>${T(0, r * .52, "?", r * 1.56, P.ink)}`);
 const r1Pic = (i, t) => TF(0, 0, 1.08, mPic(R1P[i], t));
 
