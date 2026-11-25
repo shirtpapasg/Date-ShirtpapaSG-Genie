@@ -483,6 +483,7 @@ The teacher: "something is wrong with the direction of the person cycling. Also,
 - A person, animal or vehicle that travels across the frame (a cyclist, a fish, a bird, a bus, an insect, a buddy walking) always faces its direction of travel: its head, front wheel or nose leads. Never slide a drawing backwards.
 - Every moving drawing function states which way it is drawn (a `FACES: right` / `FACES: left` comment at its definition). Where it moves the other way, mirror it with a negative x-scale only (`TF(x, y, -k, art, rot, k)`), never a negative scale on both axes (that turns it upside down).
 - QA: `qa/facing_scan.js` (run with the ghost scan) lists every moving drawing whose travel direction disagrees with its facing. A part is not finished until it is clean. Check by eye too: the contact sheet shows anything crossing the frame.
+- Run it from explained2/: `NODE_PATH=$(npm root -g) node qa/facing_scan.js epNN P` (BACKWARDS lines with the 10 s chunks to re-render; exit 1 when any; `--movers` also lists untagged groups that travel; `STATIC=1 node qa/facing_scan.js epNN` is a quick source-only check). A creature drawn inline in a scene gets an SVG note as the first thing in the group that moves it: `` TF(x, y, k, `<!--FACES:right cyclist-->...`) ``.
 
 ## 7. On screen
 
