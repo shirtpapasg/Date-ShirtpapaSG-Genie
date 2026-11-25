@@ -52,15 +52,15 @@ SC.lcwriggler = (t, s) => { window._BUBAT = { '*': [700, 880] }; const p = camPt
 /* 6 · Be a mosquito egg! The pill; the buddies wave the viewer off (goodbye); ONE glide down to the pail's still surface (a soft blue wipe); the
    journey (lc17.js mosqJourney, redrawn 25 Nov: a side view of the pail, the buddies watching from its rim); one pull back out. The dragonfly on the pail's rim */
 const camGlide = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .25 * e + 5 * dive, lerp(1000, PAILC[0] + 20, m), lerp(640, PAILC[1] - PAILH, m)]; };
-SC.waitw = (t, s) => { const L = "b601", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VCR(t, { wrig: 1 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 1250, 1056, 420, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 1520, 1066, 440, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
-      + bd("basil", 1780, 1076, 460, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
+SC.waitw = (t, s) => { /* teacher, 25 Nov 2026: the buddies pop out in turn as the camera dives (never fade with it) */ const L = "b601", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
+  return VCR(t, { wrig: 1 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 1250, 1056, 420, t, { in: s.t0 + .1, out: s.t1 - 1.5, flip: true, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 1520, 1066, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, flip: true, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+      + bd("basil", 1780, 1076, 460, t, { in: s.t0 + .1, out: s.t1 - 1.42, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a mosquito egg!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#7FC6D8", 960, 540); };
 SC.shrink = (t, s) => { const m = MK;   // 25 Nov redraw (teacher: "I don't get what this scene is"): a side view of the pail's still water, YOU marked, every stage labelled on the thing, a stage strip; the buddies watch from the rim (lc17.js mosqJourney)
   const rp = { momo: [[m("jhatch") + .2, "surprised"], [m("jhatch") + 2.2, "sit"], [m("jpupa") + .2, "thinking"], [m("jpupa") + 2.4, "sit"], [m("jfly") + .2, "surprised"], [m("jfly") + 2, "sit"]],
     pip: [[W("b603", "moult") + .3, "pointing"], [W("b603", "moult") + 2.2, "sit"], [m("jfly") + .2, "surprised"], [m("jfly") + 2, "sit"]], basil: [[m("jfly") + .2, "surprised"], [m("jfly") + 2, "sit"]] };
   return mosqJourney(t, s, { poses: rp }); };
-SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VCR(t, { wrig: 1, pupae: 1, dflyAt: false }, [1.4 + 2.6 * u, PAILC[0] + 20, PAILC[1] - PAILH]) + bd("basil", 300, 1076, 500, t, { in: s.t0 + .2 }) + bd("pip", 1680, 1076, 510, t, { in: s.t0 + .25, flip: true }) + bd("momo", 1420, 1040, 380, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
+SC.pullout = (t, s) => { const u = 1 - eo((t - s.t0) / .6); return VCR(t, { wrig: 1, pupae: 1, dflyAt: false }, [1.4 + 2.6 * u, PAILC[0] + 20, PAILC[1] - PAILH]) + bd("basil", 250, 1076, 500, t, { in: s.t0 + .2 }) + bd("pip", 1720, 1076, 510, t, { in: s.t0 + .25, flip: true }) + bd("momo", 1210, 1030, 370, t, { in: s.t0 + .3, flip: true }) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 7 · the answer is two: the pupa. The pail at its spot, the wrigglers and two comma-shaped pupae at the surface; the three numbered cards small
    along the top, card 2 glows (ansglow), x chips on card 3 and by Momo; the coin (two of three were right: the Buddies also score). Basil and
