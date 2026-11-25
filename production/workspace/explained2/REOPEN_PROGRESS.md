@@ -138,3 +138,5 @@
 - 20:49 UTC: EP25 UPLOADED (teacher pre-approved): Part 1 2mqesk7Ntoc, Part 2 T19-tLr7tbk. Chapters applied.
 - 20:51 UTC: EP26 UPLOADED (teacher pre-approved): Part 1 TTlTybAl2Fc, Part 2 iy77Q9ymcMk. Chapters applied.
 - 20:53 UTC 25 Nov: TEACHER: 'OK to replace the fixed parts' (uploading v5 of EP17 P2, EP18 P1+P2, EP16 P1, EP19 P1, EP22 P2) and 'EP20 toy train: leave it'.
+- 20:54 UTC: EP17 v5 UPLOADED (teacher: 'OK to replace the fixed parts'): YJyG31rG41s
+- 20:55 UTC: EP17 v5 P2 UPLOADED YJyG31rG41s (chapters on, playlists done). EP18 v5 P1 8SjQiyMz9oc + P2 WUjnXo-s1rg uploaded but the quota ran out before thumbnails/playlists/retire; resume upv5.sh (18 16 19 22) after 08:00 UTC 26 Nov.
