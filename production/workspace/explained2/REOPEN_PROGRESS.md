@@ -116,3 +116,5 @@
 - 07:24 UTC: all final files built and verified: EP0, EP16, EP17, EP18, EP19, EP20, EP21, EP22 (both parts each, epNN_partP_final.mp4: no ghosting + cheer + quiet journey audio; EP17 P2 also the new egg journey). Superseded v3/v4/v4g copies deleted. upload_v4.json ready for EP0, EP16-19, EP22; scratchpad/upv4.sh uploads one. Waits for the teacher's 'OK to re-upload the fixed episodes'.
 - 07:24 UTC: CORRECTION to the line above: EP17 Part 1 was not built then (the isolated-copy render wrote its clip to the live folder); re-running it from the live ep17 folder now.
 - 07:32 UTC: EP17 Part 1 final built (verify OK, 9422 frames, 0 decode errors). All 16 final files now ready.
+- 08:14 UTC (main session): EP20 v3 UPLOADED (cheer fix): Part 1 XfHHnLCXFzQ, Part 2 hKvBqtD5mwY. Chapters applied.
+- 08:16 UTC (main session): EP21 v3 UPLOADED (cheer fix): Part 1 7rlZItWFA-0, Part 2 VDi1Nam7aaU. Chapters applied.
