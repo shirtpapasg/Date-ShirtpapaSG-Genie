@@ -137,3 +137,4 @@
 - 20:48 UTC: EP24 UPLOADED (teacher pre-approved): Part 1 XE_lK9BbfhU, Part 2 IX-FSJWo7pQ. Chapters applied.
 - 20:49 UTC: EP25 UPLOADED (teacher pre-approved): Part 1 2mqesk7Ntoc, Part 2 T19-tLr7tbk. Chapters applied.
 - 20:51 UTC: EP26 UPLOADED (teacher pre-approved): Part 1 TTlTybAl2Fc, Part 2 iy77Q9ymcMk. Chapters applied.
+- 20:53 UTC 25 Nov: TEACHER: 'OK to replace the fixed parts' (uploading v5 of EP17 P2, EP18 P1+P2, EP16 P1, EP19 P1, EP22 P2) and 'EP20 toy train: leave it'.
