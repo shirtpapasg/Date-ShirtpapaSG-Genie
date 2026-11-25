@@ -66,8 +66,16 @@ function scalyFoot19(t, o = {}) { const sh = blink16(t, 1.1), w = 5 * Math.sin(t
 function magnet19(t, o = {}) { const cu = o.cut || 0;
   let s = `<g filter="url(#dropS)"><rect x="-150" y="-42" width="150" height="84" rx="12" fill="#E0453A" stroke="#9A2A1E" stroke-width="6"/><rect x="0" y="-42" width="150" height="84" rx="12" fill="#3A6ADB" stroke="#1E3E8A" stroke-width="6"/></g>`
     + `<rect x="-140" y="-34" width="130" height="16" rx="8" fill="#fff" opacity=".28"/><rect x="10" y="-34" width="130" height="16" rx="8" fill="#fff" opacity=".24"/>` + T(-75, 20, "N", 56, "#fff") + T(75, 20, "S", 56, "#fff");
-  if (cu > .01) { const w = 96 * cu; s += `<rect x="${n2(-60 - w / 2)}" y="-30" width="${n2(w)}" height="60" rx="8" fill="#8E96A4" stroke="#5A6070" stroke-width="4"/><rect x="${n2(-60 - w / 2 + 8)}" y="-24" width="${n2(w * .7)}" height="10" rx="5" fill="#D6DCE6" opacity=".8"/>`
-    + `<path d="M${n2(-60 + w / 2)} -30 q${n2(22 * cu)} 8 ${n2(30 * cu)} 30 q${n2(-8 * cu)} 22 ${n2(-30 * cu)} 30" fill="#F06A5E" stroke="#9A2A1E" stroke-width="4"/>`; }
+  // teacher 25 Nov: "The entire magnet is one single piece of metal. So showing just at the N pole gives misconception. Should be an entire
+  // metal rod, covering the entire magnet." The coloured paint lifts off along the WHOLE bar: one grey metal bar runs end to end under
+  // both colours (the N and S paint are only a thin coat), so the metal is never shown in one half only.
+  if (cu > .01) { const a = Math.min(1, cu * 1.15), L = 290 * cu;
+    s += `<rect x="${n2(-L / 2)}" y="-28" width="${n2(L)}" height="56" rx="9" fill="#8E96A4" stroke="#5A6070" stroke-width="4"/>`
+      + `<rect x="${n2(-L / 2 + 10)}" y="-22" width="${n2(Math.max(0, L - 20))}" height="10" rx="5" fill="#D6DCE6" opacity=".8"/>`
+      + `<path d="M${n2(-L / 2 + 14)} 14 H${n2(L / 2 - 14)}" stroke="#7A8292" stroke-width="3" opacity=".7"/>`
+      + `<g opacity="${n2(a)}"><path d="M-150 -42 H0 V-30 H-140 Q-146 -30 -146 -36z" fill="#F06A5E"/><path d="M0 -42 H150 V-30 H0z" fill="#5A84E6"/>`
+      + `<path d="M-150 42 H0 V30 H-146 Q-150 30 -150 36z" fill="#F06A5E"/><path d="M0 42 H150 V30 H0z" fill="#5A84E6"/></g>`
+      + (cu > .6 ? T(-118, 12, "N", 30, "#fff") + T(118, 12, "S", 30, "#fff") : ""); }
   if (o.glint !== false) s += lcGlint(-110, -26, 16, t, 1.3);
   return s; }
 // the IRON NAIL: dark grey, a flat round head, a point. origin = its middle, length ~220

@@ -424,6 +424,7 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - In every close-up demonstration or journey, the buddies use the *watching* poses (`<buddy>_watch_closed` / `_watch_ooh`; see characters/WATCHING_POSES_BRIEF.md), flipped to face the object.
   - Now and then (at most once per scene), ONE random buddy glances at the viewer and gives a 1-second wave, then turns back to watch. Never during the key teaching moment.
   - Until the paintings arrive, turn the buddies' bodies towards the object (flip and lean).
+- **Science pictures must never plant a misconception (teacher, 2026-11-25, on EP19's magnet cut-away: "The entire magnet is one single piece of metal. So showing just at the N pole gives misconception.").** A cut-away shows the whole object as it really is: a bar magnet is ONE piece of metal from end to end, and the red/blue (N/S) colours are only paint. Check every inside view, cut-away and close-up against the real object before rendering: what is shown in one part must not suggest it exists only there.
 - **Objects never float or fly.**
   - Things travel low along the ground in small hops with dust puffs, or are carried or slid by the buddies.
   - Nothing hangs above the buddies' heads.
