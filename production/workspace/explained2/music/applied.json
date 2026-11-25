@@ -798,21 +798,22 @@
   "duration": 329.033,
   "final_lufs": -15.97,
   "lufs": -16.0,
-  "mtime": 1795530457.2932904,
+  "mtime": 1795568440.3226297,
   "removed": {
    "calm": 10,
    "groove": 9,
    "outro": true,
    "wonder": 1
   },
-  "size": 171414600,
+  "size": 171418016,
   "true_peak": -1.6,
   "video_packets": 9871,
   "when": "2026-11-24 14:28 UTC",
   "windows": {
    "gap": 0,
    "voice": 514
-  }
+  },
+  "note": "2026-11-25: video re-spliced (the \"Now you know!\" ending re-rendered); the audio stream copied bit-identical, so Kampong Walk is still in it"
  },
  "ep22_part2": {
   "backup": "ep22/out/nolofi_p2.m4a",
@@ -855,20 +856,21 @@
   "duration": 334.9,
   "final_lufs": -15.97,
   "lufs": -16.0,
-  "mtime": 1795532614.5214186,
+  "mtime": 1795569363.8306847,
   "removed": {
    "calm": 9,
    "groove": 10,
    "outro": true,
    "wonder": 1
   },
-  "size": 130022453,
+  "size": 130012048,
   "true_peak": -1.7,
   "video_packets": 10047,
   "when": "2026-11-24 15:04 UTC",
   "windows": {
    "gap": 8,
    "voice": 483
-  }
+  },
+  "note": "2026-11-25: video re-spliced (the \"Now you know!\" ending re-rendered); the audio stream copied bit-identical, so Kampong Walk is still in it"
  }
 }

@@ -166,7 +166,12 @@ function nykScene(t, s, prop, o = {}) { const BX = o.bx || [300, 1650, 1275], HX
   let rays = ""; for (let i = 0; i < 18; i++) { const a = i * 20 + (t - s.t0) * 9; rays += `<path d="M960 520 L${n2(960 + Math.cos(a * Math.PI / 180) * 1600)} ${n2(520 + Math.sin(a * Math.PI / 180) * 1600)} L${n2(960 + Math.cos((a + 9) * Math.PI / 180) * 1600)} ${n2(520 + Math.sin((a + 9) * Math.PI / 180) * 1600)}z" fill="#FFE27A" opacity=".5"/>`; }
   let out = `<rect width="1920" height="1080" fill="url(#gSun)"/>${rays}<circle cx="960" cy="520" r="420" fill="#FFF3B8" opacity=".7" filter="url(#b60)"/>` + prop;
   const loop = []; for (let j = 0; j < 9; j++) loop.push([t0 + 1.0 + j * .62, 34]);
-  [["pip", BX[0], false], ["basil", BX[1], true], ["momo", BX[2], true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1066, o.bh || 420, t, { flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, "sit"], [t0, "cheer"]], wave: true, nohop: true, jump: [[tOne - .16, 26], [tTwo - .16, 26], [t0 - .02, 90], ...loop.map(([a, b]) => [a + i * .1, b])] }); });
+  /* teacher, 2026-11-25 ("Wrong gestures for 'now you know'"): the scene's own poses win here. keepPose: the chants "Say it with us!" and
+     "Now you know!" (who "chant": every buddy "speaks" them) no longer force the talking sprite over the cheer, and no OUTCOMES pose or the
+     learnAt check applies; noreact: no reaction to Heart's "Ready? One! two!". Before the words: happy and expectant (Pip and Basil sit and
+     smile, lip-syncing the chant; Momo WAVES, because every one of her sit/talking paintings has her arms crossed and her open mouth reads as
+     shocked). ON "Now you know!" all three cheer, arms up, happy, to the end. */
+  [["pip", BX[0], false], ["basil", BX[1], true], ["momo", BX[2], true]].forEach(([w, x, fl], i) => { out += buddy(w, x, 1066, o.bh || 420, t, { flip: fl, in: s.t0 + .05 + i * .06, poses: [[s.t0, w === "momo" ? "waving" : "sit"], [t0, "cheer"]], keepPose: true, noreact: true, wave: true, nohop: true, jump: [[tOne - .16, 26], [tTwo - .16, 26], [t0 - .02, 90], ...loop.map(([a, b]) => [a + i * .1, b])] }); });
   out += say(U, 960, o.sayY || 430, t, { size: 60, col: P.basil, tail: 0, merge: true });
   const cnt = t >= tTwo ? "2" : t >= tOne ? "1" : t >= tR ? "Ready?" : ""; if (cnt && t < tN - .04) { const tc = cnt === "2" ? tTwo : cnt === "1" ? tOne : tR; out += TF(960, 300, lerp(1.8, 1, eo((t - tc) / .14)), `<text x="0" y="60" font-family="Fredoka" font-weight="700" font-size="${cnt.length > 1 ? 150 : 230}" text-anchor="middle" fill="#fff" stroke="${P.ink}" stroke-width="26" stroke-linejoin="round" paint-order="stroke">${cnt}</text>`); }
   // YOU: the viewer's two hands, up and cheering, with their tag (no orphan labels: the tag stands with the hands it names)
