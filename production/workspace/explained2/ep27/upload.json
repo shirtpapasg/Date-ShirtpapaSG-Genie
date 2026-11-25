@@ -24,13 +24,13 @@
  "playlists": [
   {
    "id": "PLb8LpPqxQI4E",
-   "after": "explained-p3-ep26-part2"
+   "after": "P9UUTYG0koY"
   },
   {
    "id": "PLPfEuT7l4KjI",
-   "after": "explained-p3-ep26-part2"
+   "after": "P9UUTYG0koY"
   }
  ],
  "_note": "P3 EP27, the P3-to-P4 Bridge (P3 Finale / P4 Pilot), ONE video. Public, Made for Kids (the uploader sets both). NO replaces, NO retire_old (a new episode; nothing is replaced). PLAYLISTS: placed after the last P3 episode key 'explained-p3-ep26-part2' in the P3 playlist and the main Explained playlist; the main session may adjust 'after' at upload time (e.g. if EP24-26 go live in a different order or under other keys). Chapters: production/youtube/chapters_p3.json key EP27. App moments: ep27/app_moments.json. Teacher 25 Nov 2026: 'make it live immediately' (pre-approved; the main session checks and uploads). NOT RUN by the build agent.",
- "_ok": "Teacher 25 Nov 2026: 'I like this idea. Build on this and make it live immediately. Impress me! New music, new story, following the same rules.'"
+ "_ok": "Teacher 25 Nov 2026: 'Build on this and make it live immediately. Impress me!' (pre-approved; main session checked frames, science, ghost and facing scans). Placed after EP22 v4 Part 2 (P9UUTYG0koY); EP23-26 are inserted before it as they go up."
 }

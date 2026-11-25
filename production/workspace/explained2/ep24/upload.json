@@ -43,16 +43,17 @@
  "playlists": [
   {
    "id": "PLb8LpPqxQI4E",
-   "after": "explained-p3-ep23-part2"
+   "after": "P9UUTYG0koY"
   },
   {
    "id": "PLPfEuT7l4KjI",
-   "after": "explained-p3-ep23-part2"
+   "after": "P9UUTYG0koY"
   }
  ],
  "replaces": [
   "zAUE_ZuxcDs"
  ],
  "retire_old": false,
- "_note": "Public, Made for Kids (the uploader sets both). NOT UPLOADED: built 25 Nov 2026 (teacher: 'Go ahead with all the rules, build episode 24, 25'; EP24-26 pre-approved to go live without the teacher's check, but the main session reviews before any upload). The classic zAUE_ZuxcDs ('23B': fair tests and magnets everywhere) is replaced by EP24 + EP25 together: retire_old stays false here; EP25's upload.json retires it (NEW VERSION line with both) once EP24 is live. Upload only after EP23 is live (playlist order)."
+ "_note": "Public, Made for Kids (the uploader sets both). NOT UPLOADED: built 25 Nov 2026 (teacher: 'Go ahead with all the rules, build episode 24, 25'; EP24-26 pre-approved to go live without the teacher's check, but the main session reviews before any upload). The classic zAUE_ZuxcDs ('23B': fair tests and magnets everywhere) is replaced by EP24 + EP25 together: retire_old stays false here; EP25's upload.json retires it (NEW VERSION line with both) once EP24 is live. Upload only after EP23 is live (playlist order).",
+ "_ok": "Teacher 25 Nov 2026: 'you may ship episode 24, 25 and 26. no need me to check. make them live.' Placed after EP22 v4 Part 2; EP23 is inserted before it when approved."
 }
