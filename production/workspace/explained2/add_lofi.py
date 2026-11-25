@@ -77,6 +77,10 @@ def mix(epdir, part, out, ceiling=None):
     print(f'  mix built in {time.time() - t:.0f} s: bed {info["bed_under_voice_lufs_s"]} LUFS-S under voice, {info["bed_in_gaps_lufs_s"]} in gaps; '
           f'master {info["final_lufs"]} LUFS; silent under {", ".join(d[0] for d in info["dips"])}; '
           f'{info["continuity"]["beds"]} bed, {info["continuity"]["beat_restarts"]} beat restarts, {info["continuity"]["hard_cuts"]} hard cuts')
+    for j in info.get('journeys', []):
+        print(f'  journey {j["span"][0]}-{j["span"][1]} s: Kampong Walk {"silent" if j["kampong_max_lufs_s"] is None else str(j["kampong_max_lufs_s"]) + " LUFS-S at most"}, '
+              f'wonder pad {j["wonder_pad_median_lufs_s"]} LUFS-S (median)')
+        if j['kampong_max_lufs_s'] is not None: sys.exit('Kampong Walk is not silent inside a journey')
     if info['continuity']['hard_cuts']: sys.exit('the bed has a hard cut: check the dips')
     return info
 

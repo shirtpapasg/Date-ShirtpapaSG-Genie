@@ -8,7 +8,7 @@ Chosen: TheOneApp, Explained only; Kampong Walk only. The rule: `../SERIES_FORMA
 | `kampong_walk.wav` | The tune, 48 kHz stereo 16-bit, 365.7 s, a seamless loop (128 bars = 16 passes of the 8-bar tune). **Not committed** (70 MB): rebuild it with `render_kampong.js`. |
 | `render_kampong.js` | Renders it: `NODE_PATH=$(npm root -g) node render_kampong.js [/home/user/theoneapp] [passes=16]` (about 4 min). |
 | `lofi_song.js` | Runs an episode's own `song.js` (unchanged on disk, patched in memory) with the old music beds left out and the Kampong Walk bed in. |
-| `../add_lofi.py` | The tool for a finished part: `python3 add_lofi.py <epdir> <part>` (see its header). |
+| `../add_lofi.py` | The tool for a finished part: `python3 add_lofi.py <epdir> <part> [--in <mp4>] [--out <new mp4>]` (see its header). |
 | `applied.json` | Every part that has the bed: levels, loudness, true peak, the new mp4's size and time. |
 
 ## How the tune was rendered
@@ -25,8 +25,16 @@ Chosen: TheOneApp, Explained only; Kampong Walk only. The rule: `../SERIES_FORMA
   episode mix). The random parts (timing wobble, the noise reverbs) differ from one render to the next, as they do in the app.
 
 ## How it is mixed (lofi_song.js)
-- Old beds out: `C.R.groove` (the game bed and the outro), `C.R.calm`, `C.R.wonder`. Every effect, ambience, voice, chant clap and stomp,
-  tick and bell stays (song.js is deterministic, so they are identical to the finished part).
+- Old beds out: `C.R.groove` (the game bed and the outro) and `C.R.calm`. Every effect, ambience, voice, chant clap and stomp,
+  tick and bell stays (song.js is deterministic, so they are identical to the finished part). `C.R.wonder`, the journey's micro-world
+  pad, STAYS (since 2026-11-25, below).
+- **Journeys (teacher, 2026-11-25: "for shrink down scenes, the music should pause, like a quiet journey in the first few episodes").**
+  Kampong Walk fades out (1.2 s smoothstep) so it is silent from the start of the `waitw` scene ("Be a ...! Shrink down. Quietly.")
+  to the end of the `pullout`, then fades back in (1.5 s); the episode's own wonder pad plays in the journey. `journeys()` in
+  lofi_song.js finds the spans (consecutive waitw / shrink / pullout scenes and any scene the wonder pad covers, merged with the
+  `C.R.wonder` regions). The report (`LOFI` line, music/applied.json `journeys`) gives Kampong Walk's loudest 3 s level inside each
+  journey (null = silent; add_lofi.py stops if it is not) and the pad's median level. applied.json entries carry `rule`
+  ("journey-pause 2026-11-25"); a file without it had the bed through its journeys.
 - One bed for the whole part, never restarted: it fades in over 3 s at the start and out over the last 4 s, and dips to silence (0.8 s
   smoothstep fade out, 1.5 s back in) under every countdown (ring start - 0.12 s to bell + 0.45 s, the same window the old groove left),
   under the clap-clap-stomp chant, and under "Now you know!" (to 1.2 s after the blast).

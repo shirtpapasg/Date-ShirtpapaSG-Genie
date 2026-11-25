@@ -122,7 +122,7 @@ const cocoon17 = (t, o = {}) => { const c = o.cut || 0; let s = `<path d="M-140 
 
 /* ---------------------------------------------------------------- the mosquito ---------------------------------------------------------------- */
 // a wriggler, hanging head-down from the surface. Origin = the tip of its little tube (the breathing tube) AT the surface (y 0); it hangs
-// down and a little to one side. Length about 230. o.wig (0..1) an S-shaped wriggle; o.tube (0..1) lights the tube; o.k
+// down and a little to one side. Length about 230. o.wig (0..1) an S-shaped wriggle; o.tube (0..1) lights the tube; o.k; o.eye the eye size (4.5)
 function wrig17(t, o = {}) { const wg = o.wig || 0, ph = o.ph || 0, lean = o.lean === undefined ? 22 : o.lean, tl = o.tube || 0; let s = "";
   const pts = []; for (let i = 0; i <= 9; i++) { const u = i / 9, y = 30 + u * 150, x = wg * 26 * Math.sin(u * 5 + t * 14 + ph) + .6 * Math.sin(t * 2 + ph + u) * 4; pts.push([x, y]); }
   // the tube (siphon): short, at the tail end, touching the surface
@@ -132,7 +132,7 @@ function wrig17(t, o = {}) { const wg = o.wig || 0, ph = o.ph || 0, lean = o.lea
   for (let i = 0; i < 9; i++) { const [x, y] = pts[i], [x2, y2] = pts[i + 1]; s += `<path d="M${n2(x)} ${n2(y)} L${n2(x2)} ${n2(y2)}" stroke="#5A5468" stroke-width="${n2(10 + i * .6)}" stroke-linecap="round"/><path d="M${n2(x)} ${n2(y + 8)} l-12 -4 M${n2(x)} ${n2(y + 8)} l12 -4" stroke="#8A84A0" stroke-width="1.6"/>`; }
   // the thorax (wider) and the head with friendly eyes and mouth brushes
   const [hx, hy] = pts[9]; s += `<ellipse cx="${n2(hx)}" cy="${n2(hy + 22)}" rx="18" ry="22" fill="#5A5468" stroke="#3A3448" stroke-width="2.5"/><path d="M${n2(hx - 16)} ${n2(hy + 14)} l-12 -6 M${n2(hx + 16)} ${n2(hy + 14)} l12 -6" stroke="#8A84A0" stroke-width="1.6"/>`
-    + `<ellipse cx="${n2(hx)}" cy="${n2(hy + 52)}" rx="13" ry="12" fill="#4A4458" stroke="#3A3448" stroke-width="2.5"/>${eye16(n2(hx - 5), n2(hy + 54), 4.5)}${eye16(n2(hx + 6), n2(hy + 54), 4.5)}<path d="M${n2(hx - 6)} ${n2(hy + 63)} l-6 8 M${n2(hx + 6)} ${n2(hy + 63)} l6 8" stroke="#8A84A0" stroke-width="2"/>`;
+    + `<ellipse cx="${n2(hx)}" cy="${n2(hy + 52)}" rx="13" ry="12" fill="#4A4458" stroke="#3A3448" stroke-width="2.5"/>${eye16(n2(hx - (o.eye || 4.5) - .5), n2(hy + 54), o.eye || 4.5)}${eye16(n2(hx + (o.eye || 4.5) + 1.5), n2(hy + 54), o.eye || 4.5)}<path d="M${n2(hx - 6)} ${n2(hy + 63)} l-6 8 M${n2(hx + 6)} ${n2(hy + 63)} l6 8" stroke="#8A84A0" stroke-width="2"/>`;
   return TF(0, 0, o.k || 1, s, lean); }
 // the mosquito's pupa: comma-shaped (a big round front with two little trumpets on top that touch the surface, a curled tail with two small
 // paddles). Origin = the trumpets' tips at the surface. o.roll: a tumble angle

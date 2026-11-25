@@ -76,7 +76,7 @@ global.__LOFI = {
     const st0 = shortTerm(bed.L, bed.R, d0); st0.forEach((w) => { w.c = cls(w); });
     const u0 = median(st0.filter((w) => w.c === 'voice').map((w) => w.lufs));
     const g = Math.pow(10, (UNDER_VOICE_LUFS - u0) / 20);
-    stems.lofi = bed; GAIN.lofi = g; S.bed = bed; S.st0 = st0; S.g = g;
+    stems.lofi = bed; GAIN.lofi = g; S.bed = bed; S.st0 = st0; S.g = g; S.stems = stems; S.GAIN = GAIN; S.jspans = journeys(C, TL);
     S.info = { dips: dips.map(([k, a, b]) => [k, +a.toFixed(2), +b.toFixed(2)]), wonder_kept: S.wonderKept, rule: 'journey-pause 2026-11-25', drive_without_bed: +d0.toFixed(3), bed_gain: +g.toFixed(4), depth_db: +(20 * Math.log10(1 - DEPTH)).toFixed(1) };
   },
   done(mix, M) {
@@ -86,6 +86,11 @@ global.__LOFI = {
     S.info.bed_under_voice_lufs_s = +median(pick('voice')).toFixed(1); S.info.bed_in_gaps_lufs_s = +median(pick('gap')).toFixed(1);
     S.info.bed_loudest_lufs_s = +Math.max(...st.map((w) => w.lufs)).toFixed(1); S.info.removed = S.removed;
     S.info.windows = { voice: pick('voice').length, gap: pick('gap').length }; S.info.continuity = S.continuity;
+    // inside each journey (its 3 s windows wholly inside the span): Kampong Walk's loudest short-term level (silent: -inf, shown as null)
+    // and the wonder pad's median level, both as they sit in the final master
+    const sw = S.stems.wonder ? shortTerm(S.stems.wonder.L, S.stems.wonder.R, S.GAIN.wonder * d) : [];
+    S.info.journeys = S.jspans.map(([a, b]) => { const inJ = (w) => w.t - 1.5 >= a && w.t + 1.5 <= b, bl = st.filter(inJ).map((w) => w.lufs), wl = sw.filter(inJ).map((w) => w.lufs), mx = Math.max(...bl);
+      return { span: [+a.toFixed(2), +b.toFixed(2)], kampong_max_lufs_s: mx > -70 ? +mx.toFixed(1) : null, wonder_pad_median_lufs_s: wl.length ? +median(wl).toFixed(1) : null }; });
     console.log('LOFI ' + JSON.stringify(S.info));
   },
   out: path.resolve(OUT),

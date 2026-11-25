@@ -166,33 +166,124 @@ function wrigArt(t) { const m = MK, s0 = SCN.lcwriggler.t0 + 1, tH = m("hang"), 
   if (t >= tK - .2 && t < tV) out += OP(1 - ramp(t, tV - .4, .3), [0, 1, 2].map((i) => { const p = cp([WRX[i] + 20, WSURF + 120]); return pline(220, 300, p[0], p[1], ramp(t, tK, .2), "#5A5468"); }).join("") + TF(220, 300, spring(t, tK, .4), tpill(0, 0, "wrigglers: the mosquito's larvae", 40, "#5A5468", "#fff", { w: 700 })));
   return out; }
 
-/* ---------- BE A MOSQUITO EGG (the journey) ---------- */
-function mosqJourney(t, s) { const m = MK, tE = m("jegg"), tH = m("jhatch"), tEa = m("jeat"), tB = m("jbig"), tP = m("jpupa"), tSp = m("jsplit"), tF = m("jfly");
-  const under = ss(tH - .3, tH + 1.2, t) * (1 - ss(tF - 1.2, tF, t)), above = 1 - under, curl = ss(tP - .3, tP + 1.4, t) * (1 - ss(tSp + 1.2, tSp + 2, t)), tum = curl * 12 * Math.sin(t * 1.3);
-  let out = "";
-  // ABOVE: the still water's surface is a huge shining floor; the pail's wall a cliff at the side; other eggs nearby
-  if (above > .01) { let a = `<rect width="1920" height="1080" fill="url(#e17Sky)"/><rect x="0" y="0" width="420" height="1080" fill="url(#e17Pail)"/><rect x="380" y="0" width="40" height="1080" fill="#1E4E88"/><path d="M420 520 L1920 470 V1080 H420z" fill="#7FC6D8"/><path d="M420 520 L1920 470 V1080 H420z" fill="url(#e17LeafShine)"/>`
-      + [...Array(7)].map((_, i) => `<path d="M${420 + i * 60} ${n2(560 + i * 70)} L1920 ${n2(500 + i * 90)}" stroke="#fff" stroke-width="${n2(3 + i)}" opacity=".35"/>`).join("") + `<ellipse cx="1300" cy="520" rx="420" ry="20" fill="#fff" opacity=".6"/>`
-      + [[700, 640, 1.6], [1500, 600, 1.2], [1100, 760, 2.2], [600, 900, 2.8]].map(([x, y, k], i) => TF(x, y + 3 * Math.sin(t + i), k, `<ellipse rx="34" ry="14" fill="#3A3448"/><ellipse cx="-10" cy="-5" rx="10" ry="4" fill="#8A84A0"/>`, -12 + 8 * i)).join("");
-    out += OP(above, a); if (t < tH) out += eggRim(1, ss(tH - .3, tH + .2, t)).replace(/#F6E58A/g, "#8A7A6A").replace('opacity=".92"', 'opacity=".6"'); }
-  // UNDER: hanging head-down under the surface: the bright surface at the top edge, your own tail tube poking up to it; bits drift past
-  if (under > .01) { let u = `<rect width="1920" height="1080" fill="url(#e17WaterUW)"/>` + uwRays(t, "#fff", .1) + `<rect width="1920" height="130" fill="#EAF6FF"/><path d="M0 130 ${[...Array(26)].map((_, i) => `Q${40 + i * 75} ${n2(126 + 4 * Math.sin(t * 2 + i))} ${75 + i * 75} 130`).join(" ")}" stroke="#fff" stroke-width="12" fill="none"/>`;
-    u += `<path d="M960 128 L${n2(960 + 10 * Math.sin(t))} 330" stroke="#5A5468" stroke-width="44" stroke-linecap="round"/><ellipse cx="960" cy="128" rx="30" ry="12" fill="#5A5468"/>` + [...Array(5)].map((_, i) => `<path d="M${930 - i * 6} ${300 + i * 24} l-40 -10 M${990 + i * 6} ${300 + i * 24} l40 -10" stroke="#8A84A0" stroke-width="4"/>`).join("");
-    // tiny bits drift past; you eat them (they slide down to the bottom centre and vanish)
-    if (t >= tEa - .5 && t < tB + .5) u += [...Array(16)].map((_, i) => { const v = ((t - tEa) * .25 + hash(i, 41)) % 1, x = lerp(200 + 1500 * hash(i, 43), 960, ss(.6, 1, v)), y = lerp(300 + 500 * hash(i, 45), 1080, ss(.6, 1, v)); return `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(8 + 8 * hash(i, 47))}" fill="${i % 2 ? "#8FAE5A" : "#C9B88A"}" opacity="${n2(1 - ss(.85, 1, v))}"/>`; }).join("");
-    // your head and mouth brushes at the bottom edge (a wriggler)
-    if (curl < .5) u += OP(1 - curl * 2, TF(960, 1100, 1.3, `<ellipse cx="0" cy="0" rx="210" ry="120" fill="#5A5468"/><ellipse cx="0" cy="-40" rx="160" ry="70" fill="#6E6880"/>${[-1, 1].map((sg) => `<path d="M${sg * 60} -100 q${sg * 30} ${-40 - 20 * Math.abs(Math.sin(t * 8))} ${sg * 80} -40 M${sg * 90} -90 q${sg * 40} -30 ${sg * 100} -10" stroke="#8A84A0" stroke-width="10" fill="none" stroke-linecap="round"/>`).join("")}`));
-    // a tight squeeze, a moult: an old skin drifts away below
-    { const sq = ss(tB - .2, tB + .3, t) * (1 - ss(tB + 1, tB + 1.5, t)); if (sq > .01) u += `<path d="M0 0 H1920 V1080 H0z M${n2(80 + 220 * sq)} ${n2(140 + 120 * sq)} H${n2(1840 - 220 * sq)} V${n2(1040 - 120 * sq)} H${n2(80 + 220 * sq)}z" fill="#6E6880" fill-rule="evenodd" opacity="${n2(.7 * sq)}"/>`;
-      const v = clamp((t - tB - .9) / 2); if (v > 0 && v < 1) u += TF(700 + 200 * v, 800 + 400 * v, 1.6, `<path d="M-60 -100 Q-80 0 -50 100 Q0 120 50 100 Q80 0 60 -100 Q0 -120 -60 -100z" fill="#D9D4E8" stroke="#A8A0C0" stroke-width="5" opacity=".75"/>${[...Array(5)].map((_, i) => `<path d="M-50 ${-70 + i * 35} h100" stroke="#B8B0D0" stroke-width="3"/>`).join("")}`, 30 * v); }
-    // the pupa: the view rounds like a comma; you tumble gently
-    if (curl > .01) u += `<g opacity="${n2(Math.min(1, curl * 1.2))}"><path d="M0 0 H1920 V1080 H0z M960 160 C1460 160 1640 460 1560 720 C1500 940 1200 1020 980 960 C860 930 800 860 820 800 C700 820 560 760 440 640 C320 480 460 160 960 160z" fill="#6E6880" fill-rule="evenodd" opacity=".9"/><path d="M640 300 Q900 200 1200 260" stroke="#9A94B0" stroke-width="26" fill="none" opacity=".6" stroke-linecap="round"/></g>` + OP(curl, `<path d="M900 136 L920 300 M1020 136 L1000 300" stroke="#5E5870" stroke-width="30" stroke-linecap="round"/><ellipse cx="900" cy="134" rx="26" ry="10" fill="#5E5870"/><ellipse cx="1020" cy="134" rx="26" ry="10" fill="#5E5870"/>`) + TF(1320, 240, curl * spring(t, tP + .8, .4), tpill(0, 0, "your two little breathing tubes", 30, "#fff", P.ink, { w: 700 }));
-    // the case splits at the surface; light pours in
-    { const sp = ss(tSp, tSp + 1.6, t); if (sp > .01) u += `<path d="M${n2(960 - 300 * sp)} 0 L${n2(960 + 300 * sp)} 0 L${n2(960 + 80 * sp)} ${n2(700 * sp)} L${n2(960 - 80 * sp)} ${n2(700 * sp)}z" fill="#FFFDE8" opacity="${n2(.9 * sp)}"/>`; }
-    out += OP(under, `<g transform="translate(960 540) rotate(${n2(tum)}) translate(-960 -540)">${u}</g>`); }
-  // the adult: you climb out onto the surface; your new wings dry and unfold at the frame's edges
-  { const wu = ss(tF - .3, tF + 2.2, t); if (wu > .01) out += [-1, 1].map((sg) => `<g transform="translate(${sg < 0 ? 0 : 1920} 820) scale(${-sg} 1) rotate(${n2(30 - 34 * wu)})"><ellipse cx="${n2(360 * wu)}" cy="-30" rx="${n2(400 * wu)}" ry="${n2(70 + 30 * wu)}" fill="#E6F4FF" fill-opacity=".7" stroke="#7FA4C0" stroke-width="7" ${wu < .7 ? 'stroke-dasharray="14 6"' : ""}/><path d="M10 -30 L${n2(740 * wu)} -40 M10 -20 L${n2(600 * wu)} 10" stroke="#9AB8D0" stroke-width="4"/></g>`).join("")
-    + [-1, 1].map((sg) => `<path d="M${960 + sg * 360} 1080 L${960 + sg * 420} ${n2(1080 - 240 * wu)} L${960 + sg * 540} ${n2(1080 - 300 * wu)}" stroke="#4A4458" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`).join(""); }
+/* ---------- BE A MOSQUITO EGG (the journey). Redrawn 2026-11-25 (teacher, on the old first-person view: "I don't get what this scene is.
+   Improve on it, please"); the model is EP20's ring journey (ep20/lc20.js ringJourney). A SIDE VIEW of the still water in the pail: the
+   surface line across the frame, the pail's blue back wall and rim, the garden beyond; the three buddies watch from the rim, facing the
+   middle. YOU are marked all the way (a sun-yellow glow round you, eyes, a "You: ..." tag joined to you) and every stage is drawn and
+   labelled ON the thing: the eggs float on the surface in a little raft; you hatch into a wriggler, hang head-down from the surface by your
+   breathing tube, wriggle down to eat tiny bits and back up, moult (the old skin drifts off) and grow bigger; you curl into a comma-shaped
+   pupa at the surface (bits drift past: it does not eat; a glow inside: it changes); the case splits at the surface, the adult climbs out
+   onto it, dries its wings and flies off. A stage strip at the top (egg, wriggler, pupa, adult) lights up as you go. "speeded up" small.
+   Same lines and marks as before (b602-b605; jegg jhatch jeat jbig jpupa jsplit jfly). ---------- */
+const MJ = { S: 470, L: 150, R: 1770, F: 1050, X: 1000 };   // the surface's y, the pail's inside left and right, its floor, where you hang
+const mjRim = (x) => 318 + 40 * Math.pow((x - 960) / 840, 2);   // the back rim's top edge
+// a glow the shape of an svg string (every fill and stroke sun-yellow, strokes fatter, blurred)
+const mjGlow = (svg, w = 10, a = .9) => `<g filter="url(#b10)" opacity="${n2(a)}">${svg.replace(/(fill|stroke)="#[0-9A-Fa-f]{3,6}"/g, `$1="${P.sun}"`).replace(/stroke-width="([\d.]+)"/g, (q, v) => `stroke-width="${n2(+v + w)}"`)}</g>`;
+// one egg, standing on end in the raft (origin = its middle); o.empty: the shell after hatching (its bottom open)
+const mjEgg = (x, y, o = {}) => o.empty ? `<g transform="translate(${n2(x)} ${n2(y)})"><path d="M-16 34 Q-18 -50 0 -50 Q18 -50 16 34" fill="#D6D0E2" stroke="#9A94B0" stroke-width="3" opacity=".85"/><ellipse cx="0" cy="34" rx="16" ry="5" fill="#6E8FA0" opacity=".6"/></g>`
+  : `<g transform="translate(${n2(x)} ${n2(y)})"><ellipse rx="16" ry="50" fill="#3A3448" stroke="#211C2E" stroke-width="3"/><ellipse cx="-6" cy="-22" rx="4" ry="15" fill="#8A84A0" opacity=".7"/></g>`;
+// the pupa, comma-shaped (art17 mpupa17's shape), with your two eyes; o.empty: the case after the adult is out; o.inside (0..1) a glow and
+// the new body's shapes forming inside; o.crack (0..1) the split along its back. Origin = the two breathing trumpets' tips (at the surface)
+const mjPupa = (t, o = {}) => { const c = o.empty ? "#D6D0E2" : "#5E5870", g = o.inside || 0, cr = o.crack || 0;
+  return `<path d="M-10 0 L-8 18 M10 0 L8 18" stroke="#5A5468" stroke-width="5" stroke-linecap="round"/><circle cx="0" cy="48" r="36" fill="${c}" stroke="#3A3448" stroke-width="3"/><path d="M30 60 Q46 100 20 128 Q-6 146 -16 120" stroke="${c}" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M-16 120 l-18 6 M-16 120 l-8 16" stroke="#7A7490" stroke-width="5" stroke-linecap="round"/><path d="M-20 32 Q0 22 20 32" stroke="#8A84A0" stroke-width="3" fill="none"/>`
+    + (g > .02 ? `<ellipse cx="2" cy="50" rx="${n2(30 * g)}" ry="${n2(28 * g)}" fill="url(#e17Glow)"/><g opacity="${n2(g)}" stroke="#F4F8FF" stroke-width="2.5" fill="none" stroke-linecap="round"><path d="M-4 40 Q18 30 26 50"/><path d="M-6 46 Q14 44 22 62"/><path d="M-12 60 L-22 76 M-4 62 L-8 80 M4 62 L8 80"/></g>` : "")
+    + (o.empty ? "" : eye16(-20, 52, 7, { shut: o.shut }) + eye16(-2, 50, 7, { shut: o.shut }))
+    + (cr > .02 ? `<path d="M-22 ${n2(16 - 4 * cr)} L-10 ${n2(10 - 6 * cr)} L0 ${n2(16 - 4 * cr)} L10 ${n2(10 - 6 * cr)} L22 ${n2(16 - 4 * cr)}" stroke="#FFF6C8" stroke-width="${n2(3 + 5 * cr)}" fill="none" stroke-linejoin="round" stroke-linecap="round"/>` : ""); };
+// the adult mosquito (art17 mosq17's shape) with your big eye and its wings: o.wk 0..1 (crumpled, wet -> dry and open), o.wing (buzz).
+// Origin = its feet line
+const mjAdult = (t, o = {}) => { const wb = (o.wing || 0) * Math.sin(t * 80), wk = o.wk === undefined ? 1 : o.wk, wet = wk < .85 ? ' stroke-dasharray="7 4"' : "";
+  const wing = (dx, rot, rx, ry, fo) => `<g transform="translate(${dx} -44) rotate(${n2(rot + 14 * wb)}) scale(${n2(.3 + .7 * wk)} ${n2(.5 + .5 * wk)})"><ellipse cx="${-rx + 2}" cy="-8" rx="${rx}" ry="${ry}" fill="#E6F4FF" fill-opacity="${fo}" stroke="#9AB8D0" stroke-width="2.5"${wet}/></g>`;
+  return `<path d="M-10 -34 L-40 0 M-2 -34 L-14 0 M6 -34 L22 0 M10 -34 L54 2 M-14 -34 L-62 -6 M14 -34 L70 -8" stroke="#4A4458" stroke-width="3" stroke-linecap="round" fill="none"/>`
+    + wing(0, -22 - 30 * (1 - wk), 52, 12, .75) + wing(4, -12 - 30 * (1 - wk), 48, 11, .6)
+    + `<path d="M-10 -40 Q-60 -36 -96 -22" stroke="#4A4458" stroke-width="11" stroke-linecap="round" fill="none"/>${[-36, -56, -76].map((x) => `<path d="M${x} -42 v12" stroke="#E8E4F0" stroke-width="3"/>`).join("")}<ellipse cx="4" cy="-42" rx="16" ry="12" fill="#4A4458"/>`
+    + `<circle cx="24" cy="-44" r="12" fill="#5A5468"/>${eye16(28, -46, 7.5, { shut: o.shut })}<path d="M32 -36 Q42 -28 44 -18" stroke="#4A4458" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M28 -54 q8 -12 18 -14 M26 -54 q4 -14 12 -18" stroke="#4A4458" stroke-width="2" fill="none"/>`; };
+// the stage strip: four small tiles (art17 mPic) with arrows, egg -> wriggler (larva) -> pupa -> adult. The stage you are in lights (a sun disc),
+// the ones you have been get a tick, the ones to come wait faded
+function mjStrip(t, lit) { const Y0 = 76, xs = [615, 845, 1075, 1305], nm = ["egg", "wriggler (larva)", "pupa", "adult"]; let cur = -1; lit.forEach((t0, i) => { if (t >= t0) cur = i; });
+  let s = `<g filter="url(#dropS)"><rect x="470" y="10" width="980" height="174" rx="30" fill="#FFF8EA" stroke="#C9A974" stroke-width="5"/></g>`;
+  for (let i = 0; i < 3; i++) { const col = cur > i ? P.leaf : "#D9C9A8", x1 = xs[i] + 60, x2 = xs[i + 1] - 62; s += `<path d="M${x1} ${Y0} H${x2 - 12}" stroke="${col}" stroke-width="9" stroke-linecap="round"/><path d="M${x2 - 16} ${Y0 - 15} L${x2 + 4} ${Y0} L${x2 - 16} ${Y0 + 15}z" fill="${col}"/>`; }
+  xs.forEach((x, i) => { const on = i === cur, fut = i > cur, a = on ? spring(t, lit[i], .45) : 0, k = on ? 1.1 + .03 * Math.sin(t * 4) : .9;
+    s += `<g transform="translate(${x} ${Y0})">${on ? `<circle r="${n2(60 * a)}" fill="${P.sun}" opacity=".9"/>` : ""}<g opacity="${fut ? .4 : 1}">${TF(0, 0, 46 / 92 * k, tile16(mPic(i, t), 92, "mjs" + i, on ? P.ink : P.leaf))}</g>${i < cur ? TF(36, -34, 1, tickBadge(17)) : ""}</g>`
+      + OP(fut ? .55 : 1, tpill(x, Y0 + 74, nm[i], 25, on ? P.ink : "#fff", on ? "#fff" : P.ink, { w: 700 })); });
+  return s; }
+function mosqJourney(t, s, o = {}) { const m = MK, S = MJ.S, X = MJ.X, tE = m("jegg"), tH = m("jhatch"), tEa = m("jeat"), tB = m("jbig"), tP = m("jpupa"), tSp = m("jsplit"), tF = m("jfly");
+  const tDy = W("b602", "days"), tSu = W("b603", "surface"), tMo = W("b603", "moult"), tGr = W("b603", "grow"), tCu = W("b604", "curl"), tNo = W("b604", "not"), tCh = W("b604", "changing"), tCl = W("b605", "climb"), tDr = W("b605", "dry"), tEnd = s.t1;
+  const sh = blink16(t, .7); let out = "";
+  // the garden beyond the pail (soft, far), the pail's inside back wall and its rim, the water, the floor
+  out += `<rect width="1920" height="1080" fill="url(#e17Sky)"/><g filter="url(#b10)" opacity=".85">${[[120, 300, 260, 90], [480, 280, 220, 80], [880, 300, 300, 70], [1320, 285, 260, 85], [1760, 300, 240, 90]].map(([x, y, rx, ry], i) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${i % 2 ? "#7FC27A" : "#66B06A"}"/>`).join("")}<rect x="0" y="330" width="1920" height="760" fill="#8CCB76"/></g>`;
+  const rim = (y0) => [...Array(25)].map((_, i) => { const x = MJ.L - 50 + i * (MJ.R - MJ.L + 100) / 24; return `${i ? "L" : "M"}${n2(x)} ${n2(mjRim(x) + y0)}`; }).join(" ");
+  out += `<path d="${rim(0)} L${MJ.R + 50} ${S} L${MJ.L - 50} ${S}z" fill="#3F8ED6"/><path d="${rim(0)} L${MJ.R + 50} ${S} L${MJ.L - 50} ${S}z" fill="#1E4E88" opacity=".18"/><path d="${rim(0)}" stroke="#2E6FB8" stroke-width="26" fill="none" stroke-linejoin="round"/><path d="${rim(-8)}" stroke="#7FC0F2" stroke-width="7" fill="none" opacity=".8"/>`;
+  out += `<clipPath id="mjW"><rect x="${MJ.L}" y="${S}" width="${MJ.R - MJ.L}" height="${MJ.F - S}"/></clipPath><rect x="${MJ.L}" y="${S}" width="${MJ.R - MJ.L}" height="${MJ.F - S}" fill="url(#e17WaterUW)"/><g clip-path="url(#mjW)">${uwRays(t, "#fff", .08)}</g><rect x="${MJ.L}" y="${MJ.F}" width="${MJ.R - MJ.L}" height="40" fill="#2E6FB8"/>`;
+  // the buddies, shrunk, watching from the back rim: Momo and Pip at the left, Basil at the right, each facing the middle (riders flips x > 960)
+  const rp = o.poses || {}; out += riders(t, s, { tin: s.t0 + .5, h: 150, at: { momo: [250, mjRim(250) + 4], pip: [415, mjRim(415) + 4], basil: [1680, mjRim(1680) + 4] }, poses: rp });
+  // tiny bits of food drifting in the water (from just before "You eat" until the pupa has let them drift past); four are eaten at the dive's bottom
+  const bitsA = ss(tSu, tSu + 1, t) * (1 - ss(tCh, tCh + 1, t));
+  if (bitsA > .01) out += OP(bitsA, [...Array(15)].map((_, i) => { const x = 260 + 1400 * hash(i, 41) + 30 * Math.sin(t * .4 + i), y = S + 90 + 440 * hash(i, 43) + 14 * Math.sin(t * .5 + i * 2); if (Math.abs(x - X) < 120) return ""; return `<circle cx="${n2(x)}" cy="${n2(y)}" r="${n2(7 + 6 * hash(i, 47))}" fill="${i % 2 ? "#8FAE5A" : "#C9B88A"}" stroke="#6E7A4A" stroke-width="2"/>`; }).join(""));
+  const FB = [720 + 16 * Math.sin(t * .5), S + 300 + 10 * Math.sin(t * .7)];
+  if (bitsA > .01) out += OP(bitsA, `<circle cx="${n2(FB[0])}" cy="${n2(FB[1])}" r="12" fill="#8FAE5A" stroke="#6E7A4A" stroke-width="2"/>`);
+  const eatT = [0, 1, 2, 3].map((i) => tEa + .55 + i * .16), BITS = [[-84, 500], [-30, 512], [-110, 470], [0, 478]];
+  if (t >= tSu && t < eatT[3] + .2) out += BITS.map(([dx, dy], i) => { const g = 1 - ss(eatT[i] - .08, eatT[i] + .06, t); return g > .02 ? `<circle cx="${X + dx}" cy="${S + dy}" r="${n2(9 * g)}" fill="${i % 2 ? "#8FAE5A" : "#C9B88A"}" stroke="#6E7A4A" stroke-width="2"/>` : ""; }).join("");
+  // --- EGG: the raft of eggs floating on the surface; yours in the middle, glowing, with eyes. It hatches from its bottom into the water;
+  //     the empty raft then drifts aside
+  const EK = 1.45, RX = lerp(960, 470, ss(tH + .4, tH + 2.4, t)), egY = S + 8 * EK, rA = 1 - ss(tP - .6, tP + .4, t); let raft = "";
+  for (let i = 0; i < 9; i++) { const x = RX + (i - 4) * 33 * EK, y = egY + 1.5 * Math.sin(t * .9 + i);
+    if (i !== 4) raft += TF(x, y, EK, mjEgg(0, 0, { empty: t >= tH + .2 + .25 * Math.abs(i - 4) }));
+    else if (t >= tH) raft += TF(x, y, EK, mjEgg(0, 0, { empty: true })); }
+  if (t < tH) { const x = RX, y = egY - 6, e = TF(x, y, EK, mjEgg(0, 0));   // yours: drawn on top, a little higher, outlined and glowing, with eyes
+    raft += mjGlow(e, 16, .8 + .2 * Math.sin(t * 3)) + e + TF(x, y, EK, `<ellipse rx="17" ry="51" fill="none" stroke="${P.sun}" stroke-width="4.5"/>` + eye16(-7, -24, 7, { shut: sh }) + eye16(8, -24, 7, { shut: sh })); }
+  if (rA > .01) out += OP(rA, raft);
+  // the water over everything below the surface (a light veil: those parts are IN the water) and the surface line itself
+  const veil = `<rect x="${MJ.L}" y="${S}" width="${MJ.R - MJ.L}" height="${MJ.F - S}" fill="#BFE7F0" opacity=".16"/><rect x="${MJ.L}" y="${S - 3}" width="${MJ.R - MJ.L}" height="10" fill="#fff" opacity=".9"/><rect x="${MJ.L}" y="${S + 7}" width="${MJ.R - MJ.L}" height="10" fill="#fff" opacity=".25"/>`;
+  // --- WRIGGLER: out of the egg's bottom, then up to hang head-down from the surface by the tail's breathing tube; down to eat and back up;
+  //     the old skin drifts away; bigger
+  const dive = 110 * ss(tEa - .1, tEa + .55, t) * (1 - ss(tMo - .55, tMo + .05, t)), moving = Math.max(ss(tH, tH + .3, t) * (1 - ss(tH + 2.2, tH + 2.6, t)), ss(tEa - .2, tEa, t) * (1 - ss(tMo, tMo + .3, t)));
+  const wk = lerp(1.5, 1.9, ss(tGr - .1, tGr + .5, t)) * (1 + .06 * Math.sin(Math.PI * clamp((t - tGr + .1) / .6))), curl = ss(tCu + .1, tCu + .6, t);
+  const emg = ss(tH, tH + .7, t), up = ss(tH + .9, tH + 2.4, t), wx = lerp(960, X, up), wy = lerp(S + 70 + 110 * emg, S, up) + dive, wa = (t < tH ? 0 : ramp(t, tH, .3)) * (1 - curl);
+  const wrigPos = [wx, wy];
+  if (t >= tH && t < tP + .3) { const w = wrig17(t, { wig: .12 + .9 * moving, lean: 8 + 4 * Math.sin(t * .8), eye: 6, k: wk }), sq = 1 - .45 * curl;
+    out += OP(wa, TF(wx, wy, 1, mjGlow(w, 12, .75 + .15 * Math.sin(t * 3)) + w, 0, sq)); }
+  // the old skin (pale, empty) drifts off down to the left after the moult
+  { const v = clamp((t - tMo) / 2.6); if (t >= tMo && v < 1) out += OP(1 - ss(.7, 1, v), TF(X - 300 * v, S + 60 + 260 * v, 1, wrig17(t, { lean: 8 + 50 * v, k: 1.5 }).replace(/(fill|stroke)="#[0-9A-Fa-f]{3,6}"/g, `$1="#E4E0F0"`), 0)); }
+  // --- PUPA: comma-shaped, at the surface by its two trumpets; it tumbles a little; bits drift past (it does not eat); a glow inside (it is
+  //     changing); it rises so its back meets the surface, and the case splits there
+  const pa = ss(tCu + .25, tCu + .75, t), rise = ss(tSp - .7, tSp - .1, t), PK = 2.5, crack = ss(tSp, tSp + 1.4, t), outA = ss(tCl, tCl + .9, t);
+  if (pa > .01) { const roll = (1 - rise) * 5 * Math.sin(t * 1.4), py = S - 22 * PK * rise, inside = ss(tCh - .2, tCh + 1.2, t) * (1 - ss(tCl, tCl + .6, t)), pu = mjPupa(t, { inside, crack, shut: sh || t >= tCl, empty: outA > .6 });
+    out += OP(pa, TF(X, py, PK, (outA < .6 ? mjGlow(pu, 8, (.7 + .15 * Math.sin(t * 3)) * (1 - outA)) : "") + pu, roll + 8 * rise)); }
+  out += veil;
+  // --- ADULT: it climbs out of the split onto the surface (only the part above the water shows while it comes up), dries its wings (they open
+  //     out, the dashes go), and flies off up and to the right
+  const fly = ss(tF + .5, tEnd - .05, t), AK = lerp(2.6, 1.8, fly), ax = lerp(X + 20, 1420, fly), ay = lerp(S - 4, 300, fly) - 60 * Math.sin(Math.PI * fly), wkA = ss(tDr - .1, tDr + 1.6, t);
+  if (t >= tCl - .1) { const climb = 1 - ss(tCl - .1, tCl + .9, t), ad = mjAdult(t, { wk: .15 + .85 * wkA, wing: t > tF + .3 ? 1 : 0, shut: sh });
+    out += `<clipPath id="mjA"><rect x="0" y="0" width="1920" height="${S + 2}"/></clipPath><g clip-path="url(#mjA)">${TF(ax, ay + 70 * AK * climb, AK, mjGlow(ad, 7, .75 + .15 * Math.sin(t * 3)) + ad, -6 * fly)}</g>`; }
+  // the cut front edges of the pail (left and right), standing on the grass
+  out += [MJ.L, MJ.R].map((x) => `<rect x="${x - (x < 960 ? 46 : 0)}" y="${n2(mjRim(x) - 12)}" width="46" height="${n2(1080 - mjRim(x) + 12)}" fill="#2E6FB8" stroke="#1E4E88" stroke-width="4"/>`).join("");
+  // "Days go by": the light dims twice (two nights), speeded up
+  if (t > tDy && t < tDy + 2.2) { const u = (t - tDy) / 1.1; out += `<rect width="1920" height="1080" fill="#1B2350" opacity="${n2(.42 * Math.pow(Math.sin(Math.PI * u), 2))}"/>`; }
+  // --- the labels, every one joined to what it names
+  out += lcLab(t, s.t0 + .6, 1460, 395, "the water's surface", 1460, S - 4, { size: 36, t1: tE - .3 });
+  out += t >= tE + 1.8 && t < tEa ? OP(ramp(t, tE + 1.8, .4) * (1 - ramp(t, tEa - .4, .3)), TF(470, 960, 1, tpill(0, 0, "still water", 40, "#2E7AB8", "#fff", { w: 700 }))) : "";
+  out += lcLab(t, W("b602", "egg") - .1, 520, 395, "eggs, in a little raft", RX - 150 * EK, egY - 30 * EK, { size: 36, t1: tH + .2 });
+  out += lcLab(t, tH + .7, 520, 395, "the empty egg cases", RX - 150 * EK, egY - 30 * EK, { size: 36, t1: tH + 3.4 });
+  const tagC = { size: 40, fill: P.sun, ink: P.ink };
+  out += lcLab(t, tE, 1400, 395, "You: a mosquito egg", 968 + 10 * EK, egY - 44 * EK, { ...tagC, t1: tH - .05 });
+  const mid = [wrigPos[0] - 14 * wk, wrigPos[1] + 120 * wk];
+  out += lcLab(t, tH + .1, 1420, clamp(mid[1] + 40, 600, 900), "You: a wriggler", mid[0] + 22, mid[1], { ...tagC, t1: tCu + .3 });
+  out += lcLab(t, tSu - .3, 1400, 395, "your breathing tube, at the surface", X + 4, S + 14, { size: 34, t1: tEa - .3 });
+  out += lcLab(t, tEa + .1, 470, 880, "tiny bits of food", FB[0] - 8, FB[1] + 8, { size: 36, t1: tMo - .2 });
+  { const v = clamp((t - tMo) / 2.6); out += lcLab(t, tMo + .15, 430, 960, "your old skin", X - 300 * v - 80, S + 60 + 260 * v + 170, { size: 36, t1: tMo + 2.2 }); }
+  out += lcLab(t, tGr + .25, 470, 640, "you grow bigger", X - 30, S + 210, { size: 38, t1: tCu - .1 });
+  const pc = [X - 8, S + 48 * PK - 22 * PK * rise];
+  out += lcLab(t, tP, 1420, 700, "You: a pupa", pc[0] + 30, pc[1] + 10, { ...tagC, t1: tCl - .1 });
+  out += lcLab(t, tP + .5, 470, 700, "comma-shaped", X + 40, S + 310, { size: 38, t1: tNo - .3 });
+  out += lcLab(t, tNo - .1, 470, 760, "a pupa does not eat", pc[0] - 40, pc[1] + 20, { size: 38, t1: tCh - .3 });
+  out += lcLab(t, tCh, 470, 700, "changing inside", pc[0], pc[1], { size: 40, fill: "#FFF3C4", t1: tSp - .3 });
+  out += lcLab(t, tSp + .1, 1440, 390, "the case splits", X + 10, S - 8, { size: 38, t1: tCl + .2 });
+  out += lcLab(t, tCl + 1.2, 470, 760, "the empty case", X - 40, S + 140, { size: 36, t1: tEnd - .3 });
+  out += lcLab(t, tDr, 470, 390, "you dry your wings", ax - 70 * AK, ay - 54 * AK, { size: 38, t1: tF - .2 });
+  out += lcLab(t, tCl + .4, lerp(1480, ax - 560, fly), lerp(clamp(ay - 110, 260, 900), ay + 150, fly), t >= tF ? "You: an adult mosquito" : "You: climbing out", ax + 10 * AK, ay - 44 * AK, { ...tagC });
+  // the stage strip and the small "speeded up" tag
+  out += mjStrip(t, [tE, tH, tP, tF]);
+  out += TF(1690, 1028, .8, speeded(t, tDy - .1, tF + 1.2, 0, 0));
   return out; }
 
 /* ---------- [LOOK CLOSER] the flower-pot plate in the corridor (lcplate) ---------- */
