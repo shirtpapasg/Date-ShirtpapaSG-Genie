@@ -174,7 +174,7 @@ SEQ1 = [
  ("scene", "year"),
  ("say", "e1301", H, "What a year! In Primary 3, you sorted living things, tested materials, followed life cycles, and made magnets.", {"pre": .3, "post": .3, "kw": [["y1", "living"], ["y2", "materials"], ["y3", "life"], ["y4", "magnets"]]}),
  ("say", "e1302b", B, "And now, we level up.", {"pre": .3, "post": .2, "kw": [["lvl", "level"]]}),
- ("mark", "items"), ("wait", 1.6),
+ ("mark", "items"), ("wait", 2.8),
  ("scene", "p4"),
  ("say", "e1303", H, "In Primary 4, get ready for systems, matter, light, shadows and heat!", {"pre": .3, "post": .3, "kw": [["p1", "systems"], ["p2", "matter"], ["p3", "light"], ["p4", "shadows"], ["p5", "heat"]]}),
  ("say", "e1304", H, "See you in Primary 4!", {"pre": .2, "post": .6, "excited": True, "kw": [["glitch", "4"]]}),

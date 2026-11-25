@@ -3,7 +3,7 @@
 **Asked for by the teacher, 25 Nov 2026:** "I like this idea. Build on this and make it live immediately. Impress me! New music, new story,
 following the same rules." Pre-approved to go live after the main session's check. **Version 1** (25 Nov 2026, Opus), written to
 `SERIES_FORMAT.md` as it stands on 25 Nov (every rule dated 21-25 Nov) and to the teacher's P4 direction of 25 Nov
-(SecondBrain `Plans/videos/P4-new-direction.md`). Engine: `ep27/` (copied from `ep22/`). Length: **6:25.4** (one video).
+(SecondBrain `Plans/videos/P4-new-direction.md`). Engine: `ep27/` (copied from `ep22/`). Length: **6:26.6** (one video).
 
 **Topic:** the end of Primary 3 and the first taste of Primary 4 Heat (P4 Ch 6-7: heat flows from a hotter place to a colder place; good
 and poor conductors of heat; trapped air), using two P3 skills (a fair test, EP24; magnets attract iron and steel but not aluminium, EP19-20).
@@ -37,7 +37,7 @@ without slowing the clock. The read-along, the score and "Now you know!" stay. (
 easily at the party.)
 
 **Why one video, not two parts:** the whole story runs on one clock (PARTY IN 20:00 → 1:00). Splitting it would stop the deadline in the
-middle and make Part 2 open on a recap of a problem the viewer already cares about. The length is 6:25.4 including about 45 s of the series'
+middle and make Part 2 open on a recap of a problem the viewer already cares about. The length is 6:26.6 including about 45 s of the series'
 closing rituals (the read-along, "Now you know!" and the end-screen outro) and the 9 s blooper after the end card; the story itself is
 about 6 minutes.
 
@@ -183,32 +183,32 @@ about 6 minutes.
 | 5:18.0 | `e1201` | | Heart | Now, here are the words that earn marks. |
 | 5:20.5 | `e1202p` | | Pip | Say it with me! |
 | 5:22.5 | `e1203p` | | Pip | Heat flows from a hotter place to a colder place. Wool is a poor conductor of heat. It slows down the heat flowing from the warmer surroundings to the ice cream. |
-| **5:34.9** | **year** (11.1 s) | THE P3 YEAR: four polaroids pinned to the bunting pop as Heart names them (Living things, Materials, Life cycles, Magnets); LEVEL UP: PRIMARY 4!; the buddies' P4 items pop on with sparkles (Pip: safety goggles up on his forehead; Basil: a P4 LAB SCIENTIST badge; Momo: a magnifier). | | |
+| **5:34.9** | **year** (12.3 s) | THE P3 YEAR: four polaroids pinned to the bunting pop as Heart names them (Living things, Materials, Life cycles, Magnets); LEVEL UP: PRIMARY 4!; the buddies' P4 items pop on with sparkles (Pip: safety goggles up on his forehead; Basil: a P4 LAB SCIENTIST badge; Momo: a magnifier). | | |
 | 5:35.1 | `e1301` | | Heart | What a year! In Primary 3, you sorted living things, tested materials, followed life cycles, and made magnets. |
 | 5:43.1 | `e1302b` | | Basil | And now, we level up. |
-| **5:46.0** | **p4** (6.8 s) | THE P4 TEASER: COMING UP IN PRIMARY 4: five tiles pop (Systems, Matter, Light, Shadows, Heat); "See you in Primary 4!" and the buddies wave. HEART MYSTERY HINT #1: on "four" the heart in the logo pill flickers for a few frames (a cyan and magenta double, a sliver offset; one tiny digital blip). Unexplained. | | |
-| 5:46.2 | `e1303` | | Heart | In Primary 4, get ready for systems, matter, light, shadows and heat! |
-| 5:51.0 | `e1304` | | Heart | See you in Primary 4! |
-| **5:52.8** | **kwrecap** (14.3 s) | The key-word read-along (the shelf to the centre): Hotter to colder · Poor conductor of heat · Fair test. | | |
-| 5:53.3 | `h860` | | Heart | Let's read today's key words together! Ready? |
-| 5:56.8 | `hk_hotter_to_colder` | | Heart | Hotter to colder. |
-| 5:58.1 | `uk_hotter_to_colder` | | All three | Hotter to colder. |
-| 5:59.9 | `hk_poor_conductor_of_heat` | | Heart | Poor conductor of heat. |
-| 6:01.4 | `uk_poor_conductor_of_heat` | | All three | Poor conductor of heat. |
-| 6:03.4 | `hk_fair_test` | | Heart | Fair test. |
-| 6:04.4 | `uk_fair_test` | | All three | Fair test. |
-| 6:05.9 | `h864` | | Heart | Well done! |
-| **6:07.1** | **nyk** (11.1 s) | "Say it with us!" ... "Now you know!" (all three cheer on the words), the sunburst, the rescued box open on the table; about 4.6 s of outro (end-screen time). | | |
-| 6:07.8 | `u1300` | | All three | Say it with us! |
-| 6:09.7 | `h1304a` | | Heart | Ready? |
-| 6:10.6 | `h1304o` | | Heart | One! |
-| 6:11.6 | `h1304t` | | Heart | two! |
-| 6:12.6 | `h1305` | | Heart | Now you know! |
-| 6:12.6 | `u1305` | | All three | Now you know! |
-| **6:18.2** | **blooper** (7.2 s) | THE BLOOPER (after the end card): a record scratch, the clapperboard BLOOPER / TAKE 2; Pip: "...a poor conductor of meat!" (Pip shy), Basil laughs, Momo hopeful; the clapper snaps. | | |
-| 6:19.0 | `e1601p` | | Pip | Wool is a poor conductor of meat! |
-| 6:21.2 | `e1602b` | | Basil | Meat? |
-| 6:22.1 | `e1603m` | | Momo | Did somebody say meat? |
+| **5:47.2** | **p4** (6.8 s) | THE P4 TEASER: COMING UP IN PRIMARY 4: five tiles pop (Systems, Matter, Light, Shadows, Heat); "See you in Primary 4!" and the buddies wave. HEART MYSTERY HINT #1: on "four" the heart in the logo pill flickers for a few frames (a cyan and magenta double, a sliver offset; one tiny digital blip). Unexplained. | | |
+| 5:47.4 | `e1303` | | Heart | In Primary 4, get ready for systems, matter, light, shadows and heat! |
+| 5:52.2 | `e1304` | | Heart | See you in Primary 4! |
+| **5:54.0** | **kwrecap** (14.3 s) | The key-word read-along (the shelf to the centre): Hotter to colder · Poor conductor of heat · Fair test. | | |
+| 5:54.5 | `h860` | | Heart | Let's read today's key words together! Ready? |
+| 5:58.0 | `hk_hotter_to_colder` | | Heart | Hotter to colder. |
+| 5:59.3 | `uk_hotter_to_colder` | | All three | Hotter to colder. |
+| 6:01.1 | `hk_poor_conductor_of_heat` | | Heart | Poor conductor of heat. |
+| 6:02.6 | `uk_poor_conductor_of_heat` | | All three | Poor conductor of heat. |
+| 6:04.6 | `hk_fair_test` | | Heart | Fair test. |
+| 6:05.6 | `uk_fair_test` | | All three | Fair test. |
+| 6:07.1 | `h864` | | Heart | Well done! |
+| **6:08.3** | **nyk** (11.1 s) | "Say it with us!" ... "Now you know!" (all three cheer on the words), the sunburst, the rescued box open on the table; about 4.6 s of outro (end-screen time). | | |
+| 6:09.0 | `u1300` | | All three | Say it with us! |
+| 6:10.9 | `h1304a` | | Heart | Ready? |
+| 6:11.8 | `h1304o` | | Heart | One! |
+| 6:12.8 | `h1304t` | | Heart | two! |
+| 6:13.8 | `h1305` | | Heart | Now you know! |
+| 6:13.8 | `u1305` | | All three | Now you know! |
+| **6:19.4** | **blooper** (7.2 s) | THE BLOOPER (after the end card): a record scratch, the clapperboard BLOOPER / TAKE 2; Pip: "...a poor conductor of meat!" (Pip shy), Basil laughs, Momo hopeful; the clapper snaps. | | |
+| 6:20.2 | `e1601p` | | Pip | Wool is a poor conductor of meat! |
+| 6:22.4 | `e1602b` | | Basil | Meat? |
+| 6:23.3 | `e1603m` | | Momo | Did somebody say meat? |
 
 ## 5. Who is right, who is wrong (lib.js OUTCOMES) and the poses with a reason
 - Picks: Pip 1 (run), Momo 2 (fan), Basil 3 (wool). The answer is 3. Score at the party: YOU +1 if you picked 3, BUDDIES +1 (Basil).

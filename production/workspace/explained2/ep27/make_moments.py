@@ -6,7 +6,9 @@ YouTube chapters: Intro at 0:00, the moments (one less than 10 s after the previ
 "Key words, see you in P4 and a blooper" at the read-along."""
 import json, math, os
 H = os.path.dirname(os.path.abspath(__file__)); Y = os.path.join(H, "../../../youtube/chapters_p3.json")
-K = ["O.heat", "CH.heat"]
+# keys: the real TheOneApp videos.js constants (O.heatFlow, O.gainLoss, O.conductors, O.magMaterials, CH.magnets), as strings to paste without quotes;
+# the fair test and the P3-year moments have no key in videos.js, so their keys are left empty (none invented)
+KEYS = {'e101': ['O.heatFlow'], 'e201p': ['O.conductors'], 'e301': ['O.heatFlow', 'O.gainLoss'], 'e401': ['O.heatFlow'], 'e501': ['O.heatFlow'], 'e601': ['O.heatFlow'], 'e602b': ['O.heatFlow'], 'e701m': ['O.conductors'], 'e704': ['O.conductors'], 'e805b': ['O.conductors'], 'e901m': [], 'e1001': ['O.magMaterials', 'CH.magnets'], 'e1101': ['O.conductors'], 'e1201': ['O.heatFlow', 'O.conductors'], 'e1301': []}
 IDS = [("e101", "The problem: the party is in 20 minutes and it is 33 degrees"),
        ("e201p", "Pick the fix: run faster, fan it, or wrap it in wool?"),
        ("e301", "Fix 1: Pip runs. Heat flows out of his tummy into the ice cream"),
@@ -26,10 +28,8 @@ UP = json.load(open(os.path.join(H, "upload.json")))
 mmss = lambda s: f"{int(s) // 60}:{int(s) % 60:02d}"
 tl = json.load(open(os.path.join(H, "tl_p1.json"))); ms = []
 for id, what in IDS:
-    L = tl["lines"][id]; ms.append({"at": mmss(max(0, math.floor(L["t"] - 1.5))), "what": what, "keys": K, "_line": id, "_t": round(L["t"], 2)})
-out = {"_note": "EP27 (the P3-to-P4 Bridge, one video), for TheOneApp videos.js P3 after upload: ADD as one entry (nothing is retired); replace the keys' "
-       "strings by the constants (O.heat and CH.heat are placeholders: check the real names in videos.js; heat is a P4 topic, so it may sit under "
-       "the P3 finale or the first P4 row), set url to the uploaded video id.", "replaces": [],
+    L = tl["lines"][id]; ms.append({"at": mmss(max(0, math.floor(L["t"] - 1.5))), "what": what, "keys": KEYS[id], "_line": id, "_t": round(L["t"], 2)})
+out = {"_note": "EP27 (the P3-to-P4 Bridge, one video), for TheOneApp videos.js after upload: ADD as one entry (nothing is retired). The keys are the real videos.js constants (O.heatFlow, O.gainLoss, O.conductors, O.magMaterials, CH.magnets) written as strings: paste them without quotes. The fair-test and P3-year moments have no matching key in videos.js, so their keys are empty. Set url to the uploaded video id.", "replaces": [],
        "entries": [{"no": "27", "art": "🍦", "topic": "Heat (P3 to P4)", "title": UP["parts"][0]["title"].split(" | ")[0], "len": mmss(round(tl["END"])),
                     "url": "https://www.youtube.com/watch?v=<EP27>", "moments": ms}]}
 ch = json.load(open(Y)); cl = [["0:00", "Intro"]]; last = 0

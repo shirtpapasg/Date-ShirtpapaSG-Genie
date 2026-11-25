@@ -17,8 +17,8 @@ walk>drain                  279.03 s  ok
 drain>party                 300.82 s  ok
 party>words                 317.82 s  ok
 words>year                  334.88 s  ok
-year>p4                     346.00 s  ok
-p4>kwrecap                  352.78 s  ok
-kwrecap>nyk                 367.08 s  ok
-nyk>blooper                 378.19 s  ok
+year>p4                     347.20 s  ok
+p4>kwrecap                  353.98 s  ok
+kwrecap>nyk                 368.28 s  ok
+nyk>blooper                 379.39 s  ok
 no buddy ghosting

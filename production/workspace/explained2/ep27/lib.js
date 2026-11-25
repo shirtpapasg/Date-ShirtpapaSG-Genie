@@ -373,7 +373,7 @@ const KWHOLD = 2.0;
 // lcthings, on Pip's "magnetic" in m1005p); Part 2 SAME DIRECTION (inside lcway, on Momo's "Same" in n705m), SAME POLE (in the scene `fix`,
 // on Basil's "Same" in n806b; above the cream strip 7.2 step 3), STRONGER MAGNET (inside lcmore, on Pip's "stronger" in n905p). All o.at (no
 // dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it (keep the pops above the strips and clear of the boards).
-const KW = [["HOTTER TO COLDER", "kw_hotter_to_colder", 1, null, { at: [960, 250], size: 104 }], ["POOR CONDUCTOR OF HEAT", "kw_poor_conductor_of_heat", 1, null, { at: [960, 250], size: 84 }], ["FAIR TEST", "kw_fair_test", 1, null, { at: [960, 250], size: 112 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+const KW = [["HOTTER TO COLDER", "kw_hotter_to_colder", 1, null, { at: [820, 730], size: 104 }], ["POOR CONDUCTOR OF HEAT", "kw_poor_conductor_of_heat", 1, null, { at: [960, 250], size: 84 }], ["FAIR TEST", "kw_fair_test", 1, null, { at: [960, 250], size: 112 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, fixcards: 1, lock: 1, picks: 1, run: 1, fan: 1, replay: 1, lcfan: 1, scarf: 1, waitw: 1, shrink: 1, pullout: 1, words: 1, year: 1, p4: 1, nyk: 1, blooper: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;

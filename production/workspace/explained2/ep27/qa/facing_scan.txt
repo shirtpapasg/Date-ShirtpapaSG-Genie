@@ -1,5 +1,5 @@
-facing_scan ep27 part 1: 3854 samples 0-385.4 s every 0.1 s; 11 FACES notes; 24 functions watched
-EYE REVIEW    58.5-61.2    run              buddy0         moves RIGHT   992 px    from lib.js:166<p1.js:6<p1.js:96  [buddy travels]
+facing_scan ep27 part 1: 3866 samples 0-386.6 s every 0.1 s; 12 FACES notes; 25 functions watched
+EYE REVIEW    58.5-61.2    run              buddy0         moves RIGHT   558 px    from lib.js:166<p1.js:6<p1.js:96  [buddy travels]
 EYE REVIEW   273.4-279.0   walk             buddy0         moves RIGHT  1129 px    from lib.js:166<p1.js:6<p1.js:225  [buddy travels]
 EYE REVIEW   273.4-279.0   walk             buddy0         moves RIGHT   597 px    from lib.js:166<p1.js:6<p1.js:226  [buddy travels]
 no backwards movers (0 annotated movers face the right way, 3 for eye review)

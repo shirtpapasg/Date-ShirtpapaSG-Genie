@@ -180,13 +180,12 @@ BG.ms27 = () => { let s = `<rect x="-200" y="-120" width="2320" height="1320" fi
     <rect x="20" y="230" width="40" height="14" fill="#5B6B80"/><rect x="360" y="230" width="40" height="14" fill="#5B6B80"/></g>`;
   return s; };
 // THE SUNNY PATH from the shop to the void deck: wide open sky, the sun high at the right, far blocks, a long pale path along the frame,
-// grass, a few young trees too small for shade, a sign VOID DECK with an arrow pointing right (the way the buddies walk)
+// grass, a few young trees too small for shade (the VOID DECK signpost is drawn live: signpost27, only in the fix scenes, where no key-word chip is up yet)
 BG.path27 = () => { let s = `<rect x="-200" y="-120" width="2320" height="1320" fill="url(#msSky)"/>`;
   s += hdbBlock27(-120, 150, 380, 520, "#EAD9F0", "#E58A6B") + hdbBlock27(360, 230, 300, 440, "#F2E2C4", "#7BB0E0") + hdbBlock27(1380, 200, 340, 470, "#DCEBD9", "#43BF6C") + hdbBlock27(1800, 260, 340, 410, "#F2E2C4", "#E58A6B");
   s += `<rect x="-200" y="640" width="2320" height="120" fill="url(#msGrass)"/>` + [-40, 700, 1260, 1900].map((x, i) => tree27(x, 690, .55 + .08 * (i % 2))).join("");
   s += `<rect x="-200" y="740" width="2320" height="460" fill="url(#msPath)"/><path d="M-200 744 H2120" stroke="#D2B37A" stroke-width="8"/><path d="M-200 1130 H2120" stroke="#D2B37A" stroke-width="5" opacity=".6"/>`;
   for (let i = 0; i < 16; i++) s += `<path d="M${-180 + i * 150} 900 h80" stroke="#E7D3A6" stroke-width="5" opacity=".8"/>`;
-  s += `<g transform="translate(1720 760)"><rect x="-8" y="-260" width="16" height="260" fill="#8C9BB0"/><g filter="url(#dropS)"><rect x="-150" y="-300" width="300" height="84" rx="16" fill="#2E7D5B"/></g>${T(-20, -244, "VOID DECK", 38, "#fff")}<path d="M100 -274 l30 16 l-30 16z" fill="#fff"/></g>`;
   return s; };
 // THE COVERED WALKWAY: a long roof on posts (cool shade underneath), the sunny grass and blocks beyond; a drain along the near edge with a
 // steel grating at the middle (drawn live for the close-up)
@@ -245,3 +244,7 @@ function heatStream27(t, t0, y, xw, xEnd, o = {}) { if (t < t0) return ""; let s
     const inside = x > xw, w = inside ? 16 : 24, a = clamp(age / .3) * (inside ? 1 - .5 * clamp((x - xw) / (xEnd - xw)) : 1), yy = y + (i % 3 - 1) * 70 + 10 * Math.sin(t * 1.5 + i);
     s += OP(a, fatArrow(x - 110, yy, x, yy, "#FF6A2E", w)); }
   return s; }
+
+// the VOID DECK signpost on the sunny path (an arrow pointing right, the way to the party); drawn live in the fix scenes only (run, fan,
+// replay), so it never shares the top right with the key-word chips (coordinator, 25 Nov)
+const signpost27 = (x = 1720, y = 760) => `<g transform="translate(${x} ${y})"><rect x="-8" y="-260" width="16" height="260" fill="#8C9BB0"/><g filter="url(#dropS)"><rect x="-150" y="-300" width="300" height="84" rx="16" fill="#2E7D5B"/></g>${T(-20, -244, "VOID DECK", 38, "#fff")}<path d="M100 -274 l30 16 l-30 16z" fill="#fff"/></g>`;

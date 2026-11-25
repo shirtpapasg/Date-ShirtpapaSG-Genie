@@ -1,5 +1,5 @@
 {
- "_note": "EP27 (the P3-to-P4 Bridge, one video), for TheOneApp videos.js P3 after upload: ADD as one entry (nothing is retired); replace the keys' strings by the constants (O.heat and CH.heat are placeholders: check the real names in videos.js; heat is a P4 topic, so it may sit under the P3 finale or the first P4 row), set url to the uploaded video id.",
+ "_note": "EP27 (the P3-to-P4 Bridge, one video), for TheOneApp videos.js after upload: ADD as one entry (nothing is retired). The keys are the real videos.js constants (O.heatFlow, O.gainLoss, O.conductors, O.magMaterials, CH.magnets) written as strings: paste them without quotes. The fair-test and P3-year moments have no matching key in videos.js, so their keys are empty. Set url to the uploaded video id.",
  "replaces": [],
  "entries": [
   {
@@ -7,15 +7,14 @@
    "art": "🍦",
    "topic": "Heat (P3 to P4)",
    "title": "Can a WOOL Scarf Keep Ice Cream COLD? The Great Ice Cream Rescue",
-   "len": "6:25",
+   "len": "6:27",
    "url": "https://www.youtube.com/watch?v=<EP27>",
    "moments": [
     {
      "at": "0:00",
      "what": "The problem: the party is in 20 minutes and it is 33 degrees",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow"
      ],
      "_line": "e101",
      "_t": 0.61
@@ -24,8 +23,7 @@
      "at": "0:22",
      "what": "Pick the fix: run faster, fan it, or wrap it in wool?",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.conductors"
      ],
      "_line": "e201p",
      "_t": 23.53
@@ -34,8 +32,8 @@
      "at": "0:57",
      "what": "Fix 1: Pip runs. Heat flows out of his tummy into the ice cream",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow",
+      "O.gainLoss"
      ],
      "_line": "e301",
      "_t": 58.55
@@ -44,8 +42,7 @@
      "at": "1:33",
      "what": "Fix 2: fan the ice cream",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow"
      ],
      "_line": "e401",
      "_t": 94.59
@@ -54,8 +51,7 @@
      "at": "1:42",
      "what": "The slow-motion replay",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow"
      ],
      "_line": "e501",
      "_t": 104.46
@@ -64,8 +60,7 @@
      "at": "1:50",
      "what": "Look closer: warm air at 33 degrees, ice cream at minus 18",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow"
      ],
      "_line": "e601",
      "_t": 112.11
@@ -74,8 +69,7 @@
      "at": "2:03",
      "what": "Heat flows from a hotter place to a colder place",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow"
      ],
      "_line": "e602b",
      "_t": 125.17
@@ -84,8 +78,7 @@
      "at": "2:23",
      "what": "Fix 3: wrap the box in a wool scarf",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.conductors"
      ],
      "_line": "e701m",
      "_t": 144.8
@@ -94,8 +87,7 @@
      "at": "2:38",
      "what": "Journey: be a bit of air trapped in the wool",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.conductors"
      ],
      "_line": "e704",
      "_t": 159.51
@@ -104,8 +96,7 @@
      "at": "3:11",
      "what": "Wool and trapped air are poor conductors of heat",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.conductors"
      ],
      "_line": "e805b",
      "_t": 193.48
@@ -113,10 +104,7 @@
     {
      "at": "3:36",
      "what": "A fair test: no wrapper, a plastic bag or wool",
-     "keys": [
-      "O.heat",
-      "CH.heat"
-     ],
+     "keys": [],
      "_line": "e901m",
      "_t": 218.21
     },
@@ -124,8 +112,8 @@
      "at": "4:31",
      "what": "The rescue, and a magnet at the drain",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.magMaterials",
+      "CH.magnets"
      ],
      "_line": "e1001",
      "_t": 273.37
@@ -134,8 +122,7 @@
      "at": "4:59",
      "what": "The party: is the ice cream still frozen?",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.conductors"
      ],
      "_line": "e1101",
      "_t": 301.05
@@ -144,8 +131,8 @@
      "at": "5:16",
      "what": "The words that earn marks",
      "keys": [
-      "O.heat",
-      "CH.heat"
+      "O.heatFlow",
+      "O.conductors"
      ],
      "_line": "e1201",
      "_t": 318.05
@@ -153,10 +140,7 @@
     {
      "at": "5:33",
      "what": "The P3 year, and coming up in Primary 4",
-     "keys": [
-      "O.heat",
-      "CH.heat"
-     ],
+     "keys": [],
      "_line": "e1301",
      "_t": 335.1
     }

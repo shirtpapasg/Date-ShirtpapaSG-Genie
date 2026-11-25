@@ -64,17 +64,17 @@ SC.lock = (t, s) => { const r0 = MK("ring0_fix"), bell = MK("bell_fix"), rs = ri
     + bd("pip", 190, 1076, 420, t, { in: s.t0 - 1, poses: [[s.t0 - 1, "worried"], [bell + .4, "sit"]], look: 4, jump: [[r0 + 1.5, 14], [r0 + 3.5, 14]] }) + HUD27(t); };
 
 /* the picks: the cards rise to a top row; each buddy stands under the card they pick (Pip 1, Momo 2, Basil 3) */
-SC.picks = (t, s) => { const up = eio((t - s.t0) / .6), y = lerp(790, 345, up), k = lerp(.62, .64, up), tp = { pip: LT("e203p"), momo: LT("e204m"), basil: LT("e205b") };
+SC.picks = (t, s) => { window._BUBAT = { pip: [330, 600], momo: [960, 590], basil: [1600, 600] }; const up = eio((t - s.t0) / .6), y = lerp(790, 345, up), k = lerp(.62, .64, up), tp = { pip: LT("e203p"), momo: LT("e204m"), basil: LT("e205b") };
   const pick = (who, n) => t >= tp[who] - .1 ? TF(CX3[n - 1], 640, spring(t, tp[who] - .1, .4), `<path d="M0 -70 V30" stroke="${P[who]}" stroke-width="10" stroke-linecap="round"/><circle cx="0" cy="-70" r="18" fill="${P[who]}" stroke="#fff" stroke-width="5"/>`) : "";
-  return bg("stage") + cardsRow(t, y, k, { glow: (n) => [tp.pip, tp.momo, tp.basil][n - 1] <= t ? .6 : 0 }) + pick("pip", 1) + pick("momo", 2) + pick("basil", 3)
-    + bd("pip", CX3[0], 1070, 400, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]], look: 2 }) + bd("momo", CX3[1], 1070, 400, t, { in: s.t0 + .25, poses: [[s.t0, "sit"]], look: 0 })
-    + bd("basil", CX3[2], 1070, 390, t, { in: s.t0 + .4, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + HUD27(t); };
+  return bg("stage") + cardsRow(t, y, k, { glow: (n) => [tp.pip, tp.momo, tp.basil][n - 1] <= t ? .6 : 0 }) 
+    + bd("pip", CX3[0], 1075, 360, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]], look: 2 }) + bd("momo", CX3[1], 1075, 360, t, { in: s.t0 + .25, poses: [[s.t0, "sit"]], look: 0 })
+    + bd("basil", CX3[2], 1075, 360, t, { in: s.t0 + .4, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + HUD27(t); };
 
 /* ================================================================ 3 · FIX 1, RUN ================================================================ */
 // the sunny path; Basil and Momo at the left, watching; Pip dashes right with the box, slows, wobbles, flops on the kerb (x 1380) in the
 // sun and hugs the box to his tummy. Heart's correction: heat arrows from Pip's tummy into the box (warmer -> colder)
-const pathLive = (t) => sun27(t, 1780, 150, 95) + shimmer27(t, -100, 2000, 980, 12, .5);
-const PX0 = 420, PX1 = 1380;
+const pathLive = (t, sign) => sun27(t, 1780, 150, 95) + shimmer27(t, -100, 2000, 980, 12, .5) + (sign ? signpost27() : "");
+const PX0 = 860, PX1 = 1380;
 const runX = (t) => { const z = MK("zoom") + .2, f = MK("flop"); if (t < z) return PX0; if (t < f) { const u = clamp((t - z) / (f - z)); return lerp(PX0, PX1, 1 - Math.pow(1 - u, 2.4)); } return PX1; };
 SC.run = (t, s) => { const z = MK("zoom") + .2, f = MK("flop"), tC = LT("e305") + .2, c = t < tC ? [1, 960, 540] : camMix([1, 960, 540], camOn([1320, 820], 1.22, 1240, 600), eio((t - tC) / 1.2)), back = ramp(t, MK("v_run") - .2, .9), cc = camMix(c, [1, 960, 540], back);
   const x = runX(t), moving = t > z && t < f, wob_ = t > f - .5 && t < f ? Math.sin((t - f) * 30) * 6 : 0, ph = Math.max(0, f - .1);
@@ -94,8 +94,8 @@ SC.run = (t, s) => { const z = MK("zoom") + .2, f = MK("flop"), tC = LT("e305") 
       + heatArrow(bxc + sd * (bw + 110), byc - bh * .5, bxc + sd * (bw + 14), byc - bh * .5, 16, clamp((t - tO - .4) / .8))
       + (t >= tL ? TF(bxc - 40, byc - bh - 190, spring(t, tL, .4), tempTag(0, 0, "Pip: warmer", true)) : "") + (t >= tG ? TF(bxc - 330, byc - 20, spring(t, tG, .4), tempTag(0, 0, "ice cream: colder", false)) : "")); }
   const pip = bd("pip", pp[0], pp[1] + (t > f && t < f + .3 ? 10 * Math.sin((t - f) * 20) : 0), ph_, t, { poses: [[0, "sit"]], look: moving ? 8 : -3, flip: fl, jump: moving ? [[z + .3, 18], [z + .65, 16], [z + 1.0, 12]] : [] });
-  return place("path27", pathLive(t), cc) + fx
-    + bcam(cc, "basil", 330, 1062, 440, t, { poses: [[0, "sit"]], look: 6 }) + bcam(cc, "momo", 640, 1062, 420, t, { poses: [[0, "sit"]], look: 6 })
+  return place("path27", pathLive(t, true), cc) + fx
+    + bcam(cc, "basil", 200, 1062, 440, t, { poses: [[0, "sit"]], look: 6 }) + bcam(cc, "momo", 570, 1062, 420, t, { poses: [[0, "sit"]], look: 6 })
     + `<g transform="rotate(${n2(wob_)} ${n2(pp[0])} ${n2(pp[1])})">` + pip + TF(bxc, byc, bs, boxArt) + `</g>` + puff + lc
     + (t >= MK("v_run") ? TF(1560, 330, spring(t, MK("v_run"), .45) * (1 - ramp(t, MK("v_run") + 3.6, .3)), fixCard27(t, 1, { k: .55, stamp: ["MELTING!", false, MK("v_run") + .35] })) : "")
     + clock(t, s) + HUD27(t); };
@@ -107,7 +107,7 @@ const wall27 = `<rect x="-200" y="-40" width="400" height="80" rx="10" fill="#C9
 const fanSwing = (t, t0, rate) => t < t0 ? 70 : 70 + 22 * Math.sin((t - t0) * rate);
 SC.fan = (t, s) => { const c = camMix([1, 960, 540], camOn([1000, 800], 1.12, 960, 560), eio((t - s.t0) / 6)), tf = MK("fanon"), td = MK("drip"), melt = clamp((t - td + .8) / 4) * .7;
   const mx = 700, sw = fanSwing(t, tf, 13);
-  return place("path27", pathLive(t) + TF(...WALL, 1, wall27) + TF(WALL[0], WALL[1] - 40, .8, iceBox27(t, { melt, sweat: .7 })) + (t > tf ? wind27(t, 860, 760, 260, 1, 4) : "") + (t >= td && t < td + .9 ? impactFX(t, td, 1290, 700, "DRIP!", { s: .5, flash: false, size: 60 }) : ""), c)
+  return place("path27", pathLive(t, true) + TF(...WALL, 1, wall27) + TF(WALL[0], WALL[1] - 40, .8, iceBox27(t, { melt, sweat: .7 })) + (t > tf ? wind27(t, 860, 760, 260, 1, 4) : "") + (t >= td && t < td + .9 ? impactFX(t, td, 1290, 700, "DRIP!", { s: .5, flash: false, size: 60 }) : ""), c)
     + bcam(c, "momo", mx, 1062, 450, t, { poses: [[0, "sit"]], look: 6 }) + heldC(c, "momo", mx, 1062, 450, false, TF(0, 0, .8, fan27(1, sw)), 30, 70)
     + bcam(c, "basil", 260, 1062, 430, t, { poses: [[0, "sit"]], look: 6 }) + bcam(c, "pip", 1640, 1062, 440, t, { flip: true, poses: [[0, "sit"]], look: -6 })
     + clock(t, s) + HUD27(t) + melt27(t, s, "run"); };
@@ -119,7 +119,7 @@ SC.replay = (t, s) => { const t0 = MK("slow0"), sl = MK("drip") - 1.2 + Math.max
   const dripY = sl > MK("drip") ? 40 + 400 * Math.min(1, (sl - MK("drip")) * .9) : -1;
   let film = `<rect width="1920" height="110" fill="#111"/><rect y="970" width="1920" height="110" fill="#111"/>`; for (let i = 0; i < 24; i++) { const x = ((i * 90 - (t * 40) % 90) + 1920) % 1980 - 30; film += `<rect x="${n2(x)}" y="30" width="46" height="50" rx="8" fill="#EEE"/><rect x="${n2(x)}" y="1000" width="46" height="50" rx="8" fill="#EEE"/>`; }
   const rew = t < s.t0 + .45 ? 1 - (t - s.t0) / .45 : 0;
-  return place("path27", pathLive(sl) + TF(...WALL, 1, wall27) + TF(WALL[0], WALL[1] - 40, .8, iceBox27(sl, { melt, sweat: .7 })) + (dripY > 0 ? `<ellipse cx="1012" cy="${n2(WALL[1] - 40 + dripY * .4)}" rx="9" ry="13" fill="#F7B8CB" stroke="#D9849E" stroke-width="2"/>` : "") + wind27(sl, 860, 760, 260, 1, 4), c)
+  return place("path27", pathLive(sl, true) + TF(...WALL, 1, wall27) + TF(WALL[0], WALL[1] - 40, .8, iceBox27(sl, { melt, sweat: .7 })) + (dripY > 0 ? `<ellipse cx="1012" cy="${n2(WALL[1] - 40 + dripY * .4)}" rx="9" ry="13" fill="#F7B8CB" stroke="#D9849E" stroke-width="2"/>` : "") + wind27(sl, 860, 760, 260, 1, 4), c)
     + bcam(c, "momo", 700, 1062, 450, t, { poses: [[0, "sit"]], look: 6, still: true }) + heldC(c, "momo", 700, 1062, 450, false, TF(0, 0, .8, fan27(1, sw)), 30, 70)
     + `<rect width="1920" height="1080" fill="#D9C7A0" opacity=".16"/>` + film
     + TF(330, 170, spring(t, s.t0 + .1, .4), tpill(0, 0, "INSTANT REPLAY", 40, "#E5484D", "#fff", { w: 700 })) + (t >= t0 - .1 ? TF(1560, 170, spring(t, t0 - .1, .4), tpill(0, 0, "SLOW MOTION ×¼", 40, P.ink, P.sun, { w: 700 })) : "")
@@ -146,7 +146,7 @@ SC.lcfan = (t, s) => { const k = ramp(t, s.t0, .45), tP = MK("push"), t33 = MK("
 /* ================================================================ 7 · FIX 3, THE SCARF ================================================================ */
 // back at the mama shop's freezer: Pip pulls out his wool scarf and wraps the box (wrap 0 -> 1); Momo worried
 const SCF = { pip: [470, 1062, 470], momo: [1420, 1062, 440], basil: [1740, 1062, 440] };
-SC.scarf = (t, s) => { const tw_ = MK("wrap"), wr = clamp((t - tw_) / 1.6), c = camMix(camOn([960, 600], 1.04), camOn([900, 660], 1.14), eio((t - tw_ + .5) / 1.5));
+SC.scarf = (t, s) => { window._BUBAT = { pip: [430, 370], momo: [1560, 330], basil: [1560, 330] }; const tw_ = MK("wrap"), wr = clamp((t - tw_) / 1.6), c = camMix(camOn([960, 600], 1.04), camOn([900, 660], 1.14), eio((t - tw_ + .5) / 1.5));
   return place("ms27", msLive(t, c, { box: false }) + TF(BOXP[0], BOXP[1], 1, iceBox27(t, { wrap: wr, sweat: .3 * (1 - wr) })), c)
     + bcam(c, "pip", ...SCF.pip, t, { poses: [[0, "sit"]], look: 5 }) + (t < tw_ + 1.6 && t > LT("e702p") - .3 ? heldC(c, "pip", ...SCF.pip, false, TF(0, 0, .8 * (1 - .7 * wr), scarfHeld27(t)), -20, 10) : "")
     + bcam(c, "momo", ...SCF.momo, t, { flip: true, poses: [[0, "sit"], [LT("e701m") - .2, "sit"], [LE("e701m") + .1, "worried"], [LT("e703m") - .1, "sit"]], look: -6 })
@@ -190,8 +190,8 @@ const child27 = (t) => `<path d="M-150 160 Q-150 40 0 40 Q150 40 150 160z" fill=
 const inset27 = (t, x, y, k, title, inner, col) => TF(x, y, k, `<g filter="url(#drop)"><rect x="-300" y="-250" width="600" height="500" rx="30" fill="#FFF8EA" stroke="${col}" stroke-width="8"/></g>` + T(0, -190, title, 40, P.ink) + inner);
 SC.wool = (t, s) => { const c = woolCam, tN = MK("neck") - .1, tT = MK("today") - .1, tV = MK("v_wool");
   let ins = "";
-  if (t >= tN) ins += inset27(t, 560, 375, spring(t, tN, .45) * .76, "On a cold day", TF(0, 90, .9, child27(t)) + [0, 1].map((i) => heatArrow(0 + (i ? 60 : -60), 60, (i ? 1 : -1) * 250, 90, 12, clamp((t - tN - .5) / 1.6))).join("") + T(0, 225, "the scarf slows heat flowing OUT", 30, P.ink, { w: 600 }), "#3A8DFF");
-  if (t >= tT) ins += inset27(t, 1360, 375, spring(t, tT, .45) * .76, "Today", TF(0, 140, .75, iceBox27(t, { wrap: 1 })) + [0, 1].map((i) => heatArrow((i ? 1 : -1) * 270, 40, (i ? 1 : -1) * 140, 60, 12, clamp((t - tT - .5) / 1.6))).join("") + T(0, 225, "the scarf slows heat flowing IN", 30, P.ink, { w: 600 }), "#FF6A3D");
+  if (t >= tN) ins += inset27(t, 560, 412, spring(t, tN, .45) * .76, "On a cold day", TF(0, 90, .9, child27(t)) + [0, 1].map((i) => heatArrow(0 + (i ? 60 : -60), 60, (i ? 1 : -1) * 250, 90, 12, clamp((t - tN - .5) / 1.6))).join("") + T(0, 225, "the scarf slows heat flowing OUT", 30, P.ink, { w: 600 }), "#3A8DFF");
+  if (t >= tT) ins += inset27(t, 1360, 412, spring(t, tT, .45) * .76, "Today", TF(0, 140, .75, iceBox27(t, { wrap: 1 })) + [0, 1].map((i) => heatArrow((i ? 1 : -1) * 270, 40, (i ? 1 : -1) * 140, 60, 12, clamp((t - tT - .5) / 1.6))).join("") + T(0, 225, "the scarf slows heat flowing IN", 30, P.ink, { w: 600 }), "#FF6A3D");
   const dim = ramp(t, tN - .2, .4) * (1 - ramp(t, LT("e808b") + .3, .4));
   return place("ms27", msLive(t, c, { box: false }) + TF(BOXP[0], BOXP[1], 1, iceBox27(t, { wrap: 1 })), c) + `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.35 * dim)}"/>` + OP(1 - ramp(t, LT("e808b") + .3, .4), ins)
     + bd("pip", ...WOOLB.pip, t, { poses: [[0, "sit"]], look: 5 }) + bd("momo", ...WOOLB.momo, t, { flip: true, poses: [[0, "sit"], [LE("e806m") + .1, "thinking"], [LT("e807") + 1.4, "sit"]], look: -5 })
@@ -203,7 +203,7 @@ SC.wool = (t, s) => { const c = woolCam, tN = MK("neck") - .1, tT = MK("today") 
 // cups (30 ml, 20 ml, 5 ml); WOOL WINS; the three fix cards with their stamps
 const CUPX = [760, 960, 1160], ML = [30, 20, 5], MELT = [.8, .55, .12];
 const testCam = (t) => { const tP = MK("pour"); return t < tP - .3 ? camMix([1, 960, 540], camOn([960, 760], 1.1), eio((t - SCN.test.t0) / 4)) : camMix(camOn([960, 760], 1.1), camOn([960, 870], 1.3, 960, 672), eio((t - tP + .3) / 1.2)); };
-SC.test = (t, s) => { const c = testCam(t), tL = MK("lapse"), tL1 = MK("lapse1"), lu = clamp((t - tL) / (tL1 - tL)), tc = [MK("cup1"), MK("cup2"), MK("cup3")], tP = MK("pour"), tr = [MK("r1"), MK("r2"), MK("r3")], tV = MK("v_test");
+SC.test = (t, s) => { window._BUBAT = { pip: [1120, 440], basil: [1220, 440], momo: [640, 440] }; const c = testCam(t), tL = MK("lapse"), tL1 = MK("lapse1"), lu = clamp((t - tL) / (tL1 - tL)), tc = [MK("cup1"), MK("cup2"), MK("cup3")], tP = MK("pour"), tr = [MK("r1"), MK("r2"), MK("r3")], tV = MK("v_test");
   let set = pathLive(t) + TF(960, 930, 1, `<rect x="-360" y="-40" width="720" height="80" rx="10" fill="#C9BFAE" stroke="#9E9483" stroke-width="5"/><rect x="-360" y="-40" width="720" height="18" rx="8" fill="#DDD4C4"/>`);
   CUPX.forEach((x, i) => { const k = t >= LT("e904p") ? spring(t, LT("e904p") + .2 + i * .15, .45) : 0; if (k < .02) return; const m = MELT[i] * lu, wrap = t >= tc[i] ? [null, "bag", "wool"][i] : null;
     set += TF(x, 890, .62 * k, cup27(t, { melt: m, wrap, n: i + 1 })); });
@@ -220,17 +220,17 @@ SC.test = (t, s) => { const c = testCam(t), tL = MK("lapse"), tL1 = MK("lapse1")
 // the buddies walk RIGHT under the covered walkway (front views, not mirrored: they face the way they go); Pip carries the wrapped box
 const walkX = (t, x0) => x0 + 760 * clamp((t - SCN.walk.t0 - .3) / (SCN.walk.t1 - SCN.walk.t0 + 1.2));
 SC.walk = (t, s) => { const step = (ph) => [[0, 0]].concat([...Array(14)].map((_, i) => [s.t0 + .4 + i * .5 + ph, 10]));
-  const xp = walkX(t, 330), xb = walkX(t, 20), xm = walkX(t, 650);
+  const xp = walkX(t, 420), xb = walkX(t, -10), xm = walkX(t, 850);
   return place("walk27", "", [1, 960, 540])
     + bd("basil", xb, 1062, 430, t, { poses: [[0, "sit"]], look: 6, jump: step(.25) }) + bd("pip", xp, 1062, 450, t, { poses: [[0, "sit"]], look: 6, jump: step(0) }) + held("pip", xp, 1062, 450, false, TF(20, 30, .55, iceBox27(t, { wrap: 1 })))
     + bd("momo", xm, 1062, 420, t, { poses: [[0, "sit"]], look: 6, jump: step(.12) })
     + OP(ramp(t, s.t0 + .3, .4), lowerPill(60, 140, "The covered walkway ·", "out of the sun")) + clock(t, s) + HUD27(t); };
 // the drain: a cut-away under the grating (the steel opener and the aluminium ring pull lying at the bottom); Basil lowers his magnet on a
 // string; the opener jumps up to it and is lifted out; the ring pull does not move
-const DR = { x: 900, top: 740 }, TIP = [1190, 470];
+const DR = { x: 900, top: 740 }, TIP = [1150, 700];
 // a cut-away of the walkway's edge: the paving slab with the steel grating in it, the concrete drain under it (a little water at the bottom),
 // the steel bottle opener and the aluminium ring pull lying there. Basil's fishing rod from EP22's fishing game: the bar magnet on its line
-SC.drain = (t, s) => { window._BUBAT = { pip: [560, 330], momo: [600, 330], basil: [1360, 300] }; const tc = MK("clink"), tl = MK("lower"), tsn = MK("snap"), tu = MK("liftup");
+SC.drain = (t, s) => { window._BUBAT = { pip: [520, 380], momo: [600, 380], basil: [1330, 380] }; const tc = MK("clink"), tl = MK("lower"), tsn = MK("snap"), tu = MK("liftup");
   const LMAX = 150, L = t < tl ? 0 : t < tsn ? LMAX * eio((t - tl) / 1.0) : t < tu ? LMAX : LMAX - 470 * eio((t - tu) / 1.2);   // L: how far the magnet is let down below the grating
   const magY = DR.top - 150 + L;   // the magnet's top (it hangs 144 px)
   const fall = t < tc ? 0 : eo(clamp((t - tc) / .5)), opBot = [DR.x - 40, DR.top + 222];
@@ -240,14 +240,14 @@ SC.drain = (t, s) => { window._BUBAT = { pip: [560, 330], momo: [600, 330], basi
     + `<path d="M640 ${DR.top + 238} q260 ${n2(6 * Math.sin(t * 2))} 520 0 v12 h-520z" fill="#5E8FA8" opacity=".7"/>` + TF(1060, DR.top + 232, .9, ringPull27());
   sec += TF(opX, opY, .9, `<g transform="rotate(${n2(t < tsn ? 30 * fall : 90)})">${opener27()}</g>`);
   sec += TF(DR.x, DR.top + 10, 1, `<g transform="scale(.62 .4)">${grating27(520)}</g>`);
-  sec += TF(1180, DR.top - 6, 1, tpill(0, 0, "inside the drain", 28, P.ink, "#fff", { w: 700 }));
+  sec += TF(DR.x, DR.top + 318, 1, tpill(0, 0, "inside the drain", 28, P.ink, "#fff", { w: 700 }));
   if (t >= tl - .3) sec += `<path d="M${TIP[0]} ${TIP[1]} L${DR.x} ${n2(magY)}" stroke="#5B4636" stroke-width="4"/>` + TF(DR.x, magY, 1, magnetOnString(4, 0));
   if (t >= tsn && t < tsn + .8) sec += impactFX(t, tsn, DR.x + 70, magY + 160, "CLICK!", { s: .42, flash: false, size: 56 });
-  const ru = t >= LT("e1006p") ? TF(1210, DR.top + 150, spring(t, LT("e1006p"), .4), tpill(0, 0, "aluminium: not magnetic", 30, "#fff", P.ink, { w: 700 })) : "";
-  const sk = t >= tsn ? TF(680, magY + 40, spring(t, tsn, .4), tpill(0, 0, "steel: magnetic", 32, P.leaf, "#fff", { w: 700 })) : "";
+  const ru = t >= LT("e1006p") ? TF(1130, DR.top + 175, spring(t, LT("e1006p"), .4), tpill(0, 0, "aluminium: not magnetic", 30, "#fff", P.ink, { w: 700 })) : "";
+  const sk = t >= tsn ? TF(DR.x - 150, DR.top + 80, spring(t, tsn, .4), tpill(0, 0, "steel: magnetic", 32, P.leaf, "#fff", { w: 700 })) : "";
   const [bpx, bpy] = pawPt("basil", 1560, 1062, 470, true), rod = t >= tl - .3 ? `<path d="M${n2(bpx)} ${n2(bpy)} L${TIP[0]} ${TIP[1]}" stroke="#8A5A2B" stroke-width="12" stroke-linecap="round"/>` : "";
   return bg("walk27") + `<rect width="1920" height="1080" fill="${P.night}" opacity=".18"/>` + sec + sk + ru
-    + bd("momo", 420, 1062, 420, t, { poses: [[0, "sit"], [tc + .1, "surprised"], [LT("e1002m") - .1, "sit"]], look: 6 }) + bd("pip", 170, 1062, 400, t, { poses: [[0, "sit"]], look: 6 })
+    + bd("momo", 470, 1062, 420, t, { poses: [[0, "sit"], [tc + .1, "surprised"], [LT("e1002m") - .1, "sit"]], look: 6 }) + bd("pip", 150, 1062, 380, t, { poses: [[0, "sit"]], look: 6 })
     + bd("basil", 1560, 1062, 470, t, { flip: true, poses: [[0, "sit"]], look: -6 }) + rod
     + clock(t, s) + HUD27(t); };
 
@@ -256,7 +256,7 @@ const VD = { pip: [300, 1062, 450], momo: [640, 1062, 430], basil: [1720, 1062, 
 const fanDir = (t) => { const a = MK("turnfan"); return t < a ? -1 : lerp(-1, 1, eio((t - a) / .5)); };   // -1: the fan's face turned left (at the ice cream), 1: right (at Basil)
 const vdLive = (t, o = {}) => bunting27(t) + balloon27(t, 520, 260, "#FF6F61", 0) + balloon27(t, 560, 300, "#FFC83A", 1) + balloon27(t, 1480, 260, "#43BF6C", 2) + balloon27(t, 1530, 300, "#9B6BFF", 3) + TF(TBL[0], TBL[1], 1, table27(820))
   + (o.box !== false ? TF(TBL[0], TBL[1], .85, iceBox27(t, o.boxO || { wrap: 1 })) : "");
-SC.party = (t, s) => { window._BUBAT = { basil: [1380, 330], momo: [700, 400], pip: [480, 420] }; const tO = MK("open"), tF = MK("fanclick"), fd = fanDir(t), wr = 1 - clamp((t - tO) / .8), op = clamp((t - tO - .6) / .6), fr = ramp(t, tO + 1, .6);
+SC.party = (t, s) => { window._BUBAT = { basil: [1300, 430], momo: [700, 400], pip: [480, 420] }; const tO = MK("open"), tF = MK("fanclick"), fd = fanDir(t), wr = 1 - clamp((t - tO) / .8), op = clamp((t - tO - .6) / .6), fr = ramp(t, tO + 1, .6);
   const spin = t < tF ? 0 : (t - tF) * 900;
   const fan = TF(FANX, 1000, 1, `<g transform="scale(${n2(Math.abs(fd) < .05 ? .05 : fd)} 1)">${standFan27(spin)}</g>`) + (t > tF + .2 ? wind27(t, FANX + 40 * fd, 600, 330, fd < 0 ? -1 : 1, 4, fd < 0) : "");
   return bg("vd27") + vdLive(t, { boxO: { wrap: wr, open: op, frost: fr } }) + fan + (t >= LT("e1102m") ? TF(TBL[0] + 330, 420, spring(t, LT("e1102m"), .45) * (1 - ramp(t, MK("fanclick"), .3)), tpill(0, 0, "still frozen!", 46, "#3AA6E8", "#fff", { w: 700 })) : "")
@@ -280,7 +280,7 @@ const items27 = (t, B) => { const ti = MK("items"); if (t < ti) return ""; const
   const [px, py, ph] = B.pip, [bx, by, bh] = B.basil, [mx, my, mh] = B.momo, bH = bh * SIZE_K.basil;
   return TF(px + ph * .05, py - ph * .9, k * ph / 470, goggles27()) + TF(bx + bH * .02, by - bH * .52, k * .85 * bh / 450, badge27("basil")) + held("momo", mx, my, mh, false, TF(10, -40, k * .8 * mh / 420, magnifier27()))
     + [B.pip, B.basil, B.momo].map(([x, y, h], i) => popSpark(t, ti + i * .05, x, y - h * .6, h * .5)).join(""); };
-SC.year = (t, s) => bg("vd27") + vdLive(t, { boxO: { open: 1 } }) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".2"/>` + memories(t)
+SC.year = (t, s) => (window._BUBAT = { basil: [1620, 560] }, "") + bg("vd27") + vdLive(t, { boxO: { open: 1 } }) + `<rect width="1920" height="1080" fill="${P.night}" opacity=".2"/>` + memories(t)
   + bd("pip", ...YR.pip, t, { poses: [[0, "sit"]], look: 4, noreact: true, jump: [[MK("items") - .2, 40]] }) + bd("momo", ...YR.momo, t, { poses: [[0, "sit"]], look: 0, noreact: true, jump: [[MK("items") - .15, 40]] })
   + bd("basil", ...YR.basil, t, { flip: true, poses: [[0, "sit"]], look: -4, noreact: true, jump: [[MK("items") - .1, 40]] }) + items27(t, YR)
   + (t >= MK("lvl") ? TF(960, 585, spring(t, MK("lvl"), .45), tpill(0, 0, "LEVEL UP: PRIMARY 4!", 50, P.sun, P.ink, { w: 700 })) : "") + HUD27(t);
