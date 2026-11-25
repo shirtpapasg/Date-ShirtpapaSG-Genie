@@ -1,4 +1,4 @@
-// facing_scan.js <epdir> <part> [--dt 0.1] [--from s] [--to s] [--all] [--movers]   (teacher, 2026-11-25: "the fish swims backwards ... ensure
+// facing_scan.js <epdir> <part> [--dt 0.1] [--from s] [--to s] [--all] [--movers] [--wrap-all]   (teacher, 2026-11-25: "the fish swims backwards ... ensure
 //   this dont happened in future rendering"; SERIES_FORMAT 6x)
 //   cd explained2 && NODE_PATH=$(npm root -g) node qa/facing_scan.js ep18 1          -> the movers of EP18 Part 1, and any that go BACKWARDS
 //   STATIC=1 node qa/facing_scan.js ep18                                             -> the quick source-only check (no browser), all parts
@@ -12,12 +12,14 @@
 //    it is mirrored on screen (the sign of its transform's x scale: TF(x, y, -k, art, rot, k) mirrors it). Both are taken in the frame
 //    of what carries the drawing (the nearest transformed group at least 2x its area: a camera, a look-closer world, a card sliding in).
 //  * BACKWARDS: an annotated drawing whose centre moves faster than 25 px/s, for at least 60 px and 0.8 s, the way its tail points
-//    (quicker jumps are cuts, whip pans and cards sliding in, not travel). Listed with
+//    (quicker jumps are cuts, whip pans and cards sliding in, not travel; a sway to and fro of under 200 px is not travel either). Listed with
 //    the time span, the 10 s render chunks to redo, the drawing and where it is called from. Exit code 1 when any.
 //  * EYE REVIEW: unannotated animal/person/vehicle functions that travel (annotate them), and buddies whose x travels inside a scene
 //    (the pet buddies are drawn from the front, so check by eye that a walk across looks right). Check these on stills.
 //  * --movers: also every other <g transform> (30-700 px wide) that travels 200 px or more over 1.2 s or more, with the start of
 //    its markup, to find creatures drawn inline with no FACES note (slow-ish and noisy: clouds, cards and labels show up too).
+//  * --wrap-all: watch every top-level drawing function, not only the ones named like an animal, person or vehicle (to audit an old
+//    episode whose creatures have other names; lists any unannotated one that travels 200 px or more over 1.2 s or more).
 //  * A call line with a `facing-ok` comment is skipped (e.g. a picture card sliding in that happens to hold a fish).
 //  * STATIC=1: a source-only pass (no browser): TF(lerp(a, b, ...), y, k, <annotated drawing>...) lines whose travel (b - a) and the
 //    sign of k disagree with the drawing's facing. It sees only that one pattern; the browser pass is the real check.
@@ -26,7 +28,7 @@ const path = require('path'), fs = require('fs'), http = require('http');
 const ROOT = path.resolve(__dirname, '..');
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
 const [ep, P = 1] = args.filter((a, i) => !a.startsWith('--') && !['--dt', '--from', '--to'].includes(args[i - 1]));
-const DIR = path.resolve(ROOT, ep), DT = +opt('--dt', .1), VMIN = 25, DMIN = 60, TMIN = .8, ALL = args.includes('--all'), MOVERS = args.includes('--movers');
+const DIR = path.resolve(ROOT, ep), DT = +opt('--dt', .1), VMIN = 25, DMIN = 60, TMIN = .8, ALL = args.includes('--all'), MOVERS = args.includes('--movers'), WRAPALL = args.includes('--wrap-all');
 const CREATURE = /fish|bird|mynah|myna|pigeon|crow|sparrow|swallow|heron|egret|bus|bike|cycl|car$|train|ship|boat|mosq|fly|flie|bee|bfly|butter|moth|dragon|dfly|cicada|beetle|ant\d|^ant|weaverAnt|frog|tadpole|cat\d|^cat$|dog|hen|chick|snail|worm|lizard|gecko|kid|child|person|shopper|walk|swim|turtle|roach|mantis|hopper|caterp|larva|wrig|spider|turtle|kids|auntie|uncle|plane/i;
 
 // the scripts page.html loads, in order
@@ -35,6 +37,7 @@ function pageScripts() { const h = fs.readFileSync(path.join(DIR, 'page.html'), 
 function facesOf(files) { const F = {};
   for (const f of files) { const p = path.join(DIR, f); if (!fs.existsSync(p)) continue; const L = fs.readFileSync(p, 'utf8').split('\n');
     L.forEach((ln, i) => { const m = ln.match(/(?:\/\/|\/\*)\s*FACES:\s*(right|left|none)/); if (!m) return;
+      const same = ln.match(/\*\/\s*(?:function\s+(\w+)\s*\(|(?:const|let|var)\s+(\w+)\s*=)/); if (same) { F[same[1] || same[2]] = { face: m[1], file: f, line: i + 1 }; return; }   // /* FACES: right */ function x(
       for (const j of [i, i + 1]) { const d = (L[j] || '').match(/^\s*(?:function\s+(\w+)\s*\(|(?:const|let|var)\s+(\w+)\s*=)/); if (d) { F[d[1] || d[2]] = { face: m[1], file: f, line: j + 1 }; break; } } }); }
   return F; }
 // top-level function definitions: { name: { kind: 'function'|'const', file, line } }
@@ -74,7 +77,8 @@ if (process.env.STATIC) { process.exit(staticScan() ? 1 : 0); }
   for (const e of fs.readdirSync(ROOT).filter(d => /^ep\d+/.test(d) && path.resolve(ROOT, d) !== DIR).sort().reverse()) { const d = path.join(ROOT, e);
     for (const f of fs.readdirSync(d).filter(f => f.endsWith('.js'))) { const L = fs.readFileSync(path.join(d, f), 'utf8').split('\n');
       L.forEach((ln, i) => { const m = ln.match(/(?:\/\/|\/\*)\s*FACES:\s*(right|left|none)/); if (!m) return; for (const j of [i, i + 1]) { const dd = (L[j] || '').match(/^\s*(?:function\s+(\w+)\s*\(|(?:const|let|var)\s+(\w+)\s*=)/); if (dd) { const n = dd[1] || dd[2]; if (D[n] && !F[n]) F[n] = { face: m[1], file: e + '/' + f, line: j + 1, borrowed: true }; break; } } }); } }
-  const wrap = Object.keys(D).filter(n => F[n] || n === 'buddy0' || (CREATURE.test(n) && !/Card|card|Board|board|Pic$|Sheet|PH$|Tile|Label|Icon|Idea|Dish|Basket|Cut|Seed|Whole|Hang|Plant|plant|Journey$|Path$/.test(n)));
+  const NOTART = /^(TF|OP|T|CAM|tw|n2|bg|defs|XDEFS\w*|HUD|GRADE|vignette|autoSay|buddy|melt\w*|cap\w*|budsAt)$|[Cc]ard|[Bb]oard|Pic$|Sheet|PH$|Tile|[Ll]abel|Icon|Idea|Dish|Basket|Cut|Seed|Whole|Hang|[Pp]lant|Journey$|Path$|[Pp]ill|[Bb]ubble|[Ss]trip|[Tt]ag$|[Aa]rrow|[Bb]adge|[Pp]anel|[Tt]ext|[Ss]ay|[Cc]ounter|[Ss]core|[Ll]ogo|[Ss]cene|^V[A-Z]|^SR|^PG|[Cc]hant|[Mm]ark|[Ss]wish|[Bb]urst|[Ff]lash|[Gg]low|[Ss]park/;
+  const wrap = Object.keys(D).filter(n => F[n] || n === 'buddy0' || (WRAPALL ? !NOTART.test(n) : CREATURE.test(n) && !NOTART.test(n)));
   const relet = new Set(wrap.filter(n => D[n].kind === 'const').concat(['CAM']));
   const srcLines = {}; for (const f of files) { const p = path.join(DIR, f); if (fs.existsSync(p)) srcLines[f] = fs.readFileSync(p, 'utf8').split('\n'); }
   // a local server for explained2/: the episode's own scripts get `const NAME =` -> `let NAME =` for the functions we wrap
@@ -92,6 +96,7 @@ if (process.env.STATIC) { process.exit(staticScan() ? 1 : 0); }
       else (0, eval)(`if (typeof ${n} === 'function') ${n} = __fw(${n}, ${JSON.stringify(n)})`); } catch (e) { miss.push(n + ' (' + e.message + ')'); } }
     try { (0, eval)(`{ const c = CAM; CAM = (...a) => c(...a).replace('<g ', '<g data-cam="1" ') }`); } catch (e) { miss.push('CAM'); }
     // measure every tagged drawing at time t
+    const scn = (t) => window._S ? window._S.name : (typeof TL !== 'undefined' && TL.scenes ? (TL.scenes.filter(x => t >= x.t0).pop() || TL.scenes[0]).name : '?');   // older episodes set no window._S
     window.__measure = (t) => { window.render(t); const dyn = document.getElementById('dyn'), out = [], nth = {};
       let bgRef = null, bgA = 0; for (const u of dyn.querySelectorAll('use')) { if (!/^#bg_(?!_)/.test(u.getAttribute('href') || '') || u.closest('defs,clipPath,mask,pattern')) continue; const r = u.getBoundingClientRect(), a = r.width * r.height; if (a > bgA) { bgA = a; bgRef = u; } }
       if (bgA < 1920 * 1080 * .5) bgRef = null;
@@ -105,8 +110,8 @@ if (process.env.STATIC) { process.exit(staticScan() ? 1 : 0); }
         if (!cam) cam = (el.parentNode.closest && el.parentNode.closest('[data-cam]')) || bgRef; let x = r.left + r.width / 2, y = r.top + r.height / 2;
         let o = el; while (o.children.length === 1 && o.children[0].tagName === 'g') o = o.children[0]; let m = o.getScreenCTM();
         if (cam) { const ci = cam.getScreenCTM().inverse(); const pt = new DOMPoint(x, y).matrixTransform(ci); x = pt.x; y = pt.y; m = ci.multiply(m); }
-        const k = `${window._S.name}|${fn}|${cs}`; nth[k] = (nth[k] || 0) + 1;
-        out.push({ k: k + '|' + nth[k], fn, cs, face, x: +x.toFixed(1), y: +y.toFixed(1), w: Math.round(r.width), sx: Math.abs(m.a) < 1e-3 ? 0 : Math.sign(m.a), sc: window._S.name }); };
+        const sn = scn(t), k = `${sn}|${fn}|${cs}`; nth[k] = (nth[k] || 0) + 1;
+        out.push({ k: k + '|' + nth[k], fn, cs, face, x: +x.toFixed(1), y: +y.toFixed(1), w: Math.round(r.width), sx: Math.abs(m.a) < 1e-3 ? 0 : Math.sign(m.a), sc: sn }); };
       for (const el of dyn.querySelectorAll('[data-fn]')) one(el, el.getAttribute('data-fn'), el.getAttribute('data-cs'), el.getAttribute('data-face'));
       if (window.__MOVERS) for (const el of dyn.querySelectorAll('g[transform]')) { if (el.closest('[data-fn]') || el.querySelector('[data-fn]') || el.closest('[data-cam]') === el || [...el.childNodes].some(n => n.nodeType === 8 && /FACES:/.test(n.data))) continue;
         const r = el.getBoundingClientRect(); if (r.width < 30 || r.width > 700 || r.height > 700) continue; const sig = el.innerHTML.slice(0, 400).replace(/-?[\d.]+/g, '#').replace(/\s+/g, ' ').slice(0, 90); one(el, '(group)', sig, null); }
@@ -126,10 +131,12 @@ if (process.env.STATIC) { process.exit(staticScan() ? 1 : 0); }
     for (let i = 1; i < L.length; i++) { const a = L[i - 1], c = L[i], dt = c.t - a.t; if (dt > DT * 1.6) { cur = null; continue; } const vx = (c.x - a.x) / dt;
       if (Math.abs(vx) < VMIN || Math.abs(c.y - a.y) > 3 * Math.abs(c.x - a.x) + 40) { cur = null; continue; } const go = Math.sign(vx);
       if (!cur || cur.go !== go || cur.sx !== c.sx) { cur = { go, sx: c.sx, t0: a.t, t1: c.t, dx: 0, w: c.w }; spans.push(cur); } cur.t1 = c.t; cur.dx += c.x - a.x; }
-    for (const s of spans) { if (Math.abs(s.dx) < DMIN || s.t1 - s.t0 < TMIN) continue; const row = { fn, cs: L[0].cs, sc: L[0].sc, t0: s.t0, t1: s.t1, dx: Math.round(s.dx), sx: s.sx, face, w: s.w };
+    spans.forEach((s, j) => { const p = spans[j - 1], q = spans[j + 1];   // a sway in place: under 200 px, turning back just before or just after
+      s.sway = Math.abs(s.dx) < 200 && ((p && p.go === -s.go && s.t0 - p.t1 < 3) || (q && q.go === -s.go && q.t0 - s.t1 < 3)); });
+    for (const s of spans) { if (Math.abs(s.dx) < DMIN || s.t1 - s.t0 < TMIN || s.sway) continue; const row = { fn, cs: L[0].cs, sc: L[0].sc, t0: s.t0, t1: s.t1, dx: Math.round(s.dx), sx: s.sx, face, w: s.w };
       if (fn === 'buddy0') { eye.push({ ...row, why: 'buddy travels' }); continue; }
       if (fn === '(group)') { if (Math.abs(s.dx) >= 200 && s.t1 - s.t0 >= 1.2) eye.push({ ...row, why: 'an untagged group travels: is it a creature or vehicle?' }); continue; }
-      if (!face) { eye.push({ ...row, why: 'no FACES note' }); continue; } if (face === 'none' || !s.sx) { ok.push(row); continue; }
+      if (!face) { if (CREATURE.test(fn) || (Math.abs(s.dx) >= 200 && s.t1 - s.t0 >= 1.2)) eye.push({ ...row, why: 'no FACES note' }); continue; } if (face === 'none' || !s.sx) { ok.push(row); continue; }
       const look = (face === 'right' ? 1 : -1) * s.sx; (look === s.go ? ok : bad).push(row); } }
   const fmt = (r) => `${r.t0.toFixed(1).padStart(7)}-${r.t1.toFixed(1).padEnd(7)} ${r.sc.padEnd(16)} ${r.fn.padEnd(14)} ${r.dx > 0 ? 'moves RIGHT' : 'moves LEFT '} ${String(Math.abs(r.dx)).padStart(5)} px  ${r.face ? 'FACES ' + r.face + (r.sx < 0 ? ' (mirrored)' : '') : ''}  from ${r.fn === '(group)' ? '"' + r.cs + '"' : r.cs}`;
   const merge = (L) => { const o = []; for (const r of L.sort((a, b) => a.t0 - b.t0)) { const p = o.find(q => q.fn === r.fn && q.cs === r.cs && Math.sign(q.dx) === Math.sign(r.dx) && r.t0 <= q.t1 + 1); if (p) { p.t1 = Math.max(p.t1, r.t1); p.dx += r.dx; } else o.push({ ...r }); } return o; };
