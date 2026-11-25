@@ -40,3 +40,11 @@ Original series music, quiet journeys; 5 s rings, 6 s Showdown, 4.5 s YOUR TURN 
 1. YOUR TURN rings 4.5 s (not 6 s), and Part 2 trims (the ant tip, "Homework time!", the fix's read-out, the Concept's ring, a shorter
    Showdown question, a shorter "help with the Link" line): Part 2 first came out at 6:13 (now 5:53, still over 5:45: reported).
 2. The hidden dragonfly has been used in earlier episodes (open point in the script).
+
+## Render results (25 Nov 2026): BUILT, NOT UPLOADED
+- Part 1: ep26_part1.mp4 5:28.8 (9866 frames), 1080p30, -16.0 LUFS, decode clean. Countdowns step 1.00 s (Round 1 at 71.58 s, HOLD ON! at
+  205.17 s). Checked frames: the Genie rising from Momo's lamp (2:15), Momo's answer in the four colours with the bars picture (X swings
+  away from the North pole, Y swings towards its magnet) at 4:05.
+- Part 2: ep26_part2.mp4 5:53.4 (10602 frames), 1080p30, -16.0 LUFS, decode clean. Countdowns step 1.00 s (Round 1 at 54.84 s, Showdown
+  6 s at 157.69 s). Checked frames: Basil's Showdown answer with the empty Link (2:50), the phone "Learn the CECL way." with Members (5:21).
+- Intermediates deleted (chunks, video-only, mixes). Voice clips kept in voice/ until the main session's review.
