@@ -61,3 +61,8 @@ noted here were fixed in the overlap round below.)
   clean** (3 buddy walks right, eye-checked). Before/after: qa/before_after.jpg (+ qa/final_fairtest.jpg for the fair test's final frames,
   qa/items_346.4.jpg). Every 2.5 s of the video was rendered as stills and checked for text over text, a bubble over a chip or label, and a
   buddy over a word or another buddy's face.
+- Read-along fix (coordinator, 25 Nov, 20:xx UTC): the YOU bubble moved from (400, 470) to (250, 400) in this episode's common.js, so it
+  never covers POOR CONDUCTOR OF HEAT (nor "Say it!" Pip's head); "Well done!" moved from over Pip's face to the centre under the words.
+  Only 350-370 s re-rendered (render.js clip mode under the lock) and spliced into the video at the chunk keyframes (stream copy; frames
+  outside the span bit-identical, checked). ep27.mp4: 11598 frames, decode clean, -16.0 LUFS, -2.0 dBTP; ghost and facing scans clean.
+  qa/before_after_readalong.jpg.
