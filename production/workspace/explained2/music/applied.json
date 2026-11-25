@@ -1096,7 +1096,7 @@
    }
   ],
   "lufs": -16.0,
-  "mtime": 1795587158.066282,
+  "mtime": 1795587999.850332,
   "removed": {
    "calm": 10,
    "groove": 9,
@@ -1107,7 +1107,7 @@
   "true_peak": -2.1,
   "video_from": "ep19_part1_v3.mp4",
   "video_packets": 9766,
-  "when": "2026-11-25 06:13 UTC",
+  "when": "2026-11-25 06:27 UTC",
   "windows": {
    "gap": 0,
    "voice": 432
@@ -1170,6 +1170,80 @@
    "gap": 0,
    "voice": 479
   }
+ },
+ "ep19_part2_v4": {
+  "backup": null,
+  "bed_gain": 0.496,
+  "bed_in_gaps_lufs_s": null,
+  "bed_loudest_lufs_s": -24,
+  "bed_under_voice_lufs_s": -28,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 5,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    40.96,
+    46.53
+   ],
+   [
+    "countdown show",
+    188.35,
+    193.92
+   ],
+   [
+    "chant",
+    256.59,
+    275.49
+   ],
+   [
+    "now you know",
+    328.42,
+    330.09
+   ],
+   [
+    "journey",
+    65.46,
+    103.31
+   ]
+  ],
+  "drive": 0.914,
+  "drive_without_bed": 0.912,
+  "duration": 334.767,
+  "final_lufs": -15.97,
+  "journeys": [
+   {
+    "kampong_max_lufs_s": null,
+    "span": [
+     65.46,
+     103.31
+    ],
+    "wonder_pad_median_lufs_s": -26
+   }
+  ],
+  "lufs": -16.0,
+  "mtime": 1795587414.8822973,
+  "removed": {
+   "calm": 9,
+   "groove": 9,
+   "outro": true
+  },
+  "rule": "journey-pause 2026-11-25",
+  "size": 124408947,
+  "true_peak": -1.9,
+  "video_from": "ep19_part2_v3.mp4",
+  "video_packets": 10043,
+  "when": "2026-11-25 06:17 UTC",
+  "windows": {
+   "gap": 0,
+   "voice": 407
+  },
+  "wonder_kept": 1
  },
  "ep20_part1": {
   "backup": "ep20/out/nolofi_p1.m4a",
@@ -1728,6 +1802,75 @@
    "voice": 514
   }
  },
+ "ep22_part1_v4": {
+  "backup": null,
+  "bed_gain": 0.4952,
+  "bed_in_gaps_lufs_s": null,
+  "bed_loudest_lufs_s": -24,
+  "bed_under_voice_lufs_s": -28,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 4,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    63.53,
+    67.1
+   ],
+   [
+    "countdown hold",
+    197.68,
+    203.25
+   ],
+   [
+    "now you know",
+    322.7,
+    324.38
+   ],
+   [
+    "journey",
+    85.43,
+    118.93
+   ]
+  ],
+  "drive": 0.913,
+  "drive_without_bed": 0.91,
+  "duration": 329.033,
+  "final_lufs": -15.97,
+  "journeys": [
+   {
+    "kampong_max_lufs_s": null,
+    "span": [
+     85.43,
+     118.93
+    ],
+    "wonder_pad_median_lufs_s": -26.5
+   }
+  ],
+  "lufs": -16.0,
+  "mtime": 1795587558.914306,
+  "removed": {
+   "calm": 10,
+   "groove": 9,
+   "outro": true
+  },
+  "rule": "journey-pause 2026-11-25",
+  "size": 171406580,
+  "true_peak": -1.7,
+  "video_from": "ep22_part1.mp4",
+  "video_packets": 9871,
+  "when": "2026-11-25 06:19 UTC",
+  "windows": {
+   "gap": 0,
+   "voice": 450
+  },
+  "wonder_kept": 1
+ },
  "ep22_part2": {
   "backup": "ep22/out/nolofi_p2.m4a",
   "bed_gain": 0.5003,
@@ -1785,5 +1928,79 @@
    "gap": 8,
    "voice": 483
   }
+ },
+ "ep22_part2_v4": {
+  "backup": null,
+  "bed_gain": 0.4965,
+  "bed_in_gaps_lufs_s": -23.4,
+  "bed_loudest_lufs_s": -22.8,
+  "bed_under_voice_lufs_s": -28,
+  "continuity": {
+   "beat_restarts": 0,
+   "beds": 1,
+   "dips": 5,
+   "hard_cuts": 0,
+   "loop_wraps": 0
+  },
+  "depth_db": -4.4,
+  "dips": [
+   [
+    "countdown r1",
+    45.24,
+    50.81
+   ],
+   [
+    "countdown show",
+    174.79,
+    180.36
+   ],
+   [
+    "chant",
+    246.24,
+    265.14
+   ],
+   [
+    "now you know",
+    328.56,
+    330.23
+   ],
+   [
+    "journey",
+    67.26,
+    98.73
+   ]
+  ],
+  "drive": 0.911,
+  "drive_without_bed": 0.91,
+  "duration": 334.9,
+  "final_lufs": -15.96,
+  "journeys": [
+   {
+    "kampong_max_lufs_s": null,
+    "span": [
+     67.26,
+     98.73
+    ],
+    "wonder_pad_median_lufs_s": -26.3
+   }
+  ],
+  "lufs": -16.0,
+  "mtime": 1795587671.6863127,
+  "removed": {
+   "calm": 9,
+   "groove": 10,
+   "outro": true
+  },
+  "rule": "journey-pause 2026-11-25",
+  "size": 129988800,
+  "true_peak": -1.6,
+  "video_from": "ep22_part2.mp4",
+  "video_packets": 10047,
+  "when": "2026-11-25 06:21 UTC",
+  "windows": {
+   "gap": 8,
+   "voice": 424
+  },
+  "wonder_kept": 1
  }
 }
