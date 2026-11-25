@@ -118,3 +118,9 @@
 - 07:32 UTC: EP17 Part 1 final built (verify OK, 9422 frames, 0 decode errors). All 16 final files now ready.
 - 08:14 UTC (main session): EP20 v3 UPLOADED (cheer fix): Part 1 XfHHnLCXFzQ, Part 2 hKvBqtD5mwY. Chapters applied.
 - 08:16 UTC (main session): EP21 v3 UPLOADED (cheer fix): Part 1 7rlZItWFA-0, Part 2 VDi1Nam7aaU. Chapters applied.
+- 09:39 UTC (main session): EP17 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 wjzLnf98cIQ, Part 2 TG2GWRVeSe8. Chapters applied.
+- 09:41 UTC (main session): EP18 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 6rO6Szp4FE8, Part 2 J-44jPg_W6M. Chapters applied.
+- 09:43 UTC (main session): EP22 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 qArtvgbUn6Q, Part 2 P9UUTYG0koY. Chapters applied.
+- 09:46 UTC (main session): EP19 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 kKJWPbAZ7s0, Part 2 w4io5Aee7zU. Chapters applied.
+- 09:49 UTC (main session): EP16 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 CcXHPGR4KMk, Part 2 I4r-RKI0qgM. Chapters applied.
+- 09:51 UTC (main session): EP00 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 ma_-qe93ph4, Part 2 qzoVKglXQi4. Chapters applied.
