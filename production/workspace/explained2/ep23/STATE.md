@@ -111,3 +111,17 @@ line (Pip in the cold open and in journey 1 while the wire is still being coiled
   qArtvgbUn6Q), `app_moments.json`, chapters `production/youtube/chapters_p3.json` EP23_P1 / EP23_P2 (`python3 make_moments.py`).
 - Review frames for the teacher: `qa/review_p1.jpg` (0:08.8, 1:49.5, 1:57.6, 2:26.0, 2:44.3, 3:42.0, 4:12.0, 5:16.5) and `qa/review_p2.jpg`
   (1:31.8, 2:09.5, 2:20.0, 3:49.0, 4:04.6, 5:00.5, 5:15.5, 5:38.8).
+
+## Overlap fixes (coordinator's review, 25 Nov 2026), both parts re-rendered in full under the lock
+- P1 HOLD ON!: the red cross and NEVER! are drawn on top of everything (Momo's head covered NEVER!); "main electrical supply" moved clear
+  of Momo; the WARNING pill sits left of the strip's second line; Momo's speech bubble at the right of the thought bubble and the HOLD ON!
+  small print waits until her line has ended.
+- Every look-closer's small print is now ONE rule at a time at the bottom centre, under the panel and clear of the corner faces, gone
+  before the verdict (tests.js `lcPrint`); P1 lcparts' four columns fit the panel with no pan (no clipped column names); P2 lcbatt "more
+  electricity" moved clear of "2 batteries".
+- HOW STRONG? drawn at .7 (was .8) and the lc1q camera eased (1.3): its title never meets the key-word shelf; the answer scenes' small
+  cards panel moved below the logo; the +2 coin moved clear of the poster; Pip and Basil join the Showdown only after the ring stage has
+  gone; the chant lines smaller and YOUR TURN! clear of them; the EP24 dare tags wider (no clipped words).
+- Re-verified: decode clean both parts (10079 / 10345 frames), -16.0 LUFS, countdowns step 1.00 s, no buddy ghosting, no backwards movers.
+  New stills of the fixed moments: qa/review_fix_p1.jpg (2:04.5, 3:08, 3:42, 3:56, 4:12) and qa/review_fix_p2.jpg (1:41.5, 1:53, 2:56,
+  3:09.5, 3:20, 3:48.5, 3:52, 4:04.6, 4:22, 5:15).
