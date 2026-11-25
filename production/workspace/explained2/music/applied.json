@@ -51,61 +51,6 @@
    "voice": 451
   }
  },
- "ep00_part1_v4": {
-  "backup": null,
-  "bed_gain": 0.5142,
-  "bed_in_gaps_lufs_s": -23.9,
-  "bed_loudest_lufs_s": -23.6,
-  "bed_under_voice_lufs_s": -27.8,
-  "continuity": {
-   "beat_restarts": 0,
-   "beds": 1,
-   "dips": 3,
-   "hard_cuts": 0,
-   "loop_wraps": 0
-  },
-  "depth_db": -4.4,
-  "dips": [
-   [
-    "countdown r1",
-    76.96,
-    82.53
-   ],
-   [
-    "countdown hold",
-    204.96,
-    210.53
-   ],
-   [
-    "now you know",
-    296.29,
-    297.96
-   ]
-  ],
-  "drive": 0.895,
-  "drive_without_bed": 0.878,
-  "duration": 302.633,
-  "final_lufs": -15.96,
-  "journeys": [],
-  "lufs": -16.0,
-  "mtime": 1795585693.206195,
-  "removed": {
-   "calm": 10,
-   "groove": 10,
-   "outro": true
-  },
-  "rule": "journey-pause 2026-11-25",
-  "size": 115667683,
-  "true_peak": -1.7,
-  "video_from": "ep00_part1_v3.mp4",
-  "video_packets": 9079,
-  "when": "2026-11-25 05:49 UTC",
-  "windows": {
-   "gap": 6,
-   "voice": 451
-  },
-  "wonder_kept": 0
- },
  "ep00_part2": {
   "backup": "ep00/out/nolofi_p2.m4a",
   "bed_gain": 0.4833,

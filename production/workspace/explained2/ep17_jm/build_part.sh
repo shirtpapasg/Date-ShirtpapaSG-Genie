@@ -1,1 +1,0 @@
-../ep17/build_part.sh

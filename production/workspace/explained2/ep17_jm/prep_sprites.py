@@ -1,1 +1,0 @@
-../ep17/prep_sprites.py
