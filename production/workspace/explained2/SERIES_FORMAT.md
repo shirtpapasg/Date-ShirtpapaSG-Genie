@@ -420,6 +420,10 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   the follow-up feeling (relief, a cheer). A label alone is never enough. `reference/impact_bad_ep12_hardknock_flat.webp`.
 - **A face close-up (the round "faceCam") is only for a BIG feeling (teacher, 2026-11-24, on EP21's Momo: "Why is Momo face in the circle?").** Use it only on an impact or surprise, and only when that buddy's face shows the feeling clearly: shocked, wincing, oops, grumpy. Never use it for a calm nod or a "told you so", and never while the same buddy already stands in the shot with nothing to say. A calm reaction is a hop, a nod or a pose change on the buddy where it stands. The circle must never cover the thing being taught.
 - **Every zoom and pan is smooth: no stepping (teacher, 2026-11-24, on the app screen in promo film 4: "moves forward bit by bit like lag").** A picture either stays still or moves continuously on every frame, eased. Never use slow zooms that crawl in visible jumps. The cause was n2() rounding scale() to 0.01. Every lib.js now rounds to 4 decimals; keep it that way in every new episode, and never round a scale or camera value to fewer than 4 decimals.
+- **Buddies watch the demonstration (teacher, 2026-11-25: "The pet buddies should look towards the magnet during this close up demonstration, not the audience. Unless you want only one random pet buddy wave at the audience, like how you always get a student not paying attention in a class lesson.").**
+  - In every close-up demonstration or journey, the buddies use the *watching* poses (`<buddy>_watch_closed` / `_watch_ooh`; see characters/WATCHING_POSES_BRIEF.md), flipped to face the object.
+  - Now and then (at most once per scene), ONE random buddy glances at the viewer and gives a 1-second wave, then turns back to watch. Never during the key teaching moment.
+  - Until the paintings arrive, turn the buddies' bodies towards the object (flip and lean).
 - **Objects never float or fly.**
   - Things travel low along the ground in small hops with dust puffs, or are carried or slid by the buddies.
   - Nothing hangs above the buddies' heads.
