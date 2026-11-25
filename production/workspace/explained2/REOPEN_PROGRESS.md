@@ -124,3 +124,4 @@
 - 09:46 UTC (main session): EP19 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 kKJWPbAZ7s0, Part 2 w4io5Aee7zU. Chapters applied.
 - 09:49 UTC (main session): EP16 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 CcXHPGR4KMk, Part 2 I4r-RKI0qgM. Chapters applied.
 - 09:51 UTC (main session): EP00 v4 UPLOADED (no ghost + cheer + quiet journey): Part 1 ma_-qe93ph4, Part 2 qzoVKglXQi4. Chapters applied.
+- 16:26 UTC 25 Nov: TEACHER: 'Go ahead with all the rules, build episode 24, 25 and 26. I prefer the rhythm and music of episode 1 to 10. Do not use the kampong walk for new episodes.' and 'you may ship episode 24, 25 and 26. no need me to check. make them live.' EP24+EP25 agent started (scripts then builds). EP26 topic to be chosen (P3 plan ends at 25). Main session still checks frames/science/scans before each upload.
