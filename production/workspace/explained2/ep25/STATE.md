@@ -41,3 +41,12 @@ Original series music (no Kampong Walk), quiet journeys; 5 s rings, 6 s Showdown
 1. The whiteboard is drawn on Pip's kitchen wall (one room for Part 1); the recorded lines keep "Momo's magnet" and "the board in my study corner".
 2. Part 2: `usbridge` and `stridertip` cut (Round 1's question and Pip's answer keep their first, recorded wording).
 3. The HOLD ON!: Basil stands on the kitchen counter to reach the window frame (the magnet at his raised paw touches the frame's corner).
+
+## Render results (25 Nov 2026)
+- Part 1: ep25_part1.mp4 5:13.0 (9392 frames), 1080p30, -16.0 LUFS, decode clean. The HOLD ON! was fixed after the first render (Basil had
+  overlapped the ring: now he steps off the counter to the side during the ring and back onto it after; the magnet is hidden while he is
+  off the counter): span 170-190 s (frames 5100-5700) re-rendered and spliced (kit_resplice.sh), audio re-muxed, sheet and captions
+  remade (resheet.sh 1). Countdowns step 1.00 s (Round 1 at 65.71 s, HOLD ON! at 174.62 s).
+- Part 2: ep25_part2.mp4 5:37.6 (10129 frames), 1080p30, -16.0 LUFS, decode clean. Countdowns step 1.00 s (Round 1 at 47.51 s, Showdown
+  6 s at 138.06 s).
+- Intermediates deleted (chunks, video-only, mix). Voice clips kept in voice/ until the main session's review.

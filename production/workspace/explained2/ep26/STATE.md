@@ -3,7 +3,7 @@ P3 EP26, the exam-skills special "How to answer open-ended questions, the way ac
 Evidence, Concept, Link: index.html, genie/index.html, api/_marking-prompt.js on theoneapp origin/main, read 25 Nov). The script:
 `../p3_ep26_script.md` (version 1, Opus, 25 Nov 2026; the teacher's request through the main session; pre-approved to go live; the main
 session reviews first). The source of every spoken word: `script.py`. Study Skills shelf like EP0; no syllabus keys; no dare in or out.
-- **Part 1** "Why Did Basil LOSE Marks? Meet the CECL Genie" **5:30.3** (330.33 s): the science room (EP23's SR23 via art26.js SR26),
+- **Part 1** "Why Did Basil LOSE Marks? Meet the CECL Genie" **5:28.8** (328.83 s): the science room (EP23's SR23 via art26.js SR26),
   Thursday after school; Basil's quiz paper 1/3; Momo's gold lamp (the app chip's own lamp, purple wisp, 🧞); the question (Q1, original:
   bars X and Y on strings, the North pole of a magnet; X moves away, Y towards); Round 1 which answer gets full marks (three answer cards;
   3, Momo's); be an answer, being built (four coloured pieces, the marker's ticks); the Genie rises, the four tiles; Basil's answer under the
