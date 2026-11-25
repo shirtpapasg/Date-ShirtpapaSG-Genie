@@ -13,14 +13,14 @@ shrink>pullout              119.24 s  ok
 pullout>answer              119.84 s  ok
 answer>lc1q                 134.36 s  ok
 lc1q>lcon                   138.09 s  ok
-lcon>mark1                  173.92 s  GHOST pip twice at 172.433-173.9 s (lcon)
+lcon>mark1                  173.92 s  ok
 mark1>holdon                182.26 s  ok
 holdon>lc2q                 227.58 s  ok
 lc2q>lcparts                231.90 s  ok
-lcparts>mark2               263.30 s  GHOST pip twice at 261.8-263.3 s (lcparts)
+lcparts>mark2               263.30 s  ok
 mark2>final                 277.29 s  ok
 final>liz                   283.34 s  ok
 liz>kwrecap                 299.35 s  ok
 kwrecap>cliff               312.91 s  ok
 cliff>nyk                   324.24 s  ok
-2 scene change(s) with a buddy twice or half-faded
+no buddy ghosting
