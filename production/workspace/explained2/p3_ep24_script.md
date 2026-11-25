@@ -171,7 +171,7 @@ Measured on the rendered timelines (`epNN/tl_pN.json`) before writing:
 | 0:25.0 | **`today`** The camera glides to the mini crane's empty hook, then to the board (HOME). *Basil talking, pointing at the hook (showing it).* | Basil: "Our mini crane needs the strongest hook. So I am testing an iron nail and a steel nail!" | A two-note sting on the board. | The story's problem: choose a hook, fairly. |
 | 0:31.5 | *Momo talking, pointing at the big bunch on the iron nail (showing it); the others watch the nails.* | Momo: "Your iron nail picked up a lot more clips, Basil!" |  |  |
 | 0:35.5 | **`game`** (`gameScene`): one smooth push-in onto the woodlouse under the sink's edge; the black-ringed circle on the blue stage; *a little woodlouse* · *Can you spot it?*; small print *We look, and we do not touch.* *Pip surprised on "woodlouse" (the animal named).* | Heart: "A little woodlouse is hiding in this video. Can you spot it?" | A whoosh; a tiny patter of legs. |  |
-| 0:41.0 | *Momo talking, pointing low (showing where).* | Momo: "Woodlice love dark, damp corners. Look low!" |  |  |
+| 0:41.0 | *Momo talking, pointing low (showing where).* | Pip: "Woodlice love dark, damp corners. Look low!" |  |  |
 | 0:44.0 | *Basil waves on "Buddies" (hello to the game).* | Heart: "You against the Buddies! Lock in first with your fingers. One finger for every point." | **The game groove** comes in (crossfade 0.8 s). |  |
 
 ### Segment 3 · Today's goals (Momo reads) and the countdown (0:50-1:01)
@@ -186,7 +186,7 @@ Measured on the rendered timelines (`epNN/tl_pN.json`) before writing:
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 1:01.0 | **`r1card`** ROUND 1 · YOUR ANSWER FROM LAST TIME. | (nobody) | The groove fades to silent under the ring (0.8 s): only the ticks speeding up, the bell, LOCKED IN!; the groove returns softly after the stamp. | Each pick is a real child's idea. |
-| 1:02.5 | **`r1`** (`lockN`): ONE set of two numbered picture cards (1 *Yes* · 2 *No*, EP23's pictures); the ring's picture INSIDE the frame: the two coiled nails side by side over their trays, the long coil and the short coil obvious; clue labels ON TOP: *iron nail · 25 turns* · *steel nail · 8 turns* · *one battery each*; the 5 s ring. *Basil worried in the ring (before the answer).* | Heart: "Round one! Twenty-five turns on the iron nail, and eight turns on the steel nail. Is Basil's test fair? One, yes. Two, no. Show me your fingers!" |  |  |
+| 1:02.5 | **`r1`** (`lockN`): ONE set of two numbered picture cards (1 *Yes* · 2 *No*, EP23's pictures); the ring's picture INSIDE the frame: the two coiled nails side by side over their trays, the long coil and the short coil obvious; clue labels ON TOP: *iron nail · 25 turns* · *steel nail · 8 turns* · *one battery each*; the 5 s ring. *Basil worried in the ring (before the answer).* | Heart: "Round one! Is Basil's test fair? One, yes. Two, no. Show me your fingers!" |  |  |
 | 1:16.0 |  | Heart: "Locked in!" |  |  |
 | 1:17.5 | *Basil talking, a bold hop (his pick).* | Basil: "One! It's my test, and my iron nail picked up the most clips. Iron wins!" |  |  |
 | 1:22.5 | *Pip talking, pointing at the long coil (showing it).* | Pip: "Two. The iron nail has many more turns of wire. Maybe the turns did it." |  |  |
@@ -229,7 +229,7 @@ Measured on the rendered timelines (`epNN/tl_pN.json`) before writing:
 | 3:28.5 | *Momo thinking (a question to her).* | Heart: "Something is not right. If you can spot it, cross your arms. Hold on!" | The bed fades to silent under the 5 s ring; ticks, bell, stamp. |  |
 | 3:39.0 | *Momo oops to the end of the segment; Basil and Pip arms crossed.* | Heart: "Arms crossed? One finger up!" |  |  |
 | 3:41.0 | The fix: a ruler stands up between the trays; both magnets glide to the same mark (a green dashed line *the same height*); both bunches redrawn. *Basil talking, pointing at the two heights, then the ruler.* | Basil: "Momo held her magnet close to the pins, and Pip held his far away. The distance changed too! Hold them at the same height, over the same pins." | A soft slide; a click as the magnets reach the mark. |  |
-| 3:53.0 | Tag *Only the magnet is different* (green). | Heart: "Now only the magnet is different. That is fair." |  |  |
+| 3:53.0 | Tag *Only the magnet is different* (green). | Pip: "Now only the magnet is different. That is fair!" |  |  |
 
 ### Segment 9 · Make it fair [LOOK CLOSER]; EXPERIMENT; Mark Sentence 2 (4:04-4:52)
 
@@ -308,7 +308,7 @@ As EP23 (`nykScene`): "Say it with us!" (all three), 0.8 s, "Ready? One! two!" 1
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 0:39.0 | **`r1card`** ROUND 1. | (nobody) |  | The brief's quiz: a new set-up, the same skill. |
-| 0:40.0 | **`r1`** (`lockN`): THREE big numbered picture cards: 1 *Yes, it is fair* (X and Y with a green tick) · 2 *No, two things changed* (X and Y, the batteries and the coils outlined red) · 3 *No, use a steel nail* (a steel nail with a "?"); the ring's picture: X (one battery, ten turns) and Y (two batteries, twenty turns) side by side over two trays; clue labels ON TOP: *X: 1 battery · 10 turns* · *Y: 2 batteries · 20 turns* · *the same iron nails*; the 5 s ring. *Momo worried in the ring.* | Heart: "Round one. Momo wants to find out if more batteries make an electromagnet stronger. Set-up X has one battery and ten turns. Set-up Y has two batteries and twenty turns. Is her test fair? One, yes. Two, no, two things changed. Three, no, use a steel nail. Show me your fingers." | Ticks, bell, stamp under silence. |  |
+| 0:40.0 | **`r1`** (`lockN`): THREE big numbered picture cards: 1 *Yes, it is fair* (X and Y with a green tick) · 2 *No, two things changed* (X and Y, the batteries and the coils outlined red) · 3 *No, use a steel nail* (a steel nail with a "?"); the ring's picture: X (one battery, ten turns) and Y (two batteries, twenty turns) side by side over two trays; clue labels ON TOP: *X: 1 battery · 10 turns* · *Y: 2 batteries · 20 turns* · *the same iron nails*; the 5 s ring. *Momo worried in the ring.* | Heart: "Round one. Here is Momo's plan. Set-up X has one battery and ten turns. Set-up Y has two batteries and twenty turns. Is her test fair? One, yes. Two, no, two things changed. Three, no, use a steel nail. Show me your fingers." | Ticks, bell, stamp under silence. |  |
 | 1:02.5 |  | Heart: "Locked in!" |  |  |
 | 1:04.0 | *Momo talking (her pick).* | Momo: "One! X and Y are both electromagnets, so it is a fair race." |  |  |
 | 1:09.0 | *Pip talking, pointing at Basil's steel nail on the bench.* | Pip: "Three. Basil's steel nail is still here. We should use it." |  |  |
@@ -374,7 +374,7 @@ As EP23 (`nykScene`): "Say it with us!" (all three), 0.8 s, "Ready? One! two!" 1
 | Time | On screen | Who speaks, exact words | Sound | Why |
 |---|---|---|---|---|
 | 5:09.0 | **`final`**: the score hand; 3 : 0. | Heart: "Show me your score hand! Two fingers or more? You beat the Buddies. Three fingers? High five!" |  |  |
-| 5:15.0 | **`liz`**: one push-in onto the sparrow on the corridor railing outside the door; the black ring. | Heart: "Did you spot the sparrow? It was on the railing, just outside the door!" | A chirp. |  |
+| 5:15.0 | **`liz`**: one push-in onto the sparrow on the corridor railing outside the door; the black ring. | Heart: "Did you spot the sparrow? It was on top of the door frame!" | A chirp. |  |
 | 5:20.0 | Fun-fact pictures: a sparrow with a heart that beats fast (*hundreds of beats in one minute!*), beside a child's heart (*yours: about eighty*); a scientist counting again (*count, count, count*). *Pip talking, excited; surprised.* | Pip: "Here is a fun fact! A sparrow's heart beats hundreds of times in one minute! Scientists count it again and again, to be sure." |  |  |
 | 5:28.0 |  | Heart: "Tell someone at home!" |  |  |
 
@@ -394,7 +394,7 @@ As Part 1.
 
 ## 6. What to cut if a part runs over (and what is already cut)
 
-**In use from the start** (`ep24/script.py` `CUTS`): `nextjoke` (Basil's "My fridge has a lock. It's called my mum!").
+**In use from the start** (`ep24/script.py` `CUTS`): `nextjoke` (Basil's "My fridge has a lock. It's called my mum!"); `momoclips` (Momo's "Your iron nail picked up a lot more clips, Basil!": the dip in the cold open shows it).
 **If a part must lose more** (in this order, none of it teaching): Part 1: Momo's woodlouse tip "Woodlice love dark, damp corners. Look low!" (`lousetip`); Momo's "Your iron nail picked up a lot more clips, Basil!" (`momoclips`); Heart's "Now only the magnet is different. That is fair." (`fairline`: the green tag carries it); the title's hold (1.8 to 1.2 s). Part 2: Pip's sparrow tip (`sparrowtip`); Basil's "Keep the turns the same, and change only the batteries!" (`basilfix`: the coil unwinding carries it); the crane's reveal hold (`cranehold`). **Never cut:** a [LOOK CLOSER], a book sentence, a key-word definition, a pause around a new term, the countdowns.
 
 ## 7. Titles, thumbnails, description, chapters, upload and app moments

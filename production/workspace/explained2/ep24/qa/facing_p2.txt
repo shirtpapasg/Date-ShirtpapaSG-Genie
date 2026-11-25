@@ -1,0 +1,18 @@
+facing_scan ep24 part 2: 3396 samples 0-339.5 s every 0.1 s; 16 FACES notes; 24 functions watched
+EYE REVIEW    11.3-12.4    lab              buddy0         moves LEFT    263 px    from lib.js:166<p2.js:10<p2.js:42  [buddy travels]
+EYE REVIEW    15.1-16.1    game             buddy0         moves LEFT    226 px    from lib.js:166<common.js:276<p2.js:44  [buddy travels]
+EYE REVIEW    19.2-20.1    game             buddy0         moves RIGHT   247 px    from lib.js:166<common.js:276<p2.js:44  [buddy travels]
+EYE REVIEW    75.5-76.5    r1ans            buddy0         moves LEFT    358 px    from lib.js:165<p2.js:10<p2.js:68  [buddy travels]
+EYE REVIEW    86.9-90.2    lc1q             buddy0         moves LEFT    284 px    from lib.js:166<p2.js:10<p2.js:75  [buddy travels]
+EYE REVIEW   165.8-167.0   fix              buddy0         moves RIGHT   470 px    from lib.js:166<p2.js:10<p2.js:104  [buddy travels]
+EYE REVIEW   168.3-170.4   waitw            buddy0         moves LEFT    965 px    from lib.js:166<p2.js:10<p2.js:110  [buddy travels]
+EYE REVIEW   169.1-170.5   waitw            buddy0         moves RIGHT   669 px    from lib.js:166<p2.js:10<p2.js:110  [buddy travels]
+EYE REVIEW   199.5-203.1   lc2q             buddy0         moves RIGHT   208 px    from lib.js:166<p2.js:10<p2.js:123  [buddy travels]
+EYE REVIEW   235.6-236.7   crane            buddy0         moves RIGHT   500 px    from lib.js:166<p2.js:10<p2.js:135  [buddy travels]
+EYE REVIEW   235.7-236.7   crane            buddy0         moves RIGHT   328 px    from lib.js:166<p2.js:10<p2.js:136  [buddy travels]
+EYE REVIEW   235.7-236.7   crane            buddy0         moves RIGHT   187 px    from lib.js:166<p2.js:10<p2.js:137  [buddy travels]
+EYE REVIEW   280.6-281.5   liz              buddy0         moves RIGHT   704 px    from lib.js:166<p2.js:10<p2.js:149  [buddy travels]
+EYE REVIEW   280.7-281.5   liz              buddy0         moves RIGHT   465 px    from lib.js:166<p2.js:10<p2.js:150  [buddy travels]
+EYE REVIEW   305.5-306.7   dare             buddy0         moves RIGHT   374 px    from lib.js:166<p2.js:10<p2.js:159  [buddy travels]
+EYE REVIEW   305.5-306.7   dare             buddy0         moves RIGHT   922 px    from lib.js:165<p2.js:10<p2.js:159  [buddy travels]
+no backwards movers (0 annotated movers face the right way, 16 for eye review)

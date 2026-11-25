@@ -1,0 +1,58 @@
+{
+ "key": "explained-p3-ep24",
+ "parts": [
+  {
+   "key": "explained-p3-ep24-part1",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep24/ep24_part1.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep24/thumb_part1.jpg",
+   "title": "Is Basil's Test FAIR? Change Only ONE Thing (Part 1) | Fair Tests",
+   "description": "Basil coils twenty-five turns of wire round an iron nail, but only eight round a steel nail. Is his test fair? Lock in your answer from last time, be a steel paper clip pulled by two nails, look closer at what changed, spot the unfair magnet race, and make Basil's test fair. Part 1 of Primary 3 Science, Making and Using Magnets: a fair test.\n\nIn this part:\n• Is Basil's test fair? (last episode's dare)\n• Be a steel paper clip\n• Look closer: two things changed\n• HOLD ON! The magnet race\n• Look closer: make it fair\n• Spot the hidden woodlouse!\n\nKey words: variable, fair test, experiment.\nWatch Part 2: plan a fair test, measure one thing, and repeat it. Last episode: electromagnets.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nHow do scientists make a test fair? P3 Science, Chapter 7, Making and Using Magnets (p. 118, How do we conduct a fair test?; Let's Apply, pp. 123 to 124): When scientists plan and conduct an experiment, they answer a question or test a prediction. To conduct a fair test, scientists need to ensure that only one thing (called a variable) is changed. The other variables are kept the same. If the experiment is not fair, we will not be sure which variable can explain the results. It is also important to repeat the experiment a few times to ensure that the results are reliable. The sixth episode of the Magnets theme. Also fits US NGSS 3-5-ETS1-3 (Grade 3).\nSafety and care: Do this only with an adult. Use batteries only, never the wall socket. Join the wire to the battery only for a moment: it can get hot. Keep magnets, batteries and nails away from little brothers and sisters. We look at woodlice and sparrows, and we do not touch them.\nTry it at home (with an adult): plan a fair test to find which of two fridge magnets is stronger. What will you change, what will you keep the same, and what will you measure? Count a few times!\nA school science room getting ready for Science Week.\nGrade 3 science fairs in the US ask the same question: was it fair? (NGSS 3-5-ETS1-3)\n\n#PrimaryScience #Singapore #FairTest #TheOneAppExplained",
+   "tags": [
+    "fair test",
+    "variable",
+    "experiment",
+    "prediction",
+    "reliable results",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "electromagnet",
+    "theoneapp explained"
+   ]
+  },
+  {
+   "key": "explained-p3-ep24-part2",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep24/ep24_part2.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep24/thumb_part2.jpg",
+   "title": "Plan It, Test It, Count It AGAIN! Why Scientists Repeat (Part 2) | Fair Tests",
+   "description": "Momo plans to test more batteries. Is her plan fair? Lock in your answer, fill in a real plan table, spot the mistake on Pip's plan card, be a steel paper clip counted again and again, and find out why scientists repeat a test. Part 2 of Primary 3 Science, Making and Using Magnets: a fair test.\n\nIn this part:\n• Is Momo's plan fair?\n• A prediction\n• Look closer: our plan (changed, kept the same, measured)\n• Showdown: Pip's plan card\n• Be a steel paper clip, counted again and again\n• Look closer: why we repeat\n• A chant to remember it all\n• Spot the hidden sparrow!\n\nKey words: prediction, variable to be measured, reliable.\nWatch Part 1: what a fair test is. Next episode: magnets are everywhere.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nHow do scientists make a test fair? P3 Science, Chapter 7, Making and Using Magnets (p. 118, How do we conduct a fair test?; Let's Apply, pp. 123 to 124): When scientists plan and conduct an experiment, they answer a question or test a prediction. To conduct a fair test, scientists need to ensure that only one thing (called a variable) is changed. The other variables are kept the same. If the experiment is not fair, we will not be sure which variable can explain the results. It is also important to repeat the experiment a few times to ensure that the results are reliable. The sixth episode of the Magnets theme. Also fits US NGSS 3-5-ETS1-3 (Grade 3).\nSafety and care: Do this only with an adult. Use batteries only, never the wall socket. Join the wire to the battery only for a moment: it can get hot. Keep magnets, batteries and nails away from little brothers and sisters. We look at woodlice and sparrows, and we do not touch them.\nTry it at home (with an adult): plan a fair test to find which of two fridge magnets is stronger. What will you change, what will you keep the same, and what will you measure? Count a few times!\nA school science room getting ready for Science Week.\nGrade 3 science fairs in the US ask the same question: was it fair? (NGSS 3-5-ETS1-3)\n\n#PrimaryScience #Singapore #FairTest #TheOneAppExplained",
+   "tags": [
+    "fair test",
+    "variable",
+    "experiment",
+    "prediction",
+    "reliable results",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "electromagnet",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLb8LpPqxQI4E",
+   "after": "explained-p3-ep23-part2"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "explained-p3-ep23-part2"
+  }
+ ],
+ "replaces": [
+  "zAUE_ZuxcDs"
+ ],
+ "retire_old": false,
+ "_note": "Public, Made for Kids (the uploader sets both). NOT UPLOADED: built 25 Nov 2026 (teacher: 'Go ahead with all the rules, build episode 24, 25'; EP24-26 pre-approved to go live without the teacher's check, but the main session reviews before any upload). The classic zAUE_ZuxcDs ('23B': fair tests and magnets everywhere) is replaced by EP24 + EP25 together: retire_old stays false here; EP25's upload.json retires it (NEW VERSION line with both) once EP24 is live. Upload only after EP23 is live (playlist order)."
+}
