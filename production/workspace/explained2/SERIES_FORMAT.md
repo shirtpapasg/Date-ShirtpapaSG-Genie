@@ -369,7 +369,7 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   | cheer (hands up) | something is learnt or achieved: a key word lands, "Now you know!" (never the buddy whose mistake is being corrected) |
   | laughing | a line that is meant to be funny |
   | pointing | showing a specific thing on screen |
-  | waving | hello and goodbye only |
+  | waving | hello and goodbye only (Momo waves before "Now you know!", the part's goodbye, in place of her arms-crossed sit) |
   - Most of the time the buddies just listen (smile, blink, a small nod). Strong reactions are rare so they stay strong: no buddy
     shows a strong pose (cheer, surprised, laughing, worried) more than about once a minute, unless the scene calls for it.
   - Before using a pose, the script or the staging must name the reason (SCENES_TODO lists it per line). The review checks every pose
@@ -383,6 +383,18 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - The buddies who picked the right answer show arms crossed (confident) through the same fix; they may cheer only if they also
     learnt something new there.
   - This also covers a round's answer and a HOLD ON!: the reaction lasts as long as the correction is on screen, not one beat.
+
+- **"Now you know!": all three cheer (arms up, happy) on the words; nothing from earlier scenes (shy, confident, shocked) carries into
+  the ending (teacher, 2026-11-25, on EP17 Part 1's ending: "Wrong gestures for 'now you know' for the caterpillar episode").**
+  - Before the words ("Say it with us!", "Ready? One! Two!"): happy and expectant. Pip and Basil sit and smile (lip-syncing the chant);
+    Momo waves, because every one of her sit/talking paintings has her arms crossed (it reads as confident) and her open mouth reads
+    as shocked. The ending is the part's goodbye, so the wave keeps the one-job table.
+  - ON "Now you know!" (the frame the words land, `h1305.know`) all three swap to the cheer paintings (arms up, happy faces) and keep
+    them to the end of the part, hopping on the beat.
+  - The scene's own poses win: no OUTCOMES pose, no reaction, and the chant lines ("Say it with us!", "Now you know!", who "chant",
+    which count as every buddy speaking) never force the talking sprite over the cheer. (Code: nykScene in common.js passes
+    `keepPose` and `noreact` to buddy(); fixed in EP0 and EP16 to EP22; the old endings showed the cheer only about 2 s late, after
+    the chant, with Momo arms-crossed and open-mouthed before it.)
 
 - **Plants grow the way real plants grow, and what is gone is gone (teacher, 2026-11-23, on EP15 Part 2's "Be a mango flower"
   journey: "The flower should be gone but there is still a faint image of the flower. Also, the leaves of the tree must branch out
