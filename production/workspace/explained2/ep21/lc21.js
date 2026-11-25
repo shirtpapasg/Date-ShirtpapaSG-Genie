@@ -276,6 +276,7 @@ function lcUseArt(t) { const m = MKS, tT = m("turn"), tS = m("still"), tN = m("s
 // swinging, slowing and coming to rest on a dashed gold N – S line, the captain's hand on the wheel. RIGHT: far away in the United States a
 // hiker with a backpack in thick white fog among tall pines (no named park); her compass in her hand settles on its gold N – S line. A small
 // Earth between the halves: Singapore and the United States marked, their little magnets lined up.
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const shipBig = (t) => { const b = 4 * Math.sin(t * 1.2); return `<g transform="translate(0 ${n2(b)})"><path d="M-330 0 L-310 -60 H330 L300 0z" fill="#3A2E3E" stroke="#120E2E" stroke-width="4"/><path d="M-310 -44 H330" stroke="#8A2E2E" stroke-width="6"/>`
   + [...Array(14)].map((_, i) => `<rect x="${-290 + i * 36}" y="${-60 - 26 * (1 + (i * 5) % 3)}" width="33" height="${26 * (1 + (i * 5) % 3)}" fill="${["#7A3A30", "#2E4A6A", "#8A6A1E", "#3E5A3E", "#5A3E6E"][i % 5]}" stroke="#120E2E" stroke-width="2"/>`).join("")
   + `<rect x="200" y="-150" width="90" height="90" fill="#D8DCE4" stroke="#120E2E" stroke-width="3"/><rect x="190" y="-176" width="110" height="30" fill="#C8CCD4" stroke="#120E2E" stroke-width="3"/>` + [0, 1, 2].map((i) => `<rect x="${200 + i * 32}" y="-170" width="22" height="16" fill="#FFE7A0"/>`).join("")

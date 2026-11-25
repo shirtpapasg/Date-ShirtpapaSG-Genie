@@ -1,4 +1,4 @@
-"""compare_ep1.py P: qa/ep1_compare_pP.jpg, matching moments side by side (left EP1, the benchmark; right EP22), one row per kind of scene
+"""compare_ep1.py P: qa/ep1_compare_pP.jpg, matching moments side by side (left EP1, the benchmark; right EP23), one row per kind of scene
 (SERIES_FORMAT 10.6: "would a 9-year-old on a phone see what matters as clearly as in EP1?")."""
 import sys, json, subprocess, os
 from PIL import Image, ImageDraw, ImageFont
@@ -15,8 +15,8 @@ def grab(f, t, out): subprocess.run(['ffmpeg', '-y', '-v', 'error', '-ss', f'{t:
 W, H, LH = 640, 360, 34; sheet = Image.new('RGB', (2 * W + 30, len(ROWS) * (H + LH) + 50), (18, 14, 46)); d = ImageDraw.Draw(sheet)
 try: f = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', 22)
 except Exception: f = ImageFont.load_default()
-d.text((10, 12), f'EP1 (benchmark) Part {P}', fill=(255, 214, 10), font=f); d.text((W + 30, 12), f'EP22 Part {P}', fill=(255, 214, 10), font=f)
+d.text((10, 12), f'EP1 (benchmark) Part {P}', fill=(255, 214, 10), font=f); d.text((W + 30, 12), f'EP23 Part {P}', fill=(255, 214, 10), font=f)
 for i, (lab, t1, t14) in enumerate(ROWS):
-    y = 50 + i * (H + LH); d.text((10, y), f'{lab}   EP1 {t1:.1f} s  |  EP22 {t14:.1f} s', fill=(255, 255, 255), font=f)
-    sheet.paste(grab(f'../ep01/ep01_part{P}.mp4', t1, f'qa/_cmp/a{i}.jpg'), (0, y + LH - 4)); sheet.paste(grab(f'ep22_part{P}.mp4', t14, f'qa/_cmp/b{i}.jpg'), (W + 30, y + LH - 4))
+    y = 50 + i * (H + LH); d.text((10, y), f'{lab}   EP1 {t1:.1f} s  |  EP23 {t14:.1f} s', fill=(255, 255, 255), font=f)
+    sheet.paste(grab(f'../ep01/ep01_part{P}.mp4', t1, f'qa/_cmp/a{i}.jpg'), (0, y + LH - 4)); sheet.paste(grab(f'ep23_part{P}.mp4', t14, f'qa/_cmp/b{i}.jpg'), (W + 30, y + LH - 4))
 sheet.save(f'qa/ep1_compare_p{P}.jpg', quality=82); print(f'qa/ep1_compare_p{P}.jpg')

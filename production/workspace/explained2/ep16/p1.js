@@ -150,7 +150,7 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "e1002", sayId: "e1001", who: "basil"
 
 /* 11 · the grassy corner by the void deck: a brown hen walks in from the bushes with four chicks (henIn), all pecking; Pip asks (thinking);
    Momo is surprised (hens near the HDB block!), points; Basil is sure: his idea as two colour swatches with a ? */
-const HENS = (t) => { const tI = MK("henIn"), u = eio((t - tI + .6) / 3); return [[lerp(2100, 1000, u), 940, 1.2, 1, 0, 0], [lerp(2300, 1250, u), 975, .85, 1, 1, .3], [lerp(2350, 820, u), 990, .85, 0, 1, .9], [lerp(2420, 1400, u), 1010, .85, 1, 1, 1.5], [lerp(2480, 1120, u), 1030, .85, 0, 1, 2.1]]; };
+const HENS = (t) => { const tI = MK("henIn"), u = eio((t - tI + .6) / 3); return [[lerp(2100, 1000, u), 940, 1.2, 1, 0, 0], [lerp(2300, 1250, u), 975, .85, 1, 1, .3], [lerp(2350, 820, u), 990, .85, u < 1 ? 1 : 0, 1, .9], [lerp(2420, 1400, u), 1010, .85, 1, 1, 1.5], [lerp(2480, 1120, u), 1030, .85, u < 1 ? 1 : 0, 1, 2.1]]; };   // teacher 25 Nov 2026: every chick faces left while it walks in (SERIES_FORMAT 6x); two turn round once they stop
 const camHen = (t) => { const e = eio((t - LT("e1103b") + .4) / 1.4); return [1 + .04 * eio((t - SCN.hen.t0) / 5) + .14 * e, lerp(980, 980, e), lerp(600, 760, e)]; };
 SC.hen = (t, s) => VG16(t, { hens: HENS(t), walk: t < MK("henIn") + 2.4, mantisAt: false, items: treeFrogAt(t, 1540, 634, .4) }, camHen(t))
   + bd("pip", 300, 1076, 500, t, { in: s.t0 + .1, poses: [[s.t0, "sit"], [LE("e1101p") + .1, "thinking"]] })

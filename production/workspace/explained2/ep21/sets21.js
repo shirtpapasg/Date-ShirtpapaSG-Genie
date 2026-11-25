@@ -72,6 +72,7 @@ const trolley21 = () => { const [x, y] = FD.trolley; return `<ellipse cx="${x + 
   + `<circle cx="${x + 14}" cy="${y - 6}" r="9" fill="#3A3E4A"/><circle cx="${x + 96}" cy="${y - 6}" r="9" fill="#3A3E4A"/>`; };
 const TROLLEY_H = [FD.trolley[0] - 36, FD.trolley[1] - 106];   // the top of its handle (a swallow's perch)
 // children far off by the far goal: two small, out-of-focus figures passing a ball (once in a while a kick)
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 const kids21 = (t) => { const ph = t * .5, bx = 780 + 120 * Math.sin(ph * 1.3), by = 470 - Math.abs(Math.sin(t * 3.2)) * 18;
   const kid = (x, sh, sk, run) => `<g transform="translate(${x} 478)"><rect x="-9" y="-46" width="18" height="24" rx="6" fill="${sh}"/><rect x="-8" y="-24" width="16" height="12" rx="3" fill="${sk}"/><path d="M-4 -12 L${n2(-6 + 6 * run)} 0 M4 -12 L${n2(6 - 6 * run)} 0" stroke="#F2C29B" stroke-width="5" stroke-linecap="round"/><circle cy="-56" r="10" fill="#F2C29B"/><path d="M-10 -60 Q0 -72 10 -60z" fill="#2A1E16"/></g>`;
   return `<g filter="url(#b2)" opacity=".85">${kid(660, "#FFFFFF", "#3A56A8", Math.sin(t * 9))}${kid(900, "#FFD23A", "#2E6A44", Math.sin(t * 9 + 1))}<circle cx="${n2(bx)}" cy="${n2(by)}" r="7" fill="#fff" stroke="#2B2147" stroke-width="2"/></g>`; };
@@ -127,6 +128,7 @@ function spinChart21(t, x, y, k = 1, o = {}) { const f = (m) => o.all ? 1 : ss(M
 /* ================================================================ PULAU UBIN: THE JETTY ================================================================ */
 const UB = { hz: 400, arm: [300, 1250, 590], deck: 862, map: [1600, 520], mk: .88, ledge: [1600, 520 + 257 * .88], boat1: [560, 812], boat2: [1060, 742] };
 // a far container ship at anchor (a dark hull, a white bridge at the back, rows of coloured boxes); origin = its waterline middle
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const shipFar = (k = 1, ph = 0) => TF(0, 0, k, `<path d="M-160 0 L-150 -26 H170 L150 0z" fill="#5A4A52"/><rect x="100" y="-66" width="44" height="40" fill="#EDEFF2"/><rect x="106" y="-60" width="32" height="6" fill="#7A8A9A"/>`
   + [...Array(10)].map((_, i) => `<rect x="${-140 + i * 24}" y="${-26 - 14 * (1 + (i * 7 + ph) % 3)}" width="22" height="${14 * (1 + (i * 7 + ph) % 3)}" fill="${["#C9573E", "#3E7FA8", "#E8B020", "#5E8E62", "#8A6AB0"][(i + ph) % 5]}"/>`).join("") + `<path d="M120 -66 V-90" stroke="#5A4A52" stroke-width="4"/>`);
 // a mangrove tree on the shore: a short trunk on arching PROP ROOTS that go into the mud; every leaf cluster on a twig on a branch
@@ -136,8 +138,10 @@ const mangrove21 = (t, k = 1, ph = 0) => { let s = [-70, -40, -12, 16, 44, 72].m
     s += `<path d="M${bx} ${by} L${bx + dx} ${by + dy}" stroke="#5E4630" stroke-width="4"/>`; lv += `<g transform="translate(${bx + dx} ${by + dy}) rotate(${n2(a)})"><circle r="30" fill="#2E6E3A"/><circle cx="-12" cy="-10" r="20" fill="#3E8A46"/><circle cx="12" cy="-4" r="18" fill="#357C40"/><circle cx="-8" cy="-16" r="10" fill="#6AB060" opacity=".7"/></g>`; }); });
   return TF(0, 0, k, s + lv); };
 // a grey heron far off on the mud (out of focus): it stands, then dips its bill now and then
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const heron21 = (t) => { const d = Math.max(0, Math.sin(t * .6)) > .9 ? 14 : 0; return `<g filter="url(#b2)" opacity=".9"><path d="M-4 0 V-30 M6 0 V-30" stroke="#8A8A8A" stroke-width="3"/><ellipse cx="0" cy="-42" rx="20" ry="14" fill="#9EA6B0"/><path d="M10 -50 Q18 -70 ${14} ${-80 + d}" stroke="#C8CED6" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M14 ${-80 + d} l18 ${4 + d * .4}" stroke="#E8B020" stroke-width="4" stroke-linecap="round"/></g>`; };
 // a bumboat (a small wooden motor boat, painted, a roof over the seats, old tyres hung on its sides as bumpers); it bobs; origin = waterline middle
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const bumboat21 = (t, k = 1, ph = 0) => { const b = 5 * Math.sin(t * 1.4 + ph), r = 1.2 * Math.sin(t * 1.1 + ph);
   return `<g transform="translate(0 ${n2(b)}) rotate(${n2(r)})">` + TF(0, 0, k, `<path d="M-250 -70 H230 Q280 -70 290 -100 L270 -40 Q240 10 -230 10 Q-260 -20 -250 -70z" fill="#F4F2EC" stroke="#3A4A5A" stroke-width="6"/><path d="M-250 -40 H280" stroke="#2E7A9A" stroke-width="18"/><path d="M-240 -8 H250" stroke="#C9573E" stroke-width="8"/>`
     + `<path d="M-170 -70 V-170 M150 -70 V-170" stroke="#6A5A4A" stroke-width="8"/><path d="M-200 -170 H180 L160 -196 H-180z" fill="#3E8A9A" stroke="#245A66" stroke-width="5"/>` + [-120, -50, 20, 90].map((x) => `<rect x="${x}" y="-110" width="50" height="40" rx="6" fill="#C9925A" stroke="#7A4A22" stroke-width="3"/>`).join("")

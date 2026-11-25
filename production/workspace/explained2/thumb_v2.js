@@ -215,6 +215,24 @@ const THUMBS = {
       { cut: 'nails', x: 580, y: 260, w: 660, line: '#fff', lw: 8, glow: INK },
       { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
     words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'WAY?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP23 (script section 7): Part 1 STAY OR DROP?! with Momo surprised, a big coiled nail with a chain of steel clips at its tip and an
+  // adult's hand pulling the battery holder away (one lead just apart: no answer), an electric-blue burst; Part 2 MORE TURNS?! with Basil
+  // surprised, a ten-turn and a twenty-turn coiled nail side by side, each with its battery, a tray of clips below (no clips on either), an
+  // orange-to-red burst
+  ep23_1: { ep: 'ep23', part: 1, out: 'ep23/thumb_part1.jpg', old: 'ep22/thumb_part1.jpg',
+    bg: { c: ['#D8F0FF', '#1E7BE0', '#08163E'], at: [860, 430], rays: .22 },
+    cuts: { rig: `trayClips22(1, 1060, 1000, 1.7, { n: 24 }) + TF(1060, 800, 1.55, rig23(1, { n: 10, hold: [-300, -90], hdx: -60, hdy: -50, hk: 1, jA: 1, jB: .25, clips: [6, {}], ck: 1.0 })) + TF(560, 560, 1.4, hand15({ curl: .62 }), 10)` },
+    layers: [
+      { cut: 'rig', x: 560, y: 230, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'STAY OR', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'DROP?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep23_2: { ep: 'ep23', part: 2, out: 'ep23/thumb_part2.jpg', old: 'ep22/thumb_part2.jpg',
+    bg: { c: ['#FFE6C8', '#F06A1E', '#5A0E10'], at: [860, 430], rays: .22 },
+    cuts: { coils: `trayClips22(1, 960, 1010, 2.2, { n: 30 }) + TF(760, 820, 1.5, rig23(1, { n: 10, hold: [-200, -60], hk: .8 })) + TF(1200, 820, 1.5, rig23(1, { n: 20, hold: [-200, -60], hk: .8 })) + TF(760, 300, 1, tpill(0, 0, "10", 70, "#fff", "#3A2E52", { w: 700 })) + TF(1200, 300, 1, tpill(0, 0, "20", 70, "#fff", "#3A2E52", { w: 700 }))` },
+    layers: [
+      { cut: 'coils', x: 560, y: 250, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'MORE', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'TURNS?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
   // P3 EP0, the mind map special (THUMBNAIL_V2.md; script section 7): Part 1 READ or MAKE?! with Pip surprised, a half-made hand-drawn map
   // (a pencil mid-branch) beside TheOneApp's crisp printed Magnets poster, a warm orange-to-brown burst; Part 2 1 WEEK LATER?! with Basil
   // surprised, two blank pages (only "Magnets" in the middle, a pencil above each) and a calendar card Mon · Tue · Thu, an amber burst

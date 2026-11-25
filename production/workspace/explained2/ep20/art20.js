@@ -17,6 +17,7 @@ function hand15(o = {}) { const c = o.curl || 0, sl = o.sleeve || "#5B7BD6", sd 
   const fing = F.map(([y, L], i) => { const cc = o.point && i === 0 ? 0 : (o.point ? .75 : c), l = L * (1 - .6 * cc) + 10; return `<rect x="-10" y="${y - 10}" width="${n2(l)}" height="20" rx="10" transform="rotate(${n2((i - 1.5) * 4)} 0 ${y})"/>`; }).join("");
   return `<rect x="-330" y="-54" width="230" height="108" rx="20" fill="${sl}" stroke="${sd}" stroke-width="5"/><g fill="${SKN}" stroke="${SKL}" stroke-width="4" stroke-linejoin="round"><rect x="-118" y="-44" width="128" height="88" rx="34"/>${fing}<rect x="-70" y="-60" width="70" height="24" rx="12" transform="rotate(-26 -70 -48)"/></g>`
     + `<path d="M-6 -30 q6 2 0 6 M-6 -10 q6 2 0 6 M-6 10 q6 2 0 6" fill="none" stroke="${SKL}" stroke-width="2.5" opacity=".7"/>`; }
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const bird15 = (t, k = 1, ph = 0) => { const hp = Math.max(0, Math.sin(t * 2.3 + ph)) > .85 ? 8 : 0, pk = Math.max(0, Math.sin(t * 1.7 + ph)) > .9 ? 12 : 0;
   return TF(0, -hp, k, `<path d="M-4 0 l-4 -14 M6 0 l2 -14" stroke="#8A5A36" stroke-width="3"/><ellipse cx="0" cy="-22" rx="20" ry="14" fill="#B98A5A"/><path d="M-14 -24 Q-36 -30 -40 -18 Q-26 -16 -14 -18z" fill="#7E5A3A"/><g transform="rotate(${pk} 14 -30)"><circle cx="14" cy="-32" r="11" fill="#9A6E44"/><path d="M24 -33 l9 3 l-9 3z" fill="#F2C14E"/><circle cx="17" cy="-35" r="2.6" fill="#2B2147"/></g><ellipse cx="2" cy="-18" rx="11" ry="7" fill="#E9D7BC"/>`); };
 const camPt = (c, p) => [c[0] * p[0] - (c[0] - 1) * c[1], c[0] * p[1] - (c[0] - 1) * c[2]];
@@ -57,6 +58,7 @@ const chevrons = (t, x1, y1, x2, y2, k = 1, col = PUSHC, n = 3, sz = 1) => { if 
 
 /* ================================================================ THE ANIMALS ================================================================ */
 // the JUMPING SPIDER, front view (facing us), origin = where its feet stand. o.wave: a front leg waves; o.hop (a time): a tiny hop; o.look: turn
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function spider20(t, o = {}) { const br = 1 + .03 * Math.sin(t * 3.1), sh = blink16(t, .6), hp = o.hop !== undefined ? hop(t, o.hop, .32, 1) * 26 : 0, wv = o.wave ? Math.sin(t * 6) : 0, lk = o.look || 0;
   let legs = ""; const LG = [[-1, -42, -78, -34, .2], [-1, -48, -96, -6, .5], [-1, -44, -92, 18, .8], [-1, -34, -74, 30, 1.1], [1, -42, -78, -34, .4], [1, -48, -96, -6, .7], [1, -44, -92, 18, 1.0], [1, -34, -74, 30, 1.3]];
   LG.forEach(([sd, y0, kx, ky, ph], i) => { const up = i === 4 && o.wave ? -30 + 14 * wv : 0, tw = 3 * Math.sin(t * 4 + ph);
@@ -78,6 +80,7 @@ const spiderAt = (t, x, y, k = .3, o = {}) => { let s = "";
 
 // the HOUSE LIZARD seen from above (it is ON the wall or the ceiling), head up, origin = the middle of its body. o.dash (a time): a quick little
 // dash; o.flick: the tail curls; o.lift: one toe pad lifts
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function lizard20(t, o = {}) { const sh = blink16(t, 1.4), tl = 18 * Math.sin(t * 1.6) + (o.flick ? 22 * Math.sin(t * 5) : 0), br = 1 + .03 * Math.sin(t * 2.7), hd = 6 * Math.sin(t * .9);
   const body = "#D9B8A2", bodyL = "#7E6050", dark = "#7A5C4C";
   const foot = (x, y, a, lift) => { let s = `<g transform="translate(${x} ${y}) rotate(${a})${lift ? " scale(1.08)" : ""}">`;
@@ -171,15 +174,18 @@ const pipNote = (t) => smallEasel(T(0, -150, "Pip's rings", 40, P.pip) + TF(-110
 // the wooden TOY TRAIN: the engine (red, a chimney, wheels) and a carriage (blue-green, wood), each with a small round magnet at its ends.
 // origin = the base of the piece; dir 1 = facing right. o.mag: [back colour, front colour] of the magnet discs
 const wheel20 = (x, y, r, t, sp = 0) => `<g transform="translate(${x} ${y}) rotate(${n2(sp * 57)})"><circle r="${r}" fill="#3A3A4A" stroke="#1E1E28" stroke-width="4"/><circle r="${r * .45}" fill="#C9A06A"/><path d="M${-r * .7} 0 H${r * .7}" stroke="#1E1E28" stroke-width="3"/></g>`;
+// FACES: left (head / front to the -x side; checked on a still, 2026-11-25)
 const engine20 = (t, o = {}) => { const sp = o.spin || 0, mb = o.magBack || NORTHC;
   return `<ellipse cx="0" cy="4" rx="170" ry="14" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><rect x="-150" y="-110" width="250" height="80" rx="12" fill="#E0453A" stroke="#8A2418" stroke-width="5"/><rect x="40" y="-200" width="100" height="170" rx="12" fill="#E0453A" stroke="#8A2418" stroke-width="5"/>`
     + `<rect x="58" y="-180" width="64" height="50" rx="8" fill="#BFE6FF" stroke="#8A2418" stroke-width="4"/><rect x="-120" y="-170" width="40" height="64" rx="6" fill="#3A3A4A" stroke="#1E1E28" stroke-width="4"/><rect x="-130" y="-180" width="60" height="16" rx="6" fill="#4A4A5A"/>`
     + `<path d="M-150 -40 H140" stroke="#C9A06A" stroke-width="10"/>` + wheel20(-100, -24, 26, t, sp) + wheel20(-20, -24, 26, t, sp) + wheel20(90, -24, 30, t, sp)
     + `<circle cx="-158" cy="-70" r="16" fill="${mb}" stroke="${P.ink}" stroke-width="4"/>`; };
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 const carriage20 = (t, o = {}) => { const sp = o.spin || 0, [mb, mf] = o.mag || [SOUTHC, NORTHC];
   return `<ellipse cx="0" cy="4" rx="150" ry="14" fill="${P.ink}" opacity=".2" filter="url(#b4)"/><rect x="-130" y="-130" width="260" height="100" rx="14" fill="#2EB5A6" stroke="#1E7A70" stroke-width="5"/><rect x="-140" y="-140" width="280" height="22" rx="8" fill="#C9A06A" stroke="#8A6A3A" stroke-width="4"/>`
     + [-80, -20, 40].map((x) => `<rect x="${x}" y="-112" width="44" height="40" rx="6" fill="#BFE6FF" stroke="#1E7A70" stroke-width="3"/>`).join("") + wheel20(-80, -24, 24, t, sp) + wheel20(80, -24, 24, t, sp)
     + `<circle cx="-142" cy="-76" r="15" fill="${mb}" stroke="${P.ink}" stroke-width="4"/><circle cx="142" cy="-76" r="15" fill="${mf}" stroke="${P.ink}" stroke-width="4"/>`; };
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const trainToy = (t, k = 1, joined = true) => TF(0, 0, k, TF(-150, 0, .8, carriage20(t)) + TF(150, 0, .8, engine20(t, { magBack: SOUTHC })));
 // Dad's two plain unpainted grey BARS (iron A, magnet B: the same look) with paper tags; origin = the bar's middle (vertical = false: lying)
 const greyBar = (tag, k = 1) => TF(0, 0, k, `<g filter="url(#dropS)"><rect x="-150" y="-28" width="300" height="56" rx="8" fill="${BARC}" stroke="#4E535C" stroke-width="5"/></g><rect x="-140" y="-22" width="280" height="12" rx="6" fill="#C4C8D0" opacity=".6"/><path d="M-120 14 H120" stroke="#6E737C" stroke-width="3" opacity=".5"/>`

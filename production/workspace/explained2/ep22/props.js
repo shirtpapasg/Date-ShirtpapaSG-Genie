@@ -46,6 +46,7 @@ function robotRig(o = {}) {
     </g></g>`;
 }
 // the robot walking: phase p (steps so far, fractional), amp 0..1 (how lively). Each whole step is a foot landing.
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function robotWalk(p, amp = 1, extra = {}) { const f = p % 1, odd = Math.floor(p) % 2, up = Math.sin(Math.PI * f) * amp;
   return robotRig({ liftL: odd ? 0 : up, liftR: odd ? up : 0, slideL: odd ? -6 * amp : 6 * amp * (f - .5), slideR: odd ? 6 * amp * (f - .5) : -6 * amp, rock: (odd ? 1 : -1) * 3.2 * Math.cos(Math.PI * f) * amp, bob: 4 * Math.abs(Math.sin(Math.PI * f)) * amp,
     head: (odd ? -1 : 1) * 2.5 * Math.sin(Math.PI * f) * amp, ant: (odd ? -1 : 1) * 9 * Math.cos(Math.PI * f) * amp, arm: (odd ? 1 : -1) * 22 * Math.cos(Math.PI * f) * amp, key: p * 1.9, ...extra }); }

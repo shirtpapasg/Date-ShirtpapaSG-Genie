@@ -16,6 +16,7 @@ const ideaBubble16 = (t, t0, t1, x, y, pic, col, dir = 1, id = "ib") => { if (t 
 const xChip16 = (t, t0, x, y, s = 1) => t < t0 ? "" : TF(x, y, spring(t, t0, .4) * s, `<g filter="url(#dropS)"><circle r="30" fill="#fff" stroke="${P.ink}" stroke-width="4"/></g><path d="M-12 -12 L12 12 M12 -12 L-12 12" stroke="${P.ink}" stroke-width="7" stroke-linecap="round"/>`);
 const tickChip16 = (t, t0, x, y, s = 1) => t < t0 ? "" : TF(x, y, spring(t, t0, .4) * s, tickBadge(30));
 // a little fish (origin = its middle, facing right)
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const fish16 = (t, o = {}) => { const w = 10 * Math.sin(t * 10); return `<path d="M-40 0 L${n2(-86 + w * .3)} ${n2(-30 + w)} L${n2(-80 + w * .3)} ${n2(30 + w)}z" fill="#FF9838" stroke="#C4581E" stroke-width="4" stroke-linejoin="round"/><ellipse rx="56" ry="34" fill="#FFB36B" stroke="#C4581E" stroke-width="4"/><path d="M-6 -30 Q10 -50 24 -28" fill="#FF9838" stroke="#C4581E" stroke-width="3"/><path d="M-20 -24 Q-26 0 -20 24" stroke="#E36A12" stroke-width="3" fill="none"/>${eye16(30, -8, 9)}<path d="M50 6 q-6 6 -12 2" stroke="#C4581E" stroke-width="3" fill="none" stroke-linecap="round"/>`; };
 // a picture inside a round frame (a tile)
 const tile16 = (pic, r = 104, id = "t", ring = "#D9C9A8", bgc = "#fff") => `<circle r="${r}" fill="${bgc}" stroke="${ring}" stroke-width="${n2(r * .07)}"/><clipPath id="${id}"><circle r="${n2(r * .92)}"/></clipPath><g clip-path="url(#${id})">${pic}</g>`;

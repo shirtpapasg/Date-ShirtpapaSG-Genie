@@ -64,6 +64,7 @@ const ruler15 = (o = {}) => { const n = 30, c = o.cm || CM; let s = `<g filter="
   return s + (o.zero ? `<path d="M-46 0 H46" stroke="${P.leaf}" stroke-width="8" stroke-linecap="round"/>` : ""); };
 
 /* ---------- the little garden snail (Part 1's hidden animal): origin = under its foot, facing right; eye-stalks stretch and wave ---------- */
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function snail15(t, o = {}) { const e = o.ext === undefined ? .72 + .28 * Math.sin(t * 1.7) : o.ext, b = Math.sin(t * 2.2), sl = o.slide ? 3 * Math.sin(t * 3) : 0;
   let sp = ""; for (let i = 0; i <= 40; i++) { const a = i / 40 * Math.PI * 3.6, r = 6 + 34 * (i / 40); sp += `${i ? "L" : "M"}${n2(-12 + r * Math.cos(-a))} ${n2(-62 + r * Math.sin(-a))} `; }
   const s1 = [80 + 10 * e + 2 * b, -70 - 40 * e], s2 = [62 + 2 * e, -70 - 34 * e - 2 * b];
@@ -79,6 +80,7 @@ const snailAt = (t, x, y, k = .34, o = {}) => TF(x, y, k * (o.flip ? -1 : 1), sn
 // a wind chime hanging from (x, y): the tubes swing
 const chime15 = (t, x, y, k = 1) => { const sw = 6 * Math.sin(t * 1.6) + 3 * Math.sin(t * 2.7); return TF(x, y, k, `<path d="M0 0 V36" stroke="#8A8F9E" stroke-width="2"/><g transform="translate(0 36) rotate(${n2(sw * .4)})"><ellipse rx="26" ry="7" fill="#C9A26A" stroke="#7E5A2A" stroke-width="2"/>${[-18, -6, 6, 18].map((x2, i) => `<g transform="translate(${x2} 4) rotate(${n2(sw * (1 + .3 * i))})"><path d="M0 0 V12" stroke="#8A8F9E" stroke-width="1.5"/><rect x="-3.5" y="12" width="7" height="${44 + 10 * (i % 2)}" rx="3" fill="url(#g15Steel)" stroke="#8A94A6" stroke-width="1.5"/></g>`).join("")}<path d="M0 6 V70" stroke="#8A8F9E" stroke-width="1.5"/><rect x="-10" y="70" width="20" height="26" rx="4" fill="#F49B7E" transform="rotate(${n2(sw * 1.4)} 0 70)"/></g>`); };
 // a little bird (a sparrow) that hops; origin = its feet, facing right
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const bird15 = (t, k = 1, ph = 0) => { const hp = Math.max(0, Math.sin(t * 2.3 + ph)) > .85 ? 8 : 0, pk = Math.max(0, Math.sin(t * 1.7 + ph)) > .9 ? 12 : 0;
   return TF(0, -hp, k, `<path d="M-4 0 l-4 -14 M6 0 l2 -14" stroke="#8A5A36" stroke-width="3"/><ellipse cx="0" cy="-22" rx="20" ry="14" fill="#B98A5A"/><path d="M-14 -24 Q-36 -30 -40 -18 Q-26 -16 -14 -18z" fill="#7E5A3A"/><g transform="rotate(${pk} 14 -30)"><circle cx="14" cy="-32" r="11" fill="#9A6E44"/><path d="M24 -33 l9 3 l-9 3z" fill="#F2C14E"/><circle cx="17" cy="-35" r="2.6" fill="#2B2147"/></g><ellipse cx="2" cy="-18" rx="11" ry="7" fill="#E9D7BC"/>`); };
 // water drips from a ledge at (x, y): a drop grows, falls, splashes

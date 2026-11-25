@@ -27,6 +27,7 @@ function eggClump(t, o = {}) { const n = o.n || 46, r = o.r || 13, R = o.R || 90
     s += `<circle cx="${n2(x)}" cy="${n2(y)}" r="${r}" fill="url(#p16Jelly)" stroke="#A9D6CC" stroke-width="1.6"/><circle cx="${n2(x + r * .1)}" cy="${n2(y + r * .05)}" r="${n2(r * .38)}" fill="#2E2A36"/><circle cx="${n2(x - r * .35)}" cy="${n2(y - r * .4)}" r="${n2(r * .2)}" fill="#fff" opacity=".85"/>`; }
   return s; }
 // a tadpole (origin = its body's middle, facing right). stage 0: no legs; 1: two back legs; 2: four legs, the tail shrinking (o.tail 0..1)
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function tadpole16(t, stage = 0, o = {}) { const ph = o.ph || 0, w = (o.swim === false ? 3 : 10) * Math.sin(t * 9 + ph), tl = o.tail === undefined ? (stage >= 2 ? .45 : 1) : o.tail, c = o.col || "#5E5844", d = "#3E3A2C", L = 78 * tl;
   let s = "";
   if (tl > .02) s += `<path d="M-14 -6 Q${n2(-14 - L * .45)} ${n2(-10 + w * .5)} ${n2(-14 - L)} ${n2(w)} Q${n2(-14 - L * .45)} ${n2(12 + w * .5)} -14 8z" fill="#8C866E" opacity=".75" stroke="${d}" stroke-width="2.5"/><path d="M-14 0 Q${n2(-14 - L * .5)} ${n2(w * .5)} ${n2(-14 - L * .95)} ${n2(w)}" stroke="${c}" stroke-width="7" fill="none" stroke-linecap="round"/>`;
@@ -37,6 +38,7 @@ function tadpole16(t, stage = 0, o = {}) { const ph = o.ph || 0, w = (o.swim ===
   return s; }
 // the young pond frog (origin = under its feet, facing right): green-brown, a pale stripe along each side, webbed back feet, moist and
 // shiny, no tail; its throat pulses; o.hop 0..1 (a little jump), o.blink
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function frog16(t, o = {}) { const th = 1 + .12 * Math.max(0, Math.sin(t * 4.5 + (o.ph || 0))), hp = o.hop || 0, b = "#7E9A48", d = "#4E6428", st = "#EDE6A6";
   return `<g transform="translate(0 ${n2(-30 * hp)})"><path d="M-60 0 Q-96 -6 -84 -26 Q-70 -40 -38 -30 L-22 -6z" fill="${b}" stroke="${d}" stroke-width="4" stroke-linejoin="round"/>
     <path d="M-62 0 l-26 2 l8 -8 l-10 -4 l14 -2 l-4 -8 l18 8z" fill="#9DB866" stroke="${d}" stroke-width="3" stroke-linejoin="round"/>
@@ -49,6 +51,7 @@ function frog16(t, o = {}) { const th = 1 + .12 * Math.max(0, Math.sin(t * 4.5 +
     ${eye16(34, -86, 15, { shut: o.blink === undefined ? blink16(t, 1.3) : o.blink, white: "#F4E8B0" })}<path d="M50 -44 Q60 -40 66 -48" stroke="${d}" stroke-width="3" fill="none" stroke-linecap="round"/></g>`; }
 // the four-lined tree frog (Part 1's hidden animal; origin = under its toes, facing right): slim, brown-beige, darker stripes down the back,
 // big round toe pads; o.lift 0..1 lifts one sticky front foot; the throat pulses
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function treeFrog16(t, o = {}) { const th = 1 + .1 * Math.max(0, Math.sin(t * 5 + (o.ph || 0))), lf = o.lift || 0, b = "#D3B07A", d = "#7A5A34", s2 = "#9A7446";
   return `<path d="M-54 0 Q-78 -8 -70 -24 Q-60 -34 -36 -26 L-24 -4z" fill="${b}" stroke="${d}" stroke-width="3.5"/>${[[-76, 2], [-64, 4], [-52, 4]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5.5" fill="#E9CFA0" stroke="${d}" stroke-width="2"/>`).join("")}
     <path d="M-52 -36 Q-46 -74 6 -76 Q52 -76 60 -44 Q62 -20 40 -10 Q0 0 -36 -8 Q-58 -18 -52 -36z" fill="${b}" stroke="${d}" stroke-width="3.5"/>
@@ -59,6 +62,7 @@ function treeFrog16(t, o = {}) { const th = 1 + .1 * Math.max(0, Math.sin(t * 5 
 const treeFrogAt = (t, x, y, k = .42, o = {}) => TF(x, y, k * (o.flip ? -1 : 1), treeFrog16(t, o), o.rot || 0, k);
 // the praying mantis (Part 2's hidden animal; origin = where its feet hold the stem, upright, facing right): green, a long body, a small
 // triangle head with big eyes that turns, two front legs folded in front like hands; it sways like a leaf
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function mantis16(t, o = {}) { const sw = (o.sway === undefined ? 1 : o.sway) * 3 * Math.sin(t * 1.4 + (o.ph || 0)), hd = (o.turn || 0) * 18 + 6 * Math.sin(t * .9), g = "#7CC84A", d = "#3F7F2A";
   return `<g transform="rotate(${n2(sw)})"><path d="M-6 -40 Q-40 -10 -54 30 M-2 -40 Q-20 0 -34 34 M2 -60 Q-30 -60 -44 -36 M4 -60 Q-10 -40 -20 -20" stroke="${d}" stroke-width="4" fill="none" stroke-linecap="round"/>
     <path d="M-8 -30 Q-34 10 -30 54 Q-22 70 -12 52 Q-2 10 6 -26z" fill="${g}" stroke="${d}" stroke-width="3.5"/><path d="M-10 -20 Q-26 14 -22 48" stroke="#A9DE7A" stroke-width="5" fill="none" opacity=".8"/>
@@ -67,6 +71,7 @@ function mantis16(t, o = {}) { const sw = (o.sway === undefined ? 1 : o.sway) * 
     <g transform="translate(10 -134) rotate(${n2(hd)}) scale(1.3)"><path d="M-22 -10 L22 -10 L2 20z" fill="${g}" stroke="${d}" stroke-width="3.5" stroke-linejoin="round"/>${eye16(-14, -10, 9, { white: "#D9F5B8", shut: blink16(t, 2.1) })}${eye16(14, -10, 9, { white: "#D9F5B8", shut: blink16(t, 2.1) })}<path d="M-4 8 q4 3 8 0" stroke="${d}" stroke-width="2" fill="none"/><path d="M-6 -16 Q-20 -46 -34 -54 M6 -16 Q16 -46 30 -56" stroke="${d}" stroke-width="2.5" fill="none" stroke-linecap="round"/></g></g>`; }
 const mantisAt = (t, x, y, k = .4, o = {}) => TF(x, y, k * (o.flip ? -1 : 1), mantis16(t, o), o.rot || 0, k);
 // the hen (origin = under her feet, facing right): glossy brown, a red comb and wattles, two legs; o.peck 0..1 (the head goes down)
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function hen16(t, o = {}) { const pk = o.peck || 0, wk = o.walk ? Math.sin(t * 7) : 0, b = "url(#p16Hen)", d = "#6E3814";
   const head = `<g transform="translate(${n2(70 + 30 * pk)} ${n2(-150 + 110 * pk)}) rotate(${n2(60 * pk)})"><path d="M-10 -36 q4 -16 12 -6 q6 -18 14 -4 q8 -14 12 4 q4 10 -6 14z" fill="#E0402E" stroke="#9A2A1E" stroke-width="3" stroke-linejoin="round"/>
     <circle cx="6" cy="-10" r="28" fill="#B5652E" stroke="${d}" stroke-width="4"/><path d="M30 -16 L52 -8 L30 0z" fill="#F2B23A" stroke="#B8761C" stroke-width="3" stroke-linejoin="round"/><path d="M26 2 q8 16 -2 20 q-8 -8 -4 -18z" fill="#E0402E" stroke="#9A2A1E" stroke-width="2.5"/>${eye16(14, -16, 7, { shut: blink16(t, .7), white: "#FFE7A8" })}</g>`;
@@ -76,6 +81,7 @@ function hen16(t, o = {}) { const pk = o.peck || 0, wk = o.walk ? Math.sin(t * 7
     <path d="M-60 -110 Q-10 -130 30 -100 Q0 -70 -50 -80z" fill="#9A5222" stroke="${d}" stroke-width="3.5"/><path d="M-44 -100 q14 -8 30 -2 M-40 -88 q16 -6 30 0" stroke="#C9803E" stroke-width="3" fill="none"/>
     <path d="M40 -140 Q62 -160 ${n2(72 + 30 * pk)} ${n2(-148 + 100 * pk)}" stroke="#B5652E" stroke-width="40" fill="none" stroke-linecap="round"/>` + head; }
 // a chick (origin = under its feet, facing right): small, pale yellow, fluffy, two legs, a small beak; o.peck 0..1
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function chick16(t, o = {}) { const pk = o.peck || 0, ph = o.ph || 0, fl = [...Array(9)].map((_, i) => { const a = i / 9 * Math.PI * 2; return `<circle cx="${n2(-6 + 40 * Math.cos(a))}" cy="${n2(-46 + 32 * Math.sin(a))}" r="9" fill="#FFF1A8"/>`; }).join("");
   return `<path d="M-10 -16 v16 l-8 2 M-10 0 l8 0 M8 -16 v16 l-8 2 M8 0 l8 0" stroke="#E8A33A" stroke-width="4.5" fill="none" stroke-linecap="round"/>${fl}<ellipse cx="-6" cy="-46" rx="42" ry="34" fill="url(#p16Chick)" stroke="#D9B44A" stroke-width="3"/><path d="M-30 -52 Q-50 -40 -34 -30 Q-24 -36 -22 -46z" fill="#F7D86A" stroke="#D9B44A" stroke-width="2.5"/>
     <g transform="translate(${n2(22 + 14 * pk)} ${n2(-74 + 50 * pk)}) rotate(${n2(50 * pk)})"><circle r="24" fill="url(#p16Chick)" stroke="#D9B44A" stroke-width="3"/><path d="M-4 -24 q4 -10 8 0" stroke="#F7D86A" stroke-width="4" fill="none"/><path d="M20 -4 L34 2 L20 8z" fill="#F29A2E" stroke="#B8661C" stroke-width="2.5" stroke-linejoin="round"/>${eye16(8, -4, 6, { shut: blink16(t, ph) })}<circle cx="2" cy="8" r="4" fill="#FFB4A0" opacity=".7"/></g>`; }
@@ -83,6 +89,7 @@ function chick16(t, o = {}) { const pk = o.peck || 0, ph = o.ph || 0, fl = [...A
 const peckAt = (t, k, every = 1.9) => { const u = ((t + k * .73) % every) / every; return u < .22 ? Math.sin(Math.PI * u / .22) : 0; };
 // the grasshopper (origin = under its feet, facing right). o.adult: long wings folded along its back; o.skin: the empty old skin (pale,
 // see-through, hollow, split down the back, no eyes); o.feel 0..1 feelers twitch; o.lit: { legs, feelers, jump, wings } 0..1 pulses
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function hopper16(t, o = {}) { const ad = !!o.adult, sk = !!o.skin, li = o.lit || {}, g = sk ? "#F6EBC6" : ad ? "#8CC84E" : "#9CD65E", d = sk ? "#A8905E" : "#3F7F2A", fo = sk ? .82 : 1, tw_ = (o.feel === undefined ? 1 : o.feel) * 6 * Math.sin(t * 5 + (o.ph || 0));
   const lw = (k, base) => base + 4 * (li[k] || 0), lc = (k) => li[k] > .05 ? mixC(d, ["#0F766E", "#E36A12", "#7C3AED", "#1F8A4C"][["legs", "feelers", "jump", "wings"].indexOf(k)], li[k]) : d;
   const blen = ad ? 1 : .92, hx = ad ? 74 : 66;
@@ -110,6 +117,7 @@ function hopper16(t, o = {}) { const ad = !!o.adult, sk = !!o.skin, li = o.lit |
   return s; }
 // a cockroach as Pip draws it (origin = its middle, seen from above, facing right): glossy brown, big friendly eyes, long feelers, six legs;
 // o.adult: two wings with a line down the middle; the nymph is smaller, rounder, no wings
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function roach16(t, o = {}) { const ad = !!o.adult, k = ad ? 1 : .78, w = 3 * Math.sin(t * 6 + (o.ph || 0)), d = "#5A2A10";
   return `<g transform="scale(${k})"><g stroke="${d}" stroke-width="4" fill="none" stroke-linecap="round">${[-24, 0, 24].map((x, i) => `<path d="M${x} -26 l${-6 + i * 3} -22 l-8 -6 M${x} 26 l${-6 + i * 3} 22 l-8 6"/>`).join("")}</g>
     <path d="M56 -10 Q100 ${n2(-50 + w)} 140 ${n2(-56 + w)} M56 10 Q100 ${n2(50 - w)} 140 ${n2(56 - w)}" stroke="${d}" stroke-width="3.5" fill="none" stroke-linecap="round"/>
@@ -127,6 +135,7 @@ const foamNest16 = (t, k = 1) => TF(0, 0, k, [...Array(26)].map((_, i) => { cons
 // the mantis's egg case on a twig (origin = its middle): pale, foamy-looking, ridged
 const mantisCase16 = (k = 1) => TF(0, 0, k, `<path d="M-70 -30 Q-80 30 -20 44 Q50 50 72 0 Q70 -44 10 -46 Q-40 -46 -70 -30z" fill="#E9DDB8" stroke="#A8946A" stroke-width="4"/>${[...Array(8)].map((_, i) => `<path d="M${-56 + i * 16} -38 Q${-62 + i * 16} 0 ${-56 + i * 16} 40" stroke="#C9B888" stroke-width="3" fill="none"/>`).join("")}<path d="M-60 -36 Q0 -60 66 -20" stroke="#F8F2DC" stroke-width="6" fill="none" opacity=".8"/>`);
 // the lime butterfly's caterpillar (origin = under its middle, facing right): plump, green, a pale band, little prolegs; it chews and wiggles
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function caterpillar16(t, o = {}) { const ch = Math.sin(t * 8), wg = Math.sin(t * 2.4); let s = "";
   for (let i = 0; i < 7; i++) { const x = -96 + i * 26, y = -24 - 4 * Math.sin(i * .9 + t * 2.4) * (1 + .3 * wg), r = 22 - Math.abs(i - 3) * 1.2;
     s += `<path d="M${x - 6} -4 l-2 6 M${x + 6} -4 l2 6" stroke="#3E7A2A" stroke-width="5" stroke-linecap="round"/><circle cx="${x}" cy="${n2(y)}" r="${n2(r)}" fill="${i === 3 || i === 4 ? "#F2F4E2" : "#8FCB4E"}" stroke="#3E7A2A" stroke-width="3"/>`; }
@@ -198,7 +207,8 @@ const elephantLeaf = (t) => { const sw = 2 * Math.sin(t * .8); return `<path d="
 const LILY = [[700, 720, 66], [860, 660, 52], [1200, 690, 62], [1380, 790, 74], [800, 870, 62], [1120, 890, 56], [520, 800, 48], [1560, 720, 44]];
 const lilyPad = (t, x, y, r, i) => { const b = 2 * Math.sin(t * 1.1 + i); return `<g transform="translate(${x} ${n2(y + b)})"><ellipse cx="0" cy="6" rx="${r}" ry="${n2(r * .36)}" fill="#1E5E70" opacity=".35"/><path d="M0 0 L${r} ${n2(-r * .06)} A${r} ${n2(r * .38)} 0 1 1 ${n2(r * .9)} ${n2(r * .16)}z" fill="#58B56C" stroke="#2F8048" stroke-width="4"/><path d="M0 0 L${n2(-r * .6)} ${n2(-r * .2)} M0 0 L${n2(-r * .3)} ${n2(r * .26)} M0 0 L${n2(r * .4)} ${n2(r * .22)}" stroke="#2F8048" stroke-width="2" opacity=".5"/></g>`; };
 // the frogs' calls at dawn are heard, not seen; a dragonfly darts; drips fall from the big leaf
-const dragonfly = (t, x, y) => { const f = Math.abs(Math.sin(t * 40)); return TF(x, y, 1, `<ellipse cx="-8" cy="${n2(-10 * f)}" rx="26" ry="7" fill="#DDF4FF" opacity=".8" stroke="#8FB8D6" stroke-width="1.5"/><ellipse cx="8" cy="${n2(-10 * f)}" rx="26" ry="7" fill="#DDF4FF" opacity=".8" stroke="#8FB8D6" stroke-width="1.5" transform="rotate(10)"/><rect x="-30" y="-3" width="56" height="6" rx="3" fill="#2F7FB0"/><circle cx="28" cy="0" r="7" fill="#1F5F90"/>`); };
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
+const dragonfly = (t, x, y, d = 1) => { const f = Math.abs(Math.sin(t * 40)); return TF(x, y, d, `<ellipse cx="-8" cy="${n2(-10 * f)}" rx="26" ry="7" fill="#DDF4FF" opacity=".8" stroke="#8FB8D6" stroke-width="1.5"/><ellipse cx="8" cy="${n2(-10 * f)}" rx="26" ry="7" fill="#DDF4FF" opacity=".8" stroke="#8FB8D6" stroke-width="1.5" transform="rotate(10)"/><rect x="-30" y="-3" width="56" height="6" rx="3" fill="#2F7FB0"/><circle cx="28" cy="0" r="7" fill="#1F5F90"/>`, 0, d < 0 ? 1 : undefined); };   // d = -1: mirrored (it flies left)
 // the tree frog's spot in each pond scene (SERIES_FORMAT 4: a new fair spot every scene; the intro spot (cold, back, title, game: the big
 // leaf) never again; the reveal at the tap). [x, y, k, flip, rot]
 const FROGAT = { cold: [1400, 352, .42, 0, -8], back: [1400, 352, .42, 0, -8], title: [1400, 352, .42, 0, -8], game: [1400, 352, .42, 0, -8],
@@ -217,7 +227,7 @@ function VP16(t, o = {}, cam) { let s = bg("pond16");
   const nt = o.tad === undefined ? 4 : o.tad; for (let i = 0; i < nt; i++) { const u = ((t * .06 + hash(i, 3)) % 1), x = 460 + 1100 * u, y = 820 + 70 * Math.sin(i * 2 + t * .5) + 40 * hash(i, 5); s += `<g opacity=".8">${TF(x, y, .55, tadpole16(t, 0, { ph: i * 1.3 }), 6 * Math.sin(t + i))}</g>`; }
   if (o.frog) { const f = o.frog; s += TF(f.x, f.y, f.k || .8, frog16(t, { hop: f.hop || 0 }), 0); }
   s += elephantLeaf(t) + drips15(t, [[1300, 398, 0, 300], [1380, 418, 1.1, 300], [1250, 330, 1.9, 380]]);
-  s += dragonfly(t, 900 + 400 * Math.sin(t * .37), 470 + 60 * Math.sin(t * .9));
+  s += dragonfly(t, 900 + 400 * Math.sin(t * .37), 470 + 60 * Math.sin(t * .9), Math.cos(t * .37) < 0 ? -1 : 1);   // teacher 25 Nov 2026: it faces the way it darts (SERIES_FORMAT 6x)
   if (o.items) s += o.items;
   const fa = o.frogAt === undefined ? FROGAT[(window._S || {}).name] : o.frogAt; if (fa) s += treeFrogAt(t, fa[0], fa[1], fa[2], { flip: fa[3], rot: fa[4] || 0, lift: o.lift || 0 });
   if (o.front) s += o.front;

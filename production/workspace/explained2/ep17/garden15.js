@@ -9,6 +9,7 @@
 //   dare's cards (PIC.fish15, PIC.frog15, PIC.liz15).
 
 /* ---------- the weaver ant: origin = under its feet, facing right; legs walk, the front legs can wave ---------- */
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function weaverAnt(t, o = {}) { const wv = o.wave || 0, wk = o.walk === false ? 0 : 1, c = "#E8862E", d = "#A9531A";
   const leg = (x, i, front) => { const ph = t * 10 + i * 2.1, lift = wk * 5 * Math.max(0, Math.sin(ph)), up = front ? wv * (30 + 10 * Math.sin(t * 9)) : 0;
     return `<path d="M${x} -24 l${n2(-8 + 6 * Math.sin(ph) * wk)} ${n2(-10 - up)} l${n2(-4 + (front ? 14 * wv : 0))} ${n2(30 - lift + up * 1.4)}" fill="none" stroke="${d}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`; };
@@ -81,6 +82,7 @@ function VG15(t, o = {}, cam) { let s = bg("garden15");
   if (o.dim) s += `<rect x="-200" y="-120" width="2320" height="1320" fill="${P.night}" opacity="${n2(o.dim)}"/>`;
   return cam ? CAM(s, cam[0], cam[1], cam[2]) : s; }
 // a tadpole (origin = its body), swimming
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const tadpole = (t, i = 0) => { const w = 8 * Math.sin(t * 9 + i); return `<path d="M-10 0 Q-30 ${n2(w)} -50 ${n2(-w * .6)}" stroke="#4A4A5E" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse rx="16" ry="12" fill="#4A4A5E"/><circle cx="7" cy="-4" r="4" fill="#fff"/><circle cx="8" cy="-4" r="2" fill="#2B2147"/>`; };
 
 /* =============================================================================================================================

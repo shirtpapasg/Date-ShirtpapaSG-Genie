@@ -38,6 +38,7 @@ const pawPt = (who, x, y, h, flip) => { const H = h * (SIZE_K[who] || 1); return
 /* ================================================================ THE ANIMALS ================================================================ */
 // the HOUSE CROW in profile, perched: origin = its feet on the perch, facing right (o.flip: facing left). k = scale (1: about 120 px tall).
 // Alive: a slow breath, a blink, a head tilt now and then, a neck-fluff, o.hop = a little hop at that time, o.caw = the beak opens at that time
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function crow00(t, o = {}) { const ph = o.ph || 0, br = Math.sin((t + ph) * 2.4), tilt = 14 * Math.max(0, Math.sin((t + ph) * .9)) ** 6 - 8 * Math.max(0, Math.sin((t + ph) * .9 + 2.4)) ** 8,
   fl = (Math.sin((t + ph) * .55) > .93 ? 1 : 0) * Math.sin((t + ph) * 18) * 3, bl = blink16(t, ph), caw = o.caw !== undefined && t > o.caw && t < o.caw + .45 ? Math.sin(Math.PI * (t - o.caw) / .45) : 0;
   const hp = o.hop !== undefined ? hop(t, o.hop, .4, 26) : 0;
@@ -66,6 +67,7 @@ function catHead(t, o = {}) { const bl = o.shut || blink16(t, o.ph || 0), tw = o
     ${bl && !oe ? `<path d="M-22 -10 Q-14 -2 -6 -10 M6 -10 Q14 -2 22 -10" stroke="${CATC.ink}" stroke-width="3.4" fill="none" stroke-linecap="round"/>`
       : `<ellipse cx="-14" cy="-10" rx="7.5" ry="9" fill="#2E2A22"/><circle cx="-16" cy="-13" r="3" fill="#fff"/>` + (oe && bl ? `<path d="M6 -10 Q14 -2 22 -10" stroke="${CATC.ink}" stroke-width="3.4" fill="none" stroke-linecap="round"/>` : `<ellipse cx="14" cy="-10" rx="7.5" ry="9" fill="#2E2A22"/><circle cx="12" cy="-13" r="3" fill="#fff"/>`)}
     <path d="M-26 2 h-16 M-26 8 h-14 M26 2 h16 M26 8 h14" stroke="${CATC.ink}" stroke-width="1.6" opacity=".6"/>`; }
+// FACES: left (head / front to the -x side; checked on a still, 2026-11-25)
 function cat00(t, o = {}) { const p = o.pose || "sleep", br = Math.sin(t * 1.9 + (o.ph || 0));
   const tail = (ang) => `<path d="M0 0 Q${n2(40 + 10 * Math.sin(t * 1.3))} ${n2(-30 + ang)} ${n2(70 + 8 * Math.sin(t * 1.7))} ${n2(-70 + ang)}" stroke="${CATC.fur}" stroke-width="18" fill="none" stroke-linecap="round"/>`
     + [.3, .55, .8].map((u) => `<circle cx="${n2(lerp(0, 70, u) + 8 * Math.sin(u * 3))}" cy="${n2(lerp(0, -70 + ang, u) - 6 * Math.sin(u * 3))}" r="8" fill="${CATC.str}" opacity=".85"/>`).join("") + `<circle cx="${n2(70 + 8 * Math.sin(t * 1.7))}" cy="${n2(-70 + ang)}" r="9" fill="${CATC.str}"/>`;

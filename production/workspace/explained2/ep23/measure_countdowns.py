@@ -1,4 +1,4 @@
-"""measure_countdowns.py P: measures every countdown in the RENDERED ep22_partP.mp4 (SERIES_FORMAT 10.6: the numbers step once per second
+"""measure_countdowns.py P: measures every countdown in the RENDERED ep23_partP.mp4 (SERIES_FORMAT 10.6: the numbers step once per second
 exactly with the ticks, the bell lands on 0). Picture: the ring's number badge is cropped at every frame from 0.6 s before the ring starts to
 0.6 s after the bell, and the frames where it changes are found (frame difference). Sound: onsets in the rendered file's audio (the tick and the bell
 are the loudest short transients there; the music is ducked out under countdowns). Prints both lists and the offsets from the timeline."""
@@ -6,10 +6,10 @@ import sys, json, subprocess, numpy as np, wave
 P = sys.argv[1]; tl = json.load(open(f'tl_p{P}.json')); M = tl['marks']; FPS = 30
 CD = {'1': [('Round 1', 'ring0_r1', 3, (960, 640)), ('HOLD ON!', 'ring0_hold', 5, (960, 645))], '2': [('Round 1', 'ring0_r1', 5, (960, 640)), ('Showdown', 'ring0_show', 5, (1440, 640))]}[P]
 def frames(t0, t1, cx, cy, s=90):
-    cmd = ['ffmpeg', '-v', 'error', '-ss', f'{t0:.3f}', '-i', f'ep22_part{P}.mp4', '-t', f'{t1 - t0:.3f}', '-vf', f'crop={2*s}:{2*s}:{cx-s}:{cy-s},format=gray', '-f', 'rawvideo', '-']
+    cmd = ['ffmpeg', '-v', 'error', '-ss', f'{t0:.3f}', '-i', f'ep23_part{P}.mp4', '-t', f'{t1 - t0:.3f}', '-vf', f'crop={2*s}:{2*s}:{cx-s}:{cy-s},format=gray', '-f', 'rawvideo', '-']
     raw = subprocess.run(cmd, capture_output=True).stdout; n = len(raw) // (4 * s * s); return np.frombuffer(raw[:n * 4 * s * s], np.uint8).reshape(n, 2 * s, 2 * s).astype(float)
 def mixonsets(t0, t1):
-    sr = 48000; x = np.frombuffer(subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{t0:.3f}', '-i', f'ep22_part{P}.mp4', '-t', f'{t1 - t0:.3f}', '-vn', '-ac', '1', '-ar', str(sr), '-f', 's16le', '-'], capture_output=True).stdout, np.int16).astype(float)
+    sr = 48000; x = np.frombuffer(subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{t0:.3f}', '-i', f'ep23_part{P}.mp4', '-t', f'{t1 - t0:.3f}', '-vn', '-ac', '1', '-ar', str(sr), '-f', 's16le', '-'], capture_output=True).stdout, np.int16).astype(float)
     hop = int(sr * .005); e = np.array([np.sqrt(np.mean(x[k:k + hop] ** 2)) for k in range(0, len(x) - hop, hop)]) + 1; on = []; k = 12
     while k < len(e):
         if e[k] > 2.2 * e[k - 12:k - 2].mean() and e[k] > np.percentile(e, 55): on.append(t0 + k * hop / sr); k += int(.12 / .005)

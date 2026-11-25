@@ -202,6 +202,7 @@ function notebook(t, o = {}) { const lit = o.lit || [0, 0, 0], mk = o.marks || [
   ${T(0, -552, "THINGS THAT RESPONDED TODAY", 44, P.ink, { ls: 2 })}${pan}`; }
 
 /* ---------- the same person growing up: baby, child, teenager, adult. origin = feet. a = 0..3 ---------- */
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function person(a) { const H = [150, 250, 340, 400][a], hr = [40, 44, 46, 48][a], leg = [34, 92, 150, 186][a], tor = [52, 78, 98, 112][a], arm = [34, 70, 104, 124][a], wd = [50, 62, 72, 84][a], hy = -(leg + tor + hr * .86), hair = "#3A2A22", shirt = "#2EC4B6";
   const hairS = a === 0 ? `<path d="M-6 ${n2(hy - hr)} q6 -16 14 -4" fill="none" stroke="${hair}" stroke-width="6" stroke-linecap="round"/>` : a === 1 ? `<path d="M${-hr} ${n2(hy - 6)} Q${-hr - 2} ${n2(hy - hr - 12)} 0 ${n2(hy - hr - 8)} Q${hr + 2} ${n2(hy - hr - 12)} ${hr} ${n2(hy - 6)} Q${hr * .6} ${n2(hy - hr * .6)} 0 ${n2(hy - hr * .58)} Q${-hr * .6} ${n2(hy - hr * .6)} ${-hr} ${n2(hy - 6)}z" fill="${hair}"/>`
     : `<path d="M${-hr - 4} ${n2(hy + (a === 3 ? 44 : 26))} Q${-hr - 12} ${n2(hy - hr - 16)} 0 ${n2(hy - hr - 10)} Q${hr + 12} ${n2(hy - hr - 16)} ${hr + 4} ${n2(hy + (a === 3 ? 44 : 26))} Q${hr - 4} ${n2(hy - hr * .5)} 0 ${n2(hy - hr * .56)} Q${-hr + 4} ${n2(hy - hr * .5)} ${-hr - 4} ${n2(hy + (a === 3 ? 44 : 26))}z" fill="${hair}"/>`;
@@ -223,6 +224,7 @@ function trailNotes(t, o = {}) { const lit = o.lit || [0, 0, 0], L3 = o.fixed ? 
   ${o.tick ? TF(410, -250, o.tick, tickBadge(40)) : ""}`; }
 
 /* ---------- a round bus on the road (the cliffhanger); origin = the road under its middle ---------- */
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function bus(t, discs = "") { const wh = (x) => `<g transform="translate(${x} -34)"><circle r="46" fill="${P.ink}"/><circle r="24" fill="#C9D2E8"/><g transform="rotate(${n2(t * 400)})"><path d="M-24 0 H24 M0 -24 V24" stroke="#8D97B2" stroke-width="6"/></g></g>`;
   return `<ellipse cx="0" cy="12" rx="560" ry="18" fill="${P.ink}" opacity=".25" filter="url(#b4)"/><g transform="translate(0 ${n2(3 * Math.sin(t * 9))})"><g filter="url(#drop)"><rect x="-540" y="-430" width="1080" height="390" rx="50" fill="url(#fBus)" stroke="#5E6788" stroke-width="7"/></g><rect x="-540" y="-150" width="1080" height="64" fill="#2FA65A"/><rect x="-540" y="-86" width="1080" height="18" fill="#FFC83A"/>
   ${[-400, -130, 140].map((x) => `<rect x="${x - 110}" y="-392" width="230" height="210" rx="26" fill="#BFE6FF" stroke="#5E6788" stroke-width="6"/>`).join("")}<rect x="300" y="-392" width="200" height="330" rx="22" fill="#DDF1FF" stroke="#5E6788" stroke-width="6"/><path d="M400 -392 V-62" stroke="#5E6788" stroke-width="5"/>${discs}

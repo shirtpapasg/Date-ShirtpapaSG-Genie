@@ -23,6 +23,7 @@ const tipHand = (k = 1, rot = 0) => TF(0, 0, k, TF(-6, -92, 1, hand15({ curl: .5
 
 /* ================================================================ THE ANIMALS ================================================================ */
 // the CICADA, seen from above / on a trunk, head UP. origin = its middle. o.buzz: the little buzz-wobble of its belly
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function cicada18(t, o = {}) { const bz = (o.buzz === undefined ? 1 : o.buzz) * ((t % 3.1) < .5 ? 1.6 * Math.sin(t * 80) : 0), sh = blink16(t, .4);
   const legs = [[-20, -10, -36, -2], [-22, 8, -40, 18], [-20, 24, -36, 40]].map(([a, b, c, d]) => `<path d="M${a} ${b} L${c} ${d} l-6 6 M${-a} ${b} L${-c} ${d} l6 6" stroke="#4A5A2A" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`).join("");
   return `<g transform="translate(${n2(bz)} 0)">${legs}<ellipse cx="0" cy="8" rx="22" ry="44" fill="#7E8C46" stroke="#3E4A1E" stroke-width="4"/>`
@@ -40,6 +41,7 @@ function cicNymph18(t, o = {}) { const dg = Math.sin(t * 3), sh = blink16(t, 1.2
     + `<g transform="translate(58 -36) rotate(${n2(-20 + 22 * dg)})"><path d="M0 0 Q30 -6 44 14 L58 8 M44 14 L52 26 M44 14 L40 28" stroke="#7A4E22" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`
     + `<circle cx="64" cy="-64" r="26" fill="#D69A58" stroke="#6A3E16" stroke-width="4.5"/>` + eye16(72, -70, 8, { shut: sh }) + `<path d="M70 -54 q6 4 12 0" stroke="${INK16}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`; }
 // the HONEYBEE (facing right). origin = its middle. o.queen: the longer body and a tiny crown sticker; o.fly: wings a blur
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function bee18(t, o = {}) { const q = !!o.queen, L = q ? 50 : 30, fl = o.fly ? 32 * Math.sin(t * 90) : 10 * Math.sin(t * 9), sh = blink16(t, .9);
   const fuzz = (cx, cy, rx, ry, n, col) => [...Array(n)].map((_, i) => { const a = i / n * Math.PI * 2; return `<circle cx="${n2(cx + rx * Math.cos(a))}" cy="${n2(cy + ry * Math.sin(a))}" r="4.5" fill="${col}"/>`; }).join("");
   return `<g transform="rotate(${n2(-30 + fl)} 10 -14)"><ellipse cx="2" cy="-30" rx="26" ry="13" fill="#EAF6FF" fill-opacity=".7" stroke="#8FB8D0" stroke-width="2.5"/></g><g transform="rotate(${n2(-60 + fl)} 14 -14)"><ellipse cx="8" cy="-26" rx="18" ry="10" fill="#EAF6FF" fill-opacity=".6" stroke="#8FB8D0" stroke-width="2.5"/></g>`
@@ -52,6 +54,7 @@ function bee18(t, o = {}) { const q = !!o.queen, L = q ? 50 : 30, fl = o.fly ? 3
     + (q ? `<g transform="translate(34 -18)"><path d="M-12 0 L-12 -14 L-6 -6 L0 -16 L6 -6 L12 -14 L12 0z" fill="#FFD75A" stroke="#C98A00" stroke-width="2.5" stroke-linejoin="round"/></g>` : ""); }
 const beeAt = (t, x, y, k = .5, rot = 0, fly) => TF(x, y + (fly ? 4 * Math.sin(t * 7) : 0), k, bee18(t, { fly }), rot);
 // the MEALWORM (facing right). origin = its middle. o.crawl: the wave along its body
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function mealworm18(t, o = {}) { const n = 12, cr = o.crawl === undefined ? 1 : o.crawl, sh = blink16(t, 1.7); let s = "", top = "";
   for (let i = 0; i < n; i++) { const x = -110 + i * 20, y = cr * 3.5 * Math.sin(t * 5 - i * .8), r = i === 0 ? 11 : 15;
     s += `<ellipse cx="${x}" cy="${n2(y)}" rx="13" ry="${r}" fill="#D9A441" stroke="#8A5A1C" stroke-width="3"/>`; top += `<path d="M${x - 6} ${n2(y - r * .6)} q6 -3 12 0" stroke="#FFF2C8" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>`; }
@@ -64,6 +67,7 @@ function mwPupa18(t) { const br = 1 + .008 * Math.sin(t * 1.4);
     + [...Array(6)].map((_, i) => `<path d="M${-40 + i * 18} ${n2(-48 + 6 * Math.abs(i - 2.5))} l4 -9 l4 9" fill="#F4E8C8" stroke="#B89A5A" stroke-width="2.5"/>`).join("")
     + `<path d="M-30 -20 Q-34 10 -10 26 M-14 -26 Q-16 6 6 20" stroke="#C9B07A" stroke-width="3" fill="none"/>` + [0, 1, 2, 3].map((i) => `<path d="M${18 + i * 10} -36 Q${30 + i * 8} 0 ${20 + i * 10} 36" stroke="#D9C79A" stroke-width="2.5" fill="none"/>`).join("") + `</g>`; }
 // the mealworm BEETLE (from above, head right): dark, hard wing covers. origin = its middle
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function beetle18(t, o = {}) { const w = 5 * Math.sin(t * 6), sh = blink16(t, 2.3);
   const legs = [-30, 0, 30].map((x, i) => `<path d="M${x} -26 l${n2(-10 + (i % 2 ? w : -w))} -24 M${x} 26 l${n2(-10 + (i % 2 ? -w : w))} 24" stroke="#2A1E18" stroke-width="5" stroke-linecap="round"/>`).join("");
   return legs + `<path d="M64 -10 Q90 -34 98 -44 M64 10 Q90 34 98 44" stroke="#2A1E18" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="-20" cy="0" rx="62" ry="36" fill="#3E2C22" stroke="#1E140E" stroke-width="4"/><path d="M-80 0 H40" stroke="#1E140E" stroke-width="3"/>`

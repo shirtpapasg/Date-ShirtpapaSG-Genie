@@ -18,10 +18,10 @@ S = [(1, 3.4, "P1 0:03  Cold open, Heart speaking from 0.8 s: the hardware shop;
      (2, 305.0, "P2 5:05  The dare: a coiled nail and a battery. What happens to the clips?")]
 W, Hh, N = 860, 484, 2; tiles = []
 for P, t, lab in S:
-    f = f"{H}/out/_hl.png"; subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", str(t), "-i", f"{H}/ep22_part{P}.mp4", "-frames:v", "1", f], check=True)
+    f = f"{H}/out/_hl.png"; subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-ss", str(t), "-i", f"{H}/ep23_part{P}.mp4", "-frames:v", "1", f], check=True)
     im = Image.open(f).convert("RGB").resize((W, Hh)); tl = Image.new("RGB", (W, Hh + 50), (250, 246, 238)); tl.paste(im, (0, 0)); ImageDraw.Draw(tl).text((10, Hh + 10), lab, font=ImageFont.truetype(F, 18), fill=(30, 26, 60)); tiles.append(tl)
 os.remove(f"{H}/out/_hl.png")
 rows = (len(tiles) + N - 1) // N; sh = Image.new("RGB", (N * W + (N + 1) * 12, 64 + rows * (Hh + 62)), (18, 14, 46)); d = ImageDraw.Draw(sh)
-d.text((14, 14), "EP22 (v2 cast): highlights for the teacher's quick look", font=ft, fill=(255, 200, 58))
+d.text((14, 14), "EP23 (v2 cast): highlights for the teacher's quick look", font=ft, fill=(255, 200, 58))
 for i, tl in enumerate(tiles): sh.paste(tl, (12 + (i % N) * (W + 12), 64 + (i // N) * (Hh + 62)))
 sh.save(f"{H}/qa/highlights.jpg", quality=86); print(sh.size)

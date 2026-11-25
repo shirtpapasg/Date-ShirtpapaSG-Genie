@@ -66,6 +66,7 @@ const woodpeckerAt = (t, x, y, k = .38, o = {}) => { const ph = o.ph || 0, c = (
   return TF(x, y - hp * k, (o.flip ? -1 : 1) * k, woodpecker22(t, { ...o, chips: o.chips !== false }), o.rot || 0, k); };
 
 // the ANT, side view: origin = between its feet on the ground, facing RIGHT (o.flip: left). o.walk: legs trot; o.wave: feelers wave more
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function ant22(t, o = {}) { const ph = o.ph || 0, wk = o.walk ? t * 11 + ph : ph, fw = Math.sin(t * 3.2 + ph) * (o.wave ? 1 : .4), sh = blink16(t, ph + 1.1), bob = o.walk ? 1.2 * Math.sin(wk * 2) : .6 * Math.sin(t * 2 + ph);
   const leg = (bx, kx, fx, i, side) => { const sw = 5 * Math.sin(wk + i * 2.1 + side * Math.PI); return `<path d="M${bx} -15 L${kx + sw * .4} -27 L${fx + sw} 0" stroke="${side ? "#2A2434" : "#141018"}" stroke-width="${side ? 3.4 : 3}" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`; };
   const L = [[8, 16, 24], [3, 4, 4], [-3, -8, -20]];
@@ -146,6 +147,7 @@ const nameTag22 = (x, y, txt, col = "#fff", ink = P.ink, size = 30) => TF(x, y, 
 /* ---------- Part 1's build: OUR FISHING GAME (a clipboard on a little wooden easel; origin = the easel's feet on the table; about 430 tall
    at k 1). It fills on its marks (rod1, try, chipfar, list); once filled, a box stays filled. o.all: everything filled (nyk) ---------- */
 const LIST22 = [["iron nail", 1], ["steel screwdriver", 1], ["copper wire", 0], ["aluminium foil", 0], ["wooden chopstick", 0]];
+// FACES: left (head / front to the -x side; checked on a still, 2026-11-25)
 const fishP = (x, y, k, col, big) => TF(x, y, k, `<path d="M-54 0 Q-10 -40 40 -6 L66 -26 L60 0 L66 26 L40 6 Q-10 40 -54 0z" fill="${col}" stroke="${P.ink}" stroke-width="4" stroke-linejoin="round"/><path d="M-10 -28 Q-4 0 -10 28" stroke="${P.ink}" stroke-width="3" fill="none" opacity=".4"/>`
   + `<circle cx="-30" cy="-8" r="7" fill="#fff" stroke="${P.ink}" stroke-width="2.5"/><circle cx="-31" cy="-8" r="3.6" fill="${P.ink}"/><path d="M-44 6 q6 5 12 1" stroke="${P.ink}" stroke-width="2.5" fill="none" stroke-linecap="round"/>`)
   + clip21(x - 58 * k, y + 2 * k, 0, .62 * k) + (big ? clip21(x - 58 * k, y + 16 * k, 8, .62 * k) : "");

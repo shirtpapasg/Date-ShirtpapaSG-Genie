@@ -9,6 +9,7 @@ function hand15(o = {}) { const c = o.curl || 0, sl = o.sleeve || "#5B7BD6", sd 
   const fing = F.map(([y, L], i) => { const cc = o.point && i === 0 ? 0 : (o.point ? .75 : c), l = L * (1 - .6 * cc) + 10; return `<rect x="-10" y="${y - 10}" width="${n2(l)}" height="20" rx="10" transform="rotate(${n2((i - 1.5) * 4)} 0 ${y})"/>`; }).join("");
   return `<rect x="-330" y="-54" width="230" height="108" rx="20" fill="${sl}" stroke="${sd}" stroke-width="5"/><g fill="${SKN}" stroke="${SKL}" stroke-width="4" stroke-linejoin="round"><rect x="-118" y="-44" width="128" height="88" rx="34"/>${fing}<rect x="-70" y="-60" width="70" height="24" rx="12" transform="rotate(-26 -70 -48)"/></g>`
     + `<path d="M-6 -30 q6 2 0 6 M-6 -10 q6 2 0 6 M-6 10 q6 2 0 6" fill="none" stroke="${SKL}" stroke-width="2.5" opacity=".7"/>`; }
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const bird15 = (t, k = 1, ph = 0) => { const hp = Math.max(0, Math.sin(t * 2.3 + ph)) > .85 ? 8 : 0, pk = Math.max(0, Math.sin(t * 1.7 + ph)) > .9 ? 12 : 0;
   return TF(0, -hp, k, `<path d="M-4 0 l-4 -14 M6 0 l2 -14" stroke="#8A5A36" stroke-width="3"/><ellipse cx="0" cy="-22" rx="20" ry="14" fill="#B98A5A"/><path d="M-14 -24 Q-36 -30 -40 -18 Q-26 -16 -14 -18z" fill="#7E5A3A"/><g transform="rotate(${pk} 14 -30)"><circle cx="14" cy="-32" r="11" fill="#9A6E44"/><path d="M24 -33 l9 3 l-9 3z" fill="#F2C14E"/><circle cx="17" cy="-35" r="2.6" fill="#2B2147"/></g><ellipse cx="2" cy="-18" rx="11" ry="7" fill="#E9D7BC"/>`); };
 const camPt = (c, p) => [c[0] * p[0] - (c[0] - 1) * c[1], c[0] * p[1] - (c[0] - 1) * c[2]];
@@ -66,6 +67,7 @@ function swallow21(t, o = {}) { const ph = o.ph || 0, br = 1 + .03 * Math.sin(t 
     + `<path d="M-14 -22 Q10 -6 40 -30 Q34 -52 14 -50 Q-6 -44 -14 -22z" fill="${SWC}"/><path d="M-32 -46 Q8 -66 40 -54 Q8 -42 -40 -30z" fill="${SWB2}" opacity=".9"/><path d="M-36 -40 Q-4 -54 30 -48" stroke="#8FA8F0" stroke-width="3" fill="none" opacity=".6"/></g>`
     + head + `<path d="M-4 -12 V0 M-10 0 H4 M8 -12 V0 M2 0 H16" stroke="#2A2420" stroke-width="3" stroke-linecap="round"/></g>`; }
 // a swallow in flight (side view, wings up / down with the beat), origin = its body; o.look -1 flies left
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function swallowFly(t, o = {}) { const ph = o.ph || 0, w = Math.sin(t * 14 + ph);
   return `<g transform="scale(${o.look === -1 ? -1 : 1} 1)"><path d="M-30 0 L-120 14 L-92 2 L-128 28 L-26 10z" fill="${SWB}" stroke="#121A44" stroke-width="3" stroke-linejoin="round"/>`
     + `<path d="M-6 -6 Q-30 ${n2(-70 * w)} -90 ${n2(-80 * w - 10)} Q-40 ${n2(-30 * w)} 10 2z" fill="${SWB}" stroke="#121A44" stroke-width="3"/>`
@@ -79,6 +81,7 @@ const swallowAt = (t, x, y, k = .3, o = {}) => TF(x, y, k, swallow21(t, o));
 // with a pattern of plates, a rounded head with big gentle dark eyes and a short beak; it bobs, blinks, takes a breath (a tiny puff) and
 // lifts its head; a ripple ring round it. Origin = the water line at the shell's middle; it faces right (o.look -1 left).
 const TSH = "#7A6A3C", TSH2 = "#9C8A52", TSK = "#8FA25E", TSKD = "#5E6E36";
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function turtle21(t, o = {}) { const ph = o.ph || 0, bob = 4 * Math.sin(t * 1.6 + ph), sh = blink16(t, 1.7 + ph), lift = 6 * Math.max(0, Math.sin(t * .7 + ph)), puff = ((t + ph) % 4.2) / 4.2;
   let s = `<ellipse cx="0" cy="4" rx="${n2(110 + 30 * ((t * .5 + ph) % 1))}" ry="${n2(18 + 5 * ((t * .5 + ph) % 1))}" fill="none" stroke="#fff" stroke-width="4" opacity="${n2(.5 * (1 - ((t * .5 + ph) % 1)))}"/>`
     + `<ellipse cx="0" cy="4" rx="96" ry="14" fill="#fff" opacity=".25"/>`;
@@ -91,6 +94,7 @@ function turtle21(t, o = {}) { const ph = o.ph || 0, bob = 4 * Math.sin(t * 1.6 
   return `<g transform="scale(${o.look === -1 ? -1 : 1} 1)">${s}</g>`; }
 const turtleAt = (t, x, y, k = .3, o = {}) => TF(x, y, k, turtle21(t, o));
 // a whole turtle swimming (seen from above), for the fun fact: shell, head, four flippers that paddle; origin = the shell's middle, heading right
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function turtleSwim(t, o = {}) { const p = Math.sin(t * 4 + (o.ph || 0)), b = o.baby ? 1 : 0;
   const fl = (x, y, r, a) => `<path d="M0 0 Q${n2(40 * r)} ${n2(-14 * r)} ${n2(80 * r)} ${n2(-6 * r)} Q${n2(44 * r)} ${n2(10 * r)} 0 ${n2(12 * r)}z" fill="${TSK}" stroke="${TSKD}" stroke-width="4" transform="translate(${x} ${y}) rotate(${n2(a)})"/>`;
   return fl(30, -40, 1, -120 + 25 * p) + fl(30, 40, 1, 120 - 25 * p) + fl(-50, -34, .6, -150 - 15 * p) + fl(-50, 34, .6, 150 + 15 * p)

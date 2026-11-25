@@ -155,6 +155,7 @@ const pawDown = (x, y, kind = 1, s = .8) => TF(x, y, s, paw(kind === 2 ? "#DCE4D
 
 /* ---------- the pupil (drawn simply; PE kit: white T-shirt with a coloured collar, dark shorts). Origin = the feet. About 300 tall.
    o: armL, armR (degrees, 0 = down, 90 = out to the side, 180 = up), legL, legR (degrees), mouth: smile | open | o, hair, lean, bottle, sweat ---------- */
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function kid(o = {}) { const { armL = 14, armR = 14, legL = 0, legR = 0, mouth = "smile", lean = 0, col = "#2EC4B6" } = o, hairC = "#3A2A22";
   const arm = (sx, a, extra = "") => `<g transform="translate(${sx * 44} -178) rotate(${n2(sx * -a)})"><rect x="-13" y="0" width="26" height="86" rx="13" fill="${SKIN}" stroke="${SKIN2}" stroke-width="4"/><rect x="-16" y="-6" width="32" height="38" rx="12" fill="url(#hShirt)" stroke="#B9C6DE" stroke-width="4"/>${extra}</g>`;
   const leg = (sx, a) => `<g transform="translate(${sx * 22} -92) rotate(${n2(a)})"><rect x="-14" y="0" width="28" height="84" rx="13" fill="${SKIN}" stroke="${SKIN2}" stroke-width="4"/><rect x="-18" y="72" width="${42}" height="22" rx="10" fill="#fff" stroke="#8D97B2" stroke-width="4" transform="translate(${sx > 0 ? 0 : -6} 0)"/></g>`;

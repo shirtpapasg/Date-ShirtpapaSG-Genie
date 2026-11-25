@@ -72,7 +72,7 @@ const potPlant23 = (t, x, y, k = 1) => { let s = `<path d="M-70 0 H70 L56 110 H-
   for (let j = 0; j < 7; j++) { const ex = (j - 3) * 34 + 6 * Math.sin(t * .9 + j), ey = -170 - 70 * hash(j, 4); s += `<path d="M${(j - 3) * 8} 0 Q${n2(ex * .4)} ${n2(ey * .5)} ${n2(ex)} ${n2(ey)}" stroke="#3E7A3A" stroke-width="5" fill="none"/>`;
     for (let i = 0; i < 5; i++) { const u = .3 + i * .16, px = lerp((j - 3) * 8, ex, u), py = lerp(0, ey, u), a = (i % 2 ? 1 : -1) * 58 + (j - 3) * 8; s += `<g transform="translate(${n2(px)} ${n2(py)}) rotate(${n2(a)})"><path d="M0 0 V-6" stroke="#3E7A3A" stroke-width="2.6"/><path d="M0 -5 Q-16 -26 0 -50 Q16 -26 0 -5z" fill="${(i + j) % 2 ? "#58B56C" : "#4BA862"}" stroke="#2F6A34" stroke-width="1.8"/></g>`; } }
   return TF(x, y, k, s); };
-// a lorry passing on the road now and then (out of focus, far)
+// a lorry passing on the road now and then (out of focus, far). FACES: right (its cab at the right) and it drives left to right: matches
 const roadLorry = (t) => { const u = (((t - 6) % 23) + 23) % 23 / 6; if (u <= 0 || u >= 1) return ""; const x = lerp(-300, 2200, u); return `<g filter="url(#b2)" transform="translate(${n2(x)} 640) scale(.7)"><rect x="-200" y="-150" width="280" height="120" rx="6" fill="#E8E2D0" stroke="#7A7262" stroke-width="4"/><rect x="80" y="-120" width="110" height="90" rx="10" fill="#3A8DFF" stroke="#1F5FD0" stroke-width="4"/><rect x="100" y="-108" width="60" height="36" rx="4" fill="#BFE6FF"/>` + [-150, -60, 140].map((wx) => `<circle cx="${wx}" cy="-24" r="22" fill="#2E2E36"/>`).join("") + `</g>`; };
 // the yard's crane, live: o.crane = { sw, lift, on, fall } (default: slowly lifting a tangle, never dropping it: the cold open's "it does NOT drop it")
 const CRANE_AT = [1640, 560, .62];

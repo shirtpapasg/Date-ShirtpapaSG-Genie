@@ -236,7 +236,7 @@ function yardCrane23(t, o = {}) { const sw = o.sw || 0, lift = o.lift === undefi
 // the MILLIPEDE, side view: origin = between its feet on the ground, head to the RIGHT (o.flip: left). Rusty brown with darker rings, a long
 // round body of many rings, two short legs per ring rippling in a wave, two short feelers, a rounded head with big friendly eyes.
 // o.walk: the legs ripple and it creeps; o.coil 0..1: it curls into a tight flat spiral (the reveal)
-function millipede23(t, o = {}) { const ph = o.ph || 0, N = 14, cl = o.coil || 0, sh = blink16(t, ph + .7), wv = o.walk ? t * 7 + ph : ph;
+/* FACES: right */ function millipede23(t, o = {}) { const ph = o.ph || 0, N = 14, cl = o.coil || 0, sh = blink16(t, ph + .7), wv = o.walk ? t * 7 + ph : ph;
   let body = "", legs = "", pts = [];
   for (let i = 0; i < N; i++) { const u = i / (N - 1);   // 0 = the tail, 1 = the head
     const sx = -150 + u * 160, sy = -14 + 2 * Math.sin(wv * .3 + i * .7);
@@ -248,12 +248,14 @@ function millipede23(t, o = {}) { const ph = o.ph || 0, N = 14, cl = o.coil || 0
   body += `<circle cx="${n2(hx)}" cy="${n2(hy)}" r="13" fill="#B8622E" stroke="#4A2814" stroke-width="2.6"/>` + eye16(n2(hx + 5), n2(hy - 3), 5.6, { shut: sh, lx: 1, line: "#3A1E0E" })
     + `<path d="M${n2(hx + 8)} ${n2(hy - 10)} q8 ${n2(-10 + fw)} 16 ${n2(-8 + fw)} M${n2(hx + 11)} ${n2(hy - 6)} q10 ${n2(-4 - fw)} 18 ${n2(-1 - fw)}" stroke="#4A2814" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M${n2(hx + 6)} ${n2(hy + 6)} q4 3 8 0" stroke="#FFB3A8" stroke-width="2" fill="none" stroke-linecap="round"/>`;
   return legs + body; }
-// the millipede at a spot (x, y = its feet), scale k, creeping slowly back and forth a little (o.creep)
-const millipedeAt = (t, x, y, k = .34, o = {}) => { const cr = o.creep === false ? 0 : 10 * Math.sin(t * .5 + (o.ph || 0)); return TF(x + cr * k, y, (o.flip ? -1 : 1) * k, millipede23(t, { walk: true, ...o }), o.rot || 0, k); };
+// the millipede at a spot (x, y = its feet), scale k. FACES: right (o.flip: left, mirrored with a negative x-scale only). It walks ON THE
+// SPOT (its legs ripple, it does not slide): the teacher's 25 Nov rule (SERIES_FORMAT 6x) says a moving thing faces its travel, and a
+// slide sideways would read as walking backwards half the time
+const millipedeAt = (t, x, y, k = .34, o = {}) => { const cr = 0; return TF(x + cr * k, y, (o.flip ? -1 : 1) * k, millipede23(t, { walk: true, ...o }), o.rot || 0, k); };
 // the CRICKET, side view: origin = between its feet, head to the RIGHT. A brown field cricket: a round head with long feelers, big friendly
 // eyes, folded wings, big jumping back legs, front legs with a small pale oval just below each knee (o.ear: drawn and ringed only for the
 // fun fact). o.clean: now and then it cleans a feeler; o.hop: small hops
-function cricket23(t, o = {}) { const ph = o.ph || 0, sh = blink16(t, ph + .3), fw = Math.sin(t * 4 + ph), cyc = (t + ph) % 3.4, hp = o.hop ? 16 * (cyc < .3 ? Math.sin(cyc / .3 * Math.PI) : 0) : 0, cln = o.clean && cyc > 1.6 && cyc < 2.4 ? Math.sin((cyc - 1.6) / .8 * Math.PI) : 0;
+/* FACES: right; it hops straight up and down on the spot (no travel) */ function cricket23(t, o = {}) { const ph = o.ph || 0, sh = blink16(t, ph + .3), fw = Math.sin(t * 4 + ph), cyc = (t + ph) % 3.4, hp = o.hop ? 16 * (cyc < .3 ? Math.sin(cyc / .3 * Math.PI) : 0) : 0, cln = o.clean && cyc > 1.6 && cyc < 2.4 ? Math.sin((cyc - 1.6) / .8 * Math.PI) : 0;
   let s = `<g transform="translate(0 ${n2(-hp)})">`;
   s += `<path d="M-30 -22 L-62 -62 L-80 0" stroke="#5A3A1E" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M-30 -22 L-62 -62" stroke="#8A5A2E" stroke-width="13" stroke-linecap="round"/>`;
   s += `<ellipse cx="-14" cy="-28" rx="42" ry="17" fill="#6E4A26" stroke="#3A2410" stroke-width="3"/><path d="M-52 -32 Q-12 -46 26 -34 L22 -24 Q-14 -34 -50 -22z" fill="#8A6034" stroke="#3A2410" stroke-width="2.4"/><path d="M-44 -30 H16" stroke="#B88A54" stroke-width="2" opacity=".7"/>`;
@@ -261,7 +263,7 @@ function cricket23(t, o = {}) { const ph = o.ph || 0, sh = blink16(t, ph + .3), 
   s += `<circle cx="36" cy="-36" r="17" fill="#7A5228" stroke="#3A2410" stroke-width="3"/>` + eye16(43, -40, 7, { shut: sh, lx: 1, line: "#2E1A0A" }) + `<path d="M44 -28 q4 3 8 0" stroke="#FFB3A8" stroke-width="2" fill="none" stroke-linecap="round"/>`
     + `<path d="M44 -50 Q70 ${n2(-90 + 6 * fw)} ${n2(110 + 6 * fw)} ${n2(-96 + 8 * fw)}" stroke="#3A2410" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M40 -52 Q${n2(56 - 30 * cln)} ${n2(-100 + 40 * cln)} ${n2(94 - 60 * cln)} ${n2(-118 + 70 * cln)}" stroke="#3A2410" stroke-width="2.4" fill="none" stroke-linecap="round"/>`;
   return s + `</g>`; }
-const cricketAt = (t, x, y, k = .32, o = {}) => TF(x, y, (o.flip ? -1 : 1) * k, cricket23(t, { hop: true, ...o }), o.rot || 0, k);
+/* FACES: right (o.flip: left, negative x-scale only); hops in place */ const cricketAt = (t, x, y, k = .32, o = {}) => TF(x, y, (o.flip ? -1 : 1) * k, cricket23(t, { hop: true, ...o }), o.rot || 0, k);
 
 /* ================================================================ PEOPLE ================================================================ */
 // the drinks-stall AUNTIE (background; kind; origin = her waist at the counter; about 120 x 180): an apron, short hair, a kopi cup

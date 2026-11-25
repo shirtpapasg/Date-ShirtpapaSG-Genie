@@ -31,6 +31,7 @@ const limeEgg = (k = 1, t = 0) => TF(0, 0, k, `<circle r="10" fill="#F6E58A" str
 // to front; o.chew: the mouth works; o.hook: the soles' tiny hooks drawn; o.k scale. The true legs and the prolegs are at CATLEG / CATPRO.
 const CATSEG = [[150, 40], [116, 43], [80, 44], [44, 42], [8, 41], [-28, 40], [-63, 38], [-98, 36], [-132, 33], [-164, 30], [-193, 27], [-218, 24]];
 const CATLEG = [150, 116, 80], CATPRO = [-28, -63, -98, -132, -214];
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function cat17(t, o = {}) { const wk = o.walk ? 1 : 0, ch = o.chew === false ? 0 : Math.sin(t * 9), lg = o.legs || [0, 0, 0], pr = o.pro || [0, 0, 0, 0, 0], hump = (x) => wk * 7 * Math.max(0, Math.sin(t * 5 - x * .03));
   const liftAt = (x) => wk * 9 * Math.max(0, Math.sin(t * 5 - x * .03)); let s = "", legs = "";
   // the prolegs: chubby stumps with a flat sole (a ring of tiny hooks)
@@ -88,6 +89,7 @@ function insideModel(t, lit = {}) { const w = lit.wings || 0, f = lit.feelers ||
 
 // the lime butterfly, from above. Origin = its middle. Wingspan about 420. o.flap (0 open .. 1 shut, the wings fold up), o.crump (0..1:
 // small, crumpled, drooping wings: just out of the case), o.k scale
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function bfly17(t, o = {}) { const fl = o.flap || 0, cr = o.crump || 0, ws = 1 - .55 * cr, sx = Math.max(.08, Math.cos(fl * Math.PI / 2)), dr = 20 * cr;
   const wavy = (d) => cr > .05 ? `stroke-dasharray="${n2(10 - 6 * cr)} 3"` : "";
   const side = (sg) => { const fore = `M6 -8 Q60 -150 196 -128 Q212 -96 176 -50 Q120 -20 6 -8z`, hind = `M6 4 Q120 4 150 46 Q160 104 104 126 Q50 132 14 70z`;
@@ -101,6 +103,7 @@ function bfly17(t, o = {}) { const fl = o.flap || 0, cr = o.crump || 0, ws = 1 -
     + `<path d="M-4 -52 Q-20 -96 -30 -116 M4 -52 Q20 -96 30 -116" stroke="#2A2426" stroke-width="3.5" fill="none"/><circle cx="-31" cy="-118" r="6" fill="#2A2426"/><circle cx="31" cy="-118" r="6" fill="#2A2426"/>`;
   return o.k ? TF(0, 0, o.k, s) : s; }
 // the butterfly side-on, wings up (resting on a leaf edge or the empty case): origin = its feet
+// FACES: left (head / front to the -x side; checked on a still, 2026-11-25)
 const bflySide = (t, o = {}) => { const fl = .5 + .5 * Math.sin(t * (o.slow ? 2 : 6)), cr = o.crump || 0, ws = 1 - .5 * cr;
   return `<g transform="scale(${n2(ws)} ${n2(ws * (.75 + .25 * fl))})"><path d="M0 -40 Q-40 -200 60 -230 Q120 -180 80 -100 Q50 -60 0 -40z" fill="#1E1A1C" stroke="#0E0C0E" stroke-width="4" ${cr > .05 ? 'stroke-dasharray="6 3"' : ""}/>${[[30, -190], [56, -170], [70, -140], [20, -150], [44, -120]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="11" ry="8" fill="#F4DE86"/>`).join("")}<path d="M0 -40 Q60 -60 90 -10 Q60 10 10 -20z" fill="#1E1A1C" stroke="#0E0C0E" stroke-width="4"/><circle cx="20" cy="-22" r="9" fill="#3A6FD8"/><circle cx="20" cy="-22" r="5" fill="#E8432E"/></g>`
     + `<ellipse cx="0" cy="-26" rx="8" ry="30" fill="#2A2426" transform="rotate(-20)"/><circle cx="-14" cy="-56" r="11" fill="#3A3236"/>${eye16(-18, -58, 5)}<path d="M-18 -64 Q-40 -100 -46 -110" stroke="#2A2426" stroke-width="3" fill="none"/><circle cx="-47" cy="-112" r="4" fill="#2A2426"/><path d="M-6 -10 l-10 12 M2 -8 l2 14 M8 -12 l12 10" stroke="#2A2426" stroke-width="3" stroke-linecap="round"/>`; };
@@ -108,6 +111,7 @@ const bflySide = (t, o = {}) => { const fl = .5 + .5 * Math.sin(t * (o.slow ? 2 
 /* ---------------------------------------------------------------- the moth (Part 1's hidden animal) ---------------------------------------------------------------- */
 // resting flat, from above: brown-grey wings like a little triangle, FEATHERY feelers, a fuzzy body, big round eyes. Origin = its middle;
 // about 150 wide at k 1. o.open: the wings open a little (once); o.tw: the feelers twitch
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function moth17(t, o = {}) { const op = o.open || 0, tw = 6 * Math.sin(t * 5) * (o.tw === undefined ? 1 : o.tw), b = blink17(t, 2.2);
   const wing = (sg) => `<g transform="scale(${sg} 1) rotate(${n2(-14 * op)})"><path d="M2 -16 Q40 -6 78 52 Q40 64 4 40z" fill="#A08C78" stroke="#6E5C4A" stroke-width="3.5"/><path d="M14 4 Q40 18 58 44" stroke="#6E5C4A" stroke-width="3" fill="none" stroke-dasharray="5 4"/><path d="M10 -6 Q30 10 34 30" stroke="#C8B6A0" stroke-width="3" fill="none"/><circle cx="36" cy="22" r="4" fill="#5A4A3A"/></g>`;
   const feeler = (sg) => { let f = `<path d="M${sg * 6} -26 Q${sg * 22} ${-52 + tw * .3} ${sg * (34 + tw)} -66" stroke="#6E5C4A" stroke-width="3" fill="none"/>`; for (let i = 1; i < 7; i++) { const u = i / 7, x = sg * (6 + (28 + tw) * u), y = -26 - 40 * u; f += `<path d="M${n2(x)} ${n2(y)} l${sg * 7} -3 M${n2(x)} ${n2(y)} l${-sg * 3} -7" stroke="#8A7660" stroke-width="2.2"/>`; } return f; };
@@ -124,6 +128,7 @@ const cocoon17 = (t, o = {}) => { const c = o.cut || 0; let s = `<path d="M-140 
 /* ---------------------------------------------------------------- the mosquito ---------------------------------------------------------------- */
 // a wriggler, hanging head-down from the surface. Origin = the tip of its little tube (the breathing tube) AT the surface (y 0); it hangs
 // down and a little to one side. Length about 230. o.wig (0..1) an S-shaped wriggle; o.tube (0..1) lights the tube; o.k
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function wrig17(t, o = {}) { const wg = o.wig || 0, ph = o.ph || 0, lean = o.lean === undefined ? 22 : o.lean, tl = o.tube || 0; let s = "";
   const pts = []; for (let i = 0; i <= 9; i++) { const u = i / 9, y = 30 + u * 150, x = wg * 26 * Math.sin(u * 5 + t * 14 + ph) + .6 * Math.sin(t * 2 + ph + u) * 4; pts.push([x, y]); }
   // the tube (siphon): short, at the tail end, touching the surface
@@ -137,9 +142,11 @@ function wrig17(t, o = {}) { const wg = o.wig || 0, ph = o.ph || 0, lean = o.lea
   return TF(0, 0, o.k || 1, s, lean); }
 // the mosquito's pupa: comma-shaped (a big round front with two little trumpets on top that touch the surface, a curled tail with two small
 // paddles). Origin = the trumpets' tips at the surface. o.roll: a tumble angle
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 const mpupa17 = (t, o = {}) => TF(0, 0, o.k || 1, `<path d="M-10 0 L-8 18 M10 0 L8 18" stroke="#5A5468" stroke-width="5" stroke-linecap="round"/><circle cx="0" cy="48" r="36" fill="#5E5870" stroke="#3A3448" stroke-width="3"/><path d="M30 60 Q46 100 20 128 Q-6 146 -16 120" stroke="#5E5870" stroke-width="16" fill="none" stroke-linecap="round"/><path d="M-16 120 l-18 6 M-16 120 l-8 16" stroke="#7A7490" stroke-width="5" stroke-linecap="round"/>${eye16(-12, 50, 6)}<path d="M-20 32 Q0 22 20 32" stroke="#8A84A0" stroke-width="3" fill="none"/>`, o.roll || 0);
 // the adult mosquito, side-on: small, simple, never scary (no biting): slender body, pale bands, two narrow clear wings, six long thin legs,
 // a short mouth tube folded down, a round head with one big friendly eye. Origin = its feet line. o.wing (0..1 the wings buzz), o.k
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function mosq17(t, o = {}) { const wb = (o.wing || 0) * Math.sin(t * 80), lf = o.lift || 0;
   return TF(0, -lf, o.k || 1, `<path d="M-10 -34 L-40 0 M-2 -34 L-14 0 M6 -34 L22 0 M10 -34 L54 2 M-14 -34 L-62 -6 M14 -34 L70 -8" stroke="#4A4458" stroke-width="3" stroke-linecap="round" fill="none"/>`
     + `<g transform="translate(0 -44) rotate(${n2(-22 + 14 * wb)})"><ellipse cx="-50" cy="-8" rx="52" ry="12" fill="#E6F4FF" fill-opacity=".75" stroke="#9AB8D0" stroke-width="2.5"/></g><g transform="translate(4 -44) rotate(${n2(-12 + 14 * wb)})"><ellipse cx="-46" cy="-6" rx="48" ry="11" fill="#E6F4FF" fill-opacity=".6" stroke="#9AB8D0" stroke-width="2"/></g>`
@@ -151,6 +158,7 @@ const mEggs17 = (k = 1, n = 7) => TF(0, 0, k, [...Array(n)].map((_, i) => `<elli
 /* ---------------------------------------------------------------- the dragonfly (Part 2's hidden animal) and its nymph ---------------------------------------------------------------- */
 // from above: a long red body, four clear wings held out flat (they shimmer), a round head with HUGE eyes. Origin = its middle; about 200
 // across at k 1. o.turn tilts the head
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function dfly17(t, o = {}) { const sh = .55 + .25 * Math.sin(t * 9), tn = (o.turn || 0) * 14, b = blink17(t, .8), fl = o.flap ? Math.abs(Math.sin(t * 40)) : 0;
   const wing = (sg, fy, L) => `<g transform="translate(0 ${fy}) scale(${sg} ${n2(1 - .6 * fl)})"><path d="M4 -4 Q${L * .6} -24 ${L} -8 Q${L * .9} 10 4 6z" fill="#E8F6FF" fill-opacity="${n2(sh)}" stroke="#8AB4D0" stroke-width="2.5"/><path d="M8 0 L${L * .95} -6" stroke="#9AC0DA" stroke-width="1.5"/><ellipse cx="${L * .82}" cy="-10" rx="5" ry="3" fill="#8A3A2A" opacity=".6"/></g>`;
   return wing(-1, -10, 104) + wing(1, -10, 104) + wing(-1, 6, 92) + wing(1, 6, 92)
