@@ -203,7 +203,7 @@ SC.wool = (t, s) => { const c = woolCam, tN = MK("neck") - .1, tT = MK("today") 
 // cups (30 ml, 20 ml, 5 ml); WOOL WINS; the three fix cards with their stamps
 const CUPX = [760, 960, 1160], ML = [30, 20, 5], MELT = [.8, .55, .12];
 const testCam = (t) => { const tP = MK("pour"); return t < tP - .3 ? camMix([1, 960, 540], camOn([960, 760], 1.1), eio((t - SCN.test.t0) / 4)) : camMix(camOn([960, 760], 1.1), camOn([960, 870], 1.3, 960, 672), eio((t - tP + .3) / 1.2)); };
-SC.test = (t, s) => { window._BUBAT = { pip: [1120, 440], basil: [1220, 440], momo: [640, 440] }; const c = testCam(t), tL = MK("lapse"), tL1 = MK("lapse1"), lu = clamp((t - tL) / (tL1 - tL)), tc = [MK("cup1"), MK("cup2"), MK("cup3")], tP = MK("pour"), tr = [MK("r1"), MK("r2"), MK("r3")], tV = MK("v_test");
+SC.test = (t, s) => { window._BUBAT = { pip: [1080, 405], basil: [1180, 405], momo: [640, 380] }; const c = testCam(t), tL = MK("lapse"), tL1 = MK("lapse1"), lu = clamp((t - tL) / (tL1 - tL)), tc = [MK("cup1"), MK("cup2"), MK("cup3")], tP = MK("pour"), tr = [MK("r1"), MK("r2"), MK("r3")], tV = MK("v_test");
   let set = pathLive(t) + TF(960, 930, 1, `<rect x="-360" y="-40" width="720" height="80" rx="10" fill="#C9BFAE" stroke="#9E9483" stroke-width="5"/><rect x="-360" y="-40" width="720" height="18" rx="8" fill="#DDD4C4"/>`);
   CUPX.forEach((x, i) => { const k = t >= LT("e904p") ? spring(t, LT("e904p") + .2 + i * .15, .45) : 0; if (k < .02) return; const m = MELT[i] * lu, wrap = t >= tc[i] ? [null, "bag", "wool"][i] : null;
     set += TF(x, 890, .62 * k, cup27(t, { melt: m, wrap, n: i + 1 })); });

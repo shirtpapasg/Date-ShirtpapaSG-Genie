@@ -1,5 +1,5 @@
 # EP27 build state (for a resume after a restart)
-P3 EP27, **the P3-to-P4 Bridge** ("P3 Finale / P4 Pilot"): **"The Great Ice Cream Rescue"**, ONE video, **6:25.4** (the story to 5:51,
+P3 EP27, **the P3-to-P4 Bridge** ("P3 Finale / P4 Pilot"): **"The Great Ice Cream Rescue"**, ONE video, **6:26.6** (the story to 5:52,
 then the read-along, "Now you know!", 4.6 s of outro and a 7 s blooper after the end card). Asked for by the teacher on 25 Nov 2026 ("Build on
 this and make it live immediately. Impress me! New music, new story, following the same rules."); pre-approved to go live after the main
 session's check. Built by one Opus agent on 25 Nov 2026 (script, voices, drawing, music, render, checks). NOT uploaded (the main session uploads).
@@ -43,6 +43,21 @@ chapters `production/youtube/chapters_p3.json` key `EP27`, `app_moments.json` (v
 (the master ceiling was lowered from .84 to .78 after a first mux measured -1.2 dBTP). `sheet.png` (30 stills), `ep27.srt` (captions for
 Studio). Chunk 140-150 s re-rendered once (the look-closer's magnifier now gives way to fix card 2's stamp). Intermediates deleted.
 Rendered from git HEAD's files plus that one p1.js fix (committed with this line).
-Known small things left (not worth a re-render; for the main session's eye): Pip stands between Basil and Momo for about 1.5 s at the start
-of fix 1 (58.3-59.8 s) before his dash; during the slow-motion replay Momo already shows her shy pose (she was wrong about the fan);
-the level-up items show for about 1.6 s before the P4 teaser cuts in.
+Known small thing left: during the slow-motion replay Momo already shows her shy pose (she was wrong about the fan). (The other two items
+noted here were fixed in the overlap round below.)
+
+## Overlap fixes (coordinator review, 25 Nov 2026, 19:xx UTC) and re-render
+- Key-word chips (top right) kept clear: the VOID DECK signpost is no longer baked into bg/path27 (drawn live only in run / fan / replay,
+  before any chip is up); speech bubbles placed clear of the chip stack (fair test, drain, party), of the box's label and the thermometer
+  (scarf), of the magnet and its line (drain), of the LEVEL UP pill (year); each buddy its own bubble space in the picks (pins removed).
+- Buddies apart: fix 1 (Basil 200, Momo 570, Pip starts at 860), the walk (-10 / 420 / 850), the drain (Pip 150, Momo 470), picks (360 px).
+- Key-word pops moved off text: HOTTER TO COLDER to (820, 730) inside the look-closer panel; FAIR TEST to (1000, 580) above the wall.
+  Drain labels: "steel: magnetic" inside the drain's upper left, "inside the drain" under the cut-away, Basil's rod no longer crosses his chin.
+- The level-up items stay 2.8 s (was 1.6 s): the timeline after 5:44 is 1.2 s later (6:26.6).
+- app_moments.json: the real TheOneApp videos.js keys (O.heatFlow, O.gainLoss, O.conductors, O.magMaterials, CH.magnets); the fair-test and
+  P3-year moments have none in videos.js, so their keys are empty.
+- Render: a full render (the verified chunks had been deleted as intermediates), then the seven fair-test chunks (210-280 s) once more after
+  the last bubble / FAIR TEST pop fix. **ep27.mp4: 11598 frames = 6:26.6, decode clean, -16.0 LUFS, -2.0 dBTP; ghost scan clean; facing scan
+  clean** (3 buddy walks right, eye-checked). Before/after: qa/before_after.jpg (+ qa/final_fairtest.jpg for the fair test's final frames,
+  qa/items_346.4.jpg). Every 2.5 s of the video was rendered as stills and checked for text over text, a bubble over a chip or label, and a
+  buddy over a word or another buddy's face.
