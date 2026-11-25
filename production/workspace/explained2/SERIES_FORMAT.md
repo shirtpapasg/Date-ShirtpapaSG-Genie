@@ -478,6 +478,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   tail, and very fine bead-like scales (never big hexagon tiles). Use the Singapore animal children really see: the Malayan water
   monitor (dark grey-brown, rows of pale yellow spots, paddle-shaped tail). Reference photos: `refs/` (gitignored, not for reuse).
 
+### 6x. Everything that moves faces the way it moves (teacher, 2026-11-25)
+The teacher: "something is wrong with the direction of the person cycling. Also, I realised for the tadpole episode, the fish swims backwards ... ensure this dont happened in future rendering."
+- A person, animal or vehicle that travels across the frame (a cyclist, a fish, a bird, a bus, an insect, a buddy walking) always faces its direction of travel: its head, front wheel or nose leads. Never slide a drawing backwards.
+- Every moving drawing function states which way it is drawn (a `FACES: right` / `FACES: left` comment at its definition). Where it moves the other way, mirror it with a negative x-scale only (`TF(x, y, -k, art, rot, k)`), never a negative scale on both axes (that turns it upside down).
+- QA: `qa/facing_scan.js` (run with the ghost scan) lists every moving drawing whose travel direction disagrees with its facing. A part is not finished until it is clean. Check by eye too: the contact sheet shows anything crossing the frame.
+
 ## 7. On screen
 
 - Series logo pill top left; the YOU vs BUDDIES score pill top right.

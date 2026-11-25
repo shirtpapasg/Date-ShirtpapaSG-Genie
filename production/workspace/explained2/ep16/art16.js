@@ -78,7 +78,7 @@ function eggJourney(t, s) { const m = MK, tE = m("jegg"), tH = m("jhatch"), tT =
     s1 += `<rect width="1920" height="1080" fill="#5FA79A"/>` + uwRays(t, "#fff", .12);
     [[300, 260, 150], [1650, 300, 170], [1500, 860, 140], [380, 860, 130], [960, 120, 110], [1800, 620, 90], [120, 560, 100]].forEach(([x, y, r], i) => { s1 += `<circle cx="${x + sway * .5}" cy="${y + bob * .5}" r="${r * 1.7}" fill="#CFEDE4" opacity=".35"/><circle cx="${x + sway * .5}" cy="${y + bob * .5}" r="${r * .62}" fill="#2E2A36" opacity=".85"/><circle cx="${x + sway * .5 - r * .2}" cy="${y + bob * .5 - r * .2}" r="${r * .15}" fill="#fff" opacity=".4"/>`; });
     // the fish's huge blurry shape glides past outside and bumps off the jelly
-    if (t > tFi - .2 && t < tFi + 3.2) { const u = (t - tFi) / 3.2; s1 += `<g opacity=".55" filter="url(#b16)">${TF(lerp(2300, -500, u), 430 + 60 * Math.sin(u * 3) - 80 * bump, 5.5, fish16(t), 0)}</g>`; }
+    if (t > tFi - .2 && t < tFi + 3.2) { const u = (t - tFi) / 3.2; s1 += `<g opacity=".55" filter="url(#b16)">${TF(lerp(2300, -500, u), 430 + 60 * Math.sin(u * 3) - 80 * bump, -5.5, fish16(t), 0, 5.5)}</g>`; }
     // the jelly wall (a ring of light round the frame), it wobbles on the bump and stretches as you wriggle out
     const R = 760 + 30 * Math.sin(t * 1.5) - 40 * bump + 900 * ei(st);
     s1 += `<mask id="jm16"><rect width="1920" height="1080" fill="#fff"/><ellipse cx="960" cy="540" rx="${n2(R * 1.3)}" ry="${n2(R)}" fill="#000" filter="url(#b60)"/></mask><rect width="1920" height="1080" fill="#E8FBF4" opacity=".92" mask="url(#jm16)"/>`
