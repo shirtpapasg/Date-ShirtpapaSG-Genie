@@ -26,7 +26,7 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lc
 const camWin = camOn([DFAT.intro[0], DFAT.intro[1]], 1.6, 760, 480);
 const camToday = (t) => { const s = SCN.today, a = eio((t - s.t0) / 1.8), c = eio((t - (s.t1 - 1.5)) / 1.5); return c > 0 ? camMix(camLamp, camWin, c) : camMix(camRoom, camLamp, a); };
 SC.today = (t, s) => { const out = s.t1 - 1.4; return sr(t, camToday(t), { rise: t >= MK("lamp") ? .25 * spring(t, MK("lamp"), .5) : 0 }) + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .1, out, ...watchO(BL[0], 1250) }) + bd("pip", PM[0], PM[1], PM[2], t, { in: s.t0 + .15, out: out + .1, flip: true, ...watchO(PM[0], 1250) })
-  + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .05, out: out + .2, flip: true, poses: [[s.t0, "sit"], [MK("lamp") - .1, "pointing"], [MK("lamp") + 1.8, "sit"]] }) + HUD(t); };
+  + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .05, out: out + .2, flip: true, poses: [[s.t0, "sit"], [MK("lamp") - .1, "pointing"], [MK("lamp") + 1.8, "sit"]] }) + melt(t, s, "title", .5) + HUD(t); };   // popfix 25 Nov 2026: the title frame melts away and the buddies stay or glide (they used to pop in again)
 SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = DFAT.intro;
   return gameScene(t, s, ["m202", "m203p", "m204"], false, { world: (tt) => sr(tt, cE, {}), A: camPt(cE, [p[0], p[1]]), T: [680, 440], Z: 2.6, dim0: 0, finder: "pip",
     poses: { momo: [[W("m202", "dragonfly") + .1, "surprised"], [W("m202", "dragonfly") + 1.8, "sit"]], basil: [[W("m204", "buddies") - .1, "waving"], [W("m204", "buddies") + 1.0, "sit"]] } }) + smallPrint(t, LT("m204"), LOOK_RULE); };

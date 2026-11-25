@@ -70,11 +70,13 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return ba
    its title), then down towards the grey pipe, where the game's push-in starts. Pip big at the right looking up; Basil and Momo at the left */
 const camBan = camOn([BAN[0], BAN[1] - 20], 1.62, 960, 400), camPipe = camOn([1120, 200], 1.35, 960, 420);
 const camTheme = (t) => { const s = SCN.theme, a = eio((t - s.t0) / 1.2), b = eio((t - (s.t1 - 1.3)) / 1.3); return b > 0 ? camMix(camBan, camPipe, b) : camMix(camBack(SCN.title.t1), camBan, a); };
-SC.theme = (t, s) => { const dimT = 1 - clamp((t - s.t0) / .35);
+SC.theme = (t, s) => {
   return VD19(t, { top: magOnTable(t) + pinWire(t), front: dcards(t), icon: MK("theme") }, camTheme(t))
-    + (dimT > .01 ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.78 * dimT)}"/>` + OP(dimT, TITLE(1, 1)) : "")
     + bd("basil", 190, 1076, 440, t, { in: s.t0 + .2, poses: [[s.t0, "sit"]], look: -4 }) + bd("momo", 420, 1070, 400, t, { in: s.t0 + .3, poses: [[s.t0, "sit"]], look: -4 })
-    + bd("pip", 1740, 1076, 500, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], look: 5 }) + HUD(t); };
+    + bd("pip", 1740, 1076, 500, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], look: 5 })
+    // popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): the dimmed title frame used to fade by itself while the buddies
+    // popped in again at new spots; now that frame melts (lib.js meltScene) and the buddies glide from their table spots to the banner
+    + melt(t, s, "title", .5) + HUD(t); };
 SC.game = (t, s) => { const cE = camPipe, p = PIGAT.game;
   return gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => VD19(tt, { top: magOnTable(tt) + pinWire(tt), front: dcards(tt), pig: p }, cE), A: camPt(cE, [p[0], p[1] - 22]), T: [680, 440], Z: 2.6, dim0: 0 }) + smallPrint(t, LT("m304"), PIGEON_RULE); };
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1", "YOUR ANSWER FROM LAST TIME");

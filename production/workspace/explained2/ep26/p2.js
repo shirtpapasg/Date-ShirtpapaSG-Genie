@@ -19,8 +19,9 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
     + OP(k, TF(960, 930, spring(t, tb[i] + .1, .4), tpill(0, 0, labs[i], 46, P.sun, P.ink, { w: 700 }))) + HUD(t); };
 const camFruit = camOn([ANTAT.intro[0], ANTAT.intro[1] - 10], 1.6, 760, 480);
 const camHome = (t) => { const s = SCN.home, a = eio((t - s.t0) / 1.6), c = eio((t - (s.t1 - 1.2)) / 1.2); return c > 0 ? camMix(camLamp, camFruit, c) : camMix(camRoom, camLamp, a); };
-SC.home = (t, s) => home(t, camHome(t), { rise: .25 }) + bd("momo", MO[0], MO[1], MO[2], t, { in: s.t0 + .9, out: s.t1 - .6, ...watchO(MO[0], 1250) }) + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + 1.0, out: s.t1 - .5, ...watchO(PI[0], 1250) })
-  + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .3, out: s.t1 - .4, poses: [[s.t0, "sit"], [s.t0 + 1.0, "pointing"], [s.t0 + 2.6, "sit"]] }) + pill2(t, s.t0, s.t1 + 1.4) + HUD(t);
+// popfix (teacher, 25 Nov 2026, on this very scene: "Starting, 0:10, issues with pet buddies popping out and gone"): the 1.6 s establishing
+// shot shows the PLACE only. Basil, Momo and Pip used to pop in and out here within 1.2 s (and Momo jump with the pan); they arrive once, in the game.
+SC.home = (t, s) => home(t, camHome(t), { rise: .25 }) + pill2(t, s.t0, s.t1 + 1.4) + HUD(t);
 SC.game = (t, s) => { const cE = camHome(SCN.home.t1), p = ANTAT.intro;
   return gameScene(t, s, ["n202", HAS("n203m") ? "n203m" : "n202", "n204"], false, { world: (tt) => home(tt, cE, { rise: .25 }), A: camPt(cE, [p[0], p[1] - 4]), T: [680, 440], Z: 2.6, dim0: 0, finder: "momo",
     poses: { pip: [[W("n202", "ant") + .1, "surprised"], [W("n202", "ant") + 1.8, "sit"]], basil: [[LT("n204") - .1, "waving"], [LT("n204") + 1.0, "sit"]] } }) + pill2(t, SCN.home.t0, s.t0 + .9) + smallPrint(t, LT("n204"), LOOK_RULE); };

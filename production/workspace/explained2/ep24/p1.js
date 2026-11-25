@@ -70,7 +70,7 @@ const camToday = (t) => { const s = SCN.today, a = eio((t - s.t0) / 1.8), c = ei
 SC.today = (t, s) => { const out = s.t1 - 1.4;
   return sr(t, camToday(t), { bench: benchTop(t, { rack: { lift: -26, clips: [8, 2] } }) })
     + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .1, out, poses: [[s.t0, "sit"], [MK("hook") + .1, "pointing"], [MK("hook") + 1.6, "sit"]] })
-    + bd("pip", PM[0], PM[1], PM[2], t, { in: s.t0 + .15, out: out + .1, flip: true, ...watchO(PM[0], 900) }) + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .05, out: out + .2, flip: true, ...watchO(MR[0], 900) }) + HUD(t); };
+    + bd("pip", PM[0], PM[1], PM[2], t, { in: s.t0 + .15, out: out + .1, flip: true, ...watchO(PM[0], 900) }) + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .05, out: out + .2, flip: true, ...watchO(MR[0], 900) }) + melt(t, s, "title", .5) + HUD(t); };   // popfix 25 Nov 2026: the title frame melts away and the buddies stay or glide (they used to pop in again)
 SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = WLAT.intro;
   return gameScene(t, s, ["m204", "m205p", "m206"], false, { world: (tt) => sr(tt, cE, { bench: benchTop(tt, { rack: { lift: -26, clips: [8, 2] } }) }), A: camPt(cE, [p[0], p[1] - 8]), T: [680, 440], Z: 2.8, dim0: 0, finder: "pip",
     poses: { pip: [[W("m204", "woodlouse") + .1, "surprised"], [W("m204", "woodlouse") + 1.8, "sit"]], basil: [[W("m206", "buddies") - .1, "waving"], [W("m206", "buddies") + 1.0, "sit"]] } }) + smallPrint(t, LT("m206"), LOOK_RULE); };

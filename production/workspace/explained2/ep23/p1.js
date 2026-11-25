@@ -87,7 +87,7 @@ SC.today = (t, s) => { const out = s.t1 - 1.4;
     + bd("basil", BA[0], BA[1], BA[2], t, { in: s.t0 + .1, out, flip: true, poses: [[s.t0, "sit"], [LE("m203b") + .1, "laughing"]] })
     + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + .15, out: out + .1, flip: true }) + (t < out + .1 ? basilMag(t, BA[0], BA[1], BA[2], true) : "")
     + bd("momo", MO[0], MO[1], MO[2], t, { in: s.t0 + .05, out: out + .2, poses: [[s.t0, "sit"], [LE("m201m") + .05, "pointing"], [LE("m201m") + 1.6, "sit"]] })
-    + (t >= MK("caps") + .2 && t < out ? impactFX(t, MK("caps") + .25, pawPt("basil", BA[0], BA[1], BA[2], true)[0] - 220, pawPt("basil", BA[0], BA[1], BA[2], true)[1] - 120, "POP!", { s: .4, flash: false }) : "") + HUD(t); };
+    + (t >= MK("caps") + .2 && t < out ? impactFX(t, MK("caps") + .25, pawPt("basil", BA[0], BA[1], BA[2], true)[0] - 220, pawPt("basil", BA[0], BA[1], BA[2], true)[1] - 120, "POP!", { s: .4, flash: false }) : "") + melt(t, s, "title", .5) + HUD(t); };   // popfix 25 Nov 2026: the title frame melts away and the buddies stay or glide (they used to pop in again)
 SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = MPAT.intro;
   return gameScene(t, s, ["m204", "m205p", "m206"], false, { world: (tt) => cs(tt, cE, { top: tableTop(tt, { clipN: 16 }) }), A: camPt(cE, [p[0], p[1] - 14]), T: [680, 440], Z: 2.6, dim0: 0,
     poses: { momo: [[W("m204", "millipede") + .1, "surprised"], [W("m204", "millipede") + 1.8, "sit"]], basil: [[W("m206", "buddies") - .1, "waving"], [W("m206", "buddies") + 1.0, "sit"]] } }) + smallPrint(t, LT("m206"), LOOK_RULE); };

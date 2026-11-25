@@ -48,7 +48,7 @@ SC.title = (t, s) => { const u = t - MK("title"), dim = clamp(u / .2); return lc
 const camCard = camOn([1700, 420], 1.5, 1200, 520), camPlant = camOn([BEEAT.intro[0], BEEAT.intro[1] - 10], 1.6, 760, 480);
 const camToday = (t) => { const s = SCN.today, a = eio((t - s.t0) / 1.8), c = eio((t - (s.t1 - 1.5)) / 1.5); return c > 0 ? camMix(camCard, camPlant, c) : camMix(camBack(SCN.title.t1), camCard, a); };
 SC.today = (t, s) => { const out = s.t1 - 1.4; return home(t, camToday(t), {}) + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .1, out, ...watchO(BL[0], 1700) }) + bd("momo", MO[0], MO[1], MO[2], t, { in: s.t0 + .15, out: out + .1, ...watchO(MO[0], 1700) })
-  + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + .05, out: out + .2, poses: [[s.t0, "sit"], [MK("card") + .1, "pointing"], [MK("card") + 1.8, "sit"]] }) + HUD(t); };
+  + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + .05, out: out + .2, poses: [[s.t0, "sit"], [MK("card") + .1, "pointing"], [MK("card") + 1.8, "sit"]] }) + melt(t, s, "title", .5) + HUD(t); };   // popfix 25 Nov 2026: the title frame melts away and the buddies stay or glide (they used to pop in again)
 SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = BEEAT.intro;
   return gameScene(t, s, ["m204", "m205m", "m206"], false, { world: (tt) => home(tt, cE, {}), A: camPt(cE, [p[0], p[1] - 6]), T: [680, 440], Z: 2.6, dim0: 0, finder: "momo",
     poses: { pip: [[W("m204", "honeybee") + .1, "surprised"], [W("m204", "honeybee") + 1.8, "sit"]], basil: [[W("m206", "buddies") - .1, "waving"], [W("m206", "buddies") + 1.0, "sit"]] } }) + smallPrint(t, LT("m206"), LOOK_RULE); };

@@ -32,8 +32,9 @@ const camBell = camOn([SR.bell[0], SR.bell[1] + 30], 2.6, 960, 420), camRoom = c
 const camLab = (t) => { const s = SCN.lab, a = eio((t - MK("ring") - .9) / 1.3); return camMix(camBell, camRoom, a); };
 const pill2 = (t, t0, t1) => OP(ramp(t, t0, .4) * (1 - ramp(t, t1, .4)), lowerPill(60, 96, "A school science room, Singapore ·", "Monday after school"));
 SC.lab = (t, s) => { const rg = t >= MK("ring") && t < MK("ring") + 1.9 ? 1 : 0;
-  return sr(t, camLab(t), { bell: rg, bench: benchTop(t) }) + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .9, ...watchO(BL[0], 1600) }) + bd("pip", PM[0], PM[1], PM[2], t, { in: s.t0 + 1.0, flip: true, ...watchO(PM[0], 1600) })
-    + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + 1.1, flip: true, ...watchO(MR[0], 1600) }) + pill2(t, s.t0, s.t1 + 1.4) + smallPrint(t, s.t0 + .4, ADULT_RULE) + HUD(t); };
+  // popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a 2.5 s establishing shot shows the PLACE only; the buddies used to
+  // pop in here and vanish 1.5 s later with the cut to the game. They arrive once, in the game.
+  return sr(t, camLab(t), { bell: rg, bench: benchTop(t) }) + pill2(t, s.t0, s.t1 + 1.4) + smallPrint(t, s.t0 + .4, ADULT_RULE) + HUD(t); };
 SC.game = (t, s) => { const cE = camRoom, p = CKAT.intro;
   return gameScene(t, s, ["n202", "n202", "n204"], false, { world: (tt) => sr(tt, cE, { bench: benchTop(tt) }), A: camPt(cE, [p[0], p[1] - 10]), T: [680, 440], Z: 2.8, dim0: 0, finder: "momo",
     poses: { pip: [[W("n202", "cricket") + .1, "surprised"], [W("n202", "cricket") + 1.8, "sit"]], momo: [[LT("n204") - .1, "waving"], [LT("n204") + 1.0, "sit"]] } }) + pill2(t, SCN.lab.t0, s.t0 + .9) + smallPrint(t, LT("n204"), LOOK_RULE); };

@@ -31,7 +31,8 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
 const TABH = [1180, 560, 560];   // the tablet on the table in the wide shots: screen centre and width
 const camWeek = (t) => { const s = SCN.week; return camMix(camOn([960, 600], 1.0, 960, 560), camOn([700, 760], 1.15, 760, 620), eio(clamp((t - s.t0) / 2.2))); };
 SC.week = (t, s) => world(t, camWeek(t), { cat: CAT.intro, top: easelOn(t) + tablet00(t, "home", TABH[0], TABH[1], TABH[2]) })
-  + bd("momo", 620, 1076, 470, t, { in: s.t0 + .05 }) + bd("pip", 1040, 1010, 360, t, { in: s.t0 + .1, flip: true }) + bd("basil", BX.r, 1076, 470, t, { in: s.t0 + .15, flip: true })
+  // popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a short establishing shot shows the PLACE only; the buddies used to
+  // pop in here and vanish with the cut to the game. They arrive once, in the game. qa/buddy_flicker_scan.js
   + dayPill(t, "Mon") + OP(ramp(t, .2, .4), lowerPill(60, 96, "A void deck study corner ·", "Monday evening")) + HUD(t);
 SC.game = (t, s) => { const cE = camWeek(SCN.week.t1), p = CAT.intro;
   return gameScene(t, s, ["b201h", "b202m", "b203h"], false, { world: (tt) => world(tt, cE, { cat: CAT.intro, top: easelOn(tt) + tablet00(tt, "home", TABH[0], TABH[1], TABH[2]) }), A: camPt(cE, [p[0], p[1] - 40]), T: [680, 440], Z: 2.2, dim0: 0 }) + smallPrint(t, LT("b203h"), CAT_RULE); };

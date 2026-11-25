@@ -47,7 +47,8 @@ const camBoard = camOn([228, 330], 2.1, 1000, 430), camLamp = camOn([CROW.lamp[0
 const camRules = (t) => { const s = SCN.rules, a = eio((t - s.t0) / 1.3), b = eio((t - (s.t1 - 1.3)) / 1.3); return b > 0 ? camMix(camBoard, camLamp, b) : camMix(camVoid(SCN.plans.t1), camBoard, a); };
 SC.rules = (t, s) => { const cam = camRules(t), out = s.t1 - 1.2;
   return world(t, cam, { crow: CROW.lamp }) + (t >= MK("board") ? OP(pulse(t, MK("board"), .05, .8), `<rect width="1920" height="1080" fill="#fff" opacity=".1"/>`) : "")
-    + bd("momo", 1500, 1076, 480, t, { in: s.t0 + .1, out, flip: true, poses: [[s.t0, "sit"], [LE("a201m") - 1.6, "pointing"], [out - .1, "sit"]] }) + HUD(t); };
+    + bd("momo", 1500, 1076, 480, t, { in: s.t0 + .1, out, flip: true, poses: [[s.t0, "sit"], [LE("a201m") - 1.6, "pointing"], [out - .1, "sit"]] })
+    + melt(t, s, "plans", .4) + HUD(t); };   // popfix (teacher, 25 Nov 2026): Pip and Basil used to vanish with the cut and Momo pop in again; now they pop out and Momo glides
 SC.game = (t, s) => { const cE = camRules(SCN.rules.t1), p = CROW.lamp;
   return gameScene(t, s, ["a202h", ...(HAS("a203b") ? ["a203b"] : []), "a204h"], false, { world: (tt) => world(tt, cE, { crow: CROW.lamp }), A: camPt(cE, [p[0], p[1] - 26]), T: [680, 440], Z: 1.5, dim0: 0 }) + smallPrint(t, LT("a204h"), CROW_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Make your own map", ""], ["Work it out to remember it", ""], ["Memory first", ""]], ["a301b", "a302b", "a303b", "a304b"], "basil");

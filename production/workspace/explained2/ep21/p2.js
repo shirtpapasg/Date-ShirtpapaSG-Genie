@@ -37,8 +37,8 @@ const TI = TTAT.intro, camJ0 = camOn([900, 640], 1.08, 960, 560), camJ1 = camOn(
 const camJetty = (t) => camMix(camJ0, camJ1, eio((t - SCN.jetty.t0) / (SCN.jetty.t1 - SCN.jetty.t0 + .2)));
 const ubPill = (t, t0, t1) => OP(ramp(t, t0, .4) * (1 - ramp(t, t1, .4)), lowerPill(60, 96, "Pulau Ubin, Singapore ·", "Saturday morning"));
 SC.jetty = (t, s) => { const tb = MK("boat"); return jetty(t, camJetty(t))
-  + bd("momo", 330, 1076, 500, t, { in: tb - .2, poses: [[tb - .2, "sit"]], jump: [[tb, 24]] }) + pawCompass(t, 470, 880, .36, 3 * Math.sin(t * 3))
-  + bd("pip", 1400, 1010, 400, t, { in: tb, flip: true, jump: [[tb + .15, 20]] }) + bd("basil", 1730, 1076, 480, t, { in: tb + .1, flip: true, jump: [[tb + .3, 20]] })
+  // popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a short establishing shot shows the PLACE only; the buddies used to
+  // pop in here and vanish with the cut to the game. They arrive once, in the game. qa/buddy_flicker_scan.js
   + ubPill(t, s.t0 + .1, 99) + smallPrint(t, s.t0 + .2, HIKE_RULE) + HUD(t); };
 SC.game = (t, s) => { const cE = camJetty(SCN.jetty.t1), p = TI;
   return gameScene(t, s, HAS("n203b") ? ["n202", "n203b", "n204"] : ["n202", "n204"], false, { world: (tt) => jetty(tt, cE), A: camPt(cE, [p[0] + 70 * p[2], p[1] - 30 * p[2]]), T: [680, 440], Z: 2.6, dim0: 0 })

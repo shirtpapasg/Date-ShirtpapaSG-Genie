@@ -40,7 +40,11 @@ function goals3(t, s, goals, ids, who = "pip") { const cols = ["gBlue", "gPurple
     out += TF(x, y, k * .88 * (1 + .07 * lit), `<g transform="rotate(${[-2, 1.5, -1.5][i]})">${lit > .05 ? `<rect x="-270" y="-205" width="540" height="430" rx="58" fill="${P.sun}" opacity="${n2(.9 * lit)}" filter="url(#b10)"/>` : ""}<g filter="url(#drop)"><rect x="-255" y="-190" width="510" height="400" rx="46" fill="url(#gPaper)"/><rect x="-255" y="-190" width="510" height="150" rx="46" fill="url(#${cols[i]})"/><rect x="-255" y="-90" width="510" height="50" fill="url(#${cols[i]})"/></g><g transform="translate(0 -112)">${ic}</g>${ls.map((l, j) => T(0, 66 + j * 56 - (ls.length - 1) * 22, l, 46, P.ink)).join("")}${read ? TF(214, -150, spring(t, ends[i] + .1, .35), tickBadge(26)) : ""}</g>`); });
   const hops = ids ? cues.map((c) => [c - .2, 22]) : [];
   if (ids && window._SAID) ids.forEach((id) => { window._SAID[id] = 1; });
-  return out + buddy(who, 240, 1076, 540, t, { in: s.t0 + .2, poses: [[s.t0, "sit"]], jump: hops, nohop: true }) + HUD(t); }
+  // teacher, 25 Nov 2026 (EP26 P2 0:10, "pet buddies popping out and gone"): the presenter used to vanish with the game's last frame and pop in
+  // big at the left 0.2 s later. Now the cut stays a cut, the presenter GLIDES on from its spot in the game's last frame (lib.js carryIn) and
+  // the game's other buddies pop out where they stood. qa/buddy_flicker_scan.js
+  const iS = TL.scenes.findIndex((x) => x.name === s.name), prev = iS > 0 ? TL.scenes[iS - 1].name : "", bo = { in: s.t0 + .2, poses: [[s.t0, "sit"]], jump: hops, nohop: true };
+  return out + (prev === "game" && SC.game ? carryIn(t, s, "game", who, 240, 1076, 540, bo, .6) : buddy(who, 240, 1076, 540, t, bo)) + HUD(t); }
 
 /* ============ the lock-in (fingers 1, 2, 3), v3 (teacher, 22 Nov: "the countdown takes the stage"; "I no longer see the animation on the
    countdown, nor the interactive pet buddies' reactions"; "one set of big numbered choice cards").
@@ -266,14 +270,16 @@ function gameScene(t, s, L0, full, R) { const LF = L0[0], L = L0[L0.length - 1],
   const POS = finder === "momo" ? { momo: [1400, 1066, 520], pip: [1065, 1040, 310], basil: [1762, 1040, 330] } : finder === "pip" ? { pip: [1400, 1066, 520], basil: [1065, 1040, 300], momo: [1765, 1040, 330] } : { basil: [1410, 1066, 530], pip: [1065, 1040, 310], momo: [1765, 1040, 330] };   // EP23: Pip can be the finder (Part 1)
   const fA = ["thinking", "pointing", "waving"];
   for (const w of ["pip", "basil", "momo"]) { const [x, y, h] = POS[w], isF = w === finder, cl = full && HAS(CM[w]) ? CM[w] : null;
-    const tin = isF ? LT(LB) - .5 : (cl ? Math.min(LT(cl) - .5, LT(CM.momo) + (w === "pip" ? .4 : .8)) : tRule + (w === "pip" ? .1 : .25));
+    const tin = isF && R.carry ? s.t0 : isF ? LT(LB) - .5 :   // R.carry (popfix 25 Nov 2026): the finder carries on from that scene
+      (cl ? Math.min(LT(cl) - .5, LT(CM.momo) + (w === "pip" ? .4 : .8)) : tRule + (w === "pip" ? .1 : .25));
     if (t < tin) continue;
     const ps = isF ? [[tin, "sit"], [LE(LB) + .15, "pointing"], [LE(LB) + 2.6, "sit"]] : [[tin, "sit"]];   // EP15: the finder points at the animal in its circle
     if (cl) ps.push([LT(cl) - .12, CP[w]], [LE(cl) + .3, "sit"]);
     if (full && w === "momo") ps.push([LT(CM.momo) - .12, "waving"], [LE(CM.momo) + .2, "sit"]);
     if (R.poses && R.poses[w]) ps.push(...R.poses[w].filter((p) => p[0] >= tin));   // EP23: the scene's own reactions (each with its reason)
     ps.sort((a, b) => a[0] - b[0]);
-    out += buddy(w, x, y, h * (speaking(w, t) ? 1.05 : 1), t, { in: tin, poses: ps, flip: x > 1300, wave: true, look: isF ? -4 : 0, twirl: full && w === "momo" && HAS("g301c") ? [MK("twirl") - .1] : [], jump: [[tLock + .02, 18]] });
+    const bo = { in: tin, poses: ps, flip: x > 1300, wave: true, look: isF ? -4 : 0, twirl: full && w === "momo" && HAS("g301c") ? [MK("twirl") - .1] : [], jump: [[tLock + .02, 18]] };
+    out += isF && R.carry ? carryIn(t, s, R.carry, w, x, y, h * (speaking(w, t) ? 1.05 : 1), bo, .6) : buddy(w, x, y, h * (speaking(w, t) ? 1.05 : 1), t, bo);
     // a sparkle on Momo's twirl and on Basil's "handsome" (script 12.3)
     if (full && w === "momo" && TL.marks.twirl !== undefined) out += popSpark(t, MK("twirl"), x, y - h * .6, h * .7);
     if (full && w === "basil" && TL.marks.handsome !== undefined) out += popSpark(t, MK("handsome"), x, y - h * .6, h * .7); }

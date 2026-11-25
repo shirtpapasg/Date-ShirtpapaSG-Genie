@@ -426,6 +426,22 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     either: before a dive (waitw) the buddies pop out in turn.
   - QA before every render: `node qa/buddy_ghost_scan.js epNN P` steps through every scene change at 30 fps and lists each frame
     where a buddy shows twice or half-transparent. It must list none (a buddy card or a round face frame inside one scene is fine).
+  - QA for flicker too: `NODE_PATH=$(npm root -g) node qa/buddy_flicker_scan.js epNN P [t0 t1]` probes every frame and lists a buddy
+    on screen under 2.5 s that then disappears (POP), a buddy gone under 2 s that comes back, at a new place or the same (GONE), and a
+    teleport (JUMP); a gap across a whole ROUND/title card is listed as CARD and allowed. The opening (up to the end of the goals) must list
+    none; every other line gets a still checked by eye (rule below).
+- **Buddies arrive once and stay; they never flicker in and out (teacher, 2026-11-25, on EP26 Part 2 "Your turn, fix the answer" at
+  0:10: "issues with pet buddies popping out and gone. Some episodes also have this issue for starting pet buddies scene").** In the
+  1.6 s establishing shot of Pip's kitchen, Basil popped in at the left, Momo popped in, the camera panned and Basil vanished and Momo
+  jumped; then the game showed only Momo, at another spot, and Pip was missing for a while. To a child: buddies pop in, vanish and pop
+  in again elsewhere within two seconds.
+  - A short establishing shot (under about 3 s) shows the PLACE only, or the buddies arrive once and STAY into the next scene (they
+    glide to their new spots: `melt()` for a soft change, `carryIn()` (lib.js) for a hard cut). Never pop out and back in.
+  - A buddy who leaves stays gone for a while (2 s at the very least, normally until the next chapter). A buddy who is on screen in two
+    scenes in a row is ONE buddy: it stays or glides, it never pops out at the cut and pops in again (title over the table then the
+    table again: the title melts away and the buddies stay; the game into "Today you'll learn": the presenter glides to the left).
+  - Buddies never flicker: no appearance under about 2.5 s, no one-frame blink at the end of a melt (fixed in lib.js 25 Nov 2026).
+  - The opening is where this happened most (cold open, "Last time", the place, the title, the game, the goals): check its strip at 5 fps.
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**
   - lip-sync on the talking sprites;

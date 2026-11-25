@@ -150,11 +150,22 @@ function meltFrom(t, s, f, a) { if (_BCAP) return ""; const F = _MELTM["L" + s.n
 // the old scene's buddies the new one does not have: popped out where they stood
 function meltOut(old, now, t, t0) { const k = 1 - eo((t - t0) / .2); if (k < .02) return ""; let out = "";
   for (const [who, c] of Object.entries(old)) if (!now[who] || c.o.peek || now[who].o.peek) out += buddy0(who, c.x, c.y, c.h, c.t, { ...c.o, k: (c.o.k || 1) * k }); return out; }
+// popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a HARD cut where one buddy carries on. It starts at its spot, size and
+// facing in scene <from>'s last frame and glides to its new spot over d s (no second pop-in, no pose pop if the pose is the same); <from>'s
+// other buddies pop out where they stood (the usual .2 s shrink). The background still cuts. qa/buddy_flicker_scan.js
+function carryIn(t, s, from, who, x, y, h, o = {}, d = .6) {
+  if (_BCAP || t < s.t0) return buddy(who, x, y, h, t, o);
+  const F = meltFrame(from), a = F.bud[who], out = meltOut(F.bud, { [who]: { o: {} } }, t, s.t0); if (!a || a.o.peek) return out + buddy(who, x, y, h, t, o);
+  const u = eio(clamp((t - s.t0) / d)), o2 = { ...o, in: s.t0 - 3, tagIn: o.in, react0: o.in !== undefined ? o.in + .6 : undefined };
+  const pz = (n) => n.startsWith(who + "_sit") ? "sit" : n; const P0 = window._POSE; window._POSE = []; let r; try { buddy0(who, x, y, h, t, o2); r = window._POSE[0]; } finally { window._POSE = P0; }
+  if (r && pz(r.name) === pz(a.name)) o2.calmTo = s.t0 + d;
+  if (u < 1) o2.flip = u < .5 ? a.o.flip : o.flip;
+  return out + buddy0(who, lerp(a.x, x, u), lerp(a.y, y, u), lerp(a.h, h, u), t, o2); }
 function buddy(who, x, y, h, t, o = {}) {
   if (_BCAP) { _BALL.push([who, x, y, h, t, o]); const P0 = window._POSE; window._POSE = []; let r; try { buddy0(who, x, y, h, t, o); r = window._POSE[0]; } finally { window._POSE = P0; }
     if (r && r.h > 2) { const c = _BCAP[who]; if (!c || r.h > c.hk) _BCAP[who] = { x, y, h, o, t, hk: r.h, name: r.name }; } return ""; }
   const S = window._S, M = S && !o.peek && t >= S.t0 && t < S.t1 ? meltOf(S) : null;
-  if (M && !_BDRAW && t < S.t0 + M.d) return "";   // drawn by meltScene, above the fading old frame
+  if (M && !_BDRAW && t < S.t0 + M.d && (t - S.t0) / M.d < .99) return "";   // drawn by meltScene, above the fading old frame (popfix 25 Nov: meltScene stops at a <= .01, so the last frame of a melt drew no buddy: a one-frame blink)
   if (M) { const a = meltFrame(M.from).bud[who], b = budsAt(S, S.t0 + M.d)[who];
     if (a && b && !a.o.peek) { const u = eio((t - S.t0) / M.d), o2 = { ...o, in: S.t0 - 3, tagIn: o.in, react0: o.in !== undefined ? o.in + .6 : undefined };
       const pz = (n) => n.startsWith(who + "_sit") ? "sit" : n; const P0 = window._POSE; window._POSE = []; let r; try { buddy0(who, x, y, h, t, o2); r = window._POSE[0]; } finally { window._POSE = P0; }

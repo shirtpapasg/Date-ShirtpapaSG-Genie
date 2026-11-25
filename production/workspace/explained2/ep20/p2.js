@@ -35,7 +35,9 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
 const trainIn = (t) => { const a = MK("train"), u = eio(clamp((t - a + .5) / .6)); return trainOn(t, lerp(TRAIN[0] - 520, TRAIN[0], u)) + (u > 0 && u < 1 ? dust(lerp(TRAIN[0] - 520, TRAIN[0], u) - 140, TRAIN[1], (t * 3) % 1, .6) : ""); };
 const kitBuds = (t, t0, o = {}) => bd("basil", 250, 1076, 480, t, { in: t0, poses: [[t0, "sit"]], look: 3, out: o.out }) + bd("momo", 1110, 1010, 400, t, { in: t0 + .1, flip: true, poses: [[t0, "sit"]], out: o.out })
   + bd("pip", 1710, 1076, 500, t, { in: t0 + .05, flip: true, poses: [[t0, "sit"]], out: o.out });
-SC.kitchen = (t, s) => KT20(t, { tableTop: ringsT(t) + trainIn(t) }, camKit) + kitBuds(t, s.t0 - .5, { out: s.t1 - .25 }) + OP(ramp(t, s.t0 + .1, .3), lowerPill(60, 96, "Pip's home, an HDB flat, Singapore ·", "evening")) + melt(t, s, "lasttime", .45) + HUD(t);
+// popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a short establishing shot shows the PLACE only; the buddies used to
+// pop in here and vanish with the cut to the game. They arrive once, in the game. qa/buddy_flicker_scan.js
+SC.kitchen = (t, s) => KT20(t, { tableTop: ringsT(t) + trainIn(t) }, camKit) + OP(ramp(t, s.t0 + .1, .3), lowerPill(60, 96, "Pip's home, an HDB flat, Singapore ·", "evening")) + melt(t, s, "lasttime", .45) + HUD(t);
 SC.game = (t, s) => { const p = LZAT.intro;
   return gameScene(t, s, ["n202", "n203m", "n204"], false, { world: (tt) => KT20(tt, { tableTop: ringsT(tt) + trainOn(tt) }, camKit), A: camPt(camKit, [p[0], p[1]]), T: [680, 440], Z: 2.6, dim0: 0 }) + smallPrint(t, LT("n204"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Unlike and like poles", ""], ["Why the ring floats", ""], ["Is it a magnet?", ""]], ["n301", "n302", "n303", "n304"], "pip");

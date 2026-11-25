@@ -38,10 +38,11 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
    windowsill, where the game's push-in starts. The place card from the start */
 const camXY = camOn([720, 780], 1.4, 860, 560), camSill = camOn([SPAT.intro[0], SPAT.intro[1] - 20], 1.7, 760, 480);
 const camLab = (t) => { const s = SCN.lab, a = eio((t - s.t0) / 1.6), c = eio((t - (s.t1 - 1.2)) / 1.2); return c > 0 ? camMix(camXY, camSill, c) : camMix(camRoom, camXY, a); };
-SC.lab = (t, s) => sr(t, camLab(t), { bench: benchTop(t) }) + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .9, out: s.t1 - .6, ...watchO(BL[0], 720) }) + bd("pip", PM[0], PM[1], PM[2], t, { in: s.t0 + 1.0, out: s.t1 - .5, flip: true, ...watchO(PM[0], 720) })
+SC.lab = (t, s) => sr(t, camLab(t), { bench: benchTop(t) }) + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .9, out: s.t1 - .6, ...watchO(BL[0], 720) }) + bd("pip", PM[0], PM[1], PM[2], t, { in: s.t0 + 1.0, flip: true, ...watchO(PM[0], 720) })
   + bd("momo", MR[0], MR[1], MR[2], t, { in: s.t0 + .3, out: s.t1 - .4, flip: true, poses: [[s.t0, "sit"], [MK("xy") - .1, "pointing"], [MK("xy") + 1.8, "sit"]] }) + pill2(t, s.t0, s.t1 + 1.4) + smallPrint(t, s.t0 + .4, ADULT_RULE) + HUD(t);
 SC.game = (t, s) => { const cE = camLab(SCN.lab.t1), p = SPAT.intro;
-  return gameScene(t, s, ["n202", HAS("n203p") ? "n203p" : "n202", "n204"], false, { world: (tt) => sr(tt, cE, { bench: benchTop(tt) }), A: camPt(cE, [p[0], p[1] - 10]), T: [680, 440], Z: 2.6, dim0: 0, finder: "pip",
+  return gameScene(t, s, ["n202", HAS("n203p") ? "n203p" : "n202", "n204"], false, { world: (tt) => sr(tt, cE, { bench: benchTop(tt) }), A: camPt(cE, [p[0], p[1] - 10]), T: [680, 440], Z: 2.6, dim0: 0, finder: "pip", carry: "lab",   // popfix 25 Nov 2026: Pip stays from the lab and glides to his game spot (he used to pop out and back in 0.4 s later)
+   
     poses: { momo: [[W("n202", "sparrow") + .1, "surprised"], [W("n202", "sparrow") + 1.8, "sit"]], basil: [[LT("n204") - .1, "waving"], [LT("n204") + 1.0, "sit"]] } }) + pill2(t, SCN.lab.t0, s.t0 + .9) + smallPrint(t, LT("n204"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Plan a fair test", ""], ["Measure one thing", ""], ["Why we repeat", ""]], ["n301p", "n302p", "n303p", "n304p"], "pip");
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1");

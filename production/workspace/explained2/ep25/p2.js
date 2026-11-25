@@ -27,10 +27,11 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
 /* 2 · Family Day at the park: the camera glides in to the fishing stall; Momo points at the rod (rod); then on to the reeds (the game) */
 const camReed = camOn([STRAT.intro[0], STRAT.intro[1] - 10], 1.6, 760, 480);
 const camPark = (t) => { const s = SCN.park, a = eio((t - s.t0) / 1.6), c = eio((t - (s.t1 - 1.2)) / 1.2); return c > 0 ? camMix(camStall, camReed, c) : camMix(camRoom, camStall, a); };
-SC.park = (t, s) => park(t, camPark(t), {}) + bd("basil", BA[0], BA[1], BA[2], t, { in: s.t0 + .9, out: s.t1 - .6, ...watchO(BA[0], 320) }) + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + 1.0, out: s.t1 - .5, ...watchO(PI[0], 320) })
+SC.park = (t, s) => park(t, camPark(t), {}) + bd("basil", BA[0], BA[1], BA[2], t, { in: s.t0 + .9, ...watchO(BA[0], 320) }) + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + 1.0, out: s.t1 - .5, ...watchO(PI[0], 320) })
   + bd("momo", MO[0], MO[1], MO[2], t, { in: s.t0 + .3, out: s.t1 - .4, poses: [[s.t0, "sit"], [MK("rod") - .1, "pointing"], [MK("rod") + 1.8, "sit"]] }) + pill2(t, s.t0, s.t1 + 1.4) + HUD(t);
 SC.game = (t, s) => { const cE = camPark(SCN.park.t1), p = STRAT.intro;
-  return gameScene(t, s, ["n202", HAS("n203b") ? "n203b" : "n202", "n204"], false, { world: (tt) => park(tt, cE, {}), A: camPt(cE, [p[0], p[1] - 4]), T: [680, 440], Z: 2.6, dim0: 0, finder: "basil",
+  return gameScene(t, s, ["n202", HAS("n203b") ? "n203b" : "n202", "n204"], false, { world: (tt) => park(tt, cE, {}), A: camPt(cE, [p[0], p[1] - 4]), T: [680, 440], Z: 2.6, dim0: 0, finder: "basil", carry: "park",   // popfix 25 Nov 2026: Basil stays from the park and glides to his game spot (he used to pop out and back in 0.5 s later)
+   
     poses: { momo: [[W("n202", "strider") + .1, "surprised"], [W("n202", "strider") + 1.8, "sit"]], pip: [[LT("n204") - .1, "waving"], [LT("n204") + 1.0, "sit"]] } }) + pill2(t, SCN.park.t0, s.t0 + .9) + smallPrint(t, LT("n204"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Cranes and trains", ""], ["Magnets in hospitals", ""], ["Design a magnet toy", ""]], ["n301m", "n302m", "n303m", "n304m"], "momo");
 SC.r1card = (t, s) => roundCard(t, s, "ROUND 1");

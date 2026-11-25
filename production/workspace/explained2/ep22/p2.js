@@ -42,7 +42,8 @@ SC.lasttime = (t, s) => { const tb = [s.t0, MK("pic2") - .2, MK("pic3") - .2], i
    the game's push-in onto the ant beside the biscuit crumb on the window ledge (the intro spot) */
 const camMaker = (t) => { const s = SCN.maker, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([1100, 640], 1.12, 1060, 600), camOn([900, 640], 1.06, 960, 600), u); };
 SC.maker = (t, s) => room(t, camMaker(t))
-  + bd("momo", BX.l, 1076, 500, t, { in: s.t0 - .4, poses: [[s.t0, "sit"]], look: 3 }) + bd("pip", 1330, 1010, 360, t, { in: s.t0 - .3, flip: true, poses: [[s.t0, "sit"]] }) + bd("basil", BX.r, 1076, 480, t, { in: s.t0 - .35, flip: true, poses: [[s.t0, "sit"]] })
+  // popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a 1.6 s establishing shot shows the PLACE only; the buddies used to
+  // pop in here and vanish with the cut to the game. They arrive once, in the game.
   + OP(ramp(t, s.t0 + .1, .3), lowerPill(60, 96, "A school maker space, Singapore ·", "Monday after school")) + smallPrint(t, s.t0 + .2, NAIL_RULE) + melt(t, s, "lasttime", .45) + HUD(t);
 SC.game = (t, s) => { const cE = camMaker(SCN.maker.t1), p = ANTAT.intro;
   return gameScene(t, s, HAS("n202b") ? ["n201", "n202b", "n203"] : ["n201", "n203"], false, { world: (tt) => room(tt, cE), A: camPt(cE, [p[0], p[1] - 10]), T: [680, 440], Z: 3.0, dim0: 0 }) + smallPrint(t, LT("n203"), LOOK_RULE); };
