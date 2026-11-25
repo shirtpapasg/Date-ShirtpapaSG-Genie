@@ -43,11 +43,11 @@
  "playlists": [
   {
    "id": "PLb8LpPqxQI4E",
-   "after": "explained-p3-ep22v4-part2"
+   "after": "explained-p3-ep22v5-part2"
   },
   {
    "id": "PLPfEuT7l4KjI",
-   "after": "explained-p3-ep22v4-part2"
+   "after": "explained-p3-ep22v5-part2"
   }
  ],
  "replaces": [
@@ -55,5 +55,6 @@
  ],
  "retire_old": true,
  "new_version_line": "▶ NEW VERSION (2 episodes): Stroke an Iron Nail Again and Again. Is It a MAGNET Now? https://www.youtube.com/watch?v=qArtvgbUn6Q and Take the Battery Away. Do the Clips STAY or DROP? https://www.youtube.com/watch?v={P1}",
- "_note": "Public, Made for Kids (the uploader sets both). NOT UPLOADED: the main session uploads after the teacher has seen EP23 (built 25 Nov 2026 from the script the teacher approved that day). Replaces the classic P3 no. 14A 'Turn A Nail Into A Magnet, Two Ways (Part A)' (GNQn_TeCRgg; videos.js '22A'), now covered by EP22 (the stroke method) + EP23 (the electrical method): retire_old takes it out of both playlists and puts the NEW VERSION line first (never deleted). {EP22_P1} is filled with EP22 v4 Part 1's live id qArtvgbUn6Q (production/youtube/explained_uploaded.json, explained-p3-ep22v4-part1); {P1} is filled by the uploader. Per the teacher's 24 Nov instruction, GNQn_TeCRgg may be set private once TheOneApp's app update for EP23 is merged (add its line to production/youtube/retired_p3_private_2026-11-24.txt). Its partner zAUE_ZuxcDs ('22B') is NOT EP23's: EP24/EP25 retire it. Chapters: chapters_p3.json EP23_P1 / EP23_P2. School Lab 7.1B line left out (labs_p3.json: status 'review'). Music: the ORIGINAL series beds (teacher 25 Nov), no Kampong Walk."
+ "_note": "Public, Made for Kids (the uploader sets both). NOT UPLOADED: the main session uploads after the teacher has seen EP23 (built 25 Nov 2026 from the script the teacher approved that day). Replaces the classic P3 no. 14A 'Turn A Nail Into A Magnet, Two Ways (Part A)' (GNQn_TeCRgg; videos.js '22A'), now covered by EP22 (the stroke method) + EP23 (the electrical method): retire_old takes it out of both playlists and puts the NEW VERSION line first (never deleted). {EP22_P1} is filled with EP22 v4 Part 1's live id qArtvgbUn6Q (production/youtube/explained_uploaded.json, explained-p3-ep22v4-part1); {P1} is filled by the uploader. Per the teacher's 24 Nov instruction, GNQn_TeCRgg may be set private once TheOneApp's app update for EP23 is merged (add its line to production/youtube/retired_p3_private_2026-11-24.txt). Its partner zAUE_ZuxcDs ('22B') is NOT EP23's: EP24/EP25 retire it. Chapters: chapters_p3.json EP23_P1 / EP23_P2. School Lab 7.1B line left out (labs_p3.json: status 'review'). Music: the ORIGINAL series beds (teacher 25 Nov), no Kampong Walk.",
+ "_ok": "Teacher 25 Nov 2026: 'OK to upload EP23'. Goes up after the EP22 v5 Part 2 replacement (so it sits between EP22 and EP24)."
 }

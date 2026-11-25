@@ -140,3 +140,4 @@
 - 20:53 UTC 25 Nov: TEACHER: 'OK to replace the fixed parts' (uploading v5 of EP17 P2, EP18 P1+P2, EP16 P1, EP19 P1, EP22 P2) and 'EP20 toy train: leave it'.
 - 20:54 UTC: EP17 v5 UPLOADED (teacher: 'OK to replace the fixed parts'): YJyG31rG41s
 - 20:55 UTC: EP17 v5 P2 UPLOADED YJyG31rG41s (chapters on, playlists done). EP18 v5 P1 8SjQiyMz9oc + P2 WUjnXo-s1rg uploaded but the quota ran out before thumbnails/playlists/retire; resume upv5.sh (18 16 19 22) after 08:00 UTC 26 Nov.
+- 21:02 UTC 25 Nov: TheOneApp #267 and #268 merged (EP24-27 in the app). TEACHER: 'OK to upload EP23' -> queued after the v5 uploads at 08:10 UTC 26 Nov (quota used up today).
