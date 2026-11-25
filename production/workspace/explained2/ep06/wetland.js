@@ -67,6 +67,7 @@ const feather = (col = "#3CC6E8", dk = "#157FB8") => `<path d="M-120 60 Q-60 -40
 /* ---------- fish ---------- */
 // a fish. origin = its middle; faces right. o: wag (t), pal {body, belly, line, fin, finLine}, scales (false hides them), spots, barbel, bigTail
 const FISHPAL = { body: "url(#fFish)", line: "#3F6488", fin: "#F2B544", finLine: "#B07A1C", scale: "#5E86AC" };
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function fishG(o = {}) { const c = o.pal || FISHPAL, wg = o.wag === undefined ? 0 : 12 * Math.sin(o.wag * 7), tk = o.bigTail || 1; let sc = "";
   if (o.scales !== false) for (let r = 0; r < 7; r++) for (let i = 0; i < 9; i++) { const x = -112 + i * 22 + (r % 2) * 11, y = -42 + r * 14, hh = 58 * Math.sqrt(Math.max(0, 1 - Math.pow((x + 14) / 126, 2))); if (Math.abs(y) < hh - 12 && x < 62) sc += `<path d="M${x} ${y - 6} q8 10 0 20" fill="none" stroke="${c.scale || c.line}" stroke-width="2.6" stroke-linecap="round" opacity=".75"/>`; }
   return `<g transform="translate(-124 0) rotate(${n2(wg)}) scale(${tk})"><path d="M6 0 L-78 -66 Q-58 0 -78 66z" fill="${c.fin}" stroke="${c.finLine}" stroke-width="5" stroke-linejoin="round"/><path d="M-10 0 L-62 -36 M-10 0 L-66 0 M-10 0 L-62 36" stroke="${c.finLine}" stroke-width="3" opacity=".6"/></g>
@@ -79,6 +80,7 @@ function fishG(o = {}) { const c = o.pal || FISHPAL, wg = o.wag === undefined ? 
   ${o.barbel ? `<path d="M132 22 q4 16 -4 24" fill="none" stroke="${c.line}" stroke-width="4" stroke-linecap="round"/>` : ""}`; }
 const CODPAL = { body: "#B7A77A", line: "#6A5A32", fin: "#A89460", finLine: "#6A5A32", scale: "#7A6A40" }, GUPPAL = { body: "#9AD0E8", line: "#2C6F92", fin: "#FF8A4C", finLine: "#C0501C", scale: "#3F86AC" };
 // the mudskipper. origin = its belly on the mud; faces left. o: prop 0..1 (pushed up on its fins), blink, fin (dorsal fin raised 0..1)
+// FACES: left (head / front to the -x side; checked on a still, 2026-11-25)
 function mudskipper(o = {}) { const pr = o.prop === undefined ? 1 : o.prop, up = 14 * pr, df = o.fin === undefined ? 1 : o.fin; let sp = "", sc = "";
   for (let i = 0; i < 12; i++) sp += `<circle cx="${n2(-70 + i * 22)}" cy="${n2(-50 + 10 * Math.sin(i * 2.1))}" r="3.2" fill="#8CE0F0" opacity=".9"/>`;
   for (let r = 0; r < 3; r++) for (let i = 0; i < 9; i++) sc += `<path d="M${-60 + i * 22 + (r % 2) * 11} ${-58 + r * 13} q-7 8 0 16" fill="none" stroke="#5E4E34" stroke-width="2.2" stroke-linecap="round" opacity=".5"/>`;

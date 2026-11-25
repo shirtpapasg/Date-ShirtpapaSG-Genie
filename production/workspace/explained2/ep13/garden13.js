@@ -97,6 +97,7 @@ const weightRow = (n = 9) => { let s = `<rect x="-52" y="-6" width="${n > 4 ? 23
    its middle; it faces RIGHT; about 230 wide, 190 tall. o.col / o.patch / o.beard; o.walk = walk phase (legs); o.head = degrees the head is
    lowered; o.ph = phase of its idle loop; o.chew
    ==================================================================================================================================== */
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function goatS(t, o = {}) { const col = o.col || "#F6EFE2", ln = o.ln || "#8A7458", pt = o.patch, ph = o.ph || 0, w = o.walk, ear = ((t + ph) % 2.7) < .28 ? Math.sin(((t + ph) % 2.7) / .28 * Math.PI) : 0, tail = 14 * Math.sin(t * 5 + ph), hd = (o.head || 0) + 2.5 * Math.sin(t * 1.3 + ph), bl = aBlink(t, ph);
   const leg = (x, i) => { const sw = w === undefined ? 0 : 16 * Math.sin(w * Math.PI * 2 + i * Math.PI); return `<path d="M${x} -78 L${n2(x + sw)} -6" stroke="${ln}" stroke-width="19" stroke-linecap="round"/><path d="M${x} -78 L${n2(x + sw)} -6" stroke="${col}" stroke-width="12" stroke-linecap="round"/><path d="M${n2(x + sw - 7)} -3 h14" stroke="#4A3F36" stroke-width="9" stroke-linecap="round"/>`; };
   const bob = w === undefined ? 1.5 * Math.sin(t * 2 + ph) : 3 * Math.abs(Math.sin(w * Math.PI * 2));

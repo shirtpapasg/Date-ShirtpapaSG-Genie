@@ -14,6 +14,7 @@ const CHK = [{ bw: 30, bh: 26, hr: 21, neck: 0, leg: 14, tail: 0, comb: 0, body:
 const egg14 = () => `<path d="M0 -96 C34 -96 44 -40 44 -30 C44 -4 24 0 0 0 C-24 0 -44 -4 -44 -30 C-44 -40 -34 -96 0 -96z" fill="url(#g14Egg)" stroke="#B9966A" stroke-width="5"/><ellipse cx="-14" cy="-62" rx="9" ry="16" fill="#fff" opacity=".6" transform="rotate(18 -14 -62)"/>`;
 /* chicken14: origin = between its feet, facing right. o.tip = the body tipped forward in degrees (overrides the act), o.wingUp 0..1,
    o.ph = a phase so that several birds do not move together, o.blink, o.look (the head turned a little: degrees) */
+// FACES: right (head / front to the +x side: hx > 0 in the code, 2026-11-25)
 function chicken14(t, o = {}) { const age = o.age === undefined ? 3 : o.age, p = { ...CHK[age] }, ph = o.ph || 0, act = o.act || "idle", L = p.line;
   if (o.pale) { p.body = "url(#g14HenP)"; p.wing = "#C4AA86"; p.line = "#8F7658"; }
   let leg = p.leg, tip = 0, bob = 0, wingUp = o.wingUp || 0, fluff = 0, jit = 0, f1 = 0, f2 = 0, lift1 = 0, lift2 = 0, hd = 0;

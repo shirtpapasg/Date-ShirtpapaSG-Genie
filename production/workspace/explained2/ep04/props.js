@@ -15,6 +15,7 @@ const XDEFS = () => `
   <clipPath id="xBoxC"><rect x="360" y="230" width="1200" height="640" rx="30"/></clipPath>${typeof XDEFS2 === "function" ? XDEFS2() : ""}`;
 
 /* ---------- the wind-up robot (short1's rig). Origin = the floor between its feet. ---------- */
+// FACES: none (seen from the front or above; checked on a still, 2026-11-25)
 function robotRig(o = {}) {
   const { liftL = 0, liftR = 0, slideL = 0, slideR = 0, rock = 0, bob = 0, head = 0, ant = 0, arm = 0, key = 0, sy = 1, blink = 0, win = 0, coil = 0 } = o;
   const L = "#147A72", sx = 1 / Math.sqrt(sy), c = Math.cos(key), eyeH = 22 * (1 - .9 * blink), n = n2;

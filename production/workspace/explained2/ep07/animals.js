@@ -137,6 +137,7 @@ const feather = (col = "#3CC6E8", dk = "#157FB8") => `<g transform="rotate(${n2(
 // a fish. origin = its middle; faces right. It always swims (its tail and fins beat). o: wag (a time; default AT), pal {body, line, fin, finLine, scale},
 // scales (false hides them), spots, barbel, bigTail, gill (the red of the gills showing 0..1), cod (three fins on its back), fancy (a guppy's patterned tail), ph
 const FISHPAL = { body: "url(#fFish)", line: "#34608A", fin: "#FFB648", finLine: "#B8741A", scale: "#5E90BC" };
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 function fishG(o = {}) { const c = o.pal || FISHPAL, tt = (o.wag === undefined ? AT : o.wag) + (o.ph || 0), wg = 13 * Math.sin(tt * 7), tk = o.bigTail || 1, blink = aBlinkAt((o.ph || 0) + 4); let sc = "";
   if (o.scales !== false) for (let r = 0; r < 7; r++) for (let i = 0; i < 9; i++) { const x = -112 + i * 22 + (r % 2) * 11, y = -42 + r * 14, hh = 60 * Math.sqrt(Math.max(0, 1 - Math.pow((x + 14) / 126, 2))); if (Math.abs(y) < hh - 12 && x < 56) sc += `<path d="M${x} ${y - 6} q8 10 0 20" fill="none" stroke="${c.scale || c.line}" stroke-width="2.6" stroke-linecap="round" opacity=".7"/>`; }
   const dorsal = o.cod ? [[-96, 44], [-40, 50], [22, 44]].map(([x, w]) => `<path d="M${x} -50 Q${x + w * .5} ${-96} ${x + w} -52z" fill="${c.fin}" stroke="${c.finLine}" stroke-width="5" stroke-linejoin="round"/>`).join("") + `<path d="M-80 52 Q-56 84 -30 56z M-14 56 Q8 84 30 52z" fill="${c.fin}" stroke="${c.finLine}" stroke-width="5" stroke-linejoin="round"/>`
@@ -156,6 +157,7 @@ const CODPAL = { body: "#C2B284", line: "#6A5A32", fin: "#B09C68", finLine: "#6A
 // the mudskipper (the giant mudskipper of Sungei Buloh): a long body that tapers to the tail, a blunt head, two big eyes close together ON TOP of its head,
 // a wide mouth, strong front fins it props itself up and "walks" on, a tall back fin, mud-brown skin with pale blue speckles.
 // origin = its belly on the mud; faces left. o: prop 0..1 (pushed up on its fins), push 0..1 (the front fin swept back: a hop), blink, fin (back fin raised 0..1), ph
+// FACES: left (head / front to the -x side; checked on a still, 2026-11-25)
 function mudskipper(o = {}) { const ph = o.ph || 0, pr = o.prop === undefined ? 1 : o.prop, up = 14 * pr, df = (o.fin === undefined ? 1 : o.fin) * (.9 + .1 * Math.sin(AT * 2.6 + ph)), blink = o.blink === undefined ? aBlinkAt(ph + .4) : o.blink, pu = o.push || 0, tw_ = 8 * Math.sin(AT * 3.1 + ph), ch = .5 + .5 * Math.sin(AT * 3.4 + ph); let sp = "", sc = "";
   for (let i = 0; i < 11; i++) sp += `<circle cx="${n2(-56 + i * 19)}" cy="${n2(-52 + 9 * Math.sin(i * 2.1) + i * 2.2)}" r="3.4" fill="#8CE0F0" opacity=".95"/>`;
   for (let r = 0; r < 2; r++) for (let i = 0; i < 8; i++) sc += `<path d="M${-40 + i * 22 + r * 11} ${n2(-62 + r * 13 + i * 3)} q-7 8 0 16" fill="none" stroke="#5E4E34" stroke-width="2.2" stroke-linecap="round" opacity=".45"/>`;

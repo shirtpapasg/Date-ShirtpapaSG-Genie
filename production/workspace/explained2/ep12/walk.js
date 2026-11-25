@@ -92,6 +92,7 @@ const TKW = 520, TKTOP = -520, TKBOT = -220;
 const guppyAt = (i, t) => { const ph = i * 1.9, sp = .22 + .05 * (i % 3), a = t * sp + ph, x = 190 * Math.sin(a) * (1 - .12 * (i % 2)), y = -370 + (i - 2.5) * 34 + 16 * Math.sin(t * .7 + i), dir = Math.cos(a) >= 0 ? 1 : -1; return [x, y, dir]; };
 const GCOL = [["#FF8A3C", "#FFD15A"], ["#4FB3FF", "#B9E3FF"], ["#FF6F91", "#FFC2D4"], ["#7BD88F", "#F6F08A"], ["#B78BFF", "#FFB0E8"], ["#FFC83A", "#FF8A3C"]];
 // one guppy, facing right (origin = its middle; body about 44 long, the fan tail 34 more)
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const guppy = (i, t) => { const [c, c2] = GCOL[i % 6], w = 14 * Math.sin(t * 7 + i * 2); return `<g transform="translate(-22 0) rotate(${n2(w)})"><path d="M0 0 Q-20 -30 -40 -26 Q-34 0 -40 26 Q-20 30 0 0z" fill="${c2}" stroke="${c}" stroke-width="3" stroke-linejoin="round"/><path d="M-8 0 L-34 -14 M-8 0 L-36 0 M-8 0 L-34 14" stroke="${c}" stroke-width="2" opacity=".7"/></g>
   <path d="M-4 -12 Q6 -26 14 -12z" fill="${c2}" stroke="${c}" stroke-width="2.5"/><ellipse rx="24" ry="13" fill="${c}"/><ellipse cx="4" cy="4" rx="16" ry="7" fill="#fff" opacity=".35"/><circle cx="13" cy="-3" r="5.5" fill="#fff"/><circle cx="14.5" cy="-3" r="3.2" fill="#2B2147"/><circle cx="15.5" cy="-4.2" r="1.2" fill="#fff"/><path d="M19 4 Q22 6 24 3" stroke="#2B2147" stroke-width="1.6" fill="none" stroke-linecap="round"/>`; };
 function tankSvg(t, o = {}) { const id = "tk" + (o.id || ""), x0 = -TKW / 2;

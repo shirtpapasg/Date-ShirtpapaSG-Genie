@@ -8,6 +8,7 @@ const youTag = (t, t0, t1, txt) => OP(ramp(t, t0, .4) * (1 - ramp(t, t1, .3)), t
 // zoom from layer A into layer B around (fx, fy): A grows and fades, B grows from small
 const zoomAB = (t, t0, A, B, fx = 960, fy = 620, d = 1.3) => { const u = clamp((t - t0) / d), e = eio(u); if (u <= 0) return A(); if (u >= 1) return B();
   return OP(1 - ss(.45, .9, u), `<g transform="translate(${fx} ${fy}) scale(${n2(1 + 7 * e * e)}) translate(${-fx} ${-fy})">${A()}</g>`) + OP(ss(.3, .8, u), `<g transform="translate(${fx} ${fy}) scale(${n2(lerp(.25, 1, e))}) translate(${-fx} ${-fy})">${B()}</g>`); };
+// FACES: right (head / front to the +x side; checked on a still, 2026-11-25)
 const bigAnt = () => `<g stroke="#2A1810" stroke-width="7" stroke-linecap="round" fill="none"><path d="M-30 20 l-40 70 M0 24 l-6 76 M34 20 l44 66 M96 -30 q40 -50 80 -40 M84 -34 q20 -50 56 -62"/></g><ellipse cx="-70" cy="0" rx="62" ry="44" fill="#4A2E22" stroke="#2A1810" stroke-width="5"/><ellipse cx="4" cy="6" rx="34" ry="28" fill="#4A2E22" stroke="#2A1810" stroke-width="5"/><circle cx="68" cy="-6" r="36" fill="#4A2E22" stroke="#2A1810" stroke-width="5"/><circle cx="82" cy="-14" r="7" fill="#1A0E08"/><ellipse cx="-84" cy="-16" rx="22" ry="10" fill="#fff" opacity=".18"/>`;
 if (PART === 1) SC.shrink = (t, s) => { const td = MK("dive"), tS = MK("sand"), tB = MK("bact"), tSh = MK("shapes"), L8 = "c708", L9 = "c709", bob = 5 * Math.sin(t * 1.1);
   // A · as small as an ant: inside the crate, on the soil. The planks tower above; an ant as big as you walks by
