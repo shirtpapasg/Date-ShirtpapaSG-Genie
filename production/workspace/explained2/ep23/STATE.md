@@ -89,3 +89,25 @@ line (Pip in the cold open and in journey 1 while the wire is still being coiled
    zAUE_ZuxcDs stays until EP24/EP25): the numbers need settling when the app is updated.
 4. From the script's own open points: "most of its magnetism" (not "all"); the bell line says "Our school bell"; the WARNING strip read in
    full (about 13 s); Pip wrong three times across the two parts; TURNS OF WIRE defined as "A turn of wire is ...".
+
+## Render (25 Nov 2026, under the shared lock): DONE, NOT UPLOADED
+- `ep23_part1.mp4` **5:36.0** (335.97 s, 10079 frames), `ep23_part2.mp4` **5:44.8** (344.83 s, 10345 frames); 1920x1080, 30 fps, AAC 48 kHz,
+  **-16.0 LUFS** both, the original series music (no Kampong Walk). `ffmpeg -v error -i <mp4> -f null -`: no output for either part.
+  mp4s NOT committed (rebuild: `./build_part.sh 1` / `2`, about 25 min each). `ep23_part1.srt` / `_part2.srt`, `sheet_part1.png` / `_part2.png`.
+- Countdowns measured in the renders (`measure_countdowns.py`): P1 Round 1 (3 s) and HOLD ON! (5 s), P2 Round 1 and Showdown (5 s): every
+  number steps 1.00 s exactly, on the tick; the bell lands on 0.
+- `qa/buddy_ghost_scan.js`: no buddy ghosting (both parts). `qa/facing_scan.js` (SERIES_FORMAT 6x, 25 Nov): no backwards movers in either
+  part (STATIC check clean; the dynamic scan lists only "buddy travels" for eye review: the buddies are drawn in screen space while the
+  camera zooms, plus the 0.45 s melt glides; none crosses the frame). Moving drawings carry FACES notes: the millipede and the cricket
+  (FACES: right; they walk / hop ON THE SPOT, no sideways slide), the road lorry (FACES: right, drives left to right). Part 1 chunks with the
+  millipede were re-rendered after the millipede's old back-and-forth creep was taken out.
+- After the first render: the journey's tray moved further below your tip (the clips are seen to drop into it), the WARNING strip moved
+  below Momo's face, the NEVER! pill and the "main electrical supply" tag kept inside the frame and clear of Momo (chunks re-rendered).
+- Intermediates deleted (out/chunks, videos, mixes). Disk 5.2 GB free after.
+- Thumbnails (`../thumb_v2.js ep23_1 ep23_2`): `thumb_part1.jpg` STAY OR DROP?! (Momo surprised, the coiled nail with clips at its tip,
+  an adult's hand pulling the holder away, electric-blue burst), `thumb_part2.jpg` MORE TURNS?! (Basil surprised, ten and twenty turns,
+  orange-red burst).
+- `upload.json` (NOT uploaded; after explained-p3-ep22v4-part2 in both playlists; replaces GNQn_TeCRgg with the NEW VERSION line, EP22 P1 =
+  qArtvgbUn6Q), `app_moments.json`, chapters `production/youtube/chapters_p3.json` EP23_P1 / EP23_P2 (`python3 make_moments.py`).
+- Review frames for the teacher: `qa/review_p1.jpg` (0:08.8, 1:49.5, 1:57.6, 2:26.0, 2:44.3, 3:42.0, 4:12.0, 5:16.5) and `qa/review_p2.jpg`
+  (1:31.8, 2:09.5, 2:20.0, 3:49.0, 4:04.6, 5:00.5, 5:15.5, 5:38.8).
