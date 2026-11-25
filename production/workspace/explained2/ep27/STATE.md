@@ -37,3 +37,12 @@ section 0). **Heart mystery hint #1:** the logo heart flickers (cyan / magenta d
 ## Upload (the main session)
 `upload.json` (one part, key `explained-p3-ep27`, after `explained-p3-ep26-part2` in both playlists: adjust at upload time), `thumb.jpg`,
 chapters `production/youtube/chapters_p3.json` key `EP27`, `app_moments.json` (videos.js entry 27, keys are placeholders).
+
+## Render (25 Nov 2026, 18:3x UTC)
+**`ep27.mp4`**: 1920x1080, 30 fps, **11562 frames = 6:25.4**, decodes end to end (0 errors), **-16.0 LUFS, true peak -1.9 dBTP**
+(the master ceiling was lowered from .84 to .78 after a first mux measured -1.2 dBTP). `sheet.png` (30 stills), `ep27.srt` (captions for
+Studio). Chunk 140-150 s re-rendered once (the look-closer's magnifier now gives way to fix card 2's stamp). Intermediates deleted.
+Rendered from git HEAD's files plus that one p1.js fix (committed with this line).
+Known small things left (not worth a re-render; for the main session's eye): Pip stands between Basil and Momo for about 1.5 s at the start
+of fix 1 (58.3-59.8 s) before his dash; during the slow-motion replay Momo already shows her shy pose (she was wrong about the fan);
+the level-up items show for about 1.6 s before the P4 teaser cuts in.
