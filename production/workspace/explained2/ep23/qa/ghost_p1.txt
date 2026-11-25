@@ -1,0 +1,26 @@
+cold>lasttime                10.41 s  ok
+lasttime>back                19.90 s  ok
+back>title                   21.68 s  ok
+title>today                  23.48 s  ok
+today>game                   32.99 s  ok
+game>goals                   45.64 s  ok
+goals>count                  51.72 s  ok
+count>r1card                 57.43 s  ok
+r1card>r1                    58.53 s  ok
+r1>waitw                     86.19 s  ok
+waitw>shrink                 90.50 s  ok
+shrink>pullout              119.24 s  ok
+pullout>answer              119.84 s  ok
+answer>lc1q                 134.36 s  ok
+lc1q>lcon                   138.09 s  ok
+lcon>mark1                  173.92 s  GHOST pip twice at 172.433-173.9 s (lcon)
+mark1>holdon                182.26 s  ok
+holdon>lc2q                 227.58 s  ok
+lc2q>lcparts                231.90 s  ok
+lcparts>mark2               263.30 s  GHOST pip twice at 261.8-263.3 s (lcparts)
+mark2>final                 277.29 s  ok
+final>liz                   283.34 s  ok
+liz>kwrecap                 299.35 s  ok
+kwrecap>cliff               312.91 s  ok
+cliff>nyk                   324.24 s  ok
+2 scene change(s) with a buddy twice or half-faded
