@@ -1,0 +1,5 @@
+facing_scan p4ep01 part 1: 3802 samples 0-380.2 s every 0.1 s; 16 FACES notes; 25 functions watched
+EYE REVIEW   120.8-121.8   rope             buddy0         moves RIGHT   202 px    from lib.js:186<lib.js:264<p1.js:151  [buddy travels]
+EYE REVIEW   177.0-179.8   shrink           buddy0         moves RIGHT  2954 px    from lib.js:186<p1.js:8<p1.js:224  [buddy travels]
+no backwards movers (0 annotated movers face the right way, 2 for eye review)
+exit 0

@@ -1,0 +1,40 @@
+{
+ "key": "explained-p4-ep01",
+ "parts": [
+  {
+   "key": "explained-p4-ep01",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/p4ep01/p4ep01.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/p4ep01/thumb.jpg",
+   "title": "Pip's Bike Won't Move! Which Fix Works? | What Is a System? | P4 Science",
+   "description": "The class bike ride starts in one hour, and Pip has taken the \"useless\" parts off his bike. Now it won't move! Pick the fix: pedal harder, tie on a skipping rope, or put back the chain? Then watch every fix get tested, mistakes and all.\n\nIn this video:\n• The problem: a bike that won't move\n• Pick the fix: 1, 2 or 3?\n• Fix 1: pedal harder (in slow motion!)\n• Fix 2: the skipping rope. Look closer at a chain and a gear\n• Be a link of the bike chain\n• Fix 3, tested: the parts interact\n• Can it stop? Why every part has a function\n• Your body and a tree are systems too\n• The words that earn marks\n• Stay for the blooper after the end!\n\nKey words: function, interact, system.\nThe words that earn marks: A system is made up of different parts. Each part has its own function. The parts interact to perform a function. When one part stops working, the whole system is likely to be affected.\n\nFor parents: this is a story, not a lecture. Children pick a fix with their fingers before each idea is tested, so they think before they are told. It opens the Systems theme of Primary 4 Science (Singapore Primary Science Syllabus 2023). A common mistake it fixes: \"if one part breaks, everything stops\". The syllabus says the whole system is \"likely\" to be affected: a bike with no bell still moves, but less safely. Also fits US NGSS 4-LS1-1 (Grade 4: structures that work together).\nTry it (with an adult): turn a bicycle upside down, turn a pedal by hand, and watch the chain turn the back wheel. Which parts move together?\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\n#PrimaryScience #Singapore #Systems #TheOneAppExplained",
+   "tags": [
+    "what is a system",
+    "systems for kids",
+    "parts and functions",
+    "primary 4 science",
+    "P4 science systems",
+    "grade 4 science",
+    "bicycle chain how it works",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLK9BW3T6kXx4",
+   "after": "FOvUezOZJbo"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "FOvUezOZJbo"
+  }
+ ],
+ "replaces": [
+  "FOvUezOZJbo"
+ ],
+ "retire_old": true,
+ "_note": "P4 EP1 (new P4 style), ONE video. Public, Made for Kids (the uploader sets both). REPLACES the old P4 EP01 FOvUezOZJbo ('7 Bike Parts Explain Every System in Science', public): never deleted. Playlists checked read-only on 25 Nov 2026 (23:0x UTC): FOvUezOZJbo is at position 0 of the P4 playlist PLK9BW3T6kXx4 ('TheOneApp, Explained · Primary 4', 22 videos, next loaPYprOWDQ) and at position 0 of the main playlist PLPfEuT7l4KjI ('TheOneApp, Explained', 96 videos, next loaPYprOWDQ); it is in no other playlist. With after = FOvUezOZJbo the new video goes in right after it, then retire_old takes the old one out of both playlists, so the new one takes its place (position 0), and the old one's description gets a first line '▶ NEW VERSION: Pip's Bike Won't Move! Which Fix Works? <new url>'. Chapters: production/youtube/chapters_p3.json key P4EP01. App moments: p4ep01/app_moments.json (videos.js P4 entry no. 1). NOT UPLOADED by the build agent: the main session reviews it and asks the teacher first.",
+ "_ok": "Script approved by the teacher 25 Nov 2026 ('ok for the first script'). Upload only after the teacher OKs the built video."
+}
