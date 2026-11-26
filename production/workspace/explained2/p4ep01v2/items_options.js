@@ -29,7 +29,11 @@ const PIPH = {   // vx = how far the face (visor) sits right of the skull's midd
   oops: { cx: 368, rim: 177, hw: 170, vx: 20, tilt: -2, chin: [410, 308], ears: [[206, 114, 62, 70, -25], [458, 88, 48, 76, 14]], paws: [[497, 160, 44, 44]] },
   surprised: { cx: 354, rim: 183, hw: 166, vx: 22, tilt: -4, chin: [386, 344], ears: [[191, 114, 64, 72, -25], [440, 94, 50, 80, 12]] },
   thinking: { cx: 364, rim: 180, hw: 166, vx: 24, tilt: -9, chin: [418, 302], ears: [[213, 111, 72, 72, -25], [460, 90, 50, 74, 12]], paws: [[474, 324, 38, 46]] },
-  cheer: { cx: 370, rim: 174, hw: 168, vx: 24, tilt: -9, chin: [404, 322], ears: [[220, 106, 70, 72, -25], [475, 91, 50, 74, 12]] } };
+  cheer: { cx: 370, rim: 174, hw: 168, vx: 24, tilt: -9, chin: [404, 322], ears: [[220, 106, 70, 72, -25], [475, 91, 50, 74, 12]] },
+  // P4 EP1 v2 (measured 26 Nov 2026 on the spr paintings, grid crops): the three poses v1 did not use
+  pointing: { cx: 350, rim: 184, hw: 162, vx: 20, tilt: -5, chin: [385, 302], ears: [[172, 122, 60, 82, -20], [445, 76, 50, 76, 10]] },
+  arms_crossed: { cx: 368, rim: 182, hw: 166, vx: 24, tilt: -5, chin: [400, 302], ears: [[196, 116, 60, 80, -20], [453, 80, 48, 76, 8]] },
+  waving: { cx: 320, rim: 180, hw: 160, vx: 20, tilt: -5, chin: [345, 302], ears: [[155, 120, 55, 76, -25], [415, 86, 48, 76, 10]] } };
 const PIPCOL = {
   sun: { id: "hSun", hi: "#FFE08A", mid: "#FFC23D", lo: "#EE9420", vent: "#7A4A12", rim: "#D97F14", visor: "#F2A126" },
   lilac: { id: "hLil", hi: "#DCCFFF", mid: "#B39BFF", lo: "#8463E6", vent: "#3E2A86", rim: "#7454D6", visor: "#9479F2" } };
@@ -85,7 +89,8 @@ const MOMOH = {
   thinking: { chin: [268, 254], pend: [262, 336], ruff: [266, 222, 112, 54, -4], hold: [[372, 292, 36, 46], [408, 196], 40], tail: [48, 305] },
   waving: { chin: [270, 276], pend: [266, 350], ruff: [268, 240, 112, 56, -4], tail: [46, 305] },
   surprised: { chin: [290, 280], pend: [292, 356], ruff: [286, 246, 112, 56, -6], hold: [[389, 284, 36, 44], [432, 186], 38], tail: [64, 299] },
-  cheer: { chin: [290, 286], pend: [292, 362], ruff: [288, 252, 112, 56, -4], hold: [[462, 186, 36, 38], [470, 92], 38], tail: [62, 299] } };
+  cheer: { chin: [290, 286], pend: [292, 362], ruff: [288, 252, 112, 56, -4], hold: [[462, 186, 36, 38], [470, 92], 38], tail: [62, 299] },
+  oops: { chin: [318, 262], pend: [322, 338], ruff: [318, 228, 112, 52, 0], tail: [40, 305] } };   // P4 EP1 v2 (measured 26 Nov)
 // the magnifier, origin = the lens centre; r = lens radius; a = the handle's angle (deg from straight down, + = to her right)
 function magP(r, a = 25, o = {}) { const ink = INK.momo, L = r * 1.45, hx = Math.sin(a * Math.PI / 180), hy = Math.cos(a * Math.PI / 180), x1 = r1(hx * r * .95), y1 = r1(hy * r * .95), x2 = r1(hx * (r + L)), y2 = r1(hy * (r + L));
   return `<defs>${lgr("mRim", [[0, "#FFE19A"], [.5, "#E8B04A"], [1, "#B9782A"]], .3, 1)}${lgr("mWood", [[0, "#B8743E"], [1, "#7C4520"]], 1, 0)}${rg("mGlass", [[0, "#FFFFFF", .95], [.7, "#D6F1FF", .85], [1, "#A9DDF5", .9]], .38, .35, .7)}</defs>`
@@ -110,7 +115,34 @@ function momoItem(op, name, H) { const ink = INK.momo;
 // little tilt, a clip and a soft shadow; the card in the paintings' palette (cream card, teal band, ink outline), words always readable
 const BASH = { sit: [470, 360, -6], oops: [400, 300, -5], waving: [372, 290, 0], thinking: [376, 300, -6], worried: [376, 300, -6], surprised: [402, 292, -6], pointing: [352, 318, -6],
   cheer: [352, 330, -6], arms_crossed: [382, 300, -6], laughing: [296, 318, -6] };
-function basilItem(op, name, H, fl) { if (op !== "A") return ""; const ink = INK.basil, [x, y, a] = H;
+/* P4 EP1 v2 (26 Nov 2026, the coordinator: "BASIL rides, so Basil needs a proper bike helmet (same style family as Pip's B, buckled,
+   ears/spines handled sensibly) whenever he rides"): Pip's helmet shell (the same vents, shine, edge band and visor) in sun-orange, sitting
+   down on Basil's crown above his eyes, so it covers the crest spines on top of his head; the spines along his back and the sides of his
+   head still show below its rim; a chin strap down his cheeks to a buckle on top of his beard. window.BASIL_HELMET (true in P4 EP1 v2) or
+   o.helmet switches it; head landmarks per pose (sprite px): cx, rim (the helmet's front edge, just above the eyes), hw (half the head's
+   width), tilt, chin (the buckle), paws (a paw that touches the helmet, drawn again on top). */
+const BASILH = {
+  sit: { cx: 434, rim: 152, hw: 168, vx: 22, tilt: -3, chin: [470, 268] },
+  oops: { cx: 345, rim: 86, hw: 160, vx: 20, tilt: -6, chin: [392, 214], paws: [[470, 66, 54, 50]] },
+  surprised: { cx: 345, rim: 76, hw: 162, vx: 22, tilt: -4, chin: [380, 236] },
+  arms_crossed: { cx: 357, rim: 80, hw: 162, vx: 22, tilt: -3, chin: [400, 202] },
+  cheer: { cx: 347, rim: 72, hw: 158, vx: 22, tilt: -4, chin: [382, 244] },
+  laughing: { cx: 340, rim: 86, hw: 170, vx: 22, tilt: -2, chin: [382, 214] },
+  pointing: { cx: 352, rim: 78, hw: 160, vx: 22, tilt: -4, chin: [392, 196] },
+  thinking: { cx: 357, rim: 76, hw: 158, vx: 22, tilt: -3, chin: [402, 206] },
+  worried: { cx: 352, rim: 78, hw: 158, vx: 22, tilt: -3, chin: [402, 198] },
+  waving: { cx: 345, rim: 78, hw: 160, vx: 22, tilt: -3, chin: [400, 234] } };
+const BASILCOL = { id: "hBas", hi: "#FFD58A", mid: "#FFA63D", lo: "#E2761C", vent: "#7A3E12", rim: "#C9661A", visor: "#F28A2E" };
+function basilHelmet(name, H) { const ink = INK.basil, k = hk(H), B = [H.chin[0], H.chin[1]]; let st = "";
+  for (const sg of [-1, 1]) { const A = hpt(H, sg * 140 + (H.vx || 0) * .5, 34), C = [A[0] + sg * 10, A[1] + (B[1] - A[1]) * .85], d = `M${r1(A[0])} ${r1(A[1])} Q${r1(C[0])} ${r1(C[1])} ${r1(B[0] + sg * 14)} ${r1(B[1])}`;
+    st += `<path d="${d}" stroke="${ink}" stroke-width="14" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#4A5A66" stroke-width="8" fill="none" stroke-linecap="round"/>`; }
+  st += `<g transform="translate(${r1(B[0])} ${r1(B[1])}) rotate(${H.tilt})"><rect x="-18" y="-11" width="36" height="22" rx="7" fill="#3B4A56" stroke="${ink}" stroke-width="5"/><rect x="-10" y="-4" width="20" height="6" rx="3" fill="#A9B8C6"/></g>`;
+  const top = redraw(name, "bp", (H.paws || []).map(ell).join(""));
+  return inHead({ ...H, hw: H.hw * 1.04 }, helmetP(BASILCOL, { vx: H.vx })) + st + top; }
+window.basilHelmetOn = () => window.BASIL_HELMET !== false;
+function basilItem(op, name, H, fl, o = {}) { const HH = BASILH[poseKey("basil", name)], hel = (o.helmet !== undefined ? o.helmet : window.basilHelmetOn()) && HH ? basilHelmet(name, HH) : "";
+  return hel + basilBadge(op, name, H, fl); }
+function basilBadge(op, name, H, fl) { if (op !== "A") return ""; const ink = INK.basil, [x, y, a] = H;
   const card = `<g transform="translate(3 6)" opacity=".28" filter="url(#b4)"><rect x="-62" y="-40" width="124" height="84" rx="12" fill="${ink}"/></g>`
     + `<rect x="-62" y="-40" width="124" height="84" rx="12" fill="#FFF8EA" stroke="${ink}" stroke-width="5"/><path d="M-62 -16 V-28 a12 12 0 0 1 12 -12 H50 a12 12 0 0 1 12 12 V-16z" fill="#2BA58E"/><path d="M-62 -16 H62" stroke="${ink}" stroke-width="3"/>`
     + T(0, -21, "P4 LAB", 17, "#fff") + T(0, 16, "SCIENTIST", 17, ink) + `<rect x="-40" y="24" width="80" height="6" rx="3" fill="#2BA58E" opacity=".35"/>`
@@ -137,6 +169,6 @@ itemsOf = function (who, name, fl, o) { const op = window.ITEM_OPT[who]; if (!op
   const key = poseKey(who, name);
   if (who === "pip") { const H = PIPH[key]; if (!H) return _orig(who, name, fl, o); if (op !== "C" && o.helmet === false) return ""; return pipItem(op, name, H); }
   if (who === "momo") { const H = MOMOH[key]; return H ? momoItem(op, name, H) : _orig(who, name, fl, o); }
-  if (who === "basil") { const H = BASH[key]; return H ? basilItem(op, name, H, fl) : _orig(who, name, fl, o); }
+  if (who === "basil") { const H = BASH[key]; return H ? basilItem(op, name, H, fl, o) : _orig(who, name, fl, o); }
   return _orig(who, name, fl, o); };
 })();
