@@ -54,7 +54,7 @@ SC.r1 = (t, s) => lockN(t, { t0: W(L1, "what") - .35, cards: R1, clues: [["they 
    the viewer off (goodbye) and shrink (a pop each). The lizard on the living room's wall clock as the camera passes */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camKit, camOn([900, 728], 6, 960, 640), u * u); };
 SC.waitw = (t, s) => { const L = "n501", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1110, 1710][i]; return bd(w, x, [1076, 1010, 1076][i], [470, 390, 490][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1110, 1710][i]; return bd(w, x, [1076, 1010, 1076][i], [470, 390, 490][i], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return KT20(t, { tableTop: ringsT(t) + trainOn(t), items: TF(900, 724, .16, trainToy(t)) }, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a toy train carriage!", 72, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#C08A54", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jaway") + .1, "surprised"], [m("jaway") + 2.3, "sit"]] };
   return trainJourney(t, s) + riders(t, s, { tin: m("jtrack") + .6, h: 190, at: { pip: [200, 1044], basil: [1720, 1050], momo: [390, 1040] }, poses: rp })
@@ -94,7 +94,7 @@ SC.fridge = (t, s) => frWorld(t, camFr(t))
    `rings`) */
 const peekFace = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved }); };
-SC.lclike = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camFr(SCN.fridge.t1), p = camPt(cE, [1440, 455]), tm = s.t0 + 1.2, tp = LT("n703p") - .5, tb = LT("n707b") - .5, tRg = MK("rings"), tSn = MK("snap");
+SC.lclike = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camFr(SCN.fridge.t1), p = camPt(cE, [1440, 455]), tm = s.t0 + 2.3, tp = LT("n703p") - .5, tb = LT("n707b") - .5, tRg = MK("rings"), tSn = MK("snap");
   return JOLT(t, [tSn], lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcLikeArt, bgc: "#FFF8EA", set: (tt) => frWorld(tt, cE), verdict: [`UNLIKE ATTRACT · LIKE REPEL`, GOODC], tv: MK("v_like"), peek: false,
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [MK("sstoo") + .1, "oops"]])
       + peekFace("pip", "l", tt, tp, tb - .4, [[LE("n703p") + .1, "cheer"], [LE("n703p") + 2.1, "sit"]], { achieved: true })
@@ -140,7 +140,7 @@ SC.bars = (t, s) => barsWorld(t, camBars(t))
 /* [LOOK CLOSER] is it a magnet? (lc20.js lcTestArt). Faces: Pip at the right the whole time (his question is answered: thinking; then
    listening: his mistake was fixed in the Showdown, no cheer); at the left Basil (pointing at bar B ON `push`; then teaching "bar B is the
    magnet"), then Momo (teaching THE REPEL TEST; cheer after her line: a key word learnt, achieved) */
-SC.lctest = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camBars(SCN.bars.t1), p = camPt(cE, [720, 800]), tm = s.t0 + 1.2, tPu = MK("push"), tmo = LT("n906m") - .5;
+SC.lctest = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camBars(SCN.bars.t1), p = camPt(cE, [720, 800]), tm = s.t0 + 2.3, tPu = MK("push"), tmo = LT("n906m") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcTestArt, bgc: "#FFF8EA", set: (tt) => barsWorld(tt, cE), verdict: [`IT REPELS, SO IT IS A MAGNET`, GOODC], tv: MK("v_test"), peek: false,
     over: (tt) => peekFace("pip", "r", tt, tm, undefined, [[tm + .2, "thinking"], [W("n903", "basils") - .2, "sit"]])
       + peekFace("basil", "l", tt, tPu - 1.2, tmo - .3, [[tPu + .1, "pointing"], [tPu + 2.4, "sit"]]) + peekFace("momo", "l", tt, tmo, undefined, [[LE("n906m") + .1, "cheer"], [LE("n906m") + 2.1, "sit"]], { achieved: true }) }); };
@@ -156,8 +156,8 @@ SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = LZAT.liz, tc = W(L, "lizard");
   return lizReveal(t, s, L, KT20(t, { lizard: c, tableTop: ringsT(t) }), c[0], c[1] + 10, tq, "It was upside down on the ceiling!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103m", at: [1270, 400], w: 900, h: 440, items: [["ff_toe", "tiny hairs", ffToe20], ["ff_ceiling", "upside down!", ffCeil20], ["ff_no", "no glue · no magnet", ffNo20]], cols: ["#E8A23A", "#5B6BD6", "#D6402E"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("n1103m") - .3, "sit"], [MK("ff_ceiling") + .1, "surprised"], [MK("ff_ceiling") + 2.2, "sit"]] })
-    + bd("basil", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("n1103m") - .3, "sit"], [MK("ff_ceiling") + .1, "surprised"], [MK("ff_ceiling") + 2.2, "sit"]] })
+    + bd("basil", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the dare for Episode 21: the kitchen table, the fridge card complete. Basil has hung his bar magnet on a string (tied round its middle,
    to a ruler laid across two piles of books): it hangs LEVEL (string). Pip gives it a gentle spin (spin): it turns, slows... and the cards slide

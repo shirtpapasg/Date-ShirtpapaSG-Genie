@@ -43,7 +43,7 @@ SC.r1 = (t, s) => lockN(t, { t0: W(L1, "these") - .35, cards: R1, clues: [["youn
 /* 5 · [LOOK CLOSER] the wrigglers (lc17.js wrigArt; WRIGGLER pops, lib.js o.at). Faces: the speaker (auto, left: Pip, then Basil); Momo at the
    right while her pick (straight to the adult) is tested (thinking) */
 const camPail = [1.5, PAILC[0] + 40, PAILC[1] - PAILH];
-SC.lcwriggler = (t, s) => { window._BUBAT = { '*': [700, 880] }; const p = camPt(camPail, [PAILC[0], PAILC[1] - PAILH]), tm = s.t0 + 1.2, tmo = LT("b502p") + 1.5;
+SC.lcwriggler = (t, s) => { window._BUBAT = { '*': [700, 880] }; const p = camPt(camPail, [PAILC[0], PAILC[1] - PAILH]), tm = s.t0 + 2.3, tmo = LT("b502p") + 1.5;
   const moFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: wrigArt, bgc: "#DDF3FF", set: (tt) => VCR(tt, { dflyAt: false, wrig: 1 }, camPail), verdict: [`THE LARVA: A WRIGGLER`, GOODC], tv: MK("v_wriggler"), peekH: 470,
     peekEv: [[LE("b502p") + .1, "pip", "pointing"], [LE("b502p") + 2.2, "pip", "sit"]],
@@ -53,8 +53,8 @@ SC.lcwriggler = (t, s) => { window._BUBAT = { '*': [700, 880] }; const p = camPt
    journey (lc17.js mosqJourney, redrawn 25 Nov: a side view of the pail, the buddies watching from its rim); one pull back out. The dragonfly on the pail's rim */
 const camGlide = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .25 * e + 5 * dive, lerp(1000, PAILC[0] + 20, m), lerp(640, PAILC[1] - PAILH, m)]; };
 SC.waitw = (t, s) => { /* teacher, 25 Nov 2026: the buddies pop out in turn as the camera dives (never fade with it) */ const L = "b601", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VCR(t, { wrig: 1 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 1250, 1056, 420, t, { in: s.t0 + .1, out: s.t1 - 1.5, flip: true, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 1520, 1066, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, flip: true, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
-      + bd("basil", 1780, 1076, 460, t, { in: s.t0 + .1, out: s.t1 - 1.42, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
+  return VCR(t, { wrig: 1 }, camGlide(dive, e)) + OP(1 - dive * 1.7, bd("momo", 1250, 1056, 420, t, { in: s.t0 + .1, out: s.t1 - 1.8,   /* popfix 2: out .3 s sooner, so they are gone 2 s before the shrunken riders pop in */ flip: true, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 1520, 1066, 440, t, { in: s.t0 + .15, out: s.t1 - 1.68, flip: true, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+      + bd("basil", 1780, 1076, 460, t, { in: s.t0 + .1, out: s.t1 - 1.74, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a mosquito egg!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#7FC6D8", 960, 540); };
 SC.shrink = (t, s) => { const m = MK;   // 25 Nov redraw (teacher: "I don't get what this scene is"): a side view of the pail's still water, YOU marked, every stage labelled on the thing, a stage strip; the buddies watch from the rim (lc17.js mosqJourney)
   const rp = { momo: [[m("jhatch") + .2, "surprised"], [m("jhatch") + 2.2, "sit"], [m("jpupa") + .2, "thinking"], [m("jpupa") + 2.4, "sit"], [m("jfly") + .2, "surprised"], [m("jfly") + 2, "sit"]],
@@ -116,7 +116,7 @@ SC.plate = (t, s) => VH(t, {}, camPlate(t)) + OP(ramp(t, s.t0 + .2, .5), lowerPi
   + ideaBubble16(t, W("b902p", "surely") - .2, s.t1 + .4, 1100, 300, plateIdea(t), P.pip, 1, "ibp") + melt(t, s, "fix", .45) + HUD(t);
 /* [LOOK CLOSER] the flower-pot plate (lc17.js plateArt; STAGNANT WATER pops, lib.js o.at). Faces: the speaker (auto, left: Basil, then Momo);
    Pip at the right while his guess is tested (thinking, then oops at the wrigglers: OUTCOMES) */
-SC.lcplate = (t, s) => { window._BUBAT = { '*': [820, 870] }; const c = camPlate(SCN.plate.t1), p = camPt(c, [PLATEH[0], PLATEH[1] - 20]), tm = s.t0 + 1.2, tpo = MK("wrigglers") + 3.6;
+SC.lcplate = (t, s) => { window._BUBAT = { '*': [820, 870] }; const c = camPlate(SCN.plate.t1), p = camPt(c, [PLATEH[0], PLATEH[1] - 20]), tm = s.t0 + 2.3, tpo = MK("wrigglers") + 3.6;
   const pipFace = t >= tm - .05 && t < tpo + .3 ? bd("pip", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tpo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: plateArt, bgc: "#F4E9D8", set: (tt) => VH(tt, { dflyAt: false }, c), verdict: [`NO STILL WATER, NO NEW MOSQUITOES`, GOODC], tv: MK("v_plate"), peekH: 470,
     peekEv: [[MK("wrigglers") + .5, "basil", "surprised"], [MK("wrigglers") + 2.4, "basil", "sit"], [W("b907m", "plates") - .1, "momo", "pointing"]],
@@ -133,7 +133,7 @@ SC.final = (t, s) => { const L = "b1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "b1102", tq = W(L, "it") - .1, a = DFLYAT.liz, td = W(L, "dragonfly");
   return lizReveal(t, s, L, VCR(t, { dflyAt: a, turn: ss(td, td + .5, t) }), a[0], a[1], tq, "It was on the handle of the watering can!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 780, qy: 690, tx: 760, ty: 975, tell: "b1104",
     fact: { id: "b1103m", at: [1300, 395], w: 880, h: 460, items: [["ff_nymph", "a dragonfly nymph", ffNymph], ["ff_gobble", "it gobbles up wrigglers", ffGobble]], cols: ["#2E7AB8", "#2FA35A"], sx: 1300, sy: 905, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("pip", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [td + .1, "pointing"], [LT("b1103m") - .3, "sit"], [LT("b1104"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, DRAGON_RULE); };
+    + bd("pip", 180, 1076, 340, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [td + .1, "pointing"], [LT("b1103m") - .3, "sit"], [LT("b1104"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, DRAGON_RULE); };
 /* 12 · the dare for Episode 18: the void deck beside the garden (sets17.js VD); the frog's loop (EP16) and the mosquito's loop on two small boards
    on the stone table; ONE set of TWO big numbered picture cards slides in low (1 Yes, the same: =, 2 No, different: ≠); the banner; Momo and
    Pip thinking (a question, no hints), Basil a hopeful smile */

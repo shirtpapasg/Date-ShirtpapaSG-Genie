@@ -97,7 +97,7 @@ SC.ask = (t, s) => { const [px, py] = pawPt("basil", BX.l, 1076, 480, false), wi
    1), Momo at the right (teaching SAME DIRECTION; cheer after her line: a key word learnt, achieved) */
 const peekFace = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved }); };
-SC.lcway = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camAsk(SCN.ask.t1), tm = s.t0 + 1.2, tmo = LT("n705m") - .5;
+SC.lcway = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camAsk(SCN.ask.t1), tm = s.t0 + 2.3, tmo = LT("n705m") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: 760, fy: 640, art: lcWayArt, bgc: "#FFF8EA", set: (tt) => room(tt, cE), verdict: [`ONE WAY: LIFT UP, NEVER SLIDE BACK`, GOODC], tv: MK("v_way"), peek: false,
     over: (tt) => peekFace("basil", "l", tt, tm) + peekFace("momo", "r", tt, tmo, undefined, [[LE("n705m") + .1, "cheer"], [LE("n705m") + 2.2, "sit"]], { achieved: true }) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n707", sayId: "n706", who: "pip", n: "1 of 2", text: TL.lines.n707.text, keys: ["one", "pole", "Repeat", "strokes", "same", "direction", "each", "time."], size: 58, y: 240, footer: FOOT, achieved: true, poses: [[LE("n707") + .2, "cheer"], [LE("n707") + 2.0, "sit"]],
@@ -145,7 +145,7 @@ SC.lc2q = (t, s) => { const d = MK("fishdip"), sl = MK("slip"), lift = t < d ? 0
     + bd("momo", RODM[0], RODM[1], RODM[2], t, { in: s.t0 + .05, poses: [[s.t0, "sit"], [LE("n901m") + .1, "thinking"]] }) + momoRod(t, { lift, fish: on ? "big" : undefined, label: "Rod 1" }) + HUD(t); };
 /* [LOOK CLOSER] more strokes? (lc22.js lcMoreArt). Faces: Momo at the left (her question is answered: thinking; then eyes wide, listening),
    Pip at the right (teaching STRONGER MAGNET; a big smile and a nod: he cheers at the big fish) */
-SC.lcmore = (t, s) => { window._BUBAT = { '*': [960, 905] }; const tm = s.t0 + 1.2, tp = LT("n905p") - .5, f = bigFishSpot();
+SC.lcmore = (t, s) => { window._BUBAT = { '*': [960, 905] }; const tm = s.t0 + 2.3, tp = LT("n905p") - .5, f = bigFishSpot();
   return lookCloser(t, s, { tz: s.t0, fx: f[0], fy: f[1] - 60, art: lcMoreArt, bgc: "#FFF8EA", set: (tt) => room(tt, camRoom), verdict: [`MORE STROKES: A STRONGER MAGNET`, GOODC], tv: MK("v_more"), peek: false,
     over: (tt) => peekFace("momo", "l", tt, tm, undefined, [[tm + .2, "thinking"], [MK("dip") - .1, "sit"]]) + peekFace("pip", "r", tt, tp) }); };
 /* the thirty-stroke hook lifts the big fish (bigfish: the reveal, achieved: Momo and Pip cheer; Basil a big grin); the FISH CAUGHT whiteboard
@@ -168,8 +168,8 @@ SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = ANTAT.liz, tc = W(L, "ant");
   return lizReveal(t, s, L, room(t, W0()), c[0] + 6, c[1] - 12, tq, "It was on the edge of the sink!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103b", at: [1250, 400], w: 1000, h: 440, items: [["ff_food", "a smell path", ffFood22], ["ff_follow", "again and again", ffFollow22], ["ff_strong", "a stronger path", ffStrong22]], cols: ["#E8A23A", "#C2577A", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"], [LE("n1103b") + .1, "laughing"]] } })
-    + bd("momo", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103b") - .3, "sit"], [LT("n1104") - .1, "waving"]], wave: true })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_strong") + .1, "surprised"], [MK("ff_strong") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE) + smallPrint(t, s.t0 + .5, CRUMB_RULE, 1); };
+    + bd("momo", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103b") - .3, "sit"], [LT("n1104") - .1, "waving"]], wave: true })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_strong") + .1, "surprised"], [MK("ff_strong") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE) + smallPrint(t, s.t0 + .5, CRUMB_RULE, 1); };
 const W0 = () => [1, 960, 540];
 
 /* 12 · the dare for Episode 23: Momo, beside the pond, holds a NEW iron nail with a long plastic-covered wire coiled round it, its two bare

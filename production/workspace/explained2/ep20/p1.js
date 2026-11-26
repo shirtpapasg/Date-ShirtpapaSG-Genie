@@ -88,7 +88,7 @@ SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, clues: DARE_CLUES.map((c, i) => 
    each shrinks with a pop. The spider on the whiteboard's pen tray as the camera passes */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([GAP[0] - 40, GAP[1] - 120], 1.2, 960, 520), camOn([GAP[0], GAP[1] - 40], 4.4, 960, 540), u * u); };
 SC.waitw = (t, s) => { const L = "m601", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1380, 1700][i]; return bd(w, x, [1076, 1010, 1076][i], [470, 390, 490][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1380, 1700][i]; return bd(w, x, [1076, 1010, 1076][i], [470, 390, 490][i], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return room(t, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the top ring magnet!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#E3EEE6", 960, 600); };   // 24 Nov: the wall colour of the side-view journey that follows
 SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jstop") + .1, "surprised"], [m("jstop") + 2.3, "sit"]], basil: [[m("jbelow") + .4, "pointing"], [m("jbelow") + 2.6, "sit"]] };
   // 24 Nov: a SIDE VIEW (lc20.js ringJourney): the buddies stand on the bench at the pencil's foot (in the world), every tag joined to what it names
@@ -127,7 +127,7 @@ SC.bench = (t, s) => benchWorld(t, camBench(t))
    achieved), then Momo (teaching ATTRACTION; a smile and a nod), then Pip again (pointing along the row ON `shapes`) */
 const peekFace = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved }); };
-SC.lcpoles = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camBench(SCN.bench.t1), p = camPt(cE, [MAGT[0] - 100, MAGT[1] - 30]), tm = s.t0 + 1.2, tB = MK("bunch"), tp = LT("m805p") - .5, tmo = LT("m807m") - .5, tSh = MK("shapes");
+SC.lcpoles = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camBench(SCN.bench.t1), p = camPt(cE, [MAGT[0] - 100, MAGT[1] - 30]), tm = s.t0 + 2.3, tB = MK("bunch"), tp = LT("m805p") - .5, tmo = LT("m807m") - .5, tSh = MK("shapes");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcPolesArt, bgc: "#FFF8EA", set: (tt) => benchWorld(tt, cE), verdict: [`TWO POLES: STRONGEST AT THE ENDS`, GOODC], tv: MK("v_poles"), peek: false,
     over: (tt) => peekFace("basil", "r", tt, tm, undefined, [[tm + .2, "thinking"], [tB + .1, "oops"]])
       + peekFace("pip", "l", tt, tp, tmo - .3, [[LE("m805p") + .1, "cheer"], [LE("m805p") + 2.1, "sit"]], { achieved: true })
@@ -195,7 +195,7 @@ SC.pushpull = (t, s) => ppWorld(t, camPP(t))
   + bd("pip", 1420, 1010, 380, t, { in: s.t0 + .15, flip: true }) + bd("basil", 1710, 1076, 480, t, { in: s.t0 + .2, flip: true }) + HUD(t);
 /* [LOOK CLOSER] pull or push? (lc20.js lcPushPullArt). Faces: Momo at the right the whole time (her question is answered: thinking; cheer ON
    kw_repel: a key word learnt); at the left Basil (teaching REPEL; a smile after), then Pip (a nod at the verdict) */
-SC.lcpushpull = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camPP(SCN.pushpull.t1), p = camPt(cE, [1210, 790]), tm = s.t0 + 1.2, tK = MK("kw_repel"), tb = LT("m1007b") - .5, tp = LT("m1008p") - .5;
+SC.lcpushpull = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camPP(SCN.pushpull.t1), p = camPt(cE, [1210, 790]), tm = s.t0 + 2.3, tK = MK("kw_repel"), tb = LT("m1007b") - .5, tp = LT("m1008p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcPushPullArt, bgc: "#FFF8EA", set: (tt) => ppWorld(tt, cE), verdict: [`PULL OR PUSH: IT DEPENDS WHICH POLES FACE`, GOODC], tv: MK("v_pushpull"), peek: false,
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [W("m1003", "red") - .2, "sit"], [tK + .1, "cheer"], [tK + 2.3, "sit"]]) + peekFace("basil", "l", tt, tb, tp - .3) + peekFace("pip", "l", tt, tp) }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "m1010", sayId: "m1009", who: "basil", n: "2 of 2", text: "Magnets can attract (pull) or repel (push) one another. This depends on which poles are facing each other.", keys: ["attract", "(pull)", "repel", "(push)", "poles", "facing"], size: 58, y: 240, footer: FOOT, achieved: true, poses: [[LE("m1010") + .2, "cheer"], [LE("m1010") + 2.0, "sit"]],
@@ -209,8 +209,8 @@ SC.final = (t, s) => { const L = "m1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = SPAT.liz, tc = W(L, "spider");
   return lizReveal(t, s, L, SR20(t, { spider: c, bench: benchProps(t) }), c[0], c[1] - 22, tq, "It was hanging under the bench!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1104",
     fact: { id: "m1103b", at: [1270, 400], w: 900, h: 440, items: [["ff_grass", "baby spiders", ffGrass20], ["ff_up", "the wind lifts them", ffUp20], ["ff_far", "far away!", ffFar20]], cols: ["#4BA862", "#5B6BD6", "#E8A23A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("m1103b") - .3, "sit"], [MK("ff_grass") + .1, "surprised"], [MK("ff_grass") + 2.2, "sit"]] })
-    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("m1103b") - .3, "sit"], [MK("ff_grass") + .1, "surprised"], [MK("ff_grass") + 2.2, "sit"]] })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the cliffhanger: Basil's two bar magnets on the front bench in front of THE POLES BOARD (its pull and push pairs drawn). pairs1: a red
    end and a blue end slide together: click (green chip pull); pairs2: one is turned round: a red end to a red end, they push apart (magenta

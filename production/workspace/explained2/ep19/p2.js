@@ -58,7 +58,7 @@ window.SHELF_AWAY = (t) => { if (PART !== 2) return 0; const w = SCN.waitw; retu
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([TX + 100, TY - 60], 1.15, 960, 640), camOn([BIN19[0] - 60, BIN19[1] - 250], 5, 960, 540), u * u); };
 const wetLeaf = (x, y, k = 1) => TF(x, y, k, `<path d="M-50 6 Q-10 -26 50 -4 Q10 26 -50 6z" fill="#7A9A3A" stroke="#4E6A22" stroke-width="4"/><path d="M-46 5 Q0 0 46 -3" stroke="#4E6A22" stroke-width="3"/><circle cx="20" cy="-6" r="5" fill="#E6F6FF" stroke="#9FCFE8" stroke-width="1.5"/>`, -8);
 SC.waitw = (t, s) => { const L = "n501", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1, sn = SNAT.waitw;
-  const buds = ["momo", "basil", "pip"].map((w, i) => { const x = [280, 560, 1720][i]; return bd(w, x, 1076, [460, 440, 460][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["momo", "basil", "pip"].map((w, i) => { const x = [280, 560, 1720][i]; return bd(w, x, 1076, [460, 440, 460][i], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return VD19(t, { items0: wetLeaf(sn[0] + 4, sn[1] + 2, 1.1), top: magT(t) + cansOn(t) + rowOn(t) }, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be an aluminium can!", 72, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#0E1A3A", 960, 540); };
 SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jclang") + .1, "surprised"], [m("jclang") + 2.2, "sit"]] };
   return canJourney(t, s) + riderBox(t, 300, 1066, .9) + riderBox(t, 1700, 1070, .7)
@@ -96,7 +96,7 @@ SC.table = (t, s) => rowWorld(t, camRow(t))
    at the left Basil (teaching non-magnetic; confident after his line: he was right) then Pip (teaching the surprise; confident after it) */
 const peekFace = (who, side, t, tin, tout, poses) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true }); };
-SC.lcmetals = (t, s) => { window._BUBAT = { basil: [760, 905], pip: [700, 905], momo: [1220, 905] }; const cE = camRow(SCN.table.t1), p = camPt(cE, [TX, TY + 50]), tm = s.t0 + 1.2, tM = MK("metals"), tb = LT("n704b") - .5, tp = LT("n705p") - .5;
+SC.lcmetals = (t, s) => { window._BUBAT = { basil: [760, 905], pip: [700, 905], momo: [1220, 905] }; const cE = camRow(SCN.table.t1), p = camPt(cE, [TX, TY + 50]), tm = s.t0 + 2.3, tM = MK("metals"), tb = LT("n704b") - .5, tp = LT("n705p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: metalsArt, bgc: "#FFF8EA", set: (tt) => rowWorld(tt, cE), verdict: [`NOT ALL METALS ARE MAGNETIC`, GOODC], tv: MK("v_metals"), peek: false,
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [tM + .1, "surprised"], [tM + 2.0, "oops"]]) + peekFace("basil", "l", tt, tb, tp - .2, [[LE("n704b") + .1, "arms_crossed"]]) + peekFace("pip", "l", tt, tp, undefined, [[LE("n705p") + .1, "arms_crossed"]]) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n709", sayId: "n708", who: "pip", n: "1 of 2", text: "Objects that are not attracted to magnets are made of non-magnetic materials. Non-magnetic materials include ceramic, fabric, glass, plastic, rubber and wood. Metals such as aluminium and copper are also non-magnetic.", keys: ["not", "attracted", "non-magnetic", "materials", "aluminium", "copper"], size: 44, y: 215, footer: FOOT, achieved: true, poses: [[LE("n709") + .2, "cheer"], [LE("n709") + 2.0, "sit"]],
@@ -148,7 +148,7 @@ SC.interact = (t, s) => { window._BUBAT = { pip: [760, 300] }; const [u, cam] = 
 /* [LOOK CLOSER] how magnets interact (art19.js interactArt): the tray fills the panel; the magnet meets each object; CLASSIFY pops; the halves
    get the book's names (groups). Faces: Momo at the left (auto: she teaches; pointing at the two halves after her line); Basil at the right
    nodding along (listening) */
-SC.lcinteract = (t, s) => { window._BUBAT = { '*': [960, 250] }; const cE = camIA(SCN.interact.t1)[1], p = camPt(cE, [TX, TY - 46]), tm = s.t0 + 1.2;
+SC.lcinteract = (t, s) => { window._BUBAT = { '*': [960, 250] }; const cE = camIA(SCN.interact.t1)[1], p = camPt(cE, [TX, TY - 46]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: interactArt, bgc: "#FFF8EA", set: (tt) => VD19(tt, { snail: false, top: magT(tt) }, cE), verdict: [`TWO GROUPS: MAGNETIC AND NON-MAGNETIC`, GOODC], tv: MK("v_classify"), peekH: 470,
     peekEv: [[LE("n906m") + .1, "momo", "pointing"], [LE("n906m") + 2.0, "momo", "sit"]],
     over: (tt) => peekFace("basil", "r", tt, tm) + lcStrip(tt, "n905", "One of the ways to classify these materials is to observe how they interact with a magnet.", { t1: LT("n906m") + 1.0, size: 38 }) }); };
@@ -163,8 +163,8 @@ SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = SNAT.liz, tc = W(L, "snail");
   return lizReveal(t, s, L, VD19(t, { top: magT(t) }), c[0], c[1] - 20, tq, "It was on a wet leaf of the potted plant!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 700, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103b", at: [1270, 400], w: 900, h: 440, items: [["ff_deep", "deep in the sea", ffDeep19], ["ff_snail", "iron in its shell", ffSnail19], ["ff_magnet", "a magnet can attract it!", ffTug19]], cols: ["#5B6BD6", "#3A3A46", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("n1103b") - .3, "sit"]] })
-    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_magnet") + .1, "surprised"], [MK("ff_magnet") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("n1103b") - .3, "sit"]] })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_magnet") + .1, "surprised"], [MK("ff_magnet") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the dare for Episode 20: the test table, complete. A pencil stands upright in a lump of plasticine; Pip slides on two ring magnets (rings):
    the top one stops in mid-air and FLOATS above the bottom one, a clear gap (float). ONE set of TWO big numbered cards slides in low (dareIn):

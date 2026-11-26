@@ -91,7 +91,7 @@ SC.r1 = (t, s) => lockN(t, { cards: DARE_CARDS, clues: DARE_CLUES.map((c, i) => 
    each shrinks with a pop. The swallow on the edge of the sports shed's roof as the camera passes */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([HG[0] + 40, HG[1] - 160], 1.2, 960, 500), camOn([HG[0], HG[1]], 4.6, 960, 560), u * u); };
 SC.waitw = (t, s) => { const L = "m601", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [300, 1430, 1730][i]; return bd(w, x, [1076, 1060, 1076][i], [470, 460, 490][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [300, 1430, 1730][i]; return bd(w, x, [1076, 1060, 1076][i], [470, 460, 490][i], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return field(t, camWait(t), { rig: { a: 0 } }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the hanging magnet!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#CFE6F0", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jback") + .1, "thinking"], [m("jback") + 2.0, "sit"], [m("jstop2") + .1, "surprised"], [m("jstop2") + 2.2, "sit"]] };
   return magnetJourney(t, s) + riders(t, s, { tin: m("jspin") + .6, h: 200, at: { pip: [230, 1000], basil: [1700, 1004], momo: [420, 996] }, poses: rp })
@@ -127,7 +127,7 @@ SC.goal = (t, s) => field(t, camGoal(t), { rig: { a: 0 }, ...fieldCones(t), fron
 /* [LOOK CLOSER] which way? (lc21.js lcPlacesArt). Faces: Pip at the left first (his goalpost idea is tested: thinking; OOPS as the field
    magnet stops far from the goalpost, and he stays shy to the verdict: the 23 Nov rule; he leaves when Basil comes to teach); Momo at the
    right (teaching FREELY SUSPENDED; cheer after her line: achieved); Basil at the left (teaching NORTH-SOUTH DIRECTION; a smile and a nod) */
-SC.lcplaces = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camGoal(SCN.goal.t1), p = camPt(cE, HG), tm = s.t0 + 1.2, tO = MK("field") + 1.5, tMo = LT("m805m") - .5, tB = LT("m806b") - .5, tK = MK("kw_freely_suspended"), tK2 = MK("kw_north_south_direction");
+SC.lcplaces = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camGoal(SCN.goal.t1), p = camPt(cE, HG), tm = s.t0 + 2.3, tO = MK("field") + 1.5, tMo = LT("m805m") - .5, tB = LT("m806b") - .5, tK = MK("kw_freely_suspended"), tK2 = MK("kw_north_south_direction");
   const kwLines = (tt) => { let o = ""; if (tt > tK + .3 && tt < tK + 3.2) { const a = ramp(tt, tK + .3, .3) * (1 - ramp(tt, tK + 2.9, .3)); o += [lcXY(tt, s, PX[0], PY0 + 140), lcXY(tt, s, PX[2] + 80, PY0 + 250)].map(([x, y]) => pline(640, 340, x, y, a)).join(""); }
     if (tt > tK2 + .3 && tt < tK2 + 3.2) { const a = ramp(tt, tK2 + .3, .3) * (1 - ramp(tt, tK2 + 2.9, .3)), [x, y] = lcXY(tt, s, 120, 150); o += pline(1240, 340, x, y, a); } return o; };
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcPlacesArt, bgc: "#FFF8EA", set: (tt) => field(tt, cE, { rig: { a: 0 }, ...fieldCones(tt), front: coneDash(tt) }), verdict: [`SAME LINE EVERY TIME: NORTH–SOUTH`, GOODC], tv: MK("v_places"), peek: false,
@@ -192,7 +192,7 @@ SC.earthq = (t, s) => field(t, camEarthq(t), { rig: { a: 0 }, ...fieldCones(t) }
 /* [LOOK CLOSER] fly up and see the whole Earth (lc21.js lcEarthArt). Faces: Momo at the left the whole time (her question is answered:
    thinking; eyes wide as the Earth appears: listening; CHEER at EARTH BEHAVES LIKE A MAGNET: a key word learnt); Basil at the right from the
    key word (surprised: his wild guess was nearly right; then he teaches what it means; a smile) */
-SC.lcearth = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camEarthq(SCN.earthq.t1), p = camPt(cE, HG), tm = s.t0 + 1.2, tK = MK("kw_earth_behaves_like_a_magnet");
+SC.lcearth = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camEarthq(SCN.earthq.t1), p = camPt(cE, HG), tm = s.t0 + 2.3, tK = MK("kw_earth_behaves_like_a_magnet");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcEarthArt, bgc: "#0B1033", set: (tt) => field(tt, cE, { rig: { a: 0 }, ...fieldCones(tt) }), verdict: [`THE EARTH TURNS IT: NO TOUCHING`, GOODC], tv: MK("v_earth"), peek: false,
     over: (tt) => peekFace("momo", "l", tt, tm, undefined, [[tm + .2, "thinking"], [MK("earth") - .2, "sit"], [tK + .1, "cheer"], [tK + 2.3, "sit"]])
       + peekFace("basil", "r", tt, tK - .3, undefined, [[tK + .15, "surprised"], [tK + 2.4, "sit"]]) }); };
@@ -207,8 +207,8 @@ SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = SWAT.liz, tc =
   const swoop = sw > 0 && sw < 1 ? TF(lerp(1300, 2100, sw), 560 - 120 * Math.sin(Math.PI * sw), .22, swallowFly(t, { look: 1, ph: 2 })) : "";
   return lizReveal(t, s, L, field(t, null, { swallow: c, rig: { a: 0 }, ...fieldCones(t), front: swoop }), c[0] - 4, c[1] - 10, tq, "It was on the netball hoop!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1104",
     fact: { id: "m1103b", at: [1270, 400], w: 900, h: 440, items: [["ff_map", "from far away", ffMap21], ["ff_earth", "they feel the Earth's magnet", ffEarth21], ["ff_way", "it helps them find the way", ffWay21]], cols: ["#4BA862", "#5B6BD6", "#E8A23A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .2, "pointing"], [LT("m1103b") - .3, "sit"], [LT("m1104") - .1, "waving"], [LE("m1104") + 1.6, "sit"]], wave: true })
-    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_earth") + .1, "surprised"], [MK("ff_earth") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .2, "pointing"], [LT("m1103b") - .3, "sit"], [LT("m1104") - .1, "waving"], [LE("m1104") + 1.6, "sit"]], wave: true })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_earth") + .1, "surprised"], [MK("ff_earth") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the cliffhanger: Momo holds her clear hiking compass flat over the cones (compass: a magnifier opens on it: its needle swings, slows
    and settles along the cones' line, red end towards the rain tree); a big ? by the needle (qneedle); PART 2. Momo big at the left (talks,

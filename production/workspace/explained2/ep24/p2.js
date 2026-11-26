@@ -79,7 +79,7 @@ const peek24 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 |
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved, watch: W_.x }); };
 /* [LOOK CLOSER] our plan (lc24.js lcTableArt): the book's table fills row by row. Faces: Pip lower left (listening), Momo lower right
    (teaching VARIABLE TO BE MEASURED; cheer after her line) */
-SC.lctable = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1150, 640]), tm = s.t0 + 1.2;
+SC.lctable = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1150, 640]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcTableArt, bgc: "#FFFDF6", set: (tt) => sr(tt, cE, { bench: benchTop(tt) + things(tt) }), verdict: ["CHANGE ONE · KEEP THE REST THE SAME · MEASURE ONE", GOODC], tv: MK("v_plan"), peek: false,
     over: (tt) => peek24("pip", "l", tt, tm, undefined, []) + peek24("momo", "r", tt, LT("n605m") - .5, undefined, [[LE("n605m") + .1, "cheer"], [LE("n605m") + 2.2, "sit"]], { achieved: true }) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n607", sayId: "n606", who: "pip", n: "1 of 2", tab: "Our prediction", text: TL.lines.n607.text, keys: ["increase", "number", "batteries,", "strength"], size: 56, y: 240, footer: FOOT, poses: [[LE("n607") + .2, "sit"]],
@@ -108,7 +108,7 @@ SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 250], '*': [1250, 250] }; c
 /* 8 · Be a steel paper clip! A glide down to Y's tray (no cut); the buddies wave the viewer off, then shrink */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camRoom, camOn([TRX[1], TRY - 30], 5.4, 960, 600), u * u); };
 SC.waitw = (t, s) => { const L = "n801", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "pip", "momo"].map((w, i) => { const X = [BL, PM, MR][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "pip", "momo"].map((w, i) => { const X = [BL, PM, MR][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return sr(t, camWait(t), { bench: benchTop(t, { xyO: { lift: 60 } }) }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a steel paper clip!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#F4EFE6", 960, 600); };
 const riders24 = (t, s, o) => { let out = ""; for (const who of ["momo", "pip", "basil"]) { const [x, y] = o.at[who]; out += buddy(who, x, y, o.h || 200, t, { in: o.tin + ({ pip: 0, basil: .15, momo: .3 })[who], poses: (o.poses || {})[who] || [], tag: false, rim: "rimB", jump: (o.jolts || []).map((tj) => [tj, 34]), ...watchO(x, o.look || 960) }); } return out; };
 SC.shrink = (t, s) => { const m = MK, rp = { momo: glanceWave(m("jback") + .1), pip: [[m("c2") + .1, "surprised"], [m("c2") + 1.8, "sit"]] };
@@ -123,7 +123,7 @@ const camQ2 = (t) => { const s = SCN.lc2q, u = eio((t - s.t0) / (s.t1 - s.t0)); 
 SC.lc2q = (t, s) => sr(t, camQ2(t), { bench: benchTop(t) }) + bd("basil", 1060, 1010, 400, t, { in: s.t0 + .15, flip: true, ...watchO(1060, 1150) }) + bd("pip", MR[0], MR[1], MR[2], t, { in: s.t0 + .1, flip: true, ...watchO(MR[0], 1150) })
   + bd("momo", BL[0], BL[1], BL[2], t, { in: s.t0 + .05, poses: [[s.t0, "sit"], [LE("n901m") + .05, "thinking"]] }) + HUD(t);
 /* [LOOK CLOSER] count it again (lc24.js lcCountArt). Faces: Momo lower left (listening), Pip lower right (teaching RELIABLE; cheer after) */
-SC.lccount = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [1150, 640]), tm = s.t0 + 1.2;
+SC.lccount = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [1150, 640]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcCountArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt) }), verdict: ["COUNT A FEW TIMES: RELIABLE", GOODC], tv: MK("v_rel"), peek: false,
     over: (tt) => peek24("momo", "l", tt, tm, undefined, []) + peek24("pip", "r", tt, LT("n904p") - .5, undefined, [[LE("n904p") + .1, "cheer"], [LE("n904p") + 2.2, "sit"]], { achieved: true }) }); };
 /* the crane gets the two-battery hook (Y): it lifts the steel bolt and drops it into the paper lorry; READY! on the board (drop). Basil and
@@ -147,8 +147,8 @@ SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 0, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = SPAT.liz, tc = W(L, "sparrow");
   return lizReveal(t, s, L, sr(t, W0, { bench: railing24 + benchTop(t, { xyO: {} }), bug: c }), c[0], c[1] - 10, tq, "It was on the railing, just outside the door!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103p", at: [1250, 400], w: 760, h: 440, items: [["ff_heart", "hundreds of beats a minute", ffHeart24], ["ff_count", "counted again and again", ffCount24]], cols: ["#E0453A", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103p") - .3, "sit"]] })
-    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_heart") + .2, "surprised"], [MK("ff_heart") + 1.6, "sit"], [LT("n1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103p") - .3, "sit"]] })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_heart") + .2, "surprised"], [MK("ff_heart") + 1.6, "sit"], [LT("n1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the dare for Episode 25: Pip's HDB kitchen (EP15's kitchen, kitchen15.png), the fridge at the end of the counter: Pip gives the door a
    gentle push (push) and it swings shut by itself (shut) and stays. The THREE big cards (ep24dare.js) slide in BEFORE any answer is shown */

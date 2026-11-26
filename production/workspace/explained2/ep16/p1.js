@@ -33,6 +33,13 @@ SC.cold = (t, s) => { const tp = MK("budsIn");
   return VP16(t, { dawn: 1 - .35 * ss(0, 6, t), tad: 0, items: wriggle(t) }, camCold(t)) + cards3(t, "c", MK("cardsIn")) + budsCold(t, tp)
     + OP(ramp(t, .2, .4), lowerPill(60, 96, "A community garden, Singapore ·", "dawn")); };
 
+/* popfix 2 (teacher, 25 Nov 2026: "pet buddies popping out and gone ... starting pet buddies scene"): the cold open's buddies pop in on
+   the three wired pop sounds (budsIn) only about 2 s before the melt into "Last time". The sound stays; the picture changes: the buddies
+   no longer pop out at the melt. They stay, opaque and on top, while the place melts away, and pop out in turn (the order they came, the
+   usual .2 s shrink) 2.65 s after each arrived, a moment into "Last time" (never on screen under 2.5 s; never faded: SERIES_FORMAT 6) */
+const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"); let r = a > .01 ? OP(a, F.svg) : "";
+  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2); if (k >= .02) r += buddy0(who, c.x, c.y, c.h, t, { ...c.o, k: (c.o.k || 1) * k }); }
+  return r; };
 /* 2 · "Last time...": EP15's dare, word for word. ONE calm picture: the three dare cards side by side, a gentle push-in, the big ?, the three
    numbered cards; each steps forward and its card lights while Heart says it (>= 2.5 s each). WIRED */
 SC.lasttime = (t, s) => { const L = "e203", tc = [W(L, "one"), W(L, "two"), W(L, "three")], z = 1 + .04 * eio((t - s.t0) / 8), k = ramp(t, s.t0 + .05, .5), cur = tc.filter((x) => t >= x - .15).length - 1;
@@ -42,7 +49,7 @@ SC.lasttime = (t, s) => { const L = "e203", tc = [W(L, "one"), W(L, "two"), W(L,
     + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${boards}</g>`
       + qMark(t, W("e202", "what") - .1, 960, 240)
       + DARE_CARDS.map((c, i) => TF(560 + i * 400, 880, .5 * spring(t, tc[i] - .1, .45), ansCard(i + 1, c, { w: 430, h: 290, size: 50, pulse: cur === i ? .9 : pulse(t, tc[i], .04, .9) }))).join("")
-      + TF(960, 1010, spring(t, W("e202", "what") - .1, .4), tpill(0, 0, DARE_LABEL, 40, P.sun, P.ink, { w: 700 }))) + melt(t, s, "cold", .5) + HUD(t); };
+      + TF(960, 1010, spring(t, W("e202", "what") - .1, .4), tpill(0, 0, DARE_LABEL, 40, P.sun, P.ink, { w: 700 }))) + coldHold(t, s, .5) + HUD(t); };
 /* back at the pond: the camera drifts on along the water (it carries on under the title and into the game: no cut). Pip keeps his answer to
    himself (three fingers hidden behind his back: a small hop) */
 const camBack = (t) => { const u = clamp((t - SCN.back.t0) / (SCN.title.t1 - SCN.back.t0)); return [1.08 + .05 * eio(u), lerp(1000, 1120, eio(u)), lerp(740, 700, eio(u))]; };
@@ -75,7 +82,7 @@ SC.pond = (t, s) => VP16(t, {}, camPond(t)) + bd("pip", 330, 1076, 500, t, { in:
 
 /* 7 · [LOOK CLOSER] the frog eggs in their jelly (art16.js eggsArt; JELLY-LIKE COVERING pops, lib.js o.at); the book's strip (Heart reads it).
    Two faces peek in: Basil (the speaker, auto) at the left; Momo at the right until her guess is answered (thinking, then oops: OUTCOMES) */
-SC.lceggs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const p = camPt(camPond(SCN.pond.t1), [980, 740]), tm = s.t0 + 1.2, tmo = LT("e605b") + 3.9;
+SC.lceggs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const p = camPt(camPond(SCN.pond.t1), [980, 740]), tm = s.t0 + 2.3, tmo = LT("e605b") + 3.9;
   const momoFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: eggsArt, bgc: "#DDF2E8", set: (tt) => VP16(tt, {}, camPond(SCN.pond.t1)), verdict: [`EGGS KEPT SAFE AND WET`, GOODC], tv: MK("v_eggs"), peekH: 470,
     peekEv: [[LE("e607p") + .1, "pip", "thinking"], [W("e608", "protects") - .1, "pip", "sit"], [MK("v_eggs") + .1, "basil", "cheer"]],
@@ -159,7 +166,7 @@ SC.hen = (t, s) => VG16(t, { hens: HENS(t), walk: t < MK("henIn") + 2.4, mantisA
   + smallPrint(t, MK("henIn"), HEN_RULE) + melt(t, s, "mark1", .45) + HUD(t);
 /* [LOOK CLOSER] the chick beside the hen (art16.js chickArt): the parts on BOTH birds, both peck, CHICK pops; the 2x2. Faces: the speaker
    (auto, left); Basil at the right until his colour rule is answered (thinking, then oops: OUTCOMES at Pip's line) */
-SC.lcchick = (t, s) => { window._BUBAT = { '*': [1360, 250] }; const p = camPt(camHen(SCN.hen.t1), [980, 860]), tm = s.t0 + 1.2, tmo = LT("e1105p") + 3.9;
+SC.lcchick = (t, s) => { window._BUBAT = { '*': [1360, 250] }; const p = camPt(camHen(SCN.hen.t1), [980, 860]), tm = s.t0 + 2.3, tmo = LT("e1105p") + 3.9;
   const basFace = t >= tm - .05 && t < tmo + .3 ? bd("basil", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: chickArt, bgc: "#FFF3DC", set: (tt) => VG16(tt, { hens: HENS(SCN.hen.t1), mantisAt: false }, camHen(SCN.hen.t1)), verdict: [`LOOKS LIKE THE ADULT`, LIKEC], tv: MK("v_chick"), peekH: 470,
     peekEv: [[MK("kw_chick") + .1, "momo", "cheer"]], over: (tt) => basFace }); };
@@ -172,7 +179,7 @@ SC.final = (t, s) => { const L = "e1301"; return finalScene(t, s, L, 0, [[s.t0, 
 SC.liz = (t, s) => { const L = "e1302", tq = W(L, "it") - .1, f = FROGAT.liz, tf = W(L, "frog");
   return lizReveal(t, s, L, VP16(t, { frogAt: f }), f[0] + 4, f[1] - 18, tq, "It was on the garden tap, beside the pond!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 720, tx: 760, ty: 975, tell: "e1304",
     fact: { id: "e1303", at: [1270, 440], w: 860, h: 460, items: [["ff_foam", "a ball of foam", ffFoam], ["ff_drop", "tadpoles drop in", ffDrop]], cols: ["#5B6BD6", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("basil", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tf, "surprised"], [tf + 1.6, "pointing"], [LT("e1303") - .3, "sit"], [LT("e1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, FROG_RULE); };
+    + bd("basil", 180, 1076, 340, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tf, "surprised"], [tf + 1.6, "pointing"], [LT("e1303") - .3, "sit"], [LT("e1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, FROG_RULE); };
 
 /* 13 · the cliffhanger: on the grassy edge a little green grasshopper with NO wings hops onto a blade of grass (hop); beside it on another blade,
    a pale, see-through, EMPTY grasshopper (skin), a ? pops; the camera pushes along the grass from one to the other; PART 2 slams in */

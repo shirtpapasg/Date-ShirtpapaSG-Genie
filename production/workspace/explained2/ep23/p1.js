@@ -157,7 +157,7 @@ SC.lc1q = (t, s) => { const tip = rigTip({ head: [MRpaw()[0], MRpaw()[1] - 40], 
    at the lower right (teaching ELECTROMAGNET; cheer after his line: a key word learnt, achieved). Both WATCH the panel */
 const peek23 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved, watch: W_.x }); };
-SC.lcon = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1420, 860]), tm = s.t0 + 1.2, tp = LT("m706p") - .5;
+SC.lcon = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1420, 860]), tm = s.t0 + 2.3, tp = LT("m706p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcOnArt, bgc: "#FFF6E6", set: (tt) => cs(tt, cE, { top: tableTop(tt, { clips: false }) + trayClips22(tt, 1300, 900, .38, {}) }), verdict: ["IT WORKS ONLY WHILE ELECTRICITY FLOWS", GOODC], tv: MK("v_onoff"), peek: false,
     over: (tt) => peek23("basil", "l", tt, tm, tp - .2, []) + peek23("pip", "r", tt, tp, undefined, [[LE("m706p") + .1, "cheer"], [LE("m706p") + 2.2, "sit"]], { achieved: true })
       + lcPrint(tt, [[MK("on1"), MK("crane2") - .4, MOMENT_RULE], [MK("crane2"), MK("v_onoff") - .4, YARD_RULE]]) }); };
@@ -207,7 +207,7 @@ SC.lc2q = (t, s) => { const [px, py] = pawPt("pip", PL[0], PL[1], PL[2], false);
   return cs(t, camQ2(t), { top: tableTop(t, {}) + rigW(t, { head: [600, 770], ang: 80, k: .46, free: [[560, 860], [575, 870]] }) })
     + bd("momo", 1000, 1010, 380, t, { in: s.t0 + .15, flip: true, ...watchO(1000, px) }) + bd("basil", BA[0], BA[1], BA[2], t, { in: s.t0 + .1, flip: true, ...watchO(BA[0], px) })
     + bd("pip", PL[0], PL[1], PL[2], t, { in: s.t0 + .05, poses: [[s.t0, "sit"], [LE("m901p") + .05, "thinking"]] }) + TF(px + 60, py + 10, .45, battHolder23(t, 1)) + smallPrint(t, s.t0 + .3, COVER_RULE) + HUD(t); };
-SC.lcparts = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), [px, py] = pawPt("pip", PL[0], PL[1], PL[2], false), p = camPt(cE, [px + 60, py - 20]), tm = s.t0 + 1.2, tb = LT("m905b") - .5;
+SC.lcparts = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), [px, py] = pawPt("pip", PL[0], PL[1], PL[2], false), p = camPt(cE, [px + 60, py - 20]), tm = s.t0 + 2.3, tb = LT("m905b") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcPartsArt, bgc: "#FFF6E6", set: (tt) => cs(tt, cE, { top: tableTop(tt, {}) }), verdict: ["BOTH ENDS JOINED: THE NAIL BECOMES A MAGNET", GOODC], tv: MK("v_both"), peek: false,
     over: (tt) => peek23("pip", "l", tt, tm, undefined, [[tm + .2, "thinking"]]) + peek23("basil", "r", tt, tb, undefined, [[LE("m905b") + .1, "cheer"], [LE("m905b") + 2.2, "sit"]], { achieved: true })
       + lcPrint(tt, [[MK("one"), MK("both") - .4, COVER_RULE], [MK("both"), MK("v_both") - .4, MOMENT_RULE]]) }); };
@@ -222,8 +222,8 @@ SC.final = (t, s) => { const L = "m1001"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "m1002", tq = W(L, "it") - .1, c = MPAT.liz, tc = W(L, "millipede");
   return lizReveal(t, s, L, cs(t, W0, { bug: [c[0], c[1], c[2], { ...c[3], coil: t >= MK("ff_coil") && t < MK("ff_coil") + 2.4 ? 1 : 0 }], top: tableTop(t, {}) }), c[0], c[1] - 10, tq, "It was on the kerb!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1004",
     fact: { id: "m1003p", at: [1250, 400], w: 760, h: 440, items: [["ff_coil", "like our coil!", ffCoil23], ["ff_legs", "most have far fewer", ffLegs23]], cols: ["#B8622E", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
-    + bd("momo", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1003p") - .3, "sit"]] })
-    + bd("basil", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_legs") + .2, "surprised"], [MK("ff_legs") + 1.6, "sit"], [LT("m1004") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("momo", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1003p") - .3, "sit"]] })
+    + bd("basil", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_legs") + .2, "surprised"], [MK("ff_legs") + 1.6, "sit"], [LT("m1004") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 11 · the cliffhanger: Pip (big at the left) lowers the mini crane's hook (Momo's ten-turn nail, the battery joined for a moment) onto the
    steel bolt in the scrap tray: the bolt tips up, hangs for a second, and slips off with a clink (lift); Pip shows the empty battery packet

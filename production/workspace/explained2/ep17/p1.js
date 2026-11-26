@@ -35,6 +35,13 @@ SC.cold = (t, s) => { const tp = MK("budsIn");
   return VL(t, { dawn: 1 - .4 * ss(0, 6, t), cat: catLive(t), bites: bitesAt(t) }, camCold(t)) + cards2(t, "c", MK("cardsIn")) + budsCold(t, tp)
     + OP(ramp(t, .2, .4), lowerPill(60, 96, "A community garden, Singapore ·", "dawn")); };
 
+/* popfix 2 (teacher, 25 Nov 2026: "pet buddies popping out and gone ... starting pet buddies scene"): the cold open's buddies pop in on
+   the three wired pop sounds (budsIn) only about 2 s before the melt into "Last time". The sound stays; the picture changes: the buddies
+   no longer pop out at the melt. They stay, opaque and on top, while the place melts away, and pop out in turn (the order they came, the
+   usual .2 s shrink) 2.65 s after each arrived, a moment into "Last time" (never on screen under 2.5 s; never faded: SERIES_FORMAT 6) */
+const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"); let r = a > .01 ? OP(a, F.svg) : "";
+  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2); if (k >= .02) r += buddy0(who, c.x, c.y, c.h, t, { ...c.o, k: (c.o.k || 1) * k }); }
+  return r; };
 /* 2 · "Last time...": EP16's dare, word for word. ONE calm picture: EP16's two dare cards side by side, a gentle push-in, the big ?; each card
    steps forward and lights while Heart says it (>= 2.5 s each) */
 SC.lasttime = (t, s) => { const L = "a203", tc = [W(L, "one"), W(L, "two")], z = 1 + .04 * eio((t - s.t0) / 8), k = ramp(t, s.t0 + .05, .5), cur = tc.filter((x) => t >= x - .15).length - 1;
@@ -42,7 +49,7 @@ SC.lasttime = (t, s) => { const L = "a203", tc = [W(L, "one"), W(L, "two")], z =
     cards += TF(700 + i * 520, 560 + 14 * (1 - spring(t, s.t0 + .2 + i * .15, .45)), 1.15 * (1 + .1 * fw), dareCard3(i, t, { id: "lt" + i, pulse: cur === i ? .9 : pulse(t, tc[i], .04, .9) })); });
   return bg("stage2") + OP(ramp(t, s.t0, .3), T(960, 110, "Last time…", 60, "#fff", { w: 600 }))
     + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${cards}</g>` + qMark(t, W("a202", "is") - .1, 960, 250)
-      + TF(960, 1000, spring(t, W("a202", "is") - .1, .4), tpill(0, 0, DARE_LABEL, 44, P.sun, P.ink, { w: 700 }))) + melt(t, s, "cold", .5) + HUD(t); };
+      + TF(960, 1000, spring(t, W("a202", "is") - .1, .4), tpill(0, 0, DARE_LABEL, 44, P.sun, P.ink, { w: 700 }))) + coldHold(t, s, .5) + HUD(t); };
 /* back at the lime plant: the camera drifts on along the pot (it carries on under the title and into the game: no cut). Pip keeps his answer
    to himself (a small hop: an acted moment, no pose); the caterpillar takes another bite */
 const camBack = (t) => { const u = clamp((t - SCN.back.t0) / (SCN.title.t1 - SCN.back.t0)); return [1.45 - .15 * eio(u), lerp(1280, 1180, eio(u)), lerp(560, 540, eio(u))]; };
@@ -90,7 +97,7 @@ SC.lime = (t, s) => VL(t, { cat: catCrawl(t), bites: 3 }, camLime(t))
   + ideaBubble16(t, W("a701m", "worm") - .2, s.t1 + .4, 760, 300, wormIdea(t), P.momo, -1, "ibw") + melt(t, s, "answer1", .45) + HUD(t);
 /* [LOOK CLOSER] the caterpillar's legs (lc17.js legsArt; PROLEGS pops, lib.js o.at); the book's strip on the six legs (Heart reads it). Faces:
    the speaker (auto, left: Pip, then Basil); Momo at the right until her worm guess is answered (thinking, then oops: OUTCOMES at a703p) */
-SC.lclegs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camLime(SCN.lime.t1), p = camPt(c, [LT_CAT[0], LT_CAT[1] - 30]), tm = s.t0 + 1.2, tmo = LT("a703p") + 3.6;
+SC.lclegs = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camLime(SCN.lime.t1), p = camPt(c, [LT_CAT[0], LT_CAT[1] - 30]), tm = s.t0 + 2.3, tmo = LT("a703p") + 3.6;
   const moFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: legsArt, bgc: "#E6F5DA", set: (tt) => VL(tt, { cat: catCrawl(tt), bites: 3, mothAt: false }, c), verdict: [`AN INSECT, NOT A WORM`, GOODC], tv: MK("v_legs"), peekH: 470,
     peekEv: [[MK("v_legs") + .2, "basil", "sit"]],
@@ -151,7 +158,7 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [430, 250] };
 /* 11 · [LOOK CLOSER] inside the pupa (lc17.js pupaArt): the window, the shapes forming, the case darkening, the butterfly coming out, flying
    off. The book's strip (one sentence at a time). Faces: the speaker (auto, left: Momo, then Basil); Pip at the right first (thinking: his own
    question, is anything happening in there?); Momo surprised as the case splits */
-SC.lcpupa = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = [1.08, 900, 560], p = camPt(c, [LT_PUPA[0], LT_PUPA[1] - 60]), tm = s.t0 + 1.2, tpo = LT("a1103m") - .4;
+SC.lcpupa = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = [1.08, 900, 560], p = camPt(c, [LT_PUPA[0], LT_PUPA[1] - 60]), tm = s.t0 + 2.3, tpo = LT("a1103m") - .4;
   const pipFace = t >= tm - .05 && t < tpo + .3 ? bd("pip", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tpo, poses: [[tm, "thinking"], [LT("a1102"), "sit"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: pupaArt, bgc: "#EAF6E2", set: (tt) => VL(tt, { cat: false, pupa: { o: { stem: false } }, bites: 3, mothAt: false, can: false, over: TF(EASEL[0], EASEL[1], EASEL[2], restBoard(tt, { zzz: 0, glow: 1 })) }, c), verdict: [`THE PUPA IS BUSY CHANGING`, GOODC], tv: MK("v_pupa"), peekH: 470,
     peekEv: [[MK("split") + .1, "momo", "surprised"], [MK("split") + 2, "momo", "sit"]],
@@ -175,7 +182,7 @@ SC.final = (t, s) => { const L = "a1301"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "a1302", tq = W(L, "it") - .1, a = MOTHAT.liz, tm = W(L, "moth");
   return lizReveal(t, s, L, VL(t, { cat: false, pupa: { o: { stem: false } }, bites: 3, mothAt: a, mothOpen: ss(tm + .2, tm + .6, t) * (1 - ss(tm + 1.2, tm + 1.6, t)) }), a[0], a[1], tq, "It was on the side of the lime plant's pot!", -120, 160, 80, 3.2, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 780, qy: 690, tx: 760, ty: 975, tell: "a1304",
     fact: { id: "a1303", at: [1300, 395], w: 880, h: 460, items: [["ff_cocoon", "a silk cocoon", ffCocoon], ["ff_silk", "silk", ffSilk]], cols: ["#5B6BD6", "#E36A12"], sx: 1300, sy: 905, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("basil", 180, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tm + .1, "pointing"], [LT("a1303") - .3, "sit"], [LT("a1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, MOTH_RULE); };
+    + bd("basil", 180, 1076, 340, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tm + .1, "pointing"], [LT("a1303") - .3, "sit"], [LT("a1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, MOTH_RULE); };
 
 /* 14 · the cliffhanger: the garden's far corner by the tap (VCR): an old pail of rainwater, flat and still, a few leaves floating; a drop falls
    (pail: rings); tiny thin dark things wriggle down and up in it (wrig), a ?; the camera pushes from Basil to the still surface; PART 2 */

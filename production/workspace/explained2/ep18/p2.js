@@ -70,7 +70,7 @@ SC.eggans = (t, s) => { const tA = MK("ansglow");
    FIRST OR LAST STAGE lands; he teaches); Basil at the right (his idea is tested: he listens, a nod as he learns) */
 const peekFace = (who, side, t, tin, tout, poses) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true }); };
-SC.lcloop = (t, s) => { window._BUBAT = { '*': [1080, 220] }; const cE = camAns2(SCN.eggans.t1), p = camPt(cE, [NEST18[0], NEST18[1] - 80]), tm = s.t0 + 1.2, tN = MK("kw_no_first_or_last_stage"), tp = LT("d703") + .2;
+SC.lcloop = (t, s) => { window._BUBAT = { '*': [1080, 220] }; const cE = camAns2(SCN.eggans.t1), p = camPt(cE, [NEST18[0], NEST18[1] - 80]), tm = s.t0 + 2.3, tN = MK("kw_no_first_or_last_stage"), tp = LT("d703") + .2;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: loopArt, bgc: "#FFF8EA", set: (tt) => VGE(tt, {}, cE), verdict: [`NO FIRST OR LAST STAGE`, GOODC], tv: MK("v_loop"), peek: false,
     over: (tt) => peekFace("momo", "l", tt, tm, tp - .2) + peekFace("pip", "l", tt, tp, undefined, [[tN + .1, "cheer"], [tN + 2.3, "sit"]]) + peekFace("basil", "r", tt, tm, undefined, [[tm, "oops"], [MK("kw_repeated"), "sit"]]) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "d706", sayId: "d705", who: "basil", n: "1 of 2", text: "The stages in a life cycle are repeated. There is no first or last stage.", keys: ["repeated", "no", "first", "last", "stage"], size: 70, y: 250, footer: FOOT,
@@ -112,7 +112,7 @@ SC.beetle = (t, s) => { window._BUBAT = { momo: [760, 300] }; return VDK(t, { ci
 /* [LOOK CLOSER] the two larvae (art18.js larvaeArt: the band of both loops, four tiles each; the wriggler and the mealworm; PHYSICAL FEATURES,
    lib.js o.at). Faces: Basil (auto, left: he teaches); Momo at the right (her question is still open: thinking; cheer at the verdict: her
    mistake is fixed and a term learnt) */
-SC.lcbeetle = (t, s) => { window._BUBAT = { '*': [1250, 225] }; const cE = camTub(SCN.beetle.t1), p = camPt(cE, [TUB[0], TUB[1] - 80]), tm = s.t0 + 1.2;
+SC.lcbeetle = (t, s) => { window._BUBAT = { '*': [1250, 225] }; const cE = camTub(SCN.beetle.t1), p = camPt(cE, [TUB[0], TUB[1] - 80]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: larvaeArt, bgc: "#FFF8EA", set: (tt) => VDK(tt, { cicAt: false, front: tubItems(tt) }, cE), verdict: [`SAME STAGES, STILL DIFFERENT`, GOODC], tv: MK("v_beetle"), peekH: 470,
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [MK("v_beetle") + .1, "cheer"]]) }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "d906", sayId: "d905", who: "pip", n: "2 of 2", text: "Observable characteristics include the number of stages and the physical features of the animals.", keys: ["observable", "characteristics", "number", "stages", "physical", "features"], size: 60, y: 235, footer: FOOT,
@@ -147,8 +147,8 @@ SC.final = (t, s) => { const L = "d1201"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "d1202", tq = W(L, "it") - .1, b = BEEAT.liz, tb = W(L, "honeybee"), tt = W("d1203p", "thousand") - .1;
   return lizReveal(t, s, L, VGE(t, { beeAt: b }), b[0], b[1], tq, "It was on a flower of the lime plant!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 700, tx: 960, ty: 985, tell: "d1204",
     fact: { id: "d1203p", at: [1270, 400], w: 820, h: 440, items: [["ff_queen", "a queen honeybee", ffQueen18], ["ff_eggs", "more than 1000 eggs in a day!", ffEggs18]], cols: ["#E8A23A", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tb + .1, "pointing"], [LT("d1203p") - .3, "sit"]] })
-    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [tt, "surprised"], [tt + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tb + .1, "pointing"], [LT("d1203p") - .3, "sit"]] })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [tt, "surprised"], [tt + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 /* 13 · the dare for Episode 19: the void deck: Basil's red-and-blue bar magnet holds a card on the board's metal clip; a steel pin and a short
    copper wire on the table; ONE set of THREE big numbered picture cards slides in low (dareIn); the banner; Momo and Pip think (a question,
    no hints), Basil a proud smile by his magnet */

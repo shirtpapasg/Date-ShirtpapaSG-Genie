@@ -178,9 +178,11 @@ SC.shrink = (t, s) => { const tH = MK("jhot"), tC = MK("jcold"), tI = MK("jin"),
 /* the pull-out: back out of the wool to the shop; it ends on the layout of `wool` (the next scene), so nothing moves at the change */
 const WOOLB = { pip: [470, 1062, 470], momo: [1150, 1062, 420], basil: [1720, 1062, 450] };
 const woolCam = camOn([900, 640], 1.1);
+/* popfix 2 (teacher, 25 Nov 2026: "pet buddies popping out and gone"): the shrunken riders no longer vanish at the cut and pop in again
+   .8 s later; they stay (lib.js stayOf) and are there as the camera pulls out */
 SC.pullout = (t, s) => { const u = eio((t - s.t0) / (s.t1 - s.t0)), c = camMix(camOn([BOXP[0] - 60, BOXP[1] - 110], 5), woolCam, u);
   return place("ms27", msLive(t, c, { box: false }) + TF(BOXP[0], BOXP[1], 1, iceBox27(t, { wrap: 1 })), c) + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.7 * (1 - ramp(t, s.t0, .5)))}"/>`
-    + bd("pip", ...WOOLB.pip, t, { in: s.t1 - .55, poses: [[0, "sit"]], look: 5 }) + bd("momo", ...WOOLB.momo, t, { in: s.t1 - .45, flip: true, poses: [[0, "sit"]], look: -5 }) + bd("basil", ...WOOLB.basil, t, { in: s.t1 - .35, flip: true, poses: [[0, "sit"]], look: -5 })
+    + bd("pip", ...WOOLB.pip, t, { in: s.t0 + .05, poses: [[0, "sit"]], look: 5 }) + bd("momo", ...WOOLB.momo, t, { in: s.t0 + .1, flip: true, poses: [[0, "sit"]], look: -5 }) + bd("basil", ...WOOLB.basil, t, { in: s.t0 + .15, flip: true, poses: [[0, "sit"]], look: -5 })
     + `<rect width="1920" height="1080" fill="#fff" opacity="0"/>` + logo(t); };
 
 /* ================================================================ 9 · POOR CONDUCTOR OF HEAT; the scarf slows heat both ways ================================================================ */

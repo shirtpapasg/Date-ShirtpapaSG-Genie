@@ -91,10 +91,10 @@ const peek23 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 |
 /* [LOOK CLOSER] why do more turns help? (lc23.js lcTurnsArt). Faces: Pip at the lower left (shy: his pick is being corrected), Momo at the
    lower right (teaching STRENGTH; cheer after her line: a key word learnt), then Basil for a moment at the bell (surprised: the bell he hears
    every day, opened up). All WATCH the panel */
-SC.lcturns = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), [px, py] = pawPt("pip", BL[0], BL[1], BL[2], false), p = camPt(cE, [px + 70, py - 20]), tm = s.t0 + 1.2, tM = LT("n704m") - .5, tB = MK("bell");
+SC.lcturns = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), [px, py] = pawPt("pip", BL[0], BL[1], BL[2], false), p = camPt(cE, [px + 70, py - 20]), tm = s.t0 + 2.3, tM = LT("n704m") - .5, tB = MK("bell");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcTurnsArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt) }), verdict: ["MORE TURNS: A STRONGER ELECTROMAGNET", GOODC], tv: MK("v_turns"), peek: false,
     over: (tt) => peek23("pip", "l", tt, tm, undefined, []) + peek23("momo", "r", tt, tM, tB + .3, [[LE("n704m") + .1, "cheer"], [LE("n704m") + 2.2, "sit"]], { achieved: true })
-      + peek23("basil", "r", tt, tB + .6, MK("v_turns") + 2, [[MK("bell") + 1.9, "surprised"], [MK("bell") + 3.6, "sit"]]) + lcPrint(tt, [[s.t0 + 1.4, MK("bell") - .4, MOMENT_RULE]]) }); };
+      + peek23("basil", "r", tt, tB + .6, undefined, [[MK("bell") + 1.9, "surprised"], [MK("bell") + 3.6, "sit"]]) + lcPrint(tt, [[s.t0 + 1.4, MK("bell") - .4, MOMENT_RULE]]) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n707", sayId: "n706", who: "basil", n: "1 of 2", text: TL.lines.n707.text, keys: ["increase", "strength", "electromagnet", "number", "turns", "wire"], size: 56, y: 240, footer: FOOT, poses: [[LE("n707") + .2, "sit"]],
   under: markTurns(t, 1250, 930, .7 * spring(t, s.t0 + .4, .5)), extra: bd("pip", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
 
@@ -140,7 +140,7 @@ SC.lc2q = (t, s) => { const tw = MK("swing"), tsl = MK("slip"), a = .5 * eio(cla
     + smallPrint(t, s.t0 + .3, MOMENT_RULE) + HUD(t); };
 /* [LOOK CLOSER] one battery or two? (lc23.js lcBattArt). Faces: Basil at the lower left (his question is being answered; listening), Pip at
    the lower right (teaching NUMBER OF BATTERIES; cheer after his line: a key word learnt, achieved). Both WATCH the panel */
-SC.lcbatt = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [CR[0], CR[1] - 150]), tm = s.t0 + 1.2, tp = LT("n904p") - .5;
+SC.lcbatt = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [CR[0], CR[1] - 150]), tm = s.t0 + 2.3, tp = LT("n904p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcBattArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt, { hook: 20 }) }), verdict: ["MORE BATTERIES: A STRONGER ELECTROMAGNET", GOODC], tv: MK("v_batt"), peek: false,
     over: (tt) => peek23("basil", "l", tt, tm, undefined, []) + peek23("pip", "r", tt, tp, undefined, [[LE("n904p") + .1, "cheer"], [LE("n904p") + 2.2, "sit"]], { achieved: true })
       + lcPrint(tt, [[s.t0 + 1.4, MK("dip2") - .2, HOT_RULE], [MK("dip2"), MK("v_batt") - .4, MOMENT_RULE]]) }); };
@@ -169,8 +169,8 @@ SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = CKAT.liz, tc = W(L, "cricket"), tl = W("n1103m", "legs", 1);
   return lizReveal(t, s, L, sr(t, W0, { bench: benchTop(t), bug: c }), c[0], c[1] - 10, tq, "It was under the school bell!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103m", at: [1250, 400], w: 760, h: 440, items: [["ff_ear", "its ear!", ffEar23], ["ff_bell", "it hears with its legs", ffBell23]], cols: ["#7A5228", "#2E6E9A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103m") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [tl + .1, "surprised"], [tl + 1.5, "sit"], [LT("n1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1103m") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [tl + .1, "surprised"], [tl + 1.5, "sit"], [LT("n1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the dare for Episode 24: Basil, beside HOW STRONG?, with two NEW nails side by side: an iron nail with a long coil of twenty-five neat
    turns and a steel nail with a short coil of eight turns, each tag joined to its nail, one battery holder each (coil). The ONE set of two

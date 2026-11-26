@@ -115,7 +115,7 @@ SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 250], '*': [1250, 250] }; c
 const LIKE = (() => { const a = APP.mk2_done_hi.at; return [.82, .56]; })();   // "Like poles repel" on the marked map (read off the picture)
 const camDive = (t) => { const s = SCN.waitw, u = eio(clamp((t - s.t0 - .4) / (s.t1 - s.t0 - .4))); const h = TB[2] * 820 / 1180, p = [TB[0] - TB[2] / 2 + LIKE[0] * TB[2] * .59 + 30, TB[1] - h / 2 + (APP.mk2_done_hi.at[1] + LIKE[1] * APP.mk2_done_hi.at[3]) * h * .7]; return camMix([1, 960, 540], camOn(p, 1 + 9 * u * u, 960, 540), u); };
 SC.waitw = (t, s) => { const L = "b701h", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1680, 1840][i]; return bd(w, x, [1076, 1090, 1090][i], [500, 300, 300][i], t, { in: s.t0 + .05 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const x = [250, 1680, 1840][i]; return bd(w, x, [1076, 1090, 1090][i], [500, 300, 300][i], t, { in: s.t0 + .05 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return appWorld(t, screenAt("mk2_done"), { cam: camDive(t) }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 230, spring(t, tP, .45), tpill(0, 0, "Be an idea!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t))
     + smallPrint(t, s.t0 + .4, PICTURE_RULE) + wipe(t, s.t1, "#BFE6FF", 960, 540); };
 SC.garden = (t, s) => { const m = MK, st = pathState(t);
@@ -126,8 +126,9 @@ SC.garden = (t, s) => { const m = MK, st = pathState(t);
     + feelTag(t, m("walk1") + .2, m("clear1") + 1.2, "Basil draws his map from memory", 300) + feelTag(t, m("walk2") + .1, m("wide") + 1.4, "Basil finds you again", 300)
     + smallPrint(t, s.t0 + .5, PICTURE_RULE) + OP(1 - clamp((t - s.t0) / .4), `<rect width="1920" height="1080" fill="#BFE6FF"/>`) + HUD(t); };
 // the pull back out: the camera rises out of the garden and back through the tablet's screen; Thursday afternoon in the rain
+/* popfix 2: the buddies of the garden no longer vanish at the cut and pop in again 1 s later; they stay (lib.js stayOf) as the camera pulls out */
 SC.pullout = (t, s) => { const u = 1 - eio(clamp((t - s.t0) / 1.2)), w = world(t, [1, 960, 540], { when: "rain", top: easelOn(t, 1, 560) + tablet00(t, screenAt("mk2_done"), TABH[0], TABH[1], TABH[2]) + `<g transform="translate(1440 700)"><path d="M0 0 L-60 -10 L0 -120 L60 -10z" fill="#3F7FD0"/><path d="M0 -10 V40" stroke="#5B6470" stroke-width="5"/></g>` });
-  return CAM(w, 1 + 7 * u * u, TABH[0], TABH[1]) + bd("basil", BX.r, 1076, 470, t, { in: s.t0 + .9, flip: true }) + bd("pip", BX.l, 1076, 480, t, { in: s.t0 + 1.0, poses: [[s.t0, "sit"]] }) + bd("momo", BX.m, 1010, 360, t, { in: s.t0 + 1.1 })
+  return CAM(w, 1 + 7 * u * u, TABH[0], TABH[1]) + bd("basil", BX.r, 1076, 470, t, { in: s.t0 + .1, flip: true }) + bd("pip", BX.l, 1076, 480, t, { in: s.t0 + .15, poses: [[s.t0, "sit"]] }) + bd("momo", BX.m, 1010, 360, t, { in: s.t0 + .2 })
     + dayPill(t, "Thu", spring(t, s.t0 + 1.0, .4)) + wipe(t, s.t0, "#FFFFFF") + HUD(t); };
 
 /* 8 · SPACE IT OUT: Thursday, rain. The camera pushes to the card ONE-WEEK MEMORY TEST (HOME) as it fills in: Basil's row, three small maps
@@ -171,8 +172,8 @@ SC.final = (t, s) => finalScene(t, s, "b1101h", 1, [[s.t0, null, 1], [W("b1101h"
 SC.liz = (t, s) => { const L = "b1102h", tq = W(L, "it") - .1, c = CAT.mat, tc = W(L, "cat");
   return lizReveal(t, s, L, world(t, [1, 960, 540], { when: "day", cat: c }), c[0], c[1] - 30, tq, "It was on the doormat by the lift!", -120, 160, 80, 2.3, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), ix: 1400, iy: 400, qx: 1120, qy: 700, tx: 960, ty: 985, tell: "b1104h",
     fact: { id: "b1103m", at: [640, 420], w: 900, h: 440, sx: 700, sy: 790, items: [["ff_name", "its own name!", ffName1], ["ff_stranger", "even a stranger", ffName2]], cols: ["#E0A33A", "#5B6BD6"], poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .8, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("b1103m") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [LT("b1104h") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, CAT_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("b1103m") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [LT("b1104h") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, CAT_RULE); };
 
 /* 12 · your dare: three cards along the stage, each a small picture of TheOneApp's REAL screen (Make my own mind map · Start a new mind map ·
    Mark my mind map); small print Pick any chapter you are learning. All three point at the viewer (inviting) */

@@ -45,7 +45,7 @@ SC.r1 = (t, s) => lockN(t, { t0: W(L1, "this") - .35, cards: ["The young", "The 
 /* 5 · [LOOK CLOSER] the little grasshopper beside an adult (art16.js nymphArt; NYMPH pops, lib.js o.at). Faces: the speaker (auto, left);
    Basil at the right while his pick is tested (thinking; shy when Momo shows the wings) */
 const camGr = [1.1, 1000, 760];
-SC.lcnymph = (t, s) => { window._BUBAT = { pip: [520, 330], momo: [960, 215] }; const p = camPt(camGr, [1000, 800]), tm = s.t0 + 1.2, tmo = LE("f503m") + 1.6;
+SC.lcnymph = (t, s) => { window._BUBAT = { pip: [520, 330], momo: [960, 215] }; const p = camPt(camGr, [1000, 800]), tm = s.t0 + 2.3, tmo = LE("f503m") + 1.6;
   const basFace = t >= tm - .05 && t < tmo + .3 ? bd("basil", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"], [W("f503m", "none") + .1, "oops"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: nymphArt, bgc: "#E3F4FF", set: (tt) => VG16(tt, { mantisAt: false }, camGr), verdict: [`THE YOUNG: A NYMPH`, GOODC], tv: MK("v_nymph"), peekH: 470,
     peekEv: [[LE("f503m") + .1, "momo", "pointing"], [MK("kw_nymph") + .1, "momo", "cheer"]], over: (tt) => basFace }); };
@@ -56,7 +56,7 @@ SC.nymphans = (t, s) => { const tA = MK("ansglow");
     + coin(t, MK("coin1") - .1, 960, 450, "+1", "if you showed one finger")
     + bd("basil", 400, 1050, 400, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .3 ? pickNum("basil", 560, 830, t, s.t0 + .3, "2") : "") + xChip16(t, tA + .4, 600, 770, .7)
     + bd("momo", 1330, 1046, 390, t, { in: s.t0 + .15, flip: true, poses: [[s.t0, "sit"]] }) + (t > s.t0 + .35 ? pickNum("momo", 1330, 600, t, s.t0 + .35, "1") : "")
-    + bd("pip", 1680, 1076, 520, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 30]] }) + (t > s.t0 + .3 ? pickNum("pip", 1690, 490, t, s.t0 + .3, "1") : "") + melt(t, s, "lcnymph", .4) + HUD(t); };
+    + bd("pip", 1680, 1076, 520, t, { in: s.t0 + .1, flip: true, poses: [[s.t0, "sit"]], jump: [[tA + .05, 30]], glidePeek: true }) + (t > s.t0 + .3 ? pickNum("pip", 1690, 490, t, s.t0 + .3, "1") : "") + melt(t, s, "lcnymph", .4) + HUD(t); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "f602", sayId: "f601", who: "momo", n: "1 of 2", text: "The life cycle of a grasshopper has three stages. The stages are the egg, the young and the adult. The young of the grasshopper is called a nymph.", keys: ["three", "stages", "egg", "young", "adult", "nymph"], size: 50, y: 220, footer: FOOT,
   under: TF(1200, 1070, .36 * spring(t, s.t0 + .4, .5), loopBoard16(t, { tiles: [0, 0, 0], back: 0, pics: hopPic, names: HOPN, title: "THE GRASSHOPPER", id: "m1g", labels: false })) });
 
@@ -69,7 +69,7 @@ SC.skin = (t, s) => VG16(t, { skin: SKIN2 }, camSkin(t)) + bd("momo", 330, 1076,
   + ideaBubble16(t, W("f701m", "dry") - .2, s.t1 + .4, 1000, 300, dryIdea(t), P.momo, -1, "ibd") + melt(t, s, "mark1", .45) + HUD(t);
 /* [LOOK CLOSER] the empty skin and why it comes off (art16.js skinArt). Faces: the speaker (auto, left); Momo at the right until her guess is
    answered (thinking, then oops: OUTCOMES at Heart's "It is empty inside") */
-SC.lcskin = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camSkin(SCN.skin.t1), p = camPt(c, bladeTip(SCN.skin.t1, SKIN2.bx, SKIN2.by, SKIN2.bh, SKIN2.lean, 2, SKIN2.u)), tm = s.t0 + 1.2, tmo = LT("f702") + 3.9;
+SC.lcskin = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camSkin(SCN.skin.t1), p = camPt(c, bladeTip(SCN.skin.t1, SKIN2.bx, SKIN2.by, SKIN2.bh, SKIN2.lean, 2, SKIN2.u)), tm = s.t0 + 2.3, tmo = LT("f702") + 3.9;
   const moFace = t >= tm - .05 && t < tmo + .3 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, out: tmo, poses: [[tm, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: skinArt, bgc: "#FFF1C8", set: (tt) => VG16(tt, { skin: SKIN2, mantisAt: false }, c), verdict: [`THE OLD SKIN IS TOO TIGHT`, GOODC], tv: MK("v_skin"), peekH: 470,
     peekEv: [[LE("f704p") + .1, "pip", "thinking"], [MK("v_skin") + .1, "pip", "cheer"]],
@@ -79,7 +79,7 @@ SC.lcskin = (t, s) => { window._BUBAT = { '*': [620, 300] }; const c = camSkin(S
    nymphJourney; the buddies ride along, shrunk, on the next blade of grass); then one pull back out */
 const camDown = (dive, e) => { const m = Math.max(e * .4, dive); return [1.05 + .2 * e + 4 * dive, lerp(1000, 1060, m), lerp(640, 860, m)]; };
 SC.waitw = (t, s) => { /* teacher, 25 Nov 2026: the buddies pop out in turn as the camera dives (never fade with it) */ const L = "f801", dive = ei((t - (s.t1 - 1.5)) / 1.5), e = eio((t - s.t0) / 1.2), tP = W(L, "be") - .15;
-  return VG16(t, { skin: SKIN2 }, camDown(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 440, t, { in: s.t0 + .1, out: s.t1 - 1.5, poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1072, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
+  return VG16(t, { skin: SKIN2 }, camDown(dive, e)) + OP(1 - dive * 1.7, bd("momo", 300, 1076, 440, t, { in: s.t0 + .05, out: s.t1 - 1.44,   /* popfix 2: 2.5 s on screen at least */ poses: [[s.t0, "sit"], [tP + .2, "waving"]], wave: true }) + bd("pip", 620, 1072, 440, t, { in: s.t0 + .15, out: s.t1 - 1.34, poses: [[s.t0, "sit"], [tP + .5, "waving"]], wave: true })
       + bd("basil", 1690, 1076, 440, t, { in: s.t0 + .1, out: s.t1 - 1.42, flip: true, poses: [[s.t0, "sit"], [tP + .35, "waving"]], wave: true })
       + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the nymph!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#7CC85A", 960, 540); };
 const riderBlade = (t, x, k, fl) => TF(x, 1110 + 6 * Math.sin(t * 1.3 + x), k * (fl ? -1 : 1), `<path d="M-300 20 Q0 -40 320 -10 L330 60 L-300 60z" fill="#6FBF4E" stroke="#3F8A3A" stroke-width="6"/>`, 0, k);
@@ -143,7 +143,7 @@ SC.chant = (t, s) => chantScene(t, s, "c1003", { sayId: "u1002", size: 50, x: 62
 SC.final = (t, s) => { const L = "f1301"; return finalScene(t, s, L, 1, [[s.t0, null, 1], [W(L, "three") - .1, null, 3]]); };
 SC.liz = (t, s) => { const L = "f1302", tq = W(L, "it") - .1, a = MANTISAT.liz, tm = W(L, "mantis");
   return lizReveal(t, s, L, VG16(t, { mantisAt: a, turn: ss(tm, tm + .5, t) }), a[0] + 4, a[1] - 60, tq, "It was on a sunflower, keeping very still!", -120, 160, 80, 2.6, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 900, qy: 720, tx: 760, ty: 975, tell: "f1304",
-    fact: { id: "f1303b", at: [1250, 440], w: 960, h: 460, sx: 1300, sy: 860, items: [["ff_cousin", "cousins!", ffCousin], ["ff_case", "an egg case", ffMCase], ["ff_babies", "lots of tiny nymphs", ffMBabies]], cols: ["#E36A12", "#5B6BD6", "#2FA35A"], poses: [[MK("ff_in") - .4, "sit"]] } }) + bd("momo", 170, 1076, 340, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tm, "surprised"], [tm + 1.6, "pointing"], [LT("f1303b") - .3, "sit"]] }) + bd("pip", 360, 1068, 320, t, { in: s.t0 + .8, poses: [[s.t0 + .8, "sit"], [LT("f1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, MANTIS_RULE); };
+    fact: { id: "f1303b", at: [1250, 440], w: 960, h: 460, sx: 1300, sy: 860, items: [["ff_cousin", "cousins!", ffCousin], ["ff_case", "an egg case", ffMCase], ["ff_babies", "lots of tiny nymphs", ffMBabies]], cols: ["#E36A12", "#5B6BD6", "#2FA35A"], poses: [[MK("ff_in") - .4, "sit"]] } }) + bd("momo", 170, 1076, 340, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tm, "surprised"], [tm + 1.6, "pointing"], [LT("f1303b") - .3, "sit"]] }) + bd("pip", 360, 1068, 320, t, { in: s.t0 + 2.6, poses: [[s.t0 + .8, "sit"], [LT("f1304"), "waving"]], wave: true }) + smallPrint(t, s.t0 + .5, MANTIS_RULE); };
 /* 12 · the dare for Episode 17: the lime plant in its big pot at the garden's edge, a green caterpillar munching a leaf (it chews and wiggles);
    ONE set of TWO big numbered picture cards slides in low (1 Yes, a nymph: a nymph with a ? · 2 No: the caterpillar); the banner. The mantis on
    the rim of the lime plant's pot */

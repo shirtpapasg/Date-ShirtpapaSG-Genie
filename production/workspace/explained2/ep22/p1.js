@@ -100,7 +100,7 @@ SC.r1 = (t, s) => lockN(t, { t0: LT(L1) - .1, cards: DARE_CARDS, clues: DARE_CLU
    shrinks with a pop. The woodpecker on a branch of the frangipani by the shop, as the camera passes */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([1000, 720], 1.15, 960, 560), camOn([1056, 868], 5.2, 960, 560), u * u); };
 SC.waitw = (t, s) => { const L = "m601", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["pip", "momo", "basil"].map((w, i) => { const x = [BX.l, BX.m, BX.r][i]; return bd(w, x, [1076, 1010, 1076][i], [490, 390, 470][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["pip", "momo", "basil"].map((w, i) => { const x = [BX.l, BX.m, BX.r][i]; return bd(w, x, [1076, 1010, 1076][i], [490, 390, 470][i], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return shop(t, camWait(t), { tp: { lid: 1 } }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the iron nail!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#C99158", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jclips") + .15, "surprised"], [m("jclips") + 2.3, "sit"]] }, nS = t < m("jagain") ? 1 : Math.min(4, 2 + Math.floor((t - m("jagain")) / 1.2));
   return nailJourney(t, s) + riders(t, s, { tin: m("jlie") + .6, h: 200, at: { pip: [200, 1044], basil: [1720, 1050], momo: [380, 1040] }, poses: rp, jolts: [m("jhead") + .02, m("jback") + .02] })
@@ -140,7 +140,7 @@ SC.pipclaim = (t, s) => shop(t, camClaim(t), { tp: { lid: 1 } })
    nail after his line). The grey no-point pill by the BUDDIES score (nopoint) */
 const peekFace = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved }); };
-SC.lcnail = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camClaim(SCN.pipclaim.t1), p = camPt(cE, [890, 830]), tm = s.t0 + 1.2, tb = LT("m804") - .4, tNp = MK("nopoint");
+SC.lcnail = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camClaim(SCN.pipclaim.t1), p = camPt(cE, [890, 830]), tm = s.t0 + 2.3, tb = LT("m804") - .4, tNp = MK("nopoint");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcNailArt, bgc: "#FFF8EA", set: (tt) => shop(tt, cE, { tp: { lid: 1 } }), verdict: [`STROKED: NOW IT IS A MAGNET`, GOODC], tv: MK("v_magnetised"), peek: false,
     over: (tt) => peekFace("pip", "l", tt, tm, undefined, [[tm + .2, "thinking"]])
       + peekFace("basil", "r", tt, tb, undefined, [[LE("m806b") + .1, "pointing"], [LE("m806b") + 2.3, "sit"]])
@@ -205,7 +205,7 @@ SC.lcq2 = (t, s) => shop(t, camRow(t), { tp: { tray: true, bag: false, nails: fa
 /* [LOOK CLOSER] what can be magnetised? (lc22.js lcThingsArt). Faces: Momo at the left (her idea is tested: thinking; OOPS from `test`, shy
    to the end of Mark Sentence 2: OUTCOMES); Basil at the right for a moment ON `test` (surprised: the uncle's trick with his own eyes); then
    Pip at the right (teaching MAGNETIC OBJECT; cheer after his line: a key word learnt, achieved) */
-SC.lcthings = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camRow(SCN.lcq2.t1), p = camPt(cE, [860, 860]), tm = s.t0 + 1.2, tE = MK("test"), tp = LT("m1005p") - .5;
+SC.lcthings = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camRow(SCN.lcq2.t1), p = camPt(cE, [860, 860]), tm = s.t0 + 2.3, tE = MK("test"), tp = LT("m1005p") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcThingsArt, bgc: "#FFF8EA", set: (tt) => shop(tt, cE, { tp: { bag: false, nails: false, lid: 1 }, top: rowTop(tt) }), verdict: [`ONLY MAGNETIC OBJECTS CAN BE MAGNETISED`, GOODC], tv: MK("v_only"), peek: false,
     over: (tt) => peekFace("momo", "l", tt, tm, undefined, [[tm + .2, "thinking"]])
       + faceCam("basil", tt, tE + .1, tE + 2.4, 280, 470, 140, [[tE + .15, "surprised"]], { noreact: true })   // 24 Nov: at the panel's free left side (it covered the magnet's label)
@@ -221,8 +221,8 @@ SC.final = (t, s) => { const L = "m1101"; return finalScene(t, s, L, 0, [[s.t0, 
 SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = WPAT.liz, tc = W(L, "woodpecker");
   return lizReveal(t, s, L, shop(t, W0, { bird: c, tp: { lid: 1 } }), c[0] - 8, c[1] - 26, tq, "It was on a broom handle!", -120, 160, 80, 2.6, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1104",
     fact: { id: "m1103m", at: [1250, 400], w: 1000, h: 440, items: [["ff_peck", "very fast taps", ffPeck22], ["ff_nail", "like our strokes", ffNail22], ["ff_tongue", "tongue wraps round", ffTongue22]], cols: ["#8A5A36", "#2FA35A", "#C2577A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1103m") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [LT("m1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1103m") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [LT("m1104") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the cliffhanger: Basil takes a new nail and rubs the magnet's red end quickly BACK AND FORTH along it (rub: never lifting), then
    flips the magnet and rubs with the BLUE end (flip); back and forth · both ends; a big ? by his nail (qnail). PART 2. Basil big at the left

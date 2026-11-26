@@ -48,6 +48,13 @@ SC.cold = (t, s) => { const tp = MK("budsIn");
   return VD19(t, { items: "", top: magCold(t) + pinWire(t, MK("pinIn")), front: dcards(t, MK("cardsIn")), child: .8 }, camCold(t)) + budsDeck(t, tp)
     + OP(ramp(t, .2, .4), lowerPill(60, 96, "A void deck, Singapore ·", "Saturday afternoon")); };
 
+/* popfix 2 (teacher, 25 Nov 2026: "pet buddies popping out and gone ... starting pet buddies scene"): the cold open's buddies pop in on
+   the three wired pop sounds (budsIn) only about 2 s before the melt into "Last time". The sound stays; the picture changes: the buddies
+   no longer pop out at the melt. They stay, opaque and on top, while the place melts away, and pop out in turn (the order they came, the
+   usual .2 s shrink) 2.65 s after each arrived, a moment into "Last time" (never on screen under 2.5 s; never faded: SERIES_FORMAT 6) */
+const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"); let r = a > .01 ? OP(a, F.svg) : "";
+  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2); if (k >= .02) r += buddy0(who, c.x, c.y, c.h, t, { ...c.o, k: (c.o.k || 1) * k }); }
+  return r; };
 /* 2 · "Last time...": EP18's dare, word for word. ONE calm picture: the three dare cards side by side, a gentle push-in, the big ?, each card
    steps forward and lights while Heart says it (>= 2.5 s each) */
 SC.lasttime = (t, s) => { const L = "m203", tc = [W(L, "one"), W(L, "two"), W(L, "three")], z = 1 + .04 * eio((t - s.t0) / 8), k = ramp(t, s.t0 + .05, .5), cur = tc.filter((x) => t >= x - .15).length - 1;
@@ -56,7 +63,7 @@ SC.lasttime = (t, s) => { const L = "m203", tc = [W(L, "one"), W(L, "two"), W(L,
   return bg("stage2") + OP(ramp(t, s.t0, .3), T(960, 110, "Last time…", 60, "#fff", { w: 600 }))
     + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${cards}</g>`
       + qMark(t, W("m202", "which") - .1, 960, 260)
-      + TF(960, 1000, spring(t, W("m202", "which") - .1, .4), tpill(0, 0, DARE_LABEL, 40, P.sun, P.ink, { w: 700 }))) + melt(t, s, "cold", .5) + HUD(t); };
+      + TF(960, 1000, spring(t, W("m202", "which") - .1, .4), tpill(0, 0, DARE_LABEL, 40, P.sun, P.ink, { w: 700 }))) + coldHold(t, s, .5) + HUD(t); };
 /* back at the void deck: the camera drifts on along the table (it carries on under the title and into the theme: no cut). Pip keeps his
    answer to himself (a small hop), Basil a secret fist (a hop), Momo a sure little smile: no pose sprites */
 const camBack = (t) => { const u = clamp((t - SCN.back.t0) / (SCN.title.t1 - SCN.back.t0)); return camMix(camOn([TX - 60, TY - 40], 1.22, 960, 660), camOn([TX + 60, TY - 50], 1.26, 960, 660), eio(u)); };
@@ -103,7 +110,7 @@ SC.table = (t, s) => tableWorld(t, camTable(t))
    tested: thinking, surprised at the grey metal inside, then shy through the rest: her guess was wrong) */
 const peekFace = (who, side, t, tin, tout, poses) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true }); };
-SC.lcmagnet = (t, s) => { window._BUBAT = { '*': t < LT("m607b") - .5 ? [960, 870] : [960, 250] }; const cE = camTable(SCN.table.t1), p = camPt(cE, MAGAT), tm = s.t0 + 1.2, tI = MK("inside");
+SC.lcmagnet = (t, s) => { window._BUBAT = { '*': t < LT("m607b") - .5 ? [960, 870] : [960, 250] }; const cE = camTable(SCN.table.t1), p = camPt(cE, MAGAT), tm = s.t0 + 2.3, tI = MK("inside");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: magnetArt, bgc: "#FFF8EA", set: (tt) => tableWorld(tt, cE), verdict: [`A MAGNET: USUALLY IRON OR STEEL`, GOODC], tv: MK("v_magnet"), peekH: 470,
     peekEv: [[MK("v_magnet") + .1, "basil", "cheer"], [MK("v_magnet") + 2.3, "basil", "sit"]],
     over: (tt) => peekFace("momo", "r", tt, tm, undefined, [[tm + .2, "thinking"], [tI + .3, "surprised"], [tI + 1.8, "oops"]]) + lcStrip(tt, "m603", "A natural magnet is also called a lodestone.", { t1: LT("m604p") + 1.5 }) }); };
@@ -114,8 +121,9 @@ SC.mark1 = (t, s) => markScene(t, s, { id: "m609", sayId: "m608", who: "basil", 
    the viewer off (goodbye), then each shrinks with a pop. The pigeon on top of the lamp post outside as the camera passes */
 window.SHELF_AWAY = (t) => { if (PART !== 1) return 0; const a = W("m902", "cross") - .3, b = LE("m903") + .4, w = SCN.waitw; return Math.max(ss(a, a + .35, t) * (1 - ss(b, b + .35, t)), ss(w.t0 + .3, w.t0 + .8, t) * (1 - ss(SCN.pullout.t1, SCN.pullout.t1 + .4, t))); };
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix([1.02, 960, 540], camOn([PINAT[0], PINAT[1] - 4], 4.2, 960, 560), u * u); };
+// popfix 2 (teacher, 25 Nov 2026): Momo and Pip were on screen only 2 s (pop in, wave, shrink); they now stay at least 2.6 s, still shrinking before the fade
 SC.waitw = (t, s) => { const L = "m701", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1450, 1700][i]; return bd(w, x, [1076, 1030, 1076][i], [470, 380, 470][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1450, 1700][i]; return bd(w, x, [1076, 1030, 1076][i], [470, 380, 470][i], t, { in: s.t0 + .1 + .05 * i, out: Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return VD19(t, { top: magOnTable(t) + pinWire(t) }, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a steel pin!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#E9E1D2", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, lift = ss(m("jlift"), m("jlook") + .6, t), dy = 380 * lift, kk = 1 - .35 * lift;
   const rp = { basil: [[m("jfar") + .1, "pointing"], [m("jfar") + 2.3, "sit"]], momo: [[m("jclick") + .1, "surprised"], [m("jclick") + 2.2, "sit"]] };
@@ -189,7 +197,7 @@ SC.sticky = (t, s) => stickyWorld(t, camSticky(t))
    lib.js o.at). Faces: Basil at the right the whole time (his idea is tested: thinking, surprised ON gap, then shy through the rest: his idea
    is the one being corrected; he teaches "attract means pull" in his talking sprite); Pip at the left from his line (teaching magnetic
    materials; cheer at the verdict: a key word learnt) */
-SC.lcattract = (t, s) => { window._BUBAT = { '*': [960, 600] }; const cE = camSticky(SCN.sticky.t1), p = camPt(cE, MSIDE), tm = s.t0 + 1.2, tG = MK("gap"), tp = LT("m1007p") - .5, tV = MK("v_attract");
+SC.lcattract = (t, s) => { window._BUBAT = { '*': [960, 600] }; const cE = camSticky(SCN.sticky.t1), p = camPt(cE, MSIDE), tm = s.t0 + 2.3, tG = MK("gap"), tp = LT("m1007p") - .5, tV = MK("v_attract");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: attractArt, bgc: "#FFF8EA", set: (tt) => stickyWorld(tt, cE), verdict: [`ATTRACT MEANS PULL`, GOODC], tv: tV, peek: false,
     over: (tt) => peekFace("basil", "r", tt, tm, undefined, [[tm + .2, "thinking"], [tG + .1, "surprised"], [tG + 2.0, "oops"]]) + peekFace("pip", "l", tt, tp, undefined, [[tV + .1, "cheer"], [tV + 2.3, "sit"]])
       + slowTag(tt, MK("slow"), 668, 240) }); };
@@ -203,8 +211,8 @@ SC.final = (t, s) => { const L = "m1101"; return finalScene(t, s, L, 0, [[s.t0, 
 SC.liz = (t, s) => { const L = "m1102", tq = W(L, "it") - .1, c = PIGAT.liz, tc = W(L, "pigeon");
   return lizReveal(t, s, L, VD19(t, { titems: TRAY1B }), c[0], c[1] - 20, tq, "It was on top of the bicycle rack!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 700, tx: 960, ty: 985, tell: "m1104",
     fact: { id: "m1103m", at: [1270, 400], w: 900, h: 440, items: [["ff_fly", "far from home", ffFly19], ["ff_sense", "the Earth's magnetism", ffSense19], ["ff_home", "home again!", ffHome19]], cols: ["#E8A23A", "#5B6BD6", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("m1103m") - .3, "sit"], [MK("ff_sense") + .1, "surprised"], [MK("ff_sense") + 2.2, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, PIGEON_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("m1103m") - .3, "sit"], [MK("ff_sense") + .1, "surprised"], [MK("ff_sense") + 2.2, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"]] }) + smallPrint(t, s.t0 + .5, PIGEON_RULE); };
 
 /* 12 · the cliffhanger: a hand holds Basil's magnet right over the copper wire in the blue half and wiggles it (wire): the wire does not move at
    all; a ?; a chip copper: a metal by the wire, next to the green half's steel and iron (metal); PART 2. Basil big at the left (pointing at the

@@ -217,7 +217,9 @@ function lizReveal(t, s, L, view, lx, ly, tq, qtext, dx = 60, dy = 130, rr = 88,
 /* the reveal's fun fact (SERIES_FORMAT 4, teacher 22 Nov): a labelled picture panel that opens on the buddy's "fun" (mark ff_in) and
    fills one labelled picture per mark. Stage 1: a PLACEHOLDER (cream panel, a box per picture naming what to draw, its label); Stage 2
    draws the pictures (keep the marks and labels). f = { id, at: [x, y], w, h, items: [[mark, label, "DRAW: ..."], ...] } */
-function funFact(t, f) { const L = TL.lines[f.id], t0 = MK("ff_in") - .1; if (!L || t < t0 - .4 || t > L.end + 1.6) return ""; const k = spring(t, t0, .45) * (1 - ss(L.end + 1.2, L.end + 1.5, t));
+function funFact(t, f) { const L = TL.lines[f.id], t0 = MK("ff_in") - .1; if (!L || t < t0 - .4) return "";
+  if (t > L.end + 1.6) return window._S && t < window._S.t1 ? buddy(L.who, 1745, 1076, 430, t, { in: t0 - .3, poses: f.poses || [[t0 - .3, "sit"]], flip: true, nohop: true }) : "";   // popfix 2: the speaker stays to the end of the scene (it vanished .3 s before the cut, then popped in again)
+  const k = spring(t, t0, .45) * (1 - ss(L.end + 1.2, L.end + 1.5, t));
   const n = f.items.length, w = f.w || 780, h = f.h || 560, gap = 24, bw = (w - 60 - gap * (n - 1)) / n, bh = 330, cols = f.cols || ["#E8A23A", "#5B6BD6", "#2FA35A"];
   let g = `<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="34" fill="url(#gPaper)" stroke="#E3C9A8" stroke-width="7"/></g>` + TF(-w / 2 + 150, -h / 2, 1, tpill(0, 0, "FUN FACT!", 40, P[L.who], "#fff", { w: 700, ls: 3 }));
   f.items.forEach(([mk, lab, pic], i) => { const x = -w / 2 + 30 + i * (bw + gap) + bw / 2, a = (typeof mk === "number" ? mk : MK(mk)) - .1; if (t < a) return; const q = spring(t, a, .4), id = "ff" + PART + i, col = cols[i % cols.length];

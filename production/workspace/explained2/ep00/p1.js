@@ -82,7 +82,7 @@ SC.later = (t, s) => puzzleView(t, { cloth: 1 }) + TF(960, 520, spring(t, MK("la
    her line (teaching MAKE YOUR OWN, pointing at Basil's Two poles branch; her first cheer at the end: a key word learnt) */
 const peekFace = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved }); };
-SC.lcmaps = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camVoid(SCN.plans.t1), p = camPt(cE, [960, 640]), tm = s.t0 + 1.2, tb = LT("a502h") + .3, tmo = LT("a503m") - .5;
+SC.lcmaps = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camVoid(SCN.plans.t1), p = camPt(cE, [960, 640]), tm = s.t0 + 2.3, tb = LT("a502h") + .3, tmo = LT("a503m") - .5;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcMapsArt, bgc: "#FFF8EA", set: (tt) => world(tt, cE, { tt: { map: 2 } }), verdict: ["MAKE IT YOURSELF", GOODC], tv: MK("v_make"), peek: false,
     over: (tt) => peekFace("pip", "l", tt, tm, LT("a502h") + 4.5) + peekFace("basil", "r", tt, tb, tmo - .2, [[tb + .3, "thinking"]])
       + peekFace("momo", "r", tt, tmo, undefined, [[MK("twopoles") + .1, "pointing"], [LE("a503m") + .1, "cheer"], [LE("a503m") + 2.0, "sit"]], { achieved: true }) }); };
@@ -148,8 +148,8 @@ SC.final = (t, s) => finalScene(t, s, "a801h", 1, [[s.t0, null, 1], [W("a801h", 
 SC.liz = (t, s) => { const L = "a802h", tq = W(L, "it") - .1, c = CROW.liz, tc = W(L, "crow");
   return lizReveal(t, s, L, world(t, [1, 960, 540], { crow: [c[0], c[1], c[2], { hop: tc + .4 }] }), c[0], c[1] - 30, tq, "It was on the letterboxes!", -120, 160, 80, 2.4, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), ix: 1420, iy: 400, qx: 1120, qy: 700, tx: 960, ty: 985, tell: "a804h",
     fact: { id: "a803m", at: [640, 420], w: 900, h: 440, sx: 700, sy: 790, items: [["ff_mask", "a plain mask", ffMask], ["ff_years", "years later", ffYears], ["ff_us", "crows remember!", ffUs]], cols: ["#5B6BD6", "#2FA35A", "#C2577A"], poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .8, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("a803m") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_years") + .1, "surprised"], [MK("ff_years") + 1.6, "sit"], [LT("a804h") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, CROW_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("a803m") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_years") + .1, "surprised"], [MK("ff_years") + 1.6, "sit"], [LT("a804h") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, CROW_RULE); };
 
 /* 9 · the lock-in for Part 2: the void deck at dusk, the lights coming on; Pip at the left with the poster beside him on its easel (read ×5
    tonight; a hopeful smile), Basil at the right with his map and a little calendar card Tue · Thu on the table (a bold grin). Then the

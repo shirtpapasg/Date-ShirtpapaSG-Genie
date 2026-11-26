@@ -60,7 +60,7 @@ SC.r1 = (t, s) => lockN(t, { t0: W(L1, "what") - .35, cards: R1, clues: [["a com
    (goodbye), then shrink. The turtle by the orange buoy near the bumboat as the camera passes */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camOn([1320, 640], 1.15, 960, 520), camOn([LEDGE_C[0], LEDGE_C[1] - 14], 7.0, 960, 560), u * u); };
 SC.waitw = (t, s) => { const L = "n501", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1400, 1730][i]; return bd(w, x, [1076, 1010, 1076][i], [480, 390, 470][i], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1400, 1730][i]; return bd(w, x, [1076, 1010, 1076][i], [480, 390, 470][i], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return jetty(t, camWait(t), { ledge: ledgeProps(t) }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the compass needle!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#DDF4FF", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, rp = { pip: [[m("jpin") + 1, "thinking"], [m("jpin") + 3, "sit"]], momo: [[m("jpush") + .1, "surprised"], [m("jpush") + 2.2, "sit"]] }, a = needleAng(t) * Math.PI / 180, tip = [NP[0] + NL * Math.sin(a), NP[1] - NL * .44 * Math.cos(a)];
   return needleJourney(t, s) + riders(t, s, { tin: m("jpin") + .6, h: 200, at: { pip: [150, 1050], basil: [1760, 1052], momo: [320, 1046] }, poses: rp })
@@ -95,7 +95,7 @@ SC.trail = (t, s) => jetty(t, camTrail(t)) + bd("basil", 330, 1076, 480, t, { in
 /* [LOOK CLOSER] turn the compass, not the needle (lc21.js lcUseArt). Faces: Basil at the right the whole time (his idea is tested: thinking;
    OOPS ON `still`, shy to the verdict, a small nod at the verdict); Momo at the left from just before setN (pointing at the N under the red
    end; teaching COMPASS; a big smile and a nod: she cheers at her Mark Sentence) */
-SC.lcuse = (t, s) => { window._BUBAT = { '*': [960, 912] }; const p = [560, 790], tm = s.t0 + 1.2, tK = MK("kw_compass"), tN = MK("setN");
+SC.lcuse = (t, s) => { window._BUBAT = { '*': [960, 912] }; const p = [560, 790], tm = s.t0 + 2.3, tK = MK("kw_compass"), tN = MK("setN");
   const kwLine = (tt) => tt > tK + .3 && tt < tK + 3.2 ? pline(620, 340, ...lcXY(tt, s, LCU[0] + 60, LCU[1] - 120), ramp(tt, tK + .3, .3) * (1 - ramp(tt, tK + 2.9, .3))) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcUseArt, bgc: "#E9DCC0", set: (tt) => jetty(tt, camTrail(SCN.trail.t1)) + trailComp(SCN.trail.t1), verdict: [`TURN THE COMPASS, NOT THE NEEDLE`, GOODC], tv: MK("v_use"), peek: false,
     over: (tt) => kwLine(tt) + peekFace("basil", "r", tt, tm, undefined, [[tm + .2, "thinking"], [MK("still") + .1, "oops"], [MK("v_use"), "sit"]])
@@ -136,7 +136,7 @@ SC.bwalk = (t, s) => shore(t, camBw(t)) + bd("pip", 300, 1076, 500, t, { in: s.t
 /* [LOOK CLOSER] night and far away (lc21.js lcNightArt). Faces: Pip at the left the whole time (his question is answered: thinking; eyes wide
    as the ship's compass card rests: listening; he teaches TELL THE DIRECTION; cheer after his line: achieved); Momo at the right from the fog
    (listening, a small nod) */
-SC.lcnight = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camBw(SCN.bwalk.t1), p = camPt(cE, [1300, 380]), tm = s.t0 + 1.2, tK = MK("kw_tell_the_direction");
+SC.lcnight = (t, s) => { window._BUBAT = { '*': [960, 912] }; const cE = camBw(SCN.bwalk.t1), p = camPt(cE, [1300, 380]), tm = s.t0 + 2.3, tK = MK("kw_tell_the_direction");
   const kwLines = (tt) => tt > tK + .3 && tt < tK + 3.4 ? [lcXY(tt, s, -520, -180), lcXY(tt, s, 560, -150)].map(([x, y]) => pline(960, 340, x, y, ramp(tt, tK + .3, .3) * (1 - ramp(tt, tK + 3.1, .3)))).join("") : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcNightArt, bgc: "#0B1033", set: (tt) => shore(tt, cE), verdict: [`DAY OR NIGHT, NEAR OR FAR: IT TELLS THE DIRECTION`, GOODC], tv: MK("v_night"), peek: false,
     over: (tt) => kwLines(tt) + peekFace("pip", "l", tt, tm, undefined, [[tm + .2, "thinking"], [MK("shipneedle") - .3, "sit"], [LE("n905p") + .1, "cheer"], [LE("n905p") + 2.2, "sit"]], { achieved: true })
@@ -154,8 +154,8 @@ SC.final = (t, s) => { const L = "n1101"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1102", tq = W(L, "it") - .1, c = BWAT.liz, tc = W(L, "turtle");
   return lizReveal(t, s, L, shore(t, null, { turtle: c }), c[0] - 70 * c[2], c[1] - 30 * c[2], tq, "It was in the seagrass!", -120, 160, 80, 3.4, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1104",
     fact: { id: "n1103p", at: [1270, 400], w: 900, h: 440, items: [["ff_baby", "a baby turtle", ffBaby21], ["ff_ocean", "the Earth's magnet", ffOcean21], ["ff_home", "years later: back home", ffHome21]], cols: ["#E8A23A", "#5B6BD6", "#4BA862"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("basil", 170, 1076, 310, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .2, "pointing"], [LT("n1103p") - .3, "sit"], [LT("n1104") - .1, "waving"], [LE("n1104") + 1.6, "sit"]], wave: true })
-    + bd("momo", 400, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_home") + .1, "surprised"], [MK("ff_home") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("basil", 170, 1076, 310, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .2, "pointing"], [LT("n1103p") - .3, "sit"], [LT("n1104") - .1, "waving"], [LE("n1104") + 1.6, "sit"]], wave: true })
+    + bd("momo", 400, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_home") + .1, "surprised"], [MK("ff_home") + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the dare for Episode 22: the jetty, THE TRAIL MAP complete. Pip at the wooden bench by the map with an ordinary iron nail and Basil's
    bar magnet: the magnet strokes the nail from its head to its tip with its red end, lifts up and away in an arc, and strokes again the SAME

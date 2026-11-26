@@ -66,7 +66,7 @@ SC.r1 = (t, s) => { const L1 = "m401"; return lockN(t, { t0: LT(L1) - .1, cards:
 /* 5 · Be the magnetic strip! One glide into the fridge door's soft edge; the buddies wave the viewer off, then shrink */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camRoom, camOn([1540, 700], 5.0, 960, 560), u * u); };
 SC.waitw = (t, s) => { const L = "m501", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "momo", "pip"].map((w, i) => { const X = [BL, MO, PI][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "momo", "pip"].map((w, i) => { const X = [BL, MO, PI][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return home(t, camWait(t), {}) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be the magnetic strip!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#F7F9FA", 960, 600); };
 const riders25 = (t, s, o) => { let out = ""; for (const who of ["momo", "pip", "basil"]) { const [x, y] = o.at[who]; out += buddy(who, x, y, o.h || 200, t, { in: o.tin + ({ pip: 0, basil: .15, momo: .3 })[who], poses: (o.poses || {})[who] || [], tag: false, rim: "rimB", jump: (o.jolts || []).map((tj) => [tj, 34]), ...watchO(x, o.look || 960) }); } return out; };
 SC.shrink = (t, s) => { const m = MK, rp = { pip: [[m("jsnug") + .1, "surprised"], [m("jsnug") + 1.8, "sit"]], basil: glanceWave(m("jlie") + 2.0) };
@@ -93,7 +93,7 @@ SC.lc1q = (t, s) => home(t, camQ1(t), {}) + bd("momo", MO[0], MO[1], MO[2], t, {
 const peek25 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved, watch: W_.x }); };
 /* [LOOK CLOSER] where is the magnet? (lc25.js lcFridgeArt). Faces: Basil lower left (shy), Pip lower right (listening; he read the answer) */
-SC.lcfridge = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1560, 700]), tm = s.t0 + 1.2;
+SC.lcfridge = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1560, 700]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcFridgeArt, bgc: "#FFF6E6", set: (tt) => home(tt, cE, {}), verdict: ["A MAGNET HIDES IN THE DOOR'S EDGE", GOODC], tv: MK("v_edge"), peek: false,
     over: (tt) => peek25("basil", "l", tt, tm, undefined, []) + peek25("pip", "r", tt, tm + .3, undefined, []) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "m705", sayId: "m704", who: "pip", n: "1 of 2", tab: "The fridge door", text: TL.lines.m705.text, keys: ["strips", "magnets", "keep", "door", "closed."], size: 54, y: 240, footer: FOOT, poses: [[LE("m705") + .2, "sit"]],
@@ -116,11 +116,13 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [900, 220], momo: [900, 220], p
     + (ring ? OP(st, bg("stage")) + OP(st, TF(RG[0], RG[1], spring(t, tX, .45) * (1 + .035 * (inT ? rs.tick : 0)), `<g transform="translate(${-RG[0]} ${-RG[1]})">${ringTimer(RG[0], RG[1], t < r0 ? 1 : t < bell ? rs.frac : 0, t < r0 ? 5 : t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut: pulse(t, bell, .01, .6), chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.25, inner })}</g>`)
       + labels + TF(1700, 800 + bob, .9 * spring(t, tX + .1, .4), `<g filter="url(#dropS)">${crossedArms()}</g>`) + youPill(1700, 640 + bob * .6, 1.2) + TF(1700, 990, spring(t, tX + .2, .4), tpill(0, 0, "cross your arms", 38, P.ink, "#fff", { w: 700 }))) : "")
     + bd("momo", 420, 1076, 460, t, { in: LT(c) + .3, ...watchO(420, 1360) }) + bd("pip", 800, 1066, 440, t, { in: LT(c) + .4, ...watchO(800, 1360) })
-    // Basil stands on the counter with the magnet; while the countdown has the stage he pops out and stands at the side, big (SERIES_FORMAT 4:
-    // only the question's elements and one buddy at the side), then pops back onto the counter for the fix
-    + bd("basil", BC[0], BC[1], BC[2], t, { in: s.t0 + .1, out: tX - .25, poses: [[s.t0, "sit"], [W(b, "something") + .2, "thinking"]], nohop: true, watch: 1480, look: 5 })
-    + bd("basil", 1660, 1076, 440, t, { in: tX + .15, out: LE(c) + .2, flip: true, rock: inT ? 2.2 : 0, poses: [[tX, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 26]], nohop: true })
-    + bd("basil", BC[0], BC[1], BC[2], t, { in: LE(c) + .45, poses: [[LE(c) + .45, "sit"]], nohop: true, watch: 1480, look: 5 }) + (t > tX - .25 && t < LE(c) + .45 ? "" : magS)
+    // Basil stands on the counter with the magnet; while the countdown has the stage he stands at the side, big (SERIES_FORMAT 4: only the
+    // question's elements and one buddy at the side), then goes back onto the counter for the fix. popfix 2 (teacher, 25 Nov 2026: "pet
+    // buddies popping out and gone"): he GLIDES there and back (.5 s each), never popping out and in again .4 s later at another place
+    + (() => { const g1 = clamp((t - (tX - .25)) / .5), g2 = clamp((t - (LE(c) - .05)) / .5), u = eio(g1) * (1 - eio(g2)), side = g1 >= .5 && g2 < .5;
+      const o = side ? { in: s.t0 + .1, flip: true, rock: inT ? 2.2 : 0, poses: [[s.t0, "sit"], [W(b, "something") + .2, "thinking"], [bell + .35, "sit"]], jump: [[bell + .02, 26]], nohop: true }
+        : { in: s.t0 + .1, poses: g2 < .5 ? [[s.t0, "sit"], [W(b, "something") + .2, "thinking"]] : [[s.t0, "sit"], [LE(c) + .2, "sit"]], nohop: true, watch: 1480, look: 5, calmTo: LE(c) + .5 };
+      return bd("basil", lerp(BC[0], 1660, u), lerp(BC[1], 1076, u), lerp(BC[2], 440, u), t, o); })() + (t > tX - .25 && t < LE(c) + .45 ? "" : magS)
     + stamp(t, tH, 960, 560, "HOLD ON!") + bellIcon(t, r0) + coin(t, tOne, 960, 330, "+1", "arms crossed") + HUD(t); };
 
 /* 9 · Basil (still on the counter's left end, by the little whiteboard): "A whiteboard looks like plastic. So why does my magnet stick to it?"
@@ -132,7 +134,7 @@ SC.lc2q = (t, s) => home(t, camQ2(t), {}) + bd("momo", MO[0], MO[1], MO[2], t, {
    her smile and nod), then Basil lower left (teaching MAGNETIC DOORSTOP; cheer) */
 SC.lchome = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [230, 440]), tS = MK("strip");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcHomeArt, bgc: "#FFF6E6", set: (tt) => home(tt, cE, {}), verdict: ["STEEL SHEET · STEEL PLATE: MAGNETS HOLD ON", GOODC], tv: MK("v_home"), peek: false,
-    over: (tt) => peek25("momo", "r", tt, s.t0 + 1.2, MK("door") + .4, [[LE("m904m") + .1, "cheer"], [LE("m904m") + 2.2, "sit"]], { achieved: true }) + peek25("basil", "l", tt, MK("door") + .6, undefined, [[LE("m906b") + .1, "cheer"], [LE("m906b") + 2.2, "sit"]], { achieved: true })
+    over: (tt) => peek25("momo", "r", tt, s.t0 + 2.3, MK("door") + .4, [[LE("m904m") + .1, "cheer"], [LE("m904m") + 2.2, "sit"]], { achieved: true }) + peek25("basil", "l", tt, MK("door") + .6, undefined, [[LE("m906b") + .1, "cheer"], [LE("m906b") + 2.2, "sit"]], { achieved: true })
       + (tt >= tS - .1 && tt < LE("m903s") + 1.4 ? OP(1 - ramp(tt, LE("m903s") + 1.0, .3), strip2(tt, "m903s", 196, ["steel", "sheets", "attracted"])) : "") }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "m908", sayId: "m907", who: "basil", n: "2 of 2", tab: "The doorstop", text: TL.lines.m908.text, keys: ["magnet", "doorstop", "hold", "door", "place", "closing", "suddenly."], size: 52, y: 240, footer: FOOT, poses: [[LE("m908") + .2, "sit"]],
   under: markDoor25(t, 1250, 930, .7 * spring(t, s.t0 + .4, .5)), extra: bd("pip", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
@@ -142,8 +144,8 @@ SC.final = (t, s) => { const L = "m1001"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "m1002", tq = W(L, "it") - .1, c = BEEAT.liz, tc = W(L, "honeybee");
   return lizReveal(t, s, L, home(t, W0, { bug: c }), c[0], c[1] - 6, tq, "It was on the edge of the curtain!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1004",
     fact: { id: "m1003m", at: [1250, 400], w: 760, h: 440, items: [["ff_bee", "honeybees", ffBee25], ["ff_compass", "the Earth's magnetism", ffEarth25]], cols: ["#D9A21B", "#2F6FD6"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
-    + bd("basil", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1003m") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_compass") + .2, "surprised"], [MK("ff_compass") + 1.6, "sit"], [LT("m1004") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("basil", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1003m") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_compass") + .2, "surprised"], [MK("ff_compass") + 1.6, "sit"], [LT("m1004") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 11 · the cliffhanger: Pip holds up his tablet (video): a sleek train gliding above its track; the others lean in to watch the screen */
 SC.cliff = (t, s) => { const [px, py] = pawPt("pip", PI[0], PI[1], PI[2], false), tv = MK("video");

@@ -88,7 +88,7 @@ SC.r1 = (t, s) => { const L1 = "m401"; return lockN(t, { t0: LT(L1) - .1, cards:
 /* 5 · Be a steel paper clip! One glide down into the iron nail's tray (no cut); the buddies wave the viewer off, then shrink with a pop */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camRoom, camOn([TRX[0], TRY - 30], 5.4, 960, 600), u * u); };
 SC.waitw = (t, s) => { const L = "m501", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["basil", "pip", "momo"].map((w, i) => { const X = [BL, PM, MR][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["basil", "pip", "momo"].map((w, i) => { const X = [BL, PM, MR][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return sr(t, camWait(t), { bench: benchTop(t, { rack: { lift: 60 } }) }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a steel paper clip!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#F4EFE6", 960, 600); };
 // the riders: the three buddies, shrunk, on the tray's rim, WATCHING the nails above
 const riders24 = (t, s, o) => { let out = ""; for (const who of ["momo", "pip", "basil"]) { const [x, y] = o.at[who]; out += buddy(who, x, y, o.h || 200, t, { in: o.tin + ({ pip: 0, basil: .15, momo: .3 })[who], poses: (o.poses || {})[who] || [], tag: false, rim: "rimB", jump: (o.jolts || []).map((tj) => [tj, 34]), ...watchO(x, o.look || 960) }); } return out; };
@@ -125,7 +125,7 @@ const peek24 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 |
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved, watch: W_.x }); };
 /* [LOOK CLOSER] two things changed (lc24.js lcUnfairArt), then the cream strip 7.10. Faces: Basil at the lower left (shy: his own test is
    tested; OUTCOMES), Momo at the lower right (teaching FAIR TEST; cheer after her line). Both WATCH the panel */
-SC.lcunfair = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [720, 790]), tm = s.t0 + 1.2, tM = LT("m705m") - .5, tS = MK("strip");
+SC.lcunfair = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [720, 790]), tm = s.t0 + 2.3, tM = LT("m705m") - .5, tS = MK("strip");
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcUnfairArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt, { rack: { lift: -26, clips: [8, 2] } }) }), verdict: ["TWO THINGS CHANGED: NOT FAIR", "#D84A3A"], tv: MK("v_two"), peek: false,
     over: (tt) => peek24("basil", "l", tt, tm, undefined, []) + peek24("momo", "r", tt, tM, undefined, [[LE("m705m") + .1, "cheer"], [LE("m705m") + 2.2, "sit"]], { achieved: true })
       + (tt >= tS - .1 && tt < LE("m704s") + 1.6 ? OP(1 - ramp(tt, LE("m704s") + 1.2, .3), bookCaption(tt, "m704s", TL.lines.m704s.text, 236, { size: 34, keys: ["not", "fair,", "not", "sure", "variable"] })) : "") }); };
@@ -172,7 +172,7 @@ SC.lc2q = (t, s) => sr(t, camQ2(t), { bench: benchTop(t, { rack: { lift: -26, cl
   + bd("basil", BL[0], BL[1], BL[2], t, { in: s.t0 + .05, poses: [[s.t0, "sit"], [LE("m901b") + .05, "thinking"]] }) + HUD(t);
 /* [LOOK CLOSER] make it fair (lc24.js lcFairArt). Faces: Basil at the lower left (keen; teaching EXPERIMENT, cheer after his line), Pip at
    the lower right (listening). As the panel eases back the board shows the plan filled (BOARD) */
-SC.lcfair = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [720, 790]), tm = s.t0 + 1.2;
+SC.lcfair = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ2(SCN.lc2q.t1), p = camPt(cE, [720, 790]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcFairArt, bgc: "#FFF6E6", set: (tt) => sr(tt, cE, { bench: benchTop(tt, { rack: { ns: [20, 20], tagT: ["iron nail", "steel nail"] } }) }), verdict: ["ONLY ONE THING CHANGED: FAIR", GOODC], tv: MK("v_fair"), peek: false,
     over: (tt) => peek24("pip", "r", tt, tm, undefined, []) + peek24("basil", "l", tt, LT("m904b") - .5, undefined, [[LE("m904b") + .1, "cheer"], [LE("m904b") + 2.2, "sit"]], { achieved: true })
       + lcPrint(tt, [[MK("dipfair"), MK("v_fair") - .4, MOMENT_RULE]]) }); };
@@ -185,8 +185,8 @@ SC.final = (t, s) => { const L = "m1001"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "m1002", tq = W(L, "it") - .1, c = WLAT.liz, tc = W(L, "woodlouse"), rb = W(L, "cupboard"), ball = t >= rb && t < rb + 2.4 ? Math.sin(Math.PI * clamp((t - rb) / 2.4)) : 0;
   return lizReveal(t, s, L, sr(t, W0, { bench: benchTop(t, { crane: false, rack: { ns: [20, 20], tagT: ["iron nail", "steel nail"] } }), bug: [c[0], c[1], c[2], { ...c[3], ball, walk: ball < .05 }] }), c[0], c[1] - 10, tq, "It was under the cupboard door!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "m1004",
     fact: { id: "m1003b", at: [1250, 400], w: 760, h: 440, items: [["ff_crab", "cousins of crabs and prawns", ffCrab24], ["ff_damp", "the damp side", ffDamp24]], cols: ["#E0663A", "#2E6E9A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
-    + bd("momo", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1003b") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_damp") + .2, "surprised"], [MK("ff_damp") + 1.6, "sit"], [LT("m1004") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("momo", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("m1003b") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_damp") + .2, "surprised"], [MK("ff_damp") + 1.6, "sit"], [LT("m1004") - .1, "waving"], [s.t1, "sit"]], wave: true }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 11 · the cliffhanger: Momo (big at the right) holds up a holder with TWO batteries from the cupboard's tray (twob), beside two coils on the
    bench (a short one and a long one: her plan, not yet named). Basil and Pip watch the batteries. Heart: Will Momo's plan be fair? */

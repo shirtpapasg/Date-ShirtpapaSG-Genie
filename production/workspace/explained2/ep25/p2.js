@@ -62,7 +62,7 @@ SC.lc1q = (t, s) => park(t, camQ1(t), { front: poster25(t) }) + bd("momo", MO[0]
   + bd("basil", BA[0], BA[1], BA[2], t, { in: s.t0 + .05, ...watchO(BA[0], 1360) }) + HUD(t);
 const peek25 = (who, side, t, tin, tout, poses, o = {}) => { if (t < tin - .05 || (tout !== undefined && t > tout + .3)) return ""; const W_ = LCW, x = side === "l" ? W_.x - W_.w / 2 + 200 : W_.x + W_.w / 2 - 200;
   return bd(who, x, W_.y + W_.h / 2 + 470 * .42 + (1 - eo((t - tin) / .45)) * 350, 470, t, { in: tin, out: tout, poses: [[tin, "sit"], ...(poses || [])], peek: true, tag: false, shadow: false, flip: side === "r", nohop: true, achieved: o.achieved, watch: W_.x }); };
-SC.lccrane = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1360, 560]), tm = s.t0 + 1.2;
+SC.lccrane = (t, s) => { window._BUBAT = { '*': [960, 905] }; const cE = camQ1(SCN.lc1q.t1), p = camPt(cE, [1360, 560]), tm = s.t0 + 2.3;
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: lcCraneArt, bgc: "#FFF6E6", set: (tt) => park(tt, cE, { front: poster25(tt) }), verdict: ["IT CAN SWITCH OFF", GOODC], tv: MK("v_switch"), peek: false,
     over: (tt) => peek25("basil", "l", tt, tm, undefined, []) + lcPrint(tt, [[s.t0 + 1.4, MK("v_switch") - .4, "Scrapyards are for workers only. We watch from outside."]]) }); };
 SC.mark1 = (t, s) => markScene(t, s, { id: "n606", sayId: "n605", who: "momo", n: "1 of 2", tab: "The scrapyard crane", text: TL.lines.n606.text, keys: ["large", "iron", "disc", "powerful", "electromagnet.", "iron", "steel."], size: 48, y: 230, footer: FOOT, poses: [[LE("n606") + .2, "sit"]],
@@ -91,7 +91,7 @@ SC.fix = (t, s) => { window._BUBAT = { basil: [1250, 250], '*': [1250, 250] }; c
 /* 8 · Be a floating train! A glide into Pip's tablet screen (the video from Part 1); the buddies wave the viewer off, then shrink */
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix(camRoom, camOn([1500, 700], 4.0, 960, 560), u * u); };
 SC.waitw = (t, s) => { const L = "n801", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["momo", "basil", "pip"].map((w, i) => { const X = [MO, BA, PI][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["momo", "basil", "pip"].map((w, i) => { const X = [MO, BA, PI][i]; return bd(w, X[0], X[1], X[2], t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: X[0] > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return park(t, camWait(t), { front: TF(1500, 700, .5, tablet25(t, 1)) }) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a floating train!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#BFE6FF", 960, 600); };
 const riders25 = (t, s, o) => { let out = ""; for (const who of ["momo", "pip", "basil"]) { const [x, y] = o.at[who]; out += buddy(who, x, y, o.h || 200, t, { in: o.tin + ({ pip: 0, basil: .15, momo: .3 })[who], poses: (o.poses || {})[who] || [], tag: false, rim: "rimB", jump: (o.jolts || []).map((tj) => [tj, 34]), ...watchO(x, o.look || 960) }); } return out; };
 SC.shrink = (t, s) => { const m = MK, rp = { momo: [[m("jfast") + .2, "surprised"], [m("jfast") + 2.0, "sit"]], basil: glanceWave(m("jtrack") + 2.0) };
@@ -106,7 +106,7 @@ SC.lc2q = (t, s) => { const [px, py] = pawPt("pip", PI[0], PI[1], PI[2], false);
     + bd("pip", PI[0], PI[1], PI[2], t, { in: s.t0 + .05, poses: [[s.t0, "sit"], [LE("n901p") + .05, "thinking"]] }) + TF(px - 60, py - 150, .8, tablet25(t, 1)) + HUD(t); };
 SC.lctrain = (t, s) => { window._BUBAT = { '*': [960, 905] }; const [px, py] = pawPt("pip", PI[0], PI[1], PI[2], false);
   return lookCloser(t, s, { tz: s.t0, fx: px - 60, fy: py - 150, art: lcTrainArt, bgc: "#E8F4FB", set: (tt) => park(tt, camRoom, {}), verdict: ["MAGNETS LIFT, HOLD, PUSH AND HELP", GOODC], tv: MK("v_help"), peek: false,
-    over: (tt) => peek25("pip", "l", tt, s.t0 + 1.2, MK("mri") + .2, [[LE("n903p") + .1, "cheer"], [LE("n903p") + 2.2, "sit"]], { achieved: true }) + peek25("momo", "r", tt, MK("mri") + .4, undefined, [[LE("n906m") + .1, "cheer"], [LE("n906m") + 2.2, "sit"]], { achieved: true })
+    over: (tt) => peek25("pip", "l", tt, s.t0 + 2.3, MK("mri") + .2, [[LE("n903p") + .1, "cheer"], [LE("n903p") + 2.2, "sit"]], { achieved: true }) + peek25("momo", "r", tt, MK("mri") + .4, undefined, [[LE("n906m") + .1, "cheer"], [LE("n906m") + 2.2, "sit"]], { achieved: true })
       + (tt >= MK("strip") - .1 && tt < LE("n905s") + 1.4 ? OP(1 - ramp(tt, LE("n905s") + 1.0, .3), bookCaption(tt, "n905s", TL.lines.n905s.text, 206, { size: 36, keys: ["safe", "painless"] })) : "") }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "n908", sayId: "n907", who: "pip", n: "2 of 2", tab: "The floating train", text: TL.lines.n908.text, keys: ["magnets", "train", "tracks", "repel"], size: 60, y: 250, footer: FOOT, poses: [[LE("n908") + .2, "sit"]],
   under: markTrain25(t, 1250, 930, .66 * spring(t, s.t0 + .4, .5)), extra: bd("basil", 1790, 1076, 300, t, { in: s.t0 + .3, flip: true }) });
@@ -124,8 +124,8 @@ SC.final = (t, s) => { const L = "n1201"; return finalScene(t, s, L, 1, [[s.t0, 
 SC.liz = (t, s) => { const L = "n1202", tq = W(L, "it") - .1, c = STRAT.liz, tc = W(L, "strider");
   return lizReveal(t, s, L, park(t, W0, { bug: c }), c[0], c[1] - 6, tq, "It was by the stepping stone!", -120, 160, 80, 2.8, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 724, tx: 960, ty: 985, tell: "n1204",
     fact: { id: "n1203b", at: [1250, 400], w: 760, h: 440, items: [["ff_stand", "it stands on water", ffStand25], ["ff_hairs", "tiny hairs keep it dry", ffHairs25]], cols: ["#2F6FD6", "#2FA35A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "surprised"], [MK("ff_in") + .3, "sit"]] } })
-    + bd("momo", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1203b") - .3, "sit"]] })
-    + bd("pip", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [MK("ff_hairs") + .2, "surprised"], [MK("ff_hairs") + 1.6, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("momo", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .4, "pointing"], [LT("n1203b") - .3, "sit"]] })
+    + bd("pip", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [MK("ff_hairs") + .2, "surprised"], [MK("ff_hairs") + 1.6, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 /* 13 · THE P3 GOODBYE: the two hunt cards join into one big map MAGNETS EVERYWHERE! (the eight finds); the takeaway 7.13 on a cream strip;
    the series' P3 topics as small round badges (living things, materials, life cycles, magnets); the buddies together by the pond, happy
    (smiles; Momo waves once at the end: goodbye). No dare, no promised next topic */

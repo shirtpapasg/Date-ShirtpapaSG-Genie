@@ -38,6 +38,13 @@ SC.cold = (t, s) => { const tp = MK("budsIn");
   return VDK(t, { loops: loopsK(t), child: .6, front: dcards(t, MK("cardsIn"), "c") }, camCold(t)) + budsDeck(t, tp)
     + OP(ramp(t, .2, .4), lowerPill(60, 96, "A void deck, Singapore ·", "Saturday morning")); };
 
+/* popfix 2 (teacher, 25 Nov 2026: "pet buddies popping out and gone ... starting pet buddies scene"): the cold open's buddies pop in on
+   the three wired pop sounds (budsIn) only about 2 s before the melt into "Last time". The sound stays; the picture changes: the buddies
+   no longer pop out at the melt. They stay, opaque and on top, while the place melts away, and pop out in turn (the order they came, the
+   usual .2 s shrink) 2.65 s after each arrived, a moment into "Last time" (never on screen under 2.5 s; never faded: SERIES_FORMAT 6) */
+const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"); let r = a > .01 ? OP(a, F.svg) : "";
+  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2); if (k >= .02) r += buddy0(who, c.x, c.y, c.h, t, { ...c.o, k: (c.o.k || 1) * k }); }
+  return r; };
 /* 2 · "Last time...": EP17's dare, word for word. ONE calm picture: EP17's two cards side by side, a gentle push-in, the big ?, each card steps
    forward and lights while Heart says it (>= 2.5 s each) */
 SC.lasttime = (t, s) => { const L = "k203", tc = [W(L, "one"), W(L, "two")], z = 1 + .04 * eio((t - s.t0) / 8), k = ramp(t, s.t0 + .05, .5), cur = tc.filter((x) => t >= x - .15).length - 1;
@@ -46,7 +53,7 @@ SC.lasttime = (t, s) => { const L = "k203", tc = [W(L, "one"), W(L, "two")], z =
   return bg("stage2") + OP(ramp(t, s.t0, .3), T(960, 110, "Last time…", 60, "#fff", { w: 600 }))
     + OP(k, `<g transform="translate(960 540) scale(${n2(z)}) translate(-960 -540)">${cards}</g>`
       + qMark(t, W("k202", "are") - .1, 960, 300)
-      + TF(960, 1000, spring(t, W("k202", "are") - .1, .4), tpill(0, 0, DARE_LABEL, 44, P.sun, P.ink, { w: 700 }))) + melt(t, s, "cold", .5) + HUD(t); };
+      + TF(960, 1000, spring(t, W("k202", "are") - .1, .4), tpill(0, 0, DARE_LABEL, 44, P.sun, P.ink, { w: 700 }))) + coldHold(t, s, .5) + HUD(t); };
 /* back at the void deck: the camera drifts on along the board (it carries on under the title and into the game: no cut). Pip keeps his answer
    to himself (a small hop), Basil a secret fist, Momo a big sure smile: no pose sprites */
 const camBack = (t) => { const u = clamp((t - SCN.back.t0) / (SCN.title.t1 - SCN.back.t0)); return [1.1 + .04 * eio(u), lerp(1000, 1060, eio(u)), lerp(520, 500, eio(u))]; };
@@ -81,7 +88,7 @@ SC.board = (t, s) => VDK(t, { front: dcards(t) }, camBoard(t))
    similarities land on the SAME strip (same1, same2); the count waits. Faces: Basil (auto, left: he teaches the two words; cheer when
    DIFFERENCES lands); Momo at the right (her pick is tested: listening, surprised at same1 (her two similarities are real), then thinking at
    Heart's "But is there a difference?") */
-SC.lccompare = (t, s) => { window._BUBAT = { '*': [960, 600] }; const cE = camBoard(SCN.board.t1), p = camPt(cE, [1000, 470]), tm = s.t0 + 1.2, tq = W("k606", "is") - .1;
+SC.lccompare = (t, s) => { window._BUBAT = { '*': [960, 600] }; const cE = camBoard(SCN.board.t1), p = camPt(cE, [1000, 470]), tm = s.t0 + 2.3, tq = W("k606", "is") - .1;
   const momoFace = t >= tm - .05 ? bd("momo", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, poses: [[tm, "sit"], [MK("same1") + .1, "surprised"], [MK("same1") + 2.2, "sit"], [tq, "thinking"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: compareArt, bgc: "#FFF8EA", set: (tt) => VDK(tt, { front: dcards(tt) }, cE), verdict: [`SAME AND DIFFERENT: LOOK FOR BOTH`, GOODC], tv: MK("v_compare"), peekH: 470,
     peekEv: [[MK("kw_differences") + .1, "basil", "cheer"], [MK("kw_differences") + 2.3, "basil", "sit"]], over: () => momoFace }); };
@@ -90,7 +97,7 @@ SC.lccompare = (t, s) => { window._BUBAT = { '*': [960, 600] }; const cE = camBo
    a pop; the camera glides UP into the grey sky (one glide, no cut); the journey; one pull back out (the frog on its lily pad, the plate) */
 const camRain = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return [lerp(1.04, 1.5, u), 960, lerp(600, -80, u)]; };
 SC.waitw = (t, s) => { const L = "k701", tP = W(L, "be") - .15, rk = ss(s.t0, s.t0 + 1.5, t), sh = W(L, "shrink") - .1;
-  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 620, 1650][i]; return bd(w, x, 1076, 430, t, { in: s.t0 + .1 + .05 * i, out: sh + .2 * i + .3, flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 620, 1650][i]; return bd(w, x, 1076, 430, t, { in: s.t0 + .1 + .05 * i, out: Math.min(Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), s.t1 - 1.25 - .1 * (2 - i)),   /* popfix 2: on screen at least 2.6 s (they popped in, waved and shrank within 2 s), still gone before the fade */ flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return VP16(t, { frogAt: false, items: plate18(t) === "" ? "" : TF(180, 1010, .9, plate18(t)) + cicadaAt(t, 1586, 470, .3, 0), dawn: 0 }, camRain(t)) + rain18(t, rk)
     + OP(1 - ss(s.t1 - 1.2, s.t1 - .6, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a raindrop!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#9EB0C8", 960, 300); };
 SC.shrink = (t, s) => { const m = MK;
@@ -152,7 +159,7 @@ SC.holdon = (t, s) => { window._BUBAT = { basil: [1330, 250], pip: [700, 280] };
 
 /* 10 · [LOOK CLOSER] the young beside their parents (art18.js youngArt). Faces: the speakers (auto, left: Momo, then Basil); Pip at the right
    (his rule is tested: he listens; a slow nod at the end, no second oops) */
-SC.lcyoung = (t, s) => { window._BUBAT = { '*': [960, 205] }; const cE = camHold(SCN.holdon.t1), p = camPt(cE, [EAS1[0], EAS1[1] - 560 * EAS1[2]]), tm = s.t0 + 1.2;
+SC.lcyoung = (t, s) => { window._BUBAT = { '*': [960, 205] }; const cE = camHold(SCN.holdon.t1), p = camPt(cE, [EAS1[0], EAS1[1] - 560 * EAS1[2]]), tm = s.t0 + 2.3;
   const pipFace = t >= tm - .05 ? bd("pip", LCW.x + LCW.w / 2 - 200, LCW.y + LCW.h / 2 + 470 * .42 + (1 - eo((t - tm) / .45)) * 350, 470, t, { in: tm, poses: [[tm, "oops"], [LT("k1104") + .2, "sit"]], peek: true, tag: false, shadow: false, flip: true, nohop: true }) : "";
   return lookCloser(t, s, { tz: s.t0, fx: p[0], fy: p[1], art: youngArt, bgc: "#FFF8EA", set: (tt) => holdWorld(tt, cE), verdict: [`ONE SAME, ONE DIFFERENT`, GOODC], tv: MK("v_young"), peekH: 470, over: () => pipFace }); };
 SC.mark2 = (t, s) => markScene(t, s, { id: "k1107", sayId: "k1106", who: "momo", n: "2 of 2", text: "When we compare, we can use observable characteristics to identify similarities and differences between the life cycles of the animals.", keys: ["compare", "observable", "characteristics", "similarities", "differences"], size: 54, y: 225, footer: FOOT,
@@ -165,8 +172,8 @@ SC.final = (t, s) => { const L = "k1201"; return finalScene(t, s, L, 0, [[s.t0, 
 SC.liz = (t, s) => { const L = "k1202", tq = W(L, "it") - .1, c = CICAT.liz, tc = W(L, "cicada"), t17 = W("k1203b", "seventeen") - .1;
   return lizReveal(t, s, L, VDK(t, { cicAt: c, front: dcards(t) }), c[0], c[1], tq, "It was on the leg of our board's easel!", -120, 160, 80, 3.0, { from: () => SC.final(SCN.final.t1 - .04, SCN.final), qx: 1000, qy: 700, tx: 960, ty: 985, tell: "k1204",
     fact: { id: "k1203b", at: [1270, 400], w: 900, h: 440, items: [["ff_three", "three stages, like a grasshopper", ffThree18], ["ff_under", "a nymph underground", ffUnder18], ["ff_17", "seventeen years!", ff17_18]], cols: ["#2FA35A", "#9A5A2A", "#E8A23A"], sx: 1300, sy: 860, poses: [[MK("ff_in") - .4, "sit"]] } })
-    + bd("pip", 170, 1076, 330, t, { in: s.t0 + .6, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("k1203b") - .3, "sit"]] })
-    + bd("momo", 390, 1076, 330, t, { in: s.t0 + .7, poses: [[s.t0 + .7, "sit"], [t17, "surprised"], [t17 + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
+    + bd("pip", 170, 1076, 330, t, { in: s.t0 + 2.4, poses: [[s.t0 + .6, "sit"], [tc + .1, "pointing"], [LT("k1203b") - .3, "sit"]] })
+    + bd("momo", 390, 1076, 330, t, { in: s.t0 + 2.5, poses: [[s.t0 + .7, "sit"], [t17, "surprised"], [t17 + 2.2, "sit"]] }) + smallPrint(t, s.t0 + .5, LOOK_RULE); };
 
 /* 12 · the cliffhanger: the garden's edge by the void deck: EP16's brown hen sits on her straw nest under a low bush (hen: she turns her head);
    she shifts and three pale eggs show under her (nest); a ? pops. Basil big at the left looks at her and asks; Momo and Pip at the right watch
