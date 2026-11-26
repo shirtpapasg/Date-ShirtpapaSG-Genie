@@ -4,7 +4,7 @@ EYE REVIEW   153.0-155.7   runaway          x2rampBike     moves RIGHT   566 px 
 EYE REVIEW   153.0-155.7   runaway          buddy0         moves RIGHT   569 px    from lib.js:208<p1.js:12<p2.js:179  [buddy travels]
 EYE REVIEW   153.2-155.7   runaway          buddy0         moves RIGHT   536 px    from lib.js:208<p1.js:12<p2.js:178  [buddy travels]
 EYE REVIEW   166.9-171.9   runaway          buddy0         moves RIGHT  1289 px    from lib.js:208<p1.js:12<p2.js:220  [buddy travels]
-EYE REVIEW   171.3-172.4   runaway          buddy0         moves RIGHT   733 px    from lib.js:208<p1.js:12<p2.js:233  [buddy travels]
+EYE REVIEW   171.3-172.4   runaway          buddy0         moves RIGHT   773 px    from lib.js:208<p1.js:12<p2.js:233  [buddy travels]
 EYE REVIEW   184.7-185.5   race             buddy0         moves RIGHT   744 px    from lib.js:208<p1.js:12<p2.js:265  [buddy travels]
-EYE REVIEW   266.3-269.3   shrink           buddy0         moves RIGHT   587 px    from lib.js:208<p3.js:92<p3.js:83  [buddy travels]
+EYE REVIEW   266.3-269.4   shrink           buddy0         moves RIGHT   598 px    from lib.js:208<p3.js:92<p3.js:83  [buddy travels]
 no backwards movers (11 annotated movers face the right way, 8 for eye review)

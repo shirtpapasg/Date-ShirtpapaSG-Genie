@@ -95,3 +95,25 @@ the ice box), **new** `qa/review_race_lim.mp4` (196.4-226.4, "Slowly, slowly lah
 (386.6-407.6, "Aiyoh, boy. ..."). Scans re-run on the final code: no ghosting; no backwards movers; flicker 10 JUMPs, all deliberate camera
 cuts, no POP/GONE; overlap.js (5 fps, whole video): **no buddy over another buddy's face** (the shrink riders were re-ordered: Basil drawn first,
 a little further back on the chain). Hint #2 checked in the video at frames 9921-9926.
+
+## Fix pass 3: faces (26 Nov 2026, after the main session's still check; NOT uploaded)
+- **Race split screen (3:21-3:27):** Uncle Lim's bubble is one line, drawn in the empty space right of his helmet with its tail pointing
+  down-left to him (`say("r703", 1490, 372, ...)`): never over his head or the WINNER pill. Momo sits behind his bike (the right panel is
+  drawn as backdrop, Momo, then Uncle Lim) and a little further left (x 240), so the roadster reads clearly.
+- **New check `../qa/face_cover_scan.js`** (from explained2/: `NODE_PATH=$(npm root -g) node qa/face_cover_scan.js p4ep01v2 1 0-437`): bubbles,
+  pills, cards, words, comic words AND buddy sprites (by their painted alpha) against EVERY face: the buddies' and the code-drawn
+  characters' (Uncle Lim's head, the snail, Chilli, the YOU link). Skips a buddy's own items and faces under a full-frame dim layer.
+  Result: `qa/face_cover_scan.txt`.
+- Fixed from it: CLINK! (1:24) below Pip's face; SPROING! (1:52) above the faces; snail-cam "squelch." off the snail; the replay pill
+  ("it looks exactly the same") above the snail; the tease (2:09-2:13) snail moved where it shows (it was wholly behind Momo); the brakes
+  YOUR TURN! pill clear of Pip's helmet and Momo's ears; Momo's "But WHY..." bubble (2:25) off Pip's head; Pip in the ice-box shot at 470
+  (off the snail); Basil's look-closer bubbles (4:03, 4:14) off his helmet; the see-saw card (4:10-4:13) left so Uncle Lim's face shows;
+  the chain-ride tag "You: one link of a bike chain" fades before the riders pass under it; the finish snail starts right of Pip; the
+  outro (7:06-7:10) Momo 1470 / Basil 1795 so Chilli shows on the desk and Momo no longer covers Basil.
+- Left by design (eye-checked): Pip's own CHECKLIST clipboard at her chest; the pick cards rising past the faces (56.0-56.2 s); the
+  trailer push-in panel (3:05); the side-by-side cards springing in over the dimmed race (one frame); runners passing the snail; the
+  THINK card over the dimmed scene; Chilli hopping in behind the buddies (0.4 s each); the heart inset on Basil's chest (his face clear).
+- **Splice** (scratchpad ghost/msplice.sh + nyk/tools/verify.py): spans 80-90, 110-150, 170-210, 240-280, 380-400, 410-end re-rendered;
+  VERIFY OK (13086 frames, decode 0, audio bit-identical, every packet outside the spans bit-identical). -16.0 LUFS, -1.9 dBTP. Scans
+  after: no ghosting, no backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan as above.
+  srt unchanged; hint #2 frames 9921-9926 untouched (outside the spans).
