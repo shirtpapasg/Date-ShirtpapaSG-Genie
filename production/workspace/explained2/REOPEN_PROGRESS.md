@@ -153,3 +153,4 @@
 - 08:21 UTC: EP23 UPLOADED (teacher OK): Part 1 3o2rurdCtTc, Part 2 4UjU6MonuH8. Chapters applied. Retires classic GNQn_TeCRgg.
 - 09:02 UTC 26 Nov: TEACHER: 'OK to replace the flicker-fixed parts' -> upv6.sh uploading 20 parts (EP27 first). TEACHER on P4 scripts EP2-4: 'Not ok. 1st episode needs refinement.'
 - 09:03 UTC: EP27 v6 UPLOADED (flicker fix; teacher OK): 9OH920z0KKU
+- 09:05 UTC: EP26 v6 UPLOADED (flicker fix; teacher OK): hFs5zzMfyX8 YGh1zEDf5Og
