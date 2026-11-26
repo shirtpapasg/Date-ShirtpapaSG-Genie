@@ -1,0 +1,129 @@
+{
+ "_note": "P4 EP1 (the new P4 style, one video), for TheOneApp videos.js after upload: it REPLACES the P4 entry no. 1 (the old video FOvUezOZJbo, 'Your Bike, Your Body And A Tree Are All The Same Thing'): swap the whole entry, keep no. 1. The keys are the real videos.js constants and ids, written here as strings: paste O.respCirc / O.plant WITHOUT quotes and the 'lab:...' ids WITH their quotes. The problem moment has no matching key, so its keys are empty. Set url to the uploaded video id. Suggested (not in videos.js yet, as the P4 README says): CH.humanSystem / CH.plantSystem.",
+ "replaces": [
+  "FOvUezOZJbo"
+ ],
+ "entries": [
+  {
+   "no": 1,
+   "art": "🚲",
+   "topic": "Systems",
+   "title": "Pip's Bike Won't Move! Which Fix Works?",
+   "len": "6:20",
+   "url": "https://www.youtube.com/watch?v=<P4EP01>",
+   "moments": [
+    {
+     "at": "0:00",
+     "what": "The problem: the class ride is in one hour and the bike won't move",
+     "keys": [],
+     "_line": "e101",
+     "_t": 0.61
+    },
+    {
+     "at": "0:33",
+     "what": "Pick the fix: pedal harder, a skipping rope, or the chain?",
+     "keys": [
+      "'lab:p4-2-3'"
+     ],
+     "_line": "e201p",
+     "_t": 35.27
+    },
+    {
+     "at": "1:19",
+     "what": "Fix 1: pedal harder. One part cannot do another part's job",
+     "keys": [
+      "'lab:p4-2-3'"
+     ],
+     "_line": "e301",
+     "_t": 80.79
+    },
+    {
+     "at": "1:50",
+     "what": "Fix 2: a skipping rope round the gears",
+     "keys": [
+      "'lab:p4-2-1'"
+     ],
+     "_line": "e401",
+     "_t": 111.68
+    },
+    {
+     "at": "2:04",
+     "what": "Look closer: the chain's function, teeth in the gaps",
+     "keys": [
+      "'lab:p4-2-1'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "e501",
+     "_t": 125.94
+    },
+    {
+     "at": "2:38",
+     "what": "Journey: be a link of the bike chain",
+     "keys": [
+      "'lab:p4-2-1'"
+     ],
+     "_line": "e601",
+     "_t": 160.45
+    },
+    {
+     "at": "3:08",
+     "what": "Fix 3, tested: the parts interact",
+     "keys": [
+      "'lab:p4-2-1'"
+     ],
+     "_line": "e701",
+     "_t": 190.45
+    },
+    {
+     "at": "3:33",
+     "what": "Can it stop? Every part has its own function",
+     "keys": [
+      "'lab:p4-2-3'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "e707b",
+     "_t": 215.3
+    },
+    {
+     "at": "3:56",
+     "what": "One part stops working: the system is likely to be affected",
+     "keys": [
+      "'lab:p4-2-3'"
+     ],
+     "_line": "e711",
+     "_t": 238.2
+    },
+    {
+     "at": "4:32",
+     "what": "Your body is made up of systems too",
+     "keys": [
+      "O.respCirc",
+      "'lab:p4-2-1'"
+     ],
+     "_line": "e803",
+     "_t": 274.23
+    },
+    {
+     "at": "4:51",
+     "what": "A tree is a system: leaves, stem and roots",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-1'"
+     ],
+     "_line": "e807",
+     "_t": 292.51
+    },
+    {
+     "at": "5:01",
+     "what": "The words that earn marks",
+     "keys": [
+      "'lab:p4-2-1'",
+      "'lab:p4-2-3'"
+     ],
+     "_line": "e901",
+     "_t": 302.88
+    }
+   ]
+  }
+ ]
+}
