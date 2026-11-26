@@ -62,8 +62,8 @@ function x2refrain(t, id, t1, o = {}) { const L = TL.lines[id]; if (window._SAID
   for (const w of words) { const ww = tw(w.w + " ", size, 700), lit = t >= w.a - .03; s += `<text x="${n2(x)}" y="${n2(size * .35)}" font-family="Fredoka" font-weight="700" font-size="${size}" fill="${lit ? (o.litCol || P.ink) : "#B8AE9C"}">${esc(w.w)}</text>`; if (lit && t < w.a + .25) s += `<rect x="${n2(x - 4)}" y="${n2(size * .5)}" width="${n2(tw(w.w, size, 700) + 8)}" height="7" rx="3" fill="${P.sun}"/>`; x += ww; }
   return TF(960, o.y || 212, k, s); }
 // YOUR TURN!: the YOU hands bob and the refrain's words light up at a child's chanting pace (from t0, over d s)
-function x2yourTurn(t, t0, d, txt = "...but what does THAT part do?", x = 1500, y = 760) { if (t < t0 - .1 || t > t0 + d + .4) return ""; const k = spring(t, t0 - .1, .4) * (1 - eo((t - t0 - d) / .3)), ws = txt.split(" ");
-  let s = tpill(0, -250, "YOUR TURN!", 50, P.coral, "#fff", { w: 700 }) + youPill(0, -150, 1.1); const per = d / ws.length;
+function x2yourTurn(t, t0, d, txt = "...but what does THAT part do?", x = 1500, y = 760, pd = [0, 0]) { if (t < t0 - .1 || t > t0 + d + .4) return ""; const k = spring(t, t0 - .1, .4) * (1 - eo((t - t0 - d) / .3)), ws = txt.split(" ");
+  let s = tpill(pd[0], -250 + pd[1], "YOUR TURN!", 50, P.coral, "#fff", { w: 700 }) + youPill(0, -150, 1.1); const per = d / ws.length;
   const hb = 12 * Math.abs(Math.sin((t - t0) * Math.PI / per));
   s += [-1, 1].map((sd) => `<g transform="translate(${sd * 60} ${n2(-30 - hb)}) scale(${sd * .42} .42)" filter="url(#dropS)">${countHand(5)}</g>`).join("");
   return TF(x, y, k, s) + x2refrain(t, "__yt", t0 + d, { words: ws.map((w, i) => ({ w, a: t0 + i * per })), y: 212, litCol: P.coral, tag: "THE CLASS", tagCol: P.coral, col: P.coral, t0 }); }

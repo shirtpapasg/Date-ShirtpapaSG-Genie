@@ -43,7 +43,7 @@ SC.bell = (t, s) => { const tO = MK("clink"), tR = MK("rideoff"), tF = MK("flap"
     + x2bc(c, "momo", 1830, 1066, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("b403") + .2, "thinking"], [LT("b404") - .1, "sit"], [LE("b404") + .05, "pointing"], [LT("b405") + .2, "sit"]], look: -9 })
     + x2refrain(t, "b401", LE("b401") + .6) + x2refrain(t, "b402", LE("b402") + 1.2, { size: 54, col: P.pip, litCol: "#6B4FD8" })
     + comicWord(t, MK("flick") + .02, ...camPt(c, [BELLW[0] + 90, BELLW[1] - 90]), "ting!", { size: 50, tiny: true, col: "#BFE6F7", d: .6 })
-    + comicWord(t, tO + .55, ...camPt(c, [1500, 900]), "CLINK!", { size: 80, d: .8 })
+    + comicWord(t, tO + .55, ...camPt(c, [1540, 1010]), "CLINK!", { size: 80, d: .8 })   /* (face scan 26 Nov) below Pip's face */
     + x2HUD(t); };
 // (B) the ride-off from behind: the floor recedes to the back wall; Basil (back view on the saddle) rides away, smaller; the pigeons ahead
 const x2backRider = (t, x, y, k, cr, o = {}) => TF(x, y, k, `<!--FACES:away riderRear-->` + bikeRearV2(t, { crank: cr }) + buddy("basil", 0, -330, 330, t, { pose: "back", tag: false, shadow: false, noreact: true, still: false, items: false }) + basilHelmetBack(-6, -330 - 330 * .94 + 40, 1.05) + (o.rider || "")).replace("<!--FACES:away riderRear-->", "<!--FACES:away riderRear-->");
@@ -94,7 +94,7 @@ SC.chain = (t, s) => { const tS = MK("sproing"), off = t >= tS - .05, c = camMix
     + x2bc(c, "momo", 1240, 1080, 330, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("n501") + .1, "horrified/surprised"], [LT("n503") + .4, "thinking"], [LT("n504") - .1, "sit"], [LE("n504") + .05, "pointing"], [LT("n505") + .3, "sit"]], look: -12 })
     + x2bc(c, "pip", 1660, 1066, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("n501") + .1, "sit"], [MK("yt2") - .3, "pointing"], [MK("yt2") + .5, "proud/arms_crossed"], [LT("n503") + .4, "sit"], [LT("n505") + .5, "panic/oops"]], look: -6 })
     + x2refrain(t, "n501", LE("n501") + .6) + (t >= LT("n502") - .2 && t < MK("yt2") ? x2refrain(t, "n502", MK("yt2"), { size: 54, col: P.pip }) : "") + x2yourTurn(t, MK("yt2") + .1, 1.6)
-    + comicWord(t, tS + .02, ...camPt(c, [CHB[0] - 80, 760]), "SPROING!", { size: 84, d: .85 })
+    + comicWord(t, tS + .02, ...camPt(c, [CHB[0] - 80, 540]), "SPROING!", { size: 84, d: .85 })   /* (face scan 26 Nov) above the faces */
     + x2HUD(t); };
 
 /* ================================================================ SNAILCAM · the low side shot ================================================================ */
@@ -113,7 +113,7 @@ function x2snailcam(t, s, slow = 1, tw_) { const tt = tw_ === undefined ? t : tw
   return { w, bike, tail, snail, sx }; }
 SC.snailcam = (t, s) => { const R = x2snailcam(t, s), c = camOn([960, 700], 1.0);
   return R.w + R.tail + R.bike + `<rect x="0" y="0" width="1920" height="70" fill="#1E3442" opacity="0"/>` + R.snail
-    + comicWord(t, s.t0 + .2, 1300, 420, "WHIRRRR", { size: 84, d: 1.4, rot: -4 }) + comicWord(t, MK("pedt") - 1.4, R.sx + 120, 900, "squelch.", { size: 34, tiny: true, col: "#E8F4FF", d: .9 })
+    + comicWord(t, s.t0 + .2, 1300, 420, "WHIRRRR", { size: 84, d: 1.4, rot: -4 }) + comicWord(t, MK("pedt") - 1.4, R.sx + 220, 800, "squelch.", { size: 34, tiny: true, col: "#E8F4FF", d: .9 })
     + x2lab(t, MK("pedt"), s.t1, c, "pedals: turning", 1450, 300, SCB[0] + SCK * BK.BB[0] + 60, SCB[1] + SCK * BK.BB[1] - 40, 42) + x2lab(t, MK("bwst"), s.t1, c, "back wheel: still", 420, 300, SCB[0] + SCK * BK.RA[0], SCB[1] + SCK * BK.RA[1] - 90, 42)
     + OP(ramp(t, s.t0, .3), TF(1700, 990, 1, tpill(0, 0, "snail-cam", 30, "#fff", P.ink, { w: 600 }))) + x2HUD(t); };
 /* the slow-motion replay: INSTANT REPLAY · SLOW MOTION ×¼; it looks EXACTLY the same (the snail is that slow), only Basil's tail flaps slowly */
@@ -122,13 +122,13 @@ SC.replay = (t, s) => { const s0 = SCN.snailcam, rp = MK("slow0") - .4, tw_ = t 
   const rew = t < s.t0 + .45 ? 1 - (t - s.t0) / .45 : 0;
   return R.w + R.tail + R.bike + R.snail + `<rect width="1920" height="1080" fill="#D9C7A0" opacity=".14"/>` + film
     + TF(330, 160, spring(t, s.t0 + .1, .4), tpill(0, 0, "INSTANT REPLAY", 40, "#E5484D", "#fff", { w: 700 })) + (t >= rp ? TF(1560, 160, spring(t, rp, .4), tpill(0, 0, "SLOW MOTION ×¼", 40, P.ink, P.sun, { w: 700 })) : "")
-    + (t >= MK("rp0") ? OP(ramp(t, MK("rp0") + 1.2, .3), TF(960, 880, 1, tpill(0, 0, "(it looks exactly the same)", 32, "#fff", P.ink2, { w: 600 }))) : "")
+    + (t >= MK("rp0") ? OP(ramp(t, MK("rp0") + 1.2, .3), TF(960, 770, 1, tpill(0, 0, "(it looks exactly the same)", 32, "#fff", P.ink2, { w: 600 }))) : "")
     + (rew > 0 ? `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.6 * rew)}"/>` + [0, 1, 2, 3, 4, 5].map((i) => `<rect x="0" y="${(i * 197 + t * 2400) % 1080}" width="1920" height="10" fill="#fff" opacity=".6"/>`).join("") + T(960, 560, "◀◀", 160, "#fff") : "") + logo(t); };
 /* the tease: a two-shot (front view): Basil off the bike, Momo with her paws on her hips; BATTLE CRY 3, smaller, and it wobbles; the snail
    in the background, still going */
 SC.tease = (t, s) => { const c = camOn([960, 700], 1.15, 960, 620), tc = MK("cry3");
   window._BUBAT = { momo: [1240, 330], basil: [640, 330] }; x2said("n509");
-  return x2place("gardenv2", TF(...CHB, CHK, bikeP4(t, { chain: false, brakes: 1, bell: 0, crank: .6 })) + TF(1560, 1046, .55, `<g transform="rotate(20)">${chainLoose(260, 90, 0)}</g>`) + TF(lerp(1100, 1230, (t - s.t0) / 5), 960, .5, `<!--FACES:right snail-->` + snailV2(t)), c)
+  return x2place("gardenv2", TF(...CHB, CHK, bikeP4(t, { chain: false, brakes: 1, bell: 0, crank: .6 })) + TF(1560, 1046, .55, `<g transform="rotate(20)">${chainLoose(260, 90, 0)}</g>`) + TF(lerp(860, 960, (t - s.t0) / 5), 960, .5, `<!--FACES:right snail-->` + snailV2(t)), c)
     + x2bc(c, "basil", 640, 1066, 400, t, { in: s.t0 - .5, poses: [[0, "deadpan"], [tc - .1, "pointing"], [LE("n509") + .3, "sit"]], look: 4, ...x2grease(t) })
     + x2bc(c, "momo", 1250, 1066, 380, t, { in: s.t0 - .5, flip: true, poses: [[0, "unimpressed"], [LT("n508") - .05, "sit"], [LE("n508") + .1, "unimpressed"], [tc + .1, "facepalm/oops"]], look: -5 })
     + x2bc(c, "pip", 1700, 1066, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], look: -5, noreact: true })
@@ -148,14 +148,14 @@ SC.brakes = (t, s) => { const tC = MK("clang"), tL = MK("lean"), tK = MK("click"
   const lev = t < tC - .05;
   const set = x2rampBike(t, roll, { brakes: lev ? 1 : 0, stand: t < tK }) + (lev ? "" : TF(RPB[0] - 120, 760, .9, `<path d="M-30 -6 q-6 22 -26 30 M30 -10 q6 22 26 30" stroke="#59616B" stroke-width="7" fill="none" stroke-linecap="round"/>`));
   const sq = pulse(t, MK("sqz"), .02, .3);
-  window._BUBAT = { basil: [520, 300], pip: [1120, 400], momo: [1420, 460] }; x2said("k602");
+  window._BUBAT = { basil: [520, 300], pip: [1120, 400], momo: [1560, 330] }; x2said("k602");
   const turned = t >= tL;
   return x2place("rampv2", set, c) + CAM(rampFront(), c[0], c[1], c[2])
     + x2bc(c, "basil", 20, 762, 380, t, { in: s.t0 - .5, flip: turned, poses: [[0, "sit"], [MK("sqz") - .1, "pointing"], [LT("k602") - .1, "sit"], [LT("k604") - .1, "sit"], [LE("k605") + .05, "pointing"], [LT("k606") - .1, "sit"], [tL, "hero/arms_crossed"]], look: turned ? -4 : 4, ...x2grease(t) })
     + x2bc(c, "pip", 900, rampAt(900) + 4, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("k601") + .6, "panic/thinking"], [LT("k602") - .1, "sit"], [MK("yt3") - .3, "pointing"], [MK("yt3") + .5, "proud/arms_crossed"], [LT("k603") - .1, "sit"], [LE("k603") + .05, "pointing"], [LT("k604") + .3, "sit"], [LT("k606") + .3, "panic/oops"]], look: -6 })
     + x2bc(c, "momo", 1240, rampAt(1240) + 4, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("k603") + .05, "laugh/cheer"], [LT("k604") + .3, "thinking"], [LT("k605") - .1, "sit"], [LE("k606") + .2, "sit"]], look: -6 })
     + windV2(t, ...camPt(c, [-60, 560]), 300, ss(tL, tL + .2, t) * (1 - ss(tK + .3, tK + .6, t)))
-    + x2refrain(t, "k601", LE("k601") + .6) + (t >= LT("k602") - .2 && t < MK("yt3") ? x2refrain(t, "k602", MK("yt3"), { size: 54, col: P.pip }) : "") + x2yourTurn(t, MK("yt3") + .1, 1.6)
+    + x2refrain(t, "k601", LE("k601") + .6) + (t >= LT("k602") - .2 && t < MK("yt3") ? x2refrain(t, "k602", MK("yt3"), { size: 54, col: P.pip }) : "") + x2yourTurn(t, MK("yt3") + .1, 1.6, undefined, 1500, 760, [60, -40])   /* (face scan 26 Nov) the YOUR TURN! pill clear of Pip's helmet and Momo's ears */
     + OP(sq, `<g transform="translate(${n2(camPt(c, [RPB[0] + RPK * (BK.HT[0] - 80), 760 + RPK * (BK.HT[1] - 40)])[0])} ${n2(camPt(c, [0, 760 + RPK * (BK.HT[1] - 40)])[1])})"><path d="M-34 -26 l-20 -14 M-40 0 h-26 M34 -26 l20 -14 M40 0 h26" stroke="#fff" stroke-width="7" stroke-linecap="round"/></g>`)
     + comicWord(t, tC + .02, ...camPt(c, [RPB[0] + 80, 470]), "CLANG!", { size: 84, d: .85 }) + comicWord(t, tK + .02, ...camPt(c, [RPB[0] - 40, 690]), "click.", { size: 40, tiny: true, col: "#fff", d: .8 })
     + (t > tK + .1 ? `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.18 * ramp(t, tK, .4))}"/>` : "") + x2HUD(t); };
@@ -225,7 +225,7 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   // Momo and Pip slide the box in (from the right), then stand by it
   // (review 26 Nov: three buddies in the right half covered each other's faces) Momo shoves the box in alone and stays right of it; Pip runs in
   // from the LEFT after the bonk (she chased the bike) and stops left of the crown stool, facing Basil
-  const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 340, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 340, pX = lerp(-300, 430, eio(clamp((t - tBk) / 1.0)));
+  const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 340, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 340, pX = lerp(-300, 470, eio(clamp((t - tBk) / 1.0)));
   window._BUBAT = { momo: [1560, 330], pip: [480, 300], basil: [1180, 320] };
   const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "pointing"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10 });
   return CAM(bg("vdv2") + set + bike, c[0], c[1], c[2]) + basil + can + front + splashFx
@@ -291,16 +291,17 @@ function x2raceSplit(t, s) { const tg = MK("racego"), u = t - tg, tS = MK("slump
   const lx = u < half ? lerp(520, 2350, u / half) : lerp(-500, 560, clamp((u - half) / (pass - half))), moving = u < pass, cr2 = moving ? u * 2.4 : pass * 2.4;
   const pigeonsHop = (x0) => [0, 1, 2].map((i) => { const near = Math.abs(lx - (x0 + i * 60)) < 260 && u < half, hp = near ? 50 : 0; return TF(x0 + i * 60 + (near ? 40 : 0), 1040 - hp * Math.abs(Math.sin(t * 9 + i)), .7, pigeonV2(t, { peck: near ? 0 : .5 + .5 * Math.sin(t * 6 + i), ph: i })); }).join("");
   const ringNow = moving && Math.abs(lx - 1150) < 160 && u < half, brakeNow = moving && Math.abs(lx - 1700) < 140 && u < half;
-  const right = `<g clip-path="url(#spR)">${CAM(bg("vdv2") + pigeonsHop(1200) + TF(240, 1000, .8, `<path d="M0 0 V-260" stroke="#8C96A2" stroke-width="10"/>`) + ribbonV2(240, 560, 800, moving && lx < 600 && u > half ? 0 : u >= pass - .1 ? clamp((u - pass + .1) / .5) : 0)
-    + TF(lx, 1040, .62, `<!--FACES:right limRide-->` + limRideV2(t, { crank: cr2 * (brakeNow ? .6 : 1), ring: ringNow ? 1 : 0, sip: !moving ? (.5 + .5 * Math.sin((t - tWin) * 1.4)) * (1 - ss(LT("r703") - .5, LT("r703") - .15, t) + ss(LE("r703") + .2, LE("r703") + .7, t)) : 0, stand: !moving })) + TF(1860, 1000, .9, crownStoolV2(1)) + TF(180 + 4 * u, 1066, .6, `<!--FACES:right snail-->` + snailV2(t)), cR[0], cR[1], cR[2])}</g>`;
-  const momoR = x2bc(cR, "momo", 300, 1070, 380, t, { in: tg - 3, noStay: true, poses: [[0, "sit"], [tWin + .2, "surprised"], [LT("r703") + 1.2, "sit"]], look: 4, ...watchO(300, 1000), tag: false });
+  // (review 26 Nov) Momo sits BEHIND his bike (drawn between the backdrop and Uncle Lim), a little further left, so the roadster reads clearly
+  const rightBack = CAM(bg("vdv2") + pigeonsHop(1200) + TF(240, 1000, .8, `<path d="M0 0 V-260" stroke="#8C96A2" stroke-width="10"/>`) + ribbonV2(240, 560, 800, moving && lx < 600 && u > half ? 0 : u >= pass - .1 ? clamp((u - pass + .1) / .5) : 0), cR[0], cR[1], cR[2]);
+  const rightFront = CAM(TF(lx, 1040, .62, `<!--FACES:right limRide-->` + limRideV2(t, { crank: cr2 * (brakeNow ? .6 : 1), ring: ringNow ? 1 : 0, sip: !moving ? (.5 + .5 * Math.sin((t - tWin) * 1.4)) * (1 - ss(LT("r703") - .5, LT("r703") - .15, t) + ss(LE("r703") + .2, LE("r703") + .7, t)) : 0, stand: !moving })) + TF(1860, 1000, .9, crownStoolV2(1)) + TF(180 + 4 * u, 1066, .6, `<!--FACES:right snail-->` + snailV2(t)), cR[0], cR[1], cR[2]);
+  const momoR = x2bc(cR, "momo", 240, 1070, 380, t, { in: tg - 3, noStay: true, poses: [[0, "sit"], [tWin + .2, "surprised"], [LT("r703") + 1.2, "sit"]], look: 4, ...watchO(300, 1000), tag: false });
   const frame = `<rect x="40" y="150" width="760" height="790" rx="24" fill="none" stroke="#fff" stroke-width="10"/><rect x="840" y="150" width="1040" height="790" rx="24" fill="none" stroke="#fff" stroke-width="10"/>`;
   window._BUBAT = {};
-  return `<rect width="1920" height="1080" fill="${P.indigo}"/>` + L + R + left + `<g clip-path="url(#spR)">${right}${momoR}</g>` + frame
+  return `<rect width="1920" height="1080" fill="${P.indigo}"/>` + L + R + left + `<g clip-path="url(#spR)">${rightBack}${momoR}${rightFront}</g>` + frame
     + (ringNow ? comicWord(t, t - .01, ...camPt(cR, [lx + 140, 820]), "ring ring!", { size: 40, tiny: true, col: "#fff", d: .5 }) : "") + (brakeNow ? comicWord(t, t - .01, ...camPt(cR, [lx, 840]), "squeak", { size: 36, tiny: true, col: "#fff", d: .4 }) : "")
     + (u > pass - .4 && u < pass + .5 ? comicWord(t, tg + pass - .4, ...camPt(cR, [560, 840]), "zoom.", { size: 34, tiny: true, col: P.sun, d: .9 }) : "")
     + (t >= tWin + .2 ? TF(1360, 230, spring(t, tWin + .2, .45), tpill(0, 0, "WINNER: UNCLE LIM", 44, P.leaf, "#fff", { w: 700 })) : "")
-    + (t >= LT("r703") - .05 ? x2limSay("r703", ...camPt(cR, [lx + 120, 520]), t) : "")
+    + (t >= LT("r703") - .05 ? say("r703", 1490, 372, t, { size: 40, maxW: 900, tail: -170, tdx: -70 }) : "")   // (review 26 Nov) one line, right of his helmet: never over his head or the WINNER pill
     + tpill(170, 200, "BASIL", 30, P.basil, P.ink, { w: 700, ls: 4 }) + tpill(1000, 200, "UNCLE LIM", 30, P.lim, "#fff", { w: 700, ls: 4 })
     + x2raceClock(t, 0, 1, 960, 62, 1) + logo(t); }
 // (C) after: the head-on two-shot (Basil on his bike, Momo beside him, Pip a step away); then (D) the side by side

@@ -43,11 +43,11 @@ SC.lcbike = (t, s) => { const k = ramp(t, s.t0, .45), tB = MK("lbell"), tK = MK(
     + x2inset(t, tK + .4, tV - .1, 480, 540, "no brakes: the ice box", TF(0, 50, .26, iceBoxBackV2(t) + `<g transform="translate(-450 -10) scale(.75)">${bikeP4(t, { chain: false, brakes: 0, bell: 0, crank: .5 })}</g>` + iceBoxFrontV2(t)), "#FF9A8F");
   const verdict = t >= tV ? TF(860, 250, spring(t, tV, .45) * (1 - ramp(t, tF - .3, .3)), tpill(0, 0, "EVERY PART HAS A JOB", 46, P.leaf, "#fff", { w: 700 })) : "";
   // l807: the see-saw: the two bikes on a balance, Uncle Lim's side lower ("heavier"), the WINNER ribbon on it
-  const seesaw = t >= tS - .1 && t < LE("l807") + .6 ? TF(960, 470, spring(t, tS - .1, .45) * (1 - ramp(t, LE("l807") + .2, .3)), (() => { const a = 9 * eo(clamp((t - tS) / .8));
+  const seesaw = t >= tS - .1 && t < LE("l807") + .6 ? TF(870, 470, spring(t, tS - .1, .45) * (1 - ramp(t, LE("l807") + .2, .3)), (() => { const a = 9 * eo(clamp((t - tS) / .8));
     return `<g filter="url(#drop)"><rect x="-470" y="-230" width="940" height="430" rx="30" fill="#fff" stroke="${P.ink}" stroke-width="7"/></g><path d="M-40 170 L0 100 L40 170z" fill="#8C96A2" stroke="${P.ink}" stroke-width="5"/>`
       + `<g transform="translate(0 100) rotate(${n2(-a)})"><rect x="-400" y="-12" width="800" height="22" rx="8" fill="#C99A5B" stroke="#7A5226" stroke-width="5"/>${TF(-220, -12, .3, `<g transform="scale(1)">${bikeP4(t, { chain: false, brakes: 0, bell: 0, crank: .5 })}</g>`)}${TF(230, -12, .3, roadsterV2(t, { kopi: false }))}</g>`
       + tpill(-240, -170, "Basil's: lighter", 28, "#fff", P.ink, { w: 700 }) + tpill(240, -170, "Uncle Lim's: heavier", 28, P.sun, P.ink, { w: 700 }) + TF(300, -100, .9, `<path d="M-40 0 L40 0 L30 40 L0 26 L-30 40z" fill="#E5484D"/>` + T(0, 14, "WINNER", 18, "#fff")); })()) : "";
-  window._BUBAT = { pip: [1500, 250], momo: [760, 640], basil: [760, 800] };
+  window._BUBAT = { pip: [1500, 250], momo: [760, 640], basil: [880, 740] };
   const pk = (t >= tM - .05 && t < tM + 1.3);   // MISS 2: Pip and Basil go for the high-five; Momo's eyes follow the kopi bag; her paw is late
   return `<g filter="url(#b10)">${x2place("vdv2", "", [1.1, 960, 600])}</g><rect width="1920" height="1080" fill="${P.night}" opacity=".25"/>` + OP(k, panelV2(1) + `<clipPath id="pnV2"><rect x="${PNL2.x}" y="${PNL2.y}" width="${PNL2.w}" height="${PNL2.h}" rx="40"/></clipPath><g clip-path="url(#pnV2)">${CAM(body, c[0], c[1], c[2])}</g>` + labs + mag + verdict)
     + OP(k, TF(960, 110, 1, tpill(0, 0, "LOOK CLOSER", 46, P.ink, P.sun, { w: 700 }))) + ins + seesaw
@@ -84,7 +84,7 @@ SC.shrink = (t, s) => { const a = LT("j902"), sh = a + (t - a) > a ? 0 : 0, S_ =
   const riders = c[0] > .5 ? rider("basil", 3.15) + rider("pip", 1.1) + rider("momo", 2.1) : "";   // Basil (his back) drawn first, a little further back: he never covers Momo's face as they ride round the gear
   const [yx, yy] = camPt(c, [you.x, you.y]);
   return OP(ramp(t, s.t0, 1.0), CAM(world, c[0], c[1], c[2]) + riders
-    + youTag(t, s.t0 + .6, "You: one link of a bike chain") + TF(yx, yy - 120 * c[0] - 20, spring(t, s.t0 + .8, .45) * (zo > .3 ? 1.1 : .9), youPill(0, 0, 1))
+    + OP(1 - ramp(t, MK("jgrab") + 2.5, .3), youTag(t, s.t0 + .6, "You: one link of a bike chain")) + TF(yx, yy - 120 * c[0] - 20, spring(t, s.t0 + .8, .45) * (zo > .3 ? 1.1 : .9), youPill(0, 0, 1))
     + (t >= MK("jgrab") - .1 && t < tT + .4 ? TF(1300, 220, spring(t, MK("jgrab") - .1, .4) * (1 - ramp(t, tT, .3)), tpill(0, 0, "the front gear's teeth fit into your gaps", 34, "#fff", P.ink, { w: 700 })) : "")
     + (t >= tT - .1 ? TF(1240, 860, spring(t, tT - .1, .4) * (1 - ramp(t, back - .3, .3)), tpill(0, 0, "the chain tugs the back gear round", 36, "#fff", P.ink, { w: 700 })) : "")
     + (t >= MK("jwheel") - .1 ? TF(560, 300, spring(t, MK("jwheel") - .1, .4) * (1 - ramp(t, back - .2, .2)), tpill(0, 0, "back wheel: turning", 40, P.leaf, "#fff", { w: 700 })) : ""))
@@ -263,7 +263,7 @@ SC.words = (t, s) => markScene(t, s, { id: "w1203", sayId: "w1202", who: "basil"
 // places the cardboard crown on its shell; confetti; "Slowly, slowly. Every part working."; THE HIGH-FIVE LANDS: CLAP!, sparkles, and
 // everyone laughs together; the score
 SC.finish = (t, s) => { const tX = MK("cross"), tCl = MK("clap"), c = camMix(camOn([780, 980], 1.45, 960, 760), camOn([960, 720], 1.0), eio(clamp((t - LT("e1303") + .3) / 2.0)));
-  const sx = lerp(330, 600, clamp((t - s.t0) / (tX + 1.2 - s.t0))), crownOn = t >= tX + 1.0, crU = clamp((t - tX - .3) / .7);
+  const sx = lerp(420, 600, clamp((t - s.t0) / (tX + 1.2 - s.t0))), crownOn = t >= tX + 1.0, crU = clamp((t - tX - .3) / .7);
   const crownStool = TF(700, 1000, .9, crownStoolV2(!crownOn && crU <= 0 ? 1 : 0)), crownFly = crU > 0 && !crownOn ? TF(lerp(700, sx, eio(crU)), lerp(888, 980, crU) - 90 * Math.sin(Math.PI * crU), .55 * (1 - .25 * crU), crownV2()) : "";
   const conf = t >= tX + 1.0 && t < tX + 2.4 ? [...Array(26)].map((_, i) => { const u = t - tX - 1.0, an = hash(i, 3) * Math.PI * 2, r = 200 * (1 - Math.exp(-u * 3)); return `<rect x="-7" y="-4" width="14" height="8" rx="2" fill="${[P.coral, P.aqua, P.sun, P.pink, P.leaf][i % 5]}" transform="translate(${n2(sx + Math.cos(an) * r)} ${n2(900 + Math.sin(an) * r * .6 + 160 * u * u)}) rotate(${n2(i * 40 + u * 300)})" opacity="${n2(clamp(1.4 - u))}"/>`; }).join("") : "";
   const set = crownStool + TF(sx, 1050, .7, `<!--FACES:right snail-->` + snailV2(t, { crown: crownOn })) + snailTrail(250, sx, 1052) + crownFly + conf;
@@ -289,7 +289,7 @@ const deskV2 = (t, ding) => `<rect x="-200" y="0" width="400" height="24" rx="6"
 SC.nyk = (t, s) => { const kn = TL.lines.h1305.know, th = kn + 1.0, u = clamp((t - th) / 1.6), hx = lerp(2050, 1270, u), hopY = u < 1 ? -50 * Math.abs(Math.sin(u * Math.PI * 4)) : 0, ding = pulse(t, th + 2.2, .02, .3);
   P.chilli = "#D9402A";
   const outro = t >= kn + .6 ? OP(ramp(t, kn + .6, .3), TF(1170, 800, .62, deskV2(t, ding)) + (t >= th ? TF(hx, 800 + hopY, .46, `<!--FACES:none chilli-->` + chilliP4v2(t, { droop: .6 + .4 * ss(th + 1.6, th + 2.1, t), look: -1 })) : "")) : "";
-  return nykScene(t, s, TF(960, 640, .34, rainTreeP4(0, 0, 1)) + TF(820, 1000, .78, bikeP4(t, { chain: 1, crank: .6, sh: 0, brakes: 1, bell: 1 })) + TF(1160, 1040, .7, snailV2(t, { crown: true })) + outro, { bx: [250, 1700, 1400], hx: 470 }); };
+  return nykScene(t, s, TF(960, 640, .34, rainTreeP4(0, 0, 1)) + TF(820, 1000, .78, bikeP4(t, { chain: 1, crank: .6, sh: 0, brakes: 1, bell: 1 })) + TF(1160, 1040, .7, snailV2(t, { crown: true })) + outro, { bx: [250, 1795, 1470], hx: 470 }); };
 // Chilli (the EP2 guest, drawn as in v1: a terracotta pot with a face, thin stems, limp leaves, small chilli padi fruits)
 /* FACES: none */ function chilliP4v2(t, o = {}) { const d = o.droop === undefined ? 1 : o.droop, look = o.look || 0; let s = `<ellipse cx="0" cy="4" rx="96" ry="14" fill="#2B2147" opacity=".22"/>`;
   const stems = [[-40, -230], [0, -270], [40, -235], [-18, -200], [22, -205]];
