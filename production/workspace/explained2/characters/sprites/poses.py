@@ -14,12 +14,12 @@ IN = f"{H}/poses_inbox"
 POSES = {  # buddy: {pose: (file, crop or None)}
   "pip": {"cheer": ("pip_cheer_mouth_open_eyes_closed.jpg", None), "oops": ("pip_oops.jpg", None), "thinking": ("pip_thinking.jpg", None),
           "surprised": ("pip_surprised.jpg", None), "arms_crossed": ("pip_arms_crossed.jpg", None), "waving": ("pip_waving.jpg", None),
-          "pointing": ("pointing_draft2_sheet.jpg", (440, 15, 815, 432))},
+          "pointing": ("pointing_draft2_sheet.jpg", (440, 15, 815, 432)), "back": ("pip_back.jpg", None)},
   "momo": {"cheer": ("momo_cheer_mouth_open.jpg", None), "oops": ("momo_oops.jpg", None), "thinking": ("momo_thinking.jpg", None),
            "surprised": ("momo_surprised.jpg", None), "arms_crossed": ("momo_arms_crossed.jpg", None), "pointing": ("momo_pointing.jpg", None),
-           "waving": ("momo_waving.jpg", None), "back": ("momo_back.png", None)},
+           "waving": ("momo_waving.jpg", None), "back": ("momo_back.jpg", None)},
   "basil": {"cheer": ("basil_cheer_mouth_wide.jpg", None), "oops": ("basil_oops.jpg", None), "surprised": ("basil_surprised.jpg", None),
-            "arms_crossed": ("basil_arms_crossed.jpg", None), "back": ("basil_back.png", None)},
+            "arms_crossed": ("basil_arms_crossed.jpg", None), "back": ("basil_back.jpg", None)},
 }
 POSES["basil_c"] = {  # Basil in colour (teal, from EP14): his own poses, on his coloured sitting set (basil_c_sit.json)
   "oops": ("basil_c_oops.jpg", None), "waving": ("basil_c_waving.jpg", None), "thinking": ("basil_c_thinking.jpg", None),
@@ -33,18 +33,22 @@ POSES["momo_c"] = {  # Momo in colour (coral, from EP14)
 POSES["momo_v2"] = {  # Momo in Pip's style (Gemini, 23 Nov): one model, one style for all three buddies
   "oops": ("momo_v2_oops_final.jpg", None), "waving": ("momo_v2_waving.jpg", None), "thinking": ("momo_v2_thinking.jpg", None),
   "surprised": ("momo_v2_surprised.jpg", None), "cheer": ("momo_v2_cheer.jpg", None), "pointing": ("momo_v2_pointing.jpg", None),
-  "arms_crossed": ("momo_v2_talk_closed.jpg", None)}
+  "arms_crossed": ("momo_v2_talk_closed.jpg", None), "back": ("momo_back.jpg", None)}
 POSES["basil_v2"] = {  # Basil in Pip's style (Gemini, 23 Nov)
   "oops": ("basil_v2_oops.jpg", None), "waving": ("basil_v2_waving.jpg", None), "thinking": ("basil_v2_thinking.jpg", None),
   "worried": ("basil_v2_worried.jpg", None), "surprised": ("basil_v2_surprised.jpg", None), "pointing": ("basil_v2_pointing.jpg", None),
-  "cheer": ("basil_v2_cheer.jpg", None), "arms_crossed": ("basil_v2_arms_crossed.jpg", None), "laughing": ("basil_v2_laugh_eyes_shut.jpg", None)}
+  "cheer": ("basil_v2_cheer.jpg", None), "arms_crossed": ("basil_v2_arms_crossed.jpg", None), "laughing": ("basil_v2_laugh_eyes_shut.jpg", None), "back": ("basil_back.jpg", None)}
 SITREF = {}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)], ("basil_v2", "cheer"): [(221, 473), (183, 303)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 SHADOW_T = 138
 ADJ = {}      # (buddy, pose): extra scale, set by eye from qa/poses_<buddy>.png
 DX = {}       # (buddy, pose): anchor nudge in source px
-FEET = {("basil", "back"): 508}   # (buddy, pose): the feet line in source px, when something else (Basil's tail, seen from behind) hangs lower
+# (buddy, pose): the feet line in source px, when something else (a tail, seen from behind, lying towards the camera) hangs lower.
+# Back views (teacher, 26 Nov 2026): the COLOURED back paintings (characters/teacher_backs_2026-11-26/, copied to poses_inbox/<who>_back.jpg),
+# measured from the cut-outs: Pip's haunches end at 900 (tail to 956), Momo's at 912 (tail to 1000), Basil's feet at 784 (tail to 989).
+# The old grey back paintings are kept as poses_inbox/<who>_back_grey.png and poses/<who>_back_grey.png (history).
+FEET = {("pip", "back"): 900, ("momo", "back"): 912, ("basil", "back"): 784, ("momo_v2", "back"): 912, ("basil_v2", "back"): 784}
 try: exec(open(f"{H}/poses_adj.py").read())
 except FileNotFoundError: pass
 
@@ -61,12 +65,16 @@ def bbox(alpha):
 
 if __name__ == "__main__":
     os.makedirs(f"{H}/poses", exist_ok=True); os.makedirs(f"{H}/qa", exist_ok=True); meta = {}
+    ONLY = set(sys.argv[1:])            # e.g. "python poses.py back": only those poses, merged into the existing poses.json, no QA sheet rewrite
+    if ONLY:
+        old = json.load(open(f"{H}/poses/poses.json"))
+        POSES = {w: {p: v for p, v in ps.items() if p in ONLY} for w, ps in POSES.items()}
     for who, poses in POSES.items():
         ref = SITREF.get(who, who); sit = json.load(open(f"{H}/{ref}_sit.json")); sim = cv2.imread(f"{H}/{ref}_sit_closed.png", -1)
         sx0, sy0, sx1, sy1 = sit["states"]["closed"]["bbox"]; sit_h = sy1 - sy0; hips = sit["anchors"]["hips"]
         off = hips[0] - body_cx(sim[..., 3], sy0, sy1)                       # the sitting sprite's hips, relative to its body centre
         foot = sy1 - hips[1]                                                 # hips sit this far above the lowest pixel
-        meta[who] = {}; tiles = []
+        meta[who] = dict(old.get(who, {})) if ONLY else {}; tiles = []
         def tile(rgba, ax, ay, label):                                       # QA: every pose on the same canvas, anchors on one cross
             c = np.zeros((1000, 900, 4), np.uint8); M = np.float32([[1, 0, 450 - ax], [0, 1, 940 - ay]])
             w = cv2.warpAffine(rgba, M, (900, 1000)); o = on(w, (0x8C, 0x2A, 0x3B)).copy()
@@ -100,6 +108,9 @@ if __name__ == "__main__":
             tiles.append(tile(out, A[0], A[1], f"{pose} x{s * k0:.2f}"))
             print(who, pose, "scale", round(s * k0, 3), "anchor", A, "size", w, h)
         meta[who]["_sit"] = dict(body_h=sit_h, hips_above_feet=foot)
+        if ONLY:
+            if len(tiles) > 1: cv2.imwrite(f"{H}/qa/poses_{who}_{'_'.join(sorted(ONLY))}.png", cv2.resize(np.hstack(tiles), None, fx=.5, fy=.5, interpolation=cv2.INTER_AREA))
+            continue
         while len(tiles) % 4: tiles.append(np.zeros_like(tiles[0]))
         sheet = np.vstack([np.hstack(tiles[i:i + 4]) for i in range(0, len(tiles), 4)])
         cv2.imwrite(f"{H}/qa/poses_{who}.png", cv2.resize(sheet, None, fx=.5, fy=.5, interpolation=cv2.INTER_AREA))
