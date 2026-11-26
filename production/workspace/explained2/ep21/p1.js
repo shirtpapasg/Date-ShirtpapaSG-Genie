@@ -71,7 +71,7 @@ const camToday = (t) => { const s = SCN.today, a = eio((t - s.t0) / 1.3), b = ei
 SC.today = (t, s) => { const out = s.t1 - 1.4; window._BUBAT = { '*': [960, 250] };
   return field(t, camToday(t), { rig: { a: spinAng(t, SCN.back.t0 - 1.2, 2, 4.4) } }) + (t >= MK("chart") ? OP(pulse(t, MK("chart"), .05, .8), `<rect width="1920" height="1080" fill="#fff" opacity=".12"/>`) : "")
     + bd("basil", 300, 1076, 480, t, { in: s.t0 + .1, out, poses: [[s.t0, "sit"]], look: -3, jump: [[MK("chart") - .1, 18]] }) + bd("pip", 1440, 1010, 380, t, { in: s.t0 + .15, out: out + .1, flip: true, poses: [[s.t0, "sit"]] })
-    + bd("momo", 1730, 1076, 500, t, { in: s.t0 + .2, out: out + .2, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + melt(t, s, "title", .5) + HUD(t); };   // popfix 25 Nov 2026: the title frame melts away and the buddies stay or glide (they used to pop in again)
+    + bd("momo", 1730, 1076, 500, t, { in: s.t0 + .2, out: out + .2, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + meltScene(t, s, "title", .5, true) + HUD(t); };   // popfix 25 Nov 2026: still a hard cut from the title (the camera has moved on), but the buddies glide from their title spots (they used to pop in again)
 SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = SWI;
   return gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => field(tt, cE), A: camPt(cE, [p[0] - 6, p[1] - 12]), T: [680, 440], Z: 2.4, dim0: 0 }) + smallPrint(t, LT("m304"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["A freely suspended magnet", ""], ["The North-South direction", ""], ["Earth is like a magnet", ""]], ["m401", "m402", "m403", "m404"], "momo");
