@@ -75,7 +75,7 @@ function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id)
    correct one should be confident/smile. celebrate with hands high up only when achieved/learnt something new". */
 let _learn = null;
 function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you know!"
-    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|v_chain$|spins$|coin1$)/.test(k))   /* P4 EP1: a key word lands, the chain's verdict, the wheel spins (fix 3 works), the score. NOT the failed fixes (STILL STUCK, the rope) */ _learn.push([v - .4, v + 4]);
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|cross$|clap$|coin1$)/.test(k))   /* P4 EP1 v2: a key word lands, the snail crosses the line, the high-five lands, the score */   /* P4 EP1: a key word lands, the chain's verdict, the wheel spins (fix 3 works), the score. NOT the failed fixes (STILL STUCK, the rope) */ _learn.push([v - .4, v + 4]);
     for (const s of TL.scenes || []) if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); }
   return _learn.some(([a, b]) => t >= a && t < b); }
 // EP22 (script section 3, OUTCOMES): Part 1 Round 1 (EP21's dare: answer 2, the nail attracts the clips) Basil right for the right
@@ -96,8 +96,10 @@ function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is 
 /* P4 EP1 (script section 5): the picks were Pip 1 (pedal harder), Basil 2 (the skipping rope), Momo 3 (the chain: right). Pip shy from Heart's
    correction e305 to the end of the replay; Basil shy from the flop to the end of the look-closer (his rope); Momo confident through both
    corrections and at the wheel test; Pip shy again at "Oh. I took those off too." (the brakes) to the end of Heart's e710. */
-const OUTCOMES = [{ at: "l:e305", to: "s:replay", right: ["momo"], wrong: ["pip"] }, { at: "m:flop", to: "s:lcchain", right: ["momo"], wrong: ["basil"] },
-  { at: "m:spins", to: "l:e703p", right: ["momo"], wrong: [] }, { at: "m:ohno", to: "l:e710", right: [], wrong: ["pip"] }];
+/* P4 EP1 v2 (script section 6, cards 2 and 3 swapped): picks Basil 1 (pedal faster), Pip 2 (all three parts back: right), Momo 3 (chain and
+   brakes, skip the bell). Basil shy from Heart's correction r707 to the end of the look-closer lcbike (his fix 1); Momo shy from Pip's
+   "Wait. Checklist." v1004 to the end of Heart's v1008 (her fix 3); Pip confident through both corrections. */
+const OUTCOMES = [{ at: "l:r707", to: "s:lcbike", right: ["pip"], wrong: ["basil"] }, { at: "l:v1004", to: "l:v1008", right: ["pip"], wrong: ["momo"] }];
 const outcomeEnd = (o, t0) => { if (!o.to) return t0 + 4; const [k, id] = o.to.split(":");
   const v = k === "s" ? (SCN[id] && SCN[id].t1) : k === "l" ? (HAS(id) ? LE(id) : undefined) : MK(id); return v === undefined ? t0 + 4 : Math.max(t0 + 4, v); };
 function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id] = o.at.split(":"), t0 = k === "m" ? MK(id) : (HAS(id) ? LT(id) : undefined); if (t0 === undefined || t < t0) continue; const t1 = outcomeEnd(o, t0); if (t > t1) continue;
@@ -204,10 +206,21 @@ function buddy(who, x, y, h, t, o = {}) {
       if (u < 1) { o2.flip = u < .5 ? a.o.flip : o.flip; return buddy0(who, lerp(a.x, x, u), lerp(a.y, y, u), lerp(a.h, h, u), t, o2); }
       return buddy0(who, x, y, h, t, o2); } }
   return buddy0(who, x, y, h, t, o); }
+/* P4 EP1 v2 (26 Nov 2026): the teacher's NEW emotion paintings (script section 6) are asked for BY NAME in the scenes ("deadpan", "panic",
+   ...), optionally with today's stand-in after a slash ("panic/oops"). When spr/<who>_<pose>.png is in the manifest (new_poses.py copies
+   it from characters/sprites/poses/ once painted) it is used; until then the stand-in (or NEWPOSE_FALLBACK) shows, with no extra pose pop
+   when the stand-in is the pose already showing. "laugh" stand-ins giggle (a small shake). */
+const NEWPOSE_FALLBACK = { basil: { deadpan: "sit", shocked: "surprised", laugh: "laughing", shrug: "oops", hero: "arms_crossed" },
+  pip: { panic: "thinking", proud: "arms_crossed", embarrassed: "oops", angry: "pointing", dizzy: "surprised", ride: "sit" },
+  momo: { facepalm: "oops", laugh: "cheer", unimpressed: "sit", horrified: "surprised" } };
+const NEWPOSES = Object.fromEntries(Object.entries(NEWPOSE_FALLBACK).map(([w, m]) => [w, Object.keys(m)]));
+function resolvePose(who, p) { if (!p) return p; const [a, b] = p.split("/"); if (SPR[`${who}_${a}`] || a === "sit" || a === "back") return a; return b || (NEWPOSE_FALLBACK[who] || {})[a] || a; }
+const isLaughStandIn = (who, p) => !!p && p.split("/")[0] === "laugh" && !SPR[`${who}_laugh`];
 function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (location.search.includes("hide=" + who)) return "";   // thumbnails only
   let pose = o.pose || "sit", tsw = -99; const PS = (o.poses || []).slice().sort((a, b) => a[0] - b[0]);   // EP15: poses in time order
-  for (const [tp, p] of PS) if (t >= tp) { pose = p; tsw = tp; }
+  let asked = null; for (const [tp, p0] of PS) if (t >= tp) { const p = resolvePose(who, p0); if (p !== pose || tsw < -90) { pose = p; tsw = tp; } asked = p0; }
+  const giggle = isLaughStandIn(who, asked);
   let why = o.pose ? "scene" : "scene";   // EP15 QA: where the pose came from (qa/buddy_faces, pose_audit.js)
   let nxt = 1e9; for (const [tp] of PS) if (tp > t) { nxt = tp; break; }
   // teacher, 22 Nov (EP14 P1 3:30): "both pip and basil mouth not moving". Pose paintings have no mouths, so a buddy SPEAKING always
@@ -218,7 +231,7 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
       if (L.who === who && L.end + .05 > tsw && L.end + .05 <= t && t - L.end < 1.5) tsw = L.end + .05; } } }
   if (!speaking(who, t) && !o.keepPose) { const oc = outcomeAt(who, t);
     if (oc) { pose = oc.pose; why = "outcome"; if (oc.t0 > tsw) tsw = oc.t0; nxt = Math.min(nxt, oc.t1); }
-    else if (pose === "cheer" && !learnAt(t) && !o.achieved) pose = "sit"; }   // hands up only when something is learnt or achieved (EP15: never a stand-in arms-crossed)
+    else if (pose === "cheer" && !learnAt(t) && !o.achieved && !giggle && !(asked || "").startsWith("hi5")) pose = "sit"; }   // hands up only when something is learnt or achieved (EP15: never a stand-in arms-crossed)
   let nodH = 0;
   if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);   // v3: never frozen
     if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; why = "react:" + (R.txt || ""); tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
@@ -241,6 +254,7 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   const nod = nodOf(who, t), q = (pose === "sit" ? .016 : .022) * nod; sy *= 1 - q; sx *= 1 + .8 * q; rot += 1.1 * nod * (o.flip ? -1 : 1); if (pose !== "sit") lift -= 5 * nod;
   for (const [tj, hj] of o.jump || []) { lift -= hop(t, tj, .36) * hj; const a = ss(tj - .12, tj, t) * (t < tj ? 1 : 0); sy *= 1 - .08 * a; sx *= 1 + .06 * a; const w = wob(t, tj + .36, .35); if (t > tj + .36) { sy *= 1 - .08 * w; sx *= 1 + .06 * w; } }
   if (o.rock) rot += o.rock * Math.sin(2 * Math.PI * t / .7);
+  if (giggle && pose === "cheer" && !speaking(who, t)) { rot += 2.2 * Math.sin(2 * Math.PI * t / .26); lift -= 4 * Math.abs(Math.sin(2 * Math.PI * t / .26)) * (h / 380); }
   let twk = 1; for (const tw0 of o.twirl || []) { const u = clamp((t - tw0) / .7); if (u > 0 && u < 1) { twk = Math.cos(2 * Math.PI * eio(u)); lift -= 18 * Math.sin(Math.PI * u) * (h / 380); } }   // a little twirl (EP14 Momo, "I have my colours now!")
   if (nodH) { lift -= nodH * h * .05; rot += 3 * nodH * (o.flip ? -1 : 1); sy *= 1 + .03 * nodH; }
   rot += o.look || 0;
@@ -413,11 +427,11 @@ const KWHOLD = 2.0;
 // lcthings, on Pip's "magnetic" in m1005p); Part 2 SAME DIRECTION (inside lcway, on Momo's "Same" in n705m), SAME POLE (in the scene `fix`,
 // on Basil's "Same" in n806b; above the cream strip 7.2 step 3), STRONGER MAGNET (inside lcmore, on Pip's "stronger" in n905p). All o.at (no
 // dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it (keep the pops above the strips and clear of the boards).
-// P4 EP1: FUNCTION (inside the look-closer, on Momo's "function" in e504m), INTERACT (in chainfix, on Momo's "interact"), SYSTEM (in brakes, on
-// Basil's "system" in e714b). All o.at (no dimming), 2.0 s, then they fly to the shelf.
-const KW = [["FUNCTION", "kw_function", 1, null, { at: [1010, 300], size: 112 }], ["INTERACT", "kw_interact", 1, null, { at: [680, 470], size: 112 }], ["SYSTEM", "kw_system", 1, null, { at: [1330, 330], size: 120 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+// P4 EP1 v2: FUNCTION (inside the look-closer lcbike, on Pip's "function" in l804), INTERACT (in `interact`, on Momo's "interact" in j904),
+// SYSTEM (in `system`, on Basil's "system" in v1012). All o.at (no dimming), 2.0 s, then they fly to the shelf.
+const KW = [["FUNCTION", "kw_function", 1, null, { at: [930, 280], size: 104 }], ["INTERACT", "kw_interact", 1, null, { at: [1180, 560], size: 110 }], ["SYSTEM", "kw_system", 1, null, { at: [960, 200], size: 120 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
-const SHELF_HIDE = { cold: 1, title: 1, fixcards: 1, lock: 1, picks: 1, pedal: 1, replay: 1, rope: 1, waitw: 1, shrink: 1, pullout: 1, inpip: 1, words: 1, next: 1, nyk: 1, blooper: 1 };
+const SHELF_HIDE = { cold: 1, title: 1, fixcards: 1, lock: 1, picks: 1, replay: 1, waitw: 1, shrink: 1, pullout: 1, inbasil: 1, words: 1, finish: 1, nyk: 1, blooper: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
 const KWLINE = ["hk_function", "hk_interact", "hk_system"];   // P4 EP1: in the order they pop

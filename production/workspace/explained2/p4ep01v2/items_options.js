@@ -133,10 +133,12 @@ const BASILH = {
   worried: { cx: 352, rim: 78, hw: 158, vx: 22, tilt: -3, chin: [402, 198] },
   waving: { cx: 345, rim: 78, hw: 160, vx: 22, tilt: -3, chin: [400, 234] } };
 const BASILCOL = { id: "hBas", hi: "#FFD58A", mid: "#FFA63D", lo: "#E2761C", vent: "#7A3E12", rim: "#C9661A", visor: "#F28A2E" };
-function basilHelmet(name, H) { const ink = INK.basil, k = hk(H), B = [H.chin[0], H.chin[1]]; let st = "";
-  for (const sg of [-1, 1]) { const A = hpt(H, sg * 140 + (H.vx || 0) * .5, 34), C = [A[0] + sg * 10, A[1] + (B[1] - A[1]) * .85], d = `M${r1(A[0])} ${r1(A[1])} Q${r1(C[0])} ${r1(C[1])} ${r1(B[0] + sg * 14)} ${r1(B[1])}`;
-    st += `<path d="${d}" stroke="${ink}" stroke-width="14" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#4A5A66" stroke-width="8" fill="none" stroke-linecap="round"/>`; }
-  st += `<g transform="translate(${r1(B[0])} ${r1(B[1])}) rotate(${H.tilt})"><rect x="-18" y="-11" width="36" height="22" rx="7" fill="#3B4A56" stroke="${ink}" stroke-width="5"/><rect x="-10" y="-4" width="20" height="6" rx="3" fill="#A9B8C6"/></g>`;
+function basilHelmet(name, H) { const ink = INK.basil; let st = "";
+  // the chin strap: from the helmet's edge down each cheek to the corner of his jaw, where it goes UNDER the jaw (a lizard's jaw line is
+  // his mouth line, so a strap across the face would read as a mouth or a microphone); a small buckle on the near side
+  for (const sg of [-1, 1]) { const A = hpt(H, sg * 138 + (H.vx || 0) * .5, 30), J = [H.cx + (H.vx || 0) * .4 + sg * H.hw * .8, H.chin[1] - 18], C = [A[0] + sg * 14, (A[1] + J[1]) / 2], d = `M${r1(A[0])} ${r1(A[1])} Q${r1(C[0])} ${r1(C[1])} ${r1(J[0])} ${r1(J[1])}`;
+    st += `<path d="${d}" stroke="${ink}" stroke-width="13" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#4A5A66" stroke-width="7" fill="none" stroke-linecap="round"/>`;
+    if (sg > 0) st += `<g transform="translate(${r1(C[0])} ${r1(C[1] + 6)}) rotate(${80 + H.tilt})"><rect x="-13" y="-8" width="26" height="16" rx="5" fill="#3B4A56" stroke="${ink}" stroke-width="4"/></g>`; }
   const top = redraw(name, "bp", (H.paws || []).map(ell).join(""));
   return inHead({ ...H, hw: H.hw * 1.04 }, helmetP(BASILCOL, { vx: H.vx })) + st + top; }
 window.basilHelmetOn = () => window.BASIL_HELMET !== false;

@@ -24,7 +24,7 @@ SLOW = {"speed": .85, "gap": 1.0, "soft": True}   # the journey
 LC = {"speed": .85, "gap": .8}                     # LOOK CLOSER
 slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 HOLD = lambda mk: ("hold", mk, 2.0, .6)
-D = {"pre": .65, "post": .55}
+D = {"pre": .45, "post": .35}
 def o(**k): return {**D, **k}
 EXAM = "A system is made up of different parts. Each part has its own function. The parts interact to perform a function. When one part stops working, the whole system is likely to be affected."
 
@@ -43,7 +43,7 @@ NYK = [("scene", "nyk"),
  ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
  ("wait", 4.6)]
 LOCK = lambda n, d=6.5: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
-SC_GAP = ("wait", .6)
+SC_GAP = ("wait", .45)
 
 SEQ1 = [
  # ---- cold · THE PROBLEM: the freeze-frame (Basil in the ice box, three minutes before the race)
@@ -233,8 +233,8 @@ SEQ1 = [
 # PACING (P4 README section 4; v1's measured lesson: the recorded buddies speak at about 3.3 words a second): .85 s between lines (D),
 # about 1.4 s between scenes, a buddy line with two or more sentences keeps .38 s between its sentences, think time after Heart's
 # teaching sentences (THINK_AFTER).
-THINK_AFTER = {"b407": .5, "n506": .3, "k612": .5, "r707": .8, "l802": .5, "l803": .5, "l807": .6, "j904": .3, "v1008": .8, "e1102": .5, "e1103": .4,
-  "f201": .3, "f203": .3, "f204": .3, "c104": .3, "s301": .3}
+THINK_AFTER = {"b407": .4, "n506": .2, "k612": .4, "r707": .6, "l802": .3, "l803": .3, "l807": .5, "j904": .2, "v1008": .6, "e1102": .4, "e1103": .3,
+  "f204": .2, "c104": .2}
 for _i, _it in enumerate(SEQ1):
     if _it[0] == "say" and _it[2] in (P, B, M, L) and "gap" not in _it[4] and "slowof" not in _it[4] and len(re.findall(r"[.!?](?:\s|$)", _it[3].replace("...", "…"))) >= 2:
         _it[4]["gap"] = .38

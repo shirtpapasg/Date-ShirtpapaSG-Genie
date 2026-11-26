@@ -34,7 +34,7 @@ def trailer_fx(x, sr):
     call(pt, "Formula", f"self * {2 ** (-3 / 12)}"); call([pt, mm], "Replace pitch tier"); y = call(mm, "Get resynthesis (overlap-add)").values[0]
     rng = np.random.default_rng(7); n = int(2.2 * sr); tt = np.arange(n) / sr; ir = rng.standard_normal(n) * np.exp(-tt * 3.2); ir[: int(.03 * sr)] = 0
     k = np.exp(-np.arange(40) / 8.0); ir = np.convolve(ir, k / k.sum(), "same"); ir /= np.sqrt((ir ** 2).sum())
-    wet = np.convolve(y, ir)[: len(y) + n]; out = np.zeros(len(y) + n); out[: len(y)] += y; out += .35 * wet / max(1e-6, np.abs(wet).max()) * np.abs(y).max()
+    wet = np.convolve(y, ir)[: len(y) + n]; out = np.zeros(len(wet)); out[: len(y)] += y; out += .35 * wet / max(1e-6, np.abs(wet).max()) * np.abs(y).max()
     sp = out[np.abs(out) > .003]; return np.clip(out * (10 ** (-20.5 / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98)
 from script import SEQS, PRON, CHANT, CHANT_CAPS
 SEQ = SEQS[1] + SEQS[2]
