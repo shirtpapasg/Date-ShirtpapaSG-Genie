@@ -135,10 +135,11 @@ function meltFrame(name) { return _MELTM["F" + name] || (_MELTM["F" + name] = ca
 // the buddies a scene draws at time t
 function budsAt(s, t) { const k = s.name + "@" + t.toFixed(3); return _MELTM[k] || (_MELTM[k] = capBuddies(() => SC[s.name](t, s)).bud); }
 // melt(t, s, name, d): the old scene's last frame fades out over d s (buddies glide or pop out, never fade)
-function meltScene(t, s, name, d = .4) { const k = "@" + s.name; if (!_MELTM[k]) _MELTM[k] = { from: name, d }; if (_BCAP) return "";
+// cut (popfix 25 Nov 2026): the background CUTS as before, only the buddies glide or pop out
+function meltScene(t, s, name, d = .4, cut = false) { const k = "@" + s.name; if (!_MELTM[k]) _MELTM[k] = { from: name, d }; if (_BCAP) return "";
   const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; const F = meltFrame(name), now = capBuddies(() => SC[s.name](t, s)).all; let top = "";
   _BDRAW = true; try { for (const c of now) top += buddy(...c); } finally { _BDRAW = false; }   // the new scene's buddies, above the old frame
-  return OP(a, F.svg) + meltOut(F.bud, budsAt(s, s.t0 + d), t, s.t0) + top; }
+  return (cut ? "" : OP(a, F.svg)) + meltOut(F.bud, budsAt(s, s.t0 + d), t, s.t0) + top; }
 // lizReveal's o.from: the scene before fades out over .45 s, the same way
 function meltFrom(t, s, f, a) { if (_BCAP) return ""; const F = _MELTM["L" + s.name] || (_MELTM["L" + s.name] = capBuddies(f)); return OP(a, F.svg) + meltOut(F.bud, budsAt(s, s.t0 + .45), t, s.t0); }
 // the old scene's buddies the new one does not have: popped out where they stood

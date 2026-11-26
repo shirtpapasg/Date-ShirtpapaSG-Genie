@@ -70,7 +70,7 @@ const camToday = (t) => { const s = SCN.today, a = eio((t - s.t0) / 1.4), b = ei
 SC.today = (t, s) => { const out = s.t1 - 1.4; window._BUBAT = { '*': [960, 300] };
   return room(t, camToday(t)) + (t >= MK("board") ? OP(pulse(t, MK("board"), .05, .8), `<rect width="1920" height="1080" fill="#fff" opacity=".12"/>`) : "")
     + bd("basil", 230, 1076, 480, t, { in: s.t0 + .1, out, poses: [[s.t0, "sit"]], look: -3 }) + bd("pip", 1420, 1010, 380, t, { in: s.t0 + .15, out: out + .1, flip: true, poses: [[s.t0, "sit"]] })
-    + bd("momo", 1710, 1076, 500, t, { in: s.t0 + .2, out: out + .2, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + melt(t, s, "title", .5) + HUD(t); };   // popfix 25 Nov 2026: the title frame melts away and the buddies stay or glide (they used to pop in again)
+    + bd("momo", 1710, 1076, 500, t, { in: s.t0 + .2, out: out + .2, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + meltScene(t, s, "title", .5, true) + HUD(t); };   // popfix 25 Nov 2026: still a hard cut from the title (the camera has moved on), but the buddies glide from their title spots (they used to pop in again)
 SC.game = (t, s) => { const cE = camToday(SCN.today.t1), p = SPAT.intro;
   return gameScene(t, s, ["m302", "m303b", "m304"], false, { world: (tt) => room(tt, cE), A: camPt(cE, [p[0], p[1] - 16]), T: [680, 440], Z: 2.0, dim0: 0 }) + smallPrint(t, LT("m304"), LOOK_RULE); };
 SC.goals = (t, s) => goals3(t, s, [["Two poles", ""], ["Where the pull is strongest", ""], ["Attract and repel", ""]], ["m401", "m402", "m403", "m404"], "basil");
