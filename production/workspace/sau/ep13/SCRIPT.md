@@ -1,6 +1,6 @@
 # TheOneApp, Explored · EP13 · "Super El Niño! Why Is Singapore So Hot And Dry?"
 
-**PHASE 1 (26 Nov 2026): everything up to the final render. NOT rendered, NOT uploaded.** The teacher asked to confirm four points
+**Phase 1 (26 Nov 2026) was the plan below; PHASE 2 (same day) applied the teacher's answers and rendered it (next section). NOT uploaded.** The teacher asked to confirm four points
 before rendering (section 5). Approved script: the teacher's draft doc https://claude.ai/artifact/7s2QmX4ZPN4ezyRgf8Es9U (read 26 Nov,
 rev 7). Narrator Heart; buddies Pip, Momo, Basil (the saved Character Voice Kit recipes). Textbook link: the water cycle.
 
@@ -14,6 +14,28 @@ python3 ep13/make_segments.py && $PY ep13/voice13.py ep13/ep13_segments.json ep1
 python3 build_page.py ep13/ep13_segments.json ep13/ep13_tl.json common.js,ep13/geo13.js,ep13/spr13.js,ep13/mouth13.js,ep13/scenes.js ep13/ep13_page.html 1920x1080
 (render, phase 2 only: flock /tmp/explained_render.lock ./render_all.sh ep13 ep13 ; then python3 ep13/make_upload.py)
 ```
+
+
+## PHASE 2 (26 Nov 2026): rendered, NOT uploaded
+
+The teacher's answers (26 Nov): "1 no level, 2 yes, 4 EP13, 3 Dec OK".
+- No school level is said anywhere. 2:15 keeps the syllabus definitions WITHOUT "Clouds are made up of water droplets..." (still no evaporation
+  definition sentence in the definitions file: the evaporation sentence is built from AB 2.8, as listed in section 2).
+- The four checks applied: 1:12 version A ("The warm, wet air that rises from it, and builds the rain clouds, moves east too.") and "Hardly any
+  rain clouds." at 1:22; the 2:40 fires wording; BASIL "I feel great, actually. Lizards love the heat!" + PIP "Not us! Drink lots of water and
+  stay in the shade."; the teacher's title.
+- Fact fixes: "more than two degrees Celsius warmer than usual" (the thermometer's mercury passes +2 °C, with "▲ more than +2 °C"); "a warmer,
+  drier June to October"; PSI 192 is never called the peak.
+- Defaults (not answered): Pip = "he"; the series standards stay (3 s silent cold open, countdown, "Now you know!").
+- Back views: the teacher's coloured back paintings (26 Nov) are cut out by `explained2/characters/sprites/poses.py back` on the sitting scale
+  and feet line (poses/pip_back.png, momo_back.png = momo_v2_back.png, basil_back.png = basil_v2_back.png; the old grey ones kept as
+  *_back_grey.png). `spr13.py` picks the coloured painting first (switchable; a stand-in only if none exists). All three buddies ride in back
+  view; a buddy turns to the front only to speak.
+- Episode 4:13.4 (END 253.4 s incl. the end card); Short 1 "the journey" 51.1 s (Fri 4 Dec); Short 2 "only two degrees?" 52.8 s (Mon 7 Dec).
+- Built with `ep13/build.sh`; rendered with `flock /tmp/explained_render.lock ./render_all.sh ep13`; QA `ep13/check.sh`; captions and upload
+  details `python3 ep13/make_upload.py`; teacher review `ep13/review13.sh` (clip + 10 key frames in ep13/review/).
+- Shorts' NEW sentences (teacher's list): "Why is Singapore so hot and dry this year?", "How can two degrees change the weather in India and
+  the USA?", "Watch the full episode on TheOneApp, Explored." Everything else is the episode's own words.
 
 ## 1. Fact check (26 Nov 2026)
 
@@ -63,40 +85,41 @@ The series uses **he** for Pip (SERIES_FORMAT section 5: "Pip stays grey ... his
 she/her in the vault's video notes, and those 8 are about Momo). Momo is "she", Basil "he". The draft's "Pip fans herself" becomes **"Pip fans
 himself"** (on-screen note only; no spoken line has a pronoun). Note: Pip's saved voice is a high, girl-like blend (af_heart + af_nova); unchanged.
 
-## 4. Script as built, with times from the timeline (Heart soft = the BE THE THING journey voice)
+## 4. Script as rendered (phase 2), with times from the timeline (Heart soft = the BE THE THING journey voice)
 
 | At | Scene | Voice | Words |
 |---|---|---|---|
-| 0:00 | corridor | (silent 3.0 s) |   **[ADDED: silent cold open (series standard)]** |
+| 0:00 | corridor | (silent 3.0 s) |   [ADDED: silent cold open (series standard)] |
 | 0:04 | corridor | HEART | It's the end of the year. The rainy season should be here. So why does Singapore still feel like an oven? |
 | 0:10 | corridor | PIP | My fur is melting! |
 | 0:12 | corridor | MOMO | My water bowl went down again. |
-| 0:15 | corridor | BASIL | I feel great, actually. |
-| 0:17 | globeFly | HEART | The answer starts thousands of kilometres away, over the Pacific Ocean. Let's shrink down and go there. |
-| 0:24 | countdown | HEART (excited) | Are you ready? Three! Two! One! Go!  **[ADDED: countdown (series standard, as EP11)]** |
-| 0:30 | povShrink | (silent 3.2 s) |  |
-| 0:34 | povWind | HEART (soft) | You are a gust of wind. You blow over the Pacific Ocean from east to west, day after day. People call you the trade wind. |
-| 0:44 | povWarm | HEART (soft) | Below you, the sea is warm. You push the warm top layer of water along with you, west, towards Singapore. |
-| 0:52 | povCloud | HEART (soft) | The warm water gains heat from the Sun. Some of it evaporates into water vapour and rises with you. High up, the water vapour loses heat, condenses into tiny water droplets and forms clouds. |
-| 1:07 | povRain | HEART (soft) | Over Singapore, the clouds rain down. That is a normal year. |
-| 1:13 | povWeak | HEART (soft) | But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore, and the rain clouds go with it. |
-| 1:23 | povWeak | PIP | Wait for us, clouds! |
-| 1:25 | povDry | HEART (soft) | You look down at Singapore. Blue sky. No rain clouds. What you just lived through has a name: El Niño. |
-| 1:36 | news | HEART | On the twelfth of November, scientists at NOAA in the USA said this El Niño is strong to very strong. Back in May, Singapore's weather scientists had already warned us: a hotter, drier June to October. |
-| 1:50 | thermo | HEART | The middle of the Pacific is about two degrees Celsius warmer than usual. When it gets that warm, scientists call it a Super El Niño. |
-| 1:58 | thermo | MOMO | Only two degrees? |
-| 2:00 | thermo | HEART | Across a whole ocean, that is a huge amount of heat. |
-| 2:05 | waterCycle | HEART | Let's name what you saw. Water gains heat and evaporates to form water vapour. When water vapour loses heat, it changes into water droplets. This process is called condensation, where a change in state from gas to liquid occurs. Clouds are made up of water droplets which are in the liquid state. The droplets fall as rain. The continuous movement of water from the Earth to the sky and back to the Earth again is called the water cycle. El Niño does not stop the water cycle. It moves where the rain falls. |
-| 2:40 | haze | HEART | With less rain, forests and peatland in our region dried out, and fires burned longer and spread more easily. On the ninth of October, Singapore's haze reading, the P S I, reached one hundred and ninety-two. That is unhealthy. Remember the smoke particle from Episode One? |
-| 2:58 | haze | BASIL | Even I stayed indoors. |
-| 3:00 | india | HEART | El Niño moves rain around the world. In India, this year's monsoon brought about one-eighth less rain than normal, the weakest in over ten years. The south and the northeast were driest. |
-| 3:13 | usa | HEART | In the USA, it works the other way for some places. This winter, scientists expect wetter weather than usual across the south, like California and Florida, and a warmer winter up north. |
-| 3:25 | usa | PIP | So one tired wind changes the weather in three countries? |
-| 3:29 | usa | HEART | Yes. That is why scientists all over the world watch it. |
-| 3:34 | try | HEART | Be a weather detective. Put two cups with the same amount of water outside: one in the sun, one in the shade. Mark the water level. Check after three days. Which cup lost more water, and why? Hint: which one gained more heat? |
-| 3:51 | bye | MOMO | Then tell a friend in India or the USA what El Niño is doing to their weather! |
-| 3:56 | bye | HEART | See you next time on TheOneApp, Explored. |
-| 3:59 | nyk | HEART (excited) | Now you know!  **[ADDED: rule 1]** |
+| 0:15 | corridor | BASIL | I feel great, actually. Lizards love the heat! |
+| 0:18 | corridor | PIP | Not us! Drink lots of water and stay in the shade. |
+| 0:23 | globeFly | HEART | The answer starts thousands of kilometres away, over the Pacific Ocean. Let's shrink down and go there. |
+| 0:30 | countdown | HEART (excited) | Are you ready? Three! Two! One! Go!  [ADDED: countdown (series standard, as EP11)] |
+| 0:35 | povShrink | (silent 3.2 s) |  |
+| 0:40 | povWind | HEART (soft) | You are a gust of wind. You blow over the Pacific Ocean from east to west, day after day. People call you the trade wind. |
+| 0:49 | povWarm | HEART (soft) | Below you, the sea is warm. You push the warm top layer of water along with you, west, towards Singapore. |
+| 0:58 | povCloud | HEART (soft) | The warm water gains heat from the Sun. Some of it evaporates into water vapour and rises with you. High up, the water vapour loses heat, condenses into tiny water droplets and forms clouds. |
+| 1:12 | povRain | HEART (soft) | Over Singapore, the clouds rain down. That is a normal year. |
+| 1:19 | povWeak | HEART (soft) | But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore. The warm, wet air that rises from it, and builds the rain clouds, moves east too. |
+| 1:32 | povWeak | PIP | Wait for us, clouds! |
+| 1:35 | povDry | HEART (soft) | You look down at Singapore. Blue sky. Hardly any rain clouds. What you just lived through has a name: El Niño. |
+| 1:46 | news | HEART | On the twelfth of November, scientists at NOAA in the USA said this El Niño is strong to very strong. Back in May, Singapore's weather scientists had already warned us: a warmer, drier June to October. |
+| 2:00 | thermo | HEART | The middle of the Pacific is more than two degrees Celsius warmer than usual. When it gets that warm, scientists call it a Super El Niño. |
+| 2:09 | thermo | MOMO | Only two degrees? |
+| 2:10 | thermo | HEART | Across a whole ocean, that is a huge amount of heat. |
+| 2:15 | waterCycle | HEART | Let's name what you saw. Water gains heat and evaporates to form water vapour. When water vapour loses heat, it changes into water droplets. This process is called condensation, where a change in state from gas to liquid occurs. The droplets fall as rain. The continuous movement of water from the Earth to the sky and back to the Earth again is called the water cycle. El Niño does not stop the water cycle. It moves where the rain falls. |
+| 2:46 | haze | HEART | With less rain, forests and peatland in our region dried out. Dry land burns easily, so the fires that started burned longer and spread further. On the ninth of October, Singapore's haze reading, the P S I, reached one hundred and ninety-two. That is unhealthy. Remember the smoke particle from Episode One? |
+| 3:06 | haze | BASIL | Even I stayed indoors. |
+| 3:09 | india | HEART | El Niño moves rain around the world. In India, this year's monsoon brought about one-eighth less rain than normal, the weakest in over ten years. The south and the northeast were driest. |
+| 3:22 | usa | HEART | In the USA, it works the other way for some places. This winter, scientists expect wetter weather than usual across the south, like California and Florida, and a warmer winter up north. |
+| 3:34 | usa | PIP | So one tired wind changes the weather in three countries? |
+| 3:38 | usa | HEART | Yes. That is why scientists all over the world watch it. |
+| 3:43 | try | HEART | Be a weather detective. Put two cups with the same amount of water outside: one in the sun, one in the shade. Mark the water level. Check after three days. Which cup lost more water, and why? Hint: which one gained more heat? |
+| 4:00 | bye | MOMO | Then tell a friend in India or the USA what El Niño is doing to their weather! |
+| 4:05 | bye | HEART | See you next time on TheOneApp, Explored. |
+| 4:08 | nyk | HEART (excited) | Now you know!  [ADDED: rule 1] |
 
 Spoken forms (captions keep digits and letters): "On the twelfth of November", "On the ninth of October", "the P S I" (Kokoro says "PSI" as
 "sigh"), "one hundred and ninety-two", "two degrees", "Episode One". Kokoro's own phonemes checked: El Niño /ɛl ˈniːnjoʊ/ ✓, NOAA /ˈnoʊə/
@@ -176,14 +199,14 @@ coral/teal (`spr13.py`, as P4 EP1 v2 does for Basil) — SERIES_FORMAT says neve
   Rain Come From?"). In that list, no. 12 = YouTube EP10 (compost); the chip episode (YouTube EP11, public today) will be NEWS no. 13, which
   makes El Niño **NEWS no. 14** and **YouTube "EP12"**. The json says "EP13" as asked: confirm before upload.
 
-TheOneApp `videos.js` NEWS entry (prepare only; add after it is public, re-time from the final cut):
+TheOneApp `videos.js` NEWS entry (prepare only; add after it is public; times from the final cut, 26 Nov; `no: 13` as the teacher asked: the chip episode is not in NEWS yet):
 ```js
-    { no: 13, art: '🌊', topic: 'Weather and Water', title: "Super El Niño! Why Is Singapore So Hot And Dry?", len: '4:05', url: 'https://www.youtube.com/watch?v=VIDEO_ID', moments: [
-      { at: '0:30', what: 'You are the trade wind' },
-      { at: '1:36', what: 'The headline' },
-      { at: '1:49', what: 'What makes it super' },
-      { at: '2:05', what: 'The water cycle' },
-      { at: '2:39', what: 'Here in Singapore: the haze' },
-      { at: '3:00', what: 'Meanwhile in India and the USA' },
-      { at: '3:34', what: 'Try this' } ] },
+    { no: 13, art: '🌊', topic: 'Weather and Water', title: "Super El Niño! Why Is Singapore So Hot And Dry?", len: '4:13', url: 'https://www.youtube.com/watch?v=VIDEO_ID', moments: [
+      { at: '0:35', what: 'You are the trade wind' },
+      { at: '1:45', what: 'The headline' },
+      { at: '1:59', what: 'What makes it super' },
+      { at: '2:15', what: 'The water cycle' },
+      { at: '2:45', what: 'Here in Singapore: the haze' },
+      { at: '3:09', what: 'Meanwhile in India and the USA' },
+      { at: '3:42', what: 'Try this' } ] },
 ```

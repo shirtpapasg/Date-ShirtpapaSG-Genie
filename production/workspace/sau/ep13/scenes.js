@@ -13,8 +13,16 @@ const nT = (p, x, y, s, fs = 40, fill = "#fff", o = {}) => tx(p, Object.assign({
 const nPop = (e, x, y, t, a, s = 1, r = 0) => { tf(e, `translate(${x} ${y}) rotate(${r}) scale(${s * Math.max(0, pop(t, a))})`); op(e, ramp(t, a - .05, a + .1)); };
 function nClip(p, shape) { const id = "nc" + (++nUid), cp = el("clipPath", {id}, nDefs()); el(shape[0], shape[1], cp); return el("g", {"clip-path": `url(#${id})`}, p); }
 const nHash = (a, b) => { const x = Math.sin(a * 127.1 + b * 311.7) * 43758.5453; return x - Math.floor(x); };
-const nWhole = s => el("g", {}, s.stage);                              // scenes here draw on the whole screen (x -150..1770, y -60..1020)
-const nYou = "#FFC83A";                                                  // sun-yellow = YOU (series colour rule)
+// scenes here draw on the whole screen (x -150..1770, y -60..1020). In a Short (1080 x 1920) only the 1200 x 900 box is free between the
+// header question and the captions, so each scene used in a Short says which point (cx, cy) goes to the box centre, at scale k.
+const nFIT = {povShrink: [810, 500, 1], povWind: [810, 500, 1], povWarm: [810, 500, 1], povCloud: [810, 500, 1], povRain: [810, 500, 1], povDry: [810, 500, 1],
+  povWeak: [720, 470, .75], thermo: [720, 470, .75], india: [640, 520, .7], usa: [600, 500, .7], bye: [600, 450, 1]};
+const nWhole = s => { const g = el("g", {}, s.stage), f = nFIT[s.name]; if (SHORT && f) tf(g, `translate(600 450) scale(${f[2]}) translate(${-f[0]} ${-f[1]})`); return g; };
+const nYou = "#FFC83A";
+// "this is you": a soft coloured edge, centred on the first-person view (810, 500) and big enough for the Shorts' fitted view too
+function nVig(p, col, a = .55) { const id = "nv" + (++nUid), g = el("radialGradient", {id, cx: .5, cy: .5, r: .5}, nDefs());
+  el("stop", {offset: .62, "stop-color": col, "stop-opacity": 0}, g); el("stop", {offset: 1, "stop-color": col, "stop-opacity": a}, g);
+  const w = SHORT ? 1300 : 2000, h = SHORT ? 2300 : 1200; return el("rect", {x: 810 - w / 2, y: 500 - h / 2, width: w, height: h, fill: `url(#${id})`}, p); }                                                  // sun-yellow = YOU (series colour rule)
 const BUDCOL = {pip: "#8B5CF6", basil: "#14B8A6", momo: "#FB7158"};
 // a "You: ..." tag, as the Explained journeys (a yellow pill with a dark rim)
 function nYouTag(p, text) { const g = el("g", {}, p); const w = text.length * 22 + 70;
@@ -40,8 +48,15 @@ function nMote(p, r = 24) { const g = el("g", {}, p), k = r / 24, b = blob(g, r 
 /* ---------- the buddies: the teacher's paintings as cut-out sprites ---------- */
 // A speaking buddy is always in the talking sprite (lip-sync from mouth13.js) and blinks; a back view never speaks.
 const nSeg = id => TL.segs.find(s => s.id === id);
+// Every picture of a buddy is in the page from the start (one <image> each, shown or hidden), and the page reports READY only when all
+// the buddy pictures have loaded: a pose change never shows a blank frame, whichever frame a render browser starts on.
+(function () { const files = [...new Set(Object.values(SPR13).map(o => o.file))]; let n = 0, r = false;
+  files.forEach(f => { const im = new Image(); im.onload = im.onerror = () => { n++; }; im.src = f; });
+  Object.defineProperty(window, "READY", {configurable: true, get() { return r && n >= files.length; }, set(v) { r = v; }}); })();
 function nBud(p, who, aura = true) { const g = el("g", {}, p); g.who = who; g.cur = "";
-  g.aura = aura ? el("ellipse", {rx: 1, ry: 1, fill: BUDCOL[who], opacity: .28}, g) : null; g.img = el("image", {}, g); return g; }
+  g.aura = aura ? el("ellipse", {rx: 1, ry: 1, fill: BUDCOL[who], opacity: .28}, g) : null; g.imgs = {};
+  Object.keys(SPR13).filter(k => k.startsWith(who + "_")).forEach(k => { const S = SPR13[k]; g.imgs[k] = el("image", {href: S.file, width: S.w, height: S.h, opacity: 0}, g); });
+  return g; }
 function nTalk(who, t) { let m = -1; for (const id in (window.MOUTH || {})) { const M = MOUTH[id]; if (M.who !== who) continue; const sg = nSeg(id);
     if (!sg || t < sg.t0 - .05 || t > sg.t1 + .05) continue; m = M.m[clamp(Math.floor((t - sg.t0) * 30), 0, M.m.length - 1)] || 0; } return m; }
 // nShow(g, x, y, h, pose, t): feet at (x, y), body height h; pose "sit" talks and blinks by itself, else a painted pose ("waving", "back", ...)
@@ -49,10 +64,11 @@ function nShow(g, x, y, h, pose, t, o = {}) { const w = g.who; let name;
   if (pose === "sit") { const m = Math.max(0, nTalk(w, t)), bl = ((t + {pip: 0, momo: 1.3, basil: 2.1}[w]) % 3.7) < .13;
     name = m === 0 ? (bl ? `${w}_sit_blink` : `${w}_sit_closed`) : `${w}_sit_${m === 1 ? "half" : "wide"}${bl ? "_blink" : ""}`; }
   else name = `${w}_${pose}`;
-  const S = SPR13[name] || SPR13[`${w}_sit_closed`];
-  if (g.cur !== name) { set(g.img, "href", S.file); set(g.img, "width", S.w); set(g.img, "height", S.h); g.cur = name; }
+  if (!SPR13[name]) name = `${w}_sit_closed`;                                 // e.g. no back painting: the front view
+  const S = SPR13[name];
+  if (g.cur !== name) { if (g.cur) op(g.imgs[g.cur], 0); op(g.imgs[name], 1); g.cur = name; }
   const k = h * (w === "basil" ? .88 : 1) / S.bh * (o.k || 1);
-  tf(g.img, `scale(${(o.flip ? -1 : 1) * k} ${k}) translate(${-S.ax} ${-S.ay})`);
+  tf(g.imgs[name], `scale(${(o.flip ? -1 : 1) * k} ${k}) translate(${-S.ax} ${-S.ay})`);
   if (g.aura) { set(g.aura, "cx", 0); set(g.aura, "cy", -h * .45); set(g.aura, "rx", h * .62); set(g.aura, "ry", h * .62); op(g.aura, o.aura === undefined ? .28 : o.aura); }
   tf(g, `translate(${x} ${y + (o.bob ? Math.sin(t * 2.2 + x) * o.bob : 0)}) rotate(${o.rot || 0})`); op(g, o.op === undefined ? 1 : o.op); }
 
@@ -132,22 +148,23 @@ S.globeFly = (() => { const s = scene("globeFly", "#020817", "#0b132b"), st = nW
    0:40 BE THE THING: "You: a gust of the trade wind". First person, low over the Pacific, flying WEST (towards Asia, the horizon).
    Wave crests rush at the camera, wind streaks stream past; the buddies ride along SHRUNK DOWN (Momo and Basil in back view, looking
    ahead with the viewer; Pip turned to the camera because he speaks on this journey). A small real map (bottom right) shows where you are. */
-function nPovSea(name, warm) { const s = scene(name, "#3a86ff", "#bde0fe"), st = nWhole(s), HZ = 330, P = GEO13.PAC;
-  el("rect", {x: -150, y: -60, width: 1920, height: HZ + 60, fill: nGrad([[0, "#2f6fd6"], [.7, "#9fd0ff"], [1, "#e6f4ff"]])}, st);
+function nPovSea(name, warm, mode) { const s = scene(name, "#3a86ff", "#bde0fe"), st = nWhole(s), HZ = 330, P = GEO13.PAC;
+  el("rect", {x: -400, y: -800, width: 2400, height: HZ + 800, fill: nGrad([[0, "#1e4fb0"], [.55, "#2f6fd6"], [.85, "#9fd0ff"], [1, "#e6f4ff"]])}, st);
   // the western horizon: a line of tall rain clouds over the warm sea near Asia (a normal year)
   s.hcl = el("g", {}, st); [[-60, .55], [180, .8], [430, .6], [700, .9], [980, .65], [1250, .75], [1520, .55]].forEach(([x, k]) => { const c = nCloud(s.hcl, k * .9, "#ffffff", "#d7e3ef"); tf(c, `translate(${x} ${HZ - 30 * k})`); });
-  el("rect", {x: -150, y: HZ, width: 1920, height: 1020 - HZ, fill: nGrad(warm ? [[0, "#5aa9d6"], [.35, "#2a7fb8"], [1, "#0b3d66"]] : [[0, "#5aa9d6"], [.35, "#2a7fb8"], [1, "#0b3d66"]])}, st);
-  s.warm = el("rect", {x: -150, y: HZ, width: 1920, height: 1020 - HZ, fill: nGrad([[0, "#ffd29d"], [.3, "#ffa94d"], [.75, "#f76707"], [1, "#d9480f"]]), opacity: 0}, st);
+  el("rect", {x: -400, y: HZ, width: 2400, height: 1800 - HZ, fill: nGrad(warm ? [[0, "#5aa9d6"], [.35, "#2a7fb8"], [1, "#0b3d66"]] : [[0, "#5aa9d6"], [.35, "#2a7fb8"], [1, "#0b3d66"]])}, st);
+  s.warm = el("rect", {x: -400, y: HZ, width: 2400, height: 1800 - HZ, fill: nGrad([[0, "#ffd29d"], [.3, "#ffa94d"], [.75, "#f76707"], [1, "#d9480f"]]), opacity: 0}, st);
   // wave crests on the sea plane, drawn in depth (near = big, fast)
   seed = 41; s.crest = []; for (let i = 0; i < 70; i++) { const e = el("path", {d: "M-40 0 Q-20 -10 0 0 Q20 -10 40 0", fill: "none", stroke: "#e0f4ff", "stroke-width": 5, "stroke-linecap": "round"}, st); s.crest.push({e, x: rnd() * 2 - 1, z0: rnd()}); }
   // warm-water flow arrows on the surface, pointing away from us: the warm top layer is pushed west with the wind
   s.flow = []; for (let i = 0; i < 10; i++) { const e = el("path", {d: "M-44 16 L0 -10 L44 16", fill: "none", stroke: "#fff3bf", "stroke-width": 14, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0}, st); s.flow.push({e, x: (i % 5) / 2 - 1 + (i > 4 ? .25 : 0), z0: i / 10}); }
   // wind streaks rushing past the camera (you ARE this moving air)
   seed = 43; s.wind = []; for (let i = 0; i < 26; i++) { const e = el("path", {fill: "none", stroke: "#ffffff", "stroke-width": 6, "stroke-linecap": "round"}, st); s.wind.push({e, a: rnd() * Math.PI * 2, z0: rnd(), c: .7 + rnd() * .6}); }
-  vignette(st, "#d8f3ff", .7);
+  nVig(st, "#d8f3ff", .7);
   // the buddies riding a curl of wind just below the camera
   s.curl = el("path", {d: "M-260 0 Q-120 -60 0 -20 Q120 20 260 -30", fill: "none", stroke: "#fff", "stroke-width": 16, "stroke-linecap": "round", opacity: .8}, st);
-  s.momo = nBud(st, "momo", false); s.basil = nBud(st, "basil", false); s.pip = nBud(st, "pip", false);
+  s.rings = [0, 1, 2].map(() => el("circle", {cx: 810, cy: 640, r: 40, fill: "none", stroke: "#fff", "stroke-width": 10, opacity: 0}, st));   // the shrink
+  s.pip = nBud(st, "pip", false); s.momo = nBud(st, "momo", false); s.basil = nBud(st, "basil", false);
   // a little real map: where you are (the tropical Pacific, Asia on the left, as the wind sees it)
   s.map = el("g", {}, st); const mk = .2, mx = 1030, my = 640;
   const mc = nClip(s.map, ["rect", {x: 0, y: 0, width: 1840 * mk, height: 640 * mk, rx: 18}]);
@@ -168,14 +185,18 @@ function nPovSea(name, warm) { const s = scene(name, "#3a86ff", "#bde0fe"), st =
       const L = 160 / zz * o.c; set(o.e, "d", `M${cx} ${cy} q${Math.cos(a) * L * .5 + 20} ${Math.sin(a) * L * .2 - 10} ${Math.cos(a) * L} ${Math.sin(a) * L * .5}`); set(o.e, "stroke-width", clamp(14 / zz, 2, 22));
       op(o.e, .85 * clamp((1 - z) / .3) * clamp((z - .05) / .2) * (Math.abs(Math.sin(a)) < .25 && cy > 400 && cy < 560 ? .3 : 1)); });
     op(s.warm, warm ? .92 * ramp(t, cue(name, "warm", .1) - .2, cue(name, "warm", .1) + .8) : 0);
-    tf(s.curl, `translate(560 ${900 + Math.sin(t * 1.4) * 6})`);
-    nShow(s.momo, 470, 915, 195, "back", t, {bob: 5}); nShow(s.basil, 700, 915, 195, "back", t, {bob: 5});
-    nShow(s.pip, 170, 945, 215, "sit", t, {bob: 4});
-    popAt(s.tag, 810, 60, t, SC[name].t0 - .2);
-    tf(s.map, `translate(${s.mx} ${s.my})`); op(s.map, 1); const dx = lerp(1450, 1100, f); tf(s.mdot, `translate(${(dx + 110) * s.mk} ${(GEO13.PAC.yc - 4 - 150) * s.mk})`);
+    tf(s.curl, `translate(${SHORT ? 600 : 470} ${900 + Math.sin(t * 1.4) * 6})`); op(s.curl, mode === "shrink" ? ramp(t, k0 + 1.6, k0 + 2.4) : .8);
+    const X = SHORT ? [360, 600, 830] : [230, 470, 700], sk = mode === "shrink" ? lerp(SHORT ? 1.7 : 2.3, 1, ramp(t, k0 + .3, k0 + 2.4)) : 1, Y = 915 - (sk - 1) * 120;
+    nShow(s.pip, X[0] - (sk - 1) * (SHORT ? 120 : 200), Y, 200 * sk, mode === "shrink" && t < k0 + 1.9 ? "sit" : (nTalk("pip", t) >= 0 ? "sit" : "back"), t, {bob: 5});
+    nShow(s.momo, X[1], Y, 195 * sk, mode === "shrink" && t < k0 + 1.9 ? "sit" : "back", t, {bob: 5});
+    nShow(s.basil, X[2] + (sk - 1) * (SHORT ? 120 : 200), Y, 195 * sk, mode === "shrink" && t < k0 + 1.9 ? "sit" : "back", t, {bob: 5});
+    if (mode === "shrink") { s.rings.forEach((r, i) => { const ph = clamp((t - k0 - .3 - i * .35) / 1.2); set(r, "r", 40 + ph * 600); op(r, (1 - ph) * (ph > 0 ? .8 : 0)); }); }
+    popAt(s.tag, 810, 60, t, mode === "shrink" ? k0 + 2.3 : SC[name].t0 - .2);
+    tf(s.map, `translate(${s.mx} ${s.my})`); op(s.map, mode === "shrink" ? ramp(t, k0 + 2.2, k0 + 2.8) : 1); const dx = lerp(1450, 1100, f); tf(s.mdot, `translate(${(dx + 110) * s.mk} ${(GEO13.PAC.yc - 4 - 150) * s.mk})`);
     op(s.mwarm, warm ? .85 * ramp(t, cue(name, "west", .6) - .3, cue(name, "west", .6) + .6) : 0);
     if (warm) { popAt(s.card, 810, 160, t, cue(name, "west", .6)); } else op(s.card, 0); };
   return s; }
+S.povShrink = nPovSea("povShrink", false, "shrink");
 S.povWind = nPovSea("povWind", false);
 S.povWarm = nPovSea("povWarm", true);
 
@@ -212,7 +233,7 @@ S.povWeak = (() => { const s = scene("povWeak", "#0b3d66", "#1d6fa5"), st = nWho
     s.cl.forEach((g, i) => { const x0 = P.sg[0] + 60 + i * 200, x1 = 950 + i * 230; tf(g, `translate(${lerp(x0, x1, Math.max(ks * .6, kc))} ${P.yc - 140 + (i % 2) * 40})`); runRain(g, t + i, .55, 1); });
     tf(s.sun, `translate(${P.sg[0] + 30} ${P.sg[1] - 120}) scale(${Math.max(0, pop(t, tC + 1.6))})`); tf(s.sun.rays, `rotate(${t * 15})`);
     popAt(s.card, 810, 80, t, t0 + .1);
-    nShow(s.pip, 60, 960, 190, "sit", t); };
+    nShow(s.pip, SHORT ? 300 : 60, SHORT ? 1060 : 960, SHORT ? 300 : 190, "sit", t); };
   return s; })();
 
 /* ======================================================================================================================
@@ -231,13 +252,15 @@ S.thermo = (() => { const s = scene("thermo", "#0b3d66", "#1d6fa5"), st = nWhole
   s.th = el("g", {transform: "translate(600 300)"}, st); el("rect", nA({x: -34, y: -40, width: 68, height: 400, rx: 34, fill: "#fff"}), s.th);
   s.merc = el("rect", {x: -18, y: 200, width: 36, height: 150, rx: 18, fill: "#e63946"}, s.th); el("circle", nA({cx: 0, cy: 380, r: 56, fill: "#e63946"}), s.th);
   [[0, "usual"], [1, "+1 °C"], [2, "+2 °C"]].forEach(([d, l]) => { const y = 260 - d * 120; el("path", {d: `M-34 ${y} H-70`, stroke: INK, "stroke-width": 6}, s.th); nT(s.th, -82, y + 12, l, 34, "#fff", {"text-anchor": "end"}); });
+  s.more = el("g", {}, s.th); el("path", nA({d: "M60 -80 L90 -120 L120 -80 Z", fill: "#ffd60a", "stroke-width": 4}), s.more);
+  nT(s.more, 140, -76, "more than +2 °C", 34, "#ffd60a", {"text-anchor": "start"});
   s.tag = chip(st, "🔥 SUPER EL NIÑO", "#e63946", {fs: 50});
   s.momo = nBud(st, "momo");
   s.run = t => { const a = (w, f) => cue("thermo", w, f), t0 = SC.thermo.t0, tM = a("middle", .1), tD = a("degrees", .3), tS = a("super", .55), tH = a("heat", .9);
     op(s.box, ramp(t, tM - .2, tM + .3)); op(s.boxL, ramp(t, tM, tM + .3)); const k = ramp(t, tM + .3, tD + 1);
-    set(s.merc, "y", lerp(200, -40, k)); set(s.merc, "height", lerp(150, 390, k)); popAt(s.th, 600, 300, t, t0 + .1, 1);
+    set(s.merc, "y", lerp(200, -40, k)); set(s.merc, "height", lerp(150, 390, k)); popAt(s.th, 600, 300, t, t0 + .1, 1); op(s.more, ramp(t, tD + .6, tD + 1));
     op(s.hot, lerp(.35, .8, ramp(t, tD, tD + 1)) * (1 + .15 * on(t, tH - .3, tH + 1.4, .3) * Math.sin(t * 8)));
-    popAt(s.tag, 810, 80, t, tS - .1); nShow(s.momo, 180, 960, 200, "sit", t); };
+    popAt(s.tag, 810, 80, t, tS - .1); nShow(s.momo, SHORT ? 300 : 180, SHORT ? 1060 : 960, SHORT ? 300 : 200, "sit", t); };
   return s; })();
 
 /* ======================================================================================================================
@@ -274,7 +297,7 @@ S.waterCycle = (() => { const s = scene("waterCycle", "#8ecae6", "#e0fbfc"), st 
     set(s.back, "stroke-dashoffset", t * 50); op(s.back, ramp(t, tCy, tCy + .6));
     const kM = on(t, tC - .3, tCl + 2.2, .4); tf(s.mag, `translate(1010 260) scale(${.2 + .8 * kM})`); op(s.mag, kM);
     popAt(s.look, 1010, 40, t, tC - .3); op(s.look, on(t, tC - .3, tCl + 2.2, .3));
-    popAt(s.tE, 200, 560, t, tE + 2.6); popAt(s.tC, 620, 340, t, tC + 2.6); /* after the key-word box has flown to the shelf */ popAt(s.tW, 800, -5, t, tCy + .4); op(s.tW, on(t, tCy + .4, 1e9, .3)); };
+    popAt(s.tE, 200, 560, t, tE + 2.6); popAt(s.tC, 620, 340, t, tC + 2.6); /* after the key-word box has flown to the shelf */ popAt(s.tW, 1010, 760, t, tCy + .4); op(s.tW, on(t, tCy + .4, 1e9, .3)); };
   return s; })();
 
 /* ======================================================================================================================
@@ -376,4 +399,102 @@ S.news = (() => { const s = scene("news", "#14213d", "#3a0ca3"), st = nWhole(s);
   s.c2 = card(0, "🇸🇬", "MSS (Singapore)", "29 May 2026", ["Warmer, drier weather", "June to October"]);
   s.run = t => { const a = (w, f) => cue("news", w, f), tN = a("noaa", .1), tM = a("may", .6);
     popAt(s.c1, 420, 470, t, tN - .4, 1); popAt(s.c2, 1200, 470, t, tM - .2, 1); };
+  return s; })();
+
+/* ======================================================================================================================
+   0:53 BE THE THING, rising: you carry the water vapour up. The sea falls away below; the water vapour (invisible: drawn only as faint
+   dotted trails, never as white puffs) rises beside you; high up it cools, and tiny water droplets appear all round you and gather into a
+   cloud. Cards EVAPORATES, CONDENSES (one line each). The buddies ride along in back view. */
+S.povCloud = (() => { const s = scene("povCloud", "#1d4ed8", "#90e0ef"), st = nWhole(s);
+  s.sky = el("rect", {x: -400, y: -800, width: 2400, height: 2600, fill: nGrad([[0, "#1e3a8a"], [.5, "#3a86ff"], [1, "#bde0fe"]])}, st);
+  s.sea = el("g", {}, st); el("rect", {x: -400, y: 0, width: 2400, height: 1400, fill: nGrad([[0, "#ffa94d"], [.4, "#f76707"], [1, "#d9480f"]])}, s.sea);  // the warm sea, far below
+  seed = 71; for (let i = 0; i < 40; i++) el("path", {d: `M${-150 + rnd() * 1920} ${20 + rnd() * 900} q20 -8 40 0`, fill: "none", stroke: "#fff3bf", "stroke-width": 4, opacity: .7}, s.sea);
+  s.trails = []; seed = 73; for (let i = 0; i < 9; i++) s.trails.push({e: el("path", {fill: "none", stroke: "#ffffff", "stroke-width": 7, "stroke-dasharray": "3 20", "stroke-linecap": "round"}, st), x: -60 + i * 215 + rnd() * 60, w: rnd()});
+  s.drops = []; seed = 79; for (let i = 0; i < 90; i++) s.drops.push({e: el("circle", {r: 4 + rnd() * 9, fill: "#e0f2fe", stroke: "#60a5fa", "stroke-width": 2}, st), x: -150 + rnd() * 1920, y: -60 + rnd() * 1000, u: rnd()});
+  s.fog = el("rect", {x: -400, y: -800, width: 2400, height: 2600, fill: "#ffffff", opacity: 0}, st);
+  nVig(st, "#d8f3ff", .6);
+  s.pip = nBud(st, "pip", false); s.momo = nBud(st, "momo", false); s.basil = nBud(st, "basil", false);
+  s.cE = povCard(st, "EVAPORATES ↑", "#ef476f"); s.cC = povCard(st, "CONDENSES 💧", "#3a86ff");
+  s.tag = nYouTag(st, "You: a gust of the trade wind");
+  s.run = t => { const a = (w, f) => cue("povCloud", w, f), t0 = SC.povCloud.t0, t1 = SC.povCloud.t1, tE = a("evaporates", .25), tC = a("condenses", .7), tCl = a("clouds", .9);
+    const up = ramp(t, t0, tC + 1.5);                                                  // how high we have risen
+    tf(s.sea, `translate(0 ${lerp(520, 1250, up)})`);
+    s.trails.forEach((o, i) => { const x = o.x + Math.sin(t * .6 + i) * 18; set(o.e, "d", `M${x} 1100 C${x + 40} 700 ${x - 40} 400 ${x + 10} ${80 + o.w * 120}`);
+      set(o.e, "stroke-dashoffset", t * 90); op(o.e, .55 * ramp(t, tE - .3, tE + .6) * (1 - ramp(t, tC + .5, tC + 2))); });
+    const kd = ramp(t, tC - .2, tCl + .4);
+    s.drops.forEach(o => { const on1 = clamp((kd - o.u * .8) / .2); tf(o.e, `translate(${o.x + Math.sin(t + o.u * 9) * 6} ${o.y + (1 - on1) * 40})`); op(o.e, on1 * .9); });
+    op(s.fog, .55 * ramp(t, tCl - .3, tCl + 1.2));
+    const X = SHORT ? [360, 600, 830] : [230, 470, 700];
+    nShow(s.pip, X[0], 915, 200, "back", t, {bob: 5}); nShow(s.momo, X[1], 915, 195, "back", t, {bob: 5}); nShow(s.basil, X[2], 915, 195, "back", t, {bob: 5});
+    popAt(s.tag, 810, 60, t, t0 - .2); popAt(s.cE, 810, 170, t, tE); op(s.cE, on(t, tE, tC - .3, .3)); popAt(s.cC, 810, 170, t, tC); op(s.cC, on(t, tC, t1 + .5, .3)); };
+  return s; })();
+
+/* ======================================================================================================================
+   1:07 / 1:26 LOOKING DOWN AT SINGAPORE (real coast, Natural Earth 1:10m; MacRitchie Reservoir at its real place).
+   povRain: a normal year, the clouds rain on the island (card A NORMAL YEAR). povDry: this year, blue sky and hardly any clouds, the
+   island dries to straw colours; then the buddies grow back to normal size and turn round. */
+function nPovSG(name, dry) { const s = scene(name, "#48cae4", "#0096c7"), st = nWhole(s), G = GEO13.SG;
+  el("rect", {x: -400, y: -800, width: 2400, height: 2600, fill: "#48cae4"}, st);
+  s.land = el("path", {d: G.land, fill: "#74c69d", stroke: INK, "stroke-width": 4, "stroke-linejoin": "round"}, st);
+  el("ellipse", {cx: G.macritchie[0], cy: G.macritchie[1], rx: 22, ry: 14, fill: "#219ebc", stroke: INK, "stroke-width": 3}, st);
+  nT(st, G.sg[0] + 10, G.sg[1] + 120, "Singapore", 54); nT(st, G.macritchie[0] + 30, G.macritchie[1] - 26, "MacRitchie Reservoir", 26, "#fff", {"text-anchor": "start"});
+  s.cl = [[480, 300, 1.4], [820, 240, 1.7], [1150, 330, 1.3], [640, 620, 1.2], [1000, 660, 1.5]].map(([x, y, k]) => { const g = nRainCloud(st, k); g.x = x; g.y = y; g.k = k; return g; });
+  s.sun = nSun(st, 80); nVig(st, dry ? "#fff3bf" : "#d8f3ff", .6);
+  s.pip = nBud(st, "pip", false); s.momo = nBud(st, "momo", false); s.basil = nBud(st, "basil", false);
+  s.card = chip(st, dry ? "THIS YEAR" : "A NORMAL YEAR", dry ? "#e63946" : "#3a86ff", {fs: 44});
+  s.tag = nYouTag(st, "You: a gust of the trade wind");
+  s.run = t => { const t0 = SC[name].t0, t1 = SC[name].t1, a = (w, f) => cue(name, w, f);
+    if (!dry) { s.cl.forEach((g, i) => { tf(g, `translate(${g.x + (t - t0) * -8} ${g.y})`); runRain(g, t + i * .3, g.k, ramp(t, a("rain", .3) - .4, a("rain", .3))); }); op(s.sun, 0); }
+    else { const tb = a("blue", .2), th = a("hardly", .4), tn = a("nino", .8);
+      s.cl.forEach((g, i) => { tf(g, `translate(${g.x + 900 + (t - t0) * 40} ${g.y}) scale(${i === 1 ? .6 : 1})`); op(g, i === 1 ? .9 : 1 - ramp(t, t0, t0 + .8)); runRain(g, t, g.k, 0); });
+      set(s.land, "fill", mix("#74c69d", "#d9c27a", ramp(t, tb, tb + 2.5))); tf(s.sun, `translate(${SHORT ? 1100 : 1300} 150) scale(${Math.max(0, pop(t, tb - .2))})`); tf(s.sun.rays, `rotate(${t * 15})`); }
+    const grow = dry ? ramp(t, a("nino", .8) - 1.2, a("nino", .8) + .4) : 0, X = SHORT ? [360, 600, 830] : [230, 470, 700];
+    nShow(s.pip, X[0], 915, lerp(200, 300, grow), grow > .5 ? "sit" : "back", t, {bob: 5 * (1 - grow)}); nShow(s.momo, X[1], 915, lerp(195, 290, grow), grow > .5 ? "sit" : "back", t, {bob: 5 * (1 - grow)});
+    nShow(s.basil, X[2], 915, lerp(195, 290, grow), grow > .5 ? "sit" : "back", t, {bob: 5 * (1 - grow)});
+    popAt(s.tag, 810, 60, t, t0 - .2); op(s.tag, 1 - grow); popAt(s.card, 810, 160, t, t0 + .2); };
+  return s; }
+S.povRain = nPovSG("povRain", false);
+S.povDry = nPovSG("povDry", true);
+
+/* ======================================================================================================================
+   3:25 TRY THIS: back home on the HDB ledge. Two cups with the same amount of water, a marker line on each; one in the sun, one in the
+   shade of the ledge above. Day 1 -> Day 3: the cup in the sun has lost more water (it gained more heat). Momo watches (her water bowl). */
+S.try = (() => { const s = scene("try", "#fff3c4", "#ffd166"), st = nWhole(s);
+  el("rect", {x: -400, y: -800, width: 2400, height: 1400, fill: nGrad([[0, "#9ad1ff"], [1, "#fffbe8"]])}, st);
+  const blk = el("g", {}, st); for (let r = 0; r < 4; r++) for (let c = 0; c < 10; c++) el("rect", {x: -120 + c * 190, y: 40 + r * 120, width: 120, height: 70, fill: (r + c) % 3 ? "#cfe0ec" : "#f4d6b0", opacity: .7}, blk);
+  el("rect", nA({x: -400, y: 560, width: 2400, height: 90, fill: "#e9dcc0", "stroke-width": 5}), st);                 // the ledge
+  el("rect", {x: -400, y: 650, width: 2400, height: 1200, fill: "#d8c7a3"}, st);
+  s.shade = el("path", {d: "M760 560 L1500 560 L1500 650 L760 650 Z", fill: "#1b1b3a", opacity: .25}, st);              // shade from the ledge above
+  el("rect", nA({x: 700, y: -60, width: 900, height: 120, fill: "#b8aa8f", "stroke-width": 5}), st);                    // the ledge above (makes the shade)
+  s.sun = nSun(st, 70);
+  const cup = (x) => { const g = el("g", {transform: `translate(${x} 560)`}, st);
+    const cp = nClip(g, ["path", {d: "M-80 -260 L80 -260 L64 0 L-64 0 Z"}]); g.w = el("rect", {x: -90, y: -170, width: 180, height: 170, fill: "#4cc9f0", opacity: .8}, cp);
+    el("path", {d: "M-80 -260 L80 -260 L64 0 L-64 0 Z", fill: "#e0fbfc", "fill-opacity": .25, stroke: INK, "stroke-width": 6, "stroke-linejoin": "round"}, g);
+    el("path", {d: "M-90 -170 H90", stroke: "#e63946", "stroke-width": 6, "stroke-dasharray": "14 8"}, g); return g; };
+  s.c1 = cup(330); s.c2 = cup(1080);
+  nT(st, 330, 720, "in the sun", 40, INK); nT(st, 1080, 720, "in the shade", 40, INK);
+  s.day = chip(st, "Day 1", INK, {fs: 40}); s.day3 = chip(st, "Day 3", "#e63946", {fs: 40});
+  s.q = nT(st, 700, 380, "?", 160, "#e63946"); s.heat = el("g", {}, st); nArrow(s.heat, 180, "#ffbe0b", 22);
+  s.card = chip(st, "🔍 TRY THIS", "#7209b7", {fs: 46});
+  s.momo = nBud(st, "momo");
+  s.run = t => { const a = (w, f) => cue("try", w, f), t0 = SC.try.t0, tM = a("mark", .4), tC = a("check", .55), tW = a("which", .7), tH = a("hint", .85);
+    tf(s.sun, `translate(200 120)`); tf(s.sun.rays, `rotate(${t * 12})`);
+    const k = ramp(t, tC + .3, tC + 2.2); set(s.c1.w, "y", lerp(-170, -105, k)); set(s.c2.w, "y", lerp(-170, -150, k));
+    popAt(s.day, 700, 120, t, tM); op(s.day, on(t, tM, tC + .3, .2)); popAt(s.day3, 700, 120, t, tC + .3);
+    op(s.q, on(t, tW, tH, .3)); tf(s.heat, `translate(240 230) rotate(60) scale(${Math.max(0, pop(t, tH + 1))})`); op(s.heat, ramp(t, tH + 1, tH + 1.3));
+    popAt(s.card, 700, -10, t, t0 + .1); nShow(s.momo, 1370, 1000, 230, "sit", t, {flip: true}); };
+  return s; })();
+
+/* ======================================================================================================================
+   3:51 GOODBYE: back in the HDB corridor's afternoon light; Momo says her line (talking), then the three buddies wave. Also the Shorts'
+   "Watch the full episode" beat. */
+S.bye = (() => { const s = scene("bye", "#ffd6a5", "#fdffb6"), st = nWhole(s);
+  el("rect", {x: -400, y: -800, width: 2400, height: 2600, fill: nGrad([[0, "#ffd6a5"], [.6, "#fdffb6"], [1, "#e9dcc0"]])}, st);
+  s.sk = skyline(st, 0, 0, "#f4a261"); tf(s.sk, "translate(110 520) scale(1) "); op(s.sk, .35);
+  el("rect", {x: -400, y: 760, width: 2400, height: 1000, fill: "#c9b99a"}, st);
+  s.card = chip(st, "Tell a friend in 🇮🇳 India or 🇺🇸 the USA!", "#06d6a0", {fs: 40});
+  s.pip = nBud(st, "pip"); s.momo = nBud(st, "momo"); s.basil = nBud(st, "basil");
+  s.run = t => { const t0 = SC.bye.t0, m3 = nSeg("momo3"), talkM = nTalk("momo", t) >= 0;
+    nShow(s.pip, 250, 860, 280, "waving", t); nShow(s.momo, 600, 860, 290, talkM ? "sit" : "waving", t); nShow(s.basil, 960, 860, 290, "waving", t, {flip: true});
+    popAt(s.card, 600, 120, t, m3 ? m3.t0 + .6 : 1e9); };
   return s; })();

@@ -6,6 +6,7 @@ drawn in scene units (the 1200 x 900 box at screen (150, 60); the whole screen i
   IND    India, orthographic, centre 80E 22N: India's outline (for the shading clip), the South Peninsula and the
          North-East at their real places (IMD regions), New Delhi
   USA    the United States, orthographic, centre 97W 39N: California, Florida, the northern states (Montana, Minnesota, Maine)
+  SG     Singapore from above (centre 103.82E 1.36N): the coast, MacRitchie Reservoir
 Every place is put at its real longitude and latitude.     python3 ep13/geo13.py      (from workspace/sau)"""
 import json, math, os
 H = os.path.dirname(os.path.abspath(__file__)); G = os.path.join(H, '..', 'geo')
@@ -72,6 +73,11 @@ oth = [r for f in ctry['features'] if f['properties'].get('ADMIN') in ('Canada',
 OUT['USA'] = {"usa": path(usa, pu, box, 1.6), "others": path(oth, pu, box, 1.8),
               "california": r1(pu(-119.6, 37.2)), "florida": r1(pu(-81.6, 28.3)), "texas": r1(pu(-99.0, 31.2)), "montana": r1(pu(-109.6, 47.0)),
               "minnesota": r1(pu(-94.3, 46.3)), "maine": r1(pu(-69.2, 45.3)), "michigan": r1(pu(-84.7, 44.3))}
+# ---- SG: Singapore from above (land at 1:10m; the neighbours' coasts), for the rain / dry look-down shots; MacRitchie Reservoir at its real place
+ps = ortho(103.82, 1.36, 105000, 810, 500)
+nr = lambda r: any(103.2 < x < 104.5 and 0.8 < y < 1.9 for x, y in r[::max(1, len(r) // 200)] + [r[0]])
+OUT['SG'] = {"land": path([r for f in land['features'] for r in rings(f['geometry']) if nr(r)], ps, (-400, -800, 2000, 1800), 1.4),
+             "sg": r1(ps(103.82, 1.35)), "macritchie": r1(ps(103.8195, 1.3443)), "johor": r1(ps(103.75, 1.55)), "batam": r1(ps(104.03, 1.12))}
 js = "/* ep13/geo13.js: made by ep13/geo13.py from Natural Earth (real coastlines; places at real longitude and latitude). */\nconst GEO13 = " + json.dumps(OUT) + ";\n"
 open(os.path.join(H, 'geo13.js'), 'w').write(js)
 print('geo13.js', len(js) // 1024, 'KB', {k: {kk: v for kk, v in OUT[k].items() if kk not in ('land', 'grat', 'india', 'others', 'usa')} for k in OUT})
