@@ -5,7 +5,7 @@ rendered or uploaded.
 
 | File | Episode | Format | Problem (first 20 s) | Length (est.) |
 |---|---|---|---|---|
-| `p4_ep01_script.md` | EP1 Systems: bike, body, tree | B Fix-It | Pip took the "useless" parts off his bike; the class ride is in one hour and it won't move | 6:43 |
+| `p4_ep01_script.md` | EP1 Systems: bike, body, tree (**v2, 26 Nov**: "The Great Void Deck Race"; v1 rejected, kept as `p4_ep01_script_v1.md`) | B Fix-It | Basil sits in an ice box three minutes before his race with Uncle Lim: his bike has no bell, no chain and no brakes ("LIGHTER IS FASTER!") | 7:38 model (about 6:30 built) |
 | `p4_ep02_script.md` | EP2 The plant system | D Help Desk | Chilli the chilli plant: "I'm watered every single day. So why am I wilting?" | 6:23 |
 | `p4_ep03_script.md` | EP3 Read a leaf like a scientist | A Case File | A leaf lands on the Help Desk: which of three plants dropped it? | 6:09 |
 | `p4_ep04_script.md` | EP4 Plants with superpowers: cactus, climbers, carrots | D Help Desk | Spike the cactus: "My family loves me too much." | 6:23 |
@@ -53,7 +53,7 @@ Each script has the same sections, so any agent can find anything:
 ## 3. Who is right (rotation) and who reads the card
 | EP | Pip | Momo | Basil | Answer | Reads "the words that earn marks" |
 |---|---|---|---|---|---|
-| 1 | 1 (wrong) | 3 (right) | 2 (wrong) | 3 | Basil |
+| 1 (v2) | 3 (right) | 2 (wrong) | 1 (wrong) | 3 | Basil |
 | 2 | 3 (right) | 2 (wrong) | 1 (wrong) | 3 | Pip |
 | 3 | 2 (wrong) | 1 (wrong) | 3 (right) | 3 | Momo |
 | 4 | 1 (wrong) | 2 (wrong) | 3 (right answer, **wrong reason: no point**) | 3 | Basil |
