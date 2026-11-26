@@ -155,3 +155,12 @@
 - 09:03 UTC: EP27 v6 UPLOADED (flicker fix; teacher OK): 9OH920z0KKU
 - 09:05 UTC: EP26 v6 UPLOADED (flicker fix; teacher OK): hFs5zzMfyX8 YGh1zEDf5Og
 - 09:06 UTC: EP25 v6 UPLOADED (flicker fix; teacher OK): GR80QFu79vc b12jQxypRdk
+- 09:07 UTC: EP24 v6 UPLOADED (flicker fix; teacher OK): Y2-m7narjqU 2nCn0dQJF40
+- 09:09 UTC: EP22 v6 UPLOADED (flicker fix; teacher OK): zeyS_nTo2Yk
+- 09:10 UTC: EP21 v6 UPLOADED (flicker fix; teacher OK): Ds_km0L3Nig qlK-A1diJug
+- 09:11 UTC: EP20 v6 UPLOADED (flicker fix; teacher OK): -ny53vi4MJE zFx8hye_YZQ
+- 09:13 UTC: EP19 v6 UPLOADED (flicker fix; teacher OK): VQpmyDXwgJg
+- 09:14 UTC: EP18 v6 UPLOADED (flicker fix; teacher OK): LE02oYA7GCk BAMP55iorU4
+- 09:15 UTC: EP17 v6 UPLOADED (flicker fix; teacher OK): _P7y2iIcM9s uGQSm6loK-Y
+- 09:17 UTC: EP16 v6 UPLOADED (flicker fix; teacher OK): ko6P2xv1LNE
+- 09:20 UTC: EP00 v6 UPLOADED (flicker fix; teacher OK): DK19RAxb4PU sGW5pjQNrJU
