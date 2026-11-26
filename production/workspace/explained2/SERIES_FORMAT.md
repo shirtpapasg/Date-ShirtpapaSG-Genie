@@ -178,6 +178,7 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   chatter, extra examples) first, never the pauses around new terms.
 - Something changes on screen every 10 to 15 s.
 - Do not trim teaching to hit a length. Split into parts instead.
+- **Later levels (teacher, 2026-11-26):** P4 videos are **8:00 at most** each; P5 videos **10:00 at most**. See [[P4-new-direction]].
 
 ## 4. Interaction rules (the viewer must have time to react)
 
