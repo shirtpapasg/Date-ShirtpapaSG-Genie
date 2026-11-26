@@ -31,6 +31,7 @@ The teacher's answers (26 Nov): "1 no level, 2 yes, 4 EP13, 3 Dec OK".
   and feet line (poses/pip_back.png, momo_back.png = momo_v2_back.png, basil_back.png = basil_v2_back.png; the old grey ones kept as
   *_back_grey.png). `spr13.py` picks the coloured painting first (switchable; a stand-in only if none exists). All three buddies ride in back
   view; a buddy turns to the front only to speak.
+- Journey music removed after the teacher's review (26 Nov): pad_wonder taken out of the episode and Short 1 by an audio-only re-mix (video streams byte-identical, frame counts unchanged, -16.7 / -16.5 LUFS); pad_tension was never used.
 - Episode 4:13.4 (END 253.4 s incl. the end card); Short 1 "the journey" 51.1 s (Fri 4 Dec); Short 2 "only two degrees?" 52.8 s (Mon 7 Dec).
 - Built with `ep13/build.sh`; rendered with `flock /tmp/explained_render.lock ./render_all.sh ep13`; QA `ep13/check.sh`; captions and upload
   details `python3 ep13/make_upload.py`; teacher review `ep13/review13.sh` (clip + 10 key frames in ep13/review/).
@@ -161,12 +162,12 @@ countdown (−5.7 s) and the "Clouds are made up..." sentence (−4.5 s) -> abou
 | corridor ★ | 0:00 | HDB corridor at noon (one-point perspective, parapet and railing on the left, flats' gates right), sun patch and heat shimmer on the floor, a standing fan turning; card "📍 NOVEMBER, SINGAPORE". Pip with a paper fan, Momo by her half-empty water bowl, Basil basking in the sun patch (aura discs; talking sprites lip-synced). No made-up temperature number. | whirr, birds; silent 3 s cold open |
 | globeFly | 0:17 | Real globe (Natural Earth, centre 160E 5N): from Singapore, ease out and east over the Pacific | whoosh |
 | countdown | 0:25 | series countdown (common.js) | ADDED |
-| povShrink | 0:30 | (silent 3.2 s) the buddies and the viewer shrink into a curl of wind over the sea; the "You: a gust of the trade wind" tag lands | pad_wonder (calm bed for the whole journey), space_warp, wind, sparkle |
+| povShrink | 0:30 | (silent 3.2 s) the buddies and the viewer shrink into a curl of wind over the sea; the "You: a gust of the trade wind" tag lands | space_warp, wind, sparkle (no music) |
 | povWind ★ | 0:35 | BE THE THING, first person, low over the Pacific flying WEST: wave crests rush at the camera, wind streaks stream past, a line of rain clouds on the western horizon (warm sea near Asia); Momo and Basil ride in back view looking ahead, Pip faces the camera (he speaks on this journey); a small real map (bottom right) with a yellow "you" dot moving west | wind, sea_wash; Heart soft |
 | povWarm | 0:44 | same, the sea turns warm orange, chevrons on the surface stream west; card "WARM WATER PILES UP NEAR ASIA"; the map's warm pool grows near Asia | sea_wash, wind |
 | povCloud | 0:53 | first person rising: invisible water vapour shown only as faint rising dotted trails (never white puffs), cooling high up, droplets appearing and a cloud forming around the camera; cards "EVAPORATES", "CONDENSES" | sparkle, wind |
 | povRain | 1:07 | looking down at Singapore (real coast, geo13 SG view to add), the clouds rain on the city and MacRitchie; card "A NORMAL YEAR" | rain, soft thunder |
-| povWeak ★ | 1:14 | outside shot (the El Niño map): the real tropical Pacific, Asia LEFT (the wind's view): the trade-wind arrows shrink, the warm water slides east, the rain clouds follow it, a Sun appears over Singapore; card "THIS YEAR"; legend "warm water"; Pip: "Wait for us, clouds!" | wind fading, pass_by; pad_tension |
+| povWeak ★ | 1:14 | outside shot (the El Niño map): the real tropical Pacific, Asia LEFT (the wind's view): the trade-wind arrows shrink, the warm water slides east, the rain clouds follow it, a Sun appears over Singapore; card "THIS YEAR"; legend "warm water"; Pip: "Wait for us, clouds!" | wind fading, pass_by (no music) |
 | povDry | 1:26 | look down at Singapore: blue sky, dry soil, yellowing grass at a void deck; pull back to normal size (the buddies grow back); tag "EL NIÑO" | reveal |
 | news | 1:36 | two source cards: 🇺🇸 NOAA (USA), 12 November 2026 "El Niño: strong to very strong"; 🇸🇬 MSS (Singapore), 29 May 2026 "Warmer, drier weather, June to October" (our drawing, no logos, rule 6) | pop |
 | thermo ★ | 1:50 | the same real map; NOAA's Niño 3.4 box (5S–5N, 170W–120W, "the middle of the Pacific") lights up; thermometer "usual / +1 °C / +2 °C"; chip "🔥 SUPER EL NIÑO"; Momo asks "Only two degrees?" | — |
@@ -179,7 +180,7 @@ countdown (−5.7 s) and the "Clouds are made up..." sentence (−4.5 s) -> abou
 | nyk / end | 4:00 | "Now you know!" (rule 1) and the series end card | ding, tada |
 
 Captions: the series' word-by-word captions (build_tl13). Key words (shelf): TRADE WIND, EL NIÑO, EVAPORATION, CONDENSATION, WATER CYCLE.
-Music: pad_wonder under the whole journey (0:30 to 1:35), pad_tension under "THIS YEAR"; no other music (series: one or two beds).
+Music: NONE in the journey (teacher, 26 Nov: "why is there still background music playing?"): from the shrink to the return to normal size only natural sound (wind, waves, whoosh/sparkle, rain), Heart and the buddies. The episode has no other music bed.
 
 **Buddies (stills):** front views are the Explained cast as in EP27 (Pip grey, Momo coral v2, Basil teal v2). **Back views:** the teacher's
 back paintings exist only in the OLD GREY art, and Pip has none. For the stills, Momo's and Basil's grey backs were recoloured by code to

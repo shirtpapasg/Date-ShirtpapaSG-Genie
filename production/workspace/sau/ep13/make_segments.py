@@ -27,7 +27,7 @@ SEG = [
   {"id": "pip0", "scene": "corridor", "who": "pip", "text": "Not us! Drink lots of water and stay in the shade.", "hold": 0.4},
   {"id": "far", "scene": "globeFly", "text": "The answer starts thousands of kilometres away, over the Pacific Ocean. Let's shrink down and go there."},
   {"id": "ready", "scene": "countdown", "excited": True, "text": "Are you ready? Three! Two! One! Go!", "added": "countdown (series standard, as EP11)"},
-  # 0:40 You are the trade wind (BE THE THING, soft, calm pad)
+  # 0:40 You are the trade wind (BE THE THING, soft; NO music, natural sound only: teacher, 26 Nov)
   {"id": "w0", "scene": "povShrink", "silent": 3.2, "sfx": [["space_warp", 0.2], ["wind", 1.0], ["sparkle", 2.4]]},
   {"id": "wind1", "scene": "povWind", "soft": True, "text": "You are a gust of wind. You blow over the Pacific Ocean from east to west, day after day. People call you the trade wind.", "sfx": [["wind", 0], ["sea_wash", 1.5]]},
   {"id": "wind2", "scene": "povWarm", "soft": True, "text": "Below you, the sea is warm. You push the warm top layer of water along with you, west, towards Singapore.", "sfx": [["sea_wash", 0], ["wind", 2.5]]},
