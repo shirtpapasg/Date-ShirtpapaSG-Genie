@@ -36,5 +36,5 @@
  ],
  "retire_old": true,
  "_note": "P4 EP1 (new P4 style), ONE video. Public, Made for Kids (the uploader sets both). REPLACES the old P4 EP01 FOvUezOZJbo ('7 Bike Parts Explain Every System in Science', public): never deleted. Playlists checked read-only on 25 Nov 2026 (23:0x UTC): FOvUezOZJbo is at position 0 of the P4 playlist PLK9BW3T6kXx4 ('TheOneApp, Explained · Primary 4', 22 videos, next loaPYprOWDQ) and at position 0 of the main playlist PLPfEuT7l4KjI ('TheOneApp, Explained', 96 videos, next loaPYprOWDQ); it is in no other playlist. With after = FOvUezOZJbo the new video goes in right after it, then retire_old takes the old one out of both playlists, so the new one takes its place (position 0), and the old one's description gets a first line '▶ NEW VERSION: Pip's Bike Won't Move! Which Fix Works? <new url>'. Chapters: production/youtube/chapters_p3.json key P4EP01. App moments: p4ep01/app_moments.json (videos.js P4 entry no. 1). NOT UPLOADED by the build agent: the main session reviews it and asks the teacher first.",
- "_ok": "Script approved by the teacher 25 Nov 2026 ('ok for the first script'). Upload only after the teacher OKs the built video."
+ "_ok": "Teacher 26 Nov 2026: 'ok upload' (P4 EP1)"
 }
