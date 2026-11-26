@@ -136,7 +136,7 @@ const SIZE_K = { basil: .94 };   // teacher, 23 Nov: keep the three in proportio
    .2 s shrink). While the melt runs, the new scene's buddies are drawn ON TOP of the fading old frame (never washed out under it). QA: ../qa/buddy_ghost_scan.js steps through every scene change and lists any frame with a buddy twice or half-faded. */
 let _BCAP = null, _BDRAW = false, _BALL = null; const _MELTM = {};
 // f() with buddy() noting instead of drawing -> { svg, bud: { who: { x, y, h, o, t, hk, name } } } (the biggest copy of each buddy)
-function capBuddies(f) { const prev = _BCAP, pall = _BALL, nh = window._noHud, keep = [window._BP, window._SAID, window._BUBAT]; _BCAP = {}; _BALL = []; let svg = "", bud, all;
+function capBuddies(f) { const prev = _BCAP, pall = _BALL, nh = window._noHud, keep = [window._BP && { ...window._BP }, window._SAID && { ...window._SAID }, window._BUBAT];   /* popfix 26 Nov: copies, so a dry run cannot leave a speech bubble anchored to an old frame */ _BCAP = {}; _BALL = []; let svg = "", bud, all;
   try { svg = f(); } finally { bud = _BCAP; all = _BALL; _BCAP = prev; _BALL = pall; window._noHud = nh; [window._BP, window._SAID, window._BUBAT] = keep; } return { svg, bud, all }; }
 // the melt a scene opens with, { from, d } (found by a dry run of its first frame: melt() notes itself), or null
 function meltOf(s) { const k = "@" + s.name; if (!(k in _MELTM)) { _MELTM[k] = null; if (SC[s.name]) capBuddies(() => SC[s.name](s.t0 + .02, s)); } return _MELTM[k]; }
@@ -145,15 +145,16 @@ function meltFrame(name) { return _MELTM["F" + name] || (_MELTM["F" + name] = ca
 // the buddies a scene draws at time t
 function budsAt(s, t) { const k = s.name + "@" + t.toFixed(3); return _MELTM[k] || (_MELTM[k] = capBuddies(() => SC[s.name](t, s)).bud); }
 // melt(t, s, name, d): the old scene's last frame fades out over d s (buddies glide or pop out, never fade)
-function meltScene(t, s, name, d = .4) { const k = "@" + s.name; if (!_MELTM[k]) _MELTM[k] = { from: name, d }; if (_BCAP) return "";
+// cut (popfix 25 Nov 2026): the background CUTS as before, only the buddies glide or pop out
+function meltScene(t, s, name, d = .4, cut = false) { const k = "@" + s.name; if (!_MELTM[k]) _MELTM[k] = { from: name, d }; if (_BCAP) return "";
   const a = 1 - clamp((t - s.t0) / d); if (a <= .01) return ""; const F = meltFrame(name), now = capBuddies(() => SC[s.name](t, s)).all; let top = "";
   _BDRAW = true; try { for (const c of now) top += buddy(...c); } finally { _BDRAW = false; }   // the new scene's buddies, above the old frame
-  return OP(a, F.svg) + meltOut(F.bud, budsAt(s, s.t0 + d), t, s.t0) + top; }
+  return (cut ? "" : OP(a, F.svg)) + meltOut(F.bud, budsAt(s, s.t0 + d), t, s.t0) + top; }
 // lizReveal's o.from: the scene before fades out over .45 s, the same way
 function meltFrom(t, s, f, a) { if (_BCAP) return ""; const F = _MELTM["L" + s.name] || (_MELTM["L" + s.name] = capBuddies(f)); return OP(a, F.svg) + meltOut(F.bud, budsAt(s, s.t0 + .45), t, s.t0); }
 // the old scene's buddies the new one does not have: popped out where they stood
 function meltOut(old, now, t, t0) { const k = 1 - eo((t - t0) / .2); if (k < .02) return ""; let out = "";
-  for (const [who, c] of Object.entries(old)) if (!now[who] || c.o.peek || now[who].o.peek) out += buddy0(who, c.x, c.y, c.h, c.t, { ...c.o, k: (c.o.k || 1) * k }); return out; }
+  for (const [who, c] of Object.entries(old)) if (!now[who] || c.o.peek || now[who].o.peek) out += buddy0(who, c.x, c.y, c.h, c.t, { ...c.o, k: (c.o.k || 1) * k, tag: false }); return out; }   // tag: false (popfix 26 Nov): a buddy popping out anchors no speech bubble
 // popfix (teacher, 25 Nov 2026: "pet buddies popping out and gone"): a HARD cut where one buddy carries on. It starts at its spot, size and
 // facing in scene <from>'s last frame and glides to its new spot over d s (no second pop-in, no pose pop if the pose is the same); <from>'s
 // other buddies pop out where they stood (the usual .2 s shrink). The background still cuts. qa/buddy_flicker_scan.js
