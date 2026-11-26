@@ -164,3 +164,4 @@
 - 09:15 UTC: EP17 v6 UPLOADED (flicker fix; teacher OK): _P7y2iIcM9s uGQSm6loK-Y
 - 09:17 UTC: EP16 v6 UPLOADED (flicker fix; teacher OK): ko6P2xv1LNE
 - 09:20 UTC: EP00 v6 UPLOADED (flicker fix; teacher OK): DK19RAxb4PU sGW5pjQNrJU
+- 13:22 UTC 26 Nov: TEACHER: 'OK to the EP1 v2 script' -> build started in explained2/p4ep01v2/ (right card moved to 2; items Pip B / Momo A / Basil A, switchable; Uncle Lim voice test clip; current poses with switchable slots for the new paintings).
