@@ -464,6 +464,9 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
       another buddy's face. QA: popfix2 `overlap.js` / `audit.py` (render probe, the new code against the old at the same moments).
       Set objects sweeping past behind a buddy during a camera pull-out or dive (under the white flash, under 0.3 s) are staging,
       as in every designed shot. Where a stayed buddy stood under cards that rise into place (EP27 picks), the cards rise in front.
+    - No face is ever covered (from P4 EP1 v2, 2026-11-26): no speech bubble, caption pill, card, comic sound-word or sprite sits on
+      ANY face, whether a buddy's, a side character's (Uncle Lim, the snail, Chilli) or a troublemaker's. A bubble grows upwards or
+      sideways from its speaker, never down over a head. QA on every build: `qa/face_cover_scan.js` over the whole video at 5 fps.
     - A buddy that changes place inside a scene glides there (EP25 P1 holdon: Basil to the side of the countdown and back).
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**
