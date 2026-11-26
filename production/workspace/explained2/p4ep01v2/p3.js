@@ -81,7 +81,7 @@ SC.shrink = (t, s) => { const a = LT("j902"), sh = a + (t - a) > a ? 0 : 0, S_ =
   const world = `<rect x="-6000" y="-6000" width="14000" height="12000" fill="#1E2430"/><rect x="-6000" y="-6000" width="14000" height="12000" fill="url(#rimLight)" opacity=".5"/>` + OP(.85, wheel) + W_.s + x2youLink(t, you);
   const rider = (who, kk) => { const q = JLOOP.at(-kk * JW.pitch + S_ + JW.pitch / 2), [X, Y] = camPt(c, [q.x, q.y - 60]), left = q.seg === "bottom";
     return bd2(who, X, Y, 170 * c[0], t, { in: s.t0 + .8 + kk * .15, out: MK("jtug") - .5 + kk * .05, pose: who === "basil" ? "back" : undefined, poses: who === "momo" ? [[0, "sit"], [MK("wave"), "waving"], [MK("wave") + 1.0, "sit"]] : [[0, who === "basil" ? "back" : "sit"]], flip: who === "pip" ? !left : left, look: left ? -6 : 6, tag: false, shadow: false, noreact: true }); };
-  const riders = c[0] > .5 ? rider("pip", 1.1) + rider("momo", 2.1) + rider("basil", 3.0) : "";
+  const riders = c[0] > .5 ? rider("basil", 3.15) + rider("pip", 1.1) + rider("momo", 2.1) : "";   // Basil (his back) drawn first, a little further back: he never covers Momo's face as they ride round the gear
   const [yx, yy] = camPt(c, [you.x, you.y]);
   return OP(ramp(t, s.t0, 1.0), CAM(world, c[0], c[1], c[2]) + riders
     + youTag(t, s.t0 + .6, "You: one link of a bike chain") + TF(yx, yy - 120 * c[0] - 20, spring(t, s.t0 + .8, .45) * (zo > .3 ? 1.1 : .9), youPill(0, 0, 1))

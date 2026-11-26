@@ -1,5 +1,5 @@
 # P4 EP1 v2 build state (for a resume after a restart)
-P4 EP1 **v2, "The Great Void Deck Race"** (Systems: bike, body, tree), ONE video, **7:10.3** (the story to 6:41, then the read-along,
+P4 EP1 **v2, "The Great Void Deck Race"** (Systems: bike, body, tree), ONE video, **7:16.2** (was 7:10.3 before Uncle Lim's longer Singlish lines; P4 max 8:00) (the story to 6:41, then the read-along,
 "Now you know!", 4.6 s of outro with Chilli, and a 6 s blooper after the end card). Script approved by the teacher on 26 Nov 2026 ("OK to
 the EP1 v2 script"): `../p4/p4_ep01_script.md` (v2; every spoken line word for word: `script.py`). Built by one Opus agent on 26 Nov 2026.
 **NOT uploaded**: the main session shows the teacher first. It REPLACES the old P4 EP01 FOvUezOZJbo (never deleted) and supersedes the v1
@@ -19,9 +19,9 @@ Engine copied from `../p4ep01/` (lib.js with stayOf / carryIn / the melt fixes, 
 family). New files: `artv2.js` (Uncle Lim, his roadster, head-on and rear views, the snail, pigeons, ice box, stools, ball, crown, clipboard,
 flag, ribbon, comic-book sound words, battle-cry letters, the sets vdv2 / rampv2 / gardenv2 (baked) and the scrolling runaway track),
 `p1.js` (helpers + cold open to picks), `p2.js` (flashback, runaway, race), `p3.js` (look-closer to blooper), `new_poses.py`, `thumbP4v2.js`.
-- **Items** (`items_options.js`, loaded live with `window.ITEM_OPT = { pip: "B", momo: "A", basil: "A" }`, switchable in page.html): Pip's
-  lilac helmet + goggles + chin strap (B; anchors added for pointing / arms_crossed / waving), Momo's short teal cord and small magnifier
-  (A; anchor added for oops), Basil's re-pinned badge (A) **plus Basil's bike helmet** (`window.BASIL_HELMET`, on all episode: he rides):
+- **Items** (`items_options.js`, loaded live with `window.ITEM_OPT = { pip: "B", momo: "N", basil: "A" }`, switchable in page.html): Pip's
+  lilac helmet + goggles + chin strap (B; anchors added for pointing / arms_crossed / waving), Momo's magnifier on a **teal polka-dot neckerchief** (option N, 26 Nov: the cord (A) read like a second smile; the scarf is tied
+  at the neck below the cheek fur, a ring at its tip holds the magnifier; fitted per pose, flipped too; sheet scratchpad p4items/momo_cord_fix.jpg), Basil's re-pinned badge (A) **plus Basil's bike helmet** (`window.BASIL_HELMET`, on all episode: he rides):
   Pip's helmet shell in sun-orange over his crown spines, the side spines showing below the rim, chin straps down the cheeks to the jaw
   corners (a strap across a lizard's face reads as a mouth), measured per pose (BASILH). His back view wears a matching helmet (code-drawn).
 - **The bikes**: Basil's bike = artp4 bikeP4 (drive side, sprocket on the back hub, chain tangent; centred as bike_options found); the
@@ -59,6 +59,19 @@ with every line kept the series pace puts it at about 7:10 (the gaps were tighte
   matters (the runs left are the riders sitting ON the journey's chain links, the ice behind Basil in the box, and a blurred backdrop).
 - Every 2.5 s of the video checked as stills (`qa/sweep/` sheets in the scratchpad) and fixed: bubbles over labels, the refrain strip
   doubling the bubble, comic words over faces, the trailer push-ins (now letterbox panels), the split screen's clip, crowded two-shots.
+
+## Fix pass 2 (26 Nov 2026, after the coordinator's review; NOT uploaded)
+- **Uncle Lim redrawn** (`limv2.js`, loaded after artv2.js; it replaces artv2's limStand / limRideV2 / limFrontRideV2 / limRearRideV2):
+  head on a neck, shoulders, two arms with mitten hands, a checked short-sleeved shirt with folds and shading, khaki shorts, knees, sandals.
+  Riding: seat ON the saddle, BOTH hands on the grips (far arm and leg darker, behind the frame), feet ON the pedals (two-bone legs solved per
+  pedal, turning with the cranks); ringing: near hand on the bell. Sips only when stopped: the near hand lifts the kopi bag (straw at his
+  lips), the far hand stays on the bar; his kopi otherwise rides in the basket. Standing: hands at his sides / the bag in one hand / a sip /
+  a wave. Head-on and rear views: both mittens on the grips. He does not sip while he talks (race). Sheet: scratchpad p4items/uncle_lim_redraw.jpg.
+- **Uncle Lim speaks light Singlish** (teacher: "lacking the singlish element"): r703 "Slowly, slowly lah. Where got need to rush?", e1303 "Aiyoh,
+  boy. Slowly, slowly also can win one, mah. Every part working together!". Particles shaped by `../sg_pron.py shape_particles` (short, level then
+  falling, a small pause before; "Aiyoh" = EYE-yoh with a fall): see ../PRONUNCIATION.md. Test clip re-made: ../pron_clips/UncleLim_p4ep01v2_voice_test.mp3.
+- **The ice box (runaway D)**: Momo shoves the box in and stays right of it (box + 340, h 340); Pip runs in from the LEFT after the bonk and
+  stops left of the crown stool facing Basil (430, h 330). overlap.js 166-186: no buddy over another buddy's face.
 
 ## Upload (the main session, after the teacher's OK)
 `upload.json` (key `explained-p4-ep01-v2`; replaces FOvUezOZJbo, retire_old; playlists PLK9BW3T6kXx4 and PLPfEuT7l4KjI, both `after`

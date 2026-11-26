@@ -223,12 +223,15 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   const front = CAM(TF(boxX, CB.box[1], 1, iceBoxFrontV2(t)), c[0], c[1], c[2]);
   const splashFx = inBox && t < tSp + 1.0 ? [...Array(12)].map((_, i) => { const v = clamp((t - tSp) / .8), an = -Math.PI / 2 + (i - 5.5) * .25, r = 260 * v; return `<rect x="-12" y="-10" width="24" height="20" rx="5" fill="#fff" stroke="#9FD0EA" stroke-width="2.5" transform="translate(${n2(CB.box[0] + Math.cos(an) * r)} ${n2(880 + Math.sin(an) * r + 300 * v * v)}) rotate(${n2(i * 40 + v * 200)})" opacity="${n2(1 - v)}"/>`; }).join("") : "";
   // Momo and Pip slide the box in (from the right), then stand by it
-  const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 300, eio(clamp((t - tD) / 1.0))) : lerp(CB.box[0] + 300, CB.box[0] + 250, eio(clamp((t - tP - .4) / .5))), pX = lerp(1920, CB.box[0] + 650, eio(clamp((t - tD - .1) / 1.1)));
-  window._BUBAT = { momo: [1400, 330], pip: [1500, 300], basil: [1180, 320] };
+  // (review 26 Nov: three buddies in the right half covered each other's faces) Momo shoves the box in alone and stays right of it; Pip runs in
+  // from the LEFT after the bonk (she chased the bike) and stops left of the crown stool, facing Basil
+  const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 340, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 340, pX = lerp(-300, 430, eio(clamp((t - tBk) / 1.0)));
+  window._BUBAT = { momo: [1560, 330], pip: [480, 300], basil: [1180, 320] };
+  const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "pointing"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10 });
   return CAM(bg("vdv2") + set + bike, c[0], c[1], c[2]) + basil + can + front + splashFx
-    + x2bc(c, "momo", mX, 1066, 370, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "pointing"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10 })
-    + x2bc(c, "pip", pX, 1066, 320, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : -8 })
-    + (inBox && t > LT("k612") + 1.2 && t < LE("k612") ? x2held(c, "momo", CB.box[0] + 250, 1066, 370, true, `<g transform="rotate(10)"><rect x="-22" y="-34" width="44" height="64" rx="8" fill="#E5484D" stroke="#2B2F36" stroke-width="4"/><rect x="-22" y="-34" width="44" height="10" rx="4" fill="#C9D1DA"/></g>`, -20, 10) : "")
+    + momoD
+    + x2bc(c, "pip", pX, 1066, 330, t, { in: tD - 3, noStay: true, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : 8 })
+    + (inBox && t > LT("k612") + 1.2 && t < LE("k612") ? x2held(c, "momo", CB.box[0] + 340, 1066, 340, true, `<g transform="rotate(10)"><rect x="-22" y="-34" width="44" height="64" rx="8" fill="#E5484D" stroke="#2B2F36" stroke-width="4"/><rect x="-22" y="-34" width="44" height="10" rx="4" fill="#C9D1DA"/></g>`, -20, 10) : "")
     + comicWord(t, tBk, CB.box[0] - 160, 470, "BONK!", { size: 84, d: .7 }) + comicWord(t, tSp, CB.box[0] + 60, 400, "KER-SPLOOSH!", { size: 92, d: 1.0 }) + comicWord(t, tSp + 1.1, CB.box[0] + 160, 820, "plip.", { size: 40, tiny: true, col: "#BFE6F7", d: .8 })
     + x2lab(t, MK("brkl"), MK("cold") - .3, c, "brakes: help the bike slow down and stop safely", 760, 300, CB.bike[0] + CB.bk * (BK.HT[0] - 76), CB.bike[1] + CB.bk * (BK.HT[1] - 34), 36)
     + (t >= LT("k612") - .1 ? x2raceClock(t, 180, spring(t, LT("k612") - .1, .45)) : "")
@@ -289,7 +292,7 @@ function x2raceSplit(t, s) { const tg = MK("racego"), u = t - tg, tS = MK("slump
   const pigeonsHop = (x0) => [0, 1, 2].map((i) => { const near = Math.abs(lx - (x0 + i * 60)) < 260 && u < half, hp = near ? 50 : 0; return TF(x0 + i * 60 + (near ? 40 : 0), 1040 - hp * Math.abs(Math.sin(t * 9 + i)), .7, pigeonV2(t, { peck: near ? 0 : .5 + .5 * Math.sin(t * 6 + i), ph: i })); }).join("");
   const ringNow = moving && Math.abs(lx - 1150) < 160 && u < half, brakeNow = moving && Math.abs(lx - 1700) < 140 && u < half;
   const right = `<g clip-path="url(#spR)">${CAM(bg("vdv2") + pigeonsHop(1200) + TF(240, 1000, .8, `<path d="M0 0 V-260" stroke="#8C96A2" stroke-width="10"/>`) + ribbonV2(240, 560, 800, moving && lx < 600 && u > half ? 0 : u >= pass - .1 ? clamp((u - pass + .1) / .5) : 0)
-    + TF(lx, 1040, .62, `<!--FACES:right limRide-->` + limRideV2(t, { crank: cr2 * (brakeNow ? .6 : 1), ring: ringNow ? 1 : 0, sip: !moving ? .5 + .5 * Math.sin((t - tWin) * 1.4) : 0, stand: !moving })) + TF(1860, 1000, .9, crownStoolV2(1)) + TF(180 + 4 * u, 1066, .6, `<!--FACES:right snail-->` + snailV2(t)), cR[0], cR[1], cR[2])}</g>`;
+    + TF(lx, 1040, .62, `<!--FACES:right limRide-->` + limRideV2(t, { crank: cr2 * (brakeNow ? .6 : 1), ring: ringNow ? 1 : 0, sip: !moving ? (.5 + .5 * Math.sin((t - tWin) * 1.4)) * (1 - ss(LT("r703") - .5, LT("r703") - .15, t) + ss(LE("r703") + .2, LE("r703") + .7, t)) : 0, stand: !moving })) + TF(1860, 1000, .9, crownStoolV2(1)) + TF(180 + 4 * u, 1066, .6, `<!--FACES:right snail-->` + snailV2(t)), cR[0], cR[1], cR[2])}</g>`;
   const momoR = x2bc(cR, "momo", 300, 1070, 380, t, { in: tg - 3, noStay: true, poses: [[0, "sit"], [tWin + .2, "surprised"], [LT("r703") + 1.2, "sit"]], look: 4, ...watchO(300, 1000), tag: false });
   const frame = `<rect x="40" y="150" width="760" height="790" rx="24" fill="none" stroke="#fff" stroke-width="10"/><rect x="840" y="150" width="1040" height="790" rx="24" fill="none" stroke="#fff" stroke-width="10"/>`;
   window._BUBAT = {};
