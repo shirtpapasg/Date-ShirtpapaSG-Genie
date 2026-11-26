@@ -77,7 +77,7 @@ with every line kept the series pace puts it at about 7:10 (the gaps were tighte
 `upload.json` (key `explained-p4-ep01-v2`; replaces FOvUezOZJbo, retire_old; playlists PLK9BW3T6kXx4 and PLPfEuT7l4KjI, both `after`
 FOvUezOZJbo), `thumb.jpg` (LOST TO A SNAIL?!) + `qa/thumb_320.jpg`, chapters `production/youtube/chapters_p3.json` key `P4EP01V2`,
 `app_moments.json` (videos.js P4 entry no. 1, 9 moments), `p4ep01v2.srt`. Heart mystery hint #2 logged in SecondBrain
-`Plans/videos/P4-new-direction.md` (5:28.37-5:28.53, frames 9851-9856 = 6 frames, checked in the video).
+`Plans/videos/P4-new-direction.md` (5:30.69-5:30.89, frames 9921-9926 = 6 frames, checked in the video after the fix-pass-2 render).
 
 ## Render (26 Nov 2026)
 One full render of the final code (after the review fixes: the stop-3 / runaway bike without its chain, the cold open's labels clear of the
@@ -86,3 +86,12 @@ pull-out, the cards rising in front at the picks, the coloured back view). `p4ep
 (`out/finish.log`): 1920x1080, 30 fps, 12910 frames = 7:10.3, decode 0 errors, -16.0 LUFS, true peak -1.9 dBTP. `sheet.png` (30 stills),
 `p4ep01v2.srt`, `qa/key_frames.jpg`, `qa/review_opening_0-30.mp4` and `qa/review_runaway.mp4` (960 px, with sound, 30 s each: not committed),
 `thumb.jpg` + `qa/thumb_320.jpg`. Intermediates (chunks, the silent video) deleted; `out/mix_p1.wav` kept for a splice.
+
+## Render, fix pass 2 (26 Nov 2026, 16:12 UTC)
+One full render of all the fix-pass-2 code (flock): `p4ep01v2.mp4` 1920x1080, 30 fps, **13086 frames = 7:16.2** (well under P4's 8:00),
+decode 0 errors, -16.0 LUFS, true peak -1.9 dBTP; 831 words, 114 wpm. `p4ep01v2.srt` carries the new Singlish lines. `sheet.png`,
+`qa/key_frames.jpg` (12), review clips (960 px, sound, not committed): `qa/review_opening_0-30.mp4`, `qa/review_runaway.mp4` (153.45-183.45,
+the ice box), **new** `qa/review_race_lim.mp4` (196.4-226.4, "Slowly, slowly lah. Where got need to rush?") and `qa/review_finish_lim.mp4`
+(386.6-407.6, "Aiyoh, boy. ..."). Scans re-run on the final code: no ghosting; no backwards movers; flicker 10 JUMPs, all deliberate camera
+cuts, no POP/GONE; overlap.js (5 fps, whole video): **no buddy over another buddy's face** (the shrink riders were re-ordered: Basil drawn first,
+a little further back on the chain). Hint #2 checked in the video at frames 9921-9926.

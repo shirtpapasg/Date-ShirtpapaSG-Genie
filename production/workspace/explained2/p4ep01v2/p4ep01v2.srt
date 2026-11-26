@@ -331,373 +331,381 @@ Helmets on.
 Ready, steady, GO!
 
 84
-00:03:21,434 --> 00:03:23,264
-Slowly, slowly.
+00:03:21,434 --> 00:03:23,294
+Slowly, slowly lah.
 
 85
-00:03:25,121 --> 00:03:26,431
-Was that the bike?
+00:03:23,644 --> 00:03:25,604
+Where got need to rush?
 
 86
-00:03:26,482 --> 00:03:27,172
-Yes.
+00:03:27,465 --> 00:03:28,775
+Was that the bike?
 
 87
-00:03:27,716 --> 00:03:28,626
-I let him win.
+00:03:28,826 --> 00:03:29,516
+Yes.
 
 88
-00:03:29,180 --> 00:03:31,011
-Your bike didn't even move.
+00:03:30,060 --> 00:03:30,970
+I let him win.
 
 89
-00:03:31,357 --> 00:03:32,647
-I let it not move.
+00:03:31,524 --> 00:03:33,355
+Your bike didn't even move.
 
 90
-00:03:33,115 --> 00:03:36,875
-Basil's pedals turn, but nothing joins them to the back wheel.
+00:03:33,701 --> 00:03:34,991
+I let it not move.
 
 91
-00:03:37,125 --> 00:03:40,015
-Pedalling faster cannot do the chain's job.
+00:03:35,459 --> 00:03:39,219
+Basil's pedals turn, but nothing joins them to the back wheel.
 
 92
-00:03:40,829 --> 00:03:43,089
-But WHY did the old, heavy bike win?
+00:03:39,469 --> 00:03:42,359
+Pedalling faster cannot do the chain's job.
 
 93
-00:03:43,819 --> 00:03:46,069
-Look closer at Uncle Lim's bike.
+00:03:43,173 --> 00:03:45,433
+But WHY did the old, heavy bike win?
 
 94
-00:03:46,415 --> 00:03:48,835
-His bell warns people that he is coming.
+00:03:46,163 --> 00:03:48,413
+Look closer at Uncle Lim's bike.
 
 95
-00:03:49,195 --> 00:03:51,395
-His brakes slow him down at the corner.
+00:03:48,759 --> 00:03:51,179
+His bell warns people that he is coming.
 
 96
-00:03:51,975 --> 00:03:54,755
-And his chain turns the back wheel when he pedals!
+00:03:51,539 --> 00:03:53,739
+His brakes slow him down at the corner.
 
 97
-00:03:55,326 --> 00:03:58,836
-Every part has its own special job, called its function.
+00:03:54,319 --> 00:03:57,099
+And his chain turns the back wheel when he pedals!
 
 98
-00:04:00,304 --> 00:04:02,764
-So my useless parts all had functions.
+00:03:57,670 --> 00:04:01,180
+Every part has its own special job, called its function.
 
 99
-00:04:03,112 --> 00:04:04,832
-I told you s...
+00:04:02,648 --> 00:04:05,108
+So my useless parts all had functions.
 
 100
-00:04:05,031 --> 00:04:06,612
-Nice try, Basil.
+00:04:05,456 --> 00:04:07,175
+I told you s...
 
 101
-00:04:06,964 --> 00:04:10,514
-His bike is heavier, but it won, because all its parts work
+00:04:07,375 --> 00:04:08,956
+Nice try, Basil.
 
 102
-00:04:10,534 --> 00:04:11,274
-together.
+00:04:09,308 --> 00:04:12,857
+His bike is heavier, but it won, because all its parts work
 
 103
-00:04:12,005 --> 00:04:13,095
-Sorry, bike.
+00:04:12,877 --> 00:04:13,618
+together.
 
 104
-00:04:14,625 --> 00:04:16,964
-Be one little link of Uncle Lim's chain!
+00:04:14,349 --> 00:04:15,439
+Sorry, bike.
 
 105
-00:04:17,245 --> 00:04:18,235
-Shrink down.
+00:04:16,969 --> 00:04:19,308
+Be one little link of Uncle Lim's chain!
 
 106
-00:04:18,505 --> 00:04:19,435
-Quietly.
+00:04:19,589 --> 00:04:20,579
+Shrink down.
 
 107
-00:04:21,301 --> 00:04:24,901
-The front gear's teeth fit into your gaps, and pull you forward.
+00:04:20,849 --> 00:04:21,779
+Quietly.
 
 108
-00:04:25,681 --> 00:04:28,881
-The whole chain moves, and tugs the back gear round.
+00:04:23,645 --> 00:04:27,245
+The front gear's teeth fit into your gaps, and pull you forward.
 
 109
-00:04:29,688 --> 00:04:31,198
-The back wheel turns!
+00:04:28,025 --> 00:04:31,225
+The whole chain moves, and tugs the back gear round.
 
 110
-00:04:32,938 --> 00:04:35,428
-Pedals, front gear, chain, back gear, wheel.
+00:04:32,032 --> 00:04:33,542
+The back wheel turns!
 
 111
-00:04:35,838 --> 00:04:37,648
-Each part acts on the next one.
+00:04:35,282 --> 00:04:37,772
+Pedals, front gear, chain, back gear, wheel.
 
 112
-00:04:37,988 --> 00:04:40,158
-Scientists say the parts interact.
+00:04:38,182 --> 00:04:39,992
+Each part acts on the next one.
 
 113
-00:04:41,515 --> 00:04:42,385
-Okay.
+00:04:40,332 --> 00:04:42,502
+Scientists say the parts interact.
 
 114
-00:04:42,665 --> 00:04:44,205
-I want my parts back.
+00:04:43,859 --> 00:04:44,729
+Okay.
 
 115
-00:04:45,303 --> 00:04:46,713
-Every part has a job.
+00:04:45,009 --> 00:04:46,549
+I want my parts back.
 
 116
-00:04:47,073 --> 00:04:48,303
-Brakes, stop me.
+00:04:47,647 --> 00:04:49,057
+Every part has a job.
 
 117
-00:04:48,643 --> 00:04:49,893
-No more mistakes!
+00:04:49,417 --> 00:04:50,647
+Brakes, stop me.
 
 118
-00:04:51,135 --> 00:04:52,545
-Every part has a job.
+00:04:50,987 --> 00:04:52,237
+No more mistakes!
 
 119
-00:04:52,885 --> 00:04:54,515
-Chain, turn my wheel again!
-
-120
-00:04:56,088 --> 00:04:57,208
-Chain and brakes!
-
-121
-00:04:57,688 --> 00:04:59,248
-That's my fix three!
-
-122
-00:04:59,558 --> 00:05:00,688
-Race time!
-
-123
-00:05:01,594 --> 00:05:02,094
-Wait.
-
-124
-00:05:02,844 --> 00:05:03,885
-Checklist.
-
-125
-00:05:04,274 --> 00:05:05,474
-Ring the bell.
-
-126
-00:05:05,828 --> 00:05:06,818
-Ring, ring?
-
-127
-00:05:07,130 --> 00:05:08,230
-Quick question!
-
-128
-00:05:08,500 --> 00:05:10,800
-Without a bell, can the bike still move?
-
-129
-00:05:11,090 --> 00:05:12,230
-Think about it.
-
-130
-00:05:15,893 --> 00:05:18,303
-It can still move, but it is not as safe!
-
-131
-00:05:18,656 --> 00:05:19,426
-Yes!
-
-132
-00:05:19,696 --> 00:05:22,996
-When one part stops working, the whole bike is likely to be
-
-133
-00:05:23,016 --> 00:05:23,816
-affected.
-
-134
-00:05:24,663 --> 00:05:26,073
+00:04:53,479 --> 00:04:54,889
 Every part has a job.
 
-135
-00:05:26,393 --> 00:05:27,633
-Bell, you warn them well!
+120
+00:04:55,229 --> 00:04:56,859
+Chain, turn my wheel again!
 
-136
-00:05:29,727 --> 00:05:32,287
-So a system is made up of different parts...
+121
+00:04:58,432 --> 00:04:59,552
+Chain and brakes!
 
-137
-00:05:32,343 --> 00:05:34,473
-...each part has its own function...
+122
+00:05:00,032 --> 00:05:01,592
+That's my fix three!
 
-138
-00:05:34,531 --> 00:05:36,022
-...and the parts interact.
+123
+00:05:01,902 --> 00:05:03,032
+Race time!
 
-139
-00:05:36,311 --> 00:05:37,772
-My bike is a system!
+124
+00:05:03,938 --> 00:05:04,438
+Wait.
 
-140
-00:05:39,188 --> 00:05:40,798
-ALL PARTS, WORKING TOGETHER!
+125
+00:05:05,188 --> 00:05:06,228
+Checklist.
 
-141
-00:05:44,810 --> 00:05:46,150
-Basil, you're puffing!
+126
+00:05:06,618 --> 00:05:07,818
+Ring the bell.
 
-142
-00:05:46,541 --> 00:05:47,550
-But WHY?
+127
+00:05:08,172 --> 00:05:09,162
+Ring, ring?
 
-143
-00:05:47,750 --> 00:05:48,900
-Look closer.
+128
+00:05:09,474 --> 00:05:10,574
+Quick question!
 
-144
-00:05:49,490 --> 00:05:51,911
-Your bones and muscles move your legs.
+129
+00:05:10,844 --> 00:05:13,144
+Without a bell, can the bike still move?
 
-145
-00:05:52,481 --> 00:05:55,421
-Your heart beats faster, and you breathe faster.
+130
+00:05:13,434 --> 00:05:14,574
+Think about it.
 
-146
-00:05:55,990 --> 00:05:58,400
-Your body is made up of systems too.
+131
+00:05:18,237 --> 00:05:20,647
+It can still move, but it is not as safe!
 
-147
-00:06:00,077 --> 00:06:01,967
-And the rain tree is a system.
+132
+00:05:21,000 --> 00:05:21,770
+Yes!
 
-148
-00:06:02,427 --> 00:06:05,317
-Its roots, stem and leaves each have a function.
+133
+00:05:22,040 --> 00:05:25,340
+When one part stops working, the whole bike is likely to be
 
-149
-00:06:06,347 --> 00:06:08,747
-Now, here are the words that earn marks.
-
-150
-00:06:08,804 --> 00:06:09,964
-Say it with me!
-
-151
-00:06:10,672 --> 00:06:12,892
-A system is made up of different parts.
-
-152
-00:06:13,172 --> 00:06:14,902
-Each part has its own function.
-
-153
-00:06:15,192 --> 00:06:17,372
-The parts interact to perform a function.
-
-154
-00:06:17,752 --> 00:06:21,082
-When one part stops working, the whole system is likely to be
-
-155
-00:06:21,102 --> 00:06:22,032
+134
+00:05:25,360 --> 00:05:26,160
 affected.
 
+135
+00:05:27,007 --> 00:05:28,417
+Every part has a job.
+
+136
+00:05:28,737 --> 00:05:29,977
+Bell, you warn them well!
+
+137
+00:05:32,071 --> 00:05:34,631
+So a system is made up of different parts...
+
+138
+00:05:34,687 --> 00:05:36,817
+...each part has its own function...
+
+139
+00:05:36,875 --> 00:05:38,365
+...and the parts interact.
+
+140
+00:05:38,655 --> 00:05:40,115
+My bike is a system!
+
+141
+00:05:41,532 --> 00:05:43,142
+ALL PARTS, WORKING TOGETHER!
+
+142
+00:05:47,154 --> 00:05:48,494
+Basil, you're puffing!
+
+143
+00:05:48,885 --> 00:05:49,894
+But WHY?
+
+144
+00:05:50,094 --> 00:05:51,244
+Look closer.
+
+145
+00:05:51,834 --> 00:05:54,255
+Your bones and muscles move your legs.
+
+146
+00:05:54,825 --> 00:05:57,764
+Your heart beats faster, and you breathe faster.
+
+147
+00:05:58,334 --> 00:06:00,744
+Your body is made up of systems too.
+
+148
+00:06:02,421 --> 00:06:04,311
+And the rain tree is a system.
+
+149
+00:06:04,771 --> 00:06:07,661
+Its roots, stem and leaves each have a function.
+
+150
+00:06:08,691 --> 00:06:11,091
+Now, here are the words that earn marks.
+
+151
+00:06:11,148 --> 00:06:12,308
+Say it with me!
+
+152
+00:06:13,016 --> 00:06:15,236
+A system is made up of different parts.
+
+153
+00:06:15,516 --> 00:06:17,246
+Each part has its own function.
+
+154
+00:06:17,536 --> 00:06:19,716
+The parts interact to perform a function.
+
+155
+00:06:20,096 --> 00:06:23,426
+When one part stops working, the whole system is likely to be
+
 156
-00:06:24,505 --> 00:06:25,485
-But wait.
+00:06:23,446 --> 00:06:24,376
+affected.
 
 157
-00:06:25,765 --> 00:06:27,505
-Somebody is still racing!
+00:06:26,849 --> 00:06:27,829
+But wait.
 
 158
-00:06:27,825 --> 00:06:29,187
-Go, snail, go!
+00:06:28,109 --> 00:06:29,849
+Somebody is still racing!
 
 159
-00:06:31,687 --> 00:06:33,467
-Slowly, slowly.
+00:06:30,169 --> 00:06:31,531
+Go, snail, go!
 
 160
-00:06:33,837 --> 00:06:35,657
-Every part working.
+00:06:34,031 --> 00:06:35,401
+Aiyoh, boy.
 
 161
-00:06:37,610 --> 00:06:38,840
-Picked fix two?
+00:06:35,681 --> 00:06:38,731
+Slowly, slowly also can win one, mah.
 
 162
-00:06:39,110 --> 00:06:41,040
-You win a point, and so does Pip!
+00:06:39,091 --> 00:06:41,541
+Every part working together!
 
 163
-00:06:41,690 --> 00:06:43,890
-Let's read today's key words together!
+00:06:43,490 --> 00:06:44,720
+Picked fix two?
 
 164
-00:06:44,180 --> 00:06:44,940
-Ready?
+00:06:44,990 --> 00:06:46,920
+You win a point, and so does Pip!
 
 165
-00:06:45,227 --> 00:06:46,107
-Function.
+00:06:47,570 --> 00:06:49,770
+Let's read today's key words together!
 
 166
-00:06:47,411 --> 00:06:48,261
-Interact.
-
-167
-00:06:49,799 --> 00:06:50,639
-System.
-
-168
-00:06:52,010 --> 00:06:52,950
-Well done!
-
-169
-00:06:53,932 --> 00:06:55,033
-Say it with us!
-
-170
-00:06:55,833 --> 00:06:56,583
+00:06:50,060 --> 00:06:50,820
 Ready?
 
+167
+00:06:51,107 --> 00:06:51,987
+Function.
+
+168
+00:06:53,291 --> 00:06:54,141
+Interact.
+
+169
+00:06:55,679 --> 00:06:56,519
+System.
+
+170
+00:06:57,890 --> 00:06:58,830
+Well done!
+
 171
-00:06:56,706 --> 00:06:57,366
-One!
+00:06:59,812 --> 00:07:00,913
+Say it with us!
 
 172
-00:06:57,706 --> 00:06:58,406
-two!
+00:07:01,713 --> 00:07:02,463
+Ready?
 
 173
-00:06:58,711 --> 00:06:59,886
-Now you know!
+00:07:02,586 --> 00:07:03,246
+One!
 
 174
-00:07:04,896 --> 00:07:06,206
-LIGHTER IS FAST...
+00:07:03,586 --> 00:07:04,286
+two!
 
 175
-00:07:07,117 --> 00:07:08,256
-I'll keep the bell.
+00:07:04,591 --> 00:07:05,766
+Now you know!
 
 176
-00:07:08,276 --> 00:07:09,416
+00:07:10,776 --> 00:07:12,086
+LIGHTER IS FAST...
+
+177
+00:07:12,997 --> 00:07:14,136
+I'll keep the bell.
+
+178
+00:07:14,156 --> 00:07:15,296
 Take two!

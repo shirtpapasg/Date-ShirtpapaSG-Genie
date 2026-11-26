@@ -1,13 +1,12 @@
-p4ep01v2 P1 0.0-430.3 s at 30 fps: pip 7 run(s), momo 8 run(s), basil 8 run(s)
-JUMP   84.43 s  basil jumps 492 px at 84.47 s (in bell)   [chunk 80 90]
+p4ep01v2 P1 0.0-436.2 s at 30 fps: pip 8 run(s), momo 8 run(s), basil 8 run(s)
+JUMP   84.43 s  basil jumps 596 px at 84.47 s (in bell)   [chunk 80 90]
 JUMP   89.00 s  pip jumps 623 px at 89.03 s (in bell)   [chunk 80 90]
-JUMP   89.00 s  basil jumps 441 px at 89.03 s (in bell)   [chunk 80 90]
+JUMP   89.00 s  basil jumps 471 px at 89.03 s (in bell)   [chunk 80 90]
 JUMP  151.60 s  basil jumps 608 px at 151.63 s (in brakes)   [chunk 150 160]
 JUMP  155.70 s  pip jumps 558 px at 155.73 s (in runaway)   [chunk 150 160]
 JUMP  155.70 s  momo jumps 465 px at 155.73 s (in runaway)   [chunk 150 160]
 JUMP  157.97 s  pip jumps 376 px at 158.00 s (in runaway)   [chunk 150 160]
 JUMP  157.97 s  momo jumps 267 px at 158.00 s (in runaway)   [chunk 150 160]
-JUMP  166.80 s  pip jumps 693 px at 166.83 s (in runaway)   [chunk 160 170]
 JUMP  166.80 s  basil jumps 818 px at 166.83 s (in runaway)   [chunk 160 170]
-JUMP  344.30 s  basil jumps 382 px at 344.33 s (in ride)   [chunk 340 350]
-11 buddy flicker(s)
+JUMP  346.63 s  basil jumps 394 px at 346.67 s (in ride)   [chunk 340 350]
+10 buddy flicker(s)
