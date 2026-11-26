@@ -444,7 +444,9 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
   - The opening is where this happened most (cold open, "Last time", the place, the title, the game, the goals): check its strip at 5 fps.
     Fixed 25-26 Nov 2026 in EP0 and EP16-EP26 (code and finished files). The EP16-EP19 Part 1 cold opens (the buddies pop in on three
     wired pop sounds, `budsIn`, about 2 s before the melt into "Last time"): the sound is kept; the buddies now stay, opaque and on top,
-    through the melt and pop out in turn 2.65 s after each arrived (`coldHold` in p1.js). A new episode lets them arrive at least 2.5 s
+    through the melt and pop out in turn 2.65 s after each arrived (`coldHold` in p1.js). While they stay they never cover a card,
+    a label or the question pill of "Last time": any buddy in the way glides (0.35 s, as the melt starts) to a clear spot at the
+    edge (`COLD_SLOTS`; popfix 3, 26 Nov 2026, after EP18 P1 9.3 s had Pip over card 2 and the label). A new episode lets them arrive at least 2.5 s
     before the melt.
   - Mid-episode (second pass, 26 Nov 2026, EP0, EP16-EP27): the recurring scene changes flickered too (the game > "Be the ...!",
     the shrink > the pull-out, the question > LOOK CLOSER, LOOK CLOSER > the Mark sentence, the score hand > the hidden animal, the
@@ -455,7 +457,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     - The first face peeking into a LOOK CLOSER window arrives 2.3 s after the cut (not 1.2 s) when that buddy was in the question shot.
     - The hidden-animal reveal (`lizReveal`): its buddies pop in after the iris (2.4 s), not 0.6 s after the score hand's buddies popped
       out; the fun fact's speaker stays to the end of the scene (it used to vanish, with no pop-out, 0.3 s before the cut).
-    - "Be the ...!" (waitw): every buddy is on screen at least 2.6 s before it shrinks away.
+    - "Be the ...!" (waitw): every buddy is on screen at least 2.6 s before it shrinks away; a buddy that stayed from the scene
+      before keeps its first exit (held on, it stood over the cards and props the camera dives into).
+    - A buddy kept on screen longer, or sooner, by any of these must never cover a word, a card, a pill or a look-closer panel, nor
+      another buddy's face. QA: popfix2 `overlap.js` / `audit.py` (render probe, the new code against the old at the same moments).
+      Set objects sweeping past behind a buddy during a camera pull-out or dive (under the white flash, under 0.3 s) are staging,
+      as in every designed shot. Where a stayed buddy stood under cards that rise into place (EP27 picks), the cards rise in front.
     - A buddy that changes place inside a scene glides there (EP25 P1 holdon: Basil to the side of the countdown and back).
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**

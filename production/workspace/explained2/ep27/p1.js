@@ -66,9 +66,10 @@ SC.lock = (t, s) => { const r0 = MK("ring0_fix"), bell = MK("bell_fix"), rs = ri
 /* the picks: the cards rise to a top row; each buddy stands under the card they pick (Pip 1, Momo 2, Basil 3) */
 SC.picks = (t, s) => { window._BUBAT = { pip: [330, 600], momo: [960, 590], basil: [1600, 600] }; const up = eio((t - s.t0) / .6), y = lerp(790, 345, up), k = lerp(.62, .64, up), tp = { pip: LT("e203p"), momo: LT("e204m"), basil: LT("e205b") };
   const pick = (who, n) => t >= tp[who] - .1 ? TF(CX3[n - 1], 640, spring(t, tp[who] - .1, .4), `<path d="M0 -70 V30" stroke="${P[who]}" stroke-width="10" stroke-linecap="round"/><circle cx="0" cy="-70" r="18" fill="${P[who]}" stroke="#fff" stroke-width="5"/>`) : "";
-  return bg("stage") + cardsRow(t, y, k, { glow: (n) => [tp.pip, tp.momo, tp.basil][n - 1] <= t ? .6 : 0 }) 
-    + bd("pip", CX3[0], 1075, 360, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]], look: 2 }) + bd("momo", CX3[1], 1075, 360, t, { in: s.t0 + .25, poses: [[s.t0, "sit"]], look: 0 })
-    + bd("basil", CX3[2], 1075, 360, t, { in: s.t0 + .4, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + HUD27(t); };
+  // popfix 3 (26 Nov): Pip stays from the lock (lib.js stayOf), so the three cards now rise IN FRONT of the buddies (never a buddy over a
+  // card's words); once up they are clear of the buddies' heads
+  return bg("stage") + bd("pip", CX3[0], 1075, 360, t, { in: s.t0 + .1, poses: [[s.t0, "sit"]], look: 2 }) + bd("momo", CX3[1], 1075, 360, t, { in: s.t0 + .25, poses: [[s.t0, "sit"]], look: 0 })
+    + bd("basil", CX3[2], 1075, 360, t, { in: s.t0 + .4, flip: true, poses: [[s.t0, "sit"]], look: -3 }) + cardsRow(t, y, k, { glow: (n) => [tp.pip, tp.momo, tp.basil][n - 1] <= t ? .6 : 0 }) + HUD27(t); };
 
 /* ================================================================ 3 · FIX 1, RUN ================================================================ */
 // the sunny path; Basil and Momo at the left, watching; Pip dashes right with the box, slows, wobbles, flops on the kerb (x 1380) in the

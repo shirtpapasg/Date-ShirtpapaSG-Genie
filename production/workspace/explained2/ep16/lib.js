@@ -166,8 +166,8 @@ function buddy(who, x, y, h, t, o = {}) {
   if (!M && !_BDRAW && S && t >= S.t0 && t < S.t1 && stayOf(S, who, o)) { (window._STAYS = window._STAYS || {})[S.name + ":" + who] = 1; o = { ...o, in: S.t0 - 3, tagIn: o.in, react0: o.react0 !== undefined ? o.react0 : o.in + .6, calmTo: Math.max(o.calmTo !== undefined ? o.calmTo : -9, S.t0 + .3) }; }   // popfix 2: stays at a hard cut (window._STAYS: QA)
   if (M && !_BDRAW && t < S.t0 + M.d && (t - S.t0) / M.d < .99) return "";   // drawn by meltScene, above the fading old frame (popfix 25 Nov: meltScene stops at a <= .01, so the last frame of a melt drew no buddy: a one-frame blink)
   if (M) { const a = meltFrame(M.from).bud[who], b = budsAt(S, S.t0 + M.d)[who];
-    if (a && b && (!a.o.peek || o.glidePeek)) {   // popfix 2: o.glidePeek = the face peeking into a look-closer glides out of it into its spot (no pop-out, pop-in)
- const u = eio((t - S.t0) / M.d), o2 = { ...o, in: S.t0 - 3, tagIn: o.in, react0: o.in !== undefined ? o.in + .6 : undefined };
+    if (a && b && (!a.o.peek || o.glidePeek)) {   // popfix 2: o.glidePeek = the face peeking into a look-closer glides out of it into its spot (no pop-out, pop-in); [delay, duration] (popfix 3): it waits until the old frame has nearly melted, so it never crosses that frame's words
+ const u = Array.isArray(o.glidePeek) ? eio(clamp((t - S.t0 - o.glidePeek[0]) / o.glidePeek[1])) : eio((t - S.t0) / M.d), o2 = { ...o, in: S.t0 - 3, tagIn: o.in, react0: o.in !== undefined ? o.in + .6 : undefined };
       const pz = (n) => n.startsWith(who + "_sit") ? "sit" : n; const P0 = window._POSE; window._POSE = []; let r; try { buddy0(who, x, y, h, t, o2); r = window._POSE[0]; } finally { window._POSE = P0; }
       if (r && pz(r.name) === pz(a.name)) o2.calmTo = S.t0 + M.d;   // the same pose on both sides: no pose pop at the change
       if (u < 1) { o2.flip = u < .5 ? a.o.flip : o.flip; return buddy0(who, lerp(a.x, x, u), lerp(a.y, y, u), lerp(a.h, h, u), t, o2); }

@@ -52,8 +52,12 @@ SC.cold = (t, s) => { const tp = MK("budsIn");
    the three wired pop sounds (budsIn) only about 2 s before the melt into "Last time". The sound stays; the picture changes: the buddies
    no longer pop out at the melt. They stay, opaque and on top, while the place melts away, and pop out in turn (the order they came, the
    usual .2 s shrink) 2.65 s after each arrived, a moment into "Last time" (never on screen under 2.5 s; never faded: SERIES_FORMAT 6) */
-const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"); let r = a > .01 ? OP(a, F.svg) : "";
-  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2); if (k >= .02) r += buddy0(who, c.x, c.y, c.h, t, { ...c.o, k: (c.o.k || 1) * k }); }
+// popfix 3 (26 Nov): while they stay, any buddy that would cover a card, a label or the question pill of "Last time" glides (.35 s, as the
+// melt starts) to a clear spot at the edge (COLD_SLOTS: [x, y, height]); qa: popfix2/tools/overlap.js
+const COLD_SLOTS = { pip: [1390, 1076, 300] };
+const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"), g = eio(clamp((t - s.t0) / .35)); let r = a > .01 ? OP(a, F.svg) : "";
+  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2), q = COLD_SLOTS[who] || [c.x, c.y, c.h];
+    if (k >= .02) r += buddy0(who, lerp(c.x, q[0], g), lerp(c.y, q[1], g), lerp(c.h, q[2], g), t, { ...c.o, k: (c.o.k || 1) * k }); }
   return r; };
 /* 2 · "Last time...": EP18's dare, word for word. ONE calm picture: the three dare cards side by side, a gentle push-in, the big ?, each card
    steps forward and lights while Heart says it (>= 2.5 s each) */
@@ -123,7 +127,7 @@ window.SHELF_AWAY = (t) => { if (PART !== 1) return 0; const a = W("m902", "cros
 const camWait = (t) => { const s = SCN.waitw, u = eio((t - s.t0) / (s.t1 - s.t0)); return camMix([1.02, 960, 540], camOn([PINAT[0], PINAT[1] - 4], 4.2, 960, 560), u * u); };
 // popfix 2 (teacher, 25 Nov 2026): Momo and Pip were on screen only 2 s (pop in, wave, shrink); they now stay at least 2.6 s, still shrinking before the fade
 SC.waitw = (t, s) => { const L = "m701", tP = W(L, "be") - .15, sh = W(L, "shrink") - .1;
-  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1450, 1700][i]; return bd(w, x, [1076, 1030, 1076][i], [470, 380, 470][i], t, { in: s.t0 + .1 + .05 * i, out: Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
+  const buds = ["momo", "pip", "basil"].map((w, i) => { const x = [300, 1450, 1700][i]; return bd(w, x, [1076, 1030, 1076][i], [470, 380, 470][i], t, { in: s.t0 + .1 + .05 * i, out: stayOf(s, w, { in: s.t0 + .1 }) ? sh + .2 * i + .3 : Math.max(sh + .2 * i + .3, s.t0 + 2.75 + .1 * i), flip: x > 960, poses: [[s.t0, "sit"], [tP + .2 + .15 * i, "waving"]], wave: true }); }).join("");
   return VD19(t, { top: magOnTable(t) + pinWire(t) }, camWait(t)) + OP(1 - ss(s.t1 - 1.0, s.t1 - .5, t), buds + (t >= tP ? TF(960, 250, spring(t, tP, .45), tpill(0, 0, "Be a steel pin!", 76, P.sun, P.ink, { w: 700 })) : "") + HUD(t)) + wipe(t, s.t1, "#E9E1D2", 960, 600); };
 SC.shrink = (t, s) => { const m = MK, lift = ss(m("jlift"), m("jlook") + .6, t), dy = 380 * lift, kk = 1 - .35 * lift;
   const rp = { basil: [[m("jfar") + .1, "pointing"], [m("jfar") + 2.3, "sit"]], momo: [[m("jclick") + .1, "surprised"], [m("jclick") + 2.2, "sit"]] };

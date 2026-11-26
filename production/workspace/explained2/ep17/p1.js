@@ -39,8 +39,12 @@ SC.cold = (t, s) => { const tp = MK("budsIn");
    the three wired pop sounds (budsIn) only about 2 s before the melt into "Last time". The sound stays; the picture changes: the buddies
    no longer pop out at the melt. They stay, opaque and on top, while the place melts away, and pop out in turn (the order they came, the
    usual .2 s shrink) 2.65 s after each arrived, a moment into "Last time" (never on screen under 2.5 s; never faded: SERIES_FORMAT 6) */
-const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"); let r = a > .01 ? OP(a, F.svg) : "";
-  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2); if (k >= .02) r += buddy0(who, c.x, c.y, c.h, t, { ...c.o, k: (c.o.k || 1) * k }); }
+// popfix 3 (26 Nov): while they stay, any buddy that would cover a card, a label or the question pill of "Last time" glides (.35 s, as the
+// melt starts) to a clear spot at the edge (COLD_SLOTS: [x, y, height]); qa: popfix2/tools/overlap.js
+const COLD_SLOTS = { pip: [200, 1076, 360], basil: [560, 1076, 270] };
+const coldHold = (t, s, d = .5) => { if (_BCAP) return ""; const a = 1 - clamp((t - s.t0) / d), F = meltFrame("cold"), g = eio(clamp((t - s.t0) / .35)); let r = a > .01 ? OP(a, F.svg) : "";
+  for (const [who, c] of Object.entries(F.bud)) { const to = c.o.in !== undefined ? c.o.in + 2.65 : s.t0, k = t < to ? 1 : 1 - eo((t - to) / .2), q = COLD_SLOTS[who] || [c.x, c.y, c.h];
+    if (k >= .02) r += buddy0(who, lerp(c.x, q[0], g), lerp(c.y, q[1], g), lerp(c.h, q[2], g), t, { ...c.o, k: (c.o.k || 1) * k }); }
   return r; };
 /* 2 · "Last time...": EP16's dare, word for word. ONE calm picture: EP16's two dare cards side by side, a gentle push-in, the big ?; each card
    steps forward and lights while Heart says it (>= 2.5 s each) */
