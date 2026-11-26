@@ -43,8 +43,8 @@ land = json.load(open(f'{HERE}/geo/land10.geojson')); ctry = json.load(open(f'{H
 land_d = ''.join(path(r) for f in land['features'] for r in rings(f['geometry']) if near(r))
 border_d = ''.join(path(r) for f in ctry['features'] if f['properties'].get('ADMIN') in ('Indonesia', 'Malaysia', 'Brunei') for r in rings(f['geometry']) if near(r))
 grat = ''
-for lat in range(-30, 31, 5): grat += 'M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in (proj(lon / 2, lat) for lon in range(150, 260)) if x) + ' '
-for lon in range(75, 131, 5): grat += 'M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in (proj(lon, lat / 2) for lat in range(-60, 61)) if x) + ' '
+for lat in range(-30, 31, 5): grat += 'M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in filter(None, (proj(lon / 2, lat) for lon in range(150, 260)))) + ' '   # points behind the globe are skipped (a centre far from Singapore)
+for lon in range(75, 131, 5): grat += 'M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in filter(None, (proj(lon, lat / 2) for lat in range(-60, 61)))) + ' '
 P = lambda ll: proj(*ll)
 haze = ''.join(f'<ellipse cx="{P(h[0])[0]:.0f}" cy="{P(h[0])[1]:.0f}" rx="{h[1]}" ry="{h[2]}" fill="#7d6f5a" opacity="{h[3]}" filter="url(#blur)"/>' for h in cfg.get('haze', []))
 fires = ''.join(f'<text x="{P(f)[0]:.0f}" y="{P(f)[1]:.0f}" font-size="62" text-anchor="middle" dominant-baseline="central" class="emo">🔥</text>' for f in cfg.get('fires', []))

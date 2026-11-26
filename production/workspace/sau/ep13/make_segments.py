@@ -1,0 +1,64 @@
+"""ep13/make_segments.py: writes ep13_segments.json, EP13 "Super El Nino! Why Is Singapore So Hot And Dry?" (TheOneApp, Explored).
+The teacher's approved script (draft doc https://claude.ai/artifact/7s2QmX4ZPN4ezyRgf8Es9U), word for word, with:
+  - the 2:15 wording swapped for the exact definitions (P5 definitions file, Cycles in Water, AB-C 2.3 / 2.5, TLG; see SCRIPT.md);
+  - spoken forms for numbers and letters ("P S I", "the ninth of October"), so Kokoro reads them the Singapore way; captions keep digits;
+  - series standards the draft leaves out, marked ADDED (the countdown before the journey, the silent cold open, "Now you know!": rule 1).
+"who": heart (default) | pip | momo | basil.  "soft": Heart's quiet journey voice (BE THE THING).
+Every OTHER change the teacher asked to check (1:12 clouds, 2:40 fires, 0:12 Basil, the title) is prepared in SCRIPT.md, NOT applied here.
+    python3 ep13/make_segments.py      (from workspace/sau)"""
+import json, os
+H = os.path.dirname(os.path.abspath(__file__))
+WC_BEFORE = ("Let's name what you saw. Water gains heat and evaporates into water vapour. Water vapour loses heat and condenses into tiny water "
+             "droplets, which form clouds. The droplets fall as rain. That is the water cycle. El Niño does not stop the water cycle. It moves where the rain falls.")
+WC_AFTER = ("Let's name what you saw. Water gains heat and evaporates to form water vapour. When water vapour loses heat, it changes into water droplets. "
+            "This process is called condensation, where a change in state from gas to liquid occurs. Clouds are made up of water droplets which are in the liquid state. "
+            "The droplets fall as rain. The continuous movement of water from the Earth to the sky and back to the Earth again is called the water cycle. "
+            "El Niño does not stop the water cycle. It moves where the rain falls.")
+SEG = [
+  # 0:00 Why does it feel like an oven?
+  {"id": "c0", "scene": "corridor", "silent": 3.0, "sfx": [["whirr", 0.0], ["ep07_birds", 0.4]], "added": "silent cold open (series standard)"},
+  {"id": "oven", "scene": "corridor", "text": "It's the end of the year. The rainy season should be here. So why does Singapore still feel like an oven?"},
+  {"id": "pip1", "scene": "corridor", "who": "pip", "text": "My fur is melting!"},
+  {"id": "momo1", "scene": "corridor", "who": "momo", "text": "My water bowl went down again."},
+  {"id": "basil1", "scene": "corridor", "who": "basil", "text": "I feel great, actually.", "hold": 0.4},
+  {"id": "far", "scene": "globeFly", "text": "The answer starts thousands of kilometres away, over the Pacific Ocean. Let's shrink down and go there."},
+  {"id": "ready", "scene": "countdown", "excited": True, "text": "Are you ready? Three! Two! One! Go!", "added": "countdown (series standard, as EP11)"},
+  # 0:40 You are the trade wind (BE THE THING, soft, calm pad)
+  {"id": "w0", "scene": "povShrink", "silent": 3.2, "sfx": [["pad_wonder", 0], ["space_warp", 0.2], ["wind", 1.0], ["sparkle", 2.4]]},
+  {"id": "wind1", "scene": "povWind", "soft": True, "text": "You are a gust of wind. You blow over the Pacific Ocean from east to west, day after day. People call you the trade wind.", "sfx": [["wind", 0], ["sea_wash", 1.5]]},
+  {"id": "wind2", "scene": "povWarm", "soft": True, "text": "Below you, the sea is warm. You push the warm top layer of water along with you, west, towards Singapore.", "sfx": [["sea_wash", 0], ["wind", 2.5]]},
+  {"id": "wind3", "scene": "povCloud", "soft": True, "text": "The warm water gains heat from the Sun. Some of it evaporates into water vapour and rises with you. High up, the water vapour loses heat, condenses into tiny water droplets and forms clouds.", "sfx": [["sparkle", 2.0], ["wind", 5.0]]},
+  {"id": "wind4", "scene": "povRain", "soft": True, "text": "Over Singapore, the clouds rain down. That is a normal year.", "sfx": [["rain", 0.3], ["thunder", 1.2]], "hold": 0.6},
+  {"id": "wind5", "scene": "povWeak", "soft": True, "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore, and the rain clouds go with it.", "sfx": [["wind", 0], ["pass_by", 4.5]]},
+  {"id": "pip2", "scene": "povWeak", "who": "pip", "text": "Wait for us, clouds!"},
+  {"id": "wind6", "scene": "povDry", "soft": True, "text": "You look down at Singapore. Blue sky. No rain clouds. What you just lived through has a name: El Niño.", "sfx": [["reveal", 4.6]], "hold": 0.8},
+  # 1:30 The headline
+  {"id": "news", "scene": "news", "text": "On the twelfth of November, scientists at NOAA in the USA said this El Niño is strong to very strong. Back in May, Singapore's weather scientists had already warned us: a hotter, drier June to October."},
+  # 1:55 What makes it super
+  {"id": "super", "scene": "thermo", "text": "The middle of the Pacific is about two degrees Celsius warmer than usual. When it gets that warm, scientists call it a Super El Niño."},
+  {"id": "momo2", "scene": "thermo", "who": "momo", "text": "Only two degrees?"},
+  {"id": "super2", "scene": "thermo", "text": "Across a whole ocean, that is a huge amount of heat.", "hold": 0.6},
+  # 2:15 The water cycle (LOOK CLOSER); exact definitions (see SCRIPT.md, task 2)
+  {"id": "wcycle", "scene": "waterCycle", "text": WC_AFTER, "hold": 0.8},
+  # 2:40 Here in Singapore: the haze
+  {"id": "haze", "scene": "haze", "text": "With less rain, forests and peatland in our region dried out, and fires burned longer and spread more easily. On the ninth of October, Singapore's haze reading, the P S I, reached one hundred and ninety-two. That is unhealthy. Remember the smoke particle from Episode One?"},
+  {"id": "basil2", "scene": "haze", "who": "basil", "text": "Even I stayed indoors.", "hold": 0.4},
+  # 3:00 Meanwhile in India and the USA
+  {"id": "india", "scene": "india", "text": "El Niño moves rain around the world. In India, this year's monsoon brought about one-eighth less rain than normal, the weakest in over ten years. The south and the northeast were driest."},
+  {"id": "usa", "scene": "usa", "text": "In the USA, it works the other way for some places. This winter, scientists expect wetter weather than usual across the south, like California and Florida, and a warmer winter up north."},
+  {"id": "pip3", "scene": "usa", "who": "pip", "text": "So one tired wind changes the weather in three countries?"},
+  {"id": "usa2", "scene": "usa", "text": "Yes. That is why scientists all over the world watch it."},
+  # 3:25 Try this
+  {"id": "try", "scene": "try", "text": "Be a weather detective. Put two cups with the same amount of water outside: one in the sun, one in the shade. Mark the water level. Check after three days. Which cup lost more water, and why? Hint: which one gained more heat?", "hold": 0.6},
+  # 3:45 Close
+  {"id": "momo3", "scene": "bye", "who": "momo", "text": "Then tell a friend in India or the USA what El Niño is doing to their weather!"},
+  {"id": "bye", "scene": "bye", "text": "See you next time on TheOneApp, Explored."},
+  {"id": "nyk", "scene": "nyk", "excited": True, "text": "Now you know!", "added": "rule 1"},
+]
+spec = {"episode": "SAU EP13", "title": "Super El Niño! Why is Singapore so hot and dry?",
+        "tag": "🌏 TheOneApp, Explored · EP 13 · El Niño",
+        "next": ["NEXT TIME", "More science from", "your world! 🌏"], "endChip": "🌏 TheOneApp, Explored · a new episode every Thursday",
+        "kws": [["wind1", "trade", "TRADE WIND", "#4cc9f0"], ["wind6", "nino", "EL NIÑO", "#f77f00"], ["wcycle", "evaporates", "EVAPORATION", "#ef476f"],
+                ["wcycle", "condensation", "CONDENSATION", "#3a86ff"], ["wcycle", "continuous", "WATER CYCLE", "#06d6a0"]],
+        "wc_before": WC_BEFORE, "segments": SEG, "outro": 4.2}
+json.dump(spec, open(f"{H}/ep13_segments.json", "w"), indent=1, ensure_ascii=False); print("wrote ep13_segments.json", len(SEG), "segments")
