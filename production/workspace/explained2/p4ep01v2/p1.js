@@ -113,7 +113,7 @@ SC.cold = (t, s) => { const tf = MK("frz"), th = MK("thaw"), fz = t >= tf && t <
   const pip = t >= tp ? x2bc(c, "pip", px, CB.pip[1], 380, t, { flip: true, poses: [[0, "sit"], [LE("c104") + .05, "pointing"], [LT("c105") + .1, "sit"], [LT("c106") + .2, "embarrassed/oops"], [LE("c106") + .3, "sit"]], look: -5, jump: t < tp + .5 ? [[tp + .1, 18], [tp + .3, 14]] : [] }) : "";
   // c104: the three dotted outlines on the bike, each joined to its empty spot
   const bk = (p) => camPt(c, [CB.bike[0] + CB.bk * p[0], CB.bike[1] + CB.bk * p[1]]);
-  const outl = (mk, p, txt, lx, ly) => { if (t < MK(mk) - .1 || t > LE("c105") + .2) return ""; const k = spring(t, MK(mk) - .1, .4) * (1 - ramp(t, LE("c105"), .25)), [X, Y] = bk(p);
+  const outl = (mk, p, txt, lx, ly) => { if (t < MK(mk) - .1 || t > LT("c105") + .2) return ""; const k = spring(t, MK(mk) - .1, .4) * (1 - ramp(t, LT("c105") - .15, .2)), [X, Y] = bk(p);
     return OP(Math.min(1, k), `<circle cx="${n2(X)}" cy="${n2(Y)}" r="${n2(30 * c[0])}" fill="none" stroke="#fff" stroke-width="6" stroke-dasharray="8 8"/>` + plabel(lx, ly, txt, X, Y, 42, "#fff")); };
   const outs = outl("ob", [BK.HT[0] - 24, BK.HT[1] - 66], "bell?", 700, 300) + outl("oc", [(BK.RA[0] + BK.BB[0]) / 2, BK.BB[1] - 20], "chain?", 720, 600) + outl("obr", [BK.HT[0] - 76, BK.HT[1] - 34], "brakes?", 1060, 260);
   const cry = battleCry(t, cr - .05, 1120, 300, "LIGHTER|IS FASTER!", { d: 1.7 }) + windV2(t, 1250, 640, 420, ss(cr - .1, cr + .1, t) * (1 - ss(LE("c105") + .3, LE("c105") + .6, t))) + flare(...camPt(c, [1220, 640]), ss(cr, cr + .15, t) * (1 - ss(LE("c105"), LE("c105") + .4, t)));

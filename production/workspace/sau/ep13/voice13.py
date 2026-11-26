@@ -5,7 +5,7 @@
            12% slower and -18 dB RMS as in the Explained episodes (explained2/ep27/make_voice.py buddy()), resampled to 24 kHz.
   Names on the teacher's pronunciation list go through explained2/sg_pron.py (none in EP13; checked).
     /home/user/heart-tts/venv/bin/python ep13/voice13.py ep13/ep13_segments.json ep13/aud      (from workspace/sau)"""
-import sys, json, os, re, numpy as np, soundfile as sf, parselmouth
+import sys, json, os, re, hashlib, numpy as np, soundfile as sf, parselmouth
 from parselmouth.praat import call
 HERE = os.path.dirname(os.path.abspath(__file__)); EX = os.path.join(HERE, '..', '..', 'explained2')
 sys.path.insert(0, EX); sys.path.insert(0, os.path.join(EX, 'characters', 'sprites'))
@@ -20,7 +20,7 @@ def heart(s):
     speed, swing, shift, gain = (1.02, 2.2, 2 ** (3 / 12), 3.0) if ex else ((0.86, 1.6, 1.0, -2.5) if soft else (0.94, 1.6, 1.0, 0.0))
     gap = 0.9 if soft else 0.57; parts = []
     for i, p in enumerate(sents(s['text'])):
-        f = f"{out}/sent/{s['id']}_{i:02d}_{'s' if soft else 'x' if ex else 'n'}.wav"
+        f = f"{out}/sent/{s['id']}_{i:02d}_{'s' if soft else 'x' if ex else 'n'}_{hashlib.md5(p.encode()).hexdigest()[:8]}.wav"   # keyed by the sentence's words
         if not os.path.exists(f):
             a, sr = speak_line(k, p, voice='af_heart', speed=speed) if needs_fix(p) else k.create(p, voice='af_heart', speed=speed, lang='en-us')
             x = a.astype(np.float64); snd = parselmouth.Sound(x, SR); m = call(snd, 'To Manipulation', 0.01, 120, 500); pt = call(m, 'Extract pitch tier')
@@ -59,5 +59,5 @@ for s in spec['segments']:
         sf.write(f, x.astype(np.float32), SR, subtype='PCM_16'); open(meta, 'w').write(key)
     if who != 'heart': MOUTH[s['id']] = {'who': who, 'm': mouth(x)}
     print(s['id'], who, round(len(x) / SR, 2), flush=True)
-if 'short' not in os.path.basename(out.rstrip('/')):
+if os.path.basename(out.rstrip('/')) == 'aud':     # the episode's lip-sync (the Shorts reuse the same line ids)
     open(os.path.join(HERE, 'mouth13.js'), 'w').write('window.MOUTH = ' + json.dumps(MOUTH, separators=(',', ':')) + ';\n')

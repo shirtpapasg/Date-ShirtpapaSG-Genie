@@ -79,7 +79,13 @@
    "id": "basil1",
    "scene": "corridor",
    "who": "basil",
-   "text": "I feel great, actually.",
+   "text": "I feel great, actually. Lizards love the heat!"
+  },
+  {
+   "id": "pip0",
+   "scene": "corridor",
+   "who": "pip",
+   "text": "Not us! Drink lots of water and stay in the shade.",
    "hold": 0.4
   },
   {
@@ -186,7 +192,7 @@
    "id": "wind5",
    "scene": "povWeak",
    "soft": true,
-   "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore, and the rain clouds go with it.",
+   "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore. The warm, wet air that rises from it, and builds the rain clouds, moves east too.",
    "sfx": [
     [
      "wind",
@@ -208,7 +214,7 @@
    "id": "wind6",
    "scene": "povDry",
    "soft": true,
-   "text": "You look down at Singapore. Blue sky. No rain clouds. What you just lived through has a name: El Niño.",
+   "text": "You look down at Singapore. Blue sky. Hardly any rain clouds. What you just lived through has a name: El Niño.",
    "sfx": [
     [
      "reveal",
@@ -220,12 +226,12 @@
   {
    "id": "news",
    "scene": "news",
-   "text": "On the twelfth of November, scientists at NOAA in the USA said this El Niño is strong to very strong. Back in May, Singapore's weather scientists had already warned us: a hotter, drier June to October."
+   "text": "On the twelfth of November, scientists at NOAA in the USA said this El Niño is strong to very strong. Back in May, Singapore's weather scientists had already warned us: a warmer, drier June to October."
   },
   {
    "id": "super",
    "scene": "thermo",
-   "text": "The middle of the Pacific is about two degrees Celsius warmer than usual. When it gets that warm, scientists call it a Super El Niño."
+   "text": "The middle of the Pacific is more than two degrees Celsius warmer than usual. When it gets that warm, scientists call it a Super El Niño."
   },
   {
    "id": "momo2",
@@ -242,13 +248,13 @@
   {
    "id": "wcycle",
    "scene": "waterCycle",
-   "text": "Let's name what you saw. Water gains heat and evaporates to form water vapour. When water vapour loses heat, it changes into water droplets. This process is called condensation, where a change in state from gas to liquid occurs. Clouds are made up of water droplets which are in the liquid state. The droplets fall as rain. The continuous movement of water from the Earth to the sky and back to the Earth again is called the water cycle. El Niño does not stop the water cycle. It moves where the rain falls.",
+   "text": "Let's name what you saw. Water gains heat and evaporates to form water vapour. When water vapour loses heat, it changes into water droplets. This process is called condensation, where a change in state from gas to liquid occurs. The droplets fall as rain. The continuous movement of water from the Earth to the sky and back to the Earth again is called the water cycle. El Niño does not stop the water cycle. It moves where the rain falls.",
    "hold": 0.8
   },
   {
    "id": "haze",
    "scene": "haze",
-   "text": "With less rain, forests and peatland in our region dried out, and fires burned longer and spread more easily. On the ninth of October, Singapore's haze reading, the P S I, reached one hundred and ninety-two. That is unhealthy. Remember the smoke particle from Episode One?"
+   "text": "With less rain, forests and peatland in our region dried out. Dry land burns easily, so the fires that started burned longer and spread further. On the ninth of October, Singapore's haze reading, the P S I, reached one hundred and ninety-two. That is unhealthy. Remember the smoke particle from Episode One?"
   },
   {
    "id": "basil2",

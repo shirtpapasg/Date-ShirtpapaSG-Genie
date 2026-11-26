@@ -1,0 +1,115 @@
+{
+ "episode": "SAU EP13 short1",
+ "title": "Why is Singapore so hot and dry?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.4,
+ "kws": [
+  [
+   "wind1",
+   "trade",
+   "TRADE WIND",
+   "#4cc9f0"
+  ],
+  [
+   "wind6",
+   "nino",
+   "EL NIÑO",
+   "#f77f00"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "q1",
+   "scene": "qcard",
+   "text": "Why is Singapore so hot and dry this year?",
+   "new": true
+  },
+  {
+   "id": "w0",
+   "scene": "povShrink",
+   "silent": 2.6,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "space_warp",
+     0.1
+    ],
+    [
+     "wind",
+     0.8
+    ],
+    [
+     "sparkle",
+     2.0
+    ]
+   ]
+  },
+  {
+   "id": "wind1",
+   "scene": "povWind",
+   "soft": true,
+   "text": "You are a gust of wind. You blow over the Pacific Ocean from east to west, day after day. People call you the trade wind.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "sea_wash",
+     1.5
+    ]
+   ]
+  },
+  {
+   "id": "wind5",
+   "scene": "povWeak",
+   "soft": true,
+   "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore. The warm, wet air that rises from it, and builds the rain clouds, moves east too.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "pip2",
+   "scene": "povWeak",
+   "who": "pip",
+   "text": "Wait for us, clouds!"
+  },
+  {
+   "id": "wind6",
+   "scene": "povDry",
+   "soft": true,
+   "text": "You look down at Singapore. Blue sky. Hardly any rain clouds. What you just lived through has a name: El Niño.",
+   "sfx": [
+    [
+     "reveal",
+     4.6
+    ]
+   ],
+   "hold": 0.5
+  },
+  {
+   "id": "watch",
+   "scene": "bye",
+   "text": "Watch the full episode on TheOneApp, Explored.",
+   "hold": 0.3
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!",
+   "added": "rule 1"
+  }
+ ]
+}
