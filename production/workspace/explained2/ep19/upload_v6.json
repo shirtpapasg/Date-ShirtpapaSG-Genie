@@ -1,0 +1,41 @@
+{
+ "key": "explained-p3-ep19v6",
+ "parts": [
+  {
+   "key": "explained-p3-ep19v6-part2",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep19/ep19_part2_final.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep19/thumb_part2.jpg",
+   "title": "Copper Is a METAL. So Why Won't a Magnet Pull It? (Part 2) | Non-Magnetic Materials",
+   "description": "Copper is a metal, and so is a drink can. So why won't a magnet pull them? Lock in your answer, be an aluminium can at a recycling plant, find out that not all metals are magnetic, spot the mistake in Basil's magnet test, and learn to classify materials by how they interact with a magnet. Part 2 of Primary 3 Science, Properties of Magnets.\n\nIn this part:\n• A drink can and a food tin: which will the magnet pull?\n• Be an aluminium can: the giant magnet at the recycling plant\n• Look closer: not all metals are magnetic (copper and aluminium)\n• Showdown: find the mistake in Basil's magnet test\n• Our new theme: Interactions\n• Look closer: two groups, magnetic and non-magnetic\n• A chant to remember it all\n• Spot the hidden snail!\n\nKey words: non-magnetic materials, interact, classify.\nWatch Part 1 first! Next episode: two ring magnets on a pencil, and the top one floats. What holds it up, a pull or a push?\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nWhy does a magnet ignore a copper wire? P3 Science, the Interactions theme opener and Chapter 6, Properties of Magnets (pp. 99 to 104): what a magnet is (usually made of iron or steel; a natural magnet is a lodestone; bar, U-shaped, button, rod, ring and horseshoe magnets), magnetic materials (iron and steel), non-magnetic materials (ceramic, fabric, glass, plastic, rubber and wood, and the metals aluminium and copper), and how to classify materials by how they interact with a magnet. The first episode of the Magnets theme. Also fits US NGSS 3-PS2-3 (Grade 3).\nSafety and care: Keep small magnets away from little brothers and sisters, and never put a magnet in your mouth. Ask an adult before you borrow things from the kitchen. We do not feed pigeons, and we do not touch snails.\nTry it at home: With an adult, test an iron nail, a steel paper clip and some aluminium foil with a fridge magnet. Which are attracted? Tell someone at home which were attracted, and why the foil was not.\nFridge magnets hold on to the fridge door in many HDB kitchens, and the magnets on a class whiteboard hold up your work. The steel food tins you put in the blue recycling bin can be picked out by a big magnet at a recycling plant; the aluminium drink cans cannot.\nGrade 3 pupils in the US do this same test (NGSS 3-PS2-3): bring a magnet near each object and watch how it interacts with the magnet.\nOur new theme asks: I1. How do magnets interact with different things? I2. How do the interactions of magnets affect us in our daily life?\n\n#PrimaryScience #Singapore #Magnets #TheOneAppExplained",
+   "tags": [
+    "non-magnetic materials",
+    "not all metals are magnetic",
+    "copper and aluminium",
+    "magnetic and non-magnetic",
+    "classify materials",
+    "magnets for kids",
+    "primary 3 science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLb8LpPqxQI4E",
+   "after": "w4io5Aee7zU"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "w4io5Aee7zU"
+  }
+ ],
+ "replaces": [
+  "w4io5Aee7zU"
+ ],
+ "retire_old": true,
+ "new_version_line": "▶ NEW VERSION: Copper Is a METAL. So Why Won't a Magnet Pull It? (Part 2) | Non-Magnetic Materials https://www.youtube.com/watch?v={P1}",
+ "_note": "v6 = buddy flicker/overlap fix (passes 1-3) of ['w4io5Aee7zU']; same timings.",
+ "_ok": "Teacher 26 Nov 2026: 'OK to replace the flicker-fixed parts'"
+}
