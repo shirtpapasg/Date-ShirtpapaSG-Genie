@@ -442,9 +442,21 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     table again: the title melts away and the buddies stay; the game into "Today you'll learn": the presenter glides to the left).
   - Buddies never flicker: no appearance under about 2.5 s, no one-frame blink at the end of a melt (fixed in lib.js 25 Nov 2026).
   - The opening is where this happened most (cold open, "Last time", the place, the title, the game, the goals): check its strip at 5 fps.
-    Fixed 25-26 Nov 2026 in EP0 and EP16-EP26 (code and finished files). Left as published: the EP16-EP19 Part 1 cold opens, where the
-    buddies pop in on three wired pop sounds (`budsIn`) about 2 s before the melt into "Last time" and then stay away 7-10 s; a new
-    episode lets them arrive at least 2.5 s before the melt.
+    Fixed 25-26 Nov 2026 in EP0 and EP16-EP26 (code and finished files). The EP16-EP19 Part 1 cold opens (the buddies pop in on three
+    wired pop sounds, `budsIn`, about 2 s before the melt into "Last time"): the sound is kept; the buddies now stay, opaque and on top,
+    through the melt and pop out in turn 2.65 s after each arrived (`coldHold` in p1.js). A new episode lets them arrive at least 2.5 s
+    before the melt.
+  - Mid-episode (second pass, 26 Nov 2026, EP0, EP16-EP27): the recurring scene changes flickered too (the game > "Be the ...!",
+    the shrink > the pull-out, the question > LOOK CLOSER, LOOK CLOSER > the Mark sentence, the score hand > the hidden animal, the
+    animal > the key words, the cliffhanger > "Now you know!"). The rules now in the engine and the scenes:
+    - lib.js `stayOf`: at a HARD cut, a buddy that was on screen in the last frame of the scene before (a face peeking into a
+      look-closer counts) and that the new scene would pop in again within its first 0.5 s is simply THERE from the cut's first frame
+      (no second pop-in, no pose pop; its name tag and reactions keep their timing). `o.noStay` opts out. `window._STAYS` lists them.
+    - The first face peeking into a LOOK CLOSER window arrives 2.3 s after the cut (not 1.2 s) when that buddy was in the question shot.
+    - The hidden-animal reveal (`lizReveal`): its buddies pop in after the iris (2.4 s), not 0.6 s after the score hand's buddies popped
+      out; the fun fact's speaker stays to the end of the scene (it used to vanish, with no pop-out, 0.3 s before the cut).
+    - "Be the ...!" (waitw): every buddy is on screen at least 2.6 s before it shrinks away.
+    - A buddy that changes place inside a scene glides there (EP25 P1 holdon: Basil to the side of the countdown and back).
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**
   - lip-sync on the talking sprites;
