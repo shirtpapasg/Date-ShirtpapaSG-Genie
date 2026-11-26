@@ -223,12 +223,12 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   const front = CAM(TF(boxX, CB.box[1], 1, iceBoxFrontV2(t)), c[0], c[1], c[2]);
   const splashFx = inBox && t < tSp + 1.0 ? [...Array(12)].map((_, i) => { const v = clamp((t - tSp) / .8), an = -Math.PI / 2 + (i - 5.5) * .25, r = 260 * v; return `<rect x="-12" y="-10" width="24" height="20" rx="5" fill="#fff" stroke="#9FD0EA" stroke-width="2.5" transform="translate(${n2(CB.box[0] + Math.cos(an) * r)} ${n2(880 + Math.sin(an) * r + 300 * v * v)}) rotate(${n2(i * 40 + v * 200)})" opacity="${n2(1 - v)}"/>`; }).join("") : "";
   // Momo and Pip slide the box in (from the right), then stand by it
-  const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 300, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 300, pX = lerp(1920, CB.box[0] + 625, eio(clamp((t - tD - .1) / 1.1)));
+  const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 300, eio(clamp((t - tD) / 1.0))) : lerp(CB.box[0] + 300, CB.box[0] + 250, eio(clamp((t - tP - .4) / .5))), pX = lerp(1920, CB.box[0] + 650, eio(clamp((t - tD - .1) / 1.1)));
   window._BUBAT = { momo: [1400, 330], pip: [1500, 300], basil: [1180, 320] };
   return CAM(bg("vdv2") + set + bike, c[0], c[1], c[2]) + basil + can + front + splashFx
-    + x2bc(c, "momo", mX, 1066, 380, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "pointing"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10 })
-    + x2bc(c, "pip", pX, 1066, 330, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : -8 })
-    + (inBox && t > LT("k612") + 1.2 && t < LE("k612") ? x2held(c, "momo", CB.box[0] + 300, 1066, 380, true, `<g transform="rotate(10)"><rect x="-22" y="-34" width="44" height="64" rx="8" fill="#E5484D" stroke="#2B2F36" stroke-width="4"/><rect x="-22" y="-34" width="44" height="10" rx="4" fill="#C9D1DA"/></g>`, -20, 10) : "")
+    + x2bc(c, "momo", mX, 1066, 370, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "pointing"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10 })
+    + x2bc(c, "pip", pX, 1066, 320, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : -8 })
+    + (inBox && t > LT("k612") + 1.2 && t < LE("k612") ? x2held(c, "momo", CB.box[0] + 250, 1066, 370, true, `<g transform="rotate(10)"><rect x="-22" y="-34" width="44" height="64" rx="8" fill="#E5484D" stroke="#2B2F36" stroke-width="4"/><rect x="-22" y="-34" width="44" height="10" rx="4" fill="#C9D1DA"/></g>`, -20, 10) : "")
     + comicWord(t, tBk, CB.box[0] - 160, 470, "BONK!", { size: 84, d: .7 }) + comicWord(t, tSp, CB.box[0] + 60, 400, "KER-SPLOOSH!", { size: 92, d: 1.0 }) + comicWord(t, tSp + 1.1, CB.box[0] + 160, 820, "plip.", { size: 40, tiny: true, col: "#BFE6F7", d: .8 })
     + x2lab(t, MK("brkl"), MK("cold") - .3, c, "brakes: help the bike slow down and stop safely", 760, 300, CB.bike[0] + CB.bk * (BK.HT[0] - 76), CB.bike[1] + CB.bk * (BK.HT[1] - 34), 36)
     + (t >= LT("k612") - .1 ? x2raceClock(t, 180, spring(t, LT("k612") - .1, .45)) : "")

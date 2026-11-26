@@ -98,7 +98,22 @@ function magP(r, a = 25, o = {}) { const ink = INK.momo, L = r * 1.45, hx = Math
     + `<circle r="${r}" fill="url(#mGlass)"/><circle r="${r}" fill="none" stroke="${ink}" stroke-width="${r1(r * .42)}"/><circle r="${r}" fill="none" stroke="url(#mRim)" stroke-width="${r1(r * .24)}"/>`
     + `<path d="M${r1(-r * .55)} ${r1(-r * .2)} A${r1(r * .6)} ${r1(r * .6)} 0 0 1 ${r1(-r * .1)} ${r1(-r * .58)}" stroke="#fff" stroke-width="${r1(r * .16)}" fill="none" stroke-linecap="round"/>`
     + (o.loop ? `<circle cx="0" cy="${r1(-r - r * .22)}" r="${r1(r * .2)}" fill="none" stroke="${ink}" stroke-width="${r1(r * .16)}"/>` : ""); }
-function momoItem(op, name, H) { const ink = INK.momo;
+/* N (P4 EP1 v2, teacher 26 Nov: "around the neck. Please check! if cannot, use something else"): Momo's paintings have almost no neck,
+   so a thin cord under the chin read as a second smile. Instead a scientist's NECKERCHIEF: a teal band (white dots) knotted round her neck
+   at the head/chest join, well below her mouth, its ends tucked out of sight behind the cheek fur at both sides, a triangle on her chest,
+   and the small magnifier hanging from a ring at the triangle's tip. Fitted per pose from the measured chin (join = chin + 38). */
+function momoScarf(name, H) { const ink = INK.momo, [cx, cy0] = H.chin, cy = cy0 + 38, hw = 112, sag = 16, th = 24, tri = 64; let s = `<defs>${lgr("mScarf", [[0, "#3FC2AE"], [1, "#1F8F7E"]])}</defs>`;
+  const band = `M${cx - hw} ${cy - 10} Q${cx} ${cy + sag} ${cx + hw} ${cy - 10} L${cx + hw - 6} ${cy - 10 + th} Q${cx} ${cy + sag + th + 4} ${cx - hw + 6} ${cy - 10 + th}Z`;
+  s += `<path d="M${cx - 54} ${cy + 8} L${cx + 54} ${cy + 8} L${cx + 6} ${cy + tri + 10} Q${cx} ${cy + tri + 16} ${cx - 6} ${cy + tri + 10}Z" fill="url(#mScarf)" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/>`;   // the triangle on her chest
+  s += `<path d="${band}" fill="url(#mScarf)" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/>`;
+  for (let i = 0; i < 7; i++) { const u = (i + .5) / 7, x = cx - hw + 2 * hw * u, y = cy - 10 + 4 * sag * u * (1 - u) + th * .5; s += `<circle cx="${r1(x)}" cy="${r1(y)}" r="3.6" fill="#fff" opacity=".85"/>`; }
+  for (const [dx, dy] of [[-22, 30], [18, 34], [-2, 54]]) s += `<circle cx="${cx + dx}" cy="${cy + dy}" r="3.4" fill="#fff" opacity=".85"/>`;
+  s += `<path d="M${cx - hw + 4} ${cy - 6} q-6 ${th * .5} 2 ${th - 4} M${cx + hw - 4} ${cy - 6} q6 ${th * .5} -2 ${th - 4}" stroke="${ink}" stroke-width="5" fill="none" opacity=".45"/>`;   // the band turns away round her neck
+  s += `<g transform="translate(${cx - 58} ${cy + 10})"><ellipse rx="15" ry="12" fill="#2BA58E" stroke="${ink}" stroke-width="5"/><path d="M-6 8 l-10 22 l12 -6z M6 8 l6 22 l-12 -6z" fill="#2BA58E" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/></g>`;   // the knot
+  s += redraw(name, "ruffL", ell([cx - hw - 6, cy - 14, 26, 30, 0])) + redraw(name, "ruffR", ell([cx + hw + 6, cy - 14, 26, 30, 0]));   // the ends go behind the cheek fur
+  s += `<circle cx="${cx}" cy="${cy + tri + 16}" r="7" fill="none" stroke="#D9A441" stroke-width="5"/>` + TF(cx, cy + tri + 46, .8, magP(30, 0, {}));
+  return s + (H.hold ? redraw(name, "spaw", ell(H.hold[0])) : ""); }   // a raised paw stays in front of the scarf
+function momoItem(op, name, H) { const ink = INK.momo; if (op === "N") return momoScarf(name, H);
   if (op === "A") { const [px, py] = H.pend, r = 30, top = [px, py - r - 7], [cx, cy] = H.chin; let s = "";
     for (const sg of [-1, 1]) { const a = [cx + sg * 64, cy - 10], d = `M${a[0]} ${a[1]} Q${r1(cx + sg * 56)} ${r1(top[1] - 4)} ${r1(top[0] + sg * 4)} ${r1(top[1])}`;
       s += `<path d="${d}" stroke="${ink}" stroke-width="10" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#1FA08C" stroke-width="5.5" fill="none" stroke-linecap="round"/>`; }
@@ -170,7 +185,7 @@ const GRID = (name) => { const S = SPR[name]; let s = ""; for (let x = 0; x <= S
 itemsOf = function (who, name, fl, o) { const op = window.ITEM_OPT[who]; if (!op || op === "live") return _orig(who, name, fl, o); if (op === "grid") return GRID(name);
   const key = poseKey(who, name);
   if (who === "pip") { const H = PIPH[key]; if (!H) return _orig(who, name, fl, o); if (op !== "C" && o.helmet === false) return ""; return pipItem(op, name, H); }
-  if (who === "momo") { const H = MOMOH[key]; return H ? momoItem(op, name, H) : _orig(who, name, fl, o); }
+  if (who === "momo") { const H = MOMOH[key]; return H ? momoItem(op, name, H) : (op === "N" ? "" : _orig(who, name, fl, o)); }
   if (who === "basil") { const H = BASH[key]; return H ? basilItem(op, name, H, fl, o) : _orig(who, name, fl, o); }
   return _orig(who, name, fl, o); };
 })();
