@@ -76,10 +76,11 @@ function pipItem(op, name, H) { const top = redraw(name, "e", H.ears.map(ell).jo
 /* ================================================================ MOMO ================================================================ */
 // per pose: chin (the middle of the jaw), pend (where the magnifier hangs: on the chest, or resting on her crossed arms), ruff = the lower
 // face drawn again over the cord's ends (the cord goes round her neck under the fur), arms = the crossed arms (B: the handle tucked under),
-// hold = B: [paw ellipse, lens centre, lens r] (the paw drawn again over the handle: she grips it), head = C: [cx, eye y, tilt]
+// hold = B: [paw ellipse, lens centre, lens r] (the paw drawn again over the handle: she grips it), tuck = B: [lens x, y, r] beside the
+// crossed arms (the handle goes under them), tail = C: the top of the tail's tuft (the tuft drawn again over the handle)
 const MOMOH = {
-  sit: { chin: [440, 270], pend: [452, 326], ruff: [442, 236, 118, 56, 4], arms: [548, 404, 108, 62], tuck: [622, 322, 32], tail: [234, 322] },
-  arms_crossed: { chin: [270, 254], pend: [278, 326], ruff: [272, 222, 112, 54, 3], arms: [350, 388, 92, 54], tuck: [414, 318, 32], tail: [80, 305] },
+  sit: { chin: [440, 270], pend: [452, 338], ruff: [442, 232, 116, 50, 4], arms: [548, 404, 108, 62], tuck: [622, 322, 32], tail: [234, 322] },
+  arms_crossed: { chin: [270, 254], pend: [278, 334], ruff: [272, 222, 112, 54, 3], arms: [350, 388, 92, 54], tuck: [414, 318, 32], tail: [80, 305] },
   pointing: { chin: [263, 251], pend: [270, 334], ruff: [264, 218, 112, 54, 0], tail: [50, 305] },
   thinking: { chin: [268, 254], pend: [262, 336], ruff: [266, 222, 112, 54, -4], hold: [[372, 292, 36, 46], [408, 196], 40], tail: [48, 305] },
   waving: { chin: [270, 276], pend: [266, 350], ruff: [268, 240, 112, 56, -4], tail: [46, 305] },
@@ -117,6 +118,7 @@ function basilItem(op, name, H, fl) { if (op !== "A") return ""; const ink = INK
   return TF(x, y, 1, `<g transform="rotate(${a}) scale(${fl} 1)">${card}</g>`); }
 
 /* ================================================================ the switch ================================================================ */
+window.ITEM_REC = { pip: "B", momo: "A", basil: "A" };   // what the sheets mark RECOMMENDED
 window.ITEM_LABEL = {
   pip: { live: ["Now (live build)", "helmet perched on top", "like a bowl; ears out", "under it; straps hang", "loose in the air"],
     A: ["A: sun-yellow", "bike helmet", "sits down on the skull,", "ears out through it,", "visor, chin strap", "+ buckle; no goggles"],
