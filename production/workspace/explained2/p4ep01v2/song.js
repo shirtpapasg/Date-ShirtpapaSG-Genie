@@ -1,4 +1,7 @@
-// song.js: the whole soundtrack of P4 EP1 "The Great Bike Breakdown" (the P4 "Scoop Parade" family composed for the pilot EP27, unchanged, plus the
+// song.js (P4 EP1 v2 "The Great Void Deck Race", 26 Nov 2026): + Scoop Parade ACTION (a new voicing of the P4 theme: big toms, brass stabs,
+// rising strings, a choir "ahh": the runaway and the race start), the battle-cry sting that collapses into the SAD KAZOO (four falling
+// notes, the last one wobbling; it replaces v1's sad trombone), Heart's trailer boom, the freeze-frame, the toot, and the new foley (pigeons,
+// the snail, the ice box, stools, the castors, the splash). v1's header: the whole soundtrack of P4 EP1 "The Great Bike Breakdown" (the P4 "Scoop Parade" family composed for the pilot EP27, unchanged, plus the
 // series' own EP1-10 calm bed and micro-world pad; never Kampong Walk). The P4 EP1 one-shots (pedal whirr, grass thump, helmet bonk, rope hiss,
 // chain clicks, freewheel, spanner, bells, Heart's hint #2) are added at the end of the one-shot table. Below, EP27's notes on the music:
 //   node song.js 1        reads cues_p1.json (sound_cues.js) and tl_p1.json -> out/mix_p1.wav (-16 LUFS)
@@ -63,12 +66,22 @@ function tenseBar(bd, k) { const t0 = k * BAR, [root, ch] = TCH[k % 4];
   const ost = [0, 0, 12, 0, 3, 0, 7, 0]; ost.forEach((iv, s) => bd.bass.addMono(I.pizz(root + 12 + iv, { seed: 70 + s }), t0 + s * BEAT / 2, s === 0 ? .5 : .32));
   const lift = (k % 4) / 4; ch.forEach((n, i) => { const { L, R } = I.padNote(n - 12, BAR * 1.02, { cutoff: 600 + 900 * lift, attack: .4, release: .5 }); bd.pad.addStereo(L, R, t0 + i * .01, .06); });
   if (k % 4 === 0) { const x = I.timpani(root + 12, { decay: 1.0 }); bd.drums.addMono(x, t0, .35); } }
+// ---------- Scoop Parade ACTION (P4 EP1 v2): the theme's chords, big toms on every beat with a fill every 2nd bar, brass stabs on 1 and the
+// "and" of 2, a rising string line over 4 bars, a choir "ahh" on the chord every 2 bars, the bass in driving eighths
+function actionBar(bd, k) { const t0 = k * BAR, [root, ch] = CH[k % 8], lift = (k % 4) / 4;
+  for (let s = 0; s < 4; s++) { bd.drums.addMono(I.tom(70 + (s % 2) * 18, .32, 3 + s), t0 + s * BEAT, s === 0 ? .7 : .45); bd.drums.addMono(K, t0 + s * BEAT, .45); }
+  if (k % 2) [0, 1, 2, 3].forEach((i) => bd.drums.addMono(I.tom(150 - 18 * i, .14, 20 + i), t0 + 3 * BEAT + i * BEAT / 4, .35));
+  for (let s = 0; s < 8; s++) bd.bass.addMono(I.pizz(root + 12 + (s % 4 === 3 ? 7 : 0), { seed: 90 + s }), t0 + s * BEAT / 2, s % 2 ? .35 : .5);
+  for (const b of [0, 1.5]) ch.forEach((n, i) => bd.brass.addMono(I.brassNote(n + 12, .26, { stab: true, seed: 80 + i }), t0 + b * BEAT, .09));
+  ch.forEach((n, i) => bd.pad.addMono(I.strings(n + 12 + Math.round(lift * 5), BAR * .98, { attack: .15, release: .4, seed: 70 + i, bright: 1.2 }), t0, .045));
+  if (k % 2 === 0) ch.forEach((n, i) => { const v = I.voice(n, BAR * 1.6, { syl: 'a', type: i ? 'alto' : 'tenor', seed: 30 + i, vib: .12 }); bd.lead.addMono(v, t0, .05); verb.addMono(v, t0, .05); }); }
 // ---------- lay the beds on the one bar clock
 const R = C.R;
 { const b = B('theme'); for (const k of barsIn(R.theme)) themeBar(b, k); }
 { const b = B('lite'); for (const k of barsIn(R.lite)) themeBar(b, k, { full: false }); }
 { const b = B('party'); for (const k of barsIn(R.party)) themeBar(b, k, { party: true }); }
 { const b = B('tense'); for (const k of barsIn(R.tense)) tenseBar(b, k); }
+{ const b = B('action'); for (const k of barsIn(R.action || [])) actionBar(b, k); }
 for (const [name, bd] of Object.entries(beds)) { const e = envelope(R[name]); for (const x of Object.values(bd)) applyEnv(x, e); }
 // ---------- the journey pad (EP1-EP10's micro-world: a slow warm pad with soft bell tones, no rhythm)
 for (const [a, b] of R.wonder) { const prog = [['D3', 'A3', 'F#4', 'A4'], ['B2', 'F#3', 'D4', 'A4'], ['G2', 'D3', 'B3', 'G4'], ['A2', 'E3', 'C#4', 'A4']]; const step = 5.6;
@@ -201,6 +214,75 @@ Object.assign(P, {
   deskbell: (t) => { const a = I.bell(1975, .7, 1.4, 2.0), b = I.bell(2960, .45, 1.0, 2.0); game.addMono(a, t, .45); game.addMono(b, t, .18); verb.addMono(a, t, .25); },
   boing: (t) => { game.addMono(I.boing(), t, .5); },
 });
+
+// ---------- P4 EP1 v2 one-shots
+const kazooNote = (midi, dur, wob = 0) => { const n = Math.round(dur * SR), x = new Float32Array(n); let ph = 0, lp = 0, bp1 = 0, bp2 = 0; const f0 = hz(midi);
+  for (let i = 0; i < n; i++) { const u = i / n, vib = 1 + .012 * Math.sin(2 * Math.PI * 5.5 * i / SR) + wob * .06 * Math.sin(2 * Math.PI * 7 * i / SR) * u - wob * .08 * u * u; ph += f0 * vib / SR; const saw = 2 * (ph % 1) - 1;
+    const buzz = Math.tanh(3 * saw + .4 * Math.sin(2 * Math.PI * ph * 3)); lp += .35 * (buzz - lp); const env = Math.min(1, i / (.02 * SR)) * Math.min(1, (n - i) / (.05 * SR)); x[i] = lp * env * .5; } return x; };
+const kazoo = (t, g = .3) => { [[67, 0, .26, 0], [65, .28, .26, 0], [63, .56, .26, 0], [60, .84, .9, 1]].forEach(([n, d, l, w]) => { const x = kazooNote(n - 12, l, w); game.addMono(x, t + d, g); verb.addMono(x, t + d, g * .2); }); };
+const brassChord = (t, notes, d, g) => notes.forEach((n, i) => { const x = I.brassNote(m(n), d, { seed: 120 + i }); game.addMono(x, t, g); verb.addMono(x, t, g * .3); });
+const choir = (t, notes, d, g, syl = 'a') => notes.forEach((n, i) => { const v = I.voice(m(n), d, { syl, type: i % 2 ? 'alto' : 'tenor', seed: 140 + i, vib: .14 }); game.addMono(v, t, g); verb.addMono(v, t, g * .5); });
+Object.assign(P, {
+  actionsting: (t) => { [0, .25, .5].forEach((d, i) => game.addMono(I.tom(80 + 15 * i, .3, 60 + i), t + d, .55)); game.addMono(K, t, .7); brassChord(t + .52, ['F3', 'A3', 'C4', 'F4'], .55, .1); choir(t + .52, ['F3', 'C4', 'A4'], .9, .05); game.addMono(I.crash(12), t + .52, .1); },
+  kazoo: (t) => kazoo(t, .3), kazoobwop: (t) => { const x = kazooNote(55, .22, 1); game.addMono(x, t, .28); },
+  resolve: (t) => { brassChord(t, ['F3', 'A3', 'C4', 'F4', 'A4'], 1.6, .1); choir(t, ['F3', 'C4', 'A4', 'F5'], 1.8, .05); game.addMono(I.crash(14), t, .14); for (const n of ['F5', 'A5', 'C6']) { const x = I.musicBox(m(n)); game.addMono(x, t + .1, .12); verb.addMono(x, t + .1, .1); } },
+  freeze: (t) => { game.addMono(I.thud(120, .05), t, .3); game.addMono(I.noiseSweep(.3, 4000, 1200, { q: 1 }), t, .06); },
+  unfreeze: (t) => { game.addMono(I.noiseSweep(.35, 600, 2400, { q: 1.2 }), t - .1, .1); },
+  ice: (t) => { for (let k = 0; k < 3; k++) { const a = I.bell(2600 + 400 * k, .12, 2.5, 2.7); game.addMono(a, t + k * .08, .14); } },
+  dash: (t) => { sfx(t, 'ep05_run.wav', .16); game.addMono(I.noiseSweep(.5, 400, 2400, { q: 1.5 }), t, .1); },
+  slurp: (t) => { sfx(t, 'ep06_slurp.wav', .16); },
+  bloop: (t, v) => { game.addMono(I.pop(700 + 180 * (v || 0), 300 + (v || 0)), t, .4); mar(['C5', 'E5', 'G5'][(v || 0) % 3], t, .2); },
+  brasshit: (t) => brassChord(t, ['F3', 'C4', 'F4'], .35, .12),
+  clocktick: (t) => { [0, .3, .6].forEach((d) => game.addMono(I.woodTick(1.3), t + d, .22)); },
+  whirrblip: (t) => { for (let x = 0; x < .5; x += .06) game.addMono(I.rim(1.8, 700 + Math.round(x * 50)), t + x, .05); },
+  hmm: (t) => { game.addMono(I.woodTick(.7), t, .3); game.addMono(I.woodTick(.6), t + .18, .25); },
+  shing: (t) => { const x = I.bell(3200, .4, 2.0, 2.4); game.addMono(x, t, .14); verb.addMono(x, t, .12); game.addMono(I.noiseSweep(.3, 3000, 7000, { q: 2 }), t, .05); },
+  actionrise: (t) => { for (const [n, d] of [['C4', 0], ['E4', .5], ['G4', 1.0], ['C5', 1.5]]) game.addMono(I.strings(m(n), .7, { attack: .1, release: .3, seed: 9 }), t + d, .06); },
+  brakesqueak: (t) => { game.addMono(I.noiseSweep(.3, 2600, 2000, { q: 4 }), t, .1); },
+  flutter: (t) => { for (let k = 0; k < 14; k++) game.addMono(I.paperFwip(1.4 + .1 * (k % 3), 400 + k), t + k * .045, .07, (k % 2 ? .3 : -.3)); },
+  coo: (t) => { for (const [d, f] of [[0, 300], [.22, 270]]) { const n = Math.round(.22 * SR), x = new Float32Array(n); let ph = 0; for (let i = 0; i < n; i++) { const u = i / n; ph += 2 * Math.PI * f * (1 - .15 * u) / SR; x[i] = Math.sin(ph) * Math.sin(Math.PI * u) * (1 + .5 * Math.sin(2 * Math.PI * 28 * i / SR)) * .3; } game.addMono(x, t + d, .2); } },
+  yourturn: (t) => { mar('C6', t, .3); mar('G5', t + .1, .25); },
+  sproing: (t) => { game.addMono(I.boing(), t, .45); game.addMono(I.rim(2.4, 77), t, .2); },
+  chainheap: (t) => { for (let k = 0; k < 6; k++) game.addMono(I.rim(1.6 + .2 * (k % 3), 500 + k), t + k * .05, .12); game.addMono(I.thud(140, .05), t, .3); },
+  actionrev: (t) => { for (let k = 0; k < 8; k++) game.addMono(I.tom(90 + 6 * k, .12, 200 + k), t + k * .16, .25); game.addMono(I.strings(m('F3'), 2.4, { attack: 1.2, release: .3, seed: 3 }), t, .05); kazoo(t + 2.6, .2); },
+  squelch: (t) => { sfx(t, 'ep06_squish.wav', .1); },
+  squelchslow: (t) => { sfx(t, 'ep07_squish.wav', .1); game.addMono(I.thud(60, .3), t, .3); },
+  overtake: (t) => { brassChord(t, ['F3', 'A3', 'C4', 'F4'], 1.4, .1); brassChord(t + .5, ['Bb3', 'D4', 'F4', 'Bb4'], 1.2, .1); game.addMono(I.timpani(41, { decay: 1.2 }), t, .5); game.addMono(I.crash(15), t + .5, .1); },
+  cello: (t) => { const x = I.strings(m('C2'), 2.2, { attack: .3, release: .8, bright: .6, seed: 5 }); game.addMono(x, t, .14); verb.addMono(x, t, .08); },
+  creak: (t) => { game.addMono(I.noiseSweep(.6, 300, 180, { q: 6 }), t, .08); },
+  clang: (t) => { const a = I.bell(780, .4, 3.1, 3.4), b = I.bell(1240, .3, 2.6, 2.9); game.addMono(a, t, .3); game.addMono(b, t, .2); game.addMono(I.thud(160, .05), t, .3); },
+  click: (t) => { game.addMono(I.rim(2.6, 33), t, .4); },
+  standdown: (t) => { game.addMono(I.rim(1.6, 34), t, .2); },
+  whooshbig: (t) => { game.addMono(I.noiseSweep(.8, 300, 3600, { q: 1.2 }), t - .3, .3); game.addMono(I.subBoom(.8, 60, 40), t, .3); },
+  rollrumble: (t) => { game.addMono(I.noiseSweep(.65, 140, 180, { q: .6, pink: true }), t, .05); for (let k = 0; k < 3; k++) game.addMono(I.rim(2.8, 900 + k), t + k * .2, .05); },
+  clatter: (t) => { sfx(t, 'ep03_clatter.wav', .3); for (let k = 0; k < 5; k++) game.addMono(I.thud(180 + 30 * k, .04), t + k * .07, .3); },
+  runstep: (t) => { game.addMono(I.thud(150, .03), t, .09); },
+  castors: (t) => { sfx(t, 'ep03_roll.wav', .25); for (let k = 0; k < 10; k++) game.addMono(I.rim(2.2, 1000 + k), t + k * .07, .06); },
+  bonk2: (t) => { game.addMono(I.tom(200, .1, 41), t, .6); game.addMono(I.thud(110, .1), t, .7); game.addMono(I.rim(1.2, 42), t, .3); },
+  splash: (t) => { sfx(t, 'splash.wav', .35); for (let k = 0; k < 8; k++) { const a = I.bell(2400 + 300 * (k % 4), .1, 2.5, 2.7); game.addMono(a, t + .05 + k * .06, .1); } game.addMono(I.thud(90, .14), t, .6); },
+  brrr: (t) => { for (let k = 0; k < 16; k++) game.addMono(I.woodTick(1.9 + .1 * (k % 2)), t + k * .045, .1); },
+  trailerboom: (t) => { game.addMono(I.subBoom(2.4, 55, 30), t, .8); brassChord(t, ['F2', 'C3', 'F3'], 1.8, .12); game.addMono(I.crash(17), t, .1); verb.addMono(I.thud(50, .4), t, .4); },
+  riser: (t) => { sfx(t, 'riser.wav', .14); },
+  needleskip: (t) => { game.addMono(I.scratch(.18), t, .3); },
+  whistle: (t) => { game.addMono(I.whistle(.4), t, .35); },
+  bellring2: (t) => { const x = I.bell(2350, .4, 1.4, 2.0); game.addMono(x, t, .16, .4); game.addMono(x, t + .2, .14, .4); verb.addMono(x, t, .08); },
+  ribbon: (t) => { game.addMono(I.paperFwip(1.6, 55), t, .25); game.addMono(I.noiseSweep(.3, 2000, 900, { q: 1 }), t, .08); },
+  toot: (t) => { const n = Math.round(.2 * SR), x = new Float32Array(n); let ph = 0; for (let i = 0; i < n; i++) { const u = i / n; ph += hz(46 - 2 * u) / SR; const sq = Math.tanh(4 * Math.sin(2 * Math.PI * ph)); x[i] = sq * Math.sin(Math.PI * Math.min(1, u * 1.4)) * .4 * (1 - .4 * u); } game.addMono(x, t, .34); },
+  tok: (t) => { game.addMono(I.woodTick(.9), t, .45); },
+  seesaw: (t) => { game.addMono(I.thud(120, .08), t + .5, .4); game.addMono(I.noiseSweep(.5, 280, 200, { q: 5 }), t, .06); },
+  tadaa: (t) => { brassChord(t, ['F4', 'A4', 'C5'], .16, .08); brassChord(t + .18, ['F4', 'A4', 'C5', 'F5'], .5, .09); },
+  penTick: (t) => { game.addMono(I.scribble ? I.scribble(.25) : I.paperFwip(1.8, 7), t, .2); game.addMono(I.woodTick(2.0), t + .25, .15); },
+  pentap: (t) => { game.addMono(I.woodTick(1.6), t, .25); game.addMono(I.woodTick(1.6), t + .2, .22); },
+  whiff: (t) => { game.addMono(I.noiseSweep(.22, 1800, 700, { q: 1.2 }), t, .14); },
+  ooh: (t) => { choir(t, ['C4', 'E4', 'G4'], 1.2, .05, 'o'); },
+  leaves: (t) => { for (let k = 0; k < 6; k++) game.addMono(I.paperFwip(1.0 + .1 * k, 600 + k), t + k * .12, .05); },
+  drumroll: (t) => { for (let k = 0; k < 22; k++) game.addMono(I.snare({ decay: .08, seed: 70 + k }), t + k * .055, .1 + .006 * k); },
+  fanfare: (t) => { [['C4', 0, .2], ['F4', .2, .2], ['A4', .4, .2], ['C5', .6, 1.0]].forEach(([n, d, l]) => brassChord(t + d, [n], l, .14)); brassChord(t + .6, ['F3', 'A3', 'C4'], 1.0, .07); game.addMono(I.crash(19), t + .6, .12); game.addMono(I.timpani(41, { decay: 1 }), t + .6, .5); },
+  confetti: (t) => { for (let k = 0; k < 8; k++) game.addMono(I.pop(1800 + 200 * k, 700 + k), t + k * .03, .14); sfx(t, 'sparkle.wav', .08); },
+  clap: (t) => { game.addMono(CL, t, .9); game.addMono(I.thud(200, .03), t, .5); sfx(t, 'sparkle.wav', .1); },
+  laughter: (t) => { sfx(t, 'ep05_laugh.wav', .14); },
+  stingcut: (t) => { game.addMono(I.scratch(.15), t, .25); },
+});
 let miss = new Set(); C.ev.forEach((e, i) => { if (P[e.k]) P[e.k](e.t, e.v, i); else miss.add(e.k); }); if (miss.size) console.log('no sound for', [...miss]);
 // ---------- mix: the music ducks under every voice line; the ambience and the journey pad duck a little
 const music = []; for (const bd of Object.values(beds)) music.push(...Object.values(bd));
@@ -208,7 +290,7 @@ MIX.duck(music, voice, { depth: .62, release: .3 }); MIX.duck([amb], voice, { de
 MIX.duck([calm], voice, { depth: .4, release: .3 });
 const stems = { amb, wonder, game, voice, calm, verb: reverb(verb, { room: .7, damp: .4 }) }; const GAIN = { amb: 2.0, wonder: .85, game: .75, voice: 2.3, calm: 1.5, verb: .9 };
 const BG = { drums: .5, bass: .55, keys: 1.6, lead: .9, pad: 1.4, brass: 1.0 };
-for (const [name, bd] of Object.entries(beds)) for (const [k, x] of Object.entries(bd)) { stems[name + '_' + k] = x; GAIN[name + '_' + k] = BG[k] * (name === 'lite' ? .9 : name === 'tense' ? 1.5 : 1); }
+for (const [name, bd] of Object.entries(beds)) for (const [k, x] of Object.entries(bd)) { stems[name + '_' + k] = x; GAIN[name + '_' + k] = BG[k] * (name === 'lite' ? .9 : name === 'tense' ? 1.5 : name === 'action' ? 1.15 : 1); }
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? path.join(__dirname, "out", "stems") : null }); MIX.highpass(mix, 30);
 MIX.fadeOut(mix, C.END - 1.2, C.END - .05);
 const M = MIX.master(mix, .8, .78, { lufs: -16 });   // ceiling .78: true peak <= -1.5 dBTP after AAC (it measured -1.2 with .84)

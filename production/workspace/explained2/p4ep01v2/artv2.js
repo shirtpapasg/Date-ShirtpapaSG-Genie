@@ -35,7 +35,7 @@ const kopiBag = (k = 1, sip = 0) => TF(0, 0, k, `<path d="M-6 -66 q6 -16 12 0" s
 // big hand-lettered word, pops in with a squash (lerp 1.8 -> 1, a wobble), then fades over .6-.9 s; never over a face or a label (the
 // scenes place it beside its source). o: size, col, rot, d (life), tiny (lower-case, small, no burst)
 function comicWord(t, t0, x, y, txt, o = {}) { const d = o.d || .85, u = t - t0; if (u < 0 || u > d) return ""; const size = o.size || 92, col = o.col || P.sun, rot = o.rot === undefined ? -8 : o.rot;
-  const k = lerp(1.8, 1, eo(u / .12)) * (1 + .06 * wob(t, t0 + .12, .35)), a = 1 - ss(d - .25, d, t), sx = 1 + .18 * Math.max(0, 1 - u / .1);
+  const k = lerp(1.8, 1, eo(u / .12)) * (1 + .06 * wob(t, t0 + .12, .35)), a = 1 - ss(t0 + d - .25, t0 + d, t), sx = 1 + .18 * Math.max(0, 1 - u / .1);
   let burst = ""; if (!o.tiny) { const w = tw(txt, size, 700) * .6 + 60; for (let i = 0; i < 14; i++) { const an = i * Math.PI / 7, r1 = (i % 2 ? .72 : 1) * w; burst += `${i ? "L" : "M"}${n2(Math.cos(an) * r1)} ${n2(Math.sin(an) * r1 * .55)} `; }
     burst = `<path d="${burst}Z" fill="#fff" stroke="${P.ink}" stroke-width="7" stroke-linejoin="round" opacity=".95"/>`; }
   return OP(a, TF(x, y, k, `<g transform="rotate(${rot}) scale(${n2(sx)} ${n2(2 - sx)})">${burst}<text x="0" y="${n2(size * .35)}" font-family="Fredoka" font-weight="700" font-size="${size}" text-anchor="middle" fill="${col}" stroke="${P.ink}" stroke-width="${o.tiny ? 6 : 12}" stroke-linejoin="round" paint-order="stroke" letter-spacing="2">${esc(txt)}</text></g>`)); }
@@ -221,7 +221,7 @@ const rust = (pts) => pts.map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="$
   s += `<path d="M82 -50 q6 5 11 0" stroke="#5A3A22" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="74" cy="-46" rx="5" ry="3" fill="#F29A8A" opacity=".6"/>`;
   // the shell: a brown spiral
   s += `<g transform="translate(-6 -64) rotate(${n2(3 * rp)})"><circle r="52" fill="url(#snailShell)" stroke="#5A3416" stroke-width="5"/><path d="M0 0 m-6 4 a8 8 0 1 1 12 -6 a18 18 0 1 1 -24 22 a30 30 0 1 1 42 -40" stroke="#5A3416" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-30 -30 q14 -14 30 -12" stroke="#fff" stroke-width="5" fill="none" opacity=".5" stroke-linecap="round"/></g>`;
-  if (o.crown) s += `<g transform="translate(-6 -126) rotate(-8) scale(.42)">${crownV2()}</g>`;
+  if (o.crown) s += `<g transform="translate(-4 -108) rotate(-8) scale(.42)">${crownV2()}</g>`;
   return s; }
 // its shiny trail from x0 to x (world), at y
 const snailTrail = (x0, x, y) => x <= x0 ? "" : `<path d="M${n2(x0)} ${y + 2} H${n2(x - 60)}" stroke="#E8F4FF" stroke-width="7" stroke-linecap="round" opacity=".55"/><path d="M${n2(x0)} ${y} H${n2(x - 60)}" stroke="#fff" stroke-width="2" opacity=".7"/>`;

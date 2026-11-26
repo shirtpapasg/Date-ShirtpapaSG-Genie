@@ -165,3 +165,4 @@
 - 09:17 UTC: EP16 v6 UPLOADED (flicker fix; teacher OK): ko6P2xv1LNE
 - 09:20 UTC: EP00 v6 UPLOADED (flicker fix; teacher OK): DK19RAxb4PU sGW5pjQNrJU
 - 13:22 UTC 26 Nov: TEACHER: 'OK to the EP1 v2 script' -> build started in explained2/p4ep01v2/ (right card moved to 2; items Pip B / Momo A / Basil A, switchable; Uncle Lim voice test clip; current poses with switchable slots for the new paintings).
+- 14:36 UTC 26 Nov: P4 EP1 v2 'The Great Void Deck Race' BUILT (not uploaded): p4ep01v2/p4ep01v2.mp4 7:10.3, -16 LUFS, decode 0 errors; cards 2/3 swapped (right = 2, Pip); the teacher's toot added; Uncle Lim voice test clip pron_clips/UncleLim_p4ep01v2_voice_test.mp3; new emotion poses switchable by name (new_poses.py); review clips p4ep01v2/qa/review_opening_0-30.mp4, review_runaway.mp4. Main session: show the teacher, then upload with p4ep01v2/upload.json.

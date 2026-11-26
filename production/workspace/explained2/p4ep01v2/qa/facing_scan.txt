@@ -1,0 +1,10 @@
+facing_scan p4ep01v2 part 1: 4304 samples 0-430.3 s every 0.1 s; 21 FACES notes; 32 functions watched
+EYE REVIEW    90.1-91.0    bell             buddy0         moves LEFT    388 px    from lib.js:208<p1.js:12<p2.js:78  [buddy travels]
+EYE REVIEW   152.0-152.9   brakes           x2rampBike     moves RIGHT    91 px    from p2.js:149<main.js:15  [no FACES note]
+EYE REVIEW   153.0-155.7   runaway          x2rampBike     moves RIGHT   566 px    from p2.js:177<p2.js:173<main.js:15  [no FACES note]
+EYE REVIEW   153.0-155.7   runaway          buddy0         moves RIGHT   569 px    from lib.js:208<p1.js:12<p2.js:179  [buddy travels]
+EYE REVIEW   153.2-155.7   runaway          buddy0         moves RIGHT   536 px    from lib.js:208<p1.js:12<p2.js:178  [buddy travels]
+EYE REVIEW   166.9-171.9   runaway          buddy0         moves RIGHT  1289 px    from lib.js:208<p1.js:12<p2.js:220  [buddy travels]
+EYE REVIEW   184.7-185.5   race             buddy0         moves RIGHT   744 px    from lib.js:208<p1.js:12<p2.js:262  [buddy travels]
+EYE REVIEW   263.9-268.5   shrink           buddy0         moves RIGHT  3272 px    from lib.js:208<p3.js:92<p3.js:83  [buddy travels]
+no backwards movers (11 annotated movers face the right way, 8 for eye review)

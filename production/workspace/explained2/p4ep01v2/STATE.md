@@ -1,70 +1,66 @@
-# P4 EP1 build state (for a resume after a restart)
-P4 EP1, the first "TheOneApp, Explained" episode in the new P4 style: **"The Great Bike Breakdown"** (Systems: bike, body, tree), ONE video,
-**6:20.2** (the story to 5:51, then the read-along, "Now you know!", 4.6 s of outro and a 5.7 s blooper after the end card). Script approved by
-the teacher on 25 Nov 2026 ("ok for the first script"): `../p4/p4_ep01_script.md` (every spoken line word for word: `script.py`, checked
-against the beat table). Built by one Opus agent on 25 Nov 2026 (voices, drawing, music, render, checks). **NOT uploaded**: the main session
-reviews it and asks the teacher first. It REPLACES the old P4 EP01 FOvUezOZJbo (never deleted).
+# P4 EP1 v2 build state (for a resume after a restart)
+P4 EP1 **v2, "The Great Void Deck Race"** (Systems: bike, body, tree), ONE video, **7:10.3** (the story to 6:41, then the read-along,
+"Now you know!", 4.6 s of outro with Chilli, and a 6 s blooper after the end card). Script approved by the teacher on 26 Nov 2026 ("OK to
+the EP1 v2 script"): `../p4/p4_ep01_script.md` (v2; every spoken line word for word: `script.py`). Built by one Opus agent on 26 Nov 2026.
+**NOT uploaded**: the main session shows the teacher first. It REPLACES the old P4 EP01 FOvUezOZJbo (never deleted) and supersedes the v1
+build `../p4ep01/` (left as it was).
+
+## Decisions on the script's open questions (the teacher did not object)
+- **Fix cards 2 and 3 swapped:** card 2 = ALL THREE PARTS BACK (Pip, right), card 3 = CHAIN + BRAKES, skip the bell (Momo, near miss). Every
+  reference follows: Pip's pitch "Fix two: put all three parts back. I made a checklist." comes second (so the checklist tease follows it),
+  Momo's "Fix three: ..." third; picks Basil 1, Pip 2, Momo 3; the lock-in; card 2 READY TO RIDE!, card 3 NOT SAFE YET; "That's my fix
+  three!"; "Picked fix two? You win a point, and so does Pip!"; the app moments; the chapters.
+- Length kept (no cuts); slapstick, both talk-to-camera moments and Heart's trailer voice kept as written.
+- **The teacher's toot (26 Nov, via the coordinator):** after "Slowly, slowly." Basil slumps over his bars, a tiny toot (sound only), Momo:
+  "Was that the bike?" Basil (deadpan): "Yes." (r703m, r703b; the only gag of that kind).
 
 ## The build model
-Engine copied from `../ep27/` (the P3-to-P4 pilot; itself from ep22): lib.js, common.js, closer.js, main.js, render.js, song.js (the P4
-"Scoop Parade" family unchanged), make_voice.py (+ the `slowof` slow-motion line). Not edited: ep27/ or any other episode.
-- `artp4.js` (new): Pip's bike drawn true (drive side, front at the right; chain loop on the front gear and the back gear with pitch = tooth
-  spacing, so the rollers sit between the teeth and move as the gears turn; rim brakes, levers, cables; the bell), the skipping rope, the box
-  USELESS PARTS, the sign, the ride clock RIDE IN mm:ss, the three fix cards, the void deck (baked `bg/vdp4.png`), the rain tree (baked
-  `bg/rtp4.png`), the park connector (live, for the tracking shot), the look-closer chain on a gear, the journey world (one loop of huge links
-  round the two gears, the huge back wheel), YOU as a chain link.
-- `p1.js` (new): every scene. `sound_cues.js` (new). `song.js`: + the P4 EP1 ambiences (void deck, park), the series calm bed, the new
-  one-shots (pedal whirr, grass thump, helmet bonk, rope hiss / zip / flop, chain clicks, freewheel, spanner, bells, Heart's hint #2).
-- lib.js: P4 EP1 OUTCOMES / learnAt / KW / SHELF_HIDE / KWLINE, and **the P4 items worn in every pose** (`ITEM_AT`, `itemsOf`): Pip's goggles
-  (on the brim of his bike helmet: `window.PIP_HELMET`, he wears the helmet all episode), Basil's P4 LAB SCIENTIST badge (its words mirrored
-  back so they always read), Momo's magnifier on a cord round her neck. Drawn inside the sprite's transform, so they follow squash, hop and
-  flips. The read-along lists the pills in the order Heart reads them (System, Function, Interact).
-- common.js: markScene takes `bin`; the read-along and "Now you know!" buddies no longer pop in after the cut (the new flicker rule).
+Engine copied from `../p4ep01/` (lib.js with stayOf / carryIn / the melt fixes, common.js, main.js, render.js, song.js "Scoop Parade"
+family). New files: `artv2.js` (Uncle Lim, his roadster, head-on and rear views, the snail, pigeons, ice box, stools, ball, crown, clipboard,
+flag, ribbon, comic-book sound words, battle-cry letters, the sets vdv2 / rampv2 / gardenv2 (baked) and the scrolling runaway track),
+`p1.js` (helpers + cold open to picks), `p2.js` (flashback, runaway, race), `p3.js` (look-closer to blooper), `new_poses.py`, `thumbP4v2.js`.
+- **Items** (`items_options.js`, loaded live with `window.ITEM_OPT = { pip: "B", momo: "A", basil: "A" }`, switchable in page.html): Pip's
+  lilac helmet + goggles + chin strap (B; anchors added for pointing / arms_crossed / waving), Momo's short teal cord and small magnifier
+  (A; anchor added for oops), Basil's re-pinned badge (A) **plus Basil's bike helmet** (`window.BASIL_HELMET`, on all episode: he rides):
+  Pip's helmet shell in sun-orange over his crown spines, the side spines showing below the rim, chin straps down the cheeks to the jaw
+  corners (a strap across a lizard's face reads as a mouth), measured per pose (BASILH). His back view wears a matching helmet (code-drawn).
+- **The bikes**: Basil's bike = artp4 bikeP4 (drive side, sprocket on the back hub, chain tangent; centred as bike_options found); the
+  four-pictures fix became the five pictures (PEDALS → FRONT GEAR → CHAIN → BACK GEAR → BACK WHEEL) with centred icons. Riders sit on the
+  SADDLE only: head-on with a cardboard race plate (it hides Basil's sitting legs), from behind (his back view on the saddle), the
+  snail-cam (only his tail shows), or riderless. Uncle Lim is code-drawn, so his feet are on the pedals.
+- **Basil's back view**: the teacher's grey `poses/basil_back.png` recoloured to the v2 teal by `new_poses.py` (no v2 back painting yet).
+
+## New emotion paintings: switchable by name (lib.js resolvePose / NEWPOSE_FALLBACK)
+The scenes ask for `pip_embarrassed, pip_panic, pip_proud, pip_angry, pip_dizzy, pip_ride, momo_facepalm, momo_laugh, momo_unimpressed,
+momo_horrified, basil_deadpan, basil_shocked, basil_laugh, basil_shrug, basil_hero` (as "panic/oops" = new name / today's stand-in). When the
+teacher's painting is in `characters/sprites/poses/` (`<who>_<pose>.png` or the v2 cast's `<who>_v2_<pose>.png`), run `python3 new_poses.py`
+and re-render: no code change. Stand-ins now: deadpan/unimpressed → sit, shocked/horrified/dizzy → surprised, shrug/embarrassed/facepalm →
+oops, panic → thinking, proud → arms crossed, angry → pointing, hero → arms crossed + wind lines, momo laugh → cheer with a giggle shake,
+basil laugh → laughing. pip_ride: Pip rides alongside in the victory lap when present. **Before using a new painting, measure its helmet /
+goggles / magnifier / badge anchors** (items_options.js PIPH, MOMOH, BASH, BASILH): an unmeasured pose shows no item (no helmet).
 
 ## Voices
-All 76 lines recorded and aligned (`voice.log`, `voice_redo.log`; not aligned: none). Heart af_heart .90, buddies 12% slower (Character
-Voice Kit). The ritual voices (h860, h864, h1304*, h1305, u1300, u1305) copied from ep27. **New guest voice: Chilli** (one line, e1102g; the
-link to EP2): `vm.CHARACTERS["chilli"] = mix am_echo .45 + af_river .55, speed 1.02, formant 1.12, median 275 Hz, range 1.25` (make_voice.py).
-The P4 README says a guest voice is tested for the teacher before use: **clip `../pron_clips/Chilli_p4ep01_voice_test.mp3` waits for the
-teacher's listen** (keep the same recipe for EP2). No Singapore name is spoken; no sg_pron entry needed.
+All lines recorded and aligned (`voice.log`, `voice2.log`; not aligned: none). Heart af_heart .90, buddies 12% slower (Character Voice Kit).
+Ritual voices copied from v1. **Heart's trailer voice** (r701): her own recording pitched down 3 semitones + a hall reverb (make_voice.py
+`trailer_fx`). **New guest voice: Uncle Lim** (`vm.CHARACTERS["lim"]`: bm_george .45 + am_michael .55, speed .96 (x.88), formant .95,
+median 112 Hz, range 1.15; measured median F0 114 Hz). Test clip for the teacher: `../pron_clips/UncleLim_p4ep01v2_voice_test.mp3`.
+"I told you s..." is spoken as "sss..." (pron), cut off.
 
-## Pacing (P4 README section 4)
-First timeline 5:43 = 130 words a minute, voice on 76% (the recorded buddies speak at about 3.3 words a second, faster than the script's 2.7
-estimate). Per the README ("lengthen the holds and think pauses, never add words"): .85 s between lines, about 1.4 s between scenes, a .38 s
-pause between the sentences of a buddy line, the holds a little longer, think time after Heart's teaching sentences (script.py THINK_AFTER).
-Result: **6:20.2, 741 words, 117 words a minute, voice on 70%**; the lock-in ring 6 s; the think card 3.5 s of silence.
+## Pacing
+810 spoken words, **7:10.3 = 113 words a minute** (series range 105-117), voice on 66%. The script's 6:30 estimate assumed the v1 ratio;
+with every line kept the series pace puts it at about 7:10 (the gaps were tightened from 7:27: .8 s between lines, about 1.2 s between scenes).
 
-## Departures from the script (the most faithful choice where it could not be built as written)
-- Fix 1: Basil steadies the bike standing **behind** the back wheel (a buddy's paw cannot reach the saddle of a bike Pip can ride).
-- Fixes 2 and 3 (the mechanic's test): Pip lifts the back of the bike standing behind the back wheel; Momo stands in front of the front wheel
-  and **points** at the pedal she turns (the paintings have no hand-on-pedal pose).
-- Pip's fall: the bike tips over sideways (drawn lying down away from us, on the grass); Pip falls forward-right onto his back, head first the
-  way he goes (SERIES_FORMAT 6x), legs wiggling, then sits up sheepish (no "laughing" painting for Pip: his oops pose).
-- The journey dive starts from the look-closer's drive picture (the chain is not on Pip's bike yet at that point); the pull-out lands on the
-  bike in the void deck, on fix 3's layout.
-- e710: the brakes and the bell are shown in two picture insets joined by lines to where they go on the bike (they are off the bike when the
-  line is said); then they go back on, speeded up.
-- Faces close-up (round frame) twice, both impacts as the script: Basil's wince at the topple (his "surprised" painting), his surprise at the
-  rope flop.
-- App moments: the body look-closer uses `O.respCirc` (it shows the heart and lungs working harder; videos.js now has that outcome), not
-  `O.digestive` as the script's draft.
-
-## Checks
-- `qa/ghost_scan.txt`: no buddy ghosting (every scene change). `qa/facing_scan.txt`: no backwards movers (bikeP4, kidRiderP4, linkYouP4
-  annotated FACES right, chilliP4 none); eye review: the riders on the chain travel right on the top run; Basil's face frame.
-- `qa/flicker_scan.txt`: no buddy flicker (the new rule, 25 Nov: buddies arrive once and stay; no pop-ins after a cut).
-- Every 2.5 s of the video was rendered as stills and checked for text over text, a bubble over a chip or label, a buddy over a word or a
-  face; fixed before the render: fix-card bubbles, the replay bubble, the look-closer labels and verdict, the four pictures vs INTERACT, the
-  inside-Pip bubble, the small print, the cold-open layout.
+## Checks (from explained2/)
+- `qa/ghost_scan.txt`: no buddy ghosting. `qa/facing_scan.txt`: no backwards movers (FACES notes on every mover: bikes, Uncle Lim, the snail,
+  pigeons, the YOU link; mirrored where they travel left). `qa/flicker_scan.txt`: no POP / GONE; the JUMP lines left are the deliberate camera
+  cuts inside a scene (bell: three-shot → from behind → the front; brakes: the low angle on the front wheel; runaway: four shots; ride: the lap →
+  the rain tree), each checked by eye. `qa/overlap.txt` (popfix2 overlap.js at 5 fps): no buddy over a label, card or another buddy's face that
+  matters (the runs left are the riders sitting ON the journey's chain links, the ice behind Basil in the box, and a blurred backdrop).
+- Every 2.5 s of the video checked as stills (`qa/sweep/` sheets in the scratchpad) and fixed: bubbles over labels, the refrain strip
+  doubling the bubble, comic words over faces, the trailer push-ins (now letterbox panels), the split screen's clip, crowded two-shots.
 
 ## Upload (the main session, after the teacher's OK)
-`upload.json` (key `explained-p4-ep01`; replaces FOvUezOZJbo, retire_old true; playlists PLK9BW3T6kXx4 (P4) and PLPfEuT7l4KjI (main), both
-`after` FOvUezOZJbo: the old video is at position 0 of both, read-only check 25 Nov), `thumb.jpg` (WHICH PART?), chapters
-`production/youtube/chapters_p3.json` key `P4EP01`, `app_moments.json` (videos.js P4 entry no. 1, swap the whole entry), `p4ep01.srt`.
-Heart mystery hint #2 logged in SecondBrain `Plans/videos/P4-new-direction.md` (5:31.8, 6 frames).
-
-## Render (25 Nov 2026, 23:26-23:41 UTC)
-**`p4ep01.mp4`**: 1920x1080, 30 fps, **11406 frames = 6:20.2**, decodes end to end (0 errors), **-16.0 LUFS, true peak -2.0 dBTP**.
-`sheet.png` (30 stills), `p4ep01.srt` (captions for Studio), `qa/key_frames.jpg` (12 key frames from the video), `thumb.jpg` + `qa/thumb_320.jpg`.
-Heart's hint #2 checked in the video: frames 9955-9960 (5:31.83-5:32.00, exactly 6 frames) show the heart in the bell's dome.
-Intermediates (chunks, the silent video) deleted after the checks; `out/mix_p1.wav` kept for a splice if a fix is needed.
+`upload.json` (key `explained-p4-ep01-v2`; replaces FOvUezOZJbo, retire_old; playlists PLK9BW3T6kXx4 and PLPfEuT7l4KjI, both `after`
+FOvUezOZJbo), `thumb.jpg` (LOST TO A SNAIL?!) + `qa/thumb_320.jpg`, chapters `production/youtube/chapters_p3.json` key `P4EP01V2`,
+`app_moments.json` (videos.js P4 entry no. 1, 9 moments), `p4ep01v2.srt`. Heart mystery hint #2 logged in SecondBrain
+`Plans/videos/P4-new-direction.md` (5:28.3, 6 frames).

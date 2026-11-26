@@ -42,7 +42,7 @@ NYK = [("scene", "nyk"),
  ("say", "h1305", H, "Now you know!", {"after": ["h1304t", 1.0], "shout": True}),
  ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
  ("wait", 4.6)]
-LOCK = lambda n, d=6.5: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
+LOCK = lambda n, d=6.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
 SC_GAP = ("wait", .45)
 
 SEQ1 = [
@@ -68,7 +68,7 @@ SEQ1 = [
  ("say", "f204", M, "Fix three: put the chain and the brakes back, and skip the bell. A bell can't make you go!", o(kw=[["c3", "three"]])),
  ("say", "f207", H, "Show me one, two or three fingers!", o(post=.2, kw=[["show", "show"]])),
  # ---- lock · THE LOCK-IN (6.5 s ring)
- ("scene", "lock"), ("wait", .3), *LOCK("fix", 6.5),
+ ("scene", "lock"), ("wait", .5), *LOCK("fix", 6.0), ("wait", .3),
  # ---- picks · each buddy under their own card; high-five miss 1
  ("scene", "picks"), ("mark", "pk0"), ("wait", 1.2),
  ("say", "p208", M, "Team high-five!", o(pre=.2, post=.1)),

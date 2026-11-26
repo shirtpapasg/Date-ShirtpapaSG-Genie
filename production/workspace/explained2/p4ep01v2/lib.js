@@ -429,7 +429,7 @@ const KWHOLD = 2.0;
 // dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it (keep the pops above the strips and clear of the boards).
 // P4 EP1 v2: FUNCTION (inside the look-closer lcbike, on Pip's "function" in l804), INTERACT (in `interact`, on Momo's "interact" in j904),
 // SYSTEM (in `system`, on Basil's "system" in v1012). All o.at (no dimming), 2.0 s, then they fly to the shelf.
-const KW = [["FUNCTION", "kw_function", 1, null, { at: [930, 280], size: 104 }], ["INTERACT", "kw_interact", 1, null, { at: [1180, 560], size: 110 }], ["SYSTEM", "kw_system", 1, null, { at: [960, 200], size: 120 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+const KW = [["FUNCTION", "kw_function", 1, null, { at: [760, 280], size: 104 }], ["INTERACT", "kw_interact", 1, null, { at: [1400, 560], size: 110 }], ["SYSTEM", "kw_system", 1, null, { at: [960, 200], size: 120 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
 const SHELF_HIDE = { cold: 1, title: 1, fixcards: 1, lock: 1, picks: 1, replay: 1, waitw: 1, shrink: 1, pullout: 1, inbasil: 1, words: 1, finish: 1, nyk: 1, blooper: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;

@@ -12,6 +12,7 @@ const x2bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 const x2bc = (c, who, x, y, h, t, o = {}) => { const [X, Y] = camPt(c, [x, y]); return buddy(who, X, Y, h * c[0], t, o); };
 const x2place = (name, inner, c) => CAM(bg(name) + inner, c[0], c[1], c[2]);
 const x2held = (c, who, x, y, h, flip, inner, dy = 0, dx = 0) => { const [X, Y] = camPt(c, [x, y]), [px, py] = pawPt(who, X, Y, h * c[0], flip); return TF(px + (flip ? -dx : dx) * c[0], py + dy * c[0], c[0], flip ? `<g transform="scale(-1 1)">${inner}</g>` : inner); };
+const x2unflip = (k, inner) => `<g transform="scale(${-k} ${k})">${inner}</g>`;   // a held board stays readable when the holder is mirrored
 const x2fine = (t, t0, t1, txt, x = 560, y = 1032) => OP(1 - ramp(t, t1, .3), finePrint(t, t0, txt, x, y));
 const x2HUD = (t) => HUD(t);
 const FOOT = "Primary 4 Science · Systems · What is a system?";
@@ -19,6 +20,7 @@ SCORE.push([MK("coin1") - .05, 1, 1]);   // the fix pick: the viewers who picked
 window.SHELF_AWAY = () => 0;
 // Basil's grease stripe on his tail (from n505 on: "To make my tail greasy"): drawn in the sit painting's own pixels (lib.js itemsOf hook)
 { const _io = itemsOf; itemsOf = function (who, name, fl, o) { let s = _io(who, name, fl, o); if (who === "basil" && o.grease && poseKey(who, name) === "sit") s = `<path d="M118 318 Q150 300 186 312 M112 356 Q150 340 192 352" stroke="#1E2227" stroke-width="16" stroke-linecap="round" fill="none" opacity=".82"/>` + s; return s; }; }
+const x2said = (id) => { if (window._SAID) window._SAID[id] = 1; return ""; };   // a battle cry's words ARE its picture: no speech bubble
 const x2grease = (t) => t >= MK("sproing") ? { grease: true } : {};
 
 /* ---------------------------------------------------------------- the race clock (story time) ---------------------------------------------------------------- */
@@ -87,11 +89,11 @@ const x2limSay = (id, x, y, t) => say(id, x, y, t, { size: 40, maxW: 420, tail: 
 // the void deck (vdv2), Saturday 9 a.m.: Basil IN the ice box (chest up), helmet on and buckled, a feather on it, the grease stripe on his
 // tail, ice around him; his stripped bike leans on the box (no bell, no levers, no chain: bare gears); Uncle Lim far left on his roadster at
 // the START line, sipping; the snail a metre from the line, facing it; the crown on its stool. Camera: tight on Basil, eases to a three-shot.
-const CB = { box: [1300, 1062], bike: [842, 1050], bk: .75, lim: [300, 975], limk: .5, snail: [250, 1066], stool: [600, 945], momo: [420, 1066], pip: [1640, 1066] };
+const CB = { box: [1260, 1062], bike: [802, 1050], bk: .75, lim: [230, 940], limk: .45, snail: [250, 1066], stool: [720, 945], momo: [430, 1066], pip: [1640, 1066] };
 const x2bikeLean = (t, o = {}) => `<g transform="translate(${CB.bike[0]} ${CB.bike[1]}) rotate(-1.5) scale(${CB.bk})">${bikeP4(t, { chain: false, brakes: 0, bell: 0, crank: .5, sh: 0, g2: 0, stand: false, ...o })}</g>`;
 // the cold-open set as a world group (also the runaway's last shot, which ends on exactly this layout)
 function x2coldSet(t, o = {}) { const ice = o.iceT !== undefined ? o.iceT : t;
-  return TF(...CB.stool, .9, crownStoolV2(1)) + TF(...CB.lim, CB.limk, limRideV2(t, { crank: .4, sip: o.limSip === undefined ? .3 + .7 * (.5 + .5 * Math.sin(t * .8)) : o.limSip, stand: true }))
+  return (o.noStool ? "" : TF(...CB.stool, .9, crownStoolV2(1))) + TF(...CB.lim, CB.limk, limRideV2(t, { crank: .4, sip: o.limSip === undefined ? .3 + .7 * (.5 + .5 * Math.sin(t * .8)) : o.limSip, stand: true }))
     + TF(...CB.snail, .62, snailV2(t)) + (o.noBike ? "" : x2bikeLean(t)) + TF(...CB.box, 1, iceBoxBackV2(ice)); }
 const coldCam = (t) => { const s = SCN.cold, u = eio(clamp((t - MK("thaw") - .2) / 3.2)); return camMix(camOn([1310, 820], 1.85, 960, 600), camOn([960, 700], 1.0), u); };
 // Basil in the box: his painting with its feet inside the box (the front wall drawn over him)
@@ -113,10 +115,10 @@ SC.cold = (t, s) => { const tf = MK("frz"), th = MK("thaw"), fz = t >= tf && t <
   const bk = (p) => camPt(c, [CB.bike[0] + CB.bk * p[0], CB.bike[1] + CB.bk * p[1]]);
   const outl = (mk, p, txt, lx, ly) => { if (t < MK(mk) - .1 || t > LE("c105") + .2) return ""; const k = spring(t, MK(mk) - .1, .4) * (1 - ramp(t, LE("c105"), .25)), [X, Y] = bk(p);
     return OP(Math.min(1, k), `<circle cx="${n2(X)}" cy="${n2(Y)}" r="${n2(30 * c[0])}" fill="none" stroke="#fff" stroke-width="6" stroke-dasharray="8 8"/>` + plabel(lx, ly, txt, X, Y, 42, "#fff")); };
-  const outs = outl("ob", [BK.HT[0] - 24, BK.HT[1] - 66], "bell?", 700, 300) + outl("oc", [(BK.RA[0] + BK.BB[0]) / 2, BK.BB[1] - 20], "chain?", 380, 560) + outl("obr", [BK.HT[0] - 76, BK.HT[1] - 34], "brakes?", 1060, 260);
+  const outs = outl("ob", [BK.HT[0] - 24, BK.HT[1] - 66], "bell?", 700, 300) + outl("oc", [(BK.RA[0] + BK.BB[0]) / 2, BK.BB[1] - 20], "chain?", 720, 600) + outl("obr", [BK.HT[0] - 76, BK.HT[1] - 34], "brakes?", 1060, 260);
   const cry = battleCry(t, cr - .05, 1120, 300, "LIGHTER|IS FASTER!", { d: 1.7 }) + windV2(t, 1250, 640, 420, ss(cr - .1, cr + .1, t) * (1 - ss(LE("c105") + .3, LE("c105") + .6, t))) + flare(...camPt(c, [1220, 640]), ss(cr, cr + .15, t) * (1 - ss(LE("c105"), LE("c105") + .4, t)));
   const world = `<g transform="translate(960 540) scale(${n2(zp)}) translate(-960 -540)">` + CAM(bg("vdv2") + x2coldSet(tw_, { iceT: tw_ }), c[0], c[1], c[2]) + `</g>`;
-  window._BUBAT = { basil: [1180, t < LE("c102") ? 330 : 300], momo: [560, 470], pip: [1500, 420] };
+  window._BUBAT = { basil: [1180, t < LE("c102") ? 330 : 300], momo: [560, 470], pip: [1500, 420] }; x2said("c105");
   return world + (t < MK("cry1") - .1 ? "" : cry) + basil + feather + front + momo + pip + outs
     + x2frozen(fz ? 1 : 0) + x2flash(t, tf, .6, .12) + (fz ? OP(ramp(t, tf + .9, .3), TF(1540, 980, 1, tpill(0, 0, "PAUSED", 34, "#fff", P.ink, { w: 700, ls: 6 }))) : "")
     + (t > plipY && t < plipY + 1 ? comicWord(t, plipY + .4, ...camPt(c, [CB.box[0] + 120, 880]), "plip.", { size: 44, tiny: true, col: "#BFE6F7" }) : "")
@@ -134,23 +136,23 @@ SC.title = (t, s) => { const u = t - MK("title"), k1 = clamp(u / .16), k2 = clam
 /* ================================================================ FIXCARDS · THE FIX CARDS (a huddle) ================================================================ */
 // the trio in a huddle in front of the ice box (blurred behind): Basil left, Pip middle, Momo right, close together, leaning in; each
 // pitches TO the other two; the three big numbered cards pop above the huddle as each is pitched; the camera pushes onto each card
-const CX3 = [560, 960, 1360], CARDY = 360, CARDK = .64, HUD3 = { basil: [690, 1076], pip: [960, 1076], momo: [1230, 1076] };
+const CX3 = [560, 960, 1360], CARDY = 360, CARDK = .64, HUD3 = { basil: [600, 1076], pip: [960, 1076], momo: [1310, 1076] };
 const x2cards = (t, y, k, o = {}) => [1, 2, 3].map((n) => { const ti = o.tin ? o.tin[n - 1] : -9, kk = k * (ti > -9 ? spring(t, ti, .45) : 1); if (kk < .02) return "";
   const sd = o.said ? pulse(t, o.said[n - 1], .04, .6) : 0, xs = o.xs || CX3; return TF(xs[n - 1], y - 14 * sd, kk * (1 + .05 * sd), x2fixCard(t, n, { glow: o.glow ? o.glow(n) : sd, stamp: o.stamp ? o.stamp(n) : null })); }).join("");
 SC.fixcards = (t, s) => { const tc = [MK("c1"), MK("c2"), MK("c3")];
   window._BUBAT = { basil: [520, 640], pip: [960, 640], momo: [1400, 640] };
   let z = 1, fx = 960; for (let i = 0; i < 3; i++) { const a = tc[i] - .1, b = i === 0 ? tc[1] - .4 : i === 1 ? LE("f206") + .2 : LE("f204") + .2, u = ss(a, a + .7, t) * (1 - ss(b - .6, b, t)); if (u > 0) { z = 1 + .12 * u; fx = lerp(960, CX3[i], u); } }
   const c = camOn([fx, 360], z, fx, 360), clipK = t >= MK("clip") - .2 ? 1 : 0;
-  return `<g filter="url(#b4)">${x2place("vdv2", x2coldSet(t), [1.1, 1100, 700])}</g><rect width="1920" height="1080" fill="${P.night}" opacity=".5"/>`
+  return `<g filter="url(#b4)">${x2place("vdv2", x2coldSet(t, { noStool: true }), [1.1, 1100, 700])}</g><rect width="1920" height="1080" fill="${P.night}" opacity=".5"/>`
     + OP(ramp(t, s.t0 + .1, .3), T(960, 112, "THREE FIXES", 60, P.sun, { ls: 6 })) + CAM(x2cards(t, CARDY, CARDK, { tin: tc.map((x) => x - .1), said: tc }), c[0], c[1], c[2])
     + x2bd("basil", ...HUD3.basil, 330, t, { in: s.t0 + .05, poses: [[s.t0, "thinking"], [LT("f202") - .1, "sit"], [LE("f202") + .1, "arms_crossed"], [LT("f205") - .1, "sit"], [LE("f205") + .1, "deadpan"], [LE("f206") + .1, "shrug/oops"], [LT("f204") + .3, "pointing"], [LE("f204") + .2, "sit"]], look: 6 })
-    + x2bd("pip", ...HUD3.pip, 320, t, { in: s.t0 + .2, poses: [[s.t0, "thinking"], [LT("f202") + .6, "panic/thinking"], [LT("f203") - .1, "sit"], [LE("f203") + .05, "pointing"], [LT("f205") + .4, "proud/arms_crossed"], [LT("f206") - .1, "sit"], [LE("f206") + .1, "sit"]], look: t < LT("f205") ? -3 : -6, flip: t > LE("f203") + .05 && t < LE("f206") + .3 })
+    + x2bd("pip", ...HUD3.pip, 320, t, { in: s.t0 + .2, poses: [[s.t0, "thinking"], [LT("f202") + .6, "panic/thinking"], [LT("f203") - .1, "sit"], [LE("f203") + .05, "sit"], [LT("f205") + .4, "proud/arms_crossed"], [LT("f206") - .1, "sit"], [LE("f206") + .1, "sit"]], look: t < LT("f205") ? -3 : -6, flip: t > LE("f203") + .05 && t < LE("f206") + .3 })
     + x2bd("momo", ...HUD3.momo, 330, t, { in: s.t0 + .35, flip: true, poses: [[s.t0, "thinking"], [LT("f203") - .1, "sit"], [LE("f206") - .05, "laugh/cheer"], [LT("f204") - .15, "sit"]], look: -6 })
     + (clipK ? x2held([1, 960, 540], "pip", ...HUD3.pip, 320, false, TF(0, 0, .5, clipboardV2(t, {})), -50, 40) : "")
     + (t >= MK("show") - .1 ? TF(1730, 920, spring(t, MK("show") - .1, .4), countHand(t < W("f207", "two") ? 1 : t < W("f207", "three") ? 2 : 3, {}) + youPill(0, -170, .9)) : "") + x2HUD(t); };
 
 /* the lock-in: the ring with the stripped bike in it (three dotted outlines; the clue labels ON TOP of its frame); the cards under it */
-SC.lock = (t, s) => { const r0 = MK("ring0_fix"), bell = MK("bell_fix"), D = bell - r0, rs = ringState(t, r0, D), inT = t >= r0 && t < bell, shut = pulse(t, bell, .01, .6), b = Math.floor(t - r0), RC = [960, 330], RR = 230;
+SC.lock = (t, s) => { const r0 = MK("ring0_fix"), bell = MK("bell_fix"), D = Math.round(bell - r0), rs = ringState(t, r0, D), inT = t >= r0 && t < bell, shut = pulse(t, bell, .01, .6), b = Math.floor(t - r0), RC = [960, 370], RR = 230;
   const inner = `<clipPath id="lkV2"><circle cx="${RC[0]}" cy="${RC[1]}" r="${RR - 26}"/></clipPath><circle cx="${RC[0]}" cy="${RC[1]}" r="${RR - 26}" fill="#E8F3FF"/><g clip-path="url(#lkV2)"><rect x="700" y="${RC[1] + 110}" width="520" height="200" fill="#D9D1C2"/>${TF(985, RC[1] + 140, .5, bikeP4(t, { chain: false, brakes: 0, bell: 0, crank: .6, sh: 0, g2: 0 }) + x2ghostBell() + x2ghostChain() + x2ghostBrakes())}</g>`;
   const ring = ringTimer(RC[0], RC[1], t < bell ? rs.frac : 0, t < bell ? rs.secs : 0, t, { R: RR, sw: 34, tick: rs.tick, shut, chg: inT || (t >= bell && t < bell + .5) ? (t >= bell ? bell : rs.chg) : -9, ns: 1.3, inner });
   const clues = [["no bell", 1450, 190, 1060, 260], ["no chain", 470, 260, 860, 380], ["no brakes", 1480, 450, 1110, 330]].map(([txt, x, y, px, py], i) => OP(ramp(t, s.t0 + .2 + i * .15, .3), `<path d="M${x} ${y} L${px} ${py}" stroke="#fff" stroke-width="6" stroke-linecap="round"/>` + clue3(x, y, txt, spring(t, s.t0 + .2 + i * .15, .4), 54, 520))).join("");
