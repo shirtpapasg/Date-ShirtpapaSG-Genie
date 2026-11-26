@@ -28,7 +28,7 @@ SEG = [
   {"id": "far", "scene": "globeFly", "text": "The answer starts thousands of kilometres away, over the Pacific Ocean. Let's shrink down and go there."},
   {"id": "ready", "scene": "countdown", "excited": True, "text": "Are you ready? Three! Two! One! Go!", "added": "countdown (series standard, as EP11)"},
   # 0:40 You are the trade wind (BE THE THING, soft, calm pad)
-  {"id": "w0", "scene": "povShrink", "silent": 3.2, "sfx": [["pad_wonder", 0], ["space_warp", 0.2], ["wind", 1.0], ["sparkle", 2.4]]},
+  {"id": "w0", "scene": "povShrink", "silent": 3.2, "sfx": [["space_warp", 0.2], ["wind", 1.0], ["sparkle", 2.4]]},
   {"id": "wind1", "scene": "povWind", "soft": True, "text": "You are a gust of wind. You blow over the Pacific Ocean from east to west, day after day. People call you the trade wind.", "sfx": [["wind", 0], ["sea_wash", 1.5]]},
   {"id": "wind2", "scene": "povWarm", "soft": True, "text": "Below you, the sea is warm. You push the warm top layer of water along with you, west, towards Singapore.", "sfx": [["sea_wash", 0], ["wind", 2.5]]},
   {"id": "wind3", "scene": "povCloud", "soft": True, "text": "The warm water gains heat from the Sun. Some of it evaporates into water vapour and rises with you. High up, the water vapour loses heat, condenses into tiny water droplets and forms clouds.", "sfx": [["sparkle", 2.0], ["wind", 5.0]]},
@@ -71,7 +71,7 @@ E = {x["id"]: x for x in SEG}
 def ep(i, **kw): d = dict(E[i]); d.pop("hold", None); d.update(kw); return d
 WATCH = {"id": "watch", "scene": "bye", "text": "Watch the full episode on TheOneApp, Explored.", "hold": 0.3}
 S1 = [{"id": "q1", "scene": "qcard", "text": "Why is Singapore so hot and dry this year?", "new": True},
-      dict(E["w0"], silent=2.6, sfx=[["pad_wonder", 0], ["space_warp", 0.1], ["wind", 0.8], ["sparkle", 2.0]]),
+      dict(E["w0"], silent=2.6, sfx=[["space_warp", 0.1], ["wind", 0.8], ["sparkle", 2.0]]),
       ep("wind1"), ep("wind5"), ep("pip2"), ep("wind6", hold=0.5), WATCH, E["nyk"]]
 S2 = [{"id": "q2", "scene": "qcard", "text": "How can two degrees change the weather in India and the USA?", "new": True},
       ep("super"), ep("momo2"), ep("super2", hold=0.3), ep("india"), ep("usa", hold=0.3), WATCH, E["nyk"]]

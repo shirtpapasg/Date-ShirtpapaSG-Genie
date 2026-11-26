@@ -30,10 +30,6 @@
    "silent": 2.6,
    "sfx": [
     [
-     "pad_wonder",
-     0
-    ],
-    [
      "space_warp",
      0.1
     ],

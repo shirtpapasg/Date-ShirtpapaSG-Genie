@@ -28,7 +28,8 @@ flag, ribbon, comic-book sound words, battle-cry letters, the sets vdv2 / rampv2
   four-pictures fix became the five pictures (PEDALS → FRONT GEAR → CHAIN → BACK GEAR → BACK WHEEL) with centred icons. Riders sit on the
   SADDLE only: head-on with a cardboard race plate (it hides Basil's sitting legs), from behind (his back view on the saddle), the
   snail-cam (only his tail shows), or riderless. Uncle Lim is code-drawn, so his feet are on the pedals.
-- **Basil's back view**: the teacher's grey `poses/basil_back.png` recoloured to the v2 teal by `new_poses.py` (no v2 back painting yet).
+- **Basil's back view**: the teacher's NEW coloured back painting (26 Nov, `poses/basil_v2_back.png`), copied by `new_poses.py` (the ride-off,
+  the victory lap, the journey's last rider). Pip's and Momo's coloured backs exist too and are unused here.
 
 ## New emotion paintings: switchable by name (lib.js resolvePose / NEWPOSE_FALLBACK)
 The scenes ask for `pip_embarrassed, pip_panic, pip_proud, pip_angry, pip_dizzy, pip_ride, momo_facepalm, momo_laugh, momo_unimpressed,
@@ -63,4 +64,12 @@ with every line kept the series pace puts it at about 7:10 (the gaps were tighte
 `upload.json` (key `explained-p4-ep01-v2`; replaces FOvUezOZJbo, retire_old; playlists PLK9BW3T6kXx4 and PLPfEuT7l4KjI, both `after`
 FOvUezOZJbo), `thumb.jpg` (LOST TO A SNAIL?!) + `qa/thumb_320.jpg`, chapters `production/youtube/chapters_p3.json` key `P4EP01V2`,
 `app_moments.json` (videos.js P4 entry no. 1, 9 moments), `p4ep01v2.srt`. Heart mystery hint #2 logged in SecondBrain
-`Plans/videos/P4-new-direction.md` (5:28.3, 6 frames).
+`Plans/videos/P4-new-direction.md` (5:28.37-5:28.53, frames 9851-9856 = 6 frames, checked in the video).
+
+## Render (26 Nov 2026)
+One full render of the final code (after the review fixes: the stop-3 / runaway bike without its chain, the cold open's labels clear of the
+battle cry, the SYSTEM bubble clear of the key word, spacing at the bell / ice box / rain tree, the journey riders leaving before the
+pull-out, the cards rising in front at the picks, the coloured back view). `p4ep01v2.mp4`: see the numbers in the main report / finish.log
+(`out/finish.log`): 1920x1080, 30 fps, 12910 frames = 7:10.3, decode 0 errors, -16.0 LUFS, true peak -1.9 dBTP. `sheet.png` (30 stills),
+`p4ep01v2.srt`, `qa/key_frames.jpg`, `qa/review_opening_0-30.mp4` and `qa/review_runaway.mp4` (960 px, with sound, 30 s each: not committed),
+`thumb.jpg` + `qa/thumb_320.jpg`. Intermediates (chunks, the silent video) deleted; `out/mix_p1.wav` kept for a splice.

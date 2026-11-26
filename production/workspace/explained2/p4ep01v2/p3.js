@@ -80,8 +80,8 @@ SC.shrink = (t, s) => { const a = LT("j902"), sh = a + (t - a) > a ? 0 : 0, S_ =
   for (let i = 0; i < 18; i++) { const an = rw + i * Math.PI / 9; wheel += `<path d="M0 0 L${n2(1880 * Math.cos(an))} ${n2(1880 * Math.sin(an))}" stroke="#8C96A2" stroke-width="16"/>`; }
   const world = `<rect x="-6000" y="-6000" width="14000" height="12000" fill="#1E2430"/><rect x="-6000" y="-6000" width="14000" height="12000" fill="url(#rimLight)" opacity=".5"/>` + OP(.85, wheel) + W_.s + x2youLink(t, you);
   const rider = (who, kk) => { const q = JLOOP.at(-kk * JW.pitch + S_ + JW.pitch / 2), [X, Y] = camPt(c, [q.x, q.y - 60]), left = q.seg === "bottom";
-    return bd2(who, X, Y, 170 * c[0], t, { in: s.t0 + .8 + kk * .15, pose: who === "basil" ? "back" : undefined, poses: who === "momo" ? [[0, "sit"], [MK("wave"), "waving"], [MK("wave") + 1.0, "sit"]] : [[0, who === "basil" ? "back" : "sit"]], flip: who === "pip" ? !left : left, look: left ? -6 : 6, tag: false, shadow: false, noreact: true }); };
-  const riders = c[0] > .5 ? rider("pip", 1.2) + rider("momo", 2.5) + rider("basil", 3.8) : "";
+    return bd2(who, X, Y, 170 * c[0], t, { in: s.t0 + .8 + kk * .15, out: MK("jtug") - .5 + kk * .05, pose: who === "basil" ? "back" : undefined, poses: who === "momo" ? [[0, "sit"], [MK("wave"), "waving"], [MK("wave") + 1.0, "sit"]] : [[0, who === "basil" ? "back" : "sit"]], flip: who === "pip" ? !left : left, look: left ? -6 : 6, tag: false, shadow: false, noreact: true }); };
+  const riders = c[0] > .5 ? rider("pip", 1.1) + rider("momo", 2.1) + rider("basil", 3.0) : "";
   const [yx, yy] = camPt(c, [you.x, you.y]);
   return OP(ramp(t, s.t0, 1.0), CAM(world, c[0], c[1], c[2]) + riders
     + youTag(t, s.t0 + .6, "You: one link of a bike chain") + TF(yx, yy - 120 * c[0] - 20, spring(t, s.t0 + .8, .45) * (zo > .3 ? 1.1 : .9), youPill(0, 0, 1))
@@ -192,7 +192,7 @@ function x2bellClose(t, t0, t1, ring, heart, on) { if (t < t0 - .25) return ""; 
 // Basil finishes it: SYSTEM (all three cheer: each learnt it); card 2 stamped READY TO RIDE!; then THE BATTLE CRY TURNED ROUND: all three
 // strike the heroic pose together, ALL PARTS, WORKING TOGETHER! (no wobble; the sting resolves this time)
 SC.system = (t, s) => { const c = camOn([960, 720], 1.0 + .08 * eio(clamp((t - s.t0) / 8)), 960, 600), tK = MK("kw_system"), tc = MK("cry4"), lit = ramp(t, LT("v1010") + .4, .5);
-  window._BUBAT = { pip: [480, 330], momo: [1420, 330], basil: [820, 300] };
+  window._BUBAT = { pip: [480, 330], momo: [1420, 330], basil: [1180, 420] };
   x2said("v1013");
   return x2place("vdv2", TF(1130, 990, .74, bikeP4(t, { chain: 1, brakes: 1, bell: 1, crank: .6, lit: lit * .8 })), c)
     + x2bc(c, "pip", 360, 1076, 380, t, { in: s.t0 - .5, poses: [[0, "sit"], [LE("v1010") + .05, "pointing"], [tK + .05, "cheer"], [tK + 2.0, "sit"], [tc - .05, "hero/arms_crossed"]], look: 8 })
@@ -249,7 +249,7 @@ const treeCam2 = (t) => camMix(camOn([960, 860], 1.18, 960, 700), camOn([960, 56
 SC.tree = (t, s) => { const c = treeCam2(t), tl = (mk, txt, x, y, px, py) => t >= MK(mk) - .1 ? OP(spring(t, MK(mk) - .1, .4), plabel(x, y, txt, ...camPt(c, [px, py]), 44, "#fff")) : "";
   window._BUBAT = { pip: [1240, 460] };
   return x2place("rtp4", TF(1110, 1050, .55, bikeP4(t, { chain: 1, crank: .6, sh: 0, brakes: 1, bell: 1 })), c)
-    + x2bc(c, "pip", 1450, 1062, 380, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("e1103") + .3, "pointing"], [LE("e1103") + .1, "sit"]], look: -4 }) + x2bc(c, "momo", 380, 1062, 340, t, { in: s.t0 - .5, ...watchO(380, 960), poses: [[0, "sit"]] }) + x2bc(c, "basil", 1740, 1062, 380, t, { in: s.t0 - .5, ...watchO(1740, 960), poses: [[0, "sit"]], ...x2grease(t) })
+    + x2bc(c, "pip", 1400, 1062, 380, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("e1103") + .3, "pointing"], [LE("e1103") + .1, "sit"]], look: -4 }) + x2bc(c, "momo", 380, 1062, 340, t, { in: s.t0 - .5, ...watchO(380, 960), poses: [[0, "sit"]] }) + x2bc(c, "basil", 1800, 1062, 380, t, { in: s.t0 - .5, ...watchO(1800, 960), poses: [[0, "sit"]], ...x2grease(t) })
     + tl("rts", "roots", 640, 780, 830, 785) + tl("stm", "stem (trunk)", 640, 560, 935, 560) + tl("lv", "leaves", 1240, 250, 1260, 230) + x2HUD(t); };
 
 /* ================================================================ WORDS · THE WORDS THAT EARN MARKS ================================================================ */

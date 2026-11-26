@@ -166,12 +166,13 @@ SC.lock = (t, s) => { const r0 = MK("ring0_fix"), bell = MK("bell_fix"), D = Mat
    battle-cry pose facing the wrong way, so Momo's and Pip's paws meet empty air */
 SC.picks = (t, s) => { window._BUBAT = { pip: [960, 560], basil: [560, 560], momo: [1360, 560] }; const up = eio((t - s.t0) / .6), y = lerp(850, 300, up), k = lerp(.42, .48, up), tp = s.t0 + .3;
   const hf = LT("p208") + .3, ms = MK("miss1");
-  return bg("stage") + x2cards(t, y, k, { glow: (n) => t >= tp + (n - 1) * .25 ? .6 : 0 })
+  const cardsUp = x2cards(t, y, k, { glow: (n) => t >= tp + (n - 1) * .25 ? .6 : 0 });   // drawn over the buddies while they rise past them (EP27's rule)
+  return bg("stage") + (up >= 1 ? cardsUp : "")
     + x2bd("basil", CX3[0], 1076, 360, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "sit"], [tp, "hero/arms_crossed"], [LE("p209") + .1, "sit"]], look: -6, noreact: true })
     + windV2(t, CX3[0] - 40, 860, 300, ss(tp, tp + .2, t) * (1 - ss(ms + 1.2, ms + 1.5, t)))
     + x2bd("pip", CX3[1], 1076, 360, t, { in: s.t0 - .5, poses: [[s.t0, "sit"], [tp + .25, "proud/arms_crossed"], [hf, "hi5/cheer"], [ms + .35, "embarrassed/oops"], [LT("p209") + .4, "sit"]], look: t > hf && t < ms + .3 ? -10 : 0, flip: t > hf && t < ms + .35 })
     + (t < hf || t > ms + .3 ? x2held([1, 960, 540], "pip", CX3[1], 1076, 360, false, TF(0, 0, .45, clipboardV2(t, {})), -40, 30) : "")
     + x2bd("momo", CX3[2], 1076, 360, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "sit"], [tp + .5, "pointing"], [LT("p208") - .1, "sit"], [hf, "hi5/cheer"], [ms + .35, "unimpressed"], [LT("p209") + .4, "sit"]], look: t > hf && t < ms + .3 ? -12 : -3 })
     + x2whiff(t, ms, 760, 640) + (t >= ms - .05 && t < ms + .6 ? comicWord(t, ms + .4, 760, 520, "bwop.", { size: 40, tiny: true, col: "#fff", d: .6 }) : "")
-    + x2rewind(t, MK("rew") - .3, s.t1 - MK("rew") + .3, "10 MINUTES EARLIER")
+    + (up < 1 ? cardsUp : "") + x2rewind(t, MK("rew") - .3, s.t1 - MK("rew") + .3, "10 MINUTES EARLIER")
     + (t >= s.t0 ? x2raceClock(t, x2secs(t), 1) : "") + x2HUD(t); };
