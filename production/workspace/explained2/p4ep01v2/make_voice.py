@@ -1,4 +1,4 @@
-"""make_voice.py: every spoken line of P4 EP1 v2 "The Great Void Deck Race" (v2, 26 Nov 2026: + the guest voice UNCLE LIM ("lim", two lines; test clip
+"""make_voice.py: every spoken line of P4 EP1 v2 "The Great Void Deck Race" (v2, 26 Nov 2026: + the guest voice UNCLE LIM ("lim", two lines, a light Singlish flavour: "lah", "mah", "Aiyoh" shaped by ../sg_pron.py shape_particles; test clip
 ../pron_clips/UncleLim_p4ep01v2_voice_test.mp3 for the teacher) and Heart's movie-trailer voice (opts "trailer": the same words, pitched down 3
 semitones, a big hall reverb), on top of v1's engine). v1's header: every spoken line of P4 EP1 "The Great Bike Breakdown" (engine copied from EP27 unchanged: EXTRA words, the "slowof" slow-motion line;
 P4 EP1 adds the guest voice CHILLI below, for one line, e1102g; the teacher hears it before upload: qa/chilli_voice_test.wav) -> voice/<id>.wav (48 kHz mono) + voice/<id>.json (word times, mouth track).
@@ -42,7 +42,7 @@ import pocketsphinx
 from pocketsphinx import Decoder
 D = "/home/user/heart-tts"; SR = 24000; V = f"{H}/voice"; os.makedirs(V, exist_ok=True)
 sys.path.insert(0, os.path.join(H, ".."))
-from sg_pron import needs_fix, speak_line   # the teacher's approved pronunciations (../PRONUNCIATION.md): Sungei Buloh, Semakau, "live"
+from sg_pron import needs_fix, speak_line, shape_particles   # the teacher's approved pronunciations (../PRONUNCIATION.md): Sungei Buloh, Semakau, "live"
 class _FixK:
     """Kokoro, but any text with a name or word on the pronunciation list is said through sg_pron.speak_line (Heart and the buddies)."""
     def __init__(self, k): self.k = k
@@ -186,7 +186,7 @@ def crowd(id, text, hid):
     write_group(id, tracks, n, ws, {"text": text, "len": Dh + .1})
 
 dic = set(l.split()[0].split("(")[0] for l in open(os.path.join(pocketsphinx.get_model_path(), "en-us", "cmudict-en-us.dict")))
-EXTRA = {"bobs": "B AA B Z", "fragyle": "F R AE JH AY L", "letterboxes": "L EH T ER B AA K S AH Z", "ice-cream": "AY S K R IY M", "caterpillar": "K AE T ER P IH L ER", "t-shirt": "T IY SH ER T", "ice-cream": "AY S K R IY M", "aluminium": "AE L Y UW M IH N IY AH M", "kiln": "K IH L N", "ooze": "UW Z", "mould": "M OW L D", "fungi": "F AH N JH AY", "you'll": "Y UW L", "i'm": "AY M", "milks": "M IH L K S", "biscuits": "B IH S K AH T S", "noodle": "N UW D AH L", "ceramic": "S ER AE M IH K", "metals": "M EH T AH L Z", "materials": "M AH T IH R IY AH L Z", "mudskipper": "M AH D S K IH P ER", "mudskippers": "M AH D S K IH P ER Z", "warm-up": "W AO R M AH P", "non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
+EXTRA = {"lah": "L AA", "mah": "M AA", "aiyoh": "AY Y OW", "bobs": "B AA B Z", "fragyle": "F R AE JH AY L", "letterboxes": "L EH T ER B AA K S AH Z", "ice-cream": "AY S K R IY M", "caterpillar": "K AE T ER P IH L ER", "t-shirt": "T IY SH ER T", "ice-cream": "AY S K R IY M", "aluminium": "AE L Y UW M IH N IY AH M", "kiln": "K IH L N", "ooze": "UW Z", "mould": "M OW L D", "fungi": "F AH N JH AY", "you'll": "Y UW L", "i'm": "AY M", "milks": "M IH L K S", "biscuits": "B IH S K AH T S", "noodle": "N UW D AH L", "ceramic": "S ER AE M IH K", "metals": "M EH T AH L Z", "materials": "M AH T IH R IY AH L Z", "mudskipper": "M AH D S K IH P ER", "mudskippers": "M AH D S K IH P ER Z", "warm-up": "W AO R M AH P", "non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
          "lock-in": "L AA K IH N", "pe": "P IY IY", "windscreen": "W IH N D S K R IY N", "oh-pake": "OW P EY K", "mcaw": "M AH K AO", "koi": "K OY", "dragonfly": "D R AE G AH N F L AY", "goldfish": "G OW L D F IH SH", "eco-garden": "IY K OW G AA R D AH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
          "aww": "AA", "recycling": "R IY S AY K L IH NG", "organiser": "AO R G AH N AY Z ER", "showdown": "SH OW D AW N", "papaya": "P AH P AY AH",
          "toa": "T OW AH", "payoh": "P AA Y OW", "mynah": "M AY N AH", "dit": "D IH T", "wines": "W AY N Z", "squish": "S K W IH SH", "buddies": "B AH D IY Z",
@@ -288,6 +288,10 @@ for it in SEQ:
     else: x, sr = heart(text, o.get("excited", False), o.get("gap", .5), o.get("speed", .90), o.get("term", ()), o.get("soft", False)) if who == "heart" else buddy(who, text, **({"gap": o["gap"]} if "gap" in o else {}))
     if o.get("trailer"): x = trailer_fx(x, sr)
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
+    if who == "lim":   # v2 (teacher, 26 Nov: "lacking the singlish element"): his particles said the Singapore way (../sg_pron.py SG_PARTICLES)
+        w0, ok0 = align(text, f)
+        if ok0: x, rep = shape_particles(x, 48000, w0); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16"); print("   singlish:", rep)
+        else: print("   singlish: NOT shaped (alignment failed)")
     words, ok = align(text, f)
     if kn is not None: D_ = len(x) / 48000; words = [{"w": "Now", "a": .005, "b": round(sw[1]["a"], 3)}, {"w": "you", "a": round(sw[1]["a"], 3), "b": round(kn, 3)}, {"w": "know!", "a": round(kn, 3), "b": round(D_, 3)}]; ok = True
     if not ok: bad.append(id)

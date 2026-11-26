@@ -36,6 +36,10 @@ FIX = {
     # Explored EP11 (Opus, 2026-11-24; WAITING FOR THE TEACHER'S LISTEN, clip pron_clips/Heart_explored11_new_words.mp3):
     # Kokoro's own "Tampines" is "tˈæmpaɪnz" ("TAM-pines"); the Singapore way is "TAM-pin-ees". EP11 only shows it on its map.
     "Tampines": {"ph": "tˈæmpɪnˌiːs"},
+    # P4 EP1 v2 (Opus, 2026-11-26; WAITING FOR THE TEACHER'S LISTEN, clip pron_clips/UncleLim_p4ep01v2_voice_test.mp3): Uncle Lim's Singlish
+    # exclamation. Kokoro's own "Aiyoh" is "ˈeɪjoʊ" ("AY-yo", as in "day"); the Singapore sound is "EYE-yoh". Its falling tune is added after
+    # recording by shape_particles() below (SG_PARTICLES), not here.
+    "Aiyoh": {"ph": "ˈaɪjˌoʊ"},
     # "cicada": NO entry. The teacher listened (23 Nov 2026, EP18 clip) and chose Kokoro's own "sih-KAY-duh" over "sih-KAH-duh".
 }
 _tok = None
@@ -108,3 +112,55 @@ def speak_line(k, text, voice="af_heart", speed=0.90, lang="en-us", gap_in=0.08,
         if j: out.append(np.zeros(int(sr * (gap_out if pieces[j - 1][0] == "name" else gap_in)), np.float32))
         out.append(a)
     return np.concatenate(out), sr
+
+
+# ---- Singlish particles (P4 EP1 v2, Uncle Lim; Opus, 2026-11-26; WAITING FOR THE TEACHER'S LISTEN) ----------------------------------------
+# Kokoro says "lah" and "mah" as long, sung English "laaa" / "maaa" with a question-like or a stretched ending. Said the Singapore way, a final
+# particle is SHORT and its tune is LEVEL then FALLING, with a small breath of a pause before it ("Slowly, slowly ... lah."). The words
+# are recorded in the normal pass (so they join the voice naturally); then, using the line's word times, shape_particles():
+#   pause: makes sure there is at least this much silence before the particle (inserted at the word start, short fades);
+#   dur:   squeezes the particle to at most this long (Praat duration tier, pitch kept);
+#   fall:  holds the pitch level for the first third, then glides down this many semitones to the end;
+# "aiyoh" falls on its second half ("aiYOH" -> a sighing "yoh"). "one" (the emphatic "win one") and "where got" are left to Kokoro: they
+# are ordinary English sounds.
+SG_PARTICLES = {
+    "lah": {"pause": .08, "dur": .30, "fall": 3.0, "hold": .35},
+    "mah": {"pause": .08, "dur": .30, "fall": 3.0, "hold": .35},
+    "aiyoh": {"pause": 0, "dur": .62, "fall": 4.0, "hold": .5},
+}
+
+def shape_particles(audio, sr, words, table=None, floor=60, ceil=320):
+    """audio: one recorded line (float, mono); words: [{"w": word as in the script, "a": start s, "b": end s}] for that audio.
+    Returns the reshaped audio (pauses, length and tune of every particle in `table`, default SG_PARTICLES) and a report list."""
+    import parselmouth
+    from parselmouth.praat import call
+    table = table or SG_PARTICLES
+    x = np.asarray(audio, np.float64); rep = []
+    hits = [(i, w) for i, w in enumerate(words) if re.sub(r"[^a-z]", "", w["w"].lower()) in table]
+    for i, w in sorted(hits, key=lambda h: -h[1]["a"]):          # from the end, so earlier word times stay valid
+        cfg = table[re.sub(r"[^a-z]", "", w["w"].lower())]; a, b = w["a"], w["b"]
+        b = min(b, len(x) / sr)
+        if i + 1 < len(words): b = min(b, words[i + 1]["a"])
+        ia, ib = int(a * sr), int(b * sr)
+        seg = x[ia:ib].copy()
+        if len(seg) < int(.05 * sr): continue
+        snd = parselmouth.Sound(seg, sr); man = call(snd, "To Manipulation", 0.01, floor, ceil)
+        d0 = snd.get_total_duration(); pt = call(man, "Extract pitch tier")
+        f0 = call(snd.to_pitch(time_step=.01, pitch_floor=floor, pitch_ceiling=ceil), "Get quantile", 0, d0 * .4, .5, "Hertz")
+        if f0 and f0 == f0:
+            t1 = d0 * cfg["hold"]
+            call(pt, "Remove points between", 0, d0); call(pt, "Add point", 0.0, f0); call(pt, "Add point", t1, f0)
+            call(pt, "Add point", d0, f0 * 2 ** (-cfg["fall"] / 12)); call([pt, man], "Replace pitch tier")
+        fac = min(1.0, cfg["dur"] / d0)
+        if fac < .98:
+            dt = call("Create DurationTier", "d", 0, d0); call(dt, "Add point", 0, fac); call([dt, man], "Replace duration tier")
+        y = call(man, "Get resynthesis (overlap-add)").values[0]
+        n = min(len(y), int(.012 * sr)); y[-n:] *= np.linspace(1, 0, n)
+        gap = a - (words[i - 1]["b"] if i else 0.0); add = max(0.0, cfg["pause"] - gap) if i else 0.0
+        pre = x[:ia].copy()
+        if add > 0:
+            n = min(len(pre), int(.01 * sr)); pre[-n:] *= np.linspace(1, 0, n)
+            pre = np.concatenate([pre, np.zeros(int(add * sr))])
+        x = np.concatenate([pre, y, x[ib:]])
+        rep.append({"w": w["w"], "was": round(d0, 3), "now": round(len(y) / sr, 3), "f0": round(float(f0 or 0), 1), "fall": cfg["fall"], "pause_added": round(add, 3)})
+    return x.astype(np.float32), rep

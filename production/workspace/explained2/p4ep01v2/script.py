@@ -13,7 +13,7 @@
 
 SEQ items as EP27: ("scene", name) · ("say", id, who, text, {opts}) · ("wait", s) · ("mark", name) · ("hold", mark, secs, gap) ·
 ("unison", id, text, {opts}). say opt "trailer": Heart's movie-trailer voice (the same words, pitched down 3 semitones, a big hall reverb:
-make_voice.py). Guest: Uncle Lim ("lim"), two lines ("Slowly, slowly.").
+make_voice.py). Guest: Uncle Lim ("lim"), two lines, warm light Singlish (teacher 26 Nov: "lacking the singlish element"): "Slowly, slowly lah. Where got need to rush?" and "Aiyoh, boy. Slowly, slowly also can win one, mah. Every part working together!".
 """
 import re, os
 H, P, B, M, L = "heart", "pip", "basil", "momo", "lim"
@@ -135,7 +135,7 @@ SEQ1 = [
  ("say", "r701", H, "In a world... where one lizard thought a bell was too heavy... one race decides everything.", o(pre=.3, trailer=True, kw=[["tr1", "world"], ["tr2", "where"], ["tr3", "one", 1]])),
  ("say", "r702", P, "Helmets on. Ready, steady, GO!", o(pre=.5, post=0, kw=[["helm", "helmets"], ["go", "go"]])),
  ("mark", "racego"), ("wait", 5.4),
- ("say", "r703", L, "Slowly, slowly.", o(pre=.2, post=.4)),
+ ("say", "r703", L, "Slowly, slowly lah. Where got need to rush?", o(pre=.2, post=.4)),
  ("mark", "slump"), ("wait", .9), ("mark", "toot"), ("wait", .75),
  ("say", "r703m", M, "Was that the bike?", o(pre=0, post=.1)),
  ("say", "r703b", B, "Yes.", o(pre=.3, post=.7)),
@@ -216,7 +216,7 @@ SEQ1 = [
  ("say", "e1301", H, "But wait. Somebody is still racing!", o(pre=.3)),
  ("unison", "e1302", "Go, snail, go!", {"pre": .3, "post": .1}),
  ("mark", "cross"), ("wait", 2.4),
- ("say", "e1303", L, "Slowly, slowly. Every part working.", o(pre=.2)),
+ ("say", "e1303", L, "Aiyoh, boy. Slowly, slowly also can win one, mah. Every part working together!", o(pre=.2)),
  ("mark", "clap"), ("wait", 1.6),
  ("say", "e1304", H, "Picked fix two? You win a point, and so does Pip!", o(post=.5, kw=[["coin1", "point"]])),
  # ---- kwrecap, "Now you know!", the outro (Chilli hops in, wordless)

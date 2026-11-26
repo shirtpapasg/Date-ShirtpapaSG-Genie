@@ -17,15 +17,17 @@ const mittGrip = (x, y, k = 1, dark = false) => TF(x, y, k, `<ellipse cx="0" cy=
 // a relaxed mitten hand hanging down (front view), origin = the wrist
 const mittHang = (x, y, k = 1, fl = 1) => TF(x, y, k, `<g transform="scale(${fl} 1)"><path d="M-14 -4 Q-18 22 -8 34 Q4 40 14 30 Q20 14 14 -4z" fill="${LIM.skin}" stroke="${LIM.ink}" stroke-width="5" stroke-linejoin="round"/><path d="M-14 6 q-10 6 -8 16" stroke="${LIM.ink}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-4 24 v8 M4 24 v9" stroke="${LIM.skin2}" stroke-width="3"/></g>`);
 // a short sleeve over the top of an arm (from the shoulder s towards the elbow e, covering frac of it)
-const sleeveL = (s, e, frac = .55, w = 46) => { const m = [s[0] + (e[0] - s[0]) * frac, s[1] + (e[1] - s[1]) * frac]; return limbL([s, m], w, LIM.shirt) + `<path d="M${n2(m[0] - 6)} ${n2(m[1] - 3)} l12 6" stroke="${LIM.shirt2}" stroke-width="5" stroke-linecap="round"/>`; };
+const sleeveL = (s, e, frac = .5, w = 42) => { const m = [s[0] + (e[0] - s[0]) * frac, s[1] + (e[1] - s[1]) * frac], L = Math.hypot(m[0] - s[0], m[1] - s[1]) || 1, nx = -(m[1] - s[1]) / L * w / 2, ny = (m[0] - s[0]) / L * w / 2;
+  const a = [s[0] + nx, s[1] + ny], b = [m[0] + nx * 1.08, m[1] + ny * 1.08], c = [m[0] - nx * 1.08, m[1] - ny * 1.08], d = [s[0] - nx, s[1] - ny], P = (p) => `${n2(p[0])} ${n2(p[1])}`;
+  return `<path d="M${P(a)} L${P(b)} L${P(c)} L${P(d)} A${n2(w / 2)} ${n2(w / 2)} 0 0 0 ${P(a)}z" fill="${LIM.shirt}" stroke="${LIM.ink}" stroke-width="5" stroke-linejoin="round"/><path d="M${P([b[0] * .8 + c[0] * .2 + (s[0] - m[0]) * .12, b[1] * .8 + c[1] * .2 + (s[1] - m[1]) * .12])} L${P([c[0] * .8 + b[0] * .2 + (s[0] - m[0]) * .12, c[1] * .8 + b[1] * .2 + (s[1] - m[1]) * .12])}" stroke="${LIM.shirt2}" stroke-width="4" stroke-linecap="round"/>`; };
 // the side-view torso (shirt), from the hip h up to the shoulder s, facing right
 function limTorsoSide(h, s) { const ang = Math.atan2(s[0] - h[0], h[1] - s[1]), c = Math.cos(ang), sn = Math.sin(ang), P = (u, v) => [h[0] + u * c + v * sn, h[1] + u * sn - v * c];   // u: across (+ = front), v: up
-  const pts = [P(-58, -6), P(54, -6), P(66, 70), P(56, 170), P(40, 232), P(-50, 236), P(-62, 160), P(-66, 60)];
+  const pts = [P(-56, -6), P(52, -6), P(68, 56), P(60, 130), P(40, 184), P(0, 198), P(-34, 192), P(-54, 166), P(-62, 110), P(-62, 50)];
   let s_ = `<path d="M${pts.map((p) => n2(p[0]) + " " + n2(p[1])).join(" L")}Z" fill="${LIM.shirt}" stroke="${LIM.ink}" stroke-width="6" stroke-linejoin="round"/>`;
-  for (let j = 1; j < 7; j++) { const a = P(-60, j * 34), b = P(60, j * 34); s_ += `<path d="M${n2(a[0])} ${n2(a[1])} L${n2(b[0])} ${n2(b[1])}" stroke="${LIM.check}" stroke-width="3" opacity=".35"/>`; }
-  for (let i = -2; i <= 2; i++) { const a = P(i * 24, 4), b = P(i * 24, 228); s_ += `<path d="M${n2(a[0])} ${n2(a[1])} L${n2(b[0])} ${n2(b[1])}" stroke="#fff" stroke-width="3" opacity=".4"/>`; }
-  const f1 = P(30, 40), f2 = P(10, 110), f3 = P(-30, 60), f4 = P(-40, 140); s_ += `<path d="M${n2(f1[0])} ${n2(f1[1])} Q${n2(f2[0])} ${n2(f2[1])} ${n2(f2[0] - 4)} ${n2(f2[1] + 20)} M${n2(f3[0])} ${n2(f3[1])} Q${n2(f4[0])} ${n2(f4[1])} ${n2(f4[0] + 6)} ${n2(f4[1] + 24)}" stroke="${LIM.shirt2}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
-  const c1 = P(40, 222), c2 = P(10, 240), c3 = P(54, 208); s_ += `<path d="M${n2(c1[0])} ${n2(c1[1])} L${n2(c2[0])} ${n2(c2[1])} L${n2(c3[0])} ${n2(c3[1])}" stroke="${LIM.ink}" stroke-width="5" fill="#fff"/>`;   // the collar
+  for (let j = 1; j < 6; j++) { const a = P(-58, j * 32), b = P(58, j * 32); s_ += `<path d="M${n2(a[0])} ${n2(a[1])} L${n2(b[0])} ${n2(b[1])}" stroke="${LIM.check}" stroke-width="3" opacity=".35"/>`; }
+  for (let i = -2; i <= 2; i++) { const a = P(i * 24, 4), b = P(i * 24, 182); s_ += `<path d="M${n2(a[0])} ${n2(a[1])} L${n2(b[0])} ${n2(b[1])}" stroke="#fff" stroke-width="3" opacity=".4"/>`; }
+  const f1 = P(30, 30), f2 = P(10, 90), f3 = P(-30, 50), f4 = P(-40, 110); s_ += `<path d="M${n2(f1[0])} ${n2(f1[1])} Q${n2(f2[0])} ${n2(f2[1])} ${n2(f2[0] - 4)} ${n2(f2[1] + 20)} M${n2(f3[0])} ${n2(f3[1])} Q${n2(f4[0])} ${n2(f4[1])} ${n2(f4[0] + 6)} ${n2(f4[1] + 24)}" stroke="${LIM.shirt2}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  const c1 = P(38, 178), c2 = P(8, 196), c3 = P(52, 166); s_ += `<path d="M${n2(c1[0])} ${n2(c1[1])} L${n2(c2[0])} ${n2(c2[1])} L${n2(c3[0])} ${n2(c3[1])}" stroke="${LIM.ink}" stroke-width="5" fill="#fff"/>`;   // the collar
   return s_; }
 // the side-view leg from the hip to a pedal p (thigh in the shorts, the shin, a sandal on the pedal); far = darker
 function limLegSide(hip, p, far) { const ft = [p[0] + 4, p[1] - 12], kn = ik2(hip, ft, 205, 205, -1), m = [hip[0] + (kn[0] - hip[0]) * .78, hip[1] + (kn[1] - hip[1]) * .78];
@@ -34,21 +36,24 @@ function limLegSide(hip, p, far) { const ft = [p[0] + 4, p[1] - 12], kn = ik2(hi
     + `<path d="M${n2(ft[0] - 30)} ${n2(ft[1] + 14)} Q${n2(ft[0] - 30)} ${n2(ft[1] - 8)} ${n2(ft[0] + 2)} ${n2(ft[1] - 6)} Q${n2(ft[0] + 40)} ${n2(ft[1])} ${n2(ft[0] + 42)} ${n2(ft[1] + 14)}Z" fill="${far ? "#4E3424" : LIM.sandal}" stroke="${LIM.ink}" stroke-width="4"/>`; }
 
 /* FACES: right */ function limRideV2(t, o = {}) { const cr = o.crank || 0, sip = o.sip || 0; let s = "";
-  const hip = [RD.ST[0] + 4, RD.ST[1] - 26], sh = [hip[0] + 42, hip[1] - 232], nk = [sh[0] + 14, sh[1] - 18], grip = [RD.HT[0] - 112, RD.HT[1] - 70], bell = [RD.HT[0] - 46, RD.HT[1] - 96];
+  const hip = [RD.ST[0] + 4, RD.ST[1] - 26], sh = [hip[0] + 34, hip[1] - 186], nk = [sh[0] + 12, sh[1] - 16], grip = [RD.HT[0] - 112, RD.HT[1] - 70], bell = [RD.HT[0] - 46, RD.HT[1] - 96];
   const ped = (a) => V2.add(RD.BB, V2.pol(RD.crank, a));
   // behind the bike: the far leg, the far arm to the far grip
   s += limLegSide([hip[0] + 8, hip[1] + 4], ped(cr + Math.PI), true);
-  { const g = [grip[0] - 6, grip[1] - 4], el = ik2([sh[0] - 6, sh[1] + 8], g, 140, 140, 1); s += limbL([[sh[0] - 6, sh[1] + 8], el, g], 26, LIM.skin2) + mittGrip(g[0], g[1], .95, true); }
+  { const g = [grip[0] - 6, grip[1] - 4], el = ik2([sh[0] - 12, sh[1] + 24], g, 150, 150, 1); s += limbL([[sh[0] - 12, sh[1] + 24], el, g], 26, LIM.skin2) + mittGrip(g[0], g[1], .95, true); }
   s += roadsterV2(t, { ...o, stand: o.stand === undefined ? false : o.stand, kopi: sip > 0 ? false : o.kopi });
   // the seat on the saddle (shorts), the torso, the near leg
   s += `<ellipse cx="${n2(hip[0] + 6)}" cy="${n2(hip[1] - 4)}" rx="70" ry="40" fill="${LIM.shorts}" stroke="${LIM.ink}" stroke-width="6"/>`;
   s += limTorsoSide(hip, sh);
   s += limLegSide(hip, ped(cr), false);
+  const shA = [sh[0] - 6, sh[1] + 22]; let sipArm = "";
   // the near arm: to the grip (riding), to the bell (ringing), or lifting the kopi to his mouth (stopped)
-  if (sip > 0) { const hd = [nk[0] + 62, nk[1] - 26], el = ik2(sh, hd, 140, 140, 1); s += TF(hd[0] + 6, hd[1] + 70, .8, kopiBag(1, 1)) + limbL([sh, el, hd], 28, LIM.skin) + sleeveL(sh, el) + mittGrip(hd[0], hd[1], 1); }
-  else { const g = o.ring ? bell : grip, el = ik2(sh, g, 140, 140, 1); s += limbL([sh, el, g], 28, LIM.skin) + sleeveL(sh, el) + mittGrip(g[0], g[1], 1); }
+  if (sip > 0) { const e = eio(clamp(sip / .7)), up = [nk[0] + 2, nk[1] + 88], hd = [lerp(grip[0], up[0], e), lerp(grip[1], up[1], e)], e0 = ik2(shA, grip, 150, 150, 1), el = [lerp(e0[0], shA[0] + 44, e), lerp(e0[1], shA[1] + 112, e)];   // the bag held round its middle, the straw to his mouth
+    sipArm = limbL([shA, el, hd], 28, LIM.skin) + sleeveL(shA, el) + TF(hd[0], hd[1] + 10, 1.1, kopiBag(1, 1)) + mittGrip(hd[0], hd[1], .8); }   // drawn over the head (the straw at his lips)
+  else { const g = o.ring ? bell : grip, el = ik2(shA, g, 150, 150, 1); s += limbL([shA, el, g], 28, LIM.skin) + sleeveL(shA, el) + mittGrip(g[0], g[1], 1); }
   s += limbL([[sh[0] - 4, sh[1] + 6], nk], 30, LIM.skin);   // the neck
-  s += `<g transform="translate(${n2(nk[0] + 4)} ${n2(nk[1] + 14)}) rotate(4)">${limHead({ look: .9, sip: sip > .7, blink: o.blink, smile: .8 })}</g>`;
+  s += `<g transform="translate(${n2(nk[0] + 4)} ${n2(nk[1] + 16)}) rotate(4) scale(1.12)">${limHead({ look: .9, sip: sip > .75, blink: o.blink, smile: .8 })}</g>`;
+  s += sipArm;
   return s; }
 
 /* FACES: none (front view, he never travels in it) */ function limStand(t, o = {}) { const nod = o.nod || 0, sip = o.sip || 0, bob = 2 * Math.sin(t * 2.2); let s = "";
@@ -68,15 +73,17 @@ function limLegSide(hip, p, far) { const ft = [p[0] + 4, p[1] - 12], kn = ik2(hi
   // arms: shoulder -> elbow -> wrist, a short sleeve, a mitten (or an open hand to wave); right = +x
   const arm = (sx, el, wr, hand) => { const shp = [sx * 70, -404]; return limbL([shp, el, wr], 26, LIM.skin) + sleeveL(shp, el, .6, 48) + hand; };
   const L_ = o.wave ? arm(-1, [-120, -470], [-118 + 8 * Math.sin(t * 9), -560], handL(-118 + 8 * Math.sin(t * 9), -556, 1.05, 0, -1)) : arm(-1, [-86, -320], [-88, -240], mittHang(-88, -238, 1, -1));
-  const R_ = sip > 0 ? (() => { const hd = [lerp(88, 34, sip), lerp(-240, -478, sip)]; return TF(hd[0] + 4, hd[1] + 60, .85, kopiBag(1, sip > .7 ? 1 : 0)) + arm(1, [lerp(86, 104, sip), lerp(-320, -360, sip)], hd, mittGrip(hd[0], hd[1], 1)); })()
+  const R_ = sip > 0 ? (() => { const e = eio(clamp(sip / .7)), hd = [lerp(88, -16, e), lerp(-240, -380, e)]; return arm(1, [lerp(86, 118, e), lerp(-320, -330, e)], hd, TF(hd[0], hd[1] + 12, .85, kopiBag(1, sip > .75 ? 1 : 0)) + mittGrip(hd[0], hd[1], .95)); })()
     : o.bag ? arm(1, [90, -320], [92, -242], TF(92, -170, .85, kopiBag(1)) + mittGrip(92, -236, .95)) : arm(1, [86, -320], [88, -240], mittHang(88, -238, 1, 1));
   s += limbL([[0, -436], [0, -424]], 40, LIM.skin);   // the neck
-  s += L_ + R_;
-  s += `<g transform="translate(0 -428) rotate(${n2(nod * 57)})">${limHead({ sip: sip > .7, smile: o.smile, laugh: o.laugh, blink: o.blink || (Math.floor(t * .3 + .4) !== Math.floor(t * .3 + .43)), helmet: o.helmet, look: o.look })}</g></g>`;
+  s += L_ + (sip > 0 ? "" : R_);
+  s += `<g transform="translate(0 -428) rotate(${n2(nod * 57)})">${limHead({ sip: sip > .75, smile: o.smile, laugh: o.laugh, blink: o.blink || (Math.floor(t * .3 + .4) !== Math.floor(t * .3 + .43)), helmet: o.helmet, look: o.look })}</g>`;
+  if (sip > 0) s += R_;   // the sipping hand over his chin (the straw at his lips)
+  s += `</g>`;
   return s; }
 
 // head-on (towards the camera) and from behind: the same man, both hands on the grips (mittens), shirt with checks and folds, the seat on the saddle
-function limArmsBars(front) { let s = ""; for (const sx of [-1, 1]) { const shp = [sx * 72, -600], g = [sx * 200, -452], el = ik2(shp, g, 120, 120, sx * (front ? -1 : 1)); s += limbL([shp, el, g], 28, LIM.skin) + sleeveL(shp, el, .55, 50) + mittGrip(g[0], g[1], 1.05); } return s; }
+function limArmsBars(front) { let s = ""; for (const sx of [-1, 1]) { const shp = [sx * 72, -600], g = front ? [sx * 200, -452] : [sx * 188, -394], el = ik2(shp, g, front ? 110 : 124, front ? 110 : 124, sx * (front ? -1 : 1)); s += limbL([shp, el, g], 28, LIM.skin) + sleeveL(shp, el, .55, 50) + mittGrip(g[0], g[1], 1.05); } return s; }
 function limTorsoFront(back) { let s = `<path d="M-80 -620 Q-90 -520 -72 -418 Q0 -404 72 -418 Q90 -520 80 -620 Q0 -646 -80 -620z" fill="${LIM.shirt}" stroke="${LIM.ink}" stroke-width="6" stroke-linejoin="round"/>`;
   for (let i = -3; i <= 3; i++) s += `<path d="M${i * 22} -636 Q${i * 24} -520 ${i * 22} -414" stroke="#fff" stroke-width="3.5" opacity=".45" fill="none"/>`; for (let j = 0; j < 7; j++) s += `<path d="M-80 ${-604 + j * 28} Q0 ${-598 + j * 28} 80 ${-604 + j * 28}" stroke="${LIM.check}" stroke-width="3" opacity=".35" fill="none"/>`;
   s += `<path d="M-46 -500 q16 24 6 56 M48 -530 q-14 26 -4 56" stroke="${LIM.shirt2}" stroke-width="5" fill="none" stroke-linecap="round"/>`;
@@ -101,5 +108,5 @@ function limTorsoFront(back) { let s = `<path d="M-80 -620 Q-90 -520 -72 -418 Q0
   for (const [sx, a] of [[-1, cr], [1, cr + Math.PI]]) { const py = -100 + 70 * Math.sin(a), kn = [sx * 74, -250 + 26 * Math.sin(a)], hp = [sx * 38, -420], ft = [sx * 66, py - 4];
     s += limbL([hp, kn], 54, LIM.shorts) + limbL([kn, ft], 32, LIM.skin) + `<path d="M${sx * 66 - 24} ${n2(py)} h48 v12 h-48z" fill="${LIM.sandal}" stroke="${LIM.ink}" stroke-width="4"/>`; }
   s += `<ellipse cx="0" cy="-430" rx="84" ry="36" fill="${LIM.shorts}" stroke="${LIM.ink}" stroke-width="6"/>` + limTorsoFront(true) + limArmsBars(false);
-  s += limbL([[0, -640], [0, -626]], 40, LIM.skin) + `<g transform="translate(0 -650)"><ellipse cx="0" cy="-60" rx="58" ry="62" fill="${SKINL}" stroke="${INKL}" stroke-width="5"/><ellipse cx="-56" cy="-56" rx="11" ry="16" fill="${SKINL}" stroke="${INKL}" stroke-width="4"/><ellipse cx="56" cy="-56" rx="11" ry="16" fill="${SKINL}" stroke="${INKL}" stroke-width="4"/><path d="M-56 -70 Q-58 -20 -30 -6 Q0 0 30 -6 Q58 -20 56 -70 Q0 -60 -56 -70z" fill="#F4F4F4" stroke="#C9C9C9" stroke-width="3"/><path d="M-64 -82 Q-66 -150 0 -156 Q66 -150 64 -82 Q0 -70 -64 -82z" fill="url(#helmW)" stroke="${INKL}" stroke-width="5"/><path d="M-30 -150 Q-34 -118 -30 -84 M0 -156 V-72 M30 -150 Q34 -118 30 -84" stroke="#B9C3CF" stroke-width="7" fill="none"/><path d="M-58 -78 Q-56 -40 -36 -20 M58 -78 Q56 -40 36 -20" stroke="#3B4149" stroke-width="5" fill="none"/></g>`;
+  s += limbL([[0, -640], [0, -626]], 40, LIM.skin) + `<g transform="translate(0 -650)"><ellipse cx="0" cy="-60" rx="58" ry="62" fill="${SKINL}" stroke="${INKL}" stroke-width="5"/><ellipse cx="-56" cy="-56" rx="11" ry="16" fill="${SKINL}" stroke="${INKL}" stroke-width="4"/><ellipse cx="56" cy="-56" rx="11" ry="16" fill="${SKINL}" stroke="${INKL}" stroke-width="4"/><path d="M-60 -86 Q-62 -40 -40 -22 Q-20 -30 0 -26 Q20 -30 40 -22 Q62 -40 60 -86z" fill="#B8BCC4" stroke="#8D929B" stroke-width="3"/>${[-36, -18, 0, 18, 36].map((x) => `<path d="M${x} -80 q${x > 0 ? 4 : -4} 24 ${x > 0 ? 2 : -2} 46" stroke="#9EA3AC" stroke-width="3" fill="none"/>`).join("")}<path d="M-64 -82 Q-66 -150 0 -156 Q66 -150 64 -82 Q0 -70 -64 -82z" fill="url(#helmW)" stroke="${INKL}" stroke-width="5"/><path d="M-30 -150 Q-34 -118 -30 -84 M0 -156 V-72 M30 -150 Q34 -118 30 -84" stroke="#B9C3CF" stroke-width="7" fill="none"/><path d="M-58 -78 Q-56 -40 -36 -20 M58 -78 Q56 -40 36 -20" stroke="#3B4149" stroke-width="5" fill="none"/></g>`;
   return s; }
