@@ -173,3 +173,29 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   The manifest points momo_sit_* / momo_oops / momo_waving at them. items_options.js: MOMO_PAINTED now also holds sit, oops and waving, so
   no code-drawn neckerchief is drawn anywhere (medalP stays for reference). The magnifier prop (b404, l803) is unchanged.
 - Contact sheet of every scene Momo is in, by pose (63 stills, cropped to her): scratchpad p4items/momo_all_scenes.jpg, checked by eye.
+- **Pigeons (teacher: "add sound effects of pigeon")**: designed in song.js (no pigeon in the series sfx library): `cooRoo` (a soft two-part
+  "hoo ... ROO-oo", "oo" formants, the throaty trill), `wings` (band-passed noise claps, 9-12 beats a second per bird, flocks overlapped),
+  pecks = the series' ep05_peck.wav. Placed (sound_cues.js, the pigeon block) on the probed frames: the bay (pecks, a coo), the bell
+  ride-off (pecks, a coo; the flock takes off at the FLAP 1:28.0; three land on Basil 1:29.0; a coo at the helmet gag), the runaway
+  (pecks; take-off 2:37.6), the race (they hop aside 3:16.4; a coo), the think card (one lands 5:08.0; a coo), the bell inset (takes off
+  5:30.3), the victory lap (hops), the blooper (two landings, a coo). A coo or peck only where no line is spoken. Levels measured against a
+  buddy line: coo about -16 dB, wing beats about -13 dB. The pigeon on Basil's cheek (bell, 1:29-1:39) now sits on his shoulder.
+- **The low SAD TROMBONE** (teacher: "when the joke is out, put a funny low music tune instead"; and "3:34 too"): `../kit/sad_trombone.js`
+  synthesizes it (four plunger-muted brass notes D3 C#3 C3 B2, the last held with a widening wobble; nothing sampled); `node
+  kit/sad_trombone.js` writes the reusable ../../sau/sfx/sad_trombone.wav (2.4 s) and sad_trombone_quick.wav (0.65 s). In P4 EP1 four
+  flops, each in the pause after the punchline, about 6-9 dB under a buddy line: 1:28.6 (the pigeons land on the bell-less Basil, 1.7 s),
+  2:12.3 ("Because it's LIGHTER!", 0.95 s), 3:29.4 (the toot: "Was that the bike?" "Yes.", 0.59 s: the pause is short) and 3:33.1 (after
+  Momo's "Your bike didn't even move.", 0.5 s). All five sad kazoos are gone (the battle cries no longer collapse into one).
+- **Runners** (teacher: "how can momo run with arm folded?"): a buddy who runs keeps free paws, even while talking (keepPose), with a hop:
+  cold-open entries (Momo, Pip), the bell jog-up (Momo, Pip: surprised), the runaway A-D (all three: surprised; Momo's k608 and k611 and
+  Basil's k609 no longer switch to the arms-crossed talking sprite; Pip worried for "It can't stop!"). **Pip's painted RUN cycle** (teacher,
+  27 Nov, characters/teacher_run_2026-11-27/; cut by poses.py set pip_run on Pip's sitting scale; `run_poses.py` -> spr/pip_run_a/b):
+  lib.js `{ run: "left"|"right" }` alternates A/B every .135 s with a hop on the stride, mirrored for leftward runs, no pose pop; used for
+  Pip in every run above. Momo's and Basil's run paintings will drop in the same way (run_poses.py), the free-paws pose stands in until then.
+- **Pip shocked at the runaway (2:34)**: he keeps his shocked, wide-eyed look through "The bike! It's rolling away!" (his run frames there).
+- **Render**: the full re-render (the scarf) to a new file, VERIFY OK against fix pass 5 (13086 frames, audio bit-identical at that step);
+  then 0-20, 80-100 and 150-180 s spliced (msplice + verify.py: VERIFY OK, packets outside the spans bit-identical); then the new mix muxed
+  (video packets identical, md5 b4dc8c41). **Audio changed (the sfx bed: the game bus; the music and ambience unchanged; the voice stem
+  bit-identical: md5 0acae4446f4fdfdbbd6c4bcd3e3fcef8 before and after, song.js VOICEHASH)**. 7:16.2, -16.0 LUFS, true peak -1.8 dBTP,
+  decode 0. Scans: no ghosting, no backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan the same
+  by-design set. Review: scratchpad p4items/pigeons_sfx.mp4, sad_trombone.mp4, pip_run.mp4, pip_shocked.jpg, momo_all_scenes.jpg (64).

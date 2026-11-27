@@ -183,3 +183,4 @@
     - Short 1: tpbmNoH0G4c, 28 Nov 09:00Z. The old 2Kwj4p5I-oI is unscheduled and stays private (0 views).
     - Short 2: p2ukcbeLQSU, 1 Dec 09:00Z. The old eaj2RlQDV84 is unscheduled and stays private (0 views).
   - **Episode:** it waits for the teacher's OK on the habitat lines (sau/ep13/SCRIPT.md §9), then a re-render and a new upload.
+- 10:17 UTC 27 Nov: P4 EP1 v2 FIX PASS 6 done (not uploaded): painted scarf on every Momo sprite (talking set, oops, waving composited), pigeon sfx, the low sad trombone (kit/sad_trombone.js, 4 flops, kazoos gone), free-paws runners + Pip's painted run cycle, Pip shocked at 2:34, shoulder pigeon; VERIFY OK, voice stem bit-identical, -16.0 LUFS, -1.8 dBTP.
