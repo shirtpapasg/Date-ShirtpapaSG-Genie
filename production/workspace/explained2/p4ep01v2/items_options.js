@@ -111,9 +111,21 @@ function momoScarf(name, H) { const ink = INK.momo, [cx, cy0] = H.chin, cy = cy0
   s += `<path d="M${cx - hw + 4} ${cy - 6} q-6 ${th * .5} 2 ${th - 4} M${cx + hw - 4} ${cy - 6} q6 ${th * .5} -2 ${th - 4}" stroke="${ink}" stroke-width="5" fill="none" opacity=".45"/>`;   // the band turns away round her neck
   s += `<g transform="translate(${cx - 58} ${cy + 10})"><ellipse rx="15" ry="12" fill="#2BA58E" stroke="${ink}" stroke-width="5"/><path d="M-6 8 l-10 22 l12 -6z M6 8 l6 22 l-12 -6z" fill="#2BA58E" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/></g>`;   // the knot
   s += redraw(name, "ruffL", ell([cx - hw - 6, cy - 14, 26, 30, 0])) + redraw(name, "ruffR", ell([cx + hw + 6, cy - 14, 26, 30, 0]));   // the ends go behind the cheek fur
-  s += `<circle cx="${cx}" cy="${cy + tri + 16}" r="7" fill="none" stroke="#D9A441" stroke-width="5"/>` + TF(cx, cy + tri + 46, .8, magP(30, 0, {}));
+  s += medalP(cx, cy + tri + 16);   // (27 Nov) the teacher's painting: a gold medal on a short black loop (the magnifier became a hand-held prop)
   return s + (H.hold ? redraw(name, "spaw", ell(H.hold[0])) : ""); }   // a raised paw stays in front of the scarf
-function momoItem(op, name, H) { const ink = INK.momo; if (op === "N") return momoScarf(name, H);
+// the gold medal of the teacher's neckerchief paintings (27 Nov 2026), matched to them by eye at full size: its centre 32 px below the
+// triangle's tip, 48 px across (with its outline), a short black strap, a small gold ring, a darker rim and two diagonal shines. Origin = the triangle's tip.
+function medalP(x, y) { const ink = INK.momo, c = y + 32, r = 24;
+  return `<defs>${lgr("mGold", [[0, "#FFE27A"], [.55, "#F2B632"], [1, "#C98A1E"]], .2, 1)}</defs><rect x="${x - 4}" y="${y - 2}" width="8" height="12" rx="2" fill="#1E1A22"/>`
+    + `<circle cx="${x}" cy="${y + 11}" r="5" fill="none" stroke="#D9A441" stroke-width="3"/><circle cx="${x}" cy="${c}" r="${r}" fill="url(#mGold)" stroke="${ink}" stroke-width="3.5"/>`
+    + `<circle cx="${x}" cy="${c}" r="${r - 6}" fill="none" stroke="#C98A1E" stroke-width="3"/><path d="M${x - 11} ${c + 6} L${x + 5} ${c - 12} M${x - 5} ${c + 12} L${x + 11} ${c - 6}" stroke="#FFF3C2" stroke-width="3" stroke-linecap="round" opacity=".9"/>`; }
+// (27 Nov) the five poses the teacher painted WITH the neckerchief and medal: no code-drawn overlay on them
+const MOMO_PAINTED = new Set(["arms_crossed", "thinking", "pointing", "cheer", "surprised"]);
+// the hand-held magnifier (27 Nov): only while the scene passes { mag: true } to Momo (b404 "But WHY does it go ring?", l803 the look-closer), held
+// up in her raised pointing paw: the lens above the paw, the handle into the fist, the fist drawn again over the handle
+function momoMagHeld(name) { return TF(526, 182, 1, magP(34, -26)) + redraw(name, "magpaw", ell([480, 272, 36, 31])); }
+function momoItem(op, name, H, o) { const ink = INK.momo;
+  if (op === "N") { const key = poseKey("momo", name); if (MOMO_PAINTED.has(key)) return key === "pointing" && o && o.mag ? momoMagHeld(name) : ""; return momoScarf(name, H); }
   if (op === "A") { const [px, py] = H.pend, r = 30, top = [px, py - r - 7], [cx, cy] = H.chin; let s = "";
     for (const sg of [-1, 1]) { const a = [cx + sg * 64, cy - 10], d = `M${a[0]} ${a[1]} Q${r1(cx + sg * 56)} ${r1(top[1] - 4)} ${r1(top[0] + sg * 4)} ${r1(top[1])}`;
       s += `<path d="${d}" stroke="${ink}" stroke-width="10" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#1FA08C" stroke-width="5.5" fill="none" stroke-linecap="round"/>`; }
@@ -185,7 +197,7 @@ const GRID = (name) => { const S = SPR[name]; let s = ""; for (let x = 0; x <= S
 itemsOf = function (who, name, fl, o) { const op = window.ITEM_OPT[who]; if (!op || op === "live") return _orig(who, name, fl, o); if (op === "grid") return GRID(name);
   const key = poseKey(who, name);
   if (who === "pip") { const H = PIPH[key]; if (!H) return _orig(who, name, fl, o); if (op !== "C" && o.helmet === false) return ""; return pipItem(op, name, H); }
-  if (who === "momo") { const H = MOMOH[key]; return H ? momoItem(op, name, H) : (op === "N" ? "" : _orig(who, name, fl, o)); }
+  if (who === "momo") { const H = MOMOH[key]; return H ? momoItem(op, name, H, o) : (op === "N" ? "" : _orig(who, name, fl, o)); }
   if (who === "basil") { const H = BASH[key]; return H ? basilItem(op, name, H, fl, o) : _orig(who, name, fl, o); }
   return _orig(who, name, fl, o); };
 })();

@@ -40,7 +40,7 @@ SC.bell = (t, s) => { const tO = MK("clink"), tR = MK("rideoff"), tF = MK("flap"
   return CAM(bg("vdv2") + set, c[0], c[1], c[2])
     + x2bc(c, "basil", 560, 1066, 400, t, { in: s.t0 - .5, poses: [[0, "sit"], [LE("b401") + .05, "arms_crossed"], [LT("b403") - .1, "sit"], [LE("b403") + .05, "arms_crossed"], [LE("b404") + .1, "shrug/oops"], [LT("b405") - .1, "sit"]], look: 5 })
     + x2bc(c, "pip", 1440, 1066, 370, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("b401") + .5, "panic/thinking"], [LT("b402") - .1, "sit"], [LE("b402") + .05, "pointing"], [LT("b404") - .1, "sit"], [LT("b405") + .3, "panic/oops"]], look: -6 })
-    + x2bc(c, "momo", 1830, 1066, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("b403") + .2, "thinking"], [LT("b404") - .1, "sit"], [LE("b404") + .05, "pointing"], [LT("b405") + .2, "sit"]], look: -9 })
+    + x2bc(c, "momo", 1830, 1066, 360, t, { mag: t >= LE("b404") + .05 && t < LT("b405") + 1.2, in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LT("b403") + .2, "thinking"], [LT("b404") - .1, "sit"], [LE("b404") + .05, "pointing"], [LT("b405") + 1.2, "sit"]], look: -9 })
     + x2refrain(t, "b401", LE("b401") + .6) + x2refrain(t, "b402", LE("b402") + 1.2, { size: 54, col: P.pip, litCol: "#6B4FD8" })
     + comicWord(t, MK("flick") + .02, ...camPt(c, [BELLW[0] + 90, BELLW[1] - 90]), "ting!", { size: 50, tiny: true, col: "#BFE6F7", d: .6 })
     + comicWord(t, tO + .55, ...camPt(c, [1540, 1010]), "CLINK!", { size: 80, d: .8 })   /* (face scan 26 Nov) below Pip's face */

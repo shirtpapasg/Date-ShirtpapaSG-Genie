@@ -51,7 +51,7 @@ SC.lcbike = (t, s) => { const k = ramp(t, s.t0, .45), tB = MK("lbell"), tK = MK(
   const pk = (t >= tM - .05 && t < tM + 1.3);   // MISS 2: Pip and Basil go for the high-five; Momo's eyes follow the kopi bag; her paw is late
   return `<g filter="url(#b10)">${x2place("vdv2", "", [1.1, 960, 600])}</g><rect width="1920" height="1080" fill="${P.night}" opacity=".25"/>` + OP(k, panelV2(1) + `<clipPath id="pnV2"><rect x="${PNL2.x}" y="${PNL2.y}" width="${PNL2.w}" height="${PNL2.h}" rx="40"/></clipPath><g clip-path="url(#pnV2)">${CAM(body, c[0], c[1], c[2])}</g>` + labs + mag + verdict)
     + OP(k, TF(960, 110, 1, tpill(0, 0, "LOOK CLOSER", 46, P.ink, P.sun, { w: 700 }))) + ins + seesaw
-    + x2bd("momo", 140, 1076, 330, t, { in: s.t0 - .5, ...watchO(140, 800), poses: [[s.t0, "sit"], [tC - .1, "pointing"], [tC + 2.5, "sit"], [tM, "hi5/cheer"], [tM + .5, "facepalm/oops"], [tM + 1.3, "sit"]], look: pk ? 0 : 6, flip: false })
+    + x2bd("momo", 140, 1076, 330, t, { mag: t >= LE("l803") + .05 && t < LE("l803") + 1.5, in: s.t0 - .5, ...watchO(140, 800), poses: [[s.t0, "sit"], [tC - .1, "pointing"], [LE("l803") + 1.5, "sit"], [tM, "hi5/cheer"], [tM + .5, "facepalm/oops"], [tM + 1.3, "sit"]], look: pk ? 0 : 6, flip: false })
     + x2bd("basil", 480, 1185, 400, t, { in: s.t0 - .5, peek: true, poses: [[s.t0, "oops"], [LT("l808") + .1, "oops"], [tM, "hi5/cheer"], [tM + .8, "oops"]], look: 8, tag: false })
     + x2bd("pip", 1745, 1076, 460, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "sit"], [tB - .1, "pointing"], [LT("l803") - .1, "sit"], [tF + .05, "cheer"], [tF + 2.0, "sit"], [MK("tok") - .05, "embarrassed/oops"], [MK("tok") + .45, "sit"], [tM, "hi5/cheer"], [tM + .6, "sit"]], look: -4 })
     + x2whiff(t, tM + .35, 330, 720) + x2HUD(t); };

@@ -581,6 +581,77 @@
    ]
   }
  },
+ "momo_nk": {
+  "arms_crossed": {
+   "file": "poses/momo_nk_arms_crossed.png",
+   "src": "momo_nk_arms_crossed.jpg",
+   "anchor": [
+    424.4,
+    831.0
+   ],
+   "scale": 0.8849,
+   "size": [
+    666,
+    855
+   ]
+  },
+  "thinking": {
+   "file": "poses/momo_nk_thinking.png",
+   "src": "momo_nk_thinking.jpg",
+   "anchor": [
+    357.3,
+    831.0
+   ],
+   "scale": 0.8753,
+   "size": [
+    634,
+    855
+   ]
+  },
+  "pointing": {
+   "file": "poses/momo_nk_pointing.png",
+   "src": "momo_nk_pointing.jpg",
+   "anchor": [
+    353.9,
+    831.0
+   ],
+   "scale": 0.8576,
+   "size": [
+    716,
+    855
+   ]
+  },
+  "cheer": {
+   "file": "poses/momo_nk_cheer.png",
+   "src": "momo_nk_cheer.jpg",
+   "anchor": [
+    355.8,
+    831.0
+   ],
+   "scale": 0.865,
+   "size": [
+    699,
+    855
+   ]
+  },
+  "surprised": {
+   "file": "poses/momo_nk_surprised.png",
+   "src": "momo_nk_surprised.jpg",
+   "anchor": [
+    358.3,
+    831.0
+   ],
+   "scale": 0.8927,
+   "size": [
+    636,
+    855
+   ]
+  },
+  "_sit": {
+   "body_h": 807,
+   "hips_above_feet": 6
+  }
+ },
  "basil_v2": {
   "oops": {
    "file": "poses/basil_v2_oops.png",
