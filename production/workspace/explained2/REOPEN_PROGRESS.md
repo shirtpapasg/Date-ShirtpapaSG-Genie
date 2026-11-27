@@ -186,3 +186,7 @@
 - 10:17 UTC 27 Nov: P4 EP1 v2 FIX PASS 6 done (not uploaded): painted scarf on every Momo sprite (talking set, oops, waving composited), pigeon sfx, the low sad trombone (kit/sad_trombone.js, 4 flops, kazoos gone), free-paws runners + Pip's painted run cycle, Pip shocked at 2:34, shoulder pigeon; VERIFY OK, voice stem bit-identical, -16.0 LUFS, -1.8 dBTP.
 - 10:49 UTC 27 Nov: P4 EP1 v2 FIX PASS 7 rendered (not uploaded): the teacher's Momo (A/B, head-registered, mirrored for rightward runs) and Basil (A + running hop) run paintings on every run; VERIFY OK vs fix pass 6 (audio bit-identical), 7:16.2, -16.0 LUFS, -1.8 dBTP; scans clean.
 - 11:34 UTC 27 Nov: P4 EP1 v2 FIX PASS 8 done (not uploaded): arm-swapping run pairs (Momo a/b_alt, Basil a/a_alt, Pip a/b), .165 s steps, hop + lean, landing on the ground, swap glide at the end; loud comic pigeon KOOs (bell, blooper) with big KOO words; VERIFY OK, voice stem bit-identical, 7:16.2, -16.0 LUFS, -1.8 dBTP.
+- 2026-11-27 ~12:00 UTC: P4 EP1 v2, fix pass 8, is live as 7OBnZam5Xzs (teacher: "Ok replace episode 1").
+  - It replaces 22u5mW_m9y8 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI. 22u5mW_m9y8 gets the NEW VERSION line, and FOvUezOZJbo's NEW VERSION line now points to 7OBnZam5Xzs too.
+  - chapters_p3.json has key 7OBnZam5Xzs.
+  - TheOneApp #269: P4 no. 1 is now 7OBnZam5Xzs. Explored no. 13 was taken out until the fixed EP13 is public.
