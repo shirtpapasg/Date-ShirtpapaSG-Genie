@@ -179,6 +179,29 @@
    101.0
   ]
  },
+ "mid": {
+  "src": "../teacher_ep02_2026-11-27/chilli_midrecovery.jpg",
+  "w": 695,
+  "h": 815,
+  "ox": 317.5,
+  "oy": 808.0,
+  "rim": 303.0,
+  "scale": 0.6600660066006601,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   216.0,
+   628.0,
+   202.0,
+   102.0
+  ]
+ },
  "hop_b": {
   "src": "made from hop_a (cut_chilli.make_hop_b)",
   "w": 544,
@@ -296,6 +319,81 @@
   ],
   "body": "wilt",
   "face_of": "shy"
+ },
+ "wilt_tall": {
+  "src": "body droop + face tall",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   73.0,
+   296.0,
+   174.0,
+   117.0
+  ],
+  "body": "wilt",
+  "face_of": "tall"
+ },
+ "mid_shy": {
+  "src": "body mid + face shy",
+  "w": 695,
+  "h": 815,
+  "ox": 317.5,
+  "oy": 808.0,
+  "rim": 303.0,
+  "scale": 0.6600660066006601,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   215.53992247581482,
+   607.5361249446869,
+   206.22433460076044,
+   124.42585551330798
+  ],
+  "body": "mid",
+  "face_of": "shy"
+ },
+ "mid_tall": {
+  "src": "body mid + face tall",
+  "w": 695,
+  "h": 815,
+  "ox": 317.5,
+  "oy": 808.0,
+  "rim": 303.0,
+  "scale": 0.6600660066006601,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   217.27692925930023,
+   607.5538625717163,
+   202.77692307692308,
+   136.35000000000002
+  ],
+  "body": "mid",
+  "face_of": "tall"
  },
  "tallg_shy": {
   "src": "body alarmed + face shy",
