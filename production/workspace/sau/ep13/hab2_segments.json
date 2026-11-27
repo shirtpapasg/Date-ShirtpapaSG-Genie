@@ -1,0 +1,120 @@
+{
+ "episode": "SAU EP13 habitat draft (trimmed)",
+ "title": "habitat draft trimmed",
+ "tag": "🌏 TheOneApp, Explored · EP 13 · El Niño",
+ "outro": 1.0,
+ "kws": [
+  [
+   "hab1t",
+   "habitat",
+   "HABITAT",
+   "#2d6a4f"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "wind5",
+   "scene": "povWeak",
+   "soft": true,
+   "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore. The warm, wet air that rises from it, and builds the rain clouds, moves east too.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "pip2",
+   "scene": "povWeak",
+   "who": "pip",
+   "text": "Wait for us, clouds!"
+  },
+  {
+   "id": "hab1t",
+   "scene": "povReef",
+   "soft": true,
+   "text": "In strong El Niño years, warm water spreads over coral reefs, the habitat of many sea animals. Too much heat turns the corals white, and if it lasts, they die.",
+   "sfx": [
+    [
+     "underwater",
+     0.2
+    ],
+    [
+     "sea_wash",
+     4.0
+    ]
+   ],
+   "hold": 0.3
+  },
+  {
+   "id": "hab3t",
+   "scene": "povCoast",
+   "soft": true,
+   "text": "Near South America, sea lions and seabirds cannot find enough fish, and many of their babies die.",
+   "sfx": [
+    [
+     "sea_wash",
+     0
+    ],
+    [
+     "wind",
+     2.5
+    ]
+   ]
+  },
+  {
+   "id": "pipH",
+   "scene": "povCoast",
+   "who": "pip",
+   "text": "Oh no. The poor little pups.",
+   "hold": 0.2
+  },
+  {
+   "id": "hab4t",
+   "scene": "povForest",
+   "soft": true,
+   "text": "Back near Singapore, ponds dry up, and their fish die. Peat forests burn, and orangutans lose their home.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "crackle",
+     4.0
+    ]
+   ]
+  },
+  {
+   "id": "basilH",
+   "scene": "povForest",
+   "who": "basil",
+   "text": "Somebody help them!"
+  },
+  {
+   "id": "hab5",
+   "scene": "povForest",
+   "soft": true,
+   "text": "Rescue teams do. They carry orangutans to safer forests.",
+   "hold": 0.4
+  },
+  {
+   "id": "wind6",
+   "scene": "povDry",
+   "soft": true,
+   "text": "You look down at Singapore. Blue sky. Hardly any rain clouds. What you just lived through has a name: El Niño.",
+   "sfx": [
+    [
+     "reveal",
+     4.6
+    ]
+   ],
+   "hold": 0.8
+  }
+ ]
+}

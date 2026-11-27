@@ -60,6 +60,8 @@ S.povReef = (() => { const s = scene("povReef", "#0aa1c2", "#06768f"), st = nWho
   seed = 221; for (let i = 0; i < 22; i++) el("path", {d: `M${-150 + rnd() * 1920} ${-60 + rnd() * 1080} q30 -14 60 0 q30 14 60 0`, fill: "none", stroke: "#e6fbff", "stroke-width": 5, opacity: .35}, st);
   nVig(st, "#d8f3ff", .55);
   hRide(s, st);
+  // two reef fish lying still on the sand (eyes closed, no marks): they appear on "die"
+  s.deadF = [hFish(st, "#ffd60a", .7, true), hFish(st, "#3a86ff", .6, true)];
   s.where = chip(st, "📍 Kiritimati Island, middle of the Pacific, 2015–16", INK, {fs: 32});
   s.card = chip(st, "CORAL BLEACHING", "#e85d04", {fs: 42});
   s.run = t => { const a = (w, f) => cue("povReef", w, f), t0 = SC.povReef.t0, tW = a("white", .55), tD = a("die", .9);
@@ -70,6 +72,7 @@ S.povReef = (() => { const s = scene("povReef", "#0aa1c2", "#06768f"), st = nWho
     s.fish.forEach((o, i) => { const sw = Math.sin(t * .7 + o.ph) * 60, x = o.x0 + sw + o.dir * leave * 1400 * (1 + i * .08), y = o.y + Math.sin(t * 1.3 + o.ph) * 10;
       const dirNow = leave > .01 ? o.dir : (Math.cos(t * .7 + o.ph) >= 0 ? 1 : -1);    // FACES: the way it is swimming
       tf(o.e, `translate(${x} ${y}) scale(${dirNow} 1)`); op(o.e, 1 - ramp(t, tD + .8, tD + 2)); });
+    tf(s.deadF[0], "translate(1180 800) rotate(4)"); tf(s.deadF[1], "translate(1390 790) rotate(-6) scale(-1 1)"); s.deadF.forEach((d, i) => op(d, ramp(t, tD + .4 + i * .4, tD + 1 + i * .4)));
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); op(s.where, on(t, t0 + .3, tW - .5, .3));
     popAt(s.card, 810, 160, t, a("bleaching", .7) - .1); op(s.card, on(t, a("bleaching", .7) - .1, SC.povReef.t1 + .5, .3)); };
   return s; })();
@@ -77,7 +80,7 @@ S.povReef = (() => { const s = scene("povReef", "#0aa1c2", "#06768f"), st = nWho
 /* ======================================================================================================================
    THE COAST: the Galapagos Islands. Black lava rocks, the sea (warm now: no cold water rising, so few small fish). "hard to find": the
    shoal of small silver fish swims away and down out of the picture, facing the way it goes. A sea lion mother lies on the rock with her
-   thin pup (pup lying still, eyes closed); a blue-footed booby stands by an empty nest. Card "Galapagos Islands, 1982-83". */
+   thin, hungry pup (eyes open; Heart's line carries "many of their babies die"); a blue-footed booby stands by an empty nest. Card "Galapagos Islands, 1982-83". */
 S.povCoast = (() => { const s = scene("povCoast", "#8ecae6", "#219ebc"), st = nWhole(s), HZ = 300;
   el("rect", {x: -400, y: -800, width: 2400, height: HZ + 800, fill: nGrad([[0, "#9ad1ff"], [1, "#e8f6ff"]])}, st);
   el("path", {d: `M-150 ${HZ} Q200 ${HZ - 90} 420 ${HZ - 40} Q560 ${HZ - 120} 760 ${HZ} Z`, fill: "#5c677d", stroke: INK, "stroke-width": 4}, st);   // a far island
@@ -98,7 +101,7 @@ S.povCoast = (() => { const s = scene("povCoast", "#8ecae6", "#219ebc"), st = nW
     if (closed) el("path", {d: "M146 -38 Q154 -32 162 -38", fill: "none", stroke: INK, "stroke-width": 3.4, "stroke-linecap": "round"}, g);
     else { el("circle", {cx: 155, cy: -36, r: 6, fill: INK}, g); el("circle", {cx: 157, cy: -38, r: 2, fill: "#fff"}, g); }
     return g; };
-  s.mom = seal(1080, 610, 1, false, false); s.pup = seal(1290, 650, .55, true, true);
+  s.mom = seal(1080, 610, 1, false, false); s.pup = seal(1290, 650, .55, true, false);      // the pup: thin and hungry, eyes open (gentle: no dead pups drawn)
   // a blue-footed booby by its empty nest (no egg, no chick)
   s.boo = el("g", {transform: "translate(920 500)"}, st);
   el("ellipse", {cx: 0, cy: 26, rx: 60, ry: 16, fill: "#a1887f", stroke: INK, "stroke-width": 4}, s.boo);  // the nest, empty
@@ -117,7 +120,6 @@ S.povCoast = (() => { const s = scene("povCoast", "#8ecae6", "#219ebc"), st = nW
     const go = ramp(t, tH - .6, tH + 2.4);              // FACES: the shoal swims left and down, away from the camera, facing that way
     s.shoal.forEach((o, i) => { const x = o.x - go * (700 + (i % 5) * 60) + Math.sin(t * 2 + i) * 6, y = o.y + go * (160 + (i % 4) * 30);
       tf(o.e, `translate(${x} ${y}) rotate(${-12 * go}) scale(-1 1)`); op(o.e, 1 - ramp(t, tH + 1.2, tH + 2.6)); });
-    op(s.pup, ramp(t, t0 - .3, t0) * (1 - .25 * ramp(t, tB, tB + 1.2)));   // the pup lies still; it fades a little after "babies die"
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); };
   return s; })();
 
