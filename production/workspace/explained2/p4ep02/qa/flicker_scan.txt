@@ -1,0 +1,6 @@
+p4ep02 P1 0.0-453.2 s at 30 fps: pip 6 run(s), momo 5 run(s), basil 6 run(s)
+JUMP  319.33 s  basil jumps 680 px at 319.37 s (in wait)   [chunk 310 320]
+CARD  354.23 s  pip gone 1.50 s (354.27-355.77 s, shrink>transport) then back at another place (1460 px away)   [chunk 350 360]
+CARD  354.23 s  momo gone 1.50 s (354.27-355.77 s, shrink>transport) then back at another place (940 px away)   [chunk 350 360]
+CARD  354.23 s  basil gone 1.50 s (354.27-355.77 s, shrink>transport) then back where it was   [chunk 350 360]
+1 buddy flicker(s)

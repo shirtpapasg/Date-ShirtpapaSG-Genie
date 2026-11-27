@@ -1,0 +1,2 @@
+facing_scan p4ep02 part 1: 4532 samples 0-453.2 s every 0.1 s; 25 FACES notes; 30 functions watched
+no backwards movers (6 annotated movers face the right way)

@@ -1,103 +1,102 @@
 {
- "_note": "P4 EP1 v2 'The Great Void Deck Race' (the new P4 style, one video; it replaces the v1 build p4ep01 too), for TheOneApp videos.js after upload: it REPLACES the P4 entry no. 1 (the old video FOvUezOZJbo, 'Your Bike, Your Body And A Tree Are All The Same Thing'): swap the whole entry, keep no. 1. The keys are the real videos.js constants and ids, written here as strings: paste O.respCirc / O.plant WITHOUT quotes and the 'lab:...' ids WITH their quotes. Set url to the uploaded video id. Suggested (not in videos.js yet, as the P4 README says): CH.humanSystem / CH.plantSystem.",
+ "_note": "P4 EP2 'Help! I'm Wilting!' (the new P4 style, one video), for TheOneApp videos.js after upload: it REPLACES the P4 entry no. 2 (the old video loaPYprOWDQ, 'The 3-Part Team Inside Every Plant'): swap the whole entry and put the new url in. Moments: 1.5 s before each idea's first line (tl_p1.json). Suggested: CH.plantSystem: 'Plant System' (videos.js has no CH key for it yet).",
  "replaces": [
-  "FOvUezOZJbo"
+  "loaPYprOWDQ"
  ],
  "entries": [
   {
-   "no": 1,
-   "art": "🐌",
-   "topic": "Systems",
-   "title": "Basil Lost a Race to a SNAIL! Which Fix Works?",
-   "len": "7:16",
-   "url": "https://www.youtube.com/watch?v=<P4EP01V2>",
+   "no": 2,
+   "art": "🌶️",
+   "topic": "Plant System",
+   "title": "Watered Every Day, Still Wilting. Why?",
+   "len": "7:33",
+   "url": "https://www.youtube.com/watch?v=<P4EP02>",
    "moments": [
     {
-     "at": "0:23",
-     "what": "Pick the fix: pedal faster, all three parts, or chain and brakes",
+     "at": "0:25",
+     "what": "Pick the fix: check every part, water it more, or feed it?",
      "keys": [
-      "'lab:p4-2-3'"
+      "O.plant",
+      "'lab:p4-1-4'"
      ],
      "_line": "f201",
-     "_t": 24.86
+     "_t": 27.18
     },
     {
-     "at": "1:09",
-     "what": "Each part has a job: the bell warns people you are coming",
+     "at": "1:56",
+     "what": "A plant makes its own food in its leaves, using light",
      "keys": [
-      "'lab:p4-2-1'",
+      "O.plant",
+      "'M-20'",
+      "'mix:plants:38'",
       "'lab:p4-1-2'"
      ],
-     "_line": "b401",
-     "_t": 71.32
+     "_line": "u406",
+     "_t": 117.89
     },
     {
-     "at": "2:11",
-     "what": "The brakes help a bike slow down and stop safely",
+     "at": "2:09",
+     "what": "Look closer: the leaves, the stem, the soil and the roots",
      "keys": [
-      "'lab:p4-2-1'",
+      "O.plant",
+      "'mix:plants:40'",
+      "'lab:p4-1-1'",
       "'lab:p4-1-2'"
      ],
-     "_line": "k601",
-     "_t": 133.32
+     "_line": "d501",
+     "_t": 130.79
+    },
+    {
+     "at": "2:54",
+     "what": "Wet soil, thirsty plant: roots need air to absorb water",
+     "keys": [
+      "O.plant",
+      "'M-21'",
+      "'mix:plants:38'",
+      "'lab:p4-1-4'"
+     ],
+     "_line": "x601",
+     "_t": 175.93
     },
     {
      "at": "3:33",
-     "what": "The chain joins the pedals to the back wheel",
-     "keys": [
-      "'lab:p4-2-1'"
-     ],
-     "_line": "r707",
-     "_t": 215.46
-    },
-    {
-     "at": "3:44",
-     "what": "Look closer: every part has its own function",
-     "keys": [
-      "'lab:p4-2-1'",
-      "'lab:p4-1-2'"
-     ],
-     "_line": "l801",
-     "_t": 226.16
-    },
-    {
-     "at": "4:15",
-     "what": "Be a chain link: the parts interact",
-     "keys": [
-      "'lab:p4-2-1'"
-     ],
-     "_line": "j901",
-     "_t": 256.97
-    },
-    {
-     "at": "5:07",
-     "what": "When one part stops, the whole bike is likely to be affected",
-     "keys": [
-      "'lab:p4-2-3'",
-      "'lab:p4-1-2'"
-     ],
-     "_line": "v1006",
-     "_t": 309.47
-    },
-    {
-     "at": "5:48",
-     "what": "Your body is made up of systems too",
-     "keys": [
-      "O.respCirc",
-      "'lab:p4-2-1'"
-     ],
-     "_line": "e1102",
-     "_t": 350.09
-    },
-    {
-     "at": "6:00",
-     "what": "A tree is a system: roots, stem and leaves",
+     "what": "A plant is a system: one part stops, the whole plant is affected",
      "keys": [
       "O.plant",
-      "'lab:p4-1-1'"
+      "'lab:p4-2-3'"
      ],
-     "_line": "e1103",
-     "_t": 362.42
+     "_line": "s651",
+     "_t": 215.4
+    },
+    {
+     "at": "4:40",
+     "what": "The real fix: holes in the pot; water when the top is dry",
+     "keys": [
+      "'lab:p4-1-4'"
+     ],
+     "_line": "r701",
+     "_t": 281.93
+    },
+    {
+     "at": "5:31",
+     "what": "Be a drop of water: the stem transports water, salts and food",
+     "keys": [
+      "O.plant",
+      "O.transport",
+      "'mix:plants:39'"
+     ],
+     "_line": "j801",
+     "_t": 332.94
+    },
+    {
+     "at": "6:03",
+     "what": "The words that earn marks: roots, stem and leaves",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "m901",
+     "_t": 364.99
     }
    ]
   }

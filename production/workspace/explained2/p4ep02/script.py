@@ -38,7 +38,7 @@ NYK = [("scene", "nyk"),
  ("unison", "u1305", "Now you know!", {"sync": True, "crowd": "h1305"}),
  ("wait", 4.6)]
 LOCK = lambda n, d=6.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n}"), ("wait", .55)]
-SC_GAP = ("wait", .45)
+SC_GAP = ("wait", .8)   # P4 EP2: a little more air between scenes (pace)
 
 SEQ1 = [
  # ---- cold · THE PROBLEM: the Help Desk's first customer (a voice in the first second)
@@ -199,7 +199,7 @@ SEQ1 = [
  *NYK,
  # ---- blooper (after the end card)
  ("scene", "blooper"), ("wait", .4),
- ("say", "e1601b", B, "Fix two: MORE WATER, MORE POW...", {"pre": 0, "post": 0, "kw": [["splosh", "pow..."]]}),
+ ("say", "e1601b", B, "Fix two: MORE WATER, MORE POW...", {"pre": 0, "post": 0, "kw": [["splosh", "pow"]]}),
  ("mark", "drip"), ("wait", 1.0),
  ("say", "e1602g", CH, "Now YOU'RE the droopy one.", {"pre": .3, "post": .1}),
  ("say", "e1603p", P, "Towel? Take two!", {"pre": .2, "post": .1}),

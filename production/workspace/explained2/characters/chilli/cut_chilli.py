@@ -24,7 +24,9 @@ def pot_mask(img, a):
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     m = (hsv[..., 0] >= 5) & (hsv[..., 0] <= 22) & (hsv[..., 1] > 110) & (hsv[..., 2] > 120) & (a > 200)
     n, lab, st, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8)); i = 1 + np.argmax(st[1:, 4])
-    reg = (lab == i).astype(np.uint8); return cv2.morphologyEx(reg, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    reg = cv2.morphologyEx((lab == i).astype(np.uint8), cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+    cs, _ = cv2.findContours(reg, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE); out = np.zeros_like(reg); cv2.drawContours(out, cs, -1, 1, -1)
+    return out   # filled: the darker eyelid circles and the face strokes are inside the pot too
 
 def aa_draw(shape, fn, ss=4):
     """draw with fn(canvas, scale) at ss x size, return a float mask 0..1 at 1x (anti-aliased)"""

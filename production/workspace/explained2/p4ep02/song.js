@@ -78,7 +78,7 @@ function actionBar(bd, k) { const t0 = k * BAR, [root, ch] = CH[k % 8], lift = (
   if (k % 2 === 0) ch.forEach((n, i) => { const v = I.voice(n, BAR * 1.6, { syl: 'a', type: i ? 'alto' : 'tenor', seed: 30 + i, vib: .12 }); bd.lead.addMono(v, t0, .05); verb.addMono(v, t0, .05); }); }
 // ---------- lay the beds on the one bar clock
 const R = C.R;
-{ const b = B('theme'); for (const k of barsIn(R.theme)) themeBar(b, k); }
+{ const b = B('theme'); for (const k of barsIn(R.theme)) { themeBar(b, k); if (k % 4 === 0) { const d = I.bell(1975, .5, 1.4, 2.0); b.lead.addMono(d, k * BAR, .05); } } }   // P4 EP2: the help-desk voicing (a desk-bell ding on beat 1)
 { const b = B('lite'); for (const k of barsIn(R.lite)) themeBar(b, k, { full: false }); }
 { const b = B('party'); for (const k of barsIn(R.party)) themeBar(b, k, { party: true }); }
 { const b = B('tense'); for (const k of barsIn(R.tense)) tenseBar(b, k); }
@@ -310,10 +310,61 @@ Object.assign(P, {
   laughter: (t) => { sfx(t, 'ep05_laugh.wav', .14); },
   stingcut: (t) => { game.addMono(I.scratch(.15), t, .25); },
 });
+// ---------- P4 EP2 one-shots (27 Nov 2026), all synthesized here (nothing sampled but the series' own sfx library files)
+const sawTone = (f0, dur, { f1 = f0, vib = 0, drive = 2, lp = .3, env = [.01, .05] } = {}) => { const n = Math.round(dur * SR), x = new Float32Array(n); let ph = 0, l = 0;
+  for (let i = 0; i < n; i++) { const u = i / n, f = (f0 + (f1 - f0) * u) * (1 + vib * Math.sin(2 * Math.PI * 6 * i / SR)); ph += f / SR; const v = Math.tanh(drive * (2 * (ph % 1) - 1)); l += lp * (v - l);
+    x[i] = l * Math.min(1, i / (env[0] * SR)) * Math.min(1, (n - i) / (env[1] * SR)); } return x; };
+const sqTone = (f0, dur, { f1 = f0, duty = .5, g = 1 } = {}) => { const n = Math.round(dur * SR), x = new Float32Array(n); let ph = 0;
+  for (let i = 0; i < n; i++) { const u = i / n, f = f0 + (f1 - f0) * u; ph += f / SR; x[i] = ((ph % 1) < duty ? 1 : -1) * .5 * g * Math.min(1, i / (.004 * SR)) * Math.min(1, (n - i) / (.02 * SR)); } return x; };
+const sineTone = (f0, dur, f1 = f0) => { const n = Math.round(dur * SR), x = new Float32Array(n); let ph = 0; for (let i = 0; i < n; i++) { const u = i / n; ph += 2 * Math.PI * (f0 + (f1 - f0) * u) / SR; x[i] = Math.sin(ph) * Math.min(1, i / (.005 * SR)) * Math.min(1, (n - i) / (.03 * SR)); } return x; };
+const lowpassArr = (x, a) => { let l = 0; for (let i = 0; i < x.length; i++) { l += a * (x[i] - l); x[i] = l; } return x; };
+// GLITCH's pompous fanfare (2 bars): a square-wave "trumpet" over a march snare, the last note a little out of tune
+const glitchFan = (t, short = false) => { const notes = short ? [['G4', 0, .22], ['C5', .26, .55, -.35]] : [['C5', 0, .2], ['C5', .24, .1], ['E5', .38, .2], ['G5', .62, .35], ['E5', 1.07, .2], ['G5', 1.3, .2], ['C6', 1.55, .9, -.45]];
+  for (const [n, d, l, off = 0] of notes) { const f = 440 * 2 ** ((m(n) + off - 69) / 12), x = lowpassArr(sqTone(f, l, { duty: .3 }), .35); game.addMono(x, t + d, .16); verb.addMono(x, t + d, .05); }
+  if (!short) for (let k = 0; k < 8; k++) game.addMono(I.snare({ decay: .07, seed: 300 + k }), t + k * BEAT / 2, k % 2 ? .08 : .14); };
+Object.assign(P, {
+  sigh: (t) => { game.addMono(I.noiseSweep(.7, 900, 300, { q: .6, pink: true }), t, .05); },
+  glug: (t, v) => { const x = sineTone(180 + 30 * ((v || 0) % 3), .14, 420 + 40 * ((v || 0) % 2)); game.addMono(x, t, .3); game.addMono(I.pop(500 + 50 * (v || 0), 400 + (v || 0)), t + .05, .12); },
+  pizzrise: (t) => { ['C4', 'D4', 'E4', 'F4', 'G4', 'A4'].forEach((n, i) => { const x = I.pluck(m(n), { decay: .18 }); game.addMono(x, t + i * .27, .14); }); },
+  cricket: (t) => { for (let k = 0; k < 3; k++) game.addMono(sineTone(4300, .05), t + k * .09, .06); },
+  skid: (t) => { game.addMono(I.noiseSweep(.35, 2600, 1400, { q: 3 }), t, .12); },
+  heronote: (t) => { const x = I.brassNote(m('C5'), .5); game.addMono(x, t, .12); verb.addMono(x, t, .06); },
+  // the wet rude noise from the soggy soil (the series toot made wetter and longer): a low buzz with a 22 Hz flutter, a bubbly noise
+  pffrt: (t) => { const n = Math.round(.75 * SR), x = new Float32Array(n); let ph = 0, l = 0; for (let i = 0; i < n; i++) { const u = i / n; ph += (58 - 18 * u) / SR; const sq = Math.tanh(5 * Math.sin(2 * Math.PI * ph));
+      const fl = .55 + .45 * Math.sin(2 * Math.PI * 22 * i / SR + 3 * Math.sin(2 * Math.PI * 3 * i / SR)); l += .2 * ((prand() * 2 - 1) - l); x[i] = (sq * .8 + l * 1.6) * fl * Math.min(1, u * 12) * Math.min(1, (1 - u) * 5); }
+    game.addMono(x, t, .42); for (let k = 0; k < 4; k++) game.addMono(I.pop(260 + 40 * k, 900 + k), t + .1 + k * .14, .1); },
+  whum: (t) => { game.addMono(I.noiseSweep(.5, 200, 700, { q: .8, pink: true }), t, .1); game.addMono(sineTone(140, .4, 220), t, .06); },
+  bubble: (t) => { game.addMono(I.pop(180, 77), t, .2); game.addMono(I.pop(220, 78), t + .18, .14); },
+  beepboop: (t) => { game.addMono(sqTone(880, .12, { duty: .5 }), t, .18); game.addMono(sqTone(620, .16, { duty: .5 }), t + .16, .18); },
+  servo: (t) => { game.addMono(I.noiseSweep(.35, 400, 1100, { q: 4 }), t, .07); game.addMono(sawTone(220, .35, { f1: 330, lp: .15 }), t, .04); },
+  smugding: (t) => { const x = sqTone(1320, .18, { duty: .25 }); game.addMono(lowpassArr(x, .4), t, .12); },
+  scanner: (t) => { game.addMono(sineTone(600, .9, 1400), t, .07); game.addMono(I.noiseSweep(.9, 1200, 3000, { q: 3 }), t, .04); },
+  beep: (t) => { game.addMono(sineTone(1250, .09), t, .14); },
+  bzzt: (t) => { const x = sawTone(110, .45, { f1: 90, vib: .05, drive: 4, lp: .6 }); for (let i = 0; i < x.length; i++) x[i] *= (prand() > .2 ? 1 : .2); game.addMono(x, t, .4); game.addMono(I.noiseSweep(.3, 3000, 1500, { q: 1 }), t, .12); for (let k = 0; k < 5; k++) game.addMono(I.pop(3000 + 300 * k, 950 + k), t + .05 + k * .07, .12); },
+  fallbeep: (t) => { game.addMono(sineTone(1000, .5, 260), t, .12); },
+  upgrade: (t) => { ['C5', 'E5', 'G5', 'C6', 'E6'].forEach((n, i) => { const x = I.musicBox(m(n), { decay: 1.2 }); game.addMono(x, t + i * .07, .16); verb.addMono(x, t + i * .07, .12); }); },
+  lowhum: (t) => { game.addMono(sineTone(68, .7), t, .05); },
+  screenfold: (t) => { game.addMono(I.woodTick(.8), t, .3); game.addMono(I.thud(150, .05), t + .05, .3); game.addMono(I.paperFwip(.8, 31), t + .02, .12); },
+  drill: (t) => { const x = sawTone(190, .5, { vib: .04, drive: 3, lp: .5 }); game.addMono(x, t, .28); game.addMono(I.noiseSweep(.5, 2400, 2600, { q: 2 }), t, .05); },
+  snip: (t) => { [0, .2].forEach((d) => { game.addMono(I.rim(2.6, 610 + d * 10), t + d, .3); game.addMono(I.rim(3.1, 611 + d * 10), t + d + .03, .2); }); },
+  splashsmall: (t) => { sfx(t, 'splash.wav', .16); },
+  flump: (t) => { game.addMono(I.thud(70, .16), t, .7); game.addMono(I.noiseSweep(.45, 700, 200, { q: .6, pink: true }), t, .12); },
+  trickle: (t) => { game.addMono(I.noiseSweep(2.4, 600, 900, { q: .7, pink: true }), t, .03); for (let k = 0; k < 8; k++) { const x = I.bell(1800 + 200 * (k % 3), .05, 1.4, 1.6); wonder.addMono(x, t + k * .3, .03); } },
+  gloop: (t) => { game.addMono(I.pop(240, 88), t, .25); game.addMono(I.thud(110, .06), t + .03, .2); },
+  marker: (t) => { game.addMono(I.noiseSweep(.28, 2200, 3200, { q: 5 }), t, .07); },
+  noirtease: (t) => { for (let k = 0; k < 8; k++) game.addMono(I.snare({ decay: .05, snap: .3, tone: .2, seed: 400 + k }), t + k * BEAT, k % 2 ? .05 : .025);
+    ['D2', 'F2', 'G2', 'A2', 'D2', 'C2', 'A1', 'D2'].forEach((n, k) => { const x = I.bass(m(n), BEAT * .9); game.addMono(x, t + k * BEAT, .12); });
+    [['A4', 0, .5], ['C5', BEAT * 2, .4], ['A4', BEAT * 4, 1.2]].forEach(([n, d, l]) => { const x = lowpassArr(I.brassNote(m(n), l, { bright: .4 }), .25); game.addMono(x, t + d, .1); verb.addMono(x, t + d, .05); }); },
+  glitchfan: (t) => glitchFan(t), glitchfan2: (t) => glitchFan(t, true),
+  chargerhum: (t, d) => { game.addMono(sineTone(100, d || .6), t, .025); game.addMono(sineTone(200, d || .6), t, .01); },
+  // GLITCH's stutter (1.0 s, his signature): bit-crushed clicks, a "k-k-k-tsch", a 60 ms dropout (silence) in the middle
+  gstutter: (t) => { for (let k = 0; k < 12; k++) { if (k === 6) continue; const x = sqTone(300 + 900 * ((k * 7) % 5) / 5, .045, { duty: .5 }); for (let i = 0; i < x.length; i++) x[i] = Math.round(x[i] * 4) / 4; game.addMono(x, t + k * .075, .18); }
+    const ts = I.noiseSweep(.22, 5000, 2500, { q: .8 }); for (let i = 0; i < ts.length; i++) ts[i] = Math.round(ts[i] * 6) / 6; game.addMono(ts, t + .78, .12); },
+});
 // HUMOUR SFX LOUD (teacher, 27 Nov 2026: "Just make the sound effects for humour louder. Dont be shy."): the comic events (../kit/humour_sfx.js
 // HUMOUR) are drawn on their own, each set 3 dB above the dialogue around it, on their own bus (ducked under the voice, peak-limited); the
 // beds duck under it. Every other event goes to the sfx bus as before.
-const HS = require('../kit/humour_sfx'); const QUIET = process.env.HUMOUR_OLD === '1';
+const HS = require('../kit/humour_sfx'); for (const k of ['glug', 'pffrt', 'bzzt', 'beepboop', 'drill', 'snip', 'splashsmall', 'flump', 'skid', 'cricket', 'smugding']) HS.HUMOUR.add(k);   /* P4 EP2: the new comic cues (loud, +3 dB over the dialogue, never on a word) */ const QUIET = process.env.HUMOUR_OLD === '1';
 let miss = new Set(); C.ev.forEach((e, i) => { if (!QUIET && HS.HUMOUR.has(e.k)) return; if (P[e.k]) P[e.k](e.t, e.v, i); else miss.add(e.k); }); if (miss.size) console.log('no sound for', [...miss]);
 const GAME0 = game; const HUM = QUIET ? null : HS.render(C.ev, P, HS.HUMOUR, { setBus: (b) => { game = b || GAME0; }, makeBus: bus, N, SR, voice, voiceGain: 2.3, sfxGain: .75,
   lines: TL.order.filter((id) => TL.lines[id].who !== 'chant').map((id) => ({ t: TL.lines[id].t, end: TL.lines[id].end })) });
@@ -329,7 +380,11 @@ if (HUM) { stems.humour = HUM.bus; GAIN.humour = .75; }
 const BG = { drums: .5, bass: .55, keys: 1.6, lead: .9, pad: 1.4, brass: 1.0 };
 for (const [name, bd] of Object.entries(beds)) for (const [k, x] of Object.entries(bd)) { stems[name + '_' + k] = x; GAIN[name + '_' + k] = BG[k] * (name === 'lite' ? .9 : name === 'tense' ? 1.5 : name === 'action' ? 1.15 : 1); }
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? path.join(__dirname, "out", "stems") : null }); MIX.highpass(mix, 30);
-MIX.fadeOut(mix, C.END - 1.2, C.END - .05);
+// GLITCH's final sting (script 7:53.7): TRUE SILENCE (every bus at zero) for 1.8 s before his line, and silence over the black end card:
+// both spans hard-muted in the mix (10 ms ramps), so no reverb tail or bed leaks in
+{ const Mk = TL.marks, Z = TL.lines.z1201; if (Mk.silence !== undefined && Z) for (const [a, b] of [[Mk.silence, Z.t - .01], [Mk.black, C.END + 1]]) { const chans = mix.L ? [mix.L, mix.R] : [mix]; for (const ch of chans) { const i0 = Math.round(a * SR), i1 = Math.min(ch.length, Math.round(b * SR)), r = Math.round(.01 * SR);
+  for (let i = Math.max(0, i0 - r); i < i1; i++) ch[i] *= i < i0 ? (i0 - i) / r : 0; } } }
+MIX.fadeOut(mix, C.END - .45, C.END - .05);   // P4 EP2: GLITCH's line ends .5 s before the end (silence over black): the fade must not touch it
 const M = MIX.master(mix, .8, HUM ? .66 : .78, { lufs: -16 });   // (humour loud: the punchier sfx transients overshoot more after AAC: ceiling .66 keeps <= -1.5 dBTP)   // ceiling .78: true peak <= -1.5 dBTP after AAC (it measured -1.2 with .84)
 fs.mkdirSync(path.join(__dirname, 'out'), { recursive: true }); MIX.writeWav(path.join(__dirname, 'out', `mix_p${PART}.wav`), mix);
 console.log(`wrote out/mix_p${PART}.wav (${DUR.toFixed(2)} s${M && M.lufs !== undefined ? `, ${M.lufs.toFixed(1)} LUFS` : ''})`);

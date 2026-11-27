@@ -136,8 +136,11 @@ if os.path.exists(SHEET):
                 s0, s1 = w["x0"] + colsS.min() - 3, w["x0"] + colsS.max() + 3; ms = np.zeros_like(al); ms[w["top"] - 40: int(w["cy"] + .1 * w["ry"]), s0: s1] = 255
                 save2("strut" + k_, sh_cut[..., :3], np.minimum(al, np.minimum(m, ms)))
             wl.append({kk: round(float(v) - (ex0 if kk in ("cx", "x0", "x1") else ey0 if kk in ("cy", "top") else 0), 1) for kk, v in w.items()})
+        hsv2 = cv2.cvtColor(sh_im, cv2.COLOR_BGR2HSV); Y2, X2 = np.mgrid[:sh_im.shape[0], :sh_im.shape[1]]
+        yel2 = (hsv2[..., 0] > 18) & (hsv2[..., 0] < 35) & (hsv2[..., 1] > 110) & (Y2 < top_ + 60) & (X2 > xs2.min()) & (X2 < xs2.max())
+        byy, bxx = np.where(yel2); bulb2 = dict(x=round(float(bxx.mean()) - ex0, 1), y=round(float(byy.mean()) - ey0, 1), r=round(float(np.sqrt(len(bxx) / np.pi)), 1)) if len(bxx) else None
         k = BASE_SH / qh
         meta["poses"][name] = dict(w=int(ex1 - ex0), h=int(ey1 - ey0), ox=round(qx + qw / 2 - ex0, 1), oy=round(gnd - ey0, 1), scale=round(k, 4),
-            screen=dict(x=qx - ex0, y=qy - ey0, w=qw, h=qh), wheels=wl, face=[qx - ex0, qy - ey0, qw, qh])
+            screen=dict(x=qx - ex0, y=qy - ey0, w=qw, h=qh), wheels=wl, face=[qx - ex0, qy - ey0, qw, qh], bulb=bulb2)
         print(name, meta["poses"][name]["scale"], "screen", qw, qh, "wheels", [(w["cx"], w["cy"], w["rx"], w["ry"]) for w in wl])
     json.dump(meta, open(f"{H}/cut/glitch.json", "w"), indent=1, default=float)

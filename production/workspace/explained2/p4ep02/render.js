@@ -7,7 +7,7 @@ const F0 = clip ? Math.round(clip[0] * FPS) : 0, F1 = clip ? Math.round(clip[1] 
 if (clip) fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
 const jobs = []; for (let f = F0; f < F1; f += CH) jobs.push([f, Math.min(F1, f + CH)]);
 const name = (j) => path.join(dir, `c_${String(j[0]).padStart(6, '0')}.mp4`);
-async function worker(id) { const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); p.on('pageerror', e => console.log('PAGEERR', e.message));
+async function worker(id) { const b = await chromium.launch({ ignoreDefaultArgs: ['--disable-dev-shm-usage'] });   /* P4 EP2: Chromium's shared memory in /dev/shm (RAM), not as deleted files in /tmp (about 1 GB of disk with 3 workers) */ const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); p.on('pageerror', e => console.log('PAGEERR', e.message));
   await p.goto('file://' + path.join(__dirname, 'page.html') + '?part=' + PART); await p.waitForFunction(() => window.READY === true, null, { timeout: 120000 });
   while (jobs.length) { const j = jobs.shift(), out = name(j); if (fs.existsSync(out)) continue; const tmp = out + '.part.mp4';
     const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-', '-c:v', 'libx264', '-preset', 'medium', '-crf', '17', '-pix_fmt', 'yuv420p', '-r', String(FPS), tmp], { stdio: ['pipe', 'inherit', 'inherit'] });

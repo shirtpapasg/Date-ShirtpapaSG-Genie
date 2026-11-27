@@ -75,7 +75,7 @@ function nextOwn(who, t) { const a = _own[who] || (_own[who] = TL.order.map((id)
    correct one should be confident/smile. celebrate with hands high up only when achieved/learnt something new". */
 let _learn = null;
 function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is learnt: a key word lands, a cycle/living tag lands, a mistake is fixed, "Now you know!"
-    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|cross$|clap$|coin1$)/.test(k))   /* P4 EP1 v2: a key word lands, the snail crosses the line, the high-five lands, the score */   /* P4 EP1: a key word lands, the chain's verdict, the wheel spins (fix 3 works), the score. NOT the failed fixes (STILL STUCK, the rope) */ _learn.push([v - .4, v + 4]);
+    for (const [k, v] of Object.entries(TL.marks || {})) if (/^(kw_|sys$|clap$|coin1$|weeks$)/.test(k))   /* P4 EP2: a key word lands, the system sentence (all three learnt it), Chilli stands tall again, the high-five, the score */   /* P4 EP1 v2: a key word lands, the snail crosses the line, the high-five lands, the score */   /* P4 EP1: a key word lands, the chain's verdict, the wheel spins (fix 3 works), the score. NOT the failed fixes (STILL STUCK, the rope) */ _learn.push([v - .4, v + 4]);
     for (const s of TL.scenes || []) if (s.name === "nyk" || s.name === "kwrecap") _learn.push([s.t0, s.t1]); }
   return _learn.some(([a, b]) => t >= a && t < b); }
 // EP22 (script section 3, OUTCOMES): Part 1 Round 1 (EP21's dare: answer 2, the nail attracts the clips) Basil right for the right
@@ -99,7 +99,9 @@ function learnAt(t) { if (!_learn) { _learn = [];   // moments something new is 
 /* P4 EP1 v2 (script section 6, cards 2 and 3 swapped): picks Basil 1 (pedal faster), Pip 2 (all three parts back: right), Momo 3 (chain and
    brakes, skip the bell). Basil shy from Heart's correction r707 to the end of the look-closer lcbike (his fix 1); Momo shy from Pip's
    "Wait. Checklist." v1004 to the end of Heart's v1008 (her fix 3); Pip confident through both corrections. */
-const OUTCOMES = [{ at: "l:r707", to: "s:lcbike", right: ["pip"], wrong: ["basil"] }, { at: "l:v1004", to: "l:v1008", right: ["pip"], wrong: ["momo"] }];
+/* P4 EP2 (script section 6): picks Momo 1 (right), Basil 2, Pip 3. Basil shy from w306 to the end of `water` and from x603 to x605; Pip shy
+   from u406 to the end of `lunch`; Momo confident through each correction. */
+const OUTCOMES = [{ at: "l:w306", to: "s:water", right: ["momo"], wrong: ["basil"] }, { at: "l:u406", to: "s:lunch", right: ["momo"], wrong: ["pip"] }, { at: "l:x603", to: "l:x605", right: ["momo"], wrong: ["basil"] }];
 const outcomeEnd = (o, t0) => { if (!o.to) return t0 + 4; const [k, id] = o.to.split(":");
   const v = k === "s" ? (SCN[id] && SCN[id].t1) : k === "l" ? (HAS(id) ? LE(id) : undefined) : MK(id); return v === undefined ? t0 + 4 : Math.max(t0 + 4, v); };
 function outcomeAt(who, t) { for (const o of OUTCOMES) { const [k, id] = o.at.split(":"), t0 = k === "m" ? MK(id) : (HAS(id) ? LT(id) : undefined); if (t0 === undefined || t < t0) continue; const t1 = outcomeEnd(o, t0); if (t > t1) continue;
@@ -446,12 +448,12 @@ const KWHOLD = 2.0;
 // dimming), 2.0 s, then they fly to the shelf. Move an o.at if the drawing needs it (keep the pops above the strips and clear of the boards).
 // P4 EP1 v2: FUNCTION (inside the look-closer lcbike, on Pip's "function" in l804), INTERACT (in `interact`, on Momo's "interact" in j904),
 // SYSTEM (in `system`, on Basil's "system" in v1012). All o.at (no dimming), 2.0 s, then they fly to the shelf.
-const KW = [["FUNCTION", "kw_function", 1, null, { at: [760, 280], size: 104 }], ["INTERACT", "kw_interact", 1, null, { at: [1400, 560], size: 110 }], ["SYSTEM", "kw_system", 1, null, { at: [960, 200], size: 120 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));
+const KW = [["MAKE FOOD", "kw_make_food", 1, null, { at: [960, 250], size: 104 }], ["ABSORB", "kw_absorb", 1, null, { at: [960, 330], size: 112 }], ["TRANSPORT", "kw_transport", 1, null, { at: [1220, 250], size: 104 }]].map(([w, mk, big, from, o], i) => ({ w, t: MK(mk), big, from: from || (o && o.at) || [960, 470], i, o: o || {}, tl: MK(mk) + (big ? KWHOLD : 0) + .5 }));   // P4 EP2: MAKE FOOD (Pip, u407), ABSORB (Momo, x604), TRANSPORT (Basil, j805)
 const KWBIG = (w) => w.length > 20 ? 78 : w.length > 12 ? 104 : 130;
-const SHELF_HIDE = { cold: 1, title: 1, fixcards: 1, lock: 1, picks: 1, replay: 1, waitw: 1, shrink: 1, pullout: 1, inbasil: 1, words: 1, finish: 1, nyk: 1, blooper: 1 };
+const SHELF_HIDE = { cold: 1, title: 1, fixcards: 1, lock: 1, picks: 1, waitw: 1, shrink: 1, pullout: 1, words: 1, finish: 1, next: 1, nyk: 1, blooper: 1, glitchend: 1 };
 function kwPill(w, size, glow = 0) { const ww = tw(w, size, 700, "Fredoka", size * .07) + size * 1.3, h = size * 1.55;
   return `<g ${glow > .05 ? 'filter="url(#glowS)"' : 'filter="url(#dropS)"'}><rect x="${n2(-ww / 2)}" y="${n2(-h / 2)}" width="${n2(ww)}" height="${n2(h)}" rx="${n2(h / 2)}" fill="url(#gSun)"/><rect x="${n2(-ww / 2 + 5)}" y="${n2(-h / 2 + 4)}" width="${n2(ww - 10)}" height="${n2(h * .38)}" rx="${n2(h * .19)}" fill="#fff" opacity=".3"/></g>` + T(0, n2(size * .35), w, size, P.ink, { ls: n2(size * .07) }); }
-const KWLINE = ["hk_function", "hk_interact", "hk_system"];   // P4 EP1: in the order they pop
+const KWLINE = ["hk_make_food", "hk_absorb", "hk_transport"];   // P4 EP2: in the order they pop
 function shelf(t, s) { const S = TL.scenes, si = S.indexOf(s), hid = SHELF_HIDE[s.name], prevHid = si > 0 && SHELF_HIDE[S[si - 1].name];
   let hide = hid ? (prevHid ? 1 : eo((t - s.t0) / .3)) : (prevHid ? 1 - eo((t - s.t0) / .35) : 0); let out = "", top = "";
   const away = window.SHELF_AWAY ? window.SHELF_AWAY(t) : 0; hide = Math.max(hide, away); const rc = s.name === "kwrecap" ? eio((t - s.t0) / .6) : 0;

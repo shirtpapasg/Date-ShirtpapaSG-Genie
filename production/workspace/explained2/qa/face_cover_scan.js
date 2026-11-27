@@ -8,7 +8,7 @@
 // a face in a dimmed background layer (a full-frame translucent rect drawn between the face and the card: a think card over the scene). One line per (face, obstacle) run, with the largest share covered.
 //   NODE_PATH=$(npm root -g) node qa/face_cover_scan.js p4ep01v2 1 0-437 > p4ep01v2/qa/face_cover_scan.txt
 const { chromium } = require('playwright'); const path = require('path');
-const FACEFN = { limHead: 'uncle lim', limHeadBox: 'uncle lim', snailV2: 'snail', chilliP4v2: 'chilli', x2youLink: 'YOU link' };   // global drawing functions -> face name
+const FACEFN = { limHead: 'uncle lim', limHeadBox: 'uncle lim', snailV2: 'snail', chilliP4v2: 'chilli', x2youLink: 'YOU link', chilliFaceBox: 'chilli', glitchFaceBox: 'glitch' };   // P4 EP2: the painted Chilli's and GLITCH's face boxes (ep2art.js)   // global drawing functions -> face name
 (async () => { const [d, P, ...W] = process.argv.slice(2), dir = path.resolve(d), FPS = +(process.env.FPS || 5), MIN = +(process.env.MIN || .12);
   const b = await chromium.launch({ args: ['--allow-file-access-from-files', '--disable-web-security'] }); const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
   await p.goto('file://' + path.join(dir, 'page.html') + '?part=' + P); await p.waitForFunction(() => window.READY === true, null, { timeout: 120000 });

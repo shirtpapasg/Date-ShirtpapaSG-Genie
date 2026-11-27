@@ -40,7 +40,7 @@ for who, sets in (("basil", ("basil_v2", "basil")), ("momo", ("momo_v2", "momo")
             a_ = np.array(im)[..., 3]; ys = np.where(a_.max(1) > 128)[0]; yb = ys[-1]; xs = np.where(a_[yb - 6: yb + 1].max(0) > 128)[0]; anc = [float(xs.mean()), float(yb)]
         im2 = im.resize((round(im.width * K), round(im.height * K)), Image.LANCZOS); im2.save(f"{O}/{who}_back.png")
         M[f"{who}_back"] = dict(file=f"spr/{who}_back.png", w=im2.width, h=im2.height, ax=round(anc[0] * K, 1), ay=round(anc[1] * K, 1), bh=BH[who]); break
-open(f"{O}/manifest.js").read(); M = json.loads(src[src.index("=") + 1: src.rindex(";")])
+# (P4 EP2: a re-read of the manifest here dropped the back views just added; removed)
 BH = {w: M[f"{w}_sit_closed"]["bh"] for w in ("pip", "basil", "momo")}
 PJ = json.load(open(f"{S}/poses/poses.json")) if os.path.exists(f"{S}/poses/poses.json") else {}
 SET = {"pip": ["pip"], "basil": ["basil_v2", "basil"], "momo": ["momo_v2", "momo"]}
