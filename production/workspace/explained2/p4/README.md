@@ -6,7 +6,7 @@ rendered or uploaded.
 | File | Episode | Format | Problem (first 20 s) | Length (est.) |
 |---|---|---|---|---|
 | `p4_ep01_script.md` | EP1 Systems: bike, body, tree (**v2, 26 Nov**: "The Great Void Deck Race"; v1 rejected, kept as `p4_ep01_script_v1.md`) | B Fix-It | Basil sits in an ice box three minutes before his race with Uncle Lim: his bike has no bell, no chain and no brakes ("LIGHTER IS FASTER!") | 7:38 model (about 6:30 built) |
-| `p4_ep02_script.md` | EP2 The plant system | D Help Desk | Chilli the chilli plant: "I'm watered every single day. So why am I wilting?" | 6:23 |
+| `p4_ep02_script.md` | EP2 The plant system (**v2, 27 Nov**: "Help! I'm Wilting!", villain GLITCH; v1 kept as `p4_ep02_script_v1.md`) | D Help Desk | Chilli the chilli plant: "I'm watered every single day, in my beautiful new pot. So WHY am I wilting?" | 7:54 model (about 7:30 built) |
 | `p4_ep03_script.md` | EP3 Read a leaf like a scientist | A Case File | A leaf lands on the Help Desk: which of three plants dropped it? | 6:09 |
 | `p4_ep04_script.md` | EP4 Plants with superpowers: cactus, climbers, carrots | D Help Desk | Spike the cactus: "My family loves me too much." | 6:23 |
 
@@ -45,6 +45,9 @@ Each script has the same sections, so any agent can find anything:
   mechanic's wheel test, the water test, a side-by-side match, a time-lapse with a day counter) → the words that earn marks → callback joke.
 - **The BE THE THING journey** stays in every episode (quiet, micro-world pad only, YOU tag, the buddies riding along in back views).
 - **Think time:** the lock-in, plus at least one more silent think pause (2.5-3.5 s) on a question that matters.
+- **A villain from EP2 on (teacher, 27 Nov 2026: "for episode 2 onwards, include a villain"):** one of the approved troublemakers (Kopi the
+  Macaque, GLITCH the Robot, Duchess) causes or worsens the problem in a way that IS the science, stays funny and never truly mean or
+  scary, is won over by that episode's scientific method (never beaten by force), and leaves a hook to return. EP2: GLITCH.
 - **Episodes link by story:** EP1 ends with Chilli hopping up to the new Science Help Desk → EP2; EP2 ends with a leaf that is not Chilli's
   → EP3; EP3 ends with Spike at the desk → EP4; EP4 teases EP5's obstacle race (the Challenge format).
 - **The Science Help Desk** (a folding table with a desk bell at the void deck) is the buddies' P4 club corner: the home of every Help Desk
@@ -53,8 +56,8 @@ Each script has the same sections, so any agent can find anything:
 ## 3. Who is right (rotation) and who reads the card
 | EP | Pip | Momo | Basil | Answer | Reads "the words that earn marks" |
 |---|---|---|---|---|---|
-| 1 (v2) | 3 (right) | 2 (wrong) | 1 (wrong) | 3 | Basil |
-| 2 | 3 (right) | 2 (wrong) | 1 (wrong) | 3 | Pip |
+| 1 (v2, as built: cards 2 and 3 swapped) | 2 (right) | 3 (wrong) | 1 (wrong) | 2 | Basil |
+| 2 (v2) | 3 (wrong) | 1 (right) | 2 (wrong) | 1 | Momo |
 | 3 | 2 (wrong) | 1 (wrong) | 3 (right) | 3 | Momo |
 | 4 | 1 (wrong) | 2 (wrong) | 3 (right answer, **wrong reason: no point**) | 3 | Basil |
 The right answer has been card 3 four times; **from EP5, vary the position of the right card** (1 or 2) so children cannot learn "always 3".
@@ -95,7 +98,7 @@ Momo 11, Pip 7; EP4 Basil 14, Momo 7, Pip 6); in EP2 the right buddy, Pip, speak
 |---|---|---|
 | 1 | P3 EP27 (pilot) | The logo heart flickers (cyan and magenta double, a tiny blip) on "four" in "See you in Primary 4!" |
 | 2 | P4 EP1 | Pip's restored bell reflects the logo heart for 6 frames; a tiny extra digital "ting" an octave up |
-| 3 | P4 EP2 | Chilli: "Nobody ever listens to a plant." Heart: "I know the feeling." |
+| 3 | P4 EP2 | Chilli: "Thank you for listening. Nobody ever listens to a plant." Heart: "I know the feeling." (v2: about 5:45 by the model) |
 | - | P4 EP3 | none, on purpose (a gap keeps them rare) |
 | 4 | P4 EP4 | Spike looks around for the voice: "Where are you, exactly?" Heart: "Right here." |
 - Ahead: EP15 a buddy asks why Heart never makes mistakes; EP20-EP22 glitches with "Spot Heart's mistake!" (every mistake caught on screen
