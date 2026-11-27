@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 H = os.path.dirname(os.path.abspath(__file__)); S = f"{H}/../characters/sprites"; O = f"{H}/spr"; K = .75
 NEW = ["pip_embarrassed", "pip_panic", "pip_dizzy", "pip_proud", "pip_angry", "pip_ride", "momo_facepalm", "momo_laugh", "momo_unimpressed",
-       "momo_horrified", "basil_deadpan", "basil_shocked", "basil_laugh", "basil_shrug", "basil_hero"]
+       "momo_horrified", "basil_deadpan", "basil_shocked", "basil_laugh", "basil_shrug", "basil_hero", "pip_squeamish"]   # pip_squeamish: P4 EP2 (27 Nov)
 src = open(f"{O}/manifest.js").read(); M = json.loads(src[src.index("=") + 1: src.rindex(";")])
 BH = {w: M[f"{w}_sit_closed"]["bh"] for w in ("pip", "basil", "momo")}
 PJ = json.load(open(f"{S}/poses/poses.json")) if os.path.exists(f"{S}/poses/poses.json") else {}

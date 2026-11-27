@@ -27,6 +27,23 @@ vm.CHARACTERS["chilli"] = dict(desc="Chilli the chilli-padi plant: small, polite
 # P4 EP1 v2 guest: Uncle Lim, a kind, unhurried neighbour in his sixties: a warm, low, older man's voice, slow and gentle (not Heart's, not a
 # buddy's). buddy() makes it 12% slower again, like every character line.
 vm.CHARACTERS["lim"] = dict(desc="Uncle Lim: a kind, unhurried neighbour in his sixties, warm and low", mix={"bm_george": .45, "am_michael": .55}, speed=.96, formant=.95, median=112, range=1.15)
+# P4 EP2 guests (27 Nov 2026; test clips for the teacher in ../pron_clips/):
+# CHILLI (EP2's own voice; the script: "polite, a little dry", am_michael-based with a light pitch lift): a calm young voice with a narrow
+# pitch range (dry), not a buddy's and not Heart's. Replaces EP1's one-line cameo recipe.
+vm.CHARACTERS["chilli"] = dict(desc="Chilli the chilli-padi plant (EP2): polite, a little dry", mix={"am_michael": .6, "am_echo": .4}, speed=1.05, formant=1.1, median=182, range=1.0)
+# GLITCH the Robot: a pompous, precise robot. A British base (bm_lewis + bm_george), measured pace, a flattened pitch range; then glitch_fx:
+# the pitch QUANTISED to steps of a semitone (robotic stepping intonation: the "little pitch step on key words"), a short comb (3.1 ms, .28)
+# and a faint 70 Hz ring modulation (.10) for the vocoder edge. Light enough that every word stays clear (each line must align word by word).
+vm.CHARACTERS["glitch"] = dict(desc="GLITCH the Robot: pompous, precise, a light vocoder edge", mix={"bm_lewis": .6, "bm_george": .4}, speed=1.0, formant=1.0, median=138, range=.55)
+# his signature sting ("New knowledge acquired."): calm, a little lower and slower, dry (no reverb), the same robot edge
+vm.CHARACTERS["glitch_sting"] = dict(desc="GLITCH, the final sting: calm, lower, slower", mix={"bm_lewis": .6, "bm_george": .4}, speed=.9, formant=.98, median=116, range=.4)
+def glitch_fx(x, sr, step=1.0, comb=.28, ring=.10):
+    x = np.asarray(x, np.float64); snd = parselmouth.Sound(x, sr); mm = call(snd, "To Manipulation", 0.01, 70, 400); pt = call(mm, "Extract pitch tier")
+    med = call(snd.to_pitch(time_step=0.01, pitch_floor=70, pitch_ceiling=400), "Get quantile", 0, 0, 0.5, "Hertz")
+    call(pt, "Formula", f"{med} * 2 ^ (round(12 * log2(self / {med}) / {step}) * {step} / 12)"); call([pt, mm], "Replace pitch tier")
+    y = call(mm, "Get resynthesis (overlap-add)").values[0]; d = int(.0031 * sr); yc = y.copy(); yc[d:] += comb * y[:-d]
+    tt = np.arange(len(yc)) / sr; yc = yc * (1 - ring) + ring * yc * np.sin(2 * np.pi * 70 * tt)
+    sp = yc[np.abs(yc) > .003]; return np.clip(yc * (10 ** (-18 / 20) / np.sqrt(np.mean(sp ** 2))), -.98, .98)
 def trailer_fx(x, sr):
     """Heart's movie-trailer aside (script r701): her own recording pitched down 3 semitones (formants kept), then a big hall reverb (a 2.2 s
     decaying noise tail, low-passed), wet .35 under the dry voice. Returns the same length plus the tail."""
@@ -42,7 +59,7 @@ import pocketsphinx
 from pocketsphinx import Decoder
 D = "/home/user/heart-tts"; SR = 24000; V = f"{H}/voice"; os.makedirs(V, exist_ok=True)
 sys.path.insert(0, os.path.join(H, ".."))
-from sg_pron import needs_fix, speak_line, shape_particles   # the teacher's approved pronunciations (../PRONUNCIATION.md): Sungei Buloh, Semakau, "live"
+from sg_pron import needs_fix, speak_line, shape_particles, SG_PARTICLES   # the teacher's approved pronunciations (../PRONUNCIATION.md): Sungei Buloh, Semakau, "live"
 class _FixK:
     """Kokoro, but any text with a name or word on the pronunciation list is said through sg_pron.speak_line (Heart and the buddies)."""
     def __init__(self, k): self.k = k
@@ -186,7 +203,7 @@ def crowd(id, text, hid):
     write_group(id, tracks, n, ws, {"text": text, "len": Dh + .1})
 
 dic = set(l.split()[0].split("(")[0] for l in open(os.path.join(pocketsphinx.get_model_path(), "en-us", "cmudict-en-us.dict")))
-EXTRA = {"lah": "L AA", "mah": "M AA", "aiyoh": "AY Y OW", "bobs": "B AA B Z", "fragyle": "F R AE JH AY L", "letterboxes": "L EH T ER B AA K S AH Z", "ice-cream": "AY S K R IY M", "caterpillar": "K AE T ER P IH L ER", "t-shirt": "T IY SH ER T", "ice-cream": "AY S K R IY M", "aluminium": "AE L Y UW M IH N IY AH M", "kiln": "K IH L N", "ooze": "UW Z", "mould": "M OW L D", "fungi": "F AH N JH AY", "you'll": "Y UW L", "i'm": "AY M", "milks": "M IH L K S", "biscuits": "B IH S K AH T S", "noodle": "N UW D AH L", "ceramic": "S ER AE M IH K", "metals": "M EH T AH L Z", "materials": "M AH T IH R IY AH L Z", "mudskipper": "M AH D S K IH P ER", "mudskippers": "M AH D S K IH P ER Z", "warm-up": "W AO R M AH P", "non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
+EXTRA = {"noooo": "N UW", "blub": "B L AH B", "chilli": "CH IH L IY", "chilli's": "CH IH L IY Z", "pong": "P AO NG", "pow": "P AW", "you're": "Y UH R", "i've": "AY V", "couldn't": "K UH D AH N T", "isn't": "IH Z AH N T", "there's": "DH EH R Z", "he's": "HH IY Z", "aiyoh": "AY Y OW", "top-up": "T AA P AH P", "lah": "L AA", "mah": "M AA", "aiyoh": "AY Y OW", "bobs": "B AA B Z", "fragyle": "F R AE JH AY L", "letterboxes": "L EH T ER B AA K S AH Z", "ice-cream": "AY S K R IY M", "caterpillar": "K AE T ER P IH L ER", "t-shirt": "T IY SH ER T", "ice-cream": "AY S K R IY M", "aluminium": "AE L Y UW M IH N IY AH M", "kiln": "K IH L N", "ooze": "UW Z", "mould": "M OW L D", "fungi": "F AH N JH AY", "you'll": "Y UW L", "i'm": "AY M", "milks": "M IH L K S", "biscuits": "B IH S K AH T S", "noodle": "N UW D AH L", "ceramic": "S ER AE M IH K", "metals": "M EH T AH L Z", "materials": "M AH T IH R IY AH L Z", "mudskipper": "M AH D S K IH P ER", "mudskippers": "M AH D S K IH P ER Z", "warm-up": "W AO R M AH P", "non-living": "N AA N L IH V IH NG", "wind-up": "W AY N D AH P", "taogay": "T AW G EY", "cheechahk": "CH IY CH AA K", "mealworm": "M IY L W ER M",
          "lock-in": "L AA K IH N", "pe": "P IY IY", "windscreen": "W IH N D S K R IY N", "oh-pake": "OW P EY K", "mcaw": "M AH K AO", "koi": "K OY", "dragonfly": "D R AE G AH N F L AY", "goldfish": "G OW L D F IH SH", "eco-garden": "IY K OW G AA R D AH N", "it's": "IH T S", "let's": "L EH T S", "that's": "DH AE T S", "isn't": "IH Z AH N T", "momo": "M OW M OW", "pip": "P IH P",
          "aww": "AA", "recycling": "R IY S AY K L IH NG", "organiser": "AO R G AH N AY Z ER", "showdown": "SH OW D AW N", "papaya": "P AH P AY AH",
          "toa": "T OW AH", "payoh": "P AA Y OW", "mynah": "M AY N AH", "dit": "D IH T", "wines": "W AY N Z", "squish": "S K W IH SH", "buddies": "B AH D IY Z",
@@ -272,7 +289,7 @@ for it in SEQ:
         continue
     if it[0] != "say": continue
     _, id, who, text, o = it; f = f"{V}/{id}.wav"; j = f"{V}/{id}.json"
-    vo = {k: o[k] for k in ("speed", "gap", "term", "soft", "excited", "pron", "slowof", "trailer") if k in o}
+    vo = {k: o[k] for k in ("speed", "gap", "term", "soft", "excited", "pron", "slowof", "trailer", "sting") if k in o}
     if os.path.exists(j) and json.load(open(j)).get("text") == text and json.load(open(j)).get("vo", {}) == vo and os.path.exists(f) and (not o.get("shout") or "know" in json.load(open(j))): continue
     kn = None; LINE_PRON.clear(); LINE_PRON.update(o.get("pron", {}))
     if o.get("slowof"):   # EP27: the slow-motion replay: another line's recording, slowed (stretch x) and pitched down (semitones)
@@ -285,12 +302,13 @@ for it in SEQ:
         json.dump({"who": who, "text": text, "vo": vo, "dur": round(len(x) / 48000, 3), "words": words, "aligned": True, "fps": 30, "open": [round(float(v), 2) for v in op], "mouth": tv.mouth_track(lvl), "stress": tv.stresses(lv)}, open(j, "w"))
         print(id, who, "slow-motion copy of", src); continue
     if o.get("shout"): x, kn, sw = shout(text); sr = SR
-    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .5), o.get("speed", .90), o.get("term", ()), o.get("soft", False)) if who == "heart" else buddy(who, text, **({"gap": o["gap"]} if "gap" in o else {}))
+    else: x, sr = heart(text, o.get("excited", False), o.get("gap", .5), o.get("speed", .90), o.get("term", ()), o.get("soft", False)) if who == "heart" else buddy("glitch_sting" if o.get("sting") else who, text, **({"gap": o["gap"]} if "gap" in o else {}))
+    if who == "glitch": x = glitch_fx(x, sr)
     if o.get("trailer"): x = trailer_fx(x, sr)
     x = up48(np.asarray(x, np.float64), sr); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16")
     if who == "lim":   # v2 (teacher, 26 Nov: "lacking the singlish element"): his particles said the Singapore way (../sg_pron.py SG_PARTICLES)
         w0, ok0 = align(text, f)
-        if ok0: x, rep = shape_particles(x, 48000, w0); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16"); print("   singlish:", rep)
+        if ok0: x, rep = shape_particles(x, 48000, w0, table={**SG_PARTICLES, "one": {"pause": .06, "dur": .30, "fall": 2.5, "hold": .3}} if re.search(r"\bone\.$", text) else None); sf.write(f, x.astype(np.float32), 48000, subtype="PCM_16"); print("   singlish:", rep)
         else: print("   singlish: NOT shaped (alignment failed)")
     words, ok = align(text, f)
     if kn is not None: D_ = len(x) / 48000; words = [{"w": "Now", "a": .005, "b": round(sw[1]["a"], 3)}, {"w": "you", "a": round(sw[1]["a"], 3), "b": round(kn, 3)}, {"w": "know!", "a": round(kn, 3), "b": round(D_, 3)}]; ok = True

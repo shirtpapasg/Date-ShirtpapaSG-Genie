@@ -212,7 +212,7 @@ function buddy(who, x, y, h, t, o = {}) {
    when the stand-in is the pose already showing. "laugh" stand-ins giggle (a small shake). */
 const RUNSTEP = .165;   // fix pass 8: one run frame (s)
 const NEWPOSE_FALLBACK = { basil: { deadpan: "sit", shocked: "surprised", laugh: "laughing", shrug: "oops", hero: "arms_crossed" },
-  pip: { panic: "thinking", proud: "arms_crossed", embarrassed: "oops", angry: "pointing", dizzy: "surprised", ride: "sit" },
+  pip: { panic: "thinking", proud: "arms_crossed", embarrassed: "oops", angry: "pointing", dizzy: "surprised", ride: "sit", squeamish: "oops" },
   momo: { facepalm: "oops", laugh: "cheer", unimpressed: "sit", horrified: "surprised" } };
 const NEWPOSES = Object.fromEntries(Object.entries(NEWPOSE_FALLBACK).map(([w, m]) => [w, Object.keys(m)]));
 function resolvePose(who, p) { if (!p) return p; const [a, b] = p.split("/"); if (SPR[`${who}_${a}`] || a === "sit" || a === "back") return a; return b || (NEWPOSE_FALLBACK[who] || {})[a] || a; }
