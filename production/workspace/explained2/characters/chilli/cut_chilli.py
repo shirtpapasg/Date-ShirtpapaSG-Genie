@@ -13,7 +13,7 @@ H = os.path.dirname(os.path.abspath(__file__)); T = f"{H}/../teacher_ep02_2026-1
 from cutout import cutout
 PAIRS = {"chilli_droop_tall_pair": ("droop", "tall"), "chilli_hop_pair": ("hop_a", "tall_happy"), "chilli_flat_shy_pair": ("flat", "shy"),
          "chilli_alarmed_smug_pair": ("alarmed", "smug")}
-TALK = {"droop": "closed", "tall": "wide", "tall_happy": "wide", "flat": "closed", "shy": "closed", "alarmed": "closed", "smug": "closed"}
+TALK = {"mid": "closed", "droop": "closed", "tall": "wide", "tall_happy": "wide", "flat": "closed", "shy": "closed", "alarmed": "closed", "smug": "closed"}
 CUT_T = {"hop_a": 236}   # hop_a keeps its light-grey dust puffs (the default 175 floods them away)   # which state the painted mouth is (the poses with talking sets); others: one face only
 RIM_LOCAL = 200.0
 NAVY = (58, 30, 33)          # BGR of the painting's outline (sampled)
@@ -99,7 +99,7 @@ def states(name, img, a):
     def draw_line(base, curve):
         im = base.copy(); P = np.array(curve)
         ol = aa_draw(im.shape, lambda c, s: cv2.polylines(c, [np.round(P * s).astype(np.int32)], False, 255, int(lw * s), cv2.LINE_AA)); paint(im, ol, NAVY); return im
-    if name == "droop":
+    if name in ("droop", "mid"):
         poly = mouth_draw(noM, "frown_open")
         out["closed"] = img.copy()
         out["half"] = draw_open(noM, poly, 7, False)
@@ -162,14 +162,15 @@ def states(name, img, a):
     fy0 = min(e["y"] for e in eyes) - 26; fy1 = mouth["y"] + mouth["h"] + 14
     return out, pot, [float(fx0), float(fy0), float(fx1 - fx0), float(fy1 - fy0)]
 
+SINGLES = {"chilli_midrecovery": "mid"}   # one picture, one pose (27 Nov: the half-recovered plant, the middle of the two-week time-lapse)
 meta = {}; os.makedirs(f"{H}/cut", exist_ok=True)
-for f, poses in PAIRS.items():
+for f, poses in list(PAIRS.items()) + [(k, (v,)) for k, v in SINGLES.items()]:
     src = f"{T}/{f}.jpg"
     if not os.path.exists(src): src = f"{T}/{f}.png"
     if not os.path.exists(src): continue
     full = cv2.imread(src); Hh, Ww = full.shape[:2]
     for side, name in enumerate(poses):
-        img = full[:, side * Ww // 2: (side + 1) * Ww // 2].copy()
+        img = full[:, side * Ww // len(poses): (side + 1) * Ww // len(poses)].copy()
         cut = cutout(img, T=CUT_T.get(name, 175)); a = cut[..., 3]
         sts, pot, face = states(name, img, a)
         ys, xs = np.where(pot > 0)
@@ -222,8 +223,8 @@ make_hop_b()
 # after the fix; the alarmed painting's shake marks are not part of the cut) · tallr = chilli_tall's plant with ONE red chilli (after the two
 # weeks). A face (every talking / blink state of that face's painting) is moved onto the body's pot in the shared pot coordinates (local =
 # (px - ox) * scale: rim 200 wide, base centre at 0) and blended in over the union of the two face areas, inside the body's pot.
-BODY = {"wilt": "droop", "tallg": "alarmed", "tallr": "tall"}
-COMBOS = {"wilt": ["droop", "flat", "alarmed", "shy"], "tallg": ["shy", "tall"], "tallr": ["tall", "tall_happy", "smug", "flat"]}
+BODY = {"wilt": "droop", "mid": "mid", "tallg": "alarmed", "tallr": "tall"}
+COMBOS = {"wilt": ["droop", "flat", "alarmed", "shy", "tall"], "mid": ["shy", "tall"], "tallg": ["shy", "tall"], "tallr": ["tall", "tall_happy", "smug", "flat"]}
 def transplant(bname, fname):
     bp = BODY[bname]; mb, mf = meta[bp], meta[fname]
     body = cv2.imread(f"{H}/cut/chilli_{bp}_closed.png", -1); potb = np.load(f"{H}/cut/_pot_{bp}.npy").astype(np.uint8)
