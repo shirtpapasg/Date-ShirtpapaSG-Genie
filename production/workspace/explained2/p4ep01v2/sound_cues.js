@@ -95,7 +95,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   KWLINE.forEach((id, i) => { if (TL.lines[id]) E(LT(id) - .05, "glow", i); }); E(LT("h864"), "sting");
   { const kn = TL.lines.h1305.know; E(kn, "blast"); E(LT("h1304o"), "drum", 0); E(LT("h1304t"), "drum", 1); for (let i = 1; i <= 4; i++) E(kn + 1.0 + i * .4, "hop", i); E(kn + 3.2, "deskbell"); }
   // the blooper
-  E(S.blooper.t0, "scratch"); E(LT("e1601b") - .05, "actionsting"); E(mk("landp") + .05, "pigeonland", 1); E(mk("landp") + .65, "pigeonland", 1); E(mk("frozen"), "stingcut"); E(mk("frozen") + .2, "pigeoncoo"); E(mk("take2"), "clapper"); E(LE("e1602b") - .1, "laughter");
+  E(S.blooper.t0, "scratch"); E(LT("e1601b") - .05, "actionsting"); E(mk("landp") - .45, "pigeonland", 1); E(mk("landp") + .15, "pigeonland", 1)   /* the two flights (probed: 430.8-431.3, 431.4-431.9) */; E(mk("frozen"), "stingcut"); E(mk("frozen") + .2, "pigeoncoo"); E(mk("take2"), "clapper"); E(LE("e1602b") - .1, "laughter");
   tidy();
   // ---- PIGEONS (fix pass 6, the teacher: "add sound effects of pigeon"): wherever pigeons are on screen (probed frame by frame): soft
   // coo-roos while they sit, wing-flap bursts on the drawn take-off / landing / hop frames, a few pecks while they peck; a coo or a peck
