@@ -199,3 +199,7 @@
   - FOvUezOZJbo, 22u5mW_m9y8 and 7OBnZam5Xzs all carry NEW VERSION lines pointing to XkBQqzYyMdM.
   - Chapters are applied.
   - TheOneApp #269 now has P4 no. 1 = XkBQqzYyMdM.
+- 2026-11-27 ~15:30 UTC: P4 EP2 "Watered Every Day, Still Wilting. Why?" is live as E-HFXLaeP94 (teacher: "OK to upload P4 EP2").
+  - It replaces loaPYprOWDQ in both playlists; loaPYprOWDQ gets the NEW VERSION line.
+  - Chapters: key E-HFXLaeP94.
+  - The app: TheOneApp #276 is merged by Claude (new rule: Claude merges). #269 and #274 are merged too.
