@@ -264,6 +264,7 @@ Object.assign(P, {
   brakesqueak: (t) => { game.addMono(I.noiseSweep(.3, 2600, 2000, { q: 4 }), t, .1); },
   sadtrombone: (t, v) => trombone(t, v || 2.0),
   pigeontakeoff: (t, v) => wings(t, .9, v || 5, .16), pigeonland: (t, v) => wings(t, .4, v || 1, .14), pigeonhop: (t, v) => wings(t, .25, v || 2, .09),
+  pigeonkoo: (t, v) => { const x = cooRoo(v || 1.12); for (let i = 0; i < x.length; i++) x[i] = Math.tanh(1.8 * x[i]); game.addMono(x, t, .62); verb.addMono(x, t, .1); },   /* (fix pass 8, teacher: "make the pigeon 'koo' loud") the comic KOO-ROO, at about voice level */
   pigeoncoo: (t, v) => pcoo(t, .11, v || 1), pigeoncoo2: (t) => { pcoo(t, .1, 1.06, -.2); pcoo(t + .55, .09, .94, .2); },   /* coo: about -16 dB re a buddy line; wings about -13 */ pigeonpeck: (t) => peck(t, .06),
   flutter: (t) => { for (let k = 0; k < 14; k++) game.addMono(I.paperFwip(1.4 + .1 * (k % 3), 400 + k), t + k * .045, .07, (k % 2 ? .3 : -.3)); },
   coo: (t) => { for (const [d, f] of [[0, 300], [.22, 270]]) { const n = Math.round(.22 * SR), x = new Float32Array(n); let ph = 0; for (let i = 0; i < n; i++) { const u = i / n; ph += 2 * Math.PI * f * (1 - .15 * u) / SR; x[i] = Math.sin(ph) * Math.sin(Math.PI * u) * (1 + .5 * Math.sin(2 * Math.PI * 28 * i / SR)) * .3; } game.addMono(x, t + d, .2); } },

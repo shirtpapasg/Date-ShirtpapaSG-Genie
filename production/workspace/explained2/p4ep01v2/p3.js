@@ -308,9 +308,10 @@ SC.blooper = (t, s) => { const tk = MK("take2"), tl = MK("landp"), c = [1, 960, 
   return bg("stage") + `<rect width="1920" height="1080" fill="#000" opacity=".2"/>` + TF(960, 250, spring(t, s.t0 + .05, .4), clapper27(t > tk ? 1 - ramp(t, tk, .12) : (t < s.t0 + .4 ? 1 : 0)))
     + OP(ramp(t, s.t0, .3), T(960, 470, "(bloopers)", 40, "#fff", { w: 500 }))
     + x2bd("basil", 880, 1076, 420, t, { in: s.t0 - .5, poses: [[0, "hero/arms_crossed"], [MK("frozen"), "deadpan"]], look: 0, still: t > MK("frozen") && t < LT("e1602b"), noreact: true })
-    + (pg1 > 0 ? x2held(c, "basil", 880, 1076, 420, false, TF(20 - 200 * (1 - pg1), -120 - 160 * (1 - pg1), .9, pigeonV2(t, { fly: pg1 < 1 ? 1 : 0, ph: 1 })), 0, 0) : "")
+    + (pg1 > 0 ? x2held(c, "basil", 880, 1076, 420, false, TF(104 - 200 * (1 - pg1), -52 - 160 * (1 - pg1), .9, pigeonV2(   /* (fix pass 8) on his shoulder, clear of his face */t, { fly: pg1 < 1 ? 1 : 0, ph: 1 })), 0, 0) : "")
     + (pg2 > 0 ? x2held(c, "basil", 880, 1076, 420, false, TF(-20 + 220 * (1 - pg2), -262 - 140 * (1 - pg2), .95, `<g transform="scale(-1 1)"><!--FACES:right pigeon-->${pigeonV2(t, { fly: pg2 < 1 ? 1 : 0, ph: 2 })}</g>`), 0, 0) : "")
     + battleCry(t, MK("landp") - .5, 470, 640, "LIGHTER|IS FAST...", { d: 1.0, k: .55, noLines: true }) + x2said("e1601b")
+    + comicWord(t, MK("frozen") + .12, 1080, 560, "koo...", { size: 60, col: "#fff", d: .5, rot: 6 }) + comicWord(t, MK("frozen") + .38, 700, 380, "KOO!", { size: 90, col: P.sun, d: .7, rot: -8 })   /* (fix pass 8) the loud blooper KOOs */
     + x2bd("pip", 1350, 1076, 380, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("e1602b") - .2, "embarrassed/oops"]], look: -3 }) + x2held(c, "pip", 1350, 1076, 380, true, x2unflip(.5, clipboardV2(t, { bell: 1, brakes: 1, chain: 1 })), -60, 30)
     + x2bd("momo", 1730, 1076, 380, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("e1603m") - .05, "laugh/cheer"]], look: -3 })
     + comicWord(t, tl + .2, 640, 520, "FLAP.", { size: 50, tiny: true, col: "#fff", d: .8 }) + logo(t); };

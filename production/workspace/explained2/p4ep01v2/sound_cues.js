@@ -49,7 +49,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // stop 1: the bell
   E(mk("flick") + .02, "bellting"); E(LT("b402") + .1, "hmm"); E(LT("b404") + .3, "shing"); E(mk("clink") + .55, "clink");
   E(mk("rideoff"), "actionrise"); E(mk("rideoff") + 1.0, "pat"); for (let t = mk("rideoff") + .2; t < mk("flap"); t += .5) E(t, "freewheel", .45);
-  E(mk("flap") - .15, "brakesqueak"); E(mk("flap"), "pigeontakeoff", 7); E(mk("flap") + .55, "sadtrombone", 1.7);   /* (fix pass 6) the low sad trombone replaces the kazoo */ E(LT("b408") + .6, "pigeoncoo"); E(LE("b408") - .05, "rimshot");
+  E(mk("flap") - .15, "brakesqueak"); E(mk("flap"), "pigeontakeoff", 7); E(mk("flap") + .55, "sadtrombone", 1.7);   /* (fix pass 6) the low sad trombone replaces the kazoo */ E(LE("b407") + .08, "pigeonkoo", 1.06); E(LE("b408") + .08, "pigeonkoo", 1.2)   /* (fix pass 8) the comic KOOs: one before Basil's "new friends", the helmet pigeon answers after it */; E(LE("b408") - .05, "rimshot");
   // stop 2: the chain; YOUR TURN; SPROING; the snail-cam (whirr, squelch, the epic overtake swell); the replay; battle cry 3
   E(LT("n502") + .1, "hmm"); E(mk("yt2") + .1, "yourturn"); E(mk("sproing") + .02, "sproing"); E(mk("sproing") + .65, "chainheap");
   E(S.snailcam.t0, "whirr", 4.2); E(S.snailcam.t0 + .3, "actionrev"); E(mk("pedt") - 1.4, "squelch"); E(mk("ovt") - 1.0, "overtake"); E(mk("ovt") + .8, "squelch");
@@ -79,7 +79,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   // the reversal: spanner clicks, squeak, ticks; chain clicks, freewheel; Race time!; MISS 3; pen tap; Ring, ring?; the think card; the bell
   for (let i = 0; i < 5; i++) E(S.reverse.t0 + .2 + i * .3, "spanner"); E(mk("rbrk") + .1, "brakesqueak"); E(mk("tick1") - .6, "penTick");
   for (let i = 0; i < 6; i++) E(S.rchain.t0 + .2 + i * .25, "chainclick"); for (let t = mk("spin"); t < mk("spin") + 1.2; t += .12) E(t, "chainclick", 1); E(mk("spin") + 1.2, "freewheel", 3); E(mk("spin") + 1.4, "penTick");
-  E(mk("miss3"), "whiff"); E(LT("v1004") + .6, "pentap"); E(LE("v1005") - .05, "rimshot"); E(LE("v1005") - .3, "pigeoncoo"); E(mk("think") - .1, "curious"); [0, 1, 2].forEach((i) => E(mk("think0") + .05 + i * 1.17, "softtick")); E(mk("side") - .1, "softpop", 2); E(mk("likely") + .3, "stamp");
+  E(mk("miss3"), "whiff"); E(LT("v1004") + .6, "pentap"); E(LE("v1005") - .05, "rimshot"); ; E(mk("think") - .1, "curious"); [0, 1, 2].forEach((i) => E(mk("think0") + .05 + i * 1.17, "softtick")); E(mk("side") - .1, "softpop", 2); E(mk("likely") + .3, "stamp");
   E(S.rbell.t0 + .3, "spanner"); E(mk("ring1"), "bellting"); E(mk("ring2"), "bellting"); E(mk("ring2") + .04, "hint"); E(mk("ring1") + .1, "pigeontakeoff", 1); E(mk("ring1") + .5, "penTick");
   // SYSTEM, the battle cry turned round (does NOT collapse: it resolves)
   E(mk("kw_system") + 1.6, "stamp"); E(mk("kw_system") + .2, "ooh"); E(mk("cry4") - .05, "actionsting"); E(mk("cry4") + 1.05, "resolve");
@@ -95,7 +95,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
   KWLINE.forEach((id, i) => { if (TL.lines[id]) E(LT(id) - .05, "glow", i); }); E(LT("h864"), "sting");
   { const kn = TL.lines.h1305.know; E(kn, "blast"); E(LT("h1304o"), "drum", 0); E(LT("h1304t"), "drum", 1); for (let i = 1; i <= 4; i++) E(kn + 1.0 + i * .4, "hop", i); E(kn + 3.2, "deskbell"); }
   // the blooper
-  E(S.blooper.t0, "scratch"); E(LT("e1601b") - .05, "actionsting"); E(mk("landp") - .45, "pigeonland", 1); E(mk("landp") + .15, "pigeonland", 1)   /* the two flights (probed: 430.8-431.3, 431.4-431.9) */; E(mk("frozen"), "stingcut"); E(mk("frozen") + .2, "pigeoncoo"); E(mk("take2"), "clapper"); E(LE("e1602b") - .1, "laughter");
+  E(S.blooper.t0, "scratch"); E(LT("e1601b") - .05, "actionsting"); E(mk("landp") - .45, "pigeonland", 1); E(mk("landp") + .15, "pigeonland", 1)   /* the two flights (probed: 430.8-431.3, 431.4-431.9) */; E(mk("frozen"), "stingcut"); E(mk("frozen") + .12, "pigeonkoo", 1.1); E(mk("frozen") + .38, "pigeonkoo", 1.25)   /* the blooper: "koo... KOO!" */; E(mk("take2"), "clapper"); E(LE("e1602b") - .1, "laughter");
   tidy();
   // ---- PIGEONS (fix pass 6, the teacher: "add sound effects of pigeon"): wherever pigeons are on screen (probed frame by frame): soft
   // coo-roos while they sit, wing-flap bursts on the drawn take-off / landing / hop frames, a few pecks while they peck; a coo or a peck
@@ -112,7 +112,7 @@ window.CUES = (() => { const ev = [], E = (t, k, v) => { if (isFinite(t)) ev.pus
     const tF = mk("flap"), tB = tF + 1.0;
     pecks(S.bay.t0 + .6, S.bay.t1 - .3, 4); coo(S.bay.t0 + 1.0, S.bay.t1 - .2);                          // the bay: one pigeon pecking by the bike
     pecks(mk("rideoff") + .3, tF - .25, 4); coo(mk("rideoff") + .6, tF - .3);                             // the ride-off: the flock pecks ahead of him
-    E(tB, "pigeonland", 3); coo(LE("b407") + .1, LT("b408") - .1, "pigeoncoo2", 1.3) || coo(LE("b407") + .1, LT("b408") - .1);   // (the trombone has the pause after the landing)   // three land on Basil
+    E(tB, "pigeonland", 3);    // (the trombone has the pause after the landing)   // three land on Basil
     pecks(155.8, 157.5, 3); E(157.6, "pigeontakeoff", 5);                                                  // the runaway: the flock by the wall takes off
     E(mk("racego") + .5, "pigeonhop", 3); coo(mk("racego") + 1.6, MK("slump") + 1.0);                       // the race: they hop aside as he rings past
     E(LT("v1005") + .3 - .5, "pigeonland", 1);                                                              // the think card: one lands on Basil's helmet

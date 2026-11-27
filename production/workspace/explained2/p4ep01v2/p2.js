@@ -67,14 +67,14 @@ function x2bellRide(t, s) { const tR = MK("rideoff"), tF = MK("flap"), u = clamp
 const BELC = [1180, 1050];
 function x2bellFront(t, s) { const tB = MK("flap") + 1.0, c = camMix(camOn([1000, 700], 1.25, 960, 620), camOn([1000, 640], 1.0), eio(clamp((t - LT("b407") - .3) / 1.6)));
   const B = [760, 1066, 410], pgOn = (who, dx, dy, k, flip, ph) => x2held(c, "basil", B[0], B[1], B[2], false, TF(dx, dy, k, flip ? `<g transform="scale(-1 1)">${pigeonV2(t, { ph, peck: .1 * Math.sin(t * 3 + ph) })}</g>` : pigeonV2(t, { ph })), 0, 0);
-  const coo = LT("b408") + .6, turn = clamp((t - coo) / .5), hx = Math.cos(Math.PI * turn) > 0;
+  const coo = LE("b408") + .08, coo1 = LE("b407") + .08, turn = clamp((t - coo) / .3), hx = Math.cos(Math.PI * turn) > 0;   // (fix pass 8) the loud KOOs
   const helmPig = x2held(c, "basil", B[0], B[1], B[2], false, TF(-20, -262, .95, hx ? pigeonV2(t, { ph: 3 }) : `<g transform="scale(-1 1)">${pigeonV2(t, { ph: 3 })}</g>`), 0, 0);
   const jog = (x0, x1, t0) => lerp(x0, x1, eio(clamp((t - t0) / .8)));
   window._BUBAT = { basil: [560, 300], momo: [1300, 330], pip: [1500, 300] };
   return x2place("vdv2", TF(...BELC, BLK, bikeP4(t, { chain: 1, brakes: 1, bell: 0, crank: .6 })), c)
     + x2bc(c, "basil", ...B, t, { in: tB - .02, noStay: true, poses: [[0, "shocked/surprised"], [LT("b407") + .4, "deadpan"]], look: 2, noreact: true })
     + pgOn("basil", 104, -52, .85, true, 1) + pgOn("basil", -150, -40, .8, false, 2) + helmPig   /* (fix pass 6, teacher) the third pigeon on his shoulder, clear of his face */
-    + comicWord(t, coo, ...camPt(c, [B[0] + 40, B[1] - 520]), "coo.", { size: 40, tiny: true, col: "#fff", d: .7 })
+    + comicWord(t, coo1, ...camPt(c, [B[0] + 210, B[1] - 380]), "koo!", { size: 64, col: "#fff", d: .75, rot: 6 }) + comicWord(t, coo, ...camPt(c, [B[0] - 330, B[1] - 430]), "KOO-ROO!", { size: 84, col: P.sun, d: .8, rot: -6 })
     + (true ? x2bc(c, "momo", jog(1520, 1400, LT("b407") - .2), 1066, 360, t, { in: tB - 3, noStay: true, flip: true, run: t >= LT("b407") - .2 && t < LT("b407") + .6 ? "left" : undefined, run0: LT("b407") - .2, runEnd: LT("b407") + .6, jump: [[LT("b407") - .2, 14], [LT("b407") + .1, 14], [LT("b407") + .4, 12]], poses: [[0, "surprised"], [LT("b407") + .65, "sit"], [LT("b407") + .9, "laugh/cheer"], [LE("b407") + .2, "sit"]], look: -6 }) : "")
     + (true ? x2bc(c, "pip", jog(1880, 1780, LT("b407")), 1066, 350, t, { in: tB - 3, noStay: true, flip: true, run: t >= LT("b407") && t < LT("b407") + .8 ? "left" : undefined, run0: LT("b407"), runEnd: LT("b407") + .8, jump: [[LT("b407"), 14], [LT("b407") + .3, 14], [LT("b407") + .6, 12]], poses: [[0, "surprised"], [LT("b407") + .85, "sit"], [LT("b408") + .5, "embarrassed/oops"], [LE("b408") + .4, "sit"]], look: -6 }) : "")
     + faceCam("basil", t, tB + .05, tB + 1.5, 1520, 300, 150, [[0, "shocked/surprised"]], { flip: true, noreact: true })
