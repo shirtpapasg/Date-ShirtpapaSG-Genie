@@ -176,3 +176,10 @@
   - **P4 EP1 v2 "Basil Lost a Race to a SNAIL! Which Fix Works?":** 22u5mW_m9y8, public, fix pass 5 (painted Momo and Uncle Lim), 7:17 on YouTube. It replaces FOvUezOZJbo in PLK9BW3T6kXx4 and PLPfEuT7l4KjI; the old video gets the NEW VERSION line. The 11 chapters are applied; chapters_p3.json key P4EP01V2 is now 22u5mW_m9y8. The v1 5MjGXoU8zjg stays unlisted.
   - **EP0 v6 chapters** were already up to date; all 20 v6 ids have chapters.
   - **TheOneApp #269** is NOT merged yet, so the replaced P3 copies stay public. The P4 no. 1 swap and Explored no. 13 were added to #269.
+- 2026-11-27 ~10:30 UTC: Explored EP13 fixes.
+  - The teacher flagged the trade-wind arrows (direction; "red arrows") and the water-flow direction, then asked for no buddy discs and a new habitat section.
+  - REexNUS6HK0 had been public 09:00–09:34Z (3 views). It is now private ("Hold it", the teacher's choice) and not deleted.
+  - **Shorts replaced:** the fixed Shorts (red west arrows, no discs, same audio) are uploaded and scheduled.
+    - Short 1: tpbmNoH0G4c, 28 Nov 09:00Z. The old 2Kwj4p5I-oI is unscheduled and stays private (0 views).
+    - Short 2: p2ukcbeLQSU, 1 Dec 09:00Z. The old eaj2RlQDV84 is unscheduled and stays private (0 views).
+  - **Episode:** it waits for the teacher's OK on the habitat lines (sau/ep13/SCRIPT.md §9), then a re-render and a new upload.
