@@ -73,3 +73,68 @@ meta = dict(src="../teacher_ep02_2026-11-27/glitch_base.jpg", w=X1 - X0, h=Y1 - 
   wheelB={k: round(float(v) - (X0 if k == "cx" else Y0 if k == "cy" else 0), 1) for k, v in WB.items()},
   hubF=o(348, 885), face=[sx - X0, sy - Y0, sw, sh])
 json.dump(meta, open(f"{H}/cut/glitch.json", "w"), indent=1); print(json.dumps(meta)[:900])
+
+# ======== the teacher's four arm poses (glitch_arms_four.jpg, 27 Nov): 1 jug (a watering can, both arms), 2 arms crossed (smug / grumpy),
+# 3 both arms up (happy), 4 arms straight down (acquired; the body for error / surprised). Each robot is cut from the sheet, its screen glass
+# masked (the faces are drawn in code), its wheels measured; scale = the base painting's screen height / this screen's height; origin = the
+# screen's centre x on the wheels' ground line, in the base layers' units (glitch.json "poses").
+POSES4 = ["jug", "crossed", "up", "down"]
+def find_screen(img, alpha, seed):
+    Lm = img.min(2); dk = (Lm < 110).astype(np.uint8); ff = 1 - dk; pad = np.pad(ff, 1); cv2.floodFill(pad, None, (int(seed[0]) + 1, int(seed[1]) + 1), 2)
+    reg = (pad[1:-1, 1:-1] == 2).astype(np.uint8) & (alpha > 0)
+    h_ = cv2.convexHull(cv2.findNonZero(reg)); sc = np.zeros_like(reg); cv2.fillPoly(sc, [h_], 1); return cv2.erode(sc, np.ones((5, 5), np.uint8)), h_
+def wheels_of(alpha, img, ground):
+    """the two tyres: dark columns in the band just above the ground, split in two clusters; each tyre's box = its dark rows/cols"""
+    Lm = img.min(2); band = (alpha > 0) & (Lm < 125); out = []
+    y0b = int(ground - 40); cols = np.where(band[y0b:int(ground) + 1].sum(0) > 4)[0]
+    if not len(cols): return out
+    groups = np.split(cols, np.where(np.diff(cols) > 8)[0] + 1); groups = sorted(groups, key=len)[-2:]
+    for g in sorted(groups, key=lambda g: g[0]):
+        x0, x1 = int(g[0]), int(g[-1]); sub = band[int(ground) - 110:int(ground) + 1, x0:x1 + 1]; widths = sub.sum(1); wmax = widths.max()
+        r = len(widths) - 1
+        while r > 0 and (widths[r - 1] > .4 * wmax or r > len(widths) - 12): r -= 1   # the contiguous tyre rows up from the ground
+        ty0 = int(ground) - 110 + r; ty1 = int(ground)
+        out.append(dict(cx=(x0 + x1) / 2, cy=(ty0 + ty1) / 2, rx=(x1 - x0) / 2, ry=(ty1 - ty0) / 2, ang=0.0, x0=int(x0), x1=int(x1), top=int(ty0)))
+    return out
+SHEET = f"{T}/glitch_arms_four.jpg"
+if os.path.exists(SHEET):
+    sh_im = cv2.imread(SHEET); sh_cut = cutout(sh_im); sa = sh_cut[..., 3]
+    n_, lb_, st_, cen_ = cv2.connectedComponentsWithStats((sa > 20).astype(np.uint8))
+    big = sorted([i for i in range(1, n_) if st_[i, 4] > 20000], key=lambda i: cen_[i][0])[:4]
+    owner = np.zeros_like(lb_)
+    for j, i in enumerate(big): owner[lb_ == i] = j + 1
+    for i in range(1, n_):   # small pieces (the antenna bulbs, a claw tip) join the nearest robot
+        if i in big or st_[i, 4] < 15: continue
+        j = int(np.argmin([abs(cen_[i][0] - cen_[b][0]) for b in big])); owner[lb_ == i] = j + 1
+    BASE_SH = meta["screen"]["h"]; meta["poses"] = {}
+    Lsh = sh_im.min(2)
+    for j, name in enumerate(POSES4):
+        al = np.where(owner == j + 1, sa, 0).astype(np.uint8); ys2, xs2 = np.where(al > 0)
+        top_, gnd = ys2.min(), ys2.max()
+        # the screen: seed in the glass, below the painted smile (the body's upper-middle)
+        bx = int(np.median(xs2[ys2 < top_ + .55 * (gnd - top_)])); by = int(top_ + .42 * (gnd - top_))
+        cand = [(abs(x - bx) + abs(y - by), x, y) for y in range(by - 25, by + 26, 5) for x in range(bx - 40, bx + 41, 5) if Lsh[y, x] > 190 and al[y, x] > 0]
+        _, sxs, sys_ = min(cand); scm, hl = find_screen(sh_im, al, (sxs, sys_)); qx, qy, qw, qh = cv2.boundingRect(scm)
+        stk = cv2.dilate(((Lsh < 150) & (scm > 0)).astype(np.uint8), np.ones((3, 3), np.uint8), iterations=2) & cv2.erode(scm, np.ones((9, 9), np.uint8))
+        blank_ = cv2.inpaint(sh_im, stk * 255, 7, cv2.INPAINT_TELEA)
+        W2 = wheels_of(al, sh_im, gnd)
+        ex0, ey0, ex1, ey1 = xs2.min() - 20, ys2.min() - 40, xs2.max() + 20, gnd + 6
+        def save2(lname, rgb, alpha_):
+            o_ = np.dstack([rgb, alpha_]).astype(np.uint8)[ey0:ey1, ex0:ex1]; cv2.imwrite(f"{H}/cut/glitch_{name}_{lname}.png", o_)
+        save2("body", sh_cut[..., :3], al)
+        save2("screen", blank_, (cv2.GaussianBlur(scm.astype(np.float32), (0, 0), .8) * 255).clip(0, 255))
+        wl = []
+        for k_, w in zip("FB", W2):
+            m = np.zeros_like(al); cv2.ellipse(m, (int(w["cx"]), int(w["cy"])), (int(w["rx"] + 2), int(w["ry"] + 2)), 0, 0, 360, 255, -1)
+            save2("wheel" + k_, sh_cut[..., :3], np.minimum(al, m))
+            # the strut: the narrow alpha between the body and this tyre's top, kept still over the turning tyre
+            gap = al[w["top"] - 40: w["top"] + 4, w["x0"]: w["x1"] + 1] > 0; colsS = np.where(gap[: 30].sum(0) > 10)[0]
+            if len(colsS):
+                s0, s1 = w["x0"] + colsS.min() - 3, w["x0"] + colsS.max() + 3; ms = np.zeros_like(al); ms[w["top"] - 40: int(w["cy"] + .1 * w["ry"]), s0: s1] = 255
+                save2("strut" + k_, sh_cut[..., :3], np.minimum(al, np.minimum(m, ms)))
+            wl.append({kk: round(float(v) - (ex0 if kk in ("cx", "x0", "x1") else ey0 if kk in ("cy", "top") else 0), 1) for kk, v in w.items()})
+        k = BASE_SH / qh
+        meta["poses"][name] = dict(w=int(ex1 - ex0), h=int(ey1 - ey0), ox=round(qx + qw / 2 - ex0, 1), oy=round(gnd - ey0, 1), scale=round(k, 4),
+            screen=dict(x=qx - ex0, y=qy - ey0, w=qw, h=qh), wheels=wl, face=[qx - ex0, qy - ey0, qw, qh])
+        print(name, meta["poses"][name]["scale"], "screen", qw, qh, "wheels", [(w["cx"], w["cy"], w["rx"], w["ry"]) for w in wl])
+    json.dump(meta, open(f"{H}/cut/glitch.json", "w"), indent=1, default=float)
