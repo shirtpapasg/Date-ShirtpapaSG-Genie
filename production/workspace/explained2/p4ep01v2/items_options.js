@@ -120,7 +120,7 @@ function medalP(x, y) { const ink = INK.momo, c = y + 32, r = 24;
     + `<circle cx="${x}" cy="${y + 11}" r="5" fill="none" stroke="#D9A441" stroke-width="3"/><circle cx="${x}" cy="${c}" r="${r}" fill="url(#mGold)" stroke="${ink}" stroke-width="3.5"/>`
     + `<circle cx="${x}" cy="${c}" r="${r - 6}" fill="none" stroke="#C98A1E" stroke-width="3"/><path d="M${x - 11} ${c + 6} L${x + 5} ${c - 12} M${x - 5} ${c + 12} L${x + 11} ${c - 6}" stroke="#FFF3C2" stroke-width="3" stroke-linecap="round" opacity=".9"/>`; }
 // (27 Nov) the five poses the teacher painted WITH the neckerchief and medal: no code-drawn overlay on them
-const MOMO_PAINTED = new Set(["arms_crossed", "thinking", "pointing", "cheer", "surprised"]);
+const MOMO_PAINTED = new Set(["arms_crossed", "thinking", "pointing", "cheer", "surprised", "sit", "oops", "waving"]);   // sit = the talking set, with the painted scarf laid on by nk_talk.py (fix pass 6)
 // the hand-held magnifier (27 Nov): only while the scene passes { mag: true } to Momo (b404 "But WHY does it go ring?", l803 the look-closer), held
 // up in her raised pointing paw: the lens above the paw, the handle into the fist, the fist drawn again over the handle
 function momoMagHeld(name) { return TF(526, 182, 1, magP(34, -26)) + redraw(name, "magpaw", ell([480, 272, 36, 31])); }
