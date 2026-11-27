@@ -41,11 +41,15 @@ POSES["momo_nk"] = {  # Momo with the teal polka-dot NECKERCHIEF and a gold meda
 POSES["pip_run"] = {  # Pip's two-frame RUN cycle, painted by the teacher (27 Nov 2026, characters/teacher_run_2026-11-27/): side view facing right,
   # worried, helmet and goggles painted in; on Pip's sitting set (same scale and feet line as pip_sit)
   "run_a": ("pip_run_a.jpg", None), "run_b": ("pip_run_b.jpg", None)}
+POSES["momo_run"] = {  # Momo's two-frame run (teacher, 27 Nov 2026): painted facing LEFT, worried, sweat drops, neckerchief + medal painted in
+  "run_a": ("momo_run_a.jpg", None), "run_b": ("momo_run_b.jpg", None)}
+POSES["basil_run"] = {  # Basil's run frame A (teacher, 27 Nov 2026; B to come): facing right, helmet and badge painted in
+  "run_a": ("basil_run_a.jpg", None)}
 POSES["basil_v2"] = {  # Basil in Pip's style (Gemini, 23 Nov)
   "oops": ("basil_v2_oops.jpg", None), "waving": ("basil_v2_waving.jpg", None), "thinking": ("basil_v2_thinking.jpg", None),
   "worried": ("basil_v2_worried.jpg", None), "surprised": ("basil_v2_surprised.jpg", None), "pointing": ("basil_v2_pointing.jpg", None),
   "cheer": ("basil_v2_cheer.jpg", None), "arms_crossed": ("basil_v2_arms_crossed.jpg", None), "laughing": ("basil_v2_laugh_eyes_shut.jpg", None), "back": ("basil_back.jpg", None)}
-SITREF = {"momo_nk": "momo_v2", "pip_run": "pip"}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
+SITREF = {"momo_nk": "momo_v2", "pip_run": "pip", "momo_run": "momo_v2", "basil_run": "basil_v2"}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)], ("basil_v2", "cheer"): [(221, 473), (183, 303)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 FLIPX = {("momo_nk", "cheer")}   # painted facing the other way (tail on her left, knot on the right): mirrored to match momo_v2_cheer and her other poses

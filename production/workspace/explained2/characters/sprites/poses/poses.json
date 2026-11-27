@@ -684,6 +684,57 @@
    "hips_above_feet": 6
   }
  },
+ "momo_run": {
+  "run_a": {
+   "file": "poses/momo_run_run_a.png",
+   "src": "momo_run_a.jpg",
+   "anchor": [
+    417.2,
+    831.0
+   ],
+   "scale": 0.9027,
+   "size": [
+    837,
+    855
+   ]
+  },
+  "run_b": {
+   "file": "poses/momo_run_run_b.png",
+   "src": "momo_run_b.jpg",
+   "anchor": [
+    427.1,
+    831.0
+   ],
+   "scale": 0.881,
+   "size": [
+    817,
+    855
+   ]
+  },
+  "_sit": {
+   "body_h": 807,
+   "hips_above_feet": 6
+  }
+ },
+ "basil_run": {
+  "_sit": {
+   "body_h": 791,
+   "hips_above_feet": 6
+  },
+  "run_a": {
+   "file": "poses/basil_run_run_a.png",
+   "src": "basil_run_a.jpg",
+   "anchor": [
+    429.0,
+    815.0
+   ],
+   "scale": 0.8231,
+   "size": [
+    790,
+    839
+   ]
+  }
+ },
  "basil_v2": {
   "oops": {
    "file": "poses/basil_v2_oops.png",

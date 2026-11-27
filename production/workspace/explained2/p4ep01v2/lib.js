@@ -269,8 +269,12 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   // fix pass 6 (27 Nov): RUNNING. { run: "left"|"right" } shows the teacher's two-frame run cycle (<who>_run_a / _b, painted facing right)
   // when it exists: A (the stride, with a small hop) and B alternate every .135 s, mirrored for a leftward run; no pose-swap pop (the pose
   // underneath is unchanged). Until a buddy's run paintings arrive, the scene's free-paws pose (surprised) stands in.
-  if (o.run && SPR[`${who}_run_a`]) { const fa = Math.floor((t + ({ pip: 0, momo: .07, basil: .03 }[who] || 0)) / .135) % 2 === 0; name = `${who}_run_${fa ? "a" : "b"}`; wflip = o.run === "left";
-    rot = 0; sx = 1; sy = 1; lift = fa ? -10 * (h / 380) : 0; }
+  // fix pass 7: Momo's run is painted facing LEFT (mirrored for a rightward run); Basil has frame A only so far: A with a running hop (rise on
+  // the stride, a slight squash on landing) until his B arrives
+  if (o.run && SPR[`${who}_run_a`]) { const ph_ = (t + ({ pip: 0, momo: .07, basil: .03 }[who] || 0)) / .135, fa = Math.floor(ph_) % 2 === 0, hasB = !!SPR[`${who}_run_b`];
+    name = `${who}_run_${fa || !hasB ? "a" : "b"}`; wflip = (o.run === "left") !== (who === "momo");
+    rot = 0; sx = 1; sy = 1; lift = fa ? -10 * (h / 380) : 0;
+    if (!hasB) { const u = (ph_ / 2) % 1; lift = -16 * (h / 380) * Math.sin(Math.PI * Math.min(1, u / .7)); const sq = u > .7 ? .05 * Math.sin(Math.PI * (u - .7) / .3) : 0; sy = 1 - sq; sx = 1 + .8 * sq; rot = 2 * Math.sin(2 * Math.PI * u); } }
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = (wflip !== null ? wflip : o.flip) ? -1 : 1;
   if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek, why });   // EP15 QA (qa/buddy_faces): which face is on screen, where

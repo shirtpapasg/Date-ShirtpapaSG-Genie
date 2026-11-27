@@ -217,7 +217,7 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   // Basil runs in from the left behind the bike, trips over the rim at the splash and lands sitting in the ice (an arc)
   const bU = clamp((t - tD) / (tSp - tD)), basX = t < tSp - .45 ? lerp(80, CB.box[0] - 260, bU) : CB.box[0] + 10, inBox = t >= tSp;
   let basil; if (!inBox) { const fall = clamp((t - (tSp - .45)) / .45), x = lerp(CB.box[0] - 260, CB.box[0] + 10, fall), y = lerp(1066, 1040, fall) - 160 * Math.sin(Math.PI * fall);
-    basil = x2bc(c, "basil", t < tSp - .45 ? basX : x, t < tSp - .45 ? 1066 : y, 400, t, { in: tD - 3, noStay: true, poses: [[0, "shocked/surprised"]], look: 10 + 70 * clamp((t - (tSp - .45)) / .45), jump: [...Array(12)].map((_, i) => [tD + i * .3, 14]), noreact: true }); }
+    basil = x2bc(c, "basil", t < tSp - .45 ? basX : x, t < tSp - .45 ? 1066 : y, 400, t, { in: tD - 3, noStay: true, run: t < tSp - .45 ? "right" : undefined, poses: [[0, "shocked/surprised"]], look: 10 + 70 * clamp((t - (tSp - .45)) / .45), jump: [...Array(12)].map((_, i) => [tD + i * .3, 14]), noreact: true }); }
   else basil = x2basilInBox(c, t, { in: tD - 3, noStay: true, poses: [[0, "shocked/surprised"], [tSp + .6, "deadpan"]], noreact: true, ...x2grease(t) });
   const can = inBox ? x2held(c, "basil", CB.box[0] + 10, 1040, 400, false, `<g transform="translate(-20 -270) rotate(-10)"><rect x="-22" y="-34" width="44" height="64" rx="8" fill="#43BF6C" stroke="#2B2F36" stroke-width="4"/><rect x="-22" y="-34" width="44" height="10" rx="4" fill="#C9D1DA"/></g>`, 0, 0) : "";
   const front = CAM(TF(boxX, CB.box[1], 1, iceBoxFrontV2(t)), c[0], c[1], c[2]);
