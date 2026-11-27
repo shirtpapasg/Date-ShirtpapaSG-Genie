@@ -13,7 +13,7 @@ H = os.path.dirname(os.path.abspath(__file__)); T = f"{H}/../teacher_ep02_2026-1
 from cutout import cutout
 PAIRS = {"chilli_droop_tall_pair": ("droop", "tall"), "chilli_hop_pair": ("hop_a", "hop_b"), "chilli_flat_shy_pair": ("flat", "shy"),
          "chilli_alarmed_smug_pair": ("alarmed", "smug")}
-TALK = {"droop": "closed", "tall": "wide"}   # which state the painted mouth is (the poses with talking sets); others: one face only
+TALK = {"droop": "closed", "tall": "wide", "flat": "closed", "shy": "closed"}   # which state the painted mouth is (the poses with talking sets); others: one face only
 RIM_LOCAL = 200.0
 NAVY = (58, 30, 33)          # BGR of the painting's outline (sampled)
 MOUTH = (52, 40, 122)        # the open mouth's dark red (sampled from chilli_tall)
@@ -108,6 +108,24 @@ def states(name, img, a):
         out["wide"] = img.copy()
         out["half"] = draw_open(noM, poly, mh * .55, True)
         out["closed"] = draw_line(noM, [(mcx - mw * .42 + mw * .84 * u, my + 4 + mh * .38 * np.sin(np.pi * u)) for u in np.linspace(0, 1, 24)])
+    elif name == "flat":   # unimpressed: the painted flat line; talking = a flat, level opening (no smile, no frown)
+        W = max(mw, 22) * 1.1
+        def fpoly(op):
+            top = [(mcx - W / 2 + W * u, my + mh / 2 - op * .25 * np.sin(np.pi * u) ** .5) for u in np.linspace(0, 1, 24)]
+            bot = [(mcx + W / 2 - W * u, my + mh / 2 + op * .75 * np.sin(np.pi * u) ** .6) for u in np.linspace(0, 1, 24)]
+            return np.array(top + bot)
+        out["closed"] = img.copy()
+        out["half"] = draw_open(noM, fpoly, 6, False)
+        out["wide"] = draw_open(noM, fpoly, 10, True)
+    elif name == "shy":    # the painted small smile; talking = a small open smile
+        W = mw * 1.0
+        def spoly(op):
+            top = [(mcx - W / 2 + W * u, my + 1 + 1.5 * np.sin(np.pi * u)) for u in np.linspace(0, 1, 24)]
+            bot = [(mcx + W / 2 - W * u, my + 1 + 1.5 * np.sin(np.pi * u) + op * np.sin(np.pi * u) ** .8) for u in np.linspace(0, 1, 24)]
+            return np.array(top + bot)
+        out["closed"] = img.copy()
+        out["half"] = draw_open(noM, spoly, 7, False)
+        out["wide"] = draw_open(noM, spoly, 11, True)
     else:
         out["closed"] = img.copy()
     # blink: every state gets a blink twin (the eyes in-painted, two closed-lid arcs)

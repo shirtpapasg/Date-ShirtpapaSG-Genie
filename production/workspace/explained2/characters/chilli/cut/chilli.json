@@ -44,5 +44,51 @@
    174.0,
    117.0
   ]
+ },
+ "flat": {
+  "src": "../teacher_ep02_2026-11-27/chilli_flat_shy_pair.jpg",
+  "w": 504,
+  "h": 671,
+  "ox": 260.0,
+  "oy": 664.0,
+  "rim": 262.0,
+  "scale": 0.7633587786259542,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   168.0,
+   508.0,
+   178.0,
+   86.0
+  ]
+ },
+ "shy": {
+  "src": "../teacher_ep02_2026-11-27/chilli_flat_shy_pair.jpg",
+  "w": 411,
+  "h": 672,
+  "ox": 219.5,
+  "oy": 665.0,
+  "rim": 263.0,
+  "scale": 0.7604562737642585,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   131.0,
+   491.0,
+   179.0,
+   108.0
+  ]
  }
 }
