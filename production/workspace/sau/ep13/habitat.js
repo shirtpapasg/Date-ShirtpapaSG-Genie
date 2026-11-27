@@ -49,9 +49,9 @@ S.povReef = (() => { const s = scene("povReef", "#0aa1c2", "#06768f"), st = nWho
     const f = el("path", {d: "M0 0 Q-110 -60 -90 -170 Q0 -230 90 -170 Q110 -60 0 0 Z", fill: col, stroke: INK, "stroke-width": 5}, g);
     for (let i = -3; i <= 3; i++) el("path", {d: `M0 0 L${i * 28} -190`, stroke: INK, "stroke-width": 2, opacity: .3}, g);
     return {g, parts: [f], col, kind: "fill"}; };
-  [[branch, 860, 420, 1.1, "#ff6fae"], [brain, 1120, 520, 1, "#b388eb"], [table, 620, 330, 1, "#ffb347"], [fan, 1300, 380, .9, "#ff5d5d"],
-   [brain, 980, 700, .8, "#7bd389"], [branch, 1280, 700, .9, "#ffd166"], [table, 1050, 240, .8, "#f78fb3"], [branch, 470, 560, .85, "#9b5de5"],
-   [fan, 760, 650, .8, "#ff9f1c"], [brain, 1480, 560, .75, "#ff7096"]].forEach(([f, x, y, k, col], i) => { const c = f(x, y, k, col); c.i = i; C.push(c); });
+  [[branch, 860, 470, 1.0, "#ff6fae"], [brain, 1120, 560, 1, "#b388eb"], [table, 600, 360, 1, "#ffb347"], [fan, 1320, 440, .9, "#ff5d5d"],
+   [brain, 980, 730, .8, "#7bd389"], [branch, 1290, 740, .9, "#ffd166"], [table, 1100, 300, .8, "#f78fb3"], [branch, 470, 590, .85, "#9b5de5"],
+   [fan, 870, 700, .75, "#ff9f1c"], [brain, 1500, 600, .75, "#ff7096"]].forEach(([f, x, y, k, col], i) => { const c = f(x, y, k, col); c.i = i; C.push(c); });
   s.C = C;
   // the reef's fish (they live here: the habitat); they swim left or right, always facing the way they go
   s.fish = []; seed = 211; for (let i = 0; i < 9; i++) { const col = ["#ffd60a", "#3a86ff", "#ff5d73", "#06d6a0", "#ffbe0b", "#f15bb5"][i % 6];
@@ -61,18 +61,18 @@ S.povReef = (() => { const s = scene("povReef", "#0aa1c2", "#06768f"), st = nWho
   nVig(st, "#d8f3ff", .55);
   hRide(s, st);
   // two reef fish lying still on the sand (eyes closed, no marks): they appear on "die"
-  s.deadF = [hFish(st, "#ffd60a", .7, true), hFish(st, "#3a86ff", .6, true)];
+  s.deadF = [hFish(st, "#e9d98a", 1.05, true), hFish(st, "#9fb7d9", .95, true)];        // faded colours, lying on their side
   s.where = chip(st, "📍 Kiritimati Island, middle of the Pacific, 2015–16", INK, {fs: 32});
   s.card = chip(st, "CORAL BLEACHING", "#e85d04", {fs: 42});
   s.run = t => { const a = (w, f) => cue("povReef", w, f), t0 = SC.povReef.t0, tW = a("white", .55), tD = a("die", .9);
-    C.forEach(c => { const k1 = ramp(t, tW - .4 + c.i * .22, tW + .8 + c.i * .22), k2 = ramp(t, tD - .2 + c.i * .12, tD + 1 + c.i * .12);
-      const col = mix(mix(c.col, "#f6f4ee", k1), "#9c917c", k2 * .85);
+    C.forEach(c => { const k1 = ramp(t, tW - .4 + c.i * .22, tW + .8 + c.i * .22), k2 = ramp(t, tD - .5 + c.i * .06, tD + .3 + c.i * .06);
+      const A = hex(c.col), Bw = hex("#f6f4ee"), Dd = hex("#9c917c"), col = "rgb(" + A.map((v, j) => Math.round(lerp(lerp(v, Bw[j], k1), Dd[j], k2 * .85))).join(",") + ")";   // living colour -> white -> dull (mix() cannot nest)
       c.parts.forEach(p => set(p, c.kind === "stroke" ? "stroke" : "fill", col)); });
-    const leave = ramp(t, tW + 1, tD + 1.5);      // the fish leave the white, then dead, reef
+    const leave = ramp(t, tW + 1, tD + .6);      // the fish leave the white, then dead, reef
     s.fish.forEach((o, i) => { const sw = Math.sin(t * .7 + o.ph) * 60, x = o.x0 + sw + o.dir * leave * 1400 * (1 + i * .08), y = o.y + Math.sin(t * 1.3 + o.ph) * 10;
       const dirNow = leave > .01 ? o.dir : (Math.cos(t * .7 + o.ph) >= 0 ? 1 : -1);    // FACES: the way it is swimming
-      tf(o.e, `translate(${x} ${y}) scale(${dirNow} 1)`); op(o.e, 1 - ramp(t, tD + .8, tD + 2)); });
-    tf(s.deadF[0], "translate(1180 800) rotate(4)"); tf(s.deadF[1], "translate(1390 790) rotate(-6) scale(-1 1)"); s.deadF.forEach((d, i) => op(d, ramp(t, tD + .4 + i * .4, tD + 1 + i * .4)));
+      tf(o.e, `translate(${x} ${y}) scale(${dirNow} 1)`); op(o.e, 1 - ramp(t, tD - .2, tD + .6)); });
+    tf(s.deadF[0], "translate(1130 840) rotate(-14)"); tf(s.deadF[1], "translate(1420 830) rotate(12) scale(-1 1)"); s.deadF.forEach((d, i) => op(d, ramp(t, tD - .1 + i * .25, tD + .4 + i * .25)));
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); op(s.where, on(t, t0 + .3, tW - .5, .3));
     popAt(s.card, 810, 160, t, a("bleaching", .7) - .1); op(s.card, on(t, a("bleaching", .7) - .1, SC.povReef.t1 + .5, .3)); };
   return s; })();
@@ -137,7 +137,7 @@ S.povForest = (() => { const s = scene("povForest", "#d8cbb4", "#b8a98e"), st = 
   // the peat smoulders under the ground: small orange glows in cracks (no flames)
   s.glow = []; seed = 251; for (let i = 0; i < 10; i++) s.glow.push(el("ellipse", {cx: 520 + rnd() * 900, cy: 520 + rnd() * 260, rx: 26 + rnd() * 20, ry: 8, fill: "#ff7b00", filter: "url(#blur)", opacity: 0}, st));
   // the safer forest at the right edge (green, appears on "rescue")
-  s.green = el("g", {opacity: 0}, st); [[1480, 1.1], [1600, .9], [1700, 1.2]].forEach(([x, k]) => { const g = el("g", {transform: `translate(${x} ${HZ + 120}) scale(${k})`}, s.green);
+  s.green = el("g", {opacity: 0}, st); [[1480, 1.1], [1600, .9], [1700, 1.2]].forEach(([x, k]) => { const g = el("g", {transform: `translate(${x} ${HZ + 170}) scale(${k})`}, s.green);
     el("rect", {x: -14, y: -180, width: 28, height: 190, fill: "#6d4c41", stroke: INK, "stroke-width": 4}, g);
     el("circle", {cx: 0, cy: -230, r: 95, fill: "#2d6a4f", stroke: INK, "stroke-width": 5}, g); el("circle", {cx: -60, cy: -170, r: 60, fill: "#40916c", stroke: INK, "stroke-width": 5}, g); });
   // the dried-up pond (left of centre, above the buddies): cracked mud, a last wet patch that shrinks, two fish lying still
@@ -146,24 +146,34 @@ S.povForest = (() => { const s = scene("povForest", "#d8cbb4", "#b8a98e"), st = 
   s.wet = el("ellipse", {cx: 20, cy: 6, rx: 200, ry: 56, fill: "#5aa9d6", stroke: "#2a7fb8", "stroke-width": 3}, s.pond);
   seed = 261; for (let i = 0; i < 14; i++) { const x = -220 + rnd() * 440, y = -50 + rnd() * 100; el("path", {d: `M${x} ${y} l${20 + rnd() * 30} ${-10 + rnd() * 20} l${10 + rnd() * 20} ${10 + rnd() * 16}`, fill: "none", stroke: "#7f5539", "stroke-width": 3, opacity: 0, class: "crack"}, s.pond); }
   s.cracks = [...s.pond.querySelectorAll(".crack")];
-  s.dead = [hFish(s.pond, "#c9b37e", .8, true), hFish(s.pond, "#b5a26e", .7, true)]; tf(s.dead[0], "translate(-70 14) rotate(-8)"); tf(s.dead[1], "translate(90 -10) rotate(170) scale(1 -1)");
+  s.dead = [hFish(s.pond, "#c9b37e", 1.05, true), hFish(s.pond, "#b5a26e", .95, true)]; tf(s.dead[0], "translate(-70 14) rotate(-8)"); tf(s.dead[1], "translate(90 -10) rotate(170) scale(1 -1)");
   // the orangutan mother and her baby (code-drawn animals, not the buddies): sitting, looking at the burnt forest
+  // an orangutan mother with her baby clinging to her chest (sitting, facing us; long arms resting on the log; no neck, head low between
+  // the shoulders; shaggy red-orange hair; a darker face with a pale muzzle). Code-drawn animals, not the buddies.
+  const face = (g, x, y, k, sad) => { const f = el("g", {transform: `translate(${x} ${y}) scale(${k})`}, g);
+    el("ellipse", {cx: 0, cy: 0, rx: 40, ry: 44, fill: "#b5541f", stroke: INK, "stroke-width": 5}, f);                                   // hair round the face
+    el("ellipse", {cx: 0, cy: 4, rx: 30, ry: 34, fill: "#7a5240", stroke: INK, "stroke-width": 3}, f);                                   // dark face skin
+    el("ellipse", {cx: 0, cy: 18, rx: 20, ry: 15, fill: "#c9a68b", stroke: INK, "stroke-width": 2.5}, f);                               // pale muzzle
+    [-11, 11].forEach(ex => { el("ellipse", {cx: ex, cy: -6, rx: 6, ry: 6.5, fill: "#fff", stroke: INK, "stroke-width": 2}, f); el("circle", {cx: ex, cy: -5, r: 3.4, fill: INK}, f); });
+    if (sad) [-11, 11].forEach(ex => el("path", {d: `M${ex - 8} ${-17 + (ex < 0 ? 3 : 0)} L${ex + 8} ${-17 + (ex < 0 ? 0 : 3)}`, stroke: INK, "stroke-width": 2.6, "stroke-linecap": "round"}, f));   // worried brows
+    el("circle", {cx: -4, cy: 13, r: 1.8, fill: INK}, f); el("circle", {cx: 4, cy: 13, r: 1.8, fill: INK}, f);
+    el("path", {d: sad ? "M-8 27 Q0 22 8 27" : "M-8 24 Q0 29 8 24", fill: "none", stroke: INK, "stroke-width": 2.6, "stroke-linecap": "round"}, f); return f; };
   const ape = (p) => { const g = el("g", {}, p);
-    el("path", {d: "M-70 60 Q-80 -40 0 -50 Q80 -40 70 60 Z", fill: "#c1440e", stroke: INK, "stroke-width": 5}, g);                    // body
-    el("path", {d: "M-60 -20 Q-110 40 -80 90 M60 -20 Q110 40 80 90", fill: "none", stroke: "#a63a0b", "stroke-width": 22, "stroke-linecap": "round"}, g);   // long arms
-    el("circle", {cx: 0, cy: -90, r: 48, fill: "#c1440e", stroke: INK, "stroke-width": 5}, g);                                         // head
-    el("ellipse", {cx: 0, cy: -80, rx: 32, ry: 28, fill: "#f2c9a0", stroke: INK, "stroke-width": 3}, g);                                // face
-    el("circle", {cx: -11, cy: -90, r: 4.5, fill: INK}, g); el("circle", {cx: 11, cy: -90, r: 4.5, fill: INK}, g);
-    el("path", {d: "M-8 -66 Q0 -70 8 -66", fill: "none", stroke: INK, "stroke-width": 3, "stroke-linecap": "round"}, g);             // a small, sad mouth
-    const b = el("g", {transform: "translate(0 20) scale(.45)"}, g);                                                                    // the baby, held close
-    el("circle", {cx: 0, cy: 0, r: 46, fill: "#d9541a", stroke: INK, "stroke-width": 7}, b); el("ellipse", {cx: 0, cy: 8, rx: 30, ry: 26, fill: "#f2c9a0", stroke: INK, "stroke-width": 5}, b);
-    el("circle", {cx: -10, cy: 0, r: 6, fill: INK}, b); el("circle", {cx: 10, cy: 0, r: 6, fill: INK}, b); return g; };
-  s.log = el("g", {transform: "translate(1080 640)"}, st); el("rect", {x: -150, y: 40, width: 300, height: 54, rx: 26, fill: "#2b2622", stroke: INK, "stroke-width": 5}, s.log);
+    el("path", {d: "M-62 -60 Q-150 -10 -120 70 Q-112 92 -96 96", fill: "none", stroke: "#8f3a0f", "stroke-width": 30, "stroke-linecap": "round"}, g);   // long left arm to the log
+    el("path", {d: "M62 -60 Q150 -10 120 70 Q112 92 96 96", fill: "none", stroke: "#8f3a0f", "stroke-width": 30, "stroke-linecap": "round"}, g);
+    el("path", {d: "M-80 70 Q-100 -40 -40 -78 Q0 -92 40 -78 Q100 -40 80 70 Q0 96 -80 70 Z", fill: "#c1440e", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g);   // body
+    for (let j = -3; j <= 3; j++) el("path", {d: `M${j * 22} -50 q${j * 3} 30 ${j * 2} 60`, fill: "none", stroke: "#e0702b", "stroke-width": 4, "stroke-linecap": "round", opacity: .7}, g);   // shaggy hair
+    face(g, 0, -100, 1, true);
+    // the baby, clinging to her chest: its arms round her, its little face peeking out
+    el("path", {d: "M-44 10 Q0 -14 44 10", fill: "none", stroke: "#a8460f", "stroke-width": 14, "stroke-linecap": "round"}, g);
+    el("ellipse", {cx: 0, cy: 34, rx: 34, ry: 30, fill: "#d35d1b", stroke: INK, "stroke-width": 4}, g);
+    face(g, 0, 18, .55, false); return g; };
+  s.log = el("g", {transform: "translate(1080 640)"}, st); el("rect", {x: -170, y: 80, width: 340, height: 54, rx: 26, fill: "#2b2622", stroke: INK, "stroke-width": 5}, s.log);
   s.ape = ape(s.log);
   s.ape2 = ape(st);                                                     // the same pair, safe in the green forest
-  s.arrow = el("path", {d: "M1180 560 Q1330 380 1520 330", fill: "none", stroke: "#06d6a0", "stroke-width": 12, "stroke-dasharray": "4 22", "stroke-linecap": "round", opacity: 0}, st);
+  s.arrow = el("path", {d: "M1180 560 Q1330 420 1500 390", fill: "none", stroke: "#06d6a0", "stroke-width": 12, "stroke-dasharray": "4 22", "stroke-linecap": "round", opacity: 0}, st);
   s.arrowH = el("path", {d: "M-16 -16 L14 0 L-16 16", fill: "none", stroke: "#06d6a0", "stroke-width": 12, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0,
-    transform: `translate(1520 330) rotate(${(Math.atan2(330 - 380, 1520 - 1330) * 180 / Math.PI).toFixed(1)})`}, st);   // FACES: along the path, into the safe forest
+    transform: `translate(1500 390) rotate(${(Math.atan2(390 - 420, 1500 - 1330) * 180 / Math.PI).toFixed(1)})`}, st);   // FACES: along the path, into the safe forest
   s.haze = el("rect", {x: -400, y: -800, width: 2400, height: 2600, fill: "#a89a80", opacity: .18}, st);
   nVig(st, "#fff3bf", .5);
   hRide(s, st);
@@ -173,8 +183,8 @@ S.povForest = (() => { const s = scene("povForest", "#d8cbb4", "#b8a98e"), st = 
     s.cracks.forEach((c, i) => op(c, ramp(t, tP + i * .08, tP + .5 + i * .08)));
     s.dead.forEach((d, i) => op(d, ramp(t, tF - .1 + i * .3, tF + .3 + i * .3)));
     s.glow.forEach((g, i) => op(g, ramp(t, tB - .3 + i * .1, tB + .5 + i * .1) * (.55 + .25 * Math.sin(t * 2 + i * 1.7))));   // smouldering (the only motion)
-    popAt(s.log, 1080, 640, t, tO - .4);
+    popAt(s.log, 1080, 600, t, tO - .4);
     const k = ramp(t, tC, tC + 1.6); op(s.arrow, on(t, tR, 1e9, .3)); op(s.arrowH, on(t, tR, 1e9, .3)); set(s.arrow, "stroke-dashoffset", -t * 40);
-    op(s.ape, 1 - k); op(s.green, ramp(t, tR - .2, tR + .6)); tf(s.ape2, `translate(1560 ${HZ - 70}) scale(.8)`); op(s.ape2, k);
+    op(s.ape, 1 - k); op(s.green, ramp(t, tR - .2, tR + .6)); tf(s.ape2, `translate(1580 ${HZ + 10}) scale(.75)`); op(s.ape2, k);
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); };
   return s; })();

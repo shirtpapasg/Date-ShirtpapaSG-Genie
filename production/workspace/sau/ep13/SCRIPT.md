@@ -241,7 +241,21 @@ and wind6 "You look down at Singapore...", Heart soft (the journey voice, unchan
 | 2:16.2 | povForest | HEART (soft) | Rescue teams do. They carry orangutans to safer forests. |
 | 2:22.4 | povDry | HEART (soft) | (unchanged) You look down at Singapore. ... has a name: El Niño. |
 
-Adds 47.2 s: episode 4:13.4 -> about 5:00.6. Optional P6 link (+about 5 s, syllabus "organisms adapt and survive; move to other places
+Adds 47.2 s (section on screen 45.6 s): episode 4:13.4 -> about 5:00.6 (4:54.9 without the countdown).
+
+TRIMMED variant (`HAB_SHORT` in habitat_draft.py -> hab2_segments.json, hab2_tl.json): adds 38.8 s (on screen 37.4 s): episode about
+4:52.2 (4:46.5 without the countdown). Same scenes and buddy lines; "coral bleaching" is then only on the card, not spoken.
+| 1:35.2 | povReef | HEART (soft) | In strong El Niño years, warm water spreads over coral reefs, the habitat of many sea animals. Too much heat turns the corals white, and if it lasts, they die. |
+| 1:47.7 | povCoast | HEART (soft) | Near South America, sea lions and seabirds cannot find enough fish, and many of their babies die. |
+| 1:54.8 | povCoast | PIP | Oh no. The poor little pups. |
+| 1:58.5 | povForest | HEART (soft) | Back near Singapore, ponds dry up, and their fish die. Peat forests burn, and orangutans lose their home. |
+| 2:06.4 | povForest | BASIL | Somebody help them! |
+| 2:08.0 | povForest | HEART (soft) | Rescue teams do. They carry orangutans to safer forests. |
+| 2:14.0 | povDry | (unchanged) | |
+
+Gentle pictures: dead coral turns dull; two faded reef fish and two pond fish lie still on their side, eyes closed (an arc), no marks; the
+sea lion pup is thin and hungry with its eyes open (no dead pups drawn: Heart's words carry "many of their babies die"); the peat glows
+under the ground (no flames, no smoke clouds). Stills: scratchpad ep13habitat/*.png. Optional P6 link (+about 5 s, syllabus "organisms adapt and survive; move to other places
 or die", SYL p. 66): "When a habitat changes too much, living things must adapt, move to other places, or die."
 
 Facts (checked 27 Nov through web search; NOAA climate.gov could not be opened from the cloud):
