@@ -110,3 +110,35 @@ function limTorsoFront(back) { let s = `<path d="M-80 -620 Q-90 -520 -72 -418 Q0
   s += `<ellipse cx="0" cy="-430" rx="84" ry="36" fill="${LIM.shorts}" stroke="${LIM.ink}" stroke-width="6"/>` + limTorsoFront(true) + limArmsBars(false);
   s += limbL([[0, -640], [0, -626]], 40, LIM.skin) + `<g transform="translate(0 -650)"><ellipse cx="0" cy="-60" rx="58" ry="62" fill="${SKINL}" stroke="${INKL}" stroke-width="5"/><ellipse cx="-56" cy="-56" rx="11" ry="16" fill="${SKINL}" stroke="${INKL}" stroke-width="4"/><ellipse cx="56" cy="-56" rx="11" ry="16" fill="${SKINL}" stroke="${INKL}" stroke-width="4"/><path d="M-60 -86 Q-62 -40 -40 -22 Q-20 -30 0 -26 Q20 -30 40 -22 Q62 -40 60 -86z" fill="#B8BCC4" stroke="#8D929B" stroke-width="3"/>${[-36, -18, 0, 18, 36].map((x) => `<path d="M${x} -80 q${x > 0 ? 4 : -4} 24 ${x > 0 ? 2 : -2} 46" stroke="#9EA3AC" stroke-width="3" fill="none"/>`).join("")}<path d="M-64 -82 Q-66 -150 0 -156 Q66 -150 64 -82 Q0 -70 -64 -82z" fill="url(#helmW)" stroke="${INKL}" stroke-width="5"/><path d="M-30 -150 Q-34 -118 -30 -84 M0 -156 V-72 M30 -150 Q34 -118 30 -84" stroke="#B9C3CF" stroke-width="7" fill="none"/><path d="M-58 -78 Q-56 -40 -36 -20 M58 -78 Q56 -40 36 -20" stroke="#3B4149" stroke-width="5" fill="none"/></g>`;
   return s; }
+
+/* ================================================================ THE TEACHER'S PAINTED UNCLE LIM (27 Nov 2026) ================================================================
+   Fix pass 5: the paintings (characters/teacher_uncle_lim_2026-11-27/, cut out by characters/lim/cut_lim.py, spr/lim_<view>.png via
+   lim_sprites.py) replace the code-drawn figure above, all on one scale (the helmet 140 local units wide in every view). LIM_PAINTED = false
+   brings the code figure back. OUTFIT: long trousers everywhere (the teacher's choice, 27 Nov); the head-on painting's shorts were lengthened
+   (characters/lim/trousers.py). Side views (FACES right): the bike is fitted to the code roadster (wheel centres on RD.RA / RD.FA, tyres on
+   the ground); inside the painted tyres the paper and the painted spokes were cleared, so turning code spokes + rim + hub are drawn BEHIND
+   the painting and the painted tyre (a circle) stays put: no sliding. He COASTS (crank and feet still, wheels turning; option (b)): the
+   painted leg could not be split into a clean two-bone pedal cycle at this size. Views: side (looking ahead), look (turned to us, smiling:
+   when he speaks or reacts), sidesip (stopped, sipping; never while he talks), front (head-on), back (from behind), stand / sip / wave. */
+const LIM_PAINTED = true;
+const limUse = (key, extra = "") => { const S = SPR["lim_" + key]; return `<g transform="scale(${S.scale}) translate(${-S.ax} ${-S.ay})"><use href="#s_lim_${key}"/>${extra}</g>`; };
+// an invisible box over his face (QA: qa/face_cover_scan.js finds it by this function's name); no pixels
+function limHeadBox(key) { const S = SPR["lim_" + key]; if (!S || !S.face) return ""; const [x, y, w, h] = S.face; return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="none"/>`; }
+// the code wheel behind a painted tyre: a grey rim and thin grey spokes turning, a hub (the painting's look)
+const limSpokes = (r, rot) => { let s = `<circle r="${n2(r)}" fill="none" stroke="#A9B0B8" stroke-width="${n2(r * .07)}"/><circle r="${n2(r * .93)}" fill="none" stroke="#6E7681" stroke-width="2"/>`;
+  for (let i = 0; i < 16; i++) { const a = rot + i * Math.PI / 8; s += `<path d="M${n2(Math.cos(a) * r * .12)} ${n2(Math.sin(a) * r * .12)} L${n2(Math.cos(a + .18) * r * .95)} ${n2(Math.sin(a + .18) * r * .95)}" stroke="#9AA1AA" stroke-width="2.4"/>`; }
+  return s + `<circle r="${n2(r * .1)}" fill="#8C96A2" stroke="#3B4149" stroke-width="3"/>`; };
+// the bell (local units): painted in "look" and "sidesip"; the "side" painting has none, so a small code bell is fitted on its bar
+const LIMBELL = { side: [182, -474], look: [167, -487], sidesip: [169, -476] };
+if (LIM_PAINTED) {
+  /* FACES: right */ limRideV2 = function (t, o = {}) { const cr = o.crank || 0, sh = o.sh === undefined ? RD.r1 * cr : o.sh, rw = o.rw !== undefined ? o.rw : sh / RD.r2;
+    const key = o.sip > .5 && !o.talk ? "sidesip" : o.look ? "look" : "side", S = SPR["lim_" + key]; let wh = "";
+    for (const w of S.wheels) wh += `<g transform="translate(${n2(w.x)} ${n2(w.y)})">${limSpokes(w.rin - 1, rw)}</g>`;
+    const [bx, by] = LIMBELL[key], rg = o.ring ? 1 : 0; let bell = key === "side" ? TF(bx, by + 4, .75, `<g transform="rotate(${n2(rg * 10 * Math.sin(t * 38))})">${bellP4(rg, 0)}</g>`) : "";
+    if (rg) { const k = .5 + .5 * Math.sin(t * 40); bell += `<g transform="translate(${bx} ${by - 6})">${[0, 1, 2, 3].map((i) => { const a = -Math.PI / 2 + (i - 1.5) * .7, r1_ = 26 + 8 * k, r2_ = 44 + 12 * k; return `<path d="M${n2(Math.cos(a) * r1_)} ${n2(Math.sin(a) * r1_)} L${n2(Math.cos(a) * r2_)} ${n2(Math.sin(a) * r2_)}" stroke="#FFE27A" stroke-width="6" stroke-linecap="round"/>`; }).join("")}</g>`; }   // the ring: the bell wobbles, a sparkle
+    return `<g transform="scale(${S.scale}) translate(${-S.ax} ${-S.ay})">${wh}<use href="#s_lim_${key}"/>${limHeadBox(key)}</g>` + bell; };
+  /* FACES: none */ limStand = function (t, o = {}) { const key = o.wave ? "wave" : (o.sip || 0) > .5 ? "sip" : "stand";
+    return `<ellipse cx="0" cy="4" rx="110" ry="14" fill="#2B2147" opacity=".22"/>` + limUse(key, limHeadBox(key)); };
+  /* FACES: camera */ limFrontRideV2 = function (t, o = {}) { return limUse("front", limHeadBox("front")); };
+  /* FACES: away */ limRearRideV2 = function (t, o = {}) { return limUse("back"); };
+}

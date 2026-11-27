@@ -270,7 +270,7 @@ SC.finish = (t, s) => { const tX = MK("cross"), tCl = MK("clap"), c = camMix(cam
   const laugh = t >= tCl;
   window._BUBAT = { pip: [520, 380], momo: [1440, 380], basil: [960, 330] };
   return x2place("vdv2", set, c)
-    + CAM(TF(1620, 1070, .78, limStand(t, { bag: true, laugh: laugh, sip: t > s.t0 + .5 && t < LT("e1301") ? .6 : 0, nod: laugh ? .06 * Math.sin(t * 9) : 0 })), c[0], c[1], c[2])
+    + CAM(TF(1620, 1070, .78, limStand(t, { bag: true, laugh: laugh, wave: t >= tCl - .3 && t < tCl + 1.2, sip: t > s.t0 + .5 && t < LT("e1301") ? .6 : 0, nod: laugh ? .06 * Math.sin(t * 9) : 0 })), c[0], c[1], c[2])
     + (t >= LT("e1303") - .05 ? x2limSay("e1303", Math.min(1560, camPt(c, [1500, 520])[0]), Math.max(300, camPt(c, [1500, 520])[1]), t) : "")
     + x2bc(c, "pip", 240, 1076, 360, t, { in: s.t0 - .5, poses: [[0, "sit"], [LT("e1301") + .4, "surprised"], [LT("e1302") - .1, "cheer"], [tX + 1.5, "sit"], [tCl - .3, "hi5/cheer"], [tCl + .6, "proud/cheer"], [LT("e1304") + .4, "proud/arms_crossed"]], look: 6, achieved: true })
     + x2bc(c, "basil", 1040, 1090, 380, t, { in: s.t0 - .5, poses: [[0, "sit"], [LT("e1301") + .5, "surprised"], [LT("e1302") - .1, "cheer"], [tX + .2, "pointing"], [tX + 1.4, "sit"], [LE("e1303") - .6, "laugh"], [tCl - .3, "hi5/cheer"], [tCl + .6, "laugh"]], look: -4, achieved: true, ...x2grease(t) })
