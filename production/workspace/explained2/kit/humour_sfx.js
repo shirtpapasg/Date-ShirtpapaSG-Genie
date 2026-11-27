@@ -7,10 +7,11 @@
 // The voice is never touched. Use from an episode's song.js:
 //   const HS = require('../kit/humour_sfx'); const hb = HS.render(C.ev, P, HS.HUMOUR, { setBus, N, SR, voice, voiceGain, lines });
 //   then MIX.duck(beds, hb, { depth: HS.DEFAULTS.BED_DUCK }) and add hb to the stems with GAIN = the old sfx bus gain.
-const DEFAULTS = { ABOVE_DB: 3, MIN_GAIN: 1, MAX_GAIN: 10, WIN: 8, DUCK_UNDER_VOICE: .6, BED_DUCK: .5, LIMIT: .9 };
-// the comic events (sound_cues keys): stings, flops, slapstick hits, comic sound-words, the pigeon gags, the snail-cam jokes
+const DEFAULTS = { ABOVE_DB: 3, MIN_GAIN: 1, MAX_GAIN: 32, WIN: 8, DUCK_UNDER_VOICE: .6, BED_DUCK: .5, LIMIT: .9 };
+// the comic events (sound_cues keys): stings, flops, slapstick hits, comic sound-words, the pigeon gags, the snail-cam jokes (NOT the plain
+// scene-change "whoosh", the science sounds - bell, chain clicks, wheels - or the ambience)
 const HUMOUR = new Set(["sadtrombone", "kazoo", "kazoobwop", "pigeonkoo", "pigeontakeoff", "pigeonland", "flutter", "clink", "sproing", "splash",
-  "whoosh", "whooshbig", "clang", "clatter", "boing", "bonk2", "toot", "squelch", "squelchslow", "whirr", "whiff", "plip", "slurp", "brrr",
+  "whooshbig", "clang", "clatter", "boing", "bonk2", "toot", "squelch", "squelchslow", "whirr", "whiff", "plip", "slurp", "brrr",
   "rimshot", "clap", "chainheap"]);
 const LEN = { sadtrombone: 2.6, pigeonkoo: .8, pigeontakeoff: 1.0, pigeonland: .5, whirr: 4.4, squelchslow: 1.6, toot: .6, splash: 1.4 };
 function rmsActive(L, R, a, b) { let pk = 0; for (let i = a; i < b; i++) pk = Math.max(pk, Math.abs(L[i] + R[i]) / 2); const th = pk * .1; let s = 0, n = 0;

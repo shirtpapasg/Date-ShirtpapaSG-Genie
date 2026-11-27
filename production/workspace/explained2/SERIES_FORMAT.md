@@ -594,6 +594,16 @@ The teacher: "something is wrong with the direction of the person cycling. Also,
     that Kampong Walk is silent there and the pad's level (about -26 LUFS short-term). Applies to EP0 and EP16-EP22 (the v4 files;
     EP20 and EP21's v3 files were rebuilt in place before their upload). Options for files with other names: `--in <mp4>` (e.g. a
     spliced `_v3`) and `--out <new mp4>` (never overwrites).
+- **Humour sound effects are LOUD: "don't be shy" (teacher, 2026-11-27, on the live P4 EP1: "humours are ok. Just make the sound effects
+  for humour louder. Dont be shy.").** Every comic sound (the sad-trombone sting, slapstick hits and the comic sound-words: CLINK!,
+  SPROING!, KER-SPLOOSH!, WHOOSH!, CLANG!, CLATTER!, BOING!, BONK!, FLAP!, squelch, toot; the pigeon KOOs and flaps; the snail-cam WHIRR;
+  rimshots, slurps, whiffs, the CLAP!) hits 3 dB ABOVE the dialogue around it (2-4 dB is the range), punchy, on its own bus: it is
+  ducked under the voice so it never sits on a spoken word (place it in the pause after the punchline), the music and ambience duck under
+  it, and it has its own peak limiter (the voice is never limited by it). Science and place sounds (the bell, chain clicks, wheels, the
+  ambience) stay where they are. Default for EP2 on: `kit/humour_sfx.js` (HUMOUR = the comic cue keys, DEFAULTS = ABOVE_DB 3, MIN_GAIN 1,
+  MAX_GAIN 32, DUCK_UNDER_VOICE .6, BED_DUCK .5, LIMIT .9), wired into the episode's song.js as in `p4ep01v2/song.js` (HUMOUR_OLD=1 turns
+  it off); with it the master ceiling is .66 so the true peak stays <= -1.5 dBTP after AAC. New comic cues: add their key to HUMOUR.
+  The low sad trombone is `kit/sad_trombone.js` (sau/sfx/sad_trombone.wav): the series' running gag for a joke that falls flat.
 - Loudness about -16 LUFS.
 - A human must listen before upload: the agents can only measure the sound.
 

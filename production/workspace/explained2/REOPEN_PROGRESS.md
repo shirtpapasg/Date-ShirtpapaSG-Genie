@@ -193,3 +193,4 @@
 - 2026-11-27 ~12:45 UTC: Explored EP13 v2 (5:07, with the habitat section) is live, public, as wo8rAuGzrwE. The teacher replied "ok" to "OK to upload EP13".
   - The old REexNUS6HK0 was found PUBLIC again; it had been set private at 09:34. It now carries a NEW VERSION line and is out of the Explored playlist. Ask the teacher before making it private.
   - TheOneApp PR #274 adds NEWS no. 13.
+- 12:22 UTC 27 Nov: P4 EP1 v2 humour-sfx LOUD remix (audio only, not uploaded): p4ep01v2/p4ep01v2_loud.mp4 (video packets identical to fix pass 8, voice stem identical, -16.0 LUFS, -2.4 dBTP, decode 0); kit/humour_sfx.js + SERIES_FORMAT 9 = the series default from EP2.

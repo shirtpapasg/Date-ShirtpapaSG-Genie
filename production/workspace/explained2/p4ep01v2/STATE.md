@@ -238,3 +238,17 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   -19.4 / -17.3 / -17.7 (at voice level or a touch above). 7:16.2, -16.0 LUFS, true peak -1.8 dBTP, decode 0. Scans: no ghosting, no
   backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan the same by-design set. Clips: scratchpad
   p4items/pip_run.mp4, momo_run.mp4, basil_run.mp4, pigeon_koo.mp4, run_pairs.jpg; qa/review_runaway.mp4 and the key frames refreshed.
+
+## Audio-only remix: humour sfx loud (27 Nov 2026; teacher on the live P4 EP1 7OBnZam5Xzs: "humour are ok. Just make the sound effects for humour louder. Dont be shy."; NOT uploaded)
+- No video re-render: `p4ep01v2_loud.mp4` = the fix-pass-8 video stream copied (packets md5 2f10fedec074671175dbe3a58f0ce312, identical) +
+  the new mix. The voice stem is bit-identical (md5 0acae4446f4fdfdbbd6c4bcd3e3fcef8). Decode 0 errors; 13086 frames, 7:16.2.
+  -16.0 LUFS, true peak -2.4 dBTP. `p4ep01v2.mp4` (fix pass 8) is kept as it was; the main session decides which goes live.
+- `../kit/humour_sfx.js` (new, the series default; SERIES_FORMAT 9): the 51 comic events here (4 sad trombones, the KOOs and flaps, CLINK,
+  SPROING, KER-SPLOOSH, WHOOSH, CLANG, CLATTER, BOING, BONK, squelch, toot, the snail-cam whirr, rimshots, slurps, whiffs, brrr, the CLAP)
+  are each rendered alone, measured and set 3 dB above the dialogue around them (gains +2 to +30 dB; never quieter than before) on their
+  own bus, ducked under the voice (so never over a word), peak-limited; the beds duck under them. Measured in the mix: the sad trombones
+  +4 to +7 dB, the KOOs +3 to +7, CLINK +2, SPROING +4, BOING +7, KER-SPLOOSH +5, toot +2 (dB re the lines around them). The scene-change
+  whooshes, the bell, chain clicks, wheels and ambience are unchanged. Dialogue in the final mix moves by a median -0.6 dB (the loudness
+  normalisation to -16 LUFS; range -1.3 to +0.7). `out/humour_report.json` (HUMOUR_REPORT=1) lists every event's gain.
+- Review: scratchpad p4items/loud_humour.mp4 (30 s: the pigeons and the sad trombone at the bell, the snail-cam replay and "LIGHTER!"
+  trombone, the toot and the 3:33 trombone).

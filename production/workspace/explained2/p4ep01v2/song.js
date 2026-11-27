@@ -330,6 +330,6 @@ const BG = { drums: .5, bass: .55, keys: 1.6, lead: .9, pad: 1.4, brass: 1.0 };
 for (const [name, bd] of Object.entries(beds)) for (const [k, x] of Object.entries(bd)) { stems[name + '_' + k] = x; GAIN[name + '_' + k] = BG[k] * (name === 'lite' ? .9 : name === 'tense' ? 1.5 : name === 'action' ? 1.15 : 1); }
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? path.join(__dirname, "out", "stems") : null }); MIX.highpass(mix, 30);
 MIX.fadeOut(mix, C.END - 1.2, C.END - .05);
-const M = MIX.master(mix, .8, .78, { lufs: -16 });   // ceiling .78: true peak <= -1.5 dBTP after AAC (it measured -1.2 with .84)
+const M = MIX.master(mix, .8, HUM ? .66 : .78, { lufs: -16 });   // (humour loud: the punchier sfx transients overshoot more after AAC: ceiling .66 keeps <= -1.5 dBTP)   // ceiling .78: true peak <= -1.5 dBTP after AAC (it measured -1.2 with .84)
 fs.mkdirSync(path.join(__dirname, 'out'), { recursive: true }); MIX.writeWav(path.join(__dirname, 'out', `mix_p${PART}.wav`), mix);
 console.log(`wrote out/mix_p${PART}.wav (${DUR.toFixed(2)} s${M && M.lufs !== undefined ? `, ${M.lufs.toFixed(1)} LUFS` : ''})`);
