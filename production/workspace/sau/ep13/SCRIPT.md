@@ -211,3 +211,51 @@ TheOneApp `videos.js` NEWS entry (prepare only; add after it is public; times fr
       { at: '3:09', what: 'Meanwhile in India and the USA' },
       { at: '3:42', what: 'Try this' } ] },
 ```
+
+## 9. Teacher's request of 27 Nov 2026 (PHASE 1: plan, draft lines and stills; NOT applied to the episode)
+
+> "I need you to talk more about the effects of El Niño on habitat, including showing animals dying and the environment. Let this be inside
+> the micro journey with the pet buddies. Also ensure the pet buddies does not have the circular background colour. I have already uploaded
+> the new images. Use the proper ones"
+
+**No circles (done, committed):** `nBud()` no longer draws the coloured aura disc. Buddies are plain cut-outs; on a floor (corridor, try, bye)
+a soft flat contact shadow under the feet, on the maps (povWeak, thermo, usa) nothing. `thumb13.py`: the purple disc behind Pip removed (the
+thumbnail itself not re-made yet). Short 1 and Short 2 re-rendered video-only, audio copied (scratchpad ep13circles/).
+
+**The images:** EP13 already uses the newest coloured paintings: fronts = the v2 talking/pose sets via explained2/ep27/spr (Pip grey, Momo
+coral v2, Basil teal v2), backs = the teacher's coloured back paintings of 26 Nov (poses/pip_back, momo_v2_back, basil_v2_back). No grey or
+old art. The only newer buddy paintings are Momo's neckerchief + gold medal set (27 Nov), which is the P4 look; Explored has never used P4
+items, so they are NOT swapped in (teacher to confirm). The two images uploaded on 27 Nov are P4 EP1 v2 screenshots, not new paintings.
+
+**Habitat section (draft: `habitat_draft.py` lines, `habitat.js` scenes; timing from `hab_tl.json`).** Between pip2 "Wait for us, clouds!"
+and wind6 "You look down at Singapore...", Heart soft (the journey voice, unchanged recipe), buddies riding in back view:
+
+| At (new) | Scene | Voice | Words |
+|---|---|---|---|
+| 1:35.2 | povReef | HEART (soft) | In strong El Niño years, the warm water spreads over coral reefs. A reef is the habitat of many sea animals. [KEY WORD: HABITAT] |
+| 1:43.7 | povReef | HEART (soft) | Too much heat turns the corals white. This is called coral bleaching. If it lasts too long, the corals die. |
+| 1:52.9 | povCoast | HEART (soft) | Near South America, the small fish become hard to find. Sea lions and seabirds go hungry, and many of their babies die. |
+| 2:02.1 | povCoast | PIP | Oh no. The poor little pups. |
+| 2:05.9 | povForest | HEART (soft) | Back near Singapore, ponds dry up, and the fish in them die. Dry peat forests burn, and orangutans lose their home. |
+| 2:14.6 | povForest | BASIL | Somebody help them! |
+| 2:16.2 | povForest | HEART (soft) | Rescue teams do. They carry orangutans to safer forests. |
+| 2:22.4 | povDry | HEART (soft) | (unchanged) You look down at Singapore. ... has a name: El Niño. |
+
+Adds 47.2 s: episode 4:13.4 -> about 5:00.6. Optional P6 link (+about 5 s, syllabus "organisms adapt and survive; move to other places
+or die", SYL p. 66): "When a habitat changes too much, living things must adapt, move to other places, or die."
+
+Facts (checked 27 Nov through web search; NOAA climate.gov could not be opened from the cloud):
+- Coral bleaching in El Niño years: NOAA: the first global bleaching event (1998) came with the strong 1997-98 El Niño, about 8% of the
+  world's corals died; 2010 with a moderate El Niño; 2014-17 the third; the fourth, confirmed 15 Apr 2024, the largest on record (83.7% of
+  reef area, Jan 2023 to Apr 2025). climate.gov "Unprecedented 3 years of global coral bleaching, 2014-2017"; coralreefwatch.noaa.gov status page.
+- Kiritimati (Christmas Island, central equatorial Pacific, inside the Niño 3.4 box), 2015-16 El Niño: about 89% of hard coral cover lost
+  after a heatwave of about 10 months (peer-reviewed, pmc.ncbi.nlm.nih.gov/articles/PMC11318656; UVic release "2016 El Niño devastates
+  coral reefs": 80% dead, 15% bleached in 2016).
+- Galápagos 1982-83: almost all Galápagos sea lion pups of 1982 died; fur seals lost their four youngest year classes (Trillmich and
+  Limberger 1985, "Drastic effects of El Niño on Galapagos pinnipeds", Oecologia; pub.uni-bielefeld.de/record/1781862). Seabirds: Peru's
+  anchoveta fell sharply in 1997-98; extensive impacts on seabirds and sea mammals reported (NOAA AOML, Enfield; NOAA PFEL).
+- Borneo 2015: the El Niño drought dried the peat; fires burned about 2.6 million hectares in Indonesia, June to Oct 2015 (CIFOR); fires in
+  refuges and parks that hold about a third of the world's wild orangutans (CIFOR); peat fires destroy orangutan habitat (Nature news 2015).
+  Rescue: International Animal Rescue rescued about 40-50 orangutans from burnt forest in 2015 and moved them to safer forest.
+- Ponds drying and fish dying in a drought: general (no single-event claim is made). Nothing is claimed about 2026.
+- NOT used (not supported): "the fish come back quickly" after El Niño.

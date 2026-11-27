@@ -8,7 +8,7 @@ from pocketsphinx import Decoder
 spec = json.load(open(sys.argv[1])); AUD = sys.argv[2]; OUT = sys.argv[3]
 dic = set(l.split()[0].split('(')[0] for l in open(os.path.join(pocketsphinx.get_model_path(), 'en-us', 'cmudict-en-us.dict')))
 EXTRA = {"kalimantan": "K AE L IH M AE N T AE N", "sumatra": "S UW M AA T R AH", "micrometres": "M AY K R OW M IY T ER Z",
-         "kilometres": "K IH L AA M AH T ER Z", "windpipe": "W IH N D P AY P", "mucus": "M Y UW K AH S", "myenv": "M AY",
+         "kilometres": "K IH L AA M AH T ER Z", "seabirds": "S IY B ER D Z", "orangutans": "AO R AE NG AH T AE N Z", "windpipe": "W IH N D P AY P", "mucus": "M Y UW K AH S", "myenv": "M AY",
          "hotspots": "HH AA T S P AA T S", "singapore's": "S IH NG AH P AO R Z", "you'll": "Y UW L", "that's": "DH AE T S",
          "here's": "HH IY R Z", "let's": "L EH T S", "i'll": "AY L", "defence": "D IH F EH N S", "twenty-six": "T W EH N T IY S IH K S",
          "twenty-three": "T W EH N T IY TH R IY", "ninety-five": "N AY N T IY F AY V", "south-west": "S AW TH W EH S T",
@@ -63,6 +63,10 @@ for i, s in enumerate(spec["segments"]):
     parts.append(("sil", d) if s.get("silent") else ("seg", s["id"]))
     for kd, at in s.get("sfx", []): SEGSFX.append((kd, t + at))
     t += d
+# EP13: NO MUSIC. The journey has natural sound only (teacher, 26 Nov 2026: "why is there still background music playing?"); the episode has
+# no other music bed. A music bed (pad_*) in any segment stops the build, so a rebuild can never bring the music back.
+_music = sorted({kd for kd, _ in SEGSFX if kd.startswith("pad_")})
+if _music: sys.exit(f"EP13 build stopped: music bed(s) {_music} in the segments; EP13 has no music (teacher, 26 Nov 2026)")
 END = round(t + OUTRO, 3)
 inputs = []
 for kd, v in parts:

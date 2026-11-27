@@ -30,6 +30,7 @@ const BPM = 112, BEAT = 60 / BPM, BAR = 4 * BEAT, FADE = .8;
 const beds = {}; const B = (name) => (beds[name] = { drums: bus(), bass: bus(), keys: bus(), lead: bus(), pad: bus(), brass: bus() });
 // ---------- voices
 for (const id of TL.order) MIX.loadAudio(path.join(__dirname, 'voice', id + '.wav'), { at: TL.lines[id].t, length: DUR }).mixInto(voice, TL.lines[id].who === 'heart' ? 1 : TL.lines[id].who === 'chant' ? (TL.lines[id].gain || .8) : .78);
+if (process.env.VOICEHASH) { const h = require('crypto').createHash('md5'); h.update(Buffer.from(voice.L.buffer)); h.update(Buffer.from(voice.R.buffer)); console.log('voice stem md5', h.digest('hex')); if (process.env.VOICEHASH === 'only') process.exit(0); }   // fix pass 6: proves the voice stem is unchanged
 // ---------- the bar clock and the beds' envelopes
 const barsIn = (regs) => { const out = new Set(); for (const [a, b] of regs) for (let k = Math.floor((a - FADE) / BAR); k * BAR < b + FADE; k++) if (k >= 0) out.add(k); return [...out].sort((x, y) => x - y); };
 function envelope(regs) { const e = new Float32Array(N); for (const [a, b] of regs) { const i0 = Math.max(0, Math.round((a - FADE / 2) * SR)), i1 = Math.min(N, Math.round((b + FADE / 2) * SR));
@@ -221,6 +222,28 @@ const kazooNote = (midi, dur, wob = 0) => { const n = Math.round(dur * SR), x = 
     const buzz = Math.tanh(3 * saw + .4 * Math.sin(2 * Math.PI * ph * 3)); lp += .35 * (buzz - lp); const env = Math.min(1, i / (.02 * SR)) * Math.min(1, (n - i) / (.05 * SR)); x[i] = lp * env * .5; } return x; };
 const kazoo = (t, g = .3) => { [[67, 0, .26, 0], [65, .28, .26, 0], [63, .56, .26, 0], [60, .84, .9, 1]].forEach(([n, d, l, w]) => { const x = kazooNote(n - 12, l, w); game.addMono(x, t + d, g); verb.addMono(x, t + d, g * .2); }); };
 const brassChord = (t, notes, d, g) => notes.forEach((n, i) => { const x = I.brassNote(m(n), d, { seed: 120 + i }); game.addMono(x, t, g); verb.addMono(x, t, g * .3); });
+// ---- PIGEONS (fix pass 6, teacher 27 Nov: "add sound effects of pigeon"), designed here (no pigeon in the series sfx library):
+// coo-roo: a soft, hollow two-part call ("hoo ... ROO-oo"): a buzzy source (harmonics 1/n) shaped by an "oo" vowel (formants ~ 430 and
+// 900 Hz), the pitch rising a little on the first part and sliding down on the second, the throaty pigeon trill (amplitude ~ 26 Hz), a
+// breath of noise; wing-flap bursts: each beat a band-passed noise clap (fast attack, 40 ms decay) with a soft low thump, 8-12 beats a
+// second per bird, birds overlapped with a little jitter; peck: the series' ep05_peck.wav, quiet. Deterministic (a seeded random).
+let PRNG = 12345; const prand = () => ((PRNG = (PRNG * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+function cooRoo(pitch = 1) { const parts = [[0, .17, 188, 214], [.21, .46, 236, 178]], n = Math.round(.72 * SR), x = new Float32Array(n);
+  for (const [t0, d, f0, f1] of parts) { const i0 = Math.round(t0 * SR), m_ = Math.round(d * SR); let ph = 0;
+    for (let i = 0; i < m_; i++) { const u = i / m_, f = pitch * (f0 + (f1 - f0) * (u < .35 && f1 < f0 ? u * .3 : u)), env = Math.sin(Math.PI * Math.min(1, u * 1.15)) ** 1.6 * (1 + .35 * Math.sin(2 * Math.PI * 26 * i / SR)); ph += 2 * Math.PI * f / SR;
+      let v = 0; for (let h = 1; h <= 9; h++) { const hf = h * f, w = (Math.exp(-(((hf - 430) / 210) ** 2)) + .45 * Math.exp(-(((hf - 900) / 280) ** 2))) / h; v += w * Math.sin(h * ph); }
+      x[i0 + i] += env * (v + .04 * (prand() * 2 - 1)); } }
+  let mx = 0; for (const v of x) mx = Math.max(mx, Math.abs(v)); for (let i = 0; i < n; i++) x[i] /= mx || 1; return x; }
+function wingBeat() { const n = Math.round(.06 * SR), x = new Float32Array(n); let lo = 0, lo2 = 0;
+  for (let i = 0; i < n; i++) { const e = i < .003 * SR ? i / (.003 * SR) : Math.exp(-(i - .003 * SR) / (.04 * SR)), w = prand() * 2 - 1; lo += .35 * (w - lo); lo2 += .04 * (lo - lo2); x[i] = e * ((lo - lo2) * 1.6 + .35 * Math.sin(2 * Math.PI * 120 * i / SR) * Math.exp(-i / (.02 * SR))); }
+  return x; }
+const wings = (t, d, birds = 1, g = .18, pan = 0) => { for (let b = 0; b < birds; b++) { const rate = 9 + 3 * prand(); let tt = t + .03 * b + .02 * prand(); while (tt < t + d) { game.addMono(wingBeat(), tt, g / Math.sqrt(birds) * (.6 + .4 * prand()) * (1 - .5 * (tt - t) / d), pan + (prand() - .5) * .5); tt += 1 / rate * (.85 + .3 * prand()); } } };
+const pcoo = (t, g = .1, pitch = 1, pan = 0) => { const x = cooRoo(pitch); game.addMono(x, t, g, pan); verb.addMono(x, t, g * .15); };
+const peck = (t, g = .05) => sfx(t, 'ep05_peck.wav', g);
+// the series' low SAD TROMBONE (fix pass 6, teacher: "when the joke is out, put a funny low music tune instead"): ../kit/sad_trombone.js,
+// four falling plunger-muted notes, the last one wobbling; v = its length (s), fitted to the pause it sits in
+const { sadTrombone } = require('../kit/sad_trombone');
+const trombone = (t, d = 2.0, g = .15) =>   /* about -6 to -9 dB under a buddy line (measured), in a pause */ { const x = sadTrombone(SR, d); game.addMono(x, t, g); verb.addMono(x, t, g * .25); };
 const choir = (t, notes, d, g, syl = 'a') => notes.forEach((n, i) => { const v = I.voice(m(n), d, { syl, type: i % 2 ? 'alto' : 'tenor', seed: 140 + i, vib: .14 }); game.addMono(v, t, g); verb.addMono(v, t, g * .5); });
 Object.assign(P, {
   actionsting: (t) => { [0, .25, .5].forEach((d, i) => game.addMono(I.tom(80 + 15 * i, .3, 60 + i), t + d, .55)); game.addMono(K, t, .7); brassChord(t + .52, ['F3', 'A3', 'C4', 'F4'], .55, .1); choir(t + .52, ['F3', 'C4', 'A4'], .9, .05); game.addMono(I.crash(12), t + .52, .1); },
@@ -239,6 +262,9 @@ Object.assign(P, {
   shing: (t) => { const x = I.bell(3200, .4, 2.0, 2.4); game.addMono(x, t, .14); verb.addMono(x, t, .12); game.addMono(I.noiseSweep(.3, 3000, 7000, { q: 2 }), t, .05); },
   actionrise: (t) => { for (const [n, d] of [['C4', 0], ['E4', .5], ['G4', 1.0], ['C5', 1.5]]) game.addMono(I.strings(m(n), .7, { attack: .1, release: .3, seed: 9 }), t + d, .06); },
   brakesqueak: (t) => { game.addMono(I.noiseSweep(.3, 2600, 2000, { q: 4 }), t, .1); },
+  sadtrombone: (t, v) => trombone(t, v || 2.0),
+  pigeontakeoff: (t, v) => wings(t, .9, v || 5, .16), pigeonland: (t, v) => wings(t, .4, v || 1, .14), pigeonhop: (t, v) => wings(t, .25, v || 2, .09),
+  pigeoncoo: (t, v) => pcoo(t, .11, v || 1), pigeoncoo2: (t) => { pcoo(t, .1, 1.06, -.2); pcoo(t + .55, .09, .94, .2); },   /* coo: about -16 dB re a buddy line; wings about -13 */ pigeonpeck: (t) => peck(t, .06),
   flutter: (t) => { for (let k = 0; k < 14; k++) game.addMono(I.paperFwip(1.4 + .1 * (k % 3), 400 + k), t + k * .045, .07, (k % 2 ? .3 : -.3)); },
   coo: (t) => { for (const [d, f] of [[0, 300], [.22, 270]]) { const n = Math.round(.22 * SR), x = new Float32Array(n); let ph = 0; for (let i = 0; i < n; i++) { const u = i / n; ph += 2 * Math.PI * f * (1 - .15 * u) / SR; x[i] = Math.sin(ph) * Math.sin(Math.PI * u) * (1 + .5 * Math.sin(2 * Math.PI * 28 * i / SR)) * .3; } game.addMono(x, t + d, .2); } },
   yourturn: (t) => { mar('C6', t, .3); mar('G5', t + .1, .25); },

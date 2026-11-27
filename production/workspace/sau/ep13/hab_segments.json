@@ -1,0 +1,132 @@
+{
+ "episode": "SAU EP13 habitat draft",
+ "title": "habitat draft",
+ "tag": "🌏 TheOneApp, Explored · EP 13 · El Niño",
+ "outro": 1.0,
+ "kws": [
+  [
+   "hab1",
+   "habitat",
+   "HABITAT",
+   "#2d6a4f"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "wind5",
+   "scene": "povWeak",
+   "soft": true,
+   "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore. The warm, wet air that rises from it, and builds the rain clouds, moves east too.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "pass_by",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "pip2",
+   "scene": "povWeak",
+   "who": "pip",
+   "text": "Wait for us, clouds!"
+  },
+  {
+   "id": "hab1",
+   "scene": "povReef",
+   "soft": true,
+   "text": "In strong El Niño years, the warm water spreads over coral reefs. A reef is the habitat of many sea animals.",
+   "sfx": [
+    [
+     "underwater",
+     0.2
+    ],
+    [
+     "sea_wash",
+     3.0
+    ]
+   ]
+  },
+  {
+   "id": "hab2",
+   "scene": "povReef",
+   "soft": true,
+   "text": "Too much heat turns the corals white. This is called coral bleaching. If it lasts too long, the corals die.",
+   "sfx": [
+    [
+     "underwater",
+     0
+    ]
+   ],
+   "hold": 0.4
+  },
+  {
+   "id": "hab3",
+   "scene": "povCoast",
+   "soft": true,
+   "text": "Near South America, the small fish become hard to find. Sea lions and seabirds go hungry, and many of their babies die.",
+   "sfx": [
+    [
+     "sea_wash",
+     0
+    ],
+    [
+     "wind",
+     3.0
+    ]
+   ]
+  },
+  {
+   "id": "pipH",
+   "scene": "povCoast",
+   "who": "pip",
+   "text": "Oh no. The poor little pups.",
+   "hold": 0.3
+  },
+  {
+   "id": "hab4",
+   "scene": "povForest",
+   "soft": true,
+   "text": "Back near Singapore, ponds dry up, and the fish in them die. Dry peat forests burn, and orangutans lose their home.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "crackle",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "basilH",
+   "scene": "povForest",
+   "who": "basil",
+   "text": "Somebody help them!"
+  },
+  {
+   "id": "hab5",
+   "scene": "povForest",
+   "soft": true,
+   "text": "Rescue teams do. They carry orangutans to safer forests.",
+   "hold": 0.6
+  },
+  {
+   "id": "wind6",
+   "scene": "povDry",
+   "soft": true,
+   "text": "You look down at Singapore. Blue sky. Hardly any rain clouds. What you just lived through has a name: El Niño.",
+   "sfx": [
+    [
+     "reveal",
+     4.6
+    ]
+   ],
+   "hold": 0.8
+  }
+ ]
+}

@@ -73,10 +73,10 @@ function x2bellFront(t, s) { const tB = MK("flap") + 1.0, c = camMix(camOn([1000
   window._BUBAT = { basil: [560, 300], momo: [1300, 330], pip: [1500, 300] };
   return x2place("vdv2", TF(...BELC, BLK, bikeP4(t, { chain: 1, brakes: 1, bell: 0, crank: .6 })), c)
     + x2bc(c, "basil", ...B, t, { in: tB - .02, noStay: true, poses: [[0, "shocked/surprised"], [LT("b407") + .4, "deadpan"]], look: 2, noreact: true })
-    + pgOn("basil", 70, -110, .85, true, 1) + pgOn("basil", -150, -40, .8, false, 2) + helmPig
+    + pgOn("basil", 104, -52, .85, true, 1) + pgOn("basil", -150, -40, .8, false, 2) + helmPig   /* (fix pass 6, teacher) the third pigeon on his shoulder, clear of his face */
     + comicWord(t, coo, ...camPt(c, [B[0] + 40, B[1] - 520]), "coo.", { size: 40, tiny: true, col: "#fff", d: .7 })
-    + (true ? x2bc(c, "momo", jog(1520, 1400, LT("b407") - .2), 1066, 360, t, { in: tB - 3, noStay: true, flip: true, poses: [[0, "sit"], [LT("b407") + .9, "laugh/cheer"], [LE("b407") + .2, "sit"]], look: -6 }) : "")
-    + (true ? x2bc(c, "pip", jog(1880, 1780, LT("b407")), 1066, 350, t, { in: tB - 3, noStay: true, flip: true, poses: [[0, "sit"], [LT("b408") + .5, "embarrassed/oops"], [LE("b408") + .4, "sit"]], look: -6 }) : "")
+    + (true ? x2bc(c, "momo", jog(1520, 1400, LT("b407") - .2), 1066, 360, t, { in: tB - 3, noStay: true, flip: true, jump: [[LT("b407") - .2, 14], [LT("b407") + .1, 14], [LT("b407") + .4, 12]], poses: [[0, "surprised"], [LT("b407") + .65, "sit"], [LT("b407") + .9, "laugh/cheer"], [LE("b407") + .2, "sit"]], look: -6 }) : "")
+    + (true ? x2bc(c, "pip", jog(1880, 1780, LT("b407")), 1066, 350, t, { in: tB - 3, noStay: true, flip: true, jump: [[LT("b407"), 14], [LT("b407") + .3, 14], [LT("b407") + .6, 12]], poses: [[0, "surprised"], [LT("b407") + .85, "sit"], [LT("b408") + .5, "embarrassed/oops"], [LE("b408") + .4, "sit"]], look: -6 }) : "")
     + faceCam("basil", t, tB + .05, tB + 1.5, 1520, 300, 150, [[0, "shocked/surprised"]], { flip: true, noreact: true })
     + x2lab(t, MK("warn"), s.t1, c, "bell: warns people you are coming", 1380, 200, BELC[0] + BLK * (BK.HT[0] - 24), BELC[1] + BLK * (BK.HT[1] - 66), 38)
     + x2HUD(t); }
@@ -175,7 +175,7 @@ function x2runA(t, s) { const u = t - s.t0, roll = 40 * (u + SCN.brakes.t1 - MK(
   const bx = RPB[0] + roll, run = (x0, sp) => x0 + sp * u;
   window._BUBAT = { pip: [1300, 300] };
   return x2place("rampv2", x2rampBike(t, roll), c) + OP(.85, `<circle cx="${n2(camPt(c, [bx + RPK * (BK.FA[0] + 120), 0])[0])}" cy="${n2(camPt(c, [0, rampAt(bx + 300) - 150])[1])}" r="${n2(18 + 10 * Math.sin(t * 9))}" fill="#FFF6C8" filter="url(#b4)"/>`) + CAM(rampFront(), c[0], c[1], c[2])
-    + x2bc(c, "pip", run(fwx + 330 - u * 0, 0) + 260 * 0, rampAt(fwx + 330) + 4, 340, t, { in: s.t0 - 3, noStay: true, poses: [[0, "panic/surprised"]], look: 10, jump: [...Array(10)].map((_, i) => [s.t0 + .1 + i * .3, 16]) })
+    + x2bc(c, "pip", run(fwx + 330 - u * 0, 0) + 260 * 0, rampAt(fwx + 330) + 4, 340, t, { in: s.t0 - 3, noStay: true, keepPose: true, poses: [[0, "panic/surprised"]], look: 10,   /* (fix pass 6, teacher) shocked and wide-eyed through his line too */ jump: [...Array(10)].map((_, i) => [s.t0 + .1 + i * .3, 16]) })
     + x2bc(c, "momo", fwx + 620, rampAt(fwx + 620) + 4, 340, t, { in: s.t0 - 3, noStay: true, poses: [[0, "horrified/surprised"]], look: 10, jump: [...Array(10)].map((_, i) => [s.t0 + .25 + i * .3, 16]) })
     + comicWord(t, s.t0 + .9, 560, 200, "WHOOSH!", { size: 92, d: .9 }) + x2HUD(t); }
 function x2runB(t, s) { const t0 = MK("chainrx"), u = t - t0, cx = RV * u, bx = 300 + 40 * u, y = 1010, wh = (RV * (t - s.t0)) / (BK.R * .62);
@@ -202,9 +202,9 @@ function x2runC(t, s) { const t0 = LT("k608") - .3, u = t - t0, cx = 420 * u, ga
   const tk = LT("k609"), lev = t >= tk - .1 && t < LE("k610") + .3;
   window._BUBAT = { momo: [1460, 330], basil: [1000, 300], pip: [1220, 380] };
   return trackV2(t, cx) + bike
-    + x2bd("basil", 900, 1076, 330, t, { in: t0 - .02, noStay: true, poses: [[0, "shocked/surprised"], [LE("k609") + .2, "shocked/surprised"]], look: 12, jump: jump(.05), ...x2grease(t) })
-    + x2bd("pip", 1260, 1076, 320, t, { in: t0 - 3, noStay: true, poses: [[0, "thinking"], [LT("k610") - .1, "sit"], [LE("k610") + .1, "panic/thinking"]], look: 10, jump: jump(.15) })
-    + x2bd("momo", 1620, 1076, 330, t, { in: t0 - 3, noStay: true, poses: [[0, "horrified/surprised"], [LT("k608") - .05, "sit"], [LE("k608") + .1, "horrified/surprised"], [LE("k610") - .6, "pointing"]], look: 10, jump: jump(.25) })
+    + x2bd("basil", 900, 1076, 330, t, { in: t0 - .02, noStay: true, keepPose: true, poses: [[0, "shocked/surprised"], [LE("k609") + .2, "shocked/surprised"]], look: 12, jump: jump(.05), ...x2grease(t) })
+    + x2bd("pip", 1260, 1076, 320, t, { in: t0 - 3, noStay: true, keepPose: true, poses: [[0, "panic/surprised"]],   /* (fix pass 6) "It can't stop!": worried, wide-eyed */ look: 10, jump: jump(.15) })
+    + x2bd("momo", 1620, 1076, 330, t, { in: t0 - 3, noStay: true, keepPose: true, poses: [[0, "horrified/surprised"], [LE("k610") - .6, "pointing"]], /* (fix pass 6, teacher: "how can momo run with arm folded?") a runner keeps free paws while she/he talks */ look: 10, jump: jump(.25) })
     + (lev ? TF(620, 380, spring(t, tk - .1, .4) * (1 - ramp(t, LE("k610") + .1, .2)), `<g filter="url(#drop)"><circle r="150" fill="#FFF8EA" stroke="#E5484D" stroke-width="10"/></g>` + lizPaw(-70, 30, 1.5, -20) + lizPaw(70, 30, 1.5, 20, -1) + `<path d="M-90 -30 q-6 30 -30 40 M90 -30 q6 30 30 40" stroke="#59616B" stroke-width="12" fill="none" stroke-linecap="round"/><rect x="-118" y="-50" width="52" height="22" rx="8" fill="#2B2F36"/><rect x="66" y="-50" width="52" height="22" rx="8" fill="#2B2F36"/>` + T(0, 120, "his brake levers", 30, P.ink, { w: 700 })) : "")
     + (t >= MK("noslow") - .1 ? OP(spring(t, MK("noslow") - .1, .4), plabel(560, 700, "no brakes: nothing slows the wheels", 330 + 255 * .58, 1040 - 118 * .58, 38, "#fff")) : "")
     + x2HUD(t); }
@@ -227,7 +227,7 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   // from the LEFT after the bonk (she chased the bike) and stops left of the crown stool, facing Basil
   const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 340, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 340, pX = lerp(-300, 470, eio(clamp((t - tBk) / 1.0)));
   window._BUBAT = { momo: [1560, 330], pip: [480, 300], basil: [1180, 320] };
-  const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, poses: [[0, "pointing"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10 });
+  const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, keepPose: t < tP + .4, poses: [[0, "horrified/surprised"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10, jump: [...Array(4)].map((_, i) => [tD + i * .3, 14]) });
   return CAM(bg("vdv2") + set + bike, c[0], c[1], c[2]) + basil + can + front + splashFx
     + momoD
     + x2bc(c, "pip", pX, 1066, 330, t, { in: tD - 3, noStay: true, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : 8 })

@@ -37,8 +37,8 @@ h = h[:a] + f'<path d="{land}" fill="#7fbf7f" stroke="#2d5a3d" stroke-width="2.5
 pts = [proj(lo, la) for lo, la in ((-178, 0), (-150, 0), (-120, 0), (-95, 0))]
 warm = ''.join(f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="{110 + i * 12}" ry="58" fill="#ff7b00" opacity=".85" filter="url(#blur)"/>' for i, (x, y) in enumerate(p for p in pts if p))
 h = h.replace(f'<path d="{land}"', warm + f'<path d="{land}"', 1)
-# Pip with his paper fan, bottom left (the teacher's painting; words never cover his face)
-pip = ('<g transform="translate(330 900)"><circle cx="0" cy="-170" r="190" fill="#8B5CF6" opacity=".35"/>'
+# Pip with his paper fan, bottom left (the teacher's painting; words never cover his face; no disc behind him: teacher, 27 Nov 2026)
+pip = ('<g transform="translate(330 900)">'
        '<image href="../../explained2/ep27/spr/pip_surprised.png" x="-210" y="-390" width="420" height="420" preserveAspectRatio="xMidYMax meet"/>'
        '<g transform="translate(170 -215) rotate(25)"><path d="M0 0 L-60 -96 A112 112 0 0 1 60 -96 Z" fill="#ffb703" stroke="#1b1b3a" stroke-width="6" stroke-linejoin="round"/></g></g>')
 h = h.replace('<rect width="1920" height="324"', pip + '<rect width="1920" height="324"', 1) if '<rect width="1920" height="324"' in h else h.replace('</svg></body>', pip + '</svg></body>')
