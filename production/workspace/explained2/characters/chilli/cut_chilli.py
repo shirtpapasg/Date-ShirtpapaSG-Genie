@@ -11,9 +11,10 @@ A new pair (chilli_hop_pair, chilli_flat_shy_pair, chilli_alarmed_smug_pair) is 
 import cv2, numpy as np, json, os, sys
 H = os.path.dirname(os.path.abspath(__file__)); T = f"{H}/../teacher_ep02_2026-11-27"; sys.path.insert(0, f"{H}/../sprites")
 from cutout import cutout
-PAIRS = {"chilli_droop_tall_pair": ("droop", "tall"), "chilli_hop_pair": ("hop_a", "hop_b"), "chilli_flat_shy_pair": ("flat", "shy"),
+PAIRS = {"chilli_droop_tall_pair": ("droop", "tall"), "chilli_hop_pair": ("hop_a", "tall_happy"), "chilli_flat_shy_pair": ("flat", "shy"),
          "chilli_alarmed_smug_pair": ("alarmed", "smug")}
-TALK = {"droop": "closed", "tall": "wide", "flat": "closed", "shy": "closed"}   # which state the painted mouth is (the poses with talking sets); others: one face only
+TALK = {"droop": "closed", "tall": "wide", "tall_happy": "wide", "flat": "closed", "shy": "closed"}
+CUT_T = {"hop_a": 236}   # hop_a keeps its light-grey dust puffs (the default 175 floods them away)   # which state the painted mouth is (the poses with talking sets); others: one face only
 RIM_LOCAL = 200.0
 NAVY = (58, 30, 33)          # BGR of the painting's outline (sampled)
 MOUTH = (52, 40, 122)        # the open mouth's dark red (sampled from chilli_tall)
@@ -67,7 +68,7 @@ def states(name, img, a):
     mx, my, mw, mh = mouth["x"], mouth["y"], mouth["w"], mouth["h"]; mcx = mx + mw / 2
     mmask = cv2.dilate((lab == mouth["i"]).astype(np.uint8), np.ones((5, 5), np.uint8), iterations=2)
     # the mouth's whole area (the open smile's inside is not dark): its bounding box, padded
-    if name == "tall":
+    if name in ("tall", "tall_happy"):
         mmask[my - 3: my + mh + 4, mx - 4: mx + mw + 5] = 1
     noM = inpaint(img, mmask * 255, 7)
     lw = 3.6   # outline width (px at 1x)
@@ -103,7 +104,7 @@ def states(name, img, a):
         out["closed"] = img.copy()
         out["half"] = draw_open(noM, poly, 7, False)
         out["wide"] = draw_open(noM, poly, 13, True)
-    elif name == "tall":
+    elif name in ("tall", "tall_happy"):
         poly = mouth_draw(noM, "smile_open")
         out["wide"] = img.copy()
         out["half"] = draw_open(noM, poly, mh * .55, True)
@@ -137,8 +138,8 @@ def states(name, img, a):
         b = inpaint(out[k], emask * 255, 7)
         for e in eyes:
             cx, cy, w = e["x"] + e["w"] / 2, e["y"] + e["h"] * (.6 if name == "droop" else .55), e["w"] * .8
-            sag = 5 if name == "droop" else 7   # a closed eye: a soft downward arc (a happy curve when tall)
-            curve = [(cx - w / 2 + w * u, cy + (sag if name == "tall" else sag * .6) * np.sin(np.pi * u)) for u in np.linspace(0, 1, 20)]
+            sag = 5 if name == "droop" else 7   # tall / tall_happy / hop: a happy arc   # a closed eye: a soft downward arc (a happy curve when tall)
+            curve = [(cx - w / 2 + w * u, cy + (sag if name in ("tall", "tall_happy", "hop_a") else sag * .6) * np.sin(np.pi * u)) for u in np.linspace(0, 1, 20)]
             b = draw_line(b, curve)
         out[k + "_blink"] = b
     fx0 = min(e["x"] for e in eyes) - 10; fx1 = max(e["x"] + e["w"] for e in eyes) + 10
@@ -153,7 +154,7 @@ for f, poses in PAIRS.items():
     full = cv2.imread(src); Hh, Ww = full.shape[:2]
     for side, name in enumerate(poses):
         img = full[:, side * Ww // 2: (side + 1) * Ww // 2].copy()
-        cut = cutout(img); a = cut[..., 3]
+        cut = cutout(img, T=CUT_T.get(name, 175)); a = cut[..., 3]
         sts, pot, face = states(name, img, a)
         ys, xs = np.where(pot > 0)
         rows = [r for r in range(ys.min(), ys.min() + int(.3 * (ys.max() - ys.min())))]
@@ -167,4 +168,35 @@ for f, poses in PAIRS.items():
         meta[name] = dict(src=os.path.relpath(src, H), w=int(x1 - x0), h=int(y1 - y0), ox=float(ox - x0), oy=float(bot - y0), rim=float(rimw),
                           scale=RIM_LOCAL / float(rimw), states=sorted(sts), face=[face[0] - x0, face[1] - y0, face[2], face[3]])
         print(name, {k: (round(v, 3) if isinstance(v, float) else v) for k, v in meta[name].items()})
+
+def make_hop_b():
+    """chilli_hop_b (in the air), made from the teacher's hop_a (landing) as asked (27 Nov): the dust puffs erased (only the plant-and-pot
+    blob kept), the whole frame un-squashed from the base (7% taller, 5% narrower), the ORIGINAL face pasted back unscaled at the face's new
+    centre (the face stays identical), and the drooping leaf mass above the rim stretched upwards by 8% from the rim (the leaves flick up,
+    the stem stays joined). Its origin is the base centre like hop_a; the episode lifts it off the ground."""
+    if "hop_a" not in meta: return
+    m = meta["hop_a"]; im = cv2.imread(f"{H}/cut/chilli_hop_a_closed.png", -1); a = im[..., 3]
+    n, lab, st, _ = cv2.connectedComponentsWithStats((a > 20).astype(np.uint8)); i = 1 + np.argmax(st[1:, 4])
+    keep = cv2.dilate((lab == i).astype(np.uint8), np.ones((3, 3), np.uint8)); im = im.copy(); im[keep == 0] = 0
+    hgt, wid = im.shape[:2]; ox, oy = m["ox"], m["oy"]; SX, SY = .95, 1.07
+    pad = 60; big = np.zeros((hgt + pad, wid, 4), np.uint8); big[pad:] = im; oy2 = oy + pad
+    M = np.float32([[SX, 0, ox * (1 - SX)], [0, SY, oy2 * (1 - SY)]])
+    un = cv2.warpAffine(big, M, (wid, hgt + pad), flags=cv2.INTER_CUBIC, borderValue=(0, 0, 0, 0))
+    fx, fy, fw, fh = m["face"]; fy2 = fy + pad; cxo, cyo = fx + fw / 2, fy2 + fh / 2
+    ncx, ncy = ox + (cxo - ox) * SX, oy2 + (cyo - oy2) * SY
+    patch = big[int(fy2): int(fy2 + fh), int(fx): int(fx + fw)].astype(np.float32)
+    feather = np.zeros(patch.shape[:2], np.float32); cv2.ellipse(feather, (int(fw / 2), int(fh / 2)), (int(fw / 2 - 6), int(fh / 2 - 4)), 0, 0, 360, 1, -1)
+    feather = cv2.GaussianBlur(feather, (0, 0), 4)[..., None]
+    x0, y0 = int(round(ncx - fw / 2)), int(round(ncy - fh / 2)); reg = un[y0: y0 + patch.shape[0], x0: x0 + patch.shape[1]].astype(np.float32)
+    un[y0: y0 + patch.shape[0], x0: x0 + patch.shape[1]] = (reg * (1 - feather) + patch * feather).round().astype(np.uint8)
+    pot = pot_mask(un[..., :3], un[..., 3]); rim = int(np.where(pot.any(1))[0].min())
+    ys = np.arange(hgt + pad, dtype=np.float32); mapy = np.where(ys < rim, rim - (rim - ys) / 1.08, ys)   # above the rim: an upward stretch from the rim
+    mx_, my_ = np.meshgrid(np.arange(wid, dtype=np.float32), mapy)
+    out = cv2.remap(un, mx_, my_, cv2.INTER_CUBIC, borderValue=(0, 0, 0, 0))
+    al = out[..., 3]; yy, xx = np.where(al > 128); y0b, y1b = max(0, yy.min() - 6), yy.max() + 7
+    out = out[y0b:y1b]; cv2.imwrite(f"{H}/cut/chilli_hop_b_closed.png", out)
+    meta["hop_b"] = dict(src="made from hop_a (cut_chilli.make_hop_b)", w=int(out.shape[1]), h=int(out.shape[0]), ox=float(ox), oy=float(oy2 - y0b),
+                         rim=m["rim"], scale=m["scale"], states=["closed"], face=[float(x0), float(y0 - y0b), float(fw), float(fh)])
+    print("hop_b", meta["hop_b"]["w"], meta["hop_b"]["h"])
+make_hop_b()
 json.dump(meta, open(f"{H}/cut/chilli.json", "w"), indent=1)
