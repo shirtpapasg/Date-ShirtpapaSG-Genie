@@ -1,0 +1,7 @@
+*.mp4
+*.wav
+*.m4a
+*.mp3
+*.f32
+__pycache__/
+*.log
