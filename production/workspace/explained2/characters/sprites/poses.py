@@ -14,7 +14,8 @@ IN = f"{H}/poses_inbox"
 POSES = {  # buddy: {pose: (file, crop or None)}
   "pip": {"cheer": ("pip_cheer_mouth_open_eyes_closed.jpg", None), "oops": ("pip_oops.jpg", None), "thinking": ("pip_thinking.jpg", None),
           "surprised": ("pip_surprised.jpg", None), "arms_crossed": ("pip_arms_crossed.jpg", None), "waving": ("pip_waving.jpg", None),
-          "pointing": ("pointing_draft2_sheet.jpg", (440, 15, 815, 432)), "back": ("pip_back.jpg", None)},
+          "pointing": ("pointing_draft2_sheet.jpg", (440, 15, 815, 432)), "back": ("pip_back.jpg", None),
+          "squeamish": ("pip_squeamish.jpg", None)},   # P4 EP2 (teacher, 27 Nov 2026: helmet + goggles painted in; no code helmet)
   "momo": {"cheer": ("momo_cheer_mouth_open.jpg", None), "oops": ("momo_oops.jpg", None), "thinking": ("momo_thinking.jpg", None),
            "surprised": ("momo_surprised.jpg", None), "arms_crossed": ("momo_arms_crossed.jpg", None), "pointing": ("momo_pointing.jpg", None),
            "waving": ("momo_waving.jpg", None), "back": ("momo_back.jpg", None)},

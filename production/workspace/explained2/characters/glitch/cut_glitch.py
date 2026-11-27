@@ -79,6 +79,9 @@ json.dump(meta, open(f"{H}/cut/glitch.json", "w"), indent=1); print(json.dumps(m
 # masked (the faces are drawn in code), its wheels measured; scale = the base painting's screen height / this screen's height; origin = the
 # screen's centre x on the wheels' ground line, in the base layers' units (glitch.json "poses").
 POSES4 = ["jug", "crossed", "up", "down"]
+# the tyres, measured by eye on a gridded crop of the sheet (cx, cy, rx, ry; front = the picture's left one): automatic detection merged them
+WHEELS4 = {"jug": [(158, 582, 43, 40), (310, 572, 29, 38)], "crossed": [(510, 582, 41, 40), (656, 570, 40, 38)],
+           "up": [(840, 580, 22, 38), (992, 580, 22, 38)], "down": [(1174, 580, 22, 38), (1325, 580, 23, 38)]}
 def find_screen(img, alpha, seed):
     Lm = img.min(2); dk = (Lm < 110).astype(np.uint8); ff = 1 - dk; pad = np.pad(ff, 1); cv2.floodFill(pad, None, (int(seed[0]) + 1, int(seed[1]) + 1), 2)
     reg = (pad[1:-1, 1:-1] == 2).astype(np.uint8) & (alpha > 0)
@@ -117,7 +120,7 @@ if os.path.exists(SHEET):
         _, sxs, sys_ = min(cand); scm, hl = find_screen(sh_im, al, (sxs, sys_)); qx, qy, qw, qh = cv2.boundingRect(scm)
         stk = cv2.dilate(((Lsh < 150) & (scm > 0)).astype(np.uint8), np.ones((3, 3), np.uint8), iterations=2) & cv2.erode(scm, np.ones((9, 9), np.uint8))
         blank_ = cv2.inpaint(sh_im, stk * 255, 7, cv2.INPAINT_TELEA)
-        W2 = wheels_of(al, sh_im, gnd)
+        W2 = [dict(cx=cx_, cy=cy_, rx=rx_, ry=ry_, ang=0.0, x0=int(cx_ - rx_), x1=int(cx_ + rx_), top=int(cy_ - ry_)) for cx_, cy_, rx_, ry_ in WHEELS4[name]]
         ex0, ey0, ex1, ey1 = xs2.min() - 20, ys2.min() - 40, xs2.max() + 20, gnd + 6
         def save2(lname, rgb, alpha_):
             o_ = np.dstack([rgb, alpha_]).astype(np.uint8)[ey0:ey1, ex0:ex1]; cv2.imwrite(f"{H}/cut/glitch_{name}_{lname}.png", o_)

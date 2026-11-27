@@ -107,6 +107,19 @@
     757,
     914
    ]
+  },
+  "squeamish": {
+   "file": "poses/pip_squeamish.png",
+   "src": "pip_squeamish.jpg",
+   "anchor": [
+    370.1,
+    833.0
+   ],
+   "scale": 0.8634,
+   "size": [
+    810,
+    857
+   ]
   }
  },
  "momo": {
