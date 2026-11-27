@@ -213,3 +213,28 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
 - Render: full re-render to a new file; VERIFY against fix pass 6 (audio bit-identical). Scans: no ghosting, no backwards movers, flicker 10
   JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan the same by-design set. Clips: scratchpad p4items/momo_run.mp4,
   basil_run.mp4; qa/review_runaway.mp4 and key frames refreshed.
+
+## Fix pass 8: arm-swapping runs + the loud pigeon KOOs (27 Nov 2026; NOT uploaded)
+- Teacher: "Use the left and right hand swap scene. At least 2 alternating poses per pet buddies." Run pairs now: Pip run_a <-> run_b (as
+  before), **Momo momo_run_a <-> momo_run_b_alt** (arms swapped, knee up; its motion lines erased in poses.py SOLO, her sweat drops put back,
+  the paper hole by her tail cleared; momo_run_b dropped), **Basil basil_run_a <-> basil_run_a_alt** (his back arm behind / in front of his
+  belly). Sheet: scratchpad p4items/run_pairs.jpg (A, B and an onion of both, per buddy).
+- Registration (run_poses.py): SIFT features of A's head matched in B (RANSAC scale + shift): Pip 0.993, Momo 0.975, Basil 1.001; then the
+  landing frame B is stood ON the ground (its lowest opaque row = the feet line).
+- lib.js run: RUNSTEP .165 s; from run0 frame A holds .2 s, then B/A alternate; A = the stride with a hop arc; B = the landing, both feet
+  down, a slight squash; a 4-degree forward lean in the direction of travel; at runEnd the usual pose-swap glide back (no pop). Every run
+  call passes run0 (and runEnd where the run ends in the shot).
+- Pip's arm change reads only moderately at video size (in both frames one paw reaches forward; the other moves hip -> chest): a proper
+  swapped pair from the teacher would read better.
+- Pigeons (teacher: "make the pigeon 'koo' loud. It will be funny"): `pigeonkoo` in song.js (the coo-roo, a touch higher, soft-clipped,
+  at about voice level). Bell (1:35-1:39): "koo!" in the gap after Heart's b407 (95.83 s), Basil: "I have made some new friends.", the
+  helmet pigeon answers "KOO-ROO!" (98.05 s, it turns as it coos); blooper: "koo..." (431.96) then "KOO!" (432.22), before "I'll keep the
+  bell.". Each with a big comic word in sync (the old small "coo." is gone). The soft coo that sat inside Basil's b408 and the one at the
+  end of v1005 are removed. The blooper's cheek pigeon now lands on his shoulder (his face clear).
+- **Render (27 Nov):** full re-render to a new file, VERIFY OK against fix pass 7 (13086 frames, audio packets bit-identical); then the KOO
+  spans 90-100 s and 430-end spliced (msplice + verify.py: VERIFY OK, packets outside the spans bit-identical); then the new mix muxed
+  (video packets unchanged, md5 2f10fede). Audio: only the sfx bed changed (the loud KOOs in, two soft coos out); the voice stem
+  bit-identical (md5 0acae4446f4fdfdbbd6c4bcd3e3fcef8). Measured: KOOs -17.0 / -16.0 / -14.4 / -14.2 dB RMS vs the lines around them
+  -19.4 / -17.3 / -17.7 (at voice level or a touch above). 7:16.2, -16.0 LUFS, true peak -1.8 dBTP, decode 0. Scans: no ghosting, no
+  backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan the same by-design set. Clips: scratchpad
+  p4items/pip_run.mp4, momo_run.mp4, basil_run.mp4, pigeon_koo.mp4, run_pairs.jpg; qa/review_runaway.mp4 and the key frames refreshed.
