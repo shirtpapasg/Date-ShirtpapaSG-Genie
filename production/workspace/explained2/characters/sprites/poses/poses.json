@@ -941,5 +941,50 @@
    "body_h": 807,
    "hips_above_feet": 6
   }
+ },
+ "pip_doc": {
+  "arms_crossed": {
+   "file": "poses/pip_doc_arms_crossed.png",
+   "src": "pip_doctor_arms_crossed.jpg",
+   "anchor": [
+    476.2,
+    833.0
+   ],
+   "scale": 0.8606,
+   "size": [
+    743,
+    857
+   ]
+  },
+  "pointing": {
+   "file": "poses/pip_doc_pointing.png",
+   "src": "pip_doctor_pointing.jpg",
+   "anchor": [
+    443.5,
+    833.0
+   ],
+   "scale": 0.8588,
+   "size": [
+    781,
+    857
+   ]
+  },
+  "surprised": {
+   "file": "poses/pip_doc_surprised.png",
+   "src": "pip_doctor_surprised.jpg",
+   "anchor": [
+    449.5,
+    833.0
+   ],
+   "scale": 0.8606,
+   "size": [
+    706,
+    857
+   ]
+  },
+  "_sit": {
+   "body_h": 809,
+   "hips_above_feet": 6
+  }
  }
 }
