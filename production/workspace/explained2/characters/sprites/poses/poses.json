@@ -896,5 +896,50 @@
     1076
    ]
   }
+ },
+ "momo_doc": {
+  "arms_crossed": {
+   "file": "poses/momo_doc_arms_crossed.png",
+   "src": "momo_doctor_arms_crossed.jpg",
+   "anchor": [
+    419.5,
+    831.0
+   ],
+   "scale": 0.8585,
+   "size": [
+    666,
+    855
+   ]
+  },
+  "surprised": {
+   "file": "poses/momo_doc_surprised.png",
+   "src": "momo_doctor_surprised.jpg",
+   "anchor": [
+    358.6,
+    831.0
+   ],
+   "scale": 0.8585,
+   "size": [
+    636,
+    855
+   ]
+  },
+  "pointing": {
+   "file": "poses/momo_doc_pointing.png",
+   "src": "momo_doctor_pointing.jpg",
+   "anchor": [
+    361.9,
+    831.0
+   ],
+   "scale": 0.8594,
+   "size": [
+    716,
+    855
+   ]
+  },
+  "_sit": {
+   "body_h": 807,
+   "hips_above_feet": 6
+  }
  }
 }
