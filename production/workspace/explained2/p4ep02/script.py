@@ -1,22 +1,15 @@
-"""script.py: P4 EP1 v2 "TheOneApp, Explained", "The Great Void Deck Race" (Systems: bike, body, tree): the APPROVED script
-(../p4/p4_ep01_script.md, version 2 of 26 Nov 2026, Opus; the teacher, 26 Nov 2026: "OK to the EP1 v2 script") as data. ONE video (about
-6:30). Every spoken line is word for word as in the script's beat table (section 5), with the decisions taken on its open questions
-(section 14, the teacher did not object):
-- FIX CARDS 2 AND 3 SWAPPED (section 14 item 8): card 2 is now "ALL THREE PARTS BACK" (Pip, the RIGHT answer) and card 3 "CHAIN + BRAKES
-  (skip the bell)" (Momo, the near miss). Every reference follows: the pitches (Pip says "Fix two", Momo "Fix three"; Pip's pitch and the
-  checklist tease now come before Momo's pitch, so the tease follows the checklist it teases), the picks (Basil 1, Pip 2, Momo 3), the
-  lock-in, the stamps (card 2 READY TO RIDE!, card 3 NOT SAFE YET), Momo's "That's my fix three!", the score "Picked fix two?", the app
-  moments and the chapters.
-- The length is kept (about 6:30; no cuts); the slapstick, both talk-to-camera moments and Heart's movie-trailer voice are kept as written.
-- Teacher's addition (26 Nov, via the coordinator): when Basil runs out of puff and slumps after losing the race, a tiny "toot" (sound
-  only, nothing shown), then Momo: "Was that the bike?" Basil (deadpan): "Yes." (r703m, r703b; the only gag of that kind in EP1).
+"""script.py: P4 EP2 "TheOneApp, Explained", "Help! I'm Wilting!" (the Plant System): the APPROVED script v2.1
+(../p4/p4_ep02_script.md, 27 Nov 2026; the teacher, 27 Nov 2026: "OK to the EP2 script") as data. ONE video (P4 cap 8:00). Every spoken
+line is word for word as in the script's beat table (section 5); the holds are the table's silent rows (each a ("mark", ...), ("wait", s)).
+Format D, the Help Desk: the guest Chilli (a chilli-padi plant in a glossy pot, its face on the pot) and the villain GLITCH the Robot (the
+series' ultimate boss; his signature sting "New knowledge acquired." is the very last shot, after the blooper). Uncle Lim: three Singlish lines.
 
-SEQ items as EP27: ("scene", name) · ("say", id, who, text, {opts}) · ("wait", s) · ("mark", name) · ("hold", mark, secs, gap) ·
-("unison", id, text, {opts}). say opt "trailer": Heart's movie-trailer voice (the same words, pitched down 3 semitones, a big hall reverb:
-make_voice.py). Guest: Uncle Lim ("lim"), two lines, warm light Singlish (teacher 26 Nov: "lacking the singlish element"): "Slowly, slowly lah. Where got need to rush?" and "Aiyoh, boy. Slowly, slowly also can win one, mah. Every part working together!".
-"""
+SEQ items as EP1 v2: ("scene", name) · ("say", id, who, text, {opts}) · ("wait", s) · ("mark", name) · ("hold", mark, secs, gap) ·
+("unison", id, text, {opts}). Speakers: heart, pip, basil, momo, lim, chilli (new EP2 guest voice), glitch (new: a pompous, precise robot
+with a light vocoder edge; opts "sting": the calm, lower, slower take of z1201, dry). Key words: MAKE FOOD (u407), ABSORB (x604),
+TRANSPORT (j805)."""
 import re, os
-H, P, B, M, L = "heart", "pip", "basil", "momo", "lim"
+H, P, B, M, L, CH, G = "heart", "pip", "basil", "momo", "lim", "chilli", "glitch"
 CUTS = set()
 CHANT = [("System!", "Function!")]; CHANT_CAPS = ([1.0], [1.2])   # not used (no chant in P4); make_voice imports them
 PRON = {}
@@ -26,7 +19,9 @@ slug = lambda w: re.sub(r"[^a-z0-9]+", "_", w.lower()).strip("_")
 HOLD = lambda mk: ("hold", mk, 2.0, .6)
 D = {"pre": .45, "post": .35}
 def o(**k): return {**D, **k}
-EXAM = "A system is made up of different parts. Each part has its own function. The parts interact to perform a function. When one part stops working, the whole system is likely to be affected."
+EXAM = ("The roots hold the plant firmly in the soil and absorb water and mineral salts. The stem holds the plant upright and transports water, "
+        "mineral salts and food to all parts of the plant. The leaves make food for the plant. A plant is a system. When one part stops working, "
+        "the whole plant is likely to be affected.")
 
 def kwrecap(words, pron=None):
     out = [("scene", "kwrecap"), ("say", "h860", H, "Let's read today's key words together! Ready?", {"pre": .7, "post": .5})]
@@ -46,197 +41,181 @@ LOCK = lambda n, d=6.0: [("mark", f"ring0_{n}"), ("wait", d), ("mark", f"bell_{n
 SC_GAP = ("wait", .45)
 
 SEQ1 = [
- # ---- cold · THE PROBLEM: the freeze-frame (Basil in the ice box, three minutes before the race)
- ("scene", "cold"), ("wait", .25),
- ("say", "c101", H, "This is Basil. Basil is sitting in an ice box.", {"pre": .1, "post": .1, "kw": [["frz", "box"]]}),
- ("wait", 1.0),
- ("say", "c102", B, "Yep, that's me. You're probably wondering how I got here.", o(kw=[["thaw", "here"]])),
- ("say", "c103", M, "Basil! Your race with Uncle Lim starts in three minutes!", o(kw=[["clock", "three"]])),
- ("say", "c104", P, "And your bike has no bell, no chain and no brakes!", o(kw=[["ob", "bell"], ["oc", "chain"], ["obr", "brakes"]])),
- ("say", "c105", B, "Because LIGHTER IS FASTER!", o(kw=[["cry1", "lighter"]])),
- ("say", "c106", H, "Basil is not an expert at bicycles.", o(post=.6)),
+ # ---- cold · THE PROBLEM: the Help Desk's first customer (a voice in the first second)
+ ("scene", "cold"), ("wait", .2),
+ ("say", "c101", B, "The Science Help Desk is open! I'm an expert at everything!", {"pre": .1, "post": .2, "kw": [["tapfast", "open"], ["boast", "expert"]]}),
+ ("mark", "hop1"), ("wait", .8),                                     # hold: Chilli's last hop onto the desk; DING!
+ ("say", "c102", CH, "Excuse me. I'm watered every single day, in my beautiful new pot. So WHY am I wilting?", o(pre=.2, kw=[["sparkle", "beautiful"], ["wilt", "wilting"]])),
+ ("say", "c103", B, "I know! You're just feeling... CHILLI! Get it?", o(kw=[["pun", "chilli"]])),
+ ("mark", "flop1"), ("wait", 1.2),                                   # hold: nobody laughs; SAD TROMBONE 1
+ ("say", "c104", CH, "I've heard that one.", o(pre=.1)),
+ ("say", "c105", H, "Basil is not an expert at jokes.", o(post=.6)),
  SC_GAP,
  ("scene", "title"), ("mark", "title"),
- ("say", "c107", H, "The Great Void Deck Race!", {"pre": .35, "post": .6}),
- # ---- fixcards · THE FIX CARDS (a huddle). Cards 2 and 3 swapped (see the docstring)
+ ("say", "c106", H, "Help! I'm wilting!", {"pre": .35, "post": .6}),
+ # ---- fixcards · THE FIX CARDS (a huddle round Chilli)
  ("scene", "fixcards"),
- ("say", "f201", H, "Three minutes! Which fix gets Basil racing?", o(pre=.3)),
- ("say", "f202", B, "Fix one: no fixing. I just pedal faster!", o(kw=[["c1", "one"]])),
- ("say", "f203", P, "Fix two: put all three parts back. I made a checklist.", o(kw=[["c2", "two"], ["clip", "checklist"]])),
- ("say", "f205", B, "You always make a checklist.", o()),
- ("say", "f206", P, "And you never read it.", o()),
- ("say", "f204", M, "Fix three: put the chain and the brakes back, and skip the bell. A bell can't make you go!", o(kw=[["c3", "three"]])),
- ("say", "f207", H, "Show me one, two or three fingers!", o(post=.2, kw=[["show", "show"]])),
- # ---- lock · THE LOCK-IN (6.5 s ring)
+ ("say", "f201", M, "Fix one: find out WHY. Check every part, even the parts we can't see.", o(pre=.3, kw=[["c1", "one"]])),
+ ("say", "f202", B, "No time for WHY! Fix two: MORE WATER, MORE POWER!", o(kw=[["c2", "two"], ["cry1", "more"]])),
+ ("say", "f203", P, "Fix three: feed it. I packed a balanced lunch.", o(kw=[["c3", "three"], ["box", "packed"]])),
+ ("say", "f204", M, "Pip. Is that MY curry puff?", o()),
+ ("say", "f205", P, "...It's for science.", o()),
+ ("say", "f206", H, "Which fix helps Chilli? Show me one, two or three fingers!", o(post=.2, kw=[["show", "show"]])),
+ # ---- lock · THE LOCK-IN (6 s ring)
  ("scene", "lock"), ("wait", .5), *LOCK("fix", 6.0), ("wait", .3),
- # ---- picks · each buddy under their own card; high-five miss 1
+ # ---- picks · Momo 1, Basil 2, Pip 3; high-five miss 1
  ("scene", "picks"), ("mark", "pk0"), ("wait", 1.2),
- ("say", "p208", M, "Team high-five!", o(pre=.2, post=.1)),
+ ("say", "p207", P, "Team high-five!", o(pre=.2, post=.1)),
  ("mark", "miss1"), ("wait", 1.2),
- ("say", "p209", H, "Let's test them! But first: ten minutes earlier...", o(kw=[["rew", "ten"]])),
- # ---- bay · TEN MINUTES EARLIER: the bicycle bay
- ("scene", "bay"), ("wait", 1.4),
- ("say", "s301", B, "Uncle Lim's old bike is full of useless parts. Mine won't be. LIGHTER IS FASTER!", o(pre=.2, kw=[["cry2", "lighter"]])),
- # ---- bell · STOP 1: THE BELL
- ("scene", "bell"),
- ("say", "b401", B, "Who needs a bell? I'm faster as well!", o(pre=.3, kw=[["flick", "bell"]])),
- ("say", "b402", P, "Um... but what does THAT part do?", o()),
- ("say", "b403", B, "It goes ring. That's all.", o()),
- ("say", "b404", M, "But WHY does it go ring?", o()),
- ("say", "b405", B, "Nobody knows. Off it comes!", o(post=.2, kw=[["clink", "off"]])),
- ("mark", "rideoff"), ("wait", 2.6),
- ("say", "b406", B, "Ring, ring!", {"pre": 0, "post": .1}),
- ("mark", "flap"), ("wait", 2.0),
- ("say", "b407", H, "A bell warns people, and pigeons, that you are coming. Basil is not an expert at bells.", o(kw=[["warn", "warns"], ["notexp", "basil"]])),
- ("say", "b408", B, "I have made some new friends.", o(post=.5)),
+ ("say", "p208", H, "Let's test them! Fix two first.", o()),
  SC_GAP,
- # ---- chain · STOP 2: THE CHAIN (the snail-cam), the replay, the snail tease
- ("scene", "chain"),
- ("say", "n501", B, "Who needs a chain? It's a greasy pain!", o(pre=.3, kw=[["grease", "greasy"]])),
- ("say", "n502", P, "Um...", o(post=0)),
- ("mark", "yt2"), ("wait", 1.8),
- ("say", "n503", B, "It goes round and round. That's all.", o(pre=.3)),
- ("say", "n504", M, "But WHY does it go round and round?", o()),
- ("say", "n505", B, "To make my tail greasy. Off it comes!", o(post=.2, kw=[["sproing", "off"]])),
- ("scene", "snailcam"), ("mark", "pedalc"), ("wait", 2.2),
- ("say", "n506", H, "Without a chain, the pedals cannot turn the back wheel.", o(pre=.1, post=.2, kw=[["pedt", "pedals"], ["bwst", "back"]])),
- ("mark", "ovt"), ("wait", 2.6),
- ("scene", "replay"),
- ("say", "n507", H, "The slowest overtake in history. Let's see it again, in slow motion.", o(pre=.2, post=.1, kw=[["slow0", "motion"]])),
- ("mark", "rp0"), ("wait", 2.6),
- ("scene", "tease"),
- ("say", "n508", M, "Basil, you just lost to a snail.", o(pre=.3)),
- ("say", "n509", B, "Because it's LIGHTER!", o(post=.5, kw=[["cry3", "lighter"]])),
+ # ---- water · FIX 2, TESTED: WATER IT MORE; Momo's clue
+ ("scene", "water"),
+ ("say", "w301", B, "Stand back. I'm an expert at watering.", o(pre=.3)),
+ ("mark", "pour"), ("wait", 1.6),
+ ("say", "w302", P, "Um... Basil? The water isn't going down.", o(pre=.2)),
+ ("say", "w303", B, "Because it's SO thirsty! More!", o(kw=[["more", "more"]])),
+ ("mark", "spill"), ("wait", 1.8),
+ ("say", "w304", CH, "Blub. I feel worse.", o(pre=.2)),
+ ("mark", "flop2"), ("wait", 1.0),
+ ("say", "w305", M, "Look! The water came out of the top. But WHY not out of the bottom?", o(kw=[["top", "top"], ["dry", "bottom"]])),
+ ("say", "w306", H, "The water is not sinking in. The soil is already full of water, so more water cannot help.", o(kw=[["notsink", "sinking"], ["full", "full"]])),
+ ("say", "w307", B, "In my defence, it looked very thirsty.", o(post=.5)),
  SC_GAP,
- # ---- brakes · STOP 3: THE BRAKES (top of the ramp)
- ("scene", "brakes"),
- ("say", "k601", B, "To the ramp! Who needs brakes? Speed is all it takes!", o(pre=.3, kw=[["sqz", "brakes"]])),
- ("say", "k602", P, "Um...", o(post=0)),
- ("mark", "yt3"), ("wait", 1.8),
- ("say", "k603", P, "What they said.", o(pre=.2)),
- ("say", "k604", B, "Brakes slow you down. Winners never slow down!", o()),
- ("say", "k605", M, "But WHY would anybody want to slow down?", o()),
- ("say", "k606", B, "Exactly! Off they come!", o(post=.1, kw=[["clang", "off"]])),
- ("mark", "lean"), ("wait", 1.2), ("mark", "click"), ("wait", 1.4),
- # ---- runaway · THE SET PIECE
- ("scene", "runaway"),
- ("say", "k607", P, "The bike! It's rolling away!", o(pre=.1, post=.1)),
- ("mark", "chainrx"), ("wait", 2.4),
- ("say", "k608", M, "Basil! Squeeze the brakes!", o(pre=.2, post=.1)),
- ("say", "k609", B, "It hasn't GOT any brakes!", o(pre=.3, post=.1)),
- ("say", "k610", P, "Then nothing can slow its wheels down. It can't stop!", o(pre=.3, kw=[["noslow", "nothing"]])),
- ("say", "k611", M, "We need something big to stop it! The ice box!", o(pre=.3, post=.1, kw=[["icebox", "ice"]])),
- ("mark", "push"), ("wait", .9), ("mark", "bonk"), ("wait", .6), ("mark", "splash"), ("wait", 1.4),
- ("say", "k612", H, "Brakes help a bike slow down and stop safely. Basil is fine. Basil is a little cold.", o(kw=[["brkl", "brakes"], ["cold", "fine"]])),
- ("say", "k613", P, "Don't do this at home. Seriously.", o(post=.6)),
+ # ---- lunch · FIX 3, TESTED: FEED IT (Pip's balanced lunch, and the pigeons)
+ ("scene", "lunch"),
+ ("say", "u401", P, "Fix three. One curry puff, in four neat pieces.", o(pre=.3, kw=[["lay", "four"]])),
+ ("say", "u402", B, "You made a lunch. For a plant.", o()),
+ ("say", "u403", P, "A BALANCED lunch.", o()),
+ ("mark", "nothing"), ("wait", 1.2),                                 # hold: nothing happens; a cricket
+ ("mark", "koo"), ("wait", 1.6),                                     # hold: KOO! FLAP-FLAP-FLAP! the pigeons land
+ ("say", "u404", M, "Noooo! My curry puff!", o(pre=.1)),
+ ("say", "u405", B, "Look, Pip. You made some new friends.", o()),
+ ("mark", "kooroo"), ("wait", 1.3),                                  # hold: the helmet pigeon: KOO-ROO!
+ ("mark", "liftoff"), ("wait", 1.6),                                 # hold: they lift off; the feather; SAD TROMBONE 3
+ ("say", "u406", H, "A plant does not take in food from the soil. It makes its own food, in its leaves, using light.", o(kw=[["leafpic", "makes"]])),
+ ("say", "u407", P, "So the leaves make the food. My lunch only fed the pigeons.", o(kw=[["kw_make_food", "make"]])),
+ HOLD("kw_make_food"),
  SC_GAP,
- # ---- race · FIX 1, TESTED: THE RACE (the twist), the toot (teacher's addition)
- ("scene", "race"),
- ("say", "r701", H, "In a world... where one lizard thought a bell was too heavy... one race decides everything.", o(pre=.3, trailer=True, kw=[["tr1", "world"], ["tr2", "where"], ["tr3", "one", 1]])),
- ("say", "r702", P, "Helmets on. Ready, steady, GO!", o(pre=.5, post=0, kw=[["helm", "helmets"], ["go", "go"]])),
- ("mark", "racego"), ("wait", 5.4),
- ("say", "r703", L, "Slowly, slowly lah. Where got need to rush?", o(pre=.2, post=.4)),
- ("mark", "slump"), ("wait", .9), ("mark", "toot"), ("wait", .75),
- ("say", "r703m", M, "Was that the bike?", o(pre=0, post=.1)),
- ("say", "r703b", B, "Yes.", o(pre=.3, post=.7)),
- ("say", "r704", B, "I let him win.", o(pre=.2)),
- ("say", "r705", M, "Your bike didn't even move.", o()),
- ("say", "r706", B, "I let it not move.", o(post=.5)),
- ("say", "r707", H, "Basil's pedals turn, but nothing joins them to the back wheel. Pedalling faster cannot do the chain's job.", o(kw=[["gap", "nothing"], ["stuck", "pedalling"]])),
- ("say", "r708", M, "But WHY did the old, heavy bike win?", o(post=.4)),
+ # ---- lcparts · [LOOK CLOSER 1] check every part, like a plant doctor
+ ("scene", "lcparts"),
+ ("say", "d501", H, "Look closer. Momo checks every part.", {**LC, **o(pre=.3)}),
+ ("say", "d502", M, "The leaves are green, so they can make food. But they're drooping.", o(kw=[["leaves", "leaves"], ["droop", "drooping"]])),
+ ("say", "d503", M, "The stem should hold the plant upright, so the leaves get light. This one is bending.", o(kw=[["stem", "stem"], ["bend", "bending"]])),
+ ("say", "d504", B, "Now somebody has to feel the soil. Not Pip. Pip is scared of mushy things.", o(kw=[["soil", "soil"]])),
+ ("say", "d505", P, "I am. But Chilli needs help.", o()),
+ ("mark", "press"), ("wait", 1.4),                                   # hold: one fingertip; SQUELCH; the rude PFFRRRT; FREEZE-FRAME
+ ("say", "d506", M, "Chilli?!", o(pre=.1, post=.1)),
+ ("say", "d507", CH, "That was the SOIL!", o(pre=.2)),
+ ("say", "d508", H, "It really was the soil. Soil this soggy is full of water.", o(kw=[["soak", "soggy"]])),
+ ("mark", "win"), ("wait", .6),                                      # hold: the window opens on the pot's LOWER half
+ ("mark", "winhold"), ("wait", 2.0),                                 # hold: inside: brown roots, a pool of water, NO HOLE
+ ("say", "d509", M, "The roots are brown and mushy! And there's no hole at the bottom, so the water had nowhere to go!", o(kw=[["roots", "roots"], ["nohole", "hole"]])),
+ ("say", "d510", B, "Pong! That's not a smell. That's a clue.", o(kw=[["clue", "clue"]])),
  SC_GAP,
- # ---- lcbike · LOOK CLOSER at Uncle Lim's "useless" bike (FUNCTION, Pip)
- ("scene", "lcbike"),
- ("say", "l801", H, "Look closer at Uncle Lim's bike.", {**LC, **o(pre=.3)}),
- ("say", "l802", P, "His bell warns people that he is coming. His brakes slow him down at the corner.", o(kw=[["lbell", "bell"], ["lbrk", "brakes"]])),
- ("say", "l803", M, "And his chain turns the back wheel when he pedals!", o(kw=[["lchain", "chain"]])),
- ("mark", "v_chain"),
- ("say", "l804", P, "Every part has its own special job, called its function.", o(post=.1, kw=[["kw_function", "function"]])),
- HOLD("kw_function"),
- ("say", "l805", B, "So my useless parts all had functions.", o()),
- ("say", "l806", P, "I told you s... Nice try, Basil.", o(pron={"s...": "sss..."}, kw=[["tok", "s"]])),
- ("say", "l807", H, "His bike is heavier, but it won, because all its parts work together.", o(kw=[["scale", "heavier"]])),
- ("say", "l808", B, "Sorry, bike.", o(post=.2)),
- ("mark", "miss2"), ("wait", 1.4),
- # ---- waitw + shrink + pullout · BE THE THING: a link of Uncle Lim's chain (quiet)
- ("scene", "waitw"),
- ("say", "j901", H, "Be one little link of Uncle Lim's chain! Shrink down. Quietly.", o(pre=.3, post=.6, kw=[["be", "be"], ["shrinkw", "shrink"]])),
- ("scene", "shrink"), ("wait", 1.5),
- ("say", "j902", H, "The front gear's teeth fit into your gaps, and pull you forward. The whole chain moves, and tugs the back gear round.", {**SLOW, "pre": 0, "post": .3, "kw": [["jgrab", "teeth"], ["jpull", "pull"], ["jtug", "tugs"]]}),
- ("mark", "wave"), ("wait", .6),
- ("say", "j903", H, "The back wheel turns!", {**SLOW, "pre": .3, "post": .5, "kw": [["jwheel", "wheel"]]}),
- ("scene", "pullout"), ("wait", 1.3),
- # ---- interact · the five pictures (INTERACT, Momo); the Gruffalo turn
- ("scene", "interact"),
- ("say", "j904", M, "Pedals, front gear, chain, back gear, wheel. Each part acts on the next one. Scientists say the parts interact.", o(pre=.4, kw=[["p1", "pedals"], ["p2", "front"], ["p3", "chain"], ["p4", "back"], ["p5", "wheel"], ["acts", "acts"], ["kw_interact", "interact"]])),
- HOLD("kw_interact"),
- ("say", "j905", B, "Okay. I want my parts back.", o(post=.6, kw=[["turn", "okay"]])),
+ # ---- lcroots · [LOOK CLOSER 2] the twist: wet soil, thirsty plant
+ ("scene", "lcroots"),
+ ("say", "x601", B, "Wait. Chilli has loads of water. So why is it droopy?", o(pre=.3)),
+ ("mark", "think0"), ("wait", 2.5),                                  # hold: the THINK card, three soft ticks
+ ("say", "x602", H, "Roots need air, too. In soil this wet, the spaces between the bits of soil are filled with water, so there is no air. The roots go soft and brown, and rot.", {**LC, **o(kw=[["air", "air"], ["spaces", "spaces"], ["rot", "rot"]])}),
+ ("say", "x603", H, "Rotting roots cannot take in water, so the leaves droop, even in wet soil.", o(kw=[["cannot", "cannot"], ["verdict", "droop"]])),
+ ("say", "x604", M, "Healthy roots absorb water and mineral salts from the soil. To absorb means to take in. Chilli's roots couldn't.", o(kw=[["kw_absorb", "absorb"], ["salts", "mineral"]])),
+ ("say", "x605", B, "Sorry, Chilli. My extra water made it worse.", o()),
+ ("say", "x606", CH, "You were trying to help.", o(post=.5)),
  SC_GAP,
- # ---- reverse · THE REVERSAL (fixes 3 and 2, tested)
- ("scene", "reverse"),
- ("say", "v1001", B, "Every part has a job. Brakes, stop me. No more mistakes!", o(pre=.6, kw=[["rbrk", "brakes"]])),
- ("mark", "tick1"), ("wait", 1.0),
- ("scene", "rchain"),
- ("say", "v1002", B, "Every part has a job. Chain, turn my wheel again!", o(pre=.3, kw=[["rch", "chain"]])),
- ("mark", "spin"), ("wait", 1.4),
- ("say", "v1003", M, "Chain and brakes! That's my fix three! Race time!", o(pre=.2, post=0, kw=[["fix3", "three"]])),
- ("mark", "miss3"), ("wait", 1.0),
- ("say", "v1004", P, "Wait. Checklist. Ring the bell.", o(pre=.2)),
- ("say", "v1005", B, "Ring, ring?", o(post=.3)),
- ("say", "v1006", H, "Quick question! Without a bell, can the bike still move? Think about it.", o(post=.1, kw=[["think", "quick"]])),
- ("mark", "think0"), ("wait", 3.5), ("mark", "think1"),
- ("say", "v1007", P, "It can still move, but it is not as safe!", o()),
- ("say", "v1008", H, "Yes! When one part stops working, the whole bike is likely to be affected.", o(kw=[["side", "when"], ["likely", "likely"]])),
- ("scene", "rbell"),
- ("say", "v1009", B, "Every part has a job. Bell, you warn them well!", o(pre=.5, kw=[["rbell", "bell"]])),
- ("mark", "ring1"), ("wait", .45), ("mark", "ring2"), ("wait", 1.2),
- # ---- system · SYSTEM: finishing each other's sentence; the battle cry turned round
+ # ---- system · THE PLANT IS A SYSTEM: finishing each other's sentence
  ("scene", "system"),
- ("say", "v1010", P, "So a system is made up of different parts...", o(pre=.3, post=.2)),
- ("say", "v1011", M, "...each part has its own function...", o(pre=.2, post=.2)),
- ("say", "v1012", B, "...and the parts interact. My bike is a system!", o(pre=.2, post=.1, kw=[["kw_system", "system"]])),
- HOLD("kw_system"),
- ("say", "v1013", B, "ALL PARTS, WORKING TOGETHER!", o(post=.6, kw=[["cry4", "all"]])),
+ ("say", "s651", M, "So the roots couldn't absorb water...", o(pre=.3, post=.2, kw=[["sr", "roots"]])),
+ ("say", "s652", P, "...so the stem had no water to carry up...", o(pre=.2, post=.2, kw=[["ss", "stem"]])),
+ ("say", "s653", B, "...so the leaves drooped! The plant is a system. One part stopped working, and the whole plant was affected!", o(pre=.2, kw=[["sl", "leaves"], ["sys", "system"]])),
+ ("mark", "alarm"), ("wait", 1.0),                                   # hold: BEEP-BOOP! BEEP-BOOP!
+ # ---- glitch · THE VILLAIN: GLITCH, won over by the evidence
+ ("scene", "glitch"),
+ ("say", "g451", G, "Seven o'clock. Watering time! One jug, every day, for maximum efficiency.", o(pre=.6, kw=[["seven", "seven"], ["jug", "jug"]])),
+ ("say", "g452", B, "Wait. YOU water Chilli every day?", o()),
+ ("say", "g453", G, "Correct. I also chose this pot. No holes, so no water is wasted.", o(kw=[["tap", "pot"], ["leaks", "holes"]])),
+ ("say", "g454", B, "He's me, ten minutes ago.", o()),
+ ("say", "g455", P, "Um... the water had nowhere to go, so the roots got no air.", o()),
+ ("say", "g456", G, "Incorrect. Show me the data.", o(kw=[["data", "data"]])),
+ ("mark", "scan"), ("wait", 2.4),                                    # hold: the evidence on GLITCH's chest screen; SCANNING...
+ ("say", "g457", M, "Brown, mushy roots, and a pool of water with no way out.", o(pre=.2, kw=[["ev1", "brown"], ["ev2", "pool"], ["ev3", "way"]])),
+ ("mark", "bzzt"), ("wait", 1.2),                                    # hold: BZZT! swirly eyes, sparks
+ ("say", "g458", G, "Error. My plan was... not efficient.", o(pre=.1)),
+ ("say", "g459", M, "You wanted to help Chilli. So did we. Let's fix it together.", o(kw=[["pat", "wanted"]])),
+ ("say", "g460", G, "Updating! Lesson stored: roots need air. Drainage holes: required.", o(kw=[["upd", "updating"], ["stored", "stored"], ["req", "required"]], post=.6)),
  SC_GAP,
- # ---- ride · the victory lap; the body; the rain tree
- ("scene", "ride"), ("wait", 3.2),
- ("say", "e1101", M, "Basil, you're puffing! But WHY?", o(pre=.2, post=.3)),
- ("scene", "inbasil"),
- ("say", "e1102", H, "Look closer. Your bones and muscles move your legs. Your heart beats faster, and you breathe faster. Your body is made up of systems too.", {**LC, **o(pre=.3), "kw": [["lcin", "look"], ["bones", "bones"], ["muscles", "muscles"], ["heart", "heart"], ["breath", "breathe"], ["bsys", "body"]]}),
- ("scene", "tree"), ("wait", 1.2),
- ("say", "e1103", P, "And the rain tree is a system. Its roots, stem and leaves each have a function.", o(pre=.2, post=.5, kw=[["rts", "roots"], ["stm", "stem"], ["lv", "leaves"]])),
+ # ---- repair · THE REAL FIX, with Uncle Lim; the polite turn-round
+ ("scene", "repair"),
+ ("say", "r701", M, "We need holes in the bottom, so the extra water can drain out.", o(pre=.3, kw=[["holes", "holes"]])),
+ ("say", "r702", P, "And an adult must cut off the rotting roots, and add fresh soil.", o(kw=[["cut", "cut"]])),
+ ("say", "r703", L, "Aiyoh. Uncle can help.", o()),
+ ("say", "r704", CH, "Could everybody turn around, please?", o()),
+ ("mark", "screen"), ("wait", 2.6),                                  # hold: BZZZT! SNIP! SNIP! SPLOSH! FLUMP.
+ ("say", "r705", L, "Okay, can look already.", o(pre=.2)),
+ ("say", "r706", B, "Now the water test.", o()),
+ ("mark", "test"), ("wait", 2.2),                                    # hold: drip... drip... drip.
+ ("say", "r707", B, "It drains! The water has somewhere to go now!", o(pre=.2)),
+ ("say", "r708", G, "New rule saved: water only when the top of the soil is dry!", o(kw=[["rule", "rule"]], post=.5)),
  SC_GAP,
- # ---- words · THE WORDS THAT EARN MARKS (Basil)
+ # ---- wait · TWO WEEKS: "Slowly, slowly lah" and hint #3
+ ("scene", "wait"), ("mark", "tapfast2"), ("wait", .9),               # silent: Basil taps FAST and stares at Chilli
+ ("say", "t751", L, "Slowly, slowly lah. Plants cannot rush one.", o(pre=.2, post=.6)),
+ ("say", "t752", H, "Two weeks later...", o(kw=[["weeks", "weeks"]])),
+ ("mark", "lapse"), ("wait", 3.0),                                   # hold: the time-lapse
+ ("say", "t753", CH, "I'm standing tall again! Thank you for listening. Nobody ever listens to a plant.", o(pre=.2)),
+ ("say", "t754", H, "I know the feeling.", o(post=.4)),             # HEART MYSTERY HINT #3: nobody reacts
+ # ---- waitw + shrink + pullout + transport · BE THE THING: a drop of water in Chilli's pot (quiet)
+ ("scene", "waitw"),
+ ("say", "j801", H, "Be a drop of water in Chilli's pot! Shrink down. Quietly.", o(pre=.3, post=.6, kw=[["be", "be"], ["shrinkw", "shrink"]])),
+ ("scene", "shrink"), ("wait", 1.2),
+ ("say", "j802", H, "You trickle down through the soil, past little pockets of air. Some mineral salts come along with you.", {**SLOW, "pre": 0, "post": .3, "kw": [["trickle", "trickle"], ["pockets", "pockets"], ["jsalts", "mineral"]]}),
+ ("say", "j803", H, "A firm white root takes you in. You're inside the plant!", {**SLOW, "pre": .2, "post": .3, "kw": [["jroot", "root"], ["inside", "inside"]]}),
+ ("say", "j804", H, "Up you go, through the stem, all the way to a leaf, where food is made.", {**SLOW, "pre": .2, "post": .4, "kw": [["jup", "up"], ["jstem", "stem"], ["jleaf", "leaf"], ["jfood", "food"]]}),
+ ("scene", "pullout"), ("wait", 1.2),
+ ("scene", "transport"),
+ ("say", "j805", B, "So the stem carries water and mineral salts up, and food from the leaves to other parts. The stem transports them!", o(pre=.3, kw=[["up_arr", "up"], ["down_arr", "food"], ["kw_transport", "transports"]])),
+ HOLD("kw_transport"),
+ SC_GAP,
+ # ---- words · THE WORDS THAT EARN MARKS (Momo reads)
  ("scene", "words"),
- ("say", "w1201", H, "Now, here are the words that earn marks.", o(pre=.3, post=.1)),
- ("say", "w1202", B, "Say it with me!", {"pre": .3}), ("wait", .8),
- ("say", "w1203", B, EXAM, {"pre": 0, "gap": .35}), ("wait", 2.5),
- # ---- finish · THE COSY END: the snail, the crown, the high-five
+ ("say", "m901", H, "Now, here are the words that earn marks.", o(pre=.3, post=.1)),
+ ("say", "m902", M, "Say it with me!", {"pre": .3}), ("wait", .8),
+ ("say", "m903", M, EXAM, {"pre": 0, "gap": .35}), ("wait", 2.5),
+ # ---- finish · THE COSY END: the callback, the sign, the high-five that lands
  ("scene", "finish"),
- ("say", "e1301", H, "But wait. Somebody is still racing!", o(pre=.3)),
- ("unison", "e1302", "Go, snail, go!", {"pre": .3, "post": .1}),
- ("mark", "cross"), ("wait", 2.4),
- ("say", "e1303", L, "Aiyoh, boy. Slowly, slowly also can win one, mah. Every part working together!", o(pre=.2)),
- ("mark", "clap"), ("wait", 1.6),
- ("say", "e1304", H, "Picked fix two? You win a point, and so does Pip!", o(post=.5, kw=[["coin1", "point"]])),
- # ---- kwrecap, "Now you know!", the outro (Chilli hops in, wordless)
- *kwrecap(["Function", "Interact", "System"]),
+ ("say", "k1001", G, "Seven o'clock. A little top-up, Chilli?", o(pre=.6)),
+ ("say", "k1002", CH, "Is the top of my soil dry?", o()),
+ ("say", "k1003", G, "...No.", o(pre=.5, kw=[["wet", "no"]])),
+ ("say", "k1004", CH, "Then, no.", o(pre=.2)),
+ ("say", "k1005", G, "Rule saved.", o(pre=.3)),
+ ("mark", "sign"), ("wait", 1.2),                                    # hold: Basil crosses out FAST, writes PROPERLY
+ ("mark", "clap"), ("wait", 1.4),                                    # hold: THE HIGH-FIVE LANDS: CLAP!
+ ("say", "k1006", H, "Picked fix one? You win a point, and so does Momo!", o(kw=[["coin1", "point"]])),
+ # ---- next · the link to EP3: a leaf that is not Chilli's
+ ("scene", "next"), ("mark", "leaf"), ("wait", 1.6),
+ ("say", "n1101", H, "A mystery leaf! Next time, we open a case file.", o(pre=.1, kw=[["case", "case"]], post=.4)),
+ # ---- kwrecap, "Now you know!", the outro (GLITCH rolls past and does NOT water a plant)
+ *kwrecap(["Make food", "Absorb", "Transport"]),
  *NYK,
  # ---- blooper (after the end card)
  ("scene", "blooper"), ("wait", .4),
- ("say", "e1601b", B, "LIGHTER IS FAST...", {"pre": 0, "post": 0, "kw": [["landp", "fast"]]}),
- ("mark", "frozen"), ("wait", 1.0),
- ("say", "e1602b", B, "I'll keep the bell.", {"pre": .2, "post": .1}),
- ("say", "e1603m", M, "Take two!", {"pre": .2, "post": .2}),
- ("mark", "take2"), ("wait", 1.0),
+ ("say", "e1601b", B, "Fix two: MORE WATER, MORE POW...", {"pre": 0, "post": 0, "kw": [["splosh", "pow..."]]}),
+ ("mark", "drip"), ("wait", 1.0),
+ ("say", "e1602g", CH, "Now YOU'RE the droopy one.", {"pre": .3, "post": .1}),
+ ("say", "e1603p", P, "Towel? Take two!", {"pre": .2, "post": .1}),
+ ("mark", "take2"), ("wait", .5),
+ # ---- glitchend · GLITCH ALONE: his signature ending (the very last shot)
+ ("scene", "glitchend"), ("mark", "ge0"), ("wait", .6),
+ ("mark", "stutter"), ("wait", 1.0),                                 # the hard digital stutter (his sprite only)
+ ("mark", "silence"), ("wait", 1.8),                                 # TRUE SILENCE
+ ("say", "z1201", G, "New knowledge acquired.", {"pre": 0, "post": 0, "sting": True, "kw": [["acq", "acquired"]]}),
+ ("mark", "black"), ("wait", .5),                                    # cut to black
 ]
-# PACING (P4 README section 4; v1's measured lesson: the recorded buddies speak at about 3.3 words a second): .85 s between lines (D),
-# about 1.4 s between scenes, a buddy line with two or more sentences keeps .38 s between its sentences, think time after Heart's
-# teaching sentences (THINK_AFTER).
-THINK_AFTER = {"b407": .4, "n506": .2, "k612": .4, "r707": .6, "l802": .3, "l803": .3, "l807": .5, "j904": .2, "v1008": .6, "e1102": .4, "e1103": .3,
-  "f204": .2, "c104": .2}
+# PACING (as EP1 v2): a buddy or guest line with two or more sentences keeps .38 s between its sentences; think time after Heart's teaching lines
+THINK_AFTER = {"w306": .4, "u406": .5, "d508": .3, "x602": .5, "x603": .5, "x604": .3, "s653": .2, "g455": .2, "g460": .3, "r702": .2, "j805": .3,
+  "d503": .2, "d509": .3}
 for _i, _it in enumerate(SEQ1):
-    if _it[0] == "say" and _it[2] in (P, B, M, L) and "gap" not in _it[4] and "slowof" not in _it[4] and len(re.findall(r"[.!?](?:\s|$)", _it[3].replace("...", "…"))) >= 2:
+    if _it[0] == "say" and _it[2] in (P, B, M, L, CH, G) and "gap" not in _it[4] and len(re.findall(r"[.!?:](?:\s|$)", _it[3].replace("...", "…"))) >= 2:
         _it[4]["gap"] = .38
     if _it[0] == "say" and _it[1] in THINK_AFTER: _it[4]["post"] = _it[4].get("post", .3) + THINK_AFTER[_it[1]]
 SEQS = {1: SEQ1, 2: []}
@@ -247,7 +226,7 @@ if __name__ == "__main__":
     assert not dup, dup
     for part, s in SEQS.items():
         if not s: continue
-        n = sum(len(it[3].split()) for it in s if it[0] == "say")
-        lines = {w: sum(1 for it in s if it[0] == "say" and it[2] == w) for w in (H, P, B, M, L)}
-        words = {w: sum(len(it[3].split()) for it in s if it[0] == "say" and it[2] == w) for w in (H, P, B, M, L)}
-        print(f"Part {part}: {n} words in say lines; lines per speaker {lines}; words {words}")
+        n = sum(len(it[3].split()) for it in s if it[0] == "say") + sum(len(it[2].split()) for it in s if it[0] == "unison")
+        lines = {w: sum(1 for it in s if it[0] == "say" and it[2] == w) for w in (H, P, B, M, L, CH, G)}
+        words = {w: sum(len(it[3].split()) for it in s if it[0] == "say" and it[2] == w) for w in (H, P, B, M, L, CH, G)}
+        print(f"Part {part}: {n} words; lines per speaker {lines}; words {words}")

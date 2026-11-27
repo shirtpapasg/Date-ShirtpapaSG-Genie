@@ -13,7 +13,7 @@ H = os.path.dirname(os.path.abspath(__file__)); T = f"{H}/../teacher_ep02_2026-1
 from cutout import cutout
 PAIRS = {"chilli_droop_tall_pair": ("droop", "tall"), "chilli_hop_pair": ("hop_a", "tall_happy"), "chilli_flat_shy_pair": ("flat", "shy"),
          "chilli_alarmed_smug_pair": ("alarmed", "smug")}
-TALK = {"droop": "closed", "tall": "wide", "tall_happy": "wide", "flat": "closed", "shy": "closed"}
+TALK = {"droop": "closed", "tall": "wide", "tall_happy": "wide", "flat": "closed", "shy": "closed", "alarmed": "closed", "smug": "closed"}
 CUT_T = {"hop_a": 236}   # hop_a keeps its light-grey dust puffs (the default 175 floods them away)   # which state the painted mouth is (the poses with talking sets); others: one face only
 RIM_LOCAL = 200.0
 NAVY = (58, 30, 33)          # BGR of the painting's outline (sampled)
@@ -68,7 +68,7 @@ def states(name, img, a):
     mx, my, mw, mh = mouth["x"], mouth["y"], mouth["w"], mouth["h"]; mcx = mx + mw / 2
     mmask = cv2.dilate((lab == mouth["i"]).astype(np.uint8), np.ones((5, 5), np.uint8), iterations=2)
     # the mouth's whole area (the open smile's inside is not dark): its bounding box, padded
-    if name in ("tall", "tall_happy"):
+    if name in ("tall", "tall_happy", "alarmed"):
         mmask[my - 3: my + mh + 4, mx - 4: mx + mw + 5] = 1
     noM = inpaint(img, mmask * 255, 7)
     lw = 3.6   # outline width (px at 1x)
@@ -127,6 +127,22 @@ def states(name, img, a):
         out["closed"] = img.copy()
         out["half"] = draw_open(noM, spoly, 7, False)
         out["wide"] = draw_open(noM, spoly, 11, True)
+    elif name == "alarmed":   # the painted small round O; talking = the O opening wider and taller
+        def opoly(op):
+            rx, ry = mw / 2 + op * .25, mh / 2 + op
+            return np.array([(mcx + rx * np.cos(a), my + mh / 2 + op * .35 + ry * np.sin(a)) for a in np.linspace(0, 2 * np.pi, 40)])
+        out["closed"] = img.copy()
+        out["half"] = draw_open(noM, opoly, 4, True)
+        out["wide"] = draw_open(noM, opoly, 8, True)
+    elif name == "smug":      # the painted smirk; talking = a small open smirk (a little higher on the right)
+        W = mw * .95
+        def mpoly(op):
+            top = [(mcx - W / 2 + W * u, my + mh * .45 - 3 * u + 1.5 * np.sin(np.pi * u)) for u in np.linspace(0, 1, 24)]
+            bot = [(mcx + W / 2 - W * u, my + mh * .45 - 3 * (1 - u) + 1.5 * np.sin(np.pi * (1 - u)) + op * np.sin(np.pi * u) ** .8) for u in np.linspace(0, 1, 24)]
+            return np.array(top + bot)
+        out["closed"] = img.copy()
+        out["half"] = draw_open(noM, mpoly, 6, False)
+        out["wide"] = draw_open(noM, mpoly, 10, True)
     else:
         out["closed"] = img.copy()
     # blink: every state gets a blink twin (the eyes in-painted, two closed-lid arcs)
@@ -139,7 +155,7 @@ def states(name, img, a):
         for e in eyes:
             cx, cy, w = e["x"] + e["w"] / 2, e["y"] + e["h"] * (.6 if name == "droop" else .55), e["w"] * .8
             sag = 5 if name == "droop" else 7   # tall / tall_happy / hop: a happy arc   # a closed eye: a soft downward arc (a happy curve when tall)
-            curve = [(cx - w / 2 + w * u, cy + (sag if name in ("tall", "tall_happy", "hop_a") else sag * .6) * np.sin(np.pi * u)) for u in np.linspace(0, 1, 20)]
+            curve = [(cx - w / 2 + w * u, cy + (sag if name in ("tall", "tall_happy", "hop_a", "alarmed", "shy") else sag * .6) * np.sin(np.pi * u)) for u in np.linspace(0, 1, 20)]
             b = draw_line(b, curve)
         out[k + "_blink"] = b
     fx0 = min(e["x"] for e in eyes) - 10; fx1 = max(e["x"] + e["w"] for e in eyes) + 10
@@ -163,6 +179,7 @@ for f, poses in PAIRS.items():
         rx = (pot[rimr] > 0).nonzero()[0]; ox = (rx.min() + rx.max()) / 2
         bot = np.where(a.max(1) > 128)[0][-1]
         yy, xx = np.where(a > 128); x0, x1, y0, y1 = xx.min() - 6, xx.max() + 7, yy.min() - 6, bot + 7
+        np.save(f"{H}/cut/_pot_{name}.npy", pot[y0:y1, x0:x1])
         for st, im in sts.items():
             o = cut.copy(); o[..., :3] = np.where(a[..., None] > 0, im, cut[..., :3]); cv2.imwrite(f"{H}/cut/chilli_{name}_{st}.png", o[y0:y1, x0:x1])
         meta[name] = dict(src=os.path.relpath(src, H), w=int(x1 - x0), h=int(y1 - y0), ox=float(ox - x0), oy=float(bot - y0), rim=float(rimw),
@@ -199,4 +216,35 @@ def make_hop_b():
                          rim=m["rim"], scale=m["scale"], states=["closed"], face=[float(x0), float(y0 - y0b), float(fw), float(fh)])
     print("hop_b", meta["hop_b"]["w"], meta["hop_b"]["h"])
 make_hop_b()
+
+# ---- TWO LAYERS (coordinator, 27 Nov: the pots are identical in every painting): the PLANT body follows the story, the FACE the emotion.
+# Bodies: wilt = chilli_droop's plant (green chillies, until the fix) · tallg = chilli_alarmed's upright plant with two green chillies (right
+# after the fix; the alarmed painting's shake marks are not part of the cut) · tallr = chilli_tall's plant with ONE red chilli (after the two
+# weeks). A face (every talking / blink state of that face's painting) is moved onto the body's pot in the shared pot coordinates (local =
+# (px - ox) * scale: rim 200 wide, base centre at 0) and blended in over the union of the two face areas, inside the body's pot.
+BODY = {"wilt": "droop", "tallg": "alarmed", "tallr": "tall"}
+COMBOS = {"wilt": ["droop", "flat", "alarmed", "shy"], "tallg": ["shy", "tall"], "tallr": ["tall", "tall_happy", "smug", "flat"]}
+def transplant(bname, fname):
+    bp = BODY[bname]; mb, mf = meta[bp], meta[fname]
+    body = cv2.imread(f"{H}/cut/chilli_{bp}_closed.png", -1); potb = np.load(f"{H}/cut/_pot_{bp}.npy").astype(np.uint8)
+    k = mf["scale"] / mb["scale"]; A = np.float32([[k, 0, mb["ox"] - mf["ox"] * k], [0, k, mb["oy"] - mf["oy"] * k]])
+    def box_mask(face, A_=None):
+        m = np.zeros(body.shape[:2], np.uint8); x, y, w, h = face
+        if A_ is not None: x, y, w, h = A_[0, 0] * x + A_[0, 2], A_[1, 1] * y + A_[1, 2], w * A_[0, 0], h * A_[1, 1]
+        cv2.ellipse(m, (int(x + w / 2), int(y + h / 2)), (int(w / 2 + 22), int(h / 2 + 18)), 0, 0, 360, 1, -1); return m
+    reg = (box_mask(mb["face"]) | box_mask(mf["face"], A)) & cv2.erode(potb, np.ones((15, 15), np.uint8))
+    fe = cv2.GaussianBlur(reg.astype(np.float32), (0, 0), 3)[..., None] * cv2.erode(potb, np.ones((7, 7), np.uint8))[..., None]
+    for st in mf["states"]:
+        f = cv2.imread(f"{H}/cut/chilli_{fname}_{st}.png", -1)
+        fw = cv2.warpAffine(f, A, (body.shape[1], body.shape[0]), flags=cv2.INTER_CUBIC, borderValue=(0, 0, 0, 0)).astype(np.float32)
+        o = body.astype(np.float32); o[..., :3] = o[..., :3] * (1 - fe) + fw[..., :3] * fe
+        cv2.imwrite(f"{H}/cut/chilli_{bname}_{fname}_{st}.png", o.round().clip(0, 255).astype(np.uint8))
+    x, y, w, h = mf["face"]; fx = [A[0, 0] * x + A[0, 2], A[1, 1] * y + A[1, 2], w * k, h * k]; bx = mb["face"]
+    ux0, uy0 = min(fx[0], bx[0]), min(fx[1], bx[1]); ux1, uy1 = max(fx[0] + fx[2], bx[0] + bx[2]), max(fx[1] + fx[3], bx[1] + bx[3])
+    meta[f"{bname}_{fname}"] = dict(src=f"body {bp} + face {fname}", w=mb["w"], h=mb["h"], ox=mb["ox"], oy=mb["oy"], rim=mb["rim"], scale=mb["scale"], states=mf["states"],
+                                     face=[float(fx[0]), float(fx[1]), float(fx[2]), float(fx[3])], body=bname, face_of=fname)
+for b, fs in COMBOS.items():
+    if BODY[b] not in meta: continue
+    for f in fs:
+        if f in meta: transplant(b, f); print("combo", b, f)
 json.dump(meta, open(f"{H}/cut/chilli.json", "w"), indent=1)
