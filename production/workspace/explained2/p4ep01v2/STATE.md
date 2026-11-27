@@ -136,3 +136,27 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   unchanged; timings unchanged. Scans on the final code: no ghosting, no backwards movers, flicker 10 JUMPs (the camera cuts) no POP/GONE,
   overlap.js no face, face_cover_scan the same 68 runs as before (all reviewed, by design). Before/after sheet: scratchpad
   p4items/momo_painted_before_after.jpg; key frames, sheet.png and the four review clips refreshed.
+
+## Fix pass 5: the teacher's painted Uncle Lim (27 Nov 2026; NOT uploaded)
+- Paintings: `../characters/teacher_uncle_lim_2026-11-27/` (8 views; the three standing ones repainted by the teacher in LONG trousers,
+  `*_trousers.jpg`, used exactly as painted). **One outfit, long green trousers**: only the head-on ride (`lim_ride_front.jpg`, shorts) was
+  edited, by `../characters/lim/trousers.py` -> `../characters/lim/lim_ride_front_trousers.png` (each shin's skin covered by a trouser leg:
+  the convex hull, the shorts' green, a 5 px outline where it does not meet the shorts, a crease). Sheet: scratchpad p4items/lim_trousers_edit.jpg.
+  Switching back to shorts would be `SRC` in cut_lim.py (the original jpgs) + a re-cut; the riding side and rear views exist in trousers only.
+- Cut-outs: `../characters/lim/cut_lim.py` -> `cut/lim_<view>.png` + `cut/lim.json` (cutout.cutout flood, enclosed paper cleared, the helmet
+  shell restored where the flood leaked in, the painted spokes cleared inside the tyres). ONE scale: the helmet 140 local units wide in
+  every standing / head-on / rear view; the three side views fitted to the code roadster (rear and front wheel centres on RD.RA / RD.FA,
+  tyres on the ground line; their helmets come out 124-143). `lim_sprites.py` copies them to `spr/lim_<view>.png` + manifest entries.
+- limv2.js (the end): with `LIM_PAINTED = true` limRideV2 / limStand / limFrontRideV2 / limRearRideV2 draw the paintings. Side view: code
+  spokes + rim + hub turning with the distance (the crank's wheel angle, as the code roadster) BEHIND the painting; the painted tyre stays.
+  **He coasts (option b)**: crank and feet still (a two-bone pedal cycle cut from the painted leg would not look clean at this size); no body
+  bob (the painted tyres must stay on the ground). Views: side (riding, looking ahead; the "side" painting has no bell, so a small code bell
+  sits on its bar), look (the WINNER split screen and his line r703), sidesip (stopped and sipping: the cold open, the ice box, after r703;
+  never while he talks), front (race trailer), back (victory lap), stand (look-closer, finish, e1303), sip (a pause: look-closer, before
+  e1301), wave (the finish's clap). Ring: the bell wobbles + a small sparkle; the sound as before.
+- QA: `limHeadBox` marks his face for qa/face_cover_scan.js (no pixels).
+- **Render (27 Nov, about 03:00-03:15 UTC):** full re-render to a new file, checked against the fix-pass-4 mp4 before replacing it:
+  VERIFY OK (13086 frames = 7:16.2, decode 0, audio packets bit-identical, streams identical; frames before 10.37 s bit-identical).
+  -16.0 LUFS, -1.9 dBTP; srt and timings unchanged. Scans: no ghosting, no backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE,
+  overlap.js no face, face_cover_scan the same 68 by-design runs (Uncle Lim's face only under the trailer push-in panel at 3:05, as
+  before). Every Lim scene checked as stills at full size. Before/after: scratchpad p4items/lim_painted_before_after.jpg.

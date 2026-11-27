@@ -1,4 +1,4 @@
-faces wrapped: buddies + limHead, snailV2, chilliP4v2, x2youLink; 5 fps; a face counts as covered at 12 %
+faces wrapped: buddies + limHead, limHeadBox, snailV2, chilliP4v2, x2youLink; 5 fps; a face counts as covered at 12 %
 13.80-13.80 s cold       snail     face under buddy momo (15 %)
 35.20-36.80 s fixcards   pip       face under card  "CHECKLIST" (19 %)
 37.60-37.80 s fixcards   pip       face under card  "CHECKLIST" (15 %)
@@ -15,7 +15,7 @@ faces wrapped: buddies + limHead, snailV2, chilliP4v2, x2youLink; 5 fps; a face 
 167.00-168.60 s runaway    snail     face under buddy basil (74 %)
 172.00-172.00 s runaway    snail     face under buddy pip (77 %)
 185.00-185.80 s race       snail     face under buddy basil (56 %)
-185.00-185.80 s race       uncle lim face under buddy basil (65 %)
+185.00-185.80 s race       uncle lim face under buddy basil (40 %)
 215.40-215.40 s race       basil     face under card  "Uncle Lim's bike" (97 %)
 215.40-215.40 s race       momo      face under word  back wheel: still (14 %)
 215.40-215.40 s race       momo      face under card  "Basil's bike" (73 %)
