@@ -117,3 +117,22 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   VERIFY OK (13086 frames, decode 0, audio bit-identical, every packet outside the spans bit-identical). -16.0 LUFS, -1.9 dBTP. Scans
   after: no ghosting, no backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan as above.
   srt unchanged; hint #2 frames 9921-9926 untouched (outside the spans).
+
+## Fix pass 4: the teacher's painted Momo (27 Nov 2026; NOT uploaded)
+- The teacher painted Momo with the neckerchief and a GOLD MEDAL ("i got the pose of the collar fixed"): five paintings in
+  `../characters/teacher_momo_neckerchief_2026-11-27/` (arms_crossed, thinking, pointing, cheer, surprised). Cut out by
+  `../characters/sprites/poses.py` (set `momo_nk`, on momo_v2's sitting set: same scale and feet line; `WHO=momo_nk python poses.py <poses>`;
+  the cheer painting faced the other way and is mirrored, FLIPX) -> `poses/momo_nk_<pose>.png`. Checked against each momo_v2 twin (onion
+  sheet: same head top, feet line and body centre; scratchpad p4items/momo_nk_vs_v2.jpg). `nk_poses.py` scales them into `spr/momo_nk_<pose>.png`
+  and points the manifest's momo_<pose> entries at them (the v2 sprites stay on disk). horrified/surprised and laugh/cheer use them too.
+- items_options.js option N: no code overlay on the five painted poses (MOMO_PAINTED); the others (sit, oops, waving) keep the code-drawn
+  neckerchief with the painting's gold medal (`medalP`: short black strap, small ring, 48 px gold disc, two shines) instead of the magnifier.
+- The magnifier is a hand-held prop (`momoMagHeld`), drawn only when a scene passes `{ mag: true }` to Momo in her pointing pose: after
+  b404 (81.5-83.2 s, she points at the bell with it) and after l803 (236.9-238.3 s, at the chain in the look-closer). Her pointing poses
+  there were lengthened to hold it.
+- **Render (27 Nov, 02:02-02:18 UTC):** a full re-render to a NEW file (`out/run_render_nk.sh`: the new video + the verified file's own
+  audio stream, copied), checked with verify.py against the verified mp4 before replacing it: VERIFY OK (13086 frames = 7:16.2, decode 0,
+  audio packets bit-identical, streams identical; frames before 10.17 s bit-identical, Momo enters there). -16.0 LUFS, -1.9 dBTP; srt
+  unchanged; timings unchanged. Scans on the final code: no ghosting, no backwards movers, flicker 10 JUMPs (the camera cuts) no POP/GONE,
+  overlap.js no face, face_cover_scan the same 68 runs as before (all reviewed, by design). Before/after sheet: scratchpad
+  p4items/momo_painted_before_after.jpg; key frames, sheet.png and the four review clips refreshed.

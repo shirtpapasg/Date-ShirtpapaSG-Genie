@@ -17,7 +17,7 @@ faces wrapped: buddies + limHead, snailV2, chilliP4v2, x2youLink; 5 fps; a face 
 185.00-185.80 s race       snail     face under buddy basil (56 %)
 185.00-185.80 s race       uncle lim face under buddy basil (65 %)
 215.40-215.40 s race       basil     face under card  "Uncle Lim's bike" (97 %)
-215.40-215.40 s race       momo      face under word  back wheel: still (13 %)
+215.40-215.40 s race       momo      face under word  back wheel: still (14 %)
 215.40-215.40 s race       momo      face under card  "Basil's bike" (73 %)
 215.40-215.40 s race       pip       face under card  "Uncle Lim's bike" (50 %)
 270.40-273.20 s shrink     YOU link  face under card  "YOU" (22 %)
