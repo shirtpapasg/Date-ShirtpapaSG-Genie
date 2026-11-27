@@ -42,17 +42,18 @@ POSES["pip_run"] = {  # Pip's two-frame RUN cycle, painted by the teacher (27 No
   # worried, helmet and goggles painted in; on Pip's sitting set (same scale and feet line as pip_sit)
   "run_a": ("pip_run_a.jpg", None), "run_b": ("pip_run_b.jpg", None)}
 POSES["momo_run"] = {  # Momo's two-frame run (teacher, 27 Nov 2026): painted facing LEFT, worried, sweat drops, neckerchief + medal painted in
-  "run_a": ("momo_run_a.jpg", None), "run_b": ("momo_run_b.jpg", None)}
+  "run_a": ("momo_run_a.jpg", None), "run_b": ("momo_run_b_alt.jpg", None)}   # fix pass 8 (teacher: "left and right hand swap"): b = the alt, arms swapped, knee up
 POSES["basil_run"] = {  # Basil's run frame A (teacher, 27 Nov 2026; B to come): facing right, helmet and badge painted in
-  "run_a": ("basil_run_a.jpg", None)}
+  "run_a": ("basil_run_a.jpg", None), "run_b": ("basil_run_a_alt.jpg", None)}   # fix pass 8: the alt swings the back arm in front of his belly
 POSES["basil_v2"] = {  # Basil in Pip's style (Gemini, 23 Nov)
   "oops": ("basil_v2_oops.jpg", None), "waving": ("basil_v2_waving.jpg", None), "thinking": ("basil_v2_thinking.jpg", None),
   "worried": ("basil_v2_worried.jpg", None), "surprised": ("basil_v2_surprised.jpg", None), "pointing": ("basil_v2_pointing.jpg", None),
   "cheer": ("basil_v2_cheer.jpg", None), "arms_crossed": ("basil_v2_arms_crossed.jpg", None), "laughing": ("basil_v2_laugh_eyes_shut.jpg", None), "back": ("basil_back.jpg", None)}
 SITREF = {"momo_nk": "momo_v2", "pip_run": "pip", "momo_run": "momo_v2", "basil_run": "basil_v2"}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
-HOLES = {("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)], ("basil_v2", "cheer"): [(221, 473), (183, 303)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
+HOLES = {("momo_run", "run_b"): [(483, 508)], ("momo_run", "run_a"): [(579, 540)], ("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)], ("basil_v2", "cheer"): [(221, 473), (183, 303)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 FLIPX = {("momo_nk", "cheer")}   # painted facing the other way (tail on her left, knot on the right): mirrored to match momo_v2_cheer and her other poses
+SOLO = {("momo_run", "run_b")}   # fix pass 8: motion lines erased
 SHADOW_T = 138
 ADJ = {}      # (buddy, pose): extra scale, set by eye from qa/poses_<buddy>.png
 DX = {}       # (buddy, pose): anchor nudge in source px
@@ -103,7 +104,19 @@ if __name__ == "__main__":
             if crop: im = cv2.resize(im, None, fx=2, fy=2, interpolation=cv2.INTER_LANCZOS4); k0 = 2.0
             cut = cutout(im, seal=SEAL.get((who, pose), 0)); x0, y0, x1, y1 = bbox(cut[..., 3])
             Tm = np.full(im.shape[:2], 175, np.float32); Tm[int(y1 - .09 * (y1 - y0)):] = SHADOW_T   # second pass: the shadow under the feet is darker than the paper
-            cut = cutout(im, T=Tm, seal=SEAL.get((who, pose), 0)); x0, y0, x1, y1 = bbox(cut[..., 3])
+            cut = cutout(im, T=Tm, seal=SEAL.get((who, pose), 0))
+            if (who, pose) in SOLO:   # keep only the figure: drop the painted motion lines (separate strokes in the white around a paw / foot)
+                n_, lab_, st_, cen_ = cv2.connectedComponentsWithStats((cut[..., 3] > 40).astype(np.uint8)); big_ = 1 + np.argmax(st_[1:, 4]); yb_ = st_[big_, 1] + .3 * st_[big_, 3]
+                for i_ in range(1, n_):
+                    if i_ != big_ and cen_[i_][1] > yb_: cut[..., 3][lab_ == i_] = 0   # below the head only
+                # her sweat drops (small strokes by the head, which cutout's speck filter drops) are put back from the painting
+                L_ = im.min(2); pad_ = np.pad((L_ > 175).astype(np.uint8), 1, constant_values=1); cv2.floodFill(pad_, None, (0, 0), 2); fg_ = (pad_[1:-1, 1:-1] != 2).astype(np.uint8)
+                n2_, lab2_, st2_, cen2_ = cv2.connectedComponentsWithStats(fg_)
+                for i_ in range(1, n2_):
+                    if 30 < st2_[i_, 4] < 3000 and cen2_[i_][1] < yb_ and cut[..., 3][lab2_ == i_].mean() < 128:
+                        cs_, _ = cv2.findContours((lab2_ == i_).astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE); m_ = np.zeros(L_.shape, np.uint8); cv2.drawContours(m_, cs_, -1, 1, -1); m_ = m_ > 0
+                        cut[..., 3][m_] = 255; cut[..., :3][m_] = im[m_]   # the drop, filled (its light-blue inside too)
+            x0, y0, x1, y1 = bbox(cut[..., 3])
             yf = FEET.get((who, pose), y1)                                   # feet line (normally the lowest pixel)
             s = sit_h / (yf - y0) * ADJ.get((who, pose), 1.0)
             ax = body_cx(cut[..., 3], y0, yf) + off / s + DX.get((who, pose), 0); ay = float(yf)

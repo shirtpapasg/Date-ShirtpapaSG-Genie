@@ -700,14 +700,14 @@
   },
   "run_b": {
    "file": "poses/momo_run_run_b.png",
-   "src": "momo_run_b.jpg",
+   "src": "momo_run_b_alt.jpg",
    "anchor": [
-    427.1,
+    349.8,
     831.0
    ],
-   "scale": 0.881,
+   "scale": 0.9938,
    "size": [
-    817,
+    736,
     855
    ]
   },
@@ -726,6 +726,19 @@
    "src": "basil_run_a.jpg",
    "anchor": [
     429.0,
+    815.0
+   ],
+   "scale": 0.8231,
+   "size": [
+    790,
+    839
+   ]
+  },
+  "run_b": {
+   "file": "poses/basil_run_run_b.png",
+   "src": "basil_run_a_alt.jpg",
+   "anchor": [
+    449.4,
     815.0
    ],
    "scale": 0.8231,

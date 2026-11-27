@@ -22,13 +22,14 @@ def gray(p): a = cv2.imread(p, -1); al = a[..., 3:] / 255.; return cv2.cvtColor(
 for who in ("pip", "momo", "basil"):
     if not (f"{who}_run_a" in M and f"{who}_run_b" in M): continue
     A, B = gray(f"{O}/{who}_run_a.png"), gray(f"{O}/{who}_run_b.png"); h, w = A.shape
-    tA = A[int(.04 * h):int(.42 * h), int(.08 * w):int(.75 * w)]; y0, x0 = int(.04 * h), int(.08 * w); best = None
-    for k in np.linspace(.9, 1.1, 41):
-        t = cv2.resize(tA, None, fx=k, fy=k)
-        if t.shape[0] >= B.shape[0] or t.shape[1] >= B.shape[1]: continue
-        r = cv2.matchTemplate(B, t, cv2.TM_CCOEFF_NORMED); _, mx, _, loc = cv2.minMaxLoc(r)
-        if not best or mx > best[0]: best = (mx, k, loc)
-    mx, k, (bx, by) = best; ea, eb = M[f"{who}_run_a"], M[f"{who}_run_b"]
-    eb["ax"] = round(bx + (ea["ax"] - x0) * k, 1); eb["ay"] = round(by + (ea["ay"] - y0) * k, 1); eb["bh"] = round(ea["bh"] * k, 1)
-    print(who, "B registered to A by the head: match", round(mx, 3), "scale", round(k, 3), "anchor", eb["ax"], eb["ay"])
+    # (fix pass 8) SIFT features of the HEAD (top 38 % of A) matched in B, a scale + shift fitted with RANSAC: robust where the arms change
+    sf = cv2.SIFT_create(); ka, da = sf.detectAndCompute(A.astype(np.uint8), None); kb, db = sf.detectAndCompute(B.astype(np.uint8), None)
+    good = [m_ for m_, n_ in cv2.BFMatcher().knnMatch(da, db, k=2) if m_.distance < .7 * n_.distance and ka[m_.queryIdx].pt[1] < .38 * h]
+    pa = np.float32([ka[g.queryIdx].pt for g in good]); pb = np.float32([kb[g.trainIdx].pt for g in good])
+    T_, inl = cv2.estimateAffinePartial2D(pa, pb, method=cv2.RANSAC, ransacReprojThreshold=3); k = float(np.hypot(T_[0, 0], T_[1, 0])); mx = float(inl.mean())
+    ea, eb = M[f"{who}_run_a"], M[f"{who}_run_b"]
+    eb["ax"] = round(float(T_[0, 0] * ea["ax"] + T_[0, 1] * ea["ay"] + T_[0, 2]), 1); eb["ay"] = round(float(T_[1, 0] * ea["ax"] + T_[1, 1] * ea["ay"] + T_[1, 2]), 1); eb["bh"] = round(ea["bh"] * k, 1)
+    # the landing frame stands ON the ground: its lowest opaque row is the feet line (a few px of head bob between the frames, not a sink)
+    ab = cv2.imread(f"{O}/{who}_run_b.png", -1)[..., 3]; eb["ay"] = float(np.where(ab.max(1) > 128)[0].max())
+    print(who, "B registered to A by the head: inliers", round(mx, 3), len(good), "scale", round(k, 3), "anchor", eb["ax"], eb["ay"])
 open(f"{O}/manifest.js", "w").write("window.SPR=" + json.dumps(M) + ";")

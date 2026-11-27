@@ -210,6 +210,7 @@ function buddy(who, x, y, h, t, o = {}) {
    ...), optionally with today's stand-in after a slash ("panic/oops"). When spr/<who>_<pose>.png is in the manifest (new_poses.py copies
    it from characters/sprites/poses/ once painted) it is used; until then the stand-in (or NEWPOSE_FALLBACK) shows, with no extra pose pop
    when the stand-in is the pose already showing. "laugh" stand-ins giggle (a small shake). */
+const RUNSTEP = .165;   // fix pass 8: one run frame (s)
 const NEWPOSE_FALLBACK = { basil: { deadpan: "sit", shocked: "surprised", laugh: "laughing", shrug: "oops", hero: "arms_crossed" },
   pip: { panic: "thinking", proud: "arms_crossed", embarrassed: "oops", angry: "pointing", dizzy: "surprised", ride: "sit" },
   momo: { facepalm: "oops", laugh: "cheer", unimpressed: "sit", horrified: "surprised" } };
@@ -232,6 +233,7 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (!speaking(who, t) && !o.keepPose) { const oc = outcomeAt(who, t);
     if (oc) { pose = oc.pose; why = "outcome"; if (oc.t0 > tsw) tsw = oc.t0; nxt = Math.min(nxt, oc.t1); }
     else if (pose === "cheer" && !learnAt(t) && !o.achieved && !giggle && !(asked || "").startsWith("hi5")) pose = "sit"; }   // hands up only when something is learnt or achieved (EP15: never a stand-in arms-crossed)
+  if (!o.run && o.runEnd !== undefined && t >= o.runEnd && t - o.runEnd < .6 && o.runEnd > tsw) tsw = o.runEnd;   // the end of a run: the usual swap glide
   let nodH = 0;
   if (pose === "sit" || pose === "back") { const R = reactAt(who, t, tsw, nxt, o);   // v3: never frozen
     if (R) { if (R.pose && pose === "sit") { if (t < R.t1) { pose = R.pose; why = "react:" + (R.txt || ""); tsw = R.t0; nxt = R.t1; } else if (t < R.t1 + .5) tsw = R.t1; }
@@ -269,12 +271,18 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   // fix pass 6 (27 Nov): RUNNING. { run: "left"|"right" } shows the teacher's two-frame run cycle (<who>_run_a / _b, painted facing right)
   // when it exists: A (the stride, with a small hop) and B alternate every .135 s, mirrored for a leftward run; no pose-swap pop (the pose
   // underneath is unchanged). Until a buddy's run paintings arrive, the scene's free-paws pose (surprised) stands in.
-  // fix pass 7: Momo's run is painted facing LEFT (mirrored for a rightward run); Basil has frame A only so far: A with a running hop (rise on
-  // the stride, a slight squash on landing) until his B arrives
-  if (o.run && SPR[`${who}_run_a`]) { const ph_ = (t + ({ pip: 0, momo: .07, basil: .03 }[who] || 0)) / .135, fa = Math.floor(ph_) % 2 === 0, hasB = !!SPR[`${who}_run_b`];
+  // RUNNING (fix passes 6-8). { run: "left"|"right", run0, runEnd }: the teacher's two-frame run cycles (<who>_run_a / _b; Pip and Basil
+  // painted facing right, Momo facing LEFT), arms and legs swapping (teacher, fix pass 8: "Use the left and right hand swap"). From run0
+  // (default: the scene start) frame A holds .2 s, then B and A alternate every RUNSTEP (.165 s, a readable step): A = the stride, with a
+  // hop (an arc up and down within the frame); B = the landing, both feet down, a slight squash as it lands; a 4-degree forward lean.
+  // At runEnd the usual pose-swap glide brings back the sit pose (no pop). A buddy with frame A only hops on A with a squash.
+  if (o.run && SPR[`${who}_run_a`]) { const R0 = o.run0 !== undefined ? o.run0 : (window._S ? window._S.t0 : 0), u = Math.max(0, t - R0), hasB = !!SPR[`${who}_run_b`];
+    const idx = u < .2 ? 0 : 1 + Math.floor((u - .2) / RUNSTEP), q = idx === 0 ? u / .2 : ((u - .2) / RUNSTEP) % 1, fa = idx % 2 === 0, dir = o.run === "left" ? -1 : 1;
     name = `${who}_run_${fa || !hasB ? "a" : "b"}`; wflip = (o.run === "left") !== (who === "momo");
-    rot = 0; sx = 1; sy = 1; lift = fa ? -10 * (h / 380) : 0;
-    if (!hasB) { const u = (ph_ / 2) % 1; lift = -16 * (h / 380) * Math.sin(Math.PI * Math.min(1, u / .7)); const sq = u > .7 ? .05 * Math.sin(Math.PI * (u - .7) / .3) : 0; sy = 1 - sq; sx = 1 + .8 * sq; rot = 2 * Math.sin(2 * Math.PI * u); } }
+    sx = 1; sy = 1; rot = 4 * dir; lift = 0;
+    if (fa) lift = -14 * (h / 380) * Math.sin(Math.PI * q);
+    else { const sq = .05 * Math.pow(1 - q, 2); sy = 1 - sq; sx = 1 + .8 * sq; }
+    if (!hasB && !fa) { lift = -6 * (h / 380) * Math.sin(Math.PI * q); } }
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = (wflip !== null ? wflip : o.flip) ? -1 : 1;
   if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek, why });   // EP15 QA (qa/buddy_faces): which face is on screen, where
