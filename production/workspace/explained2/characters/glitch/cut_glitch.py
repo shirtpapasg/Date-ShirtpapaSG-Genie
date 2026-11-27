@@ -15,10 +15,15 @@ from cutout import cutout
 im = cv2.imread(f"{T}/glitch_base.jpg"); cut = cutout(im); a = cut[..., 3].copy()
 Hh, Ww = a.shape; yy, xx = np.mgrid[:Hh, :Ww]
 # ---- arms (measured on the 1024 px painting): everything of the arm outside the body's outline; the shoulder joints stay on the body
-armL = (a > 0) & (((xx < 252) & (yy > 600)) | ((xx < 282) & (yy > 788) & (yy < 880)))
-armR = (a > 0) & (xx > 772) & (yy < 616) & (yy > 300)
+# the body's left and right edges (outer side of the dark outline), traced on the painting; the shoulder joints (discs) are kept
+edgeL = np.interp(yy, [480, 540, 600, 650, 700, 750, 790, 810], [236, 236, 241, 247, 252, 258, 272, 300]) - 9
+keepL = ((xx >= edgeL) | ((xx - 265) ** 2 + (yy - 575) ** 2 < 52 ** 2)) & (yy < 815)
+armL = (a > 0) & (xx < 310) & (yy > 520) & ~keepL
+edgeR = np.interp(yy, [300, 400, 500, 560, 620], [744, 752, 756, 758, 758]) + 9
+keepR = (xx <= edgeR) | ((xx - 772) ** 2 + (yy - 558) ** 2 < 30 ** 2)
+armR = (a > 0) & (xx > 740) & (yy < 640) & (yy > 300) & ~keepR
 # ---- the screen glass: the light region inside the dark bezel, grown round the face strokes (its convex hull)
-L = im.min(2)
+L = im.min(2); hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 dark = (L < 110).astype(np.uint8)
 seed = (555, 520)   # glass below the smile
 ff = (1 - dark).copy(); pad = np.pad(ff, 1); cv2.floodFill(pad, None, (seed[0] + 1, seed[1] + 1), 2); reg = (pad[1:-1, 1:-1] == 2).astype(np.uint8)
@@ -35,15 +40,14 @@ eyes = sorted([c for c in comps if c[2][3] > 30][:2], key=lambda c: c[1][0])
 mouth = [c for c in comps if c[1][1] > max(e[1][1] for e in eyes) + 30]
 mouth = max(mouth, key=lambda c: c[0]) if mouth else None
 # ---- wheels: ellipses fitted to the tyres' dark outline (front = the picture's left wheel, nearer the camera; back = the right one)
-def wheel(x0, x1, y0, y1):
-    sub = (a[y0:y1, x0:x1] > 0).astype(np.uint8); cs, _ = cv2.findContours(sub, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-    c = max(cs, key=cv2.contourArea); (cx, cy), (w, h), ang = cv2.fitEllipse(c); return dict(cx=cx + x0, cy=cy + y0, rx=w / 2, ry=h / 2, ang=ang)
-WF = wheel(300, 456, 800, 960); WB = wheel(600, 745, 785, 935)
+# measured on the painting (fitEllipse was pulled off by the struts): the tyres' outer ellipses
+WF = dict(cx=378.0, cy=880.0, rx=66.0, ry=72.0, ang=0.0); WB = dict(cx=675.0, cy=857.0, rx=63.0, ry=67.0, ang=0.0)
+STRUT = {"F": np.array([[416, 786], [472, 786], [472, 880], [428, 884]], np.int32), "B": np.array([[586, 786], [642, 786], [642, 874], [600, 874]], np.int32)}
 def ell_mask(w, grow=0):
     m = np.zeros_like(a); cv2.ellipse(m, (int(w["cx"]), int(w["cy"])), (int(w["rx"] + grow), int(w["ry"] + grow)), w["ang"], 0, 360, 255, -1); return m
-hub = np.zeros_like(a); cv2.ellipse(hub, (int(WF["cx"] - .32 * WF["rx"]), int(WF["cy"] + 2)), (int(.42 * WF["rx"]), int(.62 * WF["ry"])), 0, 0, 360, 255, -1)
+hub = np.zeros_like(a); cv2.ellipse(hub, (348, 885), (29, 43), 0, 0, 360, 255, -1)
 # ---- the antenna bulb (the yellow disc) for the code glow
-hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV); yel = ((hsv[..., 0] > 18) & (hsv[..., 0] < 35) & (hsv[..., 1] > 120) & (yy < 200)).astype(np.uint8)
+yel = ((hsv[..., 0] > 18) & (hsv[..., 0] < 35) & (hsv[..., 1] > 120) & (yy < 200)).astype(np.uint8)
 by, bx = np.where(yel); bulb = dict(x=float(bx.mean()), y=float(by.mean()), r=float(np.sqrt(yel.sum() / np.pi)))
 # ---- crop box shared by every layer
 ys_, xs_ = np.where(a > 0); X0, Y0, X1, Y1 = int(xs_.min()) - 30, int(ys_.min()) - 60, int(xs_.max()) + 30, int(ys_.max()) + 8
@@ -57,6 +61,8 @@ scr_a = (cv2.GaussianBlur(scr.astype(np.float32), (0, 0), .8) * 255).clip(0, 255
 save("screen", blank, scr_a)
 for nm, w in (("wheelF", WF), ("wheelB", WB)): save(nm, cut[..., :3], np.minimum(a, ell_mask(w, 2)))
 save("hubF", cut[..., :3], np.minimum(a, cv2.GaussianBlur(hub, (0, 0), 1)))
+for k in ("F", "B"):   # the silver strut stays still while the tyre turns (drawn over the turning wheel)
+    m = np.zeros_like(a); cv2.fillPoly(m, [STRUT[k]], 255); save("strut" + k, cut[..., :3], np.minimum(a, cv2.GaussianBlur(m, (0, 0), 1)))
 gy = float(max(WF["cy"] + WF["ry"], WB["cy"] + WB["ry"]))
 o = lambda x, y: [round(float(x) - X0, 1), round(float(y) - Y0, 1)]
 meta = dict(src="../teacher_ep02_2026-11-27/glitch_base.jpg", w=X1 - X0, h=Y1 - Y0, ground=round(gy - Y0, 1), cx=round((sx + sw / 2) - X0, 1),
@@ -65,5 +71,5 @@ meta = dict(src="../teacher_ep02_2026-11-27/glitch_base.jpg", w=X1 - X0, h=Y1 - 
   shoulderL=o(265, 575), shoulderR=o(776, 548), bulb=dict(x=round(bulb["x"] - X0, 1), y=round(bulb["y"] - Y0, 1), r=round(bulb["r"], 1)),
   wheelF={k: round(float(v) - (X0 if k == "cx" else Y0 if k == "cy" else 0), 1) for k, v in WF.items()},
   wheelB={k: round(float(v) - (X0 if k == "cx" else Y0 if k == "cy" else 0), 1) for k, v in WB.items()},
-  hubF=o(WF["cx"] - .32 * WF["rx"], WF["cy"] + 2), face=[sx - X0, sy - Y0, sw, sh])
+  hubF=o(348, 885), face=[sx - X0, sy - Y0, sw, sh])
 json.dump(meta, open(f"{H}/cut/glitch.json", "w"), indent=1); print(json.dumps(meta)[:900])
