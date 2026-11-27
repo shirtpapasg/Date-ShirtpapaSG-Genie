@@ -75,8 +75,8 @@ function x2bellFront(t, s) { const tB = MK("flap") + 1.0, c = camMix(camOn([1000
     + x2bc(c, "basil", ...B, t, { in: tB - .02, noStay: true, poses: [[0, "shocked/surprised"], [LT("b407") + .4, "deadpan"]], look: 2, noreact: true })
     + pgOn("basil", 104, -52, .85, true, 1) + pgOn("basil", -150, -40, .8, false, 2) + helmPig   /* (fix pass 6, teacher) the third pigeon on his shoulder, clear of his face */
     + comicWord(t, coo, ...camPt(c, [B[0] + 40, B[1] - 520]), "coo.", { size: 40, tiny: true, col: "#fff", d: .7 })
-    + (true ? x2bc(c, "momo", jog(1520, 1400, LT("b407") - .2), 1066, 360, t, { in: tB - 3, noStay: true, flip: true, jump: [[LT("b407") - .2, 14], [LT("b407") + .1, 14], [LT("b407") + .4, 12]], poses: [[0, "surprised"], [LT("b407") + .65, "sit"], [LT("b407") + .9, "laugh/cheer"], [LE("b407") + .2, "sit"]], look: -6 }) : "")
-    + (true ? x2bc(c, "pip", jog(1880, 1780, LT("b407")), 1066, 350, t, { in: tB - 3, noStay: true, flip: true, jump: [[LT("b407"), 14], [LT("b407") + .3, 14], [LT("b407") + .6, 12]], poses: [[0, "surprised"], [LT("b407") + .85, "sit"], [LT("b408") + .5, "embarrassed/oops"], [LE("b408") + .4, "sit"]], look: -6 }) : "")
+    + (true ? x2bc(c, "momo", jog(1520, 1400, LT("b407") - .2), 1066, 360, t, { in: tB - 3, noStay: true, flip: true, run: t >= LT("b407") - .2 && t < LT("b407") + .6 ? "left" : undefined, jump: [[LT("b407") - .2, 14], [LT("b407") + .1, 14], [LT("b407") + .4, 12]], poses: [[0, "surprised"], [LT("b407") + .65, "sit"], [LT("b407") + .9, "laugh/cheer"], [LE("b407") + .2, "sit"]], look: -6 }) : "")
+    + (true ? x2bc(c, "pip", jog(1880, 1780, LT("b407")), 1066, 350, t, { in: tB - 3, noStay: true, flip: true, run: t >= LT("b407") && t < LT("b407") + .8 ? "left" : undefined, jump: [[LT("b407"), 14], [LT("b407") + .3, 14], [LT("b407") + .6, 12]], poses: [[0, "surprised"], [LT("b407") + .85, "sit"], [LT("b408") + .5, "embarrassed/oops"], [LE("b408") + .4, "sit"]], look: -6 }) : "")
     + faceCam("basil", t, tB + .05, tB + 1.5, 1520, 300, 150, [[0, "shocked/surprised"]], { flip: true, noreact: true })
     + x2lab(t, MK("warn"), s.t1, c, "bell: warns people you are coming", 1380, 200, BELC[0] + BLK * (BK.HT[0] - 24), BELC[1] + BLK * (BK.HT[1] - 66), 38)
     + x2HUD(t); }
@@ -175,8 +175,8 @@ function x2runA(t, s) { const u = t - s.t0, roll = 40 * (u + SCN.brakes.t1 - MK(
   const bx = RPB[0] + roll, run = (x0, sp) => x0 + sp * u;
   window._BUBAT = { pip: [1300, 300] };
   return x2place("rampv2", x2rampBike(t, roll), c) + OP(.85, `<circle cx="${n2(camPt(c, [bx + RPK * (BK.FA[0] + 120), 0])[0])}" cy="${n2(camPt(c, [0, rampAt(bx + 300) - 150])[1])}" r="${n2(18 + 10 * Math.sin(t * 9))}" fill="#FFF6C8" filter="url(#b4)"/>`) + CAM(rampFront(), c[0], c[1], c[2])
-    + x2bc(c, "pip", run(fwx + 330 - u * 0, 0) + 260 * 0, rampAt(fwx + 330) + 4, 340, t, { in: s.t0 - 3, noStay: true, keepPose: true, poses: [[0, "panic/surprised"]], look: 10,   /* (fix pass 6, teacher) shocked and wide-eyed through his line too */ jump: [...Array(10)].map((_, i) => [s.t0 + .1 + i * .3, 16]) })
-    + x2bc(c, "momo", fwx + 620, rampAt(fwx + 620) + 4, 340, t, { in: s.t0 - 3, noStay: true, poses: [[0, "horrified/surprised"]], look: 10, jump: [...Array(10)].map((_, i) => [s.t0 + .25 + i * .3, 16]) })
+    + x2bc(c, "pip", run(fwx + 330 - u * 0, 0) + 260 * 0, rampAt(fwx + 330) + 4, 340, t, { in: s.t0 - 3, noStay: true, keepPose: true, run: "right", poses: [[0, "panic/surprised"]], look: 10,   /* (fix pass 6, teacher) shocked and wide-eyed through his line too */ jump: [...Array(10)].map((_, i) => [s.t0 + .1 + i * .3, 16]) })
+    + x2bc(c, "momo", fwx + 620, rampAt(fwx + 620) + 4, 340, t, { in: s.t0 - 3, noStay: true, run: "right", poses: [[0, "horrified/surprised"]], look: 10, jump: [...Array(10)].map((_, i) => [s.t0 + .25 + i * .3, 16]) })
     + comicWord(t, s.t0 + .9, 560, 200, "WHOOSH!", { size: 92, d: .9 }) + x2HUD(t); }
 function x2runB(t, s) { const t0 = MK("chainrx"), u = t - t0, cx = RV * u, bx = 300 + 40 * u, y = 1010, wh = (RV * (t - s.t0)) / (BK.R * .62);
   const hit = .5, spin = clamp((u - hit) / 1.2), stx = 760 - cx * 0 + 0;
@@ -192,8 +192,8 @@ function x2runB(t, s) { const t0 = MK("chainrx"), u = t - t0, cx = RV * u, bx = 
   const bike = TF(bx, y, .62, bikeP4(t, { chain: false, brakes: 0, bell: 0, crank: .6, sh: 0, g2: 0, rw: wh, fw: wh, stand: false, blur: .5, fblur: .5 }));
   window._BUBAT = {};
   return w + st + ball + pg + bike
-    + x2bd("pip", 1540 + 40 * u, 1070, 320, t, { in: t0 - 3, noStay: true, poses: [[0, "panic/surprised"]], look: 10, jump: [...Array(9)].map((_, i) => [t0 + i * .3, 16]), tag: false })
-    + x2bd("momo", 1800 + 40 * u, 1070, 320, t, { in: t0 - 3, noStay: true, poses: [[0, "horrified/surprised"]], look: 10, jump: [...Array(9)].map((_, i) => [t0 + .15 + i * .3, 16]), tag: false })
+    + x2bd("pip", 1540 + 40 * u, 1070, 320, t, { in: t0 - 3, noStay: true, run: "right", poses: [[0, "panic/surprised"]], look: 10, jump: [...Array(9)].map((_, i) => [t0 + i * .3, 16]), tag: false })
+    + x2bd("momo", 1800 + 40 * u, 1070, 320, t, { in: t0 - 3, noStay: true, run: "right", poses: [[0, "horrified/surprised"]], look: 10, jump: [...Array(9)].map((_, i) => [t0 + .15 + i * .3, 16]), tag: false })
     + comicWord(t, t0 + hit, sx + 40, 760, "CLATTER!", { size: 78, d: .85 }) + comicWord(t, t0 + hit + .8, sx + 430, 820, "BOING!", { size: 70, d: .8, rot: 6 }) + comicWord(t, t0 + tf, sx + 960, 640, "FLAP!", { size: 70, d: .8 })
     + x2HUD(t); }
 function x2runC(t, s) { const t0 = LT("k608") - .3, u = t - t0, cx = 420 * u, gap = 520 - 40 * Math.sin(u * .8), bx = 380 - gap * 0, wh = cx / (BK.R * .58);
@@ -202,9 +202,9 @@ function x2runC(t, s) { const t0 = LT("k608") - .3, u = t - t0, cx = 420 * u, ga
   const tk = LT("k609"), lev = t >= tk - .1 && t < LE("k610") + .3;
   window._BUBAT = { momo: [1460, 330], basil: [1000, 300], pip: [1220, 380] };
   return trackV2(t, cx) + bike
-    + x2bd("basil", 900, 1076, 330, t, { in: t0 - .02, noStay: true, keepPose: true, poses: [[0, "shocked/surprised"], [LE("k609") + .2, "shocked/surprised"]], look: 12, jump: jump(.05), ...x2grease(t) })
-    + x2bd("pip", 1260, 1076, 320, t, { in: t0 - 3, noStay: true, keepPose: true, poses: [[0, "panic/surprised"]],   /* (fix pass 6) "It can't stop!": worried, wide-eyed */ look: 10, jump: jump(.15) })
-    + x2bd("momo", 1620, 1076, 330, t, { in: t0 - 3, noStay: true, keepPose: true, poses: [[0, "horrified/surprised"], [LE("k610") - .6, "pointing"]], /* (fix pass 6, teacher: "how can momo run with arm folded?") a runner keeps free paws while she/he talks */ look: 10, jump: jump(.25) })
+    + x2bd("basil", 900, 1076, 330, t, { in: t0 - .02, noStay: true, keepPose: true, run: "right", poses: [[0, "shocked/surprised"], [LE("k609") + .2, "shocked/surprised"]], look: 12, jump: jump(.05), ...x2grease(t) })
+    + x2bd("pip", 1260, 1076, 320, t, { in: t0 - 3, noStay: true, keepPose: true, run: "right", poses: [[0, "panic/surprised"]],   /* (fix pass 6) "It can't stop!": worried, wide-eyed */ look: 10, jump: jump(.15) })
+    + x2bd("momo", 1620, 1076, 330, t, { in: t0 - 3, noStay: true, keepPose: true, run: "right", poses: [[0, "horrified/surprised"], [LE("k610") - .6, "pointing"]], /* (fix pass 6, teacher: "how can momo run with arm folded?") a runner keeps free paws while she/he talks */ look: 10, jump: jump(.25) })
     + (lev ? TF(620, 380, spring(t, tk - .1, .4) * (1 - ramp(t, LE("k610") + .1, .2)), `<g filter="url(#drop)"><circle r="150" fill="#FFF8EA" stroke="#E5484D" stroke-width="10"/></g>` + lizPaw(-70, 30, 1.5, -20) + lizPaw(70, 30, 1.5, 20, -1) + `<path d="M-90 -30 q-6 30 -30 40 M90 -30 q6 30 30 40" stroke="#59616B" stroke-width="12" fill="none" stroke-linecap="round"/><rect x="-118" y="-50" width="52" height="22" rx="8" fill="#2B2F36"/><rect x="66" y="-50" width="52" height="22" rx="8" fill="#2B2F36"/>` + T(0, 120, "his brake levers", 30, P.ink, { w: 700 })) : "")
     + (t >= MK("noslow") - .1 ? OP(spring(t, MK("noslow") - .1, .4), plabel(560, 700, "no brakes: nothing slows the wheels", 330 + 255 * .58, 1040 - 118 * .58, 38, "#fff")) : "")
     + x2HUD(t); }
@@ -227,10 +227,10 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   // from the LEFT after the bonk (she chased the bike) and stops left of the crown stool, facing Basil
   const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 340, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 340, pX = lerp(-300, 470, eio(clamp((t - tBk) / 1.0)));
   window._BUBAT = { momo: [1560, 330], pip: [480, 300], basil: [1180, 320] };
-  const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, keepPose: t < tP + .4, poses: [[0, "horrified/surprised"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10, jump: [...Array(4)].map((_, i) => [tD + i * .3, 14]) });
+  const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, keepPose: t < tP + .4, run: t < tP + .4 ? "left" : undefined, poses: [[0, "horrified/surprised"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10, jump: [...Array(4)].map((_, i) => [tD + i * .3, 14]) });
   return CAM(bg("vdv2") + set + bike, c[0], c[1], c[2]) + basil + can + front + splashFx
     + momoD
-    + x2bc(c, "pip", pX, 1066, 330, t, { in: tD - 3, noStay: true, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : 8 })
+    + x2bc(c, "pip", pX, 1066, 330, t, { in: tD - 3, noStay: true, run: t >= tBk && t < tBk + 1.0 ? "right" : undefined, poses: [[0, "panic/surprised"], [tSp + .4, "sit"], [LT("k613") - .1, "sit"], [LE("k613") + .05, "angry/pointing"]], look: t >= LT("k613") - .2 ? 0 : 8 })
     + (inBox && t > LT("k612") + 1.2 && t < LE("k612") ? x2held(c, "momo", CB.box[0] + 340, 1066, 340, true, `<g transform="rotate(10)"><rect x="-22" y="-34" width="44" height="64" rx="8" fill="#E5484D" stroke="#2B2F36" stroke-width="4"/><rect x="-22" y="-34" width="44" height="10" rx="4" fill="#C9D1DA"/></g>`, -20, 10) : "")
     + comicWord(t, tBk, CB.box[0] - 160, 470, "BONK!", { size: 84, d: .7 }) + comicWord(t, tSp, CB.box[0] + 60, 400, "KER-SPLOOSH!", { size: 92, d: 1.0 }) + comicWord(t, tSp + 1.1, CB.box[0] + 160, 820, "plip.", { size: 40, tiny: true, col: "#BFE6F7", d: .8 })
     + x2lab(t, MK("brkl"), MK("cold") - .3, c, "brakes: help the bike slow down and stop safely", 760, 300, CB.bike[0] + CB.bk * (BK.HT[0] - 76), CB.bike[1] + CB.bk * (BK.HT[1] - 34), 36)

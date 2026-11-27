@@ -652,6 +652,38 @@
    "hips_above_feet": 6
   }
  },
+ "pip_run": {
+  "run_a": {
+   "file": "poses/pip_run_run_a.png",
+   "src": "pip_run_a.jpg",
+   "anchor": [
+    469.8,
+    833.0
+   ],
+   "scale": 0.8822,
+   "size": [
+    833,
+    857
+   ]
+  },
+  "run_b": {
+   "file": "poses/pip_run_run_b.png",
+   "src": "pip_run_b.jpg",
+   "anchor": [
+    463.9,
+    833.0
+   ],
+   "scale": 0.8765,
+   "size": [
+    825,
+    857
+   ]
+  },
+  "_sit": {
+   "body_h": 809,
+   "hips_above_feet": 6
+  }
+ },
  "basil_v2": {
   "oops": {
    "file": "poses/basil_v2_oops.png",

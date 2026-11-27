@@ -266,6 +266,11 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (pose === "sit" && o.watch !== undefined && !speaking(who, t) && SPR[`${who}_watch_closed`]) { name = `${who}_watch_` + (o.ooh && SPR[`${who}_watch_ooh`] ? "ooh" : "closed"); wflip = o.watch > x; }
   else if (pose === "sit") { const m = ["closed", "half", "wide"][o.mouth !== undefined && !speaking(who, t) ? o.mouth : mouthOf(who, t)], b = o.eyes === "shut" || blinkAt(who, t); name = `${who}_sit_` + (b ? (m === "closed" ? "blink" : m + "_blink") : m); }
   else name = `${who}_${POSE_SUB[who] && POSE_SUB[who][pose] && !SPR[`${who}_${pose}`] ? POSE_SUB[who][pose] : pose}`;
+  // fix pass 6 (27 Nov): RUNNING. { run: "left"|"right" } shows the teacher's two-frame run cycle (<who>_run_a / _b, painted facing right)
+  // when it exists: A (the stride, with a small hop) and B alternate every .135 s, mirrored for a leftward run; no pose-swap pop (the pose
+  // underneath is unchanged). Until a buddy's run paintings arrive, the scene's free-paws pose (surprised) stands in.
+  if (o.run && SPR[`${who}_run_a`]) { const fa = Math.floor((t + ({ pip: 0, momo: .07, basil: .03 }[who] || 0)) / .135) % 2 === 0; name = `${who}_run_${fa ? "a" : "b"}`; wflip = o.run === "left";
+    rot = 0; sx = 1; sy = 1; lift = fa ? -10 * (h / 380) : 0; }
   const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
   const s0 = h / S.bh * k, fl = (wflip !== null ? wflip : o.flip) ? -1 : 1;
   if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek, why });   // EP15 QA (qa/buddy_faces): which face is on screen, where
