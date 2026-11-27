@@ -38,7 +38,7 @@ function runRain(g, t, s = 1, on1 = 1) { g.drops.forEach((d, i) => { const ph = 
 function nSun(p, r = 60) { const g = el("g", {}, p); g.rays = el("g", {}, g);
   for (let i = 0; i < 12; i++) el("path", {d: `M0 ${-r - 14} V${-r - 40}`, stroke: "#ffbe0b", "stroke-width": 9, "stroke-linecap": "round", transform: `rotate(${i * 30})`}, g.rays);
   el("circle", nA({r, fill: "#ffd60a", "stroke-width": 6}), g); return g; }
-function nArrow(p, len, col = "#ffd166", w = 24) { const g = el("g", {}, p); el("path", {d: `M0 ${-w / 2} H${len - w * 1.5} V${-w * 1.2} L${len} 0 L${len - w * 1.5} ${w * 1.2} V${w / 2} H0 Z`, fill: col, stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g); return g; }
+function nArrow(p, len, col = "#ffd166", w = 24) { const g = el("g", len < 0 ? {transform: "scale(-1 1)"} : {}, p); len = Math.abs(len); el("path", {d: `M0 ${-w / 2} H${len - w * 1.5} V${-w * 1.2} L${len} 0 L${len - w * 1.5} ${w * 1.2} V${w / 2} H0 Z`, fill: col, stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g); return g; }
 // EP1's smoke particle (ep01/pov.js hzMote, copied under our own name): the inset that links to Episode 1
 function nMote(p, r = 24) { const g = el("g", {}, p), k = r / 24, b = blob(g, r * 1.12, "#7d6f5a", 913); set(b, "stroke-width", 4 * k);
   el("ellipse", {cx: -9 * k, cy: -14 * k, rx: 7 * k, ry: 4 * k, fill: "#fff", opacity: .35, transform: `rotate(-30 ${-9 * k} ${-14 * k})`}, g);
@@ -217,7 +217,7 @@ S.povWeak = (() => { const s = scene("povWeak", "#0b3d66", "#1d6fa5"), st = nWho
   s.sgD = el("g", {}, st); el("circle", {cx: P.sg[0], cy: P.sg[1], r: 12, fill: "#e63946", stroke: "#fff", "stroke-width": 4}, s.sgD); nT(s.sgD, P.sg[0] + 20, P.sg[1] + 52, "Singapore", 32);
   nT(st, 700, 640, "Pacific Ocean", 46, "#fff"); nT(st, P.peru[0] - 20, P.peru[1] + 90, "South America", 30, "#fff", {"text-anchor": "end"}); nT(st, 230, 720, "Australia", 30, "#fff");
   // the trade winds: arrows blowing east -> west along the equator
-  s.tw = [0, 1, 2].map(i => { const g = el("g", {}, st); nArrow(g, -240, "#e0f4ff", 30); return g; });
+  s.tw = [0, 1, 2].map(i => { const g = el("g", {}, st); nArrow(g, -240, "#e63946", 30); return g; });
   // rain clouds that follow the warm water
   s.cl = [0, 1, 2].map(i => nRainCloud(st, .55));
   s.sun = nSun(st, 34);
@@ -227,8 +227,8 @@ S.povWeak = (() => { const s = scene("povWeak", "#0b3d66", "#1d6fa5"), st = nWho
   s.pip = nBud(st, "pip");
   s.run = t => { const a = (w, f) => cue("povWeak", w, f), t0 = SC.povWeak.t0, tW = a("weaker", .2), tSl = a("slides", .4), tC = a("clouds", .7);
     const kw = ramp(t, tW - .3, tW + 1.5), ks = ramp(t, tSl - .2, tSl + 3.2), kc = ramp(t, tC - .6, tC + 2.4);
-    s.tw.forEach((g, i) => { const ph = ((t * .5 + i / 3) % 1), x = lerp(1500, 600, ph), L = lerp(1, .35, kw);
-      tf(g, `translate(${x} ${P.yc - 150 + i * 6 + (i - 1) * 90}) scale(${L})`); op(g, Math.sin(ph * Math.PI) * lerp(1, .5, kw)); });
+    s.tw.forEach((g, i) => { const ph = ((t * .5 + i / 3) % 1), x = lerp(1500, 600, ph), L = lerp(1, .55, kw);
+      tf(g, `translate(${x} ${P.yc - 150 + i * 6 + (i - 1) * 90}) scale(${L})`); op(g, Math.sin(ph * Math.PI) * lerp(1, .75, kw)); });
     op(s.warmW, .85 * (1 - ks)); set(s.warmE, "cx", lerp(P.indo[0] + 380, 1150, ks)); op(s.warmE, .85 * ks);
     s.cl.forEach((g, i) => { const x0 = P.sg[0] + 60 + i * 200, x1 = 950 + i * 230; tf(g, `translate(${lerp(x0, x1, Math.max(ks * .6, kc))} ${P.yc - 140 + (i % 2) * 40})`); runRain(g, t + i, .55, 1); });
     tf(s.sun, `translate(${P.sg[0] + 30} ${P.sg[1] - 120}) scale(${Math.max(0, pop(t, tC + 1.6))})`); tf(s.sun.rays, `rotate(${t * 15})`);
@@ -275,10 +275,14 @@ S.waterCycle = (() => { const s = scene("waterCycle", "#8ecae6", "#e0fbfc"), st 
   s.sun = nSun(st, 64); tf(s.sun, "translate(40 150)");
   s.cloud = nCloud(st, 1.15);
   // evaporation: dotted arrows rising from the sea (water vapour is invisible, so it is never drawn as white puffs)
-  s.ev = [0, 1, 2].map(i => el("path", {d: `M${-60 + i * 110} 700 Q${-30 + i * 110} 480 ${300 + i * 60} ${300 + i * 12}`, fill: "none", stroke: "#ffffff", "stroke-width": 8, "stroke-dasharray": "3 18", "stroke-linecap": "round"}, st));
+  s.ev = [0, 1, 2].map(i => el("path", {d: `M${-60 + i * 110} 700 Q${-30 + i * 110} 480 ${440 + i * 50} ${300 + i * 22}`, fill: "none", stroke: "#ffffff", "stroke-width": 8, "stroke-dasharray": "3 18", "stroke-linecap": "round"}, st));
+  // FACES: each vapour path ends in a small white arrowhead pointing along the path (up and towards the cloud)
+  s.evH = [0, 1, 2].map(i => { const ex = 440 + i * 50, ey = 300 + i * 22, cx = -30 + i * 110, cy = 480, a = Math.atan2(ey - cy, ex - cx) * 180 / Math.PI;
+    return el("path", {d: "M-14 -13 L10 0 L-14 13", fill: "none", stroke: "#ffffff", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round", transform: `translate(${ex} ${ey}) rotate(${a.toFixed(2)})`}, st); });
   s.rain = []; for (let i = 0; i < 16; i++) s.rain.push(el("path", {d: "M0 0 l-7 26", stroke: "#1d4ed8", "stroke-width": 7, "stroke-linecap": "round"}, st));
   // the water flows back: from the reservoir and drains to the sea (the cycle closes)
   s.back = el("path", {d: "M600 860 Q420 900 300 860", fill: "none", stroke: "#0077b6", "stroke-width": 10, "stroke-dasharray": "22 14", "stroke-linecap": "round"}, st);
+  s.backH = el("path", {d: "M14 -16 L-12 0 L14 16 Z", fill: "#0077b6", stroke: INK, "stroke-width": 3, "stroke-linejoin": "round", transform: `translate(292 857) rotate(${(Math.atan2(860 - 900, 300 - 420) * 180 / Math.PI - 180).toFixed(2)})`}, st);   // FACES: left, into the sea
   // the things, named in plain white words
   s.L = [["water", 90, 900], ["water vapour", 130, 430], ["clouds", 620, 70], ["rain", 840, 520]].map(([w, x, y]) => nT(st, x, y, w, 38));
   // LOOK CLOSER: a magnifier on the cloud: tiny water droplets, in the liquid state
@@ -290,11 +294,11 @@ S.waterCycle = (() => { const s = scene("waterCycle", "#8ecae6", "#e0fbfc"), st 
   s.run = t => { const a = (w, f) => cue("waterCycle", w, f), t0 = SC.waterCycle.t0, tE = a("evaporates", .12), tC = a("condensation", .32), tCl = a("clouds", .5),
       tR = a("rain", .6), tCy = a("continuous", .7);
     tf(s.sun.rays, `rotate(${t * 12})`);
-    s.ev.forEach(e => { set(e, "stroke-dashoffset", -t * 60); op(e, ramp(t, tE - .2, tE + .4)); });
+    s.ev.forEach(e => { set(e, "stroke-dashoffset", -t * 60); op(e, ramp(t, tE - .2, tE + .4)); }); s.evH.forEach(h => op(h, ramp(t, tE - .2, tE + .4)));
     op(s.L[0], ramp(t, t0, t0 + .4)); op(s.L[1], ramp(t, tE, tE + .4)); op(s.L[2], ramp(t, tCl - .2, tCl + .2)); op(s.L[3], ramp(t, tR - .2, tR + .2));
     tf(s.cloud, `translate(620 210)`);
     s.rain.forEach((d, i) => { const ph = (t * 1.2 + i * .23) % 1; tf(d, `translate(${480 + (i % 8) * 40} ${270 + ph * 420})`); op(d, ramp(t, tR - .1, tR + .3) * (1 - ph)); });
-    set(s.back, "stroke-dashoffset", t * 50); op(s.back, ramp(t, tCy, tCy + .6));
+    set(s.back, "stroke-dashoffset", -t * 50); op(s.back, ramp(t, tCy, tCy + .6)); op(s.backH, ramp(t, tCy, tCy + .6));   // dashes travel from the reservoir to the sea
     const kM = on(t, tC - .3, tCl + 2.2, .4); tf(s.mag, `translate(1010 260) scale(${.2 + .8 * kM})`); op(s.mag, kM);
     popAt(s.look, 1010, 40, t, tC - .3); op(s.look, on(t, tC - .3, tCl + 2.2, .3));
     popAt(s.tE, 200, 560, t, tE + 2.6); popAt(s.tC, 620, 340, t, tC + 2.6); /* after the key-word box has flown to the shelf */ popAt(s.tW, 1010, 760, t, tCy + .4); op(s.tW, on(t, tCy + .4, 1e9, .3)); };
@@ -420,7 +424,7 @@ S.povCloud = (() => { const s = scene("povCloud", "#1d4ed8", "#90e0ef"), st = nW
     const up = ramp(t, t0, tC + 1.5);                                                  // how high we have risen
     tf(s.sea, `translate(0 ${lerp(520, 1250, up)})`);
     s.trails.forEach((o, i) => { const x = o.x + Math.sin(t * .6 + i) * 18; set(o.e, "d", `M${x} 1100 C${x + 40} 700 ${x - 40} 400 ${x + 10} ${80 + o.w * 120}`);
-      set(o.e, "stroke-dashoffset", t * 90); op(o.e, .55 * ramp(t, tE - .3, tE + .6) * (1 - ramp(t, tC + .5, tC + 2))); });
+      set(o.e, "stroke-dashoffset", -t * 90); op(o.e, .55 * ramp(t, tE - .3, tE + .6) * (1 - ramp(t, tC + .5, tC + 2))); });
     const kd = ramp(t, tC - .2, tCl + .4);
     s.drops.forEach(o => { const on1 = clamp((kd - o.u * .8) / .2); tf(o.e, `translate(${o.x + Math.sin(t + o.u * 9) * 6} ${o.y + (1 - on1) * 40})`); op(o.e, on1 * .9); });
     op(s.fog, .55 * ramp(t, tCl - .3, tCl + 1.2));
