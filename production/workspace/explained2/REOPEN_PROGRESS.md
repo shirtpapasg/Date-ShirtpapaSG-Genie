@@ -190,3 +190,6 @@
   - It replaces 22u5mW_m9y8 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI. 22u5mW_m9y8 gets the NEW VERSION line, and FOvUezOZJbo's NEW VERSION line now points to 7OBnZam5Xzs too.
   - chapters_p3.json has key 7OBnZam5Xzs.
   - TheOneApp #269: P4 no. 1 is now 7OBnZam5Xzs. Explored no. 13 was taken out until the fixed EP13 is public.
+- 2026-11-27 ~12:45 UTC: Explored EP13 v2 (5:07, with the habitat section) is live, public, as wo8rAuGzrwE. The teacher replied "ok" to "OK to upload EP13".
+  - The old REexNUS6HK0 was found PUBLIC again; it had been set private at 09:34. It now carries a NEW VERSION line and is out of the Explored playlist. Ask the teacher before making it private.
+  - TheOneApp PR #274 adds NEWS no. 13.
