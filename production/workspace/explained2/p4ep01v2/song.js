@@ -25,7 +25,7 @@ const { SR, Bus, reverb } = require('./audio/dsp'); const I = require('./audio/i
 const PART = process.argv[2] || 1;
 const C = JSON.parse(fs.readFileSync(path.join(__dirname, `cues_p${PART}.json`))), TL = JSON.parse(fs.readFileSync(path.join(__dirname, `tl_p${PART}.json`)));
 const DUR = C.END + .2, N = Math.ceil(DUR * SR), bus = () => new Bus(N), SFX = path.join(__dirname, '..', '..', 'sau', 'sfx');
-const voice = bus(), amb = bus(), verb = bus(), wonder = bus(), game = bus();
+const voice = bus(), amb = bus(), verb = bus(), wonder = bus(); let game = bus();   // game: the sfx bus (a let: the humour pass draws its events into its own bus)
 const BPM = 112, BEAT = 60 / BPM, BAR = 4 * BEAT, FADE = .8;
 const beds = {}; const B = (name) => (beds[name] = { drums: bus(), bass: bus(), keys: bus(), lead: bus(), pad: bus(), brass: bus() });
 // ---------- voices
@@ -310,12 +310,22 @@ Object.assign(P, {
   laughter: (t) => { sfx(t, 'ep05_laugh.wav', .14); },
   stingcut: (t) => { game.addMono(I.scratch(.15), t, .25); },
 });
-let miss = new Set(); C.ev.forEach((e, i) => { if (P[e.k]) P[e.k](e.t, e.v, i); else miss.add(e.k); }); if (miss.size) console.log('no sound for', [...miss]);
+// HUMOUR SFX LOUD (teacher, 27 Nov 2026: "Just make the sound effects for humour louder. Dont be shy."): the comic events (../kit/humour_sfx.js
+// HUMOUR) are drawn on their own, each set 3 dB above the dialogue around it, on their own bus (ducked under the voice, peak-limited); the
+// beds duck under it. Every other event goes to the sfx bus as before.
+const HS = require('../kit/humour_sfx'); const QUIET = process.env.HUMOUR_OLD === '1';
+let miss = new Set(); C.ev.forEach((e, i) => { if (!QUIET && HS.HUMOUR.has(e.k)) return; if (P[e.k]) P[e.k](e.t, e.v, i); else miss.add(e.k); }); if (miss.size) console.log('no sound for', [...miss]);
+const GAME0 = game; const HUM = QUIET ? null : HS.render(C.ev, P, HS.HUMOUR, { setBus: (b) => { game = b || GAME0; }, makeBus: bus, N, SR, voice, voiceGain: 2.3, sfxGain: .75,
+  lines: TL.order.filter((id) => TL.lines[id].who !== 'chant').map((id) => ({ t: TL.lines[id].t, end: TL.lines[id].end })) });
+if (HUM) { MIX.duck([HUM.bus], voice, { depth: HUM.D.DUCK_UNDER_VOICE, release: .2 }); HS.limit(HUM.bus, HUM.D.LIMIT / .75, SR);
+  if (process.env.HUMOUR_REPORT) fs.writeFileSync(path.join(__dirname, 'out', 'humour_report.json'), JSON.stringify(HUM.report, null, 1)); console.log('humour events', HUM.report.length); }
 // ---------- mix: the music ducks under every voice line; the ambience and the journey pad duck a little
 const music = []; for (const bd of Object.values(beds)) music.push(...Object.values(bd));
 MIX.duck(music, voice, { depth: .62, release: .3 }); MIX.duck([amb], voice, { depth: .4, release: .3 }); MIX.duck([wonder], voice, { depth: .35, release: .5 }); MIX.duck([game], voice, { depth: .25, release: .2 });
 MIX.duck([calm], voice, { depth: .4, release: .3 });
+if (HUM) MIX.duck([...music, amb, wonder, calm, game], HUM.bus, { depth: HUM.D.BED_DUCK, release: .25 });   // the beds make room for a gag
 const stems = { amb, wonder, game, voice, calm, verb: reverb(verb, { room: .7, damp: .4 }) }; const GAIN = { amb: 2.0, wonder: .85, game: .75, voice: 2.3, calm: 1.5, verb: .9 };
+if (HUM) { stems.humour = HUM.bus; GAIN.humour = .75; }
 const BG = { drums: .5, bass: .55, keys: 1.6, lead: .9, pad: 1.4, brass: 1.0 };
 for (const [name, bd] of Object.entries(beds)) for (const [k, x] of Object.entries(bd)) { stems[name + '_' + k] = x; GAIN[name + '_' + k] = BG[k] * (name === 'lite' ? .9 : name === 'tense' ? 1.5 : name === 'action' ? 1.15 : 1); }
 const mix = MIX.mixdown(stems, GAIN, { stemDir: process.env.STEMS ? path.join(__dirname, "out", "stems") : null }); MIX.highpass(mix, 30);
