@@ -42,7 +42,7 @@ SC.water = (t, s) => { const tP = MK("pour"), tS = MK("spill"), lvl = clamp((t -
     + x2gSay("w304", 1150, 440, t, { tail: -60 })
     + magCircle(t, LT("w305") + .7, LE("w305") + .6, 760, 300, ...camPt(c, [CHX, DK.y + 4]), "dry", `<rect x="640" y="180" width="240" height="240" fill="url(#deskTop)"/><path d="M640 300 H880" stroke="#A39B8C" stroke-width="4"/><path d="M700 220 h120 l-14 70 h-92z" fill="#E8743B" stroke="${INKG}" stroke-width="5"/>`, 110)
     + x2lab(t, MK("full") - .2, LE("w306"), c, "soil already full of water", 1250, 260, CHX + 10, SOILY(CHK) - 2, 38)
-    + (t >= MK("full") ? TF(1660, 560, spring(t, MK("full"), .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 2, { k: .44, stamp: ["NOT THIRSTY", false, MK("full") + .5] })) : "")
+    + (t >= MK("full") ? TF(1690, 560, spring(t, MK("full"), .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 2, { k: .7, stamp: ["NOT|THIRSTY", false, MK("full") + .5] })) : "")
     + x2HUD(t); };
 
 /* ================================================================ LUNCH · FIX 3, TESTED: FEED IT (Pip's balanced lunch, and the pigeons) ================================================================ */
@@ -79,7 +79,7 @@ SC.lunch = (t, s) => { const tL = MK("koo") + .2, tO = MK("liftoff"), tK = MK("k
     + (t >= tO ? comicWord(t, tO + .05, 1250, 300, "FLAP-FLAP-FLAP!", { size: 70, d: .9 }) : "")
     + x2fine(t, tO, s.t1 - .2, "Please don't feed the pigeons.", 340, 1032)
     + (t >= MK("leafpic") - .2 ? TF(360, 360, spring(t, MK("leafpic") - .2, .45) * (1 - ramp(t, s.t1 - .3, .3)), `<g filter="url(#dropS)"><rect x="-170" y="-130" width="340" height="250" rx="22" fill="#fff" stroke="${P.leaf}" stroke-width="7"/></g><circle cx="-90" cy="-70" r="40" fill="${P.sun}"/>` + [0, 1, 2].map((i) => `<path d="M${-60 + i * 10} -40 L${-10 + i * 25} 10" stroke="${P.sun}" stroke-width="6" stroke-linecap="round"/>`).join("") + `<path d="M-20 60 Q40 -10 120 20 Q60 90 -20 60z" fill="#4FA23A" stroke="#2F6A1E" stroke-width="5"/>` + tpill(0, 150, "leaves: make food", 30, P.leaf, "#fff", { w: 700 })) : "")
-    + (t >= MK("leafpic") + .4 ? TF(1600, 560, spring(t, MK("leafpic") + .4, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 3, { k: .44, stamp: ["NOT FOOD FROM THE SOIL", false, MK("leafpic") + .9] }) + (t >= MK("leafpic") + 1.3 ? TF(0, 150, spring(t, MK("leafpic") + 1.3, .4), tpill(0, 0, "✗ plants eat food from the soil", 26, "#E5484D", "#fff", { w: 700 })) : "")) : "")
+    + (t >= MK("leafpic") + .4 ? TF(1640, 500, spring(t, MK("leafpic") + .4, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 3, { k: .7, stamp: ["NOT FOOD FROM|THE SOIL", false, MK("leafpic") + .9] }) + (t >= MK("leafpic") + 1.3 ? TF(-40, -225, spring(t, MK("leafpic") + 1.3, .4), tpill(0, 0, "✗ plants eat food from the soil", 38, "#E5484D", "#fff", { w: 700 })) : "")) : "")
     + x2HUD(t); };
 
 /* ================================================================ LCPARTS · LOOK CLOSER 1: check every part, like a plant doctor ================================================================ */
@@ -184,17 +184,17 @@ SC.glitch = (t, s) => { const tA = s.t0, low = 1 - eio(clamp((t - LT("g451") - 1
   const ev = MK("ev1"), ev2 = MK("ev2"), ev3 = MK("ev3"), ez = MK("bzzt"), tU = MK("upd"), tSt = MK("stored"), tSc = MK("scan");
   const pk = t >= tSc - .2 && t < ez ? spring(t, tSc - .2, .45) : t >= tU && t < s.t1 ? spring(t, tU, .45) * (1 - ramp(t, s.t1 - .4, .3)) : t >= ez && t < ez + .3 ? 1 - ramp(t, ez, .3) : 0;
   const pic = t < ev2 - .1 ? evRoots() : t < ev3 - .1 ? evPool() : evNoHole();
-  const panel = t < tU ? chestPanel(t, 1, pic + (t < ev ? `<rect x="-210" y="-150" width="420" height="300" fill="#DDF5EC"/>` + T(0, 12, "SCANNING...", 40, INKG) : "")) : chestPanel(t, 1, logCard(t, (t - tSt - .2) / .8, t >= MK("req") + .9 ? 1 : 0));
+  const panel = t < tU ? chestPanel(t, 1, pic + (t < ev ? `<rect x="-280" y="-190" width="560" height="380" fill="#DDF5EC"/>` + T(0, 16, "SCANNING...", 52, INKG) : "")) : chestPanel(t, 1, logCard(t, (t - tSt - .2) / .8, t >= MK("req") + .9 ? 1 : 0));
   const momoX = t < LT("g452") + .4 ? 1360 : lerp(1360, 1420, eo(clamp((t - LT("g452") - .4) / .6)));
-  window._BUBAT = { basil: [480, 400], pip: [760, 330], momo: [1180, 330] };
+  window._BUBAT = { basil: [480, 400], pip: [760, 330], momo: [640, 300] };
   const pipB = x2bc(c, "pip", 700, 965, 330, t, { in: s.t0 - .5, poses: [[0, "surprised"], [LT("g451") + .5, "sit"], [LE("g454") + .1, "sit"], [LT("g455") - .1, "sit"], [LE("g455") + .1, "thinking"], [LT("g459") + .4, "sit"]], look: 8 });
   return x2place("vdv2", "", c) + pipB + CAM(x2desk(t), c[0], c[1], c[2]) + CAM(TF(CHX, DK.y, CHK, chilliV3(t, { body: "wilt", face: "droop", win: t >= tSc - .3 && t < ez + .5 ? 1 : 0, winSt: "rot" })), c[0], c[1], c[2])
     + x2bc(c, "basil", 300, 1030, 350, t, { in: s.t0 - .5, poses: [[0, "surprised"], [LT("g452") + .3, "pointing"], [LE("g452") + .1, "sit"], [LE("g454") - .2, "deadpan"], [LE("g454") + .6, "sit"], [LT("g458") + .2, "oops"], [LT("g459") + .4, "sit"]], look: 8 })
     + CAM(x2glitch(t, s), c[0], c[1], c[2])
     + x2bc(c, "momo", momoX, 1070, 380, t, { in: s.t0 - .5, flip: false, poses: [[0, "surprised"], [LT("g452") + .4, "sit"], [tSc - .1, "pointing"], [LE("g457") + .2, "sit"], [LT("g459") + .1, "sit"], [LE("g459") + .1, "sit"], [LT("g460") + 1.5, "cheer"], [MK("req") + .6, "sit"]], look: 8, mag: t >= tSc - .1 && t < LE("g457") + .2 })
-    + (pk > .01 ? TF(1430, 330, pk * .82, panel) : "")
-    + x2gSay("g451", 1240, 260, t, { tail: 80 }) + x2gSay("g453", 1080, 200, t, { tail: 120 }) + x2gSay("g456", 1180, 240, t, { tail: 100 }) + x2gSay("g458", 1120, 560, t, { tail: 140 }) + x2gSay("g460", 960, 160, t, { tail: 200, maxW: 640 })
+    + (pk > .01 ? TF(1250, 390, pk, panel) : "")
+    + x2gSay("g451", 1240, 260, t, { tail: 80 }) + x2gSay("g453", 1080, 200, t, { tail: 120 }) + x2gSay("g456", 1180, 240, t, { tail: 100 }) + x2gSay("g458", 1120, 560, t, { tail: 140 }) + x2gSay("g460", 620, 200, t, { tail: 300, maxW: 600 })
     + (t >= LT("g451") ? comicWord(t, LT("g451") - .1, 1780, 280, "BEEP-BOOP!", { size: 66, d: .8, rot: 8 }) : "")
-    + (t >= MK("tap") ? TF(1720, 600, spring(t, MK("tap"), .4) * (1 - ramp(t, LT("g454"), .3)), tpill(0, 0, "0 LEAKS ✓", 34, "#fff", INKG, { w: 700 })) : "")
+    + (t >= MK("tap") ? TF(1720, 600, spring(t, MK("tap"), .4) * (1 - ramp(t, LT("g454"), .3)), tpill(0, 0, "0 LEAKS ✓", 48, "#fff", INKG, { w: 700 })) : "")
     + (t >= ez ? comicWord(t, ez + .02, 1760, 330, "BZZT!", { size: 104, d: .9, rot: 10 }) : "")
     + x2HUD(t); };

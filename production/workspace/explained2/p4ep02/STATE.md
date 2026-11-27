@@ -121,3 +121,20 @@ Every 2.5 s of the final video checked as stills (scratchpad `p4ep02review/sweep
 Review material (scratchpad `p4ep02review/`, 960 px with sound, not committed): `review_1_opening.mp4` (0-30 s), `review_2_pigeons_lunch.mp4`
 (1:36-2:09), `review_3_soil_root_window.mp4` (2:23-2:56), `review_4_glitch_crash_and_sting.mp4` (4:13-4:30 + 7:24.5-7:33.2),
 `review_5_water_journey.mp4` (5:31.5-6:04.5), `key_frames.jpg` + `keyframes/` (12), and the three voice test clips.
+
+## Fix pass 1: readable cards (27 Nov 2026, main-session check; NOT uploaded)
+- **The three FIX CARDS were unreadable on a phone** (about 210x225 px, 12 px labels). `x2fixCard` redesigned: labels on two short lines at
+  72 local units (CHECK / EVERY PART, WATER IT / MORE, FEED IT at 80), a big number badge (r 76, 92-unit digit), the picture above the label
+  band, verdict stamps that wrap onto two lines at 64 units. Placed at: fix cards .8 (368x400 px, labels 58 px, cap height about 41 px);
+  lock-in .8 across the lower third (x 600 / 990 / 1380, y 880; the ring moved up to y 345 so its number clears card 2; LOCK IT IN! at
+  1745, 800); picks: the cards rise from the lock-in row to a row over the buddies at .7; the verdict cards in water / lunch / repair at .7
+  (NOT|THIRSTY, NOT FOOD FROM|THE SOIL, FOUND IT,|FIXED IT!; the repair card moved to the upper left, clear of Uncle Lim's face).
+- Other story text enlarged: the KNOWLEDGE LOG panel (560x380 at full size, 40-44-unit lines, moved to (1250, 390) clear of the score and the
+  shelf; the evidence pictures fill it; SCANNING... 52), "✗ plants eat food from the soil" (38, above the card), "0 LEAKS ✓" (48), the
+  TRANSPORT arrow labels (40). Bubbles moved clear of them (Momo's in the GLITCH scene, GLITCH's g460 and r708).
+- Also from the overlap scan: Basil no longer covers Pip's face on the words card (Pip 1480) or in the corridor (Pip 1340); the recap pills
+  are clear of Pip.
+- **Splices** (msplice + verify.py, each VERIFY OK: 13596 frames, decode 0, audio packets bit-identical, every video packet outside the spans
+  bit-identical): spans 20-70, 90-100, 120-130, 240-290, 300-320, 350-370 s; then 120-130, 310-340, 360-400 s. -16.0 LUFS, -2.4 dBTP.
+  face_cover_scan and overlap.js re-run on every changed span: only the by-design runs (the pick cards rising past the faces for one frame,
+  the FOUND IT stamp over the card's own small Chilli). sheet.png, key_frames.jpg and the five review clips remade from the final file.

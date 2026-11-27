@@ -47,10 +47,10 @@ SC.repair = (t, s) => { const tSc = MK("screen"), tFold = LT("r705") - .1, onScr
     + (onScreen ? ["BZZZT!", "SNIP! SNIP!", "SPLOSH!", "FLUMP."].map((w, i) => comicWord(t, tSc + i * .6, 760 + 160 * i, 420 - 30 * (i % 2), w, { size: 64, d: .7, rot: i % 2 ? 6 : -6 })).join("") : "")
     + x2inset(t, MK("holes") - .2, LE("r701") + .3, 960, 250, "holes: water drains out", holesPic(t), P.leaf)
     + x2inset(t, MK("cut") - .2, LE("r702") + .4, 960, 250, "cut off the rotting roots", cutPic(), "#FF9A8F") + x2fine(t, MK("cut"), LE("r703"), "Drills and scissors: an adult's job.", 360, 1032)
-    + x2limSay("r703", 1580, 330, t) + x2limSay("r705", 1560, 330, t) + x2gSay("r704", 1040, 380, t, { tail: -60 }) + x2gSay("r708", 640, 300, t, { tail: -200, maxW: 640 })
+    + x2limSay("r703", 1580, 330, t) + x2limSay("r705", 1560, 330, t) + x2gSay("r704", 1040, 380, t, { tail: -60 }) + x2gSay("r708", 1150, 230, t, { tail: -260, maxW: 640 })
     + (t >= tT + .2 ? comicWord(t, tT + .2, 720, 560, "drip... drip... drip.", { size: 40, tiny: true, col: "#BFE6F7", d: 2.0 }) : "")
     + x2lab(t, LT("r707"), s.t1 - .2, c, "water drains out", 640, 600, CHX - 20, DK.y + 14, 36)
-    + (t >= LT("r707") + .3 ? TF(1650, 520, spring(t, LT("r707") + .3, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 1, { k: .42, stamp: ["FOUND IT, FIXED IT!", true, LT("r707") + .8] })) : "")
+    + (t >= LT("r707") + .3 ? TF(560, 300, spring(t, LT("r707") + .3, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 1, { k: .7, stamp: ["FOUND IT,|FIXED IT!", true, LT("r707") + .8] })) : "")
     + x2HUD(t); };
 
 /* ================================================================ WAIT · two weeks: "Slowly, slowly lah", the time-lapse, Heart's hint #3 ================================================================ */
@@ -72,14 +72,14 @@ SC.wait = (t, s) => { const tL = MK("lapse"), tW = MK("weeks"), corr = t >= tW -
     + TF(PX, PY, PK, chilliV3(t, { body: t >= tL + 3.0 ? "tallr" : body, face: body === "wilt" ? "tall" : body === "tallr" ? (t >= LT("t753") ? "tall" : "tall") : "tall", win: t >= tL && t < tL + 3.2 ? 1 : 0, winSt: "grow", winU: u, mix: null }))
     + (t >= tL - .3 && t < tL + 3.4 ? speeded(t, tL - .3, tL + 3.3, 960, 160) : "")
     + counter(t, dayN, tL + Math.floor(u * 13) / 13 * 3.0, 60, 110, 1)
-    + bud("momo", 430, 380, false) + bud("pip", 1400, 370, true) + bud("basil", 1740, 380, true)
+    + bud("momo", 430, 380, false) + bud("pip", 1340, 370, true) + bud("basil", 1740, 380, true)
     + x2gSay("t753", 960, 250, t, { maxW: 700 }) + logo(t); };
 
 /* ================================================================ BE THE THING: a drop of water in Chilli's pot (quiet) ================================================================ */
 // waitw: the corridor shot stays; the camera pushes into the soil of the pot; the buddies pop out in turn (no fading)
 SC.waitw = (t, s) => { const tS = MK("shrinkw"), z = 1 + 9 * ei(clamp((t - tS) / Math.max(.6, s.t1 - tS))), c = camMix([1, 960, 540], camOn([960, 860 - 146 * 1.05], z, 960, 540), eio(clamp((t - tS) / .8)));
   return CAM(corridorV3(t, 1) + TF(960, 862, 1.1 * 1.05, saucerV3()) + TF(960, 860, 1.05, chilliV3(t, { body: "tallr", face: "tall_happy", talk: false })), c[0], c[1], c[2])
-    + x2bd("momo", 430, 1076, 380, t, { in: s.t0 - .5, poses: [[0, "sit"]], out: MK("be") + 2.4, look: 6 }) + x2bd("pip", 1400, 1076, 370, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], out: MK("be") + 2.6, look: -6 })
+    + x2bd("momo", 430, 1076, 380, t, { in: s.t0 - .5, poses: [[0, "sit"]], out: MK("be") + 2.4, look: 6 }) + x2bd("pip", 1340, 1076, 370, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], out: MK("be") + 2.6, look: -6 })
     + x2bd("basil", 1740, 1076, 380, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], out: MK("be") + 2.8, look: -6 })
     + `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.6 * ss(s.t1 - .5, s.t1, t))}"/>` + logo(t); };
 // the drop (YOU): a round clear drop with eyes and a small smile; FACES its travel (down in the soil, up in the stem)
@@ -120,15 +120,15 @@ SC.transport = (t, s) => { const tU = MK("up_arr"), tD = MK("down_arr");
   const arr = (a, col, dir, x) => t >= a - .1 ? OP(spring(t, a - .1, .4), [0, 1, 2].map((i) => { const ph = ((t - a) * .6 + i / 3) % 1, y = dir > 0 ? lerp(820, 380, ph) : lerp(380, 820, ph); return `<path d="M${x} ${n2(y)} l-16 ${dir * 22} M${x} ${n2(y)} l16 ${dir * 22}" stroke="${col}" stroke-width="10" stroke-linecap="round" fill="none"/>`; }).join("")) : "";
   window._BUBAT = { basil: [560, 300] };
   return x2trSet(t) + arr(tU, "#2C7FB8", 1, TRX.x - 30) + arr(tD, "#3E8E36", -1, TRX.x + 30)
-    + (t >= tU ? tpill(1560, 640, "water + mineral salts: up", 30, "#2C7FB8", "#fff", { w: 700 }) : "") + (t >= tD ? tpill(1560, 460, "food: to other parts", 30, "#3E8E36", "#fff", { w: 700 }) : "")
+    + (t >= tU ? tpill(1660, 660, "water + mineral salts: up", 40, "#2C7FB8", "#fff", { w: 700 }) : "") + (t >= tD ? tpill(1660, 450, "food: to other parts", 40, "#3E8E36", "#fff", { w: 700 }) : "")
     + x2bd("basil", 430, 1076, 480, t, { in: s.t0 - .5, poses: [[s.t0, "sit"], [MK("kw_transport") + .05, "cheer"], [MK("kw_transport") + 2.0, "sit"]], look: 6 })
     + x2bd("momo", 790, 1076, 330, t, { in: s.t0 - .5, poses: [[0, "sit"]], look: 6 }) + x2bd("pip", 1640, 1076, 320, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], look: -6 }) + x2HUD(t); };
 
 /* ================================================================ WORDS · THE WORDS THAT EARN MARKS (Momo reads) ================================================================ */
-const recapV3 = (t, t0) => OP(ramp(t, t0, .4), [["no hole", 640, "over", "#E5484D"], ["cannot absorb", 980, "roots", "#E89A2E"], ["all parts working", 1320, "tall", P.leaf]].map(([w, x, kind, col]) =>
+const recapV3 = (t, t0) => OP(ramp(t, t0, .4), [["no hole", 620, "over", "#E5484D"], ["cannot absorb", 920, "roots", "#E89A2E"], ["all parts working", 1220, "tall", P.leaf]].map(([w, x, kind, col]) =>
   TF(x, kind === "roots" ? 1000 : 1010, kind === "roots" ? 1.2 : .9, recapThumb(t, kind)) + tpill(x, 1036, w, 26, col, "#fff", { w: 700 })).join(""));
 SC.words = (t, s) => markScene(t, s, { id: "m903", sayId: "m902", who: "momo", tab: "WORDS THAT EARN MARKS", text: TL.lines.m903.text, keys: ["roots", "hold", "absorb", "water", "mineral", "salts", "stem", "upright", "transports", "food", "leaves", "make", "system", "likely", "affected"], size: 40, y: 170, footer: FOOT, achieved: true, poses: [[LE("m903") + .2, "sit"]], bin: s.t0 - .5,
-  extra: recapV3(t, s.t0 + 1.2) + x2bd("pip", 1560, 1076, 300, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], look: -4 }) + x2bd("basil", 1820, 1076, 300, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], look: -4 }) });
+  extra: recapV3(t, s.t0 + 1.2) + x2bd("pip", 1480, 1076, 300, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], look: -4 }) + x2bd("basil", 1820, 1076, 300, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"]], look: -4 }) });
 
 /* ================================================================ FINISH · THE COSY END ================================================================ */
 // back at the help desk, two weeks on, seven o'clock: Chilli tall and green with ONE red chilli, in its saucer; the trio round it; Uncle Lim
