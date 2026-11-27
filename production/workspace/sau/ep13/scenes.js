@@ -53,8 +53,10 @@ const nSeg = id => TL.segs.find(s => s.id === id);
 (function () { const files = [...new Set(Object.values(SPR13).map(o => o.file))]; let n = 0, r = false;
   files.forEach(f => { const im = new Image(); im.onload = im.onerror = () => { n++; }; im.src = f; });
   Object.defineProperty(window, "READY", {configurable: true, get() { return r && n >= files.length; }, set(v) { r = v; }}); })();
-function nBud(p, who, aura = true) { const g = el("g", {}, p); g.who = who; g.cur = "";
-  g.aura = aura ? el("ellipse", {rx: 1, ry: 1, fill: BUDCOL[who], opacity: .28}, g) : null; g.imgs = {};
+// NO aura discs (teacher, 27 Nov 2026: "ensure the pet buddies does not have the circular background colour"): a buddy is a plain
+// cut-out, as in the journey. Where a buddy sits on a floor (not riding the wind), "shadow" adds a soft, flat contact shadow under the feet.
+function nBud(p, who, shadow = true) { const g = el("g", {}, p); g.who = who; g.cur = "";
+  g.sh = shadow ? el("ellipse", {rx: 1, ry: 1, fill: INK, opacity: .16}, g) : null; g.imgs = {};
   Object.keys(SPR13).filter(k => k.startsWith(who + "_")).forEach(k => { const S = SPR13[k]; g.imgs[k] = el("image", {href: S.file, width: S.w, height: S.h, opacity: 0}, g); });
   return g; }
 function nTalk(who, t) { let m = -1; for (const id in (window.MOUTH || {})) { const M = MOUTH[id]; if (M.who !== who) continue; const sg = nSeg(id);
@@ -69,7 +71,7 @@ function nShow(g, x, y, h, pose, t, o = {}) { const w = g.who; let name;
   if (g.cur !== name) { if (g.cur) op(g.imgs[g.cur], 0); op(g.imgs[name], 1); g.cur = name; }
   const k = h * (w === "basil" ? .88 : 1) / S.bh * (o.k || 1);
   tf(g.imgs[name], `scale(${(o.flip ? -1 : 1) * k} ${k}) translate(${-S.ax} ${-S.ay})`);
-  if (g.aura) { set(g.aura, "cx", 0); set(g.aura, "cy", -h * .45); set(g.aura, "rx", h * .62); set(g.aura, "ry", h * .62); op(g.aura, o.aura === undefined ? .28 : o.aura); }
+  if (g.sh) { set(g.sh, "cx", 0); set(g.sh, "cy", -h * .01); set(g.sh, "rx", h * .4); set(g.sh, "ry", h * .06); op(g.sh, o.shadow === undefined ? .16 : o.shadow); }
   tf(g, `translate(${x} ${y + (o.bob ? Math.sin(t * 2.2 + x) * o.bob : 0)}) rotate(${o.rot || 0})`); op(g, o.op === undefined ? 1 : o.op); }
 
 /* ======================================================================================================================
@@ -224,7 +226,7 @@ S.povWeak = (() => { const s = scene("povWeak", "#0b3d66", "#1d6fa5"), st = nWho
   // legend (one kind of label: what the colours mean)
   s.leg = el("g", {transform: "translate(1140 840)"}, st); el("rect", {x: 0, y: -26, width: 52, height: 40, rx: 10, fill: "#fb8500", stroke: INK, "stroke-width": 3}, s.leg); nT(s.leg, 66, 6, "warm water", 30, "#fff", {"text-anchor": "start"});
   s.card = chip(st, "THIS YEAR", "#e63946", {fs: 44});
-  s.pip = nBud(st, "pip");
+  s.pip = nBud(st, "pip", false);                                          // on a map: a plain cut-out, no floor, no shadow
   s.run = t => { const a = (w, f) => cue("povWeak", w, f), t0 = SC.povWeak.t0, tW = a("weaker", .2), tSl = a("slides", .4), tC = a("clouds", .7);
     const kw = ramp(t, tW - .3, tW + 1.5), ks = ramp(t, tSl - .2, tSl + 3.2), kc = ramp(t, tC - .6, tC + 2.4);
     s.tw.forEach((g, i) => { const ph = ((t * .5 + i / 3) % 1), x = lerp(1500, 600, ph), L = lerp(1, .55, kw);
@@ -255,7 +257,7 @@ S.thermo = (() => { const s = scene("thermo", "#0b3d66", "#1d6fa5"), st = nWhole
   s.more = el("g", {}, s.th); el("path", nA({d: "M60 -80 L90 -120 L120 -80 Z", fill: "#ffd60a", "stroke-width": 4}), s.more);
   nT(s.more, 140, -76, "more than +2 °C", 34, "#ffd60a", {"text-anchor": "start"});
   s.tag = chip(st, "🔥 SUPER EL NIÑO", "#e63946", {fs: 50});
-  s.momo = nBud(st, "momo");
+  s.momo = nBud(st, "momo", false);                                        // on a map: a plain cut-out
   s.run = t => { const a = (w, f) => cue("thermo", w, f), t0 = SC.thermo.t0, tM = a("middle", .1), tD = a("degrees", .3), tS = a("super", .55), tH = a("heat", .9);
     op(s.box, ramp(t, tM - .2, tM + .3)); op(s.boxL, ramp(t, tM, tM + .3)); const k = ramp(t, tM + .3, tD + 1);
     set(s.merc, "y", lerp(200, -40, k)); set(s.merc, "height", lerp(150, 390, k)); popAt(s.th, 600, 300, t, t0 + .1, 1); op(s.more, ramp(t, tD + .6, tD + 1));
@@ -383,7 +385,7 @@ S.usa = (() => { const s = scene("usa", "#0b3d66", "#1d6fa5"), st = nWhole(s), U
   tf(nCloud(s.leg, .3, "#dfe7ef", "#9fb3c8"), "translate(40 -10)"); nT(s.leg, 90, 0, "wetter than usual", 30, INK, {"text-anchor": "start"});
   tf(nSun(s.leg, 16), "translate(40 55)"); nT(s.leg, 90, 66, "warmer than usual", 30, INK, {"text-anchor": "start"});
   s.src = nT(s.leg, 0, 112, "NOAA winter outlook, Dec 2026 to Feb 2027", 18, INK, {"text-anchor": "start"});
-  s.pip = nBud(st, "pip");
+  s.pip = nBud(st, "pip", false);                                          // on a map: a plain cut-out
   s.run = t => { const a = (w, f) => cue("usa", w, f), tW = a("wetter", .3), tC = a("california", .45), tF = a("florida", .55), tN = a("north", .75);
     s.wet.forEach((g, i) => { tf(g, `translate(${g.p[0]} ${g.p[1] - 20}) scale(${Math.max(0, pop(t, [tC, tW + .6, tF][i]))})`); runRain(g, t + i, .5, 1); });
     s.warm.forEach((g, i) => { tf(g, `translate(${g.p[0]} ${g.p[1]}) scale(${Math.max(0, pop(t, tN + i * .25))})`); tf(g.rays, `rotate(${t * 15})`); });

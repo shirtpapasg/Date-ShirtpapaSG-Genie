@@ -160,3 +160,16 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   -16.0 LUFS, -1.9 dBTP; srt and timings unchanged. Scans: no ghosting, no backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE,
   overlap.js no face, face_cover_scan the same 68 by-design runs (Uncle Lim's face only under the trailer push-in panel at 3:05, as
   before). Every Lim scene checked as stills at full size. Before/after: scratchpad p4items/lim_painted_before_after.jpg.
+
+## Fix pass 6: Momo's scarf everywhere (27 Nov 2026; after the teacher's "All these, check momo's scarf" on the live video; NOT uploaded)
+- The cause: Momo's TALKING set (spr/momo_sit_*: her arms-crossed painting with the lip-sync mouths, about 275 s of the video, e.g. the
+  picks "Team high-five!") and the oops / waving poses still had the code-drawn neckerchief, flat and high, its knot past her outline.
+- Audit (scratchpad v2b/momoaudit.js, every frame at 5 fps, every call path): Momo draws only these sprites: momo_sit_{closed,half,wide,
+  blink,half_blink,wide_blink} (talking), arms_crossed, thinking, pointing, cheer, surprised (the teacher's paintings; hero/horrified/laugh/
+  facepalm/unimpressed resolve to them or to sit/oops), oops, waving. No back view of Momo is on screen.
+- `nk_talk.py`: the teacher's momo_nk_arms_crossed IS the talking painting plus the neckerchief (template match .998), so the painted
+  scarf, knot, tails, strap and medal (the pixels where the two paintings differ, big pieces only, below the mouth) are laid on every
+  talking state -> spr/momo_nkt_sit_<state>.png; and on oops (+48, +8 by her chin) and waving (+14, +20) -> spr/momo_nkt_<pose>.png.
+  The manifest points momo_sit_* / momo_oops / momo_waving at them. items_options.js: MOMO_PAINTED now also holds sit, oops and waving, so
+  no code-drawn neckerchief is drawn anywhere (medalP stays for reference). The magnifier prop (b404, l803) is unchanged.
+- Contact sheet of every scene Momo is in, by pose (63 stills, cropped to her): scratchpad p4items/momo_all_scenes.jpg, checked by eye.
