@@ -199,3 +199,17 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   bit-identical: md5 0acae4446f4fdfdbbd6c4bcd3e3fcef8 before and after, song.js VOICEHASH)**. 7:16.2, -16.0 LUFS, true peak -1.8 dBTP,
   decode 0. Scans: no ghosting, no backwards movers, flicker 10 JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan the same
   by-design set. Review: scratchpad p4items/pigeons_sfx.mp4, sad_trombone.mp4, pip_run.mp4, pip_shocked.jpg, momo_all_scenes.jpg (64).
+
+## Fix pass 7: Momo's and Basil's painted runs (27 Nov 2026; NOT uploaded)
+- The teacher's run paintings (characters/teacher_run_2026-11-27/): momo_run_a / momo_run_b (painted facing LEFT, worried, sweat drops,
+  neckerchief and medal painted in) and basil_run_a (facing right, helmet and badge painted in; his B is still to come). The _alt files are
+  not used. Cut by poses.py (sets momo_run on momo_v2's sitting scale, basil_run on basil_v2's), `run_poses.py` -> spr/<who>_run_<a|b>.png.
+  **B is registered to A by the head** (run_poses.py: template match of A's upper body in B over scales; Momo .991 at x.975, Pip .994), so
+  the head does not jump when the frames swap.
+- lib.js run: Momo's frames are mirrored for a rightward run (painted facing left); Basil (A only) runs with a hop: a rise on the stride,
+  a slight squash on landing, a small rock; when basil_run_b arrives, run_poses.py picks it up and he alternates like Pip and Momo.
+- Used on every run (no code items on the run frames): cold-open entrances, the bell jog-up (facing left), runaway A-C (all three, facing
+  right), runaway D (Basil runs to the ice box, Momo shoves it in facing left, Pip runs in facing right).
+- Render: full re-render to a new file; VERIFY against fix pass 6 (audio bit-identical). Scans: no ghosting, no backwards movers, flicker 10
+  JUMPs (camera cuts) no POP/GONE, overlap.js no face, face_cover_scan the same by-design set. Clips: scratchpad p4items/momo_run.mp4,
+  basil_run.mp4; qa/review_runaway.mp4 and key frames refreshed.
