@@ -194,3 +194,8 @@
   - The old REexNUS6HK0 was found PUBLIC again; it had been set private at 09:34. It now carries a NEW VERSION line and is out of the Explored playlist. Ask the teacher before making it private.
   - TheOneApp PR #274 adds NEWS no. 13.
 - 12:22 UTC 27 Nov: P4 EP1 v2 humour-sfx LOUD remix (audio only, not uploaded): p4ep01v2/p4ep01v2_loud.mp4 (video packets identical to fix pass 8, voice stem identical, -16.0 LUFS, -2.4 dBTP, decode 0); kit/humour_sfx.js + SERIES_FORMAT 9 = the series default from EP2.
+- 2026-11-27 ~13:00 UTC: P4 EP1, loud-humour version (audio-only remix of fix pass 8), is live as XkBQqzYyMdM. The teacher replied "ok" to "OK to replace P4 EP1 with the loud version".
+  - It replaces 7OBnZam5Xzs in both playlists.
+  - FOvUezOZJbo, 22u5mW_m9y8 and 7OBnZam5Xzs all carry NEW VERSION lines pointing to XkBQqzYyMdM.
+  - Chapters are applied.
+  - TheOneApp #269 now has P4 no. 1 = XkBQqzYyMdM.
