@@ -1,0 +1,41 @@
+{
+ "key": "explained-p4-ep01-v2",
+ "parts": [
+  {
+   "key": "explained-p4-ep01-v2",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/p4ep01v2/p4ep01v2.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/p4ep01v2/thumb.jpg",
+   "title": "Basil Lost a Race to a SNAIL! Which Fix Works? | What Is a System? | P4 Science",
+   "description": "Basil is sure that LIGHTER IS FASTER, so he takes the bell, the chain and the brakes off his bike before racing Uncle Lim round the void deck. Pigeons, a snail and a runaway bike later, it's three minutes to the race. Pick the fix: pedal faster, put back all three parts, or put back only the chain and the brakes? Then watch every fix get tested.\n\nIn this video:\n• The problem: Basil in an ice box\n• Pick the fix: 1, 2 or 3?\n• Ten minutes earlier: the bell, the chain and the brakes\n• The runaway bike!\n• The race (and a twist)\n• Look closer: every part has a function\n• Be a link of a bike chain: the parts interact\n• Putting it back together: what is a system?\n• Your body and a tree are systems too\n• The words that earn marks\n• Stay for the blooper after the end!\n\nKey words: function, interact, system.\nThe words that earn marks: A system is made up of different parts. Each part has its own function. The parts interact to perform a function. When one part stops working, the whole system is likely to be affected.\n\nFor parents: this is a story, not a lecture. Children pick a fix with their fingers before each idea is tested, so they think before they are told. It opens the Systems theme of Primary 4 Science (Singapore Primary Science Syllabus 2023). A common mistake it fixes: \"if one part breaks, everything stops\". The syllabus says the whole system is \"likely\" to be affected: a bike with no bell still moves, but less safely. Also fits US NGSS 4-LS1-1 (Grade 4: structures that work together).\nTry it (with an adult): turn a bicycle upside down, turn a pedal by hand, and watch the chain turn the back wheel. Then check the brakes and the bell. Ride safely; check your brakes.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\n#PrimaryScience #Singapore #Systems #TheOneAppExplained",
+   "tags": [
+    "what is a system",
+    "systems for kids",
+    "parts and functions",
+    "primary 4 science",
+    "P4 science systems",
+    "grade 4 science",
+    "how a bicycle works",
+    "bike chain",
+    "bike brakes",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLK9BW3T6kXx4",
+   "after": "FOvUezOZJbo"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "FOvUezOZJbo"
+  }
+ ],
+ "replaces": [
+  "FOvUezOZJbo"
+ ],
+ "retire_old": true,
+ "_note": "P4 EP1 v2 'The Great Void Deck Race' (the teacher's v2 script, approved 26 Nov 2026: 'OK to the EP1 v2 script'), ONE video. Public, Made for Kids (the uploader sets both). REPLACES the old P4 EP01 FOvUezOZJbo (never deleted; it is back in both playlists): with after = FOvUezOZJbo the new video goes in right after it, then retire_old takes the old one out of both playlists (the new one takes its place), and the old one's description gets a first line '▶ NEW VERSION: Basil Lost a Race to a SNAIL! Which Fix Works? <new url>'. It also supersedes the v1 build p4ep01 (and the v1 upload, if one was made unlisted: the main session decides what to do with it). Chapters: production/youtube/chapters_p3.json key P4EP01V2. App moments: p4ep01v2/app_moments.json (videos.js P4 entry no. 1). NOT UPLOADED by the build agent: the main session shows the teacher first."
+}

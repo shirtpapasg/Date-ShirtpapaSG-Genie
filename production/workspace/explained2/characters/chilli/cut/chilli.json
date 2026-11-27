@@ -1,0 +1,48 @@
+{
+ "droop": {
+  "src": "../teacher_ep02_2026-11-27/chilli_droop_tall_pair.jpg",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   71.0,
+   314.0,
+   176.0,
+   89.0
+  ]
+ },
+ "tall": {
+  "src": "../teacher_ep02_2026-11-27/chilli_droop_tall_pair.jpg",
+  "w": 492,
+  "h": 667,
+  "ox": 263.0,
+  "oy": 660.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   177.0,
+   488.0,
+   174.0,
+   117.0
+  ]
+ }
+}

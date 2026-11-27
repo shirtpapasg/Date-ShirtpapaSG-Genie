@@ -1,0 +1,203 @@
+// items_options.js: OPTIONS for the P4 "level-up" items (teacher, 26 Nov 2026: "design choice needs improvement. Momo's necklace is off,
+// and Pip isn't wearing his helmet properly"). NOT loaded by page.html: the live P4 EP1 build is unchanged until the teacher picks.
+// To try an option in the engine, load this file after lib.js and set window.ITEM_OPT, e.g. { pip: "B", momo: "A", basil: "A" }
+// ("live" or unset = lib.js itemsOf as it is now). items_sheet.js renders the comparison sheets.
+// How the items sit IN the paintings: every item is drawn inside the sprite's own transform (sprite pixels; it follows squash, hop, lean
+// and flips), and parts of the painting are drawn AGAIN on top of the item where the item must go BEHIND them: Pip's ears come out over
+// his helmet, his paw stays on top when it touches the helmet or the chin strap, Momo's cheek ruff hides where her cord goes round her
+// neck, her paw closes round the magnifier's handle, her crossed arms hide the tucked handle. (redraw(): the same painting, clipped.)
+// Head and chest landmarks were measured on each painting (sprite pixels) with GRID=1 items_sheet.js.
+(function () {
+window.ITEM_OPT = window.ITEM_OPT || {};
+const r1 = (v) => Math.round(v * 10) / 10;
+const INK = { pip: "#3A3E56", momo: "#2A1E2E", basil: "#1E3442" };   // each painting's own outline colour (sampled)
+// the painting drawn again on top, clipped to the given shapes (sprite pixels)
+const redraw = (name, key, shapes) => { if (!shapes) return ""; const id = `rd_${name}_${key}`; return `<clipPath id="${id}">${shapes}</clipPath><use href="#s_${name}" clip-path="url(#${id})"/>`; };
+// the same, but with a soft (feathered) edge: where the painting's fur crosses an item (an ear base over the helmet) there is no hard line
+const redrawSoft = (name, key, shapes, b = 6) => { if (!shapes) return ""; const id = `rs_${name}_${key}`, S = SPR[name];
+  return `<filter id="${id}f" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="${b}"/></filter><mask id="${id}" maskUnits="userSpaceOnUse" x="0" y="0" width="${S.w}" height="${S.h}"><g fill="#fff" filter="url(#${id}f)">${shapes}</g></mask><use href="#s_${name}" mask="url(#${id})"/>`; };
+const ell = (e) => `<ellipse cx="${e[0]}" cy="${e[1]}" rx="${e[2]}" ry="${e[3]}"${e[4] ? ` transform="rotate(${e[4]} ${e[0]} ${e[1]})"` : ""}/>`;
+// a mask = the painting's own silhouette (so a band round the head ends exactly at the head's outline)
+const silMask = (name) => { const S = SPR[name], id = `sm_${name}`; return [`<mask id="${id}" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="${S.w}" height="${S.h}"><use href="#s_${name}"/></mask>`, id]; };
+const lgr = (id, stops, x2 = 0, y2 = 1) => lg(id, stops, x2, y2);
+
+/* ================================================================ PIP ================================================================ */
+// per pose: cx, rim y (the helmet's front edge, just above the eyebrows), hw (half the head's width), tilt (deg, the eye line), chin,
+// ear ellipses [cx, cy, rx, ry, rot] and any paw that touches the helmet or strap (drawn again on top)
+const PIPH = {   // vx = how far the face (visor) sits right of the skull's middle (the paintings turn the head a little to his left)
+  sit: { cx: 514, rim: 190, hw: 168, vx: 26, tilt: -7, chin: [566, 336], ears: [[350, 146, 54, 80, -14], [612, 116, 46, 76, 10]] },
+  oops: { cx: 368, rim: 177, hw: 170, vx: 20, tilt: -2, chin: [410, 308], ears: [[206, 114, 62, 70, -25], [458, 88, 48, 76, 14]], paws: [[497, 160, 44, 44]] },
+  surprised: { cx: 354, rim: 183, hw: 166, vx: 22, tilt: -4, chin: [386, 344], ears: [[191, 114, 64, 72, -25], [440, 94, 50, 80, 12]] },
+  thinking: { cx: 364, rim: 180, hw: 166, vx: 24, tilt: -9, chin: [418, 302], ears: [[213, 111, 72, 72, -25], [460, 90, 50, 74, 12]], paws: [[474, 324, 38, 46]] },
+  cheer: { cx: 370, rim: 174, hw: 168, vx: 24, tilt: -9, chin: [404, 322], ears: [[220, 106, 70, 72, -25], [475, 91, 50, 74, 12]] },
+  // P4 EP1 v2 (measured 26 Nov 2026 on the spr paintings, grid crops): the three poses v1 did not use
+  pointing: { cx: 350, rim: 184, hw: 162, vx: 20, tilt: -5, chin: [385, 302], ears: [[172, 122, 60, 82, -20], [445, 76, 50, 76, 10]] },
+  arms_crossed: { cx: 368, rim: 182, hw: 166, vx: 24, tilt: -5, chin: [400, 302], ears: [[196, 116, 60, 80, -20], [453, 80, 48, 76, 8]] },
+  waving: { cx: 320, rim: 180, hw: 160, vx: 20, tilt: -5, chin: [345, 302], ears: [[155, 120, 55, 76, -25], [415, 86, 48, 76, 10]] } };
+const PIPCOL = {
+  sun: { id: "hSun", hi: "#FFE08A", mid: "#FFC23D", lo: "#EE9420", vent: "#7A4A12", rim: "#D97F14", visor: "#F2A126" },
+  lilac: { id: "hLil", hi: "#DCCFFF", mid: "#B39BFF", lo: "#8463E6", vent: "#3E2A86", rim: "#7454D6", visor: "#9479F2" } };
+const hk = (H) => H.hw / 150;
+const hpt = (H, x, y) => { const a = H.tilt * Math.PI / 180, k = hk(H); return [H.cx + k * (x * Math.cos(a) - y * Math.sin(a)), H.rim + k * (x * Math.sin(a) + y * Math.cos(a))]; };
+const inHead = (H, inner) => `<g transform="translate(${H.cx} ${H.rim}) rotate(${H.tilt}) scale(${r1(hk(H) * 1000) / 1000})">${inner}</g>`;
+// the helmet shell, local frame: origin = the middle of its front edge, 300 wide; c = colours; o.visor
+function helmetP(c, o = {}) { const ink = INK.pip;
+  const shell = SHELL, vx = o.vx || 0;
+  let s = `<defs>${lgr(c.id + "S", [[0, c.hi], [.5, c.mid], [1, c.lo]], .35, 1)}${lgr(c.id + "V", [[0, c.visor], [1, c.lo]])}</defs>`;
+  s += `<path d="M-150 58 C-120 38 -72 8 0 6 C72 8 120 38 150 58" stroke="${ink}" stroke-width="20" fill="none" opacity=".26" filter="url(#b4)"/>`;   // its shadow on the fur
+  s += `<path d="${shell}" fill="url(#${c.id}S)"/>`;
+  s += `<ellipse cx="-62" cy="-84" rx="52" ry="20" transform="rotate(-24 -62 -84)" fill="#fff" opacity=".5" filter="url(#b4)"/>`;   // the shine
+  for (const [x1, y1, x2, y2, w] of [[0, -106, 0, -52, 17], [-54, -100, -66, -46, 16], [54, -100, 66, -46, 16], [-104, -76, -124, -26, 13], [104, -76, 124, -26, 13]])
+    s += `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${c.vent}" stroke-width="${w}" stroke-linecap="round" opacity=".82"/><path d="M${x1 + 4} ${y1 + 6} L${x2 + 4} ${y2 + 2}" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".35"/>`;
+  s += `<path d="M-148 42 C-118 22 -72 -6 0 -8 C72 -6 118 22 148 42" stroke="${c.rim}" stroke-width="12" fill="none" opacity=".75"/>`;   // the darker edge band
+  s += `<path d="${shell}" fill="none" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>`;
+  if (o.visor !== false) s += `<g transform="translate(${vx} 0)"><path d="M-86 -8 C-48 -20 48 -20 86 -8 C76 8 40 14 0 14 C-40 14 -76 8 -86 -8Z" fill="url(#${c.id}V)" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/><path d="M-60 -6 C-30 -12 30 -12 60 -6" stroke="#fff" stroke-width="3.5" fill="none" opacity=".45" stroke-linecap="round"/></g>`;
+  return s; }
+// goggles, local frame: origin = between the lenses; o.frame colour; o.band = the elastic band's two ends [[x, y], ...] (local)
+function gogglesP(o = {}) { const ink = INK.pip, fr = o.frame || "#2BB5A3"; let s = `<defs>${lgr("gLens", [[0, "#F2FCFF"], [.55, "#BDE9FA"], [1, "#7FC6E6"]], .3, 1)}</defs>`;
+  if (o.band) for (const [sg, e] of [[-1, o.band[0]], [1, o.band[1]]]) { const d = `M${sg * 70} 0 Q${r1((sg * 70 + e[0]) / 2)} ${r1(e[1] * .3 - 8)} ${e[0]} ${e[1]}`; s += `<path d="${d}" stroke="${ink}" stroke-width="19" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${o.bandCol || "#3E4460"}" stroke-width="12" fill="none" stroke-linecap="round"/>`; }
+  s += `<rect x="-14" y="-7" width="28" height="12" rx="5" fill="${fr}" stroke="${ink}" stroke-width="5"/>`;
+  for (const sg of [-1, 1]) s += `<g transform="translate(${sg * 40} 0) rotate(${sg * 5})"><rect x="-34" y="-25" width="68" height="50" rx="23" fill="${fr}" stroke="${ink}" stroke-width="7"/><rect x="-25" y="-17" width="50" height="34" rx="16" fill="url(#gLens)" stroke="${ink}" stroke-width="3" opacity=".97"/><path d="M-15 -7 Q-8 -13 4 -12" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/></g>`;
+  return s; }
+// the chin strap: from under each ear (local anchor) down the cheeks to a buckle under the chin
+function strapP(H) { const ink = INK.pip, B = [H.chin[0], H.chin[1] + 8]; let s = "";
+  for (const sg of [-1, 1]) { const A = hpt(H, sg * 128 + (H.vx || 0) * .5, 40), C = [A[0] + sg * 6, A[1] + (B[1] - A[1]) * .92], d = `M${r1(A[0])} ${r1(A[1])} Q${r1(C[0])} ${r1(C[1])} ${r1(B[0] + sg * 12)} ${r1(B[1])}`;
+    s += `<path d="${d}" stroke="${ink}" stroke-width="14" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#5A5F7A" stroke-width="8" fill="none" stroke-linecap="round"/>`; }
+  return s + `<g transform="translate(${r1(B[0])} ${r1(B[1])}) rotate(${H.tilt})"><rect x="-17" y="-10" width="34" height="20" rx="7" fill="#454A63" stroke="${ink}" stroke-width="5"/><rect x="-9" y="-4" width="18" height="6" rx="3" fill="#A9AFC6"/></g>`; }
+// where an ear comes out through the helmet: the lower edge of its hole, an ink arc on the shell (clipped to the shell)
+const SHELL = "M-153 50 C-172 -30 -126 -118 0 -122 C126 -118 172 -30 153 50 C122 30 72 -2 0 -4 C-72 -2 -122 30 -153 50Z";
+const arcE = (e, a1, a2) => { const R = (e[4] || 0) * Math.PI / 180, p = (t) => { t *= Math.PI / 180; const x = e[2] * Math.cos(t), y = e[3] * Math.sin(t); return `${r1(e[0] + x * Math.cos(R) - y * Math.sin(R))} ${r1(e[1] + x * Math.sin(R) + y * Math.cos(R))}`; };
+  return `M${p(a1)} A${e[2]} ${e[3]} ${e[4] || 0} 0 1 ${p(a2)}`; };
+const earHoles = (name, H) => { const id = `sh_${name}`, k = r1(hk(H) * 1000) / 1000;
+  return `<clipPath id="${id}"><path d="${SHELL}" transform="translate(${H.cx} ${H.rim}) rotate(${H.tilt}) scale(${k})"/></clipPath><g clip-path="url(#${id})">${H.ears.map((e) => `<path d="${arcE([e[0], e[1], e[2] + 2, e[3] + 2, e[4]], 15, 165)}" stroke="${INK.pip}" stroke-width="7" fill="none" stroke-linecap="round"/><path d="${arcE([e[0], e[1], e[2] + 9, e[3] + 9, e[4]], 30, 150)}" stroke="${INK.pip}" stroke-width="8" fill="none" opacity=".22"/>`).join("")}</g>`; };
+function pipItem(op, name, H) { const top = redraw(name, "e", H.ears.map(ell).join("")) + redraw(name, "p", (H.paws || []).map(ell).join("")), holes = op === "C" ? "" : earHoles(name, H);
+  if (op === "A") return inHead(H, helmetP(PIPCOL.sun, { vx: H.vx })) + strapP(H) + holes + top;
+  if (op === "B") return inHead(H, helmetP(PIPCOL.lilac, { visor: false }) + TF(-6, -44, .95, gogglesP({ frame: "#FF8A3D", band: [[-150, 18], [150, 18]], bandCol: "#5B3FB8" }))) + strapP(H) + holes + top;
+  if (op === "C") { const [m, id] = silMask(name); return `<defs>${m}</defs><g mask="url(#${id})">${inHead(H, `<path d="M-170 2 C-110 -40 110 -40 170 2" stroke="${INK.pip}" stroke-width="22" fill="none"/><path d="M-170 2 C-110 -40 110 -40 170 2" stroke="#3E4460" stroke-width="14" fill="none"/>`)}</g>`
+    + inHead(H, TF(H.vx * .6, -30, 1.18, gogglesP({ frame: "#2BB5A3" }))) + top; }
+  return ""; }
+
+/* ================================================================ MOMO ================================================================ */
+// per pose: chin (the middle of the jaw), pend (where the magnifier hangs: on the chest, or resting on her crossed arms), ruff = the lower
+// face drawn again over the cord's ends (the cord goes round her neck under the fur), arms = the crossed arms (B: the handle tucked under),
+// hold = B: [paw ellipse, lens centre, lens r] (the paw drawn again over the handle: she grips it), tuck = B: [lens x, y, r] beside the
+// crossed arms (the handle goes under them), tail = C: the top of the tail's tuft (the tuft drawn again over the handle)
+const MOMOH = {
+  sit: { chin: [440, 270], pend: [452, 338], ruff: [442, 232, 116, 50, 4], arms: [548, 404, 108, 62], tuck: [622, 322, 32], tail: [234, 322] },
+  arms_crossed: { chin: [270, 254], pend: [278, 334], ruff: [272, 222, 112, 54, 3], arms: [350, 388, 92, 54], tuck: [414, 318, 32], tail: [80, 305] },
+  pointing: { chin: [263, 251], pend: [270, 334], ruff: [264, 218, 112, 54, 0], tail: [50, 305] },
+  thinking: { chin: [268, 254], pend: [262, 336], ruff: [266, 222, 112, 54, -4], hold: [[372, 292, 36, 46], [408, 196], 40], tail: [48, 305] },
+  waving: { chin: [270, 276], pend: [266, 350], ruff: [268, 240, 112, 56, -4], tail: [46, 305] },
+  surprised: { chin: [290, 280], pend: [292, 356], ruff: [286, 246, 112, 56, -6], hold: [[389, 284, 36, 44], [432, 186], 38], tail: [64, 299] },
+  cheer: { chin: [290, 286], pend: [292, 362], ruff: [288, 252, 112, 56, -4], hold: [[462, 186, 36, 38], [470, 92], 38], tail: [62, 299] },
+  oops: { chin: [318, 262], pend: [322, 338], ruff: [318, 228, 112, 52, 0], tail: [40, 305] } };   // P4 EP1 v2 (measured 26 Nov)
+// the magnifier, origin = the lens centre; r = lens radius; a = the handle's angle (deg from straight down, + = to her right)
+function magP(r, a = 25, o = {}) { const ink = INK.momo, L = r * 1.45, hx = Math.sin(a * Math.PI / 180), hy = Math.cos(a * Math.PI / 180), x1 = r1(hx * r * .95), y1 = r1(hy * r * .95), x2 = r1(hx * (r + L)), y2 = r1(hy * (r + L));
+  return `<defs>${lgr("mRim", [[0, "#FFE19A"], [.5, "#E8B04A"], [1, "#B9782A"]], .3, 1)}${lgr("mWood", [[0, "#B8743E"], [1, "#7C4520"]], 1, 0)}${rg("mGlass", [[0, "#FFFFFF", .95], [.7, "#D6F1FF", .85], [1, "#A9DDF5", .9]], .38, .35, .7)}</defs>`
+    + `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${ink}" stroke-width="${r1(r * .52)}" stroke-linecap="round"/><path d="M${x1} ${y1} L${x2} ${y2}" stroke="url(#mWood)" stroke-width="${r1(r * .34)}" stroke-linecap="round"/>`
+    + `<circle r="${r}" fill="url(#mGlass)"/><circle r="${r}" fill="none" stroke="${ink}" stroke-width="${r1(r * .42)}"/><circle r="${r}" fill="none" stroke="url(#mRim)" stroke-width="${r1(r * .24)}"/>`
+    + `<path d="M${r1(-r * .55)} ${r1(-r * .2)} A${r1(r * .6)} ${r1(r * .6)} 0 0 1 ${r1(-r * .1)} ${r1(-r * .58)}" stroke="#fff" stroke-width="${r1(r * .16)}" fill="none" stroke-linecap="round"/>`
+    + (o.loop ? `<circle cx="0" cy="${r1(-r - r * .22)}" r="${r1(r * .2)}" fill="none" stroke="${ink}" stroke-width="${r1(r * .16)}"/>` : ""); }
+/* N (P4 EP1 v2, teacher 26 Nov: "around the neck. Please check! if cannot, use something else"): Momo's paintings have almost no neck,
+   so a thin cord under the chin read as a second smile. Instead a scientist's NECKERCHIEF: a teal band (white dots) knotted round her neck
+   at the head/chest join, well below her mouth, its ends tucked out of sight behind the cheek fur at both sides, a triangle on her chest,
+   and the small magnifier hanging from a ring at the triangle's tip. Fitted per pose from the measured chin (join = chin + 38). */
+function momoScarf(name, H) { const ink = INK.momo, [cx, cy0] = H.chin, cy = cy0 + 38, hw = 112, sag = 16, th = 24, tri = 64; let s = `<defs>${lgr("mScarf", [[0, "#3FC2AE"], [1, "#1F8F7E"]])}</defs>`;
+  const band = `M${cx - hw} ${cy - 10} Q${cx} ${cy + sag} ${cx + hw} ${cy - 10} L${cx + hw - 6} ${cy - 10 + th} Q${cx} ${cy + sag + th + 4} ${cx - hw + 6} ${cy - 10 + th}Z`;
+  s += `<path d="M${cx - 54} ${cy + 8} L${cx + 54} ${cy + 8} L${cx + 6} ${cy + tri + 10} Q${cx} ${cy + tri + 16} ${cx - 6} ${cy + tri + 10}Z" fill="url(#mScarf)" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/>`;   // the triangle on her chest
+  s += `<path d="${band}" fill="url(#mScarf)" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/>`;
+  for (let i = 0; i < 7; i++) { const u = (i + .5) / 7, x = cx - hw + 2 * hw * u, y = cy - 10 + 4 * sag * u * (1 - u) + th * .5; s += `<circle cx="${r1(x)}" cy="${r1(y)}" r="3.6" fill="#fff" opacity=".85"/>`; }
+  for (const [dx, dy] of [[-22, 30], [18, 34], [-2, 54]]) s += `<circle cx="${cx + dx}" cy="${cy + dy}" r="3.4" fill="#fff" opacity=".85"/>`;
+  s += `<path d="M${cx - hw + 4} ${cy - 6} q-6 ${th * .5} 2 ${th - 4} M${cx + hw - 4} ${cy - 6} q6 ${th * .5} -2 ${th - 4}" stroke="${ink}" stroke-width="5" fill="none" opacity=".45"/>`;   // the band turns away round her neck
+  s += `<g transform="translate(${cx - 58} ${cy + 10})"><ellipse rx="15" ry="12" fill="#2BA58E" stroke="${ink}" stroke-width="5"/><path d="M-6 8 l-10 22 l12 -6z M6 8 l6 22 l-12 -6z" fill="#2BA58E" stroke="${ink}" stroke-width="4" stroke-linejoin="round"/></g>`;   // the knot
+  s += redraw(name, "ruffL", ell([cx - hw - 6, cy - 14, 26, 30, 0])) + redraw(name, "ruffR", ell([cx + hw + 6, cy - 14, 26, 30, 0]));   // the ends go behind the cheek fur
+  s += medalP(cx, cy + tri + 16);   // (27 Nov) the teacher's painting: a gold medal on a short black loop (the magnifier became a hand-held prop)
+  return s + (H.hold ? redraw(name, "spaw", ell(H.hold[0])) : ""); }   // a raised paw stays in front of the scarf
+// the gold medal of the teacher's neckerchief paintings (27 Nov 2026), matched to them by eye at full size: its centre 32 px below the
+// triangle's tip, 48 px across (with its outline), a short black strap, a small gold ring, a darker rim and two diagonal shines. Origin = the triangle's tip.
+function medalP(x, y) { const ink = INK.momo, c = y + 32, r = 24;
+  return `<defs>${lgr("mGold", [[0, "#FFE27A"], [.55, "#F2B632"], [1, "#C98A1E"]], .2, 1)}</defs><rect x="${x - 4}" y="${y - 2}" width="8" height="12" rx="2" fill="#1E1A22"/>`
+    + `<circle cx="${x}" cy="${y + 11}" r="5" fill="none" stroke="#D9A441" stroke-width="3"/><circle cx="${x}" cy="${c}" r="${r}" fill="url(#mGold)" stroke="${ink}" stroke-width="3.5"/>`
+    + `<circle cx="${x}" cy="${c}" r="${r - 6}" fill="none" stroke="#C98A1E" stroke-width="3"/><path d="M${x - 11} ${c + 6} L${x + 5} ${c - 12} M${x - 5} ${c + 12} L${x + 11} ${c - 6}" stroke="#FFF3C2" stroke-width="3" stroke-linecap="round" opacity=".9"/>`; }
+// (27 Nov) the five poses the teacher painted WITH the neckerchief and medal: no code-drawn overlay on them
+const MOMO_PAINTED = new Set(["arms_crossed", "thinking", "pointing", "cheer", "surprised", "sit", "oops", "waving"]);   // sit = the talking set, with the painted scarf laid on by nk_talk.py (fix pass 6)
+// the hand-held magnifier (27 Nov): only while the scene passes { mag: true } to Momo (b404 "But WHY does it go ring?", l803 the look-closer), held
+// up in her raised pointing paw: the lens above the paw, the handle into the fist, the fist drawn again over the handle
+function momoMagHeld(name) { return TF(526, 182, 1, magP(34, -26)) + redraw(name, "magpaw", ell([480, 272, 36, 31])); }
+function momoItem(op, name, H, o) { const ink = INK.momo;
+  if (op === "N") { const key = poseKey("momo", name); if (MOMO_PAINTED.has(key)) return key === "pointing" && o && o.mag ? momoMagHeld(name) : ""; return momoScarf(name, H); }
+  if (op === "A") { const [px, py] = H.pend, r = 30, top = [px, py - r - 7], [cx, cy] = H.chin; let s = "";
+    for (const sg of [-1, 1]) { const a = [cx + sg * 64, cy - 10], d = `M${a[0]} ${a[1]} Q${r1(cx + sg * 56)} ${r1(top[1] - 4)} ${r1(top[0] + sg * 4)} ${r1(top[1])}`;
+      s += `<path d="${d}" stroke="${ink}" stroke-width="10" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#1FA08C" stroke-width="5.5" fill="none" stroke-linecap="round"/>`; }
+    return s + redraw(name, "ruff", ell(H.ruff)) + TF(px, py, 1, magP(r, 16, { loop: true })); }
+  if (op === "B") { if (H.tuck) { const [x, y, r] = H.tuck, a = Math.atan2(H.arms[0] - x, H.arms[1] - y) * 180 / Math.PI; return TF(x, y, 1, magP(r, a)) + redraw(name, "arms", ell(H.arms)); }
+    if (H.hold) { const [paw, [lx, ly], r] = H.hold, a = Math.atan2(paw[0] - lx, paw[1] - ly) * 180 / Math.PI; return TF(lx, ly, 1, magP(r, a)) + redraw(name, "paw", ell(paw)); }
+    return ""; }
+  if (op === "C") { const [tx, ty] = H.tail, r = 32;   // the tail's tip curls round the handle: the tuft is drawn again over it
+    return TF(tx + 6, ty - r - 22, 1, magP(r, -4)) + redraw(name, "tail", ell([tx, ty + 44, 46, 50])); }
+  return ""; }
+
+/* ================================================================ BASIL ================================================================ */
+// A: the badge pinned on the upper chest (where a lab badge is worn), at the side of the chest away from the paws in each pose, a
+// little tilt, a clip and a soft shadow; the card in the paintings' palette (cream card, teal band, ink outline), words always readable
+const BASH = { sit: [470, 360, -6], oops: [400, 300, -5], waving: [372, 290, 0], thinking: [376, 300, -6], worried: [376, 300, -6], surprised: [402, 292, -6], pointing: [352, 318, -6],
+  cheer: [352, 330, -6], arms_crossed: [382, 300, -6], laughing: [296, 318, -6] };
+/* P4 EP1 v2 (26 Nov 2026, the coordinator: "BASIL rides, so Basil needs a proper bike helmet (same style family as Pip's B, buckled,
+   ears/spines handled sensibly) whenever he rides"): Pip's helmet shell (the same vents, shine, edge band and visor) in sun-orange, sitting
+   down on Basil's crown above his eyes, so it covers the crest spines on top of his head; the spines along his back and the sides of his
+   head still show below its rim; a chin strap down his cheeks to a buckle on top of his beard. window.BASIL_HELMET (true in P4 EP1 v2) or
+   o.helmet switches it; head landmarks per pose (sprite px): cx, rim (the helmet's front edge, just above the eyes), hw (half the head's
+   width), tilt, chin (the buckle), paws (a paw that touches the helmet, drawn again on top). */
+const BASILH = {
+  sit: { cx: 434, rim: 152, hw: 168, vx: 22, tilt: -3, chin: [470, 268] },
+  oops: { cx: 345, rim: 86, hw: 160, vx: 20, tilt: -6, chin: [392, 214], paws: [[470, 66, 54, 50]] },
+  surprised: { cx: 345, rim: 76, hw: 162, vx: 22, tilt: -4, chin: [380, 236] },
+  arms_crossed: { cx: 357, rim: 80, hw: 162, vx: 22, tilt: -3, chin: [400, 202] },
+  cheer: { cx: 347, rim: 72, hw: 158, vx: 22, tilt: -4, chin: [382, 244] },
+  laughing: { cx: 340, rim: 86, hw: 170, vx: 22, tilt: -2, chin: [382, 214] },
+  pointing: { cx: 352, rim: 78, hw: 160, vx: 22, tilt: -4, chin: [392, 196] },
+  thinking: { cx: 357, rim: 76, hw: 158, vx: 22, tilt: -3, chin: [402, 206] },
+  worried: { cx: 352, rim: 78, hw: 158, vx: 22, tilt: -3, chin: [402, 198] },
+  waving: { cx: 345, rim: 78, hw: 160, vx: 22, tilt: -3, chin: [400, 234] } };
+const BASILCOL = { id: "hBas", hi: "#FFD58A", mid: "#FFA63D", lo: "#E2761C", vent: "#7A3E12", rim: "#C9661A", visor: "#F28A2E" };
+function basilHelmet(name, H) { const ink = INK.basil; let st = "";
+  // the chin strap: from the helmet's edge down each cheek to the corner of his jaw, where it goes UNDER the jaw (a lizard's jaw line is
+  // his mouth line, so a strap across the face would read as a mouth or a microphone); a small buckle on the near side
+  for (const sg of [-1, 1]) { const A = hpt(H, sg * 138 + (H.vx || 0) * .5, 30), J = [H.cx + (H.vx || 0) * .4 + sg * H.hw * .8, H.chin[1] - 18], C = [A[0] + sg * 14, (A[1] + J[1]) / 2], d = `M${r1(A[0])} ${r1(A[1])} Q${r1(C[0])} ${r1(C[1])} ${r1(J[0])} ${r1(J[1])}`;
+    st += `<path d="${d}" stroke="${ink}" stroke-width="13" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#4A5A66" stroke-width="7" fill="none" stroke-linecap="round"/>`;
+    if (sg > 0) st += `<g transform="translate(${r1(C[0])} ${r1(C[1] + 6)}) rotate(${80 + H.tilt})"><rect x="-13" y="-8" width="26" height="16" rx="5" fill="#3B4A56" stroke="${ink}" stroke-width="4"/></g>`; }
+  const top = redraw(name, "bp", (H.paws || []).map(ell).join(""));
+  return inHead({ ...H, hw: H.hw * 1.04 }, helmetP(BASILCOL, { vx: H.vx })) + st + top; }
+window.basilHelmetOn = () => window.BASIL_HELMET !== false;
+function basilItem(op, name, H, fl, o = {}) { const HH = BASILH[poseKey("basil", name)], hel = (o.helmet !== undefined ? o.helmet : window.basilHelmetOn()) && HH ? basilHelmet(name, HH) : "";
+  return hel + basilBadge(op, name, H, fl); }
+function basilBadge(op, name, H, fl) { if (op !== "A") return ""; const ink = INK.basil, [x, y, a] = H;
+  const card = `<g transform="translate(3 6)" opacity=".28" filter="url(#b4)"><rect x="-62" y="-40" width="124" height="84" rx="12" fill="${ink}"/></g>`
+    + `<rect x="-62" y="-40" width="124" height="84" rx="12" fill="#FFF8EA" stroke="${ink}" stroke-width="5"/><path d="M-62 -16 V-28 a12 12 0 0 1 12 -12 H50 a12 12 0 0 1 12 12 V-16z" fill="#2BA58E"/><path d="M-62 -16 H62" stroke="${ink}" stroke-width="3"/>`
+    + T(0, -21, "P4 LAB", 17, "#fff") + T(0, 16, "SCIENTIST", 17, ink) + `<rect x="-40" y="24" width="80" height="6" rx="3" fill="#2BA58E" opacity=".35"/>`
+    + `<rect x="-12" y="-52" width="24" height="18" rx="5" fill="#C9D1DA" stroke="${ink}" stroke-width="4"/><circle cx="0" cy="-44" r="3.5" fill="${ink}"/>`;
+  return TF(x, y, 1, `<g transform="rotate(${a}) scale(${fl} 1)">${card}</g>`); }
+
+/* ================================================================ the switch ================================================================ */
+window.ITEM_REC = { pip: "B", momo: "A", basil: "A" };   // what the sheets mark RECOMMENDED
+window.ITEM_LABEL = {
+  pip: { live: ["Now (live build)", "helmet perched on top", "like a bowl; ears out", "under it; straps hang", "loose in the air"],
+    A: ["A: sun-yellow", "bike helmet", "sits down on the skull,", "ears out through it,", "visor, chin strap", "+ buckle; no goggles"],
+    B: ["B: helmet +", "goggles (P4 item)", "lilac helmet, goggles", "pushed up on its front,", "chin strap + buckle"],
+    C: ["C: goggles only", "(no helmet)", "band round the head", "behind the ears,", "lenses up on the crown.", "NOT for bike scenes"] },
+  momo: { live: ["Now (live build)", "cord starts at her", "mouth; big pendant", "hangs over her arms"],
+    A: ["A: short cord,", "done right", "cord goes under her", "cheek ruff; small", "magnifier rests on the", "chest / on her arms"],
+    B: ["B: carried, not worn", "tucked under her", "crossed arms; held up", "in her paw when she", "thinks / is surprised /", "cheers; none otherwise"],
+    C: ["C: carried in her tail", "the tail's tip curls", "round the handle; the", "lens stands up beside", "her; never on her", "face, paws or belly"] },
+  basil: { live: ["Now (live build)", "flat white card,", "big; same place on", "every pose"],
+    A: ["A: badge re-pinned", "smaller cream card,", "clip + soft shadow,", "slight tilt, moved", "clear of his paws"] } };
+const _orig = itemsOf;
+const GRID = (name) => { const S = SPR[name]; let s = ""; for (let x = 0; x <= S.w; x += 25) s += `<path d="M${x} 0 V${S.h}" stroke="${x % 100 ? "#f99" : "#e00"}" stroke-width="${x % 100 ? 1 : 2}" opacity=".7"/>`; for (let y = 0; y <= S.h; y += 25) s += `<path d="M0 ${y} H${S.w}" stroke="${y % 100 ? "#99f" : "#00e"}" stroke-width="${y % 100 ? 1 : 2}" opacity=".7"/>`;
+  for (let x = 0; x <= S.w; x += 100) for (let y = 0; y <= S.h; y += 100) s += `<text x="${x + 3}" y="${y + 18}" font-size="18" fill="#000">${x},${y}</text>`; return s; };
+itemsOf = function (who, name, fl, o) { const op = window.ITEM_OPT[who]; if (!op || op === "live") return _orig(who, name, fl, o); if (op === "grid") return GRID(name);
+  const key = poseKey(who, name);
+  if (who === "pip") { const H = PIPH[key]; if (!H) return _orig(who, name, fl, o); if (op !== "C" && o.helmet === false) return ""; return pipItem(op, name, H); }
+  if (who === "momo") { const H = MOMOH[key]; return H ? momoItem(op, name, H, o) : (op === "N" ? "" : _orig(who, name, fl, o)); }
+  if (who === "basil") { const H = BASH[key]; return H ? basilItem(op, name, H, fl, o) : _orig(who, name, fl, o); }
+  return _orig(who, name, fl, o); };
+})();
