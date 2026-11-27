@@ -16,6 +16,12 @@
    "#4cc9f0"
   ],
   [
+   "hab1",
+   "habitat",
+   "HABITAT",
+   "#2d6a4f"
+  ],
+  [
    "wind6",
    "nino",
    "EL NIÑO",
@@ -205,6 +211,93 @@
    "scene": "povWeak",
    "who": "pip",
    "text": "Wait for us, clouds!"
+  },
+  {
+   "id": "hab1",
+   "scene": "povReef",
+   "soft": true,
+   "text": "In strong El Niño years, the warm water spreads over coral reefs. A reef is the habitat of many sea animals.",
+   "sfx": [
+    [
+     "sea_wash",
+     0.2
+    ],
+    [
+     "wind",
+     3.0
+    ]
+   ]
+  },
+  {
+   "id": "hab2",
+   "scene": "povReef",
+   "soft": true,
+   "text": "Too much heat turns the corals white. This is called coral bleaching. If it lasts too long, the corals die.",
+   "sfx": [
+    [
+     "sea_wash",
+     1.0
+    ]
+   ],
+   "hold": 0.4
+  },
+  {
+   "id": "hab3",
+   "scene": "povCoast",
+   "soft": true,
+   "text": "Near South America, the small fish become hard to find. Sea lions and seabirds go hungry, and many of their babies die.",
+   "sfx": [
+    [
+     "sea_wash",
+     0
+    ],
+    [
+     "wind",
+     3.0
+    ]
+   ]
+  },
+  {
+   "id": "pipH",
+   "scene": "povCoast",
+   "who": "pip",
+   "text": "Oh no. The poor little pups.",
+   "hold": 0.3
+  },
+  {
+   "id": "hab4",
+   "scene": "povForest",
+   "soft": true,
+   "text": "Back near Singapore, ponds dry up, and the fish in them die. Dry peat forests burn, and orangutans lose their home.",
+   "sfx": [
+    [
+     "wind",
+     0
+    ],
+    [
+     "crackle",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "basilH",
+   "scene": "povForest",
+   "who": "basil",
+   "text": "Somebody help them!"
+  },
+  {
+   "id": "hab5",
+   "scene": "povForest",
+   "soft": true,
+   "text": "Rescue teams do. They carry orangutans to safer forests."
+  },
+  {
+   "id": "hab6",
+   "scene": "povForest",
+   "soft": true,
+   "text": "When a habitat changes too much, living things must adapt, move to other places, or die.",
+   "hold": 0.6
   },
   {
    "id": "wind6",

@@ -16,6 +16,17 @@ python3 build_page.py ep13/ep13_segments.json ep13/ep13_tl.json common.js,ep13/g
 ```
 
 
+## v2 (27 Nov 2026): the habitat section built (version A + the syllabus line), NOT uploaded
+
+The teacher (27 Nov): "Both habitats are real and well researched. Can do A & B? Make it longer is fine." -> version A in full (coral
+bleaching spoken) + "When a habitat changes too much, living things must adapt, move to other places, or die." Countdown kept; the plain
+Explored buddies (no P4 items). hab1..hab6 in `make_segments.py` between pip2 and wind6 (scenes povReef, povCoast, povForest in
+`habitat.js`, now in build.sh's LIBS); key word HABITAT; natural sound only (sea_wash, wind, crackle; `build_tl13.py` stops on any pad_*).
+Rescued orangutans calm in the green forest; three chips ADAPT / MOVE / OR DIE on hab6. Episode **5:07.1** (END 307.104 incl. the end card;
+was 4:13.4). Rendered to `ep13_v2.mp4` (scratchpad render_v2.sh = render_all.sh's mix); ep13.mp4 (REexNUS6HK0) kept. Chapters, app moments
+(`app_moments.json`) and the `sau-ep13-v2` upload entry (hold, no "at": not scheduled) from `make_upload.py`. Thumbnail re-made without
+Pip's disc.
+
 ## PHASE 2 (26 Nov 2026): rendered, NOT uploaded
 
 The teacher's answers (26 Nov): "1 no level, 2 yes, 4 EP13, 3 Dec OK".

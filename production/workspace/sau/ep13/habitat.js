@@ -6,7 +6,7 @@
      povReef   the middle of the Pacific (Kiritimati, inside NOAA's Nino 3.4 box), 2015-16: the corals bleach white, then dull; the fish leave
      povCoast  the Galapagos Islands, 1982-83: the small fish swim away and down; a sea lion and her thin pup, a booby by an empty nest
      povForest Borneo, Indonesia, 2015: a dried-up pond with two fish lying still, a burnt peat forest smouldering underground, an orangutan
-               mother and baby on a burnt log; then "Rescue teams do": the pair is carried (the arrow) to a green, safer forest */
+               mother and baby on a burnt log; then "Rescue teams do": the pair is carried (the arrow) to a green, safer forest; then "adapt, move to other places, or die" (3 chips) */
 
 // the riding buddies, as in the other journey shots (feet on the curl of wind, back view; the one who speaks turns round)
 function hRide(s, st) { s.curl = el("path", {d: "M-260 0 Q-120 -60 0 -20 Q120 20 260 -30", fill: "none", stroke: "#fff", "stroke-width": 16, "stroke-linecap": "round", opacity: .8}, st);
@@ -69,8 +69,9 @@ S.povReef = (() => { const s = scene("povReef", "#0aa1c2", "#06768f"), st = nWho
       const A = hex(c.col), Bw = hex("#f6f4ee"), Dd = hex("#9c917c"), col = "rgb(" + A.map((v, j) => Math.round(lerp(lerp(v, Bw[j], k1), Dd[j], k2 * .85))).join(",") + ")";   // living colour -> white -> dull (mix() cannot nest)
       c.parts.forEach(p => set(p, c.kind === "stroke" ? "stroke" : "fill", col)); });
     const leave = ramp(t, tW + 1, tD + .6);      // the fish leave the white, then dead, reef
-    s.fish.forEach((o, i) => { const sw = Math.sin(t * .7 + o.ph) * 60, x = o.x0 + sw + o.dir * leave * 1400 * (1 + i * .08), y = o.y + Math.sin(t * 1.3 + o.ph) * 10;
-      const dirNow = leave > .01 ? o.dir : (Math.cos(t * .7 + o.ph) >= 0 ? 1 : -1);    // FACES: the way it is swimming
+    const fx = (o, i, tt) => o.x0 + Math.sin(tt * .7 + o.ph) * 60 + o.dir * ramp(tt, tW + 1, tD + .6) * 1400 * (1 + i * .08);
+    s.fish.forEach((o, i) => { const x = fx(o, i, t), y = o.y + Math.sin(t * 1.3 + o.ph) * 10;
+      const dirNow = fx(o, i, t + .05) - x >= 0 ? 1 : -1;                               // FACES: the way it is actually moving
       tf(o.e, `translate(${x} ${y}) scale(${dirNow} 1)`); op(o.e, 1 - ramp(t, tD - .2, tD + .6)); });
     tf(s.deadF[0], "translate(1130 840) rotate(-14)"); tf(s.deadF[1], "translate(1420 830) rotate(12) scale(-1 1)"); s.deadF.forEach((d, i) => op(d, ramp(t, tD - .1 + i * .25, tD + .4 + i * .25)));
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); op(s.where, on(t, t0 + .3, tW - .5, .3));
@@ -118,7 +119,7 @@ S.povCoast = (() => { const s = scene("povCoast", "#8ecae6", "#219ebc"), st = nW
   s.run = t => { const a = (w, f) => cue("povCoast", w, f), t0 = SC.povCoast.t0, tH = a("hard", .3), tB = a("babies", .8);
     op(s.warm, .45 * ramp(t, t0, t0 + 1.5));
     const go = ramp(t, tH - .6, tH + 2.4);              // FACES: the shoal swims left and down, away from the camera, facing that way
-    s.shoal.forEach((o, i) => { const x = o.x - go * (700 + (i % 5) * 60) + Math.sin(t * 2 + i) * 6, y = o.y + go * (160 + (i % 4) * 30);
+    s.shoal.forEach((o, i) => { const x = o.x - go * (700 + (i % 5) * 60), y = o.y + go * (160 + (i % 4) * 30);
       tf(o.e, `translate(${x} ${y}) rotate(${-12 * go}) scale(-1 1)`); op(o.e, 1 - ramp(t, tH + 1.2, tH + 2.6)); });
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); };
   return s; })();
@@ -158,19 +159,19 @@ S.povForest = (() => { const s = scene("povForest", "#d8cbb4", "#b8a98e"), st = 
     if (sad) [-11, 11].forEach(ex => el("path", {d: `M${ex - 8} ${-17 + (ex < 0 ? 3 : 0)} L${ex + 8} ${-17 + (ex < 0 ? 0 : 3)}`, stroke: INK, "stroke-width": 2.6, "stroke-linecap": "round"}, f));   // worried brows
     el("circle", {cx: -4, cy: 13, r: 1.8, fill: INK}, f); el("circle", {cx: 4, cy: 13, r: 1.8, fill: INK}, f);
     el("path", {d: sad ? "M-8 27 Q0 22 8 27" : "M-8 24 Q0 29 8 24", fill: "none", stroke: INK, "stroke-width": 2.6, "stroke-linecap": "round"}, f); return f; };
-  const ape = (p) => { const g = el("g", {}, p);
+  const ape = (p, sad) => { const g = el("g", {}, p);
     el("path", {d: "M-62 -60 Q-150 -10 -120 70 Q-112 92 -96 96", fill: "none", stroke: "#8f3a0f", "stroke-width": 30, "stroke-linecap": "round"}, g);   // long left arm to the log
     el("path", {d: "M62 -60 Q150 -10 120 70 Q112 92 96 96", fill: "none", stroke: "#8f3a0f", "stroke-width": 30, "stroke-linecap": "round"}, g);
     el("path", {d: "M-80 70 Q-100 -40 -40 -78 Q0 -92 40 -78 Q100 -40 80 70 Q0 96 -80 70 Z", fill: "#c1440e", stroke: INK, "stroke-width": 5, "stroke-linejoin": "round"}, g);   // body
     for (let j = -3; j <= 3; j++) el("path", {d: `M${j * 22} -50 q${j * 3} 30 ${j * 2} 60`, fill: "none", stroke: "#e0702b", "stroke-width": 4, "stroke-linecap": "round", opacity: .7}, g);   // shaggy hair
-    face(g, 0, -100, 1, true);
+    face(g, 0, -100, 1, sad);                                          // worried on the burnt log; calm and safe in the green forest
     // the baby, clinging to her chest: its arms round her, its little face peeking out
     el("path", {d: "M-44 10 Q0 -14 44 10", fill: "none", stroke: "#a8460f", "stroke-width": 14, "stroke-linecap": "round"}, g);
     el("ellipse", {cx: 0, cy: 34, rx: 34, ry: 30, fill: "#d35d1b", stroke: INK, "stroke-width": 4}, g);
     face(g, 0, 18, .55, false); return g; };
   s.log = el("g", {transform: "translate(1080 640)"}, st); el("rect", {x: -170, y: 80, width: 340, height: 54, rx: 26, fill: "#2b2622", stroke: INK, "stroke-width": 5}, s.log);
-  s.ape = ape(s.log);
-  s.ape2 = ape(st);                                                     // the same pair, safe in the green forest
+  s.ape = ape(s.log, true);
+  s.ape2 = ape(st, false);                                                     // the same pair, safe in the green forest
   s.arrow = el("path", {d: "M1180 560 Q1330 420 1500 390", fill: "none", stroke: "#06d6a0", "stroke-width": 12, "stroke-dasharray": "4 22", "stroke-linecap": "round", opacity: 0}, st);
   s.arrowH = el("path", {d: "M-16 -16 L14 0 L-16 16", fill: "none", stroke: "#06d6a0", "stroke-width": 12, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: 0,
     transform: `translate(1500 390) rotate(${(Math.atan2(390 - 420, 1500 - 1330) * 180 / Math.PI).toFixed(1)})`}, st);   // FACES: along the path, into the safe forest
@@ -178,6 +179,7 @@ S.povForest = (() => { const s = scene("povForest", "#d8cbb4", "#b8a98e"), st = 
   nVig(st, "#fff3bf", .5);
   hRide(s, st);
   s.where = chip(st, "📍 Borneo, Indonesia, 2015", INK, {fs: 34});
+  s.out = [["ADAPT", "#3a86ff"], ["MOVE", "#06d6a0"], ["OR DIE", "#6c757d"]].map(([w, c]) => chip(st, w, c, {fs: 40}));   // hab6: what living things do
   s.run = t => { const a = (w, f) => cue("povForest", w, f), t0 = SC.povForest.t0, tP = a("ponds", .1), tF = a("fish", .25), tB = a("burn", .45), tO = a("orangutans", .55), tR = a("rescue", .8), tC = a("carry", .86);
     const dry = ramp(t, tP - .3, tF + .5); set(s.wet, "rx", lerp(200, 0, dry)); set(s.wet, "ry", lerp(56, 0, dry)); op(s.wet, 1 - ramp(t, tF, tF + .6));
     s.cracks.forEach((c, i) => op(c, ramp(t, tP + i * .08, tP + .5 + i * .08)));
@@ -186,5 +188,7 @@ S.povForest = (() => { const s = scene("povForest", "#d8cbb4", "#b8a98e"), st = 
     popAt(s.log, 1080, 600, t, tO - .4);
     const k = ramp(t, tC, tC + 1.6); op(s.arrow, on(t, tR, 1e9, .3)); op(s.arrowH, on(t, tR, 1e9, .3)); set(s.arrow, "stroke-dashoffset", -t * 40);
     op(s.ape, 1 - k); op(s.green, ramp(t, tR - .2, tR + .6)); tf(s.ape2, `translate(1580 ${HZ + 10}) scale(.75)`); op(s.ape2, k);
+    const c6 = TL.cues.hab6 || {}, tA = a("adapt", .9), tM = a("move", .94), tDi = c6.die !== undefined ? c6.die : SC.povForest.t0 + (SC.povForest.t1 - SC.povForest.t0) * .98;   // "die" of hab6, not hab4's
+    [[tA, 560], [tM, 810], [tDi, 1060]].forEach(([tt, x], i) => popAt(s.out[i], x, 250, t, tt - .1));
     hRideRun(s, t); popAt(s.where, 810, 160, t, t0 + .3); };
   return s; })();

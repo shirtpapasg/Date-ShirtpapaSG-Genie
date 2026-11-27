@@ -4,6 +4,7 @@ The teacher's approved script (draft doc https://claude.ai/artifact/7s2QmX4ZPN4e
   - spoken forms for numbers and letters ("P S I", "the ninth of October"), so Kokoro reads them the Singapore way; captions keep digits;
   - series standards the draft leaves out, marked ADDED (the countdown before the journey, the silent cold open, "Now you know!": rule 1).
 "who": heart (default) | pip | momo | basil.  "soft": Heart's quiet journey voice (BE THE THING).
+27 Nov (teacher): the HABITAT section (hab1..hab6, version A + the syllabus line) inside the journey, between pip2 and wind6.
 Phase 2 (teacher, 26 Nov: "1 no level, 2 yes, 4 EP13, 3 Dec OK"): no school level said anywhere; the 2:15 definitions without the
 "Clouds are made up of..." sentence; the four checks applied (1:12 version A + "Hardly any rain clouds." at 1:22; the 2:40 fires wording;
 Basil "Lizards love the heat!" + Pip "Not us! ..."; the teacher's title); fact fixes "more than two degrees Celsius", "a warmer, drier".
@@ -35,6 +36,17 @@ SEG = [
   {"id": "wind4", "scene": "povRain", "soft": True, "text": "Over Singapore, the clouds rain down. That is a normal year.", "sfx": [["rain", 0.3], ["thunder", 1.2]], "hold": 0.6},
   {"id": "wind5", "scene": "povWeak", "soft": True, "text": "But this year, you grow weaker and weaker. The warm water slides back east, away from Singapore. The warm, wet air that rises from it, and builds the rain clouds, moves east too.", "sfx": [["wind", 0], ["pass_by", 4.5]]},
   {"id": "pip2", "scene": "povWeak", "who": "pip", "text": "Wait for us, clouds!"},
+  # 1:35 HABITATS (teacher, 27 Nov 2026: "talk more about the effects of El Niño on habitat, including showing animals dying and the environment.
+  # Let this be inside the micro journey with the pet buddies"; version A + the syllabus line). Still the journey: Heart soft, NO music.
+  # Facts and sources: SCRIPT.md section 9. Scenes: ep13/habitat.js.
+  {"id": "hab1", "scene": "povReef", "soft": True, "text": "In strong El Niño years, the warm water spreads over coral reefs. A reef is the habitat of many sea animals.", "sfx": [["sea_wash", 0.2], ["wind", 3.0]]},
+  {"id": "hab2", "scene": "povReef", "soft": True, "text": "Too much heat turns the corals white. This is called coral bleaching. If it lasts too long, the corals die.", "sfx": [["sea_wash", 1.0]], "hold": 0.4},
+  {"id": "hab3", "scene": "povCoast", "soft": True, "text": "Near South America, the small fish become hard to find. Sea lions and seabirds go hungry, and many of their babies die.", "sfx": [["sea_wash", 0], ["wind", 3.0]]},
+  {"id": "pipH", "scene": "povCoast", "who": "pip", "text": "Oh no. The poor little pups.", "hold": 0.3},
+  {"id": "hab4", "scene": "povForest", "soft": True, "text": "Back near Singapore, ponds dry up, and the fish in them die. Dry peat forests burn, and orangutans lose their home.", "sfx": [["wind", 0], ["crackle", 4.5]]},
+  {"id": "basilH", "scene": "povForest", "who": "basil", "text": "Somebody help them!"},
+  {"id": "hab5", "scene": "povForest", "soft": True, "text": "Rescue teams do. They carry orangutans to safer forests."},
+  {"id": "hab6", "scene": "povForest", "soft": True, "text": "When a habitat changes too much, living things must adapt, move to other places, or die.", "hold": 0.6},
   {"id": "wind6", "scene": "povDry", "soft": True, "text": "You look down at Singapore. Blue sky. Hardly any rain clouds. What you just lived through has a name: El Niño.", "sfx": [["reveal", 4.6]], "hold": 0.8},
   # 1:30 The headline
   {"id": "news", "scene": "news", "text": "On the twelfth of November, scientists at NOAA in the USA said this El Niño is strong to very strong. Back in May, Singapore's weather scientists had already warned us: a warmer, drier June to October."},
@@ -62,7 +74,7 @@ SEG = [
 spec = {"episode": "SAU EP13", "title": "Super El Niño! Why is Singapore so hot and dry?",
         "tag": "🌏 TheOneApp, Explored · EP 13 · El Niño",
         "next": ["NEXT TIME", "More science from", "your world! 🌏"], "endChip": "🌏 TheOneApp, Explored · a new episode every Thursday",
-        "kws": [["wind1", "trade", "TRADE WIND", "#4cc9f0"], ["wind6", "nino", "EL NIÑO", "#f77f00"], ["wcycle", "evaporates", "EVAPORATION", "#ef476f"],
+        "kws": [["wind1", "trade", "TRADE WIND", "#4cc9f0"], ["hab1", "habitat", "HABITAT", "#2d6a4f"], ["wind6", "nino", "EL NIÑO", "#f77f00"], ["wcycle", "evaporates", "EVAPORATION", "#ef476f"],
                 ["wcycle", "condensation", "CONDENSATION", "#3a86ff"], ["wcycle", "continuous", "WATER CYCLE", "#06d6a0"]],
         "wc_before": WC_BEFORE, "segments": SEG, "outro": 4.2}
 json.dump(spec, open(f"{H}/ep13_segments.json", "w"), indent=1, ensure_ascii=False); print("wrote ep13_segments.json", len(SEG), "segments")
