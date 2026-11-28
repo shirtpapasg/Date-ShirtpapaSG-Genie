@@ -53,6 +53,11 @@ the plugin's `qa` only sees canvas text). Heavy static layers (blurred rooms, th
     camera `punch()` (a 2 to 4% zoom bump), a glow pulse and a ring. No screen shake, no white flash (style guide section 10/11).
 
 ## 3. Camera
+- **The 10-second rule (teacher, 2026-11-28):** no still frame and no same shot for more than 10 s: every 10 s at most, a cut to a
+  new angle or set, a close-up, a camera move (push-in, pan, tilt, rack) or a full-frame insert. Bubbles changing on a held wide
+  shot do not count. Cover dialogue with singles / two-shots / the group (cut just before the first word), a slow push inside every
+  shot, no jump cuts. Built with the director camera (`p4ep03/plan_shots.py` -> `director_p1.js`, `main.js` `dirAt`, `DHUD` for screen
+  things); checked with `qa/hold_check.py <video>` (longest hold, must be <= 10 s). See SERIES_FORMAT 6y.
 - Default: a slow push (1.00 to 1.04 to 1.06 over a shot). Parallax by depth with `Motion.cam(ctx, cam, depth, W, H)`: far 0.2,
   mid 1, near 1.6.
 - A push-in means "look closer" (the spring window: 1.3 to 1.7 in half a second). A pull-out means "time passes" (the night).

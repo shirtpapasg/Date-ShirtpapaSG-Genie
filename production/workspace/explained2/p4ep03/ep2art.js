@@ -106,7 +106,7 @@ function glitchV3(t, o = {}) { if (!GM) return "";
   // the screen: the blank glass + a code face (or the painted face, kept), a soft glow, extra content
   const gl = 1 - (o.dim || 0) * .6;
   let S = "";
-  if (!painted) S += `<use href="#s_${pre}screen"/>` + `<g>${glitchFace(face, scr.x, scr.y, scr.w, scr.h, t, { mouth: talk })}</g>`;
+  if (!painted) S += `<use href="#s_${pre}screen"/>` + `<g>${o.mirror && typeof unflipText === "function" ? unflipText(glitchFace(face, scr.x, scr.y, scr.w, scr.h, t, { mouth: talk })) : glitchFace(face, scr.x, scr.y, scr.w, scr.h, t, { mouth: talk })}</g>`   /* P4 EP3 v2: his "?" never reads mirrored */;
   S += `<rect x="${scr.x + 6}" y="${scr.y + 6}" width="${scr.w - 12}" height="${scr.h - 12}" rx="30" fill="#E8FFD8" opacity="${n2(.08 * gl)}"/>`;
   if (o.dim) S += `<rect x="${scr.x}" y="${scr.y}" width="${scr.w}" height="${scr.h}" rx="34" fill="#0B1A2A" opacity="${n2(o.dim * .35)}"/>`;
   if (o.scr) S += `<g transform="translate(${scr.x} ${scr.y}) scale(${scr.w} ${scr.h})${o.mirror ? " translate(.5 0) scale(-1 1) translate(-.5 0)" : ""}">${o.scr}</g>`;

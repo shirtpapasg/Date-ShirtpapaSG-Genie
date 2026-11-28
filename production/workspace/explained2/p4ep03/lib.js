@@ -42,7 +42,12 @@ function tpill(x, y, text, size = 32, fill = P.ink, ink = "#fff", o = {}) { cons
 // a label joined to its part by one plain line that touches it (style 7.8)
 function label(x, y, text, px, py, size = 30) { return `<path d="M${x} ${y} L${px} ${py}" stroke="#fff" stroke-width="4" stroke-linecap="round"/><circle cx="${px}" cy="${py}" r="6" fill="#fff"/>` + tpill(x, y, text, size, "#fff", P.ink); }
 // location / tag pill: ink pill, sun dot, white then sun text
-function lowerPill(x, y, a, b) { const wa = tw(a, 30, 600), wb = b ? tw(b, 30, 600) + 14 : 0, w = wa + wb + 86;
+// P4 EP3 v2 (the 10-second rule, teacher 28 Nov 2026): main.js may wrap a scene in a DIRECTOR camera (cuts, close-ups, push-ins; director_p1.js).
+// What belongs to the screen, not the world (the logo, the score bar, the key-word shelf, small print, the place chip, speech bubbles), is
+// drawn through DHUD: the inverse of that camera, so it stays exactly where it was. Outside a director shot DHUD changes nothing.
+const DHUD = (s) => !s ? s : window._DINV ? `<g data-hud="1" transform="${window._DINV}">${s}</g>` : `<g data-hud="1">${s}</g>`;   // (marked even without a director shot: census.js reads it)
+function lowerPill(x, y, a, b) { return DHUD(lowerPill0(x, y, a, b)); }
+function lowerPill0(x, y, a, b) { const wa = tw(a, 30, 600), wb = b ? tw(b, 30, 600) + 14 : 0, w = wa + wb + 86;
   return `<g filter="url(#dropS)"><rect x="${x}" y="${y}" width="${n2(w)}" height="62" rx="31" fill="${P.ink}" opacity=".9"/></g><circle cx="${x + 32}" cy="${y + 31}" r="9" fill="${P.sun}"/>` + T(x + 54, y + 41, `${esc(a)}${b ? `<tspan fill="${P.sun}" dx="14">${esc(b)}</tspan>` : ""}`, 30, "#fff", { a: "start", w: 600 }); }
 // "speeded up" tag (time-lapse shots)
 const speeded = (t, t0, t1, x = 1700, y = 1010) => OP(ramp(t, t0, .25) * (1 - ramp(t, t1, .25)), `<g transform="translate(${x} ${y})"><rect x="-128" y="-27" width="256" height="54" rx="27" fill="${P.ink}" opacity=".85"/><path d="M-98 -11 l14 11 l-14 11z M-82 -11 l14 11 l-14 11z" fill="${P.sun}"/>${T(18, 11, "speeded up", 30, "#fff", { w: 600 })}</g>`);

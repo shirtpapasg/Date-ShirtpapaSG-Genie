@@ -5,11 +5,51 @@
 // the taped leaves come off at GLITCH's peel (the hedge's first, in shot; the pandan's and the trunk's while he rolls on)
 const PEEL = () => [MK("peel") + 1.3, MK("peel") + 1.9, MK("peel") + .4];
 // a comparison card: two leaves side by side (never overlapped), each with its own label joined by a plain line
-const cmpCard = (t, t0, t1, x, y, A, la, B, lb, extra = "", w = 640, h = 330) => t < t0 - .05 || t > t1 + .35 ? "" : TF(x, y, spring(t, t0, .4) * (1 - ramp(t, t1, .3)), `<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="26" fill="#FFF8EA" stroke="${P.ink}" stroke-width="6"/></g><path d="M0 ${-h / 2 + 30} V${h / 2 - 90}" stroke="${P.ink}" stroke-width="3" stroke-dasharray="8 10" opacity=".4"/>` + A + B
-  + (la ? tpill(-w / 4, h / 2 - 46, la, 32, "#fff", P.ink, { w: 700 }) : "") + (lb ? tpill(w / 4, h / 2 - 46, lb, 32, "#fff", P.ink, { w: 700 }) : "") + extra);
+const cmpCard = (t, t0, t1, x, y, A, la, B, lb, extra = "", w = 640, h = 330) => t < t0 - .05 || t > t1 + .35 ? "" : DHUD(TF(x, y, spring(t, t0, .4) * (1 - ramp(t, t1, .3)), `<g filter="url(#drop)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="26" fill="#FFF8EA" stroke="${P.ink}" stroke-width="6"/></g><path d="M0 ${-h / 2 + 30} V${h / 2 - 90}" stroke="${P.ink}" stroke-width="3" stroke-dasharray="8 10" opacity=".4"/>` + A + B
+  + (la ? tpill(-w / 4, h / 2 - 46, la, 32, "#fff", P.ink, { w: 700 }) : "") + (lb ? tpill(w / 4, h / 2 - 46, lb, 32, "#fff", P.ink, { w: 700 }) : "") + extra));
 const mystL = (x, y, k, o = {}) => TF(x, y, k, `<g transform="rotate(${o.rot || -20}) translate(-130 0)">${hibLeaf({ id: o.id || "ml", ...o })}</g>`);
 const tick = (x, y, k = 1) => TF(x, y, k, `<circle r="30" fill="${P.leaf}" stroke="#fff" stroke-width="5"/><path d="M-13 1 L-3 11 L14 -10" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>`);
 
+/* ================================================================ THE EDGE TRACE (v2, teacher 28 Nov 2026) ================================================================ */
+// "should zoom in to trace in red, the edges, showing basic descriptions about them": a full-frame close look during Heart's q812 (no sound
+// change). The camera pushes in on the mango leaf, a red line runs round its edge (straight: smooth, no teeth), slides over to the mystery
+// leaf, a red line runs round its edge (jagged: tiny teeth like a saw), then pulls back to the two traced leaves side by side; it cuts back to
+// the case board just before the mango card's CLEARED stamp. The leaves are the same drawings (mangoLeaf, hibLeaf); the trace follows their
+// own outline points (leafOutline's). Screen-fixed (DHUD): the director camera leaves it alone.
+function leafPts(L, W, prof, o = {}) { const n = o.n || 72, up = [], lo = [];
+  for (let i = 0; i <= n; i++) { const u = i / n, w = W * prof(u); let d = 0;
+    if (o.teeth) { const f = (u * o.teeth) % 1; d = o.tAmp * (f < .78 ? f / .78 : (1 - f) / .22) * Math.min(1, u * 8, (1 - u) * 6); }
+    if (o.wav) d += o.wav * Math.sin(u * Math.PI * 7) * Math.min(1, u * 5, (1 - u) * 4);
+    up.push([L * u, -(w + d)]); lo.push([L * u, w + d * (o.teeth ? 1 : -1)]); }
+  return up.concat(lo.reverse()); }
+const EDGE_PTS = { mango: leafPts(400, 58, PROF_MANGO, { wav: 2.2 }), hib: leafPts(300, 108, PROF_HIB, { teeth: 19, tAmp: 9 }) };
+// the first u (0..1) of a closed outline as a polyline, its head point; lengths measured along it
+function partLine(P, u) { const seg = []; let tot = 0; for (let i = 1; i < P.length; i++) { const d = Math.hypot(P[i][0] - P[i - 1][0], P[i][1] - P[i - 1][1]); seg.push(d); tot += d; }
+  let want = clamp(u) * tot, out = [P[0]], head = P[0]; for (let i = 1; i < P.length; i++) { if (want <= 0) break; const d = seg[i - 1];
+    if (want >= d) { out.push(P[i]); head = P[i]; want -= d; } else { const k = want / d; head = [P[i - 1][0] + (P[i][0] - P[i - 1][0]) * k, P[i - 1][1] + (P[i][1] - P[i - 1][1]) * k]; out.push(head); want = 0; } }
+  return { d: "M" + out.map(([x, y]) => `${n2(x)} ${n2(y)}`).join(" L"), head }; }
+const EDGE_RED = "#E1251B";
+function edgeTraceLine(kind, u, zk) { if (u <= 0) return ""; const { d, head } = partLine(EDGE_PTS[kind], u), ns = `vector-effect="non-scaling-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round"`;
+  return `<path d="${d}" stroke="#fff" stroke-width="17" opacity=".9" ${ns}/><path d="${d}" stroke="${EDGE_RED}" stroke-width="10" ${ns}/>` + (u < 1 ? `<circle cx="${n2(head[0])}" cy="${n2(head[1])}" r="${n2(15 / zk)}" fill="${EDGE_RED}" stroke="#fff" stroke-width="5" vector-effect="non-scaling-stroke"/>` : ""); }
+// the description card: a white card with a red border, the edge's name in red, one plain line under it (P4 words), ink outline-free text
+const edgeCard = (x, y, k, title, line) => k <= 0 ? "" : TF(x, y, k, `<g filter="url(#drop)"><rect x="-470" y="-92" width="940" height="184" rx="30" fill="#fff" stroke="${EDGE_RED}" stroke-width="9"/></g>` + T(0, -14, title, 66, "#B3150F", { ls: 3 }) + T(0, 58, line, 44, P.ink));
+const edgeTag = (x, y, k, txt) => k <= 0 ? "" : TF(x, y, k, `<g filter="url(#dropS)"><rect x="${n2(-tw(txt, 44, 700) / 2 - 34)}" y="-40" width="${n2(tw(txt, 44, 700) + 68)}" height="80" rx="40" fill="#fff" stroke="${EDGE_RED}" stroke-width="7"/></g>` + T(0, 16, txt, 44, P.ink));
+const EDGE = { mango: { at: [230, 610], rot: -8, k: 1.5, c: [527, 568], z: 1.9 }, hib: { at: [1160, 620], rot: -8, k: 1.75, c: [1400, 560], z: 1.55 } };
+function edgeTrace(t) { const a = LT("q812") - .12, b = MK("clr2") - .17; if (t < a || t >= b) return "";
+  const wM = TL.lines.q812.words, tStr = MK("straight"), tJag = MK("jagged"), tMs = wM[0].a + .62, tHs = wM.find((w) => w.w === "mystery").a + .05, tBack = wM.find((w) => w.w === "teeth.").a + .25;
+  const uM = clamp((t - (tMs + .15)) / 1.7), uH = clamp((t - (tHs + .55)) / 1.75);
+  const both = [1.12, 960, 600], onM = [EDGE.mango.z, ...EDGE.mango.c], onH = [EDGE.hib.z, ...EDGE.hib.c];
+  const mixC = (p, q, u) => [lerp(p[0], q[0], u), lerp(p[1], q[1], u), lerp(p[2], q[2], u)];
+  const cam = t < tMs ? mixC(both, onM, eio(clamp((t - a) / (tMs - a)))) : t < tHs ? onM : t < tHs + .5 ? mixC(onM, onH, eio((t - tHs) / .5)) : t < tBack ? onH : mixC(onH, both, eio(clamp((t - tBack) / .7)));
+  const leaf = (kind) => { const E = EDGE[kind], u = kind === "mango" ? uM : uH, inner = kind === "mango" ? mangoLeaf({ id: "etm" }) : hibLeaf({ id: "eth", noMark: true });
+    return `<g transform="translate(${E.at[0]} ${E.at[1]}) rotate(${E.rot}) scale(${E.k})">${inner}${edgeTraceLine(kind, u, E.k * cam[0])}</g>`; };
+  const world = `<g transform="translate(960 540) scale(${cam[0].toFixed(4)}) translate(${n2(-cam[1])} ${n2(-cam[2])})">` + leaf("mango") + leaf("hib") + `</g>`;
+  const bg = `<rect width="1920" height="1080" fill="#FFF8EA"/><g opacity=".5">` + [...Array(20)].map((_, i) => `<path d="M${i * 100} 0 V1080" stroke="#EADFC8" stroke-width="2"/>`).join("") + [...Array(11)].map((_, i) => `<path d="M0 ${i * 100} H1920" stroke="#EADFC8" stroke-width="2"/>`).join("") + `</g>`;
+  const kM = t >= tStr - .05 && t < tHs ? spring(t, tStr - .05, .4) : 0, oM = 1 - ramp(t, tHs - .25, .2), kH = t >= tJag - .05 && t < tBack ? spring(t, tJag - .05, .4) : 0, oH = 1 - ramp(t, tBack - .2, .2), kB = t >= tBack + .45 ? spring(t, tBack + .45, .4) : 0;
+  const cards = OP(oM, edgeCard(960, 150, kM, "STRAIGHT EDGE", "smooth all the way round, no teeth")) + OP(oH, edgeCard(960, 150, kH, "JAGGED EDGE", "tiny teeth all round, like a saw"))
+    + edgeTag(475, 770, kB, "straight edge") + edgeTag(1453, 840, kB, "jagged edge") + (kB > 0 ? TF(960, 120, kB, tpill(0, 0, "LOOK AT THE EDGES", 46, P.sun, P.ink, { w: 700 })) : "");
+  const cut = t < a + .12 ? `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.6 * (1 - (t - a) / .12))}"/>` : "";
+  return DHUD(bg + world + cards + cut); }
 /* ================================================================ SUSPECTS · cleared one by one (and Basil's too-early CASE CLOSED) ================================================================ */
 // the left third: the cork case board on the void deck wall, Basil at it (with the CASE CLOSED stamp); the right two thirds: the real place,
 // the camera gliding from the pandan and the mango tree to the hibiscus hedge (no cuts); Momo and Pip by the suspects; GLITCH at the side
@@ -31,12 +71,12 @@ SC.suspects = (t, s) => { const tH = MK("hib") - .8, cA = camOn([220, 660], 1.25
     t >= MK("lanes") - .1 && t < MK("kw_parallel_veins") + .2 ? TF(-470, -60, .55, `<clipPath id="trk"><rect x="-170" y="-130" width="340" height="200" rx="20"/></clipPath><g clip-path="url(#trk)">${picTrack()}</g>`) : "")
     + cmpCard(t, MK("both") - .5, LT("q811") - .1, 1190, 360, TF(-200, -20, .5, `<g transform="rotate(-20)">${mangoLeaf({ id: "sm2" })}</g>`), "mango: net veins", mystL(170, -30, .5, { id: "sm3" }), "mystery: net veins")
     + cmpCard(t, LT("q811") + .3, MK("think0") - .1, 1190, 360, TF(-200, -20, .5, `<g transform="rotate(-20)">${mangoLeaf({ id: "sm4", hi: { edge: clamp((t - MK("feel")) / 1.5) } })}</g>`), "mango", mystL(170, -30, .5, { id: "sm5", hi: { edge: clamp((t - MK("feel") - .4) / 1.5) } }), "mystery leaf")
-    + cmpCard(t, LT("q812") - .1, LE("q812") + .2, 1190, 360, TF(-200, -20, .5, `<g transform="rotate(-20)">${mangoLeaf({ id: "sm6", hi: { edge: 1 } })}</g>`) + `<circle cx="-60" cy="-60" r="60" fill="none" stroke="${P.ink}" stroke-width="7"/>`, t >= MK("straight") ? "straight edge" : "", mystL(170, -30, .5, { id: "sm7", hi: { edge: 1 } }) + `<circle cx="240" cy="-80" r="60" fill="none" stroke="${P.ink}" stroke-width="7"/>`, t >= MK("jagged") ? "jagged edge" : "")
+
     + cmpCard(t, MK("hib") - .2, LE("q814") + .4, 1190, 360, `<path d="M-330 60 Q-200 40 -110 -20" stroke="#6E4A2A" stroke-width="12" fill="none" stroke-linecap="round"/>` + TF(-150, 0, .5, `<g transform="rotate(-30) translate(-130 0)">${hibLeaf({ id: "sm8", noMark: true })}</g>`), "on the hedge", mystL(170, -10, .5, { id: "sm9", rot: -30 }), "mystery leaf",
       [[MK("tk1"), "veins", -150], [MK("tk2"), "edge", -90], [MK("tk3"), "shape", -30]].map(([a, lab, yy]) => t >= a - .1 ? OP(spring(t, a - .1, .4) * (1 + .1 * (t >= MK("match") && t < MK("match") + 2 ? Math.sin(t * 8) : 0)), `<path d="M-20 ${yy} H20" stroke="${P.ink}" stroke-width="4"/>` + tick(0, yy, .9) + T(0, yy + 50, lab, 24, P.ink)) : "").join(""));
   const think = t >= MK("think0") - .1 && t < LT("q812") - .1 ? (() => { const k = spring(t, MK("think0") - .1, .45) * (1 - ramp(t, LT("q812") - .4, .3));
-    return `<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * Math.min(1, k))}"/>` + TF(1190, 400, k, `<g filter="url(#drop)"><rect x="-560" y="-300" width="1120" height="560" rx="32" fill="#FFF8EA" stroke="${P.sun}" stroke-width="10"/></g>` + tpill(0, -300, "THINK!", 44, P.sun, P.ink, { w: 700 }) + T(0, -200, "Spot the difference: look at the edges.", 46, P.ink, { w: 700 })
-      + TF(-260, 30, .62, `<g transform="rotate(-20)">${mangoLeaf({ id: "th1" })}</g>`) + TF(270, 40, .7, `<g transform="rotate(-20) translate(-130 0)">${hibLeaf({ id: "th2" })}</g>`) + tpill(-230, 210, "mango leaf", 30, "#fff", P.ink, { w: 700 }) + tpill(250, 210, "mystery leaf", 30, "#fff", P.ink, { w: 700 })); })() : "";
+    return DHUD(`<rect width="1920" height="1080" fill="${P.night}" opacity="${n2(.45 * Math.min(1, k))}"/>` + TF(1190, 400, k, `<g filter="url(#drop)"><rect x="-560" y="-300" width="1120" height="560" rx="32" fill="#FFF8EA" stroke="${P.sun}" stroke-width="10"/></g>` + tpill(0, -300, "THINK!", 44, P.sun, P.ink, { w: 700 }) + T(0, -200, "Spot the difference: look at the edges.", 46, P.ink, { w: 700 })
+      + TF(-260, 30, .62, `<g transform="rotate(-20)">${mangoLeaf({ id: "th1" })}</g>`) + TF(270, 40, .7, `<g transform="rotate(-20) translate(-130 0)">${hibLeaf({ id: "th2" })}</g>`) + tpill(-230, 210, "mango leaf", 30, "#fff", P.ink, { w: 700 }) + tpill(250, 210, "mystery leaf", 30, "#fff", P.ink, { w: 700 }))); })() : "";
   const world = x2place("vd3", tapedLeaves(t), c) + x2pigeonTree(t, c, -9) + x2limFar(t, c) + CAM(x2desk(t), c[0], c[1], c[2]);
   const basil = x2bd("basil", 560, 1076, 360, tw_, { in: s.t0 - .5, flip: true, still: frz, poses: [[s.t0, "pointing"], [LE("q801") + .1, "arms_crossed"], [LE("q804") + .05, "laughing"], [LT("q805"), "sit"], [MK("rush") - .1, "hero/arms_crossed"], [LE("q806") + .1, "hero/arms_crossed"], [LT("q810") + .2, "sit"], [LE("q810") + .05, "sit"], [LT("q813"), "pointing"], [LE("q815") + .05, "hi5/cheer"], [MK("clap") + .8, "laugh/laughing"]], look: -4 });
   return world + wall + board + basil + stampG
@@ -44,7 +84,7 @@ SC.suspects = (t, s) => { const tH = MK("hib") - .8, cA = camOn([220, 660], 1.25
     + x2bd("momo", mx, 1076, 340, tw_, { in: s.t0 - .5, still: frz, flip: true, poses: [[s.t0, "sit"], [MK("kw_parallel_veins") + .05, "cheer"], [MK("kw_parallel_veins") + 2, "sit"], [LT("q804") - .1, "sit"], [LE("q804") + .05, "thinking"], [LT("q806") + .4, "worried/thinking"], [LT("q811") - .1, "sit"], [LE("q811") + .05, "thinking"], [LT("q814") + .3, "surprised"], [LE("q814"), "sit"], [MK("clap") - .3, "hi5/cheer"], [MK("clap") + .8, "laugh/cheer"]], look: -6, achieved: true })
     + x2bd("pip", px, 1076, 330, tw_, { in: s.t0 - .5, still: frz, flip: true, poses: [[s.t0, "sit"], [LE("q803") + .1, "sit"], [LE("q805") + .05, "pointing"], [LT("q806") + .3, "sit"], [LE("q808") + .05, "sit"], [LT("q810") + .5, "proud/arms_crossed"], [LT("q811"), "sit"], [LT("q814") + .3, "surprised"], [LE("q814"), "sit"], [MK("clap") - .3, "hi5/cheer"], [MK("clap") + .8, "laugh/cheer"]], look: -6, achieved: true })
     + (t >= MK("clap") - 1.0 ? TF(px + 120, 1060, .6, toolsBundle()) : x2held([1, 960, 540], "pip", px, 1076, 330, true, TF(0, 0, .8, clipPip()), 50, 30))
-    + cmp + think
+    + cmp + think + edgeTrace(t)
     + (t >= MK("rush") ? battleCry(t, MK("rush"), 1150, 250, "CASE CLOSED!", { d: 1.0, k: .5 }) : "") + x2said("q806")
     + (t >= MK("clr1") && t < MK("clr1") + .8 ? comicWord(t, MK("clr1"), cardAt(0)[0] + 90, cardAt(0)[1] - 120, "THUMP!", { size: 44, tiny: true, col: P.ink, d: .6 }) : "")
     + (t >= MK("stamp") ? comicWord(t, MK("stamp"), 560, 220, "CASE CLOSED!", { size: 70, d: 1.2, rot: -6 }) : "")
@@ -65,7 +105,7 @@ function logCard2(t, u, cnt) { const fy = lerp(-60, -8, eio(clamp(u)));
     + `<g transform="translate(0 ${n2(fy + 14)})"><rect x="-226" y="-82" width="452" height="170" rx="12" fill="#fff" stroke="${INKG}" stroke-width="5"/>${T(0, -36, "READ A LEAF", 40, INKG)}${T(0, 10, "BY ITS PARTS", 40, INKG)}${T(0, 62, "COLOUR + SIZE: WEAK CLUES", 30, "#D9302A")}</g>`
     + `<path d="M-230 104 h460 v52 h-460z" fill="#E9B04F" stroke="${INKG}" stroke-width="6"/>` + tpill(0, 130, `ENTRY ${cnt}`, 40, INKG, "#9FFFE0", { w: 700 }); }
 SC.glitch = (t, s) => { const c = CG, tA = s.t0, ev1 = MK("ev1"), ev2 = MK("ev2"), ev3 = MK("ev3"), ez = MK("bzzt"), tU = MK("upd"), tSt = MK("stored"), tSc = MK("scan"), chill = MK("weakc") + 1.0, tP = MK("peel"), tG = LT("g907");
-  const gx = t < tG ? lerp(2300, 1620, eo(clamp((t - tA) / 1.6))) : t < LT("g908") + .3 ? lerp(1620, 1700, eio(clamp((t - tG) / 1.2))) : t < tP ? 1700 : lerp(1700, 1790, eio(clamp((t - tP) / 1.2)));
+  const gx = t < tG ? lerp(2300, 1720, eo(clamp((t - tA) / 1.6))) : t < LT("g908") + .3 ? lerp(1720, 1800, eio(clamp((t - tG) / 1.2))) : t < tP ? 1800 : lerp(1800, 1890, eio(clamp((t - tP) / 1.2)));
   let pose = "crossed", face = "smug", scr = "", tape = true, left = true;
   if (t >= LT("g902")) { pose = "down"; face = "surprised"; tape = false; }
   if (t >= tSc) scr = scrScan((t - tSc) * .9);
@@ -84,13 +124,14 @@ SC.glitch = (t, s) => { const c = CG, tA = s.t0, ev1 = MK("ev1"), ev2 = MK("ev2"
   const pic = t < ev2 - .1 ? evPar() : t < ev3 - .1 ? evEdge() : evMatch();
   const panel = t < tU ? chestPanel(t, 1, t < tSc + .8 ? `<rect x="-280" y="-190" width="560" height="380" fill="#DDF5EC"/>` + T(0, 16, "SCANNING...", 52, INKG) : pic) : chestPanel(t, 1, logCard2(t, (t - tSt - .2) / .8, t >= chill ? 2 : 1));
   const [gsx] = camPt(c, [gx, 0]);
-  const lim = CAM(TF(2025, 1000, .55, limStand(t, { bag: true, sip: t > LE("g908") + .3 && t < tP + 2 ? .8 : 0, nod: t >= LT("g908") && t < LE("g908") ? .08 * Math.sin((t - LT("g908")) * 6) : 0, talk: t >= LT("g908") - .1 && t <= LE("g908") + .1 })), c[0], c[1], c[2]);
-  const basket = t >= tP - .6 ? x2held(c, "pip", 1180, 1060, 340, true, TF(0, 0, .7, basketV3(t < tP + .5 ? 0 : t < tP + 1.4 ? 1 : t < tP + 2.0 ? 2 : 3)), 0, 40) : "";
+  const limOn = t >= LT("g908") - .2 && t < LT("g909") - .2;   // exactly the director's cuts to him and away from him (plan_shots.py)   /* v2 (teacher 28 Nov: "why is Uncle there?"): only for his one line; the director cuts to him */
+  const lim = !limOn ? "" : CAM(TF(2025, 1000, .55, limStand(t, { bag: true, sip: t > LE("g908") + .3 && t < tP + 2 ? .8 : 0, nod: t >= LT("g908") && t < LE("g908") ? .08 * Math.sin((t - LT("g908")) * 6) : 0, talk: t >= LT("g908") - .1 && t <= LE("g908") + .1 })), c[0], c[1], c[2]);
+  const basket = t >= tP - .6 ? x2held(c, "pip", 1120, 1060, 340, true, TF(0, 0, .7, basketV3(t < tP + .5 ? 0 : t < tP + 1.4 ? 1 : t < tP + 2.0 ? 2 : 3)), 0, 40) : "";
   return x2place("vd3", tapedLeaves(t, PEEL()) + TF(1860, 832, .26, snail3(t)), c) + lim
-    + x2bc(c, "momo", 860, 1062, 360, t, { in: s.t0 - .5, poses: [[0, "surprised"], [LT("g901") + .6, "sit"], [LT("g904") + .1, "thinking"], [LE("g905") - .3, "sit"], [tSt + .2, "cheer"], [tSt + 1.6, "sit"], [LT("g908") + .5, "laugh/cheer"], [LE("g908") + .5, "sit"]], look: 6, achieved: true })
-    + x2bc(c, "pip", 1180, 1060, 340, t, { in: s.t0 - .5, poses: [[0, "sit"], [LE("g903") + .05, "proud/arms_crossed"], [LT("g905"), "sit"], [tSt + .2, "cheer"], [tSt + 1.6, "sit"], [tP - .6, "sit"]], look: 8, achieved: true }) + basket
-    + x2bc(c, "basil", 1420, 1062, 350, t, { in: s.t0 - .5, poses: [[0, "surprised"], [LT("g901") + .4, "sit"], [LE("g902") + .05, "pointing"], [LT("g903"), "sit"], [LT("g905") - .1, "sit"], [LE("g905") + .1, "arms_crossed"], [LT("g907") + .3, "sit"], [LE("g909") + .2, "laughing"]], look: 6 })
-    + (t >= LT("g902") && t < tSc + 1.0 ? x2held(c, "basil", 1420, 1062, 350, false, TF(0, 0, .5, `<rect x="-90" y="-70" width="180" height="140" rx="8" fill="#E8C98A" stroke="#7A5226" stroke-width="7"/>` + T(0, 12, "CASE FILE", 28, "#7A5226")), -30, 40) : "")
+    + x2bc(c, "momo", 800, 1062, 360, t, { in: s.t0 - .5, poses: [[0, "surprised"], [LT("g901") + .6, "sit"], [LT("g904") + .1, "thinking"], [LE("g905") - .3, "sit"], [tSt + .2, "cheer"], [tSt + 1.6, "sit"], [LT("g908") + .5, "laugh/cheer"], [LE("g908") + .5, "sit"]], look: 6, achieved: true })
+    + x2bc(c, "pip", 1120, 1060, 340, t, { in: s.t0 - .5, poses: [[0, "sit"], [LE("g903") + .05, "proud/arms_crossed"], [LT("g905"), "sit"], [tSt + .2, "cheer"], [tSt + 1.6, "sit"], [tP - .6, "sit"]], look: 8, achieved: true }) + basket
+    + x2bc(c, "basil", 1360, 1062, 350, t, { in: s.t0 - .5, poses: [[0, "surprised"], [LT("g901") + .4, "sit"], [LE("g902") + .05, "pointing"], [LT("g903"), "sit"], [LT("g905") - .1, "sit"], [LE("g905") + .1, "arms_crossed"], [LT("g907") + .3, "sit"], [LE("g909") + .2, "laughing"]], look: 6 })
+    + (t >= LT("g902") && t < tSc + 1.0 ? x2held(c, "basil", 1360, 1062, 350, false, TF(0, 0, .5, `<rect x="-90" y="-70" width="180" height="140" rx="8" fill="#E8C98A" stroke="#7A5226" stroke-width="7"/>` + T(0, 12, "CASE FILE", 28, "#7A5226")), -30, 40) : "")
     + glitch + sparks
     + (pk > .01 ? TF(gsx, 300, pk * .82, panel) : "")
     + x2gSay("g901", 1500, 300, t) + x2gSay("g904", 1500, 300, t) + x2gSay("g906", 1100, 220, t, { maxW: 600 }) + x2gSay("g907", 1500, 300, t) + x2gSay("g909", 1500, 300, t) + say("g908", 1600, 300, t, { size: 40, maxW: 460, tail: 0 })
@@ -153,8 +194,8 @@ SC.next = (t, s) => { const tD = MK("ding"), tT = MK("turn"), c = camMix([1, 960
   return x2place("vd3", "", c) + x2bc(c, "basil", 1170, 960, 380, t, { in: s.t0 - .5, flip: look === 0, poses: [[0, "sit"], [tD + .3, "surprised"], [tT + .3, "deadpan"], [LT("n1202") + .3, "surprised"]], look: -4 })
     + CAM(x2desk(t, { ding: pulse(t, tD, .02, .3) }), c[0], c[1], c[2]) + cac
     + x2bc(c, "momo", 460, 1060, 370, t, { in: s.t0 - .5, poses: [[0, "sit"], [tD + .2, "surprised"], [LT("n1202") + .3, "surprised"]], look: look ? 8 : 6 })
-    + x2bc(c, "pip", 1640, 1012, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [tD + .2, "surprised"], [tT + .2, "thinking"], [LT("n1202") + .3, "surprised"]], look: -6 })
-    + x2glitchAt(t, c, 1850, { tape: true, face: gFace, scr: scrLRS() })
+    + x2bc(c, "pip", 1450, 1012, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [tD + .2, "surprised"], [tT + .2, "thinking"], [LT("n1202") + .3, "surprised"]], look: -6 })
+    + x2glitchAt(t, c, 1840, { tape: true, face: gFace, scr: scrLRS() })
     + (t >= tD - .05 ? comicWord(t, tD, 1430, 470, "DING!", { size: 80, d: .8, rot: 6 }) : "")
     + (t >= LT("n1201") ? comicWord(t, LT("n1201") - .2, ...camPt(c, [1720, 600]), "beep-boop...", { size: 40, tiny: true, col: "#0E3A3A", d: 1.0 }) : "")
     + x2gSay("n1201", 1500, 380, t) + logo(t); };

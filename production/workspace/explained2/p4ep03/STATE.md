@@ -6,6 +6,51 @@ then 0.5 s of black). Script: `../p4/p4_ep03_script.md` **v2** (Genie 3cbc25d), 
 Built by one Opus agent on 28 Nov 2026 from the P4 EP2 engine (`../p4ep02/`). **NOT uploaded**: the main session shows the teacher first.
 It REPLACES the old P4 EP03 PNe2DU8sFTI (never deleted).
 
+## v2 (28 Nov 2026, after the teacher saw the live cut): FIXES + RE-STAGED (review: scratchpad `p4ep03_v2_review/`; NOT uploaded)
+The live cut stays KLHY6W_dTR4 until the teacher replies "OK"; v2 is `/dev/shm/p4ep03/p4ep03_v2.mp4` (RAM; the live cut
+`/dev/shm/p4ep03/p4ep03.mp4` is kept). Same script, voices, timing and SOUND: the v2 file carries the live file's audio stream copied
+bit for bit (`run_render_v2.sh`: a full render, then `-map 0:v -map 1:a -c copy`). The teacher's notes and what changed:
+- **"detective needs detective hat... not over his episode bike helmet"**: `ep3art.js` `deerstalker()` / `deerstalkerBack()` / `detHat()`:
+  a brown tweed deerstalker (front and back peaks, ear flaps tied up in a bow on top), a size too big, sitting straight on his bare head
+  (no helmet, no chin strap), per pose (`BASILH3`: sit, oops (his paw redrawn on top), surprised, arms_crossed, cheer, laughing, pointing,
+  thinking, worried, waving, and the BACK view for the journey). It plops on at "Finally", sinks to his eyebrows (never his eyes), he
+  pushes it back at "expert" (tipped back). The score-bar chip and `thumb_v2.jpg` (`thumbP4ep03.js`) wear it too.
+- **"why is pip still in cyclist helmet?"**: no bike scene in EP3, so no bike helmets at all: `page.html` ITEM_OPT pip "C" (goggles only,
+  band behind his ears, lenses up on his crown; + the strap across the back of his head in the back view), `BASIL_HELMET = false`,
+  `PIP_HELMET = false`; the pandan leaf now flops onto his bare crown (`s2.js` flopLeaf). `qa_helmets.js`: 0 frames with a helmet.
+- **"font not clear"**: the title card (`slamV2`), THREE CLUES and the fix cards' white words get a thick ink outline (paint-order stroke).
+- **"Remember one of the rule is not to have still frames or same scene for more than 10 seconds"**: THE DIRECTOR. `census.js` records
+  the base staging (who and which cards are where, 4 a second); `plan_shots.py` writes `director_p1.js` (75 shots: singles, two-shots,
+  the group, slow push-ins, hand-placed pushes on the look-closer panel, the words card and the read-along; locked where the base camera
+  already moves or a full-frame insert is up; no face under a screen card or the HUD; no jump cuts) and `qa/shotlist.txt`; `main.js`
+  `dirAt()` films each scene through it; screen things go through `DHUD()` (lib.js) and stay put. `../qa/hold_check.py` measures the video.
+- **"zoom in to trace in red, the edges, showing basic descriptions"**: `s3.js` `edgeTrace()` during Heart's q812 (276.2-283.0 s): a full
+  frame push onto the mango leaf, a red line round its real outline ("STRAIGHT EDGE: smooth all the way round, no teeth"), across to the
+  mystery leaf ("JAGGED EDGE: tiny teeth all round, like a saw"), then both traced side by side; it cuts back for the CLEARED stamp.
+- **"glitch is too close to the pet buddies"**: GLITCH and the buddies re-spaced in every scene where he stands with them (cold, clue
+  cards, colour, size, GLITCH scene, next); `qa_gaps.py` on the census: >= 60 px clear in every sample.
+- **"And why is Uncle there?"**: Uncle Lim is drawn ONLY for his line g908 (the director cuts to him at 343.12 s and away at 352.99 s);
+  `x2limFar` draws nothing. Checked: 0 samples with him outside his line.
+- Pip's "LEAF CASE" clipboard read mirrored: `x2held` flips the words on a mirrored prop back (`unflipText`); GLITCH's "?" too.
+  `census.js` lists mirrored words: 0.
+- Rules recorded: `../SERIES_FORMAT.md` 6y (the 10-second rule) and 6z (hat replaces helmet, helmets only when cycling, GLITCH spacing,
+  guests only for their moment, contrast, no mirrored words, comparisons shown), `../MOTION_GUIDE.md` 3, the vault `House-Rules.md`.
+- Rebuild order (v2): `node census.js out/census_base.json .25 1` -> `python3 plan_shots.py` -> `node ../kit/bubble_layout.js . 1` ->
+  checks (`node census.js out/census_final.json .25 0 && python3 qa_gaps.py out/census_final.json`, `node qa_helmets.js`, `node sweep.js 1`,
+  `node ../qa/face_cover_scan.js p4ep03 1 0-459.1` from explained2/) -> `./run_render_v2.sh` -> `python3 ../qa/hold_check.py <mp4>`.
+**v2 result (28 Nov 2026, 09:49-10:10 UTC, full render 1237 s, flock /tmp/explained_render.lock, RAM):** `/dev/shm/p4ep03/p4ep03_v2.mp4`
+(318 MB) 1920x1080, 30 fps, 13771 frames = 7:39.0, decode 0 errors; audio stream md5 bd10cc44... (packets) / 947b601e... (decoded)
+IDENTICAL to the live file; -16.0 LUFS, peak -2.7 dBFS (unchanged). `../qa/hold_check.py`: 232 picture changes, mean hold 2.0 s,
+**longest hold 9.25 s** (the journey's drop, 201.3-210.5), 0 holds over 10 s (the live cut: 57.0 s, 11 over 10 s). census checks: GLITCH
+>= 60 px, Lim only in his line, 0 mirrored words; `qa_helmets.js` 0; `sweep.js` 0 bad; face_cover_scan: only the by-design runs (the pick
+cards rising, "Now you know!", the faces behind the full-frame edge trace) and single in-between frames of a card popping (224.8 s 13 %,
+348.8 / 351.4 s 18-21 % "the plant grows new leaves", 403.0 s 13 %). Bubbles 102 of 103 beside their speaker. Thumbnail `thumb_v2.jpg`
+(not committed: media). Review: scratchpad `p4ep03_v2_review/` (index.html, before/after sheets, edge-trace stills, the 720p preview in 3
+parts of 13.6 / 14.0 / 12.9 MB; media symlinked from `/dev/shm/p4ep03/review_v2/`). NOT uploaded: waiting for the teacher's "OK" to
+replace KLHY6W_dTR4 (then re-upload as a new version or replace per the upload kit; chapters / app moments keep their times: same timing).
+(An interim render had a Basil single cropping his hat and Lim half out of frame; the planner now frames the hat in and hand-places
+Lim's two shots; that render was discarded.)
+
 ## The teacher's 20 questions (all: the script's recommendation)
 Q1 the pandan is cleared on its veins only (no pandan leaf stalk labelled) · Q2 the book's "straight edge" for the mango · Q3 the journey
 says water travels through the veins, no P5 words · Q4 four key words (LEAF BLADE, LEAF STALK, NET VEINS, PARALLEL VEINS) · Q5 the snail's
@@ -39,7 +84,7 @@ JSONs are committed in `voice/` after the build).
   "jug" painting holds a watering can); his screen: LEAF RETURN SERVICE, OWNER: ..., the laugh meter at 0, the thumbs-up, the parts check
   (BLADE / STALK / VEINS ticks), UPDATING; the chest panel shows the three evidence cards (parallel vs net, straight vs jagged, the match)
   then KNOWLEDGE LOG with entry 2 on top of entry 1 (the counter ticks 1 -> 2 at the chill, 1.0 s after "weak clues", the eyes narrow 8 frames).
-- **Basil's detective cap** (Q11 A, code): `detCap` in the helmet's own frame (BASILH anchors), a soft brown cap two sizes too big ON TOP of
+- **Basil's detective cap** (Q11 A, code; SUPERSEDED by v2 above: a deerstalker on his bare head, no helmet): `detCap` in the helmet's own frame (BASILH anchors), a soft brown cap two sizes too big ON TOP of
   his orange helmet; it plops on at "Finally", slides to his eyebrows (never his eyes), he pushes it up at "expert"; worn to the end (not in
   the sting, not on back views).
 - **The snail** (EP1's `snailV2` with its crown, an invisible face box): the pandan pot's rim (cold, witness), the mango trunk (colour), the

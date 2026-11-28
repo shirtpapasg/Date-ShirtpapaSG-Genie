@@ -18,7 +18,7 @@ SC.colour = (t, s) => { const t0 = MK("swatch"), pan = clamp((t - t0) / 2.2), ba
   const row = t >= LT("o402") - .2 && t < MK("flop2") + .9 ? OP(1 - ramp(t, MK("flop2") + .6, .3), [0, 1, 2].map((i) => TF(700 + i * 260, 300, spring(t, W("o402", "green", i) - .05, .4), `<g filter="url(#dropS)"><rect x="-110" y="-100" width="220" height="200" rx="20" fill="#fff" stroke="${P.ink}" stroke-width="6"/></g><rect x="-90" y="-82" width="180" height="120" rx="10" fill="#4FA23A"/>` + T(0, 78, ["pandan", "mango tree", "hibiscus"][i], 30, P.ink))).join("")) : "";
   const strips = t >= MK("three3") - .3 && t < LE("o403") + .6;
   const gScr = t >= LT("o403") ? scrBox(.7, .24) + scrTxt(.8, "OWNER: PANDAN +", .055) + scrTxt(.88, "MANGO + HIBISCUS", .055) : scrLRS();
-  const glitch = x2glitchAt(t, c, 1640, { left: true, tape: true, face: t >= LT("o403") && t < LE("o404") ? "happy" : "smug", scr: gScr, strip: strips ? clamp((t - MK("three3") + .3) / .4) : 0 });
+  const glitch = x2glitchAt(t, c, 1840, { left: true, tape: true, face: t >= LT("o403") && t < LE("o404") ? "happy" : "smug", scr: gScr, strip: strips ? clamp((t - MK("three3") + .3) / .4) : 0 });
   const mx = 760, momoLeaf = t < LE("o402") + .2;
   return x2place("vd3", tapedLeaves(t) + TF(...SNAIL.colour, snail3(t)), c) + x2pigeonTree(t, c, -9) + x2limFar(t, c) + CAM(x2desk(t), c[0], c[1], c[2])
     + x2bc(c, "basil", 1180, 1060, 360, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("o402") + .1, "worried/oops"], [LT("o403") + .2, "sit"], [LE("o406") + .05, "deadpan"]], look: -4 })
@@ -28,7 +28,7 @@ SC.colour = (t, s) => { const t0 = MK("swatch"), pan = clamp((t - t0) / 2.2), ba
     + (momoLeaf ? x2held(c, "momo", mx, 1060, 380, false, heldLeaf(.42, -60), -40, 30) : "")
     + chips + row
     + (strips ? [0, 1, 2].map((i) => comicWord(t, MK("three3") + i * .25, 1080 + i * 170, 250 + (i % 2) * 60, "SKRITCH!", { size: 58, d: .6, rot: i % 2 ? 8 : -6 })).join("") : "")
-    + (t >= LT("o405") - .1 ? TF(1650, 330, spring(t, LT("o405") - .1, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 1, { k: .62, stamp: ["NOT|ENOUGH", false, MK("notenough") + .3] })) : "")
+    + (t >= LT("o405") - .1 ? DHUD(TF(1650, 330, spring(t, LT("o405") - .1, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 1, { k: .62, stamp: ["NOT|ENOUGH", false, MK("notenough") + .3] }))) : "")
     + inset3(t, MK("notenough") + .4, LE("o405") + .5, 420, 330, "some leaves are red or purple", picRedLeaves(), "#C9643E", 380, 280)
     + x2gSay("o403", 1500, 300, t) + x2HUD(t); };
 
@@ -39,8 +39,8 @@ SC.colour = (t, s) => { const t0 = MK("swatch"), pan = clamp((t - t0) / 2.2), ba
 // back (still on the plant; his face stays clear): FLOP!; the replay at a quarter speed with the ruler
 const SZC = () => camOn([560, 760], 1.2, 900, 640);
 const PIPX = (t) => { const f = MK("flop3"); return t < f ? 560 : lerp(560, 455, eo(clamp((t - f) / .45))); };
-// the flopped pandan leaf: from the plant over the top of Pip's helmet and down his back; u = 0..1 the flop (o.part: "back" | "top")
-function flopLeaf(t, c, u, part) { const px = PIPX(9e9), hx = px - 6, hy = 1060 - 380, A = [PANDAN_AT[0] + 10, PANDAN_AT[1] - 330];
+// the flopped pandan leaf: from the plant over the top of Pip's head (v2: no helmet) and down his back; u = 0..1 the flop (o.part: "back" | "top")
+function flopLeaf(t, c, u, part) { const px = PIPX(9e9), hx = px - 6, hy = 1060 - 336,   /* v2: no helmet, so the leaf lies on his bare crown, between his ears */ A = [PANDAN_AT[0] + 10, PANDAN_AT[1] - 330];
   const top = [lerp(A[0] + 80, hx + 4, u), lerp(A[1] - 160, hy + 24, u)], end = [lerp(A[0] + 170, hx + 96, u), lerp(A[1] - 220, hy + 260 * u, u)];
   const d = `M${A[0]} ${A[1]} Q${n2(top[0] - 60)} ${n2(top[1] - 60)} ${n2(top[0])} ${n2(top[1])} Q${n2(top[0] + 70)} ${n2(top[1] + 10)} ${n2(end[0])} ${n2(end[1])}`;
   const strap = (w, col) => `<path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round"/>`;
@@ -48,7 +48,7 @@ function flopLeaf(t, c, u, part) { const px = PIPX(9e9), hx = px - 6, hy = 1060 
   if (part === "back") return CAM(all, c[0], c[1], c[2]);
   return CAM(`<clipPath id="flopTop"><rect x="${hx - 140}" y="${hy - 200}" width="300" height="${n2(236)}"/></clipPath><g clip-path="url(#flopTop)">${all}</g>`, c[0], c[1], c[2]); }
 // one comparison pair (side by side, never overlapped): leaf a (left) and leaf b (right) on a card, each labelled with a plain line
-const pairCard = (t, t0, t1, x, y, a, la, b, lb) => t < t0 - .05 || t > t1 + .35 ? "" : TF(x, y, spring(t, t0, .4) * (1 - ramp(t, t1, .3)), `<g filter="url(#drop)"><rect x="-330" y="-190" width="660" height="380" rx="26" fill="#FFF8EA" stroke="${P.ink}" stroke-width="6"/></g>` + a + b + tpill(-170, 140, la, 34, "#fff", P.ink, { w: 700 }) + tpill(170, 140, lb, 34, "#fff", P.ink, { w: 700 }));
+const pairCard = (t, t0, t1, x, y, a, la, b, lb) => t < t0 - .05 || t > t1 + .35 ? "" : DHUD(TF(x, y, spring(t, t0, .4) * (1 - ramp(t, t1, .3)), `<g filter="url(#drop)"><rect x="-330" y="-190" width="660" height="380" rx="26" fill="#FFF8EA" stroke="${P.ink}" stroke-width="6"/></g>` + a + b + tpill(-170, 140, la, 34, "#fff", P.ink, { w: 700 }) + tpill(170, 140, lb, 34, "#fff", P.ink, { w: 700 })));
 SC.size = (t, s) => { const c = SZC(), tM = MK("measure"), tF = MK("flop3"), tR = MK("slow0"), rp = LT("s506");
   const replay = t >= rp + .3 && t < LT("s507") - .1, tw_ = replay ? tF - .35 + (t - rp - .3) / 4 : t;   // the replay: the flop again at a quarter speed
   const fu = clamp((tw_ - tF - .1) / .5), flopped = tw_ >= tF + .1, px = PIPX(tw_);
@@ -62,14 +62,14 @@ SC.size = (t, s) => { const c = SZC(), tM = MK("measure"), tF = MK("flop3"), tR 
   const rulerPop = replay && t >= tR + .3 ? TF(1300, 420, spring(t, tR + .3, .4), `<g filter="url(#drop)"><rect x="-380" y="-230" width="760" height="420" rx="26" fill="#FFF8EA" stroke="${P.ink}" stroke-width="6"/></g>`
     + TF(-330, -120, .9, pandanLeaf(640, { w: 22 })) + T(0, -150, "pandan leaf", 30, P.ink) + TF(-330, 0, .9, mangoLeaf({ id: "rpm" })) + T(110, 10, "old mango leaf", 28, P.ink) + TF(-330, 110, .9, mangoLeaf({ young: true, id: "rpy" })) + T(10, 120, "young mango leaf", 28, P.ink)) : "";
   return world + (flopped && !lifted ? flopLeaf(tw_, c, eo(fu), "back") : "") + pip + (flopped && !lifted ? flopLeaf(tw_, c, eo(fu), "top") : "") + ruler
-    + x2bc(c, "momo", 860, 1062, 370, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("s503") + .05, "laugh/cheer"], [tM - .1, "sit"], [tF + .3, "surprised"], [LT("s505") + 1.0, "laugh/cheer"], [LE("s505") + .5, "sit"]], look: -6, still: replay })
-    + x2bc(c, "basil", 1110, 1050, 350, t, { in: s.t0 - .5, flip: true, poses: [[0, "arms_crossed"], [tF + .3, "surprised"], [LE("s505") + .3, "arms_crossed"]], look: -4, still: replay })
-    + x2glitchAt(t, c, 1330, { left: true, tape: true, face: t >= LT("s502") && t < LE("s503") + .5 ? "happy" : "smug", scr: gScr })
+    + x2bc(c, "momo", 820, 1062, 370, t, { in: s.t0 - .5, flip: true, poses: [[0, "sit"], [LE("s503") + .05, "laugh/cheer"], [tM - .1, "sit"], [tF + .3, "surprised"], [LT("s505") + 1.0, "laugh/cheer"], [LE("s505") + .5, "sit"]], look: -6, still: replay })
+    + x2bc(c, "basil", 1050, 1050, 350, t, { in: s.t0 - .5, flip: true, poses: [[0, "arms_crossed"], [tF + .3, "surprised"], [LE("s505") + .3, "arms_crossed"]], look: -4, still: replay })
+    + x2glitchAt(t, c, 1395, { left: true, tape: true, face: t >= LT("s502") && t < LE("s503") + .5 ? "happy" : "smug", scr: gScr })
     + pairCard(t, tM, tM + 1.1, 1240, 330, TF(-280, -10, .62, `<g transform="rotate(-8)">${mangoLeaf({ id: "pc1" })}</g>`), "bigger", TF(60, -10, .62, hibLeaf({ id: "pc2" })), "smaller")
     + pairCard(t, tM + 1.15, LE("s504") + .4, 1240, 330, TF(-280, 0, .8, `<g transform="rotate(-8)">${mangoLeaf({ young: true, id: "pc3" })}</g>`), "smaller", TF(60, -10, .62, hibLeaf({ id: "pc4" })), "bigger")
     + (t >= tF + .1 && t < tF + 1.2 ? comicWord(t, tF + .15, ...camPt(c, [560, 560]), "FLOP!", { size: 110, d: 1.0 }) : "")
-    + film + rulerPop
-    + (t >= LT("s507") - .1 ? TF(1660, 360, spring(t, LT("s507") - .1, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 2, { k: .62, stamp: ["WEAK|CLUE", false, MK("weak") + .1] })) : "")
+    + DHUD(film + rulerPop)
+    + (t >= LT("s507") - .1 ? DHUD(TF(1660, 360, spring(t, LT("s507") - .1, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 2, { k: .62, stamp: ["WEAK|CLUE", false, MK("weak") + .1] }))) : "")
     + x2gSay("s502", 1300, 330, t) + x2HUD(t); };
 
 /* ================================================================ LCLEAF · [LOOK CLOSER] read the leaf like a scientist (Basil leads) ================================================================ */

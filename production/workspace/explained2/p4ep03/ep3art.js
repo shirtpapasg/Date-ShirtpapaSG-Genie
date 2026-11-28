@@ -8,7 +8,7 @@
 //   the set: BG.vd3 (baked): EP2's void deck (vdv2, one 214 plaque) with the mango tree in the open side at the left, the pandan pot by
 //           the letterboxes, the hibiscus hedge in a planter in front of the bicycle bay, Uncle Lim's stone table beside it
 //   props: the tape roll and strips, swatches, ruler, tape measure, Pip's clipboard, the basket, the case board with mugshots and red
-//           string, CLEARED / CASE CLOSED stamps, Basil's detective cap (on top of his helmet), the cactus cameo, the insets
+//           string, CLEARED / CASE CLOSED stamps, Basil's detective hat (a deerstalker, INSTEAD of his helmet), the cactus cameo, the insets
 const INK3 = "#2B2147";
 /* ================================================================ leaves ================================================================ */
 // a leaf outline along +x from the blade's base (0, 0) to its tip (L, 0): half-width W * prof(u); teeth: n small saw teeth pointing to the
@@ -162,22 +162,57 @@ function caseBoard(t, st = [0, 0, 0], hi = 0, o = {}) { let s = `<path d="M-250 
     s += `<g transform="translate(${x} ${y}) rotate(${(i - 1) * 4})">${lit ? `<rect x="-90" y="-100" width="180" height="210" rx="10" fill="${P.sun}" opacity="${n2(lit)}" filter="url(#b4)"/>` : ""}<rect x="-80" y="-90" width="160" height="190" rx="6" fill="#FFF8EA" stroke="${INK3}" stroke-width="5"/><clipPath id="cbc${i}"><rect x="-70" y="-80" width="140" height="120"/></clipPath><rect x="-70" y="-80" width="140" height="120" fill="#DDEFF7"/><g clip-path="url(#cbc${i})">${pic(i)}</g>${T(0, 76, names[i], i === 1 ? 20 : 22, INK3)}<circle cx="0" cy="-90" r="9" fill="#E5484D"/>`
       + (st[i] > 0 ? TF(0, -10, lerp(2, 1, eo(st[i])) * (i === 2 ? 1 : .85), stampMark(i === 2 ? "CASE CLOSED" : "CLEARED", i === 2 ? "#2E9E4C" : "#D9302A", i === 2 ? 30 : 34)) : "") + `</g>`; });
   return s; }
-// THE DETECTIVE CAP (script 6b, question 11 A: drawn in code): a soft brown cap two sizes too big, worn ON TOP of Basil's orange helmet.
-// Drawn in the helmet's own frame (items_options.js BASILH: origin the middle of the helmet's front edge, 300 wide); slide 0 = perched on
-// top of the helmet, 1 = slid down to just above his eyebrows (never over his eyes)
-const BASILH3 = { sit: { cx: 434, rim: 152, hw: 168, tilt: -3 }, oops: { cx: 345, rim: 86, hw: 160, tilt: -6 }, surprised: { cx: 345, rim: 76, hw: 162, tilt: -4 }, arms_crossed: { cx: 357, rim: 80, hw: 162, tilt: -3 },
+// THE DETECTIVE HAT (script 6b, question 11 A: drawn in code). v2 (teacher, 28 Nov 2026: "detective needs detective hat... not over his
+// episode bike helmet"): a brown tweed DEERSTALKER (a front peak and a back peak, the ear flaps tied up in a bow on top), a size too big,
+// worn INSTEAD of his orange bike helmet, sitting straight on his head (SERIES_FORMAT: a costume hat REPLACES the bike helmet, never
+// stacked; bike helmets only when the buddies cycle). Drawn in the head's own frame (items_options.js BASILH: origin = the middle of the
+// helmet's front edge = just above the eyes, 300 wide = the head's width); per pose: cx, rim, hw, tilt (+ back: the back view).
+// slide: < 0 = falling in from above (the cold open), 0 = landed, 1 = sunk low to his eyebrows (too big; never over his eyes),
+// .25 = pushed back up (tipped back a little). EP3 has no bike scene, so he wears no helmet at all (page.html BASIL_HELMET = false).
+const BASILH3 = { sit: { cx: 434, rim: 152, hw: 168, tilt: -3 }, oops: { cx: 345, rim: 86, hw: 160, tilt: -6, paw: [470, 66, 54, 50] }, surprised: { cx: 345, rim: 76, hw: 162, tilt: -4 }, arms_crossed: { cx: 357, rim: 80, hw: 162, tilt: -3 },
   cheer: { cx: 347, rim: 72, hw: 158, tilt: -4 }, laughing: { cx: 340, rim: 86, hw: 170, tilt: -2 }, pointing: { cx: 352, rim: 78, hw: 160, tilt: -4 }, thinking: { cx: 357, rim: 76, hw: 158, tilt: -3 },
-  worried: { cx: 352, rim: 78, hw: 158, tilt: -3 }, waving: { cx: 345, rim: 78, hw: 160, tilt: -3 } };
-function detCap(slide = 0) { const y = lerp(-112, -28, clamp(slide, -6, 1));
-  return `<g transform="translate(0 ${n2(y)})"><path d="M-178 6 C-186 -96 -96 -168 0 -170 C96 -168 186 -96 178 6 Z" fill="#9A6A3E" stroke="${INK3}" stroke-width="9" stroke-linejoin="round"/>`
-    + `<path d="M-120 -40 C-90 -120 90 -120 120 -40 M0 -170 V-10" stroke="#7E5230" stroke-width="7" fill="none"/>` + [[-90, -60], [-30, -110], [40, -90], [100, -50], [-60, -20], [60, -10]].map(([x, yy]) => `<path d="M${x - 8} ${yy} h16 M${x} ${yy - 8} v16" stroke="#C49A6A" stroke-width="4" opacity=".7"/>`).join("")
-    + `<path d="M-182 -2 Q0 -30 182 -2 L182 24 Q0 -4 -182 24Z" fill="#6E4628" stroke="${INK3}" stroke-width="7"/>`
-    + `<path d="M-120 22 Q0 0 120 22 Q100 70 0 72 Q-100 70 -120 22Z" fill="#8A5A34" stroke="${INK3}" stroke-width="8" stroke-linejoin="round"/><path d="M-80 34 Q0 22 80 34" stroke="#B88A5A" stroke-width="5" fill="none" opacity=".7"/>`
-    + `<circle cx="0" cy="-168" r="14" fill="#6E4628" stroke="${INK3}" stroke-width="6"/><path d="M-60 -136 Q-20 -158 30 -150" stroke="#fff" stroke-width="7" fill="none" opacity=".25" stroke-linecap="round"/></g>`; }
-// the cap follows Basil's pose: itemsOf (lib.js / items_options.js) is wrapped once; window.CAP(t) -> the slide (0..1), or null for no cap
-(function () { const prev = itemsOf; itemsOf = function (who, name, fl, o) { let s = prev(who, name, fl, o);
-  if (who === "basil" && window.CAP && !(o && o.cap === false)) { const H = BASILH3[poseKey("basil", name)], sl = window.CAP(window._T || 0); if (H && sl !== null) s += `<g transform="translate(${H.cx} ${H.rim}) rotate(${H.tilt}) scale(${n2(H.hw / 150 * 1.02)})">${detCap(sl)}</g>`; }
-  return s; }; })();
+  worried: { cx: 352, rim: 78, hw: 158, tilt: -3 }, waving: { cx: 345, rim: 78, hw: 160, tilt: -3 }, back: { cx: 258, rim: 98, hw: 130, tilt: 0, back: true } };
+const HAT = { base: "#9A6A3E", dark: "#6E4628", mid: "#7E5230", light: "#C9A06C", ink: "#1E3442" };
+// the tweed check, clipped to a shape (every hat part uses it)
+const hatTweed = (id, d) => `<clipPath id="${id}"><path d="${d}"/></clipPath><path d="${d}" fill="${HAT.base}"/><g clip-path="url(#${id})">`
+  + [...Array(15)].map((_, i) => `<path d="M${-280 + i * 40} -260 V120" stroke="${HAT.mid}" stroke-width="9" opacity=".45"/><path d="M-300 ${-250 + i * 26} H300" stroke="${HAT.mid}" stroke-width="7" opacity=".4"/>`).join("")
+  + [...Array(15)].map((_, i) => `<path d="M${-262 + i * 40} -260 V120" stroke="${HAT.light}" stroke-width="2.5" opacity=".55"/>`).join("")
+  + `<path d="M-300 -40 Q0 60 300 -40 V140 H-300Z" fill="${HAT.dark}" opacity=".28"/></g>`;
+// the deerstalker seen from the front three-quarter (the face turned to +x)
+function deerstalker() { const ink = HAT.ink;
+  const crown = "M-160 6 C-170 -84 -102 -156 6 -158 C112 -156 172 -84 160 6 Q4 26 -160 6Z";
+  const backPeak = "M-146 2 Q-194 4 -220 26 Q-180 32 -136 20Z";
+  const frontPeak = "M-24 16 Q60 24 150 6 Q180 10 192 22 Q124 36 40 34 Q-8 32 -24 16Z";
+  const flap = (sg) => `M${sg * 156} -6 Q${sg * 172} -58 ${sg * 140} -102 Q${sg * 114} -116 ${sg * 98} -92 Q${sg * 112} -46 ${sg * 110} 2Z`;
+  let s = hatTweed("dsBP", backPeak) + `<path d="${backPeak}" fill="none" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>`;
+  s += `<g filter="url(#b4)" opacity=".35"><path d="M-160 10 Q0 40 160 10" stroke="#10202A" stroke-width="18" fill="none"/></g>`;   // its soft shadow on his head
+  s += hatTweed("dsCr", crown) + `<path d="${crown}" fill="none" stroke="${ink}" stroke-width="9" stroke-linejoin="round"/>`;
+  s += `<path d="M6 -158 Q36 -82 30 22 M6 -158 Q-64 -100 -88 18 M6 -158 Q92 -110 118 14" stroke="${HAT.dark}" stroke-width="6" fill="none" opacity=".8"/>`;   // the panel seams
+  for (const sg of [-1, 1]) s += hatTweed("dsF" + (sg + 1), flap(sg)) + `<path d="${flap(sg)}" fill="none" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/>`;   // the ear flaps, tied up
+  s += `<path d="M-116 -98 Q-66 -154 -12 -160 M124 -96 Q76 -152 24 -160" stroke="${HAT.dark}" stroke-width="7" fill="none" stroke-linecap="round"/>`;   // the ties
+  s += `<g transform="translate(6 -162)"><path d="M0 0 Q-40 -34 -52 -6 Q-40 18 0 0Z M0 0 Q40 -34 52 -6 Q40 18 0 0Z" fill="${HAT.dark}" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/><circle r="11" fill="${HAT.mid}" stroke="${ink}" stroke-width="5"/></g>`;   // the bow on top
+  s += hatTweed("dsFP", frontPeak) + `<path d="${frontPeak}" fill="none" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>`;
+  s += `<path d="M-112 -108 Q-56 -142 6 -146" stroke="#fff" stroke-width="9" fill="none" opacity=".28" stroke-linecap="round"/>`;   // a soft shine
+  return s; }
+// the deerstalker from behind (the journey's back view): symmetric, the back peak towards us, the flaps' bow on top
+function deerstalkerBack() { const ink = HAT.ink;
+  const crown = "M-170 10 C-182 -88 -104 -168 0 -170 C104 -168 182 -88 170 10 Q0 34 -170 10Z", peak = "M-120 16 Q0 40 120 16 Q110 60 0 68 Q-110 60 -120 16Z";
+  const flap = (sg) => `M${sg * 166} -4 Q${sg * 182} -60 ${sg * 148} -108 Q${sg * 120} -124 ${sg * 102} -96 Q${sg * 118} -48 ${sg * 116} 4Z`;
+  let s = hatTweed("dbCr", crown) + `<path d="${crown}" fill="none" stroke="${ink}" stroke-width="9" stroke-linejoin="round"/><path d="M0 -170 V30 M0 -170 Q-80 -100 -90 24 M0 -170 Q80 -100 90 24" stroke="${HAT.dark}" stroke-width="6" fill="none" opacity=".8"/>`;
+  for (const sg of [-1, 1]) s += hatTweed("dbF" + (sg + 1), flap(sg)) + `<path d="${flap(sg)}" fill="none" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/>`;
+  s += `<path d="M-120 -104 Q-64 -166 -8 -172 M120 -104 Q64 -166 8 -172" stroke="${HAT.dark}" stroke-width="7" fill="none" stroke-linecap="round"/><g transform="translate(0 -174)"><path d="M0 0 Q-40 -34 -52 -6 Q-40 18 0 0Z M0 0 Q40 -34 52 -6 Q40 18 0 0Z" fill="${HAT.dark}" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/><circle r="11" fill="${HAT.mid}" stroke="${ink}" stroke-width="5"/></g>`;
+  s += hatTweed("dbPk", peak) + `<path d="${peak}" fill="none" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>`;
+  return s; }
+function detHat(slide = 0, back = false) { const sl = clamp(slide, -6, 1), y = sl < 0 ? -30 + sl * 110 : lerp(-30, -16, sl), rot = back || sl < 0 ? 0 : -8 * (1 - sl);
+  return `<g transform="translate(0 ${n2(y)}) rotate(${n2(rot)} -120 0)">${back ? deerstalkerBack() : deerstalker()}</g>`; }
+// The hat follows Basil's pose: itemsOf (lib.js / items_options.js) is wrapped once. window.CAP(t) -> the slide, or null for no hat. While
+// the hat is on, the bike helmet (and its chin strap) is never drawn under it, whatever BASIL_HELMET says.
+(function () { const prev = itemsOf; itemsOf = function (who, name, fl, o) { o = o || {};
+  if (who !== "basil" || !window.CAP || o.cap === false) return prev(who, name, fl, o);
+  const H = BASILH3[poseKey("basil", name)], sl = window.CAP(window._T || 0);
+  if (sl === null || !H) return prev(who, name, fl, o);
+  const paw = H.paw ? `<clipPath id="hatPaw_${name}"><ellipse cx="${H.paw[0]}" cy="${H.paw[1]}" rx="${H.paw[2]}" ry="${H.paw[3]}"/></clipPath><use href="#s_${name}" clip-path="url(#hatPaw_${name})"/>` : "";   // a paw on the hat stays on top
+  return prev(who, name, fl, { ...o, helmet: false }) + `<g transform="translate(${H.cx} ${H.rim}) rotate(${H.tilt}) scale(${n2(H.hw / 150 * 1.02)})">${detHat(sl, !!H.back)}</g>` + paw; }; })();
 // the cactus cameo (the link to EP4; a code drawing until EP4's Spike is painted): round, ribbed, green, spines in clusters on the ribs, a
 // glazed pot, three bright plastic leaves sticky-taped on, leaning a little. Origin = the pot's base. FACES: none (it hops straight up)
 function cactusV3(t, o = {}) { const sq = o.sq || 0; let s = `<ellipse cx="0" cy="4" rx="90" ry="12" fill="${INK3}" opacity=".2"/><g transform="scale(${n2(1 + .1 * sq)} ${n2(1 - .12 * sq)})">`;
@@ -188,7 +223,7 @@ function cactusV3(t, o = {}) { const sq = o.sq || 0; let s = `<ellipse cx="0" cy
   return s; }
 // a little inset card (title under the picture) — EP2's x2inset, kept here so the insets are one style
 const inset3 = (t, t0, t1, x, y, title, pic, col, w = 340, h = 250) => { if (t < t0 - .05 || t > t1 + .35) return ""; const k = spring(t, t0, .45) * (1 - ramp(t, t1, .3)), id = "in3" + Math.round(x) + Math.round(y);
-  return TF(x, y, k, `<g filter="url(#dropS)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="22" fill="#fff" stroke="${col}" stroke-width="7"/></g><clipPath id="${id}"><rect x="${-w / 2 + 10}" y="${-h / 2 + 10}" width="${w - 20}" height="${h - 64}" rx="16"/></clipPath><g clip-path="url(#${id})">${pic}</g>` + T(0, h / 2 - 20, title, 28, INK3, { w: 700 })); };
+  return DHUD(TF(x, y, k, `<g filter="url(#dropS)"><rect x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}" rx="22" fill="#fff" stroke="${col}" stroke-width="7"/></g><clipPath id="${id}"><rect x="${-w / 2 + 10}" y="${-h / 2 + 10}" width="${w - 20}" height="${h - 64}" rx="16"/></clipPath><g clip-path="url(#${id})">${pic}</g>` + T(0, h / 2 - 20, title, 28, INK3, { w: 700 }))); };
 // the inset pictures
 const picChilliLeaf = () => `<rect x="-170" y="-130" width="340" height="200" fill="#EAF6FF"/>` + TF(-150, -10, .42, `<path d="M0 0 Q90 -46 230 0 Q90 46 0 0Z" fill="#6DB548" stroke="${INK3}" stroke-width="9"/><path d="M0 0 H225" stroke="#3F7A2A" stroke-width="5"/>`) + TF(30, -20, .38, hibLeaf({ id: "pcl" }));
 const picRedLeaves = () => `<rect x="-170" y="-130" width="340" height="200" fill="#EAF6FF"/>` + TF(-80, -30, .4, `<g transform="rotate(40)">${mangoLeaf({ young: true, id: "prl1" })}</g>`) + TF(-120, -40, .36, `<g transform="rotate(70)">${mangoLeaf({ young: true, id: "prl2" })}</g>`)
@@ -199,3 +234,8 @@ const picNewLeaves = (t) => `<rect x="-170" y="-130" width="340" height="200" fi
 
 // EP1's snail with its tiny cardboard crown (artv2.js snailV2), with an invisible face box so speech bubbles keep off it (kit/bubble_layout.js)
 const snail3 = (t, o = {}) => `<!--FACES:right snail-->` + snailV2(t, { crown: true, ...o }) + `<rect data-face="snail" x="56" y="-120" width="52" height="84" fill="none" stroke="none"/>`;
+// v2 (teacher 28 Nov 2026: no bike helmets in EP3; Pip in his goggles, items_options.js option C): from behind (the journey's back view)
+// the goggles' strap shows across the back of his head, between his ears (sprite px of pip_back; the lenses are on the far side)
+(function () { const prev = itemsOf; itemsOf = function (who, name, fl, o) { const s = prev(who, name, fl, o);
+  if (who !== "pip" || name !== "pip_back" || (window.ITEM_OPT || {}).pip !== "C") return s;
+  const d = "M206 182 C262 206 378 206 432 178"; return s + `<path d="${d}" stroke="#3A3E56" stroke-width="24" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#3E4460" stroke-width="15" fill="none" stroke-linecap="round"/><path d="M226 186 C270 200 360 200 410 184" stroke="#6E7594" stroke-width="3" fill="none" opacity=".7"/>`; }; })();

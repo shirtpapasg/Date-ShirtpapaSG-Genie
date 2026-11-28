@@ -538,6 +538,39 @@ The teacher: "something is wrong with the direction of the person cycling. Also,
 - QA: `qa/facing_scan.js` (run with the ghost scan) lists every moving drawing whose travel direction disagrees with its facing. A part is not finished until it is clean. Check by eye too: the contact sheet shows anything crossing the frame.
 - Run it from explained2/: `NODE_PATH=$(npm root -g) node qa/facing_scan.js epNN P` (BACKWARDS lines with the 10 s chunks to re-render; exit 1 when any; `--movers` also lists untagged groups that travel; `STATIC=1 node qa/facing_scan.js epNN` is a quick source-only check). A creature drawn inline in a scene gets an SVG note as the first thing in the group that moves it: `` TF(x, y, k, `<!--FACES:right cyclist-->...`) ``.
 
+### 6y. No still frames: the picture changes at least every 10 seconds (teacher, 2026-11-28, P4 EP3)
+The teacher: "I dont like how episode 3 is filmed. Remember one of the rule is not to have still frames or same scene for more than
+10 seconds. This video breaks that rule entirely." (The void-deck wide shot was held for minutes while only the bubbles changed.)
+- **Every 10 s at most, the picture changes meaningfully:** a cut to a new angle or set, a close-up, a camera move (push-in, pan,
+  tilt, a rack between characters), or a full-frame insert (LOOK CLOSER, the journey, a card). Aim for a change every 4-8 s.
+  Holding one wide shot while only bubbles, captions or mouths change does NOT count.
+- **Cover a dialogue scene with shots:** singles and two-shots on the speaker (the cut lands just before the first word, never
+  inside one), the group for the narrator, reaction cuts, inserts of the thing being discussed (a suspect plant, the case board),
+  and a slow push (about 6 %) inside every shot so even a held shot moves. No jump cuts (the next framing changes size or place).
+- **How it is built (P4 EP3 v2 on):** the scene is staged once (the base staging); `plan_shots.py` reads a census of it
+  (`census.js`: who and which cards are where, 4 times a second) and writes the director's shot list (`director_p1.js`); `main.js`
+  films the scene through it. Screen things (logo, score bar, shelf, small print, bubbles, overlay cards) are drawn through
+  `DHUD()` and stay put. A screen-fixed card never covers the speaker's head in the new framing. Re-run `kit/bubble_layout.js` after.
+- **QA:** `python3 qa/hold_check.py <video.mp4>` (from explained2/) measures the longest stretch without a meaningful picture change
+  (frames compared with the start of the shot at 96x54, so bubbles and mouths cannot count); a part does not ship with any hold
+  over 10 s. A 4-fps preview (`prev.js`-style, 2 minutes) is enough to check before the full render.
+
+### 6z. Staging rules from P4 EP3 v2 (teacher, 2026-11-28)
+- **A costume hat REPLACES the bike helmet, never stacked on it** ("detective needs detective hat... not over his episode bike
+  helmet"). Draw it straight on the buddy's head, sized per pose, with the head's spikes / ears showing round it naturally.
+- **Bike helmets only in scenes where the buddies are cycling** ("why is pip still in cyclist helmet?"). Otherwise the buddies'
+  normal look: Pip, goggles on his head (items option C: band behind his ears, lenses up on his crown); Basil, his P4 LAB SCIENTIST
+  badge; Momo, her neckerchief and medal; or a costume. This holds for every shot, the score-bar face chips and the thumbnail.
+- **GLITCH never overlaps a buddy:** at least about 60 px clear at 1080p (tail, hat and arms included), in every shot where he stands
+  beside them ("glitch is too close to the pet buddies"). `census.js` measures the gap.
+- **A guest is on screen only for their own moment** ("And why is Uncle there?"): Uncle Lim appears for his line (the camera cuts
+  to him, or he arrives and leaves facing his way), and is in no other shot.
+- **Words must read at 720p** ("font not clear"): big titles and white or yellow words on a light ground get a thick dark ink outline
+  (`paint-order="stroke"`, 8-12 px at 1080p), like "Now you know!"; or dark ink words on the light card.
+- **Words on a prop never read mirrored.** A prop held by a mirrored buddy flips its words back (`unflipText` in `x2held`).
+- **A comparison is SHOWN, not only told** ("should zoom in to trace in red, the edges"): zoom in full frame on each thing, trace the
+  feature in red along its real outline, a short plain description beside it, then the two side by side.
+
 ## 7. On screen
 
 - Series logo pill top left; the YOU vs BUDDIES score pill top right.

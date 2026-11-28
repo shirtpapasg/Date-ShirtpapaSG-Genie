@@ -5,11 +5,13 @@
 // Built on the P4 EP2 engine (../p4ep02/: lib.js, common.js, ep2art.js); the new art is in ep3art.js; the four-face score bar in
 // ../kit/score4.js (the script's question 9 A).
 P.lim = "#6FB3DE"; BNAME.lim = "Uncle Lim";
-window.PIP_HELMET = true;
+window.PIP_HELMET = false;   /* v2 (teacher 28 Nov): no bike helmets in EP3 (page.html ITEM_OPT pip "C": goggles only) */
 const x2bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 const x2bc = (c, who, x, y, h, t, o = {}) => { const [X, Y] = camPt(c, [x, y]); return buddy(who, X, Y, h * c[0], t, o); };
 const x2place = (name, inner, c) => CAM(bg(name) + inner, c[0], c[1], c[2]);
-const x2held = (c, who, x, y, h, flip, inner, dy = 0, dx = 0) => { const [X, Y] = camPt(c, [x, y]), [px, py] = pawPt(who, X, Y, h * c[0], flip); return TF(px + (flip ? -dx : dx) * c[0], py + dy * c[0], c[0], flip ? `<g transform="scale(-1 1)">${inner}</g>` : inner); };
+// any words on a prop held by a mirrored buddy are mirrored back, so they always read (teacher 28 Nov: Pip's "LEAF CASE" clipboard)
+const unflipText = (s) => s.replace(/<text x="([-\d.]+)" y="([-\d.]+)"[^>]*>[\s\S]*?<\/text>/g, (m, x, y) => `<g transform="translate(${x} ${y}) scale(-1 1) translate(${-x} ${-y})">${m}</g>`);
+const x2held = (c, who, x, y, h, flip, inner, dy = 0, dx = 0) => { const [X, Y] = camPt(c, [x, y]), [px, py] = pawPt(who, X, Y, h * c[0], flip); return TF(px + (flip ? -dx : dx) * c[0], py + dy * c[0], c[0], flip ? `<g transform="scale(-1 1)">${unflipText(inner)}</g>` : inner); };
 const x2fine = (t, t0, t1, txt, x = 560, y = 1032) => OP(1 - ramp(t, t1, .3), finePrint(t, t0, txt, x, y));
 const x2HUD = (t) => HUD(t);
 const FOOT = "Primary 4 Science · Systems · Plant System: parts of a leaf";
@@ -17,11 +19,12 @@ SCORE4.push([MK("coin1") - .05, 1, 0, 0, 1]);   // the clue pick: the viewers wh
 window.SHELF_AWAY = () => 0;
 const x2said = (id) => { if (window._SAID) window._SAID[id] = 1; return ""; };
 const x2whiff = (t, t0, x, y) => { const u = (t - t0) / .7; if (u < 0 || u > 1) return ""; return OP(1 - u, `<g transform="translate(${x} ${y})">${[-1, 0, 1].map((i) => `<path d="M${-70 + 40 * u} ${i * 22} q40 ${-10 * i} 140 0" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/>`).join("")}</g>`) + comicWord(t, t0 + .05, x, y - 70, "whiff.", { size: 46, tiny: true, col: "#fff", d: .7 }); };
-const x2frozen = (k) => k <= .01 ? "" : OP(k, `<rect x="18" y="18" width="1884" height="1044" fill="none" stroke="#fff" stroke-width="22"/><rect width="1920" height="1080" fill="#FFE9C8" opacity=".12"/>`);
+const x2frozen = (k) => k <= .01 ? "" : DHUD(OP(k, `<rect x="18" y="18" width="1884" height="1044" fill="none" stroke="#fff" stroke-width="22"/><rect width="1920" height="1080" fill="#FFE9C8" opacity=".12"/>`));
 const x2flash = (t, t0, a = .7, d = .18) => t < t0 || t > t0 + d * 3 ? "" : `<rect x="0" y="0" width="1920" height="1080" fill="#fff" opacity="${n2(a * pulse(t, t0, .01, d))}"/>`;
 const x2lab = (t, t0, t1, txt, x, y, px, py, size = 36, col = "#fff") => t < t0 - .05 || t > t1 + .35 ? "" : OP(spring(t, t0, .4) * (1 - ramp(t, t1, .3)), plabel(x, y, txt, px, py, size, col));
 const x2gSay = (id, x, y, t, o = {}) => say(id, x, y, t, { size: 40, maxW: 520, tail: 0, ...o });
-const slamV2 = (txt, y, size, col, k) => k <= 0 ? "" : TF(960, y, lerp(2.4, 1, eo(k)) * (1 + .05 * wob(k, 1, .4)), `<g transform="translate(0 6)" opacity=".7">${T(0, size * .35, txt, size, P.ink, { ls: 4 })}</g>` + T(0, size * .35 - 6, txt, size, col, { ls: 4 }));
+// v2 (teacher 28 Nov 2026, "font not clear"): the words get a thick ink outline (paint-order stroke) and a deep ink drop, like "Now you know!"
+const slamV2 = (txt, y, size, col, k) => k <= 0 ? "" : TF(960, y, lerp(2.4, 1, eo(k)) * (1 + .05 * wob(k, 1, .4)), `<g transform="translate(0 10)">${T(0, size * .35, txt, size, P.ink, { ls: 4, x: `stroke="${P.ink}" stroke-width="${n2(size * .2)}" stroke-linejoin="round" paint-order="stroke"` })}</g>` + T(0, size * .35 - 4, txt, size, col, { ls: 4, x: `stroke="${P.ink}" stroke-width="${n2(size * .15)}" stroke-linejoin="round" paint-order="stroke"` }));
 const whip = (t, t0, d = .22) => { const u = (t - t0) / d; return u < 0 || u > 1 ? "" : `<rect width="1920" height="1080" fill="#fff" opacity="${n2(.35 * Math.sin(Math.PI * u))}" filter="url(#b10)"/>`; };
 
 /* ---------------------------------------------------------------- the set (world coordinates, camera 1): ep3art.js BG.vd3 ---------------------------------------------------------------- */
@@ -34,15 +37,17 @@ const LEAFDESK = [905, 790];
 const deskLeaf = (t, o = {}) => TF(o.x || LEAFDESK[0], o.y || LEAFDESK[1], o.k || .44, `<g transform="rotate(${o.rot === undefined ? -6 : o.rot}) scale(1 ${o.flat === undefined ? .42 : o.flat}) translate(-120 0)">${hibLeaf({ id: "dl" })}</g>`);
 // the mystery leaf held up in a paw (upright, its tip up); k scale
 const heldLeaf = (k = .5, rot = -70) => `<g transform="scale(${k}) rotate(${rot}) translate(40 0)">${hibLeaf({ id: "hl2" })}</g>`;
-// Uncle Lim at the stone table (front view, his kopi), far back unless the scene brings him near
+// Uncle Lim at the stone table: v2 (teacher 28 Nov 2026: "And why is Uncle there?") NOT drawn any more; he appears only for his one line
+// (g908, the GLITCH scene, with a cut to him). The old far-back figure is kept below, switched off
 const LIMF = [1395, 902, .4];
-const x2limFar = (t, c, o = {}) => CAM(TF(LIMF[0], LIMF[1], LIMF[2], limStand(t, { bag: true, sip: o.sip !== undefined ? o.sip : .5 + .5 * Math.sin(t * .7), ...o })), c[0], c[1], c[2]);
+const x2limFar = (t, c, o = {}) => "" && CAM(TF(LIMF[0], LIMF[1], LIMF[2], limStand(t, { bag: true, sip: o.sip !== undefined ? o.sip : .5 + .5 * Math.sin(t * .7), ...o })), c[0], c[1], c[2]);
 // the pigeon on the mango tree's low branch (EP1-EP2's running gag); it turns its head to GLITCH on KOO!
 const x2pigeonTree = (t, c, tk) => CAM(TF(300, 452, t >= tk ? .62 : -.62, `<!--FACES:right pigeon-->` + pigeonV2(t, { ph: 3 }), 0, .62), c[0], c[1], c[2]);
 // GLITCH at the right edge (EP2's painting; he rolls LEFT into the shot mirrored, screen to the front); x2glitchAt(t, c, x, o)
 const GK = .43, GY = 1042;
 const x2glitchAt = (t, c, x, o = {}) => CAM(TF(x, o.y || GY, o.left ? -GK * (o.k || 1) : GK * (o.k || 1), `<!--FACES:right glitch-->` + (o.tape ? glitchTape(t, { ...o, mirror: !!o.left }) : glitchV3(t, { ...o, mirror: !!o.left })), 0, GK * (o.k || 1)), c[0], c[1], c[2]);
-// Basil's cap (script 6b A): plopped on at "Finally" (it slides down to his eyebrows, he pushes it back up), then worn to the end
+// Basil's detective hat (script 6b A; v2: a deerstalker on his bare head, no helmet): plopped on at "Finally" (it sinks to his eyebrows, he
+// pushes it back up at "expert"), then worn to the end (not in GLITCH's sting, where he is not on screen)
 window.CAP = (t) => { const tc = MK("cap") - .15; if (t < tc - .5) return null; if (t < tc) return lerp(-6, 0, eo((t - tc + .5) / .5));
   if (t < tc + .5) return lerp(0, 1, eio((t - tc) / .5)); if (t < MK("expert") - .2) return 1; if (t < MK("expert") + .2) return lerp(1, .25, eio((t - MK("expert") + .2) / .4));
   const sc = SCN.glitchend, bl = SCN.blooper; if (sc && t >= sc.t0) return null; return .25; };
@@ -53,14 +58,14 @@ const SNAIL = { cold: [178, 806, .3], witness: [178, 806, .3], colour: [180, 668
 // opens tight on the leaf (a voice in the first second), eases back to the three-shot; SKRRRITCH! GLITCH rolls in from the right; the
 // pigeon's KOO!; the camera WHIPS to the pandan (the taped mango leaf, and the pandan leaf on the mango trunk) on "tape"; back right to
 // GLITCH tearing a strip beside the hedge (the mango leaf taped on it); back to the three-shot for "Hold it!"
-const BAS0 = [1170, 960], MOM0 = [500, 1010], PIP0 = [1640, 1012];
+const BAS0 = [1170, 960], MOM0 = [500, 1010], PIP0 = [1505, 1012];   /* v2 (teacher 28 Nov): GLITCH keeps >= 60 px clear of every buddy */ 
 function coldCam(t) { const wide = [1, 960, 540], open = camMix(camOn([905, 780], 1.9, 960, 600), wide, eio(clamp((t - 1.0) / 2.2))), tw_ = MK("whip"), tR = LT("c107") - .1, tB = LT("c108") - .1;
   if (t < tw_ - .1) return open;
   const L = camOn([260, 600], 1.45, 600, 560), R = camOn([1800, 760], 1.35, 1500, 620);
   if (t < tR) return camMix(wide, L, eio(clamp((t - tw_ + .1) / .22)));
   if (t < tB) return camMix(L, R, eio(clamp((t - tR) / .22)));
   return camMix(R, wide, eio(clamp((t - tB) / .3))); }
-SC.cold = (t, s) => { const c = coldCam(t), tS = MK("skr"), arrive = clamp((t - tS) / 1.1), gx = lerp(2240, 1810, eo(arrive)), tk = MK("koo");
+SC.cold = (t, s) => { const c = coldCam(t), tS = MK("skr"), arrive = clamp((t - tS) / 1.1), gx = lerp(2240, 1890, eo(arrive)), tk = MK("koo");
   const gFace = t < LT("c105") ? "surprised" : t < LT("c107") ? "smug" : "smug", rip = t >= MK("rip1") - .1 && t < LE("c107") + .6 ? clamp((t - MK("rip1") + .1) / .5) : 0;
   const scr = t < LT("c105") + .4 ? scrLRS() : t < LE("c105") + 1.2 ? scrLRS() + scrOwner("MANGO TREE") : scrLRS();
   const glitch = t >= tS - .05 ? x2glitchAt(t, c, gx, { left: true, tape: true, face: gFace, roll: (2240 - gx) / GK, scr, strip: rip }) : "";
@@ -131,13 +136,13 @@ SC.fixcards = (t, s) => { const tc = [MK("c1"), MK("c2"), MK("c3")], fl = MK("fl
   const board = `<g filter="url(#drop)"><rect x="300" y="110" width="1320" height="420" rx="18" fill="#8A5A2B"/></g><rect x="316" y="126" width="1288" height="388" rx="8" fill="url(#cork)"/>`;
   return `<g filter="url(#b4)">${x2place("vd3", "", [1.1, 1100, 700])}</g><rect width="1920" height="1080" fill="${P.night}" opacity=".45"/>`
     + OP(ramp(t, s.t0, .3), board) + TF(920, 950, .78, deskV3(t, { noSign: true })) + TF(900, 942, .5, `<g transform="scale(1 .42) translate(-120 0)">${hibLeaf({ id: "dl" })}</g>`)
-    + OP(ramp(t, s.t0 + .1, .3), T(960, 82, "THREE CLUES", 50, P.sun, { ls: 6 })) + CAM(x2cards(t, CARDY, CARDK, { tin: tc.map((x) => x - .1), said: tc }), c[0], c[1], c[2])
+    + DHUD(OP(ramp(t, s.t0 + .1, .3), T(960, 82, "THREE CLUES", 50, P.sun, { ls: 6, x: `stroke="${P.ink}" stroke-width="10" stroke-linejoin="round" paint-order="stroke"` }))) + CAM(x2cards(t, CARDY, CARDK, { tin: tc.map((x) => x - .1), said: tc }), c[0], c[1], c[2])
     + x2glitchAt(t, [1, 960, 540], 1830, { tape: true, face: t >= LT("f204") - .1 && t < LE("f204") + .4 ? "smug" : "plain", scr: t >= LT("f204") - .1 && t < LE("f204") + .6 ? scrLaugh() : scrLRS(), k: .85 })
     + x2bd("momo", 420, 1076, 340, t, { in: s.t0 - .5, poses: [[s.t0, "thinking"], [LT("f201") - .1, "sit"], [LE("f201") + .05, "pointing"], [LT("f202") + .3, "sit"], [fl + .1, "unimpressed"], [LT("f205") + .2, "thinking"]], look: 6 })
     + (t >= MK("swatches") - .2 && t < LT("f202") + .3 ? x2held([1, 960, 540], "momo", 420, 1076, 340, false, swatchFan(.6), 60, 90) : "")
-    + x2bd("pip", 1340, 1076, 330, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "thinking"], [LT("f201") + .4, "sit"], [LE("f202") + .05, "pointing"], [LT("f203") + .3, "sit"], [fl + .1, "thinking"], [LT("f205") + .2, "thinking"]], look: -6 })
-    + (tools ? x2held([1, 960, 540], "pip", 1340, 1076, 330, true, TF(0, 0, spring(t, MK("tools") - .6, .35), toolsBundle()), 40, 30) : "")
-    + x2bd("basil", 1600, 1076, 330, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "thinking"], [LT("f201") + .4, "arms_crossed"], [LT("f203") - .1, "sit"], [LE("f203") + .05, "hero/pointing"], [fl + .1, "deadpan"], [LT("f205") + .2, "thinking"]], look: -6 })
+    + x2bd("pip", 1200, 1076, 330, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "thinking"], [LT("f201") + .4, "sit"], [LE("f202") + .05, "pointing"], [LT("f203") + .3, "sit"], [fl + .1, "thinking"], [LT("f205") + .2, "thinking"]], look: -6 })
+    + (tools ? x2held([1, 960, 540], "pip", 1200, 1076, 330, true, TF(0, 0, spring(t, MK("tools") - .6, .35), toolsBundle()), 40, 30) : "")
+    + x2bd("basil", 1470, 1076, 330, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "thinking"], [LT("f201") + .4, "arms_crossed"], [LT("f203") - .1, "sit"], [LE("f203") + .05, "hero/pointing"], [fl + .1, "deadpan"], [LT("f205") + .2, "thinking"]], look: -6 })
     + (t >= MK("show") - .1 ? TF(1760, 400, spring(t, MK("show") - .1, .4) * .7, countHand(t < W("f205", "two") ? 1 : t < W("f205", "three") ? 2 : 3, {}) + youPill(0, -170, .9)) : "")
     + x2gSay("f204", 1500, 320, t) + x2HUD(t); };
 
