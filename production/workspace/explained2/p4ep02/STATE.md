@@ -153,3 +153,12 @@ frame, Basil's u405 by the notice board) and "also, one block number 214 will do
   bg/vdp4.png and bg/vdv2.png re-baked (bake.js vdp4 vdv2; _grain.png kept). BG_OBST marks it, main.js bg() adds the invisible mark.
 - **Render:** one full picture render (`out/run_fix.sh`, flock), muxed with the LIVE file's audio stream COPIED (the sound is bit-identical;
   no song.js / mix rebuild). The live cut is kept as `p4ep02_live_E-HFXLaeP94.mp4`.
+- **Result (28 Nov, 04:28-04:43 UTC, 878 s render):** `p4ep02.mp4` 1920x1080, 30 fps, 13596 frames = 7:33.2, decode 0 errors; audio stream
+  md5 234633d23520c4e646c99def2fd4d195 = the live file's (bit-identical); -16.0 LUFS, true peak -2.4 dBFS (as before); blackdetect: only
+  the planned 0.47 s at the end; freezedetect (1.5 s): none. face_cover_scan (5 fps, whole video, `bubplace_p1.js` loaded): no bubble on any
+  face; the runs left are the by-design ones listed above (cold-open hops, pick cards rising, the FOUND IT stamp on the card's own Chilli).
+- Review (scratchpad `p4ep02_fix_review/`, not committed): index.html, a 720p preview (27 MB), before/after stills of c102 (0:08.85) and
+  u405 (1:54.15), the 110-bubble contact sheets. NOT uploaded; upload as a NEW video after the teacher's OK (the old one keeps its views).
+- **P4 EP1 v2 (live XkBQqzYyMdM)** has the same old engine: far-off bubbles (scene-fixed _BUBAT / say spots) and the 214 plaque on every
+  pillar (vdp4 / vdv2 / rampv2 / trackV2). Not re-rendered. To fix it: copy kit hooks (lib.js bubble/say, main.js bg marks, page.html,
+  limv2 data-face), run kit/bubble_layout.js, one 214, full render, mux with the live audio.
