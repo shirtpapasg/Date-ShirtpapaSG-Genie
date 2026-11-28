@@ -27,8 +27,9 @@ What the teacher's direction changed between v1 and the final EP1-EP3 scripts, a
 - **Doctor costumes, from this episode (the teacher's Q10 A):** the Help Desk is a PLANT CLINIC and the trio are its doctors (Momo: white
   coat and head mirror; Pip: teal scrubs, scrub cap and stethoscope; Basil: white coat, stethoscope and his P4 LAB SCIENTIST badge). The
   costumes do a job in the story: Momo's head mirror bounces sunlight onto the green stem; Pip's gloves and tongs take the plastic leaves
-  off; Basil is "Doctor Basil", "an expert at plants" who says a cactus is not a plant. Three painted poses per buddy exist; section 6b lists
-  the paintings still needed, precisely.
+  off; Basil is "Doctor Basil", "an expert at plants" who says a cactus is not a plant. Three painted poses per buddy exist; every other
+  pose comes from the shared code-painted costume set being built for the EP2 remake (`../p4ep02/costume_bake.py`), so EP2 and EP4 match;
+  section 6b lists, precisely, the paintings that would replace the code-painted ones (question 11).
 - **The four-face score bar (Q9 A) tells a story.** Pip and Basil BOTH pick the right card, for different reasons: Pip scores, Basil does
   not ("Right card, wrong reason."), and he demands the replay. A **bonus point** (root or stem?) then lets Momo and Basil catch up with
   the right reasons while careful Pip slips. It ends **Pip 1 · Momo 1 · Basil 1**, and "How many did YOU get?" (up to 2). Section 4.
@@ -185,8 +186,9 @@ GLITCH in it; GLITCH comes out of the lift only after it.
   gloves and long tongs take the plastic leaves off without touching a spine (and the small print says "Wear thick gloves, and ask an
   adult."); the stethoscopes are worn, never used on Spike (a plant has no heartbeat).
 - **Poses that exist today (the teacher's paintings, cut out as `<buddy>_doc_*`):** arms crossed, pointing, surprised for each buddy. Each is
-  used only for its job (arms crossed = right / confident, pointing = showing a thing, surprised = a real surprise). **Everything else is in
-  section 6b** (12 paintings needed before the build, 5 that can wait with stand-ins).
+  used only for its job (arms crossed = right / confident, pointing = showing a thing, surprised = a real surprise). **Every other pose**
+  comes from the EP2 remake's `costume_bake.py` (the garment painted over each pose painting in code, the head pieces cut from the
+  teacher's doctor paintings); section 6b lists what EP4 uses, what that set does not have yet, and the paintings that would replace it.
 
 ## 1. The chain of questions
 1. A cactus has been watered every day, kept in a dark bathroom and had plastic leaves taped on, and he is leaning and soft. *What does
@@ -326,9 +328,9 @@ ends on 0 (positive language), and nobody is marked with a ✗.
 ## 5. The video, beat by beat
 **Times** come from the series model (section 9). The built timeline sets the real ones.
 **Poses:** the teacher's paintings only, as cut out today. **In costume (the whole episode):** `<buddy>_doc_arms_crossed`, `_doc_pointing`,
-`_doc_surprised` for each buddy, each for its one job. Talking sets: Momo's from her doctor arms-crossed painting (her talking pose is arms
-crossed, as always), Pip's and Basil's from the new doctor sit paintings, each by a face edit (section 6b). **→ *new*** marks a painting
-section 6b asks for; until it exists the build uses the stand-in named there. GLITCH: EP2's painted base and four arm poses with code
+`_doc_surprised` for each buddy, each for its one job. Every other pose from the shared code-painted costume set (`../p4ep02/costume_bake.py`, built for the EP2
+remake; section 6b). **→ *name*** marks a pose that is code-painted (or still to be added to that set); a painting replaces it if the
+teacher paints one (question 11 B). GLITCH: EP2's painted base and four arm poses with code
 screen faces. Uncle Lim: his eight paintings (long trousers). Spike: section 6b. A speaking buddy is always in the talking sprite; the pose
 column names the one listener who answers the line.
 **No runs in EP4** (nobody runs; GLITCH rolls, Spike hops and is carried, the trio walk the corridor).
@@ -513,26 +515,36 @@ SCORE4: `[80.2, 0, 0, 0, 0]`, `[221.8, 1, 1, 0, 0]`, `[374.2, 2, 1, 1, 1]` (mode
 **Where each pose is used (in costume)**
 | Pose (one job) | Painting | Where |
 |---|---|---|
-| talking | derived (6b) | every spoken line |
-| listening (smile) | Momo: `momo_doc_arms_crossed` closed-mouth frame (her usual sit); Pip, Basil: → `*_doctor_sit` | most of the time |
+| talking | `*_doc_sit_*` (Momo's by transplant, Pip's and Basil's code-painted) | every spoken line |
+| listening (smile) | Momo: her doctor talking set's closed-mouth frame (arms crossed, as always); Pip, Basil: `*_doc_sit_closed` (code-painted) | most of the time |
 | arms crossed (right / confident) | `*_doc_arms_crossed` (exists) | p303 (Basil, sure), s604 (Pip), b854 and j905 (Basil, Momo), k1204 (all three) |
 | pointing (showing a thing) | `*_doc_pointing` (exists) | c107, f203, f204, l406, g702, t803, t806, m1102 |
 | surprised (a real surprise) | `*_doc_surprised` (exists) | c101, l402, w504, n1301 |
-| oops (shy) | → `*_doctor_oops` | p306, l409-l410, w506-w507, s606-s609, j905 |
-| thinking (a question was asked) | → `*_doctor_thinking` | f206, the lock-in (Momo), p304, the two think pauses, b851, w505 |
-| cheer (learnt / achieved) | → `*_doctor_cheer` | the high-five, the key words, s603, "Now you know!" |
-| waving (goodbye) | → `momo_doctor_waving` | the read-along and "Say it with us!" |
-| laughing (a funny line) | Tier 2 → `basil_doctor_laughing`; Pip and Momo: stand-in cheer with a giggle shake (EP3's `momo_laugh` stand-in) | c109, l410, s609, j906, k1203 |
-| worried | Tier 2 → `basil_doctor_worried` (stand-in: thinking) | e1702 (the blooper) |
-| back view | Tier 2 → `*_doctor_back` (stand-in: the usual P4 back views) | the journey only |
+| oops (shy) | `*_doc_oops` (code-painted; Momo's to add) | p306, l409-l410, w506-w507, s606-s609, j905 |
+| thinking (a question was asked) | `*_doc_thinking` (code-painted) | f206, the lock-in (Momo), p304, the two think pauses, b851, w505 |
+| cheer (learnt / achieved) | `*_doc_cheer` (code-painted) | the high-five, the key words, s603, "Now you know!" |
+| waving (goodbye) | `momo_doc_waving` (code-painted) | the read-along and "Say it with us!" |
+| laughing (a funny line) | `basil_doc_laughing` (code-painted); Pip and Momo: to add, or the cheer with a giggle shake (EP3's stand-in) | c109, l410, s609, j906, k1203 |
+| worried | `basil_doc_worried` to add (or thinking) | e1702 (the blooper) |
+| back view | `*_doc_back` (code-painted) | the journey only |
 
 ## 6b. New art: the precise list (what EP4 needs painted)
 **Exists today (the teacher's paintings):** `momo_doc_`, `pip_doc_`, `basil_doc_` × `arms_crossed`, `pointing`, `surprised` (9, cut out in
 `characters/sprites/poses/`). GLITCH, Uncle Lim, the void deck, the Help Desk, the score bar: as EP3.
 
-**Tier 1: needed before the build (12 doctor poses).** Ask Gemini for each buddy's set in ONE wide picture (the house rule), attaching
-that buddy's doctor arms-crossed painting as the reference; describe poses by body parts, never "left/right"; same costume, same scale,
-white background:
+**The shared costume set (28 Nov, being built for the EP2 remake, `../p4ep02/costume_bake.py`, not yet committed when this script was
+written):** every pose the engine uses gets a `<buddy>_doc_<pose>` sprite on the pose's own canvas: (1) the teacher's three paintings as
+they are; (2) Momo's talking set by transplanting her painted coat and head mirror onto each mouth state (the `nk_talk.py` method); (3)
+every other pose code-painted (white coat or teal scrubs painted over the pose painting, its own ink lines kept; the head pieces cut from
+the doctor paintings; the stethoscope drawn). **EP4 uses that set, so the doctors look the same in EP2 and EP4.** In its file list today:
+Pip sit (talking set), thinking, oops, cheer, back; Basil sit (talking set), thinking, oops, cheer, laughing, waving, back; Momo talking set,
+thinking, cheer, waving, back. **EP4 also needs, and the set does not have yet (add to `costume_bake.py`, 4):** `momo_doc_oops`
+(w506-w507), `pip_doc_laughing` (c109, s609), `momo_doc_laughing` (l410, k1203; or the cheer with a giggle shake, as EP3) and
+`basil_doc_worried` (e1702; or thinking).
+
+**If the teacher prefers paintings to the code-painted poses (question 11 B), the precise list, Tier 1 first (12):** ask Gemini for each
+buddy's set in ONE wide picture (the house rule), attaching that buddy's doctor arms-crossed painting as the reference; describe poses by
+body parts, never "left/right"; same costume, same scale, white background:
 1. **Pip (4):** `pip_doctor_sit` (sitting, paws resting on his tummy, a gentle closed-mouth smile: his listening pose AND the base of his
    talking set) · `pip_doctor_oops` (one paw on top of his scrub cap, a sheepish smile) · `pip_doctor_thinking` (one paw at his chin, eyes
    looking up) · `pip_doctor_cheer` (both arms up high, a big happy smile).
@@ -540,13 +552,9 @@ white background:
    coat, stethoscope and P4 LAB SCIENTIST badge).
 3. **Momo (4):** `momo_doctor_oops` · `momo_doctor_thinking` · `momo_doctor_cheer` · `momo_doctor_waving` (one paw raised in a friendly
    wave). Her listening and talking pose is her doctor arms-crossed painting, as in every episode.
-**The talking sets** are made in code by editing only the face (the mouth shapes of each buddy's existing talking set placed on the doctor
-painting's face, the way `nk_talk.py` placed Momo's scarf): Momo on `momo_doc_arms_crossed`, Pip and Basil on their new doctor sit
-paintings. If a face does not line up, that buddy needs one more painting: the same sit with the mouth open (2 more at most).
-
-**Tier 2: can wait, with stand-ins (5):** `basil_doctor_laughing` (stand-in: his doctor cheer with a giggle shake) · `basil_doctor_worried`
-(stand-in: thinking; used once, in the blooper) · `momo_doctor_back`, `pip_doctor_back`, `basil_doctor_back` (stand-in: the usual P4 back
-views; the journey only, small on screen).
+**Tier 2 (5):** `basil_doctor_laughing` · `basil_doctor_worried` · `momo_doctor_back`, `pip_doctor_back`, `basil_doctor_back` (the journey
+only, small on screen). The talking sets are always made in code by editing only the face (mouth shapes on the doctor sit / arms-crossed
+painting); if a face does not line up, that buddy needs the same sit with the mouth open (2 more at most).
 
 **Spike, the guest (6 paintings, as Chilli's pairs):** a round, ribbed cactus (a ball or barrel cactus, drawn from photos, then made cute),
 spines in clusters from small pads along the ribs, his face (eyes and mouth) on the POT, never on the cactus. **Before** (a glossy blue pot,
@@ -767,11 +775,11 @@ tap: leaves / green stem) and the bonus (5:41: root / stem).
    the bonus. B: no bonus (the score ends Pip 1, Momo 0, Basil 0; about 26 s shorter; the think pause stays without a point).
 10. **Doctor costumes all episode** (the desk, the corridor, the ending), each piece doing a job (head mirror, gloves and tongs).
     **Recommended: A** all episode. B: only at the Help Desk (the corridor in the usual P4 look).
-11. **Paintings before the build:** Tier 1, **12 doctor poses** (Pip: sit, oops, thinking, cheer; Basil: sit, oops, thinking, cheer; Momo:
-    oops, thinking, cheer, waving), in three wide pictures; Tier 2, 5 later with stand-ins (Basil laughing and worried; three back views);
-    **Spike, 6** (3 before, 3 after). Prompts on request. **Recommended: A** paint Tier 1 and Spike first, then build. B: build now with
-    stand-ins (the usual P4 poses with the doctor head pieces drawn on in code) and swap in the paintings later (not recommended: the look
-    would change between poses).
+11. **Doctor poses and Spike:** the three painted doctor poses per buddy, plus the **code-painted costume set the EP2 remake is building**
+    (`costume_bake.py`: the coat or scrubs painted over every other pose in code), with 4 more poses added to it for EP4. **Spike needs 6
+    paintings** (3 before, 3 after; prompts on request). **Recommended: A** use the shared code-painted set (EP2 and EP4 then look the
+    same, and the build waits only for Spike). B: you paint the 12 Tier 1 doctor poses (section 6b: Pip and Basil sit, oops, thinking,
+    cheer; Momo oops, thinking, cheer, waving; three wide pictures) and they replace the code-painted ones in EP2 and EP4.
 12. **Spike is "he", with a new guest voice** (suggest `bm_daniel`-based, calm and dry, distinct from GLITCH and Chilli). **Recommended: a
     test clip for you first.**
 13. **Spike's look:** a round, ribbed cactus, face on the pot; a glossy blue pot with no hole, then a terracotta pot with a hole.
@@ -809,6 +817,7 @@ dock, stutter and voices (`"glitch"`, `"glitch_sting"` at speed .86 and range .3
 `sg_pron.shape_particles`, the pigeon, the sad trombone and the humour bus, the comic sound words, the slow-motion replay (from
 `../p4ep01v2/`), the look-closer panel with a peeking face, the THINK card, the micro-world, the readable fix-card design, the day counter,
 the QA scans (ghost, facing, flicker, overlap, face_cover_scan with Spike's, GLITCH's and Uncle Lim's face boxes).
-**New:** the doctor sprite sets (`*_doc_*` and the Tier 1 paintings; the talking sets by face edit), Spike (6b), the corridor set and the
+**New:** the doctor sprite sets (the shared `../p4ep02/costume_bake.py` set plus `momo_doc_oops`, `pip_doc_laughing`, `momo_doc_laughing`,
+`basil_doc_worried`; any paintings from question 11 B replace them), Spike (6b), the corridor set and the
 lift, the plant rack and its plants, the re-potting, the cut-away cactus, the bonus chips and cut-away, the sweet potato micro-world, the
 PLANT CLINIC banner, the evidence cards, the outro gag at the lift lobby, the help-desk voicing's title "ding-dong", SQUELCH, the lift DING.
