@@ -216,3 +216,7 @@
   - It replaces XkBQqzYyMdM at position 0 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI. XkBQqzYyMdM gets the NEW VERSION line and STAYS PUBLIC (the teacher decides).
   - The NEW VERSION lines of 7OBnZam5Xzs, 22u5mW_m9y8 and FOvUezOZJbo now point to c4ZDCAD2vPM. 5MjGXoU8zjg (v1, unlisted) is untouched. Chapters: key c4ZDCAD2vPM.
   - The app: TheOneApp #284 (P4 no. 1 = c4ZDCAD2vPM), merged by Claude (52ed193); not deployed.
+- 2026-11-28 ~08:20 UTC: P4 EP3 "The Case of the Mystery Leaf" is live, public, as KLHY6W_dTR4 (the teacher's "ok").
+  - Title "Which Plant Dropped This Leaf? | Parts of a Leaf, Parallel vs Net Veins | P4 Science", description with chapters, 12 tags, thumbnail p4ep03/thumb.jpg, Made for Kids, Education (config p4ep03/upload.json).
+  - It replaces PNe2DU8sFTI at position 2 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI (after GLY4mDzxdaA). PNe2DU8sFTI gets the NEW VERSION line and STAYS PUBLIC (the teacher decides). No older video pointed to PNe2DU8sFTI. Chapters: key KLHY6W_dTR4.
+  - The app: TheOneApp #286 (P4 no. 3 = KLHY6W_dTR4), merged by Claude (4d0fa15); not deployed. The mp4 stays in /dev/shm (disk at 3 GB free).

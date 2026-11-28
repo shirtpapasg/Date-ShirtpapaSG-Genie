@@ -117,3 +117,9 @@ To rebuild: the voice WAVs are in `/dev/shm/p4ep03/voice` (RAM; `voice/` here ke
 (`rm -r voice && ln -s /dev/shm/p4ep03/voice voice`) or re-run make_voice.py (it re-records only what is missing); `out` is a symlink to
 `/dev/shm/p4ep03/out` (mix, cues, logs). Then `python3 build_tl.py 1; node dump_cues.js 1; node song.js 1; node ../kit/bubble_layout.js . 1;
 ./run_render.sh`.
+- **Uploaded 28 Nov (the teacher's "ok"):** `p4ep03.mp4` is live as KLHY6W_dTR4 (https://youtu.be/KLHY6W_dTR4), public, Made for Kids,
+  Education, English (config `upload.json`, thumbnail `thumb.jpg`; processed). It replaces PNe2DU8sFTI at position 2 in PLK9BW3T6kXx4 and
+  PLPfEuT7l4KjI (right after GLY4mDzxdaA); PNe2DU8sFTI stays public with a NEW VERSION line (no other video pointed to it). Chapters:
+  key KLHY6W_dTR4 in `chapters_p3.json`. TheOneApp #286 (P4 no. 3 = KLHY6W_dTR4, the seven moments of `app_moments.json`; the 2:33 one is
+  worded "Look closer: the four parts of a leaf" in the app), merged (4d0fa15), not deployed. The mp4 is still only in RAM
+  (`/dev/shm/p4ep03/p4ep03.mp4`): moving it would leave the disk under 3 GB free.
