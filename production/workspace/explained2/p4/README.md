@@ -7,7 +7,7 @@ rendered or uploaded.
 |---|---|---|---|---|
 | `p4_ep01_script.md` | EP1 Systems: bike, body, tree (**v2, 26 Nov**: "The Great Void Deck Race"; v1 rejected, kept as `p4_ep01_script_v1.md`) | B Fix-It | Basil sits in an ice box three minutes before his race with Uncle Lim: his bike has no bell, no chain and no brakes ("LIGHTER IS FASTER!") | 7:38 model (about 6:30 built) |
 | `p4_ep02_script.md` | EP2 The plant system (**v2, 27 Nov**: "Help! I'm Wilting!", villain GLITCH; v1 kept as `p4_ep02_script_v1.md`) | D Help Desk | Chilli the chilli plant: "I'm watered every single day, in my beautiful new pot. So WHY am I wilting?" | 7:54 model (about 7:30 built) |
-| `p4_ep03_script.md` | EP3 Read a leaf like a scientist | A Case File | A leaf lands on the Help Desk: which of three plants dropped it? | 6:09 |
+| `p4_ep03_script.md` | EP3 Read a leaf like a scientist (**v2, 28 Nov**: "The Case of the Mystery Leaf", villain GLITCH with his colour-and-size scanner and sticky tape, knowledge log entry 2; v1 kept as `p4_ep03_script_v1.md`) | A Case File | EP2's leaf on the Help Desk; GLITCH: "Owner: the mango tree." and a roll of tape | 7:54 model (about 7:30 built) |
 | `p4_ep04_script.md` | EP4 Plants with superpowers: cactus, climbers, carrots | D Help Desk | Spike the cactus: "My family loves me too much." | 6:23 |
 
 **Read first, in this order:** SecondBrain `Plans/videos/P4-new-direction.md` (the brief: problem first, three fix cards, the story spine,
@@ -58,7 +58,7 @@ Each script has the same sections, so any agent can find anything:
 |---|---|---|---|---|---|
 | 1 (v2, as built: cards 2 and 3 swapped) | 2 (right) | 3 (wrong) | 1 (wrong) | 2 | Basil |
 | 2 (v2) | 3 (wrong) | 1 (right) | 2 (wrong) | 1 | Momo |
-| 3 | 2 (wrong) | 1 (wrong) | 3 (right) | 3 | Momo |
+| 3 (v2) | 2 (wrong) | 1 (wrong) | 3 (right; rushes CASE CLOSED! once) | 3 | Pip |
 | 4 | 1 (wrong) | 2 (wrong) | 3 (right answer, **wrong reason: no point**) | 3 | Basil |
 The right answer has been card 3 four times; **from EP5, vary the position of the right card** (1 or 2) so children cannot learn "always 3".
 The right buddy explains the right answer; a wrong buddy speaks only to fix their own idea or to teach a term in a later scene. Basil has at
