@@ -50,7 +50,7 @@ SC.repair = (t, s) => { const tSc = MK("screen"), tFold = LT("r705") - .1, onScr
     + x2limSay("r703", 1580, 330, t) + x2limSay("r705", 1560, 330, t) + x2gSay("r704", 1040, 380, t, { tail: -60 }) + x2gSay("r708", 1150, 230, t, { tail: -260, maxW: 640 })
     + (t >= tT + .2 ? comicWord(t, tT + .2, 720, 560, "drip... drip... drip.", { size: 40, tiny: true, col: "#BFE6F7", d: 2.0 }) : "")
     + x2lab(t, LT("r707"), s.t1 - .2, c, "water drains out", 640, 600, CHX - 20, DK.y + 14, 36)
-    + (t >= LT("r707") + .3 ? TF(560, 300, spring(t, LT("r707") + .3, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 1, { k: .7, stamp: ["FOUND IT,|FIXED IT!", true, LT("r707") + .8] })) : "")
+    + (t >= LT("r707") + .3 ? TF(690, 300, spring(t, LT("r707") + .3, .45) * (1 - ramp(t, s.t1 - .3, .3)), x2fixCard(t, 1, { k: .7, stamp: ["FOUND IT,|FIXED IT!", true, LT("r707") + .8] })) : "")   // 28 Nov: the card 130 px right (was 560), so GLITCH's r708 bubble fits just above his head at the left
     + x2HUD(t); };
 
 /* ================================================================ WAIT · two weeks: "Slowly, slowly lah", the time-lapse, Heart's hint #3 ================================================================ */

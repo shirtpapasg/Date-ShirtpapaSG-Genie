@@ -2,7 +2,9 @@
 const SC = window.SC || {};                        // scene name -> (t, scene) => svg
 const NOBAKE = location.search.includes("nobake");
 // a static background: the baked PNG when there is one, else the live SVG
-function bg(name) { return (!NOBAKE && BAKED.includes(name)) ? `<use href="#bg_${name}"/>` : `<g>${BG[name]()}</g>`; }
+function bg(name) { return ((!NOBAKE && BAKED.includes(name)) ? `<use href="#bg_${name}"/>` : `<g>${BG[name]()}</g>`) + bgMarks(name); }
+// invisible marks on a set that a bubble should keep clear of (kit/bubble_layout.js reads data-obst): BG_OBST[name] = [[x, y, w, h, label], ...]
+function bgMarks(name) { const M = (window.BG_OBST || {})[name]; return M ? M.map(([x, y, w, h, l]) => `<rect data-obst="${l || name}" x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="none"/>`).join("") : ""; }
 const GRADE = () => (!NOBAKE && BAKED.includes("_grain") ? `<use href="#bg__grain" style="mix-blend-mode:soft-light" opacity=".5"/>` : "") + vignette(.7);
 (function () {
   const perm = document.getElementById("perm"), dyn = document.getElementById("dyn"); let imgs = "";

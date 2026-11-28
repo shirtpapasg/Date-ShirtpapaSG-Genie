@@ -12,7 +12,7 @@ const INKG = "#1E2A3A";
 // the story state of the plant (the coordinator's two-layer rule, 27 Nov): wilting until the fix is done (the folding screen comes away);
 // then the recovery time-lapse grows it wilt -> mid -> upright (green chillies) -> tall with ONE red chilli
 function chilliBody(t) { const tF = MK("lapse"); if (!(tF > 0)) return "wilt"; if (t < tF) return "wilt"; if (t < tF + 1.0) return "wilt"; if (t < tF + 1.8) return "mid"; if (t < tF + 2.5) return "tallg"; return "tallr"; }
-function chilliFaceBox(x, y, w, h) { return `<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" fill="none" stroke="none"/>`; }   // qa/face_cover_scan.js
+function chilliFaceBox(x, y, w, h) { return `<rect data-face="chilli" x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" fill="none" stroke="none"/>`; }   // qa/face_cover_scan.js
 const chilliBlink = (t) => { const per = 4.3, k = Math.floor((t + 1.7) / per), tb = k * per - 1.7 + hash(k, 7) * 1.6; return t >= tb && t < tb + .1; };
 function chilliMouth(t) { const L = speaking("chilli", t); if (!L) return "closed"; const m = mouthOf("chilli", t); return m >= 2 ? "wide" : m >= 1 ? "half" : "closed"; }
 // one painted sprite at local scale (rim 200 units), base centre at 0,0
@@ -63,7 +63,7 @@ const dustPuffs = (k) => k <= .01 ? "" : OP(k, [-1, 1].map((sd) => `<g transform
 
 /* ================================================================ GLITCH ================================================================ */
 const GM = window.GLITCHM || null;
-function glitchFaceBox(x, y, w, h) { return `<rect x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" fill="none" stroke="none"/>`; }   // qa/face_cover_scan.js
+function glitchFaceBox(x, y, w, h) { return `<rect data-face="glitch" x="${n2(x)}" y="${n2(y)}" width="${n2(w)}" height="${n2(h)}" fill="none" stroke="none"/>`; }   // qa/face_cover_scan.js
 // a code face on the screen (box x, y, w, h in the layer's px): the painting's line style (dark rounded strokes, white catch-lights)
 function glitchFace(face, x, y, w, h, t, o = {}) { const cx = x + w / 2, ey = y + h * .44, dx = w * .22, er = w * .075, sw = w * .032, my = y + h * .7, mw = w * .2;
   const eye = (ex, kind) => { if (kind === "slit") return `<rect x="${n2(ex - er * 1.2)}" y="${n2(ey - er * .2)}" width="${n2(er * 2.4)}" height="${n2(er * .42)}" rx="${n2(er * .2)}" fill="${INKG}"/><circle cx="${n2(ex + er * .5)}" cy="${n2(ey - er * .02)}" r="${n2(er * .12)}" fill="#fff"/>`;

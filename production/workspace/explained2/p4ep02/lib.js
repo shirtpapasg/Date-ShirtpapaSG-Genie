@@ -316,16 +316,21 @@ function faceCam(who, t, t0, t1, x, y, r, poses, o = {}) { if (t < t0 - .01 || t
   return `<g transform="translate(${n2(x)} ${n2(y)}) scale(${n2(k)}) rotate(${o.rot || 0})"><g filter="url(#drop)"><circle r="${r + 12}" fill="${P[who]}"/></g><clipPath id="${id}"><circle r="${r}"/></clipPath><circle r="${r}" fill="${TINT[who]}"/>
     <g clip-path="url(#${id})">${buddy(who, (o.dx || 0) * r, h * .93 - r * .25, h, t, { poses, tag: false, shadow: false, flip: o.flip, nofx: true, noreact: !!o.noreact })}</g><circle r="${r}" fill="none" stroke="#fff" stroke-width="6" opacity=".9"/></g>`; }
 /* ---------- speech bubble: white pill, Fredoka 600; a ✗ chip at the START for an idea that is not right ---------- */
+/* P4 EP2 fix (teacher, 28 Nov 2026: "speech bubbles too far off"): a say() bubble carries o.bkey ("<line>#<page>") and o.who; when the
+   episode's bubplace_p<part>.js (kit/bubble_layout.js) has a spot for it, the bubble sits there, just above or beside the speaker's head, with
+   a short tail to the mouth (kit/bubbles.js); otherwise the scene's own x, y. The wrapper's data-* attributes are read by the layout pass. */
 function bubble(x, y, lines, t, t0, t1, o = {}) {
   if (t < t0 || t > t1 + .25) return ""; const size = o.size || 40, k = spring(t, t0, .4) * (1 - eo((t - t1) / .2));
   const w = Math.max(...lines.map((l) => tw(l, size, 600))) + 70 + (o.x ? 64 : 0), h = lines.length * size * 1.22 + 40, tail = o.tail === undefined ? 0 : o.tail, td = o.down === false ? -1 : 1;
-  const col = o.col; let s = `<g filter="url(#dropS)">${col ? `<path d="M${tail - 26} ${td * (h / 2 - 2)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 44)} L${tail + 26} ${td * (h / 2 - 2)}z" fill="${col}"/><rect x="${n2(-w / 2 - 7)}" y="${-h / 2 - 7}" width="${n2(w + 14)}" height="${h + 14}" rx="${Math.min(h / 2, 44) + 7}" fill="${col}"/>` : ""}<rect x="${n2(-w / 2)}" y="${-h / 2}" width="${n2(w)}" height="${h}" rx="${Math.min(h / 2, 44)}" fill="#FFF8EA"/>${col ? "" : `<path d="M${tail - 20} ${td * (h / 2 - 3)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 34)} L${tail + 20} ${td * (h / 2 - 3)}z" fill="#FFF8EA"/>`}</g>`;
+  const pl = o.bkey && typeof bubPlaceAt === "function" ? bubPlaceAt(o.bkey, t) : null; if (pl) { x = pl.x; y = pl.y; }
+  const col = o.col; let s = `<g filter="url(#dropS)">${col ? `<path d="${pl ? bubTailPath(w, h, pl.side, pl.at, pl.tip, 26, 10) : `M${tail - 26} ${td * (h / 2 - 2)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 44)} L${tail + 26} ${td * (h / 2 - 2)}z`}" fill="${col}"/><rect x="${n2(-w / 2 - 7)}" y="${-h / 2 - 7}" width="${n2(w + 14)}" height="${h + 14}" rx="${Math.min(h / 2, 44) + 7}" fill="${col}"/>` : ""}<rect x="${n2(-w / 2)}" y="${-h / 2}" width="${n2(w)}" height="${h}" rx="${Math.min(h / 2, 44)}" fill="#FFF8EA"/>${col ? "" : `<path d="${pl ? bubTailPath(w, h, pl.side, pl.at, pl.tip, 20) : `M${tail - 20} ${td * (h / 2 - 3)} L${tail + (o.tdx || 0)} ${td * (h / 2 + 34)} L${tail + 20} ${td * (h / 2 - 3)}z`}" fill="#FFF8EA"/>`}</g>`;
   const tx0 = o.x ? 32 : 0;
   lines.forEach((l, i) => { let h2 = esc(l); const m = i === 0 && o.pick !== false && /^(One, water[.!]|Two, food[.!]|Three, air[.!])/.exec(l);
     if (m) h2 = `<tspan fill="${m[1][1] === "n" ? P.blueDeep : m[1][1] === "w" ? P.orangeDeep : "#4E93B4"}" font-weight="700">${m[1]}</tspan>` + esc(l.slice(m[1].length));
     s += T(tx0, (i - (lines.length - 1) / 2) * size * 1.22 + size * .35, h2, size, P.ink, { w: 600 }); });
   if (o.x) s += `<g transform="translate(${n2(-w / 2 + 46)} 0)"><circle r="27" fill="${P.paper}" stroke="${P.ink}" stroke-width="3" opacity=".95"/><path d="M-11 -11 L11 11 M11 -11 L-11 11" stroke="${P.ink}" stroke-width="7" stroke-linecap="round"/></g>`;
-  return TF(x, y, k, s);
+  const out = TF(x, y, k, s), mt = pl && pl.m ? `<g transform="matrix(${pl.m.join(" ")})">${out}</g>` : out;
+  return o.bkey ? `<g data-bub="${o.bkey}" data-who="${o.who || ""}" data-bw="${n2(w)}" data-bh="${n2(h)}"${window._BUBORIG ? ` data-sz="${size}" data-xc="${o.x ? 1 : 0}" data-txt="${encodeURIComponent(lines.join(" "))}"` : ""}>${mt}</g>` : mt;
 }
 // the sentences of a line as bubble pages: each sentence shows while it is said
 function sentPages(id) { const L = TL.lines[id], pages = []; let cur = [], t0 = L.t; L.words.forEach((w, i) => { if (!cur.length) t0 = w.a; cur.push(w.w); if (/[.!?]$/.test(w.w) || i === L.words.length - 1) { pages.push({ text: cur.join(" "), t0, t1: w.b }); cur = []; } }); pages.forEach((p, i) => { p.t1 = pages[i + 1] ? pages[i + 1].t0 - .02 : L.end + .45; }); return pages; }
@@ -334,7 +339,8 @@ function wrap(text, size, maxW, wgt = 600, fam = "Fredoka") { const out = []; le
 function say(id, x, y, t, o = {}) { const L = TL.lines[id]; if (!L) return ""; if (window._SAID) window._SAID[id] = 1; if (t < L.t - .05 || t > L.end + .8) return ""; let s = "";
   const pages = o.merge ? [{ text: L.text, t0: L.t, t1: L.end + .45 }] : sentPages(id);
   if (!o.merge) for (let i = pages.length - 1; i > 0; i--) if (pages[i].text.split(" ").length + pages[i - 1].text.split(" ").length <= 5) { pages[i - 1].text += " " + pages[i].text; pages[i - 1].t1 = pages[i].t1; pages.splice(i, 1); }
-  pages.forEach((p, i) => { s += bubble(x, y, wrap(p.text, o.size || 40, o.maxW || 560), t, i ? p.t0 : L.t - .04, p.t1, { ...o, col: P[L.who], x: o.x && i === 0 }); }); return s; }
+  const mw = (i) => { const Q = !window._BUBORIG && window.BUBPLACE && BUBPLACE[id + "#" + i]; return (Q && Q.mw) || o.maxW || 560; };   // the layout may wrap a page narrower to fit beside its speaker
+  pages.forEach((p, i) => { s += bubble(x, y, wrap(p.text, o.size || 40, mw(i)), t, i ? p.t0 : L.t - .04, p.t1, { ...o, col: P[L.who], x: o.x && i === 0, bkey: id + "#" + i, who: L.who }); }); return s; }
 
 /* ---------- channel identity + scoreboard ---------- */
 function logo(t, x = 44, y = 34, s = .86) { const b = 1 + .22 * loud("heart", t);

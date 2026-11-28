@@ -195,6 +195,6 @@ SC.glitch = (t, s) => { const tA = s.t0, low = 1 - eio(clamp((t - LT("g451") - 1
     + (pk > .01 ? TF(1250, 390, pk, panel) : "")
     + x2gSay("g451", 1240, 260, t, { tail: 80 }) + x2gSay("g453", 1080, 200, t, { tail: 120 }) + x2gSay("g456", 1180, 240, t, { tail: 100 }) + x2gSay("g458", 1120, 560, t, { tail: 140 }) + x2gSay("g460", 620, 200, t, { tail: 300, maxW: 600 })
     + (t >= LT("g451") ? comicWord(t, LT("g451") - .1, 1780, 280, "BEEP-BOOP!", { size: 66, d: .8, rot: 8 }) : "")
-    + (t >= MK("tap") ? TF(1720, 600, spring(t, MK("tap"), .4) * (1 - ramp(t, LT("g454"), .3)), tpill(0, 0, "0 LEAKS ✓", 48, "#fff", INKG, { w: 700 })) : "")
+    + (t >= MK("tap") ? TF(1420, 610, spring(t, MK("tap"), .4) * (1 - ramp(t, LT("g454"), .3)), tpill(0, 0, "0 LEAKS ✓", 48, "#fff", INKG, { w: 700 })) : "")   /* 28 Nov: moved left from over GLITCH (1720, 600), so his bubble can sit just above his head */
     + (t >= ez ? comicWord(t, ez + .02, 1760, 330, "BZZT!", { size: 104, d: .9, rot: 10 }) : "")
     + x2HUD(t); };

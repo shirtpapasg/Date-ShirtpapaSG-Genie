@@ -155,12 +155,15 @@ const parkedBike = (x, y, k, col) => TF(x, y, k, bikeP4(0, { chain: 1, crank: .6
 // THE VOID DECK (world -192..2112 x -108..1188), Saturday morning: the ceiling with its lights; the back wall with pillars (block number 214
 // on the pillar plaques), the letterboxes, the notice board, the round stone table with four stools, the bicycle bay with two parked bikes;
 // the void deck floor; the footpath and the grass verge in front, where the buddies and Pip's bike stand (ground line about y 1050)
+const VD_PLAQUE_X = 1080;   // the one pillar that carries the block number (its plaque: x 1096..1184, y 220..280)
+// the bubble layout (kit/bubble_layout.js) keeps speech bubbles off the plaque, on both void deck sets
+window.BG_OBST = Object.assign(window.BG_OBST || {}, { vdp4: [[VD_PLAQUE_X + 16, 220, 88, 60, "214"]], vdv2: [[VD_PLAQUE_X + 16, 220, 88, 60, "214"]] });
 BG.vdp4 = () => { let s = `<rect x="-200" y="-120" width="2320" height="1320" fill="url(#vdWall)"/>`;
   s += `<rect x="-200" y="-120" width="2320" height="150" fill="#E6DCCA"/><rect x="-200" y="26" width="2320" height="12" fill="#D4C8B2"/>` + [0, 1, 2, 3, 4].map((i) => `<rect x="${-60 + i * 480}" y="-20" width="230" height="16" rx="8" fill="#fff"/><rect x="${-60 + i * 480}" y="-4" width="230" height="10" fill="#FFF6D8" opacity=".6"/>`).join("");
   // the open side at the back: sky, far blocks and trees, between the pillars at the left
   s += `<rect x="-200" y="120" width="560" height="560" fill="url(#vdSky)"/>` + blockP4(-160, 190, 260, 420, "#EAD9F0", "#E58A6B") + blockP4(140, 240, 210, 380, "#F2E2C4", "#7BB0E0") + `<rect x="-200" y="600" width="560" height="80" fill="url(#vdGrass)"/>` + tree27(40, 640, .5) + tree27(280, 650, .45);
-  // pillars with the block number
-  for (const x of [360, 1080, 1800]) s += `<rect x="${x}" y="30" width="120" height="740" fill="#EFE6D6" stroke="#CFC3AD" stroke-width="5"/><rect x="${x}" y="730" width="120" height="40" fill="#D9CDB8"/><g transform="translate(${x + 60} 250)"><rect x="-44" y="-30" width="88" height="60" rx="8" fill="#2B5F8F"/>${T(0, 14, "214", 38, "#fff")}</g>`;
+  // pillars; the block number 214 on the MIDDLE pillar only (teacher, 28 Nov 2026, P4 EP2: "one block number 214 will do"; it was on all three)
+  for (const x of [360, 1080, 1800]) s += `<rect x="${x}" y="30" width="120" height="740" fill="#EFE6D6" stroke="#CFC3AD" stroke-width="5"/><rect x="${x}" y="730" width="120" height="40" fill="#D9CDB8"/>` + (x === VD_PLAQUE_X ? `<g transform="translate(${x + 60} 250)"><rect x="-44" y="-30" width="88" height="60" rx="8" fill="#2B5F8F"/>${T(0, 14, "214", 38, "#fff")}</g>` : "");
   // the letterboxes (between the first two pillars)
   s += `<g transform="translate(540 300)"><rect x="0" y="0" width="380" height="250" rx="8" fill="#9AA6B6" stroke="#6D788C" stroke-width="5"/>${[...Array(24)].map((_, i) => `<rect x="${12 + (i % 6) * 60}" y="${12 + Math.floor(i / 6) * 58}" width="52" height="48" rx="4" fill="#C7D0DB" stroke="#7D8896" stroke-width="2"/><rect x="${20 + (i % 6) * 60}" y="${22 + Math.floor(i / 6) * 58}" width="36" height="6" rx="3" fill="#59616B"/>`).join("")}</g>`;
   // the notice board
