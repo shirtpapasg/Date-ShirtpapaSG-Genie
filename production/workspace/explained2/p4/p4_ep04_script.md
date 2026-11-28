@@ -219,7 +219,7 @@ the method, dark ink on a pale card:
 - `KNOWLEDGE LOG · ENTRY 2 · LESSON: READ A LEAF BY ITS PARTS · COLOUR AND SIZE: WEAK CLUES · BEATEN BY: OBSERVE AND COMPARE` (c108, headed USING LOG · ENTRY 2)
 - `KNOWLEDGE LOG · ENTRY 3 · LESSON: PLANT PARTS LOOK DIFFERENT IN DIFFERENT PLANTS · CACTUS: SPINE-LIKE LEAVES, GREEN STEM MAKES FOOD · BEATEN BY: TEST IT OVER TIME` (g706, filed on top of 1 and 2)
 
-**The P4 finale is a boss fight built from this log** (vault: "The finale: beat GLITCH with everything you learnt"; EP20-EP22): GLITCH,
+**The P4 finale is a boss fight built from this log** (vault: "The finale: beat GLITCH with everything you learnt"; the season finale, EP23-EP26, approved 28 Nov): GLITCH,
 made of every lesson he filed, is beaten one stage at a time; each stage calls back one entry by its number, the viewer picks that
 entry's METHOD, and one panel of his armour or screen breaks. So **these entries must stay word for word the same** in every script, card,
 build and the P4 game: copy them from the vault, never re-word them in a build, and show the entry number whenever he uses or files one.
