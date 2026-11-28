@@ -84,7 +84,7 @@ SC.lunch = (t, s) => { const tL = MK("koo") + .2, tO = MK("liftoff"), tK = MK("k
 
 /* ================================================================ LCPARTS · LOOK CLOSER 1: check every part, like a plant doctor ================================================================ */
 // one cream panel over the softly blurred void deck; Chilli BIG in the panel; Momo big at the right (she explains: she picked right) with her
-// magnifier and a toy stethoscope; Pip at the left of the pot (he presses the soil); Basil's face peeks in at the lower-left corner (shy)
+// magnifier (v3: in her doctor costume, no extra toy stethoscope); Pip at the left of the pot (he presses the soil); Basil's face peeks in at the lower-left corner (shy)
 const LCC = [905, 1000], LCKK = 1.32, LPT = (p) => [LCC[0] + LCKK * p[0], LCC[1] + LCKK * p[1]];
 SC.lcparts = (t, s) => { const k = ramp(t, s.t0, .45), tL = MK("leaves"), tS = MK("stem"), tSo = MK("soil"), tPr = MK("press"), tW = MK("win"), tR = MK("roots"), tN = MK("nohole"), frz = t >= tPr + .35 && t < LT("d506") - .05;
   const foc = (p, a, b, z) => { const u = ss(a, a + .7, t) * (1 - ss(b - .6, b, t)); return u > 0 ? [p, z, u] : null; };
@@ -108,7 +108,7 @@ SC.lcparts = (t, s) => { const k = ramp(t, s.t0, .45), tL = MK("leaves"), tS = M
     + magCircle(t, tR + .1, LE("d509") + .3, 560, 360, ...camPt(c, LPT([-20, -32])), "brown, mushy roots", TF(560, 480, 4.4, potWindow(t, 1, "rot")), 100)
     + (t >= MK("clue") - .2 && t < LE("d510") + .5 ? OP(spring(t, MK("clue") - .2, .4) * (1 - ramp(t, LE("d510") + .2, .3)), `<path d="M${camPt(c, LPT([30, -40]))[0]} ${camPt(c, LPT([30, -40]))[1]} q20 -30 0 -60 q-20 -30 0 -60" stroke="#8FAF4A" stroke-width="8" fill="none"/>` + tpill(camPt(c, LPT([30, -40]))[0] + 60, camPt(c, LPT([30, -40]))[1] - 150, "CLUE", 30, "#8FAF4A", "#fff", { w: 700 })) : "")
     + x2bd("momo", 1690, 1076, 460, t, { in: s.t0 - .5, flip: true, poses: [[s.t0, "sit"], [tL - .1, "pointing"], [LE("d503") + .1, "sit"], [frz ? tPr + .35 : 9999, "pointing"], [LT("d506") - .05, "sit"], [LE("d506") + .05, "horrified/surprised"], [LT("d507") + .5, "sit"], [tR - .1, "surprised"], [LE("d509") + .2, "sit"]], look: -6, mag: (t >= tL - .1 && t < LE("d503") + .1) || frz, still: frz })
-    + TF(1690, 1076 - 460 * .55, .9, stethV3())
+    + (window.COSTUME_T0 !== undefined && t >= window.COSTUME_T0 ? "" : TF(1690, 1076 - 460 * .55, .9, stethV3()))   // v3 fix (teacher: "a pendant like item that is not necessary"): the old toy stethoscope is not drawn over the doctor costume
     + x2bd("basil", 250, 1185, 400, t, { in: s.t0 - .5, peek: true, poses: [[s.t0, "oops"], [LT("d504") - .1, "sit"], [LE("d504") + .1, "sit"], [tPr + .35, "surprised"], [LT("d507") + .4, "laughing"], [LE("d508"), "oops"], [LT("d510") - .1, "deadpan"]], look: 8, tag: false, still: frz })
     + x2gSay("d507", 1060, 240, t, { tail: -100 })
     + x2frozen(frz ? 1 : 0) + x2flash(t, tPr + .35, .5, .12)

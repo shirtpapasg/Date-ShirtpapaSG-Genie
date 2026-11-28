@@ -213,3 +213,20 @@ GLY4mDzxdaA's (the audio stream is COPIED); bubbles beside the speakers; one 214
 - Review (scratchpad `p4ep02_v3_review/`, not committed): index.html, preview_part1-4.mp4 (720p, 6.3-7.5 MB each), before_after_01-10.jpg,
   costumes_on.jpg, costumes_{momo,pip,basil}.jpg. NOT uploaded; upload as a NEW video after the teacher's "OK" (upload_v2.json is the
   metadata model; the thumbnail still shows the helmets: remake it from a costume frame if wanted).
+- **v3 fix (28 Nov, after the teacher's review: "there is a pendant like item that is not necessary"; and her rule "bike helmets ONLY when
+  the buddies are cycling"):** (1) p2.js lcparts (LOOK CLOSER 1, 130.56-175.70 s): the old code-drawn toy stethoscope `stethV3()` (a grey
+  cord from under Momo's chin to a grey disc over her neckerchief) is no longer drawn once the costumes are on (t >= COSTUME_T0); her
+  neckerchief, medal, head mirror and pocket magnifier are in the paintings and stay. (2) costume.js: `BASIL_HELMET = false` and
+  `ITEM_OPT.pip = "live"`, p1.js: `PIP_HELMET = false`: before the swap (0-1.28 s) Basil wears his badge only (his orange helmet is gone),
+  Pip would wear his goggles only (he is not on screen then), and the score bar's plain chips carry no helmet. Checked: a 5 fps scan of
+  the whole episode (scratchpad momofix/scan2.js) finds no stethoscope, no helmet in the DOM, code items only on Basil (badge) at 0-1.2 s,
+  and no plain (non-doctor) buddy painting after 1.28 s; the other code items (lib.js itemsOf: Momo's pendant, Basil's badge27, Pip's
+  helmet/goggles; items_options.js) already return nothing for the doctor sprites. NOT changed: Uncle Lim (a human guest, not a buddy)
+  still wears his white bike helmet (limv2.js / painted) in the repair and wait scenes (about 4:45-5:30); thumb.jpg still shows the helmets.
+  Re-render: only the 300-frame chunks that changed (`out/run_v3fix.sh`: `node render.js 1 3 0 10` and `130 180`, RENDER_OUT
+  /dev/shm/p4ep02v3fix), spliced into the v3 picture by stream copy at frames 300 / 3900 / 5400 (every chunk starts on its own keyframe;
+  the same SPS), audio copied from the live p4ep02.mp4 again. `/dev/shm/p4ep02v3/p4ep02_v3.mp4` replaced (171.4 MB): 13596 frames = 7:33.2,
+  decode 0 errors, audio md5 234633d23520c4e646c99def2fd4d195 (unchanged), -16.0 LUFS, -2.4 dBTP; packet md5s identical to the earlier v3
+  except frames 0-249 and 3900-5349. Crops of Momo every 2 s (217) and Pip / Basil every 4 s checked by eye. Review folder: previews
+  re-cut (6.9 / 6.2 / 5.8 / 6.1 MB), momo_fix_before_after.jpg, basil_helmet_before_after.jpg, costumes_on.jpg and before_after_04.jpg
+  rebuilt, two lines under "What is new".

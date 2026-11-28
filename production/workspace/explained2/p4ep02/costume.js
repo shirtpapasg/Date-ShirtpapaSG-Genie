@@ -4,6 +4,10 @@
 // open!", 1.28 s) every buddy on screen swaps to its doctor painting with the usual pose-swap pop and sparkles, and keeps it to the end.
 // The sprites are baked by costume_bake.py (spr/<who>_doc_*.png); lib.js buddy0() swaps the names from COSTUME_T0.
 window.COSTUME_T0 = W("c101", "open");
+// v3 fix (28 Nov 2026, the teacher's rule: bike helmets appear ONLY while the buddies are cycling, and nobody cycles in EP2): before the
+// costumes go on (the first 1.28 s) and in the score bar's plain chips the buddies wear their normal P4 look, no helmet: Basil his badge
+// (no orange helmet), Pip his goggles on his head (lib.js itemsOf with PIP_HELMET false, set in p1.js), Momo her neckerchief and medal.
+window.BASIL_HELMET = false; window.ITEM_OPT.pip = "live";
 // the score bar's face chips wear the costume too (kit/score4.js s4chip, with the doctor sit painting once the desk is open)
 s4chip = function (who, t, r) { const [fx, fy, fr] = S4FACE[who], dn = `${who}_doc_sit_closed`, doc = t >= window.COSTUME_T0 && SPR[dn], nm = doc ? dn : `${who}_sit_closed`, S = SPR[nm]; if (!S) return "";
   const k = r / fr, id = "s4" + who, it = !doc && typeof itemsOf === "function" ? itemsOf(who, nm, 1, {}) : "";

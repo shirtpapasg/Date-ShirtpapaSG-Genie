@@ -5,7 +5,7 @@
 // Staging (P4-new-direction.md "The trio: synergy"): every line spoken TO someone and answered by a look, a pose or a reply; two-shots for
 // banter, wide for chaos, the round face close-up only for a big feeling (Basil, 1:17); show first, then tell. Guests: ep2art.js.
 P.lim = "#6FB3DE"; BNAME.lim = "Uncle Lim";
-window.PIP_HELMET = true;
+window.PIP_HELMET = false;   // v3 fix (teacher's rule, 28 Nov 2026: bike helmets ONLY while the buddies are cycling; nobody cycles in EP2): goggles on his head, no helmet
 const x2bd = (who, x, y, h, t, o = {}) => buddy(who, x, y, h, t, o);
 const x2bc = (c, who, x, y, h, t, o = {}) => { const [X, Y] = camPt(c, [x, y]); return buddy(who, X, Y, h * c[0], t, o); };
 const x2place = (name, inner, c) => CAM(bg(name) + inner, c[0], c[1], c[2]);
