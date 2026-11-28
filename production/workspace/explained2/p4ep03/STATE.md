@@ -168,3 +168,10 @@ To rebuild: the voice WAVs are in `/dev/shm/p4ep03/voice` (RAM; `voice/` here ke
   key KLHY6W_dTR4 in `chapters_p3.json`. TheOneApp #286 (P4 no. 3 = KLHY6W_dTR4, the seven moments of `app_moments.json`; the 2:33 one is
   worded "Look closer: the four parts of a leaf" in the app), merged (4d0fa15), not deployed. The mp4 is still only in RAM
   (`/dev/shm/p4ep03/p4ep03.mp4`): moving it would leave the disk under 3 GB free.
+- **v2 uploaded 28 Nov (~10:55 UTC, the teacher's "ok" to replace KLHY6W_dTR4):** `/dev/shm/p4ep03/p4ep03_v2.mp4` is live as
+  8mQZiunF-W8 (https://youtu.be/8mQZiunF-W8), public, Made for Kids, Education, English, processed (config `upload_v2.json`, thumbnail
+  `thumb_v2.jpg` with the detective hat; title, description with chapters and tags the same as KLHY6W_dTR4: same timing). It replaces
+  KLHY6W_dTR4 at position 2 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI (c4ZDCAD2vPM, GLY4mDzxdaA, 8mQZiunF-W8, ...). KLHY6W_dTR4 STAYS PUBLIC
+  with a NEW VERSION line; PNe2DU8sFTI's NEW VERSION line now points to 8mQZiunF-W8. Chapters: key 8mQZiunF-W8 in `chapters_p3.json`.
+  TheOneApp #287 (P4 no. 3 = 8mQZiunF-W8, moments unchanged), merged (02d6264), not deployed. The v2 mp4 is still only in RAM
+  (`/dev/shm/p4ep03/p4ep03_v2.mp4`, 318 MB): the disk has about 3.0 GB free. `thumb_v2.jpg` is not committed (media).

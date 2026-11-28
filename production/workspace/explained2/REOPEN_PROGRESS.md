@@ -220,3 +220,8 @@
   - Title "Which Plant Dropped This Leaf? | Parts of a Leaf, Parallel vs Net Veins | P4 Science", description with chapters, 12 tags, thumbnail p4ep03/thumb.jpg, Made for Kids, Education (config p4ep03/upload.json).
   - It replaces PNe2DU8sFTI at position 2 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI (after GLY4mDzxdaA). PNe2DU8sFTI gets the NEW VERSION line and STAYS PUBLIC (the teacher decides). No older video pointed to PNe2DU8sFTI. Chapters: key KLHY6W_dTR4.
   - The app: TheOneApp #286 (P4 no. 3 = KLHY6W_dTR4), merged by Claude (4d0fa15); not deployed. The mp4 stays in /dev/shm (disk at 3 GB free).
+- 2026-11-28 ~10:55 UTC: P4 EP3 v2 (re-filmed: a new shot every 10 s or less, the detective hat instead of the helmet, no bike helmets, the red edge trace, clearer titles; script, voices, music and timing unchanged) is live, public, as 8mQZiunF-W8 (the teacher's "ok").
+  - Same title, description (with chapters), tags, Made for Kids and Education as KLHY6W_dTR4; new thumbnail p4ep03/thumb_v2.jpg (the detective hat). Config p4ep03/upload_v2.json, file /dev/shm/p4ep03/p4ep03_v2.mp4 (RAM).
+  - It replaces KLHY6W_dTR4 at position 2 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI (after GLY4mDzxdaA). KLHY6W_dTR4 gets the NEW VERSION line and STAYS PUBLIC (the teacher decides).
+  - PNe2DU8sFTI's NEW VERSION line now points to 8mQZiunF-W8. Chapters: key 8mQZiunF-W8.
+  - The app: TheOneApp #287 (P4 no. 3 = 8mQZiunF-W8), merged by Claude (02d6264); not deployed.
