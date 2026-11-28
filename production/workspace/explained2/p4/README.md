@@ -8,7 +8,7 @@ rendered or uploaded.
 | `p4_ep01_script.md` | EP1 Systems: bike, body, tree (**v2, 26 Nov**: "The Great Void Deck Race"; v1 rejected, kept as `p4_ep01_script_v1.md`) | B Fix-It | Basil sits in an ice box three minutes before his race with Uncle Lim: his bike has no bell, no chain and no brakes ("LIGHTER IS FASTER!") | 7:38 model (about 6:30 built) |
 | `p4_ep02_script.md` | EP2 The plant system (**v2, 27 Nov**: "Help! I'm Wilting!", villain GLITCH; v1 kept as `p4_ep02_script_v1.md`) | D Help Desk | Chilli the chilli plant: "I'm watered every single day, in my beautiful new pot. So WHY am I wilting?" | 7:54 model (about 7:30 built) |
 | `p4_ep03_script.md` | EP3 Read a leaf like a scientist (**v2, 28 Nov**: "The Case of the Mystery Leaf", villain GLITCH with his colour-and-size scanner and sticky tape, knowledge log entry 2; v1 kept as `p4_ep03_script_v1.md`) | A Case File | EP2's leaf on the Help Desk; GLITCH: "Owner: the mango tree." and a roll of tape | 7:54 model (about 7:30 built) |
-| `p4_ep04_script.md` | EP4 Plants with superpowers: cactus, climbers, carrots | D Help Desk | Spike the cactus: "My family loves me too much." | 6:23 |
+| `p4_ep04_script.md` | EP4 Plants with superpowers: cactus, climbers, carrots (**v2, 28 Nov**: "The Prickly Patient", the Plant Clinic in doctor costumes, villain GLITCH (he taped the plastic leaves), knowledge log entry 3, the four-face score bar with a bonus point; v1 kept as `p4_ep04_script_v1.md`) | D Help Desk | Spike the cactus: "Doctor, my family loves me too much!" Watered every day, kept in the dark bathroom, plastic leaves taped on; GLITCH: "...Not me." | 7:56 model (about 7:40 built) |
 
 **Read first, in this order:** SecondBrain `Plans/videos/P4-new-direction.md` (the brief: problem first, three fix cards, the story spine,
 the four formats, humour by age, Heart's arc) · `Plans/videos/P4-series-plan.md` (topics, cast) · `../p3_ep27_bridge_script.md` (the pilot:
@@ -59,11 +59,12 @@ Each script has the same sections, so any agent can find anything:
 | 1 (v2, as built: cards 2 and 3 swapped) | 2 (right) | 3 (wrong) | 1 (wrong) | 2 | Basil |
 | 2 (v2) | 3 (wrong) | 1 (right) | 2 (wrong) | 1 | Momo |
 | 3 (v2) | 2 (wrong) | 1 (wrong) | 3 (right; rushes CASE CLOSED! once) | 3 | Pip |
-| 4 | 1 (wrong) | 2 (wrong) | 3 (right answer, **wrong reason: no point**) | 3 | Basil |
-The right answer has been card 3 four times; **from EP5, vary the position of the right card** (1 or 2) so children cannot learn "always 3".
+| 4 (v2) | 2 (right) | 3 (wrong) | 2 (right card, **wrong reason: no point**; scores in the bonus) | 2 | Basil |
+The right card so far: 2, 1, 3, 2 (EP1-EP4 v2); keep varying it so children cannot learn a position. **EP4 v2 adds a bonus point** (a two-chip
+pick with reasons, root or stem?), so the four-face score bar tells a story: Pip 1 · Momo 1 · Basil 1 at the end.
 The right buddy explains the right answer; a wrong buddy speaks only to fix their own idea or to teach a term in a later scene. Basil has at
 the most lines of the three buddies in every episode (lines: EP1 Basil 16, Pip 14, Momo 13; EP2 Basil 12, Pip 11, Momo 9; EP3 Basil 14,
-Momo 11, Pip 7; EP4 Basil 14, Momo 7, Pip 6); in EP2 the right buddy, Pip, speaks the most words, because he leads the diagnosis.
+Momo 11, Pip 7; EP4 v2 Basil 17, Momo 13, Pip 13); in EP2 the right buddy, Pip, speaks the most words, because he leads the diagnosis.
 
 ## 4. Pacing (the teacher: "the rhythm of P3 EP1-10")
 - **Target:** about 105-117 spoken words a minute; voice on about 70% of the time; real think time on every choice. The four scripts:
