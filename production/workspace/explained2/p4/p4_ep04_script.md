@@ -1,6 +1,6 @@
-# SCRIPT v2: TheOneApp, Explained · P4 EP4 · Plants With Superpowers · "The Prickly Patient"
+# SCRIPT v2.1: TheOneApp, Explained · P4 EP4 · Plants With Superpowers · "The Prickly Patient"
 
-**Written 28 Nov 2026 by Claude, version 2. SCRIPT ONLY: nothing is built, voiced, rendered or uploaded.** It replaces v1 (25 Nov, kept as
+**Written 28 Nov 2026 by Claude, version 2; v2.1 the same day after the teacher's new staging rules (the shot plan, red traces, no helmets, GLITCH spacing, Uncle Lim only for his moment, contrast, the GLITCH log methods, Uncle Lim's first hint). SCRIPT ONLY: nothing is built, voiced, rendered or uploaded.** It replaces v1 (25 Nov, kept as
 `p4_ep04_script_v1.md`), which was written before the teacher turned down the first EP1-EP4 scripts and before the villain rule, the doctor
 costumes and the four-face score bar. v2 keeps v1's topic, science and best ideas (Spike the cactus who is "loved too much", the plastic
 leaves, "These spines? They ARE my leaves.", the cut-away of a cactus stem, "Right card, wrong reason. No point.", "I'd like to see the
@@ -14,6 +14,38 @@ the approved scripts `p4_ep01_script.md` (v2), `p4_ep02_script.md` (v2.1) and `p
 their `_v1` files, `../p4ep03/STATE.md`, `p4/README.md`, `../SERIES_FORMAT.md`, `../STYLE_GUIDE.md`, `../EXPLAINED_PLAYBOOK.md`,
 `../PRONUNCIATION.md`, and the Inspiring Science P4 textbook, pp. 8-14 (a map only). **Follows straight on from EP3's last scene:** a cactus
 with three taped-on plastic leaves hops up to the Science Help Desk; the trio turn to GLITCH; "...Not me."
+
+## What changed in v2.1 (28 Nov 2026, the teacher's new staging rules; script only)
+v2 was written in the morning of 28 Nov, before the teacher's notes on the EP3 cut that afternoon (`../SERIES_FORMAT.md` 6y and 6z,
+`../MOTION_GUIDE.md` 3, the vault's `House-Rules.md`, the EP3 v2 re-stage in `../p4ep03/STATE.md`) and before two new arc decisions
+(the GLITCH log keeps a METHOD per entry; Uncle Lim's secret). v2.1 keeps the story, the science, the characters, every line but one and
+the 22 questions; it adds:
+1. **A shot plan (section 5b): 138 shots, none longer than 6.9 s (mean 3.5 s; 46 full-frame inserts marked ■).** The 10-second rule:
+   singles on the speaker, two-shots, the group, reaction cuts, inserts, push-ins and cuts to new sets, each with a slow push inside, cut
+   on a line's start or a sentence break; built with EP3 v2's director (`census.js` → `plan_shots.py` → `director_p1.js`, `DHUD`) and
+   checked with `qa/hold_check.py` (≤ 10 s). The ready-made list is the planner's starting point.
+2. **Comparisons are SHOWN (section 5c): 13 red-trace zooms, 8 comparisons.** Each is a full-frame zoom on the real thing, a red line drawn
+   along its real outline, a short dark-ink label in P4 words, then the two side by side: spine-like leaves vs a flat leaf (1a/1b), the
+   green stem (2), stores water vs too much water (3a/3b), DAY 1 vs DAY 21 (4, new: the test over time), woody vs non-woody (5a/5b), climber
+   vs creeper (6a/6b), the thin roots in the bonus (7), storage roots (8a/8b).
+3. **Costumes: no bike helmets anywhere** (not a cycling episode); the doctor costumes replace them, never stacked; props replace, never
+   stack (section 0d; the score-bar chips and the thumbnail too).
+4. **GLITCH at least 60 px clear of the buddies** in every shot (the cold open, the fix cards, the picks, both look-closers, his scene, the
+   finish); his outro gag is its own shot with no buddies in it.
+5. **Uncle Lim only for his own moment** (s601 and the re-potting, about 8 s): the camera cuts to him as he steps out of his gate; he goes
+   back in while the camera is on Spike; he is in no other shot (v2 had him at his gate through the GLITCH scene and chuckling at g708).
+   Spike's family are never shown (only named).
+6. **Words high-contrast and never mirrored:** dark ink on cream chips or white / yellow words with a thick dark outline (8-12 px);
+   GLITCH's screen words, Pip's CACTI book, Basil's badge, the sweet potato card and the clapperboard never read mirrored (`unflipText`).
+7. **The GLITCH log with its METHOD (the teacher: "remember all the data saved by the villain Glitch. At the end, the user needs to use
+   various methods learnt to destroy Glitch"):** every log card on screen shows its entry number, its lesson and **BEATEN BY: the method**,
+   word for word as the vault's log (section 0c). He shows **ENTRY 2** when he scans Spike by his parts (c108) and **ENTRY 1** when he warns
+   about the drainage holes (w502), so the finale can call them back. **One line changed:** g702 "Wait! Here's the data." → **"Wait! We
+   tested it over time."** (Pip names the method; "HERE'S THE DATA" moves to the evidence panel's heading; +0.7 s).
+8. **Uncle Lim hint #1** (the teacher: he is secretly a government agent, revealed in the P4 finale): the right pot with a drainage hole is
+   already waiting on his rack before anyone asked, and a 0.5 s knowing smile (s601, about 3:21-3:25; no extra time; nobody reacts).
+9. **Three new questions** (Q23 the Uncle Lim hint, Q24 the method's wording, Q25 Pip's goggles on his scrub cap); Q20's length updated.
+**Length:** 7:57 by the model (v2 7:56), about 7:41 built; under the 8:00 cap.
 
 ## What changed from v1
 What the teacher's direction changed between v1 and the final EP1-EP3 scripts, and the three new decisions, applied here:
@@ -65,12 +97,12 @@ What the teacher's direction changed between v1 and the final EP1-EP3 scripts, a
 | **Topic** | P4 Systems: the Plant System, Ch 1 (Inspiring Science P4, pp. 8-14): how plant parts look in different plants (p. 12: "The plant parts look different because they help plants growing in different environments to stay alive"): the cactus's spine-like leaves and green stem (p. 13); woody and non-woody stems (pp. 8-9); climbers and creepers (p. 14); storage roots (p. 10); a stem cutting (p. 11, as a label). Syllabus outcome: observe and compare the parts of different plants; the parts help plants live in different places. |
 | **Big idea** | Plant parts look different in different plants because they help the plants live in different places. A cactus lives in dry places: its leaves are spine-like, to reduce water loss, and its green stem makes food, so it is a real plant that needs light and only a little water (its thick stem stores water; too much water makes it rot). Some plants have woody stems, some non-woody; climbers coil around structures to climb up to light; creepers spread along the ground; storage roots store food. |
 | **The story** | "The Prickly Patient": the trio, in brand-new doctor outfits, open the Plant Clinic. Spike: "Doctor, my family loves me too much!" They water him every day and keep him in the dark bathroom, and someone has taped plastic leaves on him. GLITCH: "...Not me." It was. He read Spike's parts, found no leaf blade and no leaf stalk, and "installed" leaves from the plastic plant by the lift. Spike's spines turn out to BE his leaves, and his green stem makes his food, so the leaves come off (Pip, scared of spines, in gloves and with tongs). More water? The soil is soaking and his base is soft and brown (GLITCH, right for once: "Drainage holes: none."). Uncle Lim re-pots him and gives him a sunny spot; 21 days later he stands tall. Pip scores; Basil, right card but wrong reason, does not, and asks for the replay. GLITCH gets the data from Pip and files lesson 3. "So I'm the only odd plant here?" Uncle Lim's corridor garden is full of superpowers; a bonus point (root or stem?) and a ride into a sweet potato settle the scores at one each. |
-| **Length (estimate)** | **7:56 by the series model** (the story ends at 7:18, then the read-along, "Now you know!", the outro, the blooper and GLITCH's final sting). EP3 built at 0.97 of its model (7:54 → 7:39), EP1-EP2 at 0.95, so expect **about 7:40 when built**. The hard cap is **8:00**, end card included; section 9 has the cuts. |
-| **Spoken words / pace** | **875 words**, about **110 words a minute** (model); voice on about **75%**. By speaker: Heart 292, **Basil 177**, Pip 116, Momo 115, Spike 85, GLITCH 67, Uncle Lim 12, all three 11. **Lines: Basil 17, Momo 13, Pip 13** (Basil has the most lines and words of the three, as every episode; Pip, the right buddy, has the most words of the other two). Spike 10 lines, GLITCH 10 short lines. |
+| **Length (estimate)** | **7:57 by the series model** (v2.1; v2 7:56; the story ends at 7:19, then the read-along, "Now you know!", the outro, the blooper and GLITCH's final sting). EP3 built at 0.97 of its model (7:54 → 7:39), EP1-EP2 at 0.95, so expect **about 7:41 when built**. The hard cap is **8:00**, end card included; section 9 has the cuts. |
+| **Spoken words / pace** | **877 words**, about **110 words a minute** (model); voice on about **75%**. By speaker: Heart 292, **Basil 177**, Pip 118, Momo 115, Spike 85, GLITCH 67, Uncle Lim 12, all three 11. **Lines: Basil 17, Momo 13, Pip 13** (Basil has the most lines and words of the three, as every episode; Pip, the right buddy, has the most words of the other two). Spike 10 lines, GLITCH 10 short lines. |
 | **Narrator** | Heart, the warm host, with Peppa-style dry asides ("Basil got his coat five minutes ago."). Kokoro `af_heart` at speed 0.90, 0.5 s between sentences; the buddies in their Character Voice Kit voices, 12% slower. |
 | **Guest** | **Spike** (he), a round, ribbed cactus in a glossy blue pot, his face on the POT (never on the cactus). Dry, a little proud, the straight man to Basil's teasing ("I AM a plant, thank you!"). Lives only in this topic (EP4; a cameo later at most). Needs paintings (section 6b) and **a new Kokoro guest voice, tested for the teacher first** (suggest a calm, dry British voice, `bm_daniel`-based, speed .95: distinct from GLITCH's `bm_lewis`/`bm_george` blend and Chilli's `am_michael`/`am_echo`). |
-| **Villain** | **GLITCH the Robot, the series' ultimate boss** (EP2's paintings and voice; silver and teal, screen face, one antenna, stubby arms, on wheels), with EP3's tape roll. He CAUSES the plastic-leaf problem (his wrong idea: no flat leaves, no food), pitches fix card 1, gets one thing RIGHT from his own lesson 1 ("Drainage holes: none." a small sign that he is growing), is won over by Pip and the data, files **KNOWLEDGE LOG · ENTRY 3**, retires his tape, and ends the episode alone with "New knowledge acquired." (section 0c). |
-| **Side character** | **Uncle Lim** (the teacher's paintings, long trousers; EP1-EP3's voice): one Singlish line, "Aiyoh, cactus in the bathroom? Put here lah. My corridor got sun." He is the adult who re-pots Spike (gloves and a folded newspaper). It is his corridor garden the twist tours. |
+| **Villain** | **GLITCH the Robot, the series' ultimate boss** (EP2's paintings and voice; silver and teal, screen face, one antenna, stubby arms, on wheels), with EP3's tape roll. He CAUSES the plastic-leaf problem (his wrong idea: no flat leaves, no food), pitches fix card 1, gets one thing RIGHT from his own lesson 1 ("Drainage holes: none." a small sign that he is growing), is won over by Pip and the data, files **KNOWLEDGE LOG · ENTRY 3 · BEATEN BY: TEST IT OVER TIME**, retires his tape, and ends the episode alone with "New knowledge acquired." (section 0c). |
+| **Side character** | **Uncle Lim** (the teacher's paintings, long trousers; EP1-EP3's voice): one Singlish line, "Aiyoh, cactus in the bathroom? Put here lah. My corridor got sun." He is the adult who re-pots Spike (gloves and a folded newspaper). It is his corridor garden the twist tours. **On screen only for his own moment** (s601 and the re-potting, about 8 s: he steps out of his gate and goes back in). **Uncle Lim hint #1** (his secret, revealed in the P4 finale): the right pot is already waiting, and a tiny knowing smile (section 15b). |
 | **Hidden animal** | None (Case File episodes only). |
 | **Heart mystery hint** | **#4** (one, faint, never explained): at **4:02** by the model, Spike, new to the Help Desk, looks around for the voice: "Thank you, um... where are you, exactly?" Heart: "Right here." The logo-pill heart pulses once; nobody reacts. GLITCH is not in the shot (he arrives by lift a beat later), so the two kinds of glitch never meet. |
 | **Key words (shelf)** | SPINE-LIKE LEAVES (Pip) · WOODY / NON-WOODY (Momo, with Pip) · CLIMBERS (Basil) · STORAGE ROOTS (Basil). Four, as v1 and EP3: the leaves, the stems and the roots each get their "superpower". |
@@ -92,7 +124,13 @@ What the teacher's direction changed between v1 and the final EP1-EP3 scripts, a
 | **Execution: goal, turn, button in every scene** (26 Nov) | Each scene opens with its goal and ends on a button (a rimshot, a stamp, a score, a cliffhanger, the lift DING). Show, then tell: the soil squelches before Momo says "soaking"; the 21 days run before anyone says "right". |
 | **Sad trombone on joke flops; loud humour sounds** (27 Nov) | Two sad trombones (1:05 the pun, 2:56 Momo's plan), each in the pause; every comic sound on `kit/humour_sfx.js`, +3 dB over the dialogue, never on a word. |
 | **Side characters can speak Singlish** (26 Nov) | Uncle Lim: "Aiyoh, cactus in the bathroom? Put here lah. My corridor got sun." |
-| **8:00 at most** (26 Nov) | 7:56 by the model, about 7:40 built. |
+| **8:00 at most** (26 Nov) | 7:57 by the model, about 7:41 built. |
+| **No still frame or same shot for more than 10 s** (28 Nov, 6y) | Section 5b: 138 shots, the longest 6.9 s (aim 4-8 s); singles, two-shots, reaction cuts, inserts and push-ins; the director camera; `hold_check.py` ≤ 10 s. |
+| **Comparisons shown: zoom in, trace in red, a short description** (28 Nov, 6z) | Section 5c: 13 red-trace zooms for 8 comparisons, each then side by side. |
+| **Costume hats replace helmets; helmets only when cycling** (28 Nov, 6z) | No helmets in EP4; the doctor costumes all episode (0d). |
+| **GLITCH ≥ 60 px from the buddies; guests only for their moment** (28 Nov, 6z) | Section 5d; Uncle Lim on screen about 8 s, for his line and the re-potting. |
+| **Words readable at 720p, never mirrored** (28 Nov, 6z) | Dark ink on cream, or a thick dark outline; `unflipText` on every prop with words (5d). |
+| **The GLITCH log keeps a METHOD per entry; the finale uses them** (28 Nov) | 0c: every log card shows its number, lesson and BEATEN BY; Pip names the method (g702). |
 | **Original music, never Kampong Walk** (25 Nov) | The Scoop Parade family: the help-desk voicing (EP2's, teased by EP3's tag), lite, finale, the micro-world pad alone in the journey, the game-show tease for EP5. |
 | **Bubbles next to the speaker; one 214** (28 Nov) | The shared bubble kit; one 214 plaque on the void deck's middle pillar; the corridor shows its block number once, on the lift lobby wall. |
 
@@ -143,15 +181,16 @@ Basil → Spike → Heart.
 
 **What he does, beat by beat:** "...Not me." (0:20) → "Correction. Leaf blade: not found. Leaf stalk: not found. No leaves, no food. So I
 installed some." (0:24) → he pitches fix card 1 (0:46) and parks under it at the picks → "Joke detected. Laughter: zero." (1:06) → **right for
-once:** "Warning. Drainage holes: none." (2:43; his EP2 card flashes on his screen) → off to the lift → back out of the lift with a fresh
-plastic leaf: "Leaves: still required. Installing." (4:09) → Pip's data → BZZT! "Error. Leaves: detected. Shape: spine." (4:22) → Pip wins
-him over → "Updating! Lesson stored: plant parts look different in different plants. Cactus: spine-like leaves. Green stem makes food." (4:31)
-→ "...Tape: retired." (4:39) → outro: he tapes the plastic leaves back onto the PLASTIC plant by the lift (wordless; a plastic plant cannot
-grow new ones) → alone: "New knowledge acquired." (7:55).
+once:** "Warning. Drainage holes: none." (2:43; his EP2 card, ENTRY 1, flashes full frame on his screen) → off to the lift → back out of the lift with a fresh
+plastic leaf: "Leaves: still required. Installing." (4:09) → Pip: "Wait! We tested it over time." and the data → BZZT! "Error. Leaves: detected. Shape: spine." (4:23) → Pip wins
+him over → "Updating! Lesson stored: plant parts look different in different plants. Cactus: spine-like leaves. Green stem makes food." (4:32; the log card full frame: ENTRY 3 · LESSON · BEATEN BY: TEST IT OVER TIME)
+→ "...Tape: retired." (4:40) → outro: he tapes the plastic leaves back onto the PLASTIC plant by the lift (wordless; a plastic plant cannot
+grow new ones) → alone: "New knowledge acquired." (7:56).
 
 **His special ability, shown again (he learns from every loss; every loss makes him stronger)**
-- **He USES his log now** (new in EP4, the first visible sign of growth inside the story): lesson 2 shapes his scan (by parts) and lesson 1
-  makes him right about the drainage holes. The buddies are startled ("...Oh no. GLITCH is right."); the viewer sees a robot getting
+- **He USES his log now** (new in EP4, the first visible sign of growth inside the story): lesson 2 shapes his scan (by parts; his panel
+  is headed USING LOG · ENTRY 2, c108) and lesson 1 makes him right about the drainage holes (the ENTRY 1 card, w502). The entry numbers
+  are always shown, so the finale can call each one back. The buddies are startled ("...Oh no. GLITCH is right."); the viewer sees a robot getting
   smarter.
 - g706 files **KNOWLEDGE LOG · ENTRY 3** on top of entries 1 and 2. The buddies see a happy ending (Momo claps). The viewer alone sees the
   counter tick 2 → 3, his eyes narrow for 8 frames, the antenna light steadier, and **(new) a thin line flicker between the three cards for 6
@@ -160,18 +199,31 @@ grow new ones) → alone: "New knowledge acquired." (7:55).
   MAKES FOOD".
 - **He is won over for this problem only.** "...Tape: retired." retires the tape, not GLITCH.
 
-**The final sting (`glitchend`, 4.9 s, 7:51.5-7:56.4), the very last shot, after the blooper** (as EP2-EP3): GLITCH alone on his charging
+**The final sting (`glitchend`, 4.9 s, 7:52.2-7:57.1), the very last shot, after the blooper** (as EP2-EP3): GLITCH alone on his charging
 dock; a hard digital stutter on his own picture (silver, teal and white; at most 3 flashes a second; never full screen), then 1.8 s of true
 silence, then, calm and low: "New knowledge acquired." Cut to black. **The readable signs of "stronger" in EP4:** the log shows **3**; the
 stutter is **0.9 s** (EP2-EP3: 1.0 s: he recovers faster); the antenna light a touch brighter again; the sting voice a shade calmer (speed
 .86, range .36; EP3 .88 / .38); on "acquired" the three log cards light up one after another.
 
-**The GLITCH knowledge log (add the EP4 row to `P4-new-direction.md` once this script is approved)**
-| Entry | Episode | The lesson he files |
-|---|---|---|
-| 1 | P4 EP2 "Help! I'm Wilting!" | ROOTS NEED AIR · DRAINAGE HOLES: REQUIRED · WATER ONLY WHEN THE TOP OF THE SOIL IS DRY |
-| 2 | P4 EP3 "The Case of the Mystery Leaf" | READ A LEAF BY ITS PARTS · COLOUR AND SIZE: WEAK CLUES |
-| 3 (proposed) | P4 EP4 "The Prickly Patient" (script v2, 28 Nov 2026) | PLANT PARTS LOOK DIFFERENT IN DIFFERENT PLANTS · CACTUS: SPINE-LIKE LEAVES, GREEN STEM MAKES FOOD |
+**The GLITCH knowledge log** (copied word for word from the vault's `Plans/videos/P4-new-direction.md`, the single source of truth; the
+EP4 row is proposed until this script is approved)
+| Entry | Episode | The lesson he files | The METHOD the viewer used to beat him (for the finale) |
+|---|---|---|---|
+| 1 | P4 EP2 "Help! I'm Wilting!" (live) | ROOTS NEED AIR · DRAINAGE HOLES: REQUIRED · WATER ONLY WHEN THE TOP OF THE SOIL IS DRY | **Look closer before you fix:** check the evidence (feel the soil, look at the roots) instead of guessing |
+| 2 | P4 EP3 "The Case of the Mystery Leaf" (live) | READ A LEAF BY ITS PARTS · COLOUR AND SIZE: WEAK CLUES | **Observe and compare:** put two things side by side and compare their parts (veins, edge, shape) |
+| 3 (proposed) | P4 EP4 "The Prickly Patient" (script v2.1, 28 Nov 2026) | PLANT PARTS LOOK DIFFERENT IN DIFFERENT PLANTS · CACTUS: SPINE-LIKE LEAVES, GREEN STEM MAKES FOOD | **Test it over time:** try the fix, then watch and record what happens, day after day (the 21-day test: DAY 1 beside DAY 21) |
+
+**How a log card reads on screen (from EP4, every card, full frame when it is the subject):** the entry number big, then the lesson, then
+the method, dark ink on a pale card:
+- `KNOWLEDGE LOG · ENTRY 1 · LESSON: ROOTS NEED AIR · DRAINAGE HOLES: REQUIRED · WATER ONLY WHEN THE TOP OF THE SOIL IS DRY · BEATEN BY: LOOK CLOSER BEFORE YOU FIX` (w502, his screen)
+- `KNOWLEDGE LOG · ENTRY 2 · LESSON: READ A LEAF BY ITS PARTS · COLOUR AND SIZE: WEAK CLUES · BEATEN BY: OBSERVE AND COMPARE` (c108, headed USING LOG · ENTRY 2)
+- `KNOWLEDGE LOG · ENTRY 3 · LESSON: PLANT PARTS LOOK DIFFERENT IN DIFFERENT PLANTS · CACTUS: SPINE-LIKE LEAVES, GREEN STEM MAKES FOOD · BEATEN BY: TEST IT OVER TIME` (g706, filed on top of 1 and 2)
+
+**The P4 finale is a boss fight built from this log** (vault: "The finale: beat GLITCH with everything you learnt"; EP20-EP22): GLITCH,
+made of every lesson he filed, is beaten one stage at a time; each stage calls back one entry by its number, the viewer picks that
+entry's METHOD, and one panel of his armour or screen breaks. So **these entries must stay word for word the same** in every script, card,
+build and the P4 game: copy them from the vault, never re-word them in a build, and show the entry number whenever he uses or files one.
+In EP4 the buddy who names the method is Pip (g702: "Wait! We tested it over time.").
 
 **Two kinds of glitch, never confused:** Heart's hint #4 (4:02-4:07) is a single soft pulse of the logo heart in a corridor shot with no
 GLITCH in it; GLITCH comes out of the lift only after it.
@@ -179,6 +231,12 @@ GLITCH in it; GLITCH comes out of the lift only after it.
 ## 0d. The doctor costumes (the teacher's Q10 A: "from EP4")
 - **Why they wear them:** Spike is the clinic's first "patient" (EP3's last shot), so the trio have dressed for it: Basil's banner PLANT
   CLINIC · THE DOCTORS ARE IN! goes up over the old sign, and Heart's aside notes that Basil "got his coat five minutes ago".
+- **No bike helmets anywhere in EP4** (the teacher, 28 Nov: helmets only in scenes where the buddies cycle; there is no cycling here). The
+  doctor costumes are worn instead of them, never on top: every pose, the back views, the score-bar face chips (the doctor sit painting,
+  as EP2 v3's `costume.js`) and the thumbnail. **Props and hats replace, never stack:** Pip's scrub cap carries his goggles exactly as the
+  teacher painted them (no code goggles, no helmet added; Q25); Momo's head mirror is on its own band (no stethoscope or pendant drawn on
+  her: the EP2 v3 fix); Basil's stethoscope and badge are painted; the gloves go on over the paws only for the peel-off and are taken off
+  for the high-five; nothing is drawn on top of a costume head piece.
 - **Worn all episode** (the desk, the corridor, the tour, the ending), so the look never flips. Momo keeps her teal neckerchief and gold
   medal (painted under her coat) and her magnifier in her coat pocket; Pip's goggles sit on his scrub cap; Basil's P4 LAB SCIENTIST badge is
   on his coat (no helmet). The score bar keeps the usual P4 face chips (as the game).
@@ -304,7 +362,8 @@ the squelch, newspaper and gritty soil at the re-potting, footsteps on corridor 
 
 ## 4. The fix cards and the score
 One set of three BIG picture cards with number badges (never a second number card), clipped to a clinic notice board. Labels on two short
-lines, cap height at least about 40 px at 1080p.
+lines, cap height at least about 40 px at 1080p; white words with a thick dark ink outline (8-12 px, `paint-order="stroke"`) or dark
+ink on the card (the 28 Nov "font not clear" rule).
 | # | Card (picture · label) | Pitched by | Picked by | How the story tests it | Verdict stamped on the card |
 |---|---|---|---|---|---|
 | **1** | a plastic leaf with a strip of tape · **KEEP THE / PLASTIC LEAVES** | GLITCH, f201 | **GLITCH** (no buddy) | **The look-closer (1:48):** the spines are the leaves; the green stem makes food; the plastic only covers it. | NOT NEEDED |
@@ -319,14 +378,16 @@ day", "dark bathroom", "plastic leaves". The cards stay under the ring and glow 
 |---|---|---|
 | the picks (1:20) | The bar slides in, all 0. Pip and Basil both stand under card 2; Heart: "Same card, two reasons. A point needs the right card AND the right reason." A small REASON? tag hangs under Pip's and Basil's chips. | `[80.2, 0, 0, 0, 0]` |
 | the cure (3:42) | "Picked two? You win a point, and so does Pip!" **Pip pulls ahead.** Basil: "And me!" Heart: "Right card, wrong reason. No point this time." Basil's tag fades gently (no ✗, no red); "I'd like to see the replay." The replay. "...Replay accepted." Momo: "You'll get the next one, Basil." | `[221.8, 1, 1, 0, 0]` (YOU only if you picked 2) |
-| the bonus (5:19-6:14) | Root or stem? Pip says stem (it's joined to the stem), Momo and Basil say root, with evidence ("thin roots growing out of it"; "And this time, my reason"). The journey answers it. "Root it is! A bonus point for you, Momo and Basil." **Momo and Basil catch up; Pip claps for them.** | `[374.2, 2, 1, 1, 1]` (YOU's second point only if you showed one finger) |
-| the end (7:06) | "Final scores: Pip, Momo and Basil, one point each. How many did YOU get?" The bar grows to the centre for 2 s; YOU glows with a "?". | (unchanged) |
+| the bonus (5:19-6:14) | Root or stem? Pip says stem (it's joined to the stem), Momo and Basil say root, with evidence ("thin roots growing out of it"; "And this time, my reason"). The journey answers it. "Root it is! A bonus point for you, Momo and Basil." **Momo and Basil catch up; Pip claps for them.** | `[374.9, 2, 1, 1, 1]` (YOU's second point only if you showed one finger) |
+| the end (7:07) | "Final scores: Pip, Momo and Basil, one point each. How many did YOU get?" The bar grows to the centre for 2 s; YOU glows with a "?". | (unchanged) |
 **The story in one line:** the careful reader leads, the bold one learns that a reason counts and earns his point back with one, the
 curious one is right about what she eats, and it ends level, so every viewer with 1 or 2 points has matched or beaten the buddies. Nobody
 ends on 0 (positive language), and nobody is marked with a ✗.
 
 ## 5. The video, beat by beat
-**Times** come from the series model (section 9). The built timeline sets the real ones.
+**Times** come from the series model (section 9). The built timeline sets the real ones. **Camera:** the beat table gives the base
+staging of each scene; the director films it through the **shot plan in section 5b** (the 10-second rule) and the red-trace zooms in
+section 5c. Where a beat says "Camera: still" or "no cuts" (v2), the shot plan wins.
 **Poses:** the teacher's paintings only, as cut out today. **In costume (the whole episode):** `<buddy>_doc_arms_crossed`, `_doc_pointing`,
 `_doc_surprised` for each buddy, each for its one job. Every other pose from the shared code-painted costume set (`../p4ep02/costume_bake.py`, built for the EP2
 remake; section 6b). **→ *name*** marks a pose that is code-painted (or still to be added to that set); a painting replaces it if the
@@ -335,11 +396,12 @@ screen faces. Uncle Lim: his eight paintings (long trousers). Spike: section 6b.
 column names the one listener who answers the line.
 **No runs in EP4** (nobody runs; GLITCH rolls, Spike hops and is carried, the trio walk the corridor).
 **Faces are never covered:** no bubble, pill, card, comic word, tape, glove or sprite on any face (the buddies', Spike's pot face, GLITCH's
-screen face, Uncle Lim's). **Bubbles sit next to their speaker** (`kit/bubble_layout.js`); Spike's face box is on his pot.
+screen face, Uncle Lim's). **No bike helmets** anywhere (0d). **GLITCH at least 60 px clear of every buddy; Uncle Lim only for his own
+moment** (5d). **Bubbles sit next to their speaker** (`kit/bubble_layout.js`); Spike's face box is on his pot.
 
 | Time | Line | Who | Exact words | Reaction / pose (NOW → *new*) | On screen · camera | Music · SFX |
 |---|---|---|---|---|---|---|
-| **0:00.0** | **cold** (43.7 s) | | **THE PROBLEM: a prickly patient, and a robot with tape** | The trio in their NEW DOCTOR OUTFITS (first time on screen): Basil BEHIND the Help Desk (centre-right) in his white coat and stethoscope, still doing up a button; Momo at its left end in her white coat and head mirror; Pip at its right end in teal scrubs, scrub cap (goggles on top) and stethoscope. A close three-shot, all big (about half the frame height). GLITCH at the far right edge, his tape roll in his arms, exactly where EP3 left him. | The HDB void deck, the same Saturday morning, a minute after EP3's last shot (one 214 plaque, middle pillar only). The Science Help Desk with a new paper banner taped above the sign in Basil's big letters: **PLANT CLINIC · THE DOCTORS ARE IN!** Under it the old sign: ALL PROBLEMS FIXED ~~FAST~~ PROPERLY! / (carefully) / (but WHY?). **Spike** sits on the desk by the bell where EP3 left him: a round, ribbed cactus in a glossy blue pot with NO hole, the soil dark and wet; three bright plastic leaves sticky-taped on; the top a little pale and stretched, leaning; the base of the stem soft and brown; his face on the POT. **Camera:** opens tight on Spike (a voice in the first second), eases back to the three-shot. | Ambience: the void deck, morning (mynahs, a koel far off, a lift chime, a broom sweeping). Scoop Parade, help-desk voicing (the desk-bell ding and ukulele) on the first word. |
+| **0:00.0** | **cold** (43.7 s) | | **THE PROBLEM: a prickly patient, and a robot with tape** | The trio in their NEW DOCTOR OUTFITS (first time on screen): Basil BEHIND the Help Desk (centre-right) in his white coat and stethoscope, still doing up a button; Momo at its left end in her white coat and head mirror; Pip at its right end in teal scrubs, scrub cap and stethoscope (his goggles are painted on the cap in the teacher's painting: nothing added on top). **No bike helmets anywhere in EP4** (not a cycling episode): the doctor costumes replace them, never stacked. A close three-shot, all big (about half the frame height). GLITCH at the far right edge, his tape roll in his arms, exactly where EP3 left him, **at least 60 px clear of the nearest buddy** (arms and tape roll included). | The HDB void deck, the same Saturday morning, a minute after EP3's last shot (one 214 plaque, middle pillar only). The Science Help Desk with a new paper banner taped above the sign in Basil's big letters, **dark ink on white paper, thick strokes** (it is on the set, never mirrored): **PLANT CLINIC · THE DOCTORS ARE IN!** Under it the old sign: ALL PROBLEMS FIXED ~~FAST~~ PROPERLY! / (carefully) / (but WHY?). **Spike** sits on the desk by the bell where EP3 left him: a round, ribbed cactus in a glossy blue pot with NO hole, the soil dark and wet; three bright plastic leaves sticky-taped on; the top a little pale and stretched, leaning; the base of the stem soft and brown; his face on the POT. **Camera:** opens tight on Spike (a voice in the first second), eases back to the three-shot. | Ambience: the void deck, morning (mynahs, a koel far off, a lift chime, a broom sweeping). Scoop Parade, help-desk voicing (the desk-bell ding and ukulele) on the first word. |
 | 0:00.0 | `c101` | Spike | Doctor, my family loves me too much! | **A voice in the first second.** Spike TO Basil, fed up. Momo: surprised (*momo_doc_surprised*). |  | Desk bell DING! as Spike bumps it. |
 | 0:03.1 | `c102` | Basil | Doctor Basil is in. I'm an expert at plants. | Basil TO Spike, chest out, doing up his last coat button. Pip: a look at Momo. |  |  |
 | 0:07.4 | `c103` | Heart | Basil got his coat five minutes ago. | Basil: a slow look to the camera (deadpan; the sit is the talking set's closed-mouth frame). |  |  |
@@ -347,22 +409,22 @@ screen face, Uncle Lim's). **Bubbles sit next to their speaker** (`kit/bubble_la
 | 0:18.6 | *hold 1.2 s* | | | All three turn, slowly, to look at GLITCH. | GLITCH at the right edge, the tape roll in his arms, his screen reading LEAF RETURN SERVICE. A pigeon on the bicycle-bay rail turns its head at him: **KOO!** | The loud pigeon **KOO!** (song.js pigeonkoo, at voice level). |
 | 0:19.8 | `c106` | GLITCH | ...Not me. | GLITCH, his screen eyes darting sideways (the EP3 callback, *glitch_smug*). |  | One small guilty BEEP-BOOP. |
 | 0:21.1 | `c107` | Momo | But WHY are you holding the tape? | Momo TO GLITCH, curious, pointing at the roll (*momo_doc_pointing*). Pip: a worried look at Basil. |  |  |
-| 0:24.3 | `c108` | GLITCH | Correction. Leaf blade: not found. Leaf stalk: not found. No leaves, no food. So I installed some. | GLITCH, proud (*glitch_happy*). Momo: a worried look at Pip. | His pop-out chest panel runs EP3's parts check on Spike (**he reads plants by their parts now: lesson 2, used**): BLADE · NOT FOUND, STALK · NOT FOUND, then LEAVES INSTALLED: 3 and a small plastic-leaf icon, SOURCE: LIFT LOBBY PLANT. A quick cutaway (1 s): the plastic plant by the lift, with three bald patches. Comic word **SKRITCH!** beside the roll (never on his screen face). | Scanner sweep; **SKRITCH!** (loud, humour bus). |
+| 0:24.3 | `c108` | GLITCH | Correction. Leaf blade: not found. Leaf stalk: not found. No leaves, no food. So I installed some. | GLITCH, proud (*glitch_happy*). Momo: a worried look at Pip. | His pop-out chest panel runs EP3's parts check on Spike (**he reads plants by their parts now: lesson 2, used**), headed **USING LOG · ENTRY 2** with the entry's own words (READ A LEAF BY ITS PARTS · COLOUR AND SIZE: WEAK CLUES; so the finale can call it back): BLADE · NOT FOUND, STALK · NOT FOUND, then LEAVES INSTALLED: 3 and a small plastic-leaf icon, SOURCE: LIFT LOBBY PLANT. A quick cutaway (a full-frame flashback, 2 s): GLITCH by the lift peeling a leaf off the plastic plant, three bald patches; comic word **SKRITCH!** beside the roll (never on his screen face). His screen words are drawn the right way round whichever way he faces. | Scanner sweep; **SKRITCH!** (loud, humour bus). |
 | 0:32.8 | `c109` | Basil | To be fair, Spike, you don't look like a plant. You look like a cucumber with opinions. | Basil TO Spike, deadpan. Pip: laughing (→ *pip_doc_laughing*: stand-in cheer with a giggle shake). |  | Rimshot 1. |
 | 0:40.0 | `c110` | Spike | I AM a plant, thank you! | Spike, indignant, a little hop on the desk (the pot leads). Basil: a small shrug (no pose swap). |  | One hop thump. |
 | **0:43.7** | **title** (2.6 s) | | **Title slam** |  | THE PRICKLY / PATIENT! on a clinic clipboard chart over the blurred desk, with a small line under it: *Plants with superpowers*. Icons: Spike, a stethoscope, a sweet potato. **Camera:** still. | Title sting: the help-desk voicing's two-note 'ding-dong'. |
 | 0:43.7 | `t150` | Heart | The Prickly Patient! |  |  |  |
-| **0:46.3** | **fixcards** (27.4 s) | | **THE FIX CARDS: what does Spike really need? (a huddle round the patient)** | A huddle round Spike on the desk (a three-shot, leaning in); GLITCH squeezes in at the right edge. Each pitches TO the others, not to the camera. | The three big numbered picture cards pop above the huddle as each is pitched (section 4), clipped to a clinic notice board. **Camera:** pushes onto each card as it is named, then back to the huddle. | Scoop Parade, help-desk voicing. |
+| **0:46.3** | **fixcards** (27.4 s) | | **THE FIX CARDS: what does Spike really need? (a huddle round the patient)** | A huddle round Spike on the desk (a three-shot, leaning in); GLITCH parks at the huddle's right, **at least 60 px clear** (he never squeezes in). Each pitches TO the others, not to the camera. | The three big numbered picture cards pop above the huddle as each is pitched (section 4), clipped to a clinic notice board; their white words carry a thick dark ink outline (8-12 px). **Camera:** pushes onto each card as it is named, then back to the huddle. | Scoop Parade, help-desk voicing. |
 | 0:46.3 | `f201` | GLITCH | Fix one: keep the plastic leaves. Leaves are required. | GLITCH taps card 1 with a stubby arm (*glitch_base*). Spike: a long-suffering look. | Card 1 pops: a plastic leaf with a strip of tape · **KEEP THE / PLASTIC LEAVES**. |  |
-| 0:50.7 | `f202` | Pip | Fix two: lots of sun, and water only when the soil is dry. | Pip TO Momo, a thick library book CACTI under his arm, a gardening glove sticking out of his pocket (he came very prepared). Momo: a fond eye-roll. | Card 2 pops: a sun over a pot, a small watering can with a 'dry soil' chip · **SUN, AND / LESS WATER**. | Three small 'tok's on the woodblock as Pip pats the book. |
+| 0:50.7 | `f202` | Pip | Fix two: lots of sun, and water only when the soil is dry. | Pip TO Momo, a thick library book CACTI under his arm, a gardening glove sticking out of his pocket (he came very prepared). Momo: a fond eye-roll. The book's cover word CACTI never reads mirrored (`unflipText` when Pip is flipped). | Card 2 pops: a sun over a pot, a small watering can with a 'dry soil' chip · **SUN, AND / LESS WATER**. | Three small 'tok's on the woodblock as Pip pats the book. |
 | 0:56.1 | `f203` | Momo | Fix three: more water! A desert plant must be extra thirsty. | Momo TO Basil, holding up a big watering can (pointing, *momo_doc_pointing*, can as a code prop). | Card 3 pops: a full watering can · **MORE / WATER**. | Water slosh. |
 | 1:01.0 | `f204` | Basil | Don't worry, Spike. You're in very sharp hands. | Basil TO Spike, grinning (pointing, *basil_doc_pointing*). |  |  |
 | 1:04.9 | *hold 1.2 s* | | | Nobody laughs. Spike: a slow blink. Momo looks at her watering can. | Stillness. The pigeon on the rail turns away. | **SAD TROMBONE 1** (the pun flops; in the silence). |
 | 1:06.1 | `f205` | GLITCH | Joke detected. Laughter: zero. | GLITCH, flat (*glitch_smug*). Basil: deadpan. | His screen: a laugh meter at 0 (the EP3 running gag). |  |
 | 1:08.5 | `f206` | Heart | Which fix helps Spike? Show me one, two or three fingers! | All three turn to the viewer (thinking, → *doc_thinking*). | The YOU hand shows 1, 2, 3 fingers. |  |
-| **1:13.7** | **lock** (6.5 s) | | **THE LOCK-IN (the countdown takes the stage)** | Momo big at the left: thinking (→ *momo_doc_thinking*), her head mirror tilted. | The blue game stage. The ring big and central, Spike inside. **Clue labels ON TOP of the ring frame, large:** "watered every day", "dark bathroom", "plastic leaves". The three cards stay under the ring all the way through and glow in turn. **Camera:** still. | All beds fade to silence: ticks speeding up, the bell, the LOCKED IN! stamp. |
+| **1:13.7** | **lock** (6.5 s) | | **THE LOCK-IN (the countdown takes the stage)** | Momo big at the left: thinking (→ *momo_doc_thinking*), her head mirror tilted. | The blue game stage. The ring big and central, Spike inside. **Clue labels ON TOP of the ring frame, large, dark ink on cream chips:** "watered every day", "dark bathroom", "plastic leaves". The three cards stay under the ring all the way through and glow in turn. **Camera:** still. | All beds fade to silence: ticks speeding up, the bell, the LOCKED IN! stamp. |
 | 1:13.7 | *hold 6.5 s* | | |  | 6 s ring; ticks; bell; LOCKED IN! | Ticks, bell, LOCKED IN! thump. |
-| **1:20.2** | **picks** (27.4 s) | | **The picks: two buddies on one card (+ high-five miss 1)** | Each buddy stands under their own pick: **Pip AND Basil both under card 2** (side by side, a little squeeze; they look at each other), Momo under card 3. GLITCH parks himself under card 1. | The cards rise to a row; each pick card flips. **The four-face score bar** slides in top right (YOU · Pip · Momo · Basil, all 0; `kit/score4.js`). **Camera:** a smooth pan along the row. | Help-desk theme back in on the beat. |
+| **1:20.2** | **picks** (27.4 s) | | **The picks: two buddies on one card (+ high-five miss 1)** | Each buddy stands under their own pick: **Pip AND Basil both under card 2** (side by side, a little squeeze; they look at each other), Momo under card 3. GLITCH parks himself under card 1 (the cards are spaced so he stays at least 60 px from Basil). | The cards rise to a row; each pick card flips. **The four-face score bar** slides in top right (YOU · Pip · Momo · Basil, all 0; `kit/score4.js`). **Camera:** a smooth pan along the row. | Help-desk theme back in on the beat. |
 | 1:20.2 | *hold 1.0 s* | | | Pip under card 2, his CACTI book open; Basil squeezes in beside him; Momo under card 3 with her watering can. | GLITCH's screen under card 1: a thumbs-up icon (an icon, no hand drawn). | Three pick 'pops'. |
 | 1:21.2 | `p301` | Pip | Two. Cacti live in dry places, so they need lots of light and only a little water. | Pip TO Basil, reading his book (the right reason). Basil: a nod, as if he agrees. |  |  |
 | 1:28.4 | `p302` | Momo | Three. I'm thirsty just looking at him! | Momo TO Spike, fanning herself with a paw. Spike: unimpressed. |  |  |
@@ -370,124 +432,399 @@ screen face, Uncle Lim's). **Bubbles sit next to their speaker** (`kit/bubble_la
 | 1:37.6 | `p304` | Heart | Same card, two reasons. A point needs the right card AND the right reason. | Pip and Basil look at each other; Basil: thinking (→ *basil_doc_thinking*). | A small "REASON?" tag hangs under Pip's and Basil's face chips on the score bar. |  |
 | 1:43.4 | *hold 1.2 s* | | | Momo and Basil jump in, paws up for the team high-five (cheer as the gesture, → *doc_cheer*). **MISS 1 (Pip's stake: he is scared of spines):** Spike leans in to join; Pip snatches his paw back; Momo's and Basil's paws meet empty air where his was. | A small 'whiff' line between the paws. | Whiff. |
 | 1:44.6 | `p306` | Pip | Not near the spines! | Pip, hugging his paw (oops, → *pip_doc_oops*). Basil: a slow look. |  |  |
-| **1:47.6** | **lcspines** (52.1 s) | | **FIX 1, THE PLASTIC LEAVES: [LOOK CLOSER] where are a cactus's leaves? (Pip leads)** | Pip big at the right (he explains: he picked right, for the right reason). Momo's face peeks in from the lower left corner of the panel (a quarter of its height). Basil at the left edge, half in frame. GLITCH at the side, scanning. | LOOK CLOSER banner; one cream panel over the softly blurred void deck; **Spike HUGE, filling it.** **Camera:** push onto a cluster of spines (held 6 s); push onto the green stem; ease back. | Scoop Parade lite (teaching). |
+| **1:47.6** | **lcspines** (52.1 s) | | **FIX 1, THE PLASTIC LEAVES: [LOOK CLOSER] where are a cactus's leaves? (Pip leads)** | Pip big at the right (he explains: he picked right, for the right reason). Momo's face peeks in from the lower left corner of the panel (a quarter of its height). Basil at the left edge, half in frame. GLITCH at the far side, scanning, at least 60 px clear. | LOOK CLOSER banner; one cream panel over the softly blurred void deck; **Spike HUGE, filling it.** **Camera:** push onto a cluster of spines (held 6 s); push onto the green stem; ease back. | Scoop Parade lite (teaching). |
 | 1:47.6 | `l401` | Heart | Fix one, the plastic leaves. Look closer. | Pip and Momo watch Spike (flip and lean); Pip, bravely, pulls on his gardening gloves. |  | A soft paper rustle. |
-| 1:51.2 | `l402` | Spike | These spines? They ARE my leaves. | Spike TO GLITCH, dry. Momo (peeking): surprised (*momo_doc_surprised*). | A magnifier circle on one cluster of spines growing from a small round pad on a rib, joined by a plain line to the label "spine-like leaves". | Magnifier 'shing'. |
-| 1:54.3 | `l403` | Heart | A cactus lives in dry places. Its leaves are shaped like spines, to reduce water loss. The sharp spines also protect it from animals. | Watching. | Two small pictures side by side, plain labels: a broad leaf with several small wavy lines leaving it ("loses more water") beside a cluster of spines with one ("loses very little water"); a goat sniffing a cactus and stepping back, unhurt ("protects it from animals"). |  |
+| 1:51.2 | `l402` | Spike | These spines? They ARE my leaves. | Spike TO GLITCH, dry. Momo (peeking): surprised (*momo_doc_surprised*). | **RED TRACE 1a (full frame):** the camera zooms right in on one cluster of spines growing from a small round pad on a rib; a red line draws round the spines along their real outline; label (dark ink on a cream chip): **SPINE-LIKE LEAVES: thin and sharp, in a bunch**. | Magnifier 'shing'. |
+| 1:54.3 | `l403` | Heart | A cactus lives in dry places. Its leaves are shaped like spines, to reduce water loss. The sharp spines also protect it from animals. | Watching. | **RED TRACE 1b (full frame):** a zoom onto a broad, flat leaf (EP3's mango leaf), a red line round its real outline: **FLAT LEAF: wide and thin**. Then **side by side**, both traces kept: the flat leaf with several small wavy lines leaving it (**loses more water**) and the spines with one (**loses very little water**). Then a cut to a goat sniffing a cactus and stepping back, unhurt (**protects it from animals**). |  |
 | 2:04.8 | `l405` | Momo | But WHY... with spines for leaves, how does Spike make food? | Momo (peeking, then leaning into the panel) TO Pip: a real question. Pip: a 'let me check' look at his book. |  |  |
 | 2:09.8 | *hold 2.5 s* | | | Pip and Basil: thinking (→ *doc_thinking*). | **THINK card** over the softly dimmed panel (never over a face): "No flat leaves. How does a cactus make food?" Spike big behind it. | Three soft ticks (no bell). |
-| 2:12.3 | `l406` | Pip | With its green stem! In a cactus, the green stem makes food. | Pip TO Momo, pointing at the stem (*pip_doc_pointing*). | Momo tilts her head mirror: a beam of reflected sunlight lands on Spike (a doctor's head mirror really does reflect light); the whole green stem glows softly; a plain line to the label "green stem: makes food". | A warm chord. |
-| 2:17.6 | `l407` | Heart | Yes. So the plastic leaves only cover it up. Off they come. | Momo holds out the recycling bin (a code prop). |  |  |
+| 2:12.3 | `l406` | Pip | With its green stem! In a cactus, the green stem makes food. | Pip TO Momo, pointing at the stem (*pip_doc_pointing*). | Momo tilts her head mirror: a beam of reflected sunlight lands on Spike (a doctor's head mirror really does reflect light). **RED TRACE 2 (full frame):** a zoom onto Spike's stem; the red line runs round the green stem's real outline, rib by rib; label **GREEN STEM: makes food**. | A warm chord. |
+| 2:17.6 | `l407` | Heart | Yes. So the plastic leaves only cover it up. Off they come. | Momo holds out the recycling bin (a code prop, a symbol only, no words). |  |  |
 | 2:23.5 | *hold 1.8 s* | | | **Pip's brave moment (his stake):** in thick gardening gloves, with long kitchen tongs, he peels the tape off, leaf by leaf, never touching a spine; he drops each plastic leaf in Momo's bin. | Small print, bottom left (clear of faces): "Handling a cactus? Wear thick gloves, and ask an adult." Comic words **SKRITCH! SKRITCH! SKRITCH!** beside each leaf. | **SKRITCH!** ×3 (loud, humour bus); three soft plastic 'tock's in the bin. |
 | 2:25.3 | `l408` | Pip | Spike already has leaves. Spine-like leaves! | Pip TO Spike. **KEY WORD pops: SPINE-LIKE LEAVES** (2.0 s, chime, to the shelf); Pip: cheer (→ *pip_doc_cheer*: he has learnt it and fixed the problem). | Fix card 1 slides in, stamped **NOT NEEDED**. | Chime; a small stamp thump. |
 | 2:30.4 | `l409` | Heart | And Basil, a cactus makes its own food. It IS a real plant. | **Basil shy (oops, → *basil_doc_oops*) from here to the end of the scene** (his reason). Spike: a satisfied nod. |  |  |
 | 2:36.3 | `l410` | Basil | ...I take back the cucumber. | Basil TO Spike, shy, smiling at himself (his soft side: the first to say sorry). Momo: laughing (→ *momo_doc_laughing*: stand-in cheer with a giggle shake). |  | A soft woodblock 'tok'. |
-| **2:39.7** | **water** (39.2 s) | | **FIX 3, MORE WATER: [LOOK CLOSER] inside a cactus stem (Momo leads)** | Back at the desk: Momo leads with her watering can; Pip beside her; Basil a step back; GLITCH at the side. | The desk, then the cut-away panel. **Camera:** a medium two-shot of Momo and Spike; push into the cut-away (held 6 s); ease back. | Help-desk theme, then Scoop Parade lite under the look-closer. |
+| **2:39.7** | **water** (39.2 s) | | **FIX 3, MORE WATER: [LOOK CLOSER] inside a cactus stem (Momo leads)** | Back at the desk: Momo leads with her watering can; Pip beside her; Basil a step back; GLITCH at the side, at least 60 px clear. | The desk, then the cut-away panel. **Camera:** a medium two-shot of Momo and Spike; push into the cut-away (held 6 s); ease back. | Help-desk theme, then Scoop Parade lite under the look-closer. |
 | 2:39.7 | `w501` | Momo | Fix three! More water, coming up! | Momo TO Spike, lifting the big watering can high (pointing, *momo_doc_pointing*). Spike: alarmed. |  | Water sloshing in the can. |
-| 2:42.8 | `w502` | GLITCH | Warning. Drainage holes: none. | GLITCH, matter-of-fact (*glitch_base*). **A sign of his growth (the viewer may notice): he is RIGHT, from his own lesson 1.** | His screen flashes the EP2 card: KNOWLEDGE LOG · ENTRY 1 (DRAINAGE HOLES: REQUIRED), then a pot icon with no hole. | Two short beeps. |
+| 2:42.8 | `w502` | GLITCH | Warning. Drainage holes: none. | GLITCH, matter-of-fact (*glitch_base*). **A sign of his growth (the viewer may notice): he is RIGHT, from his own lesson 1.** | His screen, full frame, flashes his EP2 card, the entry number big: **KNOWLEDGE LOG · ENTRY 1 · LESSON: ROOTS NEED AIR · DRAINAGE HOLES: REQUIRED · WATER ONLY WHEN THE TOP OF THE SOIL IS DRY · BEATEN BY: LOOK CLOSER BEFORE YOU FIX** (DRAINAGE HOLES: REQUIRED glows), then a pot icon with no hole. | Two short beeps. |
 | 2:45.3 | `w503` | Pip | ...Oh no. GLITCH is right. | Pip TO Momo, worried (the EP3 callback "GLITCH agrees with me"). Momo stops, the can in mid-air. |  |  |
 | 2:48.0 | *hold 1.2 s* | | | Momo, the doctor, puts the can down and presses one fingertip gently into Spike's soil. | Water seeps up round her fingertip. Comic word **SQUELCH!** beside the pot. | **SQUELCH!** (loud, wet, humour bus). |
-| 2:49.2 | `w504` | Momo | Soaking wet! And the bottom of Spike's stem is soft and brown, like Chilli's roots! | Momo TO Pip, surprised (*momo_doc_surprised*): she notices the clue. | A tiny inset: Chilli's brown, rotting roots seen through the window in its pot (EP2 callback). |  |
+| 2:49.2 | `w504` | Momo | Soaking wet! And the bottom of Spike's stem is soft and brown, like Chilli's roots! | Momo TO Pip, surprised (*momo_doc_surprised*): she notices the clue. | A push-in onto Spike's soft brown base, with a tiny inset beside it: Chilli's brown, rotting roots seen through the window in its pot (EP2 callback). |  |
 | 2:55.7 | *hold 1.0 s* | | | Momo slowly lowers the watering can behind her back. | Stillness. | **SAD TROMBONE 2** (her plan flops). |
 | 2:56.7 | `w505` | Momo | But WHY? Isn't a desert plant thirsty? | Momo TO Pip, a real question (thinking, → *momo_doc_thinking*). |  |  |
-| 3:00.2 | `w506` | Heart | Look inside. A cactus stores water in its thick stem, and its spine-like leaves lose very little. So it needs only a little water. Too much, and it rots. | **Momo shy (oops, → *momo_doc_oops*) from here to the end of the scene** (her pick). Pip and Basil: watching. | LOOK CLOSER: a cut-away of a **second, healthy cactus** (never Spike): thick, pale-green, juicy flesh inside a green skin, label "stores water"; the spines outside, "lose very little water". Beside it, side by side, Spike's soft brown base: "too much water: rotting". Fix card 3 slides in, stamped **TOO MUCH WATER**. |  |
+| 3:00.2 | `w506` | Heart | Look inside. A cactus stores water in its thick stem, and its spine-like leaves lose very little. So it needs only a little water. Too much, and it rots. | **Momo shy (oops, → *momo_doc_oops*) from here to the end of the scene** (her pick). Pip and Basil: watching. | LOOK CLOSER, **RED TRACE 3 (full frame):** a cut-away of a **second, healthy cactus** (never Spike); the camera zooms in and a red line runs round the thick, pale-green, juicy flesh inside the green skin: **STORES WATER: thick and juicy inside**; the spines outside lit: **LOSE VERY LITTLE WATER**. Then a zoom onto Spike's base, a red line round the soft brown part: **TOO MUCH WATER: soft, brown, rotting**. Then the two **side by side**, both traces kept. Fix card 3 slides in, stamped **TOO MUCH WATER**. |  |
 | 3:12.9 | `w507` | Momo | So a cactus can look thirsty, and still be full of water. | Momo TO Basil, shy but thinking it through. Basil: a kind nod (he knows the feeling: the same side). |  |  |
-| **3:18.9** | **sun** (49.1 s) | | **FIX 2, TESTED: the sunny corridor (and right card, wrong reason)** | Upstairs: the trio in a three-shot by the corridor's plant rack, Spike carried in Pip's gloved paws (the pot held, never floating) and set on the rack. Uncle Lim at his open gate next door (his standing paintings, long trousers), thick gardening gloves on (a code prop). | **The HDB corridor** outside Spike's family's flat (a gate, a shoe rack) and Uncle Lim's flat next door: **Uncle Lim's corridor garden**, pots standing on the corridor floor and on a low metal plant rack against the parapet wall (nothing on the parapet ledge: Singapore's killer-litter rule): mint, a butterfly-pea vine twining up a bamboo pole, a long planter box of sweet potato, a money plant in a glass bottle of water on the rack. Bright afternoon sun on the rack's far end; a neighbour's laundry pole; a pigeon on the parapet. Down below, the void deck's rain tree. **Camera:** a slow push onto Spike through the time-lapse. | Scoop Parade (theme, help-desk voicing); a soft rising marimba line under the time-lapse. |
-| 3:18.9 | `s601` | Uncle Lim | Aiyoh, cactus in the bathroom? Put here lah. My corridor got sun. | Uncle Lim TO Pip, kindly, waving them over to the sunny end of his rack. |  | Corridor ambience: a wind chime, a radio far off, laundry flapping. |
-| 3:25.2 | *hold 1.8 s* | | | Uncle Lim (the adult) re-pots Spike: a folded newspaper wrapped round Spike's body (the gardener's trick), gloved hands under the pot; the buddies watch, Pip nodding at his book. | Spike goes into a terracotta pot WITH a hole in the bottom and gritty, dry-looking soil. The old glossy pot (no hole) goes in the sink corner. | Newspaper rustle; gritty soil pouring; a pot 'clonk'. |
-| 3:27.0 | `s602` | Heart | Fix two. A pot with a hole, bright light, and water only when the soil is dry. | Watching. | Three plain labels by Spike, one at a time: "pot with a hole", "bright light", "water when the soil is dry". |  |
-| 3:33.7 | *hold 3.0 s* | | |  | **The day counter** (top left) flips DAY 1 → DAY 21 with a small "speeded up" tag: for the first days Spike sits in bright shade by the wall, then moves along the rack into the sun (Uncle Lim's slowly, slowly); he firms up, greens, stands straight; a small fresh-green bump grows at the top; the brown base dries and scars over. The soil dries between two small waterings (a little can, a little water). | A soft rising marimba line; two tiny watering trickles. |
+| **3:18.9** | **sun** (49.1 s) | | **FIX 2, TESTED: the sunny corridor (and right card, wrong reason)** | Upstairs: the trio in a three-shot by the corridor's plant rack, Spike carried in Pip's gloved paws (the pot held, never floating) and set on the rack. **Uncle Lim only for his own moment (s601 and the re-potting, about 8 s):** the camera cuts to his gate as he steps out to them (front view, his standing paintings, long trousers, thick gardening gloves as a code prop; he does not walk across the floor); after the re-potting he steps back in through his gate, facing his way, while the camera is on Spike's labels (a soft gate clack off screen). He is in no other shot of EP4. | **The HDB corridor** outside Spike's family's flat (a gate, a shoe rack) and Uncle Lim's flat next door: **Uncle Lim's corridor garden**, pots standing on the corridor floor and on a low metal plant rack against the parapet wall (nothing on the parapet ledge: Singapore's killer-litter rule): mint, a butterfly-pea vine twining up a bamboo pole, a long planter box of sweet potato, a money plant in a glass bottle of water on the rack. Bright afternoon sun on the rack's far end; a neighbour's laundry pole; a pigeon on the parapet. Down below, the void deck's rain tree. **Camera:** a slow push onto Spike through the time-lapse. | Scoop Parade (theme, help-desk voicing); a soft rising marimba line under the time-lapse. |
+| 3:18.9 | `s601` | Uncle Lim | Aiyoh, cactus in the bathroom? Put here lah. My corridor got sun. | Uncle Lim TO Pip, kindly, waving them over to the sunny end of his rack. **UNCLE LIM HINT #1 (faint, unexplained, no extra time):** on his rack a terracotta pot WITH a drainage hole and a bag of gritty soil are already set out, waiting, before anyone has said a word about pots (the drainage holes were found downstairs, where he was not); on "Put here lah" his eyes flick to the ready pot and he gives the smallest knowing smile (about 0.5 s). Nobody reacts. No badge, no gadget, nothing named. |  | Corridor ambience: a wind chime, a radio far off, laundry flapping. |
+| 3:25.2 | *hold 1.8 s* | | | Uncle Lim (the adult) re-pots Spike: a folded newspaper wrapped round Spike's body (the gardener's trick), gloved hands under the pot; the buddies watch, Pip nodding at his book. | Spike goes into the waiting terracotta pot WITH a hole in the bottom (the hole seen once, as the pot tilts) and gritty, dry-looking soil. The old glossy pot (no hole) goes in the sink corner. | Newspaper rustle; gritty soil pouring; a pot 'clonk'. |
+| 3:27.0 | `s602` | Heart | Fix two. A pot with a hole, bright light, and water only when the soil is dry. | Uncle Lim steps back in through his gate (off screen). | Three plain labels by Spike (dark ink on cream chips), one at a time: "pot with a hole", "bright light", "water when the soil is dry". |  |
+| 3:33.7 | *hold 3.0 s* | | |  | **The day counter** (top left) flips DAY 1 → DAY 21 with a small "speeded up" tag: for the first days Spike sits in bright shade by the wall, then a little further along the rack into the sun every few days (a cut per move, no hands); he firms up, greens, stands straight; a small fresh-green bump grows at the top; the brown base dries and scars over. The soil dries between two small waterings (a little can, a little water). | A soft rising marimba line; two tiny watering trickles. |
 | 3:36.7 | `s603` | Spike | Firm, green and standing tall, with no flat leaves! | Spike TO the trio, proud. All three: cheer (→ *doc_cheer*: achieved). |  |  |
 | 3:40.6 | *hold 1.2 s* | | | **THE HIGH-FIVE LANDS:** Pip, brave now, stands on the side away from the spines; all three paws meet: **CLAP!**, sparkles; Spike gives a proud little hop. | CLAP! with sparkles. | **CLAP!** (loud); laughter. |
 | 3:41.8 | `s604` | Heart | Fix two was right! Picked two? You win a point, and so does Pip! | Pip: arms crossed, proud (*pip_doc_arms_crossed*). Momo claps for him. | **The score bar:** YOU +1 (if you picked 2) and PIP +1; Pip's REASON? tag turns into a small tick. A coin ting; the bar bumps. | Coin ting. |
 | 3:47.9 | `s605` | Basil | And me! | Basil TO Heart, very sure (pointing at his face chip, *basil_doc_pointing*). |  |  |
 | 3:49.2 | `s606` | Heart | Right card, wrong reason. No point this time. | Basil: oops (→ *basil_doc_oops*). | Basil's chip stays at 0; his REASON? tag fades gently (no ✗, no red). | A gentle low 'boop' (never a buzzer). |
 | 3:52.8 | `s607` | Basil | I'd like to see the replay. | Basil, still shy (oops, → *basil_doc_oops*) but deadpan. Momo: a giggle. |  |  |
-| 3:55.6 | *hold 2.6 s* | | | The replay: Basil under card 2 at the picks, arms crossed, very sure. | Straight in on a rewind flash (Heart says nothing: the replay is Basil's own request): film border, INSTANT REPLAY · SLOW MOTION ×¼. At ¼ speed: his bubble "A cactus isn't even a real plant..." fills in word by word while his own line plays slowed right down (a deep comic drawl); a slow zoom onto his confident face; Spike, beside him in the replay, huffing in slow motion. | The slow-motion replay cue (its last use in the series); Basil's p303 audio at ¼ speed (pitched down, comic); the replay whoosh out. |
+| 3:55.6 | *hold 2.6 s* | | | The replay: Basil under card 2 at the picks, arms crossed, very sure. | Straight in on a rewind flash (Heart says nothing: the replay is Basil's own request), full frame: film border, INSTANT REPLAY · SLOW MOTION ×¼. At ¼ speed: his bubble "A cactus isn't even a real plant..." fills in word by word while his own line plays slowed right down (a deep comic drawl); a slow zoom onto his confident face; Spike, beside him in the replay, huffing in slow motion. | The slow-motion replay cue (its last use in the series); Basil's p303 audio at ¼ speed (pitched down, comic); the replay whoosh out. |
 | 3:58.2 | `s609` | Basil | ...Replay accepted. | Basil, shy, smiling at himself. Pip: laughing (→ *pip_doc_laughing*: stand-in cheer with a giggle shake). |  | Rimshot 2. |
 | 3:59.5 | `s610` | Momo | You'll get the next one, Basil. | **Momo, the glue,** TO Basil, a kind pat on his arm. Basil: a small smile. |  |  |
-| 4:02.3 | `s611` | Spike | Thank you, um... where are you, exactly? | **HEART MYSTERY HINT #4:** Spike, new to Heart, looks up and around the corridor for the voice. Nobody else reacts. | The logo-pill heart pulses once (soft, warm; NOT GLITCH's style, and GLITCH is not in the shot). |  |
+| 4:02.3 | `s611` | Spike | Thank you, um... where are you, exactly? | **HEART MYSTERY HINT #4:** Spike, new to Heart, looks up and around the corridor for the voice. Nobody else reacts. | The logo-pill heart pulses once (soft, warm; NOT GLITCH's style, and GLITCH is not in the shot; nor is Uncle Lim). |  |
 | 4:05.8 | `s612` | Heart | Right here. | The scene moves straight on. |  | Nothing added. |
-| **4:08.0** | **glitch** (33.5 s) | | **THE VILLAIN: "Leaves: still required", the data, and the peace (Pip wins him over)** | GLITCH rolls out of the lift (FACES the way he rolls; screen face to the front). **Pip steps between GLITCH and Spike** (his brave moment); Momo and Basil a step behind him (the same side). Uncle Lim at his gate. | The same corridor; the lift lobby at the far end. **Camera:** a three-shot of Pip, GLITCH and Spike; GLITCH's pop-out chest panel becomes the evidence screen. | GLITCH's pompous 2-bar fanfare on his entrance, then the help-desk theme, quiet (ukulele). |
+| **4:08.0** | **glitch** (34.3 s) | | **THE VILLAIN: "Leaves: still required", the data, and the peace (Pip wins him over)** | GLITCH rolls out of the lift (FACES the way he rolls; screen face to the front). **Pip steps between GLITCH and Spike** (his brave moment); Momo and Basil a step behind him (the same side). **GLITCH stops at least 60 px from Pip's raised paw.** Uncle Lim is not in this scene (his gate stays shut). | The same corridor; the lift lobby at the far end. **Camera:** a three-shot of Pip, GLITCH and Spike; GLITCH's pop-out chest panel becomes the evidence screen. | GLITCH's pompous 2-bar fanfare on his entrance, then the help-desk theme, quiet (ukulele). |
 | 4:08.0 | *hold 1.0 s* | | | All look round at the lift. | **DING!** The lift doors slide open; GLITCH rolls out with a fresh plastic leaf (from the lift-lobby plant) and his tape roll. | Lift DING! (loud); the fanfare; wheel whirr. |
 | 4:09.0 | `g701` | GLITCH | Leaves: still required. Installing. | GLITCH rolls towards Spike, tape ready (*glitch_jug* arms with the tape roll prop). | Comic word **SKRRRITCH!** beside the roll. | **SKRRRITCH!** (the tape, loud). |
-| 4:11.4 | `g702` | Pip | Wait! Here's the data. | Pip, brave, steps in front of Spike, one gloved paw up (pointing, *pip_doc_pointing*). |  |  |
-| 4:13.8 | *hold 2.4 s* | | | GLITCH stops and leans in to scan. | **The evidence, on GLITCH's chest panel** (big, one picture at a time, each held at least 0.8 s): Spike on DAY 1 beside Spike on DAY 21, side by side; the spines labelled "spine-like leaves"; the green stem "makes food"; the cut-away "stores water". SCANNING... bar. | Scanner sweep; three soft beeps. |
-| 4:16.2 | `g703` | Pip | Twenty-one days, no flat leaves, and Spike's green stem made his food! | Pip TO GLITCH, careful and brave, pointing at each picture as it shows. |  |  |
-| 4:21.2 | *hold 1.0 s* | | | GLITCH freezes. | His screen: swirly eyes and a tiny "?" (*glitch_error*), his antenna droops, two little sparks. Comic word **BZZT!** beside him. | **BZZT!** (loud, humour bus); a falling beep. |
-| 4:22.2 | `g704` | GLITCH | Error. Leaves: detected. Shape: spine. | GLITCH droops (*glitch_error*). Momo: a sympathetic look. |  |  |
-| 4:25.4 | `g705` | Pip | You read his parts. Good! But parts look different in different plants. | **Pip wins GLITCH over** (his soft side: brave, and kind): he says what GLITCH got right first. Momo and Basil step in beside him. |  |  |
-| 4:31.1 | `g706` | GLITCH | Updating! Lesson stored: plant parts look different in different plants. Cactus: spine-like leaves. Green stem makes food. | **His special ability, shown again:** *glitch_grumpy* with the UPDATING... bar, then *glitch_happy* (both arms up) as the lesson is filed. Momo claps; Pip and Basil smile (a happy ending for them). | The chest panel: the bar fills to 100%, then a card slides into the folder **KNOWLEDGE LOG · ENTRY 3** ("PLANT PARTS LOOK DIFFERENT IN DIFFERENT PLANTS · CACTUS: SPINE-LIKE LEAVES, GREEN STEM MAKES FOOD"), on top of entries 1 and 2. **The small chill (the viewer only):** as the buddies turn away, the counter ticks 2 → 3, his screen eyes narrow for 8 frames, his antenna light glows steadier again, and (NEW in EP4) a thin line flickers between the three log cards for 6 frames, as if they are joining up. Nobody sees it. | Upgrade chime; a soft 'file' click; one low hum under the counter tick (quiet). |
-| 4:39.2 | `g708` | GLITCH | ...Tape: retired. | Spike gives GLITCH a long look at the tape roll. GLITCH drops the tape roll and the plastic leaf into Uncle Lim's recycling bin (a little sheepish, *glitch_grumpy* face, arms down). Uncle Lim chuckles. |  | A soft 'clunk' in the bin. |
-| **4:41.5** | **tour** (37.4 s) | | **THE TWIST: "So I'm the only odd plant here?" A corridor full of superpowers** | Spike rides along on the rack's trolley shelf pushed by Pip (never floating); the buddies big beside each plant, walking with the camera and FACING the way they go. | Uncle Lim's corridor garden in the afternoon sun. **Camera:** one slow glide along the corridor, stopping at each plant (no cuts). The key-word shelf stays top right. | Scoop Parade (theme, lighter: ukulele lead). |
-| 4:41.5 | `t801` | Spike | So I'm the only odd plant here? | Spike TO Pip, a little sad. Pip: a smile. |  |  |
-| 4:44.7 | `t802` | Pip | Not even close. Every plant here has a superpower. | Pip TO Spike, sweeping a paw along the corridor (pointing). |  |  |
-| 4:48.9 | *hold 0.6 s* | | | The buddies walk on with the camera (facing the way they go). | The camera glides to the parapet. | Footsteps on the corridor tiles; the wind chime. |
-| 4:49.5 | `t803` | Pip | Look down. The rain tree's trunk is thick and hard: a woody stem. | Pip TO Momo, pointing over the parapet (*pip_doc_pointing*). | The view down to the void deck: the rain tree (EP1's) with its thick, hard trunk; label "woody stem". |  |
-| 4:55.2 | `t804` | Momo | And this mint's stem is soft and bendy: a non-woody stem! | Momo TO Pip, gently bending one mint stem. **KEY WORD pops: WOODY / NON-WOODY** (2.0 s, chime, to the shelf); Momo: cheer (→ *momo_doc_cheer*: learnt; her mistake was in another scene). | Side by side: the rain tree's trunk ("woody: thick and hard") and the mint stem ("non-woody: soft and bendy"). | Chime. |
-| 5:01.8 | *hold 0.6 s* | | | The buddies walk on with the camera. | The camera glides to the bamboo pole. | Footsteps; the wind chime. |
-| 5:02.4 | `t805` | Basil | The butterfly pea has a weak stem. It coils round the pole to climb up to more light. A climber! | Basil TO Spike (out of shy: a new scene, and he is right about this). **KEY WORD pops: CLIMBERS** (2.0 s, chime, to the shelf); Basil: cheer (→ *basil_doc_cheer*). | The butterfly-pea vine (blue flowers) twining up a bamboo pole: **its stem itself coils round the pole** (drawn true: no tendrils); label "climber: weak stem"; a sun glow at the top. | Chime. |
-| 5:13.1 | *hold 0.6 s* | | | The buddies walk on with the camera. | The camera glides past the money plant in its glass bottle of water on the rack (white roots from the cut end; label "stem cutting: new roots grow in water"; small print "Cutting a plant? Ask an adult.") to the planter box. | Footsteps. |
-| 5:13.7 | `t806` | Momo | And the sweet potato's weak stem creeps along the ground. | Momo TO Basil, pointing along the planter box (*momo_doc_pointing*). | The long planter box: sweet potato stems creeping along the soil, heart-shaped leaves spread flat towards the light; label "creeper: weak stem". |  |
-| **5:19.0** | **bonus** (26.0 s) | | **THE BONUS POINT (the second pick: root or stem?)** | The trio round the planter box, each with their call; Spike on the trolley beside them. | A cut-away of the planter box appears beside it (never over a face): under the soil, a plump orange sweet potato joined to the plant above, with thin roots growing out of it, and a "?". Two big picture chips: **1 ROOT** · **2 STEM**. **Camera:** still, then a slow push onto the cut-away. | Help-desk theme, low; silent in the think pause but for ticks. |
-| 5:19.0 | `b851` | Heart | Bonus point! This plant stores food under the soil. Root or stem? One finger for root, two for stem! | All three: thinking (→ *doc_thinking*). | The two chips pop as they are named. | A bright 'bonus' bell. |
-| 5:27.1 | `b852` | Pip | Stem. It's joined to the creeping stem. | Pip TO Momo, careful, sure (pointing at the join). Basil: thinking. | Pip's small chip: STEM. |  |
-| 5:30.6 | `b853` | Momo | Root! It has thin roots growing out of it. | Momo TO Pip (pointing at the thin roots on the cut-away). | Momo's small chip: ROOT. |  |
-| 5:34.8 | `b854` | Basil | Root. And this time, my reason: it grows down, with roots of its own. | Basil TO Heart, arms crossed, careful for once (*basil_doc_arms_crossed*: confident in his reason). Momo: a grin. | Basil's small chip: ROOT. |  |
-| 5:40.9 | *hold 3.0 s* | | | Pip, Momo and Basil: thinking (→ *doc_thinking*). | **THINK** over the dimmed scene (never over a face): the cut-away and the two chips; your fingers. No answer shown yet. | Three soft ticks; no bell. |
-| **5:44.9** | **journey** (42.4 s) | | **BE THE THING: a bit of food in a sweet potato plant (quiet)** | The buddies ride along behind YOU in back views (→ *doc_back*) on a leaf-boat, never covering the path. Basil gives the viewer one 1-second glance-and-wave (not on a key line). | MICRO-WORLD mode (no logo, no score; only the YOU tag and the scale pill "You: a bit of food made by a leaf"). **Camera:** a slow drift along the stem, then down; 6-10 s shots. | The micro-world pad only (the theme fades out 1.2 s into j901; Scoop Parade lite back in 1.5 s after the pull-out). |
-| 5:44.9 | `j901` | Heart | Be a tiny bit of food, just made in a sweet potato leaf. Shrink down. Quietly. | The buddies pop out in turn before the dive (no fading). | The camera pushes into a sunlit sweet potato leaf in the planter box. |  |
-| 5:52.3 | `j902` | Heart | You leave the leaf and travel along the creeping stem. | Watching. | YOU = a small, glowing, round crumb of food with eyes (never a sweet); you travel from the leaf stalk along the stem, FACING the way you go. | Soft whoosh. |
-| 5:56.7 | `j903` | Heart | Then down into the soil, into something big and orange: a root, full of food, stored for later. | Basil: the 1-second wave to the viewer, then back to watching. | Down a short stalk into the dark soil; a huge orange-skinned root, plump, with thin roots growing out of it; inside it, a warm store of food. Short card: "stored for later". No P5 labels (no "starch", no tubes named). | A soft bell chord. |
-| 6:04.2 | *hold 1.2 s* | | |  | The pull-out: back to the corridor, ending on the next shot's layout (the trio by the planter box). | Pad out; lite in (1.5 s) on the beat. |
-| 6:05.4 | `j904` | Basil | So the sweet potato is a root that stores food. A storage root! Carrots too. | Basil big at the left (a new scene; he is right). **KEY WORD pops: STORAGE ROOTS** (2.0 s, chime, to the shelf); Basil: cheer (→ *basil_doc_cheer*). | A sweet potato and a carrot, each with its leafy top still on, labelled "storage root". | Chime. |
-| 6:14.2 | `j905` | Heart | Root it is! A bonus point for you, Momo and Basil. | Momo and Basil: arms crossed, proud (*doc_arms_crossed*: right, for the right reason). **Pip: oops (→ *pip_doc_oops*), then claps for them** (his first wrong pick in EP4; he is kind about it). | **The score bar:** YOU +1 (if you showed one finger), MOMO +1, BASIL +1. Coin tings; the bar bumps. | Three coin tings. |
-| 6:19.3 | `j906` | Momo | Snack emergency, solved. | Momo, dreamy, hugging the sweet potato card. Basil: laughing (→ *basil_doc_laughing*). |  | A happy 'mmm' sting (two notes). |
-| 6:21.0 | `j907` | Spike | So our parts look different because they help us live in different places. | Spike TO the trio (the big idea in his own words), at the planter box after the pull-out. All three: a nod (Pip still a little shy from the bonus, smiling). | The whole corridor garden in one frame: Spike, the butterfly pea, the sweet potato, the mint, the money plant; one sun-yellow line under them: "Different parts, different places." |  |
-| **6:27.4** | **words** (29.9 s) | | **THE WORDS THAT EARN MARKS (Basil reads)** | The approved Mark Sentence layout: Basil BIG at the left, the card large at the right; Pip and Momo smaller at the right edge, mouthing along. | The cream card THE WORDS THAT EARN MARKS (Atkinson 700, 70 px); highlights sweep as Basil reads: spine-like leaves, reduce water loss, green stem makes food, weak stems, coil around structures, climb higher, enough light, storage roots, store food. Footer: Primary 4 Science · Systems · Plant System: how plant parts look in different plants. Along the bottom: Spike, the butterfly pea, a sweet potato, each with one label. **Camera:** still. | Scoop Parade lite, low. |
-| 6:27.4 | `m1101` | Heart | Now, here are the words that earn marks. |  |  |  |
-| 6:30.7 | `m1102` | Basil | Say it with me! | Basil: an inviting gesture towards the viewer (pointing, *basil_doc_pointing*). |  |  |
-| 6:32.7 | *hold 0.8 s* | | |  |  |  |
-| 6:33.5 | `m1103` | Basil | A cactus has spine-like leaves to reduce water loss. Its green stem makes food. Climbers have weak stems, so they coil around structures to climb higher and get enough light to make food. Storage roots, such as carrots and sweet potatoes, store food. | Basil reads (talking sprite, a slower read). Pip and Momo mouth along. | The words light up as he reads them. |  |
-| 6:53.8 | *hold 2.5 s* | | | Stillness on the card. |  |  |
-| **6:57.3** | **finish** (15.8 s) | | **THE COSY END: the callback and the final score** | Back at the void deck: Spike on the Help Desk in his terracotta pot, firm and green; the trio behind the desk; GLITCH at the far side, scanning a pot plant (no tape). | The Help Desk; the PLANT CLINIC banner. **Camera:** two-shot of Basil and Spike, then the three-shot. | Scoop Parade finale, quiet; then big. |
-| 6:57.3 | `k1201` | Basil | Spike, no hard feelings about the cucumber? | Basil TO Spike, a little shy. |  |  |
-| 7:00.4 | `k1202` | Spike | None. And by the way, cucumber plants are climbers too. | Spike, dry. Basil: a slow blink. | A tiny inset: a cucumber plant climbing a trellis. |  |
-| 7:05.0 | `k1203` | Basil | ...Fair point. | Basil: laughing at himself (→ *basil_doc_laughing*). Momo and Pip: laughing. |  | Rimshot 3. |
-| 7:06.3 | `k1204` | Heart | Final scores: Pip, Momo and Basil, one point each. How many did YOU get? | All three: arms crossed, proud, a little competitive (*doc_arms_crossed*), looking at the viewer. | **The score bar** grows to the centre for 2 s: PIP 1 · MOMO 1 · BASIL 1, and YOU with a sun-yellow glow and "?" (0, 1 or 2: the viewer counts). | A drum roll, a cymbal tap. |
-| **7:13.1** | **next** (5.4 s) | | **THE LINK TO EP5** | All three by the desk. | A teaser card: the school field with an obstacle course (tyres, a balance beam, a rope); three sports bands hanging on the Help Desk. **Camera:** slow push. | A 2-bar Scoop Parade "game show" tease (bigger drums, a whistle: EP5 is a Challenge). |
-| 7:13.1 | `n1301` | Heart | Next time, an obstacle race! Which systems in your body do the work? | All three: surprised (*doc_surprised*: a new challenge). |  | A referee's whistle. |
-| **7:18.4** | **kwrecap** (15.4 s) | | **The key-word read-along** | Pip and Basil sit and smile (→ *doc_sit*); Momo waves (→ *momo_doc_waving*, the goodbye pose). Nobody carries a shy or confident pose into the ending. | The shelf moves to the centre and grows. **Camera:** still, a slow 1.00 to 1.02 push. | The series calm bed, very low; a soft chime as each word lights. |
-| 7:18.4 | `h860` | Heart | Let's read today's key words together! Ready? |  |  |  |
-| 7:21.7 | `hk_spine_like_leaves` | Heart | Spine-like leaves. |  | "Spine-like leaves" lights up. |  |
-| 7:22.6 | `uk_spine_like_leaves` | All three | Spine-like leaves. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
-| 7:24.4 | `hk_woody` | Heart | Woody, non-woody. |  | "Woody, non-woody" lights up. |  |
-| 7:25.6 | `uk_woody` | All three | Woody, non-woody. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
-| 7:27.6 | `hk_climbers` | Heart | Climbers. |  | "Climbers" lights up. |  |
-| 7:28.5 | `uk_climbers` | All three | Climbers. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
-| 7:30.3 | `hk_storage_roots` | Heart | Storage roots. |  | "Storage roots" lights up. |  |
-| 7:31.2 | `uk_storage_roots` | All three | Storage roots. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
-| 7:33.0 | `h864` | Heart | Well done! |  | "Well done!" centred under the words. |  |
-| **7:33.8** | **nyk** (11.1 s) | | **"Say it with us!" ... "Now you know!"** | Pip and Basil sit and smile, Momo waves, until "Now you know!"; **ON the words all three swap to cheer** (→ *doc_cheer*) and hop on the beat to the end. | The sunburst; Spike in his terracotta pot at the centre, a small new bump on his top. **Camera:** a hard cut in, then still. | The count-in exactly 1.0 s apart. |
-| 7:33.8 | `u1300` | All three | Say it with us! |  |  |  |
-| 7:36.9 | `h1304a` | Heart | Ready? |  |  |  |
-| 7:37.8 | `h1304o` | Heart | One! |  |  |  |
-| 7:38.8 | `h1304t` | Heart | two! |  |  |  |
-| 7:39.8 | `h1305` | Heart | Now you know! | All three cheer. | Title slam + confetti burst on "know!". | The series happy BLAST (in F). |
-| 7:40.9 | *hold 4.0 s* | | | The buddies bounce. | Outro (end-screen time): nothing new spoken; nothing in the bottom fifth. **Wordless:** at the side, GLITCH tapes the three plastic leaves back onto the plastic plant by the lift (a plastic plant cannot grow new ones), then gives it a satisfied nod. | Finale fades; a small 'beep' from GLITCH. |
-| **7:44.9** | **blooper** (6.6 s) | | **THE BLOOPER (after the end card; a line, no slapstick)** |  | The Help Desk; the clapperboard BLOOPER / TAKE 2. | Record scratch; the clapper. |
-| 7:44.9 | `e1701` | Basil | Spike, you look like a cucumber with... | Basil, grinning, mid-tease... |  |  |
-| 7:47.5 | `e1702` | Spike | Careful. | Spike, very still. Basil: a gulp (worried, → *basil_doc_worried*). |  |  |
-| 7:48.7 | `e1703` | Basil | ...lovely spine-like leaves. | Basil, smoothly. Momo: laughing; Pip: laughing. |  |  |
-| 7:50.6 | `e1704` | Pip | Take two! | Pip snaps the clapper. |  | Clapper. |
-| **7:51.5** | **glitchend** (4.9 s) | | **GLITCH ALONE: his signature ending (the very last shot)** | **No buddies; nobody reacts.** | The dim corner of the void-deck science lab: GLITCH alone on his charging dock, lit by his own screen. Centred (YouTube's end-screen elements go in the left and right corners). **Camera:** a very slow push onto his screen face. | **No music, no ambience** from the cut. |
-| 7:51.5 | *hold 0.6 s* | | | GLITCH still, screen dim, two small calm eyes (*glitch_base*, arms down). | On his chest panel, small: **KNOWLEDGE LOG · 3** (three cards in the stack). | Only a faint charger hum. |
-| 7:52.1 | *hold 0.9 s* | | | **THE GLITCH:** his screen and body stutter (*glitch_error* for 2-3 frames at a time). **0.9 s, a touch shorter than EP2-EP3's 1.0 s: he recovers faster.** | Hard horizontal tear lines and blocky pixel steps on HIS picture only; silver, teal and white (NEVER Heart's soft cyan-and-magenta). At most 3 flashes a second; never a full-screen flash. | The hard digital stutter: bit-crushed clicks, "k-k-k-tsch", a 60 ms dropout. |
-| 7:53.0 | *hold 1.8 s* | | | Perfectly still (*glitch_acquired*). | The screen settles to two calm, narrow eyes; the antenna light glows steady, **a touch brighter than at the end of EP3**. | **TRUE SILENCE** (every bus at zero). |
-| 7:54.8 | `z1801` | GLITCH | New knowledge acquired. | Calm, a little lower and slower than his usual voice, **a shade calmer than EP3's sting** (speed .86, range .36); no smile. | On "acquired" the three log cards light up one after another, 1, 2, 3. | His voice only, dry (no reverb). |
-| 7:55.9 | *hold 0.5 s* | | |  | **Cut to black.** End. | Silence. |
+| 4:11.4 | `g702` | Pip | Wait! We tested it over time. | Pip, brave, steps in front of Spike, one gloved paw up (pointing, *pip_doc_pointing*). **(v2.1) He names the method that beats GLITCH** (the log's ENTRY 3 · BEATEN BY: TEST IT OVER TIME); "Here's the data." moves to the panel's heading. |  |  |
+| 4:14.6 | *hold 2.4 s* | | | GLITCH stops and leans in to scan. | **The evidence, on GLITCH's chest panel, full frame** (big, one picture at a time, each held at least 0.8 s), headed **HERE'S THE DATA · TESTED OVER TIME**: SCANNING... bar. | Scanner sweep; three soft beeps. |
+| 4:17.0 | `g703` | Pip | Twenty-one days, no flat leaves, and Spike's green stem made his food! | Pip TO GLITCH, careful and brave, pointing at each picture as it shows. | **RED TRACE 4 (full frame, the test over time):** Spike on DAY 1 beside Spike on DAY 21; a red line round DAY 1's leaning top and soft brown base (**DAY 1: leaning, soft brown base**) and round DAY 21's upright stem and new bump (**DAY 21: firm, green, standing tall**); then the spines (**spine-like leaves**) and the green stem (**makes food**), each traced in red. |  |
+| 4:21.9 | *hold 1.0 s* | | | GLITCH freezes. | His screen: swirly eyes and a tiny "?" (*glitch_error*), his antenna droops, two little sparks. Comic word **BZZT!** beside him (never on his screen). | **BZZT!** (loud, humour bus); a falling beep. |
+| 4:22.9 | `g704` | GLITCH | Error. Leaves: detected. Shape: spine. | GLITCH droops (*glitch_error*). Momo: a sympathetic look. |  |  |
+| 4:26.1 | `g705` | Pip | You read his parts. Good! But parts look different in different plants. | **Pip wins GLITCH over** (his soft side: brave, and kind): he says what GLITCH got right first. Momo and Basil step in beside him (all three at least 60 px from GLITCH). |  |  |
+| 4:31.8 | `g706` | GLITCH | Updating! Lesson stored: plant parts look different in different plants. Cactus: spine-like leaves. Green stem makes food. | **His special ability, shown again:** *glitch_grumpy* with the UPDATING... bar, then *glitch_happy* (both arms up) as the lesson is filed. Momo claps; Pip and Basil smile (a happy ending for them). | The chest panel: the bar fills to 100%, then, **full frame**, a card slides into the folder, dark ink on a pale card, the entry number big: **KNOWLEDGE LOG · ENTRY 3 · LESSON: PLANT PARTS LOOK DIFFERENT IN DIFFERENT PLANTS · CACTUS: SPINE-LIKE LEAVES, GREEN STEM MAKES FOOD · BEATEN BY: TEST IT OVER TIME**, on top of entries 1 and 2 (each with its own number, lesson and BEATEN BY line, word for word as the log). **The small chill (the viewer only):** as the buddies turn away, the counter ticks 2 → 3, his screen eyes narrow for 8 frames, his antenna light glows steadier again, and (NEW in EP4) a thin line flickers between the three log cards for 6 frames, as if they are joining up. Nobody sees it. | Upgrade chime; a soft 'file' click; one low hum under the counter tick (quiet). |
+| 4:40.0 | `g708` | GLITCH | ...Tape: retired. | Spike gives GLITCH a long look at the tape roll. GLITCH drops the tape roll and the plastic leaf into the corridor's recycling bin by the lift (a symbol, no words; a little sheepish, *glitch_grumpy* face, arms down). Spike: a small satisfied hop. |  | A soft 'clunk' in the bin. |
+| **4:42.3** | **tour** (37.4 s) | | **THE TWIST: "So I'm the only odd plant here?" A corridor full of superpowers** | Spike rides along on the rack's trolley shelf pushed by Pip (never floating); the buddies big beside each plant, walking with the camera and FACING the way they go. Uncle Lim's plants, not Uncle Lim (he is indoors). | Uncle Lim's corridor garden in the afternoon sun. **Camera:** a slow glide along the corridor between the stops; at each plant a zoom-in with a red trace (section 5c), then side by side. The key-word shelf stays top right. | Scoop Parade (theme, lighter: ukulele lead). |
+| 4:42.3 | `t801` | Spike | So I'm the only odd plant here? | Spike TO Pip, a little sad. Pip: a smile. |  |  |
+| 4:45.4 | `t802` | Pip | Not even close. Every plant here has a superpower. | Pip TO Spike, sweeping a paw along the corridor (pointing). |  |  |
+| 4:49.6 | *hold 0.6 s* | | | The buddies walk on with the camera (facing the way they go). | The camera glides to the parapet. | Footsteps on the corridor tiles; the wind chime. |
+| 4:50.2 | `t803` | Pip | Look down. The rain tree's trunk is thick and hard: a woody stem. | Pip TO Momo, pointing over the parapet (*pip_doc_pointing*). | **RED TRACE 5a (full frame):** the view down to the void deck, zooming onto the rain tree's (EP1's) trunk; a red line runs up both sides of it: **WOODY STEM: thick and hard**. |  |
+| 4:56.0 | `t804` | Momo | And this mint's stem is soft and bendy: a non-woody stem! | Momo TO Pip, gently bending one mint stem. **KEY WORD pops: WOODY / NON-WOODY** (2.0 s, chime, to the shelf); Momo: cheer (→ *momo_doc_cheer*: learnt; her mistake was in another scene). | **RED TRACE 5b (full frame):** a zoom onto Momo's paw bending one mint stem; a red line along it: **NON-WOODY STEM: soft and bendy**. Then **side by side**, both traces kept: the trunk (**woody: thick and hard**) and the mint stem (**non-woody: soft and bendy**). | Chime. |
+| 5:02.6 | *hold 0.6 s* | | | The buddies walk on with the camera. | The camera glides to the bamboo pole. | Footsteps; the wind chime. |
+| 5:03.2 | `t805` | Basil | The butterfly pea has a weak stem. It coils round the pole to climb up to more light. A climber! | Basil TO Spike (out of shy: a new scene, and he is right about this). **KEY WORD pops: CLIMBERS** (2.0 s, chime, to the shelf); Basil: cheer (→ *basil_doc_cheer*). | **RED TRACE 6a (full frame):** a zoom onto the butterfly-pea vine (blue flowers) on its bamboo pole; the red line follows the stem as **it coils round the pole** (drawn true: no tendrils), up to a sun glow at the top: **CLIMBER: weak stem, coils round the pole to reach light**. | Chime. |
+| 5:13.8 | *hold 0.6 s* | | | The buddies walk on with the camera. | The camera glides past the money plant in its glass bottle of water on the rack (white roots from the cut end; label "stem cutting: new roots grow in water"; small print "Cutting a plant? Ask an adult.") to the planter box. | Footsteps. |
+| 5:14.4 | `t806` | Momo | And the sweet potato's weak stem creeps along the ground. | Momo TO Basil, pointing along the planter box (*momo_doc_pointing*). | **RED TRACE 6b (full frame):** a zoom onto the long planter box; the red line runs along a sweet potato stem creeping over the soil, heart-shaped leaves spread flat towards the light: **CREEPER: weak stem, spreads along the ground**. Then **side by side** with the climber: **climbs UP** · **creeps ALONG**. |  |
+| **5:19.7** | **bonus** (26.0 s) | | **THE BONUS POINT (the second pick: root or stem?)** | The trio round the planter box, each with their call; Spike on the trolley beside them. | A cut-away of the planter box appears beside it (never over a face): under the soil, a plump orange sweet potato joined to the plant above, with thin roots growing out of it, and a "?". Two big picture chips: **1 ROOT** · **2 STEM**. **Camera:** still, then a slow push onto the cut-away. | Help-desk theme, low; silent in the think pause but for ticks. |
+| 5:19.7 | `b851` | Heart | Bonus point! This plant stores food under the soil. Root or stem? One finger for root, two for stem! | All three: thinking (→ *doc_thinking*). | The two chips pop as they are named. | A bright 'bonus' bell. |
+| 5:27.8 | `b852` | Pip | Stem. It's joined to the creeping stem. | Pip TO Momo, careful, sure (pointing at the join). Basil: thinking. | Pip's small chip: STEM. |  |
+| 5:31.3 | `b853` | Momo | Root! It has thin roots growing out of it. | Momo TO Pip (pointing at the thin roots on the cut-away). | Momo's small chip: ROOT. **RED TRACE 7 (full frame):** a zoom onto the cut-away; the red line runs along the thin roots growing out of the orange thing: **THIN ROOTS grow out of it**. |  |
+| 5:35.6 | `b854` | Basil | Root. And this time, my reason: it grows down, with roots of its own. | Basil TO Heart, arms crossed, careful for once (*basil_doc_arms_crossed*: confident in his reason). Momo: a grin. | Basil's small chip: ROOT. |  |
+| 5:41.7 | *hold 3.0 s* | | | Pip, Momo and Basil: thinking (→ *doc_thinking*). | **THINK** over the dimmed cut-away (never over a face): the two clues side by side, both true (**joined to the stem** · **thin roots grow out of it**), the two chips; your fingers. No answer shown yet. | Three soft ticks; no bell. |
+| **5:45.7** | **journey** (42.4 s) | | **BE THE THING: a bit of food in a sweet potato plant (quiet)** | The buddies ride along behind YOU in back views (→ *doc_back*) on a leaf-boat, never covering the path. Basil gives the viewer one 1-second glance-and-wave (not on a key line). | MICRO-WORLD mode (no logo, no score; only the YOU tag and the scale pill "You: a bit of food made by a leaf"). **Camera:** a slow drift along the stem, then down; 6-10 s shots. | The micro-world pad only (the theme fades out 1.2 s into j901; Scoop Parade lite back in 1.5 s after the pull-out). |
+| 5:45.7 | `j901` | Heart | Be a tiny bit of food, just made in a sweet potato leaf. Shrink down. Quietly. | The buddies pop out in turn before the dive (no fading). | The camera pushes into a sunlit sweet potato leaf in the planter box. |  |
+| 5:53.1 | `j902` | Heart | You leave the leaf and travel along the creeping stem. | Watching. | YOU = a small, glowing, round crumb of food with eyes (never a sweet); you travel from the leaf stalk along the stem, FACING the way you go. | Soft whoosh. |
+| 5:57.5 | `j903` | Heart | Then down into the soil, into something big and orange: a root, full of food, stored for later. | Basil: the 1-second wave to the viewer, then back to watching. | Down a short stalk into the dark soil; a huge orange-skinned root, plump, with thin roots growing out of it; inside it, a warm store of food. **RED TRACE 8a:** a red line round the root's outline: **STORAGE ROOT: big, stores food for later**. No P5 labels (no "starch", no tubes named). | A soft bell chord. |
+| 6:04.9 | *hold 1.2 s* | | |  | The pull-out: back to the corridor, ending on the next shot's layout (the trio by the planter box). | Pad out; lite in (1.5 s) on the beat. |
+| 6:06.1 | `j904` | Basil | So the sweet potato is a root that stores food. A storage root! Carrots too. | Basil big at the left (a new scene; he is right). **KEY WORD pops: STORAGE ROOTS** (2.0 s, chime, to the shelf); Basil: cheer (→ *basil_doc_cheer*). | **RED TRACE 8b (full frame):** a sweet potato and a carrot side by side, each with its leafy top still on, a red line round each root: **STORAGE ROOT** under each. | Chime. |
+| 6:14.9 | `j905` | Heart | Root it is! A bonus point for you, Momo and Basil. | Momo and Basil: arms crossed, proud (*doc_arms_crossed*: right, for the right reason). **Pip: oops (→ *pip_doc_oops*), then claps for them** (his first wrong pick in EP4; he is kind about it). | **The score bar:** YOU +1 (if you showed one finger), MOMO +1, BASIL +1. Coin tings; the bar bumps. | Three coin tings. |
+| 6:20.1 | `j906` | Momo | Snack emergency, solved. | Momo, dreamy, hugging the sweet potato card (its words never read mirrored). Basil: laughing (→ *basil_doc_laughing*). |  | A happy 'mmm' sting (two notes). |
+| 6:21.7 | `j907` | Spike | So our parts look different because they help us live in different places. | Spike TO the trio (the big idea in his own words), at the planter box after the pull-out. All three: a nod (Pip still a little shy from the bonus, smiling). | The whole corridor garden in one frame: Spike, the butterfly pea, the sweet potato, the mint, the money plant; one sun-yellow line under them: "Different parts, different places." |  |
+| **6:28.1** | **words** (29.9 s) | | **THE WORDS THAT EARN MARKS (Basil reads)** | The approved Mark Sentence layout: Basil BIG at the left, the card large at the right; Pip and Momo smaller at the right edge, mouthing along. | The cream card THE WORDS THAT EARN MARKS (Atkinson 700, 70 px); highlights sweep as Basil reads: spine-like leaves, reduce water loss, green stem makes food, weak stems, coil around structures, climb higher, enough light, storage roots, store food. Footer: Primary 4 Science · Systems · Plant System: how plant parts look in different plants. Along the bottom: Spike, the butterfly pea, a sweet potato, each with one label. **Camera:** still. | Scoop Parade lite, low. |
+| 6:28.1 | `m1101` | Heart | Now, here are the words that earn marks. |  |  |  |
+| 6:31.4 | `m1102` | Basil | Say it with me! | Basil: an inviting gesture towards the viewer (pointing, *basil_doc_pointing*). |  |  |
+| 6:33.4 | *hold 0.8 s* | | |  |  |  |
+| 6:34.2 | `m1103` | Basil | A cactus has spine-like leaves to reduce water loss. Its green stem makes food. Climbers have weak stems, so they coil around structures to climb higher and get enough light to make food. Storage roots, such as carrots and sweet potatoes, store food. | Basil reads (talking sprite, a slower read). Pip and Momo mouth along. | The words light up as he reads them. |  |
+| 6:54.5 | *hold 2.5 s* | | | Stillness on the card. |  |  |
+| **6:58.0** | **finish** (15.8 s) | | **THE COSY END: the callback and the final score** | Back at the void deck: Spike on the Help Desk in his terracotta pot, firm and green; the trio behind the desk; GLITCH at the far side, scanning a pot plant (no tape), at least 60 px clear. | The Help Desk; the PLANT CLINIC banner. **Camera:** two-shot of Basil and Spike, then the three-shot. | Scoop Parade finale, quiet; then big. |
+| 6:58.0 | `k1201` | Basil | Spike, no hard feelings about the cucumber? | Basil TO Spike, a little shy. |  |  |
+| 7:01.2 | `k1202` | Spike | None. And by the way, cucumber plants are climbers too. | Spike, dry. Basil: a slow blink. | A tiny inset: a cucumber plant climbing a trellis. |  |
+| 7:05.8 | `k1203` | Basil | ...Fair point. | Basil: laughing at himself (→ *basil_doc_laughing*). Momo and Pip: laughing. |  | Rimshot 3. |
+| 7:07.1 | `k1204` | Heart | Final scores: Pip, Momo and Basil, one point each. How many did YOU get? | All three: arms crossed, proud, a little competitive (*doc_arms_crossed*), looking at the viewer. | **The score bar** grows to the centre for 2 s: PIP 1 · MOMO 1 · BASIL 1, and YOU with a sun-yellow glow and "?" (0, 1 or 2: the viewer counts). | A drum roll, a cymbal tap. |
+| **7:13.8** | **next** (5.4 s) | | **THE LINK TO EP5** | All three by the desk. | A teaser card: the school field with an obstacle course (tyres, a balance beam, a rope); three sports bands hanging on the Help Desk. **Camera:** slow push. | A 2-bar Scoop Parade "game show" tease (bigger drums, a whistle: EP5 is a Challenge). |
+| 7:13.8 | `n1301` | Heart | Next time, an obstacle race! Which systems in your body do the work? | All three: surprised (*doc_surprised*: a new challenge). |  | A referee's whistle. |
+| **7:19.2** | **kwrecap** (15.4 s) | | **The key-word read-along** | Pip and Basil sit and smile (→ *doc_sit*); Momo waves (→ *momo_doc_waving*, the goodbye pose). Nobody carries a shy or confident pose into the ending. | The shelf moves to the centre and grows. **Camera:** still, a slow 1.00 to 1.02 push. | The series calm bed, very low; a soft chime as each word lights. |
+| 7:19.2 | `h860` | Heart | Let's read today's key words together! Ready? |  |  |  |
+| 7:22.5 | `hk_spine_like_leaves` | Heart | Spine-like leaves. |  | "Spine-like leaves" lights up. |  |
+| 7:23.4 | `uk_spine_like_leaves` | All three | Spine-like leaves. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
+| 7:25.2 | `hk_woody` | Heart | Woody, non-woody. |  | "Woody, non-woody" lights up. |  |
+| 7:26.4 | `uk_woody` | All three | Woody, non-woody. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
+| 7:28.4 | `hk_climbers` | Heart | Climbers. |  | "Climbers" lights up. |  |
+| 7:29.3 | `uk_climbers` | All three | Climbers. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
+| 7:31.1 | `hk_storage_roots` | Heart | Storage roots. |  | "Storage roots" lights up. |  |
+| 7:32.0 | `uk_storage_roots` | All three | Storage roots. | All three mouth along; the YOU hands bob (about 1.2 s for the class). |  |  |
+| 7:33.8 | `h864` | Heart | Well done! |  | "Well done!" centred under the words. |  |
+| **7:34.6** | **nyk** (11.1 s) | | **"Say it with us!" ... "Now you know!"** | Pip and Basil sit and smile, Momo waves, until "Now you know!"; **ON the words all three swap to cheer** (→ *doc_cheer*) and hop on the beat to the end. | The sunburst; Spike in his terracotta pot at the centre, a small new bump on his top. **Camera:** a hard cut in, then still. | The count-in exactly 1.0 s apart. |
+| 7:34.6 | `u1300` | All three | Say it with us! |  |  |  |
+| 7:37.7 | `h1304a` | Heart | Ready? |  |  |  |
+| 7:38.6 | `h1304o` | Heart | One! |  |  |  |
+| 7:39.6 | `h1304t` | Heart | two! |  |  |  |
+| 7:40.6 | `h1305` | Heart | Now you know! | All three cheer. | Title slam + confetti burst on "know!". | The series happy BLAST (in F). |
+| 7:41.7 | *hold 4.0 s* | | | The buddies bounce. | Outro (end-screen time): nothing new spoken; nothing in the bottom fifth. **Wordless, its own shot (no buddies in it):** at the lift lobby, GLITCH tapes the three plastic leaves back onto the plastic plant (a plastic plant cannot grow new ones), then gives it a satisfied nod. | Finale fades; a small 'beep' from GLITCH. |
+| **7:45.7** | **blooper** (6.6 s) | | **THE BLOOPER (after the end card; a line, no slapstick)** |  | The Help Desk, costumes on; the clapperboard BLOOPER / TAKE 2 (its words never read mirrored, whichever way Pip holds it). | Record scratch; the clapper. |
+| 7:45.7 | `e1701` | Basil | Spike, you look like a cucumber with... | Basil, grinning, mid-tease... |  |  |
+| 7:48.3 | `e1702` | Spike | Careful. | Spike, very still. Basil: a gulp (worried, → *basil_doc_worried*). |  |  |
+| 7:49.5 | `e1703` | Basil | ...lovely spine-like leaves. | Basil, smoothly. Momo: laughing; Pip: laughing. |  |  |
+| 7:51.4 | `e1704` | Pip | Take two! | Pip snaps the clapper. |  | Clapper. |
+| **7:52.3** | **glitchend** (4.9 s) | | **GLITCH ALONE: his signature ending (the very last shot)** | **No buddies; nobody reacts.** | The dim corner of the void-deck science lab: GLITCH alone on his charging dock, lit by his own screen. Centred (YouTube's end-screen elements go in the left and right corners). **Camera:** a very slow push onto his screen face. | **No music, no ambience** from the cut. |
+| 7:52.3 | *hold 0.6 s* | | | GLITCH still, screen dim, two small calm eyes (*glitch_base*, arms down). | On his chest panel, small: **KNOWLEDGE LOG · 3** (three cards in the stack, numbered 1, 2, 3). | Only a faint charger hum. |
+| 7:52.9 | *hold 0.9 s* | | | **THE GLITCH:** his screen and body stutter (*glitch_error* for 2-3 frames at a time). **0.9 s, a touch shorter than EP2-EP3's 1.0 s: he recovers faster.** | Hard horizontal tear lines and blocky pixel steps on HIS picture only; silver, teal and white (NEVER Heart's soft cyan-and-magenta). At most 3 flashes a second; never a full-screen flash. | The hard digital stutter: bit-crushed clicks, "k-k-k-tsch", a 60 ms dropout. |
+| 7:53.8 | *hold 1.8 s* | | | Perfectly still (*glitch_acquired*). | The screen settles to two calm, narrow eyes; the antenna light glows steady, **a touch brighter than at the end of EP3**. | **TRUE SILENCE** (every bus at zero). |
+| 7:55.6 | `z1801` | GLITCH | New knowledge acquired. | Calm, a little lower and slower than his usual voice, **a shade calmer than EP3's sting** (speed .86, range .36); no smile. | On "acquired" the three log cards light up one after another, 1, 2, 3. | His voice only, dry (no reverb). |
+| 7:56.7 | *hold 0.5 s* | | |  | **Cut to black.** End. | Silence. |
 
-(The video ends at about **7:56.4** by the model.)
+(The video ends at about **7:57.2** by the model.)
+
+## 5b. The shot plan (the 10-second rule, v2.1)
+
+**138 shots; the longest 6.9 s** (6:34.2, closer on sentences 1-2 (spine-like leaves, green stem)); mean 3.5 s; none over 8 s, none over 10 s; **46 full-frame inserts (■)**, 13 of them red-trace zooms (section 5c). Times from the series model; each shot runs to the next one. Every shot has a slow push inside (about 6 %, 1.00 → 1.06); cuts land on a line's start or a sentence break, never inside a word, and the next framing always changes size or place (no jump cuts). The screen things (logo, score bar, shelf, small print, bubbles, THINK and key-word cards) are drawn through `DHUD()` and stay put; a screen card never covers the speaker's head in the new framing. The build's director (`plan_shots.py` from the census) starts from this list and `qa/hold_check.py` must show no hold over 10 s.
+
+Shot kinds: single = a close-up on the speaker; two-shot; the group; wide; reaction cut; insert (■ = full frame); RED TRACE zoom (always full frame); card / stage (full frame).
+
+
+**cold** (14 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 1 | 0:00.0 | 3.1 s | single (close-up) | Spike on the desk by the bell (tight; the DING) |
+| 2 | 0:03.1 | 4.2 s | single (close-up) | Basil behind the desk, doing up his coat button |
+| 3 | 0:07.4 | 3.0 s | the group | the trio under the PLANT CLINIC banner (the banner reads); Basil's slow look to camera |
+| 4 | 0:10.3 | 4.2 s | two-shot | Momo + Spike (the two insets pop beside Spike) |
+| 5 | 0:14.5 | 4.1 s | insert | push-in on the three taped plastic leaves (a tape end flaps) |
+| 6 | 0:18.6 | 1.2 s | wide | the whole desk: all three turn to GLITCH at the right edge (60 px clear); the pigeon's KOO! |
+| 7 | 0:19.8 | 1.3 s | single (close-up) | GLITCH, eyes darting sideways |
+| 8 | 0:21.1 | 3.1 s | two-shot | Momo + GLITCH (60 px apart), Momo pointing at the roll |
+| 9 | 0:24.3 | 2.9 s | single (close-up) | GLITCH, proud |
+| 10 | 0:27.2 | 3.6 s | ■ insert | his chest panel: USING LOG · ENTRY 2, BLADE · NOT FOUND, STALK · NOT FOUND, LEAVES INSTALLED: 3 |
+| 11 | 0:30.8 | 2.0 s | ■ insert | flashback: GLITCH peeling a leaf off the lift-lobby plastic plant (SKRITCH!) |
+| 12 | 0:32.8 | 5.0 s | two-shot | Basil + Spike (the cucumber line) |
+| 13 | 0:37.8 | 2.2 s | reaction cut | Pip laughing (rimshot) |
+| 14 | 0:40.0 | 3.8 s | single (close-up) | Spike, indignant hop |
+
+**title** (1 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 15 | 0:43.7 | 2.6 s | ■ card / stage | title slam: THE PRICKLY PATIENT! on the clipboard chart |
+
+**fixcards** (8 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 16 | 0:46.3 | 4.4 s | two-shot | GLITCH + card 1 (push onto the card as it pops; GLITCH 60 px from the huddle) |
+| 17 | 0:50.7 | 2.9 s | single (close-up) | Pip with his CACTI book |
+| 18 | 0:53.6 | 2.5 s | insert | push onto card 2 as it pops |
+| 19 | 0:56.1 | 5.0 s | two-shot | Momo + Basil, the big watering can; card 3 pops in frame |
+| 20 | 1:01.0 | 3.9 s | two-shot | Basil + Spike |
+| 21 | 1:04.9 | 1.2 s | the group | the huddle: nobody laughs (sad trombone) |
+| 22 | 1:06.1 | 2.4 s | single (close-up) | GLITCH, the laugh meter at 0 |
+| 23 | 1:08.5 | 5.2 s | wide | all three turn to the viewer under the three cards |
+
+**lock** (1 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 24 | 1:13.7 | 6.5 s | ■ card / stage | the lock-in stage: ring, clue labels, the three cards glowing in turn |
+
+**picks** (8 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 25 | 1:20.2 | 5.5 s | wide | pan along the row of cards (the score bar slides in), settling on Pip + Basil under card 2 |
+| 26 | 1:25.7 | 2.7 s | reaction cut | Basil nodding, as if he agrees |
+| 27 | 1:28.4 | 3.5 s | two-shot | Momo + Spike under card 3 |
+| 28 | 1:31.9 | 4.0 s | single (close-up) | Basil, arms crossed, very sure |
+| 29 | 1:35.9 | 1.7 s | reaction cut | Spike's huff |
+| 30 | 1:37.6 | 5.7 s | wide | the row and the score bar: the REASON? tags |
+| 31 | 1:43.4 | 1.2 s | the group | the high-five miss |
+| 32 | 1:44.6 | 3.0 s | single (close-up) | Pip hugging his paw |
+
+**lcspines** (16 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 33 | 1:47.6 | 3.6 s | ■ insert | LOOK CLOSER banner: the cream panel, Spike huge; Pip pulls on his gloves |
+| 34 | 1:51.2 | 3.1 s | ■ RED TRACE zoom | 1a SPINE-LIKE LEAVES: zoom onto one spine cluster on its pad, traced in red |
+| 35 | 1:54.3 | 3.4 s | ■ RED TRACE zoom | 1b FLAT LEAF: zoom onto a broad flat leaf, traced in red |
+| 36 | 1:57.7 | 4.0 s | ■ insert | side by side: flat leaf (loses more water) · spines (loses very little water) |
+| 37 | 2:01.7 | 3.1 s | ■ insert | the goat sniffs and steps back (protects it from animals) |
+| 38 | 2:04.8 | 5.0 s | two-shot | Momo peeking into the panel + Pip with his book |
+| 39 | 2:09.8 | 2.5 s | ■ card / stage | THINK card over the dimmed panel: No flat leaves. How does a cactus make food? |
+| 40 | 2:12.3 | 2.1 s | single (close-up) | Pip pointing at the stem; Momo tilts her head mirror |
+| 41 | 2:14.4 | 3.2 s | ■ RED TRACE zoom | 2 GREEN STEM: the head-mirror beam, the stem traced in red rib by rib |
+| 42 | 2:17.6 | 3.4 s | ■ insert | the plastic leaves sitting ON the green stem, covering it |
+| 43 | 2:21.0 | 2.5 s | two-shot | Momo holds out the bin + Pip with the tongs |
+| 44 | 2:23.5 | 1.8 s | insert | close on Pip's gloved paws and tongs peeling the leaves (SKRITCH! x3) |
+| 45 | 2:25.3 | 5.1 s | two-shot | Pip + Spike: KEY WORD SPINE-LIKE LEAVES; card 1 stamped NOT NEEDED |
+| 46 | 2:30.4 | 5.9 s | two-shot | Basil (shy) + Spike |
+| 47 | 2:36.3 | 2.2 s | single (close-up) | Basil: ...I take back the cucumber. |
+| 48 | 2:38.5 | 1.2 s | reaction cut | Momo laughing |
+
+**water** (12 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 49 | 2:39.7 | 3.1 s | two-shot | Momo + Spike, the can held high |
+| 50 | 2:42.8 | 2.4 s | ■ insert | GLITCH's screen: KNOWLEDGE LOG · ENTRY 1 (DRAINAGE HOLES: REQUIRED glows), the pot with no hole |
+| 51 | 2:45.3 | 2.8 s | two-shot | Pip + Momo, the can in mid-air |
+| 52 | 2:48.0 | 1.2 s | insert | Momo's fingertip in the soil (SQUELCH!) |
+| 53 | 2:49.2 | 2.9 s | single (close-up) | Momo, surprised |
+| 54 | 2:52.1 | 3.6 s | insert | push-in on Spike's soft brown base; Chilli's roots inset |
+| 55 | 2:55.7 | 1.0 s | two-shot | Momo lowers the can + Spike (sad trombone) |
+| 56 | 2:56.7 | 3.5 s | two-shot | Momo + Pip |
+| 57 | 3:00.2 | 4.7 s | ■ RED TRACE zoom | 3a STORES WATER: LOOK CLOSER, the healthy cactus cut-away, the juicy flesh traced in red |
+| 58 | 3:04.9 | 4.2 s | ■ RED TRACE zoom | 3b TOO MUCH WATER: zoom onto Spike's soft brown base, traced in red |
+| 59 | 3:09.1 | 3.9 s | ■ insert | side by side: stores water · too much water; card 3 stamped TOO MUCH WATER |
+| 60 | 3:12.9 | 6.0 s | two-shot | Momo (shy) + Basil |
+
+**sun** (17 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 61 | 3:18.9 | 2.6 s | wide | NEW SET, the HDB corridor: Uncle Lim steps out of his gate; the trio arrive with Spike |
+| 62 | 3:21.5 | 3.7 s | single (close-up) | Uncle Lim: Put here lah... (HINT #1: the waiting pot, the small knowing smile) |
+| 63 | 3:25.2 | 1.8 s | insert | close: his gloved hands, the newspaper, Spike into the waiting pot with a hole |
+| 64 | 3:27.0 | 3.4 s | single (close-up) | Spike in the new pot: the three labels (Uncle Lim goes in, off screen) |
+| 65 | 3:30.4 | 3.4 s | wide | the rack in the sun; the buddies watching |
+| 66 | 3:33.7 | 3.0 s | ■ insert | the time-lapse, DAY 1 to DAY 21 |
+| 67 | 3:36.7 | 3.9 s | single (close-up) | Spike, firm and proud |
+| 68 | 3:40.6 | 1.2 s | the group | the high-five lands (CLAP!) |
+| 69 | 3:41.8 | 6.1 s | single (close-up) | Pip, arms crossed, the score bar ticks |
+| 70 | 3:47.9 | 1.3 s | single (close-up) | Basil: And me! |
+| 71 | 3:49.2 | 3.7 s | wide | the group and the score bar: Basil's tag fades |
+| 72 | 3:52.8 | 2.8 s | single (close-up) | Basil, shy but deadpan |
+| 73 | 3:55.6 | 2.6 s | ■ insert | the slow-motion replay (film border) |
+| 74 | 3:58.2 | 1.3 s | two-shot | Basil + Pip laughing |
+| 75 | 3:59.5 | 2.8 s | two-shot | Momo pats Basil's arm |
+| 76 | 4:02.3 | 3.5 s | single (close-up) | Spike looking up and around |
+| 77 | 4:05.8 | 2.2 s | wide | the corridor from the rack (the logo heart pulses; no GLITCH, no Uncle Lim) |
+
+**glitch** (10 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 78 | 4:08.0 | 3.4 s | wide | NEW ANGLE, the lift lobby: DING!, GLITCH rolls out facing his way |
+| 79 | 4:11.4 | 3.1 s | single (close-up) | Pip steps in front of Spike, paw up: We tested it over time. |
+| 80 | 4:14.6 | 2.4 s | ■ insert | GLITCH's chest panel: HERE'S THE DATA · TESTED OVER TIME, SCANNING... |
+| 81 | 4:17.0 | 5.0 s | ■ RED TRACE zoom | 4 TEST IT OVER TIME: DAY 1 beside DAY 21, traced in red; then spines and green stem |
+| 82 | 4:21.9 | 4.2 s | single (close-up) | GLITCH freezes, BZZT!, then Error. Leaves: detected. |
+| 83 | 4:26.1 | 5.7 s | two-shot | Pip + GLITCH (60 px clear); Momo and Basil step in |
+| 84 | 4:31.8 | 1.3 s | single (close-up) | GLITCH: Updating! |
+| 85 | 4:33.1 | 5.1 s | ■ insert | the log card: KNOWLEDGE LOG · ENTRY 3 · LESSON ... · BEATEN BY: TEST IT OVER TIME, on entries 1 and 2 |
+| 86 | 4:38.2 | 1.7 s | wide | the buddies clap and turn away; the counter ticks 2 to 3, eyes narrow (the chill) |
+| 87 | 4:40.0 | 2.3 s | two-shot | GLITCH drops the tape in the bin + Spike's look |
+
+**tour** (11 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 88 | 4:42.3 | 3.1 s | two-shot | Spike on the trolley + Pip |
+| 89 | 4:45.4 | 4.8 s | wide | the glide along the corridor garden, Pip sweeping a paw |
+| 90 | 4:50.2 | 1.2 s | two-shot | Pip + Momo at the parapet: Look down. |
+| 91 | 4:51.4 | 4.5 s | ■ RED TRACE zoom | 5a WOODY STEM: zoom down onto the rain tree's trunk, traced in red |
+| 92 | 4:56.0 | 3.2 s | ■ RED TRACE zoom | 5b NON-WOODY STEM: Momo bends a mint stem, traced in red |
+| 93 | 4:59.2 | 4.0 s | ■ insert | side by side: woody · non-woody; KEY WORD WOODY / NON-WOODY |
+| 94 | 5:03.2 | 2.4 s | single (close-up) | Basil at the bamboo pole |
+| 95 | 5:05.6 | 5.0 s | ■ RED TRACE zoom | 6a CLIMBER: zoom onto the butterfly pea, the coiling stem traced in red up to the light |
+| 96 | 5:10.6 | 3.9 s | two-shot | Basil + Spike: KEY WORD CLIMBERS; Basil cheers; the glide on past the money plant (stem cutting label) |
+| 97 | 5:14.4 | 3.5 s | ■ RED TRACE zoom | 6b CREEPER: zoom onto the planter box, the creeping stem traced in red |
+| 98 | 5:17.9 | 1.8 s | ■ insert | side by side: climbs UP · creeps ALONG |
+
+**bonus** (6 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 99 | 5:19.7 | 2.9 s | the group | the trio round the planter box: Bonus point! |
+| 100 | 5:22.6 | 5.3 s | ■ insert | the planter-box cut-away and the chips 1 ROOT · 2 STEM |
+| 101 | 5:27.8 | 3.5 s | single (close-up) | Pip pointing at the join; his chip STEM |
+| 102 | 5:31.3 | 4.2 s | ■ RED TRACE zoom | 7 THIN ROOTS: zoom onto the cut-away, the thin roots traced in red; Momo's chip ROOT |
+| 103 | 5:35.6 | 6.1 s | two-shot | Basil (arms crossed) + Momo |
+| 104 | 5:41.7 | 4.0 s | ■ card / stage | THINK over the dimmed cut-away: the two clues side by side |
+
+**journey** (11 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 105 | 5:45.7 | 4.1 s | ■ insert | push into a sunlit sweet potato leaf; the buddies pop out in turn |
+| 106 | 5:49.8 | 3.3 s | ■ insert | Shrink down: the dive into the leaf |
+| 107 | 5:53.1 | 4.4 s | ■ insert | along the creeping stem, YOU facing the way you go |
+| 108 | 5:57.5 | 3.6 s | ■ insert | down the short stalk into the dark soil |
+| 109 | 6:01.1 | 3.9 s | ■ RED TRACE zoom | 8a STORAGE ROOT: the huge orange root, its outline traced in red |
+| 110 | 6:04.9 | 1.2 s | ■ insert | the pull-out to the corridor |
+| 111 | 6:06.1 | 3.5 s | single (close-up) | Basil big at the left |
+| 112 | 6:09.6 | 5.3 s | ■ RED TRACE zoom | 8b STORAGE ROOT: a sweet potato and a carrot side by side, each traced in red; KEY WORD |
+| 113 | 6:14.9 | 5.1 s | wide | the trio and the score bar: +1 Momo, +1 Basil; Pip claps |
+| 114 | 6:20.1 | 1.7 s | single (close-up) | Momo hugging the sweet potato card |
+| 115 | 6:21.7 | 6.4 s | wide | the whole corridor garden: Different parts, different places. |
+
+**words** (7 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 116 | 6:28.1 | 3.3 s | ■ card / stage | push-in on the words card |
+| 117 | 6:31.4 | 2.8 s | single (close-up) | Basil, inviting |
+| 118 | 6:34.2 | 6.9 s | ■ card / stage | closer on sentences 1-2 (spine-like leaves, green stem) |
+| 119 | 6:41.1 | 5.1 s | ■ card / stage | pan to the climber sentence and its butterfly-pea picture |
+| 120 | 6:46.2 | 4.0 s | two-shot | rack to Basil reading, Pip and Momo mouthing along |
+| 121 | 6:50.2 | 4.3 s | ■ card / stage | closer on the storage-roots sentence and the sweet potato |
+| 122 | 6:54.5 | 3.5 s | wide | the whole card with all three |
+
+**finish** (4 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 123 | 6:58.0 | 3.1 s | two-shot | NEW SET, back at the void deck: Basil + Spike |
+| 124 | 7:01.2 | 4.6 s | single (close-up) | Spike, dry; the cucumber inset beside him |
+| 125 | 7:05.8 | 1.3 s | single (close-up) | Basil laughing at himself |
+| 126 | 7:07.1 | 6.7 s | wide | the three-shot; the score bar grows to the centre (GLITCH far side, 60 px clear) |
+
+**next** (1 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 127 | 7:13.8 | 5.4 s | ■ card / stage | the EP5 teaser card, slow push |
+
+**kwrecap** (3 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 128 | 7:19.2 | 6.0 s | ■ card / stage | the key-word shelf grows at the centre, push-in |
+| 129 | 7:25.2 | 5.9 s | ■ card / stage | pan along to woody / non-woody and climbers |
+| 130 | 7:31.1 | 3.5 s | wide | pull back to the buddies (sit, smile, Momo waves) |
+
+**nyk** (3 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 131 | 7:34.6 | 6.0 s | wide | hard cut in: the sunburst, Spike at the centre, the buddies |
+| 132 | 7:40.6 | 1.1 s | ■ card / stage | Now you know! title slam + confetti |
+| 133 | 7:41.7 | 4.0 s | wide | outro, its own shot at the lift lobby: GLITCH tapes the leaves back on the plastic plant |
+
+**blooper** (4 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 134 | 7:45.7 | 2.6 s | two-shot | blooper: Basil + Spike, the clapperboard |
+| 135 | 7:48.3 | 1.2 s | single (close-up) | Spike: Careful. |
+| 136 | 7:49.5 | 1.9 s | single (close-up) | Basil, smoothly |
+| 137 | 7:51.4 | 0.9 s | the group | Pip snaps the clapper |
+
+**glitchend** (1 shots)
+
+| # | Time | Length | Shot | What the camera sees |
+|---|---|---|---|---|
+| 138 | 7:52.3 | 4.9 s | ■ wide | GLITCH alone on his charging dock, a very slow push onto his screen |
+
+## 5c. The visual-teaching inserts: zoom in, trace in red, a short label (v2.1)
+
+The teacher, 28 Nov, on EP3's leaf edges: "should zoom in to trace in red, the edges, showing basic descriptions about them". Every comparison or explanation of a plant part in EP4 is shown that way, under the lines that already say it (no time added): a full-frame zoom on the real thing; a **red line (10-12 px at 1080p, a thin white halo so it reads on dark soil) drawn along its real outline in about 1 s**, like a pen; a short label in P4 words, **dark ink on a cream chip** (Atkinson 700, cap height about 40 px), joined by a plain line (no arrowheads); then the two things **side by side, both traces kept**. No face is ever under a trace or a label. Built from EP3 v2's `edgeTrace()` (`../p4ep03/s3.js`).
+
+| Trace | The comparison | Line(s) | Starts | How it is shown | Labels (on screen, P4 words) |
+|---|---|---|---|---|---|
+| 1a · 1b | Spine-like leaves vs a flat leaf | l402-l403 | 1:51.2 | zoom onto one cluster of spines on its pad; then a broad flat leaf (EP3's mango leaf); each traced in red along its real outline; then side by side | SPINE-LIKE LEAVES: thin and sharp, in a bunch · FLAT LEAF: wide and thin · loses more water / loses very little water |
+| 2 | The green stem makes food | l406 | 2:14.4 | Momo's head-mirror beam lands; zoom onto the stem; the red line runs round the green stem rib by rib (the plastic leaves shown sitting on it, covering it, l407) | GREEN STEM: makes food |
+| 3a · 3b | The stem stores water vs too much water (the rot) | w506 | 3:00.2 | zoom into the cut-away of a second, healthy cactus, the juicy flesh traced; then Spike's base, the soft brown part traced; then side by side | STORES WATER: thick and juicy inside · LOSE VERY LITTLE WATER · TOO MUCH WATER: soft, brown, rotting |
+| 4 | DAY 1 vs DAY 21 (the test over time; the method that beats GLITCH) | g703 | 4:17.0 | full frame on GLITCH's evidence panel (HERE'S THE DATA · TESTED OVER TIME): DAY 1 beside DAY 21, each traced; then the spines and the green stem | DAY 1: leaning, soft brown base · DAY 21: firm, green, standing tall |
+| 5a · 5b | Woody vs non-woody stems | t803-t804 | 4:51.4 | zoom down onto the rain tree's trunk, a red line up both sides; then Momo's paw bending a mint stem, traced; then side by side + KEY WORD | WOODY STEM: thick and hard · NON-WOODY STEM: soft and bendy |
+| 6a · 6b | Climbers vs creepers | t805-t806 | 5:05.6 | zoom onto the butterfly pea, the red line following its stem as it coils round the pole up to the light; then the sweet potato stem along the soil; then side by side | CLIMBER: weak stem, coils round the pole to reach light · CREEPER: weak stem, spreads along the ground · climbs UP / creeps ALONG |
+| 7 | Root or stem? (the bonus) | b853 + the THINK pause | 5:31.3 | zoom onto the planter-box cut-away, the thin roots traced; in the THINK pause both true clues side by side (no answer shown) | THIN ROOTS grow out of it · joined to the stem |
+| 8a · 8b | Storage roots | j903-j904 | 6:01.1 | in the journey the huge orange root traced round its outline; then a sweet potato and a carrot side by side, each traced + KEY WORD | STORAGE ROOT: big, stores food for later · STORAGE ROOT (×2) |
+
+## 5d. The 28 Nov staging checks, scene by scene (v2.1)
+- **No bike helmets anywhere** (not a cycling episode): the doctor costumes all episode, replacing the helmets, never stacked; the back
+  views, the score-bar chips and the thumbnail too. Props replace, never stack (0d; Q25 for Pip's painted goggles on his cap).
+- **GLITCH at least 60 px clear of every buddy** (his arms, tape roll and antenna included): cold open (the right edge of the desk), fix
+  cards (beside the huddle, never squeezed in), picks (under his own card 1; the cards spaced for it), both look-closers (the far side),
+  his scene (he stops 60 px from Pip's raised paw; Momo and Basil keep the gap when they step in), the finish (the far side). His outro
+  gag (re-taping the plastic plant) is its own shot with no buddies in it; the sting is GLITCH alone.
+- **Uncle Lim only for his own moment** (about 8 s): `sun`, s601 and the re-potting hold. He enters by stepping out of his gate towards the
+  trio (front view, facing his way); he leaves by stepping back in through his gate while the camera is on Spike's labels (s602; a soft
+  gate clack off screen). He is in no other shot: not in the GLITCH scene, not at g708 (the tape goes in the corridor's recycling bin), not on the tour of
+  his corridor garden (his plants, not him). Spike's family are never shown (they are only named; the cold open's insets show a watering
+  can and a dim bathroom shelf, no people).
+- **Words high-contrast:** the PLANT CLINIC banner (dark ink on white paper), the fix cards' white words with a thick dark outline, the
+  lock-in clue chips, every red-trace label, the log cards and the evidence panel (dark ink on pale cards), the day counter, the replay
+  border text, the words card (dark ink on cream, as approved).
+- **No mirrored words:** Pip's CACTI book, Basil's P4 LAB SCIENTIST badge, GLITCH's screen and chest panel, the evidence cards, the sweet
+  potato card Momo hugs and the clapperboard flip their words back when the holder is mirrored (`unflipText`); the bin carries a symbol
+  only. The banner, the 214 on the lift-lobby wall and the money-plant label are on the set and are never mirrored.
+
 
 ## 6. Who is right, who is wrong (lib.js OUTCOMES), and the pose plan
 
@@ -510,7 +847,7 @@ ROOT, Basil ROOT (right, with reasons), Pip STEM. Score: after the cure YOU +1, 
 OUTCOMES for lib.js: `{ at: "l:l409", to: "s:water", right: ["pip"], wrong: ["basil"] }`, `{ at: "l:w506", to: "s:sun", right: ["pip"],
 wrong: ["momo"] }`, `{ at: "l:s606", to: "l:s610", right: ["pip"], wrong: ["basil"] }`, `{ at: "l:j905", to: "s:words", right: ["momo",
 "basil"], wrong: ["pip"] }`. KW: SPINE-LIKE LEAVES (l408), WOODY / NON-WOODY (t804), CLIMBERS (t805), STORAGE ROOTS (j904).
-SCORE4: `[80.2, 0, 0, 0, 0]`, `[221.8, 1, 1, 0, 0]`, `[374.2, 2, 1, 1, 1]` (model times; the build uses the line marks `l:s604`, `l:j905`).
+SCORE4: `[80.2, 0, 0, 0, 0]`, `[221.8, 1, 1, 0, 0]`, `[374.9, 2, 1, 1, 1]` (model times; the build uses the line marks `l:s604`, `l:j905`).
 
 **Where each pose is used (in costume)**
 | Pose (one job) | Painting | Where |
@@ -595,14 +932,25 @@ the sweet potato micro-world; the day counter; the evidence cards; KNOWLEDGE LOG
   the creeping stem (facing the way it goes), down into the soil, into the plump orange root. Micro-world mode: no logo, no score.
 - **The sweet potato and the carrot** on the key-word card keep their leafy tops (so they read as roots of plants).
 - **The goat** (the "protects it from animals" picture): a cute, true-shaped goat sniffing the spines and stepping back, unhurt.
-- **GLITCH** (EP2-EP3's build): about Pip's height on his wheels, at the buddies' depth; mirrored only when he travels left; wheels turn as
+- **GLITCH** (EP2-EP3's build): about Pip's height on his wheels, at the buddies' depth, **at least 60 px clear of every buddy** (his arms,
+  tape roll and antenna included; `census.js` gap check); mirrored only when he travels left, his screen words drawn back the right way; wheels turn as
   he moves; out of the lift he faces the way he rolls; the chest panel is EP2's pop-out panel; his screen face clear of every bubble and
   comic word; the evidence pictures change one at a time, each held at least 0.8 s.
 - **The replay:** a film border and ¼ speed of Basil's own pick shot; nobody falls; his face is not covered by the bubble.
-- **Uncle Lim** (the teacher's paintings, long trousers): front views at his gate and by the rack; he does not walk across the floor (EP2's
-  rule); his gloves are code props. No kopi in this scene (he is gardening).
-- **The doctor costumes** (0d): the same in every shot; Momo's medal and neckerchief show under her coat; Pip's goggles stay on his cap;
-  Basil's badge on his coat. No helmets in EP4 (the costumes replace them for the clinic).
+- **Uncle Lim** (the teacher's paintings, long trousers): **on screen only for his own moment**, s601 and the re-potting (about 8 s): the
+  camera cuts to his gate as he steps out (front view); he re-pots Spike at the rack; he steps back in through his gate, facing his way,
+  while the camera is on Spike's labels (a soft gate clack off screen). He does not walk across the floor (EP2's rule); his gloves are
+  code props; no kopi (he is gardening). **Hint #1** (15b): the terracotta pot with a hole and the bag of gritty soil are already on his
+  rack when the trio arrive; his eyes flick to it on "Put here lah", the smallest knowing smile (0.5 s); nobody reacts. No badge, no gadget,
+  no agency named. Spike's family are never shown.
+- **The doctor costumes** (0d): the same in every shot; Momo's medal and neckerchief show under her coat (no stethoscope or pendant on
+  her); Pip's goggles stay painted on his cap; Basil's badge on his coat (its words drawn the right way round when he is mirrored). **No
+  bike helmets anywhere in EP4**, the score-bar chips and the thumbnail included; nothing stacked on a costume head piece.
+- **Words on screen** (the 28 Nov "font not clear" rule): every label, chip and card is dark ink on cream / white, or white / yellow with a
+  thick dark ink outline (8-12 px at 1080p), Atkinson 700, cap height about 40 px or more; the red traces' labels are dark ink on cream
+  chips joined by a plain line (no arrowheads). **Words on props never read mirrored:** Pip's CACTI book, Basil's badge, GLITCH's screen
+  and chest panel, the evidence cards, the sweet potato card, the clapperboard (`unflipText` in `x2held`); the banner, the 214 on the
+  lobby wall and the money-plant label are on the set and never flipped.
 - **Buddies stay together** (synergy rule 6): huddles, two- and three-shots, Basil at 0.88 of the others' height (SIZE_K). Two buddies under
   one pick card stand side by side, both faces clear, each with room for a bubble.
 
@@ -646,17 +994,18 @@ Lim's Singlish.
 ## 9. Length and pacing
 - **Series model** (README section 4, as EP3: Heart 2.9 words/s, 2.6 in the look-closers and the journey; buddies and Spike 2.7; GLITCH 2.6;
   Uncle Lim 2.4; all three 2.2; the card read 2.3; +0.35 s per extra sentence; 0.55 s after each line; 1.0 s between scenes; +2.0 s per key
-  word; lock-in 6.5 s; holds as written; the read-along, "Now you know!", the blooper and the sting as EP3 built them): **7:56**, 875 words,
+  word; lock-in 6.5 s; holds as written; the read-along, "Now you know!", the blooper and the sting as EP3 built them): **7:57** (v2.1; v2 7:56), 877 words,
   110 words a minute, voice on about 75%.
 - **Calibrated by the builds:** EP3 v2 built at 0.97 of its model (7:54 → 7:39), EP1 v2 and EP2 v2.1 at 0.95. On those ratios EP4 builds
-  at **about 7:33-7:42**, under the 8:00 cap.
+  at **about 7:34-7:43**, under the 8:00 cap. (v2.1 adds 0.7 s: g702 "Wait! We tested it over time." The red traces and the
+  shot plan play under the existing lines and holds: no time added.)
 - **Already cut while writing (about 72 s, from a 9:09 first draft):** the stem-cutting scene (Uncle Lim's "My money plant also start from
   one small cutting only. In a kopi bottle!" and Heart's definition: question 6), Momo's "But WHY would anyone tape leaves on a cactus?",
   GLITCH's "Leaves... detected?", Spike's "And the tape?", Heart's "Let's look at that again, in slow motion." and "Let's test them. Fix one
   first.", "Team high-five!", and shorter versions of 30 lines.
 - **If the first timeline is over 7:45, take these cuts in order** (never the look-closers, the journey, the think pauses, the bonus, the
-  card, the lock-in or GLITCH's sting): (1) the blooper (6.6 s; the sting then follows the outro); (2) t806, the creeper line (4.3 s; the
-  planter box keeps its "creeper" label); (3) c103, Heart's "Basil got his coat five minutes ago." (3.0 s); (4) s610, "You'll get the next
+  card, the lock-in or GLITCH's sting): (1) the blooper (6.6 s; the sting then follows the outro); (2) t806, the creeper line (about 3.3 s;
+  red trace 6b and the climber / creeper side by side stay, wordless, for 2 s); (3) c103, Heart's "Basil got his coat five minutes ago." (3.0 s); (4) s610, "You'll get the next
   one, Basil." (2.8 s); (5) f204-f205, the pun, its sad trombone and "Joke detected" (8.0 s; one sad trombone left); (6) g708 "...Tape:
   retired." (1.3 s; the outro still shows it). About 26 s in all.
 - **Pace by part:** a quick, funny cold open (the patient, "Not me", the cucumber), the fix cards and the two-on-one-card picks, a calm
@@ -675,7 +1024,7 @@ Lim's Singlish.
 
 ## 11. YouTube (one video)
 - **Title:** `This Cactus Is Loved Too Much! | Plants With Superpowers | P4 Science`
-- **Thumbnail (THUMBNAIL_V2):** Spike big on the right, leaning in his glossy pot with three bright plastic leaves taped on, a fed-up face on
+- **Thumbnail (THUMBNAIL_V2; no bike helmets, the doctor costumes):** Spike big on the right, leaning in his glossy pot with three bright plastic leaves taped on, a fed-up face on
   the pot; Pip big at the left in his teal scrubs and gloves, holding the tongs, with a "huh?" face; GLITCH small behind with a strip of
   tape. One word that asks: **LEAVES?** (sun-yellow, thick dark-violet stroke); a hot-orange background; a tiny "P4" chip; readable at
   320 px; nothing bottom right; no words over a face.
@@ -796,17 +1145,38 @@ tap: leaves / green stem) and the bonus (5:41: root / stem).
 19. **Pronunciation clips before voicing:** "cactus" / "cacti", "spine-like" (no pause at the hyphen), "non-woody" (not "N-O-N"),
     "butterfly pea", "Doctor Basil" (written out so the voice never reads "Dr" as "Drive"), and Uncle Lim's line ("Aiyoh... Put here lah...").
     **Recommended: one test clip for you first; add `sg_pron.py` entries only after your OK.**
-20. **Length:** 7:56 by the model, about 7:40 built. **Recommended: build as written; take the section 9 cuts in order only if the first
+20. **Length:** 7:57 by the model (v2.1), about 7:41 built. **Recommended: build as written; take the section 9 cuts in order only if the first
     timeline is over 7:45.**
 21. **Heart hint #4** ("...where are you, exactly?" "Right here."), with GLITCH out of the shot. **Recommended: keep.**
 22. **The titles:** in the video "The Prickly Patient!" (with "Plants with superpowers" under it); on YouTube "This Cactus Is Loved Too
     Much! | Plants With Superpowers | P4 Science". **Recommended: keep.**
+
+**New in v2.1 (the teacher's decisions of 28 Nov; each with a recommendation):**
+23. **OK with this Uncle Lim hint?** (his secret: a government agent, revealed in the P4 finale.) Hint #1 at s601 (about 3:21-3:25):
+    when the trio arrive, a terracotta pot WITH a drainage hole and a bag of gritty soil are already waiting on his rack, before anyone
+    has said a word about pots; on "Put here lah" his eyes flick to it and he gives the smallest knowing smile (0.5 s). Nobody reacts; no
+    badge, no gadget, nothing named; no extra time. **Recommended: A** as written. B: instead, a one-frame glint of a badge-shaped shape in
+    his shirt pocket as he bends to re-pot Spike. C: no hint in EP4.
+24. **GLITCH's log method for EP4.** Every log card now shows its number, lesson and "BEATEN BY: ..." (word for word as the vault's log),
+    and Pip names the method: g702 "Wait! Here's the data." becomes **"Wait! We tested it over time."** (+0.7 s). The vault's wording for
+    the method was "change one thing and watch the result"; Spike's cure changes three things at once (the pot, the light and the water),
+    so v2.1 words it **"Test it over time: try the fix, then watch and record what happens, day after day (the 21-day test: DAY 1 beside
+    DAY 21)"** and keeps "change one thing" for a later fair-test episode. **Recommended: A** as written (the vault log updated to match).
+    B: keep "Here's the data." and show the method on the card only.
+25. **Pip's goggles on his scrub cap.** Your doctor painting has his goggles on top of the scrub cap; with the new "never stack" rule,
+    v2.1 keeps them exactly as painted (nothing added by code, no helmet). **Recommended: A** keep the painting as it is. B: hide the
+    goggles in the clinic (code removes them from the cap in every pose).
 
 ## 15. Heart mystery log
 Row #4 (already planned in `P4-new-direction.md`; fill in the time at build):
 | # | Episode | Time | The hint |
 |---|---|---|---|
 | 4 | P4 EP4 "The Prickly Patient" | 4:02 by the model (at build) | Spike, new to the Help Desk, looks up and around the corridor for the voice: "Thank you, um... where are you, exactly?" Heart: "Right here." The logo-pill heart pulses once. Nobody reacts; GLITCH is not in the shot. |
+
+## 15b. Uncle Lim hint log (copy this row into the vault's `P4-new-direction.md`, "Uncle Lim hint log")
+| # | Episode | Time | The hint |
+|---|---|---|---|
+| 1 | P4 EP4 "The Prickly Patient" (script v2.1) | about 3:21-3:25 by the model (s601; set at build) | When the trio arrive with Spike, the right pot (terracotta, WITH a drainage hole) and a bag of gritty soil are already waiting on his rack, before anyone has said a word about pots; on "Put here lah" his eyes flick to it and he gives the smallest knowing smile. Nobody reacts. |
 
 ## 16. Build notes (from `../p4ep03/STATE.md`)
 **Reuse from `../p4ep03/`:** the engine (lib.js, common.js, closer.js, main.js, render.js with RENDER_OUT, song.js), the bubble layout
@@ -817,6 +1187,13 @@ dock, stutter and voices (`"glitch"`, `"glitch_sting"` at speed .86 and range .3
 `sg_pron.shape_particles`, the pigeon, the sad trombone and the humour bus, the comic sound words, the slow-motion replay (from
 `../p4ep01v2/`), the look-closer panel with a peeking face, the THINK card, the micro-world, the readable fix-card design, the day counter,
 the QA scans (ghost, facing, flicker, overlap, face_cover_scan with Spike's, GLITCH's and Uncle Lim's face boxes).
+**From EP3 v2 (the 28 Nov rules):** the director (`../p4ep03/census.js` → `plan_shots.py` → `director_p1.js`, `main.js` `dirAt`,
+`DHUD()` for the screen things; or `../kit/census.js`, `../kit/director.js`, `../kit/plan_shots.py`), seeded with section 5b's shot list
+and its hand-placed pushes (the red traces, the cards, the journey); `edgeTrace()` from EP3's `s3.js` generalised for the 13 traces
+(section 5c); the doctor sprites with no helmet anywhere (`BASIL_HELMET = false`, `PIP_HELMET = false`, EP2 v3's `costume.js` chips);
+`unflipText` in `x2held`. Checks before the render: `qa_gaps.py` on the census (GLITCH ≥ 60 px), Uncle Lim drawn only in s601 and the
+re-potting, `qa_helmets.js` (0), 0 mirrored words, `kit/bubble_layout.js` re-run; after: `python3 ../qa/hold_check.py <mp4>` (no hold
+over 10 s), stills every 2.5 s.
 **New:** the doctor sprite sets (the shared `../p4ep02/costume_bake.py` set plus `momo_doc_oops`, `pip_doc_laughing`, `momo_doc_laughing`,
 `basil_doc_worried`; any paintings from question 11 B replace them), Spike (6b), the corridor set and the
 lift, the plant rack and its plants, the re-potting, the cut-away cactus, the bonus chips and cut-away, the sweet potato micro-world, the
