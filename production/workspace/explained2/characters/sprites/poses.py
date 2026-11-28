@@ -55,7 +55,9 @@ POSES["momo_doc"] = {  # Momo as a DOCTOR (teacher, 27 Nov 2026, characters/teac
   "arms_crossed": ("momo_doctor_arms_crossed.jpg", None), "surprised": ("momo_doctor_surprised.jpg", None), "pointing": ("momo_doctor_pointing.jpg", None)}
 POSES["pip_doc"] = {  # Pip as a DOCTOR (teacher, 27 Nov 2026): teal scrubs and cap, orange goggles on the cap, stethoscope
   "arms_crossed": ("pip_doctor_arms_crossed.jpg", None), "pointing": ("pip_doctor_pointing.jpg", None), "surprised": ("pip_doctor_surprised.jpg", None)}
-SITREF = {"momo_nk": "momo_v2", "momo_doc": "momo_v2", "pip_doc": "pip", "pip_run": "pip", "momo_run": "momo_v2", "basil_run": "basil_v2"}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
+POSES["basil_doc"] = {  # Basil as a DOCTOR (teacher, 28 Nov 2026): white coat, stethoscope, "P4 LAB SCIENTIST" badge
+  "arms_crossed": ("basil_doctor_arms_crossed.jpg", None), "pointing": ("basil_doctor_pointing.jpg", None), "surprised": ("basil_doctor_surprised.jpg", None)}
+SITREF = {"momo_nk": "momo_v2", "momo_doc": "momo_v2", "pip_doc": "pip", "basil_doc": "basil_v2", "pip_run": "pip", "momo_run": "momo_v2", "basil_run": "basil_v2"}   # which sitting sprite sets the scale and foot line (default: the buddy's own; basil_c / momo_c: their coloured sets, *_c_sit.json, from align_set.py)
 SEAL = {("pip", "cheer"): 4, ("pip", "waving"): 4}   # Pip's cheer: the outline has a small break, the flood would empty the white belly
 HOLES = {("momo_run", "run_b"): [(483, 508)], ("momo_run", "run_a"): [(579, 540)], ("pip", "waving"): [(150, 590)], ("basil_c", "waving"): [(768, 342)], ("basil_v2", "cheer"): [(221, 473), (183, 303)]}   # paper showing through a closed gap (between tail and body): seed points in the output PNG
 FLIPX = {("momo_nk", "cheer")}   # painted facing the other way (tail on her left, knot on the right): mirrored to match momo_v2_cheer and her other poses

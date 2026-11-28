@@ -986,5 +986,50 @@
    "body_h": 809,
    "hips_above_feet": 6
   }
+ },
+ "basil_doc": {
+  "arms_crossed": {
+   "file": "poses/basil_doc_arms_crossed.png",
+   "src": "basil_doctor_arms_crossed.jpg",
+   "anchor": [
+    463.4,
+    815.0
+   ],
+   "scale": 0.8433,
+   "size": [
+    770,
+    839
+   ]
+  },
+  "pointing": {
+   "file": "poses/basil_doc_pointing.png",
+   "src": "basil_doctor_pointing.jpg",
+   "anchor": [
+    461.3,
+    815.0
+   ],
+   "scale": 0.8433,
+   "size": [
+    835,
+    839
+   ]
+  },
+  "surprised": {
+   "file": "poses/basil_doc_surprised.png",
+   "src": "basil_doctor_surprised.jpg",
+   "anchor": [
+    463.4,
+    815.0
+   ],
+   "scale": 0.8424,
+   "size": [
+    817,
+    839
+   ]
+  },
+  "_sit": {
+   "body_h": 791,
+   "hips_above_feet": 6
+  }
  }
 }
