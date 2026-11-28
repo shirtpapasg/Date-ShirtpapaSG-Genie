@@ -53,7 +53,7 @@ def V(find):
     F = find; S = []
     S.append(dict(clip="phone_title", t=.4, d=2.75, vo=[("watch", .2)], caps=[("Watching is fun.", .15, 1.3, "top"), ("Playing is [BETTER!]", 1.3, 2.75, "top")]))
     tl = F("phone_ep19", "sfx:lock")
-    S.append(dict(clip="phone_ep19", t=tl - 1.5, d=4.6, vo=[("beat", 3.3)], caps=[("Tap. [Lock it in!]", 0, 3.2, "top"), ("[Beat the Buddies!]", 3.2, 4.6, "top")]))
+    S.append(dict(clip="phone_ep19", t=tl - 1.2, d=5.0, vo=[("beat", 3.95)], caps=[("Tap. [Lock it in!]", 0, 3.85, "top"), ("[Beat the Buddies!]", 3.85, 5.0, "top")]))   # ends after the score bar counts YOU 1
     th = F("phone_ep05", "sfx:hold")
     S.append(dict(clip="phone_ep05", t=th - 2.0, d=3.4, vo=[("holdon", .25)], caps=[("Hear a mistake?", .2, 1.2, "top"), ("Shout [HOLD ON!]", 1.2, 3.4, "top")]))
     ts = F("phone_ep19", "sfx:fanfare", 0)
@@ -73,7 +73,7 @@ def end_at(segs):
     return next(s["at"] for s in segs if s.get("end"))
 
 CUTS = {
-    "h": dict(size=(1920, 1080), segs=H, out="pbq_p3_promo_16x9", capsize=74, capw=1500, pos={"top": (960, 122), "mid": (960, 470), "low": (960, 760), "panel": (960, 962)},
+    "h": dict(size=(1920, 1080), segs=H, out="pbq_p3_promo_16x9", capsize=74, capw=1500, pos={"top": (960, 132), "mid": (960, 470), "low": (960, 760), "panel": (960, 962)},
               tapscale=lambda d: (1920 / d["w"], 1080 / d["h"]), tapr=46, sfxdb=-5, gvodb=-1, musdb=-9, duckdb=10, hit=end_at),
     "v": dict(size=(1080, 1920), segs=V, out="pbq_p3_promo_9x16", capsize=76, capw=820, pos={"top": (540, 382)},
               frame=dict(top=480, scale=(1920 - 480) / 1920, logo_y=None),   # no brand line: the top 14 % is under the apps' buttons
