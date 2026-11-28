@@ -138,3 +138,18 @@ Review material (scratchpad `p4ep02review/`, 960 px with sound, not committed): 
   bit-identical): spans 20-70, 90-100, 120-130, 240-290, 300-320, 350-370 s; then 120-130, 310-340, 360-400 s. -16.0 LUFS, -2.4 dBTP.
   face_cover_scan and overlap.js re-run on every changed span: only the by-design runs (the pick cards rising past the faces for one frame,
   the FOUND IT stamp over the card's own small Chilli). sheet.png, key_frames.jpg and the five review clips remade from the final file.
+
+## Fix pass 2: bubbles next to their speaker, one 214 (28 Nov 2026; the teacher on the LIVE EP2 E-HFXLaeP94; NOT uploaded)
+The teacher: "bring the speech bubble closer to the characters" / "speech bubbles too far off" (Chilli's c102 bubble at the top of the
+frame, Basil's u405 by the notice board) and "also, one block number 214 will do" (three plaques on the void deck pillars).
+- **Bubbles:** every say() bubble page (110 of the 111; the chant u1300 has no speaker on screen) is now placed by `../kit/bubble_layout.js`
+  (writes `bubplace_p1.js`; build_part.sh runs it before the render) and drawn there by lib.js bubble() through `../kit/bubbles.js`: just
+  above or beside the speaker's head, the tail from the nearest edge aimed at the mouth (tails 22-62 px), clear of every face, card, word
+  and data-obst mark, inside the frame, a narrower wrap where it fits better (34 pages), a line's pages kept in one spot. 103 pages moved
+  more than 40 px (83 more than 150 px; mean 348 px). Chilli's head for the layout is the whole plant (bubbles go above the leaves, not on
+  them). Guest face boxes carry `data-face` (chilliFaceBox, glitchFaceBox, limHeadBox). Two scene items moved to make room: the 0 LEAKS
+  label (p2.js, 1720,600 -> 1420,610, off GLITCH's head) and the FOUND IT card (p3.js, 560 -> 690, so GLITCH's r708 bubble fits above him).
+- **214:** artp4.js BG.vdp4 (and so vdv2) puts the plaque on the middle pillar only (`VD_PLAQUE_X = 1080`; plaque x 1096-1184, y 220-280);
+  bg/vdp4.png and bg/vdv2.png re-baked (bake.js vdp4 vdv2; _grain.png kept). BG_OBST marks it, main.js bg() adds the invisible mark.
+- **Render:** one full picture render (`out/run_fix.sh`, flock), muxed with the LIVE file's audio stream COPIED (the sound is bit-identical;
+  no song.js / mix rebuild). The live cut is kept as `p4ep02_live_E-HFXLaeP94.mp4`.

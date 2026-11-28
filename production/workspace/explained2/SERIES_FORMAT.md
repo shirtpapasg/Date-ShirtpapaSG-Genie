@@ -467,6 +467,14 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
     - No face is ever covered (from P4 EP1 v2, 2026-11-26): no speech bubble, caption pill, card, comic sound-word or sprite sits on
       ANY face, whether a buddy's, a side character's (Uncle Lim, the snail, Chilli) or a troublemaker's. A bubble grows upwards or
       sideways from its speaker, never down over a head. QA on every build: `qa/face_cover_scan.js` over the whole video at 5 fps.
+    - **Bubbles sit next to their speaker** (teacher, 28 Nov 2026, on the live P4 EP2: "bring the speech bubble closer to the
+      characters" / "speech bubbles too far off"): just above (or beside) the speaker's head with a SHORT tail pointing at the mouth,
+      never parked at the top of the frame. Done by `kit/bubble_layout.js` (writes `bubplace_p<part>.js`, run by build_part.sh before
+      the render) + `kit/bubbles.js` (read by lib.js bubble()); scenes' own x, y are only the fallback. The layout keeps every bubble
+      off every face, card, word and `data-obst` mark, inside the frame, wraps it narrower when that fits better, and keeps a line's
+      pages in one spot. Engine from P4 EP2 on (copy `p4ep02/`: lib.js, main.js, page.html, ep2art.js / limv2.js face boxes).
+    - **Set dressing is not repeated** (same day: "one block number 214 will do"): one block-number plaque per void deck (the middle
+      pillar, `VD_PLAQUE_X` in artp4.js), marked `data-obst` so no bubble covers it.
     - A buddy that changes place inside a scene glides there (EP25 P1 holdon: Basil to the side of the countdown and back).
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**
