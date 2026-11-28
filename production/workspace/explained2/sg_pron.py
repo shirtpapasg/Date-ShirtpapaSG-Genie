@@ -40,6 +40,12 @@ FIX = {
     # exclamation. Kokoro's own "Aiyoh" is "ˈeɪjoʊ" ("AY-yo", as in "day"); the Singapore sound is "EYE-yoh". Its falling tune is added after
     # recording by shape_particles() below (SG_PARTICLES), not here.
     "Aiyoh": {"ph": "ˈaɪjˌoʊ"},
+    # P4 EP3 (Opus, 2026-11-28; the script's question 17; WAITING FOR THE TEACHER'S LISTEN, clips pron_clips/p4ep03_*.mp3):
+    # Kokoro's own "pandan" is "pˈændən" ("PAN-dun"); the Singapore sound is "PAHN-dahn" (both vowels open, as in "father").
+    "pandan": {"ph": "pˈɑːndˌɑːn"},
+    # Kokoro's own "hibiscus" is "hˈɪbɪskəs" (stress on the first syllable, "HIB-is-kus"); the dictionary's is "hy-BIS-kus".
+    "hibiscus": {"ph": "haɪbˈɪskəs"},
+    # "jagged": NO entry. Kokoro's own is "dʒˈæɡᵻd" ("JAG-id", the adjective), already right (checked 28 Nov 2026).
     # "cicada": NO entry. The teacher listened (23 Nov 2026, EP18 clip) and chose Kokoro's own "sih-KAY-duh" over "sih-KAH-duh".
 }
 _tok = None

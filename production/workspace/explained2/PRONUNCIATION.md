@@ -44,3 +44,13 @@ Singlish for a guest (P4 EP1 v2, 26 Nov 2026, Opus): Uncle Lim's two lines are "
 Slowly, slowly also can win one, mah. Every part working together!". "where got" and the emphatic "one" are left to Kokoro (ordinary English
 sounds; Kokoro: wˌɛɹ ɡɑːt, wˌʌn). In code: a "lim" line is recorded as usual, aligned, then `shape_particles(audio, sr, words)` reshapes every
 particle in `SG_PARTICLES` (p4ep01v2/make_voice.py); "Aiyoh" also has a FIX entry for its sound. Reuse for any later Singlish-speaking guest.
+
+P4 EP3 (28 Nov 2026, Opus; the script's question 17; **waiting for the teacher's listen**, clips `pron_clips/p4ep03_pandan_test.mp3`,
+`p4ep03_hibiscus_test.mp3`, `p4ep03_jagged_test.mp3`, `p4ep03_UncleLim_test.mp3`, each: Kokoro's own, then the fix, then the episode's lines):
+- "pandan": Kokoro said pˈændən (PAN-dun); now a FIX entry pˈɑːndˌɑːn (the Singapore PAHN-dahn).
+- "hibiscus": Kokoro said hˈɪbɪskəs (HIB-is-kus); now a FIX entry haɪbˈɪskəs (hy-BIS-kus).
+- "jagged": left to Kokoro (dʒˈæɡᵻd, JAG-id, the adjective).
+- Uncle Lim, "Aiyoh. Leaf drop already, cannot stick back one lah. The plant grows new leaves. Slowly, slowly.": the EP1 v2 recipe
+  (FIX "Aiyoh" + shape_particles on "Aiyoh." and "lah.").
+Measured, not only listened: pocketsphinx chose between the two spellings of each word on every use in the episode (15 of 15 heard as
+intended) after moving the child or robot voice to an adult range; scripts in the P4 EP3 build notes (`p4ep03/STATE.md`).

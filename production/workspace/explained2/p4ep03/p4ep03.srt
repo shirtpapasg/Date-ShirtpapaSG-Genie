@@ -1,0 +1,743 @@
+1
+00:00:00,310 --> 00:00:01,620
+A leaf with no owner!
+
+2
+00:00:02,010 --> 00:00:04,260
+Finally, a case for Detective Basil.
+
+3
+00:00:04,650 --> 00:00:06,340
+I'm an expert at detecting.
+
+4
+00:00:06,499 --> 00:00:08,189
+But WHY is it on our desk?
+
+5
+00:00:08,470 --> 00:00:10,119
+It isn't Chilli's leaf.
+
+6
+00:00:11,289 --> 00:00:13,499
+Fallen leaf detected.
+
+7
+00:00:13,729 --> 00:00:15,259
+Colour: green.
+
+8
+00:00:15,599 --> 00:00:16,999
+Size: big.
+
+9
+00:00:17,339 --> 00:00:19,569
+Owner: the mango tree.
+
+10
+00:00:20,544 --> 00:00:21,235
+GLITCH!
+
+11
+00:00:21,624 --> 00:00:23,904
+Did you tape THAT leaf onto the pandan?
+
+12
+00:00:24,378 --> 00:00:25,448
+Correct.
+
+13
+00:00:25,758 --> 00:00:28,319
+Lost property must be returned.
+
+14
+00:00:28,628 --> 00:00:29,948
+Efficiently.
+
+15
+00:00:30,298 --> 00:00:31,148
+Hold it!
+
+16
+00:00:31,438 --> 00:00:35,498
+Nobody tapes anything until Detective Basil cracks the case!
+
+17
+00:00:35,887 --> 00:00:37,657
+The Case of the Mystery Leaf!
+
+18
+00:00:38,085 --> 00:00:39,835
+Every case needs a witness.
+
+19
+00:00:40,115 --> 00:00:42,355
+Our old friend the snail saw everything.
+
+20
+00:00:42,635 --> 00:00:44,265
+It's hiding in this video.
+
+21
+00:00:44,515 --> 00:00:45,755
+Can you spot it?
+
+22
+00:00:46,329 --> 00:00:47,769
+The King of the Void Deck.
+
+23
+00:00:48,039 --> 00:00:49,539
+He still has my crown.
+
+24
+00:00:49,885 --> 00:00:51,055
+Clue one: the colour.
+
+25
+00:00:51,565 --> 00:00:53,505
+Let's match its exact green.
+
+26
+00:00:53,856 --> 00:00:55,356
+Clue two: the size.
+
+27
+00:00:55,736 --> 00:00:57,676
+Careful scientists measure!
+
+28
+00:00:58,029 --> 00:00:59,529
+Clue three: read the leaf.
+
+29
+00:00:59,839 --> 00:01:01,159
+Every part is a clue.
+
+30
+00:01:01,499 --> 00:01:02,639
+Leaf it to me!
+
+31
+00:01:04,017 --> 00:01:05,697
+Joke detected.
+
+32
+00:01:05,977 --> 00:01:07,737
+Laughter: zero.
+
+33
+00:01:08,091 --> 00:01:09,701
+Which clue cracks the case?
+
+34
+00:01:09,991 --> 00:01:12,111
+Show me one, two or three fingers!
+
+35
+00:01:20,733 --> 00:01:22,043
+Team high-five!
+
+36
+00:01:23,513 --> 00:01:24,663
+Let's test them!
+
+37
+00:01:24,953 --> 00:01:26,183
+Clue one first.
+
+38
+00:01:29,364 --> 00:01:29,854
+Green.
+
+39
+00:01:30,544 --> 00:01:31,024
+Green.
+
+40
+00:01:31,714 --> 00:01:32,494
+And...
+
+41
+00:01:32,794 --> 00:01:33,264
+green.
+
+42
+00:01:33,954 --> 00:01:35,294
+They're ALL green!
+
+43
+00:01:36,464 --> 00:01:37,964
+Recalculating.
+
+44
+00:01:38,244 --> 00:01:41,094
+The leaf belongs to all three plants.
+
+45
+00:01:42,427 --> 00:01:44,877
+Um... a leaf can only come from one plant.
+
+46
+00:01:45,230 --> 00:01:49,450
+Most leaves are green, so colour alone cannot tell these three apart.
+
+47
+00:01:50,188 --> 00:01:52,318
+Every suspect has the same alibi.
+
+48
+00:01:53,472 --> 00:01:54,562
+Clue two.
+
+49
+00:01:54,942 --> 00:01:57,812
+The mango tree is the biggest plant, so it must have the
+
+50
+00:01:57,832 --> 00:01:59,072
+biggest leaves.
+
+51
+00:01:59,425 --> 00:02:00,465
+Agreed.
+
+52
+00:02:00,845 --> 00:02:02,945
+Big tree, big leaf.
+
+53
+00:02:03,299 --> 00:02:04,259
+...Oh no.
+
+54
+00:02:04,809 --> 00:02:06,439
+GLITCH agrees with me.
+
+55
+00:02:08,809 --> 00:02:10,008
+One is bigger.
+
+56
+00:02:10,459 --> 00:02:11,329
+One is smaller.
+
+57
+00:02:11,349 --> 00:02:11,728
+Um...
+
+58
+00:02:13,439 --> 00:02:14,739
+that doesn't help.
+
+59
+00:02:16,913 --> 00:02:17,553
+Pip!
+
+60
+00:02:17,943 --> 00:02:20,803
+The little pandan plant has the longest leaves of all!
+
+61
+00:02:21,531 --> 00:02:24,061
+Let's look at that again, in slow motion.
+
+62
+00:02:26,242 --> 00:02:29,992
+Leaves on one plant come in different sizes, and a small plant
+
+63
+00:02:30,012 --> 00:02:31,492
+can have long leaves.
+
+64
+00:02:31,762 --> 00:02:33,471
+So size is a weak clue.
+
+65
+00:02:34,893 --> 00:02:37,593
+Look closer, the way a scientist does.
+
+66
+00:02:37,957 --> 00:02:40,187
+The flat, wide part is the leaf blade.
+
+67
+00:02:40,617 --> 00:02:43,697
+It's usually the biggest part of a leaf, and its edge gives
+
+68
+00:02:43,717 --> 00:02:45,047
+the leaf its shape.
+
+69
+00:02:46,146 --> 00:02:48,366
+This thin part is the leaf stalk.
+
+70
+00:02:48,746 --> 00:02:51,356
+The leaf stalk attaches the leaf to the stem.
+
+71
+00:02:52,453 --> 00:02:56,183
+From the leaf stalk, the main vein runs down the middle, and
+
+72
+00:02:56,203 --> 00:02:58,433
+it branches into smaller veins.
+
+73
+00:02:59,021 --> 00:03:01,001
+But WHERE do all the little veins go?
+
+74
+00:03:01,391 --> 00:03:02,661
+They're everywhere!
+
+75
+00:03:03,011 --> 00:03:05,831
+Be a drop of water, on your way into a leaf.
+
+76
+00:03:06,111 --> 00:03:07,091
+Shrink down.
+
+77
+00:03:07,371 --> 00:03:08,301
+Quietly.
+
+78
+00:03:09,665 --> 00:03:11,775
+Last time, you rode up a stem.
+
+79
+00:03:12,555 --> 00:03:16,745
+This time, you slide into the leaf stalk, a narrow green tunnel.
+
+80
+00:03:16,894 --> 00:03:20,514
+Now you are in the main vein, the widest path, running down
+
+81
+00:03:20,534 --> 00:03:21,154
+the middle.
+
+82
+00:03:21,298 --> 00:03:23,368
+Paths branch off on both sides.
+
+83
+00:03:24,138 --> 00:03:27,648
+You take one, then a smaller one, then a smaller one still.
+
+84
+00:03:27,790 --> 00:03:31,580
+They split and join, all over the leaf blade, like a net.
+
+85
+00:03:33,057 --> 00:03:35,917
+So veins that split and join like a net are called net
+
+86
+00:03:35,937 --> 00:03:36,897
+veins!
+
+87
+00:03:38,680 --> 00:03:40,620
+Suspect one: the pandan plant.
+
+88
+00:03:40,840 --> 00:03:44,170
+Its veins run side by side, from one end to the other.
+
+89
+00:03:44,517 --> 00:03:46,507
+Like the lanes on a running track!
+
+90
+00:03:46,807 --> 00:03:49,357
+Veins like that are called parallel veins.
+
+91
+00:03:50,462 --> 00:03:54,482
+Our mystery leaf has net veins, so the pandan plant is cleared.
+
+92
+00:03:55,072 --> 00:03:57,052
+And it smells like pandan cake.
+
+93
+00:03:57,272 --> 00:03:58,562
+Sorry, pandan.
+
+94
+00:03:58,832 --> 00:04:00,192
+You're free to go.
+
+95
+00:04:00,540 --> 00:04:02,720
+Suspect two: the mango tree.
+
+96
+00:04:03,110 --> 00:04:05,150
+Its leaves have net veins too!
+
+97
+00:04:05,496 --> 00:04:06,496
+Net veins!
+
+98
+00:04:06,746 --> 00:04:08,196
+The mango tree did it!
+
+99
+00:04:08,457 --> 00:04:09,626
+CASE CLOSED!
+
+100
+00:04:09,796 --> 00:04:10,886
+Mango.
+
+101
+00:04:11,186 --> 00:04:13,066
+As I calculated.
+
+102
+00:04:13,420 --> 00:04:13,940
+Um...
+
+103
+00:04:14,650 --> 00:04:15,430
+Basil?
+
+104
+00:04:15,980 --> 00:04:18,070
+Two suspects have net veins.
+
+105
+00:04:18,480 --> 00:04:20,260
+And you're agreeing with GLITCH.
+
+106
+00:04:21,635 --> 00:04:23,964
+Basil is not an expert at waiting.
+
+107
+00:04:24,311 --> 00:04:25,071
+Case...
+
+108
+00:04:25,431 --> 00:04:26,421
+not closed.
+
+109
+00:04:26,741 --> 00:04:27,951
+Good catch, Pip.
+
+110
+00:04:28,300 --> 00:04:31,580
+But WHY does the mango leaf feel smooth all the way round,
+
+111
+00:04:31,600 --> 00:04:33,190
+and ours feels bumpy?
+
+112
+00:04:36,360 --> 00:04:38,380
+The mango leaf has a straight edge.
+
+113
+00:04:38,650 --> 00:04:42,010
+The mystery leaf has a jagged edge, like tiny teeth.
+
+114
+00:04:42,280 --> 00:04:43,950
+The mango tree is cleared.
+
+115
+00:04:44,597 --> 00:04:46,337
+Suspect three: the hibiscus.
+
+116
+00:04:46,567 --> 00:04:49,707
+Net veins, a jagged edge, and the same oval shape with a
+
+117
+00:04:49,727 --> 00:04:50,887
+pointed tip.
+
+118
+00:04:53,064 --> 00:04:54,424
+Every clue matches.
+
+119
+00:04:54,684 --> 00:04:57,054
+The hibiscus dropped the mystery leaf!
+
+120
+00:04:57,550 --> 00:04:59,030
+NOW it's case closed!
+
+121
+00:05:00,890 --> 00:05:02,200
+Incorrect.
+
+122
+00:05:02,460 --> 00:05:04,590
+My scan said mango.
+
+123
+00:05:04,840 --> 00:05:06,350
+Show me the data.
+
+124
+00:05:06,700 --> 00:05:07,850
+Here's the data.
+
+125
+00:05:10,421 --> 00:05:12,341
+Pandan: parallel veins.
+
+126
+00:05:12,591 --> 00:05:14,241
+Mango: a straight edge.
+
+127
+00:05:14,621 --> 00:05:16,941
+Hibiscus: every clue matches.
+
+128
+00:05:18,469 --> 00:05:19,139
+Error.
+
+129
+00:05:19,659 --> 00:05:21,289
+Colour: the same.
+
+130
+00:05:21,559 --> 00:05:23,149
+Size: different.
+
+131
+00:05:23,419 --> 00:05:24,199
+Owner...
+
+132
+00:05:24,769 --> 00:05:26,009
+hibiscus.
+
+133
+00:05:26,478 --> 00:05:27,308
+You rushed.
+
+134
+00:05:27,638 --> 00:05:28,678
+I rushed too.
+
+135
+00:05:29,008 --> 00:05:31,028
+A good detective reads every clue.
+
+136
+00:05:31,376 --> 00:05:32,436
+Updating!
+
+137
+00:05:32,806 --> 00:05:36,186
+Lesson stored: read a leaf by its parts.
+
+138
+00:05:36,426 --> 00:05:39,086
+Colour and size: weak clues.
+
+139
+00:05:39,845 --> 00:05:42,855
+Returning lost property to the hibiscus!
+
+140
+00:05:43,325 --> 00:05:44,185
+Aiyoh.
+
+141
+00:05:44,505 --> 00:05:48,005
+Leaf drop already, cannot stick back one lah.
+
+142
+00:05:48,345 --> 00:05:50,615
+The plant grows new leaves.
+
+143
+00:05:50,955 --> 00:05:52,725
+Slowly, slowly.
+
+144
+00:05:53,189 --> 00:05:54,779
+...Removing tape.
+
+145
+00:05:57,416 --> 00:05:58,846
+Did you spot the snail?
+
+146
+00:05:59,116 --> 00:06:01,806
+Just now, it was under a hibiscus leaf!
+
+147
+00:06:02,152 --> 00:06:06,192
+Snails eat leaves, and a snail's tongue has thousands of tiny teeth!
+
+148
+00:06:06,544 --> 00:06:09,064
+Our witness was sitting on the answer all along.
+
+149
+00:06:09,412 --> 00:06:10,692
+Tell someone at home!
+
+150
+00:06:10,971 --> 00:06:13,371
+Now, here are the words that earn marks.
+
+151
+00:06:13,428 --> 00:06:14,638
+Say it with me!
+
+152
+00:06:15,353 --> 00:06:17,843
+The main parts of a leaf are the leaf blade, the leaf
+
+153
+00:06:17,863 --> 00:06:20,823
+stalk, the main vein and the smaller veins.
+
+154
+00:06:21,143 --> 00:06:23,353
+The leaf stalk attaches the leaf to the stem.
+
+155
+00:06:23,373 --> 00:06:27,193
+The veins can be arranged in a parallel pattern or a net
+
+156
+00:06:27,213 --> 00:06:28,083
+pattern.
+
+157
+00:06:30,784 --> 00:06:33,064
+Fallen leaf detected.
+
+158
+00:06:33,416 --> 00:06:34,376
+And whose is it?
+
+159
+00:06:35,153 --> 00:06:36,503
+Net veins.
+
+160
+00:06:36,833 --> 00:06:38,343
+Jagged edge.
+
+161
+00:06:38,633 --> 00:06:39,873
+Hibiscus.
+
+162
+00:06:40,083 --> 00:06:42,153
+And it stays on the ground.
+
+163
+00:06:42,543 --> 00:06:45,013
+Basil, am I shorter than a pandan leaf?
+
+164
+00:06:45,371 --> 00:06:46,491
+Case closed.
+
+165
+00:06:46,958 --> 00:06:48,178
+Picked clue three?
+
+166
+00:06:48,468 --> 00:06:50,648
+You win a point, and so does Basil!
+
+167
+00:06:53,818 --> 00:06:55,068
+...Not me.
+
+168
+00:06:55,419 --> 00:06:58,369
+Next time, a prickly customer at the Help Desk!
+
+169
+00:06:58,957 --> 00:07:01,157
+Let's read today's key words together!
+
+170
+00:07:01,447 --> 00:07:02,207
+Ready?
+
+171
+00:07:02,494 --> 00:07:03,564
+Leaf blade.
+
+172
+00:07:05,042 --> 00:07:06,122
+Leaf stalk.
+
+173
+00:07:07,600 --> 00:07:08,720
+Net veins.
+
+174
+00:07:10,274 --> 00:07:11,584
+Parallel veins.
+
+175
+00:07:13,342 --> 00:07:14,282
+Well done!
+
+176
+00:07:15,264 --> 00:07:16,368
+Say it with us!
+
+177
+00:07:17,168 --> 00:07:17,918
+Ready?
+
+178
+00:07:18,041 --> 00:07:18,701
+One!
+
+179
+00:07:19,041 --> 00:07:19,741
+two!
+
+180
+00:07:20,046 --> 00:07:21,221
+Now you know!
+
+181
+00:07:25,631 --> 00:07:26,771
+Case closed!
+
+182
+00:07:27,677 --> 00:07:28,547
+Basil.
+
+183
+00:07:28,887 --> 00:07:30,034
+The evidence.
+
+184
+00:07:30,054 --> 00:07:31,313
+...Case reopened.
+
+185
+00:07:31,333 --> 00:07:32,463
+Take two!
+
+186
+00:07:36,351 --> 00:07:38,771
+New knowledge acquired.
