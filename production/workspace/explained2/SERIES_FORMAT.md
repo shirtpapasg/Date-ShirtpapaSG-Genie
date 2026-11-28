@@ -472,9 +472,12 @@ they explain / teach scientific terms." From EP14 (a trial; if the teacher likes
       never parked at the top of the frame. Done by `kit/bubble_layout.js` (writes `bubplace_p<part>.js`, run by build_part.sh before
       the render) + `kit/bubbles.js` (read by lib.js bubble()); scenes' own x, y are only the fallback. The layout keeps every bubble
       off every face, card, word and `data-obst` mark, inside the frame, wraps it narrower when that fits better, and keeps a line's
-      pages in one spot. Engine from P4 EP2 on (copy `p4ep02/`: lib.js, main.js, page.html, ep2art.js / limv2.js face boxes).
-    - **Set dressing is not repeated** (same day: "one block number 214 will do"): one block-number plaque per void deck (the middle
-      pillar, `VD_PLAQUE_X` in artp4.js), marked `data-obst` so no bubble covers it.
+      pages in one spot. Engine from P4 EP2 on (copy `p4ep02/`: lib.js, main.js, page.html, ep2art.js / limv2.js face boxes); P4 EP1
+      v2 has it too (28 Nov). A code-drawn side character needs an invisible `data-face` box (the snail: artv2.js snailV2). When a
+      scene item sits where the speaker's bubble belongs (a label, a small card over the head), move the item, not the bubble.
+    - **Set dressing is not repeated** (same day: "one block number 214 will do"): ONE block-number plaque per set, marked
+      `data-obst` so no bubble covers it: the void deck's middle pillar (`VD_PLAQUE_X` in artp4.js), the ramp's middle pillar
+      (`RAMP_PLAQUE_X`), a scrolling wall ONE world pillar only (`TRACK_PLAQUE` in P4 EP1 artv2.js trackV2).
     - A buddy that changes place inside a scene glides there (EP25 P1 holdon: Basil to the side of the countdown and back).
 - **Idle life:** breathing, a slight sway, leaning towards the action, blinks.
 - **Talking:**

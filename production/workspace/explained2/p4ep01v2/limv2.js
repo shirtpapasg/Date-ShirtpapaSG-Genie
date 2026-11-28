@@ -123,7 +123,7 @@ function limTorsoFront(back) { let s = `<path d="M-80 -620 Q-90 -520 -72 -418 Q0
 const LIM_PAINTED = true;
 const limUse = (key, extra = "") => { const S = SPR["lim_" + key]; return `<g transform="scale(${S.scale}) translate(${-S.ax} ${-S.ay})"><use href="#s_lim_${key}"/>${extra}</g>`; };
 // an invisible box over his face (QA: qa/face_cover_scan.js finds it by this function's name); no pixels
-function limHeadBox(key) { const S = SPR["lim_" + key]; if (!S || !S.face) return ""; const [x, y, w, h] = S.face; return `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="none"/>`; }
+function limHeadBox(key) { const S = SPR["lim_" + key]; if (!S || !S.face) return ""; const [x, y, w, h] = S.face; return `<rect data-face="lim" x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="none"/>`; }
 // the code wheel behind a painted tyre: a grey rim and thin grey spokes turning, a hub (the painting's look)
 const limSpokes = (r, rot) => { let s = `<circle r="${n2(r)}" fill="none" stroke="#A9B0B8" stroke-width="${n2(r * .07)}"/><circle r="${n2(r * .93)}" fill="none" stroke="#6E7681" stroke-width="2"/>`;
   for (let i = 0; i < 16; i++) { const a = rot + i * Math.PI / 8; s += `<path d="M${n2(Math.cos(a) * r * .12)} ${n2(Math.sin(a) * r * .12)} L${n2(Math.cos(a + .18) * r * .95)} ${n2(Math.sin(a + .18) * r * .95)}" stroke="#9AA1AA" stroke-width="2.4"/>`; }

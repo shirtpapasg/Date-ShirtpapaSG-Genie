@@ -252,3 +252,32 @@ a little further back on the chain). Hint #2 checked in the video at frames 9921
   normalisation to -16 LUFS; range -1.3 to +0.7). `out/humour_report.json` (HUMOUR_REPORT=1) lists every event's gain.
 - Review: scratchpad p4items/loud_humour.mp4 (30 s: the pigeons and the sad trombone at the bell, the snail-cam replay and "LIGHTER!"
   trombone, the toot and the 3:33 trombone).
+
+## Fix pass 9: bubbles next to their speaker, one 214 per set (28 Nov 2026; the teacher on P4 EP2, "yes" to the same fix on EP1; LIVE EP1 = XkBQqzYyMdM = `p4ep01v2_loud.mp4`; NOT uploaded)
+The teacher on EP2: "bring the speech bubble closer to the characters" / "speech bubbles too far off" / "one block number 214 will do",
+then yes to fixing EP1 too. EP1 had bubbles parked at fixed spots near the top (`_BUBAT`) and 214 on every pillar (vdp4/vdv2 3, rampv2 3,
+the runaway track's every pillar). Built on the live version (fix pass 8 + the loud-humour mix: scarf, runs, KOOs, trombones, trousers).
+- **Bubbles:** the P4 EP2 engine copied in: lib.js bubble()/say() (o.bkey / o.who, the layout's spot and wrap), main.js bg() + bgMarks()
+  (data-obst), page.html (../kit/bubbles.js + bubplace_p1.js), limv2.js limHeadBox data-face="lim", artv2.js snailV2 an invisible
+  data-face="snail" box, build_part.sh runs `../kit/bubble_layout.js`. 76 of 77 say() pages placed (the chant u1300 has no speaker on
+  screen); 75 moved more than 40 px (57 more than 150 px; mean 258 px); tails 22-60 px; 10 pages wrapped narrower.
+  Lines without a say() bubble (battle cries, refrains, "Um...", comic words) are unchanged.
+- **Scene items moved to make room:** p3.js the THINK card's small fix card 3 up (y 520 -> 330) so Pip's v1007 bubble sits just above his
+  head, not on "cannot move" (the old bubble covered Pip's chin); p2.js the bell label "bell: warns people you are coming" 140 px right
+  (off the 214); p2.js runaway D: x2said("k610"), so "It can't stop!" ends at the cut instead of lingering beside Basil.
+- **214, one per set:** void deck (vdp4 -> vdv2) the middle pillar (`VD_PLAQUE_X = 1080`, as EP2); the ramp the middle pillar
+  (`RAMP_PLAQUE_X = 900`, artp4.js; plaque x 916-1004, y 220-280); the runaway track ONE world pillar (`TRACK_PLAQUE = 1` in artv2.js
+  trackV2: centre of the wall when the shot starts, it scrolls off to the left), with its own data-obst mark. BG_OBST marks vdp4, vdv2,
+  rampv2. bg/vdp4.png, vdv2.png, rampv2.png re-baked (bake.js; _grain.png and manifest.js restored from before the bake).
+- **Render:** `out/run_fix.sh` (layout, then a full picture render on the shared lock with chunks + joined video in RAM:
+  `RENDER_OUT=/dev/shm/p4ep01fix`, render.js reads it; Chromium /dev/shm as in EP2), muxed with the LIVE file's audio stream COPIED.
+- **Result (28 Nov, two full renders of 860 s each; the second after the bell label moved):** `p4ep01v2_fix.mp4` 1920x1080, 30 fps,
+  13086 frames = 7:16.2 (as live), decode 0 errors; audio stream md5 732ed80971ee808d71dee27d6d643bcd = the live file's (bit-identical);
+  -16.0 LUFS, true peak -2.4 dBFS (as before). blackdetect: none. freezedetect (1.5 s): 3.4 s and 310 s (the THINK countdown) as on the
+  live file, plus 220.3 s for 1.6 s (the bike comparison cards, pedals turning: frame-to-frame motion equal to the live file's, the
+  detector's edge). face_cover_scan (5 fps, whole video): no speech bubble on any face; the old bubble runs (141.4 s "What they said." on
+  Pip, 320.6 s v1007 on Momo / Pip / the snail) are gone; the rest are the by-design runs (cards, CHECKLIST, buddies over the snail).
+  **Disk was tight (3.1 GB free, keep 3 GB): the fixed file is in RAM at /dev/shm/p4ep01fix/p4ep01v2_fix.mp4 until room is made;**
+  then move it here. The live cut stays as `p4ep01v2_loud.mp4` (XkBQqzYyMdM).
+- Review (scratchpad `p4ep01_fix_review/`, not committed): index.html, 720p preview in 3 parts (13.3 / 14.1 / 10.9 MB), before/after
+  stills (5:37 void deck, 2:26 ramp, 2:39 runaway), 76-bubble contact sheets. Upload as a NEW video only after the teacher's OK.

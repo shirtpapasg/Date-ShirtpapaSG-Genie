@@ -222,6 +222,7 @@ const rust = (pts) => pts.map(([x, y, r]) => `<ellipse cx="${x}" cy="${y}" rx="$
   // the shell: a brown spiral
   s += `<g transform="translate(-6 -64) rotate(${n2(3 * rp)})"><circle r="52" fill="url(#snailShell)" stroke="#5A3416" stroke-width="5"/><path d="M0 0 m-6 4 a8 8 0 1 1 12 -6 a18 18 0 1 1 -24 22 a30 30 0 1 1 42 -40" stroke="#5A3416" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-30 -30 q14 -14 30 -12" stroke="#fff" stroke-width="5" fill="none" opacity=".5" stroke-linecap="round"/></g>`;
   if (o.crown) s += `<g transform="translate(-4 -108) rotate(-8) scale(.42)">${crownV2()}</g>`;
+  s += `<rect data-face="snail" x="60" y="-118" width="46" height="84" fill="none" stroke="none"/>`;   // an invisible box over the snail's face (kit/bubble_layout.js keeps bubbles off it); no pixels
   return s; }
 // its shiny trail from x0 to x (world), at y
 const snailTrail = (x0, x, y) => x <= x0 ? "" : `<path d="M${n2(x0)} ${y + 2} H${n2(x - 60)}" stroke="#E8F4FF" stroke-width="7" stroke-linecap="round" opacity=".55"/><path d="M${n2(x0)} ${y} H${n2(x - 60)}" stroke="#fff" stroke-width="2" opacity=".7"/>`;
@@ -298,7 +299,8 @@ const RAMPY = (x) => x < 560 ? 760 : x > 1460 ? 1000 : 760 + (x - 560) * 240 / 9
 BG.rampv2 = () => { let s = `<rect x="-200" y="-120" width="2320" height="1320" fill="url(#vdWall)"/><rect x="-200" y="-120" width="2320" height="150" fill="#E6DCCA"/><rect x="-200" y="26" width="2320" height="12" fill="#D4C8B2"/>`;
   s += [0, 1, 2, 3, 4].map((i) => `<rect x="${-60 + i * 480}" y="-20" width="230" height="16" rx="8" fill="#fff"/>`).join("");
   s += `<rect x="1500" y="120" width="620" height="560" fill="url(#vdSky)"/>` + hdbBlock27(1560, 220, 260, 420, "#EAD9F0", "#E58A6B") + `<rect x="1500" y="600" width="620" height="80" fill="url(#vdGrass)"/>` + tree27(1900, 650, .5);
-  for (const x of [200, 900, 1440]) s += `<rect x="${x}" y="30" width="120" height="760" fill="#EFE6D6" stroke="#CFC3AD" stroke-width="5"/><g transform="translate(${x + 60} 250)"><rect x="-44" y="-30" width="88" height="60" rx="8" fill="#2B5F8F"/>${T(0, 14, "214", 38, "#fff")}</g>`;
+  // pillars; the block number 214 on the middle pillar only (teacher, 28 Nov 2026: "one block number 214 will do"; it was on all three)
+  for (const x of [200, 900, 1440]) s += `<rect x="${x}" y="30" width="120" height="760" fill="#EFE6D6" stroke="#CFC3AD" stroke-width="5"/>` + (x === RAMP_PLAQUE_X ? `<g transform="translate(${x + 60} 250)"><rect x="-44" y="-30" width="88" height="60" rx="8" fill="#2B5F8F"/>${T(0, 14, "214", 38, "#fff")}</g>` : "");
   s += `<g transform="translate(420 340)"><rect width="380" height="250" rx="8" fill="#9AA6B6" stroke="#6D788C" stroke-width="5"/>${[...Array(24)].map((_, i) => `<rect x="${12 + (i % 6) * 60}" y="${12 + Math.floor(i / 6) * 58}" width="52" height="48" rx="4" fill="#C7D0DB" stroke="#7D8896" stroke-width="2"/>`).join("")}</g>`;
   // the floor below, the ramp (its side wall), the landing
   s += `<rect x="-200" y="980" width="2320" height="240" fill="url(#floorV2)"/>`;
@@ -324,9 +326,12 @@ BG.gardenv2 = () => { let s = `<rect x="-200" y="-120" width="2320" height="1320
 
 // the runaway track (live, scrolling): the void deck's floor and back wall seen side-on, repeating (pillars, letterboxes, a notice
 // board), parallax: the wall moves at .5 of the floor. cx = how far the camera has moved right (floor px). Ground y 1040.
+// the block number 214 on ONE pillar of the wall (world pillar TRACK_PLAQUE: the middle one when the shot starts; it scrolls away to the
+// left; teacher, 28 Nov 2026: "one block number 214 will do"; it was on every pillar), with an invisible data-obst mark (no bubble on it)
+const TRACK_PLAQUE = 1;
 function trackV2(t, cx) { const W_ = (x, w) => ((x % w) + w) % w; let s = `<rect width="1920" height="1080" fill="url(#vdWall)"/><rect width="1920" height="120" fill="#E6DCCA"/>`;
   for (let i = -1; i < 6; i++) { const x = i * 420 - W_(cx * .5, 420); s += `<rect x="${n2(x)}" y="-4" width="200" height="14" rx="7" fill="#fff"/>`; }
-  for (let i = -1; i < 4; i++) { const x = i * 840 - W_(cx * .5, 840); s += `<rect x="${n2(x + 40)}" y="120" width="110" height="700" fill="#EFE6D6" stroke="#CFC3AD" stroke-width="5"/><g transform="translate(${n2(x + 95)} 300)"><rect x="-40" y="-28" width="80" height="56" rx="8" fill="#2B5F8F"/>${T(0, 12, "214", 34, "#fff")}</g>`
+  for (let i = -1; i < 4; i++) { const x = i * 840 - W_(cx * .5, 840); s += `<rect x="${n2(x + 40)}" y="120" width="110" height="700" fill="#EFE6D6" stroke="#CFC3AD" stroke-width="5"/>` + (i + Math.floor(cx * .5 / 840) === TRACK_PLAQUE ? `<g transform="translate(${n2(x + 95)} 300)"><rect x="-40" y="-28" width="80" height="56" rx="8" fill="#2B5F8F"/>${T(0, 12, "214", 34, "#fff")}</g><rect data-obst="214" x="${n2(x + 55)}" y="272" width="80" height="56" fill="none" stroke="none"/>` : "")
     + (i % 2 ? `<g transform="translate(${n2(x + 260)} 330)"><rect width="340" height="230" rx="8" fill="#9AA6B6" stroke="#6D788C" stroke-width="5"/>${[...Array(18)].map((_, j) => `<rect x="${12 + (j % 6) * 54}" y="${12 + Math.floor(j / 6) * 70}" width="46" height="58" rx="4" fill="#C7D0DB" stroke="#7D8896" stroke-width="2"/>`).join("")}</g>` : `<g transform="translate(${n2(x + 300)} 300)"><rect width="260" height="190" rx="8" fill="#B88A5E" stroke="#8A5A2B" stroke-width="5"/><rect x="12" y="12" width="236" height="166" fill="#D9B98C"/><rect x="30" y="26" width="90" height="70" fill="#fff"/><rect x="140" y="30" width="90" height="120" fill="#FFF3B8"/></g>`); }
   s += `<rect y="820" width="1920" height="260" fill="url(#floorV2)"/><path d="M0 820 H1920" stroke="#B5AA95" stroke-width="5"/>`;
   for (let i = -1; i < 22; i++) { const x = i * 100 - W_(cx, 100); s += `<path d="M${n2(x)} 820 L${n2(x - 160)} 1080" stroke="#C2B8A4" stroke-width="3" opacity=".7"/>`; }

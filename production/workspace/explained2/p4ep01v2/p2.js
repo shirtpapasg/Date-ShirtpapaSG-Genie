@@ -78,7 +78,7 @@ function x2bellFront(t, s) { const tB = MK("flap") + 1.0, c = camMix(camOn([1000
     + (true ? x2bc(c, "momo", jog(1520, 1400, LT("b407") - .2), 1066, 360, t, { in: tB - 3, noStay: true, flip: true, run: t >= LT("b407") - .2 && t < LT("b407") + .6 ? "left" : undefined, run0: LT("b407") - .2, runEnd: LT("b407") + .6, jump: [[LT("b407") - .2, 14], [LT("b407") + .1, 14], [LT("b407") + .4, 12]], poses: [[0, "surprised"], [LT("b407") + .65, "sit"], [LT("b407") + .9, "laugh/cheer"], [LE("b407") + .2, "sit"]], look: -6 }) : "")
     + (true ? x2bc(c, "pip", jog(1880, 1780, LT("b407")), 1066, 350, t, { in: tB - 3, noStay: true, flip: true, run: t >= LT("b407") && t < LT("b407") + .8 ? "left" : undefined, run0: LT("b407"), runEnd: LT("b407") + .8, jump: [[LT("b407"), 14], [LT("b407") + .3, 14], [LT("b407") + .6, 12]], poses: [[0, "surprised"], [LT("b407") + .85, "sit"], [LT("b408") + .5, "embarrassed/oops"], [LE("b408") + .4, "sit"]], look: -6 }) : "")
     + faceCam("basil", t, tB + .05, tB + 1.5, 1520, 300, 150, [[0, "shocked/surprised"]], { flip: true, noreact: true })
-    + x2lab(t, MK("warn"), s.t1, c, "bell: warns people you are coming", 1380, 200, BELC[0] + BLK * (BK.HT[0] - 24), BELC[1] + BLK * (BK.HT[1] - 66), 38)
+    + x2lab(t, MK("warn"), s.t1, c, "bell: warns people you are coming", 1520, 200, BELC[0] + BLK * (BK.HT[0] - 24), BELC[1] + BLK * (BK.HT[1] - 66), 38)   /* 28 Nov fix: the label 140 px right (was x 1380), off the one 214 plaque */
     + x2HUD(t); }
 
 /* ================================================================ CHAIN · STOP 2: THE CHAIN ================================================================ */
@@ -226,7 +226,7 @@ function x2runD(t, s) { const tD = LT("k611") - .15, tP = MK("push"), tBk = MK("
   // (review 26 Nov: three buddies in the right half covered each other's faces) Momo shoves the box in alone and stays right of it; Pip runs in
   // from the LEFT after the bonk (she chased the bike) and stops left of the crown stool, facing Basil
   const mX = t < tP + .4 ? lerp(1700, CB.box[0] + 340, eio(clamp((t - tD) / 1.0))) : CB.box[0] + 340, pX = lerp(-300, 470, eio(clamp((t - tBk) / 1.0)));
-  window._BUBAT = { momo: [1560, 330], pip: [480, 300], basil: [1180, 320] };
+  window._BUBAT = { momo: [1560, 330], pip: [480, 300], basil: [1180, 320] }; x2said("k610");   /* 28 Nov fix: Pip's "It can't stop!" ends at the cut (it lingered a moment beside Basil) */
   const momoD = x2bc(c, "momo", mX, 1066, 340, t, { in: tD - 3, noStay: true, flip: true, keepPose: t < tP + .4, run: t < tP + .4 ? "left" : undefined, run0: tD, runEnd: tP + .4, poses: [[0, "horrified/surprised"], [tP + .4, "sit"], [MK("cold") - .2, "sit"]], look: -10, jump: [...Array(4)].map((_, i) => [tD + i * .3, 14]) });
   return CAM(bg("vdv2") + set + bike, c[0], c[1], c[2]) + basil + can + front + splashFx
     + momoD
