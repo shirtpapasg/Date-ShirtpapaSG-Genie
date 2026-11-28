@@ -47,6 +47,12 @@ FIX = {
     "hibiscus": {"ph": "haɪbˈɪskəs"},
     # "jagged": NO entry. Kokoro's own is "dʒˈæɡᵻd" ("JAG-id", the adjective), already right (checked 28 Nov 2026).
     # "cicada": NO entry. The teacher listened (23 Nov 2026, EP18 clip) and chose Kokoro's own "sih-KAY-duh" over "sih-KAH-duh".
+    # P4 EP4 (2026-11-28; the script's questions 12 and 19; WAITING FOR THE TEACHER'S LISTEN, clips pron_clips/p4ep04_I_AM_test.mp3 and
+    # the second line of each Spike_p4ep04_voice_*.mp3): Spike's "I AM a plant, thank you!". Kokoro runs it together as "aɪɐm" (a weak "am", nearly "I'm"); the script's
+    # capitals ask for the strong, proud "I AM" (aɪ ˈæm). "case": the entry matches only when written exactly so (the capitals mark the
+    # stress), so an ordinary "I am" elsewhere is untouched. Q19's words (cactus, cacti, spine-like, non-woody, butterfly pea, "Doctor Basil")
+    # need NO entry: Kokoro's own sounds are right (measured, PRONUNCIATION.md).
+    "I AM": {"ph": "aɪ ˈæm", "case": True},
 }
 _tok = None
 def _tokz():
@@ -58,12 +64,13 @@ def _tokz():
 
 def _pattern():
     # whole words only, any capital letters ("Live" at the start of a sentence too)
-    keys = "|".join(re.escape(k) for k in sorted(FIX, key=len, reverse=True))
+    # an entry with "case": True matches only as written (a scoped (?-i:...) group), e.g. "I AM" but not "I am"
+    keys = "|".join(("(?-i:" + re.escape(k) + ")") if FIX[k].get("case") else re.escape(k) for k in sorted(FIX, key=len, reverse=True))
     return re.compile("((?<![A-Za-z])(?:" + keys + ")(?![A-Za-z]))", re.IGNORECASE)
 
 def _key(word):
     for k in FIX:
-        if k.lower() == word.lower(): return k
+        if (k == word) if FIX[k].get("case") else (k.lower() == word.lower()): return k
     return None
 
 def needs_fix(text):

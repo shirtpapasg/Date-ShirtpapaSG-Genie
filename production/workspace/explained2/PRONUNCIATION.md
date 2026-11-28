@@ -54,3 +54,23 @@ P4 EP3 (28 Nov 2026, Opus; the script's question 17; **waiting for the teacher's
   (FIX "Aiyoh" + shape_particles on "Aiyoh." and "lah.").
 Measured, not only listened: pocketsphinx chose between the two spellings of each word on every use in the episode (15 of 15 heard as
 intended) after moving the child or robot voice to an adult range; scripts in the P4 EP3 build notes (`p4ep03/STATE.md`).
+
+P4 EP4 "The Prickly Patient" (28 Nov 2026; the script v2.1's questions 12 and 19; **waiting for the teacher's listen**; nothing
+built). Clips in `pron_clips/`, each the episode's own lines in the speaker's voice: `p4ep04_cactus_cacti_test.mp3` (Heart l403, Basil
+p303, Pip p301), `p4ep04_spinelike_test.mp3` (Pip l408, Heart w506), `p4ep04_nonwoody_test.mp3` (Momo t804, Heart "Woody, non-woody."),
+`p4ep04_butterflypea_test.mp3` (Basil t805), `p4ep04_DoctorBasil_test.mp3` (Basil c102), `p4ep04_UncleLim_test.mp3` (s601),
+`p4ep04_I_AM_test.mp3` (Spike A c110: Kokoro's own, then the fix); Spike's three candidate voices `Spike_p4ep04_voice_A/B/C.mp3`.
+Made by `p4/p4ep04_voice_tests.py`, measured by `p4/p4ep04_pron_check.py` (pocketsphinx forced choice on the word alone AND inside the
+whole line, the hyphen pause measured; child / Heart voices moved to an adult range first, as EP3):
+- "cactus": left to Kokoro (kˈæktəs, KAK-tus; Heart and Basil). "cacti": left to Kokoro (kˈæktaɪ, KAK-tie; Pip; not KAK-tee / KAK-tus).
+- "spine-like": left to Kokoro (spˈaɪnlˈaɪk: one word, 0.00 s at the hyphen in Pip's and Heart's lines; the check measures an inserted
+  .25 s gap as .27 s, so it would catch one).
+- "non-woody": left to Kokoro (nˈɑːnwˈʊdi, NON-woody, never "N-O-N"; 0.00 s at the hyphen; Momo and Heart).
+- "butterfly pea": left to Kokoro (bˈʌɾɚflˌaɪ pˈiː, "pee" not "pay"; Basil).
+- "Doctor Basil": written out in the script; heard as "Doctor", never "Drive" (dˈɑːktɚ bˈeɪzəl). (Kokoro also reads "Dr" as "doctor",
+  but the script keeps the full word.)
+- Uncle Lim, "Aiyoh, cactus in the bathroom? Put here lah. My corridor got sun.": the EP1 v2 recipe (FIX "Aiyoh" + shape_particles):
+  "Aiyoh" heard as EYE-yoh (Kokoro's own: AY-yo), falling 4 semitones; "lah" .53 -> .30 s, 110 Hz falling 3 semitones, .08 s pause added.
+- **NEW `sg_pron.py` entry "I AM" -> aɪ ˈæm, case-sensitive** (Spike c110 "I AM a plant, thank you!"; `"case": True`, a new sg_pron
+  option: the entry matches only as written in capitals, so an ordinary "I am" is untouched). Kokoro's own ran it together as "aɪɐm" (a
+  weak "am", .14 s, nearly "I'm"); with the entry "am" is .23 s and heard as the strong form in all three Spike voices.

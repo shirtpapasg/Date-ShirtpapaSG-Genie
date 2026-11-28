@@ -57,7 +57,7 @@ def speak(k, text, p, gap=0.2, para_gap=0.6):
     parts, sr = [], 24000
     for para in [x.strip() for x in re.split(r"\n\s*\n", text) if x.strip()]:
         for s in [x for x in re.split(r"(?<=[.!?])\s+", para) if x]:
-            a, sr = k.create(s, voice=style, speed=p["speed"], lang="en-us")
+            a, sr = k.create(s, voice=style, speed=p["speed"], lang=p.get("lang", "en-us"))   # "lang": "en-gb" gives a British accent (P4 EP4 Spike B)
             parts += [a, np.zeros(int(sr * gap), np.float32)]
         parts.append(np.zeros(int(sr * para_gap), np.float32))
     snd = parselmouth.Sound(np.concatenate(parts).astype(np.float64), sampling_frequency=sr)
