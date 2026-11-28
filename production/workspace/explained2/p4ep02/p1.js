@@ -15,6 +15,7 @@ const x2fine = (t, t0, t1, txt, x = 560, y = 1032) => OP(1 - ramp(t, t1, .3), fi
 const x2HUD = (t) => HUD(t);
 const FOOT = "Primary 4 Science · Systems · Plant System";
 SCORE.push([MK("coin1") - .05, 1, 1]);   // the fix pick: the viewers who picked 1, and Momo (who picked 1), each get a point at k1006
+SCORE4.push([MK("coin1") - .05, 1, 0, 1, 0]);   // v3: the four-face bar (../kit/score4.js): YOU +1 and Momo +1 (the right card, fix 1, for the right reason: find out WHY); Pip and Basil 0
 window.SHELF_AWAY = () => 0;
 const x2said = (id) => { if (window._SAID) window._SAID[id] = 1; return ""; };   // a line whose words ARE its picture (a battle cry): no bubble
 const x2whiff = (t, t0, x, y) => { const u = (t - t0) / .7; if (u < 0 || u > 1) return ""; return OP(1 - u, `<g transform="translate(${x} ${y})">${[-1, 0, 1].map((i) => `<path d="M${-70 + 40 * u} ${i * 22} q40 ${-10 * i} 140 0" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round" opacity=".9"/>`).join("")}</g>`) + comicWord(t, t0 + .05, x, y - 70, "whiff.", { size: 46, tiny: true, col: "#fff", d: .7 }); };

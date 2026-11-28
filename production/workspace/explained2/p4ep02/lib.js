@@ -247,6 +247,7 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
   if (o.in !== undefined) { const w = wob(t, o.in, .5); sy *= 1 + .09 * w; sx *= 1 - .07 * w; }
   // pose swap, as in the approved pose test: 3 frames of squash on the old picture, a hard cut to the new picture stretched tall,
   // an overshoot that settles in about 0.3 s, a tiny hop, a ring of sparkles and two dust puffs. Never a cross-fade.
+  { const tc = window.COSTUME_T0; if (tc !== undefined && t >= tc && t - tc < .5 && tc > tsw && !o.nocostume && !(o.in !== undefined && tc - o.in < .6)) tsw = tc; }   // the costume goes on with the usual pose-swap pop and sparkles
   const ant = ss(nxt - .1, nxt, t); sy *= 1 - .10 * ant; sx *= 1 + .08 * ant; let fx = "";
   if (tsw > -90 && !(o.in !== undefined && Math.abs(tsw - o.in) < .3) && !(o.calmTo !== undefined && tsw <= o.calmTo)) { const u = t - tsw, w = Math.exp(-u * 9) * Math.cos(u * 23); sy *= 1 + .13 * w; sx *= 1 - .09 * w; lift -= 15 * Math.sin(Math.PI * clamp(u / .22)) * (h / 380);
     if (u >= 0 && u < .4 && !o.nofx) { const e = 1 - Math.pow(1 - u / .4, 2), cy = y - h * .52;
@@ -285,7 +286,12 @@ function buddy0(who, x, y, h, t, o = {}) { h *= SIZE_K[who] || 1;
     if (fa) lift = -14 * (h / 380) * Math.sin(Math.PI * q);
     else { const sq = .05 * Math.pow(1 - q, 2); sy = 1 - sq; sx = 1 + .8 * sq; }
     if (!hasB && !fa) { lift = -6 * (h / 380) * Math.sin(Math.PI * q); } }
-  const S = SPR[name] || SPR[`${who}_sit_closed`]; if (!SPR[name]) name = `${who}_sit_closed`;
+  if (!SPR[name]) name = `${who}_sit_closed`;
+  // P4 EP2 v3 (teacher, 28 Nov 2026: "Since they are role playing as doctors, can we give new costumes to the pet buddies?"): from
+  // window.COSTUME_T0 (costume.js) every painting is swapped for its doctor version <who>_doc_<pose> (costume_bake.py; same canvas, so
+  // face boxes, paws and bubbles are unchanged); a pose with no doctor version stays as it is. o.nocostume keeps the plain painting.
+  if (window.COSTUME_T0 !== undefined && t >= window.COSTUME_T0 && !o.nocostume) { const dn = name.replace(who + "_", who + "_doc_"); if (SPR[dn]) name = dn; }
+  const S = SPR[name];
   const s0 = h / S.bh * k, fl = (wflip !== null ? wflip : o.flip) ? -1 : 1;
   if (window._POSE) window._POSE.push({ who, name, x, y: y + lift, h: h * k, peek: !!o.peek, why });   // EP15 QA (qa/buddy_faces): which face is on screen, where
   let out = "";

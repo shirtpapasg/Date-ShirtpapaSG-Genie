@@ -162,3 +162,54 @@ frame, Basil's u405 by the notice board) and "also, one block number 214 will do
 - **P4 EP1 v2 (live XkBQqzYyMdM)** has the same old engine: far-off bubbles (scene-fixed _BUBAT / say spots) and the 214 plaque on every
   pillar (vdp4 / vdv2 / rampv2 / trackV2). Not re-rendered. To fix it: copy kit hooks (lib.js bubble/say, main.js bg marks, page.html,
   limv2 data-face), run kit/bubble_layout.js, one 214, full render, mux with the live audio.
+
+## v3: "complete new EP2" in DOCTOR COSTUMES + the four-face score bar (28 Nov 2026; NOT uploaded)
+The teacher: "Since they are role playing as doctors, can we give new costumes to the pet buddies?" and "complete new EP2"; the score bar
+she chose for P4 (YOU plus Pip, Momo and Basil, each with their own face and score). Script, voices, timing and the whole sound are the live
+GLY4mDzxdaA's (the audio stream is COPIED); bubbles beside the speakers; one 214 plaque. Only the picture changes.
+- **Where the costumes go on:** on Basil's "open!" in c101 ("The Science Help Desk is open!", 1.28 s) every buddy on screen swaps to its
+  doctor painting with the usual pose-swap pop and sparkles (before that, the first second, they still wear their P4 helmets), and keeps it
+  to the end (the whole episode is the Help Desk role-play, the journey dive, the ritual ending and the blooper included). `costume.js`
+  (`window.COSTUME_T0`); lib.js buddy0() swaps every sprite name `<who>_<pose>` -> `<who>_doc_<pose>` from then on when it exists (same
+  canvas, so face boxes, paws, bubbles and pose swaps are unchanged; `o.nocostume` keeps the plain painting); doctor sprites carry no code
+  items (the cap, goggles, head mirror and badge are painted).
+- **How each pose is dressed (`costume_bake.py`, run with the heart-tts venv python; writes spr/*_doc_*.png + the manifest; 43 sprites):**
+  1. PAINTED (the teacher's paintings, characters/teacher_doctor_2026-11-27/, cut by poses.py): arms_crossed, pointing, surprised for all
+     three; they are pixel-aligned edits of the plain poses, so they sit on the plain pose's canvas as they are.
+  2. PAINTED TRANSPLANT, Momo's talking set (6 mouth / blink states): her talking set IS her arms-crossed painting, so each state is her
+     doctor arms-crossed painting with that state's own eyes and mouth. All painted.
+  3. DRESSED FROM A DOCTOR PAINTING ON THE SAME BODY (`dress()`): the doctor paintings share their lower body with the other poses of the
+     same set (Basil v2: oops, thinking, laughing, cheer, waving AND his sit pose; Pip: sit, thinking, oops, cheer; Momo nk: thinking, cheer,
+     waving), found by template-matching the legs (0.82-0.997). The painted costume pixels (doctor painting minus its plain painting) are
+     moved onto the pose wherever the pose shows exactly the same body (blurred difference < 30), so the coats, scrubs, Pip's cap and
+     goggles, Momo's head mirror, the stethoscopes, the pocket magnifier and Basil's badge are mostly the teacher's own pixels; the rest of
+     the garment (where the pose's arms differ) is code-painted fabric (the painting's own light, rim shade, its ink lines kept, an ink edge)
+     plus measured sleeve polygons; the pose's paws are drawn again on top (paw pixels only, not the belly round them).
+     Used for: Pip's and Basil's TALKING sets (sit, 6 states each, masks from the closed mouth), basil oops / thinking / laughing / cheer /
+     waving, pip thinking / oops / cheer, momo thinking / cheer / waving.
+  4. CODE ONLY (no doctor painting on that body): the three back views (journey dive) and Momo's two run frames (0.8 s): measured garment
+     polygons, Pip's cap + goggle strap from behind, Momo's head-mirror band from behind.
+  5. STAND-IN BY EMOTION: pip squeamish -> pip doctor surprised (d504/d508); momo oops -> momo doctor surprised (3 s).
+  QA sheets: scratchpad p4ep02_v3_review/costumes_*.jpg (plain pose beside its doctor version).
+- **Paintings that would replace the code-dressed stand-ins** (each an edit of the exact plain painting, like the doctor paintings were;
+  cut with poses.py into characters/sprites/poses/<who>_doc_<pose>.png and re-run costume_bake.py: a painted `<who>_doc_sit` replaces the
+  dressed talking set automatically, any other painted pose replaces its recipe): see the list in the v3 review page / the journal.
+- **Score bar:** `../kit/score4.js` (from the P4 EP3 build; EP2 now loads it too, page.html), `SCORE4.push([MK("coin1") - .05, 1, 0, 1, 0])`
+  in p1.js: YOU +1 and Momo +1 at k1006 (Momo picked fix 1 for the right reason: find out WHY); Pip 0, Basil 0. `costume.js` overrides the
+  bar's face chips (s4chip) to show the doctor sit painting once the desk is open. NOTE: kit/score4.js is the EP3 helper's file (committed
+  with their work); EP2 v3 needs it.
+- **Bubbles:** kit/bubble_layout.js re-run (the head mirror, the caps and the wider score bar are new obstacles): 110 of 111 pages placed next
+  to the speaker; 52 pages moved (the bubplace of the live cut kept in the scratchpad).
+- **Render:** `out/run_v3.sh` (render.js now takes RENDER_OUT; chunks and the joined picture in /dev/shm/p4ep02v3), muxed with the live
+  p4ep02.mp4's audio stream copied.
+- **Result (28 Nov, 07:58-08:17 UTC render, 1019 s):** `/dev/shm/p4ep02v3/p4ep02_v3.mp4` (171.6 MB; left in RAM: the disk had 3022 MB free
+  and moving it would go below 3 GB; copy it to `p4ep02/p4ep02_v3.mp4` once there is room, BEFORE a reboot) 1920x1080, 30 fps, 13596
+  frames = 7:33.2, decode 0 errors; audio stream md5 234633d23520c4e646c99def2fd4d195 = the live file's (bit-identical); -16.0 LUFS,
+  -2.4 dBTP; blackdetect: only the planned 0.47 s at the end; freezedetect (n .003, 1.5 s): one 1.97 s hold at 315.07 s (wait: Uncle Lim
+  "Slowly, slowly lah", Basil's head only behind the desk; 750-30000 px still change per frame: breathing, blinks; the live file's helmet
+  moved just enough to pass the threshold). face_cover_scan (5 fps, whole video): no bubble on a face; the runs left are the by-design
+  ones (cold-open GLITCH / Chilli behind the buddies, the pick cards rising for 1-2 frames, the FOUND IT stamp on its card's own Chilli,
+  one frame of the flying MAKE FOOD pill over Momo's head mirror at 127.8 s). Stills every 2.5 s and all 110 bubble pages checked by eye.
+- Review (scratchpad `p4ep02_v3_review/`, not committed): index.html, preview_part1-4.mp4 (720p, 6.3-7.5 MB each), before_after_01-10.jpg,
+  costumes_on.jpg, costumes_{momo,pip,basil}.jpg. NOT uploaded; upload as a NEW video after the teacher's "OK" (upload_v2.json is the
+  metadata model; the thumbnail still shows the helmets: remake it from a costume frame if wanted).

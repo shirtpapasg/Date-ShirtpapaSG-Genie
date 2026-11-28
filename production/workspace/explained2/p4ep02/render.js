@@ -1,7 +1,7 @@
 // render.js: frames -> out/chunks/c_NNNN.mp4 (300 frames each; finished chunks are kept, so a restart loses little), then out/video.mp4.
 //   NODE_PATH=$(npm root -g) node render.js <part> [workers=3] [t0 t1]     With t0 t1 it renders only that span to out/clip_<t0>.mp4 (with sound).
 const { chromium } = require('playwright'); const { spawn, spawnSync } = require('child_process'); const fs = require('fs'), path = require('path');
-const PART = +(process.argv[2] || 1), TL = JSON.parse(fs.readFileSync(path.join(__dirname, `tl_p${PART}.json`))), FPS = 30, CH = 300, OUT = path.join(__dirname, 'out');
+const PART = +(process.argv[2] || 1), TL = JSON.parse(fs.readFileSync(path.join(__dirname, `tl_p${PART}.json`))), FPS = 30, CH = 300, OUT = process.env.RENDER_OUT || path.join(__dirname, 'out');   /* v3: RENDER_OUT=/dev/shm/...: chunks and the joined video in RAM when the disk is tight */
 const W = +(process.argv[3] || 3), clip = process.argv[4] !== undefined ? [+process.argv[4], +process.argv[5]] : null;
 const F0 = clip ? Math.round(clip[0] * FPS) : 0, F1 = clip ? Math.round(clip[1] * FPS) : Math.ceil(TL.END * FPS), dir = path.join(OUT, clip ? 'clipchunks' : `chunks_p${PART}`);
 if (clip) fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
