@@ -1,0 +1,63 @@
+{
+ "episode": "SAU EP13 short2",
+ "title": "How can 2 °C change the weather?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.4,
+ "kws": [
+  [
+   "super",
+   "super",
+   "SUPER EL NIÑO",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "q2",
+   "scene": "qcard",
+   "text": "How can two degrees change the weather in India and the USA?",
+   "new": true
+  },
+  {
+   "id": "super",
+   "scene": "thermo",
+   "text": "The middle of the Pacific is more than two degrees Celsius warmer than usual. When it gets that warm, scientists call it a Super El Niño."
+  },
+  {
+   "id": "momo2",
+   "scene": "thermo",
+   "who": "momo",
+   "text": "Only two degrees?"
+  },
+  {
+   "id": "super2",
+   "scene": "thermo",
+   "text": "Across a whole ocean, that is a huge amount of heat.",
+   "hold": 0.3
+  },
+  {
+   "id": "india",
+   "scene": "india",
+   "text": "El Niño moves rain around the world. In India, this year's monsoon brought about one-eighth less rain than normal, the weakest in over ten years. The south and the northeast were driest."
+  },
+  {
+   "id": "usa",
+   "scene": "usa",
+   "text": "In the USA, it works the other way for some places. This winter, scientists expect wetter weather than usual across the south, like California and Florida, and a warmer winter up north.",
+   "hold": 0.3
+  },
+  {
+   "id": "watch",
+   "scene": "bye",
+   "text": "Watch the full episode on TheOneApp, Explored.",
+   "hold": 0.3
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!",
+   "added": "rule 1"
+  }
+ ]
+}

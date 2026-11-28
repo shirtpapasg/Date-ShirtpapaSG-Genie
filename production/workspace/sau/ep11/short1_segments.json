@@ -1,0 +1,133 @@
+{
+ "episode": "SAU EP11 Short 1",
+ "title": "How does sand become a chip?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.4,
+ "ask": "What blocks the light to make the pattern?",
+ "kws": [
+  [
+   "s1d",
+   "wafers",
+   "WAFER",
+   "#4361ee"
+  ],
+  [
+   "s1e",
+   "shadow",
+   "SHADOW",
+   "#1b1b3a"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "How does a grain of sand become a computer chip?"
+  },
+  {
+   "id": "c1",
+   "scene": "povSand",
+   "silent": 2.6,
+   "sfx": [
+    [
+     "sea_wash",
+     0
+    ],
+    [
+     "whoosh",
+     0.4
+    ],
+    [
+     "pass_by",
+     1.0
+    ],
+    [
+     "sparkle",
+     2.0
+    ],
+    [
+     "ping",
+     2.2
+    ]
+   ]
+  },
+  {
+   "id": "s1b",
+   "scene": "povSand",
+   "text": "You are a grain of sand."
+  },
+  {
+   "id": "s1c",
+   "scene": "povMelt",
+   "text": "You are cleaned and melted until you are almost pure silicon."
+  },
+  {
+   "id": "s1d",
+   "scene": "wafer",
+   "text": "You are sliced into thin round plates called wafers, thinner than a coin, and polished until you shine like a mirror."
+  },
+  {
+   "id": "c2",
+   "scene": "povLight",
+   "silent": 2.8,
+   "sfx": [
+    [
+     "ep03_slide",
+     0.1
+    ],
+    [
+     "riser",
+     0.4
+    ],
+    [
+     "flash",
+     1.35
+    ],
+    [
+     "zap",
+     1.4
+    ],
+    [
+     "sparkle",
+     2.0
+    ],
+    [
+     "chime",
+     2.2
+    ]
+   ]
+  },
+  {
+   "id": "s1e",
+   "scene": "shadow",
+   "text": "In Primary Four, you learn that light travels in a straight line, and when an object blocks light, it forms a shadow.",
+   "hold": 1.3
+  },
+  {
+   "id": "s1f",
+   "scene": "shadow",
+   "text": "A stencil, called a mask, blocks some of the light. Where the light reaches you, the layer changes. Where the mask blocks it, the shadow keeps the pattern."
+  },
+  {
+   "id": "s1g",
+   "scene": "s1end",
+   "text": "A hundred billion switches. Drawn with light and shadow."
+  },
+  {
+   "id": "s1h",
+   "scene": "s1end",
+   "text": "What blocks the light to make the pattern?"
+  },
+  {
+   "id": "s1i",
+   "scene": "s1end",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

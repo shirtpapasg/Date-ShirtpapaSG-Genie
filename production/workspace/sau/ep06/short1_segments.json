@@ -1,0 +1,113 @@
+{
+ "episode": "SAU EP06 Short 1",
+ "title": "Why does bread taste sweet if you chew it?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s1b",
+   "saliva",
+   "SALIVA",
+   "#0077b6"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "Why does bread taste sweet if you chew it?"
+  },
+  {
+   "id": "h0",
+   "scene": "canteenBite",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep05_kids",
+     0
+    ],
+    [
+     "ep06_clink",
+     0.8
+    ],
+    [
+     "ep06_chomp",
+     3.3
+    ],
+    [
+     "ep05_munch",
+     3.65
+    ]
+   ]
+  },
+  {
+   "id": "s1b",
+   "scene": "try",
+   "text": "Try this at home! Chew a piece of plain bread for one whole minute without swallowing. Does it start to taste sweet? That's your saliva breaking starch into sugar!"
+  },
+  {
+   "id": "d1",
+   "scene": "povMouth",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ep06_chomp",
+     0.9
+    ],
+    [
+     "splash",
+     0.98
+    ],
+    [
+     "ep06_chomp",
+     1.95
+    ],
+    [
+     "splash",
+     2.03
+    ],
+    [
+     "ep06_chomp",
+     3.0
+    ],
+    [
+     "splash",
+     3.08
+    ],
+    [
+     "ep06_squish",
+     3.7
+    ],
+    [
+     "whoosh",
+     4.4
+    ]
+   ]
+  },
+  {
+   "id": "s1c",
+   "scene": "textbook",
+   "text": "In Primary Four, you learn about the digestive system: the mouth, gullet, stomach, small intestine and large intestine."
+  },
+  {
+   "id": "s1d",
+   "scene": "textbook",
+   "text": "Digestive juices break food down into simpler substances."
+  },
+  {
+   "id": "s1e",
+   "scene": "textbook",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

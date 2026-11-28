@@ -1,0 +1,295 @@
+{
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP17_P1_v2); Part 2 is re-rendered from unchanged code (its times are the live 6rVLGfilVXQ's; v2 for one continuous music bed, chapters key EP17_P2_v2). EP17, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.cycles, CH.animalCycles), set url to the uploaded video ids. With EP16 these two parts replace the classic P3 no 10 (2Atm-edXKVk, 'A Tadpole Has No Legs. So How Does It Become A Frog?'), which upload.json retires.",
+ "entries": [
+  {
+   "no": "17A",
+   "art": "🦋",
+   "topic": "Life Cycles",
+   "title": "Is a Caterpillar a NYMPH? The Butterfly's Secret Stage (Part A)",
+   "len": "5:14",
+   "url": "https://www.youtube.com/watch?v=<EP17_P1>",
+   "moments": [
+    {
+     "at": "0:43",
+     "what": "Round 1: is the caterpillar a nymph like the young grasshopper?",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a501",
+     "_t": 45.2
+    },
+    {
+     "at": "1:12",
+     "what": "A caterpillar looks nothing like a butterfly",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a601",
+     "_t": 73.69
+    },
+    {
+     "at": "1:23",
+     "what": "Count the caterpillar's legs: six legs at the front",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a702",
+     "_t": 84.61
+    },
+    {
+     "at": "1:38",
+     "what": "The stumps at the back are called prolegs",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a705",
+     "_t": 100.24
+    },
+    {
+     "at": "1:44",
+     "what": "Prolegs have tiny hooks that grip the twig",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a706b",
+     "_t": 106.39
+    },
+    {
+     "at": "2:07",
+     "what": "Journey: be a butterfly egg, hatch, munch, moult and grow",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a802",
+     "_t": 129.47
+    },
+    {
+     "at": "2:37",
+     "what": "The butterfly larva is also called a caterpillar",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a901",
+     "_t": 158.98
+    },
+    {
+     "at": "2:51",
+     "what": "HOLD ON! The pupa is busy inside its case",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a1001p",
+     "_t": 173.49
+    },
+    {
+     "at": "3:17",
+     "what": "This stage is called the pupa",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a1005",
+     "_t": 199.45
+    },
+    {
+     "at": "3:22",
+     "what": "Inside the pupal case, the body changes into a butterfly",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a1101",
+     "_t": 203.58
+    },
+    {
+     "at": "3:44",
+     "what": "The pupal case splits and out comes the adult butterfly",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a1105",
+     "_t": 225.7
+    },
+    {
+     "at": "3:57",
+     "what": "The butterfly has four stages: egg, larva, pupa and adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a1201",
+     "_t": 239.3
+    },
+    {
+     "at": "4:08",
+     "what": "The young of these animals look different from the adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "a1203",
+     "_t": 250.21
+    }
+   ]
+  },
+  {
+   "no": "17B",
+   "art": "🦟",
+   "topic": "Life Cycles",
+   "title": "What's WRIGGLING in This Pail of Rainwater? (Part B)",
+   "len": "5:27",
+   "url": "https://www.youtube.com/watch?v=<EP17_P2>",
+   "moments": [
+    {
+     "at": "0:32",
+     "what": "Round 1: what comes after the wriggler?",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b401",
+     "_t": 34.05
+    },
+    {
+     "at": "1:07",
+     "what": "Wrigglers hang just under the water's surface",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b501",
+     "_t": 68.62
+    },
+    {
+     "at": "1:12",
+     "what": "A little tube at the tail end lets the wriggler get air",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b502p",
+     "_t": 74.21
+    },
+    {
+     "at": "1:19",
+     "what": "The mosquito larva is also called a wriggler",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b505",
+     "_t": 80.92
+    },
+    {
+     "at": "1:37",
+     "what": "Journey: be a mosquito egg, a wriggler, a pupa, then an adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b602",
+     "_t": 99.36
+    },
+    {
+     "at": "2:07",
+     "what": "After the wriggler comes the pupa",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b701",
+     "_t": 129.36
+    },
+    {
+     "at": "2:14",
+     "what": "A life cycle with four stages: egg, larva, pupa and adult",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b706",
+     "_t": 136.31
+    },
+    {
+     "at": "2:23",
+     "what": "Showdown: check Basil's homework on the mosquito",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b801",
+     "_t": 145.36
+    },
+    {
+     "at": "2:53",
+     "what": "Only some kinds of mosquitoes spread dengue",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b806",
+     "_t": 175.05
+    },
+    {
+     "at": "3:04",
+     "what": "Dengue is a sickness that gives people a high fever",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b807m",
+     "_t": 185.89
+    },
+    {
+     "at": "3:28",
+     "what": "Mosquito eggs are laid in stagnant water",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b904",
+     "_t": 209.8
+    },
+    {
+     "at": "3:32",
+     "what": "Stagnant water is still water that nobody changes",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b905b",
+     "_t": 213.78
+    },
+    {
+     "at": "3:38",
+     "what": "Tip out still water to stop new mosquitoes",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b906",
+     "_t": 220.12
+    },
+    {
+     "at": "3:56",
+     "what": "Remove breeding spots in our schools and homes",
+     "keys": [
+      "O.cycles",
+      "CH.animalCycles"
+     ],
+     "_line": "b909",
+     "_t": 237.54
+    }
+   ]
+  }
+ ]
+}

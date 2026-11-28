@@ -1,0 +1,212 @@
+[
+ {
+  "take": "Heart, HOLD ON!: \"It depends on the use.\"",
+  "id": "g1003",
+  "word": "use",
+  "heard": "? ???",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Heart, the strip: \"the intended use\"",
+  "id": "j1008",
+  "word": "use",
+  "heard": "right rrr",
+  "tail_voiced": 0.8
+ },
+ {
+  "take": "Heart, read-along: \"Use.\"",
+  "id": "hk_use",
+  "word": "use",
+  "heard": "right rrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Pip, read-along",
+  "id": "uk_use",
+  "word": "use",
+  "heard": "wrong www",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Basil, read-along",
+  "id": "uk_use",
+  "word": "use",
+  "heard": "wrong www",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Momo, read-along",
+  "id": "uk_use",
+  "word": "use",
+  "heard": "right rrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Basil, Mark Sentence 3.26: \"the use of the object\"",
+  "id": "j602",
+  "word": "use",
+  "heard": "right rrr",
+  "tail_voiced": 1.0
+ },
+ {
+  "take": "Momo: \"A different use!\"",
+  "id": "g1105",
+  "word": "use",
+  "heard": "wrong rww",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Momo, goal card: \"Properties decide uses.\"",
+  "id": "g403",
+  "word": "uses",
+  "heard": "right rrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Pip, goal card: \"Choosing a suitable material.\"",
+  "id": "j304",
+  "word": "suitable",
+  "heard": "right rrr",
+  "tail_voiced": null
+ },
+ {
+  "take": "Heart, the strip: \"suitable\"",
+  "id": "j1008",
+  "word": "suitable",
+  "heard": "right rrr",
+  "tail_voiced": null
+ },
+ {
+  "take": "Heart, read-along: \"Suitable.\"",
+  "id": "hk_suitable",
+  "word": "suitable",
+  "heard": "right rr?",
+  "tail_voiced": null
+ },
+ {
+  "take": "Pip, read-along",
+  "id": "uk_suitable",
+  "word": "suitable",
+  "heard": "right rrr",
+  "tail_voiced": null
+ },
+ {
+  "take": "Basil, read-along",
+  "id": "uk_suitable",
+  "word": "suitable",
+  "heard": "right rrr",
+  "tail_voiced": null
+ },
+ {
+  "take": "Momo, read-along",
+  "id": "uk_suitable",
+  "word": "suitable",
+  "heard": "wrong www",
+  "tail_voiced": null
+ },
+ {
+  "take": "Pip, chant",
+  "id": "c1003",
+  "word": "suitable",
+  "heard": "right rrr",
+  "tail_voiced": null
+ },
+ {
+  "take": "Basil, chant",
+  "id": "c1003",
+  "word": "suitable",
+  "heard": "? ???",
+  "tail_voiced": null
+ },
+ {
+  "take": "Momo, chant",
+  "id": "c1003",
+  "word": "suitable",
+  "heard": "right rr?",
+  "tail_voiced": null
+ },
+ {
+  "take": "Momo, goal card: \"Objects have purposes.\"",
+  "id": "g402",
+  "word": "purposes",
+  "heard": "right rrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Heart, look-closer: \"That is its purpose.\"",
+  "id": "g504",
+  "word": "purpose",
+  "heard": "? ???",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Pip, Mark Sentence 3.24: \"different purposes\"",
+  "id": "g602",
+  "word": "purposes",
+  "heard": "right rrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Heart: \"Each has its own purpose.\"",
+  "id": "g603",
+  "word": "purpose",
+  "heard": "? ???",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Heart, read-along: \"Purpose.\"",
+  "id": "hk_purpose",
+  "word": "purpose",
+  "heard": "? ???",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Pip, read-along",
+  "id": "uk_purpose",
+  "word": "purpose",
+  "heard": "right rrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Basil, read-along",
+  "id": "uk_purpose",
+  "word": "purpose",
+  "heard": "right r?r",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Momo, read-along",
+  "id": "uk_purpose",
+  "word": "purpose",
+  "heard": "right wrr",
+  "tail_voiced": 0.0
+ },
+ {
+  "take": "Pip, chant",
+  "id": "c1003",
+  "word": "purpose",
+  "heard": "? ???",
+  "tail_voiced": null
+ },
+ {
+  "take": "Basil, chant",
+  "id": "c1003",
+  "word": "purpose",
+  "heard": "right rrr",
+  "tail_voiced": null
+ },
+ {
+  "take": "Momo, chant",
+  "id": "c1003",
+  "word": "purpose",
+  "heard": "? ???",
+  "tail_voiced": null
+ },
+ {
+  "take": "Heart, the strip 3.13a (sg_pron FRAJ-ile)",
+  "id": "g805",
+  "word": "fragile",
+  "heard": "right rrr",
+  "tail_voiced": null
+ }
+]

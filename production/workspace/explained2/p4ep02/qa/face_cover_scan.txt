@@ -1,0 +1,13 @@
+faces wrapped: buddies + limHead, limHeadBox, snailV2, chilliP4v2, chilliFaceBox, glitchFaceBox; 5 fps; a face counts as covered at 12 %
+1.40-1.40 s cold       glitch    face under buddy momo (93 %)
+2.60-3.00 s cold       chilli    face under buddy momo (100 %)
+3.00-3.20 s cold       glitch    face under buddy basil (100 %)
+56.40-56.40 s picks      momo      face under card  "FIND OUT WHY:" (83 %)
+56.40-56.40 s picks      basil     face under card  "WATER IT" (84 %)
+56.40-56.40 s picks      pip       face under card  "FEED IT" (100 %)
+295.40-295.40 s repair     basil     face under buddy pip (21 %)
+295.60-295.60 s repair     chilli    face under buddy pip (72 %)
+298.60-298.60 s repair     basil     face under buddy pip (32 %)
+305.60-305.60 s repair     chilli    face under word  FOUND IT, FIXED IT! (33 %)
+305.60-305.60 s repair     chilli    face under card  "FOUND IT, FIXED IT!" (100 %)
+11 face-cover run(s)

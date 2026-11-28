@@ -1,0 +1,41 @@
+{
+ "key": "explained-p4-ep02",
+ "parts": [
+  {
+   "key": "explained-p4-ep02",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/p4ep02/p4ep02.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/p4ep02/thumb.jpg",
+   "title": "Watered Every Day, Still Wilting. Why? | Plant Parts and Their Functions | P4 Science",
+   "description": "A chilli plant hops up to the buddies' Science Help Desk: \"I'm watered every single day, in my beautiful new pot. So WHY am I wilting?\" Pick the fix: find out why and check every part, water it more, or feed it? Then watch every fix get tested: a flood, a flock of pigeons, a very rude noise from the soil, and a robot called GLITCH who loves efficiency a little too much.\n\nIn this video:\n• The problem: a plant that is watered every day, yet wilting\n• Pick the fix: 1, 2 or 3?\n• Fix 2: more water (oh no)\n• Fix 3: a balanced lunch? Where a plant's food really comes from\n• Look closer: leaves, stem, soil and roots, like a plant doctor\n• The twist: wet soil, thirsty plant?\n• GLITCH: show me the data!\n• The real fix, tested\n• Be a drop of water: root, stem, leaf\n• The words that earn marks\n• Stay for the blooper after the end!\n\nKey words: make food, absorb, transport.\nThe words that earn marks: The roots hold the plant firmly in the soil and absorb water and mineral salts. The stem holds the plant upright and transports water, mineral salts and food to all parts of the plant. The leaves make food for the plant. A plant is a system. When one part stops working, the whole plant is likely to be affected.\n\nFor parents: children pick a fix with their fingers before each idea is tested, so they think before they are told. Primary 4 Science (Singapore Primary Science Syllabus 2023), Plant System: the parts of a plant and their functions. Two common mistakes it fixes: \"plants get their food from the soil\" (they make it in their leaves) and \"a droopy plant always needs more water\" (in a pot with no hole, wet soil leaves the roots no air, and they rot). Also fits US NGSS 4-LS1-1 (Grade 4).\nTry it (with an adult): look under your potted plants. Is there a drainage hole? Push a fingertip into the soil before you water: water only when the top feels dry. Please don't feed the pigeons.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\n#PrimaryScience #Singapore #Plants #TheOneAppExplained",
+   "tags": [
+    "plant parts and their functions",
+    "roots stem leaves",
+    "why is my plant wilting",
+    "overwatering plants for kids",
+    "roots absorb water and mineral salts",
+    "drainage hole",
+    "primary 4 science plant system",
+    "P4 science plants",
+    "grade 4 science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLK9BW3T6kXx4",
+   "after": "loaPYprOWDQ"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "loaPYprOWDQ"
+  }
+ ],
+ "replaces": [
+  "loaPYprOWDQ"
+ ],
+ "retire_old": true,
+ "_note": "P4 EP2 'Help! I'm Wilting!' (the teacher's v2.1 script, approved 27 Nov 2026: 'OK to the EP2 script'), ONE video. Public, Made for Kids (the uploader sets both). REPLACES the old P4 EP02 loaPYprOWDQ (never deleted): with after = loaPYprOWDQ the new video goes in right after it in both playlists, then retire_old takes the old one out of both playlists (the new one takes its place), and the old one's description gets a first line '▶ NEW VERSION: Watered Every Day, Still Wilting. Why? <new url>'. Chapters: production/youtube/chapters_p3.json key P4EP02. App moments: p4ep02/app_moments.json (videos.js P4 entry no. 2). NOT UPLOADED by the build agent: the main session shows the teacher first."
+}

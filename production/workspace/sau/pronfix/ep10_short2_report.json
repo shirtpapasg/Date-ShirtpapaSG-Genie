@@ -1,0 +1,72 @@
+{
+ "video": "ep10/short2",
+ "lines": [
+  {
+   "segment": "s2c",
+   "sentence": 2,
+   "text": "And less burning means less ash buried at Pulau Semakau, Singapore's only landfill, which could be full by about twenty thirty-five.",
+   "t_old": 33.881,
+   "t_new": 33.776,
+   "dur_old": 7.987,
+   "dur_new": 8.3,
+   "silence_before": 0.465,
+   "silence_after": 0.792,
+   "caption_drift_s": [
+    -0.275,
+    0.275
+   ],
+   "speech_dB_new": -21.41,
+   "speech_dB_old": -21.65,
+   "speech_dB_same_segment": [
+    -21.81,
+    -21.7
+   ],
+   "mix_dB_new_sentence": -15.36,
+   "mix_dB_old_sentence": -15.73,
+   "mix_dB_neighbours_old_new": [
+    -16.33,
+    -16.05,
+    -16.32,
+    -16.08
+   ]
+  }
+ ],
+ "final_gain": {
+  "mix_before_gain_LUFS": -16.28,
+  "mix_true_peak": -3.22,
+  "gain_dB": 0.28,
+  "peak_limiter": false
+ },
+ "checks": {
+  "lufs_old": -16.2,
+  "lufs_new": -16.0,
+  "video_stream_identical": true,
+  "streams_old": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "55.366667"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "55.400000"
+   }
+  ],
+  "streams_new": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "55.366667"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "55.400000"
+   }
+  ],
+  "audio_away_from_fix_residual_dB": -32.7,
+  "fixed_gain_dB": 0.28,
+  "audio_lag_ms": 0.0
+ }
+}

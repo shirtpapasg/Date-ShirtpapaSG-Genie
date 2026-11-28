@@ -1,0 +1,155 @@
+"""script.py: P3 EP1 pilot, the approved script as data (pilot_p3_ep01_script.md). Every spoken line is exactly as in the script
+(the teacher's decision: "HOLD ON!" replaces "FOUL!"). make_voice.py records the lines; build_tl.py lays them on the timeline.
+
+SEQ items:
+  ("scene", name)                      a new scene starts at the cursor
+  ("say", id, who, text, {opts})       a spoken line. opts: pre = silence before it (s), post = silence after it (s)
+  ("wait", seconds)                    picture-only time
+  ("mark", name)                       name the cursor time (used by sound and picture)
+  ("chant", id)                        the buddies' chant on the clap-clap-stomp grid (6 s)
+"""
+H, P, B, M = "heart", "pip", "basil", "momo"
+CHANT = ["Does it move?", "That's NOT the clue!", "What does it NEED?", "What can it DO?"]
+# how the TTS should say a word (the caption/script text is unchanged)
+PRON = {"Taugeh": "Taogay", "taugeh": "taogay", "cicak": "cheechahk", "winds it up": "wines dit up", "TheOneApp": "The One App"}
+
+SEQ = [
+ # ---- 1 · silent cold open (12 s)
+ ("scene", "cold"), ("mark", "cold0"), ("wait", 2.6), ("mark", "coldBox"), ("wait", 5.0), ("mark", "coldLid"), ("wait", 1.7),
+ ("mark", "coldD30"), ("wait", 1.6), ("mark", "coldCut"), ("wait", 0.5),
+ # ---- 2 · hook and the practice lock-in
+ ("scene", "hook"),
+ ("say", "h201", H, "This is Momo. This is a teddy bear. Two eyes. Soft fur. One is living. One is not.", {"pre": .2}),
+ ("scene", "title"),
+ ("say", "h202", H, "Easy? Then try the six things in our box.", {"pre": .45, "post": .5}),
+ ("scene", "prac"),
+ ("say", "h203", H, "First, a practice round. The teddy bear. Point left for living. Point right for non-living. Go!", {"pre": .3}),
+ ("mark", "ring0_p"), ("wait", 5.0), ("mark", "bell_p"), ("wait", .55),
+ ("say", "h204", H, "Locked in!", {"pre": 0}),
+ ("say", "p205", P, "Non-living. It never eats.", {"pre": .5}),
+ ("say", "b206", B, "Non-living! It's full of cotton.", {"pre": .4}),
+ ("say", "m207", M, "But it has eyes and fur like me. Why isn't it living?", {"pre": .4}),
+ ("say", "h208", H, "The teddy bear is a non-living thing. Eyes and fur are only how it looks. We need better clues.", {"pre": .6, "post": .5}),
+ # ---- 3 · the game and today's goals
+ ("scene", "game"),
+ ("say", "h301", H, "Here is the game. It's You against the Buddies. You lock in first. Then Pip, Basil and Momo answer.", {"pre": .5}),
+ ("say", "h302", H, "Every time you are right, put up one finger on your other hand. Five fingers wins. No lock-in, no point. And a cicak is hiding in this video. Find it!", {"pre": .5, "post": .3}),
+ ("scene", "goals"),
+ ("say", "h303", H, "Today you will learn what diversity means, how to classify things into groups, and how to tell living things from non-living things.", {"pre": .4, "post": .5}),
+ # ---- 4 · where the six things came from: diversity
+ ("scene", "garden"),
+ ("say", "h401", H, "Our six things came from here. A void deck and a garden in Toa Payoh. Look around.", {"pre": .9}),
+ ("say", "h402", H, "A mynah. Ants. A papaya tree. A bench. A bicycle. A blue recycling bin. So many different things!", {"pre": .5, "post": .4}),
+ ("scene", "mark1"),
+ ("say", "h403", H, "There is a great variety of living and non-living things around us. This is called diversity.", {"pre": .7, "post": 1.0}),
+ ("scene", "garden2"),
+ ("say", "b404", B, "So many! How do we keep track?", {"pre": .4}),
+ ("say", "h405", H, "We put them into groups. Let's start with six.", {"pre": .35, "post": .9}),
+ # ---- 5 · the countdown and Day 1
+ ("scene", "count"),
+ ("say", "h501", H, "Are you ready? Three! Two! One! Go!", {"pre": .3, "post": .5, "gap": .57, "speed": .94}),
+ ("scene", "day1"),
+ ("say", "h502", H, "Day one. Six things, one box. The lid has holes, so air can get in. The mealworm has oats to eat and a juicy carrot for water. The plant gets water, and light from the window.", {"pre": .9, "post": .7}),
+ # ---- 6 · Round 1: the wind-up robot
+ ("scene", "r1card"), ("wait", 1.1),
+ ("scene", "r1"),
+ ("say", "h601", H, "Round one. The wind-up robot. Look at it go! Point left for living. Point right for non-living.", {"pre": .1}),
+ ("mark", "ring0_1"), ("wait", 5.0), ("mark", "bell_1"), ("wait", .55),
+ ("say", "h602", H, "Locked in!", {"pre": 0}),
+ ("say", "b603", B, "Living! It moves, so it's living!", {"pre": .5}),
+ ("say", "p604", P, "Non-living. I saw you wind it up, Basil.", {"pre": .4}),
+ ("say", "m605", M, "Non-living. Does it ever get hungry?", {"pre": .4, "post": .5}),
+ ("scene", "r1ev"),
+ ("say", "h606", H, "Watch. The robot stops. A spring inside was pushing it.", {"pre": .5}),
+ ("say", "h606b", H, "Nobody winds it up, so it stays still. All night. All of day two.", {"pre": .5, "post": .6}),
+ ("say", "h607", H, "It does not need water, food or air. It does not grow. The wind-up robot is a non-living thing.", {"pre": .3, "post": .7}),
+ ("scene", "r1score"),
+ ("say", "h608", H, "Pointed right? One finger up!", {"pre": .5}),
+ ("say", "b609", B, "Aww. So moving is not the clue!", {"pre": .5}),
+ ("say", "m610", M, "Then is a thing that stays still always non-living?", {"pre": .4, "post": .5}),
+ # ---- 7 · Round 2: the green bean, and the shrink
+ ("scene", "r2card"), ("wait", 1.1),
+ ("scene", "r2"),
+ ("say", "h701", H, "Round two. Day two. The green bean. It is a seed. It has not moved at all. Living, or non-living? Point!", {"pre": .1}),
+ ("mark", "ring0_2"), ("wait", 5.0), ("mark", "bell_2"), ("wait", .55),
+ ("say", "h702", H, "Locked in!", {"pre": 0}),
+ ("say", "p703", P, "Non-living. I watched it for one whole day. It did nothing.", {"pre": .5}),
+ ("say", "m704", M, "Living! It's green, like a leaf.", {"pre": .4}),
+ ("say", "b705", B, "Living! Taugeh grows from green beans. I eat taugeh!", {"pre": .4, "post": .5}),
+ ("scene", "lean"),
+ ("say", "h706", H, "Three buddies, two answers. Let's shrink down and watch. Quietly.", {"pre": .4, "post": .6}),
+ ("scene", "shrink"), ("mark", "dive"), ("wait", 3.0),
+ ("say", "h707", H, "You are tiny now. The green bean is as big as a bus.", {"speed": .92, "gap": .5, "pre": 0, "post": 1.6}),
+ ("mark", "beanClose"),
+ ("say", "h708", H, "Listen.", {"speed": .92, "gap": .5, "pre": .6}),
+ ("wait", 1.6), ("mark", "crack"), ("wait", 1.9),
+ ("say", "h709", H, "The skin splits. A root pushes out.", {"speed": .92, "gap": .5, "pre": 0}),
+ ("wait", 2.2),
+ ("say", "h710", H, "Nobody wound it up. Nobody pushed it. It is growing by itself.", {"speed": .92, "gap": .5, "pre": 0, "post": 1.6}),
+ ("scene", "r2out"), ("mark", "pullout"), ("wait", 1.3),
+ ("say", "h711", H, "The green bean is a living thing. It was living all along. It took in water. Then it began to grow.", {"pre": 0, "post": .8}),
+ ("scene", "r2score"),
+ ("say", "h712", H, "Pointed left? One finger up!", {"pre": .5}),
+ ("say", "p713", P, "I was careful. But I did not watch long enough.", {"pre": .5}),
+ ("say", "h714", H, "Momo, living is right. But green is only how it looks. A green pencil is non-living.", {"pre": .5}),
+ ("say", "m715", M, "No point for me! So what ARE the clues?", {"pre": .4, "post": .6}),
+ # ---- 8 · the real clues, and the chant
+ ("scene", "clue"),
+ ("say", "h801", H, "Not how it looks. Not whether it moves. Ask two things. What does it need? What can it do?", {"pre": .5, "post": .5}),
+ ("say", "h802", H, "Living things need water, food and air. Living things grow, respond to changes and reproduce. You will test these in the next two episodes.", {"pre": .5, "post": .6}),
+ ("scene", "chant"), ("wait", .9),
+ ("chant", "c803"), ("wait", .7),
+ # ---- 9 · HOLD ON: Momo's sort
+ ("scene", "sort"),
+ ("say", "h901", H, "Day ten. Time to sort all six into two groups: living things and non-living things. Momo, you go first.", {"pre": .8, "post": .3}),
+ ("mark", "sortGo"),
+ ("say", "m902", M, "Squish... squish... knock, knock. Done!", {"pre": .9, "post": .7}),
+ ("say", "h903", H, "Something is not right. If you can spot it, cross your arms. Hold on!", {"pre": .2}),
+ ("mark", "ring0_3"), ("wait", 5.0), ("mark", "bell_3"), ("wait", .6),
+ ("say", "h904", H, "Arms crossed? One finger up! Look. The teddy bear is sitting with the mealworm. Momo sorted by soft and hard.", {"pre": 0}),
+ ("say", "m905", M, "I wanted to know how they feel! Good sort. Wrong question.", {"pre": .5, "post": .6}),
+ ("scene", "mark2"),
+ ("say", "h906", H, "Momo did put things into groups. Alike things together. Different things apart.", {"pre": .5}),
+ ("say", "h907", H, "Classification is the grouping of things based on their similarities and differences.", {"pre": .9, "post": 1.0}),
+ ("scene", "relabel"),
+ ("say", "h908", H, "You can choose soft or hard. But our question is living or non-living. So we use the real clues. Has anyone done that?", {"pre": .5, "post": .6}),
+ # ---- 10 · Showdown: Pip's homework
+ ("scene", "showcard"), ("wait", 1.2),
+ ("scene", "show"),
+ ("say", "p1001", P, "My homework from Day one. I fixed the green bean after Round two.", {"pre": .5}),
+ ("say", "h1002", H, "Showdown! Double points. Pip made a table with two columns. One thing is still in the wrong column.", {"pre": .5}),
+ ("say", "h1003", H, "Is it one, the wind-up robot? Two, the plant? Or three, the pebble? Show me with your fingers.", {"pre": .5}),
+ ("mark", "ring0_4"), ("wait", 6.0), ("mark", "bell_4"), ("wait", .55),
+ ("say", "h1004", H, "Locked in!", {"pre": 0}),
+ ("say", "b1005", B, "Two! We water that plant. It needs water.", {"pre": .5}),
+ ("say", "m1006", M, "Two! I saw a new leaf.", {"pre": .4}),
+ ("say", "p1007", P, "But it never moved out of its pot!", {"pre": .4, "post": .5}),
+ ("scene", "replay"),
+ ("say", "h1008", H, "Watch the plant, from day one to day fourteen. It stays in its pot. But it has a new leaf. And it grows towards the light from the window. The plant is a living thing.", {"pre": .6, "post": .6}),
+ ("scene", "fixed"),
+ ("say", "p1009", P, "Fixed! A plant stays in one place. But it is a living thing.", {"pre": 1.5}),
+ ("say", "h1010", H, "Two fingers? Put up two more on your score hand!", {"pre": .5, "post": .6}),
+ # ---- 11 · three ways to show the groups
+ ("scene", "ways"),
+ ("say", "h1101", H, "Pip used a table. The same two groups can be shown in other ways too.", {"pre": .5}),
+ ("say", "h1102", H, "We can present our classification using pictures, a table, and a graphic organiser.", {"pre": .8, "post": 1.0}),
+ # ---- 12 · Day 30
+ ("scene", "day30"), ("wait", 1.4),
+ ("say", "h1201", H, "Day thirty. What is under the cloth?", {"pre": 0}),
+ ("wait", 1.5), ("mark", "reveal"), ("wait", .9),
+ ("say", "h1202", H, "The green bean is a tall plant now. The mealworm is bigger. The plant has new leaves. And the teddy bear, the robot and the pebble? Exactly the same.", {"pre": 0, "post": .8}),
+ ("scene", "piles"),
+ ("say", "h1203", H, "Three living things. Three non-living things.", {"pre": .6, "post": .5}),
+ ("chant", "c1204"), ("wait", .6),
+ # ---- 13 · score hand, cicak, the dare, "Now you know!"
+ ("scene", "final"),
+ ("say", "h1301", H, "Show me your score hand! More than three? You beat the Buddies. Five fingers? High five!", {"pre": .5, "post": .6}),
+ ("scene", "cicak"),
+ ("say", "h1302", H, "Did you spot the cicak? It was on the window frame on day fourteen. Is a cicak living or non-living? Tell someone at home.", {"pre": .4, "post": .6}),
+ ("scene", "day31"), ("wait", 1.3),
+ ("say", "m1303", M, "Oh no. Is it sad?", {"pre": 0}),
+ ("say", "h1304", H, "A drooping plant isn't sad. What does it need? Lock in your answer for next time.", {"pre": .5, "post": .6}),
+ ("scene", "nyk"),
+ ("say", "h1305", H, "Now you know!", {"pre": .5, "excited": True}),
+ ("wait", 2.2),
+]

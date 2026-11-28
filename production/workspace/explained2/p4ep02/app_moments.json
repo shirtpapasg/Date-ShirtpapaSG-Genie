@@ -1,0 +1,104 @@
+{
+ "_note": "P4 EP2 'Help! I'm Wilting!' (the new P4 style, one video), for TheOneApp videos.js after upload: it REPLACES the P4 entry no. 2 (the old video loaPYprOWDQ, 'The 3-Part Team Inside Every Plant'): swap the whole entry and put the new url in. Moments: 1.5 s before each idea's first line (tl_p1.json). Suggested: CH.plantSystem: 'Plant System' (videos.js has no CH key for it yet).",
+ "replaces": [
+  "loaPYprOWDQ"
+ ],
+ "entries": [
+  {
+   "no": 2,
+   "art": "🌶️",
+   "topic": "Plant System",
+   "title": "Watered Every Day, Still Wilting. Why?",
+   "len": "7:33",
+   "url": "https://www.youtube.com/watch?v=<P4EP02>",
+   "moments": [
+    {
+     "at": "0:25",
+     "what": "Pick the fix: check every part, water it more, or feed it?",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-4'"
+     ],
+     "_line": "f201",
+     "_t": 27.18
+    },
+    {
+     "at": "1:56",
+     "what": "A plant makes its own food in its leaves, using light",
+     "keys": [
+      "O.plant",
+      "'M-20'",
+      "'mix:plants:38'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "u406",
+     "_t": 117.89
+    },
+    {
+     "at": "2:09",
+     "what": "Look closer: the leaves, the stem, the soil and the roots",
+     "keys": [
+      "O.plant",
+      "'mix:plants:40'",
+      "'lab:p4-1-1'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "d501",
+     "_t": 130.79
+    },
+    {
+     "at": "2:54",
+     "what": "Wet soil, thirsty plant: roots need air to absorb water",
+     "keys": [
+      "O.plant",
+      "'M-21'",
+      "'mix:plants:38'",
+      "'lab:p4-1-4'"
+     ],
+     "_line": "x601",
+     "_t": 175.93
+    },
+    {
+     "at": "3:33",
+     "what": "A plant is a system: one part stops, the whole plant is affected",
+     "keys": [
+      "O.plant",
+      "'lab:p4-2-3'"
+     ],
+     "_line": "s651",
+     "_t": 215.4
+    },
+    {
+     "at": "4:40",
+     "what": "The real fix: holes in the pot; water when the top is dry",
+     "keys": [
+      "'lab:p4-1-4'"
+     ],
+     "_line": "r701",
+     "_t": 281.93
+    },
+    {
+     "at": "5:31",
+     "what": "Be a drop of water: the stem transports water, salts and food",
+     "keys": [
+      "O.plant",
+      "O.transport",
+      "'mix:plants:39'"
+     ],
+     "_line": "j801",
+     "_t": 332.94
+    },
+    {
+     "at": "6:03",
+     "what": "The words that earn marks: roots, stem and leaves",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "m901",
+     "_t": 364.99
+    }
+   ]
+  }
+ ]
+}

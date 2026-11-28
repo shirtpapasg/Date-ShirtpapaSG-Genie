@@ -1,0 +1,247 @@
+{
+ "film": 2,
+ "title": "TheOneApp Promotional Video 2: The Sleeping Guardians",
+ "youtube": "d7N5awbmRwQ",
+ "duration": 75.617,
+ "lines": [
+  {
+   "speaker": "Heart",
+   "text": "Three Guardians keep the Station's sparkle alight.",
+   "start": 2.73,
+   "end": 5.16,
+   "captioned": false,
+   "start_rough": 2.3,
+   "end_rough": 5.14,
+   "new_start": 2.73,
+   "new_end": 5.34,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Heart",
+   "text": "They have never once slept.",
+   "start": 6.32,
+   "end": 7.63,
+   "captioned": false,
+   "start_rough": 6.36,
+   "end_rough": 7.58,
+   "new_start": 6.32,
+   "new_end": 7.66,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Momo",
+   "text": "They never sleep!",
+   "start": 12.35,
+   "end": 13.15,
+   "start_rough": 12.3,
+   "end_rough": 13.08,
+   "new_start": 12.35,
+   "new_end": 13.49,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Pip",
+   "text": "Then something has enchanted them.",
+   "start": 13.61,
+   "end": 15.79,
+   "start_rough": 13.68,
+   "end_rough": 15.66,
+   "new_start": 13.61,
+   "new_end": 15.49,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Momo",
+   "text": "WAKE UP!",
+   "start": 17.34,
+   "end": 17.82,
+   "start_rough": 17.3,
+   "end_rough": 17.84,
+   "new_start": 17.34,
+   "new_end": 18.13,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Basil",
+   "text": "Shouting will not do it.",
+   "start": 19.08,
+   "end": 20.83,
+   "start_rough": 19.3,
+   "end_rough": 20.36,
+   "new_start": 19.08,
+   "new_end": 20.24,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Basil",
+   "text": "Look: each one is missing something.",
+   "start": 21.48,
+   "end": 23.23,
+   "start_rough": 21.44,
+   "end_rough": 23.1,
+   "new_start": 21.48,
+   "new_end": 23.07,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Basil",
+   "text": "In the School Lab, we find out.",
+   "start": 24.74,
+   "end": 27.02,
+   "start_rough": 24.1,
+   "end_rough": 27.02,
+   "new_start": 24.74,
+   "new_end": 26.28,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Heart",
+   "text": "Heat flows from a hotter object to a colder one.",
+   "start": 31.58,
+   "end": 34.93,
+   "start_rough": 30.84,
+   "end_rough": 34.44,
+   "new_start": 31.58,
+   "new_end": 34.19,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Momo",
+   "text": "One!",
+   "start": 34.7,
+   "end": 35.14,
+   "start_rough": 34.75,
+   "end_rough": 35.4,
+   "new_start": 34.7,
+   "new_end": 35.29,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Heart",
+   "text": "Light can be reflected.",
+   "start": 39.98,
+   "end": 41.19,
+   "start_rough": 39.68,
+   "end_rough": 41.04,
+   "new_start": 39.98,
+   "new_end": 41.23,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Pip",
+   "text": "Two!",
+   "start": 42.04,
+   "end": 42.6,
+   "start_rough": 41.96,
+   "end_rough": 42.44,
+   "new_start": 42.04,
+   "new_end": 42.69,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Heart",
+   "text": "A magnet attracts iron.",
+   "start": 47.42,
+   "end": 48.78,
+   "start_rough": 46.62,
+   "end_rough": 48.7,
+   "new_start": 47.42,
+   "new_end": 48.79,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Basil",
+   "text": "Three.",
+   "start": 49.91,
+   "end": 50.5,
+   "start_rough": 49.94,
+   "end_rough": 50.28,
+   "new_start": 49.91,
+   "new_end": 50.5,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Momo",
+   "text": "You woke them! You did the science!",
+   "start": 55.14,
+   "end": 57.93,
+   "parts": [
+    [
+     "You woke them!",
+     54.7
+    ],
+    [
+     "You did the science!",
+     56.9
+    ]
+   ],
+   "start_rough": 54.7,
+   "end_rough": 57.78,
+   "new_start": 55.14,
+   "new_end": 58.22,
+   "tempo": 1.0,
+   "part_starts": [
+    55.14,
+    57.05
+   ]
+  },
+  {
+   "speaker": "Pip",
+   "text": "And the Guardians can be your buddies too.",
+   "start": 60.15,
+   "end": 62.19,
+   "start_rough": 60.04,
+   "end_rough": 62.1,
+   "new_start": 60.15,
+   "new_end": 62.27,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Heart",
+   "text": "The only app you need to learn Science.",
+   "start": 64.52,
+   "end": 66.46,
+   "start_rough": 64.58,
+   "end_rough": 66.4,
+   "new_start": 64.52,
+   "new_end": 66.44,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Pip, Momo and Basil",
+   "text": "TheOneApp!",
+   "start": 66.96,
+   "end": 67.81,
+   "start_rough": 67.04,
+   "end_rough": 67.68,
+   "new_start": 66.96,
+   "new_end": 68.04,
+   "tempo": 1.0
+  },
+  {
+   "speaker": "Basil",
+   "text": "Next time... who stole the light?",
+   "start": 70.39,
+   "end": 73.51,
+   "parts": [
+    [
+     "Next time...",
+     70.2
+    ],
+    [
+     "who stole the light?",
+     72.32
+    ]
+   ],
+   "start_rough": 70.2,
+   "end_rough": 73.26,
+   "new_start": 70.39,
+   "new_end": 73.32,
+   "tempo": 1.0,
+   "part_starts": [
+    70.39,
+    72.28
+   ]
+  }
+ ]
+}

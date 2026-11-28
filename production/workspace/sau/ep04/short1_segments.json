@@ -1,0 +1,160 @@
+{
+ "episode": "SAU EP04 Short 1",
+ "title": "Is rain from the sea salty?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [],
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "Is rain from the sea salty?"
+  },
+  {
+   "id": "s1b",
+   "scene": "hook",
+   "text": "Almost every afternoon, the sky turns dark and the rain pours down. But where does all this rain come from?"
+  },
+  {
+   "id": "w2",
+   "scene": "povEvap",
+   "silent": 5.5,
+   "sfx": [
+    [
+     "jiggle",
+     0
+    ],
+    [
+     "pad_wonder",
+     2.35
+    ],
+    [
+     "pop",
+     3.4
+    ],
+    [
+     "sun_whoosh",
+     3.4
+    ],
+    [
+     "wind",
+     3.6
+    ]
+   ]
+  },
+  {
+   "id": "w4",
+   "scene": "povSea",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "sea_wash",
+     0
+    ],
+    [
+     "pass_by",
+     1.0
+    ],
+    [
+     "splash",
+     1.95
+    ],
+    [
+     "pop",
+     2.1
+    ],
+    [
+     "splash",
+     3.45
+    ]
+   ]
+  },
+  {
+   "id": "w5",
+   "scene": "povCool",
+   "silent": 5.5,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "chime",
+     0.4
+    ],
+    [
+     "wind",
+     1.0
+    ],
+    [
+     "pop",
+     2.9
+    ],
+    [
+     "pop",
+     3.1
+    ],
+    [
+     "pop",
+     3.3
+    ],
+    [
+     "bubble",
+     3.45
+    ],
+    [
+     "reveal",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "w7",
+   "scene": "povFall",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "rain",
+     0
+    ],
+    [
+     "thunder",
+     0.1
+    ],
+    [
+     "rush",
+     0.4
+    ],
+    [
+     "splash",
+     4.05
+    ],
+    [
+     "thud",
+     4.05
+    ]
+   ]
+  },
+  {
+   "id": "s1c",
+   "scene": "salt",
+   "text": "And here's a surprise. When sea water evaporates, the salt stays behind."
+  },
+  {
+   "id": "s1d",
+   "scene": "salt",
+   "text": "So rain is fresh water, even when it came from the sea!"
+  },
+  {
+   "id": "s1e",
+   "scene": "salt",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

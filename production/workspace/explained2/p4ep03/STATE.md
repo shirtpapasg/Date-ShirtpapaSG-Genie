@@ -1,0 +1,177 @@
+# P4 EP3 build state (for a resume after a restart)
+P4 EP3, **"The Case of the Mystery Leaf"** (Read a Leaf Like a Scientist; the Plant System), ONE video, **7:39.0** (459.03 s; P4 max 8:00):
+the story to 6:58, then the read-along, "Now you know!", 4.0 s of outro, the blooper and GLITCH's final sting ("New knowledge acquired.",
+then 0.5 s of black). Script: `../p4/p4_ep03_script.md` **v2** (Genie 3cbc25d), every spoken line word for word (`script.py`). The teacher
+(28 Nov 2026) replied "ok" to the script and its 20 questions: every question takes the script's own recommendation (list below).
+Built by one Opus agent on 28 Nov 2026 from the P4 EP2 engine (`../p4ep02/`). **NOT uploaded**: the main session shows the teacher first.
+It REPLACES the old P4 EP03 PNe2DU8sFTI (never deleted).
+
+## v2 (28 Nov 2026, after the teacher saw the live cut): FIXES + RE-STAGED (review: scratchpad `p4ep03_v2_review/`; NOT uploaded)
+The live cut stays KLHY6W_dTR4 until the teacher replies "OK"; v2 is `/dev/shm/p4ep03/p4ep03_v2.mp4` (RAM; the live cut
+`/dev/shm/p4ep03/p4ep03.mp4` is kept). Same script, voices, timing and SOUND: the v2 file carries the live file's audio stream copied
+bit for bit (`run_render_v2.sh`: a full render, then `-map 0:v -map 1:a -c copy`). The teacher's notes and what changed:
+- **"detective needs detective hat... not over his episode bike helmet"**: `ep3art.js` `deerstalker()` / `deerstalkerBack()` / `detHat()`:
+  a brown tweed deerstalker (front and back peaks, ear flaps tied up in a bow on top), a size too big, sitting straight on his bare head
+  (no helmet, no chin strap), per pose (`BASILH3`: sit, oops (his paw redrawn on top), surprised, arms_crossed, cheer, laughing, pointing,
+  thinking, worried, waving, and the BACK view for the journey). It plops on at "Finally", sinks to his eyebrows (never his eyes), he
+  pushes it back at "expert" (tipped back). The score-bar chip and `thumb_v2.jpg` (`thumbP4ep03.js`) wear it too.
+- **"why is pip still in cyclist helmet?"**: no bike scene in EP3, so no bike helmets at all: `page.html` ITEM_OPT pip "C" (goggles only,
+  band behind his ears, lenses up on his crown; + the strap across the back of his head in the back view), `BASIL_HELMET = false`,
+  `PIP_HELMET = false`; the pandan leaf now flops onto his bare crown (`s2.js` flopLeaf). `qa_helmets.js`: 0 frames with a helmet.
+- **"font not clear"**: the title card (`slamV2`), THREE CLUES and the fix cards' white words get a thick ink outline (paint-order stroke).
+- **"Remember one of the rule is not to have still frames or same scene for more than 10 seconds"**: THE DIRECTOR. `census.js` records
+  the base staging (who and which cards are where, 4 a second); `plan_shots.py` writes `director_p1.js` (75 shots: singles, two-shots,
+  the group, slow push-ins, hand-placed pushes on the look-closer panel, the words card and the read-along; locked where the base camera
+  already moves or a full-frame insert is up; no face under a screen card or the HUD; no jump cuts) and `qa/shotlist.txt`; `main.js`
+  `dirAt()` films each scene through it; screen things go through `DHUD()` (lib.js) and stay put. `../qa/hold_check.py` measures the video.
+- **"zoom in to trace in red, the edges, showing basic descriptions"**: `s3.js` `edgeTrace()` during Heart's q812 (276.2-283.0 s): a full
+  frame push onto the mango leaf, a red line round its real outline ("STRAIGHT EDGE: smooth all the way round, no teeth"), across to the
+  mystery leaf ("JAGGED EDGE: tiny teeth all round, like a saw"), then both traced side by side; it cuts back for the CLEARED stamp.
+- **"glitch is too close to the pet buddies"**: GLITCH and the buddies re-spaced in every scene where he stands with them (cold, clue
+  cards, colour, size, GLITCH scene, next); `qa_gaps.py` on the census: >= 60 px clear in every sample.
+- **"And why is Uncle there?"**: Uncle Lim is drawn ONLY for his line g908 (the director cuts to him at 343.12 s and away at 352.99 s);
+  `x2limFar` draws nothing. Checked: 0 samples with him outside his line.
+- Pip's "LEAF CASE" clipboard read mirrored: `x2held` flips the words on a mirrored prop back (`unflipText`); GLITCH's "?" too.
+  `census.js` lists mirrored words: 0.
+- Rules recorded: `../SERIES_FORMAT.md` 6y (the 10-second rule) and 6z (hat replaces helmet, helmets only when cycling, GLITCH spacing,
+  guests only for their moment, contrast, no mirrored words, comparisons shown), `../MOTION_GUIDE.md` 3, the vault `House-Rules.md`.
+- Rebuild order (v2): `node census.js out/census_base.json .25 1` -> `python3 plan_shots.py` -> `node ../kit/bubble_layout.js . 1` ->
+  checks (`node census.js out/census_final.json .25 0 && python3 qa_gaps.py out/census_final.json`, `node qa_helmets.js`, `node sweep.js 1`,
+  `node ../qa/face_cover_scan.js p4ep03 1 0-459.1` from explained2/) -> `./run_render_v2.sh` -> `python3 ../qa/hold_check.py <mp4>`.
+**v2 result (28 Nov 2026, 09:49-10:10 UTC, full render 1237 s, flock /tmp/explained_render.lock, RAM):** `/dev/shm/p4ep03/p4ep03_v2.mp4`
+(318 MB) 1920x1080, 30 fps, 13771 frames = 7:39.0, decode 0 errors; audio stream md5 bd10cc44... (packets) / 947b601e... (decoded)
+IDENTICAL to the live file; -16.0 LUFS, peak -2.7 dBFS (unchanged). `../qa/hold_check.py`: 232 picture changes, mean hold 2.0 s,
+**longest hold 9.25 s** (the journey's drop, 201.3-210.5), 0 holds over 10 s (the live cut: 57.0 s, 11 over 10 s). census checks: GLITCH
+>= 60 px, Lim only in his line, 0 mirrored words; `qa_helmets.js` 0; `sweep.js` 0 bad; face_cover_scan: only the by-design runs (the pick
+cards rising, "Now you know!", the faces behind the full-frame edge trace) and single in-between frames of a card popping (224.8 s 13 %,
+348.8 / 351.4 s 18-21 % "the plant grows new leaves", 403.0 s 13 %). Bubbles 102 of 103 beside their speaker. Thumbnail `thumb_v2.jpg`
+(not committed: media). Review: scratchpad `p4ep03_v2_review/` (index.html, before/after sheets, edge-trace stills, the 720p preview in 3
+parts of 13.6 / 14.0 / 12.9 MB; media symlinked from `/dev/shm/p4ep03/review_v2/`). NOT uploaded: waiting for the teacher's "OK" to
+replace KLHY6W_dTR4 (then re-upload as a new version or replace per the upload kit; chapters / app moments keep their times: same timing).
+(An interim render had a Basil single cropping his hat and Lim half out of frame; the planner now frames the hat in and hand-places
+Lim's two shots; that render was discarded.)
+
+## The teacher's 20 questions (all: the script's recommendation)
+Q1 the pandan is cleared on its veins only (no pandan leaf stalk labelled) · Q2 the book's "straight edge" for the mango · Q3 the journey
+says water travels through the veins, no P5 words · Q4 four key words (LEAF BLADE, LEAF STALK, NET VEINS, PARALLEL VEINS) · Q5 the snail's
+tongue fact, "radula" not said · Q6 Uncle Lim's "cannot stick back... grows new leaves" · Q7 the hibiscus match on veins, edge and shape ·
+Q8 GLITCH again (LEAF RETURN SERVICE, KNOWLEDGE LOG · ENTRY 2) · **Q9 A: the four-face score bar** (`../kit/score4.js`, below) · **Q10 A:
+no doctor costumes in EP3** (they start in EP4) · Q11 A: Basil's detective cap drawn in code (no painting arrived) · Q12 the cactus link and
+"...Not me." · Q13 the last slapstick (the cap, the pandan flop and its replay) · Q14 EP1's snail with its crown as the witness · Q15 Basil
+right but rushes (CASE CLOSED! stopped by Pip) · Q16 Pip reads the card · Q17 test clips made and measured (below) · Q18 GLITCH's growth
+signs kept small (log 2, a steadier, slightly brighter antenna light, sting voice speed .88 / range .38, the 8-frame chill) · Q19 build as
+written (it built at 7:39, under the 7:45 cut line: no cut taken) · Q20 no Heart hint in EP3.
+
+## The build model
+Engine copied from `../p4ep02/` (lib.js, common.js, main.js, render.js from `../p4ep01v2/` with RENDER_OUT, song.js, the humour bus, the
+sad trombone, the pigeons, the face_cover_scan, the bubble layout). EP3 files: `script.py`, `ep3art.js` (the leaves, the plants, the set,
+the props, the cap, the cactus), `s1.js` (helpers + cold open to picks), `s2.js` (colour, size, look-closer, journey, NET VEINS), `s3.js`
+(suspects to the sting), `sound_cues.js`, `make_moments.py`, `thumbP4ep03.js`, `run_render.sh`. lib.js: EP3's OUTCOMES, KW (all four pop
+in place at [1180, 236]/[1200, 196], no dimming; the flight to the shelf no longer arcs over the score bar), KWLINE, SHELF_HIDE (+ witness,
+reveal, glitch, dive, journey), learnAt. main.js: XDEFSE3 + `window._T` (the frame time, for the cap drawn inside Basil's sprite).
+`spr` is a symlink to `../p4ep02/spr` (the same paintings; no new sprite). `voice/` and `out/` live in RAM (`/dev/shm/p4ep03/`; the voice
+JSONs are committed in `voice/` after the build).
+- **The set `vd3`** (ep3art.js BG.vd3, baked to bg/vd3.png): EP2's void deck (one 214 on the middle pillar; EP1's chalk race line repaved)
+  with the three suspects: the pandan in a big blue pot by the letterboxes (left), the mango tree on the grass in the void deck's open side
+  at the left (a bunch of young coppery-red leaves; the pigeon's low branch), the hibiscus hedge in a long planter in front of the bicycle bay
+  (red flowers), Uncle Lim's round stone table beside it. The Help Desk (EP2's deskV3) in the middle, its sign corrected to PROPERLY.
+- **The leaves** (drawn from the NParks facts in the script's section 2): `hibLeaf` (THE mystery leaf: oval, pointed tip, 19 saw teeth =
+  jagged edge, a leaf stalk, net veins that split and join, the same small dusty mark in every shot; `glow` = lit from behind; `hi` =
+  blade / edge / stalk / main / small highlights), `mangoLeaf` (long, lance-shaped, a smooth slightly wavy edge, net veins; `young` =
+  smaller and coppery red), `pandanLeaf` (a strap with parallel veins side by side, no stalk). Every comparison is side by side on a card,
+  never overlapped; labels are joined by plain lines.
+- **GLITCH** (EP2's paintings): with his tape roll he is the "crossed" painting with the roll drawn in front of his arms (`glitchTape`; the
+  "jug" painting holds a watering can); his screen: LEAF RETURN SERVICE, OWNER: ..., the laugh meter at 0, the thumbs-up, the parts check
+  (BLADE / STALK / VEINS ticks), UPDATING; the chest panel shows the three evidence cards (parallel vs net, straight vs jagged, the match)
+  then KNOWLEDGE LOG with entry 2 on top of entry 1 (the counter ticks 1 -> 2 at the chill, 1.0 s after "weak clues", the eyes narrow 8 frames).
+- **Basil's detective cap** (Q11 A, code; SUPERSEDED by v2 above: a deerstalker on his bare head, no helmet): `detCap` in the helmet's own frame (BASILH anchors), a soft brown cap two sizes too big ON TOP of
+  his orange helmet; it plops on at "Finally", slides to his eyebrows (never his eyes), he pushes it up at "expert"; worn to the end (not in
+  the sting, not on back views).
+- **The snail** (EP1's `snailV2` with its crown, an invisible face box): the pandan pot's rim (cold, witness), the mango trunk (colour), the
+  floor by the open side (size), the desk's leg (look-closer), the case board's corner (suspects), low in the hedge (GLITCH; the reveal).
+
+## The four-face score bar (Q9 A; `../kit/score4.js`, for EP4+ too)
+YOU plus Pip, Momo and Basil, each with their own face (the sit painting cropped round, with their P4 helmet) and their own score in a
+sun-yellow badge (Pet Buddy Quest's phone layout), top right (446 x 76 px, right edge 1888). `SCORE4.push([t, you, pip, momo, basil])`;
+it replaces lib.js `scoreboard()`, so `HUD()` draws it; the changed number bumps. EP3: at k1106 YOU 1, BASIL 1, Pip 0, Momo 0 (no mark
+against a 0). EP1 and EP2 keep "YOU vs BUDDIES".
+
+## Voices (`make_voice.py`; every line aligned, none proportional)
+EP2's recipes: Heart af_heart .90 (the journey .85, softer; the look-closer .85), the buddies 12% slower (Character Voice Kit), GLITCH
+(`glitch`, glitch_fx) and his sting `glitch_sting` **speed .88, range .38** (a shade calmer than EP2's .9 / .4), Uncle Lim with
+`sg_pron.shape_particles` ("Aiyoh." EYE-yoh with a 4-semitone fall, "lah." shortened to .30 s with a 3-semitone fall). Every line through
+`../sg_pron.py`. **New sg_pron entries (Q17; WAITING FOR THE TEACHER'S LISTEN):** "pandan" -> pˈɑːndˌɑːn (PAHN-dahn; Kokoro said PAN-dun),
+"hibiscus" -> haɪbˈɪskəs (hy-BIS-kus; Kokoro stressed HIB). "jagged": no entry (Kokoro's own dʒˈæɡᵻd is JAG-id).
+**Measured** (pocketsphinx, a two-way forced choice between the spellings + an allphone pass; child/robot voices moved to an adult range
+first): all 15 uses of pandan / hibiscus / jagged in the episode were heard as the intended form (e.g. Basil's q801 "pandan" phones
+P AA N AE N; Heart's q814 "hibiscus" AH HH AY B IH Z G ER Z; k1103 "jagged" JH AE G IH D); Uncle Lim's "Aiyoh" heard as EYE-yoh (pitch
+134 -> 118 Hz), his "lah" .29 s falling 109 -> 102 Hz; a free transcription of his line: "...leave drop already cannot speak that one lol
+the plant grows new leaves slowly slowly" (the English words land; Singlish words are not in the English model).
+Test clips: `../pron_clips/p4ep03_pandan_test.mp3`, `p4ep03_hibiscus_test.mp3`, `p4ep03_jagged_test.mp3`, `p4ep03_UncleLim_test.mp3`.
+
+## Pacing
+875 words (incl. the read-along) in 7:39.0 = **114 words a minute** (series range 105-117), voice on 75%. The script's model said 7:54 /
+about 7:30 built; it built at 7:39 (under 7:45), so no ready cut was needed.
+
+## Sound (`sound_cues.js`, `song.js`)
+New: **Scoop Parade NOIR** (`noirBar`: Dm7 | Bb | Gm7 | A7, brushed snare, a walking upright bass, a D-minor glockenspiel hook answered
+by a muted trumpet; original): the cold open, the witness, the fix cards, the picks, the colour and size tests, the suspects (to the stamp,
+where the finale takes over), the reveal. ACTION stab on "Hold it!" (resolves) and on the too-early CASE CLOSED! (cut short). Lite under
+o405, the look-closer, NET VEINS, the words; the help-desk voicing in the GLITCH scene and the EP4 tag; the micro-world pad alone in the
+journey; the calm bed in the read-along; silence in the lock-in, on the frozen stamp (record scratch) and in GLITCH's sting. The SAD
+TROMBONE exactly three times (after "Leaf it to me!", after "They're ALL green!", the pandan flop); rimshots at a202, o406, k1105; the
+pigeon's KOO! New comic sounds on the humour bus (+3 dB over the dialogue, never on a word): taperip (SKRRRITCH), tapestrip (SKRITCH),
+leafflop (FLOP), folderslap. Also: the swatch boops, ruler clacks, the noir title "dun-dun", the cap's flump, the big CASE CLOSED thump.
+
+## Deviations from the script (each for a reason)
+- One set for every void-deck scene: the mango tree stands in the void deck's open side at the LEFT (the script: "on the grass, centre
+  back"), so all three suspects are in the wide shot; the hibiscus hedge is in a planter in front of the bicycle bay.
+- The suspects: the case board is the left third of the frame (on the wall); Basil stays at it with the stamp (the hibiscus match
+  "beside a leaf still on the hedge" is a side-by-side card); Momo and Pip glide with the camera along the suspects.
+- The size test's bigger / smaller pairs are side-by-side cards (no invented numbers), not held up at the branch.
+- Pip sets his tools down on the floor beside him (not on the desk) before the high-five lands.
+- GLITCH peels the hedge's taped leaf in shot; the pandan's and the trunk's come off as he rolls on (gone in the later wide shots); the
+  basket fills to three.
+- Uncle Lim is a front view (EP2's rule): far back by his stone table in the desk shots, by the hedge's end in the GLITCH scene; no walk.
+- Not animated: Basil's pat on GLITCH's arm (a lean), Momo's fingertip along the edges (the two edges light up on the card).
+- The key-word shelf is hidden in the GLITCH scene (his chest panel and the KNOWLEDGE LOG need the top of the frame).
+- The cactus has no face yet (EP4's Spike is still to be designed); an invisible face box keeps bubbles and words off it.
+
+## Checks (on the final code; see the end of this file for the render)
+`qa/face_cover_scan.txt` (5 fps, the whole video): no speech bubble on any face; the runs left are by design (the pick cards rising past
+the faces for one frame as in EP2, "Now you know!" sliding past for one frame) and single frames of Pip's shoulder by Basil's chin in the
+colour pan. `kit/bubble_layout.js`: 102 of 103 pages beside their speaker (the chant u1300 has no speaker on screen).
+Other scans (in `qa/`): `ghost_scan.txt` no buddy ghosting; `facing_scan.txt` no backwards movers; `flicker_scan.txt` no buddy flicker
+(after the fix below).
+
+## Render (28 Nov 2026, 07:23-07:43 UTC; flock /tmp/explained_render.lock)
+One full render (`run_render.sh`: render.js, 3 workers, chunks and the joined video in RAM, `RENDER_OUT=/dev/shm/p4ep03/render`; 1158 s),
+then `finish.sh`. **Splice** (the flicker scan found the journey's raft jumping 340 px between two phases at 201.3 s; s2.js now keeps the
+raft in one place): frames 6000-6300 (200-210 s, exactly one render chunk, so it starts on a key frame) re-rendered with `render.js 1 3 200
+210` and joined with `-f segment -segment_frames 6000,6300` + the concat demuxer (stream copy); frames outside the span decode
+bit-identical (checked at frames 3000, 5999, 12000, 13770). **Sound:** the first mux measured a true peak of -1.5 dBTP: the new tape
+sounds' top end overshoots in the AAC encoder. Lowering the master ceiling only made it worse (+2.6 dBTP: more limiting, more top end), so
+the master is back at EP2's .66 and finish.sh low-passes at 15 kHz just before the AAC encode.
+**Result:** `p4ep03.mp4` 1920x1080, 30 fps, **13771 frames = 7:39.0**, decode 0 errors, **-16.0 LUFS, true peak -2.7 dBTP**;
+blackdetect: only the planned 0.47 s at the end; freezedetect (1.5 s): 42.4 s for 3.5 s (the witness hold: the snail in its ring).
+**Disk was tight (3.06-3.07 GB free; keep 3 GB): the final file is in RAM at `/dev/shm/p4ep03/p4ep03.mp4`** (197 MB; `p4ep03.mp4` here is a
+symlink to it); move it here only when there is room. The same for `sheet.png` (30 stills) and the review media.
+Review (scratchpad `p4ep03_review/`, not committed): index.html, the 720p preview in 3 parts (14.4 / 13.7 / 14.9 MB), thumb.jpg, a contact
+sheet every 5 s, the four Q17 test clips. The media files there are symlinks into `/dev/shm/p4ep03/review/` (disk). NOT uploaded.
+To rebuild: the voice WAVs are in `/dev/shm/p4ep03/voice` (RAM; `voice/` here keeps only the committed JSONs): point `voice` back there
+(`rm -r voice && ln -s /dev/shm/p4ep03/voice voice`) or re-run make_voice.py (it re-records only what is missing); `out` is a symlink to
+`/dev/shm/p4ep03/out` (mix, cues, logs). Then `python3 build_tl.py 1; node dump_cues.js 1; node song.js 1; node ../kit/bubble_layout.js . 1;
+./run_render.sh`.
+- **Uploaded 28 Nov (the teacher's "ok"):** `p4ep03.mp4` is live as KLHY6W_dTR4 (https://youtu.be/KLHY6W_dTR4), public, Made for Kids,
+  Education, English (config `upload.json`, thumbnail `thumb.jpg`; processed). It replaces PNe2DU8sFTI at position 2 in PLK9BW3T6kXx4 and
+  PLPfEuT7l4KjI (right after GLY4mDzxdaA); PNe2DU8sFTI stays public with a NEW VERSION line (no other video pointed to it). Chapters:
+  key KLHY6W_dTR4 in `chapters_p3.json`. TheOneApp #286 (P4 no. 3 = KLHY6W_dTR4, the seven moments of `app_moments.json`; the 2:33 one is
+  worded "Look closer: the four parts of a leaf" in the app), merged (4d0fa15), not deployed. The mp4 is still only in RAM
+  (`/dev/shm/p4ep03/p4ep03.mp4`): moving it would leave the disk under 3 GB free.
+- **v2 uploaded 28 Nov (~10:55 UTC, the teacher's "ok" to replace KLHY6W_dTR4):** `/dev/shm/p4ep03/p4ep03_v2.mp4` is live as
+  8mQZiunF-W8 (https://youtu.be/8mQZiunF-W8), public, Made for Kids, Education, English, processed (config `upload_v2.json`, thumbnail
+  `thumb_v2.jpg` with the detective hat; title, description with chapters and tags the same as KLHY6W_dTR4: same timing). It replaces
+  KLHY6W_dTR4 at position 2 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI (c4ZDCAD2vPM, GLY4mDzxdaA, 8mQZiunF-W8, ...). KLHY6W_dTR4 STAYS PUBLIC
+  with a NEW VERSION line; PNe2DU8sFTI's NEW VERSION line now points to 8mQZiunF-W8. Chapters: key 8mQZiunF-W8 in `chapters_p3.json`.
+  TheOneApp #287 (P4 no. 3 = 8mQZiunF-W8, moments unchanged), merged (02d6264), not deployed. The v2 mp4 is still only in RAM
+  (`/dev/shm/p4ep03/p4ep03_v2.mp4`, 318 MB): the disk has about 3.0 GB free. `thumb_v2.jpg` is not committed (media).

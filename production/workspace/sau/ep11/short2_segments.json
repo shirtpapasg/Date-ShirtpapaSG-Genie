@@ -1,0 +1,58 @@
+{
+ "episode": "SAU EP11 Short 2",
+ "title": "One teacher or a whole hall?",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.4,
+ "kws": [
+  [
+   "s2b",
+   "gpus",
+   "GPU",
+   "#06a77d"
+  ],
+  [
+   "s2c",
+   "cpu",
+   "CPU",
+   "#3a86ff"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "s2a",
+   "scene": "qcard",
+   "text": "One clever teacher, or a whole school hall? Which works faster?"
+  },
+  {
+   "id": "s2b",
+   "scene": "pixels",
+   "text": "Nvidia's famous chips are called GPUs, graphics processing units. They were first made to draw video games."
+  },
+  {
+   "id": "s2c",
+   "scene": "hall",
+   "text": "An ordinary computer brain, a CPU, is like one very clever teacher, solving sums one after another. A GPU is like a whole school hall of pupils, each solving one small sum, all at the same time."
+  },
+  {
+   "id": "s2d",
+   "scene": "ai",
+   "text": "And it turns out AI learns in a similar way: by doing billions and billions of small multiplications. So the chip built for games became the chip that helps teach AI."
+  },
+  {
+   "id": "s2e",
+   "scene": "try",
+   "text": "Which finishes first: one friend with twenty sums, or twenty friends with one sum each?"
+  },
+  {
+   "id": "s2f",
+   "scene": "try",
+   "text": "Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

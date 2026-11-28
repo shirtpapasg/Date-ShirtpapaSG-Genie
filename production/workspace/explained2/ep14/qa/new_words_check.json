@@ -1,0 +1,294 @@
+{
+ "phonemes": {
+  "rotation": "\u0279o\u028at\u02c8e\u026a\u0283\u0259n",
+  "reproduce": "\u0279\u1d7bp\u0279\u0259d\u02c8u\u02d0s",
+  "reproduces": "\u0279\u1d7bp\u0279\u0259d\u02c8u\u02d0s\u1d7bz",
+  "cycle": "s\u02c8a\u026ak\u0259l",
+  "cycles": "s\u02c8a\u026ak\u0259lz",
+  "life cycle": "l\u02c8a\u026af s\u02c8a\u026ak\u0259l",
+  "live": "l\u02c8a\u026av",
+  "j1003 (sg_pron)": "l\u02c8a\u026af s\u02c8a\u026ak\u0259lz \u025bn\u0283\u02c8\u028a\u0279 \u00f0\u00e6t l\u02c8\u026av\u026a\u014b \u03b8\u02c8\u026a\u014bz \u028cv\u00f0\u0259 s\u02c8e\u026am k\u02c8a\u026and k\u00e6n k\u0259nt\u02c8\u026anju\u02d0 tu\u02d0 l\u02c8i\u02d0v \u02cc\u0254n \u02c8\u025c\u02d0\u03b8."
+ },
+ "takes": [
+  {
+   "take": "Heart: \"Scientists call this turning: rotation.\"",
+   "id": "g708",
+   "word": "rotation",
+   "heard": "right ?r?",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil: \"Rotation means the Earth spins round and round...\"",
+   "id": "g709r",
+   "word": "rotation",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, Mark Sentence C0.3: \"the rotation of the Earth\"",
+   "id": "g1002",
+   "word": "rotation",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, Mark Sentence C0.3: \"This rotation takes 24 hours.\"",
+   "id": "g1002",
+   "word": "rotation",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, read-along: \"Rotation.\"",
+   "id": "hk_rotation",
+   "word": "rotation",
+   "heard": "right r??",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, read-along",
+   "id": "uk_rotation",
+   "word": "rotation",
+   "heard": "wrong www",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, read-along",
+   "id": "uk_rotation",
+   "word": "rotation",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, read-along",
+   "id": "uk_rotation",
+   "word": "rotation",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, goal card: \"What a cycle is.\"",
+   "id": "g403",
+   "word": "cycle",
+   "heard": "wrong www",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, goal card: \"Cycle or not?\"",
+   "id": "g404",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"...is called a cycle.\"",
+   "id": "g1101",
+   "word": "cycle",
+   "heard": "right ??r",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, Mark Sentence C0.1: \"Cycles are repeated patterns of change.\"",
+   "id": "g1103",
+   "word": "cycles",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, HOLD ON!: \"That means it is a cycle!\"",
+   "id": "g1201",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip: \"I think it is a cycle.\"",
+   "id": "g1301",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, look-closer: \"so it is a cycle too!\"",
+   "id": "g1304b",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo: \"Do living things have cycles too?\"",
+   "id": "g1501",
+   "word": "cycles",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, read-along: \"Cycle.\"",
+   "id": "hk_cycle",
+   "word": "cycle",
+   "heard": "right rr?",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, read-along",
+   "id": "uk_cycle",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, read-along",
+   "id": "uk_cycle",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, read-along",
+   "id": "uk_cycle",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, Part 2 recap: \"That is a cycle\"",
+   "id": "j101",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, goal card: \"What a life cycle is.\"",
+   "id": "j303",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, goal card: \"Why life cycles matter.\"",
+   "id": "j304",
+   "word": "cycles",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart: \"It goes round and round: that is a life cycle!\"",
+   "id": "j801",
+   "word": "cycle",
+   "heard": "? ???",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, Mark Sentence 4.2: \"A life cycle is...\"",
+   "id": "j803",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, his notes: \"a life cycle ends at the adult\"",
+   "id": "j902",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, Showdown: \"A life cycle repeats\"",
+   "id": "j905",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, Mark Sentence 4.1: \"Life cycles ensure...\"",
+   "id": "j1003",
+   "word": "cycles",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, read-along: \"Life cycle.\"",
+   "id": "hk_life_cycle",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Pip, read-along: \"Life cycle.\"",
+   "id": "uk_life_cycle",
+   "word": "cycle",
+   "heard": "wrong ??w",
+   "tail_voiced": null
+  },
+  {
+   "take": "Basil, read-along: \"Life cycle.\"",
+   "id": "uk_life_cycle",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, read-along: \"Life cycle.\"",
+   "id": "uk_life_cycle",
+   "word": "cycle",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Heart, look-closer: \"Living things reproduce and have young.\"",
+   "id": "j604",
+   "word": "reproduce",
+   "heard": "right rrr",
+   "tail_voiced": 0.9333333333333333
+  },
+  {
+   "take": "Momo: \"What does reproduce mean?\"",
+   "id": "j606m",
+   "word": "reproduce",
+   "heard": "wrong www",
+   "tail_voiced": 1.0
+  },
+  {
+   "take": "Heart, read-along: \"Reproduce.\"",
+   "id": "hk_reproduce",
+   "word": "reproduce",
+   "heard": "? ???",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Pip, read-along",
+   "id": "uk_reproduce",
+   "word": "reproduce",
+   "heard": "wrong rww",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Basil, read-along",
+   "id": "uk_reproduce",
+   "word": "reproduce",
+   "heard": "wrong rww",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Momo, read-along",
+   "id": "uk_reproduce",
+   "word": "reproduce",
+   "heard": "right rrw",
+   "tail_voiced": 0.0
+  },
+  {
+   "take": "Basil, Mark Sentence 4.2: \"...grows over time and reproduces.\"",
+   "id": "j803",
+   "word": "reproduces",
+   "heard": "right rrr",
+   "tail_voiced": null
+  },
+  {
+   "take": "Momo, Mark Sentence 4.1: \"can continue to live on Earth\" (sg_pron: leev)",
+   "id": "j1003",
+   "word": "live",
+   "heard": "right rrr",
+   "tail_voiced": null
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "claude/*": false,
+      "claude/epic-feynman-8hz8e1": false
+    }
+  }
+}

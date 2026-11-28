@@ -1,0 +1,415 @@
+{
+ "episode": "SAU EP02 Part 1",
+ "title": "How does Singapore keep the lights on? (Part 1)",
+ "tag": "🌏 TheOneApp, Explored · EP 2 · Part 1",
+ "intro": {
+  "goals": [
+   [
+    "⚡",
+    "How Singapore makes electricity",
+    "first"
+   ],
+   [
+    "🔄",
+    "The energy changes in a power station",
+    "second"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT",
+  "Part 2: Can Singapore",
+  "keep the lights on? ⚡"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · Part 2 is out on Sunday!",
+ "close": {
+  "rows": [
+   [
+    "🔥",
+    "Most of our electricity: burning natural gas",
+    "natural",
+    0.15,
+    "#3a86ff"
+   ],
+   [
+    "⚡",
+    "chemical → heat → kinetic → electrical",
+    "chemical",
+    0.4,
+    "#f77f00"
+   ],
+   [
+    "🚢",
+    "But we have no gas of our own",
+    "own",
+    0.7,
+    "#e63946"
+   ]
+  ],
+  "tease": "▶ Part 2: Can Singapore keep the lights on?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "today",
+   "natural",
+   "NATURAL GAS",
+   "#3a86ff"
+  ],
+  [
+   "j5",
+   "chemical",
+   "CHEMICAL POTENTIAL ENERGY",
+   "#f77f00"
+  ],
+  [
+   "j5",
+   "electrical",
+   "ELECTRICAL ENERGY",
+   "#ffbe0b"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h00",
+   "scene": "kidRoom",
+   "silent": 4.8,
+   "sfx": [
+    [
+     "door_open",
+     0.52
+    ],
+    [
+     "footsteps",
+     1.28
+    ],
+    [
+     "lamp_click",
+     3.5
+    ],
+    [
+     "click",
+     3.55
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Flip a switch, and the lights come on. But Singapore has no oil, no coal and no gas of its own. So where does our electricity come from?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last week's question. Why does an N ninety-five mask protect you better than a cloth mask? A cloth mask has gaps much bigger than haze particles. An N ninety-five mask has a fine filter that traps at least ninety-five out of every hundred tiny particles, and it fits closely around your face.",
+   "shots": [
+    [
+     "cloth",
+     1.3,
+     300,
+     380
+    ],
+    [
+     "filter",
+     1.3,
+     900,
+     380
+    ],
+    [
+     "traps",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! This is part one of two. Today, you'll learn two things. First, how Singapore makes its electricity. Second, the energy changes inside a power station. Let's get started!"
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "h1",
+   "scene": "seabed",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "pad_tension",
+     0
+    ],
+    [
+     "deep",
+     0
+    ],
+    [
+     "bubble",
+     1.2
+    ],
+    [
+     "bubble",
+     2.2
+    ],
+    [
+     "whoosh",
+     3.4
+    ]
+   ]
+  },
+  {
+   "id": "h2",
+   "scene": "povRock",
+   "silent": 4.2,
+   "sfx": [
+    [
+     "squeeze",
+     0
+    ],
+    [
+     "drill",
+     2.1
+    ]
+   ]
+  },
+  {
+   "id": "h3",
+   "scene": "povWell",
+   "silent": 4.4,
+   "sfx": [
+    [
+     "pipe_rush",
+     0
+    ]
+   ]
+  },
+  {
+   "id": "h4",
+   "scene": "povClean",
+   "silent": 4.2,
+   "sfx": [
+    [
+     "splash",
+     0.4
+    ],
+    [
+     "tank_swirl",
+     0.2
+    ],
+    [
+     "bubble",
+     1.6
+    ],
+    [
+     "hiss",
+     2.8
+    ],
+    [
+     "whoosh",
+     3.3
+    ]
+   ]
+  },
+  {
+   "id": "h5",
+   "scene": "route",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "hum",
+     0
+    ],
+    [
+     "ping",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "h6",
+   "scene": "povBurn",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "flame_roar",
+     0
+    ],
+    [
+     "ignite",
+     2.7
+    ],
+    [
+     "flash",
+     2.9
+    ],
+    [
+     "crackle",
+     3.3
+    ]
+   ]
+  },
+  {
+   "id": "h7",
+   "scene": "povTurbine",
+   "silent": 4.0,
+   "sfx": [
+    [
+     "blade_whoosh",
+     0
+    ],
+    [
+     "turbine_spool",
+     0.2
+    ]
+   ]
+  },
+  {
+   "id": "h8",
+   "scene": "povCoil",
+   "silent": 3.6,
+   "sfx": [
+    [
+     "coil_spin",
+     0
+    ],
+    [
+     "generator_hum",
+     0.5
+    ],
+    [
+     "spark",
+     1.0
+    ],
+    [
+     "power_up",
+     1.3
+    ],
+    [
+     "spark",
+     2.4
+    ]
+   ]
+  },
+  {
+   "id": "h9",
+   "scene": "chimney",
+   "silent": 3.6,
+   "sfx": [
+    [
+     "hiss",
+     0.1
+    ],
+    [
+     "cable_zip",
+     2.4
+    ]
+   ]
+  },
+  {
+   "id": "h10",
+   "scene": "povCable",
+   "silent": 4.2,
+   "sfx": [
+    [
+     "hum",
+     0
+    ],
+    [
+     "cable_zip",
+     0.2
+    ],
+    [
+     "cable_zip",
+     1.6
+    ],
+    [
+     "whoosh",
+     3.3
+    ]
+   ]
+  },
+  {
+   "id": "h11",
+   "scene": "ceiling",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "lamp_click",
+     0.92
+    ],
+    [
+     "reveal",
+     1.0
+    ]
+   ]
+  },
+  {
+   "id": "today",
+   "scene": "today",
+   "text": "Today, about ninety-three out of every hundred units of our electricity come from burning natural gas. Solar panels make less than three.",
+   "hold": 1.0
+  },
+  {
+   "id": "n1",
+   "scene": "recap1",
+   "hold": 1.0,
+   "text": "Did you feel that journey? You were a tiny bit of natural gas, trapped in rock under the seabed, near the Natuna Islands. You were cleaned, then you travelled about six hundred and fifty kilometres through a pipe on the seabed, all the way to Singapore."
+  },
+  {
+   "id": "j5",
+   "scene": "convert",
+   "text": "Now for the textbook link! In Primary Six, you learn that energy changes from one form to another. At the power station, the gas burned. Its chemical potential energy became heat energy. The hot gases spun a turbine, and the turbine turned a magnet inside a copper coil in the generator, making electrical energy.",
+   "hold": 1.5,
+   "shots": [
+    [
+     "turbine",
+     1.3,
+     560,
+     470
+    ],
+    [
+     "electrical",
+     1,
+     600,
+     450
+    ]
+   ]
+  },
+  {
+   "id": "n2",
+   "scene": "recap2",
+   "hold": 1.2,
+   "text": "Burning turned you into carbon dioxide and water vapour. But your energy kept going, as electricity through cables under the ground, all the way to the lamp in your room."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Be an energy detective. Find five things at home that change electrical energy into other forms, like a fan, a lamp or a kettle. For each one, write down the forms of energy it changes into."
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! The energy in natural gas did not start in the gas. Where do you think it came from? I'll tell you the answer in part two."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Most of Singapore's electricity comes from burning natural gas. Its chemical potential energy becomes heat, then kinetic, then electrical energy. But we have no gas of our own, and a neighbour has begun sending us less. So what happens next? Find out in part two!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

@@ -1,0 +1,71 @@
+{
+ "video": "ep03b/short2",
+ "lines": [
+  {
+   "segment": "s2c",
+   "sentence": 1,
+   "text": "All that was left was ash, which a barge carried to Semakau Landfill.",
+   "t_old": 37.05,
+   "t_new": 37.041,
+   "dur_old": 3.936,
+   "dur_new": 3.925,
+   "silence_before": 0.56,
+   "silence_after": 0.571,
+   "caption_drift_s": [
+    -0.02,
+    0.02
+   ],
+   "speech_dB_new": -21.98,
+   "speech_dB_old": -21.9,
+   "speech_dB_same_segment": [
+    -21.3
+   ],
+   "mix_dB_new_sentence": -14.53,
+   "mix_dB_old_sentence": -16.3,
+   "mix_dB_neighbours_old_new": [
+    -17.55,
+    -15.76,
+    -16.02,
+    -14.21
+   ]
+  }
+ ],
+ "final_gain": {
+  "mix_before_gain_LUFS": -17.79,
+  "mix_true_peak": -3.31,
+  "gain_dB": 1.79,
+  "peak_limiter": false
+ },
+ "checks": {
+  "lufs_old": -17.8,
+  "lufs_new": -16.0,
+  "video_stream_identical": true,
+  "streams_old": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "48.266667"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "48.300000"
+   }
+  ],
+  "streams_new": [
+   {
+    "codec_type": "video",
+    "start_time": "0.000000",
+    "duration": "48.266667"
+   },
+   {
+    "codec_type": "audio",
+    "start_time": "0.000000",
+    "duration": "48.300000"
+   }
+  ],
+  "audio_away_from_fix_residual_dB": -30.2,
+  "fixed_gain_dB": 1.8,
+  "audio_lag_ms": 0.0
+ }
+}

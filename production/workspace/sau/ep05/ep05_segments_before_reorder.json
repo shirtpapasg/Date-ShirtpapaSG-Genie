@@ -1,0 +1,486 @@
+{
+ "episode": "SAU EP05",
+ "title": "Where does your energy come from?",
+ "tag": "🌏 TheOneApp, Explored · EP 5 · Food",
+ "intro": {
+  "goals": [
+   [
+    "🌿",
+    "How plants make food from light",
+    "first"
+   ],
+   [
+    "🐔",
+    "How energy passes along a food chain",
+    "second"
+   ],
+   [
+    "🍽️",
+    "How Singapore keeps food on our tables",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "Where does the rest",
+  "of your food go? 🍽️"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "☀️",
+    "All food starts with sunlight",
+    "sunlight",
+    0.15,
+    "#f4a261"
+   ],
+   [
+    "🌽",
+    "Plant → hen → you: a food chain",
+    "chain",
+    0.35,
+    "#2a9d8f"
+   ],
+   [
+    "🛒",
+    "Many sources, grow more, store some",
+    "countries",
+    0.6,
+    "#e63946"
+   ]
+  ],
+  "tease": "🍽️ Next time: where does the rest of your food go?",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "photosynthesis",
+   "PHOTOSYNTHESIS",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "chain",
+   "FOOD CHAIN",
+   "#f77f00"
+  ],
+  [
+   "food",
+   "security",
+   "FOOD SECURITY",
+   "#e63946"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "playground0",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep05_bell",
+     0.05
+    ],
+    [
+     "ep05_kids",
+     0.7
+    ],
+    [
+     "ep05_run",
+     0.9
+    ],
+    [
+     "ep05_run",
+     2.1
+    ],
+    [
+     "whoosh",
+     3.2
+    ],
+    [
+     "ep05_laugh",
+     3.45
+    ],
+    [
+     "thud",
+     4.1
+    ],
+    [
+     "ep05_laugh",
+     4.35
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Run, jump, climb! Where does all that energy come from? From your food. But Singapore brings in more than nine out of every ten bites of food from other countries. So how does food, and its energy, reach you?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why do wet clothes dry faster on a sunny, windy day? The Sun's heat makes the water evaporate faster, and the wind blows the water vapour away, so more water can evaporate."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, how plants make food from light. Second, how energy passes along a food chain. And third, how Singapore keeps food on our tables. Let's get started!"
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. Last November, Singapore set new goals for its food. By twenty thirty-five, our own farms should grow one in five of the leafy and fruit vegetables we eat, and three in ten of our eggs and seafood. About a third of our eggs already come from farms in Singapore."
+  },
+  {
+   "id": "f1",
+   "scene": "povSun",
+   "silent": 3.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "sun_whoosh",
+     0.25
+    ],
+    [
+     "flash",
+     0.85
+    ],
+    [
+     "space_warp",
+     1.0
+    ]
+   ]
+  },
+  {
+   "id": "f2",
+   "scene": "povLeaf",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pass_by",
+     1.3
+    ],
+    [
+     "ep05_leaf",
+     1.9
+    ],
+    [
+     "pass_by",
+     3.0
+    ],
+    [
+     "pass_by",
+     3.7
+    ],
+    [
+     "riser",
+     3.9
+    ],
+    [
+     "pass_by",
+     4.3
+    ]
+   ]
+  },
+  {
+   "id": "f3",
+   "scene": "povPhoto",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0.7
+    ],
+    [
+     "bubble",
+     0.3
+    ],
+    [
+     "bubble",
+     1.0
+    ],
+    [
+     "bubble",
+     1.7
+    ],
+    [
+     "flash",
+     2.75
+    ],
+    [
+     "stinger",
+     2.8
+    ],
+    [
+     "sparkle",
+     3.3
+    ],
+    [
+     "bubble",
+     3.5
+    ],
+    [
+     "bubble",
+     4.1
+    ],
+    [
+     "bubble",
+     4.8
+    ]
+   ]
+  },
+  {
+   "id": "f4",
+   "scene": "povGrain",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "rush",
+     0
+    ],
+    [
+     "pop",
+     1.75
+    ],
+    [
+     "pop",
+     1.95
+    ],
+    [
+     "pop",
+     2.15
+    ],
+    [
+     "pop",
+     2.35
+    ],
+    [
+     "pop",
+     2.6
+    ],
+    [
+     "thud",
+     3.05
+    ],
+    [
+     "whoosh",
+     3.1
+    ],
+    [
+     "pad_wonder",
+     3.55
+    ],
+    [
+     "chime",
+     3.8
+    ]
+   ]
+  },
+  {
+   "id": "f5",
+   "scene": "shipMap",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "ep05_horn",
+     0.3
+    ],
+    [
+     "splash",
+     1.3
+    ],
+    [
+     "ping",
+     3.5
+    ]
+   ]
+  },
+  {
+   "id": "f6",
+   "scene": "povHen",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep05_cluck",
+     0.15
+    ],
+    [
+     "ep05_cluck",
+     1.0
+    ],
+    [
+     "ep05_peck",
+     1.93
+    ],
+    [
+     "ep05_gulp",
+     2.05
+    ],
+    [
+     "reveal",
+     2.5
+    ],
+    [
+     "pop",
+     3.4
+    ],
+    [
+     "ep05_cluck",
+     4.1
+    ],
+    [
+     "chime",
+     3.7
+    ]
+   ]
+  },
+  {
+   "id": "f7",
+   "scene": "canteen",
+   "silent": 5.8,
+   "sfx": [
+    [
+     "ep05_kids",
+     0
+    ],
+    [
+     "ep05_crack",
+     2.25
+    ],
+    [
+     "ep05_sizzle",
+     2.6
+    ],
+    [
+     "ep05_peck",
+     4.17
+    ],
+    [
+     "whoosh",
+     4.5
+    ],
+    [
+     "ep05_munch",
+     5.03
+    ]
+   ]
+  },
+  {
+   "id": "f8",
+   "scene": "povBody",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "bubble",
+     0.2
+    ],
+    [
+     "bubble",
+     0.8
+    ],
+    [
+     "splash",
+     1.45
+    ],
+    [
+     "ep05_heart",
+     1.7
+    ],
+    [
+     "power_up",
+     4.25
+    ],
+    [
+     "sparkle",
+     4.6
+    ]
+   ]
+  },
+  {
+   "id": "f9",
+   "scene": "playground",
+   "silent": 5.5,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "ep05_run",
+     0.1
+    ],
+    [
+     "ep05_kids",
+     0.3
+    ],
+    [
+     "ep05_run",
+     1.5
+    ],
+    [
+     "whoosh",
+     2.95
+    ],
+    [
+     "ep05_laugh",
+     3.3
+    ],
+    [
+     "thud",
+     3.95
+    ],
+    [
+     "ep05_laugh",
+     4.4
+    ]
+   ]
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "hold": 1.0,
+   "text": "Did you feel that journey? You were light energy from the Sun. A leaf caught you, and photosynthesis turned you into food: chemical potential energy, stored in a grain of corn. A hen on a Singapore farm ate the grain, and you went into an egg. A student ate the egg, and now you help them run, jump and grow."
+  },
+  {
+   "id": "textbook",
+   "scene": "photo",
+   "hold": 1.0,
+   "text": "Now for the textbook link! Plants make their own food by photosynthesis. Using light energy, their leaves turn water and carbon dioxide into sugar, and give out oxygen. Animals cannot make their own food. They get energy by eating plants, or other animals that ate plants. Plant, hen, you: that's a food chain."
+  },
+  {
+   "id": "food",
+   "scene": "security",
+   "hold": 1.0,
+   "text": "So how does Singapore keep food on our tables? This is called food security. We buy from many different countries, so if one has a problem, others can still sell to us. We grow more at home, on egg farms, fish farms, and vegetable farms stacked high in buildings. And we store food away, just in case."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Look at your dinner. Trace every food back to a plant that caught sunlight. Rice? A plant. Chicken? It ate grain. Can you find any food that did not start with sunlight?"
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why does Singapore buy food from many different countries, instead of just one? I'll tell you the answer next time."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. All our food starts with sunlight, caught by plants. Energy passes along the food chain, from plants, to animals, to us. And Singapore keeps its food safe by buying from many countries, growing more at home, and storing some away. Next time: where does the rest of your food go?"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

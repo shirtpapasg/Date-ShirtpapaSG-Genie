@@ -1,0 +1,215 @@
+{
+ "_note": "v2 (2026-11-24): Part 1 re-rendered with the cold open SPEAKING (Heart from 0.825 s, SERIES_FORMAT 11 item 1); Part 1's times are 5.475 s earlier and its url is the NEW Part 1 (upload_v2.json, chapters key EP19_P1_v2); Part 2 is unchanged (live JpBskDtIwb0). EP19, for TheOneApp videos.js P3 after upload: paste as two entries, replace keys' strings by the constants (O.interactions and CH.magnets are placeholders: check the real names in videos.js), set url to the uploaded video ids. EP19 replaces no classic video (EP20 retires VLGDU0qduEw).",
+ "entries": [
+  {
+   "no": "19A",
+   "art": "🧲",
+   "topic": "Magnets",
+   "title": "Will a Magnet Pull a COPPER Wire? What a Magnet Really Is (Part A)",
+   "len": "5:26",
+   "url": "https://www.youtube.com/watch?v=<EP19_P1>",
+   "moments": [
+    {
+     "at": "0:52",
+     "what": "Round 1: a steel pin or a copper wire, which will a magnet pull?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m501",
+     "_t": 54.06
+    },
+    {
+     "at": "1:17",
+     "what": "Is a magnet made of plastic?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m601m",
+     "_t": 79.11
+    },
+    {
+     "at": "1:23",
+     "what": "Look closer: a lodestone is a natural magnet",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m602",
+     "_t": 84.83
+    },
+    {
+     "at": "1:37",
+     "what": "Inside a magnet: usually iron or steel",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m605",
+     "_t": 99.31
+    },
+    {
+     "at": "1:45",
+     "what": "Magnets come in lots of shapes",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m607b",
+     "_t": 107.44
+    },
+    {
+     "at": "2:02",
+     "what": "Journey: be a steel pin and feel the magnet pull",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m701",
+     "_t": 123.78
+    },
+    {
+     "at": "2:43",
+     "what": "The answer: the magnet pulled the steel pin",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m801",
+     "_t": 164.59
+    },
+    {
+     "at": "3:00",
+     "what": "HOLD ON! Too heavy to lift, so is the wok attracted?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m901m",
+     "_t": 182.3
+    },
+    {
+     "at": "3:40",
+     "what": "Look closer in slow motion: attract means pull",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1002",
+     "_t": 221.57
+    },
+    {
+     "at": "4:00",
+     "what": "Iron and steel are magnetic materials",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "m1006",
+     "_t": 241.78
+    }
+   ]
+  },
+  {
+   "no": "19B",
+   "art": "🥫",
+   "topic": "Magnets",
+   "title": "Copper Is a METAL. So Why Won't a Magnet Pull It? (Part B)",
+   "len": "5:35",
+   "url": "https://www.youtube.com/watch?v=<EP19_P2>",
+   "moments": [
+    {
+     "at": "0:30",
+     "what": "Round 1: the drink can or the food tin?",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n401",
+     "_t": 32.17
+    },
+    {
+     "at": "1:04",
+     "what": "Journey: be an aluminium can at a recycling plant",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n501",
+     "_t": 65.84
+    },
+    {
+     "at": "1:42",
+     "what": "The answer: the steel food tin",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n601",
+     "_t": 103.61
+    },
+    {
+     "at": "1:54",
+     "what": "Look closer: objects made of non-magnetic materials",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n702",
+     "_t": 115.52
+    },
+    {
+     "at": "2:12",
+     "what": "Copper and aluminium are metals that are non-magnetic",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n705p",
+     "_t": 133.94
+    },
+    {
+     "at": "2:47",
+     "what": "Showdown: Basil's magnet test, find the line to fix",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n801",
+     "_t": 168.53
+    },
+    {
+     "at": "3:25",
+     "what": "Our new theme: Interactions",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n901",
+     "_t": 206.9
+    },
+    {
+     "at": "3:40",
+     "what": "Look closer: how magnets interact with objects",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n904",
+     "_t": 222.38
+    },
+    {
+     "at": "3:54",
+     "what": "Classify: sort materials into magnetic and non-magnetic",
+     "keys": [
+      "O.interactions",
+      "CH.magnets"
+     ],
+     "_line": "n906m",
+     "_t": 236.38
+    }
+   ]
+  }
+ ]
+}

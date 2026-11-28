@@ -1,0 +1,14 @@
+{
+ "verdict": "Half the concept is there",
+ "headline": "You explained that the object blocks light, but you have not said anything about how light travels.",
+ "hits": "object blocks light",
+ "gaps": "You have not described how light travels before it is blocked.",
+ "ponder": "Think about what light does when it leaves the Sun or a lamp. Does it bend around corners by itself, or does it go in one particular way until something gets in its path?",
+ "tip": "",
+ "verdict2": "CORRECT AND COMPLETE",
+ "headline2": "You have explained both parts perfectly — the property of light and how the shadow forms.",
+ "gained": "travels in a straight line",
+ "model": "Light travels in a straight line1. A shadow forms when an object blocks light2.\nThe underlined words earn the marks. Each number matches a line in How You Did.",
+ "marks": "2/2",
+ "mc": " / "
+}

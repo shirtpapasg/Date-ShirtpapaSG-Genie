@@ -1,0 +1,51 @@
+{
+ "centre": [
+  172,
+  3
+ ],
+ "R": 540,
+ "cx": 1300,
+ "cy": 590,
+ "disk": 540,
+ "white": "SUPER",
+ "yellow": "EL NIÑO!",
+ "titleSize": 170,
+ "banner": "Why is Singapore so hot and dry?",
+ "bannerSize": 92,
+ "labels": [
+  [
+   "Pacific Ocean",
+   [
+    -178,
+    20
+   ],
+   42
+  ]
+ ],
+ "icons": [
+  {
+   "at": [
+    -150,
+    3
+   ],
+   "e": "🌧️",
+   "size": 86
+  },
+  {
+   "at": [
+    -118,
+    -2
+   ],
+   "e": "🌧️",
+   "size": 76
+  },
+  {
+   "at": [
+    104,
+    12
+   ],
+   "e": "☀️",
+   "size": 96
+  }
+ ]
+}

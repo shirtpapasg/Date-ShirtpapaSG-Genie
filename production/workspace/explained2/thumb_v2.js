@@ -1,0 +1,360 @@
+// thumb_v2.js: the "v2" thumbnail style (click-rate pilot, Nov 2026). Rules and how-to: THUMBNAIL_V2.md.
+//   node thumb_v2.js <key> [<key> ...]   draw the thumbnails named in THUMBS below (e.g. ep10_1), or "all"
+//   node thumb_v2.js sheet               qa/thumb_pilot.jpg: old vs new for every entry, at full size and at 320 px
+// How it works: (1) each "cut" is an SVG expression evaluated inside that episode's own engine page (epNN/page.html, so the episode's
+// drawing functions, gradients and sprites are all there) and screenshotted on a transparent background; (2) the cut-outs, the teacher's
+// buddy PNG (characters/sprites/poses/, never redrawn: only scaled, flipped, outlined) and the words are laid out on a 1280x720 page with a
+// saturated burst background and saved as a JPG. Nothing here uploads anything.
+const { chromium } = require('playwright'); const path = require('path'), fs = require('fs'), os = require('os');
+const ROOT = __dirname, W = 1280, H = 720, INK = '#1E1638';
+const FONT = path.join(ROOT, 'fonts/node_modules/@fontsource/nunito/files/nunito-latin-900-normal.woff2');
+const FRED = path.join(ROOT, 'fonts/node_modules/@fontsource/fredoka/files/fredoka-latin-700-normal.woff2');
+const TMP = path.join(os.tmpdir(), 'thumb_v2'); fs.mkdirSync(TMP, { recursive: true });
+
+/* One entry per thumbnail.
+   ep, part      the episode folder and the part (the engine page that draws the cuts; the small chip shows the part; chip: false for none)
+   out, old      the JPG to write; the old thumbnail (for the comparison sheet)
+   bg            { c: [centre, middle, edge] colours of the burst, at: [x, y] its centre, rays: ray opacity }
+   cuts          name -> SVG expression (a string of JavaScript, run in the engine page; world 1920x1080; t = 1)
+   layers        back to front, each one of
+                   { cut, x, y, w, rot, flip, line, lw, glow }   a cut-out: left, top, width in px; line = sticker outline colour (or none)
+                   { buddy, x, y, h, flip, rot, line, lw, glow }      a buddy pose file name without .png (or "pip_sit_wide" etc. from sprites/)
+                   { svg }                                             raw SVG in the 1280x720 frame (a sea band, a floor line)
+   words         [{ t, x, y, size, fill, rot, anchor }]: 0-3 words in all, white #FFFFFF or yellow #FFD60A, thick dark outline
+*/
+const THUMBS = {
+  ep10_1: { ep: 'ep10', part: 1, out: 'ep10/thumb_v2_part1.jpg', old: 'ep10/thumb_part1.jpg',
+    bg: { c: ['#FFF27A', '#FFB300', '#F4511E'], at: [830, 250], rays: .2 },
+    cuts: { ship: `TF(960, 600, 1, shipSide())`,
+      tub: `TF(960, 800, 1.6, tubSvg({ t: 1, label: false, inner: TF(0, TUB.fl - 16, 2.1, spoonM(), 3) + bubbles(3, 0, 10, () => -40, TUB.ys, 4, .5, 30, 5) }))` },
+    layers: [
+      { cut: 'ship', x: 290, y: 163, w: 1000, flip: true, glow: INK },
+      { svg: `<rect x="0" y="453" width="${W}" height="${H}" fill="#0B63C8" opacity=".86"/><rect x="0" y="560" width="${W}" height="${H}" fill="#083C8C" opacity=".5"/>
+        <path d="M0 453 ${Array.from({ length: 33 }, () => 'q10 -9 20 0 t20 0').join(' ')}" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>` },
+      { cut: 'tub', x: 640, y: 415, w: 430, line: '#fff', lw: 7, glow: INK },
+      { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'SHIP FLOATS,', x: 1250, y: 106, size: 100, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'HOW?', x: 1256, y: 222, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+
+  ep09_2: { ep: 'ep09', part: 2, out: 'ep09/thumb_v2_part2.jpg', old: 'ep09/thumb_part2.jpg',
+    bg: { c: ['#7CFFB2', '#12B76A', '#05603A'], at: [860, 420], rays: .2 },
+    cuts: { stick: `TF(960, 520, 1.5, stickSvg({ bend: 30, crack: 1 })) + TF(960 + 372, 574, 1.5, glovePinch(0), 15) + '<g transform="translate(' + (960 - 372) + ' 574) rotate(-15) scale(-1.5 1.5)">' + glovePinch(0) + '</g>'`,
+      band: `TF(960, 540, 1.6, bandSvg(0, 1))` },
+    layers: [
+      { cut: 'stick', x: 330, y: 300, w: 1100, line: '#fff', lw: 7, glow: INK },
+      { cut: 'band', x: 700, y: 492, w: 350, line: '#fff', lw: 7, glow: INK, rot: -6 },
+      { buddy: 'momo_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1240, y: 122, size: 122, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SNAPS?', x: 1246, y: 236, size: 142, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+
+  ep11_1: { ep: 'ep11', part: 1, out: 'ep11/thumb_v2_part1.jpg', old: 'ep11/thumb_part1.jpg',
+    bg: { c: ['#B46BFF', '#6D28D9', '#2A0F6B'], at: [850, 430], rays: .16 },
+    cuts: { clear: `'<rect x="792" y="270" width="336" height="388" fill="#FFF6D8"/>' + TF(960, 700, 1, frontView("clear", 1, { id: "tc" }))`,
+      frost: `'<rect x="792" y="270" width="336" height="388" fill="#FFF6D8"/>' + TF(960, 700, 1, frontView("frost", 1, { id: "tf" }))` },
+    layers: [
+      { cut: 'clear', x: 455, y: 262, w: 400, line: '#fff', lw: 7, glow: '#FFE45C', rot: -3 },
+      { cut: 'frost', x: 850, y: 262, w: 400, line: '#fff', lw: 7, glow: '#FFE45C', rot: 3 },
+      { buddy: 'pip_surprised', x: -20, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHY', x: 456, y: 190, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'start' }, { t: 'BLURRY?', x: 1256, y: 148, size: 112, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+
+  // EP12 (Stage 2): these two ARE the uploaded thumbnails (ep12/thumb_part1.jpg, thumb_part2.jpg): no old style was made for EP12
+  ep12_1: { ep: 'ep12', part: 1, out: 'ep12/thumb_part1.jpg', old: 'ep12/thumb_part1.jpg',
+    bg: { c: ['#FFD1E3', '#FF4F8B', '#B0124F'], at: [850, 420], rays: .2 },
+    cuts: { trolley: `TF(850, 590, 2.2, riceSack()) + TF(1010, 590, 2.1, drinkB(1)) + TF(1066, 590, 2.1, drinkB(0)) + TF(960, 500, 3.4, trolley("glass"))` },
+    layers: [
+      { cut: 'trolley', x: 520, y: 246, w: 590, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'GLASS', x: 1250, y: 112, size: 118, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'TROLLEY?', x: 1256, y: 224, size: 128, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep12_2: { ep: 'ep12', part: 2, out: 'ep12/thumb_part2.jpg', old: 'ep12/thumb_part2.jpg',
+    bg: { c: ['#FFF27A', '#FF9A1F', '#D9480F'], at: [860, 430], rays: .2 },
+    cuts: { car: `TF(960, 800, 2.2, carSide())` },
+    layers: [
+      { cut: 'car', x: 440, y: 320, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHY 4', x: 1250, y: 118, size: 124, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MATERIALS?', x: 1256, y: 232, size: 118, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep13_1: { ep: 'ep13', part: 1, out: 'ep13/thumb_part1.jpg', old: 'ep13/thumb_part1.jpg',
+    bg: { c: ['#C8FFF0', '#12B8A0', '#066B66'], at: [860, 430], rays: .2 },
+    cuts: { bag: `TF(900, 800, 2.5, bag13({ strapR: "torn", id: "th" })) + TF(1420, 470, 1, strapBand("metal", 620, 62), -68)` },
+    layers: [
+      { cut: 'bag', x: 470, y: 262, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'METAL', x: 1250, y: 116, size: 128, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'STRAP?', x: 1256, y: 236, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep13_2: { ep: 'ep13', part: 2, out: 'ep13/thumb_part2.jpg', old: 'ep13/thumb_part2.jpg',
+    bg: { c: ['#EBD9FF', '#8B4DF0', '#3F1C96'], at: [860, 430], rays: .2 },
+    cuts: { strap: `newStrap(960, 60, 300, 120) + TF(960, 300, 3.2, hangerSvg(5, { slide: [5, .72] })) + '<rect x="760" y="20" width="400" height="70" rx="16" fill="#39435A" stroke="#2B2147" stroke-width="8"/>'` },
+    layers: [
+      { cut: 'strap', x: 660, y: 250, w: 440, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: '5 OR 9?', x: 1250, y: 150, size: 165, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP14 (the first episode with the buddies in colour: the teacher's coloured Momo and Basil, characters/sprites/poses/*_c_*)
+  ep14_1: { ep: 'ep14', part: 1, out: 'ep14/thumb_part1.jpg', old: 'ep14/thumb_part1.jpg',
+    bg: { c: ['#FFC27A', '#F0703A', '#2B1D70'], at: [860, 430], rays: .22 },
+    cuts: { globe: `TF(520, 600, 1.7, torch14(1)) + TF(1000, 600, 1, globe14(300, SGLL[0], { lit: 1, dot: true, stand: false, id: "th1", dotR: 30 }))` },
+    layers: [
+      { cut: 'globe', x: 470, y: 270, w: 760, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_c_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHO', x: 1250, y: 118, size: 128, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MOVED?', x: 1256, y: 240, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep14_2: { ep: 'ep14', part: 2, out: 'ep14/thumb_part2.jpg', old: 'ep14/thumb_part2.jpg',
+    bg: { c: ['#F4FFB0', '#9BE15D', '#2E9E4F'], at: [860, 430], rays: .22 },
+    cuts: { tree: `TF(960, 760, 1.55, '<ellipse cx="-10" cy="206" rx="170" ry="18" fill="#2B2147" opacity=".2"/><path d="M-76 204 Q-50 0 -58 -330 H26 Q18 0 56 204 Q20 186 -8 204 Q-40 186 -76 204z" fill="url(#g14Trunk)" stroke="#5E3F28" stroke-width="5" stroke-linejoin="round"/>' + [[-200, -330, 170, 90, "#2F8048"], [-20, -390, 210, 100, "#3E9E5A"], [180, -330, 180, 90, "#2F8048"], [-90, -300, 130, 56, "#58B56C"], [120, -290, 140, 56, "#58B56C"]].map(([x, y, rx, ry, c]) => '<ellipse cx="' + x + '" cy="' + y + '" rx="' + rx + '" ry="' + ry + '" fill="' + c + '"/>').join("") + [[-180, -250], [-60, -240], [90, -246], [200, -262]].map(([x, y]) => fruit14(x, y, 1.4)).join("") + TF(-190, 204 - 86 * 1.1, 1.1, teddy() + worn14()) + '<path d="M-330 20 H-60" stroke="#FFD23A" stroke-width="10" stroke-linecap="round" stroke-dasharray="2 18"/>')` },
+    layers: [
+      { cut: 'tree', x: 560, y: 270, w: 520, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_c_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHY NOT', x: 1250, y: 118, size: 118, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'TEDDY?', x: 1256, y: 236, size: 136, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep15_1: { ep: 'ep15', part: 1, out: 'ep15/thumb_part1.jpg', old: 'ep15/thumb_part1.jpg',
+    bg: { c: ['#D8F6FF', '#38B6FF', '#1B3FA0'], at: [860, 430], rays: .22 },
+    cuts: { seed: `'<rect x="560" y="600" width="800" height="300" rx="40" fill="#5A3A22"/>' + '<path d="M820 700 Q790 790 840 890" fill="none" stroke="#F6EEDF" stroke-width="30" stroke-linecap="round"/>' + '<path d="M900 640 Q930 530 990 450" fill="none" stroke="#9CB85A" stroke-width="30" stroke-linecap="round"/>' + '<g transform="translate(990 450) rotate(-40)">' + leaf15(130, 30, "#D2503F", "#8E2E26") + '</g><g transform="translate(990 450) rotate(200)">' + leaf15(130, 30, "#D2503F", "#8E2E26") + '</g>' + TF(960, 680, 2.3, mangoSeed(1, -8))` },
+    layers: [
+      { cut: 'seed', x: 560, y: 230, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_c_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHAT GROWS', x: 1250, y: 112, size: 104, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 236, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep15_2: { ep: 'ep15', part: 2, out: 'ep15/thumb_part2.jpg', old: 'ep15/thumb_part2.jpg',
+    bg: { c: ['#FFE6F2', '#FF6FA8', '#7A1E5A'], at: [860, 430], rays: .22 },
+    cuts: { mango: `TF(860, 640, 2.0, mangoCutOpen(1, true)) + '<path d="M1060 520 Q1250 330 1330 560" fill="none" stroke="#43BF6C" stroke-width="26" stroke-linecap="round"/><path d="M1300 520 L1336 600 L1376 530z" fill="#43BF6C"/>' + TF(1360, 820, 1.5, '<ellipse cx="0" cy="6" rx="90" ry="22" fill="#77502F"/>' + youngPlant15(1, { h: 120, n: 4, red: 0, k: 1, sw: 0 }))` },
+    layers: [
+      { cut: 'mango', x: 520, y: 260, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_c_thinking', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH CAME', x: 1250, y: 112, size: 104, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 236, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP16 (the v2 cast: basil_v2 / momo_v2 poses, one style)
+  ep16_1: { ep: 'ep16', part: 1, out: 'ep16/thumb_part1.jpg', old: 'ep16/thumb_part1.jpg',
+    bg: { c: ['#D9FFF6', '#1FC7B0', '#0B4F4A'], at: [860, 430], rays: .22 },
+    cuts: { tad: `'<ellipse cx="960" cy="640" rx="600" ry="330" fill="#5FB7C9"/><ellipse cx="900" cy="520" rx="380" ry="60" fill="#BDEBF5" opacity=".5"/>' + TF(1270, 470, 2.1, eggClump(1, { n: 46, r: 13, R: 90 })) + TF(980, 720, 4.6, tadpole16(1, 1, { swim: false }), -6)` },
+    layers: [
+      { cut: 'tad', x: 470, y: 250, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'FISH OR', x: 1250, y: 112, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FROG?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep16_2: { ep: 'ep16', part: 2, out: 'ep16/thumb_part2.jpg', old: 'ep16/thumb_part2.jpg',
+    bg: { c: ['#FFF0C8', '#FF8A2A', '#B3261E'], at: [860, 430], rays: .22 },
+    cuts: { skin: `'<path d="M520 1000 Q820 760 900 300" stroke="#6FBF4E" stroke-width="54" fill="none" stroke-linecap="round"/><path d="M1060 1000 Q1240 900 1500 860" stroke="#7CC85A" stroke-width="54" fill="none" stroke-linecap="round"/>' + TF(770, 700, 3.0, hopper16(1, { skin: true }), -62) + TF(1240, 900, 2.6, hopper16(1, { adult: true }), -8)` },
+    layers: [
+      { cut: 'skin', x: 470, y: 210, w: 690, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'EMPTY', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SKIN?!', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP17 (the v2 cast: basil_v2 / momo_v2 poses, one style)
+  ep17_1: { ep: 'ep17', part: 1, out: 'ep17/thumb_part1.jpg', old: 'ep17/thumb_part1.jpg',
+    bg: { c: ['#EFFFD2', '#7CCB2E', '#1F5A1E'], at: [860, 430], rays: .22 },
+    cuts: { cat: `'<path d="M500 762 Q960 730 1420 750" stroke="#7A5230" stroke-width="34" fill="none" stroke-linecap="round"/>' + TF(960, 750, 1.9, cat17(1, { legs: [.6, .6, .6], pro: [.5, .5, .5, .5, .5] }))` },
+    layers: [
+      { cut: 'cat', x: 450, y: 300, w: 800, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'NYMPH?!', x: 1256, y: 190, size: 160, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep17_2: { ep: 'ep17', part: 2, out: 'ep17/thumb_part2.jpg', old: 'ep17/thumb_part2.jpg',
+    bg: { c: ['#E3F6FF', '#3FA9F5', '#3B1E8C'], at: [860, 430], rays: .22 },
+    cuts: { pail: `'<rect x="500" y="420" width="900" height="560" rx="40" fill="#BFE7E0"/><rect x="500" y="420" width="900" height="140" rx="40" fill="#DDF3FF"/><path d="M500 560 H1400" stroke="#fff" stroke-width="14"/><g transform="translate(640 556) rotate(-20)">' + leaf15(110, 40, "#C9A84A", "#8A6A2A") + '</g><g transform="translate(1240 560) rotate(170)">' + leaf15(90, 34, "#7AB85A", "#3E7A2A") + '</g>' + [[760, 0], [960, 1.3], [1160, 2.2]].map(([x, ph]) => TF(x, 560, 1.6, wrig17(1, { wig: .25, ph, lean: 16 }))).join("")` },
+    layers: [
+      { cut: 'pail', x: 480, y: 280, w: 660, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: "WHAT'S IN", x: 1250, y: 112, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'HERE?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // EP18 (the v2 cast)
+  ep18_1: { ep: 'ep18', part: 1, out: 'ep18/thumb_part1.jpg', old: 'ep18/thumb_part1.jpg',
+    bg: { c: ['#FFF6C0', '#FFB020', '#E0401E'], at: [860, 430], rays: .22 },
+    cuts: { pair: `'<ellipse cx="960" cy="800" rx="520" ry="110" fill="#58B56C" stroke="#2F8048" stroke-width="10"/>' + TF(740, 790, 2.5, frog16(1)) + TF(1250, 620, -2.5, mosq17(1, { wing: .3 }), 0, 2.5) + TF(680, 300, 1, loopN(1, frogPic, 3, { R: 120, r: 60, id: 'tf', sw: 12 })) + TF(1260, 300, 1, loopN(1, mPic, 4, { R: 120, r: 54, id: 'tm', sw: 12 }))` },
+    layers: [
+      { cut: 'pair', x: 500, y: 236, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'SAME?!', x: 1256, y: 190, size: 160, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep18_2: { ep: 'ep18', part: 2, out: 'ep18/thumb_part2.jpg', old: 'ep18/thumb_part2.jpg',
+    bg: { c: ['#FFE0F6', '#E040A0', '#3B1474'], at: [860, 430], rays: .22 },
+    cuts: { hen: `TF(820, 880, 2.1, henNest18(1, {})) + '<ellipse cx="1420" cy="800" rx="120" ry="155" fill="#FFF6E6" stroke="#D9C9A8" stroke-width="12"/><ellipse cx="1380" cy="730" rx="34" ry="22" fill="#fff"/>' + TF(1240, 430, 1, '<circle r="95" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 55, '?', 160, '#2B2147'))` },
+    layers: [
+      { cut: 'hen', x: 470, y: 240, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FIRST?', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep19_1: { ep: 'ep19', part: 1, out: 'ep19/thumb_part1.jpg', old: 'ep18/thumb_part1.jpg',
+    bg: { c: ['#DDF3FF', '#3A8DFF', '#14204E'], at: [860, 430], rays: .22 },
+    cuts: { mag: `TF(980, 330, 2.6, magnet19(1)) + pullArrows(.3, 760, 650, 860, 470, 1, '#43BF6C', 3) + TF(760, 700, 2.4, pin18()) + TF(1300, 720, 2.3, wire18()) + TF(1300, 610, 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'mag', x: 500, y: 290, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'ONE?!', x: 1256, y: 240, size: 146, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep19_2: { ep: 'ep19', part: 2, out: 'ep19/thumb_part2.jpg', old: 'ep18/thumb_part2.jpg',
+    bg: { c: ['#F4FFC0', '#7CCB2A', '#0E5E3A'], at: [860, 430], rays: .22 },
+    cuts: { cu: `TF(960, 300, 2.4, magnet19(1)) + TF(1000, 640, 2.6, wire18()) + TF(1480, 880, 1.6, can19(1, 1)) + TF(1000, 600, 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'cu', x: 520, y: 270, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'COPPER?!', x: 1256, y: 180, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep20_1: { ep: 'ep20', part: 1, out: 'ep20/thumb_part1.jpg', old: 'ep19/thumb_part1.jpg',
+    bg: { c: ['#FFE6F4', '#D9468F', '#3A1450'], at: [860, 430], rays: .22 },
+    cuts: { ring: `TF(960, 1000, 1.45, rings20(1, { glowTop: PUSHC, glowBot: PUSHC, bob: 0 })) + ppArrows(1, 960, 1000 + 1.45 * ringGapY(1), 'push', 1, { dir: 'v', gap: 16, len: 60, w: 26 }) + TF(1250, 1000 + 1.45 * ringGapY(1), 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'ring', x: 590, y: 95, w: 470, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'IT', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FLOATS?!', x: 1256, y: 240, size: 140, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep20_2: { ep: 'ep20', part: 2, out: 'ep20/thumb_part2.jpg', old: 'ep19/thumb_part2.jpg',
+    bg: { c: ['#E8FFF8', '#2EC4B6', '#0E2E5A'], at: [860, 430], rays: .22 },
+    cuts: { mags: `TF(620, 600, 1.7, bar20(1, { flip: true, glint: false })) + TF(1300, 600, 1.7, bar20(1, { glint: false })) + ppArrows(1, 960, 600, 'push', 1, { gap: 20, len: 70, w: 30 })
+      + '<path d="M1110 420 Q1300 280 1490 420" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round"/><path d="M1110 420 Q1300 280 1490 420" fill="none" stroke="#2B2147" stroke-width="16" stroke-linecap="round"/><path d="M1440 360 L1494 424 L1420 438" fill="none" stroke="#2B2147" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>'` },
+    layers: [
+      { cut: 'mags', x: 520, y: 300, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'FLIP IT,', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SNAP!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep21_1: { ep: 'ep21', part: 1, out: 'ep21/thumb_part1.jpg', old: 'ep20/thumb_part1.jpg',
+    bg: { c: ['#FFF4C8', '#F28C28', '#3A1E10'], at: [860, 430], rays: .22 },
+    cuts: { hang: `TF(960, 300, 1, hangMag21(1, 0, 300, 1.9)) + '<path d="M620 720 Q960 800 1300 720" fill="none" stroke="#fff" stroke-width="26" stroke-linecap="round"/><path d="M620 720 Q960 800 1300 720" fill="none" stroke="#2B2147" stroke-width="13" stroke-linecap="round"/><path d="M1250 690 L1306 720 L1248 760" fill="none" stroke="#2B2147" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>'` },
+    layers: [
+      { cut: 'hang', x: 600, y: 330, w: 600, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 160, h: 590, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'SAME WAY', x: 1250, y: 112, size: 112, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'EVERY TIME?!', x: 1256, y: 240, size: 124, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep21_2: { ep: 'ep21', part: 2, out: 'ep21/thumb_part2.jpg', old: 'ep20/thumb_part2.jpg',
+    bg: { c: ['#E6FBFF', '#2F8FD0', '#0A1E3A'], at: [860, 430], rays: .22 },
+    cuts: { comp: `TF(820, 560, 2.3, compass21(1, -58, 0, { base: false })) + TF(1420, 560, 1.5, bar20(1, { glint: false })) + fatArrow(1120, 380, 900, 300, PUSHC, 34) + TF(1120, 860, 1, '<circle r="80" fill="#FFC83A" stroke="#2B2147" stroke-width="8"/>' + T(0, 44, '?', 130, '#2B2147'))` },
+    layers: [
+      { cut: 'comp', x: 560, y: 250, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'THE NEEDLE', x: 1250, y: 112, size: 108, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MOVES?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep22_1: { ep: 'ep22', part: 1, out: 'ep22/thumb_part1.jpg', old: 'ep20/thumb_part1.jpg',
+    bg: { c: ['#FFE2D6', '#D8402E', '#4A0E16'], at: [860, 430], rays: .22 },
+    cuts: { nail: `trayClips22(1, 980, 900, 2.0, { n: 26 }) + nail21(980, 620, 2.6) + magAt(1, 760, 590, 1.0, -112) + '<path d="M1280 520 C1280 300 720 300 720 520" fill="none" stroke="#fff" stroke-width="30" stroke-linecap="round" stroke-dasharray="40 30"/><path d="M1280 520 C1280 300 720 300 720 520" fill="none" stroke="#C9932E" stroke-width="16" stroke-linecap="round" stroke-dasharray="40 30"/>'` },
+    layers: [
+      { cut: 'nail', x: 560, y: 240, w: 680, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'MAGNET', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'NOW?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep22_2: { ep: 'ep22', part: 2, out: 'ep22/thumb_part2.jpg', old: 'ep20/thumb_part2.jpg',
+    bg: { c: ['#DDEBFF', '#2F5FD0', '#0A1238'], at: [860, 430], rays: .22 },
+    cuts: { nails: `nail21(960, 470, 2.4) + backForth(1, 0, 960, 380, 620) + nail21(960, 760, 2.4) + strokeArrow(1, -9, 660, 680, 1260, 680, 24) + liftArc(1, -9, 1270, 660, 650, 660, 170, 14) + fishP(1180, 950, 1.3, '#FFC83A', true)` },
+    layers: [
+      { cut: 'nails', x: 580, y: 260, w: 660, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'WHICH', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'WAY?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP23 (script section 7): Part 1 STAY OR DROP?! with Momo surprised, a big coiled nail with a chain of steel clips at its tip and an
+  // adult's hand pulling the battery holder away (one lead just apart: no answer), an electric-blue burst; Part 2 MORE TURNS?! with Basil
+  // surprised, a ten-turn and a twenty-turn coiled nail side by side, each with its battery, a tray of clips below (no clips on either), an
+  // orange-to-red burst
+  ep23_1: { ep: 'ep23', part: 1, out: 'ep23/thumb_part1.jpg', old: 'ep22/thumb_part1.jpg',
+    bg: { c: ['#D8F0FF', '#1E7BE0', '#08163E'], at: [860, 430], rays: .22 },
+    cuts: { rig: `trayClips22(1, 1060, 1000, 1.7, { n: 24 }) + TF(1060, 800, 1.55, rig23(1, { n: 10, hold: [-300, -90], hdx: -60, hdy: -50, hk: 1, jA: 1, jB: .25, clips: [6, {}], ck: 1.0 })) + TF(560, 560, 1.4, hand15({ curl: .62 }), 10)` },
+    layers: [
+      { cut: 'rig', x: 560, y: 230, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'STAY OR', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'DROP?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep23_2: { ep: 'ep23', part: 2, out: 'ep23/thumb_part2.jpg', old: 'ep22/thumb_part2.jpg',
+    bg: { c: ['#FFE6C8', '#F06A1E', '#5A0E10'], at: [860, 430], rays: .22 },
+    cuts: { coils: `trayClips22(1, 960, 1010, 2.2, { n: 30 }) + TF(760, 820, 1.5, rig23(1, { n: 10, hold: [-200, -60], hk: .8 })) + TF(1200, 820, 1.5, rig23(1, { n: 20, hold: [-200, -60], hk: .8 })) + TF(760, 300, 1, tpill(0, 0, "10", 70, "#fff", "#3A2E52", { w: 700 })) + TF(1200, 300, 1, tpill(0, 0, "20", 70, "#fff", "#3A2E52", { w: 700 }))` },
+    layers: [
+      { cut: 'coils', x: 560, y: 250, w: 700, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'MORE', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'TURNS?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP24 (fair tests; script section 7): Part 1 FAIR?! with Basil surprised, his two coiled nails (25 turns on the iron nail, 8 on the
+  // steel nail) over their trays and a red "?" between them, a teal-to-navy burst; Part 2 COUNT AGAIN?! with Pip surprised, a nail with its
+  // bunch of clips and the counts 9 · 8 · 9, an amber burst
+  ep24_1: { ep: 'ep24', part: 1, out: 'ep24/thumb_part1.jpg', old: 'ep23/thumb_part1.jpg',
+    bg: { c: ['#D8FFF6', '#14A8B0', '#08263E'], at: [860, 430], rays: .22 },
+    cuts: { pair: `trayClips22(1, 760, 1000, 1.6, { n: 20 }) + trayClips22(1, 1260, 1000, 1.6, { n: 20 }) + setup24(1, { x: 760, y: 900, k: 1.5, kind: 'iron', n: 25, hx: -230, hk: .55, tag: 'iron · 25 turns', tagS: 40 }) + setup24(1, { x: 1260, y: 900, k: 1.5, kind: 'steel', n: 8, hx: 230, hk: .55, tag: 'steel · 8 turns', tagS: 40 }) + TF(1010, 560, 1, '<circle r="80" fill="#fff" stroke="#D84A3A" stroke-width="12"/>' + T(0, 40, '?', 120, '#D84A3A'))` },
+    layers: [
+      { cut: 'pair', x: 540, y: 230, w: 720, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'FAIR?!', x: 1256, y: 200, size: 170, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep24_2: { ep: 'ep24', part: 2, out: 'ep24/thumb_part2.jpg', old: 'ep23/thumb_part2.jpg',
+    bg: { c: ['#FFF0C8', '#F0A01E', '#5A2A0E'], at: [860, 430], rays: .22 },
+    cuts: { count: `trayClips22(1, 900, 1010, 2.0, { n: 24 }) + setup24(1, { x: 900, y: 860, k: 1.6, kind: 'iron', n: 20, batt: 2, clips: 8, ck: 1.2, hx: -260, hk: .45 }) + TF(1260, 600, 1, tpill(0, 0, '9 · 8 · 9', 90, '#fff', '#3A2E52', { w: 700 }))` },
+    layers: [
+      { cut: 'count', x: 540, y: 240, w: 720, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'COUNT', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'AGAIN?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP25 (magnets everywhere): Part 1 STAY SHUT?! with Pip surprised, the fridge with its strip shown round the door's soft edge, an
+  // ice-blue burst; Part 2 IT FLOATS?! with Basil surprised, the floating train over its guideway with a glowing gap, a violet burst
+  ep25_1: { ep: 'ep25', part: 1, out: 'ep25/thumb_part1.jpg', old: 'ep24/thumb_part1.jpg',
+    bg: { c: ['#E6FBFF', '#3AA8E0', '#0A2A4E'], at: [860, 430], rays: .22 },
+    cuts: { fridge: `TF(1000, 1060, 1.3, fridgeStrip25(1)) + TF(1350, 560, 1, tpill(0, 0, 'magnet?', 64, '#fff', '#3A2E52', { w: 700 }))` },
+    layers: [
+      { cut: 'fridge', x: 560, y: 160, w: 680, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'STAY', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'SHUT?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep25_2: { ep: 'ep25', part: 2, out: 'ep25/thumb_part2.jpg', old: 'ep24/thumb_part2.jpg',
+    bg: { c: ['#F0E6FF', '#8A4AE0', '#1A0E3E'], at: [860, 430], rays: .22 },
+    cuts: { train: `TF(1000, 760, 1.3, guideway25({ mags: true }) + maglev25(1, { gap: 46, mags: true })) + '<rect x="500" y="690" width="1000" height="16" fill="#FFF3B0" opacity=".9"/>'` },
+    layers: [
+      { cut: 'train', x: 470, y: 300, w: 800, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'IT', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'FLOATS?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP26 (the CECL exam-skills special): Part 1 ONE MARK?! with Basil surprised, the Genie's lamp with the four CECL tiles, a navy-cyan
+  // burst; Part 2 ADD THE LINK! with Momo surprised, the four tiles with the green L glowing, a green burst
+  ep26_1: { ep: 'ep26', part: 1, out: 'ep26/thumb_part1.jpg', old: 'ep25/thumb_part1.jpg',
+    bg: { c: ['#DDF4FF', '#2A7AD0', '#0A1320'], at: [860, 430], rays: .22 },
+    cuts: { lamp: `TF(620, 900, .55, genieLamp26(1, { rise: 1 })) + TF(1200, 900, .5, ceclTiles26(1, {})) + TF(1200, 700, 1, '<circle r="70" fill="#fff" stroke="#D84A3A" stroke-width="10"/>' + T(0, 22, '1/3', 60, '#D84A3A'))` },
+    layers: [
+      { cut: 'lamp', x: 500, y: 300, w: 760, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'ONE', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MARK?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep26_2: { ep: 'ep26', part: 2, out: 'ep26/thumb_part2.jpg', old: 'ep25/thumb_part2.jpg',
+    bg: { c: ['#E6FFE8', '#2FA35A', '#0A2A14'], at: [860, 430], rays: .22 },
+    cuts: { tiles: `TF(1000, 760, 1.2, ceclTiles26(1, { on: [true, true, true, true] })) + '<rect x="1240" y="640" width="290" height="240" rx="30" fill="none" stroke="#FFF3B0" stroke-width="16"/>'` },
+    layers: [
+      { cut: 'tiles', x: 480, y: 300, w: 790, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'momo_v2_surprised', x: -30, y: 150, h: 600, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'ADD THE', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'LINK!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  // P3 EP0, the mind map special (THUMBNAIL_V2.md; script section 7): Part 1 READ or MAKE?! with Pip surprised, a half-made hand-drawn map
+  // (a pencil mid-branch) beside TheOneApp's crisp printed Magnets poster, a warm orange-to-brown burst; Part 2 1 WEEK LATER?! with Basil
+  // surprised, two blank pages (only "Magnets" in the middle, a pencil above each) and a calendar card Mon · Tue · Thu, an amber burst
+  ep00_1: { ep: 'ep00', part: 1, out: 'ep00/thumb_part1.jpg', old: 'ep22/thumb_part1.jpg',
+    bg: { c: ['#FFE9C2', '#F08A2A', '#4A2410'], at: [860, 430], rays: .22 },
+    cuts: { comp: `'<g filter="url(#drop)"><rect x="1036" y="196" width="808" height="488" fill="#fff"/></g>' + appImg("posterP", 1060, 220, 760, 440) + TF(760, 700, 1.05, sheet00(760, 520, { lines: false }) + TF(0, 0, .7, handMap(1, MAPB.slice(0, 3), { at: { "b2.1": 99 }, size: 44 })) + TF(250, 40, 1.2, pencil00(0)))` },
+    layers: [
+      { cut: 'comp', x: 520, y: 250, w: 740, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'pip_surprised', x: -20, y: 170, h: 580, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: 'READ or', x: 1250, y: 112, size: 116, fill: '#FFFFFF', rot: -3, anchor: 'end' }, { t: 'MAKE?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+  ep00_2: { ep: 'ep00', part: 2, out: 'ep00/thumb_part2.jpg', old: 'ep22/thumb_part2.jpg',
+    bg: { c: ['#FFF0C8', '#E0A020', '#3E2208'], at: [860, 430], rays: .22 },
+    cuts: { pages: `[700, 1220].map((x) => TF(x, 560, 1, sheet00(440, 480, { lines: false }) + '<ellipse rx="120" ry="72" fill="#FFF3C4" stroke="#3A2E52" stroke-width="8"/>' + T(0, 18, "Magnets", 54, "#3A2E52", { w: 700 }) + TF(150, -120, 1.1, pencil00(0)))).join("") + TF(960, 880, 1, '<g filter="url(#drop)"><rect x="-230" y="-70" width="460" height="140" rx="16" fill="#fff"/></g><rect x="-230" y="-70" width="460" height="44" rx="16" fill="#D84A3A"/>' + T(0, 44, "Mon · Tue · Thu", 50, "#3A2E52", { w: 700 }))` },
+    layers: [
+      { cut: 'pages', x: 600, y: 250, w: 640, line: '#fff', lw: 8, glow: INK },
+      { buddy: 'basil_v2_surprised', x: -40, y: 140, h: 610, line: '#fff', lw: 9, glow: INK } ],
+    words: [{ t: '1 WEEK', x: 1250, y: 112, size: 116, fill: '#FFD60A', rot: -3, anchor: 'end' }, { t: 'LATER?!', x: 1256, y: 250, size: 150, fill: '#FFD60A', rot: -3, anchor: 'end' }] },
+};
+
+const file = (p) => 'file://' + path.resolve(p);
+async function cutOut(b, th, name) {   // one cut-out PNG from the episode's engine; returns { png, w, h }
+  const p = await b.newPage({ viewport: { width: 1920, height: 1080 } }); p.on('pageerror', (e) => console.log('PAGEERR', th.ep, e.message));
+  await p.goto(file(path.join(ROOT, th.ep, 'page.html')) + '?part=' + th.part); await p.waitForFunction(() => window.READY === true, null, { timeout: 60000 });
+  const box = await p.evaluate((e) => { document.documentElement.style.background = 'transparent'; document.body.style.background = 'transparent';
+    const d = document.getElementById('dyn'); d.innerHTML = eval(e); const r = d.getBoundingClientRect(), pad = 14;
+    const x = Math.max(0, Math.floor(r.left - pad)), y = Math.max(0, Math.floor(r.top - pad)); return { x, y, width: Math.min(1920, Math.ceil(r.right + pad)) - x, height: Math.min(1080, Math.ceil(r.bottom + pad)) - y }; }, th.cuts[name]);
+  const png = path.join(TMP, `${th.ep}_${th.part}_${name}.png`); await p.screenshot({ path: png, omitBackground: true, clip: box }); await p.close(); return { png, w: box.width, h: box.height };
+}
+// the brand tag, drawn by the episode's own logo() (kept top left, small) and cut out the same way
+const TAG = `logo(0, 40, 40, 1)`;
+const size = (png) => { const d = fs.readFileSync(png); return [d.readUInt32BE(16), d.readUInt32BE(20)]; };
+// a sticker outline (round, from the cut-out's own shape) and a soft glow behind it
+const fx = (id, line, lw, glow) => `<filter id="${id}" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+  ${line ? `<feGaussianBlur in="SourceAlpha" stdDeviation="${lw * .55}"/><feComponentTransfer result="fat"><feFuncA type="linear" slope="40" intercept="-3"/></feComponentTransfer><feFlood flood-color="${line}"/><feComposite in2="fat" operator="in" result="edge"/>` : `<feMerge result="fat"><feMergeNode in="SourceAlpha"/></feMerge><feMerge result="edge"><feMergeNode in="SourceGraphic"/></feMerge>`}
+  ${glow ? `<feGaussianBlur in="fat" stdDeviation="13"/><feOffset dy="6"/><feComponentTransfer result="gb"><feFuncA type="linear" slope=".85"/></feComponentTransfer><feFlood flood-color="${glow}"/><feComposite in2="gb" operator="in" result="gl"/>` : ''}
+  <feMerge>${glow ? '<feMergeNode in="gl"/>' : ''}<feMergeNode in="edge"/><feMergeNode in="SourceGraphic"/></feMerge></filter>`;
+function burst(bg) { const [cx, cy] = bg.at, n = 16, R = 1700; let rays = '';
+  for (let i = 0; i < n; i++) { const a0 = (i / n) * 2 * Math.PI + .1, a1 = a0 + Math.PI / n; rays += `<path d="M${cx} ${cy} L${(cx + R * Math.cos(a0)).toFixed(1)} ${(cy + R * Math.sin(a0)).toFixed(1)} L${(cx + R * Math.cos(a1)).toFixed(1)} ${(cy + R * Math.sin(a1)).toFixed(1)}z"/>`; }
+  return `<defs><radialGradient id="bgG" gradientUnits="userSpaceOnUse" cx="${cx}" cy="${cy}" r="900"><stop offset="0" stop-color="${bg.c[0]}"/><stop offset=".42" stop-color="${bg.c[1]}"/><stop offset="1" stop-color="${bg.c[2]}"/></radialGradient>
+    <radialGradient id="bgV" cx=".5" cy=".5" r=".75"><stop offset=".62" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></radialGradient></defs>
+    <rect width="${W}" height="${H}" fill="url(#bgG)"/><g fill="#fff" opacity="${bg.rays === undefined ? .18 : bg.rays}">${rays}</g><rect width="${W}" height="${H}" fill="url(#bgV)"/>`; }
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+const word = (w) => `<g transform="translate(${w.x} ${w.y}) rotate(${w.rot || 0})" filter="url(#wsh)"><text text-anchor="${w.anchor || 'middle'}" font-family="NunitoB" font-weight="900" font-size="${w.size}" letter-spacing="-2" fill="${w.fill || '#fff'}" stroke="${INK}" stroke-width="${Math.round(w.size * .2)}" stroke-linejoin="round" paint-order="stroke">${esc(w.t)}</text></g>`;
+
+async function make(b, key) { const th = THUMBS[key]; if (!th) throw new Error('no such thumbnail: ' + key + ' (have: ' + Object.keys(THUMBS).join(', ') + ')');
+  const cuts = {}; for (const n of Object.keys(th.cuts)) cuts[n] = await cutOut(b, th, n);
+  th.cuts._tag = TAG; const tag = await cutOut(b, th, '_tag'); delete th.cuts._tag;
+  let defs = '', body = '', i = 0;
+  for (const L of th.layers) { if (L.svg) { body += L.svg; continue; } const id = 'f' + (i++); let src, w, h;
+    if (L.cut) { const c = cuts[L.cut]; src = c.png; w = L.w; h = L.w * c.h / c.w; }
+    else { src = ['poses', '.'].map((d) => path.join(ROOT, 'characters/sprites', d, L.buddy + '.png')).find((f) => fs.existsSync(f)); if (!src) throw new Error('no buddy art: ' + L.buddy); const [pw, ph] = size(src); h = L.h; w = L.h * pw / ph; }
+    defs += fx(id, L.line, L.lw || 8, L.glow);
+    body += `<g transform="translate(${L.x + w / 2} ${L.y + h / 2}) rotate(${L.rot || 0}) scale(${L.flip ? -1 : 1} 1)" filter="url(#${id})"><image href="${file(src)}" x="${-w / 2}" y="${-h / 2}" width="${w}" height="${h}"/></g>`; }
+  const tw = 250, tagS = `<image href="${file(tag.png)}" x="14" y="12" width="${tw}" height="${tw * tag.h / tag.w}"/>`;
+  const chip = th.chip === false ? '' : `<g transform="translate(${14 + tw + 22} ${12 + tw * tag.h / tag.w / 2})"><circle r="19" fill="#fff" stroke="${INK}" stroke-width="5"/><text y="10" text-anchor="middle" font-family="NunitoB" font-weight="900" font-size="28" fill="${INK}">${th.part}</text></g>`;
+  const html = `<!doctype html><meta charset="utf-8"><style>@font-face{font-family:NunitoB;font-weight:900;src:url(${file(FONT)})}@font-face{font-family:Fredoka;font-weight:700;src:url(${file(FRED)})}html,body{margin:0;background:#000}svg{display:block}</style>
+  <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${burst(th.bg)}<defs>${defs}<filter id="wsh" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="9" stdDeviation="5" flood-color="${INK}" flood-opacity=".55"/></filter></defs>
+  ${body}${(th.words || []).map(word).join('')}${tagS}${chip}</svg>`;
+  const tmp = path.join(TMP, key + '.html'); fs.writeFileSync(tmp, html); const p = await b.newPage({ viewport: { width: W, height: H } });
+  await p.goto(file(tmp)); await p.evaluate(() => document.fonts.load('900 40px NunitoB').then(() => document.fonts.ready)); await p.waitForLoadState('networkidle');
+  const out = path.join(ROOT, th.out); let q = 92; do { await p.screenshot({ path: out, type: 'jpeg', quality: q }); q -= 4; } while (fs.statSync(out).size > 1.9e6 && q > 60);
+  await p.close(); console.log(th.out, Math.round(fs.statSync(out).size / 1024) + ' KB', 'words: ' + (th.words || []).map((w) => w.t).join(' ')); }
+
+// the comparison sheet: a row per thumbnail: OLD and NEW large, then both at 320 px (the size in a phone feed), on YouTube's dark grey
+async function sheet(b) { const keys = Object.keys(THUMBS).filter((k) => fs.existsSync(path.join(ROOT, THUMBS[k].out))), bw = 800, bh = 450, sw = 320, sh = 180;
+  const rows = keys.map((k) => { const th = THUMBS[k], o = file(path.join(ROOT, th.old)), n = file(path.join(ROOT, th.out)) + '?' + Date.now();
+    return `<div class="r"><div><p>${th.ep.toUpperCase()} Part ${th.part}: OLD</p><img src="${o}" width="${bw}" height="${bh}"></div><div><p>NEW (v2): ${(th.words || []).map((w) => w.t).join(' ')}</p><img src="${n}" width="${bw}" height="${bh}"></div>
+      <div><p>at 320 px: old</p><img src="${o}" width="${sw}" height="${sh}"><p>at 320 px: new</p><img src="${n}" width="${sw}" height="${sh}"></div></div>`; }).join('');
+  const html = `<!doctype html><meta charset="utf-8"><style>body{margin:0;background:#0F0F0F;font:700 22px sans-serif;color:#fff;width:${bw * 2 + sw + 100}px}.r{display:flex;gap:25px;padding:14px 25px}p{margin:8px 0 6px}img{display:block;border-radius:10px}</style>${rows}`;
+  const tmp = path.join(TMP, 'sheet.html'); fs.writeFileSync(tmp, html); const p = await b.newPage({ viewport: { width: bw * 2 + sw + 100, height: 300 } }); await p.goto(file(tmp)); await p.waitForLoadState('networkidle');
+  fs.mkdirSync(path.join(ROOT, 'qa'), { recursive: true }); await p.screenshot({ path: path.join(ROOT, 'qa/thumb_pilot.jpg'), type: 'jpeg', quality: 88, fullPage: true }); await p.close(); console.log('qa/thumb_pilot.jpg'); }
+
+if (require.main === module) (async () => { let a = process.argv.slice(2); if (!a.length) { console.log('node thumb_v2.js <' + Object.keys(THUMBS).join('|') + '|all|sheet> ...'); return; }
+  if (a.includes('all')) a = [...Object.keys(THUMBS), ...a.filter((x) => x === 'sheet')]; const b = await chromium.launch();
+  try { for (const k of a) if (k === 'sheet') await sheet(b); else await make(b, k); } finally { await b.close(); } })();
+module.exports = { THUMBS, make, sheet };

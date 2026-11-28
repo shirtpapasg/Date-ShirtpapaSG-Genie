@@ -1,0 +1,87 @@
+{
+ "_note": "P4 EP3 'The Case of the Mystery Leaf' (the new P4 style, one video), for TheOneApp videos.js after upload: it REPLACES the P4 entry no. 3 (the old video PNe2DU8sFTI, 'Read A Leaf Like A Scientist'): swap the whole entry and put the new url in. Moments: 1.5 s before each idea's first line (tl_p1.json). Suggested: CH.plantSystem: 'Plant System' (videos.js has no CH key for it yet).",
+ "replaces": [
+  "PNe2DU8sFTI"
+ ],
+ "entries": [
+  {
+   "no": 3,
+   "art": "🍃",
+   "topic": "Plant System",
+   "title": "Which Plant Dropped This Leaf?",
+   "len": "7:39",
+   "url": "https://www.youtube.com/watch?v=<P4EP03>",
+   "moments": [
+    {
+     "at": "0:48",
+     "what": "Pick the clue: the colour, the size, or the leaf's parts?",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-3'"
+     ],
+     "_line": "f201",
+     "_t": 49.88
+    },
+    {
+     "at": "1:43",
+     "what": "Colour and size are weak clues for telling leaves apart",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-3'"
+     ],
+     "_line": "o405",
+     "_t": 105.23
+    },
+    {
+     "at": "2:33",
+     "what": "Look closer: leaf blade, leaf stalk, main vein, smaller veins",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-1'"
+     ],
+     "_line": "l601",
+     "_t": 154.89
+    },
+    {
+     "at": "3:01",
+     "what": "Be a drop of water: the veins of a leaf (net veins)",
+     "keys": [
+      "O.plant"
+     ],
+     "_line": "j701",
+     "_t": 183.01
+    },
+    {
+     "at": "3:37",
+     "what": "Parallel veins and net veins",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-3'"
+     ],
+     "_line": "q801",
+     "_t": 218.68
+    },
+    {
+     "at": "4:26",
+     "what": "Compare the edges: straight or jagged",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-3'"
+     ],
+     "_line": "q811",
+     "_t": 268.3
+    },
+    {
+     "at": "6:09",
+     "what": "The words that earn marks: the parts of a leaf",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-1'"
+     ],
+     "_line": "m1001",
+     "_t": 370.97
+    }
+   ]
+  }
+ ]
+}

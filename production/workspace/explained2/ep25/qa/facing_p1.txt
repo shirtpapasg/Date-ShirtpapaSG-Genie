@@ -1,0 +1,13 @@
+facing_scan ep25 part 1: 3131 samples 0-313.0 s every 0.1 s; 20 FACES notes; 32 functions watched
+EYE REVIEW     3.0-8.2     cold             buddy0         moves RIGHT   694 px    from lib.js:165<p1.js:12<p1.js:30  [buddy travels]
+EYE REVIEW     6.4-7.9     cold             buddy0         moves RIGHT    83 px    from lib.js:165<p1.js:12<p1.js:31  [buddy travels]
+EYE REVIEW    23.2-24.6    today            buddy0         moves RIGHT   202 px    from lib.js:165<p1.js:12<p1.js:50  [buddy travels]
+EYE REVIEW    86.3-88.7    waitw            buddy0         moves RIGHT  2112 px    from lib.js:165<p1.js:12<p1.js:69  [buddy travels]
+EYE REVIEW   121.9-123.1   answer           buddy0         moves RIGHT   465 px    from lib.js:164<p1.js:12<p1.js:84  [buddy travels]
+EYE REVIEW   121.9-123.1   answer           buddy0         moves RIGHT   401 px    from lib.js:164<p1.js:12<p1.js:85  [buddy travels]
+EYE REVIEW   121.9-123.1   answer           buddy0         moves RIGHT   337 px    from lib.js:164<p1.js:12<p1.js:86  [buddy travels]
+EYE REVIEW   129.2-131.8   lc1q             buddy0         moves RIGHT   734 px    from lib.js:165<p1.js:12<p1.js:91  [buddy travels]
+EYE REVIEW   129.2-131.7   lc1q             buddy0         moves RIGHT   574 px    from lib.js:165<p1.js:12<p1.js:92  [buddy travels]
+EYE REVIEW   197.1-200.9   lc2q             buddy0         moves LEFT    923 px    from lib.js:165<p1.js:12<p1.js:125  [buddy travels]
+EYE REVIEW   264.0-264.9   liz              buddy0         moves RIGHT   308 px    from lib.js:165<p1.js:12<p1.js:141  [buddy travels]
+no backwards movers (1 annotated movers face the right way, 11 for eye review)

@@ -1,0 +1,1 @@
+window.BAKED=["_grain","corridor","daystage","flat","flatD","stage","stage2"];

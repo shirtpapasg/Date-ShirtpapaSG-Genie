@@ -1,0 +1,127 @@
+1
+00:00:00,540 --> 00:00:01,790
+One clever teacher,
+
+2
+00:00:01,790 --> 00:00:03,390
+or a whole school hall?
+
+3
+00:00:03,390 --> 00:00:05,300
+Which works faster?
+
+4
+00:00:05,537 --> 00:00:07,347
+Nvidia's famous chips are called
+
+5
+00:00:07,347 --> 00:00:08,487
+GPUs,
+
+6
+00:00:08,487 --> 00:00:10,527
+graphics processing units.
+
+7
+00:00:10,527 --> 00:00:11,457
+They were first made to
+
+8
+00:00:11,457 --> 00:00:13,337
+draw video games.
+
+9
+00:00:13,592 --> 00:00:15,322
+An ordinary computer brain,
+
+10
+00:00:15,322 --> 00:00:16,552
+a CPU,
+
+11
+00:00:16,552 --> 00:00:17,912
+is like one very clever
+
+12
+00:00:17,912 --> 00:00:18,772
+teacher,
+
+13
+00:00:18,772 --> 00:00:21,242
+solving sums one after another.
+
+14
+00:00:21,242 --> 00:00:22,392
+A GPU is like a
+
+15
+00:00:22,392 --> 00:00:24,442
+whole school hall of pupils,
+
+16
+00:00:24,442 --> 00:00:26,412
+each solving one small sum,
+
+17
+00:00:26,412 --> 00:00:28,292
+all at the same time.
+
+18
+00:00:28,534 --> 00:00:29,754
+And it turns out AI
+
+19
+00:00:29,754 --> 00:00:31,574
+learns in a similar way:
+
+20
+00:00:31,574 --> 00:00:33,234
+by doing billions and billions
+
+21
+00:00:33,234 --> 00:00:35,294
+of small multiplications.
+
+22
+00:00:35,294 --> 00:00:36,194
+So the chip built for
+
+23
+00:00:36,194 --> 00:00:37,954
+games became the chip that
+
+24
+00:00:37,954 --> 00:00:39,934
+helps teach AI.
+
+25
+00:00:40,177 --> 00:00:42,227
+Which finishes first: one friend
+
+26
+00:00:42,227 --> 00:00:43,367
+with twenty sums,
+
+27
+00:00:43,367 --> 00:00:44,677
+or twenty friends with one
+
+28
+00:00:44,677 --> 00:00:45,900
+sum each?
+
+29
+00:00:45,900 --> 00:00:47,150
+Watch the full episode on
+
+30
+00:00:47,150 --> 00:00:47,870
+TheOneApp,
+
+31
+00:00:47,870 --> 00:00:49,200
+Explored.
+
+32
+00:00:49,411 --> 00:00:51,571
+Now you know!

@@ -1,0 +1,73 @@
+{
+ "size": 1024,
+ "states": {
+  "closed": {
+   "file": "momo_v2_sit_closed.png",
+   "bbox": [
+    252,
+    44,
+    869,
+    851
+   ]
+  },
+  "half": {
+   "file": "momo_v2_sit_half.png",
+   "bbox": [
+    252,
+    44,
+    869,
+    851
+   ]
+  },
+  "wide": {
+   "file": "momo_v2_sit_wide.png",
+   "bbox": [
+    252,
+    44,
+    869,
+    851
+   ]
+  },
+  "blink": {
+   "file": "momo_v2_sit_blink.png",
+   "bbox": [
+    252,
+    44,
+    869,
+    851
+   ]
+  },
+  "half_blink": {
+   "file": "momo_v2_sit_half_blink.png",
+   "bbox": [
+    252,
+    44,
+    869,
+    851
+   ]
+  },
+  "wide_blink": {
+   "file": "momo_v2_sit_wide_blink.png",
+   "bbox": [
+    252,
+    44,
+    869,
+    851
+   ]
+  }
+ },
+ "source": {
+  "closed": "momo_v2_talk_closed.jpg",
+  "half": "momo_v2_talk_half.jpg",
+  "wide": "momo_v2_talk_wide.jpg",
+  "blink": "momo_v2_talk_blink.jpg"
+ },
+ "note": "build_v2.py: one transform for the whole set (Gemini kept the body identical)",
+ "anchors": {
+  "hips": [
+   651,
+   845
+  ],
+  "ground_y": 851
+ }
+}

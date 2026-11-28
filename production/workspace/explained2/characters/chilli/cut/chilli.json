@@ -1,0 +1,548 @@
+{
+ "droop": {
+  "src": "../teacher_ep02_2026-11-27/chilli_droop_tall_pair.jpg",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   71.0,
+   314.0,
+   176.0,
+   89.0
+  ]
+ },
+ "tall": {
+  "src": "../teacher_ep02_2026-11-27/chilli_droop_tall_pair.jpg",
+  "w": 492,
+  "h": 667,
+  "ox": 263.0,
+  "oy": 660.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   177.0,
+   488.0,
+   174.0,
+   117.0
+  ]
+ },
+ "hop_a": {
+  "src": "../teacher_ep02_2026-11-27/chilli_hop_pair.jpg",
+  "w": 544,
+  "h": 481,
+  "ox": 249.5,
+  "oy": 474.0,
+  "rim": 261.0,
+  "scale": 0.7662835249042146,
+  "states": [
+   "closed",
+   "closed_blink"
+  ],
+  "face": [
+   179.0,
+   313.0,
+   103.0,
+   108.0
+  ]
+ },
+ "tall_happy": {
+  "src": "../teacher_ep02_2026-11-27/chilli_hop_pair.jpg",
+  "w": 502,
+  "h": 676,
+  "ox": 268.5,
+  "oy": 669.0,
+  "rim": 265.0,
+  "scale": 0.7547169811320755,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   181.0,
+   495.0,
+   177.0,
+   118.0
+  ]
+ },
+ "flat": {
+  "src": "../teacher_ep02_2026-11-27/chilli_flat_shy_pair.jpg",
+  "w": 504,
+  "h": 671,
+  "ox": 260.0,
+  "oy": 664.0,
+  "rim": 262.0,
+  "scale": 0.7633587786259542,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   168.0,
+   508.0,
+   178.0,
+   86.0
+  ]
+ },
+ "shy": {
+  "src": "../teacher_ep02_2026-11-27/chilli_flat_shy_pair.jpg",
+  "w": 411,
+  "h": 672,
+  "ox": 219.5,
+  "oy": 665.0,
+  "rim": 263.0,
+  "scale": 0.7604562737642585,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   131.0,
+   491.0,
+   179.0,
+   108.0
+  ]
+ },
+ "alarmed": {
+  "src": "../teacher_ep02_2026-11-27/chilli_alarmed_smug_pair.jpg",
+  "w": 485,
+  "h": 661,
+  "ox": 251.5,
+  "oy": 654.0,
+  "rim": 263.0,
+  "scale": 0.7604562737642585,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   160.0,
+   478.0,
+   183.0,
+   124.0
+  ]
+ },
+ "smug": {
+  "src": "../teacher_ep02_2026-11-27/chilli_alarmed_smug_pair.jpg",
+  "w": 497,
+  "h": 671,
+  "ox": 256.5,
+  "oy": 664.0,
+  "rim": 259.0,
+  "scale": 0.7722007722007722,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   155.0,
+   497.0,
+   191.0,
+   101.0
+  ]
+ },
+ "mid": {
+  "src": "../teacher_ep02_2026-11-27/chilli_midrecovery.jpg",
+  "w": 695,
+  "h": 815,
+  "ox": 317.5,
+  "oy": 808.0,
+  "rim": 303.0,
+  "scale": 0.6600660066006601,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   216.0,
+   628.0,
+   202.0,
+   102.0
+  ]
+ },
+ "hop_b": {
+  "src": "made from hop_a (cut_chilli.make_hop_b)",
+  "w": 544,
+  "h": 537,
+  "ox": 249.5,
+  "oy": 530.0,
+  "rim": 261.0,
+  "scale": 0.7662835249042146,
+  "states": [
+   "closed"
+  ],
+  "face": [
+   180.0,
+   362.0,
+   103.0,
+   108.0
+  ]
+ },
+ "wilt_droop": {
+  "src": "body droop + face droop",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   71.0,
+   314.0,
+   176.0,
+   89.0
+  ],
+  "body": "wilt",
+  "face_of": "droop"
+ },
+ "wilt_flat": {
+  "src": "body droop + face flat",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   67.70229434967041,
+   313.19084310531616,
+   176.6412213740458,
+   85.34351145038168
+  ],
+  "body": "wilt",
+  "face_of": "flat"
+ },
+ "wilt_alarmed": {
+  "src": "body droop + face alarmed",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   68.54372596740723,
+   294.0076140165329,
+   180.91254752851708,
+   122.58555133079847
+  ],
+  "body": "wilt",
+  "face_of": "alarmed"
+ },
+ "wilt_shy": {
+  "src": "body droop + face shy",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   71.50950735807419,
+   295.98479813337326,
+   176.95817490494295,
+   106.76806083650189
+  ],
+  "body": "wilt",
+  "face_of": "shy"
+ },
+ "wilt_tall": {
+  "src": "body droop + face tall",
+  "w": 449,
+  "h": 475,
+  "ox": 159.0,
+  "oy": 468.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   73.0,
+   296.0,
+   174.0,
+   117.0
+  ],
+  "body": "wilt",
+  "face_of": "tall"
+ },
+ "mid_shy": {
+  "src": "body mid + face shy",
+  "w": 695,
+  "h": 815,
+  "ox": 317.5,
+  "oy": 808.0,
+  "rim": 303.0,
+  "scale": 0.6600660066006601,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   215.53992247581482,
+   607.5361249446869,
+   206.22433460076044,
+   124.42585551330798
+  ],
+  "body": "mid",
+  "face_of": "shy"
+ },
+ "mid_tall": {
+  "src": "body mid + face tall",
+  "w": 695,
+  "h": 815,
+  "ox": 317.5,
+  "oy": 808.0,
+  "rim": 303.0,
+  "scale": 0.6600660066006601,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   217.27692925930023,
+   607.5538625717163,
+   202.77692307692308,
+   136.35000000000002
+  ],
+  "body": "mid",
+  "face_of": "tall"
+ },
+ "tallg_shy": {
+  "src": "body alarmed + face shy",
+  "w": 485,
+  "h": 661,
+  "ox": 251.5,
+  "oy": 654.0,
+  "rim": 263.0,
+  "scale": 0.7604562737642585,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   163.0,
+   480.0,
+   179.0,
+   108.0
+  ],
+  "body": "tallg",
+  "face_of": "shy"
+ },
+ "tallg_tall": {
+  "src": "body alarmed + face tall",
+  "w": 485,
+  "h": 661,
+  "ox": 251.5,
+  "oy": 654.0,
+  "rim": 263.0,
+  "scale": 0.7604562737642585,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   164.50769996643066,
+   480.0154056549072,
+   176.00769230769234,
+   118.35000000000002
+  ],
+  "body": "tallg",
+  "face_of": "tall"
+ },
+ "tallr_tall": {
+  "src": "body tall + face tall",
+  "w": 492,
+  "h": 667,
+  "ox": 263.0,
+  "oy": 660.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   177.0,
+   488.0,
+   174.0,
+   117.0
+  ],
+  "body": "tallr",
+  "face_of": "tall"
+ },
+ "tallr_tall_happy": {
+  "src": "body tall + face tall_happy",
+  "w": 492,
+  "h": 667,
+  "ox": 263.0,
+  "oy": 660.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   177.15094605088234,
+   489.28302615880966,
+   173.66037735849056,
+   115.77358490566037
+  ],
+  "body": "tallr",
+  "face_of": "tall_happy"
+ },
+ "tallr_smug": {
+  "src": "body tall + face smug",
+  "w": 492,
+  "h": 667,
+  "ox": 263.0,
+  "oy": 660.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   161.10809993743896,
+   492.3551859855652,
+   191.73745173745175,
+   101.38996138996139
+  ],
+  "body": "tallr",
+  "face_of": "smug"
+ },
+ "tallr_flat": {
+  "src": "body tall + face flat",
+  "w": 492,
+  "h": 667,
+  "ox": 263.0,
+  "oy": 660.0,
+  "rim": 260.0,
+  "scale": 0.7692307692307693,
+  "states": [
+   "closed",
+   "closed_blink",
+   "half",
+   "half_blink",
+   "wide",
+   "wide_blink"
+  ],
+  "face": [
+   171.7022933959961,
+   505.1908503770828,
+   176.6412213740458,
+   85.34351145038168
+  ],
+  "body": "tallr",
+  "face_of": "flat"
+ }
+}

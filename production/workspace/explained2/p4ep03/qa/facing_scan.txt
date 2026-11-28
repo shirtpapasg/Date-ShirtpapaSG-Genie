@@ -1,0 +1,7 @@
+facing_scan p4ep03 part 1: 4591 samples 0-459.0 s every 0.1 s; 25 FACES notes; 32 functions watched
+EYE REVIEW   201.4-205.4   journey          buddy0         moves RIGHT  2605 px    from lib.js:213<s2.js:125<s2.js:126  [buddy travels]
+EYE REVIEW   284.5-286.2   suspects         buddy0         moves RIGHT  1242 px    from lib.js:213<s1.js:9<s3.js:44  [buddy travels]
+EYE REVIEW   284.5-286.2   suspects         buddy0         moves RIGHT  1234 px    from lib.js:213<s1.js:9<s3.js:45  [buddy travels]
+EYE REVIEW   284.6-286.2   suspects         buddy0         moves RIGHT  1264 px    from lib.js:213<s1.js:9<s3.js:41  [buddy travels]
+EYE REVIEW   357.4-358.5   reveal           buddy0         moves RIGHT   360 px    from lib.js:213<s1.js:9<s3.js:116  [buddy travels]
+no backwards movers (2 annotated movers face the right way, 5 for eye review)

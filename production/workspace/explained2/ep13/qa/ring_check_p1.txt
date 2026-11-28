@@ -1,0 +1,2 @@
+Round 1: ring0 54.84 s, 3 s. Ticks planned 7 + bell; heard onsets 8; |tick - heard| max 5 ms, mean 5 ms. Number changes seen at 54.87, 55.84, 56.84, 57.61, 58.14; vs the whole-second ticks 55.84, 56.84, 57.84: max offset 233 ms (1 frame = 33 ms).
+HOLD ON!: ring0 174.71 s, 5 s. Ticks planned 10 + bell; heard onsets 11; |tick - heard| max 5 ms, mean 5 ms. Number changes seen at 174.74, 175.74, 176.74, 177.28, 178.24, 178.98, 179.51; vs the whole-second ticks 175.71, 176.71, 177.71, 178.71, 179.71: max offset 433 ms (1 frame = 33 ms).

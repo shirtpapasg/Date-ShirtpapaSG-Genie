@@ -1,0 +1,116 @@
+{
+ "size": 1024,
+ "states": {
+  "closed": {
+   "file": "momo_c_sit_closed.png",
+   "bbox": [
+    254,
+    44,
+    866,
+    851
+   ]
+  },
+  "half": {
+   "file": "momo_c_sit_half.png",
+   "bbox": [
+    254,
+    44,
+    866,
+    851
+   ]
+  },
+  "wide": {
+   "file": "momo_c_sit_wide.png",
+   "bbox": [
+    254,
+    44,
+    866,
+    851
+   ]
+  },
+  "blink": {
+   "file": "momo_c_sit_blink.png",
+   "bbox": [
+    254,
+    44,
+    866,
+    851
+   ]
+  },
+  "half_blink": {
+   "file": "momo_c_sit_half_blink.png",
+   "bbox": [
+    254,
+    44,
+    866,
+    851
+   ]
+  },
+  "wide_blink": {
+   "file": "momo_c_sit_wide_blink.png",
+   "bbox": [
+    254,
+    44,
+    866,
+    851
+   ]
+  }
+ },
+ "fit": {
+  "half": {
+   "body_scale": 0.8938,
+   "body_rot": -0.89,
+   "body_inliers": 76,
+   "head_rot_vs_body": 0.71
+  },
+  "wide": {
+   "body_scale": 0.8167,
+   "body_rot": -0.19,
+   "body_inliers": 112,
+   "head_rot_vs_body": 0.08
+  },
+  "blink": {
+   "body_scale": 0.9862,
+   "body_rot": 0.01,
+   "body_inliers": 185,
+   "head_rot_vs_body": 0.01
+  }
+ },
+ "source": {
+  "closed": "poses_inbox/momo_c_talk_closed.jpg",
+  "half": "poses_inbox/momo_c_talk_half.jpg",
+  "wide": "poses_inbox/momo_c_talk_wide.jpg",
+  "blink": "poses_inbox/momo_c_talk_blink.jpg"
+ },
+ "anchors": {
+  "hips": [
+   638,
+   845
+  ],
+  "ground_y": 851
+ },
+ "eyes": {
+  "L": {
+   "c": [
+    578,
+    296
+   ],
+   "r": [
+    58,
+    32
+   ],
+   "ang": 0
+  },
+  "R": {
+   "c": [
+    746,
+    274
+   ],
+   "r": [
+    44,
+    32
+   ],
+   "ang": 0
+  }
+ }
+}

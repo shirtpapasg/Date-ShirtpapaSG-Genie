@@ -1,0 +1,95 @@
+{
+ "size": [
+  1200,
+  896
+ ],
+ "states": {
+  "closed": {
+   "file": "pip_sit_closed.png",
+   "bbox": [
+    265,
+    50,
+    924,
+    859
+   ]
+  },
+  "half": {
+   "file": "pip_sit_half.png",
+   "bbox": [
+    265,
+    50,
+    924,
+    859
+   ]
+  },
+  "wide": {
+   "file": "pip_sit_wide.png",
+   "bbox": [
+    265,
+    50,
+    924,
+    859
+   ]
+  },
+  "blink": {
+   "file": "pip_sit_blink.png",
+   "bbox": [
+    265,
+    50,
+    924,
+    859
+   ]
+  },
+  "half_blink": {
+   "file": "pip_sit_half_blink.png",
+   "bbox": [
+    265,
+    50,
+    924,
+    859
+   ]
+  },
+  "wide_blink": {
+   "file": "pip_sit_wide_blink.png",
+   "bbox": [
+    265,
+    50,
+    924,
+    859
+   ]
+  }
+ },
+ "anchors": {
+  "hips": [
+   690,
+   853
+  ],
+  "neck": [
+   700,
+   468
+  ],
+  "neck_band": [
+   430,
+   505
+  ],
+  "head_xmin": [
+   468,
+   500
+  ],
+  "tail": {
+   "root": [
+    475,
+    700
+   ],
+   "xband": [
+    470,
+    400
+   ],
+   "ymin": [
+    420,
+    460
+   ]
+  },
+  "ground_y": 859
+ }
+}

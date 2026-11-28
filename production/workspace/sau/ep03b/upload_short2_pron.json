@@ -1,0 +1,28 @@
+{
+ "key": "explored-ep03b-short2-pron",
+ "parts": [
+  {
+   "key": "explored-ep03b-short2-pron",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep03b/short2.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/sau/ep03b/thumb_short2.jpg",
+   "title": "What Happens To Rubbish You Throw Away? #Shorts",
+   "description": "Down the chute, burnt at a waste-to-energy plant, and the ash goes to Semakau. Watch the full episode: Where does our rubbish go? (TheOneApp, Explored EP3 Part 2)\n\nTheOneApp, Explored: one real news story every Thursday, and the science from your textbook (Primary 3 to Primary 6, Singapore). The sister series of TheOneApp, Explained.\n\n#TheOneAppExplored #PrimaryScience #Singapore",
+   "tags": [
+    "rubbish",
+    "shorts",
+    "theoneapp explored",
+    "waste to energy"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLO1GzAf41cwM",
+   "after": "explored-ep03b-short1-pron"
+  }
+ ],
+ "replaces": [
+  "3as-TwJ4tGM"
+ ],
+ "retire_old": true
+}

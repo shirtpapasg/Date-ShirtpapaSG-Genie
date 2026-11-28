@@ -1,0 +1,142 @@
+{
+ "size": 1024,
+ "states": {
+  "closed": {
+   "file": "basil_c_sit_closed.png",
+   "bbox": [
+    98,
+    126,
+    884,
+    917
+   ]
+  },
+  "half": {
+   "file": "basil_c_sit_half.png",
+   "bbox": [
+    98,
+    126,
+    884,
+    917
+   ]
+  },
+  "wide": {
+   "file": "basil_c_sit_wide.png",
+   "bbox": [
+    98,
+    126,
+    884,
+    917
+   ]
+  },
+  "blink": {
+   "file": "basil_c_sit_blink.png",
+   "bbox": [
+    98,
+    126,
+    884,
+    917
+   ]
+  },
+  "half_blink": {
+   "file": "basil_c_sit_half_blink.png",
+   "bbox": [
+    98,
+    126,
+    884,
+    917
+   ]
+  },
+  "wide_blink": {
+   "file": "basil_c_sit_wide_blink.png",
+   "bbox": [
+    98,
+    126,
+    884,
+    917
+   ]
+  }
+ },
+ "fit": {
+  "half": {
+   "body_scale": 0.9586,
+   "body_rot": -0.11,
+   "body_inliers": 260,
+   "head_rot_vs_body": 0.17
+  },
+  "wide": {
+   "body_scale": 0.9139,
+   "body_rot": 0.26,
+   "body_inliers": 149,
+   "head_rot_vs_body": -0.03
+  },
+  "blink": {
+   "body_scale": 0.9835,
+   "body_rot": -0.21,
+   "body_inliers": 94,
+   "head_rot_vs_body": 0.08
+  }
+ },
+ "source": {
+  "closed": "poses_inbox/basil_c_sit_closed.jpg",
+  "half": "poses_inbox/basil_c_sit_half.jpg",
+  "wide": "poses_inbox/basil_c_sit_wide.jpg",
+  "blink": "poses_inbox/basil_c_sit_blink.jpg"
+ },
+ "anchors": {
+  "hips": [
+   628,
+   911
+  ],
+  "neck": [
+   650,
+   495
+  ],
+  "neck_band": [
+   455,
+   522
+  ],
+  "head_xmin": [
+   375,
+   395
+  ],
+  "tail": {
+   "root": [
+    450,
+    790
+   ],
+   "xband": [
+    450,
+    340
+   ],
+   "ymin": [
+    415,
+    455
+   ]
+  },
+  "ground_y": 917
+ },
+ "eyes": {
+  "L": {
+   "c": [
+    563,
+    259
+   ],
+   "r": [
+    60,
+    62
+   ],
+   "ang": 0
+  },
+  "R": {
+   "c": [
+    795,
+    229
+   ],
+   "r": [
+    31,
+    52
+   ],
+   "ang": 0
+  }
+ }
+}

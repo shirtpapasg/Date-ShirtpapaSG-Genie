@@ -1,0 +1,515 @@
+1
+00:00:00,300 --> 00:00:04,270
+Last time, clear glass let most light pass through: transparent.
+
+2
+00:00:04,540 --> 00:00:08,330
+Frosted glass let only some light pass through: translucent.
+
+3
+00:00:08,630 --> 00:00:10,420
+Now, the white wooden door!
+
+4
+00:00:13,674 --> 00:00:14,904
+Lock in first.
+
+5
+00:00:15,154 --> 00:00:17,494
+A little moth is hiding in this video.
+
+6
+00:00:17,784 --> 00:00:18,984
+Can you spot it?
+
+7
+00:00:19,561 --> 00:00:20,711
+Today you'll learn:
+
+8
+00:00:20,913 --> 00:00:21,633
+Opaque.
+
+9
+00:00:22,024 --> 00:00:23,524
+What transparency is.
+
+10
+00:00:23,727 --> 00:00:25,847
+Transparent, translucent, opaque.
+
+11
+00:00:27,533 --> 00:00:28,413
+Round one.
+
+12
+00:00:28,723 --> 00:00:30,713
+A wooden door, painted white.
+
+13
+00:00:30,983 --> 00:00:32,503
+The torch shines on it.
+
+14
+00:00:32,783 --> 00:00:34,493
+How much light will pass through?
+
+15
+00:00:34,763 --> 00:00:35,763
+One, most.
+
+16
+00:00:36,053 --> 00:00:37,253
+Two, only some.
+
+17
+00:00:37,543 --> 00:00:38,453
+Three, none.
+
+18
+00:00:38,753 --> 00:00:40,233
+Show me with your fingers.
+
+19
+00:00:45,706 --> 00:00:46,686
+Locked in!
+
+20
+00:00:46,814 --> 00:00:47,594
+Two!
+
+21
+00:00:47,664 --> 00:00:49,704
+It is white, and white is bright!
+
+22
+00:00:49,756 --> 00:00:50,496
+Three!
+
+23
+00:00:50,606 --> 00:00:53,136
+Nobody found my robot behind that door!
+
+24
+00:00:53,186 --> 00:00:53,726
+Three.
+
+25
+00:00:55,048 --> 00:00:56,198
+Look closer.
+
+26
+00:00:56,798 --> 00:00:57,728
+Torch on.
+
+27
+00:00:58,318 --> 00:01:00,238
+The front of the door is bright.
+
+28
+00:01:01,749 --> 00:01:03,239
+Now look behind it.
+
+29
+00:01:03,819 --> 00:01:05,239
+No bright spot.
+
+30
+00:01:05,829 --> 00:01:06,799
+No glow.
+
+31
+00:01:07,419 --> 00:01:08,939
+No light passed through.
+
+32
+00:01:10,852 --> 00:01:12,042
+And the robot?
+
+33
+00:01:12,602 --> 00:01:14,342
+It is still behind the door.
+
+34
+00:01:14,932 --> 00:01:16,262
+We cannot see it.
+
+35
+00:01:20,337 --> 00:01:21,697
+The answer is three.
+
+36
+00:01:21,997 --> 00:01:22,737
+None!
+
+37
+00:01:22,787 --> 00:01:23,387
+Oh!
+
+38
+00:01:23,647 --> 00:01:25,347
+White is only its colour!
+
+39
+00:01:25,398 --> 00:01:26,488
+Three fingers?
+
+40
+00:01:26,758 --> 00:01:27,968
+One finger up!
+
+41
+00:01:28,468 --> 00:01:29,718
+Say it with me!
+
+42
+00:01:30,428 --> 00:01:33,518
+Some materials do not allow any light to pass through them.
+
+43
+00:01:34,228 --> 00:01:36,138
+These materials are opaque.
+
+44
+00:01:40,039 --> 00:01:41,129
+A rubber mat.
+
+45
+00:01:41,409 --> 00:01:42,499
+A metal tray.
+
+46
+00:01:42,769 --> 00:01:45,059
+Torch on: no light passes through.
+
+47
+00:01:45,262 --> 00:01:48,142
+Rubber, wood and metal are opaque materials.
+
+48
+00:01:48,412 --> 00:01:51,762
+You cannot see objects placed behind opaque materials.
+
+49
+00:01:53,162 --> 00:01:54,312
+Three sheets.
+
+50
+00:01:54,892 --> 00:01:56,202
+The same torch.
+
+51
+00:01:56,822 --> 00:01:57,843
+Look closer.
+
+52
+00:01:57,863 --> 00:01:58,923
+Most light.
+
+53
+00:01:59,503 --> 00:02:00,793
+Only some light.
+
+54
+00:02:01,373 --> 00:02:02,343
+No light.
+
+55
+00:02:02,363 --> 00:02:04,133
+How much light can pass through?
+
+56
+00:02:04,713 --> 00:02:05,933
+That has a name.
+
+57
+00:02:09,534 --> 00:02:10,694
+Say it with me!
+
+58
+00:02:11,402 --> 00:02:15,092
+The transparency of a material refers to how much light can pass
+
+59
+00:02:15,112 --> 00:02:15,892
+through it.
+
+60
+00:02:21,216 --> 00:02:22,196
+Be the light!
+
+61
+00:02:22,466 --> 00:02:23,456
+Shrink down.
+
+62
+00:02:23,736 --> 00:02:24,666
+Quietly.
+
+63
+00:02:26,954 --> 00:02:29,734
+You are light from a lamp, in a flat at night.
+
+64
+00:02:30,391 --> 00:02:31,521
+A wooden door.
+
+65
+00:02:32,341 --> 00:02:33,291
+You stop.
+
+66
+00:02:34,121 --> 00:02:35,621
+You cannot pass through.
+
+67
+00:02:36,345 --> 00:02:37,775
+A frosted window.
+
+68
+00:02:38,545 --> 00:02:40,185
+Only some of you pass through.
+
+69
+00:02:40,910 --> 00:02:42,380
+A clear glass window.
+
+70
+00:02:43,180 --> 00:02:45,910
+Most of you pass through, out into the night!
+
+71
+00:02:48,623 --> 00:02:49,613
+My notes!
+
+72
+00:02:49,893 --> 00:02:52,073
+One: a metal tray is opaque.
+
+73
+00:02:52,173 --> 00:02:55,333
+Two: this box is plastic, so it is transparent.
+
+74
+00:02:55,573 --> 00:02:58,253
+Three: frosted glass is translucent.
+
+75
+00:02:58,527 --> 00:02:59,427
+Showdown!
+
+76
+00:02:59,737 --> 00:03:00,867
+Double points.
+
+77
+00:03:01,137 --> 00:03:02,757
+One line has a mistake.
+
+78
+00:03:03,047 --> 00:03:04,807
+Line one, two, or three?
+
+79
+00:03:05,107 --> 00:03:06,577
+Show me with your fingers.
+
+80
+00:03:13,052 --> 00:03:14,032
+Locked in!
+
+81
+00:03:14,160 --> 00:03:14,950
+Two!
+
+82
+00:03:15,020 --> 00:03:17,320
+I cannot see clearly into that box.
+
+83
+00:03:17,371 --> 00:03:18,011
+Two!
+
+84
+00:03:18,151 --> 00:03:19,921
+My lunch looks blurry in there!
+
+85
+00:03:19,974 --> 00:03:20,634
+Oops!
+
+86
+00:03:21,636 --> 00:03:22,866
+Let's test it.
+
+87
+00:03:23,466 --> 00:03:24,606
+Look closer.
+
+88
+00:03:25,619 --> 00:03:27,299
+A clear plastic box.
+
+89
+00:03:27,869 --> 00:03:29,689
+A bright spot: most light.
+
+90
+00:03:31,397 --> 00:03:33,197
+The cloudy plastic box.
+
+91
+00:03:33,777 --> 00:03:36,127
+A soft glow: only some light.
+
+92
+00:03:37,035 --> 00:03:39,015
+Both boxes are plastic!
+
+93
+00:03:42,920 --> 00:03:45,320
+Glass and some plastics are transparent.
+
+94
+00:03:45,590 --> 00:03:48,710
+Frosted glass and some plastics are translucent.
+
+95
+00:03:50,295 --> 00:03:51,335
+Two fingers?
+
+96
+00:03:51,575 --> 00:03:53,505
+Put up two more on your score hand!
+
+97
+00:03:54,063 --> 00:03:55,168
+Say it with us!
+
+98
+00:03:55,828 --> 00:03:56,884
+Most light!
+
+99
+00:03:57,408 --> 00:03:58,502
+Transparent!
+
+100
+00:04:02,228 --> 00:04:03,514
+Only some light!
+
+101
+00:04:03,808 --> 00:04:04,990
+Translucent!
+
+102
+00:04:08,628 --> 00:04:09,617
+No light!
+
+103
+00:04:10,208 --> 00:04:11,125
+Opaque!
+
+104
+00:04:15,783 --> 00:04:17,253
+Show me your score hand!
+
+105
+00:04:17,533 --> 00:04:18,583
+More than one?
+
+106
+00:04:18,883 --> 00:04:20,243
+You beat the Buddies.
+
+107
+00:04:20,543 --> 00:04:21,603
+Three fingers?
+
+108
+00:04:21,873 --> 00:04:22,883
+High five!
+
+109
+00:04:23,388 --> 00:04:24,828
+Did you spot the moth?
+
+110
+00:04:25,098 --> 00:04:26,768
+It was by the corridor lamp!
+
+111
+00:04:27,058 --> 00:04:28,368
+Tell someone at home.
+
+112
+00:04:29,149 --> 00:04:31,649
+Next time: a supermarket trolley!
+
+113
+00:04:31,939 --> 00:04:34,149
+Which material would you choose to make it?
+
+114
+00:04:34,419 --> 00:04:35,489
+One, glass.
+
+115
+00:04:35,759 --> 00:04:36,709
+Two, metal.
+
+116
+00:04:37,009 --> 00:04:38,149
+Three, fabric.
+
+117
+00:04:38,439 --> 00:04:39,759
+Lock in your answer!
+
+118
+00:04:39,807 --> 00:04:41,007
+A glass trolley!
+
+119
+00:04:41,057 --> 00:04:42,677
+I could see all my snacks!
+
+120
+00:04:43,403 --> 00:04:45,603
+Let's read today's key words together!
+
+121
+00:04:45,893 --> 00:04:46,653
+Ready?
+
+122
+00:04:46,940 --> 00:04:47,820
+Opaque.
+
+123
+00:04:49,301 --> 00:04:50,298
+Transparency.
+
+124
+00:04:52,164 --> 00:04:53,104
+Well done!
+
+125
+00:04:54,086 --> 00:04:55,187
+Say it with us!
+
+126
+00:04:55,987 --> 00:04:56,737
+Ready?
+
+127
+00:04:56,860 --> 00:04:57,520
+One!
+
+128
+00:04:57,860 --> 00:04:58,560
+two!
+
+129
+00:04:58,865 --> 00:05:00,040
+Now you know!

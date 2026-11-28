@@ -1,0 +1,112 @@
+{
+ "_note": "EP0 (the mind map special), for TheOneApp videos.js P3 after upload: REPLACE the entry { no: 0, art: '🧠', topic: 'Study Skills', title: 'Make Your Own Mind Map: Remember More (P3–P6)', url: ...zxerWQ9zGII } with these two entries no: '0A' and '0B' (keys [] as now), set url to the uploaded video ids. No link to zxerWQ9zGII may stay in the app (SERIES_FORMAT 5, 23 Nov).",
+ "replaces": [
+  "zxerWQ9zGII"
+ ],
+ "entries": [
+  {
+   "no": "0A",
+   "art": "🧠",
+   "topic": "Study Skills",
+   "title": "Read It or Make It? Which Mind Map Do You REMEMBER? (Part A)",
+   "len": "5:03",
+   "url": "https://www.youtube.com/watch?v=<EP00_P1>",
+   "moments": [
+    {
+     "at": "0:46",
+     "what": "Round 1: the word puzzle test",
+     "keys": [],
+     "_line": "a401h",
+     "_t": 48.24
+    },
+    {
+     "at": "1:39",
+     "what": "Look closer: read it or make it?",
+     "keys": [],
+     "_line": "a501h",
+     "_t": 101.38
+    },
+    {
+     "at": "2:15",
+     "what": "The memory test: the generation effect",
+     "keys": [],
+     "_line": "a601h",
+     "_t": 136.54
+    },
+    {
+     "at": "3:12",
+     "what": "HOLD ON! Is copying the poster making your own?",
+     "keys": [],
+     "_line": "a701m",
+     "_t": 193.67
+    },
+    {
+     "at": "3:39",
+     "what": "Memory first: draw your map with the poster closed",
+     "keys": [],
+     "_line": "a705b",
+     "_t": 220.74
+    }
+   ]
+  },
+  {
+   "no": "0B",
+   "art": "🧠",
+   "topic": "Study Skills",
+   "title": "One Week, One Blank Page. Who Remembers MORE? (Part B)",
+   "len": "5:35",
+   "url": "https://www.youtube.com/watch?v=<EP00_P2>",
+   "moments": [
+    {
+     "at": "0:29",
+     "what": "Round 1: who draws more next Monday?",
+     "keys": [],
+     "_line": "b401h",
+     "_t": 30.61
+    },
+    {
+     "at": "0:57",
+     "what": "Make one together in TheOneApp",
+     "keys": [],
+     "_line": "b501h",
+     "_t": 59.45
+    },
+    {
+     "at": "1:27",
+     "what": "Look closer: Mark my mind map, then check and fix",
+     "keys": [],
+     "_line": "b506h",
+     "_t": 88.89
+    },
+    {
+     "at": "2:05",
+     "what": "Showdown: memory first, then compare",
+     "keys": [],
+     "_line": "b601p",
+     "_t": 127.21
+    },
+    {
+     "at": "2:43",
+     "what": "Be an idea: why drawing it again works",
+     "keys": [],
+     "_line": "b701h",
+     "_t": 165.2
+    },
+    {
+     "at": "3:27",
+     "what": "Space it out: one day, three days, a week",
+     "keys": [],
+     "_line": "b801h",
+     "_t": 209.08
+    },
+    {
+     "at": "3:46",
+     "what": "Next Monday: two blank pages",
+     "keys": [],
+     "_line": "b901h",
+     "_t": 228.41
+    }
+   ]
+  }
+ ]
+}

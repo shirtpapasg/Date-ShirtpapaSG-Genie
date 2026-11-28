@@ -1,0 +1,755 @@
+1
+00:00:05,140 --> 00:00:06,630
+This tiny square is about
+
+2
+00:00:06,630 --> 00:00:07,740
+the size of a postage
+
+3
+00:00:07,740 --> 00:00:08,730
+stamp.
+
+4
+00:00:08,730 --> 00:00:10,020
+Inside it are more than
+
+5
+00:00:10,020 --> 00:00:12,110
+a hundred billion switches.
+
+6
+00:00:12,110 --> 00:00:13,370
+And every single one was
+
+7
+00:00:13,370 --> 00:00:15,120
+drawn… with light.
+
+8
+00:00:16,175 --> 00:00:16,965
+Last time,
+
+9
+00:00:16,965 --> 00:00:18,315
+I asked why a compost
+
+10
+00:00:18,315 --> 00:00:20,185
+bin gets warm inside.
+
+11
+00:00:20,185 --> 00:00:21,865
+Tiny decomposers break down the
+
+12
+00:00:21,865 --> 00:00:23,055
+food scraps,
+
+13
+00:00:23,055 --> 00:00:23,905
+and as they work,
+
+14
+00:00:23,905 --> 00:00:25,335
+they give off heat.
+
+15
+00:00:25,335 --> 00:00:26,255
+A busy bin is a
+
+16
+00:00:26,255 --> 00:00:27,745
+warm bin!
+
+17
+00:00:27,981 --> 00:00:30,152
+In November 2026,
+
+18
+00:00:30,152 --> 00:00:32,271
+the computer chip company Nvidia
+
+19
+00:00:32,271 --> 00:00:33,381
+was in the news around
+
+20
+00:00:33,381 --> 00:00:34,411
+the world.
+
+21
+00:00:34,411 --> 00:00:35,031
+Its founder,
+
+22
+00:00:35,031 --> 00:00:36,212
+Jensen Huang,
+
+23
+00:00:36,212 --> 00:00:37,531
+stepped down as its boss
+
+24
+00:00:37,531 --> 00:00:39,001
+for a short time.
+
+25
+00:00:39,001 --> 00:00:39,322
+Then,
+
+26
+00:00:39,322 --> 00:00:40,582
+eleven days later,
+
+27
+00:00:40,582 --> 00:00:42,582
+he came back as CEO.
+
+28
+00:00:42,582 --> 00:00:43,972
+Why does the whole world
+
+29
+00:00:43,972 --> 00:00:45,322
+watch one chip company so
+
+30
+00:00:45,322 --> 00:00:46,432
+closely?
+
+31
+00:00:46,432 --> 00:00:47,631
+Because its chips are the
+
+32
+00:00:47,631 --> 00:00:50,261
+engines that run today's AI.
+
+33
+00:00:51,300 --> 00:00:53,110
+Nvidia's famous chips are called
+
+34
+00:00:53,110 --> 00:00:54,250
+GPUs,
+
+35
+00:00:54,250 --> 00:00:56,290
+graphics processing units.
+
+36
+00:00:56,290 --> 00:00:57,220
+They were first made to
+
+37
+00:00:57,220 --> 00:00:58,940
+draw video games.
+
+38
+00:00:58,940 --> 00:01:00,250
+A picture on a screen
+
+39
+00:01:00,250 --> 00:01:01,420
+is made of millions of
+
+40
+00:01:01,420 --> 00:01:03,730
+tiny dots called pixels.
+
+41
+00:01:03,730 --> 00:01:04,530
+To draw it,
+
+42
+00:01:04,530 --> 00:01:05,640
+the computer works out the
+
+43
+00:01:05,640 --> 00:01:07,250
+colour of every dot,
+
+44
+00:01:07,250 --> 00:01:09,490
+many times every second.
+
+45
+00:01:09,733 --> 00:01:11,463
+An ordinary computer brain,
+
+46
+00:01:11,463 --> 00:01:12,693
+a CPU,
+
+47
+00:01:12,693 --> 00:01:14,053
+is like one very clever
+
+48
+00:01:14,053 --> 00:01:14,913
+teacher,
+
+49
+00:01:14,913 --> 00:01:17,383
+solving sums one after another.
+
+50
+00:01:17,383 --> 00:01:18,533
+A GPU is like a
+
+51
+00:01:18,533 --> 00:01:20,583
+whole school hall of pupils,
+
+52
+00:01:20,583 --> 00:01:22,553
+each solving one small sum,
+
+53
+00:01:22,553 --> 00:01:24,433
+all at the same time.
+
+54
+00:01:24,674 --> 00:01:25,894
+And it turns out AI
+
+55
+00:01:25,894 --> 00:01:27,714
+learns in a similar way:
+
+56
+00:01:27,714 --> 00:01:29,374
+by doing billions and billions
+
+57
+00:01:29,374 --> 00:01:31,434
+of small multiplications.
+
+58
+00:01:31,434 --> 00:01:32,334
+So the chip built for
+
+59
+00:01:32,334 --> 00:01:34,094
+games became the chip that
+
+60
+00:01:34,094 --> 00:01:36,074
+helps teach AI.
+
+61
+00:01:36,317 --> 00:01:37,557
+In Primary Five,
+
+62
+00:01:37,557 --> 00:01:39,817
+you learn about electric circuits.
+
+63
+00:01:39,817 --> 00:01:41,157
+When the switch is closed,
+
+64
+00:01:41,157 --> 00:01:42,357
+current flows and the bulb
+
+65
+00:01:42,357 --> 00:01:43,497
+lights up.
+
+66
+00:01:43,497 --> 00:01:44,757
+When the switch is open,
+
+67
+00:01:44,757 --> 00:01:45,517
+there is a gap,
+
+68
+00:01:45,517 --> 00:01:47,597
+and no current flows.
+
+69
+00:01:47,848 --> 00:01:48,708
+A chip is made of
+
+70
+00:01:48,708 --> 00:01:51,428
+tiny switches called transistors.
+
+71
+00:01:51,428 --> 00:01:53,428
+They have no moving parts.
+
+72
+00:01:53,428 --> 00:01:54,718
+On or off.
+
+73
+00:01:54,718 --> 00:01:56,178
+One or zero.
+
+74
+00:01:56,178 --> 00:01:57,708
+Billions of switches,
+
+75
+00:01:57,708 --> 00:01:59,098
+flicking on and off billions
+
+76
+00:01:59,098 --> 00:02:00,588
+of times a second.
+
+77
+00:02:00,588 --> 00:02:01,438
+That is how a chip
+
+78
+00:02:01,438 --> 00:02:02,868
+works things out.
+
+79
+00:02:02,868 --> 00:02:03,658
+So how do you build
+
+80
+00:02:03,658 --> 00:02:05,838
+a hundred billion switches?
+
+81
+00:02:05,838 --> 00:02:07,548
+Let's find out.
+
+82
+00:02:07,784 --> 00:02:09,044
+Are you ready?
+
+83
+00:02:09,044 --> 00:02:10,084
+Three!
+
+84
+00:02:10,084 --> 00:02:11,074
+Two!
+
+85
+00:02:11,074 --> 00:02:12,074
+One!
+
+86
+00:02:12,074 --> 00:02:13,234
+Go!
+
+87
+00:02:17,225 --> 00:02:17,915
+You are a grain of
+
+88
+00:02:17,915 --> 00:02:19,185
+sand.
+
+89
+00:02:19,431 --> 00:02:21,211
+Sand is mostly silica,
+
+90
+00:02:21,211 --> 00:02:23,361
+made of silicon and oxygen.
+
+91
+00:02:23,361 --> 00:02:24,991
+You are cleaned and melted
+
+92
+00:02:24,991 --> 00:02:26,161
+until you are almost pure
+
+93
+00:02:26,161 --> 00:02:27,451
+silicon.
+
+94
+00:02:27,693 --> 00:02:29,153
+A tiny seed crystal is
+
+95
+00:02:29,153 --> 00:02:30,223
+dipped into you and pulled
+
+96
+00:02:30,223 --> 00:02:31,303
+up slowly,
+
+97
+00:02:31,303 --> 00:02:33,253
+turning round and round.
+
+98
+00:02:33,253 --> 00:02:34,493
+You grow into a shiny
+
+99
+00:02:34,493 --> 00:02:35,973
+cylinder of crystal,
+
+100
+00:02:35,973 --> 00:02:36,973
+as long as a child
+
+101
+00:02:36,973 --> 00:02:38,193
+is tall.
+
+102
+00:02:38,440 --> 00:02:39,680
+You are sliced into thin
+
+103
+00:02:39,680 --> 00:02:41,610
+round plates called wafers,
+
+104
+00:02:41,610 --> 00:02:42,660
+thinner than a coin,
+
+105
+00:02:42,660 --> 00:02:44,570
+and polished until you shine
+
+106
+00:02:44,570 --> 00:02:45,910
+like a mirror.
+
+107
+00:02:46,164 --> 00:02:47,224
+Now you enter a clean
+
+108
+00:02:47,224 --> 00:02:48,134
+room.
+
+109
+00:02:48,134 --> 00:02:49,614
+The air here is cleaner
+
+110
+00:02:49,614 --> 00:02:51,954
+than a hospital operating theatre.
+
+111
+00:02:51,954 --> 00:02:53,484
+The workers wear suits that
+
+112
+00:02:53,484 --> 00:02:54,434
+cover them from head to
+
+113
+00:02:54,434 --> 00:02:55,574
+toe.
+
+114
+00:03:00,223 --> 00:03:01,403
+In Primary Four,
+
+115
+00:03:01,403 --> 00:03:02,763
+you learn that light travels
+
+116
+00:03:02,763 --> 00:03:04,133
+in a straight line,
+
+117
+00:03:04,133 --> 00:03:05,273
+and when an object blocks
+
+118
+00:03:05,273 --> 00:03:05,863
+light,
+
+119
+00:03:05,863 --> 00:03:07,633
+it forms a shadow.
+
+120
+00:03:08,930 --> 00:03:09,800
+You are coated with a
+
+121
+00:03:09,800 --> 00:03:11,890
+special layer that changes when
+
+122
+00:03:11,890 --> 00:03:13,470
+light shines on it.
+
+123
+00:03:13,470 --> 00:03:14,110
+A stencil,
+
+124
+00:03:14,110 --> 00:03:14,960
+called a mask,
+
+125
+00:03:14,960 --> 00:03:16,600
+blocks some of the light.
+
+126
+00:03:16,600 --> 00:03:17,920
+Where the light reaches you,
+
+127
+00:03:17,920 --> 00:03:19,590
+the layer changes.
+
+128
+00:03:19,590 --> 00:03:20,920
+Where the mask blocks it,
+
+129
+00:03:20,920 --> 00:03:23,040
+the shadow keeps the pattern.
+
+130
+00:03:24,090 --> 00:03:25,780
+Lenses shrink the pattern again
+
+131
+00:03:25,780 --> 00:03:26,760
+and again,
+
+132
+00:03:26,760 --> 00:03:28,430
+until each line is thousands
+
+133
+00:03:28,430 --> 00:03:29,420
+of times thinner than a
+
+134
+00:03:29,420 --> 00:03:30,560
+hair.
+
+135
+00:03:30,813 --> 00:03:31,933
+Then the pattern is etched
+
+136
+00:03:31,933 --> 00:03:32,503
+in,
+
+137
+00:03:32,503 --> 00:03:33,423
+metal is added,
+
+138
+00:03:33,423 --> 00:03:34,993
+and it starts again.
+
+139
+00:03:34,993 --> 00:03:36,093
+Layer on layer,
+
+140
+00:03:36,093 --> 00:03:37,063
+hundreds of steps,
+
+141
+00:03:37,063 --> 00:03:38,693
+over many weeks.
+
+142
+00:03:38,940 --> 00:03:39,630
+At the end,
+
+143
+00:03:39,630 --> 00:03:41,850
+one wafer holds many chips.
+
+144
+00:03:41,850 --> 00:03:42,940
+They are cut apart,
+
+145
+00:03:42,940 --> 00:03:43,420
+tested,
+
+146
+00:03:43,420 --> 00:03:45,490
+and packed into a case.
+
+147
+00:03:45,490 --> 00:03:47,280
+Now you are a chip!
+
+148
+00:03:47,523 --> 00:03:49,323
+Nvidia designs its chips in
+
+149
+00:03:49,323 --> 00:03:50,703
+the United States,
+
+150
+00:03:50,703 --> 00:03:52,663
+and factories in Taiwan build
+
+151
+00:03:52,663 --> 00:03:54,103
+the newest ones.
+
+152
+00:03:54,103 --> 00:03:55,613
+And Singapore?
+
+153
+00:03:55,613 --> 00:03:57,133
+About one in every ten
+
+154
+00:03:57,133 --> 00:03:58,233
+chips in the world is
+
+155
+00:03:58,233 --> 00:03:59,503
+made here.
+
+156
+00:04:00,553 --> 00:04:02,373
+When thousands of GPUs work
+
+157
+00:04:02,373 --> 00:04:04,193
+together to train an AI,
+
+158
+00:04:04,193 --> 00:04:04,993
+they use a lot of
+
+159
+00:04:04,993 --> 00:04:06,123
+electricity,
+
+160
+00:04:06,123 --> 00:04:07,543
+and they get hot.
+
+161
+00:04:07,543 --> 00:04:07,983
+Remember,
+
+162
+00:04:07,983 --> 00:04:09,433
+heat flows from a hotter
+
+163
+00:04:09,433 --> 00:04:11,333
+object to a colder one.
+
+164
+00:04:11,333 --> 00:04:12,553
+So cool water and air
+
+165
+00:04:12,553 --> 00:04:13,993
+flow past the chips to
+
+166
+00:04:13,993 --> 00:04:15,533
+carry the heat away.
+
+167
+00:04:15,533 --> 00:04:17,133
+Engineers are working hard to
+
+168
+00:04:17,133 --> 00:04:18,553
+use less energy,
+
+169
+00:04:18,553 --> 00:04:20,163
+so AI can grow without
+
+170
+00:04:20,163 --> 00:04:22,163
+wasting electricity.
+
+171
+00:04:22,412 --> 00:04:24,232
+Try this with your class.
+
+172
+00:04:24,232 --> 00:04:25,962
+Give one friend twenty easy
+
+173
+00:04:25,962 --> 00:04:27,512
+sums to do alone.
+
+174
+00:04:27,512 --> 00:04:28,772
+Then give twenty friends one
+
+175
+00:04:28,772 --> 00:04:30,032
+sum each.
+
+176
+00:04:30,032 --> 00:04:31,632
+Who finishes first?
+
+177
+00:04:31,632 --> 00:04:32,802
+That is the difference between
+
+178
+00:04:32,802 --> 00:04:35,542
+a CPU and a GPU!
+
+179
+00:04:35,787 --> 00:04:37,177
+Think about it!
+
+180
+00:04:37,177 --> 00:04:37,997
+Why do you think chip
+
+181
+00:04:37,997 --> 00:04:40,327
+factories must be even cleaner
+
+182
+00:04:40,327 --> 00:04:42,827
+than a hospital operating theatre?
+
+183
+00:04:42,827 --> 00:04:43,777
+I'll tell you the answer
+
+184
+00:04:43,777 --> 00:04:45,237
+next time.
+
+185
+00:04:45,488 --> 00:04:47,578
+A hundred billion switches.
+
+186
+00:04:47,578 --> 00:04:49,458
+Drawn with light and shadow.
+
+187
+00:04:49,458 --> 00:04:50,348
+And it all started with
+
+188
+00:04:50,348 --> 00:04:51,968
+a grain of sand.
+
+189
+00:04:52,983 --> 00:04:55,142
+Now you know!

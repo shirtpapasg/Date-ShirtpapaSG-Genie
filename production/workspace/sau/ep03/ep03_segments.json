@@ -1,0 +1,427 @@
+{
+ "episode": "SAU EP03 Part 1",
+ "title": "What really happens to your drink can? (Part 1)",
+ "tag": "🌏 TheOneApp, Explored · EP 3 · Part 1",
+ "intro": {
+  "goals": [
+   [
+    "🥫",
+    "What a can is made of",
+    "first"
+   ],
+   [
+    "♻️",
+    "How a can becomes a new can",
+    "second"
+   ],
+   [
+    "🇸🇬",
+    "Why Singapore needs us to recycle",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT",
+  "Part 2: Where does",
+  "our rubbish go? 🗑️"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · Part 2 is out on Saturday!",
+ "close": {
+  "rows": [
+   [
+    "🪙",
+    "Return your can: 10¢ back",
+    "cents",
+    0.15,
+    "#2a9d8f"
+   ],
+   [
+    "🔥",
+    "Sorted, melted, made into a new can",
+    "melted",
+    0.35,
+    "#f77f00"
+   ],
+   [
+    "🗑️",
+    "But not everything gets a second life…",
+    "everything",
+    0.65,
+    "#e63946"
+   ]
+  ],
+  "tease": "▶ Part 2: Where does our rubbish go?",
+  "teaseWord": "find"
+ },
+ "kws": [
+  [
+   "news",
+   "deposit",
+   "10¢ DEPOSIT",
+   "#2a9d8f"
+  ],
+  [
+   "textbook",
+   "aluminium",
+   "ALUMINIUM",
+   "#adb5bd"
+  ],
+  [
+   "textbook",
+   "magnets",
+   "MAGNETS",
+   "#e63946"
+  ],
+  [
+   "matters",
+   "energy",
+   "SAVES ENERGY",
+   "#f77f00"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "voidDeck",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep03_gulp",
+     0.25
+    ],
+    [
+     "ep03_clink",
+     1.85
+    ],
+    [
+     "footsteps",
+     2.1
+    ],
+    [
+     "sparkle",
+     3.85
+    ],
+    [
+     "reveal",
+     3.9
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "Clink! You finish your drink. Bin it, or bring it back? When you buy a canned or bottled drink in Singapore, you now pay a ten-cent deposit. Bring the empty back, and you get your ten cents! But what really happens to the can after that?"
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Could solar panels on every rooftop power the whole of Singapore? Not on their own. Our rooftops are too small for all the electricity we use, and solar panels make nothing at night and less on cloudy days. That's why Singapore is also looking at power from our neighbours, and even nuclear."
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! This is part one of two. Today, you'll learn three things. First, what a can is made of. Second, how a can becomes a brand-new can. And third, why Singapore needs us to recycle. Let's get started!"
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "c1",
+   "scene": "returnMachine",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "footsteps",
+     0.3
+    ],
+    [
+     "ep03_slide",
+     2.05
+    ],
+    [
+     "whoosh",
+     3.0
+    ],
+    [
+     "rush",
+     2.9
+    ]
+   ]
+  },
+  {
+   "id": "c2",
+   "scene": "povScan",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "hum",
+     0
+    ],
+    [
+     "cable_zip",
+     1.0
+    ],
+    [
+     "ep03_beep",
+     2.25
+    ],
+    [
+     "ep03_coin",
+     2.55
+    ],
+    [
+     "pad_wonder",
+     3.85
+    ],
+    [
+     "ep03_crunch",
+     3.93
+    ],
+    [
+     "boom",
+     3.95
+    ]
+   ]
+  },
+  {
+   "id": "c3",
+   "scene": "povTruck",
+   "silent": 4.0,
+   "sfx": [
+    [
+     "ep03_clatter",
+     0
+    ],
+    [
+     "rumble",
+     0
+    ],
+    [
+     "thud",
+     0.9
+    ],
+    [
+     "thud",
+     2.3
+    ]
+   ]
+  },
+  {
+   "id": "c4",
+   "scene": "povSort",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "ep03_belt",
+     0
+    ],
+    [
+     "ep03_clank",
+     2.48
+    ],
+    [
+     "ep03_clank",
+     3.0
+    ],
+    [
+     "ep03_clank",
+     3.43
+    ],
+    [
+     "pad_tension",
+     3.55
+    ],
+    [
+     "ep03_clank",
+     3.86
+    ],
+    [
+     "ep03_clank",
+     4.22
+    ],
+    [
+     "pass_by",
+     4.45
+    ]
+   ]
+  },
+  {
+   "id": "c5",
+   "scene": "povBale",
+   "silent": 4.6,
+   "sfx": [
+    [
+     "ep03_press",
+     0.2
+    ],
+    [
+     "boom",
+     2.05
+    ],
+    [
+     "pop",
+     2.85
+    ]
+   ]
+  },
+  {
+   "id": "c6",
+   "scene": "povMelt",
+   "silent": 5.4,
+   "sfx": [
+    [
+     "roar",
+     0
+    ],
+    [
+     "ignite",
+     0.8
+    ],
+    [
+     "pad_wonder",
+     1.65
+    ],
+    [
+     "crackle",
+     2.0
+    ],
+    [
+     "bubble",
+     2.8
+    ],
+    [
+     "hiss",
+     3.0
+    ],
+    [
+     "bubble",
+     3.5
+    ],
+    [
+     "bubble",
+     4.1
+    ],
+    [
+     "bubble",
+     4.7
+    ]
+   ]
+  },
+  {
+   "id": "c7",
+   "scene": "povRoll",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "ep03_roll",
+     0
+    ],
+    [
+     "whoosh",
+     1.6
+    ],
+    [
+     "ep03_stamp",
+     2.5
+    ],
+    [
+     "ep03_stamp",
+     3.57
+    ],
+    [
+     "pop",
+     4.0
+    ],
+    [
+     "sparkle",
+     4.3
+    ],
+    [
+     "chime",
+     4.35
+    ],
+    [
+     "pad_wonder",
+     5.1
+    ]
+   ]
+  },
+  {
+   "id": "c8",
+   "scene": "shelf",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "sparkle",
+     0.2
+    ],
+    [
+     "footsteps",
+     0.75
+    ],
+    [
+     "pop",
+     2.45
+    ],
+    [
+     "chime",
+     3.0
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "hold": 1.0,
+   "text": "Here's the news. On the first of April, Singapore started the Beverage Container Return Scheme. Drinks in plastic bottles and metal cans now carry a ten-cent deposit. There are around a thousand return machines across Singapore. Put in your empty can, and the machine pays your ten cents back."
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "hold": 1.0,
+   "text": "Did you feel that journey? You were an empty drink can. The return machine scanned you and paid back ten cents. A truck took you to be sorted, where a magnet pulled out the steel cans, but not you. You were squashed into a block, melted into liquid metal, and rolled and pressed into a brand-new can."
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "hold": 1.0,
+   "text": "Now for the textbook link! In Primary Three, you learn about materials. A drink can is made of a metal called aluminium. Metals can be melted and shaped again and again. And magnets attract steel, but not aluminium. That's how a magnet sorts cans!"
+  },
+  {
+   "id": "matters",
+   "scene": "matters",
+   "hold": 1.0,
+   "text": "And here's why it matters. Making a can from recycled aluminium uses much less energy than making one from new metal dug out of the ground."
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! Look for the Deposit Mark on your drink. Empty your can, keep it whole, and bring it to a return machine. Glass bottles and drink cartons don't go in the machine. They go in the blue recycling bin."
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! A can can be recycled again and again. Why is that better than digging up new metal? I'll tell you the answer in part two."
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Return your can, and get your ten cents back. It is sorted, squashed, melted and made into a brand-new can. But not everything we throw away gets a second life. So what happens to the rest? Find out in part two!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

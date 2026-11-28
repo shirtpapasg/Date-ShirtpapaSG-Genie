@@ -1,0 +1,595 @@
+1
+00:00:00,300 --> 00:00:03,820
+Last time, we designed a school bag, like engineers.
+
+2
+00:00:04,110 --> 00:00:05,360
+Fabric straps.
+
+3
+00:00:05,640 --> 00:00:06,660
+A metal zip.
+
+4
+00:00:06,980 --> 00:00:08,270
+A plastic base.
+
+5
+00:00:08,510 --> 00:00:10,180
+But will the new strap hold?
+
+6
+00:00:13,435 --> 00:00:14,665
+Lock in first.
+
+7
+00:00:14,935 --> 00:00:17,335
+A little frog is hiding in this video.
+
+8
+00:00:17,615 --> 00:00:18,815
+Can you spot it?
+
+9
+00:00:19,393 --> 00:00:20,693
+Today you'll learn:
+
+10
+00:00:20,897 --> 00:00:22,257
+Test your design.
+
+11
+00:00:22,457 --> 00:00:23,937
+Design a zoo home.
+
+12
+00:00:24,135 --> 00:00:25,895
+Keep the great variety.
+
+13
+00:00:27,578 --> 00:00:28,458
+Round one.
+
+14
+00:00:28,768 --> 00:00:30,738
+The old strap held five weights.
+
+15
+00:00:31,048 --> 00:00:32,038
+Then it tore.
+
+16
+00:00:32,338 --> 00:00:34,148
+How many will the new strap hold?
+
+17
+00:00:34,438 --> 00:00:36,038
+One, fewer than five.
+
+18
+00:00:36,308 --> 00:00:37,338
+Two, five.
+
+19
+00:00:37,618 --> 00:00:39,108
+Three, more than five.
+
+20
+00:00:39,388 --> 00:00:40,878
+Show me with your fingers.
+
+21
+00:00:47,344 --> 00:00:48,324
+Locked in!
+
+22
+00:00:48,452 --> 00:00:49,272
+Two!
+
+23
+00:00:49,312 --> 00:00:50,772
+A strap is a strap!
+
+24
+00:00:50,818 --> 00:00:51,558
+Three!
+
+25
+00:00:51,618 --> 00:00:52,788
+Thicker fabric!
+
+26
+00:00:52,841 --> 00:00:53,381
+Three.
+
+27
+00:00:54,705 --> 00:00:55,855
+Look closer.
+
+28
+00:00:56,445 --> 00:00:59,115
+Same length, same width: a fair test.
+
+29
+00:00:59,534 --> 00:01:00,204
+One.
+
+30
+00:01:00,484 --> 00:01:01,124
+Two.
+
+31
+00:01:01,284 --> 00:01:02,104
+Three.
+
+32
+00:01:02,244 --> 00:01:03,004
+Four.
+
+33
+00:01:03,154 --> 00:01:03,994
+Five.
+
+34
+00:01:04,114 --> 00:01:05,824
+The old strap tore here.
+
+35
+00:01:06,237 --> 00:01:06,967
+Six.
+
+36
+00:01:07,247 --> 00:01:07,967
+Seven.
+
+37
+00:01:08,157 --> 00:01:08,877
+Eight.
+
+38
+00:01:09,017 --> 00:01:09,837
+Nine!
+
+39
+00:01:09,987 --> 00:01:10,977
+No tear.
+
+40
+00:01:11,287 --> 00:01:13,257
+The new strap holds more weights.
+
+41
+00:01:13,837 --> 00:01:14,967
+It is stronger.
+
+42
+00:01:15,567 --> 00:01:16,607
+Now we know!
+
+43
+00:01:16,822 --> 00:01:20,662
+After designing, engineers test their product.
+
+44
+00:01:24,067 --> 00:01:25,427
+The answer is three.
+
+45
+00:01:25,707 --> 00:01:26,877
+More than five!
+
+46
+00:01:27,167 --> 00:01:28,237
+Three fingers?
+
+47
+00:01:28,507 --> 00:01:29,717
+One finger up!
+
+48
+00:01:30,070 --> 00:01:31,260
+Be the new strap!
+
+49
+00:01:31,560 --> 00:01:32,560
+Shrink down.
+
+50
+00:01:32,810 --> 00:01:33,770
+Quietly.
+
+51
+00:01:36,051 --> 00:01:38,791
+You are the new strap, hanging from the stand.
+
+52
+00:01:39,451 --> 00:01:41,011
+A weight pulls you down.
+
+53
+00:01:41,811 --> 00:01:42,751
+Then another.
+
+54
+00:01:43,561 --> 00:01:44,961
+You are pulled tight.
+
+55
+00:01:45,626 --> 00:01:46,356
+Six.
+
+56
+00:01:46,986 --> 00:01:47,706
+Seven.
+
+57
+00:01:48,246 --> 00:01:48,966
+Eight.
+
+58
+00:01:49,456 --> 00:01:50,276
+Nine!
+
+59
+00:01:50,756 --> 00:01:51,906
+You do not tear.
+
+60
+00:01:52,406 --> 00:01:53,486
+You are strong!
+
+61
+00:01:55,716 --> 00:01:57,716
+Now, the same plan, for a zoo!
+
+62
+00:01:57,996 --> 00:01:59,723
+Design a home for the goats.
+
+63
+00:01:59,743 --> 00:02:00,853
+What is it for?
+
+64
+00:02:01,123 --> 00:02:04,203
+To keep the goats safe, and to let visitors see them.
+
+65
+00:02:07,454 --> 00:02:08,584
+Look closer.
+
+66
+00:02:09,194 --> 00:02:10,864
+A goat home, at the zoo.
+
+67
+00:02:12,074 --> 00:02:14,084
+A goat pushes the wooden fence.
+
+68
+00:02:14,664 --> 00:02:15,664
+No break.
+
+69
+00:02:16,294 --> 00:02:17,464
+Wood is strong.
+
+70
+00:02:18,874 --> 00:02:21,384
+Between the rails, we can see the goats.
+
+71
+00:02:25,510 --> 00:02:26,500
+Not glass!
+
+72
+00:02:26,550 --> 00:02:28,170
+A goat's knock could break it!
+
+73
+00:02:28,596 --> 00:02:29,756
+Say it with me!
+
+74
+00:02:30,464 --> 00:02:33,624
+The physical properties of a material allow it to be used in
+
+75
+00:02:33,644 --> 00:02:34,784
+certain ways.
+
+76
+00:02:35,444 --> 00:02:39,424
+It is important to choose a material whose physical property is suitable
+
+77
+00:02:39,444 --> 00:02:41,964
+for the intended use of the object.
+
+78
+00:02:45,592 --> 00:02:49,342
+A zoo puts its animals in groups, so visitors can learn their
+
+79
+00:02:49,362 --> 00:02:51,252
+similarities and differences.
+
+80
+00:02:51,312 --> 00:02:52,272
+My zoo map!
+
+81
+00:02:52,412 --> 00:02:53,412
+One: fish.
+
+82
+00:02:53,452 --> 00:02:54,702
+Goldfish and koi.
+
+83
+00:02:54,822 --> 00:02:55,822
+Two: birds.
+
+84
+00:02:55,902 --> 00:02:57,822
+Flamingo, macaw and dragonfly.
+
+85
+00:02:57,992 --> 00:02:59,282
+Three: amphibians.
+
+86
+00:02:59,312 --> 00:03:00,732
+Frog and salamander.
+
+87
+00:03:01,012 --> 00:03:01,912
+Showdown!
+
+88
+00:03:02,222 --> 00:03:03,352
+Double points.
+
+89
+00:03:03,622 --> 00:03:05,242
+One line has a mistake.
+
+90
+00:03:05,532 --> 00:03:07,292
+Line one, two, or three?
+
+91
+00:03:07,592 --> 00:03:09,062
+Show me with your fingers.
+
+92
+00:03:15,537 --> 00:03:16,517
+Locked in!
+
+93
+00:03:16,645 --> 00:03:19,765
+Two. A dragonfly has six legs.
+
+94
+00:03:19,935 --> 00:03:21,475
+It is an insect!
+
+95
+00:03:21,528 --> 00:03:22,308
+Two!
+
+96
+00:03:22,388 --> 00:03:23,788
+Birds have feathers.
+
+97
+00:03:23,858 --> 00:03:25,608
+A dragonfly has none!
+
+98
+00:03:27,039 --> 00:03:28,079
+Two fingers?
+
+99
+00:03:28,319 --> 00:03:30,249
+Put up two more on your score hand!
+
+100
+00:03:30,447 --> 00:03:31,187
+Oops.
+
+101
+00:03:31,237 --> 00:03:32,547
+The wings fooled me!
+
+102
+00:03:33,199 --> 00:03:34,279
+Six groups.
+
+103
+00:03:34,579 --> 00:03:36,349
+So many kinds of living things!
+
+104
+00:03:36,629 --> 00:03:37,969
+A great variety.
+
+105
+00:03:38,024 --> 00:03:40,964
+Why is it important to maintain diversity?
+
+106
+00:03:42,574 --> 00:03:43,864
+Say it with me!
+
+107
+00:03:44,579 --> 00:03:48,229
+Living things that are not able to survive will become extinct.
+
+108
+00:03:48,729 --> 00:03:50,929
+This means that they will all die out.
+
+109
+00:03:53,940 --> 00:03:55,830
+So we take care of every kind.
+
+110
+00:03:56,392 --> 00:03:57,497
+Say it with us!
+
+111
+00:03:58,157 --> 00:03:59,147
+Design it!
+
+112
+00:03:59,737 --> 00:04:01,006
+Part by part!
+
+113
+00:04:04,557 --> 00:04:05,505
+Choose it!
+
+114
+00:04:06,137 --> 00:04:07,617
+A suitable material!
+
+115
+00:04:10,957 --> 00:04:11,919
+Test it!
+
+116
+00:04:12,537 --> 00:04:13,572
+Then you know!
+
+117
+00:04:18,112 --> 00:04:19,582
+Show me your score hand!
+
+118
+00:04:19,862 --> 00:04:20,912
+More than one?
+
+119
+00:04:21,212 --> 00:04:22,572
+You beat the Buddies.
+
+120
+00:04:22,872 --> 00:04:23,932
+Three fingers?
+
+121
+00:04:24,202 --> 00:04:25,212
+High five!
+
+122
+00:04:25,717 --> 00:04:27,107
+Did you spot the frog?
+
+123
+00:04:27,407 --> 00:04:29,467
+It was on the lily pad in the pond!
+
+124
+00:04:29,591 --> 00:04:30,611
+Guess what!
+
+125
+00:04:30,791 --> 00:04:33,021
+Some frogs have sticky toe pads.
+
+126
+00:04:33,201 --> 00:04:35,181
+They can climb up smooth glass!
+
+127
+00:04:35,331 --> 00:04:37,551
+So a frog's zoo home needs a lid.
+
+128
+00:04:37,677 --> 00:04:38,957
+Tell someone at home!
+
+129
+00:04:39,746 --> 00:04:41,276
+Next time: the Sun!
+
+130
+00:04:41,586 --> 00:04:43,146
+Every evening, it goes.
+
+131
+00:04:43,426 --> 00:04:45,296
+Every morning, it comes back.
+
+132
+00:04:45,576 --> 00:04:46,256
+Why?
+
+133
+00:04:46,566 --> 00:04:48,336
+One, the Sun moves away.
+
+134
+00:04:48,606 --> 00:04:50,026
+Two, the Earth turns.
+
+135
+00:04:50,296 --> 00:04:52,126
+Three, clouds hide the Sun.
+
+136
+00:04:52,396 --> 00:04:53,716
+Lock in your answer!
+
+137
+00:04:53,768 --> 00:04:54,288
+Easy!
+
+138
+00:04:54,608 --> 00:04:56,338
+The Sun needs a nap, like me!
+
+139
+00:04:57,064 --> 00:04:59,264
+Let's read today's key words together!
+
+140
+00:04:59,554 --> 00:05:00,314
+Ready?
+
+141
+00:05:00,601 --> 00:05:01,371
+Test.
+
+142
+00:05:02,634 --> 00:05:03,624
+Diversity.
+
+143
+00:05:05,171 --> 00:05:06,111
+Extinct.
+
+144
+00:05:07,562 --> 00:05:08,502
+Well done!
+
+145
+00:05:09,484 --> 00:05:10,585
+Say it with us!
+
+146
+00:05:11,385 --> 00:05:12,135
+Ready?
+
+147
+00:05:12,259 --> 00:05:12,919
+One!
+
+148
+00:05:13,259 --> 00:05:13,959
+two!
+
+149
+00:05:14,264 --> 00:05:15,439
+Now you know!

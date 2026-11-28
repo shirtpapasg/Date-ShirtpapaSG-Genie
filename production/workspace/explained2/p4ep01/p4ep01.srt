@@ -1,0 +1,555 @@
+1
+00:00:00,610 --> 00:00:02,950
+The class bike ride starts in one hour!
+
+2
+00:00:03,712 --> 00:00:04,642
+Ta-da!
+
+3
+00:00:05,152 --> 00:00:06,732
+My Super-Light Racer!
+
+4
+00:00:07,212 --> 00:00:09,633
+I took off every part that does nothing.
+
+5
+00:00:10,062 --> 00:00:11,912
+Lighter bike, faster bike!
+
+6
+00:00:12,793 --> 00:00:13,983
+Ready, steady...
+
+7
+00:00:14,194 --> 00:00:15,323
+whoa, whoa, whoa!
+
+8
+00:00:17,996 --> 00:00:19,736
+Lightest bike in Singapore.
+
+9
+00:00:20,076 --> 00:00:21,396
+Also the slowest.
+
+10
+00:00:22,042 --> 00:00:22,682
+Pip!
+
+11
+00:00:23,102 --> 00:00:25,032
+Which parts did you take off?
+
+12
+00:00:25,678 --> 00:00:27,348
+Only the boring ones.
+
+13
+00:00:27,768 --> 00:00:29,688
+Don't worry, I've got a plan!
+
+14
+00:00:30,340 --> 00:00:31,740
+That's how this started.
+
+15
+00:00:32,649 --> 00:00:34,279
+The Great Bike Breakdown!
+
+16
+00:00:35,267 --> 00:00:37,217
+Plan one: I pedal harder.
+
+17
+00:00:37,727 --> 00:00:39,177
+Much, much harder!
+
+18
+00:00:40,205 --> 00:00:43,405
+Plan two: we loop Momo's skipping rope round the gears.
+
+19
+00:00:44,426 --> 00:00:47,016
+Plan three: put back the chain you took off.
+
+20
+00:00:48,038 --> 00:00:49,078
+The chain?
+
+21
+00:00:49,578 --> 00:00:53,258
+It just goes round and round, and it makes my socks black!
+
+22
+00:00:53,904 --> 00:00:55,764
+Which fix gets the bike moving?
+
+23
+00:00:56,044 --> 00:00:58,174
+Show me one, two or three fingers!
+
+24
+00:01:05,160 --> 00:01:05,930
+One!
+
+25
+00:01:06,380 --> 00:01:08,160
+My legs are super strong!
+
+26
+00:01:09,113 --> 00:01:09,773
+Two.
+
+27
+00:01:10,123 --> 00:01:11,353
+A loop is a loop.
+
+28
+00:01:12,301 --> 00:01:12,881
+Three.
+
+29
+00:01:13,471 --> 00:01:16,061
+If it was on the bike, maybe it had a job.
+
+30
+00:01:17,013 --> 00:01:18,163
+Three fixes.
+
+31
+00:01:18,443 --> 00:01:19,613
+Let's test them!
+
+32
+00:01:20,792 --> 00:01:21,742
+Fix one.
+
+33
+00:01:22,012 --> 00:01:23,412
+Pip pedals harder!
+
+34
+00:01:24,058 --> 00:01:25,978
+Faster, faster, FASTER!
+
+35
+00:01:28,693 --> 00:01:31,623
+The pedals spin, but the back wheel isn't moving!
+
+36
+00:01:31,895 --> 00:01:34,398
+Let's look at that again, in slow motion.
+
+37
+00:01:34,418 --> 00:01:38,676
+Faster, faster, FASTER!
+
+38
+00:01:39,447 --> 00:01:43,087
+The front gear turns, but nothing joins it to the back wheel.
+
+39
+00:01:43,347 --> 00:01:46,957
+Pushing harder on one part cannot do another part's job.
+
+40
+00:01:48,286 --> 00:01:49,346
+Strong legs.
+
+41
+00:01:49,626 --> 00:01:50,736
+Going nowhere.
+
+42
+00:01:51,682 --> 00:01:52,732
+Fix two.
+
+43
+00:01:52,992 --> 00:01:55,332
+The skipping rope goes round both gears.
+
+44
+00:01:56,282 --> 00:01:59,352
+Lift the back wheel, turn the pedal, and watch the magic.
+
+45
+00:02:02,861 --> 00:02:04,991
+The magic is on your head, Basil.
+
+46
+00:02:05,944 --> 00:02:07,094
+Look closer.
+
+47
+00:02:07,684 --> 00:02:10,754
+Here is the chain from Pip's box of useless parts.
+
+48
+00:02:11,790 --> 00:02:13,370
+See the gaps in the chain?
+
+49
+00:02:13,770 --> 00:02:16,430
+Each tooth of the gear fits into one, so when the gear
+
+50
+00:02:16,450 --> 00:02:18,660
+turns, it pulls the chain along.
+
+51
+00:02:19,913 --> 00:02:23,333
+The chain pulls the back gear, and the back wheel turns.
+
+52
+00:02:23,913 --> 00:02:26,873
+A smooth rope has no gaps, so the teeth slip.
+
+53
+00:02:28,212 --> 00:02:29,932
+So the chain has a function.
+
+54
+00:02:30,272 --> 00:02:32,532
+A function is a part's special job.
+
+55
+00:02:32,852 --> 00:02:36,112
+The chain's job is to turn the back wheel when you pedal.
+
+56
+00:02:37,177 --> 00:02:38,897
+So my rope had no function.
+
+57
+00:02:39,237 --> 00:02:40,097
+Noted.
+
+58
+00:02:40,446 --> 00:02:42,556
+Be one little link of the bike chain!
+
+59
+00:02:42,836 --> 00:02:43,826
+Shrink down.
+
+60
+00:02:44,106 --> 00:02:45,036
+Quietly.
+
+61
+00:02:46,892 --> 00:02:49,482
+You are a link at the top of the chain, between the
+
+62
+00:02:49,502 --> 00:02:50,532
+two gears.
+
+63
+00:02:52,115 --> 00:02:53,875
+Someone pushes the pedals.
+
+64
+00:02:54,635 --> 00:02:57,555
+The front gear's teeth grab you and pull you forward.
+
+65
+00:02:58,144 --> 00:03:01,764
+The whole chain moves with you, and tugs the back gear round.
+
+66
+00:03:02,544 --> 00:03:04,054
+The back wheel turns!
+
+67
+00:03:04,940 --> 00:03:08,590
+Round the front gear you go, back underneath, and round again.
+
+68
+00:03:10,446 --> 00:03:11,476
+Fix three.
+
+69
+00:03:11,746 --> 00:03:13,306
+The chain goes back on.
+
+70
+00:03:13,971 --> 00:03:16,131
+Lift the back wheel, and turn the pedal...
+
+71
+00:03:18,447 --> 00:03:19,087
+It spins!
+
+72
+00:03:19,107 --> 00:03:21,667
+The back wheel spins!
+
+73
+00:03:22,541 --> 00:03:24,301
+Pedals, gear, chain, wheel.
+
+74
+00:03:24,741 --> 00:03:26,641
+Each part acts on the next one.
+
+75
+00:03:27,668 --> 00:03:31,188
+Scientists say the parts interact: they act on one another.
+
+76
+00:03:32,104 --> 00:03:34,354
+Even I can't argue with a spinning wheel.
+
+77
+00:03:35,300 --> 00:03:37,480
+Pip, before you ride, squeeze the brakes.
+
+78
+00:03:38,132 --> 00:03:38,922
+Squeeze...
+
+79
+00:03:39,582 --> 00:03:43,962
+squeeze... Oh. I took those off too.
+
+80
+00:03:44,611 --> 00:03:45,251
+Pip!
+
+81
+00:03:45,691 --> 00:03:48,201
+A bike that cannot stop is not safe!
+
+82
+00:03:48,853 --> 00:03:52,553
+The brakes help the bike stop safely, and the bell warns people.
+
+83
+00:03:52,863 --> 00:03:54,903
+Every part has its own function.
+
+84
+00:03:58,198 --> 00:03:59,298
+Quick question!
+
+85
+00:03:59,578 --> 00:04:02,168
+If the bell falls off on the ride, can the bike still
+
+86
+00:04:02,188 --> 00:04:02,878
+move?
+
+87
+00:04:03,158 --> 00:04:04,308
+Think about it.
+
+88
+00:04:08,119 --> 00:04:10,509
+It can still move, but it is not as safe!
+
+89
+00:04:11,388 --> 00:04:12,158
+Yes!
+
+90
+00:04:12,428 --> 00:04:16,008
+When one part stops working, the whole system is likely to be
+
+91
+00:04:16,028 --> 00:04:16,848
+affected.
+
+92
+00:04:18,183 --> 00:04:19,653
+So the bike is a system.
+
+93
+00:04:20,003 --> 00:04:23,143
+A system is made up of different parts, and each part has
+
+94
+00:04:23,163 --> 00:04:24,943
+its own special function.
+
+95
+00:04:26,497 --> 00:04:29,107
+With one minute to spare, Pip makes the ride!
+
+96
+00:04:30,204 --> 00:04:31,404
+Pip, you're puffing!
+
+97
+00:04:31,734 --> 00:04:33,954
+Is something inside you broken too?
+
+98
+00:04:34,230 --> 00:04:35,720
+Nothing is broken.
+
+99
+00:04:36,330 --> 00:04:37,450
+Look closer.
+
+100
+00:04:38,010 --> 00:04:40,630
+Pip's bones and muscles move his legs.
+
+101
+00:04:41,210 --> 00:04:44,340
+His heart beats faster, and he breathes faster.
+
+102
+00:04:48,289 --> 00:04:50,469
+So Pip's body is made of systems too.
+
+103
+00:04:50,839 --> 00:04:52,159
+Very furry ones.
+
+104
+00:04:52,514 --> 00:04:54,954
+And the ride ends under a giant rain tree.
+
+105
+00:04:56,069 --> 00:04:57,629
+And a tree is a system too.
+
+106
+00:04:57,949 --> 00:05:01,549
+Its leaves, its stem and its roots each have their own function.
+
+107
+00:05:02,879 --> 00:05:05,279
+Now, here are the words that earn marks.
+
+108
+00:05:05,336 --> 00:05:06,486
+Say it with me!
+
+109
+00:05:07,201 --> 00:05:09,421
+A system is made up of different parts.
+
+110
+00:05:09,701 --> 00:05:11,431
+Each part has its own function.
+
+111
+00:05:11,721 --> 00:05:13,901
+The parts interact to perform a function.
+
+112
+00:05:14,281 --> 00:05:17,611
+When one part stops working, the whole system is likely to be
+
+113
+00:05:17,631 --> 00:05:18,561
+affected.
+
+114
+00:05:21,034 --> 00:05:23,854
+Basil, your tail doesn't pedal, and it doesn't ring.
+
+115
+00:05:24,324 --> 00:05:26,294
+Lighter lizard, faster lizard?
+
+116
+00:05:26,940 --> 00:05:28,550
+My tail helps me balance.
+
+117
+00:05:28,830 --> 00:05:30,690
+Every part has a function, Pip.
+
+118
+00:05:31,339 --> 00:05:32,459
+Ring, ring!
+
+119
+00:05:32,999 --> 00:05:34,319
+My bell works!
+
+120
+00:05:35,346 --> 00:05:36,436
+Picked the chain?
+
+121
+00:05:36,716 --> 00:05:38,756
+You win a point, and so does Momo!
+
+122
+00:05:41,444 --> 00:05:42,704
+Excuse me.
+
+123
+00:05:43,234 --> 00:05:45,544
+I'm watered every single day.
+
+124
+00:05:46,044 --> 00:05:48,124
+So why am I wilting?
+
+125
+00:05:48,775 --> 00:05:51,085
+Next time, at the Plant Help Desk!
+
+126
+00:05:51,808 --> 00:05:54,008
+Let's read today's key words together!
+
+127
+00:05:54,298 --> 00:05:55,058
+Ready?
+
+128
+00:05:55,345 --> 00:05:56,185
+System.
+
+129
+00:05:57,555 --> 00:05:58,435
+Function.
+
+130
+00:05:59,739 --> 00:06:00,589
+Interact.
+
+131
+00:06:02,128 --> 00:06:03,068
+Well done!
+
+132
+00:06:04,050 --> 00:06:05,151
+Say it with us!
+
+133
+00:06:05,951 --> 00:06:06,701
+Ready?
+
+134
+00:06:06,824 --> 00:06:07,484
+One!
+
+135
+00:06:07,824 --> 00:06:08,524
+two!
+
+136
+00:06:08,829 --> 00:06:10,004
+Now you know!
+
+137
+00:06:15,014 --> 00:06:16,874
+Lighter bike, faster bike!
+
+138
+00:06:16,924 --> 00:06:17,967
+Lighter bike.
+
+139
+00:06:17,987 --> 00:06:19,277
+Not faster.

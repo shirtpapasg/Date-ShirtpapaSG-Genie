@@ -1,0 +1,110 @@
+{
+ "_note": "EP26, the CECL exam-skills special, for TheOneApp videos.js P3 after upload: add two entries on the Study Skills shelf like EP0 (topic 'Study Skills', keys []), numbered as the app needs ('26A' / '26B' here). Nothing is replaced.",
+ "replaces": [],
+ "entries": [
+  {
+   "no": "26A",
+   "art": "🧞",
+   "topic": "Study Skills",
+   "title": "Why Did Basil LOSE Marks? Meet the CECL Genie (Part A)",
+   "len": "5:30",
+   "url": "https://www.youtube.com/watch?v=<EP26_P1>",
+   "moments": [
+    {
+     "at": "0:42",
+     "what": "The question: which bar is a magnet?",
+     "keys": [],
+     "_line": "m401",
+     "_t": 43.94
+    },
+    {
+     "at": "1:01",
+     "what": "Round 1: which answer gets full marks?",
+     "keys": [],
+     "_line": "m402",
+     "_t": 63.06
+    },
+    {
+     "at": "2:11",
+     "what": "Meet the CECL Genie",
+     "keys": [],
+     "_line": "m602",
+     "_t": 133.33
+    },
+    {
+     "at": "2:19",
+     "what": "Look closer: what Basil's answer missed",
+     "keys": [],
+     "_line": "m702",
+     "_t": 141.45
+    },
+    {
+     "at": "3:15",
+     "what": "HOLD ON! Evidence or Concept?",
+     "keys": [],
+     "_line": "m801p",
+     "_t": 197.17
+    },
+    {
+     "at": "3:44",
+     "what": "Build a full answer: C, E, C, L",
+     "keys": [],
+     "_line": "m902",
+     "_t": 225.71
+    }
+   ]
+  },
+  {
+   "no": "26B",
+   "art": "🧞",
+   "topic": "Study Skills",
+   "title": "Your Turn! Fix the Answer, Part by Part (Part B)",
+   "len": "5:53",
+   "url": "https://www.youtube.com/watch?v=<EP26_P2>",
+   "moments": [
+    {
+     "at": "0:26",
+     "what": "Question one: a fair test",
+     "keys": [],
+     "_line": "n401",
+     "_t": 27.86
+    },
+    {
+     "at": "0:46",
+     "what": "Round 1: does it need a Choice?",
+     "keys": [],
+     "_line": "n402",
+     "_t": 47.93
+    },
+    {
+     "at": "1:28",
+     "what": "Your turn: Evidence, Concept, Link",
+     "keys": [],
+     "_line": "n602",
+     "_t": 89.75
+    },
+    {
+     "at": "2:19",
+     "what": "Showdown: which part is missing?",
+     "keys": [],
+     "_line": "n701",
+     "_t": 140.76
+    },
+    {
+     "at": "3:28",
+     "what": "The most common mistake: add the Link",
+     "keys": [],
+     "_line": "n902",
+     "_t": 210.01
+    },
+    {
+     "at": "5:09",
+     "what": "Find the CECL Genie in TheOneApp",
+     "keys": [],
+     "_line": "n1201",
+     "_t": 310.81
+    }
+   ]
+  }
+ ]
+}

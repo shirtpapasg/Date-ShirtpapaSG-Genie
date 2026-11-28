@@ -1,0 +1,1 @@
+window.BAKED=["_grain","daystage","lake","lakedusk","palmvalley","stage","stage2","wetland"];

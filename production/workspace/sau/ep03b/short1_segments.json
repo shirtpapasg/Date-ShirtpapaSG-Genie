@@ -1,0 +1,182 @@
+{
+ "episode": "SAU EP03 Part 2 Short 1",
+ "title": "Singapore's only landfill is filling up!",
+ "tag": "🌏 TheOneApp, Explored",
+ "outro": 2.6,
+ "kws": [
+  [
+   "s1c",
+   "landfill",
+   "LANDFILL",
+   "#6c757d"
+  ]
+ ],
+ "close": {
+  "rows": [
+   [
+    "🔥",
+    "Rubbish we can't recycle is burnt",
+    "burnt",
+    0.15,
+    "#f77f00"
+   ],
+   [
+    "🚢",
+    "A barge carries its ash to Semakau",
+    "barge",
+    0.35,
+    "#6c757d"
+   ],
+   [
+    "♻️",
+    "Reduce, reuse, recycle right!",
+    "reduce",
+    0.6,
+    "#2a9d8f"
+   ]
+  ],
+  "tease": "▶ Watch the full episode!",
+  "teaseWord": "watch"
+ },
+ "segments": [
+  {
+   "id": "s1a",
+   "scene": "qcard",
+   "text": "Did you know? Singapore has only one landfill left, and it is filling up!"
+  },
+  {
+   "id": "s1b",
+   "scene": "news",
+   "text": "Only about one in every ten things thrown away from our homes was recycled."
+  },
+  {
+   "id": "s1c",
+   "scene": "news",
+   "text": "And our only landfill, at Pulau Semakau, is expected to be full by about twenty thirty-five."
+  },
+  {
+   "id": "r6",
+   "scene": "povAsh",
+   "silent": 4.5,
+   "sfx": [
+    [
+     "hiss",
+     0
+    ],
+    [
+     "whirr",
+     0.2
+    ],
+    [
+     "pop",
+     0.35
+    ],
+    [
+     "crackle",
+     0.3
+    ],
+    [
+     "reveal",
+     1.3
+    ],
+    [
+     "sparkle",
+     3.0
+    ],
+    [
+     "pad_wonder",
+     3.6
+    ]
+   ]
+  },
+  {
+   "id": "r7",
+   "scene": "barge",
+   "silent": 5.5,
+   "sfx": [
+    [
+     "ping",
+     0.15
+    ],
+    [
+     "ping",
+     0.5
+    ],
+    [
+     "splash",
+     0.8
+    ],
+    [
+     "wind",
+     0.6
+    ],
+    [
+     "pad_wonder",
+     2.0
+    ],
+    [
+     "splash",
+     2.6
+    ],
+    [
+     "chime",
+     4.8
+    ]
+   ]
+  },
+  {
+   "id": "r8",
+   "scene": "semakau",
+   "silent": 7.0,
+   "sfx": [
+    [
+     "splash",
+     0.3
+    ],
+    [
+     "pop",
+     0.5
+    ],
+    [
+     "pop",
+     0.85
+    ],
+    [
+     "pop",
+     1.2
+    ],
+    [
+     "rumble",
+     1.1
+    ],
+    [
+     "splash",
+     2.4
+    ],
+    [
+     "rumble",
+     3.6
+    ],
+    [
+     "splash",
+     4.6
+    ],
+    [
+     "stinger",
+     6.15
+    ]
+   ]
+  },
+  {
+   "id": "s1d",
+   "scene": "close",
+   "text": "So remember. Rubbish we can't recycle is burnt, and a barge carries its ash to Semakau. So reduce, reuse, and recycle right! Watch the full episode on TheOneApp, Explored."
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ]
+}

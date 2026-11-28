@@ -1,0 +1,910 @@
+{
+ "episode": "SAU EP10",
+ "title": "Dead things… become your food?!",
+ "tag": "🌏 TheOneApp, Explored · EP 10 · Compost",
+ "intro": {
+  "goals": [
+   [
+    "🍄",
+    "What decomposers do",
+    "first"
+   ],
+   [
+    "🪱",
+    "How a compost bin feeds plants",
+    "second"
+   ],
+   [
+    "🍽️",
+    "How it helps Singapore's food security",
+    "third"
+   ]
+  ]
+ },
+ "next": [
+  "NEXT TIME",
+  "More science from",
+  "your world! 🌏"
+ ],
+ "endChip": "🌏 TheOneApp, Explored · new episodes every few days",
+ "close": {
+  "rows": [
+   [
+    "🍄",
+    "Decomposers return nutrients to the soil",
+    "decomposers",
+    0.12,
+    "#7f5539"
+   ],
+   [
+    "🌱",
+    "Compost feeds plants, plants feed animals",
+    "compost",
+    0.32,
+    "#2a9d8f"
+   ],
+   [
+    "🍽️",
+    "Waste less, compost more: food security",
+    "waste",
+    0.55,
+    "#e63946"
+   ]
+  ],
+  "tease": "🌏 Next time: more science from your world!",
+  "teaseWord": "next"
+ },
+ "kws": [
+  [
+   "textbook",
+   "decomposers",
+   "DECOMPOSERS",
+   "#7f5539"
+  ],
+  [
+   "textbook",
+   "nutrients",
+   "NUTRIENTS",
+   "#2a9d8f"
+  ],
+  [
+   "security",
+   "compost",
+   "COMPOST",
+   "#6a994e"
+  ],
+  [
+   "news",
+   "waste",
+   "FOOD WASTE",
+   "#e63946"
+  ],
+  [
+   "semakau",
+   "landfill",
+   "LANDFILL",
+   "#6c757d"
+  ],
+  [
+   "helpers",
+   "detritivores",
+   "DETRITIVORES",
+   "#bc6c25"
+  ]
+ ],
+ "segments": [
+  {
+   "id": "h0",
+   "scene": "gardenFind",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "footsteps",
+     0.1
+    ],
+    [
+     "footsteps",
+     1.1
+    ],
+    [
+     "pop",
+     2.05
+    ],
+    [
+     "ep08_nibble",
+     3.22
+    ],
+    [
+     "thud",
+     3.25
+    ],
+    [
+     "thud",
+     3.75
+    ],
+    [
+     "jiggle",
+     3.95
+    ],
+    [
+     "stinger",
+     3.98
+    ]
+   ]
+  },
+  {
+   "id": "hook",
+   "scene": "hook",
+   "text": "A dead grasshopper. Gross? Actually, it's treasure! Inside it are nutrients that plants need. So where do they go?",
+   "sfx": [
+    [
+     "sparkle",
+     3.5
+    ],
+    [
+     "chime",
+     3.6
+    ],
+    [
+     "reveal",
+     4.5
+    ],
+    [
+     "pop",
+     6.1
+    ]
+   ]
+  },
+  {
+   "id": "answer",
+   "scene": "answer",
+   "text": "First, last time's question. Why does Project Wolbachia release only male mosquitoes? Male mosquitoes don't bite, so they can't spread dengue. Female mosquitoes bite, so releasing them could make things worse.",
+   "sfx": [
+    [
+     "ep09_buzz",
+     2.0
+    ],
+    [
+     "ding",
+     7.4
+    ],
+    [
+     "ep09_zip",
+     10.0
+    ],
+    [
+     "buzz",
+     12.6
+    ]
+   ]
+  },
+  {
+   "id": "welcome",
+   "scene": "welcome",
+   "text": "Welcome to TheOneApp, Explored! Today, you'll learn three things. First, what decomposers do. Second, how a compost bin feeds plants. And third, how it helps Singapore's food security. Let's get started!"
+  },
+  {
+   "id": "ready",
+   "scene": "countdown",
+   "excited": true,
+   "text": "Are you ready? Three! Two! One! Go!"
+  },
+  {
+   "id": "c1",
+   "scene": "povGrasshopper",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     0
+    ],
+    [
+     "whoosh",
+     0.5
+    ],
+    [
+     "pass_by",
+     1.0
+    ],
+    [
+     "deep",
+     1.3
+    ],
+    [
+     "bubble",
+     1.6
+    ],
+    [
+     "pop",
+     2.3
+    ],
+    [
+     "sparkle",
+     2.4
+    ]
+   ]
+  },
+  {
+   "id": "c2",
+   "scene": "povDecompose",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "ep08_scuttle",
+     0.2
+    ],
+    [
+     "bubble",
+     0.6
+    ],
+    [
+     "pop",
+     0.9
+    ],
+    [
+     "bubble",
+     1.2
+    ],
+    [
+     "pop",
+     1.4
+    ],
+    [
+     "ep03_crunch",
+     1.7
+    ],
+    [
+     "ep08_nibble",
+     2.2
+    ],
+    [
+     "pass_by",
+     2.6
+    ],
+    [
+     "thud",
+     3.5
+    ],
+    [
+     "pad_wonder",
+     4.0
+    ],
+    [
+     "ep05_leaf",
+     4.2
+    ],
+    [
+     "pop",
+     4.25
+    ],
+    [
+     "sparkle",
+     4.6
+    ]
+   ]
+  },
+  {
+   "id": "c3",
+   "scene": "povCompost",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "ep08_scuttle",
+     0.5
+    ],
+    [
+     "ep03_slide",
+     1.0
+    ],
+    [
+     "whoosh",
+     1.7
+    ],
+    [
+     "thud",
+     2.85
+    ],
+    [
+     "ep06_plop",
+     3.55
+    ],
+    [
+     "ep06_plop",
+     3.95
+    ],
+    [
+     "ep06_plop",
+     4.35
+    ],
+    [
+     "ep06_plop",
+     4.75
+    ],
+    [
+     "hiss",
+     4.0
+    ],
+    [
+     "ep06_squish",
+     4.4
+    ],
+    [
+     "bubble",
+     4.9
+    ],
+    [
+     "chime",
+     5.0
+    ]
+   ]
+  },
+  {
+   "id": "c4",
+   "scene": "povSpread",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep08_ff",
+     0.2
+    ],
+    [
+     "pad_wonder",
+     0.7
+    ],
+    [
+     "ep09_tick",
+     0.15
+    ],
+    [
+     "ep09_tick",
+     0.35
+    ],
+    [
+     "ep09_tick",
+     0.55
+    ],
+    [
+     "ep09_tick",
+     0.75
+    ],
+    [
+     "ep09_tick",
+     0.95
+    ],
+    [
+     "ep09_tick",
+     1.15
+    ],
+    [
+     "ep09_tick",
+     1.35
+    ],
+    [
+     "ep09_tick",
+     1.55
+    ],
+    [
+     "ding",
+     1.75
+    ],
+    [
+     "whoosh",
+     1.95
+    ],
+    [
+     "ep08_scuttle",
+     2.5
+    ],
+    [
+     "rain",
+     2.6
+    ],
+    [
+     "thud",
+     3.4
+    ],
+    [
+     "sparkle",
+     3.7
+    ]
+   ]
+  },
+  {
+   "id": "c5",
+   "scene": "povRoot",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "drip",
+     0.0
+    ],
+    [
+     "splash",
+     0.5
+    ],
+    [
+     "bubble",
+     0.95
+    ],
+    [
+     "ep06_slurp",
+     1.6
+    ],
+    [
+     "ep07_squish",
+     2.05
+    ],
+    [
+     "pipe_rush",
+     2.6
+    ],
+    [
+     "pass_by",
+     3.0
+    ],
+    [
+     "pass_by",
+     3.4
+    ],
+    [
+     "flash",
+     3.85
+    ],
+    [
+     "pad_wonder",
+     4.0
+    ],
+    [
+     "chime",
+     4.2
+    ],
+    [
+     "sparkle",
+     4.5
+    ]
+   ]
+  },
+  {
+   "id": "c6",
+   "scene": "povEaten",
+   "silent": 5.0,
+   "sfx": [
+    [
+     "ep08_hop",
+     0.2
+    ],
+    [
+     "ep08_nibble",
+     0.62
+    ],
+    [
+     "ep08_nibble",
+     1.22
+    ],
+    [
+     "ep08_nibble",
+     1.82
+    ],
+    [
+     "ep08_nibble",
+     2.42
+    ],
+    [
+     "ep06_chomp",
+     2.8
+    ],
+    [
+     "ep05_gulp",
+     3.0
+    ],
+    [
+     "reveal",
+     3.5
+    ],
+    [
+     "ep08_hop",
+     4.1
+    ],
+    [
+     "sparkle",
+     4.2
+    ]
+   ]
+  },
+  {
+   "id": "c7",
+   "scene": "circle",
+   "silent": 6.0,
+   "sfx": [
+    [
+     "pad_wonder",
+     1.5
+    ],
+    [
+     "pop",
+     0.55
+    ],
+    [
+     "pop",
+     1.35
+    ],
+    [
+     "pop",
+     2.15
+    ],
+    [
+     "pop",
+     2.95
+    ],
+    [
+     "pop",
+     3.75
+    ],
+    [
+     "chime",
+     4.5
+    ],
+    [
+     "sparkle",
+     5.0
+    ]
+   ]
+  },
+  {
+   "id": "news",
+   "scene": "news",
+   "text": "Here's the news. In twenty twenty-five, Singapore threw away about seven hundred and ninety thousand tonnes of food waste. Only about eighteen out of every hundred tonnes was recycled. The rest was burnt, and its nutrients were lost.",
+   "hold": 1.0,
+   "sfx": [
+    [
+     "ep06_clink",
+     2.9
+    ],
+    [
+     "thud",
+     3.9
+    ],
+    [
+     "stinger",
+     4.5
+    ],
+    [
+     "pop",
+     8.9
+    ],
+    [
+     "chime",
+     9.3
+    ],
+    [
+     "roar",
+     12.4
+    ]
+   ]
+  },
+  {
+   "id": "n1",
+   "scene": "recap",
+   "text": "Did you feel that journey? You were a tiny bit of nutrient inside a dead grasshopper. Decomposers broke it down, and you went into the soil. You were raked into a compost bin with leaves and food scraps, and spread on the garden as compost. A plant's roots took you in. A grasshopper ate the leaf, and one day, you went back to the soil again.",
+   "hold": 1.0,
+   "sfx": [
+    [
+     "pop",
+     3.6
+    ],
+    [
+     "pop",
+     5.7
+    ],
+    [
+     "pop",
+     8.2
+    ],
+    [
+     "pop",
+     9.4
+    ],
+    [
+     "pop",
+     13.0
+    ],
+    [
+     "pop",
+     15.9
+    ],
+    [
+     "pop",
+     17.5
+    ],
+    [
+     "chime",
+     20.1
+    ]
+   ]
+  },
+  {
+   "id": "textbook",
+   "scene": "textbook",
+   "text": "Now for the textbook link! In Primary Six, you learn about decomposers. Bacteria and fungi break down dead plants and animals into simpler substances. These go back into the soil, and plants use them to grow. Without decomposers, dead things would pile up, and the soil would run out of nutrients.",
+   "hold": 1.0,
+   "sfx": [
+    [
+     "pop",
+     5.0
+    ],
+    [
+     "pop",
+     5.8
+    ],
+    [
+     "pop",
+     7.1
+    ],
+    [
+     "pop",
+     8.8
+    ],
+    [
+     "chime",
+     12.3
+    ],
+    [
+     "pad_tension",
+     14.2
+    ],
+    [
+     "thud",
+     16.4
+    ]
+   ]
+  },
+  {
+   "id": "helpers",
+   "scene": "helpers",
+   "hold": 1.0,
+   "text": "And don't forget the little helpers. Ants, flies, earthworms, millipedes and woodlice eat dead things too. They are called detritivores. They break dead things into smaller pieces, so bacteria and fungi can finish the job. So don't kill them. Leave them alone!",
+   "sfx": [
+    [
+     "pop",
+     2.2
+    ],
+    [
+     "pop",
+     2.55
+    ],
+    [
+     "pop",
+     3.4
+    ],
+    [
+     "pop",
+     4.2
+    ],
+    [
+     "pop",
+     5.0
+    ],
+    [
+     "ep08_nibble",
+     9.2
+    ],
+    [
+     "ep08_nibble",
+     10.2
+    ],
+    [
+     "buzz",
+     14.9
+    ],
+    [
+     "chime",
+     16.4
+    ]
+   ]
+  },
+  {
+   "id": "security",
+   "scene": "security",
+   "text": "So how does this help Singapore's food security? Singapore is small, with very little land to farm, so we import most of our food. That's why we must not waste it. Healthy soil grows healthy food, and composting turns food scraps into rich compost for our gardens and farms, instead of burning them. And wasting less food means Singapore needs to buy less.",
+   "sfx": [
+    [
+     "ep07_birds",
+     0
+    ],
+    [
+     "pop",
+     5.5
+    ],
+    [
+     "pop",
+     6.1
+    ],
+    [
+     "pop",
+     8.6
+    ],
+    [
+     "pop",
+     9.2
+    ],
+    [
+     "buzz",
+     10.6
+    ],
+    [
+     "sparkle",
+     12.4
+    ],
+    [
+     "ep05_horn",
+     12.7
+    ]
+   ]
+  },
+  {
+   "id": "semakau",
+   "scene": "semakau",
+   "hold": 1.0,
+   "text": "Composting works together with recycling. Every fruit peel we compost, and every can we recycle, is one less thing to burn. And less burning means less ash buried at Pulau Semakau, Singapore's only landfill, which could be full by about twenty thirty-five.",
+   "sfx": [
+    [
+     "pop",
+     0.1
+    ],
+    [
+     "pop",
+     1.4
+    ],
+    [
+     "ep06_plop",
+     3.6
+    ],
+    [
+     "ep03_clink",
+     5.4
+    ],
+    [
+     "ding",
+     6.5
+    ],
+    [
+     "ep05_horn",
+     10.3
+    ],
+    [
+     "sea_wash",
+     10.3
+    ],
+    [
+     "ping",
+     10.9
+    ],
+    [
+     "reveal",
+     13.8
+    ]
+   ]
+  },
+  {
+   "id": "habit",
+   "scene": "habit",
+   "text": "So make composting a habit! Keep a small container for fruit and vegetable peels. The benefits? Less rubbish, richer soil, healthier plants, and less fertiliser to buy.",
+   "sfx": [
+    [
+     "pop",
+     2.6
+    ],
+    [
+     "ep06_plop",
+     4.0
+    ],
+    [
+     "ep06_plop",
+     4.6
+    ],
+    [
+     "pop",
+     7.15
+    ],
+    [
+     "pop",
+     8.15
+    ],
+    [
+     "pop",
+     8.85
+    ],
+    [
+     "pop",
+     10.2
+    ],
+    [
+     "chime",
+     10.6
+    ]
+   ]
+  },
+  {
+   "id": "try",
+   "scene": "try",
+   "text": "Try this at home! In a container, layer fruit and vegetable peels with dry leaves and some soil. Keep it damp, and stir it every few days. In a few weeks, it turns into dark, crumbly compost. But don't add meat, fish or oily food. They smell, and attract pests.",
+   "sfx": [
+    [
+     "pop",
+     1.6
+    ],
+    [
+     "thud",
+     3.1
+    ],
+    [
+     "ep05_leaf",
+     4.7
+    ],
+    [
+     "thud",
+     5.8
+    ],
+    [
+     "hiss",
+     6.9
+    ],
+    [
+     "ep08_scuttle",
+     7.7
+    ],
+    [
+     "ep09_tick",
+     9.6
+    ],
+    [
+     "ep09_tick",
+     9.8
+    ],
+    [
+     "ep09_tick",
+     10.0
+    ],
+    [
+     "sparkle",
+     11.2
+    ],
+    [
+     "buzz",
+     15.0
+    ]
+   ]
+  },
+  {
+   "id": "think",
+   "scene": "think",
+   "text": "Think about it! Why do you think a compost bin gets warm inside? I'll tell you the answer next time.",
+   "sfx": [
+    [
+     "hiss",
+     2.6
+    ],
+    [
+     "reveal",
+     3.0
+    ]
+   ]
+  },
+  {
+   "id": "close",
+   "scene": "close",
+   "text": "So remember. Decomposers return nutrients from dead things to the soil. Compost feeds plants, and plants feed animals, round and round. And when we waste less and compost more, we help Singapore's food security. Next time: more science from your world!"
+  },
+  {
+   "id": "nyk",
+   "scene": "nyk",
+   "excited": true,
+   "text": "Now you know!"
+  }
+ ],
+ "outro": 6.0
+}

@@ -1,0 +1,105 @@
+{
+ "_note": "P4 EP1 v2 'The Great Void Deck Race' (the new P4 style, one video; it replaces the v1 build p4ep01 too), for TheOneApp videos.js after upload: it REPLACES the P4 entry no. 1 (the old video FOvUezOZJbo, 'Your Bike, Your Body And A Tree Are All The Same Thing'): swap the whole entry, keep no. 1. The keys are the real videos.js constants and ids, written here as strings: paste O.respCirc / O.plant WITHOUT quotes and the 'lab:...' ids WITH their quotes. Set url to the uploaded video id. Suggested (not in videos.js yet, as the P4 README says): CH.humanSystem / CH.plantSystem.",
+ "replaces": [
+  "FOvUezOZJbo"
+ ],
+ "entries": [
+  {
+   "no": 1,
+   "art": "🐌",
+   "topic": "Systems",
+   "title": "Basil Lost a Race to a SNAIL! Which Fix Works?",
+   "len": "7:16",
+   "url": "https://www.youtube.com/watch?v=<P4EP01V2>",
+   "moments": [
+    {
+     "at": "0:23",
+     "what": "Pick the fix: pedal faster, all three parts, or chain and brakes",
+     "keys": [
+      "'lab:p4-2-3'"
+     ],
+     "_line": "f201",
+     "_t": 24.86
+    },
+    {
+     "at": "1:09",
+     "what": "Each part has a job: the bell warns people you are coming",
+     "keys": [
+      "'lab:p4-2-1'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "b401",
+     "_t": 71.32
+    },
+    {
+     "at": "2:11",
+     "what": "The brakes help a bike slow down and stop safely",
+     "keys": [
+      "'lab:p4-2-1'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "k601",
+     "_t": 133.32
+    },
+    {
+     "at": "3:33",
+     "what": "The chain joins the pedals to the back wheel",
+     "keys": [
+      "'lab:p4-2-1'"
+     ],
+     "_line": "r707",
+     "_t": 215.46
+    },
+    {
+     "at": "3:44",
+     "what": "Look closer: every part has its own function",
+     "keys": [
+      "'lab:p4-2-1'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "l801",
+     "_t": 226.16
+    },
+    {
+     "at": "4:15",
+     "what": "Be a chain link: the parts interact",
+     "keys": [
+      "'lab:p4-2-1'"
+     ],
+     "_line": "j901",
+     "_t": 256.97
+    },
+    {
+     "at": "5:07",
+     "what": "When one part stops, the whole bike is likely to be affected",
+     "keys": [
+      "'lab:p4-2-3'",
+      "'lab:p4-1-2'"
+     ],
+     "_line": "v1006",
+     "_t": 309.47
+    },
+    {
+     "at": "5:48",
+     "what": "Your body is made up of systems too",
+     "keys": [
+      "O.respCirc",
+      "'lab:p4-2-1'"
+     ],
+     "_line": "e1102",
+     "_t": 350.09
+    },
+    {
+     "at": "6:00",
+     "what": "A tree is a system: roots, stem and leaves",
+     "keys": [
+      "O.plant",
+      "'lab:p4-1-1'"
+     ],
+     "_line": "e1103",
+     "_t": 362.42
+    }
+   ]
+  }
+ ]
+}

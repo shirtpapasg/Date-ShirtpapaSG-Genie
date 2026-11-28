@@ -1,0 +1,15 @@
+// ep13dare.js: EP13's three dare boards (drawn in ep13/garden13.js, EP13 Stage 2; copied unchanged), which open EP14: the same HDB skyline
+// at dusk three times, the Sun low: PIC.sunAway (the Sun slides away to one side) · PIC.sunEarth (a small Earth with a turning line round it)
+// · PIC.sunCloud (a big cloud in front of the Sun). For picBoard (pics.js): each picture is 330 x 290, centred on (0, 0). EP13 p2.js SC.dare
+// used them; EP14 p1.js dareBoard(i, x, y, sc) draws one (the cold open, the recap, Round 1's cards, the answer with its tick / x chips).
+// Only what the boards need is copied: duskSky, sunDisc, the gradient gDusk (XDEFS13E: main.js picks it up). Small print wherever the Sun is
+// drawn: "Never look at the Sun." (p1.js SUN_RULE).
+const XDEFS13E = () => `${lg("gDusk", [[0, "#5B4B9E"], [.5, "#F08A5D"], [1, "#FFD08A"]])}`;
+const duskSky = () => { let b = ""; [[-165, 70, 60, 150], [-100, 40, 70, 180], [-24, 84, 54, 140], [36, 30, 80, 190], [122, 66, 60, 160]].forEach(([x, y, w, h], i) => { b += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${i % 2 ? "#3B2A5C" : "#2B2147"}"/>`; for (let r = 0; r < 4; r++) for (let c = 0; c < Math.floor(w / 18); c++) b += `<rect x="${x + 6 + c * 18}" y="${y + 10 + r * 18}" width="9" height="8" fill="${hash(i * 9 + r * 3 + c, 5) > .5 ? "#FFD75A" : "#5A4A8A"}"/>`; });
+  return `<rect x="-200" y="-200" width="400" height="400" fill="url(#gDusk)"/>` + b; };
+const sunDisc = (x, y, r = 34) => `<circle cx="${x}" cy="${y}" r="${n2(r * 1.7)}" fill="#FFE27A" opacity=".35"/><circle cx="${x}" cy="${y}" r="${r}" fill="#FFD75A" stroke="#F59E0B" stroke-width="4"/>`;
+PIC.sunAway = () => { const sky = duskSky(), i = sky.indexOf("<rect", 10); return sky.slice(0, i) + OP(.3, sunDisc(-20, 30)) + sunDisc(96, 30) + `<path d="M24 14 H50 M18 30 H48 M24 46 H50" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".9"/>` + sky.slice(i); };
+PIC.sunEarth = () => { const sky = duskSky(), i = sky.indexOf("<rect", 10); return sky.slice(0, i) + sunDisc(96, 30) + sky.slice(i)
+  + `<g transform="translate(-66 -66)"><circle r="46" fill="#3A8DFF" stroke="#1F5FD0" stroke-width="5"/><path d="M-30 -22 Q-10 -36 4 -24 Q10 -6 -8 0 Q-28 4 -30 -22z M10 8 Q30 2 34 20 Q22 36 8 28z" fill="#43BF6C"/><path d="M0 -62 V-50 M0 50 V62" stroke="#fff" stroke-width="5" stroke-linecap="round"/><path d="M-60 10 A62 20 0 0 0 60 10" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-dasharray="14 10"/><path d="M60 10 l-4 -16 M60 10 l-16 4" stroke="#fff" stroke-width="6" stroke-linecap="round"/></g>`; };
+PIC.sunCloud = () => { const sky = duskSky(), i = sky.indexOf("<rect", 10); return sky.slice(0, i) + sunDisc(40, 6) + `<g transform="translate(30 10)"><path d="M-96 26 Q-112 -6 -76 -14 Q-70 -50 -30 -42 Q-6 -68 26 -44 Q64 -52 70 -18 Q104 -10 92 26z" fill="#F4F0FA" stroke="#B9B0D6" stroke-width="5" stroke-linejoin="round"/><path d="M-60 6 Q-30 -6 0 6" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/></g>` + sky.slice(i); };
+const DARE_PICS = ["sunAway", "sunEarth", "sunCloud"];   // card 1, 2, 3 of EP13's dare

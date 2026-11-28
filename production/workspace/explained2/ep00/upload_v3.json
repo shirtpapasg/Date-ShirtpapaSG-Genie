@@ -1,0 +1,62 @@
+{
+ "key": "explained-p3-ep00v3",
+ "parts": [
+  {
+   "key": "explained-p3-ep00v3-part1",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/ep00_part1_v3.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/thumb_part1.jpg",
+   "title": "Read It or Make It? Which Mind Map Do You REMEMBER? (Part 1) | Study Skills P3–P6",
+   "description": "Pip reads a ready-made mind map. Basil makes his own, from memory. Which one helps you remember more? Play the word puzzle test, find out why working something out makes it stick (scientists call it the generation effect), and spot the mistake when Momo \"makes her own\" map. A study-skills special for Primary 3 to 6 Science (Singapore), for kids aged 8 to 12, with Heart and the pet buddies Pip, Momo and Basil. Part 1 of 2.\n\nIn this part:\n• Read it or make it?\n• The word puzzle test\n• Look closer: reading a map vs making one\n• The memory test: the generation effect\n• HOLD ON! Is copying the same as making?\n• Memory first\n• Spot the hidden crow!\n\nKey words: make your own, generation effect, memory first.\nWatch Part 2: make one together in TheOneApp, check and fix, and space it out: who remembers more one week later?\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nThe science, short and honest: Scientists have tested these study habits many times: working something out yourself helps you remember it (the generation effect); drawing a map from memory and then checking it beats copying it (retrieval practice); and drawing it again after a few days beats reading it many times at once (spaced practice). One day, three days and a week is a simple plan; any spread-out days work.\nMake your own mind map in TheOneApp: tap Mind Maps, then ✏️ Make my own mind map, pick your chapter and tap ＋ Start a new mind map. When you are done, tap ✅ Mark my mind map. https://theoneapp-ten.vercel.app\nSafety and care: We look at crows and community cats, and we do not feed, chase or touch them.\n\n#StudySkills #PrimaryScience #Singapore #MindMap #TheOneAppExplained",
+   "tags": [
+    "mind map",
+    "make a mind map",
+    "study skills",
+    "how to study",
+    "generation effect",
+    "retrieval practice",
+    "spaced practice",
+    "primary science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  },
+  {
+   "key": "explained-p3-ep00v3-part2",
+   "file": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/ep00_part2_v3.mp4",
+   "thumb": "/home/user/Date-ShirtpapaSG-Genie/production/workspace/explained2/ep00/thumb_part2.jpg",
+   "title": "One Week, One Blank Page. Who Remembers MORE? (Part 2) | Make Your Own Mind Map",
+   "description": "Pip reads the poster five times. Basil makes his own map in TheOneApp from memory, checks it, fixes it, and draws it again on Tuesday and Thursday. Next Monday, a blank page each: who draws more? Make a mind map with us in TheOneApp, step by step (Mind Maps · Make my own mind map · Start a new mind map · Mark my mind map · Compare with the poster), spot the mistake on Pip's poster, and be an idea in a picture of Basil's memory. Part 2 of 2 of a study-skills special for Primary 3 to 6 Science (Singapore), kids aged 8 to 12.\n\nIn this part:\n• Make one together in TheOneApp\n• Look closer: Mark my mind map, then check and fix\n• Showdown: Pip's steps poster\n• Be an idea: why drawing it again works\n• Space it out: one day, three days, a week\n• Two blank pages: who remembers more?\n• Spot the hidden cat!\n\nKey words: make your own, check and fix, space it out.\nWatch Part 1: read it or make it, and the word puzzle test.\n\nTheOneApp, Explained: Singapore primary science, made fun. Play along with Pip, Basil and Momo: show fingers to lock in, keep score on your hand, beat the Buddies!\n\nThe science, short and honest: Scientists have tested these study habits many times: working something out yourself helps you remember it (the generation effect); drawing a map from memory and then checking it beats copying it (retrieval practice); and drawing it again after a few days beats reading it many times at once (spaced practice). One day, three days and a week is a simple plan; any spread-out days work.\nMake your own mind map in TheOneApp: tap Mind Maps, then ✏️ Make my own mind map, pick your chapter and tap ＋ Start a new mind map. When you are done, tap ✅ Mark my mind map. https://theoneapp-ten.vercel.app\nSafety and care: We look at crows and community cats, and we do not feed, chase or touch them.\n\n#StudySkills #PrimaryScience #Singapore #MindMap #TheOneAppExplained",
+   "tags": [
+    "mind map",
+    "make a mind map",
+    "study skills",
+    "how to study",
+    "generation effect",
+    "retrieval practice",
+    "spaced practice",
+    "primary science",
+    "science for kids",
+    "singapore science",
+    "theoneapp explained"
+   ]
+  }
+ ],
+ "playlists": [
+  {
+   "id": "PLb8LpPqxQI4E",
+   "after": "K8QIjEU-uyU"
+  },
+  {
+   "id": "PLPfEuT7l4KjI",
+   "after": "K8QIjEU-uyU"
+  }
+ ],
+ "replaces": [
+  "K8QIjEU-uyU",
+  "JtxACnn4byI"
+ ],
+ "retire_old": true,
+ "new_version_line": "▶ NEW VERSION (2 parts): Read It or Make It? Which Mind Map Do You REMEMBER? https://www.youtube.com/watch?v={P1}",
+ "_note": "v3 of EP00 (2026-11-25; teacher: \"Wrong gestures for 'now you know'\"; SERIES_FORMAT 5): the \"Now you know!\" ending re-rendered: Pip and Basil sit and smile, Momo waves, and all three cheer (arms up, happy) ON the words, not 2 s later; nothing shy, confident or shocked carries in. The file is ep00_part1/2_v3.mp4: the old file with only the changed spans re-rendered and spliced in (same frame count and timings, the audio stream bit-identical, Kampong Walk kept). Same titles, descriptions, tags and thumbnails as the live v2 parts (K8QIjEU-uyU, JtxACnn4byI), which it replaces. \"after\" = the live Part 1 (K8QIjEU-uyU): the new parts go in right after it, then retire_old takes both old parts out of the playlists, so the new parts land exactly where the old ones were (no dependence on the order in which episodes are re-uploaded); the old videos get the NEW VERSION first line and are never deleted. Chapters: production/youtube/chapters_p3.json keys EP00_P1_v3 / EP00_P2_v3 (copies of the live parts' chapters; timings unchanged; swap in the new ids after upload). Public, Made for Kids (the uploader sets both). NOT uploaded: the teacher decides."
+}
