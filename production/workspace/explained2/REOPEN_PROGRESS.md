@@ -203,3 +203,11 @@
   - It replaces loaPYprOWDQ in both playlists; loaPYprOWDQ gets the NEW VERSION line.
   - Chapters: key E-HFXLaeP94.
   - The app: TheOneApp #276 is merged by Claude (new rule: Claude merges). #269 and #274 are merged too.
+- 2026-11-28 ~05:15 UTC: P4 EP2 fix pass 2 (speech bubbles next to their speakers, one 214 plaque) is live, public, as GLY4mDzxdaA (the teacher's OK).
+  - Same title, description (with chapters), tags, thumbnail (p4ep02/thumb.jpg), Made for Kids and Education as E-HFXLaeP94 (config p4ep02/upload_v2.json).
+  - It replaces E-HFXLaeP94 at position 1 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI. E-HFXLaeP94 gets the NEW VERSION line and STAYS PUBLIC (the teacher decides; it has views).
+  - loaPYprOWDQ's NEW VERSION line now points to GLY4mDzxdaA. Chapters: key GLY4mDzxdaA (already in its description).
+  - The app: TheOneApp #283 (P4 no. 2 = GLY4mDzxdaA), merged by Claude; not deployed.
+- 2026-11-28 ~05:25 UTC: Pet Buddy Quest: Primary 3 promo uploaded, public, Made for Kids, Education (the teacher's OK).
+  - 16:9: aejYm8iE1Jc "Pet Buddy Quest: Play Along With Pip, Momo and Basil! | TheOneApp Promo", end-card thumbnail (promo/pbq_p3/thumb_16x9.jpg), no playlist (like the earlier 16:9 promos).
+  - 9:16 Short: p8Xno1LBiys "Watching Is Fun. Playing Is BETTER! | Pet Buddy Quest #Shorts", at the end of TheOneApp Shorts (PLO1GzAf41cwM). Configs: promo/pbq_p3/upload_16x9.json, upload_9x16.json.
