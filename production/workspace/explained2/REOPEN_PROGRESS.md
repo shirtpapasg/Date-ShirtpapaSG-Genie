@@ -211,3 +211,8 @@
 - 2026-11-28 ~05:25 UTC: Pet Buddy Quest: Primary 3 promo uploaded, public, Made for Kids, Education (the teacher's OK).
   - 16:9: aejYm8iE1Jc "Pet Buddy Quest: Play Along With Pip, Momo and Basil! | TheOneApp Promo", end-card thumbnail (promo/pbq_p3/thumb_16x9.jpg), no playlist (like the earlier 16:9 promos).
   - 9:16 Short: p8Xno1LBiys "Watching Is Fun. Playing Is BETTER! | Pet Buddy Quest #Shorts", at the end of TheOneApp Shorts (PLO1GzAf41cwM). Configs: promo/pbq_p3/upload_16x9.json, upload_9x16.json.
+- 2026-11-28 ~06:20 UTC: P4 EP1 fix pass 9 (speech bubbles next to their speakers, one 214 sign per set) is live, public, as c4ZDCAD2vPM (the teacher's "ok").
+  - Same title, description (with chapters), thumbnail (p4ep01v2/thumb.jpg), Made for Kids and Education as XkBQqzYyMdM (config p4ep01v2/upload_fix.json, file p4ep01v2_fix.mp4). Tags from upload_loud.json (= 7OBnZam5Xzs's): XkBQqzYyMdM itself shows no tags on YouTube.
+  - It replaces XkBQqzYyMdM at position 0 in PLK9BW3T6kXx4 and PLPfEuT7l4KjI. XkBQqzYyMdM gets the NEW VERSION line and STAYS PUBLIC (the teacher decides).
+  - The NEW VERSION lines of 7OBnZam5Xzs, 22u5mW_m9y8 and FOvUezOZJbo now point to c4ZDCAD2vPM. 5MjGXoU8zjg (v1, unlisted) is untouched. Chapters: key c4ZDCAD2vPM.
+  - The app: TheOneApp #284 (P4 no. 1 = c4ZDCAD2vPM), merged by Claude (52ed193); not deployed.

@@ -281,3 +281,4 @@ the runaway track's every pillar). Built on the live version (fix pass 8 + the l
   then move it here. The live cut stays as `p4ep01v2_loud.mp4` (XkBQqzYyMdM).
 - Review (scratchpad `p4ep01_fix_review/`, not committed): index.html, 720p preview in 3 parts (13.3 / 14.1 / 10.9 MB), before/after
   stills (5:37 void deck, 2:26 ramp, 2:39 runaway), 76-bubble contact sheets. Upload as a NEW video only after the teacher's OK.
+- **Uploaded 28 Nov (the teacher's "ok"):** `p4ep01v2_fix.mp4` is live as c4ZDCAD2vPM (config `upload_fix.json`); it replaces XkBQqzYyMdM in both playlists (XkBQqzYyMdM stays public with a NEW VERSION line). TheOneApp #284.
